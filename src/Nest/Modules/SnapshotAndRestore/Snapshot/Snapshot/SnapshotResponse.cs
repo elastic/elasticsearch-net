@@ -15,18 +15,15 @@ namespace Nest
 	public class SnapshotResponse : ResponseBase, ISnapshotResponse
 	{
 		private bool _accepted = false;
+
 		[JsonProperty("accepted")]
 		public bool Accepted
 		{
-			get
-			{
-				return  _accepted ? _accepted : this.Snapshot != null;
-			}
-			internal set { _accepted = value; }
+			get => _accepted ? _accepted : Snapshot != null;
+			internal set => _accepted = value;
 		}
 
 		[JsonProperty("snapshot")]
 		public Snapshot Snapshot { get; set; }
-
 	}
 }

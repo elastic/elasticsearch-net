@@ -5,14 +5,15 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	internal class RangeQueryJsonConverter: FieldNameQueryJsonConverter<NumericRangeQuery>
+	internal class RangeQueryJsonConverter : FieldNameQueryJsonConverter<NumericRangeQuery>
 	{
 		private static readonly string[] _rangeKeys = new[] { "gt", "gte", "lte", "lt" };
-		public override bool CanConvert(Type objectType) => true;
 
 		public override bool CanRead => true;
 
 		public override bool CanWrite => true;
+
+		public override bool CanConvert(Type objectType) => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -27,19 +28,15 @@ namespace Nest
 			if (jo == null) return null;
 
 
-			var isNumeric = !jo.Properties().Any(p=>p.Name == "format" || p.Name == "time_zone")
-				&& jo.Properties().Any(p=> _rangeKeys.Contains(p.Name) && (p.Value.Type  == JTokenType.Integer || p.Value.Type == JTokenType.Float));
+			var isNumeric = !jo.Properties().Any(p => p.Name == "format" || p.Name == "time_zone")
+				&& jo.Properties().Any(p => _rangeKeys.Contains(p.Name) && (p.Value.Type == JTokenType.Integer || p.Value.Type == JTokenType.Float));
 
 
 			IRangeQuery fq;
 			if (isNumeric)
-			{
 				fq = FromJson.ReadAs<NumericRangeQuery>(jo.CreateReader(), objectType, existingValue, serializer);
-			}
 			else
-			{
 				fq = FromJson.ReadAs<DateRangeQuery>(jo.CreateReader(), objectType, existingValue, serializer);
-			}
 
 			fq.Name = GetPropValue<string>(jo, "_name");
 			fq.Boost = GetPropValue<double?>(jo, "boost");

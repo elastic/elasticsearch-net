@@ -2,59 +2,43 @@
 
 namespace Nest
 {
-
 	public class MultiGetOperation<T> : IMultiGetOperation
 	{
 		public MultiGetOperation(Id id)
 		{
-			this.Id = id;
-			this.Index = typeof(T);
-			this.Type = typeof(T);
+			Id = id;
+			Index = typeof(T);
+			Type = typeof(T);
 		}
-
-		Type IMultiGetOperation.ClrType => typeof(T);
-
-		public IndexName Index { get; set; }
-
-		public TypeName Type { get; set; }
-
-		public Id Id { get; set; }
-
-		public Fields StoredFields { get; set; }
-
-		public Union<bool, ISourceFilter> Source { get; set; }
-
-		public string Routing { get; set; }
-
-		bool IMultiGetOperation.CanBeFlattened =>
-			this.Index == null
-			&& this.Type == null
-			&& this.Routing == null
-			&& this.Source == null
-			&& this.StoredFields == null;
 
 
 		public object Document { get; set; }
+
+		public Id Id { get; set; }
+
+		public IndexName Index { get; set; }
+
+		public string Routing { get; set; }
+
+		public Union<bool, ISourceFilter> Source { get; set; }
+
+		public Fields StoredFields { get; set; }
+
+		public TypeName Type { get; set; }
+
+		bool IMultiGetOperation.CanBeFlattened =>
+			Index == null
+			&& Type == null
+			&& Routing == null
+			&& Source == null
+			&& StoredFields == null;
+
+		Type IMultiGetOperation.ClrType => typeof(T);
 	}
 
 	public class MultiGetOperationDescriptor<T> : DescriptorBase<MultiGetOperationDescriptor<T>, IMultiGetOperation>, IMultiGetOperation
 		where T : class
 	{
-		IndexName IMultiGetOperation.Index { get; set; }
-		TypeName IMultiGetOperation.Type { get; set; }
-		Id IMultiGetOperation.Id { get; set; }
-		string IMultiGetOperation.Routing { get; set; }
-		Union<bool, ISourceFilter> IMultiGetOperation.Source { get; set; }
-		Fields IMultiGetOperation.StoredFields { get; set; }
-		Type IMultiGetOperation.ClrType => typeof(T);
-
-		bool IMultiGetOperation.CanBeFlattened =>
-			Self.Index == null
-			&& Self.Type == null
-			&& Self.Routing == null
-			&& Self.Source == null
-			&& Self.StoredFields == null;
-
 		public MultiGetOperationDescriptor()
 		{
 			Self.Index = Self.ClrType;
@@ -72,8 +56,24 @@ namespace Nest
 			: this()
 		{
 			if (allowExplicitIndex) return;
+
 			Self.Index = null;
 		}
+
+		bool IMultiGetOperation.CanBeFlattened =>
+			Self.Index == null
+			&& Self.Type == null
+			&& Self.Routing == null
+			&& Self.Source == null
+			&& Self.StoredFields == null;
+
+		Type IMultiGetOperation.ClrType => typeof(T);
+		Id IMultiGetOperation.Id { get; set; }
+		IndexName IMultiGetOperation.Index { get; set; }
+		string IMultiGetOperation.Routing { get; set; }
+		Union<bool, ISourceFilter> IMultiGetOperation.Source { get; set; }
+		Fields IMultiGetOperation.StoredFields { get; set; }
+		TypeName IMultiGetOperation.Type { get; set; }
 
 		/// <summary>
 		/// Manually set the index, default to the default index or the index set for the type on the connectionsettings.
@@ -84,7 +84,7 @@ namespace Nest
 		/// Manualy set the type to get the object from, default to whatever
 		/// T will be inferred to if not passed.
 		/// </summary>
-		public MultiGetOperationDescriptor<T> Type(TypeName type) => Assign(a=> a.Type = type);
+		public MultiGetOperationDescriptor<T> Type(TypeName type) => Assign(a => a.Type = type);
 
 		public MultiGetOperationDescriptor<T> Id(Id id) => Assign(a => a.Id = id);
 
@@ -112,6 +112,5 @@ namespace Nest
 			Assign(a => a.StoredFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		public MultiGetOperationDescriptor<T> StoredFields(Fields fields) => Assign(a => a.StoredFields = fields);
-
 	}
 }

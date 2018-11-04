@@ -18,31 +18,30 @@ namespace Nest
 	[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with multi search api")]
 	public class MultiPercolateResponse : ResponseBase, IMultiPercolateResponse
 	{
-		public override bool IsValid => base.IsValid && this.Responses.All(r => r.IsValid);
+		public override bool IsValid => base.IsValid && Responses.All(r => r.IsValid);
 
-		protected override void DebugIsValid(StringBuilder sb)
-		{
-			sb.AppendLine($"# Invalid percolations (inspect individual response.DebugInformation for more detail):");
-			foreach(var i in AllResponses.Select((item, i) => new { item, i}).Where(i=>!i.item.IsValid))
-				sb.AppendLine($"  search[{i.i}]: {i.item}");
-		}
+		public IEnumerable<PercolateResponse> Responses => _allResponses();
 
 		[JsonProperty("responses")]
 		internal IReadOnlyCollection<PercolateResponse> AllResponses { get; set; } = EmptyReadOnly<PercolateResponse>.Collection;
 
-		IEnumerable<PercolateResponse> IMultiPercolateResponse.Responses => this.Responses;
+		IEnumerable<PercolateResponse> IMultiPercolateResponse.Responses => Responses;
+
+		protected override void DebugIsValid(StringBuilder sb)
+		{
+			sb.AppendLine($"# Invalid percolations (inspect individual response.DebugInformation for more detail):");
+			foreach (var i in AllResponses.Select((item, i) => new { item, i }).Where(i => !i.item.IsValid))
+				sb.AppendLine($"  search[{i.i}]: {i.item}");
+		}
 
 		private IEnumerable<PercolateResponse> _allResponses()
 		{
-			foreach (var r in this.AllResponses)
+			foreach (var r in AllResponses)
 			{
 				IBodyWithApiCallDetails d = r;
-				d.ApiCall = this.ApiCall;
+				d.ApiCall = ApiCall;
 				yield return r;
 			}
 		}
-
-		public IEnumerable<PercolateResponse> Responses => this._allResponses();
-
 	}
 }

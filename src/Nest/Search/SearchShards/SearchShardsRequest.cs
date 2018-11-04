@@ -1,9 +1,11 @@
 ﻿namespace Nest
 {
 	public partial interface ISearchShardsRequest { }
+
 	public partial interface ISearchShardsRequest<T> : ISearchShardsRequest { }
 
 	public partial class SearchShardsRequest { }
+
 	public partial class SearchShardsRequest<T> where T : class { }
 
 	/// <summary>

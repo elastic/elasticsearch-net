@@ -9,6 +9,7 @@ namespace Nest
 	{
 		public override bool CanRead => false;
 		public override bool CanWrite => true;
+
 		public override bool CanConvert(Type objectType) => true;
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
@@ -20,6 +21,7 @@ namespace Nest
 			var settings = serializer.GetConnectionSettings();
 			var elasticsearchSerializer = settings.Serializer;
 			if (elasticsearchSerializer == null) return;
+
 			foreach (var percolation in request.Percolations)
 			{
 				var requestParameters = percolation.GetRequestParameters() ?? new PercolateRequestParameters();
@@ -45,9 +47,7 @@ namespace Nest
 				var headerBytes = elasticsearchSerializer.SerializeToBytes(header, SerializationFormatting.None);
 				writer.WriteRaw($"{{\"{percolation.MultiPercolateName}\":" + headerBytes.Utf8String() + "}\n");
 				if (percolation == null)
-				{
 					writer.WriteRaw("{}\n");
-				}
 				else
 				{
 					var bodyBytes = elasticsearchSerializer.SerializeToBytes(percolation, SerializationFormatting.None);
@@ -56,23 +56,21 @@ namespace Nest
 			}
 		}
 
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
+			throw new NotSupportedException();
+
 		private class PercolateHeader
 		{
-			public IndexName index { get; set; }
-			public TypeName type { get; set; }
 			public Id id { get; set; }
+			public IndexName index { get; set; }
 			public string percolate_index { get; set; }
-			public string percolate_type { get; set; }
-			public string[] routing { get; set; }
-			public string preference { get; set; }
-			public string percolate_routing { get; set; }
 			public string percolate_preference { get; set; }
+			public string percolate_routing { get; set; }
+			public string percolate_type { get; set; }
+			public string preference { get; set; }
+			public string[] routing { get; set; }
+			public TypeName type { get; set; }
 			public long? version { get; set; }
-		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			throw new NotSupportedException();
 		}
 	}
 }

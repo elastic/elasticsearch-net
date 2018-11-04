@@ -1,9 +1,9 @@
 namespace Nest
 {
-	public partial interface IDeleteDatafeedRequest {}
+	public partial interface IDeleteDatafeedRequest { }
 
-	public partial class DeleteDatafeedRequest {}
+	public partial class DeleteDatafeedRequest { }
 
 	[DescriptorFor("XpackMlDeleteDatafeed")]
-	public partial class DeleteDatafeedDescriptor {}
+	public partial class DeleteDatafeedDescriptor { }
 }

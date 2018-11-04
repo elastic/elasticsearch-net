@@ -53,38 +53,37 @@ namespace Nest
 		double? NormalizationZZ { get; set; }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class IBSimilarity : IIBSimilarity
 	{
-		public string Type => "IB";
-
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IBDistribution? Distribution { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IBLambda? Lambda { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public Normalization? Normalization { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public double? NormalizationH1C { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public double? NormalizationH2C { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public double? NormalizationH3C { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public double? NormalizationZZ { get; set; }
+
+		public string Type => "IB";
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class IBSimilarityDescriptor
 		: DescriptorBase<IBSimilarityDescriptor, IIBSimilarity>, IIBSimilarity
 	{
-		string ISimilarity.Type => "IB";
 		IBDistribution? IIBSimilarity.Distribution { get; set; }
 		IBLambda? IIBSimilarity.Lambda { get; set; }
 		Normalization? IIBSimilarity.Normalization { get; set; }
@@ -92,14 +91,15 @@ namespace Nest
 		double? IIBSimilarity.NormalizationH2C { get; set; }
 		double? IIBSimilarity.NormalizationH3C { get; set; }
 		double? IIBSimilarity.NormalizationZZ { get; set; }
+		string ISimilarity.Type => "IB";
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IBSimilarityDescriptor Distribution(IBDistribution? distribution) => Assign(a => a.Distribution = distribution);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IBSimilarityDescriptor Lambda(IBLambda? lambda) => Assign(a => a.Lambda = lambda);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IBSimilarityDescriptor NoNormalization() => Assign(a => a.Normalization = Normalization.No);
 
 		/// <summary>
@@ -142,5 +142,4 @@ namespace Nest
 			a.NormalizationH1C = z;
 		});
 	}
-
 }

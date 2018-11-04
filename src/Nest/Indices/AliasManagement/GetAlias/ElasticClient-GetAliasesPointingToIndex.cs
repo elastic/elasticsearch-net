@@ -29,7 +29,9 @@ namespace Nest
 			return AliasesPointingToIndex(client.ConnectionSettings, indices, response);
 		}
 
-		private static IEnumerable<AliasDefinition> AliasesPointingToIndex(IConnectionConfigurationValues settings, IUrlParameter indices, IGetAliasResponse aliasesResponse)
+		private static IEnumerable<AliasDefinition> AliasesPointingToIndex(IConnectionConfigurationValues settings, IUrlParameter indices,
+			IGetAliasResponse aliasesResponse
+		)
 		{
 			if (!aliasesResponse.IsValid || !aliasesResponse.Indices.HasAny())
 				return Enumerable.Empty<AliasDefinition>();
@@ -38,8 +40,10 @@ namespace Nest
 
 			var aliases = new List<AliasDefinition>();
 			foreach (var indexName in indexNames)
+			{
 				if (aliasesResponse.Indices.ContainsKey(indexName))
 					aliases.AddRange(aliasesResponse.Indices[indexName]);
+			}
 
 			return aliases;
 		}

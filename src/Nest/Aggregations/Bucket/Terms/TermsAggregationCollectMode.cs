@@ -11,10 +11,11 @@ namespace Nest
 	public enum TermsAggregationCollectMode
 	{
 		/// <summary>
-		/// Order by using field values directly in order to aggregate data per-bucket 
+		/// Order by using field values directly in order to aggregate data per-bucket
 		/// </summary>
 		[EnumMember(Value = "depth_first")]
 		DepthFirst,
+
 		/// <summary>
 		/// Order by using ordinals of the field values instead of the values themselves
 		/// </summary>

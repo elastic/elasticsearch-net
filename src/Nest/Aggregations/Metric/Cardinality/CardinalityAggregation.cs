@@ -15,19 +15,19 @@ namespace Nest
 
 	public class CardinalityAggregation : MetricAggregationBase, ICardinalityAggregation
 	{
-		public int? PrecisionThreshold { get; set; }
-		public bool? Rehash { get; set; }
-
 		internal CardinalityAggregation() { }
 
 		public CardinalityAggregation(string name, Field field) : base(name, field) { }
 
+		public int? PrecisionThreshold { get; set; }
+		public bool? Rehash { get; set; }
+
 		internal override void WrapInContainer(AggregationContainer c) => c.Cardinality = this;
 	}
 
-	public class CardinalityAggregationDescriptor<T> 
+	public class CardinalityAggregationDescriptor<T>
 		: MetricAggregationDescriptorBase<CardinalityAggregationDescriptor<T>, ICardinalityAggregation, T>
-			, ICardinalityAggregation 
+			, ICardinalityAggregation
 		where T : class
 	{
 		int? ICardinalityAggregation.PrecisionThreshold { get; set; }
@@ -38,6 +38,5 @@ namespace Nest
 			=> Assign(a => a.PrecisionThreshold = precisionThreshold);
 
 		public CardinalityAggregationDescriptor<T> Rehash(bool rehash = true) => Assign(a => a.Rehash = rehash);
-
 	}
 }

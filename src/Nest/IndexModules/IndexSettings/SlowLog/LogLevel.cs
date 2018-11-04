@@ -9,12 +9,16 @@ namespace Nest
 	{
 		[EnumMember(Value = "error")]
 		Error,
+
 		[EnumMember(Value = "warn")]
 		Warn,
+
 		[EnumMember(Value = "info")]
 		Info,
+
 		[EnumMember(Value = "debug")]
 		Debug,
+
 		[EnumMember(Value = "trace")]
 		Trace
 	}

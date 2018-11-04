@@ -7,10 +7,19 @@ namespace Nest
 	public partial interface IExecuteWatchRequest
 	{
 		/// <summary>
-		/// This structure will be parsed as a trigger event and used for the watch execution.
+		/// Determines how to handle the watch actions as part of the watch execution.
 		/// </summary>
-		[JsonProperty("trigger_data")]
-		IScheduleTriggerEvent TriggerData { get; set; }
+		[JsonProperty("action_modes")]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, ActionExecutionMode>))]
+		IDictionary<string, ActionExecutionMode> ActionModes { get; set; }
+
+		/// <summary>
+		/// When present, the watch uses this object as a payload
+		/// instead of executing its own input.
+		/// </summary>
+		[JsonProperty("alternative_input")]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
+		IDictionary<string, object> AlternativeInput { get; set; }
 
 		/// <summary>
 		/// If this is set to true the watch execution will use the Always Condition.
@@ -28,27 +37,18 @@ namespace Nest
 		bool? RecordExecution { get; set; }
 
 		/// <summary>
-		/// When present, the watch uses this object as a payload
-		/// instead of executing its own input.
-		/// </summary>
-		[JsonProperty("alternative_input")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
-		IDictionary<string, object> AlternativeInput { get; set; }
-
-		/// <summary>
-		/// Determines how to handle the watch actions as part of the watch execution.
-		/// </summary>
-		[JsonProperty("action_modes")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, ActionExecutionMode>))]
-		IDictionary<string, ActionExecutionMode> ActionModes { get; set; }
-
-		/// <summary>
-		///This field can either be a list of action ids or the string _all.
-		/// If _all is set or an action that is executed by the watch appears in this list
-		/// it will be executed in simulated mode.
+		/// This field can either be a list of action ids or the string _all.
+		///  If _all is set or an action that is executed by the watch appears in this list
+		///  it will be executed in simulated mode.
 		/// </summary>
 		[JsonProperty("simulated_actions")]
 		SimulatedActions SimulatedActions { get; set; }
+
+		/// <summary>
+		/// This structure will be parsed as a trigger event and used for the watch execution.
+		/// </summary>
+		[JsonProperty("trigger_data")]
+		IScheduleTriggerEvent TriggerData { get; set; }
 
 		/// <summary>
 		/// When present, this watch is used instead of the one specified in the request.
@@ -60,17 +60,16 @@ namespace Nest
 
 	public partial class ExecuteWatchRequest
 	{
-		public IScheduleTriggerEvent TriggerData { get; set; }
+		public IDictionary<string, ActionExecutionMode> ActionModes { get; set; }
+
+		public IDictionary<string, object> AlternativeInput { get; set; }
 
 		public bool? IgnoreCondition { get; set; }
 
 		public bool? RecordExecution { get; set; }
 
-		public IDictionary<string, object> AlternativeInput { get; set; }
-
-		public IDictionary<string, ActionExecutionMode> ActionModes { get; set; }
-
 		public SimulatedActions SimulatedActions { get; set; }
+		public IScheduleTriggerEvent TriggerData { get; set; }
 
 		public IPutWatchRequest Watch { get; set; }
 	}
@@ -78,12 +77,12 @@ namespace Nest
 	[DescriptorFor("XpackWatcherExecuteWatch")]
 	public partial class ExecuteWatchDescriptor
 	{
-		IScheduleTriggerEvent IExecuteWatchRequest.TriggerData { get; set; }
+		IDictionary<string, ActionExecutionMode> IExecuteWatchRequest.ActionModes { get; set; }
+		IDictionary<string, object> IExecuteWatchRequest.AlternativeInput { get; set; }
 		bool? IExecuteWatchRequest.IgnoreCondition { get; set; }
 		bool? IExecuteWatchRequest.RecordExecution { get; set; }
-		IDictionary<string, object> IExecuteWatchRequest.AlternativeInput { get; set; }
-		IDictionary<string, ActionExecutionMode> IExecuteWatchRequest.ActionModes { get; set; }
 		SimulatedActions IExecuteWatchRequest.SimulatedActions { get; set; }
+		IScheduleTriggerEvent IExecuteWatchRequest.TriggerData { get; set; }
 		IPutWatchRequest IExecuteWatchRequest.Watch { get; set; }
 
 		public ExecuteWatchDescriptor TriggerData(Func<ScheduleTriggerEventDescriptor, IScheduleTriggerEvent> selector) =>
@@ -95,13 +94,17 @@ namespace Nest
 		public ExecuteWatchDescriptor RecordExecution(bool record = true) =>
 			Assign(a => a.RecordExecution = record);
 
-		public ExecuteWatchDescriptor ActionModes(Func<FluentDictionary<string, ActionExecutionMode>, FluentDictionary<string, ActionExecutionMode>> actionModesDictionary) =>
+		public ExecuteWatchDescriptor ActionModes(
+			Func<FluentDictionary<string, ActionExecutionMode>, FluentDictionary<string, ActionExecutionMode>> actionModesDictionary
+		) =>
 			Assign(a => a.ActionModes = actionModesDictionary(new FluentDictionary<string, ActionExecutionMode>()));
 
 		public ExecuteWatchDescriptor ActionModes(Dictionary<string, ActionExecutionMode> actionModesDictionary) =>
 			Assign(a => a.ActionModes = actionModesDictionary);
 
-		public ExecuteWatchDescriptor AlternativeInput(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> alternativeInputDictionary) =>
+		public ExecuteWatchDescriptor AlternativeInput(
+			Func<FluentDictionary<string, object>, FluentDictionary<string, object>> alternativeInputDictionary
+		) =>
 			Assign(a => a.AlternativeInput = alternativeInputDictionary(new FluentDictionary<string, object>()));
 
 		public ExecuteWatchDescriptor AlternativeInput(Dictionary<string, object> alternativeInputDictionary) =>

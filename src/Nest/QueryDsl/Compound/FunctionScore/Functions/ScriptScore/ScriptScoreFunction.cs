@@ -15,8 +15,8 @@ namespace Nest
 		public IScriptQuery Script { get; set; }
 	}
 
-	public class ScriptScoreFunctionDescriptor<T> :
-		FunctionScoreFunctionDescriptorBase<ScriptScoreFunctionDescriptor<T>, IScriptScoreFunction, T> , IScriptScoreFunction
+	public class ScriptScoreFunctionDescriptor<T>
+		: FunctionScoreFunctionDescriptorBase<ScriptScoreFunctionDescriptor<T>, IScriptScoreFunction, T>, IScriptScoreFunction
 		where T : class
 	{
 		IScriptQuery IScriptScoreFunction.Script { get; set; }

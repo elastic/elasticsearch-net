@@ -1,5 +1,3 @@
-using System;
-using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -10,13 +8,13 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public interface IFloatRangeProperty : IRangeProperty { }
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class FloatRangeProperty : RangePropertyBase, IFloatRangeProperty
 	{
 		public FloatRangeProperty() : base(RangeType.FloatRange) { }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class FloatRangePropertyDescriptor<T>
 		: RangePropertyDescriptorBase<FloatRangePropertyDescriptor<T>, IFloatRangeProperty, T>, IFloatRangeProperty
 		where T : class

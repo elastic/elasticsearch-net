@@ -9,16 +9,16 @@ namespace Nest
 	public interface IEdgeNGramTokenizer : ITokenizer
 	{
 		/// <summary>
-		/// Minimum size in codepoints of a single n-gram
-		/// </summary>
-		[JsonProperty("min_gram")]
-		int? MinGram { get; set; }
-
-		/// <summary>
 		/// Maximum size in codepoints of a single n-gram
 		/// </summary>
 		[JsonProperty("max_gram")]
 		int? MaxGram { get; set; }
+
+		/// <summary>
+		/// Minimum size in codepoints of a single n-gram
+		/// </summary>
+		[JsonProperty("min_gram")]
+		int? MinGram { get; set; }
 
 		/// <summary>
 		/// Characters classes to keep in the tokens, Elasticsearch
@@ -27,43 +27,44 @@ namespace Nest
 		[JsonProperty("token_chars")]
 		IEnumerable<TokenChar> TokenChars { get; set; }
 	}
-	/// <inheritdoc/>
+
+	/// <inheritdoc />
 	public class EdgeNGramTokenizer : TokenizerBase, IEdgeNGramTokenizer
 	{
-		public EdgeNGramTokenizer() { Type = "edge_ngram"; }
+		public EdgeNGramTokenizer() => Type = "edge_ngram";
 
-		/// <inheritdoc/>
-		public int? MinGram { get; set; }
-
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public int? MaxGram { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
+		public int? MinGram { get; set; }
+
+		/// <inheritdoc />
 		public IEnumerable<TokenChar> TokenChars { get; set; }
 	}
-	/// <inheritdoc/>
-	public class EdgeNGramTokenizerDescriptor 
+
+	/// <inheritdoc />
+	public class EdgeNGramTokenizerDescriptor
 		: TokenizerDescriptorBase<EdgeNGramTokenizerDescriptor, IEdgeNGramTokenizer>, IEdgeNGramTokenizer
 	{
 		protected override string Type => "edge_ngram";
+		int? IEdgeNGramTokenizer.MaxGram { get; set; }
 
 		int? IEdgeNGramTokenizer.MinGram { get; set; }
-		int? IEdgeNGramTokenizer.MaxGram { get; set; }
 		IEnumerable<TokenChar> IEdgeNGramTokenizer.TokenChars { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public EdgeNGramTokenizerDescriptor MinGram(int? minGram) => Assign(a => a.MinGram = minGram);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public EdgeNGramTokenizerDescriptor MaxGram(int? maxGram) => Assign(a => a.MaxGram = maxGram);
 
-		/// <inheritdoc/>
-		public EdgeNGramTokenizerDescriptor TokenChars(IEnumerable<TokenChar> tokenChars) => 
+		/// <inheritdoc />
+		public EdgeNGramTokenizerDescriptor TokenChars(IEnumerable<TokenChar> tokenChars) =>
 			Assign(a => a.TokenChars = tokenChars);
 
-		/// <inheritdoc/>
-		public EdgeNGramTokenizerDescriptor TokenChars(params TokenChar[] tokenChars) => 
+		/// <inheritdoc />
+		public EdgeNGramTokenizerDescriptor TokenChars(params TokenChar[] tokenChars) =>
 			Assign(a => a.TokenChars = tokenChars);
 	}
-
 }

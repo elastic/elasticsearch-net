@@ -4,7 +4,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonConverter(typeof (StringEnumConverter))]
+	[JsonConverter(typeof(StringEnumConverter))]
 	public enum NoMatchShortcut
 	{
 		[EnumMember(Value = "none")] None,

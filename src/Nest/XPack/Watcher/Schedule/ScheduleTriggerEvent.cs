@@ -7,18 +7,17 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<ScheduleTriggerEvent>))]
 	public interface IScheduleTriggerEvent : ITriggerEvent
 	{
-		[JsonProperty("triggered_time")]
-		Union<DateTimeOffset, string> TriggeredTime { get; set; }
-
 		[JsonProperty("scheduled_time")]
 		Union<DateTimeOffset, string> ScheduledTime { get; set; }
+
+		[JsonProperty("triggered_time")]
+		Union<DateTimeOffset, string> TriggeredTime { get; set; }
 	}
 
 	public class ScheduleTriggerEvent : TriggerEventBase, IScheduleTriggerEvent
 	{
-		public Union<DateTimeOffset,string> TriggeredTime { get; set; }
-
 		public Union<DateTimeOffset, string> ScheduledTime { get; set; }
+		public Union<DateTimeOffset, string> TriggeredTime { get; set; }
 
 		internal override void WrapInContainer(ITriggerEventContainer container) => container.Schedule = this;
 	}
@@ -26,8 +25,8 @@ namespace Nest
 	public class ScheduleTriggerEventDescriptor
 		: DescriptorBase<ScheduleTriggerEventDescriptor, IScheduleTriggerEvent>, IScheduleTriggerEvent
 	{
-		Union<DateTimeOffset, string> IScheduleTriggerEvent.TriggeredTime { get; set; }
 		Union<DateTimeOffset, string> IScheduleTriggerEvent.ScheduledTime { get; set; }
+		Union<DateTimeOffset, string> IScheduleTriggerEvent.TriggeredTime { get; set; }
 
 		public ScheduleTriggerEventDescriptor TriggeredTime(DateTimeOffset triggeredTime) =>
 			Assign(a => a.TriggeredTime = triggeredTime);

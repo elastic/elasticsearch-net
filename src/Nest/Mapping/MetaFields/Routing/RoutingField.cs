@@ -14,10 +14,10 @@ namespace Nest
 		public bool? Required { get; set; }
 	}
 
-	public class RoutingFieldDescriptor<T> 
+	public class RoutingFieldDescriptor<T>
 		: DescriptorBase<RoutingFieldDescriptor<T>, IRoutingField>, IRoutingField
 	{
-		bool? IRoutingField.Required { get; set;}
+		bool? IRoutingField.Required { get; set; }
 
 		public RoutingFieldDescriptor<T> Required(bool required = true) => Assign(a => a.Required = required);
 	}

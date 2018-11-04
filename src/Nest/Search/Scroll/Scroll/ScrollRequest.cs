@@ -14,34 +14,33 @@ namespace Nest
 
 	public partial class ScrollRequest
 	{
-		private Type _clrType { get; set; }
-		Type ICovariantSearchRequest.ClrType => this._clrType;
-		Types ICovariantSearchRequest.ElasticsearchTypes => this.CovariantTypes;
+		public ScrollRequest(string scrollId, Time scroll)
+		{
+			Scroll = scroll;
+			ScrollId = scrollId;
+		}
 
 		public Types CovariantTypes { get; set; }
-		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 
 		public Time Scroll { get; set; }
 
 		public string ScrollId { get; set; }
-
-		public ScrollRequest(string scrollId, Time scroll)
-		{
-			this.Scroll = scroll;
-			this.ScrollId = scrollId;
-		}
+		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
+		private Type _clrType { get; set; }
+		Type ICovariantSearchRequest.ClrType => _clrType;
+		Types ICovariantSearchRequest.ElasticsearchTypes => CovariantTypes;
 	}
 
 	public partial class ScrollDescriptor<T> where T : class
 	{
-		Type ICovariantSearchRequest.ClrType => typeof(T);
 		private Types _covariantTypes = null;
-		Types ICovariantSearchRequest.ElasticsearchTypes => this._covariantTypes;
-		Func<dynamic, Hit<dynamic>, Type> ICovariantSearchRequest.TypeSelector { get; set; }
+		Type ICovariantSearchRequest.ClrType => typeof(T);
+		Types ICovariantSearchRequest.ElasticsearchTypes => _covariantTypes;
 
 		Time IScrollRequest.Scroll { get; set; }
 
 		string IScrollRequest.ScrollId { get; set; }
+		Func<dynamic, Hit<dynamic>, Type> ICovariantSearchRequest.TypeSelector { get; set; }
 
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public ScrollDescriptor<T> Scroll(Time scroll) => Assign(a => a.Scroll = scroll);
@@ -51,7 +50,6 @@ namespace Nest
 		public ScrollDescriptor<T> ConcreteTypeSelector(Func<dynamic, Hit<dynamic>, Type> typeSelector) =>
 			Assign(a => a.TypeSelector = typeSelector);
 
-		public ScrollDescriptor<T> CovariantTypes(Types covariantTypes) => Assign(a=> this._covariantTypes = covariantTypes);
-
+		public ScrollDescriptor<T> CovariantTypes(Types covariantTypes) => Assign(a => _covariantTypes = covariantTypes);
 	}
 }

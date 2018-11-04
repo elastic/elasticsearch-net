@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -25,10 +22,10 @@ namespace Nest
 
 	public class ConvertProcessor : ProcessorBase, IConvertProcessor
 	{
-		protected override string Name => "convert";
 		public Field Field { get; set; }
 		public Field TargetField { get; set; }
 		public ConvertProcessorType? Type { get; set; }
+		protected override string Name => "convert";
 	}
 
 	public class ConvertProcessorDescriptor<T> : ProcessorDescriptorBase<ConvertProcessorDescriptor<T>, IConvertProcessor>, IConvertProcessor
@@ -55,16 +52,19 @@ namespace Nest
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum ConvertProcessorType
 	{
-		[EnumMember(Value="integer")]
+		[EnumMember(Value = "integer")]
 		Integer,
-		[EnumMember(Value="float")]
+
+		[EnumMember(Value = "float")]
 		Float,
-		[EnumMember(Value="string")]
+
+		[EnumMember(Value = "string")]
 		String,
-		[EnumMember(Value="boolean")]
+
+		[EnumMember(Value = "boolean")]
 		Boolean,
-		[EnumMember(Value="auto")]
+
+		[EnumMember(Value = "auto")]
 		Auto
 	}
-
 }

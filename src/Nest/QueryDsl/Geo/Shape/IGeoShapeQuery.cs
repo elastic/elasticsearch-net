@@ -3,35 +3,35 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof (CompositeJsonConverter<GeoShapeQueryJsonConverter, GeoShapeQueryFieldNameConverter>))]
+	[JsonConverter(typeof(CompositeJsonConverter<GeoShapeQueryJsonConverter, GeoShapeQueryFieldNameConverter>))]
 	public interface IGeoShapeQuery : IFieldNameQuery
 	{
-		/// <summary>
-		/// Controls the spatial relation operator to use at search time.
-		/// </summary>
-		[JsonProperty("relation")]
-		GeoShapeRelation? Relation { get; set; }
-
 		/// <summary>
 		/// Will ignore an unmapped field and will not match any documents for this query.
 		/// This can be useful when querying multiple indexes which might have different mappings.
 		/// </summary>
 		[JsonProperty("ignore_unmapped")]
 		bool? IgnoreUnmapped { get; set; }
+
+		/// <summary>
+		/// Controls the spatial relation operator to use at search time.
+		/// </summary>
+		[JsonProperty("relation")]
+		GeoShapeRelation? Relation { get; set; }
 	}
 
 	public abstract class GeoShapeQueryBase : FieldNameQueryBase, IGeoShapeQuery
 	{
 		/// <summary>
-		/// Controls the spatial relation operator to use at search time.
-		/// </summary>
-		public GeoShapeRelation? Relation { get; set; }
-
-		/// <summary>
 		/// Will ignore an unmapped field and will not match any documents for this query.
 		/// This can be useful when querying multiple indexes which might have different mappings.
 		/// </summary>
 		public bool? IgnoreUnmapped { get; set; }
+
+		/// <summary>
+		/// Controls the spatial relation operator to use at search time.
+		/// </summary>
+		public GeoShapeRelation? Relation { get; set; }
 	}
 
 	public abstract class GeoShapeQueryDescriptorBase<TDescriptor, TInterface, T>

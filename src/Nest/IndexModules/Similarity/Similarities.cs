@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -11,11 +10,13 @@ namespace Nest
 	public class Similarities : IsADictionaryBase<string, ISimilarity>, ISimilarities
 	{
 		public Similarities() { }
+
 		public Similarities(IDictionary<string, ISimilarity> container) : base(container) { }
+
 		public Similarities(Dictionary<string, ISimilarity> container) : base(container) { }
 
 		/// <summary>
-		/// Add an <see cref="ISimilarity"/>
+		/// Add an <see cref="ISimilarity" />
 		/// </summary>
 		public void Add(string type, ISimilarity mapping) => BackingDictionary.Add(type, mapping);
 	}

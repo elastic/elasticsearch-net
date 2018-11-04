@@ -1,31 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using Elasticsearch.Net;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
 	[JsonConverter(typeof(GetAliasResponseConverter))]
 	public interface IGetAliasResponse : IResponse
 	{
-		IReadOnlyDictionary<string, IReadOnlyList<AliasDefinition>> Indices { get; }
 		/// <summary>
 		/// An additional error message if an error occurs.
 		/// </summary>
 		/// <remarks>Applies to Elasticsearch 5.5.0+</remarks>
 		string Error { get; }
+
+		IReadOnlyDictionary<string, IReadOnlyList<AliasDefinition>> Indices { get; }
 		int? StatusCode { get; }
 	}
 
 	public class GetAliasResponse : ResponseBase, IGetAliasResponse
 	{
-		public IReadOnlyDictionary<string, IReadOnlyList<AliasDefinition>> Indices { get; internal set; } = EmptyReadOnly<string, IReadOnlyList<AliasDefinition>>.Dictionary;
-
-		public override bool IsValid => this.Indices.Count > 0;
 		public string Error { get; internal set; }
+
+		public IReadOnlyDictionary<string, IReadOnlyList<AliasDefinition>> Indices { get; internal set; } =
+			EmptyReadOnly<string, IReadOnlyList<AliasDefinition>>.Dictionary;
+
+		public override bool IsValid => Indices.Count > 0;
 		public int? StatusCode { get; internal set; }
 	}
 
@@ -33,10 +33,7 @@ namespace Nest
 	{
 		public override bool CanWrite => false;
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			throw new NotSupportedException();
-		}
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -54,18 +51,21 @@ namespace Nest
 				{
 					var aliasDict = kv.Value["aliases"];
 					if (aliasDict != null)
+					{
 						aliases = aliasDict.Select(kva =>
-						{
-							var alias = kva.Value;
-							alias.Name = kva.Key;
-							return alias;
-						}).ToList();
+							{
+								var alias = kva.Value;
+								alias.Name = kva.Key;
+								return alias;
+							})
+							.ToList();
+					}
 				}
 
 				indices.Add(indexDict, aliases);
 			}
 
-			return new GetAliasResponse { Indices = indices, Error = error?.Reason, StatusCode = statusCode};
+			return new GetAliasResponse { Indices = indices, Error = error?.Reason, StatusCode = statusCode };
 		}
 
 		public override bool CanConvert(Type objectType) => true;

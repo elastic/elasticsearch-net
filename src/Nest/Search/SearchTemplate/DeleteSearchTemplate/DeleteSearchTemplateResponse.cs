@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Nest
+﻿namespace Nest
 {
 	/// <remarks>Removed in 6.x</remarks>
 	public interface IDeleteSearchTemplateResponse : IAcknowledgedResponse { }

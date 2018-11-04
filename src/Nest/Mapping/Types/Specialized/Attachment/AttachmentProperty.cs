@@ -9,15 +9,15 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public interface IAttachmentProperty : IDocValuesProperty
 	{
-		IDateProperty DateField { get; set; }
-		ITextProperty TitleField { get; set; }
-		ITextProperty NameField { get; set; }
-		ITextProperty ContentField { get; set; }
 		ITextProperty AuthorField { get; set; }
-		ITextProperty KeywordsField { get; set; }
-		ITextProperty ContentTypeField { get; set; }
+		ITextProperty ContentField { get; set; }
 		INumberProperty ContentLengthField { get; set; }
+		ITextProperty ContentTypeField { get; set; }
+		IDateProperty DateField { get; set; }
+		ITextProperty KeywordsField { get; set; }
 		ITextProperty LanguageField { get; set; }
+		ITextProperty NameField { get; set; }
+		ITextProperty TitleField { get; set; }
 	}
 
 	[Obsolete("Removed in Elasticsearch 6.0, please consider using the ingest-attachment plugin.")]
@@ -26,61 +26,61 @@ namespace Nest
 	{
 		public AttachmentProperty() : base(FieldType.Attachment) { }
 
-		private IDictionary<PropertyName, IProperty> Dictionary => this.Fields ?? (this.Fields = new Properties());
-
 		public ITextProperty AuthorField
 		{
-			get { return Dictionary["author"] as ITextProperty; }
-			set { Dictionary["author"] = value; }
-		}
-
-		public INumberProperty ContentLengthField
-		{
-			get { return Dictionary["content_length"] as INumberProperty; }
-			set { Dictionary["content_length"] = value; }
-		}
-
-		public ITextProperty ContentTypeField
-		{
-			get { return Dictionary["content_type"] as ITextProperty; }
-			set { Dictionary["content_type"] = value; }
-		}
-
-		public IDateProperty DateField
-		{
-			get { return Dictionary["date"] as IDateProperty; }
-			set { Dictionary["date"] = value; }
+			get => Dictionary["author"] as ITextProperty;
+			set => Dictionary["author"] = value;
 		}
 
 		public ITextProperty ContentField
 		{
-			get { return Dictionary["content"] as ITextProperty; }
-			set { Dictionary["content"] = value; }
+			get => Dictionary["content"] as ITextProperty;
+			set => Dictionary["content"] = value;
+		}
+
+		public INumberProperty ContentLengthField
+		{
+			get => Dictionary["content_length"] as INumberProperty;
+			set => Dictionary["content_length"] = value;
+		}
+
+		public ITextProperty ContentTypeField
+		{
+			get => Dictionary["content_type"] as ITextProperty;
+			set => Dictionary["content_type"] = value;
+		}
+
+		public IDateProperty DateField
+		{
+			get => Dictionary["date"] as IDateProperty;
+			set => Dictionary["date"] = value;
 		}
 
 		public ITextProperty KeywordsField
 		{
-			get { return Dictionary["keywords"] as ITextProperty; }
-			set { Dictionary["keywords"] = value; }
+			get => Dictionary["keywords"] as ITextProperty;
+			set => Dictionary["keywords"] = value;
 		}
 
 		public ITextProperty LanguageField
 		{
-			get { return Dictionary["language"] as ITextProperty; }
-			set { Dictionary["language"] = value; }
+			get => Dictionary["language"] as ITextProperty;
+			set => Dictionary["language"] = value;
 		}
 
 		public ITextProperty NameField
 		{
-			get { return Dictionary["name"] as ITextProperty; }
-			set { Dictionary["name"] = value; }
+			get => Dictionary["name"] as ITextProperty;
+			set => Dictionary["name"] = value;
 		}
 
 		public ITextProperty TitleField
 		{
-			get { return Dictionary["title"] as ITextProperty; }
-			set { Dictionary["title"] = value; }
+			get => Dictionary["title"] as ITextProperty;
+			set => Dictionary["title"] = value;
 		}
+
+		private IDictionary<PropertyName, IProperty> Dictionary => Fields ?? (Fields = new Properties());
 	}
 
 	[Obsolete("Removed in Elasticsearch 6.0, please consider using the ingest-attachment plugin.")]
@@ -89,19 +89,19 @@ namespace Nest
 		: DocValuesPropertyDescriptorBase<AttachmentPropertyDescriptor<T>, IAttachmentProperty, T>, IAttachmentProperty
 		where T : class
 	{
-		IDateProperty IAttachmentProperty.DateField { get; set; }
-		ITextProperty IAttachmentProperty.TitleField { get; set; }
-		ITextProperty IAttachmentProperty.NameField { get; set; }
-		ITextProperty IAttachmentProperty.ContentField { get; set; }
+		public AttachmentPropertyDescriptor() : base(FieldType.Attachment) { }
+
 		ITextProperty IAttachmentProperty.AuthorField { get; set; }
-		ITextProperty IAttachmentProperty.KeywordsField { get; set; }
-		ITextProperty IAttachmentProperty.ContentTypeField { get; set; }
+		ITextProperty IAttachmentProperty.ContentField { get; set; }
 		INumberProperty IAttachmentProperty.ContentLengthField { get; set; }
-		ITextProperty IAttachmentProperty.LanguageField { get; set; }
+		ITextProperty IAttachmentProperty.ContentTypeField { get; set; }
+		IDateProperty IAttachmentProperty.DateField { get; set; }
 
 		private IDictionary<PropertyName, IProperty> Dictionary => Self.Fields ?? (Self.Fields = new Properties());
-
-		public AttachmentPropertyDescriptor() : base(FieldType.Attachment) { }
+		ITextProperty IAttachmentProperty.KeywordsField { get; set; }
+		ITextProperty IAttachmentProperty.LanguageField { get; set; }
+		ITextProperty IAttachmentProperty.NameField { get; set; }
+		ITextProperty IAttachmentProperty.TitleField { get; set; }
 
 		private AttachmentPropertyDescriptor<T> SetMetadataField<TDescriptor, TInterface>(Func<TDescriptor, TInterface> selector, string fieldName)
 			where TDescriptor : TInterface, new()
@@ -109,7 +109,7 @@ namespace Nest
 		{
 			selector.ThrowIfNull(nameof(selector));
 			var type = selector(new TDescriptor());
-			this.Dictionary[fieldName] = type;
+			Dictionary[fieldName] = type;
 			return this;
 		}
 

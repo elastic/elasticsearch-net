@@ -1,16 +1,16 @@
-﻿using System;
-using Elasticsearch.Net;
-
-namespace Nest
+﻿namespace Nest
 {
 	public class DateRangeAttribute : RangePropertyAttributeBase, IDateRangeProperty
 	{
-		private IDateRangeProperty Self => this;
-
 		public DateRangeAttribute() : base(RangeType.DateRange) { }
 
-		string IDateRangeProperty.Format { get; set; }
+		public string Format
+		{
+			get => Self.Format;
+			set => Self.Format = value;
+		}
 
-		public string Format { get { return Self.Format; } set { Self.Format = value; } }
+		string IDateRangeProperty.Format { get; set; }
+		private IDateRangeProperty Self => this;
 	}
 }

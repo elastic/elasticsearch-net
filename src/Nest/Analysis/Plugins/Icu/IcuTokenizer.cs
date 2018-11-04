@@ -19,16 +19,16 @@ namespace Nest
 		string RuleFiles { get; set; }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class IcuTokenizer : TokenizerBase, IIcuTokenizer
-    {
-		public IcuTokenizer() { Type = "icu_tokenizer"; }
+	{
+		public IcuTokenizer() => Type = "icu_tokenizer";
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public string RuleFiles { get; set; }
-    }
+	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class IcuTokenizerDescriptor
 		: TokenizerDescriptorBase<IcuTokenizerDescriptor, IIcuTokenizer>, IIcuTokenizer
 	{
@@ -36,7 +36,7 @@ namespace Nest
 
 		string IIcuTokenizer.RuleFiles { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IcuTokenizerDescriptor RuleFiles(string ruleFiles) => Assign(a => a.RuleFiles = ruleFiles);
 	}
 }

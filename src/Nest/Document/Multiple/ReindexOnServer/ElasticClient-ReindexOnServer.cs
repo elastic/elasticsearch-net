@@ -1,50 +1,56 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using System.IO;
-using System.Threading;
 
 namespace Nest
 {
 	public partial interface IElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		IReindexOnServerResponse ReindexOnServer(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		IReindexOnServerResponse ReindexOnServer(IReindexOnServerRequest request);
 
-		/// <inheritdoc/>
-		Task<IReindexOnServerResponse> ReindexOnServerAsync(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<IReindexOnServerResponse> ReindexOnServerAsync(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
-		/// <inheritdoc/>
-		Task<IReindexOnServerResponse> ReindexOnServerAsync(IReindexOnServerRequest request, CancellationToken cancellationToken = default(CancellationToken));
-
+		/// <inheritdoc />
+		Task<IReindexOnServerResponse> ReindexOnServerAsync(IReindexOnServerRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IReindexOnServerResponse ReindexOnServer(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector) =>
-			this.ReindexOnServer(selector.InvokeOrDefault(new ReindexOnServerDescriptor()));
+			ReindexOnServer(selector.InvokeOrDefault(new ReindexOnServerDescriptor()));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IReindexOnServerResponse ReindexOnServer(IReindexOnServerRequest request) =>
-			this.Dispatcher.Dispatch<IReindexOnServerRequest, ReindexOnServerRequestParameters, ReindexOnServerResponse>(
-				this.ForceConfiguration<IReindexOnServerRequest, ReindexOnServerRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
-				this.LowLevelDispatch.ReindexDispatch<ReindexOnServerResponse>
+			Dispatcher.Dispatch<IReindexOnServerRequest, ReindexOnServerRequestParameters, ReindexOnServerResponse>(
+				ForceConfiguration<IReindexOnServerRequest, ReindexOnServerRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
+				LowLevelDispatch.ReindexDispatch<ReindexOnServerResponse>
 			);
 
-		/// <inheritdoc/>
-		public Task<IReindexOnServerResponse> ReindexOnServerAsync(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.ReindexOnServerAsync(selector.InvokeOrDefault(new ReindexOnServerDescriptor()), cancellationToken);
+		/// <inheritdoc />
+		public Task<IReindexOnServerResponse> ReindexOnServerAsync(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			ReindexOnServerAsync(selector.InvokeOrDefault(new ReindexOnServerDescriptor()), cancellationToken);
 
-		/// <inheritdoc/>
-		public Task<IReindexOnServerResponse> ReindexOnServerAsync(IReindexOnServerRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<IReindexOnServerRequest, ReindexOnServerRequestParameters, ReindexOnServerResponse, IReindexOnServerResponse>(
-				this.ForceConfiguration<IReindexOnServerRequest, ReindexOnServerRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
+		/// <inheritdoc />
+		public Task<IReindexOnServerResponse> ReindexOnServerAsync(IReindexOnServerRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			Dispatcher.DispatchAsync<IReindexOnServerRequest, ReindexOnServerRequestParameters, ReindexOnServerResponse, IReindexOnServerResponse>(
+				ForceConfiguration<IReindexOnServerRequest, ReindexOnServerRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
 				cancellationToken,
-				this.LowLevelDispatch.ReindexDispatchAsync<ReindexOnServerResponse>
+				LowLevelDispatch.ReindexDispatchAsync<ReindexOnServerResponse>
 			);
 	}
 }

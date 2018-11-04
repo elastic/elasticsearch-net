@@ -20,28 +20,33 @@ namespace Nest
 	public partial class MultiTermVectorsDescriptor
 	{
 		private List<IMultiTermVectorOperation> _operations = new List<IMultiTermVectorOperation>();
+
 		IEnumerable<IMultiTermVectorOperation> IMultiTermVectorsRequest.Documents
 		{
-			get { return this._operations; }
-			set { this._operations = value?.ToList(); }
+			get => _operations;
+			set => _operations = value?.ToList();
 		}
 
 		public MultiTermVectorsDescriptor Get<T>(Func<MultiTermVectorOperationDescriptor<T>, IMultiTermVectorOperation> getSelector)
 			where T : class =>
-			Assign(a => this._operations.AddIfNotNull(getSelector?.Invoke(new MultiTermVectorOperationDescriptor<T>())));
+			Assign(a => _operations.AddIfNotNull(getSelector?.Invoke(new MultiTermVectorOperationDescriptor<T>())));
 
 		public MultiTermVectorsDescriptor GetMany<T>(IEnumerable<long> ids,
-			Func<MultiTermVectorOperationDescriptor<T>, long, IMultiTermVectorOperation> getSelector = null)
+			Func<MultiTermVectorOperationDescriptor<T>, long, IMultiTermVectorOperation> getSelector = null
+		)
 			where T : class =>
-			Assign(a => this._operations.AddRange(ids.Select(id => getSelector.InvokeOrDefault(new MultiTermVectorOperationDescriptor<T>().Id(id), id))));
+			Assign(a => _operations.AddRange(ids.Select(id => getSelector.InvokeOrDefault(new MultiTermVectorOperationDescriptor<T>().Id(id), id))));
 
-		public MultiTermVectorsDescriptor GetMany<T>(IEnumerable<string> ids, Func<MultiTermVectorOperationDescriptor<T>, string, IMultiTermVectorOperation> getSelector = null)
+		public MultiTermVectorsDescriptor GetMany<T>(IEnumerable<string> ids,
+			Func<MultiTermVectorOperationDescriptor<T>, string, IMultiTermVectorOperation> getSelector = null
+		)
 			where T : class =>
-			Assign(a => this._operations.AddRange(ids.Select(id => getSelector.InvokeOrDefault(new MultiTermVectorOperationDescriptor<T>().Id(id), id))));
+			Assign(a => _operations.AddRange(ids.Select(id => getSelector.InvokeOrDefault(new MultiTermVectorOperationDescriptor<T>().Id(id), id))));
 
-		public MultiTermVectorsDescriptor GetMany<T>(IEnumerable<Id> ids, Func<MultiTermVectorOperationDescriptor<T>, Id, IMultiTermVectorOperation> getSelector = null)
+		public MultiTermVectorsDescriptor GetMany<T>(IEnumerable<Id> ids,
+			Func<MultiTermVectorOperationDescriptor<T>, Id, IMultiTermVectorOperation> getSelector = null
+		)
 			where T : class =>
-			Assign(a => this._operations.AddRange(ids.Select(id => getSelector.InvokeOrDefault(new MultiTermVectorOperationDescriptor<T>().Id(id), id))));
-
+			Assign(a => _operations.AddRange(ids.Select(id => getSelector.InvokeOrDefault(new MultiTermVectorOperationDescriptor<T>().Id(id), id))));
 	}
 }

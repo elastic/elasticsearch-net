@@ -8,19 +8,18 @@ namespace Nest
 	[JsonConverter(typeof(ScriptJsonConverter))]
 	public interface IScript
 	{
+		[JsonProperty("lang")]
+		string Lang { get; set; }
+
 		[JsonProperty("params")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysPreservingNullJsonConverter<string, object>))]
 		Dictionary<string, object> Params { get; set; }
-
-		[JsonProperty("lang")]
-		string Lang { get; set; }
 	}
 
 	public abstract class ScriptBase : IScript
 	{
-		public Dictionary<string, object> Params { get; set; }
-
 		public string Lang { get; set; }
+		public Dictionary<string, object> Params { get; set; }
 
 		public static implicit operator ScriptBase(string inline) => new InlineScript(inline);
 	}
@@ -29,8 +28,8 @@ namespace Nest
 		where TDescriptor : ScriptDescriptorBase<TDescriptor, TInterface>, TInterface, IScript
 		where TInterface : class, IScript
 	{
-		Dictionary<string, object> IScript.Params { get; set; }
 		string IScript.Lang { get; set; }
+		Dictionary<string, object> IScript.Params { get; set; }
 
 		public TDescriptor Params(Dictionary<string, object> scriptParams) => Assign(a => a.Params = scriptParams);
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
@@ -12,6 +11,7 @@ namespace Nest
 	{
 		public override bool CanRead => true;
 		public override bool CanWrite => true;
+
 		public override bool CanConvert(Type objectType) => true;
 
 		protected override bool SkipValue(JsonSerializer serializer, KeyValuePair<string, object> entry) =>
@@ -22,7 +22,8 @@ namespace Nest
 			var ds = value as IDynamicIndexSettings ?? (value as IUpdateIndexSettingsRequest)?.IndexSettings;
 
 			if (ds == null) return;
-			IDictionary<string,object> d = ds;
+
+			IDictionary<string, object> d = ds;
 
 			void Set(string knownKey, object newValue)
 			{
@@ -88,10 +89,10 @@ namespace Nest
 
 			var indexSettings = value as IIndexSettings;
 
-            Set(StoreType, indexSettings?.FileSystemStorageImplementation);
-            Set(QueriesCacheEnabled, indexSettings?.Queries?.Cache?.Enabled);
+			Set(StoreType, indexSettings?.FileSystemStorageImplementation);
+			Set(QueriesCacheEnabled, indexSettings?.Queries?.Cache?.Enabled);
 			Set(FixedIndexSettings.NumberOfShards, indexSettings?.NumberOfShards);
-            Set(FixedIndexSettings.RoutingPartitionSize, indexSettings?.RoutingPartitionSize);
+			Set(FixedIndexSettings.RoutingPartitionSize, indexSettings?.RoutingPartitionSize);
 
 			base.WriteJson(writer, d, serializer);
 		}
@@ -100,9 +101,9 @@ namespace Nest
 		{
 			var s = new IndexSettings();
 			SetKnownIndexSettings(reader, serializer, s);
-			if (!typeof (IUpdateIndexSettingsRequest).IsAssignableFrom(objectType)) return s;
+			if (!typeof(IUpdateIndexSettingsRequest).IsAssignableFrom(objectType)) return s;
 
-			var request = new UpdateIndexSettingsRequest() { IndexSettings =  s};
+			var request = new UpdateIndexSettingsRequest() { IndexSettings = s };
 			return request;
 		}
 
@@ -112,8 +113,8 @@ namespace Nest
 			foreach (var property in original.Properties())
 			{
 				if (property.Value is JObject &&
-				    property.Name != UpdatableIndexSettings.Analysis &&
-				    property.Name != Similarity)
+					property.Name != UpdatableIndexSettings.Analysis &&
+					property.Name != Similarity)
 					Flatten(property.Value.Value<JObject>(), prefix + property.Name + ".", newObject);
 				else newObject.Add(prefix + property.Name, property.Value);
 			}
@@ -200,7 +201,7 @@ namespace Nest
 			var queriesCache = s.Queries.Cache = new QueriesCacheSettings();
 			Set<bool?>(s, settings, QueriesCacheEnabled, v => queriesCache.Enabled = v);
 
-			IDictionary<string,object> dict = s;
+			IDictionary<string, object> dict = s;
 			foreach (var kv in settings)
 			{
 				var setting = kv.Value;
@@ -209,17 +210,18 @@ namespace Nest
 				if (kv.Key == Similarity || kv.Key == "index.similarity")
 					s.Similarity = setting.Value.Value<JObject>().ToObject<Similarities>(serializer);
 				else
-				{
 					dict?.Add(kv.Key, serializer.Deserialize(kv.Value.Value.CreateReader()));
-				}
 			}
 		}
 
-		private static void Set<T>(IIndexSettings s, IDictionary<string, JProperty> settings, string key, Action<T> assign, JsonSerializer serializer = null)
+		private static void Set<T>(IIndexSettings s, IDictionary<string, JProperty> settings, string key, Action<T> assign,
+			JsonSerializer serializer = null
+		)
 		{
 			if (!settings.ContainsKey(key)) return;
+
 			var v = settings[key];
-			T value = serializer == null ? v.Value.ToObject<T>() : v.Value.ToObject<T>(serializer);
+			var value = serializer == null ? v.Value.ToObject<T>() : v.Value.ToObject<T>(serializer);
 			assign(value);
 			s.Add(key, value);
 			settings.Remove(key);

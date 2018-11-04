@@ -15,6 +15,5 @@ namespace Nest
 
 		[JsonProperty("weight")]
 		public double Weight { get; internal set; }
-
 	}
 }

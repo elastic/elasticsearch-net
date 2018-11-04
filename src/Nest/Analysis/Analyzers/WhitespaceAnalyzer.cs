@@ -5,15 +5,14 @@
 	/// </summary>
 	public interface IWhitespaceAnalyzer : IAnalyzer { }
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class WhitespaceAnalyzer : AnalyzerBase, IWhitespaceAnalyzer
 	{
-		public WhitespaceAnalyzer() : base("whitespace") {}
+		public WhitespaceAnalyzer() : base("whitespace") { }
 	}
 
-	/// <inheritdoc/>
-	public class WhitespaceAnalyzerDescriptor :
-		AnalyzerDescriptorBase<WhitespaceAnalyzerDescriptor, IWhitespaceAnalyzer>, IWhitespaceAnalyzer
+	/// <inheritdoc />
+	public class WhitespaceAnalyzerDescriptor : AnalyzerDescriptorBase<WhitespaceAnalyzerDescriptor, IWhitespaceAnalyzer>, IWhitespaceAnalyzer
 	{
 		protected override string Type => "whitespace";
 	}

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -12,24 +10,17 @@ namespace Nest
 
 	public partial class InvalidateUserAccessTokenRequest
 	{
+		public InvalidateUserAccessTokenRequest(string token) => ((IInvalidateUserAccessTokenRequest)this).Token = token;
+
 		[JsonProperty("token")]
 		string IInvalidateUserAccessTokenRequest.Token { get; set; }
-
-		public InvalidateUserAccessTokenRequest(string token)
-		{
-			((IInvalidateUserAccessTokenRequest) this).Token = token;
-		}
 	}
 
 	[DescriptorFor("XpackSecurityInvalidateToken")]
 	public partial class InvalidateUserAccessTokenDescriptor
 	{
+		public InvalidateUserAccessTokenDescriptor(string token) => ((IInvalidateUserAccessTokenRequest)this).Token = token;
+
 		string IInvalidateUserAccessTokenRequest.Token { get; set; }
-
-		public InvalidateUserAccessTokenDescriptor(string token)
-		{
-			((IInvalidateUserAccessTokenRequest) this).Token = token;
-		}
-
 	}
 }

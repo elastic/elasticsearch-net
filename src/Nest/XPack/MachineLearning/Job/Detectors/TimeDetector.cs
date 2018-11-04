@@ -13,7 +13,7 @@ namespace Nest
 	{
 		public static string GetStringValue(this TimeFunction timeFunction)
 		{
-			switch(timeFunction)
+			switch (timeFunction)
 			{
 				case TimeFunction.TimeOfDay:
 					return "time_of_day";
@@ -25,14 +25,13 @@ namespace Nest
 		}
 	}
 
-	public interface ITimeDetector : IDetector, IByFieldNameDetector, IOverFieldNameDetector,
-		IPartitionFieldNameDetector
-	{
-	}
+	public interface ITimeDetector
+		: IDetector, IByFieldNameDetector, IOverFieldNameDetector,
+			IPartitionFieldNameDetector { }
 
 	public abstract class TimeDetectorBase : DetectorBase, ITimeDetector
 	{
-		protected TimeDetectorBase(TimeFunction function) : base(function.GetStringValue()) {}
+		protected TimeDetectorBase(TimeFunction function) : base(function.GetStringValue()) { }
 
 		public Field ByFieldName { get; set; }
 		public Field OverFieldName { get; set; }
@@ -41,21 +40,21 @@ namespace Nest
 
 	public class TimeOfDayDetector : TimeDetectorBase
 	{
-		public TimeOfDayDetector() : base(TimeFunction.TimeOfDay) {}
+		public TimeOfDayDetector() : base(TimeFunction.TimeOfDay) { }
 	}
 
 	public class TimeOfWeekDetector : TimeDetectorBase
 	{
-		public TimeOfWeekDetector() : base(TimeFunction.TimeOfWeek) {}
+		public TimeOfWeekDetector() : base(TimeFunction.TimeOfWeek) { }
 	}
 
 	public class TimeDetectorDescriptor<T> : DetectorDescriptorBase<TimeDetectorDescriptor<T>, ITimeDetector>, ITimeDetector where T : class
 	{
+		public TimeDetectorDescriptor(TimeFunction function) : base(function.GetStringValue()) { }
+
 		Field IByFieldNameDetector.ByFieldName { get; set; }
 		Field IOverFieldNameDetector.OverFieldName { get; set; }
 		Field IPartitionFieldNameDetector.PartitionFieldName { get; set; }
-
-		public TimeDetectorDescriptor(TimeFunction function) : base(function.GetStringValue()) {}
 
 		public TimeDetectorDescriptor<T> ByFieldName(Field byFieldName) => Assign(a => a.ByFieldName = byFieldName);
 

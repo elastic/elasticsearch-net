@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -13,9 +10,8 @@ namespace Nest
 
 	public class PutRoleMappingResponse : ResponseBase, IPutRoleMappingResponse
 	{
+		public bool Created => RoleMapping?.Created ?? false;
 		public PutRoleMappingStatus RoleMapping { get; internal set; }
-
-		public bool Created => this.RoleMapping?.Created ?? false;
 	}
 
 	public class PutRoleMappingStatus
@@ -23,5 +19,4 @@ namespace Nest
 		[JsonProperty("created")]
 		public bool Created { get; set; }
 	}
-
 }

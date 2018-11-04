@@ -11,5 +11,4 @@ namespace Nest
 			return self;
 		}
 	}
-
 }

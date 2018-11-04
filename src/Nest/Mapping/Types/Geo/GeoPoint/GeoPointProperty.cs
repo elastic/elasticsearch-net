@@ -1,4 +1,3 @@
-using System;
 using System.Diagnostics;
 using Newtonsoft.Json;
 
@@ -8,7 +7,7 @@ namespace Nest
 	public interface IGeoPointProperty : IDocValuesProperty
 	{
 		[JsonProperty("ignore_malformed")]
-		bool? IgnoreMalformed { get; set;  }
+		bool? IgnoreMalformed { get; set; }
 	}
 
 	[DebuggerDisplay("{DebugDisplay}")]
@@ -24,9 +23,9 @@ namespace Nest
 		: DocValuesPropertyDescriptorBase<GeoPointPropertyDescriptor<T>, IGeoPointProperty, T>, IGeoPointProperty
 		where T : class
 	{
-		bool? IGeoPointProperty.IgnoreMalformed { get; set; }
-
 		public GeoPointPropertyDescriptor() : base(FieldType.GeoPoint) { }
+
+		bool? IGeoPointProperty.IgnoreMalformed { get; set; }
 
 		public GeoPointPropertyDescriptor<T> IgnoreMalformed(bool ignoreMalformed = true) => Assign(a => a.IgnoreMalformed = ignoreMalformed);
 	}

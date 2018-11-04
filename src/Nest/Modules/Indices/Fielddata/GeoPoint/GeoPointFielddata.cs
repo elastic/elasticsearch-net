@@ -5,18 +5,17 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public interface IGeoPointFielddata : IFielddata
 	{
-		[JsonProperty("precision")]
-		Distance Precision { get; set; }
-
 		[JsonProperty("format")]
 		GeoPointFielddataFormat? Format { get; set; }
+
+		[JsonProperty("precision")]
+		Distance Precision { get; set; }
 	}
 
 	public class GeoPointFielddata : FielddataBase, IGeoPointFielddata
 	{
-		public Distance Precision { get; set; }
-
 		public GeoPointFielddataFormat? Format { get; set; }
+		public Distance Precision { get; set; }
 	}
 
 	public class GeoPointFielddataDescriptor

@@ -1,10 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -21,10 +17,7 @@ namespace Nest
 	{
 		internal MatrixAggregationBase() { }
 
-		protected MatrixAggregationBase(string name, Fields field) : base(name)
-		{
-			this.Fields = field;
-		}
+		protected MatrixAggregationBase(string name, Fields field) : base(name) => Fields = field;
 
 		public Fields Fields { get; set; }
 

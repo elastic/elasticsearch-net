@@ -5,11 +5,11 @@ namespace Nest
 	[ContractJsonConverter(typeof(AnalyzerJsonConverter))]
 	public interface IAnalyzer
 	{
-		[JsonProperty(PropertyName = "version")]
-		string Version { get; set; }
-
 		[JsonProperty(PropertyName = "type")]
 		string Type { get; }
+
+		[JsonProperty(PropertyName = "version")]
+		string Version { get; set; }
 	}
 
 	public abstract class AnalyzerBase : IAnalyzer
@@ -18,9 +18,9 @@ namespace Nest
 
 		protected AnalyzerBase(string type) => Type = type;
 
-		public string Version { get; set; }
-
 		public virtual string Type { get; protected set; }
+
+		public string Version { get; set; }
 	}
 
 	public abstract class AnalyzerDescriptorBase<TAnalyzer, TAnalyzerInterface>
@@ -28,11 +28,10 @@ namespace Nest
 		where TAnalyzer : AnalyzerDescriptorBase<TAnalyzer, TAnalyzerInterface>, TAnalyzerInterface
 		where TAnalyzerInterface : class, IAnalyzer
 	{
-		string IAnalyzer.Version { get; set; }
-		string IAnalyzer.Type => this.Type;
 		protected abstract string Type { get; }
+		string IAnalyzer.Type => Type;
+		string IAnalyzer.Version { get; set; }
 
 		public TAnalyzer Version(string version) => Assign(a => a.Version = version);
 	}
-
 }

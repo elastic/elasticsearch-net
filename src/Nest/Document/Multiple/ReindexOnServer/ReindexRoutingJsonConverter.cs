@@ -15,7 +15,7 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var s = reader.ReadAsString();
-			switch(s)
+			switch (s)
 			{
 				case "keep": return ReindexRouting.Keep;
 				case "discard": return ReindexRouting.Discard;

@@ -12,39 +12,47 @@ namespace Nest
 		/// </summary>
 		IGetCategoriesResponse GetCategories(Id jobId, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		IGetCategoriesResponse GetCategories(IGetCategoriesRequest request);
 
-		/// <inheritdoc/>
-		Task<IGetCategoriesResponse> GetCategoriesAsync(Id jobId, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<IGetCategoriesResponse> GetCategoriesAsync(Id jobId, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
-		/// <inheritdoc/>
-		Task<IGetCategoriesResponse> GetCategoriesAsync(IGetCategoriesRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<IGetCategoriesResponse> GetCategoriesAsync(IGetCategoriesRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IGetCategoriesResponse GetCategories(Id jobId, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null) =>
-			this.GetCategories(selector.InvokeOrDefault(new GetCategoriesDescriptor(jobId)));
+			GetCategories(selector.InvokeOrDefault(new GetCategoriesDescriptor(jobId)));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IGetCategoriesResponse GetCategories(IGetCategoriesRequest request) =>
-			this.Dispatcher.Dispatch<IGetCategoriesRequest, GetCategoriesRequestParameters, GetCategoriesResponse>(
+			Dispatcher.Dispatch<IGetCategoriesRequest, GetCategoriesRequestParameters, GetCategoriesResponse>(
 				request,
-				this.LowLevelDispatch.XpackMlGetCategoriesDispatch<GetCategoriesResponse>
+				LowLevelDispatch.XpackMlGetCategoriesDispatch<GetCategoriesResponse>
 			);
 
-		/// <inheritdoc/>
-		public Task<IGetCategoriesResponse> GetCategoriesAsync(Id jobId, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.GetCategoriesAsync(selector.InvokeOrDefault(new GetCategoriesDescriptor(jobId)), cancellationToken);
+		/// <inheritdoc />
+		public Task<IGetCategoriesResponse> GetCategoriesAsync(Id jobId, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			GetCategoriesAsync(selector.InvokeOrDefault(new GetCategoriesDescriptor(jobId)), cancellationToken);
 
-		/// <inheritdoc/>
-		public Task<IGetCategoriesResponse> GetCategoriesAsync(IGetCategoriesRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<IGetCategoriesRequest, GetCategoriesRequestParameters, GetCategoriesResponse, IGetCategoriesResponse>(
+		/// <inheritdoc />
+		public Task<IGetCategoriesResponse> GetCategoriesAsync(IGetCategoriesRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			Dispatcher.DispatchAsync<IGetCategoriesRequest, GetCategoriesRequestParameters, GetCategoriesResponse, IGetCategoriesResponse>(
 				request,
 				cancellationToken,
-				this.LowLevelDispatch.XpackMlGetCategoriesDispatchAsync<GetCategoriesResponse>
+				LowLevelDispatch.XpackMlGetCategoriesDispatchAsync<GetCategoriesResponse>
 			);
 	}
 }

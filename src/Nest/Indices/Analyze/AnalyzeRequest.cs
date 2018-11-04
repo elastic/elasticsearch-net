@@ -17,13 +17,13 @@ namespace Nest
 		[JsonProperty("char_filter")]
 		string[] CharFilter { get; set; }
 
-		///<summary>A collection of filters to use for the analysis</summary>
-		[JsonProperty("filter")]
-		string[] Filter { get; set; }
-
 		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
 		[JsonProperty("field")]
 		Field Field { get; set; }
+
+		///<summary>A collection of filters to use for the analysis</summary>
+		[JsonProperty("filter")]
+		string[] Filter { get; set; }
 
 		///<summary>The text on which the analysis should be performed (when request body is not used)</summary>
 		[JsonProperty("text")]
@@ -37,10 +37,7 @@ namespace Nest
 	public partial class AnalyzeRequest
 	{
 		public AnalyzeRequest(IndexName indices, string textToAnalyze)
-			: this(indices)
-		{
-			this.Text = new[] { textToAnalyze };
-		}
+			: this(indices) => Text = new[] { textToAnalyze };
 
 		///<summary>The name of the analyzer to use</summary>
 		public string Analyzer { get; set; }
@@ -48,11 +45,11 @@ namespace Nest
 		///<summary>A collection of character filters to use for the analysis</summary>
 		public string[] CharFilter { get; set; }
 
-		///<summary>A collection of filters to use for the analysis</summary>
-		public string[] Filter { get; set; }
-
 		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
 		public Field Field { get; set; }
+
+		///<summary>A collection of filters to use for the analysis</summary>
+		public string[] Filter { get; set; }
 
 		///<summary>The text on which the analysis should be performed</summary>
 		public string[] Text { get; set; }
@@ -66,8 +63,8 @@ namespace Nest
 	{
 		string IAnalyzeRequest.Analyzer { get; set; }
 		string[] IAnalyzeRequest.CharFilter { get; set; }
-		string[] IAnalyzeRequest.Filter { get; set; }
 		Field IAnalyzeRequest.Field { get; set; }
+		string[] IAnalyzeRequest.Filter { get; set; }
 		string[] IAnalyzeRequest.Text { get; set; }
 		string IAnalyzeRequest.Tokenizer { get; set; }
 

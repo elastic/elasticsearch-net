@@ -138,13 +138,14 @@ namespace Nest
 		public PutDatafeedDescriptor<T> Indices<TOther>() => Assign(a => a.Indices = typeof(TOther));
 
 		///<summary>A shortcut into calling Indices(Indices.All)</summary>
-		public PutDatafeedDescriptor<T> AllIndices() => this.Indices(Nest.Indices.All);
+		public PutDatafeedDescriptor<T> AllIndices() => Indices(Nest.Indices.All);
 
 		/// <inheritdoc />
 		public PutDatafeedDescriptor<T> JobId(Id jobId) => Assign(a => a.JobId = jobId);
 
 		/// <inheritdoc />
-		public PutDatafeedDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query) => Assign(a => a.Query = query?.Invoke(new QueryContainerDescriptor<T>()));
+		public PutDatafeedDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query) =>
+			Assign(a => a.Query = query?.Invoke(new QueryContainerDescriptor<T>()));
 
 		/// <inheritdoc />
 		public PutDatafeedDescriptor<T> QueryDelay(Time queryDelay) => Assign(a => a.QueryDelay = queryDelay);
@@ -163,6 +164,6 @@ namespace Nest
 		public PutDatafeedDescriptor<T> Types<TOther>() => Assign(a => a.Types = typeof(TOther));
 
 		///<summary>a shortcut into calling Types(Types.All)</summary>
-		public PutDatafeedDescriptor<T> AllTypes() => this.Types(Nest.Types.All);
+		public PutDatafeedDescriptor<T> AllTypes() => Types(Nest.Types.All);
 	}
 }

@@ -6,8 +6,14 @@ namespace Nest
 	/// <summary>
 	/// Protects words from being modified by stemmers. Must be placed before any stemming filters.
 	/// </summary>
-	public interface IKeywordMarkerTokenFilter: ITokenFilter
+	public interface IKeywordMarkerTokenFilter : ITokenFilter
 	{
+		/// <summary>
+		/// Set to true to lower case all words first. Defaults to false.
+		/// </summary>
+		[JsonProperty("ignore_case")]
+		bool? IgnoreCase { get; set; }
+
 		/// <summary>
 		/// A list of words to use.
 		/// </summary>
@@ -19,48 +25,43 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("keywords_path")]
 		string KeywordsPath { get; set; }
-
-		/// <summary>
-		/// Set to true to lower case all words first. Defaults to false.
-		/// </summary>
-		[JsonProperty("ignore_case")]
-		bool? IgnoreCase { get; set; }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class KeywordMarkerTokenFilter : TokenFilterBase, IKeywordMarkerTokenFilter
 	{
 		public KeywordMarkerTokenFilter() : base("keyword_marker") { }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
+		public bool? IgnoreCase { get; set; }
+
+		/// <inheritdoc />
 		public IEnumerable<string> Keywords { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public string KeywordsPath { get; set; }
-
-		/// <inheritdoc/>
-		public bool? IgnoreCase { get; set; }
 	}
-	///<inheritdoc/>
-	public class KeywordMarkerTokenFilterDescriptor 
+
+	/// <inheritdoc />
+	public class KeywordMarkerTokenFilterDescriptor
 		: TokenFilterDescriptorBase<KeywordMarkerTokenFilterDescriptor, IKeywordMarkerTokenFilter>, IKeywordMarkerTokenFilter
 	{
 		protected override string Type => "keyword_marker";
+		bool? IKeywordMarkerTokenFilter.IgnoreCase { get; set; }
 
 		IEnumerable<string> IKeywordMarkerTokenFilter.Keywords { get; set; }
 		string IKeywordMarkerTokenFilter.KeywordsPath { get; set; }
-		bool? IKeywordMarkerTokenFilter.IgnoreCase { get; set; }
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public KeywordMarkerTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true) => Assign(a => a.IgnoreCase = ignoreCase);
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public KeywordMarkerTokenFilterDescriptor KeywordsPath(string path) => Assign(a => a.KeywordsPath = path);
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public KeywordMarkerTokenFilterDescriptor Keywords(IEnumerable<string> keywords) => Assign(a => a.Keywords = keywords);
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public KeywordMarkerTokenFilterDescriptor Keywords(params string[] keywords) => Assign(a => a.Keywords = keywords);
 	}
 }

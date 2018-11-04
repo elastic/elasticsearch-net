@@ -6,14 +6,16 @@ namespace Nest
 {
 	internal class MultiSearchJsonConverter : JsonConverter
 	{
-		public override bool CanConvert(Type objectType) => true;
 		public override bool CanRead => false;
 		public override bool CanWrite => true;
+
+		public override bool CanConvert(Type objectType) => true;
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var request = (IMultiSearchRequest)value;
 			if (request == null) return;
+
 			var settings = serializer.GetConnectionSettings();
 			var elasticsearchSerializer = settings.Serializer;
 			if (elasticsearchSerializer == null) return;
@@ -51,9 +53,7 @@ namespace Nest
 			}
 		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
 			throw new NotSupportedException();
-		}
 	}
 }

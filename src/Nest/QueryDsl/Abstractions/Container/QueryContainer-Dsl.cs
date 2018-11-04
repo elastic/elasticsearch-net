@@ -1,29 +1,14 @@
 ﻿using System;
-using System.Linq;
 
 namespace Nest
 {
 	internal static class QueryContainerExtensions
 	{
-		public static bool IsConditionless(this QueryContainer q) => q == null || (q.IsConditionless);
+		public static bool IsConditionless(this QueryContainer q) => q == null || q.IsConditionless;
 	}
 
 	public partial class QueryContainer : IQueryContainer, IDescriptor
 	{
-		bool IQueryContainer.IsConditionless => (ContainedQuery?.Conditionless).GetValueOrDefault(true);
-		internal bool IsConditionless => Self.IsConditionless;
-
-		bool IQueryContainer.IsStrict { get; set; }
-		internal bool IsStrict => Self.IsStrict;
-
-		bool IQueryContainer.IsWritable => Self.IsVerbatim || !Self.IsConditionless;
-		internal bool IsWritable => Self.IsWritable;
-
-		bool IQueryContainer.IsVerbatim { get; set; }
-		internal bool IsVerbatim => Self.IsVerbatim;
-
-		internal bool HoldsOnlyShouldMusts { get; set; }
-
 		public QueryContainer() { }
 
 		public QueryContainer(QueryBase query) : this()
@@ -34,6 +19,25 @@ namespace Nest
 				throw new ArgumentException("Query is conditionless but strict is turned on");
 
 			query.WrapInContainer(this);
+		}
+
+		internal bool HoldsOnlyShouldMusts { get; set; }
+		internal bool IsConditionless => Self.IsConditionless;
+		internal bool IsStrict => Self.IsStrict;
+		internal bool IsVerbatim => Self.IsVerbatim;
+		internal bool IsWritable => Self.IsWritable;
+		bool IQueryContainer.IsConditionless => (ContainedQuery?.Conditionless).GetValueOrDefault(true);
+
+		bool IQueryContainer.IsStrict { get; set; }
+
+		bool IQueryContainer.IsVerbatim { get; set; }
+
+		bool IQueryContainer.IsWritable => Self.IsVerbatim || !Self.IsConditionless;
+
+		public void Accept(IQueryVisitor visitor)
+		{
+			if (visitor.Scope == VisitorScope.Unknown) visitor.Scope = VisitorScope.Query;
+			new QueryWalker().Walk(this, visitor);
 		}
 
 		public static QueryContainer operator &(QueryContainer leftContainer, QueryContainer rightContainer) =>
@@ -58,10 +62,13 @@ namespace Nest
 				: leftContainer.CombineAsShould(rightContainer);
 		}
 
-		private static bool IfEitherIsEmptyReturnTheOtherOrEmpty(QueryContainer leftContainer, QueryContainer rightContainer, out QueryContainer queryContainer)
+		private static bool IfEitherIsEmptyReturnTheOtherOrEmpty(QueryContainer leftContainer, QueryContainer rightContainer,
+			out QueryContainer queryContainer
+		)
 		{
 			queryContainer = null;
 			if (leftContainer == null && rightContainer == null) return true;
+
 			var leftWritable = (leftContainer?.IsWritable).GetValueOrDefault(false);
 			var rightWritable = (rightContainer?.IsWritable).GetValueOrDefault(false);
 			if (leftWritable && rightWritable) return false;
@@ -71,22 +78,16 @@ namespace Nest
 			return true;
 		}
 
-		public static QueryContainer operator !(QueryContainer queryContainer) => queryContainer == null || (!queryContainer.IsWritable)
+		public static QueryContainer operator !(QueryContainer queryContainer) => queryContainer == null || !queryContainer.IsWritable
 			? null
 			: new QueryContainer(new BoolQuery { MustNot = new[] { queryContainer } });
 
-		public static QueryContainer operator +(QueryContainer queryContainer) => queryContainer == null || (!queryContainer.IsWritable)
+		public static QueryContainer operator +(QueryContainer queryContainer) => queryContainer == null || !queryContainer.IsWritable
 			? null
 			: new QueryContainer(new BoolQuery { Filter = new[] { queryContainer } });
 
 		public static bool operator false(QueryContainer a) => false;
 
 		public static bool operator true(QueryContainer a) => false;
-
-		public void Accept(IQueryVisitor visitor)
-		{
-			if (visitor.Scope == VisitorScope.Unknown) visitor.Scope = VisitorScope.Query;
-			new QueryWalker().Walk(this, visitor);
-		}
 	}
 }

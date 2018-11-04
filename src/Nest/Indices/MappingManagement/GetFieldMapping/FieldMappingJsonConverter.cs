@@ -14,16 +14,14 @@ namespace Nest
 
 		public override bool CanConvert(Type objectType) => objectType == typeof(IDictionary<string, IFieldMapping>);
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) =>
 			_dictionaryConverter.WriteJson(writer, value, serializer);
-		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var r = new Dictionary<string, IFieldMapping>();
 
-			JObject o = JObject.Load(reader);
+			var o = JObject.Load(reader);
 
 			foreach (var p in o.Properties())
 			{
@@ -33,7 +31,7 @@ namespace Nest
 					continue;
 
 				var mapping = _elasticTypeConverter.ReadJson(po.CreateReader(), objectType, existingValue, serializer)
-				as IFieldMapping;
+					as IFieldMapping;
 				if (mapping == null)
 				{
 					if (name == "_all") mapping = po.ToObject<AllField>();
@@ -51,7 +49,6 @@ namespace Nest
 					esType.Name = name;
 
 				r.Add(name, mapping);
-
 			}
 			return r;
 		}

@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using System.Threading;
 
 namespace Nest
 {
@@ -17,49 +17,60 @@ namespace Nest
 		IRegisterPercolatorResponse RegisterPercolator<T>(Name name, Func<RegisterPercolatorDescriptor<T>, IRegisterPercolatorRequest> selector)
 			where T : class;
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		[Obsolete("Deprecated. Will be removed in the next major release. Index a document containing a field mapped with percolator type")]
 		IRegisterPercolatorResponse RegisterPercolator(IRegisterPercolatorRequest request);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		[Obsolete("Deprecated. Will be removed in the next major release. Index a document containing a field mapped with percolator type")]
-		Task<IRegisterPercolatorResponse> RegisterPercolatorAsync<T>(Name name, Func<RegisterPercolatorDescriptor<T>, IRegisterPercolatorRequest> selector, CancellationToken cancellationToken = default(CancellationToken))
+		Task<IRegisterPercolatorResponse> RegisterPercolatorAsync<T>(Name name,
+			Func<RegisterPercolatorDescriptor<T>, IRegisterPercolatorRequest> selector,
+			CancellationToken cancellationToken = default(CancellationToken)
+		)
 			where T : class;
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		[Obsolete("Deprecated. Will be removed in the next major release. Index a document containing a field mapped with percolator type")]
-		Task<IRegisterPercolatorResponse> RegisterPercolatorAsync(IRegisterPercolatorRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IRegisterPercolatorResponse> RegisterPercolatorAsync(IRegisterPercolatorRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		[Obsolete("Deprecated. Will be removed in the next major release. Index a document containing a field mapped with percolator type")]
-		public IRegisterPercolatorResponse RegisterPercolator<T>(Name name, Func<RegisterPercolatorDescriptor<T>, IRegisterPercolatorRequest> selector)
+		public IRegisterPercolatorResponse RegisterPercolator<T>(Name name, Func<RegisterPercolatorDescriptor<T>, IRegisterPercolatorRequest> selector
+		)
 			where T : class =>
-			this.RegisterPercolator(selector.InvokeOrDefault(new RegisterPercolatorDescriptor<T>(name)));
+			RegisterPercolator(selector.InvokeOrDefault(new RegisterPercolatorDescriptor<T>(name)));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		[Obsolete("Deprecated. Will be removed in the next major release. Index a document containing a field mapped with percolator type")]
 		public IRegisterPercolatorResponse RegisterPercolator(IRegisterPercolatorRequest request) =>
-			this.Dispatcher.Dispatch<IRegisterPercolatorRequest, IndexRequestParameters, RegisterPercolatorResponse>(
+			Dispatcher.Dispatch<IRegisterPercolatorRequest, IndexRequestParameters, RegisterPercolatorResponse>(
 				request,
-				this.LowLevelDispatch.IndexDispatch<RegisterPercolatorResponse>
+				LowLevelDispatch.IndexDispatch<RegisterPercolatorResponse>
 			);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		[Obsolete("Deprecated. Will be removed in the next major release. Index a document containing a field mapped with percolator type")]
-		public Task<IRegisterPercolatorResponse> RegisterPercolatorAsync<T>(Name name, Func<RegisterPercolatorDescriptor<T>, IRegisterPercolatorRequest> selector, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<IRegisterPercolatorResponse> RegisterPercolatorAsync<T>(Name name,
+			Func<RegisterPercolatorDescriptor<T>, IRegisterPercolatorRequest> selector,
+			CancellationToken cancellationToken = default(CancellationToken)
+		)
 			where T : class =>
-			this.RegisterPercolatorAsync(selector.InvokeOrDefault(new RegisterPercolatorDescriptor<T>(name)), cancellationToken);
+			RegisterPercolatorAsync(selector.InvokeOrDefault(new RegisterPercolatorDescriptor<T>(name)), cancellationToken);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		[Obsolete("Deprecated. Will be removed in the next major release. Index a document containing a field mapped with percolator type")]
-		public Task<IRegisterPercolatorResponse> RegisterPercolatorAsync(IRegisterPercolatorRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<IRegisterPercolatorRequest, IndexRequestParameters, RegisterPercolatorResponse, IRegisterPercolatorResponse>(
+		public Task<IRegisterPercolatorResponse> RegisterPercolatorAsync(IRegisterPercolatorRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			Dispatcher.DispatchAsync<IRegisterPercolatorRequest, IndexRequestParameters, RegisterPercolatorResponse, IRegisterPercolatorResponse>(
 				request,
 				cancellationToken,
-				this.LowLevelDispatch.IndexDispatchAsync<RegisterPercolatorResponse>
+				LowLevelDispatch.IndexDispatchAsync<RegisterPercolatorResponse>
 			);
 	}
 }

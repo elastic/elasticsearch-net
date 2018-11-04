@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Nest
 {
@@ -8,10 +7,21 @@ namespace Nest
 	public interface IIndexSettings : IDynamicIndexSettings
 	{
 		/// <summary>
+		/// The store module allows you to control how index data is stored and accessed on disk.
+		/// <para>EXPERT MODE toggle</para>
+		/// </summary>
+		FileSystemStorageImplementation? FileSystemStorageImplementation { get; set; }
+
+		/// <summary>
 		/// The number of primary shards that an index should have. Defaults to 5.
 		/// This setting can only be set at index creation time. It cannot be changed on a closed index.
 		/// </summary>
 		int? NumberOfShards { get; set; }
+
+		/// <summary>
+		/// Settings associated with queries.
+		/// </summary>
+		IQueriesSettings Queries { get; set; }
 
 
 		//TODO remove pre note with 6.0
@@ -21,40 +31,30 @@ namespace Nest
 		/// <pre>Added in Elasticsearch 5.3.0</pre>
 		/// </summary>
 		int? RoutingPartitionSize { get; set; }
-
-		/// <summary>
-		/// The store module allows you to control how index data is stored and accessed on disk.
-		/// <para>EXPERT MODE toggle</para>
-		/// </summary>
-		FileSystemStorageImplementation? FileSystemStorageImplementation { get; set; }
-
-		/// <summary>
-		/// Settings associated with queries.
-		/// </summary>
-		IQueriesSettings Queries { get; set; }
 	}
 
 	/// <inheritdoc />
-	public class IndexSettings: DynamicIndexSettings, IIndexSettings
+	public class IndexSettings : DynamicIndexSettings, IIndexSettings
 	{
 		public IndexSettings() { }
+
 		public IndexSettings(IDictionary<string, object> container) : base(container) { }
-
-		/// <inheritdoc />
-		public int? NumberOfShards { get; set; }
-
-		/// <inheritdoc />
-		public int? RoutingPartitionSize { get; set; }
 
 		/// <inheritdoc />
 		public FileSystemStorageImplementation? FileSystemStorageImplementation { get; set; }
 
 		/// <inheritdoc />
+		public int? NumberOfShards { get; set; }
+
+		/// <inheritdoc />
 		public IQueriesSettings Queries { get; set; }
+
+		/// <inheritdoc />
+		public int? RoutingPartitionSize { get; set; }
 	}
 
 	/// <inheritdoc />
-	public class IndexSettingsDescriptor: DynamicIndexSettingsDescriptorBase<IndexSettingsDescriptor, IndexSettings>
+	public class IndexSettingsDescriptor : DynamicIndexSettingsDescriptorBase<IndexSettingsDescriptor, IndexSettings>
 	{
 		public IndexSettingsDescriptor() : base(new IndexSettings()) { }
 
@@ -73,5 +73,4 @@ namespace Nest
 		public IndexSettingsDescriptor Queries(Func<QueriesSettingsDescriptor, IQueriesSettings> selector) =>
 			Assign(a => a.Queries = selector?.Invoke(new QueriesSettingsDescriptor()));
 	}
-
 }

@@ -10,21 +10,15 @@ namespace Nest
 
 	public class InlineScriptCondition : ScriptConditionBase, IInlineScriptCondition
 	{
-		public InlineScriptCondition(string script)
-		{
-			this.Inline = script;
-		}
+		public InlineScriptCondition(string script) => Inline = script;
 
 		public string Inline { get; set; }
 	}
 
-	public class InlineScriptConditionDescriptor :
-		ScriptConditionDescriptorBase<InlineScriptConditionDescriptor, IInlineScriptCondition>, IInlineScriptCondition
+	public class InlineScriptConditionDescriptor
+		: ScriptConditionDescriptorBase<InlineScriptConditionDescriptor, IInlineScriptCondition>, IInlineScriptCondition
 	{
-		public InlineScriptConditionDescriptor(string script)
-		{
-			Self.Inline = script;
-		}
+		public InlineScriptConditionDescriptor(string script) => Self.Inline = script;
 
 		string IInlineScriptCondition.Inline { get; set; }
 	}

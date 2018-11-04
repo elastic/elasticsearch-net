@@ -17,11 +17,13 @@ namespace Nest
 		where T : class
 	{
 		public SuggestResponse() { }
+
 		internal SuggestResponse(ShardsMetaData metaData, IDictionary<string, object> dict)
 		{
-			this.Shards = metaData;
+			Shards = metaData;
 			if (dict == null) return;
-			this.Suggestions = dict
+
+			Suggestions = dict
 				.Select(kv => new { k = kv.Key, v = kv.Value as Suggest<T>[] })
 				.Where(kv => kv.v != null)
 				.ToDictionary(kv => kv.k, kv => (IReadOnlyCollection<Suggest<T>>)kv.v);
@@ -29,6 +31,7 @@ namespace Nest
 
 		public ShardsMetaData Shards { get; internal set; }
 
-		public IReadOnlyDictionary<string, IReadOnlyCollection<Suggest<T>>> Suggestions { get; set; } = EmptyReadOnly<string, IReadOnlyCollection<Suggest<T>>>.Dictionary;
+		public IReadOnlyDictionary<string, IReadOnlyCollection<Suggest<T>>> Suggestions { get; set; } =
+			EmptyReadOnly<string, IReadOnlyCollection<Suggest<T>>>.Dictionary;
 	}
 }

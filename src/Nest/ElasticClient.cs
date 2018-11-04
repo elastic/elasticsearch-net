@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using System.Threading;
 
 namespace Nest
 {
@@ -11,20 +11,10 @@ namespace Nest
 	/// </summary>
 	public partial class ElasticClient : IElasticClient, IHighLevelToLowLevelDispatcher
 	{
-		private IHighLevelToLowLevelDispatcher Dispatcher => this;
-
-		private LowLevelDispatch LowLevelDispatch { get; }
-
-		private ITransport<IConnectionSettingsValues> Transport { get; }
-
-		public IElasticsearchSerializer Serializer => this.Transport.Settings.Serializer;
-		public Inferrer Infer => this.Transport.Settings.Inferrer;
-		public IConnectionSettingsValues ConnectionSettings => this.Transport.Settings;
-
-		public IElasticLowLevelClient LowLevel { get; }
-
 		public ElasticClient() : this(new ConnectionSettings(new Uri("http://localhost:9200"))) { }
+
 		public ElasticClient(Uri uri) : this(new ConnectionSettings(uri)) { }
+
 		public ElasticClient(IConnectionSettingsValues connectionSettings)
 			: this(new Transport<IConnectionSettingsValues>(connectionSettings ?? new ConnectionSettings())) { }
 
@@ -35,23 +25,35 @@ namespace Nest
 			transport.Settings.Serializer.ThrowIfNull(nameof(transport.Settings.Serializer));
 			transport.Settings.Inferrer.ThrowIfNull(nameof(transport.Settings.Inferrer));
 
-			this.Transport = transport;
-			this.LowLevel = new ElasticLowLevelClient(this.Transport);
-			this.LowLevelDispatch = new LowLevelDispatch(this.LowLevel);
+			Transport = transport;
+			LowLevel = new ElasticLowLevelClient(Transport);
+			LowLevelDispatch = new LowLevelDispatch(LowLevel);
 		}
+
+		public IConnectionSettingsValues ConnectionSettings => Transport.Settings;
+		public Inferrer Infer => Transport.Settings.Inferrer;
+
+		public IElasticLowLevelClient LowLevel { get; }
+
+		public IElasticsearchSerializer Serializer => Transport.Settings.Serializer;
+		private IHighLevelToLowLevelDispatcher Dispatcher => this;
+
+		private LowLevelDispatch LowLevelDispatch { get; }
+
+		private ITransport<IConnectionSettingsValues> Transport { get; }
 
 		TResponse IHighLevelToLowLevelDispatcher.Dispatch<TRequest, TQueryString, TResponse>(
 			TRequest request,
 			Func<TRequest, PostData<object>,
-			ElasticsearchResponse<TResponse>> dispatch
-			) => this.Dispatcher.Dispatch<TRequest,TQueryString,TResponse>(request, null, dispatch);
+				ElasticsearchResponse<TResponse>> dispatch
+		) => Dispatcher.Dispatch<TRequest, TQueryString, TResponse>(request, null, dispatch);
 
 		TResponse IHighLevelToLowLevelDispatcher.Dispatch<TRequest, TQueryString, TResponse>(
 			TRequest request, Func<IApiCallDetails, Stream, TResponse> responseGenerator,
 			Func<TRequest, PostData<object>, ElasticsearchResponse<TResponse>> dispatch
-			)
+		)
 		{
-			request.RouteValues.Resolve(this.ConnectionSettings);
+			request.RouteValues.Resolve(ConnectionSettings);
 			request.RequestParameters.DeserializationOverride(responseGenerator);
 
 			var response = dispatch(request, request);
@@ -62,16 +64,16 @@ namespace Nest
 			TRequest descriptor,
 			CancellationToken cancellationToken,
 			Func<TRequest, PostData<object>, CancellationToken, Task<ElasticsearchResponse<TResponse>>> dispatch
-			) => this.Dispatcher.DispatchAsync<TRequest,TQueryString,TResponse,TResponseInterface>(descriptor, cancellationToken, null, dispatch);
+		) => Dispatcher.DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(descriptor, cancellationToken, null, dispatch);
 
 		async Task<TResponseInterface> IHighLevelToLowLevelDispatcher.DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(
 			TRequest request,
 			CancellationToken cancellationToken,
 			Func<IApiCallDetails, Stream, TResponse> responseGenerator,
 			Func<TRequest, PostData<object>, CancellationToken, Task<ElasticsearchResponse<TResponse>>> dispatch
-			)
+		)
 		{
-			request.RouteValues.Resolve(this.ConnectionSettings);
+			request.RouteValues.Resolve(ConnectionSettings);
 			request.RequestParameters.DeserializationOverride(responseGenerator);
 			var response = await dispatch(request, request, cancellationToken).ConfigureAwait(false);
 			return ResultsSelector(response);
@@ -98,6 +100,5 @@ namespace Nest
 			request.RequestParameters.RequestConfiguration = configuration;
 			return request;
 		}
-
 	}
 }

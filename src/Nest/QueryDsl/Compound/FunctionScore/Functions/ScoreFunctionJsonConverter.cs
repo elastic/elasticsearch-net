@@ -8,8 +8,22 @@ namespace Nest
 {
 	internal class ScoreFunctionJsonConverter : JsonConverter
 	{
+		private static readonly IDictionary<string, Type> DecayTypeMapping = new Dictionary<string, Type>
+		{
+			{ "exp_numeric", typeof(ExponentialDecayFunction) },
+			{ "exp_date", typeof(ExponentialDateDecayFunction) },
+			{ "exp_geo", typeof(ExponentialGeoDecayFunction) },
+			{ "gauss_numeric", typeof(GaussDecayFunction) },
+			{ "gauss_date", typeof(GaussDateDecayFunction) },
+			{ "gauss_geo", typeof(GaussGeoDecayFunction) },
+			{ "linear_numeric", typeof(LinearDecayFunction) },
+			{ "linear_date", typeof(LinearDateDecayFunction) },
+			{ "linear_geo", typeof(LinearGeoDecayFunction) },
+		};
+
 		public override bool CanRead => true;
 		public override bool CanWrite => true;
+
 		public override bool CanConvert(Type objectType) => true;
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
@@ -37,7 +51,6 @@ namespace Nest
 					writer.WritePropertyName("weight");
 					serializer.Serialize(writer, function.Weight.Value);
 				}
-
 			}
 			writer.WriteEndObject();
 		}
@@ -48,6 +61,7 @@ namespace Nest
 		private bool WriteScriptScore(JsonWriter writer, IScriptScoreFunction value, JsonSerializer serializer)
 		{
 			if (value == null) return false;
+
 			writer.WritePropertyName("script_score");
 			serializer.Serialize(writer, value.Script);
 			//writer.WriteStartObject();
@@ -61,6 +75,7 @@ namespace Nest
 		private bool WriteRandomScore(JsonWriter writer, IRandomScoreFunction value, JsonSerializer serializer)
 		{
 			if (value == null) return false;
+
 			writer.WritePropertyName("random_score");
 			writer.WriteStartObject();
 			{
@@ -69,9 +84,11 @@ namespace Nest
 			writer.WriteEndObject();
 			return true;
 		}
+
 		private bool WriteFieldValueFactor(JsonWriter writer, IFieldValueFactorFunction value, JsonSerializer serializer)
 		{
 			if (value == null) return false;
+
 			writer.WritePropertyName("field_value_factor");
 			writer.WriteStartObject();
 			{
@@ -83,6 +100,7 @@ namespace Nest
 			writer.WriteEndObject();
 			return true;
 		}
+
 		private bool WriteDecay(JsonWriter writer, IDecayFunction decay, JsonSerializer serializer)
 		{
 			if (decay == null) return false;
@@ -94,8 +112,8 @@ namespace Nest
 				writer.WriteStartObject();
 				{
 					var write = WriteNumericDecay(writer, decay as IDecayFunction<double?, double?>, serializer)
-								|| WriteDateDecay(writer, decay as IDecayFunction<DateMath, Time>, serializer)
-								|| WriteGeoDecay(writer, decay as IDecayFunction<GeoLocation, Distance>, serializer);
+						|| WriteDateDecay(writer, decay as IDecayFunction<DateMath, Time>, serializer)
+						|| WriteGeoDecay(writer, decay as IDecayFunction<GeoLocation, Distance>, serializer);
 					if (!write) throw new Exception($"Can not write decay function json for {decay.GetType().Name}");
 
 					if (decay.Decay.HasValue)
@@ -113,12 +131,12 @@ namespace Nest
 			}
 			writer.WriteEndObject();
 			return true;
-
 		}
 
 		private bool WriteNumericDecay(JsonWriter writer, IDecayFunction<double?, double?> value, JsonSerializer serializer)
 		{
 			if (value == null) return false;
+
 			writer.WritePropertyName("origin");
 			serializer.Serialize(writer, value.Origin);
 			writer.WritePropertyName("scale");
@@ -134,6 +152,7 @@ namespace Nest
 		private bool WriteDateDecay(JsonWriter writer, IDecayFunction<DateMath, Time> value, JsonSerializer serializer)
 		{
 			if (value == null || value.Field.IsConditionless()) return false;
+
 			if (value.Origin != null)
 			{
 				writer.WritePropertyName("origin");
@@ -147,12 +166,12 @@ namespace Nest
 				serializer.Serialize(writer, value.Offset);
 			}
 			return true;
-
 		}
 
 		private bool WriteGeoDecay(JsonWriter writer, IDecayFunction<GeoLocation, Distance> value, JsonSerializer serializer)
 		{
 			if (value == null || value.Field.IsConditionless()) return false;
+
 			writer.WritePropertyName("origin");
 			serializer.Serialize(writer, value.Origin);
 			writer.WritePropertyName("scale");
@@ -168,8 +187,9 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var jo = JObject.Load(reader);
-			QueryContainer filter = jo.Property("filter")?.Value.ToObject<QueryContainer>(serializer);
-			double? weight = jo.Property("weight")?.Value.ToObject<double?>(); ;
+			var filter = jo.Property("filter")?.Value.ToObject<QueryContainer>(serializer);
+			var weight = jo.Property("weight")?.Value.ToObject<double?>();
+			;
 			IScoreFunction function = null;
 			foreach (var prop in jo.Properties())
 			{
@@ -181,7 +201,7 @@ namespace Nest
 						var properties = prop.Value.Value<JObject>().Properties().ToList();
 						var fieldProp = properties.First(p => p.Name != "multi_value_mode");
 						var field = fieldProp.Name;
-						var f = this.ReadDecayFunction(prop.Name, fieldProp.Value.Value<JObject>(), serializer);
+						var f = ReadDecayFunction(prop.Name, fieldProp.Value.Value<JObject>(), serializer);
 						f.Field = field;
 						var mv = properties.FirstOrDefault(p => p.Name == "multi_value_mode")?.Value;
 						if (mv != null)
@@ -202,28 +222,17 @@ namespace Nest
 			}
 			if (function == null && weight.HasValue) function = new WeightFunction { Weight = weight };
 			else if (function == null) return null; //throw new Exception("error deserializing function score function");
+
 			function.Weight = weight;
 			function.Filter = filter;
 			return function;
 		}
 
-		private static IDictionary<string, Type> DecayTypeMapping = new Dictionary<string, Type>
-		{
-			{ "exp_numeric", typeof(ExponentialDecayFunction) },
-			{ "exp_date", typeof(ExponentialDateDecayFunction) },
-			{ "exp_geo", typeof(ExponentialGeoDecayFunction) },
-			{ "gauss_numeric", typeof(GaussDecayFunction) },
-			{ "gauss_date", typeof(GaussDateDecayFunction) },
-			{ "gauss_geo", typeof(GaussGeoDecayFunction) },
-			{ "linear_numeric", typeof(LinearDecayFunction) },
-			{ "linear_date", typeof(LinearDateDecayFunction) },
-			{ "linear_geo", typeof(LinearGeoDecayFunction) },
-		};
-
 		private IDecayFunction ReadDecayFunction(string type, JObject o, JsonSerializer serializer)
 		{
 			var origin = o.Property("origin")?.Value.Type;
 			if (origin == null) return null;
+
 			var subType = "numeric";
 			switch (origin)
 			{
@@ -237,6 +246,5 @@ namespace Nest
 			var t = DecayTypeMapping[$"{type}_{subType}"];
 			return FromJson.Read(o.CreateReader(), t, null, serializer) as IDecayFunction;
 		}
-
 	}
 }

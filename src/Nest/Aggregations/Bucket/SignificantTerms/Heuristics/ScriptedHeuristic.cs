@@ -5,7 +5,7 @@ namespace Nest
 {
 	[JsonObject]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<ScriptedHeuristic>))]
-	public interface IScriptedHeuristic 
+	public interface IScriptedHeuristic
 	{
 		[JsonProperty("script")]
 		IScript Script { get; set; }
@@ -16,7 +16,7 @@ namespace Nest
 		public IScript Script { get; set; }
 	}
 
-	public class ScriptedHeuristicDescriptor 
+	public class ScriptedHeuristicDescriptor
 		: DescriptorBase<ScriptedHeuristicDescriptor, IScriptedHeuristic>, IScriptedHeuristic
 	{
 		IScript IScriptedHeuristic.Script { get; set; }

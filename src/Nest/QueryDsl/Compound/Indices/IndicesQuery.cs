@@ -14,12 +14,12 @@ namespace Nest
 		[JsonConverter(typeof(IndicesJsonConverter))]
 		Indices Indices { get; set; }
 
-		[JsonProperty("query")]
-		QueryContainer Query { get; set; }
-
 		[JsonProperty("no_match_query")]
 		[JsonConverter(typeof(NoMatchQueryJsonConverter))]
 		QueryContainer NoMatchQuery { get; set; }
+
+		[JsonProperty("query")]
+		QueryContainer Query { get; set; }
 	}
 
 	public class NoMatchQueryContainer : QueryContainer
@@ -32,12 +32,13 @@ namespace Nest
 	[Obsolete("Deprecated. You can specify _index on the query to target specific indices")]
 	public class IndicesQuery : QueryBase, IIndicesQuery
 	{
-		protected override bool Conditionless => IsConditionless(this);
-		public QueryContainer Query { get; set; }
-		public QueryContainer NoMatchQuery { get; set; }
 		public Indices Indices { get; set; }
+		public QueryContainer NoMatchQuery { get; set; }
+		public QueryContainer Query { get; set; }
+		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Indices = this;
+
 		internal static bool IsConditionless(IIndicesQuery q) =>
 			q.Indices == null || q.NoMatchQuery.NotWritable() && q.Query.NotWritable();
 	}
@@ -45,12 +46,12 @@ namespace Nest
 	[Obsolete("Deprecated. You can specify _index on the query to target specific indices")]
 	public class IndicesQueryDescriptor<T>
 		: QueryDescriptorBase<IndicesQueryDescriptor<T>, IIndicesQuery>
-		, IIndicesQuery where T : class
+			, IIndicesQuery where T : class
 	{
 		protected override bool Conditionless => IndicesQuery.IsConditionless(this);
-		QueryContainer IIndicesQuery.Query { get; set; }
-		QueryContainer IIndicesQuery.NoMatchQuery { get; set; }
 		Indices IIndicesQuery.Indices { get; set; }
+		QueryContainer IIndicesQuery.NoMatchQuery { get; set; }
+		QueryContainer IIndicesQuery.Query { get; set; }
 
 		public IndicesQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
 			Assign(a => a.Query = selector?.Invoke(new QueryContainerDescriptor<T>()));
@@ -68,7 +69,9 @@ namespace Nest
 			Assign(a => a.NoMatchQuery = selector?.Invoke(new QueryContainerDescriptor<TOther>()));
 
 		public IndicesQueryDescriptor<T> Indices(Indices indices) => Assign(a => a.Indices = indices);
+
 		public IndicesQueryDescriptor<T> Indices(params IndexName[] indices) => Assign(a => a.Indices = indices);
+
 		public IndicesQueryDescriptor<T> Indices(IEnumerable<IndexName> indices) => Assign(a => a.Indices = indices.ToArray());
 	}
 }

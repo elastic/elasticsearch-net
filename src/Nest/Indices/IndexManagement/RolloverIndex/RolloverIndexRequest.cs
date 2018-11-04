@@ -1,46 +1,41 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<RolloverIndexRequest>))]
 	public partial interface IRolloverIndexRequest
 	{
-		[JsonProperty("conditions")]
-		IRolloverConditions Conditions { get; set; }
-
-		[JsonProperty("settings")]
-		IIndexSettings Settings { get; set; }
-
 		[JsonProperty("aliases")]
 		IAliases Aliases { get; set; }
 
+		[JsonProperty("conditions")]
+		IRolloverConditions Conditions { get; set; }
+
 		[JsonProperty("mappings")]
 		IMappings Mappings { get; set; }
+
+		[JsonProperty("settings")]
+		IIndexSettings Settings { get; set; }
 	}
 
 	public partial class RolloverIndexRequest
 	{
+		public IAliases Aliases { get; set; }
 		public IRolloverConditions Conditions { get; set; }
 
-		public IIndexSettings Settings { get; set; }
-
-		public IAliases Aliases { get; set; }
-
 		public IMappings Mappings { get; set; }
+
+		public IIndexSettings Settings { get; set; }
 	}
 
 	[DescriptorFor("IndicesRollover")]
 	public partial class RolloverIndexDescriptor
 	{
-		IRolloverConditions IRolloverIndexRequest.Conditions { get; set; }
-		IIndexSettings IRolloverIndexRequest.Settings { get; set; }
-		IMappings IRolloverIndexRequest.Mappings { get; set; }
 		IAliases IRolloverIndexRequest.Aliases { get; set; }
+		IRolloverConditions IRolloverIndexRequest.Conditions { get; set; }
+		IMappings IRolloverIndexRequest.Mappings { get; set; }
+		IIndexSettings IRolloverIndexRequest.Settings { get; set; }
 
 		public RolloverIndexDescriptor Conditions(Func<RolloverConditionsDescriptor, IRolloverConditions> selector) =>
 			Assign(a => a.Conditions = selector?.Invoke(new RolloverConditionsDescriptor()));

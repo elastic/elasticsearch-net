@@ -5,47 +5,44 @@ namespace Nest
 {
 	public interface IBulkIndexOperation<T> : IBulkOperation
 	{
+		T Document { get; set; }
+
 		[JsonProperty("_percolate")]
 		string Percolate { get; set; }
 
 		[JsonProperty("pipeline")]
 		string Pipeline { get; set; }
-
-		T Document { get; set; }
 	}
 
 	public class BulkIndexOperation<T> : BulkOperationBase, IBulkIndexOperation<T>
 		where T : class
 	{
-		public BulkIndexOperation(T document)
-		{
-			this.Document = document;
-		}
+		public BulkIndexOperation(T document) => Document = document;
 
-		protected override string Operation => "index";
-
-		protected override Type ClrType => typeof(T);
-
-		protected override object GetBody() => this.Document;
-
-		protected override Id GetIdForOperation(Inferrer inferrer) => this.Id ?? new Id(this.Document);
+		public T Document { get; set; }
 
 		public string Percolate { get; set; }
 
 		public string Pipeline { get; set; }
 
-		public T Document { get; set; }
+		protected override Type ClrType => typeof(T);
+
+		protected override string Operation => "index";
+
+		protected override object GetBody() => Document;
+
+		protected override Id GetIdForOperation(Inferrer inferrer) => Id ?? new Id(Document);
 	}
 
 
 	public class BulkIndexDescriptor<T> : BulkOperationDescriptorBase<BulkIndexDescriptor<T>, IBulkIndexOperation<T>>, IBulkIndexOperation<T>
 		where T : class
 	{
-		protected override string BulkOperationType => "index";
 		protected override Type BulkOperationClrType => typeof(T);
+		protected override string BulkOperationType => "index";
+		T IBulkIndexOperation<T>.Document { get; set; }
 		string IBulkIndexOperation<T>.Percolate { get; set; }
 		string IBulkIndexOperation<T>.Pipeline { get; set; }
-		T IBulkIndexOperation<T>.Document { get; set; }
 
 		protected override object GetBulkOperationBody() => Self.Document;
 

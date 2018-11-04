@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -11,7 +10,8 @@ namespace Nest
 		public override string Type => "category";
 	}
 
-	public class CategorySuggestContextDescriptor<T> : SuggestContextDescriptorBase<CategorySuggestContextDescriptor<T>, ICategorySuggestContext, T>, ICategorySuggestContext
+	public class CategorySuggestContextDescriptor<T>
+		: SuggestContextDescriptorBase<CategorySuggestContextDescriptor<T>, ICategorySuggestContext, T>, ICategorySuggestContext
 		where T : class
 	{
 		protected override string Type => "category";

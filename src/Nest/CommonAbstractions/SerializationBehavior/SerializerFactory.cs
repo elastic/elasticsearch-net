@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
@@ -17,22 +13,26 @@ namespace Nest
 
 	public class SerializerFactory : ISerializerFactory
 	{
-		private Func<IConnectionSettingsValues, IElasticsearchSerializer> _serializerFactoryFunc;
-		private Action<JsonSerializerSettings, IConnectionSettingsValues> _settingsModifier;
+		private readonly Func<IConnectionSettingsValues, IElasticsearchSerializer> _serializerFactoryFunc;
+		private readonly Action<JsonSerializerSettings, IConnectionSettingsValues> _settingsModifier;
 
 		public SerializerFactory() { }
-		public SerializerFactory(Func<IConnectionSettingsValues, IElasticsearchSerializer> serializerFactoryFunc) : this(serializerFactoryFunc, null) { }
+
+		public SerializerFactory(Func<IConnectionSettingsValues, IElasticsearchSerializer> serializerFactoryFunc) :
+			this(serializerFactoryFunc, null) { }
 
 		public SerializerFactory(Action<JsonSerializerSettings, IConnectionSettingsValues> settingsModifier) : this(null, settingsModifier) { }
 
-		public SerializerFactory(Func<IConnectionSettingsValues, IElasticsearchSerializer> serializerFactoryFunc, Action<JsonSerializerSettings, IConnectionSettingsValues> settingsModifier)
+		public SerializerFactory(Func<IConnectionSettingsValues, IElasticsearchSerializer> serializerFactoryFunc,
+			Action<JsonSerializerSettings, IConnectionSettingsValues> settingsModifier
+		)
 		{
-			this._serializerFactoryFunc = serializerFactoryFunc;
-			this._settingsModifier = settingsModifier;
+			_serializerFactoryFunc = serializerFactoryFunc;
+			_settingsModifier = settingsModifier;
 		}
 
 		public IElasticsearchSerializer Create(IConnectionSettingsValues settings) =>
-			this._serializerFactoryFunc?.Invoke(settings) ?? new JsonNetSerializer(settings, this._settingsModifier);
+			_serializerFactoryFunc?.Invoke(settings) ?? new JsonNetSerializer(settings, _settingsModifier);
 
 		public IElasticsearchSerializer CreateStateful(IConnectionSettingsValues settings, JsonConverter converter) =>
 			new JsonNetSerializer(settings, converter);

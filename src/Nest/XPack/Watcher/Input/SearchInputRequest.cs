@@ -10,52 +10,50 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchInputRequest>))]
 	public interface ISearchInputRequest
 	{
+		[JsonProperty("body")]
+		[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchRequest>))]
+		ISearchRequest Body { get; set; }
+
 		[JsonProperty("indices")]
 		IEnumerable<IndexName> Indices { get; set; }
 
-		[JsonProperty("types")]
-		IEnumerable<TypeName> Types { get; set; }
+		[JsonProperty("indices_options")]
+		IIndicesOptions IndicesOptions { get; set; }
 
 		[JsonProperty("search_type")]
 		[JsonConverter(typeof(StringEnumConverter))]
 		SearchType? SearchType { get; set; }
 
-		[JsonProperty("indices_options")]
-		IIndicesOptions IndicesOptions { get; set; }
-
-		[JsonProperty("body")]
-		[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchRequest>))]
-		ISearchRequest Body { get; set; }
-
 		[JsonProperty("template")]
 		[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchTemplateRequest>))]
 		ISearchTemplateRequest Template { get; set; }
+
+		[JsonProperty("types")]
+		IEnumerable<TypeName> Types { get; set; }
 	}
 
 	public class SearchInputRequest : ISearchInputRequest
 	{
+		public ISearchRequest Body { get; set; }
 		public IEnumerable<IndexName> Indices { get; set; }
-
-		public IEnumerable<TypeName> Types { get; set; }
-
-		public SearchType? SearchType { get; set; }
 
 		public IIndicesOptions IndicesOptions { get; set; }
 
-		public ISearchRequest Body { get; set; }
+		public SearchType? SearchType { get; set; }
 
 		public ISearchTemplateRequest Template { get; set; }
+
+		public IEnumerable<TypeName> Types { get; set; }
 	}
 
-	public class SearchInputRequestDescriptor :
-		DescriptorBase<SearchInputRequestDescriptor, ISearchInputRequest>, ISearchInputRequest
+	public class SearchInputRequestDescriptor : DescriptorBase<SearchInputRequestDescriptor, ISearchInputRequest>, ISearchInputRequest
 	{
-		IEnumerable<IndexName> ISearchInputRequest.Indices { get; set; }
-		IEnumerable<TypeName> ISearchInputRequest.Types { get; set; }
-		SearchType? ISearchInputRequest.SearchType { get; set; }
-		IIndicesOptions ISearchInputRequest.IndicesOptions { get; set; }
 		ISearchRequest ISearchInputRequest.Body { get; set; }
+		IEnumerable<IndexName> ISearchInputRequest.Indices { get; set; }
+		IIndicesOptions ISearchInputRequest.IndicesOptions { get; set; }
+		SearchType? ISearchInputRequest.SearchType { get; set; }
 		ISearchTemplateRequest ISearchInputRequest.Template { get; set; }
+		IEnumerable<TypeName> ISearchInputRequest.Types { get; set; }
 
 		public SearchInputRequestDescriptor Indices(IEnumerable<IndexName> indices) =>
 			Assign(a => a.Indices = indices);
@@ -64,7 +62,7 @@ namespace Nest
 			Assign(a => a.Indices = indices);
 
 		public SearchInputRequestDescriptor Indices<T>() =>
-			Assign(a => a.Indices = new [] { (IndexName)typeof(T) });
+			Assign(a => a.Indices = new[] { (IndexName)typeof(T) });
 
 		public SearchInputRequestDescriptor Types(IEnumerable<TypeName> types) =>
 			Assign(a => a.Types = types);

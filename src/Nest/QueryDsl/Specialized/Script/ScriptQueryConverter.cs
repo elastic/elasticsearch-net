@@ -10,6 +10,7 @@ namespace Nest
 	{
 		public override bool CanRead => true;
 		public override bool CanWrite => true;
+
 		public override bool CanConvert(Type objectType) => true;
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
@@ -38,7 +39,7 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var r = new ScriptQuery();
-			JObject o = JObject.Load(reader);
+			var o = JObject.Load(reader);
 			var properties = o.Properties().ToListOrNullIfEmpty();
 			var scriptProperty = properties.FirstOrDefault(p => p.Name == "script");
 			if (scriptProperty != null)

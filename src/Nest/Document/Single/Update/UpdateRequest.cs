@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
 
@@ -9,14 +8,17 @@ namespace Nest
 		where TDocument : class
 		where TPartialDocument : class
 	{
-		[JsonProperty(PropertyName = "script")]
-		IScript Script { get; set; }
+		[JsonProperty(PropertyName = "detect_noop")]
+		bool? DetectNoop { get; set; }
 
-		[JsonProperty(PropertyName = "upsert")]
-		TDocument Upsert { get; set; }
+		[JsonProperty(PropertyName = "doc")]
+		TPartialDocument Doc { get; set; }
 
 		[JsonProperty(PropertyName = "doc_as_upsert")]
 		bool? DocAsUpsert { get; set; }
+
+		[JsonProperty(PropertyName = "script")]
+		IScript Script { get; set; }
 
 		/// <summary>
 		/// If you would like your script to run regardless of whether the document exists or not — i.e. the script handles
@@ -25,53 +27,54 @@ namespace Nest
 		[JsonProperty(PropertyName = "scripted_upsert")]
 		bool? ScriptedUpsert { get; set; }
 
-		[JsonProperty(PropertyName = "doc")]
-		TPartialDocument Doc { get; set; }
-
-		[JsonProperty(PropertyName = "detect_noop")]
-		bool? DetectNoop { get; set; }
+		[JsonProperty(PropertyName = "upsert")]
+		TDocument Upsert { get; set; }
 	}
 
 	public partial class UpdateRequest<TDocument, TPartialDocument>
 		where TDocument : class
 		where TPartialDocument : class
 	{
-		/// <inheritdoc/>
-		public IScript Script { get; set; }
-		/// <inheritdoc/>
-		public TDocument Upsert { get; set; }
-		/// <inheritdoc/>
-		public bool? DocAsUpsert { get; set; }
-		/// <inheritdoc/>
-		public TPartialDocument Doc { get; set; }
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public bool? DetectNoop { get; set; }
-		/// <inheritdoc/>
-		public bool? ScriptedUpsert { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
+		public TPartialDocument Doc { get; set; }
+
+		/// <inheritdoc />
+		public bool? DocAsUpsert { get; set; }
+
+		/// <inheritdoc />
 		public Fields Fields
 		{
-			get { return Self.RequestParameters.GetQueryStringValue<Fields>("fields"); }
-			set { Self.RequestParameters.AddQueryString("fields", value); }
+			get => Self.RequestParameters.GetQueryStringValue<Fields>("fields");
+			set => Self.RequestParameters.AddQueryString("fields", value);
 		}
+
+		/// <inheritdoc />
+		public IScript Script { get; set; }
+
+		/// <inheritdoc />
+		public bool? ScriptedUpsert { get; set; }
+
+		/// <inheritdoc />
+		public TDocument Upsert { get; set; }
 	}
 
 	public partial class UpdateDescriptor<TDocument, TPartialDocument>
 		where TDocument : class
 		where TPartialDocument : class
 	{
-		IScript IUpdateRequest<TDocument, TPartialDocument>.Script { get; set; }
-
-		TDocument IUpdateRequest<TDocument, TPartialDocument>.Upsert { get; set; }
-
-		bool? IUpdateRequest<TDocument, TPartialDocument>.DocAsUpsert { get; set; }
+		bool? IUpdateRequest<TDocument, TPartialDocument>.DetectNoop { get; set; }
 
 		TPartialDocument IUpdateRequest<TDocument, TPartialDocument>.Doc { get; set; }
 
-		bool? IUpdateRequest<TDocument, TPartialDocument>.DetectNoop { get; set; }
+		bool? IUpdateRequest<TDocument, TPartialDocument>.DocAsUpsert { get; set; }
+		IScript IUpdateRequest<TDocument, TPartialDocument>.Script { get; set; }
 
 		bool? IUpdateRequest<TDocument, TPartialDocument>.ScriptedUpsert { get; set; }
+
+		TDocument IUpdateRequest<TDocument, TPartialDocument>.Upsert { get; set; }
 
 		/// <summary>
 		/// The full document to be created if an existing document does not exist for a partial merge.
@@ -87,7 +90,8 @@ namespace Nest
 
 		public UpdateDescriptor<TDocument, TPartialDocument> DetectNoop(bool detectNoop = true) => Assign(a => a.DetectNoop = detectNoop);
 
-		public UpdateDescriptor<TDocument, TPartialDocument> ScriptedUpsert(bool scriptedUpsert = true) => Assign(a => a.ScriptedUpsert = scriptedUpsert);
+		public UpdateDescriptor<TDocument, TPartialDocument> ScriptedUpsert(bool scriptedUpsert = true) =>
+			Assign(a => a.ScriptedUpsert = scriptedUpsert);
 
 		public UpdateDescriptor<TDocument, TPartialDocument> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
 			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));

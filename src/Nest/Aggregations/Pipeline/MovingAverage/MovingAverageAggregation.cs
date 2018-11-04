@@ -7,42 +7,41 @@ namespace Nest
 	[ContractJsonConverter(typeof(MovingAverageAggregationJsonConverter))]
 	public interface IMovingAverageAggregation : IPipelineAggregation
 	{
-		IMovingAverageModel Model { get; set; }
-
-		[JsonProperty("window")]
-		int? Window { get; set; }
-
 		[JsonProperty("minimize")]
 		bool? Minimize { get; set; }
 
+		IMovingAverageModel Model { get; set; }
+
 		[JsonProperty("predict")]
 		int? Predict { get; set; }
+
+		[JsonProperty("window")]
+		int? Window { get; set; }
 	}
 
 	public class MovingAverageAggregation : PipelineAggregationBase, IMovingAverageAggregation
 	{
-		public bool? Minimize { get; set; }
-		public IMovingAverageModel Model { get; set; }
-		public int? Window { get; set; }
-		public int? Predict { get; set; }
-
 		internal MovingAverageAggregation() { }
 
 		public MovingAverageAggregation(string name, SingleBucketsPath bucketsPath)
-			: base(name, bucketsPath)
-		{ }
+			: base(name, bucketsPath) { }
+
+		public bool? Minimize { get; set; }
+		public IMovingAverageModel Model { get; set; }
+		public int? Predict { get; set; }
+		public int? Window { get; set; }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.MovingAverage = this;
 	}
 
 	public class MovingAverageAggregationDescriptor
 		: PipelineAggregationDescriptorBase<MovingAverageAggregationDescriptor, IMovingAverageAggregation, SingleBucketsPath>
-		, IMovingAverageAggregation
+			, IMovingAverageAggregation
 	{
 		bool? IMovingAverageAggregation.Minimize { get; set; }
 		IMovingAverageModel IMovingAverageAggregation.Model { get; set; }
-		int? IMovingAverageAggregation.Window { get; set; }
 		int? IMovingAverageAggregation.Predict { get; set; }
+		int? IMovingAverageAggregation.Window { get; set; }
 
 		public MovingAverageAggregationDescriptor Minimize(bool minimize) => Assign(a => a.Minimize = minimize);
 
@@ -52,6 +51,5 @@ namespace Nest
 
 		public MovingAverageAggregationDescriptor Model(Func<MovingAverageModelDescriptor, IMovingAverageModel> modelSelector) =>
 			Assign(a => a.Model = modelSelector?.Invoke(new MovingAverageModelDescriptor()));
-
 	}
 }

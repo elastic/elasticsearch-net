@@ -15,6 +15,7 @@ namespace Nest
 		public static void CloseOverAutomagicCovariantResultSelector(Inferrer infer, ICovariantSearchRequest self)
 		{
 			if (infer == null || self == null) return;
+
 			var returnType = self.ClrType;
 
 			if (returnType == null) return;
@@ -38,6 +39,6 @@ namespace Nest
 	{
 		Type ClrType { get; }
 		Types ElasticsearchTypes { get; }
-		Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set;}
+		Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 	}
 }

@@ -22,11 +22,11 @@ namespace Nest
 	{
 		internal RegisterPercolatorRequest() { }
 
+		public RegisterPercolatorRequest(IndexName index, Name name)
+			: base(r => r.Required("index", index).Required("type", (TypeName)".percolator").Required("id", name)) { }
+
 		public IDictionary<string, object> Metadata { get; set; }
 		public QueryContainer Query { get; set; }
-
-		public RegisterPercolatorRequest(IndexName index, Name name)
-			: base(r=>r.Required("index", index).Required("type", (TypeName)".percolator").Required("id", name)) { }
 	}
 
 	[Obsolete("Deprecated. Removed in NEST 6.x. Use a percolate query with search api")]
@@ -37,13 +37,13 @@ namespace Nest
 		internal RegisterPercolatorDescriptor() { }
 
 		public RegisterPercolatorDescriptor(Name name)
-			: base(r=>r.Required("index", (IndexName)typeof(T)).Required("type", (TypeName)".percolator").Required("id", name)) { }
+			: base(r => r.Required("index", (IndexName)typeof(T)).Required("type", (TypeName)".percolator").Required("id", name)) { }
 
-		public RegisterPercolatorDescriptor<T> Index(IndexName index) => Assign(a => a.RouteValues.Required("index", index));
+		IDictionary<string, object> IRegisterPercolatorRequest.Metadata { get; set; }
 
 		QueryContainer IRegisterPercolatorRequest.Query { get; set; }
 
-		IDictionary<string, object> IRegisterPercolatorRequest.Metadata { get; set; }
+		public RegisterPercolatorDescriptor<T> Index(IndexName index) => Assign(a => a.RouteValues.Required("index", index));
 
 		/// <summary>
 		/// Add metadata associated with this percolator query document that can later be used to query or filter specific percolated queries

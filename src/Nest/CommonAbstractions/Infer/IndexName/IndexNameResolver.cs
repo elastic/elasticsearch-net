@@ -1,5 +1,4 @@
-﻿using Elasticsearch.Net;
-using System;
+﻿using System;
 
 namespace Nest
 {
@@ -10,22 +9,24 @@ namespace Nest
 		public IndexNameResolver(IConnectionSettingsValues connectionSettings)
 		{
 			connectionSettings.ThrowIfNull(nameof(connectionSettings));
-			this._connectionSettings = connectionSettings;
+			_connectionSettings = connectionSettings;
 		}
-		public string Resolve<T>() where T : class => this.Resolve(typeof(T));
+
+		public string Resolve<T>() where T : class => Resolve(typeof(T));
 
 		public string Resolve(IndexName i)
 		{
 			if (string.IsNullOrEmpty(i?.Name))
-				return PrefixClusterName(i,this.Resolve(i?.Type));
+				return PrefixClusterName(i, Resolve(i?.Type));
+
 			ValidateIndexName(i.Name);
 			return PrefixClusterName(i, i.Name);
 		}
 
 		public string Resolve(Type type)
 		{
-			var indexName = this._connectionSettings.DefaultIndex;
-			var defaultIndices = this._connectionSettings.DefaultIndices;
+			var indexName = _connectionSettings.DefaultIndex;
+			var defaultIndices = _connectionSettings.DefaultIndices;
 			if (defaultIndices != null && type != null)
 			{
 				string value;
@@ -35,6 +36,7 @@ namespace Nest
 			ValidateIndexName(indexName);
 			return indexName;
 		}
+
 		private static string PrefixClusterName(IndexName i, string name) => i.Cluster.IsNullOrEmpty() ? name : $"{i.Cluster}:{name}";
 
 		private static void ValidateIndexName(string indexName)

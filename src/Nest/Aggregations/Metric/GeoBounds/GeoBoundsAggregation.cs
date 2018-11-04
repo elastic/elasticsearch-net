@@ -12,16 +12,16 @@ namespace Nest
 
 	public class GeoBoundsAggregation : MetricAggregationBase, IGeoBoundsAggregation
 	{
-		public bool? WrapLongitude { get; set; }
-
 		internal GeoBoundsAggregation() { }
 
 		public GeoBoundsAggregation(string name, Field field) : base(name, field) { }
 
+		public bool? WrapLongitude { get; set; }
+
 		internal override void WrapInContainer(AggregationContainer c) => c.GeoBounds = this;
 	}
 
-	public class GeoBoundsAggregationDescriptor<T> 
+	public class GeoBoundsAggregationDescriptor<T>
 		: MetricAggregationDescriptorBase<GeoBoundsAggregationDescriptor<T>, IGeoBoundsAggregation, T>
 			, IGeoBoundsAggregation
 		where T : class

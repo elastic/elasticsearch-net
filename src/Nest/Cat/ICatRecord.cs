@@ -1,4 +1,4 @@
 ﻿namespace Nest
 {
-	public interface ICatRecord {}
+	public interface ICatRecord { }
 }

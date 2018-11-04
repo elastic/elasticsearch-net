@@ -14,30 +14,32 @@ namespace Nest
 		TimeUnit? Round { get; }
 	}
 
-	[JsonConverter(typeof(DateMath.Json))]
+	[JsonConverter(typeof(Json))]
 	public abstract class DateMath : IDateMath
 	{
-		protected IDateMath Self => this;
+		private static readonly Regex _dateMathRe =
+			new Regex(@"^(?<anchor>now|.+(?:\|\||$))(?<ranges>(?:(?:\+|\-)[^\/]*))?(?<rounding>\/(?:y|M|w|d|h|m|s))?$");
 
 		protected Union<DateTime, string> Anchor;
-		Union<DateTime, string> IDateMath.Anchor => Anchor;
 
 		protected TimeUnit? Round;
-		TimeUnit? IDateMath.Round => Round;
-
-		IList<Tuple<DateMathOperation, Time>> IDateMath.Ranges { get; } = new List<Tuple<DateMathOperation, Time>>();
 
 		protected DateMath() { }
 
 		public static DateMathExpression Now => new DateMathExpression("now");
+		protected IDateMath Self => this;
+		Union<DateTime, string> IDateMath.Anchor => Anchor;
+
+		IList<Tuple<DateMathOperation, Time>> IDateMath.Ranges { get; } = new List<Tuple<DateMathOperation, Time>>();
+		TimeUnit? IDateMath.Round => Round;
+
 		public static DateMathExpression Anchored(DateTime anchor) => new DateMathExpression(anchor);
+
 		public static DateMathExpression Anchored(string dateAnchor) => new DateMathExpression(dateAnchor);
 
-		private static readonly Regex _dateMathRe =
-			new Regex(@"^(?<anchor>now|.+(?:\|\||$))(?<ranges>(?:(?:\+|\-)[^\/]*))?(?<rounding>\/(?:y|M|w|d|h|m|s))?$");
+		public static implicit operator DateMath(DateTime dateTime) => Anchored(dateTime);
 
-		public static implicit operator DateMath(DateTime dateTime) => DateMath.Anchored(dateTime);
-		public static implicit operator DateMath(string dateMath) => DateMath.FromString(dateMath);
+		public static implicit operator DateMath(string dateMath) => FromString(dateMath);
 
 		public static DateMath FromString(string dateMath)
 		{
@@ -112,11 +114,12 @@ namespace Nest
 			public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 			{
 				if (reader.TokenType == JsonToken.String)
-					return DateMath.FromString(reader.Value as string);
+					return FromString(reader.Value as string);
+
 				if (reader.TokenType == JsonToken.Date)
 				{
 					var d = reader.Value as DateTime?;
-					return d.HasValue ? DateMath.Anchored(d.Value) : null;
+					return d.HasValue ? Anchored(d.Value) : null;
 				}
 				return null;
 			}

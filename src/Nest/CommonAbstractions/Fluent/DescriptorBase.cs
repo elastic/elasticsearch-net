@@ -11,31 +11,28 @@ namespace Nest
 	{
 		private readonly TDescriptor _self;
 
-		protected DescriptorBase()
-		{
-			_self = (TDescriptor)this;
-		}
+		protected DescriptorBase() => _self = (TDescriptor)this;
 
 		protected TInterface Self => _self;
 
 		protected TDescriptor Assign(Action<TInterface> assigner) => Fluent.Assign(_self, assigner);
 
 		/// <summary>
-		/// Hides the <see cref="Equals"/> method.
+		/// Hides the <see cref="Equals" /> method.
 		/// </summary>
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public override bool Equals(object obj) => base.Equals(obj);
 
 		/// <summary>
-		/// Hides the <see cref="GetHashCode"/> method.
+		/// Hides the <see cref="GetHashCode" /> method.
 		/// </summary>
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public override int GetHashCode() => base.GetHashCode();
 
 		/// <summary>
-		/// Hides the <see cref="ToString"/> method.
+		/// Hides the <see cref="ToString" /> method.
 		/// </summary>
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]

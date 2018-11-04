@@ -13,12 +13,12 @@ namespace Nest
 		public TypeNameResolver(IConnectionSettingsValues connectionSettings)
 		{
 			connectionSettings.ThrowIfNull(nameof(connectionSettings));
-			this._connectionSettings = connectionSettings;
+			_connectionSettings = connectionSettings;
 		}
 
-		public string Resolve<T>() where T : class => this.Resolve(typeof(T));
+		public string Resolve<T>() where T : class => Resolve(typeof(T));
 
-		public string Resolve(TypeName t) => t?.Name ?? this.ResolveType(t?.Type);
+		public string Resolve(TypeName t) => t?.Name ?? ResolveType(t?.Type);
 
 		private string ResolveType(Type type)
 		{

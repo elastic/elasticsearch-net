@@ -1,7 +1,6 @@
 using System;
-using System.Collections.Generic;
-using Elasticsearch.Net;
 using System.Diagnostics;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -37,8 +36,10 @@ namespace Nest
 
 		public Union<bool, DynamicMapping> Dynamic { get; set; }
 		public bool? Enabled { get; set; }
+
 		/// <remarks>Removed in 6.x</remarks>
 		public bool? IncludeInAll { get; set; }
+
 		public IProperties Properties { get; set; }
 	}
 
@@ -46,9 +47,7 @@ namespace Nest
 	public class ObjectTypeDescriptor<TParent, TChild>
 		: ObjectPropertyDescriptorBase<ObjectTypeDescriptor<TParent, TChild>, IObjectProperty, TParent, TChild>, IObjectProperty
 		where TParent : class
-		where TChild : class
-	{
-	}
+		where TChild : class { }
 
 	[DebuggerDisplay("{DebugDisplay}")]
 	public abstract class ObjectPropertyDescriptorBase<TDescriptor, TInterface, TParent, TChild>
@@ -58,25 +57,23 @@ namespace Nest
 		where TParent : class
 		where TChild : class
 	{
-		internal TypeName _TypeName { get; set; }
-
-		Union<bool, DynamicMapping> IObjectProperty.Dynamic { get; set; }
-		bool? IObjectProperty.Enabled { get; set; }
-		/// <remarks>Removed in 6.x</remarks>
-		bool? IObjectProperty.IncludeInAll { get; set; }
-		IProperties IObjectProperty.Properties { get; set; }
-
 		protected ObjectPropertyDescriptorBase() : this(FieldType.Object) { }
 
 		[Obsolete("Please use overload taking FieldType")]
-		protected ObjectPropertyDescriptorBase(string type) : base(type)
-		{
-			_TypeName = TypeName.Create<TChild>();
-		}
+		protected ObjectPropertyDescriptorBase(string type) : base(type) => _TypeName = TypeName.Create<TChild>();
 
 #pragma warning disable 618
 		protected ObjectPropertyDescriptorBase(FieldType type) : this(type.GetStringValue()) { }
 #pragma warning restore 618
+		internal TypeName _TypeName { get; set; }
+
+		Union<bool, DynamicMapping> IObjectProperty.Dynamic { get; set; }
+		bool? IObjectProperty.Enabled { get; set; }
+
+		/// <remarks>Removed in 6.x</remarks>
+		bool? IObjectProperty.IncludeInAll { get; set; }
+
+		IProperties IObjectProperty.Properties { get; set; }
 
 		public TDescriptor Dynamic(Union<bool, DynamicMapping> dynamic) =>
 			Assign(a => a.Dynamic = dynamic);

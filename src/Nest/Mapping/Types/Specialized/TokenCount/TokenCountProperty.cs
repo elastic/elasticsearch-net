@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -10,18 +9,18 @@ namespace Nest
 		[JsonProperty("analyzer")]
 		string Analyzer { get; set; }
 
-		[JsonProperty("index")]
-		bool? Index { get; set; }
-
 		[JsonProperty("boost")]
 		double? Boost { get; set; }
-
-		[JsonProperty("null_value")]
-		double? NullValue { get; set; }
 
 		[JsonProperty("include_in_all")]
 		/// <remarks>Removed in 6.x</remarks>
 		bool? IncludeInAll { get; set; }
+
+		[JsonProperty("index")]
+		bool? Index { get; set; }
+
+		[JsonProperty("null_value")]
+		double? NullValue { get; set; }
 	}
 
 	[DebuggerDisplay("{DebugDisplay}")]
@@ -31,14 +30,14 @@ namespace Nest
 
 		public string Analyzer { get; set; }
 
-		public bool? Index { get; set; }
-
 		public double? Boost { get; set; }
-
-		public double? NullValue { get; set; }
 
 		/// <remarks>Removed in 6.x</remarks>
 		public bool? IncludeInAll { get; set; }
+
+		public bool? Index { get; set; }
+
+		public double? NullValue { get; set; }
 	}
 
 	[DebuggerDisplay("{DebugDisplay}")]
@@ -50,16 +49,22 @@ namespace Nest
 
 		string ITokenCountProperty.Analyzer { get; set; }
 		double? ITokenCountProperty.Boost { get; set; }
+
 		/// <remarks>Removed in 6.x</remarks>
 		bool? ITokenCountProperty.IncludeInAll { get; set; }
+
 		bool? ITokenCountProperty.Index { get; set; }
 		double? ITokenCountProperty.NullValue { get; set; }
 
 		public TokenCountPropertyDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
+
 		public TokenCountPropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
+
 		/// <remarks>Removed in 6.x</remarks>
 		public TokenCountPropertyDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
+
 		public TokenCountPropertyDescriptor<T> Index(bool index = true) => Assign(a => a.Index = index);
+
 		public TokenCountPropertyDescriptor<T> NullValue(double nullValue) => Assign(a => a.NullValue = nullValue);
 	}
 }

@@ -26,11 +26,11 @@ namespace Nest
 		[JsonProperty("rep")]
 		public string Replica { get; set; }
 
-		[JsonProperty("store.size")]
-		public string StoreSize { get; set; }
-
 		[JsonProperty("status")]
 		public string Status { get; set; }
+
+		[JsonProperty("store.size")]
+		public string StoreSize { get; set; }
 
 		[JsonProperty("tm")]
 		public string TotalMemory { get; set; }

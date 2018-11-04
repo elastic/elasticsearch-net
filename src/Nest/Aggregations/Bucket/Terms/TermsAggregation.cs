@@ -9,63 +9,61 @@ namespace Nest
 	[ContractJsonConverter(typeof(AggregationJsonConverter<TermsAggregation>))]
 	public interface ITermsAggregation : IBucketAggregation
 	{
-		[JsonProperty("field")]
-		Field Field { get; set; }
-
-		[JsonProperty("script")]
-		IScript Script { get; set; }
-
-		[JsonProperty("size")]
-		int? Size { get; set; }
-
-		[JsonProperty("shard_size")]
-		int? ShardSize { get; set; }
-
-		[JsonProperty("min_doc_count")]
-		int? MinimumDocumentCount { get; set; }
-
-		[JsonProperty("execution_hint")]
-		TermsAggregationExecutionHint? ExecutionHint { get; set; }
-
-		[JsonProperty("order")]
-		IList<TermsOrder> Order { get; set; }
-
-		[JsonProperty("include")]
-		TermsIncludeExclude Include { get; set; }
+		[JsonProperty("collect_mode")]
+		TermsAggregationCollectMode? CollectMode { get; set; }
 
 		[JsonProperty("exclude")]
 		TermsIncludeExclude Exclude { get; set; }
 
-		[JsonProperty("collect_mode")]
-		TermsAggregationCollectMode? CollectMode { get; set; }
+		[JsonProperty("execution_hint")]
+		TermsAggregationExecutionHint? ExecutionHint { get; set; }
+
+		[JsonProperty("field")]
+		Field Field { get; set; }
+
+		[JsonProperty("include")]
+		TermsIncludeExclude Include { get; set; }
+
+		[JsonProperty("min_doc_count")]
+		int? MinimumDocumentCount { get; set; }
 
 		[JsonProperty("missing")]
 		string Missing { get; set; }
 
+		[JsonProperty("order")]
+		IList<TermsOrder> Order { get; set; }
+
+		[JsonProperty("script")]
+		IScript Script { get; set; }
+
+		[JsonProperty("shard_size")]
+		int? ShardSize { get; set; }
+
 		[JsonProperty("show_term_doc_count_error")]
 		bool? ShowTermDocCountError { get; set; }
 
-
+		[JsonProperty("size")]
+		int? Size { get; set; }
 	}
 
 	public class TermsAggregation : BucketAggregationBase, ITermsAggregation
 	{
-		public Field Field { get; set; }
-		public IScript Script { get; set; }
-		public int? Size { get; set; }
-		public int? ShardSize { get; set; }
-		public int? MinimumDocumentCount { get; set; }
-		public TermsAggregationExecutionHint? ExecutionHint { get; set; }
-		public IList<TermsOrder> Order { get; set; }
-		public TermsIncludeExclude Include { get; set; }
-		public TermsIncludeExclude Exclude { get; set; }
-		public TermsAggregationCollectMode? CollectMode { get; set; }
-		public string Missing { get; set; }
-		public bool? ShowTermDocCountError { get; set; }
-
 		internal TermsAggregation() { }
 
 		public TermsAggregation(string name) : base(name) { }
+
+		public TermsAggregationCollectMode? CollectMode { get; set; }
+		public TermsIncludeExclude Exclude { get; set; }
+		public TermsAggregationExecutionHint? ExecutionHint { get; set; }
+		public Field Field { get; set; }
+		public TermsIncludeExclude Include { get; set; }
+		public int? MinimumDocumentCount { get; set; }
+		public string Missing { get; set; }
+		public IList<TermsOrder> Order { get; set; }
+		public IScript Script { get; set; }
+		public int? ShardSize { get; set; }
+		public bool? ShowTermDocCountError { get; set; }
+		public int? Size { get; set; }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Terms = this;
 	}
@@ -75,29 +73,28 @@ namespace Nest
 			, ITermsAggregation
 		where T : class
 	{
-		Field ITermsAggregation.Field { get; set; }
-
-		IScript ITermsAggregation.Script { get; set; }
-
-		int? ITermsAggregation.Size { get; set; }
-
-		int? ITermsAggregation.ShardSize { get; set; }
-
-		int? ITermsAggregation.MinimumDocumentCount { get; set; }
-
-		TermsAggregationExecutionHint? ITermsAggregation.ExecutionHint { get; set; }
-
-		IList<TermsOrder> ITermsAggregation.Order { get; set; }
-
-		TermsIncludeExclude ITermsAggregation.Include { get; set; }
+		TermsAggregationCollectMode? ITermsAggregation.CollectMode { get; set; }
 
 		TermsIncludeExclude ITermsAggregation.Exclude { get; set; }
 
-		TermsAggregationCollectMode? ITermsAggregation.CollectMode { get; set; }
+		TermsAggregationExecutionHint? ITermsAggregation.ExecutionHint { get; set; }
+		Field ITermsAggregation.Field { get; set; }
+
+		TermsIncludeExclude ITermsAggregation.Include { get; set; }
+
+		int? ITermsAggregation.MinimumDocumentCount { get; set; }
 
 		string ITermsAggregation.Missing { get; set; }
 
+		IList<TermsOrder> ITermsAggregation.Order { get; set; }
+
+		IScript ITermsAggregation.Script { get; set; }
+
+		int? ITermsAggregation.ShardSize { get; set; }
+
 		bool? ITermsAggregation.ShowTermDocCountError { get; set; }
+
+		int? ITermsAggregation.Size { get; set; }
 
 		public TermsAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
@@ -139,7 +136,7 @@ namespace Nest
 		});
 
 		public TermsAggregationDescriptor<T> Include(long partition, long numberOfPartitions) =>
-			Assign(a => a.Include = new TermsIncludeExclude() {Partition = partition, NumberOfPartitions = numberOfPartitions});
+			Assign(a => a.Include = new TermsIncludeExclude() { Partition = partition, NumberOfPartitions = numberOfPartitions });
 
 		public TermsAggregationDescriptor<T> Include(string includePattern, string regexFlags = null) =>
 			Assign(a => a.Include = new TermsIncludeExclude
@@ -170,6 +167,7 @@ namespace Nest
 
 		public TermsAggregationDescriptor<T> Missing(string missing) => Assign(a => a.Missing = missing);
 
-		public TermsAggregationDescriptor<T> ShowTermDocCountError(bool? showTermDocCountError = true) => Assign(a => a.ShowTermDocCountError = showTermDocCountError);
+		public TermsAggregationDescriptor<T> ShowTermDocCountError(bool? showTermDocCountError = true) =>
+			Assign(a => a.ShowTermDocCountError = showTermDocCountError);
 	}
 }

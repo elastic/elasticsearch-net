@@ -1,6 +1,4 @@
-﻿using System;
-using Elasticsearch.Net;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -9,16 +7,16 @@ namespace Nest
 	public interface IRangeProperty : IDocValuesProperty
 	{
 		/// <summary>
-		/// Try to convert strings to numbers and truncate fractions for integers. Accepts true (default) and false.
-		/// </summary>
-		[JsonProperty("coerce")]
-		bool? Coerce { get; set; }
-
-		/// <summary>
 		/// Mapping field-level query time boosting. Accepts a floating point number, defaults to 1.0.
 		/// </summary>
 		[JsonProperty("boost")]
 		double? Boost { get; set; }
+
+		/// <summary>
+		/// Try to convert strings to numbers and truncate fractions for integers. Accepts true (default) and false.
+		/// </summary>
+		[JsonProperty("coerce")]
+		bool? Coerce { get; set; }
 
 		/// <summary>
 		/// Whether or not the field value should be included in the _all field? Accepts true or false. Defaults
@@ -40,14 +38,17 @@ namespace Nest
 	{
 		protected RangePropertyBase(RangeType rangeType) : base(rangeType.ToFieldType()) { }
 
-		/// <inheritdoc/>
-		public bool? Coerce { get; set; }
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public double? Boost { get; set; }
-		/// <inheritdoc/>
+
+		/// <inheritdoc />
+		public bool? Coerce { get; set; }
+
+		/// <inheritdoc />
 		/// <remarks>Removed in 6.x</remarks>
 		public bool? IncludeInAll { get; set; }
-		/// <inheritdoc/>
+
+		/// <inheritdoc />
 		public bool? Index { get; set; }
 	}
 
@@ -57,22 +58,27 @@ namespace Nest
 		where TInterface : class, IRangeProperty
 		where T : class
 	{
-		bool? IRangeProperty.Coerce { get; set; }
-		double? IRangeProperty.Boost { get; set; }
-		/// <remarks>Removed in 6.x</remarks>
-		bool? IRangeProperty.IncludeInAll { get; set; }
-		bool? IRangeProperty.Index { get; set; }
-
 		protected RangePropertyDescriptorBase(RangeType type) : base(type.ToFieldType()) { }
 
-		/// <inheritdoc cref="IRangeProperty.Coerce"/>
+		double? IRangeProperty.Boost { get; set; }
+		bool? IRangeProperty.Coerce { get; set; }
+
+		/// <remarks>Removed in 6.x</remarks>
+		bool? IRangeProperty.IncludeInAll { get; set; }
+
+		bool? IRangeProperty.Index { get; set; }
+
+		/// <inheritdoc cref="IRangeProperty.Coerce" />
 		public TDescriptor Coerce(bool coerce = true) => Assign(a => a.Coerce = coerce);
-		/// <inheritdoc cref="IRangeProperty.Boost"/>
+
+		/// <inheritdoc cref="IRangeProperty.Boost" />
 		public TDescriptor Boost(double boost) => Assign(a => a.Boost = boost);
-		/// <inheritdoc cref="IRangeProperty.IncludeInAll"/>
+
+		/// <inheritdoc cref="IRangeProperty.IncludeInAll" />
 		/// <remarks>Removed in 6.x</remarks>
 		public TDescriptor IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
-		/// <inheritdoc cref="IRangeProperty.Index"/>
+
+		/// <inheritdoc cref="IRangeProperty.Index" />
 		public TDescriptor Index(bool index = true) => Assign(a => a.Index = index);
 	}
 }

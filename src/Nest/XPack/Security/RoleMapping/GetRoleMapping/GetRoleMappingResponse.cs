@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -21,11 +19,11 @@ namespace Nest
 	//only used by GetRoleMappingResponse thus private setters and IReadOnlyCollection
 	public class XPackRoleMapping
 	{
-		[JsonProperty("metadata")]
-		public IDictionary<string, object> Metadata { get; private set; }
-
 		[JsonProperty("enabled")]
 		public bool Enabled { get; private set; }
+
+		[JsonProperty("metadata")]
+		public IDictionary<string, object> Metadata { get; private set; }
 
 		[JsonProperty("roles")]
 		public IReadOnlyCollection<string> Roles { get; private set; } = EmptyReadOnly<string>.Collection;
@@ -33,5 +31,4 @@ namespace Nest
 		[JsonProperty("rules")]
 		public RoleMappingRuleBase Rules { get; private set; }
 	}
-
 }

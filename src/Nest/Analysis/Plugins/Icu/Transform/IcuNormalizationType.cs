@@ -11,10 +11,11 @@ namespace Nest
 	public enum IcuTransformDirection
 	{
 		/// <summary>LTR</summary>
-		[EnumMember(Value="forward")]
+		[EnumMember(Value = "forward")]
 		Forward,
+
 		/// <summary> RTL</summary>
-		[EnumMember(Value="reverse")]
+		[EnumMember(Value = "reverse")]
 		Reverse,
 	}
 }

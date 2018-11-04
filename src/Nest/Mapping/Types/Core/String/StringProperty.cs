@@ -5,108 +5,118 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	[Obsolete("Only valid for indices created before Elasticsearch 5.0, removed in Elasticsearch 6.0.  For newly created indices, use `text` or `keyword` instead.")]
+	[Obsolete(
+		"Only valid for indices created before Elasticsearch 5.0, removed in Elasticsearch 6.0.  For newly created indices, use `text` or `keyword` instead.")]
 	public interface IStringProperty : IDocValuesProperty
 	{
-		[JsonProperty("index")]
-		FieldIndexOption? Index { get; set; }
-
-		[JsonProperty("term_vector")]
-		TermVectorOption? TermVector { get; set; }
+		[JsonProperty("analyzer")]
+		string Analyzer { get; set; }
 
 		[JsonProperty("boost")]
 		double? Boost { get; set; }
 
-		[JsonProperty("null_value")]
-		string NullValue { get; set; }
+		[JsonProperty("eager_global_ordinals")]
+		bool? EagerGlobalOrdinals { get; set; }
 
-		[JsonProperty("norms")]
-		bool? Norms { get; set; }
+		[JsonIgnore]
+		[Obsolete("Use FielddataUpgrade")]
+		IStringFielddata Fielddata { get; set; }
 
-		[JsonProperty("index_options")]
-		IndexOptions? IndexOptions { get; set; }
+		[JsonProperty("fielddata_frequency_filter")]
+		IFielddataFrequencyFilter FielddataFrequencyFilter { get; set; }
 
-		[JsonProperty("analyzer")]
-		string Analyzer { get; set; }
+		[JsonProperty("fielddata")]
+		bool? FielddataUpgrade { get; set; }
 
-		[JsonProperty("search_analyzer")]
-		string SearchAnalyzer { get; set; }
+		[JsonProperty("ignore_above")]
+		int? IgnoreAbove { get; set; }
 
 		[JsonProperty("include_in_all")]
 		/// <remarks>Removed in 6.x</remarks>
 		bool? IncludeInAll { get; set; }
 
-		[JsonProperty("ignore_above")]
-		int? IgnoreAbove { get; set; }
+		[JsonProperty("index")]
+		FieldIndexOption? Index { get; set; }
+
+		[JsonProperty("index_options")]
+		IndexOptions? IndexOptions { get; set; }
+
+		[JsonProperty("norms")]
+		bool? Norms { get; set; }
+
+		[JsonProperty("null_value")]
+		string NullValue { get; set; }
 
 		[JsonProperty("position_increment_gap")]
 		int? PositionIncrementGap { get; set; }
 
-		[JsonIgnore]
-		[Obsolete("Use FielddataUpgrade")]
-		IStringFielddata Fielddata{ get; set; }
+		[JsonProperty("search_analyzer")]
+		string SearchAnalyzer { get; set; }
 
-		[JsonProperty("fielddata")]
-		bool? FielddataUpgrade { get; set; }
-
-		[JsonProperty("fielddata_frequency_filter")]
-		IFielddataFrequencyFilter FielddataFrequencyFilter { get; set; }
-
-		[JsonProperty("eager_global_ordinals")]
-		bool? EagerGlobalOrdinals { get; set; }
+		[JsonProperty("term_vector")]
+		TermVectorOption? TermVector { get; set; }
 	}
 
-	[Obsolete("Only valid for indices created before Elasticsearch 5.0, removed in Elasticsearch 6.0.  For newly created indices, use `text` or `keyword` instead.")]
+	[Obsolete(
+		"Only valid for indices created before Elasticsearch 5.0, removed in Elasticsearch 6.0.  For newly created indices, use `text` or `keyword` instead.")]
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class StringProperty : DocValuesPropertyBase, IStringProperty
 	{
 		public StringProperty() : base("string") { }
 
-		public FieldIndexOption? Index { get; set; }
-		public TermVectorOption? TermVector { get; set; }
-		public double? Boost { get; set; }
-		public string NullValue { get; set; }
-		public bool? Norms { get; set; }
-		public IndexOptions? IndexOptions { get; set; }
 		public string Analyzer { get; set; }
-		public string SearchAnalyzer { get; set; }
-		/// <remarks>Removed in 6.x</remarks>
-		public bool? IncludeInAll { get; set; }
-		public int? IgnoreAbove { get; set; }
-		public int? PositionIncrementGap { get; set; }
+		public double? Boost { get; set; }
+		public bool? EagerGlobalOrdinals { get; set; }
+
 		[Obsolete("Use FielddataUpgrade")]
 		public IStringFielddata Fielddata { get; set; }
-		public bool? FielddataUpgrade { get; set; }
+
 		public IFielddataFrequencyFilter FielddataFrequencyFilter { get; set; }
-		public bool? EagerGlobalOrdinals { get; set; }
+		public bool? FielddataUpgrade { get; set; }
+		public int? IgnoreAbove { get; set; }
+
+		/// <remarks>Removed in 6.x</remarks>
+		public bool? IncludeInAll { get; set; }
+
+		public FieldIndexOption? Index { get; set; }
+		public IndexOptions? IndexOptions { get; set; }
+		public bool? Norms { get; set; }
+		public string NullValue { get; set; }
+		public int? PositionIncrementGap { get; set; }
+		public string SearchAnalyzer { get; set; }
+		public TermVectorOption? TermVector { get; set; }
 	}
 
-	[Obsolete("Only valid for indices created before Elasticsearch 5.0, removed in Elasticsearch 6.0.  For newly created indices, use `text` or `keyword` instead.")]
+	[Obsolete(
+		"Only valid for indices created before Elasticsearch 5.0, removed in Elasticsearch 6.0.  For newly created indices, use `text` or `keyword` instead.")]
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class StringPropertyDescriptor<T>
 		: DocValuesPropertyDescriptorBase<StringPropertyDescriptor<T>, IStringProperty, T>, IStringProperty
 		where T : class
 	{
-		FieldIndexOption? IStringProperty.Index { get; set; }
-		TermVectorOption? IStringProperty.TermVector { get; set; }
-		double? IStringProperty.Boost { get; set; }
-		string IStringProperty.NullValue { get; set; }
-		bool? IStringProperty.Norms { get; set; }
-		IndexOptions? IStringProperty.IndexOptions { get; set; }
+		public StringPropertyDescriptor() : base("string") { }
+
 		string IStringProperty.Analyzer { get; set; }
-		string IStringProperty.SearchAnalyzer { get; set; }
+		double? IStringProperty.Boost { get; set; }
+		bool? IStringProperty.EagerGlobalOrdinals { get; set; }
+
+		[Obsolete("Use FielddataUpgrade")]
+		IStringFielddata IStringProperty.Fielddata { get; set; }
+
+		IFielddataFrequencyFilter IStringProperty.FielddataFrequencyFilter { get; set; }
+		bool? IStringProperty.FielddataUpgrade { get; set; }
+		int? IStringProperty.IgnoreAbove { get; set; }
 
 		/// <remarks>Removed in 6.x</remarks>
 		bool? IStringProperty.IncludeInAll { get; set; }
-		int? IStringProperty.IgnoreAbove { get; set; }
-		int? IStringProperty.PositionIncrementGap { get; set; }
-		[Obsolete("Use FielddataUpgrade")]
-		IStringFielddata IStringProperty.Fielddata { get; set; }
-		bool? IStringProperty.FielddataUpgrade { get; set; }
-		IFielddataFrequencyFilter IStringProperty.FielddataFrequencyFilter { get; set; }
-		bool? IStringProperty.EagerGlobalOrdinals { get; set; }
 
-		public StringPropertyDescriptor() : base("string") { }
+		FieldIndexOption? IStringProperty.Index { get; set; }
+		IndexOptions? IStringProperty.IndexOptions { get; set; }
+		bool? IStringProperty.Norms { get; set; }
+		string IStringProperty.NullValue { get; set; }
+		int? IStringProperty.PositionIncrementGap { get; set; }
+		string IStringProperty.SearchAnalyzer { get; set; }
+		TermVectorOption? IStringProperty.TermVector { get; set; }
 
 		/// <summary>
 		/// Shortcut into .Index(FieldIndexOption.NotAnalyzed)
@@ -134,13 +144,15 @@ namespace Nest
 		/// <remarks>Removed in 6.x</remarks>
 		public StringPropertyDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 
-		public StringPropertyDescriptor<T> PositionIncrementGap(int positionIncrementGap) => Assign(a => a.PositionIncrementGap = positionIncrementGap);
+		public StringPropertyDescriptor<T> PositionIncrementGap(int positionIncrementGap) =>
+			Assign(a => a.PositionIncrementGap = positionIncrementGap);
 
 		[Obsolete("Use Fielddata that takes a bool argument")]
 		public StringPropertyDescriptor<T> Fielddata(Func<StringFielddataDescriptor, IStringFielddata> selector) =>
 			Assign(a => a.Fielddata = selector?.Invoke(new StringFielddataDescriptor()));
 
-		public StringPropertyDescriptor<T> EagerGlobalOrdinals(bool eagerGlobalOrdinals = true) => Assign(a => a.EagerGlobalOrdinals = eagerGlobalOrdinals);
+		public StringPropertyDescriptor<T> EagerGlobalOrdinals(bool eagerGlobalOrdinals = true) =>
+			Assign(a => a.EagerGlobalOrdinals = eagerGlobalOrdinals);
 
 		public StringPropertyDescriptor<T> Fielddata(bool fielddata = true) => Assign(a => a.FielddataUpgrade = fielddata);
 

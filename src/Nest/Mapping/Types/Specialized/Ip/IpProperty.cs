@@ -1,4 +1,3 @@
-using System;
 using System.Diagnostics;
 using Newtonsoft.Json;
 
@@ -7,18 +6,18 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public interface IIpProperty : IDocValuesProperty
 	{
-		[JsonProperty("index")]
-		bool? Index { get; set; }
-
 		[JsonProperty("boost")]
 		double? Boost { get; set; }
-
-		[JsonProperty("null_value")]
-		string NullValue { get; set; }
 
 		[JsonProperty("include_in_all")]
 		/// <remarks>Removed in 6.x</remarks>
 		bool? IncludeInAll { get; set; }
+
+		[JsonProperty("index")]
+		bool? Index { get; set; }
+
+		[JsonProperty("null_value")]
+		string NullValue { get; set; }
 	}
 
 	[DebuggerDisplay("{DebugDisplay}")]
@@ -27,8 +26,10 @@ namespace Nest
 		public IpProperty() : base(FieldType.Ip) { }
 
 		public double? Boost { get; set; }
+
 		/// <remarks>Removed in 6.x</remarks>
 		public bool? IncludeInAll { get; set; }
+
 		public bool? Index { get; set; }
 		public string NullValue { get; set; }
 	}
@@ -38,13 +39,15 @@ namespace Nest
 		: DocValuesPropertyDescriptorBase<IpPropertyDescriptor<T>, IIpProperty, T>, IIpProperty
 		where T : class
 	{
-		bool? IIpProperty.Index { get; set; }
+		public IpPropertyDescriptor() : base(FieldType.Ip) { }
+
 		double? IIpProperty.Boost { get; set; }
-		string IIpProperty.NullValue { get; set; }
+
 		/// <remarks>Removed in 6.x</remarks>
 		bool? IIpProperty.IncludeInAll { get; set; }
 
-		public IpPropertyDescriptor() : base(FieldType.Ip) { }
+		bool? IIpProperty.Index { get; set; }
+		string IIpProperty.NullValue { get; set; }
 
 		public IpPropertyDescriptor<T> Index(bool index) => Assign(a => a.Index = index);
 

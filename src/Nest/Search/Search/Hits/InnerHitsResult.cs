@@ -10,11 +10,11 @@ namespace Nest
 		public InnerHitsMetaData Hits { get; internal set; }
 
 		/// <summary>
-		/// Retrieve <see cref="Hits"/> documents as a strongly typed
+		/// Retrieve <see cref="Hits" /> documents as a strongly typed
 		/// collection
 		/// </summary>
 		/// <typeparam name="T">The hits document type</typeparam>
-		public IEnumerable<T> Documents<T>() where T : class => 
-			this.Hits == null ? Enumerable.Empty<T>() : this.Hits.Documents<T>();
+		public IEnumerable<T> Documents<T>() where T : class =>
+			Hits == null ? Enumerable.Empty<T>() : Hits.Documents<T>();
 	}
 }

@@ -1,50 +1,47 @@
 ﻿using System;
-using Newtonsoft.Json;
 
 namespace Nest
 {
-	public partial interface IPutIndexTemplateRequest : ITemplateMapping
-	{
-	}
+	public partial interface IPutIndexTemplateRequest : ITemplateMapping { }
 
 	public partial class PutIndexTemplateRequest
 	{
-		[Obsolete("Removed in NEST 6.x.")]
-		public string Template { get; set; }
-
-		public int? Order { get; set; }
-
-		public int? Version { get; set; }
-
-		public IIndexSettings Settings { get; set; }
+		public IAliases Aliases { get; set; }
 
 		public IMappings Mappings { get; set; }
 
-		public IAliases Aliases { get; set; }
+		public int? Order { get; set; }
+
+		public IIndexSettings Settings { get; set; }
+
+		[Obsolete("Removed in NEST 6.x.")]
+		public string Template { get; set; }
+
+		public int? Version { get; set; }
 	}
 
 	[DescriptorFor("IndicesPutTemplate")]
 	public partial class PutIndexTemplateDescriptor
 	{
-		[Obsolete("Removed in NEST 6.x.")]
-		string ITemplateMapping.Template { get; set; }
-
-		int? ITemplateMapping.Order { get; set; }
-
-		int? ITemplateMapping.Version { get; set; }
-
-		IIndexSettings ITemplateMapping.Settings { get; set; }
+		IAliases ITemplateMapping.Aliases { get; set; }
 
 		IMappings ITemplateMapping.Mappings { get; set; }
 
-		IAliases ITemplateMapping.Aliases { get; set; }
+		int? ITemplateMapping.Order { get; set; }
+
+		IIndexSettings ITemplateMapping.Settings { get; set; }
+
+		[Obsolete("Removed in NEST 6.x.")]
+		string ITemplateMapping.Template { get; set; }
+
+		int? ITemplateMapping.Version { get; set; }
 
 		public PutIndexTemplateDescriptor Order(int order) => Assign(a => a.Order = order);
 
 		public PutIndexTemplateDescriptor Version(int version) => Assign(a => a.Version = version);
 
 		[Obsolete("Removed in NEST 6.x.")]
-		public PutIndexTemplateDescriptor Template(string template)=> Assign(a => a.Template = template);
+		public PutIndexTemplateDescriptor Template(string template) => Assign(a => a.Template = template);
 
 		public PutIndexTemplateDescriptor Settings(Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> settingsSelector) =>
 			Assign(a => a.Settings = settingsSelector?.Invoke(new IndexSettingsDescriptor())?.Value);

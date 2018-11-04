@@ -3,7 +3,7 @@
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof (FieldNameQueryJsonConverter<TermQuery>))]
+	[JsonConverter(typeof(FieldNameQueryJsonConverter<TermQuery>))]
 	public interface ITermQuery : IFieldNameQuery
 	{
 		[JsonProperty("value")]
@@ -12,16 +12,17 @@ namespace Nest
 
 	public class TermQuery : FieldNameQueryBase, ITermQuery
 	{
-		protected override bool Conditionless => IsConditionless(this);
 		public object Value { get; set; }
+		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Term = this;
 
 		internal static bool IsConditionless(ITermQuery q) => q.Value == null || q.Value.ToString().IsNullOrEmpty() || q.Field.IsConditionless();
 	}
 
-	public abstract class TermQueryDescriptorBase<TDescriptor, T> : FieldNameQueryDescriptorBase<TDescriptor, ITermQuery, T>
-		, ITermQuery
+	public abstract class TermQueryDescriptorBase<TDescriptor, T>
+		: FieldNameQueryDescriptorBase<TDescriptor, ITermQuery, T>
+			, ITermQuery
 		where TDescriptor : TermQueryDescriptorBase<TDescriptor, T>
 		where T : class
 	{
@@ -36,7 +37,5 @@ namespace Nest
 	}
 
 	public class TermQueryDescriptor<T> : TermQueryDescriptorBase<TermQueryDescriptor<T>, T>
-		where T : class
-	{	
-	}
+		where T : class { }
 }

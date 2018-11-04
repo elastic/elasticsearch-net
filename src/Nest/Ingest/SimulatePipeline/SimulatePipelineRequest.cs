@@ -1,31 +1,29 @@
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Nest
 {
 	public partial interface ISimulatePipelineRequest
 	{
-		[JsonProperty("pipeline")]
-		IPipeline Pipeline { get; set; }
-
 		[JsonProperty("docs")]
 		IEnumerable<ISimulatePipelineDocument> Documents { get; set; }
+
+		[JsonProperty("pipeline")]
+		IPipeline Pipeline { get; set; }
 	}
 
 	public partial class SimulatePipelineRequest
 	{
-		public IPipeline Pipeline { get; set; }
-
 		public IEnumerable<ISimulatePipelineDocument> Documents { get; set; }
+		public IPipeline Pipeline { get; set; }
 	}
 
 	[DescriptorFor("IngestSimulate")]
 	public partial class SimulatePipelineDescriptor
 	{
-		IPipeline ISimulatePipelineRequest.Pipeline { get; set; }
-
 		IEnumerable<ISimulatePipelineDocument> ISimulatePipelineRequest.Documents { get; set; }
+		IPipeline ISimulatePipelineRequest.Pipeline { get; set; }
 
 		public SimulatePipelineDescriptor Pipeline(Func<PipelineDescriptor, IPipeline> pipeline) =>
 			Assign(a => a.Pipeline = pipeline?.Invoke(new PipelineDescriptor()));

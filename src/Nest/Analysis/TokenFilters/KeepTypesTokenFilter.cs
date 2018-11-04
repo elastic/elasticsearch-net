@@ -14,29 +14,28 @@ namespace Nest
 		[JsonProperty("types")]
 		IEnumerable<string> Types { get; set; }
 	}
-	/// <inheritdoc/>
+
+	/// <inheritdoc />
 	public class KeepTypesTokenFilter : TokenFilterBase
 	{
 		public KeepTypesTokenFilter() : base("keep_types") { }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IEnumerable<string> Types { get; set; }
-
 	}
-	///<inheritdoc/>
-	public class KeepTypesTokenFilterDescriptor 
+
+	/// <inheritdoc />
+	public class KeepTypesTokenFilterDescriptor
 		: TokenFilterDescriptorBase<KeepTypesTokenFilterDescriptor, IKeepTypesTokenFilter>, IKeepTypesTokenFilter
 	{
 		protected override string Type => "keep_types";
 
 		IEnumerable<string> IKeepTypesTokenFilter.Types { get; set; }
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public KeepTypesTokenFilterDescriptor Types(IEnumerable<string> types) => Assign(a => a.Types = types);
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public KeepTypesTokenFilterDescriptor Types(params string[] types) => Assign(a => a.Types = types);
-
 	}
-
 }

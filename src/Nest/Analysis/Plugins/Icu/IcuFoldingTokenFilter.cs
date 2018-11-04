@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -17,16 +15,16 @@ namespace Nest
 		string UnicodeSetFilter { get; set; }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class IcuFoldingTokenFilter : TokenFilterBase, IIcuFoldingTokenFilter
 	{
 		public IcuFoldingTokenFilter() : base("icu_folding") { }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public string UnicodeSetFilter { get; set; }
 	}
 
-	///<inheritdoc/>
+	/// <inheritdoc />
 	public class IcuFoldingTokenFilterDescriptor
 		: TokenFilterDescriptorBase<IcuFoldingTokenFilterDescriptor, IIcuFoldingTokenFilter>, IIcuFoldingTokenFilter
 	{
@@ -34,7 +32,7 @@ namespace Nest
 
 		string IIcuFoldingTokenFilter.UnicodeSetFilter { get; set; }
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public IcuFoldingTokenFilterDescriptor UnicodeSetFilter(string filter) =>
 			Assign(a => a.UnicodeSetFilter = filter);
 	}

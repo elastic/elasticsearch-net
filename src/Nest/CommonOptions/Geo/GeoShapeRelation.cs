@@ -9,10 +9,13 @@ namespace Nest
 	{
 		[EnumMember(Value = "intersects")]
 		Intersects,
+
 		[EnumMember(Value = "disjoint")]
 		Disjoint,
+
 		[EnumMember(Value = "within")]
 		Within,
+
 		[EnumMember(Value = "contains")]
 		Contains
 	}

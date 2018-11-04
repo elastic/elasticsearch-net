@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -14,7 +12,6 @@ namespace Nest
 
 		/// <summary>The number of back off retries were needed to store this document.</summary>
 		int Retries { get; }
-
 	}
 
 	/// <inheritdoc />
@@ -22,12 +19,12 @@ namespace Nest
 	public class BulkAllResponse : IBulkAllResponse
 	{
 		/// <inheritdoc />
+		public bool IsValid => true;
+
+		/// <inheritdoc />
 		public long Page { get; internal set; }
 
 		/// <inheritdoc />
 		public int Retries { get; internal set; }
-
-		/// <inheritdoc />
-		public bool IsValid => true;
 	}
 }

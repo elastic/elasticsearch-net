@@ -1,6 +1,4 @@
-﻿using Elasticsearch.Net;
-
-namespace Nest
+﻿namespace Nest
 {
 	public partial interface IDocumentExistsRequest { }
 
@@ -11,7 +9,5 @@ namespace Nest
 	public partial class DocumentExistsRequest<T> where T : class { }
 
 	[DescriptorFor("Exists")]
-	public partial class DocumentExistsDescriptor<T> where T : class
-	{
-	}
+	public partial class DocumentExistsDescriptor<T> where T : class { }
 }

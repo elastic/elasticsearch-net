@@ -6,6 +6,9 @@ namespace Nest
 	[JsonObject]
 	public class IndexingStats
 	{
+		[JsonProperty("index_current")]
+		public long Current { get; set; }
+
 		[JsonProperty("delete_current")]
 		public long DeleteCurrent { get; set; }
 
@@ -18,18 +21,6 @@ namespace Nest
 		[JsonProperty("delete_total")]
 		public long DeleteTotal { get; set; }
 
-		[JsonProperty("index_current")]
-		public long Current { get; set; }
-
-		[JsonProperty("index_time")]
-		public string Time { get; set; }
-
-		[JsonProperty("index_time_in_millis")]
-		public long TimeInMilliseconds { get; set; }
-
-		[JsonProperty("index_total")]
-		public long Total { get; set; }
-
 		[JsonProperty("is_throttled")]
 		public bool IsThrottled { get; set; }
 
@@ -41,6 +32,15 @@ namespace Nest
 
 		[JsonProperty("throttle_time_in_millis")]
 		public long ThrottleTimeInMilliseconds { get; set; }
+
+		[JsonProperty("index_time")]
+		public string Time { get; set; }
+
+		[JsonProperty("index_time_in_millis")]
+		public long TimeInMilliseconds { get; set; }
+
+		[JsonProperty("index_total")]
+		public long Total { get; set; }
 
 		[JsonProperty("types")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, IndexingStats>))]

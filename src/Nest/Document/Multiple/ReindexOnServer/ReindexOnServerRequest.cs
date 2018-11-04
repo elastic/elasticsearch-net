@@ -1,5 +1,4 @@
 ﻿using System;
-using System.CodeDom;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -8,8 +7,9 @@ namespace Nest
 {
 	public partial interface IReindexOnServerRequest
 	{
-		[JsonProperty("source")]
-		IReindexSource Source { get; set; }
+		[JsonProperty("conflicts")]
+		[JsonConverter(typeof(StringEnumConverter))]
+		Conflicts? Conflicts { get; set; }
 
 		[JsonProperty("dest")]
 		IReindexDestination Destination { get; set; }
@@ -20,28 +20,27 @@ namespace Nest
 		[JsonProperty("size")]
 		long? Size { get; set; }
 
-        [JsonProperty("conflicts")]
-        [JsonConverter(typeof(StringEnumConverter))]
-        Conflicts?  Conflicts { get; set; }
-    }
+		[JsonProperty("source")]
+		IReindexSource Source { get; set; }
+	}
 
 	public partial class ReindexOnServerRequest
 	{
-		public IReindexSource Source { get; set; }
+		public Conflicts? Conflicts { get; set; }
 		public IReindexDestination Destination { get; set; }
 		public IScript Script { get; set; }
 		public long? Size { get; set; }
-        public Conflicts? Conflicts { get; set; }
-    }
+		public IReindexSource Source { get; set; }
+	}
 
 	[DescriptorFor("Reindex")]
 	public partial class ReindexOnServerDescriptor
 	{
-		IReindexSource IReindexOnServerRequest.Source { get; set; }
+		Conflicts? IReindexOnServerRequest.Conflicts { get; set; }
 		IReindexDestination IReindexOnServerRequest.Destination { get; set; }
 		IScript IReindexOnServerRequest.Script { get; set; }
 		long? IReindexOnServerRequest.Size { get; set; }
-        Conflicts? IReindexOnServerRequest.Conflicts { get; set; }
+		IReindexSource IReindexOnServerRequest.Source { get; set; }
 
 		public ReindexOnServerDescriptor Source(Func<ReindexSourceDescriptor, IReindexSource> selector = null) =>
 			Assign(a => a.Source = selector.InvokeOrDefault(new ReindexSourceDescriptor()));
@@ -56,6 +55,6 @@ namespace Nest
 
 		public ReindexOnServerDescriptor Size(long? size) => Assign(a => a.Size = size);
 
-        public ReindexOnServerDescriptor Conflicts(Conflicts conflicts) => Assign(a => a.Conflicts = conflicts);
+		public ReindexOnServerDescriptor Conflicts(Conflicts conflicts) => Assign(a => a.Conflicts = conflicts);
 	}
 }

@@ -1,5 +1,4 @@
-﻿
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -29,14 +28,13 @@ namespace Nest
 
 		[JsonProperty("store")]
 		public StoreStats Store { get; internal set; }
-
 	}
 
 	[JsonObject]
 	public class ClusterIndicesShardsStats
 	{
-		[JsonProperty("total")]
-		public double Total { get; internal set; }
+		[JsonProperty("index")]
+		public ClusterIndicesShardsIndexStats Index { get; internal set; }
 
 		[JsonProperty("primaries")]
 		public double Primaries { get; internal set; }
@@ -44,33 +42,33 @@ namespace Nest
 		[JsonProperty("replication")]
 		public double Replication { get; internal set; }
 
-		[JsonProperty("index")]
-		public ClusterIndicesShardsIndexStats Index { get; internal set; }
+		[JsonProperty("total")]
+		public double Total { get; internal set; }
 	}
 
 	[JsonObject]
 	public class ClusterIndicesShardsIndexStats
 	{
-		[JsonProperty("shards")]
-		public ClusterShardMetrics Shards { get; internal set; }
-
 		[JsonProperty("primaries")]
 		public ClusterShardMetrics Primaries { get; internal set; }
 
 		[JsonProperty("replication")]
 		public ClusterShardMetrics Replication { get; internal set; }
+
+		[JsonProperty("shards")]
+		public ClusterShardMetrics Shards { get; internal set; }
 	}
 
 	[JsonObject]
 	public class ClusterShardMetrics
 	{
-		[JsonProperty("min")]
-		public double Min { get; internal set; }
+		[JsonProperty("avg")]
+		public double Avg { get; internal set; }
 
 		[JsonProperty("max")]
 		public double Max { get; internal set; }
 
-		[JsonProperty("avg")]
-		public double Avg { get; internal set; }
+		[JsonProperty("min")]
+		public double Min { get; internal set; }
 	}
 }

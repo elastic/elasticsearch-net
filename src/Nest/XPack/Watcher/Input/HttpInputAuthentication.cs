@@ -43,16 +43,16 @@ namespace Nest
 	public interface IHttpInputBasicAuthentication
 	{
 		/// <summary>
-		/// Username for Basic Authentication
-		/// </summary>
-		[JsonProperty("username")]
-		string Username { get; set; }
-
-		/// <summary>
 		/// Password for Basic Authentication
 		/// </summary>
 		[JsonProperty("password")]
 		string Password { get; set; }
+
+		/// <summary>
+		/// Username for Basic Authentication
+		/// </summary>
+		[JsonProperty("username")]
+		string Username { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -60,17 +60,18 @@ namespace Nest
 	public class HttpInputBasicAuthentication : IHttpInputBasicAuthentication
 	{
 		/// <inheritdoc />
-		public string Username { get; set; }
-		/// <inheritdoc />
 		public string Password { get; set; }
+
+		/// <inheritdoc />
+		public string Username { get; set; }
 	}
 
 	/// <inheritdoc />
 	public class HttpInputBasicAuthenticationDescriptor
 		: DescriptorBase<HttpInputBasicAuthenticationDescriptor, IHttpInputBasicAuthentication>, IHttpInputBasicAuthentication
 	{
-		string IHttpInputBasicAuthentication.Username { get; set; }
 		string IHttpInputBasicAuthentication.Password { get; set; }
+		string IHttpInputBasicAuthentication.Username { get; set; }
 
 		/// <inheritdoc />
 		public HttpInputBasicAuthenticationDescriptor Username(string username) =>

@@ -6,13 +6,12 @@ namespace Nest
 	public class TranslogStats
 	{
 		[JsonProperty("operations")]
-		public long Operations  { get; set; }
+		public long Operations { get; set; }
 
 		[JsonProperty("size")]
 		public string Size { get; set; }
 
 		[JsonProperty("size_in_bytes")]
-		public long SizeInBytes  { get; set; }
-
+		public long SizeInBytes { get; set; }
 	}
 }

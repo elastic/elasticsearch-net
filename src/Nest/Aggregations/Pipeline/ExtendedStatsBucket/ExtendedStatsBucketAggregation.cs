@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -17,8 +16,7 @@ namespace Nest
 		internal ExtendedStatsBucketAggregation() { }
 
 		public ExtendedStatsBucketAggregation(string name, SingleBucketsPath bucketsPath)
-			: base(name, bucketsPath)
-		{ }
+			: base(name, bucketsPath) { }
 
 		public double? Sigma { get; set; }
 
@@ -27,12 +25,10 @@ namespace Nest
 
 	public class ExtendedStatsBucketAggregationDescriptor
 		: PipelineAggregationDescriptorBase<ExtendedStatsBucketAggregationDescriptor, IExtendedStatsBucketAggregation, SingleBucketsPath>
-		, IExtendedStatsBucketAggregation
+			, IExtendedStatsBucketAggregation
 	{
-
 		double? IExtendedStatsBucketAggregation.Sigma { get; set; }
 
 		public ExtendedStatsBucketAggregationDescriptor Sigma(double sigma) => Assign(a => a.Sigma = sigma);
-
 	}
 }

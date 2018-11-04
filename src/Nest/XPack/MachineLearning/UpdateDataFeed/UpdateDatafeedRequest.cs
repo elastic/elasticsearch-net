@@ -138,7 +138,7 @@ namespace Nest
 		public UpdateDatafeedDescriptor<T> Indices<TOther>() => Assign(a => a.Indices = typeof(TOther));
 
 		///<summary>A shortcut into calling Indices(Indices.All)</summary>
-		public UpdateDatafeedDescriptor<T> AllIndices() => this.Indices(Nest.Indices.All);
+		public UpdateDatafeedDescriptor<T> AllIndices() => Indices(Nest.Indices.All);
 
 		/// <inheritdoc />
 		public UpdateDatafeedDescriptor<T> JobId(Id jobId) => Assign(a => a.JobId = jobId);
@@ -164,6 +164,6 @@ namespace Nest
 		public UpdateDatafeedDescriptor<T> Types<TOther>() => Assign(a => a.Types = typeof(TOther));
 
 		///<summary>a shortcut into calling Types(Types.All)</summary>
-		public UpdateDatafeedDescriptor<T> AllTypes() => this.Types(Nest.Types.All);
+		public UpdateDatafeedDescriptor<T> AllTypes() => Types(Nest.Types.All);
 	}
 }

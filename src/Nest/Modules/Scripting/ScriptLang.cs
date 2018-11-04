@@ -28,5 +28,4 @@ namespace Nest
 		[EnumMember(Value = "native")]
 		Native,
 	}
-
 }

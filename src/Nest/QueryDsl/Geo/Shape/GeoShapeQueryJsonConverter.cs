@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -12,7 +11,8 @@ namespace Nest
 	/// </summary>
 	internal class GeoShapeQueryFieldNameConverter : ReserializeJsonConverter<GeoShapeCircleQuery, IGeoShapeQuery>
 	{
-		private static readonly string[] SkipProperties = {"boost", "_name", "ignore_unmapped"};
+		private static readonly string[] SkipProperties = { "boost", "_name", "ignore_unmapped" };
+
 		protected override bool SkipWriteProperty(string propertyName) => SkipProperties.Contains(propertyName);
 
 		protected override void SerializeJson(JsonWriter writer, object value, IGeoShapeQuery castValue, JsonSerializer serializer)
@@ -32,16 +32,17 @@ namespace Nest
 			if (boost != null) writer.WriteProperty(serializer, "boost", boost);
 			if (ignoreUnmapped != null) writer.WriteProperty(serializer, "ignore_unmapped", ignoreUnmapped);
 			writer.WritePropertyName(field);
-			this.Reserialize(writer, value, serializer);
+			Reserialize(writer, value, serializer);
 			writer.WriteEndObject();
 		}
 	}
 
 	internal class GeoShapeQueryJsonConverter : JsonConverter
 	{
-		public override bool CanConvert(Type objectType) => true;
 		public override bool CanRead => true;
 		public override bool CanWrite => false;
+
+		public override bool CanConvert(Type objectType) => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -49,9 +50,9 @@ namespace Nest
 			if (j == null || !j.HasValues) return null;
 
 			double? boost = null;
-			string name  = null;
+			string name = null;
 			bool? ignoreUnmapped = null;
-			if (j.TryGetValue("boost", out var boostToken) && (boostToken.Type != JTokenType.Array && boostToken.Type != JTokenType.Object))
+			if (j.TryGetValue("boost", out var boostToken) && boostToken.Type != JTokenType.Array && boostToken.Type != JTokenType.Object)
 			{
 				j.Remove("boost");
 				boost = boostToken.Value<double?>();
@@ -81,6 +82,7 @@ namespace Nest
 				query = ParseIndexedShapeQuery(indexedShape);
 
 			if (query == null) return null;
+
 			var relation = jo["relation"]?.Value<string>().ToEnum<GeoShapeRelation>();
 			query.Boost = boost;
 			query.Name = name;
@@ -91,7 +93,7 @@ namespace Nest
 		}
 
 		private static IGeoShapeQuery ParseIndexedShapeQuery(JToken indexedShape) =>
-			new GeoIndexedShapeQuery {IndexedShape = (indexedShape as JObject)?.ToObject<FieldLookup>()};
+			new GeoIndexedShapeQuery { IndexedShape = (indexedShape as JObject)?.ToObject<FieldLookup>() };
 
 		private static IGeoShapeQuery ParseShapeQuery(JToken shape, JsonSerializer serializer)
 		{

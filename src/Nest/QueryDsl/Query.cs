@@ -60,7 +60,8 @@ namespace Nest
 		public static QueryContainer GeoShapeLineString(Func<GeoShapeLineStringQueryDescriptor<T>, IGeoShapeLineStringQuery> selector) =>
 			new QueryContainerDescriptor<T>().GeoShapeLineString(selector);
 
-		public static QueryContainer GeoShapeMultiLineString(Func<GeoShapeMultiLineStringQueryDescriptor<T>, IGeoShapeMultiLineStringQuery> selector) =>
+		public static QueryContainer
+			GeoShapeMultiLineString(Func<GeoShapeMultiLineStringQueryDescriptor<T>, IGeoShapeMultiLineStringQuery> selector) =>
 			new QueryContainerDescriptor<T>().GeoShapeMultiLineString(selector);
 
 		public static QueryContainer GeoShapeMultiPoint(Func<GeoShapeMultiPointQueryDescriptor<T>, IGeoShapeMultiPointQuery> selector) =>
@@ -75,7 +76,9 @@ namespace Nest
 		public static QueryContainer GeoShapePolygon(Func<GeoShapePolygonQueryDescriptor<T>, IGeoShapePolygonQuery> selector) =>
 			new QueryContainerDescriptor<T>().GeoShapePolygon(selector);
 
-		public static QueryContainer GeoShapeGeometryCollection(Func<GeoShapeGeometryCollectionQueryDescriptor<T>, IGeoShapeGeometryCollectionQuery> selector) =>
+		public static QueryContainer GeoShapeGeometryCollection(
+			Func<GeoShapeGeometryCollectionQueryDescriptor<T>, IGeoShapeGeometryCollectionQuery> selector
+		) =>
 			new QueryContainerDescriptor<T>().GeoShapeGeometryCollection(selector);
 
 		public static QueryContainer HasChild<TChild>(Func<HasChildQueryDescriptor<TChild>, IHasChildQuery> selector) where TChild : class =>
@@ -122,17 +125,22 @@ namespace Nest
 			new QueryContainerDescriptor<T>().Percolate(selector);
 
 		[Obsolete("Use overload that accepts MultiTermQueryRewrite as an argument")]
-		public static QueryContainer Prefix(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null, RewriteMultiTerm? rewrite = null, string name = null) =>
+		public static QueryContainer Prefix(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null,
+			RewriteMultiTerm? rewrite = null, string name = null
+		) =>
 			new QueryContainerDescriptor<T>().Prefix(fieldDescriptor, value, boost, rewrite, name);
 
-		public static QueryContainer Prefix(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null, MultiTermQueryRewrite rewrite = null, string name = null) =>
+		public static QueryContainer Prefix(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null,
+			MultiTermQueryRewrite rewrite = null, string name = null
+		) =>
 			new QueryContainerDescriptor<T>().Prefix(fieldDescriptor, value, boost, rewrite, name);
 
 		[Obsolete("Use overload that accepts MultiTermQueryRewrite as an argument")]
 		public static QueryContainer Prefix(Field field, string value, double? boost = null, RewriteMultiTerm? rewrite = null, string name = null) =>
 			new QueryContainerDescriptor<T>().Prefix(field, value, boost, rewrite, name);
 
-		public static QueryContainer Prefix(Field field, string value, double? boost = null, MultiTermQueryRewrite rewrite = null, string name = null) =>
+		public static QueryContainer Prefix(Field field, string value, double? boost = null, MultiTermQueryRewrite rewrite = null, string name = null
+		) =>
 			new QueryContainerDescriptor<T>().Prefix(field, value, boost, rewrite, name);
 
 		public static QueryContainer Prefix(Func<PrefixQueryDescriptor<T>, IPrefixQuery> selector) =>
@@ -205,17 +213,24 @@ namespace Nest
 		public static QueryContainer Type<TOther>() => Type(q => q.Value<TOther>());
 
 		[Obsolete("Use overload that accepts MultiTermQueryRewrite as an argument")]
-		public static QueryContainer Wildcard(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null, RewriteMultiTerm? rewrite = null, string name = null) =>
+		public static QueryContainer Wildcard(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null,
+			RewriteMultiTerm? rewrite = null, string name = null
+		) =>
 			new QueryContainerDescriptor<T>().Wildcard(fieldDescriptor, value, boost, rewrite, name);
 
-		public static QueryContainer Wildcard(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null, MultiTermQueryRewrite rewrite = null, string name = null) =>
+		public static QueryContainer Wildcard(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null,
+			MultiTermQueryRewrite rewrite = null, string name = null
+		) =>
 			new QueryContainerDescriptor<T>().Wildcard(fieldDescriptor, value, boost, rewrite, name);
 
 		[Obsolete("Use overload that accepts MultiTermQueryRewrite as an argument")]
-		public static QueryContainer Wildcard(Field field, string value, double? boost = null, RewriteMultiTerm? rewrite = null, string name = null) =>
+		public static QueryContainer Wildcard(Field field, string value, double? boost = null, RewriteMultiTerm? rewrite = null, string name = null
+		) =>
 			new QueryContainerDescriptor<T>().Wildcard(field, value, boost, rewrite, name);
 
-		public static QueryContainer Wildcard(Field field, string value, double? boost = null, MultiTermQueryRewrite rewrite = null, string name = null) =>
+		public static QueryContainer Wildcard(Field field, string value, double? boost = null, MultiTermQueryRewrite rewrite = null,
+			string name = null
+		) =>
 			new QueryContainerDescriptor<T>().Wildcard(field, value, boost, rewrite, name);
 
 		public static QueryContainer Wildcard(Func<WildcardQueryDescriptor<T>, IWildcardQuery> selector) =>

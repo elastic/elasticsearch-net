@@ -1,7 +1,5 @@
 using System;
-using System.Reflection;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -63,16 +61,22 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public IAnalysisConfig AnalysisConfig { get; set; }
+
 		/// <inheritdoc />
 		public IAnalysisLimits AnalysisLimits { get; set; }
+
 		/// <inheritdoc />
 		public IDataDescription DataDescription { get; set; }
+
 		/// <inheritdoc />
 		public string Description { get; set; }
+
 		/// <inheritdoc />
 		public IModelPlotConfig ModelPlotConfig { get; set; }
+
 		/// <inheritdoc />
 		public long? ModelSnapshotRetentionDays { get; set; }
+
 		/// <inheritdoc />
 		public IndexName ResultsIndexName { get; set; }
 	}
@@ -126,10 +130,13 @@ namespace Nest
 	{
 		[EnumMember(Value = "all")]
 		All,
+
 		[EnumMember(Value = "none")]
 		None,
+
 		[EnumMember(Value = "by")]
 		By,
+
 		[EnumMember(Value = "over")]
 		Over
 	}

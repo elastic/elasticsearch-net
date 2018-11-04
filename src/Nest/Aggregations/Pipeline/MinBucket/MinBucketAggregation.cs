@@ -9,7 +9,7 @@ namespace Nest
 	public class MinBucketAggregation
 		: PipelineAggregationBase, IMinBucketAggregation
 	{
-		internal MinBucketAggregation () { }
+		internal MinBucketAggregation() { }
 
 		public MinBucketAggregation(string name, SingleBucketsPath bucketsPath)
 			: base(name, bucketsPath) { }
@@ -19,7 +19,5 @@ namespace Nest
 
 	public class MinBucketAggregationDescriptor
 		: PipelineAggregationDescriptorBase<MinBucketAggregationDescriptor, IMinBucketAggregation, SingleBucketsPath>
-		, IMinBucketAggregation
-	{
-	}
+			, IMinBucketAggregation { }
 }

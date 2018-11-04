@@ -10,9 +10,6 @@ namespace Nest
 		[VariableField]
 		IBoundingBox BoundingBox { get; set; }
 
-		[JsonProperty("type")]
-		GeoExecution? Type { get; set; }
-
 		[Obsolete("Deprecated. Use ValidationMethod")]
 		[JsonProperty("coerce")]
 		bool? Coerce { get; set; }
@@ -21,6 +18,9 @@ namespace Nest
 		[JsonProperty("ignore_malformed")]
 		bool? IgnoreMalformed { get; set; }
 
+		[JsonProperty("type")]
+		GeoExecution? Type { get; set; }
+
 		[JsonProperty("validation_method")]
 		GeoValidationMethod? ValidationMethod { get; set; }
 	}
@@ -28,16 +28,17 @@ namespace Nest
 
 	public class GeoBoundingBoxQuery : FieldNameQueryBase, IGeoBoundingBoxQuery
 	{
-		protected override bool Conditionless => IsConditionless(this);
 		public IBoundingBox BoundingBox { get; set; }
-		public GeoExecution? Type { get; set; }
 
 		[Obsolete("Deprecated. Use ValidationMethod")]
 		public bool? Coerce { get; set; }
 
 		[Obsolete("Deprecated. Use ValidationMethod")]
 		public bool? IgnoreMalformed { get; set; }
+
+		public GeoExecution? Type { get; set; }
 		public GeoValidationMethod? ValidationMethod { get; set; }
+		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.GeoBoundingBox = this;
 
@@ -47,20 +48,20 @@ namespace Nest
 
 	public class GeoBoundingBoxQueryDescriptor<T>
 		: FieldNameQueryDescriptorBase<GeoBoundingBoxQueryDescriptor<T>, IGeoBoundingBoxQuery, T>
-		, IGeoBoundingBoxQuery where T : class
+			, IGeoBoundingBoxQuery where T : class
 	{
 		protected override bool Conditionless => GeoBoundingBoxQuery.IsConditionless(this);
 		IBoundingBox IGeoBoundingBoxQuery.BoundingBox { get; set; }
-		GeoExecution? IGeoBoundingBoxQuery.Type { get; set; }
 		bool? IGeoBoundingBoxQuery.Coerce { get; set; }
 		bool? IGeoBoundingBoxQuery.IgnoreMalformed { get; set; }
+		GeoExecution? IGeoBoundingBoxQuery.Type { get; set; }
 		GeoValidationMethod? IGeoBoundingBoxQuery.ValidationMethod { get; set; }
 
 		public GeoBoundingBoxQueryDescriptor<T> BoundingBox(double topLeftLat, double topLeftLon, double bottomRightLat, double bottomRightLon) =>
-			BoundingBox(f=>f.TopLeft(topLeftLat, topLeftLon).BottomRight(bottomRightLat, bottomRightLon));
+			BoundingBox(f => f.TopLeft(topLeftLat, topLeftLon).BottomRight(bottomRightLat, bottomRightLon));
 
 		public GeoBoundingBoxQueryDescriptor<T> BoundingBox(GeoLocation topLeft, GeoLocation bottomRight) =>
-			BoundingBox(f=>f.TopLeft(topLeft).BottomRight(bottomRight));
+			BoundingBox(f => f.TopLeft(topLeft).BottomRight(bottomRight));
 
 		public GeoBoundingBoxQueryDescriptor<T> BoundingBox(Func<BoundingBoxDescriptor, IBoundingBox> boundingBoxSelector) =>
 			Assign(a => a.BoundingBox = boundingBoxSelector?.Invoke(new BoundingBoxDescriptor()));

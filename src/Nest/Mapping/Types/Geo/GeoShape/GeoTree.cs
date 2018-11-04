@@ -9,6 +9,7 @@ namespace Nest
 	{
 		[EnumMember(Value = "geohash")]
 		Geohash,
+
 		[EnumMember(Value = "quadtree")]
 		Quadtree
 	}

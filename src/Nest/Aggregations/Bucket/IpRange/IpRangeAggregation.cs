@@ -19,18 +19,18 @@ namespace Nest
 
 	public class IpRangeAggregation : BucketAggregationBase, IIpRangeAggregation
 	{
-		public Field Field { get; set; }
-		public IEnumerable<IIpRange> Ranges { get; set; }
-
 		internal IpRangeAggregation() { }
 
 		public IpRangeAggregation(string name) : base(name) { }
 
+		public Field Field { get; set; }
+		public IEnumerable<IIpRange> Ranges { get; set; }
+
 		internal override void WrapInContainer(AggregationContainer c) => c.IpRange = this;
 	}
 
-	public class IpRangeAggregationDescriptor<T> :
-		BucketAggregationDescriptorBase<IpRangeAggregationDescriptor<T>,IIpRangeAggregation, T>
+	public class IpRangeAggregationDescriptor<T>
+		: BucketAggregationDescriptorBase<IpRangeAggregationDescriptor<T>, IIpRangeAggregation, T>
 			, IIpRangeAggregation
 		where T : class
 	{

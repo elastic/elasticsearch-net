@@ -2,7 +2,6 @@
 
 namespace Nest
 {
-
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(AggregationJsonConverter<ValueCountAggregation>))]
 	public interface IValueCountAggregation : IMetricAggregation { }
@@ -16,8 +15,8 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.ValueCount = this;
 	}
 
-	public class ValueCountAggregationDescriptor<T> 
+	public class ValueCountAggregationDescriptor<T>
 		: MetricAggregationDescriptorBase<ValueCountAggregationDescriptor<T>, IValueCountAggregation, T>
-			, IValueCountAggregation 
+			, IValueCountAggregation
 		where T : class { }
 }

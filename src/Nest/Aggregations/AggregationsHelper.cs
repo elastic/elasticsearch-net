@@ -1,115 +1,111 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace Nest
 {
 	public class AggregationsHelper
 	{
-		public IReadOnlyDictionary<string, IAggregate> Aggregations { get; protected internal set; } = EmptyReadOnly<string, IAggregate>.Dictionary;
-
 		public AggregationsHelper() { }
 
-		protected AggregationsHelper(IDictionary<string, IAggregate> aggregations)
-		{
-			this.Aggregations = aggregations != null ?
-				new Dictionary<string, IAggregate>(aggregations)
-				: EmptyReadOnly<string, IAggregate>.Dictionary;
-		}
-		public AggregationsHelper(IReadOnlyDictionary<string, IAggregate> aggregations)
-		{
-			this.Aggregations = aggregations ?? EmptyReadOnly<string, IAggregate>.Dictionary;
-		}
+		protected AggregationsHelper(IDictionary<string, IAggregate> aggregations) => Aggregations = aggregations != null
+			? new Dictionary<string, IAggregate>(aggregations)
+			: EmptyReadOnly<string, IAggregate>.Dictionary;
 
-		public ValueAggregate Min(string key) => this.TryGet<ValueAggregate>(key);
+		public AggregationsHelper(IReadOnlyDictionary<string, IAggregate> aggregations) =>
+			Aggregations = aggregations ?? EmptyReadOnly<string, IAggregate>.Dictionary;
 
-		public ValueAggregate Max(string key) => this.TryGet<ValueAggregate>(key);
+		public IReadOnlyDictionary<string, IAggregate> Aggregations { get; protected internal set; } = EmptyReadOnly<string, IAggregate>.Dictionary;
 
-		public ValueAggregate Sum(string key) => this.TryGet<ValueAggregate>(key);
+		public ValueAggregate Min(string key) => TryGet<ValueAggregate>(key);
 
-		public ValueAggregate Cardinality(string key) => this.TryGet<ValueAggregate>(key);
+		public ValueAggregate Max(string key) => TryGet<ValueAggregate>(key);
 
-		public ValueAggregate Average(string key) => this.TryGet<ValueAggregate>(key);
+		public ValueAggregate Sum(string key) => TryGet<ValueAggregate>(key);
 
-		public ValueAggregate ValueCount(string key) => this.TryGet<ValueAggregate>(key);
+		public ValueAggregate Cardinality(string key) => TryGet<ValueAggregate>(key);
 
-		public ValueAggregate AverageBucket(string key) => this.TryGet<ValueAggregate>(key);
+		public ValueAggregate Average(string key) => TryGet<ValueAggregate>(key);
 
-		public ValueAggregate Derivative(string key) => this.TryGet<ValueAggregate>(key);
+		public ValueAggregate ValueCount(string key) => TryGet<ValueAggregate>(key);
 
-		public ValueAggregate SumBucket(string key) => this.TryGet<ValueAggregate>(key);
+		public ValueAggregate AverageBucket(string key) => TryGet<ValueAggregate>(key);
 
-		public ValueAggregate MovingAverage(string key) => this.TryGet<ValueAggregate>(key);
+		public ValueAggregate Derivative(string key) => TryGet<ValueAggregate>(key);
 
-		public ValueAggregate CumulativeSum(string key) => this.TryGet<ValueAggregate>(key);
+		public ValueAggregate SumBucket(string key) => TryGet<ValueAggregate>(key);
 
-		public ValueAggregate BucketScript(string key) => this.TryGet<ValueAggregate>(key);
+		public ValueAggregate MovingAverage(string key) => TryGet<ValueAggregate>(key);
 
-		public ValueAggregate SerialDifferencing(string key) => this.TryGet<ValueAggregate>(key);
+		public ValueAggregate CumulativeSum(string key) => TryGet<ValueAggregate>(key);
 
-		public KeyedValueAggregate MaxBucket(string key) => this.TryGet<KeyedValueAggregate>(key);
+		public ValueAggregate BucketScript(string key) => TryGet<ValueAggregate>(key);
 
-		public KeyedValueAggregate MinBucket(string key) => this.TryGet<KeyedValueAggregate>(key);
+		public ValueAggregate SerialDifferencing(string key) => TryGet<ValueAggregate>(key);
+
+		public KeyedValueAggregate MaxBucket(string key) => TryGet<KeyedValueAggregate>(key);
+
+		public KeyedValueAggregate MinBucket(string key) => TryGet<KeyedValueAggregate>(key);
 
 		public ScriptedMetricAggregate ScriptedMetric(string key)
 		{
-			var valueMetric = this.TryGet<ValueAggregate>(key);
+			var valueMetric = TryGet<ValueAggregate>(key);
 
 			return valueMetric != null
 				? new ScriptedMetricAggregate { _Value = valueMetric.Value, Meta = valueMetric.Meta }
-				: this.TryGet<ScriptedMetricAggregate>(key);
+				: TryGet<ScriptedMetricAggregate>(key);
 		}
 
-		public StatsAggregate Stats(string key) => this.TryGet<StatsAggregate>(key);
+		public StatsAggregate Stats(string key) => TryGet<StatsAggregate>(key);
 
-		public StatsAggregate StatsBucket(string key) => this.TryGet<StatsAggregate>(key);
+		public StatsAggregate StatsBucket(string key) => TryGet<StatsAggregate>(key);
 
-		public ExtendedStatsAggregate ExtendedStats(string key) => this.TryGet<ExtendedStatsAggregate>(key);
+		public ExtendedStatsAggregate ExtendedStats(string key) => TryGet<ExtendedStatsAggregate>(key);
 
-		public ExtendedStatsAggregate ExtendedStatsBucket(string key) => this.TryGet<ExtendedStatsAggregate>(key);
+		public ExtendedStatsAggregate ExtendedStatsBucket(string key) => TryGet<ExtendedStatsAggregate>(key);
 
-		public GeoBoundsAggregate GeoBounds(string key) => this.TryGet<GeoBoundsAggregate>(key);
+		public GeoBoundsAggregate GeoBounds(string key) => TryGet<GeoBoundsAggregate>(key);
 
-		public PercentilesAggregate Percentiles(string key) => this.TryGet<PercentilesAggregate>(key);
+		public PercentilesAggregate Percentiles(string key) => TryGet<PercentilesAggregate>(key);
 
-		public PercentilesAggregate PercentilesBucket(string key) => this.TryGet<PercentilesAggregate>(key);
+		public PercentilesAggregate PercentilesBucket(string key) => TryGet<PercentilesAggregate>(key);
 
-		public PercentilesAggregate PercentileRanks(string key) => this.TryGet<PercentilesAggregate>(key);
+		public PercentilesAggregate PercentileRanks(string key) => TryGet<PercentilesAggregate>(key);
 
-		public TopHitsAggregate TopHits(string key) => this.TryGet<TopHitsAggregate>(key);
+		public TopHitsAggregate TopHits(string key) => TryGet<TopHitsAggregate>(key);
 
 		public FiltersAggregate Filters(string key)
 		{
-			var named = this.TryGet<FiltersAggregate>(key);
+			var named = TryGet<FiltersAggregate>(key);
 			if (named != null)
 				return named;
 
-			var anonymous = this.TryGet<BucketAggregate>(key);
+			var anonymous = TryGet<BucketAggregate>(key);
 			return anonymous != null
 				? new FiltersAggregate { Buckets = anonymous.Items.OfType<FiltersBucketItem>().ToList(), Meta = anonymous.Meta }
 				: null;
 		}
 
-		public SingleBucketAggregate Global(string key) => this.TryGet<SingleBucketAggregate>(key);
+		public SingleBucketAggregate Global(string key) => TryGet<SingleBucketAggregate>(key);
 
-		public SingleBucketAggregate Filter(string key) => this.TryGet<SingleBucketAggregate>(key);
+		public SingleBucketAggregate Filter(string key) => TryGet<SingleBucketAggregate>(key);
 
-		public SingleBucketAggregate Missing(string key) => this.TryGet<SingleBucketAggregate>(key);
+		public SingleBucketAggregate Missing(string key) => TryGet<SingleBucketAggregate>(key);
 
-		public SingleBucketAggregate Nested(string key) => this.TryGet<SingleBucketAggregate>(key);
+		public SingleBucketAggregate Nested(string key) => TryGet<SingleBucketAggregate>(key);
 
-		public SingleBucketAggregate ReverseNested(string key) => this.TryGet<SingleBucketAggregate>(key);
+		public SingleBucketAggregate ReverseNested(string key) => TryGet<SingleBucketAggregate>(key);
 
-		public SingleBucketAggregate Children(string key) => this.TryGet<SingleBucketAggregate>(key);
+		public SingleBucketAggregate Children(string key) => TryGet<SingleBucketAggregate>(key);
 
-		public SingleBucketAggregate Sampler(string key) => this.TryGet<SingleBucketAggregate>(key);
+		public SingleBucketAggregate Sampler(string key) => TryGet<SingleBucketAggregate>(key);
 
 		public GeoCentroidAggregate GeoCentroid(string key)
 		{
-			var geoCentroid = this.TryGet<GeoCentroidAggregate>(key);
+			var geoCentroid = TryGet<GeoCentroidAggregate>(key);
 			if (geoCentroid != null) return geoCentroid;
-			var singleBucket = this.TryGet<SingleBucketAggregate>(key);
+
+			var singleBucket = TryGet<SingleBucketAggregate>(key);
 			return new GeoCentroidAggregate()
 			{
 				Count = singleBucket?.DocCount ?? 0
@@ -118,7 +114,7 @@ namespace Nest
 
 		public SignificantTermsAggregate SignificantTerms(string key)
 		{
-			var bucket = this.TryGet<BucketAggregate>(key);
+			var bucket = TryGet<BucketAggregate>(key);
 			return bucket == null
 				? null
 				: new SignificantTermsAggregate
@@ -132,7 +128,7 @@ namespace Nest
 
 		public TermsAggregate<TKey> Terms<TKey>(string key)
 		{
-			var bucket = this.TryGet<BucketAggregate>(key);
+			var bucket = TryGet<BucketAggregate>(key);
 			return bucket == null
 				? null
 				: new TermsAggregate<TKey>
@@ -162,30 +158,33 @@ namespace Nest
 
 		public MultiBucketAggregate<DateHistogramBucket> DateHistogram(string key) => GetMultiBucketAggregate<DateHistogramBucket>(key);
 
-		public MatrixStatsAggregate MatrixStats(string key) => this.TryGet<MatrixStatsAggregate>(key);
+		public MatrixStatsAggregate MatrixStats(string key) => TryGet<MatrixStatsAggregate>(key);
 
 		private TAggregate TryGet<TAggregate>(string key)
 			where TAggregate : class, IAggregate
 		{
 			IAggregate agg;
-			return this.Aggregations.TryGetValue(key, out agg) ? agg as TAggregate : null;
+			return Aggregations.TryGetValue(key, out agg) ? agg as TAggregate : null;
 		}
 
 		private MultiBucketAggregate<TBucket> GetMultiBucketAggregate<TBucket>(string key)
 			where TBucket : IBucket
 		{
-			var bucket = this.TryGet<BucketAggregate>(key);
+			var bucket = TryGet<BucketAggregate>(key);
 			if (bucket == null) return null;
+
 			return new MultiBucketAggregate<TBucket>
 			{
 				Buckets = bucket.Items.OfType<TBucket>().ToList(),
 				Meta = bucket.Meta,
 			};
 		}
+
 		private MultiBucketAggregate<KeyedBucket<TKey>> GetMultiKeyedBucketAggregate<TKey>(string key)
 		{
-			var bucket = this.TryGet<BucketAggregate>(key);
+			var bucket = TryGet<BucketAggregate>(key);
 			if (bucket == null) return null;
+
 			return new MultiBucketAggregate<KeyedBucket<TKey>>
 			{
 				Buckets = GetKeyedBuckets<TKey>(bucket.Items).ToList(),
@@ -199,7 +198,6 @@ namespace Nest
 			var buckets = items.Cast<KeyedBucket<object>>();
 
 			foreach (var bucket in buckets)
-			{
 				yield return new KeyedBucket<TKey>
 				{
 					Key = (TKey)Convert.ChangeType(bucket.Key, typeof(TKey)),
@@ -208,7 +206,6 @@ namespace Nest
 					DocCount = bucket.DocCount,
 					DocCountErrorUpperBound = bucket.DocCountErrorUpperBound
 				};
-			}
 		}
 	}
 }

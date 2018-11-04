@@ -12,17 +12,17 @@ namespace Nest
 		[JsonProperty("body")]
 		string Body { get; set; }
 
-		[JsonProperty("format")]
-		HipChatMessageFormat? Format { get; set; }
-
 		[JsonProperty("color")]
 		HipChatMessageColor? Color { get; set; }
 
-		[JsonProperty("notify")]
-		bool? Notify { get; set; }
+		[JsonProperty("format")]
+		HipChatMessageFormat? Format { get; set; }
 
 		[JsonProperty("from")]
 		string From { get; set; }
+
+		[JsonProperty("notify")]
+		bool? Notify { get; set; }
 
 		[JsonProperty("room")]
 		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<string>))]
@@ -37,13 +37,13 @@ namespace Nest
 	{
 		public string Body { get; set; }
 
-		public HipChatMessageFormat? Format { get; set; }
-
 		public HipChatMessageColor? Color { get; set; }
 
-		public bool? Notify { get; set; }
+		public HipChatMessageFormat? Format { get; set; }
 
 		public string From { get; set; }
+
+		public bool? Notify { get; set; }
 
 		public IEnumerable<string> Room { get; set; }
 
@@ -53,10 +53,10 @@ namespace Nest
 	public class HipChatMessageDescriptor : DescriptorBase<HipChatMessageDescriptor, IHipChatMessage>, IHipChatMessage
 	{
 		string IHipChatMessage.Body { get; set; }
-		HipChatMessageFormat? IHipChatMessage.Format { get; set; }
 		HipChatMessageColor? IHipChatMessage.Color { get; set; }
-		bool? IHipChatMessage.Notify { get; set; }
+		HipChatMessageFormat? IHipChatMessage.Format { get; set; }
 		string IHipChatMessage.From { get; set; }
+		bool? IHipChatMessage.Notify { get; set; }
 		IEnumerable<string> IHipChatMessage.Room { get; set; }
 		IEnumerable<string> IHipChatMessage.User { get; set; }
 

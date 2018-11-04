@@ -11,18 +11,17 @@ namespace Nest
 		where TInterface : class, IProperty
 		where T : class
 	{
-		PropertyName IProperty.Name { get; set; }
-		TypeName IProperty.Type { get; set; }
-		IDictionary<string, object> IProperty.LocalMetadata { get; set; }
-
-		protected string DebugDisplay => $"Type: {Self.Type.DebugDisplay}, Name: {Self.Name.DebugDisplay} ";
-
 		[Obsolete("Please use overload taking FieldType")]
-		protected PropertyDescriptorBase(string type) { Self.Type = type; }
+		protected PropertyDescriptorBase(string type) => Self.Type = type;
 
 #pragma warning disable 618
-		protected PropertyDescriptorBase(FieldType type) : this(type.GetStringValue()){}
+		protected PropertyDescriptorBase(FieldType type) : this(type.GetStringValue()) { }
 #pragma warning restore 618
+
+		protected string DebugDisplay => $"Type: {Self.Type.DebugDisplay}, Name: {Self.Name.DebugDisplay} ";
+		IDictionary<string, object> IProperty.LocalMetadata { get; set; }
+		PropertyName IProperty.Name { get; set; }
+		TypeName IProperty.Type { get; set; }
 
 		public TDescriptor Name(PropertyName name) => Assign(a => a.Name = name);
 

@@ -8,13 +8,11 @@ namespace Nest
 	{
 		private readonly Type _genericRequestType;
 
-		protected DocumentJsonConverterBase(Type genericRequestType)
-		{
-			_genericRequestType = genericRequestType;
-		}
+		protected DocumentJsonConverterBase(Type genericRequestType) => _genericRequestType = genericRequestType;
 
 		public override bool CanRead => true;
 		public override bool CanWrite => true;
+
 		public override bool CanConvert(Type objectType) => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -23,7 +21,8 @@ namespace Nest
 			var genericType = objectType.GetTypeInfo().GenericTypeArguments[0];
 			var o = serializer.Deserialize(reader, genericType);
 			// index, type and id are optional parameters on _genericRequestType but need to be passed to construct through reflection
-			var x = _genericRequestType.CreateGenericInstance(genericType, typeof(DocumentPath<>).CreateGenericInstance(genericType, o), null, null, null);
+			var x = _genericRequestType.CreateGenericInstance(genericType, typeof(DocumentPath<>).CreateGenericInstance(genericType, o), null, null,
+				null);
 			return x;
 		}
 

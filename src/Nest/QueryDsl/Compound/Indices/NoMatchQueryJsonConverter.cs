@@ -5,7 +5,6 @@ namespace Nest
 {
 	internal class NoMatchQueryJsonConverter : ReserializeJsonConverter<QueryContainer, IQueryContainer>
 	{
-
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var nq = value as NoMatchQueryContainer;
@@ -29,7 +28,7 @@ namespace Nest
 				return base.ReadJson(reader, objectType, existingValue, serializer);
 
 			var en = serializer.Deserialize<NoMatchShortcut>(reader);
-			return new NoMatchQueryContainer {Shortcut = en};
+			return new NoMatchQueryContainer { Shortcut = en };
 		}
 	}
 }

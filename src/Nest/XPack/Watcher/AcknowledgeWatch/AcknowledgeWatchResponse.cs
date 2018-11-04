@@ -20,11 +20,8 @@ namespace Nest
 	[JsonObject]
 	public class WatchStatus
 	{
-		[JsonProperty("version")]
-		public int? Version { get; set; }
-
-		[JsonProperty("state")]
-		public ActivationState State { get; set; }
+		[JsonProperty("actions")]
+		public IReadOnlyDictionary<string, ActionStatus> Actions { get; set; }
 
 		[JsonProperty("last_checked")]
 		public DateTimeOffset? LastChecked { get; set; }
@@ -32,8 +29,11 @@ namespace Nest
 		[JsonProperty("last_met_condition")]
 		public DateTimeOffset? LastMetCondition { get; set; }
 
-		[JsonProperty("actions")]
-		public IReadOnlyDictionary<string, ActionStatus> Actions { get; set; }
+		[JsonProperty("state")]
+		public ActivationState State { get; set; }
+
+		[JsonProperty("version")]
+		public int? Version { get; set; }
 	}
 
 	public class ActionStatus
@@ -54,41 +54,41 @@ namespace Nest
 	[JsonObject]
 	public class ActivationState
 	{
-		[JsonProperty("timestamp")]
-		public DateTimeOffset Timestamp { get; set; }
-
 		[JsonProperty("active")]
 		public bool Active { get; set; }
+
+		[JsonProperty("timestamp")]
+		public DateTimeOffset Timestamp { get; set; }
 	}
 
 	[JsonObject]
 	public class AcknowledgeState
 	{
-		[JsonProperty("timestamp")]
-		public DateTimeOffset Timestamp { get; set; }
-
 		[JsonProperty("state")]
 		public AcknowledgementState State { get; set; }
+
+		[JsonProperty("timestamp")]
+		public DateTimeOffset Timestamp { get; set; }
 	}
 
 	[JsonObject]
 	public class ExecutionState
 	{
-		[JsonProperty("timestamp")]
-		public DateTimeOffset Timestamp { get; set; }
-
 		[JsonProperty("successful")]
 		public bool Successful { get; set; }
+
+		[JsonProperty("timestamp")]
+		public DateTimeOffset Timestamp { get; set; }
 	}
 
 	[JsonObject]
 	public class ThrottleState
 	{
-		[JsonProperty("timestamp")]
-		public DateTimeOffset Timestamp { get; set; }
-
 		[JsonProperty("reason")]
 		public string Reason { get; set; }
+
+		[JsonProperty("timestamp")]
+		public DateTimeOffset Timestamp { get; set; }
 	}
 
 	[JsonConverter(typeof(StringEnumConverter))]

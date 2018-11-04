@@ -9,8 +9,10 @@ namespace Nest
 	{
 		[EnumMember(Value = "int")]
 		Integer,
+
 		[EnumMember(Value = "float")]
 		Float,
+
 		[EnumMember(Value = "identity")]
 		Identity,
 	}

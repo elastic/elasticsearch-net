@@ -5,17 +5,16 @@ namespace Nest
 {
 	public interface IGetCategoriesResponse : IResponse
 	{
-		[JsonProperty("count")]
-		long Count { get; }
-
 		[JsonProperty("categories")]
 		IReadOnlyCollection<CategoryDefinition> Categories { get; }
+
+		[JsonProperty("count")]
+		long Count { get; }
 	}
 
 	public class GetCategoriesResponse : ResponseBase, IGetCategoriesResponse
 	{
-		public long Count { get; internal set; }
-
 		public IReadOnlyCollection<CategoryDefinition> Categories { get; internal set; } = EmptyReadOnly<CategoryDefinition>.Collection;
+		public long Count { get; internal set; }
 	}
 }

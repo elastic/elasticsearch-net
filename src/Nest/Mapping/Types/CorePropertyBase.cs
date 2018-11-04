@@ -8,8 +8,9 @@ namespace Nest
 	[ContractJsonConverter(typeof(PropertyJsonConverter))]
 	public interface ICoreProperty : IProperty
 	{
-		[JsonProperty("store")]
-		bool? Store { get; set; }
+		[JsonProperty("copy_to")]
+		[JsonConverter(typeof(FieldsJsonConverter))]
+		Fields CopyTo { get; set; }
 
 		[JsonProperty("fields", DefaultValueHandling = DefaultValueHandling.Ignore)]
 		IProperties Fields { get; set; }
@@ -17,9 +18,8 @@ namespace Nest
 		[JsonProperty("similarity")]
 		Union<SimilarityOption, string> Similarity { get; set; }
 
-		[JsonProperty("copy_to")]
-		[JsonConverter(typeof(FieldsJsonConverter))]
-		Fields CopyTo { get; set; }
+		[JsonProperty("store")]
+		bool? Store { get; set; }
 	}
 
 	[DebuggerDisplay("{DebugDisplay}")]
@@ -27,6 +27,7 @@ namespace Nest
 	{
 		[Obsolete("Removed in 6.0.")]
 		protected CorePropertyBase(TypeName typeName) : base(typeName) { }
+
 		protected CorePropertyBase(FieldType type) : base(type) { }
 
 

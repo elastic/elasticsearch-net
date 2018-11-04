@@ -11,8 +11,10 @@ namespace Nest
 	{
 		[EnumMember(Value = "memory")]
 		Memory,
+
 		[EnumMember(Value = "indexed")]
 		Indexed,
+
 		[EnumMember(Value = "none")]
 		None
 	}

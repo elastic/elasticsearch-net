@@ -1,9 +1,9 @@
 namespace Nest
 {
-	public partial interface IDeleteExpiredDataRequest {}
+	public partial interface IDeleteExpiredDataRequest { }
 
-	public partial class DeleteExpiredDataRequest {}
+	public partial class DeleteExpiredDataRequest { }
 
 	[DescriptorFor("XpackMlDeleteExpiredData")]
-	public partial class DeleteExpiredDataDescriptor {}
+	public partial class DeleteExpiredDataDescriptor { }
 }

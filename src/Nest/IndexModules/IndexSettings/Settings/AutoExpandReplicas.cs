@@ -10,17 +10,33 @@ namespace Nest
 		private Union<int?, string> _maxReplicas;
 		private int? _minReplicas;
 
+		public static AutoExpandReplicas Disabled { get; } = new AutoExpandReplicas();
+
 		/// <summary>
 		/// Whether auto expand replicas is enabled
 		/// </summary>
 		public bool Enabled { get; private set; }
 
 		/// <summary>
+		/// The upper bound of replicas. Can be an integer value or a string value of "all"
+		/// </summary>
+		public Union<int?, string> MaxReplicas
+		{
+			get => _maxReplicas;
+			private set
+			{
+				if (value == null && _minReplicas == null) Enabled = false;
+				else Enabled = true;
+				_maxReplicas = value;
+			}
+		}
+
+		/// <summary>
 		/// The lower bound of replicas
 		/// </summary>
 		public int? MinReplicas
 		{
-			get { return _minReplicas; }
+			get => _minReplicas;
 			private set
 			{
 				if (value == null && _maxReplicas == null) Enabled = false;
@@ -30,23 +46,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// The upper bound of replicas. Can be an integer value or a string value of "all"
-		/// </summary>
-		public Union<int?, string> MaxReplicas
-		{
-			get { return _maxReplicas; }
-			private set
-			{
-				if (value == null && _minReplicas == null) Enabled = false;
-				else Enabled = true;
-				_maxReplicas = value;
-			}
-		}
-
-		public static AutoExpandReplicas Disabled { get; } = new AutoExpandReplicas();
-
-		/// <summary>
-		/// Creates an <see cref="AutoExpandReplicas"/> with the specified lower and upper bounds of replicas
+		/// Creates an <see cref="AutoExpandReplicas" /> with the specified lower and upper bounds of replicas
 		/// </summary>
 		public static AutoExpandReplicas Create(int minReplicas, int maxReplicas)
 		{
@@ -68,7 +68,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Creates an <see cref="AutoExpandReplicas"/> with the specified lower bound of replicas and an
+		/// Creates an <see cref="AutoExpandReplicas" /> with the specified lower bound of replicas and an
 		/// "all" upper bound of replicas
 		/// </summary>
 		public static AutoExpandReplicas Create(int minReplicas)
@@ -85,7 +85,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Creates an <see cref="AutoExpandReplicas"/> with the specified lower and upper bounds of replicas
+		/// Creates an <see cref="AutoExpandReplicas" /> with the specified lower and upper bounds of replicas
 		/// </summary>
 		/// <example>0-5</example>
 		/// <example>0-all</example>
@@ -95,10 +95,7 @@ namespace Nest
 				throw new ArgumentException("cannot be null or empty", nameof(value));
 
 			var expandReplicaParts = value.Split('-');
-			if (expandReplicaParts.Length != 2)
-			{
-				throw new ArgumentException("must contain a 'from' and 'to' value", nameof(value));
-			}
+			if (expandReplicaParts.Length != 2) throw new ArgumentException("must contain a 'from' and 'to' value", nameof(value));
 
 			int minReplicas;
 			if (!int.TryParse(expandReplicaParts[0], out minReplicas))
@@ -125,6 +122,7 @@ namespace Nest
 		public override string ToString()
 		{
 			if (!Enabled) return "false";
+
 			var maxReplicas = MaxReplicas.Match(i => i.ToString(), s => s);
 			return string.Join("-", MinReplicas, maxReplicas);
 		}

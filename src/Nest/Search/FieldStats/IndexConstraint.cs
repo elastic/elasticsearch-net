@@ -1,26 +1,22 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
 	public interface IIndexConstraint
 	{
-		[JsonProperty("min_value")]
-		IIndexConstraintComparison MinValue { get; set; }
-
 		[JsonProperty("max_value")]
 		IIndexConstraintComparison MaxValue { get; set; }
+
+		[JsonProperty("min_value")]
+		IIndexConstraintComparison MinValue { get; set; }
 	}
 
 	[JsonObject]
 	public class IndexConstraint : IIndexConstraint
 	{
-		public IIndexConstraintComparison MinValue { get; set; }
 		public IIndexConstraintComparison MaxValue { get; set; }
+		public IIndexConstraintComparison MinValue { get; set; }
 	}
 
 	public class IndexConstraintDescriptor
@@ -38,29 +34,29 @@ namespace Nest
 
 	public interface IIndexConstraintComparison
 	{
-		[JsonProperty("gte")]
-		string GreaterThanOrEqualTo { get; set; }
+		[JsonProperty("format")]
+		string Format { get; set; }
 
 		[JsonProperty("gt")]
 		string GreaterThan { get; set; }
 
-		[JsonProperty("lte")]
-		string LessThanOrEqualTo { get; set; }
+		[JsonProperty("gte")]
+		string GreaterThanOrEqualTo { get; set; }
 
 		[JsonProperty("lt")]
 		string LessThan { get; set; }
 
-		[JsonProperty("format")]
-		string Format { get; set; }
+		[JsonProperty("lte")]
+		string LessThanOrEqualTo { get; set; }
 	}
 
 	public class IndexConstraintComparison : IIndexConstraintComparison
 	{
-		public string GreaterThanOrEqualTo { get; set; }
-		public string GreaterThan { get; set; }
-		public string LessThanOrEqualTo { get; set; }
-		public string LessThan { get; set; }
 		public string Format { get; set; }
+		public string GreaterThan { get; set; }
+		public string GreaterThanOrEqualTo { get; set; }
+		public string LessThan { get; set; }
+		public string LessThanOrEqualTo { get; set; }
 	}
 
 	public class IndexConstraintComparisonDescriptor
@@ -73,9 +69,13 @@ namespace Nest
 		string IIndexConstraintComparison.LessThanOrEqualTo { get; set; }
 
 		public IndexConstraintComparisonDescriptor Format(string format) => Assign(a => a.Format = format);
+
 		public IndexConstraintComparisonDescriptor GreaterThan(string gt) => Assign(a => a.GreaterThan = gt);
+
 		public IndexConstraintComparisonDescriptor GreaterThanOrEqualTo(string gte) => Assign(a => a.GreaterThanOrEqualTo = gte);
+
 		public IndexConstraintComparisonDescriptor LessThan(string lt) => Assign(a => a.LessThan = lt);
+
 		public IndexConstraintComparisonDescriptor LessThanOrEqualTo(string lte) => Assign(a => a.LessThanOrEqualTo = lte);
 	}
 }

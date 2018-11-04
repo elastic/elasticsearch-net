@@ -6,17 +6,17 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public interface IGeoShapeProperty : IDocValuesProperty
 	{
-		[JsonProperty("tree")]
-		GeoTree? Tree { get; set; }
-
-		[JsonProperty("precision")]
-		Distance Precision { get; set; }
+		[JsonProperty("distance_error_pct")]
+		double? DistanceErrorPercentage { get; set; }
 
 		[JsonProperty("orientation")]
 		GeoOrientation? Orientation { get; set; }
 
-		[JsonProperty("tree_levels")]
-		int? TreeLevels { get; set; }
+		[JsonProperty("points_only")]
+		bool? PointsOnly { get; set; }
+
+		[JsonProperty("precision")]
+		Distance Precision { get; set; }
 
 		/// <summary>
 		/// defines the approach for how to represent shapes at indexing and search time.
@@ -26,11 +26,11 @@ namespace Nest
 		[JsonProperty("strategy")]
 		GeoStrategy? Strategy { get; set; }
 
-		[JsonProperty("distance_error_pct")]
-		double? DistanceErrorPercentage { get; set; }
+		[JsonProperty("tree")]
+		GeoTree? Tree { get; set; }
 
-		[JsonProperty("points_only")]
-		bool? PointsOnly { get; set; }
+		[JsonProperty("tree_levels")]
+		int? TreeLevels { get; set; }
 	}
 
 	[DebuggerDisplay("{DebugDisplay}")]
@@ -38,19 +38,19 @@ namespace Nest
 	{
 		public GeoShapeProperty() : base(FieldType.GeoShape) { }
 
-		public GeoTree? Tree { get; set; }
-
-		public Distance Precision { get; set; }
+		public double? DistanceErrorPercentage { get; set; }
 
 		public GeoOrientation? Orientation { get; set; }
 
-		public int? TreeLevels { get; set; }
+		public bool? PointsOnly { get; set; }
+
+		public Distance Precision { get; set; }
 
 		public GeoStrategy? Strategy { get; set; }
 
-		public double? DistanceErrorPercentage { get; set; }
+		public GeoTree? Tree { get; set; }
 
-		public bool? PointsOnly { get; set; }
+		public int? TreeLevels { get; set; }
 	}
 
 	[DebuggerDisplay("{DebugDisplay}")]
@@ -58,15 +58,15 @@ namespace Nest
 		: DocValuesPropertyDescriptorBase<GeoShapePropertyDescriptor<T>, IGeoShapeProperty, T>, IGeoShapeProperty
 		where T : class
 	{
-		GeoTree? IGeoShapeProperty.Tree { get; set; }
-		Distance IGeoShapeProperty.Precision { get; set; }
-		GeoOrientation? IGeoShapeProperty.Orientation { get; set; }
-		int? IGeoShapeProperty.TreeLevels { get; set; }
-		GeoStrategy? IGeoShapeProperty.Strategy { get; set; }
-		double? IGeoShapeProperty.DistanceErrorPercentage { get; set; }
-		bool? IGeoShapeProperty.PointsOnly { get; set; }
-
 		public GeoShapePropertyDescriptor() : base(FieldType.GeoShape) { }
+
+		double? IGeoShapeProperty.DistanceErrorPercentage { get; set; }
+		GeoOrientation? IGeoShapeProperty.Orientation { get; set; }
+		bool? IGeoShapeProperty.PointsOnly { get; set; }
+		Distance IGeoShapeProperty.Precision { get; set; }
+		GeoStrategy? IGeoShapeProperty.Strategy { get; set; }
+		GeoTree? IGeoShapeProperty.Tree { get; set; }
+		int? IGeoShapeProperty.TreeLevels { get; set; }
 
 		public GeoShapePropertyDescriptor<T> Tree(GeoTree tree) => Assign(a => a.Tree = tree);
 

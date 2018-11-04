@@ -11,6 +11,22 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public interface IGenericProperty : IDocValuesProperty
 	{
+		[JsonProperty("analyzer")]
+		string Analyzer { get; set; }
+
+		[JsonProperty("boost")]
+		double? Boost { get; set; }
+
+		[JsonProperty("fielddata")]
+		IStringFielddata Fielddata { get; set; }
+
+		[JsonProperty("ignore_above")]
+		int? IgnoreAbove { get; set; }
+
+		[JsonProperty("include_in_all")]
+		/// <remarks>Removed in 6.x</remarks>
+		bool? IncludeInAll { get; set; }
+
 		[JsonIgnore]
 		[Obsolete("Please use Indexed. Will be fixed in NEST 7.x")]
 		FieldIndexOption? Index { get; set; }
@@ -18,39 +34,23 @@ namespace Nest
 		[JsonProperty("index")]
 		bool? Indexed { get; set; }
 
-		[JsonProperty("term_vector")]
-		TermVectorOption? TermVector { get; set; }
-
-		[JsonProperty("boost")]
-		double? Boost { get; set; }
-
-		[JsonProperty("null_value")]
-		string NullValue { get; set; }
+		[JsonProperty("index_options")]
+		IndexOptions? IndexOptions { get; set; }
 
 		[JsonProperty("norms")]
 		bool? Norms { get; set; }
 
-		[JsonProperty("index_options")]
-		IndexOptions? IndexOptions { get; set; }
-
-		[JsonProperty("analyzer")]
-		string Analyzer { get; set; }
-
-		[JsonProperty("search_analyzer")]
-		string SearchAnalyzer { get; set; }
-
-		[JsonProperty("include_in_all")]
-		/// <remarks>Removed in 6.x</remarks>
-		bool? IncludeInAll { get; set; }
-
-		[JsonProperty("ignore_above")]
-		int? IgnoreAbove { get; set; }
+		[JsonProperty("null_value")]
+		string NullValue { get; set; }
 
 		[JsonProperty("position_increment_gap")]
 		int? PositionIncrementGap { get; set; }
 
-		[JsonProperty("fielddata")]
-		IStringFielddata Fielddata { get; set; }
+		[JsonProperty("search_analyzer")]
+		string SearchAnalyzer { get; set; }
+
+		[JsonProperty("term_vector")]
+		TermVectorOption? TermVector { get; set; }
 	}
 
 	/// <summary>
@@ -65,15 +65,13 @@ namespace Nest
 #pragma warning disable 618
 		public GenericProperty() : base(null) { }
 #pragma warning restore 618
-
-		public TermVectorOption? TermVector { get; set; }
+		public string Analyzer { get; set; }
 		public double? Boost { get; set; }
-		public string SearchAnalyzer { get; set; }
+		public IStringFielddata Fielddata { get; set; }
+		public int? IgnoreAbove { get; set; }
+
 		/// <remarks>Removed in 6.x</remarks>
 		public bool? IncludeInAll { get; set; }
-		public int? IgnoreAbove { get; set; }
-		public int? PositionIncrementGap { get; set; }
-		public IStringFielddata Fielddata { get; set; }
 
 		[Obsolete("Please use Indexed. Will be fixed in NEST 7.x")]
 		public FieldIndexOption? Index
@@ -99,10 +97,13 @@ namespace Nest
 		}
 
 		public bool? Indexed { get; set; }
-		public string NullValue { get; set; }
-		public bool? Norms { get; set; }
 		public IndexOptions? IndexOptions { get; set; }
-		public string Analyzer { get; set; }
+		public bool? Norms { get; set; }
+		public string NullValue { get; set; }
+		public int? PositionIncrementGap { get; set; }
+		public string SearchAnalyzer { get; set; }
+
+		public TermVectorOption? TermVector { get; set; }
 	}
 
 	/// <summary>
@@ -116,6 +117,17 @@ namespace Nest
 		where T : class
 	{
 		private FieldIndexOption? _index;
+
+#pragma warning disable 618
+		public GenericPropertyDescriptor() : base(null) { }
+#pragma warning restore 618
+		string IGenericProperty.Analyzer { get; set; }
+		double? IGenericProperty.Boost { get; set; }
+		IStringFielddata IGenericProperty.Fielddata { get; set; }
+		int? IGenericProperty.IgnoreAbove { get; set; }
+
+		/// <remarks>Removed in 6.x</remarks>
+		bool? IGenericProperty.IncludeInAll { get; set; }
 
 		FieldIndexOption? IGenericProperty.Index
 		{
@@ -140,22 +152,12 @@ namespace Nest
 		}
 
 		bool? IGenericProperty.Indexed { get; set; }
-		TermVectorOption? IGenericProperty.TermVector { get; set; }
-		double? IGenericProperty.Boost { get; set; }
-		string IGenericProperty.NullValue { get; set; }
-		bool? IGenericProperty.Norms { get; set; }
 		IndexOptions? IGenericProperty.IndexOptions { get; set; }
-		string IGenericProperty.Analyzer { get; set; }
-		string IGenericProperty.SearchAnalyzer { get; set; }
-		/// <remarks>Removed in 6.x</remarks>
-		bool? IGenericProperty.IncludeInAll { get; set; }
-		int? IGenericProperty.IgnoreAbove { get; set; }
+		bool? IGenericProperty.Norms { get; set; }
+		string IGenericProperty.NullValue { get; set; }
 		int? IGenericProperty.PositionIncrementGap { get; set; }
-		IStringFielddata IGenericProperty.Fielddata { get; set; }
-
-#pragma warning disable 618
-		public GenericPropertyDescriptor() : base(null) { }
-#pragma warning restore 618
+		string IGenericProperty.SearchAnalyzer { get; set; }
+		TermVectorOption? IGenericProperty.TermVector { get; set; }
 
 		public GenericPropertyDescriptor<T> Type(string type) => Assign(a => a.Type = type);
 
@@ -189,7 +191,8 @@ namespace Nest
 
 		public GenericPropertyDescriptor<T> IgnoreAbove(int ignoreAbove) => Assign(a => a.IgnoreAbove = ignoreAbove);
 
-		public GenericPropertyDescriptor<T> PositionIncrementGap(int? positionIncrementGap) => Assign(a => a.PositionIncrementGap = positionIncrementGap);
+		public GenericPropertyDescriptor<T> PositionIncrementGap(int? positionIncrementGap) =>
+			Assign(a => a.PositionIncrementGap = positionIncrementGap);
 
 		public GenericPropertyDescriptor<T> Fielddata(Func<StringFielddataDescriptor, IStringFielddata> selector) =>
 			Assign(a => a.Fielddata = selector?.Invoke(new StringFielddataDescriptor()));

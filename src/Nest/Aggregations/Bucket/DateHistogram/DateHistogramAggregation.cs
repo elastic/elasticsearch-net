@@ -9,33 +9,6 @@ namespace Nest
 	[ContractJsonConverter(typeof(AggregationJsonConverter<DateHistogramAggregation>))]
 	public interface IDateHistogramAggregation : IBucketAggregation
 	{
-		[JsonProperty("field")]
-		Field Field { get; set; }
-
-		[JsonProperty("script")]
-		IScript Script { get; set; }
-
-		[JsonProperty("params")]
-		IDictionary<string, object> Params { get; set; }
-
-		[JsonProperty("interval")]
-		Union<DateInterval, Time> Interval { get; set; }
-
-		[JsonProperty("format")]
-		string Format { get; set; }
-
-		[JsonProperty("min_doc_count")]
-		int? MinimumDocumentCount { get; set; }
-
-		[JsonProperty("time_zone")]
-		string TimeZone { get; set; }
-
-		[JsonProperty("offset")]
-		string Offset { get; set; }
-
-		[JsonProperty("order")]
-		HistogramOrder Order { get; set; }
-
 		[JsonIgnore]
 		[Obsolete("Use ExtendedBoundsDateMath that accepts DateMath expressions. Fixed in NEST 6.x")]
 		ExtendedBounds<DateTime> ExtendedBounds { get; set; }
@@ -43,33 +16,45 @@ namespace Nest
 		[JsonProperty("extended_bounds")]
 		ExtendedBounds<DateMath> ExtendedBoundsDateMath { get; set; }
 
+		[JsonProperty("field")]
+		Field Field { get; set; }
+
+		[JsonProperty("format")]
+		string Format { get; set; }
+
+		[JsonProperty("interval")]
+		Union<DateInterval, Time> Interval { get; set; }
+
+		[JsonProperty("min_doc_count")]
+		int? MinimumDocumentCount { get; set; }
+
 		[JsonProperty("missing")]
 		DateTime? Missing { get; set; }
+
+		[JsonProperty("offset")]
+		string Offset { get; set; }
+
+		[JsonProperty("order")]
+		HistogramOrder Order { get; set; }
+
+		[JsonProperty("params")]
+		IDictionary<string, object> Params { get; set; }
+
+		[JsonProperty("script")]
+		IScript Script { get; set; }
+
+		[JsonProperty("time_zone")]
+		string TimeZone { get; set; }
 	}
 
 	public class DateHistogramAggregation : BucketAggregationBase, IDateHistogramAggregation
 	{
-		private string _format;
 		private ExtendedBounds<DateTime> _extendedBounds;
-		public Field Field { get; set; }
-		public IScript Script { get; set; }
-		public IDictionary<string, object> Params { get; set; }
-		public Union<DateInterval, Time> Interval { get; set; }
+		private string _format;
 
-		public string Format
-		{
-			get => !string.IsNullOrEmpty(_format) &&
-			       !_format.Contains("date_optional_time") &&
-			       (ExtendedBoundsDateMath != null || Missing.HasValue)
-				? _format + "||date_optional_time"
-				: _format;
-			set => _format = value;
-		}
+		internal DateHistogramAggregation() { }
 
-		public int? MinimumDocumentCount { get; set; }
-		public string TimeZone { get; set; }
-		public string Offset { get; set; }
-		public HistogramOrder Order { get; set; }
+		public DateHistogramAggregation(string name) : base(name) { }
 
 		[Obsolete("Use ExtendedBoundsDateMath that accepts DateMath expressions. Fixed in NEST 6.x")]
 		public ExtendedBounds<DateTime> ExtendedBounds
@@ -89,12 +74,28 @@ namespace Nest
 		}
 
 		public ExtendedBounds<DateMath> ExtendedBoundsDateMath { get; set; }
+		public Field Field { get; set; }
+
+		public string Format
+		{
+			get => !string.IsNullOrEmpty(_format) &&
+				!_format.Contains("date_optional_time") &&
+				(ExtendedBoundsDateMath != null || Missing.HasValue)
+					? _format + "||date_optional_time"
+					: _format;
+			set => _format = value;
+		}
+
+		public Union<DateInterval, Time> Interval { get; set; }
+
+		public int? MinimumDocumentCount { get; set; }
 
 		public DateTime? Missing { get; set; }
-
-		internal DateHistogramAggregation() { }
-
-		public DateHistogramAggregation(string name) : base(name) { }
+		public string Offset { get; set; }
+		public HistogramOrder Order { get; set; }
+		public IDictionary<string, object> Params { get; set; }
+		public IScript Script { get; set; }
+		public string TimeZone { get; set; }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.DateHistogram = this;
 	}
@@ -104,33 +105,8 @@ namespace Nest
 			, IDateHistogramAggregation
 		where T : class
 	{
-		private string _format;
 		private ExtendedBounds<DateTime> _extendedBounds;
-		Field IDateHistogramAggregation.Field { get; set; }
-
-		IScript IDateHistogramAggregation.Script { get; set; }
-
-		IDictionary<string, object> IDateHistogramAggregation.Params { get; set; }
-
-		Union<DateInterval, Time> IDateHistogramAggregation.Interval { get; set; }
-
-		string IDateHistogramAggregation.Format
-		{
-			get => !string.IsNullOrEmpty(_format) &&
-			       !_format.Contains("date_optional_time") &&
-			       (Self.ExtendedBoundsDateMath != null || Self.Missing.HasValue)
-				? _format + "||date_optional_time"
-				: _format;
-			set => _format = value;
-		}
-
-		int? IDateHistogramAggregation.MinimumDocumentCount { get; set; }
-
-		string IDateHistogramAggregation.TimeZone { get; set; }
-
-		string IDateHistogramAggregation.Offset { get; set; }
-
-		HistogramOrder IDateHistogramAggregation.Order { get; set; }
+		private string _format;
 
 		[Obsolete("Use ExtendedBoundsDateMath that accepts DateMath expressions. Fixed in NEST 6.x")]
 		ExtendedBounds<DateTime> IDateHistogramAggregation.ExtendedBounds
@@ -150,8 +126,33 @@ namespace Nest
 		}
 
 		ExtendedBounds<DateMath> IDateHistogramAggregation.ExtendedBoundsDateMath { get; set; }
+		Field IDateHistogramAggregation.Field { get; set; }
+
+		string IDateHistogramAggregation.Format
+		{
+			get => !string.IsNullOrEmpty(_format) &&
+				!_format.Contains("date_optional_time") &&
+				(Self.ExtendedBoundsDateMath != null || Self.Missing.HasValue)
+					? _format + "||date_optional_time"
+					: _format;
+			set => _format = value;
+		}
+
+		Union<DateInterval, Time> IDateHistogramAggregation.Interval { get; set; }
+
+		int? IDateHistogramAggregation.MinimumDocumentCount { get; set; }
 
 		DateTime? IDateHistogramAggregation.Missing { get; set; }
+
+		string IDateHistogramAggregation.Offset { get; set; }
+
+		HistogramOrder IDateHistogramAggregation.Order { get; set; }
+
+		IDictionary<string, object> IDateHistogramAggregation.Params { get; set; }
+
+		IScript IDateHistogramAggregation.Script { get; set; }
+
+		string IDateHistogramAggregation.TimeZone { get; set; }
 
 		public DateHistogramAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
@@ -186,10 +187,10 @@ namespace Nest
 
 		[Obsolete("Use ExtendedBoundsDateMath() that accepts DateMath expressions. Fixed in NEST 6.x")]
 		public DateHistogramAggregationDescriptor<T> ExtendedBounds(DateTime min, DateTime max) =>
-			Assign(a=>a.ExtendedBounds = new ExtendedBounds<DateTime> { Minimum = min, Maximum = max });
+			Assign(a => a.ExtendedBounds = new ExtendedBounds<DateTime> { Minimum = min, Maximum = max });
 
 		public DateHistogramAggregationDescriptor<T> ExtendedBoundsDateMath(DateMath min, DateMath max) =>
-			Assign(a=>a.ExtendedBoundsDateMath = new ExtendedBounds<DateMath> { Minimum = min, Maximum = max });
+			Assign(a => a.ExtendedBoundsDateMath = new ExtendedBounds<DateMath> { Minimum = min, Maximum = max });
 
 		public DateHistogramAggregationDescriptor<T> Missing(DateTime missing) => Assign(a => a.Missing = missing);
 	}

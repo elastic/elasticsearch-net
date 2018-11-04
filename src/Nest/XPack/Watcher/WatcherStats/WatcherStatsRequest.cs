@@ -1,9 +1,9 @@
 ﻿namespace Nest
 {
-	public partial interface IWatcherStatsRequest {}
+	public partial interface IWatcherStatsRequest { }
 
-	public partial class WatcherStatsRequest {}
+	public partial class WatcherStatsRequest { }
 
 	[DescriptorFor("XpackWatcherStats")]
-	public partial class WatcherStatsDescriptor {}
+	public partial class WatcherStatsDescriptor { }
 }

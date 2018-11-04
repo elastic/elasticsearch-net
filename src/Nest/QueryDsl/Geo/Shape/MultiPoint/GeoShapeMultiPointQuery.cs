@@ -12,16 +12,18 @@ namespace Nest
 
 	public class GeoShapeMultiPointQuery : GeoShapeQueryBase, IGeoShapeMultiPointQuery
 	{
-		protected override bool Conditionless => IsConditionless(this);
 		public IMultiPointGeoShape Shape { get; set; }
+		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.GeoShape = this;
-		internal static bool IsConditionless(IGeoShapeMultiPointQuery q) => q.Field.IsConditionless() || q.Shape == null || !q.Shape.Coordinates.HasAny();
+
+		internal static bool IsConditionless(IGeoShapeMultiPointQuery q) =>
+			q.Field.IsConditionless() || q.Shape == null || !q.Shape.Coordinates.HasAny();
 	}
 
 	public class GeoShapeMultiPointQueryDescriptor<T>
 		: GeoShapeQueryDescriptorBase<GeoShapeMultiPointQueryDescriptor<T>, IGeoShapeMultiPointQuery, T>
-		, IGeoShapeMultiPointQuery where T : class
+			, IGeoShapeMultiPointQuery where T : class
 	{
 		protected override bool Conditionless => GeoShapeMultiPointQuery.IsConditionless(this);
 		IMultiPointGeoShape IGeoShapeMultiPointQuery.Shape { get; set; }

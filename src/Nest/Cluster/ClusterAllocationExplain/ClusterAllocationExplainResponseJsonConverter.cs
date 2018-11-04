@@ -1,8 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Collections.ObjectModel;
-using System.Collections.Generic;
 
 namespace Nest
 {
@@ -29,9 +28,7 @@ namespace Nest
 				{
 					case "shard":
 						if (p.Value.Type == JTokenType.Object)
-						{
 							response.Shard = p.Value.ToObject<ShardAllocationExplanation>();
-						}
 						else if (p.Value.Type == JTokenType.Integer)
 						{
 							newResponseStructure = true;
@@ -145,9 +142,6 @@ namespace Nest
 		}
 #pragma warning restore 612, 618
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			throw new NotSupportedException();
-		}
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
 	}
 }

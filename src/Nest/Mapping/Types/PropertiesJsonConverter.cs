@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -13,14 +12,15 @@ namespace Nest
 			new VerbatimDictionaryKeysJsonConverter<PropertyName, IProperty>();
 
 		private readonly PropertyJsonConverter _elasticTypeConverter = new PropertyJsonConverter();
+		public override bool CanWrite => true;
 
 		public override bool CanConvert(Type objectType) => objectType == typeof(IProperties);
-		public override bool CanWrite => true;
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var dict = value as IDictionary<PropertyName, IProperty>;
 			if (dict == null) return;
+
 			var settings = serializer.GetConnectionSettings();
 			var props = new Properties();
 			foreach (var kv in dict)
@@ -33,17 +33,18 @@ namespace Nest
 					continue;
 				}
 				// Check against connection settings mappings
-                IPropertyMapping propertyMapping;
+				IPropertyMapping propertyMapping;
 				if (settings.PropertyMappings.TryGetValue(propertyInfo, out propertyMapping))
 				{
 					if (propertyMapping.Ignore) continue;
+
 					props.Add(propertyMapping.Name, kv.Value);
 					continue;
 				}
 				// Check against attribute mapping, CreatePropertyMapping caches.
 				// We do not have to take .Name into account from serializer PropertyName (kv.Key) already handles this
 				propertyMapping = settings.Serializer?.CreatePropertyMapping(propertyInfo);
-				if (propertyMapping  == null || !propertyMapping.Ignore)
+				if (propertyMapping == null || !propertyMapping.Ignore)
 					props.Add(kv.Key, kv.Value);
 			}
 			_dictionaryConverter.WriteJson(writer, props, serializer);
@@ -69,6 +70,5 @@ namespace Nest
 			}
 			return r;
 		}
-
 	}
 }

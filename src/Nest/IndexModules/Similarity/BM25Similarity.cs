@@ -21,40 +21,43 @@ namespace Nest
 		bool? DiscountOverlaps { get; set; }
 
 		/// <summary>
-		///Controls non-linear term frequency normalization (saturation).
+		/// Controls non-linear term frequency normalization (saturation).
 		/// </summary>
 		[JsonProperty("k1")]
 		double? K1 { get; set; }
 	}
-	/// <inheritdoc/>
+
+	/// <inheritdoc />
 	public class BM25Similarity : IBM25Similarity
 	{
-		public string Type => "BM25";
-
-		/// <inheritdoc/>
-		public double? K1 { get; set; }
-
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public double? B { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public bool? DiscountOverlaps { get; set; }
+
+		/// <inheritdoc />
+		public double? K1 { get; set; }
+
+		public string Type => "BM25";
 	}
-	/// <inheritdoc/>
+
+	/// <inheritdoc />
 	public class BM25SimilarityDescriptor
 		: DescriptorBase<BM25SimilarityDescriptor, IBM25Similarity>, IBM25Similarity
 	{
-		string ISimilarity.Type => "BM25";
+		double? IBM25Similarity.B { get; set; }
 		bool? IBM25Similarity.DiscountOverlaps { get; set; }
 		double? IBM25Similarity.K1 { get; set; }
-		double? IBM25Similarity.B { get; set; }
+		string ISimilarity.Type => "BM25";
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public BM25SimilarityDescriptor DiscountOverlaps(bool? discount = true) => Assign(a => a.DiscountOverlaps = discount);
-		/// <inheritdoc/>
+
+		/// <inheritdoc />
 		public BM25SimilarityDescriptor K1(double? k1) => Assign(a => a.K1 = k1);
-		/// <inheritdoc/>
+
+		/// <inheritdoc />
 		public BM25SimilarityDescriptor B(double? b) => Assign(a => a.B = b);
 	}
-
 }

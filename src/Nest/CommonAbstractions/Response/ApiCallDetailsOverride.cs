@@ -6,22 +6,9 @@ namespace Nest
 {
 	internal class ApiCallDetailsOverride : IApiCallDetails
 	{
-		private readonly IApiCallDetails _original;
 		private readonly ServerError _error;
 		private readonly bool? _isValid;
-
-		public bool Success => _isValid ?? this._original.Success;
-		public ServerError ServerError => this._error ?? this._original.ServerError;
-
-		public Exception OriginalException => this._original.OriginalException;
-		public HttpMethod HttpMethod => this._original.HttpMethod;
-		public Uri Uri => this._original.Uri;
-		public int? HttpStatusCode => this._original.HttpStatusCode;
-		public byte[] ResponseBodyInBytes => this._original.ResponseBodyInBytes;
-		public byte[] RequestBodyInBytes => this._original.RequestBodyInBytes;
-		public List<Audit> AuditTrail => this._original.AuditTrail;
-		public string DebugInformation => this._original.DebugInformation;
-		public IEnumerable<string> DeprecationWarnings => this._original.DeprecationWarnings;
+		private readonly IApiCallDetails _original;
 
 		public ApiCallDetailsOverride(IApiCallDetails original, bool isValid)
 		{
@@ -35,5 +22,19 @@ namespace Nest
 			_error = error;
 			_isValid = false;
 		}
+
+		public List<Audit> AuditTrail => _original.AuditTrail;
+		public string DebugInformation => _original.DebugInformation;
+		public IEnumerable<string> DeprecationWarnings => _original.DeprecationWarnings;
+		public HttpMethod HttpMethod => _original.HttpMethod;
+		public int? HttpStatusCode => _original.HttpStatusCode;
+
+		public Exception OriginalException => _original.OriginalException;
+		public byte[] RequestBodyInBytes => _original.RequestBodyInBytes;
+		public byte[] ResponseBodyInBytes => _original.ResponseBodyInBytes;
+		public ServerError ServerError => _error ?? _original.ServerError;
+
+		public bool Success => _isValid ?? _original.Success;
+		public Uri Uri => _original.Uri;
 	}
 }

@@ -3,7 +3,7 @@
 namespace Nest
 {
 	[JsonObject]
-	public interface IInput {}
+	public interface IInput { }
 
 	public abstract class InputBase : IInput
 	{

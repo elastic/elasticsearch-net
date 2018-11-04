@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using System.Threading;
 
 namespace Nest
 {
@@ -20,7 +20,7 @@ namespace Nest
 			TRequest descriptor,
 			Func<IApiCallDetails, Stream, TResponse> responseGenerator,
 			Func<TRequest, PostData<object>, ElasticsearchResponse<TResponse>> dispatch
-			)
+		)
 			where TQueryString : FluentRequestParameters<TQueryString>, new()
 			where TRequest : IRequest<TQueryString>
 			where TResponse : ResponseBase;
@@ -29,7 +29,7 @@ namespace Nest
 			TRequest descriptor,
 			CancellationToken cancellationToken,
 			Func<TRequest, PostData<object>, CancellationToken, Task<ElasticsearchResponse<TResponse>>> dispatch
-			)
+		)
 			where TQueryString : FluentRequestParameters<TQueryString>, new()
 			where TRequest : IRequest<TQueryString>
 			where TResponse : ResponseBase, TResponseInterface
