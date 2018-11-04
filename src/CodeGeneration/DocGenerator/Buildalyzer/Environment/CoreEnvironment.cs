@@ -1,4 +1,5 @@
 ﻿#region License
+
 //MIT License
 //
 //Copyright (c) 2017 Dave Glick
@@ -20,8 +21,8 @@
 //LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
+
 #endregion
-// @formatter:off
 
 using System.Collections.Generic;
 using System.IO;
@@ -32,25 +33,25 @@ namespace DocGenerator.Buildalyzer.Environment
 	// https://github.com/OmniSharp/omnisharp-roslyn/blob/78ccc8b4376c73da282a600ac6fb10fce8620b52/src/OmniSharp.Abstractions/Services/DotNetCliService.cs
 	internal class CoreEnvironment : BuildEnvironment
 	{
-		public string ToolsPath { get; }
-		public string ExtensionsPath { get; }
-		public string SDKsPath { get; }
-		public string RoslynTargetsPath { get; }
-
 		public CoreEnvironment(string projectPath)
 		{
-			string dotnetPath = DotnetPathResolver.ResolvePath(projectPath);
+			var dotnetPath = DotnetPathResolver.ResolvePath(projectPath);
 			ToolsPath = dotnetPath;
 			ExtensionsPath = dotnetPath;
 			SDKsPath = Path.Combine(dotnetPath, "Sdks");
 			RoslynTargetsPath = Path.Combine(dotnetPath, "Roslyn");
 		}
 
+		public string ExtensionsPath { get; }
+		public string RoslynTargetsPath { get; }
+		public string SDKsPath { get; }
+		public string ToolsPath { get; }
+
 		public override string GetToolsPath() => ToolsPath;
 
 		public override Dictionary<string, string> GetGlobalProperties(string solutionDir)
 		{
-			Dictionary<string, string> globalProperties = base.GetGlobalProperties(solutionDir);
+			var globalProperties = base.GetGlobalProperties(solutionDir);
 			globalProperties.Add(MsBuildProperties.MSBuildExtensionsPath, ExtensionsPath);
 			globalProperties.Add(MsBuildProperties.MSBuildSDKsPath, SDKsPath);
 			globalProperties.Add(MsBuildProperties.RoslynTargetsPath, RoslynTargetsPath);

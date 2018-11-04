@@ -14,19 +14,19 @@ namespace DocGenerator
 			}
 
 			var currentDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
-            if (currentDirectory.Name == "DocGenerator" && currentDirectory.Parent.Name == "CodeGeneration")
+			if (currentDirectory.Name == "DocGenerator" && currentDirectory.Parent.Name == "CodeGeneration")
 			{
 				Console.WriteLine("IDE: " + currentDirectory);
-                InputDirPath = P(@"..\..\");
+				InputDirPath = P(@"..\..\");
 				OutputDirPath = P(@"..\..\..\docs");
-                BuildOutputPath = P(@"..\..\..\src");
+				BuildOutputPath = P(@"..\..\..\src");
 			}
 			else
 			{
 				Console.WriteLine("CMD: " + currentDirectory);
 				InputDirPath = P(@"..\..\..\..\src");
 				OutputDirPath = P(@"..\..\..\..\docs");
-                BuildOutputPath = P(@"..\..\..\..\build\output");
+				BuildOutputPath = P(@"..\..\..\..\build\output");
 			}
 
 			var process = new Process
@@ -56,44 +56,42 @@ namespace DocGenerator
 			{
 				process.Dispose();
 			}
-        }
-
-        public static string BuildOutputPath { get; }
-
-		public static string InputDirPath { get; }
-
-		public static string OutputDirPath { get; }
+		}
 
 		/// <summary>
 		/// The branch name to include in generated docs to link back to the original source file
 		/// </summary>
 		public static string BranchName { get; set; }
 
+		public static string BuildOutputPath { get; }
+
 		/// <summary>
 		/// The Elasticsearch documentation version to link to
 		/// </summary>
 		public static string DocVersion => "6.4";
 
-		static int Main(string[] args)
+		public static string InputDirPath { get; }
+
+		public static string OutputDirPath { get; }
+
+		private static int Main(string[] args)
 		{
-		    try
-		    {
-			    if (args.Length > 0)
-				    BranchName = args[0];
+			try
+			{
+				if (args.Length > 0)
+					BranchName = args[0];
 
-			    Console.WriteLine($"Using branch name {BranchName} in documentation");
+				Console.WriteLine($"Using branch name {BranchName} in documentation");
 
-                LitUp.GoAsync(args).Wait();
-			    return 0;
-		    }
-		    catch (AggregateException ae)
-		    {
-			    var ex = ae.InnerException ?? ae;
-                Console.WriteLine(ex.Message);
-			    return 1;
-		    }
+				LitUp.GoAsync(args).Wait();
+				return 0;
+			}
+			catch (AggregateException ae)
+			{
+				var ex = ae.InnerException ?? ae;
+				Console.WriteLine(ex.Message);
+				return 1;
+			}
 		}
 	}
 }
-
-

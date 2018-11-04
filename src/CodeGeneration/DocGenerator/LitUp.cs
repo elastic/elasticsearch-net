@@ -6,17 +6,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using DocGenerator.Buildalyzer;
 using DocGenerator.Documentation.Files;
-using Microsoft.Build.Framework;
 using Microsoft.CodeAnalysis;
-using Microsoft.Extensions.Logging;
 
 namespace DocGenerator
 {
 	public static class LitUp
 	{
-		private static readonly string[] SkipFolders = {"Debug", "Release"};
+		private static readonly string[] SkipFolders = { "Debug", "Release" };
 
 		private static string GetProjectDir(string projectName) => Path.Combine(Program.InputDirPath, projectName);
+
 		private static string GetProjectFile(string projectName) => Path.Combine(GetProjectDir(projectName), $"{projectName}.csproj");
 
 		public static IEnumerable<DocumentationFile> InputFiles(string path) =>
@@ -40,6 +39,7 @@ namespace DocGenerator
 			yield return InputFiles("*.png");
 			yield return InputFiles("*.gif");
 			yield return InputFiles("*.jpg");
+
 			// process asciidocs last as they may have generated
 			// includes to other output asciidocs
 			yield return InputFiles("*.asciidoc");
@@ -68,10 +68,7 @@ namespace DocGenerator
 			var projects = workspace.CurrentSolution.Projects
 				.ToDictionary(p => p.Name, StringComparer.OrdinalIgnoreCase);
 
-			foreach (var file in GetDocumentFiles(projects).SelectMany(s => s))
-			{
-				await file.SaveToDocumentationFolderAsync();
-			}
+			foreach (var file in GetDocumentFiles(projects).SelectMany(s => s)) await file.SaveToDocumentationFolderAsync();
 
 			Console.ForegroundColor = ConsoleColor.Green;
 			Console.WriteLine("Documentation generated.");
@@ -105,9 +102,7 @@ namespace DocGenerator
 				}
 
 				if (!workspace.TryApplyChanges(project.Solution))
-				{
 					Console.WriteLine($"failed to apply changes to workspace from project {project.Name}");
-				}
 			}
 		}
 	}
