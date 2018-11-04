@@ -1,25 +1,27 @@
 ﻿using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Tests.Core;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Domain;
-using Tests.Framework;
 
 namespace Tests.ClientConcepts.ServerError
 {
 	public abstract class ServerErrorTestsBase
 	{
-		private IElasticClient HighLevelClient { get; }
-		private IElasticLowLevelClient LowLevelClient { get; }
-
 		protected ServerErrorTestsBase()
 		{
 			var settings = FixedResponseClient.CreateConnectionSettings(ResponseJson, 500);
-			this.LowLevelClient = new ElasticLowLevelClient(settings);
-			this.HighLevelClient = new ElasticClient(settings);
+			LowLevelClient = new ElasticLowLevelClient(settings);
+			HighLevelClient = new ElasticClient(settings);
 		}
+
+		protected abstract string Json { get; }
+		private IElasticClient HighLevelClient { get; }
+		private IElasticLowLevelClient LowLevelClient { get; }
+
+		private string ResponseJson => string.Concat(@"{ ""error"": ", Json, @",  ""status"":500 }");
+
 		protected virtual void AssertServerError()
 		{
 			LowLevelCall();
@@ -28,7 +30,7 @@ namespace Tests.ClientConcepts.ServerError
 
 		protected void HighLevelCall()
 		{
-			var response = this.HighLevelClient.Search<Project>(s => s);
+			var response = HighLevelClient.Search<Project>(s => s);
 			response.Should().NotBeNull();
 			var serverError = response.ServerError;
 			serverError.Should().NotBeNull();
@@ -40,7 +42,7 @@ namespace Tests.ClientConcepts.ServerError
 
 		protected void LowLevelCall()
 		{
-			var response = this.LowLevelClient.Search<StringResponse>(PostData.Serializable(new { }));
+			var response = LowLevelClient.Search<StringResponse>(PostData.Serializable(new { }));
 			response.Should().NotBeNull();
 			response.Body.Should().NotBeNullOrWhiteSpace();
 			var hasServerError = response.TryGetServerError(out var serverError);
@@ -49,10 +51,6 @@ namespace Tests.ClientConcepts.ServerError
 			serverError.Status.Should().Be(response.ApiCall.HttpStatusCode);
 			AssertResponseError("low level client", serverError.Error);
 		}
-
-		private string ResponseJson => string.Concat(@"{ ""error"": ", Json, @",  ""status"":500 }");
-
-		protected abstract string Json { get;  }
 
 		protected abstract void AssertResponseError(string origin, Error error);
 	}

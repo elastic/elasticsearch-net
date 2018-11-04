@@ -3,13 +3,33 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.TermLevel.Fuzzy
 {
 	public class FuzzyDateQueryUsageTests : QueryDslUsageTestsBase
 	{
-		public FuzzyDateQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		public FuzzyDateQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IFuzzyQuery<DateTime?, Time>>(
+			a => a.Fuzzy as IFuzzyQuery<DateTime?, Time>
+		)
+		{
+			q => q.Field = null,
+			q => q.Value = null
+		};
+
+		protected override QueryContainer QueryInitializer => new FuzzyDateQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Field = "description",
+			Fuzziness = TimeSpan.FromDays(2),
+			Value = Project.Instance.StartedOn,
+			MaxExpansions = 100,
+			PrefixLength = 3,
+			Rewrite = MultiTermQueryRewrite.ConstantScore,
+			Transpositions = true
+		};
 
 		protected override object QueryJson => new
 		{
@@ -27,20 +47,6 @@ namespace Tests.QueryDsl.TermLevel.Fuzzy
 					value = "2015-01-01T00:00:00"
 				}
 			}
-
-		};
-
-		protected override QueryContainer QueryInitializer => new FuzzyDateQuery
-		{
-			Name = "named_query",
-			Boost = 1.1,
-			Field = "description",
-			Fuzziness = TimeSpan.FromDays(2),
-			Value = Project.Instance.StartedOn,
-			MaxExpansions = 100,
-			PrefixLength = 3,
-			Rewrite = MultiTermQueryRewrite.ConstantScore,
-			Transpositions = true
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -55,13 +61,5 @@ namespace Tests.QueryDsl.TermLevel.Fuzzy
 				.Rewrite(MultiTermQueryRewrite.ConstantScore)
 				.Transpositions()
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IFuzzyQuery<DateTime?, Time>>(
-			a => a.Fuzzy as IFuzzyQuery<DateTime?, Time>
-		)
-		{
-			q => q.Field = null,
-			q => q.Value = null
-		};
 	}
 }

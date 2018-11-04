@@ -3,7 +3,6 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Search.Request
 {
@@ -21,15 +20,15 @@ namespace Tests.Search.Request
 		protected override object ExpectJson =>
 			new { from = 10, size = 12 };
 
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.From(10)
+			.Size(12);
+
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>()
 			{
 				From = 10,
 				Size = 12
 			};
-
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-				.From(10)
-				.Size(12);
 	}
 }

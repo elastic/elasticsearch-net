@@ -4,7 +4,6 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Search.Request
 {
@@ -14,13 +13,14 @@ namespace Tests.Search.Request
 
 		protected override object ExpectJson => new
 		{
-			indices_boost = new object[] {
+			indices_boost = new object[]
+			{
 				new { project = 1.4 },
 				new { devs = 1.3 }
 			},
 			query = new
 			{
-				match_all = new {}
+				match_all = new { }
 			}
 		};
 

@@ -2,13 +2,34 @@
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.Span.Container
 {
 	public class SpanContainingUsageTests : QueryDslUsageTestsBase
 	{
 		public SpanContainingUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISpanContainingQuery>(a => a.SpanContaining)
+		{
+			q =>
+			{
+				q.Big = null;
+				q.Little = null;
+			},
+			q =>
+			{
+				q.Big = new SpanQuery { };
+				q.Little = new SpanQuery { };
+			},
+		};
+
+		protected override QueryContainer QueryInitializer => new SpanContainingQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Little = new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field1", Value = "hoya" } },
+			Big = new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field1", Value = "hoya2" } },
+		};
 
 		protected override object QueryJson => new
 		{
@@ -39,36 +60,16 @@ namespace Tests.QueryDsl.Span.Container
 			}
 		};
 
-		protected override QueryContainer QueryInitializer => new SpanContainingQuery
-		{
-			Name = "named_query",
-			Boost = 1.1,
-			Little = new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field1", Value = "hoya"} },
-			Big = new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field1", Value = "hoya2"} },
-		};
-
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.SpanContaining(sn => sn
 				.Name("named_query")
 				.Boost(1.1)
-				.Little(i=>i
-					.SpanTerm(st=>st.Field("field1").Value("hoya"))
+				.Little(i => i
+					.SpanTerm(st => st.Field("field1").Value("hoya"))
 				)
-				.Big(e=>e
-					.SpanTerm(st=>st.Field("field1").Value("hoya2"))
+				.Big(e => e
+					.SpanTerm(st => st.Field("field1").Value("hoya2"))
 				)
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISpanContainingQuery>(a => a.SpanContaining)
-		{
-			q => {
-				q.Big = null;
-				q.Little = null;
-			},
-			q => {
-				q.Big = new SpanQuery { };
-				q.Little = new SpanQuery { };
-			},
-		};
 	}
 }

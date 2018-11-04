@@ -6,33 +6,16 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Document.Single.Update
 {
-	public class UpdateWithScriptApiTests : ApiIntegrationTestBase<WritableCluster, IUpdateResponse<Project>, IUpdateRequest<Project, Project>, UpdateDescriptor<Project, Project>, UpdateRequest<Project, Project>>
+	public class UpdateWithScriptApiTests
+		: ApiIntegrationTestBase<WritableCluster, IUpdateResponse<Project>, IUpdateRequest<Project, Project>, UpdateDescriptor<Project, Project>,
+			UpdateRequest<Project, Project>>
 	{
 		public UpdateWithScriptApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
-		{
-			foreach (var id in values.Values)
-				this.Client.Index(Project.Instance, i=>i.Id(id));
-		}
-
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Update<Project>(CallIsolatedValue, f),
-			fluentAsync: (client, f) => client.UpdateAsync<Project>(CallIsolatedValue, f),
-			request: (client, r) => client.Update<Project>(r),
-			requestAsync: (client, r) => client.UpdateAsync<Project>(r)
-		);
-
 		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/project/doc/{CallIsolatedValue}/_update?routing={U(Project.Routing)}";
-
-		protected override bool SupportsDeserialization => false;
 
 		protected override object ExpectJson { get; } = new
 		{
@@ -41,15 +24,15 @@ namespace Tests.Document.Single.Update
 			{
 				source = "ctx._source.name = \"params.name\"",
 				lang = "painless",
-				@params = new {
+				@params = new
+				{
 					name = "foo",
 					other = (object)null
 				}
 			}
 		};
 
-		protected override UpdateDescriptor<Project, Project> NewDescriptor() =>
-			new UpdateDescriptor<Project, Project>(DocumentPath<Project>.Id(CallIsolatedValue));
+		protected override int ExpectStatusCode => 200;
 
 		protected override Func<UpdateDescriptor<Project, Project>, IUpdateRequest<Project, Project>> Fluent => d => d
 			.Routing(Project.Routing)
@@ -61,7 +44,9 @@ namespace Tests.Document.Single.Update
 					.Add("name", "foo")
 					.Add("other", null)
 				)
-			 );
+			);
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected override UpdateRequest<Project, Project> Initializer => new UpdateRequest<Project, Project>(CallIsolatedValue)
 		{
@@ -76,9 +61,25 @@ namespace Tests.Document.Single.Update
 					{ "other", null }
 				}
 			}
-
 		};
+
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/project/doc/{CallIsolatedValue}/_update?routing={U(Project.Routing)}";
+
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
+		{
+			foreach (var id in values.Values)
+				Client.Index(Project.Instance, i => i.Id(id));
+		}
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.Update<Project>(CallIsolatedValue, f),
+			(client, f) => client.UpdateAsync<Project>(CallIsolatedValue, f),
+			(client, r) => client.Update<Project>(r),
+			(client, r) => client.UpdateAsync<Project>(r)
+		);
+
+		protected override UpdateDescriptor<Project, Project> NewDescriptor() =>
+			new UpdateDescriptor<Project, Project>(DocumentPath<Project>.Id(CallIsolatedValue));
 	}
 }
-
-

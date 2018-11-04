@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
-using Tests.Core;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
-using Tests.Framework;
 
 namespace Tests.XPack.DeprecationInfo
 {
@@ -17,27 +15,32 @@ namespace Tests.XPack.DeprecationInfo
 			const string nodeId = "pQHNt5rXTTWNvUgOrdynKg";
 			var fixedResponse = new
 			{
-				_nodes = new {
-				total = 1,
-				successful = 1,
-				failed = 0
-			},
-			cluster_name = "my_cluster",
-			nodes = new Dictionary<string, object>{{
-				nodeId, new {
-					timestamp = 1492553961812,
-					since = 1492553906606,
-					rest_actions = new Dictionary<string, object>
+				_nodes = new
+				{
+					total = 1,
+					successful = 1,
+					failed = 0
+				},
+				cluster_name = "my_cluster",
+				nodes = new Dictionary<string, object>
+				{
 					{
-						{ "org.elasticsearch.rest.action.admin.cluster.RestNodesUsageAction", 1},
-						{ "org.elasticsearch.rest.action.admin.indices.RestCreateIndexAction", 1},
-						{ "org.elasticsearch.rest.action.document.RestGetAction", 1},
-						{ "org.elasticsearch.rest.action.search.RestSearchAction", 19},
-						{ "org.elasticsearch.rest.action.admin.cluster.RestNodesInfoAction", 36}
+						nodeId, new
+						{
+							timestamp = 1492553961812,
+							since = 1492553906606,
+							rest_actions = new Dictionary<string, object>
+							{
+								{ "org.elasticsearch.rest.action.admin.cluster.RestNodesUsageAction", 1 },
+								{ "org.elasticsearch.rest.action.admin.indices.RestCreateIndexAction", 1 },
+								{ "org.elasticsearch.rest.action.document.RestGetAction", 1 },
+								{ "org.elasticsearch.rest.action.search.RestSearchAction", 19 },
+								{ "org.elasticsearch.rest.action.admin.cluster.RestNodesInfoAction", 36 }
+							}
+						}
 					}
 				}
-				}
-			}};
+			};
 
 			var client = FixedResponseClient.Create(fixedResponse);
 

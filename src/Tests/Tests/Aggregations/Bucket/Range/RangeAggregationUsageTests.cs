@@ -6,9 +6,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.Range
@@ -26,9 +24,9 @@ namespace Tests.Aggregations.Bucket.Range
 					field = "numberOfCommits",
 					ranges = new object[]
 					{
-						new {to = 100.0},
-						new {from = 100.0, to = 500.0},
-						new {from = 500.0}
+						new { to = 100.0 },
+						new { from = 100.0, to = 500.0 },
+						new { from = 500.0 }
 					}
 				}
 			}
@@ -50,9 +48,9 @@ namespace Tests.Aggregations.Bucket.Range
 				Field = Field<Project>(p => p.NumberOfCommits),
 				Ranges = new List<AggregationRange>
 				{
-					{new AggregationRange {To = 100}},
-					{new AggregationRange {From = 100, To = 500}},
-					{new AggregationRange {From = 500}}
+					{ new AggregationRange { To = 100 } },
+					{ new AggregationRange { From = 100, To = 500 } },
+					{ new AggregationRange { From = 500 } }
 				}
 			};
 

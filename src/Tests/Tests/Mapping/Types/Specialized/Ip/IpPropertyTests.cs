@@ -1,11 +1,8 @@
 ﻿using System;
-using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Mapping.Types.Core.Ip
 {
@@ -30,19 +27,20 @@ namespace Tests.Mapping.Types.Core.Ip
 		};
 
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
-				.Ip(s => s
-					.Name(p => p.Name)
-					.Index(false)
-					.Boost(1.3)
-					.NullValue("127.0.0.1")
-					.DocValues()
-					.Store()
-				);
+			.Ip(s => s
+				.Name(p => p.Name)
+				.Index(false)
+				.Boost(1.3)
+				.NullValue("127.0.0.1")
+				.DocValues()
+				.Store()
+			);
 
 
 		protected override IProperties InitializerProperties => new Properties
 		{
-			{ "name", new IpProperty
+			{
+				"name", new IpProperty
 				{
 					Index = false,
 					Boost = 1.3,

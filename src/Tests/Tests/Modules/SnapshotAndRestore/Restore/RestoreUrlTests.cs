@@ -14,10 +14,10 @@ namespace Tests.Modules.SnapshotAndRestore.Restore.Restore
 			var snapshot = "snap";
 
 			await POST($"/_snapshot/{repository}/{snapshot}/_restore")
-				.Fluent(c => c.Restore(repository, snapshot))
-				.Request(c => c.Restore(new RestoreRequest(repository, snapshot)))
-				.FluentAsync(c => c.RestoreAsync(repository, snapshot))
-				.RequestAsync(c => c.RestoreAsync(new RestoreRequest(repository, snapshot)))
+					.Fluent(c => c.Restore(repository, snapshot))
+					.Request(c => c.Restore(new RestoreRequest(repository, snapshot)))
+					.FluentAsync(c => c.RestoreAsync(repository, snapshot))
+					.RequestAsync(c => c.RestoreAsync(new RestoreRequest(repository, snapshot)))
 				;
 		}
 	}

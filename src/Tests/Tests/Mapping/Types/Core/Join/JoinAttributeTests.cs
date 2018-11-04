@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Nest;
+﻿using Nest;
 using Tests.Domain;
 
 namespace Tests.Mapping.Types.Core.Join
@@ -23,7 +18,8 @@ namespace Tests.Mapping.Types.Core.Join
 				joinField = new
 				{
 					type = "join",
-					relations = new {
+					relations = new
+					{
 						project = "commits"
 					}
 				}

@@ -10,26 +10,15 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Search.Search
 {
-	public class SearchApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+	public class SearchApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		public SearchApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.Search(f),
-			fluentAsync: (c, f) => c.SearchAsync(f),
-			request: (c, r) => c.Search<Project>(r),
-			requestAsync: (c, r) => c.SearchAsync<Project>(r)
-		);
-
-		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/project/doc/_search";
 
 		protected override object ExpectJson => new
 		{
@@ -57,26 +46,11 @@ namespace Tests.Search.Search
 					{
 						value = "Stable"
 					}
-
 				}
 			}
 		};
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
-		{
-			response.Hits.Count().Should().BeGreaterThan(0);
-			response.Hits.First().Should().NotBeNull();
-			response.Hits.First().Source.Should().NotBeNull();
-			response.Aggregations.Count.Should().BeGreaterThan(0);
-			response.Took.Should().BeGreaterThan(0);
-			var startDates = response.Aggregations.Terms("startDates");
-			startDates.Should().NotBeNull();
-
-			foreach (var document in response.Documents)
-			{
-				document.ShouldAdhereToSourceSerializerWhenSet();
-			}
-		}
+		protected override int ExpectStatusCode => 200;
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.From(10)
@@ -93,6 +67,8 @@ namespace Tests.Search.Search
 				.Term(p => p.State, StateOfBeing.Stable)
 			);
 
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
 		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
 		{
 			From = 10,
@@ -108,6 +84,28 @@ namespace Tests.Search.Search
 				Value = "Stable"
 			})
 		};
+
+		protected override string UrlPath => $"/project/doc/_search";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(c, f) => c.Search(f),
+			(c, f) => c.SearchAsync(f),
+			(c, r) => c.Search<Project>(r),
+			(c, r) => c.SearchAsync<Project>(r)
+		);
+
+		protected override void ExpectResponse(ISearchResponse<Project> response)
+		{
+			response.Hits.Count().Should().BeGreaterThan(0);
+			response.Hits.First().Should().NotBeNull();
+			response.Hits.First().Source.Should().NotBeNull();
+			response.Aggregations.Count.Should().BeGreaterThan(0);
+			response.Took.Should().BeGreaterThan(0);
+			var startDates = response.Aggregations.Terms("startDates");
+			startDates.Should().NotBeNull();
+
+			foreach (var document in response.Documents) document.ShouldAdhereToSourceSerializerWhenSet();
+		}
 	}
 
 	public class SearchApiFieldsTests : SearchApiTests
@@ -140,30 +138,29 @@ namespace Tests.Search.Search
 					{
 						value = "Stable"
 					}
-
 				}
 			},
 			stored_fields = new[] { "name", "numberOfCommits" }
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-		.From(10)
-		.Size(20)
-		.Query(q => q
-			.MatchAll()
-		)
-		.Aggregations(a => a
-			.Terms("startDates", t => t
-				.Field(p => p.StartedOn)
+			.From(10)
+			.Size(20)
+			.Query(q => q
+				.MatchAll()
 			)
-		)
-		.PostFilter(f => f
-			.Term(p => p.State, StateOfBeing.Stable)
-		)
-		.StoredFields(fs => fs
-			.Field(p => p.Name)
-			.Field(p => p.NumberOfCommits)
-		);
+			.Aggregations(a => a
+				.Terms("startDates", t => t
+					.Field(p => p.StartedOn)
+				)
+			)
+			.PostFilter(f => f
+				.Term(p => p.State, StateOfBeing.Stable)
+			)
+			.StoredFields(fs => fs
+				.Field(p => p.Name)
+				.Field(p => p.NumberOfCommits)
+			);
 
 		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
 		{
@@ -244,35 +241,32 @@ namespace Tests.Search.Search
 			{
 				Must = new List<QueryContainer>
 				{
-					new QueryStringQuery{ Query = "query" },
-					new QueryStringQuery{ Query = string.Empty },
-					new QueryStringQuery{ Query =  null },
+					new QueryStringQuery { Query = "query" },
+					new QueryStringQuery { Query = string.Empty },
+					new QueryStringQuery { Query = null },
 					new QueryContainer(),
 					null
 				},
 				Should = new List<QueryContainer>
 				{
-					new QueryStringQuery{ Query = "query" },
-					new QueryStringQuery{ Query = string.Empty },
-					new QueryStringQuery{ Query =  null },
+					new QueryStringQuery { Query = "query" },
+					new QueryStringQuery { Query = string.Empty },
+					new QueryStringQuery { Query = null },
 					new QueryContainer(),
 					null
 				},
 				MustNot = new List<QueryContainer>
 				{
-					new QueryStringQuery{ Query = "query" },
-					new QueryStringQuery{ Query = string.Empty },
-					new QueryStringQuery{ Query =  null },
+					new QueryStringQuery { Query = "query" },
+					new QueryStringQuery { Query = string.Empty },
+					new QueryStringQuery { Query = null },
 					new QueryContainer(),
 					null
 				}
 			}
 		};
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
-		{
-			response.ShouldBeValid();
-		}
+		protected override void ExpectResponse(ISearchResponse<Project> response) => response.ShouldBeValid();
 	}
 
 	public class SearchApiNullQueryContainerTests : SearchApiTests
@@ -300,20 +294,12 @@ namespace Tests.Search.Search
 			}
 		};
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
-		{
-			response.ShouldBeValid();
-		}
+		protected override void ExpectResponse(ISearchResponse<Project> response) => response.ShouldBeValid();
 	}
 
 	public class SearchApiNullQueriesInQueryContainerTests : SearchApiTests
 	{
 		public SearchApiNullQueriesInQueryContainerTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-		// when we serialize we write and empty bool, when we read the fact it was verbatim is lost so while
-		// we technically DO support deserialization here (and empty bool will get set) when we write it a second
-		// time it will NOT write that bool because the is verbatim did not carry over.
-		protected override bool SupportsDeserialization => false;
 
 		protected override object ExpectJson => new
 		{
@@ -349,46 +335,52 @@ namespace Tests.Search.Search
 			}
 		};
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
-		{
-			response.ShouldBeValid();
-		}
+		// when we serialize we write and empty bool, when we read the fact it was verbatim is lost so while
+		// we technically DO support deserialization here (and empty bool will get set) when we write it a second
+		// time it will NOT write that bool because the is verbatim did not carry over.
+		protected override bool SupportsDeserialization => false;
+
+		protected override void ExpectResponse(ISearchResponse<Project> response) => response.ShouldBeValid();
 	}
 
 
 	[SkipVersion("<6.2.0", "OpaqueId introduced in 6.2.0")]
-	public class OpaqueIdApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IListTasksResponse, IListTasksRequest, ListTasksDescriptor, ListTasksRequest>
+	public class OpaqueIdApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IListTasksResponse, IListTasksRequest, ListTasksDescriptor, ListTasksRequest>
 	{
 		public OpaqueIdApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override object ExpectJson => null;
-		protected override bool SupportsDeserialization => false;
-		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/_tasks?pretty=true&error_trace=true";
+
+		protected override object ExpectJson => null;
+		protected override int ExpectStatusCode => 200;
 
 		protected override Func<ListTasksDescriptor, IListTasksRequest> Fluent => s => s
 			.RequestConfiguration(r => r.OpaqueId(CallIsolatedValue));
+
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
 		protected override ListTasksRequest Initializer => new ListTasksRequest()
 		{
 			RequestConfiguration = new RequestConfiguration { OpaqueId = CallIsolatedValue },
 		};
 
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/_tasks?pretty=true&error_trace=true";
+
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.ListTasks(f),
-			fluentAsync: (c, f) => c.ListTasksAsync(f),
-			request: (c, r) => c.ListTasks(r),
-			requestAsync: (c, r) => c.ListTasksAsync(r)
+			(c, f) => c.ListTasks(f),
+			(c, f) => c.ListTasksAsync(f),
+			(c, r) => c.ListTasks(r),
+			(c, r) => c.ListTasksAsync(r)
 		);
 
 		protected override void OnBeforeCall(IElasticClient client)
 		{
 			var searchResponse = client.Search<Project>(s => s
-				.RequestConfiguration(r => r.OpaqueId(CallIsolatedValue))
-				.Scroll("10m") // Create a scroll in order to keep the task around.
-            );
+					.RequestConfiguration(r => r.OpaqueId(CallIsolatedValue))
+					.Scroll("10m") // Create a scroll in order to keep the task around.
+			);
 
 			searchResponse.ShouldBeValid();
 		}
@@ -401,10 +393,9 @@ namespace Tests.Search.Search
 			{
 				task.Value.Headers.Should().NotBeNull();
 				if (task.Value.Headers.TryGetValue(RequestData.OpaqueIdHeader, out var opaqueIdValue))
-				{
-					opaqueIdValue.Should().Be(this.CallIsolatedValue,
-						$"OpaqueId header {opaqueIdValue} did not match {this.CallIsolatedValue}");
-				}
+					opaqueIdValue.Should()
+						.Be(CallIsolatedValue,
+							$"OpaqueId header {opaqueIdValue} did not match {CallIsolatedValue}");
 				// TODO: Determine if this is a valid assertion i.e. should all tasks returned have an OpaqueId header?
 //				else
 //				{

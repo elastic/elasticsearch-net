@@ -2,7 +2,6 @@
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.Joining.SpanNot
 {
@@ -10,27 +9,21 @@ namespace Tests.QueryDsl.Joining.SpanNot
 	{
 		public SpanNotUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override bool KnownParseException => true; //using both pre/post AND dist needs to be split up in to two.
-
-		protected override object QueryJson => new
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISpanNotQuery>(a => a.SpanNot)
 		{
-			span_not = new
+			q =>
 			{
-				_name = "named_query",
-				boost = 1.1,
-				include = new
-				{
-					span_term = new { field1 = new { value = "hoya" } }
-				},
-				exclude = new
-				{
-					span_term = new { field1 = new { value = "hoya2" } }
-				},
-				pre = 14,
-				post = 13,
-				dist = 12
-			}
+				q.Include = null;
+				q.Exclude = null;
+			},
+			q =>
+			{
+				q.Include = new SpanQuery();
+				q.Exclude = new SpanQuery();
+			},
 		};
+
+		protected override bool KnownParseException => true; //using both pre/post AND dist needs to be split up in to two.
 
 		protected override QueryContainer QueryInitializer => new SpanNotQuery
 		{
@@ -55,6 +48,26 @@ namespace Tests.QueryDsl.Joining.SpanNot
 			},
 		};
 
+		protected override object QueryJson => new
+		{
+			span_not = new
+			{
+				_name = "named_query",
+				boost = 1.1,
+				include = new
+				{
+					span_term = new { field1 = new { value = "hoya" } }
+				},
+				exclude = new
+				{
+					span_term = new { field1 = new { value = "hoya2" } }
+				},
+				pre = 14,
+				post = 13,
+				dist = 12
+			}
+		};
+
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.SpanNot(sn => sn
 				.Name("named_query")
@@ -69,17 +82,5 @@ namespace Tests.QueryDsl.Joining.SpanNot
 					.SpanTerm(st => st.Field("field1").Value("hoya2"))
 				)
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISpanNotQuery>(a => a.SpanNot)
-		{
-			q => {
-				q.Include = null;
-				q.Exclude = null;
-			},
-			q => {
-				q.Include = new SpanQuery();
-				q.Exclude = new SpanQuery();
-			},
-		};
 	}
 }

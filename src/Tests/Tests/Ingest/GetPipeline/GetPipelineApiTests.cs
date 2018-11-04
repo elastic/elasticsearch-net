@@ -4,32 +4,31 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Ingest.GetPipeline
 {
 	//integration test is part of PipelineCrudTests
-	public class GetPipelineApiTests : ApiTestBase<ReadOnlyCluster, IGetPipelineResponse, IGetPipelineRequest, GetPipelineDescriptor, GetPipelineRequest>
+	public class GetPipelineApiTests
+		: ApiTestBase<ReadOnlyCluster, IGetPipelineResponse, IGetPipelineRequest, GetPipelineDescriptor, GetPipelineRequest>
 	{
-		public GetPipelineApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
 		private const string PipelineId = "pipeline-1";
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.GetPipeline(f),
-			fluentAsync: (client, f) => client.GetPipelineAsync(f),
-			request: (client, r) => client.GetPipeline(r),
-			requestAsync: (client, r) => client.GetPipelineAsync(r)
-		);
-
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/_ingest/pipeline/{PipelineId}";
-
-		protected override GetPipelineDescriptor NewDescriptor() => new GetPipelineDescriptor().Id(PipelineId);
+		public GetPipelineApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override Func<GetPipelineDescriptor, IGetPipelineRequest> Fluent => d => d.Id(PipelineId);
 
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+
 		protected override GetPipelineRequest Initializer => new GetPipelineRequest(PipelineId);
+		protected override string UrlPath => $"/_ingest/pipeline/{PipelineId}";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.GetPipeline(f),
+			(client, f) => client.GetPipelineAsync(f),
+			(client, r) => client.GetPipeline(r),
+			(client, r) => client.GetPipelineAsync(r)
+		);
+
+		protected override GetPipelineDescriptor NewDescriptor() => new GetPipelineDescriptor().Id(PipelineId);
 	}
 }

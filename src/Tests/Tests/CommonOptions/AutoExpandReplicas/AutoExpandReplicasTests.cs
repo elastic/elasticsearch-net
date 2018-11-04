@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
-using Tests.Framework;
-using Nest;
 using Xunit;
 
 namespace Tests.CommonOptions.AutoExpandReplicas
@@ -24,14 +18,14 @@ namespace Tests.CommonOptions.AutoExpandReplicas
 		[U]
 		public void ImplicitConversionFromMinAndMaxString()
 		{
-			string minAndMax = "0-5";
+			var minAndMax = "0-5";
 			Nest.AutoExpandReplicas autoExpandReplicas = minAndMax;
 			autoExpandReplicas.Should().NotBeNull();
 			autoExpandReplicas.Enabled.Should().BeTrue();
 			autoExpandReplicas.MinReplicas.Should().Be(0);
 			autoExpandReplicas.MaxReplicas.Match(
-                i => i.Should().Be(5), 
-                s => Assert.True(false, "expecting a match on integer"));
+				i => i.Should().Be(5),
+				s => Assert.True(false, "expecting a match on integer"));
 
 			autoExpandReplicas.ToString().Should().Be(minAndMax);
 		}
@@ -39,7 +33,7 @@ namespace Tests.CommonOptions.AutoExpandReplicas
 		[U]
 		public void ImplicitConversionFromMinAndAllString()
 		{
-			string minAndMax = "0-all";
+			var minAndMax = "0-all";
 			Nest.AutoExpandReplicas autoExpandReplicas = minAndMax;
 			autoExpandReplicas.Should().NotBeNull();
 			autoExpandReplicas.Enabled.Should().BeTrue();
@@ -59,8 +53,8 @@ namespace Tests.CommonOptions.AutoExpandReplicas
 			autoExpandReplicas.Enabled.Should().BeTrue();
 			autoExpandReplicas.MinReplicas.Should().Be(2);
 			autoExpandReplicas.MaxReplicas.Match(
-                i => i.Should().Be(3), 
-                s => Assert.True(false, "expecting a match on integer"));
+				i => i.Should().Be(3),
+				s => Assert.True(false, "expecting a match on integer"));
 
 			autoExpandReplicas.ToString().Should().Be("2-3");
 		}
@@ -92,19 +86,19 @@ namespace Tests.CommonOptions.AutoExpandReplicas
 		}
 
 		[U]
-		public void MinMustBeEqualOrLessThanMax() => 
-            Assert.Throws<ArgumentException>(() => Nest.AutoExpandReplicas.Create(2,1));
+		public void MinMustBeEqualOrLessThanMax() =>
+			Assert.Throws<ArgumentException>(() => Nest.AutoExpandReplicas.Create(2, 1));
 
 		[U]
-		public void MinMustBeGreaterThanOrEqualToZero() => 
-            Assert.Throws<ArgumentException>(() => Nest.AutoExpandReplicas.Create(-1));
+		public void MinMustBeGreaterThanOrEqualToZero() =>
+			Assert.Throws<ArgumentException>(() => Nest.AutoExpandReplicas.Create(-1));
 
 		[U]
-		public void MinMustBeAnInteger() => 
-            Assert.Throws<FormatException>(() => Nest.AutoExpandReplicas.Create("all-all"));
+		public void MinMustBeAnInteger() =>
+			Assert.Throws<FormatException>(() => Nest.AutoExpandReplicas.Create("all-all"));
 
 		[U]
-		public void MaxMustBeAllOrAnInteger() => 
-            Assert.Throws<FormatException>(() => Nest.AutoExpandReplicas.Create("2-boo"));
+		public void MaxMustBeAllOrAnInteger() =>
+			Assert.Throws<FormatException>(() => Nest.AutoExpandReplicas.Create("2-boo"));
 	}
 }

@@ -7,7 +7,6 @@ using Tests.Framework.Integration;
 
 namespace Tests.Mapping.Types.Core.Text
 {
-
 	[SkipVersion("<6.4.0", "index_phrases is a new feature")]
 	public class TextPropertyIndexPhrasesTests : PropertyTestsBase
 	{
@@ -27,10 +26,10 @@ namespace Tests.Mapping.Types.Core.Text
 
 
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
-				.Text(s => s
-					.Name(p => p.Name)
-					.IndexPhrases()
-				);
+			.Text(s => s
+				.Name(p => p.Name)
+				.IndexPhrases()
+			);
 
 
 		protected override IProperties InitializerProperties => new Properties
@@ -62,18 +61,19 @@ namespace Tests.Mapping.Types.Core.Text
 
 
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
-				.Text(s => s
-					.Name(p => p.Name)
-					.IndexPrefixes(i => i
-						.MinCharacters(1)
-						.MaxCharacters(10)
-					)
-				);
+			.Text(s => s
+				.Name(p => p.Name)
+				.IndexPrefixes(i => i
+					.MinCharacters(1)
+					.MaxCharacters(10)
+				)
+			);
 
 
 		protected override IProperties InitializerProperties => new Properties
 		{
-			{ "name", new TextProperty
+			{
+				"name", new TextProperty
 				{
 					IndexPrefixes = new TextIndexPrefixes
 					{
@@ -98,7 +98,7 @@ namespace Tests.Mapping.Types.Core.Text
 					type = "text",
 					analyzer = "standard",
 					boost = 1.2,
-					copy_to = new [] { "other_field" },
+					copy_to = new[] { "other_field" },
 					eager_global_ordinals = true,
 					fielddata = true,
 					fielddata_frequency_filter = new
@@ -130,41 +130,42 @@ namespace Tests.Mapping.Types.Core.Text
 
 
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
-				.Text(s => s
-					.Name(p => p.Name)
-					.Analyzer("standard")
-					.Boost(1.2)
-					.CopyTo(c => c
-						.Field("other_field")
+			.Text(s => s
+				.Name(p => p.Name)
+				.Analyzer("standard")
+				.Boost(1.2)
+				.CopyTo(c => c
+					.Field("other_field")
+				)
+				.EagerGlobalOrdinals()
+				.Fielddata()
+				.FielddataFrequencyFilter(ff => ff
+					.Min(1)
+					.Max(100)
+					.MinSegmentSize(2)
+				)
+				.Fields(fd => fd
+					.Keyword(k => k
+						.Name("raw")
+						.IgnoreAbove(100)
 					)
-					.EagerGlobalOrdinals()
-					.Fielddata()
-					.FielddataFrequencyFilter(ff => ff
-						.Min(1)
-						.Max(100)
-						.MinSegmentSize(2)
-					)
-					.Fields(fd => fd
-						.Keyword(k => k
-							.Name("raw")
-							.IgnoreAbove(100)
-						)
-					)
-					.Index(true)
-					.IndexOptions(IndexOptions.Offsets)
-					.PositionIncrementGap(5)
-					.SearchAnalyzer("standard")
-					.SearchQuoteAnalyzer("standard")
-					.Similarity(SimilarityOption.Classic)
-					.Store()
-					.Norms(false)
-					.TermVector(TermVectorOption.WithPositionsOffsets)
-				);
+				)
+				.Index(true)
+				.IndexOptions(IndexOptions.Offsets)
+				.PositionIncrementGap(5)
+				.SearchAnalyzer("standard")
+				.SearchQuoteAnalyzer("standard")
+				.Similarity(SimilarityOption.Classic)
+				.Store()
+				.Norms(false)
+				.TermVector(TermVectorOption.WithPositionsOffsets)
+			);
 
 
 		protected override IProperties InitializerProperties => new Properties
 		{
-			{ "name", new TextProperty
+			{
+				"name", new TextProperty
 				{
 					Analyzer = "standard",
 					Boost = 1.2,
@@ -179,7 +180,8 @@ namespace Tests.Mapping.Types.Core.Text
 					},
 					Fields = new Properties
 					{
-						{ "raw", new KeywordProperty
+						{
+							"raw", new KeywordProperty
 							{
 								IgnoreAbove = 100
 							}

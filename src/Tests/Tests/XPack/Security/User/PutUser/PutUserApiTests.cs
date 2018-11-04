@@ -8,8 +8,6 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.XPack.Security.User.PutUser
 {
@@ -18,42 +16,38 @@ namespace Tests.XPack.Security.User.PutUser
 	{
 		public PutUserApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.PutUser(CallIsolatedValue, f),
-			fluentAsync: (client, f) => client.PutUserAsync(CallIsolatedValue, f),
-			request: (client, r) => client.PutUser(r),
-			requestAsync: (client, r) => client.PutUserAsync(r)
-		);
-
 		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-
-		protected override string UrlPath => $"/_xpack/security/user/{CallIsolatedValue}";
-
-		protected override bool SupportsDeserialization => false;
-
-		private string Email => $"{CallIsolatedValue}@example.example";
-
-		private string Password => CallIsolatedValue;
 
 		protected override object ExpectJson => new
 		{
 			roles = new[] { "user" },
-			password = this.Password,
-			email = this.Email,
-			full_name = this.CallIsolatedValue,
+			password = Password,
+			email = Email,
+			full_name = CallIsolatedValue,
 			metadata = new
 			{
 				x = CallIsolatedValue
 			}
 		};
 
+		protected override int ExpectStatusCode => 200;
+
+		protected override Func<PutUserDescriptor, IPutUserRequest> Fluent => d => d
+			.Roles("user")
+			.Password(Password)
+			.Email(Email)
+			.FullName(CallIsolatedValue)
+			.Metadata(m => m
+				.Add("x", CallIsolatedValue)
+			);
+
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+
 		protected override PutUserRequest Initializer => new PutUserRequest(CallIsolatedValue)
 		{
 			Roles = new[] { "user" },
-			Password = this.Password,
-			Email = this.Email,
+			Password = Password,
+			Email = Email,
 			FullName = CallIsolatedValue,
 			Metadata = new Dictionary<string, object>
 			{
@@ -61,16 +55,22 @@ namespace Tests.XPack.Security.User.PutUser
 			}
 		};
 
-		protected override PutUserDescriptor NewDescriptor() => new PutUserDescriptor(CallIsolatedValue);
+		protected override bool SupportsDeserialization => false;
 
-		protected override Func<PutUserDescriptor, IPutUserRequest> Fluent => d => d
-			.Roles("user")
-			.Password(this.Password)
-			.Email(this.Email)
-			.FullName(CallIsolatedValue)
-			.Metadata(m => m
-				.Add("x", CallIsolatedValue)
-			);
+		protected override string UrlPath => $"/_xpack/security/user/{CallIsolatedValue}";
+
+		private string Email => $"{CallIsolatedValue}@example.example";
+
+		private string Password => CallIsolatedValue;
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.PutUser(CallIsolatedValue, f),
+			(client, f) => client.PutUserAsync(CallIsolatedValue, f),
+			(client, r) => client.PutUser(r),
+			(client, r) => client.PutUserAsync(r)
+		);
+
+		protected override PutUserDescriptor NewDescriptor() => new PutUserDescriptor(CallIsolatedValue);
 
 		protected override void ExpectResponse(IPutUserResponse response)
 		{
@@ -83,12 +83,17 @@ namespace Tests.XPack.Security.User.PutUser
 	{
 		public PutUserRunAsApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
-			var x = this.Client.GetUser(new GetUserRequest(ClusterAuthentication.User.Username));
-			var y = this.Client.GetRole(new GetRoleRequest(ClusterAuthentication.User.Role));
+			var x = Client.GetUser(new GetUserRequest(ClusterAuthentication.User.Username));
+			var y = Client.GetRole(new GetRoleRequest(ClusterAuthentication.User.Role));
 		}
 
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 403;
+
+		protected override Func<PutUserDescriptor, IPutUserRequest> Fluent => f => base.Fluent(f
+			.RequestConfiguration(c => c
+				.RunAs(ClusterAuthentication.User.Username)
+			));
 
 		protected override PutUserRequest Initializer
 		{
@@ -103,14 +108,6 @@ namespace Tests.XPack.Security.User.PutUser
 			}
 		}
 
-		protected override Func<PutUserDescriptor, IPutUserRequest> Fluent => f => base.Fluent(f
-			.RequestConfiguration(c => c
-				.RunAs(ClusterAuthentication.User.Username)
-			));
-
-		protected override void ExpectResponse(IPutUserResponse response)
-		{
-		}
+		protected override void ExpectResponse(IPutUserResponse response) { }
 	}
-
 }

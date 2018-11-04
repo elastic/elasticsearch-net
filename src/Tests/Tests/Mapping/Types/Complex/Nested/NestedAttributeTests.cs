@@ -1,15 +1,9 @@
-﻿using System;
-using Nest;
+﻿using Nest;
 
 namespace Tests.Mapping.Types.Complex.Nested
 {
 	public class NestedTest
 	{
-		public class InnerObject
-		{
-			public string Name { get; set; }
-		}
-
 		[Nested(
 			IncludeInParent = true,
 			IncludeInRoot = false,
@@ -18,6 +12,11 @@ namespace Tests.Mapping.Types.Complex.Nested
 
 		[Nested]
 		public InnerObject Minimal { get; set; }
+
+		public class InnerObject
+		{
+			public string Name { get; set; }
+		}
 	}
 
 	public class NestedAttributeTests : AttributeTestsBase<NestedTest>

@@ -10,10 +10,7 @@ namespace Tests.Framework
 		{
 			private readonly T _o;
 
-			public PromiseValue(T o)
-			{
-				_o = o;
-			}
+			public PromiseValue(T o) => _o = o;
 
 			T IPromise<T>.Value => _o;
 		}

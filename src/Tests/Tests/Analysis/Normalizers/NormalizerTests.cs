@@ -9,24 +9,23 @@ namespace Tests.Analysis.Normalizers
 	{
 		public class CustomTests : NormalizerAssertionBase<CustomTests>
 		{
-			public override string Name => "myCustom";
-
-			public override INormalizer Initializer => new CustomNormalizer
-			{
-				Filter = new[] {"lowercase", "asciifolding"},
-			};
-
 			public override FuncTokenizer Fluent => (n, an) => an
 				.Custom("myCustom", a => a
 					.Filters("lowercase", "asciifolding")
 				);
 
+			public override INormalizer Initializer => new CustomNormalizer
+			{
+				Filter = new[] { "lowercase", "asciifolding" },
+			};
+
 			public override object Json => new
 			{
 				type = "custom",
-				filter = new[] {"lowercase", "asciifolding"},
+				filter = new[] { "lowercase", "asciifolding" },
 			};
-		}
 
+			public override string Name => "myCustom";
+		}
 	}
 }

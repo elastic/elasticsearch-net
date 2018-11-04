@@ -2,7 +2,6 @@
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.QueryDsl.FullText.Match
@@ -10,6 +9,29 @@ namespace Tests.QueryDsl.FullText.Match
 	public class MatchUsageTests : QueryDslUsageTestsBase
 	{
 		public MatchUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IMatchQuery>(a => a.Match)
+		{
+			q => q.Query = null,
+			q => q.Query = string.Empty,
+			q => q.Field = null
+		};
+
+		protected override QueryContainer QueryInitializer => new MatchQuery
+		{
+			Field = Field<Project>(p => p.Description),
+			Analyzer = "standard",
+			Boost = 1.1,
+			Name = "named_query",
+			CutoffFrequency = 0.001,
+			Query = "hello world",
+			Fuzziness = Fuzziness.Auto,
+			FuzzyTranspositions = true,
+			MinimumShouldMatch = 2,
+			FuzzyRewrite = MultiTermQueryRewrite.TopTermsBlendedFreqs(10),
+			Lenient = true,
+			Operator = Operator.Or
+		};
 
 		protected override object QueryJson => new
 		{
@@ -27,26 +49,9 @@ namespace Tests.QueryDsl.FullText.Match
 					cutoff_frequency = 0.001,
 					lenient = true,
 					minimum_should_match = 2,
-			        @operator = "or"
+					@operator = "or"
 				}
 			}
-
-		};
-
-		protected override QueryContainer QueryInitializer => new MatchQuery
-		{
-			Field = Field<Project>(p=>p.Description),
-			Analyzer = "standard",
-			Boost = 1.1,
-			Name = "named_query",
-			CutoffFrequency = 0.001,
-			Query = "hello world",
-			Fuzziness = Fuzziness.Auto,
-			FuzzyTranspositions = true,
-			MinimumShouldMatch = 2,
-			FuzzyRewrite = MultiTermQueryRewrite.TopTermsBlendedFreqs(10),
-			Lenient = true,
-			Operator = Operator.Or
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -64,12 +69,5 @@ namespace Tests.QueryDsl.FullText.Match
 				.FuzzyRewrite(MultiTermQueryRewrite.TopTermsBlendedFreqs(10))
 				.Name("named_query")
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IMatchQuery>(a => a.Match)
-		{
-			q => q.Query = null,
-			q => q.Query = string.Empty,
-			q => q.Field = null
-		};
 	}
 }

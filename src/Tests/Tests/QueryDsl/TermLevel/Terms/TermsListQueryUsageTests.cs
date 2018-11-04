@@ -1,20 +1,25 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.TermLevel.Terms
 {
 	public class TermsListQueryUsageTests : QueryDslUsageTestsBase
 	{
-		public TermsListQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		public TermsListQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override QueryContainer QueryInitializer => new TermsQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Field = "description",
+			Terms = new List<string> { "term1", "term2" }
+		};
 
 		protected override object QueryJson => new
 		{
@@ -24,14 +29,6 @@ namespace Tests.QueryDsl.TermLevel.Terms
 				boost = 1.1,
 				description = new[] { "term1", "term2" }
 			}
-		};
-
-		protected override QueryContainer QueryInitializer => new TermsQuery
-		{
-			Name = "named_query",
-			Boost = 1.1,
-			Field = "description",
-			Terms = new List<string> { "term1", "term2" }
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -45,22 +42,13 @@ namespace Tests.QueryDsl.TermLevel.Terms
 
 	public class TermsListOfListIntegrationTests : QueryDslIntegrationTestsBase
 	{
+		private readonly List<List<string>> _terms = new List<List<string>> { new List<string> { "term1", "term2" } };
+
 		public TermsListOfListIntegrationTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		private List<List<string>> _terms = new List<List<string>> { new List<string> { "term1", "term2" } };
-
-		protected override int ExpectStatusCode => 400;
 		protected override bool ExpectIsValid => false;
 
-		protected override object QueryJson => new
-		{
-			terms = new
-			{
-				_name = "named_query",
-				boost = 1.1,
-				description = new[] { new [] { "term1", "term2" } },
-			}
-		};
+		protected override int ExpectStatusCode => 400;
 
 		protected override QueryContainer QueryInitializer => new TermsQuery
 		{
@@ -68,6 +56,16 @@ namespace Tests.QueryDsl.TermLevel.Terms
 			Boost = 1.1,
 			Field = "description",
 			Terms = _terms
+		};
+
+		protected override object QueryJson => new
+		{
+			terms = new
+			{
+				_name = "named_query",
+				boost = 1.1,
+				description = new[] { new[] { "term1", "term2" } },
+			}
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -94,23 +92,14 @@ namespace Tests.QueryDsl.TermLevel.Terms
 
 	public class TermsListOfListStringAgainstNumericFieldIntegrationTests : QueryDslIntegrationTestsBase
 	{
+		private readonly List<List<string>> _terms = new List<List<string>> { new List<string> { "term1", "term2" } };
+
 		public TermsListOfListStringAgainstNumericFieldIntegrationTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		private List<List<string>> _terms = new List<List<string>> { new List<string> { "term1", "term2" } };
+		protected override bool ExpectIsValid => false;
 
 
 		protected override int ExpectStatusCode => 400;
-		protected override bool ExpectIsValid => false;
-
-		protected override object QueryJson => new
-		{
-			terms = new
-			{
-				_name = "named_query",
-				boost = 1.1,
-				numberOfCommits = new[] { new [] { "term1", "term2" } }
-			}
-		};
 
 		protected override QueryContainer QueryInitializer => new TermsQuery
 		{
@@ -118,6 +107,16 @@ namespace Tests.QueryDsl.TermLevel.Terms
 			Boost = 1.1,
 			Field = "numberOfCommits",
 			Terms = _terms,
+		};
+
+		protected override object QueryJson => new
+		{
+			terms = new
+			{
+				_name = "named_query",
+				boost = 1.1,
+				numberOfCommits = new[] { new[] { "term1", "term2" } }
+			}
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -138,7 +137,5 @@ namespace Tests.QueryDsl.TermLevel.Terms
 			var rootCause = rootCauses.First();
 			rootCause.Type.Should().Be("parsing_exception");
 		}
-
 	}
-
 }

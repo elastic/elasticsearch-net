@@ -4,9 +4,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Aggregations.Pipeline.BucketSelector
 {
@@ -76,7 +74,7 @@ namespace Tests.Aggregations.Pipeline.BucketSelector
 					new SumAggregation("commits", "numberOfCommits") &&
 					new BucketSelectorAggregation("commits_bucket_filter", new MultiBucketsPath
 					{
-						{"totalCommits", "commits"},
+						{ "totalCommits", "commits" },
 					})
 					{
 						Script = new InlineScript("params.totalCommits >= 500")

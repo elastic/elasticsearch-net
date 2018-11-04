@@ -2,7 +2,6 @@
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.QueryDsl.FullText.QueryString
@@ -10,6 +9,37 @@ namespace Tests.QueryDsl.FullText.QueryString
 	public class QueryStringUsageTests : QueryDslUsageTestsBase
 	{
 		public QueryStringUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IQueryStringQuery>(a => a.QueryString)
+		{
+			q => q.Query = null,
+			q => q.Query = string.Empty,
+		};
+
+		protected override QueryContainer QueryInitializer => new QueryStringQuery
+		{
+			Fields = Field<Project>(p => p.Description).And("myOtherField"),
+			Boost = 1.1,
+			Name = "named_query",
+			Query = "hello world",
+			DefaultField = Field<Project>(p => p.Description),
+			DefaultOperator = Operator.Or,
+			Analyzer = "standard",
+			QuoteAnalyzer = "quote-an",
+			AllowLeadingWildcard = true,
+			MaximumDeterminizedStates = 2,
+			Escape = true,
+			FuzzyPrefixLength = 2,
+			FuzzyMaxExpansions = 3,
+			FuzzyRewrite = MultiTermQueryRewrite.ConstantScore,
+			Rewrite = MultiTermQueryRewrite.ConstantScore,
+			Fuzziness = Fuzziness.Auto,
+			TieBreaker = 1.2,
+			AnalyzeWildcard = true,
+			MinimumShouldMatch = 2,
+			QuoteFieldSuffix = "'",
+			Lenient = true
+		};
 
 		protected override object QueryJson => new
 		{
@@ -39,38 +69,13 @@ namespace Tests.QueryDsl.FullText.QueryString
 			}
 		};
 
-		protected override QueryContainer QueryInitializer => new QueryStringQuery
-		{
-			Fields = Field<Project>(p=>p.Description).And("myOtherField"),
-			Boost = 1.1,
-			Name = "named_query",
-			Query = "hello world",
-			DefaultField = Field<Project>(p=>p.Description),
-			DefaultOperator = Operator.Or,
-			Analyzer = "standard",
-			QuoteAnalyzer = "quote-an",
-			AllowLeadingWildcard = true,
-			MaximumDeterminizedStates = 2,
-			Escape = true,
-			FuzzyPrefixLength = 2,
-			FuzzyMaxExpansions = 3,
-			FuzzyRewrite = MultiTermQueryRewrite.ConstantScore,
-			Rewrite = MultiTermQueryRewrite.ConstantScore,
-			Fuzziness = Fuzziness.Auto,
-			TieBreaker = 1.2,
-			AnalyzeWildcard = true,
-			MinimumShouldMatch = 2,
-			QuoteFieldSuffix = "'",
-			Lenient = true
-		};
-
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.QueryString(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Fields(f => f.Field(p=>p.Description).Field("myOtherField"))
+				.Fields(f => f.Field(p => p.Description).Field("myOtherField"))
 				.Query("hello world")
-				.DefaultField(p=>p.Description)
+				.DefaultField(p => p.Description)
 				.DefaultOperator(Operator.Or)
 				.Analyzer("standard")
 				.QuoteAnalyzer("quote-an")
@@ -88,11 +93,5 @@ namespace Tests.QueryDsl.FullText.QueryString
 				.QuoteFieldSuffix("'")
 				.Lenient()
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IQueryStringQuery>(a => a.QueryString)
-		{
-			q => q.Query = null,
-			q => q.Query = string.Empty,
-		};
 	}
 }

@@ -5,6 +5,8 @@ namespace Tests.Mapping.Types.Core.Keyword
 {
 	public class KeywordTest
 	{
+		public char Char { get; set; }
+
 		[Keyword(
 			Boost = 1.2,
 			EagerGlobalOrdinals = true,
@@ -16,12 +18,10 @@ namespace Tests.Mapping.Types.Core.Keyword
 		)]
 		public string Full { get; set; }
 
+		public Guid Guid { get; set; }
+
 		[Keyword]
 		public string Minimal { get; set; }
-
-        public char Char { get; set; }
-
-        public Guid Guid { get; set; }
 	}
 
 	public class KeywordAttributeTests : AttributeTestsBase<KeywordTest>

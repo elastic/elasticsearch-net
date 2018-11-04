@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.Indices.AliasManagement.AliasExists
@@ -16,6 +13,17 @@ namespace Tests.Indices.AliasManagement.AliasExists
 		: ApiIntegrationTestBase<WritableCluster, IExistsResponse, IAliasExistsRequest, AliasExistsDescriptor, AliasExistsRequest>
 	{
 		public AliasExistsApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+
+		protected override Func<AliasExistsDescriptor, IAliasExistsRequest> Fluent => d => d;
+		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+
+		protected override AliasExistsRequest Initializer => new AliasExistsRequest(Names(CallIsolatedValue + "-alias"));
+
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/_alias/{CallIsolatedValue}-alias";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -26,29 +34,15 @@ namespace Tests.Indices.AliasManagement.AliasExists
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.AliasExists(CallIsolatedValue + "-alias", f),
-			fluentAsync: (client, f) => client.AliasExistsAsync(CallIsolatedValue + "-alias", f),
-			request: (client, r) => client.AliasExists(r),
-			requestAsync: (client, r) => client.AliasExistsAsync(r)
+			(client, f) => client.AliasExists(CallIsolatedValue + "-alias", f),
+			(client, f) => client.AliasExistsAsync(CallIsolatedValue + "-alias", f),
+			(client, r) => client.AliasExists(r),
+			(client, r) => client.AliasExistsAsync(r)
 		);
-
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override string UrlPath => $"/_alias/{CallIsolatedValue}-alias";
-
-		protected override bool SupportsDeserialization => false;
 
 		protected override AliasExistsDescriptor NewDescriptor() => new AliasExistsDescriptor(Names(CallIsolatedValue + "-alias"));
 
-		protected override Func<AliasExistsDescriptor, IAliasExistsRequest> Fluent => d => d;
-
-		protected override AliasExistsRequest Initializer => new AliasExistsRequest(Names(CallIsolatedValue + "-alias"));
-
-		protected override void ExpectResponse(IExistsResponse response)
-		{
-			response.Exists.Should().BeTrue();
-		}
+		protected override void ExpectResponse(IExistsResponse response) => response.Exists.Should().BeTrue();
 	}
 
 	public class AliasExistsNotFoundApiTests
@@ -57,25 +51,25 @@ namespace Tests.Indices.AliasManagement.AliasExists
 	{
 		public AliasExistsNotFoundApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.AliasExists("unknown-alias", f),
-			fluentAsync: (client, f) => client.AliasExistsAsync("unknown-alias", f),
-			request: (client, r) => client.AliasExists(r),
-			requestAsync: (client, r) => client.AliasExistsAsync(r)
-		);
-
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 404;
-		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override string UrlPath => $"/_alias/unknown-alias";
-
-		protected override bool SupportsDeserialization => false;
-
-		protected override AliasExistsDescriptor NewDescriptor() => new AliasExistsDescriptor(Names("unknown-alias"));
 
 		protected override Func<AliasExistsDescriptor, IAliasExistsRequest> Fluent => d => d;
+		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 
 		protected override AliasExistsRequest Initializer => new AliasExistsRequest(Names("unknown-alias"));
+
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/_alias/unknown-alias";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.AliasExists("unknown-alias", f),
+			(client, f) => client.AliasExistsAsync("unknown-alias", f),
+			(client, r) => client.AliasExists(r),
+			(client, r) => client.AliasExistsAsync(r)
+		);
+
+		protected override AliasExistsDescriptor NewDescriptor() => new AliasExistsDescriptor(Names("unknown-alias"));
 
 		protected override void ExpectResponse(IExistsResponse response)
 		{

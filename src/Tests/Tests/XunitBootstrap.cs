@@ -1,6 +1,6 @@
 ﻿using Elastic.Xunit;
 using Tests.Core.Xunit;
-using Tests.Framework.ManagedElasticsearch;
+using Xunit;
 
-[assembly: Xunit.TestFrameworkAttribute("Elastic.Xunit.Sdk.ElasticTestFramework", "Elastic.Xunit")]
+[assembly: TestFramework("Elastic.Xunit.Sdk.ElasticTestFramework", "Elastic.Xunit")]
 [assembly: ElasticXunitConfiguration(typeof(NestXunitRunOptions))]

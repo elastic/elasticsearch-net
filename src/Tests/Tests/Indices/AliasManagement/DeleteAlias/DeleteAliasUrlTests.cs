@@ -13,12 +13,11 @@ namespace Tests.Indices.AliasManagement.DeleteAlias
 			var hardcoded = "hardcoded";
 			var index = "index";
 			await DELETE($"/{index}/_alias/{hardcoded}")
-				.Fluent(c=>c.DeleteAlias(index, hardcoded))
-				.Request(c=>c.DeleteAlias(new DeleteAliasRequest(index, hardcoded)))
-				.FluentAsync(c=>c.DeleteAliasAsync(index, hardcoded))
-				.RequestAsync(c=>c.DeleteAliasAsync(new DeleteAliasRequest(index, hardcoded)))
+					.Fluent(c => c.DeleteAlias(index, hardcoded))
+					.Request(c => c.DeleteAlias(new DeleteAliasRequest(index, hardcoded)))
+					.FluentAsync(c => c.DeleteAliasAsync(index, hardcoded))
+					.RequestAsync(c => c.DeleteAliasAsync(new DeleteAliasRequest(index, hardcoded)))
 				;
-
 		}
 	}
 }

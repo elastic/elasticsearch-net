@@ -18,6 +18,45 @@ namespace Tests.Aggregations
 	{
 		protected AggregationUsageTestBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
+		protected virtual Nest.Indices AgainstIndex { get; } = Index<Project>();
+
+		protected abstract object AggregationJson { get; }
+
+		protected override bool ExpectIsValid => true;
+
+		protected sealed override object ExpectJson => QueryScopeJson == null
+			? (object)new { size = 0, aggs = AggregationJson }
+			: new { size = 0, aggs = AggregationJson, query = QueryScopeJson };
+
+		protected override int ExpectStatusCode => 200;
+
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Size(0)
+			.Index(AgainstIndex)
+			.Type<Project>()
+			.TypedKeys(TestClient.Configuration.Random.TypedKeys)
+			.Query(q => QueryScope)
+			.Aggregations(FluentAggs);
+
+		protected abstract Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs { get; }
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
+		protected override SearchRequest<Project> Initializer =>
+			new SearchRequest<Project>(AgainstIndex, Type<Project>())
+			{
+				Query = QueryScope,
+				Size = 0,
+				TypedKeys = TestClient.Configuration.Random.TypedKeys,
+				Aggregations = InitializerAggs
+			};
+
+		protected abstract AggregationDictionary InitializerAggs { get; }
+
+		protected virtual QueryContainer QueryScope { get; }
+
+		protected virtual object QueryScopeJson { get; }
+		protected override string UrlPath => $"/project/doc/_search";
+
 		// https://youtrack.jetbrains.com/issue/RIDER-19912
 		[U] protected override Task HitsTheCorrectUrl() => base.HitsTheCorrectUrl();
 
@@ -34,58 +73,19 @@ namespace Tests.Aggregations
 		[I] public override Task ReturnsExpectedResponse() => base.ReturnsExpectedResponse();
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Search<Project>(f),
-			fluentAsync: (client, f) => client.SearchAsync<Project>(f),
-			request: (client, r) => client.Search<Project>(r),
-			requestAsync: (client, r) => client.SearchAsync<Project>(r)
+			(client, f) => client.Search<Project>(f),
+			(client, f) => client.SearchAsync<Project>(f),
+			(client, r) => client.Search<Project>(r),
+			(client, r) => client.SearchAsync<Project>(r)
 		);
-
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/project/doc/_search";
-
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>(this.AgainstIndex, Type<Project>())
-			{
-				Query = QueryScope,
-				Size = 0,
-				TypedKeys = TestClient.Configuration.Random.TypedKeys,
-				Aggregations = InitializerAggs
-			};
-
-		protected virtual QueryContainer QueryScope { get; }
-
-		protected virtual object QueryScopeJson { get; }
-
-		protected virtual Nest.Indices AgainstIndex { get; } = Index<Project>();
-
-		protected abstract AggregationDictionary InitializerAggs { get; }
-
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Size(0)
-			.Index(AgainstIndex)
-			.Type<Project>()
-			.TypedKeys(TestClient.Configuration.Random.TypedKeys)
-			.Query(q=> QueryScope)
-			.Aggregations(this.FluentAggs);
-
-		protected abstract Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs { get; }
-
-		protected sealed override object ExpectJson => this.QueryScopeJson == null  ?
-			 (object) new { size = 0, aggs = AggregationJson }
-			 : new { size = 0, aggs = AggregationJson, query = QueryScopeJson };
-
-		protected abstract object AggregationJson { get;  }
 	}
 
 	public abstract class ProjectsOnlyAggregationUsageTestBase : AggregationUsageTestBase
 	{
-		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/doc/_search";
-
 		protected ProjectsOnlyAggregationUsageTestBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override Nest.Indices AgainstIndex => DefaultSeeder.ProjectsAliasFilter;
+		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/doc/_search";
 
 		// https://youtrack.jetbrains.com/issue/RIDER-19912
 		[U] protected override Task HitsTheCorrectUrl() => base.HitsTheCorrectUrl();

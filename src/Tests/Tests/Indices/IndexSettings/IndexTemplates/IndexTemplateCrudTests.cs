@@ -6,33 +6,34 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Indices.IndexSettings.IndexTemplates
 {
 	public class IndexTemplateCrudTests
-		: CrudTestBase<WritableCluster, IPutIndexTemplateResponse, IGetIndexTemplateResponse, IPutIndexTemplateResponse, IDeleteIndexTemplateResponse, IExistsResponse>
+		: CrudTestBase<WritableCluster, IPutIndexTemplateResponse, IGetIndexTemplateResponse, IPutIndexTemplateResponse, IDeleteIndexTemplateResponse,
+			IExistsResponse>
 	{
 		public IndexTemplateCrudTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses Exists() => Calls<IndexTemplateExistsDescriptor, IndexTemplateExistsRequest, IIndexTemplateExistsRequest, IExistsResponse>(
-			id => new IndexTemplateExistsRequest(id),
-			(id, d) => d,
-			fluent: (s, c, f) => c.IndexTemplateExists(s, f),
-			fluentAsync: (s, c, f) => c.IndexTemplateExistsAsync(s, f),
-			request: (s, c, r) => c.IndexTemplateExists(r),
-			requestAsync: (s, c, r) => c.IndexTemplateExistsAsync(r)
-		);
+		protected override LazyResponses Exists() =>
+			Calls<IndexTemplateExistsDescriptor, IndexTemplateExistsRequest, IIndexTemplateExistsRequest, IExistsResponse>(
+				id => new IndexTemplateExistsRequest(id),
+				(id, d) => d,
+				(s, c, f) => c.IndexTemplateExists(s, f),
+				(s, c, f) => c.IndexTemplateExistsAsync(s, f),
+				(s, c, r) => c.IndexTemplateExists(r),
+				(s, c, r) => c.IndexTemplateExistsAsync(r)
+			);
 
-		protected override LazyResponses Create() => Calls<PutIndexTemplateDescriptor, PutIndexTemplateRequest, IPutIndexTemplateRequest, IPutIndexTemplateResponse>(
-			CreateInitializer,
-			CreateFluent,
-			fluent: (s, c, f) => c.PutIndexTemplate(s, f),
-			fluentAsync: (s, c, f) => c.PutIndexTemplateAsync(s, f),
-			request: (s, c, r) => c.PutIndexTemplate(r),
-			requestAsync: (s, c, r) => c.PutIndexTemplateAsync(r)
-		);
+		protected override LazyResponses Create() =>
+			Calls<PutIndexTemplateDescriptor, PutIndexTemplateRequest, IPutIndexTemplateRequest, IPutIndexTemplateResponse>(
+				CreateInitializer,
+				CreateFluent,
+				(s, c, f) => c.PutIndexTemplate(s, f),
+				(s, c, f) => c.PutIndexTemplateAsync(s, f),
+				(s, c, r) => c.PutIndexTemplate(r),
+				(s, c, r) => c.PutIndexTemplateAsync(r)
+			);
 
 		private PutIndexTemplateRequest CreateInitializer(string name) => new PutIndexTemplateRequest(name)
 		{
@@ -49,14 +50,15 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 				.NumberOfShards(2)
 			);
 
-		protected override LazyResponses Read() => Calls<GetIndexTemplateDescriptor, GetIndexTemplateRequest, IGetIndexTemplateRequest, IGetIndexTemplateResponse>(
-			name => new GetIndexTemplateRequest(name),
-			(name, d) => d.Name(name),
-			fluent: (s, c, f) => c.GetIndexTemplate(f),
-			fluentAsync: (s, c, f) => c.GetIndexTemplateAsync(f),
-			request: (s, c, r) => c.GetIndexTemplate(r),
-			requestAsync: (s, c, r) => c.GetIndexTemplateAsync(r)
-		);
+		protected override LazyResponses Read() =>
+			Calls<GetIndexTemplateDescriptor, GetIndexTemplateRequest, IGetIndexTemplateRequest, IGetIndexTemplateResponse>(
+				name => new GetIndexTemplateRequest(name),
+				(name, d) => d.Name(name),
+				(s, c, f) => c.GetIndexTemplate(f),
+				(s, c, f) => c.GetIndexTemplateAsync(f),
+				(s, c, r) => c.GetIndexTemplate(r),
+				(s, c, r) => c.GetIndexTemplateAsync(r)
+			);
 
 		protected override void ExpectAfterCreate(IGetIndexTemplateResponse response)
 		{
@@ -67,14 +69,15 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 			templateMapping.Settings.NumberOfShards.Should().Be(2);
 		}
 
-		protected override LazyResponses Update() => Calls<PutIndexTemplateDescriptor, PutIndexTemplateRequest, IPutIndexTemplateRequest, IPutIndexTemplateResponse>(
-			PutInitializer,
-			PutFluent,
-			fluent: (s, c, f) => c.PutIndexTemplate(s, f),
-			fluentAsync: (s, c, f) => c.PutIndexTemplateAsync(s, f),
-			request: (s, c, r) => c.PutIndexTemplate(r),
-			requestAsync: (s, c, r) => c.PutIndexTemplateAsync(r)
-		);
+		protected override LazyResponses Update() =>
+			Calls<PutIndexTemplateDescriptor, PutIndexTemplateRequest, IPutIndexTemplateRequest, IPutIndexTemplateResponse>(
+				PutInitializer,
+				PutFluent,
+				(s, c, f) => c.PutIndexTemplate(s, f),
+				(s, c, f) => c.PutIndexTemplateAsync(s, f),
+				(s, c, r) => c.PutIndexTemplate(r),
+				(s, c, r) => c.PutIndexTemplateAsync(r)
+			);
 
 		private PutIndexTemplateRequest PutInitializer(string name) => new PutIndexTemplateRequest(name)
 		{
@@ -87,7 +90,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 
 		private IPutIndexTemplateRequest PutFluent(string name, PutIndexTemplateDescriptor d) => d
 			.IndexPatterns("startingwiththis-*")
-			.Settings(s=>s
+			.Settings(s => s
 				.NumberOfShards(1)
 			);
 
@@ -100,16 +103,17 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 			templateMapping.Settings.NumberOfShards.Should().Be(1);
 		}
 
-		protected override LazyResponses Delete() => Calls<DeleteIndexTemplateDescriptor, DeleteIndexTemplateRequest, IDeleteIndexTemplateRequest, IDeleteIndexTemplateResponse>(
-			name => new DeleteIndexTemplateRequest(name),
-			(name, d) => d,
-			fluent: (s, c, f) => c.DeleteIndexTemplate(s, f),
-			fluentAsync: (s, c, f) => c.DeleteIndexTemplateAsync(s, f),
-			request: (s, c, r) => c.DeleteIndexTemplate(r),
-			requestAsync: (s, c, r) => c.DeleteIndexTemplateAsync(r)
-		);
+		protected override LazyResponses Delete() =>
+			Calls<DeleteIndexTemplateDescriptor, DeleteIndexTemplateRequest, IDeleteIndexTemplateRequest, IDeleteIndexTemplateResponse>(
+				name => new DeleteIndexTemplateRequest(name),
+				(name, d) => d,
+				(s, c, f) => c.DeleteIndexTemplate(s, f),
+				(s, c, f) => c.DeleteIndexTemplateAsync(s, f),
+				(s, c, r) => c.DeleteIndexTemplate(r),
+				(s, c, r) => c.DeleteIndexTemplateAsync(r)
+			);
 
-		protected override async Task GetAfterDeleteIsValid() => await this.AssertOnGetAfterDelete(r => r.ShouldNotBeValid());
+		protected override async Task GetAfterDeleteIsValid() => await AssertOnGetAfterDelete(r => r.ShouldNotBeValid());
 
 		protected override void ExpectDeleteNotFoundResponse(IDeleteIndexTemplateResponse response)
 		{

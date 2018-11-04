@@ -1,14 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using Nest;
-using Tests.Framework.Integration;
-using static Nest.Infer;
-using System.Collections.Generic;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.Integration;
+using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.Average
 {
@@ -51,7 +49,7 @@ namespace Tests.Aggregations.Metric.Average
 			{
 				Meta = new Dictionary<string, object>
 				{
-					{"foo", "bar"}
+					{ "foo", "bar" }
 				},
 				Missing = 10,
 				Script = new InlineScript("_value * 1.2")

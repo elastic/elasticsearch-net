@@ -6,13 +6,26 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.Watcher.DeactivateWatch
 {
-	public class DeactivateWatchApiTests : ApiIntegrationTestBase<XPackCluster, IDeactivateWatchResponse, IDeactivateWatchRequest, DeactivateWatchDescriptor, DeactivateWatchRequest>
+	public class DeactivateWatchApiTests
+		: ApiIntegrationTestBase<XPackCluster, IDeactivateWatchResponse, IDeactivateWatchRequest, DeactivateWatchDescriptor, DeactivateWatchRequest>
 	{
 		public DeactivateWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+
+		protected override object ExpectJson => null;
+		protected override int ExpectStatusCode => 200;
+
+		protected override Func<DeactivateWatchDescriptor, IDeactivateWatchRequest> Fluent => f => f;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+
+		protected override DeactivateWatchRequest Initializer =>
+			new DeactivateWatchRequest(CallIsolatedValue);
+
+		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}/_deactivate";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -58,26 +71,13 @@ namespace Tests.XPack.Watcher.DeactivateWatch
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.DeactivateWatch(CallIsolatedValue, f),
-			fluentAsync: (client, f) => client.DeactivateWatchAsync(CallIsolatedValue, f),
-			request: (client, r) => client.DeactivateWatch(r),
-			requestAsync: (client, r) => client.DeactivateWatchAsync(r)
+			(client, f) => client.DeactivateWatch(CallIsolatedValue, f),
+			(client, f) => client.DeactivateWatchAsync(CallIsolatedValue, f),
+			(client, r) => client.DeactivateWatch(r),
+			(client, r) => client.DeactivateWatchAsync(r)
 		);
 
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-
-		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}/_deactivate";
-
 		protected override DeactivateWatchDescriptor NewDescriptor() => new DeactivateWatchDescriptor(CallIsolatedValue);
-
-		protected override object ExpectJson => null;
-
-		protected override Func<DeactivateWatchDescriptor, IDeactivateWatchRequest> Fluent => f => f;
-
-		protected override DeactivateWatchRequest Initializer =>
-			new DeactivateWatchRequest(CallIsolatedValue);
 
 		protected override void ExpectResponse(IDeactivateWatchResponse response)
 		{

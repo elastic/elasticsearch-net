@@ -4,7 +4,6 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Domain;
-using Tests.Framework;
 
 namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 {
@@ -13,7 +12,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 		[U] public void Eq()
 		{
 			Id types = "foo";
-			Id[] equal = {"foo"};
+			Id[] equal = { "foo" };
 			foreach (var t in equal)
 			{
 				(t == types).ShouldBeTrue(t);
@@ -29,21 +28,22 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 			l1.Should().Be(2);
 
 			var g = Guid.NewGuid();
-			l1 = g; l2 = g;
+			l1 = g;
+			l2 = g;
 			(l1 == l2).ShouldBeTrue(l2);
 			l1.Should().Be(l2);
 
-			var project = new Project {Name = "x"};
-			l1 = Id.From(project); l2 = Id.From(project);
+			var project = new Project { Name = "x" };
+			l1 = Id.From(project);
+			l2 = Id.From(project);
 			(l1 == l2).ShouldBeTrue(l2);
 			l1.Should().Be(l2);
-
 		}
 
 		[U] public void NotEq()
 		{
 			Id types = "foo";
-			Id[] notEqual = {"bar", "" , "foo  "};
+			Id[] notEqual = { "bar", "", "foo  " };
 			foreach (var t in notEqual)
 			{
 				(t != types).ShouldBeTrue(t);
@@ -57,12 +57,14 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 			l1.Should().NotBe(3);
 			l1.Should().NotBe("3");
 
-			l1 = Guid.NewGuid(); l2 = Guid.NewGuid();
+			l1 = Guid.NewGuid();
+			l2 = Guid.NewGuid();
 			(l1 != l2).ShouldBeTrue(l2);
 			l1.Should().NotBe(l2);
 
 			//when comparing objects we can only do referential equality. Project does not have its own Equals implementation.
-			l1 = Id.From(new Project {Name = "x"}); l2 = Id.From(new Project {Name = "x"});
+			l1 = Id.From(new Project { Name = "x" });
+			l2 = Id.From(new Project { Name = "x" });
 			(l1 != l2).ShouldBeTrue(l2);
 			l1.Should().NotBe(l2);
 		}

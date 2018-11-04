@@ -4,7 +4,6 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 #pragma warning disable 618 // Uses CollectPayloads
 
@@ -14,22 +13,11 @@ namespace Tests.QueryDsl.Joining.SpanNear
 	{
 		public SpanNearUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object QueryJson => new
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISpanNearQuery>(a => a.SpanNear)
 		{
-			span_near = new
-			{
-				clauses = new object[] {
-					new { span_term = new { field = new { value = "value1" } } },
-					new { span_term = new { field = new { value = "value2" } } },
-					new { span_term = new { field = new { value = "value3" } } },
-					new { span_gap = new { field = 2 } }
-				},
-				slop = 12,
-				in_order = false,
-				_name = "named_query",
-				boost = 1.1
-			}
-
+			q => q.Clauses = null,
+			q => q.Clauses = Enumerable.Empty<ISpanQuery>(),
+			q => q.Clauses = new[] { new SpanQuery() },
 		};
 
 		protected override QueryContainer QueryInitializer => new SpanNearQuery
@@ -47,6 +35,24 @@ namespace Tests.QueryDsl.Joining.SpanNear
 			InOrder = false,
 		};
 
+		protected override object QueryJson => new
+		{
+			span_near = new
+			{
+				clauses = new object[]
+				{
+					new { span_term = new { field = new { value = "value1" } } },
+					new { span_term = new { field = new { value = "value2" } } },
+					new { span_term = new { field = new { value = "value3" } } },
+					new { span_gap = new { field = 2 } }
+				},
+				slop = 12,
+				in_order = false,
+				_name = "named_query",
+				boost = 1.1
+			}
+		};
+
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.SpanNear(sn => sn
 				.Name("named_query")
@@ -60,12 +66,5 @@ namespace Tests.QueryDsl.Joining.SpanNear
 				.Slop(12)
 				.InOrder(false)
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISpanNearQuery>(a => a.SpanNear)
-		{
-			q => q.Clauses = null,
-			q => q.Clauses = Enumerable.Empty<ISpanQuery>(),
-			q => q.Clauses = new [] { new SpanQuery() },
-		};
 	}
 }

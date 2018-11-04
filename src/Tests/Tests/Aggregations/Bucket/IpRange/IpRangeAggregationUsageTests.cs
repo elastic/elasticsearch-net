@@ -24,8 +24,8 @@ namespace Tests.Aggregations.Bucket.IpRange
 					field = "leadDeveloper.ipAddress",
 					ranges = new object[]
 					{
-						new {to = "127.0.0.1"},
-						new {from = "127.0.0.1"}
+						new { to = "127.0.0.1" },
+						new { from = "127.0.0.1" }
 					}
 				}
 			}
@@ -46,8 +46,8 @@ namespace Tests.Aggregations.Bucket.IpRange
 				Field = Field((Project p) => p.LeadDeveloper.IpAddress),
 				Ranges = new List<Nest.IpRange>
 				{
-					new Nest.IpRange {To = "127.0.0.1"},
-					new Nest.IpRange {From = "127.0.0.1"}
+					new Nest.IpRange { To = "127.0.0.1" },
+					new Nest.IpRange { From = "127.0.0.1" }
 				}
 			};
 

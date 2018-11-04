@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
 using Tests.Core.Extensions;
 
@@ -30,7 +28,7 @@ namespace Tests
 		private static Uri CreateUri(Uri baseUri, Dictionary<string, string> newQueryString)
 		{
 			var query = FlattenQueryString(newQueryString);
-			var uriBuilder = new UriBuilder(baseUri) {Query = query };
+			var uriBuilder = new UriBuilder(baseUri) { Query = query };
 			return uriBuilder.Uri;
 		}
 
@@ -47,6 +45,7 @@ namespace Tests
 
 			//actualParameters.Count.Should().Be(expectedParameters.Count, "All query string parameters need to be asserted.\r\n{0}", because);
 			if (actualParameters.Count == 0) return;
+
 			actualParameters.Should().ContainKeys(expectedParameters.Keys.ToArray(), because);
 			actualParameters.Should().Equal(expectedParameters, because);
 		}
@@ -56,20 +55,22 @@ namespace Tests
 			Dictionary<string, string> expectedParameters,
 			Uri actualUri,
 			Dictionary<string, string> actualParameters,
-			string origin)
+			string origin
+		)
 		{
 			var because = $"\r\nExpected query string from {origin}: {expectedUri.Query} on {expectedUri.PathAndQuery}";
 			because += $"\r\nActual query string from {origin}: {actualUri.Query} on {actualUri.PathAndQuery}\r\n";
 
 			//only assert these if they appear in expectedUri
-			var specialQueryStringParameters = new[] {"pretty", "typed_keys", "error_trace"};
+			var specialQueryStringParameters = new[] { "pretty", "typed_keys", "error_trace" };
 			foreach (var key in specialQueryStringParameters)
 			{
 				if (!expectedParameters.ContainsKey(key)) continue;
+
 				var expected = expectedParameters[key];
 				actualParameters.Should().ContainKey(key, "query value for '{0}' expected to exist\r\n{1}", key, because);
 				var actual = actualParameters[key];
-				new[] {key, actual}.Should().BeEquivalentTo(new[] {key, expected}, "query value for '{0}' should be equal\r\n{1}", key, because);
+				new[] { key, actual }.Should().BeEquivalentTo(new[] { key, expected }, "query value for '{0}' should be equal\r\n{1}", key, because);
 			}
 
 			foreach (var key in specialQueryStringParameters)
@@ -88,7 +89,7 @@ namespace Tests
 
 		private static Uri CreateExpectedUri(Uri u, string pathAndQueryString)
 		{
-			var paths = (pathAndQueryString ?? "").Split(new[] {'?'}, 2);
+			var paths = (pathAndQueryString ?? "").Split(new[] { '?' }, 2);
 
 			string path = paths.First(), query = string.Empty;
 			if (paths.Length > 1) query = paths.Last();
@@ -96,9 +97,11 @@ namespace Tests
 			var expectedUri = new UriBuilder("http", "localhost", u.Port, path, "?" + query).Uri;
 			return expectedUri;
 		}
+
 		private static string FlattenQueryString(Dictionary<string, string> queryString)
 		{
 			if (queryString == null || queryString.Count == 0) return string.Empty;
+
 			return string.Join("&", queryString.Select(kv => $"{kv.Key}={kv.Value}"));
 		}
 
@@ -106,7 +109,9 @@ namespace Tests
 		{
 			var query = u.Query;
 			if (string.IsNullOrEmpty(query) || query.Length <= 1) return new Dictionary<string, string>();
-			return query.Substring(1).Split('&')
+
+			return query.Substring(1)
+				.Split('&')
 				.Select(v => v.Split('='))
 				.Where(k => !string.IsNullOrWhiteSpace(k[0]))
 				.ToDictionary(k => k[0], v => v.Last());

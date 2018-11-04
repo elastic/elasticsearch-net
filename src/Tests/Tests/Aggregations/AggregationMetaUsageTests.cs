@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Aggregations
 {
@@ -52,7 +49,7 @@ namespace Tests.Aggregations
 		protected override AggregationDictionary InitializerAggs =>
 			new MinAggregation("min_last_activity", Infer.Field<Project>(p => p.LastActivity))
 			{
-				Meta = new Dictionary<string,object>
+				Meta = new Dictionary<string, object>
 				{
 					{ "meta_1", "value_1" },
 					{ "meta_2", 2 },

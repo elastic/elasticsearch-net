@@ -5,9 +5,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.PercentileRanks
@@ -23,7 +21,7 @@ namespace Tests.Aggregations.Metric.PercentileRanks
 				percentile_ranks = new
 				{
 					field = "numberOfCommits",
-					values = new[] {15.0, 30.0},
+					values = new[] { 15.0, 30.0 },
 					tdigest = new
 					{
 						compression = 200.0
@@ -53,7 +51,7 @@ namespace Tests.Aggregations.Metric.PercentileRanks
 		protected override AggregationDictionary InitializerAggs =>
 			new PercentileRanksAggregation("commits_outlier", Field<Project>(p => p.NumberOfCommits))
 			{
-				Values = new List<double> {15, 30},
+				Values = new List<double> { 15, 30 },
 				Method = new TDigestMethod
 				{
 					Compression = 200
