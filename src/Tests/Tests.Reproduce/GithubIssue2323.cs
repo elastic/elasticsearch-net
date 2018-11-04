@@ -3,7 +3,6 @@ using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
-using Tests.Core.ManagedElasticsearch;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 
@@ -13,27 +12,24 @@ namespace Tests.Reproduce
 	{
 		private readonly ReadOnlyCluster _cluster;
 
-		public GithubIssue2323(ReadOnlyCluster cluster)
-		{
-			_cluster = cluster;
-		}
+		public GithubIssue2323(ReadOnlyCluster cluster) => _cluster = cluster;
 
 		[I]
 		public void NestedInnerHitsShouldIncludedNestedProperty()
 		{
 			var client = _cluster.Client;
 			var response = client.Search<Project>(s => s
-					.Query(q => q
-							.Nested(n => n
-									.Path(p => p.Tags)
-									.Query(nq => nq
-											.MatchAll()
-									)
-									.InnerHits(i => i
-											.Source(false)
-									)
-							)
+				.Query(q => q
+					.Nested(n => n
+						.Path(p => p.Tags)
+						.Query(nq => nq
+							.MatchAll()
+						)
+						.InnerHits(i => i
+							.Source(false)
+						)
 					)
+				)
 			);
 
 			response.ShouldBeValid();

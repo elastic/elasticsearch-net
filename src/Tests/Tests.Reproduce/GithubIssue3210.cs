@@ -1,14 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
-using Nest;
 using FluentAssertions;
-using Tests.Core;
+using Nest;
 using Tests.Core.Client;
 
 namespace Tests.Reproduce

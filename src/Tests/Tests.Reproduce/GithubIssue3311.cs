@@ -10,6 +10,7 @@ namespace Tests.Reproduce
 	public class GithubIssue3314 : IClusterFixture<WritableCluster>
 	{
 		private readonly WritableCluster _cluster;
+
 		public GithubIssue3314(WritableCluster cluster) => _cluster = cluster;
 
 		[I]
@@ -17,7 +18,7 @@ namespace Tests.Reproduce
 		{
 			var indexName = "max-bucket-reproduce";
 
-			var ec = this._cluster.Client;
+			var ec = _cluster.Client;
 			var now = DateTime.Now;
 			var testdata = new DateTime[] { }
 				.Concat(Enumerable.Repeat(now.AddMinutes(1), 3))
@@ -57,10 +58,9 @@ namespace Tests.Reproduce
 		public class MyClass
 		{
 			public int Id { get; set; }
-			public DateTime Time { get; set; }
-			public int MessageType { get; set; }
 			public string Message { get; set; }
+			public int MessageType { get; set; }
+			public DateTime Time { get; set; }
 		}
 	}
-
 }

@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Diagnostics;
-using FluentAssertions;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
+using FluentAssertions;
 using Nest;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
@@ -12,17 +12,6 @@ namespace Tests.Reproduce
 {
 	public class GithubIssue2723
 	{
-		public class Residential
-		{
-			public string SourceDisplayName { get; set; }
-			public string FullAddress { get; set; }
-			public string FirstName1 { get; set; }
-			public string CityName { get; set; }
-			public string PostalCode { get; set; }
-			public string Country { get; set; }
-			public string SourceDisplayPhone { get; set; }
-		}
-
 		[U]
 		public void SerializationOverhead()
 		{
@@ -48,8 +37,9 @@ namespace Tests.Reproduce
 				response.Took.Should().Be(147);
 			}
 
-			var orderedElapsed = elapsed.OrderBy(e=>e).ToList();
-			var median = TimeSpan.FromTicks((orderedElapsed.ElementAt(iterations/2).Ticks + orderedElapsed.ElementAt((iterations-1)/2).Ticks) / 2);
+			var orderedElapsed = elapsed.OrderBy(e => e).ToList();
+			var median = TimeSpan.FromTicks((orderedElapsed.ElementAt(iterations / 2).Ticks + orderedElapsed.ElementAt((iterations - 1) / 2).Ticks)
+				/ 2);
 			median.Should().BeLessThan(TimeSpan.FromMilliseconds(5)).And.BeGreaterThan(TimeSpan.FromMilliseconds(0));
 		}
 
@@ -70,6 +60,17 @@ namespace Tests.Reproduce
 				.Take(1)
 			);
 			return response;
+		}
+
+		public class Residential
+		{
+			public string CityName { get; set; }
+			public string Country { get; set; }
+			public string FirstName1 { get; set; }
+			public string FullAddress { get; set; }
+			public string PostalCode { get; set; }
+			public string SourceDisplayName { get; set; }
+			public string SourceDisplayPhone { get; set; }
 		}
 	}
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Text;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
@@ -14,7 +13,8 @@ namespace Tests.Reproduce
 		[U]
 		public void CanDeserializeCopyTo()
 		{
-			var json = "{\"test-events-v1-201412\":{\"mappings\":{\"events\":{\"dynamic\":\"false\",\"_size\":{\"enabled\":true},\"properties\":{\"created_utc\":{\"type\":\"date\"},\"data\":{\"properties\":{\"@environment\":{\"properties\":{\"o_s_name\":{\"type\":\"text\",\"index\":false,\"copy_to\":[\"os\"]}}}}},\"id\":{\"type\":\"keyword\"},\"os\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\",\"ignore_above\":256}}}}}}},\"test-events-v1-201502\":{\"mappings\":{\"events\":{\"dynamic\":\"false\",\"_size\":{\"enabled\":true},\"properties\":{\"created_utc\":{\"type\":\"date\"},\"data\":{\"properties\":{\"@environment\":{\"properties\":{\"o_s_name\":{\"type\":\"text\",\"index\":false,\"copy_to\":[\"os\"]}}}}},\"id\":{\"type\":\"keyword\"},\"os\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\",\"ignore_above\":256}}}}}}}}";
+			var json =
+				"{\"test-events-v1-201412\":{\"mappings\":{\"events\":{\"dynamic\":\"false\",\"_size\":{\"enabled\":true},\"properties\":{\"created_utc\":{\"type\":\"date\"},\"data\":{\"properties\":{\"@environment\":{\"properties\":{\"o_s_name\":{\"type\":\"text\",\"index\":false,\"copy_to\":[\"os\"]}}}}},\"id\":{\"type\":\"keyword\"},\"os\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\",\"ignore_above\":256}}}}}}},\"test-events-v1-201502\":{\"mappings\":{\"events\":{\"dynamic\":\"false\",\"_size\":{\"enabled\":true},\"properties\":{\"created_utc\":{\"type\":\"date\"},\"data\":{\"properties\":{\"@environment\":{\"properties\":{\"o_s_name\":{\"type\":\"text\",\"index\":false,\"copy_to\":[\"os\"]}}}}},\"id\":{\"type\":\"keyword\"},\"os\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\",\"ignore_above\":256}}}}}}}}";
 
 			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 
@@ -34,15 +34,10 @@ namespace Tests.Reproduce
 		{
 			public override void Visit(ITextProperty property)
 			{
-				if (property.Name == "o_s_name")
-				{
-					property.CopyTo.Should().NotBeNull();
-				}
+				if (property.Name == "o_s_name") property.CopyTo.Should().NotBeNull();
 			}
 		}
 
-		public class Events
-		{
-		}
+		public class Events { }
 	}
 }

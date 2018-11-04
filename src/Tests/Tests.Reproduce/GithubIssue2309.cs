@@ -53,14 +53,14 @@ namespace Tests.Reproduce
 			var client = new ElasticClient(settings);
 
 			var reindexResponse = client.ReindexOnServer(r => r
-					.Source(s => s
-							.Index("employees-v1")
-							.Type("employee")
-					)
-					.Destination(d => d
-							.Index("employees-v2")
-					)
-					.Conflicts(Conflicts.Proceed)
+				.Source(s => s
+					.Index("employees-v1")
+					.Type("employee")
+				)
+				.Destination(d => d
+					.Index("employees-v2")
+				)
+				.Conflicts(Conflicts.Proceed)
 			);
 
 			reindexResponse.ShouldNotBeValid();

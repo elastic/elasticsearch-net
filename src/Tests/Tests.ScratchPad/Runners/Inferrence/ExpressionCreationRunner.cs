@@ -8,6 +8,6 @@ namespace Tests.ScratchPad.Runners.Inferrence
 	{
 		private static Expression<Func<T, object>> Exp<T>(Expression<Func<T, object>> exp) => exp;
 
-		protected override RoutineBase Routine() => this.Loop(() => Exp<Project>(p => p.LeadDeveloper.FirstName), (c, f) => { });
+		protected override RoutineBase Routine() => Loop(() => Exp<Project>(p => p.LeadDeveloper.FirstName), (c, f) => { });
 	}
 }

@@ -1,21 +1,14 @@
 ﻿using System;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
-using Nest;
 using FluentAssertions;
-using Tests.Core;
+using Nest;
 using Tests.Core.Client;
 
 namespace Tests.Reproduce
 {
 	public class GithubIssue1901
 	{
-		private class Example
-		{
-		}
-
 		private const string ProxyAuthResponse = @"<html>
 <head><title>401 Authorization Required</title></head>
 <body bgcolor=""white"">
@@ -51,5 +44,7 @@ namespace Tests.Reproduce
 			response.ResponseBodyInBytes.Should().NotBeNullOrEmpty();
 			response.HttpStatusCode.Should().Be(401);
 		}
+
+		private class Example { }
 	}
 }
