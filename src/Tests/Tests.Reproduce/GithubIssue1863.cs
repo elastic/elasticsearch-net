@@ -10,14 +10,15 @@ namespace Tests.Reproduce
 	public class GithubIssue1863 : IClusterFixture<ReadOnlyCluster>
 	{
 		private readonly ReadOnlyCluster _cluster;
-		public GithubIssue1863(ReadOnlyCluster cluster) { _cluster = cluster; }
+
+		public GithubIssue1863(ReadOnlyCluster cluster) => _cluster = cluster;
 
 		[I]
 		public void ConcreteTypeConverterReturnsNullScores()
 		{
 			var client = _cluster.Client;
 			var response = client.Search<Project>(s => s
-				.ConcreteTypeSelector((d,h) => typeof(Project))
+				.ConcreteTypeSelector((d, h) => typeof(Project))
 				.Sort(srt => srt.Ascending(p => p.StartedOn))
 			);
 			response.Hits.Count().Should().BeGreaterThan(0);

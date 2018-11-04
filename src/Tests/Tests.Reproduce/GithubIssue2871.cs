@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
@@ -7,7 +6,6 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Xunit;
 
 namespace Tests.Reproduce
 {
@@ -25,7 +23,7 @@ namespace Tests.Reproduce
 			var alias = "my_alias";
 			var client = _cluster.Client;
 
-			client.CreateIndex(index1, c=> c
+			client.CreateIndex(index1, c => c
 				.Mappings(m => m
 					.Map<Project>(mm => mm
 						.AutoMap()
@@ -66,9 +64,10 @@ namespace Tests.Reproduce
 
 			var multiGetRequest = new MultiGetRequest
 			{
-				Documents = new[] {
-					new MultiGetOperation<Project>("project1") {Index = alias },
-					new MultiGetOperation<Project>("project2") {Index = alias }
+				Documents = new[]
+				{
+					new MultiGetOperation<Project>("project1") { Index = alias },
+					new MultiGetOperation<Project>("project2") { Index = alias }
 				}
 			};
 
