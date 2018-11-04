@@ -12,33 +12,26 @@ namespace Tests.Domain
 {
 	public class Project
 	{
-		public static Project Instance = new Project
-		{
-			Name = Projects.First().Name,
-			LeadDeveloper = new Developer() { FirstName = "Martijn", LastName = "Laarman" },
-			StartedOn = new DateTime(2015, 1, 1),
-			DateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
-			Location = new SimpleGeoPoint { Lat = 42.1523, Lon = -80.321 }
-		};
-
-		public static object InstanceAnonymous = new
-		{
-			name = Projects.First().Name,
-			state = "BellyUp",
-			startedOn = "2015-01-01T00:00:00",
-			lastActivity = "0001-01-01T00:00:00",
-			dateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
-			leadDeveloper = new { gender = "Male", id = 0, firstName = "Martijn", lastName = "Laarman" },
-			location = new { lat = Instance.Location.Lat, lon = Instance.Location.Lon }
-		};
-
 		public IEnumerable<string> Branches { get; set; }
 		public IList<Tag> CuratedTags { get; set; }
 		public string DateString { get; set; }
 		public string Description { get; set; }
 
-		public static Project First { get; } = Projects.First();
+		public DateTime LastActivity { get; set; }
+		public Developer LeadDeveloper { get; set; }
+		public SimpleGeoPoint Location { get; set; }
+		public Dictionary<string, Metadata> Metadata { get; set; }
+		public string Name { get; set; }
+		public int? NumberOfCommits { get; set; }
+		public int? NumberOfContributors { get; set; }
 
+		public Ranges Ranges { get; set; }
+		public DateTime StartedOn { get; set; }
+		public StateOfBeing State { get; set; }
+		public CompletionField Suggest { get; set; }
+		public IEnumerable<Tag> Tags { get; set; }
+
+		// @formatter:off — enable formatter after this line
 		public static Faker<Project> Generator { get; } =
 			new Faker<Project>()
 				.UseSeed(TestConfiguration.Instance.Seed)
@@ -65,20 +58,29 @@ namespace Tests.Domain
 					}
 				);
 
-		public DateTime LastActivity { get; set; }
-		public Developer LeadDeveloper { get; set; }
-		public SimpleGeoPoint Location { get; set; }
-		public Dictionary<string, Metadata> Metadata { get; set; }
-		public string Name { get; set; }
-		public int? NumberOfCommits { get; set; }
-		public int? NumberOfContributors { get; set; }
-
 		public static IList<Project> Projects { get; } = Generator.Clone().Generate(100);
-		public Ranges Ranges { get; set; }
-		public DateTime StartedOn { get; set; }
-		public StateOfBeing State { get; set; }
-		public CompletionField Suggest { get; set; }
-		public IEnumerable<Tag> Tags { get; set; }
+
+		public static Project First { get; } = Projects.First();
+
+		public static Project Instance = new Project
+		{
+			Name = Projects.First().Name,
+			LeadDeveloper = new Developer() { FirstName = "Martijn", LastName = "Laarman" },
+			StartedOn = new DateTime(2015, 1, 1),
+			DateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
+			Location = new SimpleGeoPoint { Lat = 42.1523, Lon = -80.321 }
+		};
+
+		public static object InstanceAnonymous = new
+		{
+			name = Projects.First().Name,
+			state = "BellyUp",
+			startedOn = "2015-01-01T00:00:00",
+			lastActivity = "0001-01-01T00:00:00",
+			dateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
+			leadDeveloper = new { gender = "Male", id = 0, firstName = "Martijn", lastName = "Laarman" },
+			location = new { lat = Instance.Location.Lat, lon = Instance.Location.Lon }
+		};
 	}
 
 	[JsonConverter(typeof(StringEnumConverter))]

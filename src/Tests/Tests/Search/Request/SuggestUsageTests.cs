@@ -20,6 +20,8 @@ namespace Tests.Search.Request
 	{
 		public SuggestUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
+		protected override bool SupportsDeserialization => false;
+
 		protected override object ExpectJson =>
 			new
 			{
