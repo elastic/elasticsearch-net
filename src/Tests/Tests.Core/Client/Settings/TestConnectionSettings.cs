@@ -36,6 +36,10 @@ namespace Tests.Core.Client.Settings
 		private static string LocalHost => "localhost";
 
 		internal ConnectionSettings ApplyTestSettings() => EnableDebugMode()
+			//TODO make this random
+			//.EnableHttpCompression()
+#if DEBUG
+			.EnableDebugMode()
 #endif
 			.ConnectionLimit(ConnectionLimitDefault)
 			.OnRequestCompleted(r =>

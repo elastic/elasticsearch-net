@@ -1,4 +1,8 @@
-﻿namespace Elasticsearch.Net
+﻿#if DOTNETCORE
+using System.Security.Cryptography.X509Certificates;
+#endif
+
+namespace Elasticsearch.Net
 {
 	internal static class X509CertificateExtensions
 	{
