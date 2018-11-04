@@ -6,6 +6,8 @@ namespace Tests.Domain
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum Gender
 	{
-		Male, Female, NoneOfYourBeeswax
+		Male,
+		Female,
+		NoneOfYourBeeswax
 	}
 }

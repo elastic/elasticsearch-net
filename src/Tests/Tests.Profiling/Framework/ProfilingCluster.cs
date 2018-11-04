@@ -7,7 +7,7 @@ namespace Tests.Profiling.Framework
 	{
 		protected override void SeedCluster()
 		{
-			var seeder = new DefaultSeeder(this.Client);
+			var seeder = new DefaultSeeder(Client);
 			seeder.DeleteIndicesAndTemplates();
 			seeder.CreateIndices();
 		}

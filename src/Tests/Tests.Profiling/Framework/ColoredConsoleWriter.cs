@@ -2,7 +2,7 @@ using System;
 
 namespace Tests.Profiling.Framework
 {
-	public class ColoredConsoleWriter  : IColoredWriter
+	public class ColoredConsoleWriter : IColoredWriter
 	{
 		public void Write(ConsoleColor color, string value)
 		{

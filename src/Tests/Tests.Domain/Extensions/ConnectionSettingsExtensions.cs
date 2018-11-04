@@ -31,6 +31,7 @@ namespace Tests.Domain.Extensions
 				.IndexName("shapes")
 				.TypeName("doc")
 			);
+
 		private static IClrTypeMapping<Project> ProjectMapping(ClrTypeMappingDescriptor<Project> m)
 		{
 			m.IndexName("project").IdProperty(p => p.Name);

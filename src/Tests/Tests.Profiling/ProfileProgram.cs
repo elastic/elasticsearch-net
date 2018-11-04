@@ -12,9 +12,7 @@ namespace Tests.Profiling
 {
 	public static class Program
 	{
-
-		private static string SdkPath { get; }
-		private static string OutputPath { get; }
+		private const string SelfProfileSdkDirectory = "dottrace-selfprofile";
 
 		static Program()
 		{
@@ -26,6 +24,10 @@ namespace Tests.Profiling
 			SdkPath = sdkDir.FullName;
 			OutputPath = Path.Combine(sdkDir.Parent.Parent.FullName, "profiling");
 		}
+
+		private static string OutputPath { get; }
+
+		private static string SdkPath { get; }
 
 		public static int Main(string[] arguments)
 		{
@@ -62,14 +64,13 @@ namespace Tests.Profiling
 			yield return new MemoryProfileFactory(SdkPath, OutputPath, cluster, Assembly.GetEntryAssembly(), new ColoredConsoleWriter());
 		}
 #endif
-
-		private const string SelfProfileSdkDirectory = "dottrace-selfprofile";
 		private static DirectoryInfo FindSelfProfileSdkDirectory(DirectoryInfo directoryInfo)
 		{
 			do
 			{
 				var sdkDir = Path.Combine(directoryInfo.FullName, "build", "tools", SelfProfileSdkDirectory);
 				if (Directory.Exists(sdkDir)) return new DirectoryInfo(sdkDir);
+
 				directoryInfo = directoryInfo.Parent;
 			} while (directoryInfo != null);
 			return null;

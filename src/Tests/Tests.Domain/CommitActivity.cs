@@ -10,27 +10,19 @@ namespace Tests.Domain
 {
 	public class CommitActivity
 	{
-		public string Id { get; set; }
-		public string ProjectName { get; set; }
-		public string Message { get; set; }
-		public long SizeInBytes { get; set; }
-		public double ConfidenceFactor { get; set; }
-		public Developer Committer { get; set; }
-		public TimeSpan? Duration { get; set; }
+		public static IList<CommitActivity> CommitActivities { get; } =
+			Generator.Clone().Generate(1000);
 
-		[JsonConverter(typeof(StringTimeSpanConverter))]
-		public TimeSpan? StringDuration
-		{
-			get => this.Duration;
-			set => this.Duration = value;
-		}
+		public Developer Committer { get; set; }
+		public double ConfidenceFactor { get; set; }
+		public TimeSpan? Duration { get; set; }
 
 		public static Faker<CommitActivity> Generator { get; } =
 			new Faker<CommitActivity>()
 				.UseSeed(TestConfiguration.Instance.Seed)
 				.RuleFor(p => p.Id, p => Guid.NewGuid().ToString("N").Substring(0, 8))
-				.RuleFor(p => p.ProjectName, p => Project.Projects[Gimme.Random.Number(0, Project.Projects.Count -1)].Name)
-				.RuleFor(p => p.Committer, p => Developer.Developers[Gimme.Random.Number(0, Developer.Developers.Count -1)])
+				.RuleFor(p => p.ProjectName, p => Project.Projects[Gimme.Random.Number(0, Project.Projects.Count - 1)].Name)
+				.RuleFor(p => p.Committer, p => Developer.Developers[Gimme.Random.Number(0, Developer.Developers.Count - 1)])
 				.RuleFor(p => p.Message, p => p.Lorem.Paragraph(Gimme.Random.Number(1, 3)))
 				.RuleFor(p => p.SizeInBytes, p => p.Random.Number(0, 100000))
 				.RuleFor(p => p.ConfidenceFactor, p => p.Random.Double())
@@ -43,11 +35,19 @@ namespace Tests.Domain
 					null,
 					TimeSpan.FromHours(4.23),
 					TimeSpan.FromDays(5),
-				}))
-			;
+				}));
 
-		public static IList<CommitActivity> CommitActivities { get; } =
-			Generator.Clone().Generate(1000);
+		public string Id { get; set; }
+		public string Message { get; set; }
+		public string ProjectName { get; set; }
+		public long SizeInBytes { get; set; }
+
+		[JsonConverter(typeof(StringTimeSpanConverter))]
+		public TimeSpan? StringDuration
+		{
+			get => Duration;
+			set => Duration = value;
+		}
 	}
 
 	internal class StringTimeSpanConverter : JsonConverter
@@ -72,10 +72,7 @@ namespace Tests.Domain
 
 				return null;
 			}
-			if (reader.TokenType == JsonToken.String)
-			{
-				return TimeSpan.Parse((string)reader.Value);
-			}
+			if (reader.TokenType == JsonToken.String) return TimeSpan.Parse((string)reader.Value);
 
 			throw new JsonSerializationException($"Cannot convert token of type {reader.TokenType} to {objectType}.");
 		}
