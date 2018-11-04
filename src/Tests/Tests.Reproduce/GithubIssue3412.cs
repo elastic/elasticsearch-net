@@ -1,6 +1,6 @@
-﻿using FluentAssertions;
-using System.Linq;
+﻿using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
+using FluentAssertions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 
@@ -21,7 +21,7 @@ namespace Tests.Reproduce
 			var search = _cluster.Client.Search<Project>(s => s.Index("prefixed-*"));
 			search.Total.Should().Be(2);
 			var queriedIndices = search.Hits.Select(h => h.Index).ToArray();
-			queriedIndices.Should().BeEquivalentTo(new[] {"prefixed-1", "prefixed-2"});
+			queriedIndices.Should().BeEquivalentTo(new[] { "prefixed-1", "prefixed-2" });
 		}
 	}
 }
