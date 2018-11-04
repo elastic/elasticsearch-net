@@ -16,12 +16,12 @@ namespace Tests.Profiling.Framework.Timeline
 				SaveDir = resultsDirectory,
 				RedistDir = sdkPath,
 				ProfilingType = ProfilingType.Timeline,
-				ListFile = this.ListFile,
+				ListFile = ListFile,
 				SnapshotFormat = SnapshotFormat.Uncompressed
 			};
 
 			SelfAttach.Attach(saveSnapshotProfilingConfig);
-			this.WaitForProfilerToAttachToProcess();
+			WaitForProfilerToAttachToProcess();
 
 			if (TimelineProfiler.IsActive)
 				TimelineProfiler.Begin();
@@ -38,8 +38,6 @@ namespace Tests.Profiling.Framework.Timeline
 				TimelineProfiler.Detach();
 
 			base.Dispose();
-
-
 		}
 	}
 }

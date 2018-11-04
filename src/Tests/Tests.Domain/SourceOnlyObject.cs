@@ -6,10 +6,11 @@ namespace Tests.Domain
 {
 	public class SourceOnlyObject
 	{
-		[Ignore, JsonIgnore]
-		public string NotWrittenByDefaultSerializer { get; set; }
-		[Ignore, JsonIgnore]
+		[Ignore] [JsonIgnore]
 		public string NotReadByDefaultSerializer { get; set; }
+
+		[Ignore] [JsonIgnore]
+		public string NotWrittenByDefaultSerializer { get; set; }
 	}
 
 	public class SourceOnlyUsingBuiltInConverter : JsonConverter
@@ -27,9 +28,8 @@ namespace Tests.Domain
 			//ignore json as provided
 			var depth = reader.Depth;
 			do
-			{
 				reader.Read();
-			} while (reader.Depth >= depth && reader.TokenType != JsonToken.EndObject);
+			while (reader.Depth >= depth && reader.TokenType != JsonToken.EndObject);
 			var p = new SourceOnlyObject
 			{
 				NotWrittenByDefaultSerializer = "written",
@@ -37,6 +37,7 @@ namespace Tests.Domain
 			};
 			return p;
 		}
+
 		public override bool CanConvert(Type objectType) => objectType == typeof(SourceOnlyObject);
 	}
 }
