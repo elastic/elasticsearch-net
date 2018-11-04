@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -12,14 +9,22 @@ namespace Nest.JsonNetSerializer.Converters
 {
 	public class HandleNestTypesOnSourceJsonConverter : JsonConverter
 	{
+		private static readonly HashSet<Type> NestTypesThatCanAppearInSource = new HashSet<Type>
+		{
+			typeof(JoinField),
+			typeof(QueryContainer),
+			typeof(CompletionField),
+			typeof(Attachment),
+			typeof(ILazyDocument),
+			typeof(GeoCoordinate)
+		};
+
 		private readonly IElasticsearchSerializer _builtInSerializer;
+
+		public HandleNestTypesOnSourceJsonConverter(IElasticsearchSerializer builtInSerializer) => _builtInSerializer = builtInSerializer;
+
 		public override bool CanRead => true;
 		public override bool CanWrite => true;
-
-		public HandleNestTypesOnSourceJsonConverter(IElasticsearchSerializer builtInSerializer)
-		{
-			_builtInSerializer = builtInSerializer;
-		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
@@ -51,19 +56,9 @@ namespace Nest.JsonNetSerializer.Converters
 				return _builtInSerializer.Deserialize(objectType, ms);
 		}
 
-		private static readonly HashSet<Type> NestTypesThatCanAppearInSource = new HashSet<Type>
-		{
-			typeof(JoinField),
-			typeof(QueryContainer),
-			typeof(CompletionField),
-			typeof(Attachment),
-			typeof(ILazyDocument),
-			typeof(GeoCoordinate)
-		};
-
 		public override bool CanConvert(Type objectType) =>
 			NestTypesThatCanAppearInSource.Contains(objectType) ||
-		    typeof(IGeoShape).IsAssignableFrom(objectType) ||
-		    typeof(IGeometryCollection).IsAssignableFrom(objectType);
+			typeof(IGeoShape).IsAssignableFrom(objectType) ||
+			typeof(IGeometryCollection).IsAssignableFrom(objectType);
 	}
 }

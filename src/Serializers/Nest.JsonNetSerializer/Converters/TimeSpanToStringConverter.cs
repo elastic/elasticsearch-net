@@ -14,7 +14,7 @@ namespace Nest.JsonNetSerializer.Converters
 				writer.WriteNull();
 			else
 			{
-				var timeSpan = (TimeSpan) value;
+				var timeSpan = (TimeSpan)value;
 				writer.WriteValue(timeSpan.Ticks);
 			}
 		}
@@ -24,12 +24,12 @@ namespace Nest.JsonNetSerializer.Converters
 			switch (reader.TokenType)
 			{
 				case JsonToken.Null: return null;
-				case JsonToken.String: return TimeSpan.Parse((string) reader.Value);
-				case JsonToken.Integer: return new TimeSpan((long) reader.Value);
+				case JsonToken.String: return TimeSpan.Parse((string)reader.Value);
+				case JsonToken.Integer: return new TimeSpan((long)reader.Value);
 			}
 			throw new JsonSerializationException($"Cannot convert token of type {reader.TokenType} to {objectType}.");
 		}
 
-		public override bool CanConvert(Type objectType) => objectType == typeof (TimeSpan) || objectType == typeof (TimeSpan?);
+		public override bool CanConvert(Type objectType) => objectType == typeof(TimeSpan) || objectType == typeof(TimeSpan?);
 	}
 }
