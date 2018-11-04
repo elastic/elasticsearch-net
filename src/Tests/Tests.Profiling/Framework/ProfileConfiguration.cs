@@ -5,7 +5,7 @@ namespace Tests.Profiling.Framework
 {
 	public class ProfileConfiguration
 	{
-		private ProfileConfiguration() {}
+		private ProfileConfiguration() { }
 
 		public IEnumerable<string> ClassNames { get; private set; }
 
@@ -16,12 +16,8 @@ namespace Tests.Profiling.Framework
 			var classNames = new HashSet<string>();
 			var classIndex = Array.IndexOf(args, "Class");
 			if (classIndex > -1 && args.Length > classIndex + 1)
-			{
 				foreach (var className in args[classIndex + 1].Split(','))
-				{
 					classNames.Add(className);
-				}
-			}
 
 			configuration.ClassNames = classNames;
 			return configuration;

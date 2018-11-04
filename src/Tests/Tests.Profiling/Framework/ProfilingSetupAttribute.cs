@@ -3,7 +3,5 @@ using System;
 namespace Tests.Profiling.Framework
 {
 	[AttributeUsage(AttributeTargets.Method)]
-	public class ProfilingSetupAttribute : ProfilingAttribute
-	{
-	}
+	public class ProfilingSetupAttribute : ProfilingAttribute { }
 }

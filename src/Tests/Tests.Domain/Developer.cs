@@ -9,15 +9,10 @@ namespace Tests.Domain
 {
 	public class Developer : Person
 	{
-		public string OnlineHandle { get; set; }
+		public static IList<Developer> Developers { get; } = Generator.Clone().Generate(1000);
 		public Gender Gender { get; set; }
-		public string PrivateValue { get; set; }
-		public string IpAddress { get; set; }
 
-		// not populated by generator. Used by ingest geoip test
-		public GeoIp GeoIp { get; set; }
-
-		public new static Faker<Developer> Generator { get; } =
+		public static new Faker<Developer> Generator { get; } =
 			new Faker<Developer>()
 				.UseSeed(TestConfiguration.Instance.Seed)
 				.RuleFor(p => p.Id, p => Interlocked.Increment(ref IdState))
@@ -28,9 +23,12 @@ namespace Tests.Domain
 				.RuleFor(p => p.OnlineHandle, p => p.Internet.UserName())
 				.RuleFor(p => p.Gender, p => p.PickRandom<Gender>())
 				.RuleFor(p => p.PrivateValue, p => "THIS SHOULD NEVER BE INDEXED")
-				.RuleFor(p => p.IpAddress, p => p.Internet.Ip())
-			;
+				.RuleFor(p => p.IpAddress, p => p.Internet.Ip());
 
-		public static IList<Developer> Developers { get; } = Developer.Generator.Clone().Generate(1000);
+		// not populated by generator. Used by ingest geoip test
+		public GeoIp GeoIp { get; set; }
+		public string IpAddress { get; set; }
+		public string OnlineHandle { get; set; }
+		public string PrivateValue { get; set; }
 	}
 }

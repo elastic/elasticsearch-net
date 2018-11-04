@@ -5,6 +5,6 @@ namespace Tests.Profiling.Framework
 {
 	public class ProfilingCluster : ClientTestClusterBase
 	{
-		protected override void SeedCluster() => new DefaultSeeder(this.Client).SeedNodeNoData();
+		protected override void SeedCluster() => new DefaultSeeder(Client).SeedNodeNoData();
 	}
 }

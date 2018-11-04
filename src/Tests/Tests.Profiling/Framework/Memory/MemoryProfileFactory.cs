@@ -10,13 +10,9 @@ namespace Tests.Profiling.Framework.Memory
 			string outputPath,
 			ProfilingCluster cluster,
 			Assembly assembly,
-			IColoredWriter output) : base(sdkPath, outputPath, cluster, assembly, output)
-		{
-		}
+			IColoredWriter output
+		) : base(sdkPath, outputPath, cluster, assembly, output) { }
 
-		protected override IDisposable BeginProfiling(string resultsDirectory)
-		{
-			return new MemoryProfile(this.SdkPath, resultsDirectory);
-		}
+		protected override IDisposable BeginProfiling(string resultsDirectory) => new MemoryProfile(SdkPath, resultsDirectory);
 	}
 }

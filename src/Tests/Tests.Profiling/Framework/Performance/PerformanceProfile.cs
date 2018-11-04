@@ -17,17 +17,14 @@ namespace Tests.Profiling.Framework.Performance
 				SaveDir = resultsDirectory,
 				RedistDir = sdkPath,
 				ProfilingType = ProfilingType.Performance,
-				ListFile = this.ListFile,
+				ListFile = ListFile,
 				SnapshotFormat = SnapshotFormat.Uncompressed
 			};
 
-			while (SelfAttach.State != SelfApiState.None)
-			{
-				Thread.Sleep(250);
-			}
+			while (SelfAttach.State != SelfApiState.None) Thread.Sleep(250);
 
 			SelfAttach.Attach(saveSnapshotProfilingConfig);
-			this.WaitForProfilerToAttachToProcess();
+			WaitForProfilerToAttachToProcess();
 
 			if (PerformanceProfiler.IsActive)
 			{
