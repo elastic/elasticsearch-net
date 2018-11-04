@@ -5,7 +5,8 @@ namespace Tests.Core.Serialization
 {
 	public static class SerializationTestHelper
 	{
-		public static JsonRoundTripper Expect(object expected, bool preserveNullInExpected = false) => new JsonRoundTripper(expected, preserveNullInExpected: preserveNullInExpected);
+		public static JsonRoundTripper Expect(object expected, bool preserveNullInExpected = false) =>
+			new JsonRoundTripper(expected, preserveNullInExpected: preserveNullInExpected);
 
 		public static ObjectRoundTripper<T> Object<T>(T expected) => new ObjectRoundTripper<T>(expected);
 
@@ -13,37 +14,34 @@ namespace Tests.Core.Serialization
 			new IntermediateChangedSettings(settings);
 
 		public static IntermediateChangedSettings WithSourceSerializer(ConnectionSettings.SourceSerializerFactory factory) =>
-			new IntermediateChangedSettings(s=>s.EnableDebugMode()).WithSourceSerializer(factory);
+			new IntermediateChangedSettings(s => s.EnableDebugMode()).WithSourceSerializer(factory);
 
 		public class IntermediateChangedSettings
 		{
 			private readonly Func<ConnectionSettings, ConnectionSettings> _connectionSettingsModifier;
-			private ConnectionSettings.SourceSerializerFactory _sourceSerializerFactory;
 			private IPropertyMappingProvider _propertyMappingProvider;
+			private ConnectionSettings.SourceSerializerFactory _sourceSerializerFactory;
 
-			internal IntermediateChangedSettings(Func<ConnectionSettings, ConnectionSettings> settings)
-			{
-				this._connectionSettingsModifier = settings;
-			}
+			internal IntermediateChangedSettings(Func<ConnectionSettings, ConnectionSettings> settings) => _connectionSettingsModifier = settings;
 
 			public IntermediateChangedSettings WithSourceSerializer(ConnectionSettings.SourceSerializerFactory factory)
 			{
-				this._sourceSerializerFactory = factory;
+				_sourceSerializerFactory = factory;
 				return this;
 			}
 
 			public IntermediateChangedSettings WithPropertyMappingProvider(IPropertyMappingProvider propertyMappingProvider)
 			{
-				this._propertyMappingProvider = propertyMappingProvider;
+				_propertyMappingProvider = propertyMappingProvider;
 				return this;
 			}
 
 			public JsonRoundTripper Expect(object expected, bool preserveNullInExpected = false) =>
-				new JsonRoundTripper(expected, _connectionSettingsModifier, this._sourceSerializerFactory, this._propertyMappingProvider, preserveNullInExpected);
+				new JsonRoundTripper(expected, _connectionSettingsModifier, _sourceSerializerFactory, _propertyMappingProvider,
+					preserveNullInExpected);
 
 			public ObjectRoundTripper<T> Object<T>(T expected) =>
-				new ObjectRoundTripper<T>(expected, _connectionSettingsModifier, this._sourceSerializerFactory, this._propertyMappingProvider);
-
+				new ObjectRoundTripper<T>(expected, _connectionSettingsModifier, _sourceSerializerFactory, _propertyMappingProvider);
 		}
 	}
 }

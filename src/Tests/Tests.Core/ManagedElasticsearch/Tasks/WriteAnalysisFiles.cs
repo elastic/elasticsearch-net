@@ -36,6 +36,7 @@ namespace Tests.Core.ManagedElasticsearch.Tasks
 			var hunspellFolder = Path.Combine(configPath, "hunspell", "en_US");
 			var hunspellPrefix = Path.Combine(hunspellFolder, "en_US");
 			if (File.Exists(hunspellPrefix + ".dic")) return;
+
 			Directory.CreateDirectory(hunspellFolder);
 			File.WriteAllText(hunspellPrefix + ".dic", "1\r\nabcdegf");
 			File.WriteAllText(hunspellPrefix + ".aff", "SET UTF8\r\nSFX P Y 1\r\nSFX P 0 s");
@@ -49,6 +50,5 @@ namespace Tests.Core.ManagedElasticsearch.Tasks
 			var icuFile = Path.Combine(icuFolder, "KeywordTokenizer") + ".rbbi";
 			if (!File.Exists(icuFile)) File.WriteAllText(icuFile, ".+ {200};");
 		}
-
 	}
 }
