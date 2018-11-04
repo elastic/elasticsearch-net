@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using Elastic.Managed;
 using Elastic.Managed.Ephemeral;
 using FluentAssertions.Common;
@@ -13,6 +12,8 @@ namespace Tests.ClusterLauncher
 {
 	public static class ClusterLaunchProgram
 	{
+		private static ICluster<EphemeralClusterConfiguration> Instance { get; set; }
+
 		public static int Main(string[] arguments)
 		{
 			if (arguments.Length < 1)
@@ -22,7 +23,7 @@ namespace Tests.ClusterLauncher
 			}
 
 			var clusterName = arguments[0];
-			if 	(arguments.Length > 1)
+			if (arguments.Length > 1)
 				Environment.SetEnvironmentVariable("NEST_INTEGRATION_VERSION", arguments[1], EnvironmentVariableTarget.Process);
 			Environment.SetEnvironmentVariable("NEST_INTEGRATION_SHOW_OUTPUT_AFTER_START", "1", EnvironmentVariableTarget.Process);
 
@@ -48,11 +49,10 @@ namespace Tests.ClusterLauncher
 			return 0;
 		}
 
-		private static ICluster<EphemeralClusterConfiguration> Instance { get; set; }
-
 		private static bool TryStartXPackClusterImplementation(Type cluster)
 		{
 			if (!(Activator.CreateInstance(cluster) is XPackCluster instance)) return false;
+
 			Instance = instance;
 			using (instance)
 				return Run(instance);
@@ -62,6 +62,7 @@ namespace Tests.ClusterLauncher
 		private static bool TryStartClientTestClusterBaseImplementation(Type cluster)
 		{
 			if (!(Activator.CreateInstance(cluster) is ClientTestClusterBase instance)) return false;
+
 			Instance = instance;
 			using (instance)
 				return Run(instance);
