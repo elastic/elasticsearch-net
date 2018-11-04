@@ -1,4 +1,5 @@
 ﻿#region License
+
 //MIT License
 //
 //Copyright (c) 2017 Dave Glick
@@ -20,6 +21,7 @@
 //LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
+
 #endregion
 
 using System;
@@ -32,11 +34,6 @@ namespace DocGenerator.Buildalyzer.Environment
 {
 	internal class FrameworkEnvironment : BuildEnvironment
 	{
-		public string ToolsPath { get; }
-		public string ExtensionsPath { get; }
-		public string SDKsPath { get; }
-		public string RoslynTargetsPath { get; }
-
 		public FrameworkEnvironment(string projectPath, bool sdkProject)
 		{
 			ToolsPath = LocateToolsPath();
@@ -45,11 +42,16 @@ namespace DocGenerator.Buildalyzer.Environment
 			RoslynTargetsPath = Path.Combine(ToolsPath, "Roslyn");
 		}
 
+		public string ExtensionsPath { get; }
+		public string RoslynTargetsPath { get; }
+		public string SDKsPath { get; }
+		public string ToolsPath { get; }
+
 		public override string GetToolsPath() => ToolsPath;
 
 		public override Dictionary<string, string> GetGlobalProperties(string solutionDir)
 		{
-			Dictionary<string, string> globalProperties = base.GetGlobalProperties(solutionDir);
+			var globalProperties = base.GetGlobalProperties(solutionDir);
 			globalProperties.Add(MsBuildProperties.MSBuildExtensionsPath, ExtensionsPath);
 			globalProperties.Add(MsBuildProperties.MSBuildSDKsPath, SDKsPath);
 			globalProperties.Add(MsBuildProperties.RoslynTargetsPath, RoslynTargetsPath);
@@ -58,24 +60,17 @@ namespace DocGenerator.Buildalyzer.Environment
 
 		private static string LocateToolsPath()
 		{
-			string toolsPath = ToolLocationHelper.GetPathToBuildToolsFile("msbuild.exe", ToolLocationHelper.CurrentToolsVersion);
-			if (string.IsNullOrEmpty(toolsPath))
-			{
-				// Could not find the tools path, possibly due to https://github.com/Microsoft/msbuild/issues/2369
-				// Try to poll for it
-				toolsPath = PollForToolsPath();
-			}
-			if (string.IsNullOrEmpty(toolsPath))
-			{
-				throw new InvalidOperationException("Could not locate the tools (msbuild.exe) path");
-			}
+			var toolsPath = ToolLocationHelper.GetPathToBuildToolsFile("msbuild.exe", ToolLocationHelper.CurrentToolsVersion);
+			if (string.IsNullOrEmpty(toolsPath)) toolsPath = PollForToolsPath();
+			if (string.IsNullOrEmpty(toolsPath)) throw new InvalidOperationException("Could not locate the tools (msbuild.exe) path");
+
 			return Path.GetDirectoryName(toolsPath);
 		}
 
 		// From https://github.com/KirillOsenkov/MSBuildStructuredLog/blob/4649f55f900a324421bad5a714a2584926a02138/src/StructuredLogViewer/MSBuildLocator.cs
 		private static string PollForToolsPath()
 		{
-			string programFilesX86 = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFilesX86);
+			var programFilesX86 = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFilesX86);
 			return new[]
 				{
 					Path.Combine(programFilesX86, @"Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe"),

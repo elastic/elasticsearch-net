@@ -1,4 +1,5 @@
 ﻿#region License
+
 //MIT License
 //
 //Copyright (c) 2017 Dave Glick
@@ -20,6 +21,7 @@
 //LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
+
 #endregion
 
 using System.IO;
@@ -31,14 +33,9 @@ namespace DocGenerator.Buildalyzer.Logging
 	{
 		private readonly TextWriter _textWriter;
 
-		public TextWriterLoggerProvider(TextWriter textWriter)
-		{
-			_textWriter = textWriter;
-		}
+		public TextWriterLoggerProvider(TextWriter textWriter) => _textWriter = textWriter;
 
-		public void Dispose()
-		{
-		}
+		public void Dispose() { }
 
 		public ILogger CreateLogger(string categoryName) => new TextWriterLogger(_textWriter);
 	}
