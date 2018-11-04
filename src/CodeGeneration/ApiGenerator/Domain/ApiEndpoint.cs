@@ -12,6 +12,23 @@ namespace ApiGenerator.Domain
 	{
 		public CsharpMethod CsharpMethod { get; set; }
 
+		public string IfCheck
+		{
+			get
+			{
+				var parts = CsharpMethod.Parts.Where(p => p.Name != "body").ToList();
+				if (!parts.Any()) return string.Empty;
+
+				var allPartsAreRequired = parts.Any() && parts.All(p => p.Required);
+				var call = allPartsAreRequired ? "AllSetNoFallback" : "AllSet";
+				var assignments = parts
+					.Select(p => $"p.RouteValues.{p.Name.ToPascalCase()}")
+					.ToList();
+
+				return $"{call}({string.Join(", ", assignments)})";
+			}
+		}
+
 		public IEnumerable<string> MethodArguments
 		{
 			get
@@ -31,25 +48,8 @@ namespace ApiGenerator.Domain
 								return $"p.RouteValues.{p.Name.ToPascalCase()}";
 						}
 					})
-					.Concat(new[] {"u => p.RequestParameters"});
+					.Concat(new[] { "u => p.RequestParameters" });
 				return methodArgs;
-			}
-		}
-
-		public string IfCheck
-		{
-			get
-			{
-				var parts = this.CsharpMethod.Parts.Where(p => p.Name != "body").ToList();
-				if (!parts.Any()) return string.Empty;
-
-				var allPartsAreRequired = parts.Any() && parts.All(p => p.Required);
-				var call = allPartsAreRequired ? "AllSetNoFallback" : "AllSet";
-				var assignments = parts
-					.Select(p => $"p.RouteValues.{p.Name.ToPascalCase()}")
-					.ToList();
-
-				return $"{call}({string.Join(", ", assignments)})";
 			}
 		}
 	}
@@ -57,61 +57,9 @@ namespace ApiGenerator.Domain
 	public class ApiEndpoint
 	{
 		private List<CsharpMethod> _csharpMethods;
+		public ApiBody Body { get; set; }
 
 		public string CsharpMethodName { get; set; }
-		public string Documentation { get; set; }
-		public IEnumerable<string> Methods { get; set; }
-		public IDictionary<string, string> RemovedMethods { get; set; } = new Dictionary<string, string>();
-		public ApiUrl Url { get; set; }
-		public ApiBody Body { get; set; }
-		public IDictionary<string, ApiQueryParameters> ObsoleteQueryParameters { get; set; }
-
-		public string PascalCase(string s)
-		{
-			return ApiGenerator.PascalCase(s);
-		}
-
-		public IEnumerable<CsharpMethod> GetCsharpMethods()
-		{
-			//we distinct by here to catch aliased endpoints like:
-			//  /_cluster/nodes/hotthreads and /_nodes/hotthreads
-			return this.CsharpMethods.ToList()
-				.Where(m => m.CallTypeGeneric != "DynamicDictionary" && m.CallTypeGeneric != "string")
-				.DistinctBy(m => m.ReturnType + "--" + m.FullName + "--" + m.Arguments
-				);
-		}
-
-		public IDictionary<string, IEnumerable<RawDispatchInfo>> RawDispatches
-		{
-			get
-			{
-				return this.GetCsharpMethods()
-					.GroupBy(p => p.HttpMethod)
-					.ToDictionary(kv => kv.Key, kv => kv
-						.DistinctBy(m => m.Path)
-						.OrderByDescending(m => m.Parts.Count())
-						.Select(m =>
-							new RawDispatchInfo
-							{
-								CsharpMethod = m,
-							}
-						)
-					);
-			}
-		}
-
-		public string OptionallyAppendHttpMethod(IEnumerable<string> availableMethods, string currentHttpMethod)
-		{
-			if (availableMethods.Count() == 1)
-				return string.Empty;
-			if (availableMethods.Count() == 2 && availableMethods.Contains("GET"))
-			{
-				//if on operation has two endpoints and one of them is GET always favor the other as default
-				return currentHttpMethod == "GET" ? "Get" : string.Empty;
-			}
-
-			return availableMethods.First() == currentHttpMethod ? string.Empty : this.PascalCase(currentHttpMethod);
-		}
 
 		public IEnumerable<CsharpMethod> CsharpMethods
 		{
@@ -121,28 +69,29 @@ namespace ApiGenerator.Domain
 				{
 					foreach (var csharpMethod in _csharpMethods)
 						yield return csharpMethod;
+
 					yield break;
 				}
 
 				// enumerate once and cache
 				_csharpMethods = new List<CsharpMethod>();
 
-				this.PatchEndpoint();
+				PatchEndpoint();
 
-				var methods = new Dictionary<string, string>(this.RemovedMethods);
-				foreach (var method in this.Methods) methods.Add(method, null);
+				var methods = new Dictionary<string, string>(RemovedMethods);
+				foreach (var method in Methods) methods.Add(method, null);
 				foreach (var kv in methods)
 				{
 					var method = kv.Key;
 					var obsoleteVersion = kv.Value;
-					var methodName = this.CsharpMethodName + this.OptionallyAppendHttpMethod(methods.Keys, method);
+					var methodName = CsharpMethodName + OptionallyAppendHttpMethod(methods.Keys, method);
 					//the distinctby here catches aliases routes i.e
 					//  /_cluster/nodes/{node_id}/hotthreads vs  /_cluster/nodes/{node_id}/hot_threads
-					foreach (var path in this.Url.Paths.DistinctBy(p => p.Replace("_", "")))
+					foreach (var path in Url.Paths.DistinctBy(p => p.Replace("_", "")))
 					{
-						var parts = (this.Url.Parts ?? new Dictionary<string, ApiUrlPart>())
+						var parts = (Url.Parts ?? new Dictionary<string, ApiUrlPart>())
 							.Where(p => path.Contains("{" + p.Key + "}"))
-							.OrderBy(p => path.IndexOf("{" + p.Key, System.StringComparison.Ordinal))
+							.OrderBy(p => path.IndexOf("{" + p.Key, StringComparison.Ordinal))
 							.Select(p =>
 							{
 								p.Value.Name = p.Key;
@@ -153,28 +102,24 @@ namespace ApiGenerator.Domain
 						var args = parts.Select(p => p.Argument);
 
 						//.NET does not allow get requests to have a body payload.
-						if (method != "GET" && this.Body != null)
-						{
+						if (method != "GET" && Body != null)
 							parts.Add(new ApiUrlPart
 							{
 								Name = "body",
 								Type = "PostData<object>",
-								Description = this.Body.Description
+								Description = Body.Description
 							});
-						}
 						var queryStringParamName = "FluentQueryString";
-						if (this.Url.Params == null || !this.Url.Params.Any())
-						{
-							this.Url.Params = new Dictionary<string, ApiQueryParameters>();
-						}
-						queryStringParamName = this.CsharpMethodName + "RequestParameters";
+						if (Url.Params == null || !Url.Params.Any()) Url.Params = new Dictionary<string, ApiQueryParameters>();
+						queryStringParamName = CsharpMethodName + "RequestParameters";
 						var paraIndent = "\r\n\t\t///";
 						var explanationOfT =
 								paraIndent + "<para> - T, an object you own that the elasticsearch response will be deserialized to </para>"
 								+ paraIndent + "<para> - byte[], no deserialization, but the response stream will be closed </para>"
 								+ paraIndent + "<para> - Stream, no deserialization, response stream is your responsibility </para>"
 								+ paraIndent + "<para> - VoidResponse, no deserialization, response stream never read and closed </para>"
-								+ paraIndent + "<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>"
+								+ paraIndent
+								+ "<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>"
 							;
 						var apiMethod = new CsharpMethod
 						{
@@ -187,11 +132,11 @@ namespace ApiGenerator.Domain
 								+ explanationOfT,
 							FullName = methodName,
 							HttpMethod = method,
-							Documentation = this.Documentation,
+							Documentation = Documentation,
 							ObsoleteMethodVersion = obsoleteVersion,
 							Path = path,
 							Parts = parts,
-							Url = this.Url
+							Url = Url
 						};
 						PatchMethod(apiMethod);
 
@@ -220,12 +165,12 @@ namespace ApiGenerator.Domain
 								+ explanationOfT,
 							FullName = methodName + "Async",
 							HttpMethod = method,
-							Documentation = this.Documentation,
+							Documentation = Documentation,
 							ObsoleteMethodVersion = obsoleteVersion,
 							Arguments = string.Join(", ", args),
 							Path = path,
 							Parts = parts,
-							Url = this.Url
+							Url = Url
 						};
 						PatchMethod(apiMethod);
 						_csharpMethods.Add(apiMethod);
@@ -255,12 +200,12 @@ namespace ApiGenerator.Domain
 								+ explanationOfDynamic,
 							FullName = methodName,
 							HttpMethod = method,
-							Documentation = this.Documentation,
+							Documentation = Documentation,
 							ObsoleteMethodVersion = obsoleteVersion,
 							Arguments = string.Join(", ", args),
 							Path = path,
 							Parts = parts,
-							Url = this.Url
+							Url = Url
 						};
 						PatchMethod(apiMethod);
 						_csharpMethods.Add(apiMethod);
@@ -283,12 +228,12 @@ namespace ApiGenerator.Domain
 								+ explanationOfDynamic,
 							FullName = methodName + "Async",
 							HttpMethod = method,
-							Documentation = this.Documentation,
+							Documentation = Documentation,
 							ObsoleteMethodVersion = obsoleteVersion,
 							Arguments = string.Join(", ", args),
 							Path = path,
 							Parts = parts,
-							Url = this.Url
+							Url = Url
 						};
 						PatchMethod(apiMethod);
 						_csharpMethods.Add(apiMethod);
@@ -298,31 +243,61 @@ namespace ApiGenerator.Domain
 			}
 		}
 
+		public string Documentation { get; set; }
+		public IEnumerable<string> Methods { get; set; }
+		public IDictionary<string, ApiQueryParameters> ObsoleteQueryParameters { get; set; }
+
+		public IDictionary<string, IEnumerable<RawDispatchInfo>> RawDispatches => GetCsharpMethods()
+			.GroupBy(p => p.HttpMethod)
+			.ToDictionary(kv => kv.Key, kv => kv
+				.DistinctBy(m => m.Path)
+				.OrderByDescending(m => m.Parts.Count())
+				.Select(m =>
+					new RawDispatchInfo
+					{
+						CsharpMethod = m,
+					}
+				)
+			);
+
+		public IDictionary<string, string> RemovedMethods { get; set; } = new Dictionary<string, string>();
+		public ApiUrl Url { get; set; }
+
+		public string PascalCase(string s) => ApiGenerator.PascalCase(s);
+
+		public IEnumerable<CsharpMethod> GetCsharpMethods() => CsharpMethods.ToList()
+			.Where(m => m.CallTypeGeneric != "DynamicDictionary" && m.CallTypeGeneric != "string")
+			.DistinctBy(m => m.ReturnType + "--" + m.FullName + "--" + m.Arguments
+			);
+
+		public string OptionallyAppendHttpMethod(IEnumerable<string> availableMethods, string currentHttpMethod)
+		{
+			if (availableMethods.Count() == 1)
+				return string.Empty;
+			if (availableMethods.Count() == 2 && availableMethods.Contains("GET")) return currentHttpMethod == "GET" ? "Get" : string.Empty;
+
+			return availableMethods.First() == currentHttpMethod ? string.Empty : PascalCase(currentHttpMethod);
+		}
+
 		private void PatchEndpoint()
 		{
 			//rename the {metric} route param to something more specific on XpackWatcherStats
 			// TODO: find a better place to do this
-			if (this.CsharpMethodName == "XpackWatcherStats")
+			if (CsharpMethodName == "XpackWatcherStats")
 			{
-				var metric = this.Url.Parts.First(p => p.Key == "metric");
+				var metric = Url.Parts.First(p => p.Key == "metric");
 
 				var apiUrlPart = metric.Value;
 				apiUrlPart.Name = "watcher_stats_metric";
 
-				if (this.Url.Parts.Remove("metric"))
-				{
-					this.Url.Parts.Add("watcher_stats_metric", apiUrlPart);
-				}
+				if (Url.Parts.Remove("metric")) Url.Parts.Add("watcher_stats_metric", apiUrlPart);
 
-				this.Url.Path = RenameMetricUrlPathParam(this.Url.Path);
-				this.Url.Paths = this.Url.Paths.Select(RenameMetricUrlPathParam);
+				Url.Path = RenameMetricUrlPathParam(Url.Path);
+				Url.Paths = Url.Paths.Select(RenameMetricUrlPathParam);
 			}
 		}
 
-		private static string RenameMetricUrlPathParam(string path)
-		{
-			return path.Replace("{metric}", "{watcher_stats_metric}");
-		}
+		private static string RenameMetricUrlPathParam(string path) => path.Replace("{metric}", "{watcher_stats_metric}");
 
 		//Patches a method name for the exceptions (IndicesStats needs better unique names for all the url endpoints)
 		//or to get rid of double verbs in an method name i,e ClusterGetSettingsGet > ClusterGetSettings
@@ -347,9 +322,9 @@ namespace ApiGenerator.Domain
 				if (!method.Url.Params.ContainsKey(param.Key))
 					method.Url.Params.Add(param.Key, param.Value);
 			}
-			if (this.ObsoleteQueryParameters != null)
+			if (ObsoleteQueryParameters != null)
 			{
-				foreach (var param in this.ObsoleteQueryParameters)
+				foreach (var param in ObsoleteQueryParameters)
 				{
 					if (!method.Url.Params.ContainsKey(param.Key))
 						method.Url.Params.Add(param.Key, param.Value);
@@ -395,15 +370,17 @@ namespace ApiGenerator.Domain
 
 				var globalQueryStringRenames = new Dictionary<string, string>
 				{
-					{"_source", "source_enabled"},
-					{"_source_include", "source_include"},
-					{"_source_exclude", "source_exclude"},
-					{"q", "query_on_query_string"},
+					{ "_source", "source_enabled" },
+					{ "_source_include", "source_include" },
+					{ "_source_exclude", "source_exclude" },
+					{ "q", "query_on_query_string" },
 				};
 
 				foreach (var kv in globalQueryStringRenames)
+				{
 					if (!queryStringParamsRenameList.ContainsKey(kv.Key))
 						queryStringParamsRenameList[kv.Key] = kv.Value;
+				}
 
 				var patchedParams = new Dictionary<string, ApiQueryParameters>();
 				foreach (var kv in method.Url.Params)
@@ -426,9 +403,7 @@ namespace ApiGenerator.Domain
 				method.Url.Params = patchedParams;
 			}
 			// ReSharper disable once EmptyGeneralCatchClause
-			catch
-			{
-			}
+			catch { }
 		}
 	}
 }

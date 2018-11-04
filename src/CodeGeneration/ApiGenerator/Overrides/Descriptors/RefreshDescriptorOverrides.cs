@@ -15,8 +15,9 @@ namespace ApiGenerator.Overrides.Descriptors
 		{
 			public NoopApiQueryParameters()
 			{
-				this.Obsolete = "calling this is a noop";
-				this.FluentGenerator = (queryStringParamName, mm, original, setter) => $"public {queryStringParamName} {mm.ToPascalCase()}({CsharpType(mm)} {mm}) => this;";
+				Obsolete = "calling this is a noop";
+				FluentGenerator = (queryStringParamName, mm, original, setter) =>
+					$"public {queryStringParamName} {mm.ToPascalCase()}({CsharpType(mm)} {mm}) => this;";
 			}
 		}
 	}

@@ -5,7 +5,7 @@ namespace ApiGenerator.Overrides.Descriptors
 	// ReSharper disable once UnusedMember.Global
 	public class UpdateDescriptorOverrides : DescriptorOverridesBase
 	{
-		public override IEnumerable<string> SkipQueryStringParams => new []
+		public override IEnumerable<string> SkipQueryStringParams => new[]
 		{
 			"fields", "_source_include", "_source_exclude"
 		};
