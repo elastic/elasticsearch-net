@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using System.Collections.Generic;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.QueryDsl.Specialized.Script
 {
@@ -20,9 +13,40 @@ namespace Tests.QueryDsl.Specialized.Script
 	*/
 	public class ScriptQueryUsageTests : QueryDslUsageTestsBase
 	{
+		private static readonly string _templateString = "doc['numberOfCommits'].value > param1";
+
 		public ScriptQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		private static readonly string _templateString = "doc['numberOfCommits'].value > param1";
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IScriptQuery>(a => a.Script)
+		{
+			q =>
+			{
+				q.Inline = "";
+				q.Id = null;
+#pragma warning disable 618
+				q.File = "";
+#pragma warning restore 618
+			},
+			q =>
+			{
+				q.Inline = null;
+				q.Id = null;
+#pragma warning disable 618
+				q.File = null;
+#pragma warning restore 618
+			}
+		};
+
+		protected override QueryContainer QueryInitializer => new ScriptQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Inline = _templateString,
+			Params = new Dictionary<string, object>
+			{
+				{ "param1", 50 }
+			}
+		};
 
 		protected override object QueryJson => new
 		{
@@ -38,41 +62,12 @@ namespace Tests.QueryDsl.Specialized.Script
 			}
 		};
 
-		protected override QueryContainer QueryInitializer => new ScriptQuery
-		{
-			Name = "named_query",
-			Boost = 1.1,
-			Inline = _templateString,
-			Params = new Dictionary<string, object>
-			{
-				{ "param1", 50 }
-			}
-		};
-
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.Script(sn => sn
 				.Name("named_query")
 				.Boost(1.1)
 				.Inline(_templateString)
-				.Params(p=>p.Add("param1", 50))
+				.Params(p => p.Add("param1", 50))
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IScriptQuery>(a => a.Script)
-		{
-			q => {
-				q.Inline = "";
-				q.Id = null;
-#pragma warning disable 618
-				q.File = "";
-#pragma warning restore 618
-			},
-			q => {
-				q.Inline = null;
-				q.Id = null;
-#pragma warning disable 618
-				q.File = null;
-#pragma warning restore 618
-			}
-		};
 	}
 }

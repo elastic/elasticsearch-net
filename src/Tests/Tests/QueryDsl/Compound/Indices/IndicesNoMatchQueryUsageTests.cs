@@ -11,6 +11,36 @@ namespace Tests.QueryDsl.Compound.Indices
 	{
 		public IndicesNoMatchQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IIndicesQuery>(p => p.Indices)
+		{
+			q => q.Indices = null,
+			q => q.Query = null,
+			q => q.Query = ConditionlessQuery
+		};
+
+		protected override NotConditionlessWhen NotConditionlessWhen => new NotConditionlessWhen<IIndicesQuery>(p => p.Indices)
+		{
+			q =>
+			{
+				q.Query = VerbatimQuery;
+				q.NoMatchQuery = null;
+			},
+			q =>
+			{
+				q.Query = null;
+				q.NoMatchQuery = VerbatimQuery;
+			}
+		};
+
+		protected override QueryContainer QueryInitializer => new IndicesQuery()
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Indices = Nest.Indices.All,
+			Query = new MatchAllQuery(),
+			NoMatchQuery = new NoMatchQueryContainer { Shortcut = NoMatchShortcut.All }
+		};
+
 		protected override object QueryJson => new
 		{
 			indices = new
@@ -26,15 +56,6 @@ namespace Tests.QueryDsl.Compound.Indices
 			}
 		};
 
-		protected override QueryContainer QueryInitializer => new IndicesQuery()
-		{
-			Name = "named_query",
-			Boost = 1.1,
-			Indices = Nest.Indices.All,
-			Query = new MatchAllQuery(),
-			NoMatchQuery = new NoMatchQueryContainer { Shortcut = NoMatchShortcut.All }
-		};
-
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.Indices(c => c
 				.Name("named_query")
@@ -43,24 +64,5 @@ namespace Tests.QueryDsl.Compound.Indices
 				.Query(qq => qq.MatchAll())
 				.NoMatchQuery(NoMatchShortcut.All)
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IIndicesQuery>(p => p.Indices)
-		{
-			q => q.Indices = null,
-			q => q.Query = null,
-			q => q.Query = ConditionlessQuery
-		};
-
-		protected override NotConditionlessWhen NotConditionlessWhen => new NotConditionlessWhen<IIndicesQuery>(p => p.Indices)
-		{
-			q => {
-				q.Query = VerbatimQuery;
-				q.NoMatchQuery = null;
-			},
-			q => {
-				q.Query = null;
-				q.NoMatchQuery = VerbatimQuery;
-			}
-		};
 	}
 }

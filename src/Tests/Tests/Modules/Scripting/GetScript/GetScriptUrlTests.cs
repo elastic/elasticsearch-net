@@ -14,10 +14,10 @@ namespace Tests.Modules.Scripting.GetScript
 			var id = "id";
 
 			await GET($"/_scripts/{lang}/{id}")
-				.Fluent(c => c.GetScript(lang, id))
-				.Request(c => c.GetScript(new GetScriptRequest(lang, id)))
-				.FluentAsync(c => c.GetScriptAsync(lang, id))
-				.RequestAsync(c => c.GetScriptAsync(new GetScriptRequest(lang, id)))
+					.Fluent(c => c.GetScript(lang, id))
+					.Request(c => c.GetScript(new GetScriptRequest(lang, id)))
+					.FluentAsync(c => c.GetScriptAsync(lang, id))
+					.RequestAsync(c => c.GetScriptAsync(new GetScriptRequest(lang, id)))
 				;
 		}
 	}

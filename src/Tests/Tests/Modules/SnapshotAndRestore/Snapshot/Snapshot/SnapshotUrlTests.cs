@@ -14,10 +14,10 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot.Snapshot
 			var snapshot = "snap";
 
 			await PUT($"/_snapshot/{repository}/{snapshot}")
-				.Fluent(c => c.Snapshot(repository, snapshot))
-				.Request(c => c.Snapshot(new SnapshotRequest(repository, snapshot)))
-				.FluentAsync(c => c.SnapshotAsync(repository, snapshot))
-				.RequestAsync(c => c.SnapshotAsync(new SnapshotRequest(repository, snapshot)))
+					.Fluent(c => c.Snapshot(repository, snapshot))
+					.Request(c => c.Snapshot(new SnapshotRequest(repository, snapshot)))
+					.FluentAsync(c => c.SnapshotAsync(repository, snapshot))
+					.RequestAsync(c => c.SnapshotAsync(new SnapshotRequest(repository, snapshot)))
 				;
 		}
 	}

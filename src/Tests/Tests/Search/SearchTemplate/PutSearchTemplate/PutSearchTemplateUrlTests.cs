@@ -3,6 +3,7 @@ using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework;
 using static Tests.Framework.UrlTester;
+
 #pragma warning disable 618
 
 namespace Tests.Search.SearchTemplate.PutSearchTemplate
@@ -13,10 +14,10 @@ namespace Tests.Search.SearchTemplate.PutSearchTemplate
 		{
 			var id = "the-id";
 			await PUT("/_search/template/the-id")
-				.Fluent(c => c.PutSearchTemplate(id, s => s.Template("{}")))
-				.Request(c=>c.PutSearchTemplate(new PutSearchTemplateRequest(id) { Template = "{}" }))
-				.FluentAsync(c => c.PutSearchTemplateAsync(id, s => s.Template("{}")))
-				.RequestAsync(c=>c.PutSearchTemplateAsync(new PutSearchTemplateRequest(id) { Template = "{}" }))
+					.Fluent(c => c.PutSearchTemplate(id, s => s.Template("{}")))
+					.Request(c => c.PutSearchTemplate(new PutSearchTemplateRequest(id) { Template = "{}" }))
+					.FluentAsync(c => c.PutSearchTemplateAsync(id, s => s.Template("{}")))
+					.RequestAsync(c => c.PutSearchTemplateAsync(new PutSearchTemplateRequest(id) { Template = "{}" }))
 				;
 		}
 	}

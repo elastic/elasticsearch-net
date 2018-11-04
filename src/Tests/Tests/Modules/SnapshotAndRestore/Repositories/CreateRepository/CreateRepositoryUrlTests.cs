@@ -13,10 +13,10 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 			var repository = "repos";
 
 			await PUT($"/_snapshot/{repository}")
-				.Fluent(c => c.CreateRepository(repository, s=>s))
-				.Request(c => c.CreateRepository(new CreateRepositoryRequest(repository)))
-				.FluentAsync(c => c.CreateRepositoryAsync(repository, s=>s))
-				.RequestAsync(c => c.CreateRepositoryAsync(new CreateRepositoryRequest(repository)))
+					.Fluent(c => c.CreateRepository(repository, s => s))
+					.Request(c => c.CreateRepository(new CreateRepositoryRequest(repository)))
+					.FluentAsync(c => c.CreateRepositoryAsync(repository, s => s))
+					.RequestAsync(c => c.CreateRepositoryAsync(new CreateRepositoryRequest(repository)))
 				;
 		}
 	}

@@ -1,15 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using Nest;
-using Tests.Framework.Integration;
-using static Nest.Infer;
-using System.Collections.Generic;
-using Tests.Framework;
-using System.Linq;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.Integration;
+using static Nest.Infer;
 
 namespace Tests.Aggregations.Matrix.MatrixStats
 {
@@ -30,7 +28,8 @@ namespace Tests.Aggregations.Matrix.MatrixStats
 					matrix_stats = new
 					{
 						fields = new[] { "numberOfCommits", "numberOfContributors" },
-						missing = new {
+						missing = new
+						{
 							numberOfCommits = 0.0,
 							numberOfContributors = 1.0
 						},

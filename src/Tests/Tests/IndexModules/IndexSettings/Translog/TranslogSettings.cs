@@ -14,10 +14,10 @@ namespace Tests.IndexModules.IndexSettings.Translog
 		{
 			protected override object ExpectJson => new Dictionary<string, object>
 			{
-				{"index.translog.sync_interval", "5s" },
-				{"index.translog.durability", "request" },
-				{"index.translog.flush_threshold_size", "10mb" },
-				{"index.translog.flush_threshold_period", "30m" }
+				{ "index.translog.sync_interval", "5s" },
+				{ "index.translog.durability", "request" },
+				{ "index.translog.flush_threshold_size", "10mb" },
+				{ "index.translog.flush_threshold_period", "30m" }
 			};
 
 			/**

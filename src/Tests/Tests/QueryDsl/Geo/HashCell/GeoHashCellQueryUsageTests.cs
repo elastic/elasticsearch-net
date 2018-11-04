@@ -2,12 +2,28 @@
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+
 namespace Tests.QueryDsl.Geo.HashCell
 {
 	public class GeoHashCellQueryUsageTests : QueryDslUsageTestsBase
 	{
 		public GeoHashCellQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoHashCellQuery>(a => a.GeoHashCell)
+		{
+			q => q.Field = null,
+			q => q.Location = null
+		};
+
+		protected override QueryContainer QueryInitializer => new GeoHashCellQuery
+		{
+			Boost = 1.1,
+			Name = "named_query",
+			Field = Infer.Field<Project>(p => p.Location),
+			Location = new GeoLocation(13.4080, 52.5186),
+			Neighbors = true,
+			Precision = Nest.Distance.Meters(3)
+		};
 
 		protected override object QueryJson => new
 		{
@@ -25,30 +41,14 @@ namespace Tests.QueryDsl.Geo.HashCell
 			}
 		};
 
-		protected override QueryContainer QueryInitializer => new GeoHashCellQuery
-		{
-			Boost = 1.1,
-			Name = "named_query",
-			Field = Infer.Field<Project>(p=>p.Location),
-			Location = new GeoLocation(13.4080, 52.5186),
-			Neighbors = true,
-			Precision = Nest.Distance.Meters(3)
-		};
-
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.GeoHashCell(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Field(p=>p.Location)
+				.Field(p => p.Location)
 				.Location(new GeoLocation(13.4080, 52.5186))
 				.Neighbors()
 				.Precision(Nest.Distance.Meters(3))
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoHashCellQuery>(a => a.GeoHashCell)
-		{
-			q =>  q.Field = null,
-			q =>  q.Location = null
-		};
 	}
 }

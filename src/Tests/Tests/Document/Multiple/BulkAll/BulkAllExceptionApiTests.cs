@@ -20,10 +20,10 @@ namespace Tests.Document.Multiple.BulkAll
 			var pages = 10;
 			var seenPages = 0;
 			var numberOfDocuments = size * pages;
-			var documents = this.CreateLazyStreamOfDocuments(numberOfDocuments);
+			var documents = CreateLazyStreamOfDocuments(numberOfDocuments);
 
 			var tokenSource = new CancellationTokenSource();
-			var observableBulk = this.Client.BulkAll(documents, f => f
+			var observableBulk = Client.BulkAll(documents, f => f
 					.MaxDegreeOfParallelism(4)
 					.BackOffTime(TimeSpan.FromSeconds(10))
 					.BackOffRetries(2)
@@ -38,8 +38,8 @@ namespace Tests.Document.Multiple.BulkAll
 				observableBulk.Wait(TimeSpan.FromSeconds(30), b =>
 				{
 					if (seenPages == 8) throw new Exception("boom");
-					Interlocked.Increment(ref seenPages);
 
+					Interlocked.Increment(ref seenPages);
 				});
 			}
 			catch (Exception e)

@@ -1,12 +1,12 @@
 ﻿using System;
 using Elastic.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
 using Nest;
+using Tests.Analysis.CharFilters;
+using Tests.Analysis.Normalizers;
+using Tests.Analysis.TokenFilters;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Tests.Framework.Promisify;
 
 namespace Tests.Mapping.Types.Core.Keyword
@@ -15,15 +15,6 @@ namespace Tests.Mapping.Types.Core.Keyword
 	public class KeywordPropertyTests : PropertyTestsBase
 	{
 		public KeywordPropertyTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-		protected override ICreateIndexRequest CreateIndexSettings(CreateIndexDescriptor create) => create
-			.Settings(s => s
-				.Analysis(a => a
-					.CharFilters(t => Promise(Analysis.CharFilters.CharFilterUsageTests.FluentExample(s).Value.Analysis.CharFilters))
-					.TokenFilters(t => Promise(Analysis.TokenFilters.TokenFilterUsageTests.FluentExample(s).Value.Analysis.TokenFilters))
-					.Normalizers(t => Promise(Analysis.Normalizers.NormalizerUsageTests.FluentExample(s).Value.Analysis.Normalizers))
-				)
-			);
 
 		protected override object ExpectJson => new
 		{
@@ -56,6 +47,14 @@ namespace Tests.Mapping.Types.Core.Keyword
 			}
 		};
 
+		protected override ICreateIndexRequest CreateIndexSettings(CreateIndexDescriptor create) => create
+			.Settings(s => s
+				.Analysis(a => a
+					.CharFilters(t => Promise(CharFilterUsageTests.FluentExample(s).Value.Analysis.CharFilters))
+					.TokenFilters(t => Promise(TokenFilterUsageTests.FluentExample(s).Value.Analysis.TokenFilters))
+					.Normalizers(t => Promise(NormalizerUsageTests.FluentExample(s).Value.Analysis.Normalizers))
+				)
+			);
 #pragma warning disable 618 // Usage of IncludeInAll
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
 			.Keyword(b => b
@@ -83,7 +82,8 @@ namespace Tests.Mapping.Types.Core.Keyword
 
 		protected override IProperties InitializerProperties => new Properties
 		{
-			{ "state", new KeywordProperty
+			{
+				"state", new KeywordProperty
 				{
 					DocValues = false,
 					Boost = 1.2,

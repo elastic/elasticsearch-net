@@ -9,7 +9,6 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Document.Single.Attachment
 {
@@ -33,14 +32,12 @@ namespace Tests.Document.Single.Attachment
 		public static string TestPdfDocument { get; }
 	}
 
-	public abstract class AttachmentApiTestsBase :
-		ApiIntegrationTestBase<WritableCluster, IIndexResponse, IIndexRequest<Document>, IndexDescriptor<Document>, IndexRequest<Document>>
+	public abstract class AttachmentApiTestsBase
+		: ApiIntegrationTestBase<WritableCluster, IIndexResponse, IIndexRequest<Document>, IndexDescriptor<Document>, IndexRequest<Document>>
 	{
-		protected virtual Document Document => new Document { Attachment = new Nest.Attachment { Content = Attachment.Document.TestPdfDocument } };
+		protected AttachmentApiTestsBase(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected AttachmentApiTestsBase(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		protected virtual Document Document => new Document { Attachment = new Nest.Attachment { Content = Document.TestPdfDocument } };
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -98,19 +95,16 @@ namespace Tests.Document.Single.Attachment
 				);
 #pragma warning restore 618
 
-				if (!indexResponse.IsValid)
-				{
-					throw new Exception("Could not set up attachment index for test");
-				}
+				if (!indexResponse.IsValid) throw new Exception("Could not set up attachment index for test");
 			}
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Index(this.Document, f),
-			fluentAsync: (client, f) => client.IndexAsync(this.Document, f),
-			request: (client, r) => client.Index(r),
-			requestAsync: (client, r) => client.IndexAsync(r)
-			);
+			(client, f) => client.Index(Document, f),
+			(client, f) => client.IndexAsync(Document, f),
+			(client, r) => client.Index(r),
+			(client, r) => client.IndexAsync(r)
+		);
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 201;
@@ -121,7 +115,7 @@ namespace Tests.Document.Single.Attachment
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override IndexDescriptor<Document> NewDescriptor() => new IndexDescriptor<Document>(this.Document);
+		protected override IndexDescriptor<Document> NewDescriptor() => new IndexDescriptor<Document>(Document);
 
 		protected override Func<IndexDescriptor<Document>, IIndexRequest<Document>> Fluent => s => s
 			.Index(CallIsolatedValue)
@@ -129,7 +123,7 @@ namespace Tests.Document.Single.Attachment
 			.Refresh(Refresh.True);
 
 		protected override IndexRequest<Document> Initializer =>
-			new IndexRequest<Document>(this.Document, CallIsolatedValue, id: CallIsolatedValue)
+			new IndexRequest<Document>(Document, CallIsolatedValue, id: CallIsolatedValue)
 			{
 				Refresh = Refresh.True,
 			};
@@ -155,10 +149,7 @@ namespace Tests.Document.Single.Attachment
 
 	public class AttachmentApiTests : AttachmentApiTestsBase
 	{
-
-		public AttachmentApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public AttachmentApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object ExpectJson =>
 			new
@@ -198,12 +189,15 @@ namespace Tests.Document.Single.Attachment
 			searchResponse.Hits.First()
 				.Fields
 				.ValueOf<Document, string>(d => d.Attachment.ContentType)
-				.Should().Be("application/pdf");
+				.Should()
+				.Be("application/pdf");
 		}
 	}
 
 	public class AttachmentExplicitWithMetadataApiTests : AttachmentApiTestsBase
 	{
+		public AttachmentExplicitWithMetadataApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override Document Document =>
 			new Document
 			{
@@ -216,10 +210,6 @@ namespace Tests.Document.Single.Attachment
 					DetectLanguage = true
 				}
 			};
-
-		public AttachmentExplicitWithMetadataApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
 
 		protected override object ExpectJson =>
 			new
@@ -284,6 +274,8 @@ namespace Tests.Document.Single.Attachment
 
 	public class AttachmentDetectLanguageApiTests : AttachmentApiTestsBase
 	{
+		public AttachmentDetectLanguageApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override Document Document =>
 			new Document
 			{
@@ -293,10 +285,6 @@ namespace Tests.Document.Single.Attachment
 					DetectLanguage = true
 				}
 			};
-
-		public AttachmentDetectLanguageApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
 
 		protected override object ExpectJson =>
 			new
@@ -330,6 +318,8 @@ namespace Tests.Document.Single.Attachment
 
 	public class AttachmentPopulatingFromHitApiTests : AttachmentApiTestsBase
 	{
+		public AttachmentPopulatingFromHitApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override Document Document =>
 			new Document
 			{
@@ -339,10 +329,6 @@ namespace Tests.Document.Single.Attachment
 					DetectLanguage = true
 				}
 			};
-
-		public AttachmentPopulatingFromHitApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
 
 		protected override object ExpectJson =>
 			new

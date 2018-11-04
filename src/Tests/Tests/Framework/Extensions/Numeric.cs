@@ -1,6 +1,6 @@
 ﻿namespace Tests.Framework
 {
-	static class NumericExtensions
+	internal static class NumericExtensions
 	{
 		public static string ToOrdinal(this int num)
 		{
@@ -25,7 +25,6 @@
 				default:
 					return num + "th";
 			}
-
 		}
 	}
 }

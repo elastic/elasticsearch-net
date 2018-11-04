@@ -1,11 +1,8 @@
 ﻿using System;
-using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Mapping.Types.Core.Object
 {
@@ -48,18 +45,19 @@ namespace Tests.Mapping.Types.Core.Object
 			);
 
 		protected override IProperties InitializerProperties => new Properties
+		{
 			{
-				{ "leadDeveloper", new ObjectProperty
+				"leadDeveloper", new ObjectProperty
+				{
+					Dynamic = true,
+					Enabled = true,
+					IncludeInAll = true,
+					Properties = new Properties
 					{
-						Dynamic = true,
-						Enabled = true,
-						IncludeInAll = true,
-						Properties = new Properties
-						{
-							{ "iPAddress", new IpProperty () }
-						}
+						{ "iPAddress", new IpProperty() }
 					}
 				}
-			};
+			}
+		};
 	}
 }

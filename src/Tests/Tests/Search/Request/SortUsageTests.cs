@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Search.Request
@@ -22,37 +20,48 @@ namespace Tests.Search.Request
 		protected override object ExpectJson =>
 			new
 			{
-				sort = new object[] {
+				sort = new object[]
+				{
 					new { startedOn = new { order = "asc" } },
 					new { name = new { order = "desc" } },
 					new { _score = new { order = "desc" } },
 					new { _doc = new { order = "asc" } },
-					new {
-						lastActivity = new {
+					new
+					{
+						lastActivity = new
+						{
 							missing = "_last",
 							order = "desc",
 							mode = "avg",
-							nested_filter = new {
-							  match_all = new {}
+							nested_filter = new
+							{
+								match_all = new { }
 							},
 							nested_path = "tags",
 							unmapped_type = "date"
 						}
 					},
-					new {
-						numberOfCommits = new {
+					new
+					{
+						numberOfCommits = new
+						{
 							missing = -1,
 							order = "desc"
 						}
 					},
-					new {
-						_geo_distance = new {
-							location = new [] {
-								new {
+					new
+					{
+						_geo_distance = new
+						{
+							location = new[]
+							{
+								new
+								{
 									lat = 70.0,
 									lon = -70.0
 								},
-								new {
+								new
+								{
 									lat = -12.0,
 									lon = 12.0
 								}
@@ -63,12 +72,16 @@ namespace Tests.Search.Request
 							unit = "cm"
 						}
 					},
-					new {
-						_script = new {
+					new
+					{
+						_script = new
+						{
 							order = "asc",
 							type = "number",
-							script = new {
-								@params = new {
+							script = new
+							{
+								@params = new
+								{
 									factor = 1.1
 								},
 								inline = "doc['numberOfCommits'].value * factor",
@@ -129,17 +142,17 @@ namespace Tests.Search.Request
 					new SortField { Field = "_doc", Order = SortOrder.Ascending },
 					new SortField
 					{
-						Field = Field<Project>(p=>p.LastActivity),
+						Field = Field<Project>(p => p.LastActivity),
 						Order = SortOrder.Descending,
 						MissingValue = "_last",
 						UnmappedType = FieldType.Date,
 						Mode = SortMode.Average,
-						NestedPath = Field<Project>(p=>p.Tags),
+						NestedPath = Field<Project>(p => p.Tags),
 						NestedFilter = new MatchAllQuery(),
 					},
 					new SortField
 					{
-						Field = Field<Project>(p=>p.NumberOfCommits),
+						Field = Field<Project>(p => p.NumberOfCommits),
 						Order = SortOrder.Descending,
 						MissingValue = -1
 					},
@@ -150,13 +163,13 @@ namespace Tests.Search.Request
 						DistanceType = GeoDistanceType.Arc,
 						GeoUnit = DistanceUnit.Centimeters,
 						Mode = SortMode.Min,
-						Points = new [] {new GeoLocation(70, -70), new GeoLocation(-12, 12) }
+						Points = new[] { new GeoLocation(70, -70), new GeoLocation(-12, 12) }
 					},
 					new ScriptSort
 					{
 						Type = "number",
 						Order = SortOrder.Ascending,
-						Script =  new InlineScript("doc['numberOfCommits'].value * factor")
+						Script = new InlineScript("doc['numberOfCommits'].value * factor")
 						{
 							Lang = "groovy",
 							Params = new Dictionary<string, object>

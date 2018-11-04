@@ -1,30 +1,28 @@
 ﻿using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Cluster.ClusterHealth
 {
-	public class ClusterHealthApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IClusterHealthResponse, IClusterHealthRequest, ClusterHealthDescriptor, ClusterHealthRequest>
+	public class ClusterHealthApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IClusterHealthResponse, IClusterHealthRequest, ClusterHealthDescriptor, ClusterHealthRequest>
 	{
 		public ClusterHealthApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.ClusterHealth(),
-			fluentAsync: (client, f) => client.ClusterHealthAsync(),
-			request: (client, r) => client.ClusterHealth(r),
-			requestAsync: (client, r) => client.ClusterHealthAsync(r)
-		);
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cluster/health";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.ClusterHealth(),
+			(client, f) => client.ClusterHealthAsync(),
+			(client, r) => client.ClusterHealth(r),
+			(client, r) => client.ClusterHealthAsync(r)
+		);
 
 		protected override void ExpectResponse(IClusterHealthResponse response)
 		{
@@ -37,5 +35,4 @@ namespace Tests.Cluster.ClusterHealth
 			response.ActiveShards.Should().BeGreaterOrEqualTo(1);
 		}
 	}
-
 }

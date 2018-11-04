@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -7,8 +6,8 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Xunit;
 using static Nest.Infer;
+
 #pragma warning disable 618
 
 namespace Tests.Search.FieldStats
@@ -18,34 +17,28 @@ namespace Tests.Search.FieldStats
 	{
 		public FieldStatsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.FieldStats(typeof(Project), f),
-			fluentAsync: (c, f) => c.FieldStatsAsync(typeof(Project), f),
-			request: (c, r) => c.FieldStats(r),
-			requestAsync: (c, r) => c.FieldStatsAsync(r)
-		);
+		protected override bool ExpectIsValid => true;
 
 		protected override int ExpectStatusCode => 200;
-		protected override bool ExpectIsValid => true;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/project/_field_stats?level=indices";
 
 		protected override Func<FieldStatsDescriptor, IFieldStatsRequest> Fluent => d => d
 			.Fields("*")
 			.Level(Level.Indices);
-			// TODO: These seem to never return stats...
-			//.IndexConstraints(cs => cs
-			//	.IndexConstraint(Field<Project>(p => p.StartedOn), c => c
-			//		.MinValue(min => min
-			//			.GreaterThanOrEqualTo(Project.Projects.Min(p => p.StartedOn).ToString("yyyy-MM-dd"))
-			//			.Format("date_optional_time")
-			//		)
-			//		.MaxValue(max => max
-			//			.LessThan(Project.Projects.Max(p => p.StartedOn).ToString("yyyy-MM-dd"))
-			//			.Format("date_optional_time")
-			//		)
-			//	)
-			//);
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		// TODO: These seem to never return stats...
+		//.IndexConstraints(cs => cs
+		//	.IndexConstraint(Field<Project>(p => p.StartedOn), c => c
+		//		.MinValue(min => min
+		//			.GreaterThanOrEqualTo(Project.Projects.Min(p => p.StartedOn).ToString("yyyy-MM-dd"))
+		//			.Format("date_optional_time")
+		//		)
+		//		.MaxValue(max => max
+		//			.LessThan(Project.Projects.Max(p => p.StartedOn).ToString("yyyy-MM-dd"))
+		//			.Format("date_optional_time")
+		//		)
+		//	)
+		//);
 
 		protected override FieldStatsRequest Initializer => new FieldStatsRequest(typeof(Project))
 		{
@@ -72,6 +65,15 @@ namespace Tests.Search.FieldStats
 			//	}
 			//}
 		};
+
+		protected override string UrlPath => "/project/_field_stats?level=indices";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(c, f) => c.FieldStats(typeof(Project), f),
+			(c, f) => c.FieldStatsAsync(typeof(Project), f),
+			(c, r) => c.FieldStats(r),
+			(c, r) => c.FieldStatsAsync(r)
+		);
 
 		protected override void ExpectResponse(IFieldStatsResponse response)
 		{

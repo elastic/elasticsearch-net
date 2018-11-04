@@ -14,34 +14,13 @@ using Tests.Framework.Integration;
 namespace Tests.Search.Percolator.RegisterPercolator
 {
 	[SkipVersion(">5.0.0-alpha1", "deprecated")]
-	public class RegisterPercolatorApiTests : ApiIntegrationTestBase<WritableCluster, IRegisterPercolatorResponse, IRegisterPercolatorRequest, RegisterPercolatorDescriptor<Project>, RegisterPercolatorRequest>
+	public class RegisterPercolatorApiTests
+		: ApiIntegrationTestBase<WritableCluster, IRegisterPercolatorResponse, IRegisterPercolatorRequest, RegisterPercolatorDescriptor<Project>,
+			RegisterPercolatorRequest>
 	{
 		public RegisterPercolatorApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override void OnBeforeCall(IElasticClient client)
-		{
-			var createIndex = this.Client.CreateIndex(this.CallIsolatedValue + "-index", c=>c
-				.Mappings(mm=>mm
-					.Map<Project>(m=>m.AutoMap())
-				)
-			);
-			if (!createIndex.IsValid)
-				throw new Exception($"Setup: failed to first register percolator {this.CallIsolatedValue}");
-		}
-
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.RegisterPercolator(this.CallIsolatedValue, f),
-			fluentAsync: (c, f) => c.RegisterPercolatorAsync(this.CallIsolatedValue, f),
-			request: (c, r) => c.RegisterPercolator(r),
-			requestAsync: (c, r) => c.RegisterPercolatorAsync(r)
-		);
-
-		protected override int ExpectStatusCode => 201;
 		protected override bool ExpectIsValid => true;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/{CallIsolatedValue}-index/.percolator/{this.CallIsolatedValue}";
-
-		protected override RegisterPercolatorDescriptor<Project> NewDescriptor() => new RegisterPercolatorDescriptor<Project>(this.CallIsolatedValue);
 
 		protected override object ExpectJson => new
 		{
@@ -54,17 +33,10 @@ namespace Tests.Search.Percolator.RegisterPercolator
 			project = Project.InstanceAnonymous
 		};
 
-		protected override void ExpectResponse(IRegisterPercolatorResponse response)
-		{
-			response.Created.Should().BeTrue();
-			response.Index.Should().NotBeNullOrEmpty();
-			response.Type.Should().NotBeNullOrEmpty();
-			response.Id.Should().NotBeNullOrEmpty();
-			response.Version.Should().BeGreaterThan(0);
-		}
+		protected override int ExpectStatusCode => 201;
 
 		protected override Func<RegisterPercolatorDescriptor<Project>, IRegisterPercolatorRequest> Fluent => r => r
-			.Index(this.CallIsolatedValue + "-index")
+			.Index(CallIsolatedValue + "-index")
 			.Query(q => q
 				.Match(m => m
 					.Field(p => p.Name)
@@ -77,7 +49,9 @@ namespace Tests.Search.Percolator.RegisterPercolator
 				.Add("project", Project.Instance)
 			);
 
-		protected override RegisterPercolatorRequest Initializer => new RegisterPercolatorRequest(this.CallIsolatedValue + "-index", this.CallIsolatedValue)
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
+		protected override RegisterPercolatorRequest Initializer => new RegisterPercolatorRequest(CallIsolatedValue + "-index", CallIsolatedValue)
 		{
 			Query = new QueryContainer(new MatchQuery
 			{
@@ -91,5 +65,36 @@ namespace Tests.Search.Percolator.RegisterPercolator
 				{ "project", Project.Instance }
 			}
 		};
+
+		protected override string UrlPath => $"/{CallIsolatedValue}-index/.percolator/{CallIsolatedValue}";
+
+		protected override void OnBeforeCall(IElasticClient client)
+		{
+			var createIndex = Client.CreateIndex(CallIsolatedValue + "-index", c => c
+				.Mappings(mm => mm
+					.Map<Project>(m => m.AutoMap())
+				)
+			);
+			if (!createIndex.IsValid)
+				throw new Exception($"Setup: failed to first register percolator {CallIsolatedValue}");
+		}
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(c, f) => c.RegisterPercolator(CallIsolatedValue, f),
+			(c, f) => c.RegisterPercolatorAsync(CallIsolatedValue, f),
+			(c, r) => c.RegisterPercolator(r),
+			(c, r) => c.RegisterPercolatorAsync(r)
+		);
+
+		protected override RegisterPercolatorDescriptor<Project> NewDescriptor() => new RegisterPercolatorDescriptor<Project>(CallIsolatedValue);
+
+		protected override void ExpectResponse(IRegisterPercolatorResponse response)
+		{
+			response.Created.Should().BeTrue();
+			response.Index.Should().NotBeNullOrEmpty();
+			response.Type.Should().NotBeNullOrEmpty();
+			response.Id.Should().NotBeNullOrEmpty();
+			response.Version.Should().BeGreaterThan(0);
+		}
 	}
 }

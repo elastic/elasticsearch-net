@@ -2,21 +2,24 @@
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
+using Tests.Analysis.Analyzers;
+using Tests.Analysis.CharFilters;
+using Tests.Analysis.TokenFilters;
+using Tests.Analysis.Tokenizers;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 using static Tests.Framework.Promisify;
 
 namespace Tests.Analysis
 {
-
 	[SkipVersion("<5.4.0", "This tests contains analyzers/tokenfilters not found in previous versions, need a clean way to seperate these out")]
 	public class AnalysisCrudTests
 		: CrudWithNoDeleteTestBase<ICreateIndexResponse, IGetIndexSettingsResponse, IUpdateIndexSettingsResponse>
 	{
+		public AnalysisCrudTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		/**
 		* == Analysis crud
 		*
@@ -26,18 +29,16 @@ namespace Tests.Analysis
 		*/
 		protected override bool SupportsDeletes => false;
 
-		public AnalysisCrudTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
 		/**
 		* We can create the analysis settings as part of the create index call
 		*/
 		protected override LazyResponses Create() => Calls<CreateIndexDescriptor, CreateIndexRequest, ICreateIndexRequest, ICreateIndexResponse>(
 			CreateInitializer,
 			CreateFluent,
-			fluent: (s, c, f) => c.CreateIndex(s, f),
-			fluentAsync: (s, c, f) => c.CreateIndexAsync(s, f),
-			request: (s, c, r) => c.CreateIndex(r),
-			requestAsync: (s, c, r) => c.CreateIndexAsync(r)
+			(s, c, f) => c.CreateIndex(s, f),
+			(s, c, f) => c.CreateIndexAsync(s, f),
+			(s, c, r) => c.CreateIndex(r),
+			(s, c, r) => c.CreateIndexAsync(r)
 		);
 
 		protected virtual CreateIndexRequest CreateInitializer(string indexName) => new CreateIndexRequest(indexName)
@@ -46,10 +47,10 @@ namespace Tests.Analysis
 			{
 				Analysis = new Nest.Analysis
 				{
-					Analyzers = Analyzers.AnalyzerUsageTests.InitializerExample.Analysis.Analyzers,
-					CharFilters = CharFilters.CharFilterUsageTests.InitializerExample.Analysis.CharFilters,
-					Tokenizers = Tokenizers.TokenizerUsageTests.InitializerExample.Analysis.Tokenizers,
-					TokenFilters = TokenFilters.TokenFilterUsageTests.InitializerExample.Analysis.TokenFilters,
+					Analyzers = AnalyzerUsageTests.InitializerExample.Analysis.Analyzers,
+					CharFilters = CharFilterUsageTests.InitializerExample.Analysis.CharFilters,
+					Tokenizers = TokenizerUsageTests.InitializerExample.Analysis.Tokenizers,
+					TokenFilters = TokenFilterUsageTests.InitializerExample.Analysis.TokenFilters,
 				}
 			}
 		};
@@ -57,10 +58,10 @@ namespace Tests.Analysis
 		protected virtual ICreateIndexRequest CreateFluent(string indexName, CreateIndexDescriptor c) =>
 			c.Settings(s => s
 				.Analysis(a => a
-					.Analyzers(t => Promise(Analyzers.AnalyzerUsageTests.FluentExample(s).Value.Analysis.Analyzers))
-					.CharFilters(t => Promise(CharFilters.CharFilterUsageTests.FluentExample(s).Value.Analysis.CharFilters))
-					.Tokenizers(t => Promise(Tokenizers.TokenizerUsageTests.FluentExample(s).Value.Analysis.Tokenizers))
-					.TokenFilters(t => Promise(TokenFilters.TokenFilterUsageTests.FluentExample(s).Value.Analysis.TokenFilters))
+					.Analyzers(t => Promise(AnalyzerUsageTests.FluentExample(s).Value.Analysis.Analyzers))
+					.CharFilters(t => Promise(CharFilterUsageTests.FluentExample(s).Value.Analysis.CharFilters))
+					.Tokenizers(t => Promise(TokenizerUsageTests.FluentExample(s).Value.Analysis.Tokenizers))
+					.TokenFilters(t => Promise(TokenFilterUsageTests.FluentExample(s).Value.Analysis.TokenFilters))
 				)
 			);
 
@@ -68,16 +69,18 @@ namespace Tests.Analysis
 		/**
 		* We then read back the analysis settings using `GetIndexSettings()`, you can use this method to get the settings for 1, or many indices in one go
 		*/
-		protected override LazyResponses Read() => Calls<GetIndexSettingsDescriptor, GetIndexSettingsRequest, IGetIndexSettingsRequest, IGetIndexSettingsResponse>(
-			GetInitializer,
-			GetFluent,
-			fluent: (s, c, f) => c.GetIndexSettings(f),
-			fluentAsync: (s, c, f) => c.GetIndexSettingsAsync(f),
-			request: (s, c, r) => c.GetIndexSettings(r),
-			requestAsync: (s, c, r) => c.GetIndexSettingsAsync(r)
-		);
+		protected override LazyResponses Read() =>
+			Calls<GetIndexSettingsDescriptor, GetIndexSettingsRequest, IGetIndexSettingsRequest, IGetIndexSettingsResponse>(
+				GetInitializer,
+				GetFluent,
+				(s, c, f) => c.GetIndexSettings(f),
+				(s, c, f) => c.GetIndexSettingsAsync(f),
+				(s, c, r) => c.GetIndexSettings(r),
+				(s, c, r) => c.GetIndexSettingsAsync(r)
+			);
 
 		protected GetIndexSettingsRequest GetInitializer(string indexName) => new GetIndexSettingsRequest(Nest.Indices.Index(indexName)) { };
+
 		protected IGetIndexSettingsRequest GetFluent(string indexName, GetIndexSettingsDescriptor u) => u.Index(indexName);
 
 		/**
@@ -101,39 +104,40 @@ namespace Tests.Analysis
 		/**
 		* Elasticsearch has an `UpdateIndexSettings()` call but in order to be able to use it you first need to close the index and reopen it afterwards
 		*/
-		protected override LazyResponses Update() => Calls<UpdateIndexSettingsDescriptor, UpdateIndexSettingsRequest, IUpdateIndexSettingsRequest, IUpdateIndexSettingsResponse>(
-			UpdateInitializer,
-			UpdateFluent,
-			fluent: (s, c, f) =>
-			{
-				c.CloseIndex(s);
-				var response = c.UpdateIndexSettings(s, f);
-				c.OpenIndex(s);
-				return response;
-			}
-			,
-			fluentAsync: async (s, c, f) =>
-			{
-				c.CloseIndex(s);
-				var response = await c.UpdateIndexSettingsAsync(s, f);
-				c.OpenIndex(s);
-				return response;
-			},
-			request: (s, c, r) =>
-			{
-				c.CloseIndex(s);
-				var response = c.UpdateIndexSettings(r);
-				c.OpenIndex(s);
-				return response;
-			},
-			requestAsync: async (s, c, r) =>
-			{
-				c.CloseIndex(s);
-				var response = await c.UpdateIndexSettingsAsync(r);
-				c.OpenIndex(s);
-				return response;
-			}
-		);
+		protected override LazyResponses Update() =>
+			Calls<UpdateIndexSettingsDescriptor, UpdateIndexSettingsRequest, IUpdateIndexSettingsRequest, IUpdateIndexSettingsResponse>(
+				UpdateInitializer,
+				UpdateFluent,
+				(s, c, f) =>
+				{
+					c.CloseIndex(s);
+					var response = c.UpdateIndexSettings(s, f);
+					c.OpenIndex(s);
+					return response;
+				}
+				,
+				async (s, c, f) =>
+				{
+					c.CloseIndex(s);
+					var response = await c.UpdateIndexSettingsAsync(s, f);
+					c.OpenIndex(s);
+					return response;
+				},
+				(s, c, r) =>
+				{
+					c.CloseIndex(s);
+					var response = c.UpdateIndexSettings(r);
+					c.OpenIndex(s);
+					return response;
+				},
+				async (s, c, r) =>
+				{
+					c.CloseIndex(s);
+					var response = await c.UpdateIndexSettingsAsync(r);
+					c.OpenIndex(s);
+					return response;
+				}
+			);
 
 		/**
 		* Here we add a new `HtmlStripCharFilter` called `differentHtml`
@@ -145,7 +149,7 @@ namespace Tests.Analysis
 			{
 				Analysis = new Nest.Analysis
 				{
-					CharFilters = new Nest.CharFilters {{"differentHtml", new HtmlStripCharFilter {}}}
+					CharFilters = new Nest.CharFilters { { "differentHtml", new HtmlStripCharFilter { } } }
 				}
 			}
 		};

@@ -2,13 +2,30 @@
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.Joining.HasParent
 {
 	public class HasParentUsageTests : QueryDslUsageTestsBase
 	{
 		public HasParentUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IHasParentQuery>(a => a.HasParent)
+		{
+			q => q.Query = null,
+			q => q.Query = ConditionlessQuery,
+			q => q.Type = null,
+		};
+
+		protected override QueryContainer QueryInitializer => new HasParentQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Type = Infer.Type<Developer>(),
+			InnerHits = new InnerHits { Explain = true },
+			Query = new MatchAllQuery(),
+			Score = true,
+			IgnoreUnmapped = true
+		};
 
 		protected override object QueryJson => new
 		{
@@ -30,32 +47,14 @@ namespace Tests.QueryDsl.Joining.HasParent
 			}
 		};
 
-		protected override QueryContainer QueryInitializer => new HasParentQuery
-		{
-			Name = "named_query",
-			Boost = 1.1,
-			Type = Infer.Type<Developer>(),
-			InnerHits = new InnerHits { Explain = true },
-			Query = new MatchAllQuery(),
-			Score = true,
-			IgnoreUnmapped = true
-		};
-
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.HasParent<Developer>(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.InnerHits(i=>i.Explain())
+				.InnerHits(i => i.Explain())
 				.Score(true)
-				.Query(qq=>qq.MatchAll())
+				.Query(qq => qq.MatchAll())
 				.IgnoreUnmapped(true)
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IHasParentQuery>(a => a.HasParent)
-		{
-			q =>  q.Query = null,
-			q =>  q.Query = ConditionlessQuery,
-			q =>  q.Type = null,
-		};
 	}
 }

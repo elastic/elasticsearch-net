@@ -2,13 +2,36 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.TermLevel.Range
 {
 	public class RangeQueryUsageTests : QueryDslUsageTestsBase
 	{
-		public RangeQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		public RangeQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<INumericRangeQuery>(q => q.Range as INumericRangeQuery)
+		{
+			q => q.Field = null,
+			q =>
+			{
+				q.GreaterThan = null;
+				q.GreaterThanOrEqualTo = null;
+				q.LessThan = null;
+				q.LessThanOrEqualTo = null;
+			}
+		};
+
+		protected override QueryContainer QueryInitializer => new NumericRangeQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Field = "description",
+			GreaterThan = 1.0,
+			GreaterThanOrEqualTo = 1.1,
+			LessThan = 2.1,
+			LessThanOrEqualTo = 2.0,
+			Relation = RangeRelation.Within
+		};
 
 		protected override object QueryJson => new
 		{
@@ -27,18 +50,6 @@ namespace Tests.QueryDsl.TermLevel.Range
 			}
 		};
 
-		protected override QueryContainer QueryInitializer => new NumericRangeQuery
-		{
-			Name = "named_query",
-			Boost = 1.1,
-			Field = "description",
-			GreaterThan = 1.0,
-			GreaterThanOrEqualTo = 1.1,
-			LessThan = 2.1,
-			LessThanOrEqualTo = 2.0,
-			Relation = RangeRelation.Within
-		};
-
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.Range(c => c
 				.Name("named_query")
@@ -50,17 +61,5 @@ namespace Tests.QueryDsl.TermLevel.Range
 				.LessThanOrEquals(2.0)
 				.Relation(RangeRelation.Within)
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<INumericRangeQuery>(q => q.Range as INumericRangeQuery)
-		{
-			q=> q.Field = null,
-			q=>
-			{
-				q.GreaterThan = null;
-				q.GreaterThanOrEqualTo = null;
-				q.LessThan = null;
-				q.LessThanOrEqualTo = null;
-			}
-		};
 	}
 }

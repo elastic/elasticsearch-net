@@ -7,28 +7,17 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.Document.Single.TermVectors
 {
-	public class TermVectorsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ITermVectorsResponse, ITermVectorsRequest<Project>, TermVectorsDescriptor<Project>, TermVectorsRequest<Project>>
+	public class TermVectorsApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, ITermVectorsResponse, ITermVectorsRequest<Project>, TermVectorsDescriptor<Project>,
+			TermVectorsRequest<Project>>
 	{
 		public TermVectorsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.TermVectors(f),
-			fluentAsync: (client, f) => client.TermVectorsAsync(f),
-			request: (client, r) => client.TermVectors(r),
-			requestAsync: (client, r) => client.TermVectorsAsync(r)
-		);
 
 		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/project/project/{UrlEncode(Project.Instance.Name)}/_termvectors?offsets=true";
-
-		protected override bool SupportsDeserialization => false;
 
 		protected override object ExpectJson => new
 		{
@@ -44,9 +33,9 @@ namespace Tests.Document.Single.TermVectors
 			}
 		};
 
-		protected override TermVectorsDescriptor<Project> NewDescriptor() => new TermVectorsDescriptor<Project>(typeof (Project), typeof (Project));
+		protected override int ExpectStatusCode => 200;
 
-		protected override Func<TermVectorsDescriptor<Project>, ITermVectorsRequest<Project>> Fluent => d=>d
+		protected override Func<TermVectorsDescriptor<Project>, ITermVectorsRequest<Project>> Fluent => d => d
 			.Id(Id(Project.Instance))
 			.Offsets()
 			.Filter(f => f
@@ -57,8 +46,9 @@ namespace Tests.Document.Single.TermVectors
 				.MaximumDocumentFrequency(int.MaxValue)
 				.MinimumWordLength(0)
 				.MaximumWordLength(200)
-			)
-		;
+			);
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected override TermVectorsRequest<Project> Initializer => new TermVectorsRequest<Project>(Project.Instance.Name)
 		{
@@ -74,6 +64,18 @@ namespace Tests.Document.Single.TermVectors
 				MaximumWordLength = 200
 			}
 		};
+
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/project/project/{UrlEncode(Project.Instance.Name)}/_termvectors?offsets=true";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.TermVectors(f),
+			(client, f) => client.TermVectorsAsync(f),
+			(client, r) => client.TermVectors(r),
+			(client, r) => client.TermVectorsAsync(r)
+		);
+
+		protected override TermVectorsDescriptor<Project> NewDescriptor() => new TermVectorsDescriptor<Project>(typeof(Project), typeof(Project));
 
 		protected override void ExpectResponse(ITermVectorsResponse response)
 		{

@@ -2,14 +2,38 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Tests.Domain.Helpers.TestValueHelper;
 
 namespace Tests.QueryDsl.TermLevel.Range
 {
 	public class DateRangeQueryUsageTests : QueryDslUsageTestsBase
 	{
-		public DateRangeQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		public DateRangeQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IDateRangeQuery>(q => q.Range as IDateRangeQuery)
+		{
+			q => q.Field = null,
+			q =>
+			{
+				q.GreaterThan = null;
+				q.GreaterThanOrEqualTo = null;
+				q.LessThan = null;
+				q.LessThanOrEqualTo = null;
+			}
+		};
+
+		protected override QueryContainer QueryInitializer => new DateRangeQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Field = "description",
+			GreaterThan = FixedDate,
+			GreaterThanOrEqualTo = DateMath.Anchored(FixedDate).RoundTo(TimeUnit.Month),
+			LessThan = "01/01/2012",
+			LessThanOrEqualTo = DateMath.Now,
+			TimeZone = "+01:00",
+			Format = "dd/MM/yyyy||yyyy"
+		};
 
 		protected override object QueryJson => new
 		{
@@ -29,19 +53,6 @@ namespace Tests.QueryDsl.TermLevel.Range
 			}
 		};
 
-		protected override QueryContainer QueryInitializer => new DateRangeQuery
-		{
-			Name = "named_query",
-			Boost = 1.1,
-			Field = "description",
-			GreaterThan = FixedDate,
-			GreaterThanOrEqualTo = DateMath.Anchored(FixedDate).RoundTo(TimeUnit.Month),
-			LessThan = "01/01/2012",
-			LessThanOrEqualTo = DateMath.Now,
-			TimeZone = "+01:00",
-			Format = "dd/MM/yyyy||yyyy"
-		};
-
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.DateRange(c => c
 				.Name("named_query")
@@ -54,17 +65,5 @@ namespace Tests.QueryDsl.TermLevel.Range
 				.Format("dd/MM/yyyy||yyyy")
 				.TimeZone("+01:00")
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IDateRangeQuery>(q => q.Range as IDateRangeQuery)
-		{
-			q=> q.Field = null,
-			q=>
-			{
-				q.GreaterThan = null;
-				q.GreaterThanOrEqualTo = null;
-				q.LessThan = null;
-				q.LessThanOrEqualTo = null;
-			}
-		};
 	}
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -10,38 +9,28 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Search.MultiSearch.MultiSearchTemplate
 {
 	public class MultiSearchTemplateApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IMultiSearchResponse, IMultiSearchTemplateRequest, MultiSearchTemplateDescriptor, MultiSearchTemplateRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, IMultiSearchResponse, IMultiSearchTemplateRequest, MultiSearchTemplateDescriptor,
+			MultiSearchTemplateRequest>
 	{
 		public MultiSearchTemplateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.MultiSearchTemplate(f),
-			fluentAsync: (c, f) => c.MultiSearchTemplateAsync(f),
-			request: (c, r) => c.MultiSearchTemplate(r),
-			requestAsync: (c, r) => c.MultiSearchTemplateAsync(r)
-		);
-
-		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => false;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/project/project/_msearch/template";
-
-		protected override bool SupportsDeserialization => false;
 
 		protected override object ExpectJson => new object[]
 		{
-			new {},
+			new { },
 			new { @params = new { state = "Stable" }, inline = "{\"query\": {\"match\":  {\"state\" : \"{{state}}\" }}}" },
 			new { index = "devs" },
-			new { id = "template-id"},
-			new { index = "devs"},
-			new { file = "template-file"}
+			new { id = "template-id" },
+			new { index = "devs" },
+			new { file = "template-file" }
 		};
+
+		protected override int ExpectStatusCode => 200;
 
 		protected override Func<MultiSearchTemplateDescriptor, IMultiSearchTemplateRequest> Fluent => ms => ms
 			.Index(typeof(Project))
@@ -56,12 +45,14 @@ namespace Tests.Search.MultiSearch.MultiSearchTemplate
 #pragma warning disable 618
 			.Template<Project>("file", s => s.Index("devs").File("template-file"));
 #pragma warning restore 618
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected override MultiSearchTemplateRequest Initializer => new MultiSearchTemplateRequest(typeof(Project), typeof(Project))
 		{
 			Operations = new Dictionary<string, ISearchTemplateRequest>
 			{
-				{ "inline", new SearchTemplateRequest<Project>(typeof(Project))
+				{
+					"inline", new SearchTemplateRequest<Project>(typeof(Project))
 					{
 						Inline = "{\"query\": {\"match\":  {\"state\" : \"{{state}}\" }}}",
 						Params = new Dictionary<string, object>
@@ -74,9 +65,18 @@ namespace Tests.Search.MultiSearch.MultiSearchTemplate
 #pragma warning disable 618
 				{ "file", new SearchTemplateRequest<Project>("devs") { File = "template-file" } }
 #pragma warning restore 618
-
 			}
 		};
+
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => "/project/project/_msearch/template";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(c, f) => c.MultiSearchTemplate(f),
+			(c, f) => c.MultiSearchTemplateAsync(f),
+			(c, r) => c.MultiSearchTemplate(r),
+			(c, r) => c.MultiSearchTemplateAsync(r)
+		);
 
 		protected override void ExpectResponse(IMultiSearchResponse response)
 		{

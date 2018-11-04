@@ -4,9 +4,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Aggregations.Bucket.Nested
 {
@@ -70,7 +68,7 @@ namespace Tests.Aggregations.Bucket.Nested
 			tags.Should().NotBeNull();
 			var tagNames = tags.Terms("tag_names");
 			tagNames.Should().NotBeNull();
-			foreach(var item in tagNames.Buckets)
+			foreach (var item in tagNames.Buckets)
 			{
 				item.Key.Should().NotBeNullOrEmpty();
 				item.DocCount.Should().BeGreaterThan(0);

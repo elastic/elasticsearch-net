@@ -9,16 +9,91 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using Xunit;
 
 namespace Tests.XPack.Watcher.ExecuteWatch
 {
-	public class ExecuteWatchApiTests : ApiIntegrationTestBase<XPackCluster, IExecuteWatchResponse, IExecuteWatchRequest, ExecuteWatchDescriptor, ExecuteWatchRequest>
+	public class ExecuteWatchApiTests
+		: ApiIntegrationTestBase<XPackCluster, IExecuteWatchResponse, IExecuteWatchRequest, ExecuteWatchDescriptor, ExecuteWatchRequest>
 	{
 		private readonly DateTimeOffset _triggeredDateTime = new DateTimeOffset(2016, 11, 17, 13, 00, 00, TimeSpan.Zero);
 
 		public ExecuteWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+
+		protected override object ExpectJson => new
+		{
+			action_modes = new
+			{
+				email_admin = "force_simulate",
+				webhook_action = "force_simulate",
+				slack_action = "force_simulate",
+				hipchat_action = "force_simulate",
+				pagerduty_action = "force_simulate",
+			},
+			alternative_input = new
+			{
+				foo = "bar"
+			},
+			ignore_condition = true,
+			record_execution = true,
+			trigger_data = new
+			{
+				scheduled_time = "2016-11-17T13:00:00+00:00",
+				triggered_time = "2016-11-17T13:00:00+00:00"
+			}
+		};
+
+		protected override int ExpectStatusCode => 200;
+
+		protected override Func<ExecuteWatchDescriptor, IExecuteWatchRequest> Fluent => f => f
+			.Id(CallIsolatedValue)
+			.TriggerData(te => te
+				.ScheduledTime(_triggeredDateTime)
+				.TriggeredTime(_triggeredDateTime)
+			)
+			.AlternativeInput(i => i.Add("foo", "bar"))
+			.IgnoreCondition()
+			.ActionModes(a => a
+				.Add("email_admin", ActionExecutionMode.ForceSimulate)
+				.Add("webhook_action", ActionExecutionMode.ForceSimulate)
+				.Add("slack_action", ActionExecutionMode.ForceSimulate)
+				.Add("hipchat_action", ActionExecutionMode.ForceSimulate)
+				.Add("pagerduty_action", ActionExecutionMode.ForceSimulate)
+			)
+			.RecordExecution();
+
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+
+
+		protected override ExecuteWatchRequest Initializer =>
+			new ExecuteWatchRequest(CallIsolatedValue)
+			{
+				TriggerData = new ScheduleTriggerEvent
+				{
+					ScheduledTime = _triggeredDateTime,
+					TriggeredTime = _triggeredDateTime
+				},
+				AlternativeInput = new Dictionary<string, object>
+				{
+					{ "foo", "bar" }
+				},
+				IgnoreCondition = true,
+				ActionModes = new Dictionary<string, ActionExecutionMode>
+				{
+					{ "email_admin", ActionExecutionMode.ForceSimulate },
+					{ "webhook_action", ActionExecutionMode.ForceSimulate },
+					{ "slack_action", ActionExecutionMode.ForceSimulate },
+					{ "hipchat_action", ActionExecutionMode.ForceSimulate },
+					{ "pagerduty_action", ActionExecutionMode.ForceSimulate },
+				},
+				RecordExecution = true
+			};
+
+		protected override bool SupportsDeserialization => false;
+
+		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}/_execute";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -31,15 +106,15 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 								.Indices("logstash")
 								.Body<object>(b => b
 									.Query(q => q
-										.Match(m => m
+											.Match(m => m
 												.Field("response")
 												.Query("404")
-										) && +q
-										.DateRange(ffrr => ffrr
-											.Field("@timestamp")
-											.GreaterThanOrEquals("{{ctx.trigger.scheduled_time}}||-5m")
-											.LessThanOrEquals("{{ctx.trigger.triggered_time}}")
-										)
+											) && +q
+											.DateRange(ffrr => ffrr
+												.Field("@timestamp")
+												.GreaterThanOrEquals("{{ctx.trigger.scheduled_time}}||-5m")
+												.LessThanOrEquals("{{ctx.trigger.triggered_time}}")
+											)
 									)
 								)
 							)
@@ -122,84 +197,11 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.ExecuteWatch(f),
-			fluentAsync: (client, f) => client.ExecuteWatchAsync(f),
-			request: (client, r) => client.ExecuteWatch(r),
-			requestAsync: (client, r) => client.ExecuteWatchAsync(r)
+			(client, f) => client.ExecuteWatch(f),
+			(client, f) => client.ExecuteWatchAsync(f),
+			(client, r) => client.ExecuteWatch(r),
+			(client, r) => client.ExecuteWatchAsync(r)
 		);
-
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-
-		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}/_execute";
-
-		protected override bool SupportsDeserialization => false;
-
-		protected override object ExpectJson => new
-			{
-				action_modes = new
-				{
-					email_admin = "force_simulate",
-					webhook_action = "force_simulate",
-					slack_action = "force_simulate",
-					hipchat_action = "force_simulate",
-					pagerduty_action = "force_simulate",
-				},
-				alternative_input = new
-				{
-					foo = "bar"
-				},
-				ignore_condition = true,
-				record_execution = true,
-				trigger_data = new
-				{
-					scheduled_time = "2016-11-17T13:00:00+00:00",
-					triggered_time = "2016-11-17T13:00:00+00:00"
-				}
-			};
-
-		protected override Func<ExecuteWatchDescriptor, IExecuteWatchRequest> Fluent => f => f
-			.Id(CallIsolatedValue)
-			.TriggerData(te => te
-				.ScheduledTime(_triggeredDateTime)
-				.TriggeredTime(_triggeredDateTime)
-			)
-			.AlternativeInput(i => i.Add("foo", "bar"))
-			.IgnoreCondition()
-			.ActionModes(a => a
-				.Add("email_admin", ActionExecutionMode.ForceSimulate)
-				.Add("webhook_action", ActionExecutionMode.ForceSimulate)
-				.Add("slack_action", ActionExecutionMode.ForceSimulate)
-				.Add("hipchat_action", ActionExecutionMode.ForceSimulate)
-				.Add("pagerduty_action", ActionExecutionMode.ForceSimulate)
-			)
-			.RecordExecution();
-
-
-		protected override ExecuteWatchRequest Initializer =>
-			new ExecuteWatchRequest(CallIsolatedValue)
-			{
-				TriggerData = new ScheduleTriggerEvent
-				{
-					ScheduledTime = _triggeredDateTime,
-					TriggeredTime = _triggeredDateTime
-				},
-				AlternativeInput = new Dictionary<string, object>
-				{
-					{ "foo", "bar" }
-				},
-				IgnoreCondition = true,
-				ActionModes = new Dictionary<string, ActionExecutionMode>
-				{
-					{ "email_admin", ActionExecutionMode.ForceSimulate },
-					{ "webhook_action", ActionExecutionMode.ForceSimulate },
-					{ "slack_action", ActionExecutionMode.ForceSimulate },
-					{ "hipchat_action", ActionExecutionMode.ForceSimulate },
-					{ "pagerduty_action", ActionExecutionMode.ForceSimulate },
-				},
-				RecordExecution = true
-			};
 
 		protected override void ExpectResponse(IExecuteWatchResponse response)
 		{
@@ -285,89 +287,14 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 		}
 	}
 
-	public class ExecuteInlineWatchApiTests : ApiIntegrationTestBase<XPackCluster, IExecuteWatchResponse, IExecuteWatchRequest, ExecuteWatchDescriptor, ExecuteWatchRequest>
+	public class ExecuteInlineWatchApiTests
+		: ApiIntegrationTestBase<XPackCluster, IExecuteWatchResponse, IExecuteWatchRequest, ExecuteWatchDescriptor, ExecuteWatchRequest>
 	{
 		private readonly DateTimeOffset _triggeredDateTime = new DateTimeOffset(2016, 11, 17, 13, 00, 00, TimeSpan.Zero);
 
 		public ExecuteInlineWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
-		{
-			foreach (var callUniqueValue in values)
-			{
-				var putWatchResponse = client.PutWatch(callUniqueValue.Value, p => p
-					.Input(i => i
-						.Search(s => s
-							.Request(r => r
-								.Indices("logstash")
-								.Body<object>(b => b
-									.Query(q => q
-										.Match(m => m
-												.Field("response")
-												.Query("404")
-										) && +q
-										.DateRange(ffrr => ffrr
-											.Field("@timestamp")
-											.GreaterThanOrEquals("{{ctx.trigger.scheduled_time}}||-5m")
-											.LessThanOrEquals("{{ctx.trigger.triggered_time}}")
-										)
-									)
-								)
-							)
-						)
-					)
-					.Condition(c => c
-						.Script(ss => ss
-							.Inline("ctx.payload.hits.total > 1")
-						)
-					)
-					.Trigger(t => t
-						.Schedule(s => s
-							.Cron("0 0 0 1 * ? 2099")
-						)
-					)
-					.Metadata(meta => meta.Add("foo", "bar"))
-					.Actions(a => a
-						.Email("email_admin", e => e
-							.To("someone@domain.host.com")
-							.Subject("404 recently encountered")
-						)
-						.Index("index_action", i => i
-							.Index("test")
-							.DocType("doctype2")
-						)
-						.Logging("logging_action", l => l
-							.Text("404 recently encountered")
-						)
-						.Webhook("webhook_action", w => w
-							.Host("foo.com")
-							.Port(80)
-							.Path("/bar")
-							.Method(HttpInputMethod.Post)
-							.Body("{}")
-						)
-					)
-				);
-
-				if (!putWatchResponse.IsValid)
-					throw new Exception("Problem setting up integration test");
-			}
-		}
-
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.ExecuteWatch(f),
-			fluentAsync: (client, f) => client.ExecuteWatchAsync(f),
-			request: (client, r) => client.ExecuteWatch(r),
-			requestAsync: (client, r) => client.ExecuteWatchAsync(r)
-		);
-
 		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-
-		protected override string UrlPath => $"/_xpack/watcher/watch/_execute";
-
-		protected override bool SupportsDeserialization => false;
 
 		protected override object ExpectJson => new
 		{
@@ -490,6 +417,8 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 			}
 		};
 
+		protected override int ExpectStatusCode => 200;
+
 		protected override Func<ExecuteWatchDescriptor, IExecuteWatchRequest> Fluent => f => f
 			.TriggerData(te => te
 				.ScheduledTime(_triggeredDateTime)
@@ -504,15 +433,15 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 							.Indices("logstash")
 							.Body<object>(b => b
 								.Query(q => q
-									.Match(m => m
-										.Field("response")
-										.Query("404")
-									) && +q
-									.DateRange(ffrr => ffrr
-										.Field("@timestamp")
-										.GreaterThanOrEquals("{{ctx.trigger.scheduled_time}}||-5m")
-										.LessThanOrEquals("{{ctx.trigger.triggered_time}}")
-									)
+										.Match(m => m
+											.Field("response")
+											.Query("404")
+										) && +q
+										.DateRange(ffrr => ffrr
+											.Field("@timestamp")
+											.GreaterThanOrEquals("{{ctx.trigger.scheduled_time}}||-5m")
+											.LessThanOrEquals("{{ctx.trigger.triggered_time}}")
+										)
 								)
 							)
 						)
@@ -554,6 +483,8 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 			.RequestConfiguration(r => r
 				.RequestTimeout(TimeSpan.FromMinutes(2))
 			);
+
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 
 		protected override ExecuteWatchRequest Initializer =>
 			new ExecuteWatchRequest
@@ -600,32 +531,106 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 					},
 					Condition = new InlineScriptCondition("ctx.payload.hits.total > 1"),
 					Actions = new EmailAction("email_admin")
-					{
-						From = "nest-client@domain.example",
-						To = new [] {"someone@domain.host.example"},
-						Subject = "404 recently encountered"
-					} && new IndexAction("index_action")
-					{
-						Index = "test",
-						DocType = "doctype2"
-					} && new LoggingAction("logging_action")
-					{
-						Text = "404 recently encountered"
-					}
-					&& new WebhookAction("webhook_action")
-					{
-						Host = "foo.com",
-						Port = 80,
-						Path = "/bar",
-						Method = HttpInputMethod.Post,
-						Body = "{}"
-					}
+						{
+							From = "nest-client@domain.example",
+							To = new[] { "someone@domain.host.example" },
+							Subject = "404 recently encountered"
+						} && new IndexAction("index_action")
+						{
+							Index = "test",
+							DocType = "doctype2"
+						} && new LoggingAction("logging_action")
+						{
+							Text = "404 recently encountered"
+						}
+						&& new WebhookAction("webhook_action")
+						{
+							Host = "foo.com",
+							Port = 80,
+							Path = "/bar",
+							Method = HttpInputMethod.Post,
+							Body = "{}"
+						}
 				},
 				RequestConfiguration = new RequestConfiguration
 				{
 					RequestTimeout = TimeSpan.FromMinutes(2)
 				}
 			};
+
+		protected override bool SupportsDeserialization => false;
+
+		protected override string UrlPath => $"/_xpack/watcher/watch/_execute";
+
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
+		{
+			foreach (var callUniqueValue in values)
+			{
+				var putWatchResponse = client.PutWatch(callUniqueValue.Value, p => p
+					.Input(i => i
+						.Search(s => s
+							.Request(r => r
+								.Indices("logstash")
+								.Body<object>(b => b
+									.Query(q => q
+											.Match(m => m
+												.Field("response")
+												.Query("404")
+											) && +q
+											.DateRange(ffrr => ffrr
+												.Field("@timestamp")
+												.GreaterThanOrEquals("{{ctx.trigger.scheduled_time}}||-5m")
+												.LessThanOrEquals("{{ctx.trigger.triggered_time}}")
+											)
+									)
+								)
+							)
+						)
+					)
+					.Condition(c => c
+						.Script(ss => ss
+							.Inline("ctx.payload.hits.total > 1")
+						)
+					)
+					.Trigger(t => t
+						.Schedule(s => s
+							.Cron("0 0 0 1 * ? 2099")
+						)
+					)
+					.Metadata(meta => meta.Add("foo", "bar"))
+					.Actions(a => a
+						.Email("email_admin", e => e
+							.To("someone@domain.host.com")
+							.Subject("404 recently encountered")
+						)
+						.Index("index_action", i => i
+							.Index("test")
+							.DocType("doctype2")
+						)
+						.Logging("logging_action", l => l
+							.Text("404 recently encountered")
+						)
+						.Webhook("webhook_action", w => w
+							.Host("foo.com")
+							.Port(80)
+							.Path("/bar")
+							.Method(HttpInputMethod.Post)
+							.Body("{}")
+						)
+					)
+				);
+
+				if (!putWatchResponse.IsValid)
+					throw new Exception("Problem setting up integration test");
+			}
+		}
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.ExecuteWatch(f),
+			(client, f) => client.ExecuteWatchAsync(f),
+			(client, r) => client.ExecuteWatch(r),
+			(client, r) => client.ExecuteWatchAsync(r)
+		);
 
 		protected override void ExpectResponse(IExecuteWatchResponse response)
 		{

@@ -1,14 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using Nest;
-using Tests.Framework.Integration;
-using static Nest.Infer;
-using System.Collections.Generic;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.Integration;
+using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.Average
 {
@@ -48,7 +46,7 @@ namespace Tests.Aggregations.Metric.Average
 					)
 					.Field(p => p.NumberOfCommits)
 					.Missing(10)
-					.Script(ss=>ss.Inline("_value * 1.2").Lang("groovy"))
+					.Script(ss => ss.Inline("_value * 1.2").Lang("groovy"))
 				)
 			);
 

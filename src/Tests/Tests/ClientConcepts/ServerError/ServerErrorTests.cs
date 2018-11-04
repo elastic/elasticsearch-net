@@ -1,6 +1,5 @@
 ﻿using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
-using Tests.Core.Serialization;
 using static Tests.Core.Serialization.SerializationTestHelper;
 
 namespace Tests.ClientConcepts.ServerError

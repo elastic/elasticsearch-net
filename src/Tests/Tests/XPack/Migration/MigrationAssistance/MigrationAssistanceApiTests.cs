@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Tests.Core;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
@@ -15,18 +13,33 @@ using Tests.Framework.Integration;
 
 namespace Tests.XPack.Migration.MigrationAssistance
 {
-	[SkipVersion("<5.6.0","Introduced in Elasticsearch 5.6.0 to aid in upgrading")]
-	public class MigrationAssistanceApiTests :
-		ApiIntegrationTestBase<XPackCluster, IMigrationAssistanceResponse, IMigrationAssistanceRequest, MigrationAssistanceDescriptor, MigrationAssistanceRequest>
+	[SkipVersion("<5.6.0", "Introduced in Elasticsearch 5.6.0 to aid in upgrading")]
+	public class MigrationAssistanceApiTests
+		: ApiIntegrationTestBase<XPackCluster, IMigrationAssistanceResponse, IMigrationAssistanceRequest, MigrationAssistanceDescriptor,
+			MigrationAssistanceRequest>
 	{
 		public MigrationAssistanceApiTests(XPackCluster cluster, EndpointUsage usage)
 			: base(cluster, usage) { }
 
+		protected override bool ExpectIsValid => true;
+
+		protected override object ExpectJson => null;
+		protected override int ExpectStatusCode => 200;
+
+		protected override Func<MigrationAssistanceDescriptor, IMigrationAssistanceRequest> Fluent => f => f
+			.Index(CallIsolatedValue);
+
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+
+		protected override MigrationAssistanceRequest Initializer => new MigrationAssistanceRequest(CallIsolatedValue);
+
+		protected override string UrlPath => $"/_xpack/migration/assistance/{CallIsolatedValue}";
+
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.MigrationAssistance(f),
-			fluentAsync: (c, f) => c.MigrationAssistanceAsync(f),
-			request: (c, r) => c.MigrationAssistance(r),
-			requestAsync: (c, r) => c.MigrationAssistanceAsync(r)
+			(c, f) => c.MigrationAssistance(f),
+			(c, f) => c.MigrationAssistanceAsync(f),
+			(c, r) => c.MigrationAssistance(r),
+			(c, r) => c.MigrationAssistanceAsync(r)
 		);
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
@@ -50,19 +63,7 @@ namespace Tests.XPack.Migration.MigrationAssistance
 			}
 		}
 
-		protected override string UrlPath => $"/_xpack/migration/assistance/{CallIsolatedValue}";
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override int ExpectStatusCode => 200;
-		protected override bool ExpectIsValid => true;
-
-		protected override object ExpectJson => null;
-
 		protected override MigrationAssistanceDescriptor NewDescriptor() => new MigrationAssistanceDescriptor();
-
-		protected override Func<MigrationAssistanceDescriptor, IMigrationAssistanceRequest> Fluent => f => f
-			.Index(CallIsolatedValue);
-
-		protected override MigrationAssistanceRequest Initializer => new MigrationAssistanceRequest(CallIsolatedValue);
 
 		protected override void ExpectResponse(IMigrationAssistanceResponse response)
 		{

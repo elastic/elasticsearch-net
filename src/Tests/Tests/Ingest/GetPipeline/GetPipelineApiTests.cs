@@ -4,31 +4,30 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Ingest.GetPipeline
 {
-	public class GetPipelineApiTests : ApiTestBase<ReadOnlyCluster, IGetPipelineResponse, IGetPipelineRequest, GetPipelineDescriptor, GetPipelineRequest>
+	public class GetPipelineApiTests
+		: ApiTestBase<ReadOnlyCluster, IGetPipelineResponse, IGetPipelineRequest, GetPipelineDescriptor, GetPipelineRequest>
 	{
-		public GetPipelineApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
 		private static readonly string _id = "pipeline-1";
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.GetPipeline(f),
-			fluentAsync: (client, f) => client.GetPipelineAsync(f),
-			request: (client, r) => client.GetPipeline(r),
-			requestAsync: (client, r) => client.GetPipelineAsync(r)
-		);
-
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/_ingest/pipeline/{_id}";
-
-		protected override GetPipelineDescriptor NewDescriptor() => new GetPipelineDescriptor().Id(_id);
+		public GetPipelineApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override Func<GetPipelineDescriptor, IGetPipelineRequest> Fluent => d => d.Id(_id);
 
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+
 		protected override GetPipelineRequest Initializer => new GetPipelineRequest(_id);
+		protected override string UrlPath => $"/_ingest/pipeline/{_id}";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.GetPipeline(f),
+			(client, f) => client.GetPipelineAsync(f),
+			(client, r) => client.GetPipeline(r),
+			(client, r) => client.GetPipelineAsync(r)
+		);
+
+		protected override GetPipelineDescriptor NewDescriptor() => new GetPipelineDescriptor().Id(_id);
 	}
 }

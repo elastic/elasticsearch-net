@@ -6,6 +6,8 @@ namespace Tests.Mapping.Types.Core.String
 {
 	public class StringTest
 	{
+		public char Char { get; set; }
+
 		[String(
 			Analyzer = "myanalyzer",
 			Boost = 1.2,
@@ -24,14 +26,12 @@ namespace Tests.Mapping.Types.Core.String
 			EagerGlobalOrdinals = true)]
 		public string Full { get; set; }
 
-		[String]
-		public string Minimal { get; set; }
+		public Guid Guid { get; set; }
 
 		public string Inferred { get; set; }
 
-		public char Char { get; set; }
-
-		public Guid Guid { get; set; }
+		[String]
+		public string Minimal { get; set; }
 	}
 
 	public class StringAttributeTests : AttributeTestsBase<StringTest>

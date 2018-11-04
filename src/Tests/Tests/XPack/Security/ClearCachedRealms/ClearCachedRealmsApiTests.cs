@@ -9,39 +9,39 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.XPack.Security.ClearCachedRealms
 {
 	[SkipVersion("<2.3.0", "")]
-	public class ClearCachedRealmsApiTests : ApiIntegrationTestBase<XPackCluster, IClearCachedRealmsResponse, IClearCachedRealmsRequest, ClearCachedRealmsDescriptor, ClearCachedRealmsRequest>
+	public class ClearCachedRealmsApiTests
+		: ApiIntegrationTestBase<XPackCluster, IClearCachedRealmsResponse, IClearCachedRealmsRequest, ClearCachedRealmsDescriptor,
+			ClearCachedRealmsRequest>
 	{
 		public ClearCachedRealmsApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.ClearCachedRealms(this.Realm, f),
-			fluentAsync: (client, f) => client.ClearCachedRealmsAsync(this.Realm, f),
-			request: (client, r) => client.ClearCachedRealms(r),
-			requestAsync: (client, r) => client.ClearCachedRealmsAsync(r)
-		);
-
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
+
+		protected override Func<ClearCachedRealmsDescriptor, IClearCachedRealmsRequest> Fluent => d => d;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override string UrlPath => $"/_xpack/security/realm/{UrlEncode(this.Realm)}/_clear_cache";
+		protected override ClearCachedRealmsRequest Initializer => new ClearCachedRealmsRequest(Realm);
 
 		protected override bool SupportsDeserialization => false;
+
+		protected override string UrlPath => $"/_xpack/security/realm/{UrlEncode(Realm)}/_clear_cache";
 
 		//callisolated value can sometimes start with a digit which is not allowed for rolenames
 		private string Realm => SecurityRealms.FileRealm;
 
-		protected override ClearCachedRealmsRequest Initializer => new ClearCachedRealmsRequest(this.Realm);
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.ClearCachedRealms(Realm, f),
+			(client, f) => client.ClearCachedRealmsAsync(Realm, f),
+			(client, r) => client.ClearCachedRealms(r),
+			(client, r) => client.ClearCachedRealmsAsync(r)
+		);
 
-		protected override ClearCachedRealmsDescriptor NewDescriptor() => new ClearCachedRealmsDescriptor(this.Realm);
-
-		protected override Func<ClearCachedRealmsDescriptor, IClearCachedRealmsRequest> Fluent => d => d;
+		protected override ClearCachedRealmsDescriptor NewDescriptor() => new ClearCachedRealmsDescriptor(Realm);
 
 		protected override void ExpectResponse(IClearCachedRealmsResponse response)
 		{
@@ -52,5 +52,4 @@ namespace Tests.XPack.Security.ClearCachedRealms
 			node.Name.Should().StartWith("xpack-node-");
 		}
 	}
-
 }

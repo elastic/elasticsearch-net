@@ -6,9 +6,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.IpRange
@@ -20,7 +18,8 @@ namespace Tests.Aggregations.Bucket.IpRange
 
 		protected override object ExpectJson => new
 		{
-			aggs = new {
+			aggs = new
+			{
 				ip_ranges = new
 				{
 					ip_range = new
@@ -28,11 +27,11 @@ namespace Tests.Aggregations.Bucket.IpRange
 						field = "leadDeveloper.iPAddress",
 						ranges = new object[]
 						{
-							new {to = "127.0.0.1"},
-							new {from = "127.0.0.1"}
+							new { to = "127.0.0.1" },
+							new { from = "127.0.0.1" }
 						}
 					}
-					}
+				}
 			}
 		};
 
@@ -53,8 +52,8 @@ namespace Tests.Aggregations.Bucket.IpRange
 					Field = Field((Project p) => p.LeadDeveloper.IPAddress),
 					Ranges = new List<Nest.IpRange>
 					{
-						new Nest.IpRange {To = "127.0.0.1"},
-						new Nest.IpRange {From = "127.0.0.1"}
+						new Nest.IpRange { To = "127.0.0.1" },
+						new Nest.IpRange { From = "127.0.0.1" }
 					}
 				}
 			};

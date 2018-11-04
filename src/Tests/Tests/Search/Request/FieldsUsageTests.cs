@@ -6,9 +6,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Search.Request
@@ -48,7 +46,7 @@ namespace Tests.Search.Request
 					p => p.DateString)
 			};
 
-		[I] protected Task FieldsAreReturned() => this.AssertOnAllResponses(r =>
+		[I] protected Task FieldsAreReturned() => AssertOnAllResponses(r =>
 		{
 			r.Fields.Should().NotBeNull();
 			r.Fields.Count().Should().BeGreaterThan(0);
@@ -66,7 +64,8 @@ namespace Tests.Search.Request
 				dateTime.Should().BeAfter(default(DateTime));
 
 				var dateTimeAsString = fieldValues.ValueOf<Project, string>(p => p.DateString);
-				dateTimeAsString.Should().NotContain("/")
+				dateTimeAsString.Should()
+					.NotContain("/")
 					.And.MatchRegex(@"^\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d.*$");
 			}
 		});

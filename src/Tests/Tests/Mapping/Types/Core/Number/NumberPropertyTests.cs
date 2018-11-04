@@ -1,11 +1,8 @@
 ﻿using System;
-using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Mapping.Types.Core.Number
 {
@@ -32,7 +29,6 @@ namespace Tests.Mapping.Types.Core.Number
 				}
 			}
 		};
-
 #pragma warning disable 618 // Usage of IncludeInAll
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
 			.Number(n => n
@@ -52,7 +48,8 @@ namespace Tests.Mapping.Types.Core.Number
 
 		protected override IProperties InitializerProperties => new Properties
 		{
-			{ "numberOfCommits", new NumberProperty(NumberType.Integer)
+			{
+				"numberOfCommits", new NumberProperty(NumberType.Integer)
 				{
 					DocValues = true,
 					Similarity = SimilarityOption.Classic,
@@ -94,7 +91,6 @@ namespace Tests.Mapping.Types.Core.Number
 				}
 			}
 		};
-
 #pragma warning disable 618 // Usage of IncludeInAll
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
 			.Number(n => n
@@ -116,7 +112,8 @@ namespace Tests.Mapping.Types.Core.Number
 
 		protected override IProperties InitializerProperties => new Properties
 		{
-			{ "numberOfCommits", new NumberProperty(NumberType.ScaledFloat)
+			{
+				"numberOfCommits", new NumberProperty(NumberType.ScaledFloat)
 				{
 					ScalingFactor = 10,
 					DocValues = true,

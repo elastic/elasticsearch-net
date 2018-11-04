@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -16,71 +14,68 @@ namespace Tests.Search.MultiSearch
 {
 	public class MultiSearchLowLevelPostDataTests : IClusterFixture<ReadOnlyCluster>, IClassFixture<EndpointUsage>
 	{
-		private IElasticClient _client;
+		private readonly IElasticClient _client;
 
-		public MultiSearchLowLevelPostDataTests(ReadOnlyCluster cluster, EndpointUsage usage)
-		{
-			_client = cluster.Client;
-		}
+		public MultiSearchLowLevelPostDataTests(ReadOnlyCluster cluster, EndpointUsage usage) => _client = cluster.Client;
 
 		protected List<object> Search => new object[]
 		{
-			new {},
-			new { from = 0, size = 10, query = new { match_all = new {} } },
+			new { },
+			new { from = 0, size = 10, query = new { match_all = new { } } },
 			new { search_type = "query_then_fetch" },
-			new {},
+			new { },
 			new { index = "devs", type = "developer" },
-			new { from = 0, size = 5, query = new { match_all = new {} } },
+			new { from = 0, size = 5, query = new { match_all = new { } } },
 			new { index = "devs", type = "developer" },
-			new { from = 0, size = 5, query = new { match_all = new {} } }
+			new { from = 0, size = 5, query = new { match_all = new { } } }
 		}.ToList();
 
 
 		[I] public void PostEnumerableOfObjects()
 		{
-			var response = this._client.LowLevel.Msearch<dynamic>("project", "project", this.Search);
+			var response = _client.LowLevel.Msearch<dynamic>("project", "project", Search);
 			AssertResponse(response);
-			response = this._client.LowLevel.Msearch<dynamic>("project", "project", (object)this.Search);
+			response = _client.LowLevel.Msearch<dynamic>("project", "project", (object)Search);
 			AssertResponse(response);
 		}
 
 		[I] public void PostEnumerableOfStrings()
 		{
 			var listOfStrings = Search
-				.Select(s => this._client.Serializer.SerializeToString(s, SerializationFormatting.None))
+				.Select(s => _client.Serializer.SerializeToString(s, SerializationFormatting.None))
 				.ToList();
 
-			var response = this._client.LowLevel.Msearch<dynamic>("project", "project", listOfStrings);
+			var response = _client.LowLevel.Msearch<dynamic>("project", "project", listOfStrings);
 			AssertResponse(response);
-			response = this._client.LowLevel.Msearch<dynamic>("project", "project", (object)listOfStrings);
+			response = _client.LowLevel.Msearch<dynamic>("project", "project", (object)listOfStrings);
 			AssertResponse(response);
 		}
 
 		[I] public void PostString()
 		{
 			var str = Search
-				.Select(s => this._client.Serializer.SerializeToString(s, SerializationFormatting.None))
+				.Select(s => _client.Serializer.SerializeToString(s, SerializationFormatting.None))
 				.ToList()
 				.Aggregate(new StringBuilder(), (sb, s) => sb.Append(s + "\n"), sb => sb.ToString());
 
-			var response = this._client.LowLevel.Msearch<dynamic>("project", "project", str);
+			var response = _client.LowLevel.Msearch<dynamic>("project", "project", str);
 			AssertResponse(response);
-			response = this._client.LowLevel.Msearch<dynamic>("project", "project", (object)str);
+			response = _client.LowLevel.Msearch<dynamic>("project", "project", (object)str);
 			AssertResponse(response);
 		}
 
 		[I] public void PostByteArray()
 		{
 			var str = Search
-				.Select(s => this._client.Serializer.SerializeToString(s, SerializationFormatting.None))
+				.Select(s => _client.Serializer.SerializeToString(s, SerializationFormatting.None))
 				.ToList()
 				.Aggregate(new StringBuilder(), (sb, s) => sb.Append(s + "\n"), sb => sb.ToString());
 
 			var bytes = Encoding.UTF8.GetBytes(str);
 
-			var response = this._client.LowLevel.Msearch<dynamic>("project", "project", bytes);
+			var response = _client.LowLevel.Msearch<dynamic>("project", "project", bytes);
 			AssertResponse(response);
-			response = this._client.LowLevel.Msearch<dynamic>("project", "project", (object)bytes);
+			response = _client.LowLevel.Msearch<dynamic>("project", "project", (object)bytes);
 			AssertResponse(response);
 		}
 

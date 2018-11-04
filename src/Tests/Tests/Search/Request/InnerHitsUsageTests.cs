@@ -24,20 +24,26 @@ namespace Tests.Search.Request
 		where TRoyal : class, IRoyal
 	{
 		protected static int IdState = 0;
-		public string Name { get; set; }
+
 		public static Faker<TRoyal> Generator { get; } =
 			new Faker<TRoyal>()
 				.UseSeed(TestClient.Configuration.Seed)
 				.RuleFor(p => p.Name, f => f.Person.Company.Name + IdState++);
+
+		public string Name { get; set; }
 	}
 
 	public class King : RoyalBase<King>
 	{
 		public List<King> Foes { get; set; }
 	}
+
 	public class Prince : RoyalBase<Prince> { }
+
 	public class Duke : RoyalBase<Duke> { }
+
 	public class Earl : RoyalBase<Earl> { }
+
 	public class Baron : RoyalBase<Baron> { }
 
 	//hide
@@ -46,11 +52,15 @@ namespace Tests.Search.Request
 		private readonly IElasticClient _client;
 		private readonly IndexName _index;
 
-		public RoyalSeeder(IElasticClient client, IndexName index) { this._client = client; this._index = index; }
+		public RoyalSeeder(IElasticClient client, IndexName index)
+		{
+			_client = client;
+			_index = index;
+		}
 
 		public void Seed()
 		{
-			var create = this._client.CreateIndex(this._index, c => c
+			var create = _client.CreateIndex(_index, c => c
 				.Settings(s => s
 					.NumberOfReplicas(0)
 					.NumberOfShards(1)
@@ -59,14 +69,14 @@ namespace Tests.Search.Request
 					.Map<King>(m => m.AutoMap()
 						.Properties(props =>
 							RoyalProps(props)
-							.Nested<King>(n => n.Name(p => p.Foes).AutoMap())
+								.Nested<King>(n => n.Name(p => p.Foes).AutoMap())
 						)
 					)
 					.Map<Prince>(m => m.AutoMap().Properties(RoyalProps).Parent<King>())
 					.Map<Duke>(m => m.AutoMap().Properties(RoyalProps).Parent<Prince>())
 					.Map<Earl>(m => m.AutoMap().Properties(RoyalProps).Parent<Duke>())
 					.Map<Baron>(m => m.AutoMap().Properties(RoyalProps).Parent<Earl>())
-				 )
+				)
 			);
 
 			var kings = King.Generator.Generate(2)
@@ -78,22 +88,23 @@ namespace Tests.Search.Request
 
 			var bulk = new BulkDescriptor();
 			IndexAll(bulk, () => kings, indexChildren: king =>
-				 IndexAll(bulk, () => Prince.Generator.Generate(2), king.Name, prince =>
-					 IndexAll(bulk, () => Duke.Generator.Generate(3), prince.Name, duke =>
-						 IndexAll(bulk, () => Earl.Generator.Generate(5), duke.Name, earl =>
-							 IndexAll(bulk, () => Baron.Generator.Generate(1), earl.Name)
-						 )
-					 )
-				 )
+				IndexAll(bulk, () => Prince.Generator.Generate(2), king.Name, prince =>
+					IndexAll(bulk, () => Duke.Generator.Generate(3), prince.Name, duke =>
+						IndexAll(bulk, () => Earl.Generator.Generate(5), duke.Name, earl =>
+							IndexAll(bulk, () => Baron.Generator.Generate(1), earl.Name)
+						)
+					)
+				)
 			);
-			this._client.Bulk(bulk);
-			this._client.Refresh(this._index);
+			_client.Bulk(bulk);
+			_client.Refresh(_index);
 		}
 
 		private PropertiesDescriptor<TRoyal> RoyalProps<TRoyal>(PropertiesDescriptor<TRoyal> props) where TRoyal : class, IRoyal =>
 			props.Keyword(s => s.Name(p => p.Name));
 
-		private void IndexAll<TRoyal>(BulkDescriptor bulk, Func<IEnumerable<TRoyal>> create, string parent = null, Action<TRoyal> indexChildren = null)
+		private void IndexAll<TRoyal>(BulkDescriptor bulk, Func<IEnumerable<TRoyal>> create, string parent = null, Action<TRoyal> indexChildren = null
+		)
 			where TRoyal : class, IRoyal
 		{
 			var current = create();
@@ -102,9 +113,10 @@ namespace Tests.Search.Request
 			foreach (var royal in royals)
 			{
 				var royal1 = royal;
-				bulk.Index<TRoyal>(i => i.Document(royal1).Index(this._index).Parent(parent));
+				bulk.Index<TRoyal>(i => i.Document(royal1).Index(_index).Parent(parent));
 			}
 			if (indexChildren == null) return;
+
 			foreach (var royal in royals)
 				indexChildren(royal);
 		}
@@ -129,25 +141,27 @@ namespace Tests.Search.Request
 	*
 	* See the Elasticsearch documentation on {ref_current}/search-request-inner-hits.html[Inner hits] for more detail.
 	*/
-	public abstract class InnerHitsApiTestsBase<TRoyal> : ApiIntegrationTestBase<IntrusiveOperationCluster, ISearchResponse<TRoyal>, ISearchRequest, SearchDescriptor<TRoyal>, SearchRequest<TRoyal>>
+	public abstract class InnerHitsApiTestsBase<TRoyal>
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, ISearchResponse<TRoyal>, ISearchRequest, SearchDescriptor<TRoyal>, SearchRequest<TRoyal>>
 		where TRoyal : class, IRoyal
 	{
 		protected InnerHitsApiTestsBase(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected abstract IndexName Index { get; }
-		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values) => new RoyalSeeder(this.Client, Index).Seed();
-
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Search<TRoyal>(f),
-			fluentAsync: (client, f) => client.SearchAsync<TRoyal>(f),
-			request: (client, r) => client.Search<TRoyal>(r),
-			requestAsync: (client, r) => client.SearchAsync<TRoyal>(r)
-		);
-
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/{Index}/{this.Client.Infer.TypeName<TRoyal>()}/_search";
+
+		protected abstract IndexName Index { get; }
+		protected override string UrlPath => $"/{Index}/{Client.Infer.TypeName<TRoyal>()}/_search";
+
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values) => new RoyalSeeder(Client, Index).Seed();
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.Search<TRoyal>(f),
+			(client, f) => client.SearchAsync<TRoyal>(f),
+			(client, r) => client.Search<TRoyal>(r),
+			(client, r) => client.SearchAsync<TRoyal>(r)
+		);
 
 		protected override SearchDescriptor<TRoyal> NewDescriptor() => new SearchDescriptor<TRoyal>().Index(Index);
 	}
@@ -158,9 +172,6 @@ namespace Tests.Search.Request
 	public class QueryInnerHitsApiTests : InnerHitsApiTestsBase<King>
 	{
 		public QueryInnerHitsApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-		private static IndexName IndexName { get; } = RandomString();
-		protected override IndexName Index => QueryInnerHitsApiTests.IndexName;
 
 		protected override object ExpectJson { get; } = new
 		{
@@ -182,7 +193,7 @@ namespace Tests.Search.Request
 								inner_hits = new
 								{
 									name = "princes",
-									docvalue_fields = new []{"name"}
+									docvalue_fields = new[] { "name" }
 								}
 							}
 						},
@@ -206,7 +217,7 @@ namespace Tests.Search.Request
 				q.HasChild<Prince>(hc => hc
 					.Query(hcq => hcq.MatchAll())
 					.InnerHits(ih => ih
-						.DocValueFields(f=>f.Field(p=>p.Name))
+						.DocValueFields(f => f.Field(p => p.Name))
 						.Name("princes")
 					)
 				) || q.Nested(n => n
@@ -215,6 +226,8 @@ namespace Tests.Search.Request
 					.InnerHits()
 				)
 			);
+
+		protected override IndexName Index => IndexName;
 
 		protected override SearchRequest<King> Initializer => new SearchRequest<King>(Index, typeof(King))
 		{
@@ -225,7 +238,7 @@ namespace Tests.Search.Request
 				InnerHits = new InnerHits
 				{
 					Name = "princes",
-					DocValueFields = Field<Prince>(p=>p.Name)
+					DocValueFields = Field<Prince>(p => p.Name)
 				}
 			} || new NestedQuery
 			{
@@ -234,6 +247,8 @@ namespace Tests.Search.Request
 				InnerHits = new InnerHits()
 			}
 		};
+
+		private static IndexName IndexName { get; } = RandomString();
 
 		protected override void ExpectResponse(ISearchResponse<King> response)
 		{
@@ -245,14 +260,14 @@ namespace Tests.Search.Request
 				foreach (var princeHit in hit.InnerHits["princes"].Hits.Hits)
 				{
 					princeHit.Fields.Should().NotBeNull("all princes have a keyword name so fields should be returned");
-					var docValueName = princeHit.Fields.ValueOf<Prince, string>(p=>p.Name);
+					var docValueName = princeHit.Fields.ValueOf<Prince, string>(p => p.Name);
 					docValueName.Should().NotBeNullOrWhiteSpace("value of name on Fields");
-
 				}
 
 				var foes = hit.InnerHits["foes"].Documents<King>();
 				foes.Should().NotBeEmpty();
-			};
+			}
+			;
 		}
 	}
 }

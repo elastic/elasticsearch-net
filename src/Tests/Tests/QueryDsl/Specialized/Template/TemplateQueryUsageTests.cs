@@ -3,15 +3,43 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
+
 #pragma warning disable 618
 
 namespace Tests.QueryDsl.Specialized.Template
 {
 	public class TemplateQueryUsageTests : QueryDslUsageTestsBase
 	{
+		private static readonly string _templateString = "{ \"match\": { \"text\": \"{{query_string}}\" }}";
+
 		public TemplateQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		private static readonly string _templateString = "{ \"match\": { \"text\": \"{{query_string}}\" }}";
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ITemplateQuery>(a => a.Template)
+		{
+			q =>
+			{
+				q.Inline = "";
+				q.Id = null;
+				q.File = "";
+			},
+			q =>
+			{
+				q.Inline = null;
+				q.Id = null;
+				q.File = null;
+			}
+		};
+
+		protected override QueryContainer QueryInitializer => new TemplateQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Inline = _templateString,
+			Params = new Dictionary<string, object>
+			{
+				{ "query_string", "all about search" }
+			}
+		};
 
 		protected override object QueryJson => new
 		{
@@ -27,37 +55,12 @@ namespace Tests.QueryDsl.Specialized.Template
 			}
 		};
 
-		protected override QueryContainer QueryInitializer => new TemplateQuery
-		{
-			Name = "named_query",
-			Boost = 1.1,
-			Inline = _templateString,
-			Params = new Dictionary<string, object>
-			{
-				{ "query_string", "all about search" }
-			}
-		};
-
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.Template(sn => sn
 				.Name("named_query")
 				.Boost(1.1)
 				.Inline(_templateString)
-				.Params(p=>p.Add("query_string", "all about search"))
+				.Params(p => p.Add("query_string", "all about search"))
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ITemplateQuery>(a => a.Template)
-		{
-			q => {
-				q.Inline = "";
-				q.Id = null;
-				q.File = "";
-			},
-			q => {
-				q.Inline = null;
-				q.Id = null;
-				q.File = null;
-			}
-		};
 	}
 }

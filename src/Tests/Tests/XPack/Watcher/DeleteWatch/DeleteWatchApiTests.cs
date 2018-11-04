@@ -1,18 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.Watcher.DeleteWatch
 {
-	public class DeleteWatchApiTests : ApiIntegrationTestBase<XPackCluster, IDeleteWatchResponse, IDeleteWatchRequest, DeleteWatchDescriptor, DeleteWatchRequest>
+	public class DeleteWatchApiTests
+		: ApiIntegrationTestBase<XPackCluster, IDeleteWatchResponse, IDeleteWatchRequest, DeleteWatchDescriptor, DeleteWatchRequest>
 	{
 		public DeleteWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+
+		protected override object ExpectJson => null;
+		protected override int ExpectStatusCode => 200;
+
+		protected override Func<DeleteWatchDescriptor, IDeleteWatchRequest> Fluent => p => p;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+
+		protected override DeleteWatchRequest Initializer =>
+			new DeleteWatchRequest(CallIsolatedValue);
+
+		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -30,7 +42,7 @@ namespace Tests.XPack.Watcher.DeleteWatch
 						)
 					)
 					.Actions(a => a
-						.Email("reminder_email", e => e 
+						.Email("reminder_email", e => e
 							.To("me@example.com")
 							.Subject("Something's strange in the neighbourhood")
 							.Body(b => b
@@ -46,26 +58,13 @@ namespace Tests.XPack.Watcher.DeleteWatch
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.DeleteWatch(CallIsolatedValue, f),
-			fluentAsync: (client, f) => client.DeleteWatchAsync(CallIsolatedValue, f),
-			request: (client, r) => client.DeleteWatch(r),
-			requestAsync: (client, r) => client.DeleteWatchAsync(r)
+			(client, f) => client.DeleteWatch(CallIsolatedValue, f),
+			(client, f) => client.DeleteWatchAsync(CallIsolatedValue, f),
+			(client, r) => client.DeleteWatch(r),
+			(client, r) => client.DeleteWatchAsync(r)
 		);
 
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-
-		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}";
-
 		protected override DeleteWatchDescriptor NewDescriptor() => new DeleteWatchDescriptor(CallIsolatedValue);
-
-		protected override object ExpectJson => null;
-
-		protected override Func<DeleteWatchDescriptor, IDeleteWatchRequest> Fluent => p => p;
-
-		protected override DeleteWatchRequest Initializer =>
-			new DeleteWatchRequest(CallIsolatedValue);
 
 		protected override void ExpectResponse(IDeleteWatchResponse response)
 		{
@@ -75,31 +74,32 @@ namespace Tests.XPack.Watcher.DeleteWatch
 		}
 	}
 
-	public class DeleteNonExistentWatchApiTests : ApiIntegrationTestBase<XPackCluster, IDeleteWatchResponse, IDeleteWatchRequest, DeleteWatchDescriptor, DeleteWatchRequest>
+	public class DeleteNonExistentWatchApiTests
+		: ApiIntegrationTestBase<XPackCluster, IDeleteWatchResponse, IDeleteWatchRequest, DeleteWatchDescriptor, DeleteWatchRequest>
 	{
 		public DeleteNonExistentWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.DeleteWatch(CallIsolatedValue, f),
-			fluentAsync: (client, f) => client.DeleteWatchAsync(CallIsolatedValue, f),
-			request: (client, r) => client.DeleteWatch(r),
-			requestAsync: (client, r) => client.DeleteWatchAsync(r)
-		);
-
 		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 404;
-		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-
-		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}";
-
-		protected override DeleteWatchDescriptor NewDescriptor() => new DeleteWatchDescriptor(CallIsolatedValue);
 
 		protected override object ExpectJson => null;
+		protected override int ExpectStatusCode => 404;
 
 		protected override Func<DeleteWatchDescriptor, IDeleteWatchRequest> Fluent => p => p;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 
 		protected override DeleteWatchRequest Initializer =>
 			new DeleteWatchRequest(CallIsolatedValue);
+
+		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.DeleteWatch(CallIsolatedValue, f),
+			(client, f) => client.DeleteWatchAsync(CallIsolatedValue, f),
+			(client, r) => client.DeleteWatch(r),
+			(client, r) => client.DeleteWatchAsync(r)
+		);
+
+		protected override DeleteWatchDescriptor NewDescriptor() => new DeleteWatchDescriptor(CallIsolatedValue);
 
 		protected override void ExpectResponse(IDeleteWatchResponse response)
 		{

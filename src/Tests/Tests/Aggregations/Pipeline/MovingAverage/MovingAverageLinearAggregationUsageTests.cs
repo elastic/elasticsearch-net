@@ -6,9 +6,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Aggregations.Pipeline.MovingAverage
 {
@@ -45,7 +43,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 								buckets_path = "commits",
 								gap_policy = "insert_zeros",
 								model = "linear",
-								settings = new {}
+								settings = new { }
 							}
 						}
 					}
@@ -101,7 +99,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 			projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
 
 			// average not calculated for the first bucket
-			foreach(var item in projectsPerMonth.Buckets.Skip(1))
+			foreach (var item in projectsPerMonth.Buckets.Skip(1))
 			{
 				var movingAvg = item.MovingAverage("commits_moving_avg");
 				movingAvg.Should().NotBeNull();

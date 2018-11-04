@@ -1,42 +1,30 @@
 ﻿using System;
-using Elasticsearch.Net;
-using Nest;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Xunit;
-using FluentAssertions;
 using System.Linq;
+using Elasticsearch.Net;
+using FluentAssertions;
+using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework;
+using Tests.Framework.Integration;
 
 namespace Tests.Ingest.SimulatePipeline
 {
 	public class SimulatePipelineApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ISimulatePipelineResponse, ISimulatePipelineRequest, SimulatePipelineDescriptor, SimulatePipelineRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ISimulatePipelineResponse, ISimulatePipelineRequest, SimulatePipelineDescriptor,
+			SimulatePipelineRequest>
 	{
 		public SimulatePipelineApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.SimulatePipeline(f),
-			fluentAsync: (client, f) => client.SimulatePipelineAsync(f),
-			request: (client, r) => client.SimulatePipeline(r),
-			requestAsync: (client, r) => client.SimulatePipelineAsync(r)
-		);
-
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/_ingest/pipeline/_simulate";
-		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
-		protected override bool SupportsDeserialization => false;
 
 		protected override object ExpectJson { get; } = new
 		{
 			pipeline = new
 			{
 				description = "pipeline simulation",
-				processors = new object []
+				processors = new object[]
 				{
 					new
 					{
@@ -51,7 +39,7 @@ namespace Tests.Ingest.SimulatePipeline
 						append = new
 						{
 							field = "colors",
-							value = new [] { "blue", "black" }
+							value = new[] { "blue", "black" }
 						}
 					},
 					new
@@ -63,7 +51,7 @@ namespace Tests.Ingest.SimulatePipeline
 					}
 				}
 			},
-			docs = new object []
+			docs = new object[]
 			{
 				new
 				{
@@ -84,44 +72,12 @@ namespace Tests.Ingest.SimulatePipeline
 					_index = "otherindex",
 					_type = "anotherType",
 					_id = "2",
-					_source = new { id = "2", colors = new [] { "red" } }
+					_source = new { id = "2", colors = new[] { "red" } }
 				}
 			}
 		};
 
-		protected override void ExpectResponse(ISimulatePipelineResponse response)
-		{
-			response.ShouldBeValid();
-			response.Documents.Should().NotBeNull().And.HaveCount(3);
-
-			var simulation = response.Documents.FirstOrDefault(d => d.Document.Id == Project.Instance.Name);
-			simulation.Should().NotBeNull();
-			simulation.Document.Ingest.Should().NotBeNull();
-			simulation.Document.Ingest.Timestamp.Should().NotBe(default(DateTime));
-			var project = simulation.Document.Source.As<Project>();
-			project.Should().NotBeNull();
-			project.Name.Should().Be("BUZZ");
-
-			simulation = response.Documents.FirstOrDefault(d => d.Document.Id == "otherid");
-			simulation.Should().NotBeNull();
-			simulation.Document.Ingest.Should().NotBeNull();
-			simulation.Document.Ingest.Timestamp.Should().NotBe(default(DateTime));
-			project = simulation.Document.Source.As<Project>();
-			project.Name.Should().Be("BUZZ");
-
-			simulation = response.Documents.FirstOrDefault(d => d.Document.Id == "2");
-			simulation.Document.Ingest.Should().NotBeNull();
-			simulation.Document.Ingest.Timestamp.Should().NotBe(default(DateTime));
-			var anotherType = simulation.Document.Source.As<AnotherType>();
-			anotherType.Should().NotBeNull();
-			anotherType.Colors.Should().BeEquivalentTo(new string[] { "red", "blue", "black" });
-		}
-
-		public class AnotherType
-		{
-			public string Id { get; set; }
-			public string[] Colors { get; set; }
-		}
+		protected override int ExpectStatusCode => 200;
 
 		protected override Func<SimulatePipelineDescriptor, ISimulatePipelineRequest> Fluent => d => d
 			.Pipeline(pl => pl
@@ -157,6 +113,8 @@ namespace Tests.Ingest.SimulatePipeline
 				)
 			);
 
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
 		protected override SimulatePipelineRequest Initializer => new SimulatePipelineRequest
 		{
 			Pipeline = new Pipeline
@@ -172,7 +130,7 @@ namespace Tests.Ingest.SimulatePipeline
 					new AppendProcessor
 					{
 						Field = "colors",
-						Value = new [] { "blue", "black"}
+						Value = new[] { "blue", "black" }
 					},
 					new UppercaseProcessor
 					{
@@ -197,15 +155,71 @@ namespace Tests.Ingest.SimulatePipeline
 				{
 					Index = "otherindex",
 					Type = "anotherType",
-					Source = new AnotherType { Id = "2", Colors = new [] { "red" } }
+					Source = new AnotherType { Id = "2", Colors = new[] { "red" } }
 				}
 			}
 		};
+
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/_ingest/pipeline/_simulate";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.SimulatePipeline(f),
+			(client, f) => client.SimulatePipelineAsync(f),
+			(client, r) => client.SimulatePipeline(r),
+			(client, r) => client.SimulatePipelineAsync(r)
+		);
+
+		protected override void ExpectResponse(ISimulatePipelineResponse response)
+		{
+			response.ShouldBeValid();
+			response.Documents.Should().NotBeNull().And.HaveCount(3);
+
+			var simulation = response.Documents.FirstOrDefault(d => d.Document.Id == Project.Instance.Name);
+			simulation.Should().NotBeNull();
+			simulation.Document.Ingest.Should().NotBeNull();
+			simulation.Document.Ingest.Timestamp.Should().NotBe(default(DateTime));
+			var project = simulation.Document.Source.As<Project>();
+			project.Should().NotBeNull();
+			project.Name.Should().Be("BUZZ");
+
+			simulation = response.Documents.FirstOrDefault(d => d.Document.Id == "otherid");
+			simulation.Should().NotBeNull();
+			simulation.Document.Ingest.Should().NotBeNull();
+			simulation.Document.Ingest.Timestamp.Should().NotBe(default(DateTime));
+			project = simulation.Document.Source.As<Project>();
+			project.Name.Should().Be("BUZZ");
+
+			simulation = response.Documents.FirstOrDefault(d => d.Document.Id == "2");
+			simulation.Document.Ingest.Should().NotBeNull();
+			simulation.Document.Ingest.Timestamp.Should().NotBe(default(DateTime));
+			var anotherType = simulation.Document.Source.As<AnotherType>();
+			anotherType.Should().NotBeNull();
+			anotherType.Colors.Should().BeEquivalentTo(new string[] { "red", "blue", "black" });
+		}
+
+		public class AnotherType
+		{
+			public string[] Colors { get; set; }
+			public string Id { get; set; }
+		}
 	}
 
 	public class SimulatePipelineVerboseApiTests : SimulatePipelineApiTests
 	{
 		public SimulatePipelineVerboseApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override Func<SimulatePipelineDescriptor, ISimulatePipelineRequest> Fluent => f => base.Fluent(f.Verbose());
+
+		protected override SimulatePipelineRequest Initializer
+		{
+			get
+			{
+				var initializer = base.Initializer;
+				initializer.Verbose = true;
+				return initializer;
+			}
+		}
 
 		protected override string UrlPath => $"/_ingest/pipeline/_simulate?verbose=true";
 
@@ -221,18 +235,6 @@ namespace Tests.Ingest.SimulatePipeline
 					result.Document.Should().NotBeNull();
 					result.Document.Ingest.Should().NotBeNull();
 				}
-			}
-		}
-
-		protected override Func<SimulatePipelineDescriptor, ISimulatePipelineRequest> Fluent => f => base.Fluent(f.Verbose());
-
-		protected override SimulatePipelineRequest Initializer
-		{
-			get
-			{
-				var initializer = base.Initializer;
-				initializer.Verbose = true;
-				return initializer;
 			}
 		}
 	}

@@ -14,10 +14,10 @@ namespace Tests.Modules.Scripting.PutScript
 			var id = "id";
 
 			await PUT($"/_scripts/{lang}/{id}")
-				.Fluent(c => c.PutScript(lang, id, s=>s.Script("")))
-				.Request(c => c.PutScript(new PutScriptRequest(lang, id)))
-				.FluentAsync(c => c.PutScriptAsync(lang, id, s=>s.Script("")))
-				.RequestAsync(c => c.PutScriptAsync(new PutScriptRequest(lang, id)))
+					.Fluent(c => c.PutScript(lang, id, s => s.Script("")))
+					.Request(c => c.PutScript(new PutScriptRequest(lang, id)))
+					.FluentAsync(c => c.PutScriptAsync(lang, id, s => s.Script("")))
+					.RequestAsync(c => c.PutScriptAsync(new PutScriptRequest(lang, id)))
 				;
 		}
 	}

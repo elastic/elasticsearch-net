@@ -5,8 +5,6 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Search.Count
 {
@@ -15,17 +13,7 @@ namespace Tests.Search.Count
 	{
 		public CountApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.Count(f),
-			fluentAsync: (c, f) => c.CountAsync(f),
-			request: (c, r) => c.Count<Project>(r),
-			requestAsync: (c, r) => c.CountAsync<Project>(r)
-		);
-
-		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/project/project/_count";
 
 		protected override object ExpectJson => new
 		{
@@ -41,6 +29,8 @@ namespace Tests.Search.Count
 			}
 		};
 
+		protected override int ExpectStatusCode => 200;
+
 		protected override Func<CountDescriptor<Project>, ICountRequest> Fluent => c => c
 			.Query(q => q
 				.Match(m => m
@@ -48,6 +38,8 @@ namespace Tests.Search.Count
 					.Query("NEST")
 				)
 			);
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected override CountRequest<Project> Initializer => new CountRequest<Project>()
 		{
@@ -57,5 +49,14 @@ namespace Tests.Search.Count
 				Query = "NEST"
 			})
 		};
+
+		protected override string UrlPath => "/project/project/_count";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(c, f) => c.Count(f),
+			(c, f) => c.CountAsync(f),
+			(c, r) => c.Count<Project>(r),
+			(c, r) => c.CountAsync<Project>(r)
+		);
 	}
 }

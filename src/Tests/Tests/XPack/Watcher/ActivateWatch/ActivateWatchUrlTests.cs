@@ -8,14 +8,10 @@ namespace Tests.XPack.Watcher.ActivateWatch
 {
 	public class ActivateWatchUrlTests : UrlTestsBase
 	{
-		[U] public override async Task Urls()
-		{
-			await PUT("/_xpack/watcher/watch/watch_id/_activate")
-				.Fluent(c => c.ActivateWatch("watch_id"))
-				.Request(c => c.ActivateWatch(new ActivateWatchRequest("watch_id")))
-				.FluentAsync(c => c.ActivateWatchAsync("watch_id"))
-				.RequestAsync(c => c.ActivateWatchAsync(new ActivateWatchRequest("watch_id")))
-				;
-		}
+		[U] public override async Task Urls() => await PUT("/_xpack/watcher/watch/watch_id/_activate")
+			.Fluent(c => c.ActivateWatch("watch_id"))
+			.Request(c => c.ActivateWatch(new ActivateWatchRequest("watch_id")))
+			.FluentAsync(c => c.ActivateWatchAsync("watch_id"))
+			.RequestAsync(c => c.ActivateWatchAsync(new ActivateWatchRequest("watch_id")));
 	}
 }

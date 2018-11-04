@@ -2,7 +2,6 @@
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Tests.Core.Extensions;
 using static Tests.Core.Serialization.SerializationTestHelper;
 using Name = Bogus.DataSets.Name;
 
@@ -10,17 +9,6 @@ namespace Tests.Search.Hits
 {
 	public class HitsSerializationTests
 	{
-		public class Person
-		{
-			public string Name { get; set; }
-
-			public byte Age { get; set; }
-
-			public Name.Gender Gender { get; set; }
-
-			public List<Person> Children { get; set; }
-		}
-
 		[U]
 		public void CanDeserializeNestedNestedTopHits()
 		{
@@ -308,6 +296,16 @@ namespace Tests.Search.Hits
 				nestedNestedIdentity.Field.Should().NotBeNull();
 				nestedNestedIdentity.Offset.Should().BeGreaterOrEqualTo(0);
 			}
+		}
+
+		public class Person
+		{
+			public byte Age { get; set; }
+
+			public List<Person> Children { get; set; }
+
+			public Name.Gender Gender { get; set; }
+			public string Name { get; set; }
 		}
 	}
 }

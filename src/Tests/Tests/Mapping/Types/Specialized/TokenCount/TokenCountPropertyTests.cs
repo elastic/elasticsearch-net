@@ -1,11 +1,8 @@
 ﻿using System;
-using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Mapping.Types.Core.TokenCount
 {
@@ -28,22 +25,22 @@ namespace Tests.Mapping.Types.Core.TokenCount
 				}
 			}
 		};
-
 #pragma warning disable 618 // Usage of IncludeInAll
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
-				.TokenCount(s => s
-					.Name(p => p.Name)
-					.Analyzer("standard")
-					.Index(false)
-					.Boost(1.2)
-					.NullValue(0.0)
-					.IncludeInAll()
-				);
+			.TokenCount(s => s
+				.Name(p => p.Name)
+				.Analyzer("standard")
+				.Index(false)
+				.Boost(1.2)
+				.NullValue(0.0)
+				.IncludeInAll()
+			);
 #pragma warning restore 618
 
 		protected override IProperties InitializerProperties => new Properties
 		{
-			{ "name", new TokenCountProperty
+			{
+				"name", new TokenCountProperty
 				{
 					Index = false,
 					Analyzer = "standard",

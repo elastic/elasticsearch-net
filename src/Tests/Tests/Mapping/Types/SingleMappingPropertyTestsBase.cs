@@ -5,27 +5,16 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Mapping.Types
 {
 	public abstract class SingleMappingPropertyTestsBase
-		: ApiIntegrationTestBase<WritableCluster, IPutIndexTemplateResponse, IPutIndexTemplateRequest, PutIndexTemplateDescriptor, PutIndexTemplateRequest>
+		: ApiIntegrationTestBase<WritableCluster, IPutIndexTemplateResponse, IPutIndexTemplateRequest, PutIndexTemplateDescriptor,
+			PutIndexTemplateRequest>
 	{
 		protected SingleMappingPropertyTestsBase(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.PutIndexTemplate(CallIsolatedValue, f),
-			fluentAsync: (client, f) => client.PutIndexTemplateAsync(CallIsolatedValue, f),
-			request: (client, r) => client.PutIndexTemplate(r),
-			requestAsync: (client, r) => client.PutIndexTemplateAsync(r)
-		);
-
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override string UrlPath => $"/_template/{CallIsolatedValue}?create=false";
-		protected override bool SupportsDeserialization => false;
 		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
 
 		protected override object ExpectJson => new
 		{
@@ -44,7 +33,7 @@ namespace Tests.Mapping.Types
 							{
 								match = "*",
 								match_mapping_type = "*",
-								mapping = this.SingleMappingJson
+								mapping = SingleMappingJson
 							}
 						}
 					}
@@ -52,16 +41,28 @@ namespace Tests.Mapping.Types
 			}
 		};
 
-		protected abstract object SingleMappingJson { get;  }
+		protected override int ExpectStatusCode => 200;
+
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+
+		protected abstract object SingleMappingJson { get; }
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/_template/{CallIsolatedValue}?create=false";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.PutIndexTemplate(CallIsolatedValue, f),
+			(client, f) => client.PutIndexTemplateAsync(CallIsolatedValue, f),
+			(client, r) => client.PutIndexTemplate(r),
+			(client, r) => client.PutIndexTemplateAsync(r)
+		);
 
 		protected override PutIndexTemplateDescriptor NewDescriptor() => new PutIndexTemplateDescriptor(CallIsolatedValue);
-
 #pragma warning disable 618 // Use of Template
 		protected override Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> Fluent => d => d
 			.Order(1)
 			.Template("nestx-*")
 			.Create(false)
-			.Settings(p=>p.NumberOfShards(1))
+			.Settings(p => p.NumberOfShards(1))
 			.Mappings(m => m
 				.Map("_default_", tm => tm
 					.DynamicTemplates(t => t
@@ -85,17 +86,19 @@ namespace Tests.Mapping.Types
 			Template = "nestx-*",
 #pragma warning restore 618
 			Create = false,
-			Settings = new Nest.IndexSettings
+			Settings = new IndexSettings
 			{
 				NumberOfShards = 1
 			},
 			Mappings = new Mappings
 			{
-				{ "_default_", new TypeMapping
+				{
+					"_default_", new TypeMapping
 					{
 						DynamicTemplates = new DynamicTemplateContainer
 						{
-							{ "base", new DynamicTemplate
+							{
+								"base", new DynamicTemplate
 								{
 									Match = "*",
 									MatchMappingType = "*",

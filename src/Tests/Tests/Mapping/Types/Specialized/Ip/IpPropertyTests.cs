@@ -2,7 +2,6 @@
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
 
 namespace Tests.Mapping.Types.Specialized.Ip
@@ -27,23 +26,23 @@ namespace Tests.Mapping.Types.Specialized.Ip
 				}
 			}
 		};
-
 #pragma warning disable 618 // Usage of IncludeInAll
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
-				.Ip(s => s
-					.Name(p => p.Name)
-					.Index(false)
-					.Boost(1.3)
-					.NullValue("127.0.0.1")
-					.IncludeInAll()
-					.DocValues()
-					.Store()
-				);
+			.Ip(s => s
+				.Name(p => p.Name)
+				.Index(false)
+				.Boost(1.3)
+				.NullValue("127.0.0.1")
+				.IncludeInAll()
+				.DocValues()
+				.Store()
+			);
 #pragma warning restore 618
 
 		protected override IProperties InitializerProperties => new Properties
 		{
-			{ "name", new IpProperty
+			{
+				"name", new IpProperty
 				{
 					Index = false,
 					Boost = 1.3,

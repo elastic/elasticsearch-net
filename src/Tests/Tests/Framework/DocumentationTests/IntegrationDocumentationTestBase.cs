@@ -7,22 +7,19 @@ namespace Tests.Framework
 {
 	public abstract class DocumentationTestBase
 	{
-		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
-
 		protected IElasticClient Client => TestClient.DefaultInMemoryClient;
 
+		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
 	}
 
 	public abstract class IntegrationDocumentationTestBase
 	{
+		private readonly ClientTestClusterBase _cluster;
+
+		protected IntegrationDocumentationTestBase(ClientTestClusterBase cluster) => _cluster = cluster;
+
+		protected IElasticClient Client => _cluster.Client;
+
 		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
-
-		readonly ClientTestClusterBase _cluster;
-		protected IElasticClient Client => this._cluster.Client;
-
-		protected IntegrationDocumentationTestBase(ClientTestClusterBase cluster)
-		{
-			this._cluster = cluster;
-		}
 	}
 }

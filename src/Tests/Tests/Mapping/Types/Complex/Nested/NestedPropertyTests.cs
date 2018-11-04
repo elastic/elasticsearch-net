@@ -1,11 +1,8 @@
 ﻿using System;
-using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Mapping.Types.Core.Nested
 {
@@ -37,23 +34,24 @@ namespace Tests.Mapping.Types.Core.Nested
 		};
 
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
-				.Nested<Developer>(n => n
-					.Name(p => p.LeadDeveloper)
-					.IncludeInParent()
-					.IncludeInRoot(false)
-					.Dynamic(DynamicMapping.Strict)
-					.Enabled()
-					.IncludeInAll()
-					.Properties(pps => pps
-						.Ip(i => i
-							.Name(p => p.IPAddress)
-						)
+			.Nested<Developer>(n => n
+				.Name(p => p.LeadDeveloper)
+				.IncludeInParent()
+				.IncludeInRoot(false)
+				.Dynamic(DynamicMapping.Strict)
+				.Enabled()
+				.IncludeInAll()
+				.Properties(pps => pps
+					.Ip(i => i
+						.Name(p => p.IPAddress)
 					)
-				);
+				)
+			);
 
 		protected override IProperties InitializerProperties => new Properties
 		{
-			{ "leadDeveloper", new NestedProperty
+			{
+				"leadDeveloper", new NestedProperty
 				{
 					IncludeInParent = true,
 					IncludeInRoot = false,
@@ -62,7 +60,7 @@ namespace Tests.Mapping.Types.Core.Nested
 					IncludeInAll = true,
 					Properties = new Properties
 					{
-						{ "iPAddress", new IpProperty () }
+						{ "iPAddress", new IpProperty() }
 					}
 				}
 			}

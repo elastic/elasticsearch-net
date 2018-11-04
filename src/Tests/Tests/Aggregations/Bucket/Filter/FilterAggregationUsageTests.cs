@@ -7,9 +7,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.Filter
@@ -22,9 +20,9 @@ namespace Tests.Aggregations.Bucket.Filter
 	*/
 	public class FilterAggregationUsageTests : AggregationUsageTestBase
 	{
-		public FilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
-
 		public static string FirstNameToFind = Project.First.LeadDeveloper.FirstName.ToLowerInvariant();
+
+		public FilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object ExpectJson => new
 		{
@@ -36,12 +34,12 @@ namespace Tests.Aggregations.Bucket.Filter
 					{
 						term = new Dictionary<string, object>
 						{
-							{"leadDeveloper.firstName", new {value = FirstNameToFind}}
+							{ "leadDeveloper.firstName", new { value = FirstNameToFind } }
 						}
 					},
 					aggs = new
 					{
-						project_tags = new {terms = new {field = "curatedTags.name.keyword"}}
+						project_tags = new { terms = new { field = "curatedTags.name.keyword" } }
 					}
 				}
 			}
@@ -62,7 +60,7 @@ namespace Tests.Aggregations.Bucket.Filter
 			{
 				Aggregations = new FilterAggregation("bethels_projects")
 				{
-					Filter = new TermQuery {Field = Field<Project>(p => p.LeadDeveloper.FirstName), Value = FirstNameToFind},
+					Filter = new TermQuery { Field = Field<Project>(p => p.LeadDeveloper.FirstName), Value = FirstNameToFind },
 					Aggregations =
 						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword")) }
 				}
@@ -101,7 +99,7 @@ namespace Tests.Aggregations.Bucket.Filter
 			{
 				empty_filter = new
 				{
-					filter = new {}
+					filter = new { }
 				}
 			}
 		};
@@ -140,18 +138,23 @@ namespace Tests.Aggregations.Bucket.Filter
 	// hide
 	public class InlineScriptFilterAggregationUsageTests : AggregationUsageTestBase
 	{
-		private string _ctxNumberofCommits = "_source.numberOfCommits > 0";
-		private string _aggName = "script_filter";
+		private readonly string _aggName = "script_filter";
+		private readonly string _ctxNumberofCommits = "_source.numberOfCommits > 0";
 
 		public InlineScriptFilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object ExpectJson => new
 		{
-			aggs = new {
-				script_filter = new {
-					filter = new {
-						script = new {
-							script = new {
+			aggs = new
+			{
+				script_filter = new
+				{
+					filter = new
+					{
+						script = new
+						{
+							script = new
+							{
 								inline = _ctxNumberofCommits,
 								lang = "groovy"
 							}
@@ -182,7 +185,7 @@ namespace Tests.Aggregations.Bucket.Filter
 					{
 						Inline = _ctxNumberofCommits,
 						Lang = "groovy"
-				}
+					}
 				}
 			};
 

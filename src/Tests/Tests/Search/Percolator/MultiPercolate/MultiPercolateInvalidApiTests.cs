@@ -10,7 +10,6 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Xunit;
 
 #pragma warning disable 618 // testing deprecated percolate APIs
 
@@ -22,31 +21,21 @@ namespace Tests.Search.Percolator.MultiPercolate
 	{
 		public MultiPercolateInvalidApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.MultiPercolate(f),
-			fluentAsync: (c, f) => c.MultiPercolateAsync(f),
-			request: (c, r) => c.MultiPercolate(r),
-			requestAsync: (c, r) => c.MultiPercolateAsync(r)
-		);
-
-		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => false; //three out of 4 responses have an error
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/project/project/_mpercolate";
-
-		protected override bool SupportsDeserialization => false;
 
 		protected override object ExpectJson => new object[]
 		{
-			new Dictionary<string, object>{ { "percolate", new {} } },
+			new Dictionary<string, object> { { "percolate", new { } } },
 			new { doc = Project.InstanceAnonymous },
-			new Dictionary<string, object>{ { "percolate", new {  index = "otherindex", id = 1 } } },
+			new Dictionary<string, object> { { "percolate", new { index = "otherindex", id = 1 } } },
 			new { },
 			new Dictionary<string, object> { { "count", new { index = "otherindex", type = "othertype" } } },
 			new { doc = Project.InstanceAnonymous },
 			new Dictionary<string, object> { { "count", new { id = 2 } } },
 			new { }
 		};
+
+		protected override int ExpectStatusCode => 200;
 
 		protected override Func<MultiPercolateDescriptor, IMultiPercolateRequest> Fluent => m => m
 			.Index(typeof(Project))
@@ -55,6 +44,8 @@ namespace Tests.Search.Percolator.MultiPercolate
 			.Percolate<Project>(p => p.Index("otherindex").Id(1))
 			.Count<Project>(p => p.Index("otherindex").Type("othertype").Document(Project.Instance))
 			.Count<Project>(p => p.Id(2));
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected override MultiPercolateRequest Initializer => new MultiPercolateRequest(typeof(Project), typeof(Project))
 		{
@@ -67,6 +58,16 @@ namespace Tests.Search.Percolator.MultiPercolate
 			}
 		};
 
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => "/project/project/_mpercolate";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(c, f) => c.MultiPercolate(f),
+			(c, f) => c.MultiPercolateAsync(f),
+			(c, r) => c.MultiPercolate(r),
+			(c, r) => c.MultiPercolateAsync(r)
+		);
+
 		protected override void ExpectResponse(IMultiPercolateResponse response)
 		{
 			var responses = response.Responses.ToList();
@@ -76,7 +77,6 @@ namespace Tests.Search.Percolator.MultiPercolate
 				r.ShouldNotBeValid();
 				r.ServerError.Should().NotBeNull();
 				r.ServerError.Error.Should().NotBeNull();
-
 			}
 			responses[1].ServerError.Error.Reason.Should().Be("no such index");
 			responses[1].ServerError.Error.Type.Should().Be("index_not_found_exception");

@@ -9,36 +9,39 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Search.FieldCapabilities
 {
 	[SkipVersion("<5.4.0", "new API")]
 	public class FieldCapabilitiesApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IFieldCapabilitiesResponse, IFieldCapabilitiesRequest, FieldCapabilitiesDescriptor, FieldCapabilitiesRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, IFieldCapabilitiesResponse, IFieldCapabilitiesRequest, FieldCapabilitiesDescriptor,
+			FieldCapabilitiesRequest>
 	{
 		public FieldCapabilitiesApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.FieldCapabilities(Index<Project>().And<Developer>(), f),
-			fluentAsync: (c, f) => c.FieldCapabilitiesAsync(Index<Project>().And<Developer>(), f),
-			request: (c, r) => c.FieldCapabilities(r),
-			requestAsync: (c, r) => c.FieldCapabilitiesAsync(r)
-		);
+		protected override bool ExpectIsValid => true;
 
 		protected override int ExpectStatusCode => 200;
-		protected override bool ExpectIsValid => true;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => "/project%2Cdevs/_field_caps?fields=name%2C%2A";
 
 		protected override Func<FieldCapabilitiesDescriptor, IFieldCapabilitiesRequest> Fluent => d => d
-			.Fields(Fields<Project>(p=>p.Name).And("*"));
+			.Fields(Fields<Project>(p => p.Name).And("*"));
+
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
 		protected override FieldCapabilitiesRequest Initializer => new FieldCapabilitiesRequest(Index<Project>().And<Developer>())
 		{
-			Fields = Fields<Project>(p=>p.Name).And("*"),
+			Fields = Fields<Project>(p => p.Name).And("*"),
 		};
+
+		protected override string UrlPath => "/project%2Cdevs/_field_caps?fields=name%2C%2A";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(c, f) => c.FieldCapabilities(Index<Project>().And<Developer>(), f),
+			(c, f) => c.FieldCapabilitiesAsync(Index<Project>().And<Developer>(), f),
+			(c, r) => c.FieldCapabilities(r),
+			(c, r) => c.FieldCapabilitiesAsync(r)
+		);
 
 		protected override void ExpectResponse(IFieldCapabilitiesResponse response)
 		{

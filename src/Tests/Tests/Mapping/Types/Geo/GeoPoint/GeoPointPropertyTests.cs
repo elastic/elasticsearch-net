@@ -2,7 +2,6 @@
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
 
 namespace Tests.Mapping.Types.Geo.GeoPoint
@@ -25,15 +24,16 @@ namespace Tests.Mapping.Types.Geo.GeoPoint
 
 
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
-				.GeoPoint(s => s
-					.Name(p => p.Location)
-					.IgnoreMalformed()
-				);
+			.GeoPoint(s => s
+				.Name(p => p.Location)
+				.IgnoreMalformed()
+			);
 
 
 		protected override IProperties InitializerProperties => new Properties
 		{
-			{ "location", new GeoPointProperty
+			{
+				"location", new GeoPointProperty
 				{
 					IgnoreMalformed = true
 				}

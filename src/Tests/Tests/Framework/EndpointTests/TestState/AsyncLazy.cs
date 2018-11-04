@@ -19,30 +19,21 @@ namespace Tests.Framework
 		private readonly Lazy<Task<T>> instance;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="AsyncLazy&lt;T&gt;"/> class.
+		/// Initializes a new instance of the <see cref="AsyncLazy&lt;T&gt;" /> class.
 		/// </summary>
 		/// <param name="factory">The delegate that is invoked on a background thread to produce the value when it is needed.</param>
-		public AsyncLazy(Func<T> factory)
-		{
-			instance = new Lazy<Task<T>>(() => System.Threading.Tasks.Task.Run(factory));
-		}
+		public AsyncLazy(Func<T> factory) => instance = new Lazy<Task<T>>(() => Task.Run(factory));
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="AsyncLazy&lt;T&gt;"/> class.
+		/// Initializes a new instance of the <see cref="AsyncLazy&lt;T&gt;" /> class.
 		/// </summary>
 		/// <param name="factory">The asynchronous delegate that is invoked on a background thread to produce the value when it is needed.</param>
-		public AsyncLazy(Func<Task<T>> factory)
-		{
-			instance = new Lazy<Task<T>>(() => System.Threading.Tasks.Task.Run(factory));
-		}
+		public AsyncLazy(Func<Task<T>> factory) => instance = new Lazy<Task<T>>(() => Task.Run(factory));
 
 		/// <summary>
-		/// Asynchronous infrastructure support. This method permits instances of <see cref="AsyncLazy&lt;T&gt;"/> to be await'ed.
+		/// Asynchronous infrastructure support. This method permits instances of <see cref="AsyncLazy&lt;T&gt;" /> to be await'ed.
 		/// </summary>
-		public TaskAwaiter<T> GetAwaiter()
-		{
-			return instance.Value.GetAwaiter();
-		}
+		public TaskAwaiter<T> GetAwaiter() => instance.Value.GetAwaiter();
 
 		/// <summary>
 		/// Starts the asynchronous initialization, if it has not already started.
@@ -53,12 +44,12 @@ namespace Tests.Framework
 		}
 	}
 
-	public class LazyResponses : AsyncLazy<Dictionary<Integration.ClientMethod, IResponse>>
+	public class LazyResponses : AsyncLazy<Dictionary<ClientMethod, IResponse>>
 	{
-		public static LazyResponses Empty { get; } = new LazyResponses(() => new Dictionary<Integration.ClientMethod, IResponse> { });
+		public LazyResponses(Func<Dictionary<ClientMethod, IResponse>> factory) : base(factory) { }
 
-		public LazyResponses(Func<Dictionary<Integration.ClientMethod, IResponse>> factory) : base(factory) { }
+		public LazyResponses(Func<Task<Dictionary<ClientMethod, IResponse>>> factory) : base(factory) { }
 
-		public LazyResponses(Func<Task<Dictionary<Integration.ClientMethod, IResponse>>> factory) : base(factory) { }
+		public static LazyResponses Empty { get; } = new LazyResponses(() => new Dictionary<ClientMethod, IResponse> { });
 	}
 }

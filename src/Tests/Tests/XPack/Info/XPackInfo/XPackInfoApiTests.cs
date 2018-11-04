@@ -10,26 +10,27 @@ using Tests.Framework.Integration;
 namespace Tests.XPack.Info.XPackInfo
 {
 	[SkipVersion("<5.4.0", "")]
-	public class XPackInfoApiTests : ApiIntegrationTestBase<XPackCluster, IXPackInfoResponse, IXPackInfoRequest, XPackInfoDescriptor, XPackInfoRequest>
+	public class XPackInfoApiTests
+		: ApiIntegrationTestBase<XPackCluster, IXPackInfoResponse, IXPackInfoRequest, XPackInfoDescriptor, XPackInfoRequest>
 	{
 		public XPackInfoApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.XPackInfo(f),
-			fluentAsync: (client, f) => client.XPackInfoAsync(f),
-			request: (client, r) => client.XPackInfo(r),
-			requestAsync: (client, r) => client.XPackInfoAsync(r)
-		);
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
-		protected override string UrlPath => $"/_xpack";
+		protected override XPackInfoRequest Initializer => new XPackInfoRequest();
 
 		protected override bool SupportsDeserialization => true;
 
-		protected override XPackInfoRequest Initializer => new XPackInfoRequest();
+		protected override string UrlPath => $"/_xpack";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.XPackInfo(f),
+			(client, f) => client.XPackInfoAsync(f),
+			(client, r) => client.XPackInfo(r),
+			(client, r) => client.XPackInfoAsync(r)
+		);
 
 		protected override void ExpectResponse(IXPackInfoResponse response)
 		{

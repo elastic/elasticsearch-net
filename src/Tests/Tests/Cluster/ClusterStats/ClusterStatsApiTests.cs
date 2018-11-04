@@ -5,25 +5,25 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Cluster.ClusterStats
 {
-	public class ClusterStatsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IClusterStatsResponse, IClusterStatsRequest, ClusterStatsDescriptor, ClusterStatsRequest>
+	public class ClusterStatsApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IClusterStatsResponse, IClusterStatsRequest, ClusterStatsDescriptor, ClusterStatsRequest>
 	{
 		public ClusterStatsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.ClusterStats(),
-			fluentAsync: (client, f) => client.ClusterStatsAsync(),
-			request: (client, r) => client.ClusterStats(r),
-			requestAsync: (client, r) => client.ClusterStatsAsync(r)
-		);
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cluster/stats";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.ClusterStats(),
+			(client, f) => client.ClusterStatsAsync(),
+			(client, r) => client.ClusterStats(r),
+			(client, r) => client.ClusterStatsAsync(r)
+		);
 
 		protected override void ExpectResponse(IClusterStatsResponse response)
 		{

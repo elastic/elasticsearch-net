@@ -2,13 +2,33 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.TermLevel.Fuzzy
 {
 	public class FuzzyQueryUsageTests : QueryDslUsageTestsBase
 	{
-		public FuzzyQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		public FuzzyQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IFuzzyQuery<string, Fuzziness>>(
+			a => a.Fuzzy as IFuzzyQuery<string, Fuzziness>
+		)
+		{
+			q => q.Field = null,
+			q => q.Value = null
+		};
+
+		protected override QueryContainer QueryInitializer => new FuzzyQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Field = "description",
+			Fuzziness = Fuzziness.Auto,
+			Value = "ki",
+			MaxExpansions = 100,
+			PrefixLength = 3,
+			MultiTermQueryRewrite = MultiTermQueryRewrite.ConstantScore,
+			Transpositions = true
+		};
 
 		protected override object QueryJson => new
 		{
@@ -28,19 +48,6 @@ namespace Tests.QueryDsl.TermLevel.Fuzzy
 			}
 		};
 
-		protected override QueryContainer QueryInitializer => new FuzzyQuery
-		{
-			Name = "named_query",
-			Boost = 1.1,
-			Field = "description",
-			Fuzziness = Fuzziness.Auto,
-			Value = "ki",
-			MaxExpansions = 100,
-			PrefixLength = 3,
-			MultiTermQueryRewrite = MultiTermQueryRewrite.ConstantScore,
-			Transpositions = true
-		};
-
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.Fuzzy(c => c
 				.Name("named_query")
@@ -53,13 +60,5 @@ namespace Tests.QueryDsl.TermLevel.Fuzzy
 				.Rewrite(MultiTermQueryRewrite.ConstantScore)
 				.Transpositions()
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IFuzzyQuery<string, Fuzziness>>(
-			a => a.Fuzzy as IFuzzyQuery<string, Fuzziness>
-		)
-		{
-			q => q.Field = null,
-			q => q.Value = null
-		};
 	}
 }

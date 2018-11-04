@@ -8,14 +8,10 @@ namespace Tests.Cat.CatHealth
 {
 	public class CatHealthUrlTests : UrlTestsBase
 	{
-		[U] public override async Task Urls()
-		{
-			await GET("/_cat/health")
-				.Fluent(c => c.CatHealth())
-				.Request(c => c.CatHealth(new CatHealthRequest()))
-				.FluentAsync(c => c.CatHealthAsync())
-				.RequestAsync(c => c.CatHealthAsync(new CatHealthRequest()))
-				;
-		}
+		[U] public override async Task Urls() => await GET("/_cat/health")
+			.Fluent(c => c.CatHealth())
+			.Request(c => c.CatHealth(new CatHealthRequest()))
+			.FluentAsync(c => c.CatHealthAsync())
+			.RequestAsync(c => c.CatHealthAsync(new CatHealthRequest()));
 	}
 }

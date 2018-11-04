@@ -12,6 +12,14 @@ namespace Tests.XPack.MachineLearning.CloseJob
 	{
 		public CloseJobApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
+		protected override bool ExpectIsValid => true;
+		protected override object ExpectJson => null;
+		protected override int ExpectStatusCode => 200;
+		protected override Func<CloseJobDescriptor, ICloseJobRequest> Fluent => f => f;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override CloseJobRequest Initializer => new CloseJobRequest(CallIsolatedValue);
+		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/_close";
+
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var callUniqueValue in values)
@@ -22,24 +30,14 @@ namespace Tests.XPack.MachineLearning.CloseJob
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.CloseJob(CallIsolatedValue, f),
-			fluentAsync: (client, f) => client.CloseJobAsync(CallIsolatedValue, f),
-			request: (client, r) => client.CloseJob(r),
-			requestAsync: (client, r) => client.CloseJobAsync(r)
+			(client, f) => client.CloseJob(CallIsolatedValue, f),
+			(client, f) => client.CloseJobAsync(CallIsolatedValue, f),
+			(client, r) => client.CloseJob(r),
+			(client, r) => client.CloseJobAsync(r)
 		);
 
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/_close";
 		protected override CloseJobDescriptor NewDescriptor() => new CloseJobDescriptor(CallIsolatedValue);
-		protected override object ExpectJson => null;
-		protected override Func<CloseJobDescriptor, ICloseJobRequest> Fluent => f => f;
-		protected override CloseJobRequest Initializer => new CloseJobRequest(CallIsolatedValue);
 
-		protected override void ExpectResponse(ICloseJobResponse response)
-		{
-			response.Closed.Should().BeTrue();
-		}
+		protected override void ExpectResponse(ICloseJobResponse response) => response.Closed.Should().BeTrue();
 	}
 }

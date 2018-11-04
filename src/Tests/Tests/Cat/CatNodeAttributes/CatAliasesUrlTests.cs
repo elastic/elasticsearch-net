@@ -8,14 +8,10 @@ namespace Tests.Cat.CatNodeAttributes
 {
 	public class CatNodeAttributesUrlTests : UrlTestsBase
 	{
-		[U] public override async Task Urls()
-		{
-			await GET("/_cat/nodeattrs")
-				.Fluent(c => c.CatNodeAttributes())
-				.Request(c => c.CatNodeAttributes(new CatNodeAttributesRequest()))
-				.FluentAsync(c => c.CatNodeAttributesAsync())
-				.RequestAsync(c => c.CatNodeAttributesAsync(new CatNodeAttributesRequest()))
-				;
-		}
+		[U] public override async Task Urls() => await GET("/_cat/nodeattrs")
+			.Fluent(c => c.CatNodeAttributes())
+			.Request(c => c.CatNodeAttributes(new CatNodeAttributesRequest()))
+			.FluentAsync(c => c.CatNodeAttributesAsync())
+			.RequestAsync(c => c.CatNodeAttributesAsync(new CatNodeAttributesRequest()));
 	}
 }
