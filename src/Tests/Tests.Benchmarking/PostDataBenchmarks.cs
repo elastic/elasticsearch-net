@@ -41,7 +41,7 @@ namespace Tests.Benchmarking
 
 		public PostDataBenchmarks()
 		{
-			simpleObject = new {my_property = "value"};
+			simpleObject = new { my_property = "value" };
 			complexObject = new
 			{
 				input = new
@@ -92,7 +92,7 @@ namespace Tests.Benchmarking
 												}
 											},
 											body =
-											"{\"query\" : {\"range\": {\"@timestamp\" : {\"from\": \"{{ctx.trigger.triggered_time}}||-5m\",\"to\": \"{{ctx.trigger.triggered_time}}\"}}}}",
+												"{\"query\" : {\"range\": {\"@timestamp\" : {\"from\": \"{{ctx.trigger.triggered_time}}||-5m\",\"to\": \"{{ctx.trigger.triggered_time}}\"}}}}",
 											headers = new
 											{
 												header1 = "value1"
@@ -118,7 +118,7 @@ namespace Tests.Benchmarking
 									{
 										request = new
 										{
-											indices = new[] {"project"},
+											indices = new[] { "project" },
 											body = new
 											{
 												size = 0,
@@ -160,7 +160,7 @@ namespace Tests.Benchmarking
 							{
 								request = new
 								{
-									indices = new[] {"project"},
+									indices = new[] { "project" },
 									indices_options = new
 									{
 										expand_wildcards = "open",
@@ -200,8 +200,8 @@ namespace Tests.Benchmarking
 						{
 							"ctx.payload.search.aggregations.top_project_tags.buckets", new JObject
 							{
-								{"path", "doc_count"},
-								{"gte", new JObject {{"value", 1}}}
+								{ "path", "doc_count" },
+								{ "gte", new JObject { { "value", 1 } } }
 							}
 						}
 					}
@@ -212,8 +212,8 @@ namespace Tests.Benchmarking
 					{
 						weekly = new[]
 						{
-							new {on = new[] {"monday"}, at = new[] {"noon"}},
-							new {on = new[] {"friday"}, at = new[] {"17:00"}}
+							new { on = new[] { "monday" }, at = new[] { "noon" } },
+							new { on = new[] { "friday" }, at = new[] { "17:00" } }
 						}
 					}
 				},
@@ -223,7 +223,7 @@ namespace Tests.Benchmarking
 					{
 						email = new
 						{
-							to = new[] {"me@example.com"},
+							to = new[] { "me@example.com" },
 							subject = "Something's strange in the neighbourhood",
 							body = new
 							{
@@ -294,7 +294,7 @@ namespace Tests.Benchmarking
 							message = new
 							{
 								from = "nest integration test",
-								to = new[] {"#nest"},
+								to = new[] { "#nest" },
 								text = "slack message",
 								attachments = new[]
 								{
@@ -316,7 +316,7 @@ namespace Tests.Benchmarking
 							{
 								body = "hipchat message",
 								color = "purple",
-								room = new[] {"nest"},
+								room = new[] { "nest" },
 								notify = true
 							}
 						}
@@ -335,139 +335,99 @@ namespace Tests.Benchmarking
 			_postDataOfSimpleObject = new PostData<object>(simpleObject);
 			_postDataOfComplexObject = new PostData<object>(complexObject);
 
-			_postDataOfStringDisableDirectStreaming = new PostData<string>(@string) {DisableDirectStreaming = true};
-			_postDataOfBytesDisableDirectStreaming = new PostData<byte[]>(bytes) {DisableDirectStreaming = true};
-			_postDataOfCollectionOfStringsDisableDirectStreaming = new PostData<List<string>>(collectionOfStrings) {DisableDirectStreaming = true};
-			_postDataOfCollectionOfSimpleObjectsDisableDirectStreaming = new PostData<List<object>>(collectionOfSimpleObjects) {DisableDirectStreaming = true};
-			_postDataOfCollectionOfComplexObjectsDisableDirectStreaming = new PostData<List<object>>(collectionOfComplexObjects) {DisableDirectStreaming = true};
-			_postDataOfSimpleObjectDisableDirectStreaming = new PostData<object>(simpleObject) {DisableDirectStreaming = true};
-			_postDataOfComplexObjectDisableDirectStreaming = new PostData<object>(complexObject) {DisableDirectStreaming = true};
+			_postDataOfStringDisableDirectStreaming = new PostData<string>(@string) { DisableDirectStreaming = true };
+			_postDataOfBytesDisableDirectStreaming = new PostData<byte[]>(bytes) { DisableDirectStreaming = true };
+			_postDataOfCollectionOfStringsDisableDirectStreaming = new PostData<List<string>>(collectionOfStrings) { DisableDirectStreaming = true };
+			_postDataOfCollectionOfSimpleObjectsDisableDirectStreaming = new PostData<List<object>>(collectionOfSimpleObjects)
+				{ DisableDirectStreaming = true };
+			_postDataOfCollectionOfComplexObjectsDisableDirectStreaming = new PostData<List<object>>(collectionOfComplexObjects)
+				{ DisableDirectStreaming = true };
+			_postDataOfSimpleObjectDisableDirectStreaming = new PostData<object>(simpleObject) { DisableDirectStreaming = true };
+			_postDataOfComplexObjectDisableDirectStreaming = new PostData<object>(complexObject) { DisableDirectStreaming = true };
 		}
 
 		[Benchmark]
 		public void PostString()
 		{
-			using (var ms = new MemoryStream())
-			{
-				_postDataOfString.Write(ms, connectionSettings);
-			}
+			using (var ms = new MemoryStream()) _postDataOfString.Write(ms, connectionSettings);
 		}
 
 		[Benchmark]
 		public void PostBytes()
 		{
-			using (var ms = new MemoryStream())
-			{
-				_postDataOfBytes.Write(ms, connectionSettings);
-			}
+			using (var ms = new MemoryStream()) _postDataOfBytes.Write(ms, connectionSettings);
 		}
 
 		[Benchmark]
 		public void PostCollectionOfStrings()
 		{
-			using (var ms = new MemoryStream())
-			{
-				_postDataOfCollectionOfStrings.Write(ms, connectionSettings);
-			}
+			using (var ms = new MemoryStream()) _postDataOfCollectionOfStrings.Write(ms, connectionSettings);
 		}
 
 		[Benchmark]
 		public void PostCollectionOfSimpleObjects()
 		{
-			using (var ms = new MemoryStream())
-			{
-				_postDataOfCollectionOfSimpleObjects.Write(ms, connectionSettings);
-			}
+			using (var ms = new MemoryStream()) _postDataOfCollectionOfSimpleObjects.Write(ms, connectionSettings);
 		}
 
 		[Benchmark]
 		public void PostCollectionOfComplexObjects()
 		{
-			using (var ms = new MemoryStream())
-			{
-				_postDataOfCollectionOfComplexObjects.Write(ms, connectionSettings);
-			}
+			using (var ms = new MemoryStream()) _postDataOfCollectionOfComplexObjects.Write(ms, connectionSettings);
 		}
 
 		[Benchmark]
 		public void PostSimpleObject()
 		{
-			using (var ms = new MemoryStream())
-			{
-				_postDataOfSimpleObject.Write(ms, connectionSettings);
-			}
+			using (var ms = new MemoryStream()) _postDataOfSimpleObject.Write(ms, connectionSettings);
 		}
 
 		[Benchmark]
 		public void PostComplexObject()
 		{
-			using (var ms = new MemoryStream())
-			{
-				_postDataOfComplexObject.Write(ms, connectionSettings);
-			}
+			using (var ms = new MemoryStream()) _postDataOfComplexObject.Write(ms, connectionSettings);
 		}
 
 		[Benchmark]
 		public void PostStringDisableDirectStreaming()
 		{
-			using (var ms = new MemoryStream())
-			{
-				_postDataOfStringDisableDirectStreaming.Write(ms, connectionSettings);
-			}
+			using (var ms = new MemoryStream()) _postDataOfStringDisableDirectStreaming.Write(ms, connectionSettings);
 		}
 
 		[Benchmark]
 		public void PostBytesDisableDirectStreaming()
 		{
-			using (var ms = new MemoryStream())
-			{
-				_postDataOfBytesDisableDirectStreaming.Write(ms, connectionSettings);
-			}
+			using (var ms = new MemoryStream()) _postDataOfBytesDisableDirectStreaming.Write(ms, connectionSettings);
 		}
 
 		[Benchmark]
 		public void PostCollectionOfStringsDisableDirectStreaming()
 		{
-			using (var ms = new MemoryStream())
-			{
-				_postDataOfCollectionOfStringsDisableDirectStreaming.Write(ms, connectionSettings);
-			}
+			using (var ms = new MemoryStream()) _postDataOfCollectionOfStringsDisableDirectStreaming.Write(ms, connectionSettings);
 		}
 
 		[Benchmark]
 		public void PostCollectionOfSimpleObjectsDisableDirectStreaming()
 		{
-			using (var ms = new MemoryStream())
-			{
-				_postDataOfCollectionOfSimpleObjectsDisableDirectStreaming.Write(ms, connectionSettings);
-			}
+			using (var ms = new MemoryStream()) _postDataOfCollectionOfSimpleObjectsDisableDirectStreaming.Write(ms, connectionSettings);
 		}
 
 		[Benchmark]
 		public void PostCollectionOfComplexObjectsDisableDirectStreaming()
 		{
-			using (var ms = new MemoryStream())
-			{
-				_postDataOfCollectionOfComplexObjectsDisableDirectStreaming.Write(ms, connectionSettings);
-			}
+			using (var ms = new MemoryStream()) _postDataOfCollectionOfComplexObjectsDisableDirectStreaming.Write(ms, connectionSettings);
 		}
 
 		[Benchmark]
 		public void PostSimpleObjectDisableDirectStreaming()
 		{
-			using (var ms = new MemoryStream())
-			{
-				_postDataOfSimpleObjectDisableDirectStreaming.Write(ms, connectionSettings);
-			}
+			using (var ms = new MemoryStream()) _postDataOfSimpleObjectDisableDirectStreaming.Write(ms, connectionSettings);
 		}
 
 		[Benchmark]
 		public void PostComplexObjectDisableDirectStreaming()
 		{
-			using (var ms = new MemoryStream())
-			{
-				_postDataOfComplexObjectDisableDirectStreaming.Write(ms, connectionSettings);
-			}
+			using (var ms = new MemoryStream()) _postDataOfComplexObjectDisableDirectStreaming.Write(ms, connectionSettings);
 		}
 	}
 }
