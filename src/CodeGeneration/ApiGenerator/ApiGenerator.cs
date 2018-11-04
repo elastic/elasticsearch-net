@@ -4,10 +4,9 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using ApiGenerator.Domain;
-using Newtonsoft.Json;
-using ShellProgressBar;
 using Newtonsoft.Json.Linq;
 using RazorLight;
+using ShellProgressBar;
 
 namespace ApiGenerator
 {
@@ -16,39 +15,6 @@ namespace ApiGenerator
 		private static readonly RazorLightEngine Razor = new RazorLightEngineBuilder()
 			.UseMemoryCachingProvider()
 			.Build();
-
-		public static void Generate(string downloadBranch, params string[] folders)
-		{
-			Warnings = new List<string>();
-			var spec = CreateRestApiSpecModel(downloadBranch, folders);
-			var actions = new Dictionary<Action<RestApiSpec>, string>
-			{
-				{  GenerateClientInterface, "Client interface" },
-				{  GenerateRequestParameters, "Request parameters" },
-				{  GenerateDescriptors, "Descriptors" },
-				{  GenerateRequests, "Requests" },
-				{  GenerateEnums, "Enums" },
-				{  GenerateRawClient, "Lowlevel client" },
-				{  GenerateRawDispatch, "Dispatch" },
-			};
-
-			using (var pbar = new ProgressBar(actions.Count, "Generating code", new ProgressBarOptions { BackgroundColor = ConsoleColor.DarkGray }))
-			{
-				foreach(var kv in actions)
-				{
-					pbar.Message = "Generating " + kv.Value;
-					kv.Key(spec);
-					pbar.Tick("Generated " + kv.Value);
-				}
-			}
-
-			if (Warnings.Count == 0) return;
-
-			Console.ForegroundColor = ConsoleColor.Yellow;
-			foreach (var warning in Warnings.Distinct().OrderBy(w=>w))
-				Console.WriteLine(warning);
-			Console.ResetColor();
-		}
 
 		public static List<string> Warnings { get; private set; }
 
@@ -85,27 +51,63 @@ namespace ApiGenerator
 			"nodes.reload_secure_settings.json"
 		};
 
+		public static void Generate(string downloadBranch, params string[] folders)
+		{
+			Warnings = new List<string>();
+			var spec = CreateRestApiSpecModel(downloadBranch, folders);
+			var actions = new Dictionary<Action<RestApiSpec>, string>
+			{
+				{ GenerateClientInterface, "Client interface" },
+				{ GenerateRequestParameters, "Request parameters" },
+				{ GenerateDescriptors, "Descriptors" },
+				{ GenerateRequests, "Requests" },
+				{ GenerateEnums, "Enums" },
+				{ GenerateRawClient, "Lowlevel client" },
+				{ GenerateRawDispatch, "Dispatch" },
+			};
+
+			using (var pbar = new ProgressBar(actions.Count, "Generating code", new ProgressBarOptions { BackgroundColor = ConsoleColor.DarkGray }))
+			{
+				foreach (var kv in actions)
+				{
+					pbar.Message = "Generating " + kv.Value;
+					kv.Key(spec);
+					pbar.Tick("Generated " + kv.Value);
+				}
+			}
+
+			if (Warnings.Count == 0) return;
+
+			Console.ForegroundColor = ConsoleColor.Yellow;
+			foreach (var warning in Warnings.Distinct().OrderBy(w => w))
+				Console.WriteLine(warning);
+			Console.ResetColor();
+		}
+
 		private static RestApiSpec CreateRestApiSpecModel(string downloadBranch, string[] folders)
 		{
 			var directories = Directory.GetDirectories(CodeConfiguration.RestSpecificationFolder, "*", SearchOption.AllDirectories)
-				.Where(f=>folders == null || folders.Length == 0 || folders.Contains(new DirectoryInfo(f).Name))
+				.Where(f => folders == null || folders.Length == 0 || folders.Contains(new DirectoryInfo(f).Name))
 				.ToList();
 
 			var endpoints = new Dictionary<string, ApiEndpoint>();
-			using (var pbar = new ProgressBar(directories.Count, $"Listing {directories.Count} directories", new ProgressBarOptions { BackgroundColor = ConsoleColor.DarkGray }))
+			using (var pbar = new ProgressBar(directories.Count, $"Listing {directories.Count} directories",
+				new ProgressBarOptions { BackgroundColor = ConsoleColor.DarkGray }))
 			{
 				var folderFiles = directories.Select(dir =>
 					Directory.GetFiles(dir)
-					.Where(f => f.EndsWith(".json") && !IgnoredApis.Contains(new FileInfo(f).Name))
-					.ToList()
+						.Where(f => f.EndsWith(".json") && !IgnoredApis.Contains(new FileInfo(f).Name))
+						.ToList()
 				);
 				var commonFile = Path.Combine(CodeConfiguration.RestSpecificationFolder, "Core", "_common.json");
 				if (!File.Exists(commonFile)) throw new Exception($"Expected to find {commonFile}");
+
 				RestApiSpec.CommonApiQueryParameters = CreateCommonApiQueryParameters(commonFile);
 
 				foreach (var jsonFiles in folderFiles)
 				{
-					using (var fileProgress = pbar.Spawn(jsonFiles.Count, $"Listing {jsonFiles.Count} files", new ProgressBarOptions { ProgressCharacter = '─', BackgroundColor = ConsoleColor.DarkGray }))
+					using (var fileProgress = pbar.Spawn(jsonFiles.Count, $"Listing {jsonFiles.Count} files",
+						new ProgressBarOptions { ProgressCharacter = '─', BackgroundColor = ConsoleColor.DarkGray }))
 					{
 						foreach (var file in jsonFiles)
 						{
@@ -118,6 +120,7 @@ namespace ApiGenerator
 								var endpoint = CreateApiEndpoint(file);
 								endpoints.Add(endpoint.Key, endpoint.Value);
 							}
+
 							fileProgress.Tick();
 						}
 					}
@@ -169,13 +172,7 @@ namespace ApiGenerator
 				MergeArrayHandling = MergeArrayHandling.Union
 			});
 
-			if (pathsOverride != null)
-			{
-				original.SelectToken("*.url.paths").Replace(pathsOverride);
-			}
-
-
-
+			if (pathsOverride != null) original.SelectToken("*.url.paths").Replace(pathsOverride);
 		}
 
 		private static Dictionary<string, ApiQueryParameters> CreateCommonApiQueryParameters(string jsonFile)
@@ -183,44 +180,43 @@ namespace ApiGenerator
 			var json = File.ReadAllText(jsonFile);
 			var jobject = JObject.Parse(json);
 			var commonParameters = jobject.Property("params").Value.ToObject<Dictionary<string, ApiQueryParameters>>();
-			return ApiQueryParametersPatcher.Patch(null, commonParameters, null, checkCommon: false);
+			return ApiQueryParametersPatcher.Patch(null, commonParameters, null, false);
 		}
 
-		private static string CreateMethodName(string apiEndpointKey)
-		{
-			return PascalCase(apiEndpointKey);
-		}
+		private static string CreateMethodName(string apiEndpointKey) => PascalCase(apiEndpointKey);
 
-		private static string DoRazor(string name, string template, RestApiSpec model)
-		{
-			return Razor.CompileRenderAsync(name, template, model).GetAwaiter().GetResult();
-		}
+		private static string DoRazor(string name, string template, RestApiSpec model) =>
+			Razor.CompileRenderAsync(name, template, model).GetAwaiter().GetResult();
 
 		private static void GenerateClientInterface(RestApiSpec model)
 		{
 			var targetFile = CodeConfiguration.EsNetFolder + @"IElasticLowLevelClient.Generated.cs";
-			var source = DoRazor(nameof(GenerateClientInterface), File.ReadAllText(CodeConfiguration.ViewFolder + @"IElasticLowLevelClient.Generated.cshtml"), model);
+			var source = DoRazor(nameof(GenerateClientInterface),
+				File.ReadAllText(CodeConfiguration.ViewFolder + @"IElasticLowLevelClient.Generated.cshtml"), model);
 			File.WriteAllText(targetFile, source);
 		}
 
 		private static void GenerateRawDispatch(RestApiSpec model)
 		{
 			var targetFile = CodeConfiguration.NestFolder + @"_Generated/_LowLevelDispatch.generated.cs";
-			var source = DoRazor(nameof(GenerateRawDispatch), File.ReadAllText(CodeConfiguration.ViewFolder + @"_LowLevelDispatch.Generated.cshtml"), model);
+			var source = DoRazor(nameof(GenerateRawDispatch), File.ReadAllText(CodeConfiguration.ViewFolder + @"_LowLevelDispatch.Generated.cshtml"),
+				model);
 			File.WriteAllText(targetFile, source);
 		}
 
 		private static void GenerateRawClient(RestApiSpec model)
 		{
 			var targetFile = CodeConfiguration.EsNetFolder + @"ElasticLowLevelClient.Generated.cs";
-			var source = DoRazor(nameof(GenerateRawClient), File.ReadAllText(CodeConfiguration.ViewFolder + @"ElasticLowLevelClient.Generated.cshtml"), model);
+			var source = DoRazor(nameof(GenerateRawClient),
+				File.ReadAllText(CodeConfiguration.ViewFolder + @"ElasticLowLevelClient.Generated.cshtml"), model);
 			File.WriteAllText(targetFile, source);
 		}
 
 		private static void GenerateDescriptors(RestApiSpec model)
 		{
 			var targetFile = CodeConfiguration.NestFolder + @"_Generated\_Descriptors.generated.cs";
-			var source = DoRazor(nameof(GenerateDescriptors), File.ReadAllText(CodeConfiguration.ViewFolder + @"_Descriptors.Generated.cshtml"), model);
+			var source = DoRazor(nameof(GenerateDescriptors), File.ReadAllText(CodeConfiguration.ViewFolder + @"_Descriptors.Generated.cshtml"),
+				model);
 			File.WriteAllText(targetFile, source);
 		}
 
@@ -234,7 +230,8 @@ namespace ApiGenerator
 		private static void GenerateRequestParameters(RestApiSpec model)
 		{
 			var targetFile = CodeConfiguration.EsNetFolder + @"Domain\RequestParameters\RequestParameters.Generated.cs";
-			var source = DoRazor(nameof(GenerateRequestParameters), File.ReadAllText(CodeConfiguration.ViewFolder + @"RequestParameters.Generated.cshtml"), model);
+			var source = DoRazor(nameof(GenerateRequestParameters),
+				File.ReadAllText(CodeConfiguration.ViewFolder + @"RequestParameters.Generated.cshtml"), model);
 			File.WriteAllText(targetFile, source);
 		}
 
