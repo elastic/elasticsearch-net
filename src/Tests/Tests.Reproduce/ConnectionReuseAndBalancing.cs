@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Elasticsearch.Net;
-using Nest;
-using FluentAssertions;
-using System.Threading;
 using System.Reactive.Linq;
-using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
+using Elasticsearch.Net;
+using FluentAssertions;
+using Nest;
 using Tests.Core.ManagedElasticsearch;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
@@ -21,26 +19,25 @@ namespace Tests.Reproduce
 
 	public class ConnectionReuseAndBalancing : ClusterTestClassBase<ConnectionReuseCluster>
 	{
+		public ConnectionReuseAndBalancing(ConnectionReuseCluster cluster) : base(cluster) { }
 
 		private static bool IsCurlHandler { get; } =
-            #if DOTNETCORE
+#if DOTNETCORE
                 typeof(HttpClientHandler).Assembly().GetType("System.Net.Http.CurlHandler") != null;
             #else
-                 false;
-            #endif
-
-		public ConnectionReuseAndBalancing(ConnectionReuseCluster cluster) : base(cluster) { }
+			false;
+#endif
 
 		public IEnumerable<Project> MockDataGenerator(int numDocuments)
 		{
 			foreach (var i in Enumerable.Range(0, numDocuments))
-				yield return new Project {Name = $"project-{i}"};
+				yield return new Project { Name = $"project-{i}" };
 		}
 
 		[I] public async Task IndexAndSearchABunch()
 		{
 			const int requestsPerIteration = 1000;
-			var client = this.Client;
+			var client = Client;
 
 			await IndexMockData(client, requestsPerIteration);
 
@@ -84,7 +81,7 @@ namespace Tests.Reproduce
 				else
 				{
 					var m = Math.Max(2, i + 1) + 1;
-					iterationMax = ((maxCurrent * m) / 2) + leeWay;
+					iterationMax = maxCurrent * m / 2 + leeWay;
 					errorMessage =
 						$"Expected some socket bleeding but iteration {i} exceeded iteration specific max {iterationMax} = (({maxCurrent} * {m}) / 2) + {leeWay}";
 				}
@@ -100,7 +97,7 @@ namespace Tests.Reproduce
 		{
 			var tokenSource = new CancellationTokenSource();
 			await c.DeleteIndexAsync(Index<Project>(), cancellationToken: tokenSource.Token);
-			var observableBulk = c.BulkAll(this.MockDataGenerator(100000), f => f
+			var observableBulk = c.BulkAll(MockDataGenerator(100000), f => f
 					.MaxDegreeOfParallelism(10)
 					.BackOffTime(TimeSpan.FromSeconds(10))
 					.BackOffRetries(2)

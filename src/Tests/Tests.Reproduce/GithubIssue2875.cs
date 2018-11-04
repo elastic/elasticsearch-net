@@ -7,23 +7,20 @@ namespace Tests.Reproduce
 {
 	public class GithubIssue2875
 	{
-
-		[U] public void ReusingQueryDescriptorOutSideOfSelector()
-		{
-			Expect(new
+		[U] public void ReusingQueryDescriptorOutSideOfSelector() => Expect(new
 			{
-				query = new {
+				query = new
+				{
 					@bool = new
 					{
-						must = new []
+						must = new[]
 						{
-							new  { term = new { field = new { value = "value" } }}
+							new { term = new { field = new { value = "value" } } }
 						}
-
 					}
 				}
-			}).FromRequest(ReuseQueryDescriptorUnexpected);
-		}
+			})
+			.FromRequest(ReuseQueryDescriptorUnexpected);
 
 		private static ISearchResponse<Project> ReuseQueryDescriptorUnexpected(IElasticClient client) => client.Search<Project>(s => s
 			.Query(q => q

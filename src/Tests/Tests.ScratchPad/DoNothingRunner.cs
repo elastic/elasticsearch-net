@@ -4,6 +4,6 @@
 	{
 		protected override int LoopCount => 100_000_000;
 
-		protected override RoutineBase Routine() => this.Loop(() => 1, (c, f) => { });
+		protected override RoutineBase Routine() => Loop(() => 1, (c, f) => { });
 	}
 }

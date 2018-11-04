@@ -14,6 +14,11 @@ namespace Tests.Reproduce
 	// from https://stackoverflow.com/questions/49224866/elasticsearch-nest-6-storing-enums-as-string
 	public class JsonNetSerializerConverters
 	{
+		public enum ProductType
+		{
+			Example
+		}
+
 		[U] public void JsonConvertersInJsonSerializerSettingsAreHonoured()
 		{
 			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
@@ -33,11 +38,6 @@ namespace Tests.Reproduce
 		public class Product
 		{
 			public ProductType ProductType { get; set; }
-		}
-
-		public enum ProductType
-		{
-			Example
 		}
 	}
 }
