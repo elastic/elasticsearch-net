@@ -1,28 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace ApiGenerator.Domain
 {
 	public class ApiUrlPart
 	{
-		public string Name { get; set; }
-		public string Type { get; set; }
-
-
 		private string _description;
-		public string Description
-		{
-			get => _description;
-			set => _description = CleanUpDescription(value);
-		}
-		public bool Required { get; set; }
-		public IEnumerable<string> Options { get; set; }
 
-
-		private string CleanUpDescription(string value)
+		public string Argument
 		{
-			if (string.IsNullOrWhiteSpace(value)) return value;
-			return value.Replace("use `_all` or empty string", "use the special string `_all` or Indices.All");
+			get
+			{
+				switch (Type)
+				{
+					case "int":
+					case "string":
+						return Type + " " + Name;
+					case "list":
+						return "string " + Name;
+					case "enum":
+						return ApiGenerator.PascalCase(Name) + " " + Name;
+					case "number":
+						return "string " + Name;
+					default:
+						return Type + " " + Name;
+				}
+			}
 		}
 
 		public string ClrTypeName
@@ -31,25 +33,25 @@ namespace ApiGenerator.Domain
 			{
 				if (ClrTypeNameOverride != null) return ClrTypeNameOverride;
 
-				switch(this.Name)
+				switch (Name)
 				{
 					case "index":
 					case "new_index":
-						return this.Type == "string" ? "IndexName" : "Indices";
+						return Type == "string" ? "IndexName" : "Indices";
 					case "target":
 						return "IndexName";
-					case "type": return this.Type == "string" ? "TypeName" : "Types";
+					case "type": return Type == "string" ? "TypeName" : "Types";
 					case "watch_id":
 					case "job_id":
 					case "datafeed_id":
 					case "snapshot_id":
 					case "filter_id":
-					case "id": return this.Type == "string" ? "Id" : "Ids";
+					case "id": return Type == "string" ? "Id" : "Ids";
 					case "category_id": return "CategoryId";
-					case "node_id": return this.Type == "string" ? "NodeId" : "NodeIds";
-					case "scroll_id": return this.Type == "string" ? "ScrollId" : "ScrollIds";
+					case "node_id": return Type == "string" ? "NodeId" : "NodeIds";
+					case "scroll_id": return Type == "string" ? "ScrollId" : "ScrollIds";
 					case "field":
-					case "fields": return this.Type == "string" ? "Field" : "Fields";
+					case "fields": return Type == "string" ? "Field" : "Fields";
 					case "index_metric": return "IndexMetrics";
 					case "metric":
 					case "watcher_stats_metric":
@@ -66,47 +68,45 @@ namespace ApiGenerator.Domain
 					case "alias":
 					case "name":
 					case "thread_pool_patterns":
-						return this.Type == "string" ? "Name" : "Names";
+						return Type == "string" ? "Name" : "Names";
 					case "task_id": return "TaskId";
 					case "timestamp": return "Timestamp";
-					default: return this.Type + "_";
+					default: return Type + "_";
 				}
 			}
 		}
 
 		public string ClrTypeNameOverride { get; set; }
 
+		public string Description
+		{
+			get => _description;
+			set => _description = CleanUpDescription(value);
+		}
+
 		public string InterfaceName
 		{
 			get
 			{
-				switch(this.Name)
+				switch (Name)
 				{
 					case "repository": return "RepositoryName";
-					default: return this.Name.ToPascalCase();
+					default: return Name.ToPascalCase();
 				}
 			}
 		}
 
-		public string Argument
+		public string Name { get; set; }
+		public IEnumerable<string> Options { get; set; }
+		public bool Required { get; set; }
+		public string Type { get; set; }
+
+
+		private string CleanUpDescription(string value)
 		{
-			get
-			{
-				switch (this.Type)
-				{
-					case "int":
-					case "string":
-						return this.Type + " " + this.Name;
-					case "list":
-						return "string " + this.Name;
-					case "enum":
-						return ApiGenerator.PascalCase(this.Name) + " " + this.Name;
-					case "number":
-						return "string " + this.Name;
-					default:
-						return this.Type + " " + this.Name;
-				}
-			}
+			if (string.IsNullOrWhiteSpace(value)) return value;
+
+			return value.Replace("use `_all` or empty string", "use the special string `_all` or Indices.All");
 		}
 	}
 }
