@@ -19,7 +19,7 @@ namespace Tests.ClusterLauncher
 			}
 
 			var clusterName = arguments[0];
-			if 	(arguments.Length > 1)
+			if (arguments.Length > 1)
 				Environment.SetEnvironmentVariable("NEST_INTEGRATION_VERSION", arguments[1], EnvironmentVariableTarget.Process);
 			Environment.SetEnvironmentVariable("NEST_INTEGRATION_SHOW_OUTPUT_AFTER_START", "1", EnvironmentVariableTarget.Process);
 
@@ -37,9 +37,11 @@ namespace Tests.ClusterLauncher
 			}
 			return 0;
 		}
+
 		private static bool TryStartXPackClusterImplementation(Type cluster)
 		{
 			if (!(Activator.CreateInstance(cluster) is XPackCluster instance)) return false;
+
 			using (instance)
 			{
 				instance.Start();
@@ -54,6 +56,7 @@ namespace Tests.ClusterLauncher
 		private static bool TryStartClientTestClusterBaseImplementation(Type cluster)
 		{
 			if (!(Activator.CreateInstance(cluster) is ClientTestClusterBase instance)) return false;
+
 			using (instance)
 			{
 				instance.Start();
