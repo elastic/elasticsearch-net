@@ -2,13 +2,10 @@
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
-using Tests.ClientConcepts.HighLevel.Inference;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.Indices.MappingManagement.PutMapping
@@ -20,17 +17,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 	{
 		public PutMappingApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Map(f),
-			fluentAsync: (client, f) => client.MapAsync(f),
-			request: (client, r) => client.Map(r),
-			requestAsync: (client, r) => client.MapAsync(r)
-		);
-
 		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override string UrlPath => $"/{CallIsolatedValue}/project/_mapping";
 
 		protected override object ExpectJson { get; } = new
 		{
@@ -163,21 +150,28 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				{
 					type = "completion"
 				},
-				ranges = new {
-					properties = new {
-						dates = new {
+				ranges = new
+				{
+					properties = new
+					{
+						dates = new
+						{
 							type = "date_range"
 						},
-						doubles = new {
+						doubles = new
+						{
 							type = "double_range"
 						},
-						floats = new {
+						floats = new
+						{
 							type = "float_range"
 						},
-						integers = new {
+						integers = new
+						{
 							type = "integer_range"
 						},
-						longs = new {
+						longs = new
+						{
 							type = "long_range"
 						},
 						ips = new
@@ -204,6 +198,8 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				}
 			}
 		};
+
+		protected override int ExpectStatusCode => 200;
 
 
 		protected override Func<PutMappingDescriptor<Project>, IPutMappingRequest> Fluent => d => d
@@ -252,90 +248,108 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				)
 			);
 
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+
 		protected override PutMappingRequest<Project> Initializer => new PutMappingRequest<Project>(CallIsolatedValue, Type<Project>())
 		{
 			IncludeInAll = true,
 			Properties = new Properties<Project>
 			{
-				{ p => p.Branches, new TextProperty
+				{
+					p => p.Branches, new TextProperty
+					{
+						Fields = new Properties
 						{
-							Fields = new Properties
 							{
-								{ "keyword", new KeywordProperty
-									{
-										IgnoreAbove = 256
-									}
+								"keyword", new KeywordProperty
+								{
+									IgnoreAbove = 256
 								}
 							}
 						}
+					}
 				},
-				{ p => p.CuratedTags, new ObjectProperty
+				{
+					p => p.CuratedTags, new ObjectProperty
+					{
+						Properties = new Properties<Tag>
 						{
-							Properties = new Properties<Tag>
-							{
-								{ p => p.Added, new DateProperty() },
-								{ p => p.Name, new TextProperty() },
-							}
+							{ p => p.Added, new DateProperty() },
+							{ p => p.Name, new TextProperty() },
 						}
+					}
 				},
 				{ p => p.Description, new TextProperty() },
 				{ p => p.DateString, new TextProperty { } },
 				{ p => p.LastActivity, new DateProperty() },
-				{ p => p.LeadDeveloper, new ObjectProperty
+				{
+					p => p.LeadDeveloper, new ObjectProperty
+					{
+						Properties = new Properties<Developer>
 						{
-							Properties = new Properties<Developer>
-							{
-								{ p => p.FirstName, new TextProperty() },
-								{ p => p.Gender, new NumberProperty(NumberType.Integer) },
-								{ p => p.Id, new NumberProperty(NumberType.Long) },
-								{ p => p.IPAddress, new TextProperty() },
-								{ p => p.JobTitle, new TextProperty() },
-								{ p => p.LastName, new TextProperty() },
-								{ p => p.Location, new GeoPointProperty() },
-								{ p => p.OnlineHandle, new TextProperty() },
-								{ p => p.GeoIp, new ObjectProperty() },
-							}
+							{ p => p.FirstName, new TextProperty() },
+							{ p => p.Gender, new NumberProperty(NumberType.Integer) },
+							{ p => p.Id, new NumberProperty(NumberType.Long) },
+							{ p => p.IPAddress, new TextProperty() },
+							{ p => p.JobTitle, new TextProperty() },
+							{ p => p.LastName, new TextProperty() },
+							{ p => p.Location, new GeoPointProperty() },
+							{ p => p.OnlineHandle, new TextProperty() },
+							{ p => p.GeoIp, new ObjectProperty() },
 						}
+					}
 				},
-				{ p => p.Location, new ObjectProperty
+				{
+					p => p.Location, new ObjectProperty
+					{
+						Properties = new Properties<SimpleGeoPoint>
 						{
-							Properties = new Properties<SimpleGeoPoint>
-							{
-								{ p => p.Lat, new NumberProperty(NumberType.Double) },
-								{ p => p.Lon, new NumberProperty(NumberType.Double) },
-							}
+							{ p => p.Lat, new NumberProperty(NumberType.Double) },
+							{ p => p.Lon, new NumberProperty(NumberType.Double) },
 						}
+					}
 				},
 				{ p => p.Metadata, new ObjectProperty() },
-				{ p => p.Name, new TextProperty { Index = false }  },
+				{ p => p.Name, new TextProperty { Index = false } },
 				{ p => p.NumberOfCommits, new NumberProperty(NumberType.Integer) },
 				{ p => p.NumberOfContributors, new NumberProperty(NumberType.Integer) },
 				{ p => p.StartedOn, new DateProperty() },
 				{ p => p.State, new NumberProperty(NumberType.Integer) },
 				{ p => p.Suggest, new CompletionProperty() },
-				{ p => p.Ranges, new ObjectProperty
+				{
+					p => p.Ranges, new ObjectProperty
+					{
+						Properties = new Properties<Ranges>
 						{
-							Properties = new Properties<Ranges>
-							{
-								{ p => p.Dates, new DateRangeProperty() },
-								{ p => p.Doubles, new DoubleRangeProperty() },
-								{ p => p.Floats, new FloatRangeProperty() },
-								{ p => p.Integers, new IntegerRangeProperty() },
-								{ p => p.Longs, new LongRangeProperty() },
-								{ p => p.Ips, new IpRangeProperty() },
-							}
+							{ p => p.Dates, new DateRangeProperty() },
+							{ p => p.Doubles, new DoubleRangeProperty() },
+							{ p => p.Floats, new FloatRangeProperty() },
+							{ p => p.Integers, new IntegerRangeProperty() },
+							{ p => p.Longs, new LongRangeProperty() },
+							{ p => p.Ips, new IpRangeProperty() },
 						}
+					}
 				},
-				{ p => p.Tags, new ObjectProperty
+				{
+					p => p.Tags, new ObjectProperty
+					{
+						Properties = new Properties<Tag>
 						{
-							Properties = new Properties<Tag>
-							{
-								{ p => p.Added, new DateProperty() },
-								{ p => p.Name, new TextProperty() },
-							}
+							{ p => p.Added, new DateProperty() },
+							{ p => p.Name, new TextProperty() },
 						}
+					}
 				},
 			}
 		};
+
+		protected override string UrlPath => $"/{CallIsolatedValue}/project/_mapping";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.Map(f),
+			(client, f) => client.MapAsync(f),
+			(client, r) => client.Map(r),
+			(client, r) => client.MapAsync(r)
+		);
 	}
 }

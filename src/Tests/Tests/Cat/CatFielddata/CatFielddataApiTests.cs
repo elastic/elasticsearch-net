@@ -7,19 +7,24 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Cat.CatFielddata
 {
-	public class CatFielddataApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatFielddataRecord>, ICatFielddataRequest, CatFielddataDescriptor, CatFielddataRequest>
+	public class CatFielddataApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatFielddataRecord>, ICatFielddataRequest, CatFielddataDescriptor, CatFielddataRequest>
 	{
 		public CatFielddataApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override string UrlPath => "/_cat/fielddata";
+
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.CatFielddata(),
-			fluentAsync: (client, f) => client.CatFielddataAsync(),
-			request: (client, r) => client.CatFielddata(r),
-			requestAsync: (client, r) => client.CatFielddataAsync(r)
+			(client, f) => client.CatFielddata(),
+			(client, f) => client.CatFielddataAsync(),
+			(client, r) => client.CatFielddata(r),
+			(client, r) => client.CatFielddataAsync(r)
 		);
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
@@ -38,11 +43,6 @@ namespace Tests.Cat.CatFielddata
 				throw new Exception($"Failure setting up integration test. {response.DebugInformation}");
 		}
 
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => "/_cat/fielddata";
-
 		protected override void ExpectResponse(ICatResponse<CatFielddataRecord> response)
 		{
 			response.Records.Should().NotBeEmpty();
@@ -57,5 +57,4 @@ namespace Tests.Cat.CatFielddata
 			}
 		}
 	}
-
 }

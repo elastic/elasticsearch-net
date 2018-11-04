@@ -2,7 +2,6 @@
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 
@@ -11,6 +10,30 @@ namespace Tests.QueryDsl.FullText.SimpleQueryString
 	public class SimpleQueryStringUsageTests : QueryDslUsageTestsBase
 	{
 		public SimpleQueryStringUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISimpleQueryStringQuery>(a => a.SimpleQueryString)
+		{
+			q => q.Query = null,
+			q => q.Query = string.Empty,
+		};
+
+		protected override QueryContainer QueryInitializer => new SimpleQueryStringQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Fields = Field<Project>(p => p.Description).And("myOtherField"),
+			Query = "hello world",
+			Analyzer = "standard",
+			DefaultOperator = Operator.Or,
+			Flags = SimpleQueryStringFlags.And | SimpleQueryStringFlags.Near,
+#pragma warning disable 618
+			Locale = "en_US",
+			LowercaseExpendedTerms = true,
+#pragma warning restore 618
+			Lenient = true,
+			AnalyzeWildcard = true,
+			MinimumShouldMatch = "30%"
+		};
 
 		protected override object QueryJson => new
 		{
@@ -31,34 +54,16 @@ namespace Tests.QueryDsl.FullText.SimpleQueryString
 			}
 		};
 
-		protected override QueryContainer QueryInitializer => new SimpleQueryStringQuery
-		{
-			Name = "named_query",
-			Boost = 1.1,
-			Fields = Field<Project>(p=>p.Description).And("myOtherField"),
-			Query = "hello world",
-			Analyzer = "standard",
-			DefaultOperator = Operator.Or,
-			Flags = SimpleQueryStringFlags.And|SimpleQueryStringFlags.Near,
-#pragma warning disable 618
-			Locale = "en_US",
-			LowercaseExpendedTerms = true,
-#pragma warning restore 618
-			Lenient = true,
-			AnalyzeWildcard = true,
-			MinimumShouldMatch = "30%"
-		};
-
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 #pragma warning disable 618
 			.SimpleQueryString(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Fields(f => f.Field(p=>p.Description).Field("myOtherField"))
+				.Fields(f => f.Field(p => p.Description).Field("myOtherField"))
 				.Query("hello world")
 				.Analyzer("standard")
 				.DefaultOperator(Operator.Or)
-				.Flags(SimpleQueryStringFlags.And|SimpleQueryStringFlags.Near)
+				.Flags(SimpleQueryStringFlags.And | SimpleQueryStringFlags.Near)
 				.Locale("en_US")
 				.LowercaseExpendedTerms()
 				.Lenient()
@@ -66,11 +71,5 @@ namespace Tests.QueryDsl.FullText.SimpleQueryString
 				.MinimumShouldMatch("30%")
 			);
 #pragma warning restore 618
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISimpleQueryStringQuery>(a => a.SimpleQueryString)
-		{
-			q => q.Query = null,
-			q => q.Query = string.Empty,
-		};
 	}
 }

@@ -1,11 +1,8 @@
 ﻿using System;
-using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Mapping.Types.Core.Date
 {
@@ -32,7 +29,6 @@ namespace Tests.Mapping.Types.Core.Date
 				}
 			}
 		};
-
 #pragma warning disable 618 // usage of IncludeInAll
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
 			.Date(b => b
@@ -51,7 +47,8 @@ namespace Tests.Mapping.Types.Core.Date
 
 		protected override IProperties InitializerProperties => new Properties
 		{
-			{ "lastActivity", new DateProperty
+			{
+				"lastActivity", new DateProperty
 				{
 					DocValues = false,
 					Similarity = SimilarityOption.Classic,

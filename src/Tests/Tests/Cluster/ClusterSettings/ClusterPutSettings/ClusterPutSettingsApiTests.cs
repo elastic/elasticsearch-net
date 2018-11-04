@@ -5,30 +5,32 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Cluster.ClusterSettings.ClusterPutSettings
 {
-	public class ClusterPutSettingsApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, IClusterPutSettingsResponse, IClusterPutSettingsRequest, ClusterPutSettingsDescriptor, ClusterPutSettingsRequest>
+	public class ClusterPutSettingsApiTests
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, IClusterPutSettingsResponse, IClusterPutSettingsRequest, ClusterPutSettingsDescriptor,
+			ClusterPutSettingsRequest>
 	{
 		public ClusterPutSettingsApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.ClusterPutSettings(f),
-			fluentAsync: (client, f) => client.ClusterPutSettingsAsync(f),
-			request: (client, r) => client.ClusterPutSettings(r),
-			requestAsync: (client, r) => client.ClusterPutSettingsAsync(r)
-		);
 
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override string UrlPath => "/_cluster/settings";
-
-		protected override int ExpectStatusCode => 400;
 		protected override bool ExpectIsValid => false;
 
+		protected override int ExpectStatusCode => 400;
+
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+
 		protected override ClusterPutSettingsRequest Initializer => new ClusterPutSettingsRequest
-		{
-		};
+			{ };
+
+		protected override string UrlPath => "/_cluster/settings";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.ClusterPutSettings(f),
+			(client, f) => client.ClusterPutSettingsAsync(f),
+			(client, r) => client.ClusterPutSettings(r),
+			(client, r) => client.ClusterPutSettingsAsync(r)
+		);
 
 		protected override void ExpectResponse(IClusterPutSettingsResponse response)
 		{
@@ -42,5 +44,4 @@ namespace Tests.Cluster.ClusterSettings.ClusterPutSettings
 	}
 
 	//TODO write a success test
-
 }

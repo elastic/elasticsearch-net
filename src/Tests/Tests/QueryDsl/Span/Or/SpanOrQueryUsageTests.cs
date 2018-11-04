@@ -4,7 +4,6 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.Joining.SpanOr
 {
@@ -12,18 +11,11 @@ namespace Tests.QueryDsl.Joining.SpanOr
 	{
 		public SpanOrUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object QueryJson => new
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISpanOrQuery>(a => a.SpanOr)
 		{
-			span_or = new
-			{
-				_name = "named_query",
-				boost = 1.1,
-				clauses = new[] {
-					new { span_term = new { field = new { value = "value1" } } },
-					new { span_term = new { field = new { value = "value2" } } },
-					new { span_term = new { field = new { value = "value3" } } }
-				}
-			}
+			q => q.Clauses = null,
+			q => q.Clauses = Enumerable.Empty<ISpanQuery>(),
+			q => q.Clauses = new[] { new SpanQuery() },
 		};
 
 		protected override QueryContainer QueryInitializer => new SpanOrQuery
@@ -38,6 +30,21 @@ namespace Tests.QueryDsl.Joining.SpanOr
 			},
 		};
 
+		protected override object QueryJson => new
+		{
+			span_or = new
+			{
+				_name = "named_query",
+				boost = 1.1,
+				clauses = new[]
+				{
+					new { span_term = new { field = new { value = "value1" } } },
+					new { span_term = new { field = new { value = "value2" } } },
+					new { span_term = new { field = new { value = "value3" } } }
+				}
+			}
+		};
+
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.SpanOr(sn => sn
 				.Name("named_query")
@@ -48,12 +55,5 @@ namespace Tests.QueryDsl.Joining.SpanOr
 					c => c.SpanTerm(st => st.Field("field").Value("value3"))
 				)
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISpanOrQuery>(a => a.SpanOr)
-		{
-			q => q.Clauses = null,
-			q => q.Clauses = Enumerable.Empty<ISpanQuery>(),
-			q => q.Clauses = new [] { new SpanQuery() },
-		};
 	}
 }

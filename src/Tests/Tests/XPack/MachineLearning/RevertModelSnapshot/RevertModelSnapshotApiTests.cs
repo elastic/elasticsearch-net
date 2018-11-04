@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -9,9 +8,33 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.MachineLearning.RevertModelSnapshot
 {
-	public class RevertModelSnapshotApiTests : MachineLearningIntegrationTestBase<IRevertModelSnapshotResponse, IRevertModelSnapshotRequest, RevertModelSnapshotDescriptor, RevertModelSnapshotRequest>
+	public class RevertModelSnapshotApiTests
+		: MachineLearningIntegrationTestBase<IRevertModelSnapshotResponse, IRevertModelSnapshotRequest, RevertModelSnapshotDescriptor,
+			RevertModelSnapshotRequest>
 	{
 		public RevertModelSnapshotApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+
+		protected override object ExpectJson => new
+		{
+			delete_intervening_results = true
+		};
+
+		protected override int ExpectStatusCode => 200;
+
+		protected override Func<RevertModelSnapshotDescriptor, IRevertModelSnapshotRequest> Fluent => f => f
+			.DeleteInterveningResults();
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
+		protected override RevertModelSnapshotRequest Initializer => new RevertModelSnapshotRequest(CallIsolatedValue, "first")
+		{
+			DeleteInterveningResults = true
+		};
+
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/_xpack/ml/anomaly_detectors/{CallIsolatedValue}/model_snapshots/first/_revert";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -30,32 +53,13 @@ namespace Tests.XPack.MachineLearning.RevertModelSnapshot
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.RevertModelSnapshot(CallIsolatedValue, "first", f),
-			fluentAsync: (client, f) => client.RevertModelSnapshotAsync(CallIsolatedValue, "first", f),
-			request: (client, r) => client.RevertModelSnapshot(r),
-			requestAsync: (client, r) => client.RevertModelSnapshotAsync(r)
+			(client, f) => client.RevertModelSnapshot(CallIsolatedValue, "first", f),
+			(client, f) => client.RevertModelSnapshotAsync(CallIsolatedValue, "first", f),
+			(client, r) => client.RevertModelSnapshot(r),
+			(client, r) => client.RevertModelSnapshotAsync(r)
 		);
 
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/_xpack/ml/anomaly_detectors/{CallIsolatedValue}/model_snapshots/first/_revert";
-		protected override bool SupportsDeserialization => false;
-
-		protected override object ExpectJson => new
-		{
-			delete_intervening_results = true
-		};
-
 		protected override RevertModelSnapshotDescriptor NewDescriptor() => new RevertModelSnapshotDescriptor(CallIsolatedValue, "first");
-
-		protected override Func<RevertModelSnapshotDescriptor, IRevertModelSnapshotRequest> Fluent => f => f
-			.DeleteInterveningResults();
-
-		protected override RevertModelSnapshotRequest Initializer => new RevertModelSnapshotRequest(CallIsolatedValue, "first")
-		{
-			DeleteInterveningResults = true
-		};
 
 		protected override void ExpectResponse(IRevertModelSnapshotResponse response)
 		{

@@ -5,6 +5,14 @@ namespace Tests.Mapping.Types.Core.Number
 {
 	public class NumberTest
 	{
+		public byte Byte { get; set; }
+
+		public decimal Decimal { get; set; }
+
+		public double Double { get; set; }
+
+		public float Float { get; set; }
+
 		[Number(
 			DocValues = true,
 			Similarity = "classic",
@@ -20,32 +28,24 @@ namespace Tests.Mapping.Types.Core.Number
 			ScalingFactor = 10)]
 		public double Full { get; set; }
 
-		[Number]
-		public double Minimal { get; set; }
-
-		public byte Byte { get; set; }
-
-		public short Short { get; set; }
-
 		public int Integer { get; set; }
 
 		public long Long { get; set; }
 
+		[Number]
+		public double Minimal { get; set; }
+
+		public short Short { get; set; }
+
 		public sbyte SignedByte { get; set; }
 
-		public ushort UnsignedShort { get; set; }
+		public TimeSpan TimeSpan { get; set; }
 
 		public uint UnsignedInteger { get; set; }
 
 		public ulong UnsignedLong { get; set; }
 
-		public float Float { get; set; }
-
-		public double Double { get; set; }
-
-		public decimal Decimal { get; set; }
-
-		public TimeSpan TimeSpan { get; set; }
+		public ushort UnsignedShort { get; set; }
 	}
 
 	public class NumberAttributeTests

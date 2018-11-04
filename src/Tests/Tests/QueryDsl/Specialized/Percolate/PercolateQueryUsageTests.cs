@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -12,9 +9,6 @@ using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.ManagedElasticsearch.NodeSeeders;
-using Xunit;
 
 namespace Tests.QueryDsl.Specialized.Percolate
 {
@@ -31,55 +25,42 @@ namespace Tests.QueryDsl.Specialized.Percolate
 	* contains a `match` query.
 	*/
 	[SkipVersion("5.0.0-alpha1", "percolate query changed property in query dsl from 'percolator' to 'percolate'")]
-	public class PercolateQueryUsageTests : ApiIntegrationTestBase<WritableCluster, ISearchResponse<PercolatedQuery>, ISearchRequest, SearchDescriptor<PercolatedQuery>, SearchRequest<PercolatedQuery>>
+	public class PercolateQueryUsageTests
+		: ApiIntegrationTestBase<WritableCluster, ISearchResponse<PercolatedQuery>, ISearchRequest, SearchDescriptor<PercolatedQuery>,
+			SearchRequest<PercolatedQuery>>
 	{
 		private static readonly string PercolatorId = RandomString();
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Search<PercolatedQuery>(f),
-			fluentAsync: (client, f) => client.SearchAsync<PercolatedQuery>(f),
-			request: (client, r) => client.Search<PercolatedQuery>(r),
-			requestAsync: (client, r) => client.SearchAsync<PercolatedQuery>(r)
-		);
-
-		protected override string UrlPath => $"{this.CallIsolatedValue}/_search";
-		protected override int ExpectStatusCode => 200;
-		protected override bool ExpectIsValid => true;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-
 		public PercolateQueryUsageTests(WritableCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
+		protected ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IPercolateQuery>(a => a.Percolate)
 		{
-			foreach (var index in values.Values)
+			q => { q.DocumentType = null; },
+			q => { q.Document = null; }
+		};
+
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+
+		//hide
+		protected override Func<SearchDescriptor<PercolatedQuery>, ISearchRequest> Fluent => f =>
+			f.Query(QueryFluent).Index(CallIsolatedValue).AllTypes();
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
+		//hide
+		protected override SearchRequest<PercolatedQuery> Initializer =>
+			new SearchRequest<PercolatedQuery>(CallIsolatedValue, Types.All)
 			{
-				this.Client.CreateIndex(index, c => c
-                    .Settings(settings=>settings
-                        .Analysis(DefaultSeeder.ProjectAnalysisSettings)
-                    )
-					.Mappings(m => m
-						.Map<Project>(mm => mm.AutoMap()
-							.Properties(DefaultSeeder.ProjectProperties)
-						)
-						.Map<PercolatedQuery>(mm => mm.AutoMap()
-							.Properties(DefaultSeeder.PercolatedQueryProperties)
-						)
-					)
-				);
+				Query = QueryInitializer
+			};
 
-				this.Client.Index(new PercolatedQuery
-				{
-					Id = PercolatorId,
-					Query = new QueryContainer(new MatchQuery
-					{
-						Field = Infer.Field<Project>(f => f.LeadDeveloper.FirstName),
-						Query = "Martijn"
-					})
-				}, d => d.Index(index));
-
-				this.Client.Refresh(index);
-			}
-		}
+		protected QueryContainer QueryInitializer => new PercolateQuery
+		{
+			DocumentType = typeof(Project),
+			Document = Project.Instance,
+			Field = Infer.Field<PercolatedQuery>(f => f.Query)
+		};
 
 		protected object QueryJson => new
 		{
@@ -91,23 +72,46 @@ namespace Tests.QueryDsl.Specialized.Percolate
 			}
 		};
 
-        //hide
-		protected override Func<SearchDescriptor<PercolatedQuery>, ISearchRequest> Fluent => f =>
-			f.Query(QueryFluent).Index(CallIsolatedValue).AllTypes();
+		protected override string UrlPath => $"{CallIsolatedValue}/_search";
 
-        //hide
-		protected override SearchRequest<PercolatedQuery> Initializer =>
-			new SearchRequest<PercolatedQuery>(CallIsolatedValue, Types.All)
-			{
-				Query = this.QueryInitializer
-			};
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.Search<PercolatedQuery>(f),
+			(client, f) => client.SearchAsync<PercolatedQuery>(f),
+			(client, r) => client.Search<PercolatedQuery>(r),
+			(client, r) => client.SearchAsync<PercolatedQuery>(r)
+		);
 
-		protected QueryContainer QueryInitializer => new PercolateQuery
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			DocumentType = typeof(Project),
-			Document = Project.Instance,
-			Field = Infer.Field<PercolatedQuery>(f => f.Query)
-		};
+			foreach (var index in values.Values)
+			{
+				Client.CreateIndex(index, c => c
+					.Settings(settings => settings
+						.Analysis(DefaultSeeder.ProjectAnalysisSettings)
+					)
+					.Mappings(m => m
+						.Map<Project>(mm => mm.AutoMap()
+							.Properties(DefaultSeeder.ProjectProperties)
+						)
+						.Map<PercolatedQuery>(mm => mm.AutoMap()
+							.Properties(DefaultSeeder.PercolatedQueryProperties)
+						)
+					)
+				);
+
+				Client.Index(new PercolatedQuery
+				{
+					Id = PercolatorId,
+					Query = new QueryContainer(new MatchQuery
+					{
+						Field = Infer.Field<Project>(f => f.LeadDeveloper.FirstName),
+						Query = "Martijn"
+					})
+				}, d => d.Index(index));
+
+				Client.Refresh(index);
+			}
+		}
 
 		protected QueryContainer QueryFluent(QueryContainerDescriptor<PercolatedQuery> q) => q
 			.Percolate(p => p
@@ -125,16 +129,6 @@ namespace Tests.QueryDsl.Specialized.Percolate
 			match.Id.Should().Be(PercolatorId);
 			((IQueryContainer)match.Query).Match.Should().NotBeNull();
 		}
-
-		protected ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IPercolateQuery>(a => a.Percolate)
-		{
-			q => {
-				q.DocumentType = null;
-			},
-			q => {
-				q.Document = null;
-			}
-		};
 	}
 
 	/**[float]
@@ -152,57 +146,38 @@ namespace Tests.QueryDsl.Specialized.Percolate
 	* See the Elasticsearch documentation on {ref_current}/query-dsl-percolate-query.html[percolate query] for more details.
 	*/
 	[SkipVersion("5.0.0-alpha1", "percolate query changed property in query dsl from 'percolator' to 'percolate'")]
-	public class PercolateQueryExistingDocumentUsageTests : ApiIntegrationTestBase<WritableCluster, ISearchResponse<PercolatedQuery>, ISearchRequest, SearchDescriptor<PercolatedQuery>, SearchRequest<PercolatedQuery>>
+	public class PercolateQueryExistingDocumentUsageTests
+		: ApiIntegrationTestBase<WritableCluster, ISearchResponse<PercolatedQuery>, ISearchRequest, SearchDescriptor<PercolatedQuery>,
+			SearchRequest<PercolatedQuery>>
 	{
 		private static readonly string PercolatorId = RandomString();
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Search<PercolatedQuery>(f),
-			fluentAsync: (client, f) => client.SearchAsync<PercolatedQuery>(f),
-			request: (client, r) => client.Search<PercolatedQuery>(r),
-			requestAsync: (client, r) => client.SearchAsync<PercolatedQuery>(r)
-		);
-
-		protected override string UrlPath => $"{this.CallIsolatedValue}/_search";
-		protected override int ExpectStatusCode => 200;
-		protected override bool ExpectIsValid => true;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-
 		public PercolateQueryExistingDocumentUsageTests(WritableCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+
 		//hide
-		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
-		{
-			foreach (var index in values.Values)
+		protected override Func<SearchDescriptor<PercolatedQuery>, ISearchRequest> Fluent => f =>
+			f.Query(QueryFluent).Index(CallIsolatedValue).AllTypes();
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
+		//hide
+		protected override SearchRequest<PercolatedQuery> Initializer =>
+			new SearchRequest<PercolatedQuery>(CallIsolatedValue, Types.All)
 			{
-				this.Client.CreateIndex(index, c => c
-                    .Settings(settings=>settings
-                        .Analysis(DefaultSeeder.ProjectAnalysisSettings)
-                    )
-					.Mappings(m => m
-						.Map<Project>(mm => mm.AutoMap()
-							.Properties(DefaultSeeder.ProjectProperties)
-						)
-						.Map<PercolatedQuery>(mm => mm.AutoMap()
-							.Properties(DefaultSeeder.PercolatedQueryProperties)
-						)
-					)
-				);
+				Query = QueryInitializer
+			};
 
-				this.Client.Index(new PercolatedQuery
-				{
-					Id = PercolatorId,
-					Query = new QueryContainer(new MatchQuery
-					{
-						Field = Infer.Field<Project>(f => f.LeadDeveloper.FirstName),
-						Query = "Martijn"
-					})
-				}, d => d.Index(index));
-
-				this.Client.Index(Project.Instance);
-				this.Client.Refresh(Nest.Indices.Index(index).And<Project>());
-			}
-		}
+		protected QueryContainer QueryInitializer => new PercolateQuery
+		{
+			Type = typeof(Project),
+			Index = IndexName.From<Project>(),
+			Id = Project.Instance.Name,
+			DocumentType = typeof(Project),
+			Field = Infer.Field<PercolatedQuery>(f => f.Query)
+		};
 
 		protected object QueryJson => new
 		{
@@ -216,33 +191,56 @@ namespace Tests.QueryDsl.Specialized.Percolate
 			}
 		};
 
-		//hide
-		protected override Func<SearchDescriptor<PercolatedQuery>, ISearchRequest> Fluent => f =>
-			f.Query(QueryFluent).Index(CallIsolatedValue).AllTypes();
+		protected override string UrlPath => $"{CallIsolatedValue}/_search";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.Search<PercolatedQuery>(f),
+			(client, f) => client.SearchAsync<PercolatedQuery>(f),
+			(client, r) => client.Search<PercolatedQuery>(r),
+			(client, r) => client.SearchAsync<PercolatedQuery>(r)
+		);
 
 		//hide
-		protected override SearchRequest<PercolatedQuery> Initializer =>
-			new SearchRequest<PercolatedQuery>(CallIsolatedValue, Types.All)
-			{
-				Query = this.QueryInitializer
-			};
-
-		protected QueryContainer QueryInitializer => new PercolateQuery
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			Type = typeof(Project),
-			Index = IndexName.From<Project>(),
-			Id = Project.Instance.Name,
-			DocumentType = typeof(Project),
-			Field = Infer.Field<PercolatedQuery>(f => f.Query)
-		};
+			foreach (var index in values.Values)
+			{
+				Client.CreateIndex(index, c => c
+					.Settings(settings => settings
+						.Analysis(DefaultSeeder.ProjectAnalysisSettings)
+					)
+					.Mappings(m => m
+						.Map<Project>(mm => mm.AutoMap()
+							.Properties(DefaultSeeder.ProjectProperties)
+						)
+						.Map<PercolatedQuery>(mm => mm.AutoMap()
+							.Properties(DefaultSeeder.PercolatedQueryProperties)
+						)
+					)
+				);
+
+				Client.Index(new PercolatedQuery
+				{
+					Id = PercolatorId,
+					Query = new QueryContainer(new MatchQuery
+					{
+						Field = Infer.Field<Project>(f => f.LeadDeveloper.FirstName),
+						Query = "Martijn"
+					})
+				}, d => d.Index(index));
+
+				Client.Index(Project.Instance);
+				Client.Refresh(Nest.Indices.Index(index).And<Project>());
+			}
+		}
 
 		protected QueryContainer QueryFluent(QueryContainerDescriptor<PercolatedQuery> q) => q
 			.Percolate(p => p
-				.Type<Project>()
-				.Index<Project>()
-				.Id(Project.Instance.Name)
-				.Field(f => f.Query)
-				.DocumentType<Project>() // <1> specify the `type`, `index`, `id`, `field`, `document_type` of the document to fetch, to percolate.
+					.Type<Project>()
+					.Index<Project>()
+					.Id(Project.Instance.Name)
+					.Field(f => f.Query)
+					.DocumentType<Project>() // <1> specify the `type`, `index`, `id`, `field`, `document_type` of the document to fetch, to percolate.
 			);
 
 		protected override void ExpectResponse(ISearchResponse<PercolatedQuery> response)

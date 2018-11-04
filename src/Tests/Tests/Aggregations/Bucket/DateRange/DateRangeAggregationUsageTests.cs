@@ -5,9 +5,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 using static Tests.Domain.Helpers.TestValueHelper;
 
@@ -75,7 +73,7 @@ namespace Tests.Aggregations.Bucket.DateRange
 					Field = Field<Project>(p => p.StartedOn),
 					Ranges = new List<DateRangeExpression>
 					{
-						new DateRangeExpression { From = DateMath.Anchored(FixedDate).Add("2d"), To = DateMath.Now},
+						new DateRangeExpression { From = DateMath.Anchored(FixedDate).Add("2d"), To = DateMath.Now },
 						new DateRangeExpression { To = DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(TimeUnit.Hour) },
 						new DateRangeExpression { From = DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m") }
 					},
@@ -99,10 +97,7 @@ namespace Tests.Aggregations.Bucket.DateRange
 
 			/** We specified three ranges so we expect to have three of them in the response */
 			dateHistogram.Buckets.Count.Should().Be(3);
-			foreach (var item in dateHistogram.Buckets)
-			{
-				item.DocCount.Should().BeGreaterThan(0);
-			}
+			foreach (var item in dateHistogram.Buckets) item.DocCount.Should().BeGreaterThan(0);
 		}
 	}
 }

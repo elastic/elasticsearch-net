@@ -7,7 +7,6 @@ using FluentAssertions;
 using Nest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Tests.Framework;
 
 namespace Tests.ClientConcepts.Serializer
 {
@@ -43,14 +42,14 @@ namespace Tests.ClientConcepts.Serializer
 		/// Unspecified = None
 		/// Utc = UTC Timezone identifier
 		/// Local = Local Timezone offset
-		/// Offset = Timezone offset specified 
+		/// Offset = Timezone offset specified
 		/// </remarks>
 		[U]
 		public void RoundTripKind()
 		{
 			var dateTimeZoneHandling = DateTimeZoneHandling.RoundtripKind;
 
-			var jsonWithRoundtripTimeZone = this.SerializeUsing(dateTimeZoneHandling);
+			var jsonWithRoundtripTimeZone = SerializeUsing(dateTimeZoneHandling);
 			var expected = @" {
 			   ""DepartureDate"": ""2013-01-21T00:00:00"",
 			   ""DepartureDateUtc"": ""2013-01-21T00:00:00Z"",
@@ -62,7 +61,7 @@ namespace Tests.ClientConcepts.Serializer
 
 			jsonWithRoundtripTimeZone.JsonEquals(expected).Should().BeTrue("{0}", jsonWithRoundtripTimeZone);
 
-			var flight = this.DeserializeUsing(jsonWithRoundtripTimeZone, dateTimeZoneHandling);
+			var flight = DeserializeUsing(jsonWithRoundtripTimeZone, dateTimeZoneHandling);
 
 			flight.Should().Be(_flight);
 			flight.DepartureDate.Kind.Should().Be(_flight.DepartureDate.Kind);
@@ -87,7 +86,7 @@ namespace Tests.ClientConcepts.Serializer
 
 			var departureDateLocalInUtc = TimeZoneInfo.ConvertTime(_flight.DepartureDateLocal, TimeZoneInfo.Local, TimeZoneInfo.Utc);
 
-			var jsonWithUtcTimeZone = this.SerializeUsing(dateTimeZoneHandling);
+			var jsonWithUtcTimeZone = SerializeUsing(dateTimeZoneHandling);
 			var expected = @" {
 			   ""DepartureDate"": ""2013-01-21T00:00:00Z"",
 			   ""DepartureDateUtc"": ""2013-01-21T00:00:00Z"",
@@ -99,7 +98,7 @@ namespace Tests.ClientConcepts.Serializer
 
 			jsonWithUtcTimeZone.JsonEquals(expected).Should().BeTrue("{0}", jsonWithUtcTimeZone);
 
-			var flight = this.DeserializeUsing(jsonWithUtcTimeZone, dateTimeZoneHandling);
+			var flight = DeserializeUsing(jsonWithUtcTimeZone, dateTimeZoneHandling);
 
 			flight.DepartureDate.Should().Be(_flight.DepartureDate);
 			flight.DepartureDate.Kind.Should().Be(dateTimeKind);
@@ -131,7 +130,7 @@ namespace Tests.ClientConcepts.Serializer
 			var dateTimeZoneHandling = DateTimeZoneHandling.Unspecified;
 			var dateTimeKind = DateTimeKind.Unspecified;
 
-			var jsonWithUnspecifiedTimeZone = this.SerializeUsing(dateTimeZoneHandling);
+			var jsonWithUnspecifiedTimeZone = SerializeUsing(dateTimeZoneHandling);
 			var expected = @" {
 			   ""DepartureDate"": ""2013-01-21T00:00:00"",
 			   ""DepartureDateUtc"": ""2013-01-21T00:00:00"",
@@ -143,7 +142,7 @@ namespace Tests.ClientConcepts.Serializer
 
 			jsonWithUnspecifiedTimeZone.JsonEquals(expected).Should().BeTrue("{0}", jsonWithUnspecifiedTimeZone);
 
-			var flight = this.DeserializeUsing(jsonWithUnspecifiedTimeZone, dateTimeZoneHandling);
+			var flight = DeserializeUsing(jsonWithUnspecifiedTimeZone, dateTimeZoneHandling);
 
 			flight.Should().Be(_flight);
 			flight.DepartureDate.Kind.Should().Be(dateTimeKind);
@@ -160,7 +159,7 @@ namespace Tests.ClientConcepts.Serializer
 			var dateTimeZoneHandling = DateTimeZoneHandling.Local;
 			var dateTimeKind = DateTimeKind.Local;
 
-			var jsonWithLocalTimeZone = this.SerializeUsing(dateTimeZoneHandling);
+			var jsonWithLocalTimeZone = SerializeUsing(dateTimeZoneHandling);
 			var departureDateUtcInLocal = TimeZoneInfo.ConvertTime(_flight.DepartureDateUtc, TimeZoneInfo.Utc, TimeZoneInfo.Local);
 
 			var expected = @"
@@ -175,7 +174,7 @@ namespace Tests.ClientConcepts.Serializer
 
 			jsonWithLocalTimeZone.JsonEquals(expected).Should().BeTrue("{0}", jsonWithLocalTimeZone);
 
-			var flight = this.DeserializeUsing(jsonWithLocalTimeZone, dateTimeZoneHandling);
+			var flight = DeserializeUsing(jsonWithLocalTimeZone, dateTimeZoneHandling);
 
 			flight.DepartureDate.Should().Be(_flight.DepartureDate);
 			flight.DepartureDate.Kind.Should().Be(dateTimeKind);
@@ -221,44 +220,36 @@ namespace Tests.ClientConcepts.Serializer
 		{
 			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 			var settings = new ConnectionSettings(pool, new InMemoryConnection(), new SerializerFactory(
-					(serializerSettings, connectionSettings) =>
-					{
-						serializerSettings.DateTimeZoneHandling = handling;
-					}))
+					(serializerSettings, connectionSettings) => { serializerSettings.DateTimeZoneHandling = handling; }))
 				.DefaultFieldNameInferrer(p => p);
 
 			var client = new ElasticClient(settings);
-			using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
-			{
-				return client.Serializer.Deserialize<Flight>(stream);
-			}
+			using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(json))) return client.Serializer.Deserialize<Flight>(stream);
 		}
 	}
 
 	internal class Flight
 	{
 		public DateTime DepartureDate { get; set; }
-		public DateTime DepartureDateUtc { get; set; }
 		public DateTime DepartureDateLocal { get; set; }
 		public DateTimeOffset DepartureDateOffset { get; set; }
-		public DateTimeOffset DepartureDateOffsetZero { get; set; }
 		public DateTimeOffset DepartureDateOffsetNonLocal { get; set; }
+		public DateTimeOffset DepartureDateOffsetZero { get; set; }
+		public DateTime DepartureDateUtc { get; set; }
 
-		protected bool Equals(Flight other)
-		{
-			return DepartureDate.Equals(other.DepartureDate) &&
-			       DepartureDateUtc.Equals(other.DepartureDateUtc) &&
-			       DepartureDateLocal.Equals(other.DepartureDateLocal) &&
-			       DepartureDateOffset.Equals(other.DepartureDateOffset) &&
-			       DepartureDateOffsetZero.Equals(other.DepartureDateOffsetZero) &&
-			       DepartureDateOffsetNonLocal.Equals(other.DepartureDateOffsetNonLocal);
-		}
+		protected bool Equals(Flight other) => DepartureDate.Equals(other.DepartureDate) &&
+			DepartureDateUtc.Equals(other.DepartureDateUtc) &&
+			DepartureDateLocal.Equals(other.DepartureDateLocal) &&
+			DepartureDateOffset.Equals(other.DepartureDateOffset) &&
+			DepartureDateOffsetZero.Equals(other.DepartureDateOffsetZero) &&
+			DepartureDateOffsetNonLocal.Equals(other.DepartureDateOffsetNonLocal);
 
 		public override bool Equals(object obj)
 		{
 			if (ReferenceEquals(null, obj)) return false;
 			if (ReferenceEquals(this, obj)) return true;
-			if (obj.GetType() != this.GetType()) return false;
+			if (obj.GetType() != GetType()) return false;
+
 			return Equals((Flight)obj);
 		}
 

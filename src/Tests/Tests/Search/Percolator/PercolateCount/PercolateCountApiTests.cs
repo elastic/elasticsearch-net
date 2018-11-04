@@ -14,25 +14,12 @@ namespace Tests.Search.Percolator.PercolateCount
 {
 	[SkipVersion(">5.0.0-alpha1", "deprecated")]
 	public class PercolateCountApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IPercolateCountResponse, IPercolateCountRequest<Project>, PercolateCountDescriptor<Project>, PercolateCountRequest<Project>>
+		: ApiIntegrationTestBase<ReadOnlyCluster, IPercolateCountResponse, IPercolateCountRequest<Project>, PercolateCountDescriptor<Project>,
+			PercolateCountRequest<Project>>
 	{
 		public PercolateCountApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.PercolateCount(f),
-			fluentAsync: (c, f) => c.PercolateCountAsync(f),
-			request: (c, r) => c.PercolateCount(r),
-			requestAsync: (c, r) => c.PercolateCountAsync(r)
-		);
-
-		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/project/project/_percolate/count";
-
-		protected override PercolateCountDescriptor<Project> NewDescriptor() => new PercolateCountDescriptor<Project>(typeof(Project), typeof(Project));
-
-		protected override bool SupportsDeserialization => false;
 
 		protected override object ExpectJson => new
 		{
@@ -50,10 +37,7 @@ namespace Tests.Search.Percolator.PercolateCount
 			}
 		};
 
-		protected override void ExpectResponse(IPercolateCountResponse response)
-		{
-			response.Took.Should().BeGreaterThan(0);
-		}
+		protected override int ExpectStatusCode => 200;
 
 		protected override Func<PercolateCountDescriptor<Project>, IPercolateCountRequest<Project>> Fluent => c => c
 			.Document(Project.Instance)
@@ -65,6 +49,8 @@ namespace Tests.Search.Percolator.PercolateCount
 				)
 			);
 
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
 		protected override PercolateCountRequest<Project> Initializer => new PercolateCountRequest<Project>
 		{
 			Document = Project.Instance,
@@ -75,32 +61,49 @@ namespace Tests.Search.Percolator.PercolateCount
 				Format = "yyyy/MM/dd"
 			})
 		};
+
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => "/project/project/_percolate/count";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(c, f) => c.PercolateCount(f),
+			(c, f) => c.PercolateCountAsync(f),
+			(c, r) => c.PercolateCount(r),
+			(c, r) => c.PercolateCountAsync(r)
+		);
+
+		protected override PercolateCountDescriptor<Project> NewDescriptor() =>
+			new PercolateCountDescriptor<Project>(typeof(Project), typeof(Project));
+
+		protected override void ExpectResponse(IPercolateCountResponse response) => response.Took.Should().BeGreaterThan(0);
 	}
 
 	[SkipVersion(">5.0.0-alpha1", "deprecated")]
 	public class PercolateCountExistingDocApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IPercolateCountResponse, IPercolateCountRequest<Project>, PercolateCountDescriptor<Project>, PercolateCountRequest<Project>>
+		: ApiIntegrationTestBase<ReadOnlyCluster, IPercolateCountResponse, IPercolateCountRequest<Project>, PercolateCountDescriptor<Project>,
+			PercolateCountRequest<Project>>
 	{
+		private readonly string _percolateId = Project.Instance.Name;
+
 		public PercolateCountExistingDocApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.PercolateCount<Project>(p => p.Id(_percolateId)),
-			fluentAsync: (c, f) => c.PercolateCountAsync<Project>(p => p.Id(_percolateId)),
-			request: (c, r) => c.PercolateCount(r),
-			requestAsync: (c, r) => c.PercolateCountAsync(r)
-		);
-
-		private string _percolateId = Project.Instance.Name;
+		protected override bool ExpectIsValid => true;
 
 		protected override int ExpectStatusCode => 200;
-		protected override bool ExpectIsValid => true;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"project/project/{UrlEncode(_percolateId)}/_percolate/count";
-
-		protected override bool SupportsDeserialization => false;
 
 		protected override Func<PercolateCountDescriptor<Project>, IPercolateCountRequest<Project>> Fluent => null;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected override PercolateCountRequest<Project> Initializer => new PercolateCountRequest<Project>(_percolateId);
+
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"project/project/{UrlEncode(_percolateId)}/_percolate/count";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(c, f) => c.PercolateCount<Project>(p => p.Id(_percolateId)),
+			(c, f) => c.PercolateCountAsync<Project>(p => p.Id(_percolateId)),
+			(c, r) => c.PercolateCount(r),
+			(c, r) => c.PercolateCountAsync(r)
+		);
 	}
 }

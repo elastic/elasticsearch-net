@@ -1,34 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using Elasticsearch.Net;
 using Nest;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Xunit;
-using System.Collections.Generic;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework;
+using Tests.Framework.Integration;
 
 namespace Tests.Ingest.PutPipeline
 {
 	public class PutPipelineApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, IPutPipelineResponse, IPutPipelineRequest, PutPipelineDescriptor, PutPipelineRequest>
 	{
-		public PutPipelineApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
 		private static readonly string _id = "pipeline-1";
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.PutPipeline(_id, f),
-			fluentAsync: (client, f) => client.PutPipelineAsync(_id, f),
-			request: (client, r) => client.PutPipeline(r),
-			requestAsync: (client, r) => client.PutPipelineAsync(r)
-		);
+		public PutPipelineApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override string UrlPath => $"/_ingest/pipeline/{_id}";
-		protected override bool SupportsDeserialization => false;
-		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
 
 		protected override object ExpectJson { get; } = new
@@ -41,7 +28,7 @@ namespace Tests.Ingest.PutPipeline
 					append = new
 					{
 						field = "state",
-						value = new [] { "Stable", "VeryActive" }
+						value = new[] { "Stable", "VeryActive" }
 					}
 				},
 				new
@@ -59,7 +46,7 @@ namespace Tests.Ingest.PutPipeline
 					{
 						field = "startedOn",
 						target_field = "timestamp",
-						formats = new [] { "dd/MM/yyyy hh:mm:ss" },
+						formats = new[] { "dd/MM/yyyy hh:mm:ss" },
 						timezone = "Europe/Amsterdam"
 					}
 				},
@@ -183,7 +170,7 @@ namespace Tests.Ingest.PutPipeline
 			}
 		};
 
-		protected override PutPipelineDescriptor NewDescriptor() => new PutPipelineDescriptor(_id);
+		protected override int ExpectStatusCode => 200;
 
 		protected override Func<PutPipelineDescriptor, IPutPipelineRequest> Fluent => d => d
 			.Description("My test pipeline")
@@ -263,6 +250,8 @@ namespace Tests.Ingest.PutPipeline
 				)
 			);
 
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+
 		protected override PutPipelineRequest Initializer => new PutPipelineRequest(_id)
 		{
 			Description = "My test pipeline",
@@ -271,7 +260,7 @@ namespace Tests.Ingest.PutPipeline
 				new AppendProcessor
 				{
 					Field = "state",
-					Value = new object [] { StateOfBeing.Stable, StateOfBeing.VeryActive }
+					Value = new object[] { StateOfBeing.Stable, StateOfBeing.VeryActive }
 				},
 				new ConvertProcessor
 				{
@@ -283,7 +272,7 @@ namespace Tests.Ingest.PutPipeline
 				{
 					Field = "startedOn",
 					TargetField = "timestamp",
-					Formats = new string [] { "dd/MM/yyyy hh:mm:ss"},
+					Formats = new string[] { "dd/MM/yyyy hh:mm:ss" },
 					Timezone = "Europe/Amsterdam"
 				},
 				new FailProcessor
@@ -301,7 +290,7 @@ namespace Tests.Ingest.PutPipeline
 				new GrokProcessor
 				{
 					Field = "description",
-					Patterns = new [] { "my %{FAVORITE_DOG:dog} is colored %{RGB:color}" },
+					Patterns = new[] { "my %{FAVORITE_DOG:dog} is colored %{RGB:color}" },
 					PatternDefinitions = new Dictionary<string, string>
 					{
 						{ "FAVORITE_DOG", "border collie" },
@@ -360,5 +349,17 @@ namespace Tests.Ingest.PutPipeline
 				}
 			}
 		};
+
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/_ingest/pipeline/{_id}";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.PutPipeline(_id, f),
+			(client, f) => client.PutPipelineAsync(_id, f),
+			(client, r) => client.PutPipeline(r),
+			(client, r) => client.PutPipelineAsync(r)
+		);
+
+		protected override PutPipelineDescriptor NewDescriptor() => new PutPipelineDescriptor(_id);
 	}
 }

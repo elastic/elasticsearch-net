@@ -11,74 +11,73 @@ using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.ManagedElasticsearch.NodeSeeders;
-using Xunit;
 
 #pragma warning disable 618 // testing deprecated percolate APIs
 
 namespace Tests.Search.Percolator.MultiPercolate
 {
-    [SkipVersion(">5.0.0-alpha1", "Deprecated. percolation changed in 5 to support percolate queries. Remove?")]
-    public class MultiPercolateApiTests : ApiIntegrationTestBase<WritableCluster, IMultiPercolateResponse, IMultiPercolateRequest, MultiPercolateDescriptor, MultiPercolateRequest>
+	[SkipVersion(">5.0.0-alpha1", "Deprecated. percolation changed in 5 to support percolate queries. Remove?")]
+	public class MultiPercolateApiTests
+		: ApiIntegrationTestBase<WritableCluster, IMultiPercolateResponse, IMultiPercolateRequest, MultiPercolateDescriptor, MultiPercolateRequest>
 	{
 		public MultiPercolateApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		public string Index => this.CallIsolatedValue + "-index";
-
-		protected override void OnBeforeCall(IElasticClient client)
-		{
-			var createIndex = this.Client.CreateIndex(this.Index, c=>c
-				.Mappings(mm=>mm
-					.Map<Project>(m => m.Properties(DefaultSeeder.ProjectProperties))
-				)
-			);
-			this.Client.ClusterHealth(h => h.WaitForStatus(WaitForStatus.Yellow).Index(this.Index));
-			this.Client.Index(Project.Instance, s => s.Index(this.Index).Refresh(Refresh.True));
-			var registerPercolator = this.Client.RegisterPercolator<Project>("match_all", r => r
-				.Index(this.Index)
-				.Query(q => q.MatchAll())
-			);
-
-			this.Client.Refresh(this.Index);
-		}
-
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.MultiPercolate(f),
-			fluentAsync: (c, f) => c.MultiPercolateAsync(f),
-			request: (c, r) => c.MultiPercolate(r),
-			requestAsync: (c, r) => c.MultiPercolateAsync(r)
-		);
-
-		protected override int ExpectStatusCode => 200;
+		public string Index => CallIsolatedValue + "-index";
 		protected override bool ExpectIsValid => true;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/{this.Index}/project/_mpercolate";
-
-		protected override bool SupportsDeserialization => false;
 
 		protected override object ExpectJson => new object[]
 		{
-			new Dictionary<string, object>{ { "percolate", new {} } },
+			new Dictionary<string, object> { { "percolate", new { } } },
 			new { doc = Project.InstanceAnonymous },
-			new Dictionary<string, object>{ { "count", new {} } },
+			new Dictionary<string, object> { { "count", new { } } },
 			new { doc = Project.InstanceAnonymous },
 		};
 
-		protected override Func<MultiPercolateDescriptor, IMultiPercolateRequest> Fluent => m => m
-			.Index(this.Index)
-			.Type(typeof(Project))
-			.Percolate<Project>(p => p.Document(Project.Instance).Index(this.Index))
-			.Count<Project>(p => p.Document(Project.Instance).Index(this.Index));
+		protected override int ExpectStatusCode => 200;
 
-		protected override MultiPercolateRequest Initializer => new MultiPercolateRequest(this.Index, typeof(Project))
+		protected override Func<MultiPercolateDescriptor, IMultiPercolateRequest> Fluent => m => m
+			.Index(Index)
+			.Type(typeof(Project))
+			.Percolate<Project>(p => p.Document(Project.Instance).Index(Index))
+			.Count<Project>(p => p.Document(Project.Instance).Index(Index));
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
+		protected override MultiPercolateRequest Initializer => new MultiPercolateRequest(Index, typeof(Project))
 		{
 			Percolations = new List<IPercolateOperation>
 			{
-				new PercolateRequest<Project>(Project.Instance, this.Index),
-				new PercolateCountRequest<Project>(Project.Instance, this.Index)
+				new PercolateRequest<Project>(Project.Instance, Index),
+				new PercolateCountRequest<Project>(Project.Instance, Index)
 			}
 		};
+
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/{Index}/project/_mpercolate";
+
+		protected override void OnBeforeCall(IElasticClient client)
+		{
+			var createIndex = Client.CreateIndex(Index, c => c
+				.Mappings(mm => mm
+					.Map<Project>(m => m.Properties(DefaultSeeder.ProjectProperties))
+				)
+			);
+			Client.ClusterHealth(h => h.WaitForStatus(WaitForStatus.Yellow).Index(Index));
+			Client.Index(Project.Instance, s => s.Index(Index).Refresh(Refresh.True));
+			var registerPercolator = Client.RegisterPercolator<Project>("match_all", r => r
+				.Index(Index)
+				.Query(q => q.MatchAll())
+			);
+
+			Client.Refresh(Index);
+		}
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(c, f) => c.MultiPercolate(f),
+			(c, f) => c.MultiPercolateAsync(f),
+			(c, r) => c.MultiPercolate(r),
+			(c, r) => c.MultiPercolateAsync(r)
+		);
 
 		protected override void ExpectResponse(IMultiPercolateResponse response)
 		{
@@ -91,7 +90,7 @@ namespace Tests.Search.Percolator.MultiPercolate
 			}
 
 			responses[0].Matches.Should().NotBeEmpty().And.HaveCount(1);
-			foreach(var m in responses[0].Matches)
+			foreach (var m in responses[0].Matches)
 			{
 				m.Id.Should().NotBeNullOrEmpty();
 				m.Index.Should().NotBeNullOrEmpty();

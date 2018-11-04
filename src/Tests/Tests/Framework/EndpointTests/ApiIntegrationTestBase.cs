@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Net;
+using System.Net.Http;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
-using Elastic.Xunit.XunitPlumbing;
 using Elastic.Managed.Ephemeral;
-using Elasticsearch.Net;
+using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using Nest;
@@ -12,39 +11,38 @@ using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Framework
 {
 	public abstract class ApiIntegrationTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		: ApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
-		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster , new()
+		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster, new()
 		where TResponse : class, IResponse
 		where TDescriptor : class, TInterface
 		where TInitializer : class, TInterface
 		where TInterface : class
 	{
-		protected abstract int ExpectStatusCode { get; }
-		protected abstract bool ExpectIsValid { get; }
-		protected virtual void ExpectResponse(TResponse response) { }
-
 		protected ApiIntegrationTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override IElasticClient Client => Cluster.Client;
+		protected abstract bool ExpectIsValid { get; }
+		protected abstract int ExpectStatusCode { get; }
 
 		protected override TInitializer Initializer => Activator.CreateInstance<TInitializer>();
 
-		protected override IElasticClient Client => this.Cluster.Client;
+		protected virtual void ExpectResponse(TResponse response) { }
 
-		[I] public async virtual Task HandlesStatusCode() =>
-			await this.AssertOnAllResponses(r => r.ApiCall.HttpStatusCode.Should().Be(this.ExpectStatusCode));
+		[I] public virtual async Task HandlesStatusCode() =>
+			await AssertOnAllResponses(r => r.ApiCall.HttpStatusCode.Should().Be(ExpectStatusCode));
 
-		[I] public async virtual Task ReturnsExpectedIsValid() =>
-			await this.AssertOnAllResponses(r => r.ShouldHaveExpectedIsValid(this.ExpectIsValid));
+		[I] public virtual async Task ReturnsExpectedIsValid() =>
+			await AssertOnAllResponses(r => r.ShouldHaveExpectedIsValid(ExpectIsValid));
 
-		[I] public async virtual Task ReturnsExpectedResponse() => await this.AssertOnAllResponses(ExpectResponse);
+		[I] public virtual async Task ReturnsExpectedResponse() => await AssertOnAllResponses(ExpectResponse);
 
 		protected override Task AssertOnAllResponses(Action<TResponse> assert)
 		{
-			if (!this.ExpectIsValid) return base.AssertOnAllResponses(assert);
+			if (!ExpectIsValid) return base.AssertOnAllResponses(assert);
 
 			return base.AssertOnAllResponses((r) =>
 			{
@@ -60,14 +58,13 @@ namespace Tests.Framework
 					assert(r);
 					var failures = scope.Discard();
 					if (failures.Length <= 0) return;
-					
+
 					var failure = failures[0];
 					scope.AddReportable("Failure", failure);
 					scope.AddReportable("DebugInformation", r.DebugInformation);
-					scope.FailWith( $@"{{Failure}}
+					scope.FailWith($@"{{Failure}}
 Response Under Test:
 {{DebugInformation}}");
-
 				}
 			});
 		}
@@ -75,7 +72,7 @@ Response Under Test:
 		private static bool IsNotRequestExceptionType(Type exceptionType)
 		{
 #if DOTNETCORE
-			return exceptionType != typeof(System.Net.Http.HttpRequestException);
+			return exceptionType != typeof(HttpRequestException);
 #else
 			return exceptionType != typeof(WebException);
 #endif

@@ -7,26 +7,26 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Cluster.NodesStats
 {
 	//TODO: re-evaluate which numerics are safe to assert greater then 0 and add better error messages so we can see which numeric assertion fails on CI.
-	public class NodesStatsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, INodesStatsResponse, INodesStatsRequest, NodesStatsDescriptor, NodesStatsRequest>
+	public class NodesStatsApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, INodesStatsResponse, INodesStatsRequest, NodesStatsDescriptor, NodesStatsRequest>
 	{
 		public NodesStatsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.NodesStats(),
-			fluentAsync: (client, f) => client.NodesStatsAsync(),
-			request: (client, r) => client.NodesStats(r),
-			requestAsync: (client, r) => client.NodesStatsAsync(r)
-		);
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_nodes/stats";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.NodesStats(),
+			(client, f) => client.NodesStatsAsync(),
+			(client, r) => client.NodesStats(r),
+			(client, r) => client.NodesStatsAsync(r)
+		);
 
 		protected override void ExpectResponse(INodesStatsResponse response)
 		{
@@ -131,25 +131,11 @@ namespace Tests.Cluster.NodesStats
 			//process.Memory.TotalVirtualInBytes.Should().BeGreaterThan(0);
 		}
 
-		protected void Assert(ScriptStats script)
-		{
-			script.Should().NotBeNull();
-		}
+		protected void Assert(ScriptStats script) => script.Should().NotBeNull();
 
-		protected void Assert(TransportStats transport)
-		{
-			transport.Should().NotBeNull();
-			//transport.RXCount.Should().BeGreaterThan(0);
-			//transport.RXSizeInBytes.Should().BeGreaterThan(0);
-			//transport.TXCount.Should().BeGreaterThan(0);
-			//transport.TXSizeInBytes.Should().BeGreaterThan(0);
-		}
+		protected void Assert(TransportStats transport) => transport.Should().NotBeNull();
 
-		protected void Assert(HttpStats http)
-		{
-			http.Should().NotBeNull();
-			//http.TotalOpened.Should().BeGreaterThan(0);
-		}
+		protected void Assert(HttpStats http) => http.Should().NotBeNull();
 
 		protected void Assert(Dictionary<string, BreakerStats> breakers)
 		{
@@ -205,7 +191,7 @@ namespace Tests.Cluster.NodesStats
 
 			jvm.GarbageCollection.Should().NotBeNull();
 			jvm.GarbageCollection.Collectors.Should().NotBeEmpty().And.ContainKey("young");
-			var youngGc=  jvm.GarbageCollection.Collectors["young"];
+			var youngGc = jvm.GarbageCollection.Collectors["young"];
 			youngGc.Should().NotBeNull();
 			//youngGc.CollectionCount.Should().BeGreaterThan(0);
 			//youngGc.CollectionTimeInMilliseconds.Should().BeGreaterThan(0);

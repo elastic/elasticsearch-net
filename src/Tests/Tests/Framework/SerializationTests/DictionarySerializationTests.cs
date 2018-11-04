@@ -24,7 +24,7 @@ namespace Tests.Framework
 				{ "Key2", "value2" },
 			});
 
-			Object(isADictionary).RoundTrips(this.ExpectJson);
+			Object(isADictionary).RoundTrips(ExpectJson);
 		}
 
 		private class MyIsADictionary : IsADictionaryBase<object, object>
@@ -35,7 +35,7 @@ namespace Tests.Framework
 
 	public class DictionarySerializationTests
 	{
-		protected object ExpectJson => new { Key1 = "value1", Key2 ="value2", };
+		protected object ExpectJson => new { Key1 = "value1", Key2 = "value2", };
 
 		[U]
 		public void CanSerializeCustomGenericDictionary()
@@ -46,19 +46,19 @@ namespace Tests.Framework
 				{ "Key2", "value2" },
 			};
 
-			Object(dictionary).RoundTrips(this.ExpectJson);
+			Object(dictionary).RoundTrips(ExpectJson);
 		}
 
 		[U]
 		public void CanSerializeGenericDictionary()
 		{
-			var dictionary = new Dictionary<string,string>
+			var dictionary = new Dictionary<string, string>
 			{
 				{ "Key1", "value1" },
 				{ "Key2", "value2" },
 			};
 
-			Object(dictionary).RoundTrips(this.ExpectJson);
+			Object(dictionary).RoundTrips(ExpectJson);
 		}
 
 		[U]
@@ -71,7 +71,7 @@ namespace Tests.Framework
 					{ "Key2", "value2" },
 				});
 
-			Object(dictionary).RoundTrips(this.ExpectJson);
+			Object(dictionary).RoundTrips(ExpectJson);
 		}
 
 		[U]
@@ -83,7 +83,7 @@ namespace Tests.Framework
 				{ "Key2", "value2" },
 			};
 
-			Object(dictionary).RoundTrips(this.ExpectJson);
+			Object(dictionary).RoundTrips(ExpectJson);
 		}
 
 		[U]
@@ -95,7 +95,7 @@ namespace Tests.Framework
 				{ "Key2", "value2" },
 			});
 
-			Object(dictionary).RoundTrips(this.ExpectJson);
+			Object(dictionary).RoundTrips(ExpectJson);
 		}
 
 		[U]
@@ -107,7 +107,7 @@ namespace Tests.Framework
 				{ "Key2", "value2" },
 			};
 
-			Object(hashTable).RoundTrips(this.ExpectJson);
+			Object(hashTable).RoundTrips(ExpectJson);
 		}
 
 		[U]
@@ -119,83 +119,91 @@ namespace Tests.Framework
 				{ "Key2", "value2" },
 			};
 
-			Object(hashTable).RoundTrips(this.ExpectJson);
+			Object(hashTable).RoundTrips(ExpectJson);
 		}
 
 		private class MyDictionary : IDictionary
 		{
 			private readonly IDictionary _dictionary = new Hashtable();
 
-			public bool Contains(object key) => _dictionary.Contains(key);
+			public int Count => _dictionary.Count;
+
+			public bool IsFixedSize => _dictionary.IsFixedSize;
+
+			public bool IsReadOnly => _dictionary.IsReadOnly;
+
+			public bool IsSynchronized => _dictionary.IsSynchronized;
+
+			public object this[object key]
+			{
+				get => _dictionary[key];
+				set => _dictionary[key] = value;
+			}
+
+			public ICollection Keys => _dictionary.Keys;
+
+			public object SyncRoot => _dictionary.SyncRoot;
+
+			public ICollection Values => _dictionary.Values;
+
+			public void CopyTo(Array array, int index) => _dictionary.CopyTo(array, index);
 
 			public void Add(object key, object value) => _dictionary.Add(key, value);
 
 			public void Clear() => _dictionary.Clear();
 
+			public bool Contains(object key) => _dictionary.Contains(key);
+
 			public IDictionaryEnumerator GetEnumerator() => _dictionary.GetEnumerator();
 
 			public void Remove(object key) => _dictionary.Remove(key);
 
-			public object this[object key]
-			{
-				get { return _dictionary[key]; }
-				set { _dictionary[key] = value; }
-			}
-
-			public ICollection Keys => _dictionary.Keys;
-
-			public ICollection Values => _dictionary.Values;
-
-			public bool IsReadOnly => _dictionary.IsReadOnly;
-
-			public bool IsFixedSize => _dictionary.IsFixedSize;
-
 			IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_dictionary).GetEnumerator();
-
-			public void CopyTo(Array array, int index) => _dictionary.CopyTo(array, index);
-
-			public int Count => _dictionary.Count;
-
-			public object SyncRoot => _dictionary.SyncRoot;
-
-			public bool IsSynchronized => _dictionary.IsSynchronized;
 		}
 
-		private class MyGenericDictionary : Dictionary<string, string> {}
+		private class MyGenericDictionary : Dictionary<string, string> { }
 
 		private class MyGenericIReadOnlyDictionary : IReadOnlyDictionary<object, object>
 		{
 			private readonly IDictionary<object, object> _backingDictionary;
 
-			public MyGenericIReadOnlyDictionary(IDictionary<object, object> dictionary)
-			{
+			public MyGenericIReadOnlyDictionary(IDictionary<object, object> dictionary) =>
 				_backingDictionary = dictionary ?? new Dictionary<object, object>();
-			}
-
-			public IEnumerator<KeyValuePair<object, object>> GetEnumerator() => _backingDictionary.GetEnumerator();
-
-			IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_backingDictionary).GetEnumerator();
 
 			public int Count => _backingDictionary.Count;
-
-			public bool ContainsKey(object key) => _backingDictionary.ContainsKey(key);
-
-			public bool TryGetValue(object key, out object value) => _backingDictionary.TryGetValue(key, out value);
 
 			public object this[object key] => _backingDictionary[key];
 
 			public IEnumerable<object> Keys => _backingDictionary.Keys;
 
 			public IEnumerable<object> Values => _backingDictionary.Values;
+
+			IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_backingDictionary).GetEnumerator();
+
+			public IEnumerator<KeyValuePair<object, object>> GetEnumerator() => _backingDictionary.GetEnumerator();
+
+			public bool ContainsKey(object key) => _backingDictionary.ContainsKey(key);
+
+			public bool TryGetValue(object key, out object value) => _backingDictionary.TryGetValue(key, out value);
 		}
 
 		private class MyGenericIDictionary : IDictionary<object, object>
 		{
 			private readonly IDictionary<object, object> _backingDictionary = new Dictionary<object, object>();
 
-			public IEnumerator<KeyValuePair<object, object>> GetEnumerator() => _backingDictionary.GetEnumerator();
+			public int Count => _backingDictionary.Count;
 
-			IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_backingDictionary).GetEnumerator();
+			public bool IsReadOnly => _backingDictionary.IsReadOnly;
+
+			public object this[object key]
+			{
+				get => _backingDictionary[key];
+				set => _backingDictionary[key] = value;
+			}
+
+			public ICollection<object> Keys => _backingDictionary.Keys;
+
+			public ICollection<object> Values => _backingDictionary.Values;
 
 			public void Add(KeyValuePair<object, object> item) => _backingDictionary.Add(item);
 
@@ -207,27 +215,17 @@ namespace Tests.Framework
 
 			public bool Remove(KeyValuePair<object, object> item) => _backingDictionary.Remove(item);
 
-			public int Count => _backingDictionary.Count;
-
-			public bool IsReadOnly => _backingDictionary.IsReadOnly;
+			public void Add(object key, object value) => _backingDictionary.Add(key, value);
 
 			public bool ContainsKey(object key) => _backingDictionary.ContainsKey(key);
-
-			public void Add(object key, object value) => _backingDictionary.Add(key, value);
 
 			public bool Remove(object key) => _backingDictionary.Remove(key);
 
 			public bool TryGetValue(object key, out object value) => _backingDictionary.TryGetValue(key, out value);
 
-			public object this[object key]
-			{
-				get { return _backingDictionary[key]; }
-				set { _backingDictionary[key] = value; }
-			}
+			IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_backingDictionary).GetEnumerator();
 
-			public ICollection<object> Keys => _backingDictionary.Keys;
-
-			public ICollection<object> Values => _backingDictionary.Values;
+			public IEnumerator<KeyValuePair<object, object>> GetEnumerator() => _backingDictionary.GetEnumerator();
 		}
 	}
 }

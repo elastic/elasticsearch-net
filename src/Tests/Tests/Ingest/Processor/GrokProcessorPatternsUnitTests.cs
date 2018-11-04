@@ -1,14 +1,11 @@
 ﻿using System.Collections.Generic;
 using Elastic.Xunit.XunitPlumbing;
-using FluentAssertions;
-using Tests.Core;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
-using Tests.Framework;
 
 namespace Tests.Ingest.Processor
 {
-	[SkipVersion("<5.6.0","Introduced in Elasticsearch 5.6.0")]
+	[SkipVersion("<5.6.0", "Introduced in Elasticsearch 5.6.0")]
 	public class GrokProcessorPatternsUnitTests
 	{
 		[U]
@@ -18,8 +15,8 @@ namespace Tests.Ingest.Processor
 			{
 				patterns = new Dictionary<string, object>
 				{
-					{ "BACULA_CAPACITY" ,"%{INT}{1,3}(,%{INT}{3})*"},
-					{ "PATH", "(?:%{UNIXPATH}|%{WINPATH})"}
+					{ "BACULA_CAPACITY", "%{INT}{1,3}(,%{INT}{3})*" },
+					{ "PATH", "(?:%{UNIXPATH}|%{WINPATH})" }
 				}
 			};
 

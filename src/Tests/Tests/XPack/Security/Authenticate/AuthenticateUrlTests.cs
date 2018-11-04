@@ -8,14 +8,10 @@ namespace Tests.XPack.Security.Authenticate
 {
 	public class AuthenticateUrlTests : UrlTestsBase
 	{
-		[U] public override async Task Urls()
-		{
-			await GET("/_xpack/security/_authenticate")
-				.Fluent(c => c.Authenticate())
-				.Request(c => c.Authenticate(new AuthenticateRequest()))
-				.FluentAsync(c => c.AuthenticateAsync())
-				.RequestAsync(c => c.AuthenticateAsync(new AuthenticateRequest()))
-				;
-		}
+		[U] public override async Task Urls() => await GET("/_xpack/security/_authenticate")
+			.Fluent(c => c.Authenticate())
+			.Request(c => c.Authenticate(new AuthenticateRequest()))
+			.FluentAsync(c => c.AuthenticateAsync())
+			.RequestAsync(c => c.AuthenticateAsync(new AuthenticateRequest()));
 	}
 }

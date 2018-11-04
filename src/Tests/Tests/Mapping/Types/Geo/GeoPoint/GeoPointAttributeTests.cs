@@ -1,5 +1,4 @@
-﻿using System;
-using Nest;
+﻿using Nest;
 
 namespace Tests.Mapping.Types.Geo.GeoPoint
 {
@@ -9,10 +8,10 @@ namespace Tests.Mapping.Types.Geo.GeoPoint
 			IgnoreMalformed = true)]
 		public string Full { get; set; }
 
+		public GeoLocation Inferred { get; set; }
+
 		[GeoPoint]
 		public string Minimal { get; set; }
-
-		public GeoLocation Inferred { get; set; }
 	}
 
 	public class GeoPointAttributeTests : AttributeTestsBase<GeoPointTest>

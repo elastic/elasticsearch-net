@@ -7,8 +7,6 @@ using Tests.Core.Client;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Modules.SnapshotAndRestore.Restore
 {
@@ -18,7 +16,7 @@ namespace Tests.Modules.SnapshotAndRestore.Restore
 		{
 			if (!TestClient.Configuration.RunIntegrationTests) return;
 
-			var createRepository = this.Client.CreateRepository(RepositoryName, r => r
+			var createRepository = Client.CreateRepository(RepositoryName, r => r
 				.FileSystem(fs => fs
 					.Settings(Path.Combine(cluster.FileSystem.RepositoryPath, RepositoryName))
 				)
@@ -26,12 +24,12 @@ namespace Tests.Modules.SnapshotAndRestore.Restore
 			if (!createRepository.IsValid)
 				throw new Exception("Setup: failed to create snapshot repository");
 
-			var getSnapshotResponse = this.Client.GetSnapshot(RepositoryName, SnapshotName);
+			var getSnapshotResponse = Client.GetSnapshot(RepositoryName, SnapshotName);
 
-			if ((!getSnapshotResponse.IsValid && getSnapshotResponse.ApiCall.HttpStatusCode == 404) ||
+			if (!getSnapshotResponse.IsValid && getSnapshotResponse.ApiCall.HttpStatusCode == 404 ||
 				!getSnapshotResponse.Snapshots.Any())
 			{
-				var snapshot = this.Client.Snapshot(RepositoryName, SnapshotName, s => s
+				var snapshot = Client.Snapshot(RepositoryName, SnapshotName, s => s
 					.WaitForCompletion()
 				);
 
@@ -40,37 +38,37 @@ namespace Tests.Modules.SnapshotAndRestore.Restore
 			}
 		}
 
-		private static string RepositoryName { get; } = RandomString();
-		private static string SnapshotName { get; } = RandomString();
-
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Restore(RepositoryName, SnapshotName, f),
-			fluentAsync: (client, f) => client.RestoreAsync(RepositoryName, SnapshotName, f),
-			request: (client, r) => client.Restore(r),
-			requestAsync: (client, r) => client.RestoreAsync(r)
-		);
-
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/_snapshot/{RepositoryName}/{SnapshotName}/_restore";
-
 		protected override object ExpectJson { get; } = new
 		{
 			rename_pattern = "nest-(.+)",
 			rename_replacement = "nest-restored-$1",
 		};
 
-		protected override bool SupportsDeserialization => false;
-
-		protected override RestoreDescriptor NewDescriptor() => new RestoreDescriptor(RepositoryName, SnapshotName);
-
 		protected override Func<RestoreDescriptor, IRestoreRequest> Fluent => d => d
 			.RenamePattern("nest-(.+)")
 			.RenameReplacement("nest-restored-$1");
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected override RestoreRequest Initializer => new RestoreRequest(RepositoryName, SnapshotName)
 		{
 			RenamePattern = "nest-(.+)",
 			RenameReplacement = "nest-restored-$1"
 		};
+
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/_snapshot/{RepositoryName}/{SnapshotName}/_restore";
+
+		private static string RepositoryName { get; } = RandomString();
+		private static string SnapshotName { get; } = RandomString();
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.Restore(RepositoryName, SnapshotName, f),
+			(client, f) => client.RestoreAsync(RepositoryName, SnapshotName, f),
+			(client, r) => client.Restore(r),
+			(client, r) => client.RestoreAsync(r)
+		);
+
+		protected override RestoreDescriptor NewDescriptor() => new RestoreDescriptor(RepositoryName, SnapshotName);
 	}
 }

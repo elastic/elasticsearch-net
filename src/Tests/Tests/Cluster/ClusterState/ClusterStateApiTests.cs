@@ -9,27 +9,26 @@ using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.ManagedElasticsearch.NodeSeeders;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.Cluster.ClusterState
 {
-	public class ClusterStateApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IClusterStateResponse, IClusterStateRequest, ClusterStateDescriptor, ClusterStateRequest>
+	public class ClusterStateApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IClusterStateResponse, IClusterStateRequest, ClusterStateDescriptor, ClusterStateRequest>
 	{
 		public ClusterStateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.ClusterState(),
-			fluentAsync: (client, f) => client.ClusterStateAsync(),
-			request: (client, r) => client.ClusterState(r),
-			requestAsync: (client, r) => client.ClusterStateAsync(r)
-		);
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cluster/state";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.ClusterState(),
+			(client, f) => client.ClusterStateAsync(),
+			(client, r) => client.ClusterState(r),
+			(client, r) => client.ClusterStateAsync(r)
+		);
 
 		protected override void ExpectResponse(IClusterStateResponse response)
 		{
@@ -77,8 +76,8 @@ namespace Tests.Cluster.ClusterState
 			//rawField.Should().NotBeNull();
 			//rawField.Index.Should().Be(true);
 
-			var i = this.Client.Infer.IndexName(Index<Project>());
-			var t = this.Client.Infer.TypeName(Type<CommitActivity>());
+			var i = Client.Infer.IndexName(Index<Project>());
+			var t = Client.Infer.TypeName(Type<CommitActivity>());
 
 			meta.Indices.Should().NotBeEmpty().And.ContainKey(i);
 

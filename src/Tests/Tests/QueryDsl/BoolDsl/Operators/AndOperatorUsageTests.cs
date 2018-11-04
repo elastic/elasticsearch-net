@@ -1,9 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
 
 namespace Tests.QueryDsl.BoolDsl.Operators
 {
@@ -36,7 +34,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			ReturnsSingleQuery(Query && NullQuery, q => q.Query() && q.NullQuery(),
 				c => c.Term.Value.Should().NotBeNull());
 
-			ReturnsSingleQuery(NullQuery && Query, q=> q.NullQuery() && q.Query(),
+			ReturnsSingleQuery(NullQuery && Query, q => q.NullQuery() && q.Query(),
 				c => c.Term.Value.Should().NotBeNull());
 
 			ReturnsSingleQuery(ConditionlessQuery && ConditionlessQuery && ConditionlessQuery && Query,
@@ -45,20 +43,19 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 
 			ReturnsSingleQuery(
 				NullQuery && NullQuery && ConditionlessQuery && Query,
-				q=>q.NullQuery() && q.NullQuery() && q.ConditionlessQuery() && q.Query(),
+				q => q.NullQuery() && q.NullQuery() && q.ConditionlessQuery() && q.Query(),
 				c => c.Term.Value.Should().NotBeNull());
 
-			ReturnsNull(NullQuery && ConditionlessQuery, q=> q.NullQuery() && q.ConditionlessQuery());
-			ReturnsNull(ConditionlessQuery && NullQuery, q=>q.ConditionlessQuery() && q.NullQuery());
-			ReturnsNull(ConditionlessQuery && ConditionlessQuery, q=>q.ConditionlessQuery() && q.ConditionlessQuery());
+			ReturnsNull(NullQuery && ConditionlessQuery, q => q.NullQuery() && q.ConditionlessQuery());
+			ReturnsNull(ConditionlessQuery && NullQuery, q => q.ConditionlessQuery() && q.NullQuery());
+			ReturnsNull(ConditionlessQuery && ConditionlessQuery, q => q.ConditionlessQuery() && q.ConditionlessQuery());
 			ReturnsNull(
 				ConditionlessQuery && ConditionlessQuery && ConditionlessQuery && ConditionlessQuery,
-				q=>q.ConditionlessQuery() && q.ConditionlessQuery() && q.ConditionlessQuery() && q.ConditionlessQuery()
-
+				q => q.ConditionlessQuery() && q.ConditionlessQuery() && q.ConditionlessQuery() && q.ConditionlessQuery()
 			);
 			ReturnsNull(
 				NullQuery && ConditionlessQuery && ConditionlessQuery && ConditionlessQuery,
-				q=>q.NullQuery() && q.ConditionlessQuery() && q.ConditionlessQuery() && q.ConditionlessQuery()
+				q => q.NullQuery() && q.ConditionlessQuery() && q.ConditionlessQuery() && q.ConditionlessQuery()
 			);
 		}
 
@@ -71,7 +68,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 		[U] public void CombiningManyUsingForeachInitializingWithNull()
 		{
 			QueryContainer container = null;
-			foreach(var i in Enumerable.Range(0, 100))
+			foreach (var i in Enumerable.Range(0, 100))
 				container &= Query;
 			LotsOfAnds(container);
 		}
@@ -79,7 +76,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 		[U] public void CombiningManyUsingForeachInitializingWithDefault()
 		{
 			var container = new QueryContainer();
-			foreach(var i in Enumerable.Range(0, 100))
+			foreach (var i in Enumerable.Range(0, 100))
 				container &= Query;
 			LotsOfAnds(container);
 		}
@@ -90,6 +87,5 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			lotsOfAnds.Bool.Should().NotBeNull();
 			lotsOfAnds.Bool.Must.Should().NotBeEmpty().And.HaveCount(iterations);
 		}
-
 	}
 }

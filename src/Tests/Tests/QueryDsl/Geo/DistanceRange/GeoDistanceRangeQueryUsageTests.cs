@@ -2,6 +2,7 @@
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
+
 #pragma warning disable 618
 
 namespace Tests.QueryDsl.Geo.DistanceRange
@@ -9,6 +10,34 @@ namespace Tests.QueryDsl.Geo.DistanceRange
 	public class GeoDistanceRangeQueryUsageTests : QueryDslUsageTestsBase
 	{
 		public GeoDistanceRangeQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoDistanceRangeQuery>(a => a.GeoDistanceRange)
+		{
+			q =>
+			{
+				q.LessThanOrEqualTo = null;
+				q.LessThan = null;
+				q.GreaterThanOrEqualTo = null;
+				q.GreaterThan = null;
+			},
+			q => q.Field = null,
+			q => q.Location = null
+		};
+
+		protected override QueryContainer QueryInitializer => new GeoDistanceRangeQuery
+		{
+			Boost = 1.1,
+			Name = "named_query",
+			Field = Infer.Field<Project>(p => p.Location),
+			DistanceType = GeoDistanceType.Arc,
+			GreaterThanOrEqualTo = Nest.Distance.Kilometers(200),
+			GreaterThan = Nest.Distance.Kilometers(200),
+			LessThan = Nest.Distance.Miles(400),
+			Location = new GeoLocation(40, -70),
+			OptimizeBoundingBox = GeoOptimizeBBox.Indexed,
+			LessThanOrEqualTo = Nest.Distance.Miles(400),
+			ValidationMethod = GeoValidationMethod.Strict
+		};
 
 		protected override object QueryJson => new
 		{
@@ -31,26 +60,11 @@ namespace Tests.QueryDsl.Geo.DistanceRange
 			}
 		};
 
-		protected override QueryContainer QueryInitializer => new GeoDistanceRangeQuery
-		{
-			Boost = 1.1,
-			Name = "named_query",
-			Field = Infer.Field<Project>(p=>p.Location),
-			DistanceType = GeoDistanceType.Arc,
-			GreaterThanOrEqualTo = Nest.Distance.Kilometers(200),
-			GreaterThan = Nest.Distance.Kilometers(200),
-			LessThan = Nest.Distance.Miles(400),
-			Location = new GeoLocation(40, -70),
-			OptimizeBoundingBox = GeoOptimizeBBox.Indexed,
-			LessThanOrEqualTo = Nest.Distance.Miles(400),
-			ValidationMethod = GeoValidationMethod.Strict
-		};
-
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
-			.GeoDistanceRange(g=>g
+			.GeoDistanceRange(g => g
 				.Boost(1.1)
 				.Name("named_query")
-				.Field(p=>p.Location)
+				.Field(p => p.Location)
 				.DistanceType(GeoDistanceType.Arc)
 				.GreaterThanOrEqualTo(200, DistanceUnit.Kilometers)
 				.GreaterThan(200, DistanceUnit.Kilometers)
@@ -60,17 +74,5 @@ namespace Tests.QueryDsl.Geo.DistanceRange
 				.LessThan(Nest.Distance.Miles(400))
 				.ValidationMethod(GeoValidationMethod.Strict)
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoDistanceRangeQuery>(a => a.GeoDistanceRange)
-		{
-			q => {
-				q.LessThanOrEqualTo = null;
-				q.LessThan = null;
-				q.GreaterThanOrEqualTo = null;
-				q.GreaterThan = null;
-			},
-			q =>  q.Field = null,
-			q =>  q.Location = null
-		};
 	}
 }

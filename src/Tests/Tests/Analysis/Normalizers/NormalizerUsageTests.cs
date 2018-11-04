@@ -11,27 +11,6 @@ namespace Tests.Analysis.Normalizers
 	[SkipVersion("<5.2.0", "Normalizers are a new 5.2.0 feature")]
 	public class NormalizerUsageTests : PromiseUsageTestBase<IIndexSettings, IndexSettingsDescriptor, IndexSettings>
 	{
-		protected override object ExpectJson => new
-		{
-			analysis = new
-			{
-				normalizer = new
-				{
-					myCustom = new
-					{
-						type = "custom",
-						filter = new[] {"lowercase", "asciifolding"},
-						char_filter = new[] {"mapped"}
-					}
-				}
-			}
-		};
-
-		/**
-		 *
-		 */
-		protected override Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> Fluent => FluentExample;
-
 		public static Func<IndexSettingsDescriptor, IPromise<IndexSettings>> FluentExample => s => s
 			.Analysis(analysis => analysis
 				.Normalizers(analyzers => analyzers
@@ -41,10 +20,6 @@ namespace Tests.Analysis.Normalizers
 					)
 				)
 			);
-
-		/**
-		 */
-		protected override IndexSettings Initializer => InitializerExample;
 
 		public static IndexSettings InitializerExample =>
 			new IndexSettings
@@ -56,12 +31,37 @@ namespace Tests.Analysis.Normalizers
 						{
 							"myCustom", new CustomNormalizer
 							{
-								CharFilter = new[] {"mapped"},
-								Filter = new[] {"lowercase", "asciifolding"},
+								CharFilter = new[] { "mapped" },
+								Filter = new[] { "lowercase", "asciifolding" },
 							}
 						}
 					}
 				}
 			};
+
+		protected override object ExpectJson => new
+		{
+			analysis = new
+			{
+				normalizer = new
+				{
+					myCustom = new
+					{
+						type = "custom",
+						filter = new[] { "lowercase", "asciifolding" },
+						char_filter = new[] { "mapped" }
+					}
+				}
+			}
+		};
+
+		/**
+		 *
+		 */
+		protected override Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> Fluent => FluentExample;
+
+		/**
+		 */
+		protected override IndexSettings Initializer => InitializerExample;
 	}
 }

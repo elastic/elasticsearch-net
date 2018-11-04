@@ -6,24 +6,24 @@ namespace Tests.Framework
 {
 	public class SealedVirtualCluster
 	{
-		private readonly IConnectionPool _connectionPool;
 		private readonly IConnection _connection;
+		private readonly IConnectionPool _connectionPool;
 		private readonly TestableDateTimeProvider _dateTimeProvider;
 
 		public SealedVirtualCluster(VirtualCluster cluster, IConnectionPool pool, TestableDateTimeProvider dateTimeProvider)
 		{
-			this._connectionPool = pool;
-			this._connection = new VirtualClusterConnection(cluster, dateTimeProvider);
-			this._dateTimeProvider = dateTimeProvider;
+			_connectionPool = pool;
+			_connection = new VirtualClusterConnection(cluster, dateTimeProvider);
+			_dateTimeProvider = dateTimeProvider;
 		}
 
 		private ConnectionSettings CreateSettings() =>
-			new ConnectionSettings(this._connectionPool, this._connection).DefaultIndex("default-index");
+			new ConnectionSettings(_connectionPool, _connection).DefaultIndex("default-index");
 
 		public VirtualizedCluster AllDefaults() =>
-			new VirtualizedCluster(this._dateTimeProvider, CreateSettings());
+			new VirtualizedCluster(_dateTimeProvider, CreateSettings());
 
 		public VirtualizedCluster Settings(Func<ConnectionSettings, ConnectionSettings> selector) =>
-			new VirtualizedCluster(this._dateTimeProvider, selector(CreateSettings()));
+			new VirtualizedCluster(_dateTimeProvider, selector(CreateSettings()));
 	}
 }

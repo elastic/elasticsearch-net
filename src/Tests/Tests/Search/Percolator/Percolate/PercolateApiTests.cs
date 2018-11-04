@@ -4,13 +4,11 @@ using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
-using FluentAssertions.Common;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Xunit;
 using static Nest.Infer;
 
 #pragma warning disable 618 // testing deprecated percolate APIs
@@ -18,27 +16,15 @@ using static Nest.Infer;
 namespace Tests.Search.Percolator.Percolate
 {
 	[SkipVersion(">5.0.0-alpha1", "deprecated")]
-	public class PercolateApiTests : ApiIntegrationTestBase<WritableCluster, IPercolateResponse, IPercolateRequest<Project>, PercolateDescriptor<Project>, PercolateRequest<Project>>
+	public class PercolateApiTests
+		: ApiIntegrationTestBase<WritableCluster, IPercolateResponse, IPercolateRequest<Project>, PercolateDescriptor<Project>,
+			PercolateRequest<Project>>
 	{
+		private static readonly string PercolatorId = RandomString();
+
 		public PercolateApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		private string Index => this.CallIsolatedValue + "-index";
-
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.Percolate(f),
-			fluentAsync: (c, f) => c.PercolateAsync(f),
-			request: (c, r) => c.Percolate(r),
-			requestAsync: (c, r) => c.PercolateAsync(r)
-		);
-
-		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/{this.Index}/project/_percolate";
-
-		protected override PercolateDescriptor<Project> NewDescriptor() => new PercolateDescriptor<Project>(this.Index, typeof(Project));
-
-		protected override bool SupportsDeserialization => false;
 
 		protected override object ExpectJson => new
 		{
@@ -61,6 +47,41 @@ namespace Tests.Search.Percolator.Percolate
 			track_scores = true
 		};
 
+		protected override int ExpectStatusCode => 200;
+
+		protected override Func<PercolateDescriptor<Project>, IPercolateRequest<Project>> Fluent => c => c
+			.Index(Index)
+			.Document(Project.Instance)
+			.Query(q => q.MatchAll())
+			.Size(10)
+			.Sort(s => s.Descending(SortSpecialField.Score))
+			.TrackScores();
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
+		protected override PercolateRequest<Project> Initializer => new PercolateRequest<Project>(Index, Type<Project>())
+		{
+			Document = Project.Instance,
+			Query = new QueryContainer(new MatchAllQuery()),
+			Size = 10,
+			Sort = new List<ISort> { new SortField { Field = "_score", Order = SortOrder.Descending } },
+			TrackScores = true
+		};
+
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/{Index}/project/_percolate";
+
+		private string Index => CallIsolatedValue + "-index";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(c, f) => c.Percolate(f),
+			(c, f) => c.PercolateAsync(f),
+			(c, r) => c.Percolate(r),
+			(c, r) => c.PercolateAsync(r)
+		);
+
+		protected override PercolateDescriptor<Project> NewDescriptor() => new PercolateDescriptor<Project>(Index, typeof(Project));
+
 		protected override void ExpectResponse(IPercolateResponse response)
 		{
 			response.Total.Should().BeGreaterThan(0);
@@ -71,57 +92,38 @@ namespace Tests.Search.Percolator.Percolate
 			match.Score.Should().Be(1);
 		}
 
-		private static readonly string PercolatorId = RandomString();
-
 		protected override void OnBeforeCall(IElasticClient client)
 		{
-			var register = this.Client.RegisterPercolator<Project>(PercolatorId, r => r
-				.Index(this.Index)
+			var register = Client.RegisterPercolator<Project>(PercolatorId, r => r
+				.Index(Index)
 				.Query(q => q.MatchAll())
 			);
 
-			this.Client.Refresh(this.Index);
+			Client.Refresh(Index);
 		}
-
-		protected override Func<PercolateDescriptor<Project>, IPercolateRequest<Project>> Fluent => c => c
-			.Index(this.Index)
-			.Document(Project.Instance)
-			.Query(q => q.MatchAll())
-			.Size(10)
-			.Sort(s => s.Descending(SortSpecialField.Score))
-			.TrackScores()
-		;
-
-		protected override PercolateRequest<Project> Initializer => new PercolateRequest<Project>(Index, Type<Project>())
-		{
-			Document = Project.Instance,
-			Query = new QueryContainer(new MatchAllQuery()),
-			Size = 10,
-			Sort = new List<ISort> { new SortField { Field = "_score", Order = SortOrder.Descending } },
-			TrackScores = true
-		};
 	}
 
-	public class PercolateExistingDocApiTests : ApiTestBase<ReadOnlyCluster, IPercolateResponse, IPercolateRequest<Project>, PercolateDescriptor<Project>, PercolateRequest<Project>>
+	public class PercolateExistingDocApiTests
+		: ApiTestBase<ReadOnlyCluster, IPercolateResponse, IPercolateRequest<Project>, PercolateDescriptor<Project>, PercolateRequest<Project>>
 	{
-		public PercolateExistingDocApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.Percolate<Project>(p => p.Id(_percolateId)),
-			fluentAsync: (c, f) => c.PercolateAsync<Project>(p => p.Id(_percolateId)),
-			request: (c, r) => c.Percolate(r),
-			requestAsync: (c, r) => c.PercolateAsync(r)
-		);
-
 		private readonly string _percolateId = Project.Instance.Name;
 
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"project/project/{UrlEncode(_percolateId)}/_percolate";
-
-		protected override bool SupportsDeserialization => false;
+		public PercolateExistingDocApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override Func<PercolateDescriptor<Project>, IPercolateRequest<Project>> Fluent => null;
 
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
 		protected override PercolateRequest<Project> Initializer => new PercolateRequest<Project>(_percolateId);
+
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"project/project/{UrlEncode(_percolateId)}/_percolate";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(c, f) => c.Percolate<Project>(p => p.Id(_percolateId)),
+			(c, f) => c.PercolateAsync<Project>(p => p.Id(_percolateId)),
+			(c, r) => c.Percolate(r),
+			(c, r) => c.PercolateAsync(r)
+		);
 	}
 }

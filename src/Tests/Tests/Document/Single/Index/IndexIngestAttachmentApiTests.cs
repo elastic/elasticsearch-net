@@ -7,29 +7,56 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Document.Single.Index
 {
-	public class IndexIngestAttachmentApiTests :
-		ApiIntegrationTestBase<IntrusiveOperationCluster, IIndexResponse,
+	public class IndexIngestAttachmentApiTests
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, IIndexResponse,
 			IIndexRequest<IndexIngestAttachmentApiTests.IngestedAttachment>,
 			IndexDescriptor<IndexIngestAttachmentApiTests.IngestedAttachment>,
 			IndexRequest<IndexIngestAttachmentApiTests.IngestedAttachment>>
 	{
-		public class IngestedAttachment
-		{
-			public int Id { get; set; }
-			public string Content { get; set; }
-			public Nest.Attachment Attachment { get; set; }
-		}
+		public IndexIngestAttachmentApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		private static string Content => Tests.Document.Single.Attachment.Document.TestPdfDocument;
+		protected override bool ExpectIsValid => true;
+
+		protected override object ExpectJson =>
+			new
+			{
+				id = 1,
+				content = Content
+			};
+
+		protected override int ExpectStatusCode => 201;
+
+		protected override Func<IndexDescriptor<IngestedAttachment>, IIndexRequest<IngestedAttachment>> Fluent => s => s
+			.Index(CallIsolatedValue)
+			.Refresh(Refresh.True)
+			.Pipeline(PipelineId);
+
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+
+		protected override IndexRequest<IngestedAttachment> Initializer =>
+			new IndexRequest<IngestedAttachment>(Document, CallIsolatedValue)
+			{
+				Refresh = Refresh.True,
+				Pipeline = PipelineId
+			};
+
+		protected override bool SupportsDeserialization => false;
+
+		protected override string UrlPath
+			=> $"/{CallIsolatedValue}/ingestedattachment/1?refresh=true&pipeline={PipelineId}";
+
+		private static string Content => Attachment.Document.TestPdfDocument;
+
+		private IngestedAttachment Document => new IngestedAttachment
+		{
+			Id = 1,
+			Content = Content
+		};
 
 		private static string PipelineId { get; } = "pipeline-" + Guid.NewGuid().ToString("N").Substring(0, 8);
-
-		public IndexIngestAttachmentApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -67,54 +94,20 @@ namespace Tests.Document.Single.Index
 			});
 		}
 
-		private IngestedAttachment Document => new IngestedAttachment
-		{
-			Id = 1,
-			Content = Content
-		};
-
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Index<IngestedAttachment>(this.Document, f),
-			fluentAsync: (client, f) => client.IndexAsync<IngestedAttachment>(this.Document, f),
-			request: (client, r) => client.Index(r),
-			requestAsync: (client, r) => client.IndexAsync(r)
-			);
+			(client, f) => client.Index<IngestedAttachment>(Document, f),
+			(client, f) => client.IndexAsync<IngestedAttachment>(Document, f),
+			(client, r) => client.Index(r),
+			(client, r) => client.IndexAsync(r)
+		);
 
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 201;
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-
-		protected override string UrlPath
-			=> $"/{CallIsolatedValue}/ingestedattachment/1?refresh=true&pipeline={PipelineId}";
-
-		protected override bool SupportsDeserialization => false;
-
-		protected override object ExpectJson =>
-			new
-			{
-				id = 1,
-				content = Content
-			};
-
-		protected override IndexDescriptor<IngestedAttachment> NewDescriptor() => new IndexDescriptor<IngestedAttachment>(this.Document);
-
-		protected override Func<IndexDescriptor<IngestedAttachment>, IIndexRequest<IngestedAttachment>> Fluent => s => s
-			.Index(CallIsolatedValue)
-			.Refresh(Refresh.True)
-			.Pipeline(PipelineId);
-
-		protected override IndexRequest<IngestedAttachment> Initializer =>
-			new IndexRequest<IngestedAttachment>(this.Document, CallIsolatedValue)
-			{
-				Refresh = Refresh.True,
-				Pipeline = PipelineId
-			};
+		protected override IndexDescriptor<IngestedAttachment> NewDescriptor() => new IndexDescriptor<IngestedAttachment>(Document);
 
 		protected override void ExpectResponse(IIndexResponse response)
 		{
 			response.ShouldBeValid();
 
-			var getResponse = this.Client.Get<IngestedAttachment>(response.Id, g => g.Index(CallIsolatedValue));
+			var getResponse = Client.Get<IngestedAttachment>(response.Id, g => g.Index(CallIsolatedValue));
 
 			getResponse.ShouldBeValid();
 			getResponse.Source.Should().NotBeNull();
@@ -131,6 +124,13 @@ namespace Tests.Document.Single.Index
 			attachment.Language.Should().Be("fr");
 			attachment.ContentLength.Should().Be(96);
 			attachment.Content.Should().Contain("mapper-attachment support");
+		}
+
+		public class IngestedAttachment
+		{
+			public Nest.Attachment Attachment { get; set; }
+			public string Content { get; set; }
+			public int Id { get; set; }
 		}
 	}
 }

@@ -16,50 +16,32 @@ namespace Tests.XPack.MachineLearning.PutJob
 	{
 		public PutJobApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.PutJob(CallIsolatedValue, f),
-			fluentAsync: (client, f) => client.PutJobAsync(CallIsolatedValue, f),
-			request: (client, r) => client.PutJob(r),
-			requestAsync: (client, r) => client.PutJobAsync(r)
-		);
-
-		protected override void IntegrationTeardown(IElasticClient client, CallUniqueValues values)
-		{
-			foreach (var callUniqueValue in values.Values)
-			{
-				DeleteJob(client, callUniqueValue);
-			}
-		}
-
 		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}";
-		protected override bool SupportsDeserialization => false;
-		protected override PutJobDescriptor<Metric> NewDescriptor() => new PutJobDescriptor<Metric>(CallIsolatedValue);
 
 		protected override object ExpectJson => new
+		{
+			analysis_config = new
 			{
-				analysis_config = new
+				bucket_span = "30m",
+				detectors = new[]
 				{
-					bucket_span = "30m",
-					detectors = new[]
+					new
 					{
-						new
-						{
-							function = "sum",
-							field_name = "total"
-						}
-					},
-					latency = "0s",
+						function = "sum",
+						field_name = "total"
+					}
 				},
-				data_description = new
-				{
-					time_field = "@timestamp"
-				},
-				description = "Lab 1 - Simple example",
-				results_index_name = "server-metrics"
-			};
+				latency = "0s",
+			},
+			data_description = new
+			{
+				time_field = "@timestamp"
+			},
+			description = "Lab 1 - Simple example",
+			results_index_name = "server-metrics"
+		};
+
+		protected override int ExpectStatusCode => 200;
 
 		protected override Func<PutJobDescriptor<Metric>, IPutJobRequest> Fluent => f => f
 			.Description("Lab 1 - Simple example")
@@ -71,6 +53,8 @@ namespace Tests.XPack.MachineLearning.PutJob
 			)
 			.DataDescription(d => d.TimeField(r => r.Timestamp));
 
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+
 		protected override PutJobRequest Initializer =>
 			new PutJobRequest(CallIsolatedValue)
 			{
@@ -80,7 +64,7 @@ namespace Tests.XPack.MachineLearning.PutJob
 				{
 					BucketSpan = "30m",
 					Latency = "0s",
-					Detectors = new []
+					Detectors = new[]
 					{
 						new SumDetector
 						{
@@ -93,6 +77,23 @@ namespace Tests.XPack.MachineLearning.PutJob
 					TimeField = Field<Metric>(f => f.Timestamp)
 				}
 			};
+
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.PutJob(CallIsolatedValue, f),
+			(client, f) => client.PutJobAsync(CallIsolatedValue, f),
+			(client, r) => client.PutJob(r),
+			(client, r) => client.PutJobAsync(r)
+		);
+
+		protected override void IntegrationTeardown(IElasticClient client, CallUniqueValues values)
+		{
+			foreach (var callUniqueValue in values.Values) DeleteJob(client, callUniqueValue);
+		}
+
+		protected override PutJobDescriptor<Metric> NewDescriptor() => new PutJobDescriptor<Metric>(CallIsolatedValue);
 
 		protected override void ExpectResponse(IPutJobResponse response)
 		{

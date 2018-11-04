@@ -5,27 +5,29 @@ namespace Tests.Framework
 {
 	public class FixedPipelineFactory : IRequestPipelineFactory
 	{
-		private IConnectionSettingsValues Settings { get; }
-		private Transport<IConnectionSettingsValues> Transport =>
-			new Transport<IConnectionSettingsValues>(this.Settings, this, this.DateTimeProvider, this.MemoryStreamFactory);
+		public FixedPipelineFactory(IConnectionSettingsValues connectionSettings, IDateTimeProvider dateTimeProvider)
+		{
+			DateTimeProvider = dateTimeProvider;
+			MemoryStreamFactory = new MemoryStreamFactory();
 
-		private IDateTimeProvider DateTimeProvider { get; }
-		private MemoryStreamFactory MemoryStreamFactory { get; }
+			Settings = connectionSettings;
+			Pipeline = Create(Settings, DateTimeProvider, MemoryStreamFactory, new SearchRequestParameters());
+		}
+
+		public ElasticClient Client => new ElasticClient(Transport);
 
 		public IRequestPipeline Pipeline { get; }
 
-		public ElasticClient Client => new ElasticClient(this.Transport);
+		private IDateTimeProvider DateTimeProvider { get; }
+		private MemoryStreamFactory MemoryStreamFactory { get; }
+		private IConnectionSettingsValues Settings { get; }
 
-		public FixedPipelineFactory(IConnectionSettingsValues connectionSettings, IDateTimeProvider dateTimeProvider)
-		{
-			this.DateTimeProvider = dateTimeProvider;
-			this.MemoryStreamFactory = new MemoryStreamFactory();
+		private Transport<IConnectionSettingsValues> Transport =>
+			new Transport<IConnectionSettingsValues>(Settings, this, DateTimeProvider, MemoryStreamFactory);
 
-			this.Settings = connectionSettings;
-			this.Pipeline = this.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, new SearchRequestParameters());
-		}
-
-		public IRequestPipeline Create(IConnectionConfigurationValues configurationValues, IDateTimeProvider dateTimeProvider, IMemoryStreamFactory memorystreamFactory, IRequestParameters requestParameters) =>
-			new RequestPipeline(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters ?? new SearchRequestParameters());
+		public IRequestPipeline Create(IConnectionConfigurationValues configurationValues, IDateTimeProvider dateTimeProvider,
+			IMemoryStreamFactory memorystreamFactory, IRequestParameters requestParameters
+		) =>
+			new RequestPipeline(Settings, DateTimeProvider, MemoryStreamFactory, requestParameters ?? new SearchRequestParameters());
 	}
 }

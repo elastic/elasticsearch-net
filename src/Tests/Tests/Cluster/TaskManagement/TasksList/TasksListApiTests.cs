@@ -10,35 +10,35 @@ using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.ManagedElasticsearch.NodeSeeders;
-using Xunit;
-
 
 namespace Tests.Cluster.TaskManagement.TasksList
 {
-	public class TasksListApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IListTasksResponse, IListTasksRequest, ListTasksDescriptor, ListTasksRequest>
+	public class TasksListApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IListTasksResponse, IListTasksRequest, ListTasksDescriptor, ListTasksRequest>
 	{
 		public TasksListApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.ListTasks(f),
-			fluentAsync: (client, f) => client.ListTasksAsync(f),
-			request: (client, r) => client.ListTasks(r),
-			requestAsync: (client, r) => client.ListTasksAsync(r)
-		);
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => "/_tasks?actions=%2Alists%2A";
 
 		protected override Func<ListTasksDescriptor, IListTasksRequest> Fluent => s => s
 			.Actions("*lists*");
+
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
 		protected override ListTasksRequest Initializer => new ListTasksRequest
 		{
 			Actions = new[] { "*lists*" }
 		};
+
+		protected override string UrlPath => "/_tasks?actions=%2Alists%2A";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.ListTasks(f),
+			(client, f) => client.ListTasksAsync(f),
+			(client, r) => client.ListTasks(r),
+			(client, r) => client.ListTasksAsync(r)
+		);
 
 		protected override void ExpectResponse(IListTasksResponse response)
 		{
@@ -67,16 +67,33 @@ namespace Tests.Cluster.TaskManagement.TasksList
 	}
 
 	[SkipVersion("<2.3.0", "")]
-	public class TasksListDetailedApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, IListTasksResponse, IListTasksRequest, ListTasksDescriptor, ListTasksRequest>
+	public class TasksListDetailedApiTests
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, IListTasksResponse, IListTasksRequest, ListTasksDescriptor, ListTasksRequest>
 	{
 		private static TaskId _taskId = new TaskId("fakeid:1");
 
 		public TasksListDetailedApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+
+		protected override Func<ListTasksDescriptor, IListTasksRequest> Fluent => s => s
+			.Detailed();
+
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+
+		protected override ListTasksRequest Initializer => new ListTasksRequest()
+		{
+			Detailed = true
+		};
+
+		protected override string UrlPath => $"/_tasks?detailed=true";
+
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.ListTasks(f),
-			fluentAsync: (client, f) => client.ListTasksAsync(f),
-			request: (client, r) => client.ListTasks(r),
-			requestAsync: (client, r) => client.ListTasksAsync(r)
+			(client, f) => client.ListTasks(f),
+			(client, f) => client.ListTasksAsync(f),
+			(client, r) => client.ListTasks(r),
+			(client, r) => client.ListTasksAsync(r)
 		);
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
@@ -105,19 +122,6 @@ namespace Tests.Cluster.TaskManagement.TasksList
 
 			_taskId = response.Task;
 		}
-
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/_tasks?detailed=true";
-
-		protected override Func<ListTasksDescriptor, IListTasksRequest> Fluent => s => s
-			.Detailed();
-
-		protected override ListTasksRequest Initializer => new ListTasksRequest()
-		{
-			Detailed = true
-		};
 
 		protected override void ExpectResponse(IListTasksResponse response)
 		{

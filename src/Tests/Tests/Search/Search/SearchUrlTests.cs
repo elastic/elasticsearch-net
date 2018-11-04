@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using Tests.Domain;
 using Tests.Framework;
- using static Tests.Framework.UrlTester;
-using System;
- using Elastic.Xunit.XunitPlumbing;
- using Tests.Domain;
+using static Tests.Framework.UrlTester;
 
 namespace Tests.Search.Search
 {
@@ -14,53 +14,53 @@ namespace Tests.Search.Search
 		{
 			var hardcoded = "hardcoded";
 			await POST("/project/commits/_search")
-				.Fluent(c=>c.Search<CommitActivity>())
-				.Request(c=>c.Search<Project>(new SearchRequest<CommitActivity>()))
-				.FluentAsync(c=>c.SearchAsync<CommitActivity>())
-				.RequestAsync(c=>c.SearchAsync<Project>(new SearchRequest<CommitActivity>()))
+					.Fluent(c => c.Search<CommitActivity>())
+					.Request(c => c.Search<Project>(new SearchRequest<CommitActivity>()))
+					.FluentAsync(c => c.SearchAsync<CommitActivity>())
+					.RequestAsync(c => c.SearchAsync<Project>(new SearchRequest<CommitActivity>()))
 				;
 
 			await POST("/project/hardcoded/_search")
-				.Fluent(c=>c.Search<CommitActivity>(s=>s.Type(hardcoded)))
-				.Request(c=>c.Search<Project>(new SearchRequest<CommitActivity>(typeof(Project), hardcoded)))
-				.FluentAsync(c=>c.SearchAsync<CommitActivity>(s=>s.Type(hardcoded)))
-				.RequestAsync(c=>c.SearchAsync<Project>(new SearchRequest<CommitActivity>(typeof(Project), hardcoded)))
+					.Fluent(c => c.Search<CommitActivity>(s => s.Type(hardcoded)))
+					.Request(c => c.Search<Project>(new SearchRequest<CommitActivity>(typeof(Project), hardcoded)))
+					.FluentAsync(c => c.SearchAsync<CommitActivity>(s => s.Type(hardcoded)))
+					.RequestAsync(c => c.SearchAsync<Project>(new SearchRequest<CommitActivity>(typeof(Project), hardcoded)))
 				;
 
 			await POST("/project/_search")
-				.Fluent(c=>c.Search<Project>(s=>s.Type(Types.All)))
-				.Fluent(c=>c.Search<Project>(s=>s.AllTypes()))
-				.Request(c=>c.Search<Project>(new SearchRequest("project")))
-				.Request(c=>c.Search<Project>(new SearchRequest<Project>("project", Types.All)))
-				.FluentAsync(c=>c.SearchAsync<Project>(s=>s.Type(Types.All)))
-				.RequestAsync(c=>c.SearchAsync<Project>(new SearchRequest<Project>(typeof(Project), Types.All)))
-				.FluentAsync(c=>c.SearchAsync<Project>(s=>s.AllTypes()))
+					.Fluent(c => c.Search<Project>(s => s.Type(Types.All)))
+					.Fluent(c => c.Search<Project>(s => s.AllTypes()))
+					.Request(c => c.Search<Project>(new SearchRequest("project")))
+					.Request(c => c.Search<Project>(new SearchRequest<Project>("project", Types.All)))
+					.FluentAsync(c => c.SearchAsync<Project>(s => s.Type(Types.All)))
+					.RequestAsync(c => c.SearchAsync<Project>(new SearchRequest<Project>(typeof(Project), Types.All)))
+					.FluentAsync(c => c.SearchAsync<Project>(s => s.AllTypes()))
 				;
 
 			await POST("/hardcoded/_search")
-				.Fluent(c=>c.Search<Project>(s=>s.Index(hardcoded).Type(Types.All)))
-				.Fluent(c=>c.Search<Project>(s=>s.Index(hardcoded).AllTypes()))
-				.Request(c=>c.Search<Project>(new SearchRequest(hardcoded)))
-				.Request(c=>c.Search<Project>(new SearchRequest<Project>(hardcoded, Types.All)))
-				.FluentAsync(c=>c.SearchAsync<Project>(s=>s.Index(hardcoded).Type(Types.All)))
-				.RequestAsync(c=>c.SearchAsync<Project>(new SearchRequest<Project>(hardcoded, Types.All)))
-				.FluentAsync(c=>c.SearchAsync<Project>(s=>s.Index(hardcoded).AllTypes()))
+					.Fluent(c => c.Search<Project>(s => s.Index(hardcoded).Type(Types.All)))
+					.Fluent(c => c.Search<Project>(s => s.Index(hardcoded).AllTypes()))
+					.Request(c => c.Search<Project>(new SearchRequest(hardcoded)))
+					.Request(c => c.Search<Project>(new SearchRequest<Project>(hardcoded, Types.All)))
+					.FluentAsync(c => c.SearchAsync<Project>(s => s.Index(hardcoded).Type(Types.All)))
+					.RequestAsync(c => c.SearchAsync<Project>(new SearchRequest<Project>(hardcoded, Types.All)))
+					.FluentAsync(c => c.SearchAsync<Project>(s => s.Index(hardcoded).AllTypes()))
 				;
 
 			await POST("/_search")
-				.Fluent(c=>c.Search<Project>(s=>s.AllTypes().AllIndices()))
-				.Request(c=>c.Search<Project>(new SearchRequest()))
-				.Request(c=>c.Search<Project>(new SearchRequest<Project>(Nest.Indices.All, Types.All)))
-				.FluentAsync(c=>c.SearchAsync<Project>(s=>s.AllIndices().Type(Types.All)))
-				.RequestAsync(c=>c.SearchAsync<Project>(new SearchRequest<Project>(Nest.Indices.All, Types.All)))
-				.RequestAsync(c=>c.SearchAsync<Project>(new SearchRequest()))
+					.Fluent(c => c.Search<Project>(s => s.AllTypes().AllIndices()))
+					.Request(c => c.Search<Project>(new SearchRequest()))
+					.Request(c => c.Search<Project>(new SearchRequest<Project>(Nest.Indices.All, Types.All)))
+					.FluentAsync(c => c.SearchAsync<Project>(s => s.AllIndices().Type(Types.All)))
+					.RequestAsync(c => c.SearchAsync<Project>(new SearchRequest<Project>(Nest.Indices.All, Types.All)))
+					.RequestAsync(c => c.SearchAsync<Project>(new SearchRequest()))
 				;
 
 			await POST("/_search?scroll=1m")
-				.Fluent(c=>c.Search<Project>(s=>s.AllTypes().AllIndices().Scroll(60000)))
-				.Request(c=>c.Search<Project>(new SearchRequest<Project>(Nest.Indices.All, Types.All) { Scroll = TimeSpan.FromMinutes(1) }))
-				.FluentAsync(c=>c.SearchAsync<Project>(s=>s.AllIndices().Type(Types.All).Scroll("1m")))
-				.RequestAsync(c=>c.SearchAsync<Project>(new SearchRequest<Project>(Nest.Indices.All, Types.All) { Scroll = 60000 } ))
+					.Fluent(c => c.Search<Project>(s => s.AllTypes().AllIndices().Scroll(60000)))
+					.Request(c => c.Search<Project>(new SearchRequest<Project>(Nest.Indices.All, Types.All) { Scroll = TimeSpan.FromMinutes(1) }))
+					.FluentAsync(c => c.SearchAsync<Project>(s => s.AllIndices().Type(Types.All).Scroll("1m")))
+					.RequestAsync(c => c.SearchAsync<Project>(new SearchRequest<Project>(Nest.Indices.All, Types.All) { Scroll = 60000 }))
 				;
 		}
 	}

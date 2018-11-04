@@ -1,17 +1,13 @@
-﻿using Elasticsearch.Net;
+﻿using System;
+using System.Collections.Generic;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Indices.IndexManagement.RolloverIndex
 {
@@ -21,34 +17,7 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 		public RolloverIndexApiTests(WritableCluster cluster, EndpointUsage usage)
 			: base(cluster, usage) { }
 
-		protected override bool SupportsDeserialization => false;
-
-		protected override void OnBeforeCall(IElasticClient client)
-		{
-			var create = client.CreateIndex(CallIsolatedValue, c => c
-				.Aliases(a => a
-					.Alias(CallIsolatedValue + "-alias")
-				)
-			);
-			create.ShouldBeValid();
-		}
-
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.RolloverIndex(CallIsolatedValue + "-alias", f),
-			fluentAsync: (client, f) => client.RolloverIndexAsync(CallIsolatedValue + "-alias", f),
-			request: (client, r) => client.RolloverIndex(r),
-			requestAsync: (client, r) => client.RolloverIndexAsync(r)
-		);
-
 		protected override bool ExpectIsValid => true;
-
-		protected override int ExpectStatusCode => 200;
-
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-
-		protected override string UrlPath => $"/{CallIsolatedValue}-alias/_rollover/{CallIsolatedValue}-new";
-
-		protected override RolloverIndexDescriptor NewDescriptor() => new RolloverIndexDescriptor(CallIsolatedValue + "-alias");
 
 		protected override object ExpectJson => new
 		{
@@ -85,51 +54,11 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 			},
 			aliases = new
 			{
-				new_projects = new {}
+				new_projects = new { }
 			}
 		};
 
-		protected override RolloverIndexRequest Initializer => new RolloverIndexRequest(CallIsolatedValue + "-alias", CallIsolatedValue + "-new")
-		{
-			Conditions = new RolloverConditions
-			{
-				MaxAge = "7d",
-				MaxDocs = 1000
-			},
-			Settings = new Nest.IndexSettings
-			{
-				NumberOfShards = 1,
-				NumberOfReplicas = 1
-			},
-			Mappings = new Mappings
-			{
-				{ typeof(Project), new TypeMapping
-					{
-						Properties = new Properties<Project>
-						{
-							{
-								p => p.Branches, new TextProperty
-								{
-									Fields = new Properties
-									{
-										{
-											"keyword", new KeywordProperty
-											{
-												IgnoreAbove = 256
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			},
-			Aliases = new Aliases
-			{
-				{ "new_projects", new Alias() }
-			}
-		};
+		protected override int ExpectStatusCode => 200;
 
 		protected override Func<RolloverIndexDescriptor, IRolloverIndexRequest> Fluent => f => f
 			.NewIndex(CallIsolatedValue + "-new")
@@ -159,6 +88,74 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 			.Aliases(a => a
 				.Alias("new_projects")
 			);
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
+		protected override RolloverIndexRequest Initializer => new RolloverIndexRequest(CallIsolatedValue + "-alias", CallIsolatedValue + "-new")
+		{
+			Conditions = new RolloverConditions
+			{
+				MaxAge = "7d",
+				MaxDocs = 1000
+			},
+			Settings = new Nest.IndexSettings
+			{
+				NumberOfShards = 1,
+				NumberOfReplicas = 1
+			},
+			Mappings = new Mappings
+			{
+				{
+					typeof(Project), new TypeMapping
+					{
+						Properties = new Properties<Project>
+						{
+							{
+								p => p.Branches, new TextProperty
+								{
+									Fields = new Properties
+									{
+										{
+											"keyword", new KeywordProperty
+											{
+												IgnoreAbove = 256
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			Aliases = new Aliases
+			{
+				{ "new_projects", new Alias() }
+			}
+		};
+
+		protected override bool SupportsDeserialization => false;
+
+		protected override string UrlPath => $"/{CallIsolatedValue}-alias/_rollover/{CallIsolatedValue}-new";
+
+		protected override void OnBeforeCall(IElasticClient client)
+		{
+			var create = client.CreateIndex(CallIsolatedValue, c => c
+				.Aliases(a => a
+					.Alias(CallIsolatedValue + "-alias")
+				)
+			);
+			create.ShouldBeValid();
+		}
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.RolloverIndex(CallIsolatedValue + "-alias", f),
+			(client, f) => client.RolloverIndexAsync(CallIsolatedValue + "-alias", f),
+			(client, r) => client.RolloverIndex(r),
+			(client, r) => client.RolloverIndexAsync(r)
+		);
+
+		protected override RolloverIndexDescriptor NewDescriptor() => new RolloverIndexDescriptor(CallIsolatedValue + "-alias");
 
 		protected override void ExpectResponse(IRolloverIndexResponse response)
 		{

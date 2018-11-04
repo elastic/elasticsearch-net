@@ -6,10 +6,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.Terms
@@ -21,9 +18,7 @@ namespace Tests.Aggregations.Bucket.Terms
 	 */
 	public class TermsAggregationUsageTests : AggregationUsageTestBase
 	{
-		public TermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)
-		{
-		}
+		public TermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object ExpectJson => new
 		{
@@ -51,8 +46,8 @@ namespace Tests.Aggregations.Bucket.Terms
 						},
 						order = new object[]
 						{
-							new {_term = "asc"},
-							new {_count = "desc"}
+							new { _term = "asc" },
+							new { _count = "desc" }
 						}
 					}
 				}
@@ -90,7 +85,7 @@ namespace Tests.Aggregations.Bucket.Terms
 					ShardSize = 100,
 					ExecutionHint = TermsAggregationExecutionHint.Map,
 					Missing = "n/a",
-					Script = new InlineScript("'State of Being: '+_value") {Lang = "groovy"},
+					Script = new InlineScript("'State of Being: '+_value") { Lang = "groovy" },
 					Order = new List<TermsOrder>
 					{
 						TermsOrder.TermAscending,
@@ -98,7 +93,7 @@ namespace Tests.Aggregations.Bucket.Terms
 					},
 					Meta = new Dictionary<string, object>
 					{
-						{"foo", "bar"}
+						{ "foo", "bar" }
 					}
 				}
 			};
@@ -132,9 +127,7 @@ namespace Tests.Aggregations.Bucket.Terms
 	 */
 	public class TermsAggregationIncludePatternUsageTests : AggregationUsageTestBase
 	{
-		public TermsAggregationIncludePatternUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)
-		{
-		}
+		public TermsAggregationIncludePatternUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object ExpectJson => new
 		{
@@ -158,8 +151,8 @@ namespace Tests.Aggregations.Bucket.Terms
 						include = "(Stable|VeryActive)",
 						order = new object[]
 						{
-							new {_term = "asc"},
-							new {_count = "desc"}
+							new { _term = "asc" },
+							new { _count = "desc" }
 						}
 					}
 				}
@@ -197,7 +190,7 @@ namespace Tests.Aggregations.Bucket.Terms
 					ShardSize = 100,
 					ExecutionHint = TermsAggregationExecutionHint.Map,
 					Missing = "n/a",
-					Include = new TermsIncludeExclude {Pattern = "(Stable|VeryActive)"},
+					Include = new TermsIncludeExclude { Pattern = "(Stable|VeryActive)" },
 					Order = new List<TermsOrder>
 					{
 						TermsOrder.TermAscending,
@@ -205,7 +198,7 @@ namespace Tests.Aggregations.Bucket.Terms
 					},
 					Meta = new Dictionary<string, object>
 					{
-						{"foo", "bar"}
+						{ "foo", "bar" }
 					}
 				}
 			};
@@ -239,9 +232,7 @@ namespace Tests.Aggregations.Bucket.Terms
 	 */
 	public class TermsAggregationIncludeExactValuesUsageTests : AggregationUsageTestBase
 	{
-		public TermsAggregationIncludeExactValuesUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)
-		{
-		}
+		public TermsAggregationIncludeExactValuesUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object ExpectJson => new
 		{
@@ -262,11 +253,11 @@ namespace Tests.Aggregations.Bucket.Terms
 						shard_size = 100,
 						execution_hint = "map",
 						missing = "n/a",
-						include = new[] {"Stable", "VeryActive"},
+						include = new[] { "Stable", "VeryActive" },
 						order = new object[]
 						{
-							new {_term = "asc"},
-							new {_count = "desc"}
+							new { _term = "asc" },
+							new { _count = "desc" }
 						}
 					}
 				}
@@ -283,7 +274,7 @@ namespace Tests.Aggregations.Bucket.Terms
 					.ShardSize(100)
 					.ExecutionHint(TermsAggregationExecutionHint.Map)
 					.Missing("n/a")
-					.Include(new[] {StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString()})
+					.Include(new[] { StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString() })
 					.Order(TermsOrder.TermAscending)
 					.Order(TermsOrder.CountDescending)
 					.Meta(m => m
@@ -304,7 +295,7 @@ namespace Tests.Aggregations.Bucket.Terms
 					ShardSize = 100,
 					ExecutionHint = TermsAggregationExecutionHint.Map,
 					Missing = "n/a",
-					Include = new TermsIncludeExclude {Values = new[] {StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString()}},
+					Include = new TermsIncludeExclude { Values = new[] { StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString() } },
 					Order = new List<TermsOrder>
 					{
 						TermsOrder.TermAscending,
@@ -312,7 +303,7 @@ namespace Tests.Aggregations.Bucket.Terms
 					},
 					Meta = new Dictionary<string, object>
 					{
-						{"foo", "bar"}
+						{ "foo", "bar" }
 					}
 				}
 			};
@@ -351,9 +342,7 @@ namespace Tests.Aggregations.Bucket.Terms
 	[SkipVersion("<5.2.0", "Partitioning term aggregations responses is a new feature in 5.2.0")]
 	public class PartitionTermsAggregationUsageTests : AggregationUsageTestBase
 	{
-		public PartitionTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)
-		{
-		}
+		public PartitionTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object ExpectJson => new
 		{
@@ -381,7 +370,7 @@ namespace Tests.Aggregations.Bucket.Terms
 			.Aggregations(a => a
 				.Terms("commits", st => st
 					.Field(p => p.NumberOfCommits)
-					.Include(partition: 0, numberOfPartitions: 10)
+					.Include(0, 10)
 					.Size(5)
 				)
 			);
@@ -392,7 +381,7 @@ namespace Tests.Aggregations.Bucket.Terms
 				Size = 0,
 				Aggregations = new TermsAggregation("commits")
 				{
-					Field = Infer.Field<Project>(p => p.NumberOfCommits),
+					Field = Field<Project>(p => p.NumberOfCommits),
 					Include = new TermsIncludeExclude
 					{
 						Partition = 0,
@@ -427,9 +416,7 @@ namespace Tests.Aggregations.Bucket.Terms
 	 */
 	public class NumericTermsAggregationUsageTests : AggregationUsageTestBase
 	{
-		public NumericTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)
-		{
-		}
+		public NumericTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object ExpectJson => new
 		{

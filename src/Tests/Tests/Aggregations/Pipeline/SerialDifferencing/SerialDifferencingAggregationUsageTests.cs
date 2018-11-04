@@ -4,9 +4,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Aggregations.Pipeline.SerialDifferencing
 {
@@ -105,9 +103,7 @@ namespace Tests.Aggregations.Pipeline.SerialDifferencing
 				// serial differencing specified a lag of 2, so
 				// only expect values from the 3rd bucket onwards
 				if (differenceCount <= 2)
-				{
 					secondDifference.Should().BeNull();
-				}
 				else
 				{
 					secondDifference.Should().NotBeNull();

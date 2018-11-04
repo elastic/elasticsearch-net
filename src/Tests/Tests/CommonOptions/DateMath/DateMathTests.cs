@@ -1,7 +1,6 @@
 using System;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
-using Tests.Framework;
 
 namespace Tests.CommonOptions.DateMath
 {
@@ -26,7 +25,7 @@ namespace Tests.CommonOptions.DateMath
 		[U]
 		public void ImplicitConversionFromDateMathString()
 		{
-			string nullString = "now+3d";
+			var nullString = "now+3d";
 			Nest.DateMath dateMath = nullString;
 			dateMath.Should().NotBeNull();
 		}

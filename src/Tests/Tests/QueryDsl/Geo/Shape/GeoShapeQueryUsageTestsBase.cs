@@ -1,7 +1,5 @@
 ﻿using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.QueryDsl
 {
@@ -13,13 +11,13 @@ namespace Tests.QueryDsl
 		{
 			geo_shape = new
 			{
-				_name="named_query",
+				_name = "named_query",
 				boost = 1.1,
 				ignore_unmapped = false,
 				location = new
 				{
 					relation = "intersects",
-					shape = this.ShapeJson
+					shape = ShapeJson
 				}
 			}
 		};

@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Bogus;
 using Elastic.Xunit.XunitPlumbing;
-using Nest;
-using Tests.Framework.Integration;
 using FluentAssertions;
+using Nest;
 using Newtonsoft.Json.Linq;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
+using Tests.Framework.Integration;
 using Xunit;
-using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Search.Request
 {
@@ -34,7 +31,8 @@ namespace Tests.Search.Request
 			{
 				match = new Dictionary<string, object>
 				{
-					{ "name.standard", new Dictionary<string, object>
+					{
+						"name.standard", new Dictionary<string, object>
 						{
 							{ "query", "Upton Sons Shield Rice Rowe Roberts" }
 						}
@@ -48,28 +46,33 @@ namespace Tests.Search.Request
 				encoder = "html",
 				fields = new Dictionary<string, object>
 				{
-					{ "name.standard", new Dictionary<string, object>
+					{
+						"name.standard", new Dictionary<string, object>
 						{
 							{ "type", "plain" },
-							{ "force_source", true},
+							{ "force_source", true },
 							{ "fragment_size", 150 },
 							{ "fragmenter", "span" },
-							{ "number_of_fragments", 3},
+							{ "number_of_fragments", 3 },
 							{ "no_match_size", 150 }
 						}
 					},
-					{ "leadDeveloper.firstName", new Dictionary<string, object>
+					{
+						"leadDeveloper.firstName", new Dictionary<string, object>
 						{
 							{ "type", "fvh" },
 							{ "phrase_limit", 10 },
 							{ "boundary_max_scan", 50 },
-							{ "pre_tags", new [] { "<name>" } },
-							{ "post_tags", new [] { "</name>" } },
-							{ "highlight_query", new Dictionary<string, object>
+							{ "pre_tags", new[] { "<name>" } },
+							{ "post_tags", new[] { "</name>" } },
+							{
+								"highlight_query", new Dictionary<string, object>
 								{
-									{ "match", new Dictionary<string, object>
+									{
+										"match", new Dictionary<string, object>
 										{
-											{ "leadDeveloper.firstName", new Dictionary<string, object>
+											{
+												"leadDeveloper.firstName", new Dictionary<string, object>
 												{
 													{ "query", "Kurt Edgardo Naomi Dariana Justice Felton" }
 												}
@@ -80,16 +83,19 @@ namespace Tests.Search.Request
 							}
 						}
 					},
-					{ "state.offsets", new Dictionary<string, object>
+					{
+						"state.offsets", new Dictionary<string, object>
 						{
 							{ "type", "postings" },
-							{ "pre_tags", new [] { "<state>" } },
-							{ "post_tags", new [] { "</state>" } },
-							{ "highlight_query", new Dictionary<string, object>
+							{ "pre_tags", new[] { "<state>" } },
+							{ "post_tags", new[] { "</state>" } },
+							{
+								"highlight_query", new Dictionary<string, object>
 								{
-									{ "terms", new Dictionary<string, object>
+									{
+										"terms", new Dictionary<string, object>
 										{
-											{ "state.offsets", new [] { "stable" , "bellyup" } }
+											{ "state.offsets", new[] { "stable", "bellyup" } }
 										}
 									}
 								}
@@ -165,7 +171,8 @@ namespace Tests.Search.Request
 					Encoder = "html",
 					Fields = new Dictionary<Field, IHighlightField>
 					{
-						{ "name.standard", new HighlightField
+						{
+							"name.standard", new HighlightField
 							{
 								Type = HighlighterType.Plain,
 								ForceSource = true,
@@ -175,13 +182,14 @@ namespace Tests.Search.Request
 								NoMatchSize = 150
 							}
 						},
-						{ "leadDeveloper.firstName", new HighlightField
+						{
+							"leadDeveloper.firstName", new HighlightField
 							{
 								Type = "fvh",
 								PhraseLimit = 10,
 								BoundaryMaxScan = 50,
-								PreTags = new[] { "<name>"},
-								PostTags = new[] { "</name>"},
+								PreTags = new[] { "<name>" },
+								PostTags = new[] { "</name>" },
 								HighlightQuery = new MatchQuery
 								{
 									Field = "leadDeveloper.firstName",
@@ -189,15 +197,16 @@ namespace Tests.Search.Request
 								}
 							}
 						},
-						{ "state.offsets", new HighlightField
+						{
+							"state.offsets", new HighlightField
 							{
 								Type = HighlighterType.Postings,
-								PreTags = new[] { "<state>"},
-								PostTags = new[] { "</state>"},
+								PreTags = new[] { "<state>" },
+								PostTags = new[] { "</state>" },
 								HighlightQuery = new TermsQuery
 								{
 									Field = "state.offsets",
-									Terms = new [] { "stable", "bellyup" }
+									Terms = new[] { "stable", "bellyup" }
 								}
 							}
 						}
@@ -209,7 +218,7 @@ namespace Tests.Search.Request
 		{
 			response.ShouldBeValid();
 
-			foreach (var highlightsInEachHit in response.Hits.Select(d=>d.Highlights))
+			foreach (var highlightsInEachHit in response.Hits.Select(d => d.Highlights))
 			{
 				foreach (var highlightField in highlightsInEachHit)
 				{
@@ -238,9 +247,7 @@ namespace Tests.Search.Request
 						}
 					}
 					else
-					{
 						Assert.True(false, $"highlights contains unexpected key {highlightField.Key}");
-					}
 				}
 			}
 		}
@@ -279,7 +286,8 @@ namespace Tests.Search.Request
 			{
 				match = new JObject
 				{
-					{ "name.standard", new JObject
+					{
+						"name.standard", new JObject
 						{
 							{ "query", "Upton Sons Shield Rice Rowe Roberts" }
 						}
@@ -290,16 +298,20 @@ namespace Tests.Search.Request
 			{
 				fields = new JObject
 				{
-					{ "leadDeveloper.lastName", new JObject
+					{
+						"leadDeveloper.lastName", new JObject
 						{
 							{ "type", "unified" },
 							{ "pre_tags", new JArray { "<name>" } },
 							{ "post_tags", new JArray { "</name>" } },
-							{ "highlight_query", new JObject
+							{
+								"highlight_query", new JObject
 								{
-									{ "match", new JObject
+									{
+										"match", new JObject
 										{
-											{ "leadDeveloper.lastName", new JObject
+											{
+												"leadDeveloper.lastName", new JObject
 												{
 													{ "query", LastNameSearch }
 												}
@@ -349,11 +361,12 @@ namespace Tests.Search.Request
 				{
 					Fields = new Dictionary<Field, IHighlightField>
 					{
-						{ "leadDeveloper.lastName", new HighlightField
+						{
+							"leadDeveloper.lastName", new HighlightField
 							{
 								Type = HighlighterType.Unified,
-								PreTags = new[] { "<name>"},
-								PostTags = new[] { "</name>"},
+								PreTags = new[] { "<name>" },
+								PostTags = new[] { "</name>" },
 								HighlightQuery = new MatchQuery
 								{
 									Field = "leadDeveloper.lastName",
@@ -382,9 +395,7 @@ namespace Tests.Search.Request
 						}
 					}
 					else
-					{
 						Assert.True(false, $"highlights contains unexpected key {highlightField.Key}");
-					}
 				}
 			}
 		}

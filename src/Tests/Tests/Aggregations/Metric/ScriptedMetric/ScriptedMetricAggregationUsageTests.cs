@@ -1,22 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using System.Collections.Generic;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.ManagedElasticsearch.NodeSeeders;
+using Tests.Framework.Integration;
 
 namespace Tests.Aggregations.Metric.ScriptedMetric
 {
 	public class ScriptedMetricAggregationUsageTests : AggregationUsageTestBase
 	{
-		public ScriptedMetricAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)
-		{
-		}
+		public ScriptedMetricAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object ExpectJson => new
 		{
@@ -66,10 +61,11 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 			{
 				Aggregations = new ScriptedMetricAggregation("sum_the_hard_way")
 				{
-					InitScript = new InlineScript("_agg['commits'] = []") {Lang = "groovy"},
-					MapScript = new InlineScript("if (doc['state'].value == \"Stable\") { _agg.commits.add(doc['numberOfCommits']) }") {Lang = "groovy"},
-					CombineScript = new InlineScript("sum = 0; for (c in _agg.commits) { sum += c }; return sum") {Lang = "groovy"},
-					ReduceScript = new InlineScript("sum = 0; for (a in _aggs) { sum += a }; return sum") {Lang = "groovy"}
+					InitScript = new InlineScript("_agg['commits'] = []") { Lang = "groovy" },
+					MapScript = new InlineScript("if (doc['state'].value == \"Stable\") { _agg.commits.add(doc['numberOfCommits']) }")
+						{ Lang = "groovy" },
+					CombineScript = new InlineScript("sum = 0; for (c in _agg.commits) { sum += c }; return sum") { Lang = "groovy" },
+					ReduceScript = new InlineScript("sum = 0; for (a in _aggs) { sum += a }; return sum") { Lang = "groovy" }
 				}
 			};
 
@@ -87,17 +83,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 	/// </summary>
 	public class ScriptedMetricMultiAggregationTests : AggregationUsageTestBase
 	{
-		// hide
-		class Scripted
-		{
-			public string Language { get; set; }
-			public string Combine { get; set; }
-			public string Reduce { get; set; }
-			public string Map { get; set; }
-			public string Init { get; set; }
-		}
-
-		private Scripted First = new Scripted
+		private readonly Scripted First = new Scripted
 		{
 			Language = "painless",
 			Init = "params._agg.map = [:]",
@@ -122,7 +108,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 				"return reduce;"
 		};
 
-		private Scripted Second = new Scripted
+		private readonly Scripted Second = new Scripted
 		{
 			Language = "painless",
 			Combine = "def sum = 0.0; for (c in params._agg.commits) { sum += c } return sum",
@@ -208,16 +194,16 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 				Aggregations =
 					new ScriptedMetricAggregation("by_state_total")
 					{
-						InitScript = new InlineScript(First.Init) {Lang = First.Language},
-						MapScript = new InlineScript(First.Map) {Lang = First.Language},
-						ReduceScript = new InlineScript(First.Reduce) {Lang = First.Language}
+						InitScript = new InlineScript(First.Init) { Lang = First.Language },
+						MapScript = new InlineScript(First.Map) { Lang = First.Language },
+						ReduceScript = new InlineScript(First.Reduce) { Lang = First.Language }
 					} &&
 					new ScriptedMetricAggregation("total_commits")
 					{
-						InitScript = new InlineScript(Second.Init) {Lang = Second.Language},
-						MapScript = new InlineScript(Second.Map) {Lang = Second.Language},
-						CombineScript = new InlineScript(Second.Combine) {Lang = Second.Language},
-						ReduceScript = new InlineScript(Second.Reduce) {Lang = Second.Language}
+						InitScript = new InlineScript(Second.Init) { Lang = Second.Language },
+						MapScript = new InlineScript(Second.Map) { Lang = Second.Language },
+						CombineScript = new InlineScript(Second.Combine) { Lang = Second.Language },
+						ReduceScript = new InlineScript(Second.Reduce) { Lang = Second.Language }
 					}
 			};
 
@@ -232,6 +218,16 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 
 			by_state_total.Value<IDictionary<string, int>>().Should().NotBeNull();
 			total_commits.Value<int>().Should().BeGreaterThan(0);
+		}
+
+		// hide
+		private class Scripted
+		{
+			public string Combine { get; set; }
+			public string Init { get; set; }
+			public string Language { get; set; }
+			public string Map { get; set; }
+			public string Reduce { get; set; }
 		}
 	}
 }

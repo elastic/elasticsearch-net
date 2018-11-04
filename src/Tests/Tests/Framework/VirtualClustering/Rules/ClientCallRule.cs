@@ -1,12 +1,10 @@
 using System;
+using System.Net.Http;
 using Nest;
-using System.Net;
 
 namespace Tests.Framework
 {
-	public interface IClientCallRule : IRule
-	{
-	}
+	public interface IClientCallRule : IRule { }
 
 	public class ClientCallRule : RuleBase<ClientCallRule>, IClientCallRule
 	{
@@ -18,7 +16,7 @@ namespace Tests.Framework
 			Self.Succeeds = false;
 			Self.Return = errorState ??
 #if DOTNETCORE
-			new System.Net.Http.HttpRequestException();
+				new HttpRequestException();
 #else
 			new WebException();
 #endif
@@ -32,23 +30,26 @@ namespace Tests.Framework
 			Self.Return = validResponseCode;
 			return this;
 		}
+
 		public ClientCallRule AfterSucceeds(Union<Exception, int> errorState = null)
 		{
 			Self.AfterSucceeds = errorState;
 			return this;
 		}
+
 		public ClientCallRule ThrowsAfterSucceeds()
 		{
 			Self.AfterSucceeds =
-                #if DOTNETCORE
-                    new System.Net.Http.HttpRequestException();
-                #else
+#if DOTNETCORE
+				new HttpRequestException();
+#else
                     new WebException();
                 #endif
 			return this;
 		}
 
-		public ClientCallRule SucceedAlways(int? validResponseCode = 200) => this.Succeeds(TimesHelper.Always, validResponseCode);
-		public ClientCallRule FailAlways(Union<Exception, int> errorState = null) => this.Fails(TimesHelper.Always, errorState);
+		public ClientCallRule SucceedAlways(int? validResponseCode = 200) => Succeeds(TimesHelper.Always, validResponseCode);
+
+		public ClientCallRule FailAlways(Union<Exception, int> errorState = null) => Fails(TimesHelper.Always, errorState);
 	}
 }

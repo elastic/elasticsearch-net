@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Elasticsearch.Net;
-using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.Search.Search.Rescoring
@@ -49,7 +44,7 @@ namespace Tests.Search.Search.Rescoring
 								{
 									terms = new
 									{
-										tags = new [] { "eos", "sit", "sed" }
+										tags = new[] { "eos", "sit", "sed" }
 									}
 								}
 							}
@@ -136,7 +131,7 @@ namespace Tests.Search.Search.Rescoring
 						{
 							Filter = new TermsQuery
 							{
-								Field = Infer.Field<Project>(p => p.Tags.First()),
+								Field = Field<Project>(p => p.Tags.First()),
 								Terms = new[] { "eos", "sit", "sed" }
 							}
 						}

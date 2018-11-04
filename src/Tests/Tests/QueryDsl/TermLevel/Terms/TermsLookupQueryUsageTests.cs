@@ -2,14 +2,38 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.QueryDsl.TermLevel.Terms
 {
 	public class TermsLookupQueryUsageTests : QueryDslUsageTestsBase
 	{
-		public TermsLookupQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		public TermsLookupQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ITermsQuery>(a => a.Terms)
+		{
+			q => q.Field = null,
+			q => q.TermsLookup = null,
+			q => q.TermsLookup.Id = null,
+			q => q.TermsLookup.Type = null,
+			q => q.TermsLookup.Index = null,
+			q => q.TermsLookup.Path = null,
+		};
+
+		protected override QueryContainer QueryInitializer => new TermsQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Field = "description",
+			TermsLookup = new FieldLookup
+			{
+				Id = 12,
+				Index = Index<Developer>(),
+				Type = Type<Developer>(),
+				Path = Field<Developer>(p => p.LastName),
+				Routing = "myroutingvalue"
+			}
+		};
 
 		protected override object QueryJson => new
 		{
@@ -28,21 +52,6 @@ namespace Tests.QueryDsl.TermLevel.Terms
 			}
 		};
 
-		protected override QueryContainer QueryInitializer => new TermsQuery
-		{
-			Name = "named_query",
-			Boost = 1.1,
-			Field = "description",
-			TermsLookup = new FieldLookup
-			{
-				Id = 12,
-				Index = Index<Developer>(),
-				Type = Type<Developer>(),
-				Path = Field<Developer>(p=>p.LastName),
-				Routing = "myroutingvalue"
-			}
-		};
-
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.Terms(c => c
 				.Name("named_query")
@@ -54,15 +63,5 @@ namespace Tests.QueryDsl.TermLevel.Terms
 					.Routing("myroutingvalue")
 				)
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ITermsQuery>(a => a.Terms)
-		{
-			q => q.Field = null,
-			q => q.TermsLookup = null,
-			q => q.TermsLookup.Id = null,
-			q => q.TermsLookup.Type = null,
-			q => q.TermsLookup.Index = null,
-			q => q.TermsLookup.Path = null,
-		};
 	}
 }

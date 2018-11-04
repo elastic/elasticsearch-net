@@ -18,12 +18,12 @@ namespace Tests.Mapping.Types.Core.Date
 			Format = "MM/dd/yyyy")]
 		public DateTime Full { get; set; }
 
-		[Date]
-		public DateTime Minimal { get; set; }
-
 		public DateTime Inferred { get; set; }
 
 		public DateTimeOffset InferredOffset { get; set; }
+
+		[Date]
+		public DateTime Minimal { get; set; }
 	}
 
 	public class DateAttributeTests : AttributeTestsBase<DateTest>

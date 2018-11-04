@@ -12,10 +12,10 @@ namespace Tests.Search.SearchTemplate.DeleteSearchTemplate
 		{
 			var id = "the-id";
 			await DELETE("/_search/template/the-id")
-				.Fluent(c => c.DeleteSearchTemplate(id))
-				.Request(c=>c.DeleteSearchTemplate(new DeleteSearchTemplateRequest(id)))
-				.FluentAsync(c => c.DeleteSearchTemplateAsync(id))
-				.RequestAsync(c=>c.DeleteSearchTemplateAsync(new DeleteSearchTemplateRequest(id)))
+					.Fluent(c => c.DeleteSearchTemplate(id))
+					.Request(c => c.DeleteSearchTemplate(new DeleteSearchTemplateRequest(id)))
+					.FluentAsync(c => c.DeleteSearchTemplateAsync(id))
+					.RequestAsync(c => c.DeleteSearchTemplateAsync(new DeleteSearchTemplateRequest(id)))
 				;
 		}
 	}

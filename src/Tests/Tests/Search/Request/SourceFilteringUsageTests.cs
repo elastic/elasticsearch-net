@@ -1,17 +1,14 @@
 using System;
 using Elastic.Xunit.XunitPlumbing;
-using Tests.Framework.Integration;
-using Nest;
 using FluentAssertions;
-using Tests.Framework;
+using Nest;
 using Newtonsoft.Json;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using static Nest.Infer;
+using Tests.Framework.Integration;
 using Xunit;
-using Xunit.Sdk;
+using static Nest.Infer;
 using static Tests.Core.Serialization.SerializationTestHelper;
 
 namespace Tests.Search.Request
@@ -98,12 +95,6 @@ namespace Tests.Search.Request
 	//hide
 	public class SourceFilteringSerializationTests
 	{
-		internal class WithSourceFilterProperty
-		{
-			[JsonProperty("_source")]
-			public Union<bool, ISourceFilter> SourceFilter { get; set; }
-		}
-
 		[U]
 		public void CanDeserializeBoolean()
 		{
@@ -111,7 +102,7 @@ namespace Tests.Search.Request
 			falseCase.Should().NotBeNull();
 			falseCase.SourceFilter.Should().NotBeNull();
 			falseCase.SourceFilter.Match
-				(b => b.Should().BeFalse(),
+			(b => b.Should().BeFalse(),
 				f => Assert.True(false, "Expected bool but found ISourceFilter")
 			);
 
@@ -119,7 +110,7 @@ namespace Tests.Search.Request
 			trueCase.Should().NotBeNull();
 			trueCase.SourceFilter.Should().NotBeNull();
 			trueCase.SourceFilter.Match
-				(b => b.Should().BeTrue(),
+			(b => b.Should().BeTrue(),
 				f => Assert.True(false, "Expected bool but found ISourceFilter")
 			);
 		}
@@ -137,7 +128,6 @@ namespace Tests.Search.Request
 					f.Includes.Should().Contain("obj.*");
 				}
 			);
-
 		}
 
 		[U]
@@ -169,6 +159,12 @@ namespace Tests.Search.Request
 					f.Excludes.Should().Contain("foo.*");
 				}
 			);
+		}
+
+		internal class WithSourceFilterProperty
+		{
+			[JsonProperty("_source")]
+			public Union<bool, ISourceFilter> SourceFilter { get; set; }
 		}
 	}
 }

@@ -4,9 +4,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.Cardinality
@@ -53,6 +51,6 @@ namespace Tests.Aggregations.Metric.Cardinality
 			var projectCount = response.Aggs.Cardinality("state_count");
 			projectCount.Should().NotBeNull();
 			projectCount.Value.Should().Be(3);
-        }
+		}
 	}
 }

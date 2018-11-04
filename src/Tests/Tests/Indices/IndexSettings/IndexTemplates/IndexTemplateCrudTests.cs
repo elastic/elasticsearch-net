@@ -6,8 +6,7 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
+
 #pragma warning disable 618
 
 namespace Tests.Indices.IndexSettings.IndexTemplates
@@ -17,14 +16,15 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 	{
 		public IndexTemplateCrudTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses Create() => Calls<PutIndexTemplateDescriptor, PutIndexTemplateRequest, IPutIndexTemplateRequest, IPutIndexTemplateResponse>(
-			CreateInitializer,
-			CreateFluent,
-			fluent: (s, c, f) => c.PutIndexTemplate(s, f),
-			fluentAsync: (s, c, f) => c.PutIndexTemplateAsync(s, f),
-			request: (s, c, r) => c.PutIndexTemplate(r),
-			requestAsync: (s, c, r) => c.PutIndexTemplateAsync(r)
-		);
+		protected override LazyResponses Create() =>
+			Calls<PutIndexTemplateDescriptor, PutIndexTemplateRequest, IPutIndexTemplateRequest, IPutIndexTemplateResponse>(
+				CreateInitializer,
+				CreateFluent,
+				(s, c, f) => c.PutIndexTemplate(s, f),
+				(s, c, f) => c.PutIndexTemplateAsync(s, f),
+				(s, c, r) => c.PutIndexTemplate(r),
+				(s, c, r) => c.PutIndexTemplateAsync(r)
+			);
 
 		protected PutIndexTemplateRequest CreateInitializer(string name) => new PutIndexTemplateRequest(name)
 		{
@@ -41,16 +41,18 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 				.NumberOfShards(2)
 			);
 
-		protected override LazyResponses Read() => Calls<GetIndexTemplateDescriptor, GetIndexTemplateRequest, IGetIndexTemplateRequest, IGetIndexTemplateResponse>(
-			ReadInitializer,
-			ReadFluent,
-			fluent: (s, c, f) => c.GetIndexTemplate(f),
-			fluentAsync: (s, c, f) => c.GetIndexTemplateAsync(f),
-			request: (s, c, r) => c.GetIndexTemplate(r),
-			requestAsync: (s, c, r) => c.GetIndexTemplateAsync(r)
-		);
+		protected override LazyResponses Read() =>
+			Calls<GetIndexTemplateDescriptor, GetIndexTemplateRequest, IGetIndexTemplateRequest, IGetIndexTemplateResponse>(
+				ReadInitializer,
+				ReadFluent,
+				(s, c, f) => c.GetIndexTemplate(f),
+				(s, c, f) => c.GetIndexTemplateAsync(f),
+				(s, c, r) => c.GetIndexTemplate(r),
+				(s, c, r) => c.GetIndexTemplateAsync(r)
+			);
 
 		protected GetIndexTemplateRequest ReadInitializer(string name) => new GetIndexTemplateRequest(name);
+
 		protected IGetIndexTemplateRequest ReadFluent(string name, GetIndexTemplateDescriptor d) => d.Name(name);
 
 		protected override void ExpectAfterCreate(IGetIndexTemplateResponse response)
@@ -62,14 +64,15 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 			templateMapping.Settings.NumberOfShards.Should().Be(2);
 		}
 
-		protected override LazyResponses Update() => Calls<PutIndexTemplateDescriptor, PutIndexTemplateRequest, IPutIndexTemplateRequest, IPutIndexTemplateResponse>(
-			PutInitializer,
-			PutFluent,
-			fluent: (s, c, f) => c.PutIndexTemplate(s, f),
-			fluentAsync: (s, c, f) => c.PutIndexTemplateAsync(s, f),
-			request: (s, c, r) => c.PutIndexTemplate(r),
-			requestAsync: (s, c, r) => c.PutIndexTemplateAsync(r)
-		);
+		protected override LazyResponses Update() =>
+			Calls<PutIndexTemplateDescriptor, PutIndexTemplateRequest, IPutIndexTemplateRequest, IPutIndexTemplateResponse>(
+				PutInitializer,
+				PutFluent,
+				(s, c, f) => c.PutIndexTemplate(s, f),
+				(s, c, f) => c.PutIndexTemplateAsync(s, f),
+				(s, c, r) => c.PutIndexTemplate(r),
+				(s, c, r) => c.PutIndexTemplateAsync(r)
+			);
 
 		protected PutIndexTemplateRequest PutInitializer(string name) => new PutIndexTemplateRequest(name)
 		{
@@ -79,9 +82,10 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 				NumberOfShards = 1
 			}
 		};
+
 		protected IPutIndexTemplateRequest PutFluent(string name, PutIndexTemplateDescriptor d) => d
 			.Template("startingwiththis-*")
-			.Settings(s=>s
+			.Settings(s => s
 				.NumberOfShards(1)
 			);
 
@@ -94,19 +98,20 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 			templateMapping.Settings.NumberOfShards.Should().Be(1);
 		}
 
-		protected override LazyResponses Delete() => Calls<DeleteIndexTemplateDescriptor, DeleteIndexTemplateRequest, IDeleteIndexTemplateRequest, IDeleteIndexTemplateResponse>(
-			DeleteInitializer,
-			DeleteFluent,
-			fluent: (s, c, f) => c.DeleteIndexTemplate(s, f),
-			fluentAsync: (s, c, f) => c.DeleteIndexTemplateAsync(s, f),
-			request: (s, c, r) => c.DeleteIndexTemplate(r),
-			requestAsync: (s, c, r) => c.DeleteIndexTemplateAsync(r)
-		);
+		protected override LazyResponses Delete() =>
+			Calls<DeleteIndexTemplateDescriptor, DeleteIndexTemplateRequest, IDeleteIndexTemplateRequest, IDeleteIndexTemplateResponse>(
+				DeleteInitializer,
+				DeleteFluent,
+				(s, c, f) => c.DeleteIndexTemplate(s, f),
+				(s, c, f) => c.DeleteIndexTemplateAsync(s, f),
+				(s, c, r) => c.DeleteIndexTemplate(r),
+				(s, c, r) => c.DeleteIndexTemplateAsync(r)
+			);
 
 		protected DeleteIndexTemplateRequest DeleteInitializer(string name) => new DeleteIndexTemplateRequest(name);
+
 		protected IDeleteIndexTemplateRequest DeleteFluent(string name, DeleteIndexTemplateDescriptor d) => d;
 
-		protected override async Task GetAfterDeleteIsValid() => await this.AssertOnGetAfterDelete(r => r.ShouldNotBeValid());
-
+		protected override async Task GetAfterDeleteIsValid() => await AssertOnGetAfterDelete(r => r.ShouldNotBeValid());
 	}
 }

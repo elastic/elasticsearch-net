@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
@@ -8,29 +7,45 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.Document.Multiple.UpdateByQuery
 {
 	[SkipVersion("<2.3.0", "")]
-	public class UpdateByQueryApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, IUpdateByQueryResponse, IUpdateByQueryRequest, UpdateByQueryDescriptor<UpdateByQueryApiTests.Test>, UpdateByQueryRequest>
+	public class UpdateByQueryApiTests
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, IUpdateByQueryResponse, IUpdateByQueryRequest,
+			UpdateByQueryDescriptor<UpdateByQueryApiTests.Test>, UpdateByQueryRequest>
 	{
-		public class Test
-		{
-			public string Text { get; set; }
-			public string Flag { get; set; }
-		}
-
 		public UpdateByQueryApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+
+		protected override object ExpectJson { get; } = new { };
+		protected override int ExpectStatusCode => 200;
+
+		protected override Func<UpdateByQueryDescriptor<Test>, IUpdateByQueryRequest> Fluent => d => d
+			.Index(CallIsolatedValue)
+			.Refresh()
+			.Conflicts(Conflicts.Proceed);
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
+		protected override UpdateByQueryRequest Initializer => new UpdateByQueryRequest(CallIsolatedValue, Type<Test>())
+		{
+			Refresh = true,
+			Conflicts = Conflicts.Proceed
+		};
+
+		protected override bool SupportsDeserialization => false;
+
+		protected override string UrlPath => $"/{CallIsolatedValue}/test/_update_by_query?refresh=true&conflicts=proceed";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var index in values.Values)
 			{
 #pragma warning disable 618
-				this.Client.CreateIndex(index, c => c
+				Client.CreateIndex(index, c => c
 					.Mappings(m => m
 						.Map<Test>(map => map
 							.Dynamic(false)
@@ -41,9 +56,9 @@ namespace Tests.Document.Multiple.UpdateByQuery
 					)
 				);
 #pragma warning restore 618
-				this.Client.Index(new Test { Text = "words words", Flag = "bar" }, i => i.Index(index).Refresh(Refresh.True));
-				this.Client.Index(new Test { Text = "words words", Flag = "foo" }, i => i.Index(index).Refresh(Refresh.True));
-				this.Client.Map<Test>(m => m
+				Client.Index(new Test { Text = "words words", Flag = "bar" }, i => i.Index(index).Refresh(Refresh.True));
+				Client.Index(new Test { Text = "words words", Flag = "foo" }, i => i.Index(index).Refresh(Refresh.True));
+				Client.Map<Test>(m => m
 					.Index(index)
 					.Properties(props => props
 						.Text(s => s.Name(p => p.Text))
@@ -51,43 +66,24 @@ namespace Tests.Document.Multiple.UpdateByQuery
 					)
 				);
 
-				var searchResults = this.SearchFlags(index);
+				var searchResults = SearchFlags(index);
 				searchResults.Total.Should().Be(0);
 			}
 		}
+
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.UpdateByQuery(f),
-			fluentAsync: (client, f) => client.UpdateByQueryAsync(f),
-			request: (client, r) => client.UpdateByQuery(r),
-			requestAsync: (client, r) => client.UpdateByQueryAsync(r)
+			(client, f) => client.UpdateByQuery(f),
+			(client, f) => client.UpdateByQueryAsync(f),
+			(client, r) => client.UpdateByQuery(r),
+			(client, r) => client.UpdateByQueryAsync(r)
 		);
+
 		protected override void OnAfterCall(IElasticClient client) => client.Refresh(CallIsolatedValue);
-
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-
-		protected override string UrlPath => $"/{CallIsolatedValue}/test/_update_by_query?refresh=true&conflicts=proceed";
-
-		protected override bool SupportsDeserialization => false;
-
-		protected override object ExpectJson { get; } = new { };
 
 		protected override UpdateByQueryDescriptor<Test> NewDescriptor() => new UpdateByQueryDescriptor<Test>(CallIsolatedValue).Type<Test>();
 
-		protected override Func<UpdateByQueryDescriptor<Test>, IUpdateByQueryRequest> Fluent => d => d
-			.Index(CallIsolatedValue)
-			.Refresh()
-			.Conflicts(Conflicts.Proceed);
-
-		protected override UpdateByQueryRequest Initializer => new UpdateByQueryRequest(CallIsolatedValue, Type<Test>())
-		{
-			Refresh = true,
-			Conflicts = Conflicts.Proceed
-		};
-
 		private ISearchResponse<Test> SearchFlags(string index) =>
-			this.Client.Search<Test>(s => s
+			Client.Search<Test>(s => s
 				.Index(index)
 				.Query(q => q.Match(m => m.Field(p => p.Flag).Query("foo")))
 			);
@@ -100,8 +96,14 @@ namespace Tests.Document.Multiple.UpdateByQuery
 			response.Updated.Should().Be(2);
 			response.Batches.Should().Be(1);
 
-			var searchResponse = this.SearchFlags(CallIsolatedValue);
+			var searchResponse = SearchFlags(CallIsolatedValue);
 			searchResponse.Total.Should().Be(1);
+		}
+
+		public class Test
+		{
+			public string Flag { get; set; }
+			public string Text { get; set; }
 		}
 	}
 
@@ -109,8 +111,6 @@ namespace Tests.Document.Multiple.UpdateByQuery
 	public class UpdateByQueryWaitForCompletionApiTests : UpdateByQueryApiTests
 	{
 		public UpdateByQueryWaitForCompletionApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-		protected override string UrlPath => $"/{CallIsolatedValue}/test/_update_by_query?wait_for_completion=false&conflicts=proceed";
 
 		protected override Func<UpdateByQueryDescriptor<Test>, IUpdateByQueryRequest> Fluent => d => d
 			.Index(CallIsolatedValue)
@@ -122,6 +122,8 @@ namespace Tests.Document.Multiple.UpdateByQuery
 			WaitForCompletion = false,
 			Conflicts = Conflicts.Proceed
 		};
+
+		protected override string UrlPath => $"/{CallIsolatedValue}/test/_update_by_query?wait_for_completion=false&conflicts=proceed";
 
 		protected override void ExpectResponse(IUpdateByQueryResponse response)
 		{
@@ -135,27 +137,12 @@ namespace Tests.Document.Multiple.UpdateByQuery
 	[SkipVersion("<2.3.0", "")]
 	public class UpdateByQueryWithFailuresApiTests : UpdateByQueryApiTests
 	{
+		private static readonly string _script = "ctx._source.text = 'x'";
+
 		public UpdateByQueryWithFailuresApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
-		{
-			foreach (var index in values.Values)
-			{
-				this.Client.CreateIndex(index, c => c
-					.Settings(s => s
-						.RefreshInterval(-1)
-					)
-				);
-				this.Client.Index(new Test { Text = "test1", Flag = "bar" }, i => i.Index(index).Id(1).Refresh(Refresh.True));
-				this.Client.Index(new Test { Text = "test2", Flag = "bar" }, i => i.Index(index).Id(1));
-			}
-		}
-		private static string _script = "ctx._source.text = 'x'";
-
 		protected override bool ExpectIsValid => false;
-		protected override int ExpectStatusCode => 409;
 
-		protected override string UrlPath => $"/{CallIsolatedValue}/test/_update_by_query";
 		protected override object ExpectJson { get; } =
 			new
 			{
@@ -163,11 +150,12 @@ namespace Tests.Document.Multiple.UpdateByQuery
 				script = new { inline = "ctx._source.text = 'x'", lang = "groovy" }
 			};
 
+		protected override int ExpectStatusCode => 409;
+
 		protected override Func<UpdateByQueryDescriptor<Test>, IUpdateByQueryRequest> Fluent => d => d
 			.Index(CallIsolatedValue)
 			.Query(q => q.Match(m => m.Field(p => p.Flag).Query("bar")))
-			.Script(ss => ss.Inline(_script).Lang("groovy"))
-			;
+			.Script(ss => ss.Inline(_script).Lang("groovy"));
 
 		protected override UpdateByQueryRequest Initializer => new UpdateByQueryRequest(CallIsolatedValue, Type<Test>())
 		{
@@ -178,6 +166,22 @@ namespace Tests.Document.Multiple.UpdateByQuery
 			},
 			Script = new InlineScript(_script) { Lang = "groovy" },
 		};
+
+		protected override string UrlPath => $"/{CallIsolatedValue}/test/_update_by_query";
+
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
+		{
+			foreach (var index in values.Values)
+			{
+				Client.CreateIndex(index, c => c
+					.Settings(s => s
+						.RefreshInterval(-1)
+					)
+				);
+				Client.Index(new Test { Text = "test1", Flag = "bar" }, i => i.Index(index).Id(1).Refresh(Refresh.True));
+				Client.Index(new Test { Text = "test2", Flag = "bar" }, i => i.Index(index).Id(1));
+			}
+		}
 
 		protected override void ExpectResponse(IUpdateByQueryResponse response)
 		{

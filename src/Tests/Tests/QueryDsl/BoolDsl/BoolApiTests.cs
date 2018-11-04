@@ -1,23 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
-using A = Tests.QueryDsl.BoolDsl.BoolCluster.A;
-using E = Tests.QueryDsl.BoolDsl.BoolCluster.E;
 using static Nest.Infer;
 
 
@@ -25,27 +16,23 @@ namespace Tests.QueryDsl.BoolDsl
 {
 	internal static class BoolDslTestExtensions
 	{
-		public static QueryContainer Id(this QueryContainerDescriptor<A> q, int id) => q.Term(p => p.Id, id);
-		public static QueryContainer O(this QueryContainerDescriptor<A> q, E option) => q.Term(p => p.Option, option);
+		public static QueryContainer Id(this QueryContainerDescriptor<BoolCluster.A> q, int id) => q.Term(p => p.Id, id);
+
+		public static QueryContainer O(this QueryContainerDescriptor<BoolCluster.A> q, BoolCluster.E option) => q.Term(p => p.Option, option);
 	}
 
 	public class BoolCluster : ClientTestClusterBase
 	{
 		[JsonConverter(typeof(StringEnumConverter))]
-		public enum E { Option1, Option2 }
-
-		public class A
+		public enum E
 		{
-			public int Id { get; set; }
-			public E Option { get; set; }
-
-			private static E[] Options = new[] { E.Option1, E.Option2 };
-			public static IList<A> Documents => Enumerable.Range(0, 20).Select(i => new A { Id = i + 1, Option = Options[i % 2] }).ToList();
+			Option1,
+			Option2
 		}
 
 		protected override void SeedCluster()
 		{
-			var client = this.Client;
+			var client = Client;
 			var index = client.CreateIndex(Index<A>(), i => i
 				.Mappings(map => map
 					.Map<A>(m => m
@@ -58,7 +45,16 @@ namespace Tests.QueryDsl.BoolDsl
 			);
 			var bulkResponse = client.Bulk(b => b.IndexMany(A.Documents));
 			if (!bulkResponse.IsValid) throw new Exception("Could not bootstrap bool cluster, bulk was invalid");
+
 			client.Refresh(Indices<A>());
+		}
+
+		public class A
+		{
+			private static readonly E[] Options = new[] { E.Option1, E.Option2 };
+			public static IList<A> Documents => Enumerable.Range(0, 20).Select(i => new A { Id = i + 1, Option = Options[i % 2] }).ToList();
+			public int Id { get; set; }
+			public E Option { get; set; }
 		}
 	}
 
@@ -66,28 +62,25 @@ namespace Tests.QueryDsl.BoolDsl
 	{
 		private readonly BoolCluster _cluster;
 
-		public BoolsInPractice(BoolCluster cluster)
-		{
-			this._cluster = cluster;
-		}
+		public BoolsInPractice(BoolCluster cluster) => _cluster = cluster;
 
 		private async Task Bool(
-			Func<A, bool> programmatic,
-			Func<QueryContainerDescriptor<A>, QueryContainer> fluentQuery,
+			Func<BoolCluster.A, bool> programmatic,
+			Func<QueryContainerDescriptor<BoolCluster.A>, QueryContainer> fluentQuery,
 			QueryContainer initializerQuery,
 			int expectedCount
-			)
+		)
 		{
-			var documents = A.Documents.Where(programmatic).ToList();
+			var documents = BoolCluster.A.Documents.Where(programmatic).ToList();
 			documents.Count().Should().Be(expectedCount, " filtering the documents in memory did not yield the expected count");
 
-			var client = this._cluster.Client;
+			var client = _cluster.Client;
 
-			var fluent = client.Search<A>(s => s.Query(fluentQuery));
-			var fluentAsync = await client.SearchAsync<A>(s => s.Query(fluentQuery));
+			var fluent = client.Search<BoolCluster.A>(s => s.Query(fluentQuery));
+			var fluentAsync = await client.SearchAsync<BoolCluster.A>(s => s.Query(fluentQuery));
 
-			var initializer = client.Search<A>(new SearchRequest<A> { Query = initializerQuery });
-			var initializerAsync = await client.SearchAsync<A>(new SearchRequest<A> { Query = initializerQuery });
+			var initializer = client.Search<BoolCluster.A>(new SearchRequest<BoolCluster.A> { Query = initializerQuery });
+			var initializerAsync = await client.SearchAsync<BoolCluster.A>(new SearchRequest<BoolCluster.A> { Query = initializerQuery });
 
 			var responses = new[] { fluent, fluentAsync, initializer, initializerAsync };
 			foreach (var response in responses)
@@ -98,46 +91,46 @@ namespace Tests.QueryDsl.BoolDsl
 		}
 
 		private TermQuery Id(int id) => new TermQuery { Field = "id", Value = id };
-		private TermQuery O(E option) => new TermQuery { Field = "option", Value = option };
+
+		private TermQuery O(BoolCluster.E option) => new TermQuery { Field = "option", Value = option };
 
 		[I]
 		public async Task CompareBoolQueryTranslationsToRealBooleanLogic()
 		{
 			await Bool(
-				a => a.Id == 1 && a.Option == E.Option1,
-				a => a.Id(1) && a.O(E.Option1),
-				Id(1) && O(E.Option1),
-				expectedCount: 1
+				a => a.Id == 1 && a.Option == BoolCluster.E.Option1,
+				a => a.Id(1) && a.O(BoolCluster.E.Option1),
+				Id(1) && O(BoolCluster.E.Option1),
+				1
 			);
 
 			await Bool(
 				a => a.Id == 1 || a.Id == 2 || a.Id == 3 || a.Id == 4,
 				a => +a.Id(1) || +a.Id(2) || +a.Id(3) || +a.Id(4),
 				+Id(1) || +Id(2) || +Id(3) || +Id(4),
-				expectedCount: 4
+				4
 			);
 
 			await Bool(
-				a => a.Id == 1 || a.Id == 2 || a.Id == 3 || a.Id == 4 && (a.Option != E.Option1 || a.Option == E.Option2),
-				a => +a.Id(1) || +a.Id(2) || +a.Id(3) || +a.Id(4) && (!a.O(E.Option1) || a.O(E.Option2)),
-				+Id(1) || +Id(2) || +Id(3) || +Id(4) && (!O(E.Option1) || O(E.Option2)),
-				expectedCount: 4
+				a => a.Id == 1 || a.Id == 2 || a.Id == 3 || a.Id == 4 && (a.Option != BoolCluster.E.Option1 || a.Option == BoolCluster.E.Option2),
+				a => +a.Id(1) || +a.Id(2) || +a.Id(3) || +a.Id(4) && (!a.O(BoolCluster.E.Option1) || a.O(BoolCluster.E.Option2)),
+				+Id(1) || +Id(2) || +Id(3) || +Id(4) && (!O(BoolCluster.E.Option1) || O(BoolCluster.E.Option2)),
+				4
 			);
 
 			await Bool(
-				a => a.Id == 1 || a.Id == 2 || a.Id == 3 || a.Id == 4 && a.Option != E.Option1 || a.Option == E.Option2,
-				a => +a.Id(1) || +a.Id(2) || +a.Id(3) || +a.Id(4) && !a.O(E.Option1) || a.O(E.Option2),
-				+Id(1) || +Id(2) || +Id(3) || +Id(4) && !O(E.Option1) || O(E.Option2),
-				expectedCount: 12
+				a => a.Id == 1 || a.Id == 2 || a.Id == 3 || a.Id == 4 && a.Option != BoolCluster.E.Option1 || a.Option == BoolCluster.E.Option2,
+				a => +a.Id(1) || +a.Id(2) || +a.Id(3) || +a.Id(4) && !a.O(BoolCluster.E.Option1) || a.O(BoolCluster.E.Option2),
+				+Id(1) || +Id(2) || +Id(3) || +Id(4) && !O(BoolCluster.E.Option1) || O(BoolCluster.E.Option2),
+				12
 			);
 
 			await Bool(
-				a => a.Option != E.Option1 && a.Id != 2 && a.Id != 3,
-				a => !a.O(E.Option1) && !a.Id(2) && !+a.Id(3),
-				!O(E.Option1) && !Id(2) && !+Id(3),
-				expectedCount: 9
+				a => a.Option != BoolCluster.E.Option1 && a.Id != 2 && a.Id != 3,
+				a => !a.O(BoolCluster.E.Option1) && !a.Id(2) && !+a.Id(3),
+				!O(BoolCluster.E.Option1) && !Id(2) && !+Id(3),
+				9
 			);
-
 		}
 	}
 }

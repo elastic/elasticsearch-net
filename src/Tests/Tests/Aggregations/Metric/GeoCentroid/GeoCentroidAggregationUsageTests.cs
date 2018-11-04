@@ -3,12 +3,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Core.Xunit;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Aggregations.Metric.GeoCentroid
 {
@@ -143,18 +139,18 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 
 		protected override object ExpectJson => new
 		{
-			query = new {term = new {name = new {value = "noresult"}}},
+			query = new { term = new { name = new { value = "noresult" } } },
 			aggs = new
 			{
 				centroid = new
 				{
-					geo_centroid = new {field = "location"}
+					geo_centroid = new { field = "location" }
 				}
 			}
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Query(q=>q.Term(p=>p.Name, "noresult"))
+			.Query(q => q.Term(p => p.Name, "noresult"))
 			.Aggregations(a => a
 				.GeoCentroid("centroid", gb => gb
 					.Field(p => p.Location)
@@ -164,7 +160,7 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
-				Query = new TermQuery { Field = Infer.Field<Project>(p=>p.Name), Value = "noresult" },
+				Query = new TermQuery { Field = Infer.Field<Project>(p => p.Name), Value = "noresult" },
 				Aggregations = new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.Location))
 			};
 

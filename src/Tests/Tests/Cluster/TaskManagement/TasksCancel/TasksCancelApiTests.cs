@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -8,22 +7,27 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Cluster.TaskManagement.TasksCancel
 {
-	public class TasksCancelApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, ICancelTasksResponse, ICancelTasksRequest, CancelTasksDescriptor, CancelTasksRequest>
+	public class TasksCancelApiTests
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, ICancelTasksResponse, ICancelTasksRequest, CancelTasksDescriptor, CancelTasksRequest>
 	{
-		private TaskId TaskId => this.RanIntegrationSetup ? this.ExtendedValue<TaskId>("taskId") : "foo:1";
-
-		private class Test
-		{
-			public long Id { get; set; }
-			public string Flag { get; set; }
-		}
-
 		public TasksCancelApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+
+
+		protected override Func<CancelTasksDescriptor, ICancelTasksRequest> Fluent => d => d
+			.TaskId(TaskId);
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
+		protected override CancelTasksRequest Initializer => new CancelTasksRequest(TaskId);
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/_tasks/{UrlEncode(TaskId.ToString())}/_cancel";
+		private TaskId TaskId => RanIntegrationSetup ? ExtendedValue<TaskId>("taskId") : "foo:1";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -49,31 +53,26 @@ namespace Tests.Cluster.TaskManagement.TasksCancel
 				values.ExtendedValue("taskId", taskId);
 			}
 		}
+
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.CancelTasks(f),
-			fluentAsync: (client, f) => client.CancelTasksAsync(f),
-			request: (client, r) => client.CancelTasks(r),
-			requestAsync: (client, r) => client.CancelTasksAsync(r)
+			(client, f) => client.CancelTasks(f),
+			(client, f) => client.CancelTasksAsync(f),
+			(client, r) => client.CancelTasks(r),
+			(client, r) => client.CancelTasksAsync(r)
 		);
-
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/_tasks/{UrlEncode(this.TaskId.ToString())}/_cancel";
-		protected override bool SupportsDeserialization => false;
-
-
-		protected override Func<CancelTasksDescriptor, ICancelTasksRequest> Fluent => d => d
-			.TaskId(this.TaskId);
-
-		protected override CancelTasksRequest Initializer => new CancelTasksRequest(this.TaskId);
 
 		protected override void ExpectResponse(ICancelTasksResponse response)
 		{
 			response.NodeFailures.Should().BeNullOrEmpty();
 			response.Nodes.Should().NotBeEmpty();
 			var tasks = response.Nodes.First().Value.Tasks;
-			tasks.Should().NotBeEmpty().And.ContainKey(this.TaskId);
+			tasks.Should().NotBeEmpty().And.ContainKey(TaskId);
+		}
+
+		private class Test
+		{
+			public string Flag { get; set; }
+			public long Id { get; set; }
 		}
 	}
 }

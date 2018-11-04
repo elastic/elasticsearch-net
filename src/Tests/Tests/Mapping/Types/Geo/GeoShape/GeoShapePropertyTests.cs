@@ -2,7 +2,6 @@
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
 
 namespace Tests.Mapping.Types.Geo.GeoShape
@@ -29,20 +28,21 @@ namespace Tests.Mapping.Types.Geo.GeoShape
 		};
 
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
-				.GeoShape(s => s
-					.Name(p => p.Location)
-					.Tree(GeoTree.Quadtree)
-					.Orientation(GeoOrientation.ClockWise)
-					.Strategy(GeoStrategy.Recursive)
-					.TreeLevels(3)
-					.PointsOnly()
-					.DistanceErrorPercentage(1.0)
-				);
+			.GeoShape(s => s
+				.Name(p => p.Location)
+				.Tree(GeoTree.Quadtree)
+				.Orientation(GeoOrientation.ClockWise)
+				.Strategy(GeoStrategy.Recursive)
+				.TreeLevels(3)
+				.PointsOnly()
+				.DistanceErrorPercentage(1.0)
+			);
 
 
 		protected override IProperties InitializerProperties => new Properties
 		{
-			{ "location", new GeoShapeProperty
+			{
+				"location", new GeoShapeProperty
 				{
 					Tree = GeoTree.Quadtree,
 					Orientation = GeoOrientation.ClockWise,

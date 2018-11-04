@@ -7,8 +7,8 @@ using Tests.Framework;
 
 namespace Tests.Aggregations
 {
-    public class AggregationVisitorTests
-    {
+	public class AggregationVisitorTests
+	{
 		[U]
 		public void VisitMethodForEachTypeOfAggregation()
 		{

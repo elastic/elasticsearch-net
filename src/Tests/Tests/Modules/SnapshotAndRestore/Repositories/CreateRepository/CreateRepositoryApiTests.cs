@@ -4,28 +4,15 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 {
-	public class CreateAzureRepositoryApiTests : ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
+	public class CreateAzureRepositoryApiTests
+		: ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
 	{
-		public CreateAzureRepositoryApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
 		private static readonly string _name = "repository1";
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.CreateRepository(_name, f),
-			fluentAsync: (client, f) => client.CreateRepositoryAsync(_name, f),
-			request: (client, r) => client.CreateRepository(r),
-			requestAsync: (client, r) => client.CreateRepositoryAsync(r)
-		);
-
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override string UrlPath => $"/_snapshot/{_name}";
-
-		protected override bool SupportsDeserialization => false;
+		public CreateAzureRepositoryApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object ExpectJson { get; } = new
 		{
@@ -39,8 +26,6 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 			}
 		};
 
-		protected override CreateRepositoryDescriptor NewDescriptor() => new CreateRepositoryDescriptor(_name);
-
 		protected override Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> Fluent => d => d
 			.Azure(a => a
 				.Settings(s => s
@@ -50,6 +35,8 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 					.ChunkSize("64mb")
 				)
 			);
+
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 
 		protected override CreateRepositoryRequest Initializer => new CreateRepositoryRequest(_name)
 		{
@@ -64,31 +51,32 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 				}
 			}
 		};
-	}
-
-	public class CreateHdfsRepositoryApiTests : ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
-	{
-		public CreateHdfsRepositoryApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-		private static readonly string _name = "repository1";
-
-
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.CreateRepository(_name, f),
-			fluentAsync: (client, f) => client.CreateRepositoryAsync(_name, f),
-			request: (client, r) => client.CreateRepository(r),
-			requestAsync: (client, r) => client.CreateRepositoryAsync(r)
-		);
-
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override string UrlPath => $"/_snapshot/{_name}";
 
 		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/_snapshot/{_name}";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.CreateRepository(_name, f),
+			(client, f) => client.CreateRepositoryAsync(_name, f),
+			(client, r) => client.CreateRepository(r),
+			(client, r) => client.CreateRepositoryAsync(r)
+		);
+
+		protected override CreateRepositoryDescriptor NewDescriptor() => new CreateRepositoryDescriptor(_name);
+	}
+
+	public class CreateHdfsRepositoryApiTests
+		: ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
+	{
+		private static readonly string _name = "repository1";
+
+		public CreateHdfsRepositoryApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object ExpectJson { get; } = new
 		{
 			type = "hdfs",
-			settings = new {
+			settings = new
+			{
 				uri = "foouri",
 				path = "some/path",
 				load_defaults = true,
@@ -98,8 +86,6 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 				chunk_size = "64mb"
 			}
 		};
-
-		protected override CreateRepositoryDescriptor NewDescriptor() => new CreateRepositoryDescriptor(_name);
 
 		protected override Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> Fluent => d => d
 			.Hdfs(h => h
@@ -113,6 +99,8 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 				)
 			);
 
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+
 		protected override CreateRepositoryRequest Initializer => new CreateRepositoryRequest(_name)
 		{
 			Repository = new HdfsRepository(new HdfsRepositorySettings("some/path")
@@ -125,31 +113,33 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 				ChunkSize = "64mb"
 			})
 		};
+
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/_snapshot/{_name}";
+
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.CreateRepository(_name, f),
+			(client, f) => client.CreateRepositoryAsync(_name, f),
+			(client, r) => client.CreateRepository(r),
+			(client, r) => client.CreateRepositoryAsync(r)
+		);
+
+		protected override CreateRepositoryDescriptor NewDescriptor() => new CreateRepositoryDescriptor(_name);
 	}
 
 	public class CreateFileSystemRepositoryApiTests
 		: ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
 	{
-		public CreateFileSystemRepositoryApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
 		private static readonly string _name = "repository1";
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.CreateRepository(_name, f),
-			fluentAsync: (client, f) => client.CreateRepositoryAsync(_name, f),
-			request: (client, r) => client.CreateRepository(r),
-			requestAsync: (client, r) => client.CreateRepositoryAsync(r)
-		);
-
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override string UrlPath => $"/_snapshot/{_name}";
-
-		protected override bool SupportsDeserialization => false;
+		public CreateFileSystemRepositoryApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object ExpectJson { get; } = new
 		{
 			type = "fs",
-			settings = new {
+			settings = new
+			{
 				location = "some/location",
 				compress = true,
 				concurrent_streams = 5,
@@ -158,8 +148,6 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 				max_snapshot_bytes_per_second = "200mb"
 			}
 		};
-
-		protected override CreateRepositoryDescriptor NewDescriptor() => new CreateRepositoryDescriptor(_name);
 
 		protected override Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> Fluent => d => d
 			.FileSystem(fs => fs
@@ -172,6 +160,8 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 				)
 			);
 
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+
 		protected override CreateRepositoryRequest Initializer => new CreateRepositoryRequest(_name)
 		{
 			Repository = new FileSystemRepository(new FileSystemRepositorySettings("some/location")
@@ -183,36 +173,36 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 				SnapshotBytesPerSecondMaximum = "200mb"
 			})
 		};
-	}
-
-	public class CreateReadOnlyUrlRepositoryApiTests : ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
-	{
-		public CreateReadOnlyUrlRepositoryApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-		private static readonly string _name = "repository1";
-
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.CreateRepository(_name, f),
-			fluentAsync: (client, f) => client.CreateRepositoryAsync(_name, f),
-			request: (client, r) => client.CreateRepository(r),
-			requestAsync: (client, r) => client.CreateRepositoryAsync(r)
-		);
-
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override string UrlPath => $"/_snapshot/{_name}";
 
 		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/_snapshot/{_name}";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.CreateRepository(_name, f),
+			(client, f) => client.CreateRepositoryAsync(_name, f),
+			(client, r) => client.CreateRepository(r),
+			(client, r) => client.CreateRepositoryAsync(r)
+		);
+
+		protected override CreateRepositoryDescriptor NewDescriptor() => new CreateRepositoryDescriptor(_name);
+	}
+
+	public class CreateReadOnlyUrlRepositoryApiTests
+		: ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
+	{
+		private static readonly string _name = "repository1";
+
+		public CreateReadOnlyUrlRepositoryApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object ExpectJson { get; } = new
 		{
 			type = "url",
-			settings = new {
+			settings = new
+			{
 				location = "http://some/location",
 				concurrent_streams = 5
 			}
 		};
-
-		protected override CreateRepositoryDescriptor NewDescriptor() => new CreateRepositoryDescriptor(_name);
 
 		protected override Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> Fluent => d => d
 			.ReadOnlyUrl(u => u
@@ -221,6 +211,8 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 				)
 			);
 
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+
 		protected override CreateRepositoryRequest Initializer => new CreateRepositoryRequest(_name)
 		{
 			Repository = new ReadOnlyUrlRepository(new ReadOnlyUrlRepositorySettings("http://some/location")
@@ -228,30 +220,32 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 				ConcurrentStreams = 5,
 			})
 		};
-	}
-
-	public class CreateS3RepositoryApiTests : ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
-	{
-		public CreateS3RepositoryApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-		private static readonly string _name = "repository1";
-
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.CreateRepository(_name, f),
-			fluentAsync: (client, f) => client.CreateRepositoryAsync(_name, f),
-			request: (client, r) => client.CreateRepository(r),
-			requestAsync: (client, r) => client.CreateRepositoryAsync(r)
-		);
-
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override string UrlPath => $"/_snapshot/{_name}";
 
 		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/_snapshot/{_name}";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.CreateRepository(_name, f),
+			(client, f) => client.CreateRepositoryAsync(_name, f),
+			(client, r) => client.CreateRepository(r),
+			(client, r) => client.CreateRepositoryAsync(r)
+		);
+
+		protected override CreateRepositoryDescriptor NewDescriptor() => new CreateRepositoryDescriptor(_name);
+	}
+
+	public class CreateS3RepositoryApiTests
+		: ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
+	{
+		private static readonly string _name = "repository1";
+
+		public CreateS3RepositoryApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object ExpectJson { get; } = new
 		{
 			type = "s3",
-			settings = new {
+			settings = new
+			{
 				bucket = "foobucket",
 				base_path = "some/path",
 				compress = true,
@@ -262,8 +256,6 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 				storage_class = "standard"
 			}
 		};
-
-		protected override CreateRepositoryDescriptor NewDescriptor() => new CreateRepositoryDescriptor(_name);
 
 		protected override Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> Fluent => d => d
 			.S3(fs => fs
@@ -278,6 +270,8 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 				)
 			);
 
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+
 		protected override CreateRepositoryRequest Initializer => new CreateRepositoryRequest(_name)
 		{
 			Repository = new S3Repository(new S3RepositorySettings("foobucket")
@@ -291,5 +285,17 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 				StorageClass = "standard"
 			})
 		};
+
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/_snapshot/{_name}";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.CreateRepository(_name, f),
+			(client, f) => client.CreateRepositoryAsync(_name, f),
+			(client, r) => client.CreateRepository(r),
+			(client, r) => client.CreateRepositoryAsync(r)
+		);
+
+		protected override CreateRepositoryDescriptor NewDescriptor() => new CreateRepositoryDescriptor(_name);
 	}
 }

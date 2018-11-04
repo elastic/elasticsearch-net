@@ -6,9 +6,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.TopHits
@@ -58,14 +56,14 @@ namespace Tests.Aggregations.Metric.TopHits
 								},
 								_source = new
 								{
-									includes = new [] { "name", "lastActivity" }
+									includes = new[] { "name", "lastActivity" }
 								},
 								size = 1,
 								version = true,
 								track_scores = true,
 								explain = true,
-								fielddata_fields = new [] { "state", "numberOfCommits" },
-								stored_fields = new [] { "startedOn" },
+								fielddata_fields = new[] { "state", "numberOfCommits" },
+								stored_fields = new[] { "startedOn" },
 								highlight = new
 								{
 									fields = new
@@ -85,14 +83,13 @@ namespace Tests.Aggregations.Metric.TopHits
 										}
 									}
 								},
-								docvalue_fields = new [] { "state" }
+								docvalue_fields = new[] { "state" }
 							}
 						}
 					}
 				}
 			}
 		};
-
 #pragma warning disable 618 // Use of FielddataFields
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Aggregations(a => a
@@ -172,19 +169,19 @@ namespace Tests.Aggregations.Metric.TopHits
 						},
 						Source = new SourceFilter
 						{
-							Includes = new [] { "name", "lastActivity" }
+							Includes = new[] { "name", "lastActivity" }
 						},
 						Size = 1,
 						Version = true,
 						TrackScores = true,
 						Explain = true,
 #pragma warning disable 618
-						FielddataFields = new [] { "state", "numberOfCommits" },
+						FielddataFields = new[] { "state", "numberOfCommits" },
 #pragma warning restore 618
 						StoredFields = new[] { "startedOn" },
 						Highlight = new Highlight
 						{
-							Fields = new Dictionary<Nest.Field, IHighlightField>
+							Fields = new Dictionary<Field, IHighlightField>
 							{
 								{ Field<Project>(p => p.Tags), new HighlightField() },
 								{ Field<Project>(p => p.Description), new HighlightField() }
@@ -192,13 +189,14 @@ namespace Tests.Aggregations.Metric.TopHits
 						},
 						ScriptFields = new ScriptFields
 						{
-							{ "commit_factor", new ScriptField
+							{
+								"commit_factor", new ScriptField
 								{
 									Script = new InlineScript("doc['numberOfCommits'].value * 2") { Lang = "groovy" }
 								}
 							}
 						},
-						DocValueFields = Infer.Fields<Project>(f => f.State)
+						DocValueFields = Fields<Project>(f => f.State)
 					}
 				}
 			};
@@ -209,7 +207,7 @@ namespace Tests.Aggregations.Metric.TopHits
 			var states = response.Aggs.Terms("states");
 			states.Should().NotBeNull();
 			states.Buckets.Should().NotBeNullOrEmpty();
-			foreach(var state in states.Buckets)
+			foreach (var state in states.Buckets)
 			{
 				state.Key.Should().NotBeNullOrEmpty();
 				state.DocCount.Should().BeGreaterThan(0);
@@ -226,8 +224,8 @@ namespace Tests.Aggregations.Metric.TopHits
 				hits.All(h => h.Fields.ValuesOf<DateTime>("startedOn").Any()).Should().BeTrue();
 				var projects = topStateHits.Documents<Project>();
 				projects.Should().NotBeEmpty();
-				projects.Should().OnlyContain(p=>!string.IsNullOrWhiteSpace(p.Name), "source filter included name");
-				projects.Should().OnlyContain(p=>string.IsNullOrWhiteSpace(p.Description), "source filter does NOT include description");
+				projects.Should().OnlyContain(p => !string.IsNullOrWhiteSpace(p.Name), "source filter included name");
+				projects.Should().OnlyContain(p => string.IsNullOrWhiteSpace(p.Description), "source filter does NOT include description");
 			}
 		}
 	}

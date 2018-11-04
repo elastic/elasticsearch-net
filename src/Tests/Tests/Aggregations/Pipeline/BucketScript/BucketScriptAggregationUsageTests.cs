@@ -4,9 +4,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Aggregations.Pipeline.BucketScript
 {
@@ -70,7 +68,7 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 								script = new
 								{
 									inline = "stableCommits / totalCommits * 100",
-									lang  = "groovy"
+									lang = "groovy"
 								}
 							}
 						}
@@ -104,7 +102,7 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 								.Add("totalCommits", "commits")
 								.Add("stableCommits", "stable_state>commits")
 							)
-							.Script(ss =>ss.Inline("stableCommits / totalCommits * 100").Lang("groovy"))
+							.Script(ss => ss.Inline("stableCommits / totalCommits * 100").Lang("groovy"))
 						)
 					)
 				)
@@ -129,10 +127,10 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 						Aggregations = new SumAggregation("commits", "numberOfCommits")
 					} &&
 					new BucketScriptAggregation("stable_percentage", new MultiBucketsPath
-						{
-							{ "totalCommits", "commits" },
-							{ "stableCommits", "stable_state>commits" }
-						})
+					{
+						{ "totalCommits", "commits" },
+						{ "stableCommits", "stable_state>commits" }
+					})
 					{
 						Script = new InlineScript("stableCommits / totalCommits * 100") { Lang = "groovy" }
 					}
@@ -148,7 +146,7 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 			projectsPerMonth.Buckets.Should().NotBeNull();
 			projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
 
-			foreach(var item in projectsPerMonth.Buckets)
+			foreach (var item in projectsPerMonth.Buckets)
 			{
 				var stablePercentage = item.BucketScript("stable_percentage");
 				stablePercentage.Should().NotBeNull();

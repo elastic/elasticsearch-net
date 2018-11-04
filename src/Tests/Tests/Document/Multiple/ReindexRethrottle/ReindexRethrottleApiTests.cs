@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Document.Multiple.Reindex;
-using Tests.Document.Multiple.ReindexOnServer;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.Document.Multiple.ReindexRethrottle
@@ -35,15 +32,13 @@ namespace Tests.Document.Multiple.ReindexRethrottle
 			);
 
 			reindex.ShouldBeValid();
-			this.ExtendedValue(TaskIdKey, reindex.Task);
+			ExtendedValue(TaskIdKey, reindex.Task);
 		}
 	}
 
 	public class ReindexRethrottleUpdateByQueryTests : ReindexRethrottleApiTests
 	{
-		public ReindexRethrottleUpdateByQueryTests(ReindexCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public ReindexRethrottleUpdateByQueryTests(ReindexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void OnBeforeCall(IElasticClient client)
 		{
@@ -57,18 +52,38 @@ namespace Tests.Document.Multiple.ReindexRethrottle
 			);
 
 			reindex.ShouldBeValid();
-			this.ExtendedValue(TaskIdKey, reindex.Task);
+			ExtendedValue(TaskIdKey, reindex.Task);
 		}
 	}
 
 	public abstract class ReindexRethrottleApiTests
-		: ApiIntegrationTestBase<ReindexCluster, IReindexRethrottleResponse, IReindexRethrottleRequest, ReindexRethrottleDescriptor, ReindexRethrottleRequest>
+		: ApiIntegrationTestBase<ReindexCluster, IReindexRethrottleResponse, IReindexRethrottleRequest, ReindexRethrottleDescriptor,
+			ReindexRethrottleRequest>
 	{
-		protected TaskId TaskId => this.RanIntegrationSetup ? this.ExtendedValue<TaskId>(TaskIdKey) : "foo:1";
-
 		protected const string TaskIdKey = "taskId";
 
 		protected ReindexRethrottleApiTests(ReindexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+
+		protected override object ExpectJson => null;
+		protected override int ExpectStatusCode => 200;
+
+		protected override Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> Fluent => d => d
+			.TaskId(TaskId)
+			.RequestsPerSecond(-1);
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
+		protected override ReindexRethrottleRequest Initializer => new ReindexRethrottleRequest(TaskId)
+		{
+			RequestsPerSecond = -1,
+		};
+
+		protected override bool SupportsDeserialization => false;
+		protected TaskId TaskId => RanIntegrationSetup ? ExtendedValue<TaskId>(TaskIdKey) : "foo:1";
+
+		protected override string UrlPath => $"/_reindex/{TaskId.NodeId}%3A{TaskId.TaskNumber}/_rethrottle?requests_per_second=-1";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -77,28 +92,11 @@ namespace Tests.Document.Multiple.ReindexRethrottle
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Rethrottle(f),
-			fluentAsync: (client, f) => client.RethrottleAsync(f),
-			request: (client, r) => client.Rethrottle(r),
-			requestAsync: (client, r) => client.RethrottleAsync(r)
+			(client, f) => client.Rethrottle(f),
+			(client, f) => client.RethrottleAsync(f),
+			(client, r) => client.Rethrottle(r),
+			(client, r) => client.RethrottleAsync(r)
 		);
-
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-
-		protected override string UrlPath => $"/_reindex/{TaskId.NodeId}%3A{TaskId.TaskNumber}/_rethrottle?requests_per_second=-1";
-
-		protected override bool SupportsDeserialization => false;
-
-		protected override Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> Fluent => d => d
-			.TaskId(TaskId)
-			.RequestsPerSecond(-1);
-
-		protected override ReindexRethrottleRequest Initializer => new ReindexRethrottleRequest(TaskId)
-		{
-			RequestsPerSecond = -1,
-		};
 
 		protected override void ExpectResponse(IReindexRethrottleResponse response)
 		{
@@ -131,7 +129,5 @@ namespace Tests.Document.Multiple.ReindexRethrottle
 			task.RunningTimeInNanoseconds.Should().BeGreaterThan(0);
 			task.Cancellable.Should().BeTrue();
 		}
-
-		protected override object ExpectJson => null;
 	}
 }

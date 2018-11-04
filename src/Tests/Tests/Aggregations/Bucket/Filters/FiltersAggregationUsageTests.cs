@@ -6,7 +6,6 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
 using static Nest.Infer;
 
@@ -77,9 +76,9 @@ namespace Tests.Aggregations.Bucket.Filters
 					OtherBucketKey = "other_states_of_being",
 					Filters = new NamedFiltersContainer
 					{
-							{ "belly_up", Query<Project>.Term(p=>p.State, StateOfBeing.BellyUp) },
-							{ "stable", Query<Project>.Term(p=>p.State, StateOfBeing.Stable) },
-							{ "very_active", Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive) }
+						{ "belly_up", Query<Project>.Term(p => p.State, StateOfBeing.BellyUp) },
+						{ "stable", Query<Project>.Term(p => p.State, StateOfBeing.Stable) },
+						{ "very_active", Query<Project>.Term(p => p.State, StateOfBeing.VeryActive) }
 					},
 					Aggregations =
 						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword")) }
@@ -131,11 +130,12 @@ namespace Tests.Aggregations.Bucket.Filters
 					filters = new
 					{
 						other_bucket = true,
-						filters = new[] {
-								new { term = new { state = new { value = "BellyUp" } }},
-								new { term = new { state = new { value = "Stable" } }},
-								new { term = new { state = new { value = "VeryActive" } }},
-							}
+						filters = new[]
+						{
+							new { term = new { state = new { value = "BellyUp" } } },
+							new { term = new { state = new { value = "Stable" } } },
+							new { term = new { state = new { value = "VeryActive" } } },
+						}
 					},
 					aggs = new
 					{
@@ -168,9 +168,9 @@ namespace Tests.Aggregations.Bucket.Filters
 					OtherBucket = true,
 					Filters = new List<QueryContainer>
 					{
-							 Query<Project>.Term(p=>p.State, StateOfBeing.BellyUp) ,
-							 Query<Project>.Term(p=>p.State, StateOfBeing.Stable) ,
-							 Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive)
+						Query<Project>.Term(p => p.State, StateOfBeing.BellyUp),
+						Query<Project>.Term(p => p.State, StateOfBeing.Stable),
+						Query<Project>.Term(p => p.State, StateOfBeing.VeryActive)
 					},
 					Aggregations =
 						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword")) }
@@ -190,10 +190,7 @@ namespace Tests.Aggregations.Bucket.Filters
 			var results = filterAgg.AnonymousBuckets();
 			results.Count.Should().Be(4);
 
-			foreach (var singleBucket in results.Take(3))
-			{
-				singleBucket.DocCount.Should().BeGreaterThan(0);
-			}
+			foreach (var singleBucket in results.Take(3)) singleBucket.DocCount.Should().BeGreaterThan(0);
 
 			results.Last().DocCount.Should().Be(0); // <1> The last bucket is the _other bucket_
 		}
@@ -214,7 +211,7 @@ namespace Tests.Aggregations.Bucket.Filters
 				{
 					filters = new
 					{
-						filters = new object[] {}
+						filters = new object[] { }
 					}
 				}
 			}
@@ -257,7 +254,7 @@ namespace Tests.Aggregations.Bucket.Filters
 				{
 					filters = new
 					{
-						filters = new object[] {}
+						filters = new object[] { }
 					}
 				}
 			}

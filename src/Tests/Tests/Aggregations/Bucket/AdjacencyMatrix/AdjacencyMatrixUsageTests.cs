@@ -5,18 +5,14 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Aggregations.Bucket.AdjacencyMatrix
 {
 	[SkipVersion("<=5.3.0", "new feature")]
 	public class AdjacencyMatrixUsageTests : AggregationUsageTestBase
 	{
-		public AdjacencyMatrixUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public AdjacencyMatrixUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object ExpectJson => new
 		{
@@ -29,29 +25,14 @@ namespace Tests.Aggregations.Bucket.AdjacencyMatrix
 					{
 						filters = new
 						{
-							grpA = new { term = new { state = new { value = "BellyUp"} } },
-							grpB = new { term = new { state = new { value = "Stable"} } },
-							grpC = new { term = new { state = new { value = "VeryActive"} } }
+							grpA = new { term = new { state = new { value = "BellyUp" } } },
+							grpB = new { term = new { state = new { value = "Stable" } } },
+							grpC = new { term = new { state = new { value = "VeryActive" } } }
 						}
 					}
 				}
 			}
 		};
-
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
-			{
-				Size =  0,
-				Aggregations = new AdjacencyMatrixAggregation("interactions")
-				{
-					Filters = new NamedFiltersContainer
-					{
-						{ "grpA", new TermQuery { Field = "state", Value = StateOfBeing.BellyUp } },
-						{ "grpB", new TermQuery { Field = "state", Value = StateOfBeing.Stable } },
-						{ "grpC", new TermQuery { Field = "state", Value = StateOfBeing.VeryActive } },
-					}
-				}
-			};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Size(0)
@@ -64,6 +45,21 @@ namespace Tests.Aggregations.Bucket.AdjacencyMatrix
 					)
 				)
 			);
+
+		protected override SearchRequest<Project> Initializer =>
+			new SearchRequest<Project>
+			{
+				Size = 0,
+				Aggregations = new AdjacencyMatrixAggregation("interactions")
+				{
+					Filters = new NamedFiltersContainer
+					{
+						{ "grpA", new TermQuery { Field = "state", Value = StateOfBeing.BellyUp } },
+						{ "grpB", new TermQuery { Field = "state", Value = StateOfBeing.Stable } },
+						{ "grpC", new TermQuery { Field = "state", Value = StateOfBeing.VeryActive } },
+					}
+				}
+			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{

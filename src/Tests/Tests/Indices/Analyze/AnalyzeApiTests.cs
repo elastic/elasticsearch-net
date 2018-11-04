@@ -4,8 +4,6 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Indices.Analyze
 {
@@ -13,17 +11,8 @@ namespace Tests.Indices.Analyze
 		: ApiIntegrationTestBase<ReadOnlyCluster, IAnalyzeResponse, IAnalyzeRequest, AnalyzeDescriptor, AnalyzeRequest>
 	{
 		public AnalyzeApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Analyze(f),
-			fluentAsync: (client, f) => client.AnalyzeAsync(f),
-			request: (client, r) => client.Analyze(r),
-			requestAsync: (client, r) => client.AnalyzeAsync(r)
-		);
 
 		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/_analyze";
 
 		protected override object ExpectJson => new
 		{
@@ -33,11 +22,15 @@ namespace Tests.Indices.Analyze
 			filter = new[] { "lowercase", "stop" }
 		};
 
+		protected override int ExpectStatusCode => 200;
+
 		protected override Func<AnalyzeDescriptor, IAnalyzeRequest> Fluent => d => d
 			.Text("hello world", "domination")
 			.CharFilter("html_strip")
 			.Tokenizer("keyword")
 			.Filter("lowercase", "stop");
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected override AnalyzeRequest Initializer => new AnalyzeRequest
 		{
@@ -46,5 +39,14 @@ namespace Tests.Indices.Analyze
 			Tokenizer = "keyword",
 			Filter = new[] { "lowercase", "stop" }
 		};
+
+		protected override string UrlPath => $"/_analyze";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.Analyze(f),
+			(client, f) => client.AnalyzeAsync(f),
+			(client, r) => client.Analyze(r),
+			(client, r) => client.AnalyzeAsync(r)
+		);
 	}
 }

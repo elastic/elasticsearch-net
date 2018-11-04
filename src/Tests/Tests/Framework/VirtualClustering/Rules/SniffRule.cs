@@ -10,8 +10,8 @@ namespace Tests.Framework
 
 	public class SniffRule : RuleBase<SniffRule>, ISniffRule
 	{
-		private ISniffRule Self => this;
 		VirtualCluster ISniffRule.NewClusterState { get; set; }
+		private ISniffRule Self => this;
 
 		public SniffRule Fails(Union<TimesHelper.AllTimes, int> times, Union<Exception, int> errorState = null)
 		{
@@ -29,7 +29,9 @@ namespace Tests.Framework
 			Self.Return = 200;
 			return this;
 		}
-		public SniffRule SucceedAlways(VirtualCluster cluster = null) => this.Succeeds(TimesHelper.Always, cluster);
-		public SniffRule FailAlways(Union<Exception, int> errorState = null) => this.Fails(TimesHelper.Always, errorState);
+
+		public SniffRule SucceedAlways(VirtualCluster cluster = null) => Succeeds(TimesHelper.Always, cluster);
+
+		public SniffRule FailAlways(Union<Exception, int> errorState = null) => Fails(TimesHelper.Always, errorState);
 	}
 }

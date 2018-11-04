@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Net;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -10,16 +8,28 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.Migration.MigrationUpgrade
 {
-	[SkipVersion("<5.6.0","Introduced in Elasticsearch 5.6.0 to aid in upgrading")]
-	public class MigrationUpgradeApiTests :
-		ApiIntegrationTestBase<XPackCluster, IMigrationUpgradeResponse, IMigrationUpgradeRequest, MigrationUpgradeDescriptor, MigrationUpgradeRequest>
+	[SkipVersion("<5.6.0", "Introduced in Elasticsearch 5.6.0 to aid in upgrading")]
+	public class MigrationUpgradeApiTests
+		: ApiIntegrationTestBase<XPackCluster, IMigrationUpgradeResponse, IMigrationUpgradeRequest, MigrationUpgradeDescriptor,
+			MigrationUpgradeRequest>
 	{
 		public MigrationUpgradeApiTests(XPackCluster cluster, EndpointUsage usage)
 			: base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => false;
+
+		protected override object ExpectJson => null;
+		protected override int ExpectStatusCode => 500;
+
+		protected override Func<MigrationUpgradeDescriptor, IMigrationUpgradeRequest> Fluent => f => f;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
+		protected override MigrationUpgradeRequest Initializer => new MigrationUpgradeRequest(CallIsolatedValue);
+
+		protected override string UrlPath => $"/_xpack/migration/upgrade/{CallIsolatedValue}";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -41,24 +51,13 @@ namespace Tests.XPack.Migration.MigrationUpgrade
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.MigrationUpgrade(CallIsolatedValue, f),
-			fluentAsync: (c, f) => c.MigrationUpgradeAsync(CallIsolatedValue, f),
-			request: (c, r) => c.MigrationUpgrade(r),
-			requestAsync: (c, r) => c.MigrationUpgradeAsync(r)
+			(c, f) => c.MigrationUpgrade(CallIsolatedValue, f),
+			(c, f) => c.MigrationUpgradeAsync(CallIsolatedValue, f),
+			(c, r) => c.MigrationUpgrade(r),
+			(c, r) => c.MigrationUpgradeAsync(r)
 		);
 
-		protected override string UrlPath => $"/_xpack/migration/upgrade/{CallIsolatedValue}";
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override int ExpectStatusCode => 500;
-		protected override bool ExpectIsValid => false;
-
-		protected override object ExpectJson => null;
-
 		protected override MigrationUpgradeDescriptor NewDescriptor() => new MigrationUpgradeDescriptor(CallIsolatedValue);
-
-		protected override Func<MigrationUpgradeDescriptor, IMigrationUpgradeRequest> Fluent => f => f;
-
-		protected override MigrationUpgradeRequest Initializer => new MigrationUpgradeRequest(CallIsolatedValue);
 
 		protected override void ExpectResponse(IMigrationUpgradeResponse response)
 		{

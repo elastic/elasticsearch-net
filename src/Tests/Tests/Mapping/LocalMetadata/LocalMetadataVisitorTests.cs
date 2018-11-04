@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Tests.Mapping.Types.Core.Text;
-using Xunit;
-using Tests.Framework;
 using Tests.Mapping.LocalMetadata.Extensions;
+using Tests.Mapping.Types.Core.Text;
 
 namespace Tests.Mapping.LocalMetadata
 {
@@ -34,12 +31,12 @@ namespace Tests.Mapping.LocalMetadata
 		{
 			var descriptor = new TypeMappingDescriptor<TextTest>().Properties(p => p
 				.Text(t => t
-				.Name(o => o.Full)
-				.Norms()
-				.LocalMetadata(m => m
-					.Add("Test", "TestValue")
-				)
-			)) as ITypeMapping;
+					.Name(o => o.Full)
+					.Norms()
+					.LocalMetadata(m => m
+						.Add("Test", "TestValue")
+					)
+				)) as ITypeMapping;
 
 			var visitor = new LocalMatadataVisitor();
 			var walker = new MappingWalker(visitor);
@@ -55,7 +52,7 @@ namespace Tests.Mapping.LocalMetadata.Extensions
 	public static class TestLocalMetadataMappingExtensions
 	{
 		public static TDescriptor AddTestLocalMetadata<TDescriptor>(this TDescriptor descriptor)
-				where TDescriptor : IDescriptor
+			where TDescriptor : IDescriptor
 		{
 			var propertyDescriptor = descriptor as IProperty;
 

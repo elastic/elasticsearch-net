@@ -4,7 +4,6 @@ using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Domain;
-using Tests.Framework;
 
 namespace Tests.QueryDsl.BoolDsl.Operators
 {
@@ -17,27 +16,26 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			var queries = new QueryContainer[] { Query };
 			ReturnsBool(
 				new BoolQuery { Must = queries, Should = queries }
-					|| new BoolQuery { MustNot = queries, Should = queries }
-				, q => q.Bool(b=>b.Must(c=>c.Query()).Should(c=>c.Query()))
-					|| q.Bool(b=>b.MustNot(c=>c.Query()).Should(c=>c.Query()))
+				|| new BoolQuery { MustNot = queries, Should = queries }
+				, q => q.Bool(b => b.Must(c => c.Query()).Should(c => c.Query()))
+					|| q.Bool(b => b.MustNot(c => c.Query()).Should(c => c.Query()))
 				, b =>
-			{
+				{
+					b.Should.Should().NotBeEmpty().And.HaveCount(2);
+					var first = (IQueryContainer)b.Should.First();
+					var last = (IQueryContainer)b.Should.Last();
+					first.Bool.Should().NotBeNull();
+					last.Bool.Should().NotBeNull();
 
-				b.Should.Should().NotBeEmpty().And.HaveCount(2);
-				var first = (IQueryContainer)b.Should.First();
-				var last = (IQueryContainer)b.Should.Last();
-				first.Bool.Should().NotBeNull();
-				last.Bool.Should().NotBeNull();
+					var firstBool = first.Bool;
+					var lastBool = last.Bool;
 
-				var firstBool = first.Bool;
-				var lastBool = last.Bool;
+					firstBool.Should.Should().NotBeEmpty().And.HaveCount(1);
+					firstBool.Must.Should().NotBeEmpty().And.HaveCount(1);
 
-				firstBool.Should.Should().NotBeEmpty().And.HaveCount(1);
-				firstBool.Must.Should().NotBeEmpty().And.HaveCount(1);
-
-				lastBool.Should.Should().NotBeEmpty().And.HaveCount(1);
-				lastBool.MustNot.Should().NotBeEmpty().And.HaveCount(1);
-			});
+					lastBool.Should.Should().NotBeEmpty().And.HaveCount(1);
+					lastBool.MustNot.Should().NotBeEmpty().And.HaveCount(1);
+				});
 		}
 
 		protected void CombineBothWays(
@@ -48,7 +46,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			Action<IQueryContainer> assertLeft,
 			Action<IQueryContainer> assertRight,
 			Action<IBoolQuery> assertContainer = null
-			)
+		)
 		{
 			var oisLeft = ois1 || ois2;
 			Func<QueryContainerDescriptor<Project>, QueryContainer> lambdaLeft = (s) => lambda1(s) || lambda2(s);
@@ -80,7 +78,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			var queries = new QueryContainer[] { Query };
 			CombineBothWays(
 				new BoolQuery { Must = queries, Should = queries }, Query
-				, q => q.Bool(b => b.Must(c => c.Query()).Should(c => c.Query())), q=> q.Query()
+				, q => q.Bool(b => b.Must(c => c.Query()).Should(c => c.Query())), q => q.Query()
 				, l => l.Bool.Should().NotBeNull()
 				, r => r.Term.Should().NotBeNull()
 				, b => b.Should.Should().NotBeEmpty().And.HaveCount(2)
@@ -95,9 +93,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 				, q => q.Bool(b => b.Must(c => c.Query()).MustNot(c => c.Query())), q => q.Query()
 				, l => l.Bool.Should().NotBeNull()
 				, r => r.Term.Should().NotBeNull()
-				, b => {
-					b.Should.Should().NotBeEmpty().And.HaveCount(2);
-				}
+				, b => { b.Should.Should().NotBeEmpty().And.HaveCount(2); }
 			);
 		}
 
@@ -109,9 +105,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 				, q => q.Bool(b => b.Must(c => c.Query())), q => q.Query()
 				, l => l.Bool.Should().NotBeNull()
 				, r => r.Term.Should().NotBeNull()
-				, b => {
-					b.Should.Should().NotBeEmpty().And.HaveCount(2);
-				}
+				, b => { b.Should.Should().NotBeEmpty().And.HaveCount(2); }
 			);
 		}
 
@@ -120,7 +114,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			var queries = new QueryContainer[] { Query };
 			CombineBothWays(
 				new BoolQuery { Should = queries }, Query
-				, q => q.Bool(b => b.Should(c => c.Query())), q=> q.Query()
+				, q => q.Bool(b => b.Should(c => c.Query())), q => q.Query()
 				, l => l.Term.Should().NotBeNull()
 				, r => r.Term.Should().NotBeNull()
 				, b => b.Should.Should().NotBeEmpty().And.HaveCount(2)
@@ -132,8 +126,9 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			var queries = new QueryContainer[] { Query };
 			CombineBothWays(
 				new BoolQuery { Should = queries, Name = "name" }, Query
-				, q => q.Bool(b => b.Should(c => c.Query()).Name("name")), q=> q.Query()
-				, l => {
+				, q => q.Bool(b => b.Should(c => c.Query()).Name("name")), q => q.Query()
+				, l =>
+				{
 					l.Bool.Should().NotBeNull();
 					l.Bool.Should.Should().NotBeNullOrEmpty();
 					l.Bool.Name.Should().Be("name");
@@ -142,6 +137,5 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 				, b => b.Should.Should().NotBeEmpty().And.HaveCount(2)
 			);
 		}
-
 	}
 }

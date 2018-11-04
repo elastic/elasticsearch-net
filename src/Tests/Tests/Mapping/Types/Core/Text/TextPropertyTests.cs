@@ -1,11 +1,8 @@
 ﻿using System;
-using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Mapping.Types.Core.Text
 {
@@ -22,7 +19,7 @@ namespace Tests.Mapping.Types.Core.Text
 					type = "text",
 					analyzer = "standard",
 					boost = 1.2,
-					copy_to = new [] { "other_field" },
+					copy_to = new[] { "other_field" },
 					eager_global_ordinals = true,
 					fielddata = true,
 					fielddata_frequency_filter = new
@@ -52,45 +49,45 @@ namespace Tests.Mapping.Types.Core.Text
 				}
 			}
 		};
-
 #pragma warning disable 618 // Usage of IncludeInAll
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
-				.Text(s => s
-					.Name(p => p.Name)
-					.Analyzer("standard")
-					.Boost(1.2)
-					.CopyTo(c => c
-						.Field("other_field")
+			.Text(s => s
+				.Name(p => p.Name)
+				.Analyzer("standard")
+				.Boost(1.2)
+				.CopyTo(c => c
+					.Field("other_field")
+				)
+				.EagerGlobalOrdinals()
+				.Fielddata()
+				.FielddataFrequencyFilter(ff => ff
+					.Min(1)
+					.Max(100)
+					.MinSegmentSize(2)
+				)
+				.Fields(fd => fd
+					.Keyword(k => k
+						.Name("raw")
+						.IgnoreAbove(100)
 					)
-					.EagerGlobalOrdinals()
-					.Fielddata()
-					.FielddataFrequencyFilter(ff => ff
-						.Min(1)
-						.Max(100)
-						.MinSegmentSize(2)
-					)
-					.Fields(fd => fd
-						.Keyword(k => k
-							.Name("raw")
-							.IgnoreAbove(100)
-						)
-					)
-					.IncludeInAll(false)
-					.Index(true)
-					.IndexOptions(IndexOptions.Offsets)
-					.PositionIncrementGap(5)
-					.SearchAnalyzer("standard")
-					.SearchQuoteAnalyzer("standard")
-					.Similarity(SimilarityOption.Classic)
-					.Store()
-					.Norms(false)
-					.TermVector(TermVectorOption.WithPositionsOffsets)
-				);
+				)
+				.IncludeInAll(false)
+				.Index(true)
+				.IndexOptions(IndexOptions.Offsets)
+				.PositionIncrementGap(5)
+				.SearchAnalyzer("standard")
+				.SearchQuoteAnalyzer("standard")
+				.Similarity(SimilarityOption.Classic)
+				.Store()
+				.Norms(false)
+				.TermVector(TermVectorOption.WithPositionsOffsets)
+			);
 #pragma warning restore 618
 
 		protected override IProperties InitializerProperties => new Properties
 		{
-			{ "name", new TextProperty
+			{
+				"name", new TextProperty
 				{
 					Analyzer = "standard",
 					Boost = 1.2,
@@ -105,7 +102,8 @@ namespace Tests.Mapping.Types.Core.Text
 					},
 					Fields = new Properties
 					{
-						{ "raw", new KeywordProperty
+						{
+							"raw", new KeywordProperty
 							{
 								IgnoreAbove = 100
 							}

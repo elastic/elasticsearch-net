@@ -10,39 +10,17 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.MachineLearning.UpdateDatafeed
 {
-	public class UpdateDatafeedApiTests : MachineLearningIntegrationTestBase<IUpdateDatafeedResponse,
-		IUpdateDatafeedRequest, UpdateDatafeedDescriptor<Metric>, UpdateDatafeedRequest>
+	public class UpdateDatafeedApiTests
+		: MachineLearningIntegrationTestBase<IUpdateDatafeedResponse,
+			IUpdateDatafeedRequest, UpdateDatafeedDescriptor<Metric>, UpdateDatafeedRequest>
 	{
-		public UpdateDatafeedApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
-
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.UpdateDatafeed(CallIsolatedValue + "-datafeed", f),
-			fluentAsync: (client, f) => client.UpdateDatafeedAsync(CallIsolatedValue + "-datafeed", f),
-			request: (client, r) => client.UpdateDatafeed(r),
-			requestAsync: (client, r) => client.UpdateDatafeedAsync(r)
-		);
-
-		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
-		{
-			foreach (var callUniqueValue in values)
-			{
-				PutJob(client, callUniqueValue.Value);
-				PutDatafeed(client, callUniqueValue.Value);
-			}
-		}
+		public UpdateDatafeedApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"_xpack/ml/datafeeds/{CallIsolatedValue}-datafeed/_update";
-		protected override bool SupportsDeserialization => false;
-		protected override UpdateDatafeedDescriptor<Metric> NewDescriptor() => new UpdateDatafeedDescriptor<Metric>(CallIsolatedValue);
 
 		protected override object ExpectJson => new
 		{
-			indices = new [] { "server-metrics" },
+			indices = new[] { "server-metrics" },
 			job_id = CallIsolatedValue,
 			query = new
 			{
@@ -51,15 +29,18 @@ namespace Tests.XPack.MachineLearning.UpdateDatafeed
 					boost = 2.0
 				}
 			},
-			types = new [] { "metric" }
+			types = new[] { "metric" }
 		};
+
+		protected override int ExpectStatusCode => 200;
 
 		protected override Func<UpdateDatafeedDescriptor<Metric>, IUpdateDatafeedRequest> Fluent => f => f
 			.JobId(CallIsolatedValue)
 			.Query(q => q
 				.MatchAll(m => m.Boost(2))
-			)
-			;
+			);
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected override UpdateDatafeedRequest Initializer =>
 			new UpdateDatafeedRequest(CallIsolatedValue + "-datafeed")
@@ -72,6 +53,27 @@ namespace Tests.XPack.MachineLearning.UpdateDatafeed
 					Boost = 2
 				}
 			};
+
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"_xpack/ml/datafeeds/{CallIsolatedValue}-datafeed/_update";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.UpdateDatafeed(CallIsolatedValue + "-datafeed", f),
+			(client, f) => client.UpdateDatafeedAsync(CallIsolatedValue + "-datafeed", f),
+			(client, r) => client.UpdateDatafeed(r),
+			(client, r) => client.UpdateDatafeedAsync(r)
+		);
+
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
+		{
+			foreach (var callUniqueValue in values)
+			{
+				PutJob(client, callUniqueValue.Value);
+				PutDatafeed(client, callUniqueValue.Value);
+			}
+		}
+
+		protected override UpdateDatafeedDescriptor<Metric> NewDescriptor() => new UpdateDatafeedDescriptor<Metric>(CallIsolatedValue);
 
 		protected override void ExpectResponse(IUpdateDatafeedResponse response)
 		{

@@ -31,14 +31,16 @@ namespace Tests.IndexModules.Similarity
 					independence_measure = "chisquared",
 					type = "DFI"
 				},
-				dfr = new Dictionary<string, object>{
+				dfr = new Dictionary<string, object>
+				{
 					{ "basic_model", "d" },
 					{ "after_effect", "b" },
 					{ "normalization", "h1" },
 					{ "normalization.h1.c", 1.1 },
 					{ "type", "DFR" }
 				},
-				ib = new Dictionary<string, object> {
+				ib = new Dictionary<string, object>
+				{
 					{ "distribution", "ll" },
 					{ "lambda", "df" },
 					{ "normalization", "h1" },
@@ -90,29 +92,34 @@ namespace Tests.IndexModules.Similarity
 				.Custom("my_name", "plugin_sim", d => d
 					.Add("some_property", "some value")
 				);
+
 			/**
 			 */
 			protected override Similarities Initializer =>
 				new Similarities
 				{
-					{ "bm25", new BM25Similarity
+					{
+						"bm25", new BM25Similarity
 						{
 							B = 1.0,
 							K1 = 1.1,
 							DiscountOverlaps = true
 						}
 					},
-					{ "def", new ClassicSimilarity
+					{
+						"def", new ClassicSimilarity
 						{
 							DiscountOverlaps = true
 						}
 					},
-					{ "dfi", new DFISimilarity
+					{
+						"dfi", new DFISimilarity
 						{
 							IndependenceMeasure = DFIIndependenceMeasure.ChiSquared
 						}
 					},
-					{ "dfr", new DFRSimilarity
+					{
+						"dfr", new DFRSimilarity
 						{
 							AfterEffect = DFRAfterEffect.B,
 							BasicModel = DFRBasicModel.D,
@@ -120,7 +127,8 @@ namespace Tests.IndexModules.Similarity
 							NormalizationH1C = 1.1
 						}
 					},
-					{ "ib", new IBSimilarity
+					{
+						"ib", new IBSimilarity
 						{
 							Distribution = IBDistribution.LogLogistic,
 							Lambda = IBLambda.DocumentFrequency,
@@ -128,17 +136,20 @@ namespace Tests.IndexModules.Similarity
 							NormalizationH1C = 1.2
 						}
 					},
-					{ "lmd", new LMDirichletSimilarity
+					{
+						"lmd", new LMDirichletSimilarity
 						{
 							Mu = 2
 						}
 					},
-					{ "lmj", new LMJelinekMercerSimilarity
+					{
+						"lmj", new LMJelinekMercerSimilarity
 						{
 							Lambda = 2.0
 						}
 					},
-					{ "my_name", new CustomSimilarity("plugin_sim")
+					{
+						"my_name", new CustomSimilarity("plugin_sim")
 						{
 							{ "some_property", "some value" }
 						}

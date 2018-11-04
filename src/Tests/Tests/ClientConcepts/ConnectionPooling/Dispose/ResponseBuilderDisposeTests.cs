@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Client.Settings;
-using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 {
@@ -18,28 +15,6 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 	{
 		private readonly IConnectionSettingsValues _settings = new AlwaysInMemoryConnectionSettings().DisableDirectStreaming(false);
 		private readonly IConnectionSettingsValues _settingsDisableDirectStream = new AlwaysInMemoryConnectionSettings().DisableDirectStreaming(true);
-
-		private class TrackDisposeStream : MemoryStream
-		{
-			public bool IsDisposed { get; private set; }
-			protected override void Dispose(bool disposing)
-			{
-				this.IsDisposed = true;
-				base.Dispose(disposing);
-			}
-		}
-
-		private class TrackMemoryStreamFactory : IMemoryStreamFactory
-		{
-			public IList<TrackDisposeStream> Created { get; } = new List<TrackDisposeStream>();
-
-			public MemoryStream Create()
-			{
-				var stream = new TrackDisposeStream();
-				this.Created.Add(stream);
-				return stream;
-			}
-		}
 
 		[U] public async Task ResponseWithHttpStatusCode() => await AssertRegularResponse(false, r => r.StatusCode = 1);
 
@@ -61,8 +36,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 			};
 
 			var responseBuilder = new ResponseBuilder<RootNodeInfoResponse>(requestData)
-			{
-			};
+				{ };
 			mutate?.Invoke(responseBuilder);
 
 			var stream = new TrackDisposeStream();
@@ -111,8 +85,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 			};
 
 			var responseBuilder = new ResponseBuilder<Stream>(requestData)
-			{
-			};
+				{ };
 			mutate?.Invoke(responseBuilder);
 
 			var stream = new TrackDisposeStream();
@@ -130,7 +103,27 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 			stream.IsDisposed.Should().Be(disableDirectStreaming ? true : false);
 		}
 
+		private class TrackDisposeStream : MemoryStream
+		{
+			public bool IsDisposed { get; private set; }
+
+			protected override void Dispose(bool disposing)
+			{
+				IsDisposed = true;
+				base.Dispose(disposing);
+			}
+		}
+
+		private class TrackMemoryStreamFactory : IMemoryStreamFactory
+		{
+			public IList<TrackDisposeStream> Created { get; } = new List<TrackDisposeStream>();
+
+			public MemoryStream Create()
+			{
+				var stream = new TrackDisposeStream();
+				Created.Add(stream);
+				return stream;
+			}
+		}
 	}
-
-
 }

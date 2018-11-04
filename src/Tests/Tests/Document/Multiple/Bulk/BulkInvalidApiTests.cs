@@ -8,34 +8,53 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Document.Multiple.Bulk
 {
 	public class BulkInvalidApiTests : ApiIntegrationTestBase<WritableCluster, IBulkResponse, IBulkRequest, BulkDescriptor, BulkRequest>
 	{
 		public BulkInvalidApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Bulk(f),
-			fluentAsync: (client, f) => client.BulkAsync(f),
-			request: (client, r) => client.Bulk(r),
-			requestAsync: (client, r) => client.BulkAsync(r)
-		);
 
 		protected override bool ExpectIsValid => false;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/{CallIsolatedValue}/_bulk";
-
-		protected override bool SupportsDeserialization => false;
 
 		protected override object ExpectJson { get; } = new object[]
 		{
-			new Dictionary<string, object>{ { "update", new { _type="project", _id = Project.Instance.Name } } },
+			new Dictionary<string, object> { { "update", new { _type = "project", _id = Project.Instance.Name } } },
 			new { doc = new { leadDeveloper = new { firstName = "martijn" } } },
-			new Dictionary<string, object>{ { "delete", new { _type="project", _id = Project.Instance.Name + "1" } } },
+			new Dictionary<string, object> { { "delete", new { _type = "project", _id = Project.Instance.Name + "1" } } },
 		};
+
+		protected override int ExpectStatusCode => 200;
+
+		protected override Func<BulkDescriptor, IBulkRequest> Fluent => d => d
+			.Index(CallIsolatedValue)
+			.Update<Project, object>(b => b.Doc(new { leadDeveloper = new { firstName = "martijn" } }).Id(Project.Instance.Name))
+			.Delete<Project>(b => b.Id(Project.Instance.Name + "1"));
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
+
+		protected override BulkRequest Initializer => new BulkRequest(CallIsolatedValue)
+		{
+			Operations = new List<IBulkOperation>
+			{
+				new BulkUpdateOperation<Project, object>(Project.Instance)
+				{
+					Doc = new { leadDeveloper = new { firstName = "martijn" } }
+				},
+				new BulkDeleteOperation<Project>(Project.Instance.Name + "1"),
+			}
+		};
+
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/{CallIsolatedValue}/_bulk";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.Bulk(f),
+			(client, f) => client.BulkAsync(f),
+			(client, r) => client.Bulk(r),
+			(client, r) => client.BulkAsync(r)
+		);
 
 		protected override void ExpectResponse(IBulkResponse response)
 		{
@@ -61,23 +80,5 @@ namespace Tests.Document.Multiple.Bulk
 #pragma warning restore 618
 			failedDelete.IsValid.Should().BeTrue();
 		}
-
-		protected override Func<BulkDescriptor, IBulkRequest> Fluent => d => d
-			.Index(CallIsolatedValue)
-			.Update<Project, object>(b => b.Doc(new { leadDeveloper = new { firstName = "martijn" } }).Id(Project.Instance.Name))
-			.Delete<Project>(b=>b.Id(Project.Instance.Name + "1"));
-
-
-		protected override BulkRequest Initializer => new BulkRequest(CallIsolatedValue)
-		{
-			Operations = new List<IBulkOperation>
-			{
-				new BulkUpdateOperation<Project, object>(Project.Instance)
-				{
-					Doc = new { leadDeveloper = new { firstName = "martijn" } }
-				},
-				new BulkDeleteOperation<Project>(Project.Instance.Name + "1"),
-			}
-		};
 	}
 }

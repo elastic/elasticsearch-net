@@ -4,9 +4,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Aggregations.Pipeline.AverageBucket
 {
@@ -70,15 +68,15 @@ namespace Tests.Aggregations.Pipeline.AverageBucket
 		{
 			Size = 0,
 			Aggregations = new DateHistogramAggregation("projects_started_per_month")
-			{
-				Field = "startedOn",
-				Interval = DateInterval.Month,
-				Aggregations = new SumAggregation("commits", "numberOfCommits")
-			}
-			&& new AverageBucketAggregation("average_commits_per_month", "projects_started_per_month>commits")
-			{
-				GapPolicy = GapPolicy.InsertZeros
-			}
+				{
+					Field = "startedOn",
+					Interval = DateInterval.Month,
+					Aggregations = new SumAggregation("commits", "numberOfCommits")
+				}
+				&& new AverageBucketAggregation("average_commits_per_month", "projects_started_per_month>commits")
+				{
+					GapPolicy = GapPolicy.InsertZeros
+				}
 		};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
