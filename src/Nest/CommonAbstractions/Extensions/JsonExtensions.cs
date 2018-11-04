@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Elasticsearch.Net;
@@ -15,6 +14,7 @@ namespace Nest
 			var contract = serializer.ContractResolver as ElasticContractResolver;
 			if (contract?.ConnectionSettings == null)
 				throw new Exception("If you use a custom contract resolver be sure to subclass from " + nameof(ElasticContractResolver));
+
 			return contract.ConnectionSettings;
 		}
 
@@ -29,6 +29,7 @@ namespace Nest
 		public static void WriteProperty(this JsonWriter writer, JsonSerializer serializer, string propertyName, object value)
 		{
 			if (value == null) return;
+
 			writer.WritePropertyName(propertyName);
 			serializer.Serialize(writer, value);
 		}
@@ -47,7 +48,7 @@ namespace Nest
 			{
 				var o = new JObject
 				{
-					{"error", jToken}
+					{ "error", jToken }
 				};
 				j = o;
 			}

@@ -17,5 +17,4 @@ namespace Nest
 		[JsonProperty("throttle_time_in_millis")]
 		public long ThrottleTimeInMilliseconds { get; set; }
 	}
-
 }

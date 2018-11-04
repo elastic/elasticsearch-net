@@ -6,11 +6,11 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public interface IFielddata
 	{
-		[JsonProperty("loading")]
-		FielddataLoading? Loading { get; set; }
-
 		[JsonProperty("filter")]
 		IFielddataFilter Filter { get; set; }
+
+		[JsonProperty("loading")]
+		FielddataLoading? Loading { get; set; }
 	}
 
 	public abstract class FielddataBase : IFielddata

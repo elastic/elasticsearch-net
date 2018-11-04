@@ -9,11 +9,29 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<InnerHits>))]
 	public interface IInnerHits
 	{
-		[JsonProperty("name")]
-		string Name { get; set; }
+		[JsonProperty("docvalue_fields")]
+		Fields DocValueFields { get; set; }
+
+		[JsonProperty(PropertyName = "explain")]
+		bool? Explain { get; set; }
+
+		[JsonProperty(PropertyName = "fielddata_fields")]
+		IList<Field> FielddataFields { get; set; }
 
 		[JsonProperty("from")]
 		int? From { get; set; }
+
+		[JsonProperty(PropertyName = "highlight")]
+		IHighlight Highlight { get; set; }
+
+		[JsonProperty("ignore_unmapped")]
+		bool? IgnoreUnmapped { get; set; }
+
+		[JsonProperty("name")]
+		string Name { get; set; }
+
+		[JsonProperty(PropertyName = "script_fields")]
+		IScriptFields ScriptFields { get; set; }
 
 		[JsonProperty("size")]
 		int? Size { get; set; }
@@ -21,73 +39,54 @@ namespace Nest
 		[JsonProperty(PropertyName = "sort")]
 		IList<ISort> Sort { get; set; }
 
-		[JsonProperty(PropertyName = "highlight")]
-		IHighlight Highlight { get; set; }
-
-		[JsonProperty(PropertyName = "explain")]
-		bool? Explain { get; set; }
-
 		[JsonProperty(PropertyName = "_source")]
 		Union<bool, ISourceFilter> Source { get; set; }
 
 		[JsonProperty(PropertyName = "version")]
 		bool? Version { get; set; }
-
-		[JsonProperty(PropertyName = "fielddata_fields")]
-		IList<Field> FielddataFields { get; set; }
-
-		[JsonProperty(PropertyName = "script_fields")]
-		IScriptFields ScriptFields { get; set; }
-
-		[JsonProperty("docvalue_fields")]
-		Fields DocValueFields { get; set; }
-
-		[JsonProperty("ignore_unmapped")]
-		bool? IgnoreUnmapped { get; set; }
 	}
 
 	public class InnerHits : IInnerHits
 	{
-		public string Name { get; set; }
+		public Fields DocValueFields { get; set; }
+
+		public bool? Explain { get; set; }
+
+		public IList<Field> FielddataFields { get; set; }
 
 		public int? From { get; set; }
+
+		public IHighlight Highlight { get; set; }
+
+		public bool? IgnoreUnmapped { get; set; }
+		public string Name { get; set; }
+
+		public IScriptFields ScriptFields { get; set; }
 
 		public int? Size { get; set; }
 
 		public IList<ISort> Sort { get; set; }
 
-		public IHighlight Highlight { get; set; }
-
-		public bool? Explain { get; set; }
-
 		public Union<bool, ISourceFilter> Source { get; set; }
 
 		public bool? Version { get; set; }
-
-		public IList<Field> FielddataFields { get; set; }
-
-		public IScriptFields ScriptFields { get; set; }
-
-		public Fields DocValueFields { get; set; }
-
-		public bool? IgnoreUnmapped { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class InnerHitsDescriptor<T> : DescriptorBase<InnerHitsDescriptor<T>, IInnerHits>, IInnerHits where T : class
 	{
-		string IInnerHits.Name { get; set; }
+		Fields IInnerHits.DocValueFields { get; set; }
+		bool? IInnerHits.Explain { get; set; }
+		IList<Field> IInnerHits.FielddataFields { get; set; }
 		int? IInnerHits.From { get; set; }
+		IHighlight IInnerHits.Highlight { get; set; }
+		bool? IInnerHits.IgnoreUnmapped { get; set; }
+		string IInnerHits.Name { get; set; }
+		IScriptFields IInnerHits.ScriptFields { get; set; }
 		int? IInnerHits.Size { get; set; }
 		IList<ISort> IInnerHits.Sort { get; set; }
-		IHighlight IInnerHits.Highlight { get; set; }
-		bool? IInnerHits.Explain { get; set; }
 		Union<bool, ISourceFilter> IInnerHits.Source { get; set; }
 		bool? IInnerHits.Version { get; set; }
-		IList<Field> IInnerHits.FielddataFields { get; set; }
-		IScriptFields IInnerHits.ScriptFields { get; set; }
-		Fields IInnerHits.DocValueFields { get; set; }
-		bool? IInnerHits.IgnoreUnmapped { get; set; }
 
 		public InnerHitsDescriptor<T> From(int? from) => Assign(a => a.From = from);
 
@@ -105,7 +104,8 @@ namespace Nest
 
 		public InnerHitsDescriptor<T> Version(bool? version = true) => Assign(a => a.Version = version);
 
-		public InnerHitsDescriptor<T> Sort(Func<SortDescriptor<T>, IPromise<IList<ISort>>> selector) => Assign(a => a.Sort = selector?.Invoke(new SortDescriptor<T>())?.Value);
+		public InnerHitsDescriptor<T> Sort(Func<SortDescriptor<T>, IPromise<IList<ISort>>> selector) =>
+			Assign(a => a.Sort = selector?.Invoke(new SortDescriptor<T>())?.Value);
 
 		/// <summary>
 		/// Allow to highlight search results on one or more fields. The implementation uses the either lucene fast-vector-highlighter or highlighter.

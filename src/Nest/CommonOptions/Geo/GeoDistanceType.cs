@@ -9,8 +9,10 @@ namespace Nest
 	{
 		[EnumMember(Value = "sloppy_arc")]
 		SloppyArc,
+
 		[EnumMember(Value = "arc")]
 		Arc,
+
 		[EnumMember(Value = "plane")]
 		Plane
 	}

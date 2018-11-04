@@ -9,23 +9,23 @@ namespace Nest
 	[JsonObject]
 	public interface IWatcherStatsResponse : IResponse
 	{
-		[JsonProperty("watcher_state")]
-		WatcherState WatcherState { get; }
-
-		[JsonProperty("watch_count")]
-		long WatchCount { get; }
+		[JsonProperty("current_watches")]
+		IReadOnlyCollection<WatchRecordStats> CurrentWatches { get; }
 
 		[JsonProperty("execution_thread_pool")]
 		ExecutionThreadPool ExecutionThreadPool { get; }
 
-		[JsonProperty("current_watches")]
-		IReadOnlyCollection<WatchRecordStats> CurrentWatches { get; }
+		[JsonProperty("manually_stopped")]
+		bool ManuallyStopped { get; }
 
 		[JsonProperty("queued_watches")]
 		IReadOnlyCollection<WatchRecordQueuedStats> QueuedWatches { get; }
 
-		[JsonProperty("manually_stopped")]
-		bool ManuallyStopped { get; }
+		[JsonProperty("watch_count")]
+		long WatchCount { get; }
+
+		[JsonProperty("watcher_state")]
+		WatcherState WatcherState { get; }
 	}
 
 	[JsonConverter(typeof(StringEnumConverter))]
@@ -46,34 +46,33 @@ namespace Nest
 
 	public class WatcherStatsResponse : ResponseBase, IWatcherStatsResponse
 	{
-		public WatcherState WatcherState { get; internal set; }
-
-		public long WatchCount { get; internal set; }
+		public IReadOnlyCollection<WatchRecordStats> CurrentWatches { get; internal set; }
 
 		public ExecutionThreadPool ExecutionThreadPool { get; internal set; }
 
-		public IReadOnlyCollection<WatchRecordStats> CurrentWatches { get; internal set; }
+		public bool ManuallyStopped { get; internal set; }
 
 		public IReadOnlyCollection<WatchRecordQueuedStats> QueuedWatches { get; internal set; }
 
-		public bool ManuallyStopped { get; internal set; }
+		public long WatchCount { get; internal set; }
+		public WatcherState WatcherState { get; internal set; }
 	}
 
 	public class WatchRecordQueuedStats
 	{
+		[JsonProperty("execution_time")]
+		public DateTimeOffset? ExecutionTime { get; internal set; }
+
+		[JsonProperty("triggered_time")]
+		public DateTimeOffset? TriggeredTime { get; internal set; }
+
 		[JsonProperty("watch_id")]
 		public string WatchId { get; internal set; }
 
 		[JsonProperty("watch_record_id")]
 		public string WatchRecordId { get; internal set; }
-
-		[JsonProperty("triggered_time")]
-		public DateTimeOffset? TriggeredTime { get; internal set; }
-
-		[JsonProperty("execution_time")]
-		public DateTimeOffset? ExecutionTime { get; internal set; }
-
 	}
+
 	public class WatchRecordStats : WatchRecordQueuedStats
 	{
 		[JsonProperty("execution_phase")]
@@ -83,11 +82,11 @@ namespace Nest
 	[JsonObject]
 	public class ExecutionThreadPool
 	{
-		[JsonProperty("queue_size")]
-		public long QueueSize { get; internal set; }
-
 		[JsonProperty("max_size")]
 		public long MaxSize { get; internal set; }
+
+		[JsonProperty("queue_size")]
+		public long QueueSize { get; internal set; }
 	}
 
 	[JsonConverter(typeof(StringEnumConverter))]

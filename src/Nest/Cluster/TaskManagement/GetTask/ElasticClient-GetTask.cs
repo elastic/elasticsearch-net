@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using System.Threading;
 
 namespace Nest
 {
@@ -11,7 +11,9 @@ namespace Nest
 
 		IGetTaskResponse GetTask(IGetTaskRequest request);
 
-		Task<IGetTaskResponse> GetTaskAsync(TaskId id, Func<GetTaskDescriptor, IGetTaskRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IGetTaskResponse> GetTaskAsync(TaskId id, Func<GetTaskDescriptor, IGetTaskRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
 		Task<IGetTaskResponse> GetTaskAsync(IGetTaskRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
@@ -19,22 +21,24 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		public IGetTaskResponse GetTask(TaskId id, Func<GetTaskDescriptor, IGetTaskRequest> selector = null) =>
-			this.GetTask(selector.InvokeOrDefault(new GetTaskDescriptor().TaskId(id)));
+			GetTask(selector.InvokeOrDefault(new GetTaskDescriptor().TaskId(id)));
 
 		public IGetTaskResponse GetTask(IGetTaskRequest request) =>
-			this.Dispatcher.Dispatch<IGetTaskRequest, GetTaskRequestParameters, GetTaskResponse>(
+			Dispatcher.Dispatch<IGetTaskRequest, GetTaskRequestParameters, GetTaskResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.TasksGetDispatch<GetTaskResponse>(p)
+				(p, d) => LowLevelDispatch.TasksGetDispatch<GetTaskResponse>(p)
 			);
 
-		public Task<IGetTaskResponse> GetTaskAsync(TaskId id, Func<GetTaskDescriptor, IGetTaskRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.GetTaskAsync(selector.InvokeOrDefault(new GetTaskDescriptor().TaskId(id)), cancellationToken);
+		public Task<IGetTaskResponse> GetTaskAsync(TaskId id, Func<GetTaskDescriptor, IGetTaskRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			GetTaskAsync(selector.InvokeOrDefault(new GetTaskDescriptor().TaskId(id)), cancellationToken);
 
 		public Task<IGetTaskResponse> GetTaskAsync(IGetTaskRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<IGetTaskRequest, GetTaskRequestParameters, GetTaskResponse, IGetTaskResponse>(
+			Dispatcher.DispatchAsync<IGetTaskRequest, GetTaskRequestParameters, GetTaskResponse, IGetTaskResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => this.LowLevelDispatch.TasksGetDispatchAsync<GetTaskResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.TasksGetDispatchAsync<GetTaskResponse>(p, c)
 			);
 	}
 }

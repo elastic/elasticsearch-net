@@ -18,5 +18,5 @@ namespace Nest
 
 	public class DerivativeAggregationDescriptor
 		: PipelineAggregationDescriptorBase<DerivativeAggregationDescriptor, IDerivativeAggregation, SingleBucketsPath>
-		, IDerivativeAggregation { }
+			, IDerivativeAggregation { }
 }

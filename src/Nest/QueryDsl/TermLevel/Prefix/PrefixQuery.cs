@@ -1,25 +1,23 @@
 ﻿using System;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof (FieldNameQueryJsonConverter<PrefixQuery>))]
+	[JsonConverter(typeof(FieldNameQueryJsonConverter<PrefixQuery>))]
 	public interface IPrefixQuery : ITermQuery
 	{
+		[JsonProperty("rewrite")]
+		MultiTermQueryRewrite MultiTermQueryRewrite { get; set; }
+
 		[JsonIgnore]
 		[Obsolete("Use MultiTermQueryRewrite")]
 		RewriteMultiTerm? Rewrite { get; set; }
-
-		[JsonProperty("rewrite")]
-		MultiTermQueryRewrite MultiTermQueryRewrite { get; set; }
 	}
 
 	public class PrefixQuery : FieldNameQueryBase, IPrefixQuery
 	{
-		protected override bool Conditionless => TermQuery.IsConditionless(this);
-		public object Value { get; set; }
+		public MultiTermQueryRewrite MultiTermQueryRewrite { get; set; }
 
 		[Obsolete("Use MultiTermQueryRewrite")]
 		public RewriteMultiTerm? Rewrite
@@ -28,23 +26,25 @@ namespace Nest
 			set => MultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value);
 		}
 
-		public MultiTermQueryRewrite MultiTermQueryRewrite { get; set; }
+		public object Value { get; set; }
+		protected override bool Conditionless => TermQuery.IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Prefix = this;
 	}
 
-	public class PrefixQueryDescriptor<T> : TermQueryDescriptorBase<PrefixQueryDescriptor<T>, T>,
-		IPrefixQuery where T : class
+	public class PrefixQueryDescriptor<T>
+		: TermQueryDescriptorBase<PrefixQueryDescriptor<T>, T>,
+			IPrefixQuery where T : class
 	{
 		protected new IPrefixQuery Self => this;
+
+		MultiTermQueryRewrite IPrefixQuery.MultiTermQueryRewrite { get; set; }
 
 		RewriteMultiTerm? IPrefixQuery.Rewrite
 		{
 			get => Self.MultiTermQueryRewrite?.Rewrite;
 			set => Self.MultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value);
 		}
-
-		MultiTermQueryRewrite IPrefixQuery.MultiTermQueryRewrite { get; set; }
 
 		[Obsolete("Use Rewrite(MultiTermQueryRewrite rewrite)")]
 		public PrefixQueryDescriptor<T> Rewrite(RewriteMultiTerm? rewrite)

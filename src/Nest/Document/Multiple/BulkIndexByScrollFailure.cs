@@ -10,39 +10,39 @@ namespace Nest
 	[JsonObject]
 	public class BulkIndexByScrollFailure
 	{
-		[JsonProperty("index")]
-		public string Index { get; set; }
-
-		[JsonProperty("type")]
-		public string Type { get; internal set; }
+		[JsonProperty("cause")]
+		public BulkIndexFailureCause Cause { get; set; }
 
 		[JsonProperty("id")]
 		public string Id { get; internal set; }
 
-		[JsonProperty("cause")]
-		public BulkIndexFailureCause Cause { get; set; }
+		[JsonProperty("index")]
+		public string Index { get; set; }
 
 		[JsonProperty("status")]
 		public int Status { get; set; }
+
+		[JsonProperty("type")]
+		public string Type { get; internal set; }
 	}
 
 	[JsonObject]
 	public class BulkIndexFailureCause : IFailureReason
 	{
-		public string Type { get; internal set; }
-
-		public string Reason { get; internal set; }
-
-		[JsonProperty("index_uuid")]
-		public string IndexUniqueId { get; internal set; }
-
-		[JsonProperty("shard")]
-		public string Shard { get; internal set; }
+		[JsonProperty("caused_by")]
+		public CausedBy CausedBy { get; internal set; }
 
 		[JsonProperty("index")]
 		public string Index { get; internal set; }
 
-		[JsonProperty("caused_by")]
-		public CausedBy CausedBy { get; internal set; }
+		[JsonProperty("index_uuid")]
+		public string IndexUniqueId { get; internal set; }
+
+		public string Reason { get; internal set; }
+
+		[JsonProperty("shard")]
+		public string Shard { get; internal set; }
+
+		public string Type { get; internal set; }
 	}
 }

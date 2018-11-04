@@ -1,5 +1,4 @@
-﻿using System;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -7,8 +6,9 @@ namespace Nest
 	{
 		private readonly NodesStatsIndexMetric _enumValue;
 
-		public string GetString(IConnectionConfigurationValues settings) => this._enumValue.GetStringValue();
-		internal IndexMetrics(NodesStatsIndexMetric metric) { _enumValue = metric; }
+		internal IndexMetrics(NodesStatsIndexMetric metric) => _enumValue = metric;
+
+		public string GetString(IConnectionConfigurationValues settings) => _enumValue.GetStringValue();
 
 		public static implicit operator IndexMetrics(NodesStatsIndexMetric metric) => new IndexMetrics(metric);
 	}

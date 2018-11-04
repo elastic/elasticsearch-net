@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -12,6 +11,18 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("author")]
 		public string Author { get; set; }
+
+		/// <summary>
+		/// Whether the attachment contains explicit metadata in addition to the
+		/// content. Used at indexing time to determine the serialized form of the
+		/// attachment.
+		/// </summary>
+		[JsonIgnore]
+		public bool ContainsMetadata => !Name.IsNullOrEmpty() ||
+			!ContentType.IsNullOrEmpty() ||
+			!Language.IsNullOrEmpty() ||
+			DetectLanguage.HasValue ||
+			IndexedCharacters.HasValue;
 
 		/// <summary>
 		/// The base64 encoded content. Can be explicitly set
@@ -38,6 +49,22 @@ namespace Nest
 		public DateTime? Date { get; set; }
 
 		/// <summary>
+		/// Detect the language of the attachment. Language detection is
+		/// disabled by default.
+		/// </summary>
+		[JsonProperty("detect_language")]
+		public bool? DetectLanguage { get; set; }
+
+		/// <summary>
+		/// Determines how many characters are extracted when indexing the content.
+		/// By default, 100000 characters are extracted when indexing the content.
+		/// -1 can be set to extract all text, but note that all the text needs to be
+		/// allowed to be represented in memory
+		/// </summary>
+		[JsonProperty("indexed_chars")]
+		public long? IndexedCharacters { get; set; }
+
+		/// <summary>
 		/// The keywords in the attachment.
 		/// </summary>
 		[JsonProperty("keywords")]
@@ -50,13 +77,6 @@ namespace Nest
 		public string Language { get; set; }
 
 		/// <summary>
-		/// Detect the language of the attachment. Language detection is
-		/// disabled by default.
-		/// </summary>
-		[JsonProperty("detect_language")]
-		public bool? DetectLanguage { get; set; }
-
-		/// <summary>
 		/// The name of the attachment. Can be explicitly set
 		/// </summary>
 		[JsonProperty("name")]
@@ -67,27 +87,6 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("title")]
 		public string Title { get; set; }
-
-		/// <summary>
-		/// Determines how many characters are extracted when indexing the content.
-		/// By default, 100000 characters are extracted when indexing the content.
-		/// -1 can be set to extract all text, but note that all the text needs to be
-		/// allowed to be represented in memory
-		/// </summary>
-		[JsonProperty("indexed_chars")]
-		public long? IndexedCharacters { get; set; }
-
-		/// <summary>
-		/// Whether the attachment contains explicit metadata in addition to the
-		/// content. Used at indexing time to determine the serialized form of the
-		/// attachment.
-		/// </summary>
-		[JsonIgnore]
-		public bool ContainsMetadata => !Name.IsNullOrEmpty() ||
-		                                !ContentType.IsNullOrEmpty() ||
-		                                !Language.IsNullOrEmpty() ||
-										DetectLanguage.HasValue ||
-										IndexedCharacters.HasValue;
 	}
 
 	internal class AttachmentConverter : JsonConverter
@@ -96,9 +95,7 @@ namespace Nest
 		{
 			var attachment = (Attachment)value;
 			if (!attachment.ContainsMetadata)
-			{
 				writer.WriteValue(attachment.Content);
-			}
 			else
 			{
 				writer.WriteStartObject();
@@ -141,10 +138,7 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			if (reader.TokenType == JsonToken.String)
-			{
-				return new Attachment { Content = (string)reader.Value };
-			}
+			if (reader.TokenType == JsonToken.String) return new Attachment { Content = (string)reader.Value };
 
 			if (reader.TokenType == JsonToken.StartObject)
 			{
@@ -206,7 +200,6 @@ namespace Nest
 									case JsonToken.Float:
 										attachment.ContentLength = (long?)reader.Value;
 										break;
-
 								}
 								break;
 							case "_language":
@@ -230,7 +223,6 @@ namespace Nest
 									case JsonToken.Float:
 										attachment.IndexedCharacters = (long?)reader.Value;
 										break;
-
 								}
 								break;
 							case "title":
@@ -238,10 +230,7 @@ namespace Nest
 								break;
 						}
 					}
-					if (reader.TokenType == JsonToken.EndObject)
-					{
-						break;
-					}
+					if (reader.TokenType == JsonToken.EndObject) break;
 				}
 				return attachment;
 			}

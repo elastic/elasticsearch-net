@@ -12,9 +12,10 @@ namespace Nest
 			reader.Read(); //property name
 			var fieldName = reader.Value as string;
 			reader.Read(); //{
-			var query = this.ReadAs(reader, objectType, existingValue, serializer);
+			var query = ReadAs(reader, objectType, existingValue, serializer);
 
 			if (query == null) return null;
+
 			query.Field = fieldName;
 
 			return query;
@@ -34,7 +35,7 @@ namespace Nest
 			writer.WriteStartObject();
 			writer.WritePropertyName(field);
 
-			this.Reserialize(writer, value, serializer);
+			Reserialize(writer, value, serializer);
 
 			writer.WriteEndObject();
 		}

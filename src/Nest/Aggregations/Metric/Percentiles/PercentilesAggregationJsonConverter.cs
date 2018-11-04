@@ -56,6 +56,7 @@ namespace Nest
 		{
 			var percentiles = value as IPercentilesAggregation;
 			if (percentiles == null) return;
+
 			writer.WriteStartObject();
 			WriteMetricProperties(percentiles, writer, serializer);
 			if (percentiles.Percents != null)
@@ -100,7 +101,6 @@ namespace Nest
 
 		protected void WriteMetricProperties(IMetricAggregation metric, JsonWriter writer, JsonSerializer serializer)
 		{
-
 			if (metric.Field != null)
 			{
 				var settings = serializer.GetConnectionSettings();

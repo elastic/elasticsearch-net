@@ -4,26 +4,55 @@ namespace Nest
 {
 	public class DateAttribute : ElasticsearchDocValuesPropertyAttributeBase, IDateProperty
 	{
-		private IDateProperty Self => this;
-
 		public DateAttribute() : base(FieldType.Date) { }
 
-		bool? IDateProperty.Index { get; set; }
+		public double Boost
+		{
+			get => Self.Boost.GetValueOrDefault();
+			set => Self.Boost = value;
+		}
+
+		public string Format
+		{
+			get => Self.Format;
+			set => Self.Format = value;
+		}
+
+		public bool IgnoreMalformed
+		{
+			get => Self.IgnoreMalformed.GetValueOrDefault();
+			set => Self.IgnoreMalformed = value;
+		}
+
+		/// <remarks>Removed in 6.x</remarks>
+		public bool IncludeInAll
+		{
+			get => Self.IncludeInAll.GetValueOrDefault();
+			set => Self.IncludeInAll = value;
+		}
+
+		public bool Index
+		{
+			get => Self.Index.GetValueOrDefault();
+			set => Self.Index = value;
+		}
+
+		public DateTime NullValue
+		{
+			get => Self.NullValue.GetValueOrDefault();
+			set => Self.NullValue = value;
+		}
+
 		double? IDateProperty.Boost { get; set; }
-		DateTime? IDateProperty.NullValue { get; set; }
+		INumericFielddata IDateProperty.Fielddata { get; set; }
+		string IDateProperty.Format { get; set; }
+		bool? IDateProperty.IgnoreMalformed { get; set; }
+
 		/// <remarks>Removed in 6.x</remarks>
 		bool? IDateProperty.IncludeInAll { get; set; }
-		bool? IDateProperty.IgnoreMalformed { get; set; }
-		string IDateProperty.Format { get; set; }
-		INumericFielddata IDateProperty.Fielddata { get; set; }
 
-		public bool Index { get { return Self.Index.GetValueOrDefault(); } set { Self.Index = value; } }
-		public double Boost { get { return Self.Boost.GetValueOrDefault(); } set { Self.Boost = value; } }
-		public DateTime NullValue { get { return Self.NullValue.GetValueOrDefault(); } set { Self.NullValue = value; } }
-		/// <remarks>Removed in 6.x</remarks>
-		public bool IncludeInAll { get { return Self.IncludeInAll.GetValueOrDefault(); } set { Self.IncludeInAll = value; } }
-		public bool IgnoreMalformed { get { return Self.IgnoreMalformed.GetValueOrDefault(); } set { Self.IgnoreMalformed = value; } }
-		public string Format { get { return Self.Format; } set { Self.Format = value; } }
-
+		bool? IDateProperty.Index { get; set; }
+		DateTime? IDateProperty.NullValue { get; set; }
+		private IDateProperty Self => this;
 	}
 }

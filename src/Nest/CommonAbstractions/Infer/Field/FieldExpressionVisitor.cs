@@ -1,6 +1,4 @@
-﻿using Elasticsearch.Net;
-using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -8,29 +6,30 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Nest
 {
 	internal class HasVariableExpressionVisitor : ExpressionVisitor
 	{
 		private bool _found;
+
+		public HasVariableExpressionVisitor(Expression e) => Visit(e);
+
 		public bool Found
 		{
 			get => _found;
 			// This is only set to true once to prevent clobbering from subsequent node visits
-			private set { if (!_found) _found = value; }
-		}
-
-		public HasVariableExpressionVisitor(Expression e)
-		{
-			this.Visit(e);
+			private set
+			{
+				if (!_found) _found = value;
+			}
 		}
 
 		public override Expression Visit(Expression node)
 		{
-			if (!this.Found)
+			if (!Found)
 				return base.Visit(node);
+
 			return node;
 		}
 
@@ -39,7 +38,7 @@ namespace Nest
 			if (node.Method.Name == nameof(SuffixExtensions.Suffix) && node.Arguments.Any())
 			{
 				var lastArg = node.Arguments.Last();
-				this.Found = !(lastArg is ConstantExpression);
+				Found = !(lastArg is ConstantExpression);
 			}
 			else if (node.Method.Name == "get_Item" && node.Arguments.Any())
 			{
@@ -47,12 +46,13 @@ namespace Nest
 				var isDict =
 					typeof(IDictionary).IsAssignableFrom(t)
 					|| typeof(IDictionary<,>).IsAssignableFrom(t)
-					|| (t.IsGeneric() && t.GetGenericTypeDefinition() == typeof(IDictionary<,>));
+					|| t.IsGeneric() && t.GetGenericTypeDefinition() == typeof(IDictionary<,>);
 
 				if (!isDict)
 					return base.VisitMethodCall(node);
+
 				var lastArg = node.Arguments.Last();
-				this.Found = !(lastArg is ConstantExpression);
+				Found = !(lastArg is ConstantExpression);
 			}
 			return base.VisitMethodCall(node);
 		}
@@ -60,24 +60,21 @@ namespace Nest
 
 	internal class FieldExpressionVisitor : ExpressionVisitor
 	{
+		private readonly IConnectionSettingsValues _settings;
 		private readonly Stack<string> _stack = new Stack<string>();
 
-		private readonly IConnectionSettingsValues _settings;
-
-		public FieldExpressionVisitor(IConnectionSettingsValues settings)
-		{
-			_settings = settings;
-		}
+		public FieldExpressionVisitor(IConnectionSettingsValues settings) => _settings = settings;
 
 		public string Resolve(Expression expression, bool toLastToken = false)
 		{
 			Visit(expression);
 			if (toLastToken) return _stack.Last();
+
 			return _stack
 				.Aggregate(
 					new StringBuilder(),
 					(sb, name) =>
-					(sb.Length > 0 ? sb.Append(".") : sb).Append(name))
+						(sb.Length > 0 ? sb.Append(".") : sb).Append(name))
 				.ToString();
 		}
 
@@ -88,7 +85,7 @@ namespace Nest
 
 			var name = info.Name;
 
-			if (this._settings.PropertyMappings.TryGetValue(info, out var propertyMapping))
+			if (_settings.PropertyMappings.TryGetValue(info, out var propertyMapping))
 				return propertyMapping.Name;
 
 			var att = ElasticsearchPropertyAttributeBase.From(info);
@@ -101,7 +98,8 @@ namespace Nest
 		protected override Expression VisitMember(MemberExpression expression)
 		{
 			if (_stack == null) return base.VisitMember(expression);
-			var name = this.Resolve(expression.Member);
+
+			var name = Resolve(expression.Member);
 			_stack.Push(name);
 			return base.VisitMember(expression);
 		}
@@ -114,7 +112,7 @@ namespace Nest
 				var callingMember = new ReadOnlyCollection<Expression>(
 					new List<Expression> { { methodCall.Arguments.First() } }
 				);
-				base.Visit(callingMember);
+				Visit(callingMember);
 				return methodCall;
 			}
 			else if (methodCall.Method.Name == "get_Item" && methodCall.Arguments.Any())
@@ -123,22 +121,17 @@ namespace Nest
 				var isDict =
 					typeof(IDictionary).IsAssignableFrom(t)
 					|| typeof(IDictionary<,>).IsAssignableFrom(t)
-					|| (t.IsGeneric() && t.GetGenericTypeDefinition() == typeof(IDictionary<,>));
+					|| t.IsGeneric() && t.GetGenericTypeDefinition() == typeof(IDictionary<,>);
 
-				if (!isDict)
-				{
-					return base.VisitMethodCall(methodCall);
-				}
+				if (!isDict) return base.VisitMethodCall(methodCall);
+
 				VisitConstantOrVariable(methodCall, _stack);
 				Visit(methodCall.Object);
 				return methodCall;
 			}
 			else if (IsLinqOperator(methodCall.Method))
 			{
-				for (int i = 1; i < methodCall.Arguments.Count; i++)
-				{
-					Visit(methodCall.Arguments[i]);
-				}
+				for (var i = 1; i < methodCall.Arguments.Count; i++) Visit(methodCall.Arguments[i]);
 				Visit(methodCall.Arguments[0]);
 				return methodCall;
 			}

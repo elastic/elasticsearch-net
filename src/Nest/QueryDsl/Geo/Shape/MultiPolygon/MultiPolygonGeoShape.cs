@@ -13,11 +13,8 @@ namespace Nest
 	{
 		public MultiPolygonGeoShape() : this(null) { }
 
-		public MultiPolygonGeoShape(IEnumerable<IEnumerable<IEnumerable<GeoCoordinate>>> coordinates) 
-			: base("multipolygon") 
-		{
-			this.Coordinates = coordinates;
-		}
+		public MultiPolygonGeoShape(IEnumerable<IEnumerable<IEnumerable<GeoCoordinate>>> coordinates)
+			: base("multipolygon") => Coordinates = coordinates;
 
 		public IEnumerable<IEnumerable<IEnumerable<GeoCoordinate>>> Coordinates { get; set; }
 	}

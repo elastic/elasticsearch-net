@@ -11,20 +11,23 @@ namespace Nest
 		[JsonProperty("epoch")]
 		public string Epoch { get; set; }
 
+		[JsonProperty("init")]
+		public string Initializing { get; set; }
+
 		[JsonProperty("node.data")]
 		public string NodeData { get; set; }
 
 		[JsonProperty("node.total")]
 		public string NodeTotal { get; set; }
 
+		[JsonProperty("pending_tasks")]
+		public string PendingTasks { get; set; }
+
 		[JsonProperty("pri")]
 		public string Primary { get; set; }
 
 		[JsonProperty("relo")]
 		public string Relocating { get; set; }
-
-		[JsonProperty("init")]
-		public string Initializing { get; set; }
 
 		[JsonProperty("shards")]
 		public string Shards { get; set; }
@@ -37,8 +40,5 @@ namespace Nest
 
 		[JsonProperty("unassign")]
 		public string Unassigned { get; set; }
-
-		[JsonProperty("pending_tasks")]
-		public string PendingTasks { get; set; }
 	}
 }

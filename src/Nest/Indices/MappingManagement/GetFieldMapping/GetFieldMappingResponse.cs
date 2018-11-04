@@ -12,7 +12,8 @@ namespace Nest
 	public class TypeFieldMappings
 	{
 		[JsonProperty("mappings")]
-		public IReadOnlyDictionary<string, FieldMappingProperties> Mappings { get; internal set; } = EmptyReadOnly<string, FieldMappingProperties>.Dictionary;
+		public IReadOnlyDictionary<string, FieldMappingProperties> Mappings { get; internal set; } =
+			EmptyReadOnly<string, FieldMappingProperties>.Dictionary;
 	}
 
 	public class FieldMapping
@@ -45,35 +46,25 @@ namespace Nest
 
 	public class GetFieldMappingResponse : ResponseBase, IGetFieldMappingResponse
 	{
-		private Inferrer _inferrer { get; set; }
-
 		public GetFieldMappingResponse() { }
-
-		//if you call get mapping on an existing type and index but no fields match you still get back a 200.
-		public override bool IsValid => base.IsValid && this.Indices.HasAny();
 
 		internal GetFieldMappingResponse(IApiCallDetails status, IReadOnlyDictionary<string, TypeFieldMappings> dict, Inferrer inferrer)
 		{
-			this.Indices = dict ?? EmptyReadOnly<string, TypeFieldMappings>.Dictionary;
-			this._inferrer = inferrer;
+			Indices = dict ?? EmptyReadOnly<string, TypeFieldMappings>.Dictionary;
+			_inferrer = inferrer;
 		}
 
 		public IReadOnlyDictionary<string, TypeFieldMappings> Indices { get; internal set; } = EmptyReadOnly<string, TypeFieldMappings>.Dictionary;
 
-		public FieldMappingProperties MappingsFor(string indexName, string typeName)
-		{
-			TypeFieldMappings index;
-			FieldMappingProperties type;
-
-			if (!this.Indices.TryGetValue(indexName, out index) || index.Mappings == null) return null;
-			return !index.Mappings.TryGetValue(typeName, out type) ? null : type;
-		}
+		//if you call get mapping on an existing type and index but no fields match you still get back a 200.
+		public override bool IsValid => base.IsValid && Indices.HasAny();
+		private Inferrer _inferrer { get; set; }
 
 		public IFieldMapping MappingFor(string indexName, string typeName, string fieldName)
 		{
 			if (fieldName.IsNullOrEmpty()) return null;
 
-			var type = this.MappingsFor(indexName, typeName);
+			var type = MappingsFor(indexName, typeName);
 			if (type == null) return null;
 
 			FieldMapping field;
@@ -86,25 +77,35 @@ namespace Nest
 		public IFieldMapping MappingFor<T>(string fieldName)
 			where T : class
 		{
-			var indexName = this._inferrer.IndexName<T>();
-			var typeName = this._inferrer.TypeName<T>();
-			return this.MappingFor(indexName, typeName, fieldName);
+			var indexName = _inferrer.IndexName<T>();
+			var typeName = _inferrer.TypeName<T>();
+			return MappingFor(indexName, typeName, fieldName);
 		}
 
 		public IFieldMapping MappingFor<T>(Expression<Func<T, object>> fieldName)
 			where T : class
 		{
-			var path = this._inferrer.Field(fieldName);
-			return this.MappingFor<T>(path);
+			var path = _inferrer.Field(fieldName);
+			return MappingFor<T>(path);
+		}
+
+		public FieldMappingProperties MappingsFor(string indexName, string typeName)
+		{
+			TypeFieldMappings index;
+			FieldMappingProperties type;
+
+			if (!Indices.TryGetValue(indexName, out index) || index.Mappings == null) return null;
+
+			return !index.Mappings.TryGetValue(typeName, out type) ? null : type;
 		}
 
 		public FieldMappingProperties MappingsFor<T>(string indexName = null, string typeName = null)
 			where T : class
 		{
-			indexName = indexName ?? this._inferrer.IndexName<T>();
-			typeName = typeName ?? this._inferrer.TypeName<T>();
+			indexName = indexName ?? _inferrer.IndexName<T>();
+			typeName = typeName ?? _inferrer.TypeName<T>();
 
-			return this.MappingsFor(indexName, typeName);
+			return MappingsFor(indexName, typeName);
 		}
 	}
 }

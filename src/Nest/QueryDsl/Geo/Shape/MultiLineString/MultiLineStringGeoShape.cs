@@ -14,10 +14,7 @@ namespace Nest
 		public MultiLineStringGeoShape() : this(null) { }
 
 		public MultiLineStringGeoShape(IEnumerable<IEnumerable<GeoCoordinate>> coordinates)
-			: base("multilinestring")
-		{
-			this.Coordinates = coordinates;
-		}
+			: base("multilinestring") => Coordinates = coordinates;
 
 		public IEnumerable<IEnumerable<GeoCoordinate>> Coordinates { get; set; }
 	}

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(CreateJsonConverter))]
-	public interface ICreateRequest : IRequest<CreateRequestParameters>, IUntypedDocumentRequest {}
+	public interface ICreateRequest : IRequest<CreateRequestParameters>, IUntypedDocumentRequest { }
 
 	public partial interface ICreateRequest<TDocument> : ICreateRequest where TDocument : class
 	{
@@ -13,21 +13,21 @@ namespace Nest
 
 	public partial class CreateRequest<TDocument> where TDocument : class
 	{
-		partial void DocumentFromPath(TDocument document) => this.Document = document;
-
-		object IUntypedDocumentRequest.UntypedDocument => this.Document;
-
 		public TDocument Document { get; set; }
+
+		object IUntypedDocumentRequest.UntypedDocument => Document;
+
+		partial void DocumentFromPath(TDocument document) => Document = document;
 	}
 
 	[DescriptorFor("Create")]
 	public partial class CreateDescriptor<TDocument> where TDocument : class
 	{
-		partial void DocumentFromPath(TDocument document) => Assign(a => a.Document = document);
+		TDocument ICreateRequest<TDocument>.Document { get; set; }
 
 		object IUntypedDocumentRequest.UntypedDocument => Self.Document;
 
-		TDocument ICreateRequest<TDocument>.Document { get; set; }
+		partial void DocumentFromPath(TDocument document) => Assign(a => a.Document = document);
 
 		/// <summary>
 		/// Sets the id for the document. Overrides the id that may be inferred from the document.

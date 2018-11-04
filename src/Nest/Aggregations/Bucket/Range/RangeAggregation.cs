@@ -13,26 +13,26 @@ namespace Nest
 		[JsonProperty("field")]
 		Field Field { get; set; }
 
-		[JsonProperty("script")]
-		IScript Script { get; set; }
-
 		[JsonProperty(PropertyName = "ranges")]
 #pragma warning disable 618
 		IEnumerable<IRange> Ranges { get; set; }
 #pragma warning restore 618
+
+		[JsonProperty("script")]
+		IScript Script { get; set; }
 	}
 
 	public class RangeAggregation : BucketAggregationBase, IRangeAggregation
 	{
-		public Field Field { get; set; }
-		public IScript Script { get; set; }
-#pragma warning disable 618
-		public IEnumerable<IRange> Ranges { get; set; }
-#pragma warning restore 618
-
 		internal RangeAggregation() { }
 
 		public RangeAggregation(string name) : base(name) { }
+
+		public Field Field { get; set; }
+#pragma warning disable 618
+		public IEnumerable<IRange> Ranges { get; set; }
+#pragma warning restore 618
+		public IScript Script { get; set; }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Range = this;
 	}
@@ -43,11 +43,11 @@ namespace Nest
 	{
 		Field IRangeAggregation.Field { get; set; }
 
-		IScript IRangeAggregation.Script { get; set; }
-
 #pragma warning disable 618
 		IEnumerable<IRange> IRangeAggregation.Ranges { get; set; }
 #pragma warning restore 618
+
+		IScript IRangeAggregation.Script { get; set; }
 
 		public RangeAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 

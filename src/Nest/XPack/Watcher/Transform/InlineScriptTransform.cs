@@ -11,10 +11,7 @@ namespace Nest
 
 	public class InlineScriptTransform : ScriptTransformBase, IInlineScriptTransform
 	{
-		public InlineScriptTransform(string script)
-		{
-			this.Inline = script;
-		}
+		public InlineScriptTransform(string script) => Inline = script;
 
 		public string Inline { get; set; }
 	}
@@ -22,12 +19,9 @@ namespace Nest
 	public class InlineScriptTransformDescriptor
 		: ScriptTransformDescriptorBase<InlineScriptTransformDescriptor, IInlineScriptTransform>, IInlineScriptTransform
 	{
-		public InlineScriptTransformDescriptor(string inline)
-		{
-			Self.Inline = inline;
-		}
+		public InlineScriptTransformDescriptor(string inline) => Self.Inline = inline;
 
-		public InlineScriptTransformDescriptor() {}
+		public InlineScriptTransformDescriptor() { }
 
 		string IInlineScriptTransform.Inline { get; set; }
 	}

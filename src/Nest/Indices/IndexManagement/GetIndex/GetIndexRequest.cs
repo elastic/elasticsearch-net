@@ -1,15 +1,9 @@
 ﻿namespace Nest
 {
-	public partial interface IGetIndexRequest 
-	{
-	}
+	public partial interface IGetIndexRequest { }
 
-	public partial class GetIndexRequest 
-	{
-	}
+	public partial class GetIndexRequest { }
 
 	[DescriptorFor("IndicesGet")]
-	public partial class GetIndexDescriptor 
-	{
-	}
+	public partial class GetIndexDescriptor { }
 }

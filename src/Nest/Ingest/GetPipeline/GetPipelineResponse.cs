@@ -1,7 +1,5 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Linq;
-using System;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -18,5 +16,4 @@ namespace Nest
 		[JsonIgnore]
 		public IReadOnlyDictionary<string, IPipeline> Pipelines => Self.BackingDictionary;
 	}
-
 }

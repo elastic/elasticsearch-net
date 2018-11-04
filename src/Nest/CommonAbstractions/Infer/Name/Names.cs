@@ -14,23 +14,25 @@ namespace Nest
 		public Names(IEnumerable<string> names)
 		{
 			if (!names.HasAny()) throw new ArgumentException("can not create Names on an empty enumerable of string", nameof(names));
-			this._names = names.Select(n => (Name)n);
+
+			_names = names.Select(n => (Name)n);
 		}
 
-		public Names(IEnumerable<Name> names) { this._names = names; }
+		public Names(IEnumerable<Name> names) => _names = names;
+
+		private string DebugDisplay => GetString(null);
+
+		//TODO to explicit private implemenation
+		public string GetString(IConnectionConfigurationValues settings) =>
+			string.Join(",", _names.Select(n => n.GetString(settings)));
 
 		public static Names Parse(string names)
 		{
 			if (names.IsNullOrEmpty()) throw new ArgumentException("can not create Names on an empty enumerable of string", nameof(names));
-			var nameList = names.Split(new [] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(s=>s.Trim());
+
+			var nameList = names.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim());
 			return new Names(nameList);
 		}
-
-		//TODO to explicit private implemenation
-		public string GetString(IConnectionConfigurationValues settings) =>
-			string.Join(",", this._names.Select(n => n.GetString(settings)));
-
-		private string DebugDisplay => GetString(null);
 
 		public static implicit operator Names(Name name) => new Names(new[] { name });
 

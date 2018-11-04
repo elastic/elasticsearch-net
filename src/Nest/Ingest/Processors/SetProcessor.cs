@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
 
@@ -20,9 +17,9 @@ namespace Nest
 
 	public class SetProcessor : ProcessorBase, ISetProcessor
 	{
-		protected override string Name => "set";
 		public Field Field { get; set; }
 		public object Value { get; set; }
+		protected override string Name => "set";
 	}
 
 	public class SetProcessorDescriptor<T> : ProcessorDescriptorBase<SetProcessorDescriptor<T>, ISetProcessor>, ISetProcessor

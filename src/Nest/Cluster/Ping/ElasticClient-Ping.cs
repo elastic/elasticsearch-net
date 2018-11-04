@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
 namespace Nest
 {
-	using System.Threading;
 	using PingConverter = Func<IApiCallDetails, Stream, PingResponse>;
 
 	public partial interface IElasticClient
@@ -15,48 +15,53 @@ namespace Nest
 		/// </summary>
 		IPingResponse Ping(Func<PingDescriptor, IPingRequest> selector = null);
 
-		/// <inheritdoc/>
-		Task<IPingResponse> PingAsync(Func<PingDescriptor, IPingRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<IPingResponse> PingAsync(Func<PingDescriptor, IPingRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		IPingResponse Ping(IPingRequest request);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		Task<IPingResponse> PingAsync(IPingRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IPingResponse Ping(Func<PingDescriptor, IPingRequest> selector = null) =>
-			this.Ping(selector.InvokeOrDefault(new PingDescriptor()));
+			Ping(selector.InvokeOrDefault(new PingDescriptor()));
 
-		/// <inheritdoc/>
-		public Task<IPingResponse> PingAsync(Func<PingDescriptor, IPingRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.PingAsync(selector.InvokeOrDefault(new PingDescriptor()), cancellationToken);
-
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IPingResponse Ping(IPingRequest request) =>
-			this.Dispatcher.Dispatch<IPingRequest, PingRequestParameters, PingResponse>(
+			Dispatcher.Dispatch<IPingRequest, PingRequestParameters, PingResponse>(
 				SetPingTimeout(request),
 				new PingConverter(DeserializePingResponse),
-				(p, d) => this.LowLevelDispatch.PingDispatch<PingResponse>(p)
+				(p, d) => LowLevelDispatch.PingDispatch<PingResponse>(p)
 			);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
+		public Task<IPingResponse> PingAsync(Func<PingDescriptor, IPingRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			PingAsync(selector.InvokeOrDefault(new PingDescriptor()), cancellationToken);
+
+		/// <inheritdoc />
 		public Task<IPingResponse> PingAsync(IPingRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<IPingRequest, PingRequestParameters, PingResponse, IPingResponse>(
+			Dispatcher.DispatchAsync<IPingRequest, PingRequestParameters, PingResponse, IPingResponse>(
 				SetPingTimeout(request),
 				cancellationToken,
 				new PingConverter(DeserializePingResponse),
-				(p, d, c) => this.LowLevelDispatch.PingDispatchAsync<PingResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.PingDispatchAsync<PingResponse>(p, c)
 			);
 
 		private IPingRequest SetPingTimeout(IPingRequest pingRequest)
 		{
-			if (!this.ConnectionSettings.PingTimeout.HasValue) return pingRequest;
-			var timeout = this.ConnectionSettings.PingTimeout.Value;
-			return this.ForceConfiguration<IPingRequest, PingRequestParameters>(pingRequest, r => r.RequestTimeout = timeout);
+			if (!ConnectionSettings.PingTimeout.HasValue) return pingRequest;
+
+			var timeout = ConnectionSettings.PingTimeout.Value;
+			return ForceConfiguration<IPingRequest, PingRequestParameters>(pingRequest, r => r.RequestTimeout = timeout);
 		}
 
 		private PingResponse DeserializePingResponse(IApiCallDetails response, Stream stream) => new PingResponse();

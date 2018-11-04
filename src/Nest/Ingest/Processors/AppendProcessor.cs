@@ -20,9 +20,9 @@ namespace Nest
 
 	public class AppendProcessor : ProcessorBase, IAppendProcessor
 	{
-		protected override string Name => "append";
 		public Field Field { get; set; }
 		public IEnumerable<object> Value { get; set; }
+		protected override string Name => "append";
 	}
 
 	public class AppendProcessorDescriptor<T> : ProcessorDescriptorBase<AppendProcessorDescriptor<T>, IAppendProcessor>, IAppendProcessor
@@ -39,11 +39,11 @@ namespace Nest
 
 		public AppendProcessorDescriptor<T> Value<TValue>(IEnumerable<TValue> values) => Assign(a => a.Value = values?.Cast<object>());
 
-		public AppendProcessorDescriptor<T> Value<TValue>(params TValue[] values) => Assign(a => {
-			if(values?.Length == 1 && typeof(IEnumerable).IsAssignableFrom(typeof(TValue)) && typeof(TValue) != typeof(string))
+		public AppendProcessorDescriptor<T> Value<TValue>(params TValue[] values) => Assign(a =>
+		{
+			if (values?.Length == 1 && typeof(IEnumerable).IsAssignableFrom(typeof(TValue)) && typeof(TValue) != typeof(string))
 				a.Value = (values.First() as IEnumerable)?.Cast<object>();
 			else a.Value = values?.Cast<object>();
 		});
 	}
-
 }

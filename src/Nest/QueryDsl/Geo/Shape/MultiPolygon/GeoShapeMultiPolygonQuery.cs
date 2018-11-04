@@ -12,23 +12,23 @@ namespace Nest
 
 	public class GeoShapeMultiPolygonQuery : GeoShapeQueryBase, IGeoShapeMultiPolygonQuery
 	{
-		protected override bool Conditionless => IsConditionless(this);
 		public IMultiPolygonGeoShape Shape { get; set; }
+		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.GeoShape = this;
-		internal static bool IsConditionless(IGeoShapeMultiPolygonQuery q) => q.Field.IsConditionless() || q.Shape == null || !q.Shape.Coordinates.HasAny();
+
+		internal static bool IsConditionless(IGeoShapeMultiPolygonQuery q) =>
+			q.Field.IsConditionless() || q.Shape == null || !q.Shape.Coordinates.HasAny();
 	}
 
 	public class GeoShapeMultiPolygonQueryDescriptor<T>
 		: GeoShapeQueryDescriptorBase<GeoShapeMultiPolygonQueryDescriptor<T>, IGeoShapeMultiPolygonQuery, T>
-		, IGeoShapeMultiPolygonQuery where T : class
+			, IGeoShapeMultiPolygonQuery where T : class
 	{
 		protected override bool Conditionless => GeoShapeMultiPolygonQuery.IsConditionless(this);
 		IMultiPolygonGeoShape IGeoShapeMultiPolygonQuery.Shape { get; set; }
 
 		public GeoShapeMultiPolygonQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<IEnumerable<GeoCoordinate>>> coordinates) =>
 			Assign(a => a.Shape = new MultiPolygonGeoShape { Coordinates = coordinates });
-
-
 	}
 }

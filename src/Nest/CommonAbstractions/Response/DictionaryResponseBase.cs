@@ -16,6 +16,7 @@ namespace Nest
 		protected IDictionaryResponse<TKey, TValue> Self => this;
 		IReadOnlyDictionary<TKey, TValue> IDictionaryResponse<TKey, TValue>.BackingDictionary { get; set; }
 	}
+
 	internal class DictionaryResponseJsonConverterHelpers
 	{
 		public static JObject ReadServerErrorFirst(JsonReader reader, out Error error, out int? statusCode)
@@ -26,10 +27,10 @@ namespace Nest
 			if (errorProperty?.Value?.Type == JTokenType.String)
 			{
 				var reason = errorProperty.Value.Value<string>();
-				error = new Error {Reason = reason};
+				error = new Error { Reason = reason };
 				errorProperty.Remove();
 			}
-			else if (errorProperty?.Value?.Type == JTokenType.Object && ((JObject) errorProperty.Value)["reason"] != null)
+			else if (errorProperty?.Value?.Type == JTokenType.Object && ((JObject)errorProperty.Value)["reason"] != null)
 			{
 				error = errorProperty.Value.ToObject<Error>();
 				errorProperty.Remove();
@@ -48,9 +49,10 @@ namespace Nest
 	internal class DictionaryResponseJsonConverter<TResponse, TKey, TValue> : JsonConverter
 		where TResponse : IDictionaryResponse<TKey, TValue>, new()
 	{
-		public override bool CanConvert(Type objectType) => true;
 		public override bool CanRead => true;
 		public override bool CanWrite => false;
+
+		public override bool CanConvert(Type objectType) => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{

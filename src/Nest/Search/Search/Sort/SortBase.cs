@@ -12,11 +12,6 @@ namespace Nest
 	public interface ISort
 	{
 		/// <summary>
-		/// The field to sort on
-		/// </summary>
-		Field SortKey { get; }
-
-		/// <summary>
 		/// Specifies how docs which are missing the field should be treated
 		/// </summary>
 		[JsonIgnore]
@@ -30,13 +25,7 @@ namespace Nest
 		object MissingValue { get; set; }
 
 		/// <summary>
-		/// The sort order
-		/// </summary>
-		[JsonProperty("order")]
-		SortOrder? Order { get; set; }
-
-		/// <summary>
-		/// Elasticsearch supports sorting by array or multi-valued fields. <see cref="Mode"/>
+		/// Elasticsearch supports sorting by array or multi-valued fields. <see cref="Mode" />
 		/// controls what array value is picked for sorting the document it belongs to.
 		/// </summary>
 		[JsonProperty("mode")]
@@ -56,34 +45,52 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("nested_path")]
 		Field NestedPath { get; set; }
+
+		/// <summary>
+		/// The sort order
+		/// </summary>
+		[JsonProperty("order")]
+		SortOrder? Order { get; set; }
+
+		/// <summary>
+		/// The field to sort on
+		/// </summary>
+		Field SortKey { get; }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public abstract class SortBase : ISort
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		[Obsolete("Use MissingValue")]
 		public string Missing
 		{
 			get => MissingValue as string;
 			set => MissingValue = value;
 		}
-		/// <inheritdoc/>
+
+		/// <inheritdoc />
 		public object MissingValue { get; set; }
-		/// <inheritdoc/>
-		public SortOrder? Order { get; set; }
-		/// <inheritdoc/>
+
+		/// <inheritdoc />
 		public SortMode? Mode { get; set; }
-		/// <inheritdoc/>
+
+		/// <inheritdoc />
 		public QueryContainer NestedFilter { get; set; }
-		/// <inheritdoc/>
+
+		/// <inheritdoc />
 		public Field NestedPath { get; set; }
-		/// <inheritdoc/>
-		Field ISort.SortKey => this.SortKey;
+
+		/// <inheritdoc />
+		public SortOrder? Order { get; set; }
+
 		/// <summary>
 		/// The field to sort on
 		/// </summary>
 		protected abstract Field SortKey { get; }
+
+		/// <inheritdoc />
+		Field ISort.SortKey => SortKey;
 	}
 
 	public abstract class SortDescriptorBase<TDescriptor, TInterface, T> : DescriptorBase<TDescriptor, TInterface>, ISort
@@ -91,7 +98,7 @@ namespace Nest
 		where TDescriptor : SortDescriptorBase<TDescriptor, TInterface, T>, TInterface, ISort
 		where TInterface : class, ISort
 	{
-		Field ISort.SortKey => this.SortKey;
+		protected abstract Field SortKey { get; }
 
 		[Obsolete("Use MissingValue")]
 		string ISort.Missing
@@ -102,15 +109,14 @@ namespace Nest
 
 		object ISort.MissingValue { get; set; }
 
-		SortOrder? ISort.Order { get; set; }
-
 		SortMode? ISort.Mode { get; set; }
 
 		QueryContainer ISort.NestedFilter { get; set; }
 
 		Field ISort.NestedPath { get; set; }
 
-		protected abstract Field SortKey { get; }
+		SortOrder? ISort.Order { get; set; }
+		Field ISort.SortKey => SortKey;
 
 		public virtual TDescriptor Ascending() => Assign(a => a.Order = SortOrder.Ascending);
 

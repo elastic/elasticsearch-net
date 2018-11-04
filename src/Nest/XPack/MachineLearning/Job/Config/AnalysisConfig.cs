@@ -75,18 +75,25 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public Time BucketSpan { get; set; }
+
 		/// <inheritdoc />
 		public Field CategorizationFieldName { get; set; }
+
 		/// <inheritdoc />
 		public IEnumerable<string> CategorizationFilters { get; set; }
+
 		/// <inheritdoc />
 		public IEnumerable<IDetector> Detectors { get; set; }
+
 		/// <inheritdoc />
 		public Fields Influencers { get; set; }
+
 		/// <inheritdoc />
 		public Time Latency { get; set; }
+
 		/// <inheritdoc />
 		public bool? MultivariateByFields { get; set; }
+
 		/// <inheritdoc />
 		public Field SummaryCountFieldName { get; set; }
 	}
@@ -134,12 +141,15 @@ namespace Nest
 		public AnalysisConfigDescriptor<T> Latency(Time latency) => Assign(a => a.Latency = latency);
 
 		/// <inheritdoc />
-		public AnalysisConfigDescriptor<T> MultivariateByFields(bool multivariateByFields = true) => Assign(a => a.MultivariateByFields = multivariateByFields);
+		public AnalysisConfigDescriptor<T> MultivariateByFields(bool multivariateByFields = true) =>
+			Assign(a => a.MultivariateByFields = multivariateByFields);
 
 		/// <inheritdoc />
-		public AnalysisConfigDescriptor<T> SummaryCountFieldName(Field summaryCountFieldName) => Assign(a => a.SummaryCountFieldName = summaryCountFieldName);
+		public AnalysisConfigDescriptor<T> SummaryCountFieldName(Field summaryCountFieldName) =>
+			Assign(a => a.SummaryCountFieldName = summaryCountFieldName);
 
 		/// <inheritdoc />
-		public AnalysisConfigDescriptor<T> SummaryCountFieldName(Expression<Func<T, object>> objectPath) => Assign(a => a.SummaryCountFieldName = objectPath);
+		public AnalysisConfigDescriptor<T> SummaryCountFieldName(Expression<Func<T, object>> objectPath) =>
+			Assign(a => a.SummaryCountFieldName = objectPath);
 	}
 }

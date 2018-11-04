@@ -5,9 +5,6 @@ namespace Nest
 	[JsonObject]
 	public class SearchStats
 	{
-		[JsonProperty(PropertyName = "open_contexts")]
-		public long OpenContexts { get; set; }
-
 		[JsonProperty(PropertyName = "fetch_current")]
 		public long FetchCurrent { get; set; }
 
@@ -16,6 +13,9 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "fetch_total")]
 		public long FetchTotal { get; set; }
+
+		[JsonProperty(PropertyName = "open_contexts")]
+		public long OpenContexts { get; set; }
 
 		[JsonProperty(PropertyName = "query_current")]
 		public long QueryCurrent { get; set; }

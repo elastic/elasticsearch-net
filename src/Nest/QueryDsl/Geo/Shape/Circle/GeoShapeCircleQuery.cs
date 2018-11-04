@@ -11,8 +11,8 @@ namespace Nest
 
 	public class GeoShapeCircleQuery : GeoShapeQueryBase, IGeoShapeCircleQuery
 	{
-		protected override bool Conditionless => IsConditionless(this);
 		public ICircleGeoShape Shape { get; set; }
+		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.GeoShape = this;
 
@@ -21,7 +21,7 @@ namespace Nest
 
 	public class GeoShapeCircleQueryDescriptor<T>
 		: GeoShapeQueryDescriptorBase<GeoShapeCircleQueryDescriptor<T>, IGeoShapeCircleQuery, T>
-		, IGeoShapeCircleQuery where T : class
+			, IGeoShapeCircleQuery where T : class
 	{
 		protected override bool Conditionless => GeoShapeCircleQuery.IsConditionless(this);
 		ICircleGeoShape IGeoShapeCircleQuery.Shape { get; set; }

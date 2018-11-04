@@ -1,6 +1,5 @@
 ﻿using System;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
@@ -8,52 +7,37 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<MultiMatchQueryDescriptor<object>>))]
 	public interface IMultiMatchQuery : IQuery
 	{
-		[JsonProperty("type")]
-		TextQueryType? Type { get; set; }
-
-		[JsonProperty("query")]
-		string Query { get; set; }
-
 		[JsonProperty("analyzer")]
 		string Analyzer { get; set; }
+
+		[JsonProperty("cutoff_frequency")]
+		double? CutoffFrequency { get; set; }
+
+		[JsonProperty("fields")]
+		Fields Fields { get; set; }
+
+		/// <summary>
+		/// Allows fuzzy matching based on the type of field being queried.
+		/// Cannot be used with the
+		/// <see cref="TextQueryType.CrossFields" />,
+		/// <see cref="TextQueryType.Phrase" /> or
+		/// <see cref="TextQueryType.PhrasePrefix" /> types.
+		/// </summary>
+		[JsonProperty("fuzziness")]
+		Fuzziness Fuzziness { get; set; }
+
+		[JsonProperty("fuzzy_rewrite")]
+		MultiTermQueryRewrite FuzzyMultiTermQueryRewrite { get; set; }
 
 		[JsonIgnore]
 		[Obsolete("Use FuzzyMultiTermQueryRewrite")]
 		RewriteMultiTerm? FuzzyRewrite { get; set; }
 
-		[JsonProperty("fuzzy_rewrite")]
-		MultiTermQueryRewrite FuzzyMultiTermQueryRewrite { get; set; }
-
-		/// <summary>
-		/// Allows fuzzy matching based on the type of field being queried.
-		/// Cannot be used with the
-		/// <see cref="TextQueryType.CrossFields"/>,
-		/// <see cref="TextQueryType.Phrase"/> or
-		/// <see cref="TextQueryType.PhrasePrefix"/> types.
-		/// </summary>
-		[JsonProperty("fuzziness")]
-		Fuzziness Fuzziness { get; set; }
-
-		[JsonProperty("cutoff_frequency")]
-		double? CutoffFrequency { get; set; }
-
-		[JsonProperty("prefix_length")]
-		int? PrefixLength { get; set; }
-
-		[JsonProperty("max_expansions")]
-		int? MaxExpansions { get; set; }
-
-		[JsonProperty("slop")]
-		int? Slop { get; set; }
-
 		[JsonProperty("lenient")]
 		bool? Lenient { get; set; }
 
-		[JsonProperty("use_dis_max")]
-		bool? UseDisMax { get; set; }
-
-		[JsonProperty("tie_breaker")]
-		double? TieBreaker { get; set; }
+		[JsonProperty("max_expansions")]
+		int? MaxExpansions { get; set; }
 
 		[JsonProperty("minimum_should_match")]
 		MinimumShouldMatch MinimumShouldMatch { get; set; }
@@ -61,8 +45,23 @@ namespace Nest
 		[JsonProperty("operator")]
 		Operator? Operator { get; set; }
 
-		[JsonProperty("fields")]
-		Fields Fields { get; set; }
+		[JsonProperty("prefix_length")]
+		int? PrefixLength { get; set; }
+
+		[JsonProperty("query")]
+		string Query { get; set; }
+
+		[JsonProperty("slop")]
+		int? Slop { get; set; }
+
+		[JsonProperty("tie_breaker")]
+		double? TieBreaker { get; set; }
+
+		[JsonProperty("type")]
+		TextQueryType? Type { get; set; }
+
+		[JsonProperty("use_dis_max")]
+		bool? UseDisMax { get; set; }
 
 		[JsonProperty("zero_terms_query")]
 		ZeroTermsQuery? ZeroTermsQuery { get; set; }
@@ -70,37 +69,40 @@ namespace Nest
 
 	public class MultiMatchQuery : QueryBase, IMultiMatchQuery
 	{
-		protected override bool Conditionless => IsConditionless(this);
-		public TextQueryType? Type { get; set; }
-		public string Query { get; set; }
 		public string Analyzer { get; set; }
+		public double? CutoffFrequency { get; set; }
+		public Fields Fields { get; set; }
+
+		/// <summary>
+		/// Allows fuzzy matching based on the type of field being queried.
+		/// Cannot be used with the
+		/// <see cref="TextQueryType.CrossFields" />,
+		/// <see cref="TextQueryType.Phrase" /> or
+		/// <see cref="TextQueryType.PhrasePrefix" /> types.
+		/// </summary>
+		public Fuzziness Fuzziness { get; set; }
+
+		public MultiTermQueryRewrite FuzzyMultiTermQueryRewrite { get; set; }
+
 		[Obsolete("Use FuzzyMultiTermQueryRewrite")]
 		public RewriteMultiTerm? FuzzyRewrite
 		{
 			get => FuzzyMultiTermQueryRewrite?.Rewrite;
 			set => FuzzyMultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value);
 		}
-		public MultiTermQueryRewrite FuzzyMultiTermQueryRewrite { get; set; }
 
-		/// <summary>
-		/// Allows fuzzy matching based on the type of field being queried.
-		/// Cannot be used with the
-		/// <see cref="TextQueryType.CrossFields"/>,
-		/// <see cref="TextQueryType.Phrase"/> or
-		/// <see cref="TextQueryType.PhrasePrefix"/> types.
-		/// </summary>
-		public Fuzziness Fuzziness { get; set; }
-		public double? CutoffFrequency { get; set; }
-		public int? PrefixLength { get; set; }
-		public int? MaxExpansions { get; set; }
-		public int? Slop { get; set; }
 		public bool? Lenient { get; set; }
-		public bool? UseDisMax { get; set; }
-		public double? TieBreaker { get; set; }
+		public int? MaxExpansions { get; set; }
 		public MinimumShouldMatch MinimumShouldMatch { get; set; }
 		public Operator? Operator { get; set; }
-		public Fields Fields { get; set; }
+		public int? PrefixLength { get; set; }
+		public string Query { get; set; }
+		public int? Slop { get; set; }
+		public double? TieBreaker { get; set; }
+		public TextQueryType? Type { get; set; }
+		public bool? UseDisMax { get; set; }
 		public ZeroTermsQuery? ZeroTermsQuery { get; set; }
+		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.MultiMatch = this;
 
@@ -110,30 +112,32 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class MultiMatchQueryDescriptor<T>
 		: QueryDescriptorBase<MultiMatchQueryDescriptor<T>, IMultiMatchQuery>
-		, IMultiMatchQuery where T : class
+			, IMultiMatchQuery where T : class
 	{
 		protected override bool Conditionless => MultiMatchQuery.IsConditionless(this);
-		TextQueryType? IMultiMatchQuery.Type { get; set; }
-		string IMultiMatchQuery.Query { get; set; }
 		string IMultiMatchQuery.Analyzer { get; set; }
+		double? IMultiMatchQuery.CutoffFrequency { get; set; }
+		Fields IMultiMatchQuery.Fields { get; set; }
+		Fuzziness IMultiMatchQuery.Fuzziness { get; set; }
+		MultiTermQueryRewrite IMultiMatchQuery.FuzzyMultiTermQueryRewrite { get; set; }
+
 		[Obsolete("Use FuzzyMultiTermQueryRewrite")]
 		RewriteMultiTerm? IMultiMatchQuery.FuzzyRewrite
 		{
 			get => Self.FuzzyMultiTermQueryRewrite?.Rewrite;
 			set => Self.FuzzyMultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value);
 		}
-		MultiTermQueryRewrite IMultiMatchQuery.FuzzyMultiTermQueryRewrite { get; set; }
-		Fuzziness IMultiMatchQuery.Fuzziness { get; set; }
-		double? IMultiMatchQuery.CutoffFrequency { get; set; }
-		int? IMultiMatchQuery.PrefixLength { get; set; }
-		int? IMultiMatchQuery.MaxExpansions { get; set; }
-		int? IMultiMatchQuery.Slop { get; set; }
+
 		bool? IMultiMatchQuery.Lenient { get; set; }
-		bool? IMultiMatchQuery.UseDisMax { get; set; }
-		double? IMultiMatchQuery.TieBreaker { get; set; }
+		int? IMultiMatchQuery.MaxExpansions { get; set; }
 		MinimumShouldMatch IMultiMatchQuery.MinimumShouldMatch { get; set; }
 		Operator? IMultiMatchQuery.Operator { get; set; }
-		Fields IMultiMatchQuery.Fields { get; set; }
+		int? IMultiMatchQuery.PrefixLength { get; set; }
+		string IMultiMatchQuery.Query { get; set; }
+		int? IMultiMatchQuery.Slop { get; set; }
+		double? IMultiMatchQuery.TieBreaker { get; set; }
+		TextQueryType? IMultiMatchQuery.Type { get; set; }
+		bool? IMultiMatchQuery.UseDisMax { get; set; }
 		ZeroTermsQuery? IMultiMatchQuery.ZeroTermsQuery { get; set; }
 
 		public MultiMatchQueryDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
@@ -148,9 +152,9 @@ namespace Nest
 		/// <summary>
 		/// Allows fuzzy matching based on the type of field being queried.
 		/// Cannot be used with the
-		/// <see cref="TextQueryType.CrossFields"/>,
-		/// <see cref="TextQueryType.Phrase"/> or
-		/// <see cref="TextQueryType.PhrasePrefix"/> types.
+		/// <see cref="TextQueryType.CrossFields" />,
+		/// <see cref="TextQueryType.Phrase" /> or
+		/// <see cref="TextQueryType.PhrasePrefix" /> types.
 		/// </summary>
 		public MultiMatchQueryDescriptor<T> Fuzziness(Fuzziness fuzziness) => Assign(a => a.Fuzziness = fuzziness);
 

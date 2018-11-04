@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -10,11 +10,12 @@ namespace Nest
 
 	public class IndexConstraints : IsADictionaryBase<Field, IIndexConstraint>, IIndexConstraints
 	{
-		public IndexConstraints() {}
+		public IndexConstraints() { }
+
 		public IndexConstraints(IDictionary<Field, IIndexConstraint> container) : base(container) { }
+
 		public IndexConstraints(Dictionary<Field, IIndexConstraint> container)
-			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
-		{}
+			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value)) { }
 
 		public void Add(Field field, IndexConstraint constraint) => BackingDictionary.Add(field, constraint);
 	}

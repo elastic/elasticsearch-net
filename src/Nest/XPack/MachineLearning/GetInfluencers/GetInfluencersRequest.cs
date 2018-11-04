@@ -39,7 +39,7 @@ namespace Nest
 		IPage Page { get; set; }
 
 		/// <summary>
-		/// Specifies the sort field for the requested influencers. By default, the influencers are sorted by the <see cref="InfluencerScore"/> value.
+		/// Specifies the sort field for the requested influencers. By default, the influencers are sorted by the <see cref="InfluencerScore" /> value.
 		/// </summary>
 		[JsonProperty("sort")]
 		Field Sort { get; set; }
@@ -81,7 +81,7 @@ namespace Nest
 	[DescriptorFor("XpackMlGetInfluencers")]
 	public partial class GetInfluencersDescriptor
 	{
-		public GetInfluencersDescriptor() {}
+		public GetInfluencersDescriptor() { }
 
 		bool? IGetInfluencersRequest.Descending { get; set; }
 		DateTimeOffset? IGetInfluencersRequest.End { get; set; }

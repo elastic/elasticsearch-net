@@ -7,20 +7,20 @@ namespace Nest
 	[JsonConverter(typeof(ReserializeJsonConverter<SmoothingModelContainer, ISmoothingModelContainer>))]
 	public interface ISmoothingModelContainer
 	{
-		[JsonProperty("stupid_backoff")]
-		IStupidBackoffSmoothingModel StupidBackoff { get; set; }
-
 		[JsonProperty("laplace")]
 		ILaplaceSmoothingModel Laplace { get; set; }
 
 		[JsonProperty("linear_interpolation")]
 		ILinearInterpolationSmoothingModel LinearInterpolation { get; set; }
+
+		[JsonProperty("stupid_backoff")]
+		IStupidBackoffSmoothingModel StupidBackoff { get; set; }
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
 	public class SmoothingModelContainer : ISmoothingModelContainer, IDescriptor
 	{
-		internal SmoothingModelContainer() {}
+		internal SmoothingModelContainer() { }
 
 		public SmoothingModelContainer(SmoothingModelBase model)
 		{
@@ -28,9 +28,10 @@ namespace Nest
 			model.WrapInContainer(this);
 		}
 
-		IStupidBackoffSmoothingModel ISmoothingModelContainer.StupidBackoff { get; set; }
 		ILaplaceSmoothingModel ISmoothingModelContainer.Laplace { get; set; }
 		ILinearInterpolationSmoothingModel ISmoothingModelContainer.LinearInterpolation { get; set; }
+
+		IStupidBackoffSmoothingModel ISmoothingModelContainer.StupidBackoff { get; set; }
 	}
 
 	public class SmoothingModelContainerDescriptor : SmoothingModelContainer
@@ -40,7 +41,9 @@ namespace Nest
 		public SmoothingModelContainerDescriptor StupidBackoff(Func<StupidBackoffSmoothingModelDescriptor, IStupidBackoffSmoothingModel> selector) =>
 			Assign(a => a.StupidBackoff = selector?.InvokeOrDefault(new StupidBackoffSmoothingModelDescriptor()));
 
-		public SmoothingModelContainerDescriptor LinearInterpolation(Func<LinearInterpolationSmoothingModelDescriptor, ILinearInterpolationSmoothingModel> selector) =>
+		public SmoothingModelContainerDescriptor LinearInterpolation(
+			Func<LinearInterpolationSmoothingModelDescriptor, ILinearInterpolationSmoothingModel> selector
+		) =>
 			Assign(a => a.LinearInterpolation = selector?.InvokeOrDefault(new LinearInterpolationSmoothingModelDescriptor()));
 
 		public SmoothingModelContainerDescriptor Laplace(Func<LaplaceSmoothingModelDescriptor, ILaplaceSmoothingModel> selector) =>

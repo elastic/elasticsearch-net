@@ -4,7 +4,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	internal class MatchQueryJsonConverter : FieldNameQueryJsonConverter<MatchQuery> 
+	internal class MatchQueryJsonConverter : FieldNameQueryJsonConverter<MatchQuery>
 	{
 		protected override object DeserializeJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -30,6 +30,7 @@ namespace Nest
 			}
 
 			if (query == null) return null;
+
 			query.Field = fieldName;
 
 			return query;

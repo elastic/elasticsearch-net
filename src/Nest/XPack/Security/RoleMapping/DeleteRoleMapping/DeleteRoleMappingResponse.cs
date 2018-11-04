@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -15,5 +12,4 @@ namespace Nest
 	{
 		public bool Found { get; internal set; }
 	}
-
 }

@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Nest
@@ -7,6 +6,7 @@ namespace Nest
 	public class FiltersBucketItem : BucketBase
 	{
 		public FiltersBucketItem() { }
+
 		public FiltersBucketItem(IDictionary<string, IAggregate> aggregations) : base(aggregations) { }
 
 		public long DocCount { get; set; }
@@ -18,8 +18,8 @@ namespace Nest
 
 		public FiltersAggregate(IDictionary<string, IAggregate> aggregations) : base(aggregations) { }
 
-		public SingleBucketAggregate NamedBucket(string key) => this.Global(key);
+		public SingleBucketAggregate NamedBucket(string key) => Global(key);
 
-		public IList<FiltersBucketItem> AnonymousBuckets() => this.Buckets?.OfType<FiltersBucketItem>().ToList();
+		public IList<FiltersBucketItem> AnonymousBuckets() => Buckets?.OfType<FiltersBucketItem>().ToList();
 	}
 }

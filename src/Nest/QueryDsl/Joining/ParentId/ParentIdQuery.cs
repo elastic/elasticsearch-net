@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -14,12 +9,6 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<ParentIdQuery>))]
 	public interface IParentIdQuery : IQuery
 	{
-		/// <summary>
-		/// The child type. This must be a type with _parent field.
-	    /// </summary>
-		[JsonProperty("type")]
-		TypeName Type { get; set; }
-
 		/// <summary>
 		/// The id of the parent document to get children for.
 		/// </summary>
@@ -32,33 +21,38 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("ignore_unmapped")]
 		bool? IgnoreUnmapped { get; set; }
+
+		/// <summary>
+		/// The child type. This must be a type with _parent field.
+		/// </summary>
+		[JsonProperty("type")]
+		TypeName Type { get; set; }
 	}
 
 	public class ParentIdQuery : QueryBase, IParentIdQuery
 	{
+		public Id Id { get; set; }
+
+		public bool? IgnoreUnmapped { get; set; }
+
+		public TypeName Type { get; set; }
 		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.ParentId = this;
 
 		internal static bool IsConditionless(IParentIdQuery q) => q.Type.IsConditionless() || q.Id.IsConditionless();
-
-		public TypeName Type { get; set; }
-
-		public Id Id { get; set; }
-
-		public bool? IgnoreUnmapped { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class ParentIdQueryDescriptor<T>
-	: QueryDescriptorBase<ParentIdQueryDescriptor<T>, IParentIdQuery>
-	, IParentIdQuery where T : class
+		: QueryDescriptorBase<ParentIdQueryDescriptor<T>, IParentIdQuery>
+			, IParentIdQuery where T : class
 	{
 		protected override bool Conditionless => ParentIdQuery.IsConditionless(this);
-
-		TypeName IParentIdQuery.Type { get; set; }
 		Id IParentIdQuery.Id { get; set; }
 		bool? IParentIdQuery.IgnoreUnmapped { get; set; }
+
+		TypeName IParentIdQuery.Type { get; set; }
 
 		public ParentIdQueryDescriptor<T> Id(Id id) => Assign(a => a.Id = id);
 

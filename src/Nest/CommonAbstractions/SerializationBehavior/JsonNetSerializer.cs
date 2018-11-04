@@ -18,18 +18,31 @@ namespace Nest
 	public class JsonNetSerializer : IElasticsearchSerializer
 	{
 		private static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
-		private JsonSerializer _defaultSerializer;
+
+		protected readonly ConcurrentDictionary<string, IPropertyMapping> Properties = new ConcurrentDictionary<string, IPropertyMapping>();
 		private JsonSerializer _indentedSerializer;
 
-		protected IConnectionSettingsValues Settings { get; }
+		public JsonNetSerializer(IConnectionSettingsValues settings, Action<JsonSerializerSettings, IConnectionSettingsValues> settingsModifier) :
+			this(settings, null, settingsModifier) { }
+
+		public JsonNetSerializer(IConnectionSettingsValues settings) : this(settings, null, null) { }
 
 		/// <summary>
-		/// Resolves JsonContracts for types
+		/// this constructor is only here for stateful (de)serialization
 		/// </summary>
-		private ElasticContractResolver ContractResolver { get; }
+		protected internal JsonNetSerializer(
+			IConnectionSettingsValues settings,
+			JsonConverter statefulConverter,
+			Action<JsonSerializerSettings, IConnectionSettingsValues> settingsModifier = null
+		)
+		{
+			Settings = settings;
+			var piggyBackState = statefulConverter == null ? null : new JsonConverterPiggyBackState { ActualJsonConverter = statefulConverter };
+			// ReSharper disable once VirtualMemberCallInContructor
+			ContractResolver = new ElasticContractResolver(Settings, ContractConverters) { PiggyBackState = piggyBackState };
 
-		//TODO this internal smells
-		internal JsonSerializer Serializer => _defaultSerializer;
+			OverwriteDefaultSerializers(settingsModifier ?? ((s, csv) => { }));
+		}
 
 		/// <summary>
 		/// The size of the buffer to use when writing the serialized request
@@ -41,27 +54,59 @@ namespace Nest
 
 		protected virtual IList<Func<Type, JsonConverter>> ContractConverters => null;
 
-		protected readonly ConcurrentDictionary<string, IPropertyMapping> Properties = new ConcurrentDictionary<string, IPropertyMapping>();
+		protected IConnectionSettingsValues Settings { get; }
 
-		public JsonNetSerializer(IConnectionSettingsValues settings, Action<JsonSerializerSettings, IConnectionSettingsValues> settingsModifier) : this(settings, null, settingsModifier) { }
-
-		public JsonNetSerializer(IConnectionSettingsValues settings) : this(settings, null, null) { }
+		//TODO this internal smells
+		internal JsonSerializer Serializer { get; private set; }
 
 		/// <summary>
-		/// this constructor is only here for stateful (de)serialization
+		/// Resolves JsonContracts for types
 		/// </summary>
-		protected internal JsonNetSerializer(
-			IConnectionSettingsValues settings,
-			JsonConverter statefulConverter,
-			Action<JsonSerializerSettings, IConnectionSettingsValues> settingsModifier = null
-			)
-		{
-			this.Settings = settings;
-			var piggyBackState = statefulConverter == null ? null : new JsonConverterPiggyBackState { ActualJsonConverter = statefulConverter };
-			// ReSharper disable once VirtualMemberCallInContructor
-			this.ContractResolver = new ElasticContractResolver(this.Settings, this.ContractConverters) { PiggyBackState = piggyBackState };
+		private ElasticContractResolver ContractResolver { get; }
 
-			OverwriteDefaultSerializers(settingsModifier ?? ((s, csv) => { }));
+		public virtual IPropertyMapping CreatePropertyMapping(MemberInfo memberInfo)
+		{
+			var memberInfoString = $"{memberInfo.DeclaringType?.FullName}.{memberInfo.Name}";
+			if (Properties.TryGetValue(memberInfoString, out var mapping))
+				return mapping;
+
+			mapping = PropertyMappingFromAttributes(memberInfo);
+			Properties.TryAdd(memberInfoString, mapping);
+			return mapping;
+		}
+
+		public virtual T Deserialize<T>(Stream stream)
+		{
+			if (stream == null) return default(T);
+
+			using (var streamReader = new StreamReader(stream))
+			using (var jsonTextReader = new JsonTextReader(streamReader))
+			{
+				var t = Serializer.Deserialize<T>(jsonTextReader);
+				return t;
+			}
+		}
+
+		public virtual Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken))
+		{
+			//Json.NET does not support reading a stream asynchronously :(
+			var result = Deserialize<T>(stream);
+			return Task.FromResult(result);
+		}
+
+		public virtual void Serialize(object data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented)
+		{
+			var serializer = formatting == SerializationFormatting.Indented
+				? _indentedSerializer
+				: Serializer;
+
+			using (var writer = new StreamWriter(writableStream, ExpectedEncoding, BufferSize, true))
+			using (var jsonWriter = new JsonTextWriter(writer))
+			{
+				serializer.Serialize(jsonWriter, data);
+				writer.Flush();
+				jsonWriter.Flush();
+			}
 		}
 
 		/// <summary>
@@ -72,38 +117,13 @@ namespace Nest
 		protected void OverwriteDefaultSerializers(Action<JsonSerializerSettings, IConnectionSettingsValues> settingsModifier)
 		{
 			settingsModifier.ThrowIfNull(nameof(settingsModifier));
-			var collapsed = this.CreateSettings(SerializationFormatting.None);
-			var indented = this.CreateSettings(SerializationFormatting.Indented);
-			settingsModifier(collapsed, this.Settings);
-			settingsModifier(indented, this.Settings);
+			var collapsed = CreateSettings(SerializationFormatting.None);
+			var indented = CreateSettings(SerializationFormatting.Indented);
+			settingsModifier(collapsed, Settings);
+			settingsModifier(indented, Settings);
 
-			this._defaultSerializer = JsonSerializer.Create(collapsed);
-			this._indentedSerializer = JsonSerializer.Create(indented);
-		}
-
-		public virtual void Serialize(object data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented)
-		{
-			var serializer = formatting == SerializationFormatting.Indented
-				? _indentedSerializer
-				: _defaultSerializer;
-
-			using (var writer = new StreamWriter(writableStream, ExpectedEncoding, BufferSize, leaveOpen: true))
-			using (var jsonWriter = new JsonTextWriter(writer))
-			{
-				serializer.Serialize(jsonWriter, data);
-				writer.Flush();
-				jsonWriter.Flush();
-			}
-		}
-
-		public virtual IPropertyMapping CreatePropertyMapping(MemberInfo memberInfo)
-		{
-			var memberInfoString = $"{memberInfo.DeclaringType?.FullName}.{memberInfo.Name}";
-			if (Properties.TryGetValue(memberInfoString, out var mapping))
-				return mapping;
-			mapping =  PropertyMappingFromAttributes(memberInfo);
-			this.Properties.TryAdd(memberInfoString, mapping);
-			return mapping;
+			Serializer = JsonSerializer.Create(collapsed);
+			_indentedSerializer = JsonSerializer.Create(indented);
 		}
 
 		private static IPropertyMapping PropertyMappingFromAttributes(MemberInfo memberInfo)
@@ -112,25 +132,8 @@ namespace Nest
 			var dataMember = memberInfo.GetCustomAttribute<DataMemberAttribute>(true);
 			var ignoreProperty = memberInfo.GetCustomAttribute<JsonIgnoreAttribute>(true);
 			if (jsonProperty == null && ignoreProperty == null && dataMember == null) return null;
-			return new PropertyMapping {Name = jsonProperty?.PropertyName ?? dataMember?.Name, Ignore = ignoreProperty != null};
-		}
 
-		public virtual T Deserialize<T>(Stream stream)
-		{
-			if (stream == null) return default(T);
-			using (var streamReader = new StreamReader(stream))
-			using (var jsonTextReader = new JsonTextReader(streamReader))
-			{
-				var t = this._defaultSerializer.Deserialize<T>(jsonTextReader);
-				return t;
-			}
-		}
-
-		public virtual Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken))
-		{
-			//Json.NET does not support reading a stream asynchronously :(
-			var result = this.Deserialize<T>(stream);
-			return Task.FromResult(result);
+			return new PropertyMapping { Name = jsonProperty?.PropertyName ?? dataMember?.Name, Ignore = ignoreProperty != null };
 		}
 
 		private JsonSerializerSettings CreateSettings(SerializationFormatting formatting)
@@ -138,13 +141,14 @@ namespace Nest
 			var settings = new JsonSerializerSettings()
 			{
 				Formatting = formatting == SerializationFormatting.Indented ? Formatting.Indented : Formatting.None,
-				ContractResolver = this.ContractResolver,
+				ContractResolver = ContractResolver,
 				DefaultValueHandling = DefaultValueHandling.Include,
 				NullValueHandling = NullValueHandling.Ignore
 			};
 
 			var contract = settings.ContractResolver as ElasticContractResolver;
-			if (contract == null) throw new Exception($"NEST needs an instance of {nameof(ElasticContractResolver)} registered on Json.NET's JsonSerializerSettings");
+			if (contract == null)
+				throw new Exception($"NEST needs an instance of {nameof(ElasticContractResolver)} registered on Json.NET's JsonSerializerSettings");
 
 			return settings;
 		}

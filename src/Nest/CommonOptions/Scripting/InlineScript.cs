@@ -11,10 +11,7 @@ namespace Nest
 
 	public class InlineScript : ScriptBase, IInlineScript
 	{
-		public InlineScript(string script)
-		{
-			this.Inline = script;
-		}
+		public InlineScript(string script) => Inline = script;
 
 		public string Inline { get; set; }
 
@@ -24,14 +21,11 @@ namespace Nest
 	public class InlineScriptDescriptor
 		: ScriptDescriptorBase<InlineScriptDescriptor, IInlineScript>, IInlineScript
 	{
+		public InlineScriptDescriptor() { }
+
+		public InlineScriptDescriptor(string script) => Self.Inline = script;
+
 		string IInlineScript.Inline { get; set; }
-
-		public InlineScriptDescriptor() {}
-
-		public InlineScriptDescriptor(string script)
-		{
-			Self.Inline = script;
-		}
 
 		public InlineScriptDescriptor Inline(string script) => Assign(a => a.Inline = script);
 	}

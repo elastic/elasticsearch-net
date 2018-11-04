@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -19,8 +14,8 @@ namespace Nest
 
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class PercolatorPropertyDescriptor<T>
-	: PropertyDescriptorBase<PercolatorPropertyDescriptor<T>, IPercolatorProperty, T>, IPercolatorProperty
-	where T : class
+		: PropertyDescriptorBase<PercolatorPropertyDescriptor<T>, IPercolatorProperty, T>, IPercolatorProperty
+		where T : class
 	{
 		public PercolatorPropertyDescriptor() : base(FieldType.Percolator) { }
 	}

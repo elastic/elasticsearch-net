@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	[ContractJsonConverterAttribute(typeof(GeoShapeConverter))]
+	[ContractJsonConverter(typeof(GeoShapeConverter))]
 	public interface IGeoShape
 	{
 		/// <summary>
@@ -18,7 +18,7 @@ namespace Nest
 
 	public abstract class GeoShapeBase : IGeoShape
 	{
-	    protected GeoShapeBase(string type) => this.Type = type;
+		protected GeoShapeBase(string type) => Type = type;
 
 		/// <inheritdoc />
 		public string Type { get; protected set; }
@@ -71,7 +71,7 @@ namespace Nest
 		}
 
 		public override bool CanConvert(Type objectType) => typeof(IGeoShape).IsAssignableFrom(objectType) ||
-		                                                    typeof(IGeometryCollection).IsAssignableFrom(objectType);
+			typeof(IGeometryCollection).IsAssignableFrom(objectType);
 
 		private static GeometryCollection ParseGeometryCollection(JToken shape, JsonSerializer serializer)
 		{
@@ -96,13 +96,13 @@ namespace Nest
 			};
 
 		private static PolygonGeoShape ParsePolygonGeoShape(JToken shape, JsonSerializer serializer) =>
-			new PolygonGeoShape {Coordinates = GetCoordinates<IEnumerable<IEnumerable<GeoCoordinate>>>(shape, serializer)};
+			new PolygonGeoShape { Coordinates = GetCoordinates<IEnumerable<IEnumerable<GeoCoordinate>>>(shape, serializer) };
 
 		private static MultiPointGeoShape ParseMultiPointGeoShape(JToken shape, JsonSerializer serializer) =>
-			new MultiPointGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)};
+			new MultiPointGeoShape { Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer) };
 
 		private static PointGeoShape ParsePointGeoShape(JToken shape, JsonSerializer serializer) =>
-			new PointGeoShape {Coordinates = GetCoordinates<GeoCoordinate>(shape, serializer)};
+			new PointGeoShape { Coordinates = GetCoordinates<GeoCoordinate>(shape, serializer) };
 
 		private static MultiLineStringGeoShape ParseMultiLineStringGeoShape(JToken shape, JsonSerializer serializer) =>
 			new MultiLineStringGeoShape
@@ -111,10 +111,10 @@ namespace Nest
 			};
 
 		private static LineStringGeoShape ParseLineStringGeoShape(JToken shape, JsonSerializer serializer) =>
-			new LineStringGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)};
+			new LineStringGeoShape { Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer) };
 
 		private static EnvelopeGeoShape ParseEnvelopeGeoShape(JToken shape, JsonSerializer serializer) =>
-			new EnvelopeGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)};
+			new EnvelopeGeoShape { Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer) };
 
 		private static CircleGeoShape ParseCircleGeoShape(JToken shape, JsonSerializer serializer, JToken radius) =>
 			new CircleGeoShape

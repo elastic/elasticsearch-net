@@ -1,7 +1,4 @@
-﻿
-using System;
-using Elasticsearch.Net;
-using Newtonsoft.Json;
+﻿using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -18,6 +15,6 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
 		public FieldCapabilitiesDescriptor Fields(Fields fields) =>
-			AssignParam(p=>p.AddQueryString("fields", fields));
+			AssignParam(p => p.AddQueryString("fields", fields));
 	}
 }

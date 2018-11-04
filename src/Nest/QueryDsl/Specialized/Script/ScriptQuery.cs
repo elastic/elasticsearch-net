@@ -5,59 +5,60 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-
 	[JsonConverter(typeof(ScriptQueryConverter))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IScriptQuery : IQuery
 	{
-		[JsonProperty(PropertyName = "inline")]
-		string Inline { get; set; }
-
-		[JsonProperty(PropertyName = "id")]
-		Id Id { get; set; }
-
 		[Obsolete("Removed in NEST 6.x.")]
 		[JsonProperty("file")]
 		string File { get; set; }
 
-		[JsonProperty(PropertyName = "params")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
-		Dictionary<string, object> Params { get; set; }
+		[JsonProperty(PropertyName = "id")]
+		Id Id { get; set; }
+
+		[JsonProperty(PropertyName = "inline")]
+		string Inline { get; set; }
 
 		[JsonProperty(PropertyName = "lang")]
 		string Lang { get; set; }
+
+		[JsonProperty(PropertyName = "params")]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
+		Dictionary<string, object> Params { get; set; }
 	}
 
 	public class ScriptQuery : QueryBase, IScriptQuery
 	{
-		protected override bool Conditionless => IsConditionless(this);
-		public string Inline { get; set; }
-		public Id Id { get; set; }
-
 		[Obsolete("Removed in NEST 6.x.")]
 		public string File { get; set; }
-		public Dictionary<string, object> Params { get; set; }
+
+		public Id Id { get; set; }
+		public string Inline { get; set; }
 		public string Lang { get; set; }
+		public Dictionary<string, object> Params { get; set; }
+		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Script = this;
+
 		internal static bool IsConditionless(IScriptQuery q) =>
 			q.Inline.IsNullOrEmpty() &&
 			q.Id == null &&
 #pragma warning disable 618
 			q.File.IsNullOrEmpty();
 #pragma warning restore 618
-
 	}
 
 	public class ScriptQueryDescriptor<T>
 		: QueryDescriptorBase<ScriptQueryDescriptor<T>, IScriptQuery>
-		, IScriptQuery where T : class
+			, IScriptQuery where T : class
 	{
 		protected override bool Conditionless => ScriptQuery.IsConditionless(this);
-		string IScriptQuery.Inline { get; set; }
-		Id IScriptQuery.Id { get; set; }
+
 		[Obsolete("Removed in NEST 6.x.")]
 		string IScriptQuery.File { get; set; }
+
+		Id IScriptQuery.Id { get; set; }
+		string IScriptQuery.Inline { get; set; }
 		string IScriptQuery.Lang { get; set; }
 		Dictionary<string, object> IScriptQuery.Params { get; set; }
 
@@ -78,13 +79,13 @@ namespace Nest
 		public ScriptQueryDescriptor<T> File(string scriptFile) => Assign(a => a.File = scriptFile);
 
 		/// <summary>
-		/// Scripts are compiled and cached for faster execution.
-		/// If the same script can be used, just with different parameters provided,
-		/// it is preferable to use the ability to pass parameters to the script itself.
+		///  Scripts are compiled and cached for faster execution.
+		///  If the same script can be used, just with different parameters provided,
+		///  it is preferable to use the ability to pass parameters to the script itself.
 		/// </summary>
 		/// <example>
-		///	    script: "doc['num1'].value &gt; param1"
-		///		param: "param1" = 5
+		/// 	    script: "doc['num1'].value &gt; param1"
+		/// 		param: "param1" = 5
 		/// </example>
 		/// <param name="paramDictionary">param</param>
 		/// <returns>this</returns>

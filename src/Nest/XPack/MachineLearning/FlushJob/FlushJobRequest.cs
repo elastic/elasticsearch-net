@@ -21,22 +21,13 @@ namespace Nest
 		bool? CalculateInterim { get; set; }
 
 		/// <summary>
-		///  When used in conjunction with <see cref="CalculateInterim"/>, specifies the range of buckets on
+		///  When used in conjunction with <see cref="CalculateInterim" />, specifies the range of buckets on
 		/// which to calculate interim results.
 		/// </summary>
 		[JsonProperty("end")]
 		// Forced to prevent override, ML API always expects ISO8601 format
 		[JsonConverter(typeof(IsoDateTimeConverter))]
 		DateTimeOffset? End { get; set; }
-
-		/// <summary>
-		/// When used in conjunction with <see cref="CalculateInterim"/>, specifies the range of buckets
-		/// on which to calculate interim results.
-		/// </summary>
-		[JsonProperty("start")]
-		// Forced to prevent override, ML API always expects ISO8601 format
-		[JsonConverter(typeof(IsoDateTimeConverter))]
-		DateTimeOffset? Start { get; set; }
 
 		/// <summary>
 		/// Skips time to the given value without generating results or updating the model for the skipped interval
@@ -46,21 +37,34 @@ namespace Nest
 		[JsonConverter(typeof(IsoDateTimeConverter))]
 		[Obsolete("Scheduled to be removed in 6.0")]
 		DateTimeOffset? SkipTime { get; set; }
+
+		/// <summary>
+		/// When used in conjunction with <see cref="CalculateInterim" />, specifies the range of buckets
+		/// on which to calculate interim results.
+		/// </summary>
+		[JsonProperty("start")]
+		// Forced to prevent override, ML API always expects ISO8601 format
+		[JsonConverter(typeof(IsoDateTimeConverter))]
+		DateTimeOffset? Start { get; set; }
 	}
 
 	public partial class FlushJobRequest
 	{
 		/// <inheritdoc />
 		public DateTimeOffset? AdvanceTime { get; set; }
+
 		/// <inheritdoc />
 		public bool? CalculateInterim { get; set; }
+
 		/// <inheritdoc />
 		public DateTimeOffset? End { get; set; }
-		/// <inheritdoc />
-		public DateTimeOffset? Start { get; set; }
+
 		/// <inheritdoc />
 		[Obsolete("Scheduled to be removed in 6.0")]
 		public DateTimeOffset? SkipTime { get; set; }
+
+		/// <inheritdoc />
+		public DateTimeOffset? Start { get; set; }
 	}
 
 	[DescriptorFor("XpackMlFlushJob")]
@@ -69,10 +73,11 @@ namespace Nest
 		DateTimeOffset? IFlushJobRequest.AdvanceTime { get; set; }
 		bool? IFlushJobRequest.CalculateInterim { get; set; }
 		DateTimeOffset? IFlushJobRequest.End { get; set; }
-		DateTimeOffset? IFlushJobRequest.Start { get; set; }
 
 		[Obsolete("Scheduled to be removed in 6.0")]
 		DateTimeOffset? IFlushJobRequest.SkipTime { get; set; }
+
+		DateTimeOffset? IFlushJobRequest.Start { get; set; }
 
 		/// <inheritdoc />
 		public FlushJobDescriptor AdvanceTime(DateTimeOffset advanceTime) => Assign(a => a.AdvanceTime = advanceTime);

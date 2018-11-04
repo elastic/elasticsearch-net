@@ -16,7 +16,8 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Read the json as an instance of <para name="objectType"></para>
+		/// Read the json as an instance of
+		/// <para name="objectType"></para>
 		/// </summary>
 		public static object Read(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{

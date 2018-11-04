@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	internal class QueryContainerJsonConverter: ReserializeJsonConverter<QueryContainer, IQueryContainer>
+	internal class QueryContainerJsonConverter : ReserializeJsonConverter<QueryContainer, IQueryContainer>
 	{
-
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			if (reader.TokenType == JsonToken.StartObject)
@@ -18,6 +16,7 @@ namespace Nest
 			//Some API's return the stored queries as escaped string, e.g the get shield role API
 			var escapedJson = reader.Value as string;
 			if (string.IsNullOrWhiteSpace(escapedJson)) return null;
+
 			using (var sr = new StringReader(escapedJson))
 			using (var escapedReader = new JsonTextReader(sr))
 			{
@@ -42,12 +41,12 @@ namespace Nest
 
 	internal class QueryContainerCollectionJsonConverter : JsonConverter
 	{
-		public override bool CanWrite => true;
 		public override bool CanRead => false;
+		public override bool CanWrite => true;
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var collection = (IEnumerable<QueryContainer>) value;
+			var collection = (IEnumerable<QueryContainer>)value;
 
 			if (collection == null)
 			{
@@ -64,10 +63,8 @@ namespace Nest
 			writer.WriteEndArray();
 		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
 			throw new NotSupportedException();
-		}
 
 		public override bool CanConvert(Type objectType) => true;
 	}

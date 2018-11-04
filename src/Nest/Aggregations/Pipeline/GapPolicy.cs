@@ -9,6 +9,7 @@ namespace Nest
 	{
 		[EnumMember(Value = "skip")]
 		Skip,
+
 		[EnumMember(Value = "insert_zeros")]
 		InsertZeros
 	}

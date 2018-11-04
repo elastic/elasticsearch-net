@@ -4,9 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface IBinaryProperty : IDocValuesProperty
-	{
-	}
+	public interface IBinaryProperty : IDocValuesProperty { }
 
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class BinaryProperty : DocValuesPropertyBase, IBinaryProperty

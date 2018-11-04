@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using Newtonsoft.Json.Linq;
 
 namespace Nest
@@ -14,10 +13,10 @@ namespace Nest
 		/// <typeparam name="T">The type that best represents the result of your scripted metric aggrgation</typeparam>
 		public T Value<T>()
 		{
-			var jToken = this._Value as JToken;
+			var jToken = _Value as JToken;
 			return jToken != null
 				? jToken.ToObject<T>()
-				: (T)Convert.ChangeType(this._Value, typeof(T));
+				: (T)Convert.ChangeType(_Value, typeof(T));
 		}
 	}
 }

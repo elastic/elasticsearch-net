@@ -4,7 +4,6 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	
 	public class PropertyMappingDescriptor<TDocument> : DescriptorBase<PropertyMappingDescriptor<TDocument>, IDescriptor>
 		where TDocument : class
 	{
@@ -14,16 +13,15 @@ namespace Nest
 		{
 			property.ThrowIfNull(nameof(property));
 			field.ThrowIfNullOrEmpty(nameof(field));
-			this.Mappings.Add(new RenamePropertyMapping<TDocument>(property, field));
+			Mappings.Add(new RenamePropertyMapping<TDocument>(property, field));
 			return this;
 		}
 
 		public PropertyMappingDescriptor<TDocument> Ignore(Expression<Func<TDocument, object>> property)
 		{
 			property.ThrowIfNull(nameof(property));
-			this.Mappings.Add(new IgnorePropertyMapping<TDocument>(property));
+			Mappings.Add(new IgnorePropertyMapping<TDocument>(property));
 			return this;
 		}
 	}
-
 }

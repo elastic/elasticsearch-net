@@ -26,12 +26,14 @@ namespace Nest
 		public MultiPercolateDescriptor Percolate<T>(Func<PercolateDescriptor<T>, IPercolateOperation> percolateSelector)
 			where T : class
 		{
-			var percolation = percolateSelector.InvokeOrDefault((new PercolateDescriptor<T>(typeof(T), typeof(T))));
+			var percolation = percolateSelector.InvokeOrDefault(new PercolateDescriptor<T>(typeof(T), typeof(T)));
 			Self.Percolations.Add(percolation);
 			return this;
 		}
 
-		public MultiPercolateDescriptor PercolateMany<T>(IEnumerable<T> sources, Func<PercolateDescriptor<T>, T, IPercolateOperation> percolateSelector)
+		public MultiPercolateDescriptor PercolateMany<T>(IEnumerable<T> sources,
+			Func<PercolateDescriptor<T>, T, IPercolateOperation> percolateSelector
+		)
 			where T : class
 		{
 			foreach (var source in sources)

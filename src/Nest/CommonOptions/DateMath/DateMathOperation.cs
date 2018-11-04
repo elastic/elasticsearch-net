@@ -9,6 +9,7 @@ namespace Nest
 	{
 		[EnumMember(Value = "+")]
 		Add,
+
 		[EnumMember(Value = "-")]
 		Subtract
 	}

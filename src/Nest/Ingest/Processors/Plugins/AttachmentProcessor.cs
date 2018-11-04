@@ -24,17 +24,10 @@ namespace Nest
 		Field Field { get; set; }
 
 		/// <summary>
-		/// The field that will hold the attachment information
+		/// If `true` and `field` does not exist, the processor quietly exits without modifying the document
 		/// </summary>
-		[JsonProperty("target_field")]
-		Field TargetField { get; set; }
-
-		/// <summary>
-		/// Properties to select to be stored. Can be content, title, name, author,
-		/// keywords, date, content_type, content_length, language. Defaults to all
-		/// </summary>
-		[JsonProperty("properties")]
-		IEnumerable<string> Properties { get; set; }
+		[JsonProperty("ignore_missing")]
+		bool? IgnoreMissing { get; set; }
 
 		/// <summary>
 		/// The number of chars being used for extraction to prevent huge fields. Use -1 for no limit.
@@ -44,10 +37,17 @@ namespace Nest
 		long? IndexedCharacters { get; set; }
 
 		/// <summary>
-		/// If `true` and `field` does not exist, the processor quietly exits without modifying the document
+		/// Properties to select to be stored. Can be content, title, name, author,
+		/// keywords, date, content_type, content_length, language. Defaults to all
 		/// </summary>
-		[JsonProperty("ignore_missing")]
-		bool? IgnoreMissing { get; set; }
+		[JsonProperty("properties")]
+		IEnumerable<string> Properties { get; set; }
+
+		/// <summary>
+		/// The field that will hold the attachment information
+		/// </summary>
+		[JsonProperty("target_field")]
+		Field TargetField { get; set; }
 	}
 
 	/// <summary>
@@ -60,17 +60,19 @@ namespace Nest
 	/// </remarks>
 	public class AttachmentProcessor : ProcessorBase, IAttachmentProcessor
 	{
-		protected override string Name => "attachment";
-
 		/// <summary>
 		/// The field to get the base64 encoded field from
 		/// </summary>
 		public Field Field { get; set; }
 
+		/// <inheritdoc />
+		public bool? IgnoreMissing { get; set; }
+
 		/// <summary>
-		/// The field that will hold the attachment information
+		/// The number of chars being used for extraction to prevent huge fields. Use -1 for no limit.
+		/// Defaults to 100000.
 		/// </summary>
-		public Field TargetField { get; set; }
+		public long? IndexedCharacters { get; set; }
 
 		/// <summary>
 		/// Properties to select to be stored. Can be content, title, name, author,
@@ -79,13 +81,11 @@ namespace Nest
 		public IEnumerable<string> Properties { get; set; }
 
 		/// <summary>
-		/// The number of chars being used for extraction to prevent huge fields. Use -1 for no limit.
-		/// Defaults to 100000.
+		/// The field that will hold the attachment information
 		/// </summary>
-		public long? IndexedCharacters { get; set; }
+		public Field TargetField { get; set; }
 
-		/// <inheritdoc/>
-		public bool? IgnoreMissing { get; set; }
+		protected override string Name => "attachment";
 	}
 
 	/// <summary>
@@ -103,10 +103,10 @@ namespace Nest
 		protected override string Name => "attachment";
 
 		Field IAttachmentProcessor.Field { get; set; }
-		Field IAttachmentProcessor.TargetField { get; set; }
-		IEnumerable<string> IAttachmentProcessor.Properties { get; set; }
-		long? IAttachmentProcessor.IndexedCharacters { get; set; }
 		bool? IAttachmentProcessor.IgnoreMissing { get; set; }
+		long? IAttachmentProcessor.IndexedCharacters { get; set; }
+		IEnumerable<string> IAttachmentProcessor.Properties { get; set; }
+		Field IAttachmentProcessor.TargetField { get; set; }
 
 		/// <summary>
 		/// The field to get the base64 encoded field from
@@ -136,7 +136,7 @@ namespace Nest
 		/// </summary>
 		public AttachmentProcessorDescriptor<T> IndexedCharacters(long indexedCharacters) => Assign(a => a.IndexedCharacters = indexedCharacters);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public AttachmentProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);
 
 		/// <summary>

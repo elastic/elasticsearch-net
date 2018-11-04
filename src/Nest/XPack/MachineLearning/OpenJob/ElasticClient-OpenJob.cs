@@ -14,39 +14,43 @@ namespace Nest
 		/// </summary>
 		IOpenJobResponse OpenJob(Id jobId, Func<OpenJobDescriptor, IOpenJobRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		IOpenJobResponse OpenJob(IOpenJobRequest request);
 
-		/// <inheritdoc/>
-		Task<IOpenJobResponse> OpenJobAsync(Id jobId, Func<OpenJobDescriptor, IOpenJobRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<IOpenJobResponse> OpenJobAsync(Id jobId, Func<OpenJobDescriptor, IOpenJobRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		Task<IOpenJobResponse> OpenJobAsync(IOpenJobRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IOpenJobResponse OpenJob(Id jobId, Func<OpenJobDescriptor, IOpenJobRequest> selector = null) =>
-			this.OpenJob(selector.InvokeOrDefault(new OpenJobDescriptor(jobId)));
+			OpenJob(selector.InvokeOrDefault(new OpenJobDescriptor(jobId)));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IOpenJobResponse OpenJob(IOpenJobRequest request) =>
-			this.Dispatcher.Dispatch<IOpenJobRequest, OpenJobRequestParameters, OpenJobResponse>(
+			Dispatcher.Dispatch<IOpenJobRequest, OpenJobRequestParameters, OpenJobResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.XpackMlOpenJobDispatch<OpenJobResponse>(p)
+				(p, d) => LowLevelDispatch.XpackMlOpenJobDispatch<OpenJobResponse>(p)
 			);
 
-		/// <inheritdoc/>
-		public Task<IOpenJobResponse> OpenJobAsync(Id jobId, Func<OpenJobDescriptor, IOpenJobRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.OpenJobAsync(selector.InvokeOrDefault(new OpenJobDescriptor(jobId)), cancellationToken);
+		/// <inheritdoc />
+		public Task<IOpenJobResponse> OpenJobAsync(Id jobId, Func<OpenJobDescriptor, IOpenJobRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			OpenJobAsync(selector.InvokeOrDefault(new OpenJobDescriptor(jobId)), cancellationToken);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public Task<IOpenJobResponse> OpenJobAsync(IOpenJobRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<IOpenJobRequest, OpenJobRequestParameters, OpenJobResponse, IOpenJobResponse>(
+			Dispatcher.DispatchAsync<IOpenJobRequest, OpenJobRequestParameters, OpenJobResponse, IOpenJobResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => this.LowLevelDispatch.XpackMlOpenJobDispatchAsync<OpenJobResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.XpackMlOpenJobDispatchAsync<OpenJobResponse>(p, c)
 			);
 	}
 }

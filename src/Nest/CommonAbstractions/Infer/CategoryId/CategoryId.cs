@@ -7,13 +7,10 @@ namespace Nest
 	{
 		private readonly long _categoryId;
 
-		public CategoryId(long categoryId)
-		{
-			_categoryId = categoryId;
-		}
-
-		public static implicit operator CategoryId(long categoryId) => new CategoryId(categoryId);
+		public CategoryId(long categoryId) => _categoryId = categoryId;
 
 		public string GetString(IConnectionConfigurationValues settings) => _categoryId.ToString(CultureInfo.InvariantCulture);
+
+		public static implicit operator CategoryId(long categoryId) => new CategoryId(categoryId);
 	}
 }

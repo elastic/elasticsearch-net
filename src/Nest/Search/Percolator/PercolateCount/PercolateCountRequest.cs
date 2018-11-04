@@ -16,30 +16,28 @@ namespace Nest
 	[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
 	public partial class PercolateCountRequest<TDocument> where TDocument : class
 	{
-		public string MultiPercolateName => "count";
-		public int? Size { get; set; }
-		public bool? TrackScores { get; set; }
-		public IList<ISort> Sort { get; set; }
-		public IHighlight Highlight { get; set; }
-		public QueryContainer Query { get; set; }
-		public QueryContainer Filter { get; set; }
+		public PercolateCountRequest() : this(typeof(TDocument), typeof(TDocument)) { }
+
+		public PercolateCountRequest(Id id) : this(typeof(TDocument), typeof(TDocument), id) { }
+
 		public AggregationDictionary Aggregations { get; set; }
 
 		public TDocument Document { get; set; }
+		public QueryContainer Filter { get; set; }
+		public IHighlight Highlight { get; set; }
+		public string MultiPercolateName => "count";
+		public QueryContainer Query { get; set; }
+		public int? Size { get; set; }
+		public IList<ISort> Sort { get; set; }
+		public bool? TrackScores { get; set; }
 
-		public PercolateCountRequest() : this(typeof(TDocument), typeof(TDocument)) { }
-		public PercolateCountRequest(Id id) : this(typeof(TDocument), typeof(TDocument), id) { }
+		IRequestParameters IPercolateOperation.GetRequestParameters() => RequestState.RequestParameters;
 
 		partial void DocumentFromPath(TDocument document)
 		{
 			Self.Document = document;
 			if (Self.Document != null)
 				Self.RouteValues.Remove("id");
-		}
-
-		IRequestParameters IPercolateOperation.GetRequestParameters()
-		{
-			return this.RequestState.RequestParameters;
 		}
 	}
 
@@ -48,22 +46,22 @@ namespace Nest
 	public partial class PercolateCountDescriptor<TDocument> : IPercolateCountRequest<TDocument>
 		where TDocument : class
 	{
-		IHighlight IPercolateOperation.Highlight { get; set; }
-		QueryContainer IPercolateOperation.Query { get; set; }
-		QueryContainer IPercolateOperation.Filter { get; set; }
-
-		int? IPercolateOperation.Size { get; set; }
-		bool? IPercolateOperation.TrackScores { get; set; }
-
-		TDocument IPercolateCountRequest<TDocument>.Document { get; set; }
-
-		IList<ISort> IPercolateOperation.Sort { get; set; }
 		AggregationDictionary IPercolateOperation.Aggregations { get; set; }
 
+		TDocument IPercolateCountRequest<TDocument>.Document { get; set; }
+		QueryContainer IPercolateOperation.Filter { get; set; }
+		IHighlight IPercolateOperation.Highlight { get; set; }
+
 		string IPercolateOperation.MultiPercolateName => "count";
+		QueryContainer IPercolateOperation.Query { get; set; }
+
+		int? IPercolateOperation.Size { get; set; }
+
+		IList<ISort> IPercolateOperation.Sort { get; set; }
+		bool? IPercolateOperation.TrackScores { get; set; }
 
 		IRequestParameters IPercolateOperation.GetRequestParameters() =>
-			this.Self.RequestParameters;
+			Self.RequestParameters;
 
 		/// <summary>
 		/// The object to perculate
@@ -75,13 +73,16 @@ namespace Nest
 		/// </summary>
 		public PercolateCountDescriptor<TDocument> TrackScores(bool trackscores = true) => Assign(a => a.TrackScores = trackscores);
 
-		public PercolateCountDescriptor<TDocument> Aggregations(Func<AggregationContainerDescriptor<TDocument>, IAggregationContainer> aggregationsSelector) =>
+		public PercolateCountDescriptor<TDocument> Aggregations(
+			Func<AggregationContainerDescriptor<TDocument>, IAggregationContainer> aggregationsSelector
+		) =>
 			Assign(a => a.Aggregations = aggregationsSelector(new AggregationContainerDescriptor<TDocument>())?.Aggregations);
 
 		public PercolateCountDescriptor<TDocument> Aggregations(AggregationDictionary aggregations) =>
 			Assign(a => a.Aggregations = aggregations);
 
-		public PercolateCountDescriptor<TDocument> Sort(Func<SortDescriptor<TDocument>, IPromise<IList<ISort>>> selector) => Assign(a => a.Sort = selector?.Invoke(new SortDescriptor<TDocument>())?.Value);
+		public PercolateCountDescriptor<TDocument> Sort(Func<SortDescriptor<TDocument>, IPromise<IList<ISort>>> selector) =>
+			Assign(a => a.Sort = selector?.Invoke(new SortDescriptor<TDocument>())?.Value);
 
 		/// <summary>
 		/// Describe the query to perform using a query descriptor lambda

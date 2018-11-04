@@ -5,15 +5,14 @@
 	/// </summary>
 	public interface ISimpleAnalyzer : IAnalyzer { }
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class SimpleAnalyzer : AnalyzerBase, ISimpleAnalyzer
 	{
-		public SimpleAnalyzer() : base("simple") {}
+		public SimpleAnalyzer() : base("simple") { }
 	}
 
-	/// <inheritdoc/>
-	public class SimpleAnalyzerDescriptor :
-		AnalyzerDescriptorBase<SimpleAnalyzerDescriptor, ISimpleAnalyzer>, ISimpleAnalyzer
+	/// <inheritdoc />
+	public class SimpleAnalyzerDescriptor : AnalyzerDescriptorBase<SimpleAnalyzerDescriptor, ISimpleAnalyzer>, ISimpleAnalyzer
 	{
 		protected override string Type => "simple";
 	}

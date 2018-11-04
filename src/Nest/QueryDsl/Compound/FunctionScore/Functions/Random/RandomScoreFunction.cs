@@ -10,18 +10,19 @@ namespace Nest
 		Union<long, string> Seed { get; set; }
 	}
 
-	public class RandomScoreFunction: FunctionScoreFunctionBase, IRandomScoreFunction
+	public class RandomScoreFunction : FunctionScoreFunctionBase, IRandomScoreFunction
 	{
 		public Union<long, string> Seed { get; set; }
 	}
 
-	public class RandomScoreFunctionDescriptor<T> : FunctionScoreFunctionDescriptorBase<RandomScoreFunctionDescriptor<T>, IRandomScoreFunction,T>, IRandomScoreFunction
+	public class RandomScoreFunctionDescriptor<T>
+		: FunctionScoreFunctionDescriptorBase<RandomScoreFunctionDescriptor<T>, IRandomScoreFunction, T>, IRandomScoreFunction
 		where T : class
 	{
 		Union<long, string> IRandomScoreFunction.Seed { get; set; }
 
 		public RandomScoreFunctionDescriptor<T> Seed(long? seed) => Assign(a => a.Seed = seed);
-		public RandomScoreFunctionDescriptor<T> Seed(string seed) => Assign(a => a.Seed = seed);
 
+		public RandomScoreFunctionDescriptor<T> Seed(string seed) => Assign(a => a.Seed = seed);
 	}
 }

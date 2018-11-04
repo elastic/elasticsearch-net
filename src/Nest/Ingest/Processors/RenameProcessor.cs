@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
@@ -22,9 +17,9 @@ namespace Nest
 
 	public class RenameProcessor : ProcessorBase, IRenameProcessor
 	{
-		protected override string Name => "rename";
 		public Field Field { get; set; }
 		public Field TargetField { get; set; }
+		protected override string Name => "rename";
 	}
 
 	public class RenameProcessorDescriptor<T>

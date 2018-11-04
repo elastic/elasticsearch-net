@@ -1,6 +1,6 @@
 ﻿namespace Nest
 {
-	public interface ITrigger {}
+	public interface ITrigger { }
 
 	public abstract class TriggerBase : ITrigger
 	{

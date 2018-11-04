@@ -1,6 +1,4 @@
-﻿
-using System;
-using Elasticsearch.Net;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Nest

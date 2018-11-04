@@ -10,37 +10,40 @@ namespace Nest
 		[JsonProperty("query")]
 		QueryContainer Query { get; set; }
 	}
-	public partial interface ICountRequest<T> : ICountRequest
-		where T : class
-	{
 
-	}
+	public partial interface ICountRequest<T> : ICountRequest
+		where T : class { }
 
 	public partial class CountRequest
 	{
-		protected override HttpMethod HttpMethod =>
-			Self.RequestParameters.ContainsKey("_source") || Self.RequestParameters.ContainsKey("q") || Self.Query == null || Self.Query.IsConditionless()
-				? HttpMethod.GET : HttpMethod.POST;
-
 		public QueryContainer Query { get; set; }
 
+		protected override HttpMethod HttpMethod =>
+			Self.RequestParameters.ContainsKey("_source") || Self.RequestParameters.ContainsKey("q") || Self.Query == null
+			|| Self.Query.IsConditionless()
+				? HttpMethod.GET
+				: HttpMethod.POST;
 	}
 
 	public partial class CountRequest<T>
 	{
-		protected override HttpMethod HttpMethod =>
-			Self.RequestParameters.ContainsKey("_source") || Self.RequestParameters.ContainsKey("q") || Self.Query == null || Self.Query.IsConditionless()
-				? HttpMethod.GET : HttpMethod.POST;
-
 		public QueryContainer Query { get; set; }
+
+		protected override HttpMethod HttpMethod =>
+			Self.RequestParameters.ContainsKey("_source") || Self.RequestParameters.ContainsKey("q") || Self.Query == null
+			|| Self.Query.IsConditionless()
+				? HttpMethod.GET
+				: HttpMethod.POST;
 	}
 
 	[DescriptorFor("Count")]
 	public partial class CountDescriptor<T> where T : class
 	{
 		protected override HttpMethod HttpMethod =>
-			Self.RequestParameters.ContainsKey("_source") || Self.RequestParameters.ContainsKey("q") || Self.Query == null || Self.Query.IsConditionless()
-				? HttpMethod.GET : HttpMethod.POST;
+			Self.RequestParameters.ContainsKey("_source") || Self.RequestParameters.ContainsKey("q") || Self.Query == null
+			|| Self.Query.IsConditionless()
+				? HttpMethod.GET
+				: HttpMethod.POST;
 
 		QueryContainer ICountRequest.Query { get; set; }
 

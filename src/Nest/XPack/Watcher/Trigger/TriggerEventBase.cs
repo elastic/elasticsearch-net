@@ -3,7 +3,7 @@
 namespace Nest
 {
 	[JsonObject]
-	public interface ITriggerEvent {}
+	public interface ITriggerEvent { }
 
 	public abstract class TriggerEventBase : ITriggerEvent
 	{

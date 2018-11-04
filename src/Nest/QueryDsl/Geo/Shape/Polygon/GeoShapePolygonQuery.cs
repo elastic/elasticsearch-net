@@ -12,16 +12,18 @@ namespace Nest
 
 	public class GeoShapePolygonQuery : GeoShapeQueryBase, IGeoShapePolygonQuery
 	{
-		protected override bool Conditionless => IsConditionless(this);
 		public IPolygonGeoShape Shape { get; set; }
+		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.GeoShape = this;
-		internal static bool IsConditionless(IGeoShapePolygonQuery q) => q.Field.IsConditionless() || q.Shape == null || !q.Shape.Coordinates.HasAny();
+
+		internal static bool IsConditionless(IGeoShapePolygonQuery q) =>
+			q.Field.IsConditionless() || q.Shape == null || !q.Shape.Coordinates.HasAny();
 	}
 
 	public class GeoShapePolygonQueryDescriptor<T>
 		: GeoShapeQueryDescriptorBase<GeoShapePolygonQueryDescriptor<T>, IGeoShapePolygonQuery, T>
-		, IGeoShapePolygonQuery where T : class
+			, IGeoShapePolygonQuery where T : class
 	{
 		protected override bool Conditionless => GeoShapePolygonQuery.IsConditionless(this);
 		IPolygonGeoShape IGeoShapePolygonQuery.Shape { get; set; }

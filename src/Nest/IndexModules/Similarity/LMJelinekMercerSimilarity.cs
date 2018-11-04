@@ -18,18 +18,18 @@ namespace Nest
 	/// <inheritdoc />
 	public class LMJelinekMercerSimilarity : ILMJelinekMercerSimilarity
 	{
-		public string Type => "LMJelinekMercer";
-
 		/// <inheritdoc />
 		public double? Lambda { get; set; }
+
+		public string Type => "LMJelinekMercer";
 	}
 
 	/// <inheritdoc />
 	public class LMJelinekMercerSimilarityDescriptor
 		: DescriptorBase<LMJelinekMercerSimilarityDescriptor, ILMJelinekMercerSimilarity>, ILMJelinekMercerSimilarity
 	{
-		string ISimilarity.Type => "LMJelinekMercer";
 		double? ILMJelinekMercerSimilarity.Lambda { get; set; }
+		string ISimilarity.Type => "LMJelinekMercer";
 
 		public LMJelinekMercerSimilarityDescriptor Lamdba(double? lamda) => Assign(a => a.Lambda = lamda);
 	}

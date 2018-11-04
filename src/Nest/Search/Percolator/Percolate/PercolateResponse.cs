@@ -22,22 +22,22 @@ namespace Nest
 	[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
 	public class PercolateCountResponse : ResponseBase, IPercolateCountResponse
 	{
+		public override ServerError ServerError => Error ?? base.ServerError;
+
+		[JsonProperty(PropertyName = "_shards")]
+		public ShardsMetaData Shards { get; internal set; }
+
 		[JsonProperty(PropertyName = "took")]
 		public long Took { get; internal set; }
 
 		[JsonProperty(PropertyName = "total")]
 		public long Total { get; internal set; }
 
-		[JsonProperty(PropertyName = "_shards")]
-		public ShardsMetaData Shards { get; internal set; }
-
 		/// <summary>
 		/// The individual error for separate requests on the _mpercolate API
 		/// </summary>
 		[JsonProperty(PropertyName = "error")]
 		internal ServerError Error { get; set; }
-
-		public override ServerError ServerError => this.Error ?? base.ServerError;
 	}
 
 	[JsonObject]

@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-
-namespace Nest
+﻿namespace Nest
 {
-	public partial interface IAuthenticateRequest
-	{
-	}
+	public partial interface IAuthenticateRequest { }
 
-	public partial class AuthenticateRequest
-	{
-	}
+	public partial class AuthenticateRequest { }
 
 	[DescriptorFor("XpackSecurityAuthenticate")]
-	public partial class AuthenticateDescriptor
-	{
-	}
+	public partial class AuthenticateDescriptor { }
 }

@@ -31,20 +31,20 @@ namespace Nest
 		int? MaxConcurrentGroupSearches { get; set; }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class FieldCollapse : IFieldCollapse
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public Field Field { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IInnerHits InnerHits { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public int? MaxConcurrentGroupSearches { get; set; }
 	}
 
-	/// <inheritdoc cref="IFieldCollapse"/>
+	/// <inheritdoc cref="IFieldCollapse" />
 	public class FieldCollapseDescriptor<T> : DescriptorBase<FieldCollapseDescriptor<T>, IFieldCollapse>, IFieldCollapse
 		where T : class
 	{
@@ -52,17 +52,17 @@ namespace Nest
 		IInnerHits IFieldCollapse.InnerHits { get; set; }
 		int? IFieldCollapse.MaxConcurrentGroupSearches { get; set; }
 
-		/// <inheritdoc cref="IFieldCollapse.MaxConcurrentGroupSearches"/>
+		/// <inheritdoc cref="IFieldCollapse.MaxConcurrentGroupSearches" />
 		public FieldCollapseDescriptor<T> MaxConcurrentGroupSearches(int? maxConcurrentGroupSearches) =>
 			Assign(a => a.MaxConcurrentGroupSearches = maxConcurrentGroupSearches);
 
-		/// <inheritdoc cref="IFieldCollapse.Field"/>
+		/// <inheritdoc cref="IFieldCollapse.Field" />
 		public FieldCollapseDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
-		/// <inheritdoc cref="IFieldCollapse.Field"/>
+		/// <inheritdoc cref="IFieldCollapse.Field" />
 		public FieldCollapseDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
 
-		/// <inheritdoc cref="IFieldCollapse.InnerHits"/>
+		/// <inheritdoc cref="IFieldCollapse.InnerHits" />
 		public FieldCollapseDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> selector = null) =>
 			Assign(a => a.InnerHits = selector.InvokeOrDefault(new InnerHitsDescriptor<T>()));
 	}

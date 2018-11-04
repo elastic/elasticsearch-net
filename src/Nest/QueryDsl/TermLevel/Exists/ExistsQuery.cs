@@ -18,19 +18,20 @@ namespace Nest
 		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Exists = this;
+
 		internal static bool IsConditionless(IExistsQuery q) => q.Field.IsConditionless();
 	}
 
-	public class ExistsQueryDescriptor<T> 
+	public class ExistsQueryDescriptor<T>
 		: QueryDescriptorBase<ExistsQueryDescriptor<T>, IExistsQuery>
-		, IExistsQuery where T : class
+			, IExistsQuery where T : class
 	{
 		protected override bool Conditionless => ExistsQuery.IsConditionless(this);
 
 		Field IExistsQuery.Field { get; set; }
 
 		public ExistsQueryDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
-		public ExistsQueryDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
 
+		public ExistsQueryDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
 	}
 }

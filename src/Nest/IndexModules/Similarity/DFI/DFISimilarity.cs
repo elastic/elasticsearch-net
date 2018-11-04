@@ -14,23 +14,23 @@ namespace Nest
 		DFIIndependenceMeasure? IndependenceMeasure { get; set; }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class DFISimilarity : IDFISimilarity
 	{
-		public string Type => "DFI";
-
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public DFIIndependenceMeasure? IndependenceMeasure { get; set; }
+
+		public string Type => "DFI";
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class DFISimilarityDescriptor
 		: DescriptorBase<DFISimilarityDescriptor, IDFISimilarity>, IDFISimilarity
 	{
-		string ISimilarity.Type => "DFI";
 		DFIIndependenceMeasure? IDFISimilarity.IndependenceMeasure { get; set; }
+		string ISimilarity.Type => "DFI";
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public DFISimilarityDescriptor IndependenceMeasure(DFIIndependenceMeasure independenceMeasure) =>
 			Assign(a => a.IndependenceMeasure = independenceMeasure);
 	}

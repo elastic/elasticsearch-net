@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -14,12 +11,6 @@ namespace Nest
 	[JsonConverter(typeof(ProcessorJsonConverter<ScriptProcessor>))]
 	public interface IScriptProcessor : IProcessor
 	{
-		/// <summary>
-		/// The scripting language. Defaults to painless
-		/// </summary>
-		[JsonProperty("lang")]
-		string Lang { get; set; }
-
 		/// <summary>
 		/// The script file to refer to
 		/// </summary>
@@ -40,6 +31,12 @@ namespace Nest
 		string Inline { get; set; }
 
 		/// <summary>
+		/// The scripting language. Defaults to painless
+		/// </summary>
+		[JsonProperty("lang")]
+		string Lang { get; set; }
+
+		/// <summary>
 		/// Parameters for the script
 		/// </summary>
 		[JsonProperty("params")]
@@ -52,13 +49,6 @@ namespace Nest
 	/// </summary>
 	public class ScriptProcessor : ProcessorBase, IScriptProcessor
 	{
-		protected override string Name => "script";
-
-		/// <summary>
-		/// The scripting language. Defaults to painless
-		/// </summary>
-		public string Lang { get; set; }
-
 		/// <summary>
 		/// The script file to refer to
 		/// </summary>
@@ -76,9 +66,16 @@ namespace Nest
 		public string Inline { get; set; }
 
 		/// <summary>
+		/// The scripting language. Defaults to painless
+		/// </summary>
+		public string Lang { get; set; }
+
+		/// <summary>
 		/// Parameters for the script
 		/// </summary>
 		public Dictionary<string, object> Params { get; set; }
+
+		protected override string Name => "script";
 	}
 
 	/// <summary>
@@ -89,11 +86,13 @@ namespace Nest
 	{
 		protected override string Name => "script";
 
-		string IScriptProcessor.Lang { get; set; }
 		[Obsolete("Removed in NEST 6.x.")]
-		string IScriptProcessor.File{ get; set; }
-		string IScriptProcessor.Id{ get; set; }
+		string IScriptProcessor.File { get; set; }
+
+		string IScriptProcessor.Id { get; set; }
 		string IScriptProcessor.Inline { get; set; }
+
+		string IScriptProcessor.Lang { get; set; }
 		Dictionary<string, object> IScriptProcessor.Params { get; set; }
 
 		/// <summary>

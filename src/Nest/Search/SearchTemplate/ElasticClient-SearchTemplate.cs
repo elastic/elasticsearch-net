@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using System.Threading;
 
 namespace Nest
 {
@@ -16,35 +16,43 @@ namespace Nest
 		ISearchResponse<T> SearchTemplate<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector)
 			where T : class;
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		ISearchResponse<TResult> SearchTemplate<T, TResult>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector)
 			where T : class
 			where TResult : class;
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		ISearchResponse<T> SearchTemplate<T>(ISearchTemplateRequest request)
 			where T : class;
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		ISearchResponse<TResult> SearchTemplate<T, TResult>(ISearchTemplateRequest request)
 			where T : class
 			where TResult : class;
 
-		/// <inheritdoc/>
-		Task<ISearchResponse<T>> SearchTemplateAsync<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector, CancellationToken cancellationToken = default(CancellationToken))
+		/// <inheritdoc />
+		Task<ISearchResponse<T>> SearchTemplateAsync<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector,
+			CancellationToken cancellationToken = default(CancellationToken)
+		)
 			where T : class;
 
-		/// <inheritdoc/>
-		Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector, CancellationToken cancellationToken = default(CancellationToken))
+		/// <inheritdoc />
+		Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector,
+			CancellationToken cancellationToken = default(CancellationToken)
+		)
 			where T : class
 			where TResult : class;
 
-		/// <inheritdoc/>
-		Task<ISearchResponse<T>> SearchTemplateAsync<T>(ISearchTemplateRequest request, CancellationToken cancellationToken = default(CancellationToken))
+		/// <inheritdoc />
+		Task<ISearchResponse<T>> SearchTemplateAsync<T>(ISearchTemplateRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		)
 			where T : class;
 
-		/// <inheritdoc/>
-		Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(ISearchTemplateRequest request, CancellationToken cancellationToken = default(CancellationToken))
+		/// <inheritdoc />
+		Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(ISearchTemplateRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		)
 			where T : class
 			where TResult : class;
 	}
@@ -52,53 +60,61 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		public ISearchResponse<T> SearchTemplate<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector) where T : class =>
-			this.SearchTemplate<T, T>(selector);
+			SearchTemplate<T, T>(selector);
 
 		public ISearchResponse<TResult> SearchTemplate<T, TResult>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector)
 			where T : class
 			where TResult : class =>
-			this.SearchTemplate<T, TResult>(selector?.Invoke(new SearchTemplateDescriptor<T>()));
+			SearchTemplate<T, TResult>(selector?.Invoke(new SearchTemplateDescriptor<T>()));
 
 		public ISearchResponse<T> SearchTemplate<T>(ISearchTemplateRequest request) where T : class =>
-			this.SearchTemplate<T, T>(request);
+			SearchTemplate<T, T>(request);
 
 		public ISearchResponse<TResult> SearchTemplate<T, TResult>(ISearchTemplateRequest request)
 			where T : class
 			where TResult : class =>
-			this.Dispatcher.Dispatch<ISearchTemplateRequest, SearchTemplateRequestParameters, SearchResponse<TResult>>(
+			Dispatcher.Dispatch<ISearchTemplateRequest, SearchTemplateRequestParameters, SearchResponse<TResult>>(
 				request,
-				this.CreateSearchDeserializer<T, TResult>(request),
-				this.LowLevelDispatch.SearchTemplateDispatch<SearchResponse<TResult>>
+				CreateSearchDeserializer<T, TResult>(request),
+				LowLevelDispatch.SearchTemplateDispatch<SearchResponse<TResult>>
 			);
 
-		public Task<ISearchResponse<T>> SearchTemplateAsync<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector, CancellationToken cancellationToken = default(CancellationToken)) where T : class =>
-			this.SearchTemplateAsync<T, T>(selector, cancellationToken);
+		public Task<ISearchResponse<T>> SearchTemplateAsync<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) where T : class =>
+			SearchTemplateAsync<T, T>(selector, cancellationToken);
 
-		public Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector,
+			CancellationToken cancellationToken = default(CancellationToken)
+		)
 			where T : class
 			where TResult : class =>
-			this.SearchTemplateAsync<T, TResult>(selector?.Invoke(new SearchTemplateDescriptor<T>()), cancellationToken);
+			SearchTemplateAsync<T, TResult>(selector?.Invoke(new SearchTemplateDescriptor<T>()), cancellationToken);
 
-		public Task<ISearchResponse<T>> SearchTemplateAsync<T>(ISearchTemplateRequest request, CancellationToken cancellationToken = default(CancellationToken)) where T : class =>
-			this.SearchTemplateAsync<T, T>(request, cancellationToken);
+		public Task<ISearchResponse<T>> SearchTemplateAsync<T>(ISearchTemplateRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) where T : class =>
+			SearchTemplateAsync<T, T>(request, cancellationToken);
 
-		public Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(ISearchTemplateRequest request, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(ISearchTemplateRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		)
 			where T : class
 			where TResult : class =>
-			this.Dispatcher.DispatchAsync<ISearchTemplateRequest, SearchTemplateRequestParameters, SearchResponse<TResult>, ISearchResponse<TResult>>(
+			Dispatcher.DispatchAsync<ISearchTemplateRequest, SearchTemplateRequestParameters, SearchResponse<TResult>, ISearchResponse<TResult>>(
 				request,
 				cancellationToken,
-				this.CreateSearchDeserializer<T, TResult>(request),
-				this.LowLevelDispatch.SearchTemplateDispatchAsync<SearchResponse<TResult>>
+				CreateSearchDeserializer<T, TResult>(request),
+				LowLevelDispatch.SearchTemplateDispatchAsync<SearchResponse<TResult>>
 			);
 
 		private SearchResponse<TResult> FieldsSearchDeserializer<T, TResult>(IApiCallDetails response, Stream stream, ISearchTemplateRequest d)
 			where T : class
 			where TResult : class
 		{
-			var converter = this.CreateCovariantSearchSelector<T, TResult>(d);
+			var converter = CreateCovariantSearchSelector<T, TResult>(d);
 			var dict = response.Success
-				? this.ConnectionSettings.StatefulSerializer(converter).Deserialize<SearchResponse<TResult>>(stream)
+				? ConnectionSettings.StatefulSerializer(converter).Deserialize<SearchResponse<TResult>>(stream)
 				: null;
 			return dict;
 		}
@@ -107,9 +123,8 @@ namespace Nest
 			where T : class
 			where TResult : class
 		{
-
 			Func<IApiCallDetails, Stream, SearchResponse<TResult>> responseCreator =
-					(r, s) => this.FieldsSearchDeserializer<T, TResult>(r, s, request);
+				(r, s) => FieldsSearchDeserializer<T, TResult>(r, s, request);
 			return responseCreator;
 		}
 
@@ -117,9 +132,8 @@ namespace Nest
 			where T : class
 			where TResult : class
 		{
-			CovariantSearch.CloseOverAutomagicCovariantResultSelector(this.Infer, originalSearchDescriptor);
+			CovariantSearch.CloseOverAutomagicCovariantResultSelector(Infer, originalSearchDescriptor);
 			return originalSearchDescriptor.TypeSelector == null ? null : new ConcreteTypeConverter<TResult>(originalSearchDescriptor.TypeSelector);
 		}
-
 	}
 }

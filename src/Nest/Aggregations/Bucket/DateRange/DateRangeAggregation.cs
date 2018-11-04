@@ -25,14 +25,14 @@ namespace Nest
 
 	public class DateRangeAggregation : BucketAggregationBase, IDateRangeAggregation
 	{
+		internal DateRangeAggregation() { }
+
+		public DateRangeAggregation(string name) : base(name) { }
+
 		public Field Field { get; set; }
 		public string Format { get; set; }
 		public IEnumerable<IDateRangeExpression> Ranges { get; set; }
 		public string TimeZone { get; set; }
-
-		internal DateRangeAggregation() { }
-
-		public DateRangeAggregation(string name) : base(name) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.DateRange = this;
 	}
@@ -57,14 +57,14 @@ namespace Nest
 		public DateRangeAggregationDescriptor<T> Format(string format) => Assign(a => a.Format = format);
 
 		public DateRangeAggregationDescriptor<T> Ranges(params IDateRangeExpression[] ranges) =>
-			Assign(a=>a.Ranges = ranges.ToListOrNullIfEmpty());
+			Assign(a => a.Ranges = ranges.ToListOrNullIfEmpty());
 
 		public DateRangeAggregationDescriptor<T> TimeZone(string timeZone) => Assign(a => a.TimeZone = timeZone);
 
 		public DateRangeAggregationDescriptor<T> Ranges(params Func<DateRangeExpressionDescriptor, IDateRangeExpression>[] ranges) =>
-			Assign(a=>a.Ranges = ranges?.Select(r=>r(new DateRangeExpressionDescriptor())).ToListOrNullIfEmpty());
+			Assign(a => a.Ranges = ranges?.Select(r => r(new DateRangeExpressionDescriptor())).ToListOrNullIfEmpty());
 
 		public DateRangeAggregationDescriptor<T> Ranges(IEnumerable<Func<DateRangeExpressionDescriptor, IDateRangeExpression>> ranges) =>
-			Assign(a=>a.Ranges = ranges?.Select(r=>r(new DateRangeExpressionDescriptor())).ToListOrNullIfEmpty());
+			Assign(a => a.Ranges = ranges?.Select(r => r(new DateRangeExpressionDescriptor())).ToListOrNullIfEmpty());
 	}
 }

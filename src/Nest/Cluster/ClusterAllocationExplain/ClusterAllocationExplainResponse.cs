@@ -9,27 +9,43 @@ namespace Nest
 	[JsonConverter(typeof(ClusterAllocationExplainResponseJsonConverter))]
 	public interface IClusterAllocationExplainResponse : IResponse
 	{
-		[JsonProperty("index")]
-		string Index { get; }
+		[JsonProperty("allocate_explanation")]
+		string AllocateExplanation { get; }
 
-		[JsonIgnore]
-		// TODO rename to Shard in 6.0
-		int ShardId { get; }
+		[JsonProperty("allocation_delay")]
+		string AllocationDelay { get; }
 
-		[JsonProperty("primary")]
-		bool Primary { get; }
+		[JsonProperty("allocation_delay_in_millis")]
+		long AllocationDelayInMilliseconds { get; }
 
-		[JsonProperty("current_state")]
-		string CurrentState { get; }
+		[JsonProperty("assigned")]
+		[Obsolete("Removed in Elasticsearch 5.2.")]
+		bool Assigned { get; }
 
-		[JsonProperty("unassigned_info")]
-		UnassignedInformation UnassignedInformation { get; }
+		[JsonProperty("assigned_node_id")]
+		[Obsolete("Removed in Elasticsearch 5.2.")]
+		string AssignedNodeId { get; }
 
 		[JsonProperty("can_allocate")]
 		Decision? CanAllocate { get; }
 
-		[JsonProperty("allocate_explanation")]
-		string AllocateExplanation { get; }
+		[JsonProperty("can_move_to_other_node")]
+		Decision? CanMoveToOtherNode { get; }
+
+		[JsonProperty("can_rebalance_cluster")]
+		Decision? CanRebalanceCluster { get; }
+
+		[JsonProperty("can_rebalance_cluster_decisions")]
+		IReadOnlyCollection<AllocationDecision> CanRebalanceClusterDecisions { get; }
+
+		[JsonProperty("can_rebalance_to_other_nodes")]
+		Decision? CanRebalanceToOtherNode { get; }
+
+		[JsonProperty("can_remain_decisions")]
+		IReadOnlyCollection<AllocationDecision> CanRemainDecisions { get; }
+
+		[JsonProperty("can_remain_on_current_node")]
+		Decision? CanRemainOnCurrentNode { get; }
 
 		[JsonProperty("configured_delay")]
 		string ConfiguredDelay { get; }
@@ -40,38 +56,28 @@ namespace Nest
 		[JsonProperty("current_node")]
 		CurrentNode CurrentNode { get; }
 
-		[JsonProperty("can_remain_on_current_node")]
-		Decision? CanRemainOnCurrentNode { get; }
+		[JsonProperty("current_state")]
+		string CurrentState { get; }
 
-		[JsonProperty("can_remain_decisions")]
-		IReadOnlyCollection<AllocationDecision> CanRemainDecisions { get; }
-
-		[JsonProperty("can_rebalance_cluster")]
-		Decision? CanRebalanceCluster { get; }
-
-		[JsonProperty("can_rebalance_to_other_nodes")]
-		Decision? CanRebalanceToOtherNode { get; }
-
-		[JsonProperty("can_rebalance_cluster_decisions")]
-		IReadOnlyCollection<AllocationDecision> CanRebalanceClusterDecisions { get; }
-
-		[JsonProperty("rebalance_explanation")]
-		string RebalanceExplanation { get; }
-
-		[JsonProperty("node_allocation_decisions")]
-		IReadOnlyCollection<NodeAllocationExplanation> NodeAllocationDecisions { get; }
-
-		[JsonProperty("can_move_to_other_node")]
-		Decision? CanMoveToOtherNode { get; }
+		[JsonProperty("index")]
+		string Index { get; }
 
 		[JsonProperty("move_explanation")]
 		string MoveExplanation { get; }
 
-		[JsonProperty("allocation_delay")]
-		string AllocationDelay { get; }
+		[JsonProperty("node_allocation_decisions")]
+		IReadOnlyCollection<NodeAllocationExplanation> NodeAllocationDecisions { get; }
 
-		[JsonProperty("allocation_delay_in_millis")]
-		long AllocationDelayInMilliseconds { get; }
+		[JsonProperty("nodes")]
+		[Obsolete("Removed in Elasticsearch 5.2.  Use node_allocation_decisions instead.")]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, NodeAllocationExplanation>))]
+		IReadOnlyDictionary<string, NodeAllocationExplanation> Nodes { get; }
+
+		[JsonProperty("primary")]
+		bool Primary { get; }
+
+		[JsonProperty("rebalance_explanation")]
+		string RebalanceExplanation { get; }
 
 		[JsonProperty("remaining_delay")]
 		string RemainingDelay { get; }
@@ -83,39 +89,46 @@ namespace Nest
 		[Obsolete("Removed in Elasticsearch 5.2. Use properties on root object instead.")]
 		ShardAllocationExplanation Shard { get; }
 
-		[JsonProperty("assigned")]
-		[Obsolete("Removed in Elasticsearch 5.2.")]
-		bool Assigned { get; }
-
-		[JsonProperty("assigned_node_id")]
-		[Obsolete("Removed in Elasticsearch 5.2.")]
-		string AssignedNodeId { get; }
+		[JsonIgnore]
+		// TODO rename to Shard in 6.0
+		int ShardId { get; }
 
 		[JsonProperty("shard_state_fetch_pending")]
 		[Obsolete("Removed in Elasticsearch 5.2.")]
 		bool ShardStateFetchPending { get; }
 
-		[JsonProperty("nodes")]
-		[Obsolete("Removed in Elasticsearch 5.2.  Use node_allocation_decisions instead.")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, NodeAllocationExplanation>))]
-		IReadOnlyDictionary<string, NodeAllocationExplanation> Nodes { get; }
+		[JsonProperty("unassigned_info")]
+		UnassignedInformation UnassignedInformation { get; }
 	}
 
 	public class ClusterAllocationExplainResponse : ResponseBase, IClusterAllocationExplainResponse
 	{
-		public string Index { get; internal set; }
+		public string AllocateExplanation { get; internal set; }
 
-		public int ShardId { get; internal set; }
+		public string AllocationDelay { get; internal set; }
 
-		public bool Primary { get; internal set; }
+		public long AllocationDelayInMilliseconds { get; internal set; }
 
-		public string CurrentState { get; internal set; }
+		[Obsolete("Removed in Elasticsearch 5.2.")]
+		public bool Assigned { get; internal set; }
 
-		public UnassignedInformation UnassignedInformation { get; internal set; }
+		[Obsolete("Removed in Elasticsearch 5.2.")]
+		public string AssignedNodeId { get; internal set; }
 
 		public Decision? CanAllocate { get; internal set; }
 
-		public string AllocateExplanation { get; internal set; }
+		public Decision? CanMoveToOtherNode { get; internal set; }
+
+		public Decision? CanRebalanceCluster { get; internal set; }
+
+		public IReadOnlyCollection<AllocationDecision> CanRebalanceClusterDecisions { get; internal set; } =
+			EmptyReadOnly<AllocationDecision>.Collection;
+
+		public Decision? CanRebalanceToOtherNode { get; internal set; }
+
+		public IReadOnlyCollection<AllocationDecision> CanRemainDecisions { get; internal set; }
+
+		public Decision? CanRemainOnCurrentNode { get; internal set; }
 
 		public string ConfiguredDelay { get; internal set; }
 
@@ -123,27 +136,20 @@ namespace Nest
 
 		public CurrentNode CurrentNode { get; internal set; }
 
-		public Decision? CanRemainOnCurrentNode { get; internal set; }
-
-		public IReadOnlyCollection<AllocationDecision> CanRemainDecisions { get; internal set; }
-
-		public Decision? CanRebalanceCluster { get; internal set; }
-
-		public Decision? CanRebalanceToOtherNode { get; internal set; }
-
-		public IReadOnlyCollection<AllocationDecision> CanRebalanceClusterDecisions { get; internal set; } = EmptyReadOnly<AllocationDecision>.Collection;
-
-		public string RebalanceExplanation { get; internal set; }
-
-		public IReadOnlyCollection<NodeAllocationExplanation> NodeAllocationDecisions { get; internal set; }
-
-		public Decision? CanMoveToOtherNode { get; internal set; }
+		public string CurrentState { get; internal set; }
+		public string Index { get; internal set; }
 
 		public string MoveExplanation { get; internal set; }
 
-		public string AllocationDelay { get; internal set; }
+		public IReadOnlyCollection<NodeAllocationExplanation> NodeAllocationDecisions { get; internal set; }
 
-		public long AllocationDelayInMilliseconds { get; internal set; }
+		[Obsolete("Removed in Elasticsearch 5.2. Usage NodeAllocationDecisions instead.")]
+		public IReadOnlyDictionary<string, NodeAllocationExplanation> Nodes { get; internal set; } =
+			EmptyReadOnly<string, NodeAllocationExplanation>.Dictionary;
+
+		public bool Primary { get; internal set; }
+
+		public string RebalanceExplanation { get; internal set; }
 
 		public string RemainingDelay { get; internal set; }
 
@@ -152,17 +158,12 @@ namespace Nest
 		[Obsolete("Removed in Elasticsearch 5.2. Use properties on root object instead.")]
 		public ShardAllocationExplanation Shard { get; internal set; }
 
-		[Obsolete("Removed in Elasticsearch 5.2.")]
-		public bool Assigned { get; internal set; }
-
-		[Obsolete("Removed in Elasticsearch 5.2.")]
-		public string AssignedNodeId { get; internal set; }
+		public int ShardId { get; internal set; }
 
 		[Obsolete("Removed in Elasticsearch 5.2.")]
 		public bool ShardStateFetchPending { get; internal set; }
 
-		[Obsolete("Removed in Elasticsearch 5.2. Usage NodeAllocationDecisions instead.")]
-		public IReadOnlyDictionary<string, NodeAllocationExplanation> Nodes { get; internal set; } = EmptyReadOnly<string, NodeAllocationExplanation>.Dictionary;
+		public UnassignedInformation UnassignedInformation { get; internal set; }
 	}
 
 	[JsonObject]
@@ -174,14 +175,14 @@ namespace Nest
 		[JsonProperty("name")]
 		public string Name { get; internal set; }
 
+		[JsonProperty("attributes")]
+		public IReadOnlyDictionary<string, string> NodeAttributes { get; set; } = EmptyReadOnly<string, string>.Dictionary;
+
 		[JsonProperty("transport_address")]
 		public string TransportAddress { get; internal set; }
 
 		[JsonProperty("weight_ranking")]
 		public string WeightRanking { get; internal set; }
-
-		[JsonProperty("attributes")]
-		public IReadOnlyDictionary<string, string> NodeAttributes { get; set; } = EmptyReadOnly<string, string>.Dictionary;
 	}
 
 	[JsonConverter(typeof(StringEnumConverter))]
@@ -203,23 +204,12 @@ namespace Nest
 	[JsonObject]
 	public class NodeAllocationExplanation
 	{
-		[JsonProperty("node_id")]
-		public string NodeId { get; set; }
+		[JsonProperty("deciders")]
+		public IReadOnlyCollection<AllocationDecision> Deciders { get; set; } = EmptyReadOnly<AllocationDecision>.Collection;
 
-		[JsonProperty("node_name")]
-		public string NodeName { get; set; }
-
-		[JsonProperty("transport_address")]
-		public string TransportAddress { get; set; }
-
-		[JsonProperty("node_decision")]
-		public Decision? NodeDecision { get; set; }
-
-		[JsonProperty("node_attributes")]
-		public IReadOnlyDictionary<string, string> NodeAttributes { get; set; } = EmptyReadOnly<string, string>.Dictionary;
-
-		[JsonProperty("store")]
-		public AllocationStore Store { get; set; }
+		[JsonProperty("decisions")]
+		[Obsolete("Removed in Elasticsearch 5.2.  Use Deciders instead.")]
+		public IReadOnlyCollection<AllocationDecision> Decisions { get; set; } = EmptyReadOnly<AllocationDecision>.Collection;
 
 		[JsonProperty("final_decision")]
 		[Obsolete("Removed in Elasticsearch 5.2.")]
@@ -229,19 +219,30 @@ namespace Nest
 		[Obsolete("Removed in Elasticsearch 5.2.")]
 		public string FinalExplanation { get; set; }
 
+		[JsonProperty("node_attributes")]
+		public IReadOnlyDictionary<string, string> NodeAttributes { get; set; } = EmptyReadOnly<string, string>.Dictionary;
+
+		[JsonProperty("node_decision")]
+		public Decision? NodeDecision { get; set; }
+
+		[JsonProperty("node_id")]
+		public string NodeId { get; set; }
+
+		[JsonProperty("node_name")]
+		public string NodeName { get; set; }
+
+		[JsonProperty("store")]
+		public AllocationStore Store { get; set; }
+
+		[JsonProperty("transport_address")]
+		public string TransportAddress { get; set; }
+
 		[JsonProperty("weight")]
 		[Obsolete("Removed in Elasticsearch 5.2.  Use WeightRanking instead.")]
 		public float Weight { get; set; }
 
 		[JsonProperty("weight_ranking")]
 		public int? WeightRanking { get; set; }
-
-		[JsonProperty("decisions")]
-		[Obsolete("Removed in Elasticsearch 5.2.  Use Deciders instead.")]
-		public IReadOnlyCollection<AllocationDecision> Decisions { get; set; } = EmptyReadOnly<AllocationDecision>.Collection;
-
-		[JsonProperty("deciders")]
-		public IReadOnlyCollection<AllocationDecision> Deciders { get; set; } = EmptyReadOnly<AllocationDecision>.Collection;
 	}
 
 	[JsonConverter(typeof(StringEnumConverter))]
@@ -311,9 +312,8 @@ namespace Nest
 	[JsonObject]
 	public class AllocationStore
 	{
-		[JsonProperty("shard_copy")]
-		[Obsolete("Removed in Elasticsearch 5.2")]
-		public StoreCopy ShardCopy { get; set; }
+		[JsonProperty("allocation_id")]
+		public string AllocationId { get; set; }
 
 		[JsonProperty("found")]
 		public bool? Found { get; set; }
@@ -321,14 +321,15 @@ namespace Nest
 		[JsonProperty("in_sync")]
 		public bool? InSync { get; set; }
 
-		[JsonProperty("allocation_id")]
-		public string AllocationId { get; set; }
+		[JsonProperty("matching_size_in_bytes")]
+		public long? MatchingSizeInBytes { get; set; }
 
 		[JsonProperty("matching_sync_id")]
 		public bool? MatchingSyncId { get; set; }
 
-		[JsonProperty("matching_size_in_bytes")]
-		public long? MatchingSizeInBytes { get; set; }
+		[JsonProperty("shard_copy")]
+		[Obsolete("Removed in Elasticsearch 5.2")]
+		public StoreCopy ShardCopy { get; set; }
 
 		[JsonProperty("store_exception")]
 		public string StoreException { get; set; }
@@ -349,26 +350,26 @@ namespace Nest
 
 	public class UnassignedInformation
 	{
-		[JsonProperty("reason")]
-		public UnassignedInformationReason Reason { get; set; }
-
 		[JsonProperty("at")]
 		public DateTime At { get; set; }
 
 		[JsonProperty("last_allocation_status")]
 		public string LastAllocationStatus { get; set; }
+
+		[JsonProperty("reason")]
+		public UnassignedInformationReason Reason { get; set; }
 	}
 
 	public class ShardAllocationExplanation
 	{
+		[JsonProperty("id")]
+		public int Id { get; set; }
+
 		[JsonProperty("index")]
 		public IndexName Index { get; set; }
 
 		[JsonProperty("index_uuid")]
 		public string IndexUniqueId { get; set; }
-
-		[JsonProperty("id")]
-		public int Id { get; set; }
 
 		[JsonProperty("primary")]
 		public bool Primary { get; set; }
@@ -377,89 +378,88 @@ namespace Nest
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum UnassignedInformationReason
 	{
-		///<summary>
-		/// Unassigned as a result of an API creation of an index.
-		///</summary>
+		/// <summary>
+		///  Unassigned as a result of an API creation of an index.
+		/// </summary>
 		[EnumMember(Value = "INDEX_CREATED")]
 		IndexCreated,
 
-		///<summary>
-		/// Unassigned as a result of a full cluster recovery.
-		///</summary>
+		/// <summary>
+		///  Unassigned as a result of a full cluster recovery.
+		/// </summary>
 		[EnumMember(Value = "CLUSTER_RECOVERED")]
 		ClusterRecovered,
 
-		///<summary>
-		/// Unassigned as a result of opening a closed index.
-		///</summary>
+		/// <summary>
+		///  Unassigned as a result of opening a closed index.
+		/// </summary>
 		[EnumMember(Value = "INDEX_REOPENED")]
 		IndexReopened,
 
-		///<summary>
-		/// Unassigned as a result of importing a dangling index.
-		///</summary>
+		/// <summary>
+		///  Unassigned as a result of importing a dangling index.
+		/// </summary>
 		[EnumMember(Value = "DANGLING_INDEX_IMPORTED")]
 		DanglingIndexImported,
 
-		///<summary>
-		/// Unassigned as a result of restoring into a new index.
-		///</summary>
+		/// <summary>
+		///  Unassigned as a result of restoring into a new index.
+		/// </summary>
 		[EnumMember(Value = "NEW_INDEX_RESTORED")]
 		NewIndexRestored,
 
-		///<summary>
-		/// Unassigned as a result of restoring into a closed index.
-		///</summary>
+		/// <summary>
+		///  Unassigned as a result of restoring into a closed index.
+		/// </summary>
 		[EnumMember(Value = "EXISTING_INDEX_RESTORED")]
 		ExistingIndexRestored,
 
-		///<summary>
-		/// Unassigned as a result of explicit addition of a replica.
-		///</summary>
+		/// <summary>
+		///  Unassigned as a result of explicit addition of a replica.
+		/// </summary>
 		[EnumMember(Value = "REPLICA_ADDED")]
 		ReplicaAdded,
 
-		///<summary>
-		/// Unassigned as a result of a failed allocation of the shard.
-		///</summary>
+		/// <summary>
+		///  Unassigned as a result of a failed allocation of the shard.
+		/// </summary>
 		[EnumMember(Value = "ALLOCATION_FAILED")]
 		AllocationFailed,
 
-		///<summary>
-		/// Unassigned as a result of the node hosting it leaving the cluster.
-		///</summary>
+		/// <summary>
+		///  Unassigned as a result of the node hosting it leaving the cluster.
+		/// </summary>
 		[EnumMember(Value = "NODE_LEFT")]
 		NodeLeft,
 
-		///<summary>
-		/// Unassigned as a result of explicit cancel reroute command.
-		///</summary>
+		/// <summary>
+		///  Unassigned as a result of explicit cancel reroute command.
+		/// </summary>
 		[EnumMember(Value = "REROUTE_CANCELLED")]
 		RerouteCancelled,
 
-		///<summary>
-		/// When a shard moves from started back to initializing, for example, during shadow replica
-		///</summary>
+		/// <summary>
+		///  When a shard moves from started back to initializing, for example, during shadow replica
+		/// </summary>
 		[EnumMember(Value = "REINITIALIZED")]
 		Reinitialized,
 
-		///<summary>
-		/// A better replica location is identified and causes the existing replica allocation to be cancelled.
-		///</summary>
+		/// <summary>
+		///  A better replica location is identified and causes the existing replica allocation to be cancelled.
+		/// </summary>
 		[EnumMember(Value = "REALLOCATED_REPLICA")]
 		ReallocatedReplica,
 
-		///<summary>
-		/// Unassigned as a result of a failed primary while the replica was initializing.
-		///</summary>
+		/// <summary>
+		///  Unassigned as a result of a failed primary while the replica was initializing.
+		/// </summary>
 		[EnumMember(Value = "PRIMARY_FAILED")]
 		PrimaryFailed,
 
-		///<summary>
-		/// Unassigned after forcing an empty primary
-		///</summary>
+		/// <summary>
+		///  Unassigned after forcing an empty primary
+		/// </summary>
 		[EnumMember(Value = "FORCED_EMPTY_PRIMARY")]
 		ForcedEmptyPrimary
-
 	}
 }

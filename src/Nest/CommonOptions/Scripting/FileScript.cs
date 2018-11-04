@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -14,10 +13,7 @@ namespace Nest
 	/// <remarks>Removed in 6.x</remarks>
 	public class FileScript : ScriptBase, IFileScript
 	{
-		public FileScript(string file)
-		{
-			this.File = file;
-		}
+		public FileScript(string file) => File = file;
 
 		public string File { get; set; }
 	}
@@ -26,12 +22,9 @@ namespace Nest
 	public class FileScriptDescriptor
 		: ScriptDescriptorBase<FileScriptDescriptor, IFileScript>, IFileScript
 	{
-		public FileScriptDescriptor() {}
+		public FileScriptDescriptor() { }
 
-		public FileScriptDescriptor(string file)
-		{
-			Self.File = file;
-		}
+		public FileScriptDescriptor(string file) => Self.File = file;
 
 		string IFileScript.File { get; set; }
 

@@ -10,8 +10,8 @@ namespace Nest
 		TypeName Type { get; set; }
 	}
 
-    public class ParentField : IParentField
-    {
+	public class ParentField : IParentField
+	{
 		public TypeName Type { get; set; }
-    }
+	}
 }

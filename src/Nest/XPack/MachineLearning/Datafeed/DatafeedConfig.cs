@@ -9,12 +9,6 @@ namespace Nest
 	public class DatafeedConfig
 	{
 		/// <summary>
-		/// The datafeed id
-		/// </summary>
-		[JsonProperty("datafeed_id")]
-		public string DatafeedId { get; internal set; }
-
-		/// <summary>
 		/// the aggregation searches to perform for the datafeed
 		/// </summary>
 		[JsonProperty("aggregations")]
@@ -25,6 +19,12 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("chunking_config")]
 		public IChunkingConfig ChunkingConfig { get; internal set; }
+
+		/// <summary>
+		/// The datafeed id
+		/// </summary>
+		[JsonProperty("datafeed_id")]
+		public string DatafeedId { get; internal set; }
 
 		/// <summary>
 		/// The interval at which scheduled queries are made while the datafeed runs in real time.

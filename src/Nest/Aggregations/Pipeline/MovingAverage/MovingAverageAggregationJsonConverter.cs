@@ -28,13 +28,9 @@ namespace Nest
 #if DOTNETCORE
 			JToken value;
 			if (ps.TryGetValue("buckets_path", out value) && value != null)
-			{
 				aggregation.BucketsPath = new SingleBucketsPath((string)value);
-			}
 			else
-			{
 				aggregation.BucketsPath = default(SingleBucketsPath);
-			}
 
 #else
 			aggregation.BucketsPath = GetOrDefault<SingleBucketsPath>("buckets_path", ps);
@@ -46,6 +42,7 @@ namespace Nest
 		{
 			var movingAvg = value as IMovingAverageAggregation;
 			if (movingAvg == null) return;
+
 			writer.WriteStartObject();
 			writer.WritePropertyName("buckets_path");
 			serializer.Serialize(writer, movingAvg.BucketsPath);
@@ -100,6 +97,7 @@ namespace Nest
 			if (value.IsNullOrEmpty()) return null;
 			if (value == "insert_zeros") return GapPolicy.InsertZeros;
 			if (value == "skip") return GapPolicy.Skip;
+
 			return null;
 		}
 
@@ -121,6 +119,7 @@ namespace Nest
 				return settings.ToObject<HoltLinearModel>();
 			else if (name == "holt_winters")
 				return settings.ToObject<HoltWintersModel>();
+
 			return null;
 		}
 	}

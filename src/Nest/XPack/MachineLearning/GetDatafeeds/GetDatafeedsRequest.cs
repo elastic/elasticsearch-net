@@ -1,17 +1,14 @@
-using System;
-using Newtonsoft.Json;
-
 namespace Nest
 {
 	/// <summary>
 	/// A request to retrieve configuration information for Machine Learning datafeeds.
 	/// </summary>
-	public partial interface IGetDatafeedsRequest {}
+	public partial interface IGetDatafeedsRequest { }
 
 	/// <inheritdoc />
-	public partial class GetDatafeedsRequest {}
+	public partial class GetDatafeedsRequest { }
 
 	/// <inheritdoc />
 	[DescriptorFor("XpackMlGetDatafeeds")]
-	public partial class GetDatafeedsDescriptor {}
+	public partial class GetDatafeedsDescriptor { }
 }

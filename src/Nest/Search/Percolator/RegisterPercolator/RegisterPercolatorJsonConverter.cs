@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Reflection;
 
 namespace Nest
 {
@@ -25,7 +25,7 @@ namespace Nest
 			if (metaProperties.Count() > 0)
 			{
 				request.Metadata = new Dictionary<string, object>();
-				foreach(var property in metaProperties)
+				foreach (var property in metaProperties)
 					request.Metadata.Add(property.Name, property.Value.ToObject<object>());
 			}
 
@@ -48,7 +48,7 @@ namespace Nest
 
 			if (request.Metadata != null)
 			{
-				foreach(var kv in request.Metadata)
+				foreach (var kv in request.Metadata)
 				{
 					writer.WritePropertyName(kv.Key);
 #if DOTNETCORE

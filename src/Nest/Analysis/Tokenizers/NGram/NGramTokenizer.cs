@@ -9,61 +9,61 @@ namespace Nest
 	public interface INGramTokenizer : ITokenizer
 	{
 		/// <summary>
-		/// Minimum size in codepoints of a single n-gram, defaults to 1.
-		/// </summary>
-		[JsonProperty("min_gram")]
-		int? MinGram { get; set; }
-
-		/// <summary>
 		/// Maximum size in codepoints of a single n-gram, defaults to 2.
 		/// </summary>
 		[JsonProperty("max_gram")]
 		int? MaxGram { get; set; }
 
 		/// <summary>
+		/// Minimum size in codepoints of a single n-gram, defaults to 1.
+		/// </summary>
+		[JsonProperty("min_gram")]
+		int? MinGram { get; set; }
+
+		/// <summary>
 		/// Characters classes to keep in the tokens, Elasticsearch will
-		/// split on characters that don’t belong to any of these classes. 
+		/// split on characters that don’t belong to any of these classes.
 		/// </summary>
 		[JsonProperty("token_chars")]
 		IEnumerable<TokenChar> TokenChars { get; set; }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class NGramTokenizer : TokenizerBase, INGramTokenizer
 	{
-		public NGramTokenizer() { Type = "ngram"; }
+		public NGramTokenizer() => Type = "ngram";
 
-		/// <inheritdoc/>
-		public int? MinGram { get; set; }
-
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public int? MaxGram { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
+		public int? MinGram { get; set; }
+
+		/// <inheritdoc />
 		public IEnumerable<TokenChar> TokenChars { get; set; }
 	}
-	/// <inheritdoc/>
-	public class NGramTokenizerDescriptor 
+
+	/// <inheritdoc />
+	public class NGramTokenizerDescriptor
 		: TokenizerDescriptorBase<NGramTokenizerDescriptor, INGramTokenizer>, INGramTokenizer
 	{
 		protected override string Type => "ngram";
+		int? INGramTokenizer.MaxGram { get; set; }
 
 		int? INGramTokenizer.MinGram { get; set; }
-		int? INGramTokenizer.MaxGram { get; set; }
 		IEnumerable<TokenChar> INGramTokenizer.TokenChars { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public NGramTokenizerDescriptor MinGram(int? minGram) => Assign(a => a.MinGram = minGram);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public NGramTokenizerDescriptor MaxGram(int? minGram) => Assign(a => a.MaxGram = minGram);
 
-		/// <inheritdoc/>
-		public NGramTokenizerDescriptor TokenChars(IEnumerable<TokenChar> tokenChars) => 
+		/// <inheritdoc />
+		public NGramTokenizerDescriptor TokenChars(IEnumerable<TokenChar> tokenChars) =>
 			Assign(a => a.TokenChars = tokenChars);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public NGramTokenizerDescriptor TokenChars(params TokenChar[] tokenChars) => Assign(a => a.TokenChars = tokenChars);
-
 	}
 }

@@ -16,7 +16,7 @@ namespace Nest
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum IcuCollationDecomposition
 	{
-		[EnumMember(Value="no")] No,
-		[EnumMember(Value="identical")] Canonical
+		[EnumMember(Value = "no")] No,
+		[EnumMember(Value = "identical")] Canonical
 	}
 }

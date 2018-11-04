@@ -30,6 +30,5 @@ namespace Nest
 		/// </summary>
 		[EnumMember(Value = "none")]
 		None,
-
 	}
 }

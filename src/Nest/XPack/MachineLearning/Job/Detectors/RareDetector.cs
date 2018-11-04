@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -27,29 +25,26 @@ namespace Nest
 		}
 	}
 
-	public interface IRareDetector : IDetector, IByFieldNameDetector, IOverFieldNameDetector,
-		IPartitionFieldNameDetector
-	{
-	}
+	public interface IRareDetector
+		: IDetector, IByFieldNameDetector, IOverFieldNameDetector,
+			IPartitionFieldNameDetector { }
 
 	public abstract class RareDetectorBase : DetectorBase, IRareDetector
 	{
+		protected RareDetectorBase(RareFunction function) : base(function.GetStringValue()) { }
+
 		public Field ByFieldName { get; set; }
 		public Field OverFieldName { get; set; }
 		public Field PartitionFieldName { get; set; }
-
-		protected RareDetectorBase(RareFunction function) : base(function.GetStringValue())
-		{
-		}
 	}
 
 	public class RareDetectorDescriptor<T> : DetectorDescriptorBase<RareDetectorDescriptor<T>, IRareDetector>, IRareDetector where T : class
 	{
+		public RareDetectorDescriptor(RareFunction function) : base(function.GetStringValue()) { }
+
 		Field IByFieldNameDetector.ByFieldName { get; set; }
 		Field IOverFieldNameDetector.OverFieldName { get; set; }
 		Field IPartitionFieldNameDetector.PartitionFieldName { get; set; }
-
-		public RareDetectorDescriptor(RareFunction function) : base(function.GetStringValue()) {}
 
 		public RareDetectorDescriptor<T> ByFieldName(Field byFieldName) => Assign(a => a.ByFieldName = byFieldName);
 
@@ -66,11 +61,11 @@ namespace Nest
 
 	public class RareDetector : RareDetectorBase
 	{
-		public RareDetector() : base(RareFunction.Rare) {}
+		public RareDetector() : base(RareFunction.Rare) { }
 	}
 
 	public class FreqRareDetector : RareDetectorBase
 	{
-		public FreqRareDetector() : base(RareFunction.FreqRare) {}
+		public FreqRareDetector() : base(RareFunction.FreqRare) { }
 	}
 }

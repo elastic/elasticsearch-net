@@ -14,19 +14,16 @@ namespace Nest
 
 	public class ChildrenAggregation : BucketAggregationBase, IChildrenAggregation
 	{
-		public TypeName Type { get; set; }
-
 		internal ChildrenAggregation() { }
 
-		public ChildrenAggregation(string name, TypeName type) : base(name)
-		{
-			this.Type = type;
-		}
+		public ChildrenAggregation(string name, TypeName type) : base(name) => Type = type;
+
+		public TypeName Type { get; set; }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Children = this;
 	}
 
-	public class ChildrenAggregationDescriptor<T> 
+	public class ChildrenAggregationDescriptor<T>
 		: BucketAggregationDescriptorBase<ChildrenAggregationDescriptor<T>, IChildrenAggregation, T>, IChildrenAggregation
 		where T : class
 	{

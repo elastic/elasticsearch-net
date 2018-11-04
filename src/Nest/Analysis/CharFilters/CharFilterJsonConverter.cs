@@ -6,19 +6,20 @@ namespace Nest
 {
 	internal class CharFilterJsonConverter : JsonConverter
 	{
-		public override bool CanConvert(Type objectType) => true;
-		public override bool CanWrite => false;
 		public override bool CanRead => true;
+		public override bool CanWrite => false;
+
+		public override bool CanConvert(Type objectType) => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			JObject o = JObject.Load(reader);
+			var o = JObject.Load(reader);
 
-			JProperty typeProperty = o.Property("type");
+			var typeProperty = o.Property("type");
 			if (typeProperty == null) return null;
 
 			var typePropertyValue = typeProperty.Value.ToString();
-			switch(typePropertyValue)
+			switch (typePropertyValue)
 			{
 				case "html_strip": return o.ToObject<HtmlStripCharFilter>(ElasticContractResolver.Empty);
 				case "mapping": return o.ToObject<MappingCharFilter>(ElasticContractResolver.Empty);
@@ -29,9 +30,6 @@ namespace Nest
 			return null;
 		}
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			throw new NotSupportedException();
-		}
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
 	}
 }

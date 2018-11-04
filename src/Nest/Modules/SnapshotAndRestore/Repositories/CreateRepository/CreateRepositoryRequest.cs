@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-
 	[JsonConverter(typeof(CreateRepositoryJsonConverter))]
 	public partial interface ICreateRepositoryRequest
 	{
@@ -21,9 +20,9 @@ namespace Nest
 		ISnapshotRepository ICreateRepositoryRequest.Repository { get; set; }
 
 		/// <summary>
-		///	The shared file system repository ("type": "fs") is using shared file system to store snapshot.
-		/// The path specified in the location parameter should point to the same location in the shared
-		/// filesystem and be accessible on all data and master nodes.
+		/// 	The shared file system repository ("type": "fs") is using shared file system to store snapshot.
+		///  The path specified in the location parameter should point to the same location in the shared
+		///  filesystem and be accessible on all data and master nodes.
 		/// </summary>
 		public CreateRepositoryDescriptor FileSystem(Func<FileSystemRepositoryDescriptor, IFileSystemRepository> selector) =>
 			Assign(a => a.Repository = selector?.Invoke(new FileSystemRepositoryDescriptor()));

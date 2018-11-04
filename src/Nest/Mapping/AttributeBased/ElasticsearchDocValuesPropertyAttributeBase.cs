@@ -8,13 +8,6 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public abstract class ElasticsearchDocValuesPropertyAttributeBase : ElasticsearchCorePropertyAttributeBase, IDocValuesProperty
 	{
-		private IDocValuesProperty Self => this;
-
-		bool? IDocValuesProperty.DocValues { get; set; }
-
-		public bool DocValues { get { return Self.DocValues.GetValueOrDefault(true); } set { Self.DocValues = value; } }
-
-
 		protected ElasticsearchDocValuesPropertyAttributeBase(FieldType type) : base(type) { }
 
 		[Obsolete("Please use overload taking FieldType")]
@@ -23,9 +16,16 @@ namespace Nest
 		[Obsolete("Please use overload taking FieldType")]
 		protected ElasticsearchDocValuesPropertyAttributeBase(Type type) : base(type) { }
 
-		public new static ElasticsearchDocValuesPropertyAttributeBase From(MemberInfo memberInfo)
+		public bool DocValues
 		{
-			return memberInfo.GetCustomAttribute<ElasticsearchDocValuesPropertyAttributeBase>(true);
+			get => Self.DocValues.GetValueOrDefault(true);
+			set => Self.DocValues = value;
 		}
+
+		bool? IDocValuesProperty.DocValues { get; set; }
+		private IDocValuesProperty Self => this;
+
+		public static new ElasticsearchDocValuesPropertyAttributeBase From(MemberInfo memberInfo) =>
+			memberInfo.GetCustomAttribute<ElasticsearchDocValuesPropertyAttributeBase>(true);
 	}
 }

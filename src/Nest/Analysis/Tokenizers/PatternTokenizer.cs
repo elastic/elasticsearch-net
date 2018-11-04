@@ -8,12 +8,6 @@ namespace Nest
 	public interface IPatternTokenizer : ITokenizer
 	{
 		/// <summary>
-		/// The regular expression pattern, defaults to \W+.
-		/// </summary>
-		[JsonProperty("pattern")]
-		string Pattern { get; set; }
-
-		/// <summary>
 		/// The regular expression flags.
 		/// </summary>
 		[JsonProperty("flags")]
@@ -25,40 +19,45 @@ namespace Nest
 		[JsonProperty("group")]
 		int? Group { get; set; }
 
+		/// <summary>
+		/// The regular expression pattern, defaults to \W+.
+		/// </summary>
+		[JsonProperty("pattern")]
+		string Pattern { get; set; }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class PatternTokenizer : TokenizerBase, IPatternTokenizer
-    {
-		public PatternTokenizer() { Type = "pattern"; }
+	{
+		public PatternTokenizer() => Type = "pattern";
 
-		/// <inheritdoc/>
-		public string Pattern { get; set; }
-
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public string Flags { get; set; }
 
-		/// <summary/>
+		/// <summary />
 		public int? Group { get; set; }
-    }
-	/// <inheritdoc/>
+
+		/// <inheritdoc />
+		public string Pattern { get; set; }
+	}
+
+	/// <inheritdoc />
 	public class PatternTokenizerDescriptor
 		: TokenizerDescriptorBase<PatternTokenizerDescriptor, IPatternTokenizer>, IPatternTokenizer
 	{
 		protected override string Type => "pattern";
+		string IPatternTokenizer.Flags { get; set; }
 
 		int? IPatternTokenizer.Group { get; set; }
 		string IPatternTokenizer.Pattern { get; set; }
-		string IPatternTokenizer.Flags { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public PatternTokenizerDescriptor Group(int? group) => Assign(a => a.Group = group);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public PatternTokenizerDescriptor Pattern(string pattern) => Assign(a => a.Pattern = pattern);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public PatternTokenizerDescriptor Flags(string flags) => Assign(a => a.Flags = flags);
-
 	}
 }

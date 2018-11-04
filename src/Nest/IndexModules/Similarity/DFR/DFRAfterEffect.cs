@@ -24,6 +24,5 @@ namespace Nest
 		/// </summary>
 		[EnumMember(Value = "l")]
 		L,
-
 	}
 }

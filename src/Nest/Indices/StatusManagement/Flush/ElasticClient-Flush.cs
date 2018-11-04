@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using System.Threading;
 
 namespace Nest
 {
@@ -12,44 +12,49 @@ namespace Nest
 		/// frees memory from the index by flushing data to the index storage and clearing the internal transaction log.
 		/// By default, Elasticsearch uses memory heuristics in order to automatically trigger
 		/// flush operations as required in order to clear memory.
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-flush.html
+		/// <para> </para>
+		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-flush.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the flush operation</param>
 		IFlushResponse Flush(Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		IFlushResponse Flush(IFlushRequest request);
 
-		/// <inheritdoc/>
-		Task<IFlushResponse> FlushAsync(Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<IFlushResponse> FlushAsync(Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		Task<IFlushResponse> FlushAsync(IFlushRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IFlushResponse Flush(Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null) =>
-			this.Flush(selector.InvokeOrDefault(new FlushDescriptor().Index(indices)));
+			Flush(selector.InvokeOrDefault(new FlushDescriptor().Index(indices)));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IFlushResponse Flush(IFlushRequest request) =>
-			this.Dispatcher.Dispatch<IFlushRequest, FlushRequestParameters, FlushResponse>(
+			Dispatcher.Dispatch<IFlushRequest, FlushRequestParameters, FlushResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IndicesFlushDispatch<FlushResponse>(p)
+				(p, d) => LowLevelDispatch.IndicesFlushDispatch<FlushResponse>(p)
 			);
 
-		/// <inheritdoc/>
-		public Task<IFlushResponse> FlushAsync(Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.FlushAsync(selector.InvokeOrDefault(new FlushDescriptor().Index(indices)), cancellationToken);
+		/// <inheritdoc />
+		public Task<IFlushResponse> FlushAsync(Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			FlushAsync(selector.InvokeOrDefault(new FlushDescriptor().Index(indices)), cancellationToken);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public Task<IFlushResponse> FlushAsync(IFlushRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<IFlushRequest, FlushRequestParameters, FlushResponse, IFlushResponse>(
+			Dispatcher.DispatchAsync<IFlushRequest, FlushRequestParameters, FlushResponse, IFlushResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => this.LowLevelDispatch.IndicesFlushDispatchAsync<FlushResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.IndicesFlushDispatchAsync<FlushResponse>(p, c)
 			);
 	}
 }

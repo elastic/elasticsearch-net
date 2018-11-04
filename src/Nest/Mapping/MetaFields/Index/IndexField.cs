@@ -14,7 +14,7 @@ namespace Nest
 		public bool? Enabled { get; set; }
 	}
 
-	public class IndexFieldDescriptor 
+	public class IndexFieldDescriptor
 		: DescriptorBase<IndexFieldDescriptor, IIndexField>, IIndexField
 	{
 		bool? IIndexField.Enabled { get; set; }

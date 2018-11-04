@@ -10,43 +10,40 @@ namespace Nest
 		[JsonProperty("field")]
 		Field Field { get; set; }
 
-		[JsonProperty("script")]
-		IScript Script { get; set; }
-
 		[JsonProperty("missing")]
 		double? Missing { get; set; }
+
+		[JsonProperty("script")]
+		IScript Script { get; set; }
 	}
 
 	public abstract class MetricAggregationBase : AggregationBase, IMetricAggregation
 	{
 		internal MetricAggregationBase() { }
 
-		protected MetricAggregationBase(string name, Field field) : base(name)
-		{
-			this.Field = field;
-		}
+		protected MetricAggregationBase(string name, Field field) : base(name) => Field = field;
 
 		public Field Field { get; set; }
-		public virtual IScript Script { get; set; }
 		public double? Missing { get; set; }
+		public virtual IScript Script { get; set; }
 	}
 
 	public abstract class MetricAggregationDescriptorBase<TMetricAggregation, TMetricAggregationInterface, T>
-		:  DescriptorBase<TMetricAggregation, TMetricAggregationInterface>, IMetricAggregation
+		: DescriptorBase<TMetricAggregation, TMetricAggregationInterface>, IMetricAggregation
 		where TMetricAggregation : MetricAggregationDescriptorBase<TMetricAggregation, TMetricAggregationInterface, T>
-			, TMetricAggregationInterface, IMetricAggregation
+		, TMetricAggregationInterface, IMetricAggregation
 		where T : class
 		where TMetricAggregationInterface : class, IMetricAggregation
 	{
 		Field IMetricAggregation.Field { get; set; }
 
-		IScript IMetricAggregation.Script { get; set; }
+		IDictionary<string, object> IAggregation.Meta { get; set; }
 
 		double? IMetricAggregation.Missing { get; set; }
 
 		string IAggregation.Name { get; set; }
 
-		IDictionary<string, object> IAggregation.Meta { get; set; }
+		IScript IMetricAggregation.Script { get; set; }
 
 		public TMetricAggregation Field(Field field) => Assign(a => a.Field = field);
 

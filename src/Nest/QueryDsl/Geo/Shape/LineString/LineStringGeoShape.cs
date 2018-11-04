@@ -13,11 +13,8 @@ namespace Nest
 	{
 		public LineStringGeoShape() : this(null) { }
 
-		public LineStringGeoShape(IEnumerable<GeoCoordinate> coordinates) 
-			: base("linestring") 
-		{
-			this.Coordinates = coordinates;
-		}
+		public LineStringGeoShape(IEnumerable<GeoCoordinate> coordinates)
+			: base("linestring") => Coordinates = coordinates;
 
 		public IEnumerable<GeoCoordinate> Coordinates { get; set; }
 	}

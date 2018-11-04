@@ -1,51 +1,56 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using System.Threading;
 
 namespace Nest
 {
 	public partial interface IElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		IChangePasswordResponse ChangePassword(Func<ChangePasswordDescriptor, IChangePasswordRequest> selector);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		IChangePasswordResponse ChangePassword(IChangePasswordRequest request);
 
-		/// <inheritdoc/>
-		Task<IChangePasswordResponse> ChangePasswordAsync(Func<ChangePasswordDescriptor, IChangePasswordRequest> selector, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<IChangePasswordResponse> ChangePasswordAsync(Func<ChangePasswordDescriptor, IChangePasswordRequest> selector,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
-		/// <inheritdoc/>
-		Task<IChangePasswordResponse> ChangePasswordAsync(IChangePasswordRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<IChangePasswordResponse> ChangePasswordAsync(IChangePasswordRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IChangePasswordResponse ChangePassword(Func<ChangePasswordDescriptor, IChangePasswordRequest> selector) =>
-			this.ChangePassword(selector.InvokeOrDefault(new ChangePasswordDescriptor()));
+			ChangePassword(selector.InvokeOrDefault(new ChangePasswordDescriptor()));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IChangePasswordResponse ChangePassword(IChangePasswordRequest request) =>
-			this.Dispatcher.Dispatch<IChangePasswordRequest, ChangePasswordRequestParameters, ChangePasswordResponse>(
+			Dispatcher.Dispatch<IChangePasswordRequest, ChangePasswordRequestParameters, ChangePasswordResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.XpackSecurityChangePasswordDispatch<ChangePasswordResponse>(p, d)
+				(p, d) => LowLevelDispatch.XpackSecurityChangePasswordDispatch<ChangePasswordResponse>(p, d)
 			);
 
-		/// <inheritdoc/>
-		public Task<IChangePasswordResponse> ChangePasswordAsync(Func<ChangePasswordDescriptor, IChangePasswordRequest> selector, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.ChangePasswordAsync(selector.InvokeOrDefault(new ChangePasswordDescriptor()), cancellationToken);
+		/// <inheritdoc />
+		public Task<IChangePasswordResponse> ChangePasswordAsync(Func<ChangePasswordDescriptor, IChangePasswordRequest> selector,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			ChangePasswordAsync(selector.InvokeOrDefault(new ChangePasswordDescriptor()), cancellationToken);
 
-		/// <inheritdoc/>
-		public Task<IChangePasswordResponse> ChangePasswordAsync(IChangePasswordRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<IChangePasswordRequest, ChangePasswordRequestParameters, ChangePasswordResponse, IChangePasswordResponse>(
+		/// <inheritdoc />
+		public Task<IChangePasswordResponse> ChangePasswordAsync(IChangePasswordRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			Dispatcher.DispatchAsync<IChangePasswordRequest, ChangePasswordRequestParameters, ChangePasswordResponse, IChangePasswordResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => this.LowLevelDispatch.XpackSecurityChangePasswordDispatchAsync<ChangePasswordResponse>(p, d, c)
+				(p, d, c) => LowLevelDispatch.XpackSecurityChangePasswordDispatchAsync<ChangePasswordResponse>(p, d, c)
 			);
 	}
 }

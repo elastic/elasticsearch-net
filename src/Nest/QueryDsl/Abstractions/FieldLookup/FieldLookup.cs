@@ -7,51 +7,51 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<FieldLookup>))]
 	public interface IFieldLookup
 	{
-		[JsonProperty("index")]
-		IndexName Index { get; set; }
-
-		[JsonProperty("type")]
-		TypeName Type { get; set; }
-
 		[JsonProperty("id")]
 		Id Id { get; set; }
+
+		[JsonProperty("index")]
+		IndexName Index { get; set; }
 
 		[JsonProperty("path")]
 		Field Path { get; set; }
 
 		[JsonProperty("routing")]
 		string Routing { get; set; }
+
+		[JsonProperty("type")]
+		TypeName Type { get; set; }
 	}
 
 	public class FieldLookup : IFieldLookup
 	{
-		public IndexName Index { get; set; }
-		public TypeName Type { get; set; }
 		public Id Id { get; set; }
+		public IndexName Index { get; set; }
 		public Field Path { get; set; }
 		public string Routing { get; set; }
+		public TypeName Type { get; set; }
 	}
 
-	public class FieldLookupDescriptor<T> : DescriptorBase<FieldLookupDescriptor<T>,IFieldLookup>, IFieldLookup
+	public class FieldLookupDescriptor<T> : DescriptorBase<FieldLookupDescriptor<T>, IFieldLookup>, IFieldLookup
 		where T : class
 	{
+		public FieldLookupDescriptor()
+		{
+			Self.Type = new TypeName { Type = _ClrType };
+			Self.Index = new IndexName { Type = _ClrType };
+		}
+
 		internal Type _ClrType => typeof(T);
 
-		IndexName IFieldLookup.Index { get; set; }
-
-		TypeName IFieldLookup.Type { get; set; }
-
 		Id IFieldLookup.Id { get; set; }
+
+		IndexName IFieldLookup.Index { get; set; }
 
 		Field IFieldLookup.Path { get; set; }
 
 		string IFieldLookup.Routing { get; set; }
 
-		public FieldLookupDescriptor()
-		{
-			Self.Type = new TypeName { Type = this._ClrType };
-			Self.Index = new IndexName { Type = this._ClrType };
-		}
+		TypeName IFieldLookup.Type { get; set; }
 
 		public FieldLookupDescriptor<T> Index(IndexName index) => Assign(a => a.Index = index);
 

@@ -14,10 +14,10 @@ namespace Nest
 		public bool Enabled { get; set; }
 	}
 
-	public class FieldNamesFieldDescriptor<T> 
+	public class FieldNamesFieldDescriptor<T>
 		: DescriptorBase<FieldNamesFieldDescriptor<T>, IFieldNamesField>, IFieldNamesField
 	{
-		bool IFieldNamesField.Enabled { get; set;}
+		bool IFieldNamesField.Enabled { get; set; }
 
 		public FieldNamesFieldDescriptor<T> Enabled(bool enabled = true) => Assign(a => a.Enabled = enabled);
 	}

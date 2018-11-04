@@ -10,13 +10,13 @@ namespace Nest
 	/// </summary>
 	public static class Inflector
 	{
-		private static readonly ConcurrentDictionary<string, string> _memoization = new ConcurrentDictionary<string, string>(); 
+		private static readonly ConcurrentDictionary<string, string> _memoization = new ConcurrentDictionary<string, string>();
 		private static readonly List<InflectorRule> _plurals = new List<InflectorRule>();
 		private static readonly List<InflectorRule> _singulars = new List<InflectorRule>();
 		private static readonly List<string> _uncountables = new List<string>();
 
 		/// <summary>
-		/// Initializes the <see cref="Inflector"/> class.
+		/// Initializes the <see cref="Inflector" /> class.
 		/// </summary>
 		static Inflector()
 		{
@@ -90,39 +90,30 @@ namespace Nest
 		private static void AddIrregularRule(string singular, string plural)
 		{
 			AddPluralRule(String.Concat("(", singular[0], ")", singular.Substring(1), "$"),
-						  String.Concat("$1", plural.Substring(1)));
+				String.Concat("$1", plural.Substring(1)));
 			AddSingularRule(String.Concat("(", plural[0], ")", plural.Substring(1), "$"),
-							String.Concat("$1", singular.Substring(1)));
+				String.Concat("$1", singular.Substring(1)));
 		}
 
 		/// <summary>
 		/// Adds the unknown count rule.
 		/// </summary>
 		/// <param name="word">The word.</param>
-		private static void AddUnknownCountRule(string word)
-		{
-			_uncountables.Add(word.ToLower());
-		}
+		private static void AddUnknownCountRule(string word) => _uncountables.Add(word.ToLower());
 
 		/// <summary>
 		/// Adds the plural rule.
 		/// </summary>
 		/// <param name="rule">The rule.</param>
 		/// <param name="replacement">The replacement.</param>
-		private static void AddPluralRule(string rule, string replacement)
-		{
-			_plurals.Add(new InflectorRule(rule, replacement));
-		}
+		private static void AddPluralRule(string rule, string replacement) => _plurals.Add(new InflectorRule(rule, replacement));
 
 		/// <summary>
 		/// Adds the singular rule.
 		/// </summary>
 		/// <param name="rule">The rule.</param>
 		/// <param name="replacement">The replacement.</param>
-		private static void AddSingularRule(string rule, string replacement)
-		{
-			_singulars.Add(new InflectorRule(rule, replacement));
-		}
+		private static void AddSingularRule(string rule, string replacement) => _singulars.Add(new InflectorRule(rule, replacement));
 
 		/// <summary>
 		/// Makes the plural.
@@ -145,10 +136,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="word">The word.</param>
 		/// <returns></returns>
-		public static string MakeSingular(this string word)
-		{
-			return ApplyRules(_singulars, word);
-		}
+		public static string MakeSingular(this string word) => ApplyRules(_singulars, word);
 
 		/// <summary>
 		/// Applies the rules.
@@ -158,13 +146,13 @@ namespace Nest
 		/// <returns></returns>
 		private static string ApplyRules(IList<InflectorRule> rules, string word)
 		{
-			string result = word;
+			var result = word;
 
 			if (!_uncountables.Contains(word.ToLower()))
 			{
-				for (int i = rules.Count - 1; i >= 0; i--)
+				for (var i = rules.Count - 1; i >= 0; i--)
 				{
-					string currentPass = rules[i].Apply(word);
+					var currentPass = rules[i].Apply(word);
 					if (currentPass != null)
 					{
 						result = currentPass;
@@ -176,8 +164,6 @@ namespace Nest
 			return result;
 		}
 
-		#region Nested type: InflectorRule
-
 		/// <summary>
 		/// Summary for the InflectorRule class
 		/// </summary>
@@ -187,7 +173,7 @@ namespace Nest
 			private readonly string replacement;
 
 			/// <summary>
-			/// Initializes a new instance of the <see cref="InflectorRule"/> class.
+			/// Initializes a new instance of the <see cref="InflectorRule" /> class.
 			/// </summary>
 			/// <param name="regexPattern">The regex pattern.</param>
 			/// <param name="replacementText">The replacement text.</param>
@@ -207,14 +193,12 @@ namespace Nest
 				if (!regex.IsMatch(word))
 					return null;
 
-				string replace = regex.Replace(word, replacement);
+				var replace = regex.Replace(word, replacement);
 				if (word == word.ToUpper())
 					replace = replace.ToUpper();
 
 				return replace;
 			}
 		}
-
-		#endregion
 	}
 }

@@ -13,34 +13,39 @@ namespace Nest
 	public interface IPhraseSuggestCollate
 	{
 		/// <summary>
-		/// The collate query to run.
+		/// The parameters for the query. the suggestion value will be added to the variables you specify.
 		/// </summary>
-		/// <remarks>
-		/// Query parameters should be specified using <see cref="Params"/>
-		/// </remarks>
-		[JsonProperty("query")]
-#pragma warning disable 618
-		ITemplateQuery Query { get; set; }
-#pragma warning restore 618
+		[JsonProperty("params")]
+		IDictionary<string, object> Params { get; set; }
 
 		/// <summary>
 		/// Controls if all phrase suggestions will be returned. When set to <c>true</c>, the suggestions will have
 		/// an additional option collate_match, which will be <c>true</c> if matching documents for the phrase was found,
-		/// <c>false</c> otherwise. The default value for <see cref="Prune"/> is <c>false</c>.
+		/// <c>false</c> otherwise. The default value for <see cref="Prune" /> is <c>false</c>.
 		/// </summary>
 		[JsonProperty("prune")]
 		bool? Prune { get; set; }
 
 		/// <summary>
-		/// The parameters for the query. the suggestion value will be added to the variables you specify.
+		/// The collate query to run.
 		/// </summary>
-		[JsonProperty("params")]
-		IDictionary<string, object> Params { get; set; }
+		/// <remarks>
+		/// Query parameters should be specified using <see cref="Params" />
+		/// </remarks>
+		[JsonProperty("query")]
+#pragma warning disable 618
+		ITemplateQuery Query { get; set; }
+#pragma warning restore 618
 	}
 
 	/// <inheritdoc />
 	public class PhraseSuggestCollate : IPhraseSuggestCollate
 	{
+		/// <inheritdoc />
+		public IDictionary<string, object> Params { get; set; }
+
+		/// <inheritdoc />
+		public bool? Prune { get; set; }
 #pragma warning disable 618
 		private ITemplateQuery _query;
 
@@ -55,28 +60,22 @@ namespace Nest
 				if (_query != null) Params = _query.Params;
 			}
 		}
-
-		/// <inheritdoc />
-		public bool? Prune { get; set; }
-
-		/// <inheritdoc />
-		public IDictionary<string, object> Params { get; set; }
 	}
 
 	public class PhraseSuggestCollateDescriptor<T> : DescriptorBase<PhraseSuggestCollateDescriptor<T>, IPhraseSuggestCollate>, IPhraseSuggestCollate
 		where T : class
 	{
+		IDictionary<string, object> IPhraseSuggestCollate.Params { get; set; }
+		bool? IPhraseSuggestCollate.Prune { get; set; }
 #pragma warning disable 618
 		ITemplateQuery IPhraseSuggestCollate.Query { get; set; }
 #pragma warning restore 618
-		IDictionary<string, object> IPhraseSuggestCollate.Params { get; set; }
-		bool? IPhraseSuggestCollate.Prune { get; set; }
 
 		/// <summary>
 		/// The collate query to run.
 		/// </summary>
 		/// <remarks>
-		/// Query parameters should be specified using <see cref="Params(IDictionary&lt;string, object&gt;)"/> or
+		/// Query parameters should be specified using <see cref="Params(IDictionary&lt;string, object&gt;)" /> or
 		/// Params(Func&lt;FluentDictionary&lt;string, object&gt;, FluentDictionary&lt;string, object&gt;&gt;)
 		/// </remarks>
 #pragma warning disable 618
@@ -92,7 +91,7 @@ namespace Nest
 		/// <summary>
 		/// Controls if all phrase suggestions will be returned. When set to <c>true</c>, the suggestions will have
 		/// an additional option collate_match, which will be <c>true</c> if matching documents for the phrase was found,
-		/// <c>false</c> otherwise. The default value for <see cref="Prune"/> is <c>false</c>.
+		/// <c>false</c> otherwise. The default value for <see cref="Prune" /> is <c>false</c>.
 		/// </summary>
 		public PhraseSuggestCollateDescriptor<T> Prune(bool? prune = true) => Assign(a => a.Prune = prune);
 

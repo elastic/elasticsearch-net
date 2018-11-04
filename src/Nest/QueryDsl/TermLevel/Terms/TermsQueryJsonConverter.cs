@@ -23,29 +23,29 @@ namespace Nest
 			{
 				if (t.IsVerbatim)
 				{
-                    if (t.TermsLookup != null)
-                    {
-                        writer.WritePropertyName(field);
-                        serializer.Serialize(writer, t.TermsLookup);
-                    }
-                    else if (t.Terms != null)
-                    {
-                        writer.WritePropertyName(field);
-                        serializer.Serialize(writer, t.Terms);
-                    }
+					if (t.TermsLookup != null)
+					{
+						writer.WritePropertyName(field);
+						serializer.Serialize(writer, t.TermsLookup);
+					}
+					else if (t.Terms != null)
+					{
+						writer.WritePropertyName(field);
+						serializer.Serialize(writer, t.Terms);
+					}
 				}
 				else
 				{
-                    if (t.Terms.HasAny())
-                    {
-                        writer.WritePropertyName(field);
-                        serializer.Serialize(writer, t.Terms);
-                    }
-                    else if (t.TermsLookup != null)
-                    {
-                        writer.WritePropertyName(field);
-                        serializer.Serialize(writer, t.TermsLookup);
-                    }
+					if (t.Terms.HasAny())
+					{
+						writer.WritePropertyName(field);
+						serializer.Serialize(writer, t.Terms);
+					}
+					else if (t.TermsLookup != null)
+					{
+						writer.WritePropertyName(field);
+						serializer.Serialize(writer, t.TermsLookup);
+					}
 				}
 
 				if (t.Boost.HasValue)
@@ -61,6 +61,7 @@ namespace Nest
 			}
 			writer.WriteEndObject();
 		}
+
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var filter = new TermsQueryDescriptor<object>();
@@ -90,7 +91,6 @@ namespace Nest
 				}
 			}
 			return filter;
-
 		}
 
 		private void ReadTerms(ITermsQuery termsQuery, JsonReader reader, JsonSerializer serializer)
@@ -137,5 +137,4 @@ namespace Nest
 			}
 		}
 	}
-
 }

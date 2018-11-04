@@ -75,20 +75,28 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public double? AnomalyScore { get; set; }
+
 		/// <inheritdoc />
 		public bool? Descending { get; set; }
+
 		/// <inheritdoc />
 		public DateTimeOffset? End { get; set; }
+
 		/// <inheritdoc />
 		public bool? ExcludeInterim { get; set; }
+
 		/// <inheritdoc />
 		public bool? Expand { get; set; }
+
 		/// <inheritdoc />
 		public IPage Page { get; set; }
+
 		/// <inheritdoc />
 		public Field Sort { get; set; }
+
 		/// <inheritdoc />
 		public DateTimeOffset? Start { get; set; }
+
 		/// <inheritdoc />
 		public DateTimeOffset? Timestamp { get; set; }
 	}

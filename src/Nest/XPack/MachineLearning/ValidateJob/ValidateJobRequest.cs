@@ -59,16 +59,22 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public IAnalysisConfig AnalysisConfig { get; set; }
+
 		/// <inheritdoc />
 		public IAnalysisLimits AnalysisLimits { get; set; }
+
 		/// <inheritdoc />
 		public IDataDescription DataDescription { get; set; }
+
 		/// <inheritdoc />
 		public string Description { get; set; }
+
 		/// <inheritdoc />
 		public IModelPlotConfig ModelPlotConfig { get; set; }
+
 		/// <inheritdoc />
 		public long? ModelSnapshotRetentionDays { get; set; }
+
 		/// <inheritdoc />
 		public IndexName ResultsIndexName { get; set; }
 	}
@@ -90,7 +96,8 @@ namespace Nest
 			Assign(a => a.AnalysisConfig = selector?.Invoke(new AnalysisConfigDescriptor<T>()));
 
 		/// <inheritdoc />
-		public ValidateJobDescriptor<T> AnalysisLimits(Func<AnalysisLimitsDescriptor, IAnalysisLimits> selector) => Assign(a => a.AnalysisLimits = selector?.Invoke(new AnalysisLimitsDescriptor()));
+		public ValidateJobDescriptor<T> AnalysisLimits(Func<AnalysisLimitsDescriptor, IAnalysisLimits> selector) =>
+			Assign(a => a.AnalysisLimits = selector?.Invoke(new AnalysisLimitsDescriptor()));
 
 		/// <inheritdoc />
 		public ValidateJobDescriptor<T> DataDescription(Func<DataDescriptionDescriptor<T>, IDataDescription> selector) =>
@@ -100,10 +107,12 @@ namespace Nest
 		public ValidateJobDescriptor<T> Description(string description) => Assign(a => a.Description = description);
 
 		/// <inheritdoc />
-		public ValidateJobDescriptor<T> ModelPlot(Func<ModelPlotConfigDescriptor<T>, IModelPlotConfig> selector) => Assign(a => a.ModelPlotConfig = selector?.Invoke(new ModelPlotConfigDescriptor<T>()));
+		public ValidateJobDescriptor<T> ModelPlot(Func<ModelPlotConfigDescriptor<T>, IModelPlotConfig> selector) =>
+			Assign(a => a.ModelPlotConfig = selector?.Invoke(new ModelPlotConfigDescriptor<T>()));
 
 		/// <inheritdoc />
-		public ValidateJobDescriptor<T> ModelSnapshotRetentionDays(long modelSnapshotRetentionDays) => Assign(a => a.ModelSnapshotRetentionDays = modelSnapshotRetentionDays);
+		public ValidateJobDescriptor<T> ModelSnapshotRetentionDays(long modelSnapshotRetentionDays) =>
+			Assign(a => a.ModelSnapshotRetentionDays = modelSnapshotRetentionDays);
 
 		/// <inheritdoc />
 		public ValidateJobDescriptor<T> ResultsIndexName(IndexName indexName) => Assign(a => a.ResultsIndexName = indexName);

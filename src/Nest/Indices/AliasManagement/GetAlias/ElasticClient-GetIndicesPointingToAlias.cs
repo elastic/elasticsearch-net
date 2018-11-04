@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using Nest;
 
 namespace Nest
 {
@@ -33,10 +32,12 @@ namespace Nest
 			return IndicesPointingToAlias(client.ConnectionSettings, alias, response);
 		}
 
-		private static IEnumerable<string> IndicesPointingToAlias(IConnectionConfigurationValues settings, Names alias, IGetAliasResponse aliasesResponse)
+		private static IEnumerable<string> IndicesPointingToAlias(IConnectionConfigurationValues settings, Names alias,
+			IGetAliasResponse aliasesResponse
+		)
 		{
 			if (!aliasesResponse.IsValid
-			    || !aliasesResponse.Indices.HasAny())
+				|| !aliasesResponse.Indices.HasAny())
 				return new string[] { };
 
 			var aliases = alias.GetString(settings).Split(',');

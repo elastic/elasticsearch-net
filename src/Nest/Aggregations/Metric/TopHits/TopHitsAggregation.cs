@@ -8,8 +8,25 @@ namespace Nest
 	[ContractJsonConverter(typeof(AggregationJsonConverter<TopHitsAggregation>))]
 	public interface ITopHitsAggregation : IMetricAggregation
 	{
+		[JsonProperty("docvalue_fields")]
+		Fields DocValueFields { get; set; }
+
+		[JsonProperty("explain")]
+		bool? Explain { get; set; }
+
+		[Obsolete("Removed in NEST 6.x")]
+		[JsonProperty("fielddata_fields")]
+		Fields FielddataFields { get; set; }
+
 		[JsonProperty("from")]
 		int? From { get; set; }
+
+		[JsonProperty("highlight")]
+		IHighlight Highlight { get; set; }
+
+		[JsonProperty("script_fields")]
+		[JsonConverter(typeof(ReadAsTypeJsonConverter<ScriptFields>))]
+		IScriptFields ScriptFields { get; set; }
 
 		[JsonProperty("size")]
 		int? Size { get; set; }
@@ -20,53 +37,37 @@ namespace Nest
 		[JsonProperty("_source")]
 		Union<bool, ISourceFilter> Source { get; set; }
 
-		[JsonProperty("highlight")]
-		IHighlight Highlight { get; set; }
-
-		[JsonProperty("explain")]
-		bool? Explain { get; set; }
-
-		[JsonProperty("script_fields")]
-		[JsonConverter(typeof(ReadAsTypeJsonConverter<ScriptFields>))]
-		IScriptFields ScriptFields { get; set; }
-
-		[Obsolete("Removed in NEST 6.x")]
-		[JsonProperty("fielddata_fields")]
-		Fields FielddataFields { get; set; }
-
 		[JsonProperty("stored_fields")]
 		Fields StoredFields { get; set; }
 
-		[JsonProperty("docvalue_fields")]
-		Fields DocValueFields { get; set; }
+		[JsonProperty("track_scores")]
+		bool? TrackScores { get; set; }
 
 		[JsonProperty("version")]
 		bool? Version { get; set; }
-
-		[JsonProperty("track_scores")]
-		bool? TrackScores { get; set; }
 	}
 
 	public class TopHitsAggregation : MetricAggregationBase, ITopHitsAggregation
 	{
-		public int? From { get; set; }
-		public int? Size { get; set; }
-		public IList<ISort> Sort { get; set; }
-		public Union<bool, ISourceFilter> Source { get; set; }
-		public IHighlight Highlight { get; set; }
-		public bool? Explain { get; set; }
-		public IScriptFields ScriptFields { get; set; }
-
-		[Obsolete("Removed in NEST 6.x")]
-		public Fields FielddataFields { get; set; }
-		public Fields StoredFields { get; set; }
-		public bool? Version { get; set; }
-		public bool? TrackScores { get; set; }
-		public Fields DocValueFields { get; set; }
-
 		internal TopHitsAggregation() { }
 
 		public TopHitsAggregation(string name) : base(name, null) { }
+
+		public Fields DocValueFields { get; set; }
+		public bool? Explain { get; set; }
+
+		[Obsolete("Removed in NEST 6.x")]
+		public Fields FielddataFields { get; set; }
+
+		public int? From { get; set; }
+		public IHighlight Highlight { get; set; }
+		public IScriptFields ScriptFields { get; set; }
+		public int? Size { get; set; }
+		public IList<ISort> Sort { get; set; }
+		public Union<bool, ISourceFilter> Source { get; set; }
+		public Fields StoredFields { get; set; }
+		public bool? TrackScores { get; set; }
+		public bool? Version { get; set; }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.TopHits = this;
 	}
@@ -76,7 +77,18 @@ namespace Nest
 			, ITopHitsAggregation
 		where T : class
 	{
+		Fields ITopHitsAggregation.DocValueFields { get; set; }
+
+		bool? ITopHitsAggregation.Explain { get; set; }
+
+		[Obsolete("Removed in NEST 6.x")]
+		Fields ITopHitsAggregation.FielddataFields { get; set; }
+
 		int? ITopHitsAggregation.From { get; set; }
+
+		IHighlight ITopHitsAggregation.Highlight { get; set; }
+
+		IScriptFields ITopHitsAggregation.ScriptFields { get; set; }
 
 		int? ITopHitsAggregation.Size { get; set; }
 
@@ -84,22 +96,11 @@ namespace Nest
 
 		Union<bool, ISourceFilter> ITopHitsAggregation.Source { get; set; }
 
-		IHighlight ITopHitsAggregation.Highlight { get; set; }
-
-		bool? ITopHitsAggregation.Explain { get; set; }
-
-		IScriptFields ITopHitsAggregation.ScriptFields { get; set; }
-
-		[Obsolete("Removed in NEST 6.x")]
-		Fields ITopHitsAggregation.FielddataFields { get; set; }
-
 		Fields ITopHitsAggregation.StoredFields { get; set; }
-
-		bool? ITopHitsAggregation.Version { get; set; }
 
 		bool? ITopHitsAggregation.TrackScores { get; set; }
 
-		Fields ITopHitsAggregation.DocValueFields { get; set; }
+		bool? ITopHitsAggregation.Version { get; set; }
 
 		public TopHitsAggregationDescriptor<T> From(int from) => Assign(a => a.From = from);
 

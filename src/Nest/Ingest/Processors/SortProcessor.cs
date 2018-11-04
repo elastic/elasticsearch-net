@@ -28,16 +28,15 @@ namespace Nest
 
 	public class SortProcessor : ProcessorBase, ISortProcessor
 	{
-		protected override string Name => "sort";
-
 		public Field Field { get; set; }
 
 		public SortOrder? Order { get; set; }
+		protected override string Name => "sort";
 	}
 
 	public class SortProcessorDescriptor<T>
-	: ProcessorDescriptorBase<SortProcessorDescriptor<T>, ISortProcessor>, ISortProcessor
-	where T : class
+		: ProcessorDescriptorBase<SortProcessorDescriptor<T>, ISortProcessor>, ISortProcessor
+		where T : class
 	{
 		protected override string Name => "sort";
 

@@ -10,18 +10,19 @@ namespace Nest
 	{
 		private readonly IEnumerable<string> _nodeIds;
 
-		public NodeIds(IEnumerable<string> nodeIds) { this._nodeIds = nodeIds; }
+		public NodeIds(IEnumerable<string> nodeIds) => _nodeIds = nodeIds;
 
 		private string DebugDisplay => GetString(null);
 
 		//TODO to explicit private implementation
 		public string GetString(IConnectionConfigurationValues settings) =>
-			string.Join(",", this._nodeIds);
+			string.Join(",", _nodeIds);
 
 		public static NodeIds Parse(string nodeIds)
 		{
 			//TODO trim()?
 			if (nodeIds.IsNullOrEmpty()) throw new ArgumentException("can not create NodeIds on an empty enumerable of ", nameof(nodeIds));
+
 			var nodes = nodeIds.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
 			return new NodeIds(nodes);
 		}

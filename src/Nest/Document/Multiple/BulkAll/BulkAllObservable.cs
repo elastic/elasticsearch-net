@@ -9,19 +9,19 @@ namespace Nest
 {
 	public class BulkAllObservable<T> : IDisposable, IObservable<IBulkAllResponse> where T : class
 	{
-		private readonly IBulkAllRequest<T> _partionedBulkRequest;
-		private readonly IElasticClient _client;
-		private readonly TimeSpan _backOffTime;
 		private readonly int _backOffRetries;
+		private readonly TimeSpan _backOffTime;
 		private readonly int _bulkSize;
-		private readonly int _maxDegreeOfParallelism;
-		private Action _incrementFailed = () => { };
-		private Action _incrementRetries = () => { };
+		private readonly IElasticClient _client;
 
 		private readonly CancellationToken _compositeCancelToken;
 		private readonly CancellationTokenSource _compositeCancelTokenSource;
+		private readonly int _maxDegreeOfParallelism;
+		private readonly IBulkAllRequest<T> _partionedBulkRequest;
 		private readonly Func<BulkResponseItemBase, T, bool> _retryPredicate;
-		private Action<BulkResponseItemBase, T> _droppedDocumentCallBack;
+		private readonly Action<BulkResponseItemBase, T> _droppedDocumentCallBack;
+		private Action _incrementFailed = () => { };
+		private Action _incrementRetries = () => { };
 
 		public BulkAllObservable(
 			IElasticClient client,
@@ -29,44 +29,52 @@ namespace Nest
 			CancellationToken cancellationToken = default(CancellationToken)
 		)
 		{
-			this._client = client;
-			this._partionedBulkRequest = partionedBulkRequest;
-			this._backOffRetries = this._partionedBulkRequest.BackOffRetries.GetValueOrDefault(CoordinatedRequestDefaults.BulkAllBackOffRetriesDefault);
-			this._backOffTime = (this._partionedBulkRequest?.BackOffTime?.ToTimeSpan() ?? CoordinatedRequestDefaults.BulkAllBackOffTimeDefault);
-			this._bulkSize = this._partionedBulkRequest.Size ?? CoordinatedRequestDefaults.BulkAllSizeDefault;
-			this._retryPredicate = this._partionedBulkRequest.RetryDocumentPredicate ?? RetryBulkActionPredicate;
-			this._droppedDocumentCallBack = this._partionedBulkRequest.DroppedDocumentCallback ?? DroppedDocumentCallbackDefault;
-			this._maxDegreeOfParallelism = _partionedBulkRequest.MaxDegreeOfParallelism ?? CoordinatedRequestDefaults.BulkAllMaxDegreeOfParallelismDefault;
+			_client = client;
+			_partionedBulkRequest = partionedBulkRequest;
+			_backOffRetries = _partionedBulkRequest.BackOffRetries.GetValueOrDefault(CoordinatedRequestDefaults.BulkAllBackOffRetriesDefault);
+			_backOffTime = _partionedBulkRequest?.BackOffTime?.ToTimeSpan() ?? CoordinatedRequestDefaults.BulkAllBackOffTimeDefault;
+			_bulkSize = _partionedBulkRequest.Size ?? CoordinatedRequestDefaults.BulkAllSizeDefault;
+			_retryPredicate = _partionedBulkRequest.RetryDocumentPredicate ?? RetryBulkActionPredicate;
+			_droppedDocumentCallBack = _partionedBulkRequest.DroppedDocumentCallback ?? DroppedDocumentCallbackDefault;
+			_maxDegreeOfParallelism = _partionedBulkRequest.MaxDegreeOfParallelism ?? CoordinatedRequestDefaults.BulkAllMaxDegreeOfParallelismDefault;
 
-			this._compositeCancelTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-			this._compositeCancelToken = this._compositeCancelTokenSource.Token;
+			_compositeCancelTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+			_compositeCancelToken = _compositeCancelTokenSource.Token;
+		}
+
+		public bool IsDisposed { get; private set; }
+
+		public void Dispose()
+		{
+			IsDisposed = true;
+			_compositeCancelTokenSource?.Cancel();
+		}
+
+		public IDisposable Subscribe(IObserver<IBulkAllResponse> observer)
+		{
+			observer.ThrowIfNull(nameof(observer));
+			BulkAll(observer);
+			return this;
 		}
 
 		public IDisposable Subscribe(BulkAllObserver observer)
 		{
 			_incrementFailed = observer.IncrementTotalNumberOfFailedBuffers;
 			_incrementRetries = observer.IncrementTotalNumberOfRetries;
-			return this.Subscribe((IObserver<IBulkAllResponse>) observer);
-		}
-
-		public IDisposable Subscribe(IObserver<IBulkAllResponse> observer)
-		{
-			observer.ThrowIfNull(nameof(observer));
-			this.BulkAll(observer);
-			return this;
+			return Subscribe((IObserver<IBulkAllResponse>)observer);
 		}
 
 		private void BulkAll(IObserver<IBulkAllResponse> observer)
 		{
-			var documents = this._partionedBulkRequest.Documents;
-			var partioned = new PartitionHelper<T>(documents, this._bulkSize);
+			var documents = _partionedBulkRequest.Documents;
+			var partioned = new PartitionHelper<T>(documents, _bulkSize);
 #pragma warning disable 4014
 			partioned.ForEachAsync(
 #pragma warning restore 4014
-				(buffer, page) => this.BulkAsync(buffer, page, 0),
+				(buffer, page) => BulkAsync(buffer, page, 0),
 				(buffer, response) => observer.OnNext(response),
 				ex => OnCompleted(ex, observer),
-				this._maxDegreeOfParallelism
+				_maxDegreeOfParallelism
 			);
 		}
 
@@ -90,17 +98,18 @@ namespace Nest
 
 		private void RefreshOnCompleted()
 		{
-			if (!this._partionedBulkRequest.RefreshOnCompleted) return;
-			var refresh = this._client.Refresh(this._partionedBulkRequest.Index);
+			if (!_partionedBulkRequest.RefreshOnCompleted) return;
+
+			var refresh = _client.Refresh(_partionedBulkRequest.Index);
 			if (!refresh.IsValid) throw Throw($"Refreshing after all documents have indexed failed", refresh.ApiCall);
 		}
 
 		private async Task<IBulkAllResponse> BulkAsync(IList<T> buffer, long page, int backOffRetries)
 		{
-			this._compositeCancelToken.ThrowIfCancellationRequested();
+			_compositeCancelToken.ThrowIfCancellationRequested();
 
-			var r = this._partionedBulkRequest;
-			var response = await this._client.BulkAsync(s =>
+			var r = _partionedBulkRequest;
+			var response = await _client.BulkAsync(s =>
 				{
 					s.Index(r.Index).Type(r.Type);
 					if (r.BufferToBulk != null) r.BufferToBulk(s, buffer);
@@ -111,41 +120,42 @@ namespace Nest
 					if (r.WaitForActiveShards.HasValue) s.WaitForActiveShards(r.WaitForActiveShards.ToString());
 
 					return s;
-				}, this._compositeCancelToken)
+				}, _compositeCancelToken)
 				.ConfigureAwait(false);
 
-			this._compositeCancelToken.ThrowIfCancellationRequested();
+			_compositeCancelToken.ThrowIfCancellationRequested();
 
 			if (!response.ApiCall.Success)
-				return await this.HandleBulkRequest(buffer, page, backOffRetries, response);
+				return await HandleBulkRequest(buffer, page, backOffRetries, response);
 
 			var documentsWithResponse = response.Items.Zip(buffer, Tuple.Create).ToList();
 
-			this.HandleDroppedDocuments(documentsWithResponse, response);
+			HandleDroppedDocuments(documentsWithResponse, response);
 
 			var retryDocuments = documentsWithResponse
-				.Where(x=> !x.Item1.IsValid && this._retryPredicate(x.Item1, x.Item2))
+				.Where(x => !x.Item1.IsValid && _retryPredicate(x.Item1, x.Item2))
 				.Select(x => x.Item2)
 				.ToList();
 
-			if (retryDocuments.Count > 0 && backOffRetries < this._backOffRetries)
-				return await this.RetryDocuments(page, ++backOffRetries, retryDocuments);
+			if (retryDocuments.Count > 0 && backOffRetries < _backOffRetries)
+				return await RetryDocuments(page, ++backOffRetries, retryDocuments);
 			else if (retryDocuments.Count > 0)
-				throw this.ThrowOnBadBulk(response, $"Bulk indexing failed and after retrying {backOffRetries} times");
+				throw ThrowOnBadBulk(response, $"Bulk indexing failed and after retrying {backOffRetries} times");
 
-			this._partionedBulkRequest.BackPressure?.Release();
+			_partionedBulkRequest.BackPressure?.Release();
 			return new BulkAllResponse { Retries = backOffRetries, Page = page };
 		}
 
 		private void HandleDroppedDocuments(List<Tuple<BulkResponseItemBase, T>> documentsWithResponse, IBulkResponse response)
 		{
 			var droppedDocuments = documentsWithResponse
-				.Where(x => !x.Item1.IsValid && !this._retryPredicate(x.Item1, x.Item2))
+				.Where(x => !x.Item1.IsValid && !_retryPredicate(x.Item1, x.Item2))
 				.ToList();
 			if (droppedDocuments.Count <= 0) return;
-			foreach (var dropped in droppedDocuments) this._droppedDocumentCallBack(dropped.Item1, dropped.Item2);
-			if (!this._partionedBulkRequest.ContinueAfterDroppedDocuments)
-				throw this.ThrowOnBadBulk(response, $"BulkAll halted after receiving failures that can not be retried from _bulk");
+
+			foreach (var dropped in droppedDocuments) _droppedDocumentCallBack(dropped.Item1, dropped.Item2);
+			if (!_partionedBulkRequest.ContinueAfterDroppedDocuments)
+				throw ThrowOnBadBulk(response, $"BulkAll halted after receiving failures that can not be retried from _bulk");
 		}
 
 		private async Task<IBulkAllResponse> HandleBulkRequest(IList<T> buffer, long page, int backOffRetries, IBulkResponse response)
@@ -158,33 +168,35 @@ namespace Nest
 				case PipelineFailure.MaxRetriesReached:
 					//TODO move this to its own PipelineFailure classification in 7.0
 					if (response.ApiCall.AuditTrail.Last().Event == AuditEvent.FailedOverAllNodes)
-						throw this.ThrowOnBadBulk(response, $"BulkAll halted after attempted bulk failed over all the active nodes");
-					return await this.RetryDocuments(page, ++backOffRetries, buffer);
+						throw ThrowOnBadBulk(response, $"BulkAll halted after attempted bulk failed over all the active nodes");
+
+					return await RetryDocuments(page, ++backOffRetries, buffer);
 				case PipelineFailure.CouldNotStartSniffOnStartup:
 				case PipelineFailure.BadAuthentication:
 				case PipelineFailure.NoNodesAttempted:
 				case PipelineFailure.SniffFailure:
 				case PipelineFailure.Unexpected:
-					throw this.ThrowOnBadBulk(response,
+					throw ThrowOnBadBulk(response,
 						$"BulkAll halted after {nameof(PipelineFailure)}{failureReason.GetStringValue()} from _bulk");
 				default:
-					return await this.RetryDocuments(page, ++backOffRetries, buffer);
+					return await RetryDocuments(page, ++backOffRetries, buffer);
 			}
 		}
 
 		private async Task<IBulkAllResponse> RetryDocuments(long page, int backOffRetries, IList<T> retryDocuments)
 		{
-			this._incrementRetries();
-			await Task.Delay(this._backOffTime, this._compositeCancelToken).ConfigureAwait(false);
-			return await this.BulkAsync(retryDocuments, page, backOffRetries).ConfigureAwait(false);
+			_incrementRetries();
+			await Task.Delay(_backOffTime, _compositeCancelToken).ConfigureAwait(false);
+			return await BulkAsync(retryDocuments, page, backOffRetries).ConfigureAwait(false);
 		}
 
 		private Exception ThrowOnBadBulk(IBodyWithApiCallDetails response, string message)
 		{
-			this._incrementFailed();
-			this._partionedBulkRequest.BackPressure?.Release();
+			_incrementFailed();
+			_partionedBulkRequest.BackPressure?.Release();
 			return Throw(message, response.ApiCall);
 		}
+
 		private static ElasticsearchClientException Throw(string message, IApiCallDetails details) =>
 			new ElasticsearchClientException(PipelineFailure.BadResponse, message, details);
 
@@ -192,13 +204,5 @@ namespace Nest
 		private static bool RetryBulkActionPredicate(BulkResponseItemBase bulkResponseItem, T d) => bulkResponseItem.Status == 429;
 
 		private static void DroppedDocumentCallbackDefault(BulkResponseItemBase bulkResponseItem, T d) { }
-
-		public bool IsDisposed { get; private set; }
-
-		public void Dispose()
-		{
-			this.IsDisposed = true;
-			this._compositeCancelTokenSource?.Cancel();
-		}
 	}
 }

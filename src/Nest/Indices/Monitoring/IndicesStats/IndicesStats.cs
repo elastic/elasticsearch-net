@@ -9,11 +9,11 @@ namespace Nest
 		[JsonProperty(PropertyName = "primaries")]
 		public IndexStats Primaries { get; internal set; }
 
-		[JsonProperty(PropertyName = "total")]
-		public IndexStats Total { get; internal set; }
-
 		[JsonProperty("shards")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, ShardStats[]>))]
 		public IReadOnlyDictionary<string, ShardStats[]> Shards { get; internal set; } = EmptyReadOnly<string, ShardStats[]>.Dictionary;
+
+		[JsonProperty(PropertyName = "total")]
+		public IndexStats Total { get; internal set; }
 	}
 }

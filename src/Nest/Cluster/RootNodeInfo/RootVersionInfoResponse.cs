@@ -5,8 +5,8 @@ namespace Nest
 	public interface IRootNodeInfoResponse : IResponse
 	{
 		string Name { get; }
-		string Tagline { get;  }
-		ElasticsearchVersionInfo Version { get;  }
+		string Tagline { get; }
+		ElasticsearchVersionInfo Version { get; }
 	}
 
 	[JsonObject]
@@ -17,9 +17,8 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "tagline")]
 		public string Tagline { get; internal set; }
-		
+
 		[JsonProperty(PropertyName = "version")]
 		public ElasticsearchVersionInfo Version { get; internal set; }
-
 	}
 }

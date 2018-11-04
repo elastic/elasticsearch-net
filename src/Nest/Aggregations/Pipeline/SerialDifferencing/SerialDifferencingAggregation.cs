@@ -12,20 +12,19 @@ namespace Nest
 
 	public class SerialDifferencingAggregation : PipelineAggregationBase, ISerialDifferencingAggregation
 	{
-		public int? Lag { get; set; }
-
 		internal SerialDifferencingAggregation() { }
 
 		public SerialDifferencingAggregation(string name, SingleBucketsPath bucketsPath)
-			: base(name, bucketsPath)
-		{ }
+			: base(name, bucketsPath) { }
+
+		public int? Lag { get; set; }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.SerialDifferencing = this;
 	}
 
 	public class SerialDifferencingAggregationDescriptor
 		: PipelineAggregationDescriptorBase<SerialDifferencingAggregationDescriptor, ISerialDifferencingAggregation, SingleBucketsPath>
-		, ISerialDifferencingAggregation
+			, ISerialDifferencingAggregation
 	{
 		int? ISerialDifferencingAggregation.Lag { get; set; }
 

@@ -2,12 +2,15 @@
 {
 	public class GeoPointAttribute : ElasticsearchDocValuesPropertyAttributeBase, IGeoPointProperty
 	{
-		private IGeoPointProperty Self => this;
-
 		public GeoPointAttribute() : base(FieldType.GeoPoint) { }
 
-		bool? IGeoPointProperty.IgnoreMalformed { get; set; }
+		public bool IgnoreMalformed
+		{
+			get => Self.IgnoreMalformed.GetValueOrDefault();
+			set => Self.IgnoreMalformed = value;
+		}
 
-		public bool IgnoreMalformed { get { return Self.IgnoreMalformed.GetValueOrDefault(); } set { Self.IgnoreMalformed = value; } }
+		bool? IGeoPointProperty.IgnoreMalformed { get; set; }
+		private IGeoPointProperty Self => this;
 	}
 }

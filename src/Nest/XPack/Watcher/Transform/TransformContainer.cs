@@ -7,20 +7,20 @@ namespace Nest
 	[JsonConverter(typeof(ReserializeJsonConverter<TransformContainer, ITransformContainer>))]
 	public interface ITransformContainer
 	{
-		[JsonProperty("search")]
-		ISearchTransform Search { get; set; }
+		[JsonProperty("chain")]
+		IChainTransform Chain { get; set; }
 
 		[JsonProperty("script")]
 		IScriptTransform Script { get; set; }
 
-		[JsonProperty("chain")]
-		IChainTransform Chain { get; set; }
+		[JsonProperty("search")]
+		ISearchTransform Search { get; set; }
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
 	public class TransformContainer : ITransformContainer, IDescriptor
 	{
-		internal TransformContainer() {}
+		internal TransformContainer() { }
 
 		public TransformContainer(TransformBase transform)
 		{
@@ -28,9 +28,10 @@ namespace Nest
 			transform.WrapInContainer(this);
 		}
 
-		ISearchTransform ITransformContainer.Search { get; set; }
-		IScriptTransform ITransformContainer.Script { get; set; }
 		IChainTransform ITransformContainer.Chain { get; set; }
+		IScriptTransform ITransformContainer.Script { get; set; }
+
+		ISearchTransform ITransformContainer.Search { get; set; }
 	}
 
 	public class TransformDescriptor : TransformContainer

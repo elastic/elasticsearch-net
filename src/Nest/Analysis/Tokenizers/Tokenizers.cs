@@ -10,16 +10,17 @@ namespace Nest
 
 	public class Tokenizers : IsADictionaryBase<string, ITokenizer>, ITokenizers
 	{
-		public Tokenizers() {}
+		public Tokenizers() { }
+
 		public Tokenizers(IDictionary<string, ITokenizer> container) : base(container) { }
+
 		public Tokenizers(Dictionary<string, ITokenizer> container)
-			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
-		{}
+			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value)) { }
 
 		public void Add(string name, ITokenizer analyzer) => BackingDictionary.Add(name, analyzer);
 	}
 
-	public class TokenizersDescriptor :IsADictionaryDescriptorBase<TokenizersDescriptor, ITokenizers, string, ITokenizer>
+	public class TokenizersDescriptor : IsADictionaryDescriptorBase<TokenizersDescriptor, ITokenizers, string, ITokenizer>
 	{
 		public TokenizersDescriptor() : base(new Tokenizers()) { }
 
@@ -45,7 +46,10 @@ namespace Nest
 
 		/// <summary>
 		/// A tokenizer of type letter that divides text at non-letters. That’s to say, it defines tokens as maximal strings of adjacent letters.
-		/// <para>Note, this does a decent job for most European languages, but does a terrible job for some Asian languages, where words are not separated by spaces.</para>
+		/// <para>
+		/// Note, this does a decent job for most European languages, but does a terrible job for some Asian languages, where words are not
+		/// separated by spaces.
+		/// </para>
 		/// </summary>
 		public TokenizersDescriptor Letter(string name, Func<LetterTokenizerDescriptor, ILetterTokenizer> selector) =>
 			Assign(name, selector?.Invoke(new LetterTokenizerDescriptor()));
@@ -60,13 +64,13 @@ namespace Nest
 			Assign(name, selector?.Invoke(new LowercaseTokenizerDescriptor()));
 
 		/// <summary>
-		/// The path_hierarchy tokenizer takes something like this:
-		///<para>/something/something/else</para>
-		///<para>And produces tokens:</para>
-		///<para></para>
-		///<para>/something</para>
-		///<para>/something/something</para>
-		///<para>/something/something/else</para>
+		///  The path_hierarchy tokenizer takes something like this:
+		/// <para>/something/something/else</para>
+		/// <para>And produces tokens:</para>
+		/// <para></para>
+		/// <para>/something</para>
+		/// <para>/something/something</para>
+		/// <para>/something/something/else</para>
 		/// </summary>
 		public TokenizersDescriptor PathHierarchy(string name, Func<PathHierarchyTokenizerDescriptor, IPathHierarchyTokenizer> selector) =>
 			Assign(name, selector?.Invoke(new PathHierarchyTokenizerDescriptor()));

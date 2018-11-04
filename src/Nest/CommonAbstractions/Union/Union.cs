@@ -6,12 +6,21 @@ namespace Nest
 	[JsonConverter(typeof(UnionJsonConverter))]
 	public class Union<TFirst, TSecond>
 	{
+		internal readonly int _tag;
 		internal readonly TFirst Item1;
 		internal readonly TSecond Item2;
-		internal readonly int _tag;
 
-		public Union(TFirst item) { Item1 = item; _tag = 0; }
-		public Union(TSecond item) { Item2 = item; _tag = 1; }
+		public Union(TFirst item)
+		{
+			Item1 = item;
+			_tag = 0;
+		}
+
+		public Union(TSecond item)
+		{
+			Item2 = item;
+			_tag = 1;
+		}
 
 		public void Match(Action<TFirst> first, Action<TSecond> second)
 		{
@@ -26,6 +35,7 @@ namespace Nest
 				default: throw new Exception($"Unrecognized tag value: {_tag}");
 			}
 		}
+
 		public T Match<T>(Func<TFirst, T> first, Func<TSecond, T> second)
 		{
 			switch (_tag)
@@ -37,6 +47,7 @@ namespace Nest
 		}
 
 		public static implicit operator Union<TFirst, TSecond>(TFirst first) => new Union<TFirst, TSecond>(first);
+
 		public static implicit operator Union<TFirst, TSecond>(TSecond second) => new Union<TFirst, TSecond>(second);
 	}
 }

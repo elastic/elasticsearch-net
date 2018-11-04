@@ -22,29 +22,29 @@ namespace Nest
 		}
 	}
 
-	public interface IGeographicDetector : IDetector, IByFieldNameDetector, IOverFieldNameDetector,
-		IPartitionFieldNameDetector, IFieldNameDetector
-	{
-	}
+	public interface IGeographicDetector
+		: IDetector, IByFieldNameDetector, IOverFieldNameDetector,
+			IPartitionFieldNameDetector, IFieldNameDetector { }
 
 	public class LatLongDetector : DetectorBase, IGeographicDetector
 	{
-		public LatLongDetector() : base(GeographicFunction.LatLong.GetStringValue()) {}
+		public LatLongDetector() : base(GeographicFunction.LatLong.GetStringValue()) { }
 
 		public Field ByFieldName { get; set; }
+		public Field FieldName { get; set; }
 		public Field OverFieldName { get; set; }
 		public Field PartitionFieldName { get; set; }
-		public Field FieldName { get; set; }
 	}
 
-	public class LatLongDetectorDescriptor<T> : DetectorDescriptorBase<LatLongDetectorDescriptor<T>, IGeographicDetector>, IGeographicDetector where T : class
+	public class LatLongDetectorDescriptor<T> : DetectorDescriptorBase<LatLongDetectorDescriptor<T>, IGeographicDetector>, IGeographicDetector
+		where T : class
 	{
+		public LatLongDetectorDescriptor(string function) : base(function) { }
+
 		Field IByFieldNameDetector.ByFieldName { get; set; }
+		Field IFieldNameDetector.FieldName { get; set; }
 		Field IOverFieldNameDetector.OverFieldName { get; set; }
 		Field IPartitionFieldNameDetector.PartitionFieldName { get; set; }
-		Field IFieldNameDetector.FieldName { get; set; }
-
-		public LatLongDetectorDescriptor(string function) : base(function) {}
 
 		public LatLongDetectorDescriptor<T> FieldName(Field fieldName) => Assign(a => a.FieldName = fieldName);
 
@@ -60,6 +60,7 @@ namespace Nest
 
 		public LatLongDetectorDescriptor<T> PartitionFieldName(Field partitionFieldName) => Assign(a => a.PartitionFieldName = partitionFieldName);
 
-		public LatLongDetectorDescriptor<T> PartitionFieldName(Expression<Func<T, object>> objectPath) => Assign(a => a.PartitionFieldName = objectPath);
+		public LatLongDetectorDescriptor<T> PartitionFieldName(Expression<Func<T, object>> objectPath) =>
+			Assign(a => a.PartitionFieldName = objectPath);
 	}
 }
