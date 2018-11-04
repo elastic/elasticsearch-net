@@ -13,10 +13,10 @@ namespace Tests.Ingest.PutPipeline
 			var id = "id";
 
 			await PUT($"/_ingest/pipeline/{id}")
-				.Fluent(c => c.PutPipeline(id, s=>s))
-				.Request(c => c.PutPipeline(new PutPipelineRequest(id)))
-				.FluentAsync(c => c.PutPipelineAsync(id, s=>s))
-				.RequestAsync(c => c.PutPipelineAsync(new PutPipelineRequest(id)))
+					.Fluent(c => c.PutPipeline(id, s => s))
+					.Request(c => c.PutPipeline(new PutPipelineRequest(id)))
+					.FluentAsync(c => c.PutPipelineAsync(id, s => s))
+					.RequestAsync(c => c.PutPipelineAsync(new PutPipelineRequest(id)))
 				;
 		}
 	}

@@ -4,9 +4,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.SignificantTerms
@@ -161,7 +159,7 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 						background_is_superset = true,
 						include_negatives = true
 					},
-					exclude = new[] {"pierce"}
+					exclude = new[] { "pierce" }
 				}
 			}
 		};
@@ -174,7 +172,7 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 					.BackgroundIsSuperSet()
 					.IncludeNegatives()
 				)
-				.Exclude(new[] {"pierce"})
+				.Exclude(new[] { "pierce" })
 			);
 
 		protected override AggregationDictionary InitializerAggs =>
@@ -187,7 +185,7 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 					BackgroundIsSuperSet = true,
 					IncludeNegatives = true
 				},
-				Exclude = new SignificantTermsIncludeExclude(new[] {"pierce"})
+				Exclude = new SignificantTermsIncludeExclude(new[] { "pierce" })
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)

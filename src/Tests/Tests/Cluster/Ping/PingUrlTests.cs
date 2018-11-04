@@ -8,14 +8,10 @@ namespace Tests.Cluster.Ping
 {
 	public class PingUrlTests : UrlTestsBase
 	{
-		[U] public override async Task Urls()
-		{
-			await HEAD("/")
-				.Fluent(c => c.Ping())
-				.Request(c => c.Ping(new PingRequest()))
-				.FluentAsync(c => c.PingAsync())
-				.RequestAsync(c => c.PingAsync(new PingRequest()))
-				;
-		}
+		[U] public override async Task Urls() => await HEAD("/")
+			.Fluent(c => c.Ping())
+			.Request(c => c.Ping(new PingRequest()))
+			.FluentAsync(c => c.PingAsync())
+			.RequestAsync(c => c.PingAsync(new PingRequest()));
 	}
 }

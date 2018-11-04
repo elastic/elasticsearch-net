@@ -6,25 +6,14 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Indices.Analyze
 {
 	public class AnalyzeApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IAnalyzeResponse, IAnalyzeRequest, AnalyzeDescriptor, AnalyzeRequest>
 	{
 		public AnalyzeApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Analyze(f),
-			fluentAsync: (client, f) => client.AnalyzeAsync(f),
-			request: (client, r) => client.Analyze(r),
-			requestAsync: (client, r) => client.AnalyzeAsync(r)
-		);
 
 		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/_analyze";
 
 		protected override object ExpectJson => new
 		{
@@ -34,11 +23,15 @@ namespace Tests.Indices.Analyze
 			filter = new[] { "lowercase", "stop" }
 		};
 
+		protected override int ExpectStatusCode => 200;
+
 		protected override Func<AnalyzeDescriptor, IAnalyzeRequest> Fluent => d => d
 			.Text("hello world", "domination")
 			.CharFilter("html_strip")
 			.Tokenizer("keyword")
 			.Filter("lowercase", "stop");
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected override AnalyzeRequest Initializer => new AnalyzeRequest
 		{
@@ -47,25 +40,25 @@ namespace Tests.Indices.Analyze
 			Tokenizer = "keyword",
 			Filter = new[] { "lowercase", "stop" }
 		};
+
+		protected override string UrlPath => $"/_analyze";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.Analyze(f),
+			(client, f) => client.AnalyzeAsync(f),
+			(client, r) => client.Analyze(r),
+			(client, r) => client.AnalyzeAsync(r)
+		);
 	}
 
-	public class AnalyzeInlineAnalyzerApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IAnalyzeResponse, IAnalyzeRequest, AnalyzeDescriptor, AnalyzeRequest>
+	public class AnalyzeInlineAnalyzerApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IAnalyzeResponse, IAnalyzeRequest, AnalyzeDescriptor, AnalyzeRequest>
 	{
 		protected const string TextToAnalyze = "F# is <b>THE SUPERIOR</b> language :) :gandalf: ";
 
 		public AnalyzeInlineAnalyzerApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Analyze(f),
-			fluentAsync: (client, f) => client.AnalyzeAsync(f),
-			request: (client, r) => client.Analyze(r),
-			requestAsync: (client, r) => client.AnalyzeAsync(r)
-		);
-
 		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/_analyze";
 
 		protected override object ExpectJson => new
 		{
@@ -83,6 +76,8 @@ namespace Tests.Indices.Analyze
 			}
 		};
 
+		protected override int ExpectStatusCode => 200;
+
 		protected override Func<AnalyzeDescriptor, IAnalyzeRequest> Fluent => d => d
 			.Text(TextToAnalyze)
 			.CharFilter(c => c
@@ -95,6 +90,8 @@ namespace Tests.Indices.Analyze
 			)
 			.Tokenizer(t => t.Standard(s => s.MaxTokenLength(7)));
 
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
 		protected override AnalyzeRequest Initializer => new AnalyzeRequest
 		{
 			Text = new[] { TextToAnalyze },
@@ -102,14 +99,23 @@ namespace Tests.Indices.Analyze
 			CharFilter = new AnalyzeCharFilters
 			{
 				"html_strip",
-				new MappingCharFilter { Mappings = new[] { "F# => fsharp"}}
+				new MappingCharFilter { Mappings = new[] { "F# => fsharp" } }
 			},
 			Filter = new AnalyzeTokenFilters
 			{
 				"lowercase",
-				new StopTokenFilter { StopWords = new [] {"_english_", "the" }}
+				new StopTokenFilter { StopWords = new[] { "_english_", "the" } }
 			}
 		};
+
+		protected override string UrlPath => $"/_analyze";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.Analyze(f),
+			(client, f) => client.AnalyzeAsync(f),
+			(client, r) => client.Analyze(r),
+			(client, r) => client.AnalyzeAsync(r)
+		);
 
 		protected override void ExpectResponse(IAnalyzeResponse response)
 		{
@@ -120,23 +126,14 @@ namespace Tests.Indices.Analyze
 		}
 	}
 
-	public class AnalyzeInlineNormalizerApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IAnalyzeResponse, IAnalyzeRequest, AnalyzeDescriptor, AnalyzeRequest>
+	public class AnalyzeInlineNormalizerApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IAnalyzeResponse, IAnalyzeRequest, AnalyzeDescriptor, AnalyzeRequest>
 	{
 		private const string TextToAnalyze = "F# is <b>THE SUPERIOR</b> language :) :gandalf: ";
 
 		public AnalyzeInlineNormalizerApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Analyze(f),
-			fluentAsync: (client, f) => client.AnalyzeAsync(f),
-			request: (client, r) => client.Analyze(r),
-			requestAsync: (client, r) => client.AnalyzeAsync(r)
-		);
-
 		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/_analyze";
 
 		protected override object ExpectJson => new
 		{
@@ -151,6 +148,8 @@ namespace Tests.Indices.Analyze
 			}
 		};
 
+		protected override int ExpectStatusCode => 200;
+
 		protected override Func<AnalyzeDescriptor, IAnalyzeRequest> Fluent => d => d
 			.Text(TextToAnalyze)
 			.CharFilter(c => c
@@ -160,18 +159,29 @@ namespace Tests.Indices.Analyze
 				.Name("lowercase")
 			);
 
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
 		protected override AnalyzeRequest Initializer => new AnalyzeRequest
 		{
 			Text = new[] { TextToAnalyze },
 			CharFilter = new AnalyzeCharFilters
 			{
-				new MappingCharFilter { Mappings = new[] { "F# => fsharp"}}
+				new MappingCharFilter { Mappings = new[] { "F# => fsharp" } }
 			},
 			Filter = new AnalyzeTokenFilters
 			{
 				"lowercase"
 			}
 		};
+
+		protected override string UrlPath => $"/_analyze";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.Analyze(f),
+			(client, f) => client.AnalyzeAsync(f),
+			(client, r) => client.Analyze(r),
+			(client, r) => client.AnalyzeAsync(r)
+		);
 
 		protected override void ExpectResponse(IAnalyzeResponse response)
 		{
@@ -236,10 +246,7 @@ namespace Tests.Indices.Analyze
 		private static void AssertTokenDetail(TokenDetail c)
 		{
 			c.Name.Should().NotBeNullOrWhiteSpace();
-			foreach (var t in c.Tokens)
-			{
-				t.Token.Should().NotBeNullOrWhiteSpace();
-			}
+			foreach (var t in c.Tokens) t.Token.Should().NotBeNullOrWhiteSpace();
 		}
 	}
 }

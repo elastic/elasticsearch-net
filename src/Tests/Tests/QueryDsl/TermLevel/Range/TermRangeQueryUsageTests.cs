@@ -2,13 +2,42 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.TermLevel.Range
 {
 	public class TermRangeQueryUsageTests : QueryDslUsageTestsBase
 	{
-		public TermRangeQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		public TermRangeQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ITermRangeQuery>(q => q.Range as ITermRangeQuery)
+		{
+			q => q.Field = null,
+			q =>
+			{
+				q.GreaterThan = null;
+				q.GreaterThanOrEqualTo = null;
+				q.LessThan = null;
+				q.LessThanOrEqualTo = null;
+			},
+			q =>
+			{
+				q.GreaterThan = string.Empty;
+				q.GreaterThanOrEqualTo = string.Empty;
+				q.LessThan = string.Empty;
+				q.LessThanOrEqualTo = string.Empty;
+			},
+		};
+
+		protected override QueryContainer QueryInitializer => new TermRangeQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Field = "description",
+			GreaterThan = "foo",
+			GreaterThanOrEqualTo = "foof",
+			LessThan = "bar",
+			LessThanOrEqualTo = "barb"
+		};
 
 		protected override object QueryJson => new
 		{
@@ -26,17 +55,6 @@ namespace Tests.QueryDsl.TermLevel.Range
 			}
 		};
 
-		protected override QueryContainer QueryInitializer => new TermRangeQuery
-		{
-			Name = "named_query",
-			Boost = 1.1,
-			Field = "description",
-			GreaterThan = "foo",
-			GreaterThanOrEqualTo = "foof",
-			LessThan = "bar",
-			LessThanOrEqualTo = "barb"
-		};
-
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.TermRange(c => c
 				.Name("named_query")
@@ -47,24 +65,5 @@ namespace Tests.QueryDsl.TermLevel.Range
 				.LessThan("bar")
 				.LessThanOrEquals("barb")
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ITermRangeQuery>(q => q.Range as ITermRangeQuery)
-		{
-			q=> q.Field = null,
-			q=>
-			{
-				q.GreaterThan = null;
-				q.GreaterThanOrEqualTo = null;
-				q.LessThan = null;
-				q.LessThanOrEqualTo = null;
-			},
-            q =>
-			{
-				q.GreaterThan = string.Empty;
-				q.GreaterThanOrEqualTo = string.Empty;
-				q.LessThan = string.Empty;
-				q.LessThanOrEqualTo = string.Empty;
-			},
-		};
 	}
 }

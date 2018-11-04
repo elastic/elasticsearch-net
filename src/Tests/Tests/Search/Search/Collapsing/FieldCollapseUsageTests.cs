@@ -13,8 +13,6 @@ namespace Tests.Search.Search.Collapsing
 {
 	public class FieldCollapseUsageTests : SearchUsageTestBase
 	{
-		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/doc/_search";
-
 		public FieldCollapseUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object ExpectJson => new
@@ -29,7 +27,6 @@ namespace Tests.Search.Search.Collapsing
 					name = "stateofbeing",
 					size = 5
 				}
-
 			}
 		};
 
@@ -60,6 +57,8 @@ namespace Tests.Search.Search.Collapsing
 			}
 		};
 
+		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/doc/_search";
+
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			var numberOfStates = Enum.GetValues(typeof(StateOfBeing)).Length;
@@ -78,20 +77,22 @@ namespace Tests.Search.Search.Collapsing
 	[SkipVersion("<6.4.0", "2nd level collapsing is a new feature in 6.4.0")]
 	public class FieldCollapseSecondLevelUsageTests : SearchUsageTestBase
 	{
-		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/doc/_search";
-
 		public FieldCollapseSecondLevelUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object ExpectJson => new
 		{
-			_source = new { excludes = new [] { "*" } },
-			collapse = new {
+			_source = new { excludes = new[] { "*" } },
+			collapse = new
+			{
 				field = "state",
-				inner_hits = new {
-					_source = new {
-						excludes = new [] { "*" }
+				inner_hits = new
+				{
+					_source = new
+					{
+						excludes = new[] { "*" }
 					},
-					collapse = new {
+					collapse = new
+					{
 						field = "name"
 					},
 					from = 1,
@@ -103,18 +104,18 @@ namespace Tests.Search.Search.Collapsing
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Source(source=>source.ExcludeAll())
+			.Source(source => source.ExcludeAll())
 			.Index(DefaultSeeder.ProjectsAliasFilter)
 			.Collapse(c => c
 				.Field(f => f.State)
 				.MaxConcurrentGroupSearches(1000)
 				.InnerHits(i => i
-					.Source(source=>source.ExcludeAll())
+					.Source(source => source.ExcludeAll())
 					.Name(nameof(StateOfBeing).ToLowerInvariant())
 					.Size(5)
 					.From(1)
 					.Collapse(c2 => c2
-						.Field(p=>p.Name)
+						.Field(p => p.Name)
 					)
 				)
 			);
@@ -134,11 +135,13 @@ namespace Tests.Search.Search.Collapsing
 					From = 1,
 					Collapse = new FieldCollapse
 					{
-						Field = Field<Project>(p=>p.Name)
+						Field = Field<Project>(p => p.Name)
 					}
 				}
 			}
 		};
+
+		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/doc/_search";
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
@@ -155,7 +158,8 @@ namespace Tests.Search.Search.Collapsing
 				foreach (var innerHit in innerHits.Hits.Hits)
 				{
 					i++;
-					innerHit.Fields.Should().NotBeEmpty()
+					innerHit.Fields.Should()
+						.NotBeEmpty()
 						.And.ContainKey("name");
 				}
 

@@ -1,112 +1,15 @@
-﻿using Nest;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Nest;
 using Tests.Framework;
 
 namespace Tests.Mapping.Scalar
 {
 	public class ScalarUsageTests : UsageTestBase<ITypeMapping, TypeMappingDescriptor<ScalarUsageTests.ScalarPoco>, TypeMapping>
 	{
-		protected override bool SupportsDeserialization => false;
-		protected override bool TestObjectInitializer => false;
-
-		public enum ScalarEnum { X }
-
-		public class ScalarPoco
+		public enum ScalarEnum
 		{
-			public int Int { get; set; }
-			public IEnumerable<int> Ints { get; set; }
-			public int? IntNullable { get; set; }
-			public IEnumerable<int?> IntNullables { get; set; }
-
-			public float Float { get; set; }
-			public IEnumerable<float> Floats { get; set; }
-			public float? FloatNullable { get; set; }
-			public IEnumerable<float?> FloatNullables { get; set; }
-
-			public double Double { get; set; }
-			public IEnumerable<double> Doubles { get; set; }
-			public double? DoubleNullable { get; set; }
-			public IEnumerable<double?> DoubleNullables { get; set; }
-
-			public sbyte SByte { get; set; }
-			public IEnumerable<sbyte> SBytes { get; set; }
-			public sbyte? SByteNullable { get; set; }
-			public IEnumerable<sbyte?> SByteNullables { get; set; }
-
-			public short Short { get; set; }
-			public IEnumerable<short> Shorts { get; set; }
-			public short? ShortNullable { get; set; }
-			public IEnumerable<short?> ShortNullables { get; set; }
-
-			public byte Byte { get; set; }
-			public IEnumerable<byte> Bytes { get; set; }
-			public byte? ByteNullable { get; set; }
-			public IEnumerable<byte?> ByteNullables { get; set; }
-
-			public long Long { get; set; }
-			public IEnumerable<long> Longs { get; set; }
-			public long? LongNullable { get; set; }
-			public IEnumerable<long?> LongNullables { get; set; }
-
-			public uint Uint { get; set; }
-			public IEnumerable<uint> Uints { get; set; }
-			public uint? UintNullable { get; set; }
-			public IEnumerable<uint?> UintNullables { get; set; }
-
-			public TimeSpan TimeSpan { get; set; }
-			public IEnumerable<TimeSpan> TimeSpans { get; set; }
-			public TimeSpan? TimeSpanNullable { get; set; }
-			public IEnumerable<TimeSpan?> TimeSpanNullables { get; set; }
-
-			public decimal Decimal { get; set; }
-			public IEnumerable<decimal> Decimals {get;set; }
-			public decimal? DecimalNullable { get; set; }
-			public IEnumerable<decimal?> DecimalNullables { get; set; }
-
-			public ulong Ulong { get; set; }
-			public IEnumerable<ulong> Ulongs { get; set; }
-			public ulong? UlongNullable { get; set; }
-			public IEnumerable<ulong?> UlongNullables { get; set; }
-
-			public DateTime DateTime { get; set; }
-			public IEnumerable<DateTime> DateTimes { get; set; }
-			public DateTime? DateTimeNullable { get; set; }
-			public IEnumerable<DateTime?> DateTimeNullables { get; set; }
-
-			public DateTimeOffset DateTimeOffset { get; set; }
-			public IEnumerable<DateTimeOffset> DateTimeOffsets { get; set; }
-			public DateTimeOffset? DateTimeOffsetNullable { get; set; }
-			public IEnumerable<DateTimeOffset?> DateTimeOffsetNullables { get; set; }
-
-			public bool Bool { get; set; }
-			public IEnumerable<bool> Bools { get; set; }
-			public bool? BoolNullable { get; set; }
-			public IEnumerable<bool?> BoolNullables { get; set; }
-
-			public char Char { get; set; }
-			public IEnumerable<char> Chars { get; set; }
-			public char? CharNullable { get; set; }
-			public IEnumerable<char?> CharNullables { get; set; }
-
-			public Guid Guid { get; set; }
-			public IEnumerable<Guid> Guids { get; set; }
-			public Guid? GuidNullable { get; set; }
-			public IEnumerable<Guid?> GuidNullables { get; set; }
-
-			public string String { get; set; }
-			public IEnumerable<string> Strings { get; set; }
-
-			public ScalarEnum Enum { get; set; }
-
-			public DateRange DateRange { get; set; }
-			public DoubleRange DoubleRange { get; set; }
-			public IntegerRange IntegerRange { get; set; }
-			public FloatRange FloatRange { get; set; }
-			public LongRange LongRange { get; set; }
+			X
 		}
 
 		protected override object ExpectJson => new
@@ -265,5 +168,100 @@ namespace Tests.Mapping.Scalar
 			);
 
 		protected override TypeMapping Initializer => null;
+		protected override bool SupportsDeserialization => false;
+		protected override bool TestObjectInitializer => false;
+
+		public class ScalarPoco
+		{
+			public bool Bool { get; set; }
+			public bool? BoolNullable { get; set; }
+			public IEnumerable<bool?> BoolNullables { get; set; }
+			public IEnumerable<bool> Bools { get; set; }
+
+			public byte Byte { get; set; }
+			public byte? ByteNullable { get; set; }
+			public IEnumerable<byte?> ByteNullables { get; set; }
+			public IEnumerable<byte> Bytes { get; set; }
+
+			public char Char { get; set; }
+			public char? CharNullable { get; set; }
+			public IEnumerable<char?> CharNullables { get; set; }
+			public IEnumerable<char> Chars { get; set; }
+
+			public DateRange DateRange { get; set; }
+
+			public DateTime DateTime { get; set; }
+			public DateTime? DateTimeNullable { get; set; }
+			public IEnumerable<DateTime?> DateTimeNullables { get; set; }
+
+			public DateTimeOffset DateTimeOffset { get; set; }
+			public DateTimeOffset? DateTimeOffsetNullable { get; set; }
+			public IEnumerable<DateTimeOffset?> DateTimeOffsetNullables { get; set; }
+			public IEnumerable<DateTimeOffset> DateTimeOffsets { get; set; }
+			public IEnumerable<DateTime> DateTimes { get; set; }
+
+			public decimal Decimal { get; set; }
+			public decimal? DecimalNullable { get; set; }
+			public IEnumerable<decimal?> DecimalNullables { get; set; }
+			public IEnumerable<decimal> Decimals { get; set; }
+
+			public double Double { get; set; }
+			public double? DoubleNullable { get; set; }
+			public IEnumerable<double?> DoubleNullables { get; set; }
+			public DoubleRange DoubleRange { get; set; }
+			public IEnumerable<double> Doubles { get; set; }
+
+			public ScalarEnum Enum { get; set; }
+
+			public float Float { get; set; }
+			public float? FloatNullable { get; set; }
+			public IEnumerable<float?> FloatNullables { get; set; }
+			public FloatRange FloatRange { get; set; }
+			public IEnumerable<float> Floats { get; set; }
+
+			public Guid Guid { get; set; }
+			public Guid? GuidNullable { get; set; }
+			public IEnumerable<Guid?> GuidNullables { get; set; }
+			public IEnumerable<Guid> Guids { get; set; }
+			public int Int { get; set; }
+			public IntegerRange IntegerRange { get; set; }
+			public int? IntNullable { get; set; }
+			public IEnumerable<int?> IntNullables { get; set; }
+			public IEnumerable<int> Ints { get; set; }
+
+			public long Long { get; set; }
+			public long? LongNullable { get; set; }
+			public IEnumerable<long?> LongNullables { get; set; }
+			public LongRange LongRange { get; set; }
+			public IEnumerable<long> Longs { get; set; }
+
+			public sbyte SByte { get; set; }
+			public sbyte? SByteNullable { get; set; }
+			public IEnumerable<sbyte?> SByteNullables { get; set; }
+			public IEnumerable<sbyte> SBytes { get; set; }
+
+			public short Short { get; set; }
+			public short? ShortNullable { get; set; }
+			public IEnumerable<short?> ShortNullables { get; set; }
+			public IEnumerable<short> Shorts { get; set; }
+
+			public string String { get; set; }
+			public IEnumerable<string> Strings { get; set; }
+
+			public TimeSpan TimeSpan { get; set; }
+			public TimeSpan? TimeSpanNullable { get; set; }
+			public IEnumerable<TimeSpan?> TimeSpanNullables { get; set; }
+			public IEnumerable<TimeSpan> TimeSpans { get; set; }
+
+			public uint Uint { get; set; }
+			public uint? UintNullable { get; set; }
+			public IEnumerable<uint?> UintNullables { get; set; }
+			public IEnumerable<uint> Uints { get; set; }
+
+			public ulong Ulong { get; set; }
+			public ulong? UlongNullable { get; set; }
+			public IEnumerable<ulong?> UlongNullables { get; set; }
+			public IEnumerable<ulong> Ulongs { get; set; }
+		}
 	}
 }

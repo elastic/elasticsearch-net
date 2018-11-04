@@ -12,11 +12,20 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.ForecastJob
 {
 	[SkipVersion("<6.1.0", "Only exists in Elasticsearch 6.1.0+")]
-	public class ForecastJobApiTests : MachineLearningIntegrationTestBase<IForecastJobResponse, IForecastJobRequest, ForecastJobDescriptor, ForecastJobRequest>
+	public class ForecastJobApiTests
+		: MachineLearningIntegrationTestBase<IForecastJobResponse, IForecastJobRequest, ForecastJobDescriptor, ForecastJobRequest>
 	{
 		private const int BucketSpanSeconds = 3600;
 
 		public ForecastJobApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+		protected override object ExpectJson => null;
+		protected override int ExpectStatusCode => 200;
+		protected override Func<ForecastJobDescriptor, IForecastJobRequest> Fluent => f => f;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override ForecastJobRequest Initializer => new ForecastJobRequest(CallIsolatedValue);
+		protected override string UrlPath => $"/_xpack/ml/anomaly_detectors/{CallIsolatedValue}/_forecast";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -48,7 +57,7 @@ namespace Tests.XPack.MachineLearning.ForecastJob
 				var data = new List<object>(50);
 				while (timestamp < now)
 				{
-					data.AddRange(new []
+					data.AddRange(new[]
 					{
 						new { time = timestamp, value = 10d },
 						new { time = timestamp, value = 30d }
@@ -74,21 +83,13 @@ namespace Tests.XPack.MachineLearning.ForecastJob
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.ForecastJob(CallIsolatedValue, f),
-			fluentAsync: (client, f) => client.ForecastJobAsync(CallIsolatedValue, f),
-			request: (client, r) => client.ForecastJob(r),
-			requestAsync: (client, r) => client.ForecastJobAsync(r)
+			(client, f) => client.ForecastJob(CallIsolatedValue, f),
+			(client, f) => client.ForecastJobAsync(CallIsolatedValue, f),
+			(client, r) => client.ForecastJob(r),
+			(client, r) => client.ForecastJobAsync(r)
 		);
 
 		protected override ForecastJobDescriptor NewDescriptor() => new ForecastJobDescriptor(CallIsolatedValue);
-
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/_xpack/ml/anomaly_detectors/{CallIsolatedValue}/_forecast";
-		protected override object ExpectJson => null;
-		protected override Func<ForecastJobDescriptor, IForecastJobRequest> Fluent => f => f;
-		protected override ForecastJobRequest Initializer => new ForecastJobRequest(CallIsolatedValue);
 
 		protected override void ExpectResponse(IForecastJobResponse response)
 		{

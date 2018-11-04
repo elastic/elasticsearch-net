@@ -1,11 +1,9 @@
-using System.Collections.Generic;
 using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.TermLevel.TermsSet
 {
@@ -24,7 +22,29 @@ namespace Tests.QueryDsl.TermLevel.TermsSet
 	[SkipVersion("<6.1.0", "terms set query was added in 6.1.0")]
 	public class TermsSetQueryUsageTests : QueryDslUsageTestsBase
 	{
-		public TermsSetQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		public TermsSetQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ITermsSetQuery>(a => a.TermsSet)
+		{
+			q => q.Field = null,
+			q => q.Terms = null,
+			q => q.Terms = Enumerable.Empty<object>(),
+			q => q.Terms = new[] { "" },
+			q =>
+			{
+				q.MinimumShouldMatchField = null;
+				q.MinimumShouldMatchScript = null;
+			}
+		};
+
+		protected override QueryContainer QueryInitializer => new TermsSetQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Field = Infer.Field<Project>(p => p.Branches),
+			Terms = new[] { "master", "dev" },
+			MinimumShouldMatchField = Infer.Field<Project>(p => p.RequiredBranches)
+		};
 
 		protected override object QueryJson => new
 		{
@@ -34,19 +54,10 @@ namespace Tests.QueryDsl.TermLevel.TermsSet
 				{
 					_name = "named_query",
 					boost = 1.1,
-					terms = new [] { "master", "dev" },
+					terms = new[] { "master", "dev" },
 					minimum_should_match_field = "requiredBranches"
 				}
 			}
-		};
-
-		protected override QueryContainer QueryInitializer => new TermsSetQuery
-		{
-			Name = "named_query",
-			Boost = 1.1,
-			Field = Infer.Field<Project>(p => p.Branches),
-			Terms = new [] { "master", "dev" },
-			MinimumShouldMatchField = Infer.Field<Project>(p => p.RequiredBranches)
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -57,19 +68,6 @@ namespace Tests.QueryDsl.TermLevel.TermsSet
 				.Terms("master", "dev")
 				.MinimumShouldMatchField(p => p.RequiredBranches)
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ITermsSetQuery>(a => a.TermsSet)
-		{
-			q => q.Field = null,
-			q => q.Terms = null,
-			q => q.Terms = Enumerable.Empty<object>(),
-			q => q.Terms = new [] { "" },
-			q =>
-			{
-				q.MinimumShouldMatchField = null;
-				q.MinimumShouldMatchScript = null;
-			}
-		};
 	}
 
 	/**[float]
@@ -83,7 +81,16 @@ namespace Tests.QueryDsl.TermLevel.TermsSet
 	[SkipVersion("<6.1.0", "terms set query was added in 6.1.0")]
 	public class TermsSetScriptQueryUsageTests : QueryDslUsageTestsBase
 	{
-		public TermsSetScriptQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		public TermsSetScriptQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override QueryContainer QueryInitializer => new TermsSetQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Field = Infer.Field<Project>(p => p.Branches),
+			Terms = new[] { "master", "dev" },
+			MinimumShouldMatchScript = new InlineScript("Math.min(params.num_terms, doc['requiredBranches'].value)")
+		};
 
 		protected override object QueryJson => new
 		{
@@ -93,22 +100,13 @@ namespace Tests.QueryDsl.TermLevel.TermsSet
 				{
 					_name = "named_query",
 					boost = 1.1,
-					terms = new [] { "master", "dev" },
+					terms = new[] { "master", "dev" },
 					minimum_should_match_script = new
 					{
 						source = "Math.min(params.num_terms, doc['requiredBranches'].value)"
 					}
 				}
 			}
-		};
-
-		protected override QueryContainer QueryInitializer => new TermsSetQuery
-		{
-			Name = "named_query",
-			Boost = 1.1,
-			Field = Infer.Field<Project>(p => p.Branches),
-			Terms = new [] { "master", "dev" },
-			MinimumShouldMatchScript = new InlineScript("Math.min(params.num_terms, doc['requiredBranches'].value)")
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q

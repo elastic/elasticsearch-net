@@ -4,9 +4,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.Percentiles
@@ -22,7 +20,7 @@ namespace Tests.Aggregations.Metric.Percentiles
 				percentiles = new
 				{
 					field = "numberOfCommits",
-					percents = new[] {95.0, 99.0, 99.9},
+					percents = new[] { 95.0, 99.0, 99.9 },
 					hdr = new
 					{
 						number_of_significant_value_digits = 3
@@ -52,7 +50,7 @@ namespace Tests.Aggregations.Metric.Percentiles
 		protected override AggregationDictionary InitializerAggs =>
 			new PercentilesAggregation("commits_outlier", Field<Project>(p => p.NumberOfCommits))
 			{
-				Percents = new[] {95, 99, 99.9},
+				Percents = new[] { 95, 99, 99.9 },
 				Method = new HDRHistogramMethod
 				{
 					NumberOfSignificantValueDigits = 3

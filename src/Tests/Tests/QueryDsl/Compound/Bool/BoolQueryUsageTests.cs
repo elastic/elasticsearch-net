@@ -1,13 +1,11 @@
-﻿using System.Linq;
-using Nest;
-using Tests.Framework.Integration;
-using System;
+﻿using System;
+using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
-using Tests.Framework;
 using FluentAssertions;
+using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.Integration;
 
 namespace Tests.QueryDsl.Compound.Bool
 {
@@ -38,6 +36,76 @@ namespace Tests.QueryDsl.Compound.Bool
 	{
 		public BoolQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
+		// hide
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IBoolQuery>(a => a.Bool)
+		{
+			q =>
+			{
+				q.MustNot = null;
+				q.Should = null;
+				q.Must = null;
+				q.Filter = null;
+			},
+			q =>
+			{
+				q.MustNot = Enumerable.Empty<QueryContainer>();
+				q.Should = Enumerable.Empty<QueryContainer>();
+				q.Must = Enumerable.Empty<QueryContainer>();
+				q.Filter = Enumerable.Empty<QueryContainer>();
+			},
+			q =>
+			{
+				q.MustNot = new[] { ConditionlessQuery };
+				q.Should = new[] { ConditionlessQuery };
+				q.Must = new[] { ConditionlessQuery };
+				q.Filter = new[] { ConditionlessQuery };
+			},
+		};
+
+		// hide
+		protected override NotConditionlessWhen NotConditionlessWhen => new NotConditionlessWhen<IBoolQuery>(a => a.Bool)
+		{
+			q =>
+			{
+				q.MustNot = new[] { VerbatimQuery };
+				q.Should = null;
+				q.Must = null;
+				q.Filter = null;
+			},
+			q =>
+			{
+				q.MustNot = null;
+				q.Should = new[] { VerbatimQuery };
+				q.Must = null;
+				q.Filter = null;
+			},
+			q =>
+			{
+				q.MustNot = null;
+				q.Should = null;
+				q.Must = new[] { VerbatimQuery };
+				q.Filter = null;
+			},
+			q =>
+			{
+				q.MustNot = null;
+				q.Should = null;
+				q.Must = null;
+				q.Filter = new[] { VerbatimQuery };
+			},
+		};
+
+		protected override QueryContainer QueryInitializer =>
+			new BoolQuery
+			{
+				MustNot = new QueryContainer[] { new MatchAllQuery() },
+				Should = new QueryContainer[] { new MatchAllQuery() },
+				Must = new QueryContainer[] { new MatchAllQuery() },
+				Filter = new QueryContainer[] { new MatchAllQuery() },
+				MinimumShouldMatch = 1,
+				Boost = 2
+			};
+
 		protected override object QueryJson => new
 		{
 			@bool = new
@@ -63,17 +131,6 @@ namespace Tests.QueryDsl.Compound.Bool
 			}
 		};
 
-		protected override QueryContainer QueryInitializer =>
-			new BoolQuery
-			{
-				MustNot = new QueryContainer[] { new MatchAllQuery() },
-				Should = new QueryContainer[] { new MatchAllQuery() },
-				Must = new QueryContainer[] { new MatchAllQuery() },
-				Filter = new QueryContainer[] { new MatchAllQuery() },
-				MinimumShouldMatch = 1,
-				Boost = 2
-			};
-
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.Bool(b => b
 				.MustNot(m => m.MatchAll())
@@ -84,70 +141,18 @@ namespace Tests.QueryDsl.Compound.Bool
 				.Boost(2));
 
 		// hide
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IBoolQuery>(a => a.Bool)
-		{
-			q=> {
-				q.MustNot = null;
-				q.Should = null;
-				q.Must = null;
-				q.Filter = null;
-			},
-			q => {
-				q.MustNot = Enumerable.Empty<QueryContainer>();
-				q.Should = Enumerable.Empty<QueryContainer>();
-				q.Must = Enumerable.Empty<QueryContainer>();
-				q.Filter = Enumerable.Empty<QueryContainer>();
-			},
-			q => {
-				q.MustNot = new [] { ConditionlessQuery };
-				q.Should = new [] { ConditionlessQuery };
-				q.Must = new [] { ConditionlessQuery };
-				q.Filter = new [] { ConditionlessQuery };
-			},
-		};
-
-		// hide
-		protected override NotConditionlessWhen NotConditionlessWhen => new NotConditionlessWhen<IBoolQuery>(a => a.Bool)
-		{
-			q => {
-				q.MustNot = new [] { VerbatimQuery };
-				q.Should = null;
-				q.Must = null;
-				q.Filter = null;
-			},
-			q => {
-				q.MustNot = null;
-				q.Should = new [] { VerbatimQuery };
-				q.Must = null;
-				q.Filter = null;
-			},
-			q => {
-				q.MustNot = null;
-				q.Should = null;
-				q.Must = new [] { VerbatimQuery };
-				q.Filter = null;
-			},
-			q => {
-				q.MustNot = null;
-				q.Should = null;
-				q.Must = null;
-				q.Filter = new [] { VerbatimQuery };
-			},
-		};
-
-		// hide
 		[U]
 		public void NullQueryDoesNotCauseANullReferenceException()
 		{
-			Action query = () => this.Client.Search<Project>(s => s
-					.Query(q => q
-						.Bool(b => b
-							.Filter(f => f
-								.Term(t => t.Name, null)
-							)
+			Action query = () => Client.Search<Project>(s => s
+				.Query(q => q
+					.Bool(b => b
+						.Filter(f => f
+							.Term(t => t.Name, null)
 						)
 					)
-				);
+				)
+			);
 
 			query.ShouldNotThrow();
 		}

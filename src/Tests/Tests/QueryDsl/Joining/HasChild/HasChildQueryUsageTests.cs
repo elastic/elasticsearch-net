@@ -2,13 +2,31 @@
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.Joining.HasChild
 {
 	public class HasChildUsageTests : QueryDslUsageTestsBase
 	{
 		public HasChildUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IHasChildQuery>(a => a.HasChild)
+		{
+			q => q.Query = null,
+			q => q.Query = ConditionlessQuery,
+			q => q.Type = null,
+		};
+
+		protected override QueryContainer QueryInitializer => new HasChildQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Type = Infer.Type<Developer>(),
+			InnerHits = new InnerHits { Explain = true },
+			MaxChildren = 5,
+			MinChildren = 1,
+			Query = new MatchAllQuery(),
+			ScoreMode = ChildScoreMode.Average
+		};
 
 		protected override object QueryJson => new
 		{
@@ -25,34 +43,15 @@ namespace Tests.QueryDsl.Joining.HasChild
 			}
 		};
 
-		protected override QueryContainer QueryInitializer => new HasChildQuery
-		{
-			Name = "named_query",
-			Boost = 1.1,
-			Type = Infer.Type<Developer>(),
-			InnerHits = new InnerHits { Explain = true },
-			MaxChildren = 5,
-			MinChildren = 1,
-			Query = new MatchAllQuery(),
-			ScoreMode = ChildScoreMode.Average
-		};
-
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.HasChild<Developer>(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.InnerHits(i=>i.Explain())
+				.InnerHits(i => i.Explain())
 				.MaxChildren(5)
 				.MinChildren(1)
 				.ScoreMode(ChildScoreMode.Average)
-				.Query(qq=>qq.MatchAll())
+				.Query(qq => qq.MatchAll())
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IHasChildQuery>(a => a.HasChild)
-		{
-			q =>  q.Query = null,
-			q =>  q.Query = ConditionlessQuery,
-			q =>  q.Type = null,
-		};
 	}
 }

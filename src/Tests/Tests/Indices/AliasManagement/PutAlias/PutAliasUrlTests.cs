@@ -13,12 +13,11 @@ namespace Tests.Indices.AliasManagement.PutAlias
 			var hardcoded = "hardcoded";
 			var index = "index";
 			await PUT($"/{index}/_alias/{hardcoded}")
-				.Fluent(c=>c.PutAlias(index, hardcoded))
-				.Request(c=>c.PutAlias(new PutAliasRequest(index, hardcoded)))
-				.FluentAsync(c=>c.PutAliasAsync(index, hardcoded))
-				.RequestAsync(c=>c.PutAliasAsync(new PutAliasRequest(index, hardcoded)))
+					.Fluent(c => c.PutAlias(index, hardcoded))
+					.Request(c => c.PutAlias(new PutAliasRequest(index, hardcoded)))
+					.FluentAsync(c => c.PutAliasAsync(index, hardcoded))
+					.RequestAsync(c => c.PutAliasAsync(new PutAliasRequest(index, hardcoded)))
 				;
-
 		}
 	}
 }

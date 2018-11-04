@@ -3,7 +3,6 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Aggregations.Bucket.Children
 {
@@ -21,20 +20,20 @@ namespace Tests.Aggregations.Bucket.Children
 		{
 			name_of_child_agg = new
 			{
-				children = new {type = "commits"},
+				children = new { type = "commits" },
 				aggs = new
 				{
 					average_per_child = new
 					{
-						avg = new {field = "confidenceFactor"}
+						avg = new { field = "confidenceFactor" }
 					},
 					max_per_child = new
 					{
-						max = new {field = "confidenceFactor"}
+						max = new { field = "confidenceFactor" }
 					},
 					min_per_child = new
 					{
-						min = new {field = "confidenceFactor"}
+						min = new { field = "confidenceFactor" }
 					}
 				}
 			}

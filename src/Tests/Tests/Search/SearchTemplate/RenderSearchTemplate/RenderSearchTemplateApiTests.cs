@@ -8,28 +8,14 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Search.SearchTemplate.RenderSearchTemplate
 {
-	public class RenderSearchTemplateApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IRenderSearchTemplateResponse, IRenderSearchTemplateRequest, RenderSearchTemplateDescriptor, RenderSearchTemplateRequest>
+	public class RenderSearchTemplateApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IRenderSearchTemplateResponse, IRenderSearchTemplateRequest, RenderSearchTemplateDescriptor,
+			RenderSearchTemplateRequest>
 	{
-		public RenderSearchTemplateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.RenderSearchTemplate(f),
-			fluentAsync: (c, f) => c.RenderSearchTemplateAsync(f),
-			request: (c, r) => c.RenderSearchTemplate(r),
-			requestAsync: (c, r) => c.RenderSearchTemplateAsync(r)
-		);
-
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/_render/template";
-		protected override int ExpectStatusCode => 200;
-		protected override bool ExpectIsValid => true;
-
-		private static string inlineSearchTemplate = @"
+		private static readonly string inlineSearchTemplate = @"
 {
 	""query"": {
 	  ""terms"": {
@@ -41,13 +27,21 @@ namespace Tests.Search.SearchTemplate.RenderSearchTemplate
 	  }
 	}
   }";
-		private string[] statusValues = new[] { "pending", "published" };
 
-		protected override Func<RenderSearchTemplateDescriptor, IRenderSearchTemplateRequest> Fluent => s=>s
+		private readonly string[] statusValues = new[] { "pending", "published" };
+
+		public RenderSearchTemplateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+
+		protected override Func<RenderSearchTemplateDescriptor, IRenderSearchTemplateRequest> Fluent => s => s
 			.Source(inlineSearchTemplate)
-			.Params(p=>p
+			.Params(p => p
 				.Add("status", statusValues)
 			);
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 
 		protected override RenderSearchTemplateRequest Initializer => new RenderSearchTemplateRequest
@@ -59,7 +53,16 @@ namespace Tests.Search.SearchTemplate.RenderSearchTemplate
 			}
 		};
 
-		[I] public Task AssertResponse() => this.AssertOnAllResponses(r =>
+		protected override string UrlPath => $"/_render/template";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(c, f) => c.RenderSearchTemplate(f),
+			(c, f) => c.RenderSearchTemplateAsync(f),
+			(c, r) => c.RenderSearchTemplate(r),
+			(c, r) => c.RenderSearchTemplateAsync(r)
+		);
+
+		[I] public Task AssertResponse() => AssertOnAllResponses(r =>
 		{
 			r.TemplateOutput.Should().NotBeNull();
 			var searchRequest = r.TemplateOutput.As<ISearchRequest>();

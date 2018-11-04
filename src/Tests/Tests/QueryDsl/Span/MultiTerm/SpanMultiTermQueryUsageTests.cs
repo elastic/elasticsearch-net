@@ -2,13 +2,25 @@
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.Joining.SpanMultiTerm
 {
 	public class SpanMultiTermUsageTests : QueryDslUsageTestsBase
 	{
 		public SpanMultiTermUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISpanMultiTermQuery>(a => a.SpanMultiTerm)
+		{
+			q => q.Match = null,
+			q => q.Match = ConditionlessQuery,
+		};
+
+		protected override QueryContainer QueryInitializer => new SpanMultiTermQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Match = new PrefixQuery { Field = "name", Value = "pre-*" }
+		};
 
 		protected override object QueryJson => new
 		{
@@ -23,26 +35,13 @@ namespace Tests.QueryDsl.Joining.SpanMultiTerm
 			}
 		};
 
-		protected override QueryContainer QueryInitializer => new SpanMultiTermQuery
-		{
-			Name = "named_query",
-			Boost = 1.1,
-			Match = new PrefixQuery { Field = "name", Value = "pre-*" }
-		};
-
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.SpanMultiTerm(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Match(sq=>sq
-					.Prefix(pr=>pr.Field(p=>p.Name).Value("pre-*"))
+				.Match(sq => sq
+					.Prefix(pr => pr.Field(p => p.Name).Value("pre-*"))
 				)
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISpanMultiTermQuery>(a => a.SpanMultiTerm)
-		{
-			q => q.Match = null,
-			q => q.Match = ConditionlessQuery,
-		};
 	}
 }

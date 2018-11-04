@@ -5,26 +5,26 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Cat.CatTemplates
 {
 	[SkipVersion("<5.1.0", "CatTemplates is an API introduced in 5.1")]
-	public class CatTemplatesApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatTemplatesRecord>, ICatTemplatesRequest, CatTemplatesDescriptor, CatTemplatesRequest>
+	public class CatTemplatesApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatTemplatesRecord>, ICatTemplatesRequest, CatTemplatesDescriptor, CatTemplatesRequest>
 	{
 		public CatTemplatesApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.CatTemplates(),
-			fluentAsync: (client, f) => client.CatTemplatesAsync(),
-			request: (client, r) => client.CatTemplates(r),
-			requestAsync: (client, r) => client.CatTemplatesAsync(r)
-		);
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cat/templates";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.CatTemplates(),
+			(client, f) => client.CatTemplatesAsync(),
+			(client, r) => client.CatTemplates(r),
+			(client, r) => client.CatTemplatesAsync(r)
+		);
 
 		protected override void ExpectResponse(ICatResponse<CatTemplatesRecord> response)
 		{
@@ -33,5 +33,4 @@ namespace Tests.Cat.CatTemplates
 #pragma warning restore CS0618 // Type or member is obsolete
 		}
 	}
-
 }

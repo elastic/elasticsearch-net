@@ -1,11 +1,8 @@
 ﻿using System;
-using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Mapping.Types.Core.GeoPoint
 {
@@ -27,15 +24,16 @@ namespace Tests.Mapping.Types.Core.GeoPoint
 
 
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
-				.GeoPoint(s => s
-					.Name(p => p.Location)
-					.IgnoreMalformed()
-				);
+			.GeoPoint(s => s
+				.Name(p => p.Location)
+				.IgnoreMalformed()
+			);
 
 
 		protected override IProperties InitializerProperties => new Properties
 		{
-			{ "location", new GeoPointProperty
+			{
+				"location", new GeoPointProperty
 				{
 					IgnoreMalformed = true
 				}

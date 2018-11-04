@@ -11,36 +11,37 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.Indices.MappingManagement.GetMapping
 {
-	public class GetMappingApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetMappingResponse, IGetMappingRequest, GetMappingDescriptor<Project>,
-		GetMappingRequest>
+	public class GetMappingApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IGetMappingResponse, IGetMappingRequest, GetMappingDescriptor<Project>,
+			GetMappingRequest>
 	{
 		public GetMappingApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => this.Calls(
-			fluent: (client, f) => client.GetMapping<Project>(f),
-			fluentAsync: (client, f) => client.GetMappingAsync<Project>(f),
-			request: (client, r) => client.GetMapping(r),
-			requestAsync: (client, r) => client.GetMappingAsync(r)
-		);
-
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => "/project/_mapping/doc?ignore_unavailable=true";
 
 		protected override Func<GetMappingDescriptor<Project>, IGetMappingRequest> Fluent => d => d
 			.IgnoreUnavailable();
+
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
 		protected override GetMappingRequest Initializer => new GetMappingRequest(Index<Project>(), Type<Project>())
 		{
 			IgnoreUnavailable = true
 		};
+
+		protected override string UrlPath => "/project/_mapping/doc?ignore_unavailable=true";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.GetMapping<Project>(f),
+			(client, f) => client.GetMappingAsync<Project>(f),
+			(client, r) => client.GetMapping(r),
+			(client, r) => client.GetMappingAsync(r)
+		);
 
 		protected override void ExpectResponse(IGetMappingResponse response)
 		{
@@ -77,10 +78,8 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			response.GetMappingFor("dev", "dev").Should().BeNull();
 			response.GetMappingFor(typeof(Project), "x").Should().BeNull();
 			response.GetMappingFor("dev").Should().BeNull();
-
-
-
 		}
+
 		//hide
 		private static void AssertVisitedProperies(IGetMappingResponse response)
 		{
@@ -107,30 +106,32 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		}
 	}
 
-	public class GetMappingNonExistentIndexApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetMappingResponse, IGetMappingRequest,
-		GetMappingDescriptor<Project>, GetMappingRequest>
+	public class GetMappingNonExistentIndexApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IGetMappingResponse, IGetMappingRequest,
+			GetMappingDescriptor<Project>, GetMappingRequest>
 	{
-		private string _nonExistentIndex = "non-existent-index";
+		private readonly string _nonExistentIndex = "non-existent-index";
 
 		public GetMappingNonExistentIndexApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => this.Calls(
-			fluent: (client, f) => client.GetMapping<Project>(f),
-			fluentAsync: (client, f) => client.GetMappingAsync<Project>(f),
-			request: (client, r) => client.GetMapping(r),
-			requestAsync: (client, r) => client.GetMappingAsync(r)
-		);
-
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/{_nonExistentIndex}/_mapping";
 
 		protected override Func<GetMappingDescriptor<Project>, IGetMappingRequest> Fluent => d => d
 			.Index(_nonExistentIndex)
 			.AllTypes();
 
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+
 		protected override GetMappingRequest Initializer => new GetMappingRequest(_nonExistentIndex, AllTypes);
+		protected override string UrlPath => $"/{_nonExistentIndex}/_mapping";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.GetMapping<Project>(f),
+			(client, f) => client.GetMappingAsync<Project>(f),
+			(client, r) => client.GetMapping(r),
+			(client, r) => client.GetMappingAsync(r)
+		);
 
 		protected override void ExpectResponse(IGetMappingResponse response)
 		{
@@ -141,75 +142,72 @@ namespace Tests.Indices.MappingManagement.GetMapping
 
 	internal class TestVisitor : IMappingVisitor
 	{
-		public TestVisitor() => this.Counts = new Dictionary<string, int>();
-
-		public int Depth { get; set; }
+		public TestVisitor() => Counts = new Dictionary<string, int>();
 
 		public Dictionary<string, int> Counts { get; }
 
+		public int Depth { get; set; }
+
+		public void Visit(IDateProperty mapping) => Increment("date");
+
+		public void Visit(IBinaryProperty mapping) => Increment("binary");
+
+		public void Visit(INestedProperty mapping) => Increment("nested");
+
+		public void Visit(IGeoPointProperty mapping) => Increment("geo_point");
+
+		public void Visit(ICompletionProperty mapping) => Increment("completion");
+
+		public void Visit(ITokenCountProperty mapping) => Increment("token_count");
+
+		public void Visit(IPercolatorProperty property) => Increment("percolator");
+
+		public void Visit(IIntegerRangeProperty property) => Increment("integer_range");
+
+		public void Visit(IFloatRangeProperty property) => Increment("float_range");
+
+		public void Visit(ILongRangeProperty property) => Increment("long_range");
+
+		public void Visit(IDoubleRangeProperty property) => Increment("double_range");
+
+		public void Visit(IDateRangeProperty property) => Increment("date_range");
+
+		public void Visit(IIpRangeProperty property) => Increment("ip_range");
+
+		public void Visit(IJoinProperty property) => Increment("join");
+
+		public void Visit(IMurmur3HashProperty mapping) => Increment("murmur3");
+
+		public void Visit(INumberProperty mapping) => Increment("number");
+
+		public void Visit(IGeoShapeProperty mapping) => Increment("geo_shape");
+
+		public void Visit(IIpProperty mapping) => Increment("ip");
+
+		public void Visit(IObjectProperty mapping) => Increment("object");
+
+		public void Visit(IBooleanProperty mapping) => Increment("boolean");
+
+		public void Visit(ITextProperty mapping) => Increment("text");
+
+		public void Visit(IKeywordProperty mapping) => Increment("keyword");
+
+		public void Visit(ITypeMapping mapping) => Increment("type");
+
 		private void Increment(string key)
 		{
-			if (!this.Counts.ContainsKey(key))
-			{
-				this.Counts.Add(key, 0);
-			}
+			if (!Counts.ContainsKey(key)) Counts.Add(key, 0);
 
-			this.Counts[key] += 1;
+			Counts[key] += 1;
 		}
 
 		public void CountsShouldContainKeyAndCountBe(string key, int count)
 		{
-			this.Counts.ContainsKey(key).Should().BeTrue($"did not see {key}");
+			Counts.ContainsKey(key).Should().BeTrue($"did not see {key}");
 			var sb = new StringBuilder()
 				.AppendLine($"because there should be {count} {key} properties");
-			var because = this.Counts.Aggregate(sb, (s, kv) => s.AppendLine($"{kv.Key} = {kv.Value}"), s=>s.ToString());
-			this.Counts[key].Should().Be(count, because);
+			var because = Counts.Aggregate(sb, (s, kv) => s.AppendLine($"{kv.Key} = {kv.Value}"), s => s.ToString());
+			Counts[key].Should().Be(count, because);
 		}
-
-		public void Visit(IDateProperty mapping) => this.Increment("date");
-
-		public void Visit(IBinaryProperty mapping) => this.Increment("binary");
-
-		public void Visit(INestedProperty mapping) => this.Increment("nested");
-
-		public void Visit(IGeoPointProperty mapping) => this.Increment("geo_point");
-
-		public void Visit(ICompletionProperty mapping) => this.Increment("completion");
-
-		public void Visit(ITokenCountProperty mapping) => this.Increment("token_count");
-
-		public void Visit(IPercolatorProperty property) => this.Increment("percolator");
-
-		public void Visit(IIntegerRangeProperty property) => this.Increment("integer_range");
-
-		public void Visit(IFloatRangeProperty property) => this.Increment("float_range");
-
-		public void Visit(ILongRangeProperty property) => this.Increment("long_range");
-
-		public void Visit(IDoubleRangeProperty property) => this.Increment("double_range");
-
-		public void Visit(IDateRangeProperty property) => this.Increment("date_range");
-
-		public void Visit(IIpRangeProperty property) => this.Increment("ip_range");
-
-		public void Visit(IJoinProperty property) => this.Increment("join");
-
-		public void Visit(IMurmur3HashProperty mapping) => this.Increment("murmur3");
-
-		public void Visit(INumberProperty mapping) => this.Increment("number");
-
-		public void Visit(IGeoShapeProperty mapping) => this.Increment("geo_shape");
-
-		public void Visit(IIpProperty mapping) => this.Increment("ip");
-
-		public void Visit(IObjectProperty mapping) => this.Increment("object");
-
-		public void Visit(IBooleanProperty mapping) => this.Increment("boolean");
-
-		public void Visit(ITextProperty mapping) => this.Increment("text");
-
-		public void Visit(IKeywordProperty mapping) => this.Increment("keyword");
-
-		public void Visit(ITypeMapping mapping) => this.Increment("type");
 	}
 }

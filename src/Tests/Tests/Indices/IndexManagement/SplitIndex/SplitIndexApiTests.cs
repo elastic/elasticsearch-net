@@ -8,21 +8,49 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Indices.IndexManagement.SplitIndex
 {
 	[SkipVersion("<6.1.0", "split index api was added in 6.1.0")]
-	public class SplitIndexApiTests : ApiIntegrationTestBase<WritableCluster, ISplitIndexResponse, ISplitIndexRequest, SplitIndexDescriptor, SplitIndexRequest>
+	public class SplitIndexApiTests
+		: ApiIntegrationTestBase<WritableCluster, ISplitIndexResponse, ISplitIndexRequest, SplitIndexDescriptor, SplitIndexRequest>
 	{
 		public SplitIndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
+		protected override bool ExpectIsValid => true;
+
+		protected override object ExpectJson { get; } = new
+		{
+			settings = new Dictionary<string, object>
+			{
+				{ "index.number_of_shards", 8 }
+			}
+		};
+
+		protected override int ExpectStatusCode => 200;
+
+		protected override Func<SplitIndexDescriptor, ISplitIndexRequest> Fluent => d => d
+			.Settings(s => s
+				.NumberOfShards(8)
+			);
+
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+
+		protected override SplitIndexRequest Initializer => new SplitIndexRequest(CallIsolatedValue, CallIsolatedValue + "-target")
+		{
+			Settings = new Nest.IndexSettings
+			{
+				NumberOfShards = 8
+			}
+		};
+
+		protected override string UrlPath => $"/{CallIsolatedValue}/_split/{CallIsolatedValue}-target";
+
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.SplitIndex(CallIsolatedValue, CallIsolatedValue + "-target", f),
-			fluentAsync: (client, f) => client.SplitIndexAsync(CallIsolatedValue, CallIsolatedValue + "-target", f),
-			request: (client, r) => client.SplitIndex(r),
-			requestAsync: (client, r) => client.SplitIndexAsync(r)
+			(client, f) => client.SplitIndex(CallIsolatedValue, CallIsolatedValue + "-target", f),
+			(client, f) => client.SplitIndexAsync(CallIsolatedValue, CallIsolatedValue + "-target", f),
+			(client, r) => client.SplitIndex(r),
+			(client, r) => client.SplitIndexAsync(r)
 		);
 
 		protected override void OnBeforeCall(IElasticClient client)
@@ -43,33 +71,7 @@ namespace Tests.Indices.IndexManagement.SplitIndex
 			update.ShouldBeValid();
 		}
 
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override string UrlPath => $"/{CallIsolatedValue}/_split/{CallIsolatedValue}-target";
-
-		protected override object ExpectJson { get; } = new
-		{
-			settings = new Dictionary<string, object>
-			{
-				{ "index.number_of_shards", 8 }
-			}
-		};
-
 		protected override SplitIndexDescriptor NewDescriptor() => new SplitIndexDescriptor(CallIsolatedValue, CallIsolatedValue + "-target");
-
-		protected override Func<SplitIndexDescriptor, ISplitIndexRequest> Fluent => d => d
-			.Settings(s => s
-				.NumberOfShards(8)
-			);
-
-		protected override SplitIndexRequest Initializer => new SplitIndexRequest(CallIsolatedValue, CallIsolatedValue + "-target")
-		{
-			Settings = new Nest.IndexSettings
-			{
-				NumberOfShards = 8
-			}
-		};
 
 		protected override void ExpectResponse(ISplitIndexResponse response)
 		{

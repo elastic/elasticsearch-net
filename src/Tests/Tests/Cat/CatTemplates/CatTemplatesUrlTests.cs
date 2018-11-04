@@ -11,10 +11,10 @@ namespace Tests.Cat.CatTemplates
 		[U] public override async Task Urls()
 		{
 			await GET("/_cat/templates")
-				.Fluent(c => c.CatTemplates())
-				.Request(c => c.CatTemplates(new CatTemplatesRequest()))
-				.FluentAsync(c => c.CatTemplatesAsync())
-				.RequestAsync(c => c.CatTemplatesAsync(new CatTemplatesRequest()))
+					.Fluent(c => c.CatTemplates())
+					.Request(c => c.CatTemplates(new CatTemplatesRequest()))
+					.FluentAsync(c => c.CatTemplatesAsync())
+					.RequestAsync(c => c.CatTemplatesAsync(new CatTemplatesRequest()))
 				;
 
 			await GET("/_cat/templates/index-%2A")

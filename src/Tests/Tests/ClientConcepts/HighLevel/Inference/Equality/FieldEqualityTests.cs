@@ -1,10 +1,8 @@
-using System.Reflection;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Domain;
-using Tests.Framework;
 
 namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 {
@@ -13,7 +11,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 		[U] public void Eq()
 		{
 			Field name = "foo";
-			Field[] equal = {"foo"};
+			Field[] equal = { "foo" };
 			foreach (var t in equal)
 			{
 				(t == name).ShouldBeTrue(t);
@@ -24,7 +22,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 		[U] public void NotEq()
 		{
 			Field name = "foo";
-			Field[] notEqual = {"bar", "x", "", "   ", " foo ", Infer.Field<Project>(p=>p.Name)};
+			Field[] notEqual = { "bar", "x", "", "   ", " foo ", Infer.Field<Project>(p => p.Name) };
 			foreach (var t in notEqual)
 			{
 				(t != name).ShouldBeTrue(t);
@@ -49,7 +47,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 		[U] public void ReflectedEq()
 		{
 			Field t1 = typeof(Project).GetProperty(nameof(Project.Name)),
-				  t2 = typeof(Project).GetProperty(nameof(Project.Name));
+				t2 = typeof(Project).GetProperty(nameof(Project.Name));
 			(t1 == t2).ShouldBeTrue(t2);
 			t1.Should().Be(t2);
 		}
@@ -57,7 +55,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 		[U] public void ReflectedNotEq()
 		{
 			Field t1 = typeof(CommitActivity).GetProperty(nameof(CommitActivity.Id)),
-				  t2 = typeof(Developer).GetProperty(nameof(Developer.Id));
+				t2 = typeof(Developer).GetProperty(nameof(Developer.Id));
 			(t1 != t2).ShouldBeTrue(t2);
 			t1.Should().NotBe(t2);
 		}

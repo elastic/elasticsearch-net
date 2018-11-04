@@ -6,33 +6,34 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Indices.MappingManagement.GetFieldMapping
 {
 	public class GetFieldMappingApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IGetFieldMappingResponse, IGetFieldMappingRequest, GetFieldMappingDescriptor<Project>, GetFieldMappingRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, IGetFieldMappingResponse, IGetFieldMappingRequest, GetFieldMappingDescriptor<Project>,
+			GetFieldMappingRequest>
 	{
 		private static readonly Fields Fields = Fields<Project>(p => p.Name, p => p.LeadDeveloper.IpAddress);
 		private static readonly Field NameField = Field<Project>(p => p.Name);
 
 		public GetFieldMappingApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.GetFieldMapping<Project>(Fields),
-			fluentAsync: (client, f) => client.GetFieldMappingAsync<Project>(Fields),
-			request: (client, r) => client.GetFieldMapping(r),
-			requestAsync: (client, r) => client.GetFieldMappingAsync(r)
-		);
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/_mapping/field/name%2CleadDeveloper.ipAddress";
-
-		protected override GetFieldMappingDescriptor<Project> NewDescriptor() => new GetFieldMappingDescriptor<Project>(Fields);
 
 		protected override GetFieldMappingRequest Initializer => new GetFieldMappingRequest(Fields);
+		protected override string UrlPath => $"/_mapping/field/name%2CleadDeveloper.ipAddress";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.GetFieldMapping<Project>(Fields),
+			(client, f) => client.GetFieldMappingAsync<Project>(Fields),
+			(client, r) => client.GetFieldMapping(r),
+			(client, r) => client.GetFieldMappingAsync(r)
+		);
+
+		protected override GetFieldMappingDescriptor<Project> NewDescriptor() => new GetFieldMappingDescriptor<Project>(Fields);
 
 		protected override void ExpectResponse(IGetFieldMappingResponse response)
 		{
@@ -69,14 +70,14 @@ namespace Tests.Indices.MappingManagement.GetFieldMapping
 			fieldMapping = response.MappingFor<Project>(NameField);
 			AssertNameFieldMapping(fieldMapping);
 
-			fieldMapping = response.MappingFor<Project>(p=>p.Name);
+			fieldMapping = response.MappingFor<Project>(p => p.Name);
 			AssertNameFieldMapping(fieldMapping);
 		}
 
 		private static void AssertNameFieldMapping(IFieldMapping fieldMapping)
 		{
 			fieldMapping.Should().NotBeNull("expected to find name on field type mapping for project");
-			var nameKeyword = (fieldMapping as KeywordProperty);
+			var nameKeyword = fieldMapping as KeywordProperty;
 			nameKeyword.Should().NotBeNull("the field type is a keyword mapping");
 			nameKeyword.Store.Should().BeTrue("name is keyword field that has store enabled");
 			nameKeyword.Fields.Should().NotBeEmpty().And.HaveCount(2);

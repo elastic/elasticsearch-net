@@ -1,9 +1,7 @@
-﻿using System.Linq;
-using Nest;
+﻿using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.Joining.ParentId
 {
@@ -16,6 +14,19 @@ namespace Tests.QueryDsl.Joining.ParentId
 	{
 		public ParentIdQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IParentIdQuery>(a => a.ParentId)
+		{
+			q => q.Id = null,
+			q => q.Type = null,
+		};
+
+		protected override QueryContainer QueryInitializer => new ParentIdQuery
+		{
+			Name = "named_query",
+			Type = Infer.Relation<CommitActivity>(),
+			Id = Project.Instance.Name
+		};
+
 		protected override object QueryJson => new
 		{
 			parent_id = new
@@ -26,24 +37,11 @@ namespace Tests.QueryDsl.Joining.ParentId
 			}
 		};
 
-		protected override QueryContainer QueryInitializer => new ParentIdQuery
-		{
-			Name = "named_query",
-			Type = Infer.Relation<CommitActivity>(),
-			Id = Project.Instance.Name
-		};
-
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.ParentId(p => p
 				.Name("named_query")
 				.Type<CommitActivity>()
 				.Id(Project.Instance.Name)
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IParentIdQuery>(a => a.ParentId)
-		{
-			q =>  q.Id = null,
-			q =>  q.Type = null,
-		};
 	}
 }

@@ -1,10 +1,8 @@
-using System.Reflection;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Domain;
-using Tests.Framework;
 
 namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 {
@@ -13,7 +11,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 		[U] public void Eq()
 		{
 			Fields name = "foo, bar";
-			Fields[] equal = {"foo, bar", "  foo,   bar", "bar, foo", "   bar  ,   foo  "};
+			Fields[] equal = { "foo, bar", "  foo,   bar", "bar, foo", "   bar  ,   foo  " };
 			foreach (var t in equal)
 			{
 				(t == name).ShouldBeTrue(t);
@@ -24,7 +22,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 		[U] public void NotEq()
 		{
 			Fields name = "foo, bar";
-			Fields[] notEqual = {"bar", "foo, bar, x", "", "   ", " foo ", Infer.Field<Project>(p=>p.Name)};
+			Fields[] notEqual = { "bar", "foo, bar, x", "", "   ", " foo ", Infer.Field<Project>(p => p.Name) };
 			foreach (var t in notEqual)
 			{
 				(t != name).ShouldBeTrue(t);
@@ -38,17 +36,20 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 			(t1 == t2).ShouldBeTrue(t2);
 			t1.Should().BeEquivalentTo(t2);
 
-			t1 = Infer.Field<Project>(p => p.Name, 1.1); t2 = Infer.Field<Project>(p => p.Name, 1.1);
+			t1 = Infer.Field<Project>(p => p.Name, 1.1);
+			t2 = Infer.Field<Project>(p => p.Name, 1.1);
 			(t1 == t2).ShouldBeTrue(t2);
 			t1.Should().BeEquivalentTo(t2);
 
 			// boost factor is not taken into account when comparing fields
-			t1 = Infer.Field<Project>(p => p.Name, 2.1); t2 = Infer.Field<Project>(p => p.Name, 1.1);
+			t1 = Infer.Field<Project>(p => p.Name, 2.1);
+			t2 = Infer.Field<Project>(p => p.Name, 1.1);
 			(t1 == t2).ShouldBeTrue(t2);
 			t1.Should().BeEquivalentTo(t2);
 
 			// boost factor is not taken into account when comparing fields
-			t1 = Infer.Field<Project>(p => p.Name); t2 = Infer.Field<Project>(p => p.Name, 1.1);
+			t1 = Infer.Field<Project>(p => p.Name);
+			t2 = Infer.Field<Project>(p => p.Name, 1.1);
 			(t1 == t2).ShouldBeTrue(t2);
 			t1.Should().BeEquivalentTo(t2);
 		}
@@ -59,7 +60,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 			(t1 != t2).ShouldBeTrue(t2);
 			t1.Should().NotBeEquivalentTo(t2);
 
-			t1 = Infer.Field<Project>(p => p.Name, 1.0); t2 = Infer.Field<Project>(p => p.Location, 1.0);
+			t1 = Infer.Field<Project>(p => p.Name, 1.0);
+			t2 = Infer.Field<Project>(p => p.Location, 1.0);
 			(t1 != t2).ShouldBeTrue(t2);
 			t1.Should().NotBeEquivalentTo(t2);
 		}
@@ -67,7 +69,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 		[U] public void ReflectedEq()
 		{
 			Fields t1 = typeof(Project).GetProperty(nameof(Project.Name)),
-				  t2 = typeof(Project).GetProperty(nameof(Project.Name));
+				t2 = typeof(Project).GetProperty(nameof(Project.Name));
 			(t1 == t2).ShouldBeTrue(t2);
 			t1.Should().BeEquivalentTo(t2);
 		}
@@ -75,7 +77,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 		[U] public void ReflectedNotEq()
 		{
 			Fields t1 = typeof(CommitActivity).GetProperty(nameof(CommitActivity.Id)),
-				  t2 = typeof(Developer).GetProperty(nameof(Developer.Id));
+				t2 = typeof(Developer).GetProperty(nameof(Developer.Id));
 			(t1 != t2).ShouldBeTrue(t2);
 			t1.Should().NotBeEquivalentTo(t2);
 		}
