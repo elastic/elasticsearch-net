@@ -5,7 +5,7 @@ namespace ApiGenerator.Overrides.Endpoints
 	// ReSharper disable once UnusedMember.Global
 	public class SearchOverrides : EndpointOverridesBase
 	{
-		public override IEnumerable<string> SkipQueryStringParams => new []
+		public override IEnumerable<string> SkipQueryStringParams => new[]
 		{
 			"size",
 			"from",

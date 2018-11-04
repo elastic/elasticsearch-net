@@ -10,21 +10,13 @@ namespace ApiGenerator
 {
 	public class RestSpecDownloader
 	{
-		public static RestSpecDownloader Download(string branch) => new RestSpecDownloader(branch);
+		private static readonly ProgressBarOptions MainProgressBarOptions = new ProgressBarOptions { BackgroundColor = ConsoleColor.DarkGray };
 
 		private static readonly Dictionary<string, string> OnlineSpecifications = new Dictionary<string, string>
 		{
 			{ "Core", "https://github.com/elastic/elasticsearch/tree/{version}/rest-api-spec/src/main/resources/rest-api-spec/api" },
 		};
-		private class Specification
-		{
-			public string FolderOnDisk { get; set; }
-			public string GithubListingUrl { get; set; }
-			public string Branch { get; set; }
-			public string GithubDownloadUrl(string file) => this.GithubListingUrl.Replace("github.com", "raw.githubusercontent.com").Replace("tree/", "") + "/" + file;
-		}
 
-		private static readonly ProgressBarOptions MainProgressBarOptions = new ProgressBarOptions { BackgroundColor = ConsoleColor.DarkGray };
 		private static readonly ProgressBarOptions SubProgressBarOptions = new ProgressBarOptions
 		{
 			ForegroundColor = ConsoleColor.Cyan,
@@ -53,6 +45,8 @@ namespace ApiGenerator
 
 			File.WriteAllText(CodeConfiguration.LastDownloadedVersionFile, branch);
 		}
+
+		public static RestSpecDownloader Download(string branch) => new RestSpecDownloader(branch);
 
 		private void DownloadJsonDefinitions(Specification spec, IProgressBar pbar)
 		{
@@ -97,6 +91,16 @@ namespace ApiGenerator
 			var f = Path.Combine(CodeConfiguration.RestSpecificationFolder, folder);
 			if (!Directory.Exists(f)) Directory.CreateDirectory(f);
 			File.WriteAllText(f + "\\" + filename, contents);
+		}
+
+		private class Specification
+		{
+			public string Branch { get; set; }
+			public string FolderOnDisk { get; set; }
+			public string GithubListingUrl { get; set; }
+
+			public string GithubDownloadUrl(string file) =>
+				GithubListingUrl.Replace("github.com", "raw.githubusercontent.com").Replace("tree/", "") + "/" + file;
 		}
 	}
 }
