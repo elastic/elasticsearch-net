@@ -12,7 +12,7 @@ namespace Elasticsearch.Net
 		public bool TryGetServerError(out ServerError serverError)
 		{
 			serverError = null;
-			if (string.IsNullOrEmpty(this.Body))
+			if (string.IsNullOrEmpty(this.Body) || ResponseMimeType != RequestData.MimeType)
 				return false;
 
 			using(var stream = new MemoryStream(Encoding.UTF8.GetBytes(this.Body)))
