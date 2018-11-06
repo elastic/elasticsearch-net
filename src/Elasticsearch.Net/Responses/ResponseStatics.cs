@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -49,10 +50,26 @@ namespace Elasticsearch.Net
 			{
 				var audit = a.a;
 				sb.Append($" - [{a.i + 1}] {audit.Event.GetStringValue()}:");
-				if (audit.Node?.Uri != null) sb.Append($" Node: {audit.Node.Uri}");
+
+				AuditNodeUrl(sb, audit);
+
 				if (audit.Exception != null) sb.Append($" Exception: {audit.Exception.GetType().Name}");
 				sb.AppendLine($" Took: {(audit.Ended - audit.Started).ToString()}");
 			}
+		}
+
+		private static void AuditNodeUrl(StringBuilder sb, Audit audit)
+		{
+			var uri = audit.Node?.Uri;
+			if (uri == null) return;
+
+			if (!string.IsNullOrEmpty(uri.UserInfo))
+			{
+				var builder = new UriBuilder(uri);
+				builder.Password = "redacted";
+				uri = builder.Uri;
+			}
+			sb.Append($" Node: {uri}");
 		}
 	}
 }
