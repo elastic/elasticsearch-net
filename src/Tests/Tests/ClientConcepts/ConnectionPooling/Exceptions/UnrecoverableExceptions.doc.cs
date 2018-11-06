@@ -32,7 +32,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 		* --
 		*
 		* By default, the client won't throw on any `ElasticsearchClientException` but instead return an invalid response
-        * that can be detected by checking the `.IsValid` property on the response. You can change this behaviour with
+		* that can be detected by checking the `.IsValid` property on the response. You can change this behaviour with
 		* by using `ThrowExceptions()` on <<configuration-options, `ConnectionSettings`>>.
 		*
 		*/

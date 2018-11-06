@@ -25,11 +25,11 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 
 		/**
 		* We'll look at the features of auto mapping with a number of examples. For this,
-        * we'll define two POCOs, `Company`, which has a name
+		* we'll define two POCOs, `Company`, which has a name
 		* and a collection of Employees, and `Employee` which has various properties of
 		* different types, and itself has a collection of `Employee` types.
 		*/
-        public class Company
+		public class Company
 		{
 			public string Name { get; set; }
 			public List<Employee> Employees { get; set; }
@@ -50,8 +50,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		public void UsingAutoMap()
 		{
 			/**
-            * Auto mapping can take the pain out of having to define a manual mapping for all properties
-            * on the POCO
+			* Auto mapping can take the pain out of having to define a manual mapping for all properties
+			* on the POCO
 			*/
 
 			var createIndexResponse = _client.CreateIndex("myindex", c => c
@@ -264,43 +264,43 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		 * - Employees is mapped as an `object`
 		 *
 		 * and the remaining string properties as multi field `text` datatypes, each with a `keyword` datatype
-         * sub field.
-         *
-         * NEST has inferred mapping support for the following .NET types
-         *
-		 * [horizontal]
-         * `String`:: maps to `"text"` with a `"keyword"` sub field. See <<multi-fields, Multi Fields>>.
-         * `Int32`:: maps to `"integer"`
-         * `UInt16`:: maps to `"integer"`
-         * `Int16`:: maps to `"short"`
-         * `Byte`:: maps to `"short"`
-         * `Int64`:: maps to `"long"`
-         * `UInt32`:: maps to `"long"`
-         * `TimeSpan`:: maps to `"long"`
-         * `Single`:: maps to `"float"`
-         * `Double`:: maps to `"double"`
-         * `Decimal`:: maps to `"double"`
-         * `UInt64`:: maps to `"double"`
-         * `DateTime`:: maps to `"date"`
-         * `DateTimeOffset`:: maps to `"date"`
-         * `Boolean`:: maps to `"boolean"`
-         * `Char`:: maps to `"keyword"`
-         * `Guid`:: maps to `"keyword"`
-         *
-         * and supports a number of special types defined in NEST
-         *
-		 * [horizontal]
-         * `Nest.GeoLocation`:: maps to `"geo_point"`
-         * `Nest.CompletionField`:: maps to `"completion"`
-         * `Nest.DateRange`:: maps to `"date_range"`
-         * `Nest.DoubleRange`:: maps to `"double_range"`
-         * `Nest.FloatRange`:: maps to `"float_range"`
-         * `Nest.IntegerRange`:: maps to `"integer_range"`
-         * `Nest.LongRange`:: maps to `"long_range"`
+		 * sub field.
 		 *
-         * All other types map to `"object"` by default.
-         *
-         *[IMPORTANT]
+		 * NEST has inferred mapping support for the following .NET types
+		 *
+		 * [horizontal]
+		 * `String`:: maps to `"text"` with a `"keyword"` sub field. See <<multi-fields, Multi Fields>>.
+		 * `Int32`:: maps to `"integer"`
+		 * `UInt16`:: maps to `"integer"`
+		 * `Int16`:: maps to `"short"`
+		 * `Byte`:: maps to `"short"`
+		 * `Int64`:: maps to `"long"`
+		 * `UInt32`:: maps to `"long"`
+		 * `TimeSpan`:: maps to `"long"`
+		 * `Single`:: maps to `"float"`
+		 * `Double`:: maps to `"double"`
+		 * `Decimal`:: maps to `"double"`
+		 * `UInt64`:: maps to `"double"`
+		 * `DateTime`:: maps to `"date"`
+		 * `DateTimeOffset`:: maps to `"date"`
+		 * `Boolean`:: maps to `"boolean"`
+		 * `Char`:: maps to `"keyword"`
+		 * `Guid`:: maps to `"keyword"`
+		 *
+		 * and supports a number of special types defined in NEST
+		 *
+		 * [horizontal]
+		 * `Nest.GeoLocation`:: maps to `"geo_point"`
+		 * `Nest.CompletionField`:: maps to `"completion"`
+		 * `Nest.DateRange`:: maps to `"date_range"`
+		 * `Nest.DoubleRange`:: maps to `"double_range"`
+		 * `Nest.FloatRange`:: maps to `"float_range"`
+		 * `Nest.IntegerRange`:: maps to `"integer_range"`
+		 * `Nest.LongRange`:: maps to `"long_range"`
+		 *
+		 * All other types map to `"object"` by default.
+		 *
+		 *[IMPORTANT]
 		 * --
 		 * Some .NET types do not have direct equivalent Elasticsearch types. For example, `System.Decimal` is a type
 		 * commonly used to express currencies and other financial calculations that require large numbers of significant
@@ -328,8 +328,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		 * If you notice in our previous `Company` and `Employee` example, the `Employee` type is recursive
 		 * in that the `Employee` class itself contains a collection of type `Employee`. By default, `.AutoMap()` will only
 		 * traverse a single depth when it encounters recursive instances like this; the collection of type `Employee`
-         * on the `Employee` class did not get any of its properties mapped.
-         *
+		 * on the `Employee` class did not get any of its properties mapped.
+		 *
 		 * This is done as a safe-guard to prevent stack overflows and all the fun that comes with
 		 * __infinite__ recursion.  Additionally, in most cases, when it comes to Elasticsearch mappings, it is
 		 * often an edge case to have deeply nested mappings like this.  However, you may still have
@@ -374,7 +374,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			};
 
 			//hide
-            Expect(expected).FromRequest(createIndexResponse);
+			Expect(expected).FromRequest(createIndexResponse);
 
 			/** Now let's specify a maxRecursion of `3` */
 			createIndexResponse = _client.CreateIndex("myindex", c => c
@@ -425,7 +425,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			};
 
 			//hide
-            Expect(expectedWithMaxRecursion).FromRequest(createIndexResponse);
+			Expect(expectedWithMaxRecursion).FromRequest(createIndexResponse);
 		}
 
 		//hide
@@ -483,7 +483,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-            Expect(expectedWithMaxRecursion).WhenSerializing((IPutMappingRequest)withMaxRecursionDescriptor);
+			Expect(expectedWithMaxRecursion).WhenSerializing((IPutMappingRequest)withMaxRecursionDescriptor);
 		}
 	}
 }

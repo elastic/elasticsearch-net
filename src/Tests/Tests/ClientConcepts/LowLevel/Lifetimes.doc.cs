@@ -17,7 +17,7 @@ namespace Tests.ClientConcepts.LowLevel
 		/**== Lifetimes
 		*
 		* If you are using an IOC/Dependency Injection container, it's always useful to know the best practices around
-        * the lifetime of your objects.
+		* the lifetime of your objects.
 		*
 		* In general, we advise folks to register an `ElasticClient` instance as a singleton; the client is thread safe,
 		* so sharing an instance across threads is fine.

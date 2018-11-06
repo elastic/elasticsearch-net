@@ -27,15 +27,15 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 			var uris = Enumerable.Range(9200, numberOfNodes).Select(p => new Uri("http://localhost:" + p));
 			var pool = new Elasticsearch.Net.StickySniffingConnectionPool(uris, (n)=>0f);
 
-            /**
+			/**
 			* Here we have setup a sticky connection pool seeded with 10 nodes all weighted the same.
 			* So what order we expect? Imagine the following:
 			*
 			* Thread A calls `.CreateView()` and gets returned the first live node
 			* Thread B calls `.CreateView()` and gets returned the same node, since the first
-            * node is still good
+			* node is still good
 			*/
-            var startingPositions = Enumerable.Range(0, numberOfNodes)
+			var startingPositions = Enumerable.Range(0, numberOfNodes)
 				.Select(i => pool.CreateView().First())
 				.Select(n => n.Uri.Port)
 				.ToList();

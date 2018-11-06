@@ -9,7 +9,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 	public class RequestTimeoutsOverrides
 	{
 		/**[[request-timeout]]
-        * === Request timeouts
+		* === Request timeouts
 		*
 		* While you can specify Request time out globally you can override this per request too
 		*/
@@ -54,15 +54,15 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 
 		}
 
-		/**[float] 
-        * === Connect timeouts
-        * 
-		* Connect timeouts can be overridden on a per request basis. 
-        * 
-        * Whilst the underlying `WebRequest` in the case of Desktop CLR
+		/**[float]
+		* === Connect timeouts
+		*
+		* Connect timeouts can be overridden on a per request basis.
+		*
+		* Whilst the underlying `WebRequest` in the case of Desktop CLR
 		* and `HttpClient` in the case of Core CLR cannot distinguish between connect and retry timeouts,
 		* we use a separate configuration value for ping requests to allow ping to be configured
-        * independently.
+		* independently.
 		*/
 		[U]
 		public async Task RespectsConnectTimeoutOverride()

@@ -24,10 +24,10 @@ namespace Tests.Search
 	 */
 	public class RoleMappingRulesTests
 	{
-        /**==== Rule Conjunction
-         *
-         * You can create a conjuction of many rules using either `+` or `&` which are both overloaded to produce an `all` rule.
-         */
+		/**==== Rule Conjunction
+		 *
+		 * You can create a conjuction of many rules using either `+` or `&` which are both overloaded to produce an `all` rule.
+		 */
 		[U] public void RulesConjunction()
 		{
 			var allRule = new UsernameRule("u1") + new UsernameRule("u2") & new UsernameRule("u3");
@@ -46,10 +46,10 @@ namespace Tests.Search
 
 		}
 
-        /**==== Rule Disjunction
-         *
-         * The produce an `any` disjunction rule over many rules you can use the overloaded `|`
-         */
+		/**==== Rule Disjunction
+		 *
+		 * The produce an `any` disjunction rule over many rules you can use the overloaded `|`
+		 */
 		[U] public void RulesDisjunction()
 		{
 			var anyRule = new UsernameRule("u1") | new UsernameRule("u2") | new UsernameRule("u3");
@@ -66,20 +66,20 @@ namespace Tests.Search
 
 		}
 
-        /**==== Rule Negation
-         *
-         * You can automatically negate any rule by using the `!` infix operator
-         */
+		/**==== Rule Negation
+		 *
+		 * You can automatically negate any rule by using the `!` infix operator
+		 */
 		[U] public void RuleNegation()
 		{
 			var exceptRule = !new UsernameRule("user_1");
 			exceptRule.Should().BeOfType<ExceptRoleMappingRole>();
 		}
 
-        /**==== Full Example
-         *
-         * Combining all of these you can build role mapping rules quite elegantly
-         */
+		/**==== Full Example
+		 *
+		 * Combining all of these you can build role mapping rules quite elegantly
+		 */
 		[U] public void FullExample()
 		{
 			var dn = "*,ou=admin,dc=example,dc=com";
@@ -119,7 +119,7 @@ namespace Tests.Search
 					new { field = new Dictionary<string, object>(){ {"metadata.a", "b" } } },
 					new { except = new { field = new { groups = new [] { "group1", "group2" } } } }
 				}
-            });
+			});
 		}
 
 		private static Tuple<RoleMappingRuleBase, RoleMappingRuleBase> Setup(RoleMappingRuleBase dsl, RoleMappingRuleBase ois) =>

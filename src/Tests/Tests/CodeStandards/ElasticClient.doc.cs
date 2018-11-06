@@ -101,9 +101,9 @@ namespace Tests.CodeStandards
 		}
 
 		/*
-        * Synchronous and Asynchronous methods should be consistent
-        * with regards to optional parameters
-        */
+		* Synchronous and Asynchronous methods should be consistent
+		* with regards to optional parameters
+		*/
 		[U]
 		public void ConsistentOptionalParametersForSyncAndAsyncMethods()
 		{

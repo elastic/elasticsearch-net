@@ -10,14 +10,14 @@ using Nest;
 namespace Tests.ClientConcepts.HighLevel
 {
 	/**[[nest-getting-started]]
-     * == Getting started
+	 * == Getting started
 	 *
 	 * NEST is a high level Elasticsearch .NET client that still maps very closely to the original Elasticsearch API.
 	 * All requests and responses are exposed through types, making it ideal for getting up and running quickly.
-     *
-     * Under the covers, NEST uses the <<elasticsearch-net,Elasticsearch.Net low level client>> to dispatch requests and
-     * responses, using and extending many of the types within Elasticsearch.Net. The low level client itself is still
-     * exposed on the high level client through the `.LowLevel` property.
+	 *
+	 * Under the covers, NEST uses the <<elasticsearch-net,Elasticsearch.Net low level client>> to dispatch requests and
+	 * responses, using and extending many of the types within Elasticsearch.Net. The low level client itself is still
+	 * exposed on the high level client through the `.LowLevel` property.
 	 */
 	public class GettingStarted
 	{
@@ -80,7 +80,7 @@ namespace Tests.ClientConcepts.HighLevel
 		 * === Indexing
 		 *
 		 * Once a client had been configured to connect to Elasticsearch, we need to get some data into the cluster
-         * to work with.
+		 * to work with.
 		 *
 		 * Imagine we have the following http://en.wikipedia.org/wiki/Plain_Old_CLR_Object[Plain Old CLR Object (POCO)]
 		 */
@@ -115,7 +115,7 @@ namespace Tests.ClientConcepts.HighLevel
 		 * This will index the document to the endpoint `/people/person/1`. NEST is smart enough to infer the
 		 * type from the Person CLR type as well as infer the id for the document by looking for an `Id` property on the POCO. Take a look
 		 * at <<ids-inference,Ids inference>> to see other ways in which NEST can be configured to infer an id for a document. The default index configured
-         * on `ConnectionSettings` has been used as the index name for the request.
+		 * on `ConnectionSettings` has been used as the index name for the request.
 		 *
 		 * CAUTION: By default, NEST camel cases the property names on the POCO when serializing the POCO into a JSON document to send to Elasticsearch.
 		 * You can <<camel-casing,change this behaviour>> by using the `.DefaultFieldNameInferrer(Func<string,string>)` method on `ConnectionSettings`.
@@ -236,45 +236,45 @@ namespace Tests.ClientConcepts.HighLevel
 			var searchResponse = await client.SearchAsync<Person>(searchRequest);
 		}
 
-        /** [NOTE]
-         * --
-         * As indicated at the start of this section, the high level client still exposes the low level client from Elasticsearch.Net
-         * through the `.LowLevel` property on the client. The low level client can be useful in scenarios where you may already have
-         * the JSON that represents the request that you wish to send and don't wish to translate it over to the Fluent API or Object Initializer syntax
-         * at this point in time, or perhaps there is a bug in the client that can be worked around by sending a request as a string or anonymous type.
-         *
-         * Using the low level client via the `.LowLevel` property means you can get with the best of both worlds:
-         *
-         * . Use the high level client
-         * . Use the low level client where it makes sense, taking advantage of all the strong types within NEST and using the JSON.Net based
-         * serializer for deserialization.
-         *
-         * Here's an example
-         */
+		/** [NOTE]
+		 * --
+		 * As indicated at the start of this section, the high level client still exposes the low level client from Elasticsearch.Net
+		 * through the `.LowLevel` property on the client. The low level client can be useful in scenarios where you may already have
+		 * the JSON that represents the request that you wish to send and don't wish to translate it over to the Fluent API or Object Initializer syntax
+		 * at this point in time, or perhaps there is a bug in the client that can be worked around by sending a request as a string or anonymous type.
+		 *
+		 * Using the low level client via the `.LowLevel` property means you can get with the best of both worlds:
+		 *
+		 * . Use the high level client
+		 * . Use the low level client where it makes sense, taking advantage of all the strong types within NEST and using the JSON.Net based
+		 * serializer for deserialization.
+		 *
+		 * Here's an example
+		 */
 
-	    public void SearchingWithTheLowLevelClient()
-	    {
-            var searchResponse = client.LowLevel.Search<SearchResponse<Person>>("people", "person", new
-            {
-                from = 0,
-                size = 10,
-                query = new
-                {
-                    match = new
-                    {
-                        field = "firstName",
-                        query = "Martijn"
-                    }
-                }
-            });
+		public void SearchingWithTheLowLevelClient()
+		{
+			var searchResponse = client.LowLevel.Search<SearchResponse<Person>>("people", "person", new
+			{
+				from = 0,
+				size = 10,
+				query = new
+				{
+					match = new
+					{
+						field = "firstName",
+						query = "Martijn"
+					}
+				}
+			});
 
-            var responseJson = searchResponse.Body;
-        }
-        /**
-         * Here, the query is represented as an anonymous type, but the body of the response is a concrete
-         * implementation of the same response type returned from NEST.
-         * --
-         */
+			var responseJson = searchResponse.Body;
+		}
+		/**
+		 * Here, the query is represented as an anonymous type, but the body of the response is a concrete
+		 * implementation of the same response type returned from NEST.
+		 * --
+		 */
 
 
 		/**[float]
@@ -304,16 +304,16 @@ namespace Tests.ClientConcepts.HighLevel
 
 		/**
 		 * In this example, a `match` query to search for people with the first name of "Martijn" is issued as before;
-         * this time however,
+		 * this time however,
 		 *
 		 * . a size of `0` is set because we don't want the first 10 documents that match this query to be returned,
-         * we're only interested in the aggregation results
+		 * we're only interested in the aggregation results
 		 * . a `terms` aggregation is specified to group matching documents into buckets based on last name.
 		 *
 		 * `termsAggregation` can be used to get the count of documents for each bucket, where each bucket will be
-         * keyed by last name.
-         *
-         * See <<writing-aggregations, Writing aggregations>> for more details.
+		 * keyed by last name.
+		 *
+		 * See <<writing-aggregations, Writing aggregations>> for more details.
 		 */
 	}
 }

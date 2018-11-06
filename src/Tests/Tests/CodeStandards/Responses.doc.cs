@@ -34,8 +34,8 @@ namespace Tests.CodeStandards
 			};
 
 			var responseInterfaceTypes = from t in typeof(IResponse).Assembly().Types()
-							    where t.IsInterface() && typeof(IResponse).IsAssignableFrom(t)
-							    select t;
+								where t.IsInterface() && typeof(IResponse).IsAssignableFrom(t)
+								select t;
 
 			var ruleBreakers = new List<string>();
 			var seenTypes = new HashSet<Type>();
@@ -66,8 +66,8 @@ namespace Tests.CodeStandards
 					{
 						var genericTypeDefinition = propertyInfo.PropertyType.GetGenericTypeDefinition();
 						if (genericTypeDefinition == typeof(IDictionary<,>) ||
-						    genericTypeDefinition == typeof(Dictionary<,>) ||
-						    genericTypeDefinition == typeof(IEnumerable<>) ||
+							genericTypeDefinition == typeof(Dictionary<,>) ||
+							genericTypeDefinition == typeof(IEnumerable<>) ||
 							genericTypeDefinition == typeof(IList<>) ||
 							genericTypeDefinition == typeof(ICollection<>))
 						{
@@ -75,7 +75,7 @@ namespace Tests.CodeStandards
 						}
 					}
 					else if (propertyInfo.PropertyType.IsClass() && (propertyInfo.PropertyType.Namespace.StartsWith("Nest") ||
-					                                                 propertyInfo.PropertyType.Namespace.StartsWith("Elasticsearch.Net")))
+																	 propertyInfo.PropertyType.Namespace.StartsWith("Elasticsearch.Net")))
 					{
 						FindPropertiesBreakingRule(propertyInfo.PropertyType, exceptions, seenTypes, ruleBreakers);
 					}

@@ -106,17 +106,17 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 				.Size(100)
 			);
 
-            /**
+			/**
 			* here for each hit we'll call the delegate passed to `ConcreteTypeSelector` where
 			* - `d` is a representation of the `_source` exposed as a `dynamic` type
 			* - a typed `h` which represents the encapsulating hit of the source i.e. `Hit<dynamic>`
 			*/
 
-            /**
+			/**
 			* Here we assume our response is valid and that we received the 100 documents
 			* we are expecting. Remember `result.Documents` is an `IReadOnlyCollection<ISearchResult>`
 			*/
-            result.ShouldBeValid();
+			result.ShouldBeValid();
 			result.Documents.Count.Should().Be(100);
 
 			/**
@@ -151,16 +151,16 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 			var result = this._client.Scroll<ISearchResult>(TimeSpan.FromMinutes(60), "scrollId", s => s
 				.CovariantTypes(Types.Type(typeof(A), typeof(B), typeof(C)))
 			);
-            /**
+			/**
 			* NEST will translate this to a search over `/index/a,b,c/_search`;
 			* hits that have `"_type" : "a"` will be serialized to `A` and so forth
 			*/
 
-            /**
+			/**
 			* Here we assume our response is valid and that we received the 100 documents
 			* we are expecting. Remember `result.Documents` is an `IReadOnlyCollection<ISearchResult>`
 			*/
-            result.ShouldBeValid();
+			result.ShouldBeValid();
 			result.Documents.Count.Should().Be(100);
 
 			/**
