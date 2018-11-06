@@ -17,7 +17,7 @@ using static Tests.Core.Serialization.SerializationTestHelper;
 namespace Tests.ClientConcepts.HighLevel.Serialization
 {
 	/**[[custom-serialization]]
-     * === Custom Serialization
+	 * === Custom Serialization
 	 *
 	 * NEST 6.x ships with a _shaded_ Json.NET dependency, meaning that all of Json.NET's types are
 	 * internalized and IL merged into the NEST assembly, and their namespace has been changed

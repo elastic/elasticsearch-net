@@ -28,15 +28,15 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 				.Settings(s => s.SniffOnStartup()) // <1> sniff on startup
 			);
 
-            /** Now We disable sniffing on the request so even though it's our first call,
-             * we do not want to sniff on startup.
-             *
-             * Instead, the sniff on startup is deferred to the second call into the cluster that
+			/** Now We disable sniffing on the request so even though it's our first call,
+			 * we do not want to sniff on startup.
+			 *
+			 * Instead, the sniff on startup is deferred to the second call into the cluster that
 			 * does not disable sniffing on a per request basis.
-             *
-             * And after that no sniff on startup will happen again
-             */
-            audit = await audit.TraceCalls(
+			 *
+			 * And after that no sniff on startup will happen again
+			 */
+			audit = await audit.TraceCalls(
 				new ClientCall(r => r.DisableSniffing()) // <1> disable sniffing
 				{
 					{ PingSuccess, 9200 }, // <2> first call is a successful ping
@@ -54,7 +54,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 					{ PingSuccess, 9201 }, // <4> No sniff on startup again
 					{ HealthyResponse, 9201 }
 				}
-            );
+			);
 		}
 
 		/** Now, let's disable pinging on the request */
@@ -74,7 +74,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 					{ SniffSuccess, 9200 }, // <2> No ping after sniffing
 					{ HealthyResponse, 9200 }
 				}
-            );
+			);
 		}
 
 		/** Finally, let's demonstrate disabling both sniff and ping on the request */
@@ -92,7 +92,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 				{
 					{ HealthyResponse, 9200 } // <2> no ping or sniff before the call
 				}
-            );
+			);
 		}
 	}
 }

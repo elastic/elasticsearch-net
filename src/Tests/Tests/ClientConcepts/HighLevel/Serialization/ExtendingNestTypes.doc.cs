@@ -13,13 +13,13 @@ using static Tests.Core.Serialization.SerializationTestHelper;
 
 namespace Tests.ClientConcepts.HighLevel.Serialization
 {
-    /**[[extending-nest-types]]
-     * === Extending NEST types
-     *
-     * Sometimes you might want to provide a custom implementation of a type perhaps to work around an issue or because
-     * you're using a third-party plugin that extends the features of Elasticsearch, and NEST does not provide support out of the box.
-     */
-    public class ExtendingNestTypes
+	/**[[extending-nest-types]]
+	 * === Extending NEST types
+	 *
+	 * Sometimes you might want to provide a custom implementation of a type perhaps to work around an issue or because
+	 * you're using a third-party plugin that extends the features of Elasticsearch, and NEST does not provide support out of the box.
+	 */
+	public class ExtendingNestTypes
 	{
 		private readonly IElasticClient _client = TestClient.DisabledStreaming;
 

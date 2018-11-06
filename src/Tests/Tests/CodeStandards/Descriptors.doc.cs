@@ -23,13 +23,13 @@ namespace Tests.CodeStandards
 			var descriptors =
 				from t in typeof(DescriptorBase<,>).Assembly().Types()
 				where t.IsClass()
-				      && t.Name.Contains("Descriptor")
-				      && !t.Namespace.StartsWith("Nest.Json")
-				      && !notDescriptors.Contains(t.Name)
+					  && t.Name.Contains("Descriptor")
+					  && !t.Namespace.StartsWith("Nest.Json")
+					  && !notDescriptors.Contains(t.Name)
 #if __MonoCS__
-				      && !t.FullName.Contains("c__AnonStore") //compiler generated
+					  && !t.FullName.Contains("c__AnonStore") //compiler generated
 #endif
-				      && t.GetInterfaces().All(i => i != typeof(IDescriptor))
+					  && t.GetInterfaces().All(i => i != typeof(IDescriptor))
 				select t.FullName;
 			descriptors.Should().BeEmpty();
 		}
@@ -45,13 +45,13 @@ namespace Tests.CodeStandards
 			var selectors =
 				from t in typeof(SelectorBase<>).Assembly().Types()
 				where t.IsClass()
-				      && t.Name.Contains("Selector")
-				      && !t.Namespace.StartsWith("Nest.Json")
-				      && !notSelectors.Contains(t.Name)
+					  && t.Name.Contains("Selector")
+					  && !t.Namespace.StartsWith("Nest.Json")
+					  && !notSelectors.Contains(t.Name)
 #if __MonoCS__
-				      && !t.FullName.Contains("c__AnonStore") //compiler generated
+					  && !t.FullName.Contains("c__AnonStore") //compiler generated
 #endif
-				      && t.GetInterfaces().All(i => i != typeof(ISelector))
+					  && t.GetInterfaces().All(i => i != typeof(ISelector))
 				select t.FullName;
 			selectors.Should().BeEmpty();
 		}

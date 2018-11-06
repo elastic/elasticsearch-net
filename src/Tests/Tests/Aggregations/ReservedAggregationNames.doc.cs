@@ -26,13 +26,13 @@ namespace Tests.Aggregations
 	{
 		public string[] Reserved => new []
 		{
-		    "score",
-            "value_as_string",
-            "keys",
-            "max_score"
+			"score",
+			"value_as_string",
+			"keys",
+			"max_score"
 		};
 
-        //hide
+		//hide
 		private TermsAggregation Terms(string name) => new TermsAggregation(name) {Field = "x"};
 
 		//hide

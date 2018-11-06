@@ -32,8 +32,8 @@ namespace Tests.CodeStandards
 			};
 
 			var responseInterfaceTypes = from t in typeof(IResponse).Assembly().Types()
-							    where t.IsInterface() && typeof(IResponse).IsAssignableFrom(t)
-							    select t;
+								where t.IsInterface() && typeof(IResponse).IsAssignableFrom(t)
+								select t;
 
 			var ruleBreakers = new List<string>();
 			var seenTypes = new HashSet<Type>();
@@ -58,7 +58,7 @@ namespace Tests.CodeStandards
 					continue;
 
 				if (typeof(IDictionary).IsAssignableFrom(propertyInfo.PropertyType) ||
-				    typeof(ICollection).IsAssignableFrom(propertyInfo.PropertyType))
+					typeof(ICollection).IsAssignableFrom(propertyInfo.PropertyType))
 				{
 					ruleBreakers.Add($"{type.FullName}.{propertyInfo.Name} is of type {propertyInfo.PropertyType.Name}");
 				}
@@ -66,18 +66,18 @@ namespace Tests.CodeStandards
 				{
 					var genericTypeDefinition = propertyInfo.PropertyType.GetGenericTypeDefinition();
 					if (genericTypeDefinition == typeof(IDictionary<,>) ||
-					    genericTypeDefinition == typeof(Dictionary<,>) ||
-					    genericTypeDefinition == typeof(IEnumerable<>) ||
-					    genericTypeDefinition == typeof(IList<>) ||
-					    genericTypeDefinition == typeof(ICollection<>))
+						genericTypeDefinition == typeof(Dictionary<,>) ||
+						genericTypeDefinition == typeof(IEnumerable<>) ||
+						genericTypeDefinition == typeof(IList<>) ||
+						genericTypeDefinition == typeof(ICollection<>))
 					{
 						ruleBreakers.Add($"{type.FullName}.{propertyInfo.Name} is of type {propertyInfo.PropertyType.Name}");
 					}
 				}
 				else if (propertyInfo.PropertyType.IsClass() &&
-				         (propertyInfo.PropertyType.Namespace.StartsWith("Nest") || propertyInfo.PropertyType.Namespace.StartsWith("Elasticsearch.Net"))
-				         //Do not traverse known response dictionaries
-				         && !ResponseDictionaries.Contains(propertyInfo.PropertyType)
+						 (propertyInfo.PropertyType.Namespace.StartsWith("Nest") || propertyInfo.PropertyType.Namespace.StartsWith("Elasticsearch.Net"))
+						 //Do not traverse known response dictionaries
+						 && !ResponseDictionaries.Contains(propertyInfo.PropertyType)
 				)
 				{
 					FindPropertiesBreakingRule(propertyInfo.PropertyType, exceptions, seenTypes, ruleBreakers);

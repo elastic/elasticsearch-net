@@ -15,8 +15,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 		/**=== Ping on revival
 		*
 		* When a node is marked dead it will only be __put in the dog house__ for a certain amount of time.
-        * Once it __comes out of the dog house__, or revived, a ping is scheduled before an actual API call, to ensure
-        * that it's up and running. If it's still down, it's put _back in the dog house_ a little longer.
+		* Once it __comes out of the dog house__, or revived, a ping is scheduled before an actual API call, to ensure
+		* that it's up and running. If it's still down, it's put _back in the dog house_ a little longer.
 		*
 		* Take a look at the <<request-timeout, Request timeouts>> for an explanation on what each timeout is.
 		*/

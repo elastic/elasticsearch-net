@@ -116,8 +116,8 @@ namespace Tests.ClientConcepts.Certificates
 		 */
 		public class CertgenCaCluster : SslAndKpiXPackCluster
 		{
-            public CertgenCaCluster() : this(new SslAndKpiClusterConfiguration()) { }
-            public CertgenCaCluster(SslAndKpiClusterConfiguration configuration) : base(configuration) { }
+			public CertgenCaCluster() : this(new SslAndKpiClusterConfiguration()) { }
+			public CertgenCaCluster(SslAndKpiClusterConfiguration configuration) : base(configuration) { }
 			protected override ConnectionSettings ConnectionSettings(ConnectionSettings s) => s
 				.ServerCertificateValidationCallback(
 					CertificateValidations.AuthorityIsRoot(new X509Certificate(this.ClusterConfiguration.FileSystem.CaCertificate))

@@ -10,15 +10,15 @@ using Tests.Framework;
 namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 {
 	public class UnexpectedExceptions
-    {
+	{
 		/**=== Unexpected exceptions
-        *
+		*
 		* When a client call throws an exception that the `IConnection` cannot handle, the exception will bubble
 		* out of the client as an `UnexpectedElasticsearchClientException`, regardless of whether the client is configured to
-        * throw exceptions or not.
-        *
+		* throw exceptions or not.
+		*
 		* An `IConnection` is in charge of knowing which exceptions it can recover from and those it can't, and the default `IConnection`
-        * in
+		* in
 		*
 		* - Desktop CLR is based on `WebRequest` which can and will recover from `WebException`
 		* - Core CLR is based on `HttpClient` which can and will recover from `HttpRequestException`
@@ -93,7 +93,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 		* An unexpected hard exception on ping and sniff is something we *do* try to recover from and failover to retrying on the next node.
 		*
 		* Here, pinging nodes on first use is enabled and the node on port 9200 throws an exception on ping; when this happens,
-        * we still fallover to retry the ping on node on port 9201, where it succeeds.
+		* we still fallover to retry the ping on node on port 9201, where it succeeds.
 		* Following this, the client call on 9201 throws a hard exception that we are not able to recover from
 		*/
 		[U] public async Task PingUnexceptedExceptionDoesFailOver()

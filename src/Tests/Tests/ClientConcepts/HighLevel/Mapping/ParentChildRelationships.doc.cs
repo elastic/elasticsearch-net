@@ -146,7 +146,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			* Note how `MyParent`'s relation name is `parent` because of the mapping on connection settings. This also comes in handy
 			* later when doing strongly typed `has_child` and `has_parent` queries.
 			*/
-  			//hide
+			//hide
 			WithConnectionSettings(s => connectionSettings)
 				.Expect(expected).FromRequest(createIndexResponse);
 		}
