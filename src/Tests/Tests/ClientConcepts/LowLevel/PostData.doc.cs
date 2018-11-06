@@ -16,7 +16,7 @@ namespace Tests.ClientConcepts.LowLevel
 	public class PostingData
 	{
 		/**[[post-data]]
-         * === Post data
+		 * === Post data
 		 *
 		 * The low level client allows you to post a `string` or `byte[]` array directly. On top of this,
 		 * if you pass a collection of `string` or `object` they will be serialized using Elasticsearch's special bulk/multi format.

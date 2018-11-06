@@ -85,8 +85,8 @@ namespace Tests.CommonOptions.TimeUnit
 
 			fourteenDays.Should().BeGreaterThan(twoDays);
 			(fourteenDays > twoDays).Should().BeTrue();
-		    (twoDays != null).Should().BeTrue();
-            (twoDays >= new Time("2d")).Should().BeTrue();
+			(twoDays != null).Should().BeTrue();
+			(twoDays >= new Time("2d")).Should().BeTrue();
 
 			twoDays.Should().BeLessThan(fourteenDays);
 			(twoDays < fourteenDays).Should().BeTrue();
@@ -158,8 +158,8 @@ namespace Tests.CommonOptions.TimeUnit
 			(new Time(0, Nest.TimeUnit.Millisecond) == new Time("0ms")).Should().BeTrue();
 		}
 
-        // hide
-        private class StringParsingTestCases : List<Tuple<string, TimeSpan, string>>
+		// hide
+		private class StringParsingTestCases : List<Tuple<string, TimeSpan, string>>
 		{
 			public void Add(string original, TimeSpan expect, string toString) =>
 				this.Add(Tuple.Create(original, expect, toString));
@@ -168,7 +168,7 @@ namespace Tests.CommonOptions.TimeUnit
 				this.Add(Tuple.Create(bad, TimeSpan.FromDays(1), argumentExceptionContains));
 		}
 
-        // hide
+		// hide
 		[U]public void StringImplicitConversionParsing()
 		{
 			var testCases = new StringParsingTestCases
@@ -200,8 +200,8 @@ namespace Tests.CommonOptions.TimeUnit
 			}
 		}
 
-        // hide
-        [U]public void StringParseExceptions()
+		// hide
+		[U]public void StringParseExceptions()
 		{
 			var testCases = new StringParsingTestCases
 			{

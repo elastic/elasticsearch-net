@@ -79,7 +79,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			/** If we move the clock forward again by another 31 minutes, we now discover that we've scaled back
 			 * down to 10 nodes
 			 */
-            audit.ChangeTime(d => d.AddMinutes(31));
+			audit.ChangeTime(d => d.AddMinutes(31));
 
 			audit = await audit.TraceCalls(
 				new ClientCall {
