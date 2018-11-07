@@ -4,19 +4,23 @@ using System.Diagnostics;
 
 namespace Elasticsearch.Net
 {
+	/// <summary>
+	/// Details about the API call
+	/// </summary>
 	public interface IApiCallDetails
 	{
-		//TODO Get rid of setter
-		/// <summary>
-		/// An audit trail of requests made to nodes within the cluster
-		/// </summary>
-		List<Audit> AuditTrail { get; set; }
 
-		/// <summary>
-		/// A lazy human readable string representation of what happened during this request for both successful and
-		/// failed requests.
-		/// </summary>
-		string DebugInformation { get; }
+		//TODO: Get rid of setter
+        /// <summary>
+        /// An audit trail of requests made to nodes within the cluster
+        /// </summary>
+        List<Audit> AuditTrail { get; set; }
+
+        /// <summary>
+        /// A lazy human readable string representation of what happened during this request for both successful and
+        /// failed requests.
+        /// </summary>
+        string DebugInformation { get; }
 
 		/// <summary>
 		/// A collection of deprecation warnings returned from Elasticsearch.
@@ -35,28 +39,27 @@ namespace Elasticsearch.Net
 		int? HttpStatusCode { get; }
 
 		/// <summary>
-		/// If <see cref="Success" /> is <c>false</c>, this will hold the original exception.
-		/// This will be the orginating CLR exception in most cases.
+		/// If <see cref="Success"/> is <c>false</c>, this will hold the original exception.
+		/// This will be the originating CLR exception in most cases.
 		/// </summary>
 		Exception OriginalException { get; }
 
-		/// <summary>
-		/// The request body bytes.
-		/// <para>NOTE: Only set when disable direct streaming is set for the request</para>
-		/// </summary>
-		[DebuggerDisplay("{RequestBodyInBytes != null ? System.Text.Encoding.UTF8.GetString(RequestBodyInBytes) : null,nq}")]
+        /// <summary>
+        /// The request body bytes.
+        /// <para>NOTE: Only set when disable direct streaming is set for the request</para>
+        /// </summary>
+        [DebuggerDisplay("{RequestBodyInBytes != null ? System.Text.Encoding.UTF8.GetString(RequestBodyInBytes) : null,nq}")]
 		byte[] RequestBodyInBytes { get; }
 
-		/// <summary>
-		/// The response body bytes.
-		/// <para>NOTE: Only set when disable direct streaming is set for the request</para>
-		/// </summary>
-		[DebuggerDisplay("{ResponseBodyInBytes != null ? System.Text.Encoding.UTF8.GetString(ResponseBodyInBytes) : null,nq}")]
+        /// <summary>
+        /// The response body bytes.
+        /// <para>NOTE: Only set when disable direct streaming is set for the request</para>
+        /// </summary>
+        [DebuggerDisplay("{ResponseBodyInBytes != null ? System.Text.Encoding.UTF8.GetString(ResponseBodyInBytes) : null,nq}")]
 		byte[] ResponseBodyInBytes { get; }
 
-		/// <summary>The response mime type </summary>
+		/// <summary>The response MIME type </summary>
 		string ResponseMimeType { get; }
-
 		/// <summary>
 		/// The response status code is in the 200 range or is in the allowed list of status codes set on the request.
 		/// </summary>

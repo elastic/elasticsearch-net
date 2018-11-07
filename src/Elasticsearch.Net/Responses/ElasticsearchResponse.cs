@@ -8,31 +8,42 @@ namespace Elasticsearch.Net
 	/// </summary>
 	public abstract class ElasticsearchResponseBase : IApiCallDetails, IElasticsearchResponse
 	{
+		/// <inheritdoc />
 		public IApiCallDetails ApiCall { get; set; }
-		public List<Audit> AuditTrail => ApiCall.AuditTrail;
 
+		/// <inheritdoc cref="IApiCallDetails.DebugInformation"/>
 		public string DebugInformation => ApiCall.DebugInformation;
-		public IEnumerable<string> DeprecationWarnings => ApiCall.DeprecationWarnings;
+		/// <inheritdoc cref="IApiCallDetails.HttpMethod"/>
 		public HttpMethod HttpMethod => ApiCall.HttpMethod;
-		public int? HttpStatusCode => ApiCall.HttpStatusCode;
-		public Exception OriginalException => ApiCall.OriginalException;
-
-		/// <summary>The raw byte request message body, only set when DisableDirectStreaming() is set on Connection configuration</summary>
-		public byte[] RequestBodyInBytes => ApiCall.RequestBodyInBytes;
-
-		/// <summary>The raw byte response message body, only set when DisableDirectStreaming() is set on Connection configuration</summary>
-		public byte[] ResponseBodyInBytes => ApiCall.ResponseBodyInBytes;
-
-		public string ResponseMimeType => ApiCall.ResponseMimeType;
-
-		public bool Success => ApiCall.Success;
+		/// <inheritdoc cref="IApiCallDetails.AuditTrail"/>
+		public List<Audit> AuditTrail => ApiCall.AuditTrail;
+		/// <inheritdoc cref="IApiCallDetails.DeprecationWarnings"/>
+		public IEnumerable<string> DeprecationWarnings => ApiCall.DeprecationWarnings;
+		/// <inheritdoc cref="IApiCallDetails.SuccessOrKnownError"/>
 		public bool SuccessOrKnownError => ApiCall.SuccessOrKnownError;
+		/// <inheritdoc cref="IApiCallDetails.HttpStatusCode"/>
+		public int? HttpStatusCode => ApiCall.HttpStatusCode;
+
+		/// <inheritdoc cref="IApiCallDetails.Success"/>
+		public bool Success => ApiCall.Success;
+		/// <inheritdoc cref="IApiCallDetails.OriginalException"/>
+		public Exception OriginalException => ApiCall.OriginalException;
+		/// <inheritdoc cref="IApiCallDetails.ResponseMimeType"/>
+		public string ResponseMimeType => ApiCall.ResponseMimeType;
+		/// <inheritdoc cref="IApiCallDetails.Uri"/>
 		public Uri Uri => ApiCall.Uri;
 
-		//ignored
-		List<Audit> IApiCallDetails.AuditTrail { get; set; }
+		/// <inheritdoc cref="IApiCallDetails.ResponseBodyInBytes"/>
+		public byte[] ResponseBodyInBytes => ApiCall.ResponseBodyInBytes;
+
+		/// <inheritdoc cref="IApiCallDetails.RequestBodyInBytes"/>
+		public byte[] RequestBodyInBytes => ApiCall.RequestBodyInBytes;
 
 		bool IElasticsearchResponse.TryGetServerErrorReason(out string reason) => TryGetServerErrorReason(out reason);
+
+		// TODO: Remove?
+		//ignored
+		List<Audit> IApiCallDetails.AuditTrail { get; set; }
 
 		protected virtual bool TryGetServerErrorReason(out string reason)
 		{
@@ -45,7 +56,7 @@ namespace Elasticsearch.Net
 
 	/// <summary>
 	/// A response from Elasticsearch including details about the request/response life cycle. Base class for the built in low level response
-	/// types: <see cref="StringResponse" /> <see cref="BytesResponse" /> and <see cref="DynamicResponse" />
+	/// types, <see cref="StringResponse"/>, <see cref="BytesResponse"/>, <see cref="DynamicResponse"/> and <see cref="VoidResponse"/>
 	/// </summary>
 	public abstract class ElasticsearchResponse<T> : ElasticsearchResponseBase
 	{

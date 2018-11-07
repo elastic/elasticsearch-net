@@ -28,12 +28,25 @@ namespace Tests.Core.Client
 		)
 		{
 			var serializer = TestClient.Default.RequestResponseSerializer;
-			byte[] fixedResult = null;
-			if (response is string s) fixedResult = Encoding.UTF8.GetBytes(s);
-			else if (contentType == RequestData.MimeType) fixedResult = serializer.SerializeToBytes(response);
-			else fixedResult = Encoding.UTF8.GetBytes(response.ToString());
+			byte[] responseBytes;
+			switch (response)
+			{
+				case string s:
+					responseBytes = Encoding.UTF8.GetBytes(s);
+					break;
+				case byte[] b:
+					responseBytes = b;
+					break;
+				default:
+				{
+					responseBytes = contentType == RequestData.MimeType
+						? serializer.SerializeToBytes(response)
+						: Encoding.UTF8.GetBytes(response.ToString());
+					break;
+				}
+			}
 
-			var connection = new InMemoryConnection(fixedResult, statusCode, exception, contentType);
+			var connection = new InMemoryConnection(responseBytes, statusCode, exception, contentType);
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 			var defaultSettings = new ConnectionSettings(connectionPool, connection)
 				.DefaultIndex("default-index");

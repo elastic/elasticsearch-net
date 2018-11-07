@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 
 namespace Elasticsearch.Net
@@ -12,11 +13,11 @@ namespace Elasticsearch.Net
 		public bool TryGetServerError(out ServerError serverError)
 		{
 			serverError = null;
-			if (string.IsNullOrEmpty(Body)) return false;
+			if (string.IsNullOrEmpty(Body) || ResponseMimeType != RequestData.MimeType)
+				return false;
 
-			using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(Body)))
-				serverError = ServerError.Create(stream);
-			return true;
+			using(var stream = new MemoryStream(Encoding.UTF8.GetBytes(Body)))
+				return ServerError.TryCreate(stream, out serverError);
 		}
 
 		protected override bool TryGetServerErrorReason(out string reason)
