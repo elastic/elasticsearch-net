@@ -4,13 +4,17 @@ using System.Diagnostics;
 
 namespace Elasticsearch.Net
 {
+	/// <summary>
+	/// Details about the API call
+	/// </summary>
 	public interface IApiCallDetails
 	{
-		//TODO Get rid of setter
-		/// <summary>
-		/// An audit trail of requests made to nodes within the cluster
-		/// </summary>
-		List<Audit> AuditTrail { get; set; }
+
+		//TODO: Get rid of setter
+        /// <summary>
+        /// An audit trail of requests made to nodes within the cluster
+        /// </summary>
+        List<Audit> AuditTrail { get; set; }
 
 		/// <summary>
 		/// A lazy human readable string representation of what happened during this request for both successful and
@@ -35,8 +39,8 @@ namespace Elasticsearch.Net
 		int? HttpStatusCode { get; }
 
 		/// <summary>
-		/// If <see cref="Success" /> is <c>false</c>, this will hold the original exception.
-		/// This will be the orginating CLR exception in most cases.
+		/// If <see cref="Success"/> is <c>false</c>, this will hold the original exception.
+		/// This will be the originating CLR exception in most cases.
 		/// </summary>
 		Exception OriginalException { get; }
 
@@ -54,7 +58,7 @@ namespace Elasticsearch.Net
 		[DebuggerDisplay("{ResponseBodyInBytes != null ? System.Text.Encoding.UTF8.GetString(ResponseBodyInBytes) : null,nq}")]
 		byte[] ResponseBodyInBytes { get; }
 
-		/// <summary>The response mime type </summary>
+		/// <summary>The response MIME type </summary>
 		string ResponseMimeType { get; }
 
 		/// <summary>
