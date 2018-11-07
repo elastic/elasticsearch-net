@@ -6,33 +6,33 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Search
 {
-	public abstract class SearchUsageTestBase : ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+	public abstract class SearchUsageTestBase
+		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
-		protected SearchUsageTestBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Search<Project>(f),
-			fluentAsync: (client, f) => client.SearchAsync<Project>(f),
-			request: (client, r) => client.Search<Project>(r),
-			requestAsync: (client, r) => client.SearchAsync<Project>(r)
-		);
-
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/project/doc/_search";
-
 		protected TermQuery ProjectFilter = new TermQuery
 		{
 			Field = Infer.Field<Project>(p => p.Type),
 			Value = Project.TypeName
 		};
 
-		protected object ProjectFilterExpectedJson = new {term = new {type = new {value = Project.TypeName}}};
+		protected object ProjectFilterExpectedJson = new { term = new { type = new { value = Project.TypeName } } };
+
+		protected SearchUsageTestBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override string UrlPath => "/project/doc/_search";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.Search<Project>(f),
+			(client, f) => client.SearchAsync<Project>(f),
+			(client, r) => client.Search<Project>(r),
+			(client, r) => client.SearchAsync<Project>(r)
+		);
 
 		// https://youtrack.jetbrains.com/issue/RIDER-19912
 		[U] protected override Task HitsTheCorrectUrl() => base.HitsTheCorrectUrl();
@@ -48,7 +48,5 @@ namespace Tests.Search
 		[I] public override Task ReturnsExpectedIsValid() => base.ReturnsExpectedIsValid();
 
 		[I] public override Task ReturnsExpectedResponse() => base.ReturnsExpectedResponse();
-
-
 	}
 }

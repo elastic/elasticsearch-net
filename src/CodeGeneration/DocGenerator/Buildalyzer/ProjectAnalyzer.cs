@@ -1,4 +1,5 @@
 ﻿#region License
+
 //MIT License
 //
 //Copyright (c) 2017 Dave Glick
@@ -20,13 +21,13 @@
 //LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
+
 #endregion
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Xml;
 using System.Xml.Linq;
 using DocGenerator.Buildalyzer.Environment;
 using Microsoft.Build.Evaluation;
@@ -41,32 +42,16 @@ namespace DocGenerator.Buildalyzer
 {
 	public class ProjectAnalyzer
 	{
-		private readonly XDocument _projectDocument;
-		private readonly Dictionary<string, string> _globalProperties;
 		private readonly BuildEnvironment _buildEnvironment;
+		private readonly Dictionary<string, string> _globalProperties;
 		private readonly ConsoleLogger _logger;
-
-		private Project _project = null;
+		private readonly XDocument _projectDocument;
 		private ProjectInstance _compiledProject = null;
 
-		public AnalyzerManager Manager { get; }
-
-		public string ProjectFilePath { get; }
-
-		/// <summary>
-		/// The global properties for MSBuild. By default, each project
-		/// is configured with properties that use a design-time build without calling the compiler.
-		/// </summary>
-		public IReadOnlyDictionary<string, string> GlobalProperties => _globalProperties;
-
-		public Project Project => Load();
-
-		public ProjectInstance CompiledProject => Compile();
+		private Project _project = null;
 
 		internal ProjectAnalyzer(AnalyzerManager manager, string projectFilePath)
-			: this(manager, projectFilePath, XDocument.Load(projectFilePath))
-		{
-		}
+			: this(manager, projectFilePath, XDocument.Load(projectFilePath)) { }
 
 		internal ProjectAnalyzer(AnalyzerManager manager, string projectFilePath, XDocument projectDocument)
 		{
@@ -87,17 +72,26 @@ namespace DocGenerator.Buildalyzer
 
 			// Create the logger
 			if (manager.ProjectLogger != null)
-			{
 				_logger = new ConsoleLogger(manager.LoggerVerbosity, x => manager.ProjectLogger.LogInformation(x), null, null);
-			}
 		}
+
+		public ProjectInstance CompiledProject => Compile();
+
+		/// <summary>
+		/// The global properties for MSBuild. By default, each project
+		/// is configured with properties that use a design-time build without calling the compiler.
+		/// </summary>
+		public IReadOnlyDictionary<string, string> GlobalProperties => _globalProperties;
+
+		public AnalyzerManager Manager { get; }
+
+		public Project Project => Load();
+
+		public string ProjectFilePath { get; }
 
 		public Project Load()
 		{
-			if (_project != null)
-			{
-				return _project;
-			}
+			if (_project != null) return _project;
 
 			// Create a project collection for each project since the toolset might change depending on the type of project
 			var projectCollection = CreateProjectCollection();
@@ -120,7 +114,6 @@ namespace DocGenerator.Buildalyzer
 		}
 
 
-
 		// Tweaks the project file a bit to ensure a succesfull build
 		private static XDocument TweakProjectDocument(XDocument projectDocument, string projectFolder)
 		{
@@ -132,23 +125,17 @@ namespace DocGenerator.Buildalyzer
 				var project = att.Value;
 
 				if (!ResolveKnownPropsPath(projectFolder, project, att, "PublishArtifacts.build.props"))
-				{
 					ResolveKnownPropsPath(projectFolder, project, att, "Artifacts.build.props");
-				}
 				ResolveKnownPropsPath(projectFolder, project, att, "Library.build.props");
 			}
 			// Add SkipGetTargetFrameworkProperties to every ProjectReference
 			foreach (var projectReference in projectDocument.GetDescendants("ProjectReference").ToArray())
-			{
 				projectReference.AddChildElement("SkipGetTargetFrameworkProperties", "true");
-			}
 
 			// Removes all EnsureNuGetPackageBuildImports
 			foreach (var ensureNuGetPackageBuildImports in
 				projectDocument.GetDescendants("Target").Where(x => x.GetAttributeValue("Name") == "EnsureNuGetPackageBuildImports").ToArray())
-			{
 				ensureNuGetPackageBuildImports.Remove();
-			}
 
 			return projectDocument;
 		}
@@ -156,10 +143,12 @@ namespace DocGenerator.Buildalyzer
 		private static bool ResolveKnownPropsPath(string projectFolder, string project, XAttribute att, string buildPropFile)
 		{
 			if (!project.Contains(buildPropFile)) return false;
+
 			var dir = new DirectoryInfo(projectFolder).Parent;
 			while (dir != null && dir.Name != "src")
 				dir = dir.Parent;
 			if (dir == null) return true;
+
 			att.Value = Path.GetFullPath(Path.Combine(dir.FullName, buildPropFile));
 			return false;
 		}
@@ -171,38 +160,26 @@ namespace DocGenerator.Buildalyzer
 			projectCollection.AddToolset(
 				new Toolset(ToolLocationHelper.CurrentToolsVersion, _buildEnvironment.GetToolsPath(), projectCollection, string.Empty));
 			projectCollection.DefaultToolsVersion = ToolLocationHelper.CurrentToolsVersion;
-			if (_logger != null)
-			{
-				projectCollection.RegisterLogger(_logger);
-			}
+			if (_logger != null) projectCollection.RegisterLogger(_logger);
 			return projectCollection;
 		}
 
 		public ProjectInstance Compile()
 		{
-			if (_compiledProject != null)
-			{
-				return _compiledProject;
-			}
+			if (_compiledProject != null) return _compiledProject;
+
 			var project = Load();
-			if (project == null)
-			{
-				return null;
-			}
+			if (project == null) return null;
 
 			// Compile the project
 			_buildEnvironment.SetEnvironmentVars(GlobalProperties);
 			try
 			{
 				var projectInstance = project.CreateProjectInstance();
-				if (!projectInstance.Build("Clean", _logger == null ? null : new ILogger[] { _logger }))
-				{
-					return null;
-				}
-				if (!projectInstance.Build("Compile", _logger == null ? null : new ILogger[] { _logger }))
-				{
-					return null;
-				}
+				if (!projectInstance.Build("Clean", _logger == null ? null : new ILogger[] { _logger })) return null;
+
+				if (!projectInstance.Build("Compile", _logger == null ? null : new ILogger[] { _logger })) return null;
+
 				_compiledProject = projectInstance;
 				return _compiledProject;
 			}
@@ -213,38 +190,37 @@ namespace DocGenerator.Buildalyzer
 		}
 
 		public IReadOnlyList<string> GetSourceFiles() =>
-			Compile()?.Items
+			Compile()
+				?.Items
 				.Where(x => x.ItemType == "CscCommandLineArgs" && !x.EvaluatedInclude.StartsWith("/"))
 				.Select(x => Path.GetFullPath(Path.Combine(Path.GetDirectoryName(ProjectFilePath), x.EvaluatedInclude)))
 				.ToList();
 
 		public IReadOnlyList<string> GetReferences() =>
-			Compile()?.Items
+			Compile()
+				?.Items
 				.Where(x => x.ItemType == "CscCommandLineArgs" && x.EvaluatedInclude.StartsWith("/reference:"))
 				.Select(x => x.EvaluatedInclude.Substring(11).Trim('"'))
 				.ToList();
 
 		public IReadOnlyList<string> GetProjectReferences() =>
-			Compile()?.Items
+			Compile()
+				?.Items
 				.Where(x => x.ItemType == "ProjectReference")
 				.Select(x => Path.GetFullPath(Path.Combine(Path.GetDirectoryName(ProjectFilePath), x.EvaluatedInclude)))
 				.ToList();
 
 		public void SetGlobalProperty(string key, string value)
 		{
-			if (_project != null)
-			{
-				throw new InvalidOperationException("Can not change global properties once project has been loaded");
-			}
+			if (_project != null) throw new InvalidOperationException("Can not change global properties once project has been loaded");
+
 			_globalProperties[key] = value;
 		}
 
 		public bool RemoveGlobalProperty(string key)
 		{
-			if (_project != null)
-			{
-				throw new InvalidOperationException("Can not change global properties once project has been loaded");
-			}
+			if (_project != null) throw new InvalidOperationException("Can not change global properties once project has been loaded");
+
 			return _globalProperties.Remove(key);
 		}
 	}

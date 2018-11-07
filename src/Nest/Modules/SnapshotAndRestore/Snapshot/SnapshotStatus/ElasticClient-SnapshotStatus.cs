@@ -1,48 +1,56 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using System.Threading;
 
 namespace Nest
 {
 	public partial interface IElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		ISnapshotStatusResponse SnapshotStatus(Func<SnapshotStatusDescriptor, ISnapshotStatusRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		ISnapshotStatusResponse SnapshotStatus(ISnapshotStatusRequest request);
 
-		/// <inheritdoc/>
-		Task<ISnapshotStatusResponse> SnapshotStatusAsync(Func<SnapshotStatusDescriptor, ISnapshotStatusRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<ISnapshotStatusResponse> SnapshotStatusAsync(Func<SnapshotStatusDescriptor, ISnapshotStatusRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
-		/// <inheritdoc/>
-		Task<ISnapshotStatusResponse> SnapshotStatusAsync(ISnapshotStatusRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<ISnapshotStatusResponse> SnapshotStatusAsync(ISnapshotStatusRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public ISnapshotStatusResponse SnapshotStatus(Func<SnapshotStatusDescriptor, ISnapshotStatusRequest> selector = null) =>
-			this.SnapshotStatus(selector.InvokeOrDefault(new SnapshotStatusDescriptor()));
+			SnapshotStatus(selector.InvokeOrDefault(new SnapshotStatusDescriptor()));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public ISnapshotStatusResponse SnapshotStatus(ISnapshotStatusRequest request) =>
-			this.Dispatcher.Dispatch<ISnapshotStatusRequest, SnapshotStatusRequestParameters, SnapshotStatusResponse>(
+			Dispatcher.Dispatch<ISnapshotStatusRequest, SnapshotStatusRequestParameters, SnapshotStatusResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.SnapshotStatusDispatch<SnapshotStatusResponse>(p)
+				(p, d) => LowLevelDispatch.SnapshotStatusDispatch<SnapshotStatusResponse>(p)
 			);
 
-		/// <inheritdoc/>
-		public Task<ISnapshotStatusResponse> SnapshotStatusAsync(Func<SnapshotStatusDescriptor, ISnapshotStatusRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.SnapshotStatusAsync(selector.InvokeOrDefault(new SnapshotStatusDescriptor()), cancellationToken);
+		/// <inheritdoc />
+		public Task<ISnapshotStatusResponse> SnapshotStatusAsync(Func<SnapshotStatusDescriptor, ISnapshotStatusRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			SnapshotStatusAsync(selector.InvokeOrDefault(new SnapshotStatusDescriptor()), cancellationToken);
 
-		/// <inheritdoc/>
-		public Task<ISnapshotStatusResponse> SnapshotStatusAsync(ISnapshotStatusRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<ISnapshotStatusRequest, SnapshotStatusRequestParameters, SnapshotStatusResponse, ISnapshotStatusResponse>(
+		/// <inheritdoc />
+		public Task<ISnapshotStatusResponse> SnapshotStatusAsync(ISnapshotStatusRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			Dispatcher.DispatchAsync<ISnapshotStatusRequest, SnapshotStatusRequestParameters, SnapshotStatusResponse, ISnapshotStatusResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => this.LowLevelDispatch.SnapshotStatusDispatchAsync<SnapshotStatusResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.SnapshotStatusDispatchAsync<SnapshotStatusResponse>(p, c)
 			);
 	}
 }

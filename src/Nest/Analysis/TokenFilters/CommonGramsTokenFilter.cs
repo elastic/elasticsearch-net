@@ -4,8 +4,8 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// Token filter that generates bigrams for frequently occuring terms. Single terms are still indexed.
-	///<para>Note, common_words or common_words_path field is required.</para>
+	///  Token filter that generates bigrams for frequently occuring terms. Single terms are still indexed.
+	/// <para>Note, common_words or common_words_path field is required.</para>
 	/// </summary>
 	public interface ICommonGramsTokenFilter : ITokenFilter
 	{
@@ -35,27 +35,26 @@ namespace Nest
 		bool? QueryMode { get; set; }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class CommonGramsTokenFilter : TokenFilterBase, ICommonGramsTokenFilter
 	{
 		public CommonGramsTokenFilter() : base("common_grams") { }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IEnumerable<string> CommonWords { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public string CommonWordsPath { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public bool? IgnoreCase { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public bool? QueryMode { get; set; }
-
 	}
 
-	///<inheritdoc/>
-	public class CommonGramsTokenFilterDescriptor 
+	/// <inheritdoc />
+	public class CommonGramsTokenFilterDescriptor
 		: TokenFilterDescriptorBase<CommonGramsTokenFilterDescriptor, ICommonGramsTokenFilter>, ICommonGramsTokenFilter
 	{
 		protected override string Type => "common_grams";
@@ -65,21 +64,19 @@ namespace Nest
 		bool? ICommonGramsTokenFilter.IgnoreCase { get; set; }
 		bool? ICommonGramsTokenFilter.QueryMode { get; set; }
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public CommonGramsTokenFilterDescriptor QueryMode(bool? queryMode = true) => Assign(a => a.QueryMode = queryMode);
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public CommonGramsTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true) => Assign(a => a.IgnoreCase = ignoreCase);
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public CommonGramsTokenFilterDescriptor CommonWordsPath(string path) => Assign(a => a.CommonWordsPath = path);
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public CommonGramsTokenFilterDescriptor CommonWords(IEnumerable<string> commonWords) => Assign(a => a.CommonWords = commonWords);
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public CommonGramsTokenFilterDescriptor CommonWords(params string[] commonWords) => Assign(a => a.CommonWords = commonWords);
-
 	}
-
 }

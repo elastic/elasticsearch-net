@@ -1,10 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -18,8 +14,8 @@ namespace Nest
 
 	public class TrimProcessor : ProcessorBase, ITrimProcessor
 	{
-		protected override string Name => "trim";
 		public Field Field { get; set; }
+		protected override string Name => "trim";
 	}
 
 	public class TrimProcessorDescriptor<T>

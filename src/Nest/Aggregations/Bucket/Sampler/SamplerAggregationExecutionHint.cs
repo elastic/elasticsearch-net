@@ -9,9 +9,11 @@ namespace Nest
 	{
 		[EnumMember(Value = "map")]
 		Map,
-        [EnumMember(Value = "global_ordinals")]
+
+		[EnumMember(Value = "global_ordinals")]
 		GlobalOrdinals,
-        [EnumMember(Value = "bytes_hash")]
+
+		[EnumMember(Value = "bytes_hash")]
 		BytesHash
 	}
 }

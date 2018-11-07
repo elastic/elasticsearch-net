@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Elastic.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
-using Nest;
+﻿using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
+using Nest;
 
 namespace Tests.Reproduce
 {
 	public class GithubIssue2101
 	{
-
 		[U]
 		public void BoolClausesShouldEvaluateOnlyOnce()
 		{

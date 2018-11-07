@@ -21,10 +21,10 @@ namespace Tests.Document.Multiple.BulkAll
 			var pages = 10;
 			var seenPages = 0;
 			var numberOfDocuments = size * pages;
-			var documents = this.CreateLazyStreamOfDocuments(numberOfDocuments);
+			var documents = CreateLazyStreamOfDocuments(numberOfDocuments);
 
 			var tokenSource = new CancellationTokenSource();
-			var observableBulk = this.Client.BulkAll(documents, f => f
+			var observableBulk = Client.BulkAll(documents, f => f
 					.MaxDegreeOfParallelism(8)
 					.BackOffTime(TimeSpan.FromSeconds(10))
 					.BackOffRetries(2)
@@ -39,7 +39,7 @@ namespace Tests.Document.Multiple.BulkAll
 				.ForEachAsync(x => Interlocked.Increment(ref seenPages), tokenSource.Token);
 
 			seenPages.Should().Be(pages);
-			var count = this.Client.Count<SmallObject>(f => f.Index(index));
+			var count = Client.Count<SmallObject>(f => f.Index(index));
 			count.Count.Should().Be(numberOfDocuments);
 		}
 	}

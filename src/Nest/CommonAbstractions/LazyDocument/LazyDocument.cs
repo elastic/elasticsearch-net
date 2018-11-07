@@ -1,8 +1,5 @@
 ﻿using System;
-using System.IO;
-using System.Text;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Nest
@@ -14,15 +11,15 @@ namespace Nest
 	public interface ILazyDocument
 	{
 		/// <summary>
-		/// Creates an instance of <typeparamref name="T"/> from this
-		/// <see cref="ILazyDocument"/> instance
+		/// Creates an instance of <typeparamref name="T" /> from this
+		/// <see cref="ILazyDocument" /> instance
 		/// </summary>
 		/// <typeparam name="T">The type</typeparam>
 		T As<T>();
 
 		/// <summary>
-		/// Creates an instance of <paramref name="objectType"/> from this
-		/// <see cref="ILazyDocument"/> instance
+		/// Creates an instance of <paramref name="objectType" /> from this
+		/// <see cref="ILazyDocument" /> instance
 		/// </summary>
 		/// <param name="objectType">The type</param>
 		object As(Type objectType);
@@ -31,8 +28,6 @@ namespace Nest
 	/// <inheritdoc />
 	public class LazyDocument : ILazyDocument
 	{
-		internal JToken Token { get; }
-
 		private readonly IElasticsearchSerializer _serializer;
 
 		internal LazyDocument(JToken token, IElasticsearchSerializer serializer)
@@ -40,6 +35,8 @@ namespace Nest
 			Token = token;
 			_serializer = serializer;
 		}
+
+		internal JToken Token { get; }
 
 		/// <inheritdoc />
 		public T As<T>()

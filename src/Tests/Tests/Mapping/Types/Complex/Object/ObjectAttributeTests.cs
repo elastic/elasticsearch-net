@@ -1,21 +1,20 @@
-﻿using System;
-using Nest;
+﻿using Nest;
 
 namespace Tests.Mapping.Types.Complex.Object
 {
 	public class ObjectTest
 	{
-		public class InnerObject
-		{
-			public string Name { get; set; }
-		}
-
 		[Object(
 			Enabled = true)]
 		public InnerObject Full { get; set; }
 
 		[Object]
 		public InnerObject Minimal { get; set; }
+
+		public class InnerObject
+		{
+			public string Name { get; set; }
+		}
 	}
 
 	public class ObjectAttributeTests : AttributeTestsBase<ObjectTest>

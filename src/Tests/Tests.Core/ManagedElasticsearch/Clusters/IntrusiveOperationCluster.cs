@@ -11,7 +11,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 			ElasticsearchPlugin.IngestGeoIp, ElasticsearchPlugin.IngestAttachment
 		)
 		{
-			MaxConcurrency= 1
+			MaxConcurrency = 1
 		}) { }
 	}
 }

@@ -9,6 +9,7 @@ namespace Nest
 	{
 		[EnumMember(Value = "eager")]
 		Eager,
+
 		[EnumMember(Value = "eager_global_ordinals")]
 		EagerGlobalOrdinals
 	}

@@ -7,8 +7,6 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Modules.SnapshotAndRestore.Snapshot
 {
@@ -17,14 +15,15 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 	{
 		private static readonly string SnapshotIndexName = Guid.NewGuid().ToString("N").Substring(8);
 
-		public SnapshotCrudTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
+		private readonly string _repositoryLocation;
+		private readonly string _repositoryName = RandomString();
+
+		public SnapshotCrudTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) =>
 			_repositoryLocation = Path.Combine(cluster.FileSystem.RepositoryPath, RandomString());
-		}
 
 		protected override void IntegrationSetup(IElasticClient client)
 		{
-			var create = this.Client.CreateRepository(_repositoryName, cr => cr
+			var create = Client.CreateRepository(_repositoryName, cr => cr
 				.FileSystem(fs => fs
 					.Settings(_repositoryLocation)
 				)
@@ -33,23 +32,20 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 			if (!create.IsValid || !create.Acknowledged)
 				throw new Exception("Setup: failed to create snapshot repository");
 
-			var createIndex = this.Client.CreateIndex(SnapshotIndexName);
-			var waitForIndex = this.Client.ClusterHealth(c=>c
+			var createIndex = Client.CreateIndex(SnapshotIndexName);
+			var waitForIndex = Client.ClusterHealth(c => c
 				.WaitForStatus(WaitForStatus.Yellow)
 				.Index(SnapshotIndexName)
 			);
 		}
 
-		private string _repositoryLocation;
-		private string _repositoryName = RandomString();
-
 		protected override LazyResponses Create() => Calls<SnapshotDescriptor, SnapshotRequest, ISnapshotRequest, ISnapshotResponse>(
 			CreateInitializer,
 			CreateFluent,
-			fluent: (s, c, f) => c.Snapshot(_repositoryName, s, f),
-			fluentAsync: (s, c, f) => c.SnapshotAsync(_repositoryName, s, f),
-			request: (s, c, r) => c.Snapshot(r),
-			requestAsync: (s, c, r) => c.SnapshotAsync(r)
+			(s, c, f) => c.Snapshot(_repositoryName, s, f),
+			(s, c, f) => c.SnapshotAsync(_repositoryName, s, f),
+			(s, c, r) => c.Snapshot(r),
+			(s, c, r) => c.SnapshotAsync(r)
 		);
 
 		protected SnapshotRequest CreateInitializer(string snapshotName) => new SnapshotRequest(_repositoryName, snapshotName)
@@ -65,25 +61,28 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 		protected override LazyResponses Read() => Calls<GetSnapshotDescriptor, GetSnapshotRequest, IGetSnapshotRequest, IGetSnapshotResponse>(
 			ReadInitializer,
 			ReadFluent,
-			fluent: (s, c, f) => c.GetSnapshot(_repositoryName, s, f),
-			fluentAsync: (s, c, f) => c.GetSnapshotAsync(_repositoryName, s, f),
-			request: (s, c, r) => c.GetSnapshot(r),
-			requestAsync: (s, c, r) => c.GetSnapshotAsync(r)
+			(s, c, f) => c.GetSnapshot(_repositoryName, s, f),
+			(s, c, f) => c.GetSnapshotAsync(_repositoryName, s, f),
+			(s, c, r) => c.GetSnapshot(r),
+			(s, c, r) => c.GetSnapshotAsync(r)
 		);
 
 		protected GetSnapshotRequest ReadInitializer(string snapshotName) => new GetSnapshotRequest(_repositoryName, snapshotName);
+
 		protected IGetSnapshotRequest ReadFluent(string snapshotName, GetSnapshotDescriptor d) => null;
 
-		protected override LazyResponses Delete() => Calls<DeleteSnapshotDescriptor, DeleteSnapshotRequest, IDeleteSnapshotRequest, IDeleteSnapshotResponse>(
-			DeleteInitializer,
-			DeleteFluent,
-			fluent: (s, c, f) => c.DeleteSnapshot(_repositoryName, s, f),
-			fluentAsync: (s, c, f) => c.DeleteSnapshotAsync(_repositoryName, s, f),
-			request: (s, c, r) => c.DeleteSnapshot(r),
-			requestAsync: (s, c, r) => c.DeleteSnapshotAsync(r)
-		);
+		protected override LazyResponses Delete() =>
+			Calls<DeleteSnapshotDescriptor, DeleteSnapshotRequest, IDeleteSnapshotRequest, IDeleteSnapshotResponse>(
+				DeleteInitializer,
+				DeleteFluent,
+				(s, c, f) => c.DeleteSnapshot(_repositoryName, s, f),
+				(s, c, f) => c.DeleteSnapshotAsync(_repositoryName, s, f),
+				(s, c, r) => c.DeleteSnapshot(r),
+				(s, c, r) => c.DeleteSnapshotAsync(r)
+			);
 
 		protected DeleteSnapshotRequest DeleteInitializer(string snapshotName) => new DeleteSnapshotRequest(_repositoryName, snapshotName);
+
 		protected IDeleteSnapshotRequest DeleteFluent(string snapshotName, DeleteSnapshotDescriptor d) => null;
 
 		protected override LazyResponses Update() => LazyResponses.Empty;

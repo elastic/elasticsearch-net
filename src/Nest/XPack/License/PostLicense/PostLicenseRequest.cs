@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -24,6 +22,5 @@ namespace Nest
 
 		public PostLicenseDescriptor License(License license) =>
 			Assign(a => a.License = license);
-
 	}
 }

@@ -8,29 +8,29 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<NestedSort>))]
 	public interface INestedSort
 	{
-		[JsonProperty("path")]
-		Field Path { get; set; }
-
 		[JsonProperty("filter")]
 		QueryContainer Filter { get; set; }
 
 		[JsonProperty("nested")]
 		INestedSort Nested { get; set; }
+
+		[JsonProperty("path")]
+		Field Path { get; set; }
 	}
 
 	public class NestedSort : INestedSort
 	{
-		public Field Path { get; set; }
 		public QueryContainer Filter { get; set; }
 		public INestedSort Nested { get; set; }
+		public Field Path { get; set; }
 	}
 
 	public class NestedSortDescriptor<T>
 		: DescriptorBase<NestedSortDescriptor<T>, INestedSort>, INestedSort where T : class
 	{
-		Field INestedSort.Path { get; set; }
 		QueryContainer INestedSort.Filter { get; set; }
 		INestedSort INestedSort.Nested { get; set; }
+		Field INestedSort.Path { get; set; }
 
 		public NestedSortDescriptor<T> Path(Field path) => Assign(a => a.Path = path);
 

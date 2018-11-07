@@ -1,11 +1,8 @@
 ﻿using System;
-using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Mapping.Types.Core.Boolean
 {
@@ -43,7 +40,8 @@ namespace Tests.Mapping.Types.Core.Boolean
 
 		protected override IProperties InitializerProperties => new Properties
 		{
-			{ "name", new BooleanProperty
+			{
+				"name", new BooleanProperty
 				{
 					DocValues = false,
 					Boost = 1.3,

@@ -2,36 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace Nest
 {
 	internal static class DotNetCoreTypeExtensions
 	{
-		internal static bool IsGeneric(this Type type)
-		{
-			return type.GetTypeInfo().IsGenericType;
-		}
+		internal static bool IsGeneric(this Type type) => type.GetTypeInfo().IsGenericType;
 
-		internal static Assembly Assembly(this Type type)
-		{
-			return type.GetTypeInfo().Assembly;
-		}
+		internal static Assembly Assembly(this Type type) => type.GetTypeInfo().Assembly;
 
-		internal static bool IsGenericDictionary(this Type type)
-		{
-			return type.GetInterfaces().Any(t =>
+		internal static bool IsGenericDictionary(this Type type) => type.GetInterfaces()
+			.Any(t =>
 				t.IsGeneric() && (
-				t.GetGenericTypeDefinition() == typeof(IDictionary<,>) ||
-				t.GetGenericTypeDefinition() == typeof(IReadOnlyDictionary<,>)));
-		}
+					t.GetGenericTypeDefinition() == typeof(IDictionary<,>) ||
+					t.GetGenericTypeDefinition() == typeof(IReadOnlyDictionary<,>)));
 
 		internal static bool TryGetGenericDictionaryArguments(this Type type, out Type[] genericArguments)
 		{
-			var genericDictionary = type.GetInterfaces().FirstOrDefault(t =>
-				t.IsGeneric() && (
-				t.GetGenericTypeDefinition() == typeof(IDictionary<,>) ||
-				t.GetGenericTypeDefinition() == typeof(IReadOnlyDictionary<,>)));
+			var genericDictionary = type.GetInterfaces()
+				.FirstOrDefault(t =>
+					t.IsGeneric() && (
+						t.GetGenericTypeDefinition() == typeof(IDictionary<,>) ||
+						t.GetGenericTypeDefinition() == typeof(IReadOnlyDictionary<,>)));
 
 			if (genericDictionary == null)
 			{
@@ -43,15 +35,9 @@ namespace Nest
 			return true;
 		}
 
-		internal static bool IsValue(this Type type)
-		{
-			return type.GetTypeInfo().IsValueType;
-		}
+		internal static bool IsValue(this Type type) => type.GetTypeInfo().IsValueType;
 
-		internal static bool IsClass(this Type type)
-		{
-			return type.GetTypeInfo().IsClass;
-		}
+		internal static bool IsClass(this Type type) => type.GetTypeInfo().IsClass;
 
 		internal static TypeCode GetTypeCode(this Type type)
 		{
@@ -83,7 +69,7 @@ namespace Nest
 				return TypeCode.Double;
 			else if (type == typeof(decimal))
 				return TypeCode.Decimal;
-			else if (type == typeof(System.DateTime))
+			else if (type == typeof(DateTime))
 				return TypeCode.DateTime;
 			else if (type == typeof(string))
 				return TypeCode.String;
@@ -95,20 +81,14 @@ namespace Nest
 
 		internal static bool IsAssignableFrom(this Type t, Type other) => t.GetTypeInfo().IsAssignableFrom(other.GetTypeInfo());
 
-		internal static bool IsEnumType(this Type type)
-		{
-			return type.GetTypeInfo().IsEnum;
-		}
+		internal static bool IsEnumType(this Type type) => type.GetTypeInfo().IsEnum;
 
-		internal static IEnumerable<Type> GetInterfaces(this Type type)
-		{
-			return type.GetTypeInfo().ImplementedInterfaces;
-		}
+		internal static IEnumerable<Type> GetInterfaces(this Type type) => type.GetTypeInfo().ImplementedInterfaces;
 
 		internal static IEnumerable<TAttribute> GetAttributes<TAttribute>(this Type t)
 			where TAttribute : Attribute
 		{
-			var attributes =  t.GetTypeInfo().GetCustomAttributes(typeof(TAttribute), true);
+			var attributes = t.GetTypeInfo().GetCustomAttributes(typeof(TAttribute), true);
 			return attributes.Cast<TAttribute>();
 		}
 	}

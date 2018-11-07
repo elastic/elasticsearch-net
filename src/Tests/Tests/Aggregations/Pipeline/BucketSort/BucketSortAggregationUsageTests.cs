@@ -6,9 +6,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Aggregations.Pipeline.BucketSort
 {
@@ -102,7 +100,7 @@ namespace Tests.Aggregations.Pipeline.BucketSort
 			double previousCommits = -1;
 
 			// sum of commits should descend over buckets
-			foreach(var item in projectsPerMonth.Buckets)
+			foreach (var item in projectsPerMonth.Buckets)
 			{
 				var numberOfCommits = item.Sum("commits").Value.Value;
 				if (previousCommits != -1)

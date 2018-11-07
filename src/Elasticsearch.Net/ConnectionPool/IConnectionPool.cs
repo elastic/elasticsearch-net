@@ -6,11 +6,9 @@ namespace Elasticsearch.Net
 	public interface IConnectionPool : IDisposable
 	{
 		/// <summary>
-		/// Returns a read only view of all the nodes in the cluster, which might involve creating copies of nodes e.g
-		/// if you are using <see cref="SniffingConnectionPool"/>.
-		/// If you do not need an isolated copy of the nodes, please read <see cref="CreateView"/> to completion
+		/// The last time that this instance was updated
 		/// </summary>
-		IReadOnlyCollection<Node> Nodes { get; }
+		DateTime LastUpdate { get; }
 
 		/// <summary>
 		/// Returns the default maximum retries for the connection pool implementation.
@@ -20,9 +18,17 @@ namespace Elasticsearch.Net
 		int MaxRetries { get; }
 
 		/// <summary>
-		/// Whether reseeding with new nodes is supported
+		/// Returns a read only view of all the nodes in the cluster, which might involve creating copies of nodes e.g
+		/// if you are using <see cref="SniffingConnectionPool" />.
+		/// If you do not need an isolated copy of the nodes, please read <see cref="CreateView" /> to completion
 		/// </summary>
-		bool SupportsReseeding { get; }
+		IReadOnlyCollection<Node> Nodes { get; }
+
+		/// <summary>
+		/// Whether a sniff is seen on startup. The implementation is
+		/// responsible for setting this in a thread safe fashion.
+		/// </summary>
+		bool SniffedOnStartup { get; set; }
 
 		/// <summary>
 		/// Whether pinging is supported
@@ -30,20 +36,14 @@ namespace Elasticsearch.Net
 		bool SupportsPinging { get; }
 
 		/// <summary>
-		/// The last time that this instance was updated
+		/// Whether reseeding with new nodes is supported
 		/// </summary>
-		DateTime LastUpdate { get; }
+		bool SupportsReseeding { get; }
 
 		/// <summary>
 		/// Whether SSL/TLS is being used
 		/// </summary>
 		bool UsingSsl { get; }
-
-		/// <summary>
-		/// Whether a sniff is seen on startup. The implementation is
-		/// responsible for setting this in a thread safe fashion.
-		/// </summary>
-		bool SniffedOnStartup { get; set; }
 
 		/// <summary>
 		/// Creates a view over the nodes, with changing starting positions, that wraps over on each call
@@ -56,6 +56,5 @@ namespace Elasticsearch.Net
 		/// Reseeds the nodes. The implementation is responsible for thread safety
 		/// </summary>
 		void Reseed(IEnumerable<Node> nodes);
-
 	}
 }

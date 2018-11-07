@@ -10,22 +10,66 @@ using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.ManagedElasticsearch.NodeSeeders;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.Document.Multiple.DeleteByQuery
 {
-	public class DeleteByQueryApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, IDeleteByQueryResponse, IDeleteByQueryRequest, DeleteByQueryDescriptor<Project>, DeleteByQueryRequest>
+	public class DeleteByQueryApiTests
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, IDeleteByQueryResponse, IDeleteByQueryRequest, DeleteByQueryDescriptor<Project>,
+			DeleteByQueryRequest>
 	{
 		public DeleteByQueryApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+
+		protected override object ExpectJson { get; } = new
+		{
+			query = new
+			{
+				ids = new
+				{
+					type = new[] { "doc" },
+					values = new[] { Project.First.Name, "x" }
+				}
+			}
+		};
+
+		protected override int ExpectStatusCode => 200;
+
+		protected override Func<DeleteByQueryDescriptor<Project>, IDeleteByQueryRequest> Fluent => d => d
+			.Index(Indices)
+			.IgnoreUnavailable()
+			.Query(q => q
+				.Ids(ids => ids
+					.Types(typeof(Project))
+					.Values(Project.First.Name, "x")
+				)
+			);
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
+		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(Indices, Type<Project>())
+		{
+			IgnoreUnavailable = true,
+			Query = new IdsQuery
+			{
+				Types = Types.Type<Project>(),
+				Values = new Id[] { Project.First.Name, "x" }
+			}
+		};
+
+		protected override bool SupportsDeserialization => false;
+
+		protected override string UrlPath => $"/{CallIsolatedValue}%2C{SecondIndex}/doc/_delete_by_query?ignore_unavailable=true";
+		private Nest.Indices Indices => Index(CallIsolatedValue).And(SecondIndex);
+
+		private string SecondIndex => $"{CallIsolatedValue}-clone";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var index in values.Values)
 			{
-				this.Client.CreateIndex(index, c => c
+				Client.CreateIndex(index, c => c
 					.Settings(s => s
 						.NumberOfShards(2)
 						.NumberOfReplicas(0)
@@ -39,64 +83,23 @@ namespace Tests.Document.Multiple.DeleteByQuery
 					)
 				);
 
-				this.Client.IndexMany(Project.Projects, index);
+				Client.IndexMany(Project.Projects, index);
 				var cloneIndex = index + "-clone";
-				this.Client.CreateIndex(cloneIndex);
-				this.Client.Refresh(Index(index).And(cloneIndex));
+				Client.CreateIndex(cloneIndex);
+				Client.Refresh(Index(index).And(cloneIndex));
 			}
 		}
+
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.DeleteByQuery(f),
-			fluentAsync: (client, f) => client.DeleteByQueryAsync(f),
-			request: (client, r) => client.DeleteByQuery(r),
-			requestAsync: (client, r) => client.DeleteByQueryAsync(r)
+			(client, f) => client.DeleteByQuery(f),
+			(client, f) => client.DeleteByQueryAsync(f),
+			(client, r) => client.DeleteByQuery(r),
+			(client, r) => client.DeleteByQueryAsync(r)
 		);
+
 		protected override void OnAfterCall(IElasticClient client) => client.Refresh(CallIsolatedValue);
 
-		private string SecondIndex => $"{CallIsolatedValue}-clone";
-		private Nest.Indices Indices => Index(CallIsolatedValue).And(SecondIndex);
-
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-
-		protected override string UrlPath => $"/{CallIsolatedValue}%2C{SecondIndex}/doc/_delete_by_query?ignore_unavailable=true";
-
-		protected override bool SupportsDeserialization => false;
-
-		protected override object ExpectJson { get; } = new
-		{
-			query = new
-			{
-				ids = new
-				{
-					type = new[] { "doc" },
-					values = new [] { Project.First.Name, "x" }
-				}
-			}
-		};
-
-		protected override DeleteByQueryDescriptor<Project> NewDescriptor() => new DeleteByQueryDescriptor<Project>(this.Indices);
-
-		protected override Func<DeleteByQueryDescriptor<Project>, IDeleteByQueryRequest> Fluent => d => d
-			.Index(this.Indices)
-			.IgnoreUnavailable()
-			.Query(q=>q
-				.Ids(ids=>ids
-					.Types(typeof(Project))
-					.Values(Project.First.Name, "x")
-				)
-			);
-
-		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(this.Indices, Type<Project>())
-		{
-			IgnoreUnavailable = true,
-			Query = new IdsQuery
-			{
-				Types = Types.Type<Project>(),
-				Values = new Id[] { Project.First.Name, "x" }
-			}
-		};
+		protected override DeleteByQueryDescriptor<Project> NewDescriptor() => new DeleteByQueryDescriptor<Project>(Indices);
 
 		protected override void ExpectResponse(IDeleteByQueryResponse response)
 		{
@@ -119,24 +122,24 @@ namespace Tests.Document.Multiple.DeleteByQuery
 	{
 		public DeleteByQueryWaitForCompletionApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override string UrlPath => $"/{CallIsolatedValue}/doc/_delete_by_query?wait_for_completion=false&conflicts=proceed";
-
-		protected override DeleteByQueryDescriptor<Project> NewDescriptor() => new DeleteByQueryDescriptor<Project>(this.CallIsolatedValue);
-
 		protected override object ExpectJson => new { query = new { match_all = new { } } };
 
 		protected override Func<DeleteByQueryDescriptor<Project>, IDeleteByQueryRequest> Fluent => d => d
-			.Index(this.CallIsolatedValue)
-			.Query(q=>q.MatchAll())
+			.Index(CallIsolatedValue)
+			.Query(q => q.MatchAll())
 			.WaitForCompletion(false)
 			.Conflicts(Conflicts.Proceed);
 
-		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(this.CallIsolatedValue, Type<Project>())
+		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(CallIsolatedValue, Type<Project>())
 		{
 			Query = new MatchAllQuery(),
 			WaitForCompletion = false,
 			Conflicts = Conflicts.Proceed
 		};
+
+		protected override string UrlPath => $"/{CallIsolatedValue}/doc/_delete_by_query?wait_for_completion=false&conflicts=proceed";
+
+		protected override DeleteByQueryDescriptor<Project> NewDescriptor() => new DeleteByQueryDescriptor<Project>(CallIsolatedValue);
 
 		protected override void ExpectResponse(IDeleteByQueryResponse response)
 		{
@@ -151,45 +154,26 @@ namespace Tests.Document.Multiple.DeleteByQuery
 	{
 		public DeleteByQueryWithFailuresApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
-		{
-			foreach (var index in values.Values)
-			{
-				this.Client.CreateIndex(index, c => c
-					.Settings(s => s
-						.RefreshInterval(-1)
-					)
-				);
-				this.Client.Index(new Project { Name = "project1", Description = "description" },
-					i => i.Index(index).Id(1).Refresh(Refresh.True).Routing(Project.Routing));
-				this.Client.Index(new Project { Name = "project2", Description = "description" },
-					i => i.Index(index).Id(1).Routing(Project.Routing));
-			}
-		}
-
 		protected override bool ExpectIsValid => false;
-		protected override int ExpectStatusCode => 409;
 
-		protected override string UrlPath => $"/{CallIsolatedValue}/doc/_delete_by_query";
 		protected override object ExpectJson =>
 			new
 			{
 				query = new { match = new { description = new { query = "description" } } }
 			};
 
-		protected override DeleteByQueryDescriptor<Project> NewDescriptor() => new DeleteByQueryDescriptor<Project>(this.CallIsolatedValue);
+		protected override int ExpectStatusCode => 409;
 
 		protected override Func<DeleteByQueryDescriptor<Project>, IDeleteByQueryRequest> Fluent => d => d
-			.Index(this.CallIsolatedValue)
+			.Index(CallIsolatedValue)
 			.Query(q => q
 				.Match(m => m
 					.Field(p => p.Description)
 					.Query("description")
 				)
-			)
-			;
+			);
 
-		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(this.CallIsolatedValue, Type<Project>())
+		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(CallIsolatedValue, Type<Project>())
 		{
 			Query = new MatchQuery
 			{
@@ -197,6 +181,26 @@ namespace Tests.Document.Multiple.DeleteByQuery
 				Query = "description"
 			},
 		};
+
+		protected override string UrlPath => $"/{CallIsolatedValue}/doc/_delete_by_query";
+
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
+		{
+			foreach (var index in values.Values)
+			{
+				Client.CreateIndex(index, c => c
+					.Settings(s => s
+						.RefreshInterval(-1)
+					)
+				);
+				Client.Index(new Project { Name = "project1", Description = "description" },
+					i => i.Index(index).Id(1).Refresh(Refresh.True).Routing(Project.Routing));
+				Client.Index(new Project { Name = "project2", Description = "description" },
+					i => i.Index(index).Id(1).Routing(Project.Routing));
+			}
+		}
+
+		protected override DeleteByQueryDescriptor<Project> NewDescriptor() => new DeleteByQueryDescriptor<Project>(CallIsolatedValue);
 
 		protected override void ExpectResponse(IDeleteByQueryResponse response)
 		{
@@ -220,14 +224,9 @@ namespace Tests.Document.Multiple.DeleteByQuery
 
 	public class DeleteByQueryWithSlicesApiTests : DeleteByQueryApiTests
 	{
-		private static List<string> FirstTenProjectNames => Project.Projects.Take(10).Select(p => p.Name).ToList();
-
 		public DeleteByQueryWithSlicesApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-
-		protected override string UrlPath => $"/{CallIsolatedValue}/doc/_delete_by_query";
 
 		protected override object ExpectJson =>
 			new
@@ -236,10 +235,10 @@ namespace Tests.Document.Multiple.DeleteByQuery
 				query = new { terms = new { name = FirstTenProjectNames } }
 			};
 
-		protected override DeleteByQueryDescriptor<Project> NewDescriptor() => new DeleteByQueryDescriptor<Project>(this.CallIsolatedValue);
+		protected override int ExpectStatusCode => 200;
 
 		protected override Func<DeleteByQueryDescriptor<Project>, IDeleteByQueryRequest> Fluent => d => d
-			.Index(this.CallIsolatedValue)
+			.Index(CallIsolatedValue)
 			.Slice(s => s
 				.Id(0)
 				.Max(2)
@@ -249,10 +248,9 @@ namespace Tests.Document.Multiple.DeleteByQuery
 					.Field(p => p.Name)
 					.Terms(FirstTenProjectNames)
 				)
-			)
-			;
+			);
 
-		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(this.CallIsolatedValue, Type<Project>())
+		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(CallIsolatedValue, Type<Project>())
 		{
 			Slice = new SlicedScroll
 			{
@@ -265,6 +263,11 @@ namespace Tests.Document.Multiple.DeleteByQuery
 				Terms = FirstTenProjectNames
 			},
 		};
+
+		protected override string UrlPath => $"/{CallIsolatedValue}/doc/_delete_by_query";
+		private static List<string> FirstTenProjectNames => Project.Projects.Take(10).Select(p => p.Name).ToList();
+
+		protected override DeleteByQueryDescriptor<Project> NewDescriptor() => new DeleteByQueryDescriptor<Project>(CallIsolatedValue);
 
 		protected override void ExpectResponse(IDeleteByQueryResponse response)
 		{

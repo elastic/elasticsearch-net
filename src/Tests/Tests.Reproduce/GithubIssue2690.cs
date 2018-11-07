@@ -1,5 +1,4 @@
 ﻿using Elastic.Xunit.XunitPlumbing;
-using FluentAssertions;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
 

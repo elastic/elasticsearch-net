@@ -10,7 +10,5 @@ namespace Nest
 
 		[JsonProperty("size_in_bytes")]
 		public double SizeInBytes { get; set; }
-
 	}
-
 }

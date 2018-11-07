@@ -5,9 +5,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Aggregations.Bucket.SignificantText
 {
@@ -33,10 +31,10 @@ namespace Tests.Aggregations.Bucket.SignificantText
 	 */
 	public class SignificantTextAggregationUsageTests : AggregationUsageTestBase
 	{
-		public SignificantTextAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
-
 		private readonly string _firstTenDescriptions =
 			string.Join(" ", Project.First.Description.Split(' ').Distinct().Take(1024));
+
+		public SignificantTextAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object AggregationJson => new
 		{
@@ -48,23 +46,6 @@ namespace Tests.Aggregations.Bucket.SignificantText
 					filter_duplicate_text = true
 				}
 			}
-		};
-
-		protected override object QueryScopeJson => new
-		{
-			match = new
-			{
-				description = new
-				{
-					query = _firstTenDescriptions
-				}
-			}
-		};
-
-		protected override QueryContainer QueryScope => new MatchQuery
-		{
-			Field = Infer.Field<Project>(p => p.Description),
-			Query = _firstTenDescriptions
 		};
 
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
@@ -79,6 +60,23 @@ namespace Tests.Aggregations.Bucket.SignificantText
 				Field = Infer.Field<Project>(p => p.Description),
 				FilterDuplicateText = true
 			};
+
+		protected override QueryContainer QueryScope => new MatchQuery
+		{
+			Field = Infer.Field<Project>(p => p.Description),
+			Query = _firstTenDescriptions
+		};
+
+		protected override object QueryScopeJson => new
+		{
+			match = new
+			{
+				description = new
+				{
+					query = _firstTenDescriptions
+				}
+			}
+		};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{

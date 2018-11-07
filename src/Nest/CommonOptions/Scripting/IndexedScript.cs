@@ -11,10 +11,7 @@ namespace Nest
 
 	public class IndexedScript : ScriptBase, IIndexedScript
 	{
-		public IndexedScript(string id)
-		{
-			this.Id = id;
-		}
+		public IndexedScript(string id) => Id = id;
 
 		public string Id { get; set; }
 	}
@@ -22,14 +19,11 @@ namespace Nest
 	public class IndexedScriptDescriptor
 		: ScriptDescriptorBase<IndexedScriptDescriptor, IIndexedScript>, IIndexedScript
 	{
+		public IndexedScriptDescriptor() { }
+
+		public IndexedScriptDescriptor(string id) => Self.Id = id;
+
 		string IIndexedScript.Id { get; set; }
-
-		public IndexedScriptDescriptor() {}
-
-		public IndexedScriptDescriptor(string id)
-		{
-			Self.Id = id;
-		}
 
 		public IndexedScriptDescriptor Id(string id) => Assign(a => a.Id = id);
 	}

@@ -5,9 +5,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 using static Tests.Domain.Helpers.TestValueHelper;
 
@@ -35,15 +33,15 @@ namespace Tests.Aggregations.Bucket.DateRange
 					field = "startedOn",
 					ranges = new object[]
 					{
-						new {to = "now", from = "2015-06-06T12:01:02.123||+2d"},
-						new {to = "now+1d-30m/h"},
-						new {from = "2012-05-05||+1d-1m"},
+						new { to = "now", from = "2015-06-06T12:01:02.123||+2d" },
+						new { to = "now+1d-30m/h" },
+						new { from = "2012-05-05||+1d-1m" },
 					},
 					time_zone = "CET"
 				},
 				aggs = new
 				{
-					project_tags = new {terms = new {field = "tags"}}
+					project_tags = new { terms = new { field = "tags" } }
 				}
 			}
 		};
@@ -68,13 +66,13 @@ namespace Tests.Aggregations.Bucket.DateRange
 				Field = Field<Project>(p => p.StartedOn),
 				Ranges = new List<DateRangeExpression>
 				{
-					new DateRangeExpression {From = DateMath.Anchored(FixedDate).Add("2d"), To = DateMath.Now},
-					new DateRangeExpression {To = DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(DateMathTimeUnit.Hour)},
-					new DateRangeExpression {From = DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m")}
+					new DateRangeExpression { From = DateMath.Anchored(FixedDate).Add("2d"), To = DateMath.Now },
+					new DateRangeExpression { To = DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(DateMathTimeUnit.Hour) },
+					new DateRangeExpression { From = DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m") }
 				},
 				TimeZone = "CET",
 				Aggregations =
-					new TermsAggregation("project_tags") {Field = Field<Project>(p => p.Tags)}
+					new TermsAggregation("project_tags") { Field = Field<Project>(p => p.Tags) }
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
@@ -92,10 +90,7 @@ namespace Tests.Aggregations.Bucket.DateRange
 
 			/** We specified three ranges so we expect to have three of them in the response */
 			dateHistogram.Buckets.Count.Should().Be(3);
-			foreach (var item in dateHistogram.Buckets)
-			{
-				item.DocCount.Should().BeGreaterThan(0);
-			}
+			foreach (var item in dateHistogram.Buckets) item.DocCount.Should().BeGreaterThan(0);
 		}
 	}
 }

@@ -1,6 +1,7 @@
 ﻿namespace Nest
 {
 	public partial interface IGetRequest { }
+
 	public interface IGetRequest<T> : IGetRequest where T : class { }
 
 	public partial class GetRequest
@@ -18,8 +19,8 @@
 	{
 		private object AutoRouteDocument() => null;
 
-		public GetDescriptor<T> ExecuteOnPrimary() => this.Preference("_primary");
+		public GetDescriptor<T> ExecuteOnPrimary() => Preference("_primary");
 
-		public GetDescriptor<T> ExecuteOnLocalShard() => this.Preference("_local");
+		public GetDescriptor<T> ExecuteOnLocalShard() => Preference("_local");
 	}
 }

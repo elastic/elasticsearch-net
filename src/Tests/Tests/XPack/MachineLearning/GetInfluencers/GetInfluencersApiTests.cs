@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Threading;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -11,9 +10,18 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.MachineLearning.GetInfluencers
 {
-	public class GetInfluencersApiTests : MachineLearningIntegrationTestBase<IGetInfluencersResponse, IGetInfluencersRequest, GetInfluencersDescriptor, GetInfluencersRequest>
+	public class GetInfluencersApiTests
+		: MachineLearningIntegrationTestBase<IGetInfluencersResponse, IGetInfluencersRequest, GetInfluencersDescriptor, GetInfluencersRequest>
 	{
 		public GetInfluencersApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+		protected override object ExpectJson => null;
+		protected override int ExpectStatusCode => 200;
+		protected override Func<GetInfluencersDescriptor, IGetInfluencersRequest> Fluent => f => f;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override GetInfluencersRequest Initializer => new GetInfluencersRequest(CallIsolatedValue);
+		protected override string UrlPath => $"/_xpack/ml/anomaly_detectors/{CallIsolatedValue}/results/influencers";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -25,19 +33,11 @@ namespace Tests.XPack.MachineLearning.GetInfluencers
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.GetInfluencers(CallIsolatedValue, f),
-			fluentAsync: (client, f) => client.GetInfluencersAsync(CallIsolatedValue, f),
-			request: (client, r) => client.GetInfluencers(r),
-			requestAsync: (client, r) => client.GetInfluencersAsync(r)
+			(client, f) => client.GetInfluencers(CallIsolatedValue, f),
+			(client, f) => client.GetInfluencersAsync(CallIsolatedValue, f),
+			(client, r) => client.GetInfluencers(r),
+			(client, r) => client.GetInfluencersAsync(r)
 		);
-
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/_xpack/ml/anomaly_detectors/{CallIsolatedValue}/results/influencers";
-		protected override object ExpectJson => null;
-		protected override Func<GetInfluencersDescriptor, IGetInfluencersRequest> Fluent => f => f;
-		protected override GetInfluencersRequest Initializer => new GetInfluencersRequest(CallIsolatedValue);
 
 		protected override void ExpectResponse(IGetInfluencersResponse response)
 		{

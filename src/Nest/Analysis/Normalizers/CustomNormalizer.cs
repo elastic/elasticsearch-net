@@ -28,19 +28,19 @@ namespace Nest
 		IEnumerable<string> Filter { get; set; }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class CustomNormalizer : NormalizerBase, ICustomNormalizer
 	{
-		public CustomNormalizer() : base("custom") {}
+		public CustomNormalizer() : base("custom") { }
 
-		/// <inheritdoc/>
-		public IEnumerable<string> Filter { get; set; }
-
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IEnumerable<string> CharFilter { get; set; }
+
+		/// <inheritdoc />
+		public IEnumerable<string> Filter { get; set; }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class CustomNormalizerDescriptor
 		: NormalizerDescriptorBase<CustomNormalizerDescriptor, ICustomNormalizer>, ICustomNormalizer
 	{
@@ -48,17 +48,17 @@ namespace Nest
 
 		IEnumerable<string> ICustomNormalizer.CharFilter { get; set; }
 		IEnumerable<string> ICustomNormalizer.Filter { get; set; }
-		/// <inheritdoc/>
+
+		/// <inheritdoc />
 		public CustomNormalizerDescriptor Filters(params string[] filters) => Assign(a => a.Filter = filters);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public CustomNormalizerDescriptor Filters(IEnumerable<string> filters) => Assign(a => a.Filter = filters);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public CustomNormalizerDescriptor CharFilters(params string[] charFilters) => Assign(a => a.CharFilter = charFilters);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public CustomNormalizerDescriptor CharFilters(IEnumerable<string> charFilters) => Assign(a => a.CharFilter = charFilters);
-
 	}
 }

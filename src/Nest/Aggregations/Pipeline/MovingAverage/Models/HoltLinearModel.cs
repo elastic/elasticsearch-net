@@ -14,18 +14,17 @@ namespace Nest
 
 	public class HoltLinearModel : IHoltLinearModel
 	{
-		string IMovingAverageModel.Name { get; } = "holt";
-
 		public float? Alpha { get; set; }
 		public float? Beta { get; set; }
+		string IMovingAverageModel.Name { get; } = "holt";
 	}
 
 	public class HoltLinearModelDescriptor
 		: DescriptorBase<HoltLinearModelDescriptor, IHoltLinearModel>, IHoltLinearModel
 	{
-		string IMovingAverageModel.Name { get; } = "holt";
 		float? IHoltLinearModel.Alpha { get; set; }
 		float? IHoltLinearModel.Beta { get; set; }
+		string IMovingAverageModel.Name { get; } = "holt";
 
 		public HoltLinearModelDescriptor Alpha(float? alpha) => Assign(a => a.Alpha = alpha);
 

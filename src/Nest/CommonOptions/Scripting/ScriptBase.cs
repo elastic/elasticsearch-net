@@ -10,33 +10,31 @@ namespace Nest
 	public interface IScript
 	{
 		/// <summary>
-		/// Scripts are compiled and cached for faster execution.
-		/// If the same script can be used, just with different parameters provided,
-		/// it is preferable to use the ability to pass parameters to the script itself.
-		/// </summary>
-		/// <example>
-		///	    script: "doc['num1'].value &gt; param1"
-		///		param: "param1" = 5
-		/// </example>
-		/// <param name="paramsDictionary">param</param>
-		/// <returns>this</returns>
-		[JsonProperty("params")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysPreservingNullJsonConverter<string, object>))]
-		Dictionary<string, object> Params { get; set; }
-
-		/// <summary>
 		/// Language of script.
 		/// </summary>
 		/// <param name="lang">language</param>
 		/// <returns>this</returns>
 		[JsonProperty("lang")]
 		string Lang { get; set; }
+
+		/// <summary>
+		///  Scripts are compiled and cached for faster execution.
+		///  If the same script can be used, just with different parameters provided,
+		///  it is preferable to use the ability to pass parameters to the script itself.
+		/// </summary>
+		/// <example>
+		/// 	    script: "doc['num1'].value &gt; param1"
+		/// 		param: "param1" = 5
+		/// </example>
+		/// <param name="paramsDictionary">param</param>
+		/// <returns>this</returns>
+		[JsonProperty("params")]
+		[JsonConverter(typeof(VerbatimDictionaryKeysPreservingNullJsonConverter<string, object>))]
+		Dictionary<string, object> Params { get; set; }
 	}
 
 	public abstract class ScriptBase : IScript
 	{
-		public Dictionary<string, object> Params { get; set; }
-
 		/// <summary>
 		/// Language of script.
 		/// </summary>
@@ -44,8 +42,10 @@ namespace Nest
 		/// <returns>this</returns>
 		public string Lang { get; set; }
 
+		public Dictionary<string, object> Params { get; set; }
+
 		/// <summary>
-		/// Implicit conversion from <see cref="string"/> to <see cref="InlineScript"/>
+		/// Implicit conversion from <see cref="string" /> to <see cref="InlineScript" />
 		/// </summary>
 		public static implicit operator ScriptBase(string script) => new InlineScript(script);
 	}
@@ -54,30 +54,30 @@ namespace Nest
 		where TDescriptor : ScriptDescriptorBase<TDescriptor, TInterface>, TInterface, IScript
 		where TInterface : class, IScript
 	{
-		Dictionary<string, object> IScript.Params { get; set; }
 		string IScript.Lang { get; set; }
+		Dictionary<string, object> IScript.Params { get; set; }
 
 		/// <summary>
-		/// Scripts are compiled and cached for faster execution.
-		/// If the same script can be used, just with different parameters provided,
-		/// it is preferable to use the ability to pass parameters to the script itself.
+		///  Scripts are compiled and cached for faster execution.
+		///  If the same script can be used, just with different parameters provided,
+		///  it is preferable to use the ability to pass parameters to the script itself.
 		/// </summary>
 		/// <example>
-		///	    script: "doc['num1'].value &gt; param1"
-		///		param: "param1" = 5
+		/// 	    script: "doc['num1'].value &gt; param1"
+		/// 		param: "param1" = 5
 		/// </example>
 		/// <param name="paramsDictionary">param</param>
 		/// <returns>this</returns>
 		public TDescriptor Params(Dictionary<string, object> scriptParams) => Assign(a => a.Params = scriptParams);
 
 		/// <summary>
-		/// Scripts are compiled and cached for faster execution.
-		/// If the same script can be used, just with different parameters provided,
-		/// it is preferable to use the ability to pass parameters to the script itself.
+		///  Scripts are compiled and cached for faster execution.
+		///  If the same script can be used, just with different parameters provided,
+		///  it is preferable to use the ability to pass parameters to the script itself.
 		/// </summary>
 		/// <example>
-		///	    script: "doc['num1'].value &gt; param1"
-		///		param: "param1" = 5
+		/// 	    script: "doc['num1'].value &gt; param1"
+		/// 		param: "param1" = 5
 		/// </example>
 		/// <param name="paramsDictionary">param</param>
 		/// <returns>this</returns>

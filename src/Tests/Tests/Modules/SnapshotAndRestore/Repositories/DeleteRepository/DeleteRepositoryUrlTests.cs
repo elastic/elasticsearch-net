@@ -13,10 +13,10 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.DeleteRepository
 			var repository = "repos";
 
 			await DELETE($"/_snapshot/{repository}")
-				.Fluent(c => c.DeleteRepository(repository))
-				.Request(c => c.DeleteRepository(new DeleteRepositoryRequest(repository)))
-				.FluentAsync(c => c.DeleteRepositoryAsync(repository))
-				.RequestAsync(c => c.DeleteRepositoryAsync(new DeleteRepositoryRequest(repository)))
+					.Fluent(c => c.DeleteRepository(repository))
+					.Request(c => c.DeleteRepository(new DeleteRepositoryRequest(repository)))
+					.FluentAsync(c => c.DeleteRepositoryAsync(repository))
+					.RequestAsync(c => c.DeleteRepositoryAsync(new DeleteRepositoryRequest(repository)))
 				;
 		}
 	}

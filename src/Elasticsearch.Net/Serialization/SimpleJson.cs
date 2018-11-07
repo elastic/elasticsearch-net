@@ -17,6 +17,8 @@
 // <website>https://github.com/facebook-csharp-sdk/simple-json</website>
 //-----------------------------------------------------------------------
 
+// @formatter:on — enable formatter after this line
+
 // VERSION: 0.32.0
 
 // NOTE: uncomment the following line to make SimpleJson class internal.
@@ -2088,3 +2090,4 @@ namespace Elasticsearch.Net
 // ReSharper restore RedundantExplicitArrayCreation
 // ReSharper restore SuggestUseVarKeywordEvident
 }
+// @formatter:on — enable formatter after this line

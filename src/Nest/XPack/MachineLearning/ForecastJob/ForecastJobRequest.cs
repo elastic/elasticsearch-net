@@ -1,4 +1,3 @@
-using System;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -22,7 +21,7 @@ namespace Nest
 		Time ExpiresIn { get; set; }
 	}
 
-	/// <inheritdoc cref="IForecastJobRequest"/>
+	/// <inheritdoc cref="IForecastJobRequest" />
 	public partial class ForecastJobRequest : IForecastJobRequest
 	{
 		/// <inheritdoc />

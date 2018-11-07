@@ -1,23 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Elastic.Managed;
 using Elastic.Managed.Ephemeral;
-using Nest;
-using Tests.Framework.Integration;
-using Elastic.Xunit.Sdk;
 using Elastic.Xunit.XunitPlumbing;
+using Nest;
 using Tests.Core.Client;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.Serialization;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.Integration;
 using Xunit;
 
 namespace Tests.Framework
 {
 	public abstract class RequestResponseApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		: ExpectJsonTestBase, IClusterFixture<TCluster>, IClassFixture<EndpointUsage>
-		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster , new()
+		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster, new()
 		where TResponse : class, IResponse
 		where TInterface : class
 		where TDescriptor : class, TInterface
@@ -25,104 +22,111 @@ namespace Tests.Framework
 	{
 		private readonly EndpointUsage _usage;
 
-		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
-		protected bool RanIntegrationSetup => this._usage?.CalledSetup ?? false;
-	    protected string U(string s) => Uri.EscapeDataString(s);
+		protected RequestResponseApiTestBase(TCluster cluster, EndpointUsage usage) : base(cluster.Client)
+		{
+			_usage = usage ?? throw new ArgumentNullException(nameof(usage));
 
-		protected string CallIsolatedValue => UniqueValues.Value;
-		protected T ExtendedValue<T>(string key) where T : class => this.UniqueValues.ExtendedValue<T>(key);
-		protected void ExtendedValue<T>(string key, T value) where T : class => this.UniqueValues.ExtendedValue(key, value);
+			if (cluster == null) throw new ArgumentNullException(nameof(cluster));
 
-		protected virtual TDescriptor NewDescriptor() => Activator.CreateInstance<TDescriptor>();
-		protected virtual Func<TDescriptor, TInterface> Fluent { get; } = null;
-		protected virtual TInitializer Initializer { get; } = null;
-
-		protected virtual void IntegrationSetup(IElasticClient client, CallUniqueValues values) { }
-		protected virtual void IntegrationTeardown(IElasticClient client, CallUniqueValues values) { }
-		protected virtual void OnBeforeCall(IElasticClient client) { }
-		protected virtual void OnAfterCall(IElasticClient client) { }
-
-		protected CallUniqueValues UniqueValues { get; }
-		protected LazyResponses Responses { get; }
+			Cluster = cluster;
+			Responses = usage.CallOnce(ClientUsage, 0);
+			UniqueValues = usage.CallUniqueValues;
+		}
 
 		public virtual IElasticClient Client => TestClient.DefaultInMemoryClient;
 
+		public TCluster Cluster { get; }
+
+		protected string CallIsolatedValue => UniqueValues.Value;
+		protected virtual Func<TDescriptor, TInterface> Fluent { get; } = null;
+		protected virtual TInitializer Initializer { get; } = null;
+		protected bool RanIntegrationSetup => _usage?.CalledSetup ?? false;
+		protected LazyResponses Responses { get; }
+
+		protected CallUniqueValues UniqueValues { get; }
+
+		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
+
+		protected string U(string s) => Uri.EscapeDataString(s);
+
+		protected T ExtendedValue<T>(string key) where T : class => UniqueValues.ExtendedValue<T>(key);
+
+		protected void ExtendedValue<T>(string key, T value) where T : class => UniqueValues.ExtendedValue(key, value);
+
+		protected virtual TDescriptor NewDescriptor() => Activator.CreateInstance<TDescriptor>();
+
+		protected virtual void IntegrationSetup(IElasticClient client, CallUniqueValues values) { }
+
+		protected virtual void IntegrationTeardown(IElasticClient client, CallUniqueValues values) { }
+
+		protected virtual void OnBeforeCall(IElasticClient client) { }
+
+		protected virtual void OnAfterCall(IElasticClient client) { }
+
 		protected abstract LazyResponses ClientUsage();
-
-        public TCluster Cluster { get; }
-
-		protected RequestResponseApiTestBase(TCluster cluster, EndpointUsage usage) : base(cluster.Client)
-		{
-			this._usage = usage ?? throw new ArgumentNullException(nameof(usage));
-
-			if (cluster == null) throw new ArgumentNullException(nameof(cluster));
-			this.Cluster = cluster;
-			this.Responses = usage.CallOnce(this.ClientUsage, 0);
-			this.UniqueValues = usage.CallUniqueValues;
-		}
 
 		protected LazyResponses Calls(
 			Func<IElasticClient, Func<TDescriptor, TInterface>, TResponse> fluent,
 			Func<IElasticClient, Func<TDescriptor, TInterface>, Task<TResponse>> fluentAsync,
 			Func<IElasticClient, TInitializer, TResponse> request,
 			Func<IElasticClient, TInitializer, Task<TResponse>> requestAsync
-		)
+		) => new LazyResponses(async () =>
 		{
-			return new LazyResponses(async () =>
+			var client = Client;
+
+			void IntegrateOnly(Action<IElasticClient> act)
 			{
-				var client = this.Client;
-				void IntegrateOnly(Action<IElasticClient> act)
-				{
-					if (!TestClient.Configuration.RunIntegrationTests) return;
-					act(client);
-				}
-				if (TestClient.Configuration.RunIntegrationTests)
-				{
-					this.IntegrationSetup(client, UniqueValues);
-					this._usage.CalledSetup = true;
-				}
+				if (!TestClient.Configuration.RunIntegrationTests) return;
 
-				var dict = new Dictionary<ClientMethod, IResponse>();
-				UniqueValues.CurrentView = ClientMethod.Fluent;
+				act(client);
+			}
 
-				IntegrateOnly(this.OnBeforeCall);
-				dict.Add(ClientMethod.Fluent, fluent(client, this.Fluent));
-				IntegrateOnly(this.OnAfterCall);
+			if (TestClient.Configuration.RunIntegrationTests)
+			{
+				IntegrationSetup(client, UniqueValues);
+				_usage.CalledSetup = true;
+			}
 
-				UniqueValues.CurrentView = ClientMethod.FluentAsync;
-				IntegrateOnly(this.OnBeforeCall);
-				dict.Add(ClientMethod.FluentAsync, await fluentAsync(client, this.Fluent));
-				IntegrateOnly(this.OnAfterCall);
+			var dict = new Dictionary<ClientMethod, IResponse>();
+			UniqueValues.CurrentView = ClientMethod.Fluent;
 
-				UniqueValues.CurrentView = ClientMethod.Initializer;
-				IntegrateOnly(this.OnBeforeCall);
-				dict.Add(ClientMethod.Initializer, request(client, this.Initializer));
-				IntegrateOnly(this.OnAfterCall);
+			IntegrateOnly(OnBeforeCall);
+			dict.Add(ClientMethod.Fluent, fluent(client, Fluent));
+			IntegrateOnly(OnAfterCall);
 
-				UniqueValues.CurrentView = ClientMethod.InitializerAsync;
-				IntegrateOnly(this.OnBeforeCall);
-				dict.Add(ClientMethod.InitializerAsync, await requestAsync(client, this.Initializer));
-				IntegrateOnly(this.OnAfterCall);
+			UniqueValues.CurrentView = ClientMethod.FluentAsync;
+			IntegrateOnly(OnBeforeCall);
+			dict.Add(ClientMethod.FluentAsync, await fluentAsync(client, Fluent));
+			IntegrateOnly(OnAfterCall);
 
-				if (TestClient.Configuration.RunIntegrationTests)
-				{
-					this.IntegrationTeardown(client, UniqueValues);
-					this._usage.CalledTeardown = true;
-				}
+			UniqueValues.CurrentView = ClientMethod.Initializer;
+			IntegrateOnly(OnBeforeCall);
+			dict.Add(ClientMethod.Initializer, request(client, Initializer));
+			IntegrateOnly(OnAfterCall);
 
-				return dict;
-			});
-		}
+			UniqueValues.CurrentView = ClientMethod.InitializerAsync;
+			IntegrateOnly(OnBeforeCall);
+			dict.Add(ClientMethod.InitializerAsync, await requestAsync(client, Initializer));
+			IntegrateOnly(OnAfterCall);
+
+			if (TestClient.Configuration.RunIntegrationTests)
+			{
+				IntegrationTeardown(client, UniqueValues);
+				_usage.CalledTeardown = true;
+			}
+
+			return dict;
+		});
 
 		protected virtual async Task AssertOnAllResponses(Action<TResponse> assert)
 		{
-			var responses = await this.Responses;
+			var responses = await Responses;
 			foreach (var kv in responses)
 			{
 				var response = kv.Value as TResponse;
 				try
 				{
-					this.UniqueValues.CurrentView = kv.Key;
+					UniqueValues.CurrentView = kv.Key;
 					assert(response);
 				}
 #pragma warning disable 7095 //enable this if you expect a single overload to act up

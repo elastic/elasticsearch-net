@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using System.Threading;
 
 namespace Nest
 {
@@ -13,39 +13,45 @@ namespace Nest
 		/// <param name="selector">A descriptor to further describe the root operation</param>
 		ICancelTasksResponse CancelTasks(Func<CancelTasksDescriptor, ICancelTasksRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		ICancelTasksResponse CancelTasks(ICancelTasksRequest request);
 
-		/// <inheritdoc/>
-		Task<ICancelTasksResponse> CancelTasksAsync(Func<CancelTasksDescriptor, ICancelTasksRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<ICancelTasksResponse> CancelTasksAsync(Func<CancelTasksDescriptor, ICancelTasksRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		Task<ICancelTasksResponse> CancelTasksAsync(ICancelTasksRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public ICancelTasksResponse CancelTasks(Func<CancelTasksDescriptor, ICancelTasksRequest> selector = null) =>
-			this.CancelTasks(selector.InvokeOrDefault(new CancelTasksDescriptor()));
+			CancelTasks(selector.InvokeOrDefault(new CancelTasksDescriptor()));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public ICancelTasksResponse CancelTasks(ICancelTasksRequest request) =>
-			this.Dispatcher.Dispatch<ICancelTasksRequest, CancelTasksRequestParameters, CancelTasksResponse>(
+			Dispatcher.Dispatch<ICancelTasksRequest, CancelTasksRequestParameters, CancelTasksResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.TasksCancelDispatch<CancelTasksResponse>(p)
+				(p, d) => LowLevelDispatch.TasksCancelDispatch<CancelTasksResponse>(p)
 			);
 
-		/// <inheritdoc/>
-		public Task<ICancelTasksResponse> CancelTasksAsync(Func<CancelTasksDescriptor, ICancelTasksRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.CancelTasksAsync(selector.InvokeOrDefault(new CancelTasksDescriptor()), cancellationToken);
+		/// <inheritdoc />
+		public Task<ICancelTasksResponse> CancelTasksAsync(Func<CancelTasksDescriptor, ICancelTasksRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			CancelTasksAsync(selector.InvokeOrDefault(new CancelTasksDescriptor()), cancellationToken);
 
-		/// <inheritdoc/>
-		public Task<ICancelTasksResponse> CancelTasksAsync(ICancelTasksRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<ICancelTasksRequest, CancelTasksRequestParameters, CancelTasksResponse, ICancelTasksResponse>(
+		/// <inheritdoc />
+		public Task<ICancelTasksResponse> CancelTasksAsync(ICancelTasksRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			Dispatcher.DispatchAsync<ICancelTasksRequest, CancelTasksRequestParameters, CancelTasksResponse, ICancelTasksResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => this.LowLevelDispatch.TasksCancelDispatchAsync<CancelTasksResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.TasksCancelDispatchAsync<CancelTasksResponse>(p, c)
 			);
 	}
 }

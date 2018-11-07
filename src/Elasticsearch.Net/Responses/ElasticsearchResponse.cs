@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Elasticsearch.Net
 {
@@ -13,7 +11,39 @@ namespace Elasticsearch.Net
 		/// <inheritdoc />
 		public IApiCallDetails ApiCall { get; set; }
 
-		bool IElasticsearchResponse.TryGetServerErrorReason(out string reason) => this.TryGetServerErrorReason(out reason);
+		/// <inheritdoc cref="IApiCallDetails.DebugInformation"/>
+		public string DebugInformation => ApiCall.DebugInformation;
+		/// <inheritdoc cref="IApiCallDetails.HttpMethod"/>
+		public HttpMethod HttpMethod => ApiCall.HttpMethod;
+		/// <inheritdoc cref="IApiCallDetails.AuditTrail"/>
+		public List<Audit> AuditTrail => ApiCall.AuditTrail;
+		/// <inheritdoc cref="IApiCallDetails.DeprecationWarnings"/>
+		public IEnumerable<string> DeprecationWarnings => ApiCall.DeprecationWarnings;
+		/// <inheritdoc cref="IApiCallDetails.SuccessOrKnownError"/>
+		public bool SuccessOrKnownError => ApiCall.SuccessOrKnownError;
+		/// <inheritdoc cref="IApiCallDetails.HttpStatusCode"/>
+		public int? HttpStatusCode => ApiCall.HttpStatusCode;
+
+		/// <inheritdoc cref="IApiCallDetails.Success"/>
+		public bool Success => ApiCall.Success;
+		/// <inheritdoc cref="IApiCallDetails.OriginalException"/>
+		public Exception OriginalException => ApiCall.OriginalException;
+		/// <inheritdoc cref="IApiCallDetails.ResponseMimeType"/>
+		public string ResponseMimeType => ApiCall.ResponseMimeType;
+		/// <inheritdoc cref="IApiCallDetails.Uri"/>
+		public Uri Uri => ApiCall.Uri;
+
+		/// <inheritdoc cref="IApiCallDetails.ResponseBodyInBytes"/>
+		public byte[] ResponseBodyInBytes => ApiCall.ResponseBodyInBytes;
+
+		/// <inheritdoc cref="IApiCallDetails.RequestBodyInBytes"/>
+		public byte[] RequestBodyInBytes => ApiCall.RequestBodyInBytes;
+
+		bool IElasticsearchResponse.TryGetServerErrorReason(out string reason) => TryGetServerErrorReason(out reason);
+
+		// TODO: Remove?
+		//ignored
+		List<Audit> IApiCallDetails.AuditTrail { get; set; }
 
 		protected virtual bool TryGetServerErrorReason(out string reason)
 		{
@@ -21,47 +51,7 @@ namespace Elasticsearch.Net
 			return false;
 		}
 
-		// TODO: Remove?
-		//ignored
-		List<Audit> IApiCallDetails.AuditTrail { get; set; }
-
-		/// <inheritdoc cref="IApiCallDetails.Success"/>
-		public bool Success => this.ApiCall.Success;
-
-		/// <inheritdoc cref="IApiCallDetails.ResponseMimeType"/>
-		public string ResponseMimeType => this.ApiCall.ResponseMimeType;
-
-		/// <inheritdoc cref="IApiCallDetails.HttpMethod"/>
-		public HttpMethod HttpMethod => this.ApiCall.HttpMethod;
-
-		/// <inheritdoc cref="IApiCallDetails.Uri"/>
-		public Uri Uri => this.ApiCall.Uri;
-
-		/// <inheritdoc cref="IApiCallDetails.HttpStatusCode"/>
-		public int? HttpStatusCode => this.ApiCall.HttpStatusCode;
-
-		/// <inheritdoc cref="IApiCallDetails.AuditTrail"/>
-		public List<Audit> AuditTrail => this.ApiCall.AuditTrail;
-
-		/// <inheritdoc cref="IApiCallDetails.DeprecationWarnings"/>
-		public IEnumerable<string> DeprecationWarnings => this.ApiCall.DeprecationWarnings;
-
-		/// <inheritdoc cref="IApiCallDetails.SuccessOrKnownError"/>
-		public bool SuccessOrKnownError => this.ApiCall.SuccessOrKnownError;
-
-		/// <inheritdoc cref="IApiCallDetails.OriginalException"/>
-		public Exception OriginalException => this.ApiCall.OriginalException;
-
-		/// <inheritdoc cref="IApiCallDetails.RequestBodyInBytes"/>
-		public byte[] RequestBodyInBytes => this.ApiCall.RequestBodyInBytes;
-
-		/// <inheritdoc cref="IApiCallDetails.ResponseBodyInBytes"/>
-		public byte[] ResponseBodyInBytes => this.ApiCall.ResponseBodyInBytes;
-
-		/// <inheritdoc cref="IApiCallDetails.DebugInformation"/>
-		public string DebugInformation => this.ApiCall.DebugInformation;
-
-		public override string ToString() => this.ApiCall.ToString();
+		public override string ToString() => ApiCall.ToString();
 	}
 
 	/// <summary>

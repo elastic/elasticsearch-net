@@ -6,31 +6,30 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 using static Elasticsearch.Net.HttpMethod;
 
 namespace Tests.XPack.License.GetLicense
 {
 	[SkipVersion("<2.3.0", "")]
-	public class GetLicenseApiTests : ApiIntegrationTestBase<XPackCluster, IGetLicenseResponse, IGetLicenseRequest, GetLicenseDescriptor, GetLicenseRequest>
+	public class GetLicenseApiTests
+		: ApiIntegrationTestBase<XPackCluster, IGetLicenseResponse, IGetLicenseRequest, GetLicenseDescriptor, GetLicenseRequest>
 	{
 		public GetLicenseApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.GetLicense(f),
-			fluentAsync: (client, f) => client.GetLicenseAsync(f),
-			request: (client, r) => client.GetLicense(r),
-			requestAsync: (client, r) => client.GetLicenseAsync(r)
-		);
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => GET;
 
+		protected override GetLicenseRequest Initializer => new GetLicenseRequest();
+
 		protected override string UrlPath => $"/_xpack/license";
 
-		protected override GetLicenseRequest Initializer => new GetLicenseRequest();
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.GetLicense(f),
+			(client, f) => client.GetLicenseAsync(f),
+			(client, r) => client.GetLicense(r),
+			(client, r) => client.GetLicenseAsync(r)
+		);
 
 		protected override void ExpectResponse(IGetLicenseResponse response)
 		{

@@ -15,8 +15,8 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Max = this;
 	}
 
-	public class MaxAggregationDescriptor<T> 
+	public class MaxAggregationDescriptor<T>
 		: MetricAggregationDescriptorBase<MaxAggregationDescriptor<T>, IMaxAggregation, T>
-			, IMaxAggregation 
+			, IMaxAggregation
 		where T : class { }
 }

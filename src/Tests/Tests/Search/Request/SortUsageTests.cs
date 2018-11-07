@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Search.Request
@@ -19,14 +16,13 @@ namespace Tests.Search.Request
 	 */
 	public class SortUsageTests : SearchUsageTestBase
 	{
-		public SortUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public SortUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object ExpectJson =>
 			new
 			{
-				sort = new object[] {
+				sort = new object[]
+				{
 					new { startedOn = new { order = "asc" } },
 					new { name = new { order = "desc" } },
 					new { _score = new { order = "desc" } },
@@ -97,7 +93,6 @@ namespace Tests.Search.Request
 					}
 				}
 			};
-
 #pragma warning disable 618 // uses NestedPath and NestedFilter
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Sort(ss => ss
@@ -105,7 +100,6 @@ namespace Tests.Search.Request
 				.Descending(p => p.Name)
 				.Descending(SortSpecialField.Score)
 				.Ascending(SortSpecialField.DocumentIndexOrder)
-
 				.Field(f => f
 					.Field(p => p.Tags.First().Added)
 					.Order(SortOrder.Descending)
@@ -150,13 +144,13 @@ namespace Tests.Search.Request
 					new SortField { Field = "_doc", Order = SortOrder.Ascending },
 					new SortField
 					{
-						Field = Field<Project>(p=>p.Tags.First().Added),
+						Field = Field<Project>(p => p.Tags.First().Added),
 						Order = SortOrder.Descending,
 						Missing = "_last",
 						UnmappedType = FieldType.Date,
 						Mode = SortMode.Average,
 #pragma warning disable 618
-						NestedPath = Field<Project>(p=>p.Tags),
+						NestedPath = Field<Project>(p => p.Tags),
 						NestedFilter = new MatchAllQuery(),
 #pragma warning restore 618
 					},
@@ -173,7 +167,7 @@ namespace Tests.Search.Request
 						DistanceType = GeoDistanceType.Arc,
 						GeoUnit = DistanceUnit.Centimeters,
 						Mode = SortMode.Min,
-						Points = new[] {new GeoLocation(70, -70), new GeoLocation(-12, 12)}
+						Points = new[] { new GeoLocation(70, -70), new GeoLocation(-12, 12) }
 					},
 					new ScriptSort
 					{
@@ -183,7 +177,7 @@ namespace Tests.Search.Request
 						{
 							Params = new Dictionary<string, object>
 							{
-								{"factor", 1.1}
+								{ "factor", 1.1 }
 							}
 						}
 					}
@@ -201,9 +195,7 @@ namespace Tests.Search.Request
 	[SkipVersion("<6.1.0", "Only available in Elasticsearch 6.1.0+")]
 	public class NestedSortUsageTests : SearchUsageTestBase
 	{
-		public NestedSortUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public NestedSortUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object ExpectJson =>
 			new
@@ -328,7 +320,7 @@ namespace Tests.Search.Request
 						DistanceType = GeoDistanceType.Arc,
 						GeoUnit = DistanceUnit.Centimeters,
 						Mode = SortMode.Min,
-						Points = new[] {new GeoLocation(70, -70), new GeoLocation(-12, 12)}
+						Points = new[] { new GeoLocation(70, -70), new GeoLocation(-12, 12) }
 					},
 				}
 			};

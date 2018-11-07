@@ -7,12 +7,11 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
-using Elasticsearch.Net;
+using System.Threading;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using System.Threading.Tasks;
-using System.Threading;
 
 namespace Nest
 {
@@ -20,6 +19,7 @@ namespace Nest
 	{
 		public static readonly IReadOnlyCollection<TElement> Collection = new ReadOnlyCollection<TElement>(new TElement[0]);
 	}
+
 	internal static class EmptyReadOnly<TKey, TValue>
 	{
 		public static readonly IReadOnlyDictionary<TKey, TValue> Dictionary = new ReadOnlyDictionary<TKey, TValue>(new Dictionary<TKey, TValue>(0));
@@ -27,6 +27,11 @@ namespace Nest
 
 	internal static class Extensions
 	{
+		internal static ConcurrentDictionary<string, object> _enumCache = new ConcurrentDictionary<string, object>();
+
+		internal static readonly JsonConverter dateConverter = new IsoDateTimeConverter { Culture = CultureInfo.InvariantCulture };
+		internal static readonly JsonSerializer serializer = new JsonSerializer();
+
 		internal static bool NotWritable(this QueryContainer q) => q == null || !q.IsWritable;
 
 		internal static bool NotWritable(this IEnumerable<QueryContainer> qs) => qs == null || qs.All(q => q.NotWritable());
@@ -39,8 +44,6 @@ namespace Nest
 			where T1 : class, TReturn where TReturn : class =>
 			func?.Invoke(@default, param2) ?? @default;
 
-		internal static readonly JsonConverter dateConverter = new IsoDateTimeConverter { Culture = CultureInfo.InvariantCulture };
-		internal static readonly JsonSerializer serializer = new JsonSerializer();
 		internal static string ToJsonNetString(this DateTime date)
 		{
 			using (var writer = new JTokenWriter())
@@ -50,12 +53,8 @@ namespace Nest
 			}
 		}
 
-		internal static IEnumerable<T> DistinctBy<T, TKey>(this IEnumerable<T> items, Func<T, TKey> property)
-		{
-			return items.GroupBy(property).Select(x => x.First());
-		}
-
-		internal static ConcurrentDictionary<string, object> _enumCache = new ConcurrentDictionary<string, object>();
+		internal static IEnumerable<T> DistinctBy<T, TKey>(this IEnumerable<T> items, Func<T, TKey> property) =>
+			items.GroupBy(property).Select(x => x.First());
 
 		internal static string ToEnumValue<T>(this T enumValue) where T : struct
 		{
@@ -95,7 +94,7 @@ namespace Nest
 				var enumMemberAttribute = enumFieldInfo.GetCustomAttribute<EnumMemberAttribute>();
 				if (enumMemberAttribute?.Value.Equals(str, comparison) ?? false)
 				{
-					var v = (T) Enum.Parse(enumType, name);
+					var v = (T)Enum.Parse(enumType, name);
 					_enumCache.TryAdd(key, v);
 					return v;
 				}
@@ -103,7 +102,7 @@ namespace Nest
 				var alternativeEnumMemberAttribute = enumFieldInfo.GetCustomAttribute<AlternativeEnumMemberAttribute>();
 				if (alternativeEnumMemberAttribute?.Value.Equals(str, comparison) ?? false)
 				{
-					var v = (T) Enum.Parse(enumType, name);
+					var v = (T)Enum.Parse(enumType, name);
 					_enumCache.TryAdd(key, v);
 					return v;
 				}
@@ -114,23 +113,13 @@ namespace Nest
 
 		internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes, 0, bytes.Length);
 
-		internal static byte[] Utf8Bytes(this string s)
-		{
-			return s.IsNullOrEmpty() ? null : Encoding.UTF8.GetBytes(s);
-		}
+		internal static byte[] Utf8Bytes(this string s) => s.IsNullOrEmpty() ? null : Encoding.UTF8.GetBytes(s);
 
-		internal static bool IsNullOrEmpty(this TypeName value)
-		{
-			return value == null || value.GetHashCode() == 0;
-		}
-		internal static bool IsNullOrEmpty(this IndexName value)
-		{
-			return value == null || value.GetHashCode() == 0;
-		}
-		internal static bool IsValueType(this Type type)
-		{
-			return type.GetTypeInfo().IsValueType;
-		}
+		internal static bool IsNullOrEmpty(this TypeName value) => value == null || value.GetHashCode() == 0;
+
+		internal static bool IsNullOrEmpty(this IndexName value) => value == null || value.GetHashCode() == 0;
+
+		internal static bool IsValueType(this Type type) => type.GetTypeInfo().IsValueType;
 
 		internal static void ThrowIfNullOrEmpty(this string @object, string parameterName, string when = null)
 		{
@@ -146,46 +135,39 @@ namespace Nest
 				throw new ArgumentException("Argument can not be an empty collection", parameterName);
 		}
 
-		internal static List<T> AsInstanceOrToListOrDefault<T>(this IEnumerable<T> list)
-		{
-			return list as List<T> ?? list?.ToList<T>() ?? new List<T>();
-		}
-		internal static List<T> AsInstanceOrToListOrNull<T>(this IEnumerable<T> list)
-		{
-			return list as List<T> ?? list?.ToList<T>();
-		}
+		internal static List<T> AsInstanceOrToListOrDefault<T>(this IEnumerable<T> list) => list as List<T> ?? list?.ToList<T>() ?? new List<T>();
+
+		internal static List<T> AsInstanceOrToListOrNull<T>(this IEnumerable<T> list) => list as List<T> ?? list?.ToList<T>();
 
 		internal static List<T> EagerConcat<T>(this IEnumerable<T> list, IEnumerable<T> other)
 		{
 			var first = list.AsInstanceOrToListOrDefault();
 			if (other == null) return first;
+
 			var second = other.AsInstanceOrToListOrDefault();
 			var newList = new List<T>(first.Count + second.Count);
 			newList.AddRange(first);
 			newList.AddRange(second);
 			return newList;
 		}
+
 		internal static IEnumerable<T> AddIfNotNull<T>(this IEnumerable<T> list, T other)
 		{
 			if (other == null) return list;
+
 			var l = list.AsInstanceOrToListOrDefault();
 			l.Add(other);
 			return l;
 		}
 
-		internal static bool HasAny<T>(this IEnumerable<T> list, Func<T, bool> predicate)
-		{
-			return list != null && list.Any(predicate);
-		}
+		internal static bool HasAny<T>(this IEnumerable<T> list, Func<T, bool> predicate) => list != null && list.Any(predicate);
 
-		internal static bool HasAny<T>(this IEnumerable<T> list)
-		{
-			return list != null && list.Any();
-		}
+		internal static bool HasAny<T>(this IEnumerable<T> list) => list != null && list.Any();
 
 		internal static bool IsEmpty<T>(this IEnumerable<T> list)
 		{
 			if (list == null) return true;
+
 			var enumerable = list as T[] ?? list.ToArray();
 			return !enumerable.Any() || enumerable.All(t => t == null);
 		}
@@ -196,17 +178,16 @@ namespace Nest
 			else if (value == null) throw new ArgumentNullException(name, "Argument can not be null when " + message);
 		}
 
-		internal static bool IsNullOrEmpty(this string value)
-		{
-			return string.IsNullOrWhiteSpace(value);
-		}
+		internal static bool IsNullOrEmpty(this string value) => string.IsNullOrWhiteSpace(value);
+
 		internal static bool IsNullOrEmptyCommaSeparatedList(this string value, out string[] split)
 		{
 			split = null;
 			if (string.IsNullOrWhiteSpace(value)) return true;
-			split = value.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries)
-				.Where(t=>!t.IsNullOrEmpty())
-				.Select(t=>t.Trim())
+
+			split = value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+				.Where(t => !t.IsNullOrEmpty())
+				.Select(t => t.Trim())
 				.ToArray();
 			return split.Length == 0;
 		}
@@ -225,12 +206,15 @@ namespace Nest
 		internal static void AddIfNotNull<T>(this IList<T> list, T item) where T : class
 		{
 			if (item == null) return;
+
 			list.Add(item);
 		}
+
 		internal static void AddRangeIfNotNull<T>(this List<T> list, IEnumerable<T> item) where T : class
 		{
 			if (item == null) return;
-			list.AddRange(item.Where(x=>x!=null));
+
+			list.AddRange(item.Where(x => x != null));
 		}
 
 		internal static Dictionary<TKey, TValue> NullIfNoKeys<TKey, TValue>(this Dictionary<TKey, TValue> dictionary)
@@ -250,7 +234,7 @@ namespace Nest
 			SemaphoreSlim additionalRateLimitter = null
 		)
 		{
-			var semaphore = new SemaphoreSlim(initialCount: maxDegreeOfParallelism, maxCount: maxDegreeOfParallelism);
+			var semaphore = new SemaphoreSlim(maxDegreeOfParallelism, maxDegreeOfParallelism);
 			long page = 0;
 
 			try
@@ -284,7 +268,8 @@ namespace Nest
 			Action<TSource, TResult> resultProcessor,
 			SemaphoreSlim localRateLimiter,
 			SemaphoreSlim additionalRateLimiter,
-			long page)
+			long page
+		)
 		{
 			if (localRateLimiter != null) await localRateLimiter.WaitAsync().ConfigureAwait(false);
 			if (additionalRateLimiter != null) await additionalRateLimiter.WaitAsync().ConfigureAwait(false);
@@ -304,8 +289,8 @@ namespace Nest
 		{
 			if (o == null && other == null) return true;
 			if (o == null || other == null) return false;
+
 			return o.Equals(other);
 		}
-
 	}
 }

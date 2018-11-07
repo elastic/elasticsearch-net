@@ -18,7 +18,6 @@ namespace Nest
 	{
 		public QueryContainer Query { get; set; }
 		public IScript Script { get; set; }
-
 	}
 
 	public partial class UpdateByQueryRequest<T> : IUpdateByQueryRequest<T>
@@ -43,6 +42,5 @@ namespace Nest
 
 		public UpdateByQueryDescriptor<T> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
 			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
-
 	}
 }

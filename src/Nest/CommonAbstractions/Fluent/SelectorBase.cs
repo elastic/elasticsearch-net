@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace Nest
 {
@@ -8,7 +7,7 @@ namespace Nest
 	public abstract class SelectorBase<TInterface> : ISelector where TInterface : class
 	{
 		/// <summary>
-		/// Hides the <see cref="Equals"/> method.
+		/// Hides the <see cref="Equals" /> method.
 		/// </summary>
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
@@ -17,7 +16,7 @@ namespace Nest
 		public override bool Equals(object obj) => base.Equals(obj);
 
 		/// <summary>
-		/// Hides the <see cref="GetHashCode"/> method.
+		/// Hides the <see cref="GetHashCode" /> method.
 		/// </summary>
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
@@ -26,7 +25,7 @@ namespace Nest
 		public override int GetHashCode() => base.GetHashCode();
 
 		/// <summary>
-		/// Hides the <see cref="ToString"/> method.
+		/// Hides the <see cref="ToString" /> method.
 		/// </summary>
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]

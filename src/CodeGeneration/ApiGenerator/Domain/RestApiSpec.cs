@@ -14,16 +14,38 @@ namespace ApiGenerator.Domain
 		private IEnumerable<EnumDescription> _enumDescriptions;
 
 		public string Commit { get; set; }
-		public IDictionary<string, ApiEndpoint> Endpoints { get; set; }
 
 		public static Dictionary<string, ApiQueryParameters> CommonApiQueryParameters { get; set; }
+
+
+		public IEnumerable<CsharpMethod> CsharpMethodsWithQueryStringInfo =>
+			(from u in Endpoints.Values.SelectMany(v => v.CsharpMethods)
+				where u.QueryStringParamName != "FluentQueryString"
+				select u).GroupBy(m => m.QueryStringParamName)
+			.Select(g =>
+			{
+				if (g.Count() == 1) return g.First();
+
+				return g.OrderBy(v =>
+					{
+						switch (v.HttpMethod.ToUpper())
+						{
+							case "GET": return 1;
+							default: return 0;
+						}
+					})
+					.First();
+			});
+
+		public IDictionary<string, ApiEndpoint> Endpoints { get; set; }
 
 		public IEnumerable<EnumDescription> EnumsInTheSpec
 		{
 			get
 			{
 				if (_enumDescriptions != null) return _enumDescriptions;
-				var queryParamEnums = from m in this.CsharpMethodsWithQueryStringInfo.SelectMany(m => m.Url.Params)
+
+				var queryParamEnums = from m in CsharpMethodsWithQueryStringInfo.SelectMany(m => m.Url.Params)
 					where m.Value.Type == "enum"
 					select new EnumDescription
 					{
@@ -31,7 +53,7 @@ namespace ApiGenerator.Domain
 						Options = m.Value.Options
 					};
 
-				var urlParamEnums = from data in this.Endpoints.Values
+				var urlParamEnums = from data in Endpoints.Values
 						.SelectMany(v => v.CsharpMethods.Select(m => new { m, n = v.CsharpMethodName }))
 						.SelectMany(m => m.m.Parts.Select(part => new { m = m.n, p = part }))
 					let p = data.p
@@ -50,24 +72,6 @@ namespace ApiGenerator.Domain
 
 				return _enumDescriptions;
 			}
-
 		}
-
-
-		public IEnumerable<CsharpMethod> CsharpMethodsWithQueryStringInfo =>
-			(from u in this.Endpoints.Values.SelectMany(v => v.CsharpMethods)
-			where u.QueryStringParamName != "FluentQueryString"
-			select u).GroupBy(m => m.QueryStringParamName).Select(g =>
-		{
-			if (g.Count() == 1) return g.First();
-			return g.OrderBy(v =>
-			{
-				switch (v.HttpMethod.ToUpper())
-				{
-					case "GET": return 1;
-					default: return 0;
-				}
-			}).First();
-		});
 	}
 }

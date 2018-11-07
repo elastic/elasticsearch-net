@@ -17,7 +17,7 @@ namespace Nest
 				return;
 			}
 			marker.Match(
-				all=> writer.WriteNull(),
+				all => writer.WriteNull(),
 				many => writer.WriteValue(((IUrlParameter)marker).GetString(serializer.GetConnectionSettings()))
 			);
 		}
@@ -31,6 +31,5 @@ namespace Nest
 			}
 			return null;
 		}
-
 	}
 }

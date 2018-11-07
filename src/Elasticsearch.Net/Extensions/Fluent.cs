@@ -11,5 +11,4 @@ namespace Elasticsearch.Net
 			return self;
 		}
 	}
-
 }

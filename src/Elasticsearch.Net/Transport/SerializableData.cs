@@ -13,46 +13,47 @@ namespace Elasticsearch.Net
 			Type = PostType.Serializable;
 			_serializable = item;
 		}
-		public static implicit operator SerializableData<T>(T serialiableData) => new SerializableData<T>(serialiableData);
 
 		public override void Write(Stream writableStream, IConnectionConfigurationValues settings)
 		{
 			var indent = settings.PrettyJson ? SerializationFormatting.Indented : SerializationFormatting.None;
 			var stream = writableStream;
 			MemoryStream ms = null;
-			if (this.DisableDirectStreaming ?? settings.DisableDirectStreaming)
+			if (DisableDirectStreaming ?? settings.DisableDirectStreaming)
 			{
 				ms = new MemoryStream();
 				stream = ms;
 			}
-			settings.RequestResponseSerializer.Serialize(this._serializable, stream, indent);
+			settings.RequestResponseSerializer.Serialize(_serializable, stream, indent);
 			if (ms != null)
 			{
 				ms.Position = 0;
 				ms.CopyTo(writableStream, BufferSize);
 			}
-			if (this.Type != 0)
-				this.WrittenBytes = ms?.ToArray();
+			if (Type != 0)
+				WrittenBytes = ms?.ToArray();
 		}
+
+		public static implicit operator SerializableData<T>(T serialiableData) => new SerializableData<T>(serialiableData);
 
 		public override async Task WriteAsync(Stream writableStream, IConnectionConfigurationValues settings, CancellationToken cancellationToken)
 		{
 			var indent = settings.PrettyJson ? SerializationFormatting.Indented : SerializationFormatting.None;
 			var stream = writableStream;
 			MemoryStream ms = null;
-			if (this.DisableDirectStreaming ?? settings.DisableDirectStreaming)
+			if (DisableDirectStreaming ?? settings.DisableDirectStreaming)
 			{
 				ms = new MemoryStream();
 				stream = ms;
 			}
-			await settings.RequestResponseSerializer.SerializeAsync(this._serializable, stream, indent, cancellationToken).ConfigureAwait(false);
+			await settings.RequestResponseSerializer.SerializeAsync(_serializable, stream, indent, cancellationToken).ConfigureAwait(false);
 			if (ms != null)
 			{
 				ms.Position = 0;
 				await ms.CopyToAsync(writableStream, BufferSize, cancellationToken).ConfigureAwait(false);
 			}
-			if (this.Type != 0)
-				this.WrittenBytes = ms?.ToArray();
+			if (Type != 0)
+				WrittenBytes = ms?.ToArray();
 		}
 	}
 }

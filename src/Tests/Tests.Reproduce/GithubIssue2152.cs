@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using System.Linq;
 using System.Text;
 using Elastic.Xunit.XunitPlumbing;
@@ -58,7 +57,7 @@ namespace Tests.Reproduce
 
 			ShouldDeserialize(firstOperation.Error);
 			ShouldDeserialize(firstOperation.Error.CausedBy);
-			ShouldDeserialize(firstOperation.Error.CausedBy.CausedBy, nullReason: true);
+			ShouldDeserialize(firstOperation.Error.CausedBy.CausedBy, true);
 			ShouldDeserialize(firstOperation.Error.CausedBy.CausedBy.CausedBy);
 		}
 
@@ -98,11 +97,11 @@ namespace Tests.Reproduce
 			se.Should().NotBeNull();
 			ShouldDeserialize(se.Error);
 			ShouldDeserialize(se.Error.CausedBy);
-			ShouldDeserialize(se.Error.CausedBy.CausedBy, nullReason: true);
+			ShouldDeserialize(se.Error.CausedBy.CausedBy, true);
 			ShouldDeserialize(se.Error.CausedBy.CausedBy.CausedBy);
 		}
 
-		private static void ShouldDeserialize(ErrorCause error,  bool nullReason = false)
+		private static void ShouldDeserialize(ErrorCause error, bool nullReason = false)
 		{
 			error.Should().NotBeNull();
 			error.Type.Should().NotBeNullOrEmpty();

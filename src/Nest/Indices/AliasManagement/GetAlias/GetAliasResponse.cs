@@ -20,6 +20,6 @@ namespace Nest
 		[JsonIgnore]
 		public IReadOnlyDictionary<IndexName, IndexAliases> Indices => Self.BackingDictionary;
 
-		public override bool IsValid => this.Indices.Count > 0;
+		public override bool IsValid => Indices.Count > 0;
 	}
 }

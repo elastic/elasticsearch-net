@@ -13,11 +13,11 @@ namespace Nest
 
 	public class FieldCapabilitiesResponse : ResponseBase, IFieldCapabilitiesResponse
 	{
-		public ShardStatistics Shards { get; internal set; }
 		public FieldCapabilitiesFields Fields { get; internal set; }
+		public ShardStatistics Shards { get; internal set; }
 	}
 
-	[JsonConverter(typeof(FieldCapabilitiesFields.Converter))]
+	[JsonConverter(typeof(Converter))]
 	public class FieldCapabilitiesFields : ResolvableDictionaryProxy<Field, FieldTypes>
 	{
 		internal FieldCapabilitiesFields(IConnectionConfigurationValues c, IReadOnlyDictionary<Field, FieldTypes> b) : base(c, b) { }
@@ -31,61 +31,60 @@ namespace Nest
 
 	public class FieldTypes : IsADictionaryBase<string, FieldCapabilities>
 	{
-		public FieldCapabilities All => this.BackingDictionary.TryGetValue("_all", out var f) ? f : null;
-		public FieldCapabilities Id => this.BackingDictionary.TryGetValue("_id", out var f) ? f : null;
-		public FieldCapabilities Uid => this.BackingDictionary.TryGetValue("_uid", out var f) ? f : null;
-		public FieldCapabilities Type => this.BackingDictionary.TryGetValue("_type", out var f) ? f : null;
-		public FieldCapabilities Index => this.BackingDictionary.TryGetValue("_index", out var f) ? f : null;
-		public FieldCapabilities Parent => this.BackingDictionary.TryGetValue("_parent", out var f) ? f : null;
-		public FieldCapabilities Version => this.BackingDictionary.TryGetValue("_version", out var f) ? f : null;
-		public FieldCapabilities Routing => this.BackingDictionary.TryGetValue("_routing", out var f) ? f : null;
-		public FieldCapabilities Source => this.BackingDictionary.TryGetValue("_source", out var f) ? f : null;
-		public FieldCapabilities FieldNames => this.BackingDictionary.TryGetValue("_field_names", out var f) ? f : null;
+		public FieldCapabilities All => BackingDictionary.TryGetValue("_all", out var f) ? f : null;
+		public FieldCapabilities Attachment => BackingDictionary.TryGetValue("attachment", out var f) ? f : null;
+		public FieldCapabilities Binary => BackingDictionary.TryGetValue("binary", out var f) ? f : null;
+		public FieldCapabilities Boolean => BackingDictionary.TryGetValue("boolean", out var f) ? f : null;
+		public FieldCapabilities Byte => BackingDictionary.TryGetValue("byte", out var f) ? f : null;
+		public FieldCapabilities Completion => BackingDictionary.TryGetValue("completion", out var f) ? f : null;
+		public FieldCapabilities Date => BackingDictionary.TryGetValue("date", out var f) ? f : null;
+		public FieldCapabilities DateRange => BackingDictionary.TryGetValue("date_range", out var f) ? f : null;
+		public FieldCapabilities Double => BackingDictionary.TryGetValue("double", out var f) ? f : null;
+		public FieldCapabilities DoubleRange => BackingDictionary.TryGetValue("double_range", out var f) ? f : null;
+		public FieldCapabilities FieldNames => BackingDictionary.TryGetValue("_field_names", out var f) ? f : null;
+		public FieldCapabilities Float => BackingDictionary.TryGetValue("float", out var f) ? f : null;
+		public FieldCapabilities FloatRange => BackingDictionary.TryGetValue("float_range", out var f) ? f : null;
+		public FieldCapabilities GeoPoint => BackingDictionary.TryGetValue("geo_point", out var f) ? f : null;
+		public FieldCapabilities GeoShape => BackingDictionary.TryGetValue("geo_shape", out var f) ? f : null;
+		public FieldCapabilities HalfFloat => BackingDictionary.TryGetValue("half_float", out var f) ? f : null;
+		public FieldCapabilities Id => BackingDictionary.TryGetValue("_id", out var f) ? f : null;
+		public FieldCapabilities Index => BackingDictionary.TryGetValue("_index", out var f) ? f : null;
+		public FieldCapabilities Integer => BackingDictionary.TryGetValue("integer", out var f) ? f : null;
+		public FieldCapabilities IntegerRange => BackingDictionary.TryGetValue("integer_range", out var f) ? f : null;
+		public FieldCapabilities Ip => BackingDictionary.TryGetValue("ip", out var f) ? f : null;
 
-		public FieldCapabilities Keyword => this.BackingDictionary.TryGetValue("keyword", out var f) ? f : null;
-		public FieldCapabilities Text => this.BackingDictionary.TryGetValue("text", out var f) ? f : null;
-		public FieldCapabilities GeoPoint => this.BackingDictionary.TryGetValue("geo_point", out var f) ? f : null;
-		public FieldCapabilities GeoShape => this.BackingDictionary.TryGetValue("geo_shape", out var f) ? f : null;
-		public FieldCapabilities Attachment => this.BackingDictionary.TryGetValue("attachment", out var f) ? f : null;
-		public FieldCapabilities Ip => this.BackingDictionary.TryGetValue("ip", out var f) ? f : null;
-		public FieldCapabilities Binary => this.BackingDictionary.TryGetValue("binary", out var f) ? f : null;
-		public FieldCapabilities Date => this.BackingDictionary.TryGetValue("date", out var f) ? f : null;
-		public FieldCapabilities Boolean => this.BackingDictionary.TryGetValue("boolean", out var f) ? f : null;
-		public FieldCapabilities Completion => this.BackingDictionary.TryGetValue("completion", out var f) ? f : null;
-		public FieldCapabilities Murmur3 => this.BackingDictionary.TryGetValue("murmur3", out var f) ? f : null;
-		public FieldCapabilities TokenCount => this.BackingDictionary.TryGetValue("token_count", out var f) ? f : null;
-		public FieldCapabilities Percolator => this.BackingDictionary.TryGetValue("percolator", out var f) ? f : null;
-		public FieldCapabilities Integer => this.BackingDictionary.TryGetValue("integer", out var f) ? f : null;
-		public FieldCapabilities Long => this.BackingDictionary.TryGetValue("long", out var f) ? f : null;
-		public FieldCapabilities Short => this.BackingDictionary.TryGetValue("short", out var f) ? f : null;
-		public FieldCapabilities Byte => this.BackingDictionary.TryGetValue("byte", out var f) ? f : null;
-		public FieldCapabilities Float => this.BackingDictionary.TryGetValue("float", out var f) ? f : null;
-		public FieldCapabilities HalfFloat => this.BackingDictionary.TryGetValue("half_float", out var f) ? f : null;
-		public FieldCapabilities ScaledFloat => this.BackingDictionary.TryGetValue("scaled_float", out var f) ? f : null;
-		public FieldCapabilities Double => this.BackingDictionary.TryGetValue("double", out var f) ? f : null;
-		public FieldCapabilities IntegerRange => this.BackingDictionary.TryGetValue("integer_range", out var f) ? f : null;
-		public FieldCapabilities FloatRange => this.BackingDictionary.TryGetValue("float_range", out var f) ? f : null;
-		public FieldCapabilities LongRange => this.BackingDictionary.TryGetValue("long_range", out var f) ? f : null;
-		public FieldCapabilities DoubleRange => this.BackingDictionary.TryGetValue("double_range", out var f) ? f : null;
-		public FieldCapabilities DateRange => this.BackingDictionary.TryGetValue("date_range", out var f) ? f : null;
+		public FieldCapabilities Keyword => BackingDictionary.TryGetValue("keyword", out var f) ? f : null;
+		public FieldCapabilities Long => BackingDictionary.TryGetValue("long", out var f) ? f : null;
+		public FieldCapabilities LongRange => BackingDictionary.TryGetValue("long_range", out var f) ? f : null;
+		public FieldCapabilities Murmur3 => BackingDictionary.TryGetValue("murmur3", out var f) ? f : null;
+		public FieldCapabilities Parent => BackingDictionary.TryGetValue("_parent", out var f) ? f : null;
+		public FieldCapabilities Percolator => BackingDictionary.TryGetValue("percolator", out var f) ? f : null;
+		public FieldCapabilities Routing => BackingDictionary.TryGetValue("_routing", out var f) ? f : null;
+		public FieldCapabilities ScaledFloat => BackingDictionary.TryGetValue("scaled_float", out var f) ? f : null;
+		public FieldCapabilities Short => BackingDictionary.TryGetValue("short", out var f) ? f : null;
+		public FieldCapabilities Source => BackingDictionary.TryGetValue("_source", out var f) ? f : null;
+		public FieldCapabilities Text => BackingDictionary.TryGetValue("text", out var f) ? f : null;
+		public FieldCapabilities TokenCount => BackingDictionary.TryGetValue("token_count", out var f) ? f : null;
+		public FieldCapabilities Type => BackingDictionary.TryGetValue("_type", out var f) ? f : null;
+		public FieldCapabilities Uid => BackingDictionary.TryGetValue("_uid", out var f) ? f : null;
+		public FieldCapabilities Version => BackingDictionary.TryGetValue("_version", out var f) ? f : null;
 	}
 
 	public class FieldCapabilities
 	{
-		[JsonProperty("searchable")]
-		public bool Searchable { get; internal set; }
-
 		[JsonProperty("aggregatable")]
 		public bool Aggregatable { get; internal set; }
 
 		[JsonProperty("indices")]
 		public Indices Indices { get; internal set; }
 
-		[JsonProperty("non_searchable_indices")]
-		public Indices NonSearchableIndices { get; internal set; }
-
 		[JsonProperty("non_aggregatable_indices")]
 		public Indices NonAggregatableIndices { get; internal set; }
 
+		[JsonProperty("non_searchable_indices")]
+		public Indices NonSearchableIndices { get; internal set; }
+
+		[JsonProperty("searchable")]
+		public bool Searchable { get; internal set; }
 	}
 }

@@ -7,24 +7,25 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Cluster.NodesUsage
 {
-	public class NodesUsageApiTests : ApiIntegrationTestBase<ReadOnlyCluster, INodesUsageResponse, INodesUsageRequest, NodesUsageDescriptor, NodesUsageRequest>
+	public class NodesUsageApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, INodesUsageResponse, INodesUsageRequest, NodesUsageDescriptor, NodesUsageRequest>
 	{
 		public NodesUsageApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.NodesUsage(),
-			fluentAsync: (client, f) => client.NodesUsageAsync(),
-			request: (client, r) => client.NodesUsage(r),
-			requestAsync: (client, r) => client.NodesUsageAsync(r)
-		);
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_nodes/usage";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.NodesUsage(),
+			(client, f) => client.NodesUsageAsync(),
+			(client, r) => client.NodesUsage(r),
+			(client, r) => client.NodesUsageAsync(r)
+		);
 
 		protected override void ExpectResponse(INodesUsageResponse response)
 		{
@@ -43,5 +44,4 @@ namespace Tests.Cluster.NodesUsage
 			response.Nodes.First().Value.RestActions.Should().NotBeNull();
 		}
 	}
-
 }

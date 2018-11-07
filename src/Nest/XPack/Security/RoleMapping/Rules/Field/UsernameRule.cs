@@ -2,9 +2,6 @@
 {
 	public class UsernameRule : FieldRuleBase
 	{
-		public UsernameRule(string username)
-		{
-			this.Username = username;
-		}
+		public UsernameRule(string username) => Username = username;
 	}
 }

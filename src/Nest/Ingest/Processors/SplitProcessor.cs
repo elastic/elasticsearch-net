@@ -1,10 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -21,11 +17,10 @@ namespace Nest
 
 	public class SplitProcessor : ProcessorBase, ISplitProcessor
 	{
-		protected override string Name => "split";
-
 		public Field Field { get; set; }
 
 		public string Separator { get; set; }
+		protected override string Name => "split";
 	}
 
 	public class SplitProcessorDescriptor<T>

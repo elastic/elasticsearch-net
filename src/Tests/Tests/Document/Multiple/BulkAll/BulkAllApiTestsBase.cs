@@ -14,13 +14,7 @@ namespace Tests.Document.Multiple.BulkAll
 {
 	public abstract class BulkAllApiTestsBase : IClusterFixture<IntrusiveOperationCluster>, IClassFixture<EndpointUsage>
 	{
-		protected BulkAllApiTestsBase(IntrusiveOperationCluster cluster, EndpointUsage usage) => this.Client = cluster.Client;
-
-		protected class SmallObject
-		{
-			public int Id { get; set; }
-			public string Number { get; set; }
-		}
+		protected BulkAllApiTestsBase(IntrusiveOperationCluster cluster, EndpointUsage usage) => Client = cluster.Client;
 
 		protected IElasticClient Client { get; }
 
@@ -34,7 +28,7 @@ namespace Tests.Document.Multiple.BulkAll
 
 		protected async Task CreateIndexAsync(string indexName, int numberOfShards, Func<MappingsDescriptor, IPromise<IMappings>> mappings = null)
 		{
-			var result = await this.Client.CreateIndexAsync(indexName, s => s
+			var result = await Client.CreateIndexAsync(indexName, s => s
 				.Settings(settings => settings
 					.NumberOfShards(numberOfShards)
 					.NumberOfReplicas(0)
@@ -44,11 +38,18 @@ namespace Tests.Document.Multiple.BulkAll
 			result.Should().NotBeNull();
 			result.ShouldBeValid();
 		}
+
 		protected static void OnError(ref Exception ex, Exception e, EventWaitHandle handle)
 		{
 			ex = e;
 			handle.Set();
 			throw e;
+		}
+
+		protected class SmallObject
+		{
+			public int Id { get; set; }
+			public string Number { get; set; }
 		}
 	}
 }

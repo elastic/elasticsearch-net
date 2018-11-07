@@ -13,7 +13,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 		/**=== Transports
 		*
 		* The `ITransport` interface can be seen as the motor block of the client. Its interface is
-        * deceitfully simple, yet it's ultimately responsible for translating a client call to a response.
+		* deceitfully simple, yet it's ultimately responsible for translating a client call to a response.
 		*
 		* If for some reason you do not agree with the way we wrote the internals of the client,
 		* by implementing a custom `ITransport`, you can circumvent all of it and introduce your own.
@@ -33,7 +33,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 			var inMemoryTransport = new Transport<ConnectionSettings>(
-                new ConnectionSettings(connectionPool, new InMemoryConnection()));
+				new ConnectionSettings(connectionPool, new InMemoryConnection()));
 
 			/**
 			* The only two methods on `ITransport` are `Request()` and `RequestAsync()`; the default `ITransport` implementation is responsible for introducing

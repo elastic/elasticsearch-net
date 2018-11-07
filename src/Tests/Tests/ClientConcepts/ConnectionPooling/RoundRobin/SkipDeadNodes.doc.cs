@@ -18,7 +18,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 		* When selecting nodes, the connection pool will try and skip all nodes that are marked as dead.
 		*
 		* ==== CreateView
-        *
+		*
 		* CreateView is implemented in a lock free thread safe fashion, meaning each callee gets returned its own cursor to advance
 		* over the internal list of nodes. This to guarantee each request that needs to fall over tries all the nodes without
 		* suffering from noisy neighbours advancing a global cursor.

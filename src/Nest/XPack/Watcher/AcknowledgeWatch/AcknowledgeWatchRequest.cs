@@ -1,9 +1,9 @@
 ﻿namespace Nest
 {
-	public partial interface IAcknowledgeWatchRequest {}
+	public partial interface IAcknowledgeWatchRequest { }
 
-	public partial class AcknowledgeWatchRequest {}
+	public partial class AcknowledgeWatchRequest { }
 
 	[DescriptorFor("XpackWatcherAckWatch")]
-	public partial class AcknowledgeWatchDescriptor {}
+	public partial class AcknowledgeWatchDescriptor { }
 }

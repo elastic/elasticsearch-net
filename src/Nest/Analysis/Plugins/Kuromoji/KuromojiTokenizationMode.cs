@@ -16,17 +16,18 @@ namespace Nest
 		/// </summary>
 		[EnumMember(Value = "normal")]
 		Normal,
+
 		/// <summary>
 		/// Segmentation geared towards search. This includes a decompounding process for long nouns,
 		/// also including the full compound token as a synonym.
 		/// </summary>
 		[EnumMember(Value = "search")]
 		Search,
+
 		/// <summary>
 		/// Extended mode outputs unigrams for unknown words.
 		/// </summary>
 		[EnumMember(Value = "extended")]
 		Extended
-
 	}
 }

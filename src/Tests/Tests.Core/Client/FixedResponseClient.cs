@@ -12,7 +12,8 @@ namespace Tests.Core.Client
 			int statusCode = 200,
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
 			string contentType = RequestData.MimeType,
-			Exception exception = null)
+			Exception exception = null
+		)
 		{
 			var settings = CreateConnectionSettings(response, statusCode, modifySettings, contentType, exception);
 			return new ElasticClient(settings);
@@ -23,7 +24,8 @@ namespace Tests.Core.Client
 			int statusCode = 200,
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
 			string contentType = RequestData.MimeType,
-			Exception exception = null)
+			Exception exception = null
+		)
 		{
 			var serializer = TestClient.Default.RequestResponseSerializer;
 			byte[] responseBytes;
@@ -48,9 +50,8 @@ namespace Tests.Core.Client
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 			var defaultSettings = new ConnectionSettings(connectionPool, connection)
 				.DefaultIndex("default-index");
-			var settings = (modifySettings != null) ? modifySettings(defaultSettings) : defaultSettings;
+			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
 			return settings;
 		}
-
 	}
 }

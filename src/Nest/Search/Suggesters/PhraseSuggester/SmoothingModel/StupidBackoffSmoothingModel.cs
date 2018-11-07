@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
 
 namespace Nest
 {
@@ -18,9 +17,10 @@ namespace Nest
 		internal override void WrapInContainer(ISmoothingModelContainer container) => container.StupidBackoff = this;
 	}
 
-	public class StupidBackoffSmoothingModelDescriptor : DescriptorBase<StupidBackoffSmoothingModelDescriptor, IStupidBackoffSmoothingModel>, IStupidBackoffSmoothingModel
+	public class StupidBackoffSmoothingModelDescriptor
+		: DescriptorBase<StupidBackoffSmoothingModelDescriptor, IStupidBackoffSmoothingModel>, IStupidBackoffSmoothingModel
 	{
-		double? IStupidBackoffSmoothingModel.Discount{ get; set; }
+		double? IStupidBackoffSmoothingModel.Discount { get; set; }
 
 		public StupidBackoffSmoothingModelDescriptor Discount(double? discount) => Assign(a => a.Discount = discount);
 	}

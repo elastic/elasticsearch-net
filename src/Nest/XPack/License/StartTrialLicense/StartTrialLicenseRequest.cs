@@ -1,20 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-
-namespace Nest
+﻿namespace Nest
 {
-	public partial interface IStartTrialLicenseRequest
-	{
-	}
+	public partial interface IStartTrialLicenseRequest { }
 
-	public partial class StartTrialLicenseRequest
-	{
-	}
+	public partial class StartTrialLicenseRequest { }
 
 	[DescriptorFor("XpackLicensePostStartTrial")]
-	public partial class StartTrialLicenseDescriptor : IStartTrialLicenseRequest
-	{
-
-	}
+	public partial class StartTrialLicenseDescriptor : IStartTrialLicenseRequest { }
 }

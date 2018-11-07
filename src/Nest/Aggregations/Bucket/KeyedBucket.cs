@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Nest
 {
@@ -9,10 +6,11 @@ namespace Nest
 	{
 		public KeyedBucket(IReadOnlyDictionary<string, IAggregate> dict) : base(dict) { }
 
-		public TKey Key { get; set; }
-		public string KeyAsString { get; set; }
 		public long? DocCount { get; set; }
 
 		public long? DocCountErrorUpperBound { get; set; }
+
+		public TKey Key { get; set; }
+		public string KeyAsString { get; set; }
 	}
 }

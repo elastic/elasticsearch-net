@@ -26,6 +26,7 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public bool? Enabled { get; set; }
+
 		/// <inheritdoc />
 		public Fields Terms { get; set; }
 	}
@@ -70,7 +71,8 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	public class ModelPlotConfigEnabledDescriptor<T> : DescriptorBase<ModelPlotConfigEnabledDescriptor<T>, IModelPlotConfigEnabled>, IModelPlotConfigEnabled where T : class
+	public class ModelPlotConfigEnabledDescriptor<T>
+		: DescriptorBase<ModelPlotConfigEnabledDescriptor<T>, IModelPlotConfigEnabled>, IModelPlotConfigEnabled where T : class
 	{
 		bool? IModelPlotConfigEnabled.Enabled { get; set; }
 

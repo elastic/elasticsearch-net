@@ -9,10 +9,8 @@ namespace Nest
 		public HighlightFieldDictionary(IDictionary<string, HighlightHit> dictionary = null)
 		{
 			if (dictionary == null) return;
-			foreach(var kv in dictionary)
-			{
-				this.Add(kv.Key, kv.Value);
-			}
+
+			foreach (var kv in dictionary) Add(kv.Key, kv.Value);
 		}
 	}
 }

@@ -7,33 +7,37 @@ namespace Nest
 	{
 		[JsonProperty("analyzer")]
 		IAnalyzers Analyzers { get; set; }
+
 		[JsonProperty("char_filter")]
 		ICharFilters CharFilters { get; set; }
-		[JsonProperty("filter")]
-		ITokenFilters TokenFilters { get; set; }
-		[JsonProperty("tokenizer")]
-		ITokenizers Tokenizers { get; set; }
+
 		[JsonProperty("normalizer")]
 		INormalizers Normalizers { get; set; }
+
+		[JsonProperty("filter")]
+		ITokenFilters TokenFilters { get; set; }
+
+		[JsonProperty("tokenizer")]
+		ITokenizers Tokenizers { get; set; }
 	}
 
 	public class Analysis : IAnalysis
 	{
 		public IAnalyzers Analyzers { get; set; }
 		public ICharFilters CharFilters { get; set; }
-		public ITokenFilters TokenFilters { get; set; }
-		public ITokenizers Tokenizers { get; set; }
 
 		public INormalizers Normalizers { get; set; }
+		public ITokenFilters TokenFilters { get; set; }
+		public ITokenizers Tokenizers { get; set; }
 	}
 
 	public class AnalysisDescriptor : DescriptorBase<AnalysisDescriptor, IAnalysis>, IAnalysis
 	{
 		IAnalyzers IAnalysis.Analyzers { get; set; }
 		ICharFilters IAnalysis.CharFilters { get; set; }
+		INormalizers IAnalysis.Normalizers { get; set; }
 		ITokenFilters IAnalysis.TokenFilters { get; set; }
 		ITokenizers IAnalysis.Tokenizers { get; set; }
-		INormalizers IAnalysis.Normalizers { get; set; }
 
 		public AnalysisDescriptor Analyzers(Func<AnalyzersDescriptor, IPromise<IAnalyzers>> selector) =>
 			Assign(a => a.Analyzers = selector?.Invoke(new AnalyzersDescriptor())?.Value);

@@ -86,10 +86,13 @@ namespace Nest
 		public static QueryContainer Percolate(Func<PercolateQueryDescriptor<T>, IPercolateQuery> selector) =>
 			new QueryContainerDescriptor<T>().Percolate(selector);
 
-		public static QueryContainer Prefix(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null, MultiTermQueryRewrite rewrite = null, string name = null) =>
+		public static QueryContainer Prefix(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null,
+			MultiTermQueryRewrite rewrite = null, string name = null
+		) =>
 			new QueryContainerDescriptor<T>().Prefix(fieldDescriptor, value, boost, rewrite, name);
 
-		public static QueryContainer Prefix(Field field, string value, double? boost = null, MultiTermQueryRewrite rewrite = null, string name = null) =>
+		public static QueryContainer Prefix(Field field, string value, double? boost = null, MultiTermQueryRewrite rewrite = null, string name = null
+		) =>
 			new QueryContainerDescriptor<T>().Prefix(field, value, boost, rewrite, name);
 
 		public static QueryContainer Prefix(Func<PrefixQueryDescriptor<T>, IPrefixQuery> selector) =>
@@ -163,10 +166,14 @@ namespace Nest
 
 		public static QueryContainer Type<TOther>() => Type(q => q.Value<TOther>());
 
-		public static QueryContainer Wildcard(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null, MultiTermQueryRewrite rewrite = null, string name = null) =>
+		public static QueryContainer Wildcard(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null,
+			MultiTermQueryRewrite rewrite = null, string name = null
+		) =>
 			new QueryContainerDescriptor<T>().Wildcard(fieldDescriptor, value, boost, rewrite, name);
 
-		public static QueryContainer Wildcard(Field field, string value, double? boost = null, MultiTermQueryRewrite rewrite = null, string name = null) =>
+		public static QueryContainer Wildcard(Field field, string value, double? boost = null, MultiTermQueryRewrite rewrite = null,
+			string name = null
+		) =>
 			new QueryContainerDescriptor<T>().Wildcard(field, value, boost, rewrite, name);
 
 		public static QueryContainer Wildcard(Func<WildcardQueryDescriptor<T>, IWildcardQuery> selector) =>

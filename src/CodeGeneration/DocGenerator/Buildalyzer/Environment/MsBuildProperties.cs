@@ -1,4 +1,5 @@
 ﻿#region License
+
 //MIT License
 //
 //Copyright (c) 2017 Dave Glick
@@ -20,25 +21,27 @@
 //LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
+
 #endregion
 
 namespace DocGenerator.Buildalyzer.Environment
 {
 	public static class MsBuildProperties
 	{
-		// MSBuild Project Loading
-		public const string MSBuildExtensionsPath = nameof(MSBuildExtensionsPath);
-		public const string MSBuildSDKsPath = nameof(MSBuildSDKsPath);
-		public const string RoslynTargetsPath = nameof(RoslynTargetsPath);
-		public const string SolutionDir = nameof(SolutionDir);
+		public const string BuildProjectReferences = nameof(BuildProjectReferences);
 
 		// Design-time Build
 		public const string DesignTimeBuild = nameof(DesignTimeBuild);
-		public const string BuildProjectReferences = nameof(BuildProjectReferences);
-		public const string SkipCompilerExecution = nameof(SkipCompilerExecution);
-		public const string ProvideCommandLineArgs = nameof(ProvideCommandLineArgs);
 
 		// Others
 		public const string GenerateResourceMSBuildArchitecture = nameof(GenerateResourceMSBuildArchitecture);
+
+		// MSBuild Project Loading
+		public const string MSBuildExtensionsPath = nameof(MSBuildExtensionsPath);
+		public const string MSBuildSDKsPath = nameof(MSBuildSDKsPath);
+		public const string ProvideCommandLineArgs = nameof(ProvideCommandLineArgs);
+		public const string RoslynTargetsPath = nameof(RoslynTargetsPath);
+		public const string SkipCompilerExecution = nameof(SkipCompilerExecution);
+		public const string SolutionDir = nameof(SolutionDir);
 	}
 }

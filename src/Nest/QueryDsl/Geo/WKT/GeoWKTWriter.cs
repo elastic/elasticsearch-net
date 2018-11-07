@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Nest
 {
 	/// <summary>
-	/// Writes <see cref="IGeoShape"/> types to Well-Known Text (WKT)
+	/// Writes <see cref="IGeoShape" /> types to Well-Known Text (WKT)
 	/// </summary>
 	public class GeoWKTWriter
 	{
 		/// <summary>
-		/// Writes a <see cref="IGeoShape"/> to Well-Known Text (WKT)
+		/// Writes a <see cref="IGeoShape" /> to Well-Known Text (WKT)
 		/// </summary>
 		public static string Write(IGeoShape shape) =>
 			shape == null ? null : Write(shape, new StringBuilder());

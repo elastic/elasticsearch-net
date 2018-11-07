@@ -7,6 +7,9 @@ namespace Nest
 	[JsonConverter(typeof(ReserializeJsonConverter<InputContainer, IInputContainer>))]
 	public interface IInputContainer
 	{
+		[JsonProperty("chain")]
+		IChainInput Chain { get; set; }
+
 		[JsonProperty("http")]
 		IHttpInput Http { get; set; }
 
@@ -15,26 +18,23 @@ namespace Nest
 
 		[JsonProperty("simple")]
 		ISimpleInput Simple { get; set; }
-
-		[JsonProperty("chain")]
-		IChainInput Chain { get; set; }
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
 	public class InputContainer : IInputContainer, IDescriptor
 	{
-		IHttpInput IInputContainer.Http { get; set; }
-		ISearchInput IInputContainer.Search { get; set; }
-		ISimpleInput IInputContainer.Simple { get; set; }
-		IChainInput IInputContainer.Chain { get; set; }
-
-		internal InputContainer() {}
+		internal InputContainer() { }
 
 		public InputContainer(InputBase input)
 		{
 			input.ThrowIfNull(nameof(input));
 			input.WrapInContainer(this);
 		}
+
+		IChainInput IInputContainer.Chain { get; set; }
+		IHttpInput IInputContainer.Http { get; set; }
+		ISearchInput IInputContainer.Search { get; set; }
+		ISimpleInput IInputContainer.Simple { get; set; }
 
 		public static implicit operator InputContainer(InputBase input) => input == null
 			? null

@@ -3,7 +3,7 @@
 namespace Nest
 {
 	[JsonObject]
-	public interface ISmoothingModel {}
+	public interface ISmoothingModel { }
 
 	public abstract class SmoothingModelBase
 	{

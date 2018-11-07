@@ -8,6 +8,7 @@ namespace Elasticsearch.Net
 		public static void FillValues(this ErrorCause rootCause, IDictionary<string, object> dict)
 		{
 			if (dict == null) return;
+
 			if (dict.TryGetValue("reason", out var reason)) rootCause.Reason = Convert.ToString(reason);
 			if (dict.TryGetValue("type", out var type)) rootCause.Type = Convert.ToString(type);
 			if (dict.TryGetValue("stack_trace", out var stackTrace)) rootCause.StackTrace = Convert.ToString(stackTrace);

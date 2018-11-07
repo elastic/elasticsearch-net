@@ -1,15 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using Nest;
-using Tests.Framework.Integration;
-using static Nest.Infer;
-using System.Collections.Generic;
-using Tests.Framework;
-using System.Linq;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.Integration;
+using static Nest.Infer;
 
 namespace Tests.Aggregations.Matrix.MatrixStats
 {
@@ -27,7 +25,7 @@ namespace Tests.Aggregations.Matrix.MatrixStats
 				},
 				matrix_stats = new
 				{
-					fields = new[] {"numberOfCommits", "numberOfContributors"},
+					fields = new[] { "numberOfCommits", "numberOfContributors" },
 					missing = new
 					{
 						numberOfCommits = 0.0,
@@ -59,12 +57,12 @@ namespace Tests.Aggregations.Matrix.MatrixStats
 			{
 				Meta = new Dictionary<string, object>
 				{
-					{"foo", "bar"}
+					{ "foo", "bar" }
 				},
 				Missing = new Dictionary<Field, double>
 				{
-					{"numberOfCommits", 0.0},
-					{"numberOfContributors", 1.0},
+					{ "numberOfCommits", 0.0 },
+					{ "numberOfContributors", 1.0 },
 				},
 				Mode = MatrixStatsMode.Median,
 				Fields = Field<Project>(p => p.NumberOfCommits).And("numberOfContributors")

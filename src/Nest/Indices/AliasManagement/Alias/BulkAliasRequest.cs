@@ -19,14 +19,15 @@ namespace Nest
 	[DescriptorFor("IndicesUpdateAliases")]
 	public partial class BulkAliasDescriptor
 	{
-		public BulkAliasDescriptor Add(IAliasAction action) =>
-			Fluent.Assign<BulkAliasDescriptor, IBulkAliasRequest>(this, a=> a.Actions.AddIfNotNull(action));
-
 		IList<IAliasAction> IBulkAliasRequest.Actions { get; set; } = new List<IAliasAction>();
+
+		public BulkAliasDescriptor Add(IAliasAction action) =>
+			Fluent.Assign<BulkAliasDescriptor, IBulkAliasRequest>(this, a => a.Actions.AddIfNotNull(action));
 
 		public BulkAliasDescriptor Add(Func<AliasAddDescriptor, IAliasAddAction> addSelector) => Add(addSelector?.Invoke(new AliasAddDescriptor()));
 
-		public BulkAliasDescriptor Remove(Func<AliasRemoveDescriptor, IAliasRemoveAction> removeSelector)=> Add(removeSelector?.Invoke(new AliasRemoveDescriptor()));
+		public BulkAliasDescriptor Remove(Func<AliasRemoveDescriptor, IAliasRemoveAction> removeSelector) =>
+			Add(removeSelector?.Invoke(new AliasRemoveDescriptor()));
 
 		public BulkAliasDescriptor RemoveIndex(Func<AliasRemoveIndexDescriptor, IAliasRemoveIndexAction> removeIndexSelector) =>
 			Add(removeIndexSelector?.Invoke(new AliasRemoveIndexDescriptor()));

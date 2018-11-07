@@ -9,12 +9,14 @@ namespace Nest
 	internal class DynamicTemplatesJsonConverter : JsonConverter
 	{
 		public override bool CanWrite => true;
+
 		public override bool CanConvert(Type objectType) => objectType == typeof(IDictionary<string, DynamicTemplate>);
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var dict = value as DynamicTemplateContainer;
 			if (!dict.HasAny()) return;
+
 			writer.WriteStartArray();
 			foreach (var p in dict)
 			{

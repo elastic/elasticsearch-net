@@ -9,42 +9,40 @@ namespace Nest
 	{
 		public AzureRepository() { }
 
-		public AzureRepository(IAzureRepositorySettings settings)
-		{
-			Settings = settings;
-		}
+		public AzureRepository(IAzureRepositorySettings settings) => Settings = settings;
+
 		public IAzureRepositorySettings Settings { get; set; }
 		public string Type { get; } = "azure";
 	}
 
 	public interface IAzureRepositorySettings : IRepositorySettings
 	{
-		[JsonProperty("container")]
-		string Container { get; set; }
-
 		[JsonProperty("base_path")]
 		string BasePath { get; set; }
+
+		[JsonProperty("chunk_size")]
+		string ChunkSize { get; set; }
 
 		[JsonProperty("compress")]
 		bool? Compress { get; set; }
 
-		[JsonProperty("chunk_size")]
-		string ChunkSize { get; set; }
+		[JsonProperty("container")]
+		string Container { get; set; }
 	}
 
 	public class AzureRepositorySettings : IAzureRepositorySettings
 	{
-		[JsonProperty("container")]
-		public string Container { get; set; }
-
 		[JsonProperty("base_path")]
 		public string BasePath { get; set; }
+
+		[JsonProperty("chunk_size")]
+		public string ChunkSize { get; set; }
 
 		[JsonProperty("compress")]
 		public bool? Compress { get; set; }
 
-		[JsonProperty("chunk_size")]
-		public string ChunkSize { get; set; }
+		[JsonProperty("container")]
+		public string Container { get; set; }
 	}
 
 	public class AzureRepositorySettingsDescriptor
@@ -62,7 +60,7 @@ namespace Nest
 		public AzureRepositorySettingsDescriptor Container(string container) => Assign(a => a.Container = container);
 
 		/// <summary>
-		///Specifies the path within container to repository data. Defaults to empty (root directory).
+		/// Specifies the path within container to repository data. Defaults to empty (root directory).
 		/// </summary>
 		/// <param name="basePath"></param>
 		/// <returns></returns>

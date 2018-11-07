@@ -4,54 +4,81 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.QueryDsl.BoolDsl;
 
 namespace Tests.QueryDsl.Compound.Bool
 {
 	public class BoolDslComplexQueryUsageTests : BoolQueryUsageTests
 	{
-		protected static readonly TermQuery Query = new TermQuery { Field = "x", Value = "y" };
 		protected static readonly TermQuery NullQuery = null;
+		protected static readonly TermQuery Query = new TermQuery { Field = "x", Value = "y" };
 
 		public BoolDslComplexQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override QueryContainer QueryInitializer =>
+			//first bool
+			Query && Query
+			//second bool
+			|| (+Query || +Query || !Query && (!Query && !ConditionlessQuery))
+			// simple nested or
+			&& (Query || Query || Query)
+			//all conditionless bool
+			&& (NullQuery || +ConditionlessQuery || !ConditionlessQuery)
+			// actual bool query
+			&& base.QueryInitializer;
 
 		protected override object QueryJson => new
 		{
 			@bool = new
 			{
-				should = new object[] {
+				should = new object[]
+				{
 					//first bool
-					new {
-						@bool = new {
-							must = new object[] {
+					new
+					{
+						@bool = new
+						{
+							must = new object[]
+							{
 								new { term = new { x = new { value = "y" } } },
 								new { term = new { x = new { value = "y" } } }
 							}
 						}
 					},
-					new {
-						@bool = new {
-							must = new object[] {
-								new {
-									@bool = new {
+					new
+					{
+						@bool = new
+						{
+							must = new object[]
+							{
+								new
+								{
+									@bool = new
+									{
 										//complex nested bool
-										should = new object[] {
-											new {
-												@bool = new {
+										should = new object[]
+										{
+											new
+											{
+												@bool = new
+												{
 													filter = new object[] { new { term = new { x = new { value = "y" } } } }
 												}
 											},
-											new {
-												@bool = new {
+											new
+											{
+												@bool = new
+												{
 													filter = new object[] { new { term = new { x = new { value = "y" } } } }
 												}
 											},
-											new {
-												@bool = new {
-													must_not = new object[] {
+											new
+											{
+												@bool = new
+												{
+													must_not = new object[]
+													{
 														new { term = new { x = new { value = "y" } } },
 														new { term = new { x = new { value = "y" } } }
 													}
@@ -61,9 +88,12 @@ namespace Tests.QueryDsl.Compound.Bool
 									}
 								},
 								//simple nested or
-								new {
-									@bool = new {
-										should = new object[] {
+								new
+								{
+									@bool = new
+									{
+										should = new object[]
+										{
 											new { term = new { x = new { value = "y" } } },
 											new { term = new { x = new { value = "y" } } },
 											new { term = new { x = new { value = "y" } } }
@@ -79,41 +109,21 @@ namespace Tests.QueryDsl.Compound.Bool
 			}
 		};
 
-		protected override QueryContainer QueryInitializer =>
-			//first bool
-			Query && Query
-			//second bool
-			|| (
-				//complex nested bool
-				(+Query || +Query || !Query && (!Query && !ConditionlessQuery))
-				// simple nested or
-				&& (Query || Query || Query)
-				//all conditionless bool
-				&& (NullQuery || +ConditionlessQuery || !ConditionlessQuery)
-				// actual bool query
-				&& (base.QueryInitializer));
-
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) =>
 			//first bool
 			q.Query() && q.Query()
 			//second bool
-			|| (
-				//complex nested bool
-				(+q.Query() || +q.Query() || !q.Query() && (!q.Query() && !q.ConditionlessQuery()))
-				// simple nested or
-				&& (q.Query() || q.Query() || q.Query())
-				//all conditionless bool
-				&& (q.NullQuery() || +q.ConditionlessQuery() || !q.ConditionlessQuery())
-				// actual bool query
-				&& (base.QueryFluent(q)));
+			|| (+q.Query() || +q.Query() || !q.Query() && (!q.Query() && !q.ConditionlessQuery()))
+			// simple nested or
+			&& (q.Query() || q.Query() || q.Query())
+			//all conditionless bool
+			&& (q.NullQuery() || +q.ConditionlessQuery() || !q.ConditionlessQuery())
+			// actual bool query
+			&& base.QueryFluent(q);
 
 		//hide
 		[U]
-		protected void AsssertShape()
-		{
-			this.AssertShape(this.QueryInitializer);
-			//this.AssertShape(this.QueryFluent(new QueryContainerDescriptor<Project>()));
-		}
+		protected void AsssertShape() => AssertShape(QueryInitializer);
 
 		//hide
 		private void AssertShape(IQueryContainer container)
@@ -147,10 +157,9 @@ namespace Tests.QueryDsl.Compound.Bool
 			complexNestedBool.Should.Should().HaveCount(3);
 
 			//inner must nots
-			var mustNotsBool = (complexNestedBool.Should.Cast<IQueryContainer>().FirstOrDefault(q => q.Bool != null && q.Bool.MustNot != null))?.Bool;
+			var mustNotsBool = complexNestedBool.Should.Cast<IQueryContainer>().FirstOrDefault(q => q.Bool != null && q.Bool.MustNot != null)?.Bool;
 			mustNotsBool.Should().NotBeNull();
 			mustNotsBool.MustNot.Should().HaveCount(2); //one of the three must nots was conditionless
 		}
-
 	}
 }

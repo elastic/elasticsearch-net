@@ -6,14 +6,22 @@ namespace Nest
 	[JsonConverter(typeof(CronExpressionJsonConverter))]
 	public class CronExpression : ScheduleBase, IEquatable<CronExpression>
 	{
-		private string _expression;
+		private readonly string _expression;
 
 		public CronExpression(string expression)
 		{
 			if (expression == null) throw new ArgumentNullException(nameof(expression));
 			if (expression.Length == 0) throw new ArgumentException("must have a length", nameof(expression));
 
-			this._expression = expression;
+			_expression = expression;
+		}
+
+		public bool Equals(CronExpression other)
+		{
+			if (ReferenceEquals(null, other)) return false;
+			if (ReferenceEquals(this, other)) return true;
+
+			return string.Equals(_expression, other._expression);
 		}
 
 		public static implicit operator CronExpression(string expression) =>
@@ -23,35 +31,20 @@ namespace Nest
 
 		internal override void WrapInContainer(IScheduleContainer container) => container.Cron = this;
 
-		public bool Equals(CronExpression other)
-		{
-			if (ReferenceEquals(null, other)) return false;
-			if (ReferenceEquals(this, other)) return true;
-			return string.Equals(_expression, other._expression);
-		}
-
 		public override bool Equals(object obj)
 		{
 			if (ReferenceEquals(null, obj)) return false;
 			if (ReferenceEquals(this, obj)) return true;
-			if (obj.GetType() != this.GetType()) return false;
+			if (obj.GetType() != GetType()) return false;
+
 			return Equals((CronExpression)obj);
 		}
 
-		public override int GetHashCode()
-		{
-			return _expression?.GetHashCode() ?? 0;
-		}
+		public override int GetHashCode() => _expression?.GetHashCode() ?? 0;
 
-		public static bool operator ==(CronExpression left, CronExpression right)
-		{
-			return Equals(left, right);
-		}
+		public static bool operator ==(CronExpression left, CronExpression right) => Equals(left, right);
 
-		public static bool operator !=(CronExpression left, CronExpression right)
-		{
-			return !Equals(left, right);
-		}
+		public static bool operator !=(CronExpression left, CronExpression right) => !Equals(left, right);
 	}
 
 	internal class CronExpressionJsonConverter : JsonConverter

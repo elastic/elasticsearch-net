@@ -21,7 +21,7 @@ namespace Nest
 		bool? CalculateInterim { get; set; }
 
 		/// <summary>
-		///  When used in conjunction with <see cref="CalculateInterim"/>, specifies the range of buckets on
+		///  When used in conjunction with <see cref="CalculateInterim" />, specifies the range of buckets on
 		/// which to calculate interim results.
 		/// </summary>
 		[JsonProperty("end")]
@@ -30,7 +30,7 @@ namespace Nest
 		DateTimeOffset? End { get; set; }
 
 		/// <summary>
-		/// When used in conjunction with <see cref="CalculateInterim"/>, specifies the range of buckets
+		/// When used in conjunction with <see cref="CalculateInterim" />, specifies the range of buckets
 		/// on which to calculate interim results.
 		/// </summary>
 		[JsonProperty("start")]
@@ -43,10 +43,13 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public DateTimeOffset? AdvanceTime { get; set; }
+
 		/// <inheritdoc />
 		public bool? CalculateInterim { get; set; }
+
 		/// <inheritdoc />
 		public DateTimeOffset? End { get; set; }
+
 		/// <inheritdoc />
 		public DateTimeOffset? Start { get; set; }
 	}

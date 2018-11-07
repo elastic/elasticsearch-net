@@ -1,8 +1,5 @@
-﻿using System.Linq;
-using Elastic.Xunit.XunitPlumbing;
+﻿using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
-using Nest;
-using Tests.Framework;
 
 namespace Tests.QueryDsl.BoolDsl.Operators
 {
@@ -17,12 +14,11 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 				b.Should.Should().BeNull();
 				b.MustNot.Should().BeNull();
 				b.Filter.Should().BeNull();
-
 			});
 
 		[U] public void DoesJoinTwoShouldsUsingOr() => ReturnsBool(
-			(Query || Query) || (Query || Query),
-			q => (q.Query() || q.Query()) || (q.Query() || q.Query()),
+			Query || Query || (Query || Query),
+			q => q.Query() || q.Query() || (q.Query() || q.Query()),
 			b =>
 			{
 				b.Should.Should().NotBeEmpty().And.HaveCount(4);
@@ -32,8 +28,8 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			});
 
 		[U] public void DoesNotJoinTwoMustsUsingOr() => ReturnsBool(
-			(Query && Query) || (Query && Query),
-			q => (q.Query() && q.Query()) || (q.Query() && q.Query()),
+			Query && Query || Query && Query,
+			q => q.Query() && q.Query() || q.Query() && q.Query(),
 			b =>
 			{
 				b.Should.Should().NotBeEmpty().And.HaveCount(2);
@@ -43,8 +39,8 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			});
 
 		[U] public void DoesJoinTwoMustsUsingAnd() => ReturnsBool(
-			(Query && Query) && (Query && Query),
-			q => (q.Query() && q.Query()) && (q.Query() && q.Query()),
+			Query && Query && (Query && Query),
+			q => q.Query() && q.Query() && (q.Query() && q.Query()),
 			b =>
 			{
 				b.Must.Should().NotBeEmpty().And.HaveCount(4);
@@ -65,10 +61,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 		[U] public void OrDoesNotJoinMustNot() => ReturnsBool(
 			Query || !Query,
 			q => q.Query() || !q.Query(),
-			b =>
-			{
-				b.Should.Should().NotBeEmpty().And.HaveCount(2);
-			});
+			b => { b.Should.Should().NotBeEmpty().And.HaveCount(2); });
 
 		[U] public void OrDoesNotJoinFilter() => ReturnsBool(
 			Query || !Query,

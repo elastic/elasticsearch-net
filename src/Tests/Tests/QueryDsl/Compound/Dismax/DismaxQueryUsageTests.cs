@@ -1,13 +1,11 @@
-﻿using System.Linq;
-using Nest;
-using Tests.Framework.Integration;
-using Tests.Framework;
-using System;
+﻿using System;
+using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
+using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.Integration;
 
 #pragma warning disable 618 //Testing an obsolete method
 
@@ -17,18 +15,17 @@ namespace Tests.QueryDsl.Compound.Dismax
 	{
 		public DismaxQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object QueryJson => new
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IDisMaxQuery>(a => a.DisMax)
 		{
-			dis_max = new
-			{
-				_name = "named_query",
-				boost = 1.1,
-				queries = new[] {
-					new { match_all = new { _name = "query1" } },
-					new { match_all = new { _name = "query2" } }
-				},
-				tie_breaker = 1.11
-			}
+			q => q.Queries = null,
+			q => q.Queries = Enumerable.Empty<QueryContainer>(),
+			q => q.Queries = new[] { ConditionlessQuery },
+		};
+
+		protected override NotConditionlessWhen NotConditionlessWhen => new NotConditionlessWhen<IDisMaxQuery>(a => a.DisMax)
+		{
+			q => q.Queries = new[] { VerbatimQuery },
+			q => q.Queries = new[] { VerbatimQuery, ConditionlessQuery },
 		};
 
 		protected override QueryContainer QueryInitializer => new DisMaxQuery()
@@ -36,9 +33,25 @@ namespace Tests.QueryDsl.Compound.Dismax
 			Name = "named_query",
 			Boost = 1.1,
 			TieBreaker = 1.11,
-			Queries = new QueryContainer[] {
+			Queries = new QueryContainer[]
+			{
 				new MatchAllQuery() { Name = "query1" },
 				new MatchAllQuery() { Name = "query2" },
+			}
+		};
+
+		protected override object QueryJson => new
+		{
+			dis_max = new
+			{
+				_name = "named_query",
+				boost = 1.1,
+				queries = new[]
+				{
+					new { match_all = new { _name = "query1" } },
+					new { match_all = new { _name = "query2" } }
+				},
+				tie_breaker = 1.11
 			}
 		};
 
@@ -53,23 +66,10 @@ namespace Tests.QueryDsl.Compound.Dismax
 				)
 			);
 
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IDisMaxQuery>(a => a.DisMax)
-		{
-			q => q.Queries = null,
-			q => q.Queries = Enumerable.Empty<QueryContainer>(),
-			q => q.Queries = new [] { ConditionlessQuery },
-		};
-
-		protected override NotConditionlessWhen NotConditionlessWhen => new NotConditionlessWhen<IDisMaxQuery>(a => a.DisMax)
-		{
-			q => q.Queries = new [] { VerbatimQuery },
-			q => q.Queries = new [] { VerbatimQuery, ConditionlessQuery },
-		};
-
 		[U]
 		public void NullQueryDoesNotCauseANullReferenceException()
 		{
-			Action query = () => this.Client.Search<Project>(s => s
+			Action query = () => Client.Search<Project>(s => s
 				.Query(q => q
 					.DisMax(dm => dm
 						.Queries(

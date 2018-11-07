@@ -67,6 +67,7 @@ namespace Nest
 			}
 			writer.WriteEndObject();
 		}
+
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var filter = new TermsQuery();
@@ -96,7 +97,6 @@ namespace Nest
 				}
 			}
 			return filter;
-
 		}
 
 		private void ReadTerms(ITermsQuery termsQuery, JsonReader reader, JsonSerializer serializer)
@@ -143,5 +143,4 @@ namespace Nest
 			}
 		}
 	}
-
 }

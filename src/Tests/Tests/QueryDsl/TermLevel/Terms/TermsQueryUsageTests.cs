@@ -1,10 +1,8 @@
-using System.Collections.Generic;
 using System.Linq;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.TermLevel.Terms
 {
@@ -15,9 +13,25 @@ namespace Tests.QueryDsl.TermLevel.Terms
 	*/
 	public class TermsQueryUsageTests : QueryDslUsageTestsBase
 	{
-		protected virtual string[] ExpectedTerms => new [] { "term1", "term2" };
+		public TermsQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		public TermsQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ITermsQuery>(a => a.Terms)
+		{
+			q => q.Field = null,
+			q => q.Terms = null,
+			q => q.Terms = Enumerable.Empty<object>(),
+			q => q.Terms = new[] { "" }
+		};
+
+		protected virtual string[] ExpectedTerms => new[] { "term1", "term2" };
+
+		protected override QueryContainer QueryInitializer => new TermsQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Field = "description",
+			Terms = ExpectedTerms,
+		};
 
 		protected override object QueryJson => new
 		{
@@ -29,14 +43,6 @@ namespace Tests.QueryDsl.TermLevel.Terms
 			}
 		};
 
-		protected override QueryContainer QueryInitializer => new TermsQuery
-		{
-			Name = "named_query",
-			Boost = 1.1,
-			Field = "description",
-			Terms = ExpectedTerms,
-		};
-
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.Terms(c => c
 				.Name("named_query")
@@ -44,14 +50,6 @@ namespace Tests.QueryDsl.TermLevel.Terms
 				.Field(p => p.Description)
 				.Terms("term1", "term2")
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ITermsQuery>(a => a.Terms)
-		{
-			q => q.Field = null,
-			q => q.Terms = null,
-			q => q.Terms = Enumerable.Empty<object>(),
-			q => q.Terms = new [] { "" }
-		};
 	}
 
 	/**[float]
@@ -59,9 +57,9 @@ namespace Tests.QueryDsl.TermLevel.Terms
 	*/
 	public class SingleTermTermsQueryUsageTests : TermsQueryUsageTests
 	{
-		protected override string[] ExpectedTerms => new [] { "term1"  };
-
 		public SingleTermTermsQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override string[] ExpectedTerms => new[] { "term1" };
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.Terms(c => c
@@ -84,31 +82,30 @@ namespace Tests.QueryDsl.TermLevel.Terms
 		public VerbatimTermsQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override ConditionlessWhen ConditionlessWhen => null;
-		//when reading back the json the notion of is conditionless is lost
-		protected override bool SupportsDeserialization => false;
-
-		protected override object QueryJson => new
-		{
-			terms = new
-			{
-				description = new string[] {}
-			}
-		};
 
 		protected override QueryContainer QueryInitializer => new TermsQuery
 		{
 			IsVerbatim = true,
 			Field = "description",
-			Terms = new string[] {},
+			Terms = new string[] { },
 		};
+
+		protected override object QueryJson => new
+		{
+			terms = new
+			{
+				description = new string[] { }
+			}
+		};
+
+		//when reading back the json the notion of is conditionless is lost
+		protected override bool SupportsDeserialization => false;
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.Terms(c => c
 				.Verbatim()
 				.Field(p => p.Description)
-				.Terms(new string[] {})
+				.Terms(new string[] { })
 			);
 	}
-
-
 }

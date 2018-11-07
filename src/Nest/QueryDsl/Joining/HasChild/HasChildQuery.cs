@@ -7,14 +7,11 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<HasChildQueryDescriptor<object>>))]
 	public interface IHasChildQuery : IQuery
 	{
-		[JsonProperty("type")]
-		TypeName Type { get; set; }
+		[JsonProperty("ignore_unmapped")]
+		bool? IgnoreUnmapped { get; set; }
 
-		[JsonProperty("score_mode")]
-		ChildScoreMode? ScoreMode { get; set; }
-
-		[JsonProperty("min_children")]
-		int? MinChildren { get; set; }
+		[JsonProperty("inner_hits")]
+		IInnerHits InnerHits { get; set; }
 
 		/// <summary>
 		/// Specify how many child documents are allowed to match.
@@ -22,56 +19,59 @@ namespace Nest
 		[JsonProperty("max_children")]
 		int? MaxChildren { get; set; }
 
+		[JsonProperty("min_children")]
+		int? MinChildren { get; set; }
+
 		[JsonProperty("query")]
 		QueryContainer Query { get; set; }
 
-		[JsonProperty("inner_hits")]
-		IInnerHits InnerHits { get; set; }
+		[JsonProperty("score_mode")]
+		ChildScoreMode? ScoreMode { get; set; }
 
-		[JsonProperty("ignore_unmapped")]
-		bool? IgnoreUnmapped { get; set; }
+		[JsonProperty("type")]
+		TypeName Type { get; set; }
 	}
 
 	public class HasChildQuery : QueryBase, IHasChildQuery
 	{
-		protected override bool Conditionless => IsConditionless(this);
-		public TypeName Type { get; set; }
-		public ChildScoreMode? ScoreMode { get; set; }
-		public int? MinChildren { get; set; }
+		public bool? IgnoreUnmapped { get; set; }
+		public IInnerHits InnerHits { get; set; }
 
 		/// <summary>
 		/// Specify how many child documents are allowed to match.
 		/// </summary>
 		public int? MaxChildren { get; set; }
+
+		public int? MinChildren { get; set; }
 		public QueryContainer Query { get; set; }
-		public IInnerHits InnerHits { get; set; }
-		public bool? IgnoreUnmapped { get; set; }
+		public ChildScoreMode? ScoreMode { get; set; }
+		public TypeName Type { get; set; }
+		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.HasChild = this;
+
 		internal static bool IsConditionless(IHasChildQuery q) => q.Query == null || q.Query.IsConditionless || q.Type == null;
 	}
 
 	public class HasChildQueryDescriptor<T>
 		: QueryDescriptorBase<HasChildQueryDescriptor<T>, IHasChildQuery>
-		, IHasChildQuery where T : class
+			, IHasChildQuery where T : class
 	{
+		public HasChildQueryDescriptor() => ((IHasChildQuery)this).Type = TypeName.Create<T>();
+
 		protected override bool Conditionless => HasChildQuery.IsConditionless(this);
-		TypeName IHasChildQuery.Type { get; set; }
-		ChildScoreMode? IHasChildQuery.ScoreMode { get; set; }
-		int? IHasChildQuery.MinChildren { get; set; }
+		bool? IHasChildQuery.IgnoreUnmapped { get; set; }
+		IInnerHits IHasChildQuery.InnerHits { get; set; }
 
 		/// <summary>
 		/// Specify how many child documents are allowed to match.
 		/// </summary>
 		int? IHasChildQuery.MaxChildren { get; set; }
-		QueryContainer IHasChildQuery.Query { get; set; }
-		IInnerHits IHasChildQuery.InnerHits { get; set; }
-		bool? IHasChildQuery.IgnoreUnmapped { get; set; }
 
-		public HasChildQueryDescriptor()
-		{
-			((IHasChildQuery)this).Type = TypeName.Create<T>();
-		}
+		int? IHasChildQuery.MinChildren { get; set; }
+		QueryContainer IHasChildQuery.Query { get; set; }
+		ChildScoreMode? IHasChildQuery.ScoreMode { get; set; }
+		TypeName IHasChildQuery.Type { get; set; }
 
 		public HasChildQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
 			Assign(a => a.Query = selector?.Invoke(new QueryContainerDescriptor<T>()));

@@ -5,8 +5,8 @@ namespace Nest
 	[JsonObject]
 	public class HipChatActionMessageResult
 	{
-		[JsonProperty("status")]
-		public Status Status { get; set; }
+		[JsonProperty("message")]
+		public IHipChatMessage Message { get; set; }
 
 		[JsonProperty("reason")]
 		public string Reason { get; set; }
@@ -20,10 +20,10 @@ namespace Nest
 		[JsonProperty("room")]
 		public string Room { get; set; }
 
+		[JsonProperty("status")]
+		public Status Status { get; set; }
+
 		[JsonProperty("user")]
 		public string User { get; set; }
-
-		[JsonProperty("message")]
-		public IHipChatMessage Message { get; set; }
 	}
 }

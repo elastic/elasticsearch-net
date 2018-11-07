@@ -12,16 +12,17 @@ namespace Nest
 
 	public class TypeQuery : QueryBase, ITypeQuery
 	{
-		protected override bool Conditionless => IsConditionless(this);
 		public TypeName Value { get; set; }
+		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Type = this;
+
 		internal static bool IsConditionless(ITypeQuery q) => q.Value.IsConditionless();
 	}
 
 	public class TypeQueryDescriptor
 		: QueryDescriptorBase<TypeQueryDescriptor, ITypeQuery>
-		, ITypeQuery
+			, ITypeQuery
 	{
 		protected override bool Conditionless => TypeQuery.IsConditionless(this);
 

@@ -4,7 +4,6 @@ using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Client;
-using Tests.Framework;
 
 namespace Tests.Search.Request
 {
@@ -19,7 +18,7 @@ namespace Tests.Search.Request
 				var searchRequest = TestClient.Default.RequestResponseSerializer.Deserialize<SearchRequest>(stream);
 
 				searchRequest.Should().NotBeNull();
-				searchRequest.IndicesBoost.Should().NotBeNull().And.ContainKeys((IndexName) "project", (IndexName) "devs");
+				searchRequest.IndicesBoost.Should().NotBeNull().And.ContainKeys((IndexName)"project", (IndexName)"devs");
 			}
 		}
 
@@ -32,7 +31,7 @@ namespace Tests.Search.Request
 				var searchRequest = TestClient.Default.RequestResponseSerializer.Deserialize<SearchRequest>(stream);
 
 				searchRequest.Should().NotBeNull();
-				searchRequest.IndicesBoost.Should().NotBeNull().And.ContainKeys((IndexName) "project", (IndexName) "devs");
+				searchRequest.IndicesBoost.Should().NotBeNull().And.ContainKeys((IndexName)"project", (IndexName)"devs");
 			}
 		}
 	}

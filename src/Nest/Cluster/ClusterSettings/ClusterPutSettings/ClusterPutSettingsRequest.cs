@@ -11,7 +11,6 @@ namespace Nest
 
 		[JsonProperty("transient")]
 		IDictionary<string, object> Transient { get; set; }
-
 	}
 
 	public partial class ClusterPutSettingsRequest

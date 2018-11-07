@@ -5,6 +5,10 @@ namespace Nest
 {
 	public class Collector
 	{
+		[JsonProperty("children")]
+		public IReadOnlyCollection<Collector> Children { get; internal set; } =
+			EmptyReadOnly<Collector>.Collection;
+
 		[JsonProperty("name")]
 		public string Name { get; internal set; }
 
@@ -13,11 +17,5 @@ namespace Nest
 
 		[JsonProperty("time_in_nanos")]
 		public long TimeInNanoseconds { get; internal set; }
-
-	[JsonProperty("children")]
-		public IReadOnlyCollection<Collector> Children { get; internal set; } =
-			EmptyReadOnly<Collector>.Collection;
-
-
 	}
 }

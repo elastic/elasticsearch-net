@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Elastic.Xunit;
 using Elastic.Xunit.XunitPlumbing;
@@ -14,14 +13,15 @@ namespace Tests.Analysis
 {
 	public interface IAnalysisAssertion
 	{
-		string Name { get; }
 		object Json { get; }
+		string Name { get; }
 	}
+
 	public interface IAnalysisAssertion<out TComponent, out TContainer, in TDescriptor> : IAnalysisAssertion
 		where TContainer : class
 	{
-		TComponent Initializer { get; }
 		Func<string, TDescriptor, IPromise<TContainer>> Fluent { get; }
+		TComponent Initializer { get; }
 	}
 
 	[IntegrationTestCluster(typeof(WritableCluster))]
@@ -32,51 +32,53 @@ namespace Tests.Analysis
 	{
 		private static readonly SingleEndpointUsage<ICreateIndexResponse> Usage = new SingleEndpointUsage<ICreateIndexResponse>
 		(
-			fluent: (s, c) => c.CreateIndex(s, AssertionSetup.FluentCall),
-			fluentAsync: (s, c) => c.CreateIndexAsync(s, AssertionSetup.FluentCall),
-			request: (s, c) => c.CreateIndex(AssertionSetup.InitializerCall(s)),
-			requestAsync: (s, c) => c.CreateIndexAsync(AssertionSetup.InitializerCall(s)),
-			valuePrefix: $"test-{typeof(TAssertion).Name.ToLowerInvariant()}"
+			(s, c) => c.CreateIndex(s, AssertionSetup.FluentCall),
+			(s, c) => c.CreateIndexAsync(s, AssertionSetup.FluentCall),
+			(s, c) => c.CreateIndex(AssertionSetup.InitializerCall(s)),
+			(s, c) => c.CreateIndexAsync(AssertionSetup.InitializerCall(s)),
+			$"test-{typeof(TAssertion).Name.ToLowerInvariant()}"
 		)
 		{
-			OnAfterCall = c=> c.DeleteIndex(Usage.CallUniqueValues.Value)
+			OnAfterCall = c => c.DeleteIndex(Usage.CallUniqueValues.Value)
 		};
-		protected static TAssertion AssertionSetup { get; } = new TAssertion();
 
 		protected AnalysisComponentTestBase()
 		{
-			this.Client = (ElasticXunitRunner.CurrentCluster as INestTestCluster)?.Client ?? TestClient.DefaultInMemoryClient;
-			Usage.KickOffOnce(this.Client, oneRandomCall: true);
+			Client = (ElasticXunitRunner.CurrentCluster as INestTestCluster)?.Client ?? TestClient.DefaultInMemoryClient;
+			Usage.KickOffOnce(Client, true);
 		}
+
+		public abstract Func<string, TDescriptor, IPromise<TContainer>> Fluent { get; }
+		public abstract TComponent Initializer { get; }
+		public abstract object Json { get; }
+
+		public abstract string Name { get; }
+
+		protected abstract object AnalysisJson { get; }
+		protected static TAssertion AssertionSetup { get; } = new TAssertion();
 
 		private IElasticClient Client { get; }
 
-		public abstract string Name { get; }
-		public abstract TComponent Initializer { get; }
-		public abstract Func<string, TDescriptor, IPromise<TContainer>> Fluent { get; }
-		public abstract object Json { get; }
+		private Func<CreateIndexDescriptor, ICreateIndexRequest> FluentCall => i => i.Settings(s => s.Analysis(FluentAnalysis));
 
-		private Func<CreateIndexDescriptor, ICreateIndexRequest> FluentCall => i =>i.Settings(s => s.Analysis(this.FluentAnalysis));
 		protected abstract IAnalysis FluentAnalysis(AnalysisDescriptor an);
 
 		private CreateIndexRequest InitializerCall(string index) => new CreateIndexRequest(index)
 		{
-			Settings = new IndexSettings { Analysis = this.InitializerAnalysis() }
+			Settings = new IndexSettings { Analysis = InitializerAnalysis() }
 		};
+
 		protected abstract Nest.Analysis InitializerAnalysis();
 
 		[U] public virtual async Task TestPutSettingsRequest() => await Usage.AssertOnAllResponses(r =>
 		{
-			var json = new { settings = new { analysis = this.AnalysisJson } };
+			var json = new { settings = new { analysis = AnalysisJson } };
 			SerializationTestHelper.Expect(json).FromRequest(r);
 		});
-
-		protected abstract object AnalysisJson { get; }
 
 		[I] public virtual async Task TestPutSettingsResponse() => await Usage.AssertOnAllResponses(r =>
 		{
 			r.ApiCall.HttpStatusCode.Should().Be(200);
 		});
-
 	}
 }

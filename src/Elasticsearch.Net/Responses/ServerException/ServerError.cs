@@ -11,8 +11,8 @@ namespace Elasticsearch.Net
 	{
 		public ServerError(Error error, int? statusCode)
 		{
-			this.Error = error;
-			this.Status = statusCode.GetValueOrDefault();
+			Error = error;
+			Status = statusCode.GetValueOrDefault();
 		}
 
 		public Error Error { get; }
@@ -47,12 +47,11 @@ namespace Elasticsearch.Net
 				statusCode = Convert.ToInt32(status);
 
 			if (!dict.TryGetValue("error", out var error)) return null;
+
 			Error err;
 			if (error is string s)
-			{
-				err = new Error {Reason = s};
-			}
-			else err = (Error) strategy.DeserializeObject(error, typeof(Error));
+				err = new Error { Reason = s };
+			else err = (Error)strategy.DeserializeObject(error, typeof(Error));
 
 			return new ServerError(err, statusCode);
 		}

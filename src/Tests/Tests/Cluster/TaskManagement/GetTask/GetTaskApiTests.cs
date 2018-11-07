@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -8,31 +7,30 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Cluster.TaskManagement.GetTask
 {
 	public class GetTaskApiTests : ApiIntegrationTestBase<WritableCluster, IGetTaskResponse, IGetTaskRequest, GetTaskDescriptor, GetTaskRequest>
 	{
-		public GetTaskApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.GetTask(_taskId, f),
-			fluentAsync: (client, f) => client.GetTaskAsync(_taskId, f),
-			request: (client, r) => client.GetTask(r),
-			requestAsync: (client, r) => client.GetTaskAsync(r)
-		);
-
 		private static TaskId _taskId = new TaskId("fakeid:1");
+
+		public GetTaskApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/_tasks/fakeid%3A1";
 
 		protected override Func<GetTaskDescriptor, IGetTaskRequest> Fluent => s => s;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
 		protected override GetTaskRequest Initializer => new GetTaskRequest(_taskId);
+		protected override string UrlPath => $"/_tasks/fakeid%3A1";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.GetTask(_taskId, f),
+			(client, f) => client.GetTaskAsync(_taskId, f),
+			(client, r) => client.GetTask(r),
+			(client, r) => client.GetTaskAsync(r)
+		);
 
 		protected override GetTaskDescriptor NewDescriptor() => new GetTaskDescriptor(_taskId);
 

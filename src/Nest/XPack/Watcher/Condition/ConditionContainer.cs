@@ -1,5 +1,5 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -17,6 +17,18 @@ namespace Nest
 		IAlwaysCondition Always { get; set; }
 
 		/// <summary>
+		/// Compares an array of values in the execution context to a given value.
+		/// </summary>
+		[JsonProperty("array_compare")]
+		IArrayCompareCondition ArrayCompare { get; set; }
+
+		/// <summary>
+		/// Performs a simple comparison against a value in the watch payload.
+		/// </summary>
+		[JsonProperty("compare")]
+		ICompareCondition Compare { get; set; }
+
+		/// <summary>
 		/// Watch actions are never executed when the watch is triggered.
 		/// The watch input is executed, a record is added to the watch history,
 		/// and the watch execution ends.
@@ -26,18 +38,6 @@ namespace Nest
 		/// </remarks>
 		[JsonProperty("never")]
 		INeverCondition Never { get; set; }
-
-		/// <summary>
-		/// Performs a simple comparison against a value in the watch payload.
-		/// </summary>
-		[JsonProperty("compare")]
-		ICompareCondition Compare { get; set; }
-
-		/// <summary>
-		/// Compares an array of values in the execution context to a given value.
-		/// </summary>
-		[JsonProperty("array_compare")]
-		IArrayCompareCondition ArrayCompare { get; set; }
 
 		/// <summary>
 		/// A watch condition that evaluates a script.
@@ -59,28 +59,28 @@ namespace Nest
 	/// <inheritdoc />
 	public class ConditionContainer : IConditionContainer, IDescriptor
 	{
-		/// <inheritdoc />
-		IAlwaysCondition IConditionContainer.Always { get; set; }
-
-		/// <inheritdoc />
-		INeverCondition IConditionContainer.Never { get; set; }
-
-		/// <inheritdoc />
-		IScriptCondition IConditionContainer.Script { get; set; }
-
-		/// <inheritdoc />
-		ICompareCondition IConditionContainer.Compare { get; set; }
-
-		/// <inheritdoc />
-		IArrayCompareCondition IConditionContainer.ArrayCompare { get; set; }
-
-		internal ConditionContainer() {}
+		internal ConditionContainer() { }
 
 		public ConditionContainer(ConditionBase condition)
 		{
 			condition.ThrowIfNull(nameof(condition));
 			condition.WrapInContainer(this);
 		}
+
+		/// <inheritdoc />
+		IAlwaysCondition IConditionContainer.Always { get; set; }
+
+		/// <inheritdoc />
+		IArrayCompareCondition IConditionContainer.ArrayCompare { get; set; }
+
+		/// <inheritdoc />
+		ICompareCondition IConditionContainer.Compare { get; set; }
+
+		/// <inheritdoc />
+		INeverCondition IConditionContainer.Never { get; set; }
+
+		/// <inheritdoc />
+		IScriptCondition IConditionContainer.Script { get; set; }
 
 		public static implicit operator ConditionContainer(ConditionBase condition) => condition == null
 			? null

@@ -12,10 +12,10 @@ namespace Tests.Cat.CatSegments
 		[U] public override async Task Urls()
 		{
 			await GET("/_cat/segments")
-				.Fluent(c => c.CatSegments())
-				.Request(c => c.CatSegments(new CatSegmentsRequest()))
-				.FluentAsync(c => c.CatSegmentsAsync())
-				.RequestAsync(c => c.CatSegmentsAsync(new CatSegmentsRequest()))
+					.Fluent(c => c.CatSegments())
+					.Request(c => c.CatSegments(new CatSegmentsRequest()))
+					.FluentAsync(c => c.CatSegmentsAsync())
+					.RequestAsync(c => c.CatSegmentsAsync(new CatSegmentsRequest()))
 				;
 
 			await GET("/_cat/segments/project")

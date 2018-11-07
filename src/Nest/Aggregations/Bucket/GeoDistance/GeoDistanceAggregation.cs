@@ -10,56 +10,53 @@ namespace Nest
 	[ContractJsonConverter(typeof(AggregationJsonConverter<GeoDistanceAggregation>))]
 	public interface IGeoDistanceAggregation : IBucketAggregation
 	{
+		[JsonProperty("distance_type")]
+		GeoDistanceType? DistanceType { get; set; }
+
 		[JsonProperty("field")]
 		Field Field { get; set; }
 
 		[JsonProperty("origin")]
 		GeoLocation Origin { get; set; }
 
-		[JsonProperty("unit")]
-		DistanceUnit? Unit { get; set; }
-
-		[JsonProperty("distance_type")]
-		GeoDistanceType? DistanceType { get; set; }
-
 		[JsonProperty("ranges")]
 		IEnumerable<IAggregationRange> Ranges { get; set; }
 
+		[JsonProperty("unit")]
+		DistanceUnit? Unit { get; set; }
 	}
 
 	public class GeoDistanceAggregation : BucketAggregationBase, IGeoDistanceAggregation
 	{
-		public Field Field { get; set; }
-
-		public GeoLocation Origin { get; set; }
-
-		public DistanceUnit? Unit { get; set; }
-
-		public GeoDistanceType? DistanceType { get; set; }
-
-		public IEnumerable<IAggregationRange> Ranges { get; set; }
-
 		internal GeoDistanceAggregation() { }
 
 		public GeoDistanceAggregation(string name) : base(name) { }
 
+		public GeoDistanceType? DistanceType { get; set; }
+		public Field Field { get; set; }
+
+		public GeoLocation Origin { get; set; }
+
+		public IEnumerable<IAggregationRange> Ranges { get; set; }
+
+		public DistanceUnit? Unit { get; set; }
+
 		internal override void WrapInContainer(AggregationContainer c) => c.GeoDistance = this;
 	}
 
-	public class GeoDistanceAggregationDescriptor<T> :
-		BucketAggregationDescriptorBase<GeoDistanceAggregationDescriptor<T>, IGeoDistanceAggregation, T>
+	public class GeoDistanceAggregationDescriptor<T>
+		: BucketAggregationDescriptorBase<GeoDistanceAggregationDescriptor<T>, IGeoDistanceAggregation, T>
 			, IGeoDistanceAggregation
 		where T : class
 	{
+		GeoDistanceType? IGeoDistanceAggregation.DistanceType { get; set; }
 		Field IGeoDistanceAggregation.Field { get; set; }
 
 		GeoLocation IGeoDistanceAggregation.Origin { get; set; }
 
-		DistanceUnit? IGeoDistanceAggregation.Unit { get; set; }
-
-		GeoDistanceType? IGeoDistanceAggregation.DistanceType { get; set; }
-
 		IEnumerable<IAggregationRange> IGeoDistanceAggregation.Ranges { get; set; }
+
+		DistanceUnit? IGeoDistanceAggregation.Unit { get; set; }
 
 		public GeoDistanceAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 

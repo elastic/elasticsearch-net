@@ -8,11 +8,11 @@ namespace Nest
 	[ContractJsonConverter(typeof(AggregationJsonConverter<HistogramAggregation>))]
 	public interface IHistogramAggregation : IBucketAggregation
 	{
+		[JsonProperty("extended_bounds")]
+		ExtendedBounds<double> ExtendedBounds { get; set; }
+
 		[JsonProperty("field")]
 		Field Field { get; set; }
-
-		[JsonProperty("script")]
-		IScript Script { get; set; }
 
 		[JsonProperty("interval")]
 		double? Interval { get; set; }
@@ -20,33 +20,33 @@ namespace Nest
 		[JsonProperty("min_doc_count")]
 		int? MinimumDocumentCount { get; set; }
 
-		[JsonProperty("order")]
-		HistogramOrder Order { get; set; }
-
-		[JsonProperty("extended_bounds")]
-		ExtendedBounds<double> ExtendedBounds { get; set; }
+		[JsonProperty("missing")]
+		double? Missing { get; set; }
 
 		[JsonProperty("offset")]
 		double? Offset { get; set; }
 
-		[JsonProperty("missing")]
-		double? Missing { get; set; }
+		[JsonProperty("order")]
+		HistogramOrder Order { get; set; }
+
+		[JsonProperty("script")]
+		IScript Script { get; set; }
 	}
 
 	public class HistogramAggregation : BucketAggregationBase, IHistogramAggregation
 	{
-		public Field Field { get; set; }
-		public IScript Script { get; set; }
-		public double? Interval { get; set; }
-		public int? MinimumDocumentCount { get; set; }
-		public HistogramOrder Order { get; set; }
-		public ExtendedBounds<double> ExtendedBounds { get; set; }
-		public double? Offset { get; set; }
-		public double? Missing { get; set; }
-
 		internal HistogramAggregation() { }
 
 		public HistogramAggregation(string name) : base(name) { }
+
+		public ExtendedBounds<double> ExtendedBounds { get; set; }
+		public Field Field { get; set; }
+		public double? Interval { get; set; }
+		public int? MinimumDocumentCount { get; set; }
+		public double? Missing { get; set; }
+		public double? Offset { get; set; }
+		public HistogramOrder Order { get; set; }
+		public IScript Script { get; set; }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Histogram = this;
 	}
@@ -55,21 +55,20 @@ namespace Nest
 		: BucketAggregationDescriptorBase<HistogramAggregationDescriptor<T>, IHistogramAggregation, T>, IHistogramAggregation
 		where T : class
 	{
+		ExtendedBounds<double> IHistogramAggregation.ExtendedBounds { get; set; }
 		Field IHistogramAggregation.Field { get; set; }
-
-		IScript IHistogramAggregation.Script { get; set; }
 
 		double? IHistogramAggregation.Interval { get; set; }
 
 		int? IHistogramAggregation.MinimumDocumentCount { get; set; }
 
-		HistogramOrder IHistogramAggregation.Order { get; set; }
-
-		ExtendedBounds<double> IHistogramAggregation.ExtendedBounds { get; set; }
+		double? IHistogramAggregation.Missing { get; set; }
 
 		double? IHistogramAggregation.Offset { get; set; }
 
-		double? IHistogramAggregation.Missing { get; set; }
+		HistogramOrder IHistogramAggregation.Order { get; set; }
+
+		IScript IHistogramAggregation.Script { get; set; }
 
 		public HistogramAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 

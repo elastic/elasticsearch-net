@@ -16,9 +16,9 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 			MaxConcurrency = 1,
 			DefaultNodeSettings =
 			{
-				{ "xpack.ml.node_concurrent_job_allocations", "4", ">=5.4.0"},
-				{ "node.attr.ml.max_open_jobs", "30", ">=5.4.0 <6.0.0"},
-				{ "xpack.ml.max_open_jobs", "30", ">=6.0.0"}
+				{ "xpack.ml.node_concurrent_job_allocations", "4", ">=5.4.0" },
+				{ "node.attr.ml.max_open_jobs", "30", ">=5.4.0 <6.0.0" },
+				{ "xpack.ml.max_open_jobs", "30", ">=6.0.0" }
 			},
 			AdditionalBeforeNodeStartedTasks =
 			{
@@ -27,7 +27,7 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 			Timeout = TimeSpan.FromMinutes(10),
 		}) { }
 
-		protected override void SeedCluster() => new MachineLearningSeeder(this.Client, this.ClusterConfiguration.FileSystem).SeedNode();
+		protected override void SeedCluster() => new MachineLearningSeeder(Client, ClusterConfiguration.FileSystem).SeedNode();
 	}
 
 	public class DownloadMachineLearningSampleDataDistribution : ClusterComposeTask

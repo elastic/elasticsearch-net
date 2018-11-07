@@ -1,6 +1,4 @@
-﻿using Nest;
-
-namespace Tests.Framework
+﻿namespace Tests.Framework
 {
 	internal static class NumericExtensions
 	{
@@ -27,8 +25,6 @@ namespace Tests.Framework
 				default:
 					return num + "th";
 			}
-
 		}
 	}
-
 }

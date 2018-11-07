@@ -9,16 +9,26 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class TypeName : IEquatable<TypeName>, IUrlParameter
 	{
-		private static int TypeHashCode { get; } = typeof(TypeName).GetHashCode();
+		private TypeName(string type) => Name = type;
+
+		private TypeName(Type type) => Type = type;
 
 		public string Name { get; }
 		public Type Type { get; }
 
-		private TypeName(string type) => this.Name = type;
-
-		private TypeName(Type type) => this.Type = type;
-
 		internal string DebugDisplay => Type == null ? Name : $"{nameof(TypeName)} for typeof: {Type?.Name}";
+		private static int TypeHashCode { get; } = typeof(TypeName).GetHashCode();
+
+		public bool Equals(TypeName other) => EqualsMarker(other);
+
+		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
+		{
+			if (!(settings is IConnectionSettingsValues nestSettings))
+				throw new ArgumentNullException(nameof(settings),
+					$"Can not resolve {nameof(TypeName)} if no {nameof(IConnectionSettingsValues)} is provided");
+
+			return nestSettings.Inferrer.TypeName(this);
+		}
 
 		public static TypeName Create(Type type) => GetTypeNameForType(type);
 
@@ -35,57 +45,50 @@ namespace Nest
 			unchecked
 			{
 				var result = TypeHashCode;
-				result = (result * 397) ^ (this.Name?.GetHashCode() ?? this.Type?.GetHashCode() ?? 0);
+				result = (result * 397) ^ (Name?.GetHashCode() ?? Type?.GetHashCode() ?? 0);
 				return result;
 			}
 		}
+
 		public static bool operator ==(TypeName left, TypeName right) => Equals(left, right);
 
 		public static bool operator !=(TypeName left, TypeName right) => !Equals(left, right);
 
-		public bool Equals(TypeName other) => EqualsMarker(other);
-
 		public override bool Equals(object obj)
 		{
 			var s = obj as string;
-			if (!s.IsNullOrEmpty()) return this.EqualsString(s);
+			if (!s.IsNullOrEmpty()) return EqualsString(s);
+
 			var pp = obj as TypeName;
-			return this.EqualsMarker(pp);
+			return EqualsMarker(pp);
 		}
 
 		public override string ToString()
 		{
-			if (!this.Name.IsNullOrEmpty())
-				return this.Name;
-			return this.Type != null ? this.Type.Name : string.Empty;
+			if (!Name.IsNullOrEmpty())
+				return Name;
+
+			return Type != null ? Type.Name : string.Empty;
 		}
 
 		private bool EqualsMarker(TypeName other)
 		{
-			if (!this.Name.IsNullOrEmpty() && other != null && !other.Name.IsNullOrEmpty())
+			if (!Name.IsNullOrEmpty() && other != null && !other.Name.IsNullOrEmpty())
 				return EqualsString(other.Name);
-			if (this.Type != null && other?.Type != null)
-				return this.Type == other.Type;
+			if (Type != null && other?.Type != null)
+				return Type == other.Type;
+
 			return false;
 		}
 
-		private bool EqualsString(string other)
-		{
-			return !other.IsNullOrEmpty() && other == this.Name;
-		}
-
-		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
-		{
-			if (!(settings is IConnectionSettingsValues nestSettings))
-				throw new ArgumentNullException(nameof(settings), $"Can not resolve {nameof(TypeName)} if no {nameof(IConnectionSettingsValues)} is provided");
-
-			return nestSettings.Inferrer.TypeName(this);
-		}
+		private bool EqualsString(string other) => !other.IsNullOrEmpty() && other == Name;
 
 		public static TypeName From<T>() => typeof(T);
 
-		public Types And<T>() => new Types(new TypeName[] { this, typeof(T)});
+		public Types And<T>() => new Types(new TypeName[] { this, typeof(T) });
+
 		public Types And(TypeName type) => new Types(new TypeName[] { this, type });
+
 		public Types And(TypeName[] types) => new Types(new TypeName[] { this }.Concat(types));
 	}
 }

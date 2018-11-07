@@ -1,24 +1,24 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonConverter(typeof(EmailAttachmentsJsonConverter))]
-	public interface IEmailAttachments : IIsADictionary<string, IEmailAttachment> {}
+	public interface IEmailAttachments : IIsADictionary<string, IEmailAttachment> { }
 
 	public class EmailAttachments : IsADictionaryBase<string, IEmailAttachment>, IEmailAttachments
 	{
-		public EmailAttachments() {}
+		public EmailAttachments() { }
 
-		public EmailAttachments(IDictionary<string, IEmailAttachment> attachments) : base(attachments) {}
+		public EmailAttachments(IDictionary<string, IEmailAttachment> attachments) : base(attachments) { }
 
-		public void Add(string name, IEmailAttachment attachment) => this.BackingDictionary.Add(name, attachment);
+		public void Add(string name, IEmailAttachment attachment) => BackingDictionary.Add(name, attachment);
 	}
 
 	public class EmailAttachmentsDescriptor : DescriptorPromiseBase<EmailAttachmentsDescriptor, IEmailAttachments>
 	{
-		public EmailAttachmentsDescriptor() : base(new EmailAttachments()) {}
+		public EmailAttachmentsDescriptor() : base(new EmailAttachments()) { }
 
 		public EmailAttachmentsDescriptor HttpAttachment(string name, Func<HttpAttachmentDescriptor, IHttpAttachment> selector) =>
 			Assign(a => a.Add(name, selector?.Invoke(new HttpAttachmentDescriptor())));
@@ -27,7 +27,7 @@ namespace Nest
 			Assign(a => a.Add(name, selector?.Invoke(new DataAttachmentDescriptor())));
 	}
 
-	public interface IEmailAttachment {}
+	public interface IEmailAttachment { }
 
 	internal class EmailAttachmentsJsonConverter : JsonConverter
 	{
@@ -60,6 +60,7 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			if (reader.TokenType != JsonToken.StartObject) return null;
+
 			var attachments = new Dictionary<string, IEmailAttachment>();
 			while (reader.Read())
 			{

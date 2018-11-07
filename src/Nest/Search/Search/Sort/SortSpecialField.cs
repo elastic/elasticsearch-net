@@ -9,6 +9,7 @@ namespace Nest
 	{
 		[EnumMember(Value = "_score")]
 		Score,
+
 		[EnumMember(Value = "_doc")]
 		DocumentIndexOrder
 	}

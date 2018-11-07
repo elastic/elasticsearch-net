@@ -15,16 +15,17 @@ namespace Nest
 
 	public class SpanOrQuery : QueryBase, ISpanOrQuery
 	{
-		protected override bool Conditionless => IsConditionless(this);
 		public IEnumerable<ISpanQuery> Clauses { get; set; }
+		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.SpanOr = this;
+
 		internal static bool IsConditionless(ISpanOrQuery q) => !q.Clauses.HasAny() || q.Clauses.Cast<IQuery>().All(qq => qq.Conditionless);
 	}
 
 	public class SpanOrQueryDescriptor<T>
 		: QueryDescriptorBase<SpanOrQueryDescriptor<T>, ISpanOrQuery>
-		, ISpanOrQuery where T : class
+			, ISpanOrQuery where T : class
 	{
 		protected override bool Conditionless => SpanOrQuery.IsConditionless(this);
 		IEnumerable<ISpanQuery> ISpanOrQuery.Clauses { get; set; }
@@ -33,7 +34,8 @@ namespace Nest
 		{
 			var clauses = (
 				from selector in selectors
-				select selector(new SpanQueryDescriptor<T>()) into q
+				select selector(new SpanQueryDescriptor<T>())
+				into q
 				where !(q as IQuery).Conditionless
 				select q
 			).ToList();

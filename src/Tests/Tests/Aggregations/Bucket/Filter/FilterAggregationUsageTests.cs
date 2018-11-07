@@ -7,9 +7,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.Filter
@@ -22,9 +20,9 @@ namespace Tests.Aggregations.Bucket.Filter
 	*/
 	public class FilterAggregationUsageTests : AggregationUsageTestBase
 	{
-		public FilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
-
 		public static string FirstNameToFind = Project.First.LeadDeveloper.FirstName.ToLowerInvariant();
+
+		public FilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object AggregationJson => new
 		{
@@ -34,12 +32,12 @@ namespace Tests.Aggregations.Bucket.Filter
 				{
 					term = new Dictionary<string, object>
 					{
-						{"leadDeveloper.firstName", new {value = FirstNameToFind}}
+						{ "leadDeveloper.firstName", new { value = FirstNameToFind } }
 					}
 				},
 				aggs = new
 				{
-					project_tags = new {terms = new {field = "curatedTags.name.keyword"}}
+					project_tags = new { terms = new { field = "curatedTags.name.keyword" } }
 				}
 			}
 		};
@@ -55,9 +53,9 @@ namespace Tests.Aggregations.Bucket.Filter
 		protected override AggregationDictionary InitializerAggs =>
 			new FilterAggregation("bethels_projects")
 			{
-				Filter = new TermQuery {Field = Field<Project>(p => p.LeadDeveloper.FirstName), Value = FirstNameToFind},
+				Filter = new TermQuery { Field = Field<Project>(p => p.LeadDeveloper.FirstName), Value = FirstNameToFind },
 				Aggregations =
-					new TermsAggregation("project_tags") {Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword"))}
+					new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword")) }
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
@@ -83,13 +81,11 @@ namespace Tests.Aggregations.Bucket.Filter
 	* When the collection of filters is empty or all are conditionless, NEST will serialize them
 	* to an empty object.
 	*/
-	[SkipVersion("6.0.0-alpha1", "https://github.com/elastic/elasticsearch/issues/17518 && 6.0 https://github.com/elastic/elasticsearch/pull/17542#issuecomment-300796197")]
+	[SkipVersion("6.0.0-alpha1",
+		"https://github.com/elastic/elasticsearch/issues/17518 && 6.0 https://github.com/elastic/elasticsearch/pull/17542#issuecomment-300796197")]
 	public class EmptyFilterAggregationUsageTests : AggregationUsageTestBase
 	{
 		public EmptyFilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
-
-		protected override bool ExpectIsValid => false;
-		protected override int ExpectStatusCode => 400;
 
 		protected override object AggregationJson => new
 		{
@@ -98,6 +94,9 @@ namespace Tests.Aggregations.Bucket.Filter
 				filter = new { }
 			}
 		};
+
+		protected override bool ExpectIsValid => false;
+		protected override int ExpectStatusCode => 400;
 
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.Filter("empty_filter", date => date
@@ -117,18 +116,15 @@ namespace Tests.Aggregations.Bucket.Filter
 				}
 			};
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
-		{
-			response.ShouldNotBeValid();
-		}
+		protected override void ExpectResponse(ISearchResponse<Project> response) => response.ShouldNotBeValid();
 	}
 
 	//reproduce of https://github.com/elastic/elasticsearch-net/issues/1931
 	// hide
 	public class InlineScriptFilterAggregationUsageTests : AggregationUsageTestBase
 	{
-		private string _ctxNumberofCommits = "doc['numberOfCommits'].value > 0";
-		private string _aggName = "script_filter";
+		private readonly string _aggName = "script_filter";
+		private readonly string _ctxNumberofCommits = "doc['numberOfCommits'].value > 0";
 
 		public InlineScriptFilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

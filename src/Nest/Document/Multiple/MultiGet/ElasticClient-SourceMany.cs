@@ -18,7 +18,8 @@ namespace Nest
 		/// The response includes a docs array with all the fetched documents, each element similar in structure to a document
 		/// provided by the get API.
 		/// </para>
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-get.html
+		/// <para> </para>
+		/// >http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-get.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="client"></param>
@@ -29,7 +30,7 @@ namespace Nest
 			where T : class
 		{
 			var result = client.MultiGet(s => s
-				.RequestConfiguration(r=>r.ThrowExceptions())
+				.RequestConfiguration(r => r.ThrowExceptions())
 				.GetMany<T>(ids, (gs, i) => gs
 					.Index(index)
 					.Type(type)
@@ -45,7 +46,8 @@ namespace Nest
 		/// The response includes a docs array with all the fetched documents, each element similar in structure to a document
 		/// provided by the get API.
 		/// </para>
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-get.html
+		/// <para> </para>
+		/// >http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-get.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="client"></param>
@@ -53,10 +55,7 @@ namespace Nest
 		/// <param name="index">Optionally override the default inferred indexname for T</param>
 		/// <param name="type">Optionally override the default inferred indexname for T</param>
 		public static IEnumerable<T> SourceMany<T>(this IElasticClient client, IEnumerable<long> ids, string index = null, string type = null)
-			where T : class
-		{
-			return client.SourceMany<T>(ids.Select(i => i.ToString(CultureInfo.InvariantCulture)), index, type);
-		}
+			where T : class => client.SourceMany<T>(ids.Select(i => i.ToString(CultureInfo.InvariantCulture)), index, type);
 
 		/// <summary>
 		/// SourceMany allows you to get a list of T documents out of elasticsearch, internally it calls into MultiGet()
@@ -65,7 +64,8 @@ namespace Nest
 		/// The response includes a docs array with all the fetched documents, each element similar in structure to a document
 		/// provided by the get API.
 		/// </para>
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-get.html
+		/// <para> </para>
+		/// >http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-get.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="client"></param>
@@ -73,15 +73,17 @@ namespace Nest
 		/// <param name="index">Optionally override the default inferred indexname for T</param>
 		/// <param name="type">Optionally override the default inferred indexname for T</param>
 		public static async Task<IEnumerable<T>> SourceManyAsync<T>(
-			this IElasticClient client, IEnumerable<string> ids, string index = null, string type = null, CancellationToken cancellationToken = default(CancellationToken))
+			this IElasticClient client, IEnumerable<string> ids, string index = null, string type = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		)
 			where T : class
 		{
 			var response = await client.MultiGetAsync(s => s
-				.RequestConfiguration(r=>r.ThrowExceptions())
-				.GetMany<T>(ids, (gs, i) => gs
-					.Index(index)
-					.Type(type)
-				), cancellationToken)
+					.RequestConfiguration(r => r.ThrowExceptions())
+					.GetMany<T>(ids, (gs, i) => gs
+						.Index(index)
+						.Type(type)
+					), cancellationToken)
 				.ConfigureAwait(false);
 			return response.SourceMany<T>(ids);
 		}
@@ -93,7 +95,8 @@ namespace Nest
 		/// The response includes a docs array with all the fetched documents, each element similar in structure to a document
 		/// provided by the get API.
 		/// </para>
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-get.html
+		/// <para> </para>
+		/// >http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-get.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="client"></param>
@@ -101,10 +104,9 @@ namespace Nest
 		/// <param name="index">Optionally override the default inferred indexname for T</param>
 		/// <param name="type">Optionally override the default inferred indexname for T</param>
 		public static Task<IEnumerable<T>> SourceManyAsync<T>(
-			this IElasticClient client, IEnumerable<long> ids, string index = null, string type = null, CancellationToken cancellationToken = default(CancellationToken))
-			where T : class
-		{
-			return client.SourceManyAsync<T>(ids.Select(i => i.ToString(CultureInfo.InvariantCulture)), index, type, cancellationToken);
-		}
+			this IElasticClient client, IEnumerable<long> ids, string index = null, string type = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		)
+			where T : class => client.SourceManyAsync<T>(ids.Select(i => i.ToString(CultureInfo.InvariantCulture)), index, type, cancellationToken);
 	}
 }

@@ -16,39 +16,41 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 	{
 		public const string MachineLearningTestsIndexTemplateName = "server-metrics";
 
-		private IElasticClient Client { get; }
-		public string RoamingFolder { get; }
-
 		public MachineLearningSeeder(IElasticClient client, INodeFileSystem fileSystem)
 		{
-			this.RoamingFolder = fileSystem.LocalFolder;
-			this.Client = client;
+			RoamingFolder = fileSystem.LocalFolder;
+			Client = client;
 		}
+
+		public string RoamingFolder { get; }
+
+		private IElasticClient Client { get; }
 
 		// Sometimes we run against an manually started elasticsearch when
 		// writing tests to cut down on cluster startup times.
 		// If template exists assume this cluster is already seeded with the machine learning data.
-		private bool AlreadySeeded() => this.Client.IndexTemplateExists(MachineLearningTestsIndexTemplateName).Exists;
+		private bool AlreadySeeded() => Client.IndexTemplateExists(MachineLearningTestsIndexTemplateName).Exists;
 
 		public void SeedNode()
 		{
 			if (!TestClient.Configuration.ForceReseed && AlreadySeeded()) return;
+
 			// Ensure a clean slate by deleting everything regardless of whether they may already exist
-			this.DeleteIndicesAndTemplates();
+			DeleteIndicesAndTemplates();
 			// and now recreate everything
-			this.CreateIndicesAndSeedIndexData();
+			CreateIndicesAndSeedIndexData();
 		}
 
 		public void DeleteIndicesAndTemplates()
 		{
-			if (this.Client.IndexTemplateExists(MachineLearningTestsIndexTemplateName).Exists)
-				this.Client.DeleteIndexTemplate(MachineLearningTestsIndexTemplateName);
+			if (Client.IndexTemplateExists(MachineLearningTestsIndexTemplateName).Exists)
+				Client.DeleteIndexTemplate(MachineLearningTestsIndexTemplateName);
 		}
 
 		private void CreateIndicesAndSeedIndexData()
 		{
-			this.CreateIndices();
-			this.SeedIndexData();
+			CreateIndices();
+			SeedIndexData();
 		}
 
 		public void CreateIndices()
@@ -60,36 +62,38 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 		private void SeedIndexData()
 		{
 			Console.WriteLine("Bulk importing starting ...");
-			var folder = Path.Combine(this.RoamingFolder, "server_metrics");
-			Enumerable.Range(1, 4).ToList().ForEach(i =>
-			{
-				var metricsFile = Path.Combine(folder, $"server-metrics_{i}.json");
-				var bulkResponse = this.Client.LowLevel.Bulk<BulkResponse>(
-					File.ReadAllBytes(metricsFile),
-					new BulkRequestParameters
-					{
-						RequestConfiguration = new RequestConfiguration
-						{
-							RequestTimeout = TimeSpan.FromMinutes(3)
-						}
-					});
-
-				if (!bulkResponse.ApiCall.Success || (!bulkResponse.IsValid))
+			var folder = Path.Combine(RoamingFolder, "server_metrics");
+			Enumerable.Range(1, 4)
+				.ToList()
+				.ForEach(i =>
 				{
-					// only use the Audit trail as failed bulk items will be YUGE
-					var sb = new StringBuilder();
-					ResponseStatics.DebugAuditTrail(bulkResponse.ApiCall.AuditTrail, sb);
-					throw new Exception($"Problem seeding server-metrics data for machine learning: {sb}");
-				}
+					var metricsFile = Path.Combine(folder, $"server-metrics_{i}.json");
+					var bulkResponse = Client.LowLevel.Bulk<BulkResponse>(
+						File.ReadAllBytes(metricsFile),
+						new BulkRequestParameters
+						{
+							RequestConfiguration = new RequestConfiguration
+							{
+								RequestTimeout = TimeSpan.FromMinutes(3)
+							}
+						});
 
-				Console.WriteLine($"Indexed docs from {metricsFile}");
-			});
+					if (!bulkResponse.ApiCall.Success || !bulkResponse.IsValid)
+					{
+						// only use the Audit trail as failed bulk items will be YUGE
+						var sb = new StringBuilder();
+						ResponseStatics.DebugAuditTrail(bulkResponse.ApiCall.AuditTrail, sb);
+						throw new Exception($"Problem seeding server-metrics data for machine learning: {sb}");
+					}
+
+					Console.WriteLine($"Indexed docs from {metricsFile}");
+				});
 			Console.WriteLine("Bulk importing finished.");
 		}
 
 		private void CreateMetricIndex()
 		{
-			var createProjectIndex = this.Client.CreateIndex(MachineLearningTestsIndexTemplateName, c => c
+			var createProjectIndex = Client.CreateIndex(MachineLearningTestsIndexTemplateName, c => c
 				.Mappings(map => map
 					.Map<Metric>(m => m
 						.AutoMap()
@@ -109,9 +113,9 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 
 		private void CreateIndexTemplate()
 		{
-			var putTemplateResult = this.Client.PutIndexTemplate(new PutIndexTemplateRequest(MachineLearningTestsIndexTemplateName)
+			var putTemplateResult = Client.PutIndexTemplate(new PutIndexTemplateRequest(MachineLearningTestsIndexTemplateName)
 			{
-				IndexPatterns = new ReadOnlyCollection<string>(new [] { "*" }),
+				IndexPatterns = new ReadOnlyCollection<string>(new[] { "*" }),
 				Settings = new IndexSettings
 				{
 					NumberOfShards = 1,

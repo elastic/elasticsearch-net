@@ -2,11 +2,11 @@
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Tests.Framework.Integration;
-using static Nest.Infer;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
+using Tests.Framework.Integration;
+using static Nest.Infer;
 using ValueType = Nest.ValueType;
 
 namespace Tests.Aggregations.Metric.WeightedAverage

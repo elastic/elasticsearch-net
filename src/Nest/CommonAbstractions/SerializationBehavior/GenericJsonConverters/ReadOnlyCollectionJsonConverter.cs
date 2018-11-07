@@ -6,12 +6,12 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// Json converter that deserializes into an <see cref="ReadOnlyCollection{TInterface}"/> or <see cref="IReadOnlyCollection{TInterface}"/>
-	/// where <typeparamref name="TInterface"/> does not have a custom deserializer and should be deserialized
-	/// into concrete types of <typeparamref name="TDocument"/>
+	/// Json converter that deserializes into an <see cref="ReadOnlyCollection{T}" /> or <see cref="IReadOnlyCollection{T}" />
+	/// where <typeparamref name="TInterface" /> does not have a custom deserializer and should be deserialized
+	/// into concrete types of <typeparamref name="TDocument" />
 	/// </summary>
 	/// <remarks>
-	/// <typeparamref name="TInterface"/> may not have a deserializer for valid reasons, for example, an interface may be implemented by two
+	/// <typeparamref name="TInterface" /> may not have a deserializer for valid reasons, for example, an interface may be implemented by two
 	/// concrete types that need to be deserialized. In this case, a deserializer would not know which concrete type to deserialize to in
 	/// a given context.
 	/// </remarks>
@@ -21,13 +21,10 @@ namespace Nest
 		where TDocument : TInterface
 		where TInterface : class
 	{
-		public override bool CanWrite => false;
 		public override bool CanRead => true;
+		public override bool CanWrite => false;
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			throw new NotSupportedException();
-		}
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{

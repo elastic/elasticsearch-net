@@ -1,48 +1,53 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using System.Threading;
 
 namespace Nest
 {
 	public partial interface IElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		IXPackUsageResponse XPackUsage(Func<XPackUsageDescriptor, IXPackUsageRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		IXPackUsageResponse XPackUsage(IXPackUsageRequest request);
 
-		/// <inheritdoc/>
-		Task<IXPackUsageResponse> XPackUsageAsync(Func<XPackUsageDescriptor, IXPackUsageRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<IXPackUsageResponse> XPackUsageAsync(Func<XPackUsageDescriptor, IXPackUsageRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		Task<IXPackUsageResponse> XPackUsageAsync(IXPackUsageRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IXPackUsageResponse XPackUsage(Func<XPackUsageDescriptor, IXPackUsageRequest> selector = null) =>
-			this.XPackUsage(selector.InvokeOrDefault(new XPackUsageDescriptor()));
+			XPackUsage(selector.InvokeOrDefault(new XPackUsageDescriptor()));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IXPackUsageResponse XPackUsage(IXPackUsageRequest request) =>
-			this.Dispatcher.Dispatch<IXPackUsageRequest, XPackUsageRequestParameters, XPackUsageResponse>(
+			Dispatcher.Dispatch<IXPackUsageRequest, XPackUsageRequestParameters, XPackUsageResponse>(
 				request,
-				(p, d) =>this.LowLevelDispatch.XpackUsageDispatch<XPackUsageResponse>(p)
+				(p, d) => LowLevelDispatch.XpackUsageDispatch<XPackUsageResponse>(p)
 			);
 
-		/// <inheritdoc/>
-		public Task<IXPackUsageResponse> XPackUsageAsync(Func<XPackUsageDescriptor, IXPackUsageRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.XPackUsageAsync(selector.InvokeOrDefault(new XPackUsageDescriptor()), cancellationToken);
+		/// <inheritdoc />
+		public Task<IXPackUsageResponse> XPackUsageAsync(Func<XPackUsageDescriptor, IXPackUsageRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			XPackUsageAsync(selector.InvokeOrDefault(new XPackUsageDescriptor()), cancellationToken);
 
-		/// <inheritdoc/>
-		public Task<IXPackUsageResponse> XPackUsageAsync(IXPackUsageRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<IXPackUsageRequest, XPackUsageRequestParameters, XPackUsageResponse, IXPackUsageResponse>(
+		/// <inheritdoc />
+		public Task<IXPackUsageResponse> XPackUsageAsync(IXPackUsageRequest request, CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			Dispatcher.DispatchAsync<IXPackUsageRequest, XPackUsageRequestParameters, XPackUsageResponse, IXPackUsageResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => this.LowLevelDispatch.XpackUsageDispatchAsync<XPackUsageResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.XpackUsageDispatchAsync<XPackUsageResponse>(p, c)
 			);
 	}
 }

@@ -2,7 +2,6 @@
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
-using Tests.Framework;
 
 namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 {
@@ -11,7 +10,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 		[U] public void Eq()
 		{
 			Names types = "foo,bar";
-			Names[] equal = {"foo,bar", "bar,foo", "foo,  bar", "bar,  foo   "};
+			Names[] equal = { "foo,bar", "bar,foo", "foo,  bar", "bar,  foo   " };
 			foreach (var t in equal)
 			{
 				(t == types).ShouldBeTrue(t);
@@ -22,13 +21,14 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 		[U] public void NotEq()
 		{
 			Names types = "foo,bar";
-			Names[] notEqual = {"foo,bar,x", "foo" };
+			Names[] notEqual = { "foo,bar,x", "foo" };
 			foreach (var t in notEqual)
 			{
 				(t != types).ShouldBeTrue(t);
 				t.Should().NotBe(types);
 			}
 		}
+
 		[U] public void Null()
 		{
 			Names types = "foo,bar";

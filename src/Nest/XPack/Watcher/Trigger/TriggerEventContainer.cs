@@ -13,7 +13,7 @@ namespace Nest
 	[JsonObject]
 	public class TriggerEventContainer : ITriggerEventContainer, IDescriptor
 	{
-		public TriggerEventContainer() {}
+		public TriggerEventContainer() { }
 
 		public TriggerEventContainer(TriggerEventBase trigger)
 		{

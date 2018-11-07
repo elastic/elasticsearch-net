@@ -9,8 +9,10 @@ namespace Nest
 	{
 		[EnumMember(Value = "http")]
 		Http,
+
 		[EnumMember(Value = "search")]
 		Search,
+
 		[EnumMember(Value = "simple")]
 		Simple
 	}

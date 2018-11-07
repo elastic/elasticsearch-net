@@ -18,13 +18,6 @@ namespace Nest
 	public interface ITermsSetQuery : IFieldNameQuery
 	{
 		/// <summary>
-		/// The required terms to match
-		/// </summary>
-		[JsonProperty("terms")]
-		[JsonConverter(typeof(SourceValueWriteConverter))]
-		IEnumerable<object> Terms { get; set; }
-
-		/// <summary>
 		/// A field containing the number of required terms that must match
 		/// </summary>
 		[JsonProperty("minimum_should_match_field")]
@@ -35,29 +28,38 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("minimum_should_match_script")]
 		IScript MinimumShouldMatchScript { get; set; }
+
+		/// <summary>
+		/// The required terms to match
+		/// </summary>
+		[JsonProperty("terms")]
+		[JsonConverter(typeof(SourceValueWriteConverter))]
+		IEnumerable<object> Terms { get; set; }
 	}
 
-	/// <<inheritdoc cref="ITermsSetQuery" />
+	/// <
+	/// <inheritdoc cref="ITermsSetQuery" />
 	public class TermsSetQuery : FieldNameQueryBase, ITermsSetQuery
 	{
-		protected override bool Conditionless => IsConditionless(this);
-
-		/// <inheritdoc />
-		public IEnumerable<object> Terms { get; set; }
-
 		/// <inheritdoc />
 		public Field MinimumShouldMatchField { get; set; }
 
 		/// <inheritdoc />
 		public IScript MinimumShouldMatchScript { get; set; }
 
+		/// <inheritdoc />
+		public IEnumerable<object> Terms { get; set; }
+
+		protected override bool Conditionless => IsConditionless(this);
+
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.TermsSet = this;
+
 		internal static bool IsConditionless(ITermsSetQuery q) =>
 			q.Field.IsConditionless() ||
-		    q.Terms == null ||
-		    !q.Terms.HasAny() ||
-		    q.Terms.All(t => t == null || ((t as string)?.IsNullOrEmpty()).GetValueOrDefault(false)) ||
-		    (q.MinimumShouldMatchField.IsConditionless() && q.MinimumShouldMatchScript == null);
+			q.Terms == null ||
+			!q.Terms.HasAny() ||
+			q.Terms.All(t => t == null || ((t as string)?.IsNullOrEmpty()).GetValueOrDefault(false)) ||
+			q.MinimumShouldMatchField.IsConditionless() && q.MinimumShouldMatchScript == null;
 	}
 
 	/// <summary>
@@ -69,12 +71,12 @@ namespace Nest
 	/// <typeparam name="T">The type that represents the expected hit type</typeparam>
 	public class TermsSetQueryDescriptor<T>
 		: FieldNameQueryDescriptorBase<TermsSetQueryDescriptor<T>, ITermsSetQuery, T>
-		, ITermsSetQuery where T : class
+			, ITermsSetQuery where T : class
 	{
 		protected override bool Conditionless => TermsSetQuery.IsConditionless(this);
-		IEnumerable<object> ITermsSetQuery.Terms { get; set; }
 		Field ITermsSetQuery.MinimumShouldMatchField { get; set; }
 		IScript ITermsSetQuery.MinimumShouldMatchScript { get; set; }
+		IEnumerable<object> ITermsSetQuery.Terms { get; set; }
 
 		/// <summary>
 		/// The required terms to match
@@ -84,11 +86,10 @@ namespace Nest
 		/// <summary>
 		/// The required terms to match
 		/// </summary>
-		public TermsSetQueryDescriptor<T> Terms<TValue>(params TValue[] terms) => Assign(a => {
-			if(terms?.Length == 1 && typeof(IEnumerable).IsAssignableFrom(typeof(TValue)) && typeof(TValue) != typeof(string))
-			{
+		public TermsSetQueryDescriptor<T> Terms<TValue>(params TValue[] terms) => Assign(a =>
+		{
+			if (terms?.Length == 1 && typeof(IEnumerable).IsAssignableFrom(typeof(TValue)) && typeof(TValue) != typeof(string))
 				a.Terms = (terms.First() as IEnumerable)?.Cast<object>();
-			}
 			else a.Terms = terms?.Cast<object>();
 		});
 

@@ -6,9 +6,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.GeoDistance
@@ -31,9 +29,9 @@ namespace Tests.Aggregations.Bucket.GeoDistance
 					},
 					ranges = new object[]
 					{
-						new {to = 100.0},
-						new {from = 100.0, to = 300.0},
-						new {from = 300.0}
+						new { to = 100.0 },
+						new { from = 100.0, to = 300.0 },
+						new { from = 300.0 }
 					}
 				}
 			}
@@ -57,9 +55,9 @@ namespace Tests.Aggregations.Bucket.GeoDistance
 				Origin = "52.376, 4.894",
 				Ranges = new List<AggregationRange>
 				{
-					new AggregationRange {To = 100},
-					new AggregationRange {From = 100, To = 300},
-					new AggregationRange {From = 300}
+					new AggregationRange { To = 100 },
+					new AggregationRange { From = 100, To = 300 },
+					new AggregationRange { From = 300 }
 				}
 			};
 

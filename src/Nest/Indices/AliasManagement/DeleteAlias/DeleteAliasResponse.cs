@@ -1,10 +1,6 @@
 ﻿namespace Nest
 {
-	public interface IDeleteAliasResponse : IResponse
-	{
-	}
+	public interface IDeleteAliasResponse : IResponse { }
 
-	public class DeleteAliasResponse : ResponseBase, IDeleteAliasResponse
-	{
-	}
+	public class DeleteAliasResponse : ResponseBase, IDeleteAliasResponse { }
 }

@@ -5,7 +5,6 @@ using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Domain;
-using Tests.Framework;
 
 namespace Tests.ClientConcepts.HighLevel.Inference
 {
@@ -19,14 +18,11 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Implicit<ActionIds>("").Should().BeNull();
 			Implicit<ActionIds>("   ").Should().BeNull();
 			Implicit<ActionIds>(",, ,,").Should().BeNull();
-			Implicit<ActionIds>(new string[] {}).Should().BeNull();
-			Implicit<ActionIds>(new string[] {null, null}).Should().BeNull();
+			Implicit<ActionIds>(new string[] { }).Should().BeNull();
+			Implicit<ActionIds>(new string[] { null, null }).Should().BeNull();
 		}
 
-		[U] public void CategoryId()
-		{
-			Implicit<CategoryId>(null).Should().BeNull();
-		}
+		[U] public void CategoryId() => Implicit<CategoryId>(null).Should().BeNull();
 
 		[U] public void DocumentPath()
 		{
@@ -58,13 +54,13 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Implicit<Fields>((Field[])null).Should().BeNull();
 			Implicit<Fields>("").Should().BeNull();
 			Implicit<Fields>("   ").Should().BeNull();
-			Implicit<Fields>(new string[] {}).Should().BeNull();
-			Implicit<Fields>(new Expression[] {}).Should().BeNull();
-			Implicit<Fields>(new PropertyInfo[] {}).Should().BeNull();
-			Implicit<Fields>(new Field[] {}).Should().BeNull();
-			Implicit<Fields>(new Expression[] {null, null}).Should().BeNull();
-			Implicit<Fields>(new PropertyInfo[] {null, null}).Should().BeNull();
-			Implicit<Fields>(new Field[] {null, null}).Should().BeNull();
+			Implicit<Fields>(new string[] { }).Should().BeNull();
+			Implicit<Fields>(new Expression[] { }).Should().BeNull();
+			Implicit<Fields>(new PropertyInfo[] { }).Should().BeNull();
+			Implicit<Fields>(new Field[] { }).Should().BeNull();
+			Implicit<Fields>(new Expression[] { null, null }).Should().BeNull();
+			Implicit<Fields>(new PropertyInfo[] { null, null }).Should().BeNull();
+			Implicit<Fields>(new Field[] { null, null }).Should().BeNull();
 		}
 
 		[U] public void Id()
@@ -93,10 +89,10 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Implicit<Nest.Indices>("").Should().BeNull();
 			Implicit<Nest.Indices>("    ").Should().BeNull();
 			Implicit<Nest.Indices>(",, ,,    ").Should().BeNull();
-			Implicit<Nest.Indices>(new string[] {}).Should().BeNull();
-			Implicit<Nest.Indices>(new IndexName[] {}).Should().BeNull();
-			Implicit<Nest.Indices>(new string[] {null, null}).Should().BeNull();
-			Implicit<Nest.Indices>(new IndexName[] {null, null}).Should().BeNull();
+			Implicit<Nest.Indices>(new string[] { }).Should().BeNull();
+			Implicit<Nest.Indices>(new IndexName[] { }).Should().BeNull();
+			Implicit<Nest.Indices>(new string[] { null, null }).Should().BeNull();
+			Implicit<Nest.Indices>(new IndexName[] { null, null }).Should().BeNull();
 		}
 
 		[U] public void Names()
@@ -107,8 +103,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Implicit<Names>(",,").Should().BeNull();
 			Implicit<Names>(",   ,").Should().BeNull();
 			Implicit<Names>("   ").Should().BeNull();
-			Implicit<Names>(new string[] {}).Should().BeNull();
-			Implicit<Names>(new string[] {null, null}).Should().BeNull();
+			Implicit<Names>(new string[] { }).Should().BeNull();
+			Implicit<Names>(new string[] { null, null }).Should().BeNull();
 		}
 
 		[U] public void Routing()
@@ -119,19 +115,13 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Implicit<Routing>(",,").Should().BeNull();
 			Implicit<Routing>(",   ,").Should().BeNull();
 			Implicit<Routing>("   ").Should().BeNull();
-			Implicit<Routing>(new string[] {}).Should().BeNull();
-			Implicit<Routing>(new string[] {null, null}).Should().BeNull();
+			Implicit<Routing>(new string[] { }).Should().BeNull();
+			Implicit<Routing>(new string[] { null, null }).Should().BeNull();
 		}
 
-		[U] public void Metrics()
-		{
-			Implicit<Metrics>(null).Should().BeNull();
-		}
+		[U] public void Metrics() => Implicit<Metrics>(null).Should().BeNull();
 
-		[U] public void IndexMetrics()
-		{
-			Implicit<IndexMetrics>(null).Should().BeNull();
-		}
+		[U] public void IndexMetrics() => Implicit<IndexMetrics>(null).Should().BeNull();
 
 		[U] public void Name()
 		{
@@ -147,8 +137,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Implicit<NodeIds>("").Should().BeNull();
 			Implicit<NodeIds>("  ").Should().BeNull();
 			Implicit<NodeIds>("  ,, , ,,").Should().BeNull();
-			Implicit<NodeIds>(new string[] {}).Should().BeNull();
-			Implicit<NodeIds>(new string[] {null, null}).Should().BeNull();
+			Implicit<NodeIds>(new string[] { }).Should().BeNull();
+			Implicit<NodeIds>(new string[] { null, null }).Should().BeNull();
 		}
 
 		[U] public void PropertyName()
@@ -192,12 +182,10 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Implicit<Types>("").Should().BeNull();
 			Implicit<Types>(" ,,, ").Should().BeNull();
 			Implicit<Types>("  ").Should().BeNull();
-			Implicit<Types>(new string[] {}).Should().BeNull();
-			Implicit<Types>(new TypeName[] {}).Should().BeNull();
-			Implicit<Types>(new string[] {null, null}).Should().BeNull();
-			Implicit<Types>(new TypeName[] {null, null}).Should().BeNull();
+			Implicit<Types>(new string[] { }).Should().BeNull();
+			Implicit<Types>(new TypeName[] { }).Should().BeNull();
+			Implicit<Types>(new string[] { null, null }).Should().BeNull();
+			Implicit<Types>(new TypeName[] { null, null }).Should().BeNull();
 		}
-
-
 	}
 }

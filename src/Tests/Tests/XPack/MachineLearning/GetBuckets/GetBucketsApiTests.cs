@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Threading;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -11,9 +10,18 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.MachineLearning.GetBuckets
 {
-	public class GetBucketsApiTests : MachineLearningIntegrationTestBase<IGetBucketsResponse, IGetBucketsRequest, GetBucketsDescriptor, GetBucketsRequest>
+	public class GetBucketsApiTests
+		: MachineLearningIntegrationTestBase<IGetBucketsResponse, IGetBucketsRequest, GetBucketsDescriptor, GetBucketsRequest>
 	{
 		public GetBucketsApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+		protected override object ExpectJson => null;
+		protected override int ExpectStatusCode => 200;
+		protected override Func<GetBucketsDescriptor, IGetBucketsRequest> Fluent => f => f;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override GetBucketsRequest Initializer => new GetBucketsRequest(CallIsolatedValue);
+		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/results/buckets";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -25,20 +33,13 @@ namespace Tests.XPack.MachineLearning.GetBuckets
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.GetBuckets(CallIsolatedValue, f),
-			fluentAsync: (client, f) => client.GetBucketsAsync(CallIsolatedValue, f),
-			request: (client, r) => client.GetBuckets(r),
-			requestAsync: (client, r) => client.GetBucketsAsync(r)
+			(client, f) => client.GetBuckets(CallIsolatedValue, f),
+			(client, f) => client.GetBucketsAsync(CallIsolatedValue, f),
+			(client, r) => client.GetBuckets(r),
+			(client, r) => client.GetBucketsAsync(r)
 		);
 
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/results/buckets";
 		protected override GetBucketsDescriptor NewDescriptor() => new GetBucketsDescriptor(CallIsolatedValue);
-		protected override object ExpectJson => null;
-		protected override Func<GetBucketsDescriptor, IGetBucketsRequest> Fluent => f => f;
-		protected override GetBucketsRequest Initializer => new GetBucketsRequest(CallIsolatedValue);
 
 		protected override void ExpectResponse(IGetBucketsResponse response)
 		{
@@ -59,9 +60,26 @@ namespace Tests.XPack.MachineLearning.GetBuckets
 		}
 	}
 
-	public class GetBucketsWithTimestampApiTests : MachineLearningIntegrationTestBase<IGetBucketsResponse, IGetBucketsRequest, GetBucketsDescriptor, GetBucketsRequest>
+	public class GetBucketsWithTimestampApiTests
+		: MachineLearningIntegrationTestBase<IGetBucketsResponse, IGetBucketsRequest, GetBucketsDescriptor, GetBucketsRequest>
 	{
 		public GetBucketsWithTimestampApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+		protected override object ExpectJson => null;
+		protected override int ExpectStatusCode => 200;
+
+		protected override Func<GetBucketsDescriptor, IGetBucketsRequest> Fluent =>
+			f => f.Timestamp(new DateTimeOffset(2016, 6, 2, 00, 00, 00, TimeSpan.Zero));
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
+		protected override GetBucketsRequest Initializer => new GetBucketsRequest(CallIsolatedValue)
+		{
+			Timestamp = new DateTimeOffset(2016, 6, 2, 00, 00, 00, TimeSpan.Zero)
+		};
+
+		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/results/buckets";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -73,23 +91,13 @@ namespace Tests.XPack.MachineLearning.GetBuckets
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.GetBuckets(CallIsolatedValue, f),
-			fluentAsync: (client, f) => client.GetBucketsAsync(CallIsolatedValue, f),
-			request: (client, r) => client.GetBuckets(r),
-			requestAsync: (client, r) => client.GetBucketsAsync(r)
+			(client, f) => client.GetBuckets(CallIsolatedValue, f),
+			(client, f) => client.GetBucketsAsync(CallIsolatedValue, f),
+			(client, r) => client.GetBuckets(r),
+			(client, r) => client.GetBucketsAsync(r)
 		);
 
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/results/buckets";
 		protected override GetBucketsDescriptor NewDescriptor() => new GetBucketsDescriptor(CallIsolatedValue);
-		protected override object ExpectJson => null;
-		protected override Func<GetBucketsDescriptor, IGetBucketsRequest> Fluent => f => f.Timestamp(new DateTimeOffset(2016, 6, 2, 00, 00, 00, TimeSpan.Zero));
-		protected override GetBucketsRequest Initializer => new GetBucketsRequest(CallIsolatedValue)
-		{
-			Timestamp = new DateTimeOffset(2016, 6, 2, 00, 00, 00, TimeSpan.Zero)
-		};
 
 		protected override void ExpectResponse(IGetBucketsResponse response)
 		{

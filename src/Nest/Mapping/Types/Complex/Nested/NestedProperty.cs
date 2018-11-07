@@ -25,14 +25,14 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class NestedPropertyDescriptor<TParent, TChild>
 		: ObjectPropertyDescriptorBase<NestedPropertyDescriptor<TParent, TChild>, INestedProperty, TParent, TChild>
-		, INestedProperty
+			, INestedProperty
 		where TParent : class
 		where TChild : class
 	{
+		public NestedPropertyDescriptor() : base(FieldType.Nested) { }
+
 		bool? INestedProperty.IncludeInParent { get; set; }
 		bool? INestedProperty.IncludeInRoot { get; set; }
-
-		public NestedPropertyDescriptor() : base(FieldType.Nested) { }
 
 		public NestedPropertyDescriptor<TParent, TChild> IncludeInParent(bool? includeInParent = true) =>
 			Assign(a => a.IncludeInParent = includeInParent);

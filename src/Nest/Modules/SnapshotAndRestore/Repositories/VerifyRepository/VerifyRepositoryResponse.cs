@@ -17,7 +17,6 @@ namespace Nest
 	[JsonObject]
 	public class VerifyRepositoryResponse : ResponseBase, IVerifyRepositoryResponse
 	{
-
 		/// <summary>
 		///  A dictionary of nodeId => nodeinfo of nodes that verified the repository
 		/// </summary>

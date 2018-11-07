@@ -19,11 +19,8 @@ namespace Nest
 
 	internal class ReadAsAttribute : Attribute
 	{
-		public Type Type { get; }
+		public ReadAsAttribute(Type readAs) => Type = readAs;
 
-		public ReadAsAttribute(Type readAs)
-		{
-			this.Type = readAs;
-		}
+		public Type Type { get; }
 	}
 }

@@ -1,6 +1,6 @@
 ﻿namespace Nest
 {
-	public interface IDeleteModelSnapshotResponse : IAcknowledgedResponse {}
+	public interface IDeleteModelSnapshotResponse : IAcknowledgedResponse { }
 
-	public class DeleteModelSnapshotResponse : AcknowledgedResponseBase, IDeleteModelSnapshotResponse {}
+	public class DeleteModelSnapshotResponse : AcknowledgedResponseBase, IDeleteModelSnapshotResponse { }
 }

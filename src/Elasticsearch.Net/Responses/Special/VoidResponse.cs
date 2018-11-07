@@ -1,10 +1,7 @@
-﻿using System;
-
-namespace Elasticsearch.Net
+﻿namespace Elasticsearch.Net
 {
 	public class VoidResponse : ElasticsearchResponse<VoidResponse.VoidBody>
 	{
 		public class VoidBody { }
-
 	}
 }

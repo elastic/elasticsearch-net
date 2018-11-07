@@ -17,16 +17,16 @@ namespace Nest
 		IEnumerable<string> StopTags { get; set; }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class KuromojiPartOfSpeechTokenFilter : TokenFilterBase, IKuromojiPartOfSpeechTokenFilter
 	{
 		public KuromojiPartOfSpeechTokenFilter() : base("kuromoji_part_of_speech") { }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IEnumerable<string> StopTags { get; set; }
 	}
 
-	///<inheritdoc/>
+	/// <inheritdoc />
 	public class KuromojiPartOfSpeechTokenFilterDescriptor
 		: TokenFilterDescriptorBase<KuromojiPartOfSpeechTokenFilterDescriptor, IKuromojiPartOfSpeechTokenFilter>, IKuromojiPartOfSpeechTokenFilter
 	{
@@ -34,12 +34,10 @@ namespace Nest
 
 		IEnumerable<string> IKuromojiPartOfSpeechTokenFilter.StopTags { get; set; }
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public KuromojiPartOfSpeechTokenFilterDescriptor StopTags(IEnumerable<string> stopTags) => Assign(a => a.StopTags = stopTags);
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public KuromojiPartOfSpeechTokenFilterDescriptor StopTags(params string[] stopTags) => Assign(a => a.StopTags = stopTags);
-
 	}
-
 }

@@ -6,6 +6,7 @@ namespace Nest
 	{
 		public NodeStatistics NodeStatistics { get; internal set; }
 	}
+
 	public interface INodesResponse : IResponse
 	{
 		[JsonProperty("_nodes")]
@@ -16,15 +17,14 @@ namespace Nest
 	public class NodeStatistics
 	{
 		[JsonProperty]
-		public int Total { get; internal set; }
+		public int Failed { get; internal set; }
 
 		[JsonProperty]
 		public int Successful { get; internal set; }
 
 		[JsonProperty]
-		public int Failed { get; internal set; }
+		public int Total { get; internal set; }
 
 		//TODO map failures
-
 	}
 }

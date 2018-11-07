@@ -12,7 +12,10 @@ namespace Tests.Reproduce
 		{
 			var searchRequest = new SearchRequest<Project> { Scroll = "1s" };
 
-			Action getScroll = () => { var scroll = searchRequest.Scroll; };
+			Action getScroll = () =>
+			{
+				var scroll = searchRequest.Scroll;
+			};
 
 			getScroll.ShouldThrow<Exception>();
 			//getScroll.ShouldNotThrow();

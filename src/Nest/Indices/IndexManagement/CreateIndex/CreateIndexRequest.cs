@@ -4,22 +4,10 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<CreateIndexRequest>))]
-	public partial interface ICreateIndexRequest : IIndexState
-	{
-	}
+	public partial interface ICreateIndexRequest : IIndexState { }
 
 	public partial class CreateIndexRequest
 	{
-		//Only here for ReadAsType new() constraint needs to be updated
-		internal CreateIndexRequest() { }
-
-		public CreateIndexRequest(IndexName index, IIndexState state) : this(index)
-		{
-			this.Settings = state.Settings;
-			this.Mappings = state.Mappings;
-			CreateIndexRequest.RemoveReadOnlySettings(this.Settings);
-		}
-
 		private static readonly string[] ReadOnlySettings =
 		{
 			"index.creation_date",
@@ -28,31 +16,41 @@ namespace Nest
 			"index.provided_name"
 		};
 
-		internal static void RemoveReadOnlySettings (IIndexSettings settings)
+		//Only here for ReadAsType new() constraint needs to be updated
+		internal CreateIndexRequest() { }
+
+		public CreateIndexRequest(IndexName index, IIndexState state) : this(index)
+		{
+			Settings = state.Settings;
+			Mappings = state.Mappings;
+			RemoveReadOnlySettings(Settings);
+		}
+
+		public IAliases Aliases { get; set; }
+
+		public IMappings Mappings { get; set; }
+
+		public IIndexSettings Settings { get; set; }
+
+		internal static void RemoveReadOnlySettings(IIndexSettings settings)
 		{
 			if (settings == null) return;
-			foreach(var bad in ReadOnlySettings)
+
+			foreach (var bad in ReadOnlySettings)
 			{
 				if (settings.ContainsKey(bad))
 					settings.Remove(bad);
 			}
 		}
-
-		public IIndexSettings Settings { get; set; }
-
-		public IMappings Mappings { get; set; }
-
-		public IAliases Aliases { get; set; }
 	}
 
 	[DescriptorFor("IndicesCreate")]
 	public partial class CreateIndexDescriptor
 	{
-		IIndexSettings IIndexState.Settings { get; set; }
+		IAliases IIndexState.Aliases { get; set; }
 
 		IMappings IIndexState.Mappings { get; set; }
-
-		IAliases IIndexState.Aliases { get; set; }
+		IIndexSettings IIndexState.Settings { get; set; }
 
 		public CreateIndexDescriptor InitializeUsing(IIndexState indexSettings) => Assign(a =>
 		{

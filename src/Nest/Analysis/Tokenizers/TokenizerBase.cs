@@ -5,18 +5,17 @@ namespace Nest
 	[ContractJsonConverter(typeof(TokenizerJsonConverter))]
 	public interface ITokenizer
 	{
-		[JsonProperty("version")]
-		string Version { get; set; }
-
 		[JsonProperty("type")]
 		string Type { get; }
+
+		[JsonProperty("version")]
+		string Version { get; set; }
 	}
 
 	public abstract class TokenizerBase : ITokenizer
 	{
-		public string Version { get; set; }
-
 		public string Type { get; protected set; }
+		public string Version { get; set; }
 	}
 
 	public abstract class TokenizerDescriptorBase<TTokenizer, TTokenizerInterface>
@@ -24,11 +23,10 @@ namespace Nest
 		where TTokenizer : TokenizerDescriptorBase<TTokenizer, TTokenizerInterface>, TTokenizerInterface
 		where TTokenizerInterface : class, ITokenizer
 	{
-		string ITokenizer.Version { get; set; }
-		string ITokenizer.Type => this.Type;
 		protected abstract string Type { get; }
+		string ITokenizer.Type => Type;
+		string ITokenizer.Version { get; set; }
 
 		public TTokenizer Version(string version) => Assign(a => a.Version = version);
 	}
-
 }

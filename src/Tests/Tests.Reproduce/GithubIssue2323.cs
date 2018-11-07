@@ -16,19 +16,19 @@ namespace Tests.Reproduce
 		[I]
 		public void NestedInnerHitsShouldIncludedNestedProperty()
 		{
-			var client = this.Client;
+			var client = Client;
 			var response = client.Search<Project>(s => s
-					.Query(q => q
-							.Nested(n => n
-									.Path(p => p.Tags)
-									.Query(nq => nq
-											.MatchAll()
-									)
-									.InnerHits(i => i
-											.Source(false)
-									)
-							)
+				.Query(q => q
+					.Nested(n => n
+						.Path(p => p.Tags)
+						.Query(nq => nq
+							.MatchAll()
+						)
+						.InnerHits(i => i
+							.Source(false)
+						)
 					)
+				)
 			);
 
 			response.ShouldBeValid();

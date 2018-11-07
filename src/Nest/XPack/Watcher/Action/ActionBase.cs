@@ -11,31 +11,31 @@ namespace Nest
 	public interface IAction
 	{
 		[JsonIgnore]
+		ActionType ActionType { get; }
+
+		[JsonIgnore]
 		string Name { get; set; }
 
 		[JsonIgnore]
-		ActionType ActionType { get; }
+		Time ThrottlePeriod { get; set; }
 
 		[JsonProperty("transform")]
 		TransformContainer Transform { get; set; }
-
-		[JsonIgnore]
-		Time ThrottlePeriod { get; set; }
 	}
 
 	public abstract class ActionBase : IAction
 	{
-		internal ActionBase() {}
+		internal ActionBase() { }
 
-		protected ActionBase(string name) => this.Name = name;
-
-		public string Name { get; set; }
+		protected ActionBase(string name) => Name = name;
 
 		public abstract ActionType ActionType { get; }
 
-		public TransformContainer Transform { get; set; }
+		public string Name { get; set; }
 
 		public Time ThrottlePeriod { get; set; }
+
+		public TransformContainer Transform { get; set; }
 
 		public static bool operator false(ActionBase a) => false;
 
@@ -47,26 +47,24 @@ namespace Nest
 
 	internal class ActionCombinator : ActionBase, IAction
 	{
-		internal List<ActionBase> Actions { get; } = new List<ActionBase>();
-
 		public ActionCombinator(ActionBase left, ActionBase right) : base(null)
 		{
-			this.AddAction(left);
-			this.AddAction(right);
+			AddAction(left);
+			AddAction(right);
 		}
+
+		public override ActionType ActionType => (ActionType)10;
+		internal List<ActionBase> Actions { get; } = new List<ActionBase>();
 
 		private void AddAction(ActionBase agg)
 		{
 			if (agg == null) return;
+
 			var combinator = agg as ActionCombinator;
 			if ((combinator?.Actions.HasAny()).GetValueOrDefault(false))
-			{
-				this.Actions.AddRange(combinator.Actions);
-			}
-			else this.Actions.Add(agg);
+				Actions.AddRange(combinator.Actions);
+			else Actions.Add(agg);
 		}
-
-		public override ActionType ActionType => (ActionType)10;
 	}
 
 	internal class ActionsJsonConverter : JsonConverter
@@ -81,6 +79,7 @@ namespace Nest
 			{
 				var property = child as JProperty;
 				if (property == null) continue;
+
 				var name = property.Name;
 
 				var actionJson = property.Value as JObject;

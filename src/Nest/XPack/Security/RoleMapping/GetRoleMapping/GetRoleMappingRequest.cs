@@ -1,20 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-
-namespace Nest
+﻿namespace Nest
 {
-	public partial interface IGetRoleMappingRequest
-	{
+	public partial interface IGetRoleMappingRequest { }
 
-	}
-
-	public partial class GetRoleMappingRequest
-	{
-	}
+	public partial class GetRoleMappingRequest { }
 
 	[DescriptorFor("XpackSecurityGetRoleMapping")]
-	public partial class GetRoleMappingDescriptor
-	{
-	}
+	public partial class GetRoleMappingDescriptor { }
 }

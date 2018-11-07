@@ -17,13 +17,14 @@ namespace Tests.Core.Client.Settings
 			Func<ICollection<Uri>, IConnectionPool> createPool = null,
 			SourceSerializerFactory sourceSerializerFactory = null,
 			IPropertyMappingProvider propertyMappingProvider = null,
-			int port = 9200)
+			int port = 9200
+		)
 			: base(
 				createPool,
 				sourceSerializerFactory,
 				propertyMappingProvider,
-				forceInMemory: true,
-				port: port
+				true,
+				port
 			) { }
 	}
 }

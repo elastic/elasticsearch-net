@@ -25,6 +25,5 @@ namespace Nest
 
 		public RoleMappingRuleBase Except(Func<RoleMappingRuleDescriptor, RoleMappingRuleBase> selector) =>
 			new ExceptRoleMappingRole(selector?.Invoke(new RoleMappingRuleDescriptor()));
-
 	}
 }

@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq.Expressions;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -8,17 +6,17 @@ namespace Nest
 	[JsonConverter(typeof(RoleMappingRuleBaseJsonConverter))]
 	public abstract class RoleMappingRuleBase
 	{
-		[JsonProperty("any")]
-		protected internal IEnumerable<RoleMappingRuleBase> AnyRules { get; set; }
-
 		[JsonProperty("all")]
 		protected internal IEnumerable<RoleMappingRuleBase> AllRules { get; set; }
 
-		[JsonProperty("field")]
-		protected FieldRuleBase FieldRule { get; set; }
+		[JsonProperty("any")]
+		protected internal IEnumerable<RoleMappingRuleBase> AnyRules { get; set; }
 
 		[JsonProperty("except")]
 		protected RoleMappingRuleBase ExceptRule { get; set; }
+
+		[JsonProperty("field")]
+		protected FieldRuleBase FieldRule { get; set; }
 
 		public static AnyRoleMappingRule operator |(RoleMappingRuleBase leftContainer, RoleMappingRuleBase rightContainer) =>
 			CombineAny(leftContainer, rightContainer);
@@ -51,19 +49,23 @@ namespace Nest
 		public static IEnumerable<RoleMappingRuleBase> AllOrSelf(RoleMappingRuleBase rule)
 		{
 			var all = rule as AllRoleMappingRule;
-			return all != null ? all.AllRules : new[] {rule};
+			return all != null ? all.AllRules : new[] { rule };
 		}
 
 		public static IEnumerable<RoleMappingRuleBase> AnyOrSelf(RoleMappingRuleBase rule)
 		{
 			var all = rule as AnyRoleMappingRule;
-			return all != null ? all.AnyRules : new[] {rule};
+			return all != null ? all.AnyRules : new[] { rule };
 		}
 
 		public static implicit operator RoleMappingRuleBase(UsernameRule rule) => new FieldRoleMappingRule(rule);
+
 		public static implicit operator RoleMappingRuleBase(DistinguishedNameRule rule) => new FieldRoleMappingRule(rule);
+
 		public static implicit operator RoleMappingRuleBase(GroupsRule rule) => new FieldRoleMappingRule(rule);
+
 		public static implicit operator RoleMappingRuleBase(MetadataRule rule) => new FieldRoleMappingRule(rule);
+
 		public static implicit operator RoleMappingRuleBase(RealmRule rule) => new FieldRoleMappingRule(rule);
 	}
 }

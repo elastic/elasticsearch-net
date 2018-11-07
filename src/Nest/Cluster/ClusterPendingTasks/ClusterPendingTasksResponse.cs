@@ -27,10 +27,10 @@ namespace Nest
 		[JsonProperty("source")]
 		public string Source { get; internal set; }
 
-		[JsonProperty("time_in_queue_millis")]
-		public int TimeInQueueMilliseconds { get; internal set; }
-
 		[JsonProperty("time_in_queue")]
 		public string TimeInQueue { get; internal set; }
+
+		[JsonProperty("time_in_queue_millis")]
+		public int TimeInQueueMilliseconds { get; internal set; }
 	}
 }

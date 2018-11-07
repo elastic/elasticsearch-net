@@ -17,14 +17,16 @@ namespace Nest
 		/// It is the strongest difference. For example, dictionaries are divided into different sections by
 		/// base character.
 		/// </summary>
-		[EnumMember(Value="primary")] Primary,
+		[EnumMember(Value = "primary")] Primary,
+
 		/// <summary>
 		/// Accents in the characters are considered secondary differences (for example, "as" &lt; "às" &lt; "at").
 		/// Other differences between letters can also be considered secondary differences, depending on
 		/// the language. A secondary difference is ignored when there is a primary difference anywhere
 		/// in the strings.
 		/// </summary>
-		[EnumMember(Value="secondary")] Secondary,
+		[EnumMember(Value = "secondary")] Secondary,
+
 		/// <summary>
 		/// Upper and lower case differences in characters are distinguished at tertiary strength
 		/// (for example, "ao" &lt; "Ao" &lt; "aò"). In addition, a variant of a letter differs from the base
@@ -32,7 +34,8 @@ namespace Nest
 		/// large and small Kana. A tertiary difference is ignored when there is a primary or secondary
 		/// difference anywhere in the strings.
 		/// </summary>
-		[EnumMember(Value="tertiary")] Tertiary,
+		[EnumMember(Value = "tertiary")] Tertiary,
+
 		/// <summary>
 		/// When punctuation is ignored (see Ignoring Punctuations in the User Guide) at PRIMARY to
 		/// TERTIARY strength, an additional strength level can be used to distinguish words with
@@ -40,7 +43,8 @@ namespace Nest
 		/// when there is a PRIMARY, SECONDARY or TERTIARY difference. The QUATERNARY strength should
 		/// only be used if ignoring punctuation is required.
 		/// </summary>
-		[EnumMember(Value="quaternary")] Quaternary,
+		[EnumMember(Value = "quaternary")] Quaternary,
+
 		/// <summary>
 		/// When all other strengths are equal, the IDENTICAL strength is used as a tiebreaker.
 		/// The Unicode code point values of the NFD form of each string are compared, just in
@@ -50,6 +54,6 @@ namespace Nest
 		/// this strength substantially decreases the performance for both comparison and collation key
 		/// generation APIs. This strength also increases the size of the collation key.
 		/// </summary>
-		[EnumMember(Value="identical")] Indentical,
+		[EnumMember(Value = "identical")] Indentical,
 	}
 }

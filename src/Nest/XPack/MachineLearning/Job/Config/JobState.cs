@@ -15,17 +15,20 @@ namespace Nest
 		/// </summary>
 		[EnumMember(Value = "closing")]
 		Closing,
+
 		/// <summary>
 		/// The job finished successfully with its model state persisted.
 		/// The job must be opened before it can accept further data.
 		/// </summary>
 		[EnumMember(Value = "closed")]
 		Closed,
+
 		/// <summary>
 		/// The job is available to receive and process data.
 		/// </summary>
 		[EnumMember(Value = "opened")]
 		Opened,
+
 		/// <summary>
 		/// The job did not finish successfully due to an error. This situation can occur due to invalid input data.
 		/// If the job had irrevocably failed, it must be force closed and then deleted.
@@ -33,6 +36,7 @@ namespace Nest
 		/// </summary>
 		[EnumMember(Value = "failed")]
 		Failed,
+
 		/// <summary>
 		/// The job open action is in progress and has not yet completed.
 		/// </summary>
