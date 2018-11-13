@@ -7,14 +7,13 @@ namespace Elasticsearch.Net
 	/// </summary>
 	public class MemoryStreamFactory : IMemoryStreamFactory
 	{
-		/// <summary>
-		/// Creates a memory stream using <see cref="MemoryStream" />
-		/// </summary>
+		/// <inheritdoc />
 		public MemoryStream Create() => new MemoryStream();
 
-		/// <summary>
-		/// Creates a memory stream using <see cref="MemoryStream" /> with the bytes written to the stream
-		/// </summary>
+		/// <inheritdoc />
 		public MemoryStream Create(byte[] bytes) => new MemoryStream(bytes);
+
+		/// <inheritdoc />
+		public MemoryStream Create(byte[] bytes, int index, int count) => new MemoryStream(bytes, index, count);
 	}
 }
