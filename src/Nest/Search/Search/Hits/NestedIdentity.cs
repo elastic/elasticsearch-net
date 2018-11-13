@@ -1,17 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject]
 	public class NestedIdentity
 	{
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		public Field Field { get; internal set; }
 
-		[JsonProperty("_nested")]
+		[DataMember(Name ="_nested")]
 		public NestedIdentity Nested { get; internal set; }
 
-		[JsonProperty("offset")]
+		[DataMember(Name ="offset")]
 		public int Offset { get; internal set; }
 	}
 }

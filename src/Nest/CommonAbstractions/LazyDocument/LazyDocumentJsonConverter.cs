@@ -1,29 +1,33 @@
 using System;
-using Newtonsoft.Json;
+using Utf8Json;
 
 namespace Nest
 {
-	internal class LazyDocumentJsonConverter : JsonConverter
+	internal class LazyDocumentJsonFormatter : IJsonFormatter<ILazyDocument>
 	{
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public void Serialize(ref JsonWriter writer, ILazyDocument value, IJsonFormatterResolver formatterResolver)
 		{
-			var d = (LazyDocument)value;
-			if (d?.Token == null)
+			if (value == null)
 			{
 				writer.WriteNull();
 				return;
 			}
 
-			writer.WriteToken(d.Token.CreateReader());
+			var lazyDocument = (LazyDocument)value;
+
+			for (var i = lazyDocument.ArraySegment.Offset; i < lazyDocument.ArraySegment.Count; i++)
+				writer.WriteByte(lazyDocument.ArraySegment.Array[i]);
 		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public ILazyDocument Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var sourceSerializer = serializer.GetConnectionSettings().SourceSerializer;
-			var token = reader.ReadTokenWithDateParseHandlingNone();
-			return new LazyDocument(token, sourceSerializer);
-		}
+			if (reader.GetCurrentJsonToken() == JsonToken.Null)
+				return null;
 
-		public override bool CanConvert(Type objectType) => true;
+			// TODO: ensure this handles all types. May need switch () { reader.ReadNumberSegment(), etc. }
+			var arraySegment = reader.ReadNextBlockSegment();
+
+			return new LazyDocument(arraySegment, formatterResolver);
+		}
 	}
 }

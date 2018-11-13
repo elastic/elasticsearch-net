@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -15,7 +16,7 @@ namespace Nest
 
 		string Routing { get; }
 
-		[JsonConverter(typeof(SourceConverter))]
+		[JsonFormatter(typeof(SourceFormatter<>))]
 		TDocument Source { get; }
 
 		string Type { get; }
@@ -57,13 +58,12 @@ namespace Nest
 		IReadOnlyCollection<object> Sorts { get; }
 	}
 
-	[JsonObject]
 	public class Hit<TDocument> : IHit<TDocument> where TDocument : class
 	{
-		[JsonProperty("_explanation")]
+		[DataMember(Name ="_explanation")]
 		public Explanation Explanation { get; internal set; }
 
-		[JsonProperty("fields")]
+		[DataMember(Name ="fields")]
 		public FieldValues Fields { get; internal set; }
 
 		public HighlightFieldDictionary Highlights
@@ -85,47 +85,48 @@ namespace Nest
 			}
 		}
 
-		[JsonProperty("_id")]
+		[DataMember(Name ="_id")]
 		public string Id { get; internal set; }
 
-		[JsonProperty("_index")]
+		[DataMember(Name ="_index")]
 		public string Index { get; internal set; }
 
-		[JsonProperty("inner_hits")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, InnerHitsResult>))]
+		[DataMember(Name ="inner_hits")]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, InnerHitsResult>))]
 		public IReadOnlyDictionary<string, InnerHitsResult> InnerHits { get; internal set; } =
 			EmptyReadOnly<string, InnerHitsResult>.Dictionary;
 
-		[JsonProperty("matched_queries")]
+		[DataMember(Name ="matched_queries")]
 		public IReadOnlyCollection<string> MatchedQueries { get; internal set; } = EmptyReadOnly<string>.Collection;
 
-		[JsonProperty("_nested")]
+		[DataMember(Name ="_nested")]
 		public NestedIdentity Nested { get; internal set; }
 
-		[JsonProperty("_parent")]
+		[DataMember(Name ="_parent")]
 		[Obsolete("This property is no longer returned on indices created in Elasticsearch 6.0.0 and up, use Routing instead")]
 		public string Parent { get; internal set; }
 
-		[JsonProperty("_routing")]
+		[DataMember(Name ="_routing")]
 		public string Routing { get; internal set; }
 
-		[JsonProperty("_score")]
+		[DataMember(Name ="_score")]
 		public double? Score { get; set; }
 
-		[JsonProperty("sort")]
+		[DataMember(Name ="sort")]
 		public IReadOnlyCollection<object> Sorts { get; internal set; } = EmptyReadOnly<object>.Collection;
 
-		[JsonProperty("_source")]
+		[DataMember(Name ="_source")]
+		[JsonFormatter(typeof(SourceFormatter<>))]
 		public TDocument Source { get; internal set; }
 
-		[JsonProperty("_type")]
+		[DataMember(Name ="_type")]
 		public string Type { get; internal set; }
 
-		[JsonProperty("_version")]
+		[DataMember(Name ="_version")]
 		public long? Version { get; internal set; }
 
-		[JsonProperty("highlight")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, List<string>>))]
+		[DataMember(Name ="highlight")]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, List<string>>))]
 		internal Dictionary<string, List<string>> _Highlight { get; set; }
 	}
 }

@@ -1,3 +1,4 @@
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -7,25 +8,25 @@ namespace Nest
 		/// <summary>
 		/// Detailed stats about how the time was spent
 		/// </summary>
-		[JsonProperty("breakdown")]
+		[DataMember(Name ="breakdown")]
 		public AggregationBreakdown Breakdown { get; internal set; }
 
 		/// <summary>
 		/// The user defined name of the aggregation
 		/// </summary>
-		[JsonProperty("description")]
+		[DataMember(Name ="description")]
 		public string Description { get; internal set; }
 
 		/// <summary>
 		/// The time this aggregation took, in nanoseconds
 		/// </summary>
-		[JsonProperty("time_in_nanos")]
+		[DataMember(Name ="time_in_nanos")]
 		public long TimeInNanoseconds { get; internal set; }
 
 		/// <summary>
 		/// The Elasticsearch aggregation type
 		/// </summary>
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		public string Type { get; internal set; }
 	}
 }

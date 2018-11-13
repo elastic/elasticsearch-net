@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Utf8Json;
 
 namespace Nest
 {
@@ -9,10 +10,12 @@ namespace Nest
 	/// going to elasticsearch and an `Aggregate` describes an aggregation going out.
 	/// </summary>
 	[ContractJsonConverter(typeof(AggregateDictionaryConverter))]
+	[JsonFormatter(typeof(IReadOnlyDictionary<string, IAggregate>))]
 	public class AggregateDictionary : IsAReadOnlyDictionaryBase<string, IAggregate>
 	{
 		internal static readonly char[] TypedKeysSeparator = { '#' };
 
+		[SerializationConstructor]
 		public AggregateDictionary(IReadOnlyDictionary<string, IAggregate> backingDictionary) : base(backingDictionary) { }
 
 		public static AggregateDictionary Default { get; } = new AggregateDictionary(EmptyReadOnly<string, IAggregate>.Dictionary);

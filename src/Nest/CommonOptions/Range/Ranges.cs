@@ -1,95 +1,96 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	public class DateRange
 	{
-		[JsonProperty("gt")]
+		[DataMember(Name ="gt")]
 		public DateTimeOffset? GreaterThan { get; set; }
 
-		[JsonProperty("gte")]
+		[DataMember(Name ="gte")]
 		public DateTimeOffset? GreaterThanOrEqualTo { get; set; }
 
-		[JsonProperty("lt")]
+		[DataMember(Name ="lt")]
 		public DateTimeOffset? LessThan { get; set; }
 
-		[JsonProperty("lte")]
+		[DataMember(Name ="lte")]
 		public DateTimeOffset? LessThanOrEqualTo { get; set; }
 	}
 
 	public class DoubleRange
 	{
-		[JsonProperty("gt")]
+		[DataMember(Name ="gt")]
 		public double? GreaterThan { get; set; }
 
-		[JsonProperty("gte")]
+		[DataMember(Name ="gte")]
 		public double? GreaterThanOrEqualTo { get; set; }
 
-		[JsonProperty("lt")]
+		[DataMember(Name ="lt")]
 		public double? LessThan { get; set; }
 
-		[JsonProperty("lte")]
+		[DataMember(Name ="lte")]
 		public double? LessThanOrEqualTo { get; set; }
 	}
 
 	public class FloatRange
 	{
-		[JsonProperty("gt")]
+		[DataMember(Name ="gt")]
 		public float? GreaterThan { get; set; }
 
-		[JsonProperty("gte")]
+		[DataMember(Name ="gte")]
 		public float? GreaterThanOrEqualTo { get; set; }
 
-		[JsonProperty("lt")]
+		[DataMember(Name ="lt")]
 		public float? LessThan { get; set; }
 
-		[JsonProperty("lte")]
+		[DataMember(Name ="lte")]
 		public float? LessThanOrEqualTo { get; set; }
 	}
 
 	public class IntegerRange
 	{
-		[JsonProperty("gt")]
+		[DataMember(Name ="gt")]
 		public int? GreaterThan { get; set; }
 
-		[JsonProperty("gte")]
+		[DataMember(Name ="gte")]
 		public int? GreaterThanOrEqualTo { get; set; }
 
-		[JsonProperty("lt")]
+		[DataMember(Name ="lt")]
 		public int? LessThan { get; set; }
 
-		[JsonProperty("lte")]
+		[DataMember(Name ="lte")]
 		public int? LessThanOrEqualTo { get; set; }
 	}
 
 	public class LongRange
 	{
-		[JsonProperty("gt")]
+		[DataMember(Name ="gt")]
 		public long? GreaterThan { get; set; }
 
-		[JsonProperty("gte")]
+		[DataMember(Name ="gte")]
 		public long? GreaterThanOrEqualTo { get; set; }
 
-		[JsonProperty("lt")]
+		[DataMember(Name ="lt")]
 		public long? LessThan { get; set; }
 
-		[JsonProperty("lte")]
+		[DataMember(Name ="lte")]
 		public long? LessThanOrEqualTo { get; set; }
 	}
 
 	public class IpAddressRange
 	{
-		[JsonProperty("gt")]
+		[DataMember(Name ="gt")]
 		public string GreaterThan { get; set; }
 
-		[JsonProperty("gte")]
+		[DataMember(Name ="gte")]
 		public string GreaterThanOrEqualTo { get; set; }
 
-		[JsonProperty("lt")]
+		[DataMember(Name ="lt")]
 		public string LessThan { get; set; }
 
-		[JsonProperty("lte")]
+		[DataMember(Name ="lte")]
 		public string LessThanOrEqualTo { get; set; }
 	}
 }

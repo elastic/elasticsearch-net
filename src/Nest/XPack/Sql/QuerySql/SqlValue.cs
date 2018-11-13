@@ -1,23 +1,38 @@
 ﻿using System;
-using Elasticsearch.Net;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using Utf8Json;
 
 namespace Nest
 {
-	[ContractJsonConverter(typeof(SqlValueJsonConverter))]
+	[JsonFormatter(typeof(SqlValueJsonFormatter))]
 	public class SqlValue : LazyDocument
 	{
-		internal SqlValue(JToken token, IElasticsearchSerializer serializer) : base(token, serializer) { }
+		internal SqlValue(ArraySegment<byte> arraySegment, IJsonFormatterResolver formatterResolver)
+			: base(arraySegment, formatterResolver) { }
 	}
 
-	internal class SqlValueJsonConverter : LazyDocumentJsonConverter
+	internal class SqlValueJsonFormatter : IJsonFormatter<SqlValue>
 	{
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public SqlValue Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var sourceSerializer = serializer.GetConnectionSettings().SourceSerializer;
-			var token = reader.ReadTokenWithDateParseHandlingNone();
-			return new SqlValue(token, sourceSerializer);
+			if (reader.GetCurrentJsonToken() == JsonToken.Null)
+				return null;
+
+			// TODO: ensure this handles all types. May need switch () { reader.ReadNumberSegment(), etc. }
+			var arraySegment = reader.ReadNextBlockSegment();
+
+			return new SqlValue(arraySegment, formatterResolver);
+		}
+
+		public void Serialize(ref JsonWriter writer, SqlValue value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
+
+			for (var i = value.ArraySegment.Offset; i < value.ArraySegment.Count; i++)
+				writer.WriteByte(value.ArraySegment.Array[i]);
 		}
 	}
 }

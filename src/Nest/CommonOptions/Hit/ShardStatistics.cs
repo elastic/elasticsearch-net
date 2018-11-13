@@ -1,22 +1,22 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject]
 	public class ShardStatistics
 	{
-		[JsonProperty]
+		[DataMember(Name ="failed")]
 		public int Failed { get; internal set; }
 
-		[JsonProperty("failures")]
+		[DataMember(Name ="failures")]
 		public IReadOnlyCollection<ShardFailure> Failures { get; internal set; } = EmptyReadOnly<ShardFailure>.Collection;
 
-		[JsonProperty]
+		[DataMember(Name ="successful")]
 		public int Successful { get; internal set; }
 
-		[JsonProperty]
+		[DataMember(Name ="total")]
 		public int Total { get; internal set; }
 	}
 }

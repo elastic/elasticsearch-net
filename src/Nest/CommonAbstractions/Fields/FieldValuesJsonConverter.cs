@@ -15,7 +15,7 @@ namespace Nest
 		{
 			var o = JObject.Load(reader);
 			var s = serializer.GetConnectionSettings().SourceSerializer;
-			var fields = o.Properties().ToDictionary(p => p.Name, p => new LazyDocument(p.Value, s));
+			var fields = o.Properties().ToDictionary(p => p.Name, p => (LazyDocument)null); //new LazyDocument(p.Value, s));
 			var inferrer = serializer.GetConnectionSettings().Inferrer;
 			var fieldValues = new FieldValues(inferrer, fields);
 			return fieldValues;

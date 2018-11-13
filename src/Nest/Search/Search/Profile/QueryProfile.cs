@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -8,31 +9,31 @@ namespace Nest
 		/// <summary>
 		/// Detailed stats about how the time was spent
 		/// </summary>
-		[JsonProperty("breakdown")]
+		[DataMember(Name ="breakdown")]
 		public QueryBreakdown Breakdown { get; internal set; }
 
 		/// <summary>
 		/// Sub-queries of this query
 		/// </summary>
-		[JsonProperty("children")]
+		[DataMember(Name ="children")]
 		public IEnumerable<QueryProfile> Children { get; internal set; }
 
 		/// <summary>
 		/// The lucene explanation text for the query
 		/// </summary>
-		[JsonProperty("description")]
+		[DataMember(Name ="description")]
 		public string Description { get; internal set; }
 
 		/// <summary>
 		/// The time that this query took in nanoseconds
 		/// </summary>
-		[JsonProperty("time_in_nanos")]
+		[DataMember(Name ="time_in_nanos")]
 		public long TimeInNanoseconds { get; internal set; }
 
 		/// <summary>
 		/// The lucene class name for the type of query
 		/// </summary>
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		public string Type { get; internal set; }
 	}
 }

@@ -4,10 +4,12 @@ using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;
 using Elasticsearch.Net;
+using Utf8Json;
 
 namespace Nest
 {
 	[ContractJsonConverter(typeof(FieldJsonConverter))]
+	[JsonFormatter(typeof(FieldFormatter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Field : IEquatable<Field>, IUrlParameter
 	{
