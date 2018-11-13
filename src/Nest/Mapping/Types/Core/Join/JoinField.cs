@@ -1,4 +1,5 @@
 using System;
+using Utf8Json;
 
 namespace Nest
 {
@@ -12,6 +13,7 @@ namespace Nest
 	/// The field on which a parent-child relationship is joined
 	/// </summary>
 	[ContractJsonConverter(typeof(JoinFieldJsonConverter))]
+	[JsonFormatter(typeof(JoinFieldFormatter))]
 	public class JoinField
 	{
 		internal readonly Child _child;

@@ -30,7 +30,7 @@ namespace Nest
 
 			if (tuple.Hit["fields"] is JObject fields)
 			{
-				var fieldsDictionary = fields.Properties().ToDictionary(p => p.Name, p => new LazyDocument(p.Value, s));
+				var fieldsDictionary = fields.Properties().ToDictionary(p => p.Name, p => (LazyDocument)null); //new LazyDocument(p.Value, s));
 				hit.Fields = new FieldValues(settings.Inferrer, fieldsDictionary);
 			}
 

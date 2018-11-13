@@ -1,13 +1,12 @@
 ﻿using System;
-using Elasticsearch.Net;
-using Newtonsoft.Json.Linq;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// A lazily deserialized document
 	/// </summary>
-	[ContractJsonConverter(typeof(LazyDocumentJsonConverter))]
+	[JsonFormatter(typeof(LazyDocumentJsonFormatter))]
 	public interface ILazyDocument
 	{
 		/// <summary>
@@ -28,30 +27,30 @@ namespace Nest
 	/// <inheritdoc />
 	public class LazyDocument : ILazyDocument
 	{
-		private readonly IElasticsearchSerializer _serializer;
+		private readonly IJsonFormatterResolver _formatterResolver;
 
-		internal LazyDocument(JToken token, IElasticsearchSerializer serializer)
+		internal LazyDocument(ArraySegment<byte> arraySegment, IJsonFormatterResolver formatterResolver)
 		{
-			Token = token;
-			_serializer = serializer;
+			ArraySegment = arraySegment;
+			_formatterResolver = formatterResolver;
 		}
 
-		internal JToken Token { get; }
+		internal ArraySegment<byte> ArraySegment { get; }
 
 		/// <inheritdoc />
 		public T As<T>()
 		{
-			if (Token == null) return default(T);
-			using (var ms = Token.ToStream())
-				return _serializer.Deserialize<T>(ms);
+			var reader = new JsonReader(ArraySegment.Array, ArraySegment.Offset);
+			var formatter = new SourceFormatter<T>();
+			return formatter.Deserialize(ref reader, _formatterResolver);
 		}
 
 		/// <inheritdoc />
 		public object As(Type objectType)
 		{
-			if (Token == null) return null;
-			using (var ms = Token.ToStream())
-				return _serializer.Deserialize(objectType, ms);
+			var reader = new JsonReader(ArraySegment.Array, ArraySegment.Offset);
+			// TODO: Non generic SourceFormatter equivalent
+			return JsonSerializer.NonGeneric.Deserialize(objectType, ref reader, _formatterResolver);
 		}
 	}
 }

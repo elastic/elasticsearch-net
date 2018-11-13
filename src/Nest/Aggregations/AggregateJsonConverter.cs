@@ -4,8 +4,13 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using Nest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using JsonReader = Newtonsoft.Json.JsonReader;
+using JsonSerializer = Newtonsoft.Json.JsonSerializer;
+using JsonToken = Newtonsoft.Json.JsonToken;
+using JsonWriter = Newtonsoft.Json.JsonWriter;
 
 namespace Nest
 {
@@ -185,7 +190,7 @@ namespace Nest
 			reader.Read();
 			//using request/response serializer here because doc is wrapped in NEST's Hit<T>
 			var s = serializer.GetConnectionSettings().RequestResponseSerializer;
-			var lazyHits = hits.Select(h => new LazyDocument(h, s)).ToList();
+			var lazyHits = new List<LazyDocument>(); //hits.Select(h => new LazyDocument(h, s)).ToList();
 			return new TopHitsAggregate(lazyHits)
 			{
 				Total = total,
@@ -559,7 +564,7 @@ namespace Nest
 			if (scriptedMetric != null)
 			{
 				var s = serializer.GetConnectionSettings().SourceSerializer;
-				return new ScriptedMetricAggregate(new LazyDocument(scriptedMetric, s));
+				return new ScriptedMetricAggregate(null); //new LazyDocument(scriptedMetric, s));
 			}
 			return valueMetric;
 		}

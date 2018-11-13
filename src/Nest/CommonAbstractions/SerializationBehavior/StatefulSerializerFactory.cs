@@ -5,6 +5,6 @@ namespace Nest
 	internal static class StatefulSerializerFactory
 	{
 		public static InternalSerializer CreateStateful(IConnectionSettingsValues settings, JsonConverter converter) =>
-			new InternalSerializer(settings, converter);
+			null; //new InternalSerializer(settings, converter);
 	}
 }

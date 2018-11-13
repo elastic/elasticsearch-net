@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Globalization;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using Utf8Json;
 
 /*
  * Taken from SolrNet https://github.com/mausch/SolrNet/blob/master/SolrNet/Location.cs
@@ -11,6 +13,7 @@ namespace Nest
 	/// <summary>
 	/// Represents a Latitude/Longitude as a 2 dimensional point that gets serialized as { lat, lon }
 	/// </summary>
+	[JsonFormatter(typeof(GeoLocationFormatter))]
 	public class GeoLocation : IEquatable<GeoLocation>, IFormattable
 	{
 		/// <summary>
@@ -35,13 +38,13 @@ namespace Nest
 		/// <summary>
 		/// Latitude
 		/// </summary>
-		[JsonProperty("lat")]
+		[DataMember(Name = "lat")]
 		public double Latitude { get; }
 
 		/// <summary>
 		/// Longitude
 		/// </summary>
-		[JsonProperty("lon")]
+		[DataMember(Name = "lon")]
 		public double Longitude { get; }
 
 		public bool Equals(GeoLocation other)
