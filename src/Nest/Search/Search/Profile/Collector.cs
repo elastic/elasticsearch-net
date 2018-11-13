@@ -1,21 +1,22 @@
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	public class Collector
 	{
-		[JsonProperty("children")]
+		[DataMember(Name ="children")]
 		public IReadOnlyCollection<Collector> Children { get; internal set; } =
 			EmptyReadOnly<Collector>.Collection;
 
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		public string Name { get; internal set; }
 
-		[JsonProperty("reason")]
+		[DataMember(Name ="reason")]
 		public string Reason { get; internal set; }
 
-		[JsonProperty("time_in_nanos")]
+		[DataMember(Name ="time_in_nanos")]
 		public long TimeInNanoseconds { get; internal set; }
 	}
 }

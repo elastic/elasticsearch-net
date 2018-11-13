@@ -1,21 +1,21 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject]
 	public class Suggest<T> where T : class
 	{
-		[JsonProperty("length")]
+		[DataMember(Name ="length")]
 		public int Length { get; internal set; }
 
-		[JsonProperty("offset")]
+		[DataMember(Name ="offset")]
 		public int Offset { get; internal set; }
 
-		[JsonProperty("options")]
+		[DataMember(Name ="options")]
 		public IReadOnlyCollection<SuggestOption<T>> Options { get; internal set; } = EmptyReadOnly<SuggestOption<T>>.Collection;
 
-		[JsonProperty("text")]
+		[DataMember(Name ="text")]
 		public string Text { get; internal set; }
 	}
 }

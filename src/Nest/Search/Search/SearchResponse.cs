@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -100,7 +101,6 @@ namespace Nest
 		long Total { get; }
 	}
 
-	[JsonObject]
 	public class SearchResponse<T> : ResponseBase, ISearchResponse<T> where T : class
 	{
 		private IReadOnlyCollection<T> _documents;
@@ -109,63 +109,64 @@ namespace Nest
 
 		private IReadOnlyCollection<IHit<T>> _hits;
 
-		[JsonProperty("aggregations")]
+		[DataMember(Name ="aggregations")]
 		public AggregateDictionary Aggregations { get; internal set; } = AggregateDictionary.Default;
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		public AggregateDictionary Aggs => Aggregations;
 
 		/// <inheritdoc />
-		[JsonIgnore]
+		[IgnoreDataMember]
 		public IReadOnlyCollection<T> Documents =>
 			_documents ?? (_documents = Hits
 				.Select(h => h.Source)
 				.ToList());
 
 		/// <inheritdoc />
+		[IgnoreDataMember]
 		public IReadOnlyCollection<FieldValues> Fields =>
 			_fields ?? (_fields = Hits
 				.Select(h => h.Fields)
 				.ToList());
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		public IReadOnlyCollection<IHit<T>> Hits =>
 			_hits ?? (_hits = HitsMetadata?.Hits ?? EmptyReadOnly<IHit<T>>.Collection);
 
-		[JsonProperty("hits")]
+		[DataMember(Name ="hits")]
 		public HitsMetadata<T> HitsMetadata { get; internal set; }
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		public double MaxScore => HitsMetadata?.MaxScore ?? 0;
 
-		[JsonProperty("num_reduce_phases")]
+		[DataMember(Name ="num_reduce_phases")]
 		public long NumberOfReducePhases { get; internal set; }
 
-		[JsonProperty("profile")]
+		[DataMember(Name ="profile")]
 		public Profile Profile { get; internal set; }
 
 		/// <summary>
 		/// Only set when search type = scan and scroll specified
 		/// </summary>
-		[JsonProperty("_scroll_id")]
+		[DataMember(Name = "_scroll_id")]
 		public string ScrollId { get; internal set; }
 
-		[JsonProperty("_shards")]
+		[DataMember(Name ="_shards")]
 		public ShardStatistics Shards { get; internal set; }
 
-		[JsonProperty("suggest")]
+		[DataMember(Name ="suggest")]
 		public SuggestDictionary<T> Suggest { get; internal set; } = SuggestDictionary<T>.Default;
 
-		[JsonProperty("terminated_early")]
+		[DataMember(Name ="terminated_early")]
 		public bool TerminatedEarly { get; internal set; }
 
-		[JsonProperty("timed_out")]
+		[DataMember(Name ="timed_out")]
 		public bool TimedOut { get; internal set; }
 
-		[JsonProperty("took")]
+		[DataMember(Name ="took")]
 		public long Took { get; internal set; }
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		public long Total => HitsMetadata?.Total.Value ?? 0;
 	}
 }

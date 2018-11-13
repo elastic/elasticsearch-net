@@ -1,23 +1,24 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	public class InnerHitsMetadata
 	{
-		[JsonProperty("hits")]
+		[DataMember(Name ="hits")]
 		public List<Hit<ILazyDocument>> Hits { get; internal set; }
 
-		[JsonProperty("max_score")]
+		[DataMember(Name ="max_score")]
 		public double? MaxScore { get; internal set; }
 
-		[JsonProperty("total")]
+		[DataMember(Name = "total")]
 		public HitsTotal Total { get; internal set; }
 
 		public IEnumerable<T> Documents<T>() where T : class
 		{
-			if (Hits == null || !Hits.HasAny())
+			if (Hits == null || Hits.Count == 0)
 				return Enumerable.Empty<T>();
 
 			return Hits.Select(hit => hit.Source.As<T>()).ToList();

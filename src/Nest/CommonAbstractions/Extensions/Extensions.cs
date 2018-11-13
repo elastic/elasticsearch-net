@@ -119,6 +119,9 @@ namespace Nest
 
 		internal static bool IsValueType(this Type type) => type.GetTypeInfo().IsValueType;
 
+		internal static bool IsNullable(this TypeInfo type) =>
+			type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
+
 		internal static void ThrowIfNullOrEmpty(this string @object, string parameterName, string when = null)
 		{
 			@object.ThrowIfNull(parameterName, when);
