@@ -101,6 +101,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Dispose
 
 			public TrackDisposeStream(byte[] bytes) : base(bytes) { }
 
+			public TrackDisposeStream(byte[] bytes, int index, int count) : base(bytes, index, count) { }
+
 			public bool IsDisposed { get; private set; }
 
 			protected override void Dispose(bool disposing)
@@ -124,6 +126,13 @@ namespace Tests.ClientConcepts.ConnectionPooling.Dispose
 			public MemoryStream Create(byte[] bytes)
 			{
 				var stream = new TrackDisposeStream(bytes);
+				Created.Add(stream);
+				return stream;
+			}
+
+			public MemoryStream Create(byte[] bytes, int index, int count)
+			{
+				var stream = new TrackDisposeStream(bytes, index, count);
 				Created.Add(stream);
 				return stream;
 			}

@@ -16,5 +16,10 @@ namespace Elasticsearch.Net
 		/// Creates a memory stream with the bytes written to the stream
 		/// </summary>
 		MemoryStream Create(byte[] bytes);
+
+		/// <summary>
+		/// Creates a memory stream with the bytes written to the stream
+		/// </summary>
+		MemoryStream Create(byte[] bytes, int index, int count);
 	}
 }
