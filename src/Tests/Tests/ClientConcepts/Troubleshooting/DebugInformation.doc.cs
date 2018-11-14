@@ -77,8 +77,6 @@ namespace Tests.ClientConcepts.Troubleshooting
 
 			response.DebugInformation.Should().NotContain("pass2");
 		}
-<<<<<<< HEAD
-
 		/**
 		 * This can be useful in tracking down numerous problems and can also be useful when filing an
 		 * {github}/issues[issue] on our github repository.
@@ -97,26 +95,6 @@ namespace Tests.ClientConcepts.Troubleshooting
 			var client = new ElasticClient(settings);
 		}
 
-=======
-		/**
-		 * This can be useful in tracking down numerous problems and can also be useful when filing an
-		 * {github}/issues[issue] on our github repository.
-		 *
-		 * By default, the request and response bytes are not available within the debug information, but
-		 * can be enabled globally on Connection Settings
-		 *
-		 */
-		public void DisableDirectStreaming()
-		{
-			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-
-			var settings = new ConnectionSettings(connectionPool)
-				.DisableDirectStreaming(); // <1> disable direct streaming for *all* requests
-
-			var client = new ElasticClient(settings);
-		}
-
->>>>>>> fix tabs in DebugInformation.doc.cs
 		/**
 		 * or on a _per request_ basis
 		 */
