@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
+using System.Runtime.Serialization;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
@@ -50,7 +51,8 @@ namespace Nest
 </text>
 	foreach (ApiUrlPart part in method.Url.ExposedApiParts)
 	{
-<text>		@(Raw(part.ClrTypeName)) @(part.InterfaceName) { get; }
+<text>		[IgnoreDataMember] 
+		@(Raw(part.ClrTypeName)) @(part.InterfaceName) { get; }
 </text>
 	}
 	//render partial methods as interface properties forcing us to implement them on request and request descriptors
@@ -58,8 +60,7 @@ namespace Nest
 	{
 		foreach (var partialParam in method.Url.Params.Values.Where(p=>p.RenderPartial))
 		{
-		<text>[JsonProperty("@(partialParam.QueryStringKey)")] @(Raw(partialParam.TypeHighLevel)) @(partialParam.ClsName) { get; set; }
-		</text>
+		<text>[DataMember(Name = "@(partialParam.QueryStringKey)")] @(Raw(partialParam.TypeHighLevel)) @(partialParam.ClsName) { get; set; }</text>
 		}
 	}
 <text>	}
@@ -85,7 +86,8 @@ namespace Nest
 		// values part of the url path
 @foreach (var part in method.Url.ExposedApiParts)
 {
-<text>		@(Raw(part.ClrTypeName)) @(Raw(method.InterfaceType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>", part.ClrTypeName)))("@(part.Name)");
+<text>		[IgnoreDataMember]
+		@(Raw(part.ClrTypeName)) @(Raw(method.InterfaceType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>", part.ClrTypeName)))("@(part.Name)");
 </text>
 }
 
