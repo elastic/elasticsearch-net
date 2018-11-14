@@ -5,7 +5,7 @@ using Tests.Domain;
 
 namespace Tests.Benchmarking
 {
-	[BenchmarkConfig(100)]
+	//[BenchmarkConfig(100)]
 	public class FieldResolverBenchmarkTests
 	{
 		private static readonly Field InferredField = Infer.Field<Project>(p => p.Name);

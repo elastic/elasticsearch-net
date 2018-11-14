@@ -5,7 +5,7 @@ using Tests.Domain;
 
 namespace Tests.Benchmarking
 {
-	[BenchmarkConfig(100)]
+	//[BenchmarkConfig(100)]
 	public class PropertyNameResolverBenchmarkTests
 	{
 		private static readonly PropertyName InferredPropertyName = Infer.Property<Project>(p => p.Name);

@@ -13,6 +13,7 @@ using BenchmarkDotNet.Running;
 using Elastic.BenchmarkDotNetExporter;
 using LibGit2Sharp;
 using Tests.Benchmarking.Framework;
+using RunMode = BenchmarkDotNet.Jobs.RunMode;
 
 namespace Tests.Benchmarking
 {
@@ -40,20 +41,38 @@ namespace Tests.Benchmarking
 
 		public static int Main(string[] arguments)
 		{
+
+
 			Console.WriteLine($"Tests.Benchmarking: [{Branch}]@({Commit}) : {CommitMessage}");
+			var config = CreateDefaultConfig();
 			if (arguments.Any() && arguments[0].Equals("--all", StringComparison.OrdinalIgnoreCase))
 			{
 				Console.WriteLine("Running all the benchmarks");
-				return RunAllBenchmarks(arguments.Skip(1).ToArray());
+				return RunAllBenchmarks(config, arguments.Skip(1).ToArray());
 			}
 
 			Console.WriteLine("Running the interactive benchmark switcher.");
 			var benchmarkSwitcher = new BenchmarkSwitcher(GetBenchmarkTypes());
-			benchmarkSwitcher.Run(arguments);
+			config = config.With(MarkdownExporter.GitHub);
+			benchmarkSwitcher.Run(arguments, config);
 			return 0;
 		}
 
-		private static int RunAllBenchmarks(string [] arguments)
+		private static IConfig CreateDefaultConfig()
+		{
+			var jobs = new[]
+			{
+				Job.ShortRun.With(Runtime.Core).With(Jit.RyuJit),
+				Job.ShortRun.With(Runtime.Clr).With(Jit.RyuJit),
+				Job.ShortRun.With(Runtime.Clr).With(Jit.LegacyJit),
+			};
+			var config = DefaultConfig.Instance
+				.With(jobs)
+				.With(MemoryDiagnoser.Default);
+			return config;
+		}
+
+		private static int RunAllBenchmarks(IConfig config, string[] arguments)
 		{
 			var url = arguments.Length > 0 ? arguments[0] : null;
 			var username = arguments.Length > 1 ? arguments[1] : null;
@@ -63,16 +82,6 @@ namespace Tests.Benchmarking
 			var exporter = !string.IsNullOrEmpty(url) ? new ElasticsearchBenchmarkExporter(url, username, password, Commit, Branch) : null;
 			foreach (var benchmarkType in GetBenchmarkTypes())
 			{
-				var runCount = benchmarkType.GetCustomAttribute<BenchmarkConfigAttribute>()?.RunCount ?? 1;
-				var jobs = new[]
-				{
-					Job.Dry.With(Runtime.Core).With(Jit.RyuJit).WithIterationCount(runCount),
-					Job.Dry.With(Runtime.Clr).With(Jit.RyuJit).WithIterationCount(runCount),
-					Job.Dry.With(Runtime.Clr).With(Jit.LegacyJit).WithIterationCount(runCount)
-				};
-				var config = DefaultConfig.Instance
-					.With(jobs)
-					.With(MemoryDiagnoser.Default);
 				if (exporter != null) config = config.With(exporter);
 				BenchmarkRunner.Run(benchmarkType, config);
 			}

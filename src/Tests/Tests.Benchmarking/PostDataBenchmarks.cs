@@ -10,7 +10,7 @@ using Tests.Benchmarking.Framework;
 
 namespace Tests.Benchmarking
 {
-	[BenchmarkConfig(1000)]
+	//[BenchmarkConfig(1000)]
 	public class PostDataBenchmarks
 	{
 		private readonly PostData _postDataOfBytes;

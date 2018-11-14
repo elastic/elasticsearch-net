@@ -41,6 +41,7 @@ packages/*
 paket.exe
 paket-files/*.cached
 
+BenchmarkDotNet.Artifacts
 build/*
 !build/tools
 !build/keys
