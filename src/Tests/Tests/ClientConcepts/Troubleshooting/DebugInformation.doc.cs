@@ -8,6 +8,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Client;
+using Tests.Core.Client.Settings;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
@@ -40,6 +41,36 @@ namespace Tests.ClientConcepts.Troubleshooting
 			);
 
 			response.DebugInformation.Should().Contain("Valid NEST response");
+		}
+		//hide
+		[U] public void PasswordIsNotExposedInDebugInformation()
+		{
+			// hide
+			var client = new ElasticClient(new AlwaysInMemoryConnectionSettings()
+				.DefaultIndex("index")
+				.BasicAuthentication("user1", "pass2")
+			);
+			var response = client.Search<Project>(s => s
+				.Query(q => q
+					.MatchAll()
+				)
+			);
+			response.DebugInformation.Should().NotContain("pass2");
+		}
+		//hide
+		[U] public void PasswordIsNotExposedInDebugInformationWhenPartOfUrl()
+		{
+			// hide
+			var pool = new SingleNodeConnectionPool(new Uri("http://user1:pass2@localhost:9200"));
+			var client = new ElasticClient(new ConnectionSettings(pool, new InMemoryConnection())
+				.DefaultIndex("index")
+			);
+			var response = client.Search<Project>(s => s
+				.Query(q => q
+					.MatchAll()
+				)
+			);
+			response.DebugInformation.Should().NotContain("pass2");
 		}
 		/**
 		 * This can be useful in tracking down numerous problems and can also be useful when filing an
