@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,6 +12,32 @@ namespace ApiGenerator
 		private static string _root = null;
 
 		public static readonly Assembly Assembly = typeof(ApiGenerator).Assembly;
+
+		private static string Root
+		{
+			get
+			{
+				if (_root != null) return _root;
+
+				var currentDirectory = Directory.GetCurrentDirectory();
+				var directoryInfo = new DirectoryInfo(currentDirectory);
+
+				var runningAsDnx =
+					directoryInfo.Name == "ApiGenerator" &&
+					directoryInfo.Parent != null &&
+					directoryInfo.Parent.Name == "CodeGeneration";
+
+				_root = runningAsDnx ? "" : @"..\..\..\";
+				return _root;
+			}
+		}
+
+		public static string EsNetFolder { get; } = $@"{Root}..\..\..\src\Elasticsearch.Net\";
+		public static string LastDownloadedVersionFile { get; } = Path.Combine(Root, "last_downloaded_version.txt");
+
+		public static string NestFolder { get; } = $@"{Root}..\..\..\src\Nest\";
+		public static string RestSpecificationFolder { get; } = $@"{Root}RestSpecification\";
+		public static string ViewFolder { get; } = $@"{Root}Views\";
 
 		public static readonly Dictionary<string, string> ApiNameMapping =
 			(from f in new DirectoryInfo(NestFolder).GetFiles("*.cs", SearchOption.AllDirectories)
@@ -48,31 +75,5 @@ namespace ApiGenerator
 				select new { Key = Regex.Replace(c, "<.*$", ""), Value = Regex.Replace(c, @"^.*?(?:(\<.+>).*?)?$", "$1") })
 			.DistinctBy(v => v.Key)
 			.ToDictionary(k => k.Key, v => v.Value);
-
-
-		public static string EsNetFolder { get; } = $@"{Root}..\..\..\src\Elasticsearch.Net\";
-		public static string LastDownloadedVersionFile { get; } = Path.Combine(Root, "last_downloaded_version.txt");
-
-		public static string NestFolder { get; } = $@"{Root}..\..\..\src\Nest\";
-		public static string RestSpecificationFolder { get; } = $@"{Root}RestSpecification\";
-		public static string ViewFolder { get; } = $@"{Root}Views\";
-
-		private static string Root
-		{
-			get
-			{
-				if (_root != null) return _root;
-
-				var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
-
-				var runningAsDnx =
-					directoryInfo.Name == "ApiGenerator" &&
-					directoryInfo.Parent != null &&
-					directoryInfo.Parent.Name == "CodeGeneration";
-
-				_root = runningAsDnx ? "" : @"..\..\..\";
-				return _root;
-			}
-		}
 	}
 }
