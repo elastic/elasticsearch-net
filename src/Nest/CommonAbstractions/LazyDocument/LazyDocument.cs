@@ -29,18 +29,18 @@ namespace Nest
 	{
 		private readonly IJsonFormatterResolver _formatterResolver;
 
-		internal LazyDocument(ArraySegment<byte> arraySegment, IJsonFormatterResolver formatterResolver)
+		internal LazyDocument(byte[] bytes, IJsonFormatterResolver formatterResolver)
 		{
-			ArraySegment = arraySegment;
+			Bytes = bytes;
 			_formatterResolver = formatterResolver;
 		}
 
-		internal ArraySegment<byte> ArraySegment { get; }
+		internal byte[] Bytes { get; }
 
 		/// <inheritdoc />
 		public T As<T>()
 		{
-			var reader = new JsonReader(ArraySegment.Array, ArraySegment.Offset);
+			var reader = new JsonReader(Bytes);
 			var formatter = new SourceFormatter<T>();
 			return formatter.Deserialize(ref reader, _formatterResolver);
 		}
@@ -48,7 +48,7 @@ namespace Nest
 		/// <inheritdoc />
 		public object As(Type objectType)
 		{
-			var reader = new JsonReader(ArraySegment.Array, ArraySegment.Offset);
+			var reader = new JsonReader(Bytes);
 			// TODO: Non generic SourceFormatter equivalent
 			return JsonSerializer.NonGeneric.Deserialize(objectType, ref reader, _formatterResolver);
 		}

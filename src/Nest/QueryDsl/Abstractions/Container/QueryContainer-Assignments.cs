@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -52,6 +53,10 @@ namespace Nest
 		private ITermsSetQuery _termsSet;
 		private IWildcardQuery _wildcard;
 
+		[IgnoreDataMember]
+		private IQueryContainer Self => this;
+
+		[IgnoreDataMember]
 		internal IQuery ContainedQuery { get; set; }
 
 		IBoolQuery IQueryContainer.Bool
@@ -239,8 +244,6 @@ namespace Nest
 			get => _script;
 			set => _script = Set(value);
 		}
-
-		private IQueryContainer Self => this;
 
 		ISimpleQueryStringQuery IQueryContainer.SimpleQueryString
 		{

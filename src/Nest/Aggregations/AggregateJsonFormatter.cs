@@ -584,7 +584,7 @@ namespace Nest
 			var scriptedMetric = reader.ReadNextBlockSegment();
 			reader.ReadNext();
 			if (scriptedMetric != default(ArraySegment<byte>))
-				return new ScriptedMetricAggregate(new LazyDocument(scriptedMetric, formatterResolver));
+				return new ScriptedMetricAggregate(new LazyDocument(scriptedMetric.ToArray(), formatterResolver));
 
 			return valueMetric;
 		}

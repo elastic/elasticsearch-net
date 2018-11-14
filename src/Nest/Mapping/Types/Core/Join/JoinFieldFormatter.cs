@@ -59,7 +59,7 @@ namespace Nest
 					relationNameFormatter.Serialize(ref writer, child.Name, formatterResolver);
 					writer.WriteValueSeparator();
 					writer.WritePropertyName("parent");
-					var id = (child.Parent as IUrlParameter)?.GetString(((ElasticsearchFormatterResolver)formatterResolver).Settings);
+					var id = (child.Parent as IUrlParameter)?.GetString(formatterResolver.GetConnectionSettings());
 					writer.WriteString(id);
 					writer.WriteEndObject();
 					break;

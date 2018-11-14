@@ -1,81 +1,84 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchRequest>))]
+	[ReadAs(typeof(SearchRequest))]
 	public partial interface ISearchRequest : ICovariantSearchRequest
 	{
-		[JsonProperty("aggs")]
+		[DataMember(Name ="aggs")]
 		AggregationDictionary Aggregations { get; set; }
 
-		[JsonProperty("collapse")]
+		[DataMember(Name ="collapse")]
 		IFieldCollapse Collapse { get; set; }
 
-		[JsonProperty("explain")]
+		[DataMember(Name ="explain")]
 		bool? Explain { get; set; }
 
-		[JsonProperty("from")]
+		[DataMember(Name ="from")]
 		int? From { get; set; }
 
-		[JsonProperty("highlight")]
+		[DataMember(Name ="highlight")]
 		IHighlight Highlight { get; set; }
 
-		[JsonProperty("indices_boost")]
+		[DataMember(Name ="indices_boost")]
 		[JsonConverter(typeof(IndicesBoostJsonConverter))]
 		IDictionary<IndexName, double> IndicesBoost { get; set; }
 
-		[JsonProperty("min_score")]
+		[DataMember(Name ="min_score")]
 		double? MinScore { get; set; }
 
-		[JsonProperty("post_filter")]
+		[DataMember(Name ="post_filter")]
 		QueryContainer PostFilter { get; set; }
 
-		[JsonProperty("profile")]
+		[DataMember(Name ="profile")]
 		bool? Profile { get; set; }
 
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		QueryContainer Query { get; set; }
 
-		[JsonProperty("rescore")]
+		[DataMember(Name ="rescore")]
 		IList<IRescore> Rescore { get; set; }
 
-		[JsonProperty("script_fields")]
+		[DataMember(Name ="script_fields")]
 		IScriptFields ScriptFields { get; set; }
 
-		[JsonProperty("search_after")]
+		[DataMember(Name ="search_after")]
 		IList<object> SearchAfter { get; set; }
 
-		[JsonProperty("size")]
+		[DataMember(Name ="size")]
 		int? Size { get; set; }
 
-		[JsonProperty("slice")]
+		[DataMember(Name ="slice")]
 		ISlicedScroll Slice { get; set; }
 
-		[JsonProperty("sort")]
+		[DataMember(Name ="sort")]
 		IList<ISort> Sort { get; set; }
 
-		[JsonProperty("_source")]
+		[DataMember(Name ="_source")]
 		Union<bool, ISourceFilter> Source { get; set; }
 
-		[JsonProperty("suggest")]
+		[DataMember(Name ="suggest")]
 		ISuggestContainer Suggest { get; set; }
 
-		[JsonProperty("terminate_after")]
+		[DataMember(Name ="terminate_after")]
 		long? TerminateAfter { get; set; }
 
-		[JsonProperty("timeout")]
+		[DataMember(Name ="timeout")]
 		string Timeout { get; set; }
 
-		[JsonProperty("track_scores")]
+		[DataMember(Name ="track_scores")]
 		bool? TrackScores { get; set; }
 
-		[JsonProperty("version")]
+		[DataMember(Name ="version")]
 		bool? Version { get; set; }
 	}
 
+	[ReadAs(typeof(SearchRequest<>))]
 	public partial interface ISearchRequest<T> : ISearchRequest { }
 
 	public partial class SearchRequest
@@ -119,7 +122,7 @@ namespace Nest
 		protected sealed override void Initialize() => TypedKeys = true;
 	}
 
-	public partial class SearchRequest<T>
+	public partial class SearchRequest<T> : ISearchRequest<T>
 	{
 		Type ICovariantSearchRequest.ClrType => typeof(T);
 	}

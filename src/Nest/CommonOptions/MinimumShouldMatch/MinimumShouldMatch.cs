@@ -1,9 +1,14 @@
 ﻿using System;
 using Newtonsoft.Json;
+using Utf8Json;
+using JsonReader = Newtonsoft.Json.JsonReader;
+using JsonSerializer = Newtonsoft.Json.JsonSerializer;
+using JsonWriter = Newtonsoft.Json.JsonWriter;
 
 namespace Nest
 {
 	[ContractJsonConverter(typeof(MinimumShouldMatchJsonConverter))]
+	[JsonFormatter(typeof(MinimumShouldMatchFormatter))]
 	public class MinimumShouldMatch : Union<int?, string>
 	{
 		public MinimumShouldMatch(int count) : base(count) { }

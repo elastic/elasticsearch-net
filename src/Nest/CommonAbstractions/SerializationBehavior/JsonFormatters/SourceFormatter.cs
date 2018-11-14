@@ -9,7 +9,7 @@ namespace Nest
 
 		public T Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var settings = ((ElasticsearchFormatterResolver)formatterResolver).Settings;
+			var settings = formatterResolver.GetConnectionSettings();
 
 			// avoid deserialization through stream when not using custom source serializer
 			if (ReferenceEquals(settings.SourceSerializer, settings.RequestResponseSerializer))
@@ -22,7 +22,7 @@ namespace Nest
 
 		public void Serialize(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver)
 		{
-			var settings = ((ElasticsearchFormatterResolver)formatterResolver).Settings;
+			var settings = formatterResolver.GetConnectionSettings();
 
 			// avoid serialization to bytes when not using custom source serializer
 			if (ReferenceEquals(settings.SourceSerializer, settings.RequestResponseSerializer))

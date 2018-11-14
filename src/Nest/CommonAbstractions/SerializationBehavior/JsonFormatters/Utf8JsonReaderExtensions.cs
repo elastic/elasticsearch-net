@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 using Utf8Json;
 
 namespace Nest
@@ -23,6 +24,21 @@ namespace Nest
 
 			reader.ReadNext();
 			return null;
+		}
+	}
+
+	internal static class ArraySegmentBytesExtensions
+	{
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsDouble(this ref ArraySegment<byte> arraySegment)
+		{
+			for (var i = arraySegment.Offset; i < arraySegment.Count; i++)
+			{
+				if (arraySegment.Array[i] == 48)
+					return true;
+			}
+
+			return false;
 		}
 	}
 }
