@@ -23,7 +23,7 @@ namespace Nest
 
 			if (value.Document != null)
 			{
-				var settings = ((ElasticsearchFormatterResolver)formatterResolver).Settings;
+				var settings = formatterResolver.GetConnectionSettings();
 				var documentId = settings.Inferrer.Id(value.Document.GetType(), value.Document);
 				writer.WriteString(documentId);
 			}

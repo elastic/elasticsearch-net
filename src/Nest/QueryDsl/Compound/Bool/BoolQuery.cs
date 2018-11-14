@@ -1,39 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<BoolQuery>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[ReadAs(typeof(BoolQuery))]
 	public interface IBoolQuery : IQuery
 	{
 		/// <summary>
 		/// The clause (query) which is to be used as a filter (in filter context).
 		/// </summary>
-		[JsonProperty("filter", DefaultValueHandling = DefaultValueHandling.Ignore)]
+		[DataMember(Name = "filter")]
 		IEnumerable<QueryContainer> Filter { get; set; }
 
+		[IgnoreDataMember]
 		bool Locked { get; }
 
 		/// <summary>
 		/// Specifies a minimum number of the optional BooleanClauses which must be satisfied.
 		/// </summary>
-		[JsonProperty("minimum_should_match")]
+		[DataMember(Name = "minimum_should_match")]
 		MinimumShouldMatch MinimumShouldMatch { get; set; }
 
 		/// <summary>
 		/// The clause(s) that must appear in matching documents
 		/// </summary>
-		[JsonProperty("must", DefaultValueHandling = DefaultValueHandling.Ignore)]
+		[DataMember(Name = "must")]
 		IEnumerable<QueryContainer> Must { get; set; }
 
 		/// <summary>
 		/// The clause (query) must not appear in the matching documents.
 		/// Note that it is not possible to search on documents that only consists of a must_not clauses.
 		/// </summary>
-		[JsonProperty("must_not", DefaultValueHandling = DefaultValueHandling.Ignore)]
+		[DataMember(Name = "must_not")]
 		IEnumerable<QueryContainer> MustNot { get; set; }
 
 		/// <summary>
@@ -41,7 +44,7 @@ namespace Nest
 		/// document.
 		/// The minimum number of should clauses to match can be set using <see cref="MinimumShouldMatch" />.
 		/// </summary>
-		[JsonProperty("should", DefaultValueHandling = DefaultValueHandling.Ignore)]
+		[DataMember(Name = "should")]
 		IEnumerable<QueryContainer> Should { get; set; }
 	}
 

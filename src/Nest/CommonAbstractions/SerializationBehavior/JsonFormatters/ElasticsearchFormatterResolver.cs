@@ -43,7 +43,13 @@ namespace Nest
 				AttributeFormatterResolver.Instance, // [JsonFormatter]
 				ReadAsFormatterResolver.Instance,
 				NestGenericSourceTypeFormatterResolver.Instance,
+				// IL emit a resolver that registers formatters
+				DynamicCompositeResolver.Create(new IJsonFormatter[]
+				{
+					new QueryContainerCollectionFormatter(),
+				}, new IJsonFormatterResolver[0]),
 				DynamicObjectResolver.AllowPrivateExcludeNullCamelCase
+
 			};
 
 			private InnerResolver() { }

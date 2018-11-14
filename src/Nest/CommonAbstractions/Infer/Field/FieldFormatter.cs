@@ -21,7 +21,7 @@ namespace Nest
 				return;
 			}
 
-			var settings = ((ElasticsearchFormatterResolver)formatterResolver).Settings;
+			var settings = formatterResolver.GetConnectionSettings();
 			writer.WriteString(settings.Inferrer.Field(value));
 		}
 	}
