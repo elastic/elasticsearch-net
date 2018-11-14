@@ -7,7 +7,7 @@ namespace Nest
 {
 	internal class NestGenericSourceTypeFormatterResolver : IJsonFormatterResolver
 	{
-		public static NestGenericSourceTypeFormatterResolver Instance = new NestGenericSourceTypeFormatterResolver();
+		public static readonly NestGenericSourceTypeFormatterResolver Instance = new NestGenericSourceTypeFormatterResolver();
 
 		public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.Formatter;
 

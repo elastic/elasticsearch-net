@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Utf8Json;
 
 namespace Nest
@@ -13,10 +14,10 @@ namespace Nest
 				return;
 			}
 
-			var lazyDocument = (LazyDocument)value;
-
-			for (var i = lazyDocument.ArraySegment.Offset; i < lazyDocument.ArraySegment.Count; i++)
-				writer.WriteByte(lazyDocument.ArraySegment.Array[i]);
+			if (value is LazyDocument lazyDocument)
+				writer.WriteRaw(lazyDocument.Bytes);
+			else
+				writer.WriteNull();
 		}
 
 		public ILazyDocument Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -27,7 +28,8 @@ namespace Nest
 			// TODO: ensure this handles all types. May need switch () { reader.ReadNumberSegment(), etc. }
 			var arraySegment = reader.ReadNextBlockSegment();
 
-			return new LazyDocument(arraySegment, formatterResolver);
+			// copy byte array
+			return new LazyDocument(arraySegment.ToArray(), formatterResolver);
 		}
 	}
 }

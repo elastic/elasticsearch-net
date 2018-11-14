@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Utf8Json;
 
 namespace Nest
@@ -6,8 +7,8 @@ namespace Nest
 	[JsonFormatter(typeof(SqlValueJsonFormatter))]
 	public class SqlValue : LazyDocument
 	{
-		internal SqlValue(ArraySegment<byte> arraySegment, IJsonFormatterResolver formatterResolver)
-			: base(arraySegment, formatterResolver) { }
+		internal SqlValue(byte[] bytes, IJsonFormatterResolver formatterResolver)
+			: base(bytes, formatterResolver) { }
 	}
 
 	internal class SqlValueJsonFormatter : IJsonFormatter<SqlValue>
@@ -20,7 +21,7 @@ namespace Nest
 			// TODO: ensure this handles all types. May need switch () { reader.ReadNumberSegment(), etc. }
 			var arraySegment = reader.ReadNextBlockSegment();
 
-			return new SqlValue(arraySegment, formatterResolver);
+			return new SqlValue(arraySegment.ToArray(), formatterResolver);
 		}
 
 		public void Serialize(ref JsonWriter writer, SqlValue value, IJsonFormatterResolver formatterResolver)
@@ -31,8 +32,8 @@ namespace Nest
 				return;
 			}
 
-			for (var i = value.ArraySegment.Offset; i < value.ArraySegment.Count; i++)
-				writer.WriteByte(value.ArraySegment.Array[i]);
+			for (var i = 0; i < value.Bytes.Length; i++)
+				writer.WriteByte(value.Bytes[i]);
 		}
 	}
 }

@@ -2,6 +2,11 @@
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Utf8Json;
+using JsonReader = Newtonsoft.Json.JsonReader;
+using JsonSerializer = Newtonsoft.Json.JsonSerializer;
+using JsonToken = Newtonsoft.Json.JsonToken;
+using JsonWriter = Newtonsoft.Json.JsonWriter;
 
 namespace Nest
 {
@@ -66,6 +71,7 @@ namespace Nest
 	/// Controls how a multi term query such as a wildcard or prefix query, is rewritten.
 	/// </summary>
 	[JsonConverter(typeof(MultiTermQueryRewriteConverter))]
+	[JsonFormatter(typeof(MultiTermQueryRewriteFormatter))]
 	public class MultiTermQueryRewrite : IEquatable<MultiTermQueryRewrite>
 	{
 		private static readonly char[] DigitCharacters = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };

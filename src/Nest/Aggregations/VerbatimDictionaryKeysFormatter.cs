@@ -29,7 +29,7 @@ namespace Nest
 				return;
 			}
 
-			var settings = ((ElasticsearchFormatterResolver)formatterResolver).Settings;
+			var settings = formatterResolver.GetConnectionSettings();
 			var seenEntries = new Dictionary<string, TValue>(value.Count);
 
 			foreach (var entry in enumerable)

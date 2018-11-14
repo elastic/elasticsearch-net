@@ -1,5 +1,7 @@
 ﻿using System;
-using Newtonsoft.Json;
+using JsonReader = Newtonsoft.Json.JsonReader;
+using JsonSerializer = Newtonsoft.Json.JsonSerializer;
+using JsonWriter = Newtonsoft.Json.JsonWriter;
 
 namespace Nest
 {

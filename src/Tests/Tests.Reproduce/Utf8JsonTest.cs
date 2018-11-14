@@ -1,4 +1,5 @@
-﻿using Elastic.Xunit.XunitPlumbing;
+﻿using System.Text;
+using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Client;
@@ -1706,6 +1707,118 @@ namespace Tests.Reproduce {
 			searchResponse.Should().NotBeNull();
 			searchResponse.Documents.Should().NotBeNull();
 			searchResponse.Documents.Count.Should().Be(10);
+		}
+
+		[U]
+		public void SerializeMatchQuery()
+		{
+			var client = FixedResponseClient.Create(new {}, modifySettings: c => c.DisableDirectStreaming());
+
+			var searchRequest = new SearchRequest<Project>
+			{
+				Query = new MatchQuery
+				{
+					Field = Infer.Field<Project>(p => p.Name),
+					Query = "Bar"
+				}
+			};
+
+			var searchResponse = client.Search<Project>(searchRequest);
+
+			searchResponse.ApiCall.RequestBodyInBytes.Should().NotBeNull();
+			var json = Encoding.UTF8.GetString(searchResponse.ApiCall.RequestBodyInBytes);
+
+			var queryJson = @"{""query"":{""match"":{""name"":{""query"":""Bar""}}}}";
+			json.Should().NotBeNullOrEmpty().And.Be(queryJson);
+
+			searchResponse = client.Search<Project>(s => s
+				.Query(q => q
+					.Match(m => m
+						.Field(f => f.Name)
+						.Query("Bar")
+					)
+				)
+			);
+
+			searchResponse.ApiCall.RequestBodyInBytes.Should().NotBeNull();
+			json = Encoding.UTF8.GetString(searchResponse.ApiCall.RequestBodyInBytes);
+
+			json.Should().NotBeNullOrEmpty().And.Be(queryJson);
+		}
+
+		[U]
+		public void SerializeBoolQuery()
+		{
+			var client = FixedResponseClient.Create(new {}, modifySettings: c => c.DisableDirectStreaming());
+
+			var searchRequest = new SearchRequest<Project>
+			{
+				Query = new BoolQuery
+				{
+					Must = new QueryContainer[]
+					{
+						new MatchQuery
+						{
+							Field = Infer.Field<Project>(p => p.Name),
+							Query = "Bar"
+						},
+						new MatchQuery
+						{
+							Field = Infer.Field<Project>(p => p.Description),
+							Query = "Baz"
+						}
+					}
+				}
+			};
+
+			var searchResponse = client.Search<Project>(searchRequest);
+
+			searchResponse.ApiCall.RequestBodyInBytes.Should().NotBeNull();
+			var json = Encoding.UTF8.GetString(searchResponse.ApiCall.RequestBodyInBytes);
+
+			var queryJson = @"{""query"":{""bool"":{""must"":[{""match"":{""name"":{""query"":""Bar""}}},{""match"":{""description"":{""query"":""Baz""}}}]}}}";
+
+			json.Should().NotBeNullOrEmpty().And.Be(queryJson);
+
+			searchResponse = client.Search<Project>(s => s
+				.Query(q => q
+					.Bool(b => b
+						.Must(qq => qq
+							.Match(m => m
+								.Field(f => f.Name)
+								.Query("Bar")
+							), qq => qq
+							.Match(m => m
+								.Field(f => f.Description)
+								.Query("Baz")
+							)
+						)
+					)
+				)
+			);
+
+			searchResponse.ApiCall.RequestBodyInBytes.Should().NotBeNull();
+			json = Encoding.UTF8.GetString(searchResponse.ApiCall.RequestBodyInBytes);
+
+			json.Should().NotBeNullOrEmpty().And.Be(queryJson);
+
+			searchResponse = client.Search<Project>(s => s
+				.Query(q => q
+					.Match(m => m
+						.Field(f => f.Name)
+						.Query("Bar")
+					) && q
+					.Match(m => m
+						.Field(f => f.Description)
+						.Query("Baz")
+					)
+				)
+			);
+
+			searchResponse.ApiCall.RequestBodyInBytes.Should().NotBeNull();
+			json = Encoding.UTF8.GetString(searchResponse.ApiCall.RequestBodyInBytes);
+
+			json.Should().NotBeNullOrEmpty().And.Be(queryJson);
 		}
 	}
 }
