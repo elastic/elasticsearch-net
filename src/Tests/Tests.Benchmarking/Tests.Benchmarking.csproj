@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.1;net461</TargetFrameworks>
     <OutputType>Exe</OutputType>
-    <RestoreSources>https://ci.appveyor.com/nuget/benchmarkdotnet;$(RestoreSources)</RestoreSources>
+    <RestoreSources>https://ci.appveyor.com/nuget/benchmarkdotnet;https://ci.appveyor.com/nuget/elasticsearch-net-abstractions;$(RestoreSources)</RestoreSources>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <Optimize>true</Optimize>
