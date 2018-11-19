@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using Elastic.Managed.Ephemeral;
 using Elastic.Managed.Ephemeral.Tasks;
 using ICSharpCode.SharpZipLib.GZip;
@@ -45,7 +46,13 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 
 			var directoryTarget = Path.Combine(cluster.FileSystem.LocalFolder, "server_metrics");
 
-			if (Directory.Exists(directoryTarget)) return;
+			if (Directory.Exists(directoryTarget))
+			{
+				if (Directory.EnumerateFiles(directoryTarget).Any())
+					return;
+
+				MoveFiles(directoryTarget);
+			}
 
 			Directory.CreateDirectory(directoryTarget);
 			Console.WriteLine($"Unzipping machine learning sample data: {to} ...");
@@ -55,6 +62,23 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 			{
 				tarArchive.ExtractContents(directoryTarget);
 				tarArchive.Close();
+			}
+
+			MoveFiles(directoryTarget);
+		}
+
+		private void MoveFiles(string directoryTarget)
+		{
+			var filesSubDirectory = Path.Combine(directoryTarget, "files");
+			if (Directory.Exists(filesSubDirectory))
+			{
+				foreach (var file in Directory.EnumerateFiles(filesSubDirectory))
+				{
+					var fileInfo = new FileInfo(file);
+					fileInfo.MoveTo(Path.Combine(directoryTarget, fileInfo.Name));
+				}
+
+				Directory.Delete(filesSubDirectory, true);
 			}
 		}
 	}
