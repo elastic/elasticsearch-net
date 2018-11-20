@@ -72,6 +72,8 @@ ProjectSection(SolutionItems) = preProject
 	..\readme.md = ..\readme.md
 EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utf8Json", "Utf8Json\src\Utf8Json\Utf8Json.csproj", "{3DAA58E6-A2A1-4203-8BCA-89BE6AC58449}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -156,5 +158,9 @@ Global
 		{D6997ADC-E933-418E-831C-DE1A78897493}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6997ADC-E933-418E-831C-DE1A78897493}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6997ADC-E933-418E-831C-DE1A78897493}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DAA58E6-A2A1-4203-8BCA-89BE6AC58449}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DAA58E6-A2A1-4203-8BCA-89BE6AC58449}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DAA58E6-A2A1-4203-8BCA-89BE6AC58449}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DAA58E6-A2A1-4203-8BCA-89BE6AC58449}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
