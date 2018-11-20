@@ -35,7 +35,7 @@ namespace Tests.Benchmarking
 			using (var repos = new Repository(dirInfo.FullName))
 			{
 				Commit = repos.Head.Tip.Sha;
-				CommitMessage = repos.Head.Tip.Message;
+				CommitMessage = repos.Head.Tip.Message?.Trim(' ', '\t', '\r', '\n');
 				Branch = repos.Head.FriendlyName;
 				var remoteName = repos.Head.RemoteName;
 				Repository =
@@ -102,7 +102,8 @@ namespace Tests.Benchmarking
 				Password = password,
 				GitCommitSha = Commit,
 				GitBranch = Branch,
-				GitCommitMessage = CommitMessage
+				GitCommitMessage = CommitMessage,
+				GitRepositoryIdentifier = Repository
 			};
 			return new ElasticsearchBenchmarkExporter(options);
 		}
