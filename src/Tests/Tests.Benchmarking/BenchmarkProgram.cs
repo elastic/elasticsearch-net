@@ -22,6 +22,7 @@ namespace Tests.Benchmarking
 		private static string Commit { get; }
 		private static string CommitMessage { get; }
 		private static string Branch { get; }
+		private static string Repository { get; }
 
 		static Program()
 		{
@@ -36,14 +37,17 @@ namespace Tests.Benchmarking
 				Commit = repos.Head.Tip.Sha;
 				CommitMessage = repos.Head.Tip.Message;
 				Branch = repos.Head.FriendlyName;
+				var remoteName = repos.Head.RemoteName;
+				Repository =
+					repos.Network.Remotes.FirstOrDefault(r => r.Name == remoteName)?.Url
+					?? repos.Network.Remotes.FirstOrDefault()?.Url;
 			}
 		}
 
 		public static int Main(string[] arguments)
 		{
-
-
-			Console.WriteLine($"Tests.Benchmarking: [{Branch}]@({Commit}) : {CommitMessage}");
+			Console.WriteLine($"Tests.Benchmarking: [{Branch}]@({Commit}) on {Repository} : {CommitMessage} - ");
+			return 0;
 			var config = CreateDefaultConfig();
 			if (arguments.Any() && arguments[0].Equals("--all", StringComparison.OrdinalIgnoreCase))
 			{
@@ -63,8 +67,8 @@ namespace Tests.Benchmarking
 			var jobs = new[]
 			{
 				Job.ShortRun.With(Runtime.Core).With(Jit.RyuJit),
-				Job.ShortRun.With(Runtime.Clr).With(Jit.RyuJit),
-				Job.ShortRun.With(Runtime.Clr).With(Jit.LegacyJit),
+//				Job.ShortRun.With(Runtime.Clr).With(Jit.RyuJit),
+//				Job.ShortRun.With(Runtime.Clr).With(Jit.LegacyJit),
 			};
 			var config = DefaultConfig.Instance
 				.With(jobs)
@@ -79,7 +83,8 @@ namespace Tests.Benchmarking
 			var password = arguments.Length > 2 ? arguments[2] : null;
 
 			Console.WriteLine("Running in Non-Interactive mode.");
-			var exporter = !string.IsNullOrEmpty(url) ? new ElasticsearchBenchmarkExporter(url, username, password, Commit, Branch) : null;
+
+			var exporter = CreateElasticsearchExporter(url, username, password);
 			foreach (var benchmarkType in GetBenchmarkTypes())
 			{
 				if (exporter != null) config = config.With(exporter);
@@ -87,6 +92,20 @@ namespace Tests.Benchmarking
 			}
 
 			return 0;
+		}
+
+		private static ElasticsearchBenchmarkExporter CreateElasticsearchExporter(string url, string username, string password)
+		{
+			if (string.IsNullOrWhiteSpace(url)) return null;
+			var options = new ElasticsearchBenchmarkExporterOptions(url)
+			{
+				Username = username,
+				Password = password,
+				GitCommitSha = Commit,
+				GitBranch = Branch,
+				GitCommitMessage = CommitMessage
+			};
+			return new ElasticsearchBenchmarkExporter(options);
 		}
 
 
