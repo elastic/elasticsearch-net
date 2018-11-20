@@ -47,7 +47,6 @@ namespace Tests.Benchmarking
 		public static int Main(string[] arguments)
 		{
 			Console.WriteLine($"Tests.Benchmarking: [{Branch}]@({Commit}) on {Repository} : {CommitMessage} - ");
-			return 0;
 			var config = CreateDefaultConfig();
 			if (arguments.Any() && arguments[0].Equals("--all", StringComparison.OrdinalIgnoreCase))
 			{
