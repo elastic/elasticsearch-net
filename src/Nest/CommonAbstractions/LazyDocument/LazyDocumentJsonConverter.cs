@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Utf8Json;
+using Utf8Json.Internal;
 
 namespace Nest
 {
@@ -29,7 +30,7 @@ namespace Nest
 			var arraySegment = reader.ReadNextBlockSegment();
 
 			// copy byte array
-			return new LazyDocument(arraySegment.ToArray(), formatterResolver);
+			return new LazyDocument(BinaryUtil.ToArray(arraySegment), formatterResolver);
 		}
 	}
 }
