@@ -22,8 +22,6 @@ namespace Nest
 		{
 			private static readonly Dictionary<Type, Type> FormatterMap = new Dictionary<Type, Type>()
 			{
-				{ typeof(Hit<>), typeof(HitFormatter<>) },
-				{ typeof(SuggestOption<>), typeof(SuggestOptionFormatter<>) }
 			};
 
 			internal static object GetFormatter(Type t)
