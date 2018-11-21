@@ -4,11 +4,6 @@
 
 #load @"Projects.fsx"
 
-open System
-open System.IO
-open System.Diagnostics
-open System.Net
-
 open Fake
 open Projects
 

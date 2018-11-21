@@ -46,44 +46,44 @@ namespace Tests.Benchmarking
 				return Client.RequestResponseSerializer.Deserialize<BulkResponse>(ms);
 		}
 
-		[Benchmark(Description = "deserialize 1,000 items in bulk response")]
-		public BulkResponse LargeResponse()
-		{
-			using (var ms = new MemoryStream(_largeResponse))
-				return Client.RequestResponseSerializer.Deserialize<BulkResponse>(ms);
-		}
-
-		[Benchmark(Description = "deserialize 100,000 items in bulk response")]
-		public BulkResponse HugeResponse()
-		{
-			using (var ms = new MemoryStream(_hugeResponse))
-				return Client.RequestResponseSerializer.Deserialize<BulkResponse>(ms);
-		}
-
-		[Benchmark(Description = "deserialize 100,000 items in bulk response")]
-		public BulkResponse HugeResponseWithStream()
-		{
-			using (var ms = new JsonTextReader(new StreamReader(new MemoryStream(_hugeResponse))))
-				return _jsonSerializer.Deserialize<BulkResponse>(ms);
-		}
-
-		[Benchmark(Description = "deserialize 100,000 items in bulk string response")]
-		public BulkResponse HugeResponseWithString()
-		{
-			using (var reader = new JsonTextReader(new StringReader(Encoding.UTF8.GetString(_hugeResponse))))
-				return _jsonSerializer.Deserialize<BulkResponse>(reader);
-		}
-
-		[Benchmark(Description = "Baseline", Baseline = true)]
-		public BulkResponse Baseline()
-		{
-			using (var reader = new JsonTextReader(new StreamReader(new MemoryStream(_hugeResponse))))
-			{
-				while (reader.Read()) { }
-
-				return new BulkResponse();
-			}
-		}
+//		[Benchmark(Description = "deserialize 1,000 items in bulk response")]
+//		public BulkResponse LargeResponse()
+//		{
+//			using (var ms = new MemoryStream(_largeResponse))
+//				return Client.RequestResponseSerializer.Deserialize<BulkResponse>(ms);
+//		}
+//
+//		[Benchmark(Description = "deserialize 100,000 items in bulk response")]
+//		public BulkResponse HugeResponse()
+//		{
+//			using (var ms = new MemoryStream(_hugeResponse))
+//				return Client.RequestResponseSerializer.Deserialize<BulkResponse>(ms);
+//		}
+//
+//		[Benchmark(Description = "deserialize 100,000 items in bulk response")]
+//		public BulkResponse HugeResponseWithStream()
+//		{
+//			using (var ms = new JsonTextReader(new StreamReader(new MemoryStream(_hugeResponse))))
+//				return _jsonSerializer.Deserialize<BulkResponse>(ms);
+//		}
+//
+//		[Benchmark(Description = "deserialize 100,000 items in bulk string response")]
+//		public BulkResponse HugeResponseWithString()
+//		{
+//			using (var reader = new JsonTextReader(new StringReader(Encoding.UTF8.GetString(_hugeResponse))))
+//				return _jsonSerializer.Deserialize<BulkResponse>(reader);
+//		}
+//
+//		[Benchmark(Description = "Baseline", Baseline = true)]
+//		public BulkResponse Baseline()
+//		{
+//			using (var reader = new JsonTextReader(new StreamReader(new MemoryStream(_hugeResponse))))
+//			{
+//				while (reader.Read()) { }
+//
+//				return new BulkResponse();
+//			}
+//		}
 
 		private static object BulkItemResponse() => new
 		{
