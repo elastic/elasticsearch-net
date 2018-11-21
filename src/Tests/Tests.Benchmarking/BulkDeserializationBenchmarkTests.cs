@@ -7,10 +7,6 @@ using Nest;
 using Newtonsoft.Json;
 using Tests.Benchmarking.Framework;
 using Tests.Core.Client;
-#if !DOTNETCORE
-using System.Buffers;
-
-#endif
 
 namespace Tests.Benchmarking
 {
@@ -117,15 +113,5 @@ namespace Tests.Benchmarking
 				.ToArray()
 		};
 
-#if !DOTNETCORE
-		public class JsonArrayPool : IArrayPool<char>
-		{
-			public static readonly JsonArrayPool Instance = new JsonArrayPool();
-
-			public char[] Rent(int minimumLength) => ArrayPool<char>.Shared.Rent(minimumLength);
-
-			public void Return(char[] array) => ArrayPool<char>.Shared.Return(array);
-		}
-#endif
 	}
 }
