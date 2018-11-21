@@ -9,7 +9,10 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tests.Core\Tests.Core.csproj" />
-    <PackageReference Include="BenchMarkDotNet" Version="0.11.0" />
-    <PackageReference Include="System.Buffers" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.11.3" />
+    <PackageReference Include="Elastic.BenchmarkDotNetExporter" Version="0.1.0-ci20181120T172449" />
+    <PackageReference Include="LibGit2Sharp" Version="0.26.0-preview-0062" />
   </ItemGroup>
 </Project>

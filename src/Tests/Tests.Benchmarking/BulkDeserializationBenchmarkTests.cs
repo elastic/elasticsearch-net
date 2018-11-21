@@ -1,6 +1,5 @@
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using BenchmarkDotNet.Attributes;
 using Elasticsearch.Net;
@@ -8,10 +7,6 @@ using Nest;
 using Newtonsoft.Json;
 using Tests.Benchmarking.Framework;
 using Tests.Core.Client;
-#if !DOTNETCORE
-using System.Buffers;
-
-#endif
 
 namespace Tests.Benchmarking
 {
@@ -52,56 +47,44 @@ namespace Tests.Benchmarking
 				return Client.Serializer.Deserialize<BulkResponse>(ms);
 		}
 
-		[Benchmark(Description = "deserialize 1,000 items in bulk response")]
-		public BulkResponse LargeResponse()
-		{
-			using (var ms = new MemoryStream(_largeResponse))
-				return Client.Serializer.Deserialize<BulkResponse>(ms);
-		}
-
-		[Benchmark(Description = "deserialize 100,000 items in bulk response")]
-		public BulkResponse HugeResponse()
-		{
-			using (var ms = new MemoryStream(_hugeResponse))
-				return Client.Serializer.Deserialize<BulkResponse>(ms);
-		}
-
-		[Benchmark(Description = "deserialize 100,000 items in bulk response")]
-		public BulkResponse HugeResponseWithStream()
-		{
-			using (var ms = new JsonTextReader(new StreamReader(new MemoryStream(_hugeResponse))))
-				return _jsonSerializer.Deserialize<BulkResponse>(ms);
-		}
-
-		[Benchmark(Description = "deserialize 100,000 items in bulk string response")]
-		public BulkResponse HugeResponseWithString()
-		{
-			using (var reader = new JsonTextReader(new StringReader(Encoding.UTF8.GetString(_hugeResponse))))
-				return _jsonSerializer.Deserialize<BulkResponse>(reader);
-		}
-
-#if !DOTNETCORE
-		[Benchmark(Description = "deserialize 100,000 items in bulk string response with array pool")]
-		public BulkResponse HugeResponseWithStringAndArrayPool()
-		{
-			using (var reader = new JsonTextReader(new StringReader(Encoding.UTF8.GetString(_hugeResponse))))
-			{
-				reader.ArrayPool = JsonArrayPool.Instance;
-				return _jsonSerializer.Deserialize<BulkResponse>(reader);
-			}
-		}
-#endif
-
-		[Benchmark(Description = "Baseline", Baseline = true)]
-		public BulkResponse Baseline()
-		{
-			using (var reader = new JsonTextReader(new StreamReader(new MemoryStream(_hugeResponse))))
-			{
-				while (reader.Read()) { }
-
-				return new BulkResponse();
-			}
-		}
+//		[Benchmark(Description = "deserialize 1,000 items in bulk response")]
+//		public BulkResponse LargeResponse()
+//		{
+//			using (var ms = new MemoryStream(_largeResponse))
+//				return Client.RequestResponseSerializer.Deserialize<BulkResponse>(ms);
+//		}
+//
+//		[Benchmark(Description = "deserialize 100,000 items in bulk response")]
+//		public BulkResponse HugeResponse()
+//		{
+//			using (var ms = new MemoryStream(_hugeResponse))
+//				return Client.RequestResponseSerializer.Deserialize<BulkResponse>(ms);
+//		}
+//
+//		[Benchmark(Description = "deserialize 100,000 items in bulk response")]
+//		public BulkResponse HugeResponseWithStream()
+//		{
+//			using (var ms = new JsonTextReader(new StreamReader(new MemoryStream(_hugeResponse))))
+//				return _jsonSerializer.Deserialize<BulkResponse>(ms);
+//		}
+//
+//		[Benchmark(Description = "deserialize 100,000 items in bulk string response")]
+//		public BulkResponse HugeResponseWithString()
+//		{
+//			using (var reader = new JsonTextReader(new StringReader(Encoding.UTF8.GetString(_hugeResponse))))
+//				return _jsonSerializer.Deserialize<BulkResponse>(reader);
+//		}
+//
+//		[Benchmark(Description = "Baseline", Baseline = true)]
+//		public BulkResponse Baseline()
+//		{
+//			using (var reader = new JsonTextReader(new StreamReader(new MemoryStream(_hugeResponse))))
+//			{
+//				while (reader.Read()) { }
+//
+//				return new BulkResponse();
+//			}
+//		}
 
 		private static object BulkItemResponse() => new
 		{
@@ -130,16 +113,5 @@ namespace Tests.Benchmarking
 				.Select(i => BulkItemResponse())
 				.ToArray()
 		};
-
-#if !DOTNETCORE
-		public class JsonArrayPool : IArrayPool<char>
-		{
-			public static readonly JsonArrayPool Instance = new JsonArrayPool();
-
-			public char[] Rent(int minimumLength) => ArrayPool<char>.Shared.Rent(minimumLength);
-
-			public void Return(char[] array) => ArrayPool<char>.Shared.Return(array);
-		}
-#endif
 	}
 }
