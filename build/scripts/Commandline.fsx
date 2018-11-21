@@ -32,7 +32,7 @@ Targets:
 * cluster <cluster-name> [version]
   - Start a cluster defined in Tests.Core or Tests from the command line and leaves it running
     untill a key is pressed. Handy if you want to run the integration tests numerous times while developing  
-* benchmark [url] [username] [password] [non-interactive]
+* benchmark [non-interactive] [url] [username] [password] 
   - Runs a benchmark from Tests.Benchmarking and indexes the results to [url] when provided.
     If non-interactive runs all benchmarks without prompting
 
@@ -41,6 +41,7 @@ NOTE: both the `test` and `integrate` targets can be suffixed with `-all` to for
 Execution hints can be provided anywhere on the command line
 - skiptests : skip running tests as part of the target chain
 - skipdocs : skip generating documentation
+- non-interactive : make targets that run in interactive mode by default to run unassisted.
 - docs:<B> : the branch name B to use when generating documentation
 - seed:<N> : provide a seed to run the tests with.
 - random:<K><:B> : sets random K to bool B if if B is omitted will default to true
@@ -52,6 +53,7 @@ module Commandline =
 
     let private args = getBuildParamOrDefault "cmdline" "build" |> split ' '
     
+    let nonInteractive = args |> List.exists (fun x -> x = "non-interactive")
     let skipTests = args |> List.exists (fun x -> x = "skiptests")
     let skipDocs = args |> List.exists (fun x -> x = "skipdocs") || isMono
     let seed = 
@@ -75,6 +77,7 @@ module Commandline =
             fun x -> 
                 x <> "skiptests" && 
                 x <> "skipdocs" && 
+                x <> "non-interactive" && 
                 not (x.StartsWith("seed:")) && 
                 not (x.StartsWith("random:")) && 
                 not (x.StartsWith("docs:"))
@@ -152,29 +155,13 @@ module Commandline =
 
         | ["test"; testFilter] -> setBuildParam "testfilter" testFilter
 
-        | ["benchmark"; IsUrl elasticsearch; username; password; "non-interactive"] ->
-            setBuildParam "elasticsearch" elasticsearch
-            setBuildParam "nonInteractive" "1"
-            setBuildParam "username" username
-            setBuildParam "password" password
-            
-        | ["benchmark"; IsUrl elasticsearch; "non-interactive"] ->
-            setBuildParam "elasticsearch" elasticsearch
-            setBuildParam "nonInteractive" "1"
-            
-        | ["benchmark"; "non-interactive"] ->
-            setBuildParam "nonInteractive" "1"
-
         | ["benchmark"; IsUrl elasticsearch; username; password] ->
             setBuildParam "elasticsearch" elasticsearch
-            setBuildParam "nonInteractive" "0"
             setBuildParam "username" username
             setBuildParam "password" password
-
         | ["benchmark"; IsUrl elasticsearch] ->
             setBuildParam "elasticsearch" elasticsearch
-            setBuildParam "nonInteractive" "0"
-
+            
         | ["profile"; IsUrl elasticsearch] ->
             setBuildParam "elasticsearch" elasticsearch
 

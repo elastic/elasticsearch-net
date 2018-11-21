@@ -59,10 +59,7 @@ Target "Profile" <| fun _ ->
 
 Target "Integrate" Tests.RunIntegrationTests
 
-Target "Benchmark" <| fun _ ->
-    let runInteractive = ((getBuildParam "nonInteractive") <> "1")
-    Benchmarker.Run(runInteractive)
-    Benchmarker.IndexResults (url, username, password)
+Target "Benchmark" Benchmarker.Run
 
 Target "InternalizeDependencies" Build.ILRepack
 

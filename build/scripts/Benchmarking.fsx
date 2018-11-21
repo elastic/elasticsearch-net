@@ -1,51 +1,32 @@
-﻿#r "../../packages/build/NEST/lib/net46/Nest.dll"
-#r "../../packages/build/Elasticsearch.Net/lib/net46/Elasticsearch.Net.dll"
-#r "../../packages/build/Newtonsoft.Json/lib/net45/Newtonsoft.Json.dll"
-#r "../../packages/build/FSharp.Data/lib/net45/FSharp.Data.dll"
-#I @"../../packages/build/FAKE/tools"
+﻿#I @"../../packages/build/FAKE/tools"
 #r @"FakeLib.dll"
 #nowarn "0044" //TODO sort out FAKE 5
 
-open Fake
-
+#load @"Commandline.fsx"
 #load @"Paths.fsx"
 
-open System
+open Fake
 open System.IO
-open System.Linq
-open System.Diagnostics
 open Paths
-
-open FSharp.Data
-
-open Nest
-open Elasticsearch.Net
-open Newtonsoft.Json
-open Git.Branches
-open Git.Information
+open Commandline
 
 module Benchmarker =
 
-    let pipelineName = "benchmark-pipeline"
-    let indexName = IndexName.op_Implicit("benchmark-reports")
-    let typeName = TypeName.op_Implicit("benchmarkreport")
-    
     let private testsProjectDirectory = Path.GetFullPath(Paths.TestsSource("Tests.Benchmarking"))
 
-    let Run(runInteractive:bool) =
-
+    let Run() =
+        let runInteractive = not Commandline.nonInteractive
         let url = getBuildParam "elasticsearch"
         let username = getBuildParam "username"
         let password = getBuildParam "password"
+        let hasUrl = not <| isNullOrEmpty url
+        let hasCredentials = not <| (isNullOrEmpty username && isNullOrEmpty password)
+        let runCommandPrefix = "run -f netcoreapp2.1 -c Release"
+        let runCommand =
+            match (runInteractive, hasUrl, hasCredentials) with
+            | (false, true, true) -> sprintf "%s -- --all \"%s\" \"%s\" \"%s\"" runCommandPrefix url username password
+            | (false, true, false) -> sprintf "%s -- --all \"%s\"" runCommandPrefix url
+            | (false, _, _) -> sprintf "%s -- --all" runCommandPrefix 
+            | (true, _, _) -> runCommandPrefix
         
-        try
-            if runInteractive then
-                DotNetCli.RunCommand(fun p ->
-                    { p with
-                        WorkingDir = testsProjectDirectory
-                    }) "run -f netcoreapp2.1 -c Release"
-             else
-                DotNetCli.RunCommand(fun p ->
-                    { p with
-                        WorkingDir = testsProjectDirectory
-                    }) "run -f netcoreapp2.1 -c Release non-interactive"
+        DotNetCli.RunCommand(fun p -> { p with WorkingDir = testsProjectDirectory }) runCommand
