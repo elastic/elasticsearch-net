@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using Utf8Json;
+using Utf8Json.Internal;
 
 namespace Nest
 {
@@ -584,7 +585,7 @@ namespace Nest
 			var scriptedMetric = reader.ReadNextBlockSegment();
 			reader.ReadNext();
 			if (scriptedMetric != default(ArraySegment<byte>))
-				return new ScriptedMetricAggregate(new LazyDocument(scriptedMetric.ToArray(), formatterResolver));
+				return new ScriptedMetricAggregate(new LazyDocument(BinaryUtil.ToArray(scriptedMetric), formatterResolver));
 
 			return valueMetric;
 		}
