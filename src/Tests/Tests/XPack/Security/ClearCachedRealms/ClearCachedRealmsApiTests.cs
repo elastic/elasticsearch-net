@@ -45,7 +45,7 @@ namespace Tests.XPack.Security.ClearCachedRealms
 
 		protected override void ExpectResponse(IClearCachedRealmsResponse response)
 		{
-			response.ClusterName.Should().StartWith("xpack-cluster-");
+			response.ClusterName.Should().StartWith("ephemeral-cluster-");
 			response.Nodes.Should().NotBeEmpty().And.HaveCount(1);
 			var node = response.Nodes.First().Value;
 			node.Should().NotBeNull();
