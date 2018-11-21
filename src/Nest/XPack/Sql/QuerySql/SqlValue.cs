@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Utf8Json;
+using Utf8Json.Internal;
 
 namespace Nest
 {
@@ -21,7 +22,7 @@ namespace Nest
 			// TODO: ensure this handles all types. May need switch () { reader.ReadNumberSegment(), etc. }
 			var arraySegment = reader.ReadNextBlockSegment();
 
-			return new SqlValue(arraySegment.ToArray(), formatterResolver);
+			return new SqlValue(BinaryUtil.ToArray(arraySegment), formatterResolver);
 		}
 
 		public void Serialize(ref JsonWriter writer, SqlValue value, IJsonFormatterResolver formatterResolver)
