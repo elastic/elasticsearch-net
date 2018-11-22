@@ -72,9 +72,9 @@ Target "Version" <| fun _ ->
 
 Target "Release" <| fun _ -> 
     Release.NugetPack()   
-    Versioning.ValidateArtifacts()
-    StrongName.ValidateDllsInNugetPackage()
-    Release.GenerateNotes()
+    //Versioning.ValidateArtifacts()
+    //StrongName.ValidateDllsInNugetPackage()
+    //Release.GenerateNotes()
 
 Target "TestNugetPackage" <| fun _ -> 
     //RunReleaseUnitTests restores the canary nugetpackages in tests, since these end up being cached
@@ -155,8 +155,10 @@ Target "Cluster" <| fun _ ->
   =?> ("FullBuild", Commandline.needsFullBuild)
   ==> "Integrate"
 
-"Build"
-  ==> "Release"
+"Release"
+
+//"Build"
+//  ==> "Release"
   
 "Touch"
 "Start"

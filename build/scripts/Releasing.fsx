@@ -1,5 +1,4 @@
-﻿#I @"../../packages/build/FAKE/tools"
-#I @"../../packages/build/Octokit/lib/net45"
+﻿#I @"../../packages/build/Octokit/lib/net45"
 #r @"FakeLib.dll"
 #r "Octokit.dll"
 #nowarn "0044" //TODO sort out FAKE 5
@@ -14,7 +13,9 @@ open System.Collections.Generic
 open System.IO
 open System.Linq
 open System.Text
+open System.Xml
 open System.Xml.Linq
+open System.Xml.XPath
 open Microsoft.FSharp.Quotations
 open Microsoft.FSharp.Quotations.Patterns
 open Fake
@@ -25,66 +26,118 @@ open Projects
 open Tooling
 open Versioning
 
-module Release = 
-    let NugetPack() = 
+module Release =
+    
+    let private jsonNetVersionCurrent p = 
+        let xName n = XName.op_Implicit n
+        use stream = File.OpenRead <| Paths.ProjFile p
+        let doc = XDocument.Load(stream)
+        let packageReference = 
+            doc.Descendants(xName "PackageReference")
+               .FirstOrDefault(fun e -> e.Attribute(xName "Include").Value = "Newtonsoft.Json")
+        if (packageReference <> null) then packageReference.Attribute(xName "Version").Value
+        else String.Empty
+        
+    let private jsonNetVersionNext p =
+        match jsonNetVersionCurrent p with
+        | "" -> String.Empty
+        | version -> 
+            let semanticVersion = SemVerHelper.parse version
+            sprintf "%i" (semanticVersion.Major + 1)
+            
+    let private addKeyValue (e:Expr<string>) (builder:StringBuilder) =
+        // the binding for this tuple looks like key/value should 
+        // be round the other way (but it's correct as is)...
+        let (value,key) = 
+            match e with
+            | PropertyGet (eo, pi, li) -> (pi.Name, (pi.GetValue(e) |> string))
+            | ValueWithName (obj,ty,nm) -> ((obj |> string), nm)
+            | _ -> failwith (sprintf "%A is not a let-bound value. %A" e (e.GetType()))
+            
+        if (isNotNullOrEmpty value) then builder.AppendFormat("{0}=\"{1}\";", key, value)
+        else builder
+            
+    let NugetPack() =
+        let currentVersion = sprintf "%O" <| Versioning.CurrentVersion
+        let currentMajorVersion = sprintf "%i" <| Versioning.CurrentVersion.Major
+        let nextMajorVersion = sprintf "%i" <| Versioning.CurrentVersion.Major + 1
+        let year = sprintf "%i" DateTime.UtcNow.Year
+        
+        CreateDir Paths.NugetOutput
+            
         DotNetProject.AllPublishable
         |> Seq.iter(fun p ->
-            CreateDir Paths.NugetOutput
 
-            let name = p.Name;
-            let nuspec = (sprintf @"build/%s.nuspec" name)
-            let nugetOutFile =  Paths.Output(sprintf "%s.%s.nupkg" name (Versioning.CurrentVersion.ToString()))
-
-            let nextMajorVersion = 
-                let nextMajor = Versioning.CurrentVersion.Major + 1
-                sprintf "%i" nextMajor
-
-            let year = sprintf "%i" DateTime.UtcNow.Year
-
-            let jsonDotNetCurrentVersion = 
-                let xName n = XName.op_Implicit n
-                use stream = File.OpenRead <| Paths.ProjFile p
-                let doc = XDocument.Load(stream)
-                let packageReference = 
-                    doc.Descendants(xName "PackageReference")
-                       .FirstOrDefault(fun e -> e.Attribute(xName "Include").Value = "Newtonsoft.Json")
-                if (packageReference <> null) then packageReference.Attribute(xName "Version").Value
-                else String.Empty
-                
-            let jsonDotNetNextVersion = 
-                match jsonDotNetCurrentVersion with
-                | "" -> String.Empty
-                | version -> 
-                    let semanticVersion = SemVerHelper.parse version
-                    sprintf "%i" (semanticVersion.Major + 1) 
+            let jsonDotNetCurrentVersion = jsonNetVersionCurrent p
+            let jsonDotNetNextVersion = jsonNetVersionNext p
 
             let properties =
-                let addKeyValue (e:Expr<string>) (builder:StringBuilder) =
-                    // the binding for this tuple looks like key/value should 
-                    // be round the other way (but it's correct as is)...
-                    let (value,key) = 
-                        match e with
-                        | PropertyGet (eo, pi, li) -> (pi.Name, (pi.GetValue(e) |> string))
-                        | ValueWithName (obj,ty,nm) -> ((obj |> string), nm)
-                        | _ -> failwith (sprintf "%A is not a let-bound value. %A" e (e.GetType()))
-                        
-                    if (isNotNullOrEmpty value) then builder.AppendFormat("{0}=\"{1}\";", key, value)
-                    else builder
                 new StringBuilder()
+                |> addKeyValue <@currentMajorVersion@>
                 |> addKeyValue <@nextMajorVersion@>
                 |> addKeyValue <@year@>
                 |> addKeyValue <@jsonDotNetCurrentVersion@>
                 |> addKeyValue <@jsonDotNetNextVersion@>
                 |> toText
-            
-            Tooling.Nuget.Exec [ "pack"; nuspec; 
-                                 "-version"; Versioning.CurrentVersion.ToString(); 
+                
+            let name = p.NugetId;
+            let nuspec = (sprintf @"build/%s.nuspec" name)
+            let nugetOutFile = Paths.Output(sprintf "%s.%s.nupkg" name (Versioning.CurrentVersion.ToString()))
+            let pack file = 
+                Tooling.Nuget.Exec [ "pack"; nuspec; 
+                                 "-version"; currentVersion; 
                                  "-outputdirectory"; Paths.BuildOutput; 
                                  "-properties"; properties; 
                                ] |> ignore
-            traceFAKE "%s" Paths.BuildOutput
-            MoveFile Paths.NugetOutput nugetOutFile
+                traceFAKE "%s" Paths.BuildOutput
+                MoveFile Paths.NugetOutput nugetOutFile
+            
+            pack nuspec
+
+            let newId = sprintf "%s%s" name currentMajorVersion;
+            let nuspecVersioned = sprintf @"build/%s.nuspec" newId
+
+            let xName n = XName.op_Implicit n
+            use stream = File.OpenRead <| nuspec
+            let doc = XDocument.Load(stream)
+            let nsManager = new XmlNamespaceManager(doc.CreateNavigator().NameTable);
+            nsManager.AddNamespace("x", "http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd")
+
+            doc.XPathSelectElement("/x:package/x:metadata/x:id", nsManager).Value <- newId
+            let titleNode = doc.XPathSelectElement("/x:package/x:metadata/x:title", nsManager) 
+            titleNode.Value <- sprintf "%s namespaced client, can be installed alongside %s" newId name
+            let xmlConfig = sprintf "/x:package//x:file[contains(@src, '%s.xml')]" p.Name
+            doc.XPathSelectElement(xmlConfig, nsManager).Remove();
+
+            let dll n = sprintf "%s.dll" n
+            let rewriteDllFile name = 
+                let d = dll name
+                let r = (dll (p.Versioned name (Some currentMajorVersion)))
+                let x = sprintf "/x:package//x:file[contains(@src, '%s')]" d
+                trace x
+                let dllNode = doc.XPathSelectElement(x, nsManager)
+                let src = dllNode.Attribute(xName "src");
+                src.Value <- replace d r src.Value 
+
+            match p with 
+            | Project Nest -> 
+                doc.XPathSelectElement("/x:package/x:metadata//x:dependency[@id='Elasticsearch.Net']", nsManager).Remove()
+                rewriteDllFile p.Name
+            | Project ElasticsearchNet ->
+                rewriteDllFile p.Name
+                ignore()
+            | Project NestJsonNetSerializer -> 
+                let nestDep = doc.XPathSelectElement("/x:package/x:metadata//x:dependency[@id='NEST']", nsManager);
+                let idAtt = nestDep.Attribute(xName "id");
+                idAtt.Value <- sprintf "NEST%s" currentMajorVersion
+                rewriteDllFile p.Name
+
+
+            doc.Save(nuspecVersioned) 
+
+             
         )
+
 
     let PublishCanaryBuild accessKey feed = 
         !! "build/output/_packages/*-ci*.nupkg"
@@ -156,8 +209,3 @@ module Release =
               
         sprintf "### [View the full list of issues and PRs](%s/issues?utf8=%%E2%%9C%%93&q=label%%3A%s)" Paths.Repository label
         |> writer.WriteLine
-        
-                           
-                      
-        
-        

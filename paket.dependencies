@@ -5,7 +5,6 @@ group build
     source https://www.nuget.org/api/v2
 
     nuget FAKE prerelease
-    nuget ILRepack prerelease
     nuget FSharp.Data 
     nuget Newtonsoft.Json
     nuget Mono.Cecil prerelease
@@ -14,3 +13,8 @@ group build
     nuget Nest framework: net46
 	
 	nuget Octokit
+	
+    nuget ILRepack 2.0.16
+	
+    source https://ci.appveyor.com/nuget/assemblyrewriter
+    clitool assembly-rewriter

@@ -12,10 +12,8 @@
 
 open System 
 open System.IO
-open System.Reflection
 open Fake 
 open FSharp.Data 
-open Mono.Cecil
 
 open Paths
 open Projects
@@ -78,100 +76,42 @@ module Build =
         CleanDir Paths.BuildOutput
         DotNetCli.RunCommand (fun p -> { p with TimeOut = TimeSpan.FromMinutes(5.) }) "clean src/Elasticsearch.sln -c Release" |> ignore
         DotNetProject.All |> Seq.iter(fun p -> CleanDir(Paths.BinFolder p.Name))
-
-    type CustomResolver(folder) = 
-        inherit DefaultAssemblyResolver()
-        member this.Folder = folder;
-
-        override this.Resolve name = 
-            try
-                base.Resolve name
-            with
-            | ex -> 
-                AssemblyDefinition.ReadAssembly(Path.Combine(folder, "Elasticsearch.Net.dll"));
-
-    let private rewriteNamespace nest f = 
-        trace "Rewriting namespaces"
-        let folder = Paths.ProjectOutputFolder nest f
-        let nestDll = sprintf "%s/%s.dll" folder nest.Name
-        let nestRewrittenDll = sprintf "%s/%s-rewriten.dll" folder nest.Name
-        use resolver = new CustomResolver(folder)
-        let readerParams = ReaderParameters( AssemblyResolver = resolver, ReadWrite = true );
-        use nestAssembly = AssemblyDefinition.ReadAssembly(nestDll, readerParams);
         
-        for item in nestAssembly.MainModule.Types do
-            if item.Namespace.StartsWith("Newtonsoft.Json") then
-                item.Namespace <- item.Namespace.Replace("Newtonsoft.Json", "Nest.Json")
-                
-        // Touch custom attribute arguments 
-        // Cecil does not update the types referenced within these attributes automatically,
-        // so enumerate them to ensure namespace renaming is reflected in these references.
-        let touchAttributes (attributes:Mono.Collections.Generic.Collection<CustomAttribute>) = 
-            for attr in attributes do
-                if attr.HasConstructorArguments then
-                    for constArg in attr.ConstructorArguments do
-                        if constArg.Type.Name = "Type" then ignore()    
-
-        // rewrite explicitly implemented interface definitions defined
-        // in Newtonsoft.Json
-        let rewriteName (method:IMemberDefinition) =
-            if method.Name.Contains("Newtonsoft.Json") then
-                method.Name <- method.Name.Replace("Newtonsoft.Json", "Nest.Json")
-             
-        // recurse through all types and nested types   
-        let rec rewriteTypes (types:Mono.Collections.Generic.Collection<TypeDefinition>) =
-            for t in types do
-                touchAttributes t.CustomAttributes
-                for prop in t.Properties do 
-                    touchAttributes prop.CustomAttributes
-                    rewriteName prop
-                    if prop.GetMethod <> null then rewriteName prop.GetMethod
-                    if prop.SetMethod <> null then rewriteName prop.SetMethod
-                for method in t.Methods do 
-                    touchAttributes method.CustomAttributes
-                    rewriteName method
-                    for over in method.Overrides do rewriteName method
-                for field in t.Fields do touchAttributes field.CustomAttributes
-                for interf in t.Interfaces do touchAttributes interf.CustomAttributes
-                for event in t.Events do touchAttributes event.CustomAttributes
-                if t.HasNestedTypes then rewriteTypes t.NestedTypes
-                
-        nestAssembly.MainModule.Types |> rewriteTypes
+    let private assemblyRewriter = Paths.PaketDotNetGlobalTool "assembly-rewriter" @"tools\netcoreapp2.1\any\assembly-rewriter.dll"
+    let private keyFile = Paths.Keys "keypair.snk"
+    let Rewrite version framework projects =
+        let project = projects |> Seq.head
+        let folder = Paths.ProjectOutputFolder project framework
         
-        let resources = nestAssembly.MainModule.Resources
-        for i = resources.Count-1 downto 0 do
-            let resource = resources.[i]
-            // remove the Newtonsoft signing key
-            if resource.Name = "Newtonsoft.Json.Dynamic.snk" then resources.Remove(resource) |> ignore
-
-        let key = File.ReadAllBytes(Paths.Keys("keypair.snk"))
-        let kp = StrongNameKeyPair(key)
-        let wp = WriterParameters ( StrongNameKeyPair = kp);
-        nestAssembly.Write(wp) |> ignore;
-        trace "Finished rewriting namespaces"
+        let dllFullPath name = sprintf "%s/%s.dll" folder name
+        let outputName (p: DotNetProject) = match p.Name = project.Name with | true -> p.Name | _ -> p.InternalName
+        let fullOutput (p: DotNetProject) = dllFullPath (p.Versioned (outputName p) version)
+        let dlls =
+            projects
+            |> Seq.map (fun p -> sprintf @"-i ""%s"" -o ""%s"" "  (dllFullPath p.Name) (fullOutput p))
+            |> Seq.fold (+) " "
+            
+        let mergeCommand = sprintf @"%s %s" assemblyRewriter dlls
+        DotNetCli.RunCommand (fun p -> { p with TimeOut = TimeSpan.FromMinutes(3.) }) mergeCommand |> ignore
+        
+        let mergedOutFile = fullOutput project
+        let ilMergeArgs = [
+            "/internalize"; 
+            (sprintf "/lib:%s" folder); 
+            (sprintf "/keyfile:%s" keyFile); 
+            (sprintf "/out:%s" mergedOutFile)
+        ]
+        let mergeDlls = projects |> Seq.map (fun p -> fullOutput p)
+        Tooling.ILRepack.Exec (ilMergeArgs |> Seq.append mergeDlls) |> ignore
 
     let private ilRepackInternal() =
         let fw = DotNetFramework.All
-        for f in fw do 
-            let nest = Project Project.Nest
-            let folder = Paths.ProjectOutputFolder nest f
-            let nestDll = sprintf "%s/%s.dll" folder nest.Name
-            let nestMergedDll = sprintf "%s/%s-merged.dll" folder nest.Name
-            let jsonDll = sprintf "%s/Newtonsoft.Json.dll" folder
-            let keyFile = Paths.Keys("keypair.snk");
-            let options = 
-                [ 
-                    "/keyfile:", keyFile;
-                    "/internalize", "";
-                    "/lib:", folder;
-                    "/out:", nestDll;
-                ] 
-                |> List.map (fun (p,v) -> sprintf "%s%s" p v)
-            
-            let args = [nestDll; jsonDll;] |> List.append options;
-            
-            Tooling.ILRepack.Exec args |> ignore
-            rewriteNamespace nest f |> ignore
+        let projects = DotNetProject.AllPublishable
+        let currentMajor = sprintf "%i" <| Versioning.CurrentVersion.Major
+        for f in fw do
+            for p in projects do
+                if p.VersionedMergeDependencies <> [] then Rewrite (Some currentMajor) f p.VersionedMergeDependencies
+                if p.MergeDependencies <> [] then Rewrite None f p.MergeDependencies
     
     let ILRepack() = 
         //ilrepack on mono crashes pretty hard on my machine
