@@ -56,13 +56,75 @@ module Release =
             
         if (isNotNullOrEmpty value) then builder.AppendFormat("{0}=\"{1}\";", key, value)
         else builder
-            
-    let NugetPack() =
-        let currentVersion = sprintf "%O" <| Versioning.CurrentVersion
-        let currentMajorVersion = sprintf "%i" <| Versioning.CurrentVersion.Major
-        let nextMajorVersion = sprintf "%i" <| Versioning.CurrentVersion.Major + 1
-        let year = sprintf "%i" DateTime.UtcNow.Year
+
+    let private currentVersion = sprintf "%O" <| Versioning.CurrentVersion
+    let private currentMajorVersion = sprintf "%i" <| Versioning.CurrentVersion.Major
+    let private nextMajorVersion = sprintf "%i" <| Versioning.CurrentVersion.Major + 1
+    let private year = sprintf "%i" DateTime.UtcNow.Year
+
+    let private props() =
+        new StringBuilder()
+        |> addKeyValue <@currentMajorVersion@>
+        |> addKeyValue <@nextMajorVersion@>
+        |> addKeyValue <@year@>
+
+    let pack file n properties = 
+        Tooling.Nuget.Exec [ "pack"; file; 
+             "-version"; currentVersion; 
+             "-outputdirectory"; Paths.BuildOutput; 
+             "-properties"; properties; 
+        ] |> ignore
+        traceFAKE "%s" Paths.BuildOutput
+        let nugetOutFile = Paths.Output(sprintf "%s.%s.nupkg" n (Versioning.CurrentVersion.ToString()))
+        MoveFile Paths.NugetOutput nugetOutFile
+
+    let private nugetPackMain (p:DotNetProject) nugetId nuspec properties = 
+        pack nuspec nugetId properties
         
+    let private nugetPackVersioned (p:DotNetProject) nugetId nuspec properties = 
+        let newId = sprintf "%s%s" nugetId currentMajorVersion;
+        let nuspecVersioned = sprintf @"build/%s.nuspec" newId
+            
+        let xName n = XName.op_Implicit n
+        use stream = File.OpenRead <| nuspec 
+        let doc = XDocument.Load(stream) 
+        let nsManager = new XmlNamespaceManager(doc.CreateNavigator().NameTable);
+        nsManager.AddNamespace("x", "http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd")
+
+        doc.XPathSelectElement("/x:package/x:metadata/x:id", nsManager).Value <- newId
+        let titleNode = doc.XPathSelectElement("/x:package/x:metadata/x:title", nsManager) 
+        titleNode.Value <- sprintf "%s namespaced client, can be installed alongside %s" newId nugetId
+        let xmlConfig = sprintf "/x:package//x:file[contains(@src, '%s.xml')]" p.Name
+        doc.XPathSelectElement(xmlConfig, nsManager).Remove();
+
+        let dll n = sprintf "%s.dll" n
+        let rewriteDllFile name = 
+            let d = dll name
+            let r = (dll (p.Versioned name (Some currentMajorVersion)))
+            let x = sprintf "/x:package//x:file[contains(@src, '%s')]" d
+            let dllNode = doc.XPathSelectElement(x, nsManager)
+            let src = dllNode.Attribute(xName "src");
+            src.Value <- replace d r src.Value 
+
+        match p with 
+        | Project Nest -> 
+            doc.XPathSelectElement("/x:package/x:metadata//x:dependency[@id='Elasticsearch.Net']", nsManager).Remove()
+            rewriteDllFile p.Name
+        | Project ElasticsearchNet ->
+            rewriteDllFile p.Name
+            ignore()
+        | Project NestJsonNetSerializer -> 
+            let nestDep = doc.XPathSelectElement("/x:package/x:metadata//x:dependency[@id='NEST']", nsManager);
+            let idAtt = nestDep.Attribute(xName "id");
+            idAtt.Value <- sprintf "NEST%s" currentMajorVersion
+            rewriteDllFile p.Name
+        | _ -> traceError (sprintf "%s still needs special canary handling" p.Name)
+        doc.Save(nuspecVersioned) 
+
+        pack nuspecVersioned newId properties
+        DeleteFile nuspecVersioned 
+    
+    let private packProjects callback  =
         CreateDir Paths.NugetOutput
             
         DotNetProject.AllPublishable
@@ -72,73 +134,20 @@ module Release =
             let jsonDotNetNextVersion = jsonNetVersionNext p
 
             let properties =
-                new StringBuilder()
-                |> addKeyValue <@currentMajorVersion@>
-                |> addKeyValue <@nextMajorVersion@>
-                |> addKeyValue <@year@>
+                props()
                 |> addKeyValue <@jsonDotNetCurrentVersion@>
                 |> addKeyValue <@jsonDotNetNextVersion@>
                 |> toText
-                
-            let name = p.NugetId;
-            let nuspec = (sprintf @"build/%s.nuspec" name)
-            let nugetOutFile = Paths.Output(sprintf "%s.%s.nupkg" name (Versioning.CurrentVersion.ToString()))
-            let pack file = 
-                Tooling.Nuget.Exec [ "pack"; nuspec; 
-                                 "-version"; currentVersion; 
-                                 "-outputdirectory"; Paths.BuildOutput; 
-                                 "-properties"; properties; 
-                               ] |> ignore
-                traceFAKE "%s" Paths.BuildOutput
-                MoveFile Paths.NugetOutput nugetOutFile
-            
-            pack nuspec
+            let nugetId = p.NugetId 
+            let nuspec = (sprintf @"build/%s.nuspec" nugetId)
 
-            let newId = sprintf "%s%s" name currentMajorVersion;
-            let nuspecVersioned = sprintf @"build/%s.nuspec" newId
-
-            let xName n = XName.op_Implicit n
-            use stream = File.OpenRead <| nuspec
-            let doc = XDocument.Load(stream)
-            let nsManager = new XmlNamespaceManager(doc.CreateNavigator().NameTable);
-            nsManager.AddNamespace("x", "http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd")
-
-            doc.XPathSelectElement("/x:package/x:metadata/x:id", nsManager).Value <- newId
-            let titleNode = doc.XPathSelectElement("/x:package/x:metadata/x:title", nsManager) 
-            titleNode.Value <- sprintf "%s namespaced client, can be installed alongside %s" newId name
-            let xmlConfig = sprintf "/x:package//x:file[contains(@src, '%s.xml')]" p.Name
-            doc.XPathSelectElement(xmlConfig, nsManager).Remove();
-
-            let dll n = sprintf "%s.dll" n
-            let rewriteDllFile name = 
-                let d = dll name
-                let r = (dll (p.Versioned name (Some currentMajorVersion)))
-                let x = sprintf "/x:package//x:file[contains(@src, '%s')]" d
-                trace x
-                let dllNode = doc.XPathSelectElement(x, nsManager)
-                let src = dllNode.Attribute(xName "src");
-                src.Value <- replace d r src.Value 
-
-            match p with 
-            | Project Nest -> 
-                doc.XPathSelectElement("/x:package/x:metadata//x:dependency[@id='Elasticsearch.Net']", nsManager).Remove()
-                rewriteDllFile p.Name
-            | Project ElasticsearchNet ->
-                rewriteDllFile p.Name
-                ignore()
-            | Project NestJsonNetSerializer -> 
-                let nestDep = doc.XPathSelectElement("/x:package/x:metadata//x:dependency[@id='NEST']", nsManager);
-                let idAtt = nestDep.Attribute(xName "id");
-                idAtt.Value <- sprintf "NEST%s" currentMajorVersion
-                rewriteDllFile p.Name
-
-
-            doc.Save(nuspecVersioned) 
-
-             
+            callback p nugetId nuspec properties
         )
+            
+    let NugetPack()  = packProjects nugetPackMain 
 
-
+    let NugetPackVersioned()  = packProjects nugetPackVersioned 
+                
     let PublishCanaryBuild accessKey feed = 
         !! "build/output/_packages/*-ci*.nupkg"
         |> Seq.iter(fun f -> 
