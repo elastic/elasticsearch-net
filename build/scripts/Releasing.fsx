@@ -108,7 +108,9 @@ module Release =
 
         match p with 
         | Project Nest -> 
-            doc.XPathSelectElement("/x:package/x:metadata//x:dependency[@id='Elasticsearch.Net']", nsManager).Remove()
+            let esDep = doc.XPathSelectElement("/x:package/x:metadata//x:dependency[@id='Elasticsearch.Net']", nsManager);
+            let esDep = esDep.Attribute(xName "id");
+            esDep.Value <- sprintf "Elasticsearch.Net%s" currentMajorVersion
             rewriteDllFile p.Name
         | Project ElasticsearchNet ->
             rewriteDllFile p.Name

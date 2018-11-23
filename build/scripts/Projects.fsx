@@ -62,8 +62,8 @@ module Projects =
 
         member this.VersionedMergeDependencies =
             match this with 
-            | Project Nest -> [Project Project.Nest; Project ElasticsearchNet; DepencyProject DependencyProject.JsonNet]
-            | Project NestJsonNetSerializer -> [Project NestJsonNetSerializer]
+            | Project Nest -> [Project Project.Nest; Project Project.ElasticsearchNet; DepencyProject DependencyProject.JsonNet]
+            | Project NestJsonNetSerializer -> [Project NestJsonNetSerializer; Project Project.Nest; Project Project.ElasticsearchNet ]
             | Project ElasticsearchNet -> [Project ElasticsearchNet]
             | _ -> []
 
@@ -87,7 +87,7 @@ module Projects =
             
         member this.InternalName =
             match this with
-            | Project p -> sprintf "Elastic.Internal.%s" this.Name
+            | Project p -> this.Name 
             | PrivateProject p -> sprintf "Elastic.Internal.%s" this.Name
             | DepencyProject JsonNet -> "Elastic.Internal.JsonNet"
                 

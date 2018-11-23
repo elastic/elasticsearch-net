@@ -84,7 +84,7 @@ module Build =
         let folder = Paths.ProjectOutputFolder project framework
         
         let dllFullPath name = sprintf "%s/%s.dll" folder name
-        let outputName (p: DotNetProject) = match p.Name = project.Name with | true -> p.Name | _ -> p.InternalName
+        let outputName (p: DotNetProject) = match p.Name = project.Name with | true -> p.Name | _ -> p.InternalName 
         let fullOutput (p: DotNetProject) = dllFullPath (p.Versioned (outputName p) version)
         let dlls =
             projects
@@ -101,7 +101,10 @@ module Build =
             (sprintf "/keyfile:%s" keyFile); 
             (sprintf "/out:%s" mergedOutFile)
         ]
-        let mergeDlls = projects |> Seq.map fullOutput
+        let mergeDlls = 
+            projects 
+            |> Seq.filter (fun p -> p.Name = project.Name || not <| (DotNetProject.AllPublishable |> Seq.contains p)) 
+            |> Seq.map fullOutput
         match project.NeedsMerge with 
         | true -> Tooling.ILRepack.Exec (ilMergeArgs |> Seq.append mergeDlls) |> ignore
         | _ -> Tooling.ILRepack.Exec (ilMergeArgs |> Seq.append [mergeDlls |> Seq.head]) |> ignore
