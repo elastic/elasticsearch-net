@@ -63,7 +63,7 @@ module Projects =
         member this.VersionedMergeDependencies =
             match this with 
             | Project Nest -> [Project Project.Nest; Project ElasticsearchNet; DepencyProject DependencyProject.JsonNet]
-            | Project NestJsonNetSerializer -> [Project NestJsonNetSerializer; DepencyProject DependencyProject.JsonNet]
+            | Project NestJsonNetSerializer -> [Project NestJsonNetSerializer]
             | Project ElasticsearchNet -> [Project ElasticsearchNet]
             | _ -> []
 

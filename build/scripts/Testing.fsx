@@ -39,7 +39,7 @@ module Tests =
             setProcessEnvironVar v (if b then "true" else "false")
         ignore()
 
-    let private dotnetTest (target: Commandline.MultiTarget) =
+    let private dotnetTest (target: Commandline.MultiTarget) stopOnFail =
         CreateDir Paths.BuildOutput
         let command = 
             let p = ["xunit"; "-parallel"; "all"; "-xml"; "../../.." @@ Paths.Output("TestResults-Desktop-Clr.xml")] 
@@ -49,8 +49,10 @@ module Tests =
             | (Commandline.MultiTarget.One, _) -> ["-framework"; "netcoreapp2.1"] |> List.append p
             | _  -> p
 
+        let c = if stopOnFail then ["-stoponfail"] |> List.append command else command
+
         let dotnet = Tooling.BuildTooling("dotnet")
-        let exitCode = dotnet.ExecWithTimeoutIn "src/Tests/Tests" command (TimeSpan.FromMinutes 30.) 
+        let exitCode = dotnet.ExecWithTimeoutIn "src/Tests/Tests" c (TimeSpan.FromMinutes 30.) 
         if exitCode > 0 && not buildingOnTeamCity then raise (Exception <| (sprintf "test finished with exitCode %d" exitCode))
 
     let RunReleaseUnitTests() =
@@ -67,11 +69,11 @@ module Tests =
         let dotnet = Tooling.BuildTooling("dotnet")
         dotnet.ExecIn "src/Tests/Tests" ["clean";] |> ignore
         dotnet.ExecIn "src/Tests/Tests" ["restore";] |> ignore
-        dotnetTest Commandline.MultiTarget.One
+        dotnetTest Commandline.MultiTarget.One true
 
     let RunUnitTests() =
         setLocalEnvVars()
-        dotnetTest Commandline.multiTarget
+        dotnetTest Commandline.multiTarget false
 
     let RunIntegrationTests() =
         setLocalEnvVars()
@@ -83,4 +85,4 @@ module Tests =
         
         for esVersion in esVersions do
             setProcessEnvironVar "NEST_INTEGRATION_VERSION" esVersion
-            dotnetTest Commandline.multiTarget |> ignore
+            dotnetTest Commandline.multiTarget false |> ignore

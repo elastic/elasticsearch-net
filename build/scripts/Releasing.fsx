@@ -148,16 +148,6 @@ module Release =
 
     let NugetPackVersioned()  = packProjects nugetPackVersioned 
                 
-    let PublishCanaryBuild accessKey feed = 
-        !! "build/output/_packages/*-ci*.nupkg"
-        |> Seq.iter(fun f -> 
-            let source = "https://www.myget.org/F/" + feed + "/api/v2/package"
-            let success = Tooling.Nuget.Exec ["push"; f; accessKey; "-source"; source] 
-            match success with
-            | 0 -> traceFAKE "publish to myget succeeded" |> ignore
-            | _ -> failwith "publish to myget failed" |> ignore
-        )
-        
     let GenerateNotes() = 
         let previousVersion = Versioning.GlobalJsonVersion.ToString()
         let currentVersion = Versioning.CurrentVersion.ToString()

@@ -74,10 +74,7 @@ Target "TestNugetPackage" <| fun _ ->
     if buildServer <> AppVeyor then Tests.RunUnitTests()
     else Tests.RunReleaseUnitTests()
     
-Target "Canary" <| fun _ -> 
-    let apiKey = (getBuildParam "apikey");
-    let feed = (getBuildParamOrDefault "feed" "elasticsearch-net");
-    if (not (String.IsNullOrWhiteSpace apiKey) || apiKey = "ignore") then Release.PublishCanaryBuild apiKey feed
+Target "Canary" <| fun _ -> tracefn "Finished Release Build %O" Versioning.CurrentVersion
     
 Target "Diff" <| fun _ ->
     let diffType = getBuildParam "diffType"
