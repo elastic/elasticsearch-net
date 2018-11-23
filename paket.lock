@@ -3,7 +3,7 @@
 GROUP build
 NUGET
   remote: https://ci.appveyor.com/nuget/assemblyrewriter
-    assembly-rewriter (1.0.0-alpha20181122T081747) - clitool: true
+    assembly-rewriter (1.0.0-alpha20181123T211244) - clitool: true
   remote: https://www.nuget.org/api/v2
     Elasticsearch.Net (6.1) - restriction: == net46
     FAKE (5.0)
