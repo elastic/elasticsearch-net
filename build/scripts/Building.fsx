@@ -101,8 +101,10 @@ module Build =
             (sprintf "/keyfile:%s" keyFile); 
             (sprintf "/out:%s" mergedOutFile)
         ]
-        let mergeDlls = projects |> Seq.map (fun p -> fullOutput p)
-        Tooling.ILRepack.Exec (ilMergeArgs |> Seq.append mergeDlls) |> ignore
+        let mergeDlls = projects |> Seq.map fullOutput
+        match project.NeedsMerge with 
+        | true -> Tooling.ILRepack.Exec (ilMergeArgs |> Seq.append mergeDlls) |> ignore
+        | _ -> Tooling.ILRepack.Exec (ilMergeArgs |> Seq.append [mergeDlls |> Seq.head]) |> ignore
 
     let private ilRepackInternal() =
         let fw = DotNetFramework.All

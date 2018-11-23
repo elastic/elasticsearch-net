@@ -76,7 +76,9 @@ module Projects =
             | PrivateProject DocGenerator -> "DocGenerator"
             | DepencyProject JsonNet -> "Newtonsoft.Json"
  
-         member this.NugetId = match this with | Project Nest -> "NEST" | _ -> this.Name
+        member this.NugetId = match this with | Project Nest -> "NEST" | _ -> this.Name
+        
+        member this.NeedsMerge = match this with | Project NestJsonNetSerializer -> false | _ -> true
                 
         member this.Versioned name version =
             match version with
