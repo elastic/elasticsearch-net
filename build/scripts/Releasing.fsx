@@ -95,7 +95,7 @@ module Release =
         let titleNode = doc.XPathSelectElement("/x:package/x:metadata/x:title", nsManager) 
         titleNode.Value <- sprintf "%s.x namespaced package, can be installed alongside %s" currentMajorVersion nugetId
         let descriptionNode = doc.XPathSelectElement("/x:package/x:metadata/x:description", nsManager) 
-        descriptionNode.Value <- sprintf "%s.x namespaced client, can be installed alongside %s" currentMajorVersion nugetId
+        descriptionNode.Value <- sprintf "%s.x namespaced package, can be installed alongside %s" currentMajorVersion nugetId
         let iconNode = doc.XPathSelectElement("/x:package/x:metadata/x:iconUrl", nsManager) 
         iconNode.Value <- replace "icon" "icon-aux" iconNode.Value 
         let xmlConfig = sprintf "/x:package//x:file[contains(@src, '%s.xml')]" p.Name
