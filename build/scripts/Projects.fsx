@@ -31,10 +31,14 @@ module Projects =
     type PrivateProject =
         | Tests
         | DocGenerator
+        
+    type DependencyProject = 
+        | JsonNet 
 
     type DotNetProject = 
         | Project of Project
         | PrivateProject of PrivateProject
+        | DepencyProject of DependencyProject
 
         static member All = 
             seq [
@@ -46,25 +50,41 @@ module Projects =
         static member AllPublishable = seq [Project Project.ElasticsearchNet; Project Project.Nest;] 
         static member Tests = seq [PrivateProject PrivateProject.Tests;] 
 
+        member this.MergeDependencies=
+            match this with 
+            | Project Nest -> [Project Project.Nest; DepencyProject DependencyProject.JsonNet]
+            | _ -> []
+
+        member this.VersionedMergeDependencies =
+            match this with 
+            | Project Nest -> [Project Project.Nest; Project Project.ElasticsearchNet; DepencyProject DependencyProject.JsonNet]
+            | Project NestJsonNetSerializer -> [Project NestJsonNetSerializer; Project Project.Nest; Project Project.ElasticsearchNet ]
+            | Project ElasticsearchNet -> [Project ElasticsearchNet]
+            | _ -> []
+            
         member this.Name =
             match this with
-            | Project p ->
-                match p with
-                | Nest -> "Nest"
-                | ElasticsearchNet -> "Elasticsearch.Net"
-            | PrivateProject p ->
-                match p with
-                | Tests -> "Tests"
-                | DocGenerator -> "DocGenerator"
+            | Project Nest -> "Nest"
+            | Project ElasticsearchNet -> "Elasticsearch.Net"
+            | PrivateProject Tests -> "Tests"
+            | PrivateProject DocGenerator -> "DocGenerator"
+            | DepencyProject JsonNet -> "Newtonsoft.Json"
+ 
+        member this.NugetId = match this with | Project Nest -> "NEST" | _ -> this.Name
+        
+        member this.NeedsMerge = match this with | Project NestJsonNetSerializer -> false | _ -> true
                 
-        member this.Nuspec =
+        member this.Versioned name version =
+            match version with
+            | Some s -> sprintf "%s%s" name s
+            | None -> name
+            
+        member this.InternalName =
             match this with
-            | Project p ->
-                match p with
-                | Nest -> "NEST"
-                | _ -> this.Name
-            | _ -> this.Name
-       
+            | Project p -> this.Name 
+            | PrivateProject p -> sprintf "Elastic.Internal.%s" this.Name
+            | DepencyProject JsonNet -> "Elastic.Internal.JsonNet"
+                
         static member TryFindName (name: string) =
             DotNetProject.All
             |> Seq.map(fun p -> p.Name)

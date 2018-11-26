@@ -4,17 +4,21 @@
 		<id>NEST</id>
 		<version>$version$</version>
 		<title>NEST - Elasticsearch .NET high level client</title>
+		
 		<authors>Elastic and contributors</authors>
 		<owners>Elastic</owners>
+		<copyright>2014-$year$ Elasticsearch BV</copyright>
+
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<licenseUrl>https://github.com/elastic/elasticsearch-net/blob/master/license.txt</licenseUrl>
 		<projectUrl>https://github.com/elastic/elasticsearch-net</projectUrl>
 		<iconUrl>https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png</iconUrl>
-		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		
 		<description>Strongly typed interface to Elasticsearch. Fluent and classic object initializer mappings of requests and responses. Uses and exposes Elasticsearch.Net</description>
 		<summary>Strongly typed interface to Elasticsearch. Fluent and classic object initializer mappings of requests and responses. Uses and exposes Elasticsearch.Net</summary>
-		<releaseNotes>See https://github.com/elastic/elasticsearch-net/releases/tag/$version$</releaseNotes>
-		<copyright>2014-$year$ Elasticsearch BV</copyright>
+		<releaseNotes>https://github.com/elastic/elasticsearch-net/releases/tag/$version$</releaseNotes>
 		<tags>elasticsearch,elastic,search,lucene,nest</tags>
+		
 		<dependencies>
 			<group targetFramework="net461">
 				<dependency id="Elasticsearch.Net" version="[$version$, $nextMajorVersion$)" />

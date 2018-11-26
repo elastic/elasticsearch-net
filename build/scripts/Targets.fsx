@@ -4,7 +4,6 @@
 #load @"Tooling.fsx"
 #load @"Versioning.fsx"
 #load @"Testing.fsx"
-#load @"Signing.fsx"
 #load @"Building.fsx"
 #load @"Documentation.fsx"
 #load @"Releasing.fsx"
@@ -28,7 +27,6 @@ open Profiling
 open Benchmarking
 open XmlDocPatcher
 open Documentation
-open Signing
 open Commandline
 open Differ
 open Differ.Differ
@@ -69,23 +67,13 @@ Target "Documentation" Documentation.Generate
 Target "Version" <| fun _ -> 
     tracefn "Current Version: %s" (Versioning.CurrentVersion.ToString())
 
-Target "Release" <| fun _ -> 
-    Release.NugetPack()   
-    Versioning.ValidateArtifacts()
-    StrongName.ValidateDllsInNugetPackage()
-    Release.GenerateNotes()
-
 Target "TestNugetPackage" <| fun _ -> 
     //RunReleaseUnitTests restores the canary nugetpackages in tests, since these end up being cached
     //its too evasive to run on development machines or TC, Run only on AppVeyor containers.
     if buildServer <> AppVeyor then Tests.RunUnitTests()
     else Tests.RunReleaseUnitTests()
     
-Target "Canary" <| fun _ -> 
-    trace "Running canary build" 
-    let apiKey = (getBuildParam "apikey");
-    let feed = (getBuildParamOrDefault "feed" "elasticsearch-net");
-    if (not (String.IsNullOrWhiteSpace apiKey) || apiKey = "ignore") then Release.PublishCanaryBuild apiKey feed
+Target "Canary" <| fun _ -> tracefn "Finished Release Build %O" Versioning.CurrentVersion
     
 Target "Diff" <| fun _ ->
     let diffType = getBuildParam "diffType"
@@ -112,6 +100,17 @@ Target "Cluster" <| fun _ ->
         }) (sprintf "%s %s" (Path.Combine(tempDir, "Tests.ClusterLauncher.dll")) command)
     
     Shell.deleteDir tempDir
+
+Target "Release" <| fun _ -> traceHeader (sprintf "Finished Release Build %O" Versioning.CurrentVersion)
+
+Target "NugetPack" Release.NugetPack
+
+Target "NugetPackVersioned" Release.NugetPackVersioned
+
+Target "ValidateArtifacts" Versioning.ValidateArtifacts
+
+Target "GenerateReleaseNotes" Release.GenerateNotes
+
 
 // Dependencies
 "Start"
@@ -147,6 +146,10 @@ Target "Cluster" <| fun _ ->
   ==> "Integrate"
 
 "Build"
+  ==> "NugetPack"
+  =?> ("NugetPackVersioned", Commandline.target = "canary")
+  ==> "ValidateArtifacts"
+  =?> ("GenerateReleaseNotes", Commandline.target <> "canary")
   ==> "Release"
   
 "Touch"

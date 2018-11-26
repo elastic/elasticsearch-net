@@ -13,7 +13,6 @@
     <None Include="Benchmarking.fsx" />
     <None Include="XmlDocPatcher.fsx" />
     <None Include="Building.fsx" />
-    <None Include="Signing.fsx" />
     <None Include="Testing.fsx" />
     <None Include="Documentation.fsx" />
     <None Include="Commandline.fsx" />

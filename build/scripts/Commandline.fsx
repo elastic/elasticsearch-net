@@ -25,9 +25,8 @@ Targets:
 * integrate <elasticsearch_versions> [clustername] [testfilter] 
   - run integration tests for <elasticsearch_versions> which is a semicolon separated list of
     elasticsearch versions to test or `latest`. Can filter tests by <clustername> and <testfilter>
-* canary [apikey] [feed]
-  - create a canary nuget package based on the current version if [feed] and [apikey] are provided
-    also pushes to upstream (myget)
+* canary 
+  - create a canary nuget package based on the current version.
 * diff <github|nuget|dir|assembly> <version|path 1> <version|path 2> [format]
 * cluster <cluster-name> [version]
   - Start a cluster defined in Tests.Core or Tests from the command line and leaves it running
@@ -220,12 +219,6 @@ module Commandline =
         | ["touch"; ] -> ignore()
         | ["temp"; ] -> ignore()
         | ["canary"; ] -> ignore()
-        | ["canary"; apiKey ] ->
-            setBuildParam "apiKey" apiKey
-            setBuildParam "feed" "elasticsearch-net"
-        | ["canary"; apiKey; feed ] ->
-            setBuildParam "apiKey" apiKey
-            setBuildParam "feed" feed
         | _ ->
             traceError usage
             exit 2
