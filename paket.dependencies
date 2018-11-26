@@ -14,3 +14,6 @@ group build
 	
     source https://ci.appveyor.com/nuget/assemblyrewriter
     clitool assembly-rewriter
+    
+    source https://ci.appveyor.com/nuget/assemblydiffer
+    clitool assembly-differ

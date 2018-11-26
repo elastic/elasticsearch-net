@@ -27,7 +27,9 @@ Targets:
     elasticsearch versions to test or `latest`. Can filter tests by <clustername> and <testfilter>
 * canary 
   - create a canary nuget package based on the current version.
-* diff <github|nuget|dir|assembly> <version|path 1> <version|path 2> [format]
+* diff <..args>
+  - runs assembly-differ with the specified arguments
+    see: https://github.com/nullean/AssemblyDiffer#differ
 * cluster <cluster-name> [version]
   - Start a cluster defined in Tests.Core or Tests from the command line and leaves it running
     untill a key is pressed. Handy if you want to run the integration tests numerous times while developing  
@@ -188,27 +190,6 @@ module Commandline =
             setBuildParam "clusterfilter" "ConnectionReuse"
             setBuildParam "numberOfConnections" numberOfConnections
  
-        | ["diff"; IsDiff diffType; IsProject project; firstVersionOrPath; secondVersionOrPath; IsFormat format] ->
-             setBuildParam "diffType" diffType
-             setBuildParam "project" project
-             setBuildParam "first" firstVersionOrPath
-             setBuildParam "second" secondVersionOrPath            
-             setBuildParam "format" format            
-        | ["diff"; IsDiff diffType; IsProject project; firstVersionOrPath; secondVersionOrPath] ->
-             setBuildParam "diffType" diffType
-             setBuildParam "project" project
-             setBuildParam "first" firstVersionOrPath
-             setBuildParam "second" secondVersionOrPath        
-        | ["diff"; IsDiff diffType; firstVersionOrPath; secondVersionOrPath; IsFormat format] ->
-             setBuildParam "diffType" diffType
-             setBuildParam "first" firstVersionOrPath
-             setBuildParam "second" secondVersionOrPath            
-             setBuildParam "format" format          
-        | ["diff"; IsDiff diffType; firstVersionOrPath; secondVersionOrPath] ->
-            setBuildParam "diffType" diffType
-            setBuildParam "first" firstVersionOrPath
-            setBuildParam "second" secondVersionOrPath         
-            
         | ["cluster"; clusterName] ->
             setBuildParam "clusterName" clusterName
             setBuildParam "clusterVersion" ""
@@ -218,6 +199,7 @@ module Commandline =
 
         | ["touch"; ] -> ignore()
         | ["temp"; ] -> ignore()
+        | "diff" :: tail -> ignore()
         | ["canary"; ] -> ignore()
         | _ ->
             traceError usage

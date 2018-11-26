@@ -9,7 +9,6 @@
 #load @"Releasing.fsx"
 #load @"Benchmarking.fsx"
 #load @"XmlDocPatcher.fsx"
-#load @"Differ.fsx"
 #nowarn "0044" //TODO sort out FAKE 5
 
 open System
@@ -25,8 +24,8 @@ open Releasing
 open Benchmarking
 open XmlDocPatcher
 open Commandline
-open Differ
 open Fake.IO
+open Tooling
 
 Commandline.parse()
 
@@ -67,13 +66,11 @@ Target "TestNugetPackage" <| fun _ ->
 Target "Canary" <| fun _ -> tracefn "Finished Release Build %O" Versioning.CurrentVersion
     
 Target "Diff" <| fun _ ->
-    let diffType = getBuildParam "diffType"
-    let project = getBuildParam "project"
-    let first = getBuildParam "first"
-    let second = getBuildParam "second"
-    let format = getBuildParam "format"
-    tracefn "Performing %s diff %s using %s with %s and %s" format project diffType first second
-    Differ.Generate(diffType, project, first, second, format)
+    let differ = Paths.PaketDotNetGlobalTool "assembly-differ" @"tools\netcoreapp2.1\any\assembly-differ.dll"
+    let args = Commandline.arguments |> Seq.skip 1 |> Seq.fold (+) " "
+    let command = sprintf @"%s %s" differ args
+    setProcessEnvironVar "NUGET" Tooling.nugetFile
+    DotNetCli.RunCommand (fun p -> { p with TimeOut = TimeSpan.FromMinutes(3.) }) command |> ignore
 
 Target "Cluster" <| fun _ -> 
     let clusterName = getBuildParam "clusterName"
