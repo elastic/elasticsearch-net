@@ -119,11 +119,6 @@ module Release =
         | Project ElasticsearchNet ->
             rewriteDllFile p.Name
             ignore()
-        | Project NestJsonNetSerializer -> 
-            let nestDep = doc.XPathSelectElement("/x:package/x:metadata//x:dependency[@id='NEST']", nsManager);
-            let idAtt = nestDep.Attribute(xName "id");
-            idAtt.Value <- sprintf "NEST.v%s" currentMajorVersion
-            rewriteDllFile p.Name
         | _ -> traceError (sprintf "%s still needs special canary handling" p.Name)
         doc.Save(nuspecVersioned) 
 

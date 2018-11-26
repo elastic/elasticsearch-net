@@ -52,13 +52,12 @@ module Projects =
 
         member this.MergeDependencies=
             match this with 
-            | Project Nest -> [Project Project.Nest; DepencyProject DependencyProject.JsonNet]
+            | Project Nest -> [Project Project.Nest; ]
             | _ -> []
 
         member this.VersionedMergeDependencies =
             match this with 
-            | Project Nest -> [Project Project.Nest; Project Project.ElasticsearchNet; DepencyProject DependencyProject.JsonNet]
-            | Project NestJsonNetSerializer -> [Project NestJsonNetSerializer; Project Project.Nest; Project Project.ElasticsearchNet ]
+            | Project Nest -> [Project Project.Nest; Project Project.ElasticsearchNet; ]
             | Project ElasticsearchNet -> [Project ElasticsearchNet]
             | _ -> []
             
@@ -72,7 +71,7 @@ module Projects =
  
         member this.NugetId = match this with | Project Nest -> "NEST" | _ -> this.Name
         
-        member this.NeedsMerge = match this with | Project NestJsonNetSerializer -> false | _ -> true
+        member this.NeedsMerge = true
                 
         member this.Versioned name version =
             match version with
