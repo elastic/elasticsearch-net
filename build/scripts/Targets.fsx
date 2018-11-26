@@ -67,7 +67,7 @@ Target "Canary" <| fun _ -> tracefn "Finished Release Build %O" Versioning.Curre
     
 Target "Diff" <| fun _ ->
     let differ = Paths.PaketDotNetGlobalTool "assembly-differ" @"tools\netcoreapp2.1\any\assembly-differ.dll"
-    let args = Commandline.arguments |> Seq.skip 1 |> Seq.fold (+) " "
+    let args = Commandline.arguments |> List.skip 1 |> String.concat " "
     let command = sprintf @"%s %s" differ args
     setProcessEnvironVar "NUGET" Tooling.nugetFile
     DotNetCli.RunCommand (fun p -> { p with TimeOut = TimeSpan.FromMinutes(3.) }) command |> ignore
