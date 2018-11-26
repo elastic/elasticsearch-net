@@ -82,7 +82,7 @@ module Release =
         pack nuspec nugetId properties
         
     let private nugetPackVersioned (p:DotNetProject) nugetId nuspec properties = 
-        let newId = sprintf "%s%s" nugetId currentMajorVersion;
+        let newId = sprintf "%s.v%s" nugetId currentMajorVersion;
         let nuspecVersioned = sprintf @"build/%s.nuspec" newId
             
         let xName n = XName.op_Implicit n
@@ -93,7 +93,11 @@ module Release =
 
         doc.XPathSelectElement("/x:package/x:metadata/x:id", nsManager).Value <- newId
         let titleNode = doc.XPathSelectElement("/x:package/x:metadata/x:title", nsManager) 
-        titleNode.Value <- sprintf "%s namespaced client, can be installed alongside %s" newId nugetId
+        titleNode.Value <- sprintf "%s.x namespaced package, can be installed alongside %s" currentMajorVersion nugetId
+        let descriptionNode = doc.XPathSelectElement("/x:package/x:metadata/x:description", nsManager) 
+        descriptionNode.Value <- sprintf "%s.x namespaced client, can be installed alongside %s" currentMajorVersion nugetId
+        let iconNode = doc.XPathSelectElement("/x:package/x:metadata/x:iconUrl", nsManager) 
+        iconNode.Value <- replace "icon" "icon-aux" iconNode.Value 
         let xmlConfig = sprintf "/x:package//x:file[contains(@src, '%s.xml')]" p.Name
         doc.XPathSelectElement(xmlConfig, nsManager).Remove();
 
@@ -110,7 +114,7 @@ module Release =
         | Project Nest -> 
             let esDep = doc.XPathSelectElement("/x:package/x:metadata//x:dependency[@id='Elasticsearch.Net']", nsManager);
             let esDep = esDep.Attribute(xName "id");
-            esDep.Value <- sprintf "Elasticsearch.Net%s" currentMajorVersion
+            esDep.Value <- sprintf "Elasticsearch.Net.v%s" currentMajorVersion
             rewriteDllFile p.Name
         | Project ElasticsearchNet ->
             rewriteDllFile p.Name
@@ -118,7 +122,7 @@ module Release =
         | Project NestJsonNetSerializer -> 
             let nestDep = doc.XPathSelectElement("/x:package/x:metadata//x:dependency[@id='NEST']", nsManager);
             let idAtt = nestDep.Attribute(xName "id");
-            idAtt.Value <- sprintf "NEST%s" currentMajorVersion
+            idAtt.Value <- sprintf "NEST.v%s" currentMajorVersion
             rewriteDllFile p.Name
         | _ -> traceError (sprintf "%s still needs special canary handling" p.Name)
         doc.Save(nuspecVersioned) 
