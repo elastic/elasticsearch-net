@@ -12,7 +12,7 @@ indent_size = 4
 indent_style = tab
 indent_size = 4
 
-[*.{fs,fsx}]
+[*.{fs,fsx,yml}]
 indent_style = space
 indent_size = 4
 
