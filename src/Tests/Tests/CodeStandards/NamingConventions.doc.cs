@@ -32,6 +32,7 @@ namespace Tests.CodeStandards
 				.Where(t => t.IsClass() && t.IsAbstract() && !t.IsSealed() && !exceptions.Contains(t))
 				//when testing nuget package against merged internalize json.net skip its types.
 				.Where(t => !t.Namespace.StartsWith("Nest.Json"))
+				.Where(t => !t.Namespace.StartsWith("Elastic.Internal"))
 				.Where(t => !t.Name.Split('`')[0].EndsWith("Base"))
 				.Select(t => t.Name.Split('`')[0])
 				.ToList();
@@ -169,6 +170,7 @@ namespace Tests.CodeStandards
 				.Where(t => t.Namespace != "Nest")
 				//when testing nuget package against merged internalize json.net skip its types.
 				.Where(t => !string.IsNullOrWhiteSpace(t.Namespace) && !t.Namespace.StartsWith("Nest.Json"))
+				.Where(t => !string.IsNullOrWhiteSpace(t.Namespace) && !t.Namespace.StartsWith("Elastic.Internal"))
 				.Where(t => !t.Name.StartsWith("<"))
 				.Where(t => IsValidTypeNameOrIdentifier(t.Name, true))
 				.ToList();

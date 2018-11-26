@@ -25,6 +25,7 @@ namespace Tests.CodeStandards
 				where t.IsClass()
 					  && t.Name.Contains("Descriptor")
 					  && !t.Namespace.StartsWith("Nest.Json")
+					  && !t.Namespace.StartsWith("Elastic.Internal")
 					  && !notDescriptors.Contains(t.Name)
 #if __MonoCS__
 					  && !t.FullName.Contains("c__AnonStore") //compiler generated

@@ -11,11 +11,7 @@ open System
 open System.IO
 
 open Fake 
-open System
-open System.IO
 open System.Linq
-open System.Net
-open System.Text
 open System.Text.RegularExpressions
 open System.Xml
 open System.Xml.Linq
