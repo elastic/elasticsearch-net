@@ -99,30 +99,36 @@ module Release =
         let iconNode = doc.XPathSelectElement("/x:package/x:metadata/x:iconUrl", nsManager) 
         iconNode.Value <- replace "icon" "icon-aux" iconNode.Value 
         let xmlConfig = sprintf "/x:package//x:file[contains(@src, '%s.xml')]" p.Name
-        doc.XPathSelectElement(xmlConfig, nsManager).Remove();
+        doc.XPathSelectElements(xmlConfig, nsManager).Remove();
 
         let dll n = sprintf "%s.dll" n
         let rewriteDllFile name = 
             let d = dll name
             let r = (dll (p.Versioned name (Some currentMajorVersion)))
             let x = sprintf "/x:package//x:file[contains(@src, '%s')]" d
-            let dllNode = doc.XPathSelectElement(x, nsManager)
-            let src = dllNode.Attribute(xName "src");
-            src.Value <- replace d r src.Value 
+            let dllNodes = doc.XPathSelectElements(x, nsManager)
+            dllNodes |> Seq.iter (fun e -> 
+                let src = e.Attribute(xName "src");
+                src.Value <- replace d r src.Value 
+            )
 
         match p with 
         | Project Nest -> 
-            let esDep = doc.XPathSelectElement("/x:package/x:metadata//x:dependency[@id='Elasticsearch.Net']", nsManager);
-            let esDep = esDep.Attribute(xName "id");
-            esDep.Value <- sprintf "Elasticsearch.Net.v%s" currentMajorVersion
+            let esDeps = doc.XPathSelectElements("/x:package/x:metadata//x:dependency[@id='Elasticsearch.Net']", nsManager);
+            esDeps |> Seq.iter(fun e ->
+                let esDep = e.Attribute(xName "id");
+                esDep.Value <- sprintf "Elasticsearch.Net.v%s" currentMajorVersion
+            )
             rewriteDllFile p.Name
         | Project ElasticsearchNet ->
             rewriteDllFile p.Name
             ignore()
         | Project NestJsonNetSerializer -> 
-            let nestDep = doc.XPathSelectElement("/x:package/x:metadata//x:dependency[@id='NEST']", nsManager);
-            let idAtt = nestDep.Attribute(xName "id");
-            idAtt.Value <- sprintf "NEST.v%s" currentMajorVersion
+            let nestDeps = doc.XPathSelectElements("/x:package/x:metadata//x:dependency[@id='NEST']", nsManager);
+            nestDeps |> Seq.iter (fun e ->
+                let idAtt = e.Attribute(xName "id");
+                idAtt.Value <- sprintf "NEST.v%s" currentMajorVersion
+            )
             rewriteDllFile p.Name
         | _ -> traceError (sprintf "%s still needs special canary handling" p.Name)
         doc.Save(nuspecVersioned) 
