@@ -99,16 +99,18 @@ module Release =
         let iconNode = doc.XPathSelectElement("/x:package/x:metadata/x:iconUrl", nsManager) 
         iconNode.Value <- replace "icon" "icon-aux" iconNode.Value 
         let xmlConfig = sprintf "/x:package//x:file[contains(@src, '%s.xml')]" p.Name
-        doc.XPathSelectElement(xmlConfig, nsManager).Remove();
+        doc.XPathSelectElements(xmlConfig, nsManager).Remove();
 
         let dll n = sprintf "%s.dll" n
         let rewriteDllFile name = 
             let d = dll name
             let r = (dll (p.Versioned name (Some currentMajorVersion)))
             let x = sprintf "/x:package//x:file[contains(@src, '%s')]" d
-            let dllNode = doc.XPathSelectElement(x, nsManager)
-            let src = dllNode.Attribute(xName "src");
-            src.Value <- replace d r src.Value 
+            let dllNodes = doc.XPathSelectElements(x, nsManager)
+            dllNodes |> Seq.iter (fun e ->
+                let src = e.Attribute(xName "src");
+                src.Value <- replace d r src.Value 
+            )
 
         match p with 
         | Project Nest -> 
@@ -116,8 +118,8 @@ module Release =
             esDeps |> Seq.iter (fun e ->
                 let esDep = e.Attribute(xName "id");
                 esDep.Value <- sprintf "Elasticsearch.Net.v%s" currentMajorVersion
-                rewriteDllFile p.Name
             )
+            rewriteDllFile p.Name
         | Project ElasticsearchNet ->
             rewriteDllFile p.Name
             ignore()
