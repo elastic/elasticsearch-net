@@ -112,10 +112,12 @@ module Release =
 
         match p with 
         | Project Nest -> 
-            let esDep = doc.XPathSelectElement("/x:package/x:metadata//x:dependency[@id='Elasticsearch.Net']", nsManager);
-            let esDep = esDep.Attribute(xName "id");
-            esDep.Value <- sprintf "Elasticsearch.Net.v%s" currentMajorVersion
-            rewriteDllFile p.Name
+            let esDeps = doc.XPathSelectElements("/x:package/x:metadata//x:dependency[@id='Elasticsearch.Net']", nsManager);
+            esDeps |> Seq.iter (fun e ->
+                let esDep = e.Attribute(xName "id");
+                esDep.Value <- sprintf "Elasticsearch.Net.v%s" currentMajorVersion
+                rewriteDllFile p.Name
+            )
         | Project ElasticsearchNet ->
             rewriteDllFile p.Name
             ignore()
