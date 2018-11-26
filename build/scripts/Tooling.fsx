@@ -7,7 +7,6 @@ open System
 open System.IO
 open System.Diagnostics
 open System.Net
-open System.Text.RegularExpressions
 
 #load @"Paths.fsx"
 
@@ -17,7 +16,6 @@ Fake.ProcessHelper.redirectOutputToTrace <-true
     
 module Tooling = 
     open Paths
-    open Projects
 
     (* helper functions *)
     #if mono_posix
@@ -106,41 +104,6 @@ module Tooling =
         Download:string;
         TargetDir:string;
     }
-
-    let jetBrainsTools = [{ 
-                            DotTraceTool.Name = "JetBrains DotTrace Self-Profile API";
-                            Download = "https://download-cf.jetbrains.com/resharper/JetBrains.Profiler.SelfSdk.2017.3.2.zip";
-                            TargetDir = "dottrace-selfprofile";
-                         };
-                         { 
-                            DotTraceTool.Name = "JetBrains DotTrace Commandline Tools";
-                            Download = "https://download-cf.jetbrains.com/resharper/JetBrains.dotTrace.CommandLineTools.2017.3.2.zip";
-                            TargetDir = "dottrace-commandline";
-                         }]
-
-    jetBrainsTools
-    |> Seq.iter(fun t -> 
-        let toolName = Path.GetFileNameWithoutExtension t.Download
-        let buildToolsDirectory = Paths.Build("tools")
-        let targetDir = sprintf "%s/%s" buildToolsDirectory t.TargetDir
-        
-        if (not (Directory.Exists targetDir)) then
-            tracefn "No %s found in %s. Downloading now" t.Name buildToolsDirectory
-            let zipFile = sprintf "%s/%s.zip" buildToolsDirectory toolName
-            use webClient = new WebClient()
-            webClient.DownloadFile(t.Download, zipFile)
-            System.IO.Compression.ZipFile.ExtractToDirectory(zipFile, targetDir)
-            File.Delete zipFile
-            tracefn "%s downloaded" t.Name
-    )
-
-    type ProfilerTooling(path) =
-        let commandLineTool = Paths.CheckedInTool((jetBrainsTools.Item 1).TargetDir)
-        let toolPath = commandLineTool @@ path
-        member this.Exec arguments = execAt Environment.CurrentDirectory toolPath arguments
-
-    let DotTraceReporter = new ProfilerTooling("Reporter.exe")
-    let DotTraceSnapshotStats = new ProfilerTooling("SnapshotStat.exe")
 
     type DotNetTooling(exe) =
         member this.Exec arguments =
