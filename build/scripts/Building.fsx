@@ -119,6 +119,8 @@ module Build =
                 if p.MergeDependencies <> [] then Rewrite None f p.MergeDependencies
     
     let ILRepack() = 
-        //nothing to IL merge in the 5.x branch
-        ignore()
+        //ilrepack on mono crashes pretty hard on my machine
+        match isMono with
+        | true -> ignore()
+        | false -> ilRepackInternal()
          
