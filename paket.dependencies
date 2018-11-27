@@ -6,11 +6,8 @@ group build
 
     nuget FAKE prerelease
     nuget FSharp.Data 
-    nuget Mono.Cecil prerelease
+    nuget Newtonsoft.Json
 
-    # persisting profiling results
-    nuget Nest  ~> 5.5 framework: net45
-	
 	nuget Octokit
 	
     nuget ILRepack 2.0.16

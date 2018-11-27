@@ -1,5 +1,4 @@
 ﻿#I @"../../packages/build/FAKE/tools"
-open Fake.Core
 #r @"FakeLib.dll"
 
 #load @"Commandline.fsx"
@@ -8,10 +7,8 @@ open Fake.Core
 #load @"Tooling.fsx"
 #load @"Versioning.fsx"
 
-open System.IO
 open Fake 
 open Paths
-open Projects
 open Tooling
 open Commandline
 open Versioning

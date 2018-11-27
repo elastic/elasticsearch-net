@@ -5,7 +5,6 @@
 #load @"Paths.fsx"
 #load @"Commandline.fsx"
 
-open System
 open System.IO
 
 open Fake 

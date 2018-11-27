@@ -5,23 +5,17 @@
 #r @"System.Xml.Linq.dll"
 #nowarn "0044" //TODO sort out FAKE 5
 
-#load @"Projects.fsx"
 #load @"Paths.fsx"
 #load @"Commandline.fsx"
 
 open System
 open System.Diagnostics
 open System.IO
-open System.Xml
-open System.Text.RegularExpressions
 open FSharp.Data 
 
 open Fake 
-open AssemblyInfoFile
 open SemVerHelper
 open Paths
-open Projects
-open SemVerHelper
 open Commandline
 
 module Versioning = 

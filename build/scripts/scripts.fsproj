@@ -3,13 +3,12 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="Differ.fsx" />
     <None Include="Projects.fsx" />
     <None Include="Paths.fsx" />
+    <None Include="Differ.fsx" />
     <None Include="Tooling.fsx" />
     <None Include="Releasing.fsx" />
     <None Include="Versioning.fsx" />
-    <None Include="Profiling.fsx" />
     <None Include="Benchmarking.fsx" />
     <None Include="XmlDocPatcher.fsx" />
     <None Include="Building.fsx" />
