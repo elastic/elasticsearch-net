@@ -8,7 +8,6 @@
 #load @"Documentation.fsx"
 #load @"Releasing.fsx"
 #load @"Benchmarking.fsx"
-#load @"Profiling.fsx"
 #load @"XmlDocPatcher.fsx"
 #load @"Differ.fsx"
 #nowarn "0044" //TODO sort out FAKE 5
@@ -23,15 +22,11 @@ open Testing
 open Versioning
 open Documentation
 open Releasing
-open Profiling
 open Benchmarking
 open XmlDocPatcher
-open Documentation
 open Commandline
 open Differ
-open Differ.Differ
 open Fake.IO
-open Octokit
 
 Commandline.parse()
 
@@ -49,11 +44,6 @@ Target "Restore" Build.Restore
 Target "FullBuild" <| fun _ -> Build.Compile Commandline.needsFullBuild
     
 Target "Test" Tests.RunUnitTests
-
-Target "Profile" <| fun _ -> 
-    Profiler.Run()
-    let url = getBuildParam "elasticsearch"
-    Profiler.IndexResults url
 
 Target "Integrate" Tests.RunIntegrationTests
 
@@ -132,11 +122,6 @@ Target "GenerateReleaseNotes" Release.GenerateNotes
   ==> "InheritDoc"
   =?> ("Documentation", (not Commandline.skipDocs))
   ==> "Build"
-
-"Start"
-  =?> ("Clean", Commandline.needsClean )
-  =?> ("FullBuild", Commandline.needsFullBuild)
-  ==> "Profile"
 
 "Start"
   =?> ("Clean", Commandline.needsClean )

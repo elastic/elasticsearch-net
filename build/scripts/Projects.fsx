@@ -1,15 +1,4 @@
-﻿#I @"../../packages/build/FAKE/tools"
-#r @"FakeLib.dll"
-#r @"System.IO.Compression.FileSystem.dll"
-
-open System
-open System.IO
-open System.Diagnostics
-open System.Net
-
-open Fake
-
-[<AutoOpen>]
+﻿[<AutoOpen>]
 module Projects = 
     type DotNetFrameworkIdentifier = { MSBuild: string; Nuget: string; DefineConstants: string; }
 
