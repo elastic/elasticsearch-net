@@ -5,7 +5,6 @@
   <ItemGroup>
     <None Include="Projects.fsx" />
     <None Include="Paths.fsx" />
-    <None Include="Differ.fsx" />
     <None Include="Tooling.fsx" />
     <None Include="Releasing.fsx" />
     <None Include="Versioning.fsx" />
