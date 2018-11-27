@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	[MapsApi("indices.put_mapping.json")]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<PutMappingRequest>))]
+	[ReadAs(typeof(PutMappingRequest))]
 	public partial interface IPutMappingRequest : ITypeMapping { }
 
 	public partial interface IPutMappingRequest<T> where T : class { }

@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IFieldValueFactorFunction : IScoreFunction
 	{
-		[JsonProperty("factor")]
+		[DataMember(Name ="factor")]
 		double? Factor { get; set; }
 
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
-		[JsonProperty("missing")]
+		[DataMember(Name ="missing")]
 		double? Missing { get; set; }
 
-		[JsonProperty("modifier")]
-		[JsonConverter(typeof(StringEnumConverter))]
+		[DataMember(Name ="modifier")]
+
 		FieldValueFactorModifier? Modifier { get; set; }
 	}
 

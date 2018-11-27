@@ -1,13 +1,13 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(ReserializeJsonConverter<TriggerContainer, ITriggerContainer>))]
 	public interface ITriggerContainer
 	{
-		[JsonProperty("schedule")]
+		[DataMember(Name ="schedule")]
 		IScheduleContainer Schedule { get; set; }
 	}
 

@@ -1,5 +1,5 @@
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
@@ -12,21 +12,21 @@ namespace Nest
 		/// <summary>
 		/// The index to reindex into
 		/// </summary>
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		IndexName Index { get; set; }
 
 		/// <summary>
 		/// Setting to <see cref="Elasticsearch.Net.OpType.Create" /> will cause reindex to only
 		/// create missing documents in the destination index.
 		/// </summary>
-		[JsonProperty("op_type")]
-		[JsonConverter(typeof(StringEnumConverter))]
+		[DataMember(Name ="op_type")]
+
 		OpType? OpType { get; set; }
 
 		/// <summary>
 		/// The routing to use when reindexing
 		/// </summary>
-		[JsonProperty("routing")]
+		[DataMember(Name ="routing")]
 		ReindexRouting Routing { get; set; }
 
 		/// <summary>
@@ -35,8 +35,8 @@ namespace Nest
 		/// and update any documents that have an older version in the destination index
 		/// than they do in the source index
 		/// </summary>
-		[JsonProperty("version_type")]
-		[JsonConverter(typeof(StringEnumConverter))]
+		[DataMember(Name ="version_type")]
+
 		VersionType? VersionType { get; set; }
 	}
 

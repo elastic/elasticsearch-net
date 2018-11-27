@@ -1,37 +1,37 @@
 ﻿using System;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IBulkOperation
 	{
 		Type ClrType { get; }
 
-		[JsonProperty("_id")]
+		[DataMember(Name ="_id")]
 		Id Id { get; set; }
 
-		[JsonProperty("_index")]
+		[DataMember(Name ="_index")]
 		IndexName Index { get; set; }
 
 		string Operation { get; }
 
-		[JsonProperty("parent")]
+		[DataMember(Name ="parent")]
 		Id Parent { get; set; }
 
-		[JsonProperty("retry_on_conflict")]
+		[DataMember(Name ="retry_on_conflict")]
 		int? RetriesOnConflict { get; set; }
 
-		[JsonProperty("routing")]
+		[DataMember(Name ="routing")]
 		Routing Routing { get; set; }
 
-		[JsonProperty("version")]
+		[DataMember(Name = "version")]
 		long? Version { get; set; }
 
-		[JsonProperty("version_type")]
-		[JsonConverter(typeof(StringEnumConverter))]
+		[DataMember(Name ="version_type")]
+
 		VersionType? VersionType { get; set; }
 
 		object GetBody();

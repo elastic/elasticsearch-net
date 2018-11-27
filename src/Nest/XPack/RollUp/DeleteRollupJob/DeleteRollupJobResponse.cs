@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public interface IDeleteRollupJobResponse : IAcknowledgedResponse { }
 
 	public class DeleteRollupJobResponse : AcknowledgedResponseBase, IDeleteRollupJobResponse

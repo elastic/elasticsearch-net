@@ -1,31 +1,31 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ScheduleContainer>))]
+	[DataContract]
+	[ReadAs(typeof(ScheduleContainer))]
 	public interface IScheduleContainer
 	{
-		[JsonProperty("cron")]
+		[DataMember(Name ="cron")]
 		CronExpression Cron { get; set; }
 
-		[JsonProperty("daily")]
+		[DataMember(Name ="daily")]
 		IDailySchedule Daily { get; set; }
 
-		[JsonProperty("hourly")]
+		[DataMember(Name ="hourly")]
 		IHourlySchedule Hourly { get; set; }
 
-		[JsonProperty("interval")]
+		[DataMember(Name ="interval")]
 		Interval Interval { get; set; }
 
-		[JsonProperty("monthly")]
+		[DataMember(Name ="monthly")]
 		IMonthlySchedule Monthly { get; set; }
 
-		[JsonProperty("weekly")]
+		[DataMember(Name ="weekly")]
 		IWeeklySchedule Weekly { get; set; }
 
-		[JsonProperty("yearly")]
+		[DataMember(Name ="yearly")]
 		IYearlySchedule Yearly { get; set; }
 	}
 

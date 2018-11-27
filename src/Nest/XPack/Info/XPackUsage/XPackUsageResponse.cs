@@ -1,41 +1,41 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IXPackUsageResponse : IResponse
 	{
-		[JsonProperty("watcher")]
+		[DataMember(Name ="watcher")]
 		AlertingUsage Alerting { get; }
 
-		[JsonProperty("graph")]
+		[DataMember(Name ="graph")]
 		XPackUsage Graph { get; }
 
-		[JsonProperty("ml")]
+		[DataMember(Name ="ml")]
 		MachineLearningUsage MachineLearning { get; }
 
-		[JsonProperty("monitoring")]
+		[DataMember(Name ="monitoring")]
 		MonitoringUsage Monitoring { get; }
 
-		[JsonProperty("security")]
+		[DataMember(Name ="security")]
 		SecurityUsage Security { get; }
 	}
 
 	public class XPackUsageResponse : ResponseBase, IXPackUsageResponse
 	{
-		[JsonProperty("watcher")]
+		[DataMember(Name ="watcher")]
 		public AlertingUsage Alerting { get; internal set; }
 
-		[JsonProperty("graph")]
+		[DataMember(Name ="graph")]
 		public XPackUsage Graph { get; internal set; }
 
-		[JsonProperty("ml")]
+		[DataMember(Name ="ml")]
 		public MachineLearningUsage MachineLearning { get; internal set; }
 
-		[JsonProperty("monitoring")]
+		[DataMember(Name ="monitoring")]
 		public MonitoringUsage Monitoring { get; internal set; }
 
-		[JsonProperty("security")]
+		[DataMember(Name ="security")]
 		public SecurityUsage Security { get; internal set; }
 	}
 
@@ -47,159 +47,159 @@ namespace Nest
 
 	public class SecurityUsage : XPackUsage
 	{
-		[JsonProperty("anonymous")]
+		[DataMember(Name ="anonymous")]
 		public SecurityFeatureToggle Anonymous { get; internal set; }
 
-		[JsonProperty("audit")]
+		[DataMember(Name ="audit")]
 		public AuditUsage Audit { get; internal set; }
 
-		[JsonProperty("ipfilter")]
+		[DataMember(Name ="ipfilter")]
 		public IpFilterUsage IpFilter { get; internal set; }
 
-		[JsonProperty("realms")]
+		[DataMember(Name ="realms")]
 		public IReadOnlyDictionary<string, RealmUsage> Realms { get; internal set; } = EmptyReadOnly<string, RealmUsage>.Dictionary;
 
-		[JsonProperty("roles")]
+		[DataMember(Name ="roles")]
 		public IReadOnlyDictionary<string, RoleUsage> Roles { get; internal set; } = EmptyReadOnly<string, RoleUsage>.Dictionary;
 
-		[JsonProperty("ssl")]
+		[DataMember(Name ="ssl")]
 		public SslUsage Ssl { get; internal set; }
 
-		[JsonProperty("system_key")]
+		[DataMember(Name ="system_key")]
 		public SecurityFeatureToggle SystemKey { get; internal set; }
 
 		public class AuditUsage : SecurityFeatureToggle
 		{
-			[JsonProperty("outputs")]
+			[DataMember(Name ="outputs")]
 			public IReadOnlyCollection<string> Outputs { get; internal set; } = EmptyReadOnly<string>.Collection;
 		}
 
 		public class IpFilterUsage
 		{
-			[JsonProperty("http")]
+			[DataMember(Name ="http")]
 			public bool Http { get; internal set; }
 
-			[JsonProperty("transport")]
+			[DataMember(Name ="transport")]
 			public bool Transport { get; internal set; }
 		}
 
 		public class RealmUsage : XPackUsage
 		{
-			[JsonProperty("name")]
+			[DataMember(Name ="name")]
 			public IReadOnlyCollection<string> Name { get; internal set; } = EmptyReadOnly<string>.Collection;
 
-			[JsonProperty("order")]
+			[DataMember(Name ="order")]
 			public IReadOnlyCollection<long> Order { get; internal set; } = EmptyReadOnly<long>.Collection;
 
-			[JsonProperty("size")]
+			[DataMember(Name ="size")]
 			public IReadOnlyCollection<long> Size { get; internal set; } = EmptyReadOnly<long>.Collection;
 		}
 
 		public class RoleUsage
 		{
-			[JsonProperty("dls")]
+			[DataMember(Name ="dls")]
 			public bool Dls { get; internal set; }
 
-			[JsonProperty("fls")]
+			[DataMember(Name ="fls")]
 			public bool Fls { get; internal set; }
 
-			[JsonProperty("size")]
+			[DataMember(Name ="size")]
 			public long Size { get; internal set; }
 		}
 
 		public class SslUsage
 		{
-			[JsonProperty("http")]
+			[DataMember(Name ="http")]
 			public SecurityFeatureToggle Http { get; internal set; }
 
-			[JsonProperty("transport")]
+			[DataMember(Name ="transport")]
 			public SecurityFeatureToggle Transport { get; internal set; }
 		}
 
 		public class SecurityFeatureToggle
 		{
-			[JsonProperty("enabled")]
+			[DataMember(Name ="enabled")]
 			public bool Enabled { get; internal set; }
 		}
 	}
 
 	public class AlertingUsage : XPackUsage
 	{
-		[JsonProperty("count")]
+		[DataMember(Name ="count")]
 		public AlertingCount Count { get; internal set; }
 
-		[JsonProperty("execution")]
+		[DataMember(Name ="execution")]
 		public AlertingExecution Execution { get; internal set; }
 
 		public class AlertingExecution
 		{
-			[JsonProperty("actions")]
+			[DataMember(Name ="actions")]
 			public IReadOnlyDictionary<string, ExecutionAction> Actions { get; internal set; } = EmptyReadOnly<string, ExecutionAction>.Dictionary;
 		}
 
 		public class ExecutionAction
 		{
-			[JsonProperty("total")]
+			[DataMember(Name ="total")]
 			public long Total { get; internal set; }
 
-			[JsonProperty("total_in_ms")]
+			[DataMember(Name ="total_in_ms")]
 			public long TotalInMilliseconds { get; internal set; }
 		}
 
 		public class AlertingCount
 		{
-			[JsonProperty("active")]
+			[DataMember(Name ="active")]
 			public long Active { get; internal set; }
 
-			[JsonProperty("total")]
+			[DataMember(Name ="total")]
 			public long Total { get; internal set; }
 		}
 	}
 
 	public class MonitoringUsage : XPackUsage
 	{
-		[JsonProperty("enabled_exporters")]
+		[DataMember(Name ="enabled_exporters")]
 		public IReadOnlyDictionary<string, long> EnabledExporters { get; set; } = EmptyReadOnly<string, long>.Dictionary;
 	}
 
 	public class MachineLearningUsage : XPackUsage
 	{
-		[JsonProperty("datafeeds")]
+		[DataMember(Name ="datafeeds")]
 		public IReadOnlyDictionary<string, DataFeed> Datafeeds { get; set; } = EmptyReadOnly<string, DataFeed>.Dictionary;
 
-		[JsonProperty("jobs")]
+		[DataMember(Name ="jobs")]
 		public IReadOnlyDictionary<string, Job> Jobs { get; set; } = EmptyReadOnly<string, Job>.Dictionary;
 
 		public class DataFeed
 		{
-			[JsonProperty("count")]
+			[DataMember(Name ="count")]
 			public long Count { get; internal set; }
 		}
 
 		public class Job
 		{
-			[JsonProperty("count")]
+			[DataMember(Name ="count")]
 			public long Count { get; internal set; }
 
-			[JsonProperty("detectors")]
+			[DataMember(Name ="detectors")]
 			public JobStatistics Detectors { get; internal set; }
 
-			[JsonProperty("model_size")]
+			[DataMember(Name ="model_size")]
 			public JobStatistics ModelSize { get; internal set; }
 		}
 
 		public class JobStatistics
 		{
-			[JsonProperty("avg")]
+			[DataMember(Name ="avg")]
 			public double Average { get; internal set; }
 
-			[JsonProperty("max")]
+			[DataMember(Name ="max")]
 			public double Maximum { get; internal set; }
 
-			[JsonProperty("min")]
+			[DataMember(Name ="min")]
 			public double Minimum { get; internal set; }
 
-			[JsonProperty("total")]
+			[DataMember(Name ="total")]
 			public double Total { get; internal set; }
 		}
 	}

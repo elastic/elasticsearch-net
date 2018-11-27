@@ -1,18 +1,18 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<FielddataFrequencyFilter>))]
+	[DataContract]
+	[ReadAs(typeof(FielddataFrequencyFilter))]
 	public interface IFielddataFrequencyFilter
 	{
-		[JsonProperty("max")]
+		[DataMember(Name ="max")]
 		double? Max { get; set; }
 
-		[JsonProperty("min")]
+		[DataMember(Name ="min")]
 		double? Min { get; set; }
 
-		[JsonProperty("min_segment_size")]
+		[DataMember(Name ="min_segment_size")]
 		int? MinSegmentSize { get; set; }
 	}
 

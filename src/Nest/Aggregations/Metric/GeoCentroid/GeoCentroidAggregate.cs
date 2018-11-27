@@ -1,13 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class GeoCentroidAggregate : MetricAggregateBase
 	{
-		[JsonProperty("count")]
+		[DataMember(Name ="count")]
 		public long Count { get; set; }
 
-		[JsonProperty("location")]
+		[DataMember(Name ="location")]
 		public GeoLocation Location { get; set; }
 	}
 }

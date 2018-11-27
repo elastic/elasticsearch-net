@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -8,40 +8,40 @@ namespace Nest
 	/// A generic property to map properties that may be of different types.
 	/// Not all methods are valid for all types.
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IGenericProperty : IDocValuesProperty
 	{
-		[JsonProperty("analyzer")]
+		[DataMember(Name ="analyzer")]
 		string Analyzer { get; set; }
 
-		[JsonProperty("boost")]
+		[DataMember(Name ="boost")]
 		double? Boost { get; set; }
 
-		[JsonProperty("fielddata")]
+		[DataMember(Name ="fielddata")]
 		IStringFielddata Fielddata { get; set; }
 
-		[JsonProperty("ignore_above")]
+		[DataMember(Name ="ignore_above")]
 		int? IgnoreAbove { get; set; }
 
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		bool? Index { get; set; }
 
-		[JsonProperty("index_options")]
+		[DataMember(Name ="index_options")]
 		IndexOptions? IndexOptions { get; set; }
 
-		[JsonProperty("norms")]
+		[DataMember(Name ="norms")]
 		bool? Norms { get; set; }
 
-		[JsonProperty("null_value")]
+		[DataMember(Name ="null_value")]
 		string NullValue { get; set; }
 
-		[JsonProperty("position_increment_gap")]
+		[DataMember(Name ="position_increment_gap")]
 		int? PositionIncrementGap { get; set; }
 
-		[JsonProperty("search_analyzer")]
+		[DataMember(Name ="search_analyzer")]
 		string SearchAnalyzer { get; set; }
 
-		[JsonProperty("term_vector")]
+		[DataMember(Name ="term_vector")]
 		TermVectorOption? TermVector { get; set; }
 	}
 

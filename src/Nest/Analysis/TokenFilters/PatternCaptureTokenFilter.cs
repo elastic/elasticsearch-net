@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -11,13 +11,13 @@ namespace Nest
 		/// <summary>
 		/// The regular expression patterns to capture
 		/// </summary>
-		[JsonProperty("patterns")]
+		[DataMember(Name ="patterns")]
 		IEnumerable<string> Patterns { get; set; }
 
 		/// <summary>
 		/// If preserve_original is set to true then it would also emit the original token
 		/// </summary>
-		[JsonProperty("preserve_original")]
+		[DataMember(Name ="preserve_original")]
 		bool? PreserveOriginal { get; set; }
 	}
 

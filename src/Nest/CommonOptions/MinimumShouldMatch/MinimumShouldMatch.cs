@@ -1,13 +1,7 @@
-﻿using System;
-using Newtonsoft.Json;
-using Utf8Json;
-using JsonReader = Newtonsoft.Json.JsonReader;
-using JsonSerializer = Newtonsoft.Json.JsonSerializer;
-using JsonWriter = Newtonsoft.Json.JsonWriter;
+﻿using Utf8Json;
 
 namespace Nest
 {
-	[ContractJsonConverter(typeof(MinimumShouldMatchJsonConverter))]
 	[JsonFormatter(typeof(MinimumShouldMatchFormatter))]
 	public class MinimumShouldMatch : Union<int?, string>
 	{
@@ -24,25 +18,5 @@ namespace Nest
 		public static implicit operator MinimumShouldMatch(int second) => new MinimumShouldMatch(second);
 
 		public static implicit operator MinimumShouldMatch(double second) => Percentage(second);
-	}
-
-	internal class MinimumShouldMatchJsonConverter : JsonConverter
-	{
-		public static UnionJsonConverter<int?, string> Unionconverter = new UnionJsonConverter<int?, string>();
-		public override bool CanRead => true;
-		public override bool CanWrite => true;
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			var union = Unionconverter.ReadJson(reader, objectType, existingValue, serializer) as Union<int?, string>;
-			if (union.Item1.HasValue) return new MinimumShouldMatch(union.Item1.Value);
-
-			return new MinimumShouldMatch(union.Item2);
-		}
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) =>
-			Unionconverter.WriteJson(writer, value, serializer);
-
-		public override bool CanConvert(Type objectType) => true;
 	}
 }

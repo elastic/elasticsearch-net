@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -11,26 +11,26 @@ namespace Nest
 		/// <summary>
 		/// If only unique terms should be returned, this needs to be set to true.
 		/// </summary>
-		[JsonProperty("dedup")]
+		[DataMember(Name ="dedup")]
 		bool? Dedup { get; set; }
 
 		/// <summary>
 		/// The name of a dictionary.The path to your hunspell dictionaries should be configured via
 		/// `indices.analysis.hunspell.dictionary.location` before.
 		/// </summary>
-		[JsonProperty("dictionary")]
+		[DataMember(Name ="dictionary")]
 		string Dictionary { get; set; }
 
 		/// <summary>
 		/// A locale for this filter. If this is unset, the lang or language are used instead - so one of these has to be set.
 		/// </summary>
-		[JsonProperty("locale")]
+		[DataMember(Name ="locale")]
 		string Locale { get; set; }
 
 		/// <summary>
 		/// If only the longest term should be returned, set this to true.
 		/// </summary>
-		[JsonProperty("longest_only")]
+		[DataMember(Name ="longest_only")]
 		bool? LongestOnly { get; set; }
 	}
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -10,32 +11,32 @@ namespace Nest
 	/// Each bucket may be sorted based on its _key, _count or its sub-aggregations.
 	/// In addition, parameters from and size may be set in order to truncate the result buckets.
 	/// </summary>
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<BucketSortAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(BucketSortAggregation))]
 	public interface IBucketSortAggregation : IAggregation
 	{
 		/// <summary>
 		/// Buckets in positions prior to the set value will be truncated
 		/// </summary>
-		[JsonProperty("from")]
+		[DataMember(Name ="from")]
 		int? From { get; set; }
 
 		/// <summary>
 		/// The policy to apply when gaps are found in the data
 		/// </summary>
-		[JsonProperty("gap_policy")]
+		[DataMember(Name ="gap_policy")]
 		GapPolicy? GapPolicy { get; set; }
 
 		/// <summary>
 		/// 	The number of buckets to return. Defaults to all buckets of the parent aggregation
 		/// </summary>
-		[JsonProperty("size")]
+		[DataMember(Name ="size")]
 		int? Size { get; set; }
 
 		/// <summary>
 		/// The list of fields to sort on
 		/// </summary>
-		[JsonProperty("sort")]
+		[DataMember(Name ="sort")]
 		IList<ISort> Sort { get; set; }
 	}
 

@@ -1,33 +1,33 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IUpdateResponse<TDocument> : IResponse
 		where TDocument : class
 	{
-		[JsonProperty("get")]
+		[DataMember(Name ="get")]
 		InstantGet<TDocument> Get { get; }
 
-		[JsonProperty("_id")]
+		[DataMember(Name ="_id")]
 		string Id { get; }
 
-		[JsonProperty("_index")]
+		[DataMember(Name ="_index")]
 		string Index { get; }
 
-		[JsonProperty("result")]
+		[DataMember(Name ="result")]
 		Result Result { get; }
 
-		[JsonProperty("_shards")]
+		[DataMember(Name ="_shards")]
 		ShardStatistics ShardsHit { get; }
 
-		[JsonProperty("_type")]
+		[DataMember(Name ="_type")]
 		string Type { get; }
 
-		[JsonProperty("_version")]
+		[DataMember(Name ="_version")]
 		long Version { get; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class UpdateResponse<TDocument> : ResponseBase, IUpdateResponse<TDocument>
 		where TDocument : class
 	{

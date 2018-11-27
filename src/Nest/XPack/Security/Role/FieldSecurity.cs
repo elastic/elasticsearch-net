@@ -1,15 +1,15 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<FieldSecurity>))]
+	[ReadAs(typeof(FieldSecurity))]
 	public interface IFieldSecurity
 	{
-		[JsonProperty("except")]
+		[DataMember(Name ="except")]
 		Fields Except { get; set; }
 
-		[JsonProperty("grant")]
+		[DataMember(Name ="grant")]
 		Fields Grant { get; set; }
 	}
 

@@ -1,33 +1,33 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class CatNodeAttributesRecord : ICatRecord
 	{
-		[JsonProperty("attr")]
+		[DataMember(Name ="attr")]
 		public string Attribute { get; set; }
 
-		[JsonProperty("host")]
+		[DataMember(Name ="host")]
 		public string Host { get; set; }
 
 		// duration indices successful_shards failed_shards total_shards
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		public string Id { get; set; }
 
-		[JsonProperty("ip")]
+		[DataMember(Name ="ip")]
 		public string Ip { get; set; }
 
-		[JsonProperty("node")]
+		[DataMember(Name ="node")]
 		public string Node { get; set; }
 
-		[JsonProperty("port")]
+		[DataMember(Name ="port")]
 		public long Port { get; set; }
 
-		[JsonProperty("pid")]
+		[DataMember(Name ="pid")]
 		public long ProcessId { get; set; }
 
-		[JsonProperty("value")]
+		[DataMember(Name ="value")]
 		public string Value { get; set; }
 	}
 }

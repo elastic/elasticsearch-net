@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(SpanGapQueryJsonConverter))]
 	public interface ISpanGapQuery : ISpanSubQuery
 	{
@@ -24,7 +24,7 @@ namespace Nest
 			throw new Exception("span_gap may only appear as a span near clause");
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	public class SpanGapQueryDescriptor<T> : QueryDescriptorBase<SpanGapQueryDescriptor<T>, ISpanGapQuery>, ISpanGapQuery
 		where T : class
 	{

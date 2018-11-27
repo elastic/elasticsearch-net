@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -11,19 +11,19 @@ namespace Nest
 		/// <summary>
 		/// Set to true to lower case all words first. Defaults to false.
 		/// </summary>
-		[JsonProperty("ignore_case")]
+		[DataMember(Name ="ignore_case")]
 		bool? IgnoreCase { get; set; }
 
 		/// <summary>
 		/// A list of words to use.
 		/// </summary>
-		[JsonProperty("keywords")]
+		[DataMember(Name ="keywords")]
 		IEnumerable<string> Keywords { get; set; }
 
 		/// <summary>
 		/// A path (either relative to config location, or absolute) to a list of words.
 		/// </summary>
-		[JsonProperty("keywords_path")]
+		[DataMember(Name ="keywords_path")]
 		string KeywordsPath { get; set; }
 	}
 

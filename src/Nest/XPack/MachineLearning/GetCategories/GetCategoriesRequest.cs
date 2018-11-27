@@ -1,5 +1,5 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -12,7 +12,7 @@ namespace Nest
 		/// <summary>
 		/// Specifies pagination for the categories
 		/// </summary>
-		[JsonProperty("page")]
+		[DataMember(Name ="page")]
 		IPage Page { get; set; }
 	}
 

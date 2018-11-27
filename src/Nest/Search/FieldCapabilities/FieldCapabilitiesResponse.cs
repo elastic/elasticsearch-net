@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public interface IFieldCapabilitiesResponse : IResponse
 	{
-		[JsonProperty("fields")]
+		[DataMember(Name ="fields")]
 		FieldCapabilitiesFields Fields { get; }
 	}
 
@@ -73,19 +73,19 @@ namespace Nest
 
 	public class FieldCapabilities
 	{
-		[JsonProperty("aggregatable")]
+		[DataMember(Name ="aggregatable")]
 		public bool Aggregatable { get; internal set; }
 
-		[JsonProperty("indices")]
+		[DataMember(Name ="indices")]
 		public Indices Indices { get; internal set; }
 
-		[JsonProperty("non_aggregatable_indices")]
+		[DataMember(Name ="non_aggregatable_indices")]
 		public Indices NonAggregatableIndices { get; internal set; }
 
-		[JsonProperty("non_searchable_indices")]
+		[DataMember(Name ="non_searchable_indices")]
 		public Indices NonSearchableIndices { get; internal set; }
 
-		[JsonProperty("searchable")]
+		[DataMember(Name ="searchable")]
 		public bool Searchable { get; internal set; }
 	}
 }

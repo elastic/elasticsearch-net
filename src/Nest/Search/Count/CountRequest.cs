@@ -1,14 +1,14 @@
 ﻿using System;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	[MapsApi("count.json")]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<CountRequest>))]
+	[ReadAs(typeof(CountRequest))]
 	public partial interface ICountRequest
 	{
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		QueryContainer Query { get; set; }
 	}
 

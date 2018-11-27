@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -10,40 +10,40 @@ namespace Nest
 		/// For example, a query with a boost of 2 is twice as important as a query with a boost of 1,
 		/// although the actual boost value that is applied undergoes normalization and internal optimization.
 		/// </summary>
-		[JsonProperty("boost")]
+		[DataMember(Name ="boost")]
 		double? Boost { get; set; }
 
 		/// <summary>
 		/// Whether the query is conditionless. A conditionless query is not serialized as part of the request
 		/// sent to Elasticsearch.
 		/// </summary>
-		[JsonIgnore]
+		[IgnoreDataMember]
 		bool Conditionless { get; }
 
 		/// <summary>
 		/// Whether the query should be treated as strict. A strict query will throw an exception when serialized
 		/// if it is <see cref="Conditionless" />.
 		/// </summary>
-		[JsonIgnore]
+		[IgnoreDataMember]
 		bool IsStrict { get; set; }
 
 		/// <summary>
 		/// Whether the query should be treated as verbatim. A verbatim query will be serialized as part of the request, irrespective
 		/// of whether it is <see cref="Conditionless" /> or not.
 		/// </summary>
-		[JsonIgnore]
+		[IgnoreDataMember]
 		bool IsVerbatim { get; set; }
 
 		/// <summary>
 		/// Whether the query should be treated as writable. Used when determining how to combine queries.
 		/// </summary>
-		[JsonIgnore]
+		[IgnoreDataMember]
 		bool IsWritable { get; }
 
 		/// <summary>
 		/// The name of the query. Allows you to retrieve for each document what part of the query it matched on.
 		/// </summary>
-		[JsonProperty("_name")]
+		[DataMember(Name ="_name")]
 		string Name { get; set; }
 	}
 

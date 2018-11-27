@@ -1,178 +1,178 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class ClusterNodesStats
 	{
-		[JsonProperty("count")]
+		[DataMember(Name ="count")]
 		public ClusterNodeCount Count { get; internal set; }
 
-		[JsonProperty("fs")]
+		[DataMember(Name ="fs")]
 		public ClusterFileSystem FileSystem { get; internal set; }
 
-		[JsonProperty("jvm")]
+		[DataMember(Name ="jvm")]
 		public ClusterJvm Jvm { get; internal set; }
 
-		[JsonProperty("os")]
+		[DataMember(Name ="os")]
 		public ClusterOperatingSystemStats OperatingSystem { get; internal set; }
 
-		[JsonProperty("plugins")]
+		[DataMember(Name ="plugins")]
 		public IReadOnlyCollection<PluginStats> Plugins { get; internal set; }
 
-		[JsonProperty("process")]
+		[DataMember(Name ="process")]
 		public ClusterProcess Process { get; internal set; }
 
-		[JsonProperty("versions")]
+		[DataMember(Name ="versions")]
 		public IReadOnlyCollection<string> Versions { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class ClusterFileSystem
 	{
-		[JsonProperty("available")]
+		[DataMember(Name ="available")]
 		public string Available { get; internal set; }
 
-		[JsonProperty("available_in_bytes")]
+		[DataMember(Name ="available_in_bytes")]
 		public long AvailableInBytes { get; internal set; }
 
-		[JsonProperty("free")]
+		[DataMember(Name ="free")]
 		public string Free { get; internal set; }
 
-		[JsonProperty("free_in_bytes")]
+		[DataMember(Name ="free_in_bytes")]
 		public long FreeInBytes { get; internal set; }
 
-		[JsonProperty("total")]
+		[DataMember(Name ="total")]
 		public string Total { get; internal set; }
 
-		[JsonProperty("total_in_bytes")]
+		[DataMember(Name ="total_in_bytes")]
 		public long TotalInBytes { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class ClusterJvm
 	{
-		[JsonProperty("max_uptime")]
+		[DataMember(Name ="max_uptime")]
 		public string MaxUptime { get; internal set; }
 
-		[JsonProperty("max_uptime_in_millis")]
+		[DataMember(Name ="max_uptime_in_millis")]
 		public long MaxUptimeInMilliseconds { get; internal set; }
 
-		[JsonProperty("mem")]
+		[DataMember(Name ="mem")]
 		public ClusterJvmMemory Memory { get; internal set; }
 
-		[JsonProperty("threads")]
+		[DataMember(Name ="threads")]
 		public long Threads { get; internal set; }
 
-		[JsonProperty("versions")]
+		[DataMember(Name ="versions")]
 		public IReadOnlyCollection<ClusterJvmVersion> Versions { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class ClusterJvmVersion
 	{
-		[JsonProperty("count")]
+		[DataMember(Name ="count")]
 		public int Count { get; internal set; }
 
-		[JsonProperty("version")]
+		[DataMember(Name ="version")]
 		public string Version { get; internal set; }
 
-		[JsonProperty("vm_name")]
+		[DataMember(Name ="vm_name")]
 		public string VmName { get; internal set; }
 
-		[JsonProperty("vm_vendor")]
+		[DataMember(Name ="vm_vendor")]
 		public string VmVendor { get; internal set; }
 
-		[JsonProperty("vm_version")]
+		[DataMember(Name ="vm_version")]
 		public string VmVersion { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class ClusterJvmMemory
 	{
-		[JsonProperty("heap_max")]
+		[DataMember(Name ="heap_max")]
 		public string HeapMax { get; internal set; }
 
-		[JsonProperty("heap_max_in_bytes")]
+		[DataMember(Name ="heap_max_in_bytes")]
 		public long HeapMaxInBytes { get; internal set; }
 
-		[JsonProperty("heap_used")]
+		[DataMember(Name ="heap_used")]
 		public string HeapUsed { get; set; }
 
-		[JsonProperty("heap_used_in_bytes")]
+		[DataMember(Name ="heap_used_in_bytes")]
 		public long HeapUsedInBytes { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class ClusterProcess
 	{
-		[JsonProperty("cpu")]
+		[DataMember(Name ="cpu")]
 		public ClusterProcessCpu Cpu { get; internal set; }
 
-		[JsonProperty("open_file_descriptors")]
+		[DataMember(Name ="open_file_descriptors")]
 		public ClusterProcessOpenFileDescriptors OpenFileDescriptors { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class ClusterProcessCpu
 	{
-		[JsonProperty("percent")]
+		[DataMember(Name ="percent")]
 		public int Percent { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class ClusterProcessOpenFileDescriptors
 	{
-		[JsonProperty("avg")]
+		[DataMember(Name ="avg")]
 		public long Avg { get; internal set; }
 
-		[JsonProperty("max")]
+		[DataMember(Name ="max")]
 		public long Max { get; internal set; }
 
-		[JsonProperty("min")]
+		[DataMember(Name ="min")]
 		public long Min { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class ClusterOperatingSystemStats
 	{
-		[JsonProperty("allocated_processors")]
+		[DataMember(Name ="allocated_processors")]
 		public int AllocatedProcessors { get; internal set; }
 
-		[JsonProperty("available_processors")]
+		[DataMember(Name ="available_processors")]
 		public int AvailableProcessors { get; internal set; }
 
-		[JsonProperty("names")]
+		[DataMember(Name ="names")]
 		public IReadOnlyCollection<ClusterOperatingSystemName> Names { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class ClusterOperatingSystemName
 	{
-		[JsonProperty("count")]
+		[DataMember(Name ="count")]
 		public int Count { get; internal set; }
 
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		public string Name { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class ClusterNodeCount
 	{
-		[JsonProperty("coordinating_only")]
+		[DataMember(Name ="coordinating_only")]
 		public int CoordinatingOnly { get; internal set; }
 
-		[JsonProperty("data")]
+		[DataMember(Name ="data")]
 		public int Data { get; internal set; }
 
-		[JsonProperty("ingest")]
+		[DataMember(Name ="ingest")]
 		public int Ingest { get; internal set; }
 
-		[JsonProperty("master")]
+		[DataMember(Name ="master")]
 		public int Master { get; internal set; }
 
-		[JsonProperty("total")]
+		[DataMember(Name ="total")]
 		public int Total { get; internal set; }
 	}
 }

@@ -1,28 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	[ContractJsonConverter(typeof(FieldRuleBaseJsonConverter))]
 	public abstract class FieldRuleBase : IsADictionaryBase<string, object>
 	{
-		[JsonIgnore]
+		[IgnoreDataMember]
 		protected string DistinguishedName
 		{
 			get => BackingDictionary.TryGetValue("dn", out var o) ? (string)o : null;
 			set => BackingDictionary.Add("dn", value);
 		}
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		protected IEnumerable<string> Groups
 		{
 			get => BackingDictionary.TryGetValue("groups", out var o) ? (IEnumerable<string>)o : null;
 			set => BackingDictionary.Add("groups", value);
 		}
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		protected Tuple<string, object> Metadata
 		{
 			get
@@ -33,14 +33,14 @@ namespace Nest
 			set => BackingDictionary.Add("metadata." + value.Item1, value.Item2);
 		}
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		protected string Realm
 		{
 			get => BackingDictionary.TryGetValue("realm.name", out var o) ? (string)o : null;
 			set => BackingDictionary.Add("realm.name", value);
 		}
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		protected string Username
 		{
 			get => BackingDictionary.TryGetValue("username", out var o) ? (string)o : null;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using static Nest.Infer;
 
 namespace Nest
@@ -16,10 +16,10 @@ namespace Nest
 
 	public class FieldMapping
 	{
-		[JsonProperty("full_name")]
+		[DataMember(Name ="full_name")]
 		public string FullName { get; internal set; }
 
-		[JsonProperty("mapping")]
+		[DataMember(Name ="mapping")]
 		[JsonConverter(typeof(FieldMappingJsonConverter))]
 		public IReadOnlyDictionary<Field, IFieldMapping> Mapping { get; internal set; } = EmptyReadOnly<Field, IFieldMapping>.Dictionary;
 	}
@@ -38,7 +38,7 @@ namespace Nest
 	[JsonConverter(typeof(ResolvableDictionaryResponseJsonConverter<GetFieldMappingResponse, IndexName, TypeFieldMappings>))]
 	public class GetFieldMappingResponse : DictionaryResponseBase<IndexName, TypeFieldMappings>, IGetFieldMappingResponse
 	{
-		[JsonIgnore]
+		[IgnoreDataMember]
 		public IReadOnlyDictionary<IndexName, TypeFieldMappings> Indices => Self.BackingDictionary;
 
 		//if you call get mapping on an existing type and index but no fields match you still get back a 200.

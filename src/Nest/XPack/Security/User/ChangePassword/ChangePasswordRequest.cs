@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	[MapsApi("security.change_password.json")]
 	public partial interface IChangePasswordRequest
 	{
-		[JsonProperty("password")]
+		[DataMember(Name ="password")]
 		string Password { get; set; }
 	}
 

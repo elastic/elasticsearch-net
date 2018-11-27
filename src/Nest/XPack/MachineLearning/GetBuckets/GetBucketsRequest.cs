@@ -1,5 +1,5 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
@@ -13,19 +13,19 @@ namespace Nest
 		/// <summary>
 		/// Returns buckets with anomaly scores higher than this value.
 		/// </summary>
-		[JsonProperty("anomaly_score")]
+		[DataMember(Name ="anomaly_score")]
 		double? AnomalyScore { get; set; }
 
 		/// <summary>
 		/// If true, the buckets are sorted in descending order.
 		/// </summary>
-		[JsonProperty("desc")]
+		[DataMember(Name ="desc")]
 		bool? Descending { get; set; }
 
 		/// <summary>
 		/// Returns buckets with timestamps earlier than this time.
 		/// </summary>
-		[JsonProperty("end")]
+		[DataMember(Name ="end")]
 		// Forced to prevent override, ML API always expects ISO8601 format
 		[JsonConverter(typeof(IsoDateTimeConverter))]
 		DateTimeOffset? End { get; set; }
@@ -33,34 +33,42 @@ namespace Nest
 		/// <summary>
 		/// If true, the output excludes interim results. By default, interim results are included.
 		/// </summary>
-		[JsonProperty("exclude_interim")]
+		[DataMember(Name ="exclude_interim")]
 		bool? ExcludeInterim { get; set; }
 
 		/// <summary>
 		/// If true, the output includes anomaly records.
 		/// </summary>
-		[JsonProperty("expand")]
+		[DataMember(Name ="expand")]
 		bool? Expand { get; set; }
 
 		/// <summary>
 		/// Specifies pagination for the buckets
 		/// </summary>
-		[JsonProperty("page")]
+		[DataMember(Name ="page")]
 		IPage Page { get; set; }
 
 		/// <summary>
 		/// Specifies the sort field for the requested buckets. By default, the buckets are sorted by the timestamp field.
 		/// </summary>
-		[JsonProperty("sort")]
+		[DataMember(Name ="sort")]
 		Field Sort { get; set; }
 
 		/// <summary>
 		/// Returns buckets with timestamps after this time.
 		/// </summary>
-		[JsonProperty("start")]
+		[DataMember(Name ="start")]
 		// Forced to prevent override, ML API always expects ISO8601 format
 		[JsonConverter(typeof(IsoDateTimeConverter))]
 		DateTimeOffset? Start { get; set; }
+
+		/// <summary>
+		/// Returns buckets with matching timestamps.
+		/// </summary>
+		[DataMember(Name ="timestamp")]
+		// Forced to prevent override, ML API always expects ISO8601 format
+		[JsonConverter(typeof(IsoDateTimeConverter))]
+		DateTimeOffset? Timestamp { get; set; }
 	}
 
 	/// <inheritdoc />

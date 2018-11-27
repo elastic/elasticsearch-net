@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
@@ -7,7 +7,7 @@ namespace Nest
 	/// <summary>
 	/// Use a built-in tag schema
 	/// </summary>
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum HighlighterTagsSchema
 	{
 		/// <summary>

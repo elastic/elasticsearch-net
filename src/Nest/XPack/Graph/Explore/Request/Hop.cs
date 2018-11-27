@@ -1,18 +1,18 @@
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IHop
 	{
-		[JsonProperty("connections")]
+		[DataMember(Name ="connections")]
 		IHop Connections { get; set; }
 
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		QueryContainer Query { get; set; }
 
-		[JsonProperty("vertices")]
+		[DataMember(Name ="vertices")]
 		IEnumerable<IGraphVertexDefinition> Vertices { get; set; }
 	}
 

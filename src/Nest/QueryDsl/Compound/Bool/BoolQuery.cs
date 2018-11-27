@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<BoolQuery>))]
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[ReadAs(typeof(BoolQuery))]
+	[DataContract]
 	[ReadAs(typeof(BoolQuery))]
 	public interface IBoolQuery : IQuery
 	{

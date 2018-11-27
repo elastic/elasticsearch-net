@@ -1,9 +1,10 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<PercentageScoreHeuristic>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(PercentageScoreHeuristic))]
 	public interface IPercentageScoreHeuristic { }
 
 	public class PercentageScoreHeuristic { }

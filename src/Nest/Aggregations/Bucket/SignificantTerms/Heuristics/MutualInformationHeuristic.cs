@@ -1,15 +1,16 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<MutualInformationHeuristic>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(MutualInformationHeuristic))]
 	public interface IMutualInformationHeuristic
 	{
-		[JsonProperty("background_is_superset")]
+		[DataMember(Name ="background_is_superset")]
 		bool? BackgroundIsSuperSet { get; set; }
 
-		[JsonProperty("include_negatives")]
+		[DataMember(Name ="include_negatives")]
 		bool? IncludeNegatives { get; set; }
 	}
 

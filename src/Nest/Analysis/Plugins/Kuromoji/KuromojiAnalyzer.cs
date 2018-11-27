@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -8,10 +8,10 @@ namespace Nest
 	/// </summary>
 	public interface IKuromojiAnalyzer : IAnalyzer
 	{
-		[JsonProperty("mode")]
+		[DataMember(Name ="mode")]
 		KuromojiTokenizationMode? Mode { get; set; }
 
-		[JsonProperty("user_dictionary")]
+		[DataMember(Name ="user_dictionary")]
 		string UserDictionary { get; set; }
 	}
 

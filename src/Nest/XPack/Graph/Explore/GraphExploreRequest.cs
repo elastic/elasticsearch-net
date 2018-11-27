@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public partial interface IGraphExploreRequest : IHop
 	{
-		[JsonProperty("controls")]
+		[DataMember(Name ="controls")]
 		IGraphExploreControls Controls { get; set; }
 	}
 

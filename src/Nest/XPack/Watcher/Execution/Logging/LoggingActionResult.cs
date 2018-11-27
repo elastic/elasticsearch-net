@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class LoggingActionResult
 	{
-		[JsonProperty("logged_text")]
+		[DataMember(Name ="logged_text")]
 		public string LoggedText { get; set; }
 	}
 }

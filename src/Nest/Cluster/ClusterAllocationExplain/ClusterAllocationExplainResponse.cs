@@ -1,81 +1,81 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public interface IClusterAllocationExplainResponse : IResponse
 	{
-		[JsonProperty("allocate_explanation")]
+		[DataMember(Name ="allocate_explanation")]
 		string AllocateExplanation { get; }
 
-		[JsonProperty("allocation_delay")]
+		[DataMember(Name ="allocation_delay")]
 		string AllocationDelay { get; }
 
-		[JsonProperty("allocation_delay_in_millis")]
+		[DataMember(Name ="allocation_delay_in_millis")]
 		long AllocationDelayInMilliseconds { get; }
 
-		[JsonProperty("can_allocate")]
+		[DataMember(Name ="can_allocate")]
 		Decision? CanAllocate { get; }
 
-		[JsonProperty("can_move_to_other_node")]
+		[DataMember(Name ="can_move_to_other_node")]
 		Decision? CanMoveToOtherNode { get; }
 
-		[JsonProperty("can_rebalance_cluster")]
+		[DataMember(Name ="can_rebalance_cluster")]
 		Decision? CanRebalanceCluster { get; }
 
-		[JsonProperty("can_rebalance_cluster_decisions")]
+		[DataMember(Name ="can_rebalance_cluster_decisions")]
 		IReadOnlyCollection<AllocationDecision> CanRebalanceClusterDecisions { get; }
 
-		[JsonProperty("can_rebalance_to_other_node")]
+		[DataMember(Name ="can_rebalance_to_other_node")]
 		Decision? CanRebalanceToOtherNode { get; }
 
-		[JsonProperty("can_remain_decisions")]
+		[DataMember(Name ="can_remain_decisions")]
 		IReadOnlyCollection<AllocationDecision> CanRemainDecisions { get; }
 
-		[JsonProperty("can_remain_on_current_node")]
+		[DataMember(Name ="can_remain_on_current_node")]
 		Decision? CanRemainOnCurrentNode { get; }
 
-		[JsonProperty("configured_delay")]
+		[DataMember(Name ="configured_delay")]
 		string ConfiguredDelay { get; }
 
-		[JsonProperty("configured_delay_in_mills")]
+		[DataMember(Name ="configured_delay_in_mills")]
 		long ConfiguredDelayInMilliseconds { get; }
 
-		[JsonProperty("current_node")]
+		[DataMember(Name ="current_node")]
 		CurrentNode CurrentNode { get; }
 
-		[JsonProperty("current_state")]
+		[DataMember(Name ="current_state")]
 		string CurrentState { get; }
 
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		string Index { get; }
 
-		[JsonProperty("move_explanation")]
+		[DataMember(Name ="move_explanation")]
 		string MoveExplanation { get; }
 
-		[JsonProperty("node_allocation_decisions")]
+		[DataMember(Name ="node_allocation_decisions")]
 		IReadOnlyCollection<NodeAllocationExplanation> NodeAllocationDecisions { get; }
 
-		[JsonProperty("primary")]
+		[DataMember(Name ="primary")]
 		bool Primary { get; }
 
-		[JsonProperty("rebalance_explanation")]
+		[DataMember(Name ="rebalance_explanation")]
 		string RebalanceExplanation { get; }
 
-		[JsonProperty("remaining_delay")]
+		[DataMember(Name ="remaining_delay")]
 		string RemainingDelay { get; }
 
-		[JsonProperty("remaining_delay_in_millis")]
+		[DataMember(Name ="remaining_delay_in_millis")]
 		long RemainingDelayInMilliseconds { get; }
 
-		[JsonProperty("shard")]
+		[DataMember(Name ="shard")]
 		int Shard { get; }
 
-		[JsonProperty("unassigned_info")]
+		[DataMember(Name ="unassigned_info")]
 		UnassignedInformation UnassignedInformation { get; }
 	}
 
@@ -128,26 +128,26 @@ namespace Nest
 		public UnassignedInformation UnassignedInformation { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class CurrentNode
 	{
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		public string Id { get; internal set; }
 
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		public string Name { get; internal set; }
 
-		[JsonProperty("attributes")]
+		[DataMember(Name ="attributes")]
 		public IReadOnlyDictionary<string, string> NodeAttributes { get; set; } = EmptyReadOnly<string, string>.Dictionary;
 
-		[JsonProperty("transport_address")]
+		[DataMember(Name ="transport_address")]
 		public string TransportAddress { get; internal set; }
 
-		[JsonProperty("weight_ranking")]
+		[DataMember(Name ="weight_ranking")]
 		public string WeightRanking { get; internal set; }
 	}
 
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum AllocationExplainDecision
 	{
 		[EnumMember(Value = "NO")]
@@ -163,35 +163,35 @@ namespace Nest
 		Always,
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class NodeAllocationExplanation
 	{
-		[JsonProperty("deciders")]
+		[DataMember(Name ="deciders")]
 		public IReadOnlyCollection<AllocationDecision> Deciders { get; set; } = EmptyReadOnly<AllocationDecision>.Collection;
 
-		[JsonProperty("node_attributes")]
+		[DataMember(Name ="node_attributes")]
 		public IReadOnlyDictionary<string, string> NodeAttributes { get; set; } = EmptyReadOnly<string, string>.Dictionary;
 
-		[JsonProperty("node_decision")]
+		[DataMember(Name ="node_decision")]
 		public Decision? NodeDecision { get; set; }
 
-		[JsonProperty("node_id")]
+		[DataMember(Name ="node_id")]
 		public string NodeId { get; set; }
 
-		[JsonProperty("node_name")]
+		[DataMember(Name ="node_name")]
 		public string NodeName { get; set; }
 
-		[JsonProperty("store")]
+		[DataMember(Name ="store")]
 		public AllocationStore Store { get; set; }
 
-		[JsonProperty("transport_address")]
+		[DataMember(Name ="transport_address")]
 		public string TransportAddress { get; set; }
 
-		[JsonProperty("weight_ranking")]
+		[DataMember(Name ="weight_ranking")]
 		public int? WeightRanking { get; set; }
 	}
 
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum Decision
 	{
 		[EnumMember(Value = "yes")]
@@ -219,7 +219,7 @@ namespace Nest
 		NoAttempt
 	}
 
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum StoreCopy
 	{
 		[EnumMember(Value = "NONE")]
@@ -241,69 +241,69 @@ namespace Nest
 		Unknown
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class AllocationStore
 	{
-		[JsonProperty("allocation_id")]
+		[DataMember(Name ="allocation_id")]
 		public string AllocationId { get; set; }
 
-		[JsonProperty("found")]
+		[DataMember(Name ="found")]
 		public bool? Found { get; set; }
 
-		[JsonProperty("in_sync")]
+		[DataMember(Name ="in_sync")]
 		public bool? InSync { get; set; }
 
-		[JsonProperty("matching_size_in_bytes")]
+		[DataMember(Name ="matching_size_in_bytes")]
 		public long? MatchingSizeInBytes { get; set; }
 
-		[JsonProperty("matching_sync_id")]
+		[DataMember(Name ="matching_sync_id")]
 		public bool? MatchingSyncId { get; set; }
 
-		[JsonProperty("store_exception")]
+		[DataMember(Name ="store_exception")]
 		public string StoreException { get; set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class AllocationDecision
 	{
-		[JsonProperty("decider")]
+		[DataMember(Name ="decider")]
 		public string Decider { get; set; }
 
-		[JsonProperty("decision")]
+		[DataMember(Name ="decision")]
 		public AllocationExplainDecision Decision { get; set; }
 
-		[JsonProperty("explanation")]
+		[DataMember(Name ="explanation")]
 		public string Explanation { get; set; }
 	}
 
 	public class UnassignedInformation
 	{
-		[JsonProperty("at")]
+		[DataMember(Name ="at")]
 		public DateTime At { get; set; }
 
-		[JsonProperty("last_allocation_status")]
+		[DataMember(Name ="last_allocation_status")]
 		public string LastAllocationStatus { get; set; }
 
-		[JsonProperty("reason")]
+		[DataMember(Name ="reason")]
 		public UnassignedInformationReason Reason { get; set; }
 	}
 
 	public class ShardAllocationExplanation
 	{
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		public int Id { get; set; }
 
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		public IndexName Index { get; set; }
 
-		[JsonProperty("index_uuid")]
+		[DataMember(Name ="index_uuid")]
 		public string IndexUniqueId { get; set; }
 
-		[JsonProperty("primary")]
+		[DataMember(Name ="primary")]
 		public bool Primary { get; set; }
 	}
 
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum UnassignedInformationReason
 	{
 		/// <summary>

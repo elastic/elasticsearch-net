@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using Utf8Json;
 
 namespace Nest
 {
@@ -10,14 +9,14 @@ namespace Nest
 	/// The configuration for a field or scrip that provides a value or weight
 	/// for <see cref="WeightedAverageAggregation" />
 	/// </summary>
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<WeightedAverageValue>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(WeightedAverageValue))]
 	public interface IWeightedAverageValue
 	{
 		/// <summary>
 		/// The field that values should be extracted from
 		/// </summary>
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
 		/// <summary>
@@ -27,13 +26,13 @@ namespace Nest
 		/// moves on to the next document.
 		/// If the weight field is missing, it is assumed to have a weight of 1 (like a normal average).
 		/// </summary>
-		[JsonProperty("missing")]
+		[DataMember(Name ="missing")]
 		double? Missing { get; set; }
 
 		/// <summary>
 		/// A script to derive the value and the weight from
 		/// </summary>
-		[JsonProperty("script")]
+		[DataMember(Name ="script")]
 		IScript Script { get; set; }
 	}
 
@@ -86,7 +85,6 @@ namespace Nest
 	/// <summary>
 	/// The type of value
 	/// </summary>
-	[JsonConverter(typeof(StringEnumConverter))]
 	public enum ValueType
 	{
 		/// <summary>A string value</summary>

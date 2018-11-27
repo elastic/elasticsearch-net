@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -11,7 +11,7 @@ namespace Nest
 		/// <summary>
 		/// Whether romaji reading form should be output instead of katakana. Defaults to false.
 		/// </summary>
-		[JsonProperty("use_romaji")]
+		[DataMember(Name ="use_romaji")]
 		bool? UseRomaji { get; set; }
 	}
 

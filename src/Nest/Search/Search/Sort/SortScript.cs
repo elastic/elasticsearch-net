@@ -1,14 +1,14 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IScriptSort : ISort
 	{
-		[JsonProperty("script")]
+		[DataMember(Name ="script")]
 		IScript Script { get; set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		string Type { get; set; }
 	}
 

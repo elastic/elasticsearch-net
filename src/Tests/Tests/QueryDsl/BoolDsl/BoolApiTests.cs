@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
@@ -23,7 +23,7 @@ namespace Tests.QueryDsl.BoolDsl
 
 	public class BoolCluster : ClientTestClusterBase
 	{
-		[JsonConverter(typeof(StringEnumConverter))]
+
 		public enum E
 		{
 			Option1,

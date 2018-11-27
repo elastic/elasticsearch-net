@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IListTasksResponse : IResponse
 	{
-		[JsonProperty("node_failures")]
+		[DataMember(Name ="node_failures")]
 		IReadOnlyCollection<ErrorCause> NodeFailures { get; }
 
-		[JsonProperty("nodes")]
+		[DataMember(Name ="nodes")]
 		IReadOnlyDictionary<string, TaskExecutingNode> Nodes { get; }
 	}
 
@@ -24,100 +24,100 @@ namespace Nest
 
 	public class TaskExecutingNode
 	{
-		[JsonProperty("host")]
+		[DataMember(Name ="host")]
 		public string Host { get; internal set; }
 
-		[JsonProperty("ip")]
+		[DataMember(Name ="ip")]
 		public string Ip { get; internal set; }
 
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		public string Name { get; internal set; }
 
-		[JsonProperty("tasks")]
+		[DataMember(Name ="tasks")]
 		public IReadOnlyDictionary<TaskId, TaskState> Tasks { get; internal set; } = EmptyReadOnly<TaskId, TaskState>.Dictionary;
 
-		[JsonProperty("transport_address")]
+		[DataMember(Name ="transport_address")]
 		public string TransportAddress { get; internal set; }
 	}
 
 	public class TaskState
 	{
-		[JsonProperty("action")]
+		[DataMember(Name ="action")]
 		public string Action { get; internal set; }
 
-		[JsonProperty("cancellable")]
+		[DataMember(Name ="cancellable")]
 		public bool Cancellable { get; internal set; }
 
-		[JsonProperty("description")]
+		[DataMember(Name ="description")]
 		public string Description { get; internal set; }
 
-		[JsonProperty("headers")]
+		[DataMember(Name ="headers")]
 		public IReadOnlyDictionary<string, string> Headers { get; internal set; } = EmptyReadOnly<string, string>.Dictionary;
 
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		public long Id { get; internal set; }
 
-		[JsonProperty("node")]
+		[DataMember(Name ="node")]
 		public string Node { get; internal set; }
 
-		[JsonProperty("parent_task_id")]
+		[DataMember(Name ="parent_task_id")]
 		public TaskId ParentTaskId { get; internal set; }
 
-		[JsonProperty("running_time_in_nanos")]
+		[DataMember(Name ="running_time_in_nanos")]
 		public long RunningTimeInNanoSeconds { get; internal set; }
 
-		[JsonProperty("start_time_in_millis")]
+		[DataMember(Name ="start_time_in_millis")]
 		public long StartTimeInMilliseconds { get; internal set; }
 
-		[JsonProperty("status")]
+		[DataMember(Name ="status")]
 		public TaskStatus Status { get; internal set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		public string Type { get; internal set; }
 	}
 
 	public class TaskStatus
 	{
-		[JsonProperty("batches")]
+		[DataMember(Name ="batches")]
 		public long Batches { get; internal set; }
 
-		[JsonProperty("created")]
+		[DataMember(Name ="created")]
 		public long Created { get; internal set; }
 
-		[JsonProperty("deleted")]
+		[DataMember(Name ="deleted")]
 		public long Deleted { get; internal set; }
 
-		[JsonProperty("noops")]
+		[DataMember(Name ="noops")]
 		public long Noops { get; internal set; }
 
-		[JsonProperty("requests_per_second")]
+		[DataMember(Name ="requests_per_second")]
 		public long RequestsPerSecond { get; internal set; }
 
-		[JsonProperty("retries")]
+		[DataMember(Name ="retries")]
 		public TaskRetries Retries { get; internal set; }
 
-		[JsonProperty("throttled_millis")]
+		[DataMember(Name ="throttled_millis")]
 		public long ThrottledMilliseconds { get; internal set; }
 
-		[JsonProperty("throttled_until_millis")]
+		[DataMember(Name ="throttled_until_millis")]
 		public long ThrottledUntilMilliseconds { get; internal set; }
 
-		[JsonProperty("total")]
+		[DataMember(Name ="total")]
 		public long Total { get; internal set; }
 
-		[JsonProperty("updated")]
+		[DataMember(Name ="updated")]
 		public long Updated { get; internal set; }
 
-		[JsonProperty("version_conflicts")]
+		[DataMember(Name ="version_conflicts")]
 		public long VersionConflicts { get; internal set; }
 	}
 
 	public class TaskRetries
 	{
-		[JsonProperty("bulk")]
+		[DataMember(Name ="bulk")]
 		public int Bulk { get; internal set; }
 
-		[JsonProperty("search")]
+		[DataMember(Name ="search")]
 		public int Search { get; internal set; }
 	}
 }

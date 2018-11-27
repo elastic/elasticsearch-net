@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
-using Newtonsoft.Json;
+using Utf8Json;
 
 namespace Nest
 {
@@ -13,7 +13,7 @@ namespace Nest
 		DateMathTimeUnit? Round { get; }
 	}
 
-	[JsonConverter(typeof(Json))]
+	[JsonFormatter(typeof(DateMathFormatter))]
 	public abstract class DateMath : IDateMath
 	{
 		private static readonly Regex DateMathRegex =
@@ -104,24 +104,34 @@ namespace Nest
 
 			return sb.ToString();
 		}
+	}
 
-		private class Json : JsonConverterBase<DateMath>
+	internal class DateMathFormatter : IJsonFormatter<DateMath>
+	{
+		public DateMath Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			public override void WriteJson(JsonWriter writer, DateMath value, JsonSerializer serializer) =>
-				writer.WriteValue(value.ToString());
-
-			public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+			var token = reader.GetCurrentJsonToken();
+			if (token == JsonToken.String)
 			{
-				if (reader.TokenType == JsonToken.String)
-					return FromString(reader.Value as string);
+				var value = reader.ReadString();
 
-				if (reader.TokenType == JsonToken.Date)
+				if (string.IsNullOrEmpty(value))
+					return null;
+
+				try
 				{
-					var d = reader.Value as DateTime?;
-					return d.HasValue ? Anchored(d.Value) : null;
+					// TODO: possibly nicer way of doing this than brute try?
+					var dateTime = JsonSerializer.Deserialize<DateTime>(value, formatterResolver);
+					return DateMath.Anchored(dateTime);
 				}
-				return null;
+				catch
+				{
+					return DateMath.FromString(reader.ReadString());
+				}
 			}
 		}
+
+		public void Serialize(ref JsonWriter writer, DateMath value, IJsonFormatterResolver formatterResolver) =>
+			writer.WriteString(value.ToString());
 	}
 }

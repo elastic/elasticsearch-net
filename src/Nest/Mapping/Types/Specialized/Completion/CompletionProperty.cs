@@ -1,33 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public interface ICompletionProperty : IDocValuesProperty
 	{
-		[JsonProperty("analyzer")]
+		[DataMember(Name ="analyzer")]
 		string Analyzer { get; set; }
 
-		[JsonProperty("contexts")]
+		[DataMember(Name ="contexts")]
 		IList<ISuggestContext> Contexts { get; set; }
 
-		[JsonProperty("max_input_length")]
+		[DataMember(Name ="max_input_length")]
 		int? MaxInputLength { get; set; }
 
-		[JsonProperty("preserve_position_increments")]
+		[DataMember(Name ="preserve_position_increments")]
 		bool? PreservePositionIncrements { get; set; }
 
-		[JsonProperty("preserve_separators")]
+		[DataMember(Name ="preserve_separators")]
 		bool? PreserveSeparators { get; set; }
 
-		[JsonProperty("search_analyzer")]
+		[DataMember(Name ="search_analyzer")]
 		string SearchAnalyzer { get; set; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class CompletionProperty : DocValuesPropertyBase, ICompletionProperty
 	{

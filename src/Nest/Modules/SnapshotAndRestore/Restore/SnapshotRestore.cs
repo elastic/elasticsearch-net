@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class SnapshotRestore
 	{
-		[JsonProperty("indices")]
+		[DataMember(Name ="indices")]
 		public IReadOnlyCollection<IndexName> Indices { get; internal set; } =
 			EmptyReadOnly<IndexName>.Collection;
 
-		[JsonProperty("snapshot")]
+		[DataMember(Name ="snapshot")]
 		public string Name { get; internal set; }
 
-		[JsonProperty("shards")]
+		[DataMember(Name ="shards")]
 		public ShardStatistics Shards { get; internal set; }
 	}
 }

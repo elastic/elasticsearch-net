@@ -1,13 +1,14 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<BucketScriptAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(BucketScriptAggregation))]
 	public interface IBucketScriptAggregation : IPipelineAggregation
 	{
-		[JsonProperty("script")]
+		[DataMember(Name ="script")]
 		IScript Script { get; set; }
 	}
 

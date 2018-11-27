@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public abstract class MetricAggregateBase : IAggregate
 	{
-		[JsonProperty("meta")]
+		[DataMember(Name ="meta")]
 		public IReadOnlyDictionary<string, object> Meta { get; set; } = EmptyReadOnly<string, object>.Dictionary;
 	}
 }

@@ -1,23 +1,23 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class RecoveryFiles
 	{
-		[JsonProperty("details")]
+		[DataMember(Name ="details")]
 		public IEnumerable<RecoveryFileDetails> Details { get; internal set; }
 
-		[JsonProperty("percent")]
+		[DataMember(Name ="percent")]
 		public string Percent { get; internal set; }
 
-		[JsonProperty("recovered")]
+		[DataMember(Name ="recovered")]
 		public long Recovered { get; internal set; }
 
-		[JsonProperty("reused")]
+		[DataMember(Name ="reused")]
 		public long Reused { get; internal set; }
 
-		[JsonProperty("total")]
+		[DataMember(Name ="total")]
 		public long Total { get; internal set; }
 	}
 }

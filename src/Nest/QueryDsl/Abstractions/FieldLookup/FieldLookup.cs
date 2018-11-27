@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<FieldLookup>))]
+	[ReadAs(typeof(FieldLookup))]
 	public interface IFieldLookup
 	{
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		Id Id { get; set; }
 
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		IndexName Index { get; set; }
 
-		[JsonProperty("path")]
+		[DataMember(Name ="path")]
 		Field Path { get; set; }
 
-		[JsonProperty("routing")]
+		[DataMember(Name ="routing")]
 		Routing Routing { get; set; }
 	}
 

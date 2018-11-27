@@ -1,9 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<DerivativeAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(DerivativeAggregation))]
 	public interface IDerivativeAggregation : IPipelineAggregation { }
 
 	public class DerivativeAggregation : PipelineAggregationBase, IDerivativeAggregation

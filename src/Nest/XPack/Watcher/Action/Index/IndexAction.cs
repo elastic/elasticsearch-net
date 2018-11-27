@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public interface IIndexAction : IAction
 	{
-		[JsonProperty("execution_time_field")]
+		[DataMember(Name = "execution_time_field")]
 		Field ExecutionTimeField { get; set; }
 
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		IndexName Index { get; set; }
 
-		[JsonProperty("timeout")]
+		[DataMember(Name ="timeout")]
 		Time Timeout { get; set; }
 	}
 

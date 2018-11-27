@@ -1,36 +1,36 @@
 ﻿using System;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<MultiGetOperationDescriptor<object>>))]
+	[DataContract]
+	[ReadAs(typeof(MultiGetOperationDescriptor<object>))]
 	public interface IMultiGetOperation
 	{
 		bool CanBeFlattened { get; }
 
 		Type ClrType { get; }
 
-		[JsonProperty("_id")]
+		[DataMember(Name ="_id")]
 		Id Id { get; set; }
 
-		[JsonProperty("_index")]
+		[DataMember(Name ="_index")]
 		IndexName Index { get; set; }
 
-		[JsonProperty("routing")]
+		[DataMember(Name ="routing")]
 		string Routing { get; set; }
 
-		[JsonProperty("_source")]
+		[DataMember(Name ="_source")]
 		Union<bool, ISourceFilter> Source { get; set; }
 
-		[JsonProperty("stored_fields")]
+		[DataMember(Name ="stored_fields")]
 		Fields StoredFields { get; set; }
 
-		[JsonProperty("version")]
+		[DataMember(Name ="version")]
 		long? Version { get; set; }
 
-		[JsonProperty("version_type")]
+		[DataMember(Name ="version_type")]
 		VersionType? VersionType { get; set; }
 	}
 }

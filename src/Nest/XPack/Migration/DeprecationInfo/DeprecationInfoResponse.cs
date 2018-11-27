@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
@@ -8,7 +8,7 @@ namespace Nest
 	/// <summary>
 	/// The deprecation warning level
 	/// </summary>
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum DeprecationWarningLevel
 	{
 		/// <summary>
@@ -42,28 +42,28 @@ namespace Nest
 	/// </summary>
 	public class DeprecationInfo
 	{
-		[JsonProperty("details")]
+		[DataMember(Name ="details")]
 		public string Details { get; internal set; }
 
-		[JsonProperty("level")]
+		[DataMember(Name ="level")]
 		public DeprecationWarningLevel Level { get; internal set; }
 
-		[JsonProperty("message")]
+		[DataMember(Name ="message")]
 		public string Message { get; internal set; }
 
-		[JsonProperty("url")]
+		[DataMember(Name ="url")]
 		public string Url { get; internal set; }
 	}
 
 	public interface IDeprecationInfoResponse : IResponse
 	{
-		[JsonProperty("cluster_settings")]
+		[DataMember(Name ="cluster_settings")]
 		IReadOnlyCollection<DeprecationInfo> ClusterSettings { get; }
 
-		[JsonProperty("index_settings")]
+		[DataMember(Name ="index_settings")]
 		IReadOnlyDictionary<string, IReadOnlyCollection<DeprecationInfo>> IndexSettings { get; }
 
-		[JsonProperty("node_settings")]
+		[DataMember(Name ="node_settings")]
 		IReadOnlyCollection<DeprecationInfo> NodeSettings { get; }
 	}
 

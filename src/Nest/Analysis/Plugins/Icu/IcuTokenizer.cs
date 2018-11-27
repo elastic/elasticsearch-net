@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -15,7 +15,7 @@ namespace Nest
 		/// You can customize the icu-tokenizer behavior by specifying per-script rule files,
 		/// see the RBBI rules syntax reference for a more detailed explanation.
 		/// </summary>
-		[JsonProperty("rule_files")]
+		[DataMember(Name ="rule_files")]
 		string RuleFiles { get; set; }
 	}
 

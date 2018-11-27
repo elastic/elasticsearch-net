@@ -1,277 +1,277 @@
 ﻿using System.Collections.Generic;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class NodeInfo
 	{
-		[JsonProperty("build_hash")]
+		[DataMember(Name ="build_hash")]
 		public string BuildHash { get; internal set; }
 
-		[JsonProperty("host")]
+		[DataMember(Name ="host")]
 		public string Host { get; internal set; }
 
-		[JsonProperty("http")]
+		[DataMember(Name ="http")]
 		public NodeInfoHttp Http { get; internal set; }
 
-		[JsonProperty("ip")]
+		[DataMember(Name ="ip")]
 		public string Ip { get; internal set; }
 
-		[JsonProperty("jvm")]
+		[DataMember(Name ="jvm")]
 		public NodeJvmInfo Jvm { get; internal set; }
 
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		public string Name { get; internal set; }
 
-		[JsonProperty("network")]
+		[DataMember(Name ="network")]
 		public NodeInfoNetwork Network { get; internal set; }
 
-		[JsonProperty("os")]
+		[DataMember(Name ="os")]
 		public NodeOperatingSystemInfo OperatingSystem { get; internal set; }
 
-		[JsonProperty("plugins")]
+		[DataMember(Name ="plugins")]
 		public List<PluginStats> Plugins { get; internal set; }
 
-		[JsonProperty("process")]
+		[DataMember(Name ="process")]
 		public NodeProcessInfo Process { get; internal set; }
 
 		/// <summary>
 		/// All of the different roles that the node fulfills. An empty
 		/// collection means that the node is a coordinating only node.
 		/// </summary>
-		[JsonProperty("roles")]
+		[DataMember(Name ="roles")]
 		public List<NodeRole> Roles { get; internal set; }
 
 		//TODO why is this using DynamicBody
-		[JsonProperty("settings")]
+		[DataMember(Name ="settings")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
 		public DynamicBody Settings { get; internal set; }
 
-		[JsonProperty("thread_pool")]
+		[DataMember(Name ="thread_pool")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, NodeThreadPoolInfo>))]
 		public Dictionary<string, NodeThreadPoolInfo> ThreadPool { get; internal set; }
 
-		[JsonProperty("transport")]
+		[DataMember(Name ="transport")]
 		public NodeInfoTransport Transport { get; internal set; }
 
-		[JsonProperty("transport_address")]
+		[DataMember(Name ="transport_address")]
 		public string TransportAddress { get; internal set; }
 
-		[JsonProperty("version")]
+		[DataMember(Name ="version")]
 		public string Version { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class NodeOperatingSystemInfo
 	{
-		[JsonProperty("arch")]
+		[DataMember(Name ="arch")]
 		public string Architecture { get; internal set; }
 
-		[JsonProperty("available_processors")]
+		[DataMember(Name ="available_processors")]
 		public int AvailableProcessors { get; internal set; }
 
-		[JsonProperty("cpu")]
+		[DataMember(Name ="cpu")]
 		public NodeInfoOSCPU Cpu { get; internal set; }
 
-		[JsonProperty("mem")]
+		[DataMember(Name ="mem")]
 		public NodeInfoMemory Mem { get; internal set; }
 
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		public string Name { get; internal set; }
 
-		[JsonProperty("refresh_interval_in_millis")]
+		[DataMember(Name ="refresh_interval_in_millis")]
 		public int RefreshInterval { get; internal set; }
 
-		[JsonProperty("swap")]
+		[DataMember(Name ="swap")]
 		public NodeInfoMemory Swap { get; internal set; }
 
-		[JsonProperty("version")]
+		[DataMember(Name ="version")]
 		public string Version { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class NodeInfoOSCPU
 	{
-		[JsonProperty("cache_size")]
+		[DataMember(Name ="cache_size")]
 		public string CacheSize { get; internal set; }
 
-		[JsonProperty("cache_size_in_bytes")]
+		[DataMember(Name ="cache_size_in_bytes")]
 		public int CacheSizeInBytes { get; internal set; }
 
-		[JsonProperty("cores_per_socket")]
+		[DataMember(Name ="cores_per_socket")]
 		public int CoresPerSocket { get; internal set; }
 
-		[JsonProperty("mhz")]
+		[DataMember(Name ="mhz")]
 		public int Mhz { get; internal set; }
 
-		[JsonProperty("model")]
+		[DataMember(Name ="model")]
 		public string Model { get; internal set; }
 
-		[JsonProperty("total_cores")]
+		[DataMember(Name ="total_cores")]
 		public int TotalCores { get; internal set; }
 
-		[JsonProperty("total_sockets")]
+		[DataMember(Name ="total_sockets")]
 		public int TotalSockets { get; internal set; }
 
-		[JsonProperty("vendor")]
+		[DataMember(Name ="vendor")]
 		public string Vendor { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class NodeInfoMemory
 	{
-		[JsonProperty("total")]
+		[DataMember(Name ="total")]
 		public string Total { get; internal set; }
 
-		[JsonProperty("total_in_bytes")]
+		[DataMember(Name ="total_in_bytes")]
 		public long TotalInBytes { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class NodeProcessInfo
 	{
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		public long Id { get; internal set; }
 
-		[JsonProperty("mlockall")]
+		[DataMember(Name ="mlockall")]
 		public bool MlockAll { get; internal set; }
 
-		[JsonProperty("refresh_interval_in_millis")]
+		[DataMember(Name ="refresh_interval_in_millis")]
 		public long RefreshIntervalInMilliseconds { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class NodeJvmInfo
 	{
-		[JsonProperty("gc_collectors")]
+		[DataMember(Name ="gc_collectors")]
 		public IEnumerable<string> GCCollectors { get; internal set; }
 
-		[JsonProperty("mem")]
+		[DataMember(Name ="mem")]
 		public NodeInfoJVMMemory Memory { get; internal set; }
 
-		[JsonProperty("memory_pools")]
+		[DataMember(Name ="memory_pools")]
 		public IEnumerable<string> MemoryPools { get; internal set; }
 
-		[JsonProperty("pid")]
+		[DataMember(Name ="pid")]
 		public int PID { get; internal set; }
 
-		[JsonProperty("start_time_in_millis")]
+		[DataMember(Name ="start_time_in_millis")]
 		public long StartTime { get; internal set; }
 
-		[JsonProperty("version")]
+		[DataMember(Name ="version")]
 		public string Version { get; internal set; }
 
-		[JsonProperty("vm_name")]
+		[DataMember(Name ="vm_name")]
 		public string VMName { get; internal set; }
 
-		[JsonProperty("vm_vendor")]
+		[DataMember(Name ="vm_vendor")]
 		public string VMVendor { get; internal set; }
 
-		[JsonProperty("vm_version")]
+		[DataMember(Name ="vm_version")]
 		public string VMVersion { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class NodeInfoJVMMemory
 	{
-		[JsonProperty("direct_max")]
+		[DataMember(Name ="direct_max")]
 		public string DirectMax { get; internal set; }
 
-		[JsonProperty("direct_max_in_bytes")]
+		[DataMember(Name ="direct_max_in_bytes")]
 		public long DirectMaxInBytes { get; internal set; }
 
-		[JsonProperty("heap_init")]
+		[DataMember(Name ="heap_init")]
 		public string HeapInit { get; internal set; }
 
-		[JsonProperty("heap_init_in_bytes")]
+		[DataMember(Name ="heap_init_in_bytes")]
 		public long HeapInitInBytes { get; internal set; }
 
-		[JsonProperty("heap_max")]
+		[DataMember(Name ="heap_max")]
 		public string HeapMax { get; internal set; }
 
-		[JsonProperty("heap_max_in_bytes")]
+		[DataMember(Name ="heap_max_in_bytes")]
 		public long HeapMaxInBytes { get; internal set; }
 
-		[JsonProperty("non_heap_init")]
+		[DataMember(Name ="non_heap_init")]
 		public string NonHeapInit { get; internal set; }
 
-		[JsonProperty("non_heap_init_in_bytes")]
+		[DataMember(Name ="non_heap_init_in_bytes")]
 		public long NonHeapInitInBytes { get; internal set; }
 
-		[JsonProperty("non_heap_max")]
+		[DataMember(Name ="non_heap_max")]
 		public string NonHeapMax { get; internal set; }
 
-		[JsonProperty("non_heap_max_in_bytes")]
+		[DataMember(Name ="non_heap_max_in_bytes")]
 		public long NonHeapMaxInBytes { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class NodeThreadPoolInfo
 	{
-		[JsonProperty("keep_alive")]
+		[DataMember(Name ="keep_alive")]
 		public string KeepAlive { get; internal set; }
 
-		[JsonProperty("max")]
+		[DataMember(Name ="max")]
 		public int? Max { get; internal set; }
 
-		[JsonProperty("min")]
+		[DataMember(Name ="min")]
 		public int? Min { get; internal set; }
 
-		[JsonProperty("queue_size")]
+		[DataMember(Name ="queue_size")]
 		public int? QueueSize { get; internal set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		public string Type { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class NodeInfoNetwork
 	{
-		[JsonProperty("primary_interface")]
+		[DataMember(Name ="primary_interface")]
 		public NodeInfoNetworkInterface PrimaryInterface { get; internal set; }
 
-		[JsonProperty("refresh_interval")]
+		[DataMember(Name ="refresh_interval")]
 		public int RefreshInterval { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class NodeInfoNetworkInterface
 	{
-		[JsonProperty("address")]
+		[DataMember(Name ="address")]
 		public string Address { get; internal set; }
 
-		[JsonProperty("mac_address")]
+		[DataMember(Name ="mac_address")]
 		public string MacAddress { get; internal set; }
 
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		public string Name { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class NodeInfoTransport
 	{
-		[JsonProperty("bound_address")]
+		[DataMember(Name ="bound_address")]
 		public IEnumerable<string> BoundAddress { get; internal set; }
 
-		[JsonProperty("publish_address")]
+		[DataMember(Name ="publish_address")]
 		public string PublishAddress { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class NodeInfoHttp
 	{
-		[JsonProperty("bound_address")]
+		[DataMember(Name ="bound_address")]
 		public IEnumerable<string> BoundAddress { get; internal set; }
 
-		[JsonProperty("max_content_length")]
+		[DataMember(Name ="max_content_length")]
 		public string MaxContentLength { get; internal set; }
 
-		[JsonProperty("max_content_length_in_bytes")]
+		[DataMember(Name ="max_content_length_in_bytes")]
 		public long MaxContentLengthInBytes { get; internal set; }
 
-		[JsonProperty("publish_address")]
+		[DataMember(Name ="publish_address")]
 		public string PublishAddress { get; internal set; }
 	}
 }

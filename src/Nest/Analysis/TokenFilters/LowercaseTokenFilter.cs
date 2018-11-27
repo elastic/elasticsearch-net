@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -11,7 +11,7 @@ namespace Nest
 		/// <summary>
 		/// Lowercase token filter supports Greek, Irish, and Turkish lowercase token filters through the language parameter
 		/// </summary>
-		[JsonProperty("language")]
+		[DataMember(Name ="language")]
 		string Language { get; set; }
 	}
 

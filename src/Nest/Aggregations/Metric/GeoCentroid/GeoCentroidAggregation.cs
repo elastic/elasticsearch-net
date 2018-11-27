@@ -1,9 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<GeoCentroidAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(GeoCentroidAggregation))]
 	public interface IGeoCentroidAggregation : IMetricAggregation { }
 
 	public class GeoCentroidAggregation : MetricAggregationBase, IGeoCentroidAggregation

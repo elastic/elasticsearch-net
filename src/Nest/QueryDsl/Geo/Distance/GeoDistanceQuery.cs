@@ -1,21 +1,21 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(VariableFieldNameQueryJsonConverter<GeoDistanceQuery, IGeoDistanceQuery>))]
 	public interface IGeoDistanceQuery : IFieldNameQuery
 	{
-		[JsonProperty("distance")]
+		[DataMember(Name ="distance")]
 		Distance Distance { get; set; }
 
-		[JsonProperty("distance_type")]
+		[DataMember(Name ="distance_type")]
 		GeoDistanceType? DistanceType { get; set; }
 
 		[VariableField]
 		GeoLocation Location { get; set; }
 
-		[JsonProperty("validation_method")]
+		[DataMember(Name ="validation_method")]
 		GeoValidationMethod? ValidationMethod { get; set; }
 	}
 

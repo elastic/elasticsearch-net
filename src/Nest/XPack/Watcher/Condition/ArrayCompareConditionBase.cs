@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	[JsonConverter(typeof(ArrayCompareConditionConverter))]
 	public interface IArrayCompareCondition
 	{
@@ -16,7 +16,7 @@ namespace Nest
 		object Value { get; set; }
 	}
 
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum Quantifier
 	{
 		[EnumMember(Value = "some")]

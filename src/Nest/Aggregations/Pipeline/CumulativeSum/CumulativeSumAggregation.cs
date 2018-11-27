@@ -1,9 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<CumulativeSumAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(CumulativeSumAggregation))]
 	public interface ICumulativeSumAggregation : IPipelineAggregation { }
 
 	public class CumulativeSumAggregation

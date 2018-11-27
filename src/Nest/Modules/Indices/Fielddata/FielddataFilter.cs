@@ -1,16 +1,16 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<FielddataFilter>))]
+	[DataContract]
+	[ReadAs(typeof(FielddataFilter))]
 	public interface IFielddataFilter
 	{
-		[JsonProperty("frequency")]
+		[DataMember(Name ="frequency")]
 		IFielddataFrequencyFilter Frequency { get; set; }
 
-		[JsonProperty("regex")]
+		[DataMember(Name ="regex")]
 		IFielddataRegexFilter Regex { get; set; }
 	}
 

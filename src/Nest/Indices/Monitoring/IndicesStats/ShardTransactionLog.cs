@@ -1,20 +1,20 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class ShardTransactionLog
 	{
-		[JsonProperty("operations")]
+		[DataMember(Name ="operations")]
 		public long Operations { get; internal set; }
 
-		[JsonProperty("size_in_bytes")]
+		[DataMember(Name ="size_in_bytes")]
 		public long SizeInBytes { get; internal set; }
 
-		[JsonProperty("uncommitted_operations")]
+		[DataMember(Name ="uncommitted_operations")]
 		public long UncommittedOperations { get; internal set; }
 
-		[JsonProperty("uncommitted_size_in_bytes")]
+		[DataMember(Name ="uncommitted_size_in_bytes")]
 		public long UncommittedSizeInBytes { get; internal set; }
 	}
 }

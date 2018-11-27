@@ -1,5 +1,5 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -7,7 +7,7 @@ namespace Nest
 	[JsonConverter(typeof(ValidateDetectorRequestConverter))]
 	public partial interface IValidateDetectorRequest
 	{
-		[JsonIgnore]
+		[IgnoreDataMember]
 		IDetector Detector { get; set; }
 	}
 

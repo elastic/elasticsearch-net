@@ -1,19 +1,19 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public interface IGeoSuggestContext : ISuggestContext
 	{
-		[JsonProperty("neighbors")]
+		[DataMember(Name ="neighbors")]
 		bool? Neighbors { get; set; }
 
-		[JsonProperty("precision")]
+		[DataMember(Name ="precision")]
 		IEnumerable<string> Precision { get; set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class GeoSuggestContext : SuggestContextBase, IGeoSuggestContext
 	{
 		public bool? Neighbors { get; set; }

@@ -1,53 +1,53 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IReindexOnServerResponse : IResponse
 	{
-		[JsonProperty("batches")]
+		[DataMember(Name ="batches")]
 		long Batches { get; }
 
-		[JsonProperty("created")]
+		[DataMember(Name ="created")]
 		long Created { get; }
 
-		[JsonProperty("failures")]
+		[DataMember(Name ="failures")]
 		IReadOnlyCollection<BulkIndexByScrollFailure> Failures { get; }
 
-		[JsonProperty("noops")]
+		[DataMember(Name ="noops")]
 		long Noops { get; }
 
-		[JsonProperty("retries")]
+		[DataMember(Name ="retries")]
 		Retries Retries { get; }
 
-		[JsonProperty("slice_id")]
+		[DataMember(Name ="slice_id")]
 		int? SliceId { get; }
 
 		/// <summary>
 		/// Only has a value if WaitForCompletion is set to false on the request
 		/// </summary>
-		[JsonProperty("task")]
+		[DataMember(Name ="task")]
 		TaskId Task { get; }
 
-		[JsonProperty("timed_out")]
+		[DataMember(Name ="timed_out")]
 		bool TimedOut { get; }
 
 		//https://github.com/elastic/elasticsearch/commit/11f90bffda50f0acc8dc1409f3f33005e1249234
 		// 2.3 released this writing the time value's to string e.g 123.4ms instead of long as all the others took responses
-		[JsonProperty("took")]
+		[DataMember(Name ="took")]
 		Time Took { get; }
 
-		[JsonProperty("total")]
+		[DataMember(Name ="total")]
 		long Total { get; }
 
-		[JsonProperty("updated")]
+		[DataMember(Name ="updated")]
 		long Updated { get; }
 
-		[JsonProperty("version_conflicts")]
+		[DataMember(Name ="version_conflicts")]
 		long VersionConflicts { get; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public class ReindexOnServerResponse : ResponseBase, IReindexOnServerResponse
 	{
 		public long Batches { get; internal set; }

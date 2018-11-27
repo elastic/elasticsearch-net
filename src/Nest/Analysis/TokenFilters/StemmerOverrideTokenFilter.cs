@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -12,13 +12,13 @@ namespace Nest
 		/// <summary>
 		/// A list of mapping rules to use.
 		/// </summary>
-		[JsonProperty("rules")]
+		[DataMember(Name ="rules")]
 		IEnumerable<string> Rules { get; set; }
 
 		/// <summary>
 		/// A path (either relative to config location, or absolute) to a list of mappings.
 		/// </summary>
-		[JsonProperty("rules_path")]
+		[DataMember(Name ="rules_path")]
 		string RulesPath { get; set; }
 	}
 

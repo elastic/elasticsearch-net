@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Bogus;
 using Nest;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 using Tests.Configuration;
 using Tests.Domain.Extensions;
@@ -44,7 +44,7 @@ namespace Tests.Domain
 		public string Type => TypeName;
 
 		//the first applies when using internal source serializer the latter when using JsonNetSourceSerializer
-		[StringEnum] [JsonConverter(typeof(StringEnumConverter))]
+		[StringEnum]
 		public Visibility Visibility { get; set; }
 
 		// @formatter:off — enable formatter after this line
@@ -128,7 +128,7 @@ namespace Tests.Domain
 	}
 
 	//the first applies when using internal source serializer the latter when using JsonNetSourceSerializer
-	[StringEnum] [JsonConverter(typeof(StringEnumConverter))]
+	[StringEnum]
 	public enum StateOfBeing
 	{
 		BellyUp,

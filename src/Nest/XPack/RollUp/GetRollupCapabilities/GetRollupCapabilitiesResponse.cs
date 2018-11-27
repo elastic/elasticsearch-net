@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -19,22 +19,22 @@ namespace Nest
 
 	public class RollupCapabilities
 	{
-		[JsonProperty("rollup_jobs")]
+		[DataMember(Name ="rollup_jobs")]
 		public IReadOnlyCollection<RollupCapabilitiesJob> RollupJobs { get; internal set; }
 	}
 
 	public class RollupCapabilitiesJob
 	{
-		[JsonProperty("fields")]
+		[DataMember(Name ="fields")]
 		public RollupFieldsCapabilitiesDictionary Fields { get; internal set; }
 
-		[JsonProperty("index_pattern")]
+		[DataMember(Name ="index_pattern")]
 		public string IndexPattern { get; internal set; }
 
-		[JsonProperty("job_id")]
+		[DataMember(Name ="job_id")]
 		public string JobId { get; internal set; }
 
-		[JsonProperty("rollup_index")]
+		[DataMember(Name ="rollup_index")]
 		public string RollupIndex { get; internal set; }
 	}
 

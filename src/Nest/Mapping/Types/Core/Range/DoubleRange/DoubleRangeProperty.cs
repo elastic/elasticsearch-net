@@ -1,11 +1,11 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary>
 	/// A range of double-precision 64-bit IEEE 754 floating point values.
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IDoubleRangeProperty : IRangeProperty { }
 
 	/// <inheritdoc />

@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -8,10 +8,10 @@ namespace Nest
 		[JsonConverter(typeof(SourceConverter))]
 		T Document { get; set; }
 
-		[JsonProperty("_percolate")]
+		[DataMember(Name ="_percolate")]
 		string Percolate { get; set; }
 
-		[JsonProperty("pipeline")]
+		[DataMember(Name ="pipeline")]
 		string Pipeline { get; set; }
 
 		[JsonProperty("if_seq_no")]

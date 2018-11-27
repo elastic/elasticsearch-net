@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -15,7 +15,7 @@ namespace Nest
 		/// <summary>
 		/// The type of phonetic encoding to use
 		/// </summary>
-		[JsonProperty("encoder")]
+		[DataMember(Name ="encoder")]
 		PhoneticEncoder? Encoder { get; set; }
 
 		/// <summary>
@@ -24,7 +24,7 @@ namespace Nest
 		/// <remarks>
 		/// Valid for <see cref="PhoneticEncoder.Beidermorse" /> only
 		/// </remarks>
-		[JsonProperty("languageset")]
+		[DataMember(Name ="languageset")]
 		IEnumerable<PhoneticLanguage> LanguageSet { get; set; }
 
 		/// <summary>
@@ -33,7 +33,7 @@ namespace Nest
 		/// <remarks>
 		/// Valid for <see cref="PhoneticEncoder.DoubleMetaphone" /> only
 		/// </remarks>
-		[JsonProperty("max_code_len")]
+		[DataMember(Name ="max_code_len")]
 		int? MaxCodeLength { get; set; }
 
 		/// <summary>
@@ -42,14 +42,14 @@ namespace Nest
 		/// <remarks>
 		/// Valid for <see cref="PhoneticEncoder.Beidermorse" /> only
 		/// </remarks>
-		[JsonProperty("name_type")]
+		[DataMember(Name ="name_type")]
 		PhoneticNameType? NameType { get; set; }
 
 		/// <summary>
 		/// The replace parameter (defaults to true) controls if the token processed should be replaced
 		///  with the encoded one (set it to true), or added (set it to false).
 		/// </summary>
-		[JsonProperty("replace")]
+		[DataMember(Name ="replace")]
 		bool? Replace { get; set; }
 
 		/// <summary>
@@ -58,7 +58,7 @@ namespace Nest
 		/// <remarks>
 		/// Valid for <see cref="PhoneticEncoder.Beidermorse" /> only
 		/// </remarks>
-		[JsonProperty("rule_type")]
+		[DataMember(Name ="rule_type")]
 		PhoneticRuleType? RuleType { get; set; }
 	}
 

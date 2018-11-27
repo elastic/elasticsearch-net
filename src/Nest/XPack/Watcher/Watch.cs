@@ -1,38 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	//TODO find a way to combine with IWatchRequest
-
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<Watch>))]
-	public interface IWatch
+	[DataContract]
+	[ReadAsAttribute(typeof(Watch))]
+	public class IWatch
 	{
-		[JsonProperty("actions")]
+		[DataMember(Name ="actions")]
 		[JsonConverter(typeof(ActionsJsonConverter))]
 		Actions Actions { get; set; }
 
-		[JsonProperty("condition")]
+		[DataMember(Name ="condition")]
 		ConditionContainer Condition { get; set; }
 
-		[JsonProperty("input")]
+		[DataMember(Name ="input")]
 		InputContainer Input { get; set; }
 
-		[JsonProperty("metadata")]
-		IDictionary<string, object> Metadata { get; set; }
+		[DataMember(Name ="metadata")]
+		IDictionary<string, object> Meta { get; set; }
 
-		[JsonProperty("status")]
+		[DataMember(Name ="status")]
 		WatchStatus Status { get; set; }
 
-		[JsonProperty("throttle_period")]
+		[DataMember(Name ="throttle_period")]
 		string ThrottlePeriod { get; set; }
 
-		[JsonProperty("transform")]
+		[DataMember(Name ="transform")]
 		TransformContainer Transform { get; set; }
 
-		[JsonProperty("trigger")]
+		[DataMember(Name = "trigger")]
 		TriggerContainer Trigger { get; set; }
 
 	}
@@ -100,5 +98,7 @@ namespace Nest
 		public WatchDescriptor Trigger(Func<TriggerDescriptor, TriggerContainer> selector) =>
 			Assign(a => a.Trigger = selector.InvokeOrDefault(new TriggerDescriptor()));
 
+		[DataMember(Name ="trigger")]
+		public ITriggerContainer Trigger { get; internal set; }
 	}
 }

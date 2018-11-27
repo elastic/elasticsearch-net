@@ -1,14 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	[ContractJsonConverter(typeof(NormalizerJsonConverter))]
 	public interface INormalizer
 	{
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		string Type { get; }
 
-		[JsonProperty("version")]
+		[DataMember(Name ="version")]
 		string Version { get; set; }
 	}
 

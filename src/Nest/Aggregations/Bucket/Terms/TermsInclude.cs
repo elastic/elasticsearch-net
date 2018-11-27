@@ -1,12 +1,13 @@
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// Filters which terms to include in the response
 	/// </summary>
-	[JsonConverter(typeof(TermsIncludeJsonConverter))]
+	[JsonFormatter(typeof(TermsIncludeFormatter))]
 	public class TermsInclude
 	{
 		/// <summary>
@@ -38,25 +39,25 @@ namespace Nest
 		/// <summary>
 		/// The total number of paritions we are interested in
 		/// </summary>
-		[JsonProperty("num_partitions")]
+		[DataMember(Name ="num_partitions")]
 		public long? NumberOfPartitions { get; set; }
 
 		/// <summary>
 		/// The current partition of terms we are interested in
 		/// </summary>
-		[JsonProperty("partition")]
+		[DataMember(Name ="partition")]
 		public long? Partition { get; set; }
 
 		/// <summary>
 		/// The regular expression pattern to determine terms to include in the response
 		/// </summary>
-		[JsonIgnore]
+		[IgnoreDataMember]
 		public string Pattern { get; set; }
 
 		/// <summary>
 		/// Collection of terms to include in the response
 		/// </summary>
-		[JsonIgnore]
+		[IgnoreDataMember]
 		public IEnumerable<string> Values { get; set; }
 	}
 }

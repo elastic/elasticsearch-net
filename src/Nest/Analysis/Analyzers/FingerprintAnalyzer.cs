@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -12,26 +12,26 @@ namespace Nest
 		/// <summary>
 		/// The maximum token size to emit. Defaults to 255.
 		/// </summary>
-		[JsonProperty("max_output_size")]
+		[DataMember(Name ="max_output_size")]
 		int? MaxOutputSize { get; set; }
 
 		/// <summary>
 		/// If true, emits both the original and folded version of tokens
 		/// that contain extended characters. Defaults to false
 		/// </summary>
-		[JsonProperty("preserve_original")]
+		[DataMember(Name ="preserve_original")]
 		bool? PreserveOriginal { get; set; }
 
 		/// <summary>
 		/// The character that separates the tokens after concatenation. Defaults to a space.
 		/// </summary>
-		[JsonProperty("separator")]
+		[DataMember(Name ="separator")]
 		string Separator { get; set; }
 
 		/// <summary>
 		/// A list of stop words to use. Defaults to an empty list
 		/// </summary>
-		[JsonProperty("stopwords")]
+		[DataMember(Name ="stopwords")]
 		[JsonConverter(typeof(StopWordsJsonConverter))]
 		StopWords StopWords { get; set; }
 
@@ -40,7 +40,7 @@ namespace Nest
 		/// file configuration.Each stop word should be in its own "line"
 		/// (separated by a line break). The file must be UTF-8 encoded.
 		/// </summary>
-		[JsonProperty("stopwords_path")]
+		[DataMember(Name ="stopwords_path")]
 		string StopWordsPath { get; set; }
 	}
 

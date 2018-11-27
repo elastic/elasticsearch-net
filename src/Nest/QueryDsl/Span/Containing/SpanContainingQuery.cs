@@ -1,16 +1,16 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SpanContainingQuery>))]
+	[DataContract]
+	[ReadAs(typeof(SpanContainingQuery))]
 	public interface ISpanContainingQuery : ISpanSubQuery
 	{
-		[JsonProperty("big")]
+		[DataMember(Name ="big")]
 		ISpanQuery Big { get; set; }
 
-		[JsonProperty("little")]
+		[DataMember(Name ="little")]
 		ISpanQuery Little { get; set; }
 	}
 

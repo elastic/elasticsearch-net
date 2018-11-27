@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -13,15 +13,15 @@ namespace Nest
 	public interface INoriAnalyzer : IAnalyzer
 	{
 		/// <inheritdoc cref="INoriTokenizer.DecompoundMode" />
-		[JsonProperty("decompound_mode")]
+		[DataMember(Name ="decompound_mode")]
 		NoriDecompoundMode? DecompoundMode { get; set; }
 
 		/// <inheritdoc cref="INoriPartOfSpeechTokenFilter.StopTags" />
-		[JsonProperty("stoptags")]
+		[DataMember(Name ="stoptags")]
 		IEnumerable<string> StopTags { get; set; }
 
 		/// <inheritdoc cref="INoriTokenizer.UserDictionary" />
-		[JsonProperty("user_dictionary")]
+		[DataMember(Name ="user_dictionary")]
 		string UserDictionary { get; set; }
 	}
 

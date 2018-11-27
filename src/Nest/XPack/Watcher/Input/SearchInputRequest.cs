@@ -1,31 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchInputRequest>))]
+	[DataContract]
+	[ReadAs(typeof(SearchInputRequest))]
 	public interface ISearchInputRequest
 	{
-		[JsonProperty("body")]
-		[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchRequest>))]
+		[DataMember(Name ="body")]
+		[ReadAs(typeof(SearchRequest))]
 		ISearchRequest Body { get; set; }
 
-		[JsonProperty("indices")]
+		[DataMember(Name ="indices")]
 		IEnumerable<IndexName> Indices { get; set; }
 
-		[JsonProperty("indices_options")]
+		[DataMember(Name ="indices_options")]
 		IIndicesOptions IndicesOptions { get; set; }
 
-		[JsonProperty("search_type")]
-		[JsonConverter(typeof(StringEnumConverter))]
+		[DataMember(Name ="search_type")]
+
 		SearchType? SearchType { get; set; }
 
-		[JsonProperty("template")]
-		[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchTemplateRequest>))]
+		[DataMember(Name ="template")]
+		[ReadAs(typeof(SearchTemplateRequest))]
 		ISearchTemplateRequest Template { get; set; }
 	}
 

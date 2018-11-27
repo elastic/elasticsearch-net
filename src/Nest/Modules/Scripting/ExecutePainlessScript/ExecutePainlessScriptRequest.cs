@@ -1,5 +1,5 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -8,15 +8,15 @@ namespace Nest
 	public partial interface IExecutePainlessScriptRequest
 	{
 		/// <summary> The context the script should be executed in </summary>
-		[JsonProperty("context")]
+		[DataMember(Name ="context")]
 		string Context { get; set; }
 
 		/// <inheritdoc cref="IPainlessContextSetup" />
-		[JsonProperty("context_setup")]
+		[DataMember(Name ="context_setup")]
 		IPainlessContextSetup ContextSetup { get; set; }
 
 		/// <summary> The script to execute </summary>
-		[JsonProperty("script")]
+		[DataMember(Name ="script")]
 		IInlineScript Script { get; set; }
 	}
 

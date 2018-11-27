@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IClearSqlCursorResponse : IResponse
 	{
-		[JsonProperty("succeeded")]
+		[DataMember(Name ="succeeded")]
 		bool Succeeded { get; }
 	}
 

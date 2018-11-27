@@ -1,11 +1,8 @@
 ﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
 	/// <summary> The decompound mode determines how the tokenizer handles compound tokens. </summary>
-	[JsonConverter(typeof(StringEnumConverter))]
 	public enum NoriDecompoundMode
 	{
 		/// <summary> Decomposes compounds and discards the original form (default). </summary>
@@ -27,14 +24,15 @@ namespace Nest
 		/// <summary>
 		/// The regular expression pattern, defaults to \W+.
 		/// </summary>
-		[JsonProperty("decompound_mode")]
+		[DataMember(Name = "decompound_mode")]
 		NoriDecompoundMode? DecompoundMode { get; set; }
 
 		/// <summary>
-		/// The Nori tokenizer uses the mecab-ko-dic dictionary by default. A user_dictionary with custom nouns (NNG) may be appended to
+		/// The Nori tokenizer uses the mecab-ko-dic dictionary by default. A user_dictionary with custom nouns (NNG) may be
+		/// appended to
 		/// the default dictionary. This property allows you to specify this file on disk
 		/// </summary>
-		[JsonProperty("user_dictionary")]
+		[DataMember(Name = "user_dictionary")]
 		string UserDictionary { get; set; }
 	}
 

@@ -1,12 +1,12 @@
 using System.Diagnostics;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary>
 	/// Maps a property as a geo_shape field
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IGeoShapeProperty : IDocValuesProperty
 	{
 		/// <summary>
@@ -22,7 +22,7 @@ namespace Nest
 		/// <see cref="Precision" /> along with a reasonable <see cref="DistanceErrorPercentage" />,
 		/// noting that large shapes will have greater false positives.
 		/// </remarks>
-		[JsonProperty("distance_error_pct")]
+		[DataMember(Name ="distance_error_pct")]
 		double? DistanceErrorPercentage { get; set; }
 
 		/// <summary>
@@ -32,7 +32,7 @@ namespace Nest
 		/// <remarks>
 		/// Valid for Elasticsearch 6.1.0+
 		/// </remarks>
-		[JsonProperty("ignore_malformed")]
+		[DataMember(Name ="ignore_malformed")]
 		bool? IgnoreMalformed { get; set; }
 
 		/// <summary>
@@ -44,14 +44,14 @@ namespace Nest
 		/// <remarks>
 		/// Valid for Elasticsearch 6.3.0+
 		/// </remarks>
-		[JsonProperty("ignore_z_value")]
+		[DataMember(Name ="ignore_z_value")]
 		bool? IgnoreZValue { get; set; }
 
 		/// <summary>
 		/// Defines how to interpret vertex order for polygons and multipolygons.
 		/// Defaults to <see cref="GeoOrientation.CounterClockWise" />
 		/// </summary>
-		[JsonProperty("orientation")]
+		[DataMember(Name ="orientation")]
 		GeoOrientation? Orientation { get; set; }
 
 		/// <summary>
@@ -62,7 +62,7 @@ namespace Nest
 		/// This option bridges the gap by improving point performance on a geo_shape field
 		/// so that geo_shape queries are optimal on a point only field.
 		/// </summary>
-		[JsonProperty("points_only")]
+		[DataMember(Name ="points_only")]
 		bool? PointsOnly { get; set; }
 
 		/// <summary>
@@ -70,7 +70,7 @@ namespace Nest
 		/// parameter. The value specifies the desired precision and Elasticsearch will calculate
 		/// the best tree_levels value to honor this precision.
 		/// </summary>
-		[JsonProperty("precision")]
+		[DataMember(Name ="precision")]
 		Distance Precision { get; set; }
 
 		/// <summary>
@@ -78,14 +78,14 @@ namespace Nest
 		/// It also influences the capabilities available so it is recommended to let
 		/// Elasticsearch set this parameter automatically.
 		/// </summary>
-		[JsonProperty("strategy")]
+		[DataMember(Name ="strategy")]
 		GeoStrategy? Strategy { get; set; }
 
 		/// <summary>
 		/// Name of the PrefixTree implementation to be used.
 		/// Defaults to <see cref="GeoTree.Geohash" />
 		/// </summary>
-		[JsonProperty("tree")]
+		[DataMember(Name ="tree")]
 		GeoTree? Tree { get; set; }
 
 		/// <summary>
@@ -95,7 +95,7 @@ namespace Nest
 		/// certain level of understanding of the underlying implementation, users may use the
 		/// <see cref="Precision" /> parameter instead.
 		/// </summary>
-		[JsonProperty("tree_levels")]
+		[DataMember(Name ="tree_levels")]
 		int? TreeLevels { get; set; }
 	}
 

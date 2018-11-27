@@ -1,30 +1,30 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary>
 	/// Sets up contextual scope for the painless script the execute under.
 	/// </summary>
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<PainlessContextSetup>))]
+	[ReadAs(typeof(PainlessContextSetup))]
 	public interface IPainlessContextSetup
 	{
 		/// <summary>
 		/// Contains the document that will be temporarily indexed in-memory and is accessible from the script.
 		/// </summary>
-		[JsonProperty("document")]
+		[DataMember(Name ="document")]
 		object Document { get; set; }
 
 		/// <summary>
 		/// The name of an index containing a mapping that is compatible with the document being indexed.
 		/// </summary>
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		IndexName Index { get; set; }
 
 		/// <summary>
 		/// If _score is used in the script then a query can specified that will be used to compute a score.
 		/// </summary>
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		QueryContainer Query { get; set; }
 	}
 

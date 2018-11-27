@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	[JsonConverter(typeof(ScriptTransformJsonConverter))]
 	public interface IScriptTransform : ITransform
 	{
-		[JsonProperty("lang")]
+		[DataMember(Name ="lang")]
 		string Lang { get; set; }
 
-		[JsonProperty("params")]
+		[DataMember(Name ="params")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
 		Dictionary<string, object> Params { get; set; }
 	}

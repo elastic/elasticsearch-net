@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(ProcessorJsonConverter<SetProcessor>))]
 	public interface ISetProcessor : IProcessor
 	{
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
-		[JsonProperty("value")]
+		[DataMember(Name ="value")]
 		[JsonConverter(typeof(SourceValueWriteConverter))]
 		object Value { get; set; }
 	}

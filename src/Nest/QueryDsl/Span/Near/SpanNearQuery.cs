@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SpanNearQueryDescriptor<object>>))]
+	[DataContract]
+	[ReadAs(typeof(SpanNearQueryDescriptor<object>))]
 	public interface ISpanNearQuery : ISpanSubQuery
 	{
-		[JsonProperty("clauses")]
+		[DataMember(Name ="clauses")]
 		IEnumerable<ISpanQuery> Clauses { get; set; }
 
-		[JsonProperty("in_order")]
+		[DataMember(Name ="in_order")]
 		bool? InOrder { get; set; }
 
-		[JsonProperty("slop")]
+		[DataMember(Name ="slop")]
 		int? Slop { get; set; }
 	}
 

@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<PercentilesBucketAggregation>))]
+	[DataContract]
+	[ReadAs(typeof(PercentilesBucketAggregation))]
 	public interface IPercentilesBucketAggregation : IPipelineAggregation
 	{
-		[JsonProperty("percents")]
+		[DataMember(Name ="percents")]
 		IEnumerable<double> Percents { get; set; }
 	}
 

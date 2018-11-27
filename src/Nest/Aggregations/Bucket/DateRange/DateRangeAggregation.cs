@@ -2,24 +2,25 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<DateRangeAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(DateRangeAggregation))]
 	public interface IDateRangeAggregation : IBucketAggregation
 	{
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
-		[JsonProperty("format")]
+		[DataMember(Name ="format")]
 		string Format { get; set; }
 
-		[JsonProperty("ranges")]
+		[DataMember(Name ="ranges")]
 		IEnumerable<IDateRangeExpression> Ranges { get; set; }
 
-		[JsonProperty("time_zone")]
+		[DataMember(Name ="time_zone")]
 		string TimeZone { get; set; }
 	}
 

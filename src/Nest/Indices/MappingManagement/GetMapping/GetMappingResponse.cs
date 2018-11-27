@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -18,14 +18,14 @@ namespace Nest
 		[Obsolete("Mapping are no longer grouped by type, this indexer is ignored and simply returns Mapppings")]
 		public TypeMapping this[string type] => Mappings;
 
-		[JsonProperty("mappings")]
+		[DataMember(Name = "mappings")]
 		public TypeMapping Mappings { get; internal set; }
 	}
 
 	[JsonConverter(typeof(ResolvableDictionaryResponseJsonConverter<GetMappingResponse, IndexName, IndexMappings>))]
 	public class GetMappingResponse : DictionaryResponseBase<IndexName, IndexMappings>, IGetMappingResponse
 	{
-		[JsonIgnore]
+		[IgnoreDataMember]
 		public IReadOnlyDictionary<IndexName, IndexMappings> Indices => Self.BackingDictionary;
 
 		public void Accept(IMappingVisitor visitor)

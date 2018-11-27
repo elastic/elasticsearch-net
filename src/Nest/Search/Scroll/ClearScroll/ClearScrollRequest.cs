@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	[MapsApi("clear_scroll.json")]
 	public partial interface IClearScrollRequest
 	{
-		[JsonProperty("scroll_id")]
+		[DataMember(Name ="scroll_id")]
 		IEnumerable<string> ScrollIds { get; set; }
 	}
 

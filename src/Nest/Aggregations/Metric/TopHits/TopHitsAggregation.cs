@@ -1,45 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<TopHitsAggregation>))]
+	[DataContract]
+	[ReadAs(typeof(TopHitsAggregation))]
 	public interface ITopHitsAggregation : IMetricAggregation
 	{
-		[JsonProperty("docvalue_fields")]
+		[DataMember(Name ="docvalue_fields")]
 		Fields DocValueFields { get; set; }
 
-		[JsonProperty("explain")]
+		[DataMember(Name ="explain")]
 		bool? Explain { get; set; }
 
-		[JsonProperty("from")]
+		[DataMember(Name ="from")]
 		int? From { get; set; }
 
-		[JsonProperty("highlight")]
+		[DataMember(Name ="highlight")]
 		IHighlight Highlight { get; set; }
 
-		[JsonProperty("script_fields")]
-		[JsonConverter(typeof(ReadAsTypeJsonConverter<ScriptFields>))]
+		[DataMember(Name ="script_fields")]
+		[ReadAs(typeof(ScriptFields))]
 		IScriptFields ScriptFields { get; set; }
 
-		[JsonProperty("size")]
+		[DataMember(Name ="size")]
 		int? Size { get; set; }
 
-		[JsonProperty("sort")]
+		[DataMember(Name ="sort")]
 		IList<ISort> Sort { get; set; }
 
-		[JsonProperty("_source")]
+		[DataMember(Name ="_source")]
 		Union<bool, ISourceFilter> Source { get; set; }
 
-		[JsonProperty("stored_fields")]
+		[DataMember(Name ="stored_fields")]
 		Fields StoredFields { get; set; }
 
-		[JsonProperty("track_scores")]
+		[DataMember(Name ="track_scores")]
 		bool? TrackScores { get; set; }
 
-		[JsonProperty("version")]
+		[DataMember(Name ="version")]
 		bool? Version { get; set; }
 	}
 

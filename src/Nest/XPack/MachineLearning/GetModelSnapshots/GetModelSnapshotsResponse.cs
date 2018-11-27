@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IGetModelSnapshotsResponse : IResponse
 	{
-		[JsonProperty("count")]
+		[DataMember(Name ="count")]
 		long Count { get; }
 
-		[JsonProperty("model_snapshots")]
+		[DataMember(Name ="model_snapshots")]
 		IReadOnlyCollection<ModelSnapshot> ModelSnapshots { get; }
 	}
 

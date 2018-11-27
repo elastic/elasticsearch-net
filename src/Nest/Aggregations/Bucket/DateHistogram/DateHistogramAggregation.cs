@@ -1,45 +1,46 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<DateHistogramAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(DateHistogramAggregation))]
 	public interface IDateHistogramAggregation : IBucketAggregation
 	{
-		[JsonProperty("extended_bounds")]
+		[DataMember(Name ="extended_bounds")]
 		ExtendedBounds<DateMath> ExtendedBounds { get; set; }
 
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
-		[JsonProperty("format")]
+		[DataMember(Name ="format")]
 		string Format { get; set; }
 
-		[JsonProperty("interval")]
+		[DataMember(Name ="interval")]
 		Union<DateInterval, Time> Interval { get; set; }
 
-		[JsonProperty("min_doc_count")]
+		[DataMember(Name ="min_doc_count")]
 		int? MinimumDocumentCount { get; set; }
 
-		[JsonProperty("missing")]
+		[DataMember(Name ="missing")]
 		DateTime? Missing { get; set; }
 
-		[JsonProperty("offset")]
+		[DataMember(Name ="offset")]
 		string Offset { get; set; }
 
-		[JsonProperty("order")]
+		[DataMember(Name ="order")]
 		HistogramOrder Order { get; set; }
 
-		[JsonProperty("params")]
+		[DataMember(Name ="params")]
 		IDictionary<string, object> Params { get; set; }
 
-		[JsonProperty("script")]
+		[DataMember(Name ="script")]
 		IScript Script { get; set; }
 
-		[JsonProperty("time_zone")]
+		[DataMember(Name ="time_zone")]
 		string TimeZone { get; set; }
 	}
 

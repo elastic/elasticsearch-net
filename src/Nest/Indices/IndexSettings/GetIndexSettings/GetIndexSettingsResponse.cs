@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -11,7 +11,7 @@ namespace Nest
 	[JsonConverter(typeof(ResolvableDictionaryResponseJsonConverter<GetIndexSettingsResponse, IndexName, IndexState>))]
 	public class GetIndexSettingsResponse : DictionaryResponseBase<IndexName, IndexState>, IGetIndexSettingsResponse
 	{
-		[JsonIgnore]
+		[IgnoreDataMember]
 		public IReadOnlyDictionary<IndexName, IndexState> Indices => Self.BackingDictionary;
 	}
 }

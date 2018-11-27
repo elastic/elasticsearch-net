@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -11,14 +11,14 @@ namespace Nest
 		/// <summary>
 		/// The query to use to select documents for deletion
 		/// </summary>
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		QueryContainer Query { get; set; }
 
 		/// <summary>
 		/// Parallelize the deleting process. This parallelization can improve efficiency and
 		/// provide a convenient way to break the request down into smaller parts.
 		/// </summary>
-		[JsonProperty("slice")]
+		[DataMember(Name ="slice")]
 		ISlicedScroll Slice { get; set; }
 	}
 

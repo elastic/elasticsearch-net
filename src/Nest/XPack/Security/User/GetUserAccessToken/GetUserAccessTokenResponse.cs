@@ -1,19 +1,19 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IGetUserAccessTokenResponse : IResponse
 	{
-		[JsonProperty("access_token")]
+		[DataMember(Name ="access_token")]
 		string AccessToken { get; set; }
 
-		[JsonProperty("expires_in")]
+		[DataMember(Name ="expires_in")]
 		long ExpiresIn { get; set; }
 
-		[JsonProperty("scope")]
+		[DataMember(Name ="scope")]
 		string Scope { get; set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		string Type { get; set; }
 	}
 

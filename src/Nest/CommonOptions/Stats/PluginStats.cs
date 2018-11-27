@@ -1,29 +1,29 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class PluginStats
 	{
-		[JsonProperty("classname")]
+		[DataMember(Name ="classname")]
 		public string ClassName { get; set; }
 
-		[JsonProperty("description")]
+		[DataMember(Name ="description")]
 		public string Description { get; set; }
 
-		[JsonProperty("isolated")]
+		[DataMember(Name ="isolated")]
 		public bool Isolated { get; set; }
 
-		[JsonProperty("jvm")]
+		[DataMember(Name ="jvm")]
 		public bool Jvm { get; set; }
 
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		public string Name { get; set; }
 
-		[JsonProperty("site")]
+		[DataMember(Name ="site")]
 		public bool Site { get; set; }
 
-		[JsonProperty("version")]
+		[DataMember(Name ="version")]
 		public string Version { get; set; }
 	}
 }

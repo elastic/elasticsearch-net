@@ -1,24 +1,24 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<IndicesPrivileges>))]
+	[ReadAs(typeof(IndicesPrivileges))]
 	public interface IIndicesPrivileges
 	{
-		[JsonProperty("field_security")]
+		[DataMember(Name ="field_security")]
 		IFieldSecurity FieldSecurity { get; set; }
 
-		[JsonProperty("names")]
+		[DataMember(Name ="names")]
 		[JsonConverter(typeof(IndicesJsonConverter))]
 		Indices Names { get; set; }
 
-		[JsonProperty("privileges")]
+		[DataMember(Name ="privileges")]
 		IEnumerable<string> Privileges { get; set; }
 
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		QueryContainer Query { get; set; }
 	}
 

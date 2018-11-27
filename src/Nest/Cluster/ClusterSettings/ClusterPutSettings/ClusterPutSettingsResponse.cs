@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IClusterPutSettingsResponse : IResponse
 	{
-		[JsonProperty("acknowledged")]
+		[DataMember(Name ="acknowledged")]
 		bool Acknowledged { get; }
 
-		[JsonProperty("persistent")]
+		[DataMember(Name ="persistent")]
 		IReadOnlyDictionary<string, object> Persistent { get; }
 
-		[JsonProperty("transient")]
+		[DataMember(Name ="transient")]
 		IReadOnlyDictionary<string, object> Transient { get; }
 	}
 

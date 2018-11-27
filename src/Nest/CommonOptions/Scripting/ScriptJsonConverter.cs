@@ -1,52 +1,65 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using System.Collections.Generic;
+using Utf8Json;
+using Utf8Json.Internal;
 
 namespace Nest
 {
-	internal class ScriptJsonConverter : JsonConverter
+	internal class ScriptFormatter : IJsonFormatter<IScript>
 	{
-		public override bool CanRead => true;
-		public override bool CanWrite => false;
-
-		public override bool CanConvert(Type objectType) => typeof(IScript).IsAssignableFrom(objectType);
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		private static readonly AutomataDictionary AutomataDictionary = new AutomataDictionary
 		{
-			var o = JObject.Load(reader);
-			var dict = o.Properties().ToDictionary(p => p.Name, p => p.Value);
-			if (!dict.HasAny()) return null;
+			{ "inline", 0 },
+			{ "source", 1 },
+			{ "id", 2 },
+			{ "lang", 3 },
+			{ "params", 4 }
+		};
 
+		public IScript Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
+				return null;
+
+			var count = 0;
 			IScript script = null;
-			if (dict.ContainsKey("inline"))
+			string language = null;
+			Dictionary<string, object> parameters = null;
+
+			while (reader.ReadIsInObject(ref count))
 			{
-				var inline = dict["inline"].ToString();
-				script = new InlineScript(inline);
-			}
-			if (dict.ContainsKey("source"))
-			{
-				var inline = dict["source"].ToString();
-				script = new InlineScript(inline);
-			}
-			if (dict.ContainsKey("id"))
-			{
-				var id = dict["id"].ToString();
-				script = new IndexedScript(id);
+				if (AutomataDictionary.TryGetValue(reader.ReadPropertyNameSegmentRaw(), out var value))
+				{
+					switch (value)
+					{
+						case 0:
+						case 1:
+							script = new InlineScript(reader.ReadString());
+							break;
+						case 2:
+							script = new IndexedScript(reader.ReadString());
+							break;
+						case 3:
+							language = reader.ReadString();
+							break;
+						case 4:
+							parameters = formatterResolver.GetFormatter<Dictionary<string, object>>()
+								.Deserialize(ref reader, formatterResolver);
+							break;
+					}
+				}
 			}
 
-			if (script == null) return null;
+			if (script == null)
+				return null;
 
-			if (dict.ContainsKey("lang"))
-				script.Lang = dict["lang"].ToString();
-			if (dict.ContainsKey("params"))
-				script.Params = dict["params"].ToObject<Dictionary<string, object>>();
-
+			script.Lang = language;
+			script.Params = parameters;
 			return script;
 		}
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) =>
-			throw new NotSupportedException();
+		public void Serialize(ref JsonWriter writer, IScript value, IJsonFormatterResolver formatterResolver)
+		{
+			var formatter = formatterResolver;
+		}
 	}
 }

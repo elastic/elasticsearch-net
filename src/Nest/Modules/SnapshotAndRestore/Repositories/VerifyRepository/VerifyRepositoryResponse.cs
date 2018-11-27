@@ -1,20 +1,20 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IVerifyRepositoryResponse : IResponse
 	{
 		/// <summary>
 		///  A dictionary of nodeId => nodeinfo of nodes that verified the repository
 		/// </summary>
-		[JsonProperty("nodes")]
+		[DataMember(Name ="nodes")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, CompactNodeInfo>))]
 		IReadOnlyDictionary<string, CompactNodeInfo> Nodes { get; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class VerifyRepositoryResponse : ResponseBase, IVerifyRepositoryResponse
 	{
 		/// <summary>

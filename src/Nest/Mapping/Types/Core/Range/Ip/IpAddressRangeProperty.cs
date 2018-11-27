@@ -1,8 +1,8 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IIpRangeProperty : IRangeProperty { }
 
 	public class IpRangeProperty : RangePropertyBase, IIpRangeProperty

@@ -1,20 +1,20 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	[MapsApi("security.get_token.json")]
 	public partial interface IGetUserAccessTokenRequest
 	{
-		[JsonProperty("grant_type")]
+		[DataMember(Name ="grant_type")]
 		AccessTokenGrantType? GrantType { get; set; }
 
-		[JsonProperty("password")]
+		[DataMember(Name ="password")]
 		string Password { get; set; }
 
-		[JsonProperty("scope")]
+		[DataMember(Name ="scope")]
 		string Scope { get; set; }
 
-		[JsonProperty("username")]
+		[DataMember(Name ="username")]
 		string Username { get; set; }
 	}
 
@@ -31,10 +31,10 @@ namespace Nest
 
 		public string Scope { get; set; }
 
-		[JsonProperty("password")]
+		[DataMember(Name ="password")]
 		string IGetUserAccessTokenRequest.Password { get; set; }
 
-		[JsonProperty("username")]
+		[DataMember(Name ="username")]
 		string IGetUserAccessTokenRequest.Username { get; set; }
 	}
 

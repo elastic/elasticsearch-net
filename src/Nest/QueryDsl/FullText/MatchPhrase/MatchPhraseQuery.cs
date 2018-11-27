@@ -1,18 +1,18 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(FieldNameQueryJsonConverter<MatchPhraseQuery>))]
 	public interface IMatchPhraseQuery : IFieldNameQuery
 	{
-		[JsonProperty("analyzer")]
+		[DataMember(Name ="analyzer")]
 		string Analyzer { get; set; }
 
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		string Query { get; set; }
 
-		[JsonProperty("slop")]
+		[DataMember(Name ="slop")]
 		int? Slop { get; set; }
 	}
 

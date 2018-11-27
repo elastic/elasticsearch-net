@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -8,10 +8,10 @@ namespace Nest
 	/// </summary>
 	public interface IMappingCharFilter : ICharFilter
 	{
-		[JsonProperty("mappings")]
+		[DataMember(Name ="mappings")]
 		IEnumerable<string> Mappings { get; set; }
 
-		[JsonProperty("mappings_path")]
+		[DataMember(Name ="mappings_path")]
 		string MappingsPath { get; set; }
 	}
 

@@ -1,10 +1,10 @@
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	[ContractJsonConverter(typeof(QueryContainerJsonConverter))]
 	[JsonFormatter(typeof(QueryContainerInterfaceFormatter))]
 	public interface IQueryContainer

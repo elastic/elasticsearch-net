@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -18,31 +18,31 @@ namespace Nest
 
 	public interface IAzureRepositorySettings : IRepositorySettings
 	{
-		[JsonProperty("base_path")]
+		[DataMember(Name ="base_path")]
 		string BasePath { get; set; }
 
-		[JsonProperty("chunk_size")]
+		[DataMember(Name ="chunk_size")]
 		string ChunkSize { get; set; }
 
-		[JsonProperty("compress")]
+		[DataMember(Name ="compress")]
 		bool? Compress { get; set; }
 
-		[JsonProperty("container")]
+		[DataMember(Name ="container")]
 		string Container { get; set; }
 	}
 
 	public class AzureRepositorySettings : IAzureRepositorySettings
 	{
-		[JsonProperty("base_path")]
+		[DataMember(Name ="base_path")]
 		public string BasePath { get; set; }
 
-		[JsonProperty("chunk_size")]
+		[DataMember(Name ="chunk_size")]
 		public string ChunkSize { get; set; }
 
-		[JsonProperty("compress")]
+		[DataMember(Name ="compress")]
 		public bool? Compress { get; set; }
 
-		[JsonProperty("container")]
+		[DataMember(Name ="container")]
 		public string Container { get; set; }
 	}
 

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -9,7 +9,7 @@ namespace Nest
 		IReadOnlyCollection<TCatRecord> Records { get; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class CatResponse<TCatRecord> : ResponseBase, ICatResponse<TCatRecord>
 		where TCatRecord : ICatRecord
 	{

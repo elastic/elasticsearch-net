@@ -1,38 +1,38 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<AllField>))]
+	[ReadAs(typeof(AllField))]
 	public interface IAllField : IFieldMapping
 	{
-		[JsonProperty("analyzer")]
+		[DataMember(Name ="analyzer")]
 		string Analyzer { get; set; }
 
-		[JsonProperty("enabled")]
+		[DataMember(Name ="enabled")]
 		bool? Enabled { get; set; }
 
-		[JsonProperty("omit_norms")]
+		[DataMember(Name ="omit_norms")]
 		bool? OmitNorms { get; set; }
 
-		[JsonProperty("search_analyzer")]
+		[DataMember(Name ="search_analyzer")]
 		string SearchAnalyzer { get; set; }
 
-		[JsonProperty("similarity")]
+		[DataMember(Name ="similarity")]
 		string Similarity { get; set; }
 
-		[JsonProperty("store")]
+		[DataMember(Name ="store")]
 		bool? Store { get; set; }
 
-		[JsonProperty("store_term_vector_offsets")]
+		[DataMember(Name ="store_term_vector_offsets")]
 		bool? StoreTermVectorOffsets { get; set; }
 
-		[JsonProperty("store_term_vector_payloads")]
+		[DataMember(Name ="store_term_vector_payloads")]
 		bool? StoreTermVectorPayloads { get; set; }
 
-		[JsonProperty("store_term_vector_positions")]
+		[DataMember(Name ="store_term_vector_positions")]
 		bool? StoreTermVectorPositions { get; set; }
 
-		[JsonProperty("store_term_vectors")]
+		[DataMember(Name ="store_term_vectors")]
 		bool? StoreTermVectors { get; set; }
 	}
 

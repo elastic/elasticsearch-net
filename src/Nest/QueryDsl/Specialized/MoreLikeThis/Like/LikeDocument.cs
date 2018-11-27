@@ -1,29 +1,29 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<LikeDocument<object>>))]
+	[DataContract]
+	[ReadAs(typeof(LikeDocument<object>))]
 	public interface ILikeDocument
 	{
-		[JsonProperty("doc")]
+		[DataMember(Name ="doc")]
 		[JsonConverter(typeof(SourceConverter))]
 		object Document { get; set; }
 
-		[JsonProperty("fields")]
+		[DataMember(Name ="fields")]
 		Fields Fields { get; set; }
 
-		[JsonProperty("_id")]
+		[DataMember(Name ="_id")]
 		Id Id { get; set; }
 
-		[JsonProperty("_index")]
+		[DataMember(Name ="_index")]
 		IndexName Index { get; set; }
 
-		[JsonProperty("per_field_analyzer")]
+		[DataMember(Name ="per_field_analyzer")]
 		IPerFieldAnalyzer PerFieldAnalyzer { get; set; }
 
-		[JsonProperty("_routing")]
+		[DataMember(Name ="_routing")]
 		Routing Routing { get; set; }
 	}
 

@@ -1,5 +1,5 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -12,44 +12,44 @@ namespace Nest
 		/// <summary>
 		/// If true, the results are sorted in descending order.
 		/// </summary>
-		[JsonProperty("desc")]
+		[DataMember(Name ="desc")]
 		bool? Descending { get; set; }
 
 		/// <summary>
 		/// Returns records with timestamps earlier than this time.
 		/// </summary>
-		[JsonProperty("end")]
+		[DataMember(Name ="end")]
 		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
 		DateTimeOffset? End { get; set; }
 
 		/// <summary>
 		/// If true, the output excludes interim results. By default, interim results are included.
 		/// </summary>
-		[JsonProperty("exclude_interim")]
+		[DataMember(Name ="exclude_interim")]
 		bool? ExcludeInterim { get; set; }
 
 		/// <summary>
 		/// Specifies pagination for the records
 		/// </summary>
-		[JsonProperty("page")]
+		[DataMember(Name ="page")]
 		IPage Page { get; set; }
 
 		/// <summary>
 		/// Returns records with anomaly scores higher than this value.
 		/// </summary>
-		[JsonProperty("record_score")]
+		[DataMember(Name ="record_score")]
 		double? RecordScore { get; set; }
 
 		/// <summary>
 		/// Specifies the sort field for the requested records. By default, records are sorted by the anomaly score value.
 		/// </summary>
-		[JsonProperty("sort")]
+		[DataMember(Name ="sort")]
 		Field Sort { get; set; }
 
 		/// <summary>
 		/// Returns records with timestamps after this time.
 		/// </summary>
-		[JsonProperty("start")]
+		[DataMember(Name ="start")]
 		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
 		DateTimeOffset? Start { get; set; }
 	}

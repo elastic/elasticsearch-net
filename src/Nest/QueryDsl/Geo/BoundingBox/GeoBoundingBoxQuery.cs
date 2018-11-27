@@ -1,19 +1,19 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(VariableFieldNameQueryJsonConverter<GeoBoundingBoxQuery, IGeoBoundingBoxQuery>))]
 	public interface IGeoBoundingBoxQuery : IFieldNameQuery
 	{
 		[VariableField]
 		IBoundingBox BoundingBox { get; set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		GeoExecution? Type { get; set; }
 
-		[JsonProperty("validation_method")]
+		[DataMember(Name ="validation_method")]
 		GeoValidationMethod? ValidationMethod { get; set; }
 	}
 

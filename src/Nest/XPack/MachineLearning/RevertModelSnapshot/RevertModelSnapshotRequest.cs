@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -13,7 +13,7 @@ namespace Nest
 		/// the reverted snapshot. It also resets the model to accept records for this time period.
 		/// The default value is false.
 		/// </summary>
-		[JsonProperty("delete_intervening_results")]
+		[DataMember(Name ="delete_intervening_results")]
 		bool? DeleteInterveningResults { get; set; }
 	}
 

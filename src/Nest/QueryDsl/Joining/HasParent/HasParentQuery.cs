@@ -1,22 +1,22 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<HasParentQueryDescriptor<object>>))]
+	[DataContract]
+	[ReadAs(typeof(HasParentQueryDescriptor<object>))]
 	public interface IHasParentQuery : IQuery
 	{
-		[JsonProperty("ignore_unmapped")]
+		[DataMember(Name ="ignore_unmapped")]
 		bool? IgnoreUnmapped { get; set; }
 
-		[JsonProperty("inner_hits")]
+		[DataMember(Name ="inner_hits")]
 		IInnerHits InnerHits { get; set; }
 
-		[JsonProperty("parent_type")]
+		[DataMember(Name = "parent_type")]
 		RelationName ParentType { get; set; }
 
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		QueryContainer Query { get; set; }
 
 		/// <summary>
@@ -24,7 +24,7 @@ namespace Nest
 		/// document.
 		/// The default is false which ignores the score from the parent document.
 		/// </summary>
-		[JsonProperty("score")]
+		[DataMember(Name ="score")]
 		bool? Score { get; set; }
 	}
 

@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -11,7 +11,7 @@ namespace Nest
 		/// <summary>
 		/// The lambda parameter
 		/// </summary>
-		[JsonProperty("lambda")]
+		[DataMember(Name ="lambda")]
 		double? Lambda { get; set; }
 	}
 

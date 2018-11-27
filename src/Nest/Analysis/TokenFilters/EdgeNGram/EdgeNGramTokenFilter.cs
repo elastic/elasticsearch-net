@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -10,19 +10,19 @@ namespace Nest
 		/// <summary>
 		/// Defaults to 2.
 		/// </summary>
-		[JsonProperty("max_gram")]
+		[DataMember(Name ="max_gram")]
 		int? MaxGram { get; set; }
 
 		/// <summary>
 		/// Defaults to 1.
 		/// </summary>
-		[JsonProperty("min_gram")]
+		[DataMember(Name ="min_gram")]
 		int? MinGram { get; set; }
 
 		/// <summary>
 		/// Either front or back. Defaults to front.
 		/// </summary>
-		[JsonProperty("side")]
+		[DataMember(Name ="side")]
 		EdgeNGramSide? Side { get; set; }
 	}
 

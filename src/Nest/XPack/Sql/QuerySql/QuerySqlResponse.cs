@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -8,7 +8,7 @@ namespace Nest
 		/// <summary>
 		/// Describes the columns being returned, this property will only be set on the first page of results.
 		/// </summary>
-		[JsonProperty("columns")]
+		[DataMember(Name ="columns")]
 		IReadOnlyCollection<SqlColumn> Columns { get; }
 
 		/// <summary>
@@ -18,10 +18,10 @@ namespace Nest
 		/// Unlike scroll, receiving the last page is enough to guarantee that the Elasticsearch state is cleared.
 		/// </para>
 		/// </summary>
-		[JsonProperty("cursor")]
+		[DataMember(Name ="cursor")]
 		string Cursor { get; }
 
-		[JsonProperty("rows")]
+		[DataMember(Name ="rows")]
 		IReadOnlyCollection<SqlRow> Rows { get; }
 	}
 

@@ -1,19 +1,19 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class GraphConnection
 	{
-		[JsonProperty("doc_count")]
+		[DataMember(Name ="doc_count")]
 		public long DocumentCount { get; internal set; }
 
-		[JsonProperty("source")]
+		[DataMember(Name ="source")]
 		public long Source { get; internal set; }
 
-		[JsonProperty("target")]
+		[DataMember(Name ="target")]
 		public long Target { get; internal set; }
 
-		[JsonProperty("weight")]
+		[DataMember(Name ="weight")]
 		public double Weight { get; internal set; }
 	}
 }

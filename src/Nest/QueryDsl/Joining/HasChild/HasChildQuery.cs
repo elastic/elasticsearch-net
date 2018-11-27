@@ -1,34 +1,34 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<HasChildQueryDescriptor<object>>))]
+	[DataContract]
+	[ReadAs(typeof(HasChildQueryDescriptor<object>))]
 	public interface IHasChildQuery : IQuery
 	{
-		[JsonProperty("ignore_unmapped")]
+		[DataMember(Name ="ignore_unmapped")]
 		bool? IgnoreUnmapped { get; set; }
 
-		[JsonProperty("inner_hits")]
+		[DataMember(Name ="inner_hits")]
 		IInnerHits InnerHits { get; set; }
 
 		/// <summary>
 		/// Specify how many child documents are allowed to match.
 		/// </summary>
-		[JsonProperty("max_children")]
+		[DataMember(Name ="max_children")]
 		int? MaxChildren { get; set; }
 
-		[JsonProperty("min_children")]
+		[DataMember(Name ="min_children")]
 		int? MinChildren { get; set; }
 
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		QueryContainer Query { get; set; }
 
-		[JsonProperty("score_mode")]
+		[DataMember(Name ="score_mode")]
 		ChildScoreMode? ScoreMode { get; set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name = "type")]
 		RelationName Type { get; set; }
 	}
 

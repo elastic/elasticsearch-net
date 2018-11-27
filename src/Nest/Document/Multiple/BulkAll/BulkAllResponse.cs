@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -15,7 +15,7 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	[JsonObject]
+	[DataContract]
 	public class BulkAllResponse : IBulkAllResponse
 	{
 		/// <inheritdoc />

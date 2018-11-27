@@ -1,41 +1,41 @@
 ﻿using System;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SpanQueryDescriptor<object>>))]
+	[DataContract]
+	[ReadAs(typeof(SpanQueryDescriptor<object>))]
 	public interface ISpanQuery : IQuery
 	{
-		[JsonProperty("span_containing")]
+		[DataMember(Name ="span_containing")]
 		ISpanContainingQuery SpanContaining { get; set; }
 
-		[JsonProperty("field_masking_span")]
+		[DataMember(Name ="field_masking_span")]
 		ISpanFieldMaskingQuery SpanFieldMasking { get; set; }
 
-		[JsonProperty("span_first")]
+		[DataMember(Name ="span_first")]
 		ISpanFirstQuery SpanFirst { get; set; }
 
-		[JsonProperty("span_gap")]
+		[DataMember(Name ="span_gap")]
 		ISpanGapQuery SpanGap { get; set; }
 
-		[JsonProperty("span_multi")]
+		[DataMember(Name ="span_multi")]
 		ISpanMultiTermQuery SpanMultiTerm { get; set; }
 
-		[JsonProperty("span_near")]
+		[DataMember(Name ="span_near")]
 		ISpanNearQuery SpanNear { get; set; }
 
-		[JsonProperty("span_not")]
+		[DataMember(Name ="span_not")]
 		ISpanNotQuery SpanNot { get; set; }
 
-		[JsonProperty("span_or")]
+		[DataMember(Name ="span_or")]
 		ISpanOrQuery SpanOr { get; set; }
 
-		[JsonProperty("span_term")]
+		[DataMember(Name ="span_term")]
 		ISpanTermQuery SpanTerm { get; set; }
 
-		[JsonProperty("span_within")]
+		[DataMember(Name ="span_within")]
 		ISpanWithinQuery SpanWithin { get; set; }
 
 		void Accept(IQueryVisitor visitor);

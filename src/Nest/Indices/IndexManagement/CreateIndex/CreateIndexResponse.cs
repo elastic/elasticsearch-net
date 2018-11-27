@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	public interface ICreateIndexResponse : IAcknowledgedResponse
 	{
-		[JsonProperty("shards_acknowledged")]
+		[DataMember(Name ="shards_acknowledged")]
 		bool ShardsAcknowledged { get; }
 	}
 

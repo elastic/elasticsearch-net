@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class GraphVertexInclude
 	{
-		[JsonProperty("boost")]
+		[DataMember(Name ="boost")]
 		public double? Boost { get; set; }
 
-		[JsonProperty("term")]
+		[DataMember(Name ="term")]
 		public string Term { get; set; }
 	}
 

@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<RoutingField>))]
+	[ReadAs(typeof(RoutingField))]
 	public interface IRoutingField : IFieldMapping
 	{
-		[JsonProperty("required")]
+		[DataMember(Name ="required")]
 		bool? Required { get; set; }
 	}
 

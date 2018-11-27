@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IClusterGetSettingsResponse : IResponse
 	{
-		[JsonProperty("persistent")]
+		[DataMember(Name ="persistent")]
 		IReadOnlyDictionary<string, object> Persistent { get; }
 
-		[JsonProperty("transient")]
+		[DataMember(Name ="transient")]
 		IReadOnlyDictionary<string, object> Transient { get; }
 	}
 
