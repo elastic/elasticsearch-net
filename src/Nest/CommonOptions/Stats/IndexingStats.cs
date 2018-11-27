@@ -1,49 +1,50 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class IndexingStats
 	{
-		[JsonProperty("index_current")]
+		[DataMember(Name ="index_current")]
 		public long Current { get; set; }
 
-		[JsonProperty("delete_current")]
+		[DataMember(Name ="delete_current")]
 		public long DeleteCurrent { get; set; }
 
-		[JsonProperty("delete_time")]
+		[DataMember(Name ="delete_time")]
 		public string DeleteTime { get; set; }
 
-		[JsonProperty("delete_time_in_millis")]
+		[DataMember(Name ="delete_time_in_millis")]
 		public long DeleteTimeInMilliseconds { get; set; }
 
-		[JsonProperty("delete_total")]
+		[DataMember(Name ="delete_total")]
 		public long DeleteTotal { get; set; }
 
-		[JsonProperty("is_throttled")]
+		[DataMember(Name ="is_throttled")]
 		public bool IsThrottled { get; set; }
 
-		[JsonProperty("noop_update_total")]
+		[DataMember(Name ="noop_update_total")]
 		public long NoopUpdateTotal { get; set; }
 
-		[JsonProperty("throttle_time")]
+		[DataMember(Name ="throttle_time")]
 		public string ThrottleTime { get; set; }
 
-		[JsonProperty("throttle_time_in_millis")]
+		[DataMember(Name ="throttle_time_in_millis")]
 		public long ThrottleTimeInMilliseconds { get; set; }
 
-		[JsonProperty("index_time")]
+		[DataMember(Name ="index_time")]
 		public string Time { get; set; }
 
-		[JsonProperty("index_time_in_millis")]
+		[DataMember(Name ="index_time_in_millis")]
 		public long TimeInMilliseconds { get; set; }
 
-		[JsonProperty("index_total")]
+		[DataMember(Name ="index_total")]
 		public long Total { get; set; }
 
-		[JsonProperty("types")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, IndexingStats>))]
+		[DataMember(Name ="types")]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, IndexingStats>))]
 		public IReadOnlyDictionary<string, IndexingStats> Types { get; set; }
 	}
 }

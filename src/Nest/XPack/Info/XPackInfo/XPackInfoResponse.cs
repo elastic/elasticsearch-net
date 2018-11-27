@@ -1,20 +1,20 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IXPackInfoResponse : IResponse
 	{
-		[JsonProperty("build")]
+		[DataMember(Name ="build")]
 		XPackBuildInformation Build { get; }
 
-		[JsonProperty("features")]
+		[DataMember(Name ="features")]
 		XPackFeatures Features { get; }
 
-		[JsonProperty("license")]
+		[DataMember(Name ="license")]
 		MinimalLicenseInformation License { get; }
 
-		[JsonProperty("tagline")]
+		[DataMember(Name ="tagline")]
 		string Tagline { get; }
 	}
 
@@ -28,70 +28,70 @@ namespace Nest
 
 	public class XPackBuildInformation
 	{
-		[JsonProperty("date")]
+		[DataMember(Name ="date")]
 		public DateTimeOffset Date { get; internal set; }
 
-		[JsonProperty("hash")]
+		[DataMember(Name ="hash")]
 		public string Hash { get; internal set; }
 	}
 
 	public class MinimalLicenseInformation
 	{
-		[JsonProperty("expiry_date_in_millis")]
+		[DataMember(Name ="expiry_date_in_millis")]
 		public long ExpiryDateInMilliseconds { get; set; }
 
-		[JsonProperty("mode")]
+		[DataMember(Name ="mode")]
 		public LicenseType Mode { get; internal set; }
 
-		[JsonProperty("status")]
+		[DataMember(Name ="status")]
 		public LicenseStatus Status { get; internal set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		public LicenseType Type { get; internal set; }
 
-		[JsonProperty("uid")]
+		[DataMember(Name ="uid")]
 		public string UID { get; internal set; }
 	}
 
 	public class XPackFeatures
 	{
-		[JsonProperty("graph")]
+		[DataMember(Name ="graph")]
 		public XPackFeature Graph { get; internal set; }
 
-		[JsonProperty("ml")]
+		[DataMember(Name ="ml")]
 		public XPackFeature MachineLearning { get; internal set; }
 
-		[JsonProperty("monitoring")]
+		[DataMember(Name ="monitoring")]
 		public XPackFeature Monitoring { get; internal set; }
 
-		[JsonProperty("security")]
+		[DataMember(Name ="security")]
 		public XPackFeature Security { get; internal set; }
 
-		[JsonProperty("watcher")]
+		[DataMember(Name ="watcher")]
 		public XPackFeature Watcher { get; internal set; }
 	}
 
 	public class XPackFeature
 	{
-		[JsonProperty("available")]
+		[DataMember(Name ="available")]
 		public bool Available { get; internal set; }
 
-		[JsonProperty("description")]
+		[DataMember(Name ="description")]
 		public string Description { get; internal set; }
 
-		[JsonProperty("enabled")]
+		[DataMember(Name ="enabled")]
 		public bool Enabled { get; internal set; }
 
-		[JsonProperty("native_code_info")]
+		[DataMember(Name ="native_code_info")]
 		public NativeCodeInformation NativeCodeInformation { get; internal set; }
 	}
 
 	public class NativeCodeInformation
 	{
-		[JsonProperty("build_hash")]
+		[DataMember(Name ="build_hash")]
 		public string BuildHash { get; internal set; }
 
-		[JsonProperty("version")]
+		[DataMember(Name ="version")]
 		public string Version { get; internal set; }
 	}
 }

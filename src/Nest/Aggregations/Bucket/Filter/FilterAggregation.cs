@@ -1,13 +1,14 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(FilterAggregationJsonConverter))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(FilterAggregationFormatter))]
 	public interface IFilterAggregation : IBucketAggregation
 	{
-		[JsonProperty("filter")]
+		[DataMember(Name ="filter")]
 		QueryContainer Filter { get; set; }
 	}
 

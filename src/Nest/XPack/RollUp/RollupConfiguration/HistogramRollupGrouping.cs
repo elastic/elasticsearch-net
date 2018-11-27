@@ -1,23 +1,23 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary> The histogram group aggregates one or more numeric fields into numeric histogram intervals. </summary>
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<HistogramRollupGrouping>))]
+	[ReadAs(typeof(HistogramRollupGrouping))]
 	public interface IHistogramRollupGrouping
 	{
 		/// <summary>
 		/// The set of fields that you wish to build histograms for. All fields specified must be some kind of numeric. Order does not matter
 		/// </summary>
-		[JsonProperty("fields")]
+		[DataMember(Name ="fields")]
 		Fields Fields { get; set; }
 
 		/// <summary>
 		/// The interval of histogram buckets to be generated when rolling up. Note that only one interval can be specified in the
 		/// histogram group, meaning that all fields being grouped via the histogram must share the same interval.
 		/// </summary>
-		[JsonProperty("interval")]
+		[DataMember(Name ="interval")]
 		long? Interval { get; set; }
 	}
 

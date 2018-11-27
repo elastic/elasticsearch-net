@@ -1,51 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<PhraseSuggester>))]
+	[DataContract]
+	[ReadAs(typeof(PhraseSuggester))]
 	public interface IPhraseSuggester : ISuggester
 	{
-		[JsonProperty("collate")]
+		[DataMember(Name ="collate")]
 		IPhraseSuggestCollate Collate { get; set; }
 
-		[JsonProperty("confidence")]
+		[DataMember(Name ="confidence")]
 		double? Confidence { get; set; }
 
-		[JsonProperty("direct_generator")]
+		[DataMember(Name ="direct_generator")]
 		IEnumerable<IDirectGenerator> DirectGenerator { get; set; }
 
-		[JsonProperty("force_unigrams")]
+		[DataMember(Name ="force_unigrams")]
 		bool? ForceUnigrams { get; set; }
 
-		[JsonProperty("gram_size")]
+		[DataMember(Name ="gram_size")]
 		int? GramSize { get; set; }
 
-		[JsonProperty("highlight")]
+		[DataMember(Name ="highlight")]
 		IPhraseSuggestHighlight Highlight { get; set; }
 
-		[JsonProperty("max_errors")]
+		[DataMember(Name ="max_errors")]
 		double? MaxErrors { get; set; }
 
-		[JsonProperty("real_word_error_likelihood")]
+		[DataMember(Name ="real_word_error_likelihood")]
 		double? RealWordErrorLikelihood { get; set; }
 
-		[JsonProperty("separator")]
+		[DataMember(Name ="separator")]
 		char? Separator { get; set; }
 
-		[JsonProperty("shard_size")]
+		[DataMember(Name ="shard_size")]
 		int? ShardSize { get; set; }
 
-		[JsonProperty("smoothing")]
+		[DataMember(Name ="smoothing")]
 		SmoothingModelContainer Smoothing { get; set; }
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		string Text { get; set; }
 
-		[JsonProperty("token_limit")]
+		[DataMember(Name ="token_limit")]
 		int? TokenLimit { get; set; }
 	}
 

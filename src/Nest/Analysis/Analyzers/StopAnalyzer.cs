@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -11,14 +11,14 @@ namespace Nest
 		/// <summary>
 		/// A list of stopword to initialize the stop filter with. Defaults to the english stop words.
 		/// </summary>
-		[JsonProperty("stopwords")]
+		[DataMember(Name ="stopwords")]
 		[JsonConverter(typeof(StopWordsJsonConverter))]
 		StopWords StopWords { get; set; }
 
 		/// <summary>
 		/// A path (either relative to config location, or absolute) to a stopwords file configuration.
 		/// </summary>
-		[JsonProperty("stopwords_path")]
+		[DataMember(Name ="stopwords_path")]
 		string StopwordsPath { get; set; }
 	}
 

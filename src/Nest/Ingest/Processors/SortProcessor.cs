@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -9,20 +9,20 @@ namespace Nest
 	/// will be sorted numerically, while arrays of strings or heterogeneous arrays
 	///  of strings and numbers will be sorted lexicographically.
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(ProcessorJsonConverter<SortProcessor>))]
 	public interface ISortProcessor : IProcessor
 	{
 		/// <summary>
 		/// The field to be sorted
 		/// </summary>
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
 		/// <summary>
 		/// The sort order to use. Default is ascending.
 		/// </summary>
-		[JsonProperty("order")]
+		[DataMember(Name ="order")]
 		SortOrder? Order { get; set; }
 	}
 

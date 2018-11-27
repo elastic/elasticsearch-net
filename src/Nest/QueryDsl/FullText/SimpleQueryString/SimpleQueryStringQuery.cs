@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -8,32 +8,32 @@ namespace Nest
 	/// Unlike the regular <see cref="IQueryStringQuery" />, the <see cref="ISimpleQueryStringQuery" /> query will
 	/// never throw an exception, and discards invalid parts of the query.
 	/// </summary>
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SimpleQueryStringQueryDescriptor<object>>))]
+	[DataContract]
+	[ReadAs(typeof(SimpleQueryStringQueryDescriptor<object>))]
 	public interface ISimpleQueryStringQuery : IQuery
 	{
 		/// <summary>
 		/// The analyzer name used to analyze the query
 		/// </summary>
-		[JsonProperty("analyzer")]
+		[DataMember(Name ="analyzer")]
 		string Analyzer { get; set; }
 
 		/// <summary>
 		/// By default, wildcards terms in a query are not analyzed.
 		/// By setting this value to <c>true</c>, a best effort will be made to analyze those as well.
 		/// </summary>
-		[JsonProperty("analyze_wildcard")]
+		[DataMember(Name ="analyze_wildcard")]
 		bool? AnalyzeWildcard { get; set; }
 
 		/// <summary></summary>
-		[JsonProperty("auto_generate_synonyms_phrase_query")]
+		[DataMember(Name ="auto_generate_synonyms_phrase_query")]
 		bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
 		/// <summary>
 		/// The default operator used if no explicit operator is specified
 		/// The default operator is <see cref="Operator.Or" />
 		/// </summary>
-		[JsonProperty("default_operator")]
+		[DataMember(Name ="default_operator")]
 		Operator? DefaultOperator { get; set; }
 
 		/// <summary>
@@ -41,26 +41,26 @@ namespace Nest
 		/// Defaults to the <c>index.query.default_field</c> index settings, which in turn defaults to <c>*</c>.
 		/// <c>*</c> extracts all fields in the mapping that are eligible to term queries and filters the metadata fields.
 		/// </summary>
-		[JsonProperty("fields")]
+		[DataMember(Name ="fields")]
 		Fields Fields { get; set; }
 
 		/// <summary>
 		/// Flags specifying which features to enable.
 		/// Defaults to <see cref="SimpleQueryStringFlags.All" />.
 		/// </summary>
-		[JsonProperty("flags")]
+		[DataMember(Name ="flags")]
 		SimpleQueryStringFlags? Flags { get; set; }
 
 		/// <summary>
 		/// Controls the number of terms fuzzy queries will expand to. Defaults to <c>50</c>
 		/// </summary>
-		[JsonProperty("fuzzy_max_expansions")]
+		[DataMember(Name ="fuzzy_max_expansions")]
 		int? FuzzyMaxExpansions { get; set; }
 
 		/// <summary>
 		/// Set the prefix length for fuzzy queries. Default is <c>0</c>
 		/// </summary>
-		[JsonProperty("fuzzy_prefix_length")]
+		[DataMember(Name ="fuzzy_prefix_length")]
 		int? FuzzyPrefixLength { get; set; }
 
 		/// <summary>
@@ -71,34 +71,34 @@ namespace Nest
 		/// switch to classic Levenshtein distance.
 		/// If not set, Damerau-Levenshtein distance metric will be used.
 		/// </summary>
-		[JsonProperty("fuzzy_transpositions")]
+		[DataMember(Name ="fuzzy_transpositions")]
 		bool? FuzzyTranspositions { get; set; }
 
 		/// <summary>
 		/// If set to <c>true</c> will cause format based failures (like providing text to a numeric field)
 		/// to be ignored
 		/// </summary>
-		[JsonProperty("lenient")]
+		[DataMember(Name ="lenient")]
 		bool? Lenient { get; set; }
 
 		/// <summary>
 		/// A value controlling how many "should" clauses in the resulting boolean query should match.
 		/// It can be an absolute value, a percentage or a combination of both
 		/// </summary>
-		[JsonProperty("minimum_should_match")]
+		[DataMember(Name ="minimum_should_match")]
 		MinimumShouldMatch MinimumShouldMatch { get; set; }
 
 		/// <summary>
 		/// The query to be parsed
 		/// </summary>
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		string Query { get; set; }
 
 		/// <summary>
 		/// A suffix to append to fields for quoted parts of the query string.
 		/// This allows to use a field that has a different analysis chain for exact matching.
 		/// </summary>
-		[JsonProperty("quote_field_suffix")]
+		[DataMember(Name ="quote_field_suffix")]
 		string QuoteFieldSuffix { get; set; }
 	}
 

@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -7,19 +7,19 @@ namespace Nest
 	/// The groups section of the configuration is where you decide which fields should be grouped on, and with what aggregations.
 	/// These fields will then be available later for aggregating into buckets
 	/// </summary>
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<RollupGroupings>))]
+	[ReadAs(typeof(RollupGroupings))]
 	public interface IRollupGroupings
 	{
 		/// <inheritdoc cref="IDateHistogramRollupGrouping" />
-		[JsonProperty("date_histogram")]
+		[DataMember(Name ="date_histogram")]
 		IDateHistogramRollupGrouping DateHistogram { get; set; }
 
 		/// <inheritdoc cref="IHistogramRollupGrouping" />
-		[JsonProperty("histogram")]
+		[DataMember(Name ="histogram")]
 		IHistogramRollupGrouping Histogram { get; set; }
 
 		/// <inheritdoc cref="ITermsRollupGrouping" />
-		[JsonProperty("terms")]
+		[DataMember(Name ="terms")]
 		ITermsRollupGrouping Terms { get; set; }
 	}
 

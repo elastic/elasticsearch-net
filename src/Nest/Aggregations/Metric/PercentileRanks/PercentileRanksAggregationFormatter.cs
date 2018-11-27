@@ -1,0 +1,167 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using Utf8Json;
+using Utf8Json.Internal;
+
+namespace Nest
+{
+	internal class PercentileRanksAggregationFormatter : IJsonFormatter<IPercentileRanksAggregation>
+	{
+		private static readonly AutomataDictionary AutomataDictionary = new AutomataDictionary
+		{
+			{ "hdr", 0 },
+			{ "tdigest", 1 },
+			{ "field", 2 },
+			{ "script", 3 },
+			{ "missing", 4 },
+			{ "meta", 5 },
+			{ "values", 6 }
+		};
+
+		public IPercentileRanksAggregation Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
+				return null;
+
+			var count = 0;
+			var percentiles = new PercentileRanksAggregation();
+
+			while (reader.ReadIsInObject(ref count))
+			{
+				var propertyName = reader.ReadPropertyNameSegmentRaw();
+				if (AutomataDictionary.TryGetValue(propertyName, out var value))
+				{
+					switch (value)
+					{
+						case 0:
+							percentiles.Method = formatterResolver.GetFormatter<HDRHistogramMethod>()
+								.Deserialize(ref reader, formatterResolver);
+							break;
+						case 1:
+							percentiles.Method = formatterResolver.GetFormatter<TDigestMethod>()
+								.Deserialize(ref reader, formatterResolver);
+							break;
+						case 2:
+							percentiles.Field = reader.ReadString();
+							break;
+						case 3:
+							percentiles.Script = formatterResolver.GetFormatter<IScript>()
+								.Deserialize(ref reader, formatterResolver);
+							break;
+						case 4:
+							percentiles.Missing = reader.ReadDouble();
+							break;
+						case 5:
+							percentiles.Meta = formatterResolver.GetFormatter<IDictionary<string, object>>()
+								.Deserialize(ref reader, formatterResolver);
+							break;
+						case 6:
+							percentiles.Values = formatterResolver.GetFormatter<IEnumerable<double>>()
+								.Deserialize(ref reader, formatterResolver);
+							break;
+					}
+				}
+			}
+
+			return percentiles;
+		}
+
+		public void Serialize(ref JsonWriter writer, IPercentileRanksAggregation value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
+
+			writer.WriteBeginObject();
+			var propertyWritten = false;
+
+			if (value.Meta != null && value.Meta.Any())
+			{
+				writer.WritePropertyName("meta");
+				var formatter = formatterResolver.GetFormatter<IDictionary<string, object>>();
+				formatter.Serialize(ref writer, value.Meta, formatterResolver);
+				propertyWritten = true;
+			}
+
+			if (value.Field != null)
+			{
+				if (propertyWritten)
+					writer.WriteValueSeparator();
+
+				var settings = formatterResolver.GetConnectionSettings();
+				writer.WritePropertyName("field");
+				writer.WriteString(settings.Inferrer.Field(value.Field));
+				propertyWritten = true;
+			}
+
+			if (value.Script != null)
+			{
+				if (propertyWritten)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName("script");
+				var formatter = formatterResolver.GetFormatter<IScript>();
+				formatter.Serialize(ref writer, value.Script, formatterResolver);
+				propertyWritten = true;
+			}
+
+			if (value.Method != null)
+			{
+				if (value.Method is ITDigestMethod tdigest)
+				{
+					if (propertyWritten)
+						writer.WriteValueSeparator();
+
+					writer.WritePropertyName("tdigest");
+					writer.WriteBeginObject();
+					if (tdigest.Compression.HasValue)
+					{
+						writer.WritePropertyName("compression");
+						writer.WriteDouble(tdigest.Compression.Value);
+					}
+					writer.WriteEndObject();
+					propertyWritten = true;
+				}
+				else if (value.Method is IHDRHistogramMethod hdr)
+				{
+					if (propertyWritten)
+						writer.WriteValueSeparator();
+
+					writer.WritePropertyName("hdr");
+					writer.WriteBeginObject();
+					if (hdr.NumberOfSignificantValueDigits.HasValue)
+					{
+						writer.WritePropertyName("number_of_significant_value_digits");
+						writer.WriteInt32(hdr.NumberOfSignificantValueDigits.Value);
+					}
+					writer.WriteEndObject();
+					propertyWritten = true;
+				}
+			}
+
+			if (value.Missing.HasValue)
+			{
+				if (propertyWritten)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName("missing");
+				writer.WriteDouble(value.Missing.Value);
+				propertyWritten = true;
+			}
+
+			if (value.Values != null && value.Values.Any())
+			{
+				if (propertyWritten)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName("values");
+				var formatter = formatterResolver.GetFormatter<IEnumerable<double>>();
+				formatter.Serialize(ref writer, value.Values, formatterResolver);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+}

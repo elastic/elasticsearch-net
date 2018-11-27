@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(RangeQueryJsonConverter))]
 	public interface IRangeQuery : IFieldNameQuery { }
 }

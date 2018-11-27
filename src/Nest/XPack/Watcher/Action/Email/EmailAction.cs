@@ -1,40 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public interface IEmailAction : IAction
 	{
-		[JsonProperty("account")]
+		[DataMember(Name ="account")]
 		string Account { get; set; }
 
-		[JsonProperty("attachments")]
+		[DataMember(Name ="attachments")]
 		IEmailAttachments Attachments { get; set; }
 
-		[JsonProperty("bcc")]
+		[DataMember(Name ="bcc")]
 		IEnumerable<string> Bcc { get; set; }
 
-		[JsonProperty("body")]
+		[DataMember(Name ="body")]
 		IEmailBody Body { get; set; }
 
-		[JsonProperty("cc")]
+		[DataMember(Name ="cc")]
 		IEnumerable<string> Cc { get; set; }
 
-		[JsonProperty("from")]
+		[DataMember(Name ="from")]
 		string From { get; set; }
 
-		[JsonProperty("priority")]
+		[DataMember(Name ="priority")]
 		EmailPriority? Priority { get; set; }
 
-		[JsonProperty("reply_to")]
+		[DataMember(Name ="reply_to")]
 		IEnumerable<string> ReplyTo { get; set; }
 
-		[JsonProperty("subject")]
+		[DataMember(Name ="subject")]
 		string Subject { get; set; }
 
-		[JsonProperty("to")]
+		[DataMember(Name ="to")]
 		IEnumerable<string> To { get; set; }
 	}
 

@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<NeverCondition>))]
+	[DataContract]
+	[ReadAs(typeof(NeverCondition))]
 	public interface INeverCondition : ICondition { }
 
 	public class NeverCondition : ConditionBase, INeverCondition

@@ -1,28 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary> Ingest pipelines are composed of one or more processors </summary>
 	public interface IProcessor
 	{
-		// TODO: even though this property is ignored it has a JsonProperty because our GetCachedProperties helper prefers
-		// this property over the differently named subclass property that has JsonProperty("name"). Needs fixing outside the
-		// scope of the current branch and warrants deeper investigation. Hence the current hack of __ignored__
 		/// <summary> The name of the processor, will be used as the key when persisting the processor on the pipeline </summary>
-		[JsonIgnore, JsonProperty("__ignored__")]
 		string Name { get; }
 
 		/// <summary>
 		/// If a processor fails, call these processors instead. Read more about handling failures here:
 		/// https://www.elastic.co/guide/en/elasticsearch/reference/current/handling-failure-in-pipelines.html
 		/// </summary>
-		[JsonProperty("on_failure")]
+		[DataMember(Name ="on_failure")]
 		IEnumerable<IProcessor> OnFailure { get; set; }
 
 		/// <summary> A painless script predicate that can control whether this processor should be executed or not </summary>
-		[JsonProperty("if")]
+		[DataMember(Name = "if")]
 		string If { get; set; }
 
 		/// <summary>
@@ -30,11 +26,11 @@ namespace Nest
 		/// in a pipeline. The tag field does not affect the processor’s behavior, but is very useful
 		/// for bookkeeping and tracing errors to specific processors.
 		/// </summary>
-		[JsonProperty("tag")]
+		[DataMember(Name = "tag")]
 		string Tag { get; set; }
 
 		/// <summary> When a failure happens, ignore it and proceed to the next processor </summary>
-		[JsonProperty("ignore_failue")]
+		[DataMember(Name = "ignore_failue")]
 		bool? IgnoreFailure { get; set; }
 	}
 

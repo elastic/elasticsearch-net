@@ -1,22 +1,22 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface INumericRangeQuery : IRangeQuery
 	{
-		[JsonProperty("gt")]
+		[DataMember(Name ="gt")]
 		double? GreaterThan { get; set; }
 
-		[JsonProperty("gte")]
+		[DataMember(Name ="gte")]
 		double? GreaterThanOrEqualTo { get; set; }
 
-		[JsonProperty("lt")]
+		[DataMember(Name ="lt")]
 		double? LessThan { get; set; }
 
-		[JsonProperty("lte")]
+		[DataMember(Name ="lte")]
 		double? LessThanOrEqualTo { get; set; }
 
-		[JsonProperty("relation")]
+		[DataMember(Name ="relation")]
 		RangeRelation? Relation { get; set; }
 	}
 
@@ -39,7 +39,7 @@ namespace Nest
 			&& q.LessThan == null;
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	public class NumericRangeQueryDescriptor<T>
 		: FieldNameQueryDescriptorBase<NumericRangeQueryDescriptor<T>, INumericRangeQuery, T>
 			, INumericRangeQuery where T : class

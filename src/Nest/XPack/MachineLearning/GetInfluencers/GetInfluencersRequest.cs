@@ -1,5 +1,5 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -17,38 +17,38 @@ namespace Nest
 		/// <summary>
 		/// Returns influencers with timestamps earlier than this time.
 		/// </summary>
-		[JsonProperty("end")]
+		[DataMember(Name ="end")]
 		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
 		DateTimeOffset? End { get; set; }
 
 		/// <summary>
 		/// If true, the output excludes interim results. By default, interim results are included.
 		/// </summary>
-		[JsonProperty("exclude_interim")]
+		[DataMember(Name ="exclude_interim")]
 		bool? ExcludeInterim { get; set; }
 
 		/// <summary>
 		/// Returns influencers with anomaly scores higher than this value.
 		/// </summary>
-		[JsonProperty("influencer_score")]
+		[DataMember(Name ="influencer_score")]
 		double? InfluencerScore { get; set; }
 
 		/// <summary>
 		/// Specifies pagination for the influencers.
 		/// </summary>
-		[JsonProperty("page")]
+		[DataMember(Name ="page")]
 		IPage Page { get; set; }
 
 		/// <summary>
 		/// Specifies the sort field for the requested influencers. By default, the influencers are sorted by the <see cref="InfluencerScore" /> value.
 		/// </summary>
-		[JsonProperty("sort")]
+		[DataMember(Name ="sort")]
 		Field Sort { get; set; }
 
 		/// <summary>
 		/// Returns influencers with timestamps after this time.
 		/// </summary>
-		[JsonProperty("start")]
+		[DataMember(Name ="start")]
 		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
 		DateTimeOffset? Start { get; set; }
 	}

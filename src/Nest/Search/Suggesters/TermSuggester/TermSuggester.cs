@@ -1,48 +1,48 @@
 ﻿using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<TermSuggester>))]
+	[DataContract]
+	[ReadAs(typeof(TermSuggester))]
 	public interface ITermSuggester : ISuggester
 	{
-		[JsonProperty("lowercase_terms")]
+		[DataMember(Name ="lowercase_terms")]
 		bool? LowercaseTerms { get; set; }
 
-		[JsonProperty("max_edits")]
+		[DataMember(Name ="max_edits")]
 		int? MaxEdits { get; set; }
 
-		[JsonProperty("max_inspections")]
+		[DataMember(Name ="max_inspections")]
 		int? MaxInspections { get; set; }
 
-		[JsonProperty("max_term_freq")]
+		[DataMember(Name ="max_term_freq")]
 		decimal? MaxTermFrequency { get; set; }
 
-		[JsonProperty("min_doc_freq")]
+		[DataMember(Name ="min_doc_freq")]
 		decimal? MinDocFrequency { get; set; }
 
-		[JsonProperty("min_word_length")]
+		[DataMember(Name ="min_word_length")]
 		int? MinWordLength { get; set; }
 
-		[JsonProperty("prefix_length")]
+		[DataMember(Name ="prefix_length")]
 		int? PrefixLength { get; set; }
 
-		[JsonProperty("shard_size")]
+		[DataMember(Name ="shard_size")]
 		int? ShardSize { get; set; }
 
-		[JsonProperty("sort")]
+		[DataMember(Name ="sort")]
 		SuggestSort? Sort { get; set; }
 
-		[JsonProperty("string_distance")]
+		[DataMember(Name ="string_distance")]
 		StringDistance? StringDistance { get; set; }
 
-		[JsonProperty("suggest_mode")]
-		[JsonConverter(typeof(StringEnumConverter))]
+		[DataMember(Name ="suggest_mode")]
+
 		SuggestMode? SuggestMode { get; set; }
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		string Text { get; set; }
 	}
 

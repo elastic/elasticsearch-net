@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -8,8 +8,8 @@ namespace Nest
 	/// An input to load the results of an Elasticsearch search request into the execution
 	/// context when a watch is triggered.
 	/// </summary>
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchInput>))]
+	[DataContract]
+	[ReadAs(typeof(SearchInput))]
 	public interface ISearchInput : IInput
 	{
 		/// <summary>
@@ -17,13 +17,13 @@ namespace Nest
 		/// When a search generates a large response, you can use extract
 		/// to select the relevant fields instead of loading the entire response
 		/// </summary>
-		[JsonProperty("extract")]
+		[DataMember(Name ="extract")]
 		IEnumerable<string> Extract { get; set; }
 
 		/// <summary>
 		/// The search request details
 		/// </summary>
-		[JsonProperty("request")]
+		[DataMember(Name ="request")]
 		ISearchInputRequest Request { get; set; }
 
 		/// <summary>
@@ -31,7 +31,7 @@ namespace Nest
 		/// If no response is returned within this time, the search input times out and fails.
 		/// This setting overrides the default search operations timeouts.
 		/// </summary>
-		[JsonProperty("timeout")]
+		[DataMember(Name ="timeout")]
 		Time Timeout { get; set; }
 	}
 

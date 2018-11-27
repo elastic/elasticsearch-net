@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -9,34 +9,34 @@ namespace Nest
 	/// <para>You must have manage or manage_rollup cluster privileges to use this API.</para>
 	/// </summary>
 	[MapsApi("rollup.put_job.json")]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<CreateRollupJobRequest>))]
+	[ReadAs(typeof(CreateRollupJobRequest))]
 	public partial interface ICreateRollupJobRequest
 	{
 		/// <summary> A cron string which defines when the rollup job should be executed. </summary>
-		[JsonProperty("cron")]
+		[DataMember(Name ="cron")]
 		string Cron { get; set; }
 
 		/// <summary> Defines the grouping fields that are defined for this rollup job </summary>
-		[JsonProperty("groups")]
+		[DataMember(Name ="groups")]
 		IRollupGroupings Groups { get; set; }
 
 		/// <summary> The index, or index pattern, that you wish to rollup. Supports wildcard-style patterns (logstash-*). </summary>
-		[JsonProperty("index_pattern")]
+		[DataMember(Name ="index_pattern")]
 		string IndexPattern { get; set; }
 
 		/// <summary> Defines the metrics that should be collected for each grouping tuple </summary>
-		[JsonProperty("metrics")]
+		[DataMember(Name ="metrics")]
 		IEnumerable<IRollupFieldMetric> Metrics { get; set; }
 
 		/// <summary>
 		/// The number of bucket results that should be processed on each iteration of the rollup indexer.
 		/// A larger value will tend to execute faster, but will require more memory during processing.
 		/// </summary>
-		[JsonProperty("page_size")]
+		[DataMember(Name ="page_size")]
 		long? PageSize { get; set; }
 
 		/// <summary> The index that you wish to store rollup results into. Can be shared with other rollup jobs. </summary>
-		[JsonProperty("rollup_index")]
+		[DataMember(Name ="rollup_index")]
 		IndexName RollupIndex { get; set; }
 	}
 

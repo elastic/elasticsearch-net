@@ -1,53 +1,53 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class CatSegmentsRecord : ICatRecord
 	{
-		[JsonProperty("committed")]
+		[DataMember(Name ="committed")]
 		public string Committed { get; set; }
 
-		[JsonProperty("compound")]
+		[DataMember(Name ="compound")]
 		public string Compound { get; set; }
 
-		[JsonProperty("docs.count")]
+		[DataMember(Name ="docs.count")]
 		public string DocsCount { get; set; }
 
-		[JsonProperty("docs.deleted")]
+		[DataMember(Name ="docs.deleted")]
 		public string DocsDeleted { get; set; }
 
-		[JsonProperty("generation")]
+		[DataMember(Name ="generation")]
 		public string Generation { get; set; }
 
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		public string Id { get; set; }
 
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		public string Index { get; set; }
 
-		[JsonProperty("ip")]
+		[DataMember(Name ="ip")]
 		public string Ip { get; set; }
 
-		[JsonProperty("prirep")]
+		[DataMember(Name ="prirep")]
 		public string PrimaryReplica { get; set; }
 
-		[JsonProperty("searchable")]
+		[DataMember(Name ="searchable")]
 		public string Searchable { get; set; }
 
-		[JsonProperty("segment")]
+		[DataMember(Name ="segment")]
 		public string Segment { get; set; }
 
-		[JsonProperty("shard")]
+		[DataMember(Name ="shard")]
 		public string Shard { get; set; }
 
-		[JsonProperty("size")]
+		[DataMember(Name ="size")]
 		public string Size { get; set; }
 
-		[JsonProperty("size.memory")]
+		[DataMember(Name ="size.memory")]
 		public string SizeMemory { get; set; }
 
-		[JsonProperty("version")]
+		[DataMember(Name ="version")]
 		public string Version { get; set; }
 	}
 }

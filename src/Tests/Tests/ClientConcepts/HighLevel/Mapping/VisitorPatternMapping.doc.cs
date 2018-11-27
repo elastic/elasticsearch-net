@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Text;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Tests.Core.Client;
 using Tests.Framework;
 using static Tests.Core.Serialization.SerializationTestHelper;

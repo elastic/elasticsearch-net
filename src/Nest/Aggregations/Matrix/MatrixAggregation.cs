@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IMatrixAggregation : IAggregation
 	{
-		[JsonProperty("fields")]
+		[DataMember(Name ="fields")]
 		Fields Fields { get; set; }
 
-		[JsonProperty("missing")]
+		[DataMember(Name ="missing")]
 		IDictionary<Field, double> Missing { get; set; }
 	}
 

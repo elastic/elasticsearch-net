@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -20,13 +20,13 @@ namespace Nest
 		/// Specifies the path within bucket to repository data.
 		/// Defaults to value of repositories.s3.base_path or to root directory if not set.
 		/// </summary>
-		[JsonProperty("base_path")]
+		[DataMember(Name ="base_path")]
 		string BasePath { get; set; }
 
 		/// <summary>
 		/// The name of the bucket to be used for snapshots. This field is required
 		/// </summary>
-		[JsonProperty("bucket")]
+		[DataMember(Name ="bucket")]
 		string Bucket { get; set; }
 
 		/// <summary>
@@ -37,7 +37,7 @@ namespace Nest
 		/// in upload errors. It is also not possible to set a buffer size greater than 5gb as it is the maximum upload
 		/// size allowed by S3. Defaults to the minimum between 100mb and 5% of the heap size.
 		/// </summary>
-		[JsonProperty("buffer_size")]
+		[DataMember(Name ="buffer_size")]
 		string BufferSize { get; set; }
 
 		/// <summary>
@@ -45,7 +45,7 @@ namespace Nest
 		/// The S3 repository supports all S3 canned ACLs : private, public-read, public-read-write, authenticated-read,
 		/// log-delivery-write, bucket-owner-read, bucket-owner-full-control. Defaults to private.
 		/// </summary>
-		[JsonProperty("canned_acl")]
+		[DataMember(Name ="canned_acl")]
 		string CannedAcl { get; set; }
 
 		/// <summary>
@@ -53,13 +53,13 @@ namespace Nest
 		/// The chunk size can be specified in bytes or by using size value notation,
 		/// i.e. 1gb, 10mb, 5kb. Defaults to 1gb.
 		/// </summary>
-		[JsonProperty("chunk_size")]
+		[DataMember(Name ="chunk_size")]
 		string ChunkSize { get; set; }
 
 		/// <summary>
 		/// The name of the s3 client to use to connect to S3. Defaults to default.
 		/// </summary>
-		[JsonProperty("client")]
+		[DataMember(Name ="client")]
 		string Client { get; set; }
 
 		/// <summary>
@@ -67,21 +67,21 @@ namespace Nest
 		/// This setting doesn't affect index files that are already compressed by default.
 		/// Defaults to false.
 		/// </summary>
-		[JsonProperty("compress")]
+		[DataMember(Name ="compress")]
 		bool? Compress { get; set; }
 
 		/// <summary>
 		/// When set to true files are encrypted on server side using AES256 algorithm.
 		/// Defaults to false.
 		/// </summary>
-		[JsonProperty("server_side_encryption")]
+		[DataMember(Name ="server_side_encryption")]
 		bool? ServerSideEncryption { get; set; }
 
 		/// <summary>
 		/// Sets the S3 storage class type for the backup files. Values may be standard, reduced_redundancy, standard_ia.
 		/// Defaults to standard.
 		/// </summary>
-		[JsonProperty("storage_class")]
+		[DataMember(Name ="storage_class")]
 		string StorageClass { get; set; }
 	}
 

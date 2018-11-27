@@ -1,68 +1,68 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class ShardStats
 	{
-		[JsonProperty("commit")]
+		[DataMember(Name ="commit")]
 		public ShardCommit Commit { get; internal set; }
 
-		[JsonProperty("completion")]
+		[DataMember(Name ="completion")]
 		public ShardCompletion Completion { get; internal set; }
 
-		[JsonProperty("docs")]
+		[DataMember(Name ="docs")]
 		public ShardDocs Documents { get; internal set; }
 
-		[JsonProperty("fielddata")]
+		[DataMember(Name ="fielddata")]
 		public ShardFieldData FieldData { get; internal set; }
 
-		[JsonProperty("flush")]
+		[DataMember(Name ="flush")]
 		public ShardFlush Flush { get; internal set; }
 
-		[JsonProperty("get")]
+		[DataMember(Name ="get")]
 		public ShardGet Get { get; internal set; }
 
-		[JsonProperty("indexing")]
+		[DataMember(Name ="indexing")]
 		public ShardIndexing Indexing { get; internal set; }
 
-		[JsonProperty("merges")]
+		[DataMember(Name ="merges")]
 		public ShardMerges Merges { get; internal set; }
 
-		[JsonProperty("shard_path")]
+		[DataMember(Name ="shard_path")]
 		public ShardPath Path { get; internal set; }
 
-		[JsonProperty("query_cache")]
+		[DataMember(Name ="query_cache")]
 		public ShardQueryCache QueryCache { get; internal set; }
 
-		[JsonProperty("recovery")]
+		[DataMember(Name ="recovery")]
 		public ShardStatsRecovery Recovery { get; internal set; }
 
-		[JsonProperty("refresh")]
+		[DataMember(Name ="refresh")]
 		public ShardRefresh Refresh { get; internal set; }
 
-		[JsonProperty("request_cache")]
+		[DataMember(Name ="request_cache")]
 		public ShardRequestCache RequestCache { get; internal set; }
 
-		[JsonProperty("routing")]
+		[DataMember(Name ="routing")]
 		public ShardRouting Routing { get; internal set; }
 
-		[JsonProperty("search")]
+		[DataMember(Name ="search")]
 		public ShardSearch Search { get; internal set; }
 
-		[JsonProperty("segments")]
+		[DataMember(Name ="segments")]
 		public ShardSegments Segments { get; internal set; }
 
-		[JsonProperty("seq_no")]
+		[DataMember(Name ="seq_no")]
 		public ShardSequenceNumber SequenceNumber { get; internal set; }
 
-		[JsonProperty("store")]
+		[DataMember(Name ="store")]
 		public ShardStatsStore Store { get; internal set; }
 
-		[JsonProperty("translog")]
+		[DataMember(Name ="translog")]
 		public ShardTransactionLog TransactionLog { get; internal set; }
 
-		[JsonProperty("warmer")]
+		[DataMember(Name ="warmer")]
 		public ShardWarmer Warmer { get; internal set; }
 	}
 }

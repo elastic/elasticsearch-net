@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	[JsonConverter(typeof(BulkRequestJsonConverter))]
 	public partial interface IBulkRequest
 	{
-		[JsonIgnore]
+		[IgnoreDataMember]
 		IList<IBulkOperation> Operations { get; set; }
 	}
 

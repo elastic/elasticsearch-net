@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -10,13 +10,13 @@ namespace Nest
 		/// <summary>
 		/// The maximum number. Defaults to Integer.MAX_VALUE.
 		/// </summary>
-		[JsonProperty("max")]
+		[DataMember(Name ="max")]
 		int? Max { get; set; }
 
 		/// <summary>
 		/// The minimum number. Defaults to 0.
 		/// </summary>
-		[JsonProperty("min")]
+		[DataMember(Name ="min")]
 		int? Min { get; set; }
 	}
 

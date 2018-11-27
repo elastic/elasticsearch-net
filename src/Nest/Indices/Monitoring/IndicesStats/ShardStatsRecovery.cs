@@ -1,17 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class ShardStatsRecovery
 	{
-		[JsonProperty("current_as_source")]
+		[DataMember(Name ="current_as_source")]
 		public long CurrentAsSource { get; internal set; }
 
-		[JsonProperty("current_as_target")]
+		[DataMember(Name ="current_as_target")]
 		public long CurrentAsTarget { get; internal set; }
 
-		[JsonProperty("throttle_time_in_millis")]
+		[DataMember(Name ="throttle_time_in_millis")]
 		public long ThrottleTimeInMilliseconds { get; internal set; }
 	}
 }

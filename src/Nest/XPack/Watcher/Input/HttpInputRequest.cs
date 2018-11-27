@@ -1,25 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<HttpInputRequest>))]
 	public interface IHttpInputRequest
 	{
 		/// <summary>
 		/// Authentication related HTTP headers.
 		/// </summary>
-		[JsonProperty("auth")]
+		[DataMember(Name ="auth")]
 		IHttpInputAuthentication Authentication { get; set; }
 
 		/// <summary>
 		/// The HTTP request body.
 		/// The body can be static text or include mustache templates.
 		/// </summary>
-		[JsonProperty("body")]
+		[DataMember(Name ="body")]
 		string Body { get; set; }
 
 		/// <summary>
@@ -27,53 +27,53 @@ namespace Nest
 		/// If the connection could not be set up within this time,
 		/// the input will timeout and fail.
 		/// </summary>
-		[JsonProperty("connection_timeout")]
+		[DataMember(Name ="connection_timeout")]
 		Time ConnectionTimeout { get; set; }
 
 		/// <summary>
 		/// The HTTP request headers.
 		/// The header values can be static text or include mustache templates.
 		/// </summary>
-		[JsonProperty("headers")]
+		[DataMember(Name ="headers")]
 		IDictionary<string, string> Headers { get; set; }
 
 		/// <summary>
 		/// The host to connect to. This is required
 		/// </summary>
-		[JsonProperty("host")]
+		[DataMember(Name ="host")]
 		string Host { get; set; }
 
 		/// <summary>
 		/// The HTTP method. Defaults to <see cref="HttpInputMethod.Get" />
 		/// </summary>
-		[JsonProperty("method")]
+		[DataMember(Name ="method")]
 		HttpInputMethod? Method { get; set; }
 
 		/// <summary>
 		/// The url query string parameters.
 		/// The parameter values can be static text or contain mustache templates.
 		/// </summary>
-		[JsonProperty("params")]
+		[DataMember(Name ="params")]
 		IDictionary<string, string> Params { get; set; }
 
 		/// <summary>
 		/// The url path. The path can be static text or contain mustache templates.
 		/// Url query string parameters must be specified with <see cref="Params" />
 		/// </summary>
-		[JsonProperty("path")]
+		[DataMember(Name ="path")]
 		string Path { get; set; }
 
 		/// <summary>
 		/// The port that the http service is listening on.
 		/// This is required
 		/// </summary>
-		[JsonProperty("port")]
+		[DataMember(Name ="port")]
 		int? Port { get; set; }
 
 		/// <summary>
 		/// The proxy to use when connecting to the host.
 		/// </summary>
-		[JsonProperty("proxy")]
+		[DataMember(Name ="proxy")]
 		IHttpInputProxy Proxy { get; set; }
 
 		/// <summary>
@@ -81,14 +81,14 @@ namespace Nest
 		/// If no response was received within this time,
 		/// the input will timeout and fail.
 		/// </summary>
-		[JsonProperty("read_timeout")]
+		[DataMember(Name ="read_timeout")]
 		Time ReadTimeout { get; set; }
 
 		/// <summary>
 		/// The url scheme
 		/// </summary>
-		[JsonProperty("scheme")]
-		[JsonConverter(typeof(StringEnumConverter))]
+		[DataMember(Name ="scheme")]
+
 		ConnectionScheme? Scheme { get; set; }
 
 		/// <summary>
@@ -97,7 +97,7 @@ namespace Nest
 		/// <see cref="Port" /> and <see cref="Params" />.
 		/// As if parameters are set, specifying them individually might overwrite them.
 		/// </summary>
-		[JsonProperty("url")]
+		[DataMember(Name ="url")]
 		string Url { get; set; }
 	}
 

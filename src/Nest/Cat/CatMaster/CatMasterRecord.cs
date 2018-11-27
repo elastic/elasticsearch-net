@@ -1,17 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class CatMasterRecord : ICatRecord
 	{
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		public string Id { get; set; }
 
-		[JsonProperty("ip")]
+		[DataMember(Name ="ip")]
 		public string Ip { get; set; }
 
-		[JsonProperty("node")]
+		[DataMember(Name ="node")]
 		public string Node { get; set; }
 	}
 }

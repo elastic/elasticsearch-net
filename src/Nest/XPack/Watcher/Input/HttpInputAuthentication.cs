@@ -1,19 +1,19 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary>
 	/// The Authentication mechanism for a request to a HTTP endpoint
 	/// </summary>
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<HttpInputAuthentication>))]
+	[DataContract]
+	[ReadAs(typeof(HttpInputAuthentication))]
 	public interface IHttpInputAuthentication
 	{
 		/// <summary>
 		/// Basic Authentication credentials
 		/// </summary>
-		[JsonProperty("basic")]
+		[DataMember(Name ="basic")]
 		IHttpInputBasicAuthentication Basic { get; set; }
 	}
 
@@ -38,25 +38,25 @@ namespace Nest
 	/// <summary>
 	/// Basic Authentication credentials
 	/// </summary>
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<HttpInputBasicAuthentication>))]
+	[DataContract]
+	[ReadAs(typeof(HttpInputBasicAuthentication))]
 	public interface IHttpInputBasicAuthentication
 	{
 		/// <summary>
 		/// Password for Basic Authentication
 		/// </summary>
-		[JsonProperty("password")]
+		[DataMember(Name ="password")]
 		string Password { get; set; }
 
 		/// <summary>
 		/// Username for Basic Authentication
 		/// </summary>
-		[JsonProperty("username")]
+		[DataMember(Name ="username")]
 		string Username { get; set; }
 	}
 
 	/// <inheritdoc />
-	[JsonObject]
+	[DataContract]
 	public class HttpInputBasicAuthentication : IHttpInputBasicAuthentication
 	{
 		/// <inheritdoc />

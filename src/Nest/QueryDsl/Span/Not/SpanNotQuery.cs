@@ -1,25 +1,25 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SpanNotQuery>))]
+	[DataContract]
+	[ReadAs(typeof(SpanNotQuery))]
 	public interface ISpanNotQuery : ISpanSubQuery
 	{
-		[JsonProperty("dist")]
+		[DataMember(Name ="dist")]
 		int? Dist { get; set; }
 
-		[JsonProperty("exclude")]
+		[DataMember(Name ="exclude")]
 		ISpanQuery Exclude { get; set; }
 
-		[JsonProperty("include")]
+		[DataMember(Name ="include")]
 		ISpanQuery Include { get; set; }
 
-		[JsonProperty("post")]
+		[DataMember(Name ="post")]
 		int? Post { get; set; }
 
-		[JsonProperty("pre")]
+		[DataMember(Name ="pre")]
 		int? Pre { get; set; }
 	}
 

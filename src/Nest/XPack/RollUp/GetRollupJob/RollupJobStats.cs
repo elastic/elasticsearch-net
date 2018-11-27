@@ -1,19 +1,19 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class RollupJobStats
 	{
-		[JsonProperty("documents_processed")]
+		[DataMember(Name ="documents_processed")]
 		public long DocumentsProcessed { get; internal set; }
 
-		[JsonProperty("pages_processed")]
+		[DataMember(Name ="pages_processed")]
 		public long PagesProcessed { get; internal set; }
 
-		[JsonProperty("rollups_indexed")]
+		[DataMember(Name ="rollups_indexed")]
 		public long RollupsIndexed { get; internal set; }
 
-		[JsonProperty("trigger_count")]
+		[DataMember(Name ="trigger_count")]
 		public long TriggerCount { get; internal set; }
 	}
 }

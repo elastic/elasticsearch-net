@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -12,10 +12,10 @@ namespace Nest
 		/// <summary>
 		/// Specify text direction with the dir parameter which accepts forward (default) for LTR and reverse for RTL.
 		/// </summary>
-		[JsonProperty("dir")]
+		[DataMember(Name ="dir")]
 		IcuTransformDirection? Direction { get; set; }
 
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		string Id { get; set; }
 	}
 

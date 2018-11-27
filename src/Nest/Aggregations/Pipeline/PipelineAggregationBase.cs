@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IPipelineAggregation : IAggregation
 	{
-		[JsonProperty("buckets_path")]
+		[DataMember(Name ="buckets_path")]
 		IBucketsPath BucketsPath { get; set; }
 
-		[JsonProperty("format")]
+		[DataMember(Name ="format")]
 		string Format { get; set; }
 
-		[JsonProperty("gap_policy")]
+		[DataMember(Name ="gap_policy")]
 		GapPolicy? GapPolicy { get; set; }
 	}
 

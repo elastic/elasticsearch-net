@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -12,25 +12,25 @@ namespace Nest
 		/// <summary>
 		/// The indices to target
 		/// </summary>
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		Indices Index { get; set; }
 
 		/// <summary>
 		/// Search query to execute to match documents for reindexing
 		/// </summary>
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		QueryContainer Query { get; set; }
 
 		/// <summary>
 		/// Reindex from a remote Elasticsearch cluster
 		/// </summary>
-		[JsonProperty("remote")]
+		[DataMember(Name ="remote")]
 		IRemoteSource Remote { get; set; }
 
 		/// <summary>
 		/// Limit the number of processed documents
 		/// </summary>
-		[JsonProperty("size")]
+		[DataMember(Name ="size")]
 		int? Size { get; set; }
 
 		/// <summary>
@@ -41,7 +41,7 @@ namespace Nest
 		/// <remarks>
 		/// Automatic slicing can be performed using <see cref="ReindexOnServerRequest.Slices" />
 		/// </remarks>
-		[JsonProperty("slice")]
+		[DataMember(Name ="slice")]
 		ISlicedScroll Slice { get; set; }
 
 		/// <summary>
@@ -49,13 +49,13 @@ namespace Nest
 		/// efficient but allows targeting a specific set of documents when used
 		/// in conjunction with <see cref="Size" />
 		/// </summary>
-		[JsonProperty("sort")]
+		[DataMember(Name ="sort")]
 		IList<ISort> Sort { get; set; }
 
 		/// <summary>
 		/// Individual fields from _source to reindex
 		/// </summary>
-		[JsonProperty("_source")]
+		[DataMember(Name ="_source")]
 		Fields Source { get; set; }
 	}
 

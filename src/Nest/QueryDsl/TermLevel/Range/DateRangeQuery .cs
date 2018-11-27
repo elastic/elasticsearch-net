@@ -1,30 +1,30 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(FieldNameQueryJsonConverter<DateRangeQuery>))]
 	public interface IDateRangeQuery : IRangeQuery
 	{
-		[JsonProperty("format")]
+		[DataMember(Name ="format")]
 		string Format { get; set; }
 
-		[JsonProperty("gt")]
+		[DataMember(Name ="gt")]
 		DateMath GreaterThan { get; set; }
 
-		[JsonProperty("gte")]
+		[DataMember(Name ="gte")]
 		DateMath GreaterThanOrEqualTo { get; set; }
 
-		[JsonProperty("lt")]
+		[DataMember(Name ="lt")]
 		DateMath LessThan { get; set; }
 
-		[JsonProperty("lte")]
+		[DataMember(Name ="lte")]
 		DateMath LessThanOrEqualTo { get; set; }
 
-		[JsonProperty("relation")]
+		[DataMember(Name ="relation")]
 		RangeRelation? Relation { get; set; }
 
-		[JsonProperty("time_zone")]
+		[DataMember(Name ="time_zone")]
 		string TimeZone { get; set; }
 	}
 
@@ -49,7 +49,7 @@ namespace Nest
 			&& (q.LessThan == null || !q.LessThan.IsValid));
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	public class DateRangeQueryDescriptor<T>
 		: FieldNameQueryDescriptorBase<DateRangeQueryDescriptor<T>, IDateRangeQuery, T>
 			, IDateRangeQuery where T : class

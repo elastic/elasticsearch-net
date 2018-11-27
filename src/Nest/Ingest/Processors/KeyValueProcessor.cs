@@ -1,50 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(ProcessorJsonConverter<KeyValueProcessor>))]
 	public interface IKeyValueProcessor : IProcessor
 	{
 		/// <summary> The field to be parsed </summary>
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
 		/// <summary> Regex pattern to use for splitting key-value pairs </summary>
-		[JsonProperty("field_split")]
+		[DataMember(Name ="field_split")]
 		string FieldSplit { get; set; }
 
 		/// <summary>
 		/// If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document
 		/// </summary>
-		[JsonProperty("ignore_missing")]
+		[DataMember(Name ="ignore_missing")]
 		bool? IgnoreMissing { get; set; }
 
 		/// <summary> List of keys to filter and insert into document. Defaults to including all keys </summary>
-		[JsonProperty("include_keys")]
+		[DataMember(Name ="include_keys")]
 		IEnumerable<string> IncludeKeys { get; set; }
 
 		/// <summary> If true strip brackets (), &lt;&gt;, [] as well as quotes ' and " from extracted values </summary>
-		[JsonProperty("strip_brackets")]
+		[DataMember(Name ="strip_brackets")]
 		bool? StripBrackets { get; set; }
 
 		/// <summary> The field to insert the extracted keys into. Defaults to the root of the document </summary>
-		[JsonProperty("target_field")]
+		[DataMember(Name ="target_field")]
 		Field TargetField { get; set; }
 
 		/// <summary> String of characters to trim from extracted keys </summary>
-		[JsonProperty("trim_key")]
+		[DataMember(Name ="trim_key")]
 		string TrimKey { get; set; }
 
 		/// <summary> String of characters to trim from extracted values </summary>
-		[JsonProperty("trim_value")]
+		[DataMember(Name ="trim_value")]
 		string TrimValue { get; set; }
 
 		/// <summary> Regex pattern to use for splitting the key from the value within a key-value pair </summary>
-		[JsonProperty("value_split")]
+		[DataMember(Name ="value_split")]
 		string ValueSplit { get; set; }
 	}
 

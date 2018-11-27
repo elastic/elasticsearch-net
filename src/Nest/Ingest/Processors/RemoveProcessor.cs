@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(ProcessorJsonConverter<RemoveProcessor>))]
 	public interface IRemoveProcessor : IProcessor
 	{
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
 		/// <summary>
 		/// If <c>true</c> and <see cref="Field" /> does not exist or is null,
 		/// the processor quietly exits without modifying the document. Default is <c>false</c>
 		/// </summary>
-		[JsonProperty("ignore_missing")]
+		[DataMember(Name ="ignore_missing")]
 		bool? IgnoreMissing { get; set; }
 	}
 

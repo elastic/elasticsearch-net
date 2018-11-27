@@ -79,10 +79,14 @@ namespace Nest
 			}
 
 			writer.WriteBeginObject();
+			var count = 0;
 			foreach (var entry in seenEntries)
 			{
+				if (count != 0)
+					writer.WriteValueSeparator();
 				writer.WritePropertyName(entry.Key);
 				JsonSerializer.Serialize(ref writer, entry.Value);
+				count++;
 			}
 			writer.WriteEndObject();
 		}

@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	[MapsApi("cluster.put_settings.json")]
 	public partial interface IClusterPutSettingsRequest
 	{
-		[JsonProperty("persistent")]
+		[DataMember(Name ="persistent")]
 		IDictionary<string, object> Persistent { get; set; }
 
-		[JsonProperty("transient")]
+		[DataMember(Name ="transient")]
 		IDictionary<string, object> Transient { get; set; }
 	}
 

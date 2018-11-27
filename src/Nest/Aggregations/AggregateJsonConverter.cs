@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using Nest;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Linq;
 using JsonReader = Newtonsoft.Json.JsonReader;
 using JsonSerializer = Newtonsoft.Json.JsonSerializer;

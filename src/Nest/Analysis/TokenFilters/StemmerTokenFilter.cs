@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -7,7 +7,7 @@ namespace Nest
 	/// </summary>
 	public interface IStemmerTokenFilter : ITokenFilter
 	{
-		[JsonProperty("language")]
+		[DataMember(Name ="language")]
 		string Language { get; set; }
 	}
 

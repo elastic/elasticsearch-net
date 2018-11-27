@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -17,7 +17,7 @@ namespace Nest
 		/// <remarks>
 		/// The job must have a state of open to receive and process the data.
 		/// </remarks>
-		[JsonIgnore]
+		[IgnoreDataMember]
 		IEnumerable<object> Data { get; set; }
 	}
 

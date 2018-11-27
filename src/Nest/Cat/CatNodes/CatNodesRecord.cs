@@ -1,14 +1,14 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public class CatNodesRecord : ICatRecord
 	{
 		public string Build => _b ?? _build;
 		public string CompletionSize => _completionSize ?? _cs ?? _completion_size;
 
-		[JsonProperty("cpu")]
+		[DataMember(Name ="cpu")]
 		public string CPU { get; internal set; }
 
 		public string DiskAvailable => _diskAvail ?? _disk ?? _d ?? _disk_avail;
@@ -41,13 +41,13 @@ namespace Nest
 		public string Ip => _i ?? _ip;
 		public string Jdk => _j ?? _jdk;
 
-		[JsonProperty("load_15m")]
+		[DataMember(Name ="load_15m")]
 		public string LoadFifteenMinute { get; internal set; }
 
-		[JsonProperty("load_5m")]
+		[DataMember(Name ="load_5m")]
 		public string LoadFiveMinute { get; internal set; }
 
-		[JsonProperty("load_1m")]
+		[DataMember(Name ="load_1m")]
 		public string LoadOneMinute { get; internal set; }
 
 		public string Master => _m ?? _master;
@@ -87,586 +87,586 @@ namespace Nest
 		public string Uptime => _u ?? _uptime;
 		public string Version => _v ?? _version;
 
-		[JsonProperty("b")]
+		[DataMember(Name ="b")]
 		internal string _b { get; set; }
 
-		[JsonProperty("build")]
+		[DataMember(Name ="build")]
 		internal string _build { get; set; }
 
-		[JsonProperty("completion.size")]
+		[DataMember(Name ="completion.size")]
 		internal string _completion_size { get; set; }
 
-		[JsonProperty("completionSize")]
+		[DataMember(Name ="completionSize")]
 		internal string _completionSize { get; set; }
 
-		[JsonProperty("cs")]
+		[DataMember(Name ="cs")]
 		internal string _cs { get; set; }
 
-		[JsonProperty("d")]
+		[DataMember(Name ="d")]
 		internal string _d { get; set; }
 
-		[JsonProperty("data/client")]
+		[DataMember(Name ="data/client")]
 		internal string _data_client { get; set; }
 
-		[JsonProperty("dc")]
+		[DataMember(Name ="dc")]
 		internal string _dc { get; set; }
 
-		[JsonProperty("disk")]
+		[DataMember(Name ="disk")]
 		internal string _disk { get; set; }
 
-		[JsonProperty("disk.avail")]
+		[DataMember(Name ="disk.avail")]
 		internal string _disk_avail { get; set; }
 
-		[JsonProperty("diskAvail")]
+		[DataMember(Name ="diskAvail")]
 		internal string _diskAvail { get; set; }
 
-		[JsonProperty("fce")]
+		[DataMember(Name ="fce")]
 		internal string _fce { get; set; }
 
-		[JsonProperty("fcm")]
+		[DataMember(Name ="fcm")]
 		internal string _fcm { get; set; }
 
-		[JsonProperty("fdc")]
+		[DataMember(Name ="fdc")]
 		internal int? _fdc { get; set; }
 
-		[JsonProperty("fdm")]
+		[DataMember(Name ="fdm")]
 		internal int? _fdm { get; set; }
 
-		[JsonProperty("fdp")]
+		[DataMember(Name ="fdp")]
 		internal int? _fdp { get; set; }
 
-		[JsonProperty("fe")]
+		[DataMember(Name ="fe")]
 		internal string _fe { get; set; }
 
-		[JsonProperty("fielddata.evictions")]
+		[DataMember(Name ="fielddata.evictions")]
 		internal string _fielddata_evictions { get; set; }
 
-		[JsonProperty("fielddata.memory_size")]
+		[DataMember(Name ="fielddata.memory_size")]
 		internal string _fielddata_memory_size { get; set; }
 
-		[JsonProperty("fielddataEvictions")]
+		[DataMember(Name ="fielddataEvictions")]
 		internal string _fielddataEvictions { get; set; }
 
-		[JsonProperty("fielddataMemory")]
+		[DataMember(Name ="fielddataMemory")]
 		internal string _fielddataMemory { get; set; }
 
-		[JsonProperty("file_desc.current")]
+		[DataMember(Name ="file_desc.current")]
 		internal int? _file_desc_current { get; set; }
 
-		[JsonProperty("file_desc.max")]
+		[DataMember(Name ="file_desc.max")]
 		internal int? _file_desc_max { get; set; }
 
-		[JsonProperty("file_desc.percent")]
+		[DataMember(Name ="file_desc.percent")]
 		internal int? _file_desc_percent { get; set; }
 
-		[JsonProperty("fileDescriptorCurrent")]
+		[DataMember(Name ="fileDescriptorCurrent")]
 		internal int? _fileDescriptorCurrent { get; set; }
 
-		[JsonProperty("fileDescriptorMax")]
+		[DataMember(Name ="fileDescriptorMax")]
 		internal int? _fileDescriptorMax { get; set; }
 
-		[JsonProperty("fileDescriptorPercent")]
+		[DataMember(Name ="fileDescriptorPercent")]
 		internal int? _fileDescriptorPercent { get; set; }
 
-		[JsonProperty("filter_cache.evictions")]
+		[DataMember(Name ="filter_cache.evictions")]
 		internal string _filter_cache_evictions { get; set; }
 
-		[JsonProperty("filter_cache.memory_size")]
+		[DataMember(Name ="filter_cache.memory_size")]
 		internal string _filter_cache_memory_size { get; set; }
 
-		[JsonProperty("filterCacheEvictions")]
+		[DataMember(Name ="filterCacheEvictions")]
 		internal string _filterCacheEvictions { get; set; }
 
-		[JsonProperty("filterCacheMemory")]
+		[DataMember(Name ="filterCacheMemory")]
 		internal string _filterCacheMemory { get; set; }
 
-		[JsonProperty("flush.total")]
+		[DataMember(Name ="flush.total")]
 		internal string _flush_total { get; set; }
 
-		[JsonProperty("flush.total_time")]
+		[DataMember(Name ="flush.total_time")]
 		internal string _flush_total_time { get; set; }
 
-		[JsonProperty("flushTotal")]
+		[DataMember(Name ="flushTotal")]
 		internal string _flushTotal { get; set; }
 
-		[JsonProperty("flushTotalTime")]
+		[DataMember(Name ="flushTotalTime")]
 		internal string _flushTotalTime { get; set; }
 
-		[JsonProperty("fm")]
+		[DataMember(Name ="fm")]
 		internal string _fm { get; set; }
 
-		[JsonProperty("ft")]
+		[DataMember(Name ="ft")]
 		internal string _ft { get; set; }
 
-		[JsonProperty("ftt")]
+		[DataMember(Name ="ftt")]
 		internal string _ftt { get; set; }
 
-		[JsonProperty("gc")]
+		[DataMember(Name ="gc")]
 		internal string _gc { get; set; }
 
-		[JsonProperty("get.current")]
+		[DataMember(Name ="get.current")]
 		internal string _get_current { get; set; }
 
-		[JsonProperty("get.exists_time")]
+		[DataMember(Name ="get.exists_time")]
 		internal string _get_exists_time { get; set; }
 
-		[JsonProperty("get.exists_total")]
+		[DataMember(Name ="get.exists_total")]
 		internal string _get_exists_total { get; set; }
 
-		[JsonProperty("get.missing_time")]
+		[DataMember(Name ="get.missing_time")]
 		internal string _get_missing_time { get; set; }
 
-		[JsonProperty("get.missing_total")]
+		[DataMember(Name ="get.missing_total")]
 		internal string _get_missing_total { get; set; }
 
-		[JsonProperty("get.time")]
+		[DataMember(Name ="get.time")]
 		internal string _get_time { get; set; }
 
-		[JsonProperty("get.total")]
+		[DataMember(Name ="get.total")]
 		internal string _get_total { get; set; }
 
-		[JsonProperty("getCurrent")]
+		[DataMember(Name ="getCurrent")]
 		internal string _getCurrent { get; set; }
 
-		[JsonProperty("getExistsTime")]
+		[DataMember(Name ="getExistsTime")]
 		internal string _getExistsTime { get; set; }
 
-		[JsonProperty("getExistsTotal")]
+		[DataMember(Name ="getExistsTotal")]
 		internal string _getExistsTotal { get; set; }
 
-		[JsonProperty("geti")]
+		[DataMember(Name ="geti")]
 		internal string _geti { get; set; }
 
-		[JsonProperty("getMissingTime")]
+		[DataMember(Name ="getMissingTime")]
 		internal string _getMissingTime { get; set; }
 
-		[JsonProperty("getMissingTotal")]
+		[DataMember(Name ="getMissingTotal")]
 		internal string _getMissingTotal { get; set; }
 
-		[JsonProperty("geto")]
+		[DataMember(Name ="geto")]
 		internal string _geto { get; set; }
 
-		[JsonProperty("getTime")]
+		[DataMember(Name ="getTime")]
 		internal string _getTime { get; set; }
 
-		[JsonProperty("getTotal")]
+		[DataMember(Name ="getTotal")]
 		internal string _getTotal { get; set; }
 
-		[JsonProperty("gmti")]
+		[DataMember(Name ="gmti")]
 		internal string _gmti { get; set; }
 
-		[JsonProperty("gmto")]
+		[DataMember(Name ="gmto")]
 		internal string _gmto { get; set; }
 
-		[JsonProperty("gti")]
+		[DataMember(Name ="gti")]
 		internal string _gti { get; set; }
 
-		[JsonProperty("gto")]
+		[DataMember(Name ="gto")]
 		internal string _gto { get; set; }
 
-		[JsonProperty("hc")]
+		[DataMember(Name ="hc")]
 		internal string _hc { get; set; }
 
-		[JsonProperty("heap.current")]
+		[DataMember(Name ="heap.current")]
 		internal string _heap_current { get; set; }
 
-		[JsonProperty("heap.max")]
+		[DataMember(Name ="heap.max")]
 		internal string _heap_max { get; set; }
 
-		[JsonProperty("heap.percent")]
+		[DataMember(Name ="heap.percent")]
 		internal string _heap_percent { get; set; }
 
-		[JsonProperty("heapCurrent")]
+		[DataMember(Name ="heapCurrent")]
 		internal string _heapCurrent { get; set; }
 
-		[JsonProperty("heapMax")]
+		[DataMember(Name ="heapMax")]
 		internal string _heapMax { get; set; }
 
-		[JsonProperty("heapPercent")]
+		[DataMember(Name ="heapPercent")]
 		internal string _heapPercent { get; set; }
 
-		[JsonProperty("hm")]
+		[DataMember(Name ="hm")]
 		internal string _hm { get; set; }
 
-		[JsonProperty("hp")]
+		[DataMember(Name ="hp")]
 		internal string _hp { get; set; }
 
-		[JsonProperty("i")]
+		[DataMember(Name ="i")]
 		internal string _i { get; set; }
 
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		internal string _id { get; set; }
 
-		[JsonProperty("id_cache.memory_size")]
+		[DataMember(Name ="id_cache.memory_size")]
 		internal string _id_cache_memory_size { get; set; }
 
-		[JsonProperty("idCacheMemory")]
+		[DataMember(Name ="idCacheMemory")]
 		internal string _idCacheMemory { get; set; }
 
-		[JsonProperty("idc")]
+		[DataMember(Name ="idc")]
 		internal string _idcs { get; set; }
 
-		[JsonProperty("idti")]
+		[DataMember(Name ="idti")]
 		internal string _idti { get; set; }
 
-		[JsonProperty("idto")]
+		[DataMember(Name ="idto")]
 		internal string _idto { get; set; }
 
-		[JsonProperty("iic")]
+		[DataMember(Name ="iic")]
 		internal string _iic { get; set; }
 
-		[JsonProperty("iiti")]
+		[DataMember(Name ="iiti")]
 		internal string _iiti { get; set; }
 
-		[JsonProperty("iito")]
+		[DataMember(Name ="iito")]
 		internal string _iito { get; set; }
 
-		[JsonProperty("im")]
+		[DataMember(Name ="im")]
 		internal string _im { get; set; }
 
-		[JsonProperty("indexing.delete_current")]
+		[DataMember(Name ="indexing.delete_current")]
 		internal string _indexing_delete_current { get; set; }
 
-		[JsonProperty("indexing.delete_time")]
+		[DataMember(Name ="indexing.delete_time")]
 		internal string _indexing_delete_time { get; set; }
 
-		[JsonProperty("indexing.delete_total")]
+		[DataMember(Name ="indexing.delete_total")]
 		internal string _indexing_delete_total { get; set; }
 
-		[JsonProperty("indexing.index_current")]
+		[DataMember(Name ="indexing.index_current")]
 		internal string _indexing_index_current { get; set; }
 
-		[JsonProperty("indexing.index_time")]
+		[DataMember(Name ="indexing.index_time")]
 		internal string _indexing_index_time { get; set; }
 
-		[JsonProperty("indexing.index_total")]
+		[DataMember(Name ="indexing.index_total")]
 		internal string _indexing_index_total { get; set; }
 
-		[JsonProperty("indexingDeleteCurrent")]
+		[DataMember(Name ="indexingDeleteCurrent")]
 		internal string _indexingDeleteCurrent { get; set; }
 
-		[JsonProperty("indexingDeleteTime")]
+		[DataMember(Name ="indexingDeleteTime")]
 		internal string _indexingDeleteTime { get; set; }
 
-		[JsonProperty("indexingDeleteTotal")]
+		[DataMember(Name ="indexingDeleteTotal")]
 		internal string _indexingDeleteTotal { get; set; }
 
-		[JsonProperty("indexingIndexCurrent")]
+		[DataMember(Name ="indexingIndexCurrent")]
 		internal string _indexingIndexCurrent { get; set; }
 
-		[JsonProperty("indexingIndexTime")]
+		[DataMember(Name ="indexingIndexTime")]
 		internal string _indexingIndexTime { get; set; }
 
-		[JsonProperty("indexingIndexTotal")]
+		[DataMember(Name ="indexingIndexTotal")]
 		internal string _indexingIndexTotal { get; set; }
 
-		[JsonProperty("ip")]
+		[DataMember(Name ="ip")]
 		internal string _ip { get; set; }
 
-		[JsonProperty("j")]
+		[DataMember(Name ="j")]
 		internal string _j { get; set; }
 
-		[JsonProperty("jdk")]
+		[DataMember(Name ="jdk")]
 		internal string _jdk { get; set; }
 
-		[JsonProperty("m")]
+		[DataMember(Name ="m")]
 		internal string _m { get; set; }
 
-		[JsonProperty("master")]
+		[DataMember(Name ="master")]
 		internal string _master { get; set; }
 
-		[JsonProperty("mc")]
+		[DataMember(Name ="mc")]
 		internal string _mc { get; set; }
 
-		[JsonProperty("mcd")]
+		[DataMember(Name ="mcd")]
 		internal string _mcd { get; set; }
 
-		[JsonProperty("mcs")]
+		[DataMember(Name ="mcs")]
 		internal string _mcs { get; set; }
 
-		[JsonProperty("merges.current")]
+		[DataMember(Name ="merges.current")]
 		internal string _merges_current { get; set; }
 
-		[JsonProperty("merges.current_docs")]
+		[DataMember(Name ="merges.current_docs")]
 		internal string _merges_current_docs { get; set; }
 
-		[JsonProperty("merges.current_size")]
+		[DataMember(Name ="merges.current_size")]
 		internal string _merges_current_size { get; set; }
 
-		[JsonProperty("merges.total")]
+		[DataMember(Name ="merges.total")]
 		internal string _merges_total { get; set; }
 
-		[JsonProperty("merges.total_docs")]
+		[DataMember(Name ="merges.total_docs")]
 		internal string _merges_total_docs { get; set; }
 
-		[JsonProperty("merges.total_time")]
+		[DataMember(Name ="merges.total_time")]
 		internal string _merges_total_time { get; set; }
 
-		[JsonProperty("mergesCurrent")]
+		[DataMember(Name ="mergesCurrent")]
 		internal string _mergesCurrent { get; set; }
 
-		[JsonProperty("mergesCurrentDocs")]
+		[DataMember(Name ="mergesCurrentDocs")]
 		internal string _mergesCurrentDocs { get; set; }
 
-		[JsonProperty("mergesCurrentSize")]
+		[DataMember(Name ="mergesCurrentSize")]
 		internal string _mergesCurrentSize { get; set; }
 
-		[JsonProperty("mergesTotal")]
+		[DataMember(Name ="mergesTotal")]
 		internal string _mergesTotal { get; set; }
 
-		[JsonProperty("mergesTotalDocs")]
+		[DataMember(Name ="mergesTotalDocs")]
 		internal string _mergesTotalDocs { get; set; }
 
-		[JsonProperty("mergesTotalTime")]
+		[DataMember(Name ="mergesTotalTime")]
 		internal string _mergesTotalTime { get; set; }
 
-		[JsonProperty("mt")]
+		[DataMember(Name ="mt")]
 		internal string _mt { get; set; }
 
-		[JsonProperty("mtd")]
+		[DataMember(Name ="mtd")]
 		internal string _mtd { get; set; }
 
-		[JsonProperty("mtt")]
+		[DataMember(Name ="mtt")]
 		internal string _mtt { get; set; }
 
-		[JsonProperty("n")]
+		[DataMember(Name ="n")]
 		internal string _n { get; set; }
 
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		internal string _name { get; set; }
 
-		[JsonProperty("node.role")]
+		[DataMember(Name ="node.role")]
 		internal string _node_role { get; set; }
 
-		[JsonProperty("nodeId")]
+		[DataMember(Name ="nodeId")]
 		internal string _nodeId { get; set; }
 
-		[JsonProperty("nodeRole")]
+		[DataMember(Name ="nodeRole")]
 		internal string _nodeRole { get; set; }
 
-		[JsonProperty("p")]
+		[DataMember(Name ="p")]
 		internal string _p { get; set; }
 
-		[JsonProperty("pc")]
+		[DataMember(Name ="pc")]
 		internal string _pc { get; set; }
 
-		[JsonProperty("percolate.current")]
+		[DataMember(Name ="percolate.current")]
 		internal string _percolate_current { get; set; }
 
-		[JsonProperty("percolate.memory_size")]
+		[DataMember(Name ="percolate.memory_size")]
 		internal string _percolate_memory_size { get; set; }
 
-		[JsonProperty("percolate.queries")]
+		[DataMember(Name ="percolate.queries")]
 		internal string _percolate_queries { get; set; }
 
-		[JsonProperty("percolate.time")]
+		[DataMember(Name ="percolate.time")]
 		internal string _percolate_time { get; set; }
 
-		[JsonProperty("percolate.total")]
+		[DataMember(Name ="percolate.total")]
 		internal string _percolate_total { get; set; }
 
-		[JsonProperty("percolateCurrent")]
+		[DataMember(Name ="percolateCurrent")]
 		internal string _percolateCurrent { get; set; }
 
-		[JsonProperty("percolateMemory")]
+		[DataMember(Name ="percolateMemory")]
 		internal string _percolateMemory { get; set; }
 
-		[JsonProperty("percolateQueries")]
+		[DataMember(Name ="percolateQueries")]
 		internal string _percolateQueries { get; set; }
 
-		[JsonProperty("percolateTime")]
+		[DataMember(Name ="percolateTime")]
 		internal string _percolateTime { get; set; }
 
-		[JsonProperty("percolateTotal")]
+		[DataMember(Name ="percolateTotal")]
 		internal string _percolateTotal { get; set; }
 
-		[JsonProperty("pid")]
+		[DataMember(Name ="pid")]
 		internal string _pid { get; set; }
 
-		[JsonProperty("pm")]
+		[DataMember(Name ="pm")]
 		internal string _pm { get; set; }
 
-		[JsonProperty("po")]
+		[DataMember(Name ="po")]
 		internal string _po { get; set; }
 
-		[JsonProperty("port")]
+		[DataMember(Name ="port")]
 		internal string _port { get; set; }
 
-		[JsonProperty("pq")]
+		[DataMember(Name ="pq")]
 		internal string _pq { get; set; }
 
-		[JsonProperty("pti")]
+		[DataMember(Name ="pti")]
 		internal string _pti { get; set; }
 
-		[JsonProperty("pto")]
+		[DataMember(Name ="pto")]
 		internal string _pto { get; set; }
 
-		[JsonProperty("r")]
+		[DataMember(Name ="r")]
 		internal string _r { get; set; }
 
-		[JsonProperty("ram.current")]
+		[DataMember(Name ="ram.current")]
 		internal string _ram_current { get; set; }
 
-		[JsonProperty("ram.max")]
+		[DataMember(Name ="ram.max")]
 		internal string _ram_max { get; set; }
 
-		[JsonProperty("ram.percent")]
+		[DataMember(Name ="ram.percent")]
 		internal string _ram_percent { get; set; }
 
-		[JsonProperty("ramCurrent")]
+		[DataMember(Name ="ramCurrent")]
 		internal string _ramCurrent { get; set; }
 
-		[JsonProperty("ramMax")]
+		[DataMember(Name ="ramMax")]
 		internal string _ramMax { get; set; }
 
-		[JsonProperty("ramPercent")]
+		[DataMember(Name ="ramPercent")]
 		internal string _ramPercent { get; set; }
 
-		[JsonProperty("rc")]
+		[DataMember(Name ="rc")]
 		internal string _rc { get; set; }
 
-		[JsonProperty("refresh.time")]
+		[DataMember(Name ="refresh.time")]
 		internal string _refresh_time { get; set; }
 
-		[JsonProperty("refresh.total")]
+		[DataMember(Name ="refresh.total")]
 		internal string _refresh_total { get; set; }
 
-		[JsonProperty("refreshTime")]
+		[DataMember(Name ="refreshTime")]
 		internal string _refreshTime { get; set; }
 
-		[JsonProperty("refreshTotal")]
+		[DataMember(Name ="refreshTotal")]
 		internal string _refreshTotal { get; set; }
 
-		[JsonProperty("rm")]
+		[DataMember(Name ="rm")]
 		internal string _rm { get; set; }
 
-		[JsonProperty("rp")]
+		[DataMember(Name ="rp")]
 		internal string _rp { get; set; }
 
-		[JsonProperty("rti")]
+		[DataMember(Name ="rti")]
 		internal string _rti { get; set; }
 
-		[JsonProperty("rto")]
+		[DataMember(Name ="rto")]
 		internal string _rto { get; set; }
 
-		[JsonProperty("sc")]
+		[DataMember(Name ="sc")]
 		internal string _sc { get; set; }
 
-		[JsonProperty("search.fetch_current")]
+		[DataMember(Name ="search.fetch_current")]
 		internal string _search_fetch_current { get; set; }
 
-		[JsonProperty("search.fetch_time")]
+		[DataMember(Name ="search.fetch_time")]
 		internal string _search_fetch_time { get; set; }
 
-		[JsonProperty("search.fetch_total")]
+		[DataMember(Name ="search.fetch_total")]
 		internal string _search_fetch_total { get; set; }
 
-		[JsonProperty("search.open_contexts")]
+		[DataMember(Name ="search.open_contexts")]
 		internal string _search_open_contexts { get; set; }
 
-		[JsonProperty("search.query_current")]
+		[DataMember(Name ="search.query_current")]
 		internal string _search_query_current { get; set; }
 
-		[JsonProperty("search.query_time")]
+		[DataMember(Name ="search.query_time")]
 		internal string _search_query_time { get; set; }
 
-		[JsonProperty("search.query_total")]
+		[DataMember(Name ="search.query_total")]
 		internal string _search_query_total { get; set; }
 
-		[JsonProperty("searchFetchCurrent")]
+		[DataMember(Name ="searchFetchCurrent")]
 		internal string _searchFetchCurrent { get; set; }
 
-		[JsonProperty("searchFetchTime")]
+		[DataMember(Name ="searchFetchTime")]
 		internal string _searchFetchTime { get; set; }
 
-		[JsonProperty("searchFetchTotal")]
+		[DataMember(Name ="searchFetchTotal")]
 		internal string _searchFetchTotal { get; set; }
 
-		[JsonProperty("searchOpenContexts")]
+		[DataMember(Name ="searchOpenContexts")]
 		internal string _searchOpenContexts { get; set; }
 
-		[JsonProperty("searchQueryCurrent")]
+		[DataMember(Name ="searchQueryCurrent")]
 		internal string _searchQueryCurrent { get; set; }
 
-		[JsonProperty("searchQueryTime")]
+		[DataMember(Name ="searchQueryTime")]
 		internal string _searchQueryTime { get; set; }
 
-		[JsonProperty("searchQueryTotal")]
+		[DataMember(Name ="searchQueryTotal")]
 		internal string _searchQueryTotal { get; set; }
 
-		[JsonProperty("segments.count")]
+		[DataMember(Name ="segments.count")]
 		internal string _segments_count { get; set; }
 
-		[JsonProperty("segments.index_writer_max_memory")]
+		[DataMember(Name ="segments.index_writer_max_memory")]
 		internal string _segments_index_writer_max_memory { get; set; }
 
-		[JsonProperty("segments.index_writer_memory")]
+		[DataMember(Name ="segments.index_writer_memory")]
 		internal string _segments_index_writer_memory { get; set; }
 
-		[JsonProperty("segments.memory")]
+		[DataMember(Name ="segments.memory")]
 		internal string _segments_memory { get; set; }
 
-		[JsonProperty("segments.version_map_memory")]
+		[DataMember(Name ="segments.version_map_memory")]
 		internal string _segments_version_map_memory { get; set; }
 
-		[JsonProperty("segmentsCount")]
+		[DataMember(Name ="segmentsCount")]
 		internal string _segmentsCount { get; set; }
 
-		[JsonProperty("segmentsIndexWriterMaxMemory")]
+		[DataMember(Name ="segmentsIndexWriterMaxMemory")]
 		internal string _segmentsIndexWriterMaxMemory { get; set; }
 
-		[JsonProperty("segmentsIndexWriterMemory")]
+		[DataMember(Name ="segmentsIndexWriterMemory")]
 		internal string _segmentsIndexWriterMemory { get; set; }
 
-		[JsonProperty("segmentsMemory")]
+		[DataMember(Name ="segmentsMemory")]
 		internal string _segmentsMemory { get; set; }
 
-		[JsonProperty("segmentsVersionMapMemory")]
+		[DataMember(Name ="segmentsVersionMapMemory")]
 		internal string _segmentsVersionMapMemory { get; set; }
 
-		[JsonProperty("sfc")]
+		[DataMember(Name ="sfc")]
 		internal string _sfc { get; set; }
 
-		[JsonProperty("sfti")]
+		[DataMember(Name ="sfti")]
 		internal string _sfti { get; set; }
 
-		[JsonProperty("sfto")]
+		[DataMember(Name ="sfto")]
 		internal string _sfto { get; set; }
 
-		[JsonProperty("siwm")]
+		[DataMember(Name ="siwm")]
 		internal string _siwm { get; set; }
 
-		[JsonProperty("siwmx")]
+		[DataMember(Name ="siwmx")]
 		internal string _siwmx { get; set; }
 
-		[JsonProperty("sm")]
+		[DataMember(Name ="sm")]
 		internal string _sm { get; set; }
 
-		[JsonProperty("so")]
+		[DataMember(Name ="so")]
 		internal string _so { get; set; }
 
-		[JsonProperty("sqc")]
+		[DataMember(Name ="sqc")]
 		internal string _sqc { get; set; }
 
-		[JsonProperty("sqti")]
+		[DataMember(Name ="sqti")]
 		internal string _sqti { get; set; }
 
-		[JsonProperty("sqto")]
+		[DataMember(Name ="sqto")]
 		internal string _sqto { get; set; }
 
-		[JsonProperty("svmm")]
+		[DataMember(Name ="svmm")]
 		internal string _svmm { get; set; }
 
-		[JsonProperty("u")]
+		[DataMember(Name ="u")]
 		internal string _u { get; set; }
 
-		[JsonProperty("uptime")]
+		[DataMember(Name ="uptime")]
 		internal string _uptime { get; set; }
 
-		[JsonProperty("v")]
+		[DataMember(Name ="v")]
 		internal string _v { get; set; }
 
-		[JsonProperty("version")]
+		[DataMember(Name ="version")]
 		internal string _version { get; set; }
 	}
 }

@@ -1,38 +1,38 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class CatIndicesRecord : ICatRecord
 	{
-		[JsonProperty("docs.count")]
+		[DataMember(Name ="docs.count")]
 		public string DocsCount { get; set; }
 
-		[JsonProperty("docs.deleted")]
+		[DataMember(Name ="docs.deleted")]
 		public string DocsDeleted { get; set; }
 
-		[JsonProperty("health")]
+		[DataMember(Name ="health")]
 		public string Health { get; set; }
 
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		public string Index { get; set; }
 
-		[JsonProperty("pri")]
+		[DataMember(Name ="pri")]
 		public string Primary { get; set; }
 
-		[JsonProperty("pri.store.size")]
+		[DataMember(Name ="pri.store.size")]
 		public string PrimaryStoreSize { get; set; }
 
-		[JsonProperty("rep")]
+		[DataMember(Name ="rep")]
 		public string Replica { get; set; }
 
-		[JsonProperty("status")]
+		[DataMember(Name ="status")]
 		public string Status { get; set; }
 
-		[JsonProperty("store.size")]
+		[DataMember(Name ="store.size")]
 		public string StoreSize { get; set; }
 
-		[JsonProperty("tm")]
+		[DataMember(Name ="tm")]
 		public string TotalMemory { get; set; }
 	}
 }

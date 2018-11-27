@@ -1,17 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class FieldStatistics
 	{
-		[JsonProperty("doc_count")]
+		[DataMember(Name ="doc_count")]
 		public int DocumentCount { get; internal set; }
 
-		[JsonProperty("sum_doc_freq")]
+		[DataMember(Name ="sum_doc_freq")]
 		public int SumOfDocumentFrequencies { get; internal set; }
 
-		[JsonProperty("sum_ttf")]
+		[DataMember(Name ="sum_ttf")]
 		public int SumOfTotalTermFrequencies { get; internal set; }
 	}
 }

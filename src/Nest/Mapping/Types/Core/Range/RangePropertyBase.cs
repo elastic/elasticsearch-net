@@ -1,27 +1,27 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	[ContractJsonConverter(typeof(PropertyJsonConverter))]
 	public interface IRangeProperty : IDocValuesProperty
 	{
 		/// <summary>
 		/// Mapping field-level query time boosting. Accepts a floating point number, defaults to 1.0.
 		/// </summary>
-		[JsonProperty("boost")]
+		[DataMember(Name ="boost")]
 		double? Boost { get; set; }
 
 		/// <summary>
 		/// Try to convert strings to numbers and truncate fractions for integers. Accepts true (default) and false.
 		/// </summary>
-		[JsonProperty("coerce")]
+		[DataMember(Name ="coerce")]
 		bool? Coerce { get; set; }
 
 		/// <summary>
 		/// Should the field be searchable? Accepts true (default) and false.
 		/// </summary>
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		bool? Index { get; set; }
 	}
 

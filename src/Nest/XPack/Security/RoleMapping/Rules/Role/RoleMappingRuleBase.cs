@@ -1,21 +1,21 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	[JsonConverter(typeof(RoleMappingRuleBaseJsonConverter))]
 	public abstract class RoleMappingRuleBase
 	{
-		[JsonProperty("all")]
+		[DataMember(Name ="all")]
 		protected internal IEnumerable<RoleMappingRuleBase> AllRules { get; set; }
 
-		[JsonProperty("any")]
+		[DataMember(Name ="any")]
 		protected internal IEnumerable<RoleMappingRuleBase> AnyRules { get; set; }
 
-		[JsonProperty("except")]
+		[DataMember(Name ="except")]
 		protected RoleMappingRuleBase ExceptRule { get; set; }
 
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		protected FieldRuleBase FieldRule { get; set; }
 
 		public static AnyRoleMappingRule operator |(RoleMappingRuleBase leftContainer, RoleMappingRuleBase rightContainer) =>

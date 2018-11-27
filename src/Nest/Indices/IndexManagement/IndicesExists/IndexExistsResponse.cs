@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -7,7 +7,7 @@ namespace Nest
 		bool Exists { get; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class ExistsResponse : ResponseBase, IExistsResponse
 	{
 		public bool Exists => ApiCall != null && ApiCall.Success && ApiCall.HttpStatusCode == 200;

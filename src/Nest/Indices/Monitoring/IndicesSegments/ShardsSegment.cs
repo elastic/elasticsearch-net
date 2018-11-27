@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	[JsonConverter(typeof(Json))]
 	public class ShardsSegment
 	{
-		[JsonProperty("num_committed_segments")]
+		[DataMember(Name ="num_committed_segments")]
 		public int CommittedSegments { get; internal set; }
 
-		[JsonProperty("routing")]
+		[DataMember(Name ="routing")]
 		public ShardSegmentRouting Routing { get; internal set; }
 
-		[JsonProperty("num_search_segments")]
+		[DataMember(Name ="num_search_segments")]
 		public int SearchSegments { get; internal set; }
 
 		[JsonProperty]

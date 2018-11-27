@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public interface ISimulatePipelineDocument
 	{
-		[JsonProperty("_id")]
+		[DataMember(Name ="_id")]
 		Id Id { get; set; }
 
-		[JsonProperty("_index")]
+		[DataMember(Name ="_index")]
 		IndexName Index { get; set; }
 
-		[JsonProperty("_source")]
+		[DataMember(Name ="_source")]
 		[JsonConverter(typeof(SourceConverter))]
 		object Source { get; set; }
 	}

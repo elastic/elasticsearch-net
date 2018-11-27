@@ -1,5 +1,5 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
@@ -13,20 +13,20 @@ namespace Nest
 		/// <summary>
 		/// If <c>false</c> and the job id does not match any job an error will be returned. The default value is true.
 		/// </summary>
-		[JsonProperty("allow_no_jobs")]
+		[DataMember(Name ="allow_no_jobs")]
 		bool? AllowNoJobs { get; set; }
 
 		/// <summary>
 		/// The span of the overall buckets.
 		/// Must be greater or equal to the largest job’s bucket span. Defaults to the largest job’s bucket span.
 		/// </summary>
-		[JsonProperty("bucket_span")]
+		[DataMember(Name ="bucket_span")]
 		Time BucketSpan { get; set; }
 
 		/// <summary>
 		/// Returns overall buckets with timestamps earlier than this time.
 		/// </summary>
-		[JsonProperty("end")]
+		[DataMember(Name ="end")]
 		// Forced to prevent override, ML API always expects ISO8601 format
 		[JsonConverter(typeof(IsoDateTimeConverter))]
 		DateTimeOffset? End { get; set; }
@@ -35,19 +35,19 @@ namespace Nest
 		/// If true, the output excludes interim overall buckets. Overall buckets are interim if any of the job
 		/// buckets within the overall bucket interval are interim. By default, interim results are included.
 		/// </summary>
-		[JsonProperty("exclude_interim")]
+		[DataMember(Name ="exclude_interim")]
 		bool? ExcludeInterim { get; set; }
 
 		/// <summary>
 		/// Returns overall buckets with overall scores greater or equal than this value.
 		/// </summary>
-		[JsonProperty("overall_score")]
+		[DataMember(Name ="overall_score")]
 		double? OverallScore { get; set; }
 
 		/// <summary>
 		/// Returns overall buckets with timestamps after this time.
 		/// </summary>
-		[JsonProperty("start")]
+		[DataMember(Name ="start")]
 		// Forced to prevent override, ML API always expects ISO8601 format
 		[JsonConverter(typeof(IsoDateTimeConverter))]
 		DateTimeOffset? Start { get; set; }
@@ -57,7 +57,7 @@ namespace Nest
 		/// <see cref="OverallBucket.OverallScore" /> calculation on the response.
 		/// The default value is <c>1</c>.
 		/// </summary>
-		[JsonProperty("top_n")]
+		[DataMember(Name ="top_n")]
 		int? TopN { get; set; }
 	}
 

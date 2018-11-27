@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SpanOrQuery>))]
+	[DataContract]
+	[ReadAs(typeof(SpanOrQuery))]
 	public interface ISpanOrQuery : ISpanSubQuery
 	{
-		[JsonProperty("clauses")]
+		[DataMember(Name ="clauses")]
 		IEnumerable<ISpanQuery> Clauses { get; set; }
 	}
 

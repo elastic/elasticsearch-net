@@ -1,44 +1,44 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class CatHealthRecord : ICatRecord
 	{
-		[JsonProperty("cluster")]
+		[DataMember(Name ="cluster")]
 		public string Cluster { get; set; }
 
-		[JsonProperty("epoch")]
+		[DataMember(Name ="epoch")]
 		public string Epoch { get; set; }
 
-		[JsonProperty("init")]
+		[DataMember(Name ="init")]
 		public string Initializing { get; set; }
 
-		[JsonProperty("node.data")]
+		[DataMember(Name ="node.data")]
 		public string NodeData { get; set; }
 
-		[JsonProperty("node.total")]
+		[DataMember(Name ="node.total")]
 		public string NodeTotal { get; set; }
 
-		[JsonProperty("pending_tasks")]
+		[DataMember(Name ="pending_tasks")]
 		public string PendingTasks { get; set; }
 
-		[JsonProperty("pri")]
+		[DataMember(Name ="pri")]
 		public string Primary { get; set; }
 
-		[JsonProperty("relo")]
+		[DataMember(Name ="relo")]
 		public string Relocating { get; set; }
 
-		[JsonProperty("shards")]
+		[DataMember(Name ="shards")]
 		public string Shards { get; set; }
 
-		[JsonProperty("status")]
+		[DataMember(Name ="status")]
 		public string Status { get; set; }
 
-		[JsonProperty("timestamp")]
+		[DataMember(Name ="timestamp")]
 		public string Timestamp { get; set; }
 
-		[JsonProperty("unassign")]
+		[DataMember(Name ="unassign")]
 		public string Unassigned { get; set; }
 	}
 }

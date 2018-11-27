@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 using System.Text;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -15,7 +15,7 @@ namespace Nest
 		/// A lazy human readable string representation of what happened during this request for both successful and
 		/// failed requests, very useful while developing or to log when <see cref="IsValid" /> is false on responses.
 		/// </summary>
-		[JsonIgnore]
+		[IgnoreDataMember]
 		string DebugInformation { get; }
 
 		/// <summary>
@@ -30,7 +30,7 @@ namespace Nest
 		/// <see cref="IConnectionConfigurationValues.ThrowExceptions" /> if the response is not valid
 		/// </para>
 		/// </summary>
-		[JsonIgnore]
+		[IgnoreDataMember]
 		bool IsValid { get; }
 
 		/// <summary>
@@ -44,7 +44,7 @@ namespace Nest
 		/// <see cref="IConnectionConfigurationValues.ThrowExceptions" /> if the response is not valid
 		/// </para>
 		/// </summary>
-		[JsonIgnore]
+		[IgnoreDataMember]
 		Exception OriginalException { get; }
 
 		/// <summary>
@@ -56,7 +56,7 @@ namespace Nest
 		/// <see cref="IConnectionConfigurationValues.ThrowExceptions" /> if the response is not valid
 		/// </para>
 		/// </summary>
-		[JsonIgnore]
+		[IgnoreDataMember]
 		ServerError ServerError { get; }
 	}
 
@@ -125,7 +125,7 @@ namespace Nest
 			}
 		}
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		IApiCallDetails IElasticsearchResponse.ApiCall
 		{
 			get => _originalApiCall;

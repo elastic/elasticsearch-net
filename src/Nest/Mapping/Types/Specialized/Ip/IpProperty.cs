@@ -1,18 +1,18 @@
 using System.Diagnostics;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IIpProperty : IDocValuesProperty
 	{
-		[JsonProperty("boost")]
+		[DataMember(Name ="boost")]
 		double? Boost { get; set; }
 
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		bool? Index { get; set; }
 
-		[JsonProperty("null_value")]
+		[DataMember(Name ="null_value")]
 		string NullValue { get; set; }
 	}
 

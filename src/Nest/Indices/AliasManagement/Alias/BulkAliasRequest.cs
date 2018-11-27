@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	[MapsApi("indices.update_aliases.json")]
 	public partial interface IBulkAliasRequest
 	{
-		[JsonProperty("actions")]
+		[DataMember(Name ="actions")]
 		IList<IAliasAction> Actions { get; set; }
 	}
 

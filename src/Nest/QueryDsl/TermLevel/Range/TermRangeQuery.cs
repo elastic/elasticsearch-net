@@ -1,20 +1,20 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	[JsonConverter(typeof(FieldNameQueryJsonConverter<TermRangeQuery>))]
 	public interface ITermRangeQuery : IRangeQuery
 	{
-		[JsonProperty("gt")]
+		[DataMember(Name ="gt")]
 		string GreaterThan { get; set; }
 
-		[JsonProperty("gte")]
+		[DataMember(Name ="gte")]
 		string GreaterThanOrEqualTo { get; set; }
 
-		[JsonProperty("lt")]
+		[DataMember(Name ="lt")]
 		string LessThan { get; set; }
 
-		[JsonProperty("lte")]
+		[DataMember(Name ="lte")]
 		string LessThanOrEqualTo { get; set; }
 	}
 
@@ -35,7 +35,7 @@ namespace Nest
 			&& q.LessThan.IsNullOrEmpty();
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	public class TermRangeQueryDescriptor<T>
 		: FieldNameQueryDescriptorBase<TermRangeQueryDescriptor<T>, ITermRangeQuery, T>
 			, ITermRangeQuery where T : class

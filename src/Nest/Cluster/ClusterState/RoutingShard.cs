@@ -1,28 +1,28 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class RoutingShard
 	{
-		[JsonProperty("allocation_id")]
+		[DataMember(Name ="allocation_id")]
 		public AllocationId AllocationId { get; internal set; }
 
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		public string Index { get; internal set; }
 
-		[JsonProperty("node")]
+		[DataMember(Name ="node")]
 		public string Node { get; internal set; }
 
-		[JsonProperty("primary")]
+		[DataMember(Name ="primary")]
 		public bool Primary { get; internal set; }
 
-		[JsonProperty("relocating_node")]
+		[DataMember(Name ="relocating_node")]
 		public string RelocatingNode { get; internal set; }
 
-		[JsonProperty("shard")]
+		[DataMember(Name ="shard")]
 		public int Shard { get; internal set; }
 
-		[JsonProperty("state")]
+		[DataMember(Name ="state")]
 		public string State { get; internal set; }
 	}
 }

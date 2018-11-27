@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -9,23 +9,23 @@ namespace Nest
 	/// Supported human readable units are "b", "kb", "mb", "gb", "tb", "pb" case insensitive.
 	/// An error will occur if the field is not a supported format or resultant value exceeds 2^63.
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(ProcessorJsonConverter<BytesProcessor>))]
 	public interface IBytesProcessor : IProcessor
 	{
 		/// <summary> The field to convert bytes from </summary>
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
 		/// <summary>
 		/// If <c>true</c> and <see cref="Field" /> does not exist or is null,
 		/// the processor quietly exits without modifying the document. Default is <c>false</c>
 		/// </summary>
-		[JsonProperty("ignore_missing")]
+		[DataMember(Name ="ignore_missing")]
 		bool? IgnoreMissing { get; set; }
 
 		/// <summary> The field to assign the converted value to, by default <see cref="Field" /> is updated in-place </summary>
-		[JsonProperty("target_field")]
+		[DataMember(Name ="target_field")]
 		Field TargetField { get; set; }
 	}
 
@@ -33,15 +33,15 @@ namespace Nest
 	public class BytesProcessor : ProcessorBase, IBytesProcessor
 	{
 		/// <inheritdoc />
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		public Field Field { get; set; }
 
 		/// <inheritdoc />
-		[JsonProperty("ignore_missing")]
+		[DataMember(Name ="ignore_missing")]
 		public bool? IgnoreMissing { get; set; }
 
 		/// <inheritdoc />
-		[JsonProperty("target_field")]
+		[DataMember(Name ="target_field")]
 		public Field TargetField { get; set; }
 
 		protected override string Name => "bytes";

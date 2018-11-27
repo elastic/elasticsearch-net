@@ -1,13 +1,13 @@
 ﻿using System;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	[MapsApi("explain.json")]
 	public partial interface IExplainRequest<TDocument> where TDocument : class
 	{
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		QueryContainer Query { get; set; }
 	}
 

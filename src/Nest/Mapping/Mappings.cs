@@ -1,7 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Linq;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -29,31 +30,31 @@ namespace Nest
 
 	public abstract class ObsoleteMappingsBase : ITypeMapping
 	{
-		[JsonProperty("_all")]
+		[DataMember(Name = "_all")]
 		public IAllField AllField { get => Wrapped.AllField; set => Wrapped.AllField = value; }
-		[JsonProperty("date_detection")]
+		[DataMember(Name = "date_detection")]
 		bool? ITypeMapping.DateDetection { get => Wrapped.DateDetection; set => Wrapped.DateDetection = value; }
-		[JsonProperty("dynamic")]
+		[DataMember(Name = "dynamic")]
 		Union<bool, DynamicMapping> ITypeMapping.Dynamic { get => Wrapped.Dynamic; set => Wrapped.Dynamic = value; }
-		[JsonProperty("dynamic_date_formats")]
+		[DataMember(Name = "dynamic_date_formats")]
 		IEnumerable<string> ITypeMapping.DynamicDateFormats { get => Wrapped.DynamicDateFormats; set => Wrapped.DynamicDateFormats = value; }
-		[JsonProperty("dynamic_templates")]
+		[DataMember(Name = "dynamic_templates")]
 		IDynamicTemplateContainer ITypeMapping.DynamicTemplates { get => Wrapped.DynamicTemplates; set => Wrapped.DynamicTemplates = value; }
-		[JsonProperty("_field_names")]
+		[DataMember(Name = "_field_names")]
 		IFieldNamesField ITypeMapping.FieldNamesField { get => Wrapped.FieldNamesField; set => Wrapped.FieldNamesField = value; }
-		[JsonProperty("_index")]
+		[DataMember(Name = "_index")]
 		IIndexField ITypeMapping.IndexField { get => Wrapped.IndexField; set => Wrapped.IndexField = value; }
-		[JsonProperty("_meta")]
+		[DataMember(Name = "_meta")]
 		IDictionary<string, object> ITypeMapping.Meta { get => Wrapped.Meta; set => Wrapped.Meta = value; }
-		[JsonProperty("numeric_detection")]
+		[DataMember(Name = "numeric_detection")]
 		bool? ITypeMapping.NumericDetection { get => Wrapped.NumericDetection; set => Wrapped.NumericDetection = value; }
-		[JsonProperty("properties")]
+		[DataMember(Name = "properties")]
 		IProperties ITypeMapping.Properties { get => Wrapped.Properties; set => Wrapped.Properties = value; }
-		[JsonProperty("_routing")]
+		[DataMember(Name = "_routing")]
 		IRoutingField ITypeMapping.RoutingField { get => Wrapped.RoutingField; set => Wrapped.RoutingField = value; }
-		[JsonProperty("_size")]
+		[DataMember(Name = "_size")]
 		ISizeField ITypeMapping.SizeField { get => Wrapped.SizeField; set => Wrapped.SizeField = value; }
-		[JsonProperty("_source")]
+		[DataMember(Name = "_source")]
 		ISourceField ITypeMapping.SourceField { get => Wrapped.SourceField; set => Wrapped.SourceField = value; }
 		protected ITypeMapping Wrapped { get; set; } = new TypeMapping();
 

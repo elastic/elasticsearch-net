@@ -1,20 +1,20 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class WarmerStats
 	{
-		[JsonProperty("current")]
+		[DataMember(Name ="current")]
 		public long Current { get; set; }
 
-		[JsonProperty("total")]
+		[DataMember(Name ="total")]
 		public long Total { get; set; }
 
-		[JsonProperty("total_time")]
+		[DataMember(Name ="total_time")]
 		public string TotalTime { get; set; }
 
-		[JsonProperty("total_time_in_millis")]
+		[DataMember(Name ="total_time_in_millis")]
 		public long TotalTimeInMilliseconds { get; set; }
 	}
 }

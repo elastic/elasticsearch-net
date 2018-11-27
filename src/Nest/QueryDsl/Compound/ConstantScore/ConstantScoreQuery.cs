@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ConstantScoreQueryDescriptor<object>>))]
+	[DataContract]
+	[ReadAs(typeof(ConstantScoreQueryDescriptor<object>))]
 	public interface IConstantScoreQuery : IQuery
 	{
-		[JsonProperty("filter")]
+		[DataMember(Name ="filter")]
 		QueryContainer Filter { get; set; }
 	}
 

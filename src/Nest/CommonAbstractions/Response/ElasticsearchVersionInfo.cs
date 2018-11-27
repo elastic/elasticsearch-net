@@ -1,13 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class ElasticsearchVersionInfo
 	{
-		[JsonProperty("snapshot_build")]
+		[DataMember(Name ="snapshot_build")]
 		public bool IsSnapShotBuild { get; set; }
 
-		[JsonProperty("lucene_version")]
+		[DataMember(Name ="lucene_version")]
 		public string LuceneVersion { get; set; }
 
 		public string Number { get; set; }

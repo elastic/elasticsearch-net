@@ -1,16 +1,16 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IInvalidateUserAccessTokenResponse : IResponse
 	{
-		[JsonProperty("invalidated_tokens")]
+		[DataMember(Name = "invalidated_tokens")]
 		long InvalidatedTokens { get; }
 
-		[JsonProperty("previously_invalidated_tokens")]
+		[DataMember(Name = "previously_invalidated_tokens")]
 		long PreviouslyInvalidatedTokens { get; }
 
-		[JsonProperty("error_count")]
+		[DataMember(Name = "error_count")]
 		long ErrorCount { get; }
 	}
 

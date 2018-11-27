@@ -1,5 +1,5 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
@@ -10,7 +10,7 @@ namespace Nest
 		/// <summary>
 		/// Specifies that no data prior to this date is expected.
 		/// </summary>
-		[JsonProperty("advance_time")]
+		[DataMember(Name ="advance_time")]
 		// Forced to prevent override, ML API always expects ISO8601 format
 		[JsonConverter(typeof(IsoDateTimeConverter))]
 		DateTimeOffset? AdvanceTime { get; set; }
@@ -18,14 +18,14 @@ namespace Nest
 		/// <summary>
 		/// Calculates the interim results for the most recent bucket or all buckets within the latency period.
 		/// </summary>
-		[JsonProperty("calc_interim")]
+		[DataMember(Name ="calc_interim")]
 		bool? CalculateInterim { get; set; }
 
 		/// <summary>
 		///  When used in conjunction with <see cref="CalculateInterim" />, specifies the range of buckets on
 		/// which to calculate interim results.
 		/// </summary>
-		[JsonProperty("end")]
+		[DataMember(Name ="end")]
 		// Forced to prevent override, ML API always expects ISO8601 format
 		[JsonConverter(typeof(IsoDateTimeConverter))]
 		DateTimeOffset? End { get; set; }
@@ -34,7 +34,7 @@ namespace Nest
 		/// When used in conjunction with <see cref="CalculateInterim" />, specifies the range of buckets
 		/// on which to calculate interim results.
 		/// </summary>
-		[JsonProperty("start")]
+		[DataMember(Name ="start")]
 		// Forced to prevent override, ML API always expects ISO8601 format
 		[JsonConverter(typeof(IsoDateTimeConverter))]
 		DateTimeOffset? Start { get; set; }

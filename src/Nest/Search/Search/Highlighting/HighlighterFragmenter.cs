@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
@@ -8,7 +8,7 @@ namespace Nest
 	/// Fragmenter can control how text should be broken up in highlight snippets. However, this option is
 	/// applicable only for the Plain Highlighter
 	/// </summary>
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum HighlighterFragmenter
 	{
 		/// <summary>

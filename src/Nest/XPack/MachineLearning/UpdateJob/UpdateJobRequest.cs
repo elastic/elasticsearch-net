@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -14,7 +14,7 @@ namespace Nest
 		/// Optionally specifies runtime limits for the job.
 		/// Requires a restart.
 		/// </summary>
-		[JsonProperty("analysis_limits")]
+		[DataMember(Name ="analysis_limits")]
 		IAnalysisMemoryLimit AnalysisLimits { get; set; }
 
 		/// <summary>
@@ -22,40 +22,40 @@ namespace Nest
 		/// which avoids all jobs persisting at exactly the same time. The smallest allowed value is 1 hour.
 		/// Requires a restart.
 		/// </summary>
-		[JsonProperty("background_persist_interval")]
+		[DataMember(Name ="background_persist_interval")]
 		Time BackgroundPersistInterval { get; set; }
 
 		/// <summary>
 		/// Contains custom meta data about the job.
 		/// </summary>
-		[JsonProperty("custom_settings")]
+		[DataMember(Name ="custom_settings")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
 		Dictionary<string, object> CustomSettings { get; set; }
 
 		/// <summary>
 		/// An optional description of the job
 		/// </summary>
-		[JsonProperty("description")]
+		[DataMember(Name ="description")]
 		string Description { get; set; }
 
 		/// <summary>
 		/// This advanced configuration option stores model information along with the results.
 		/// This adds overhead to the performance of the system and is not feasible for jobs with many entities
 		/// </summary>
-		[JsonProperty("model_plot_config")]
+		[DataMember(Name ="model_plot_config")]
 		IModelPlotConfigEnabled ModelPlotConfig { get; set; }
 
 		/// <summary>
 		/// The time in days that model snapshots are retained for the job.
 		/// Older snapshots are deleted. The default value is 1 day.
 		/// </summary>
-		[JsonProperty("model_snapshot_retention_days")]
+		[DataMember(Name ="model_snapshot_retention_days")]
 		long? ModelSnapshotRetentionDays { get; set; }
 
 		/// <summary>
 		/// The period over which adjustments to the score are applied, as new data is seen.
 		/// </summary>
-		[JsonProperty("renormalization_window_days")]
+		[DataMember(Name ="renormalization_window_days")]
 		long? RenormalizationWindowDays { get; set; }
 
 		/// <summary>
@@ -63,7 +63,7 @@ namespace Nest
 		/// results older than this period are deleted from Elasticsearch. The default value is null,
 		/// which means results are retained.
 		/// </summary>
-		[JsonProperty("results_retention_days")]
+		[DataMember(Name ="results_retention_days")]
 		long? ResultsRetentionDays { get; set; }
 	}
 

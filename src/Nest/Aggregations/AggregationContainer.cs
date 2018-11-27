@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -11,7 +12,7 @@ namespace Nest
 	/// In NEST Aggregation always refers to an aggregation
 	/// sent to Elasticsearch and an Aggregate describes an aggregation returned from Elasticsearch.
 	/// </summary>
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, IAggregationContainer>))]
+	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, IAggregationContainer>))]
 	public class AggregationDictionary : IsADictionaryBase<string, IAggregationContainer>
 	{
 		public AggregationDictionary() { }
@@ -64,171 +65,171 @@ namespace Nest
 	}
 
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<AggregationContainer>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(AggregationContainer))]
 	public interface IAggregationContainer
 	{
-		[JsonProperty("adjacency_matrix")]
+		[DataMember(Name ="adjacency_matrix")]
 		IAdjacencyMatrixAggregation AdjacencyMatrix { get; set; }
 
-		[JsonProperty("aggs")]
+		[DataMember(Name ="aggs")]
 		AggregationDictionary Aggregations { get; set; }
 
-		[JsonProperty("avg")]
+		[DataMember(Name ="avg")]
 		IAverageAggregation Average { get; set; }
 
-		[JsonProperty("avg_bucket")]
+		[DataMember(Name ="avg_bucket")]
 		IAverageBucketAggregation AverageBucket { get; set; }
 
-		[JsonProperty("bucket_script")]
+		[DataMember(Name ="bucket_script")]
 		IBucketScriptAggregation BucketScript { get; set; }
 
-		[JsonProperty("bucket_selector")]
+		[DataMember(Name ="bucket_selector")]
 		IBucketSelectorAggregation BucketSelector { get; set; }
 
-		[JsonProperty("bucket_sort")]
+		[DataMember(Name ="bucket_sort")]
 		IBucketSortAggregation BucketSort { get; set; }
 
-		[JsonProperty("cardinality")]
+		[DataMember(Name ="cardinality")]
 		ICardinalityAggregation Cardinality { get; set; }
 
-		[JsonProperty("children")]
+		[DataMember(Name ="children")]
 		IChildrenAggregation Children { get; set; }
 
-		[JsonProperty("composite")]
+		[DataMember(Name ="composite")]
 		ICompositeAggregation Composite { get; set; }
 
-		[JsonProperty("cumulative_sum")]
+		[DataMember(Name ="cumulative_sum")]
 		ICumulativeSumAggregation CumulativeSum { get; set; }
 
-		[JsonProperty("date_histogram")]
+		[DataMember(Name ="date_histogram")]
 		IDateHistogramAggregation DateHistogram { get; set; }
 
-		[JsonProperty("auto_date_histogram")]
+		[DataMember(Name ="auto_date_histogram")]
 		IAutoDateHistogramAggregation AutoDateHistogram { get; set; }
 
-		[JsonProperty("date_range")]
+		[DataMember(Name = "date_range")]
 		IDateRangeAggregation DateRange { get; set; }
 
-		[JsonProperty("derivative")]
+		[DataMember(Name ="derivative")]
 		IDerivativeAggregation Derivative { get; set; }
 
-		[JsonProperty("extended_stats")]
+		[DataMember(Name ="extended_stats")]
 		IExtendedStatsAggregation ExtendedStats { get; set; }
 
-		[JsonProperty("extended_stats_bucket")]
+		[DataMember(Name ="extended_stats_bucket")]
 		IExtendedStatsBucketAggregation ExtendedStatsBucket { get; set; }
 
-		[JsonProperty("filter")]
+		[DataMember(Name ="filter")]
 		IFilterAggregation Filter { get; set; }
 
-		[JsonProperty("filters")]
+		[DataMember(Name ="filters")]
 		IFiltersAggregation Filters { get; set; }
 
-		[JsonProperty("geo_bounds")]
+		[DataMember(Name ="geo_bounds")]
 		IGeoBoundsAggregation GeoBounds { get; set; }
 
-		[JsonProperty("geo_centroid")]
+		[DataMember(Name ="geo_centroid")]
 		IGeoCentroidAggregation GeoCentroid { get; set; }
 
-		[JsonProperty("geo_distance")]
+		[DataMember(Name ="geo_distance")]
 		IGeoDistanceAggregation GeoDistance { get; set; }
 
-		[JsonProperty("geohash_grid")]
+		[DataMember(Name ="geohash_grid")]
 		IGeoHashGridAggregation GeoHash { get; set; }
 
-		[JsonProperty("global")]
+		[DataMember(Name ="global")]
 		IGlobalAggregation Global { get; set; }
 
-		[JsonProperty("histogram")]
+		[DataMember(Name ="histogram")]
 		IHistogramAggregation Histogram { get; set; }
 
-		[JsonProperty("ip_range")]
+		[DataMember(Name ="ip_range")]
 		IIpRangeAggregation IpRange { get; set; }
 
-		[JsonProperty("matrix_stats")]
+		[DataMember(Name ="matrix_stats")]
 		IMatrixStatsAggregation MatrixStats { get; set; }
 
-		[JsonProperty("max")]
+		[DataMember(Name ="max")]
 		IMaxAggregation Max { get; set; }
 
-		[JsonProperty("max_bucket")]
+		[DataMember(Name ="max_bucket")]
 		IMaxBucketAggregation MaxBucket { get; set; }
 
-		[JsonProperty("meta")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
+		[DataMember(Name ="meta")]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, object>))]
 		IDictionary<string, object> Meta { get; set; }
 
-		[JsonProperty("min")]
+		[DataMember(Name ="min")]
 		IMinAggregation Min { get; set; }
 
-		[JsonProperty("min_bucket")]
+		[DataMember(Name ="min_bucket")]
 		IMinBucketAggregation MinBucket { get; set; }
 
-		[JsonProperty("missing")]
+		[DataMember(Name ="missing")]
 		IMissingAggregation Missing { get; set; }
 
-		[JsonProperty("moving_avg")]
+		[DataMember(Name ="moving_avg")]
 		IMovingAverageAggregation MovingAverage { get; set; }
 
-		[JsonProperty("moving_fn")]
+		[DataMember(Name ="moving_fn")]
 		IMovingFunctionAggregation MovingFunction { get; set; }
 
-		[JsonProperty("nested")]
+		[DataMember(Name ="nested")]
 		INestedAggregation Nested { get; set; }
 
-		[JsonProperty("percentile_ranks")]
+		[DataMember(Name ="percentile_ranks")]
 		IPercentileRanksAggregation PercentileRanks { get; set; }
 
-		[JsonProperty("percentiles")]
+		[DataMember(Name ="percentiles")]
 		IPercentilesAggregation Percentiles { get; set; }
 
-		[JsonProperty("percentiles_bucket")]
+		[DataMember(Name ="percentiles_bucket")]
 		IPercentilesBucketAggregation PercentilesBucket { get; set; }
 
-		[JsonProperty("range")]
+		[DataMember(Name ="range")]
 		IRangeAggregation Range { get; set; }
 
-		[JsonProperty("reverse_nested")]
+		[DataMember(Name ="reverse_nested")]
 		IReverseNestedAggregation ReverseNested { get; set; }
 
-		[JsonProperty("sampler")]
+		[DataMember(Name ="sampler")]
 		ISamplerAggregation Sampler { get; set; }
 
-		[JsonProperty("scripted_metric")]
+		[DataMember(Name ="scripted_metric")]
 		IScriptedMetricAggregation ScriptedMetric { get; set; }
 
-		[JsonProperty("serial_diff")]
+		[DataMember(Name ="serial_diff")]
 		ISerialDifferencingAggregation SerialDifferencing { get; set; }
 
-		[JsonProperty("significant_terms")]
+		[DataMember(Name ="significant_terms")]
 		ISignificantTermsAggregation SignificantTerms { get; set; }
 
-		[JsonProperty("significant_text")]
+		[DataMember(Name ="significant_text")]
 		ISignificantTextAggregation SignificantText { get; set; }
 
-		[JsonProperty("stats")]
+		[DataMember(Name ="stats")]
 		IStatsAggregation Stats { get; set; }
 
-		[JsonProperty("stats_bucket")]
+		[DataMember(Name ="stats_bucket")]
 		IStatsBucketAggregation StatsBucket { get; set; }
 
-		[JsonProperty("sum")]
+		[DataMember(Name ="sum")]
 		ISumAggregation Sum { get; set; }
 
-		[JsonProperty("sum_bucket")]
+		[DataMember(Name ="sum_bucket")]
 		ISumBucketAggregation SumBucket { get; set; }
 
-		[JsonProperty("terms")]
+		[DataMember(Name ="terms")]
 		ITermsAggregation Terms { get; set; }
 
-		[JsonProperty("top_hits")]
+		[DataMember(Name ="top_hits")]
 		ITopHitsAggregation TopHits { get; set; }
 
-		[JsonProperty("value_count")]
+		[DataMember(Name ="value_count")]
 		IValueCountAggregation ValueCount { get; set; }
 
-		[JsonProperty("weighted_avg")]
+		[DataMember(Name ="weighted_avg")]
 		IWeightedAverageAggregation WeightedAverage { get; set; }
 
 		void Accept(IAggregationVisitor visitor);

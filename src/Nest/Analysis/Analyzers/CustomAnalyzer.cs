@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -16,14 +16,14 @@ namespace Nest
 		/// <summary>
 		/// The logical / registered name of the tokenizer to use.
 		/// </summary>
-		[JsonProperty("char_filter")]
+		[DataMember(Name ="char_filter")]
 		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<string>))]
 		IEnumerable<string> CharFilter { get; set; }
 
 		/// <summary>
 		/// An optional list of logical / registered name of token filters.
 		/// </summary>
-		[JsonProperty("filter")]
+		[DataMember(Name ="filter")]
 		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<string>))]
 		IEnumerable<string> Filter { get; set; }
 
@@ -31,13 +31,13 @@ namespace Nest
 		/// An optional number of positions to increment between each field value of a
 		/// field using this analyzer.
 		/// </summary>
-		[JsonProperty("position_offset_gap")]
+		[DataMember(Name ="position_offset_gap")]
 		int? PositionOffsetGap { get; set; }
 
 		/// <summary>
 		/// An optional list of logical / registered name of char filters.
 		/// </summary>
-		[JsonProperty("tokenizer")]
+		[DataMember(Name ="tokenizer")]
 		string Tokenizer { get; set; }
 	}
 

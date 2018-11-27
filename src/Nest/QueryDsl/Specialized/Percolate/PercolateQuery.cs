@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary>
 	/// The percolate query can be used to match queries stored in an index
 	/// </summary>
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<PercolateQuery>))]
+	[DataContract]
+	[ReadAs(typeof(PercolateQuery))]
 	public interface IPercolateQuery : IQuery
 	{
 		/// <summary>
 		/// The source of the document to percolate.
 		/// </summary>
-		[JsonProperty("document")]
+		[DataMember(Name ="document")]
 		[JsonConverter(typeof(SourceConverter))]
 		object Document { get; set; }
 
@@ -24,49 +24,49 @@ namespace Nest
 		/// The source of the documents to percolate. Like <see cref="Document" /> but allows
 		/// multiple documents to be percolated.
 		/// </summary>
-		[JsonProperty("documents")]
+		[DataMember(Name ="documents")]
 		[JsonConverter(typeof(SourceConverter))]
 		IEnumerable<object> Documents { get; set; }
 
 		/// <summary>
 		/// The name of the field containing the percolated query on an existing document. This is a required parameter.
 		/// </summary>
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
 		/// <summary>
 		/// The id of the document to fetch for percolation.
 		/// Can be specified to percolate an existing document instead of providing <see cref="Document" />
 		/// </summary>
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		Id Id { get; set; }
 
 		/// <summary>
 		/// The index the document resides in for percolation.
 		/// Can be specified to percolate an existing document instead of providing <see cref="Document" />
 		/// </summary>
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		IndexName Index { get; set; }
 
 		/// <summary>
 		/// Preference to be used to fetch the document to percolate.
 		/// Can be specified to percolate an existing document instead of providing <see cref="Document" />
 		/// </summary>
-		[JsonProperty("preference")]
+		[DataMember(Name ="preference")]
 		string Preference { get; set; }
 
 		/// <summary>
 		/// Routing to be used to fetch the document to percolate.
 		/// Can be specified to percolate an existing document instead of providing <see cref="Document" />
 		/// </summary>
-		[JsonProperty("routing")]
+		[DataMember(Name ="routing")]
 		Routing Routing { get; set; }
 
 		/// <summary>
 		/// The expected version of the document to be fetched for percolation.
 		/// Can be specified to percolate an existing document instead of providing <see cref="Document" />
 		/// </summary>
-		[JsonProperty("version")]
+		[DataMember(Name ="version")]
 		long? Version { get; set; }
 	}
 

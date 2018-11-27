@@ -1,6 +1,6 @@
 ﻿using System;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
@@ -15,8 +15,8 @@ namespace Nest
 		/// Determine what to do in the event of version conflicts.
 		/// Defaults to <see cref="Elasticsearch.Net.Conflicts.Abort" />
 		/// </summary>
-		[JsonProperty("conflicts")]
-		[JsonConverter(typeof(StringEnumConverter))]
+		[DataMember(Name ="conflicts")]
+
 		Conflicts? Conflicts { get; set; }
 
 		/// <summary>
@@ -26,25 +26,25 @@ namespace Nest
 		/// Reindex does not attempt to set up the destination index. It does not copy the settings
 		/// of the source index. You should set up the destination index beforehand
 		/// </remarks>
-		[JsonProperty("dest")]
+		[DataMember(Name ="dest")]
 		IReindexDestination Destination { get; set; }
 
 		/// <summary>
 		/// A script that can modify documents from source, including metadata, before reindexing
 		/// </summary>
-		[JsonProperty("script")]
+		[DataMember(Name ="script")]
 		IScript Script { get; set; }
 
 		/// <summary>
 		/// Limit the number of processed documents
 		/// </summary>
-		[JsonProperty("size")]
+		[DataMember(Name ="size")]
 		long? Size { get; set; }
 
 		/// <summary>
 		/// The source for the reindex operation
 		/// </summary>
-		[JsonProperty("source")]
+		[DataMember(Name ="source")]
 		IReindexSource Source { get; set; }
 	}
 

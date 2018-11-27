@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -9,13 +9,13 @@ namespace Nest
 		/// required.
 		/// null if no acknowledge resubmission is needed
 		/// </summary>
-		[JsonProperty("acknowledge")]
+		[DataMember(Name ="acknowledge")]
 		LicenseAcknowledgement Acknowledge { get; }
 
-		[JsonProperty("acknowledged")]
+		[DataMember(Name ="acknowledged")]
 		bool Acknowledged { get; }
 
-		[JsonProperty("license_status")]
+		[DataMember(Name ="license_status")]
 		LicenseStatus LicenseStatus { get; }
 	}
 

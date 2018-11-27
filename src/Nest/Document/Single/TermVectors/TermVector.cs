@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class TermVector
 	{
-		[JsonProperty("field_statistics")]
+		[DataMember(Name ="field_statistics")]
 		public FieldStatistics FieldStatistics { get; internal set; }
 
-		[JsonProperty("terms")]
+		[DataMember(Name ="terms")]
 		public IReadOnlyDictionary<string, TermVectorTerm> Terms { get; internal set; } =
 			EmptyReadOnly<string, TermVectorTerm>.Dictionary;
 	}

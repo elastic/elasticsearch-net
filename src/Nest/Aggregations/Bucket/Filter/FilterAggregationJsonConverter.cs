@@ -1,38 +1,36 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	internal class FilterAggregationJsonConverter : JsonConverter
+	internal class FilterAggregationFormatter : IJsonFormatter<IFilterAggregation>
 	{
-		public override bool CanRead => true;
-
-		public override bool CanWrite => true;
-
-		public override bool CanConvert(Type objectType) => true;
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public void Serialize(ref JsonWriter writer, IFilterAggregation value, IJsonFormatterResolver formatterResolver)
 		{
-			var f = value as IFilterAggregation;
-			if (f == null || f.Filter == null || !f.Filter.IsWritable)
+			if (value?.Filter == null || !value.Filter.IsWritable)
 			{
-				writer.WriteStartObject();
+				writer.WriteBeginObject();
 				writer.WriteEndObject();
 				return;
 			}
-			;
 
-			serializer.Serialize(writer, f.Filter);
+			var formatter = formatterResolver.GetFormatter<QueryContainer>();
+			formatter.Serialize(ref writer, value.Filter, formatterResolver);
 		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public IFilterAggregation Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (reader.TokenType != JsonToken.StartObject) return null;
+			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
+				return null;
 
-			var container = new QueryContainer();
-			serializer.Populate(reader, container);
-			var agg = new FilterAggregation();
-			agg.Filter = container;
+			var formatter = formatterResolver.GetFormatter<QueryContainer>();
+			var container = formatter.Deserialize(ref reader, formatterResolver);
+			var agg = new FilterAggregation
+			{
+				Filter = container
+			};
+
 			return agg;
 		}
 	}

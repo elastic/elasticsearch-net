@@ -1,12 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<SerialDifferencingAggregation>))]
+	[DataContract]
+	[ReadAs(typeof(SerialDifferencingAggregation))]
 	public interface ISerialDifferencingAggregation : IPipelineAggregation
 	{
-		[JsonProperty("lag")]
+		[DataMember(Name ="lag")]
 		int? Lag { get; set; }
 	}
 

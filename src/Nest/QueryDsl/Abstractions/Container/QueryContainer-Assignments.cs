@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public partial class QueryContainer : IQueryContainer, IDescriptor
 	{
 		private IBoolQuery _bool;

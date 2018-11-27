@@ -1,14 +1,14 @@
 ﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<DataAttachment>))]
+	[DataContract]
+	[ReadAs(typeof(DataAttachment))]
 	public interface IDataAttachment : IEmailAttachment
 	{
-		[JsonProperty("format")]
+		[DataMember(Name ="format")]
 		DataAttachmentFormat? Format { get; set; }
 	}
 
@@ -24,7 +24,7 @@ namespace Nest
 		public DataAttachmentDescriptor Format(DataAttachmentFormat? format) => Assign(a => a.Format = format);
 	}
 
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum DataAttachmentFormat
 	{
 		[EnumMember(Value = "json")]

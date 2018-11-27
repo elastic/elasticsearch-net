@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface ICategorySuggestContext : ISuggestContext { }
 
-	[JsonObject]
+	[DataContract]
 	public class CategorySuggestContext : SuggestContextBase, ICategorySuggestContext
 	{
 		public override string Type => "category";

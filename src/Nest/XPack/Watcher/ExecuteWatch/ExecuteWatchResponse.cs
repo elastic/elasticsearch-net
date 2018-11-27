@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IExecuteWatchResponse : IResponse
 	{
-		[JsonProperty("_id")]
+		[DataMember(Name ="_id")]
 		string Id { get; set; }
 
-		[JsonProperty("watch_record")]
+		[DataMember(Name ="watch_record")]
 		WatchRecord WatchRecord { get; set; }
 	}
 
@@ -23,7 +23,7 @@ namespace Nest
 		public WatchRecord WatchRecord { get; set; }
 	}
 
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum ActionExecutionState
 	{
 		[EnumMember(Value = "awaits_execution")]
@@ -51,125 +51,125 @@ namespace Nest
 		NotExecutedAlreadyQueued
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class WatchRecord
 	{
-		[JsonProperty("condition")]
+		[DataMember(Name ="condition")]
 		public ConditionContainer Condition { get; set; }
 
-		[JsonProperty("input")]
+		[DataMember(Name ="input")]
 		public InputContainer Input { get; set; }
 
-		[JsonProperty("messages")]
+		[DataMember(Name ="messages")]
 		public IReadOnlyCollection<string> Messages { get; set; }
 
-		[JsonProperty("metadata")]
+		[DataMember(Name ="metadata")]
 		public IReadOnlyDictionary<string, object> Metadata { get; set; }
 
-		[JsonProperty("result")]
+		[DataMember(Name ="result")]
 		public ExecutionResult Result { get; set; }
 
-		[JsonProperty("state")]
+		[DataMember(Name ="state")]
 		public ActionExecutionState? State { get; set; }
 
-		[JsonProperty("trigger_event")]
+		[DataMember(Name ="trigger_event")]
 		public TriggerEventResult TriggerEvent { get; set; }
 
-		[JsonProperty("user")]
+		[DataMember(Name ="user")]
 		public string User { get; set; }
 
-		[JsonProperty("watch_id")]
+		[DataMember(Name ="watch_id")]
 		public string WatchId { get; set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class TriggerEventResult
 	{
-		[JsonProperty("manual")]
+		[DataMember(Name ="manual")]
 		public ITriggerEventContainer Manual { get; set; }
 
-		[JsonProperty("triggered_time")]
+		[DataMember(Name ="triggered_time")]
 		public DateTimeOffset? TriggeredTime { get; set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		public string Type { get; set; }
 	}
 
 	public class ExecutionResult
 	{
-		[JsonProperty("actions")]
+		[DataMember(Name ="actions")]
 		public IReadOnlyCollection<ExecutionResultAction> Actions { get; set; }
 
-		[JsonProperty("condition")]
+		[DataMember(Name ="condition")]
 		public ExecutionResultCondition Condition { get; set; }
 
-		[JsonProperty("execution_duration")]
+		[DataMember(Name ="execution_duration")]
 		public int? ExecutionDuration { get; set; }
 
-		[JsonProperty("execution_time")]
+		[DataMember(Name ="execution_time")]
 		public DateTimeOffset? ExecutionTime { get; set; }
 
-		[JsonProperty("input")]
+		[DataMember(Name ="input")]
 		public ExecutionResultInput Input { get; set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class ExecutionResultInput
 	{
-		[JsonProperty("payload")]
+		[DataMember(Name ="payload")]
 		public IReadOnlyDictionary<string, object> Payload { get; set; }
 
-		[JsonProperty("status")]
+		[DataMember(Name ="status")]
 		public Status Status { get; set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		public InputType Type { get; set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class ExecutionResultCondition
 	{
-		[JsonProperty("met")]
+		[DataMember(Name ="met")]
 		public bool? Met { get; set; }
 
-		[JsonProperty("status")]
+		[DataMember(Name ="status")]
 		public Status Status { get; set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		public ConditionType Type { get; set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class ExecutionResultAction
 	{
-		[JsonProperty("email")]
+		[DataMember(Name ="email")]
 		public EmailActionResult Email { get; set; }
 
-		[JsonProperty("id")]
+		[DataMember(Name = "id")]
 		public string Id { get; set; }
 
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		public IndexActionResult Index { get; set; }
 
-		[JsonProperty("logging")]
+		[DataMember(Name ="logging")]
 		public LoggingActionResult Logging { get; set; }
 
-		[JsonProperty("pagerduty")]
+		[DataMember(Name ="pagerduty")]
 		public PagerDutyActionResult PagerDuty { get; set; }
 
-		[JsonProperty("reason")]
+		[DataMember(Name ="reason")]
 		public string Reason { get; set; }
 
-		[JsonProperty("slack")]
+		[DataMember(Name ="slack")]
 		public SlackActionResult Slack { get; set; }
 
-		[JsonProperty("status")]
+		[DataMember(Name ="status")]
 		public Status Status { get; set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		public ActionType Type { get; set; }
 
-		[JsonProperty("webhook")]
+		[DataMember(Name ="webhook")]
 		public WebhookActionResult Webhook { get; set; }
 	}
 }

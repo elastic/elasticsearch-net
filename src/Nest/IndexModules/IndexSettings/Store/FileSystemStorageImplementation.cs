@@ -1,5 +1,5 @@
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
@@ -7,7 +7,7 @@ namespace Nest
 	/// <summary>
 	/// The store module allows you to control how index data is stored and accessed on disk.
 	/// </summary>
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum FileSystemStorageImplementation
 	{
 		/// <summary>

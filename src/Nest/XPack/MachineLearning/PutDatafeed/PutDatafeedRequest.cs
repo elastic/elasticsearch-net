@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -12,13 +12,13 @@ namespace Nest
 		/// <summary>
 		/// If set, the datafeed performs aggregation searches.
 		/// </summary>
-		[JsonProperty("aggregations")]
+		[DataMember(Name ="aggregations")]
 		AggregationDictionary Aggregations { get; set; }
 
 		/// <summary>
 		/// Specifies how data searches are split into time chunks.
 		/// </summary>
-		[JsonProperty("chunking_config")]
+		[DataMember(Name ="chunking_config")]
 		IChunkingConfig ChunkingConfig { get; set; }
 
 		/// <summary>
@@ -26,26 +26,26 @@ namespace Nest
 		/// The default value is either the bucket span for short bucket spans, or, for longer bucket spans,
 		/// a sensible fraction of the bucket span.
 		/// </summary>
-		[JsonProperty("frequency")]
+		[DataMember(Name ="frequency")]
 		Time Frequency { get; set; }
 
 		/// <summary>
 		///  A list of index names to search within, wildcards are supported.
 		/// </summary>
-		[JsonProperty("indices")]
+		[DataMember(Name ="indices")]
 		[JsonConverter(typeof(IndicesJsonConverter))]
 		Indices Indices { get; set; }
 
 		/// <summary>
 		/// A numerical character string that uniquely identifies the job.
 		/// </summary>
-		[JsonProperty("job_id")]
+		[DataMember(Name ="job_id")]
 		Id JobId { get; set; }
 
 		/// <summary>
 		/// Describe the query to perform using a query descriptor lambda.
 		/// </summary>
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		QueryContainer Query { get; set; }
 
 		/// <summary>
@@ -53,20 +53,20 @@ namespace Nest
 		/// For example, if data from 10:04 a.m. might not be searchable until 10:06 a.m.,
 		/// set this property to 120 seconds. The default value is 60s.
 		/// </summary>
-		[JsonProperty("query_delay")]
+		[DataMember(Name ="query_delay")]
 		Time QueryDelay { get; set; }
 
 		/// <summary>
 		/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.
 		/// The detector configuration in a job can contain functions that use these script fields.
 		/// </summary>
-		[JsonProperty("script_fields")]
+		[DataMember(Name ="script_fields")]
 		IScriptFields ScriptFields { get; set; }
 
 		/// <summary>
 		/// The size parameter that is used in Elasticsearch searches.
 		/// </summary>
-		[JsonProperty("scroll_size")]
+		[DataMember(Name ="scroll_size")]
 		int? ScrollSize { get; set; }
 	}
 

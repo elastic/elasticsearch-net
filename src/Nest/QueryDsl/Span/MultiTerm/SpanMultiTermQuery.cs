@@ -1,13 +1,13 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SpanMultiTermQuery>))]
+	[DataContract]
+	[ReadAs(typeof(SpanMultiTermQuery))]
 	public interface ISpanMultiTermQuery : ISpanSubQuery
 	{
-		[JsonProperty("match")]
+		[DataMember(Name ="match")]
 		QueryContainer Match { get; set; }
 	}
 

@@ -1,6 +1,6 @@
 ﻿using System;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -14,7 +14,7 @@ namespace Nest
 		/// A document not indexed in Elasticsearch,
 		/// to generate term vectors for
 		/// </summary>
-		[JsonProperty("doc")]
+		[DataMember(Name ="doc")]
 		[JsonConverter(typeof(SourceConverter))]
 		object Document { get; set; }
 
@@ -29,7 +29,7 @@ namespace Nest
 		/// <para />
 		/// will be omitted. Default is <c>true</c>.
 		/// </summary>
-		[JsonProperty("field_statistics")]
+		[DataMember(Name ="field_statistics")]
 		bool? FieldStatistics { get; set; }
 
 		/// <summary>
@@ -37,40 +37,40 @@ namespace Nest
 		/// This can be useful in order find out a good characteristic
 		/// vector of a document.
 		/// </summary>
-		[JsonProperty("filter")]
+		[DataMember(Name ="filter")]
 		ITermVectorFilter Filter { get; set; }
 
 		/// <summary>
 		/// The id of the document
 		/// </summary>
-		[JsonProperty("_id")]
+		[DataMember(Name ="_id")]
 		Id Id { get; set; }
 
 		/// <summary>
 		/// The index in which the document resides
 		/// </summary>
-		[JsonProperty("_index")]
+		[DataMember(Name ="_index")]
 		IndexName Index { get; set; }
 
 		/// <summary>
 		/// Whether to include the start and end offsets.
 		/// Default is <c>true</c>.
 		/// </summary>
-		[JsonProperty("offsets")]
+		[DataMember(Name ="offsets")]
 		bool? Offsets { get; set; }
 
 		/// <summary>
 		/// Whether to include the term payloads as
 		/// base64 encoded bytes. Default is <c>true</c>
 		/// </summary>
-		[JsonProperty("payloads")]
+		[DataMember(Name ="payloads")]
 		bool? Payloads { get; set; }
 
 		/// <summary>
 		/// Whether to include the term positions.
 		/// Default is <c>true</c>
 		/// </summary>
-		[JsonProperty("positions")]
+		[DataMember(Name ="positions")]
 		bool? Positions { get; set; }
 
 		/// <summary>
@@ -78,14 +78,14 @@ namespace Nest
 		/// a shard to get the statistics from is randomly selected.
 		/// Use <see cref="Routing" /> only to hit a particular shard.
 		/// </summary>
-		[JsonProperty("routing")]
+		[DataMember(Name ="routing")]
 		Routing Routing { get; set; }
 
 		/// <summary>
 		/// The document field to generate term
 		/// vectors for
 		/// </summary>
-		[JsonProperty("fields")]
+		[DataMember(Name ="fields")]
 		// TODO: Rename to Fields in 7.x
 		Fields StoredFields { get; set; }
 
@@ -99,19 +99,19 @@ namespace Nest
 		/// will be returned. Default is <c>false</c> since
 		/// term statistics can have a large performance impact.
 		/// </summary>
-		[JsonProperty("term_statistics")]
+		[DataMember(Name ="term_statistics")]
 		bool? TermStatistics { get; set; }
 
 		/// <summary>
 		/// The version number
 		/// </summary>
-		[JsonProperty("version")]
+		[DataMember(Name ="version")]
 		long? Version { get; set; }
 
 		/// <summary>
 		/// The type of version
 		/// </summary>
-		[JsonProperty("version_type")]
+		[DataMember(Name ="version_type")]
 		VersionType? VersionType { get; set; }
 	}
 

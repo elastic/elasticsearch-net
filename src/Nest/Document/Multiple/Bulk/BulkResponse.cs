@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -13,23 +13,23 @@ namespace Nest
 		long Took { get; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class BulkResponse : ResponseBase, IBulkResponse
 	{
-		[JsonProperty("errors")]
+		[DataMember(Name ="errors")]
 		public bool Errors { get; internal set; }
 
 		public override bool IsValid => base.IsValid && !Errors && !ItemsWithErrors.HasAny();
 
-		[JsonProperty("items")]
+		[DataMember(Name ="items")]
 		public IReadOnlyCollection<IBulkResponseItem> Items { get; internal set; } = EmptyReadOnly<IBulkResponseItem>.Collection;
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		public IEnumerable<IBulkResponseItem> ItemsWithErrors => !Items.HasAny()
 			? Enumerable.Empty<IBulkResponseItem>()
 			: Items.Where(i => !i.IsValid);
 
-		[JsonProperty("took")]
+		[DataMember(Name ="took")]
 		public long Took { get; internal set; }
 
 		protected override void DebugIsValid(StringBuilder sb)

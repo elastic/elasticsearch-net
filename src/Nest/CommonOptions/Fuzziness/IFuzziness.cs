@@ -1,9 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(FuzzinessJsonConverter))]
 	[JsonFormatter(typeof(FuzzinessFormatter))]
 	public interface IFuzziness
 	{

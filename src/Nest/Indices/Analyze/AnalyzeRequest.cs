@@ -2,48 +2,48 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	[MapsApi("indices.analyze.json")]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<AnalyzeRequest>))]
+	[ReadAs(typeof(AnalyzeRequest))]
 	public partial interface IAnalyzeRequest
 	{
 		///<summary>The name of the analyzer to use</summary>
-		[JsonProperty("analyzer")]
+		[DataMember(Name ="analyzer")]
 		string Analyzer { get; set; }
 
 		///<summary>Filter only certain token attributes to be returned</summary>
-		[JsonProperty("attributes")]
+		[DataMember(Name ="attributes")]
 		IEnumerable<string> Attributes { get; set; }
 
 		///<summary>A collection of character filters to use for the analysis</summary>
-		[JsonProperty("char_filter")]
+		[DataMember(Name ="char_filter")]
 		AnalyzeCharFilters CharFilter { get; set; }
 
 		///<summary>Return more details, and output the analyzer chain per step in the process</summary>
-		[JsonProperty("explain")]
+		[DataMember(Name ="explain")]
 		bool? Explain { get; set; }
 
 		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
 		///<summary>A collection of filters to use for the analysis</summary>
-		[JsonProperty("filter")]
+		[DataMember(Name ="filter")]
 		AnalyzeTokenFilters Filter { get; set; }
 
 		///<summary>The name of the normalizer to use</summary>
-		[JsonProperty("normalizer")]
+		[DataMember(Name ="normalizer")]
 		string Normalizer { get; set; }
 
 		///<summary>The text on which the analysis should be performed (when request body is not used)</summary>
-		[JsonProperty("text")]
+		[DataMember(Name ="text")]
 		IEnumerable<string> Text { get; set; }
 
 		///<summary>The name of the tokenizer to use for the analysis</summary>
-		[JsonProperty("tokenizer")]
+		[DataMember(Name ="tokenizer")]
 		Union<string, ITokenizer> Tokenizer { get; set; }
 	}
 

@@ -1,15 +1,15 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	[JsonConverter(typeof(SourceFilterJsonConverter))]
 	public interface ISourceFilter
 	{
-		[JsonProperty("excludes")]
+		[DataMember(Name ="excludes")]
 		Fields Excludes { get; set; }
 
-		[JsonProperty("includes")]
+		[DataMember(Name ="includes")]
 		Fields Includes { get; set; }
 	}
 

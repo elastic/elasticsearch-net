@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IPutRoleResponse : IResponse
 	{
-		[JsonProperty("role")]
+		[DataMember(Name ="role")]
 		PutRoleStatus Role { get; }
 	}
 
@@ -15,7 +15,7 @@ namespace Nest
 
 	public class PutRoleStatus
 	{
-		[JsonProperty("created")]
+		[DataMember(Name ="created")]
 		public bool Created { get; internal set; }
 	}
 }

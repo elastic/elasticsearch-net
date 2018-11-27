@@ -1,34 +1,34 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class CatTasksRecord : ICatRecord
 	{
-		[JsonProperty("action")]
+		[DataMember(Name ="action")]
 		public string Action { get; internal set; }
 
-		[JsonProperty("ip")]
+		[DataMember(Name ="ip")]
 		public string Ip { get; internal set; }
 
-		[JsonProperty("node")]
+		[DataMember(Name ="node")]
 		public string Node { get; internal set; }
 
-		[JsonProperty("parent_task_id")]
+		[DataMember(Name ="parent_task_id")]
 		public string ParentTaskId { get; internal set; }
 
-		[JsonProperty("running_time")]
+		[DataMember(Name ="running_time")]
 		public string RunningTime { get; internal set; }
 
-		[JsonProperty("start_time")]
+		[DataMember(Name ="start_time")]
 		public string StartTime { get; internal set; }
 
-		[JsonProperty("task_id")]
+		[DataMember(Name ="task_id")]
 		public string TaskId { get; internal set; }
 
-		[JsonProperty("timestamp")]
+		[DataMember(Name ="timestamp")]
 		public string Timestamp { get; internal set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		public string Type { get; internal set; }
 	}
 }

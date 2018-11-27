@@ -1,16 +1,16 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ScheduleTriggerEvent>))]
+	[DataContract]
+	[ReadAs(typeof(ScheduleTriggerEvent))]
 	public interface IScheduleTriggerEvent : ITriggerEvent
 	{
-		[JsonProperty("scheduled_time")]
+		[DataMember(Name ="scheduled_time")]
 		Union<DateTimeOffset, string> ScheduledTime { get; set; }
 
-		[JsonProperty("triggered_time")]
+		[DataMember(Name ="triggered_time")]
 		Union<DateTimeOffset, string> TriggeredTime { get; set; }
 	}
 

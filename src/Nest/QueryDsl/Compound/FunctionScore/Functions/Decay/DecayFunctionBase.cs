@@ -1,31 +1,31 @@
 using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IDecayFunction : IScoreFunction
 	{
-		[JsonProperty("decay")]
+		[DataMember(Name ="decay")]
 		double? Decay { get; set; }
 
 		string DecayType { get; }
 
 		Field Field { get; set; }
 
-		[JsonProperty("multi_value_mode")]
+		[DataMember(Name ="multi_value_mode")]
 		MultiValueMode? MultiValueMode { get; set; }
 	}
 
 	public interface IDecayFunction<TOrigin, TScale> : IDecayFunction
 	{
-		[JsonProperty("offset")]
+		[DataMember(Name ="offset")]
 		TScale Offset { get; set; }
 
-		[JsonProperty("origin")]
+		[DataMember(Name ="origin")]
 		TOrigin Origin { get; set; }
 
-		[JsonProperty("scale")]
+		[DataMember(Name ="scale")]
 		TScale Scale { get; set; }
 	}
 

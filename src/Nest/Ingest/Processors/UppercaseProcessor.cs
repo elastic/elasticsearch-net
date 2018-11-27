@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[InterfaceDataContract]
 	[JsonConverter(typeof(ProcessorJsonConverter<UppercaseProcessor>))]
 	public interface IUppercaseProcessor : IProcessor
 	{
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 	}
 
 	public class UppercaseProcessor : ProcessorBase, IUppercaseProcessor
 	{
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		public Field Field { get; set; }
 
 		protected override string Name => "uppercase";

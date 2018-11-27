@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class SecurityNode
 	{
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		public string Name { get; set; }
 	}
 }

@@ -1,6 +1,6 @@
 using System;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
@@ -13,7 +13,7 @@ namespace Nest
 		public const string Order = "index.sort.order";
 	}
 
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum IndexSortMode
 	{
 		[EnumMember(Value = "min")]
@@ -23,7 +23,7 @@ namespace Nest
 		Maximum
 	}
 
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum IndexSortMissing
 	{
 		[EnumMember(Value = "_first")]
@@ -33,7 +33,7 @@ namespace Nest
 		Last
 	}
 
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum IndexSortOrder
 	{
 		[EnumMember(Value = "asc")]

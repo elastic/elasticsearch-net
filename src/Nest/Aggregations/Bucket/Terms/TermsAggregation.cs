@@ -1,48 +1,49 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<TermsAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(TermsAggregation))]
 	public interface ITermsAggregation : IBucketAggregation
 	{
-		[JsonProperty("collect_mode")]
+		[DataMember(Name ="collect_mode")]
 		TermsAggregationCollectMode? CollectMode { get; set; }
 
-		[JsonProperty("exclude")]
+		[DataMember(Name ="exclude")]
 		TermsExclude Exclude { get; set; }
 
-		[JsonProperty("execution_hint")]
+		[DataMember(Name ="execution_hint")]
 		TermsAggregationExecutionHint? ExecutionHint { get; set; }
 
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
-		[JsonProperty("include")]
+		[DataMember(Name ="include")]
 		TermsInclude Include { get; set; }
 
-		[JsonProperty("min_doc_count")]
+		[DataMember(Name ="min_doc_count")]
 		int? MinimumDocumentCount { get; set; }
 
-		[JsonProperty("missing")]
+		[DataMember(Name ="missing")]
 		object Missing { get; set; }
 
-		[JsonProperty("order")]
+		[DataMember(Name ="order")]
 		IList<TermsOrder> Order { get; set; }
 
-		[JsonProperty("script")]
+		[DataMember(Name ="script")]
 		IScript Script { get; set; }
 
-		[JsonProperty("shard_size")]
+		[DataMember(Name ="shard_size")]
 		int? ShardSize { get; set; }
 
-		[JsonProperty("show_term_doc_count_error")]
+		[DataMember(Name ="show_term_doc_count_error")]
 		bool? ShowTermDocCountError { get; set; }
 
-		[JsonProperty("size")]
+		[DataMember(Name ="size")]
 		int? Size { get; set; }
 	}
 

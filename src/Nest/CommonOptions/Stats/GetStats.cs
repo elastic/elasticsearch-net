@@ -1,38 +1,38 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class GetStats
 	{
-		[JsonProperty("current")]
+		[DataMember(Name ="current")]
 		public long Current { get; set; }
 
-		[JsonProperty("exists_time")]
+		[DataMember(Name ="exists_time")]
 		public string ExistsTime { get; set; }
 
-		[JsonProperty("exists_time_in_millis")]
+		[DataMember(Name ="exists_time_in_millis")]
 		public long ExistsTimeInMilliseconds { get; set; }
 
-		[JsonProperty("exists_total")]
+		[DataMember(Name ="exists_total")]
 		public long ExistsTotal { get; set; }
 
-		[JsonProperty("missing_time")]
+		[DataMember(Name ="missing_time")]
 		public string MissingTime { get; set; }
 
-		[JsonProperty("missing_time_in_millis")]
+		[DataMember(Name ="missing_time_in_millis")]
 		public long MissingTimeInMilliseconds { get; set; }
 
-		[JsonProperty("missing_total")]
+		[DataMember(Name ="missing_total")]
 		public long MissingTotal { get; set; }
 
-		[JsonProperty("time")]
+		[DataMember(Name ="time")]
 		public string Time { get; set; }
 
-		[JsonProperty("time_in_millis")]
+		[DataMember(Name ="time_in_millis")]
 		public long TimeInMilliseconds { get; set; }
 
-		[JsonProperty("total")]
+		[DataMember(Name ="total")]
 		public long Total { get; set; }
 	}
 }

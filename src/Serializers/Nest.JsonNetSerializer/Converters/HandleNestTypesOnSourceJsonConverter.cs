@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Linq;
 
 namespace Nest.JsonNetSerializer.Converters

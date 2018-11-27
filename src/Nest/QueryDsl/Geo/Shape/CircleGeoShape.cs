@@ -1,14 +1,14 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface ICircleGeoShape : IGeoShape
 	{
-		[JsonProperty("coordinates")]
+		[DataMember(Name ="coordinates")]
 		GeoCoordinate Coordinates { get; set; }
 
-		[JsonProperty("radius")]
+		[DataMember(Name ="radius")]
 		string Radius { get; set; }
 	}
 

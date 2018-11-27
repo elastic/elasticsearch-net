@@ -1,13 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class SqlColumn
 	{
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		public string Name { get; set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		public string Type { get; set; }
 	}
 }

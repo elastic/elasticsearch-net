@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IDeleteRoleResponse : IResponse
 	{
-		[JsonProperty("found")]
+		[DataMember(Name ="found")]
 		bool Found { get; }
 	}
 

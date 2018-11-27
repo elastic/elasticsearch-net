@@ -1,20 +1,20 @@
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SlackAttachmentField>))]
+	[DataContract]
+	[ReadAs(typeof(SlackAttachmentField))]
 	public interface ISlackAttachmentField
 	{
-		[JsonProperty("short")]
+		[DataMember(Name ="short")]
 		bool? Short { get; set; }
 
-		[JsonProperty("title")]
+		[DataMember(Name ="title")]
 		string Title { get; set; }
 
-		[JsonProperty("value")]
+		[DataMember(Name ="value")]
 		string Value { get; set; }
 	}
 

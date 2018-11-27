@@ -1,9 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<MaxBucketAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(MaxBucketAggregation))]
 	public interface IMaxBucketAggregation : IPipelineAggregation { }
 
 	public class MaxBucketAggregation

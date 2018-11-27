@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	public interface ITDigestMethod : IPercentilesMethod
 	{
-		[JsonProperty("compression")]
+		[DataMember(Name ="compression")]
 		double? Compression { get; set; }
 	}
 

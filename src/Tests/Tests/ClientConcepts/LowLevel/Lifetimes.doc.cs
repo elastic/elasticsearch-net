@@ -7,7 +7,7 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Tests.Framework;
 
 namespace Tests.ClientConcepts.LowLevel

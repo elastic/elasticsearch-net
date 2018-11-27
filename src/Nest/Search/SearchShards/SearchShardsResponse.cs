@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public interface ISearchShardsResponse : IResponse
 	{
-		[JsonProperty("nodes")]
+		[DataMember(Name ="nodes")]
 		IReadOnlyDictionary<string, SearchNode> Nodes { get; }
 
-		[JsonProperty("shards")]
+		[DataMember(Name ="shards")]
 		IReadOnlyCollection<IReadOnlyCollection<SearchShard>> Shards { get; }
 	}
 
@@ -21,35 +21,35 @@ namespace Nest
 			EmptyReadOnly<IReadOnlyCollection<SearchShard>>.Collection;
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public class SearchNode
 	{
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		public string Name { get; internal set; }
 
-		[JsonProperty("transport_address")]
+		[DataMember(Name ="transport_address")]
 		public string TransportAddress { get; internal set; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public class SearchShard
 	{
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		public string Index { get; internal set; }
 
-		[JsonProperty("node")]
+		[DataMember(Name ="node")]
 		public string Node { get; internal set; }
 
-		[JsonProperty("primary")]
+		[DataMember(Name ="primary")]
 		public bool Primary { get; internal set; }
 
-		[JsonProperty("relocating_node")]
+		[DataMember(Name ="relocating_node")]
 		public string RelocatingNode { get; internal set; }
 
-		[JsonProperty("shard")]
+		[DataMember(Name ="shard")]
 		public int Shard { get; internal set; }
 
-		[JsonProperty("state")]
+		[DataMember(Name ="state")]
 		public string State { get; internal set; }
 	}
 }

@@ -1,17 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<DateRangeExpression>))]
+	[ReadAs(typeof(DateRangeExpression))]
 	public interface IDateRangeExpression
 	{
-		[JsonProperty("from")]
+		[DataMember(Name ="from")]
 		DateMath From { get; set; }
 
-		[JsonProperty("key")]
+		[DataMember(Name ="key")]
 		string Key { get; set; }
 
-		[JsonProperty("to")]
+		[DataMember(Name ="to")]
 		DateMath To { get; set; }
 	}
 

@@ -1,10 +1,10 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class AllocationId
 	{
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		public string Id { get; internal set; }
 	}
 }

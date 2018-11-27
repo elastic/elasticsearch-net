@@ -1,56 +1,56 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class MergesStats
 	{
-		[JsonProperty("current")]
+		[DataMember(Name ="current")]
 		public long Current { get; set; }
 
-		[JsonProperty("current_docs")]
+		[DataMember(Name ="current_docs")]
 		public long CurrentDocuments { get; set; }
 
-		[JsonProperty("current_size")]
+		[DataMember(Name ="current_size")]
 		public string CurrentSize { get; set; }
 
-		[JsonProperty("current_size_in_bytes")]
+		[DataMember(Name ="current_size_in_bytes")]
 		public long CurrentSizeInBytes { get; set; }
 
-		[JsonProperty("total")]
+		[DataMember(Name ="total")]
 		public long Total { get; set; }
 
-		[JsonProperty("total_auto_throttle")]
+		[DataMember(Name ="total_auto_throttle")]
 		public string TotalAutoThrottle { get; set; }
 
-		[JsonProperty("total_auto_throttle_in_bytes")]
+		[DataMember(Name ="total_auto_throttle_in_bytes")]
 		public long TotalAutoThrottleInBytes { get; set; }
 
-		[JsonProperty("total_docs")]
+		[DataMember(Name ="total_docs")]
 		public long TotalDocuments { get; set; }
 
-		[JsonProperty("total_size")]
+		[DataMember(Name ="total_size")]
 		public string TotalSize { get; set; }
 
-		[JsonProperty("total_size_in_bytes")]
+		[DataMember(Name ="total_size_in_bytes")]
 		public string TotalSizeInBytes { get; set; }
 
-		[JsonProperty("total_stopped_time")]
+		[DataMember(Name ="total_stopped_time")]
 		public string TotalStoppedTime { get; set; }
 
-		[JsonProperty("total__stopped_time_in_millis")]
+		[DataMember(Name ="total__stopped_time_in_millis")]
 		public long TotalStoppedTimeInMilliseconds { get; set; }
 
-		[JsonProperty("total_throttled_time")]
+		[DataMember(Name ="total_throttled_time")]
 		public string TotalThrottledTime { get; set; }
 
-		[JsonProperty("total_throttled_time_in_millis")]
+		[DataMember(Name ="total_throttled_time_in_millis")]
 		public long TotalThrottledTimeInMilliseconds { get; set; }
 
-		[JsonProperty("total_time")]
+		[DataMember(Name ="total_time")]
 		public string TotalTime { get; set; }
 
-		[JsonProperty("total_time_in_millis")]
+		[DataMember(Name ="total_time_in_millis")]
 		public long TotalTimeInMilliseconds { get; set; }
 	}
 }

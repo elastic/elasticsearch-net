@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IRecoveryStatusResponse : IResponse
 	{
 		IReadOnlyDictionary<IndexName, RecoveryStatus> Indices { get; }
@@ -12,7 +12,7 @@ namespace Nest
 	[JsonConverter(typeof(ResolvableDictionaryResponseJsonConverter<RecoveryStatusResponse, IndexName, RecoveryStatus>))]
 	public class RecoveryStatusResponse : DictionaryResponseBase<IndexName, RecoveryStatus>, IRecoveryStatusResponse
 	{
-		[JsonIgnore]
+		[IgnoreDataMember]
 		public IReadOnlyDictionary<IndexName, RecoveryStatus> Indices => Self.BackingDictionary;
 	}
 }

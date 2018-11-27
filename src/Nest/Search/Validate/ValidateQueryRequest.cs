@@ -1,15 +1,16 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	[MapsApi("indices.validate_query.json")]
 	public partial interface IValidateQueryRequest
 	{
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		QueryContainer Query { get; set; }
 	}
 
+	[DataContract]
 	public partial interface IValidateQueryRequest<T> where T : class { }
 
 	public partial class ValidateQueryRequest

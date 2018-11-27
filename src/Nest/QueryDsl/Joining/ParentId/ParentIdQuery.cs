@@ -1,31 +1,31 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary>
 	/// The parent_id query can be used to find child documents which belong to a particular parent.
 	/// </summary>
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ParentIdQuery>))]
+	[DataContract]
+	[ReadAs(typeof(ParentIdQuery))]
 	public interface IParentIdQuery : IQuery
 	{
 		/// <summary>
 		/// The id of the parent document to get children for.
 		/// </summary>
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		Id Id { get; set; }
 
 		/// <summary>
 		/// When set to true this will ignore an unmapped type and will not match any documents for
 		/// this query. This can be useful when querying multiple indexes which might have different mappings.
 		/// </summary>
-		[JsonProperty("ignore_unmapped")]
+		[DataMember(Name ="ignore_unmapped")]
 		bool? IgnoreUnmapped { get; set; }
 
 		/// <summary>
 		/// The child type. This must be a type with _parent field.
 		/// </summary>
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		RelationName Type { get; set; }
 	}
 
@@ -43,7 +43,7 @@ namespace Nest
 		internal static bool IsConditionless(IParentIdQuery q) => q.Type.IsConditionless() || q.Id.IsConditionless();
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	public class ParentIdQueryDescriptor<T>
 		: QueryDescriptorBase<ParentIdQueryDescriptor<T>, IParentIdQuery>
 			, IParentIdQuery where T : class

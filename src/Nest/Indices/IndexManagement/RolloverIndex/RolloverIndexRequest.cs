@@ -1,13 +1,13 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	[MapsApi("indices.rollover.json")]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<RolloverIndexRequest>))]
+	[ReadAs(typeof(RolloverIndexRequest))]
 	public partial interface IRolloverIndexRequest : IIndexState
 	{
-		[JsonProperty("conditions")]
+		[DataMember(Name ="conditions")]
 		IRolloverConditions Conditions { get; set; }
 	}
 

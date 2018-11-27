@@ -1,18 +1,18 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<LinearInterpolationSmoothingModel>))]
+	[DataContract]
+	[ReadAs(typeof(LinearInterpolationSmoothingModel))]
 	public interface ILinearInterpolationSmoothingModel : ISmoothingModel
 	{
-		[JsonProperty("bigram_lambda")]
+		[DataMember(Name ="bigram_lambda")]
 		double? BigramLambda { get; set; }
 
-		[JsonProperty("trigram_lambda")]
+		[DataMember(Name ="trigram_lambda")]
 		double? TrigramLambda { get; set; }
 
-		[JsonProperty("unigram_lambda")]
+		[DataMember(Name ="unigram_lambda")]
 		double? UnigramLambda { get; set; }
 	}
 

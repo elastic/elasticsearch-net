@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class PagerDutyActionResult
 	{
-		[JsonProperty("sent_event")]
+		[DataMember(Name ="sent_event")]
 		public PagerDutyActionEventResult SentEvent { get; set; }
 	}
 }

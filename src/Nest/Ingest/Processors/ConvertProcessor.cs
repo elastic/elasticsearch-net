@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(ProcessorJsonConverter<ConvertProcessor>))]
 	public interface IConvertProcessor : IProcessor
 	{
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
-		[JsonProperty("target_field")]
+		[DataMember(Name ="target_field")]
 		Field TargetField { get; set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		ConvertProcessorType? Type { get; set; }
 	}
 
@@ -49,7 +49,7 @@ namespace Nest
 		public ConvertProcessorDescriptor<T> Type(ConvertProcessorType? type) => Assign(a => a.Type = type);
 	}
 
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum ConvertProcessorType
 	{
 		[EnumMember(Value = "integer")]

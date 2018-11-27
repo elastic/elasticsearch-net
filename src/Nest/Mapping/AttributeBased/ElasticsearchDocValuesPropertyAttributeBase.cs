@@ -1,11 +1,11 @@
 using System;
 using System.Reflection;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	[AttributeUsage(AttributeTargets.Property)]
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	public abstract class ElasticsearchDocValuesPropertyAttributeBase : ElasticsearchCorePropertyAttributeBase, IDocValuesProperty
 	{
 		protected ElasticsearchDocValuesPropertyAttributeBase(FieldType type) : base(type) { }

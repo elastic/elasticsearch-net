@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(VariableFieldNameQueryJsonConverter<GeoPolygonQuery, IGeoPolygonQuery>))]
 	public interface IGeoPolygonQuery : IFieldNameQuery
 	{
 		[VariableField("points")]
 		IEnumerable<GeoLocation> Points { get; set; }
 
-		[JsonProperty("validation_method")]
+		[DataMember(Name ="validation_method")]
 		GeoValidationMethod? ValidationMethod { get; set; }
 	}
 

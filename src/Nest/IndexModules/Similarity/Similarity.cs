@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -11,7 +11,7 @@ namespace Nest
 		/// <summary>
 		/// The type of similarity.
 		/// </summary>
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		string Type { get; }
 	}
 }

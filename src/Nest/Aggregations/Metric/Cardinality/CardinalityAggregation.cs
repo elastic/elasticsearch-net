@@ -1,15 +1,16 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<CardinalityAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(CardinalityAggregation))]
 	public interface ICardinalityAggregation : IMetricAggregation
 	{
-		[JsonProperty("precision_threshold")]
+		[DataMember(Name ="precision_threshold")]
 		int? PrecisionThreshold { get; set; }
 
-		[JsonProperty("rehash")]
+		[DataMember(Name ="rehash")]
 		bool? Rehash { get; set; }
 	}
 

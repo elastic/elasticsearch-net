@@ -1,14 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IGeoPointFielddata : IFielddata
 	{
-		[JsonProperty("format")]
+		[DataMember(Name ="format")]
 		GeoPointFielddataFormat? Format { get; set; }
 
-		[JsonProperty("precision")]
+		[DataMember(Name ="precision")]
 		Distance Precision { get; set; }
 	}
 

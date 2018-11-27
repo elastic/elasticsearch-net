@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Bogus;
 using Nest;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Tests.Configuration;
 using Tests.Domain.Helpers;
 using Tests.Domain.JsonConverters;
