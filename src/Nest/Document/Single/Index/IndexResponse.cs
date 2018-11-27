@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -14,31 +14,31 @@ namespace Nest
 		long Version { get; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class IndexResponse : ResponseBase, IIndexResponse
 	{
-		[JsonProperty("_id")]
+		[DataMember(Name ="_id")]
 		public string Id { get; internal set; }
 
-		[JsonProperty("_index")]
+		[DataMember(Name ="_index")]
 		public string Index { get; internal set; }
 
-		[JsonProperty("_primary_term")]
+		[DataMember(Name ="_primary_term")]
 		public long PrimaryTerm { get; internal set; }
 
-		[JsonProperty("result")]
+		[DataMember(Name ="result")]
 		public Result Result { get; internal set; }
 
-		[JsonProperty("_seq_no")]
+		[DataMember(Name ="_seq_no")]
 		public long SequenceNumber { get; internal set; }
 
-		[JsonProperty("_shards")]
+		[DataMember(Name ="_shards")]
 		public ShardStatistics Shards { get; internal set; }
 
-		[JsonProperty("_type")]
+		[DataMember(Name ="_type")]
 		public string Type { get; internal set; }
 
-		[JsonProperty("_version")]
+		[DataMember(Name ="_version")]
 		public long Version { get; internal set; }
 	}
 }

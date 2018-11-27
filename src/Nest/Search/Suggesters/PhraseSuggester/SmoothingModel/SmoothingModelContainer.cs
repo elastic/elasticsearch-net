@@ -1,23 +1,23 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(ReserializeJsonConverter<SmoothingModelContainer, ISmoothingModelContainer>))]
 	public interface ISmoothingModelContainer
 	{
-		[JsonProperty("laplace")]
+		[DataMember(Name ="laplace")]
 		ILaplaceSmoothingModel Laplace { get; set; }
 
-		[JsonProperty("linear_interpolation")]
+		[DataMember(Name ="linear_interpolation")]
 		ILinearInterpolationSmoothingModel LinearInterpolation { get; set; }
 
-		[JsonProperty("stupid_backoff")]
+		[DataMember(Name ="stupid_backoff")]
 		IStupidBackoffSmoothingModel StupidBackoff { get; set; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public class SmoothingModelContainer : ISmoothingModelContainer, IDescriptor
 	{
 		internal SmoothingModelContainer() { }

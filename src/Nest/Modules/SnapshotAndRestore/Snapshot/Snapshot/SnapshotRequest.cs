@@ -1,20 +1,20 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public partial interface ISnapshotRequest
 	{
-		[JsonProperty("ignore_unavailable")]
+		[DataMember(Name ="ignore_unavailable")]
 		bool? IgnoreUnavailable { get; set; }
 
-		[JsonProperty("include_global_state")]
+		[DataMember(Name ="include_global_state")]
 		bool? IncludeGlobalState { get; set; }
 
-		[JsonProperty("indices")]
+		[DataMember(Name ="indices")]
 		[JsonConverter(typeof(IndicesMultiSyntaxJsonConverter))]
 		Indices Indices { get; set; }
 
-		[JsonProperty("partial")]
+		[DataMember(Name ="partial")]
 		bool? Partial { get; set; }
 	}
 

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -7,17 +8,17 @@ namespace Nest
 	/// <see cref="GeoDistanceAggregation" />. If you are looking to store ranges as
 	/// part of your document please use explicit range class e.g DateRange, FloatRange etc
 	/// </summary>
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<AggregationRange>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(AggregationRange))]
 	public interface IAggregationRange
 	{
-		[JsonProperty("from")]
+		[DataMember(Name ="from")]
 		double? From { get; set; }
 
-		[JsonProperty("key")]
+		[DataMember(Name ="key")]
 		string Key { get; set; }
 
-		[JsonProperty("to")]
+		[DataMember(Name ="to")]
 		double? To { get; set; }
 	}
 

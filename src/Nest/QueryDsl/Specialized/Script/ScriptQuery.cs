@@ -1,29 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	[JsonConverter(typeof(ScriptQueryConverter))]
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IScriptQuery : IQuery
 	{
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		Id Id { get; set; }
 
 		[Obsolete("Use Source. Inline is deprecated and scheduled to be removed in Elasticsearch 7.0")]
-		[JsonIgnore]
+		[IgnoreDataMember]
 		string Inline { get; set; }
 
-		[JsonProperty("lang")]
+		[DataMember(Name ="lang")]
 		string Lang { get; set; }
 
-		[JsonProperty("params")]
+		[DataMember(Name ="params")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
 		Dictionary<string, object> Params { get; set; }
 
-		[JsonProperty("source")]
+		[DataMember(Name ="source")]
 		string Source { get; set; }
 	}
 

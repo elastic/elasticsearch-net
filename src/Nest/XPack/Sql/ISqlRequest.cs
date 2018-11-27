@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -8,22 +8,22 @@ namespace Nest
 		/// <summary>
 		/// fetch_size is a hint for how many results to return in each page. SQL might chose to return more or fewer results though.
 		/// </summary>
-		[JsonProperty("fetch_size")]
+		[DataMember(Name ="fetch_size")]
 		int? FetchSize { get; set; }
 
 		/// <summary> Further filter the results returned by the SQL query provided on <see cref="Query" /> </summary>
-		[JsonProperty("filter")]
+		[DataMember(Name ="filter")]
 		QueryContainer Filter { get; set; }
 
 		/// <summary> The SQL query you want Elasticsearch to execute </summary>
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		string Query { get; set; }
 
 		/// <summary>
 		/// time_zone is the time zone to use for date functions and date parsing. time_zone defaults to utc
 		/// and can take any values as documented on Joda time's DateTimeZone enum.
 		/// </summary>
-		[JsonProperty("time_zone")]
+		[DataMember(Name ="time_zone")]
 		string TimeZone { get; set; }
 	}
 }

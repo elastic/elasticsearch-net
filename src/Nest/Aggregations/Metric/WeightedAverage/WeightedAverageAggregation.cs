@@ -1,27 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<WeightedAverageAggregation>))]
+	[DataContract]
+	[ReadAs(typeof(WeightedAverageAggregation))]
 	public interface IWeightedAverageAggregation : IAggregation
 	{
 		/// <summary> The optional numeric response formatter</summary>
-		[JsonProperty("format")]
+		[DataMember(Name ="format")]
 		string Format { get; set; }
 
 		/// <summary> The configuration for the field or script that provides the values</summary>
-		[JsonProperty("value")]
+		[DataMember(Name ="value")]
 		IWeightedAverageValue Value { get; set; }
 
 		/// <summary> A hint about the values for pure scripts or unmapped fields </summary>
-		[JsonProperty("value_type")]
+		[DataMember(Name ="value_type")]
 		ValueType? ValueType { get; set; }
 
 		/// <summary> The configuration for the field or script that provides the weights</summary>
-		[JsonProperty("weight")]
+		[DataMember(Name ="weight")]
 		IWeightedAverageValue Weight { get; set; }
 	}
 

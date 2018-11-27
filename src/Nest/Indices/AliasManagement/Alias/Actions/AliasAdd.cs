@@ -1,12 +1,12 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IAliasAddAction : IAliasAction
 	{
-		[JsonProperty("add")]
+		[DataMember(Name ="add")]
 		AliasAddOperation Add { get; set; }
 	}
 

@@ -1,53 +1,53 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IDeleteByQueryResponse : IResponse
 	{
-		[JsonProperty("batches")]
+		[DataMember(Name ="batches")]
 		long Batches { get; }
 
-		[JsonProperty("deleted")]
+		[DataMember(Name ="deleted")]
 		long Deleted { get; }
 
-		[JsonProperty("failures")]
+		[DataMember(Name ="failures")]
 		IReadOnlyCollection<BulkIndexByScrollFailure> Failures { get; }
 
-		[JsonProperty("noops")]
+		[DataMember(Name ="noops")]
 		long Noops { get; }
 
-		[JsonProperty("requests_per_second")]
+		[DataMember(Name ="requests_per_second")]
 		float RequestsPerSecond { get; }
 
-		[JsonProperty("retries")]
+		[DataMember(Name ="retries")]
 		Retries Retries { get; }
 
-		[JsonProperty("slice_id")]
+		[DataMember(Name ="slice_id")]
 		int? SliceId { get; }
 
 		/// <summary>
 		/// Only has a value if WaitForCompletion is set to false on the request
 		/// </summary>
-		[JsonProperty("task")]
+		[DataMember(Name ="task")]
 		TaskId Task { get; }
 
-		[JsonProperty("throttled_millis")]
+		[DataMember(Name ="throttled_millis")]
 		long ThrottledMilliseconds { get; }
 
-		[JsonProperty("throttled_until_millis")]
+		[DataMember(Name ="throttled_until_millis")]
 		long ThrottledUntilMilliseconds { get; }
 
-		[JsonProperty("timed_out")]
+		[DataMember(Name ="timed_out")]
 		bool TimedOut { get; }
 
-		[JsonProperty("took")]
+		[DataMember(Name ="took")]
 		long Took { get; }
 
-		[JsonProperty("total")]
+		[DataMember(Name ="total")]
 		long Total { get; }
 
-		[JsonProperty("version_conflicts")]
+		[DataMember(Name ="version_conflicts")]
 		long VersionConflicts { get; }
 	}
 

@@ -1,10 +1,10 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class BlockState
 	{
-		[JsonProperty("read_only")]
+		[DataMember(Name ="read_only")]
 		public bool ReadOnly { get; set; }
 	}
 }

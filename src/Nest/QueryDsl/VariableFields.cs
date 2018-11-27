@@ -2,7 +2,7 @@
 using System.Collections.Concurrent;
 using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 

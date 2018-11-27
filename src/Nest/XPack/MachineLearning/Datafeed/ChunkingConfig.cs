@@ -1,5 +1,5 @@
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
@@ -9,21 +9,21 @@ namespace Nest
 	/// This search is split into time chunks in order to ensure the load on Elasticsearch is managed.
 	/// Chunking configuration controls how the size of these time chunks are calculated.
 	/// </summary>
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ChunkingConfig>))]
+	[DataContract]
+	[ReadAs(typeof(ChunkingConfig))]
 	public interface IChunkingConfig
 	{
 		/// <summary>
 		/// The chunking mode
 		/// </summary>
-		[JsonProperty("mode")]
+		[DataMember(Name ="mode")]
 		ChunkingMode? Mode { get; set; }
 
 		/// <summary>
 		/// The time span that each search will be querying.
 		/// This setting is only applicable when <see cref="Mode" /> is set to <see cref="ChunkingMode.Manual" />.
 		/// </summary>
-		[JsonProperty("time_span")]
+		[DataMember(Name ="time_span")]
 		Time TimeSpan { get; set; }
 	}
 
@@ -54,7 +54,7 @@ namespace Nest
 	/// <summary>
 	/// The chunking mode
 	/// </summary>
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum ChunkingMode
 	{
 		/// <summary>

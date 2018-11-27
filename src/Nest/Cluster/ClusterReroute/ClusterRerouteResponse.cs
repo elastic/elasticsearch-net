@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IClusterRerouteResponse : IResponse
 	{
-		[JsonProperty("explanations")]
+		[DataMember(Name ="explanations")]
 		IReadOnlyCollection<ClusterRerouteExplanation> Explanations { get; }
 
-		[JsonProperty("state")]
+		[DataMember(Name ="state")]
 		ClusterRerouteState State { get; }
 	}
 

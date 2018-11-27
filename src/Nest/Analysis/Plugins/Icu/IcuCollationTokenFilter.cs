@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -13,23 +13,23 @@ namespace Nest
 		/// Sets the alternate handling for strength quaternary to be either shifted or non-ignorable.
 		/// Which boils down to ignoring punctuation and whitespace.
 		/// </summary>
-		[JsonProperty("alternate")]
+		[DataMember(Name ="alternate")]
 		IcuCollationAlternate? Alternate { get; set; }
 
 		/// <summary>
 		/// Useful to control which case is sorted first when case is not ignored for strength tertiary.
 		/// The default depends on the collation.
 		/// </summary>
-		[JsonProperty("caseFirst")]
+		[DataMember(Name ="caseFirst")]
 		IcuCollationCaseFirst? CaseFirst { get; set; }
 
 		/// <summary>
 		/// Whether case level sorting is required. When strength is set to primary this will ignore accent differences
 		/// </summary>
-		[JsonProperty("caseLevel")]
+		[DataMember(Name ="caseLevel")]
 		bool? CaseLevel { get; set; }
 
-		[JsonProperty("country")]
+		[DataMember(Name ="country")]
 		string Country { get; set; }
 
 		/// <summary>
@@ -40,38 +40,38 @@ namespace Nest
 		/// Since a great many of the world’s languages do not require text normalization,
 		/// most locales set no as the default decomposition mode.
 		/// </summary>
-		[JsonProperty("decomposition")]
+		[DataMember(Name ="decomposition")]
 		IcuCollationDecomposition? Decomposition { get; set; }
 
 		/// <summary>
 		/// Distinguishing between Katakana and Hiragana characters in quaternary strength.
 		/// </summary>
-		[JsonProperty("hiraganaQuaternaryMode")]
+		[DataMember(Name ="hiraganaQuaternaryMode")]
 		bool? HiraganaQuaternaryMode { get; set; }
 
-		[JsonProperty("language")]
+		[DataMember(Name ="language")]
 		string Language { get; set; }
 
 		/// <summary>
 		/// Whether digits are sorted according to their numeric representation.
 		/// For example the value egg-9 is sorted before the value egg-21.
 		/// </summary>
-		[JsonProperty("numeric")]
+		[DataMember(Name ="numeric")]
 		bool? Numeric { get; set; }
 
 		/// <summary>
 		/// The strength property determines the minimum level of difference considered significant during comparison.
 		/// </summary>
-		[JsonProperty("strength")]
+		[DataMember(Name ="strength")]
 		IcuCollationStrength? Strength { get; set; }
 
 		/// <summary>
 		/// Single character or contraction. Controls what is variable for <see cref="Alternate" />.
 		/// </summary>
-		[JsonProperty("variableTop")]
+		[DataMember(Name ="variableTop")]
 		string VariableTop { get; set; }
 
-		[JsonProperty("variant")]
+		[DataMember(Name ="variant")]
 		string Variant { get; set; }
 	}
 

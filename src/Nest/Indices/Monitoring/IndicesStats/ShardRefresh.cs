@@ -1,17 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class ShardRefresh
 	{
-		[JsonProperty("listeners")]
+		[DataMember(Name ="listeners")]
 		public long Listeners { get; internal set; }
 
-		[JsonProperty("total")]
+		[DataMember(Name ="total")]
 		public long Total { get; internal set; }
 
-		[JsonProperty("total_time_in_millis")]
+		[DataMember(Name ="total_time_in_millis")]
 		public long TotalTimeInMilliseconds { get; internal set; }
 	}
 }

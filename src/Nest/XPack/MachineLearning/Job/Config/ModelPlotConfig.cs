@@ -1,5 +1,5 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -7,7 +7,7 @@ namespace Nest
 	/// Stores model information along with the results.
 	/// It provides a more detailed view into anomaly detection.
 	/// </summary>
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ModelPlotConfig>))]
+	[ReadAs(typeof(ModelPlotConfig))]
 	public interface IModelPlotConfig : IModelPlotConfigEnabled
 	{
 		/// <summary>
@@ -17,7 +17,7 @@ namespace Nest
 		/// <remarks>
 		/// This is experimental. Only the specified terms can be viewed when using the Single Metric Viewer.
 		/// </remarks>
-		[JsonProperty("terms")]
+		[DataMember(Name ="terms")]
 		Fields Terms { get; set; }
 	}
 
@@ -52,14 +52,14 @@ namespace Nest
 	/// Stores model information along with the results.
 	/// It provides a more detailed view into anomaly detection.
 	/// </summary>
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ModelPlotConfigEnabled>))]
+	[ReadAs(typeof(ModelPlotConfigEnabled))]
 	public interface IModelPlotConfigEnabled
 	{
 		/// <summary>
 		/// Enables calculation and storage of the model bounds for each entity that is being analyzed.
 		/// By default, this is not enabled.
 		/// </summary>
-		[JsonProperty("enabled")]
+		[DataMember(Name ="enabled")]
 		bool? Enabled { get; set; }
 	}
 

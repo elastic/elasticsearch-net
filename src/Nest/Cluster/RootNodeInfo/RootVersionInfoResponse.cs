@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -9,16 +9,16 @@ namespace Nest
 		ElasticsearchVersionInfo Version { get; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class RootNodeInfoResponse : ResponseBase, IRootNodeInfoResponse
 	{
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		public string Name { get; internal set; }
 
-		[JsonProperty("tagline")]
+		[DataMember(Name ="tagline")]
 		public string Tagline { get; internal set; }
 
-		[JsonProperty("version")]
+		[DataMember(Name ="version")]
 		public ElasticsearchVersionInfo Version { get; internal set; }
 	}
 }

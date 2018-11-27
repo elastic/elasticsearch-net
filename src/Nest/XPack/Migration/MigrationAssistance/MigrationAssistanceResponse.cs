@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
 	public interface IMigrationAssistanceResponse : IResponse
 	{
-		[JsonProperty("indices")]
+		[DataMember(Name ="indices")]
 		IReadOnlyDictionary<IndexName, IndexUpgradeCheck> Indices { get; }
 	}
 
@@ -19,11 +19,11 @@ namespace Nest
 
 	public class IndexUpgradeCheck
 	{
-		[JsonProperty("action_required")]
+		[DataMember(Name ="action_required")]
 		public UpgradeActionRequired ActionRequired { get; internal set; }
 	}
 
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum UpgradeActionRequired
 	{
 		[EnumMember(Value = "not_applicable")]

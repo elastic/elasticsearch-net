@@ -1,74 +1,74 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class ClusterIndicesStats
 	{
-		[JsonProperty("completion")]
+		[DataMember(Name ="completion")]
 		public CompletionStats Completion { get; internal set; }
 
-		[JsonProperty("count")]
+		[DataMember(Name ="count")]
 		public long Count { get; internal set; }
 
-		[JsonProperty("docs")]
+		[DataMember(Name ="docs")]
 		public DocStats Documents { get; internal set; }
 
-		[JsonProperty("fielddata")]
+		[DataMember(Name ="fielddata")]
 		public FielddataStats Fielddata { get; internal set; }
 
-		[JsonProperty("query_cache")]
+		[DataMember(Name ="query_cache")]
 		public QueryCacheStats QueryCache { get; internal set; }
 
-		[JsonProperty("segments")]
+		[DataMember(Name ="segments")]
 		public SegmentsStats Segments { get; internal set; }
 
-		[JsonProperty("shards")]
+		[DataMember(Name ="shards")]
 		public ClusterIndicesShardsStats Shards { get; internal set; }
 
-		[JsonProperty("store")]
+		[DataMember(Name ="store")]
 		public StoreStats Store { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class ClusterIndicesShardsStats
 	{
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		public ClusterIndicesShardsIndexStats Index { get; internal set; }
 
-		[JsonProperty("primaries")]
+		[DataMember(Name ="primaries")]
 		public double Primaries { get; internal set; }
 
-		[JsonProperty("replication")]
+		[DataMember(Name ="replication")]
 		public double Replication { get; internal set; }
 
-		[JsonProperty("total")]
+		[DataMember(Name ="total")]
 		public double Total { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class ClusterIndicesShardsIndexStats
 	{
-		[JsonProperty("primaries")]
+		[DataMember(Name ="primaries")]
 		public ClusterShardMetrics Primaries { get; internal set; }
 
-		[JsonProperty("replication")]
+		[DataMember(Name ="replication")]
 		public ClusterShardMetrics Replication { get; internal set; }
 
-		[JsonProperty("shards")]
+		[DataMember(Name ="shards")]
 		public ClusterShardMetrics Shards { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class ClusterShardMetrics
 	{
-		[JsonProperty("avg")]
+		[DataMember(Name ="avg")]
 		public double Avg { get; internal set; }
 
-		[JsonProperty("max")]
+		[DataMember(Name ="max")]
 		public double Max { get; internal set; }
 
-		[JsonProperty("min")]
+		[DataMember(Name ="min")]
 		public double Min { get; internal set; }
 	}
 }

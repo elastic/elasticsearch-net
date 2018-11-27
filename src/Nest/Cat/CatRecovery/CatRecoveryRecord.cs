@@ -1,74 +1,74 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class CatRecoveryRecord : ICatRecord
 	{
-		[JsonProperty("bytes")]
+		[DataMember(Name ="bytes")]
 		public string Bytes { get; set; }
 
-		[JsonProperty("bytes_percent")]
+		[DataMember(Name ="bytes_percent")]
 		public string BytesPercent { get; set; }
 
-		[JsonProperty("bytes_recovered")]
+		[DataMember(Name ="bytes_recovered")]
 		public string BytesRecovered { get; set; }
 
-		[JsonProperty("bytes_total")]
+		[DataMember(Name ="bytes_total")]
 		public string BytesTotal { get; set; }
 
-		[JsonProperty("files")]
+		[DataMember(Name ="files")]
 		public string Files { get; set; }
 
-		[JsonProperty("files_percent")]
+		[DataMember(Name ="files_percent")]
 		public string FilesPercent { get; set; }
 
-		[JsonProperty("files_recovered")]
+		[DataMember(Name ="files_recovered")]
 		public string FilesRecovered { get; set; }
 
-		[JsonProperty("files_total")]
+		[DataMember(Name ="files_total")]
 		public string FilesTotal { get; set; }
 
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		public string Index { get; set; }
 
-		[JsonProperty("repository")]
+		[DataMember(Name ="repository")]
 		public string Repository { get; set; }
 
-		[JsonProperty("shard")]
+		[DataMember(Name ="shard")]
 		public string Shard { get; set; }
 
-		[JsonProperty("snapshot")]
+		[DataMember(Name ="snapshot")]
 		public string Snapshot { get; set; }
 
-		[JsonProperty("source_host")]
+		[DataMember(Name ="source_host")]
 		public string SourceHost { get; set; }
 
-		[JsonProperty("source_node")]
+		[DataMember(Name ="source_node")]
 		public string SourceNode { get; set; }
 
-		[JsonProperty("stage")]
+		[DataMember(Name ="stage")]
 		public string Stage { get; set; }
 
-		[JsonProperty("target_host")]
+		[DataMember(Name ="target_host")]
 		public string TargetHost { get; set; }
 
-		[JsonProperty("target_node")]
+		[DataMember(Name ="target_node")]
 		public string TargetNode { get; set; }
 
-		[JsonProperty("time")]
+		[DataMember(Name ="time")]
 		public string Time { get; set; }
 
-		[JsonProperty("translog_ops")]
+		[DataMember(Name ="translog_ops")]
 		public long? TranslogOps { get; set; }
 
-		[JsonProperty("translog_ops_percent")]
+		[DataMember(Name ="translog_ops_percent")]
 		public string TranslogOpsPercent { get; set; }
 
-		[JsonProperty("translog_ops_recovered")]
+		[DataMember(Name ="translog_ops_recovered")]
 		public long? TranslogOpsRecovered { get; set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		public string Type { get; set; }
 	}
 }

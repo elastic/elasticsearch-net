@@ -1,23 +1,24 @@
 using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<GeoHashGridAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(GeoHashGridAggregation))]
 	public interface IGeoHashGridAggregation : IBucketAggregation
 	{
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
-		[JsonProperty("precision")]
+		[DataMember(Name ="precision")]
 		GeoHashPrecision? Precision { get; set; }
 
-		[JsonProperty("shard_size")]
+		[DataMember(Name ="shard_size")]
 		int? ShardSize { get; set; }
 
-		[JsonProperty("size")]
+		[DataMember(Name ="size")]
 		int? Size { get; set; }
 	}
 

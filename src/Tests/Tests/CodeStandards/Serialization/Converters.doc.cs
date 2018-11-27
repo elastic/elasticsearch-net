@@ -5,7 +5,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using System.Collections.Generic;
 using Elastic.Xunit.XunitPlumbing;
 

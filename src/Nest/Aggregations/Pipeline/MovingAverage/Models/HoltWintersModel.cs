@@ -1,10 +1,8 @@
 ﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(StringEnumConverter))]
 	public enum HoltWintersType
 	{
 		[EnumMember(Value = "add")]
@@ -14,25 +12,26 @@ namespace Nest
 		Multiplicative
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[InterfaceDataContract]
+	[ReadAs(typeof(HoltWintersModel))]
 	public interface IHoltWintersModel : IMovingAverageModel
 	{
-		[JsonProperty("alpha")]
+		[DataMember(Name = "alpha")]
 		float? Alpha { get; set; }
 
-		[JsonProperty("beta")]
+		[DataMember(Name = "beta")]
 		float? Beta { get; set; }
 
-		[JsonProperty("gamma")]
+		[DataMember(Name = "gamma")]
 		float? Gamma { get; set; }
 
-		[JsonProperty("pad")]
+		[DataMember(Name = "pad")]
 		bool? Pad { get; set; }
 
-		[JsonProperty("period")]
+		[DataMember(Name = "period")]
 		int? Period { get; set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name = "type")]
 		HoltWintersType? Type { get; set; }
 	}
 

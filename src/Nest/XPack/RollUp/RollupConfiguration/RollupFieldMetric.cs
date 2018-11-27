@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<RollupFieldMetric>))]
+	[ReadAs(typeof(RollupFieldMetric))]
 	public interface IRollupFieldMetric
 	{
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
-		[JsonProperty("metrics")]
+		[DataMember(Name ="metrics")]
 		IEnumerable<RollupMetric> Metrics { get; set; }
 	}
 

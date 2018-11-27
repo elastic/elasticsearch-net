@@ -1,51 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<TypeMapping>))]
+	[DataContract]
+	[ReadAs(typeof(TypeMapping))]
 	public interface ITypeMapping
 	{
-		[JsonProperty("_all")]
+		[DataMember(Name ="_all")]
 		IAllField AllField { get; set; }
 
-		[JsonProperty("date_detection")]
+		[DataMember(Name ="date_detection")]
 		bool? DateDetection { get; set; }
 
-		[JsonProperty("dynamic")]
+		[DataMember(Name ="dynamic")]
 		Union<bool, DynamicMapping> Dynamic { get; set; }
 
-		[JsonProperty("dynamic_date_formats")]
+		[DataMember(Name ="dynamic_date_formats")]
 		IEnumerable<string> DynamicDateFormats { get; set; }
 
-		[JsonProperty("dynamic_templates")]
+		[DataMember(Name ="dynamic_templates")]
 		IDynamicTemplateContainer DynamicTemplates { get; set; }
 
-		[JsonProperty("_field_names")]
+		[DataMember(Name ="_field_names")]
 		IFieldNamesField FieldNamesField { get; set; }
 
-		[JsonProperty("_index")]
+		[DataMember(Name ="_index")]
 		IIndexField IndexField { get; set; }
 
-		[JsonProperty("_meta")]
+		[DataMember(Name ="_meta")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
 		IDictionary<string, object> Meta { get; set; }
 
-		[JsonProperty("numeric_detection")]
+		[DataMember(Name ="numeric_detection")]
 		bool? NumericDetection { get; set; }
 
-		[JsonProperty("properties", TypeNameHandling = TypeNameHandling.None)]
+		[DataMember(Name ="properties", TypeNameHandling = TypeNameHandling.None)]
 		IProperties Properties { get; set; }
 
-		[JsonProperty("_routing")]
+		[DataMember(Name ="_routing")]
 		IRoutingField RoutingField { get; set; }
 
-		[JsonProperty("_size")]
+		[DataMember(Name ="_size")]
 		ISizeField SizeField { get; set; }
 
-		[JsonProperty("_source")]
+		[DataMember(Name ="_source")]
 		ISourceField SourceField { get; set; }
 	}
 

@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
@@ -7,7 +7,7 @@ namespace Nest
 	/// <summary>
 	/// Normalization forms https://en.wikipedia.org/wiki/Unicode_equivalence#Normal_forms
 	/// </summary>
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum IcuNormalizationType
 	{
 		/// <summary>

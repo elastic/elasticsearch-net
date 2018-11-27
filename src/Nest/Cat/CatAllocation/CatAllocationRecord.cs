@@ -1,26 +1,26 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class CatAllocationRecord : ICatRecord
 	{
-		[JsonProperty("diskAvail")]
+		[DataMember(Name ="diskAvail")]
 		public string DiskAvailable { get; set; }
 
-		[JsonProperty("diskRatio")]
+		[DataMember(Name ="diskRatio")]
 		public string DiskRatio { get; set; }
 
-		[JsonProperty("diskUsed")]
+		[DataMember(Name ="diskUsed")]
 		public string DiskUsed { get; set; }
 
-		[JsonProperty("ip")]
+		[DataMember(Name ="ip")]
 		public string Ip { get; set; }
 
-		[JsonProperty("node")]
+		[DataMember(Name ="node")]
 		public string Node { get; set; }
 
-		[JsonProperty("shards")]
+		[DataMember(Name ="shards")]
 		public string Shards { get; set; }
 	}
 }

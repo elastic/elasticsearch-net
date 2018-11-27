@@ -1,6 +1,6 @@
 using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -8,25 +8,25 @@ namespace Nest
 	/// Defines the format of the input data when you send data to the machine learning job.
 	/// Note that when configure a datafeed, these properties are automatically set.
 	/// </summary>
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<DataDescription>))]
+	[ReadAs(typeof(DataDescription))]
 	public interface IDataDescription
 	{
 		/// <summary>
 		/// Only JSON format is supported at this time.
 		/// </summary>
-		[JsonProperty("format")]
+		[DataMember(Name ="format")]
 		string Format { get; set; }
 
 		/// <summary>
 		/// The name of the field that contains the timestamp. The default value is time.
 		/// </summary>
-		[JsonProperty("time_field")]
+		[DataMember(Name ="time_field")]
 		Field TimeField { get; set; }
 
 		/// <summary>
 		/// The time format, which can be epoch, epoch_ms, or a custom pattern.
 		/// </summary>
-		[JsonProperty("time_format")]
+		[DataMember(Name ="time_format")]
 		string TimeFormat { get; set; }
 	}
 

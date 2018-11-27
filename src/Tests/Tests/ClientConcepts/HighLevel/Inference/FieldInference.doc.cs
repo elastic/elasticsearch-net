@@ -8,7 +8,7 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Tests.Core.Client;
 using Tests.Core.Client.Settings;
 using Tests.Core.Xunit;
@@ -450,7 +450,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			[PropertyName("nestProp"),JsonProperty("jsonProp")]
 			public string NestProperty { get; set; } //<3> Has both a `PropertyNameAttribute` and a `JsonPropertyAttribute` - the `PropertyNameAttribute` takes precedence.
 
-			[JsonProperty("jsonProp")]
+			[DataMember(Name ="jsonProp")]
 			public string JsonProperty { get; set; } //<4> `JsonPropertyAttribute` takes precedence.
 
 			[PropertyName("dontaskme"),JsonProperty("dontaskme")]

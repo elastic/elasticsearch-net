@@ -1,28 +1,28 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class ClusterRerouteState
 	{
-		[JsonProperty("blocks")]
+		[DataMember(Name ="blocks")]
 		public BlockState Blocks { get; internal set; }
 
-		[JsonProperty("master_node")]
+		[DataMember(Name ="master_node")]
 		public string MasterNode { get; internal set; }
 
-		[JsonProperty("nodes")]
+		[DataMember(Name ="nodes")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, NodeState>))]
 		public IReadOnlyDictionary<string, NodeState> Nodes { get; internal set; }
 
-		[JsonProperty("routing_nodes")]
+		[DataMember(Name ="routing_nodes")]
 		public RoutingNodesState RoutingNodes { get; internal set; }
 
-		[JsonProperty("routing_table")]
+		[DataMember(Name ="routing_table")]
 		public RoutingTableState RoutingTable { get; internal set; }
 
-		[JsonProperty("version")]
+		[DataMember(Name ="version")]
 		public int Version { get; internal set; }
 	}
 }

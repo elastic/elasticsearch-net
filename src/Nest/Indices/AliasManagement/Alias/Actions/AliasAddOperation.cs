@@ -1,32 +1,32 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class AliasAddOperation
 	{
-		[JsonProperty("alias")]
+		[DataMember(Name ="alias")]
 		public string Alias { get; set; }
 
-		[JsonProperty("filter")]
+		[DataMember(Name ="filter")]
 		public QueryContainer Filter { get; set; }
 
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		public IndexName Index { get; set; }
 
-		[JsonProperty("index_routing")]
+		[DataMember(Name ="index_routing")]
 		public string IndexRouting { get; set; }
 
 		/// <summary>
 		/// If an alias points to multiple indices elasticsearch will reject the write operations
 		/// unless one is explicitly marked with as the write alias using this property.
 		/// </summary>
-		[JsonProperty("is_write_index")]
+		[DataMember(Name ="is_write_index")]
 		public bool? IsWriteIndex { get; set; }
 
-		[JsonProperty("routing")]
+		[DataMember(Name ="routing")]
 		public string Routing { get; set; }
 
-		[JsonProperty("search_routing")]
+		[DataMember(Name ="search_routing")]
 		public string SearchRouting { get; set; }
 	}
 }

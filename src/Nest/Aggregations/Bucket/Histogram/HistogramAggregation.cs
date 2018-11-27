@@ -1,35 +1,36 @@
 using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<HistogramAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(HistogramAggregation))]
 	public interface IHistogramAggregation : IBucketAggregation
 	{
-		[JsonProperty("extended_bounds")]
+		[DataMember(Name ="extended_bounds")]
 		ExtendedBounds<double> ExtendedBounds { get; set; }
 
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
-		[JsonProperty("interval")]
+		[DataMember(Name ="interval")]
 		double? Interval { get; set; }
 
-		[JsonProperty("min_doc_count")]
+		[DataMember(Name ="min_doc_count")]
 		int? MinimumDocumentCount { get; set; }
 
-		[JsonProperty("missing")]
+		[DataMember(Name ="missing")]
 		double? Missing { get; set; }
 
-		[JsonProperty("offset")]
+		[DataMember(Name ="offset")]
 		double? Offset { get; set; }
 
-		[JsonProperty("order")]
+		[DataMember(Name ="order")]
 		HistogramOrder Order { get; set; }
 
-		[JsonProperty("script")]
+		[DataMember(Name ="script")]
 		IScript Script { get; set; }
 	}
 

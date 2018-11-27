@@ -1,37 +1,37 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary>
 	/// A query that uses a query parser in order to parse its content
 	/// </summary>
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<QueryStringQueryDescriptor<object>>))]
+	[DataContract]
+	[ReadAs(typeof(QueryStringQueryDescriptor<object>))]
 	public interface IQueryStringQuery : IQuery
 	{
 		/// <summary>
 		/// When set, <c>*</c> or <c>?</c> are allowed as the first character. Defaults to <c>true</c>.
 		/// </summary>
-		[JsonProperty("allow_leading_wildcard")]
+		[DataMember(Name ="allow_leading_wildcard")]
 		bool? AllowLeadingWildcard { get; set; }
 
 		/// <summary>
 		/// The analyzer name used to analyze the query
 		/// </summary>
-		[JsonProperty("analyzer")]
+		[DataMember(Name ="analyzer")]
 		string Analyzer { get; set; }
 
 		/// <summary>
 		/// By default, wildcards terms in a query are not analyzed.
 		/// By setting this value to <c>true</c>, a best effort will be made to analyze those as well.
 		/// </summary>
-		[JsonProperty("analyze_wildcard")]
+		[DataMember(Name ="analyze_wildcard")]
 		bool? AnalyzeWildcard { get; set; }
 
 		/// <summary></summary>
-		[JsonProperty("auto_generate_synonyms_phrase_query")]
+		[DataMember(Name ="auto_generate_synonyms_phrase_query")]
 		bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
 		/// <summary>
@@ -40,26 +40,26 @@ namespace Nest
 		/// * extracts all fields in the mapping that are eligible to term queries and filters the metadata fields.
 		/// All extracted fields are then combined to build a query when no prefix field is provided.
 		/// </summary>
-		[JsonProperty("default_field")]
+		[DataMember(Name ="default_field")]
 		Field DefaultField { get; set; }
 
 		/// <summary>
 		/// The default operator used if no explicit operator is specified.
 		/// The default operator is <see cref="Operator.Or" />
 		/// </summary>
-		[JsonProperty("default_operator")]
+		[DataMember(Name ="default_operator")]
 		Operator? DefaultOperator { get; set; }
 
 		/// <summary>
 		/// Set to <c>true<c> to enable position increments in result queries. Defaults to <c>true<c>.
 		/// </summary>
-		[JsonProperty("enable_position_increments")]
+		[DataMember(Name ="enable_position_increments")]
 		bool? EnablePositionIncrements { get; set; }
 
 		/// <summary>
 		/// Enables escaping of the query
 		/// </summary>
-		[JsonProperty("escape")]
+		[DataMember(Name ="escape")]
 		bool? Escape { get; set; }
 
 		/// <summary>
@@ -67,32 +67,32 @@ namespace Nest
 		/// Defaults to the <c>index.query.default_field</c> index settings, which in turn defaults to <c>*</c>.
 		/// <c>*</c> extracts all fields in the mapping that are eligible to term queries and filters the metadata fields.
 		/// </summary>
-		[JsonProperty("fields")]
+		[DataMember(Name ="fields")]
 		Fields Fields { get; set; }
 
 		/// <summary>
 		/// Set the fuzziness for fuzzy queries. Defaults to <see cref="Fuzziness.Auto" />
 		/// </summary>
-		[JsonProperty("fuzziness")]
+		[DataMember(Name ="fuzziness")]
 		Fuzziness Fuzziness { get; set; }
 
 		/// <summary>
 		/// Controls the number of terms fuzzy queries will expand to. Defaults to <c>50</c>
 		/// </summary>
-		[JsonProperty("fuzzy_max_expansions")]
+		[DataMember(Name ="fuzzy_max_expansions")]
 		int? FuzzyMaxExpansions { get; set; }
 
 		/// <summary>
 		/// Set the prefix length for fuzzy queries. Default is <c>0</c>.
 		/// </summary>
-		[JsonProperty("fuzzy_prefix_length")]
+		[DataMember(Name ="fuzzy_prefix_length")]
 		int? FuzzyPrefixLength { get; set; }
 
 		/// <summary>
 		/// Controls how the query is rewritten if <see cref="Fuzziness" /> is set.
 		/// In this scenario, the default is <see cref="MultiTermQueryRewrite.TopTermsBlendedFreqs" />.
 		/// </summary>
-		[JsonProperty("fuzzy_rewrite")]
+		[DataMember(Name ="fuzzy_rewrite")]
 		MultiTermQueryRewrite FuzzyRewrite { get; set; }
 
 		/// <summary>
@@ -103,14 +103,14 @@ namespace Nest
 		/// switch to classic Levenshtein distance.
 		/// If not set, Damerau-Levenshtein distance metric will be used.
 		/// </summary>
-		[JsonProperty("fuzzy_transpositions")]
+		[DataMember(Name ="fuzzy_transpositions")]
 		bool? FuzzyTranspositions { get; set; }
 
 		/// <summary>
 		/// If set to <c>true</c> will cause format based failures (like providing text to a numeric field)
 		/// to be ignored
 		/// </summary>
-		[JsonProperty("lenient")]
+		[DataMember(Name ="lenient")]
 		bool? Lenient { get; set; }
 
 		/// <summary>
@@ -118,27 +118,27 @@ namespace Nest
 		/// This protects against too-difficult (e.g. exponentially hard) regexps.
 		/// Defaults to <c>10000</c>.
 		/// </summary>
-		[JsonProperty("max_determinized_states")]
+		[DataMember(Name ="max_determinized_states")]
 		int? MaximumDeterminizedStates { get; set; }
 
 		/// <summary>
 		/// A value controlling how many "should" clauses in the resulting boolean query should match.
 		/// It can be an absolute value, a percentage or a combination of both.
 		/// </summary>
-		[JsonProperty("minimum_should_match")]
+		[DataMember(Name ="minimum_should_match")]
 		MinimumShouldMatch MinimumShouldMatch { get; set; }
 
 		/// <summary>
 		/// Sets the default slop for phrases. If zero, then exact phrase matches are required.
 		/// Default value is <c>0</c>.
 		/// </summary>
-		[JsonProperty("phrase_slop")]
+		[DataMember(Name ="phrase_slop")]
 		double? PhraseSlop { get; set; }
 
 		/// <summary>
 		/// The query to be parsed
 		/// </summary>
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		string Query { get; set; }
 
 		/// <summary>
@@ -146,39 +146,39 @@ namespace Nest
 		/// For those parts, it overrides other analyzers that are set using the analyzer parameter
 		/// or the search_quote_analyzer setting.
 		/// </summary>
-		[JsonProperty("quote_analyzer")]
+		[DataMember(Name ="quote_analyzer")]
 		string QuoteAnalyzer { get; set; }
 
 		/// <summary>
 		/// A suffix to append to fields for quoted parts of the query string.
 		/// This allows to use a field that has a different analysis chain for exact matching.
 		/// </summary>
-		[JsonProperty("quote_field_suffix")]
+		[DataMember(Name ="quote_field_suffix")]
 		string QuoteFieldSuffix { get; set; }
 
 		/// <summary>
 		/// Controls how a multi term query such as a wildcard or prefix query, is rewritten.
 		/// </summary>
-		[JsonProperty("rewrite")]
+		[DataMember(Name ="rewrite")]
 		MultiTermQueryRewrite Rewrite { get; set; }
 
 		/// <summary>
 		/// The disjunction max tie breaker for multi fields. Defaults to <c>0</c>
 		/// </summary>
-		[JsonProperty("tie_breaker")]
+		[DataMember(Name ="tie_breaker")]
 		double? TieBreaker { get; set; }
 
 		/// <summary>
 		/// Time Zone to be applied to any range query related to dates.
 		/// </summary>
-		[JsonProperty("time_zone")]
+		[DataMember(Name ="time_zone")]
 		string Timezone { get; set; }
 
 		/// <summary>
 		/// How the fields should be combined to build the text query.
 		/// Default is <see cref="TextQueryType.BestFields" />
 		/// </summary>
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		TextQueryType? Type { get; set; }
 	}
 
@@ -268,7 +268,7 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="IQueryStringQuery" />
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	public class QueryStringQueryDescriptor<T>
 		: QueryDescriptorBase<QueryStringQueryDescriptor<T>, IQueryStringQuery>
 			, IQueryStringQuery where T : class

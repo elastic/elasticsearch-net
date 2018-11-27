@@ -1,17 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IAcknowledgedResponse : IResponse
 	{
 		bool Acknowledged { get; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public abstract class AcknowledgedResponseBase : ResponseBase, IAcknowledgedResponse
 	{
-		[JsonProperty("acknowledged")]
+		[DataMember(Name ="acknowledged")]
 		public bool Acknowledged { get; internal set; }
 	}
 }

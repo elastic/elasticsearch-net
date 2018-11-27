@@ -1,44 +1,44 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IUpdateByQueryResponse : IResponse
 	{
-		[JsonProperty("batches")]
+		[DataMember(Name ="batches")]
 		long Batches { get; }
 
-		[JsonProperty("failures")]
+		[DataMember(Name ="failures")]
 		IReadOnlyCollection<BulkIndexByScrollFailure> Failures { get; }
 
-		[JsonProperty("noops")]
+		[DataMember(Name ="noops")]
 		long Noops { get; }
 
-		[JsonProperty("requests_per_second")]
+		[DataMember(Name ="requests_per_second")]
 		float RequestsPerSecond { get; }
 
-		[JsonProperty("retries")]
+		[DataMember(Name ="retries")]
 		Retries Retries { get; }
 
 		/// <summary>
 		/// Only has a value if WaitForCompletion is set to false on the request
 		/// </summary>
-		[JsonProperty("task")]
+		[DataMember(Name ="task")]
 		TaskId Task { get; }
 
-		[JsonProperty("timed_out")]
+		[DataMember(Name ="timed_out")]
 		bool TimedOut { get; }
 
-		[JsonProperty("took")]
+		[DataMember(Name ="took")]
 		long Took { get; }
 
-		[JsonProperty("total")]
+		[DataMember(Name ="total")]
 		long Total { get; }
 
-		[JsonProperty("updated")]
+		[DataMember(Name ="updated")]
 		long Updated { get; }
 
-		[JsonProperty("version_conflicts")]
+		[DataMember(Name ="version_conflicts")]
 		long VersionConflicts { get; }
 	}
 

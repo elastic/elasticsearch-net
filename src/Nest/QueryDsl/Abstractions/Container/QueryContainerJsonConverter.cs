@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {

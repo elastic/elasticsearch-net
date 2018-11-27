@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	[JsonConverter(typeof(CatFielddataRecordJsonConverter))]
 	public class CatFielddataRecord : ICatRecord
 	{

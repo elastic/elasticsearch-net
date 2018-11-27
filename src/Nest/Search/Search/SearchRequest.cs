@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchRequest>))]
+	[ReadAs(typeof(SearchRequest))]
 	[ReadAs(typeof(SearchRequest))]
 	public partial interface ISearchRequest : ICovariantSearchRequest
 	{

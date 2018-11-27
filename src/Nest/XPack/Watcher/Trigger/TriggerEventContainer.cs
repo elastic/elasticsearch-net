@@ -1,16 +1,16 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<TriggerEventContainer>))]
+	[ReadAs(typeof(TriggerEventContainer))]
 	public interface ITriggerEventContainer
 	{
-		[JsonProperty("schedule")]
+		[DataMember(Name ="schedule")]
 		IScheduleTriggerEvent Schedule { get; set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class TriggerEventContainer : ITriggerEventContainer, IDescriptor
 	{
 		public TriggerEventContainer() { }

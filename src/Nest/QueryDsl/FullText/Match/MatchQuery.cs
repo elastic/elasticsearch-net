@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Utf8Json;
 
 namespace Nest
@@ -7,7 +7,7 @@ namespace Nest
 	/// <summary>
 	/// A match query for a single field
 	/// </summary>
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(FieldNameQueryJsonConverter<MatchQuery>))]
 	[JsonFormatter(typeof(FieldNameQueryFormatter<MatchQuery, IMatchQuery>))]
 	public interface IMatchQuery : IFieldNameQuery
@@ -154,7 +154,7 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="IMatchQuery" />
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	public class MatchQueryDescriptor<T>
 		: FieldNameQueryDescriptorBase<MatchQueryDescriptor<T>, IMatchQuery, T>
 			, IMatchQuery where T : class

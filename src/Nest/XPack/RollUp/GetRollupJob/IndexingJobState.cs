@@ -1,10 +1,10 @@
 ﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum IndexingJobState
 	{
 		/// <summary> Indexer is running, but not actively indexing data (e.g. it's idle) </summary>

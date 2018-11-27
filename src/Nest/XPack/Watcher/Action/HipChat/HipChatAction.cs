@@ -1,15 +1,15 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public interface IHipChatAction : IAction
 	{
-		[JsonProperty("account")]
+		[DataMember(Name ="account")]
 		string Account { get; set; }
 
-		[JsonProperty("message")]
+		[DataMember(Name ="message")]
 		IHipChatMessage Message { get; set; }
 	}
 

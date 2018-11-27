@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -12,20 +12,20 @@ namespace Nest
 		/// <summary>
 		/// The stem_exclusion parameter allows you to specify an array of lowercase words that should not be stemmed.
 		/// </summary>
-		[JsonProperty("stem_exclusion")]
+		[DataMember(Name ="stem_exclusion")]
 		IEnumerable<string> StemExclusionList { get; set; }
 
 		/// <summary>
 		/// A list of stopword to initialize the stop filter with. Defaults to the english stop words.
 		/// </summary>
-		[JsonProperty("stopwords")]
+		[DataMember(Name ="stopwords")]
 		[JsonConverter(typeof(StopWordsJsonConverter))]
 		StopWords StopWords { get; set; }
 
 		/// <summary>
 		/// A path (either relative to config location, or absolute) to a stopwords file configuration.
 		/// </summary>
-		[JsonProperty("stopwords_path")]
+		[DataMember(Name ="stopwords_path")]
 		string StopwordsPath { get; set; }
 	}
 
@@ -35,7 +35,7 @@ namespace Nest
 		private string _type = "language";
 
 		/// <inheritdoc />
-		[JsonIgnore]
+		[IgnoreDataMember]
 		public Language? Language
 		{
 			get => _type.ToEnum<Language>();

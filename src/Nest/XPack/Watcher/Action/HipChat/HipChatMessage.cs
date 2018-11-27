@@ -1,34 +1,34 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<HipChatMessage>))]
+	[DataContract]
+	[ReadAs(typeof(HipChatMessage))]
 	public interface IHipChatMessage
 	{
-		[JsonProperty("body")]
+		[DataMember(Name ="body")]
 		string Body { get; set; }
 
-		[JsonProperty("color")]
+		[DataMember(Name ="color")]
 		HipChatMessageColor? Color { get; set; }
 
-		[JsonProperty("format")]
+		[DataMember(Name ="format")]
 		HipChatMessageFormat? Format { get; set; }
 
-		[JsonProperty("from")]
+		[DataMember(Name ="from")]
 		string From { get; set; }
 
-		[JsonProperty("notify")]
+		[DataMember(Name ="notify")]
 		bool? Notify { get; set; }
 
-		[JsonProperty("room")]
+		[DataMember(Name ="room")]
 		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<string>))]
 		IEnumerable<string> Room { get; set; }
 
-		[JsonProperty("user")]
+		[DataMember(Name ="user")]
 		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<string>))]
 		IEnumerable<string> User { get; set; }
 	}
@@ -79,7 +79,7 @@ namespace Nest
 		public HipChatMessageDescriptor User(params string[] user) => Assign(a => a.User = user);
 	}
 
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum HipChatMessageFormat
 	{
 		[EnumMember(Value = "html")]
@@ -89,7 +89,7 @@ namespace Nest
 		Text
 	}
 
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum HipChatMessageColor
 	{
 		[EnumMember(Value = "gray")]

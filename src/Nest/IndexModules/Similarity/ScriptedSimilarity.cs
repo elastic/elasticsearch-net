@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -14,7 +14,7 @@ namespace Nest
 		/// <summary>
 		/// Script to calculate similarity
 		/// </summary>
-		[JsonProperty("script")]
+		[DataMember(Name ="script")]
 		IScript Script { get; set; }
 	}
 

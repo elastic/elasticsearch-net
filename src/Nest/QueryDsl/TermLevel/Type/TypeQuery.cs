@@ -1,12 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<TypeQueryDescriptor>))]
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[ReadAs(typeof(TypeQueryDescriptor))]
+	[DataContract]
 	public interface ITypeQuery : IQuery
 	{
-		[JsonProperty("value")]
+		[DataMember(Name ="value")]
 		TypeName Value { get; set; }
 	}
 
@@ -26,7 +26,7 @@ namespace Nest
 	{
 		protected override bool Conditionless => TypeQuery.IsConditionless(this);
 
-		[JsonProperty("value")]
+		[DataMember(Name ="value")]
 		TypeName ITypeQuery.Value { get; set; }
 
 		public TypeQueryDescriptor Value<T>() => Assign(a => a.Value = typeof(T));

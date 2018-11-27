@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Utf8Json;
 using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 

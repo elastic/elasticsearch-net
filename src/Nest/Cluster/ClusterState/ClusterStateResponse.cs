@@ -1,41 +1,41 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IClusterStateResponse : IResponse
 	{
-		[JsonProperty("blocks")]
+		[DataMember(Name ="blocks")]
 		BlockState Blocks { get; }
 
-		[JsonProperty("cluster_name")]
+		[DataMember(Name ="cluster_name")]
 		string ClusterName { get; }
 
 		/// <summary>The Universally Unique Identifier for the cluster.</summary>
 		/// <remarks>While the cluster is still forming, it is possible for the `cluster_uuid` to be `_na_`.</remarks>
-		[JsonProperty("cluster_uuid")]
+		[DataMember(Name ="cluster_uuid")]
 		string ClusterUUID { get; }
 
-		[JsonProperty("master_node")]
+		[DataMember(Name ="master_node")]
 		string MasterNode { get; }
 
-		[JsonProperty("metadata")]
+		[DataMember(Name ="metadata")]
 		MetadataState Metadata { get; }
 
-		[JsonProperty("nodes")]
+		[DataMember(Name ="nodes")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, NodeState>))]
 		IReadOnlyDictionary<string, NodeState> Nodes { get; }
 
-		[JsonProperty("routing_nodes")]
+		[DataMember(Name ="routing_nodes")]
 		RoutingNodesState RoutingNodes { get; }
 
-		[JsonProperty("routing_table")]
+		[DataMember(Name ="routing_table")]
 		RoutingTableState RoutingTable { get; }
 
-		[JsonProperty("state_uuid")]
+		[DataMember(Name ="state_uuid")]
 		string StateUUID { get; }
 
-		[JsonProperty("version")]
+		[DataMember(Name ="version")]
 		long Version { get; }
 	}
 

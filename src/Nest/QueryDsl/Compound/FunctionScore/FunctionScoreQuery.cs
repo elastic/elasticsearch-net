@@ -1,29 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<FunctionScoreQueryDescriptor<object>>))]
+	[DataContract]
+	[ReadAs(typeof(FunctionScoreQueryDescriptor<object>))]
 	public interface IFunctionScoreQuery : IQuery
 	{
-		[JsonProperty("boost_mode")]
+		[DataMember(Name ="boost_mode")]
 		FunctionBoostMode? BoostMode { get; set; }
 
-		[JsonProperty("functions")]
+		[DataMember(Name ="functions")]
 		IEnumerable<IScoreFunction> Functions { get; set; }
 
-		[JsonProperty("max_boost")]
+		[DataMember(Name ="max_boost")]
 		double? MaxBoost { get; set; }
 
-		[JsonProperty("min_score")]
+		[DataMember(Name ="min_score")]
 		double? MinScore { get; set; }
 
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		QueryContainer Query { get; set; }
 
-		[JsonProperty("score_mode")]
+		[DataMember(Name ="score_mode")]
 		FunctionScoreMode? ScoreMode { get; set; }
 	}
 

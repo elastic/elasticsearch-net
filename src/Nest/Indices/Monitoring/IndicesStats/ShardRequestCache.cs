@@ -1,20 +1,20 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class ShardRequestCache
 	{
-		[JsonProperty("evictions")]
+		[DataMember(Name ="evictions")]
 		public long Evictions { get; internal set; }
 
-		[JsonProperty("hit_count")]
+		[DataMember(Name ="hit_count")]
 		public long HitCount { get; internal set; }
 
-		[JsonProperty("memory_size_in_bytes")]
+		[DataMember(Name ="memory_size_in_bytes")]
 		public long MemorySizeInBytes { get; internal set; }
 
-		[JsonProperty("miss_count")]
+		[DataMember(Name ="miss_count")]
 		public long MissCount { get; internal set; }
 	}
 }

@@ -1,37 +1,37 @@
 ﻿using System.Diagnostics;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IKeywordProperty : IDocValuesProperty
 	{
-		[JsonProperty("boost")]
+		[DataMember(Name ="boost")]
 		double? Boost { get; set; }
 
-		[JsonProperty("eager_global_ordinals")]
+		[DataMember(Name ="eager_global_ordinals")]
 		bool? EagerGlobalOrdinals { get; set; }
 
-		[JsonProperty("ignore_above")]
+		[DataMember(Name ="ignore_above")]
 		int? IgnoreAbove { get; set; }
 
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		bool? Index { get; set; }
 
-		[JsonProperty("index_options")]
+		[DataMember(Name ="index_options")]
 		IndexOptions? IndexOptions { get; set; }
 
-		[JsonProperty("normalizer")]
+		[DataMember(Name ="normalizer")]
 		string Normalizer { get; set; }
 
-		[JsonProperty("norms")]
+		[DataMember(Name ="norms")]
 		bool? Norms { get; set; }
 
-		[JsonProperty("null_value")]
+		[DataMember(Name ="null_value")]
 		string NullValue { get; set; }
 
 		/// <summary> Whether full text queries should split the input on whitespace when building a query for this field. </summary>
-		[JsonProperty("split_queries_on_whitespace")]
+		[DataMember(Name ="split_queries_on_whitespace")]
 		bool? SplitQueriesOnWhitespace { get; set; }
 	}
 

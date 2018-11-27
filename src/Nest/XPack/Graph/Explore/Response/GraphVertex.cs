@@ -1,19 +1,19 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class GraphVertex
 	{
-		[JsonProperty("depth")]
+		[DataMember(Name ="depth")]
 		public long Depth { get; internal set; }
 
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		public string Field { get; internal set; }
 
-		[JsonProperty("term")]
+		[DataMember(Name ="term")]
 		public string Term { get; internal set; }
 
-		[JsonProperty("weight")]
+		[DataMember(Name ="weight")]
 		public double Weight { get; internal set; }
 	}
 }

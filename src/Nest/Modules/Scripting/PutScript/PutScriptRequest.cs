@@ -1,11 +1,11 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public partial interface IPutScriptRequest
 	{
-		[JsonProperty("script")]
+		[DataMember(Name ="script")]
 		IStoredScript Script { get; set; }
 	}
 

@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<IdsQueryDescriptor>))]
+	[DataContract]
+	[ReadAs(typeof(IdsQueryDescriptor))]
 	public interface IIdsQuery : IQuery
 	{
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		Types Types { get; set; }
 
-		[JsonProperty("values")]
+		[DataMember(Name ="values")]
 		IEnumerable<Id> Values { get; set; }
 	}
 

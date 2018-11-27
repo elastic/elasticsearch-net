@@ -1,44 +1,44 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class ShardRecovery
 	{
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		public long Id { get; internal set; }
 
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		public RecoveryIndexStatus Index { get; internal set; }
 
-		[JsonProperty("primary")]
+		[DataMember(Name ="primary")]
 		public bool Primary { get; internal set; }
 
-		[JsonProperty("source")]
+		[DataMember(Name ="source")]
 		public RecoveryOrigin Source { get; internal set; }
 
-		[JsonProperty("stage")]
+		[DataMember(Name ="stage")]
 		public string Stage { get; internal set; }
 
-		[JsonProperty("start")]
+		[DataMember(Name ="start")]
 		public RecoveryStartStatus Start { get; internal set; }
 
-		[JsonProperty("start_time")]
+		[DataMember(Name ="start_time")]
 		public DateTime? StartTime { get; internal set; }
 
-		[JsonProperty("stop_time")]
+		[DataMember(Name ="stop_time")]
 		public DateTime? StopTime { get; internal set; }
 
-		[JsonProperty("target")]
+		[DataMember(Name ="target")]
 		public RecoveryOrigin Target { get; internal set; }
 
-		[JsonProperty("total_time_in_millis")]
+		[DataMember(Name ="total_time_in_millis")]
 		public long TotalTimeInMilliseconds { get; internal set; }
 
-		[JsonProperty("translog")]
+		[DataMember(Name ="translog")]
 		public RecoveryTranslogStatus Translog { get; internal set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		public string Type { get; internal set; }
 	}
 }

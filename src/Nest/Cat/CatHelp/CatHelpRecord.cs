@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class CatHelpRecord : ICatRecord
 	{
-		[JsonProperty("endpoint")]
+		[DataMember(Name ="endpoint")]
 		public string Endpoint { get; set; }
 	}
 }

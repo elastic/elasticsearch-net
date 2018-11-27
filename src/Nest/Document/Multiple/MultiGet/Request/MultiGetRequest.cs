@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	[JsonConverter(typeof(MultiGetRequestJsonConverter))]
 	public partial interface IMultiGetRequest
 	{
-		[JsonProperty("docs")]
+		[DataMember(Name ="docs")]
 		IEnumerable<IMultiGetOperation> Documents { get; set; }
 	}
 

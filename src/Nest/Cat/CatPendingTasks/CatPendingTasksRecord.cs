@@ -1,20 +1,20 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class CatPendingTasksRecord : ICatRecord
 	{
-		[JsonProperty("insertOrder")]
+		[DataMember(Name ="insertOrder")]
 		public int? InsertOrder { get; set; }
 
-		[JsonProperty("priority")]
+		[DataMember(Name ="priority")]
 		public string Priority { get; set; }
 
-		[JsonProperty("source")]
+		[DataMember(Name ="source")]
 		public string Source { get; set; }
 
-		[JsonProperty("timeInQueue")]
+		[DataMember(Name ="timeInQueue")]
 		public string TimeInQueue { get; set; }
 	}
 }

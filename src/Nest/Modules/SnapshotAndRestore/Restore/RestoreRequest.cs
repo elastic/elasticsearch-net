@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -12,26 +12,26 @@ namespace Nest
 		/// <summary>
 		/// The index settings to ignore as part of the restore operation
 		/// </summary>
-		[JsonProperty("ignore_index_settings")]
+		[DataMember(Name ="ignore_index_settings")]
 		List<string> IgnoreIndexSettings { get; set; }
 
 		/// <summary>
 		/// Whether indices specified that do not exist
 		/// should be ignored.
 		/// </summary>
-		[JsonProperty("ignore_unavailable")]
+		[DataMember(Name ="ignore_unavailable")]
 		bool? IgnoreUnavailable { get; set; }
 
 		/// <summary>
 		/// Whether to include aliases as part of the restore
 		/// </summary>
-		[JsonProperty("include_aliases")]
+		[DataMember(Name ="include_aliases")]
 		bool? IncludeAliases { get; set; }
 
 		/// <summary>
 		/// Whether the cluster global state should be included
 		/// </summary>
-		[JsonProperty("include_global_state")]
+		[DataMember(Name ="include_global_state")]
 		bool? IncludeGlobalState { get; set; }
 
 		/// <summary>
@@ -40,13 +40,13 @@ namespace Nest
 		/// as part of a restore operation, for example, the number
 		/// of shards.
 		/// </summary>
-		[JsonProperty("index_settings")]
+		[DataMember(Name ="index_settings")]
 		IUpdateIndexSettingsRequest IndexSettings { get; set; }
 
 		/// <summary>
 		/// The indices to restore
 		/// </summary>
-		[JsonProperty("indices")]
+		[DataMember(Name ="indices")]
 		Indices Indices { get; set; }
 
 		/// <summary>
@@ -58,7 +58,7 @@ namespace Nest
 		/// by setting <see cref="Partial" /> to <c>true</c>. Only successfully snapshotted shards
 		/// will be restored in this case and all missing shards will be recreated empty.
 		/// </summary>
-		[JsonProperty("partial")]
+		[DataMember(Name ="partial")]
 		bool? Partial { get; set; }
 
 		/// <summary>
@@ -66,14 +66,14 @@ namespace Nest
 		/// can be used to capture parts of the original index name
 		/// and used within <see cref="RenameReplacement" />
 		/// </summary>
-		[JsonProperty("rename_pattern")]
+		[DataMember(Name ="rename_pattern")]
 		string RenamePattern { get; set; }
 
 		/// <summary>
 		/// A replacement to use to rename restored indices. Used
 		/// in conjunction with <see cref="RenamePattern" />.
 		/// </summary>
-		[JsonProperty("rename_replacement")]
+		[DataMember(Name ="rename_replacement")]
 		string RenameReplacement { get; set; }
 	}
 

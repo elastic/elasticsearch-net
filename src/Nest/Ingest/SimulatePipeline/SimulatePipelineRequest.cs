@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public partial interface ISimulatePipelineRequest
 	{
-		[JsonProperty("docs")]
+		[DataMember(Name ="docs")]
 		IEnumerable<ISimulatePipelineDocument> Documents { get; set; }
 
-		[JsonProperty("pipeline")]
+		[DataMember(Name ="pipeline")]
 		IPipeline Pipeline { get; set; }
 	}
 

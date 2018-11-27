@@ -1,26 +1,26 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ClusterAllocationExplainRequest>))]
+	[ReadAs(typeof(ClusterAllocationExplainRequest))]
 	public partial interface IClusterAllocationExplainRequest
 	{
 		/// <summary>
 		/// The name of the index to provide an explanation for
 		/// </summary>
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		IndexName Index { get; set; }
 
 		/// <summary>
 		/// Whether to explain a primary or replica shard
 		/// </summary>
-		[JsonProperty("primary")]
+		[DataMember(Name ="primary")]
 		bool? Primary { get; set; }
 
 		/// <summary>
 		/// The shard id to provide an explanation for
 		/// </summary>
-		[JsonProperty("shard")]
+		[DataMember(Name ="shard")]
 		int? Shard { get; set; }
 	}
 

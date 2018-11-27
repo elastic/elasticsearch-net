@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -8,13 +8,13 @@ namespace Nest
 		/// <summary>
 		/// The analysis configuration, which specifies how to analyze the data.
 		/// </summary>
-		[JsonProperty("analysis_config")]
+		[DataMember(Name ="analysis_config")]
 		IAnalysisConfig AnalysisConfig { get; }
 
 		/// <summary>
 		/// Optionally specifies runtime limits for the job.
 		/// </summary>
-		[JsonProperty("analysis_limits")]
+		[DataMember(Name ="analysis_limits")]
 		IAnalysisLimits AnalysisLimits { get; }
 
 		/// <summary>
@@ -26,32 +26,32 @@ namespace Nest
 		/// For very large models (several GB), persistence could take 10-20 minutes,
 		/// so do not set the background_persist_interval value too low.
 		/// </remarks>
-		[JsonProperty("background_persist_interval")]
+		[DataMember(Name ="background_persist_interval")]
 		Time BackgroundPersistInterval { get; }
 
 		/// <summary>
 		/// The time the job was created.
 		/// </summary>
 		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
-		[JsonProperty("create_time")]
+		[DataMember(Name ="create_time")]
 		DateTimeOffset CreateTime { get; }
 
 		/// <summary>
 		/// Describes the format of the input data. This object is required, but it can be empty.
 		/// </summary>
-		[JsonProperty("data_description")]
+		[DataMember(Name ="data_description")]
 		IDataDescription DataDescription { get; }
 
 		/// <summary>
 		/// An optional description of the job.
 		/// </summary>
-		[JsonProperty("description")]
+		[DataMember(Name ="description")]
 		string Description { get; }
 
 		/// <summary>
 		/// The unique identifier for the job.
 		/// </summary>
-		[JsonProperty("job_id")]
+		[DataMember(Name ="job_id")]
 		string JobId { get; }
 
 		/// <summary>
@@ -60,41 +60,41 @@ namespace Nest
 		/// <remarks>
 		/// Reserved for future use.
 		/// </remarks>
-		[JsonProperty("job_type")]
+		[DataMember(Name ="job_type")]
 		string JobType { get; }
 
 		/// <summary>
 		/// This advanced configuration option stores model information along with the results.
 		/// This adds overhead to the performance of the system and is not feasible for jobs with many entities
 		/// </summary>
-		[JsonProperty("model_plot")]
+		[DataMember(Name ="model_plot")]
 		IModelPlotConfig ModelPlotConfig { get; }
 
 		/// <summary>
 		/// A numerical character string that uniquely identifies the model snapshot.
 		/// </summary>
-		[JsonProperty("model_snapshot_id")]
+		[DataMember(Name ="model_snapshot_id")]
 		string ModelSnapshotId { get; }
 
 		/// <summary>
 		/// The time in days that model snapshots are retained for the job.
 		/// Older snapshots are deleted. The default value is 1 day.
 		/// </summary>
-		[JsonProperty("model_snapshot_retention_days")]
+		[DataMember(Name ="model_snapshot_retention_days")]
 		long? ModelSnapshotRetentionDays { get; }
 
 		/// <summary>
 		/// Advanced configuration option. The period over which adjustments to the score are applied, as new data
 		/// is seen. The default value is the longer of 30 days or 100 bucket_spans.
 		/// </summary>
-		[JsonProperty("renormalization_window_days")]
+		[DataMember(Name ="renormalization_window_days")]
 		long? RenormalizationWindowDays { get; }
 
 		/// <summary>
 		/// The name of the index in which to store the machine learning results.
 		/// The default value is shared, which corresponds to the index name .ml-anomalies-shared.
 		/// </summary>
-		[JsonProperty("results_index_name")]
+		[DataMember(Name ="results_index_name")]
 		string ResultsIndexName { get; }
 
 		/// <summary>
@@ -102,7 +102,7 @@ namespace Nest
 		/// Once per day at 00:30 (server time), results older than this period are deleted from Elasticsearch.
 		/// The default value is null, which means results are retained.
 		/// </summary>
-		[JsonProperty("results_retention_days")]
+		[DataMember(Name ="results_retention_days")]
 		long? ResultsRetentionDays { get; }
 	}
 

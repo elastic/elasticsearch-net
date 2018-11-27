@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -8,14 +8,14 @@ namespace Nest
 	/// later point. The terms group is optional. If defined, the indexer will enumerate and store all values of a field for
 	/// each time-period.
 	/// </summary>
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<TermsRollupGrouping>))]
+	[ReadAs(typeof(TermsRollupGrouping))]
 	public interface ITermsRollupGrouping
 	{
 		/// <summary>
 		/// The set of fields that you wish to collect terms for. This array can contain fields that are both keyword and numerics.
 		/// Order does not matter
 		/// </summary>
-		[JsonProperty("fields")]
+		[DataMember(Name ="fields")]
 		Fields Fields { get; set; }
 	}
 

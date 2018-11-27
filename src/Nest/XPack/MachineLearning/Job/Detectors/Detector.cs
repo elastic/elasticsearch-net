@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Linq;
 
 namespace Nest
@@ -8,19 +8,19 @@ namespace Nest
 	[ContractJsonConverter(typeof(DetectorConverter))]
 	public interface IDetector
 	{
-		[JsonProperty("detector_description")]
+		[DataMember(Name ="detector_description")]
 		string DetectorDescription { get; set; }
 
-		[JsonProperty("detector_index")]
+		[DataMember(Name ="detector_index")]
 		int? DetectorIndex { get; set; }
 
-		[JsonProperty("exclude_frequent")]
+		[DataMember(Name ="exclude_frequent")]
 		ExcludeFrequent? ExcludeFrequent { get; set; }
 
-		[JsonProperty("function")]
+		[DataMember(Name ="function")]
 		string Function { get; }
 
-		[JsonProperty("use_null")]
+		[DataMember(Name ="use_null")]
 		bool? UseNull { get; set; }
 	}
 
@@ -121,25 +121,25 @@ namespace Nest
 
 	public interface IFieldNameDetector : IDetector
 	{
-		[JsonProperty("field_name")]
+		[DataMember(Name ="field_name")]
 		Field FieldName { get; set; }
 	}
 
 	public interface IByFieldNameDetector : IDetector
 	{
-		[JsonProperty("by_field_name")]
+		[DataMember(Name ="by_field_name")]
 		Field ByFieldName { get; set; }
 	}
 
 	public interface IOverFieldNameDetector : IDetector
 	{
-		[JsonProperty("over_field_name")]
+		[DataMember(Name ="over_field_name")]
 		Field OverFieldName { get; set; }
 	}
 
 	public interface IPartitionFieldNameDetector : IDetector
 	{
-		[JsonProperty("partition_field_name")]
+		[DataMember(Name ="partition_field_name")]
 		Field PartitionFieldName { get; set; }
 	}
 

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	[AttributeUsage(AttributeTargets.Property)]
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	public abstract class ElasticsearchPropertyAttributeBase : Attribute, IProperty, IPropertyMapping
 	{
 		protected ElasticsearchPropertyAttributeBase(FieldType type) => Self.Type = type.GetStringValue();

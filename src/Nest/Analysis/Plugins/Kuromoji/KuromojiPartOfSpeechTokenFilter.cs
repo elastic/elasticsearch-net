@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -13,7 +13,7 @@ namespace Nest
 		/// An array of part-of-speech tags that should be removed. It defaults to the stoptags.txt file embedded
 		/// in the lucene-analyzer-kuromoji.jar.
 		/// </summary>
-		[JsonProperty("stoptags")]
+		[DataMember(Name ="stoptags")]
 		IEnumerable<string> StopTags { get; set; }
 	}
 

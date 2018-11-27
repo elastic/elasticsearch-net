@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<IndexField>))]
+	[ReadAs(typeof(IndexField))]
 	public interface IIndexField : IFieldMapping
 	{
-		[JsonProperty("enabled")]
+		[DataMember(Name ="enabled")]
 		bool? Enabled { get; set; }
 	}
 

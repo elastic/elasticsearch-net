@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IGetDatafeedsResponse : IResponse
 	{
-		[JsonProperty("count")]
+		[DataMember(Name ="count")]
 		long Count { get; }
 
-		[JsonProperty("datafeeds")]
+		[DataMember(Name ="datafeeds")]
 		IReadOnlyCollection<DatafeedConfig> Datafeeds { get; }
 	}
 

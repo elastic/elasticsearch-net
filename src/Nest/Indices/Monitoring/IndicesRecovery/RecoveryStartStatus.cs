@@ -1,13 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class RecoveryStartStatus
 	{
-		[JsonProperty("check_index_time")]
+		[DataMember(Name ="check_index_time")]
 		public long CheckIndexTime { get; internal set; }
 
-		[JsonProperty("total_time_in_millis")]
+		[DataMember(Name ="total_time_in_millis")]
 		public string TotalTimeInMilliseconds { get; internal set; }
 	}
 }

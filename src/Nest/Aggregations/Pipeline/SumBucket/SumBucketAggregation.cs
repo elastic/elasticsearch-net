@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<SumBucketAggregation>))]
+	[DataContract]
+	[ReadAs(typeof(SumBucketAggregation))]
 	public interface ISumBucketAggregation : IPipelineAggregation { }
 
 	public class SumBucketAggregation

@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public partial interface IPostLicenseRequest
 	{
-		[JsonProperty("license")]
+		[DataMember(Name ="license")]
 		License License { get; set; }
 	}
 

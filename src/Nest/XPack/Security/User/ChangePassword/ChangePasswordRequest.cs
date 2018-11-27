@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public partial interface IChangePasswordRequest
 	{
-		[JsonProperty("password")]
+		[DataMember(Name ="password")]
 		string Password { get; set; }
 	}
 

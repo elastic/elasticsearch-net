@@ -1,12 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(FieldNameQueryJsonConverter<TermQuery>))]
 	public interface ITermQuery : IFieldNameQuery
 	{
-		[JsonProperty("value")]
+		[DataMember(Name ="value")]
 		[JsonConverter(typeof(SourceValueWriteConverter))]
 		object Value { get; set; }
 	}

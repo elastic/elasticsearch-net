@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IClearCachedRolesResponse : IResponse
 	{
-		[JsonProperty("cluster_name")]
+		[DataMember(Name ="cluster_name")]
 		string ClusterName { get; }
 
-		[JsonProperty("nodes")]
+		[DataMember(Name ="nodes")]
 		IReadOnlyDictionary<string, SecurityNode> Nodes { get; }
 	}
 

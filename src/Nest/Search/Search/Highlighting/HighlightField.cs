@@ -1,38 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<HighlightField>))]
+	[DataContract]
+	[ReadAs(typeof(HighlightField))]
 	public interface IHighlightField
 	{
 		/// <summary>
 		/// Defines what constitutes a boundary for highlighting when using the fast vector highlighter.
 		/// It's a single string with each boundary character defined in it. It defaults to .,!? \t\n.
 		/// </summary>
-		[JsonProperty("boundary_chars")]
+		[DataMember(Name ="boundary_chars")]
 		string BoundaryChars { get; set; }
 
 		/// <summary>
 		/// Controls how far to look for boundary characters. Defaults to 20.
 		/// </summary>
-		[JsonProperty("boundary_max_scan")]
+		[DataMember(Name ="boundary_max_scan")]
 		int? BoundaryMaxScan { get; set; }
 
 		/// <summary>
 		/// When highlighting a field using the unified highlighter or the fast vector highlighter, you can specify how to break the highlighted
 		/// fragments using boundary_scanner
 		/// </summary>
-		[JsonProperty("boundary_scanner")]
+		[DataMember(Name ="boundary_scanner")]
 		BoundaryScanner? BoundaryScanner { get; set; }
 
 		/// <summary>
 		/// You can further specify boundary_scanner_locale to control which Locale is used to search the text for these boundaries.
 		/// </summary>
-		[JsonProperty("boundary_scanner_locale")]
+		[DataMember(Name ="boundary_scanner_locale")]
 		string BoundaryScannerLocale { get; set; }
 
 		/// <summary>
@@ -48,32 +48,32 @@ namespace Nest
 		/// <summary>
 		/// Forces the highlighting to highlight fields based on the source even if fields are stored separately.
 		/// </summary>
-		[JsonProperty("force_source")]
+		[DataMember(Name ="force_source")]
 		bool? ForceSource { get; set; }
 
 		/// <summary>
 		/// Fragmenter can control how text should be broken up in highlight snippets. However, this option is
 		/// applicable only for the Plain Highlighter
 		/// </summary>
-		[JsonProperty("fragmenter")]
+		[DataMember(Name ="fragmenter")]
 		HighlighterFragmenter? Fragmenter { get; set; }
 
 		/// <summary>
 		/// Controls the margin to start highlighting from when using the fast vector highlighter
 		/// </summary>
-		[JsonProperty("fragment_offset")]
+		[DataMember(Name ="fragment_offset")]
 		int? FragmentOffset { get; set; }
 
 		/// <summary>
 		/// The size of the highlighted fragment, in characters. Defaults to 100
 		/// </summary>
-		[JsonProperty("fragment_size")]
+		[DataMember(Name ="fragment_size")]
 		int? FragmentSize { get; set; }
 
 		/// <summary>
 		/// The query to use for highlighting
 		/// </summary>
-		[JsonProperty("highlight_query")]
+		[DataMember(Name ="highlight_query")]
 		QueryContainer HighlightQuery { get; set; }
 
 		/// <summary>
@@ -82,10 +82,10 @@ namespace Nest
 		/// All matched fields must have term_vector set to with_positions_offsets, but only the field to
 		/// which the matches are combined is loaded so only that field would benefit from having store set to yes.
 		/// </summary>
-		[JsonProperty("matched_fields")]
+		[DataMember(Name ="matched_fields")]
 		Fields MatchedFields { get; set; }
 
-		[JsonProperty("max_fragment_length")]
+		[DataMember(Name ="max_fragment_length")]
 		int? MaxFragmentLength { get; set; }
 
 		/// <summary>
@@ -93,19 +93,19 @@ namespace Nest
 		/// when no match for highlighting is found. Default behaviour is to not return anything when a match is not found.
 		/// The actual length may be shorter than specified as it tries to break on a word boundary.
 		/// </summary>
-		[JsonProperty("no_match_size")]
+		[DataMember(Name ="no_match_size")]
 		int? NoMatchSize { get; set; }
 
 		/// <summary>
 		/// The maximum number of fragments to return. Defaults to 5.
 		/// </summary>
-		[JsonProperty("number_of_fragments")]
+		[DataMember(Name ="number_of_fragments")]
 		int? NumberOfFragments { get; set; }
 
 		/// <summary>
 		/// The order in which highlighted fragments are sorted. Only valid for the unified highlighter.
 		/// </summary>
-		[JsonProperty("order")]
+		[DataMember(Name ="order")]
 		HighlighterOrder? Order { get; set; }
 
 		/// <summary>
@@ -114,7 +114,7 @@ namespace Nest
 		/// When using matched_fields, <see cref="PhraseLimit" /> phrases per matched field are considered. Raising the limit increases query time
 		/// and consumes more memory. Only supported by the <see cref="HighlighterType.Fvh" /> highlighter. Defaults to 256.
 		/// </summary>
-		[JsonProperty("phrase_limit")]
+		[DataMember(Name ="phrase_limit")]
 		int? PhraseLimit { get; set; }
 
 		/// <summary>
@@ -122,7 +122,7 @@ namespace Nest
 		/// By default, the highlighting will wrap highlighted text in &lt;em&gt; and &lt;/em&gt;.
 		/// Using the fast vector highlighter, there can be more tags, and the importance is ordered.
 		/// </summary>
-		[JsonProperty("post_tags")]
+		[DataMember(Name ="post_tags")]
 		IEnumerable<string> PostTags { get; set; }
 
 		/// <summary>
@@ -130,14 +130,14 @@ namespace Nest
 		/// By default, the highlighting will wrap highlighted text in &lt;em&gt; and &lt;/em&gt;.
 		/// Using the fast vector highlighter, there can be more tags, and the importance is ordered.
 		/// </summary>
-		[JsonProperty("pre_tags")]
+		[DataMember(Name ="pre_tags")]
 		IEnumerable<string> PreTags { get; set; }
 
 		/// <summary>
 		/// Determines if only fields that hold a query match will be highlighted. Set to <c>false</c>
 		/// will cause any field to be highlighted regardless of whether the query matched specifically on them. Default behaviour is <c>true</c>.
 		/// </summary>
-		[JsonProperty("require_field_match")]
+		[DataMember(Name ="require_field_match")]
 		bool? RequireFieldMatch { get; set; }
 
 		/// <summary>
@@ -150,13 +150,13 @@ namespace Nest
 		/// &lt;em class="hlt7"&gt;, &lt;em class="hlt8"&gt;, &lt;em class="hlt9"&gt;,
 		/// &lt;em class="hlt10"&gt;
 		/// </remarks>
-		[JsonProperty("tags_schema")]
+		[DataMember(Name ="tags_schema")]
 		HighlighterTagsSchema? TagsSchema { get; set; }
 
 		/// <summary>
 		/// The type of highlighter to use. Can be a defined or custom highlighter
 		/// </summary>
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		Union<HighlighterType, string> Type { get; set; }
 	}
 

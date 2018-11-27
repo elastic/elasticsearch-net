@@ -1,38 +1,38 @@
 ﻿using System.Collections.Generic;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class IndexHealthStats
 	{
-		[JsonProperty("active_primary_shards")]
+		[DataMember(Name ="active_primary_shards")]
 		public int ActivePrimaryShards { get; internal set; }
 
-		[JsonProperty("active_shards")]
+		[DataMember(Name ="active_shards")]
 		public int ActiveShards { get; internal set; }
 
-		[JsonProperty("initializing_shards")]
+		[DataMember(Name ="initializing_shards")]
 		public int InitializingShards { get; internal set; }
 
-		[JsonProperty("number_of_replicas")]
+		[DataMember(Name ="number_of_replicas")]
 		public int NumberOfReplicas { get; internal set; }
 
-		[JsonProperty("number_of_shards")]
+		[DataMember(Name ="number_of_shards")]
 		public int NumberOfShards { get; internal set; }
 
-		[JsonProperty("relocating_shards")]
+		[DataMember(Name ="relocating_shards")]
 		public int RelocatingShards { get; internal set; }
 
-		[JsonProperty("shards")]
+		[DataMember(Name ="shards")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, ShardHealthStats>))]
 		public IReadOnlyDictionary<string, ShardHealthStats> Shards { get; internal set; } = EmptyReadOnly<string, ShardHealthStats>.Dictionary;
 
-		[JsonProperty("status")]
+		[DataMember(Name ="status")]
 		public Health Status { get; internal set; }
 
-		[JsonProperty("unassigned_shards")]
+		[DataMember(Name ="unassigned_shards")]
 		public int UnassignedShards { get; internal set; }
 	}
 }

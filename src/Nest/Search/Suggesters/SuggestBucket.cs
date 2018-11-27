@@ -1,27 +1,27 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SuggestBucket>))]
+	[DataContract]
+	[ReadAs(typeof(SuggestBucket))]
 	public interface ISuggestBucket
 	{
-		[JsonProperty("completion")]
+		[DataMember(Name ="completion")]
 		ICompletionSuggester Completion { get; set; }
 
-		[JsonProperty("phrase")]
+		[DataMember(Name ="phrase")]
 		IPhraseSuggester Phrase { get; set; }
 
-		[JsonProperty("prefix")]
+		[DataMember(Name ="prefix")]
 		string Prefix { get; set; }
 
-		[JsonProperty("regex")]
+		[DataMember(Name ="regex")]
 		string Regex { get; set; }
 
-		[JsonProperty("term")]
+		[DataMember(Name ="term")]
 		ITermSuggester Term { get; set; }
 
-		[JsonProperty("text")]
+		[DataMember(Name ="text")]
 		string Text { get; set; }
 	}
 

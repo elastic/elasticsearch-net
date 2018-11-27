@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IUpgradeResponse : IResponse
 	{
-		[JsonProperty("_shards")]
+		[DataMember(Name ="_shards")]
 		ShardStatistics Shards { get; }
 	}
 

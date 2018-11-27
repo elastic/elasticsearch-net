@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Utf8Json;
 
 namespace Nest
 {
-	[ContractJsonConverter(typeof(PercentileRanksAggregationJsonConverter))]
+	[JsonFormatter(typeof(PercentileRanksAggregationFormatter))]
 	public interface IPercentileRanksAggregation : IMetricAggregation
 	{
 		IPercentilesMethod Method { get; set; }

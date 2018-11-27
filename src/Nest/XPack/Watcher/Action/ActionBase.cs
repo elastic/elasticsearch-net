@@ -2,24 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IAction
 	{
-		[JsonIgnore]
+		[IgnoreDataMember]
 		ActionType ActionType { get; }
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		string Name { get; set; }
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		Time ThrottlePeriod { get; set; }
 
-		[JsonProperty("transform")]
+		[DataMember(Name ="transform")]
 		TransformContainer Transform { get; set; }
 	}
 

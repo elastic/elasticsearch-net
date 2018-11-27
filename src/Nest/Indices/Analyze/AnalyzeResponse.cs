@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -16,83 +16,83 @@ namespace Nest
 		IReadOnlyCollection<AnalyzeToken> Tokens { get; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class AnalyzeResponse : ResponseBase, IAnalyzeResponse
 	{
-		[JsonProperty("detail")]
+		[DataMember(Name ="detail")]
 		public AnalyzeDetail Detail { get; internal set; }
 
-		[JsonProperty("tokens")]
+		[DataMember(Name ="tokens")]
 		public IReadOnlyCollection<AnalyzeToken> Tokens { get; internal set; } = EmptyReadOnly<AnalyzeToken>.Collection;
 	}
 
 
-	[JsonObject]
+	[DataContract]
 	public class AnalyzeDetail
 	{
-		[JsonProperty("charfilters")]
+		[DataMember(Name ="charfilters")]
 		public IReadOnlyCollection<CharFilterDetail> CharFilters { get; internal set; } = EmptyReadOnly<CharFilterDetail>.Collection;
 
-		[JsonProperty("custom_analyzer")]
+		[DataMember(Name ="custom_analyzer")]
 		public bool CustomAnalyzer { get; internal set; }
 
-		[JsonProperty("tokenfilters")]
+		[DataMember(Name ="tokenfilters")]
 		public IReadOnlyCollection<TokenDetail> Filters { get; internal set; } = EmptyReadOnly<TokenDetail>.Collection;
 
-		[JsonProperty("tokenizer")]
+		[DataMember(Name ="tokenizer")]
 		public TokenDetail Tokenizer { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class CharFilterDetail
 	{
-		[JsonProperty("filtered_text")]
+		[DataMember(Name ="filtered_text")]
 		public IReadOnlyCollection<string> FilteredText { get; internal set; } = EmptyReadOnly<string>.Collection;
 
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		public string Name { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class TokenDetail
 	{
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		public string Name { get; internal set; }
 
-		[JsonProperty("tokens")]
+		[DataMember(Name ="tokens")]
 		public IReadOnlyCollection<ExplainAnalyzeToken> Tokens { get; internal set; } = EmptyReadOnly<ExplainAnalyzeToken>.Collection;
 	}
 
 	//TODO create an issue on the main repos that this API uses camelCase
 	//this causes us to be unable to subclass from AnalyzeToken directly
-	[JsonObject]
+	[DataContract]
 	public class ExplainAnalyzeToken
 	{
-		[JsonProperty("bytes")]
+		[DataMember(Name ="bytes")]
 		public string Bytes { get; internal set; }
 
-		[JsonProperty("end_offset")]
+		[DataMember(Name ="end_offset")]
 		public long EndOffset { get; internal set; }
 
-		[JsonProperty("keyword")]
+		[DataMember(Name ="keyword")]
 		public bool? Keyword { get; internal set; }
 
-		[JsonProperty("position")]
+		[DataMember(Name ="position")]
 		public long Position { get; internal set; }
 
-		[JsonProperty("positionLength")]
+		[DataMember(Name ="positionLength")]
 		public long? PositionLength { get; internal set; }
 
-		[JsonProperty("start_offset")]
+		[DataMember(Name ="start_offset")]
 		public long StartOffset { get; internal set; }
 
-		[JsonProperty("termFrequency")]
+		[DataMember(Name ="termFrequency")]
 		public long? TermFrequency { get; internal set; }
 
-		[JsonProperty("token")]
+		[DataMember(Name ="token")]
 		public string Token { get; internal set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		public string Type { get; internal set; }
 	}
 }

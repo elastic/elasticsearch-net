@@ -1,21 +1,21 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class ShardCommit
 	{
-		[JsonProperty("generation")]
+		[DataMember(Name ="generation")]
 		public int Generation { get; internal set; }
 
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		public string Id { get; internal set; }
 
-		[JsonProperty("num_docs")]
+		[DataMember(Name ="num_docs")]
 		public long NumberOfDocuments { get; internal set; }
 
-		[JsonProperty("user_data")]
+		[DataMember(Name ="user_data")]
 		public IReadOnlyDictionary<string, string> UserData { get; internal set; }
 	}
 }

@@ -1,24 +1,24 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public partial interface IPutAliasRequest
 	{
-		[JsonProperty("filter")]
+		[DataMember(Name ="filter")]
 		QueryContainer Filter { get; set; }
 
-		[JsonProperty("index_routing")]
+		[DataMember(Name ="index_routing")]
 		Routing IndexRouting { get; set; }
 
 		/// <inheritdoc cref="AliasAddOperation.IsWriteIndex" />
-		[JsonProperty("is_write_index")]
+		[DataMember(Name ="is_write_index")]
 		bool? IsWriteIndex { get; set; }
 
-		[JsonProperty("routing")]
+		[DataMember(Name ="routing")]
 		Routing Routing { get; set; }
 
-		[JsonProperty("search_routing")]
+		[DataMember(Name ="search_routing")]
 		Routing SearchRouting { get; set; }
 	}
 

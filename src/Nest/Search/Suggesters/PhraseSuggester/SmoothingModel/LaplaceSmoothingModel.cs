@@ -1,12 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<LaplaceSmoothingModel>))]
+	[DataContract]
+	[ReadAs(typeof(LaplaceSmoothingModel))]
 	public interface ILaplaceSmoothingModel : ISmoothingModel
 	{
-		[JsonProperty("alpha")]
+		[DataMember(Name ="alpha")]
 		double? Alpha { get; set; }
 	}
 

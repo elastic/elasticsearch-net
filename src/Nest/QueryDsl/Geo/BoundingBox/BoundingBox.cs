@@ -1,17 +1,17 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<BoundingBox>))]
+	[ReadAs(typeof(BoundingBox))]
 	public interface IBoundingBox
 	{
-		[JsonProperty("bottom_right")]
+		[DataMember(Name ="bottom_right")]
 		GeoLocation BottomRight { get; set; }
 
-		[JsonProperty("top_left")]
+		[DataMember(Name ="top_left")]
 		GeoLocation TopLeft { get; set; }
 
-		[JsonProperty("wkt")]
+		[DataMember(Name ="wkt")]
 		string WellKnownText { get; set; }
 	}
 

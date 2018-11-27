@@ -5,7 +5,7 @@ using System.Reflection;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Tests.Core.Xunit;
 using Tests.Framework;
 

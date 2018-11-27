@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -13,39 +13,39 @@ namespace Nest
 	/// <remarks>
 	/// Requires the Ingest Attachment Processor Plugin to be installed on the cluster.
 	/// </remarks>
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(ProcessorJsonConverter<AttachmentProcessor>))]
 	public interface IAttachmentProcessor : IProcessor
 	{
 		/// <summary> The field to get the base64 encoded field from </summary>
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
 
 		/// <summary> If `true` and `field` does not exist, the processor quietly exits without modifying the document </summary>
-		[JsonProperty("ignore_missing")]
+		[DataMember(Name ="ignore_missing")]
 		bool? IgnoreMissing { get; set; }
 
 		/// <summary>
 		/// The number of chars being used for extraction to prevent huge fields. Use -1 for no limit.
 		/// Defaults to 100000.
 		/// </summary>
-		[JsonProperty("indexed_chars")]
+		[DataMember(Name ="indexed_chars")]
 		long? IndexedCharacters { get; set; }
 
 		/// <summary> Field name from which you can overwrite the number of chars being used for extraction. </summary>
-		[JsonProperty("indexed_chars_field")]
+		[DataMember(Name ="indexed_chars_field")]
 		Field IndexedCharactersField { get; set; }
 
 		/// <summary>
 		/// Properties to select to be stored. Can be content, title, name, author,
 		/// keywords, date, content_type, content_length, language. Defaults to all
 		/// </summary>
-		[JsonProperty("properties")]
+		[DataMember(Name ="properties")]
 		IEnumerable<string> Properties { get; set; }
 
 		/// <summary> The field that will hold the attachment information </summary>
-		[JsonProperty("target_field")]
+		[DataMember(Name ="target_field")]
 		Field TargetField { get; set; }
 	}
 

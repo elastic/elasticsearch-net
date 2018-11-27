@@ -1,19 +1,21 @@
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// Represents an aggregation on the request
 	/// </summary>
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[InterfaceDataContract]
 	public interface IAggregation
 	{
 		/// <summary>
 		/// metadata to associate with the individual aggregation at request time that
 		/// will be returned in place at response time
 		/// </summary>
+		[DataMember(Name = "meta")]
 		IDictionary<string, object> Meta { get; set; }
 
 		/// <summary>

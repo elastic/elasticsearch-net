@@ -1,5 +1,5 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -14,13 +14,13 @@ namespace Nest
 		/// <summary>
 		/// The interval to use when bucketing documents
 		/// </summary>
-		[JsonProperty("interval")]
+		[DataMember(Name ="interval")]
 		double? Interval { get; set; }
 
 		/// <summary>
 		/// A script to create the values for the composite buckets
 		/// </summary>
-		[JsonProperty("script")]
+		[DataMember(Name ="script")]
 		IScript Script { get; set; }
 	}
 

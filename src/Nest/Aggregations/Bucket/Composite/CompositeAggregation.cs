@@ -1,21 +1,22 @@
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// A multi-bucket aggregation that creates composite buckets from different sources.
 	/// </summary>
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<CompositeAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(CompositeAggregation))]
 	public interface ICompositeAggregation : IBucketAggregation
 	{
 		/// <summary>
 		/// Used to retrieve the composite buckets that are after the
 		/// last composite buckets returned in a previous round
 		/// </summary>
-		[JsonProperty("after")]
+		[DataMember(Name ="after")]
 		object After { get; set; }
 
 		/// <summary>
@@ -24,13 +25,13 @@ namespace Nest
 		/// setting a size of 10 will return the first 10 composite buckets
 		/// created from the values source.
 		/// </summary>
-		[JsonProperty("size")]
+		[DataMember(Name ="size")]
 		int? Size { get; set; }
 
 		/// <summary>
 		/// Controls the sources that should be used to build the composite buckets
 		/// </summary>
-		[JsonProperty("sources")]
+		[DataMember(Name ="sources")]
 		IEnumerable<ICompositeAggregationSource> Sources { get; set; }
 	}
 

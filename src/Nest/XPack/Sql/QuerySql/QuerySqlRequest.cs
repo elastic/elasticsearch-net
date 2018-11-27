@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -15,7 +15,7 @@ namespace Nest
 		/// Unlike scroll, receiving the last page is enough to guarantee that the Elasticsearch state is cleared.
 		/// </para>
 		/// </summary>
-		[JsonProperty("cursor")]
+		[DataMember(Name ="cursor")]
 		string Cursor { get; set; }
 	}
 

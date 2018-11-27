@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -16,14 +16,14 @@ namespace Nest
 		/// <summary>
 		/// Char filters to normalize the keyword
 		/// </summary>
-		[JsonProperty("char_filter")]
+		[DataMember(Name ="char_filter")]
 		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<string>))]
 		IEnumerable<string> CharFilter { get; set; }
 
 		/// <summary>
 		/// An optional list of logical / registered name of token filters.
 		/// </summary>
-		[JsonProperty("filter")]
+		[DataMember(Name ="filter")]
 		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<string>))]
 		IEnumerable<string> Filter { get; set; }
 	}

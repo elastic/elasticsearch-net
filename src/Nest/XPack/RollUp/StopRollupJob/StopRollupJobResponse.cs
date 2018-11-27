@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public interface IStopRollupJobResponse : IResponse
 	{
-		[JsonProperty("stopped")]
+		[DataMember(Name ="stopped")]
 		bool Stopped { get; set; }
 	}
 

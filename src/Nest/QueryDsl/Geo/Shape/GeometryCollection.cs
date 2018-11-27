@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -12,7 +12,7 @@ namespace Nest
 		/// <summary>
 		/// A collection of <see cref="IGeoShape" /> geometries
 		/// </summary>
-		[JsonProperty("geometries")]
+		[DataMember(Name ="geometries")]
 		IEnumerable<IGeoShape> Geometries { get; set; }
 	}
 

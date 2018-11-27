@@ -1,34 +1,34 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<PagerDutyEvent>))]
 	public interface IPagerDutyEvent
 	{
-		[JsonProperty("account")]
+		[DataMember(Name ="account")]
 		string Account { get; set; }
 
-		[JsonProperty("attach_payload")]
+		[DataMember(Name ="attach_payload")]
 		bool? AttachPayload { get; set; }
 
-		[JsonProperty("client")]
+		[DataMember(Name ="client")]
 		string Client { get; set; }
 
-		[JsonProperty("client_url")]
+		[DataMember(Name ="client_url")]
 		string ClientUrl { get; set; }
 
-		[JsonProperty("context")]
+		[DataMember(Name ="context")]
 		IEnumerable<IPagerDutyContext> Context { get; set; }
 
-		[JsonProperty("description")]
+		[DataMember(Name ="description")]
 		string Description { get; set; }
 
-		[JsonProperty("event_type")]
+		[DataMember(Name ="event_type")]
 		PagerDutyEventType? EventType { get; set; }
 
-		[JsonProperty("incident_key")]
+		[DataMember(Name ="incident_key")]
 		string IncidentKey { get; set; }
 	}
 

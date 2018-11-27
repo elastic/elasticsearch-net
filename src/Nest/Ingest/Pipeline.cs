@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(PipelineJsonConverter))]
 	public interface IPipeline
 	{
-		[JsonProperty("description")]
+		[DataMember(Name ="description")]
 		string Description { get; set; }
 
-		[JsonProperty("on_failure")]
+		[DataMember(Name ="on_failure")]
 		IEnumerable<IProcessor> OnFailure { get; set; }
 
-		[JsonProperty("processors")]
+		[DataMember(Name ="processors")]
 		IEnumerable<IProcessor> Processors { get; set; }
 	}
 

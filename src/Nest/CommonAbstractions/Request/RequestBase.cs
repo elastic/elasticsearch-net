@@ -2,11 +2,11 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IRequest
 	{
 		HttpMethod HttpMethod { get; }
@@ -43,16 +43,16 @@ namespace Nest
 
 		protected virtual HttpMethod HttpMethod => RequestState.RequestParameters.DefaultHttpMethod;
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		protected IRequest<TParameters> RequestState => this;
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		HttpMethod IRequest.HttpMethod => HttpMethod;
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		TParameters IRequest<TParameters>.RequestParameters { get; set; } = new TParameters();
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		RouteValues IRequest.RouteValues { get; } = new RouteValues();
 
 		protected virtual void Initialize() { }

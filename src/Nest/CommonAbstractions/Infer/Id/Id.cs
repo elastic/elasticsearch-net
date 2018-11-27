@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Globalization;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Utf8Json;
 
 namespace Nest

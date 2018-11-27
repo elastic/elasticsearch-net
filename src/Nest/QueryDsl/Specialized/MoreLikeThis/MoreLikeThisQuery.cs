@@ -2,70 +2,70 @@
 using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<MoreLikeThisQueryDescriptor<object>>))]
+	[DataContract]
+	[ReadAs(typeof(MoreLikeThisQueryDescriptor<object>))]
 	public interface IMoreLikeThisQuery : IQuery
 	{
-		[JsonProperty("analyzer")]
+		[DataMember(Name ="analyzer")]
 		string Analyzer { get; set; }
 
-		[JsonProperty("boost_terms")]
+		[DataMember(Name ="boost_terms")]
 		double? BoostTerms { get; set; }
 
-		[JsonProperty("fields")]
+		[DataMember(Name ="fields")]
 		Fields Fields { get; set; }
 
-		[JsonProperty("include")]
+		[DataMember(Name ="include")]
 		bool? Include { get; set; }
 
-		[JsonProperty("like")]
+		[DataMember(Name ="like")]
 		IEnumerable<Like> Like { get; set; }
 
-		[JsonProperty("max_doc_freq")]
+		[DataMember(Name ="max_doc_freq")]
 		int? MaxDocumentFrequency { get; set; }
 
-		[JsonProperty("max_query_terms")]
+		[DataMember(Name ="max_query_terms")]
 		int? MaxQueryTerms { get; set; }
 
-		[JsonProperty("max_word_length")]
+		[DataMember(Name ="max_word_length")]
 		int? MaxWordLength { get; set; }
 
-		[JsonProperty("min_doc_freq")]
+		[DataMember(Name ="min_doc_freq")]
 		int? MinDocumentFrequency { get; set; }
 
-		[JsonProperty("minimum_should_match")]
+		[DataMember(Name ="minimum_should_match")]
 		MinimumShouldMatch MinimumShouldMatch { get; set; }
 
-		[JsonProperty("min_term_freq")]
+		[DataMember(Name ="min_term_freq")]
 		int? MinTermFrequency { get; set; }
 
-		[JsonProperty("min_word_length")]
+		[DataMember(Name ="min_word_length")]
 		int? MinWordLength { get; set; }
 
 		/// <summary>
 		/// Provide a different analyzer than the one at the field.
 		/// This is useful in order to generate term vectors in any fashion, especially when using artificial documents.
 		/// </summary>
-		[JsonProperty("per_field_analyzer")]
+		[DataMember(Name ="per_field_analyzer")]
 		IPerFieldAnalyzer PerFieldAnalyzer { get; set; }
 
-		[JsonProperty("routing")]
+		[DataMember(Name ="routing")]
 		Routing Routing { get; set; }
 
-		[JsonProperty("stop_words")]
+		[DataMember(Name ="stop_words")]
 		StopWords StopWords { get; set; }
 
-		[JsonProperty("unlike")]
+		[DataMember(Name ="unlike")]
 		IEnumerable<Like> Unlike { get; set; }
 
-		[JsonProperty("version")]
+		[DataMember(Name ="version")]
 		long? Version { get; set; }
 
-		[JsonProperty("version_type")]
+		[DataMember(Name ="version_type")]
 		VersionType? VersionType { get; set; }
 	}
 

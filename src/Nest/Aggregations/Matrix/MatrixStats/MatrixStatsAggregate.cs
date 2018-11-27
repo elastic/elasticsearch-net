@@ -1,44 +1,44 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class MatrixStatsField
 	{
-		[JsonProperty("correlation")]
+		[DataMember(Name ="correlation")]
 		public Dictionary<string, double> Correlation { get; set; }
 
-		[JsonProperty("count")]
+		[DataMember(Name ="count")]
 		public int Count { get; set; }
 
-		[JsonProperty("covariance")]
+		[DataMember(Name ="covariance")]
 		public Dictionary<string, double> Covariance { get; set; }
 
-		[JsonProperty("kurtosis")]
+		[DataMember(Name ="kurtosis")]
 		public double Kurtosis { get; set; }
 
-		[JsonProperty("mean")]
+		[DataMember(Name ="mean")]
 		public double Mean { get; set; }
 
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		public string Name { get; set; }
 
-		[JsonProperty("skewness")]
+		[DataMember(Name ="skewness")]
 		public double Skewness { get; set; }
 
-		[JsonProperty("variance")]
+		[DataMember(Name ="variance")]
 		public double Variance { get; set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class MatrixStatsAggregate : MatrixAggregateBase
 	{
 		//TODO non nullable in 6.0
-		[JsonProperty("fields")]
+		[DataMember(Name ="fields")]
 		public long? DocCount { get; set; }
 
-		[JsonProperty("fields")]
+		[DataMember(Name ="fields")]
 		public List<MatrixStatsField> Fields { get; set; }
 	}
 }

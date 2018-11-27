@@ -1,8 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[InterfaceDataContract]
+	[ReadAs(typeof(LinearModel))]
 	public interface ILinearModel : IMovingAverageModel { }
 
 	public class LinearModel : ILinearModel

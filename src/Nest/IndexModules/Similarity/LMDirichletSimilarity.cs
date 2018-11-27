@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -10,7 +10,7 @@ namespace Nest
 		/// <summary>
 		/// The mu parameter. Defaults to 2000.
 		/// </summary>
-		[JsonProperty("mu")]
+		[DataMember(Name ="mu")]
 		int? Mu { get; set; }
 	}
 

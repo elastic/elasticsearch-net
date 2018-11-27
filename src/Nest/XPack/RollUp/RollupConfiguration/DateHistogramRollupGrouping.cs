@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -8,33 +8,33 @@ namespace Nest
 	/// A date_histogram group aggregates a date field into time-based buckets. The date_histogram group is mandatory ,
 	/// you currently cannot rollup documents without a timestamp and a date_histogram group
 	/// </summary>
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<DateHistogramRollupGrouping>))]
+	[ReadAs(typeof(DateHistogramRollupGrouping))]
 	public interface IDateHistogramRollupGrouping
 	{
 		/// <summary>
 		/// How long to wait before rolling up new documents. By default, the indexer attempts to roll up all data that is available.
 		/// </summary>
-		[JsonProperty("delay")]
+		[DataMember(Name ="delay")]
 		Time Delay { get; set; }
 
 		/// <summary>
 		/// The date field that is to be rolled up
 		/// </summary>
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
 		/// <summary>
 		/// The interval of time buckets to be generated when rolling up. E.g. "60m" will produce 60 minute (hourly) rollups.
 		/// The interval defines the minimum interval that can be aggregated only.
 		/// </summary>
-		[JsonProperty("interval")]
+		[DataMember(Name ="interval")]
 		Time Interval { get; set; }
 
 		/// <summary>
 		/// Defines what time_zone the rollup documents are stored as. Unlike raw data, which can shift timezones on the fly, rolled
 		/// documents have to be stored with a specific timezone. By default, rollup documents are stored in UT
 		/// </summary>
-		[JsonProperty("time_zone")]
+		[DataMember(Name ="time_zone")]
 		string TimeZone { get; set; }
 	}
 

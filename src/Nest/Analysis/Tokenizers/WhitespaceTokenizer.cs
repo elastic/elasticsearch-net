@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -14,7 +14,7 @@ namespace Nest
 		/// <remarks>
 		/// Valid for Elasticsearch 6.1.0+
 		/// </remarks>
-		[JsonProperty("max_token_length")]
+		[DataMember(Name ="max_token_length")]
 		int? MaxTokenLength { get; set; }
 	}
 

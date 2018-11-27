@@ -5,7 +5,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Nest.JsonNetSerializer;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Tests.Reproduce
 {

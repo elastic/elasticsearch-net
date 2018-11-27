@@ -1,25 +1,25 @@
 ﻿using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<IndicesOptions>))]
+	[DataContract]
+	[ReadAs(typeof(IndicesOptions))]
 	public interface IIndicesOptions
 	{
-		[JsonProperty("allow_no_indices")]
+		[DataMember(Name ="allow_no_indices")]
 		bool? AllowNoIndices { get; set; }
 
-		[JsonProperty("expand_wildcards")]
-		[JsonConverter(typeof(StringEnumConverter))]
+		[DataMember(Name ="expand_wildcards")]
+
 		ExpandWildcards? ExpandWildcards { get; set; }
 
-		[JsonProperty("ignore_unavailable")]
+		[DataMember(Name ="ignore_unavailable")]
 		bool? IgnoreUnavailable { get; set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class IndicesOptions : IIndicesOptions
 	{
 		public bool? AllowNoIndices { get; set; }

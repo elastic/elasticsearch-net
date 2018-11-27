@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
-using Newtonsoft.Json;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(DistanceJsonConverter))]
+	[JsonFormatter(typeof(DistanceFormatter))]
 	public class Distance
 	{
 		private static readonly Regex _distanceUnitRegex =

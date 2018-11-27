@@ -1,18 +1,18 @@
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class NodeState
 	{
-		[JsonProperty("attributes")]
+		[DataMember(Name ="attributes")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, string>))]
 		public Dictionary<string, string> Attributes { get; internal set; }
 
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		public string Name { get; internal set; }
 
-		[JsonProperty("transport_address")]
+		[DataMember(Name ="transport_address")]
 		public string TransportAddress { get; internal set; }
 	}
 }

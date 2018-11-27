@@ -1,24 +1,24 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary>
 	/// A query to run for a phrase suggester collate
 	/// </summary>
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<PhraseSuggestCollateQuery>))]
+	[DataContract]
+	[ReadAs(typeof(PhraseSuggestCollateQuery))]
 	public interface IPhraseSuggestCollateQuery
 	{
 		/// <summary>
 		/// The id for a stored script to execute
 		/// </summary>
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		Id Id { get; set; }
 
 		/// <summary>
 		/// The source script to be executed
 		/// </summary>
-		[JsonProperty("source")]
+		[DataMember(Name ="source")]
 		string Source { get; set; }
 	}
 

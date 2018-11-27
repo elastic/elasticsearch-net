@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -13,13 +13,13 @@ namespace Nest
 		/// Return a formatted date string as the key instead an epoch long
 		/// </summary>
 		/// <remarks> Valid for Elasticsearch 6.3.0+ </remarks>
-		[JsonProperty("format")]
+		[DataMember(Name ="format")]
 		string Format { get; set; }
 
 		/// <summary>
 		/// 	The interval to use when bucketing documents
 		/// </summary>
-		[JsonProperty("interval")]
+		[DataMember(Name ="interval")]
 		Union<DateInterval?, Time> Interval { get; set; }
 
 		/// <summary>
@@ -27,7 +27,7 @@ namespace Nest
 		/// Time zones may either be specified as an ISO 8601 UTC offset (e.g. +01:00 or -08:00)
 		/// or as a timezone id, an identifier used in the TZ database like America/Los_Angeles.
 		/// </summary>
-		[JsonProperty("time_zone")]
+		[DataMember(Name ="time_zone")]
 		string Timezone { get; set; }
 	}
 

@@ -2,14 +2,14 @@ using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// Represents a time value
 	/// </summary>
-	[JsonConverter(typeof(TimeJsonConverter))]
+	[JsonFormatter(typeof(TimeFormatter))]
 	public class Time : IComparable<Time>, IEquatable<Time>, IUrlParameter
 	{
 		private const double MicrosecondsInATick = 0.1; // 10 ticks = 1 microsecond
@@ -144,11 +144,15 @@ namespace Nest
 
 		/// <summary>
 		/// Converts this instance of <see cref="Time" /> to an instance of <see cref="TimeSpan" />.
-		/// For values in <see cref="TimeUnit.Microseconds" /> and <see cref="TimeUnit.Nanoseconds" />, value will be rounded to the nearest Tick.
+		/// For values in <see cref="TimeUnit.Microseconds" /> and <see cref="TimeUnit.Nanoseconds" />, value will be rounded to
+		/// the nearest Tick.
 		/// All other values will be rounded to the nearest Millisecond.
 		/// </summary>
 		/// <exception cref="InvalidOperationException">
-		/// <para>special time values <see cref="MinusOne" /> and <see cref="Zero" /> do not have a <see cref="TimeSpan" /> representation.</para>
+		/// <para>
+		/// special time values <see cref="MinusOne" /> and <see cref="Zero" /> do not have a <see cref="TimeSpan" />
+		/// representation.
+		/// </para>
 		/// <para>instance of <see cref="Time" /> has no value for <see cref="Interval" /></para>
 		/// </exception>
 		public TimeSpan ToTimeSpan()

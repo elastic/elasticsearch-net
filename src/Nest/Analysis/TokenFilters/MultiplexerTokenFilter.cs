@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -9,10 +9,10 @@ namespace Nest
 	/// </summary>
 	public interface IMultiplexerTokenFilter : ITokenFilter
 	{
-		[JsonProperty("filters")]
+		[DataMember(Name ="filters")]
 		IEnumerable<string> Filters { get; set; }
 
-		[JsonProperty("preserve_original")]
+		[DataMember(Name ="preserve_original")]
 		bool? PreserveOriginal { get; set; }
 	}
 

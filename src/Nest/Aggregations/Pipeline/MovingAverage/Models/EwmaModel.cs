@@ -1,11 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[InterfaceDataContract]
 	public interface IEwmaModel : IMovingAverageModel
 	{
-		[JsonProperty("alpha")]
+		[DataMember(Name ="alpha")]
 		float? Alpha { get; set; }
 	}
 

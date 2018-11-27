@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -9,7 +9,7 @@ namespace Nest
 
 	public class StopDatafeedResponse : ResponseBase, IStopDatafeedResponse
 	{
-		[JsonProperty("stopped")]
+		[DataMember(Name ="stopped")]
 		public bool Stopped { get; internal set; }
 	}
 }

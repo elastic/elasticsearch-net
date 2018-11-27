@@ -1,10 +1,10 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class AliasRemoveIndexOperation
 	{
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		public IndexName Index { get; set; }
 	}
 }

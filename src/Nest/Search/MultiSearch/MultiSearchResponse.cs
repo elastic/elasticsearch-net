@@ -2,11 +2,11 @@
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	[ContractJsonConverter(typeof(MultiSearchResponseJsonConverter))]
 	public class MultiSearchResponse : ResponseBase, IMultiSearchResponse
 	{

@@ -1,20 +1,20 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class Token
 	{
-		[JsonProperty("end_offset")]
+		[DataMember(Name ="end_offset")]
 		public int EndOffset { get; internal set; }
 
-		[JsonProperty("payload")]
+		[DataMember(Name ="payload")]
 		public string Payload { get; internal set; }
 
-		[JsonProperty("position")]
+		[DataMember(Name ="position")]
 		public int Position { get; internal set; }
 
-		[JsonProperty("start_offset")]
+		[DataMember(Name ="start_offset")]
 		public int StartOffset { get; internal set; }
 	}
 }

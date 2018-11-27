@@ -1,19 +1,19 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<BoostingQueryDescriptor<object>>))]
+	[DataContract]
+	[ReadAs(typeof(BoostingQueryDescriptor<object>))]
 	public interface IBoostingQuery : IQuery
 	{
-		[JsonProperty("negative_boost")]
+		[DataMember(Name ="negative_boost")]
 		double? NegativeBoost { get; set; }
 
-		[JsonProperty("negative")]
+		[DataMember(Name ="negative")]
 		QueryContainer NegativeQuery { get; set; }
 
-		[JsonProperty("positive")]
+		[DataMember(Name ="positive")]
 		QueryContainer PositiveQuery { get; set; }
 	}
 

@@ -1,39 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class Snapshot
 	{
-		[JsonProperty("duration_in_millis")]
+		[DataMember(Name ="duration_in_millis")]
 		public long DurationInMilliseconds { get; internal set; }
 
-		[JsonProperty("end_time")]
+		[DataMember(Name ="end_time")]
 		public DateTime EndTime { get; internal set; }
 
-		[JsonProperty("end_time_in_millis")]
+		[DataMember(Name ="end_time_in_millis")]
 		public long EndTimeInMilliseconds { get; internal set; }
 
-		[JsonProperty("failures")]
+		[DataMember(Name ="failures")]
 		public IReadOnlyCollection<SnapshotShardFailure> Failures { get; internal set; }
 
-		[JsonProperty("indices")]
+		[DataMember(Name ="indices")]
 		public IReadOnlyCollection<IndexName> Indices { get; internal set; }
 
-		[JsonProperty("snapshot")]
+		[DataMember(Name ="snapshot")]
 		public string Name { get; internal set; }
 
-		[JsonProperty("shards")]
+		[DataMember(Name ="shards")]
 		public ShardStatistics Shards { get; internal set; }
 
-		[JsonProperty("start_time")]
+		[DataMember(Name ="start_time")]
 		public DateTime StartTime { get; internal set; }
 
-		[JsonProperty("start_time_in_millis")]
+		[DataMember(Name ="start_time_in_millis")]
 		public long StartTimeInMilliseconds { get; internal set; }
 
-		[JsonProperty("state")]
+		[DataMember(Name ="state")]
 		public string State { get; internal set; }
 	}
 }

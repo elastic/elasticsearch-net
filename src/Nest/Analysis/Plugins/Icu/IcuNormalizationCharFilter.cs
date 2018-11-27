@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -11,13 +11,13 @@ namespace Nest
 		/// <summary>
 		/// Set the mode parameter to decompose to convert nfc to nfd or nfkc to nfkd respectively
 		/// </summary>
-		[JsonProperty("mode")]
+		[DataMember(Name ="mode")]
 		IcuNormalizationMode? Mode { get; set; }
 
 		/// <summary>
 		/// The type of normalization
 		/// </summary>
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		IcuNormalizationType? Name { get; set; }
 	}
 

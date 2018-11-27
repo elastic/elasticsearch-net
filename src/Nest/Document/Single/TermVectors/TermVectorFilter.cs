@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -6,49 +6,49 @@ namespace Nest
 	/// Filter terms returned based on their TF-IDF scores.
 	/// This can be useful in order find out a good characteristic vector of a document.
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public interface ITermVectorFilter
 	{
 		/// <summary>
 		/// Ignore words which occur in more than this many docs. Defaults to unbounded.
 		/// </summary>
-		[JsonProperty("max_doc_freq")]
+		[DataMember(Name ="max_doc_freq")]
 		int? MaximumDocumentFrequency { get; set; }
 
 		/// <summary>
 		/// Maximum number of terms that must be returned per field. Defaults to 25.
 		/// </summary>
-		[JsonProperty("max_num_terms")]
+		[DataMember(Name ="max_num_terms")]
 		int? MaximumNumberOfTerms { get; set; }
 
 		/// <summary>
 		/// Ignore words with more than this frequency in the source doc. Defaults to unbounded.
 		/// </summary>
-		[JsonProperty("max_term_freq")]
+		[DataMember(Name ="max_term_freq")]
 		int? MaximumTermFrequency { get; set; }
 
 		/// <summary>
 		/// The maximum word length above which words will be ignored. Defaults to unbounded.
 		/// </summary>
-		[JsonProperty("max_word_length")]
+		[DataMember(Name ="max_word_length")]
 		int? MaximumWordLength { get; set; }
 
 		/// <summary>
 		/// Ignore terms which do not occur in at least this many docs. Defaults to 1.
 		/// </summary>
-		[JsonProperty("min_doc_freq")]
+		[DataMember(Name ="min_doc_freq")]
 		int? MinimumDocumentFrequency { get; set; }
 
 		/// <summary>
 		/// Ignore words with less than this frequency in the source doc. Defaults to 1.
 		/// </summary>
-		[JsonProperty("min_term_freq")]
+		[DataMember(Name ="min_term_freq")]
 		int? MinimumTermFrequency { get; set; }
 
 		/// <summary>
 		/// The minimum word length below which words will be ignored. Defaults to 0.
 		/// </summary>
-		[JsonProperty("min_word_length")]
+		[DataMember(Name ="min_word_length")]
 		int? MinimumWordLength { get; set; }
 	}
 

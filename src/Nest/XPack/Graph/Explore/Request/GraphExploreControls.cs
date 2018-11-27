@@ -1,21 +1,21 @@
 using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IGraphExploreControls
 	{
-		[JsonProperty("sample_diversity")]
+		[DataMember(Name ="sample_diversity")]
 		SampleDiversity SampleDiversity { get; set; }
 
-		[JsonProperty("sample_size")]
+		[DataMember(Name ="sample_size")]
 		int? SampleSize { get; set; }
 
-		[JsonProperty("timeout")]
+		[DataMember(Name ="timeout")]
 		Time Timeout { get; set; }
 
-		[JsonProperty("use_significance")]
+		[DataMember(Name ="use_significance")]
 		bool? UseSignificance { get; set; }
 	}
 

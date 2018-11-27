@@ -1,9 +1,10 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<GlobalAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(GlobalAggregation))]
 	public interface IGlobalAggregation : IBucketAggregation { }
 
 	public class GlobalAggregation : BucketAggregationBase, IGlobalAggregation

@@ -1,22 +1,22 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<SamplerAggregation>))]
+	[DataContract]
+	[ReadAs(typeof(SamplerAggregation))]
 	public interface ISamplerAggregation : IBucketAggregation
 	{
-		[JsonProperty("execution_hint")]
+		[DataMember(Name ="execution_hint")]
 		SamplerAggregationExecutionHint? ExecutionHint { get; set; }
 
-		[JsonProperty("max_docs_per_value")]
+		[DataMember(Name ="max_docs_per_value")]
 		int? MaxDocsPerValue { get; set; }
 
-		[JsonProperty("script")]
+		[DataMember(Name ="script")]
 		IScript Script { get; set; }
 
-		[JsonProperty("shard_size")]
+		[DataMember(Name ="shard_size")]
 		int? ShardSize { get; set; }
 	}
 

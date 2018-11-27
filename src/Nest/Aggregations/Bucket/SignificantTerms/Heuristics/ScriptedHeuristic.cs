@@ -1,13 +1,14 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ScriptedHeuristic>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(ScriptedHeuristic))]
 	public interface IScriptedHeuristic
 	{
-		[JsonProperty("script")]
+		[DataMember(Name ="script")]
 		IScript Script { get; set; }
 	}
 

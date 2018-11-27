@@ -1,17 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class ClusterRerouteDecision
 	{
-		[JsonProperty("decider")]
+		[DataMember(Name ="decider")]
 		public string Decider { get; set; }
 
-		[JsonProperty("decision")]
+		[DataMember(Name ="decision")]
 		public string Decision { get; set; }
 
-		[JsonProperty("explanation")]
+		[DataMember(Name ="explanation")]
 		public string Explanation { get; set; }
 	}
 }

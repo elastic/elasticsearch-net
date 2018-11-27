@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -11,19 +11,19 @@ namespace Nest
 		/// <summary>
 		/// Controls to what degree document length normalizes tf values.
 		/// </summary>
-		[JsonProperty("b")]
+		[DataMember(Name ="b")]
 		double? B { get; set; }
 
 		/// <summary>
 		/// Sets whether overlap tokens (Tokens with 0 position increment) are ignored when computing norm.
 		/// </summary>
-		[JsonProperty("discount_overlaps")]
+		[DataMember(Name ="discount_overlaps")]
 		bool? DiscountOverlaps { get; set; }
 
 		/// <summary>
 		/// Controls non-linear term frequency normalization (saturation).
 		/// </summary>
-		[JsonProperty("k1")]
+		[DataMember(Name ="k1")]
 		double? K1 { get; set; }
 	}
 

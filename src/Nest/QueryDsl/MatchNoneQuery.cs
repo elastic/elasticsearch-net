@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<MatchNoneQuery>))]
+	[DataContract]
+	[ReadAs(typeof(MatchNoneQuery))]
 	public interface IMatchNoneQuery : IQuery { }
 
 	public class MatchNoneQuery : QueryBase, IMatchNoneQuery

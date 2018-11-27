@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -9,13 +9,13 @@ namespace Nest
 	/// </summary>
 	public interface ISynonymTokenFilter : ITokenFilter
 	{
-		[JsonProperty("expand")]
+		[DataMember(Name ="expand")]
 		bool? Expand { get; set; }
 
-		[JsonProperty("format")]
+		[DataMember(Name ="format")]
 		SynonymFormat? Format { get; set; }
 
-		[JsonProperty("ignore_case")]
+		[DataMember(Name ="ignore_case")]
 		[Obsolete("Will be removed in Elasticsearch 7.x, if you need to ignore case add a lowercase filter before this synonym filter")]
 		bool? IgnoreCase { get; set; }
 
@@ -23,19 +23,19 @@ namespace Nest
 		/// If `true` ignores exceptions while parsing the synonym configuration. It is important
 		// to note that only those synonym rules which cannot get parsed are ignored.
 		/// </summary>
-		[JsonProperty("lenient")]
+		[DataMember(Name ="lenient")]
 		bool? Lenient { get; set; }
 
-		[JsonProperty("synonyms")]
+		[DataMember(Name ="synonyms")]
 		IEnumerable<string> Synonyms { get; set; }
 
 		/// <summary>
 		///  a path a synonyms file relative to the node's `config` location.
 		/// </summary>
-		[JsonProperty("synonyms_path")]
+		[DataMember(Name ="synonyms_path")]
 		string SynonymsPath { get; set; }
 
-		[JsonProperty("tokenizer")]
+		[DataMember(Name ="tokenizer")]
 		string Tokenizer { get; set; }
 	}
 

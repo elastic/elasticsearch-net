@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
 	public interface IAcknowledgeWatchResponse : IResponse
 	{
-		[JsonProperty("status")]
+		[DataMember(Name ="status")]
 		WatchStatus Status { get; }
 	}
 
@@ -17,81 +17,81 @@ namespace Nest
 		public WatchStatus Status { get; internal set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class WatchStatus
 	{
-		[JsonProperty("actions")]
+		[DataMember(Name ="actions")]
 		public IReadOnlyDictionary<string, ActionStatus> Actions { get; set; }
 
-		[JsonProperty("last_checked")]
+		[DataMember(Name ="last_checked")]
 		public DateTimeOffset? LastChecked { get; set; }
 
-		[JsonProperty("last_met_condition")]
+		[DataMember(Name ="last_met_condition")]
 		public DateTimeOffset? LastMetCondition { get; set; }
 
-		[JsonProperty("state")]
+		[DataMember(Name ="state")]
 		public ActivationState State { get; set; }
 
-		[JsonProperty("version")]
+		[DataMember(Name ="version")]
 		public int? Version { get; set; }
 	}
 
 	public class ActionStatus
 	{
-		[JsonProperty("ack")]
+		[DataMember(Name ="ack")]
 		public AcknowledgeState Acknowledgement { get; set; }
 
-		[JsonProperty("last_execution")]
+		[DataMember(Name ="last_execution")]
 		public ExecutionState LastExecution { get; set; }
 
-		[JsonProperty("last_successful_execution")]
+		[DataMember(Name ="last_successful_execution")]
 		public ExecutionState LastSuccessfulExecution { get; set; }
 
-		[JsonProperty("last_throttle")]
+		[DataMember(Name ="last_throttle")]
 		public ThrottleState LastThrottle { get; set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class ActivationState
 	{
-		[JsonProperty("active")]
+		[DataMember(Name ="active")]
 		public bool Active { get; set; }
 
-		[JsonProperty("timestamp")]
+		[DataMember(Name ="timestamp")]
 		public DateTimeOffset Timestamp { get; set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class AcknowledgeState
 	{
-		[JsonProperty("state")]
+		[DataMember(Name ="state")]
 		public AcknowledgementState State { get; set; }
 
-		[JsonProperty("timestamp")]
+		[DataMember(Name ="timestamp")]
 		public DateTimeOffset Timestamp { get; set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class ExecutionState
 	{
-		[JsonProperty("successful")]
+		[DataMember(Name ="successful")]
 		public bool Successful { get; set; }
 
-		[JsonProperty("timestamp")]
+		[DataMember(Name ="timestamp")]
 		public DateTimeOffset Timestamp { get; set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class ThrottleState
 	{
-		[JsonProperty("reason")]
+		[DataMember(Name ="reason")]
 		public string Reason { get; set; }
 
-		[JsonProperty("timestamp")]
+		[DataMember(Name ="timestamp")]
 		public DateTimeOffset Timestamp { get; set; }
 	}
 
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum AcknowledgementState
 	{
 		[EnumMember(Value = "awaits_successful_execution")]

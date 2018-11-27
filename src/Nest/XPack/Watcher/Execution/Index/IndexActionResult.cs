@@ -1,14 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class IndexActionResult
 	{
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		public string Id { get; set; }
 
-		[JsonProperty("response")]
+		[DataMember(Name ="response")]
 		public IndexActionResultIndexResponse Response { get; set; }
 	}
 }

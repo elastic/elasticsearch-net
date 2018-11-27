@@ -1,12 +1,12 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IAliasRemoveAction : IAliasAction
 	{
-		[JsonProperty("remove")]
+		[DataMember(Name ="remove")]
 		AliasRemoveOperation Remove { get; set; }
 	}
 

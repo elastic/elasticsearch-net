@@ -1,13 +1,13 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class Retries
 	{
-		[JsonProperty("bulk")]
+		[DataMember(Name ="bulk")]
 		public long Bulk { get; internal set; }
 
-		[JsonProperty("search")]
+		[DataMember(Name ="search")]
 		public long Search { get; internal set; }
 	}
 }

@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchTemplateRequest>))]
+	[ReadAs(typeof(SearchTemplateRequest))]
 	public partial interface ISearchTemplateRequest : ICovariantSearchRequest
 	{
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		string Id { get; set; }
 
 		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
-		[JsonIgnore]
+		[IgnoreDataMember]
 		string Inline { get; set; }
 
-		[JsonProperty("params")]
+		[DataMember(Name ="params")]
 		IDictionary<string, object> Params { get; set; }
 
-		[JsonProperty("source")]
+		[DataMember(Name ="source")]
 		string Source { get; set; }
 	}
 

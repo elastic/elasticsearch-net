@@ -1,32 +1,32 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class CatPluginsRecord : ICatRecord
 	{
-		[JsonProperty("component")]
+		[DataMember(Name ="component")]
 		public string Component { get; set; }
 
-		[JsonProperty("description")]
+		[DataMember(Name ="description")]
 		public string Description { get; set; }
 
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		public string Id { get; set; }
 
-		[JsonProperty("isolation")]
+		[DataMember(Name ="isolation")]
 		public string Isolation { get; set; }
 
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		public string Name { get; set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		public string Type { get; set; }
 
-		[JsonProperty("url")]
+		[DataMember(Name ="url")]
 		public string Url { get; set; }
 
-		[JsonProperty("version")]
+		[DataMember(Name ="version")]
 		public string Version { get; set; }
 	}
 }

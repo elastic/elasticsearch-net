@@ -1,12 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(FieldNameQueryJsonConverter<PrefixQuery>))]
 	public interface IPrefixQuery : ITermQuery
 	{
-		[JsonProperty("rewrite")]
+		[DataMember(Name ="rewrite")]
 		MultiTermQueryRewrite Rewrite { get; set; }
 	}
 

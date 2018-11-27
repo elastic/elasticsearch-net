@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -10,19 +10,19 @@ namespace Nest
 		bool Valid { get; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class ValidateQueryResponse : ResponseBase, IValidateQueryResponse
 	{
 		/// <summary>
 		/// Gets the explanations if Explain() was set.
 		/// </summary>
-		[JsonProperty("explanations")]
+		[DataMember(Name ="explanations")]
 		public IReadOnlyCollection<ValidationExplanation> Explanations { get; internal set; } = EmptyReadOnly<ValidationExplanation>.Collection;
 
-		[JsonProperty("_shards")]
+		[DataMember(Name ="_shards")]
 		public ShardStatistics Shards { get; internal set; }
 
-		[JsonProperty("valid")]
+		[DataMember(Name ="valid")]
 		public bool Valid { get; internal set; }
 	}
 }

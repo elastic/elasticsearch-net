@@ -1,16 +1,16 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IInlineScriptTransform : IScriptTransform
 	{
 		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
-		[JsonIgnore]
+		[IgnoreDataMember]
 		string Inline { get; set; }
 
-		[JsonProperty("source")]
+		[DataMember(Name ="source")]
 		string Source { get; set; }
 	}
 

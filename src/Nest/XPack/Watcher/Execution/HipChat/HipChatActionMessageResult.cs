@@ -1,29 +1,29 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class HipChatActionMessageResult
 	{
-		[JsonProperty("message")]
+		[DataMember(Name ="message")]
 		public IHipChatMessage Message { get; set; }
 
-		[JsonProperty("reason")]
+		[DataMember(Name ="reason")]
 		public string Reason { get; set; }
 
-		[JsonProperty("request")]
+		[DataMember(Name ="request")]
 		public HttpInputRequestResult Request { get; set; }
 
-		[JsonProperty("response")]
+		[DataMember(Name ="response")]
 		public HttpInputResponseResult Response { get; set; }
 
-		[JsonProperty("room")]
+		[DataMember(Name ="room")]
 		public string Room { get; set; }
 
-		[JsonProperty("status")]
+		[DataMember(Name ="status")]
 		public Status Status { get; set; }
 
-		[JsonProperty("user")]
+		[DataMember(Name ="user")]
 		public string User { get; set; }
 	}
 }

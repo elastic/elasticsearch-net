@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -22,7 +22,7 @@ namespace Nest
 	}
 
 	/// <summary> A response returned for each scroll in ScrollAll() </summary>
-	[JsonObject]
+	[DataContract]
 	public class ScrollAllResponse<T> : IScrollAllResponse<T> where T : class
 	{
 		/// <inheritdoc />

@@ -1,24 +1,24 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SourceField>))]
+	[ReadAs(typeof(SourceField))]
 	public interface ISourceField : IFieldMapping
 	{
-		[JsonProperty("compress")]
+		[DataMember(Name ="compress")]
 		bool? Compress { get; set; }
 
-		[JsonProperty("compress_threshold")]
+		[DataMember(Name ="compress_threshold")]
 		string CompressThreshold { get; set; }
 
-		[JsonProperty("enabled")]
+		[DataMember(Name ="enabled")]
 		bool? Enabled { get; set; }
 
-		[JsonProperty("excludes")]
+		[DataMember(Name ="excludes")]
 		IEnumerable<string> Excludes { get; set; }
 
-		[JsonProperty("includes")]
+		[DataMember(Name ="includes")]
 		IEnumerable<string> Includes { get; set; }
 	}
 

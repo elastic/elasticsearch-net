@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	[ContractJsonConverter(typeof(ClusterRerouteCommandJsonConverter))]
 	public interface IClusterRerouteCommand
 	{
-		[JsonIgnore]
+		[IgnoreDataMember]
 		string Name { get; }
 	}
 }

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ScriptJsonConverter))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(ScriptFormatter))]
 	public interface IScript
 	{
 		/// <summary>
@@ -14,7 +15,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="lang">language</param>
 		/// <returns>this</returns>
-		[JsonProperty("lang")]
+		[DataMember(Name ="lang")]
 		string Lang { get; set; }
 
 		/// <summary>
@@ -28,8 +29,8 @@ namespace Nest
 		/// </example>
 		/// <param name="paramsDictionary">param</param>
 		/// <returns>this</returns>
-		[JsonProperty("params")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysPreservingNullJsonConverter<string, object>))]
+		[DataMember(Name ="params")]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysPreservingNullFormatter<string, object>))]
 		Dictionary<string, object> Params { get; set; }
 	}
 

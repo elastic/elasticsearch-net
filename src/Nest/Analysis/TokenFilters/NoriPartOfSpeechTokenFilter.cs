@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -7,7 +7,7 @@ namespace Nest
 	public interface INoriPartOfSpeechTokenFilter : ITokenFilter
 	{
 		/// <summary> An array of part-of-speech tags that should be removed. </summary>
-		[JsonProperty("stoptags")]
+		[DataMember(Name ="stoptags")]
 		IEnumerable<string> StopTags { get; set; }
 	}
 

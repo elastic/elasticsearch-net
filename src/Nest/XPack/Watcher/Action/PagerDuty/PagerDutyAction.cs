@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	[ExactContractJsonConverter(typeof(ReadAsTypeJsonConverter<PagerDutyAction>))]
 	public interface IPagerDutyAction : IAction, IPagerDutyEvent { }
 
@@ -74,7 +74,7 @@ namespace Nest
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new PagerDutyContextDescriptor(type))));
 	}
 
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum PagerDutyEventType
 	{
 		[EnumMember(Value = "trigger")]

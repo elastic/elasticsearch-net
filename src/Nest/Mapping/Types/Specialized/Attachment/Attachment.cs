@@ -1,5 +1,5 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -9,7 +9,7 @@ namespace Nest
 		/// <summary>
 		/// The author.
 		/// </summary>
-		[JsonProperty("author")]
+		[DataMember(Name ="author")]
 		public string Author { get; set; }
 
 		/// <summary>
@@ -17,7 +17,7 @@ namespace Nest
 		/// content. Used at indexing time to determine the serialized form of the
 		/// attachment.
 		/// </summary>
-		[JsonIgnore]
+		[IgnoreDataMember]
 		public bool ContainsMetadata => !Name.IsNullOrEmpty() ||
 			!ContentType.IsNullOrEmpty() ||
 			!Language.IsNullOrEmpty() ||
@@ -27,32 +27,32 @@ namespace Nest
 		/// <summary>
 		/// The base64 encoded content. Can be explicitly set
 		/// </summary>
-		[JsonProperty("content")]
+		[DataMember(Name ="content")]
 		public string Content { get; set; }
 
 		/// <summary>
 		/// The length of the content before text extraction.
 		/// </summary>
-		[JsonProperty("content_length")]
+		[DataMember(Name ="content_length")]
 		public long? ContentLength { get; set; }
 
 		/// <summary>
 		/// The content type of the attachment. Can be explicitly set
 		/// </summary>
-		[JsonProperty("content_type")]
+		[DataMember(Name ="content_type")]
 		public string ContentType { get; set; }
 
 		/// <summary>
 		/// The date of the attachment.
 		/// </summary>
-		[JsonProperty("date")]
+		[DataMember(Name ="date")]
 		public DateTime? Date { get; set; }
 
 		/// <summary>
 		/// Detect the language of the attachment. Language detection is
 		/// disabled by default.
 		/// </summary>
-		[JsonProperty("detect_language")]
+		[DataMember(Name ="detect_language")]
 		public bool? DetectLanguage { get; set; }
 
 		/// <summary>
@@ -61,31 +61,31 @@ namespace Nest
 		/// -1 can be set to extract all text, but note that all the text needs to be
 		/// allowed to be represented in memory
 		/// </summary>
-		[JsonProperty("indexed_chars")]
+		[DataMember(Name ="indexed_chars")]
 		public long? IndexedCharacters { get; set; }
 
 		/// <summary>
 		/// The keywords in the attachment.
 		/// </summary>
-		[JsonProperty("keywords")]
+		[DataMember(Name ="keywords")]
 		public string Keywords { get; set; }
 
 		/// <summary>
 		/// The language of the attachment. Can be explicitly set.
 		/// </summary>
-		[JsonProperty("language")]
+		[DataMember(Name ="language")]
 		public string Language { get; set; }
 
 		/// <summary>
 		/// The name of the attachment. Can be explicitly set
 		/// </summary>
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		public string Name { get; set; }
 
 		/// <summary>
 		/// The title of the attachment.
 		/// </summary>
-		[JsonProperty("title")]
+		[DataMember(Name ="title")]
 		public string Title { get; set; }
 	}
 

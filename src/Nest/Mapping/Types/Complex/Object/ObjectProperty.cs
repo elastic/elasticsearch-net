@@ -1,32 +1,32 @@
 using System;
 using System.Diagnostics;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary>
 	/// A object datatype mapping for an inner object
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IObjectProperty : ICoreProperty
 	{
 		/// <summary>
 		/// Whether or not new properties should be added dynamically to an existing object.
 		/// Default is <c>true</c>
 		/// </summary>
-		[JsonProperty("dynamic")]
+		[DataMember(Name ="dynamic")]
 		Union<bool, DynamicMapping> Dynamic { get; set; }
 
 		/// <summary>
 		/// Whether the JSON value given for this field should be parsed and indexed. Default is <c>true</c>
 		/// </summary>
-		[JsonProperty("enabled")]
+		[DataMember(Name ="enabled")]
 		bool? Enabled { get; set; }
 
 		/// <summary>
 		/// The fields within the object
 		/// </summary>
-		[JsonProperty("properties", TypeNameHandling = TypeNameHandling.None)]
+		[DataMember(Name ="properties", TypeNameHandling = TypeNameHandling.None)]
 		IProperties Properties { get; set; }
 	}
 

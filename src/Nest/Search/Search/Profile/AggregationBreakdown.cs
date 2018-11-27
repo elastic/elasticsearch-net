@@ -1,5 +1,5 @@
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 using Utf8Json;
 using JsonReader = Newtonsoft.Json.JsonReader;
@@ -13,7 +13,7 @@ namespace Nest
 	/// <summary>
 	/// Multi term query rewrite method
 	/// </summary>
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum RewriteMultiTerm
 	{
 		/// <summary>

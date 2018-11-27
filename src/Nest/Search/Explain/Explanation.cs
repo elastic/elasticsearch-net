@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class Explanation
 	{
-		[JsonProperty("description")]
+		[DataMember(Name ="description")]
 		public string Description { get; internal set; }
 
-		[JsonProperty("details")]
+		[DataMember(Name ="details")]
 		public IReadOnlyCollection<ExplanationDetail> Details { get; internal set; } = EmptyReadOnly<ExplanationDetail>.Collection;
 
-		[JsonProperty("value")]
+		[DataMember(Name ="value")]
 		public float Value { get; internal set; }
 	}
 }

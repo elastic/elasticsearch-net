@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<DisMaxQuery>))]
+	[DataContract]
+	[ReadAs(typeof(DisMaxQuery))]
 	public interface IDisMaxQuery : IQuery
 	{
-		[JsonProperty("queries")]
+		[DataMember(Name ="queries")]
 		IEnumerable<QueryContainer> Queries { get; set; }
 
-		[JsonProperty("tie_breaker")]
+		[DataMember(Name ="tie_breaker")]
 		double? TieBreaker { get; set; }
 	}
 

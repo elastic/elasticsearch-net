@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ClusterRerouteRequest>))]
+	[ReadAs(typeof(ClusterRerouteRequest))]
 	public partial interface IClusterRerouteRequest
 	{
-		[JsonProperty("commands")]
+		[DataMember(Name ="commands")]
 		IList<IClusterRerouteCommand> Commands { get; set; }
 	}
 

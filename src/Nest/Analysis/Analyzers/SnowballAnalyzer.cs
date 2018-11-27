@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -12,10 +12,10 @@ namespace Nest
 	/// </summary>
 	public interface ISnowballAnalyzer : IAnalyzer
 	{
-		[JsonProperty("language")]
+		[DataMember(Name ="language")]
 		SnowballLanguage? Language { get; set; }
 
-		[JsonProperty("stopwords")]
+		[DataMember(Name ="stopwords")]
 		[JsonConverter(typeof(StopWordsJsonConverter))]
 		StopWords StopWords { get; set; }
 	}

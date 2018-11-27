@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public partial interface IClearScrollRequest
 	{
-		[JsonProperty("scroll_id")]
+		[DataMember(Name ="scroll_id")]
 		IEnumerable<string> ScrollIds { get; set; }
 	}
 

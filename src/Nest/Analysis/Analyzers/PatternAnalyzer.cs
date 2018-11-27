@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -8,19 +8,19 @@ namespace Nest
 	/// </summary>
 	public interface IPatternAnalyzer : IAnalyzer
 	{
-		[JsonProperty("flags")]
+		[DataMember(Name ="flags")]
 		string Flags { get; set; }
 
-		[JsonProperty("lowercase")]
+		[DataMember(Name ="lowercase")]
 		bool? Lowercase { get; set; }
 
-		[JsonProperty("pattern")]
+		[DataMember(Name ="pattern")]
 		string Pattern { get; set; }
 
 		/// <summary>
 		/// A list of stopword to initialize the stop filter with. Defaults to an empty list
 		/// </summary>
-		[JsonProperty("stopwords")]
+		[DataMember(Name ="stopwords")]
 		[JsonConverter(typeof(StopWordsJsonConverter))]
 		StopWords StopWords { get; set; }
 	}

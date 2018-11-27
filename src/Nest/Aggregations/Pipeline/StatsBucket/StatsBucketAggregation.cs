@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<StatsBucketAggregation>))]
+	[DataContract]
+	[ReadAs(typeof(StatsBucketAggregation))]
 	public interface IStatsBucketAggregation : IPipelineAggregation { }
 
 	public class StatsBucketAggregation

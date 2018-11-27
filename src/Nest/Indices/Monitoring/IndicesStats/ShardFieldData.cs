@@ -1,14 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class ShardFieldData
 	{
-		[JsonProperty("evictions")]
+		[DataMember(Name ="evictions")]
 		public long Evictions { get; internal set; }
 
-		[JsonProperty("memory_size_in_bytes")]
+		[DataMember(Name ="memory_size_in_bytes")]
 		public long MemorySizeInBytes { get; internal set; }
 	}
 }

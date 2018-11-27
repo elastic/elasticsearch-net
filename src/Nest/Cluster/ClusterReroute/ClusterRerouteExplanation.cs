@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class ClusterRerouteExplanation
 	{
-		[JsonProperty("command")]
+		[DataMember(Name ="command")]
 		public string Command { get; set; }
 
-		[JsonProperty("decisions")]
+		[DataMember(Name ="decisions")]
 		public IEnumerable<ClusterRerouteDecision> Decisions { get; set; }
 
-		[JsonProperty("parameters")]
+		[DataMember(Name ="parameters")]
 		public ClusterRerouteParameters Parameters { get; set; }
 	}
 }

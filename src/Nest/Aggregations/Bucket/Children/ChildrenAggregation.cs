@@ -1,14 +1,13 @@
-﻿using Newtonsoft.Json;
-
-// ReSharper disable UnusedMember.Global
+﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<ChildrenAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(ChildrenAggregation))]
 	public interface IChildrenAggregation : IBucketAggregation
 	{
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		RelationName Type { get; set; }
 	}
 

@@ -1,11 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[InterfaceDataContract]
 	public interface IHDRHistogramMethod : IPercentilesMethod
 	{
-		[JsonProperty("number_of_significant_value_digits")]
+		[DataMember(Name ="number_of_significant_value_digits")]
 		int? NumberOfSignificantValueDigits { get; set; }
 	}
 

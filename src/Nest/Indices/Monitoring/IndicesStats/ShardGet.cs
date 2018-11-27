@@ -1,29 +1,29 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class ShardGet
 	{
-		[JsonProperty("current")]
+		[DataMember(Name ="current")]
 		public long Current { get; internal set; }
 
-		[JsonProperty("exists_time_in_millis")]
+		[DataMember(Name ="exists_time_in_millis")]
 		public long ExistsTimeInMilliseconds { get; internal set; }
 
-		[JsonProperty("exists_total")]
+		[DataMember(Name ="exists_total")]
 		public long ExistsTotal { get; internal set; }
 
-		[JsonProperty("missing_time_in_millis")]
+		[DataMember(Name ="missing_time_in_millis")]
 		public long MissingTimeInMilliseconds { get; internal set; }
 
-		[JsonProperty("missing_total")]
+		[DataMember(Name ="missing_total")]
 		public long MissingTotal { get; internal set; }
 
-		[JsonProperty("time_in_millis")]
+		[DataMember(Name ="time_in_millis")]
 		public long TimeInMilliseconds { get; internal set; }
 
-		[JsonProperty("total")]
+		[DataMember(Name ="total")]
 		public long Total { get; internal set; }
 	}
 }

@@ -1,14 +1,14 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public partial interface IScrollRequest : ICovariantSearchRequest
 	{
-		[JsonProperty("scroll")]
+		[DataMember(Name ="scroll")]
 		Time Scroll { get; set; }
 
-		[JsonProperty("scroll_id")]
+		[DataMember(Name ="scroll_id")]
 		string ScrollId { get; set; }
 	}
 

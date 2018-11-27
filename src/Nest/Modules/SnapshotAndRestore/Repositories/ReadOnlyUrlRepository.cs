@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -15,10 +15,10 @@ namespace Nest
 
 	public interface IReadOnlyUrlRepositorySettings : IRepositorySettings
 	{
-		[JsonProperty("concurrent_streams")]
+		[DataMember(Name ="concurrent_streams")]
 		int? ConcurrentStreams { get; set; }
 
-		[JsonProperty("location")]
+		[DataMember(Name ="location")]
 		string Location { get; set; }
 	}
 

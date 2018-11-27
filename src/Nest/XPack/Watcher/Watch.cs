@@ -1,34 +1,34 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class Watch
 	{
-		[JsonProperty("actions")]
+		[DataMember(Name ="actions")]
 		[JsonConverter(typeof(ActionsJsonConverter))]
 		public Actions Actions { get; internal set; }
 
-		[JsonProperty("condition")]
+		[DataMember(Name ="condition")]
 		public IConditionContainer Condition { get; internal set; }
 
-		[JsonProperty("input")]
+		[DataMember(Name ="input")]
 		public IInputContainer Input { get; internal set; }
 
-		[JsonProperty("metadata")]
+		[DataMember(Name ="metadata")]
 		public IReadOnlyDictionary<string, object> Meta { get; internal set; }
 
-		[JsonProperty("status")]
+		[DataMember(Name ="status")]
 		public WatchStatus Status { get; internal set; }
 
-		[JsonProperty("throttle_period")]
+		[DataMember(Name ="throttle_period")]
 		public string ThrottlePeriod { get; internal set; }
 
-		[JsonProperty("transform")]
+		[DataMember(Name ="transform")]
 		public ITransformContainer Transform { get; internal set; }
 
-		[JsonProperty("trigger")]
+		[DataMember(Name ="trigger")]
 		public ITriggerContainer Trigger { get; internal set; }
 	}
 }

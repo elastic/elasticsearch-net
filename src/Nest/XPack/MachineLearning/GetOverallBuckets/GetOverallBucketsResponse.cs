@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IGetOverallBucketsResponse : IResponse
 	{
-		[JsonProperty("count")]
+		[DataMember(Name ="count")]
 		long Count { get; }
 
-		[JsonProperty("overall_buckets")]
+		[DataMember(Name ="overall_buckets")]
 		IReadOnlyCollection<OverallBucket> OverallBuckets { get; }
 	}
 

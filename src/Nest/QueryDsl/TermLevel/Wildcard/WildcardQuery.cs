@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(FieldNameQueryJsonConverter<WildcardQuery>))]
 	public interface IWildcardQuery : ITermQuery
 	{
-		[JsonProperty("rewrite")]
+		[DataMember(Name ="rewrite")]
 		MultiTermQueryRewrite Rewrite { get; set; }
 	}
 

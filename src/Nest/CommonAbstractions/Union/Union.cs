@@ -1,5 +1,6 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -9,7 +10,7 @@ namespace Nest
 	/// </summary>
 	/// <typeparam name="TFirst">The first type</typeparam>
 	/// <typeparam name="TSecond">The second type</typeparam>
-	[JsonConverter(typeof(UnionJsonConverter))]
+	[JsonFormatter(typeof(UnionFormatter<,>))]
 	public class Union<TFirst, TSecond>
 	{
 		internal readonly int _tag;

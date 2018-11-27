@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -6,20 +6,20 @@ namespace Nest
 	/// Conditions that must be satisfied for a new index to be created
 	/// with the rollover index API
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<RolloverConditions>))]
+	[DataContract]
+	[ReadAs(typeof(RolloverConditions))]
 	public interface IRolloverConditions
 	{
 		/// <summary>
 		/// The maximum age of the index
 		/// </summary>
-		[JsonProperty("max_age")]
+		[DataMember(Name ="max_age")]
 		Time MaxAge { get; set; }
 
 		/// <summary>
 		/// The maximum number of documents
 		/// </summary>
-		[JsonProperty("max_docs")]
+		[DataMember(Name ="max_docs")]
 		long? MaxDocs { get; set; }
 
 		/// <summary>
@@ -28,7 +28,7 @@ namespace Nest
 		/// <remarks>
 		/// Valid in Elasticsearch 6.1.0+
 		/// </remarks>
-		[JsonProperty("max_size")]
+		[DataMember(Name ="max_size")]
 		string MaxSize { get; set; }
 	}
 

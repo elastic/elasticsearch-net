@@ -1,14 +1,16 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[InterfaceDataContract]
+	[ReadAs(typeof(HoltLinearModel))]
 	public interface IHoltLinearModel : IMovingAverageModel
 	{
-		[JsonProperty("alpha")]
+		[DataMember(Name ="alpha")]
 		float? Alpha { get; set; }
 
-		[JsonProperty("beta")]
+		[DataMember(Name ="beta")]
 		float? Beta { get; set; }
 	}
 

@@ -1,18 +1,18 @@
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class MetadataState
 	{
-		[JsonProperty("cluster_uuid")]
+		[DataMember(Name ="cluster_uuid")]
 		public string ClusterUUID { get; internal set; }
 
-		[JsonProperty("indices")]
+		[DataMember(Name ="indices")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, MetadataIndexState>))]
 		public IReadOnlyDictionary<string, MetadataIndexState> Indices { get; internal set; }
 
-		[JsonProperty("templates")]
+		[DataMember(Name ="templates")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, TemplateMapping>))]
 		public IReadOnlyDictionary<string, TemplateMapping> Templates { get; internal set; }
 	}

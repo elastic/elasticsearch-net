@@ -1,17 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class InstantGet<TDocument> where TDocument : class
 	{
-		[JsonProperty("fields")]
+		[DataMember(Name ="fields")]
 		public FieldValues Fields { get; internal set; }
 
-		[JsonProperty("found")]
+		[DataMember(Name ="found")]
 		public bool Found { get; internal set; }
 
-		[JsonProperty("_source")]
+		[DataMember(Name ="_source")]
 		[JsonConverter(typeof(SourceConverter))]
 		public TDocument Source { get; internal set; }
 	}

@@ -1,52 +1,52 @@
 ﻿using System.Collections.Generic;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IMigrationUpgradeResponse : IResponse
 	{
-		[JsonProperty("batches")]
+		[DataMember(Name ="batches")]
 		long Batches { get; }
 
-		[JsonProperty("created")]
+		[DataMember(Name ="created")]
 		long Created { get; }
 
-		[JsonProperty("deleted")]
+		[DataMember(Name ="deleted")]
 		long Deleted { get; }
 
-		[JsonProperty("failures")]
+		[DataMember(Name ="failures")]
 		IReadOnlyCollection<BulkIndexByScrollFailure> Failures { get; }
 
-		[JsonProperty("noops")]
+		[DataMember(Name ="noops")]
 		long Noops { get; }
 
-		[JsonProperty("retries")]
+		[DataMember(Name ="retries")]
 		Retries Retries { get; }
 
 		/// <summary>
 		/// The id of the task if <see cref="MigrationUpgradeRequestParameters.WaitForCompletion" />
 		/// is set to <c>false</c> on the request
 		/// </summary>
-		[JsonProperty("task")]
+		[DataMember(Name ="task")]
 		TaskId Task { get; }
 
-		[JsonProperty("throttled_millis")]
+		[DataMember(Name ="throttled_millis")]
 		long ThrottledMilliseconds { get; }
 
-		[JsonProperty("timed_out")]
+		[DataMember(Name ="timed_out")]
 		bool TimedOut { get; }
 
-		[JsonProperty("took")]
+		[DataMember(Name ="took")]
 		long Took { get; }
 
-		[JsonProperty("total")]
+		[DataMember(Name ="total")]
 		long Total { get; }
 
-		[JsonProperty("updated")]
+		[DataMember(Name ="updated")]
 		long Updated { get; }
 
-		[JsonProperty("version_conflicts")]
+		[DataMember(Name ="version_conflicts")]
 		long VersionConflicts { get; }
 	}
 

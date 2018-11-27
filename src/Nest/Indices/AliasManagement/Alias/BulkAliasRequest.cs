@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public partial interface IBulkAliasRequest
 	{
-		[JsonProperty("actions")]
+		[DataMember(Name ="actions")]
 		IList<IAliasAction> Actions { get; set; }
 	}
 

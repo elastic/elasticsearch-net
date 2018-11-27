@@ -1,20 +1,20 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<HttpAttachment>))]
+	[DataContract]
+	[ReadAs(typeof(HttpAttachment))]
 	public interface IHttpAttachment : IEmailAttachment
 	{
-		[JsonProperty("content_type")]
+		[DataMember(Name ="content_type")]
 		string ContentType { get; set; }
 
-		[JsonProperty("inline")]
+		[DataMember(Name ="inline")]
 		bool? Inline { get; set; }
 
-		[JsonProperty("request")]
-		[JsonConverter(typeof(ReadAsTypeJsonConverter<HttpInputRequest>))]
+		[DataMember(Name ="request")]
+		[ReadAs(typeof(HttpInputRequest))]
 		IHttpInputRequest Request { get; set; }
 	}
 

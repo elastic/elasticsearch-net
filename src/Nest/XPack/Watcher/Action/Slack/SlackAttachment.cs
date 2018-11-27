@@ -1,56 +1,56 @@
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SlackAttachment>))]
+	[DataContract]
+	[ReadAs(typeof(SlackAttachment))]
 	public interface ISlackAttachment
 	{
-		[JsonProperty("author_icon")]
+		[DataMember(Name ="author_icon")]
 		string AuthorIcon { get; set; }
 
-		[JsonProperty("author_link")]
+		[DataMember(Name ="author_link")]
 		string AuthorLink { get; set; }
 
-		[JsonProperty("author_name")]
+		[DataMember(Name ="author_name")]
 		string AuthorName { get; set; }
 
-		[JsonProperty("color")]
+		[DataMember(Name ="color")]
 		string Color { get; set; }
 
-		[JsonProperty("fallback")]
+		[DataMember(Name ="fallback")]
 		string Fallback { get; set; }
 
-		[JsonProperty("fields")]
+		[DataMember(Name ="fields")]
 		IEnumerable<ISlackAttachmentField> Fields { get; set; }
 
-		[JsonProperty("footer")]
+		[DataMember(Name ="footer")]
 		string Footer { get; set; }
 
-		[JsonProperty("footer_icon")]
+		[DataMember(Name ="footer_icon")]
 		string FooterIcon { get; set; }
 
-		[JsonProperty("image_url")]
+		[DataMember(Name ="image_url")]
 		string ImageUrl { get; set; }
 
-		[JsonProperty("pretext")]
+		[DataMember(Name ="pretext")]
 		string Pretext { get; set; }
 
-		[JsonProperty("text")]
+		[DataMember(Name ="text")]
 		string Text { get; set; }
 
-		[JsonProperty("thumb_url")]
+		[DataMember(Name ="thumb_url")]
 		string ThumbUrl { get; set; }
 
-		[JsonProperty("title")]
+		[DataMember(Name ="title")]
 		string Title { get; set; }
 
-		[JsonProperty("title_link")]
+		[DataMember(Name ="title_link")]
 		string TitleLink { get; set; }
 
-		[JsonProperty("ts")]
+		[DataMember(Name ="ts")]
 		[JsonConverter(typeof(EpochSecondsDateTimeJsonConverter))]
 		DateTimeOffset? Ts { get; set; }
 	}

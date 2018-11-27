@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IReindexRethrottleResponse : IResponse
 	{
-		[JsonProperty("nodes")]
+		[DataMember(Name ="nodes")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, ReindexNode>))]
 		IReadOnlyDictionary<string, ReindexNode> Nodes { get; }
 	}

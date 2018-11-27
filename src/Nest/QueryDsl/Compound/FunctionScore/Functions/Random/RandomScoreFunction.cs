@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<RandomScoreFunction>))]
+	[DataContract]
+	[ReadAs(typeof(RandomScoreFunction))]
 	public interface IRandomScoreFunction : IScoreFunction
 	{
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
-		[JsonProperty("seed")]
+		[DataMember(Name ="seed")]
 		Union<long, string> Seed { get; set; }
 	}
 

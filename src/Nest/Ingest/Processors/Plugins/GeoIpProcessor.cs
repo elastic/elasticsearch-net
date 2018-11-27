@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -14,26 +14,26 @@ namespace Nest
 	/// <remarks>
 	/// Requires the Ingest Geoip Processor Plugin to be installed on the cluster.
 	/// </remarks>
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(ProcessorJsonConverter<GeoIpProcessor>))]
 	public interface IGeoIpProcessor : IProcessor
 	{
-		[JsonProperty("database_file")]
+		[DataMember(Name ="database_file")]
 		string DatabaseFile { get; set; }
 
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
 		/// <summary>
 		/// If `true` and `field` does not exist, the processor quietly exits without modifying the document
 		/// </summary>
-		[JsonProperty("ignore_missing")]
+		[DataMember(Name ="ignore_missing")]
 		bool? IgnoreMissing { get; set; }
 
-		[JsonProperty("properties")]
+		[DataMember(Name ="properties")]
 		IEnumerable<string> Properties { get; set; }
 
-		[JsonProperty("target_field")]
+		[DataMember(Name ="target_field")]
 		Field TargetField { get; set; }
 	}
 

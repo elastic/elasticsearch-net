@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IRevertModelSnapshotResponse : IAcknowledgedResponse
 	{
-		[JsonProperty("model")]
+		[DataMember(Name ="model")]
 		ModelSnapshot Model { get; }
 	}
 

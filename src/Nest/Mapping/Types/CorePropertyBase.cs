@@ -1,12 +1,12 @@
 ﻿using System.Diagnostics;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary>
 	/// Core properties of a mapping for a property type to a document field in Elasticsearch
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	[ContractJsonConverter(typeof(PropertyJsonConverter))]
 	public interface ICoreProperty : IProperty
 	{
@@ -14,7 +14,7 @@ namespace Nest
 		/// Copies the value of this field into another field, which can be queried as a single field.
 		/// Allows for the creation of custom _all fields
 		/// </summary>
-		[JsonProperty("copy_to")]
+		[DataMember(Name ="copy_to")]
 		[JsonConverter(typeof(FieldsJsonConverter))]
 		Fields CopyTo { get; set; }
 
@@ -22,14 +22,14 @@ namespace Nest
 		/// Configures multi-fields for this field. Allows one field to be indexed in different
 		/// ways to serve different search and analytics purposes
 		/// </summary>
-		[JsonProperty("fields", DefaultValueHandling = DefaultValueHandling.Ignore)]
+		[DataMember(Name ="fields", DefaultValueHandling = DefaultValueHandling.Ignore)]
 		IProperties Fields { get; set; }
 
 		/// <summary>
 		/// Which relevancy scoring algorithm or similarity should be used.
 		/// Defaults to <see cref="SimilarityOption.BM25" />
 		/// </summary>
-		[JsonProperty("similarity")]
+		[DataMember(Name ="similarity")]
 		Union<SimilarityOption, string> Similarity { get; set; }
 
 		/// <summary>
@@ -39,7 +39,7 @@ namespace Nest
 		/// <remarks>
 		/// Not valid on <see cref="ObjectProperty" />
 		/// </remarks>
-		[JsonProperty("store")]
+		[DataMember(Name ="store")]
 		bool? Store { get; set; }
 	}
 

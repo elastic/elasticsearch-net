@@ -1,16 +1,16 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	[ContractJsonConverter(typeof(ScoreFunctionJsonConverter))]
 	public interface IScoreFunction
 	{
-		[JsonProperty("filter")]
+		[DataMember(Name ="filter")]
 		QueryContainer Filter { get; set; }
 
-		[JsonProperty("weight")]
+		[DataMember(Name ="weight")]
 		double? Weight { get; set; }
 	}
 

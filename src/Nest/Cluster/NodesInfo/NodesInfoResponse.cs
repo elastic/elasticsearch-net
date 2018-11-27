@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -9,13 +9,13 @@ namespace Nest
 		IReadOnlyDictionary<string, NodeInfo> Nodes { get; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class NodesInfoResponse : NodesResponseBase, INodesInfoResponse
 	{
-		[JsonProperty("cluster_name")]
+		[DataMember(Name ="cluster_name")]
 		public string ClusterName { get; internal set; }
 
-		[JsonProperty("nodes")]
+		[DataMember(Name ="nodes")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, NodeInfo>))]
 		public IReadOnlyDictionary<string, NodeInfo> Nodes { get; internal set; } = EmptyReadOnly<string, NodeInfo>.Dictionary;
 	}

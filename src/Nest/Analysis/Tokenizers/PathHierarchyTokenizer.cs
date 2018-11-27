@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -16,31 +16,31 @@ namespace Nest
 		/// <summary>
 		/// The buffer size to use, defaults to 1024.
 		/// </summary>
-		[JsonProperty("buffer_size")]
+		[DataMember(Name ="buffer_size")]
 		int? BufferSize { get; set; }
 
 		/// <summary>
 		/// The character delimiter to use, defaults to /.
 		/// </summary>
-		[JsonProperty("delimiter")]
+		[DataMember(Name ="delimiter")]
 		char? Delimiter { get; set; }
 
 		/// <summary>
 		/// An optional replacement character to use. Defaults to the delimiter
 		/// </summary>
-		[JsonProperty("replacement")]
+		[DataMember(Name ="replacement")]
 		char? Replacement { get; set; }
 
 		/// <summary>
 		/// Generates tokens in reverse order, defaults to false.
 		/// </summary>
-		[JsonProperty("reverse")]
+		[DataMember(Name ="reverse")]
 		bool? Reverse { get; set; }
 
 		/// <summary>
 		/// Controls initial tokens to skip, defaults to 0.
 		/// </summary>
-		[JsonProperty("skip")]
+		[DataMember(Name ="skip")]
 		int? Skip { get; set; }
 	}
 

@@ -1,49 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<InnerHits>))]
+	[ReadAs(typeof(InnerHits))]
 	public interface IInnerHits
 	{
 		/// <summary>
 		/// Provides a second level of collapsing, NOTE: Elasticsearch only supports collapsing up to two levels.
 		/// </summary>
-		[JsonProperty("collapse")]
+		[DataMember(Name ="collapse")]
 		IFieldCollapse Collapse { get; set; }
 
-		[JsonProperty("docvalue_fields")]
+		[DataMember(Name ="docvalue_fields")]
 		Fields DocValueFields { get; set; }
 
-		[JsonProperty("explain")]
+		[DataMember(Name ="explain")]
 		bool? Explain { get; set; }
 
-		[JsonProperty("from")]
+		[DataMember(Name ="from")]
 		int? From { get; set; }
 
-		[JsonProperty("highlight")]
+		[DataMember(Name ="highlight")]
 		IHighlight Highlight { get; set; }
 
-		[JsonProperty("ignore_unmapped")]
+		[DataMember(Name ="ignore_unmapped")]
 		bool? IgnoreUnmapped { get; set; }
 
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		string Name { get; set; }
 
-		[JsonProperty("script_fields")]
+		[DataMember(Name ="script_fields")]
 		IScriptFields ScriptFields { get; set; }
 
-		[JsonProperty("size")]
+		[DataMember(Name ="size")]
 		int? Size { get; set; }
 
-		[JsonProperty("sort")]
+		[DataMember(Name ="sort")]
 		IList<ISort> Sort { get; set; }
 
-		[JsonProperty("_source")]
+		[DataMember(Name ="_source")]
 		Union<bool, ISourceFilter> Source { get; set; }
 
-		[JsonProperty("version")]
+		[DataMember(Name ="version")]
 		bool? Version { get; set; }
 	}
 
@@ -74,7 +74,7 @@ namespace Nest
 		public bool? Version { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	public class InnerHitsDescriptor<T> : DescriptorBase<InnerHitsDescriptor<T>, IInnerHits>, IInnerHits where T : class
 	{
 		IFieldCollapse IInnerHits.Collapse { get; set; }

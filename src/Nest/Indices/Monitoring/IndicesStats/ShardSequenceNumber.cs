@@ -1,17 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class ShardSequenceNumber
 	{
-		[JsonProperty("global_checkpoint")]
+		[DataMember(Name ="global_checkpoint")]
 		public long GlobalCheckpoint { get; internal set; }
 
-		[JsonProperty("local_checkpoint")]
+		[DataMember(Name ="local_checkpoint")]
 		public long LocalCheckpoint { get; internal set; }
 
-		[JsonProperty("max_seq_no")]
+		[DataMember(Name ="max_seq_no")]
 		public long MaximumSequenceNumber { get; internal set; }
 	}
 }

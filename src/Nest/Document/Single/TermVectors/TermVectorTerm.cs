@@ -1,22 +1,22 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class TermVectorTerm
 	{
-		[JsonProperty("doc_freq")]
+		[DataMember(Name ="doc_freq")]
 		public int DocumentFrequency { get; internal set; }
 
-		[JsonProperty("term_freq")]
+		[DataMember(Name ="term_freq")]
 		public int TermFrequency { get; internal set; }
 
-		[JsonProperty("tokens")]
+		[DataMember(Name ="tokens")]
 		public IReadOnlyCollection<Token> Tokens { get; internal set; } =
 			EmptyReadOnly<Token>.Collection;
 
-		[JsonProperty("ttf")]
+		[DataMember(Name ="ttf")]
 		public int TotalTermFrequency { get; internal set; }
 	}
 }

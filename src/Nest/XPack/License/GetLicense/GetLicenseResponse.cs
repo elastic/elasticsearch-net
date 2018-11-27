@@ -1,12 +1,12 @@
 ﻿using System;
 using System.IO;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IGetLicenseResponse : IResponse
 	{
-		[JsonProperty("license")]
+		[DataMember(Name ="license")]
 		LicenseInformation License { get; }
 	}
 
@@ -19,61 +19,61 @@ namespace Nest
 
 	public class LicenseInformation
 	{
-		[JsonProperty("expiry_date")]
+		[DataMember(Name ="expiry_date")]
 		public DateTime ExpiryDate { get; internal set; }
 
-		[JsonProperty("expiry_date_in_millis")]
+		[DataMember(Name ="expiry_date_in_millis")]
 		public long ExpiryDateInMilliseconds { get; internal set; }
 
-		[JsonProperty("issue_date")]
+		[DataMember(Name ="issue_date")]
 		public DateTime IssueDate { get; internal set; }
 
-		[JsonProperty("issue_date_in_millis")]
+		[DataMember(Name ="issue_date_in_millis")]
 		public long IssueDateInMilliseconds { get; internal set; }
 
-		[JsonProperty("issued_to")]
+		[DataMember(Name ="issued_to")]
 		public string IssuedTo { get; internal set; }
 
-		[JsonProperty("issuer")]
+		[DataMember(Name ="issuer")]
 		public string Issuer { get; internal set; }
 
-		[JsonProperty("max_nodes")]
+		[DataMember(Name ="max_nodes")]
 		public long MaxNodes { get; internal set; }
 
-		[JsonProperty("status")]
+		[DataMember(Name ="status")]
 		public LicenseStatus Status { get; internal set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		public LicenseType Type { get; internal set; }
 
-		[JsonProperty("uid")]
+		[DataMember(Name ="uid")]
 		public string UID { get; internal set; }
 	}
 
 	public class License
 	{
-		[JsonProperty("expiry_date_in_millis")]
+		[DataMember(Name ="expiry_date_in_millis")]
 		public long ExpiryDateInMilliseconds { get; set; }
 
-		[JsonProperty("issue_date_in_millis")]
+		[DataMember(Name ="issue_date_in_millis")]
 		public long IssueDateInMilliseconds { get; set; }
 
-		[JsonProperty("issued_to")]
+		[DataMember(Name ="issued_to")]
 		public string IssuedTo { get; set; }
 
-		[JsonProperty("issuer")]
+		[DataMember(Name ="issuer")]
 		public string Issuer { get; set; }
 
-		[JsonProperty("max_nodes")]
+		[DataMember(Name ="max_nodes")]
 		public long MaxNodes { get; set; }
 
-		[JsonProperty("signature")]
+		[DataMember(Name ="signature")]
 		public string Signature { get; set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		public LicenseType Type { get; set; }
 
-		[JsonProperty("uid")]
+		[DataMember(Name ="uid")]
 		public string UID { get; set; }
 
 		public static License LoadFromDisk(string path)
@@ -85,7 +85,7 @@ namespace Nest
 
 		private class Wrapped
 		{
-			[JsonProperty("license")]
+			[DataMember(Name ="license")]
 			public License License { get; set; }
 		}
 	}

@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<Rescore>))]
+	[DataContract]
+	[ReadAs(typeof(Rescore))]
 	public interface IRescore
 	{
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		IRescoreQuery Query { get; set; }
 
-		[JsonProperty("window_size")]
+		[DataMember(Name ="window_size")]
 		int? WindowSize { get; set; }
 	}
 

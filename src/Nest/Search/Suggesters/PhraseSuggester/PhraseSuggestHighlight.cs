@@ -1,14 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IPhraseSuggestHighlight
 	{
-		[JsonProperty("post_tag")]
+		[DataMember(Name ="post_tag")]
 		string PostTag { get; set; }
 
-		[JsonProperty("pre_tag")]
+		[DataMember(Name ="pre_tag")]
 		string PreTag { get; set; }
 	}
 

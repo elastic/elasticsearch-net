@@ -1,32 +1,32 @@
 using System;
 using System.Diagnostics;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public interface INumberProperty : IDocValuesProperty
 	{
-		[JsonProperty("boost")]
+		[DataMember(Name ="boost")]
 		double? Boost { get; set; }
 
-		[JsonProperty("coerce")]
+		[DataMember(Name ="coerce")]
 		bool? Coerce { get; set; }
 
-		[JsonProperty("fielddata")]
+		[DataMember(Name ="fielddata")]
 		INumericFielddata Fielddata { get; set; }
 
-		[JsonProperty("ignore_malformed")]
+		[DataMember(Name ="ignore_malformed")]
 		bool? IgnoreMalformed { get; set; }
 
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		bool? Index { get; set; }
 
-		[JsonProperty("null_value")]
+		[DataMember(Name ="null_value")]
 		double? NullValue { get; set; }
 
-		[JsonProperty("scaling_factor")]
+		[DataMember(Name ="scaling_factor")]
 		double? ScalingFactor { get; set; }
 	}
 

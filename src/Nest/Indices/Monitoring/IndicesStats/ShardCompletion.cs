@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class ShardCompletion
 	{
-		[JsonProperty("size_in_bytes")]
+		[DataMember(Name ="size_in_bytes")]
 		public long SizeInBytes { get; internal set; }
 	}
 }

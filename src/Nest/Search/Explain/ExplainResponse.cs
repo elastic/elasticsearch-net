@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -10,17 +10,17 @@ namespace Nest
 		bool Matched { get; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class ExplainResponse<TDocument> : ResponseBase, IExplainResponse<TDocument>
 		where TDocument : class
 	{
-		[JsonProperty("explanation")]
+		[DataMember(Name ="explanation")]
 		public ExplanationDetail Explanation { get; internal set; }
 
-		[JsonProperty("get")]
+		[DataMember(Name ="get")]
 		public InstantGet<TDocument> Get { get; internal set; }
 
-		[JsonProperty("matched")]
+		[DataMember(Name ="matched")]
 		public bool Matched { get; internal set; }
 	}
 }

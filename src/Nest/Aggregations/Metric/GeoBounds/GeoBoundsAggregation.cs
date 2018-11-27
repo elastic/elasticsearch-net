@@ -1,12 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<GeoBoundsAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(GeoBoundsAggregation))]
 	public interface IGeoBoundsAggregation : IMetricAggregation
 	{
-		[JsonProperty("wrap_longitude")]
+		[DataMember(Name ="wrap_longitude")]
 		bool? WrapLongitude { get; set; }
 	}
 

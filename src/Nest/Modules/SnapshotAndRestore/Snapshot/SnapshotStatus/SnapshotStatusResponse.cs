@@ -1,111 +1,111 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface ISnapshotStatusResponse : IResponse
 	{
-		[JsonProperty("snapshots")]
+		[DataMember(Name ="snapshots")]
 		IReadOnlyCollection<SnapshotStatus> Snapshots { get; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class SnapshotStatusResponse : ResponseBase, ISnapshotStatusResponse
 	{
-		[JsonProperty("snapshots")]
+		[DataMember(Name ="snapshots")]
 		public IReadOnlyCollection<SnapshotStatus> Snapshots { get; internal set; } = EmptyReadOnly<SnapshotStatus>.Collection;
 	}
 
 	public class SnapshotStatus
 	{
-		[JsonProperty("include_global_state")]
+		[DataMember(Name ="include_global_state")]
 		public bool? IncludeGlobalState { get; internal set; }
 
-		[JsonProperty("indices")]
+		[DataMember(Name ="indices")]
 		public IReadOnlyDictionary<string, SnapshotIndexStats> Indices { get; internal set; } = EmptyReadOnly<string, SnapshotIndexStats>.Dictionary;
 
-		[JsonProperty("repository")]
+		[DataMember(Name ="repository")]
 		public string Repository { get; internal set; }
 
-		[JsonProperty("shards_stats")]
+		[DataMember(Name ="shards_stats")]
 		public SnapshotShardsStats ShardsStats { get; internal set; }
 
-		[JsonProperty("snapshot")]
+		[DataMember(Name ="snapshot")]
 		public string Snapshot { get; internal set; }
 
-		[JsonProperty("state")]
+		[DataMember(Name ="state")]
 		public string State { get; internal set; }
 
-		[JsonProperty("stats")]
+		[DataMember(Name ="stats")]
 		public SnapshotStats Stats { get; internal set; }
 
-		[JsonProperty("uuid")]
+		[DataMember(Name ="uuid")]
 		public string UUID { get; internal set; }
 	}
 
 	public class SnapshotIndexStats
 	{
-		[JsonProperty("shards")]
+		[DataMember(Name ="shards")]
 		public IReadOnlyDictionary<string, SnapshotShardsStats> Shards { get; internal set; } = EmptyReadOnly<string, SnapshotShardsStats>.Dictionary;
 
-		[JsonProperty("shards_stats")]
+		[DataMember(Name ="shards_stats")]
 		public SnapshotShardsStats ShardsStats { get; internal set; }
 
-		[JsonProperty("stats")]
+		[DataMember(Name ="stats")]
 		public SnapshotStats Stats { get; internal set; }
 	}
 
 	public class SnapshotIndexShardStats
 	{
-		[JsonProperty("node")]
+		[DataMember(Name ="node")]
 		public string Node { get; internal set; }
 
-		[JsonProperty("stage")]
+		[DataMember(Name ="stage")]
 		public string Stage { get; internal set; }
 
-		[JsonProperty("stats")]
+		[DataMember(Name ="stats")]
 		public SnapshotStats Stats { get; internal set; }
 	}
 
 	public class SnapshotShardsStats
 	{
-		[JsonProperty("done")]
+		[DataMember(Name ="done")]
 		public long Done { get; internal set; }
 
-		[JsonProperty("failed")]
+		[DataMember(Name ="failed")]
 		public long Failed { get; internal set; }
 
-		[JsonProperty("finalizing")]
+		[DataMember(Name ="finalizing")]
 		public long Finalizing { get; internal set; }
 
-		[JsonProperty("initializing")]
+		[DataMember(Name ="initializing")]
 		public long Initializing { get; internal set; }
 
-		[JsonProperty("started")]
+		[DataMember(Name ="started")]
 		public long Started { get; internal set; }
 
-		[JsonProperty("total")]
+		[DataMember(Name ="total")]
 		public long Total { get; internal set; }
 	}
 
 	public class SnapshotStats
 	{
-		[JsonProperty("number_of_files")]
+		[DataMember(Name ="number_of_files")]
 		public long NumberOfFiles { get; internal set; }
 
-		[JsonProperty("processed_files")]
+		[DataMember(Name ="processed_files")]
 		public long ProcessedFiles { get; internal set; }
 
-		[JsonProperty("processed_size_in_bytes")]
+		[DataMember(Name ="processed_size_in_bytes")]
 		public long ProcessedSizeInBytes { get; internal set; }
 
-		[JsonProperty("start_time_in_millis")]
+		[DataMember(Name ="start_time_in_millis")]
 		public long StartTimeInMilliseconds { get; internal set; }
 
-		[JsonProperty("time_in_millis")]
+		[DataMember(Name ="time_in_millis")]
 		public long TimeInMilliseconds { get; internal set; }
 
-		[JsonProperty("total_size_in_bytes")]
+		[DataMember(Name ="total_size_in_bytes")]
 		public long TotalSizeInBytes { get; internal set; }
 	}
 }

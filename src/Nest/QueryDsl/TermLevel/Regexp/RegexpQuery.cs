@@ -1,18 +1,18 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(FieldNameQueryJsonConverter<RegexpQuery>))]
 	public interface IRegexpQuery : IFieldNameQuery
 	{
-		[JsonProperty("flags")]
+		[DataMember(Name ="flags")]
 		string Flags { get; set; }
 
-		[JsonProperty("max_determinized_states")]
+		[DataMember(Name ="max_determinized_states")]
 		int? MaximumDeterminizedStates { get; set; }
 
-		[JsonProperty("value")]
+		[DataMember(Name ="value")]
 		string Value { get; set; }
 	}
 

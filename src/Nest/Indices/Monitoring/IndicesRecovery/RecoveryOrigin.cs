@@ -1,19 +1,19 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class RecoveryOrigin
 	{
-		[JsonProperty("hostname")]
+		[DataMember(Name ="hostname")]
 		public string HostName { get; internal set; }
 
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		public string Id { get; internal set; }
 
-		[JsonProperty("ip")]
+		[DataMember(Name ="ip")]
 		public string Ip { get; internal set; }
 
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		public string Name { get; internal set; }
 	}
 }

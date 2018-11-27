@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -9,11 +9,11 @@ namespace Nest
 
 	public interface INodesResponse : IResponse
 	{
-		[JsonProperty("_nodes")]
+		[DataMember(Name ="_nodes")]
 		NodeStatistics NodeStatistics { get; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class NodeStatistics
 	{
 		[JsonProperty]

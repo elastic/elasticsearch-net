@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(BucketsPathJsonConverter))]
+	[JsonFormatter(typeof(BucketsPathFormatter))]
 	public interface IBucketsPath { }
 
 	public class SingleBucketsPath : IBucketsPath
@@ -41,55 +40,44 @@ namespace Nest
 		public MultiBucketsPathDescriptor Add(string name, string bucketsPath) => Assign(name, bucketsPath);
 	}
 
-	internal class BucketsPathJsonConverter : JsonConverter
+	internal class BucketsPathFormatter : IJsonFormatter<IBucketsPath>
 	{
-		public override bool CanConvert(Type objectType) =>
-			typeof(SingleBucketsPath) == objectType || typeof(MultiBucketsPath) == objectType;
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public IBucketsPath Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (reader.TokenType == JsonToken.String)
-				return new SingleBucketsPath(reader.Value.ToString());
-
-			if (reader.TokenType == JsonToken.StartObject)
+			var token = reader.GetCurrentJsonToken();
+			switch (token)
 			{
-				var dict = new Dictionary<string, string>();
-				reader.Read();
-				while (reader.TokenType != JsonToken.EndObject)
-				{
-					var key = reader.Value.ToString();
-					reader.Read();
-					var value = reader.Value.ToString();
-					dict.Add(key, value);
-					reader.Read();
-				}
-				return new MultiBucketsPath(dict);
+				case JsonToken.String:
+					return new SingleBucketsPath(reader.ReadString());
+				case JsonToken.BeginObject:
+					var formatter = formatterResolver.GetFormatter<Dictionary<string, string>>();
+					var dict = formatter.Deserialize(ref reader, formatterResolver);
+					return new MultiBucketsPath(dict);
+				default:
+					return null;
 			}
-
-			return null;
 		}
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public void Serialize(ref JsonWriter writer, IBucketsPath value, IJsonFormatterResolver formatterResolver)
 		{
-			var single = value as SingleBucketsPath;
-			if (single != null)
+			if (value is SingleBucketsPath single)
+				writer.WriteString(single.BucketsPath);
+			else if (value is MultiBucketsPath multi)
 			{
-				writer.WriteValue(single.BucketsPath);
-				return;
-			}
-			var multi = value as MultiBucketsPath;
-			if (multi != null)
-			{
-				writer.WriteStartObject();
+				writer.WriteBeginObject();
+				var count = 0;
 				foreach (var kv in multi)
 				{
+					if (count != 0)
+						writer.WriteValueSeparator();
 					writer.WritePropertyName(kv.Key);
-					writer.WriteValue(kv.Value);
+					writer.WriteString(kv.Value);
+					count++;
 				}
 				writer.WriteEndObject();
-				return;
 			}
-			writer.WriteNull();
+			else
+				writer.WriteNull();
 		}
 	}
 }

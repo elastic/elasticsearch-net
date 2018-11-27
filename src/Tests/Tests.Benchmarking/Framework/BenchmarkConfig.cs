@@ -8,7 +8,7 @@ using BenchmarkDotNet.Exporters;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Loggers;
 using BenchmarkDotNet.Reports;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Tests.Benchmarking.Framework
 {

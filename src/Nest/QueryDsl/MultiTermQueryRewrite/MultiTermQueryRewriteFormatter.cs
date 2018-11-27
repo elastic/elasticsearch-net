@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 using Utf8Json;
 
 namespace Nest {
@@ -15,7 +15,7 @@ namespace Nest {
 		public MultiTermQueryRewrite Deserialize(ref Utf8Json.JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var token = reader.GetCurrentJsonToken();
-			
+
 			if (token == Utf8Json.JsonToken.Null)
 				return null;
 

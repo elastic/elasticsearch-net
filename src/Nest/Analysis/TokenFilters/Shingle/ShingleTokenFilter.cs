@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -12,38 +12,38 @@ namespace Nest
 		/// The string to use as a replacement for each position at which there is no actual token in the stream. For instance this string is used if
 		/// the position increment is greater than one when a stop filter is used together with the shingle filter. Defaults to "_"
 		/// </summary>
-		[JsonProperty("filler_token")]
+		[DataMember(Name ="filler_token")]
 		string FillerToken { get; set; }
 
 		/// <summary>
 		/// The maximum shingle size. Defaults to 2.
 		/// </summary>
-		[JsonProperty("max_shingle_size")]
+		[DataMember(Name ="max_shingle_size")]
 		int? MaxShingleSize { get; set; }
 
 		/// <summary>
 		/// The minimum shingle size. Defaults to 2.
 		/// </summary>
-		[JsonProperty("min_shingle_size")]
+		[DataMember(Name ="min_shingle_size")]
 		int? MinShingleSize { get; set; }
 
 		/// <summary>
 		/// If true the output will contain the input tokens (unigrams) as well as the shingles. Defaults to true.
 		/// </summary>
-		[JsonProperty("output_unigrams")]
+		[DataMember(Name ="output_unigrams")]
 		bool? OutputUnigrams { get; set; }
 
 		/// <summary>
 		/// If output_unigrams is false the output will contain the input tokens (unigrams) if no shingles are available.
 		/// <para>Note if output_unigrams is set to true this setting has no effect. Defaults to false.</para>
 		/// </summary>
-		[JsonProperty("output_unigrams_if_no_shingles")]
+		[DataMember(Name ="output_unigrams_if_no_shingles")]
 		bool? OutputUnigramsIfNoShingles { get; set; }
 
 		/// <summary>
 		/// The string to use when joining adjacent tokens to form a shingle. Defaults to " ".
 		/// </summary>
-		[JsonProperty("token_separator")]
+		[DataMember(Name ="token_separator")]
 		string TokenSeparator { get; set; }
 	}
 

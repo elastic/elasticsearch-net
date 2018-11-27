@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(CompositeJsonConverter<GeoShapeQueryJsonConverter, GeoShapeQueryFieldNameConverter>))]
 	public interface IGeoShapeQuery : IFieldNameQuery
 	{
@@ -12,25 +12,25 @@ namespace Nest
 		/// Will ignore an unmapped field and will not match any documents for this query.
 		/// This can be useful when querying multiple indexes which might have different mappings.
 		/// </summary>
-		[JsonProperty("ignore_unmapped")]
+		[DataMember(Name ="ignore_unmapped")]
 		bool? IgnoreUnmapped { get; set; }
 
 		/// <summary>
 		/// Indexed geo shape to search with
 		/// </summary>
-		[JsonProperty("indexed_shape")]
+		[DataMember(Name ="indexed_shape")]
 		IFieldLookup IndexedShape { get; set; }
 
 		/// <summary>
 		/// Controls the spatial relation operator to use at search time.
 		/// </summary>
-		[JsonProperty("relation")]
+		[DataMember(Name ="relation")]
 		GeoShapeRelation? Relation { get; set; }
 
 		/// <summary>
 		/// The geo shape to search with
 		/// </summary>
-		[JsonProperty("shape")]
+		[DataMember(Name ="shape")]
 		IGeoShape Shape { get; set; }
 	}
 

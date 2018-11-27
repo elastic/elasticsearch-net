@@ -1,16 +1,16 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IAllocateClusterRerouteCommand : IClusterRerouteCommand
 	{
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		IndexName Index { get; set; }
 
-		[JsonProperty("node")]
+		[DataMember(Name ="node")]
 		string Node { get; set; }
 
-		[JsonProperty("shard")]
+		[DataMember(Name ="shard")]
 		int? Shard { get; set; }
 	}
 
@@ -18,13 +18,13 @@ namespace Nest
 
 	public interface IAllocateEmptyPrimaryRerouteCommand : IAllocateClusterRerouteCommand
 	{
-		[JsonProperty("accept_data_loss")]
+		[DataMember(Name ="accept_data_loss")]
 		bool? AcceptDataLoss { get; set; }
 	}
 
 	public interface IAllocateStalePrimaryRerouteCommand : IAllocateClusterRerouteCommand
 	{
-		[JsonProperty("accept_data_loss")]
+		[DataMember(Name ="accept_data_loss")]
 		bool? AcceptDataLoss { get; set; }
 	}
 

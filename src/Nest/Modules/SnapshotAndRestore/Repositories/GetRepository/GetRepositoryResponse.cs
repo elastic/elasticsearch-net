@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(GetRepositoryResponseJsonConverter))]
 	public interface IGetRepositoryResponse : IResponse
 	{
@@ -20,7 +20,7 @@ namespace Nest
 		S3Repository S3(string name);
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class GetRepositoryResponse : ResponseBase, IGetRepositoryResponse
 	{
 		public IReadOnlyDictionary<string, ISnapshotRepository> Repositories { get; internal set; } =

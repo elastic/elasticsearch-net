@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -11,7 +11,7 @@ namespace Nest
 	/// based index based on a date or timestamp field in a document
 	/// by using the date math index name support.
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(ProcessorJsonConverter<DateIndexNameProcessor>))]
 	public interface IDateIndexNameProcessor : IProcessor
 	{
@@ -20,32 +20,32 @@ namespace Nest
 		/// dates / timestamps in the document being preprocessed.
 		/// Default is yyyy-MM-dd’T'HH:mm:ss.SSSZ
 		/// </summary>
-		[JsonProperty("date_formats")]
+		[DataMember(Name ="date_formats")]
 		IEnumerable<string> DateFormats { get; set; }
 
 		/// <summary>
 		/// How to round the date when formatting the date into the index name.
 		/// </summary>
-		[JsonProperty("date_rounding")]
+		[DataMember(Name ="date_rounding")]
 		DateRounding? DateRounding { get; set; }
 
 		/// <summary>
 		/// The field to get the date or timestamp from.
 		/// </summary>
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
 		/// <summary>
 		/// The format to be used when printing the parsed date into
 		/// the index name.
 		/// </summary>
-		[JsonProperty("index_name_format")]
+		[DataMember(Name ="index_name_format")]
 		string IndexNameFormat { get; set; }
 
 		/// <summary>
 		/// A prefix of the index name to be prepended before the printed date.
 		/// </summary>
-		[JsonProperty("index_name_prefix")]
+		[DataMember(Name ="index_name_prefix")]
 		string IndexNamePrefix { get; set; }
 
 		/// <summary>
@@ -53,7 +53,7 @@ namespace Nest
 		/// being preprocessed, relevant when parsing month names or
 		/// week days.
 		/// </summary>
-		[JsonProperty("locale")]
+		[DataMember(Name ="locale")]
 		string Locale { get; set; }
 
 		/// <summary>
@@ -61,7 +61,7 @@ namespace Nest
 		/// math index supports resolves expressions into concrete
 		/// index names.
 		/// </summary>
-		[JsonProperty("timezone")]
+		[DataMember(Name ="timezone")]
 		string TimeZone { get; set; }
 	}
 

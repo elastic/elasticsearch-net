@@ -1,9 +1,9 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<CreateIndexRequest>))]
+	[ReadAs(typeof(CreateIndexRequest))]
 	public partial interface ICreateIndexRequest : IIndexState { }
 
 	public partial class CreateIndexRequest

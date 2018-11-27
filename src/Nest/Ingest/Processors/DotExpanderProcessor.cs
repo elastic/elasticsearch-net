@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -9,14 +9,14 @@ namespace Nest
 	/// This processor allows fields with dots in the name to be accessible by other processors in the pipeline.
 	/// Otherwise these fields can’t be accessed by any processor.
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(ProcessorJsonConverter<DotExpanderProcessor>))]
 	public interface IDotExpanderProcessor : IProcessor
 	{
 		/// <summary>
 		/// The field to expand into an object field
 		/// </summary>
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
 		/// <summary>
@@ -24,7 +24,7 @@ namespace Nest
 		/// Only required if the field to expand is part another object field,
 		/// because the field option can only understand leaf fields.
 		/// </summary>
-		[JsonProperty("path")]
+		[DataMember(Name ="path")]
 		string Path { get; set; }
 	}
 
@@ -38,7 +38,7 @@ namespace Nest
 		/// <summary>
 		/// The field to expand into an object field
 		/// </summary>
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		public Field Field { get; set; }
 
 		/// <summary>
@@ -46,7 +46,7 @@ namespace Nest
 		/// Only required if the field to expand is part another object field,
 		/// because the field option can only understand leaf fields.
 		/// </summary>
-		[JsonProperty("path")]
+		[DataMember(Name ="path")]
 		public string Path { get; set; }
 
 		protected override string Name => "dot_expander";

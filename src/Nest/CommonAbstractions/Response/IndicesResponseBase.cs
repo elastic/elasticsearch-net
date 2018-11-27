@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -8,13 +8,13 @@ namespace Nest
 		ShardStatistics ShardsHit { get; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public abstract class IndicesResponseBase : ResponseBase, IIndicesResponse
 	{
-		[JsonProperty("acknowledged")]
+		[DataMember(Name ="acknowledged")]
 		public bool Acknowledged { get; private set; }
 
-		[JsonProperty("_shards")]
+		[DataMember(Name ="_shards")]
 		public ShardStatistics ShardsHit { get; private set; }
 	}
 }

@@ -1,20 +1,20 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class CatTemplatesRecord : ICatRecord
 	{
-		[JsonProperty("index_patterns")]
+		[DataMember(Name ="index_patterns")]
 		public string IndexPatterns { get; set; }
 
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		public string Name { get; set; }
 
-		[JsonProperty("order")]
+		[DataMember(Name ="order")]
 		public long Order { get; set; }
 
-		[JsonProperty("version")]
+		[DataMember(Name ="version")]
 		public long Version { get; set; }
 	}
 }

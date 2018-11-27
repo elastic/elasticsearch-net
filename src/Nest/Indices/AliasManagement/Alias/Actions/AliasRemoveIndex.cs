@@ -1,12 +1,12 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IAliasRemoveIndexAction : IAliasAction
 	{
-		[JsonProperty("remove_index")]
+		[DataMember(Name ="remove_index")]
 		AliasRemoveIndexOperation RemoveIndex { get; set; }
 	}
 

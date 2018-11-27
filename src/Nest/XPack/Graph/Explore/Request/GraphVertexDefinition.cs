@@ -1,28 +1,28 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IGraphVertexDefinition
 	{
-		[JsonProperty("exclude")]
+		[DataMember(Name ="exclude")]
 		IEnumerable<string> Exclude { get; set; }
 
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
-		[JsonProperty("include")]
+		[DataMember(Name ="include")]
 		IEnumerable<GraphVertexInclude> Include { get; set; }
 
-		[JsonProperty("min_doc_count")]
+		[DataMember(Name ="min_doc_count")]
 		long? MinimumDocumentCount { get; set; }
 
-		[JsonProperty("shard_min_doc_count")]
+		[DataMember(Name ="shard_min_doc_count")]
 		long? ShardMinimumDocumentCount { get; set; }
 
-		[JsonProperty("size")]
+		[DataMember(Name ="size")]
 		int? Size { get; set; }
 	}
 

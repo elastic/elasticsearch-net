@@ -1,23 +1,23 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IAuthenticateResponse : IResponse
 	{
-		[JsonProperty("email")]
+		[DataMember(Name ="email")]
 		string Email { get; }
 
-		[JsonProperty("full_name")]
+		[DataMember(Name ="full_name")]
 		string FullName { get; }
 
-		[JsonProperty("metadata")]
+		[DataMember(Name ="metadata")]
 		IReadOnlyDictionary<string, object> Metadata { get; }
 
-		[JsonProperty("roles")]
+		[DataMember(Name ="roles")]
 		IReadOnlyCollection<string> Roles { get; }
 
-		[JsonProperty("username")]
+		[DataMember(Name ="username")]
 		string Username { get; }
 	}
 

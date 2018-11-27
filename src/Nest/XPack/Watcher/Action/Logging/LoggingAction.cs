@@ -1,17 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public interface ILoggingAction : IAction
 	{
-		[JsonProperty("category")]
+		[DataMember(Name ="category")]
 		string Category { get; set; }
 
-		[JsonProperty("level")]
+		[DataMember(Name ="level")]
 		LogLevel? Level { get; set; }
 
-		[JsonProperty("text")]
+		[DataMember(Name ="text")]
 		string Text { get; set; }
 	}
 

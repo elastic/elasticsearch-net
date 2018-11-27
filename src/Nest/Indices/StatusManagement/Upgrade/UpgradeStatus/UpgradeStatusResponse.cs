@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(UpgradeStatusResponseJsonConverter))]
 	public interface IUpgradeStatusResponse : IResponse
 	{

@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface INodesStatsResponse : INodesResponse
 	{
-		[JsonProperty("cluster_name")]
+		[DataMember(Name ="cluster_name")]
 		string ClusterName { get; }
 
-		[JsonProperty("nodes")]
+		[DataMember(Name ="nodes")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, NodeStats>))]
 		IReadOnlyDictionary<string, NodeStats> Nodes { get; }
 	}

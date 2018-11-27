@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -12,19 +12,19 @@ namespace Nest
 	/// NOTE: The collapsing is applied to the top hits only and does not affect aggregations.
 	/// </para>
 	/// </summary>
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<FieldCollapse>))]
+	[ReadAs(typeof(FieldCollapse))]
 	public interface IFieldCollapse
 	{
 		/// <summary>
 		/// The field used for collapsing must be a single valued keyword or number field with doc-values activated
 		/// </summary>
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
 		/// <summary>
 		/// It is also possible to expand each collapsed top hits with the `inner_hits` option.
 		/// </summary>
-		[JsonProperty("inner_hits")]
+		[DataMember(Name ="inner_hits")]
 		IInnerHits InnerHits { get; set; }
 
 		/// <summary>
@@ -34,7 +34,7 @@ namespace Nest
 		/// concurrent searches allowed in this phase. The default is based on the number of data nodes and the
 		/// default search thread pool size.
 		/// </summary>
-		[JsonProperty("max_concurrent_group_searches")]
+		[DataMember(Name ="max_concurrent_group_searches")]
 		int? MaxConcurrentGroupSearches { get; set; }
 	}
 

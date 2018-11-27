@@ -1,18 +1,18 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary>
 	/// A range of date values represented as unsigned 64-bit integer milliseconds elapsed since system epoch.
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IDateRangeProperty : IRangeProperty
 	{
 		/// <summary>
 		/// The date format(s) that can be parsed. Defaults to strict_date_optional_time||epoch_millis.
 		/// <see cref="DateFormat" />
 		/// </summary>
-		[JsonProperty("format")]
+		[DataMember(Name ="format")]
 		string Format { get; set; }
 	}
 

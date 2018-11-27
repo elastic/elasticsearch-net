@@ -1,12 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<StupidBackoffSmoothingModel>))]
+	[DataContract]
+	[ReadAs(typeof(StupidBackoffSmoothingModel))]
 	public interface IStupidBackoffSmoothingModel : ISmoothingModel
 	{
-		[JsonProperty("discount")]
+		[DataMember(Name ="discount")]
 		double? Discount { get; set; }
 	}
 

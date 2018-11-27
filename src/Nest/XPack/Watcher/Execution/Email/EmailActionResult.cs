@@ -1,17 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class EmailActionResult
 	{
-		[JsonProperty("account")]
+		[DataMember(Name ="account")]
 		public string Account { get; set; }
 
-		[JsonProperty("message")]
+		[DataMember(Name ="message")]
 		public EmailResult Message { get; set; }
 
-		[JsonProperty("reason")]
+		[DataMember(Name ="reason")]
 		public string Reason { get; set; }
 	}
 }

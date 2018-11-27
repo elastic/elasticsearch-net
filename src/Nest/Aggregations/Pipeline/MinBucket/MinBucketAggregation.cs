@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<MinBucketAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(MinBucketAggregation))]
 	public interface IMinBucketAggregation : IPipelineAggregation { }
 
 	public class MinBucketAggregation

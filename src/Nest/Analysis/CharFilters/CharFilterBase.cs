@@ -1,14 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	[ContractJsonConverter(typeof(CharFilterJsonConverter))]
 	public interface ICharFilter
 	{
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		string Type { get; }
 
-		[JsonProperty("version")]
+		[DataMember(Name ="version")]
 		string Version { get; set; }
 	}
 

@@ -1,16 +1,16 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class RollupJobInformation
 	{
-		[JsonProperty("config")]
+		[DataMember(Name ="config")]
 		public RollupJobConfiguration Config { get; internal set; }
 
-		[JsonProperty("stats")]
+		[DataMember(Name ="stats")]
 		public RollupJobStats Stats { get; internal set; }
 
-		[JsonProperty("status")]
+		[DataMember(Name ="status")]
 		public RollupJobStatus Status { get; internal set; }
 	}
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -20,7 +20,7 @@ namespace Nest
 	{
 		public TypeMapping this[TypeName type] => Mappings?[type];
 
-		[JsonProperty("mappings")]
+		[DataMember(Name ="mappings")]
 		public TypeMappings Mappings { get; internal set; }
 	}
 
@@ -40,14 +40,14 @@ namespace Nest
 	[JsonConverter(typeof(ResolvableDictionaryResponseJsonConverter<GetMappingResponse, IndexName, IndexMappings>))]
 	public class GetMappingResponse : DictionaryResponseBase<IndexName, IndexMappings>, IGetMappingResponse
 	{
-		[JsonIgnore]
+		[IgnoreDataMember]
 		public IReadOnlyDictionary<IndexName, IndexMappings> Indices => Self.BackingDictionary;
 
 		[Obsolete(
 			"Recommended to use GetMappingFor, this is a leaky abstraction that returns the mapping of the first index's first type on the response")]
 		public ITypeMapping Mapping => Indices.FirstOrDefault().Value?.Mappings?.FirstOrDefault().Value;
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		[Obsolete("Renamed to Indices, will be deleted from NEST 7.x")]
 		public IReadOnlyDictionary<IndexName, IndexMappings> Mappings => Indices;
 

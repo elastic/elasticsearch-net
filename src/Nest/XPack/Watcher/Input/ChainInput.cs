@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary>
 	///  input to load data from multiple sources into the watch execution context when the watch is triggered.
 	/// </summary>
-	[JsonObject]
+	[DataContract]
 	[JsonConverter(typeof(ChainInputJsonConverter))]
 	public interface IChainInput : IInput
 	{

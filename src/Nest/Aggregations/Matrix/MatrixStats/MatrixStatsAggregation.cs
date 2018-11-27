@@ -1,12 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<MatrixStatsAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(MatrixStatsAggregation))]
 	public interface IMatrixStatsAggregation : IMatrixAggregation
 	{
-		[JsonProperty("mode")]
+		[DataMember(Name ="mode")]
 		MatrixStatsMode? Mode { get; set; }
 	}
 

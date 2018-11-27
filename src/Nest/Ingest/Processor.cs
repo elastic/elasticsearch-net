@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -8,7 +8,7 @@ namespace Nest
 	{
 		string Name { get; }
 
-		[JsonProperty("on_failure")]
+		[DataMember(Name ="on_failure")]
 		IEnumerable<IProcessor> OnFailure { get; set; }
 	}
 

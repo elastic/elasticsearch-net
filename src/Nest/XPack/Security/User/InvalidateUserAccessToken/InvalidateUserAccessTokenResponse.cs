@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IInvalidateUserAccessTokenResponse : IResponse
 	{
-		[JsonProperty("created")]
+		[DataMember(Name ="created")]
 		bool Created { get; }
 	}
 

@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class HttpInputResponseResult
 	{
-		[JsonProperty("body")]
+		[DataMember(Name ="body")]
 		public string Body { get; set; }
 
-		[JsonProperty("headers")]
+		[DataMember(Name ="headers")]
 		public IDictionary<string, string[]> Headers { get; set; }
 
-		[JsonProperty("status")]
+		[DataMember(Name ="status")]
 		public int StatusCode { get; set; }
 	}
 }

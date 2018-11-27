@@ -1,19 +1,19 @@
 using System.Diagnostics;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary>
 	/// Data type mapping to map a property as a geopoint
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IGeoPointProperty : IDocValuesProperty
 	{
 		/// <summary>
 		/// If true, malformed geo-points are ignored. If false (default), malformed
 		/// geo-points throw an exception and reject the whole document.
 		/// </summary>
-		[JsonProperty("ignore_malformed")]
+		[DataMember(Name ="ignore_malformed")]
 		bool? IgnoreMalformed { get; set; }
 
 
@@ -23,14 +23,14 @@ namespace Nest
 		/// containing any more than latitude and longitude (two dimensions) values
 		/// throw an exception and reject the whole document.
 		/// </summary>
-		[JsonProperty("ignore_z_value")]
+		[DataMember(Name ="ignore_z_value")]
 		bool? IgnoreZValue { get; set; }
 
 		/// <summary>
 		/// Accepts a geo_point value which is substituted for any explicit null values.
 		/// Defaults to null, which means the field is treated as missing.
 		/// </summary>
-		[JsonProperty("null_value")]
+		[DataMember(Name ="null_value")]
 		GeoLocation NullValue { get; set; }
 	}
 

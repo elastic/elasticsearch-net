@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IFlushJobResponse : IResponse
 	{
-		[JsonProperty("flushed")]
+		[DataMember(Name ="flushed")]
 		bool Flushed { get; }
 	}
 

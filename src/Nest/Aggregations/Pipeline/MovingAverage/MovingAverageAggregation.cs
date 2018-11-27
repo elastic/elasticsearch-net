@@ -1,21 +1,22 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(MovingAverageAggregationJsonConverter))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(MovingAverageAggregationFormatter))]
 	public interface IMovingAverageAggregation : IPipelineAggregation
 	{
-		[JsonProperty("minimize")]
+		[DataMember(Name ="minimize")]
 		bool? Minimize { get; set; }
 
 		IMovingAverageModel Model { get; set; }
 
-		[JsonProperty("predict")]
+		[DataMember(Name ="predict")]
 		int? Predict { get; set; }
 
-		[JsonProperty("window")]
+		[DataMember(Name ="window")]
 		int? Window { get; set; }
 	}
 

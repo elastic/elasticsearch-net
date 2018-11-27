@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -8,29 +8,29 @@ namespace Nest
 		IReadOnlyDictionary<string, XPackUser> Users { get; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(DictionaryResponseJsonConverter<GetUserResponse, string, XPackUser>))]
 	public class GetUserResponse : DictionaryResponseBase<string, XPackUser>, IGetUserResponse
 	{
-		[JsonIgnore]
+		[IgnoreDataMember]
 		public IReadOnlyDictionary<string, XPackUser> Users => Self.BackingDictionary;
 	}
 
 	public class XPackUser
 	{
-		[JsonProperty("email")]
+		[DataMember(Name ="email")]
 		public string Email { get; internal set; }
 
-		[JsonProperty("full_name")]
+		[DataMember(Name ="full_name")]
 		public string FullName { get; internal set; }
 
-		[JsonProperty("metadata")]
+		[DataMember(Name ="metadata")]
 		public IReadOnlyDictionary<string, object> Metadata { get; internal set; } = EmptyReadOnly<string, object>.Dictionary;
 
-		[JsonProperty("roles")]
+		[DataMember(Name ="roles")]
 		public IReadOnlyCollection<string> Roles { get; internal set; } = EmptyReadOnly<string>.Collection;
 
-		[JsonProperty("username")]
+		[DataMember(Name ="username")]
 		public string Username { get; internal set; }
 	}
 }

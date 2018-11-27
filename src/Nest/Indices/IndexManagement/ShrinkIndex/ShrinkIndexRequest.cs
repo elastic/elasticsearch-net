@@ -1,15 +1,15 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ShrinkIndexRequest>))]
+	[ReadAs(typeof(ShrinkIndexRequest))]
 	public partial interface IShrinkIndexRequest
 	{
-		[JsonProperty("aliases")]
+		[DataMember(Name ="aliases")]
 		IAliases Aliases { get; set; }
 
-		[JsonProperty("settings")]
+		[DataMember(Name ="settings")]
 		IIndexSettings Settings { get; set; }
 	}
 

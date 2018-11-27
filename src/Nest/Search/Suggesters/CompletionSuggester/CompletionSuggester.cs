@@ -1,41 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<CompletionSuggester>))]
+	[DataContract]
+	[ReadAs(typeof(CompletionSuggester))]
 	public interface ICompletionSuggester : ISuggester
 	{
 		/// <summary>
 		/// Context mappings used to filter and/or boost suggestions
 		/// </summary>
-		[JsonProperty("contexts")]
+		[DataMember(Name ="contexts")]
 		IDictionary<string, IList<ISuggestContextQuery>> Contexts { get; set; }
 
 		/// <summary>
 		/// Support fuzziness for the suggestions
 		/// </summary>
-		[JsonProperty("fuzzy")]
+		[DataMember(Name ="fuzzy")]
 		IFuzzySuggester Fuzzy { get; set; }
 
 		/// <summary>
 		/// Prefix used to search for suggestions
 		/// </summary>
-		[JsonIgnore]
+		[IgnoreDataMember]
 		string Prefix { get; set; }
 
 		/// <summary>
 		/// Prefix as a regular expression used to search for suggestions
 		/// </summary>
-		[JsonIgnore]
+		[IgnoreDataMember]
 		string Regex { get; set; }
 
 		/// <summary>
 		/// Whether duplicate suggestions should be filtered out. Defaults to <c>false</c>
 		/// </summary>
-		[JsonProperty("skip_duplicates")]
+		[DataMember(Name ="skip_duplicates")]
 		bool? SkipDuplicates { get; set; }
 	}
 

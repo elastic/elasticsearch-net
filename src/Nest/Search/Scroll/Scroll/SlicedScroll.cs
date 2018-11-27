@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SlicedScroll>))]
+	[ReadAs(typeof(SlicedScroll))]
 	public interface ISlicedScroll
 	{
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		int? Id { get; set; }
 
-		[JsonProperty("max")]
+		[DataMember(Name ="max")]
 		int? Max { get; set; }
 	}
 

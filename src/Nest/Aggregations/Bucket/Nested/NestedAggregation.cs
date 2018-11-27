@@ -1,14 +1,14 @@
 using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<NestedAggregation>))]
+	[DataContract]
+	[ReadAs(typeof(NestedAggregation))]
 	public interface INestedAggregation : IBucketAggregation
 	{
-		[JsonProperty("path")]
+		[DataMember(Name ="path")]
 		Field Path { get; set; }
 	}
 

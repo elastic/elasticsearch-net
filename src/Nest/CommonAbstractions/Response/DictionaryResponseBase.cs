@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using Utf8Json;
+using Utf8Json.Internal;
 
 namespace Nest
 {
@@ -21,53 +21,73 @@ namespace Nest
 
 	internal class DictionaryResponseJsonConverterHelpers
 	{
-		public static JObject ReadServerErrorFirst(JsonReader reader, out Error error, out int? statusCode)
+		private static readonly AutomataDictionary AutomataDictionary = new AutomataDictionary
 		{
-			var j = JObject.Load(reader);
-			var errorProperty = j.Property("error");
+			{ "error", 0 },
+			{ "status", 1 }
+		};
+
+		public static ArraySegment<byte> ReadServerErrorFirst(
+			ref JsonReader reader,
+			IJsonFormatterResolver formatterResolver,
+			out Error error,
+			out int? statusCode
+		)
+		{
+			var segment = reader.ReadNextBlockSegment();
+			var segmentReader = new JsonReader(segment.Array, segment.Offset);
+			var count = 0;
 			error = null;
-			if (errorProperty?.Value?.Type == JTokenType.String)
-			{
-				var reason = errorProperty.Value.Value<string>();
-				error = new Error { Reason = reason };
-				errorProperty.Remove();
-			}
-			else if (errorProperty?.Value?.Type == JTokenType.Object && ((JObject)errorProperty.Value)["reason"] != null)
-			{
-				error = errorProperty.Value.ToObject<Error>();
-				errorProperty.Remove();
-			}
-			var statusProperty = j.Property("status");
 			statusCode = null;
-			if (statusProperty?.Value?.Type == JTokenType.Integer)
+
+			while (segmentReader.ReadIsInObject(ref count))
 			{
-				statusCode = statusProperty.Value.Value<int>();
-				statusProperty.Remove();
+				var propertyName = segmentReader.ReadPropertyNameSegmentRaw();
+				if (AutomataDictionary.TryGetValue(propertyName, out var value))
+				{
+					switch (value)
+					{
+						case 0:
+							if (segmentReader.GetCurrentJsonToken() == JsonToken.String)
+								error = new Error { Reason = reader.ReadString() };
+							else
+							{
+								var formatter = formatterResolver.GetFormatter<Error>();
+								error = formatter.Deserialize(ref segmentReader, formatterResolver);
+							}
+							break;
+						case 1:
+							if (segmentReader.GetCurrentJsonToken() == JsonToken.Number)
+								statusCode = segmentReader.ReadInt32();
+							break;
+					}
+				}
 			}
-			return j;
+
+			return segment;
 		}
 	}
 
-	internal class DictionaryResponseJsonConverter<TResponse, TKey, TValue> : JsonConverter
+	internal class DictionaryResponseFormatter<TResponse, TKey, TValue> : IJsonFormatter<TResponse>
 		where TResponse : ResponseBase, IDictionaryResponse<TKey, TValue>, new()
 	{
-		public override bool CanRead => true;
-		public override bool CanWrite => false;
-
-		public override bool CanConvert(Type objectType) => true;
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public TResponse Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var j = DictionaryResponseJsonConverterHelpers.ReadServerErrorFirst(reader, out var error, out var statusCode);
-			var response = new TResponse();
-			var dict = new Dictionary<TKey, TValue>();
-			serializer.Populate(j.CreateReader(), dict);
-			response.BackingDictionary = dict;
-			response.Error = error;
-			response.StatusCode = statusCode;
+			var segment = DictionaryResponseJsonConverterHelpers.ReadServerErrorFirst(ref reader, formatterResolver, out var error,
+				out var statusCode);
+			var segmentReader = new JsonReader(segment.Array, segment.Offset);
+			var formatter = formatterResolver.GetFormatter<Dictionary<TKey, TValue>>();
+			var dict = formatter.Deserialize(ref segmentReader, formatterResolver);
+
+			var response = new TResponse
+			{
+				BackingDictionary = dict,
+				Error = error,
+				StatusCode = statusCode
+			};
 			return response;
 		}
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }
+		public void Serialize(ref JsonWriter writer, TResponse value, IJsonFormatterResolver formatterResolver) => throw new NotSupportedException();
 	}
 }

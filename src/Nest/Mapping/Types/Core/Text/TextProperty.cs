@@ -1,52 +1,52 @@
 ﻿using System;
 using System.Diagnostics;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public interface ITextProperty : ICoreProperty
 	{
-		[JsonProperty("analyzer")]
+		[DataMember(Name ="analyzer")]
 		string Analyzer { get; set; }
 
-		[JsonProperty("boost")]
+		[DataMember(Name ="boost")]
 		double? Boost { get; set; }
 
-		[JsonProperty("eager_global_ordinals")]
+		[DataMember(Name ="eager_global_ordinals")]
 		bool? EagerGlobalOrdinals { get; set; }
 
-		[JsonProperty("fielddata")]
+		[DataMember(Name ="fielddata")]
 		bool? Fielddata { get; set; }
 
-		[JsonProperty("fielddata_frequency_filter")]
+		[DataMember(Name ="fielddata_frequency_filter")]
 		IFielddataFrequencyFilter FielddataFrequencyFilter { get; set; }
 
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		bool? Index { get; set; }
 
-		[JsonProperty("index_options")]
+		[DataMember(Name ="index_options")]
 		IndexOptions? IndexOptions { get; set; }
 
-		[JsonProperty("index_phrases")]
+		[DataMember(Name ="index_phrases")]
 		bool? IndexPhrases { get; set; }
 
-		[JsonProperty("index_prefixes")]
+		[DataMember(Name ="index_prefixes")]
 		ITextIndexPrefixes IndexPrefixes { get; set; }
 
-		[JsonProperty("norms")]
+		[DataMember(Name ="norms")]
 		bool? Norms { get; set; }
 
-		[JsonProperty("position_increment_gap")]
+		[DataMember(Name ="position_increment_gap")]
 		int? PositionIncrementGap { get; set; }
 
-		[JsonProperty("search_analyzer")]
+		[DataMember(Name ="search_analyzer")]
 		string SearchAnalyzer { get; set; }
 
-		[JsonProperty("search_quote_analyzer")]
+		[DataMember(Name ="search_quote_analyzer")]
 		string SearchQuoteAnalyzer { get; set; }
 
-		[JsonProperty("term_vector")]
+		[DataMember(Name ="term_vector")]
 		TermVectorOption? TermVector { get; set; }
 	}
 

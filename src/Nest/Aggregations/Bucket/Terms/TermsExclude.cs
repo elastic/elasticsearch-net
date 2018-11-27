@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// Filters which terms to exclude from the response
 	/// </summary>
-	[JsonConverter(typeof(TermsExcludeJsonConverter))]
+	[JsonFormatter(typeof(TermsExcludeFormatter))]
 	public class TermsExclude
 	{
 		/// <summary>
@@ -26,13 +26,11 @@ namespace Nest
 		/// <summary>
 		/// The regular expression pattern to determine terms to exclude from the response
 		/// </summary>
-		[JsonIgnore]
 		public string Pattern { get; set; }
 
 		/// <summary>
 		/// Collection of terms to exclude from the response
 		/// </summary>
-		[JsonIgnore]
 		public IEnumerable<string> Values { get; set; }
 	}
 }

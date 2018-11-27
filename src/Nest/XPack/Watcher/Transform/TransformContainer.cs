@@ -1,23 +1,23 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(ReserializeJsonConverter<TransformContainer, ITransformContainer>))]
 	public interface ITransformContainer
 	{
-		[JsonProperty("chain")]
+		[DataMember(Name ="chain")]
 		IChainTransform Chain { get; set; }
 
-		[JsonProperty("script")]
+		[DataMember(Name ="script")]
 		IScriptTransform Script { get; set; }
 
-		[JsonProperty("search")]
+		[DataMember(Name ="search")]
 		ISearchTransform Search { get; set; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public class TransformContainer : ITransformContainer, IDescriptor
 	{
 		internal TransformContainer() { }

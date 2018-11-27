@@ -1,12 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<ExtendedStatsAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(ExtendedStatsAggregation))]
 	public interface IExtendedStatsAggregation : IMetricAggregation
 	{
-		[JsonProperty("sigma")]
+		[DataMember(Name ="sigma")]
 		double? Sigma { get; set; }
 	}
 

@@ -1,21 +1,21 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<FiltersAggregation>))]
+	[DataContract]
+	[ReadAs(typeof(FiltersAggregation))]
 	public interface IFiltersAggregation : IBucketAggregation
 	{
-		[JsonProperty("filters")]
+		[DataMember(Name ="filters")]
 		Union<INamedFiltersContainer, List<QueryContainer>> Filters { get; set; }
 
-		[JsonProperty("other_bucket")]
+		[DataMember(Name ="other_bucket")]
 		bool? OtherBucket { get; set; }
 
-		[JsonProperty("other_bucket_key")]
+		[DataMember(Name ="other_bucket_key")]
 		string OtherBucketKey { get; set; }
 	}
 

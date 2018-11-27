@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -8,7 +8,7 @@ namespace Nest
 	/// for example the Elasticsearch Java processes.
 	/// If necessary, you can increase the limits after the job is created.
 	/// </summary>
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<AnalysisLimits>))]
+	[ReadAs(typeof(AnalysisLimits))]
 	public interface IAnalysisLimits
 	{
 		/// <summary>
@@ -17,7 +17,7 @@ namespace Nest
 		/// however it requires that you have more storage available.
 		/// If you set this value to 0, no examples are stored.
 		/// </summary>
-		[JsonProperty("categorization_examples_limit")]
+		[DataMember(Name ="categorization_examples_limit")]
 		long? CategorizationExamplesLimit { get; set; }
 
 		/// <summary>
@@ -25,7 +25,7 @@ namespace Nest
 		/// in MiB. Once this limit is approached, data pruning becomes more aggressive.
 		/// Upon exceeding this limit, new entities are not modeled. The default value is 4096.
 		/// </summary>
-		[JsonProperty("model_memory_limit")]
+		[DataMember(Name ="model_memory_limit")]
 		string ModelMemoryLimit { get; set; }
 	}
 
@@ -57,7 +57,7 @@ namespace Nest
 	/// <summary>
 	/// Limits applied for the resources required to hold the mathematical models in memory.
 	/// </summary>
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<AnalysisMemoryLimit>))]
+	[ReadAs(typeof(AnalysisMemoryLimit))]
 	public interface IAnalysisMemoryLimit
 	{
 		/// <summary>
@@ -65,7 +65,7 @@ namespace Nest
 		/// in MiB. Once this limit is approached, data pruning becomes more aggressive.
 		/// Upon exceeding this limit, new entities are not modeled. The default value is 4096.
 		/// </summary>
-		[JsonProperty("model_memory_limit")]
+		[DataMember(Name ="model_memory_limit")]
 		string ModelMemoryLimit { get; set; }
 	}
 

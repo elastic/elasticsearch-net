@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class IndexSegment
 	{
-		[JsonProperty("shards")]
+		[DataMember(Name ="shards")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, ShardsSegment>))]
 		public IReadOnlyDictionary<string, ShardsSegment> Shards { get; internal set; } =
 			EmptyReadOnly<string, ShardsSegment>.Dictionary;

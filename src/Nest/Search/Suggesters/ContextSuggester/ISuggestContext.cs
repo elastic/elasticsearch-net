@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	[JsonConverter(typeof(SuggestContextJsonConverter))]
 	public interface ISuggestContext
 	{
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		string Name { get; set; }
 
-		[JsonProperty("path")]
+		[DataMember(Name ="path")]
 		Field Path { get; set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		string Type { get; }
 	}
 

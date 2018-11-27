@@ -1,15 +1,15 @@
 using System.Diagnostics;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public interface INestedProperty : IObjectProperty
 	{
-		[JsonProperty("include_in_parent")]
+		[DataMember(Name ="include_in_parent")]
 		bool? IncludeInParent { get; set; }
 
-		[JsonProperty("include_in_root")]
+		[DataMember(Name ="include_in_root")]
 		bool? IncludeInRoot { get; set; }
 	}
 

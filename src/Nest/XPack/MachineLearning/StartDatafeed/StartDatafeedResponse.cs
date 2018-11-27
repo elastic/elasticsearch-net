@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -9,7 +9,7 @@ namespace Nest
 
 	public class StartDatafeedResponse : ResponseBase, IStartDatafeedResponse
 	{
-		[JsonProperty("started")]
+		[DataMember(Name ="started")]
 		public bool Started { get; internal set; }
 	}
 }

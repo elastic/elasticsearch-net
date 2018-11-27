@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
@@ -6,7 +6,7 @@ namespace Nest
 	/// <summary>
 	/// Language types used for language analyzers
 	/// </summary>
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum Language
 	{
 		Arabic,

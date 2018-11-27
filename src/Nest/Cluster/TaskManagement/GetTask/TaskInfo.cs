@@ -1,42 +1,42 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public class TaskInfo
 	{
-		[JsonProperty("action")]
+		[DataMember(Name ="action")]
 		public string Action { get; internal set; }
 
-		[JsonProperty("cancellable")]
+		[DataMember(Name ="cancellable")]
 		public bool Cancellable { get; internal set; }
 
-		[JsonProperty("children")]
+		[DataMember(Name ="children")]
 		public IReadOnlyCollection<TaskInfo> Children { get; internal set; } = EmptyReadOnly<TaskInfo>.Collection;
 
-		[JsonProperty("description")]
+		[DataMember(Name ="description")]
 		public string Description { get; internal set; }
 
-		[JsonProperty("headers")]
+		[DataMember(Name ="headers")]
 		public IReadOnlyDictionary<string, string> Headers { get; internal set; } = EmptyReadOnly<string, string>.Dictionary;
 
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		public long Id { get; internal set; }
 
-		[JsonProperty("node")]
+		[DataMember(Name ="node")]
 		public string Node { get; internal set; }
 
-		[JsonProperty("running_time_in_nanos")]
+		[DataMember(Name ="running_time_in_nanos")]
 		public long RunningTimeInNanoseconds { get; internal set; }
 
-		[JsonProperty("start_time_in_millis")]
+		[DataMember(Name ="start_time_in_millis")]
 		public long StartTimeInMilliseconds { get; internal set; }
 
-		[JsonProperty("status")]
+		[DataMember(Name ="status")]
 		public TaskStatus Status { get; internal set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		public string Type { get; internal set; }
 	}
 }

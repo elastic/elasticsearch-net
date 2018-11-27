@@ -1,27 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(ProcessorJsonConverter<DateProcessor>))]
 	public interface IDateProcessor : IProcessor
 	{
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
-		[JsonProperty("formats")]
+		[DataMember(Name ="formats")]
 		IEnumerable<string> Formats { get; set; }
 
-		[JsonProperty("locale")]
+		[DataMember(Name ="locale")]
 		string Locale { get; set; }
 
-		[JsonProperty("target_field")]
+		[DataMember(Name ="target_field")]
 		Field TargetField { get; set; }
 
-		[JsonProperty("timezone")]
+		[DataMember(Name ="timezone")]
 		string Timezone { get; set; }
 	}
 

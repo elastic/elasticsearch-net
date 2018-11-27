@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -11,7 +11,7 @@ namespace Nest
 		/// <summary>
 		/// Set to true to lower case all words first. Defaults to false.
 		/// </summary>
-		[JsonProperty("ignore_case")]
+		[DataMember(Name ="ignore_case")]
 		bool? IgnoreCase { get; set; }
 
 		/// <summary>
@@ -19,13 +19,13 @@ namespace Nest
 		/// This is very useful for  the completion suggester as a query like green a can
 		/// be extended to green apple even though  you remove stop words in general. Defaults to true.
 		/// </summary>
-		[JsonProperty("remove_trailing")]
+		[DataMember(Name ="remove_trailing")]
 		bool? RemoveTrailing { get; set; }
 
 		/// <summary>
 		/// A list of stop words to use. Defaults to `_english_` stop words.
 		/// </summary>
-		[JsonProperty("stopwords")]
+		[DataMember(Name ="stopwords")]
 		[JsonConverter(typeof(StopWordsJsonConverter))]
 		StopWords StopWords { get; set; }
 
@@ -34,7 +34,7 @@ namespace Nest
 		/// file configuration. Each stop word should be in its own "line"
 		/// (separated by a line break). The file must be UTF-8 encoded.
 		/// </summary>
-		[JsonProperty("stopwords_path")]
+		[DataMember(Name ="stopwords_path")]
 		string StopWordsPath { get; set; }
 	}
 

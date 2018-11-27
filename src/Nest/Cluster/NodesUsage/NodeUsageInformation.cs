@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class NodeUsageInformation
 	{
-		[JsonProperty("rest_actions")]
+		[DataMember(Name ="rest_actions")]
 		public IReadOnlyDictionary<string, int> RestActions { get; internal set; }
 
-		[JsonProperty("since")]
+		[DataMember(Name ="since")]
 		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
 		public DateTimeOffset Since { get; internal set; }
 
-		[JsonProperty("timestamp")]
+		[DataMember(Name ="timestamp")]
 		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
 		public DateTimeOffset Timestamp { get; internal set; }
 	}

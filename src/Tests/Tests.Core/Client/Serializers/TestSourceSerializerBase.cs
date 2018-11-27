@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Elasticsearch.Net;
 using Nest;
 using Nest.JsonNetSerializer;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Serialization;
 using Tests.Domain;
 

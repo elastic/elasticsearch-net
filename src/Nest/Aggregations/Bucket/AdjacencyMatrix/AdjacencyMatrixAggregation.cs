@@ -1,13 +1,14 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<AdjacencyMatrixAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(AdjacencyMatrixAggregation))]
 	public interface IAdjacencyMatrixAggregation : IBucketAggregation
 	{
-		[JsonProperty("filters")]
+		[DataMember(Name ="filters")]
 		INamedFiltersContainer Filters { get; set; }
 	}
 

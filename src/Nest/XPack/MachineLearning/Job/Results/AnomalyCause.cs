@@ -1,54 +1,54 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary>
 	/// Cause for the anomaly that has been identified for the over field.
 	/// </summary>
-	[JsonObject]
+	[DataContract]
 	public class AnomalyCause
 	{
-		[JsonProperty("actual")]
+		[DataMember(Name ="actual")]
 		public IReadOnlyCollection<double> Actual { get; internal set; } = EmptyReadOnly<double>.Collection;
 
-		[JsonProperty("by_field_name")]
+		[DataMember(Name ="by_field_name")]
 		public string ByFieldName { get; internal set; }
 
-		[JsonProperty("by_field_value")]
+		[DataMember(Name ="by_field_value")]
 		public string ByFieldValue { get; internal set; }
 
-		[JsonProperty("correlated_by_field_value")]
+		[DataMember(Name ="correlated_by_field_value")]
 		public string CorrelatedByFieldValue { get; internal set; }
 
-		[JsonProperty("field_name")]
+		[DataMember(Name ="field_name")]
 		public string FieldName { get; internal set; }
 
-		[JsonProperty("function")]
+		[DataMember(Name ="function")]
 		public string Function { get; internal set; }
 
-		[JsonProperty("function_description")]
+		[DataMember(Name ="function_description")]
 		public string FunctionDescription { get; internal set; }
 
-		[JsonProperty("influencers")]
+		[DataMember(Name ="influencers")]
 		public IReadOnlyCollection<Influence> Influencers { get; internal set; } = EmptyReadOnly<Influence>.Collection;
 
-		[JsonProperty("over_field_name")]
+		[DataMember(Name ="over_field_name")]
 		public string OverFieldName { get; internal set; }
 
-		[JsonProperty("over_field_value")]
+		[DataMember(Name ="over_field_value")]
 		public string OverFieldValue { get; internal set; }
 
-		[JsonProperty("partition_field_name")]
+		[DataMember(Name ="partition_field_name")]
 		public string PartitionFieldName { get; internal set; }
 
-		[JsonProperty("partition_field_value")]
+		[DataMember(Name ="partition_field_value")]
 		public string PartitionFieldValue { get; internal set; }
 
-		[JsonProperty("probability")]
+		[DataMember(Name ="probability")]
 		public double Probability { get; internal set; }
 
-		[JsonProperty("typical")]
+		[DataMember(Name ="typical")]
 		public IReadOnlyCollection<double> Typical { get; internal set; } = EmptyReadOnly<double>.Collection;
 	}
 }

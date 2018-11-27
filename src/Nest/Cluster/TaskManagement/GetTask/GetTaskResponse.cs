@@ -1,14 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IGetTaskResponse : IResponse
 	{
-		[JsonProperty("completed")]
+		[DataMember(Name ="completed")]
 		bool Completed { get; }
 
-		[JsonProperty("task")]
+		[DataMember(Name ="task")]
 		TaskInfo Task { get; }
 	}
 

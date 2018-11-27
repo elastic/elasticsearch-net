@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<StatsAggregation>))]
+	[DataContract]
+	[ReadAs(typeof(StatsAggregation))]
 	public interface IStatsAggregation : IMetricAggregation { }
 
 	public class StatsAggregation : MetricAggregationBase, IStatsAggregation

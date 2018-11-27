@@ -1,25 +1,25 @@
 ﻿using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary>
 	/// A Stored script
 	/// </summary>
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<StoredScript>))]
+	[DataContract]
+	[ReadAs(typeof(StoredScript))]
 	public interface IStoredScript
 	{
 		/// <summary>
 		/// The script language
 		/// </summary>
-		[JsonProperty("lang")]
+		[DataMember(Name ="lang")]
 		string Lang { get; set; }
 
 		/// <summary>
 		/// The script source
 		/// </summary>
-		[JsonProperty("source")]
+		[DataMember(Name ="source")]
 		string Source { get; set; }
 	}
 
@@ -41,10 +41,10 @@ namespace Nest
 			self.Source = source;
 		}
 
-		[JsonProperty("lang")]
+		[DataMember(Name ="lang")]
 		string IStoredScript.Lang { get; set; }
 
-		[JsonProperty("source")]
+		[DataMember(Name ="source")]
 		string IStoredScript.Source { get; set; }
 	}
 

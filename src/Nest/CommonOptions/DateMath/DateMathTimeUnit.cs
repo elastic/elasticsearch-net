@@ -1,10 +1,8 @@
 using System;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(EnumMemberValueCasingJsonConverter<DateMathTimeUnit>))]
 	public enum DateMathTimeUnit
 	{
 		[EnumMember(Value = "s")]

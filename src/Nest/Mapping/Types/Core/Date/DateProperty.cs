@@ -1,39 +1,39 @@
 using System;
 using System.Diagnostics;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public interface IDateProperty : IDocValuesProperty
 	{
 		/// <summary>
 		/// Mapping field-level query time boosting. Accepts a floating point number, defaults to 1.0.
 		/// </summary>
-		[JsonProperty("boost")]
+		[DataMember(Name ="boost")]
 		double? Boost { get; set; }
 
-		[JsonProperty("fielddata")]
+		[DataMember(Name ="fielddata")]
 		INumericFielddata Fielddata { get; set; }
 
 		/// <summary>
 		/// The date format(s) that can be parsed. Defaults to strict_date_optional_time||epoch_millis.
 		/// <see cref="DateFormat" />
 		/// </summary>
-		[JsonProperty("format")]
+		[DataMember(Name ="format")]
 		string Format { get; set; }
 
 		/// <summary>
 		/// If true, malformed numbers are ignored. If false (default), malformed numbers throw an exception
 		/// and reject the whole document.
 		/// </summary>
-		[JsonProperty("ignore_malformed")]
+		[DataMember(Name ="ignore_malformed")]
 		bool? IgnoreMalformed { get; set; }
 
 		/// <summary>
 		/// Should the field be searchable? Accepts true (default) and false.
 		/// </summary>
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		bool? Index { get; set; }
 
 		/// <summary>
@@ -41,7 +41,7 @@ namespace Nest
 		/// as the field which is substituted for any explicit null values. Defaults to null,
 		/// which means the field is treated as missing.
 		/// </summary>
-		[JsonProperty("null_value")]
+		[DataMember(Name ="null_value")]
 		DateTime? NullValue { get; set; }
 	}
 

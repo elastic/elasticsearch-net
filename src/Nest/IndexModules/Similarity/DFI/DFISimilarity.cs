@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -10,7 +10,7 @@ namespace Nest
 		/// <summary>
 		/// The independence measure
 		/// </summary>
-		[JsonProperty("independence_measure")]
+		[DataMember(Name ="independence_measure")]
 		DFIIndependenceMeasure? IndependenceMeasure { get; set; }
 	}
 

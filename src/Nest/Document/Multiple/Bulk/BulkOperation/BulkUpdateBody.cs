@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -6,20 +6,20 @@ namespace Nest
 		where TDocument : class
 		where TPartialUpdate : class
 	{
-		[JsonProperty("doc_as_upsert")]
+		[DataMember(Name ="doc_as_upsert")]
 		public bool? _DocAsUpsert { get; set; }
 
-		[JsonProperty("doc")]
+		[DataMember(Name ="doc")]
 		[JsonConverter(typeof(CollapsedSourceConverter))]
 		internal TPartialUpdate _PartialUpdate { get; set; }
 
-		[JsonProperty("script")]
+		[DataMember(Name ="script")]
 		internal IScript _Script { get; set; }
 
-		[JsonProperty("scripted_upsert")]
+		[DataMember(Name ="scripted_upsert")]
 		internal bool? _ScriptedUpsert { get; set; }
 
-		[JsonProperty("upsert")]
+		[DataMember(Name ="upsert")]
 		[JsonConverter(typeof(CollapsedSourceConverter))]
 		internal TDocument _Upsert { get; set; }
 	}

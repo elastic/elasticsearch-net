@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -11,7 +11,7 @@ namespace Nest
 		/// <summary>
 		/// Accepts articles setting which is a set of stop words articles
 		/// </summary>
-		[JsonProperty("articles")]
+		[DataMember(Name ="articles")]
 		IEnumerable<string> Articles { get; set; }
 	}
 

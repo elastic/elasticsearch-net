@@ -1,42 +1,42 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class CatSnapshotsRecord : ICatRecord
 	{
-		[JsonProperty("duration")]
+		[DataMember(Name ="duration")]
 		public Time Duration { get; set; }
 
-		[JsonProperty("end_epoch")]
+		[DataMember(Name ="end_epoch")]
 		public long EndEpoch { get; set; }
 
-		[JsonProperty("end_time")]
+		[DataMember(Name ="end_time")]
 		public string EndTime { get; set; }
 
-		[JsonProperty("failed_shards")]
+		[DataMember(Name ="failed_shards")]
 		public long FailedShards { get; set; }
 
 		// duration indices successful_shards failed_shards total_shards
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		public string Id { get; set; }
 
-		[JsonProperty("indices")]
+		[DataMember(Name ="indices")]
 		public long Indices { get; set; }
 
-		[JsonProperty("start_epoch")]
+		[DataMember(Name ="start_epoch")]
 		public long StartEpoch { get; set; }
 
-		[JsonProperty("start_time")]
+		[DataMember(Name ="start_time")]
 		public string StartTime { get; set; }
 
-		[JsonProperty("status")]
+		[DataMember(Name ="status")]
 		public string Status { get; set; }
 
-		[JsonProperty("succesful_shards")]
+		[DataMember(Name ="succesful_shards")]
 		public long SuccesfulShards { get; set; }
 
-		[JsonProperty("total_shards")]
+		[DataMember(Name ="total_shards")]
 		public long TotalShards { get; set; }
 	}
 }

@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IOpenJobResponse : IResponse
 	{
-		[JsonProperty("opened")]
+		[DataMember(Name ="opened")]
 		bool Opened { get; }
 	}
 

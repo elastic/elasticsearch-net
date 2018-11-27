@@ -1,12 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<NumericFielddata>))]
+	[DataContract]
+	[ReadAs(typeof(NumericFielddata))]
 	public interface INumericFielddata : IFielddata
 	{
-		[JsonProperty("format")]
+		[DataMember(Name ="format")]
 		NumericFielddataFormat? Format { get; set; }
 	}
 

@@ -1,26 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<ScriptedMetricAggregation>))]
+	[DataContract]
+	[ReadAs(typeof(ScriptedMetricAggregation))]
 	public interface IScriptedMetricAggregation : IMetricAggregation
 	{
-		[JsonProperty("combine_script")]
+		[DataMember(Name ="combine_script")]
 		IScript CombineScript { get; set; }
 
-		[JsonProperty("init_script")]
+		[DataMember(Name ="init_script")]
 		IScript InitScript { get; set; }
 
-		[JsonProperty("map_script")]
+		[DataMember(Name ="map_script")]
 		IScript MapScript { get; set; }
 
-		[JsonProperty("params")]
+		[DataMember(Name ="params")]
 		IDictionary<string, object> Params { get; set; }
 
-		[JsonProperty("reduce_script")]
+		[DataMember(Name ="reduce_script")]
 		IScript ReduceScript { get; set; }
 	}
 

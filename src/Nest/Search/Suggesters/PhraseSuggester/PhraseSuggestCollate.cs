@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -8,14 +8,14 @@ namespace Nest
 	/// Checks each suggestion against the specified query to prune suggestions
 	/// for which no matching docs exist in the index.
 	/// </summary>
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<PhraseSuggestCollate>))]
+	[DataContract]
+	[ReadAs(typeof(PhraseSuggestCollate))]
 	public interface IPhraseSuggestCollate
 	{
 		/// <summary>
 		/// The parameters for the query. the suggestion value will be added to the variables you specify.
 		/// </summary>
-		[JsonProperty("params")]
+		[DataMember(Name ="params")]
 		IDictionary<string, object> Params { get; set; }
 
 		/// <summary>
@@ -23,13 +23,13 @@ namespace Nest
 		/// an additional option collate_match, which will be <c>true</c> if matching documents for the phrase was found,
 		/// <c>false</c> otherwise. The default value for <see cref="Prune" /> is <c>false</c>.
 		/// </summary>
-		[JsonProperty("prune")]
+		[DataMember(Name ="prune")]
 		bool? Prune { get; set; }
 
 		/// <summary>
 		/// The collate query to run.
 		/// </summary>
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		IPhraseSuggestCollateQuery Query { get; set; }
 	}
 

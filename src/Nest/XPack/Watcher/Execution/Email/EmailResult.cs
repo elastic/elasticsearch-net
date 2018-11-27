@@ -1,39 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class EmailResult
 	{
-		[JsonProperty("bcc")]
+		[DataMember(Name ="bcc")]
 		public IEnumerable<string> Bcc { get; set; }
 
-		[JsonProperty("body")]
+		[DataMember(Name ="body")]
 		public EmailBody Body { get; set; }
 
-		[JsonProperty("cc")]
+		[DataMember(Name ="cc")]
 		public IEnumerable<string> Cc { get; set; }
 
-		[JsonProperty("from")]
+		[DataMember(Name ="from")]
 		public string From { get; set; }
 
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		public string Id { get; set; }
 
-		[JsonProperty("priority")]
+		[DataMember(Name ="priority")]
 		public EmailPriority? Priority { get; set; }
 
-		[JsonProperty("reply_to")]
+		[DataMember(Name ="reply_to")]
 		public IEnumerable<string> ReplyTo { get; set; }
 
-		[JsonProperty("sent_date")]
+		[DataMember(Name ="sent_date")]
 		public DateTime? SentDate { get; set; }
 
-		[JsonProperty("subject")]
+		[DataMember(Name ="subject")]
 		public string Subject { get; set; }
 
-		[JsonProperty("to")]
+		[DataMember(Name ="to")]
 		public IEnumerable<string> To { get; set; }
 	}
 }

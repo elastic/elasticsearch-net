@@ -1,22 +1,22 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IClusterStatsResponse : INodesResponse
 	{
-		[JsonProperty("cluster_name")]
+		[DataMember(Name ="cluster_name")]
 		string ClusterName { get; }
 
-		[JsonProperty("indices")]
+		[DataMember(Name ="indices")]
 		ClusterIndicesStats Indices { get; }
 
-		[JsonProperty("nodes")]
+		[DataMember(Name ="nodes")]
 		ClusterNodesStats Nodes { get; }
 
-		[JsonProperty("status")]
+		[DataMember(Name ="status")]
 		ClusterStatus Status { get; }
 
-		[JsonProperty("timestamp")]
+		[DataMember(Name ="timestamp")]
 		long Timestamp { get; }
 	}
 

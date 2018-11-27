@@ -1,56 +1,56 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class IndexStats
 	{
-		[JsonProperty("completion")]
+		[DataMember(Name ="completion")]
 		public CompletionStats Completion { get; set; }
 
-		[JsonProperty("docs")]
+		[DataMember(Name ="docs")]
 		public DocStats Documents { get; set; }
 
-		[JsonProperty("fielddata")]
+		[DataMember(Name ="fielddata")]
 		public FielddataStats Fielddata { get; set; }
 
-		[JsonProperty("flush")]
+		[DataMember(Name ="flush")]
 		public FlushStats Flush { get; set; }
 
-		[JsonProperty("get")]
+		[DataMember(Name ="get")]
 		public GetStats Get { get; set; }
 
-		[JsonProperty("indexing")]
+		[DataMember(Name ="indexing")]
 		public IndexingStats Indexing { get; set; }
 
-		[JsonProperty("merges")]
+		[DataMember(Name ="merges")]
 		public MergesStats Merges { get; set; }
 
-		[JsonProperty("query_cache")]
+		[DataMember(Name ="query_cache")]
 		public QueryCacheStats QueryCache { get; set; }
 
-		[JsonProperty("recovery")]
+		[DataMember(Name ="recovery")]
 		public RecoveryStats Recovery { get; set; }
 
-		[JsonProperty("refresh")]
+		[DataMember(Name ="refresh")]
 		public RefreshStats Refresh { get; set; }
 
-		[JsonProperty("request_cache")]
+		[DataMember(Name ="request_cache")]
 		public RequestCacheStats RequestCache { get; set; }
 
-		[JsonProperty("search")]
+		[DataMember(Name ="search")]
 		public SearchStats Search { get; set; }
 
-		[JsonProperty("segments")]
+		[DataMember(Name ="segments")]
 		public SegmentsStats Segments { get; set; }
 
-		[JsonProperty("store")]
+		[DataMember(Name ="store")]
 		public StoreStats Store { get; set; }
 
-		[JsonProperty("translog")]
+		[DataMember(Name ="translog")]
 		public TranslogStats Translog { get; set; }
 
-		[JsonProperty("warmer")]
+		[DataMember(Name ="warmer")]
 		public WarmerStats Warmer { get; set; }
 	}
 }

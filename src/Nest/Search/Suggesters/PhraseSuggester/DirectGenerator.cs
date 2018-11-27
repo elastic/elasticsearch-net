@@ -1,47 +1,47 @@
 ﻿using System;
 using System.Linq.Expressions;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<DirectGenerator>))]
+	[DataContract]
+	[ReadAs(typeof(DirectGenerator))]
 	public interface IDirectGenerator
 	{
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
-		[JsonProperty("max_edits")]
+		[DataMember(Name ="max_edits")]
 		int? MaxEdits { get; set; }
 
-		[JsonProperty("max_inspections")]
+		[DataMember(Name ="max_inspections")]
 		decimal? MaxInspections { get; set; }
 
-		[JsonProperty("max_term_freq")]
+		[DataMember(Name ="max_term_freq")]
 		decimal? MaxTermFrequency { get; set; }
 
-		[JsonProperty("min_doc_freq")]
+		[DataMember(Name ="min_doc_freq")]
 		decimal? MinDocFrequency { get; set; }
 
-		[JsonProperty("min_word_length")]
+		[DataMember(Name ="min_word_length")]
 		int? MinWordLength { get; set; }
 
-		[JsonProperty("post_filter")]
+		[DataMember(Name ="post_filter")]
 		string PostFilter { get; set; }
 
-		[JsonProperty("pre_filter")]
+		[DataMember(Name ="pre_filter")]
 		string PreFilter { get; set; }
 
-		[JsonProperty("prefix_length")]
+		[DataMember(Name ="prefix_length")]
 		int? PrefixLength { get; set; }
 
-		[JsonProperty("size")]
+		[DataMember(Name ="size")]
 		int? Size { get; set; }
 
-		[JsonProperty("suggest_mode")]
-		[JsonConverter(typeof(StringEnumConverter))]
+		[DataMember(Name ="suggest_mode")]
+
 		SuggestMode? SuggestMode { get; set; }
 	}
 

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	[JsonConverter(typeof(CompareConditionConverter))]
 	public interface ICompareCondition : ICondition
 	{

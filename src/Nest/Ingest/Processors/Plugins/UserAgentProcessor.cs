@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -14,26 +14,26 @@ namespace Nest
 	/// <remarks>
 	/// Requires the UserAgent Processor Plugin to be installed on the cluster.
 	/// </remarks>
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	[JsonConverter(typeof(ProcessorJsonConverter<UserAgentProcessor>))]
 	public interface IUserAgentProcessor : IProcessor
 	{
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
 		/// <summary>
 		/// If `true` and `field` does not exist, the processor quietly exits without modifying the document
 		/// </summary>
-		[JsonProperty("ignore_missing")]
+		[DataMember(Name ="ignore_missing")]
 		bool? IgnoreMissing { get; set; }
 
-		[JsonProperty("options")]
+		[DataMember(Name ="options")]
 		IEnumerable<UserAgentProperty> Properties { get; set; }
 
-		[JsonProperty("regex_file")]
+		[DataMember(Name ="regex_file")]
 		string RegexFile { get; set; }
 
-		[JsonProperty("target_field")]
+		[DataMember(Name ="target_field")]
 		Field TargetField { get; set; }
 	}
 

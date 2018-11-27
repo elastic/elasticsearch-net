@@ -2,7 +2,7 @@ using System;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
@@ -165,7 +165,7 @@ namespace Tests.Search.Request
 
 		internal class WithSourceFilterProperty
 		{
-			[PropertyName("_source")] [JsonProperty("_source")]
+			[PropertyName("_source")] [DataMember(Name ="_source")]
 			public Union<bool, ISourceFilter> SourceFilter { get; set; }
 		}
 	}

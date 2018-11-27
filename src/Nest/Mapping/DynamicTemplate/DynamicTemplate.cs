@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
@@ -15,20 +15,20 @@ namespace Nest
 	/// <para />
 	/// - the full dotted path to the field, with <see cref="PathMatch" /> and <see cref="PathUnmatch" />.
 	/// </summary>
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<DynamicTemplate>))]
+	[DataContract]
+	[ReadAs(typeof(DynamicTemplate))]
 	public interface IDynamicTemplate
 	{
 		/// <summary>
 		/// The mapping to apply to matching fields
 		/// </summary>
-		[JsonProperty("mapping")]
+		[DataMember(Name ="mapping")]
 		IProperty Mapping { get; set; }
 
 		/// <summary>
 		/// A pattern to match on the field name
 		/// </summary>
-		[JsonProperty("match")]
+		[DataMember(Name ="match")]
 		string Match { get; set; }
 
 		/// <summary>
@@ -37,33 +37,33 @@ namespace Nest
 		/// Only the following datatypes can be automatically detected: boolean, date, double,
 		/// long, object, string. It also accepts * to match all datatypes.
 		/// </summary>
-		[JsonProperty("match_mapping_type")]
+		[DataMember(Name ="match_mapping_type")]
 		string MatchMappingType { get; set; }
 
 		/// <summary>
 		/// Adjusts the behavior of <see cref="Match" /> such that it supports full
 		/// Java regular expression matching on the field name instead of simple wildcards
 		/// </summary>
-		[JsonProperty("match_pattern")]
+		[DataMember(Name ="match_pattern")]
 		MatchType? MatchPattern { get; set; }
 
 		/// <summary>
 		/// A pattern to match on the field name, which may be the full dotted path
 		/// to the field name
 		/// </summary>
-		[JsonProperty("path_match")]
+		[DataMember(Name ="path_match")]
 		string PathMatch { get; set; }
 
 		/// <summary>
 		/// A pattern to exclude fields matched by <see cref="PathMatch" />
 		/// </summary>
-		[JsonProperty("path_unmatch")]
+		[DataMember(Name ="path_unmatch")]
 		string PathUnmatch { get; set; }
 
 		/// <summary>
 		/// A pattern to exclude fields matched by <see cref="Match" />
 		/// </summary>
-		[JsonProperty("unmatch")]
+		[DataMember(Name ="unmatch")]
 		string Unmatch { get; set; }
 	}
 
@@ -130,7 +130,7 @@ namespace Nest
 	/// <summary>
 	/// Dynamic match pattern type
 	/// </summary>
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum MatchType
 	{
 		/// <summary>

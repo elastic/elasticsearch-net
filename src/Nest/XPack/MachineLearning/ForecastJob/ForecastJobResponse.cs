@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IForecastJobResponse : IAcknowledgedResponse
 	{
-		[JsonProperty("forecast_id")]
+		[DataMember(Name ="forecast_id")]
 		string ForecastId { get; }
 	}
 

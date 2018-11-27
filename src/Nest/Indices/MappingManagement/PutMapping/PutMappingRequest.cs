@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<PutMappingRequest>))]
+	[ReadAs(typeof(PutMappingRequest))]
 	public partial interface IPutMappingRequest : ITypeMapping { }
 
 	public interface IPutMappingRequest<T> : IPutMappingRequest where T : class { }

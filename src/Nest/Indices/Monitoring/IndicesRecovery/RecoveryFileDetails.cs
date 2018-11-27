@@ -1,16 +1,16 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class RecoveryFileDetails
 	{
-		[JsonProperty("length")]
+		[DataMember(Name ="length")]
 		public long Length { get; internal set; }
 
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		public string Name { get; internal set; }
 
-		[JsonProperty("recovered")]
+		[DataMember(Name ="recovered")]
 		public long Recovered { get; internal set; }
 	}
 }

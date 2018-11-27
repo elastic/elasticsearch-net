@@ -1,9 +1,9 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<HttpInputProxy>))]
+	[DataContract]
+	[ReadAs(typeof(HttpInputProxy))]
 	public interface IHttpInputProxy
 	{
 		string Host { get; set; }

@@ -1,23 +1,23 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class CatAliasesRecord : ICatRecord
 	{
-		[JsonProperty("alias")]
+		[DataMember(Name ="alias")]
 		public string Alias { get; set; }
 
-		[JsonProperty("filter")]
+		[DataMember(Name ="filter")]
 		public string Filter { get; set; }
 
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		public string Index { get; set; }
 
-		[JsonProperty("indexRouting")]
+		[DataMember(Name ="indexRouting")]
 		public string IndexRouting { get; set; }
 
-		[JsonProperty("searchRouting")]
+		[DataMember(Name ="searchRouting")]
 		public string SearchRouting { get; set; }
 	}
 }

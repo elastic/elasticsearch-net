@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary>
 	/// An aggregation that returns interesting or unusual occurrences of free-text terms in a set.
 	/// </summary>
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<SignificantTextAggregation>))]
+	[DataContract]
+	[ReadAs(typeof(SignificantTextAggregation))]
 	public interface ISignificantTextAggregation : IBucketAggregation
 	{
 		/// <summary>
@@ -18,62 +18,62 @@ namespace Nest
 		/// through the use of a background filter to focus in on significant
 		/// terms within a narrower context
 		/// </summary>
-		[JsonProperty("background_filter")]
+		[DataMember(Name ="background_filter")]
 		QueryContainer BackgroundFilter { get; set; }
 
 		/// <summary>
 		/// Use chi square to calculate significance score
 		/// </summary>
-		[JsonProperty("chi_square")]
+		[DataMember(Name ="chi_square")]
 		IChiSquareHeuristic ChiSquare { get; set; }
 
 		/// <summary>
 		/// Exclude term values for which buckets will be created.
 		/// </summary>
-		[JsonProperty("exclude")]
+		[DataMember(Name ="exclude")]
 		IncludeExclude Exclude { get; set; }
 
 		/// <summary>
 		/// Determines the mechanism by which aggregations are executed
 		/// </summary>
-		[JsonProperty("execution_hint")]
+		[DataMember(Name ="execution_hint")]
 		TermsAggregationExecutionHint? ExecutionHint { get; set; }
 
 		/// <summary>
 		/// The field on which to run the aggregation
 		/// </summary>
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
 		/// <summary>
 		/// Whether to filter out near-duplicate text
 		/// </summary>
-		[JsonProperty("filter_duplicate_text")]
+		[DataMember(Name ="filter_duplicate_text")]
 		bool? FilterDuplicateText { get; set; }
 
 		/// <summary>
 		/// Use Google normalized distance to calculate significance score
 		/// </summary>
-		[JsonProperty("gnd")]
+		[DataMember(Name ="gnd")]
 		IGoogleNormalizedDistanceHeuristic GoogleNormalizedDistance { get; set; }
 
 		/// <summary>
 		/// Include term values for which buckets will be created.
 		/// </summary>
-		[JsonProperty("include")]
+		[DataMember(Name ="include")]
 		IncludeExclude Include { get; set; }
 
 		/// <summary>
 		/// Return only terms that match equal to or more than a configurable
 		/// number of hits
 		/// </summary>
-		[JsonProperty("min_doc_count")]
+		[DataMember(Name ="min_doc_count")]
 		long? MinimumDocumentCount { get; set; }
 
 		/// <summary>
 		/// Use mutual information to calculate significance score
 		/// </summary>
-		[JsonProperty("mutual_information")]
+		[DataMember(Name ="mutual_information")]
 		IMutualInformationHeuristic MutualInformation { get; set; }
 
 		/// <summary>
@@ -85,13 +85,13 @@ namespace Nest
 		///  and less than one.
 		/// </para>
 		/// </summary>
-		[JsonProperty("percentage")]
+		[DataMember(Name ="percentage")]
 		IPercentageScoreHeuristic PercentageScore { get; set; }
 
 		/// <summary>
 		/// Use a script to calculate a custom significance score.
 		/// </summary>
-		[JsonProperty("script_heuristic")]
+		[DataMember(Name ="script_heuristic")]
 		IScriptedHeuristic Script { get; set; }
 
 		/// <summary>
@@ -100,21 +100,21 @@ namespace Nest
 		/// Terms will only be considered if their local shard frequency within
 		/// the set is higher than the <see cref="ShardMinimumDocumentCount" />.
 		/// </summary>
-		[JsonProperty("shard_min_doc_count")]
+		[DataMember(Name ="shard_min_doc_count")]
 		long? ShardMinimumDocumentCount { get; set; }
 
 		/// <summary>
 		/// Controls the number of candidate terms produced by each shard from which
 		/// the <see cref="Size" /> of terms is selected.
 		/// </summary>
-		[JsonProperty("shard_size")]
+		[DataMember(Name ="shard_size")]
 		int? ShardSize { get; set; }
 
 		/// <summary>
 		/// Defines how many term buckets should be returned out of the overall
 		/// terms list
 		/// </summary>
-		[JsonProperty("size")]
+		[DataMember(Name ="size")]
 		int? Size { get; set; }
 
 		/// <summary>
@@ -125,7 +125,7 @@ namespace Nest
 		/// In these cases it is possible to list the JSON _source fields
 		/// from which text will be analyzed using <see cref="SourceFields" />
 		/// </summary>
-		[JsonProperty("source_fields")]
+		[DataMember(Name ="source_fields")]
 		Fields SourceFields { get; set; }
 	}
 

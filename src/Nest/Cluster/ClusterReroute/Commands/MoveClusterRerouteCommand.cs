@@ -1,19 +1,19 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IMoveClusterRerouteCommand : IClusterRerouteCommand
 	{
-		[JsonProperty("from_node")]
+		[DataMember(Name ="from_node")]
 		string FromNode { get; set; }
 
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		IndexName Index { get; set; }
 
-		[JsonProperty("shard")]
+		[DataMember(Name ="shard")]
 		int? Shard { get; set; }
 
-		[JsonProperty("to_node")]
+		[DataMember(Name ="to_node")]
 		string ToNode { get; set; }
 	}
 

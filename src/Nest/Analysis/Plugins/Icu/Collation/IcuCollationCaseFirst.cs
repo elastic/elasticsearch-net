@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
@@ -8,7 +8,7 @@ namespace Nest
 	/// Sets the alternate handling for strength quaternary to be either shifted or non-ignorable.
 	/// Which boils down to ignoring punctuation and whitespace.
 	/// </summary>
-	[JsonConverter(typeof(StringEnumConverter))]
+
 	public enum IcuCollationCaseFirst
 	{
 		[EnumMember(Value = "lower")] Lower,

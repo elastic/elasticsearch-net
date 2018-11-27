@@ -1,27 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SuggestContextQuery>))]
+	[DataContract]
+	[ReadAs(typeof(SuggestContextQuery))]
 	public interface ISuggestContextQuery
 	{
-		[JsonProperty("boost")]
+		[DataMember(Name ="boost")]
 		double? Boost { get; set; }
 
-		[JsonProperty("context")]
+		[DataMember(Name ="context")]
 		Context Context { get; set; }
 
-		[JsonProperty("neighbours")]
+		[DataMember(Name ="neighbours")]
 		Union<Distance[], int[]> Neighbours { get; set; }
 
-		[JsonProperty("precision")]
+		[DataMember(Name ="precision")]
 		Union<Distance, int> Precision { get; set; }
 
-		[JsonProperty("prefix")]
+		[DataMember(Name ="prefix")]
 		bool? Prefix { get; set; }
 	}
 

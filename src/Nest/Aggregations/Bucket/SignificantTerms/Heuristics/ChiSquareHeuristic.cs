@@ -1,15 +1,16 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ChiSquareHeuristic>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(ChiSquareHeuristic))]
 	public interface IChiSquareHeuristic
 	{
-		[JsonProperty("background_is_superset")]
+		[DataMember(Name ="background_is_superset")]
 		bool? BackgroundIsSuperSet { get; set; }
 
-		[JsonProperty("include_negatives")]
+		[DataMember(Name ="include_negatives")]
 		bool? IncludeNegatives { get; set; }
 	}
 

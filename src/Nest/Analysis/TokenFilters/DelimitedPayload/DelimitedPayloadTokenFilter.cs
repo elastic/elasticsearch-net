@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -10,13 +10,13 @@ namespace Nest
 		/// <summary>
 		/// Character used for splitting the tokens.
 		/// </summary>
-		[JsonProperty("delimiter")]
+		[DataMember(Name ="delimiter")]
 		char? Delimiter { get; set; }
 
 		/// <summary>
 		/// The type of the payload. int for integer, float for float and identity for characters.
 		/// </summary>
-		[JsonProperty("encoding")]
+		[DataMember(Name ="encoding")]
 		DelimitedPayloadEncoding? Encoding { get; set; }
 	}
 

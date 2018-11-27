@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class RollupJobStatus
 	{
-		[JsonProperty("current_position")]
+		[DataMember(Name ="current_position")]
 		public IReadOnlyDictionary<string, object> CurrentPosition { get; internal set; } =
 			EmptyReadOnly<string, object>.Dictionary;
 
-		[JsonProperty("job_state")]
+		[DataMember(Name ="job_state")]
 		public IndexingJobState JobState { get; internal set; }
 
-		[JsonProperty("upgraded_doc_id")]
+		[DataMember(Name ="upgraded_doc_id")]
 		public bool UpgradedDocId { get; internal set; }
 	}
 }

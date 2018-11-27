@@ -1,13 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class ExtendedBounds<T>
 	{
-		[JsonProperty("max")]
+		[DataMember(Name ="max")]
 		public T Maximum { get; set; }
 
-		[JsonProperty("min")]
+		[DataMember(Name ="min")]
 		public T Minimum { get; set; }
 	}
 }

@@ -1,23 +1,23 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IAnalysis
 	{
-		[JsonProperty("analyzer")]
+		[DataMember(Name ="analyzer")]
 		IAnalyzers Analyzers { get; set; }
 
-		[JsonProperty("char_filter")]
+		[DataMember(Name ="char_filter")]
 		ICharFilters CharFilters { get; set; }
 
-		[JsonProperty("normalizer")]
+		[DataMember(Name ="normalizer")]
 		INormalizers Normalizers { get; set; }
 
-		[JsonProperty("filter")]
+		[DataMember(Name ="filter")]
 		ITokenFilters TokenFilters { get; set; }
 
-		[JsonProperty("tokenizer")]
+		[DataMember(Name ="tokenizer")]
 		ITokenizers Tokenizers { get; set; }
 	}
 

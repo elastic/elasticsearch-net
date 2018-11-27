@@ -2,18 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<IpRangeAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(IpRangeAggregation))]
 	public interface IIpRangeAggregation : IBucketAggregation
 	{
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
-		[JsonProperty("ranges")]
+		[DataMember(Name ="ranges")]
 		IEnumerable<IIpRangeAggregationRange> Ranges { get; set; }
 	}
 

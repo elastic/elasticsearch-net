@@ -2,27 +2,28 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<GeoDistanceAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(GeoDistanceAggregation))]
 	public interface IGeoDistanceAggregation : IBucketAggregation
 	{
-		[JsonProperty("distance_type")]
+		[DataMember(Name ="distance_type")]
 		GeoDistanceType? DistanceType { get; set; }
 
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
-		[JsonProperty("origin")]
+		[DataMember(Name ="origin")]
 		GeoLocation Origin { get; set; }
 
-		[JsonProperty("ranges")]
+		[DataMember(Name ="ranges")]
 		IEnumerable<IAggregationRange> Ranges { get; set; }
 
-		[JsonProperty("unit")]
+		[DataMember(Name ="unit")]
 		DistanceUnit? Unit { get; set; }
 	}
 
