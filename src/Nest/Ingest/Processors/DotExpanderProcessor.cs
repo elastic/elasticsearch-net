@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -9,8 +10,8 @@ namespace Nest
 	/// This processor allows fields with dots in the name to be accessible by other processors in the pipeline.
 	/// Otherwise these fields can’t be accessed by any processor.
 	/// </summary>
-	[DataContract]
-	[JsonConverter(typeof(ProcessorJsonConverter<DotExpanderProcessor>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(ProcessorFormatter<DotExpanderProcessor>))]
 	public interface IDotExpanderProcessor : IProcessor
 	{
 		/// <summary>

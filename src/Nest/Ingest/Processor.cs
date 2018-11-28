@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary> Ingest pipelines are composed of one or more processors </summary>
+	[InterfaceDataContract]
 	public interface IProcessor
 	{
 		/// <summary> The name of the processor, will be used as the key when persisting the processor on the pipeline </summary>
+		[IgnoreDataMember]
 		string Name { get; }
 
 		/// <summary>

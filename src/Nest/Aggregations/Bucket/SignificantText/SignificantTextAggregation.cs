@@ -2,13 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// An aggregation that returns interesting or unusual occurrences of free-text terms in a set.
 	/// </summary>
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(SignificantTextAggregation))]
 	public interface ISignificantTextAggregation : IBucketAggregation
 	{

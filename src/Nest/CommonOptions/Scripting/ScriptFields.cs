@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(ScriptField))]
 	public interface IScriptField
 	{
-		[DataMember(Name ="script")]
+		[DataMember(Name = "script")]
 		IScript Script { get; set; }
 	}
 
@@ -27,7 +28,7 @@ namespace Nest
 			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
 	}
 
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<ScriptFields, string, IScriptField>))]
+	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<ScriptFields, string, IScriptField>))]
 	public interface IScriptFields : IIsADictionary<string, IScriptField> { }
 
 	public class ScriptFields : IsADictionaryBase<string, IScriptField>, IScriptFields

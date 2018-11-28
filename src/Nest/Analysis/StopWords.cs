@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[ContractJsonConverter(typeof(StopWordsJsonConverter))]
+	[JsonFormatter(typeof(StopWordsFormatter))]
 	public class StopWords : Union<string, IEnumerable<string>>
 	{
 		public StopWords(string item) : base(item) { }
@@ -18,23 +18,21 @@ namespace Nest
 		public static implicit operator StopWords(string[] second) => new StopWords(second);
 	}
 
-	internal class StopWordsJsonConverter : JsonConverter
+	internal class StopWordsFormatter : IJsonFormatter<StopWords>
 	{
-		public static UnionJsonConverter<string, IEnumerable<string>> Unionconverter = new UnionJsonConverter<string, IEnumerable<string>>();
-		public override bool CanRead => true;
-		public override bool CanWrite => true;
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public StopWords Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var union = Unionconverter.ReadJson(reader, objectType, existingValue, serializer) as Union<string, IEnumerable<string>>;
-			if (union.Item1 != null) return new StopWords(union.Item1);
+			var token = reader.GetCurrentJsonToken();
+			if (token == JsonToken.BeginArray)
+			{
+				var stopwords = formatterResolver.GetFormatter<IEnumerable<string>>().Deserialize(ref reader, formatterResolver);
+				return new StopWords(stopwords);
+			}
 
-			return new StopWords(union.Item2);
+			var stopword = reader.ReadString();
+			return new StopWords(stopword);
 		}
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) =>
-			Unionconverter.WriteJson(writer, value, serializer);
-
-		public override bool CanConvert(Type objectType) => true;
+		public void Serialize(ref JsonWriter writer, StopWords value, IJsonFormatterResolver formatterResolver) => throw new NotSupportedException();
 	}
 }

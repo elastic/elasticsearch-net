@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -17,14 +18,14 @@ namespace Nest
 		/// The logical / registered name of the tokenizer to use.
 		/// </summary>
 		[DataMember(Name ="char_filter")]
-		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<string>))]
+		[JsonFormatter(typeof(ReadSingleOrEnumerableFormatter<string>))]
 		IEnumerable<string> CharFilter { get; set; }
 
 		/// <summary>
 		/// An optional list of logical / registered name of token filters.
 		/// </summary>
 		[DataMember(Name ="filter")]
-		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<string>))]
+		[JsonFormatter(typeof(ReadSingleOrEnumerableFormatter<string>))]
 		IEnumerable<string> Filter { get; set; }
 
 		/// <summary>

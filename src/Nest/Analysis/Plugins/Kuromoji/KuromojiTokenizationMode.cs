@@ -1,14 +1,12 @@
 ﻿using System.Runtime.Serialization;
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
 	/// <summary>
 	/// The tokenization mode determines how the tokenizer handles compound and unknown words.
-	/// Part of the `analysis-kuromoji` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
+	/// Part of the `analysis-kuromoji` plugin:
+	/// https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
 	/// </summary>
-
 	public enum KuromojiTokenizationMode
 	{
 		/// <summary>

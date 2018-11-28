@@ -6,7 +6,7 @@
 //using System.Reflection;
 //using Elasticsearch.Net;
 //using System.Runtime.Serialization;
-//using Newtonsoft.Json.Converters;
+//
 //using Newtonsoft.Json.Serialization;
 //
 //namespace Nest

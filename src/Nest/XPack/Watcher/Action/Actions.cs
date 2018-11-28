@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	public interface IActions : IIsADictionary<string, IAction> { }
 
-	[JsonConverter(typeof(ActionsJsonConverter))]
+	[JsonFormatter(typeof(ActionsFormatter))]
 	public class Actions : IsADictionaryBase<string, IAction>, IActions
 	{
 		public Actions() { }

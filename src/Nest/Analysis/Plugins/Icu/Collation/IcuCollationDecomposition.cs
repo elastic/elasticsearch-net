@@ -1,6 +1,4 @@
 ﻿using System.Runtime.Serialization;
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
@@ -13,7 +11,6 @@ namespace Nest
 	/// great many of the world’s languages do not require text normalization, most locales
 	/// set no as the default decomposition mode.
 	/// </summary>
-
 	public enum IcuCollationDecomposition
 	{
 		[EnumMember(Value = "no")] No,

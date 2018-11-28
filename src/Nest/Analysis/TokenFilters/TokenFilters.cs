@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<TokenFilters, string, ITokenFilter>))]
+	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<TokenFilters, string, ITokenFilter>))]
 	public interface ITokenFilters : IIsADictionary<string, ITokenFilter> { }
 
 	public class TokenFilters : IsADictionaryBase<string, ITokenFilter>, ITokenFilters
@@ -82,14 +82,20 @@ namespace Nest
 
 		/// <summary>
 		/// A token filter of type asciifolding that converts alphabetic, numeric, and symbolic Unicode characters which are
-		/// <para> not in the first 127 ASCII characters (the “Basic Latin” Unicode block) into their ASCII equivalents, if one exists.</para>
+		/// <para>
+		/// not in the first 127 ASCII characters (the “Basic Latin” Unicode block) into their ASCII equivalents, if one
+		/// exists.
+		/// </para>
 		/// </summary>
 		public TokenFiltersDescriptor WordDelimiter(string name, Func<WordDelimiterTokenFilterDescriptor, IWordDelimiterTokenFilter> selector) =>
 			Assign(name, selector?.Invoke(new WordDelimiterTokenFilterDescriptor()));
 
 		/// <summary>
 		/// A token filter of type asciifolding that converts alphabetic, numeric, and symbolic Unicode characters which are
-		/// <para> not in the first 127 ASCII characters (the “Basic Latin” Unicode block) into their ASCII equivalents, if one exists.</para>
+		/// <para>
+		/// not in the first 127 ASCII characters (the “Basic Latin” Unicode block) into their ASCII equivalents, if one
+		/// exists.
+		/// </para>
 		/// </summary>
 		public TokenFiltersDescriptor WordDelimiterGraph(string name,
 			Func<WordDelimiterGraphTokenFilterDescriptor, IWordDelimiterGraphTokenFilter> selector
@@ -98,7 +104,10 @@ namespace Nest
 
 		/// <summary>
 		/// A token filter of type asciifolding that converts alphabetic, numeric, and symbolic Unicode characters which are
-		/// <para> not in the first 127 ASCII characters (the “Basic Latin” Unicode block) into their ASCII equivalents, if one exists.</para>
+		/// <para>
+		/// not in the first 127 ASCII characters (the “Basic Latin” Unicode block) into their ASCII equivalents, if one
+		/// exists.
+		/// </para>
 		/// </summary>
 		public TokenFiltersDescriptor AsciiFolding(string name, Func<AsciiFoldingTokenFilterDescriptor, IAsciiFoldingTokenFilter> selector) =>
 			Assign(name, selector?.Invoke(new AsciiFoldingTokenFilterDescriptor()));
@@ -182,7 +191,8 @@ namespace Nest
 			Assign(name, selector?.Invoke(new NGramTokenFilterDescriptor()));
 
 		/// <summary>
-		/// The pattern_capture token filter, unlike the pattern tokenizer, emits a token for every capture group in the regular expression.
+		/// The pattern_capture token filter, unlike the pattern tokenizer, emits a token for every capture group in the regular
+		/// expression.
 		/// </summary>
 		public TokenFiltersDescriptor PatternCapture(string name, Func<PatternCaptureTokenFilterDescriptor, IPatternCaptureTokenFilter> selector) =>
 			Assign(name, selector?.Invoke(new PatternCaptureTokenFilterDescriptor()));
@@ -226,7 +236,8 @@ namespace Nest
 			Assign(name, selector?.Invoke(new ConditionTokenFilterDescriptor()));
 
 		/// <summary>
-		/// Overrides stemming algorithms, by applying a custom mapping, then protecting these terms from being modified by stemmers. Must be placed
+		/// Overrides stemming algorithms, by applying a custom mapping, then protecting these terms from being modified by
+		/// stemmers. Must be placed
 		/// before any stemming filters.
 		/// </summary>
 		public TokenFiltersDescriptor StemmerOverride(string name, Func<StemmerOverrideTokenFilterDescriptor, IStemmerOverrideTokenFilter> selector
@@ -240,14 +251,16 @@ namespace Nest
 			Assign(name, selector.InvokeOrDefault(new TrimTokenFilterDescriptor()));
 
 		/// <summary>
-		/// The truncate token filter can be used to truncate tokens into a specific length. This can come in handy with keyword (single token)
+		/// The truncate token filter can be used to truncate tokens into a specific length. This can come in handy with keyword
+		/// (single token)
 		/// <para> based mapped fields that are used for sorting in order to reduce memory usage.</para>
 		/// </summary>
 		public TokenFiltersDescriptor Truncate(string name, Func<TruncateTokenFilterDescriptor, ITruncateTokenFilter> selector) =>
 			Assign(name, selector?.Invoke(new TruncateTokenFilterDescriptor()));
 
 		/// <summary>
-		/// The unique token filter can be used to only index unique tokens during analysis. By default it is applied on all the token stream
+		/// The unique token filter can be used to only index unique tokens during analysis. By default it is applied on all the
+		/// token stream
 		/// </summary>
 		public TokenFiltersDescriptor Unique(string name, Func<UniqueTokenFilterDescriptor, IUniqueTokenFilter> selector = null) =>
 			Assign(name, selector.InvokeOrDefault(new UniqueTokenFilterDescriptor()));
@@ -269,7 +282,8 @@ namespace Nest
 		/// <summary>
 		/// The kuromoji_stemmer token filter normalizes common katakana spelling variations ending in a
 		/// long sound character by removing this character (U+30FC). Only full-width katakana characters are supported.
-		/// Part of the `analysis-kuromoji` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
+		/// Part of the `analysis-kuromoji` plugin:
+		/// https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
 		/// </summary>
 		public TokenFiltersDescriptor KuromojiStemmer(string name,
 			Func<KuromojiStemmerTokenFilterDescriptor, IKuromojiStemmerTokenFilter> selector = null
@@ -278,7 +292,8 @@ namespace Nest
 
 		/// <summary>
 		/// The kuromoji_readingform token filter replaces the token with its reading form in either katakana or romaji.
-		/// Part of the `analysis-kuromoji` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
+		/// Part of the `analysis-kuromoji` plugin:
+		/// https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
 		/// </summary>
 		public TokenFiltersDescriptor KuromojiReadingForm(string name,
 			Func<KuromojiReadingFormTokenFilterDescriptor, IKuromojiReadingFormTokenFilter> selector
@@ -287,7 +302,8 @@ namespace Nest
 
 		/// <summary>
 		/// The kuromoji_part_of_speech token filter removes tokens that match a set of part-of-speech tags.
-		/// Part of the `analysis-kuromoji` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
+		/// Part of the `analysis-kuromoji` plugin:
+		/// https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
 		/// </summary>
 		public TokenFiltersDescriptor KuromojiPartOfSpeech(string name,
 			Func<KuromojiPartOfSpeechTokenFilterDescriptor, IKuromojiPartOfSpeechTokenFilter> selector
@@ -296,7 +312,8 @@ namespace Nest
 
 
 		/// <summary>
-		/// Collations are used for sorting documents in a language-specific word order. The icu_collation token filter is available to all indices and
+		/// Collations are used for sorting documents in a language-specific word order. The icu_collation token filter is
+		/// available to all indices and
 		/// defaults to using the DUCET collation, which is a best-effort attempt at language-neutral sorting.
 		/// Part of the `analysis-icu` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-icu.html
 		/// </summary>

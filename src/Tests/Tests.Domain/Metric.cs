@@ -1,7 +1,7 @@
 using System;
 using Nest;
 using System.Runtime.Serialization;
-using Newtonsoft.Json.Converters;
+
 
 namespace Tests.Domain
 {

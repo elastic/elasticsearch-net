@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<SuggestContainer, string, ISuggestBucket>))]
+	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<SuggestContainer, string, ISuggestBucket>))]
 	public interface ISuggestContainer : IIsADictionary<string, ISuggestBucket> { }
 
 	public class SuggestContainer : IsADictionaryBase<string, ISuggestBucket>, ISuggestContainer
@@ -35,8 +35,10 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// The term suggester suggests terms based on edit distance. The provided suggest text is analyzed before terms are suggested.
-		/// The suggested terms are provided per analyzed suggest text token. The term suggester doesn’t take the query into account that is part of
+		/// The term suggester suggests terms based on edit distance. The provided suggest text is analyzed before terms are
+		/// suggested.
+		/// The suggested terms are provided per analyzed suggest text token. The term suggester doesn’t take the query into
+		/// account that is part of
 		/// request.
 		/// </summary>
 		public SuggestContainerDescriptor<T> Term(string name, Func<TermSuggesterDescriptor<T>, ITermSuggester> suggest) =>

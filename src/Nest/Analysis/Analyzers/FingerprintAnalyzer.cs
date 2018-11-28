@@ -32,7 +32,6 @@ namespace Nest
 		/// A list of stop words to use. Defaults to an empty list
 		/// </summary>
 		[DataMember(Name ="stopwords")]
-		[JsonConverter(typeof(StopWordsJsonConverter))]
 		StopWords StopWords { get; set; }
 
 		/// <summary>

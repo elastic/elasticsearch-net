@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -185,8 +186,18 @@ namespace Nest
 		}
 	}
 
-	internal class VerbatimDictionaryKeysPreservingNullJsonConverter<TKey, TValue> : VerbatimDictionaryKeysJsonConverter<TKey, TValue>
+	internal class VerbatimDictionaryKeysFormatter<TIsADictionary, TKey, TValue> : VerbatimDictionaryKeysFormatter<TKey, TValue>
+		where TIsADictionary : IIsADictionary<TKey, TValue>
 	{
-		protected override bool SkipValue(JsonSerializer serializer, KeyValuePair<TKey, TValue> entry) => false;
+		public override IDictionary<TKey, TValue> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			var dictionary = base.Deserialize(ref reader, formatterResolver);
+			return typeof(TIsADictionary).CreateInstance<TIsADictionary>(dictionary);
+		}
+	}
+
+	internal class VerbatimDictionaryKeysPreservingNullFormatter<TKey, TValue> : VerbatimDictionaryKeysFormatter<TKey, TValue>
+	{
+		protected override bool SkipValue(KeyValuePair<TKey, TValue> entry) => false;
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -13,7 +14,7 @@ namespace Nest
 		public string MasterNode { get; internal set; }
 
 		[DataMember(Name ="nodes")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, NodeState>))]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, NodeState>))]
 		public IReadOnlyDictionary<string, NodeState> Nodes { get; internal set; }
 
 		[DataMember(Name ="routing_nodes")]

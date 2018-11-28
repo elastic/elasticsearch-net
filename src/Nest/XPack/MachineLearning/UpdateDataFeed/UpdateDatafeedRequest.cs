@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -31,7 +32,7 @@ namespace Nest
 
 		///<summary>A list of index names to search within, wildcards are supported.</summary>
 		[DataMember(Name ="indices")]
-		[JsonConverter(typeof(IndicesJsonConverter))]
+		[JsonFormatter(typeof(IndicesFormatter))]
 		Indices Indices { get; set; }
 
 		/// <summary>

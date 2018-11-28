@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
-using Newtonsoft.Json.Converters;
+
 using Newtonsoft.Json.Linq;
 
 namespace Nest
