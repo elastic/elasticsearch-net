@@ -16,7 +16,6 @@ namespace Nest
 		SnowballLanguage? Language { get; set; }
 
 		[DataMember(Name ="stopwords")]
-		[JsonConverter(typeof(StopWordsJsonConverter))]
 		StopWords StopWords { get; set; }
 	}
 

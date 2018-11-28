@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -12,7 +13,7 @@ namespace Nest
 		bool? IncludeGlobalState { get; set; }
 
 		[DataMember(Name ="indices")]
-		[JsonConverter(typeof(IndicesMultiSyntaxJsonConverter))]
+		[JsonFormatter(typeof(IndicesMultiSyntaxFormatter))]
 		Indices Indices { get; set; }
 
 		[DataMember(Name ="partial")]

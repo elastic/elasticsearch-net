@@ -7,7 +7,6 @@ using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(IdJsonConverter))]
 	[JsonFormatter(typeof(IdFormatter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Id : IEquatable<Id>, IUrlParameter

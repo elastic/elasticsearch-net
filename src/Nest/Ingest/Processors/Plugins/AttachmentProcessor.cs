@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -13,8 +14,8 @@ namespace Nest
 	/// <remarks>
 	/// Requires the Ingest Attachment Processor Plugin to be installed on the cluster.
 	/// </remarks>
-	[DataContract]
-	[JsonConverter(typeof(ProcessorJsonConverter<AttachmentProcessor>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(ProcessorFormatter<AttachmentProcessor>))]
 	public interface IAttachmentProcessor : IProcessor
 	{
 		/// <summary> The field to get the base64 encoded field from </summary>

@@ -27,7 +27,6 @@ namespace Nest
 		public void Serialize(ref JsonWriter writer, Time value, IJsonFormatterResolver formatterResolver)
 		{
 			if (value == Time.MinusOne) writer.WriteInt32(-1);
-			;
 			else if (value == Time.Zero) writer.WriteInt32(0);
 			else if (value.Factor.HasValue && value.Interval.HasValue) writer.WriteString(value.ToString());
 			else if (value.Milliseconds != null) writer.WriteInt64((long)value.Milliseconds);

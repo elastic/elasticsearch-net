@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Elasticsearch.Net;
+using Utf8Json;
 
 namespace Nest
 {
-	[ContractJsonConverter(typeof(IndicesMultiSyntaxJsonConverter))]
+	[JsonFormatter(typeof(IndicesMultiSyntaxFormatter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Indices : Union<Indices.AllIndicesMarker, Indices.ManyIndices>, IUrlParameter
 	{

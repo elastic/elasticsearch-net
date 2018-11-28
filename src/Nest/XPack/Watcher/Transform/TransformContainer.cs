@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[JsonConverter(typeof(ReserializeJsonConverter<TransformContainer, ITransformContainer>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(TransformContainer))]
 	public interface ITransformContainer
 	{
 		[DataMember(Name ="chain")]
@@ -30,7 +31,6 @@ namespace Nest
 
 		IChainTransform ITransformContainer.Chain { get; set; }
 		IScriptTransform ITransformContainer.Script { get; set; }
-
 		ISearchTransform ITransformContainer.Search { get; set; }
 	}
 

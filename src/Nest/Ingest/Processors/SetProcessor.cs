@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[JsonConverter(typeof(ProcessorJsonConverter<SetProcessor>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(ProcessorFormatter<SetProcessor>))]
 	public interface ISetProcessor : IProcessor
 	{
 		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
 		[DataMember(Name ="value")]
-		[JsonConverter(typeof(SourceValueWriteConverter))]
+		[JsonFormatter(typeof(SourceWriteFormatter<>))]
 		object Value { get; set; }
 	}
 

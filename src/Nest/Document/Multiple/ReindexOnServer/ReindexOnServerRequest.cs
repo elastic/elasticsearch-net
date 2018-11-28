@@ -1,7 +1,7 @@
 ﻿using System;
 using Elasticsearch.Net;
 using System.Runtime.Serialization;
-using Newtonsoft.Json.Converters;
+
 
 namespace Nest
 {

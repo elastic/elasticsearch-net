@@ -1,13 +1,10 @@
 ﻿using System.Runtime.Serialization;
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
 	/// <summary>
 	/// Normalization forms https://en.wikipedia.org/wiki/Unicode_equivalence#Normal_forms
 	/// </summary>
-
 	public enum IcuNormalizationType
 	{
 		/// <summary>

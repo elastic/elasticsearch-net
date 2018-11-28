@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Normalizers, string, INormalizer>))]
+	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<Normalizers, string, INormalizer>))]
 	public interface INormalizers : IIsADictionary<string, INormalizer> { }
 
 	public class Normalizers : IsADictionaryBase<string, INormalizer>, INormalizers

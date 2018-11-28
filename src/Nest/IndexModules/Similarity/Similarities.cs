@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Similarities, string, ISimilarity>))]
+	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<Similarities, string, ISimilarity>))]
 	public interface ISimilarities : IIsADictionary<string, ISimilarity> { }
 
 	public class Similarities : IsADictionaryBase<string, ISimilarity>, ISimilarities
@@ -27,7 +27,8 @@ namespace Nest
 
 		/// <summary>
 		/// BM25 Similarity. Introduced in Stephen E. Robertson, Steve Walker, Susan Jones, Micheline Hancock-Beaulieu,
-		/// and Mike Gatford. Okapi at TREC-3. In Proceedings of the Third Text Retrieval Conference (TREC 1994). Gaithersburg, USA, November 1994.
+		/// and Mike Gatford. Okapi at TREC-3. In Proceedings of the Third Text Retrieval Conference (TREC 1994). Gaithersburg,
+		/// USA, November 1994.
 		/// </summary>
 		public SimilaritiesDescriptor BM25(string name, Func<BM25SimilarityDescriptor, IBM25Similarity> selector) =>
 			Assign(name, selector?.Invoke(new BM25SimilarityDescriptor()));
@@ -52,12 +53,16 @@ namespace Nest
 			Assign(name, selector?.Invoke(new DFISimilarityDescriptor()));
 
 		/// <summary>
-		/// Implements the divergence from randomness (DFR) framework introduced in Gianni Amati and Cornelis Joost Van Rijsbergen. 2002.
-		/// Probabilistic models of information retrieval based on measuring the divergence from randomness. ACM Trans. Inf. Syst. 20, 4 (October
+		/// Implements the divergence from randomness (DFR) framework introduced in Gianni Amati and Cornelis Joost Van Rijsbergen.
+		/// 2002.
+		/// Probabilistic models of information retrieval based on measuring the divergence from randomness. ACM Trans. Inf. Syst.
+		/// 20, 4 (October
 		/// 2002), 357-389.
-		/// The DFR scoring formula is composed of three separate components: the basic model, the aftereffect and an additional normalization
+		/// The DFR scoring formula is composed of three separate components: the basic model, the aftereffect and an additional
+		/// normalization
 		/// component,
-		/// represented by the classes BasicModel, AfterEffect and Normalization, respectively.The names of these classes were chosen to match the
+		/// represented by the classes BasicModel, AfterEffect and Normalization, respectively.The names of these classes were
+		/// chosen to match the
 		/// names of their counterparts in the Terrier IR engine.
 		/// </summary>
 		public SimilaritiesDescriptor DFR(string name, Func<DFRSimilarityDescriptor, IDFRSimilarity> selector) =>

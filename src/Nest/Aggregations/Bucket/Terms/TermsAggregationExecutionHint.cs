@@ -1,13 +1,10 @@
 ﻿using System.Runtime.Serialization;
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
 	/// <summary>
 	/// Determines how the terms aggregation is executed
 	/// </summary>
-
 	public enum TermsAggregationExecutionHint
 	{
 		/// <summary>

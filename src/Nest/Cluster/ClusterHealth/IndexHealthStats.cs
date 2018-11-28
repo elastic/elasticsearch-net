@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Elasticsearch.Net;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -26,7 +27,7 @@ namespace Nest
 		public int RelocatingShards { get; internal set; }
 
 		[DataMember(Name ="shards")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, ShardHealthStats>))]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, ShardHealthStats>))]
 		public IReadOnlyDictionary<string, ShardHealthStats> Shards { get; internal set; } = EmptyReadOnly<string, ShardHealthStats>.Dictionary;
 
 		[DataMember(Name ="status")]

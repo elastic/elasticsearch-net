@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// Allows inline, stored, and file scripts to be executed within ingest pipelines.
 	/// </summary>
-	[DataContract]
-	[JsonConverter(typeof(ProcessorJsonConverter<ScriptProcessor>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(ProcessorFormatter<ScriptProcessor>))]
 	public interface IScriptProcessor : IProcessor
 	{
 		/// <summary>
@@ -31,7 +32,7 @@ namespace Nest
 		/// Parameters for the script
 		/// </summary>
 		[DataMember(Name ="params")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, object>))]
 		Dictionary<string, object> Params { get; set; }
 
 		/// <summary>

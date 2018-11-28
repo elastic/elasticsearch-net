@@ -4,7 +4,7 @@ using System.Linq;
 using Bogus;
 using Nest;
 using System.Runtime.Serialization;
-using Newtonsoft.Json.Converters;
+
 using Tests.Configuration;
 using Tests.Domain.Extensions;
 using Tests.Domain.Helpers;

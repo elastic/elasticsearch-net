@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// URL-decodes a string
 	/// </summary>
-	[DataContract]
-	[JsonConverter(typeof(ProcessorJsonConverter<UrlDecodeProcessor>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(ProcessorFormatter<UrlDecodeProcessor>))]
 	public interface IUrlDecodeProcessor : IProcessor
 	{
 		/// <summary>

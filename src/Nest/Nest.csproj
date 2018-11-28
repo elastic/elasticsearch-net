@@ -11,6 +11,9 @@
     <ProjectReference Include="..\Utf8Json\src\Utf8Json\Utf8Json.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\..\..\..\.nuget\packages\newtonsoft.json\11.0.1\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Utf8Json, Version=1.3.7.0, Culture=neutral, PublicKeyToken=8a73d3ba7e392e27">
       <HintPath>..\Serializers\Nest.JsonNetSerializer\bin\Debug\netstandard2.0\Utf8Json.dll</HintPath>
     </Reference>
