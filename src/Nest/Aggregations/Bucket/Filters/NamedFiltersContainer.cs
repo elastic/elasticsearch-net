@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<NamedFiltersContainer, string, IQueryContainer>))]
+	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<NamedFiltersContainer, string, IQueryContainer>))]
 	public interface INamedFiltersContainer : IIsADictionary<string, IQueryContainer> { }
 
 	public class NamedFiltersContainer : IsADictionaryBase<string, IQueryContainer>, INamedFiltersContainer

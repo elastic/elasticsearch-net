@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -11,8 +11,8 @@ namespace Nest
 	/// based index based on a date or timestamp field in a document
 	/// by using the date math index name support.
 	/// </summary>
-	[DataContract]
-	[JsonConverter(typeof(ProcessorJsonConverter<DateIndexNameProcessor>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(ProcessorFormatter<DateIndexNameProcessor>))]
 	public interface IDateIndexNameProcessor : IProcessor
 	{
 		/// <summary>
@@ -20,32 +20,32 @@ namespace Nest
 		/// dates / timestamps in the document being preprocessed.
 		/// Default is yyyy-MM-dd’T'HH:mm:ss.SSSZ
 		/// </summary>
-		[DataMember(Name ="date_formats")]
+		[DataMember(Name = "date_formats")]
 		IEnumerable<string> DateFormats { get; set; }
 
 		/// <summary>
 		/// How to round the date when formatting the date into the index name.
 		/// </summary>
-		[DataMember(Name ="date_rounding")]
+		[DataMember(Name = "date_rounding")]
 		DateRounding? DateRounding { get; set; }
 
 		/// <summary>
 		/// The field to get the date or timestamp from.
 		/// </summary>
-		[DataMember(Name ="field")]
+		[DataMember(Name = "field")]
 		Field Field { get; set; }
 
 		/// <summary>
 		/// The format to be used when printing the parsed date into
 		/// the index name.
 		/// </summary>
-		[DataMember(Name ="index_name_format")]
+		[DataMember(Name = "index_name_format")]
 		string IndexNameFormat { get; set; }
 
 		/// <summary>
 		/// A prefix of the index name to be prepended before the printed date.
 		/// </summary>
-		[DataMember(Name ="index_name_prefix")]
+		[DataMember(Name = "index_name_prefix")]
 		string IndexNamePrefix { get; set; }
 
 		/// <summary>
@@ -53,7 +53,7 @@ namespace Nest
 		/// being preprocessed, relevant when parsing month names or
 		/// week days.
 		/// </summary>
-		[DataMember(Name ="locale")]
+		[DataMember(Name = "locale")]
 		string Locale { get; set; }
 
 		/// <summary>
@@ -61,7 +61,7 @@ namespace Nest
 		/// math index supports resolves expressions into concrete
 		/// index names.
 		/// </summary>
-		[DataMember(Name ="timezone")]
+		[DataMember(Name = "timezone")]
 		string TimeZone { get; set; }
 	}
 

@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// Aggregation response for an aggregation request
 	/// </summary>
-	[ExactContractJsonConverter(typeof(AggregateJsonConverter))]
+	[JsonFormatter(typeof(AggregateJsonFormatter))]
 	public interface IAggregate
 	{
 		//TODO this public set is problematic

@@ -1,19 +1,20 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[JsonConverter(typeof(FieldNameQueryJsonConverter<TermQuery>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(FieldNameQueryFormatter<TermQuery, ITermQuery>))]
 	public interface ITermQuery : IFieldNameQuery
 	{
 		[DataMember(Name ="value")]
-		[JsonConverter(typeof(SourceValueWriteConverter))]
+		[JsonFormatter(typeof(SourceWriteFormatter<>))]
 		object Value { get; set; }
 	}
 
 	public class TermQuery : FieldNameQueryBase, ITermQuery
 	{
-		[JsonConverter(typeof(SourceValueWriteConverter))]
+		[JsonFormatter(typeof(SourceWriteFormatter<>))]
 		public object Value { get; set; }
 
 		protected override bool Conditionless => IsConditionless(this);

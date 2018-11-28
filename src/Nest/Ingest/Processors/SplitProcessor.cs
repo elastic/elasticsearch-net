@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[JsonConverter(typeof(ProcessorJsonConverter<SplitProcessor>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(ProcessorFormatter<SplitProcessor>))]
 	public interface ISplitProcessor : IProcessor
 	{
 		[DataMember(Name ="field")]

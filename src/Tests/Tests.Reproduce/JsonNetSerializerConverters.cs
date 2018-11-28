@@ -7,7 +7,7 @@ using FluentAssertions;
 using Nest;
 using Nest.JsonNetSerializer;
 using System.Runtime.Serialization;
-using Newtonsoft.Json.Converters;
+
 
 namespace Tests.Reproduce
 {

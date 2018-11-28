@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[JsonConverter(typeof(ProcessorJsonConverter<DateProcessor>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(ProcessorFormatter<DateProcessor>))]
 	public interface IDateProcessor : IProcessor
 	{
 		[DataMember(Name ="field")]

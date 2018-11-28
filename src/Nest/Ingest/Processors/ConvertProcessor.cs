@@ -2,12 +2,13 @@
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization;
-using Newtonsoft.Json.Converters;
+using Utf8Json;
+
 
 namespace Nest
 {
-	[DataContract]
-	[JsonConverter(typeof(ProcessorJsonConverter<ConvertProcessor>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(ProcessorFormatter<ConvertProcessor>))]
 	public interface IConvertProcessor : IProcessor
 	{
 		[DataMember(Name ="field")]

@@ -1,9 +1,10 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[JsonConverter(typeof(ProcessorJsonConverter<FailProcessor>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(ProcessorFormatter<FailProcessor>))]
 	public interface IFailProcessor : IProcessor
 	{
 		[DataMember(Name ="message")]

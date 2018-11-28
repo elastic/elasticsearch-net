@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -14,8 +15,8 @@ namespace Nest
 	/// <remarks>
 	/// Requires the UserAgent Processor Plugin to be installed on the cluster.
 	/// </remarks>
-	[DataContract]
-	[JsonConverter(typeof(ProcessorJsonConverter<UserAgentProcessor>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(ProcessorFormatter<UserAgentProcessor>))]
 	public interface IUserAgentProcessor : IProcessor
 	{
 		[DataMember(Name ="field")]

@@ -1,10 +1,7 @@
 ﻿using System.Runtime.Serialization;
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-
 	public enum UserAgentProperty
 	{
 		[EnumMember(Value = "NAME")] Name,

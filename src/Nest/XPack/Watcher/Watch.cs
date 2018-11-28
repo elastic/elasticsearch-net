@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -7,7 +8,7 @@ namespace Nest
 	public class Watch
 	{
 		[DataMember(Name ="actions")]
-		[JsonConverter(typeof(ActionsJsonConverter))]
+		[JsonFormatter(typeof(ActionsFormatter))]
 		public Actions Actions { get; internal set; }
 
 		[DataMember(Name ="condition")]

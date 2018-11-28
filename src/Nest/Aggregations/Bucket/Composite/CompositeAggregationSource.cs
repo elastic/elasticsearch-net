@@ -10,7 +10,7 @@ namespace Nest
 	/// <summary>
 	/// A values source for <see cref="ICompositeAggregation" />
 	/// </summary>
-	[ContractJsonConverter(typeof(CompositeAggregationSourceConverter))]
+	[JsonFormatter(typeof(CompositeAggregationSourceFormatter))]
 	public interface ICompositeAggregationSource
 	{
 		/// <summary>

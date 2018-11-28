@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -9,8 +10,8 @@ namespace Nest
 	/// will be sorted numerically, while arrays of strings or heterogeneous arrays
 	///  of strings and numbers will be sorted lexicographically.
 	/// </summary>
-	[DataContract]
-	[JsonConverter(typeof(ProcessorJsonConverter<SortProcessor>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(ProcessorFormatter<SortProcessor>))]
 	public interface ISortProcessor : IProcessor
 	{
 		/// <summary>

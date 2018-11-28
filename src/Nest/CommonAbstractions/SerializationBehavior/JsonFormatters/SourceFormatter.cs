@@ -20,7 +20,7 @@ namespace Nest
 				return settings.SourceSerializer.Deserialize<T>(ms);
 		}
 
-		public void Serialize(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver)
+		public virtual void Serialize(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver)
 		{
 			var settings = formatterResolver.GetConnectionSettings();
 

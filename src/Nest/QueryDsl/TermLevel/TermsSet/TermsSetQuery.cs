@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -33,7 +34,7 @@ namespace Nest
 		/// The required terms to match
 		/// </summary>
 		[DataMember(Name ="terms")]
-		[JsonConverter(typeof(SourceValueWriteConverter))]
+		[JsonFormatter(typeof(SourceWriteFormatter<>))]
 		IEnumerable<object> Terms { get; set; }
 	}
 

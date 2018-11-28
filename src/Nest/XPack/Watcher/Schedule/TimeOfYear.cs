@@ -8,15 +8,15 @@ namespace Nest
 	public interface ITimeOfYear
 	{
 		[DataMember(Name ="at")]
-		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<string>))]
+		[JsonFormatter(typeof(ReadSingleOrEnumerableFormatter<string>))]
 		IEnumerable<string> At { get; set; }
 
 		[DataMember(Name ="int")]
-		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<Month>))]
+		[JsonFormatter(typeof(ReadSingleOrEnumerableFormatter<Month>))]
 		IEnumerable<Month> In { get; set; }
 
 		[DataMember(Name ="on")]
-		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<int>))]
+		[JsonFormatter(typeof(ReadSingleOrEnumerableFormatter<int>))]
 		IEnumerable<int> On { get; set; }
 	}
 

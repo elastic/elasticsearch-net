@@ -6,7 +6,7 @@ using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using System.Runtime.Serialization;
-using Newtonsoft.Json.Converters;
+
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using static Nest.Infer;

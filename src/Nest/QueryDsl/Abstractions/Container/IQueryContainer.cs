@@ -4,8 +4,7 @@ using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[ContractJsonConverter(typeof(QueryContainerJsonConverter))]
+	[InterfaceDataContract]
 	[JsonFormatter(typeof(QueryContainerInterfaceFormatter))]
 	public interface IQueryContainer
 	{

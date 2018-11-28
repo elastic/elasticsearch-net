@@ -1,35 +1,34 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Converters;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(HipChatMessage))]
 	public interface IHipChatMessage
 	{
-		[DataMember(Name ="body")]
+		[DataMember(Name = "body")]
 		string Body { get; set; }
 
-		[DataMember(Name ="color")]
+		[DataMember(Name = "color")]
 		HipChatMessageColor? Color { get; set; }
 
-		[DataMember(Name ="format")]
+		[DataMember(Name = "format")]
 		HipChatMessageFormat? Format { get; set; }
 
-		[DataMember(Name ="from")]
+		[DataMember(Name = "from")]
 		string From { get; set; }
 
-		[DataMember(Name ="notify")]
+		[DataMember(Name = "notify")]
 		bool? Notify { get; set; }
 
-		[DataMember(Name ="room")]
-		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<string>))]
+		[DataMember(Name = "room")]
+		[JsonFormatter(typeof(ReadSingleOrEnumerableFormatter<string>))]
 		IEnumerable<string> Room { get; set; }
 
-		[DataMember(Name ="user")]
-		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<string>))]
+		[DataMember(Name = "user")]
+		[JsonFormatter(typeof(ReadSingleOrEnumerableFormatter<string>))]
 		IEnumerable<string> User { get; set; }
 	}
 

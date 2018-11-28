@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// Converts a JSON string into a structured JSON object.
 	/// </summary>
-	[DataContract]
-	[JsonConverter(typeof(ProcessorJsonConverter<JsonProcessor>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(ProcessorFormatter<JsonProcessor>))]
 	public interface IJsonProcessor : IProcessor
 	{
 		/// <summary>

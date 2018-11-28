@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using Newtonsoft.Json.Linq;
+using Utf8Json;
+using Utf8Json.Internal;
 
 namespace Nest
 {
-	[DataContract]
-	[JsonConverter(typeof(ScriptTransformJsonConverter))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(ScriptTransformFormatter))]
 	public interface IScriptTransform : ITransform
 	{
-		[DataMember(Name ="lang")]
+		[DataMember(Name = "lang")]
 		string Lang { get; set; }
 
-		[DataMember(Name ="params")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
+		[DataMember(Name = "params")]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, object>))]
 		Dictionary<string, object> Params { get; set; }
 	}
 
@@ -54,45 +54,60 @@ namespace Nest
 		public InlineScriptTransformDescriptor Source(string source) => new InlineScriptTransformDescriptor(source);
 	}
 
-	internal class ScriptTransformJsonConverter : JsonConverter
+	internal class ScriptTransformFormatter : IJsonFormatter<IScriptTransform>
 	{
-		public override bool CanWrite => false;
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		private static readonly AutomataDictionary AutomataDictionary = new AutomataDictionary
 		{
-			var o = JObject.Load(reader);
-			var dict = o.Properties().ToDictionary(p => p.Name, p => p.Value);
-			if (!dict.HasAny()) return null;
+			{ "inline", 0 },
+			{ "source", 1 },
+			{ "id", 2 },
+			{ "lang", 3 },
+			{ "params", 4 }
+		};
 
+		public IScriptTransform Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
+				return null;
+
+			var count = 0;
 			IScriptTransform scriptTransform = null;
-			if (dict.ContainsKey("inline"))
+			string language = null;
+			Dictionary<string, object> parameters = null;
+
+			while (reader.ReadIsInObject(ref count))
 			{
-				var inline = dict["inline"].ToString();
-				scriptTransform = new InlineScriptTransform(inline);
-			}
-			if (dict.ContainsKey("source"))
-			{
-				var inline = dict["source"].ToString();
-				scriptTransform = new InlineScriptTransform(inline);
-			}
-			if (dict.ContainsKey("id"))
-			{
-				var id = dict["id"].ToString();
-				scriptTransform = new IndexedScriptTransform(id);
+				if (AutomataDictionary.TryGetValue(reader.ReadPropertyNameSegmentRaw(), out var value))
+				{
+					switch (value)
+					{
+						case 0:
+						case 1:
+							scriptTransform = new InlineScriptTransform(reader.ReadString());
+							break;
+						case 2:
+							scriptTransform = new IndexedScriptTransform(reader.ReadString());
+							break;
+						case 3:
+							language = reader.ReadString();
+							break;
+						case 4:
+							parameters = formatterResolver.GetFormatter<Dictionary<string, object>>()
+								.Deserialize(ref reader, formatterResolver);
+							break;
+					}
+				}
 			}
 
-			if (scriptTransform == null) return null;
+			if (scriptTransform == null)
+				return null;
 
-			if (dict.ContainsKey("lang"))
-				scriptTransform.Lang = dict["lang"].ToString();
-			if (dict.ContainsKey("params"))
-				scriptTransform.Params = dict["params"].ToObject<Dictionary<string, object>>();
-
+			scriptTransform.Lang = language;
+			scriptTransform.Params = parameters;
 			return scriptTransform;
 		}
 
-		public override bool CanConvert(Type objectType) => true;
+		public void Serialize(ref JsonWriter writer, IScriptTransform value, IJsonFormatterResolver formatterResolver) =>
+			throw new NotSupportedException();
 	}
 }

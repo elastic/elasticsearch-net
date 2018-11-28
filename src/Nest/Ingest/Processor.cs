@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
+	[InterfaceDataContract]
 	public interface IProcessor
 	{
+		[IgnoreDataMember]
 		string Name { get; }
 
 		[DataMember(Name ="on_failure")]

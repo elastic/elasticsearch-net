@@ -4,10 +4,11 @@ using System.Globalization;
 using System.Linq;
 using Elasticsearch.Net;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(RoutingJsonConverter))]
+	[JsonFormatter(typeof(RoutingFormatter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Routing : IEquatable<Routing>, IUrlParameter
 	{

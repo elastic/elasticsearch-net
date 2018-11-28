@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization;
-using Newtonsoft.Json.Converters;
+using Utf8Json;
+
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IWatcherStatsResponse : IResponse
 	{
 		[DataMember(Name ="cluster_name")]

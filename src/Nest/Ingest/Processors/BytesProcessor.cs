@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -9,8 +10,8 @@ namespace Nest
 	/// Supported human readable units are "b", "kb", "mb", "gb", "tb", "pb" case insensitive.
 	/// An error will occur if the field is not a supported format or resultant value exceeds 2^63.
 	/// </summary>
-	[DataContract]
-	[JsonConverter(typeof(ProcessorJsonConverter<BytesProcessor>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(ProcessorFormatter<BytesProcessor>))]
 	public interface IBytesProcessor : IProcessor
 	{
 		/// <summary> The field to convert bytes from </summary>

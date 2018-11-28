@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Relations, RelationName, Children>))]
+	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<Relations, RelationName, Children>))]
 	public interface IRelations : IIsADictionary<RelationName, Children> { }
 
 	public class Relations : IsADictionaryBase<RelationName, Children>, IRelations

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -12,7 +13,7 @@ namespace Nest
 		IFieldSecurity FieldSecurity { get; set; }
 
 		[DataMember(Name ="names")]
-		[JsonConverter(typeof(IndicesJsonConverter))]
+		[JsonFormatter(typeof(IndicesFormatter))]
 		Indices Names { get; set; }
 
 		[DataMember(Name ="privileges")]
@@ -26,7 +27,7 @@ namespace Nest
 	{
 		public IFieldSecurity FieldSecurity { get; set; }
 
-		[JsonConverter(typeof(IndicesJsonConverter))]
+		[JsonFormatter(typeof(IndicesFormatter))]
 		public Indices Names { get; set; }
 
 		public IEnumerable<string> Privileges { get; set; }

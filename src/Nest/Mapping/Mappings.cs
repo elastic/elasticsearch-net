@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Mappings, TypeName, ITypeMapping>))]
+	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<Mappings, TypeName, ITypeMapping>))]
 	public interface IMappings : IIsADictionary<TypeName, ITypeMapping> { }
 
 	public class Mappings : IsADictionaryBase<TypeName, ITypeMapping>, IMappings
