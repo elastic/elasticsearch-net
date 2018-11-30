@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -12,33 +13,33 @@ namespace Nest
 		/// <summary>
 		/// If true, the results are sorted in descending order.
 		/// </summary>
-		[DataMember(Name ="desc")]
+		[DataMember(Name = "desc")]
 		bool? Descending { get; set; }
 
 		/// <summary>
 		/// Returns snapshots with timestamps earlier than this time.
 		/// </summary>
-		[DataMember(Name ="end")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[DataMember(Name = "end")]
+		[JsonFormatter(typeof(EpochMillisecondsNullableDateTimeOffsetFormatter))]
 		DateTimeOffset? End { get; set; }
 
 		/// <summary>
 		/// Specifies pagination for the snapshots.
 		/// </summary>
-		[DataMember(Name ="page")]
+		[DataMember(Name = "page")]
 		IPage Page { get; set; }
 
 		/// <summary>
 		/// Specifies the sort field for the requested snapshots. By default, snapshots are sorted by their timestamp.
 		/// </summary>
-		[DataMember(Name ="sort")]
+		[DataMember(Name = "sort")]
 		Field Sort { get; set; }
 
 		/// <summary>
 		/// Returns snapshots with timestamps after this time.
 		/// </summary>
-		[DataMember(Name ="start")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[DataMember(Name = "start")]
+		[JsonFormatter(typeof(EpochMillisecondsNullableDateTimeOffsetFormatter))]
 		DateTimeOffset? Start { get; set; }
 	}
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -66,7 +67,7 @@ namespace Nest
 		/// The start time of the bucket for which these results were calculated.
 		/// </summary>
 		[DataMember(Name ="timestamp")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[JsonFormatter(typeof(EpochMillisecondsDateTimeOffsetFormatter))]
 		public DateTimeOffset Timestamp { get; internal set; }
 	}
 }

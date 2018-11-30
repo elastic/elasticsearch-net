@@ -2,7 +2,6 @@
 
 namespace Nest
 {
-	[DataContract]
 	public interface IAcknowledgedResponse : IResponse
 	{
 		bool Acknowledged { get; }

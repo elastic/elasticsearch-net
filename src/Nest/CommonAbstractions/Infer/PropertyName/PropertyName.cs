@@ -3,10 +3,11 @@ using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Reflection;
 using Elasticsearch.Net;
+using Utf8Json;
 
 namespace Nest
 {
-	[ContractJsonConverter(typeof(PropertyNameJsonConverter))]
+	[JsonFormatter(typeof(PropertyNameFormatter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class PropertyName : IEquatable<PropertyName>, IUrlParameter
 	{

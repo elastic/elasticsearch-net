@@ -1,92 +1,162 @@
 ﻿using System;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Text;
 using Newtonsoft.Json.Linq;
+using Utf8Json;
+using Utf8Json.Internal;
+using Utf8Json.Resolvers;
 
 namespace Nest
 {
-	/// <summary>
-	/// Marks an instance where _name, boost and ignore_unmapped do
-	/// not exist as children of the variable field but as siblings
-	/// </summary>
-	internal class GeoShapeQueryFieldNameConverter : ReserializeJsonConverter<GeoShapeQuery, IGeoShapeQuery>
+	internal class GeoShapeQueryFieldNameFormatter : IJsonFormatter<IGeoShapeQuery>
 	{
-		private static readonly string Boost = "boost";
-		private static readonly string IgnoreUnmapped = "ignore_unmapped";
-		private static readonly string Name = "_name";
-		private static readonly string[] SkipProperties = { Boost, Name, IgnoreUnmapped };
-
-		protected override bool SkipWriteProperty(string propertyName) => SkipProperties.Contains(propertyName);
-
-		protected override void SerializeJson(JsonWriter writer, object value, IGeoShapeQuery castValue, JsonSerializer serializer)
+		public void Serialize(ref JsonWriter writer, IGeoShapeQuery value, IJsonFormatterResolver formatterResolver)
 		{
-			var fieldName = castValue.Field;
-			if (fieldName == null) return;
+			var fieldName = value.Field;
+			if (fieldName == null)
+			{
+				writer.WriteNull();
+				return;
+			}
 
-			var settings = serializer.GetConnectionSettings();
-			var field = settings?.Inferrer.Field(fieldName);
-			if (field.IsNullOrEmpty()) return;
+			var settings = formatterResolver.GetConnectionSettings();
+			var field = settings.Inferrer.Field(fieldName);
 
-			writer.WriteStartObject();
-			var name = castValue.Name;
-			var boost = castValue.Boost;
-			var ignoreUnmapped = castValue.IgnoreUnmapped;
-			if (!name.IsNullOrEmpty()) writer.WriteProperty(serializer, Name, name);
-			if (boost != null) writer.WriteProperty(serializer, Boost, boost);
-			if (ignoreUnmapped != null) writer.WriteProperty(serializer, IgnoreUnmapped, ignoreUnmapped);
+			if (field.IsNullOrEmpty())
+			{
+				writer.WriteNull();
+				return;
+			}
+
+			writer.WriteBeginObject();
+			var name = value.Name;
+			var boost = value.Boost;
+			var ignoreUnmapped = value.IgnoreUnmapped;
+
+			if (!name.IsNullOrEmpty())
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteString(name);
+				writer.WriteValueSeparator();
+			}
+			if (boost != null)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteDouble(boost.Value);
+				writer.WriteValueSeparator();
+			}
+			if (ignoreUnmapped != null)
+			{
+				writer.WritePropertyName("ignore_unmapped");
+				writer.WriteBoolean(ignoreUnmapped.Value);
+				writer.WriteValueSeparator();
+			}
+
 			writer.WritePropertyName(field);
-			Reserialize(writer, value, serializer);
+			var shapeFormatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IGeoShapeQuery>();
+			shapeFormatter.Serialize(ref writer, value, formatterResolver);
 			writer.WriteEndObject();
+		}
+
+		public IGeoShapeQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			throw new NotSupportedException();
 		}
 	}
 
-	internal class GeoShapeQueryJsonConverter : JsonConverter
+	internal class GeoShapeQueryFormatter : IJsonFormatter<IGeoShapeQuery>
 	{
-		public override bool CanRead => true;
-		public override bool CanWrite => false;
-
-		public override bool CanConvert(Type objectType) => true;
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public void Serialize(ref JsonWriter writer, IGeoShapeQuery value, IJsonFormatterResolver formatterResolver)
 		{
-			var j = JObject.Load(reader);
-			if (j == null || !j.HasValues) return null;
+			throw new NotSupportedException();
+		}
 
+		private static readonly AutomataDictionary AutomataDictionary = new AutomataDictionary
+		{
+			{ "boost", 0 },
+			{ "_name", 1 },
+			{ "ignore_unmapped", 2 },
+			{ "relation", 3 }
+		};
+
+		private static readonly AutomataDictionary ShapeDictionary = new AutomataDictionary
+		{
+			{ "shape", 0 },
+			{ "indexed_shape", 1 }
+		};
+
+		public IGeoShapeQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			var token = reader.GetCurrentJsonToken();
+
+			if (token == JsonToken.Null)
+				return null;
+
+			int count = 0;
+			string field = null;
 			double? boost = null;
 			string name = null;
 			bool? ignoreUnmapped = null;
-			if (j.TryGetValue("boost", out var boostToken) && boostToken.Type != JTokenType.Array && boostToken.Type != JTokenType.Object)
-			{
-				j.Remove("boost");
-				boost = boostToken.Value<double?>();
-			}
-			if (j.TryGetValue("_name", out var nameToken) && nameToken.Type == JTokenType.String)
-			{
-				j.Remove("_name");
-				name = nameToken.Value<string>();
-			}
-			if (j.TryGetValue("ignore_unmapped", out var ignoreUnmappedToken) && ignoreUnmappedToken.Type == JTokenType.Boolean)
-			{
-				j.Remove("ignore_unmapped");
-				ignoreUnmapped = ignoreUnmappedToken.Value<bool?>();
-			}
-			var firstProp = j.Properties().FirstOrDefault();
-			if (firstProp == null) return null;
-
-			var field = firstProp.Name;
-			var jo = firstProp.Value.Value<JObject>();
-			if (jo == null) return null;
-
 			IGeoShapeQuery query = null;
+			GeoShapeRelation? relation = null;
 
-			if (jo.TryGetValue("shape", out var shape))
-				query = ParseShapeQuery(shape, serializer);
-			else if (jo.TryGetValue("indexed_shape", out var indexedShape))
-				query = ParseIndexedShapeQuery(indexedShape);
+			while (reader.ReadIsInObject(ref count))
+			{
+				var propertyName = reader.ReadPropertyNameSegmentRaw();
+				if (AutomataDictionary.TryGetValue(propertyName, out var value))
+				{
+					switch (value)
+					{
+						case 0:
+							boost = reader.ReadDouble();
+							break;
+						case 1:
+							name = reader.ReadString();
+							break;
+						case 2:
+							ignoreUnmapped = reader.ReadBoolean();
+							break;
+						case 3:
+							relation = formatterResolver.GetFormatter<GeoShapeRelation>()
+								.Deserialize(ref reader, formatterResolver);
+							break;
+					}
+				}
+				else
+				{
+					field = Encoding.UTF8.GetString(propertyName.Array, propertyName.Offset, propertyName.Count);
+					if (reader.ReadIsBeginObject())
+					{
+						reader.ReadNext();
+						var shapeProperty = reader.ReadPropertyNameSegmentRaw();
+						if (ShapeDictionary.TryGetValue(shapeProperty, out var shapeValue))
+						{
+							switch (shapeValue)
+							{
+								case 0:
+									var shapeFormatter = formatterResolver.GetFormatter<IGeoShape>();
+									query = new GeoShapeQuery
+									{
+										Shape = shapeFormatter.Deserialize(ref reader, formatterResolver)
+									};
+									break;
+								case 1:
+									var fieldLookupFormatter = formatterResolver.GetFormatter<FieldLookup>();
+									query = new GeoShapeQuery
+									{
+										IndexedShape = fieldLookupFormatter.Deserialize(ref reader, formatterResolver)
+									};
+									break;
+							}
+						}
+					}
+				}
+			}
 
-			if (query == null) return null;
+			if (query == null)
+				return null;
 
-			var relation = jo["relation"]?.Value<string>().ToEnum<GeoShapeRelation>();
 			query.Boost = boost;
 			query.Name = name;
 			query.Field = field;
@@ -94,17 +164,5 @@ namespace Nest
 			query.IgnoreUnmapped = ignoreUnmapped;
 			return query;
 		}
-
-		private static IGeoShapeQuery ParseIndexedShapeQuery(JToken indexedShape) =>
-			new GeoShapeQuery { IndexedShape = indexedShape.ToObject<FieldLookup>() };
-
-		private static IGeoShapeQuery ParseShapeQuery(JToken shape, JsonSerializer serializer)
-		{
-			var geometry = GeoShapeConverter.ReadJToken(shape, serializer);
-			return new GeoShapeQuery { Shape = geometry };
-		}
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) =>
-			throw new NotSupportedException();
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -22,14 +23,14 @@ namespace Nest
 		/// The timestamp of the latest processed record.
 		/// </summary>
 		[DataMember(Name ="latest_record_time_stamp")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[JsonFormatter(typeof(EpochMillisecondsNullableDateTimeOffsetFormatter))]
 		public DateTimeOffset? LatestRecordTimeStamp { get; internal set; }
 
 		/// <summary>
 		/// The timestamp of the latest bucket result.
 		/// </summary>
 		[DataMember(Name ="latest_result_time_stamp")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[JsonFormatter(typeof(EpochMillisecondsNullableDateTimeOffsetFormatter))]
 		public DateTimeOffset? LatestResultTimeStamp { get; internal set; }
 
 		/// <summary>
@@ -62,7 +63,7 @@ namespace Nest
 		/// The creation timestamp for the snapshot.
 		/// </summary>
 		[DataMember(Name ="timestamp")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[JsonFormatter(typeof(EpochMillisecondsDateTimeOffsetFormatter))]
 		public DateTimeOffset Timestamp { get; internal set; }
 	}
 }

@@ -1,8 +1,9 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[ContractJsonConverter(typeof(TokenFilterJsonConverter))]
+	[JsonFormatter(typeof(TokenFilterFormatter))]
 	public interface ITokenFilter
 	{
 		[DataMember(Name ="type")]

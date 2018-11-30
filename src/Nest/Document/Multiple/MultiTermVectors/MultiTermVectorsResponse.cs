@@ -12,7 +12,6 @@ namespace Nest
 	public class MultiTermVectorsResponse : ResponseBase, IMultiTermVectorsResponse
 	{
 		[DataMember(Name ="docs")]
-		[JsonConverter(typeof(ReadOnlyCollectionJsonConverter<TermVectorsResult, ITermVectors>))]
 		public IReadOnlyCollection<ITermVectors> Documents { get; internal set; } = EmptyReadOnly<ITermVectors>.Collection;
 	}
 }
