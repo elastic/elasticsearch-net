@@ -1,5 +1,7 @@
 using System;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
+using Utf8Json;
 
 namespace Nest
 {
@@ -17,7 +19,7 @@ namespace Nest
 		/// Returns influencers with timestamps earlier than this time.
 		/// </summary>
 		[DataMember(Name ="end")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[JsonFormatter(typeof(EpochMillisecondsNullableDateTimeOffsetFormatter))]
 		DateTimeOffset? End { get; set; }
 
 		/// <summary>
@@ -48,7 +50,7 @@ namespace Nest
 		/// Returns influencers with timestamps after this time.
 		/// </summary>
 		[DataMember(Name ="start")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[JsonFormatter(typeof(EpochMillisecondsNullableDateTimeOffsetFormatter))]
 		DateTimeOffset? Start { get; set; }
 	}
 

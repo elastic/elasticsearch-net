@@ -1,52 +1,96 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Text;
 using Newtonsoft.Json.Linq;
+using Utf8Json;
+using Utf8Json.Internal;
+using Utf8Json.Resolvers;
 
 namespace Nest
 {
-	internal class FieldMappingJsonConverter : JsonConverter
+	internal class FieldMappingFormatter : IJsonFormatter<IReadOnlyDictionary<Field, IFieldMapping>>
 	{
-		private readonly VerbatimDictionaryKeysJsonConverter<Field, IFieldMapping> _dictionaryConverter =
-			new VerbatimDictionaryKeysJsonConverter<Field, IFieldMapping>();
-
-		private readonly PropertyJsonConverter _propertyJsonConverter = new PropertyJsonConverter();
-
-		public override bool CanConvert(Type objectType) => objectType == typeof(IDictionary<string, IFieldMapping>);
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) =>
-			_dictionaryConverter.WriteJson(writer, value, serializer);
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public void Serialize(ref JsonWriter writer, IReadOnlyDictionary<Field, IFieldMapping> value, IJsonFormatterResolver formatterResolver)
 		{
-			var r = new Dictionary<Field, IFieldMapping>();
+			var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IReadOnlyDictionary<Field, IFieldMapping>>();
+			formatter.Serialize(ref writer, value, formatterResolver);
+		}
 
-			var o = JObject.Load(reader);
+		private static readonly AutomataDictionary _automataDictionary = new AutomataDictionary
+		{
+			{ "_all", 0 },
+			{ "_source", 1 },
+			{ "_routing", 2 },
+			{ "_index", 3 },
+			{ "_size", 4 }
+		};
 
-			foreach (var p in o.Properties())
+		public IReadOnlyDictionary<Field, IFieldMapping> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			var fieldMappings = new Dictionary<Field, IFieldMapping>();
+
+			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
 			{
-				var name = p.Name;
-				var po = p.First as JObject;
-				if (po == null)
-					continue;
-
-				var mapping = _propertyJsonConverter.ReadJson(po.CreateReader(), objectType, existingValue, serializer) as IFieldMapping;
-				if (mapping == null)
-				{
-					if (name == "_all") mapping = po.ToObject<AllField>();
-					if (name == "_source") mapping = po.ToObject<SourceField>();
-					if (name == "_routing") mapping = po.ToObject<RoutingField>();
-					if (name == "_index") mapping = po.ToObject<IndexField>();
-					if (name == "_size") mapping = po.ToObject<SizeField>();
-					//TODO _field_names does not seem to have a special mapping (just returns like _uid) needs CONFIRMATION
-				}
-				if (mapping == null) continue;
-
-				if (mapping is IProperty esType) esType.Name = name;
-				r.Add(name, mapping);
+				reader.ReadNext();
+				return fieldMappings;
 			}
-			var settings = serializer.GetConnectionSettings();
-			return new ResolvableDictionaryProxy<Field, IFieldMapping>(settings, r);
+
+			var count = 0;
+			IFieldMapping mapping = null;
+
+			while (reader.ReadIsInObject(ref count))
+			{
+				var propertyName = reader.ReadPropertyNameSegmentRaw();
+				if (_automataDictionary.TryGetValue(propertyName, out var value))
+				{
+					switch (value)
+					{
+						case 0:
+							mapping = formatterResolver.GetFormatter<AllField>()
+								.Deserialize(ref reader, formatterResolver);
+							break;
+						case 1:
+							mapping = formatterResolver.GetFormatter<SourceField>()
+								.Deserialize(ref reader, formatterResolver);
+							break;
+						case 2:
+							mapping = formatterResolver.GetFormatter<RoutingField>()
+								.Deserialize(ref reader, formatterResolver);
+							break;
+						case 3:
+							mapping = formatterResolver.GetFormatter<IndexField>()
+								.Deserialize(ref reader, formatterResolver);
+							break;
+						case 4:
+							mapping = formatterResolver.GetFormatter<SizeField>()
+								.Deserialize(ref reader, formatterResolver);
+							break;
+						//TODO _field_names does not seem to have a special mapping (just returns like _uid) needs CONFIRMATION
+					}
+				}
+				else
+				{
+					var property = formatterResolver.GetFormatter<IProperty>()
+						.Deserialize(ref reader, formatterResolver);
+
+					if (property != null)
+						property.Name =
+							Encoding.UTF8.GetString(propertyName.Array, propertyName.Offset, propertyName.Count);
+
+					mapping = property;
+				}
+
+				if (mapping != null)
+				{
+					var name = Encoding.UTF8.GetString(propertyName.Array, propertyName.Offset, propertyName.Count);
+					fieldMappings.Add(name, mapping);
+				}
+			}
+
+			var settings = formatterResolver.GetConnectionSettings();
+			var resolvableDictionary = new ResolvableDictionaryProxy<Field, IFieldMapping>(settings, fieldMappings);
+			return resolvableDictionary;
 		}
 	}
 }

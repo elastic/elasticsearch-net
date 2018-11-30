@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Elasticsearch.Net;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
+using Utf8Json;
 using static Nest.Infer;
 
 namespace Nest
 {
-	internal class FieldMappingPropertiesJsonConverter
-		: ResolvableDictionaryJsonConverterBase<FieldMappingProperties, Field, FieldMapping>
+	internal class FieldMappingPropertiesFormatter
+		: ResolvableDictionaryFormatterBase<FieldMappingProperties, Field, FieldMapping>
 	{
 		protected override FieldMappingProperties Create(IConnectionSettingsValues s, Dictionary<Field, FieldMapping> d) =>
 			new FieldMappingProperties(s, d);
 	}
 
-	[JsonConverter(typeof(FieldMappingPropertiesJsonConverter))]
+	[JsonFormatter(typeof(FieldMappingPropertiesFormatter))]
 	public class FieldMappingProperties : ResolvableDictionaryProxy<Field, FieldMapping>
 	{
 		internal FieldMappingProperties(IConnectionConfigurationValues connectionSettings, IReadOnlyDictionary<Field, FieldMapping> backingDictionary)
@@ -23,19 +24,19 @@ namespace Nest
 
 	public class TypeFieldMappings
 	{
-		[DataMember(Name ="mappings")]
-		[JsonConverter(typeof(ResolvableDictionaryJsonConverter<TypeName, FieldMappingProperties>))]
+		[DataMember(Name = "mappings")]
+		[JsonFormatter(typeof(ResolvableDictionaryFormatter<TypeName, FieldMappingProperties>))]
 		public IReadOnlyDictionary<TypeName, FieldMappingProperties> Mappings { get; internal set; } =
 			EmptyReadOnly<TypeName, FieldMappingProperties>.Dictionary;
 	}
 
 	public class FieldMapping
 	{
-		[DataMember(Name ="full_name")]
+		[DataMember(Name = "full_name")]
 		public string FullName { get; internal set; }
 
-		[DataMember(Name ="mapping")]
-		[JsonConverter(typeof(FieldMappingJsonConverter))]
+		[DataMember(Name = "mapping")]
+		[JsonFormatter(typeof(FieldMappingFormatter))]
 		public IReadOnlyDictionary<Field, IFieldMapping> Mapping { get; internal set; } = EmptyReadOnly<Field, IFieldMapping>.Dictionary;
 	}
 
@@ -50,7 +51,7 @@ namespace Nest
 		IFieldMapping MappingFor<T>(Expression<Func<T, object>> objectPath, IndexName index = null, TypeName type = null) where T : class;
 	}
 
-	[JsonConverter(typeof(ResolvableDictionaryResponseJsonConverter<GetFieldMappingResponse, IndexName, TypeFieldMappings>))]
+	[JsonFormatter(typeof(ResolvableDictionaryResponseFormatter<GetFieldMappingResponse, IndexName, TypeFieldMappings>))]
 	public class GetFieldMappingResponse : DictionaryResponseBase<IndexName, TypeFieldMappings>, IGetFieldMappingResponse
 	{
 		[IgnoreDataMember]

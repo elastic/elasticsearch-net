@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[JsonConverter(typeof(CompositeJsonConverter<GeoShapeQueryJsonConverter, GeoShapeQueryFieldNameConverter>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(CompositeFormatter<IGeoShapeQuery, GeoShapeQueryFormatter, GeoShapeQueryFieldNameFormatter>))]
 	public interface IGeoShapeQuery : IFieldNameQuery
 	{
 		/// <summary>

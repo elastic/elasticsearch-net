@@ -46,7 +46,7 @@ namespace Nest
 		[DataMember(Name ="number_of_nodes")]
 		public int NumberOfNodes { get; internal set; }
 
-		[JsonProperty(PropertyName = "number_of_pending_tasks")]
+		[DataMember(Name = "number_of_pending_tasks")]
 		public int NumberOfPendingTasks { get; internal set; }
 
 		[DataMember(Name ="relocating_shards")]

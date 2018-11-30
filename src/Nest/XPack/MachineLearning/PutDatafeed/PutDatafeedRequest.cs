@@ -73,7 +73,7 @@ namespace Nest
 		///  A list of types to search for within the specified indices.
 		/// </summary>
 		[DataMember(Name ="types")]
-		[JsonConverter(typeof(TypesJsonConverter))]
+		[JsonConverter(typeof(TypesFormatter))]
 		Types Types { get; set; }
 	}
 

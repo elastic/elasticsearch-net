@@ -2,10 +2,11 @@
 using System.Diagnostics;
 using System.Linq;
 using Elasticsearch.Net;
+using Utf8Json;
 
 namespace Nest
 {
-	[ContractJsonConverter(typeof(TypeNameJsonConverter))]
+	[JsonFormatter(typeof(TypeNameFormatter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class TypeName : IEquatable<TypeName>, IUrlParameter
 	{

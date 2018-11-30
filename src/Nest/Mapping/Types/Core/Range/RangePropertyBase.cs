@@ -1,9 +1,9 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[ContractJsonConverter(typeof(PropertyJsonConverter))]
+	[InterfaceDataContract]
 	public interface IRangeProperty : IDocValuesProperty
 	{
 		/// <summary>

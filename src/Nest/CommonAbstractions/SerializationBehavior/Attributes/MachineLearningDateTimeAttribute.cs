@@ -1,34 +1,72 @@
 ﻿using System;
-using System.Runtime.Serialization;
-
+using Utf8Json;
 
 namespace Nest
 {
+	internal static class DateTimeUtil
+	{
+		public static readonly DateTimeOffset Epoch = new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero);
+	}
+
 	/// <summary>
-	/// Signals that this date time property is used in Machine learning API's some of which will always return the date as epoch.
+	/// Signals that this date time property is used in Machine learning API's some of which will always return the date as
+	/// epoch.
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Property)]
 	public class MachineLearningDateTimeAttribute : Attribute { }
 
-	internal class MachineLearningDateTimeConverter : IsoDateTimeConverter
+	internal class MachineLearningDateTimeOffsetFormatter : IJsonFormatter<DateTimeOffset>
 	{
-		private static readonly DateTimeOffset Epoch = new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero);
-
-		public override bool CanWrite => false;
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public DateTimeOffset Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (reader.TokenType != JsonToken.Integer) return base.ReadJson(reader, objectType, existingValue, serializer);
+			var token = reader.GetCurrentJsonToken();
 
-			var millisecondsSinceEpoch = Convert.ToDouble(reader.Value);
-			var dateTimeOffset = Epoch.AddMilliseconds(millisecondsSinceEpoch);
+			if (token == JsonToken.String)
+			{
+				var formatter = formatterResolver.GetFormatter<DateTimeOffset>();
+				return formatter.Deserialize(ref reader, formatterResolver);
+			}
+			if (token == JsonToken.Null) return default;
 
-			if (objectType == typeof(DateTimeOffset) || objectType == typeof(DateTimeOffset?))
+			if (token == JsonToken.Number)
+			{
+				var millisecondsSinceEpoch = reader.ReadDouble();
+				var dateTimeOffset = DateTimeUtil.Epoch.AddMilliseconds(millisecondsSinceEpoch);
 				return dateTimeOffset;
+			}
 
-			return dateTimeOffset.DateTime;
+			throw new Exception($"Cannot deserialize {nameof(DateTimeOffset)} from token {token}");
 		}
+
+		public virtual void Serialize(ref JsonWriter writer, DateTimeOffset value, IJsonFormatterResolver formatterResolver)
+		{
+			throw new NotSupportedException();
+		}
+	}
+
+	internal class MachineLearningDateTimeFormatter : IJsonFormatter<DateTime>
+	{
+		public DateTime Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			var token = reader.GetCurrentJsonToken();
+
+			if (token == JsonToken.String)
+			{
+				var formatter = formatterResolver.GetFormatter<DateTime>();
+				return formatter.Deserialize(ref reader, formatterResolver);
+			}
+			if (token == JsonToken.Null) return default;
+
+			if (token == JsonToken.Number)
+			{
+				var millisecondsSinceEpoch = reader.ReadDouble();
+				var dateTimeOffset = DateTimeUtil.Epoch.AddMilliseconds(millisecondsSinceEpoch);
+				return dateTimeOffset.DateTime;
+			}
+
+			throw new Exception($"Cannot deserialize {nameof(DateTimeOffset)} from token {token}");
+		}
+
+		public void Serialize(ref JsonWriter writer, DateTime value, IJsonFormatterResolver formatterResolver) => throw new NotSupportedException();
 	}
 }

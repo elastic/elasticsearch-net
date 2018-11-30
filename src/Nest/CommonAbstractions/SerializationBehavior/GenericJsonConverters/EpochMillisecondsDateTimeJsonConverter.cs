@@ -1,55 +1,51 @@
 using System;
-using System.Runtime.Serialization;
-
+using Utf8Json;
 
 namespace Nest
 {
-	internal class EpochMillisecondsDateTimeJsonConverter : DateTimeConverterBase
+	internal class EpochMillisecondsDateTimeOffsetFormatter : MachineLearningDateTimeOffsetFormatter
 	{
-		private static readonly DateTimeOffset Epoch = new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero);
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public override void Serialize(ref JsonWriter writer, DateTimeOffset value, IJsonFormatterResolver formatterResolver)
 		{
-			var dateTimeOffset = value as DateTimeOffset?;
+			var dateTimeOffsetDifference = (value - DateTimeUtil.Epoch).TotalMilliseconds;
+			writer.WriteInt64((long)dateTimeOffsetDifference);
+		}
+	}
 
-			if (dateTimeOffset == null)
+	internal class EpochMillisecondsNullableDateTimeOffsetFormatter : IJsonFormatter<DateTimeOffset?>
+	{
+		public DateTimeOffset? Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			var token = reader.GetCurrentJsonToken();
+
+			if (token == JsonToken.String)
 			{
-				var dateTime = value as DateTime?;
-				if (dateTime == null)
-				{
-					writer.WriteNull();
-					return;
-				}
+				var formatter = formatterResolver.GetFormatter<DateTimeOffset>();
+				return formatter.Deserialize(ref reader, formatterResolver);
+			}
+			if (token == JsonToken.Null)
+				return null;
 
-				var dateTimeDifference = (dateTime.Value - Epoch).TotalMilliseconds;
-				writer.WriteValue((long)dateTimeDifference);
+			if (token == JsonToken.Number)
+			{
+				var millisecondsSinceEpoch = reader.ReadDouble();
+				var dateTimeOffset = DateTimeUtil.Epoch.AddMilliseconds(millisecondsSinceEpoch);
+				return dateTimeOffset;
+			}
+
+			throw new Exception($"Cannot deserialize {nameof(DateTimeOffset)} from token {token}");
+		}
+
+		public void Serialize(ref JsonWriter writer, DateTimeOffset? value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null)
+			{
+				writer.WriteNull();
 				return;
 			}
 
-			var dateTimeOffsetDifference = (dateTimeOffset.Value - Epoch).TotalMilliseconds;
-			writer.WriteValue((long)dateTimeOffsetDifference);
-		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			if (reader.TokenType != JsonToken.Integer)
-			{
-				if (objectType == typeof(DateTimeOffset?) || objectType == typeof(DateTime?))
-					return null;
-
-				if (objectType == typeof(DateTimeOffset))
-					return default(DateTimeOffset);
-
-				return default(DateTime);
-			}
-
-			var millisecondsSinceEpoch = Convert.ToDouble(reader.Value);
-			var dateTimeOffset = Epoch.AddMilliseconds(millisecondsSinceEpoch);
-
-			if (objectType == typeof(DateTimeOffset) || objectType == typeof(DateTimeOffset?))
-				return dateTimeOffset;
-
-			return dateTimeOffset.DateTime;
+			var dateTimeOffsetDifference = (value.Value - DateTimeUtil.Epoch).TotalMilliseconds;
+			writer.WriteInt64((long)dateTimeOffsetDifference);
 		}
 	}
 }

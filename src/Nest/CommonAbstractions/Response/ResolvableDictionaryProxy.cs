@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Elasticsearch.Net;
-using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -18,7 +18,7 @@ namespace Nest
 
 			Original = backingDictionary;
 
-			var dictionary = new Dictionary<string, TValue>();
+			var dictionary = new Dictionary<string, TValue>(backingDictionary.Count);
 			foreach (var key in backingDictionary.Keys)
 				dictionary[Sanitize(key)] = backingDictionary[key];
 
@@ -50,53 +50,45 @@ namespace Nest
 		private string Sanitize(TKey key) => key?.GetString(_connectionSettings);
 	}
 
-	internal abstract class ResolvableDictionaryJsonConverterBase<TDictionary, TKey, TValue> : JsonConverter
-		where TDictionary : ResolvableDictionaryProxy<TKey, TValue>
-		where TKey : IUrlParameter
+	internal abstract class ResolvableDictionaryFormatterBase<TDictionary, TKey, TValue> : IJsonFormatter<TDictionary>
 	{
-		public override bool CanRead => true;
-		public override bool CanWrite => false;
-
-		public override bool CanConvert(Type objectType) => true;
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public TDictionary Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var d = new Dictionary<TKey, TValue>();
-			serializer.Populate(reader, d);
-			var settings = serializer.GetConnectionSettings();
+			var formatter = formatterResolver.GetFormatter<Dictionary<TKey, TValue>>();
+			var d = formatter.Deserialize(ref reader, formatterResolver);
+			var settings = formatterResolver.GetConnectionSettings();
 			var dict = Create(settings, d);
 			return dict;
 		}
 
+		public void Serialize(ref JsonWriter writer, TDictionary value, IJsonFormatterResolver formatterResolver) =>
+			throw new NotSupportedException();
+
 		protected abstract TDictionary Create(IConnectionSettingsValues settings, Dictionary<TKey, TValue> dictionary);
 	}
 
-	internal class ResolvableDictionaryJsonConverter<TKey, TValue>
-		: ResolvableDictionaryJsonConverterBase<ResolvableDictionaryProxy<TKey, TValue>, TKey, TValue>
+	internal class ResolvableDictionaryFormatter<TKey, TValue>
+		: ResolvableDictionaryFormatterBase<ResolvableDictionaryProxy<TKey, TValue>, TKey, TValue>
 		where TKey : IUrlParameter
 	{
-		protected override ResolvableDictionaryProxy<TKey, TValue> Create(IConnectionSettingsValues s, Dictionary<TKey, TValue> d) =>
-			new ResolvableDictionaryProxy<TKey, TValue>(s, d);
+		protected override ResolvableDictionaryProxy<TKey, TValue> Create(IConnectionSettingsValues settings, Dictionary<TKey, TValue> dictionary) =>
+			new ResolvableDictionaryProxy<TKey, TValue>(settings, dictionary);
 	}
 
-	internal class ResolvableDictionaryResponseJsonConverter<TResponse, TKey, TValue> : JsonConverter
-		where TResponse : ResponseBase, IDictionaryResponse<TKey, TValue>, new() where TKey : IUrlParameter
+	internal class ResolvableDictionaryResponseFormatter<TResponse, TKey, TValue> : IJsonFormatter<TResponse>
+		where TResponse : ResponseBase, IDictionaryResponse<TKey, TValue>, new()
+		where TKey : IUrlParameter
 	{
-		public override bool CanRead => true;
-		public override bool CanWrite => false;
-
-		public override bool CanConvert(Type objectType) => true;
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public TResponse Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var j = DictionaryResponseJsonConverterHelpers.ReadServerErrorFirst(reader, out var error, out var statusCode);
+			var arraySegment = DictionaryResponseJsonConverterHelpers
+				.ReadServerErrorFirst(ref reader, formatterResolver, out var error, out var statusCode);
 
 			var response = new TResponse();
-			var d = new Dictionary<TKey, TValue>();
-			serializer.Populate(j.CreateReader(), d);
-			var settings = serializer.GetConnectionSettings();
+			var formatter = formatterResolver.GetFormatter<Dictionary<TKey, TValue>>();
+			var segmentReader = new JsonReader(arraySegment.Array, arraySegment.Offset);
+			var d = formatter.Deserialize(ref segmentReader, formatterResolver);
+			var settings = formatterResolver.GetConnectionSettings();
 			var dict = new ResolvableDictionaryProxy<TKey, TValue>(settings, d);
 			response.BackingDictionary = dict;
 			response.Error = error;
@@ -104,7 +96,6 @@ namespace Nest
 			return response;
 		}
 
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }
+		public void Serialize(ref JsonWriter writer, TResponse value, IJsonFormatterResolver formatterResolver) => throw new NotSupportedException();
 	}
 }

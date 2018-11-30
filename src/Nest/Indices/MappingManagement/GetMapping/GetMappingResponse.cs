@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Elasticsearch.Net;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
+using Utf8Json;
 
 namespace Nest
 {
@@ -20,24 +21,24 @@ namespace Nest
 	{
 		public TypeMapping this[TypeName type] => Mappings?[type];
 
-		[DataMember(Name ="mappings")]
+		[DataMember(Name = "mappings")]
 		public TypeMappings Mappings { get; internal set; }
 	}
 
-	[JsonConverter(typeof(TypeMappingsJsonConverter))]
+	[JsonFormatter(typeof(TypeMappingsFormatter))]
 	public class TypeMappings : ResolvableDictionaryProxy<TypeName, TypeMapping>
 	{
 		internal TypeMappings(IConnectionConfigurationValues connectionSettings, IReadOnlyDictionary<TypeName, TypeMapping> backingDictionary)
 			: base(connectionSettings, backingDictionary) { }
 
-		internal class TypeMappingsJsonConverter : ResolvableDictionaryJsonConverterBase<TypeMappings, TypeName, TypeMapping>
+		internal class TypeMappingsFormatter : ResolvableDictionaryFormatterBase<TypeMappings, TypeName, TypeMapping>
 		{
 			protected override TypeMappings Create(IConnectionSettingsValues s, Dictionary<TypeName, TypeMapping> d) =>
 				new TypeMappings(s, d);
 		}
 	}
 
-	[JsonConverter(typeof(ResolvableDictionaryResponseJsonConverter<GetMappingResponse, IndexName, IndexMappings>))]
+	[JsonFormatter(typeof(ResolvableDictionaryResponseFormatter<GetMappingResponse, IndexName, IndexMappings>))]
 	public class GetMappingResponse : DictionaryResponseBase<IndexName, IndexMappings>, IGetMappingResponse
 	{
 		[IgnoreDataMember]

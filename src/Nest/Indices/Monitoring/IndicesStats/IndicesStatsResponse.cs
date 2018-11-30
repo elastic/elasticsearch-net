@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -14,7 +15,7 @@ namespace Nest
 	public class IndicesStatsResponse : ResponseBase, IIndicesStatsResponse
 	{
 		[DataMember(Name ="indices")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, IndicesStats>))]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, IndicesStats>))]
 		public IReadOnlyDictionary<string, IndicesStats> Indices { get; internal set; } = EmptyReadOnly<string, IndicesStats>.Dictionary;
 
 		[DataMember(Name ="_shards")]

@@ -6,7 +6,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[ContractJsonConverter(typeof(TypesJsonConverter))]
+	[ContractJsonConverter(typeof(TypesFormatter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Types : Union<Types.AllTypesMarker, Types.ManyTypes>, IUrlParameter, IEquatable<Types>
 	{

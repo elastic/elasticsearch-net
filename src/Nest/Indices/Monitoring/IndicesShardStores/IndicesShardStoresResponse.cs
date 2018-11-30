@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization;
-
+using Utf8Json;
 
 namespace Nest
 {
 	public interface IIndicesShardStoresResponse : IResponse
 	{
-		[DataMember(Name ="indices")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, IndicesShardStores>))]
+		[DataMember(Name = "indices")]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, IndicesShardStores>))]
 		IReadOnlyDictionary<string, IndicesShardStores> Indices { get; }
 	}
 
@@ -20,52 +19,52 @@ namespace Nest
 
 	public class IndicesShardStores
 	{
-		[DataMember(Name ="shards")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, ShardStoreWrapper>))]
+		[DataMember(Name = "shards")]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, ShardStoreWrapper>))]
 		public IReadOnlyDictionary<string, ShardStoreWrapper> Shards { get; internal set; } = EmptyReadOnly<string, ShardStoreWrapper>.Dictionary;
 	}
 
 	public class ShardStoreWrapper
 	{
-		[DataMember(Name ="stores")]
+		[DataMember(Name = "stores")]
 		public IReadOnlyCollection<ShardStore> Stores { get; internal set; } = EmptyReadOnly<ShardStore>.Collection;
 	}
 
-	[JsonConverter(typeof(ShardStoreJsonConverter))]
+	[JsonFormatter(typeof(ShardStoreFormatter))]
 	public class ShardStore
 	{
-		[DataMember(Name ="allocation")]
+		[DataMember(Name = "allocation")]
 		public ShardStoreAllocation Allocation { get; internal set; }
 
-		[DataMember(Name ="allocation_id")]
+		[DataMember(Name = "allocation_id")]
 		public string AllocationId { get; internal set; }
 
-		[DataMember(Name ="attributes")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
+		[DataMember(Name = "attributes")]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, object>))]
 		public IReadOnlyDictionary<string, object> Attributes { get; internal set; } = EmptyReadOnly<string, object>.Dictionary;
 
-		[DataMember(Name ="id")]
+		[DataMember(Name = "id")]
 		public string Id { get; internal set; }
 
-		[DataMember(Name ="legacy_version")]
+		[DataMember(Name = "legacy_version")]
 		public long? LegacyVersion { get; internal set; }
 
-		[DataMember(Name ="name")]
+		[DataMember(Name = "name")]
 		public string Name { get; internal set; }
 
-		[DataMember(Name ="store_exception")]
+		[DataMember(Name = "store_exception")]
 		public ShardStoreException StoreException { get; internal set; }
 
-		[DataMember(Name ="transport_address")]
+		[DataMember(Name = "transport_address")]
 		public string TransportAddress { get; internal set; }
 	}
 
 	public class ShardStoreException
 	{
-		[DataMember(Name ="reason")]
+		[DataMember(Name = "reason")]
 		public string Reason { get; internal set; }
 
-		[DataMember(Name ="type")]
+		[DataMember(Name = "type")]
 		public string Type { get; internal set; }
 	}
 

@@ -1,57 +1,30 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Linq;
+using Utf8Json;
+using Utf8Json.Resolvers;
 
 namespace Nest
 {
-	internal class ShardStoreJsonConverter : JsonConverter
+	internal class ShardStoreFormatter : IJsonFormatter<ShardStore>
 	{
-		public override bool CanWrite => false;
-
-		public override bool CanConvert(Type objectType) => true;
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public ShardStore Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var r = new ShardStore();
-			var o = JObject.Load(reader);
-			var properties = o.Properties().ToListOrNullIfEmpty();
-			var id = properties.First();
-			properties.AddRange(id.Value.Value<JObject>().Properties());
-
-			r.Id = id.Name;
-
-			foreach (var p in properties)
+			ShardStore shardStore = null;
+			var count = 0;
+			while (reader.ReadIsInObject(ref count))
 			{
-				switch (p.Name)
+				if (count == 1)
 				{
-					case "name":
-						r.Name = p.Value.Value<string>();
-						break;
-					case "transport_address":
-						r.TransportAddress = p.Value.Value<string>();
-						break;
-					case "legacy_version":
-						r.LegacyVersion = p.Value.Value<long?>();
-						break;
-					case "store_exception":
-						r.StoreException = p.Value.ToObject<ShardStoreException>();
-						break;
-					case "allocation":
-						r.Allocation = p.Value.ToObject<ShardStoreAllocation>();
-						break;
-					case "allocation_id":
-						r.AllocationId = p.Value.Value<string>();
-						break;
-					case "attributes":
-						r.Attributes = p.Value.ToObject<Dictionary<string, object>>();
-						break;
+					var id = reader.ReadPropertyName();
+					var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<ShardStore>();
+					shardStore = formatter.Deserialize(ref reader, formatterResolver);
+					shardStore.Id = id;
 				}
 			}
-			return r;
+
+			return shardStore;
 		}
+
+		public void Serialize(ref JsonWriter writer, ShardStore value, IJsonFormatterResolver formatterResolver) =>
+			throw new NotSupportedException();
 	}
 }

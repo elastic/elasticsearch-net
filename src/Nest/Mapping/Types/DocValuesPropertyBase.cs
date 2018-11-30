@@ -1,12 +1,12 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// Properties of a mapping for a property type to a document field that has doc_values in Elasticsearch
 	/// </summary>
-	[DataContract]
-	[ContractJsonConverter(typeof(PropertyJsonConverter))]
+	[InterfaceDataContract]
 	public interface IDocValuesProperty : ICoreProperty
 	{
 		/// <summary>

@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
+	[ReadAs(typeof(TermVectorsResult))]
 	public interface ITermVectors
 	{
 		bool Found { get; }
@@ -26,7 +28,7 @@ namespace Nest
 		public string Index { get; internal set; }
 
 		[DataMember(Name ="term_vectors")]
-		[JsonConverter(typeof(ResolvableDictionaryJsonConverter<Field, TermVector>))]
+		[JsonFormatter(typeof(ResolvableDictionaryFormatter<Field, TermVector>))]
 		public IReadOnlyDictionary<Field, TermVector> TermVectors { get; internal set; } = EmptyReadOnly<Field, TermVector>.Dictionary;
 
 		[DataMember(Name ="took")]

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IInlineScriptTransform : IScriptTransform
 	{
 		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]

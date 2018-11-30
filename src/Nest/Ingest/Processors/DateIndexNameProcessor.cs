@@ -189,7 +189,6 @@ namespace Nest
 			Assign(a => a.IndexNameFormat = indexNameFormat);
 	}
 
-	[JsonConverter(typeof(EnumMemberValueCasingJsonConverter<DateRounding>))]
 	public enum DateRounding
 	{
 		[EnumMember(Value = "s")]

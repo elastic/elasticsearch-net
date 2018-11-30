@@ -1,34 +1,31 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using Utf8Json;
 
 namespace Nest
 {
-	internal class PropertyNameJsonConverter : JsonConverter
+	internal class PropertyNameFormatter : IJsonFormatter<PropertyName>
 	{
-		public override bool CanRead => true;
-
-		public override bool CanWrite => true;
-
-		public override bool CanConvert(Type objectType) => objectType == typeof(PropertyName);
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public PropertyName Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var property = value as PropertyName;
-			if (property == null)
+			if (reader.GetCurrentJsonToken() != JsonToken.String)
+			{
+				reader.ReadNext();
+				return null;
+			}
+
+			PropertyName propertyName = reader.ReadString();
+			return propertyName;
+		}
+
+		public void Serialize(ref JsonWriter writer, PropertyName value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null)
 			{
 				writer.WriteNull();
 				return;
 			}
-			var infer = serializer.GetConnectionSettings().Inferrer;
-			writer.WriteValue(infer.PropertyName(property));
-		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			if (reader.TokenType != JsonToken.String) return null;
-
-			var property = reader.Value.ToString();
-			return (PropertyName)property;
+			var infer = formatterResolver.GetConnectionSettings().Inferrer;
+			writer.WriteString(infer.PropertyName(value));
 		}
 	}
 }

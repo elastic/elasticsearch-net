@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[JsonConverter(typeof(ChainTransformJsonConverter))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(ChainTransformFormatter))]
 	public interface IChainTransform : ITransform
 	{
 		ICollection<TransformContainer> Transforms { get; set; }
@@ -40,28 +41,38 @@ namespace Nest
 		}
 	}
 
-	internal class ChainTransformJsonConverter : JsonConverter
+	internal class ChainTransformFormatter : IJsonFormatter<IChainTransform>
 	{
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public void Serialize(ref JsonWriter writer, IChainTransform value, IJsonFormatterResolver formatterResolver)
 		{
-			writer.WriteStartArray();
-			var chainTransform = (IChainTransform)value;
+			writer.WriteBeginArray();
 
-			if (chainTransform != null)
-				foreach (var transform in chainTransform.Transforms)
-					serializer.Serialize(writer, transform);
+			if (value != null)
+			{
+				var formatter = formatterResolver.GetFormatter<TransformContainer>();
+				var count = 0;
+				foreach (var transform in value.Transforms)
+				{
+					if (count > 0)
+					{
+						writer.WriteValueSeparator();
+					}
+					formatter.Serialize(ref writer, transform, formatterResolver);
+					count++;
+				}
+			}
 
 			writer.WriteEndArray();
 		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public IChainTransform Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (reader.TokenType != JsonToken.StartArray) return null;
+			if (reader.GetCurrentJsonToken() != JsonToken.BeginArray)
+				return null;
 
-			var transforms = serializer.Deserialize<ICollection<TransformContainer>>(reader);
+			var formatter = formatterResolver.GetFormatter<ICollection<TransformContainer>>();
+			var transforms = formatter.Deserialize(ref reader, formatterResolver);
 			return new ChainTransform(transforms);
 		}
-
-		public override bool CanConvert(Type objectType) => true;
 	}
 }

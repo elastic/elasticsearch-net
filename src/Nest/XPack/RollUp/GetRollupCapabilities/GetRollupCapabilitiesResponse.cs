@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Elasticsearch.Net;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
+using Utf8Json;
 
 namespace Nest
 {
@@ -11,7 +12,7 @@ namespace Nest
 		IReadOnlyDictionary<IndexName, RollupCapabilities> Indices { get; }
 	}
 
-	[JsonConverter(typeof(ResolvableDictionaryResponseJsonConverter<GetRollupCapabilitiesResponse, IndexName, RollupCapabilities>))]
+	[JsonFormatter(typeof(ResolvableDictionaryResponseFormatter<GetRollupCapabilitiesResponse, IndexName, RollupCapabilities>))]
 	public class GetRollupCapabilitiesResponse : DictionaryResponseBase<IndexName, RollupCapabilities>, IGetRollupCapabilitiesResponse
 	{
 		public IReadOnlyDictionary<IndexName, RollupCapabilities> Indices => Self.BackingDictionary;
@@ -19,28 +20,28 @@ namespace Nest
 
 	public class RollupCapabilities
 	{
-		[DataMember(Name ="rollup_jobs")]
+		[DataMember(Name = "rollup_jobs")]
 		public IReadOnlyCollection<RollupCapabilitiesJob> RollupJobs { get; internal set; }
 	}
 
 	public class RollupCapabilitiesJob
 	{
-		[DataMember(Name ="fields")]
+		[DataMember(Name = "fields")]
 		public RollupFieldsCapabilitiesDictionary Fields { get; internal set; }
 
-		[DataMember(Name ="index_pattern")]
+		[DataMember(Name = "index_pattern")]
 		public string IndexPattern { get; internal set; }
 
-		[DataMember(Name ="job_id")]
+		[DataMember(Name = "job_id")]
 		public string JobId { get; internal set; }
 
-		[DataMember(Name ="rollup_index")]
+		[DataMember(Name = "rollup_index")]
 		public string RollupIndex { get; internal set; }
 	}
 
 	public class RollupFieldsCapabilities : IsADictionaryBase<string, string> { }
 
-	[JsonConverter(typeof(Converter))]
+	[JsonFormatter(typeof(Converter))]
 	public class RollupFieldsCapabilitiesDictionary : ResolvableDictionaryProxy<Field, IReadOnlyCollection<RollupFieldsCapabilities>>
 	{
 		internal RollupFieldsCapabilitiesDictionary(IConnectionConfigurationValues c,
@@ -50,7 +51,7 @@ namespace Nest
 		public IReadOnlyCollection<RollupFieldsCapabilities> Field<T>(Expression<Func<T, object>> selector) => this[selector];
 
 		internal class Converter
-			: ResolvableDictionaryJsonConverterBase
+			: ResolvableDictionaryFormatterBase
 				<RollupFieldsCapabilitiesDictionary, Field, IReadOnlyCollection<RollupFieldsCapabilities>>
 		{
 			protected override RollupFieldsCapabilitiesDictionary Create(

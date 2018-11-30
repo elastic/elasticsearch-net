@@ -3,14 +3,15 @@ using System.Diagnostics;
 using System.Reflection;
 using Elasticsearch.Net;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// A mapping for a property type to a document field in Elasticsearch
 	/// </summary>
-	[DataContract]
-	[ContractJsonConverter(typeof(PropertyJsonConverter))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(PropertyFormatter))]
 	public interface IProperty : IFieldMapping
 	{
 		/// <summary>
@@ -22,6 +23,7 @@ namespace Nest
 		/// <summary>
 		/// The name of the property
 		/// </summary>
+		[DataMember(Name = "name")]
 		PropertyName Name { get; set; }
 
 		/// <summary>

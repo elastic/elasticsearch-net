@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -16,7 +17,7 @@ namespace Nest
 		/// The timestamp of the earliest chronologically ordered record.
 		/// </summary>
 		[DataMember(Name ="earliest_record_timestamp")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[JsonFormatter(typeof(EpochMillisecondsNullableDateTimeOffsetFormatter))]
 		public DateTimeOffset? EarliestRecordTimestamp { get; internal set; }
 
 		/// <summary>
@@ -62,28 +63,28 @@ namespace Nest
 		/// The timestamp at which data was last analyzed, according to server time.
 		/// </summary>
 		[DataMember(Name ="last_data_time")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[JsonFormatter(typeof(EpochMillisecondsDateTimeOffsetFormatter))]
 		public DateTimeOffset LastDataTime { get; internal set; }
 
 		/// <summary>
 		/// The timestamp of the last bucket that did not contain any data.
 		/// </summary>
 		[DataMember(Name ="latest_empty_bucket_timestamp")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[JsonFormatter(typeof(EpochMillisecondsDateTimeOffsetFormatter))]
 		public DateTimeOffset LatestEmptyBucketTimestamp { get; internal set; }
 
 		/// <summary>
 		/// The timestamp of the last processed record.
 		/// </summary>
 		[DataMember(Name ="latest_record_timestamp")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[JsonFormatter(typeof(EpochMillisecondsDateTimeOffsetFormatter))]
 		public DateTimeOffset LatestRecordTimestamp { get; internal set; }
 
 		/// <summary>
 		/// The timestamp of the last bucket that was considered sparse.
 		/// </summary>
 		[DataMember(Name ="latest_sparse_bucket_timestamp")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[JsonFormatter(typeof(EpochMillisecondsDateTimeOffsetFormatter))]
 		public DateTimeOffset LatestSparseBucketTimestamp { get; internal set; }
 
 		/// <summary>

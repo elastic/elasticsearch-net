@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[JsonConverter(typeof(ScheduleJsonConverter<IYearlySchedule, YearlySchedule, ITimeOfYear>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(ScheduleJsonConverter<IYearlySchedule, YearlySchedule, ITimeOfYear>))]
 	public interface IYearlySchedule : ISchedule, IEnumerable<ITimeOfYear> { }
 
 	public class YearlySchedule : ScheduleBase, IYearlySchedule
