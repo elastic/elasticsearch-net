@@ -1,26 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Elasticsearch.Net;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
+using Utf8Json;
 using static Nest.Infer;
 
 namespace Nest
 {
 	public class TypeFieldMappings
 	{
-		[JsonProperty("mappings")]
+		[DataMember(Name = "mappings")]
 		[JsonConverter(typeof(ResolvableDictionaryJsonConverter<Field, FieldMapping>))]
 		public IReadOnlyDictionary<Field, FieldMapping> Mappings { get; internal set; } = EmptyReadOnly<Field, FieldMapping>.Dictionary;
 	}
 
 	public class FieldMapping
 	{
-		[DataMember(Name ="full_name")]
+		[DataMember(Name = "full_name")]
 		public string FullName { get; internal set; }
 
-		[DataMember(Name ="mapping")]
-		[JsonConverter(typeof(FieldMappingJsonConverter))]
+		[DataMember(Name = "mapping")]
+		[JsonFormatter(typeof(FieldMappingFormatter))]
 		public IReadOnlyDictionary<Field, IFieldMapping> Mapping { get; internal set; } = EmptyReadOnly<Field, IFieldMapping>.Dictionary;
 	}
 
@@ -35,7 +36,7 @@ namespace Nest
 		IFieldMapping MappingFor<T>(Expression<Func<T, object>> objectPath, IndexName index = null) where T : class;
 	}
 
-	[JsonConverter(typeof(ResolvableDictionaryResponseJsonConverter<GetFieldMappingResponse, IndexName, TypeFieldMappings>))]
+	[JsonFormatter(typeof(ResolvableDictionaryResponseFormatter<GetFieldMappingResponse, IndexName, TypeFieldMappings>))]
 	public class GetFieldMappingResponse : DictionaryResponseBase<IndexName, TypeFieldMappings>, IGetFieldMappingResponse
 	{
 		[IgnoreDataMember]

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -10,11 +11,11 @@ namespace Nest
 		public IReadOnlyDictionary<string, int> RestActions { get; internal set; }
 
 		[DataMember(Name ="since")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[JsonFormatter(typeof(EpochMillisecondsDateTimeOffsetFormatter))]
 		public DateTimeOffset Since { get; internal set; }
 
 		[DataMember(Name ="timestamp")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[JsonFormatter(typeof(EpochMillisecondsDateTimeOffsetFormatter))]
 		public DateTimeOffset Timestamp { get; internal set; }
 	}
 }

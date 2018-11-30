@@ -2,79 +2,78 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
-using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	[ReadAs(typeof(SearchRequest))]
-	[ReadAs(typeof(SearchRequest))]
 	public partial interface ISearchRequest : ICovariantSearchRequest
 	{
-		[DataMember(Name ="aggs")]
+		[DataMember(Name = "aggs")]
 		AggregationDictionary Aggregations { get; set; }
 
-		[DataMember(Name ="collapse")]
+		[DataMember(Name = "collapse")]
 		IFieldCollapse Collapse { get; set; }
 
-		[DataMember(Name ="explain")]
+		[DataMember(Name = "explain")]
 		bool? Explain { get; set; }
 
-		[DataMember(Name ="from")]
+		[DataMember(Name = "from")]
 		int? From { get; set; }
 
-		[DataMember(Name ="highlight")]
+		[DataMember(Name = "highlight")]
 		IHighlight Highlight { get; set; }
 
-		[DataMember(Name ="indices_boost")]
-		[JsonConverter(typeof(IndicesBoostJsonConverter))]
+		[DataMember(Name = "indices_boost")]
+		//[JsonFormatter(typeof(IndicesBoostFormatter))]
 		IDictionary<IndexName, double> IndicesBoost { get; set; }
 
-		[DataMember(Name ="min_score")]
+		[DataMember(Name = "min_score")]
 		double? MinScore { get; set; }
 
-		[DataMember(Name ="post_filter")]
+		[DataMember(Name = "post_filter")]
 		QueryContainer PostFilter { get; set; }
 
-		[DataMember(Name ="profile")]
+		[DataMember(Name = "profile")]
 		bool? Profile { get; set; }
 
-		[DataMember(Name ="query")]
+		[DataMember(Name = "query")]
 		QueryContainer Query { get; set; }
 
-		[DataMember(Name ="rescore")]
+		[DataMember(Name = "rescore")]
 		IList<IRescore> Rescore { get; set; }
 
-		[DataMember(Name ="script_fields")]
+		[DataMember(Name = "script_fields")]
 		IScriptFields ScriptFields { get; set; }
 
-		[DataMember(Name ="search_after")]
+		[DataMember(Name = "search_after")]
 		IList<object> SearchAfter { get; set; }
 
-		[DataMember(Name ="size")]
+		[DataMember(Name = "size")]
 		int? Size { get; set; }
 
-		[DataMember(Name ="slice")]
+		[DataMember(Name = "slice")]
 		ISlicedScroll Slice { get; set; }
 
-		[DataMember(Name ="sort")]
+		[DataMember(Name = "sort")]
 		IList<ISort> Sort { get; set; }
 
-		[DataMember(Name ="_source")]
+		[DataMember(Name = "_source")]
 		Union<bool, ISourceFilter> Source { get; set; }
 
-		[DataMember(Name ="suggest")]
+		[DataMember(Name = "suggest")]
 		ISuggestContainer Suggest { get; set; }
 
-		[DataMember(Name ="terminate_after")]
+		[DataMember(Name = "terminate_after")]
 		long? TerminateAfter { get; set; }
 
-		[DataMember(Name ="timeout")]
+		[DataMember(Name = "timeout")]
 		string Timeout { get; set; }
 
-		[DataMember(Name ="track_scores")]
+		[DataMember(Name = "track_scores")]
 		bool? TrackScores { get; set; }
 
-		[DataMember(Name ="version")]
+		[DataMember(Name = "version")]
 		bool? Version { get; set; }
 	}
 
@@ -232,8 +231,10 @@ namespace Nest
 		public SearchDescriptor<T> MinScore(double? minScore) => Assign(a => a.MinScore = minScore);
 
 		/// <summary>
-		/// The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.
-		/// If set, the response will have a boolean field terminated_early to indicate whether the query execution has actually terminated_early.
+		/// The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate
+		/// early.
+		/// If set, the response will have a boolean field terminated_early to indicate whether the query execution has actually
+		/// terminated_early.
 		/// </summary>
 		public SearchDescriptor<T> TerminateAfter(long? terminateAfter) => Assign(a => a.TerminateAfter = terminateAfter);
 
@@ -347,7 +348,8 @@ namespace Nest
 			Assign(a => a.Query = query?.Invoke(new QueryContainerDescriptor<T>()));
 
 		/// <summary>
-		/// For scroll queries that return a lot of documents it is possible to split the scroll in multiple slices which can be consumed independently
+		/// For scroll queries that return a lot of documents it is possible to split the scroll in multiple slices which can be
+		/// consumed independently
 		/// </summary>
 		public SearchDescriptor<T> Slice(Func<SlicedScrollDescriptor<T>, ISlicedScroll> selector) =>
 			Assign(a => a.Slice = selector?.Invoke(new SlicedScrollDescriptor<T>()));
@@ -364,7 +366,8 @@ namespace Nest
 			Assign(a => a.PostFilter = filter?.Invoke(new QueryContainerDescriptor<T>()));
 
 		/// <summary>
-		/// Allow to highlight search results on one or more fields. The implementation uses the either lucene fast-vector-highlighter or highlighter.
+		/// Allow to highlight search results on one or more fields. The implementation uses the either lucene
+		/// fast-vector-highlighter or highlighter.
 		/// </summary>
 		public SearchDescriptor<T> Highlight(Func<HighlightDescriptor<T>, IHighlight> highlightSelector) =>
 			Assign(a => a.Highlight = highlightSelector?.Invoke(new HighlightDescriptor<T>()));

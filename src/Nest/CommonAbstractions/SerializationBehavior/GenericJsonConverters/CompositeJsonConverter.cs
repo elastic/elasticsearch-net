@@ -1,28 +1,24 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using Utf8Json;
 
 namespace Nest
 {
-	internal class CompositeJsonConverter<TRead, TWrite> : JsonConverter
-		where TRead : JsonConverter, new()
-		where TWrite : JsonConverter, new()
+	internal class CompositeFormatter<T, TRead, TWrite> : IJsonFormatter<T>
+		where TRead : IJsonFormatter<T>, new()
+		where TWrite : IJsonFormatter<T>, new()
 	{
-		public CompositeJsonConverter()
+		public CompositeFormatter()
 		{
 			Read = new TRead();
 			Write = new TWrite();
 		}
 
-		public override bool CanRead => true;
-		public override bool CanWrite => true;
 		private TRead Read { get; set; }
 		private TWrite Write { get; set; }
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => Write.WriteJson(writer, value, serializer);
+		public T Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
+			Read.Deserialize(ref reader, formatterResolver);
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
-			Read.ReadJson(reader, objectType, existingValue, serializer);
-
-		public override bool CanConvert(Type objectType) => true;
+		public void Serialize(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver) =>
+			Write.Serialize(ref writer, value, formatterResolver);
 	}
 }

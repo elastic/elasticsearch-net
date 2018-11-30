@@ -1,35 +1,34 @@
 ﻿using System.Diagnostics;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// Core properties of a mapping for a property type to a document field in Elasticsearch
 	/// </summary>
-	[DataContract]
-	[ContractJsonConverter(typeof(PropertyJsonConverter))]
+	[InterfaceDataContract]
 	public interface ICoreProperty : IProperty
 	{
 		/// <summary>
 		/// Copies the value of this field into another field, which can be queried as a single field.
 		/// Allows for the creation of custom _all fields
 		/// </summary>
-		[DataMember(Name ="copy_to")]
-		[JsonConverter(typeof(FieldsJsonConverter))]
+		[DataMember(Name = "copy_to")]
 		Fields CopyTo { get; set; }
 
 		/// <summary>
 		/// Configures multi-fields for this field. Allows one field to be indexed in different
 		/// ways to serve different search and analytics purposes
 		/// </summary>
-		[DataMember(Name ="fields", DefaultValueHandling = DefaultValueHandling.Ignore)]
+		[DataMember(Name = "fields")]
 		IProperties Fields { get; set; }
 
 		/// <summary>
 		/// Which relevancy scoring algorithm or similarity should be used.
 		/// Defaults to <see cref="SimilarityOption.BM25" />
 		/// </summary>
-		[DataMember(Name ="similarity")]
+		[DataMember(Name = "similarity")]
 		Union<SimilarityOption, string> Similarity { get; set; }
 
 		/// <summary>
@@ -39,7 +38,7 @@ namespace Nest
 		/// <remarks>
 		/// Not valid on <see cref="ObjectProperty" />
 		/// </remarks>
-		[DataMember(Name ="store")]
+		[DataMember(Name = "store")]
 		bool? Store { get; set; }
 	}
 

@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -9,21 +10,21 @@ namespace Nest
 		/// <summary>
 		/// The time that the datafeed should end. This value is exclusive.
 		/// </summary>
-		[DataMember(Name ="end")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[DataMember(Name = "end")]
+		[JsonFormatter(typeof(EpochMillisecondsNullableDateTimeOffsetFormatter))]
 		DateTimeOffset? End { get; set; }
 
 		/// <summary>
 		/// The time that the datafeed should begin. This value is inclusive.
 		/// </summary>
-		[DataMember(Name ="start")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[DataMember(Name = "start")]
+		[JsonFormatter(typeof(EpochMillisecondsNullableDateTimeOffsetFormatter))]
 		DateTimeOffset? Start { get; set; }
 
 		/// <summary>
 		/// Controls the amount of time to wait until a datafeed starts.
 		/// </summary>
-		[DataMember(Name ="timeout")]
+		[DataMember(Name = "timeout")]
 		Time Timeout { get; set; }
 	}
 

@@ -1,72 +1,95 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using Newtonsoft.Json.Linq;
+using Utf8Json;
+using Utf8Json.Resolvers;
 
 namespace Nest
 {
-	internal class TokenFilterJsonConverter : JsonConverter
+	internal class TokenFilterFormatter : IJsonFormatter<ITokenFilter>
 	{
-		public override bool CanRead => true;
-		public override bool CanWrite => false;
-
-		public override bool CanConvert(Type objectType) => true;
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public ITokenFilter Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var o = JObject.Load(reader);
-
-			var typeProperty = o.Property("type");
-			if (typeProperty == null) return null;
-
-			var typePropertyValue = typeProperty.Value.ToString();
-			switch (typePropertyValue.ToLowerInvariant())
+			var arraySegment = reader.ReadNextBlockSegment();
+			var segmentReader = new JsonReader(arraySegment.Array, arraySegment.Offset);
+			var count = 0;
+			string tokenFilterType = null;
+			while (segmentReader.ReadIsInObject(ref count))
 			{
-				case "asciifolding": return o.ToObject<AsciiFoldingTokenFilter>(ElasticContractResolver.Empty);
-				case "common_grams": return o.ToObject<CommonGramsTokenFilter>(ElasticContractResolver.Empty);
-				case "delimited_payload": return o.ToObject<DelimitedPayloadTokenFilter>(ElasticContractResolver.Empty);
-				case "dictionary_decompounder": return o.ToObject<DictionaryDecompounderTokenFilter>(ElasticContractResolver.Empty);
-				case "edge_ngram": return o.ToObject<EdgeNGramTokenFilter>(ElasticContractResolver.Empty);
-				case "elision": return o.ToObject<ElisionTokenFilter>(ElasticContractResolver.Empty);
-				case "hunspell": return o.ToObject<HunspellTokenFilter>(ElasticContractResolver.Empty);
-				case "hyphenation_decompounder": return o.ToObject<HyphenationDecompounderTokenFilter>(ElasticContractResolver.Empty);
-				case "keep_types": return o.ToObject<KeepTypesTokenFilter>(ElasticContractResolver.Empty);
-				case "keep": return o.ToObject<KeepWordsTokenFilter>(ElasticContractResolver.Empty);
-				case "keyword_marker": return o.ToObject<KeywordMarkerTokenFilter>(ElasticContractResolver.Empty);
-				case "kstem": return o.ToObject<KStemTokenFilter>(ElasticContractResolver.Empty);
-				case "length": return o.ToObject<LengthTokenFilter>(ElasticContractResolver.Empty);
-				case "limit": return o.ToObject<LimitTokenCountTokenFilter>(ElasticContractResolver.Empty);
-				case "lowercase": return o.ToObject<LowercaseTokenFilter>(ElasticContractResolver.Empty);
-				case "ngram": return o.ToObject<NGramTokenFilter>(ElasticContractResolver.Empty);
-				case "pattern_capture": return o.ToObject<PatternCaptureTokenFilter>(ElasticContractResolver.Empty);
-				case "pattern_replace": return o.ToObject<PatternReplaceTokenFilter>(ElasticContractResolver.Empty);
-				case "porter_stem": return o.ToObject<PorterStemTokenFilter>(ElasticContractResolver.Empty);
-				case "phonetic": return o.ToObject<PhoneticTokenFilter>(ElasticContractResolver.Empty);
-				case "reverse": return o.ToObject<ReverseTokenFilter>(ElasticContractResolver.Empty);
-				case "shingle": return o.ToObject<ShingleTokenFilter>(ElasticContractResolver.Empty);
-				case "snowball": return o.ToObject<SnowballTokenFilter>(ElasticContractResolver.Empty);
-				case "stemmer": return o.ToObject<StemmerTokenFilter>(ElasticContractResolver.Empty);
-				case "stemmer_override": return o.ToObject<StemmerOverrideTokenFilter>(ElasticContractResolver.Empty);
-				case "stop": return o.ToObject<StopTokenFilter>(ElasticContractResolver.Empty);
-				case "synonym": return o.ToObject<SynonymTokenFilter>(ElasticContractResolver.Empty);
-				case "synonym_graph": return o.ToObject<SynonymGraphTokenFilter>(ElasticContractResolver.Empty);
-				case "trim": return o.ToObject<TrimTokenFilter>(ElasticContractResolver.Empty);
-				case "truncate": return o.ToObject<TruncateTokenFilter>(ElasticContractResolver.Empty);
-				case "unique": return o.ToObject<UniqueTokenFilter>(ElasticContractResolver.Empty);
-				case "uppercase": return o.ToObject<UppercaseTokenFilter>(ElasticContractResolver.Empty);
-				case "word_delimiter": return o.ToObject<WordDelimiterTokenFilter>(ElasticContractResolver.Empty);
-				case "word_delimiter_graph": return o.ToObject<WordDelimiterGraphTokenFilter>(ElasticContractResolver.Empty);
-				case "fingerprint": return o.ToObject<FingerprintTokenFilter>(ElasticContractResolver.Empty);
-				case "kuromoji_readingform": return o.ToObject<KuromojiReadingFormTokenFilter>(ElasticContractResolver.Empty);
-				case "kuromoji_part_of_speech": return o.ToObject<KuromojiPartOfSpeechTokenFilter>(ElasticContractResolver.Empty);
-				case "kuromoji_stemmer": return o.ToObject<KuromojiStemmerTokenFilter>(ElasticContractResolver.Empty);
-				case "icu_collation": return o.ToObject<IcuCollationTokenFilter>(ElasticContractResolver.Empty);
-				case "icu_folding": return o.ToObject<IcuFoldingTokenFilter>(ElasticContractResolver.Empty);
-				case "icu_normalizer": return o.ToObject<IcuNormalizationTokenFilter>(ElasticContractResolver.Empty);
-				case "icu_transform": return o.ToObject<IcuTransformTokenFilter>(ElasticContractResolver.Empty);
+				var propertyName = reader.ReadPropertyName();
+				switch (propertyName)
+				{
+					case "type":
+						tokenFilterType = reader.ReadString();
+						break;
+				}
 			}
-			return null;
+
+			if (tokenFilterType == null)
+				return null;
+
+			segmentReader = new JsonReader(arraySegment.Array, arraySegment.Offset);
+
+			switch (tokenFilterType)
+			{
+				case "asciifolding": return Deserialize<AsciiFoldingTokenFilter>(ref segmentReader, formatterResolver);
+				case "common_grams": return Deserialize<CommonGramsTokenFilter>(ref segmentReader, formatterResolver);
+				case "delimited_payload": return Deserialize<DelimitedPayloadTokenFilter>(ref segmentReader, formatterResolver);
+				case "dictionary_decompounder": return Deserialize<DictionaryDecompounderTokenFilter>(ref segmentReader, formatterResolver);
+				case "edge_ngram": return Deserialize<EdgeNGramTokenFilter>(ref segmentReader, formatterResolver);
+				case "elision": return Deserialize<ElisionTokenFilter>(ref segmentReader, formatterResolver);
+				case "hunspell": return Deserialize<HunspellTokenFilter>(ref segmentReader, formatterResolver);
+				case "hyphenation_decompounder": return Deserialize<HyphenationDecompounderTokenFilter>(ref segmentReader, formatterResolver);
+				case "keep_types": return Deserialize<KeepTypesTokenFilter>(ref segmentReader, formatterResolver);
+				case "keep": return Deserialize<KeepWordsTokenFilter>(ref segmentReader, formatterResolver);
+				case "keyword_marker": return Deserialize<KeywordMarkerTokenFilter>(ref segmentReader, formatterResolver);
+				case "kstem": return Deserialize<KStemTokenFilter>(ref segmentReader, formatterResolver);
+				case "length": return Deserialize<LengthTokenFilter>(ref segmentReader, formatterResolver);
+				case "limit": return Deserialize<LimitTokenCountTokenFilter>(ref segmentReader, formatterResolver);
+				case "lowercase": return Deserialize<LowercaseTokenFilter>(ref segmentReader, formatterResolver);
+				case "ngram": return Deserialize<NGramTokenFilter>(ref segmentReader, formatterResolver);
+				case "pattern_capture": return Deserialize<PatternCaptureTokenFilter>(ref segmentReader, formatterResolver);
+				case "pattern_replace": return Deserialize<PatternReplaceTokenFilter>(ref segmentReader, formatterResolver);
+				case "porter_stem": return Deserialize<PorterStemTokenFilter>(ref segmentReader, formatterResolver);
+				case "phonetic": return Deserialize<PhoneticTokenFilter>(ref segmentReader, formatterResolver);
+				case "reverse": return Deserialize<ReverseTokenFilter>(ref segmentReader, formatterResolver);
+				case "shingle": return Deserialize<ShingleTokenFilter>(ref segmentReader, formatterResolver);
+				case "snowball": return Deserialize<SnowballTokenFilter>(ref segmentReader, formatterResolver);
+				case "stemmer": return Deserialize<StemmerTokenFilter>(ref segmentReader, formatterResolver);
+				case "stemmer_override": return Deserialize<StemmerOverrideTokenFilter>(ref segmentReader, formatterResolver);
+				case "stop": return Deserialize<StopTokenFilter>(ref segmentReader, formatterResolver);
+				case "standard": return Deserialize<StandardTokenFilter>(ref segmentReader, formatterResolver);
+				case "synonym": return Deserialize<SynonymTokenFilter>(ref segmentReader, formatterResolver);
+				case "synonym_graph": return Deserialize<SynonymGraphTokenFilter>(ref segmentReader, formatterResolver);
+				case "trim": return Deserialize<TrimTokenFilter>(ref segmentReader, formatterResolver);
+				case "truncate": return Deserialize<TruncateTokenFilter>(ref segmentReader, formatterResolver);
+				case "unique": return Deserialize<UniqueTokenFilter>(ref segmentReader, formatterResolver);
+				case "uppercase": return Deserialize<UppercaseTokenFilter>(ref segmentReader, formatterResolver);
+				case "word_delimiter": return Deserialize<WordDelimiterTokenFilter>(ref segmentReader, formatterResolver);
+				case "word_delimiter_graph": return Deserialize<WordDelimiterGraphTokenFilter>(ref segmentReader, formatterResolver);
+				case "fingerprint": return Deserialize<FingerprintTokenFilter>(ref segmentReader, formatterResolver);
+				case "kuromoji_readingform": return Deserialize<KuromojiReadingFormTokenFilter>(ref segmentReader, formatterResolver);
+				case "kuromoji_part_of_speech": return Deserialize<KuromojiPartOfSpeechTokenFilter>(ref segmentReader, formatterResolver);
+				case "kuromoji_stemmer": return Deserialize<KuromojiStemmerTokenFilter>(ref segmentReader, formatterResolver);
+				case "icu_collation": return Deserialize<IcuCollationTokenFilter>(ref segmentReader, formatterResolver);
+				case "icu_folding": return Deserialize<IcuFoldingTokenFilter>(ref segmentReader, formatterResolver);
+				case "icu_normalizer": return Deserialize<IcuNormalizationTokenFilter>(ref segmentReader, formatterResolver);
+				case "icu_transform": return Deserialize<IcuTransformTokenFilter>(ref segmentReader, formatterResolver);
+				default: return null;
+			}
 		}
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
+		public void Serialize(ref JsonWriter writer, ITokenFilter value, IJsonFormatterResolver formatterResolver)
+		{
+			var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<ITokenFilter>();
+			formatter.Serialize(ref writer, value, formatterResolver);
+		}
+
+		private static TTokenFilter Deserialize<TTokenFilter>(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+			where TTokenFilter : ITokenFilter
+		{
+			var formatter = formatterResolver.GetFormatter<TTokenFilter>();
+			return formatter.Deserialize(ref reader, formatterResolver);
+		}
 	}
 }

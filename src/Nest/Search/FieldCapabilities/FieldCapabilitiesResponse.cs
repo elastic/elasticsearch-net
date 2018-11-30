@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using Elasticsearch.Net;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IFieldCapabilitiesResponse : IResponse
 	{
 		[DataMember(Name ="fields")]
@@ -17,12 +18,12 @@ namespace Nest
 		public ShardStatistics Shards { get; internal set; }
 	}
 
-	[JsonConverter(typeof(Converter))]
+	[JsonFormatter(typeof(Converter))]
 	public class FieldCapabilitiesFields : ResolvableDictionaryProxy<Field, FieldTypes>
 	{
 		internal FieldCapabilitiesFields(IConnectionConfigurationValues c, IReadOnlyDictionary<Field, FieldTypes> b) : base(c, b) { }
 
-		internal class Converter : ResolvableDictionaryJsonConverterBase<FieldCapabilitiesFields, Field, FieldTypes>
+		internal class Converter : ResolvableDictionaryFormatterBase<FieldCapabilitiesFields, Field, FieldTypes>
 		{
 			protected override FieldCapabilitiesFields Create(IConnectionSettingsValues s, Dictionary<Field, FieldTypes> d) =>
 				new FieldCapabilitiesFields(s, d);

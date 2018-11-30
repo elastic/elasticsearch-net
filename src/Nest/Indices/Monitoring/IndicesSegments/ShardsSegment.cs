@@ -1,46 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
+using Utf8Json.Resolvers;
 
 namespace Nest
 {
 	[DataContract]
-	[JsonConverter(typeof(Json))]
+	[JsonFormatter(typeof(Json))]
 	public class ShardsSegment
 	{
-		[DataMember(Name ="num_committed_segments")]
+		[DataMember(Name = "num_committed_segments")]
 		public int CommittedSegments { get; internal set; }
 
-		[DataMember(Name ="routing")]
+		[DataMember(Name = "routing")]
 		public ShardSegmentRouting Routing { get; internal set; }
 
-		[DataMember(Name ="num_search_segments")]
+		[DataMember(Name = "num_search_segments")]
 		public int SearchSegments { get; internal set; }
 
-		[JsonProperty]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, Segment>))]
+		[DataMember(Name = "segments")]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, Segment>))]
 		public IReadOnlyDictionary<string, Segment> Segments { get; internal set; } =
 			EmptyReadOnly<string, Segment>.Dictionary;
 
-		internal class Json : JsonConverterBase<ShardsSegment>
+		internal class Json : IJsonFormatter<ShardsSegment>
 		{
-			public override void WriteJson(JsonWriter writer, ShardsSegment value, JsonSerializer serializer) { }
-
-			public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
-				JsonSerializer serializer
-			)
+			public ShardsSegment Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 			{
-				if (reader.TokenType == JsonToken.StartArray)
-				{
-					var list = new List<ShardsSegment>();
-					serializer.Populate(reader, list);
-					return list.First();
-				}
+				var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<ShardsSegment>();
+				ShardsSegment segment = null;
 
-				var o = new ShardsSegment();
-				serializer.Populate(reader, o);
-				return o;
+				if (reader.GetCurrentJsonToken() == JsonToken.BeginArray)
+				{
+					var count = 0;
+					while (reader.ReadIsInArray(ref count))
+					{
+						if (count == 1)
+							segment = formatter.Deserialize(ref reader, formatterResolver);
+					}
+				}
+				else
+					segment = formatter.Deserialize(ref reader, formatterResolver);
+
+				return segment;
+			}
+
+			public void Serialize(ref JsonWriter writer, ShardsSegment value, IJsonFormatterResolver formatterResolver)
+			{
+				var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<ShardsSegment>();
+				formatter.Serialize(ref writer, value, formatterResolver);
 			}
 		}
 	}

@@ -25,6 +25,16 @@ namespace Nest
 			reader.ReadNext();
 			return null;
 		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool? ReadNullableBoolean(this ref JsonReader reader)
+		{
+			if (reader.GetCurrentJsonToken() != JsonToken.Null)
+				return reader.ReadBoolean();
+
+			reader.ReadNext();
+			return null;
+		}
 	}
 
 	internal static class ArraySegmentBytesExtensions

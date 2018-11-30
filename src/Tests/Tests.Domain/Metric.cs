@@ -1,7 +1,6 @@
 using System;
 using Nest;
-using System.Runtime.Serialization;
-
+using Utf8Json;
 
 namespace Tests.Domain
 {
@@ -19,7 +18,7 @@ namespace Tests.Domain
 
 		[Date(Name = "@timestamp")]
 		[MachineLearningDateTime]
-		[JsonConverter(typeof(MachineLearningDateTimeConverter))]
+		[JsonFormatter(typeof(MachineLearningDateTimeFormatter))]
 		public DateTime Timestamp { get; set; }
 
 		public long Total { get; set; }
@@ -27,25 +26,31 @@ namespace Tests.Domain
 
 	// Required as PreviewDatafeed API returns Timestamp values as epoch milliseconds, irrespective
 	// of the format in which it was originally indexed.
-	internal class MachineLearningDateTimeConverter : IsoDateTimeConverter
+	internal class MachineLearningDateTimeFormatter : IJsonFormatter<DateTime>
 	{
 		private static readonly DateTimeOffset Epoch = new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero);
 
-		public override bool CanWrite => false;
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public DateTime Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (reader.TokenType != JsonToken.Integer) return base.ReadJson(reader, objectType, existingValue, serializer);
+			var token = reader.GetCurrentJsonToken();
 
-			var millisecondsSinceEpoch = Convert.ToDouble(reader.Value);
-			var dateTimeOffset = Epoch.AddMilliseconds(millisecondsSinceEpoch);
+			if (token == JsonToken.String)
+			{
+				var formatter = formatterResolver.GetFormatter<DateTime>();
+				return formatter.Deserialize(ref reader, formatterResolver);
+			}
+			if (token == JsonToken.Null) return default;
 
-			if (objectType == typeof(DateTimeOffset) || objectType == typeof(DateTimeOffset?))
-				return dateTimeOffset;
+			if (token == JsonToken.Number)
+			{
+				var millisecondsSinceEpoch = reader.ReadDouble();
+				var dateTimeOffset = Epoch.AddMilliseconds(millisecondsSinceEpoch);
+				return dateTimeOffset.DateTime;
+			}
 
-			return dateTimeOffset.DateTime;
+			throw new Exception($"Cannot deserialize {nameof(DateTimeOffset)} from token {token}");
 		}
+
+		public void Serialize(ref JsonWriter writer, DateTime value, IJsonFormatterResolver formatterResolver) => throw new NotSupportedException();
 	}
 }

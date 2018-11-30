@@ -3,10 +3,11 @@ using System.ComponentModel;
 using System.IO;
 using Elasticsearch.Net;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IRequest
 	{
 		HttpMethod HttpMethod { get; }

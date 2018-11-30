@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -26,7 +27,6 @@ namespace Nest
 		/// A list of stop words to use. Defaults to `_english_` stop words.
 		/// </summary>
 		[DataMember(Name ="stopwords")]
-		[JsonConverter(typeof(StopWordsJsonConverter))]
 		StopWords StopWords { get; set; }
 
 		/// <summary>

@@ -3,12 +3,10 @@ using System.Globalization;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using Elasticsearch.Net;
-using System.Runtime.Serialization;
-
+using Utf8Json;
 
 namespace Nest
 {
-
 	public enum IntervalUnit
 	{
 		[EnumMember(Value = "s")]
@@ -27,7 +25,7 @@ namespace Nest
 		Week,
 	}
 
-	[JsonConverter(typeof(IntervalJsonConverter))]
+	[JsonFormatter(typeof(IntervalFormatter))]
 	public class Interval : ScheduleBase, IComparable<Interval>, IEquatable<Interval>
 	{
 		private const long DaySeconds = 86400;
@@ -192,30 +190,27 @@ namespace Nest
 		}
 	}
 
-	internal class IntervalJsonConverter : JsonConverter
+	internal class IntervalFormatter : IJsonFormatter<Interval>
 	{
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public Interval Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var v = (Interval)value;
-			if (v.Unit.HasValue) writer.WriteValue(v.ToString());
-			else writer.WriteValue(v.Factor);
-		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			switch (reader.TokenType)
+			var token = reader.GetCurrentJsonToken();
+			switch (token)
 			{
 				case JsonToken.String:
-					return new Interval((string)reader.Value);
-				case JsonToken.Integer:
-				case JsonToken.Float:
-					var seconds = Convert.ToInt64(reader.Value);
+					return new Interval(reader.ReadString());
+				case JsonToken.Number:
+					var seconds = Convert.ToInt64(reader.ReadDouble());
 					return new Interval(seconds);
 			}
 
 			return null;
 		}
 
-		public override bool CanConvert(Type objectType) => true;
+		public void Serialize(ref JsonWriter writer, Interval value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value.Unit.HasValue) writer.WriteString(value.ToString());
+			else writer.WriteInt64(value.Factor);
+		}
 	}
 }
