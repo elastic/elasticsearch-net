@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IReindexRethrottleResponse : IResponse
 	{
 		[DataMember(Name ="nodes")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, ReindexNode>))]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, ReindexNode>))]
 		IReadOnlyDictionary<string, ReindexNode> Nodes { get; }
 	}
 

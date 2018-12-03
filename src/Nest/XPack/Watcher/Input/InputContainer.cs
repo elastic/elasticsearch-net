@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[JsonConverter(typeof(ReserializeJsonConverter<InputContainer, IInputContainer>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(InputContainer))]
 	public interface IInputContainer
 	{
 		[DataMember(Name ="chain")]

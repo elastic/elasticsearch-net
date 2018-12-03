@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[ReadAs(typeof(BoolQuery))]
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(BoolQuery))]
 	public interface IBoolQuery : IQuery
 	{

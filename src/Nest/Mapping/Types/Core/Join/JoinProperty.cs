@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IJoinProperty : IProperty
 	{
 		/// <summary>
 		/// Should the field be searchable? Accepts true (default) and false.
 		/// </summary>
-		[DataMember(Name ="relations")]
+		[DataMember(Name = "relations")]
 		IRelations Relations { get; set; }
 	}
 

@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
-using Elasticsearch.Net;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface ICancelTasksResponse : IResponse
 	{
-		[DataMember(Name ="node_failures")]
+		[DataMember(Name = "node_failures")]
 		IReadOnlyCollection<ErrorCause> NodeFailures { get; }
 
-		[DataMember(Name ="nodes")]
+		[DataMember(Name = "nodes")]
 		IReadOnlyDictionary<string, TaskExecutingNode> Nodes { get; }
 	}
 

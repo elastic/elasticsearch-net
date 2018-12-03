@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	public interface INodesStatsResponse : INodesResponse
 	{
-		[DataMember(Name ="cluster_name")]
+		[DataMember(Name = "cluster_name")]
 		string ClusterName { get; }
 
-		[DataMember(Name ="nodes")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, NodeStats>))]
+		[DataMember(Name = "nodes")]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, NodeStats>))]
 		IReadOnlyDictionary<string, NodeStats> Nodes { get; }
 	}
 

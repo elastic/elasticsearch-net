@@ -1,22 +1,23 @@
 using System;
 using System.Diagnostics;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IBooleanProperty : IDocValuesProperty
 	{
-		[DataMember(Name ="boost")]
+		[DataMember(Name = "boost")]
 		double? Boost { get; set; }
 
-		[DataMember(Name ="fielddata")]
+		[DataMember(Name = "fielddata")]
 		INumericFielddata Fielddata { get; set; }
 
-		[DataMember(Name ="index")]
+		[DataMember(Name = "index")]
 		bool? Index { get; set; }
 
-		[DataMember(Name ="null_value")]
+		[DataMember(Name = "null_value")]
 		bool? NullValue { get; set; }
 	}
 

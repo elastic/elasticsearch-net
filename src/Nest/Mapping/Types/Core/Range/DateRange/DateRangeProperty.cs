@@ -1,11 +1,12 @@
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// A range of date values represented as unsigned 64-bit integer milliseconds elapsed since system epoch.
 	/// </summary>
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IDateRangeProperty : IRangeProperty
 	{
 		/// <summary>

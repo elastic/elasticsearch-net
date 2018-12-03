@@ -3,83 +3,102 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using Newtonsoft.Json.Linq;
+using Utf8Json;
+using Utf8Json.Resolvers;
 
 namespace Nest
 {
-	internal class GetRepositoryResponseJsonConverter : JsonConverter
+	internal class GetRepositoryResponseFormatter : IJsonFormatter<IGetRepositoryResponse>
 	{
-		public override bool CanConvert(Type objectType) => true;
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => serializer.Serialize(writer, value);
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			var response = new GetRepositoryResponse();
-			var repositories = JObject.Load(reader)
-				.Properties()
-				.Where(p => p.Name != "error" && p.Name != "status")
-				.ToDictionary(p => p.Name, p => p.Value);
-			if (!repositories.HasAny())
-				return response;
-
-			var d = new Dictionary<string, ISnapshotRepository>();
-			foreach (var kv in repositories)
-			{
-				var repository = JObject.FromObject(kv.Value);
-				var type = repository.Properties().Where(p => p.Name == "type").SingleOrDefault();
-				if (type == null) continue;
-
-				var typeName = type.Value.ToString();
-				var settings = GetSetingsJObject(repository);
-				if (typeName == "fs")
-				{
-					var fs = GetRepository<FileSystemRepository, FileSystemRepositorySettings>(settings);
-					d.Add(kv.Key, fs);
-				}
-				else if (typeName == "url")
-				{
-					var url = GetRepository<ReadOnlyUrlRepository, ReadOnlyUrlRepositorySettings>(settings);
-					d.Add(kv.Key, url);
-				}
-				else if (typeName == "azure")
-				{
-					var azure = GetRepository<AzureRepository, AzureRepositorySettings>(settings);
-					d.Add(kv.Key, azure);
-				}
-				else if (typeName == "s3")
-				{
-					var s3 = GetRepository<S3Repository, S3RepositorySettings>(settings);
-					d.Add(kv.Key, s3);
-				}
-				else if (typeName == "hdfs")
-				{
-					var hdfs = GetRepository<HdfsRepository, HdfsRepositorySettings>(settings);
-					d.Add(kv.Key, hdfs);
-				}
-			}
-			response.Repositories = d;
-			return response;
-		}
-
-		private TRepository GetRepository<TRepository, TSettings>(JObject settings)
+		private TRepository GetRepository<TRepository, TSettings>(ArraySegment<byte> settings, IJsonFormatterResolver formatterResolver)
 			where TRepository : ISnapshotRepository
 			where TSettings : IRepositorySettings
 		{
-			if (settings == null)
+			if (settings == default)
 				return (TRepository)typeof(TRepository).CreateInstance();
 
-			return (TRepository)typeof(TRepository).CreateInstance(settings.ToObject<TSettings>());
+			var formatter = formatterResolver.GetFormatter<TSettings>();
+
+			var reader = new JsonReader(settings.Array, settings.Offset);
+			var resolvedSettings = formatter.Deserialize(ref reader, formatterResolver);
+
+			return (TRepository)typeof(TRepository).CreateInstance(resolvedSettings);
 		}
 
-		private JObject GetSetingsJObject(JObject repository)
+		public void Serialize(ref JsonWriter writer, IGetRepositoryResponse value, IJsonFormatterResolver formatterResolver)
 		{
-			var settings = JObject.FromObject(repository)
-				.Properties()
-				.Where(p => p.Name == "settings")
-				.SingleOrDefault();
-			if (settings == null) return null;
+			var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IGetRepositoryResponse>();
+			formatter.Serialize(ref writer, value, formatterResolver);
+		}
 
-			return JObject.FromObject(settings.Value);
+		public IGetRepositoryResponse Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			var response = new GetRepositoryResponse();
+
+			var segment = DictionaryResponseFormatterHelpers
+				.ReadServerErrorFirst(ref reader, formatterResolver, out var error, out var statusCode);
+
+			response.Error = error;
+			response.StatusCode = statusCode;
+
+			var segmentReader = new JsonReader(segment.Array, segment.Offset);
+			var count = 0;
+			var d = new Dictionary<string, ISnapshotRepository>();
+
+			while (segmentReader.ReadIsInObject(ref count))
+			{
+				var name = segmentReader.ReadPropertyName();
+				if (name == "error" || name == "status")
+					continue;
+
+				var snapshotSegment = reader.ReadNextBlockSegment();
+				var snapshotSegmentReader = new JsonReader(snapshotSegment.Array, snapshotSegment.Offset);
+				var segmentCount = 0;
+
+				string repositoryType = null;
+				ArraySegment<byte> settings;
+
+				while (snapshotSegmentReader.ReadIsInObject(ref segmentCount))
+				{
+					var propertyName = snapshotSegmentReader.ReadPropertyName();
+					switch (propertyName)
+					{
+						case "type":
+							repositoryType = snapshotSegmentReader.ReadString();
+							break;
+						case "settings":
+							settings = snapshotSegmentReader.ReadNextBlockSegment();
+							break;
+					}
+				}
+
+				switch (repositoryType)
+				{
+					case "fs":
+						var fs = GetRepository<FileSystemRepository, FileSystemRepositorySettings>(settings, formatterResolver);
+						d.Add(name, fs);
+						break;
+					case "url":
+						var url = GetRepository<ReadOnlyUrlRepository, ReadOnlyUrlRepositorySettings>(settings, formatterResolver);
+						d.Add(name, url);
+						break;
+					case "azure":
+						var azure = GetRepository<AzureRepository, AzureRepositorySettings>(settings, formatterResolver);
+						d.Add(name, azure);
+						break;
+					case "s3":
+						var s3 = GetRepository<S3Repository, S3RepositorySettings>(settings, formatterResolver);
+						d.Add(name, s3);
+						break;
+					case "hdfs":
+						var hdfs = GetRepository<HdfsRepository, HdfsRepositorySettings>(settings, formatterResolver);
+						d.Add(name, hdfs);
+						break;
+				}
+			}
+
+			response.Repositories = d;
+			return response;
 		}
 	}
 }

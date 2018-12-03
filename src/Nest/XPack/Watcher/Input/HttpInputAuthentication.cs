@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -38,7 +39,7 @@ namespace Nest
 	/// <summary>
 	/// Basic Authentication credentials
 	/// </summary>
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(HttpInputBasicAuthentication))]
 	public interface IHttpInputBasicAuthentication
 	{

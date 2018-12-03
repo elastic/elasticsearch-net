@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[ContractJsonConverter(typeof(ScoreFunctionJsonConverter))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(ScoreFunctionJsonConverter))]
 	public interface IScoreFunction
 	{
 		[DataMember(Name ="filter")]

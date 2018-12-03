@@ -1,81 +1,80 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization;
-
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IClusterAllocationExplainResponse : IResponse
 	{
-		[DataMember(Name ="allocate_explanation")]
+		[DataMember(Name = "allocate_explanation")]
 		string AllocateExplanation { get; }
 
-		[DataMember(Name ="allocation_delay")]
+		[DataMember(Name = "allocation_delay")]
 		string AllocationDelay { get; }
 
-		[DataMember(Name ="allocation_delay_in_millis")]
+		[DataMember(Name = "allocation_delay_in_millis")]
 		long AllocationDelayInMilliseconds { get; }
 
-		[DataMember(Name ="can_allocate")]
+		[DataMember(Name = "can_allocate")]
 		Decision? CanAllocate { get; }
 
-		[DataMember(Name ="can_move_to_other_node")]
+		[DataMember(Name = "can_move_to_other_node")]
 		Decision? CanMoveToOtherNode { get; }
 
-		[DataMember(Name ="can_rebalance_cluster")]
+		[DataMember(Name = "can_rebalance_cluster")]
 		Decision? CanRebalanceCluster { get; }
 
-		[DataMember(Name ="can_rebalance_cluster_decisions")]
+		[DataMember(Name = "can_rebalance_cluster_decisions")]
 		IReadOnlyCollection<AllocationDecision> CanRebalanceClusterDecisions { get; }
 
-		[DataMember(Name ="can_rebalance_to_other_node")]
+		[DataMember(Name = "can_rebalance_to_other_node")]
 		Decision? CanRebalanceToOtherNode { get; }
 
-		[DataMember(Name ="can_remain_decisions")]
+		[DataMember(Name = "can_remain_decisions")]
 		IReadOnlyCollection<AllocationDecision> CanRemainDecisions { get; }
 
-		[DataMember(Name ="can_remain_on_current_node")]
+		[DataMember(Name = "can_remain_on_current_node")]
 		Decision? CanRemainOnCurrentNode { get; }
 
-		[DataMember(Name ="configured_delay")]
+		[DataMember(Name = "configured_delay")]
 		string ConfiguredDelay { get; }
 
-		[DataMember(Name ="configured_delay_in_mills")]
+		[DataMember(Name = "configured_delay_in_mills")]
 		long ConfiguredDelayInMilliseconds { get; }
 
-		[DataMember(Name ="current_node")]
+		[DataMember(Name = "current_node")]
 		CurrentNode CurrentNode { get; }
 
-		[DataMember(Name ="current_state")]
+		[DataMember(Name = "current_state")]
 		string CurrentState { get; }
 
-		[DataMember(Name ="index")]
+		[DataMember(Name = "index")]
 		string Index { get; }
 
-		[DataMember(Name ="move_explanation")]
+		[DataMember(Name = "move_explanation")]
 		string MoveExplanation { get; }
 
-		[DataMember(Name ="node_allocation_decisions")]
+		[DataMember(Name = "node_allocation_decisions")]
 		IReadOnlyCollection<NodeAllocationExplanation> NodeAllocationDecisions { get; }
 
-		[DataMember(Name ="primary")]
+		[DataMember(Name = "primary")]
 		bool Primary { get; }
 
-		[DataMember(Name ="rebalance_explanation")]
+		[DataMember(Name = "rebalance_explanation")]
 		string RebalanceExplanation { get; }
 
-		[DataMember(Name ="remaining_delay")]
+		[DataMember(Name = "remaining_delay")]
 		string RemainingDelay { get; }
 
-		[DataMember(Name ="remaining_delay_in_millis")]
+		[DataMember(Name = "remaining_delay_in_millis")]
 		long RemainingDelayInMilliseconds { get; }
 
-		[DataMember(Name ="shard")]
+		[DataMember(Name = "shard")]
 		int Shard { get; }
 
-		[DataMember(Name ="unassigned_info")]
+		[DataMember(Name = "unassigned_info")]
 		UnassignedInformation UnassignedInformation { get; }
 	}
 
@@ -131,19 +130,19 @@ namespace Nest
 	[DataContract]
 	public class CurrentNode
 	{
-		[DataMember(Name ="id")]
+		[DataMember(Name = "id")]
 		public string Id { get; internal set; }
 
-		[DataMember(Name ="name")]
+		[DataMember(Name = "name")]
 		public string Name { get; internal set; }
 
-		[DataMember(Name ="attributes")]
+		[DataMember(Name = "attributes")]
 		public IReadOnlyDictionary<string, string> NodeAttributes { get; set; } = EmptyReadOnly<string, string>.Dictionary;
 
-		[DataMember(Name ="transport_address")]
+		[DataMember(Name = "transport_address")]
 		public string TransportAddress { get; internal set; }
 
-		[DataMember(Name ="weight_ranking")]
+		[DataMember(Name = "weight_ranking")]
 		public string WeightRanking { get; internal set; }
 	}
 
@@ -166,28 +165,28 @@ namespace Nest
 	[DataContract]
 	public class NodeAllocationExplanation
 	{
-		[DataMember(Name ="deciders")]
+		[DataMember(Name = "deciders")]
 		public IReadOnlyCollection<AllocationDecision> Deciders { get; set; } = EmptyReadOnly<AllocationDecision>.Collection;
 
-		[DataMember(Name ="node_attributes")]
+		[DataMember(Name = "node_attributes")]
 		public IReadOnlyDictionary<string, string> NodeAttributes { get; set; } = EmptyReadOnly<string, string>.Dictionary;
 
-		[DataMember(Name ="node_decision")]
+		[DataMember(Name = "node_decision")]
 		public Decision? NodeDecision { get; set; }
 
-		[DataMember(Name ="node_id")]
+		[DataMember(Name = "node_id")]
 		public string NodeId { get; set; }
 
-		[DataMember(Name ="node_name")]
+		[DataMember(Name = "node_name")]
 		public string NodeName { get; set; }
 
-		[DataMember(Name ="store")]
+		[DataMember(Name = "store")]
 		public AllocationStore Store { get; set; }
 
-		[DataMember(Name ="transport_address")]
+		[DataMember(Name = "transport_address")]
 		public string TransportAddress { get; set; }
 
-		[DataMember(Name ="weight_ranking")]
+		[DataMember(Name = "weight_ranking")]
 		public int? WeightRanking { get; set; }
 	}
 
@@ -244,62 +243,62 @@ namespace Nest
 	[DataContract]
 	public class AllocationStore
 	{
-		[DataMember(Name ="allocation_id")]
+		[DataMember(Name = "allocation_id")]
 		public string AllocationId { get; set; }
 
-		[DataMember(Name ="found")]
+		[DataMember(Name = "found")]
 		public bool? Found { get; set; }
 
-		[DataMember(Name ="in_sync")]
+		[DataMember(Name = "in_sync")]
 		public bool? InSync { get; set; }
 
-		[DataMember(Name ="matching_size_in_bytes")]
+		[DataMember(Name = "matching_size_in_bytes")]
 		public long? MatchingSizeInBytes { get; set; }
 
-		[DataMember(Name ="matching_sync_id")]
+		[DataMember(Name = "matching_sync_id")]
 		public bool? MatchingSyncId { get; set; }
 
-		[DataMember(Name ="store_exception")]
+		[DataMember(Name = "store_exception")]
 		public string StoreException { get; set; }
 	}
 
 	[DataContract]
 	public class AllocationDecision
 	{
-		[DataMember(Name ="decider")]
+		[DataMember(Name = "decider")]
 		public string Decider { get; set; }
 
-		[DataMember(Name ="decision")]
+		[DataMember(Name = "decision")]
 		public AllocationExplainDecision Decision { get; set; }
 
-		[DataMember(Name ="explanation")]
+		[DataMember(Name = "explanation")]
 		public string Explanation { get; set; }
 	}
 
 	public class UnassignedInformation
 	{
-		[DataMember(Name ="at")]
+		[DataMember(Name = "at")]
 		public DateTime At { get; set; }
 
-		[DataMember(Name ="last_allocation_status")]
+		[DataMember(Name = "last_allocation_status")]
 		public string LastAllocationStatus { get; set; }
 
-		[DataMember(Name ="reason")]
+		[DataMember(Name = "reason")]
 		public UnassignedInformationReason Reason { get; set; }
 	}
 
 	public class ShardAllocationExplanation
 	{
-		[DataMember(Name ="id")]
+		[DataMember(Name = "id")]
 		public int Id { get; set; }
 
-		[DataMember(Name ="index")]
+		[DataMember(Name = "index")]
 		public IndexName Index { get; set; }
 
-		[DataMember(Name ="index_uuid")]
+		[DataMember(Name = "index_uuid")]
 		public string IndexUniqueId { get; set; }
 
-		[DataMember(Name ="primary")]
+		[DataMember(Name = "primary")]
 		public bool Primary { get; set; }
 	}
 

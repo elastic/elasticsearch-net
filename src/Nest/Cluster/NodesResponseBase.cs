@@ -9,20 +9,20 @@ namespace Nest
 
 	public interface INodesResponse : IResponse
 	{
-		[DataMember(Name ="_nodes")]
+		[DataMember(Name = "_nodes")]
 		NodeStatistics NodeStatistics { get; }
 	}
 
 	[DataContract]
 	public class NodeStatistics
 	{
-		[JsonProperty]
+		[DataMember(Name = "failed")]
 		public int Failed { get; internal set; }
 
-		[JsonProperty]
+		[DataMember(Name = "successful")]
 		public int Successful { get; internal set; }
 
-		[JsonProperty]
+		[DataMember(Name = "total")]
 		public int Total { get; internal set; }
 
 		//TODO map failures

@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IVerifyRepositoryResponse : IResponse
 	{
 		/// <summary>
 		///  A dictionary of nodeId => nodeinfo of nodes that verified the repository
 		/// </summary>
-		[DataMember(Name ="nodes")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, CompactNodeInfo>))]
+		[DataMember(Name = "nodes")]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, CompactNodeInfo>))]
 		IReadOnlyDictionary<string, CompactNodeInfo> Nodes { get; }
 	}
 

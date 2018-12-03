@@ -8,7 +8,7 @@ using Utf8Json;
 namespace Nest
 {
 	[InterfaceDataContract]
-	[JsonFormatter(typeof(ScheduleJsonConverter<IYearlySchedule, YearlySchedule, ITimeOfYear>))]
+	[JsonFormatter(typeof(ScheduleFormatter<IYearlySchedule, YearlySchedule, ITimeOfYear>))]
 	public interface IYearlySchedule : ISchedule, IEnumerable<ITimeOfYear> { }
 
 	public class YearlySchedule : ScheduleBase, IYearlySchedule

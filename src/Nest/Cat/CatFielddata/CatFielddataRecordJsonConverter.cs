@@ -1,50 +1,60 @@
 ﻿using System;
-using System.Runtime.Serialization;
+using Utf8Json;
+using Utf8Json.Internal;
 
 namespace Nest
 {
-	internal class CatFielddataRecordJsonConverter : JsonConverter
+	internal class CatFielddataRecordFormatter : IJsonFormatter<CatFielddataRecord>
 	{
-		public override bool CanWrite => false;
+		private static readonly AutomataDictionary AutomataDictionary = new AutomataDictionary
+		{
+			{ "id", 0 },
+			{ "node", 1 },
+			{ "n", 1 },
+			{ "host", 2 },
+			{ "ip", 3 },
+			{ "field", 4 },
+			{ "size", 5 }
+		};
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
-			JsonSerializer serializer
-		)
+		public CatFielddataRecord Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var record = new CatFielddataRecord();
-			while (reader.Read())
-			{
-				var prop = reader.Value as string;
-				if (prop == null) return record;
+			var count = 0;
 
-				switch (prop)
+			while (reader.ReadIsInObject(ref count))
+			{
+				var property = reader.ReadPropertyNameSegmentRaw();
+				if (AutomataDictionary.TryGetValue(property, out var value))
 				{
-					case "id":
-						record.Id = reader.ReadAsString();
-						continue;
-					case "node":
-					case "n":
-						record.Node = reader.ReadAsString();
-						continue;
-					case "host":
-						record.Host = reader.ReadAsString();
-						continue;
-					case "ip":
-						record.Ip = reader.ReadAsString();
-						continue;
-					case "field":
-						record.Field = reader.ReadAsString();
-						continue;
-					case "size":
-						record.Size = reader.ReadAsString();
-						continue;
+					switch (value)
+					{
+						case 0:
+							record.Id = reader.ReadString();
+							break;
+						case 1:
+							record.Node = reader.ReadString();
+							break;
+						case 2:
+							record.Host = reader.ReadString();
+							break;
+						case 3:
+							record.Ip = reader.ReadString();
+							break;
+						case 4:
+							record.Field = reader.ReadString();
+							break;
+						case 5:
+							record.Size = reader.ReadString();
+							break;
+					}
 				}
 			}
+
 			return record;
 		}
 
-		public override bool CanConvert(Type objectType) => objectType == typeof(CatFielddataRecord);
+		public void Serialize(ref JsonWriter writer, CatFielddataRecord value, IJsonFormatterResolver formatterResolver) =>
+			throw new NotSupportedException();
 	}
 }

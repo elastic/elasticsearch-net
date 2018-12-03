@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	///  input to load data from multiple sources into the watch execution context when the watch is triggered.
 	/// </summary>
-	[DataContract]
-	[JsonConverter(typeof(ChainInputJsonConverter))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(ChainInputFormatter))]
 	public interface IChainInput : IInput
 	{
 		/// <summary>
@@ -52,60 +52,64 @@ namespace Nest
 		}
 	}
 
-	internal class ChainInputJsonConverter : JsonConverter
+	internal class ChainInputFormatter : IJsonFormatter<IChainInput>
 	{
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public IChainInput Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var chainInput = value as IChainInput;
-			if (chainInput?.Inputs == null) return;
-
-			writer.WriteStartObject();
-			writer.WritePropertyName("inputs");
-			writer.WriteStartArray();
-			foreach (var input in chainInput.Inputs)
-			{
-				writer.WriteStartObject();
-				writer.WritePropertyName(input.Key);
-				serializer.Serialize(writer, input.Value);
-				writer.WriteEndObject();
-			}
-			writer.WriteEndArray();
-			writer.WriteEndObject();
-		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			if (reader.TokenType != JsonToken.StartObject) return null;
+			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject) return null;
 
 			// inputs property
-			reader.Read();
+			reader.ReadNext();
 
-			// opening array
-			reader.Read();
+			// property separator
+			reader.ReadNext();
 
+			var count = 0;
 			var inputs = new Dictionary<string, InputContainer>();
-			while (reader.Read())
+			while (reader.ReadIsInArray(ref count))
 			{
-				if (reader.TokenType == JsonToken.StartObject)
+				var token = reader.GetCurrentJsonToken();
+				if (token == JsonToken.BeginObject)
 				{
-					reader.Read();
-					var name = (string)reader.Value;
-					reader.Read();
-					var input = (InputContainer)serializer.Deserialize<IInputContainer>(reader);
+					reader.ReadNext();
+					var name = reader.ReadPropertyName();
+
+					var inputContainerFormatter = formatterResolver.GetFormatter<InputContainer>();
+					var input = inputContainerFormatter.Deserialize(ref reader, formatterResolver);
 
 					inputs.Add(name, input);
-					reader.Read();
-				}
-				else if (reader.TokenType == JsonToken.EndArray)
-				{
-					reader.Read();
-					break;
 				}
 			}
 
 			return new ChainInput(inputs);
 		}
 
-		public override bool CanConvert(Type objectType) => true;
+		public void Serialize(ref JsonWriter writer, IChainInput value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value?.Inputs == null)
+				return;
+
+			writer.WriteBeginObject();
+			writer.WritePropertyName("inputs");
+			writer.WriteBeginArray();
+
+			var count = 0;
+
+			foreach (var input in value.Inputs)
+			{
+				if (count > 0)
+					writer.WriteValueSeparator();
+
+				writer.WriteBeginObject();
+				writer.WritePropertyName(input.Key);
+				var inputContainerFormatter = formatterResolver.GetFormatter<IInputContainer>();
+				inputContainerFormatter.Serialize(ref writer, input.Value, formatterResolver);
+				writer.WriteEndObject();
+
+				count++;
+			}
+			writer.WriteEndArray();
+			writer.WriteEndObject();
+		}
 	}
 }

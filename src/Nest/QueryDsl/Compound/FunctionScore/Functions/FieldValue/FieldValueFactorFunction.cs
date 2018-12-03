@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IFieldValueFactorFunction : IScoreFunction
 	{
 		[DataMember(Name ="factor")]
@@ -18,7 +19,6 @@ namespace Nest
 		double? Missing { get; set; }
 
 		[DataMember(Name ="modifier")]
-
 		FieldValueFactorModifier? Modifier { get; set; }
 	}
 

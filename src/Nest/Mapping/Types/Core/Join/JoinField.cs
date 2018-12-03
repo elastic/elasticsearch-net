@@ -12,7 +12,6 @@ namespace Nest
 	/// <summary>
 	/// The field on which a parent-child relationship is joined
 	/// </summary>
-	[ContractJsonConverter(typeof(JoinFieldJsonConverter))]
 	[JsonFormatter(typeof(JoinFieldFormatter))]
 	public class JoinField
 	{

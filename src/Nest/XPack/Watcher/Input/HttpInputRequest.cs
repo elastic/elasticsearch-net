@@ -1,25 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<HttpInputRequest>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(HttpInputRequest))]
 	public interface IHttpInputRequest
 	{
 		/// <summary>
 		/// Authentication related HTTP headers.
 		/// </summary>
-		[DataMember(Name ="auth")]
+		[DataMember(Name = "auth")]
 		IHttpInputAuthentication Authentication { get; set; }
 
 		/// <summary>
 		/// The HTTP request body.
 		/// The body can be static text or include mustache templates.
 		/// </summary>
-		[DataMember(Name ="body")]
+		[DataMember(Name = "body")]
 		string Body { get; set; }
 
 		/// <summary>
@@ -27,53 +27,53 @@ namespace Nest
 		/// If the connection could not be set up within this time,
 		/// the input will timeout and fail.
 		/// </summary>
-		[DataMember(Name ="connection_timeout")]
+		[DataMember(Name = "connection_timeout")]
 		Time ConnectionTimeout { get; set; }
 
 		/// <summary>
 		/// The HTTP request headers.
 		/// The header values can be static text or include mustache templates.
 		/// </summary>
-		[DataMember(Name ="headers")]
+		[DataMember(Name = "headers")]
 		IDictionary<string, string> Headers { get; set; }
 
 		/// <summary>
 		/// The host to connect to. This is required
 		/// </summary>
-		[DataMember(Name ="host")]
+		[DataMember(Name = "host")]
 		string Host { get; set; }
 
 		/// <summary>
 		/// The HTTP method. Defaults to <see cref="HttpInputMethod.Get" />
 		/// </summary>
-		[DataMember(Name ="method")]
+		[DataMember(Name = "method")]
 		HttpInputMethod? Method { get; set; }
 
 		/// <summary>
 		/// The url query string parameters.
 		/// The parameter values can be static text or contain mustache templates.
 		/// </summary>
-		[DataMember(Name ="params")]
+		[DataMember(Name = "params")]
 		IDictionary<string, string> Params { get; set; }
 
 		/// <summary>
 		/// The url path. The path can be static text or contain mustache templates.
 		/// Url query string parameters must be specified with <see cref="Params" />
 		/// </summary>
-		[DataMember(Name ="path")]
+		[DataMember(Name = "path")]
 		string Path { get; set; }
 
 		/// <summary>
 		/// The port that the http service is listening on.
 		/// This is required
 		/// </summary>
-		[DataMember(Name ="port")]
+		[DataMember(Name = "port")]
 		int? Port { get; set; }
 
 		/// <summary>
 		/// The proxy to use when connecting to the host.
 		/// </summary>
-		[DataMember(Name ="proxy")]
+		[DataMember(Name = "proxy")]
 		IHttpInputProxy Proxy { get; set; }
 
 		/// <summary>
@@ -81,13 +81,13 @@ namespace Nest
 		/// If no response was received within this time,
 		/// the input will timeout and fail.
 		/// </summary>
-		[DataMember(Name ="read_timeout")]
+		[DataMember(Name = "read_timeout")]
 		Time ReadTimeout { get; set; }
 
 		/// <summary>
 		/// The url scheme
 		/// </summary>
-		[DataMember(Name ="scheme")]
+		[DataMember(Name = "scheme")]
 
 		ConnectionScheme? Scheme { get; set; }
 
@@ -97,7 +97,7 @@ namespace Nest
 		/// <see cref="Port" /> and <see cref="Params" />.
 		/// As if parameters are set, specifying them individually might overwrite them.
 		/// </summary>
-		[DataMember(Name ="url")]
+		[DataMember(Name = "url")]
 		string Url { get; set; }
 	}
 

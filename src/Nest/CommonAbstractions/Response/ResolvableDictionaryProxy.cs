@@ -81,7 +81,7 @@ namespace Nest
 	{
 		public TResponse Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var arraySegment = DictionaryResponseJsonConverterHelpers
+			var arraySegment = DictionaryResponseFormatterHelpers
 				.ReadServerErrorFirst(ref reader, formatterResolver, out var error, out var statusCode);
 
 			var response = new TResponse();

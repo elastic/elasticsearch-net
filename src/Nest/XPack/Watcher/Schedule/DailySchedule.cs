@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(TimeOfDay))]
 	public interface ITimeOfDay
 	{
@@ -35,7 +36,7 @@ namespace Nest
 		public TimeOfDayDescriptor Minute(params int[] minutes) => Assign(a => a.Minute = minutes);
 	}
 
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IDailySchedule : ISchedule
 	{
 		[DataMember(Name ="at")]

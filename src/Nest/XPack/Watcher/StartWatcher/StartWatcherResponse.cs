@@ -1,8 +1,9 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IStartWatcherResponse : IAcknowledgedResponse { }
 
 	public class StartWatcherResponse : AcknowledgedResponseBase, IStartWatcherResponse { }

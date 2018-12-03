@@ -1,9 +1,10 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	[DataContract]
-	[JsonConverter(typeof(CatFielddataRecordJsonConverter))]
+	[JsonFormatter(typeof(CatFielddataRecordFormatter))]
 	public class CatFielddataRecord : ICatRecord
 	{
 		public string Field { get; set; }

@@ -1,32 +1,33 @@
 using System;
 using System.Diagnostics;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// A object datatype mapping for an inner object
 	/// </summary>
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IObjectProperty : ICoreProperty
 	{
 		/// <summary>
 		/// Whether or not new properties should be added dynamically to an existing object.
 		/// Default is <c>true</c>
 		/// </summary>
-		[DataMember(Name ="dynamic")]
+		[DataMember(Name = "dynamic")]
 		Union<bool, DynamicMapping> Dynamic { get; set; }
 
 		/// <summary>
 		/// Whether the JSON value given for this field should be parsed and indexed. Default is <c>true</c>
 		/// </summary>
-		[DataMember(Name ="enabled")]
+		[DataMember(Name = "enabled")]
 		bool? Enabled { get; set; }
 
 		/// <summary>
 		/// The fields within the object
 		/// </summary>
-		[DataMember(Name ="properties", TypeNameHandling = TypeNameHandling.None)]
+		[DataMember(Name = "properties")]
 		IProperties Properties { get; set; }
 	}
 

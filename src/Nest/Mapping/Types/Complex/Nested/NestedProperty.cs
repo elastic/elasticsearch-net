@@ -1,15 +1,16 @@
 using System.Diagnostics;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface INestedProperty : IObjectProperty
 	{
-		[DataMember(Name ="include_in_parent")]
+		[DataMember(Name = "include_in_parent")]
 		bool? IncludeInParent { get; set; }
 
-		[DataMember(Name ="include_in_root")]
+		[DataMember(Name = "include_in_root")]
 		bool? IncludeInRoot { get; set; }
 	}
 

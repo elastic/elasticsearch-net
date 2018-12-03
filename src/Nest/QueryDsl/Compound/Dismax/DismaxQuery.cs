@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(DisMaxQuery))]
 	public interface IDisMaxQuery : IQuery
 	{
-		[DataMember(Name ="queries")]
+		[DataMember(Name = "queries")]
 		IEnumerable<QueryContainer> Queries { get; set; }
 
-		[DataMember(Name ="tie_breaker")]
+		[DataMember(Name = "tie_breaker")]
 		double? TieBreaker { get; set; }
 	}
 

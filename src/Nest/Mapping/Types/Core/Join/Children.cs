@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ChildrenJsonConverter))]
+	[JsonFormatter(typeof(ChildrenFormatter))]
 	public class Children : List<RelationName>
 	{
 		public Children() { }
