@@ -1,69 +1,76 @@
-﻿using System;
-using System.Linq;
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Linq;
+﻿using Utf8Json;
+using Utf8Json.Internal;
+using Utf8Json.Resolvers;
 
 namespace Nest
 {
-	internal class ClusterRerouteCommandJsonConverter : JsonConverter
+	internal class ClusterRerouteCommandFormatter : IJsonFormatter<IClusterRerouteCommand>
 	{
-		public override bool CanRead => true;
-		public override bool CanWrite => true;
+		private static readonly AutomataDictionary AutomataDictionary = new AutomataDictionary
+		{
+			{ "allocate_replica", 0 },
+			{ "allocate_empty_primary", 1 },
+			{ "allocate_stale_primary", 2 },
+			{ "move", 3 },
+			{ "cancel", 4 }
+		};
 
-		public override bool CanConvert(Type objectType) => true;
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public IClusterRerouteCommand Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			IClusterRerouteCommand command = null;
-			var o = JObject.Load(reader);
-			var child = o.Children<JProperty>().FirstOrDefault();
-			var v = child?.Children<JObject>().FirstOrDefault();
-			if (v == null) return null;
 
-			switch (child.Name)
+			var count = 0;
+			while (reader.ReadIsInObject(ref count))
 			{
-				case "allocate_replica":
-					command = v.ToObject<AllocateReplicaClusterRerouteCommand>(ElasticContractResolver.Empty);
-					break;
-				case "allocate_empty_primary":
-					command = v.ToObject<AllocateEmptyPrimaryRerouteCommand>(ElasticContractResolver.Empty);
-					break;
-				case "allocate_stale_primary":
-					command = v.ToObject<AllocateStalePrimaryRerouteCommand>(ElasticContractResolver.Empty);
-					break;
-				case "move":
-					command = v.ToObject<MoveClusterRerouteCommand>(ElasticContractResolver.Empty);
-					break;
-				case "cancel":
-					command = v.ToObject<CancelClusterRerouteCommand>(ElasticContractResolver.Empty);
-					break;
+				var propertyName = reader.ReadPropertyNameSegmentRaw();
+				if (AutomataDictionary.TryGetValue(propertyName, out var value))
+				{
+					switch (value)
+					{
+						case 0:
+							command = Deserialize<AllocateReplicaClusterRerouteCommand>(ref reader, formatterResolver);
+							break;
+						case 1:
+							command = Deserialize<AllocateEmptyPrimaryRerouteCommand>(ref reader, formatterResolver);
+							break;
+						case 2:
+							command = Deserialize<AllocateStalePrimaryRerouteCommand>(ref reader, formatterResolver);
+							break;
+						case 3:
+							command = Deserialize<MoveClusterRerouteCommand>(ref reader, formatterResolver);
+							break;
+						case 4:
+							command = Deserialize<CancelClusterRerouteCommand>(ref reader, formatterResolver);
+							break;
+					}
+				}
 			}
+
 			return command;
 		}
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public void Serialize(ref JsonWriter writer, IClusterRerouteCommand value, IJsonFormatterResolver formatterResolver)
 		{
-			var c = value as IClusterRerouteCommand;
-			if (c == null) return;
-
-			var properties = value.GetType().GetCachedObjectProperties();
-			if (properties.Count == 0) return;
-
-			writer.WriteStartObject();
-			writer.WritePropertyName(c.Name);
-			writer.WriteStartObject();
-			foreach (var p in properties)
+			if (value == null)
 			{
-				if (p.Ignored) continue;
-
-				var vv = p.ValueProvider.GetValue(value);
-				if (vv == null) continue;
-
-				writer.WritePropertyName(p.PropertyName);
-				serializer.Serialize(writer, vv);
+				writer.WriteNull();
+				return;
 			}
+
+			writer.WriteBeginObject();
+			writer.WritePropertyName(value.Name);
+
+			var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IClusterRerouteCommand>();
+			formatter.Serialize(ref writer, value, formatterResolver);
+
 			writer.WriteEndObject();
-			writer.WriteEndObject();
+		}
+
+		private static TCommand Deserialize<TCommand>(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+			where TCommand : IClusterRerouteCommand
+		{
+			var formatter = formatterResolver.GetFormatter<TCommand>();
+			return formatter.Deserialize(ref reader, formatterResolver);
 		}
 	}
 }

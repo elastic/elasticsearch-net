@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(SimpleInputJsonConverter))]
+	[JsonFormatter(typeof(SimpleInputFormatter))]
 	public interface ISimpleInput : IInput
 	{
 		IDictionary<string, object> Payload { get; }
@@ -63,28 +62,26 @@ namespace Nest
 		}
 	}
 
-	internal class SimpleInputJsonConverter : JsonConverter
+	internal class SimpleInputFormatter : IJsonFormatter<ISimpleInput>
 	{
-		public override bool CanRead => true;
-
-		public override bool CanWrite => true;
-
-		public override bool CanConvert(Type objectType) => true;
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public ISimpleInput Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (reader.TokenType != JsonToken.StartObject) return null;
+			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
+				return null;
 
-			var dictionary = serializer.Deserialize<IDictionary<string, object>>(reader);
+			var formatter = formatterResolver.GetFormatter<IDictionary<string, object>>();
+			var dictionary = formatter.Deserialize(ref reader, formatterResolver);
+
 			return new SimpleInput(dictionary);
 		}
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public void Serialize(ref JsonWriter writer, ISimpleInput value, IJsonFormatterResolver formatterResolver)
 		{
-			var s = value as ISimpleInput;
-			if (s?.Payload == null) return;
+			if (value?.Payload == null)
+				return;
 
-			serializer.Serialize(writer, s.Payload);
+			var formatter = formatterResolver.GetFormatter<IDictionary<string, object>>();
+			formatter.Serialize(ref writer, value.Payload, formatterResolver);
 		}
 	}
 }

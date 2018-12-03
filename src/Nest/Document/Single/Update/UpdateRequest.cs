@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -8,31 +9,31 @@ namespace Nest
 		where TDocument : class
 		where TPartialDocument : class
 	{
-		[DataMember(Name ="detect_noop")]
+		[DataMember(Name = "detect_noop")]
 		bool? DetectNoop { get; set; }
 
-		[DataMember(Name ="doc")]
-		[JsonConverter(typeof(SourceConverter))]
+		[DataMember(Name = "doc")]
+		[JsonFormatter(typeof(SourceFormatter<>))]
 		TPartialDocument Doc { get; set; }
 
-		[DataMember(Name ="doc_as_upsert")]
+		[DataMember(Name = "doc_as_upsert")]
 		bool? DocAsUpsert { get; set; }
 
-		[DataMember(Name ="script")]
+		[DataMember(Name = "script")]
 		IScript Script { get; set; }
 
 		/// <summary>
 		/// If you would like your script to run regardless of whether the document exists or not — i.e. the script handles
 		/// initializing the document instead of the upsert element — then set scripted_upsert to true
 		/// </summary>
-		[DataMember(Name ="scripted_upsert")]
+		[DataMember(Name = "scripted_upsert")]
 		bool? ScriptedUpsert { get; set; }
 
-		[DataMember(Name ="_source")]
+		[DataMember(Name = "_source")]
 		Union<bool, ISourceFilter> Source { get; set; }
 
-		[DataMember(Name ="upsert")]
-		[JsonConverter(typeof(SourceConverter))]
+		[DataMember(Name = "upsert")]
+		[JsonFormatter(typeof(SourceFormatter<>))]
 		TDocument Upsert { get; set; }
 	}
 

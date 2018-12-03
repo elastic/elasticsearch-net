@@ -1,11 +1,12 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// A similarity.
 	/// </summary>
-	[ContractJsonConverter(typeof(SimilarityJsonConverter))]
+	[JsonFormatter(typeof(SimilarityFormatter))]
 	public interface ISimilarity
 	{
 		/// <summary>

@@ -1,28 +1,24 @@
-using System;
-using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	internal class ReindexRoutingJsonConverter : JsonConverter
+	internal class ReindexRoutingFormatter : IJsonFormatter<ReindexRouting>
 	{
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public ReindexRouting Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var v = value as ReindexRouting;
-			if (v == null) writer.WriteNull();
-			else writer.WriteValue(v.ToString());
-		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			var s = reader.ReadAsString();
-			switch (s)
+			var value = reader.ReadString();
+			switch (value)
 			{
 				case "keep": return ReindexRouting.Keep;
 				case "discard": return ReindexRouting.Discard;
-				default: return new ReindexRouting(s);
+				default: return new ReindexRouting(value);
 			}
 		}
 
-		public override bool CanConvert(Type objectType) => true;
+		public void Serialize(ref JsonWriter writer, ReindexRouting value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null) writer.WriteNull();
+			else writer.WriteString(value.ToString());
+		}
 	}
 }

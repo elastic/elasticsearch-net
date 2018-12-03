@@ -1,39 +1,40 @@
 using System;
 using System.Diagnostics;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IDateProperty : IDocValuesProperty
 	{
 		/// <summary>
 		/// Mapping field-level query time boosting. Accepts a floating point number, defaults to 1.0.
 		/// </summary>
-		[DataMember(Name ="boost")]
+		[DataMember(Name = "boost")]
 		double? Boost { get; set; }
 
-		[DataMember(Name ="fielddata")]
+		[DataMember(Name = "fielddata")]
 		INumericFielddata Fielddata { get; set; }
 
 		/// <summary>
 		/// The date format(s) that can be parsed. Defaults to strict_date_optional_time||epoch_millis.
 		/// <see cref="DateFormat" />
 		/// </summary>
-		[DataMember(Name ="format")]
+		[DataMember(Name = "format")]
 		string Format { get; set; }
 
 		/// <summary>
 		/// If true, malformed numbers are ignored. If false (default), malformed numbers throw an exception
 		/// and reject the whole document.
 		/// </summary>
-		[DataMember(Name ="ignore_malformed")]
+		[DataMember(Name = "ignore_malformed")]
 		bool? IgnoreMalformed { get; set; }
 
 		/// <summary>
 		/// Should the field be searchable? Accepts true (default) and false.
 		/// </summary>
-		[DataMember(Name ="index")]
+		[DataMember(Name = "index")]
 		bool? Index { get; set; }
 
 		/// <summary>
@@ -41,7 +42,7 @@ namespace Nest
 		/// as the field which is substituted for any explicit null values. Defaults to null,
 		/// which means the field is treated as missing.
 		/// </summary>
-		[DataMember(Name ="null_value")]
+		[DataMember(Name = "null_value")]
 		DateTime? NullValue { get; set; }
 	}
 

@@ -1,37 +1,38 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	public interface IGetResponse<out TDocument> : IResponse where TDocument : class
 	{
-		[DataMember(Name ="fields")]
+		[DataMember(Name = "fields")]
 		FieldValues Fields { get; }
 
-		[DataMember(Name ="found")]
+		[DataMember(Name = "found")]
 		bool Found { get; }
 
-		[DataMember(Name ="_id")]
+		[DataMember(Name = "_id")]
 		string Id { get; }
 
-		[DataMember(Name ="_index")]
+		[DataMember(Name = "_index")]
 		string Index { get; }
 
-		[DataMember(Name ="_parent")]
+		[DataMember(Name = "_parent")]
 		[Obsolete("No longer returned on indices created in Elasticsearch 6.0")]
 		string Parent { get; }
 
-		[DataMember(Name ="_routing")]
+		[DataMember(Name = "_routing")]
 		string Routing { get; }
 
-		[DataMember(Name ="_source")]
-		[JsonConverter(typeof(SourceConverter))]
+		[DataMember(Name = "_source")]
+		[JsonFormatter(typeof(SourceFormatter<>))]
 		TDocument Source { get; }
 
-		[DataMember(Name ="_type")]
+		[DataMember(Name = "_type")]
 		string Type { get; }
 
-		[DataMember(Name ="_version")]
+		[DataMember(Name = "_version")]
 		long Version { get; }
 	}
 

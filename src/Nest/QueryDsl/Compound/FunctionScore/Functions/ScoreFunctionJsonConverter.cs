@@ -1,246 +1,367 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Linq;
+using System.Text;
+using Utf8Json;
+using Utf8Json.Internal;
 
 namespace Nest
 {
-	internal class ScoreFunctionJsonConverter : JsonConverter
+	internal class ScoreFunctionJsonConverter : IJsonFormatter<IScoreFunction>
 	{
-		private static readonly IDictionary<string, Type> DecayTypeMapping = new Dictionary<string, Type>
+		private static readonly AutomataDictionary AutomataDictionary = new AutomataDictionary
 		{
-			{ "exp_numeric", typeof(ExponentialDecayFunction) },
-			{ "exp_date", typeof(ExponentialDateDecayFunction) },
-			{ "exp_geo", typeof(ExponentialGeoDecayFunction) },
-			{ "gauss_numeric", typeof(GaussDecayFunction) },
-			{ "gauss_date", typeof(GaussDateDecayFunction) },
-			{ "gauss_geo", typeof(GaussGeoDecayFunction) },
-			{ "linear_numeric", typeof(LinearDecayFunction) },
-			{ "linear_date", typeof(LinearDateDecayFunction) },
-			{ "linear_geo", typeof(LinearGeoDecayFunction) },
+			{ "filter", 0 },
+			{ "weight", 1 },
+			{ "exp", 2 },
+			{ "gauss", 2 },
+			{ "linear", 2 },
+			{ "random_score", 3 },
+			{ "field_value_factor", 4 },
+			{ "script_score", 5 }
 		};
 
-		public override bool CanRead => true;
-		public override bool CanWrite => true;
-
-		public override bool CanConvert(Type objectType) => true;
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public IScoreFunction Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var function = value as IScoreFunction;
-			if (function == null) return;
+			QueryContainer filter = null;
+			double? weight = null;
+			IScoreFunction function = null;
 
-			writer.WriteStartObject();
+			var count = 0;
+			while (reader.ReadIsInObject(ref count))
 			{
-				if (function.Filter != null)
+				var propertyName = reader.ReadPropertyNameSegmentRaw();
+				if (AutomataDictionary.TryGetValue(propertyName, out var value))
 				{
-					writer.WritePropertyName("filter");
-					serializer.Serialize(writer, function.Filter);
-				}
-
-				var write = WriteDecay(writer, function as IDecayFunction, serializer)
-					|| WriteFieldValueFactor(writer, function as IFieldValueFactorFunction, serializer)
-					|| WriteRandomScore(writer, function as IRandomScoreFunction, serializer)
-					|| WriteScriptScore(writer, function as IScriptScoreFunction, serializer)
-					|| WriteWeightFunction(writer, function as IWeightFunction, serializer);
-				if (!write) throw new Exception($"Can not write function score json for {function.GetType().Name}");
-
-				if (function.Weight.HasValue)
-				{
-					writer.WritePropertyName("weight");
-					serializer.Serialize(writer, function.Weight.Value);
-				}
-			}
-			writer.WriteEndObject();
-		}
-
-		//rely on weight getting written later
-		private bool WriteWeightFunction(JsonWriter writer, IWeightFunction value, JsonSerializer serializer) => value != null;
-
-		private bool WriteScriptScore(JsonWriter writer, IScriptScoreFunction value, JsonSerializer serializer)
-		{
-			if (value == null) return false;
-
-			writer.WritePropertyName("script_score");
-			serializer.Serialize(writer, value.Script);
-			return true;
-		}
-
-		private bool WriteRandomScore(JsonWriter writer, IRandomScoreFunction value, JsonSerializer serializer)
-		{
-			if (value == null) return false;
-
-			writer.WritePropertyName("random_score");
-			writer.WriteStartObject();
-			{
-				writer.WriteProperty(serializer, "seed", value.Seed);
-				writer.WriteProperty(serializer, "field", value.Field);
-			}
-			writer.WriteEndObject();
-			return true;
-		}
-
-		private bool WriteFieldValueFactor(JsonWriter writer, IFieldValueFactorFunction value, JsonSerializer serializer)
-		{
-			if (value == null) return false;
-
-			writer.WritePropertyName("field_value_factor");
-			writer.WriteStartObject();
-			{
-				writer.WriteProperty(serializer, "field", value.Field);
-				writer.WriteProperty(serializer, "factor", value.Factor);
-				writer.WriteProperty(serializer, "missing", value.Missing);
-				writer.WriteProperty(serializer, "modifier", value.Modifier);
-			}
-			writer.WriteEndObject();
-			return true;
-		}
-
-		private bool WriteDecay(JsonWriter writer, IDecayFunction decay, JsonSerializer serializer)
-		{
-			if (decay == null) return false;
-
-			writer.WritePropertyName(decay.DecayType);
-			writer.WriteStartObject();
-			{
-				writer.WritePropertyName(serializer.GetConnectionSettings().Inferrer.Field(decay.Field));
-				writer.WriteStartObject();
-				{
-					var write = WriteNumericDecay(writer, decay as IDecayFunction<double?, double?>, serializer)
-						|| WriteDateDecay(writer, decay as IDecayFunction<DateMath, Time>, serializer)
-						|| WriteGeoDecay(writer, decay as IDecayFunction<GeoLocation, Distance>, serializer);
-					if (!write) throw new Exception($"Can not write decay function json for {decay.GetType().Name}");
-
-					if (decay.Decay.HasValue)
+					switch (value)
 					{
-						writer.WritePropertyName("decay");
-						serializer.Serialize(writer, decay.Decay.Value);
+						case 0:
+							var formatter = formatterResolver.GetFormatter<QueryContainer>();
+							filter = formatter.Deserialize(ref reader, formatterResolver);
+							break;
+						case 1:
+							weight = reader.ReadDouble();
+							break;
+						case 2:
+							var innerCount = 0;
+							MultiValueMode? multiValueMode = null;
+							IDecayFunction decayFunction = null;
+							while (reader.ReadIsInObject(ref innerCount))
+							{
+								var functionPropertyName = reader.ReadPropertyName();
+								if (functionPropertyName == "multi_value_mode")
+									multiValueMode = formatterResolver.GetFormatter<MultiValueMode>()
+										.Deserialize(ref reader, formatterResolver);
+								else
+								{
+									var name = Encoding.UTF8.GetString(propertyName.Array, propertyName.Offset, propertyName.Count);
+									decayFunction = ReadDecayFunction(ref reader, name, formatterResolver);
+									decayFunction.Field = functionPropertyName;
+								}
+							}
+
+							decayFunction.MultiValueMode = multiValueMode;
+							function = decayFunction;
+							break;
+						case 3:
+							var randomScoreFormatter = formatterResolver.GetFormatter<RandomScoreFunction>();
+							function = randomScoreFormatter.Deserialize(ref reader, formatterResolver);
+							break;
+						case 4:
+							var fieldValueFormatter = formatterResolver.GetFormatter<FieldValueFactorFunction>();
+							function = fieldValueFormatter.Deserialize(ref reader, formatterResolver);
+							break;
+						case 5:
+							var scriptScoreFormatter = formatterResolver.GetFormatter<ScriptScoreFunction>();
+							function = scriptScoreFormatter.Deserialize(ref reader, formatterResolver);
+							break;
 					}
 				}
-				writer.WriteEndObject();
-				if (decay.MultiValueMode.HasValue)
-				{
-					writer.WritePropertyName("multi_value_mode");
-					serializer.Serialize(writer, decay.MultiValueMode.Value);
-				}
 			}
-			writer.WriteEndObject();
-			return true;
-		}
 
-		private bool WriteNumericDecay(JsonWriter writer, IDecayFunction<double?, double?> value, JsonSerializer serializer)
-		{
-			if (value == null) return false;
-
-			writer.WritePropertyName("origin");
-			serializer.Serialize(writer, value.Origin);
-			writer.WritePropertyName("scale");
-			serializer.Serialize(writer, value.Scale);
-			if (value.Offset != null)
+			if (function == null)
 			{
-				writer.WritePropertyName("offset");
-				serializer.Serialize(writer, value.Offset);
+				if (weight.HasValue)
+					function = new WeightFunction();
+				else
+					return null;
 			}
-			return true;
-		}
-
-		private bool WriteDateDecay(JsonWriter writer, IDecayFunction<DateMath, Time> value, JsonSerializer serializer)
-		{
-			if (value == null || value.Field.IsConditionless()) return false;
-
-			if (value.Origin != null)
-			{
-				writer.WritePropertyName("origin");
-				serializer.Serialize(writer, value.Origin);
-			}
-			writer.WritePropertyName("scale");
-			serializer.Serialize(writer, value.Scale);
-			if (value.Offset != null)
-			{
-				writer.WritePropertyName("offset");
-				serializer.Serialize(writer, value.Offset);
-			}
-			return true;
-		}
-
-		private bool WriteGeoDecay(JsonWriter writer, IDecayFunction<GeoLocation, Distance> value, JsonSerializer serializer)
-		{
-			if (value == null || value.Field.IsConditionless()) return false;
-
-			writer.WritePropertyName("origin");
-			serializer.Serialize(writer, value.Origin);
-			writer.WritePropertyName("scale");
-			serializer.Serialize(writer, value.Scale);
-			if (value.Offset != null)
-			{
-				writer.WritePropertyName("offset");
-				serializer.Serialize(writer, value.Offset);
-			}
-			return true;
-		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			var jo = JObject.Load(reader);
-			var filter = jo.Property("filter")?.Value.ToObject<QueryContainer>(serializer);
-			var weight = jo.Property("weight")?.Value.ToObject<double?>();
-			;
-			IScoreFunction function = null;
-			foreach (var prop in jo.Properties())
-			{
-				switch (prop.Name)
-				{
-					case "exp":
-					case "gauss":
-					case "linear":
-						var properties = prop.Value.Value<JObject>().Properties().ToList();
-						var fieldProp = properties.First(p => p.Name != "multi_value_mode");
-						var field = fieldProp.Name;
-						var f = ReadDecayFunction(prop.Name, fieldProp.Value.Value<JObject>(), serializer);
-						f.Field = field;
-						var mv = properties.FirstOrDefault(p => p.Name == "multi_value_mode")?.Value;
-						if (mv != null)
-							f.MultiValueMode = serializer.Deserialize<MultiValueMode>(mv.CreateReader());
-						function = f;
-
-						break;
-					case "random_score":
-						function = FromJson.ReadAs<RandomScoreFunction>(prop.Value.Value<JObject>().CreateReader(), serializer);
-						break;
-					case "field_value_factor":
-						function = FromJson.ReadAs<FieldValueFactorFunction>(prop.Value.Value<JObject>().CreateReader(), serializer);
-						break;
-					case "script_score":
-						function = FromJson.ReadAs<ScriptScoreFunction>(prop.Value.Value<JObject>().CreateReader(), serializer);
-						break;
-				}
-			}
-			if (function == null && weight.HasValue) function = new WeightFunction { Weight = weight };
-			else if (function == null) return null; //throw new Exception("error deserializing function score function");
 
 			function.Weight = weight;
 			function.Filter = filter;
 			return function;
 		}
 
-		private IDecayFunction ReadDecayFunction(string type, JObject o, JsonSerializer serializer)
+		public void Serialize(ref JsonWriter writer, IScoreFunction value, IJsonFormatterResolver formatterResolver)
 		{
-			var origin = o.Property("origin")?.Value.Type;
-			if (origin == null) return null;
+			if (value == null) return;
 
-			var subType = "numeric";
-			switch (origin)
+			writer.WriteBeginObject();
+			if (value.Filter != null)
 			{
-				case JTokenType.String:
-					subType = "date";
-					break;
-				case JTokenType.Object:
-					subType = "geo";
-					break;
+				writer.WritePropertyName("filter");
+				var formatter = formatterResolver.GetFormatter<QueryContainer>();
+				formatter.Serialize(ref writer, value.Filter, formatterResolver);
 			}
-			var t = DecayTypeMapping[$"{type}_{subType}"];
-			return FromJson.Read(o.CreateReader(), t, serializer) as IDecayFunction;
+
+			switch (value)
+			{
+				case IDecayFunction decayFunction:
+					WriteDecay(ref writer, decayFunction, formatterResolver);
+					break;
+				case IFieldValueFactorFunction fieldValueFactorFunction:
+					WriteFieldValueFactor(ref writer, fieldValueFactorFunction, formatterResolver);
+					break;
+				case IRandomScoreFunction randomScoreFunction:
+					WriteRandomScore(ref writer, randomScoreFunction, formatterResolver);
+					break;
+				case IScriptScoreFunction scriptScoreFunction:
+					WriteScriptScore(ref writer, scriptScoreFunction, formatterResolver);
+					break;
+				case IWeightFunction _:
+					break;
+				default:
+					throw new Exception($"Can not write function score json for {value.GetType().Name}");
+			}
+
+			if (value.Weight.HasValue)
+			{
+				writer.WritePropertyName("weight");
+				writer.WriteDouble(value.Weight.Value);
+			}
+			writer.WriteEndObject();
+		}
+
+		private static void WriteScriptScore(ref JsonWriter writer, IScriptScoreFunction value, IJsonFormatterResolver formatterResolver)
+		{
+			writer.WritePropertyName("script_score");
+			var scriptQuery = formatterResolver.GetFormatter<IScriptQuery>();
+			scriptQuery.Serialize(ref writer, value.Script, formatterResolver);
+		}
+
+		private static void WriteRandomScore(ref JsonWriter writer, IRandomScoreFunction value, IJsonFormatterResolver formatterResolver)
+		{
+			writer.WritePropertyName("random_score");
+			writer.WriteBeginObject();
+			if (value.Seed != null)
+			{
+				writer.WritePropertyName("seed");
+				var seedFormatter = formatterResolver.GetFormatter<Union<long, string>>();
+				seedFormatter.Serialize(ref writer, value.Seed, formatterResolver);
+			}
+
+			if (value.Field != null)
+			{
+				if (value.Seed != null)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName("field");
+				var fieldFormatter = formatterResolver.GetFormatter<Field>();
+				fieldFormatter.Serialize(ref writer, value.Field, formatterResolver);
+			}
+			writer.WriteEndObject();
+		}
+
+		private static void WriteFieldValueFactor(ref JsonWriter writer, IFieldValueFactorFunction value, IJsonFormatterResolver formatterResolver)
+		{
+			writer.WritePropertyName("field_value_factor");
+			var formatter = formatterResolver.GetFormatter<IFieldValueFactorFunction>();
+			formatter.Serialize(ref writer, value, formatterResolver);
+		}
+
+		private void WriteDecay(ref JsonWriter writer, IDecayFunction decay, IJsonFormatterResolver formatterResolver)
+		{
+			writer.WritePropertyName(decay.DecayType);
+			writer.WriteBeginObject();
+
+			writer.WritePropertyName(formatterResolver.GetConnectionSettings().Inferrer.Field(decay.Field));
+			writer.WriteBeginObject();
+
+			var written = false;
+
+			switch (decay)
+			{
+				case IDecayFunction<double?, double?> numericDecay:
+					WriteNumericDecay(ref writer, ref written, numericDecay, formatterResolver);
+					break;
+				case IDecayFunction<DateMath, Time> dateDecay:
+					WriteDateDecay(ref writer, ref written, dateDecay, formatterResolver);
+					break;
+				case IDecayFunction<GeoLocation, Distance> geoDecay:
+					WriteGeoDecay(ref writer, ref written, geoDecay, formatterResolver);
+					break;
+				default:
+					throw new Exception($"Can not write decay function json for {decay.GetType().Name}");
+			}
+
+			if (decay.Decay.HasValue)
+			{
+				if (written)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName("decay");
+				writer.WriteDouble(decay.Decay.Value);
+			}
+
+			writer.WriteEndObject();
+
+			if (decay.MultiValueMode.HasValue)
+			{
+				writer.WriteValueSeparator();
+
+				writer.WritePropertyName("multi_value_mode");
+				formatterResolver.GetFormatter<MultiValueMode>()
+					.Serialize(ref writer, decay.MultiValueMode.Value, formatterResolver);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		private static void WriteNumericDecay(ref JsonWriter writer, ref bool written, IDecayFunction<double?, double?> value,
+			IJsonFormatterResolver formatterResolver
+		)
+		{
+			if (value.Origin.HasValue)
+			{
+				writer.WritePropertyName("origin");
+				writer.WriteDouble(value.Origin.Value);
+				written = true;
+			}
+
+			if (value.Scale.HasValue)
+			{
+				if (written)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName("scale");
+				writer.WriteDouble(value.Scale.Value);
+				written = true;
+			}
+
+			if (value.Offset != null)
+			{
+				if (written)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName("offset");
+				writer.WriteDouble(value.Offset.Value);
+			}
+		}
+
+		private static void WriteDateDecay(ref JsonWriter writer, ref bool written, IDecayFunction<DateMath, Time> value,
+			IJsonFormatterResolver formatterResolver
+		)
+		{
+			if (value == null || value.Field.IsConditionless())
+				return;
+
+			if (value.Origin != null)
+			{
+				writer.WritePropertyName("origin");
+				var dateMathFormatter = formatterResolver.GetFormatter<DateMath>();
+				dateMathFormatter.Serialize(ref writer, value.Origin, formatterResolver);
+
+				written = true;
+			}
+
+			if (written)
+				writer.WriteValueSeparator();
+
+			writer.WritePropertyName("scale");
+			var timeFormatter = formatterResolver.GetFormatter<Time>();
+			timeFormatter.Serialize(ref writer, value.Scale, formatterResolver);
+
+			written = true;
+
+			if (value.Offset != null)
+			{
+				writer.WriteValueSeparator();
+
+				writer.WritePropertyName("offset");
+				timeFormatter.Serialize(ref writer, value.Offset, formatterResolver);
+			}
+		}
+
+		private static void WriteGeoDecay(ref JsonWriter writer, ref bool written, IDecayFunction<GeoLocation, Distance> value,
+			IJsonFormatterResolver formatterResolver
+		)
+		{
+			if (value == null || value.Field.IsConditionless())
+				return;
+
+			written = true;
+
+			writer.WritePropertyName("origin");
+			var locationFormatter = formatterResolver.GetFormatter<GeoLocation>();
+			locationFormatter.Serialize(ref writer, value.Origin, formatterResolver);
+			writer.WriteValueSeparator();
+			writer.WritePropertyName("scale");
+			var distanceFormatter = formatterResolver.GetFormatter<Distance>();
+			distanceFormatter.Serialize(ref writer, value.Scale, formatterResolver);
+
+			if (value.Offset != null)
+			{
+				writer.WriteValueSeparator();
+				writer.WritePropertyName("offset");
+				distanceFormatter.Serialize(ref writer, value.Offset, formatterResolver);
+			}
+		}
+
+		private static IDecayFunction ReadDecayFunction(ref JsonReader reader, string type, IJsonFormatterResolver formatterResolver)
+		{
+			var segment = reader.ReadNextBlockSegment();
+			var count = 0;
+			var segmentReader = new JsonReader(segment.Array, segment.Offset);
+			var subType = "numeric";
+
+			while (segmentReader.ReadIsInObject(ref count))
+			{
+				var propertyName = segmentReader.ReadPropertyName();
+				if (propertyName == "origin")
+				{
+					switch (segmentReader.GetCurrentJsonToken())
+					{
+						case JsonToken.String:
+							subType = "date";
+							break;
+						case JsonToken.BeginObject:
+							subType = "geo";
+							break;
+					}
+					break;
+				}
+			}
+
+			segmentReader = new JsonReader(segment.Array, segment.Offset);
+			// TODO: Avoid allocation
+			var t = $"{type}_{subType}";
+
+			switch (t)
+			{
+				case "exp_numeric":
+					return Deserialize<ExponentialDecayFunction>(ref segmentReader, formatterResolver);
+				case "exp_date":
+					return Deserialize<ExponentialDateDecayFunction>(ref segmentReader, formatterResolver);
+				case "exp_geo":
+					return Deserialize<ExponentialGeoDecayFunction>(ref segmentReader, formatterResolver);
+				case "gauss_numeric":
+					return Deserialize<GaussDecayFunction>(ref segmentReader, formatterResolver);
+				case "gauss_date":
+					return Deserialize<GaussDateDecayFunction>(ref segmentReader, formatterResolver);
+				case "gauss_geo":
+					return Deserialize<GaussGeoDecayFunction>(ref segmentReader, formatterResolver);
+				case "linear_numeric":
+					return Deserialize<LinearDecayFunction>(ref segmentReader, formatterResolver);
+				case "linear_date":
+					return Deserialize<LinearDateDecayFunction>(ref segmentReader, formatterResolver);
+				case "linear_geo":
+					return Deserialize<LinearGeoDecayFunction>(ref segmentReader, formatterResolver);
+			}
+		}
+
+		private static TDecayFunction Deserialize<TDecayFunction>(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+			where TDecayFunction : IDecayFunction
+		{
+			var formatter = formatterResolver.GetFormatter<TDecayFunction>();
+			return formatter.Deserialize(ref reader, formatterResolver);
 		}
 	}
 }

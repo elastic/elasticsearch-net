@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	public class ReindexNode
 	{
 		[DataMember(Name ="attributes")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, string>))]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, string>))]
 		public IReadOnlyDictionary<string, string> Attributes { get; internal set; } =
 			EmptyReadOnly<string, string>.Dictionary;
 
@@ -23,7 +24,7 @@ namespace Nest
 		public IEnumerable<string> Roles { get; internal set; }
 
 		[DataMember(Name ="tasks")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<TaskId, ReindexTask>))]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<TaskId, ReindexTask>))]
 		public IReadOnlyDictionary<TaskId, ReindexTask> Tasks { get; internal set; } =
 			EmptyReadOnly<TaskId, ReindexTask>.Dictionary;
 

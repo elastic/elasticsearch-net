@@ -1,51 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(TypeMapping))]
 	public interface ITypeMapping
 	{
-		[DataMember(Name ="_all")]
+		[DataMember(Name = "_all")]
 		IAllField AllField { get; set; }
 
-		[DataMember(Name ="date_detection")]
+		[DataMember(Name = "date_detection")]
 		bool? DateDetection { get; set; }
 
-		[DataMember(Name ="dynamic")]
+		[DataMember(Name = "dynamic")]
 		Union<bool, DynamicMapping> Dynamic { get; set; }
 
-		[DataMember(Name ="dynamic_date_formats")]
+		[DataMember(Name = "dynamic_date_formats")]
 		IEnumerable<string> DynamicDateFormats { get; set; }
 
-		[DataMember(Name ="dynamic_templates")]
+		[DataMember(Name = "dynamic_templates")]
 		IDynamicTemplateContainer DynamicTemplates { get; set; }
 
-		[DataMember(Name ="_field_names")]
+		[DataMember(Name = "_field_names")]
 		IFieldNamesField FieldNamesField { get; set; }
 
-		[DataMember(Name ="_index")]
+		[DataMember(Name = "_index")]
 		IIndexField IndexField { get; set; }
 
-		[DataMember(Name ="_meta")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
+		[DataMember(Name = "_meta")]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, object>))]
 		IDictionary<string, object> Meta { get; set; }
 
-		[DataMember(Name ="numeric_detection")]
+		[DataMember(Name = "numeric_detection")]
 		bool? NumericDetection { get; set; }
 
-		[DataMember(Name ="properties", TypeNameHandling = TypeNameHandling.None)]
+		[DataMember(Name = "properties")]
 		IProperties Properties { get; set; }
 
-		[DataMember(Name ="_routing")]
+		[DataMember(Name = "_routing")]
 		IRoutingField RoutingField { get; set; }
 
-		[DataMember(Name ="_size")]
+		[DataMember(Name = "_size")]
 		ISizeField SizeField { get; set; }
 
-		[DataMember(Name ="_source")]
+		[DataMember(Name = "_source")]
 		ISourceField SourceField { get; set; }
 	}
 
@@ -110,7 +111,8 @@ namespace Nest
 		ISourceField ITypeMapping.SourceField { get; set; }
 
 		/// <summary>
-		/// Convenience method to map as much as it can based on <see cref="ElasticsearchTypeAttribute" /> attributes set on the type.
+		/// Convenience method to map as much as it can based on <see cref="ElasticsearchTypeAttribute" /> attributes set on the
+		/// type.
 		/// <pre>This method also automatically sets up mappings for known values types (int, long, double, datetime, etc)</pre>
 		/// <pre>Class types default to object and Enums to int</pre>
 		/// <pre>Later calls can override whatever is set is by this call.</pre>
@@ -119,7 +121,8 @@ namespace Nest
 			Assign(a => a.Properties = a.Properties.AutoMap<T>(visitor, maxRecursion));
 
 		/// <summary>
-		/// Convenience method to map as much as it can based on <see cref="ElasticsearchTypeAttribute" /> attributes set on the type.
+		/// Convenience method to map as much as it can based on <see cref="ElasticsearchTypeAttribute" /> attributes set on the
+		/// type.
 		/// This particular overload is useful for automapping any children
 		/// <pre>This method also automatically sets up mappings for known values types (int, long, double, datetime, etc)</pre>
 		/// <pre>Class types default to object and Enums to int</pre>
@@ -133,7 +136,8 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Convenience method to map as much as it can based on <see cref="ElasticsearchTypeAttribute" /> attributes set on the type.
+		/// Convenience method to map as much as it can based on <see cref="ElasticsearchTypeAttribute" /> attributes set on the
+		/// type.
 		/// This particular overload is useful for automapping any children
 		/// <pre>This method also automatically sets up mappings for known values types (int, long, double, datetime, etc)</pre>
 		/// <pre>Class types default to object and Enums to int</pre>

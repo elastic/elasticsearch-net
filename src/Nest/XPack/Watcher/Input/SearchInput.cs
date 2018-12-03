@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -8,7 +9,7 @@ namespace Nest
 	/// An input to load the results of an Elasticsearch search request into the execution
 	/// context when a watch is triggered.
 	/// </summary>
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(SearchInput))]
 	public interface ISearchInput : IInput
 	{

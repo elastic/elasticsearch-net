@@ -1,29 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[ReadAs(typeof(FunctionScoreQueryDescriptor<object>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(FunctionScoreQuery))]
 	public interface IFunctionScoreQuery : IQuery
 	{
-		[DataMember(Name ="boost_mode")]
+		[DataMember(Name = "boost_mode")]
 		FunctionBoostMode? BoostMode { get; set; }
 
-		[DataMember(Name ="functions")]
+		[DataMember(Name = "functions")]
 		IEnumerable<IScoreFunction> Functions { get; set; }
 
-		[DataMember(Name ="max_boost")]
+		[DataMember(Name = "max_boost")]
 		double? MaxBoost { get; set; }
 
-		[DataMember(Name ="min_score")]
+		[DataMember(Name = "min_score")]
 		double? MinScore { get; set; }
 
-		[DataMember(Name ="query")]
+		[DataMember(Name = "query")]
 		QueryContainer Query { get; set; }
 
-		[DataMember(Name ="score_mode")]
+		[DataMember(Name = "score_mode")]
 		FunctionScoreMode? ScoreMode { get; set; }
 	}
 

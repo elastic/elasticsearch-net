@@ -19,7 +19,7 @@ namespace Nest
 			EmptyReadOnly<TKey, TValue>.Dictionary;
 	}
 
-	internal class DictionaryResponseJsonConverterHelpers
+	internal class DictionaryResponseFormatterHelpers
 	{
 		private static readonly AutomataDictionary AutomataDictionary = new AutomataDictionary
 		{
@@ -73,7 +73,7 @@ namespace Nest
 	{
 		public TResponse Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var segment = DictionaryResponseJsonConverterHelpers.ReadServerErrorFirst(ref reader, formatterResolver, out var error,
+			var segment = DictionaryResponseFormatterHelpers.ReadServerErrorFirst(ref reader, formatterResolver, out var error,
 				out var statusCode);
 			var segmentReader = new JsonReader(segment.Array, segment.Offset);
 			var formatter = formatterResolver.GetFormatter<Dictionary<TKey, TValue>>();

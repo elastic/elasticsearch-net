@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -13,26 +14,26 @@ namespace Nest
 		/// <summary>
 		/// The actions that will be run if the condition matches
 		/// </summary>
-		[DataMember(Name ="actions")]
+		[DataMember(Name = "actions")]
 		Actions Actions { get; set; }
 
 		/// <summary>
 		/// Defines if the actions should be run
 		/// </summary>
-		[DataMember(Name ="condition")]
+		[DataMember(Name = "condition")]
 		ConditionContainer Condition { get; set; }
 
 		/// <summary>
 		/// Defines the input that loads the data for the watch
 		/// </summary>
-		[DataMember(Name ="input")]
+		[DataMember(Name = "input")]
 		InputContainer Input { get; set; }
 
 		/// <summary>
 		/// Metadata that will be copied into the history entries
 		/// </summary>
-		[DataMember(Name ="metadata")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
+		[DataMember(Name = "metadata")]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, object>))]
 		IDictionary<string, object> Metadata { get; set; }
 
 		/// <summary>
@@ -41,19 +42,19 @@ namespace Nest
 		/// <remarks>
 		/// Default can be changed in the config file with the setting <code>xpack.watcher.throttle.period.default_period</code>.
 		/// </remarks>
-		[DataMember(Name ="throttle_period")]
+		[DataMember(Name = "throttle_period")]
 		string ThrottlePeriod { get; set; }
 
 		/// <summary>
 		/// Processes and changes the payload in the watch execution context to prepare it for the actions.
 		/// </summary>
-		[DataMember(Name ="transform")]
+		[DataMember(Name = "transform")]
 		TransformContainer Transform { get; set; }
 
 		/// <summary>
 		/// Defines when the watch should run
 		/// </summary>
-		[DataMember(Name ="trigger")]
+		[DataMember(Name = "trigger")]
 		TriggerContainer Trigger { get; set; }
 	}
 

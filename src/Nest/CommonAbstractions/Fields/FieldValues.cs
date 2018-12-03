@@ -7,8 +7,7 @@ using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(FieldValuesJsonConverter))]
-	[JsonFormatter(typeof(FieldValuesJsonFormatter))]
+	[JsonFormatter(typeof(FieldValuesFormatter))]
 	public class FieldValues : IsADictionaryBase<string, LazyDocument>
 	{
 		public static readonly FieldValues Empty = new FieldValues();
