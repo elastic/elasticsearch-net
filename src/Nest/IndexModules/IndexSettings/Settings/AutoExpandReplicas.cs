@@ -1,9 +1,9 @@
 using System;
-using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(AutoExpandReplicasJsonConverter))]
+	[JsonFormatter(typeof(AutoExpandReplicasFormatter))]
 	public class AutoExpandReplicas
 	{
 		private const string AllMaxReplicas = "all";
@@ -128,31 +128,29 @@ namespace Nest
 		}
 	}
 
-	internal class AutoExpandReplicasJsonConverter : JsonConverter
+	internal class AutoExpandReplicasFormatter : IJsonFormatter<AutoExpandReplicas>
 	{
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public AutoExpandReplicas Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var autoExpandReplicas = (AutoExpandReplicas)value;
+			var token = reader.GetCurrentJsonToken();
 
-			if (autoExpandReplicas == null || !autoExpandReplicas.Enabled)
+			if (token == JsonToken.False)
+				return AutoExpandReplicas.Disabled;
+			if (token == JsonToken.String)
+				return AutoExpandReplicas.Create(reader.ReadString());
+
+			throw new Exception($"Cannot deserialize {typeof(AutoExpandReplicas)} from {token}");
+		}
+
+		public void Serialize(ref JsonWriter writer, AutoExpandReplicas value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null || !value.Enabled)
 			{
-				writer.WriteValue(false);
+				writer.WriteBoolean(false);
 				return;
 			}
 
-			writer.WriteValue(autoExpandReplicas.ToString());
+			writer.WriteString(value.ToString());
 		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			if (reader.TokenType == JsonToken.Boolean)
-				return AutoExpandReplicas.Disabled;
-			if (reader.TokenType == JsonToken.String)
-				return AutoExpandReplicas.Create((string)reader.Value);
-
-			throw new JsonSerializationException($"Cannot deserialize {typeof(AutoExpandReplicas)} from {reader.TokenType}");
-		}
-
-		public override bool CanConvert(Type objectType) => true;
 	}
 }

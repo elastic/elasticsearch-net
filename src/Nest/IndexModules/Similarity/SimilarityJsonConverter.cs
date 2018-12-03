@@ -1,51 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Linq;
+using Utf8Json;
 
 namespace Nest
 {
-	internal class SimilarityJsonConverter : JsonConverter
+	internal class SimilarityFormatter : IJsonFormatter<ISimilarity>
 	{
-		public override bool CanRead => true;
-		public override bool CanWrite => false;
-
-		public override bool CanConvert(Type objectType) =>
-			typeof(ISimilarity).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public ISimilarity Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var o = JObject.Load(reader);
-			var typeProperty = o.Property("type");
+			var arraySegment = reader.ReadNextBlockSegment();
+			var segmentReader = new JsonReader(arraySegment.Array, arraySegment.Offset);
 
-			if (typeProperty == null) return null;
+			var count = 0;
+			string type = null;
+			while (segmentReader.ReadIsInObject(ref count))
+			{
+				if (segmentReader.ReadPropertyName() == "type")
+				{
+					type = reader.ReadString();
+					break;
+				}
+			}
 
-			var typePropertyValue = typeProperty.Value.ToString().ToUpperInvariant();
+			segmentReader = new JsonReader(arraySegment.Array, arraySegment.Offset);
 
-			switch (typePropertyValue)
+			// TODO: Remove the UpperInvariant and match case sensitive with AutomataDictionary
+			switch (type.ToUpperInvariant())
 			{
 				case "BM25":
-					return o.ToObject<BM25Similarity>(ElasticContractResolver.Empty);
+					return Deserialize<BM25Similarity>(ref segmentReader, formatterResolver);
 				case "LMDIRICHLET":
-					return o.ToObject<LMDirichletSimilarity>(ElasticContractResolver.Empty);
+					return Deserialize<LMDirichletSimilarity>(ref segmentReader, formatterResolver);
 				case "DFR":
-					return o.ToObject<DFRSimilarity>(ElasticContractResolver.Empty);
+					return Deserialize<DFRSimilarity>(ref segmentReader, formatterResolver);
 				case "DFI":
-					return o.ToObject<DFISimilarity>(ElasticContractResolver.Empty);
+					return Deserialize<DFISimilarity>(ref segmentReader, formatterResolver);
 				case "IB":
-					return o.ToObject<IBSimilarity>(ElasticContractResolver.Empty);
+					return Deserialize<IBSimilarity>(ref segmentReader, formatterResolver);
 				case "LMJELINEKMERCER":
-					return o.ToObject<LMJelinekMercerSimilarity>(ElasticContractResolver.Empty);
+					return Deserialize<LMJelinekMercerSimilarity>(ref segmentReader, formatterResolver);
 				case "SCRIPTED":
-					return o.ToObject<ScriptedSimilarity>(ElasticContractResolver.Empty);
+					return Deserialize<ScriptedSimilarity>(ref segmentReader, formatterResolver);
 				default:
-					var dict = o.ToObject<Dictionary<string, object>>();
+					var formatter = formatterResolver.GetFormatter<Dictionary<string, object>>();
+					var dict = formatter.Deserialize(ref segmentReader, formatterResolver);
 					return new CustomSimilarity(dict);
 			}
 		}
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) =>
+		public void Serialize(ref JsonWriter writer, ISimilarity value, IJsonFormatterResolver formatterResolver) =>
 			throw new NotSupportedException();
+
+		private static TSimilarity Deserialize<TSimilarity>(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+			where TSimilarity : ISimilarity
+		{
+			var formatter = formatterResolver.GetFormatter<TSimilarity>();
+			return formatter.Deserialize(ref reader, formatterResolver);
+		}
 	}
 }

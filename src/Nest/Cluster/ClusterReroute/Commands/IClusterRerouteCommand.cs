@@ -1,8 +1,9 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[ContractJsonConverter(typeof(ClusterRerouteCommandJsonConverter))]
+	[JsonFormatter(typeof(ClusterRerouteCommandFormatter))]
 	public interface IClusterRerouteCommand
 	{
 		[IgnoreDataMember]

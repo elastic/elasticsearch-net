@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -18,7 +19,7 @@ namespace Nest
 		public string Index { get; internal set; }
 
 		[DataMember(Name ="term_vectors")]
-		[JsonConverter(typeof(ResolvableDictionaryJsonConverter<Field, TermVector>))]
+		[JsonFormatter(typeof(ResolvableDictionaryFormatter<Field, TermVector>))]
 		public IReadOnlyDictionary<Field, TermVector> TermVectors { get; internal set; } = EmptyReadOnly<Field, TermVector>.Dictionary;
 
 		[DataMember(Name ="took")]

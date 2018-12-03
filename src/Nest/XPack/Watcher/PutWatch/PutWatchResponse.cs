@@ -1,18 +1,19 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(PutWatchResponse))]
 	public interface IPutWatchResponse : IResponse
 	{
-		[DataMember(Name ="created")]
+		[DataMember(Name = "created")]
 		bool Created { get; }
 
-		[DataMember(Name ="_id")]
+		[DataMember(Name = "_id")]
 		string Id { get; }
 
-		[DataMember(Name ="_version")]
+		[DataMember(Name = "_version")]
 		int Version { get; }
 	}
 

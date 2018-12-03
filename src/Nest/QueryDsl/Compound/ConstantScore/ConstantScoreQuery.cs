@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(ConstantScoreQueryDescriptor<object>))]
 	public interface IConstantScoreQuery : IQuery
 	{

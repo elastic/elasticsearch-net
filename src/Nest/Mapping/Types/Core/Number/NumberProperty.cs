@@ -2,10 +2,11 @@ using System;
 using System.Diagnostics;
 using Elasticsearch.Net;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface INumberProperty : IDocValuesProperty
 	{
 		[DataMember(Name ="boost")]

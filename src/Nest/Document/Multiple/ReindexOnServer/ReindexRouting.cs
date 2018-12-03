@@ -1,8 +1,9 @@
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReindexRoutingJsonConverter))]
+	[JsonFormatter(typeof(ReindexRoutingFormatter))]
 	public class ReindexRouting
 	{
 		public static ReindexRouting Discard = new ReindexRouting("discard", true);

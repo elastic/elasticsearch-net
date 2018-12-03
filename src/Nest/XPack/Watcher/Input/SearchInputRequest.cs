@@ -1,30 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using Elasticsearch.Net;
 using System.Runtime.Serialization;
-
+using Elasticsearch.Net;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(SearchInputRequest))]
 	public interface ISearchInputRequest
 	{
-		[DataMember(Name ="body")]
+		[DataMember(Name = "body")]
 		[ReadAs(typeof(SearchRequest))]
 		ISearchRequest Body { get; set; }
 
-		[DataMember(Name ="indices")]
+		[DataMember(Name = "indices")]
 		IEnumerable<IndexName> Indices { get; set; }
 
-		[DataMember(Name ="indices_options")]
+		[DataMember(Name = "indices_options")]
 		IIndicesOptions IndicesOptions { get; set; }
 
-		[DataMember(Name ="search_type")]
+		[DataMember(Name = "search_type")]
 
 		SearchType? SearchType { get; set; }
 
-		[DataMember(Name ="template")]
+		[DataMember(Name = "template")]
 		[ReadAs(typeof(SearchTemplateRequest))]
 		ISearchTemplateRequest Template { get; set; }
 	}

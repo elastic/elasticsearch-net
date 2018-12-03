@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	[MapsApi("snapshot.create_repository.json")]
-	[JsonConverter(typeof(CreateRepositoryJsonConverter))]
+	[JsonFormatter(typeof(CreateRepositoryFormatter))]
 	public partial interface ICreateRepositoryRequest
 	{
 		ISnapshotRepository Repository { get; set; }

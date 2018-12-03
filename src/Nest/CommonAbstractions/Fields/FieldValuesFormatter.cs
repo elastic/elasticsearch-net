@@ -4,11 +4,11 @@ using Utf8Json;
 
 namespace Nest
 {
-	internal class FieldValuesJsonFormatter : IJsonFormatter<FieldValues>
+	internal class FieldValuesFormatter : IJsonFormatter<FieldValues>
 	{
 		private readonly IConnectionSettingsValues _settings;
 
-		public FieldValuesJsonFormatter(IConnectionSettingsValues settings) => _settings = settings;
+		public FieldValuesFormatter(IConnectionSettingsValues settings) => _settings = settings;
 
 		public FieldValues Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{

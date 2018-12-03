@@ -30,11 +30,6 @@ namespace Nest
 		private static readonly ConcurrentDictionary<Type, IList<PropertyInfo>> CachedTypePropertyInfos =
 			new ConcurrentDictionary<Type, IList<PropertyInfo>>();
 
-
-		//this contract is only used to resolve properties in class WE OWN.
-		//these are not subject to change depending on what the user passes as connectionsettings
-		private static readonly ElasticContractResolver JsonContract = new ElasticContractResolver(new ConnectionSettings());
-
 		internal static object CreateGenericInstance(this Type t, Type closeOver, params object[] args) =>
 			t.CreateGenericInstance(new[] { closeOver }, args);
 
@@ -122,7 +117,7 @@ namespace Nest
 		}
 
 		internal static IList<JsonProperty> GetCachedObjectProperties(this Type t,
-			MemberSerialization memberSerialization = MemberSerialization.OptIn
+			bool optInSerialization = true
 		)
 		{
 			if (CachedTypeProperties.TryGetValue(t, out var propertyDictionary))

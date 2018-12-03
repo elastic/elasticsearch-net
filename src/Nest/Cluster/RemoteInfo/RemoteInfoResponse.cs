@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -9,7 +10,7 @@ namespace Nest
 	}
 
 	[DataContract]
-	[JsonConverter(typeof(DictionaryResponseJsonConverter<RemoteInfoResponse, string, RemoteInfo>))]
+	[JsonFormatter(typeof(DictionaryResponseFormatter<RemoteInfoResponse, string, RemoteInfo>))]
 	public class RemoteInfoResponse : DictionaryResponseBase<string, RemoteInfo>, IRemoteInfoResponse
 	{
 		[IgnoreDataMember]
@@ -18,22 +19,22 @@ namespace Nest
 
 	public class RemoteInfo
 	{
-		[DataMember(Name ="connected")]
+		[DataMember(Name = "connected")]
 		public bool Connected { get; internal set; }
 
 		[DataMember(Name = "skip_unavailable")]
 		public bool SkipUnavailable { get; internal set; }
 
-		[DataMember(Name ="initial_connect_timeout")]
+		[DataMember(Name = "initial_connect_timeout")]
 		public Time InitialConnectTimeout { get; internal set; }
 
-		[DataMember(Name ="max_connections_per_cluster")]
+		[DataMember(Name = "max_connections_per_cluster")]
 		public int MaxConnectionsPerCluster { get; internal set; }
 
-		[DataMember(Name ="num_nodes_connected")]
+		[DataMember(Name = "num_nodes_connected")]
 		public long NumNodesConnected { get; internal set; }
 
-		[DataMember(Name ="seeds")]
+		[DataMember(Name = "seeds")]
 		public IReadOnlyCollection<string> Seeds { get; internal set; } = EmptyReadOnly<string>.Collection;
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using Elasticsearch.Net;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -15,7 +16,7 @@ namespace Nest
 		/// to generate term vectors for
 		/// </summary>
 		[DataMember(Name ="doc")]
-		[JsonConverter(typeof(SourceConverter))]
+		[JsonFormatter(typeof(SourceFormatter<>))]
 		object Document { get; set; }
 
 		/// <summary>

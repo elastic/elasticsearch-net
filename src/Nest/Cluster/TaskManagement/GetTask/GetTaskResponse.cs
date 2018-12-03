@@ -1,14 +1,15 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IGetTaskResponse : IResponse
 	{
-		[DataMember(Name ="completed")]
+		[DataMember(Name = "completed")]
 		bool Completed { get; }
 
-		[DataMember(Name ="task")]
+		[DataMember(Name = "task")]
 		TaskInfo Task { get; }
 	}
 

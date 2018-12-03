@@ -1,9 +1,9 @@
 using System;
-using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CronExpressionJsonConverter))]
+	[JsonFormatter(typeof(CronExpressionFormatter))]
 	public class CronExpression : ScheduleBase, IEquatable<CronExpression>
 	{
 		private readonly string _expression;
@@ -47,20 +47,18 @@ namespace Nest
 		public static bool operator !=(CronExpression left, CronExpression right) => !Equals(left, right);
 	}
 
-	internal class CronExpressionJsonConverter : JsonConverter
+	internal class CronExpressionFormatter : IJsonFormatter<CronExpression>
 	{
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public CronExpression Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (value == null) writer.WriteNull();
-			else writer.WriteValue(value.ToString());
-		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			var expression = (string)reader.Value;
+			var expression = reader.ReadString();
 			return new CronExpression(expression);
 		}
 
-		public override bool CanConvert(Type objectType) => objectType == typeof(CronExpression);
+		public void Serialize(ref JsonWriter writer, CronExpression value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null) writer.WriteNull();
+			else writer.WriteString(value.ToString());
+		}
 	}
 }
