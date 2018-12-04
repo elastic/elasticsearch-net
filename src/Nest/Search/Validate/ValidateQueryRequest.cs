@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	[MapsApi("indices.validate_query.json")]
 	public partial interface IValidateQueryRequest
 	{
-		[DataMember(Name ="query")]
+		[DataMember(Name = "query")]
 		QueryContainer Query { get; set; }
 	}
 
-	[DataContract]
+	[InterfaceDataContract]
 	public partial interface IValidateQueryRequest<T> where T : class { }
 
 	public partial class ValidateQueryRequest

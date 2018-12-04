@@ -7,7 +7,7 @@ namespace Nest
 	/// <summary>
 	/// The Authentication mechanism for a request to a HTTP endpoint
 	/// </summary>
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(HttpInputAuthentication))]
 	public interface IHttpInputAuthentication
 	{

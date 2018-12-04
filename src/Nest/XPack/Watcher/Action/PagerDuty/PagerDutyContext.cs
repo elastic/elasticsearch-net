@@ -1,20 +1,19 @@
 ﻿using System.Runtime.Serialization;
-using System.Runtime.Serialization;
-
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(PagerDutyContext))]
 	public interface IPagerDutyContext
 	{
-		[DataMember(Name ="href")]
+		[DataMember(Name = "href")]
 		string Href { get; set; }
 
-		[DataMember(Name ="src")]
+		[DataMember(Name = "src")]
 		string Src { get; set; }
 
-		[DataMember(Name ="type")]
+		[DataMember(Name = "type")]
 		PagerDutyContextType Type { get; set; }
 	}
 

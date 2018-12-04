@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(RescoreQuery))]
 	public interface IRescoreQuery
 	{
-		[DataMember(Name ="rescore_query")]
+		[DataMember(Name = "rescore_query")]
 		QueryContainer Query { get; set; }
 
-		[DataMember(Name ="query_weight")]
+		[DataMember(Name = "query_weight")]
 		double? QueryWeight { get; set; }
 
-		[DataMember(Name ="rescore_query_weight")]
+		[DataMember(Name = "rescore_query_weight")]
 		double? RescoreQueryWeight { get; set; }
 
-		[DataMember(Name ="score_mode")]
+		[DataMember(Name = "score_mode")]
 		ScoreMode? ScoreMode { get; set; }
 	}
 

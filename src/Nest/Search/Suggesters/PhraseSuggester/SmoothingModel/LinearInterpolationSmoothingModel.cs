@@ -1,18 +1,19 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(LinearInterpolationSmoothingModel))]
 	public interface ILinearInterpolationSmoothingModel : ISmoothingModel
 	{
-		[DataMember(Name ="bigram_lambda")]
+		[DataMember(Name = "bigram_lambda")]
 		double? BigramLambda { get; set; }
 
-		[DataMember(Name ="trigram_lambda")]
+		[DataMember(Name = "trigram_lambda")]
 		double? TrigramLambda { get; set; }
 
-		[DataMember(Name ="unigram_lambda")]
+		[DataMember(Name = "unigram_lambda")]
 		double? UnigramLambda { get; set; }
 	}
 

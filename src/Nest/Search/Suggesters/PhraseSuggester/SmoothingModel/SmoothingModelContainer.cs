@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[JsonConverter(typeof(ReserializeJsonConverter<SmoothingModelContainer, ISmoothingModelContainer>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(SmoothingModelContainer))]
 	public interface ISmoothingModelContainer
 	{
-		[DataMember(Name ="laplace")]
+		[DataMember(Name = "laplace")]
 		ILaplaceSmoothingModel Laplace { get; set; }
 
-		[DataMember(Name ="linear_interpolation")]
+		[DataMember(Name = "linear_interpolation")]
 		ILinearInterpolationSmoothingModel LinearInterpolation { get; set; }
 
-		[DataMember(Name ="stupid_backoff")]
+		[DataMember(Name = "stupid_backoff")]
 		IStupidBackoffSmoothingModel StupidBackoff { get; set; }
 	}
 

@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, HighlightHit>))]
+	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, HighlightHit>))]
 	public class HighlightFieldDictionary : Dictionary<string, HighlightHit>
 	{
 		public HighlightFieldDictionary(IDictionary<string, HighlightHit> dictionary = null)

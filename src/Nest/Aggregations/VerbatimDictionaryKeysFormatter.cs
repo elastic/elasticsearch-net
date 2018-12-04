@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using Utf8Json;
 
 namespace Nest
 {
-	public class VerbatimDictionaryKeysFormatter<TKey, TValue> : IJsonFormatter<IDictionary<TKey, TValue>>
+	public class VerbatimDictionaryKeysFormatterBase<TDictionary, TKey, TValue> : IJsonFormatter<TDictionary>
+		where TDictionary : IEnumerable<KeyValuePair<TKey, TValue>>
 	{
 		private readonly bool _keyIsField = typeof(TKey) == typeof(Field);
 		private readonly bool _keyIsIndexName = typeof(TKey) == typeof(IndexName);
@@ -14,13 +16,13 @@ namespace Nest
 		private readonly bool _keyIsString = typeof(TKey) == typeof(string);
 		private readonly bool _keyIsTypeName = typeof(TKey) == typeof(TypeName);
 
-		public virtual IDictionary<TKey, TValue> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		public virtual TDictionary Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var formatter = formatterResolver.GetFormatter<IDictionary<TKey, TValue>>();
+			var formatter = formatterResolver.GetFormatter<TDictionary>();
 			return formatter.Deserialize(ref reader, formatterResolver);
 		}
 
-		public void Serialize(ref JsonWriter writer, IDictionary<TKey, TValue> value, IJsonFormatterResolver formatterResolver)
+		public void Serialize(ref JsonWriter writer, TDictionary value, IJsonFormatterResolver formatterResolver)
 		{
 			var enumerable = (IEnumerable<KeyValuePair<TKey, TValue>>)value;
 			if (enumerable == null)
@@ -30,7 +32,7 @@ namespace Nest
 			}
 
 			var settings = formatterResolver.GetConnectionSettings();
-			var seenEntries = new Dictionary<string, TValue>(value.Count);
+			var seenEntries = new Dictionary<string, TValue>(value.Count());
 
 			foreach (var entry in enumerable)
 			{
@@ -93,5 +95,13 @@ namespace Nest
 
 		protected virtual bool SkipValue(KeyValuePair<TKey, TValue> entry) =>
 			entry.Value == null; //TODO: Check connection settings for allow nulls
+	}
+
+	public class VerbatimReadOnlyDictionaryKeysFormatter<TKey, TValue> : VerbatimDictionaryKeysFormatterBase<IReadOnlyDictionary<TKey, TValue>, TKey, TValue>
+	{
+	}
+
+	public class VerbatimDictionaryKeysFormatter<TKey, TValue> : VerbatimDictionaryKeysFormatterBase<IDictionary<TKey, TValue>, TKey, TValue>
+	{
 	}
 }

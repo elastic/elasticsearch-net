@@ -1,47 +1,81 @@
-using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
+using System.Text;
+using Utf8Json;
+using Utf8Json.Internal;
 
 namespace Nest
 {
-	internal class FieldRuleBaseJsonConverter : VerbatimDictionaryKeysJsonConverter<string, object>
+	internal class FieldRuleBaseFormatter : IJsonFormatter<FieldRuleBase>
 	{
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
-			ReadFieldRule(reader, objectType, existingValue, serializer);
-
-		public static FieldRuleBase ReadFieldRule(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		private static readonly AutomataDictionary Fields = new AutomataDictionary
 		{
-			var depth = reader.Depth;
-			if (reader.TokenType != JsonToken.StartObject) return reader.ReadToEnd<FieldRuleBase>(depth);
+			{ "username", 0 },
+			{ "dn", 1 },
+			{ "realm.name", 2 },
+			{ "groups", 3 }
+		};
 
-			reader.Read();
-			if (reader.TokenType != JsonToken.PropertyName) return reader.ReadToEnd<FieldRuleBase>(depth);
+		private static readonly VerbatimDictionaryKeysFormatter<string, object> Formatter =
+			new VerbatimDictionaryKeysFormatter<string, object>();
 
-			var propertyName = (string)reader.Value;
-			switch (propertyName)
+		public FieldRuleBase Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
+				return null;
+
+			var count = 0;
+			FieldRuleBase fieldRule = null;
+			while (reader.ReadIsInObject(ref count))
 			{
-				case "username":
-					var username = reader.ReadAsString();
-					return reader.ExhaustTo(depth, new UsernameRule(username));
-				case "dn":
-					var dn = reader.ReadAsString();
-					return reader.ExhaustTo(depth, new DistinguishedNameRule(dn));
-				case "realm.name":
-					var realm = reader.ReadAsString();
-					return reader.ExhaustTo(depth, new RealmRule(realm));
-				case "groups":
-					reader.Read(); // [
-					var groups = serializer.Deserialize<List<string>>(reader);
-					return reader.ExhaustTo(depth, new GroupsRule(groups));
-				default:
-					if (!propertyName.StartsWith("metadata."))
-						return reader.ReadToEnd<FieldRuleBase>(depth, null);
-
-					reader.Read(); //
-					var key = propertyName.Replace("metadata.", "");
-					var metadata = serializer.Deserialize<object>(reader);
-					return reader.ExhaustTo(depth, new MetadataRule(key, metadata));
+				var propertyName = reader.ReadPropertyNameSegmentRaw();
+				if (Fields.TryGetValue(propertyName, out var value))
+				{
+					switch (value)
+					{
+						case 0:
+							var username = reader.ReadString();
+							fieldRule = new UsernameRule(username);
+							break;
+						case 1:
+							var dn = reader.ReadString();
+							fieldRule = new DistinguishedNameRule(dn);
+							break;
+						case 2:
+							var realm = reader.ReadString();
+							fieldRule = new RealmRule(realm);
+							break;
+						case 3:
+							var formatter = formatterResolver.GetFormatter<IEnumerable<string>>();
+							var groups = formatter.Deserialize(ref reader, formatterResolver);
+							fieldRule = new GroupsRule(groups);
+							break;
+					}
+				}
+				else
+				{
+					var name = Encoding.UTF8.GetString(propertyName.Array, propertyName.Offset, propertyName.Count);
+					if (name.StartsWith("metadata."))
+					{
+						name = name.Replace("metadata.", string.Empty);
+						var metadata = formatterResolver.GetFormatter<object>()
+							.Deserialize(ref reader, formatterResolver);
+						fieldRule = new MetadataRule(name, metadata);
+					}
+				}
 			}
+
+			return fieldRule;
+		}
+
+		public void Serialize(ref JsonWriter writer, FieldRuleBase value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
+
+			Formatter.Serialize(ref writer, value, formatterResolver);
 		}
 	}
 }

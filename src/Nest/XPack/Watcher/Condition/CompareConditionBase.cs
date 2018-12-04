@@ -1,12 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Linq;
+﻿using Utf8Json;
+using Utf8Json.Internal;
 
 namespace Nest
 {
-	[DataContract]
-	[JsonConverter(typeof(CompareConditionConverter))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(CompareConditionFormatter))]
 	public interface ICompareCondition : ICondition
 	{
 		string Comparison { get; }
@@ -95,54 +93,78 @@ namespace Nest
 		protected override string Comparison => "lte";
 	}
 
-	internal class CompareConditionConverter : JsonConverter
+	internal class CompareConditionFormatter : IJsonFormatter<ICompareCondition>
 	{
-		public override bool CanRead => true;
-
-		public override bool CanWrite => true;
-
-		public override bool CanConvert(Type objectType) => true;
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		private static readonly AutomataDictionary Comparisons = new AutomataDictionary
 		{
-			if (reader.TokenType != JsonToken.StartObject) return null;
+			{ "eq", 0 },
+			{ "not_eq", 1 },
+			{ "gt", 2 },
+			{ "gte", 3 },
+			{ "lt", 4 },
+			{ "lte", 5 },
+		};
 
-			var compare = JObject.Load(reader);
-			if (compare.Count == 0) return null;
+		public ICompareCondition Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
+				return null;
 
-			var pathProperty = compare.Children<JProperty>().First();
-			if (pathProperty.Count == 0) return null;
-
-			var path = pathProperty.Name;
-
-			var conditionProperty = pathProperty.Value.Children<JProperty>().First();
-			if (conditionProperty.Count == 0) return null;
-
-			var condition = conditionProperty.Name;
-			var value = serializer.Deserialize<object>(conditionProperty.Value.CreateReader());
-
-			switch (condition)
+			var count = 0;
+			ICompareCondition condition = null;
+			while (reader.ReadIsInObject(ref count))
 			{
-				case "eq": return new EqualCondition(path, value);
-				case "not_eq": return new NotEqualCondition(path, value);
-				case "gt": return new GreaterThanCondition(path, value);
-				case "gte": return new GreaterThanOrEqualCondition(path, value);
-				case "lt": return new LowerThanCondition(path, value);
-				case "lte": return new LowerThanOrEqualCondition(path, value);
-				default: return null;
+				var path = reader.ReadPropertyName();
+				var innerCount = 0;
+				while (reader.ReadIsInObject(ref innerCount))
+				{
+					var comparison = reader.ReadPropertyNameSegmentRaw();
+					var formatter = formatterResolver.GetFormatter<object>();
+					var comparisonValue = formatter.Deserialize(ref reader, formatterResolver);
+
+					if (Comparisons.TryGetValue(comparison, out var value))
+					{
+						switch (value)
+						{
+							case 0:
+								condition = new EqualCondition(path, comparisonValue);
+								break;
+							case 1:
+								condition = new NotEqualCondition(path, value);
+								break;
+							case 2:
+								condition = new GreaterThanCondition(path, value);
+								break;
+							case 3:
+								condition = new GreaterThanOrEqualCondition(path, value);
+								break;
+							case 4:
+								condition = new LowerThanCondition(path, value);
+								break;
+							case 5:
+								condition = new LowerThanOrEqualCondition(path, value);
+								break;
+						}
+					}
+				}
 			}
+
+			return condition;
 		}
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public void Serialize(ref JsonWriter writer, ICompareCondition value, IJsonFormatterResolver formatterResolver)
 		{
-			var s = value as ICompareCondition;
-			if (s == null || s.Path.IsNullOrEmpty()) return;
+			if (value == null || value.Path.IsNullOrEmpty()) return;
 
-			writer.WriteStartObject();
-			writer.WritePropertyName(s.Path);
-			writer.WriteStartObject();
-			writer.WritePropertyName(s.Comparison);
-			writer.WriteValue(s.Value);
+			writer.WriteBeginObject();
+			writer.WritePropertyName(value.Path);
+
+			writer.WriteBeginObject();
+			writer.WritePropertyName(value.Comparison);
+
+			var formatter = formatterResolver.GetFormatter<object>();
+			formatter.Serialize(ref writer, value.Value, formatterResolver);
+
 			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}

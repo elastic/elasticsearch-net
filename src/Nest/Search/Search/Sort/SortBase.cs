@@ -1,11 +1,12 @@
 using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[ContractJsonConverter(typeof(SortJsonConverter))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(SortFormatter))]
 	public interface ISort
 	{
 		/// <summary>

@@ -1,17 +1,18 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface ILoggingAction : IAction
 	{
-		[DataMember(Name ="category")]
+		[DataMember(Name = "category")]
 		string Category { get; set; }
 
-		[DataMember(Name ="level")]
+		[DataMember(Name = "level")]
 		LogLevel? Level { get; set; }
 
-		[DataMember(Name ="text")]
+		[DataMember(Name = "text")]
 		string Text { get; set; }
 	}
 

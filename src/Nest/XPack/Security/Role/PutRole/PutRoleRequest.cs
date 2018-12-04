@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -13,13 +14,13 @@ namespace Nest
 		/// <summary>
 		/// A list of application privileges
 		/// </summary>
-		[DataMember(Name ="applications")]
+		[DataMember(Name = "applications")]
 		IEnumerable<IApplicationPrivileges> Applications { get; set; }
 
 		/// <summary>
 		/// A list of cluster privileges
 		/// </summary>
-		[DataMember(Name ="cluster")]
+		[DataMember(Name = "cluster")]
 		IEnumerable<string> Cluster { get; set; }
 
 		/// <summary>
@@ -27,27 +28,27 @@ namespace Nest
 		/// request-aware. Support for global privileges is currently limited to
 		/// the management of application privileges.
 		/// </summary>
-		[DataMember(Name ="global")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysPreservingNullJsonConverter<string, object>))]
+		[DataMember(Name = "global")]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysPreservingNullFormatter<string, object>))]
 		IDictionary<string, object> Global { get; set; }
 
 		/// <summary>
 		/// A list of indices permissions entries
 		/// </summary>
-		[DataMember(Name ="indices")]
+		[DataMember(Name = "indices")]
 		IEnumerable<IIndicesPrivileges> Indices { get; set; }
 
 		/// <summary>
 		/// Optional meta-data. Within the metadata object, keys that begin with _ are reserved for system usage.
 		/// </summary>
-		[DataMember(Name ="metadata")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysPreservingNullJsonConverter<string, object>))]
+		[DataMember(Name = "metadata")]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysPreservingNullFormatter<string, object>))]
 		IDictionary<string, object> Metadata { get; set; }
 
 		/// <summary>
 		/// A list of users that the owners of this role can impersonate.
 		/// </summary>
-		[DataMember(Name ="run_as")]
+		[DataMember(Name = "run_as")]
 		IEnumerable<string> RunAs { get; set; }
 	}
 

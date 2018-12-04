@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(SimulatedActionsConverter))]
+	[JsonFormatter(typeof(SimulatedActionsFormatter))]
 	public class SimulatedActions
 	{
 		private SimulatedActions() { }
@@ -19,28 +18,27 @@ namespace Nest
 		public static SimulatedActions Some(IEnumerable<string> actions) => new SimulatedActions { Actions = actions };
 	}
 
-	internal class SimulatedActionsConverter : JsonConverter
+	internal class SimulatedActionsFormatter : IJsonFormatter<SimulatedActions>
 	{
-		public override bool CanRead => true;
-
-		public override bool CanWrite => true;
-
-		public override bool CanConvert(Type objectType) => true;
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public SimulatedActions Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (reader.TokenType == JsonToken.String) return SimulatedActions.All;
+			if (reader.GetCurrentJsonToken() == JsonToken.String)
+				return SimulatedActions.All;
 
-			return SimulatedActions.Some(serializer.Deserialize<List<string>>(reader));
+			var formatter = formatterResolver.GetFormatter<IEnumerable<string>>();
+			return SimulatedActions.Some(formatter.Deserialize(ref reader, formatterResolver));
 		}
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public void Serialize(ref JsonWriter writer, SimulatedActions value, IJsonFormatterResolver formatterResolver)
 		{
-			var s = value as SimulatedActions;
-			if (s == null) return;
+			if (value == null) return;
 
-			if (s.UseAll) writer.WriteValue("_all");
-			else serializer.Serialize(writer, s.Actions);
+			if (value.UseAll) writer.WriteString("_all");
+			else
+			{
+				var formatter = formatterResolver.GetFormatter<IEnumerable<string>>();
+				formatter.Serialize(ref writer, value.Actions, formatterResolver);
+			}
 		}
 	}
 }

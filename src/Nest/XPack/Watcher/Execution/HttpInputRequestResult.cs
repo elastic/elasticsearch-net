@@ -3,6 +3,6 @@
 namespace Nest
 {
 	[DataContract]
-	[ExactContractJsonConverter(typeof(ReadAsTypeJsonConverter<HttpInputRequestResult>))]
+	[ReadAs(typeof(HttpInputRequestResult))]
 	public class HttpInputRequestResult : HttpInputRequest { }
 }

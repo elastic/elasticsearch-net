@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	//TODO 6.0 completely revisit how we mapped highlighters
 	//this is used in tophits/percolator AND in search highligher as the root
 	//Not all of these properties might make sense/valid there
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(Highlight))]
 	public interface IHighlight
 	{
@@ -46,7 +47,7 @@ namespace Nest
 		HighlighterEncoder? Encoder { get; set; }
 
 		[DataMember(Name ="fields")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Field, IHighlightField>))]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<Field, IHighlightField>))]
 		Dictionary<Field, IHighlightField> Fields { get; set; }
 
 		/// <summary>

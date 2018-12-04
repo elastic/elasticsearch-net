@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IGeoSuggestContext : ISuggestContext
 	{
 		[DataMember(Name ="neighbors")]

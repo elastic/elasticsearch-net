@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	[MapsApi("msearch.json")]
-	[JsonConverter(typeof(MultiSearchJsonConverter))]
+	[JsonFormatter(typeof(MultiSearchJsonConverter))]
 	public partial interface IMultiSearchRequest
 	{
 		IDictionary<string, ISearchRequest> Operations { get; set; }

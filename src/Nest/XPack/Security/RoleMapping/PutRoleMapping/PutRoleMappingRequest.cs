@@ -1,26 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	[MapsApi("security.put_role_mapping.json")]
 	public partial interface IPutRoleMappingRequest
 	{
-		[DataMember(Name ="enabled")]
+		[DataMember(Name = "enabled")]
 		bool? Enabled { get; set; }
 
-		[DataMember(Name ="metadata")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysPreservingNullJsonConverter<string, object>))]
+		[DataMember(Name = "metadata")]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysPreservingNullFormatter<string, object>))]
 		IDictionary<string, object> Metadata { get; set; }
 
-		[DataMember(Name ="roles")]
+		[DataMember(Name = "roles")]
 		IEnumerable<string> Roles { get; set; }
 
-		[DataMember(Name ="rules")]
+		[DataMember(Name = "rules")]
 		RoleMappingRuleBase Rules { get; set; }
 
-		[DataMember(Name ="run_as")]
+		[DataMember(Name = "run_as")]
 		IEnumerable<string> RunAs { get; set; }
 	}
 

@@ -26,8 +26,6 @@ namespace Nest
 		/// Returns buckets with timestamps earlier than this time.
 		/// </summary>
 		[DataMember(Name ="end")]
-		// Forced to prevent override, ML API always expects ISO8601 format
-		[JsonConverter(typeof(IsoDateTimeConverter))]
 		DateTimeOffset? End { get; set; }
 
 		/// <summary>
@@ -58,16 +56,12 @@ namespace Nest
 		/// Returns buckets with timestamps after this time.
 		/// </summary>
 		[DataMember(Name ="start")]
-		// Forced to prevent override, ML API always expects ISO8601 format
-		[JsonConverter(typeof(IsoDateTimeConverter))]
 		DateTimeOffset? Start { get; set; }
 
 		/// <summary>
 		/// Returns buckets with matching timestamps.
 		/// </summary>
 		[DataMember(Name ="timestamp")]
-		// Forced to prevent override, ML API always expects ISO8601 format
-		[JsonConverter(typeof(IsoDateTimeConverter))]
 		DateTimeOffset? Timestamp { get; set; }
 	}
 

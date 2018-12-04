@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[ContractJsonConverter(typeof(LikeJsonConverter))]
+	[JsonFormatter(typeof(LikeFormatter))]
 	public class Like : Union<string, ILikeDocument>
 	{
 		public Like(string item) : base(item) { }
@@ -33,22 +33,27 @@ namespace Nest
 		}
 	}
 
-	internal class LikeJsonConverter : JsonConverter
+	internal class LikeFormatter : IJsonFormatter<Like>
 	{
-		public static UnionJsonConverter<string, ILikeDocument> Unionconverter = new UnionJsonConverter<string, ILikeDocument>();
-		public override bool CanRead => true;
-		public override bool CanWrite => true;
+		private static readonly UnionFormatter<string, ILikeDocument> UnionFormatter = new UnionFormatter<string, ILikeDocument>();
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public Like Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (!(Unionconverter.ReadJson(reader, objectType, existingValue, serializer) is Union<string, ILikeDocument> union)) return null;
+			var union = UnionFormatter.Deserialize(ref reader, formatterResolver);
 
-			return union.Item1 != null ? new Like(union.Item1) : new Like(union.Item2);
+			if (union == null)
+				return null;
+
+			switch (union._tag)
+			{
+				case 0:
+					return new Like(union.Item1);
+				case 1:
+					return new Like(union.Item2);
+			}
 		}
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) =>
-			Unionconverter.WriteJson(writer, value, serializer);
-
-		public override bool CanConvert(Type objectType) => true;
+		public void Serialize(ref JsonWriter writer, Like value, IJsonFormatterResolver formatterResolver) =>
+			UnionFormatter.Serialize(ref writer, value, formatterResolver);
 	}
 }
