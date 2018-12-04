@@ -3,7 +3,7 @@
 namespace Nest
 {
 	[MapsApi("sql.translate.json")]
-	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<TranslateSqlRequest>))]
+	[ReadAs(typeof(TranslateSqlRequest))]
 	public partial interface ITranslateSqlRequest : ISqlRequest { }
 
 	public partial class TranslateSqlRequest

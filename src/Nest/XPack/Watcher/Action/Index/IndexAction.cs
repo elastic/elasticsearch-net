@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IIndexAction : IAction
 	{
 		[DataMember(Name = "execution_time_field")]
 		Field ExecutionTimeField { get; set; }
 
-		[DataMember(Name ="index")]
+		[DataMember(Name = "index")]
 		IndexName Index { get; set; }
 
-		[DataMember(Name ="timeout")]
+		[DataMember(Name = "timeout")]
 		Time Timeout { get; set; }
 	}
 

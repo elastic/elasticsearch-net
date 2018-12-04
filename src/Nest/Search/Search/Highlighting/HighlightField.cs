@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(HighlightField))]
 	public interface IHighlightField
 	{
@@ -13,26 +14,28 @@ namespace Nest
 		/// Defines what constitutes a boundary for highlighting when using the fast vector highlighter.
 		/// It's a single string with each boundary character defined in it. It defaults to .,!? \t\n.
 		/// </summary>
-		[DataMember(Name ="boundary_chars")]
+		[DataMember(Name = "boundary_chars")]
 		string BoundaryChars { get; set; }
 
 		/// <summary>
 		/// Controls how far to look for boundary characters. Defaults to 20.
 		/// </summary>
-		[DataMember(Name ="boundary_max_scan")]
+		[DataMember(Name = "boundary_max_scan")]
 		int? BoundaryMaxScan { get; set; }
 
 		/// <summary>
-		/// When highlighting a field using the unified highlighter or the fast vector highlighter, you can specify how to break the highlighted
+		/// When highlighting a field using the unified highlighter or the fast vector highlighter, you can specify how to break
+		/// the highlighted
 		/// fragments using boundary_scanner
 		/// </summary>
-		[DataMember(Name ="boundary_scanner")]
+		[DataMember(Name = "boundary_scanner")]
 		BoundaryScanner? BoundaryScanner { get; set; }
 
 		/// <summary>
-		/// You can further specify boundary_scanner_locale to control which Locale is used to search the text for these boundaries.
+		/// You can further specify boundary_scanner_locale to control which Locale is used to search the text for these
+		/// boundaries.
 		/// </summary>
-		[DataMember(Name ="boundary_scanner_locale")]
+		[DataMember(Name = "boundary_scanner_locale")]
 		string BoundaryScannerLocale { get; set; }
 
 		/// <summary>
@@ -48,32 +51,32 @@ namespace Nest
 		/// <summary>
 		/// Forces the highlighting to highlight fields based on the source even if fields are stored separately.
 		/// </summary>
-		[DataMember(Name ="force_source")]
+		[DataMember(Name = "force_source")]
 		bool? ForceSource { get; set; }
 
 		/// <summary>
 		/// Fragmenter can control how text should be broken up in highlight snippets. However, this option is
 		/// applicable only for the Plain Highlighter
 		/// </summary>
-		[DataMember(Name ="fragmenter")]
+		[DataMember(Name = "fragmenter")]
 		HighlighterFragmenter? Fragmenter { get; set; }
 
 		/// <summary>
 		/// Controls the margin to start highlighting from when using the fast vector highlighter
 		/// </summary>
-		[DataMember(Name ="fragment_offset")]
+		[DataMember(Name = "fragment_offset")]
 		int? FragmentOffset { get; set; }
 
 		/// <summary>
 		/// The size of the highlighted fragment, in characters. Defaults to 100
 		/// </summary>
-		[DataMember(Name ="fragment_size")]
+		[DataMember(Name = "fragment_size")]
 		int? FragmentSize { get; set; }
 
 		/// <summary>
 		/// The query to use for highlighting
 		/// </summary>
-		[DataMember(Name ="highlight_query")]
+		[DataMember(Name = "highlight_query")]
 		QueryContainer HighlightQuery { get; set; }
 
 		/// <summary>
@@ -82,10 +85,10 @@ namespace Nest
 		/// All matched fields must have term_vector set to with_positions_offsets, but only the field to
 		/// which the matches are combined is loaded so only that field would benefit from having store set to yes.
 		/// </summary>
-		[DataMember(Name ="matched_fields")]
+		[DataMember(Name = "matched_fields")]
 		Fields MatchedFields { get; set; }
 
-		[DataMember(Name ="max_fragment_length")]
+		[DataMember(Name = "max_fragment_length")]
 		int? MaxFragmentLength { get; set; }
 
 		/// <summary>
@@ -93,28 +96,29 @@ namespace Nest
 		/// when no match for highlighting is found. Default behaviour is to not return anything when a match is not found.
 		/// The actual length may be shorter than specified as it tries to break on a word boundary.
 		/// </summary>
-		[DataMember(Name ="no_match_size")]
+		[DataMember(Name = "no_match_size")]
 		int? NoMatchSize { get; set; }
 
 		/// <summary>
 		/// The maximum number of fragments to return. Defaults to 5.
 		/// </summary>
-		[DataMember(Name ="number_of_fragments")]
+		[DataMember(Name = "number_of_fragments")]
 		int? NumberOfFragments { get; set; }
 
 		/// <summary>
 		/// The order in which highlighted fragments are sorted. Only valid for the unified highlighter.
 		/// </summary>
-		[DataMember(Name ="order")]
+		[DataMember(Name = "order")]
 		HighlighterOrder? Order { get; set; }
 
 		/// <summary>
 		/// Controls the number of matching phrases in a document that are considered. Prevents the
 		/// <see cref="HighlighterType.Fvh" /> highlighter from analyzing too many phrases and consuming too much memory.
-		/// When using matched_fields, <see cref="PhraseLimit" /> phrases per matched field are considered. Raising the limit increases query time
+		/// When using matched_fields, <see cref="PhraseLimit" /> phrases per matched field are considered. Raising the limit
+		/// increases query time
 		/// and consumes more memory. Only supported by the <see cref="HighlighterType.Fvh" /> highlighter. Defaults to 256.
 		/// </summary>
-		[DataMember(Name ="phrase_limit")]
+		[DataMember(Name = "phrase_limit")]
 		int? PhraseLimit { get; set; }
 
 		/// <summary>
@@ -122,7 +126,7 @@ namespace Nest
 		/// By default, the highlighting will wrap highlighted text in &lt;em&gt; and &lt;/em&gt;.
 		/// Using the fast vector highlighter, there can be more tags, and the importance is ordered.
 		/// </summary>
-		[DataMember(Name ="post_tags")]
+		[DataMember(Name = "post_tags")]
 		IEnumerable<string> PostTags { get; set; }
 
 		/// <summary>
@@ -130,14 +134,15 @@ namespace Nest
 		/// By default, the highlighting will wrap highlighted text in &lt;em&gt; and &lt;/em&gt;.
 		/// Using the fast vector highlighter, there can be more tags, and the importance is ordered.
 		/// </summary>
-		[DataMember(Name ="pre_tags")]
+		[DataMember(Name = "pre_tags")]
 		IEnumerable<string> PreTags { get; set; }
 
 		/// <summary>
 		/// Determines if only fields that hold a query match will be highlighted. Set to <c>false</c>
-		/// will cause any field to be highlighted regardless of whether the query matched specifically on them. Default behaviour is <c>true</c>.
+		/// will cause any field to be highlighted regardless of whether the query matched specifically on them. Default behaviour
+		/// is <c>true</c>.
 		/// </summary>
-		[DataMember(Name ="require_field_match")]
+		[DataMember(Name = "require_field_match")]
 		bool? RequireFieldMatch { get; set; }
 
 		/// <summary>
@@ -150,13 +155,13 @@ namespace Nest
 		/// &lt;em class="hlt7"&gt;, &lt;em class="hlt8"&gt;, &lt;em class="hlt9"&gt;,
 		/// &lt;em class="hlt10"&gt;
 		/// </remarks>
-		[DataMember(Name ="tags_schema")]
+		[DataMember(Name = "tags_schema")]
 		HighlighterTagsSchema? TagsSchema { get; set; }
 
 		/// <summary>
 		/// The type of highlighter to use. Can be a defined or custom highlighter
 		/// </summary>
-		[DataMember(Name ="type")]
+		[DataMember(Name = "type")]
 		Union<HighlighterType, string> Type { get; set; }
 	}
 

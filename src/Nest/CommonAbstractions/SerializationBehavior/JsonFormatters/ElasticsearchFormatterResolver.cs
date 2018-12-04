@@ -48,7 +48,7 @@ namespace Nest
 				{
 					new QueryContainerCollectionFormatter(),
 				}, new IJsonFormatterResolver[0]),
-				DynamicObjectResolver.AllowPrivateExcludeNullCamelCase
+				DynamicObjectResolver.ExcludeNullCamelCase
 
 			};
 

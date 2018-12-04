@@ -28,7 +28,6 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name ="end")]
 		// Forced to prevent override, ML API always expects ISO8601 format
-		[JsonConverter(typeof(IsoDateTimeConverter))]
 		DateTimeOffset? End { get; set; }
 
 		/// <summary>
@@ -49,7 +48,6 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name ="start")]
 		// Forced to prevent override, ML API always expects ISO8601 format
-		[JsonConverter(typeof(IsoDateTimeConverter))]
 		DateTimeOffset? Start { get; set; }
 
 		/// <summary>

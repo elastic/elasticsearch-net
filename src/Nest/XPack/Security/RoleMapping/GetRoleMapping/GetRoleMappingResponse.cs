@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -9,7 +10,7 @@ namespace Nest
 	}
 
 	[DataContract]
-	[JsonConverter(typeof(DictionaryResponseJsonConverter<GetRoleMappingResponse, string, XPackRoleMapping>))]
+	[JsonFormatter(typeof(DictionaryResponseFormatter<GetRoleMappingResponse, string, XPackRoleMapping>))]
 	public class GetRoleMappingResponse : DictionaryResponseBase<string, XPackRoleMapping>, IGetRoleMappingResponse
 	{
 		[IgnoreDataMember]

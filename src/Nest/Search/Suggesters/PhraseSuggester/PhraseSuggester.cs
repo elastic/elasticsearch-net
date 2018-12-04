@@ -2,50 +2,51 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(PhraseSuggester))]
 	public interface IPhraseSuggester : ISuggester
 	{
-		[DataMember(Name ="collate")]
+		[DataMember(Name = "collate")]
 		IPhraseSuggestCollate Collate { get; set; }
 
-		[DataMember(Name ="confidence")]
+		[DataMember(Name = "confidence")]
 		double? Confidence { get; set; }
 
-		[DataMember(Name ="direct_generator")]
+		[DataMember(Name = "direct_generator")]
 		IEnumerable<IDirectGenerator> DirectGenerator { get; set; }
 
-		[DataMember(Name ="force_unigrams")]
+		[DataMember(Name = "force_unigrams")]
 		bool? ForceUnigrams { get; set; }
 
-		[DataMember(Name ="gram_size")]
+		[DataMember(Name = "gram_size")]
 		int? GramSize { get; set; }
 
-		[DataMember(Name ="highlight")]
+		[DataMember(Name = "highlight")]
 		IPhraseSuggestHighlight Highlight { get; set; }
 
-		[DataMember(Name ="max_errors")]
+		[DataMember(Name = "max_errors")]
 		double? MaxErrors { get; set; }
 
-		[DataMember(Name ="real_word_error_likelihood")]
+		[DataMember(Name = "real_word_error_likelihood")]
 		double? RealWordErrorLikelihood { get; set; }
 
-		[DataMember(Name ="separator")]
+		[DataMember(Name = "separator")]
 		char? Separator { get; set; }
 
-		[DataMember(Name ="shard_size")]
+		[DataMember(Name = "shard_size")]
 		int? ShardSize { get; set; }
 
-		[DataMember(Name ="smoothing")]
+		[DataMember(Name = "smoothing")]
 		SmoothingModelContainer Smoothing { get; set; }
 
 		[IgnoreDataMember]
 		string Text { get; set; }
 
-		[DataMember(Name ="token_limit")]
+		[DataMember(Name = "token_limit")]
 		int? TokenLimit { get; set; }
 	}
 

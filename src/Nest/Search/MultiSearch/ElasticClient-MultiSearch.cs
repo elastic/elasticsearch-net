@@ -74,7 +74,7 @@ namespace Nest
 			}
 		);
 
-		private JsonConverter CreateMultiSearchDeserializer(IMultiSearchRequest request) =>
-			new MultiSearchResponseJsonConverter(ConnectionSettings, request);
+		private MultiSearchResponseFormatter CreateMultiSearchDeserializer(IMultiSearchRequest request) =>
+			new MultiSearchResponseFormatter(ConnectionSettings, request);
 	}
 }

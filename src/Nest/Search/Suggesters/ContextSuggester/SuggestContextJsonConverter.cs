@@ -1,37 +1,60 @@
 using System;
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Linq;
+using Utf8Json;
+using Utf8Json.Internal;
 
 namespace Nest
 {
-	internal class SuggestContextJsonConverter : JsonConverter
+	internal class SuggestContextFormatter : IJsonFormatter<ISuggestContext>
 	{
-		public override bool CanRead => true;
-		public override bool CanWrite => false;
-
-		public override bool CanConvert(Type objectType) => true;
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		private static readonly AutomataDictionary ContextTypes = new AutomataDictionary
 		{
-			var jo = JObject.Load(reader);
-			var prop = jo.Property("type");
-			if (prop == null) return null;
+			{ "geo", 0 },
+			{ "category", 1 }
+		};
 
-			switch (prop.Value.Value<string>())
+		public ISuggestContext Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			if (reader.GetCurrentJsonToken() == JsonToken.Null)
+				return null;
+
+			var segment = reader.ReadNextBlockSegment();
+			var segmentReader = new JsonReader(segment.Array, segment.Offset);
+
+			var count = 0;
+			ArraySegment<byte> contextType;
+			while (segmentReader.ReadIsInObject(ref count))
 			{
-				case "geo":
-					var g = new GeoSuggestContext();
-					serializer.Populate(jo.CreateReader(), g);
-					return g;
-
-				case "category":
-				default:
-					var c = new CategorySuggestContext();
-					serializer.Populate(jo.CreateReader(), c);
-					return c;
+				if (segmentReader.ReadPropertyName() == "type")
+				{
+					contextType = segmentReader.ReadStringSegmentRaw();
+					break;
+				}
 			}
+
+			segmentReader = new JsonReader(segment.Array, segment.Offset);
+
+			if (ContextTypes.TryGetValue(contextType, out var value))
+			{
+				switch (value)
+				{
+					case 0:
+						return Deserialize<GeoSuggestContext>(ref segmentReader, formatterResolver);
+					case 1:
+						return Deserialize<CategorySuggestContext>(ref segmentReader, formatterResolver);
+				}
+			}
+
+			return Deserialize<CategorySuggestContext>(ref segmentReader, formatterResolver);
 		}
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }
+		public void Serialize(ref JsonWriter writer, ISuggestContext value, IJsonFormatterResolver formatterResolver) =>
+			throw new NotSupportedException();
+
+		private static TContext Deserialize<TContext>(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+			where TContext : ISuggestContext
+		{
+			var formatter = formatterResolver.GetFormatter<TContext>();
+			return formatter.Deserialize(ref reader, formatterResolver);
+		}
 	}
 }

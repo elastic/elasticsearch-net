@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization;
-
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[ExactContractJsonConverter(typeof(ReadAsTypeJsonConverter<PagerDutyAction>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(PagerDutyAction))]
 	public interface IPagerDutyAction : IAction, IPagerDutyEvent { }
 
 	public class PagerDutyAction : ActionBase, IPagerDutyAction

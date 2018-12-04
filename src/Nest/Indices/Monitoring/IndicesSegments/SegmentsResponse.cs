@@ -13,7 +13,7 @@ namespace Nest
 	public class SegmentsResponse : ResponseBase, ISegmentsResponse
 	{
 		[DataMember(Name ="indices")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, IndexSegment>))]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, IndexSegment>))]
 		public IReadOnlyDictionary<string, IndexSegment> Indices { get; internal set; } = EmptyReadOnly<string, IndexSegment>.Dictionary;
 
 		[DataMember(Name ="_shards")]

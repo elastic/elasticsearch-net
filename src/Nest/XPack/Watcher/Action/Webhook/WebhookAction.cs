@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[ExactContractJsonConverter(typeof(ReadAsTypeJsonConverter<WebhookAction>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(WebhookAction))]
 	public interface IWebhookAction : IAction, IHttpInputRequest { }
 
 	public class WebhookAction : ActionBase, IWebhookAction

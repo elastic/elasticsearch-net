@@ -1,31 +1,32 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// Conditions for a watch
 	/// </summary>
-	[DataContract]
-	[JsonConverter(typeof(ReserializeJsonConverter<ConditionContainer, IConditionContainer>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(ConditionContainer))]
 	public interface IConditionContainer
 	{
 		/// <summary>
 		/// Forces the watch actions to be executed unless they are throttled.
 		/// </summary>
-		[DataMember(Name ="always")]
+		[DataMember(Name = "always")]
 		IAlwaysCondition Always { get; set; }
 
 		/// <summary>
 		/// Compares an array of values in the execution context to a given value.
 		/// </summary>
-		[DataMember(Name ="array_compare")]
+		[DataMember(Name = "array_compare")]
 		IArrayCompareCondition ArrayCompare { get; set; }
 
 		/// <summary>
 		/// Performs a simple comparison against a value in the watch payload.
 		/// </summary>
-		[DataMember(Name ="compare")]
+		[DataMember(Name = "compare")]
 		ICompareCondition Compare { get; set; }
 
 		/// <summary>
@@ -36,7 +37,7 @@ namespace Nest
 		/// <remarks>
 		/// This condition is generally used for testing.
 		/// </remarks>
-		[DataMember(Name ="never")]
+		[DataMember(Name = "never")]
 		INeverCondition Never { get; set; }
 
 		/// <summary>
@@ -52,7 +53,7 @@ namespace Nest
 		/// To enable groovy scripting for watches only,
 		/// you can set script.engine.groovy.inline.xpack_watch: true.
 		/// </remarks>
-		[DataMember(Name ="script")]
+		[DataMember(Name = "script")]
 		IScriptCondition Script { get; set; }
 	}
 

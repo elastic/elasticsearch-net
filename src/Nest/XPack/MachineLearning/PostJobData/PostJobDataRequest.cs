@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Elasticsearch.Net;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(PostJobDataConverter))]
 	[MapsApi("ml.post_data.json")]
+	[JsonFormatter(typeof(PostJobDataFormatter))]
 	public partial interface IPostJobDataRequest
 	{
 		/// <summary>
@@ -40,37 +41,36 @@ namespace Nest
 		/// <inheritdoc />
 		public PostJobDataDescriptor Data(params object[] data) => Assign(a =>
 		{
-			if (data != null && data.Length == 1 && data[0] is IEnumerable)
-				a.Data = ((IEnumerable)data[0]).Cast<object>();
+			if (data != null && data.Length == 1 && data[0] is IEnumerable enumerable)
+				a.Data = enumerable.Cast<object>();
 			else a.Data = data;
 		});
 	}
 
-	internal class PostJobDataConverter : JsonConverter
+	internal class PostJobDataFormatter : IJsonFormatter<IPostJobDataRequest>
 	{
-		public override bool CanRead => false;
+		private const byte Newline = (byte)'\n';
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public IPostJobDataRequest Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
+			throw new NotSupportedException();
+
+		public void Serialize(ref JsonWriter writer, IPostJobDataRequest value, IJsonFormatterResolver formatterResolver)
 		{
-			var request = (IPostJobDataRequest)value;
-			if (request?.Data == null)
+			if (value?.Data == null)
 			{
 				writer.WriteNull();
 				return;
 			}
 
-			var settings = serializer.GetConnectionSettings();
-			var elasticsearchSerializer = settings.RequestResponseSerializer;
-			foreach (var data in request.Data)
+			var settings = formatterResolver.GetConnectionSettings();
+			var sourceSerializer = settings.SourceSerializer;
+
+			foreach (var data in value.Data)
 			{
-				var bodyJson = elasticsearchSerializer.SerializeToString(data, SerializationFormatting.None);
-				writer.WriteRaw(bodyJson + "\n");
+				var bodyJson = sourceSerializer.SerializeToBytes(data, SerializationFormatting.None);
+				writer.WriteRaw(bodyJson);
+				writer.WriteRaw(Newline);
 			}
 		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
-			throw new NotSupportedException();
-
-		public override bool CanConvert(Type objectType) => true;
 	}
 }

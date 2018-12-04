@@ -3,70 +3,71 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// The percolate query can be used to match queries stored in an index
 	/// </summary>
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(PercolateQuery))]
 	public interface IPercolateQuery : IQuery
 	{
 		/// <summary>
 		/// The source of the document to percolate.
 		/// </summary>
-		[DataMember(Name ="document")]
-		[JsonConverter(typeof(SourceConverter))]
+		[DataMember(Name = "document")]
+		[JsonFormatter(typeof(SourceFormatter<>))]
 		object Document { get; set; }
 
 		/// <summary>
 		/// The source of the documents to percolate. Like <see cref="Document" /> but allows
 		/// multiple documents to be percolated.
 		/// </summary>
-		[DataMember(Name ="documents")]
-		[JsonConverter(typeof(SourceConverter))]
+		[DataMember(Name = "documents")]
+		[JsonFormatter(typeof(SourceFormatter<>))]
 		IEnumerable<object> Documents { get; set; }
 
 		/// <summary>
 		/// The name of the field containing the percolated query on an existing document. This is a required parameter.
 		/// </summary>
-		[DataMember(Name ="field")]
+		[DataMember(Name = "field")]
 		Field Field { get; set; }
 
 		/// <summary>
 		/// The id of the document to fetch for percolation.
 		/// Can be specified to percolate an existing document instead of providing <see cref="Document" />
 		/// </summary>
-		[DataMember(Name ="id")]
+		[DataMember(Name = "id")]
 		Id Id { get; set; }
 
 		/// <summary>
 		/// The index the document resides in for percolation.
 		/// Can be specified to percolate an existing document instead of providing <see cref="Document" />
 		/// </summary>
-		[DataMember(Name ="index")]
+		[DataMember(Name = "index")]
 		IndexName Index { get; set; }
 
 		/// <summary>
 		/// Preference to be used to fetch the document to percolate.
 		/// Can be specified to percolate an existing document instead of providing <see cref="Document" />
 		/// </summary>
-		[DataMember(Name ="preference")]
+		[DataMember(Name = "preference")]
 		string Preference { get; set; }
 
 		/// <summary>
 		/// Routing to be used to fetch the document to percolate.
 		/// Can be specified to percolate an existing document instead of providing <see cref="Document" />
 		/// </summary>
-		[DataMember(Name ="routing")]
+		[DataMember(Name = "routing")]
 		Routing Routing { get; set; }
 
 		/// <summary>
 		/// The expected version of the document to be fetched for percolation.
 		/// Can be specified to percolate an existing document instead of providing <see cref="Document" />
 		/// </summary>
-		[DataMember(Name ="version")]
+		[DataMember(Name = "version")]
 		long? Version { get; set; }
 	}
 

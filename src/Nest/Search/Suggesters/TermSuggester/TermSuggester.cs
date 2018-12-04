@@ -1,44 +1,44 @@
-﻿using Elasticsearch.Net;
-using System.Runtime.Serialization;
-
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(TermSuggester))]
 	public interface ITermSuggester : ISuggester
 	{
-		[DataMember(Name ="lowercase_terms")]
+		[DataMember(Name = "lowercase_terms")]
 		bool? LowercaseTerms { get; set; }
 
-		[DataMember(Name ="max_edits")]
+		[DataMember(Name = "max_edits")]
 		int? MaxEdits { get; set; }
 
-		[DataMember(Name ="max_inspections")]
+		[DataMember(Name = "max_inspections")]
 		int? MaxInspections { get; set; }
 
-		[DataMember(Name ="max_term_freq")]
+		[DataMember(Name = "max_term_freq")]
 		decimal? MaxTermFrequency { get; set; }
 
-		[DataMember(Name ="min_doc_freq")]
+		[DataMember(Name = "min_doc_freq")]
 		decimal? MinDocFrequency { get; set; }
 
-		[DataMember(Name ="min_word_length")]
+		[DataMember(Name = "min_word_length")]
 		int? MinWordLength { get; set; }
 
-		[DataMember(Name ="prefix_length")]
+		[DataMember(Name = "prefix_length")]
 		int? PrefixLength { get; set; }
 
-		[DataMember(Name ="shard_size")]
+		[DataMember(Name = "shard_size")]
 		int? ShardSize { get; set; }
 
-		[DataMember(Name ="sort")]
+		[DataMember(Name = "sort")]
 		SuggestSort? Sort { get; set; }
 
-		[DataMember(Name ="string_distance")]
+		[DataMember(Name = "string_distance")]
 		StringDistance? StringDistance { get; set; }
 
-		[DataMember(Name ="suggest_mode")]
+		[DataMember(Name = "suggest_mode")]
 
 		SuggestMode? SuggestMode { get; set; }
 

@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(CompletionSuggester))]
 	public interface ICompletionSuggester : ISuggester
 	{
 		/// <summary>
 		/// Context mappings used to filter and/or boost suggestions
 		/// </summary>
-		[DataMember(Name ="contexts")]
+		[DataMember(Name = "contexts")]
 		IDictionary<string, IList<ISuggestContextQuery>> Contexts { get; set; }
 
 		/// <summary>
 		/// Support fuzziness for the suggestions
 		/// </summary>
-		[DataMember(Name ="fuzzy")]
+		[DataMember(Name = "fuzzy")]
 		IFuzzySuggester Fuzzy { get; set; }
 
 		/// <summary>
@@ -35,7 +36,7 @@ namespace Nest
 		/// <summary>
 		/// Whether duplicate suggestions should be filtered out. Defaults to <c>false</c>
 		/// </summary>
-		[DataMember(Name ="skip_duplicates")]
+		[DataMember(Name = "skip_duplicates")]
 		bool? SkipDuplicates { get; set; }
 	}
 

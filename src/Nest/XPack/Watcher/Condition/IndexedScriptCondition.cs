@@ -1,11 +1,12 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IIndexedScriptCondition : IScriptCondition
 	{
-		[DataMember(Name ="id")]
+		[DataMember(Name = "id")]
 		string Id { get; set; }
 	}
 

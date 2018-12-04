@@ -1,12 +1,13 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(StupidBackoffSmoothingModel))]
 	public interface IStupidBackoffSmoothingModel : ISmoothingModel
 	{
-		[DataMember(Name ="discount")]
+		[DataMember(Name = "discount")]
 		double? Discount { get; set; }
 	}
 

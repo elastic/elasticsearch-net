@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -10,22 +11,22 @@ namespace Nest
 		/// <summary>
 		/// Determines how to handle the watch actions as part of the watch execution.
 		/// </summary>
-		[DataMember(Name ="action_modes")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, ActionExecutionMode>))]
+		[DataMember(Name = "action_modes")]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, ActionExecutionMode>))]
 		IDictionary<string, ActionExecutionMode> ActionModes { get; set; }
 
 		/// <summary>
 		/// When present, the watch uses this object as a payload
 		/// instead of executing its own input.
 		/// </summary>
-		[DataMember(Name ="alternative_input")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
+		[DataMember(Name = "alternative_input")]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, object>))]
 		IDictionary<string, object> AlternativeInput { get; set; }
 
 		/// <summary>
 		/// If this is set to true the watch execution will use the Always Condition.
 		/// </summary>
-		[DataMember(Name ="ignore_condition")]
+		[DataMember(Name = "ignore_condition")]
 		bool? IgnoreCondition { get; set; }
 
 		/// <summary>
@@ -34,7 +35,7 @@ namespace Nest
 		/// Also the status of the watch is updated,
 		/// possbily throttling subsequent executions.
 		/// </summary>
-		[DataMember(Name ="record_execution")]
+		[DataMember(Name = "record_execution")]
 		bool? RecordExecution { get; set; }
 
 		/// <summary>
@@ -42,13 +43,13 @@ namespace Nest
 		///  If _all is set or an action that is executed by the watch appears in this list
 		///  it will be executed in simulated mode.
 		/// </summary>
-		[DataMember(Name ="simulated_actions")]
+		[DataMember(Name = "simulated_actions")]
 		SimulatedActions SimulatedActions { get; set; }
 
 		/// <summary>
 		/// This structure will be parsed as a trigger event and used for the watch execution.
 		/// </summary>
-		[DataMember(Name ="trigger_data")]
+		[DataMember(Name = "trigger_data")]
 		IScheduleTriggerEvent TriggerData { get; set; }
 
 		/// <summary>

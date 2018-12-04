@@ -1,29 +1,30 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(LikeDocument<object>))]
 	public interface ILikeDocument
 	{
-		[DataMember(Name ="doc")]
-		[JsonConverter(typeof(SourceConverter))]
+		[DataMember(Name = "doc")]
+		[JsonFormatter(typeof(SourceFormatter<>))]
 		object Document { get; set; }
 
-		[DataMember(Name ="fields")]
+		[DataMember(Name = "fields")]
 		Fields Fields { get; set; }
 
-		[DataMember(Name ="_id")]
+		[DataMember(Name = "_id")]
 		Id Id { get; set; }
 
-		[DataMember(Name ="_index")]
+		[DataMember(Name = "_index")]
 		IndexName Index { get; set; }
 
-		[DataMember(Name ="per_field_analyzer")]
+		[DataMember(Name = "per_field_analyzer")]
 		IPerFieldAnalyzer PerFieldAnalyzer { get; set; }
 
-		[DataMember(Name ="_routing")]
+		[DataMember(Name = "_routing")]
 		Routing Routing { get; set; }
 	}
 
