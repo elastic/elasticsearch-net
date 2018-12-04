@@ -1,40 +1,62 @@
 using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
+using Utf8Json;
+using Utf8Json.Internal;
 
 namespace Nest
 {
-	internal class SourceFilterJsonConverter : JsonConverter
+	internal class SourceFilterFormatter : IJsonFormatter<SourceFilter>
 	{
-		public override bool CanRead => true;
-		public override bool CanWrite => false;
-
-		public override bool CanConvert(Type objectType) => true;
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		private static readonly AutomataDictionary Fields = new AutomataDictionary
 		{
-			if (reader.TokenType == JsonToken.Null) return null;
+			{ "includes", 0 },
+			{ "excludes", 1 }
+		};
+
+		public SourceFilter Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			var token = reader.GetCurrentJsonToken();
+			if (token == JsonToken.Null)
+				return null;
 
 			var filter = new SourceFilter();
-			switch (reader.TokenType)
+			switch (token)
 			{
 				case JsonToken.String:
-					filter.Includes = new[] { (string)reader.Value };
+					filter.Includes = new[] { reader.ReadString() };
 					break;
-				case JsonToken.StartArray:
-					var include = new List<string>();
-					while (reader.Read() && reader.TokenType != JsonToken.EndArray)
-						include.Add((string)reader.Value);
-					filter.Includes = include.ToArray();
+				case JsonToken.BeginArray:
+					var include = formatterResolver.GetFormatter<string[]>()
+						.Deserialize(ref reader, formatterResolver);
+					filter.Includes = include;
 					break;
 				default:
-					serializer.Populate(reader, filter);
+					var count = 0;
+					while (reader.ReadIsInObject(ref count))
+					{
+						var propertyName = reader.ReadPropertyNameSegmentRaw();
+						if (Fields.TryGetValue(propertyName, out var value))
+						{
+							var includeExclude = formatterResolver.GetFormatter<string[]>()
+								.Deserialize(ref reader, formatterResolver);
+
+							switch (value)
+							{
+								case 0:
+									filter.Includes = includeExclude;
+									break;
+								case 1:
+									filter.Excludes = includeExclude;
+									break;
+							}
+						}
+					}
 					break;
 			}
 
 			return filter;
 		}
+
+		public void Serialize(ref JsonWriter writer, SourceFilter value, IJsonFormatterResolver formatterResolver) =>
+			throw new NotSupportedException();
 	}
 }

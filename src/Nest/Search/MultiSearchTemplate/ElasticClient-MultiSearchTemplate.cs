@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -76,7 +77,7 @@ namespace Nest
 			}
 		);
 
-		private JsonConverter CreateMultiSearchTemplateDeserializer(IMultiSearchTemplateRequest request) =>
-			new MultiSearchResponseJsonConverter(ConnectionSettings, request);
+		private IJsonFormatter<IMultiSearchResponse> CreateMultiSearchTemplateDeserializer(IMultiSearchTemplateRequest request) =>
+			new MultiSearchResponseFormatter(ConnectionSettings, request);
 	}
 }

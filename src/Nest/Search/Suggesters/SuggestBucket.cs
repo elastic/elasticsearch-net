@@ -1,27 +1,28 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(SuggestBucket))]
 	public interface ISuggestBucket
 	{
-		[DataMember(Name ="completion")]
+		[DataMember(Name = "completion")]
 		ICompletionSuggester Completion { get; set; }
 
-		[DataMember(Name ="phrase")]
+		[DataMember(Name = "phrase")]
 		IPhraseSuggester Phrase { get; set; }
 
-		[DataMember(Name ="prefix")]
+		[DataMember(Name = "prefix")]
 		string Prefix { get; set; }
 
-		[DataMember(Name ="regex")]
+		[DataMember(Name = "regex")]
 		string Regex { get; set; }
 
-		[DataMember(Name ="term")]
+		[DataMember(Name = "term")]
 		ITermSuggester Term { get; set; }
 
-		[DataMember(Name ="text")]
+		[DataMember(Name = "text")]
 		string Text { get; set; }
 	}
 

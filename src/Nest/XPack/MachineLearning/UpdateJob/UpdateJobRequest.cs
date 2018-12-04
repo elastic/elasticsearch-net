@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -28,7 +29,7 @@ namespace Nest
 		/// Contains custom meta data about the job.
 		/// </summary>
 		[DataMember(Name ="custom_settings")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, object>))]
 		Dictionary<string, object> CustomSettings { get; set; }
 
 		/// <summary>

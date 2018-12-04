@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[ContractJsonConverter(typeof(FieldRuleBaseJsonConverter))]
+	[JsonFormatter(typeof(FieldRuleBaseFormatter))]
 	public abstract class FieldRuleBase : IsADictionaryBase<string, object>
 	{
 		[IgnoreDataMember]

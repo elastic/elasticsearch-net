@@ -1,40 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IEmailAction : IAction
 	{
-		[DataMember(Name ="account")]
+		[DataMember(Name = "account")]
 		string Account { get; set; }
 
-		[DataMember(Name ="attachments")]
+		[DataMember(Name = "attachments")]
 		IEmailAttachments Attachments { get; set; }
 
-		[DataMember(Name ="bcc")]
+		[DataMember(Name = "bcc")]
 		IEnumerable<string> Bcc { get; set; }
 
-		[DataMember(Name ="body")]
+		[DataMember(Name = "body")]
 		IEmailBody Body { get; set; }
 
-		[DataMember(Name ="cc")]
+		[DataMember(Name = "cc")]
 		IEnumerable<string> Cc { get; set; }
 
-		[DataMember(Name ="from")]
+		[DataMember(Name = "from")]
 		string From { get; set; }
 
-		[DataMember(Name ="priority")]
+		[DataMember(Name = "priority")]
 		EmailPriority? Priority { get; set; }
 
-		[DataMember(Name ="reply_to")]
+		[DataMember(Name = "reply_to")]
 		IEnumerable<string> ReplyTo { get; set; }
 
-		[DataMember(Name ="subject")]
+		[DataMember(Name = "subject")]
 		string Subject { get; set; }
 
-		[DataMember(Name ="to")]
+		[DataMember(Name = "to")]
 		IEnumerable<string> To { get; set; }
 	}
 

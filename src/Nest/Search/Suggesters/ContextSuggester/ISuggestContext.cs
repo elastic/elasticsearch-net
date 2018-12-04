@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[JsonConverter(typeof(SuggestContextJsonConverter))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(SuggestContextFormatter))]
 	public interface ISuggestContext
 	{
-		[DataMember(Name ="name")]
+		[DataMember(Name = "name")]
 		string Name { get; set; }
 
-		[DataMember(Name ="path")]
+		[DataMember(Name = "path")]
 		Field Path { get; set; }
 
-		[DataMember(Name ="type")]
+		[DataMember(Name = "type")]
 		string Type { get; }
 	}
 

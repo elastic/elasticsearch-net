@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface ISearchShardsResponse : IResponse
 	{
-		[DataMember(Name ="nodes")]
+		[DataMember(Name = "nodes")]
 		IReadOnlyDictionary<string, SearchNode> Nodes { get; }
 
-		[DataMember(Name ="shards")]
+		[DataMember(Name = "shards")]
 		IReadOnlyCollection<IReadOnlyCollection<SearchShard>> Shards { get; }
 	}
 
@@ -24,32 +25,32 @@ namespace Nest
 	[DataContract]
 	public class SearchNode
 	{
-		[DataMember(Name ="name")]
+		[DataMember(Name = "name")]
 		public string Name { get; internal set; }
 
-		[DataMember(Name ="transport_address")]
+		[DataMember(Name = "transport_address")]
 		public string TransportAddress { get; internal set; }
 	}
 
 	[DataContract]
 	public class SearchShard
 	{
-		[DataMember(Name ="index")]
+		[DataMember(Name = "index")]
 		public string Index { get; internal set; }
 
-		[DataMember(Name ="node")]
+		[DataMember(Name = "node")]
 		public string Node { get; internal set; }
 
-		[DataMember(Name ="primary")]
+		[DataMember(Name = "primary")]
 		public bool Primary { get; internal set; }
 
-		[DataMember(Name ="relocating_node")]
+		[DataMember(Name = "relocating_node")]
 		public string RelocatingNode { get; internal set; }
 
-		[DataMember(Name ="shard")]
+		[DataMember(Name = "shard")]
 		public int Shard { get; internal set; }
 
-		[DataMember(Name ="state")]
+		[DataMember(Name = "state")]
 		public string State { get; internal set; }
 	}
 }

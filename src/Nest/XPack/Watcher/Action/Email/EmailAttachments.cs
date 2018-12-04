@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
+using Utf8Json;
+using Utf8Json.Internal;
 
 namespace Nest
 {
-	[JsonConverter(typeof(EmailAttachmentsJsonConverter))]
+	[JsonFormatter(typeof(EmailAttachmentsFormatter))]
 	public interface IEmailAttachments : IIsADictionary<string, IEmailAttachment> { }
 
 	public class EmailAttachments : IsADictionaryBase<string, IEmailAttachment>, IEmailAttachments
@@ -29,72 +30,90 @@ namespace Nest
 
 	public interface IEmailAttachment { }
 
-	internal class EmailAttachmentsJsonConverter : JsonConverter
+	internal class EmailAttachmentsFormatter : IJsonFormatter<EmailAttachments>
 	{
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		private static readonly AutomataDictionary AttachmentType = new AutomataDictionary
 		{
-			writer.WriteStartObject();
-			var attachments = (IDictionary<string, IEmailAttachment>)value;
-			if (attachments != null)
-			{
-				foreach (var attachment in attachments)
-				{
-					writer.WritePropertyName(attachment.Key);
-					writer.WriteStartObject();
+			{ "http", 0 },
+			{ "data", 1 }
+		};
 
-					var emailAttachment = attachment.Value;
-
-					if (emailAttachment is IHttpAttachment)
-						writer.WritePropertyName("http");
-					else if (emailAttachment is IDataAttachment)
-						writer.WritePropertyName("data");
-					else throw new ArgumentException($"{emailAttachment.GetType().FullName} is not a supported email attachment type");
-
-					serializer.Serialize(writer, emailAttachment);
-					writer.WriteEndObject();
-				}
-			}
-			writer.WriteEndObject();
-		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public EmailAttachments Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (reader.TokenType != JsonToken.StartObject) return null;
+			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
+				return null;
 
 			var attachments = new Dictionary<string, IEmailAttachment>();
-			while (reader.Read())
+
+			var count = 0;
+			while (reader.ReadIsInObject(ref count))
 			{
-				if (reader.TokenType == JsonToken.PropertyName)
+				var name = reader.ReadPropertyName();
+				var innerCount = 0;
+				while (reader.ReadIsInObject(ref innerCount))
 				{
-					var name = (string)reader.Value;
-					IEmailAttachment attachment;
-
-					reader.Read();
-					reader.Read();
-					var type = (string)reader.Value;
-					reader.Read();
-
-					switch (type)
+					if (AttachmentType.TryGetValue(reader.ReadPropertyNameSegmentRaw(), out var value))
 					{
-						case "http":
-							attachment = serializer.Deserialize<HttpAttachment>(reader);
-							break;
-						case "data":
-							attachment = serializer.Deserialize<DataAttachment>(reader);
-							break;
-						default:
-							throw new ArgumentException($"Unknown email attachment type '{type}'");
+						IEmailAttachment attachment;
+						switch (value)
+						{
+							case 0:
+								attachment = formatterResolver.GetFormatter<HttpAttachment>()
+									.Deserialize(ref reader, formatterResolver);
+								attachments.Add(name, attachment);
+								break;
+							case 1:
+								attachment = formatterResolver.GetFormatter<DataAttachment>()
+									.Deserialize(ref reader, formatterResolver);
+								attachments.Add(name, attachment);
+								break;
+						}
 					}
-
-					reader.Read();
-					attachments.Add(name, attachment);
 				}
-				else if (reader.TokenType == JsonToken.EndObject) break;
 			}
 
 			return new EmailAttachments(attachments);
 		}
 
-		public override bool CanConvert(Type objectType) => true;
+		public void Serialize(ref JsonWriter writer, EmailAttachments value, IJsonFormatterResolver formatterResolver)
+		{
+			writer.WriteBeginObject();
+			var attachments = (IDictionary<string, IEmailAttachment>)value;
+			if (attachments != null)
+			{
+				var count = 0;
+
+				foreach (var attachment in attachments)
+				{
+					if (count > 0)
+						writer.WriteValueSeparator();
+
+					writer.WritePropertyName(attachment.Key);
+					writer.WriteBeginObject();
+
+					var emailAttachment = attachment.Value;
+					switch (emailAttachment)
+					{
+						case IHttpAttachment http:
+							writer.WritePropertyName("http");
+							var httpFormatter = formatterResolver.GetFormatter<IHttpAttachment>();
+							httpFormatter.Serialize(ref writer, http, formatterResolver);
+							break;
+						case IDataAttachment data:
+							writer.WritePropertyName("data");
+							var dataFormatter = formatterResolver.GetFormatter<IDataAttachment>();
+							dataFormatter.Serialize(ref writer, data, formatterResolver);
+							break;
+						default:
+							throw new ArgumentException($"{emailAttachment.GetType().FullName} is not a supported email attachment type");
+					}
+
+					writer.WriteEndObject();
+
+					count++;
+				}
+			}
+			writer.WriteEndObject();
+		}
 	}
 }

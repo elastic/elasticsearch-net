@@ -2,26 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(SuggestContextQuery))]
 	public interface ISuggestContextQuery
 	{
-		[DataMember(Name ="boost")]
+		[DataMember(Name = "boost")]
 		double? Boost { get; set; }
 
-		[DataMember(Name ="context")]
+		[DataMember(Name = "context")]
 		Context Context { get; set; }
 
-		[DataMember(Name ="neighbours")]
+		[DataMember(Name = "neighbours")]
 		Union<Distance[], int[]> Neighbours { get; set; }
 
-		[DataMember(Name ="precision")]
+		[DataMember(Name = "precision")]
 		Union<Distance, int> Precision { get; set; }
 
-		[DataMember(Name ="prefix")]
+		[DataMember(Name = "prefix")]
 		bool? Prefix { get; set; }
 	}
 

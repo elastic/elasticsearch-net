@@ -1,34 +1,35 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<PagerDutyEvent>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(PagerDutyEvent))]
 	public interface IPagerDutyEvent
 	{
-		[DataMember(Name ="account")]
+		[DataMember(Name = "account")]
 		string Account { get; set; }
 
-		[DataMember(Name ="attach_payload")]
+		[DataMember(Name = "attach_payload")]
 		bool? AttachPayload { get; set; }
 
-		[DataMember(Name ="client")]
+		[DataMember(Name = "client")]
 		string Client { get; set; }
 
-		[DataMember(Name ="client_url")]
+		[DataMember(Name = "client_url")]
 		string ClientUrl { get; set; }
 
-		[DataMember(Name ="context")]
+		[DataMember(Name = "context")]
 		IEnumerable<IPagerDutyContext> Context { get; set; }
 
-		[DataMember(Name ="description")]
+		[DataMember(Name = "description")]
 		string Description { get; set; }
 
-		[DataMember(Name ="event_type")]
+		[DataMember(Name = "event_type")]
 		PagerDutyEventType? EventType { get; set; }
 
-		[DataMember(Name ="incident_key")]
+		[DataMember(Name = "incident_key")]
 		string IncidentKey { get; set; }
 	}
 

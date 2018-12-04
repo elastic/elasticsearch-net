@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(MultiSearchTemplateJsonConverter))]
+	[JsonFormatter(typeof(MultiSearchTemplateFormatter))]
 	public partial interface IMultiSearchTemplateRequest
 	{
 		IDictionary<string, ISearchTemplateRequest> Operations { get; set; }

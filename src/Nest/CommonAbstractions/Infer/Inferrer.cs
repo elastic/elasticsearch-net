@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Elasticsearch.Net;
 using System.Runtime.Serialization;
 using Newtonsoft.Json.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -26,8 +27,7 @@ namespace Nest
 			CreateMultiHitDelegates =
 				new ConcurrentDictionary<Type, Action<MultiGetHitJsonConverter.MultiHitTuple, JsonSerializer, ICollection<IMultiGetHit<object>>>>();
 			CreateSearchResponseDelegates =
-				new ConcurrentDictionary<Type, Action<MultiSearchResponseJsonConverter.SearchHitTuple, JsonSerializer, IDictionary<string, object>>
-				>();
+				new ConcurrentDictionary<Type, Action<MultiSearchResponseFormatter.SearchHitTuple, IJsonFormatterResolver, IDictionary<string, IResponse>>>();
 		}
 
 		internal ConcurrentDictionary<Type, JsonContract> Contracts { get; }
@@ -35,7 +35,7 @@ namespace Nest
 		internal ConcurrentDictionary<Type, Action<MultiGetHitJsonConverter.MultiHitTuple, JsonSerializer, ICollection<IMultiGetHit<object>>>>
 			CreateMultiHitDelegates { get; }
 
-		internal ConcurrentDictionary<Type, Action<MultiSearchResponseJsonConverter.SearchHitTuple, JsonSerializer, IDictionary<string, object>>>
+		internal ConcurrentDictionary<Type, Action<MultiSearchResponseFormatter.SearchHitTuple, IJsonFormatterResolver, IDictionary<string, IResponse>>>
 			CreateSearchResponseDelegates { get; }
 
 		private FieldResolver FieldResolver { get; }

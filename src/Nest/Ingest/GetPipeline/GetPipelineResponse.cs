@@ -11,7 +11,7 @@ namespace Nest
 		IReadOnlyDictionary<string, IPipeline> Pipelines { get; }
 	}
 
-	[JsonConverter(typeof(DictionaryResponseJsonConverter<GetPipelineResponse, string, IPipeline>))]
+	[JsonFormatter(typeof(DictionaryResponseFormatter<GetPipelineResponse, string, IPipeline>))]
 	public class GetPipelineResponse : DictionaryResponseBase<string, IPipeline>, IGetPipelineResponse
 	{
 		[IgnoreDataMember]

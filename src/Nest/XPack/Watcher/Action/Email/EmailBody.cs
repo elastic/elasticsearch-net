@@ -1,15 +1,16 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(EmailBody))]
 	public interface IEmailBody
 	{
-		[DataMember(Name ="html")]
+		[DataMember(Name = "html")]
 		string Html { get; set; }
 
-		[DataMember(Name ="text")]
+		[DataMember(Name = "text")]
 		string Text { get; set; }
 	}
 

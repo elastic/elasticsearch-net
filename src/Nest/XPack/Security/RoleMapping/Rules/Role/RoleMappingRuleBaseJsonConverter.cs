@@ -1,65 +1,62 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
+using Utf8Json;
+using Utf8Json.Internal;
 
 namespace Nest
 {
-	internal class RoleMappingRuleBaseJsonConverter : ReserializeJsonConverter<RoleMappingRuleBase, RoleMappingRuleBase>
+	internal class RoleMappingRuleBaseJsonConverter : IJsonFormatter<RoleMappingRuleBase>
 	{
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		private static readonly AutomataDictionary Rules = new AutomataDictionary
 		{
-			var depth = reader.Depth;
-			if (reader.TokenType != JsonToken.StartObject) return reader.ReadToEnd<object>(depth);
+			{ "all", 0 },
+			{ "any", 1 },
+			{ "field", 2 },
+			{ "except", 3 },
+		};
 
-			reader.Read();
-			if (reader.TokenType != JsonToken.PropertyName) return reader.ExhaustTo(depth);
+		private static readonly ReadSingleOrEnumerableFormatter<RoleMappingRuleBase> SingleOrEnumerableFormatter =
+			new ReadSingleOrEnumerableFormatter<RoleMappingRuleBase>();
 
-			var propertyName = (string)reader.Value;
-			switch (propertyName)
+		public RoleMappingRuleBase Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
+				return null;
+
+			var count = 0;
+			RoleMappingRuleBase rule = null;
+
+			while (reader.ReadIsInObject(ref count))
 			{
-				case "all":
-					return TryReadArray(reader, objectType, existingValue, serializer, out var all)
-						? reader.ExhaustTo(depth, new AllRoleMappingRule(all))
-						: reader.ExhaustTo(depth);
-				case "any":
-					return TryReadArray(reader, objectType, existingValue, serializer, out var any)
-						? reader.ExhaustTo(depth, new AnyRoleMappingRule(any))
-						: reader.ExhaustTo(depth);
-				case "field":
-					reader.Read();
-					var fieldRule = FieldRuleBaseJsonConverter.ReadFieldRule(reader, objectType, existingValue, serializer);
-					//var fieldRule = serializer.Deserialize<FieldRuleBase>(reader);
-					return reader.ExhaustTo(depth, new FieldRoleMappingRule(fieldRule));
-				case "except":
-					reader.Read(); //{
-					var exceptRule = ReadJson(reader, objectType, existingValue, serializer) as RoleMappingRuleBase;
-					return reader.ExhaustTo(depth, new ExceptRoleMappingRole(exceptRule));
-
-				default: return reader.ExhaustTo(depth);
+				var field = reader.ReadPropertyNameSegmentRaw();
+				if (Rules.TryGetValue(field, out var value))
+				{
+					switch (value)
+					{
+						case 0:
+							var allRules = SingleOrEnumerableFormatter.Deserialize(ref reader, formatterResolver);
+							rule = new AllRoleMappingRule(allRules);
+							break;
+						case 1:
+							var anyRules = SingleOrEnumerableFormatter.Deserialize(ref reader, formatterResolver);
+							rule = new AnyRoleMappingRule(anyRules);
+							break;
+						case 2:
+							var fieldRuleFormatter = formatterResolver.GetFormatter<FieldRuleBase>();
+							var fieldRule = fieldRuleFormatter.Deserialize(ref reader, formatterResolver);
+							rule = new FieldRoleMappingRule(fieldRule);
+							break;
+						case 3:
+							var exceptRule = Deserialize(ref reader, formatterResolver);
+							rule = new ExceptRoleMappingRole(exceptRule);
+							break;
+					}
+				}
 			}
+
+			return rule;
 		}
 
-		private bool TryReadArray(JsonReader reader, Type t, object v, JsonSerializer s, out IEnumerable<RoleMappingRuleBase> rules)
-		{
-			rules = Enumerable.Empty<RoleMappingRuleBase>();
-			reader.Read();
-			var anyDepth = reader.Depth;
-			if (reader.TokenType != JsonToken.StartArray) return false;
-
-			var l = new List<RoleMappingRuleBase>();
-			while (reader.Depth >= anyDepth && reader.TokenType != JsonToken.EndArray)
-			{
-				reader.Read();
-				if (reader.Depth == anyDepth && reader.TokenType == JsonToken.EndArray) break;
-
-				var subRule = ReadJson(reader, t, v, s) as RoleMappingRuleBase;
-				if (subRule == null) break;
-
-				l.Add(subRule);
-			}
-			rules = l;
-			return true;
-		}
+		public void Serialize(ref JsonWriter writer, RoleMappingRuleBase value, IJsonFormatterResolver formatterResolver) =>
+			throw new NotSupportedException();
 	}
 }

@@ -1,145 +1,205 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Newtonsoft.Json.Linq;
+using System.Text;
+using Utf8Json;
+using Utf8Json.Internal;
 
 namespace Nest
 {
-	[ContractJsonConverter(typeof(DetectorConverter))]
+	[JsonFormatter(typeof(DetectorFormatter))]
 	public interface IDetector
 	{
-		[DataMember(Name ="detector_description")]
+		[DataMember(Name = "detector_description")]
 		string DetectorDescription { get; set; }
 
-		[DataMember(Name ="detector_index")]
+		[DataMember(Name = "detector_index")]
 		int? DetectorIndex { get; set; }
 
-		[DataMember(Name ="exclude_frequent")]
+		[DataMember(Name = "exclude_frequent")]
 		ExcludeFrequent? ExcludeFrequent { get; set; }
 
-		[DataMember(Name ="function")]
+		[DataMember(Name = "function")]
 		string Function { get; }
 
-		[DataMember(Name ="use_null")]
+		[DataMember(Name = "use_null")]
 		bool? UseNull { get; set; }
 	}
 
-	internal class DetectorConverter : JsonConverter
+	internal class DetectorFormatter : IJsonFormatter<IDetector>
 	{
-		public override bool CanWrite => false;
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) =>
-			throw new NotSupportedException();
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		private static readonly AutomataDictionary Functions = new AutomataDictionary
 		{
-			if (reader.TokenType == JsonToken.Null)
+			{ "count", 0 },
+			{ "high_count", 1 },
+			{ "low_count", 2 },
+			{ "non_zero_count", 3 },
+			{ "high_non_zero_count", 4 },
+			{ "low_non_zero_count", 5 },
+			{ "distinct_count", 6 },
+			{ "high_distinct_count", 7 },
+			{ "low_distinct_count", 8 },
+			{ "lat_long", 9 },
+			{ "info_content", 10 },
+			{ "high_info_content", 11 },
+			{ "low_info_content", 12 },
+			{ "min", 13 },
+			{ "max", 14 },
+			{ "median", 15 },
+			{ "high_median", 16 },
+			{ "low_median", 17 },
+			{ "mean", 18 },
+			{ "high_mean", 19 },
+			{ "low_mean", 20 },
+			{ "metric", 21 },
+			{ "varp", 22 },
+			{ "high_varp", 23 },
+			{ "low_varp", 24 },
+			{ "rare", 25 },
+			{ "freq_rare", 26 },
+			{ "sum", 27 },
+			{ "high_sum", 28 },
+			{ "low_sum", 29 },
+			{ "non_null_sum", 30 },
+			{ "high_non_null_sum", 31 },
+			{ "low_non_null_sum", 32 },
+			{ "time_of_day", 33 },
+			{ "time_of_week", 34 }
+		};
+
+		public IDetector Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			if (reader.GetCurrentJsonToken() == JsonToken.Null)
 				return null;
 
-			var jObject = JObject.Load(reader);
-			var function = jObject["function"].Value<string>();
+			var segment = reader.ReadNextBlockSegment();
+			var segmentReader = new JsonReader(segment.Array, segment.Offset);
+			var count = 0;
+			ArraySegment<byte> function;
 
-			switch (function)
+			while (segmentReader.ReadIsInObject(ref count))
 			{
-				case "count":
-					return jObject.ToObject<CountDetector>(ElasticContractResolver.Empty);
-				case "high_count":
-					return jObject.ToObject<HighCountDetector>(ElasticContractResolver.Empty);
-				case "low_count":
-					return jObject.ToObject<LowCountDetector>(ElasticContractResolver.Empty);
-				case "non_zero_count":
-					return jObject.ToObject<NonZeroCountDetector>(ElasticContractResolver.Empty);
-				case "high_non_zero_count":
-					return jObject.ToObject<HighNonZeroCountDetector>(ElasticContractResolver.Empty);
-				case "low_non_zero_count":
-					return jObject.ToObject<LowNonZeroCountDetector>(ElasticContractResolver.Empty);
-				case "distinct_count":
-					return jObject.ToObject<DistinctCountDetector>(ElasticContractResolver.Empty);
-				case "high_distinct_count":
-					return jObject.ToObject<HighDistinctCountDetector>(ElasticContractResolver.Empty);
-				case "low_distinct_count":
-					return jObject.ToObject<LowDistinctCountDetector>(ElasticContractResolver.Empty);
-				case "lat_long":
-					return jObject.ToObject<LatLongDetector>(ElasticContractResolver.Empty);
-				case "info_content":
-					return jObject.ToObject<InfoContentDetector>(ElasticContractResolver.Empty);
-				case "high_info_content":
-					return jObject.ToObject<HighInfoContentDetector>(ElasticContractResolver.Empty);
-				case "low_info_content":
-					return jObject.ToObject<LowInfoContentDetector>(ElasticContractResolver.Empty);
-				case "min":
-					return jObject.ToObject<MinDetector>(ElasticContractResolver.Empty);
-				case "max":
-					return jObject.ToObject<MaxDetector>(ElasticContractResolver.Empty);
-				case "median":
-					return jObject.ToObject<MedianDetector>(ElasticContractResolver.Empty);
-				case "high_median":
-					return jObject.ToObject<HighMedianDetector>(ElasticContractResolver.Empty);
-				case "low_median":
-					return jObject.ToObject<LowMedianDetector>(ElasticContractResolver.Empty);
-				case "mean":
-					return jObject.ToObject<MeanDetector>(ElasticContractResolver.Empty);
-				case "high_mean":
-					return jObject.ToObject<HighMeanDetector>(ElasticContractResolver.Empty);
-				case "low_mean":
-					return jObject.ToObject<LowMeanDetector>(ElasticContractResolver.Empty);
-				case "metric":
-					return jObject.ToObject<MetricDetector>(ElasticContractResolver.Empty);
-				case "varp":
-					return jObject.ToObject<VarpDetector>(ElasticContractResolver.Empty);
-				case "high_varp":
-					return jObject.ToObject<HighVarpDetector>(ElasticContractResolver.Empty);
-				case "low_varp":
-					return jObject.ToObject<LowVarpDetector>(ElasticContractResolver.Empty);
-				case "rare":
-					return jObject.ToObject<RareDetector>(ElasticContractResolver.Empty);
-				case "freq_rare":
-					return jObject.ToObject<FreqRareDetector>(ElasticContractResolver.Empty);
-				case "sum":
-					return jObject.ToObject<SumDetector>(ElasticContractResolver.Empty);
-				case "high_sum":
-					return jObject.ToObject<HighSumDetector>(ElasticContractResolver.Empty);
-				case "low_sum":
-					return jObject.ToObject<LowSumDetector>(ElasticContractResolver.Empty);
-				case "non_null_sum":
-					return jObject.ToObject<NonNullSumDetector>(ElasticContractResolver.Empty);
-				case "high_non_null_sum":
-					return jObject.ToObject<HighNonNullSumDetector>(ElasticContractResolver.Empty);
-				case "low_non_null_sum":
-					return jObject.ToObject<LowNonNullSumDetector>(ElasticContractResolver.Empty);
-				case "time_of_day":
-					return jObject.ToObject<TimeOfDayDetector>(ElasticContractResolver.Empty);
-				case "time_of_week":
-					return jObject.ToObject<TimeOfWeekDetector>(ElasticContractResolver.Empty);
-				default:
-					throw new JsonSerializationException($"Cannot deserialize detector for unknown function '{function}'");
+				if (reader.ReadPropertyName() == "function")
+				{
+					function = reader.ReadStringSegmentRaw();
+					break;
+				}
 			}
+
+			segmentReader = new JsonReader(segment.Array, segment.Offset);
+
+			if (Functions.TryGetValue(function, out var value))
+			{
+				switch (value)
+				{
+					case 0:
+						return Deserialize<CountDetector>(ref segmentReader, formatterResolver);
+					case 1:
+						return Deserialize<HighCountDetector>(ref segmentReader, formatterResolver);
+					case 2:
+						return Deserialize<LowCountDetector>(ref segmentReader, formatterResolver);
+					case 3:
+						return Deserialize<NonZeroCountDetector>(ref segmentReader, formatterResolver);
+					case 4:
+						return Deserialize<HighNonZeroCountDetector>(ref segmentReader, formatterResolver);
+					case 5:
+						return Deserialize<LowNonZeroCountDetector>(ref segmentReader, formatterResolver);
+					case 6:
+						return Deserialize<DistinctCountDetector>(ref segmentReader, formatterResolver);
+					case 7:
+						return Deserialize<HighDistinctCountDetector>(ref segmentReader, formatterResolver);
+					case 8:
+						return Deserialize<LowDistinctCountDetector>(ref segmentReader, formatterResolver);
+					case 9:
+						return Deserialize<LatLongDetector>(ref segmentReader, formatterResolver);
+					case 10:
+						return Deserialize<InfoContentDetector>(ref segmentReader, formatterResolver);
+					case 11:
+						return Deserialize<HighInfoContentDetector>(ref segmentReader, formatterResolver);
+					case 12:
+						return Deserialize<LowInfoContentDetector>(ref segmentReader, formatterResolver);
+					case 13:
+						return Deserialize<MinDetector>(ref segmentReader, formatterResolver);
+					case 14:
+						return Deserialize<MaxDetector>(ref segmentReader, formatterResolver);
+					case 15:
+						return Deserialize<MedianDetector>(ref segmentReader, formatterResolver);
+					case 16:
+						return Deserialize<HighMedianDetector>(ref segmentReader, formatterResolver);
+					case 17:
+						return Deserialize<LowMedianDetector>(ref segmentReader, formatterResolver);
+					case 18:
+						return Deserialize<MeanDetector>(ref segmentReader, formatterResolver);
+					case 19:
+						return Deserialize<HighMeanDetector>(ref segmentReader, formatterResolver);
+					case 20:
+						return Deserialize<LowMeanDetector>(ref segmentReader, formatterResolver);
+					case 21:
+						return Deserialize<MetricDetector>(ref segmentReader, formatterResolver);
+					case 22:
+						return Deserialize<VarpDetector>(ref segmentReader, formatterResolver);
+					case 23:
+						return Deserialize<HighVarpDetector>(ref segmentReader, formatterResolver);
+					case 24:
+						return Deserialize<LowVarpDetector>(ref segmentReader, formatterResolver);
+					case 25:
+						return Deserialize<RareDetector>(ref segmentReader, formatterResolver);
+					case 26:
+						return Deserialize<FreqRareDetector>(ref segmentReader, formatterResolver);
+					case 27:
+						return Deserialize<SumDetector>(ref segmentReader, formatterResolver);
+					case 28:
+						return Deserialize<HighSumDetector>(ref segmentReader, formatterResolver);
+					case 29:
+						return Deserialize<LowSumDetector>(ref segmentReader, formatterResolver);
+					case 30:
+						return Deserialize<NonNullSumDetector>(ref segmentReader, formatterResolver);
+					case 31:
+						return Deserialize<HighNonNullSumDetector>(ref segmentReader, formatterResolver);
+					case 32:
+						return Deserialize<LowNonNullSumDetector>(ref segmentReader, formatterResolver);
+					case 33:
+						return Deserialize<TimeOfDayDetector>(ref segmentReader, formatterResolver);
+					case 34:
+						return Deserialize<TimeOfWeekDetector>(ref segmentReader, formatterResolver);
+				}
+			}
+
+			throw new Exception($"Unknown function {Encoding.UTF8.GetString(function.Array, function.Offset, function.Count)}");
 		}
 
-		public override bool CanConvert(Type objectType) => true;
+		public void Serialize(ref JsonWriter writer, IDetector value, IJsonFormatterResolver formatterResolver) =>
+			throw new NotSupportedException();
+
+		private static TDetector Deserialize<TDetector>(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+			where TDetector : IDetector
+		{
+			var formatter = formatterResolver.GetFormatter<TDetector>();
+			return formatter.Deserialize(ref reader, formatterResolver);
+		}
 	}
 
 	public interface IFieldNameDetector : IDetector
 	{
-		[DataMember(Name ="field_name")]
+		[DataMember(Name = "field_name")]
 		Field FieldName { get; set; }
 	}
 
 	public interface IByFieldNameDetector : IDetector
 	{
-		[DataMember(Name ="by_field_name")]
+		[DataMember(Name = "by_field_name")]
 		Field ByFieldName { get; set; }
 	}
 
 	public interface IOverFieldNameDetector : IDetector
 	{
-		[DataMember(Name ="over_field_name")]
+		[DataMember(Name = "over_field_name")]
 		Field OverFieldName { get; set; }
 	}
 
 	public interface IPartitionFieldNameDetector : IDetector
 	{
-		[DataMember(Name ="partition_field_name")]
+		[DataMember(Name = "partition_field_name")]
 		Field PartitionFieldName { get; set; }
 	}
 

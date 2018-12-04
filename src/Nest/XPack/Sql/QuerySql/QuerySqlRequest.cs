@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Nest
 {
 	[MapsApi("xpack.sql.query.json")]
-	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<QuerySqlRequest>))]
+	[ReadAs(typeof(QuerySqlRequest))]
 	public partial interface IQuerySqlRequest : ISqlRequest
 	{
 		/// <summary>

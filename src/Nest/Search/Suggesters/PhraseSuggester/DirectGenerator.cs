@@ -1,46 +1,46 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Elasticsearch.Net;
 using System.Runtime.Serialization;
-
+using Elasticsearch.Net;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(DirectGenerator))]
 	public interface IDirectGenerator
 	{
-		[DataMember(Name ="field")]
+		[DataMember(Name = "field")]
 		Field Field { get; set; }
 
-		[DataMember(Name ="max_edits")]
+		[DataMember(Name = "max_edits")]
 		int? MaxEdits { get; set; }
 
-		[DataMember(Name ="max_inspections")]
+		[DataMember(Name = "max_inspections")]
 		decimal? MaxInspections { get; set; }
 
-		[DataMember(Name ="max_term_freq")]
+		[DataMember(Name = "max_term_freq")]
 		decimal? MaxTermFrequency { get; set; }
 
-		[DataMember(Name ="min_doc_freq")]
+		[DataMember(Name = "min_doc_freq")]
 		decimal? MinDocFrequency { get; set; }
 
-		[DataMember(Name ="min_word_length")]
+		[DataMember(Name = "min_word_length")]
 		int? MinWordLength { get; set; }
 
-		[DataMember(Name ="post_filter")]
+		[DataMember(Name = "post_filter")]
 		string PostFilter { get; set; }
 
-		[DataMember(Name ="pre_filter")]
+		[DataMember(Name = "pre_filter")]
 		string PreFilter { get; set; }
 
-		[DataMember(Name ="prefix_length")]
+		[DataMember(Name = "prefix_length")]
 		int? PrefixLength { get; set; }
 
-		[DataMember(Name ="size")]
+		[DataMember(Name = "size")]
 		int? Size { get; set; }
 
-		[DataMember(Name ="suggest_mode")]
+		[DataMember(Name = "suggest_mode")]
 
 		SuggestMode? SuggestMode { get; set; }
 	}

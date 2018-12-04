@@ -1,57 +1,58 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(SlackAttachment))]
 	public interface ISlackAttachment
 	{
-		[DataMember(Name ="author_icon")]
+		[DataMember(Name = "author_icon")]
 		string AuthorIcon { get; set; }
 
-		[DataMember(Name ="author_link")]
+		[DataMember(Name = "author_link")]
 		string AuthorLink { get; set; }
 
-		[DataMember(Name ="author_name")]
+		[DataMember(Name = "author_name")]
 		string AuthorName { get; set; }
 
-		[DataMember(Name ="color")]
+		[DataMember(Name = "color")]
 		string Color { get; set; }
 
-		[DataMember(Name ="fallback")]
+		[DataMember(Name = "fallback")]
 		string Fallback { get; set; }
 
-		[DataMember(Name ="fields")]
+		[DataMember(Name = "fields")]
 		IEnumerable<ISlackAttachmentField> Fields { get; set; }
 
-		[DataMember(Name ="footer")]
+		[DataMember(Name = "footer")]
 		string Footer { get; set; }
 
-		[DataMember(Name ="footer_icon")]
+		[DataMember(Name = "footer_icon")]
 		string FooterIcon { get; set; }
 
-		[DataMember(Name ="image_url")]
+		[DataMember(Name = "image_url")]
 		string ImageUrl { get; set; }
 
-		[DataMember(Name ="pretext")]
+		[DataMember(Name = "pretext")]
 		string Pretext { get; set; }
 
-		[DataMember(Name ="text")]
+		[DataMember(Name = "text")]
 		string Text { get; set; }
 
-		[DataMember(Name ="thumb_url")]
+		[DataMember(Name = "thumb_url")]
 		string ThumbUrl { get; set; }
 
-		[DataMember(Name ="title")]
+		[DataMember(Name = "title")]
 		string Title { get; set; }
 
-		[DataMember(Name ="title_link")]
+		[DataMember(Name = "title_link")]
 		string TitleLink { get; set; }
 
-		[DataMember(Name ="ts")]
-		[JsonConverter(typeof(EpochSecondsDateTimeJsonConverter))]
+		[DataMember(Name = "ts")]
+		[JsonFormatter(typeof(EpochSecondsNullableDateTimeOffsetJsonConverter))]
 		DateTimeOffset? Ts { get; set; }
 	}
 

@@ -1,14 +1,15 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IPhraseSuggestHighlight
 	{
-		[DataMember(Name ="post_tag")]
+		[DataMember(Name = "post_tag")]
 		string PostTag { get; set; }
 
-		[DataMember(Name ="pre_tag")]
+		[DataMember(Name = "pre_tag")]
 		string PreTag { get; set; }
 	}
 

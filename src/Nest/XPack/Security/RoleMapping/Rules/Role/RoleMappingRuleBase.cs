@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(RoleMappingRuleBaseJsonConverter))]
+	[JsonFormatter(typeof(RoleMappingRuleBaseJsonConverter))]
 	public abstract class RoleMappingRuleBase
 	{
 		[DataMember(Name ="all")]

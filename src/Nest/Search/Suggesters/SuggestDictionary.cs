@@ -6,14 +6,19 @@ using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 
 namespace Nest
 {
-	internal class SuggestDictionaryConverter<T> : VerbatimDictionaryKeysJsonConverter<string, Suggest<T>[]>
+	internal class SuggestDictionaryConverter<T> : IJsonFormatter<SuggestDictionary<T>>
 		where T : class
 	{
-		public override bool CanRead => true;
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public void Serialize(ref JsonWriter writer, SuggestDictionary<T> value, IJsonFormatterResolver formatterResolver)
 		{
-			var dict = serializer.Deserialize<Dictionary<string, Suggest<T>[]>>(reader);
+			var formatter = new VerbatimReadOnlyDictionaryKeysFormatter<string, Suggest<T>[]>();
+			formatter.Serialize(ref writer, value, formatterResolver);
+		}
+
+		public SuggestDictionary<T> Deserialize(ref Utf8Json.JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			var formatter = formatterResolver.GetFormatter<Dictionary<string, Suggest<T>[]>>();
+			var dict = formatter.Deserialize(ref reader, formatterResolver);
 			return new SuggestDictionary<T>(dict);
 		}
 	}

@@ -9,12 +9,12 @@ namespace Nest
 	public class NodeStats
 	{
 		[DataMember(Name = "adaptive_selection")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, AdaptiveSelectionStats>))]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, AdaptiveSelectionStats>))]
 		public IReadOnlyDictionary<string, AdaptiveSelectionStats> AdaptiveSelection { get; internal set; }
 			= EmptyReadOnly<string, AdaptiveSelectionStats>.Dictionary;
 
 		[DataMember(Name = "breakers")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, BreakerStats>))]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, BreakerStats>))]
 		public Dictionary<string, BreakerStats> Breakers { get; internal set; }
 
 		[DataMember(Name = "fs")]
@@ -59,7 +59,7 @@ namespace Nest
 		public ScriptStats Script { get; internal set; }
 
 		[DataMember(Name = "thread_pool")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, ThreadCountStats>))]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, ThreadCountStats>))]
 		public Dictionary<string, ThreadCountStats> ThreadPool { get; internal set; }
 
 		[DataMember(Name = "timestamp")]
@@ -317,7 +317,7 @@ namespace Nest
 			public long NonHeapUsedInBytes { get; internal set; }
 
 			[DataMember(Name = "pools")]
-			[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, JVMPool>))]
+			[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, JVMPool>))]
 			public Dictionary<string, JVMPool> Pools { get; internal set; }
 
 			[DataContract]

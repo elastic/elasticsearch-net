@@ -10,8 +10,6 @@ namespace Nest
 		/// Specifies that no data prior to this date is expected.
 		/// </summary>
 		[DataMember(Name ="advance_time")]
-		// Forced to prevent override, ML API always expects ISO8601 format
-		[JsonConverter(typeof(IsoDateTimeConverter))]
 		DateTimeOffset? AdvanceTime { get; set; }
 
 		/// <summary>
@@ -25,8 +23,6 @@ namespace Nest
 		/// which to calculate interim results.
 		/// </summary>
 		[DataMember(Name ="end")]
-		// Forced to prevent override, ML API always expects ISO8601 format
-		[JsonConverter(typeof(IsoDateTimeConverter))]
 		DateTimeOffset? End { get; set; }
 
 		/// <summary>
@@ -34,8 +30,6 @@ namespace Nest
 		/// on which to calculate interim results.
 		/// </summary>
 		[DataMember(Name ="start")]
-		// Forced to prevent override, ML API always expects ISO8601 format
-		[JsonConverter(typeof(IsoDateTimeConverter))]
 		DateTimeOffset? Start { get; set; }
 	}
 

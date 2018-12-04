@@ -1,15 +1,16 @@
 using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface ISlackAction : IAction
 	{
-		[DataMember(Name ="account")]
+		[DataMember(Name = "account")]
 		string Account { get; set; }
 
-		[DataMember(Name ="message")]
+		[DataMember(Name = "message")]
 		ISlackMessage Message { get; set; }
 	}
 

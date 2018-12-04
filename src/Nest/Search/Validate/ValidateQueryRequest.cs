@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	public partial interface IValidateQueryRequest
 	{
-		[DataMember(Name ="query")]
+		[DataMember(Name = "query")]
 		QueryContainer Query { get; set; }
 	}
 
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IValidateQueryRequest<T> : IValidateQueryRequest
 		where T : class { }
 

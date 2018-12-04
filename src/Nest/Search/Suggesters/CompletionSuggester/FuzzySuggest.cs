@@ -1,24 +1,25 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(FuzzySuggester))]
 	public interface IFuzzySuggester
 	{
-		[DataMember(Name ="fuzziness")]
+		[DataMember(Name = "fuzziness")]
 		IFuzziness Fuzziness { get; set; }
 
-		[DataMember(Name ="min_length")]
+		[DataMember(Name = "min_length")]
 		int? MinLength { get; set; }
 
-		[DataMember(Name ="prefix_length")]
+		[DataMember(Name = "prefix_length")]
 		int? PrefixLength { get; set; }
 
-		[DataMember(Name ="transpositions")]
+		[DataMember(Name = "transpositions")]
 		bool? Transpositions { get; set; }
 
-		[DataMember(Name ="unicode_aware")]
+		[DataMember(Name = "unicode_aware")]
 		bool? UnicodeAware { get; set; }
 	}
 

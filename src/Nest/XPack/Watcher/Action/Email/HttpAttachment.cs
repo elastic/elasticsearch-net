@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(HttpAttachment))]
 	public interface IHttpAttachment : IEmailAttachment
 	{
-		[DataMember(Name ="content_type")]
+		[DataMember(Name = "content_type")]
 		string ContentType { get; set; }
 
-		[DataMember(Name ="inline")]
+		[DataMember(Name = "inline")]
 		bool? Inline { get; set; }
 
-		[DataMember(Name ="request")]
-		[ReadAs(typeof(HttpInputRequest))]
+		[DataMember(Name = "request")]
 		IHttpInputRequest Request { get; set; }
 	}
 

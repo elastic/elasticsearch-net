@@ -1,20 +1,21 @@
 using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(NestedSort))]
 	public interface INestedSort
 	{
-		[DataMember(Name ="filter")]
+		[DataMember(Name = "filter")]
 		QueryContainer Filter { get; set; }
 
-		[DataMember(Name ="nested")]
+		[DataMember(Name = "nested")]
 		INestedSort Nested { get; set; }
 
-		[DataMember(Name ="path")]
+		[DataMember(Name = "path")]
 		Field Path { get; set; }
 	}
 

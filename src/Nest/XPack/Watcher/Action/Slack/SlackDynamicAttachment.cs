@@ -1,16 +1,17 @@
 using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(SlackDynamicAttachment))]
 	public interface ISlackDynamicAttachment
 	{
-		[DataMember(Name ="attachment_template")]
+		[DataMember(Name = "attachment_template")]
 		ISlackAttachment AttachmentTemplate { get; set; }
 
-		[DataMember(Name ="list_path")]
+		[DataMember(Name = "list_path")]
 		string ListPath { get; set; }
 	}
 

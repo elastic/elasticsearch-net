@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(SourceFilterJsonConverter))]
+	[JsonFormatter(typeof(SourceFilterFormatter))]
 	public interface ISourceFilter
 	{
-		[DataMember(Name ="excludes")]
 		Fields Excludes { get; set; }
 
-		[DataMember(Name ="includes")]
 		Fields Includes { get; set; }
 	}
 

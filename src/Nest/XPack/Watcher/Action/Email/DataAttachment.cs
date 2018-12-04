@@ -1,14 +1,13 @@
 ﻿using System.Runtime.Serialization;
-using System.Runtime.Serialization;
-
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(DataAttachment))]
 	public interface IDataAttachment : IEmailAttachment
 	{
-		[DataMember(Name ="format")]
+		[DataMember(Name = "format")]
 		DataAttachmentFormat? Format { get; set; }
 	}
 
