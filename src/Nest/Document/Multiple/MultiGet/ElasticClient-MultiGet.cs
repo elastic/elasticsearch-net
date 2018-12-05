@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -43,7 +44,7 @@ namespace Nest
 		public IMultiGetResponse MultiGet(IMultiGetRequest request) =>
 			Dispatcher.Dispatch<IMultiGetRequest, MultiGetRequestParameters, MultiGetResponse>(
 				request,
-				(r, s) => DeserializeMultiGetResponse(r, s, CreateCovariantMultiGetConverter(request)),
+				(r, s) => DeserializeMultiGetResponse(r, s, CreateCovariantMultiGetResponseFormatter(request)),
 				LowLevelDispatch.MgetDispatch<MultiGetResponse>
 			);
 
@@ -58,13 +59,14 @@ namespace Nest
 			Dispatcher.DispatchAsync<IMultiGetRequest, MultiGetRequestParameters, MultiGetResponse, IMultiGetResponse>(
 				request,
 				cancellationToken,
-				(r, s) => DeserializeMultiGetResponse(r, s, CreateCovariantMultiGetConverter(request)),
+				(r, s) => DeserializeMultiGetResponse(r, s, CreateCovariantMultiGetResponseFormatter(request)),
 				LowLevelDispatch.MgetDispatchAsync<MultiGetResponse>
 			);
 
-		private MultiGetResponse DeserializeMultiGetResponse(IApiCallDetails response, Stream stream, JsonConverter converter) =>
-			ConnectionSettings.CreateStateful(converter).Deserialize<MultiGetResponse>(stream);
+		private MultiGetResponse DeserializeMultiGetResponse(IApiCallDetails response, Stream stream, IJsonFormatter<MultiGetResponse> formatter) =>
+			ConnectionSettings.CreateStateful(formatter).Deserialize<MultiGetResponse>(stream);
 
-		private JsonConverter CreateCovariantMultiGetConverter(IMultiGetRequest descriptor) => new MultiGetHitJsonConverter(descriptor);
+		private MultiGetResponseFormatter CreateCovariantMultiGetResponseFormatter(IMultiGetRequest descriptor) =>
+			new MultiGetResponseFormatter(descriptor);
 	}
 }

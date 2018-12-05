@@ -1,12 +1,13 @@
 ﻿using Elasticsearch.Net;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// A Stored script
 	/// </summary>
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(StoredScript))]
 	public interface IStoredScript
 	{

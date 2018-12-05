@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -9,7 +10,7 @@ namespace Nest
 	/// An alias mapping defines an alternate name for a field in the index. The alias can be used in place
 	/// of the target field in search requests, and selected other APIs like field capabilities.
 	/// </summary>
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IFieldAliasProperty : IProperty
 	{
 		/// <summary> The full path to alias </summary>

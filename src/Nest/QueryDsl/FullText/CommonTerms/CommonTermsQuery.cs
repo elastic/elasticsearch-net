@@ -1,30 +1,30 @@
 ﻿using System.Runtime.Serialization;
-
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[JsonConverter(typeof(FieldNameQueryJsonConverter<CommonTermsQuery>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(FieldNameQueryFormatter<CommonTermsQuery, ICommonTermsQuery>))]
 	public interface ICommonTermsQuery : IFieldNameQuery
 	{
-		[DataMember(Name ="analyzer")]
+		[DataMember(Name = "analyzer")]
 		string Analyzer { get; set; }
 
-		[DataMember(Name ="cutoff_frequency")]
+		[DataMember(Name = "cutoff_frequency")]
 		double? CutoffFrequency { get; set; }
 
-		[DataMember(Name ="high_freq_operator")]
+		[DataMember(Name = "high_freq_operator")]
 
 		Operator? HighFrequencyOperator { get; set; }
 
-		[DataMember(Name ="low_freq_operator")]
+		[DataMember(Name = "low_freq_operator")]
 
 		Operator? LowFrequencyOperator { get; set; }
 
-		[DataMember(Name ="minimum_should_match")]
+		[DataMember(Name = "minimum_should_match")]
 		MinimumShouldMatch MinimumShouldMatch { get; set; }
 
-		[DataMember(Name ="query")]
+		[DataMember(Name = "query")]
 		string Query { get; set; }
 	}
 

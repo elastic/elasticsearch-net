@@ -70,7 +70,6 @@ namespace Nest
 	/// <summary>
 	/// Controls how a multi term query such as a wildcard or prefix query, is rewritten.
 	/// </summary>
-	[JsonConverter(typeof(MultiTermQueryRewriteConverter))]
 	[JsonFormatter(typeof(MultiTermQueryRewriteFormatter))]
 	public class MultiTermQueryRewrite : IEquatable<MultiTermQueryRewrite>
 	{
@@ -234,27 +233,5 @@ namespace Nest
 		public static bool operator ==(MultiTermQueryRewrite left, MultiTermQueryRewrite right) => Equals(left, right);
 
 		public static bool operator !=(MultiTermQueryRewrite left, MultiTermQueryRewrite right) => !Equals(left, right);
-	}
-
-	internal class MultiTermQueryRewriteConverter : JsonConverter
-	{
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			var multiTerm = (MultiTermQueryRewrite)value;
-			writer.WriteValue(multiTerm?.ToString());
-		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			if (reader.TokenType == JsonToken.Null)
-				return null;
-
-			if (reader.TokenType != JsonToken.String)
-				throw new JsonSerializationException($"Invalid token type {reader.TokenType} to deserialize {nameof(MultiTermQueryRewrite)} from");
-
-			return MultiTermQueryRewrite.Create((string)reader.Value);
-		}
-
-		public override bool CanConvert(Type objectType) => typeof(MultiTermQueryRewrite).IsAssignableFrom(objectType);
 	}
 }

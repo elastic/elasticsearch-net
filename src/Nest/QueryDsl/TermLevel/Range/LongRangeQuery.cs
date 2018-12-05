@@ -1,7 +1,10 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(FieldNameQueryFormatter<LongRangeQuery, ILongRangeQuery>))]
 	public interface ILongRangeQuery : IRangeQuery
 	{
 		[DataMember(Name ="gt")]

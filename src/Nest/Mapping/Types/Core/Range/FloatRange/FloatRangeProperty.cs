@@ -1,11 +1,12 @@
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// A range of single-precision 32-bit IEEE 754 floating point values.
 	/// </summary>
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IFloatRangeProperty : IRangeProperty { }
 
 	/// <inheritdoc />

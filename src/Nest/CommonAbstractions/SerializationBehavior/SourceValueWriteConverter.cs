@@ -12,12 +12,9 @@ namespace Nest
 		{
 			var nestType = value.GetType().Assembly() == typeof(SourceWriteFormatter<>).Assembly();
 			if (nestType)
-			{
 				formatterResolver.GetFormatter<T>().Serialize(ref writer, value, formatterResolver);
-				return;
-			}
-
-			base.Serialize(ref writer, value, formatterResolver);
+			else
+				base.Serialize(ref writer, value, formatterResolver);
 		}
 	}
 }

@@ -14,26 +14,26 @@ namespace Nest
 	/// The number of terms that must match varies per document and is either controlled by a minimum should match
 	/// field or computed per document in a minimum should match script.
 	/// </summary>
-	[DataContract]
-	[JsonConverter(typeof(FieldNameQueryJsonConverter<TermsSetQuery>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(FieldNameQueryFormatter<TermsSetQuery, ITermsSetQuery>))]
 	public interface ITermsSetQuery : IFieldNameQuery
 	{
 		/// <summary>
 		/// A field containing the number of required terms that must match
 		/// </summary>
-		[DataMember(Name ="minimum_should_match_field")]
+		[DataMember(Name = "minimum_should_match_field")]
 		Field MinimumShouldMatchField { get; set; }
 
 		/// <summary>
 		/// A script to control how many terms are required to match
 		/// </summary>
-		[DataMember(Name ="minimum_should_match_script")]
+		[DataMember(Name = "minimum_should_match_script")]
 		IScript MinimumShouldMatchScript { get; set; }
 
 		/// <summary>
 		/// The required terms to match
 		/// </summary>
-		[DataMember(Name ="terms")]
+		[DataMember(Name = "terms")]
 		[JsonFormatter(typeof(SourceWriteFormatter<>))]
 		IEnumerable<object> Terms { get; set; }
 	}

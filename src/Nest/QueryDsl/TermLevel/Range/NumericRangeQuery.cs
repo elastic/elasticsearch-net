@@ -1,22 +1,25 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(FieldNameQueryFormatter<NumericRangeQuery, INumericRangeQuery>))]
 	public interface INumericRangeQuery : IRangeQuery
 	{
-		[DataMember(Name ="gt")]
+		[DataMember(Name = "gt")]
 		double? GreaterThan { get; set; }
 
-		[DataMember(Name ="gte")]
+		[DataMember(Name = "gte")]
 		double? GreaterThanOrEqualTo { get; set; }
 
-		[DataMember(Name ="lt")]
+		[DataMember(Name = "lt")]
 		double? LessThan { get; set; }
 
-		[DataMember(Name ="lte")]
+		[DataMember(Name = "lte")]
 		double? LessThanOrEqualTo { get; set; }
 
-		[DataMember(Name ="relation")]
+		[DataMember(Name = "relation")]
 		RangeRelation? Relation { get; set; }
 	}
 

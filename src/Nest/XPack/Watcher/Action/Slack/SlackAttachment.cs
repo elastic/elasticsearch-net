@@ -52,7 +52,7 @@ namespace Nest
 		string TitleLink { get; set; }
 
 		[DataMember(Name = "ts")]
-		[JsonFormatter(typeof(EpochSecondsNullableDateTimeOffsetJsonConverter))]
+		[JsonFormatter(typeof(EpochSecondsNullableDateTimeOffsetFormatter))]
 		DateTimeOffset? Ts { get; set; }
 	}
 

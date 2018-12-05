@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(ExistsQuery))]
 	public interface IExistsQuery : IQuery
 	{
-		[DataMember(Name ="field")]
+		[DataMember(Name = "field")]
 		Field Field { get; set; }
 	}
 

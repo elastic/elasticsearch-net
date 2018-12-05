@@ -8,7 +8,7 @@ namespace Nest
 		IReadOnlyDictionary<IndexName, IndexState> Indices { get; }
 	}
 
-	[JsonConverter(typeof(ResolvableDictionaryResponseJsonConverter<GetIndexSettingsResponse, IndexName, IndexState>))]
+	[JsonFormatter(typeof(ResolvableDictionaryResponseFormatter<GetIndexSettingsResponse, IndexName, IndexState>))]
 	public class GetIndexSettingsResponse : DictionaryResponseBase<IndexName, IndexState>, IGetIndexSettingsResponse
 	{
 		[IgnoreDataMember]

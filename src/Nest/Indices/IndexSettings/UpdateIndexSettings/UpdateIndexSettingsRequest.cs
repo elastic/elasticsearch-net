@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(IndexSettingsConverter))]
+	[ReadAs(typeof(UpdateIndexSettingsRequest))]
 	public partial interface IUpdateIndexSettingsRequest
 	{
 		IDynamicIndexSettings IndexSettings { get; set; }

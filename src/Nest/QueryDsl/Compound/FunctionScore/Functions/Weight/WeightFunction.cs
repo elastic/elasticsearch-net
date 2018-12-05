@@ -1,8 +1,9 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IWeightFunction : IScoreFunction { }
 
 	public class WeightFunction : FunctionScoreFunctionBase, IWeightFunction { }

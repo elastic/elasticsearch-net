@@ -1,11 +1,12 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// The parent_id query can be used to find child documents which belong to a particular parent.
 	/// </summary>
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(ParentIdQuery))]
 	public interface IParentIdQuery : IQuery
 	{

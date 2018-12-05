@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 
 namespace Nest
@@ -15,7 +16,7 @@ namespace Nest
 	/// <para />
 	/// - the full dotted path to the field, with <see cref="PathMatch" /> and <see cref="PathUnmatch" />.
 	/// </summary>
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(DynamicTemplate))]
 	public interface IDynamicTemplate
 	{

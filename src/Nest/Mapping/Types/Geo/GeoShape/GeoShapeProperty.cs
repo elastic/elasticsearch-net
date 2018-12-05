@@ -1,12 +1,13 @@
 using System.Diagnostics;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// Maps a property as a geo_shape field
 	/// </summary>
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IGeoShapeProperty : IDocValuesProperty
 	{
 		/// <summary>

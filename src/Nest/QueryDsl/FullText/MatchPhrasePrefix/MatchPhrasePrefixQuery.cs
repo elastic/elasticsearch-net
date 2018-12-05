@@ -1,21 +1,22 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[JsonConverter(typeof(FieldNameQueryJsonConverter<MatchPhrasePrefixQuery>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(FieldNameQueryFormatter<MatchPhrasePrefixQuery, IMatchPhrasePrefixQuery>))]
 	public interface IMatchPhrasePrefixQuery : IFieldNameQuery
 	{
-		[DataMember(Name ="analyzer")]
+		[DataMember(Name = "analyzer")]
 		string Analyzer { get; set; }
 
-		[DataMember(Name ="max_expansions")]
+		[DataMember(Name = "max_expansions")]
 		int? MaxExpansions { get; set; }
 
-		[DataMember(Name ="query")]
+		[DataMember(Name = "query")]
 		string Query { get; set; }
 
-		[DataMember(Name ="slop")]
+		[DataMember(Name = "slop")]
 		int? Slop { get; set; }
 
 		/// <summary>
@@ -24,7 +25,7 @@ namespace Nest
 		/// which accepts <see cref="ZeroTermsQuery.None" /> (default) and <see cref="ZeroTermsQuery.All" />
 		/// which corresponds to a match_all query.
 		/// </summary>
-		[DataMember(Name ="zero_terms_query")]
+		[DataMember(Name = "zero_terms_query")]
 		ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	}
 

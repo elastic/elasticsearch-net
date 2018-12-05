@@ -5,7 +5,7 @@ using static Nest.DateTimeUtil;
 
 namespace Nest
 {
-	internal class EpochSecondsNullableDateTimeOffsetJsonConverter : IJsonFormatter<DateTimeOffset?>
+	internal class EpochSecondsNullableDateTimeOffsetFormatter : IJsonFormatter<DateTimeOffset?>
 	{
 		public DateTimeOffset? Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{

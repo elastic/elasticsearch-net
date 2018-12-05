@@ -37,17 +37,18 @@ namespace Nest
 
 			private static readonly IJsonFormatterResolver[] Resolvers =
 			{
+				// IL emit a resolver that registers formatters
+				DynamicCompositeResolver.Create(new IJsonFormatter[]
+				{
+					new QueryContainerCollectionFormatter(),
+					new SimpleQueryStringFlagsFormatter(),
+				}, new IJsonFormatterResolver[0]),
 				BuiltinResolver.Instance, // Builtin
 				EnumResolver.Default, // Enum(default => string)
 				DynamicGenericResolver.Instance, // T[], List<T>, etc...
 				AttributeFormatterResolver.Instance, // [JsonFormatter]
 				ReadAsFormatterResolver.Instance,
 				NestGenericSourceTypeFormatterResolver.Instance,
-				// IL emit a resolver that registers formatters
-				DynamicCompositeResolver.Create(new IJsonFormatter[]
-				{
-					new QueryContainerCollectionFormatter(),
-				}, new IJsonFormatterResolver[0]),
 				DynamicObjectResolver.ExcludeNullCamelCase
 
 			};

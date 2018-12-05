@@ -2,12 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[JsonConverter(typeof(TermsQueryJsonConverter))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(TermsQueryFormatter))]
 	public interface ITermsQuery : IFieldNameQuery
 	{
 		IEnumerable<object> Terms { get; set; }

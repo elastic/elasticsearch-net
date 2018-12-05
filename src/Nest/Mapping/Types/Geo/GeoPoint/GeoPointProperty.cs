@@ -1,12 +1,13 @@
 using System.Diagnostics;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// Data type mapping to map a property as a geopoint
 	/// </summary>
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IGeoPointProperty : IDocValuesProperty
 	{
 		/// <summary>

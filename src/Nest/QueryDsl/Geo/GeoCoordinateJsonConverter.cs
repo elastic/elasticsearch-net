@@ -1,33 +1,16 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using Utf8Json;
 
 namespace Nest
 {
-	internal class GeoCoordinateJsonConverter : JsonConverter
+	internal class GeoCoordinateFormatter : IJsonFormatter<GeoCoordinate>
 	{
-		public override bool CanConvert(Type objectType) => true;
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public GeoCoordinate Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var p = (GeoCoordinate)value;
-			if (p == null)
-			{
-				writer.WriteNull();
-				return;
-			}
-			writer.WriteStartArray();
-			serializer.Serialize(writer, p.Longitude);
-			serializer.Serialize(writer, p.Latitude);
-			if (p.Z.HasValue)
-				serializer.Serialize(writer, p.Z.Value);
-			writer.WriteEndArray();
-		}
+			if (reader.GetCurrentJsonToken() != JsonToken.BeginArray)
+				return null;
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			if (reader.TokenType != JsonToken.StartArray) return null;
-
-			var doubles = serializer.Deserialize<double[]>(reader);
+			var doubles = formatterResolver.GetFormatter<double[]>()
+				.Deserialize(ref reader, formatterResolver);
 			switch (doubles.Length)
 			{
 				case 2:
@@ -37,6 +20,26 @@ namespace Nest
 				default:
 					return null;
 			}
+		}
+
+		public void Serialize(ref JsonWriter writer, GeoCoordinate value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
+
+			writer.WriteBeginArray();
+			writer.WriteDouble(value.Longitude);
+			writer.WriteValueSeparator();
+			writer.WriteDouble(value.Latitude);
+			if (value.Z.HasValue)
+			{
+				writer.WriteValueSeparator();
+				writer.WriteDouble(value.Z.Value);
+			}
+			writer.WriteEndArray();
 		}
 	}
 }

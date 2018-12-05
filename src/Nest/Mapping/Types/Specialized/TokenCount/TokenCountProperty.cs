@@ -1,9 +1,10 @@
 ﻿using System.Diagnostics;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface ITokenCountProperty : IDocValuesProperty
 	{
 		[DataMember(Name ="analyzer")]

@@ -1,27 +1,28 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IRolloverIndexResponse : IAcknowledgedResponse
 	{
-		[DataMember(Name ="conditions")]
+		[DataMember(Name = "conditions")]
 		IReadOnlyDictionary<string, bool> Conditions { get; }
 
-		[DataMember(Name ="dry_run")]
+		[DataMember(Name = "dry_run")]
 		bool DryRun { get; }
 
-		[DataMember(Name ="new_index")]
+		[DataMember(Name = "new_index")]
 		string NewIndex { get; }
 
-		[DataMember(Name ="old_index")]
+		[DataMember(Name = "old_index")]
 		string OldIndex { get; }
 
-		[DataMember(Name ="rolled_over")]
+		[DataMember(Name = "rolled_over")]
 		bool RolledOver { get; }
 
-		[DataMember(Name ="shards_acknowledged")]
+		[DataMember(Name = "shards_acknowledged")]
 		bool ShardsAcknowledged { get; }
 	}
 

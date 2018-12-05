@@ -1,5 +1,4 @@
 ﻿using System.Runtime.Serialization;
-using System.Runtime.Serialization;
 using Utf8Json;
 
 namespace Nest
@@ -7,19 +6,18 @@ namespace Nest
 	/// <summary>
 	/// A match query for a single field
 	/// </summary>
-	[DataContract]
-	[JsonConverter(typeof(FieldNameQueryJsonConverter<MatchQuery>))]
+	[InterfaceDataContract]
 	[JsonFormatter(typeof(FieldNameQueryFormatter<MatchQuery, IMatchQuery>))]
 	public interface IMatchQuery : IFieldNameQuery
 	{
 		/// <summary>
 		/// The analyzer name used to analyze the query
 		/// </summary>
-		[DataMember(Name ="analyzer")]
+		[DataMember(Name = "analyzer")]
 		string Analyzer { get; set; }
 
 		/// <summary></summary>
-		[DataMember(Name ="auto_generate_synonyms_phrase_query")]
+		[DataMember(Name = "auto_generate_synonyms_phrase_query")]
 		bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
 		/// <summary>
@@ -28,20 +26,20 @@ namespace Nest
 		/// (below the cutoff) terms in the case of <see cref="Operator.Or" />,
 		/// or all of the low frequency terms in the case of an <see cref="Operator.And" /> match.
 		/// </summary>
-		[DataMember(Name ="cutoff_frequency")]
+		[DataMember(Name = "cutoff_frequency")]
 		double? CutoffFrequency { get; set; }
 
 		/// <summary>
 		/// Allows fuzzy matching based on the type of field being queried.
 		/// </summary>
-		[DataMember(Name ="fuzziness")]
+		[DataMember(Name = "fuzziness")]
 		IFuzziness Fuzziness { get; set; }
 
 		/// <summary>
 		/// Controls how the query is rewritten if <see cref="Fuzziness" /> is set.
 		/// In this scenario, the default is <see cref="MultiTermQueryRewrite.TopTermsBlendedFreqs" />.
 		/// </summary>
-		[DataMember(Name ="fuzzy_rewrite")]
+		[DataMember(Name = "fuzzy_rewrite")]
 		MultiTermQueryRewrite FuzzyRewrite { get; set; }
 
 		/// <summary>
@@ -52,46 +50,46 @@ namespace Nest
 		/// switch to classic Levenshtein distance.
 		/// If not set, Damerau-Levenshtein distance metric will be used.
 		/// </summary>
-		[DataMember(Name ="fuzzy_transpositions")]
+		[DataMember(Name = "fuzzy_transpositions")]
 		bool? FuzzyTranspositions { get; set; }
 
 		/// <summary>
 		/// If set to <c>true</c> will cause format based failures (like providing text to a numeric field)
 		/// to be ignored
 		/// </summary>
-		[DataMember(Name ="lenient")]
+		[DataMember(Name = "lenient")]
 		bool? Lenient { get; set; }
 
 		/// <summary>
 		/// Controls the number of terms fuzzy queries will expand to. Defaults to <c>50</c>
 		/// </summary>
-		[DataMember(Name ="max_expansions")]
+		[DataMember(Name = "max_expansions")]
 		int? MaxExpansions { get; set; }
 
 		/// <summary>
 		/// A value controlling how many "should" clauses in the resulting boolean query should match.
 		/// It can be an absolute value, a percentage or a combination of both.
 		/// </summary>
-		[DataMember(Name ="minimum_should_match")]
+		[DataMember(Name = "minimum_should_match")]
 		MinimumShouldMatch MinimumShouldMatch { get; set; }
 
 		/// <summary>
 		/// The operator used if no explicit operator is specified.
 		/// The default operator is <see cref="Operator.Or" />
 		/// </summary>
-		[DataMember(Name ="operator")]
+		[DataMember(Name = "operator")]
 		Operator? Operator { get; set; }
 
 		/// <summary>
 		/// Set the prefix length for fuzzy queries. Default is <c>0</c>.
 		/// </summary>
-		[DataMember(Name ="prefix_length")]
+		[DataMember(Name = "prefix_length")]
 		int? PrefixLength { get; set; }
 
 		/// <summary>
 		/// The query to execute
 		/// </summary>
-		[DataMember(Name ="query")]
+		[DataMember(Name = "query")]
 		string Query { get; set; }
 
 		/// <summary>
@@ -100,7 +98,7 @@ namespace Nest
 		/// which accepts <see cref="ZeroTermsQuery.None" /> (default) and <see cref="ZeroTermsQuery.All" />
 		/// which corresponds to a match_all query.
 		/// </summary>
-		[DataMember(Name ="zero_terms_query")]
+		[DataMember(Name = "zero_terms_query")]
 		ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	}
 
