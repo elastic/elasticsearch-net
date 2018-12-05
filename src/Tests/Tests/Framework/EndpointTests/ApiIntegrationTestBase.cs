@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using Elastic.Managed.Ephemeral;
 using Elastic.Xunit.XunitPlumbing;
+using Elasticsearch.Net;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using Nest;
@@ -47,35 +49,34 @@ namespace Tests.Framework
 			return base.AssertOnAllResponses((r) =>
 			{
 				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCall.OriginalException != null
-					&& IsNotRequestExceptionType(r.ApiCall.OriginalException.GetType()))
+					&& !(r.ApiCall.OriginalException is ElasticsearchClientException))
 				{
-					ExceptionDispatchInfo.Capture(r.ApiCall.OriginalException).Throw();
-					return;
+					var e = ExceptionDispatchInfo.Capture(r.ApiCall.OriginalException.Demystify());
+					throw new ResponseAssertionException(e.SourceException, r);
 				}
 
-				using (var scope = new AssertionScope())
+				try
 				{
 					assert(r);
-					var failures = scope.Discard();
-					if (failures.Length <= 0) return;
-
-					var failure = failures[0];
-					scope.AddReportable("Failure", failure);
-					scope.AddReportable("DebugInformation", r.DebugInformation);
-					scope.FailWith($@"{{Failure}}
-Response Under Test:
-{{DebugInformation}}");
+				}
+				catch (Exception e)
+				{
+					throw new ResponseAssertionException(e, r);
 				}
 			});
 		}
+	}
 
-		private static bool IsNotRequestExceptionType(Type exceptionType)
-		{
-#if DOTNETCORE
-			return exceptionType != typeof(HttpRequestException);
-#else
-			return exceptionType != typeof(WebException);
-#endif
-		}
+	public class ResponseAssertionException : Exception
+	{
+		private readonly IResponse _response;
+
+		public ResponseAssertionException(Exception innerException, IResponse response)
+			: base(ResponseInMessage(innerException.Message, response), innerException) =>
+			_response = response;
+
+		private static string ResponseInMessage(string innerExceptionMessage, IResponse r) => $@"{innerExceptionMessage}
+Response Under Test:
+{r.DebugInformation}";
 	}
 }
