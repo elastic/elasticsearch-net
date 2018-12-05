@@ -5,19 +5,20 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.Serialization;
 using Newtonsoft.Json.Linq;
+using Utf8Json;
 
 namespace Nest
 {
-	internal class MultiGetHitJsonConverter : JsonConverter
+	internal class MultiGetResponseFormatter : IJsonFormatter<MultiGetResponse>
 	{
 		private static readonly MethodInfo MakeDelegateMethodInfo =
-			typeof(MultiGetHitJsonConverter).GetMethod(nameof(CreateMultiHit), BindingFlags.Static | BindingFlags.NonPublic);
+			typeof(MultiGetResponseFormatter).GetMethod(nameof(CreateMultiHit), BindingFlags.Static | BindingFlags.NonPublic);
 
 		private readonly IMultiGetRequest _request;
 
-		internal MultiGetHitJsonConverter() { }
+		internal MultiGetResponseFormatter() { }
 
-		public MultiGetHitJsonConverter(IMultiGetRequest request) => _request = request;
+		public MultiGetResponseFormatter(IMultiGetRequest request) => _request = request;
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
 
@@ -41,7 +42,7 @@ namespace Nest
 		{
 			if (_request == null)
 			{
-				var realConverter = serializer.GetStatefulConverter<MultiGetHitJsonConverter>();
+				var realConverter = serializer.GetStatefulConverter<MultiGetResponseFormatter>();
 				return realConverter.ReadJson(reader, objectType, existingValue, serializer);
 			}
 
@@ -82,5 +83,9 @@ namespace Nest
 			public IMultiGetOperation Descriptor { get; set; }
 			public JToken Hit { get; set; }
 		}
+
+		public void Serialize(ref JsonWriter writer, MultiGetResponse value, IJsonFormatterResolver formatterResolver) { }
+
+		public MultiGetResponse Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) => null;
 	}
 }

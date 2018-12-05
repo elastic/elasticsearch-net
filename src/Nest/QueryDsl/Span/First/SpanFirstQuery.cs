@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(SpanFirstQueryDescriptor<object>))]
 	public interface ISpanFirstQuery : ISpanSubQuery
 	{

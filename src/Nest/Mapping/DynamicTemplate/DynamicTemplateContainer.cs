@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(DynamicTemplatesJsonConverter))]
+	[JsonFormatter(typeof(DynamicTemplatesFormatter))]
 	public interface IDynamicTemplateContainer : IIsADictionary<string, IDynamicTemplate> { }
 
 	public class DynamicTemplateContainer : IsADictionaryBase<string, IDynamicTemplate>, IDynamicTemplateContainer

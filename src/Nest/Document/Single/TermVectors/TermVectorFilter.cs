@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -6,7 +7,7 @@ namespace Nest
 	/// Filter terms returned based on their TF-IDF scores.
 	/// This can be useful in order find out a good characteristic vector of a document.
 	/// </summary>
-	[DataContract]
+	[InterfaceDataContract]
 	public interface ITermVectorFilter
 	{
 		/// <summary>

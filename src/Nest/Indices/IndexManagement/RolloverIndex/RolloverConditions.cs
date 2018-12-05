@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -6,7 +7,7 @@ namespace Nest
 	/// Conditions that must be satisfied for a new index to be created
 	/// with the rollover index API
 	/// </summary>
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(RolloverConditions))]
 	public interface IRolloverConditions
 	{

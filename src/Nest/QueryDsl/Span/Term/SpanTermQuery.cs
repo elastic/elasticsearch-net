@@ -1,9 +1,10 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[JsonConverter(typeof(FieldNameQueryJsonConverter<SpanTermQuery>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(FieldNameQueryFormatter<SpanTermQuery, ISpanTermQuery>))]
 	public interface ISpanTermQuery : ITermQuery, ISpanSubQuery { }
 
 	public class SpanTermQuery : FieldNameQueryBase, ISpanTermQuery

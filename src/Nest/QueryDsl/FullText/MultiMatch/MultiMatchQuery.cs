@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// A match query across multiple fields.
 	/// </summary>
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(MultiMatchQueryDescriptor<object>))]
 	public interface IMultiMatchQuery : IQuery
 	{
 		/// <summary>
 		/// The analyzer name used to analyze the query
 		/// </summary>
-		[DataMember(Name ="analyzer")]
+		[DataMember(Name = "analyzer")]
 		string Analyzer { get; set; }
 
 		/// <summary></summary>
-		[DataMember(Name ="auto_generate_synonyms_phrase_query")]
+		[DataMember(Name = "auto_generate_synonyms_phrase_query")]
 		bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
 		/// <summary>
@@ -26,13 +27,13 @@ namespace Nest
 		/// (below the cutoff) terms in the case of <see cref="Operator.Or" />,
 		/// or all of the low frequency terms in the case of an <see cref="Operator.And" /> match.
 		/// </summary>
-		[DataMember(Name ="cutoff_frequency")]
+		[DataMember(Name = "cutoff_frequency")]
 		double? CutoffFrequency { get; set; }
 
 		/// <summary>
 		/// The fields to perform the query against.
 		/// </summary>
-		[DataMember(Name ="fields")]
+		[DataMember(Name = "fields")]
 		Fields Fields { get; set; }
 
 		/// <summary>
@@ -42,14 +43,14 @@ namespace Nest
 		/// <see cref="TextQueryType.Phrase" /> or
 		/// <see cref="TextQueryType.PhrasePrefix" /> types.
 		/// </summary>
-		[DataMember(Name ="fuzziness")]
+		[DataMember(Name = "fuzziness")]
 		Fuzziness Fuzziness { get; set; }
 
 		/// <summary>
 		/// Controls how the query is rewritten if <see cref="Fuzziness" /> is set.
 		/// In this scenario, the default is <see cref="MultiTermQueryRewrite.TopTermsBlendedFreqs" />.
 		/// </summary>
-		[DataMember(Name ="fuzzy_rewrite")]
+		[DataMember(Name = "fuzzy_rewrite")]
 		MultiTermQueryRewrite FuzzyRewrite { get; set; }
 
 		/// <summary>
@@ -60,27 +61,27 @@ namespace Nest
 		/// switch to classic Levenshtein distance.
 		/// If not set, Damerau-Levenshtein distance metric will be used.
 		/// </summary>
-		[DataMember(Name ="fuzzy_transpositions")]
+		[DataMember(Name = "fuzzy_transpositions")]
 		bool? FuzzyTranspositions { get; set; }
 
 		/// <summary>
 		/// If set to <c>true</c> will cause format based failures (like providing text to a numeric field)
 		/// to be ignored
 		/// </summary>
-		[DataMember(Name ="lenient")]
+		[DataMember(Name = "lenient")]
 		bool? Lenient { get; set; }
 
 		/// <summary>
 		/// Controls the number of terms fuzzy queries will expand to. Defaults to <c>50</c>
 		/// </summary>
-		[DataMember(Name ="max_expansions")]
+		[DataMember(Name = "max_expansions")]
 		int? MaxExpansions { get; set; }
 
 		/// <summary>
 		/// A value controlling how many "should" clauses in the resulting boolean query should match.
 		/// It can be an absolute value, a percentage or a combination of both.
 		/// </summary>
-		[DataMember(Name ="minimum_should_match")]
+		[DataMember(Name = "minimum_should_match")]
 		MinimumShouldMatch MinimumShouldMatch { get; set; }
 
 		/// <summary>
@@ -93,39 +94,39 @@ namespace Nest
 		/// are applied to each field individually, which is probably not what you want.
 		/// Consider using <see cref="TextQueryType.CrossFields" />.
 		/// </remarks>
-		[DataMember(Name ="operator")]
+		[DataMember(Name = "operator")]
 		Operator? Operator { get; set; }
 
 		/// <summary>
 		/// Set the prefix length for fuzzy queries. Default is <c>0</c>.
 		/// </summary>
-		[DataMember(Name ="prefix_length")]
+		[DataMember(Name = "prefix_length")]
 		int? PrefixLength { get; set; }
 
 		/// <summary>
 		/// The query to execute
 		/// </summary>
-		[DataMember(Name ="query")]
+		[DataMember(Name = "query")]
 		string Query { get; set; }
 
 		/// <summary>
 		/// How far apart terms are allowed to be while still considering the document to be a match.
 		/// </summary>
-		[DataMember(Name ="slop")]
+		[DataMember(Name = "slop")]
 		int? Slop { get; set; }
 
 		/// <summary>
 		/// Used to influence how the score is calculated for <see cref="TextQueryType.BestFields" />. If specified,
 		/// score is calculated using
 		/// </summary>
-		[DataMember(Name ="tie_breaker")]
+		[DataMember(Name = "tie_breaker")]
 		double? TieBreaker { get; set; }
 
 		/// <summary>
 		/// How the fields should be combined to build the text query.
 		/// Default is <see cref="TextQueryType.BestFields" />
 		/// </summary>
-		[DataMember(Name ="type")]
+		[DataMember(Name = "type")]
 		TextQueryType? Type { get; set; }
 
 		/// <summary>
@@ -133,7 +134,7 @@ namespace Nest
 		/// in a <see cref="IDisMaxQuery" />. By setting <see cref="UseDisMax" /> to <c>false</c>,
 		/// they will be wrapped in a <see cref="IBoolQuery" /> instead.
 		/// </summary>
-		[DataMember(Name ="use_dis_max")]
+		[DataMember(Name = "use_dis_max")]
 		bool? UseDisMax { get; set; }
 
 		/// <summary>
@@ -142,7 +143,7 @@ namespace Nest
 		/// which accepts <see cref="ZeroTermsQuery.None" /> (default) and <see cref="ZeroTermsQuery.All" />
 		/// which corresponds to a match_all query.
 		/// </summary>
-		[DataMember(Name ="zero_terms_query")]
+		[DataMember(Name = "zero_terms_query")]
 		ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	}
 

@@ -1,143 +1,185 @@
-﻿using System;
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Linq;
+﻿using System.Collections.Generic;
+using Utf8Json;
+using Utf8Json.Internal;
 
 namespace Nest
 {
-	internal class TermsQueryJsonConverter : JsonConverter
+	internal class TermsQueryFormatter : IJsonFormatter<ITermsQuery>
 	{
-		public override bool CanRead => true;
-
-		public override bool CanWrite => true;
-
-		public override bool CanConvert(Type objectType) => true;
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		private static readonly AutomataDictionary FieldLookups = new AutomataDictionary
 		{
-			if (!(value is ITermsQuery t)) return;
+			{ "id", 0 },
+			{ "index", 1 },
+			{ "path", 2 },
+			{ "routing", 3 }
+		};
 
-			var settings = serializer.GetConnectionSettings();
-			var field = settings.Inferrer.Field(t.Field);
+		private static readonly AutomataDictionary Fields = new AutomataDictionary
+		{
+			{ "boost", 0 },
+			{ "_name", 1 }
+		};
 
-			writer.WriteStartObject();
+		private static readonly SourceWriteFormatter<object> SourceWriteFormatter =
+			new SourceWriteFormatter<object>();
+
+		public ITermsQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
+				return null;
+
+			ITermsQuery query = new TermsQuery();
+			var count = 0;
+			while (reader.ReadIsInObject(ref count))
 			{
-				if (t.IsVerbatim)
+				var property = reader.ReadPropertyNameSegmentRaw();
+				if (Fields.TryGetValue(property, out var value))
 				{
-					if (t.TermsLookup != null)
+					switch (value)
 					{
-						writer.WritePropertyName(field);
-						serializer.Serialize(writer, t.TermsLookup);
-					}
-					else if (t.Terms != null)
-					{
-						writer.WritePropertyName(field);
-						writer.WriteStartArray();
-						foreach (var o in t.Terms)
-							SourceValueWriteConverter.Write(writer, o, serializer);
-						writer.WriteEndArray();
+						case 0:
+							query.Boost = reader.ReadDouble();
+							break;
+						case 1:
+							query.Name = reader.ReadString();
+							break;
 					}
 				}
 				else
 				{
-					if (t.Terms.HasAny())
+					query.Field = property.ToUTF8String();
+					ReadTerms(ref reader, query, formatterResolver);
+					break;
+				}
+			}
+
+			return query;
+		}
+
+		public void Serialize(ref JsonWriter writer, ITermsQuery value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
+
+			var settings = formatterResolver.GetConnectionSettings();
+			var field = settings.Inferrer.Field(value.Field);
+			var written = false;
+			writer.WriteBeginObject();
+			{
+				if (value.IsVerbatim)
+				{
+					if (value.TermsLookup != null)
 					{
 						writer.WritePropertyName(field);
-						writer.WriteStartArray();
-						foreach (var o in t.Terms)
-							SourceValueWriteConverter.Write(writer, o, serializer);
-						writer.WriteEndArray();
+						var formatter = formatterResolver.GetFormatter<IFieldLookup>();
+						formatter.Serialize(ref writer, value.TermsLookup, formatterResolver);
+						written = true;
 					}
-					else if (t.TermsLookup != null)
+					else if (value.Terms != null)
 					{
 						writer.WritePropertyName(field);
-						serializer.Serialize(writer, t.TermsLookup);
+						writer.WriteBeginArray();
+						var count = 0;
+						foreach (var o in value.Terms)
+						{
+							if (count > 0)
+								writer.WriteValueSeparator();
+
+							SourceWriteFormatter.Serialize(ref writer, o, formatterResolver);
+							count++;
+						}
+						writer.WriteEndArray();
+						written = true;
+					}
+				}
+				else
+				{
+					if (value.Terms.HasAny())
+					{
+						writer.WritePropertyName(field);
+						writer.WriteBeginArray();
+						var count = 0;
+						foreach (var o in value.Terms)
+						{
+							if (count > 0)
+								writer.WriteValueSeparator();
+
+							SourceWriteFormatter.Serialize(ref writer, o, formatterResolver);
+							count++;
+						}
+						writer.WriteEndArray();
+						written = true;
+					}
+					else if (value.TermsLookup != null)
+					{
+						writer.WritePropertyName(field);
+						var formatter = formatterResolver.GetFormatter<IFieldLookup>();
+						formatter.Serialize(ref writer, value.TermsLookup, formatterResolver);
+						written = true;
 					}
 				}
 
-				if (t.Boost.HasValue)
+				if (value.Boost.HasValue)
 				{
+					if (written)
+						writer.WriteValueSeparator();
+
 					writer.WritePropertyName("boost");
-					writer.WriteValue(t.Boost.Value);
+					writer.WriteDouble(value.Boost.Value);
+					written = true;
 				}
-				if (!t.Name.IsNullOrEmpty())
+				if (!value.Name.IsNullOrEmpty())
 				{
+					if (written)
+						writer.WriteValueSeparator();
+
 					writer.WritePropertyName("_name");
-					writer.WriteValue(t.Name);
+					writer.WriteString(value.Name);
 				}
 			}
 			writer.WriteEndObject();
 		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		private void ReadTerms(ref JsonReader reader, ITermsQuery termsQuery, IJsonFormatterResolver formatterResolver)
 		{
-			var filter = new TermsQuery();
-			ITermsQuery f = filter;
-			if (reader.TokenType != JsonToken.StartObject)
-				return null;
-
-			var depth = reader.Depth;
-			while (reader.Read() && reader.Depth >= depth && reader.Value != null)
+			var token = reader.GetCurrentJsonToken();
+			if (token == JsonToken.BeginObject)
 			{
-				var property = reader.Value as string;
-				switch (property)
-				{
-					case "boost":
-						reader.Read();
-						f.Boost = reader.Value as double?;
-						break;
-					case "_name":
-						f.Name = reader.ReadAsString();
-						break;
-					default:
-						f.Field = property;
-						//reader.Read();
-						ReadTerms(f, reader, serializer);
-						//reader.Read();
-						break;
-				}
-			}
-			return filter;
-		}
+				var fieldLookup = new FieldLookup();
 
-		private void ReadTerms(ITermsQuery termsQuery, JsonReader reader, JsonSerializer serializer)
-		{
-			reader.Read();
-			if (reader.TokenType == JsonToken.StartObject)
-			{
-				var ef = new FieldLookup();
-				var depth = reader.Depth;
-				while (reader.Read() && reader.Depth >= depth && reader.Value != null)
+				var count = 0;
+				while (reader.ReadIsInObject(ref count))
 				{
-					var property = reader.Value as string;
-					switch (property)
+					var property = reader.ReadPropertyNameSegmentRaw();
+					if (FieldLookups.TryGetValue(property, out var value))
 					{
-						case "id":
-							reader.Read();
-							var id = serializer.Deserialize<Id>(reader);
-							ef.Id = id;
-							break;
-						case "index":
-							reader.Read();
-							ef.Index = reader.Value as string;
-							break;
-						case "type":
-							reader.Read();
-							break;
-						case "path":
-							reader.Read();
-							ef.Path = reader.Value as string;
-							break;
-						case "routing":
-							reader.Read();
-							ef.Routing = reader.Value as string;
-							break;
+						switch (value)
+						{
+							case 0:
+								fieldLookup.Id = reader.ReadString();
+								break;
+							case 1:
+								fieldLookup.Index = reader.ReadString();
+								break;
+							case 2:
+								fieldLookup.Path = reader.ReadString();
+								break;
+							case 3:
+								fieldLookup.Routing = reader.ReadString();
+								break;
+						}
 					}
 				}
-				termsQuery.TermsLookup = ef;
+
+				termsQuery.TermsLookup = fieldLookup;
 			}
-			else if (reader.TokenType == JsonToken.StartArray)
+			else if (token == JsonToken.BeginArray)
 			{
-				var values = JArray.Load(reader).Values<object>();
+				var values = formatterResolver.GetFormatter<IEnumerable<object>>()
+					.Deserialize(ref reader, formatterResolver);
 				termsQuery.Terms = values;
 			}
 		}

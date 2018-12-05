@@ -1,9 +1,10 @@
 ﻿using System.IO;
 using Elasticsearch.Net;
+using Utf8Json;
 
 namespace Nest
 {
-	[ContractJsonConverter(typeof(IndexJsonConverter))]
+	[JsonFormatter(typeof(IndexRequestFormatter<>))]
 	public partial interface IIndexRequest<TDocument> : IProxyRequest where TDocument : class
 	{
 		TDocument Document { get; set; }

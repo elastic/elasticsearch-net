@@ -1,11 +1,12 @@
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// A range of signed 32-bit integers with a minimum value of -231 and maximum of 231-1.
 	/// </summary>
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IIntegerRangeProperty : IRangeProperty { }
 
 	/// <inheritdoc />

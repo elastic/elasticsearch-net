@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -32,7 +33,7 @@ namespace Nest
 
 	[DataContract]
 	//TODO validate this, ported over from ElasticContractResolver but it seems out of place
-	[ContractJsonConverter(typeof(MultiGetHitJsonConverter))]
+	[JsonFormatter(typeof(MultiGetResponseFormatter))]
 	public class MultiGetResponse : ResponseBase, IMultiGetResponse
 	{
 		public IReadOnlyCollection<IMultiGetHit<object>> Hits => InternalHits.ToList().AsReadOnly();
