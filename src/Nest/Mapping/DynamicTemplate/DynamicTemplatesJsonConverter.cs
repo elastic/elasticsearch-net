@@ -1,54 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Linq;
+﻿using Utf8Json;
 
 namespace Nest
 {
-	internal class DynamicTemplatesJsonConverter : JsonConverter
+	internal class DynamicTemplatesFormatter : IJsonFormatter<DynamicTemplateContainer>
 	{
-		public override bool CanWrite => true;
-
-		public override bool CanConvert(Type objectType) => objectType == typeof(IDictionary<string, DynamicTemplate>);
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public DynamicTemplateContainer Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var dict = value as DynamicTemplateContainer;
-			if (!dict.HasAny()) return;
+			var dynamicTemplateContainer = new DynamicTemplateContainer();
+			var count = 0;
+			var formatter = formatterResolver.GetFormatter<DynamicTemplate>();
 
-			writer.WriteStartArray();
-			foreach (var p in dict)
+			while (reader.ReadIsInArray(ref count))
 			{
-				writer.WriteStartObject();
+				var objectCount = 0;
+				string name = null;
+				IDynamicTemplate template = null;
+				while (reader.ReadIsInObject(ref objectCount))
 				{
-					writer.WritePropertyName(p.Key);
-					serializer.Serialize(writer, p.Value);
+					name = reader.ReadPropertyName();
+					template = formatter.Deserialize(ref reader, formatterResolver);
 				}
-				writer.WriteEndObject();
+
+				dynamicTemplateContainer.Add(name, template);
 			}
-			writer.WriteEndArray();
+
+			return dynamicTemplateContainer;
 		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public void Serialize(ref JsonWriter writer, DynamicTemplateContainer value, IJsonFormatterResolver formatterResolver)
 		{
-			var dict = new DynamicTemplateContainer();
-			var o = JArray.Load(reader);
-			foreach (JObject p in o)
+			if (!value.HasAny())
+				return;
+
+			writer.WriteBeginArray();
+			var formatter = formatterResolver.GetFormatter<IDynamicTemplate>();
+			var count = 0;
+			foreach (var p in value)
 			{
-				var prop = p.Properties().First();
-				var po = prop.Value as JObject;
-				var name = prop.Name;
-				if (po == null)
-					continue;
+				if (count > 0)
+					writer.WriteValueSeparator();
 
-				var template = serializer.Deserialize(po.CreateReader(), typeof(DynamicTemplate)) as DynamicTemplate;
-				if (template == null)
-					continue;
+				writer.WriteBeginObject();
+				writer.WritePropertyName(p.Key);
+				formatter.Serialize(ref writer, p.Value, formatterResolver);
+				writer.WriteEndObject();
 
-				dict.Add(name, template);
+				count++;
 			}
-			return dict;
+			writer.WriteEndArray();
 		}
 	}
 }

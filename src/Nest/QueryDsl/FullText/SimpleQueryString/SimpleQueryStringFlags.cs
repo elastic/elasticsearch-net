@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(SimpleQueryStringFlagsJsonConverter))]
 	[Flags]
 	public enum SimpleQueryStringFlags
 	{
@@ -50,16 +50,18 @@ namespace Nest
 		All = 1 << 12,
 	}
 
-	internal class SimpleQueryStringFlagsJsonConverter : JsonConverter
+	internal class SimpleQueryStringFlagsFormatter : IJsonFormatter<SimpleQueryStringFlags?>
 	{
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public void Serialize(ref JsonWriter writer, SimpleQueryStringFlags? value, IJsonFormatterResolver formatterResolver)
 		{
-			var em = value as SimpleQueryStringFlags?;
-			if (!em.HasValue) return;
+			if (!value.HasValue)
+			{
+				writer.WriteNull();
+				return;
+			}
 
-			;
-			var e = em.Value;
-			var list = new List<string>();
+			var e = value.Value;
+			var list = new List<string>(13);
 			if (e.HasFlag(SimpleQueryStringFlags.All)) list.Add("ALL");
 			if (e.HasFlag(SimpleQueryStringFlags.None)) list.Add("NONE");
 			if (e.HasFlag(SimpleQueryStringFlags.And)) list.Add("AND");
@@ -74,18 +76,16 @@ namespace Nest
 			if (e.HasFlag(SimpleQueryStringFlags.Near)) list.Add("NEAR");
 			if (e.HasFlag(SimpleQueryStringFlags.Slop)) list.Add("SLOP");
 			var flags = string.Join("|", list);
-			writer.WriteValue(flags);
+			writer.WriteString(flags);
 		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public SimpleQueryStringFlags? Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var flags = reader.Value as string;
+			var flags = reader.ReadString();
 			return flags?.Split('|')
 				.Select(flag => flag.ToEnum<SimpleQueryStringFlags>())
 				.Where(s => s.HasValue)
 				.Aggregate(default(SimpleQueryStringFlags), (current, s) => current | s.Value);
 		}
-
-		public override bool CanConvert(Type objectType) => true;
 	}
 }

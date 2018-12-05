@@ -43,8 +43,8 @@ namespace Nest
 				request,
 				(p, d) =>
 				{
-					var converter = CreateMultiSearchDeserializer(p);
-					var serializer = ConnectionSettings.CreateStateful(converter);
+					var formatter = CreateMultiSearchResponseFormatter(p);
+					var serializer = ConnectionSettings.CreateStateful(formatter);
 					var creator = new MultiSearchCreator((r, s) => serializer.Deserialize<MultiSearchResponse>(s));
 					request.RequestParameters.DeserializationOverride = creator;
 					return LowLevelDispatch.MsearchDispatch<MultiSearchResponse>(p, new SerializableData<IMultiSearchRequest>(p));
@@ -66,15 +66,15 @@ namespace Nest
 			cancellationToken,
 			(p, d, c) =>
 			{
-				var converter = CreateMultiSearchDeserializer(p);
-				var serializer = ConnectionSettings.CreateStateful(converter);
+				var formatter = CreateMultiSearchResponseFormatter(p);
+				var serializer = ConnectionSettings.CreateStateful(formatter);
 				var creator = new MultiSearchCreator((r, s) => serializer.Deserialize<MultiSearchResponse>(s));
 				request.RequestParameters.DeserializationOverride = creator;
 				return LowLevelDispatch.MsearchDispatchAsync<MultiSearchResponse>(p, new SerializableData<IMultiSearchRequest>(p), c);
 			}
 		);
 
-		private MultiSearchResponseFormatter CreateMultiSearchDeserializer(IMultiSearchRequest request) =>
+		private MultiSearchResponseFormatter CreateMultiSearchResponseFormatter(IMultiSearchRequest request) =>
 			new MultiSearchResponseFormatter(ConnectionSettings, request);
 	}
 }

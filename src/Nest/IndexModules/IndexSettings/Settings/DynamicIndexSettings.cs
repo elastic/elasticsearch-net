@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// Dynamic index settings
 	/// </summary>
-	[ContractJsonConverter(typeof(IndexSettingsConverter))]
+	[JsonFormatter(typeof(IndexSettingsFormatter))]
 	public interface IDynamicIndexSettings : IIsADictionary<string, object>
 	{
 		/// <summary>

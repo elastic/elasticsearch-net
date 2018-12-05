@@ -1,18 +1,19 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[JsonConverter(typeof(FieldNameQueryJsonConverter<MatchPhraseQuery>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(FieldNameQueryFormatter<MatchPhraseQuery, IMatchPhraseQuery>))]
 	public interface IMatchPhraseQuery : IFieldNameQuery
 	{
-		[DataMember(Name ="analyzer")]
+		[DataMember(Name = "analyzer")]
 		string Analyzer { get; set; }
 
-		[DataMember(Name ="query")]
+		[DataMember(Name = "query")]
 		string Query { get; set; }
 
-		[DataMember(Name ="slop")]
+		[DataMember(Name = "slop")]
 		int? Slop { get; set; }
 	}
 

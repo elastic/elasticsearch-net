@@ -1,71 +1,71 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using Newtonsoft.Json.Linq;
+using Utf8Json;
 using static Nest.FixedIndexSettings;
 using static Nest.IndexSortSettings;
 using static Nest.UpdatableIndexSettings;
 
 namespace Nest
 {
-	internal class IndexSettingsConverter : VerbatimDictionaryKeysJsonConverter<string, object>
+	internal class IndexSettingsFormatter : IJsonFormatter<IDynamicIndexSettings>
 	{
-		public override bool CanRead => true;
-		public override bool CanWrite => true;
-
-		public override bool CanConvert(Type objectType) => true;
-
-		protected override bool SkipValue(JsonSerializer serializer, KeyValuePair<string, object> entry) =>
-			entry.Key != RefreshInterval && base.SkipValue(serializer, entry);
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		private class IndexSettingsDictionaryFormatter : VerbatimDictionaryKeysFormatter<string, object>
 		{
-			var ds = value as IDynamicIndexSettings ?? (value as IUpdateIndexSettingsRequest)?.IndexSettings;
+			protected override bool SkipValue(KeyValuePair<string, object> entry) =>
+				entry.Key != RefreshInterval && base.SkipValue(entry);
+		}
 
-			if (ds == null) return;
+		private static readonly IndexSettingsDictionaryFormatter Formatter = new IndexSettingsDictionaryFormatter();
 
-			IDictionary<string, object> d = ds;
+		public void Serialize(ref JsonWriter writer, IDynamicIndexSettings value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null) return;
+
+			IDictionary<string, object> d = value;
 
 			void Set(string knownKey, object newValue)
 			{
 				if (newValue != null) d[knownKey] = newValue;
 			}
 
-			Set(NumberOfReplicas, ds.NumberOfReplicas);
-			Set(RefreshInterval, ds.RefreshInterval);
-			Set(DefaultPipeline, ds.DefaultPipeline);
-			Set(BlocksReadOnly, ds.BlocksReadOnly);
-			Set(BlocksRead, ds.BlocksRead);
-			Set(BlocksWrite, ds.BlocksWrite);
-			Set(BlocksMetadata, ds.BlocksMetadata);
-			Set(Priority, ds.Priority);
-			Set(UpdatableIndexSettings.AutoExpandReplicas, ds.AutoExpandReplicas);
-			Set(UpdatableIndexSettings.RecoveryInitialShards, ds.RecoveryInitialShards);
-			Set(RequestsCacheEnable, ds.RequestsCacheEnabled);
-			Set(RoutingAllocationTotalShardsPerNode, ds.RoutingAllocationTotalShardsPerNode);
-			Set(UnassignedNodeLeftDelayedTimeout, ds.UnassignedNodeLeftDelayedTimeout);
+			Set(NumberOfReplicas, value.NumberOfReplicas);
+			Set(RefreshInterval, value.RefreshInterval);
+			Set(DefaultPipeline, value.DefaultPipeline);
+			Set(BlocksReadOnly, value.BlocksReadOnly);
+			Set(BlocksRead, value.BlocksRead);
+			Set(BlocksWrite, value.BlocksWrite);
+			Set(BlocksMetadata, value.BlocksMetadata);
+			Set(Priority, value.Priority);
+			Set(UpdatableIndexSettings.AutoExpandReplicas, value.AutoExpandReplicas);
+			Set(UpdatableIndexSettings.RecoveryInitialShards, value.RecoveryInitialShards);
+			Set(RequestsCacheEnable, value.RequestsCacheEnabled);
+			Set(RoutingAllocationTotalShardsPerNode, value.RoutingAllocationTotalShardsPerNode);
+			Set(UnassignedNodeLeftDelayedTimeout, value.UnassignedNodeLeftDelayedTimeout);
 
-			var translog = ds.Translog;
+			var translog = value.Translog;
 			Set(TranslogSyncInterval, translog?.SyncInterval);
 			Set(UpdatableIndexSettings.TranslogDurability, translog?.Durability);
 
-			var flush = ds.Translog?.Flush;
+			var flush = value.Translog?.Flush;
 			Set(TranslogFlushThresholdSize, flush?.ThresholdSize);
 			Set(TranslogFlushThresholdPeriod, flush?.ThresholdPeriod);
 
-			Set(MergePolicyExpungeDeletesAllowed, ds.Merge?.Policy?.ExpungeDeletesAllowed);
-			Set(MergePolicyFloorSegment, ds.Merge?.Policy?.FloorSegment);
-			Set(MergePolicyMaxMergeAtOnce, ds.Merge?.Policy?.MaxMergeAtOnce);
-			Set(MergePolicyMaxMergeAtOnceExplicit, ds.Merge?.Policy?.MaxMergeAtOnceExplicit);
-			Set(MergePolicyMaxMergedSegment, ds.Merge?.Policy?.MaxMergedSegment);
-			Set(MergePolicySegmentsPerTier, ds.Merge?.Policy?.SegmentsPerTier);
-			Set(MergePolicyReclaimDeletesWeight, ds.Merge?.Policy?.ReclaimDeletesWeight);
+			Set(MergePolicyExpungeDeletesAllowed, value.Merge?.Policy?.ExpungeDeletesAllowed);
+			Set(MergePolicyFloorSegment, value.Merge?.Policy?.FloorSegment);
+			Set(MergePolicyMaxMergeAtOnce, value.Merge?.Policy?.MaxMergeAtOnce);
+			Set(MergePolicyMaxMergeAtOnceExplicit, value.Merge?.Policy?.MaxMergeAtOnceExplicit);
+			Set(MergePolicyMaxMergedSegment, value.Merge?.Policy?.MaxMergedSegment);
+			Set(MergePolicySegmentsPerTier, value.Merge?.Policy?.SegmentsPerTier);
+			Set(MergePolicyReclaimDeletesWeight, value.Merge?.Policy?.ReclaimDeletesWeight);
 
-			Set(MergeSchedulerMaxThreadCount, ds.Merge?.Scheduler?.MaxThreadCount);
-			Set(MergeSchedulerAutoThrottle, ds.Merge?.Scheduler?.AutoThrottle);
+			Set(MergeSchedulerMaxThreadCount, value.Merge?.Scheduler?.MaxThreadCount);
+			Set(MergeSchedulerAutoThrottle, value.Merge?.Scheduler?.AutoThrottle);
 
-			var log = ds.SlowLog;
+			var log = value.SlowLog;
 			var search = log?.Search;
 			var indexing = log?.Indexing;
 
@@ -87,8 +87,8 @@ namespace Nest
 			Set(SlowlogIndexingLevel, indexing?.LogLevel);
 			Set(SlowlogIndexingSource, indexing?.Source);
 
-			Set(UpdatableIndexSettings.Analysis, ds.Analysis);
-			Set(Similarity, ds.Similarity);
+			Set(UpdatableIndexSettings.Analysis, value.Analysis);
+			Set(Similarity, value.Similarity);
 
 			var indexSettings = value as IIndexSettings;
 
@@ -111,17 +111,14 @@ namespace Nest
 				Set(Missing, AsArrayOrSingleItem(indexSettings.Sorting.Missing));
 			}
 
-			base.WriteJson(writer, d, serializer);
+			Formatter.Serialize(ref writer, d, formatterResolver);
 		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public IDynamicIndexSettings Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var s = new IndexSettings();
-			SetKnownIndexSettings(reader, serializer, s);
-			if (!typeof(IUpdateIndexSettingsRequest).IsAssignableFrom(objectType)) return s;
-
-			var request = new UpdateIndexSettingsRequest() { IndexSettings = s };
-			return request;
+			var indexSettings = new IndexSettings();
+			SetKnownIndexSettings(ref reader, formatterResolver, indexSettings);
+			return indexSettings;
 		}
 
 		private static object AsArrayOrSingleItem<T>(IEnumerable<T> items)
@@ -135,104 +132,106 @@ namespace Nest
 			return items;
 		}
 
-		private static JObject Flatten(JObject original, string prefix = "", JObject newObject = null)
+		private static Dictionary<string, object> Flatten(Dictionary<string, object> original, string prefix = "", Dictionary<string, object> current = null)
 		{
-			newObject = newObject ?? new JObject();
-			foreach (var property in original.Properties())
+			current = current ?? new Dictionary<string, object>();
+			foreach (var property in original)
 			{
-				if (property.Value is JObject &&
-					property.Name != UpdatableIndexSettings.Analysis &&
-					property.Name != Similarity)
-					Flatten(property.Value.Value<JObject>(), prefix + property.Name + ".", newObject);
-				else newObject.Add(prefix + property.Name, property.Value);
+				if (property.Value is Dictionary<string, object> objects &&
+					property.Key != UpdatableIndexSettings.Analysis &&
+					property.Key != Similarity)
+					Flatten(objects, prefix + property.Key + ".", current);
+				else current.Add(prefix + property.Key, property.Value);
 			}
-			return newObject;
+			return current;
 		}
 
-		private static void SetKnownIndexSettings(JsonReader reader, JsonSerializer serializer, IIndexSettings s)
+		private static void SetKnownIndexSettings(ref JsonReader reader, IJsonFormatterResolver formatterResolver, IIndexSettings s)
 		{
-			var settings = Flatten(JObject.Load(reader)).Properties().ToDictionary(kv => kv.Name);
+			// TODO: Fix this. May need to use dynamic here, and flatten from it
+			var formatter = formatterResolver.GetFormatter<Dictionary<string, object>>();
+			var settings = Flatten(formatter.Deserialize(ref reader, formatterResolver));
 
-			Set<int?>(s, settings, NumberOfReplicas, v => s.NumberOfReplicas = v);
-			Set<AutoExpandReplicas>(s, settings, UpdatableIndexSettings.AutoExpandReplicas, v => s.AutoExpandReplicas = v);
-			Set<Time>(s, settings, RefreshInterval, v => s.RefreshInterval = v);
-			Set<bool?>(s, settings, BlocksReadOnly, v => s.BlocksReadOnly = v);
-			Set<bool?>(s, settings, BlocksRead, v => s.BlocksRead = v);
-			Set<bool?>(s, settings, BlocksWrite, v => s.BlocksWrite = v);
-			Set<bool?>(s, settings, BlocksMetadata, v => s.BlocksMetadata = v);
-			Set<int?>(s, settings, Priority, v => s.Priority = v);
-			Set<string>(s, settings, DefaultPipeline, v => s.DefaultPipeline = v);
+			Set<int?>(s, settings, NumberOfReplicas, v => s.NumberOfReplicas = v, formatterResolver);
+			Set<AutoExpandReplicas>(s, settings, UpdatableIndexSettings.AutoExpandReplicas, v => s.AutoExpandReplicas = v, formatterResolver);
+			Set<Time>(s, settings, RefreshInterval, v => s.RefreshInterval = v, formatterResolver);
+			Set<bool?>(s, settings, BlocksReadOnly, v => s.BlocksReadOnly = v, formatterResolver);
+			Set<bool?>(s, settings, BlocksRead, v => s.BlocksRead = v, formatterResolver);
+			Set<bool?>(s, settings, BlocksWrite, v => s.BlocksWrite = v, formatterResolver);
+			Set<bool?>(s, settings, BlocksMetadata, v => s.BlocksMetadata = v, formatterResolver);
+			Set<int?>(s, settings, Priority, v => s.Priority = v, formatterResolver);
+			Set<string>(s, settings, DefaultPipeline, v => s.DefaultPipeline = v, formatterResolver);
 
 			Set<Union<int, RecoveryInitialShards>>(s, settings, UpdatableIndexSettings.RecoveryInitialShards,
-				v => s.RecoveryInitialShards = v, serializer);
-			Set<bool?>(s, settings, RequestsCacheEnable, v => s.RequestsCacheEnabled = v);
+				v => s.RecoveryInitialShards = v, formatterResolver);
+			Set<bool?>(s, settings, RequestsCacheEnable, v => s.RequestsCacheEnabled = v, formatterResolver);
 			Set<int?>(s, settings, RoutingAllocationTotalShardsPerNode,
-				v => s.RoutingAllocationTotalShardsPerNode = v);
+				v => s.RoutingAllocationTotalShardsPerNode = v, formatterResolver);
 			Set<Time>(s, settings, UnassignedNodeLeftDelayedTimeout,
-				v => s.UnassignedNodeLeftDelayedTimeout = v);
+				v => s.UnassignedNodeLeftDelayedTimeout = v, formatterResolver);
 
 			var t = s.Translog = new TranslogSettings();
-			Set<Time>(s, settings, TranslogSyncInterval, v => t.SyncInterval = v);
-			Set<TranslogDurability?>(s, settings, UpdatableIndexSettings.TranslogDurability, v => t.Durability = v);
+			Set<Time>(s, settings, TranslogSyncInterval, v => t.SyncInterval = v, formatterResolver);
+			Set<TranslogDurability?>(s, settings, UpdatableIndexSettings.TranslogDurability, v => t.Durability = v, formatterResolver);
 
 			var tf = s.Translog.Flush = new TranslogFlushSettings();
-			Set<string>(s, settings, TranslogFlushThresholdSize, v => tf.ThresholdSize = v);
-			Set<Time>(s, settings, TranslogFlushThresholdPeriod, v => tf.ThresholdPeriod = v);
+			Set<string>(s, settings, TranslogFlushThresholdSize, v => tf.ThresholdSize = v, formatterResolver);
+			Set<Time>(s, settings, TranslogFlushThresholdPeriod, v => tf.ThresholdPeriod = v, formatterResolver);
 
 			s.Merge = new MergeSettings();
 			var p = s.Merge.Policy = new MergePolicySettings();
-			Set<int?>(s, settings, MergePolicyExpungeDeletesAllowed, v => p.ExpungeDeletesAllowed = v);
-			Set<string>(s, settings, MergePolicyFloorSegment, v => p.FloorSegment = v);
-			Set<int?>(s, settings, MergePolicyMaxMergeAtOnce, v => p.MaxMergeAtOnce = v);
-			Set<int?>(s, settings, MergePolicyMaxMergeAtOnceExplicit, v => p.MaxMergeAtOnceExplicit = v);
-			Set<string>(s, settings, MergePolicyMaxMergedSegment, v => p.MaxMergedSegment = v);
-			Set<int?>(s, settings, MergePolicySegmentsPerTier, v => p.SegmentsPerTier = v);
-			Set<double?>(s, settings, MergePolicyReclaimDeletesWeight, v => p.ReclaimDeletesWeight = v);
+			Set<int?>(s, settings, MergePolicyExpungeDeletesAllowed, v => p.ExpungeDeletesAllowed = v, formatterResolver);
+			Set<string>(s, settings, MergePolicyFloorSegment, v => p.FloorSegment = v, formatterResolver);
+			Set<int?>(s, settings, MergePolicyMaxMergeAtOnce, v => p.MaxMergeAtOnce = v, formatterResolver);
+			Set<int?>(s, settings, MergePolicyMaxMergeAtOnceExplicit, v => p.MaxMergeAtOnceExplicit = v, formatterResolver);
+			Set<string>(s, settings, MergePolicyMaxMergedSegment, v => p.MaxMergedSegment = v, formatterResolver);
+			Set<int?>(s, settings, MergePolicySegmentsPerTier, v => p.SegmentsPerTier = v, formatterResolver);
+			Set<double?>(s, settings, MergePolicyReclaimDeletesWeight, v => p.ReclaimDeletesWeight = v, formatterResolver);
 
 			var ms = s.Merge.Scheduler = new MergeSchedulerSettings();
-			Set<int?>(s, settings, MergeSchedulerMaxThreadCount, v => ms.MaxThreadCount = v);
-			Set<bool?>(s, settings, MergeSchedulerAutoThrottle, v => ms.AutoThrottle = v);
+			Set<int?>(s, settings, MergeSchedulerMaxThreadCount, v => ms.MaxThreadCount = v, formatterResolver);
+			Set<bool?>(s, settings, MergeSchedulerAutoThrottle, v => ms.AutoThrottle = v, formatterResolver);
 
 			var slowlog = s.SlowLog = new SlowLog();
 			var search = s.SlowLog.Search = new SlowLogSearch();
-			Set<LogLevel?>(s, settings, SlowlogSearchLevel, v => search.LogLevel = v);
+			Set<LogLevel?>(s, settings, SlowlogSearchLevel, v => search.LogLevel = v, formatterResolver);
 			var query = s.SlowLog.Search.Query = new SlowLogSearchQuery();
-			Set<Time>(s, settings, SlowlogSearchThresholdQueryWarn, v => query.ThresholdWarn = v);
-			Set<Time>(s, settings, SlowlogSearchThresholdQueryInfo, v => query.ThresholdInfo = v);
+			Set<Time>(s, settings, SlowlogSearchThresholdQueryWarn, v => query.ThresholdWarn = v, formatterResolver);
+			Set<Time>(s, settings, SlowlogSearchThresholdQueryInfo, v => query.ThresholdInfo = v, formatterResolver);
 			Set<Time>(s, settings, SlowlogSearchThresholdQueryDebug,
-				v => query.ThresholdDebug = v);
+				v => query.ThresholdDebug = v, formatterResolver);
 			Set<Time>(s, settings, SlowlogSearchThresholdQueryTrace,
-				v => query.ThresholdTrace = v);
+				v => query.ThresholdTrace = v, formatterResolver);
 
 			var fetch = s.SlowLog.Search.Fetch = new SlowLogSearchFetch();
-			Set<Time>(s, settings, SlowlogSearchThresholdFetchWarn, v => fetch.ThresholdWarn = v);
-			Set<Time>(s, settings, SlowlogSearchThresholdFetchInfo, v => fetch.ThresholdInfo = v);
+			Set<Time>(s, settings, SlowlogSearchThresholdFetchWarn, v => fetch.ThresholdWarn = v, formatterResolver);
+			Set<Time>(s, settings, SlowlogSearchThresholdFetchInfo, v => fetch.ThresholdInfo = v, formatterResolver);
 			Set<Time>(s, settings, SlowlogSearchThresholdFetchDebug,
-				v => fetch.ThresholdDebug = v);
+				v => fetch.ThresholdDebug = v, formatterResolver);
 			Set<Time>(s, settings, SlowlogSearchThresholdFetchTrace,
-				v => fetch.ThresholdTrace = v);
+				v => fetch.ThresholdTrace = v, formatterResolver);
 
 			var indexing = s.SlowLog.Indexing = new SlowLogIndexing();
-			Set<Time>(s, settings, SlowlogIndexingThresholdFetchWarn, v => indexing.ThresholdWarn = v);
-			Set<Time>(s, settings, SlowlogIndexingThresholdFetchInfo, v => indexing.ThresholdInfo = v);
-			Set<Time>(s, settings, SlowlogIndexingThresholdFetchDebug, v => indexing.ThresholdDebug = v);
-			Set<Time>(s, settings, SlowlogIndexingThresholdFetchTrace, v => indexing.ThresholdTrace = v);
-			Set<LogLevel?>(s, settings, SlowlogIndexingLevel, v => indexing.LogLevel = v);
-			Set<int?>(s, settings, SlowlogIndexingSource, v => indexing.Source = v);
-			Set<int?>(s, settings, NumberOfShards, v => s.NumberOfShards = v);
-			Set<int?>(s, settings, NumberOfRoutingShards, v => s.NumberOfRoutingShards = v);
-			Set<int?>(s, settings, RoutingPartitionSize, v => s.RoutingPartitionSize = v);
-			Set<FileSystemStorageImplementation?>(s, settings, StoreType, v => s.FileSystemStorageImplementation = v, serializer);
+			Set<Time>(s, settings, SlowlogIndexingThresholdFetchWarn, v => indexing.ThresholdWarn = v, formatterResolver);
+			Set<Time>(s, settings, SlowlogIndexingThresholdFetchInfo, v => indexing.ThresholdInfo = v, formatterResolver);
+			Set<Time>(s, settings, SlowlogIndexingThresholdFetchDebug, v => indexing.ThresholdDebug = v, formatterResolver);
+			Set<Time>(s, settings, SlowlogIndexingThresholdFetchTrace, v => indexing.ThresholdTrace = v, formatterResolver);
+			Set<LogLevel?>(s, settings, SlowlogIndexingLevel, v => indexing.LogLevel = v, formatterResolver);
+			Set<int?>(s, settings, SlowlogIndexingSource, v => indexing.Source = v, formatterResolver);
+			Set<int?>(s, settings, NumberOfShards, v => s.NumberOfShards = v, formatterResolver);
+			Set<int?>(s, settings, NumberOfRoutingShards, v => s.NumberOfRoutingShards = v, formatterResolver);
+			Set<int?>(s, settings, RoutingPartitionSize, v => s.RoutingPartitionSize = v, formatterResolver);
+			Set<FileSystemStorageImplementation?>(s, settings, StoreType, v => s.FileSystemStorageImplementation = v, formatterResolver);
 
 			var sorting = s.Sorting = new SortingSettings();
-			SetArray<string[], string>(s, settings, IndexSortSettings.Fields, v => sorting.Fields = v, v => sorting.Fields = new[] { v });
-			SetArray<IndexSortOrder[], IndexSortOrder>(s, settings, Order, v => sorting.Order = v, v => sorting.Order = new[] { v });
-			SetArray<IndexSortMode[], IndexSortMode>(s, settings, Mode, v => sorting.Mode = v, v => sorting.Mode = new[] { v });
-			SetArray<IndexSortMissing[], IndexSortMissing>(s, settings, Missing, v => sorting.Missing = v, v => sorting.Missing = new[] { v });
+			SetArray<string[], string>(s, settings, IndexSortSettings.Fields, v => sorting.Fields = v, v => sorting.Fields = new[] { v }, formatterResolver);
+			SetArray<IndexSortOrder[], IndexSortOrder>(s, settings, Order, v => sorting.Order = v, v => sorting.Order = new[] { v }, formatterResolver);
+			SetArray<IndexSortMode[], IndexSortMode>(s, settings, Mode, v => sorting.Mode = v, v => sorting.Mode = new[] { v }, formatterResolver);
+			SetArray<IndexSortMissing[], IndexSortMissing>(s, settings, Missing, v => sorting.Missing = v, v => sorting.Missing = new[] { v }, formatterResolver);
 
 			var queries = s.Queries = new QueriesSettings();
 			var queriesCache = s.Queries.Cache = new QueriesCacheSettings();
-			Set<bool?>(s, settings, QueriesCacheEnabled, v => queriesCache.Enabled = v);
+			Set<bool?>(s, settings, QueriesCacheEnabled, v => queriesCache.Enabled = v, formatterResolver);
 
 			var softDeletes = s.SoftDeletes = new SoftDeleteSettings();
 			Set<bool?>(s, settings, SoftDeletesEnabled, v => softDeletes.Enabled = v);
@@ -242,45 +241,61 @@ namespace Nest
 			IDictionary<string, object> dict = s;
 			foreach (var kv in settings)
 			{
-				var setting = kv.Value;
-				if (kv.Key == UpdatableIndexSettings.Analysis || kv.Key == "index.analysis")
-					s.Analysis = setting.Value.Value<JObject>().ToObject<Analysis>(serializer);
-				if (kv.Key == Similarity || kv.Key == "index.similarity")
-					s.Similarity = setting.Value.Value<JObject>().ToObject<Similarities>(serializer);
-				else
-					dict?.Add(kv.Key, serializer.Deserialize(kv.Value.Value.CreateReader()));
+				// TODO: Fix
+//				var setting = kv.Value;
+//				if (kv.Key == UpdatableIndexSettings.Analysis || kv.Key == "index.analysis")
+//					s.Analysis = setting.Value.Value<JObject>().ToObject<Analysis>(formatterResolver);
+//				if (kv.Key == Similarity || kv.Key == "index.similarity")
+//					s.Similarity = setting.Value.Value<JObject>().ToObject<Similarities>(formatterResolver);
+//				else
+//					dict?.Add(kv.Key, formatterResolver.Deserialize(kv.Value.Value.CreateReader()));
 			}
 		}
 
-		private static void Set<T>(IIndexSettings s, IDictionary<string, JProperty> settings, string key, Action<T> assign,
-			JsonSerializer serializer = null
-		)
+		private static void Set<T>(IIndexSettings s, IDictionary<string, object> settings, string key, Action<T> assign,
+			IJsonFormatterResolver formatterResolver)
 		{
-			if (!settings.ContainsKey(key)) return;
+			if (!settings.ContainsKey(key))
+				return;
 
-			var v = settings[key];
-			var value = serializer == null ? v.Value.ToObject<T>() : v.Value.ToObject<T>(serializer);
+			var setting = settings[key];
+			var value = ConvertToValue<T>(setting, formatterResolver);
 			assign(value);
 			s.Add(key, value);
 			settings.Remove(key);
 		}
 
-		private static void SetArray<TArray, TItem>(IIndexSettings s, IDictionary<string, JProperty> settings, string key, Action<TArray> assign,
-			Action<TItem> assign2, JsonSerializer serializer = null
-		)
+		private static T ConvertToValue<T>(object setting, IJsonFormatterResolver formatterResolver)
+		{
+			T value;
+			if (setting is T t)
+				value = t;
+			else
+			{
+				var writer = new JsonWriter();
+				formatterResolver.GetFormatter<object>().Serialize(ref writer, setting, formatterResolver);
+				var reader = new JsonReader(writer.GetBuffer().Array, 0);
+				value = formatterResolver.GetFormatter<T>().Deserialize(ref reader, formatterResolver);
+			}
+			return value;
+		}
+
+		private static void SetArray<TArray, TItem>(IIndexSettings s, IDictionary<string, object> settings, string key, Action<TArray> assign,
+			Action<TItem> assign2, IJsonFormatterResolver formatterResolver)
+			where TArray : IEnumerable<TItem>
 		{
 			if (!settings.ContainsKey(key)) return;
 
 			var v = settings[key];
-			if (v.Value is JArray)
+			if (v is IEnumerable)
 			{
-				var value = serializer == null ? v.Value.ToObject<TArray>() : v.Value.ToObject<TArray>(serializer);
+				var value = ConvertToValue<TArray>(v, formatterResolver);
 				assign(value);
 				s.Add(key, value);
 			}
 			else
 			{
-				var value = serializer == null ? v.Value.ToObject<TItem>() : v.Value.ToObject<TItem>(serializer);
+				var value = ConvertToValue<TItem>(v, formatterResolver);
 				assign2(value);
 				s.Add(key, value);
 			}

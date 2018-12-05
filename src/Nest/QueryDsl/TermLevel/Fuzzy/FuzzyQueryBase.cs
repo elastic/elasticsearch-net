@@ -1,9 +1,10 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[JsonConverter(typeof(FuzzyQueryJsonConverter))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(FuzzyQueryFormatter))]
 	public interface IFuzzyQuery : IFieldNameQuery
 	{
 		[DataMember(Name ="max_expansions")]

@@ -133,7 +133,7 @@ namespace Nest
 	/// Represents a Latitude/Longitude and optional Z value as a 2 or 3 dimensional point
 	/// that gets serialized as new [] { lon, lat, [z] }
 	/// </summary>
-	[JsonConverter(typeof(GeoCoordinateJsonConverter))]
+	[JsonFormatter(typeof(GeoCoordinateFormatter))]
 	public class GeoCoordinate : GeoLocation
 	{
 		/// <summary>

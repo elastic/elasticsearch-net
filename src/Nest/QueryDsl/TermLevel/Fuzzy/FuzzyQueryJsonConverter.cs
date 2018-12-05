@@ -1,82 +1,149 @@
 ﻿using System;
-using System.Linq;
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Linq;
+using Utf8Json;
+using Utf8Json.Internal;
 
 namespace Nest
 {
-	internal class FuzzyQueryJsonConverter : FieldNameQueryJsonConverter<FuzzyQuery>
+	internal class FuzzyQueryFormatter : FieldNameQueryFormatter<FuzzyQuery, IFuzzyQuery>
 	{
-		public override bool CanRead => true;
-
-		public override bool CanWrite => true;
-
-		public override bool CanConvert(Type objectType) => true;
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		private static readonly AutomataDictionary Fields = new AutomataDictionary
 		{
-			var j = JObject.Load(reader);
-			if (!j.HasValues) return null;
+			{ "value", 0 },
+			{ "fuzziness", 1 },
+			{ "prefix_length", 2 },
+			{ "max_expansions", 3 },
+			{ "transpositions", 4 },
+			{ "rewrite", 5 },
+			{ "_name", 6 },
+			{ "boost", 7 },
+		};
 
-			var firstProp = j.Properties().FirstOrDefault();
-			if (firstProp == null) return null;
+		public override IFuzzyQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			if (reader.GetCurrentJsonToken() == JsonToken.Null)
+				return null;
 
-			var field = firstProp.Name;
-			var jo = firstProp.Value.Value<JObject>();
-			if (jo == null) return null;
+			var count = 0;
+			IFuzzyQuery query = null;
+			string name = null;
+			double? boost = null;
+			MultiTermQueryRewrite multiTermQueryRewrite = null;
+			int? prefixLength = null;
+			int? maxExpansions = null;
+			bool? transpositions = null;
 
-			JToken v;
-			if (!jo.TryGetValue("value", out v)) return null;
-
-			IFuzzyQuery fq;
-			if (v.Type == JTokenType.String)
-				fq = new FuzzyQuery
+			while (reader.ReadIsInObject(ref count))
+			{
+				var field = reader.ReadPropertyName();
+				// ReSharper disable once TooWideLocalVariableScope
+				ArraySegment<byte> fuzzinessSegment;
+				var valueCount = 0;
+				while (reader.ReadIsInObject(ref valueCount))
 				{
-					Value = GetPropValue<string>(jo, "value"),
-					Fuzziness = GetPropObject<Fuzziness>(jo, "fuzziness")
-				};
-			else if (v.Type == JTokenType.Date)
-				fq = new FuzzyDateQuery
-				{
-					Value = GetPropValue<DateTime?>(jo, "value"),
-					Fuzziness = GetPropObject<Time>(jo, "fuzziness")
-				};
-			else if (v.Type == JTokenType.Integer || v.Type == JTokenType.Float)
-				fq = new FuzzyNumericQuery
-				{
-					Value = GetPropValue<double?>(jo, "value"),
-					Fuzziness = GetPropValue<double?>(jo, "fuzziness")
-				};
-			else return null;
+					var property = reader.ReadPropertyNameSegmentRaw();
+					if (Fields.TryGetValue(property, out var value))
+					{
+						switch (value)
+						{
+							case 0:
+							{
+								var token = reader.GetCurrentJsonToken();
+								switch (token)
+								{
+									case JsonToken.String:
+										var str = reader.ReadString();
+										try
+										{
+											// TODO: possibly nicer way of doing this than brute try?
+											var dateTime = JsonSerializer.Deserialize<DateTime>(str, formatterResolver);
+											query = new FuzzyDateQuery
+											{
+												Field = field,
+												Value = dateTime
+											};
+										}
+										catch
+										{
+											query = new FuzzyQuery
+											{
+												Field = field,
+												Value = str
+											};
+										}
+										break;
+									case JsonToken.Number:
+										query = new FuzzyNumericQuery
+										{
+											Field = field,
+											Value = reader.ReadDouble()
+										};
+										break;
+								}
 
-			fq.PrefixLength = GetPropValue<int?>(jo, "prefix_length");
-			fq.MaxExpansions = GetPropValue<int?>(jo, "max_expansions");
-			fq.Transpositions = GetPropValue<bool?>(jo, "transpositions");
-			var rewriteString = GetPropValue<string>(jo, "rewrite");
-			if (!rewriteString.IsNullOrEmpty())
-				fq.Rewrite = MultiTermQueryRewrite.Create(rewriteString);
+								if (fuzzinessSegment != default)
+								{
+									var fuzzinessReader = new JsonReader(fuzzinessSegment.Array, fuzzinessSegment.Offset);
+									SetFuzziness(ref fuzzinessReader, query, formatterResolver);
+								}
+								break;
+							}
+							case 1:
+							{
+								if (query != null)
+									SetFuzziness(ref reader, query, formatterResolver);
+								else
+									fuzzinessSegment = reader.ReadNextBlockSegment();
+								break;
+							}
+							case 2:
+								prefixLength = reader.ReadInt32();
+								break;
+							case 3:
+								maxExpansions = reader.ReadInt32();
+								break;
+							case 4:
+								transpositions = reader.ReadBoolean();
+								break;
+							case 5:
+								var rewriteFormatter = formatterResolver.GetFormatter<MultiTermQueryRewrite>();
+								multiTermQueryRewrite = rewriteFormatter.Deserialize(ref reader, formatterResolver);
+								break;
+							case 6:
+								name = reader.ReadString();
+								break;
+							case 7:
+								boost = reader.ReadDouble();
+								break;
+						}
+					}
+				}
+			}
 
-			fq.Name = GetPropValue<string>(jo, "_name");
-			fq.Boost = GetPropValue<double?>(jo, "boost");
-			fq.Field = field;
-
-			return fq;
+			query.PrefixLength = prefixLength;
+			query.MaxExpansions = maxExpansions;
+			query.Transpositions = transpositions;
+			query.Rewrite = multiTermQueryRewrite;
+			query.Name = name;
+			query.Boost = boost;
+			return query;
 		}
 
-		private TReturn GetPropObject<TReturn>(JObject jObject, string field)
+		private static void SetFuzziness(ref JsonReader reader, IFuzzyQuery query, IJsonFormatterResolver formatterResolver)
 		{
-			JToken jToken;
-			return !jObject.TryGetValue(field, out jToken)
-				? default(TReturn)
-				: jToken.ToObject<TReturn>();
-		}
-
-		private TReturn GetPropValue<TReturn>(JObject jObject, string field)
-		{
-			JToken jToken;
-			return !jObject.TryGetValue(field, out jToken)
-				? default(TReturn)
-				: jToken.Value<TReturn>();
+			switch (query)
+			{
+				case FuzzyQuery fuzzyQuery:
+					fuzzyQuery.Fuzziness = formatterResolver.GetFormatter<Fuzziness>()
+						.Deserialize(ref reader, formatterResolver);
+					break;
+				case FuzzyDateQuery fuzzyDateQuery:
+					fuzzyDateQuery.Fuzziness = formatterResolver.GetFormatter<Time>()
+						.Deserialize(ref reader, formatterResolver);
+					break;
+				case FuzzyNumericQuery fuzzyNumericQuery:
+					fuzzyNumericQuery.Fuzziness = reader.ReadDouble();
+					break;
+			}
 		}
 	}
 }

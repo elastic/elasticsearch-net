@@ -1,5 +1,4 @@
-﻿using System;
-using Utf8Json;
+﻿using Utf8Json;
 
 namespace Nest
 {

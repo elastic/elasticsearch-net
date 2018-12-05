@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -8,7 +9,7 @@ namespace Nest
 	/// A generic property to map properties that may be of different types.
 	/// Not all methods are valid for all types.
 	/// </summary>
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IGenericProperty : IDocValuesProperty
 	{
 		[DataMember(Name ="analyzer")]

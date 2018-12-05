@@ -1,30 +1,31 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[JsonConverter(typeof(FieldNameQueryJsonConverter<DateRangeQuery>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(FieldNameQueryFormatter<DateRangeQuery, IDateRangeQuery>))]
 	public interface IDateRangeQuery : IRangeQuery
 	{
-		[DataMember(Name ="format")]
+		[DataMember(Name = "format")]
 		string Format { get; set; }
 
-		[DataMember(Name ="gt")]
+		[DataMember(Name = "gt")]
 		DateMath GreaterThan { get; set; }
 
-		[DataMember(Name ="gte")]
+		[DataMember(Name = "gte")]
 		DateMath GreaterThanOrEqualTo { get; set; }
 
-		[DataMember(Name ="lt")]
+		[DataMember(Name = "lt")]
 		DateMath LessThan { get; set; }
 
-		[DataMember(Name ="lte")]
+		[DataMember(Name = "lte")]
 		DateMath LessThanOrEqualTo { get; set; }
 
-		[DataMember(Name ="relation")]
+		[DataMember(Name = "relation")]
 		RangeRelation? Relation { get; set; }
 
-		[DataMember(Name ="time_zone")]
+		[DataMember(Name = "time_zone")]
 		string TimeZone { get; set; }
 	}
 

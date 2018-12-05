@@ -24,14 +24,14 @@ namespace Nest
 
 			Contracts = new ConcurrentDictionary<Type, JsonContract>();
 			CreateMultiHitDelegates =
-				new ConcurrentDictionary<Type, Action<MultiGetHitJsonConverter.MultiHitTuple, JsonSerializer, ICollection<IMultiGetHit<object>>>>();
+				new ConcurrentDictionary<Type, Action<MultiGetResponseFormatter.MultiHitTuple, JsonSerializer, ICollection<IMultiGetHit<object>>>>();
 			CreateSearchResponseDelegates =
 				new ConcurrentDictionary<Type, Action<MultiSearchResponseFormatter.SearchHitTuple, IJsonFormatterResolver, IDictionary<string, IResponse>>>();
 		}
 
 		internal ConcurrentDictionary<Type, JsonContract> Contracts { get; }
 
-		internal ConcurrentDictionary<Type, Action<MultiGetHitJsonConverter.MultiHitTuple, JsonSerializer, ICollection<IMultiGetHit<object>>>>
+		internal ConcurrentDictionary<Type, Action<MultiGetResponseFormatter.MultiHitTuple, JsonSerializer, ICollection<IMultiGetHit<object>>>>
 			CreateMultiHitDelegates { get; }
 
 		internal ConcurrentDictionary<Type, Action<MultiSearchResponseFormatter.SearchHitTuple, IJsonFormatterResolver, IDictionary<string, IResponse>>>

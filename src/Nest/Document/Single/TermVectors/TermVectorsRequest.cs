@@ -1,6 +1,7 @@
 ﻿using System;
 using Elasticsearch.Net;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -12,7 +13,7 @@ namespace Nest
 		/// An optional document to get term vectors for instead of using an already indexed document
 		/// </summary>
 		[DataMember(Name ="doc")]
-		[JsonConverter(typeof(SourceConverter))]
+		[JsonFormatter(typeof(SourceFormatter<>))]
 		TDocument Document { get; set; }
 
 		/// <summary>

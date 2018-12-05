@@ -1,18 +1,19 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[JsonConverter(typeof(FieldNameQueryJsonConverter<RegexpQuery>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(FieldNameQueryFormatter<RegexpQuery, IRegexpQuery>))]
 	public interface IRegexpQuery : IFieldNameQuery
 	{
-		[DataMember(Name ="flags")]
+		[DataMember(Name = "flags")]
 		string Flags { get; set; }
 
-		[DataMember(Name ="max_determinized_states")]
+		[DataMember(Name = "max_determinized_states")]
 		int? MaximumDeterminizedStates { get; set; }
 
-		[DataMember(Name ="value")]
+		[DataMember(Name = "value")]
 		string Value { get; set; }
 	}
 

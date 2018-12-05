@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface ISimulatePipelineDocument
 	{
-		[DataMember(Name ="_id")]
+		[DataMember(Name = "_id")]
 		Id Id { get; set; }
 
-		[DataMember(Name ="_index")]
+		[DataMember(Name = "_index")]
 		IndexName Index { get; set; }
 
-		[DataMember(Name ="_source")]
-		[JsonConverter(typeof(SourceConverter))]
+		[DataMember(Name = "_source")]
+		[JsonFormatter(typeof(SourceFormatter<>))]
 		object Source { get; set; }
 	}
 
