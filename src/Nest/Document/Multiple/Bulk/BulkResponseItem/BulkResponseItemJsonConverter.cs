@@ -4,7 +4,7 @@ using Utf8Json.Internal;
 
 namespace Nest
 {
-	internal class BulkResponseItemJsonConverter : IJsonFormatter<IBulkResponseItem>
+	internal class BulkResponseItemFormatter : IJsonFormatter<IBulkResponseItem>
 	{
 		private static readonly AutomataDictionary Operations = new AutomataDictionary
 		{
