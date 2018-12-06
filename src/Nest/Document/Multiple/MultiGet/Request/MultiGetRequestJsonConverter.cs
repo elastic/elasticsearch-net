@@ -1,28 +1,28 @@
 ﻿using System;
 using System.Linq;
-using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	internal class MultiGetRequestJsonConverter : JsonConverter
+	internal class MultiGetRequestFormatter : IJsonFormatter<IMultiGetRequest>
 	{
-		public override bool CanRead => false;
-		public override bool CanWrite => true;
+		private static readonly IdFormatter IdFormatter = new IdFormatter();
 
-		public override bool CanConvert(Type objectType) => true;
+		public IMultiGetRequest Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
+			throw new NotSupportedException();
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public void Serialize(ref JsonWriter writer, IMultiGetRequest value, IJsonFormatterResolver formatterResolver)
 		{
-			var request = value as IMultiGetRequest;
-			writer.WriteStartObject();
-			if (!(request?.Documents.HasAny()).GetValueOrDefault(false))
+			writer.WriteBeginObject();
+			if (!(value?.Documents.HasAny()).GetValueOrDefault(false))
 			{
 				writer.WriteEndObject();
 				return;
 			}
-			var docs = request.Documents.Select(d =>
+
+			var docs = value.Documents.Select(d =>
 				{
-					if (request.Index != null) d.Index = null;
+					if (value.Index != null) d.Index = null;
 					return d;
 				})
 				.ToList();
@@ -30,19 +30,25 @@ namespace Nest
 			var flatten = docs.All(p => p.CanBeFlattened);
 
 			writer.WritePropertyName(flatten ? "ids" : "docs");
-			writer.WriteStartArray();
-			foreach (var id in docs)
+
+			IJsonFormatter<IMultiGetOperation> formatter = null;
+			if (!flatten)
+				formatter = formatterResolver.GetFormatter<IMultiGetOperation>();
+
+			writer.WriteBeginArray();
+			for (var index = 0; index < docs.Count; index++)
 			{
+				if (index > 0)
+					writer.WriteValueSeparator();
+
+				var id = docs[index];
 				if (flatten)
-					serializer.Serialize(writer, id.Id);
+					IdFormatter.Serialize(ref writer, id.Id, formatterResolver);
 				else
-					serializer.Serialize(writer, id);
+					formatter.Serialize(ref writer, id, formatterResolver);
 			}
 			writer.WriteEndArray();
 			writer.WriteEndObject();
 		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
-			throw new NotSupportedException();
 	}
 }

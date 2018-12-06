@@ -1,9 +1,17 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(KeyValueJsonConverter<HistogramOrder, SortOrder>))]
-	public class HistogramOrder
+	public interface ISortOrder
+	{
+		string Key { get; set; }
+
+		SortOrder Order { get; set; }
+	}
+
+	[JsonFormatter(typeof(SortOrderFormatter<HistogramOrder>))]
+	public class HistogramOrder : ISortOrder
 	{
 		public static HistogramOrder CountAscending => new HistogramOrder { Key = "_count", Order = SortOrder.Ascending };
 		public static HistogramOrder CountDescending => new HistogramOrder { Key = "_count", Order = SortOrder.Descending };

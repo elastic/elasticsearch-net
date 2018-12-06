@@ -13,6 +13,7 @@
   <ItemGroup>
     <PackageReference Include="Bogus" Version="22.1.2" />
     <PackageReference Include="Elastic.Managed" Version="0.1.0-ci20190320T170700" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <ProjectReference Include="..\Tests.Configuration\Tests.Configuration.csproj" />
   </ItemGroup>
 </Project>

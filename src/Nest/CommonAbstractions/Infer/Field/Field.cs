@@ -8,7 +8,6 @@ using Utf8Json;
 
 namespace Nest
 {
-	[ContractJsonConverter(typeof(FieldJsonConverter))]
 	[JsonFormatter(typeof(FieldFormatter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Field : IEquatable<Field>, IUrlParameter

@@ -60,14 +60,13 @@ namespace Nest
 
 		private static IPropertyMapping PropertyMappingFromAttributes(MemberInfo memberInfo)
 		{
-			var jsonProperty = memberInfo.GetCustomAttribute<JsonPropertyAttribute>(true);
 			var dataMemberProperty = memberInfo.GetCustomAttribute<DataMemberAttribute>(true);
 			var propertyName = memberInfo.GetCustomAttribute<PropertyNameAttribute>(true);
 			var ignore = memberInfo.GetCustomAttribute<IgnoreAttribute>(true);
-			if (jsonProperty == null && ignore == null && propertyName == null && dataMemberProperty == null) return null;
+			if (ignore == null && propertyName == null && dataMemberProperty == null) return null;
 
 			return new PropertyMapping
-				{ Name = propertyName?.Name ?? jsonProperty?.PropertyName ?? dataMemberProperty?.Name, Ignore = ignore != null };
+				{ Name = propertyName?.Name ?? dataMemberProperty?.Name, Ignore = ignore != null };
 		}
 	}
 }

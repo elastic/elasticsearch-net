@@ -1,48 +1,53 @@
 ﻿using System;
 using Elasticsearch.Net;
-using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	internal class BulkRequestJsonConverter : JsonConverter
+	internal class BulkRequestFormatter : IJsonFormatter<IBulkRequest>
 	{
-		public override bool CanRead => false;
-		public override bool CanWrite => true;
+		private const byte Newline = (byte)'\n';
 
-		public override bool CanConvert(Type objectType) => true;
+		public IBulkRequest Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
+			throw new NotSupportedException();
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public void Serialize(ref JsonWriter writer, IBulkRequest value, IJsonFormatterResolver formatterResolver)
 		{
-			var bulk = value as IBulkRequest;
-			var settings = serializer?.GetConnectionSettings();
-			var requestResponseSerializer = settings?.RequestResponseSerializer;
-			var sourceSerializer = settings?.SourceSerializer;
-			if (requestResponseSerializer == null || bulk?.Operations == null) return;
+			if (value?.Operations == null)
+				return;
 
-			foreach (var op in bulk.Operations)
+			var settings = formatterResolver.GetConnectionSettings();
+			var requestResponseSerializer = settings.RequestResponseSerializer;
+			var sourceSerializer = settings.SourceSerializer;
+			var inferrer = settings.Inferrer;
+			var formatter = formatterResolver.GetFormatter<IBulkOperation>();
+
+			for (var index = 0; index < value.Operations.Count; index++)
 			{
-				op.Index = op.Index ?? bulk.Index ?? op.ClrType;
-				if (op.Index.Equals(bulk.Index)) op.Index = null;
-				op.Id = op.GetIdForOperation(settings.Inferrer);
-				op.Routing = op.GetRoutingForOperation(settings.Inferrer);
+				var op = value.Operations[index];
+				op.Index = op.Index ?? value.Index ?? op.ClrType;
+				if (op.Index.Equals(value.Index)) op.Index = null;
+				op.Id = op.GetIdForOperation(inferrer);
+				op.Routing = op.GetRoutingForOperation(inferrer);
 
-				var opJson = requestResponseSerializer.SerializeToString(op, SerializationFormatting.None);
-				writer.WriteRaw($"{{\"{op.Operation}\":" + opJson + "}\n");
+				writer.WriteBeginObject();
+				writer.WritePropertyName(op.Operation);
+				formatter.Serialize(ref writer, op, formatterResolver);
+				writer.WriteEndObject();
+				writer.WriteRaw(Newline);
+
 				var body = op.GetBody();
-				if (body == null) continue;
+				if (body == null)
+					continue;
 
-				var bodyJson = (
-						op.Operation == "update" || body is ILazyDocument
-							? requestResponseSerializer
-							: sourceSerializer
-					)
-					.SerializeToString(body, SerializationFormatting.None);
+				var bodySerializer = op.Operation == "update" || body is ILazyDocument
+					? requestResponseSerializer
+					: sourceSerializer;
 
-				writer.WriteRaw(bodyJson + "\n");
+				var bodyBytes = bodySerializer.SerializeToBytes(body, SerializationFormatting.None);
+				writer.WriteRaw(bodyBytes);
+				writer.WriteRaw(Newline);
 			}
 		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
-			throw new NotSupportedException();
 	}
 }

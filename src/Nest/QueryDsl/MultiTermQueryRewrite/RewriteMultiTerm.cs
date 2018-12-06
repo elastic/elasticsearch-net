@@ -1,19 +1,12 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization;
-
 using Utf8Json;
-using JsonReader = Newtonsoft.Json.JsonReader;
-using JsonSerializer = Newtonsoft.Json.JsonSerializer;
-using JsonToken = Newtonsoft.Json.JsonToken;
-using JsonWriter = Newtonsoft.Json.JsonWriter;
 
 namespace Nest
 {
 	/// <summary>
 	/// Multi term query rewrite method
 	/// </summary>
-
 	public enum RewriteMultiTerm
 	{
 		/// <summary>

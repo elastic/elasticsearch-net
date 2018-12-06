@@ -50,6 +50,8 @@ namespace Nest
 					return new Like(union.Item1);
 				case 1:
 					return new Like(union.Item2);
+				default:
+					return null;
 			}
 		}
 

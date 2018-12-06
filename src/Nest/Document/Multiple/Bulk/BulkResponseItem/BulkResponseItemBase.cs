@@ -1,12 +1,13 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// An item within a bulk response
 	/// </summary>
-	[DataContract]
-	[JsonConverter(typeof(BulkResponseItemJsonConverter))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(BulkResponseItemJsonConverter))]
 	public interface IBulkResponseItem
 	{
 		/// <summary>
@@ -107,7 +108,7 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public abstract string Operation { get; internal set; }
+		public abstract string Operation { get; }
 
 		/// <inheritdoc />
 		public long PrimaryTerm { get; internal set; }

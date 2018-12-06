@@ -7,6 +7,7 @@ using Elasticsearch.Net;
 using Nest;
 using System.Runtime.Serialization;
 using Tests.Framework;
+using Newtonsoft.Json;
 using static Tests.Core.Serialization.SerializationTestHelper;
 
 namespace Tests.ClientConcepts.HighLevel.Mapping

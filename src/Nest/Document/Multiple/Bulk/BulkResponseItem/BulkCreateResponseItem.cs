@@ -1,11 +1,12 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	[DataContract]
-	[JsonConverter(typeof(BulkResponseItemJsonConverter))]
+	[JsonFormatter(typeof(BulkResponseItemJsonConverter))]
 	public class BulkCreateResponseItem : BulkResponseItemBase
 	{
-		public override string Operation { get; internal set; }
+		public override string Operation { get; } = "create";
 	}
 }

@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Linq;
 using Utf8Json;
 using static Nest.FixedIndexSettings;
 using static Nest.IndexSortSettings;
@@ -13,13 +11,14 @@ namespace Nest
 {
 	internal class IndexSettingsFormatter : IJsonFormatter<IDynamicIndexSettings>
 	{
-		private class IndexSettingsDictionaryFormatter : VerbatimDictionaryKeysFormatter<string, object>
-		{
-			protected override bool SkipValue(KeyValuePair<string, object> entry) =>
-				entry.Key != RefreshInterval && base.SkipValue(entry);
-		}
-
 		private static readonly IndexSettingsDictionaryFormatter Formatter = new IndexSettingsDictionaryFormatter();
+
+		public IDynamicIndexSettings Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			var indexSettings = new IndexSettings();
+			SetKnownIndexSettings(ref reader, formatterResolver, indexSettings);
+			return indexSettings;
+		}
 
 		public void Serialize(ref JsonWriter writer, IDynamicIndexSettings value, IJsonFormatterResolver formatterResolver)
 		{
@@ -114,13 +113,6 @@ namespace Nest
 			Formatter.Serialize(ref writer, d, formatterResolver);
 		}
 
-		public IDynamicIndexSettings Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
-		{
-			var indexSettings = new IndexSettings();
-			SetKnownIndexSettings(ref reader, formatterResolver, indexSettings);
-			return indexSettings;
-		}
-
 		private static object AsArrayOrSingleItem<T>(IEnumerable<T> items)
 		{
 			if (items == null || !items.Any())
@@ -132,7 +124,9 @@ namespace Nest
 			return items;
 		}
 
-		private static Dictionary<string, object> Flatten(Dictionary<string, object> original, string prefix = "", Dictionary<string, object> current = null)
+		private static Dictionary<string, object> Flatten(Dictionary<string, object> original, string prefix = "",
+			Dictionary<string, object> current = null
+		)
 		{
 			current = current ?? new Dictionary<string, object>();
 			foreach (var property in original)
@@ -224,10 +218,13 @@ namespace Nest
 			Set<FileSystemStorageImplementation?>(s, settings, StoreType, v => s.FileSystemStorageImplementation = v, formatterResolver);
 
 			var sorting = s.Sorting = new SortingSettings();
-			SetArray<string[], string>(s, settings, IndexSortSettings.Fields, v => sorting.Fields = v, v => sorting.Fields = new[] { v }, formatterResolver);
-			SetArray<IndexSortOrder[], IndexSortOrder>(s, settings, Order, v => sorting.Order = v, v => sorting.Order = new[] { v }, formatterResolver);
+			SetArray<string[], string>(s, settings, IndexSortSettings.Fields, v => sorting.Fields = v, v => sorting.Fields = new[] { v },
+				formatterResolver);
+			SetArray<IndexSortOrder[], IndexSortOrder>(s, settings, Order, v => sorting.Order = v, v => sorting.Order = new[] { v },
+				formatterResolver);
 			SetArray<IndexSortMode[], IndexSortMode>(s, settings, Mode, v => sorting.Mode = v, v => sorting.Mode = new[] { v }, formatterResolver);
-			SetArray<IndexSortMissing[], IndexSortMissing>(s, settings, Missing, v => sorting.Missing = v, v => sorting.Missing = new[] { v }, formatterResolver);
+			SetArray<IndexSortMissing[], IndexSortMissing>(s, settings, Missing, v => sorting.Missing = v, v => sorting.Missing = new[] { v },
+				formatterResolver);
 
 			var queries = s.Queries = new QueriesSettings();
 			var queriesCache = s.Queries.Cache = new QueriesCacheSettings();
@@ -253,7 +250,8 @@ namespace Nest
 		}
 
 		private static void Set<T>(IIndexSettings s, IDictionary<string, object> settings, string key, Action<T> assign,
-			IJsonFormatterResolver formatterResolver)
+			IJsonFormatterResolver formatterResolver
+		)
 		{
 			if (!settings.ContainsKey(key))
 				return;
@@ -281,7 +279,8 @@ namespace Nest
 		}
 
 		private static void SetArray<TArray, TItem>(IIndexSettings s, IDictionary<string, object> settings, string key, Action<TArray> assign,
-			Action<TItem> assign2, IJsonFormatterResolver formatterResolver)
+			Action<TItem> assign2, IJsonFormatterResolver formatterResolver
+		)
 			where TArray : IEnumerable<TItem>
 		{
 			if (!settings.ContainsKey(key)) return;
@@ -300,6 +299,12 @@ namespace Nest
 				s.Add(key, value);
 			}
 			settings.Remove(key);
+		}
+
+		private class IndexSettingsDictionaryFormatter : VerbatimDictionaryKeysFormatter<string, object>
+		{
+			protected override bool SkipValue(KeyValuePair<string, object> entry) =>
+				entry.Key != RefreshInterval && base.SkipValue(entry);
 		}
 	}
 }

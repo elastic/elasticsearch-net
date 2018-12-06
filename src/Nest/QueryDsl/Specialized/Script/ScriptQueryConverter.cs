@@ -1,73 +1,145 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Linq;
+using Utf8Json;
+using Utf8Json.Internal;
 
 namespace Nest
 {
-	internal class ScriptQueryConverter : JsonConverter
+	internal class ScriptQueryFormatter : IJsonFormatter<IScriptQuery>
 	{
-		public override bool CanRead => true;
-		public override bool CanWrite => true;
-
-		public override bool CanConvert(Type objectType) => true;
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		private static readonly AutomataDictionary Fields = new AutomataDictionary
 		{
-			var v = value as IScriptQuery;
-			if (v == null) return;
+			{ "_name", 0 },
+			{ "boost", 1 },
+			{ "script", 2 }
+		};
 
-			writer.WriteStartObject();
-			if (!v.Name.IsNullOrEmpty()) writer.WriteProperty(serializer, "_name", v.Name);
-			if (v.Boost != null) writer.WriteProperty(serializer, "boost", v.Boost);
-			writer.WritePropertyName("script");
-			writer.WriteStartObject();
-			{
-				if (v.Id != null) writer.WriteProperty(serializer, "id", v.Id);
-				if (v.Source != null) writer.WriteProperty(serializer, "source", v.Source);
-				if (v.Lang != null) writer.WriteProperty(serializer, "lang", v.Lang);
-				if (v.Params != null) writer.WriteProperty(serializer, "params", v.Params);
-			}
-			writer.WriteEndObject();
-			writer.WriteEndObject();
-		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		private static readonly AutomataDictionary ScriptFields = new AutomataDictionary
 		{
-			var r = new ScriptQuery();
-			var o = JObject.Load(reader);
-			var properties = o.Properties().ToListOrNullIfEmpty();
-			var scriptProperty = properties.FirstOrDefault(p => p.Name == "script");
-			if (scriptProperty != null)
-				properties.AddRange(scriptProperty.Value.Value<JObject>().Properties());
+			{ "id", 0 },
+			{ "source", 1 },
+			{ "inline", 1 },
+			{ "lang", 2 },
+			{ "params", 3 }
+		};
 
-			foreach (var p in properties)
+		public IScriptQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			var query = new ScriptQuery();
+
+			var count = 0;
+			while (reader.ReadIsInObject(ref count))
 			{
-				switch (p.Name)
+				var property = reader.ReadPropertyNameSegmentRaw();
+				if (Fields.TryGetValue(property, out var value))
 				{
-					case "_name":
-						r.Name = p.Value.Value<string>();
-						break;
-					case "boost":
-						r.Boost = p.Value.Value<double>();
-						break;
-					case "id":
-						r.Id = p.Value.Value<string>();
-						break;
-					case "inline":
-					case "source":
-						r.Source = p.Value.Value<string>();
-						break;
-					case "lang":
-						r.Lang = p.Value.Value<string>();
-						break;
-					case "params":
-						r.Params = p.Value.ToObject<Dictionary<string, object>>();
-						break;
+					switch (value)
+					{
+						case 0:
+							query.Name = reader.ReadString();
+							break;
+						case 1:
+							query.Boost = reader.ReadDouble();
+							break;
+						case 2:
+							var scriptCount = 0;
+							while (reader.ReadIsInObject(ref scriptCount))
+							{
+								var scriptProperty = reader.ReadPropertyNameSegmentRaw();
+								if (Fields.TryGetValue(scriptProperty, out var scriptValue))
+								{
+									switch (scriptValue)
+									{
+										case 0:
+											query.Id = reader.ReadString();
+											break;
+										case 1:
+											query.Source = reader.ReadString();
+											break;
+										case 2:
+											query.Lang = reader.ReadString();
+											break;
+										case 3:
+											query.Params = formatterResolver.GetFormatter<Dictionary<string, object>>()
+												.Deserialize(ref reader, formatterResolver);
+											break;
+									}
+								}
+							}
+							break;
+					}
 				}
 			}
-			return r;
+
+			return query;
+		}
+
+		public void Serialize(ref JsonWriter writer, IScriptQuery value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null) return;
+
+			writer.WriteBeginObject();
+
+			var written = false;
+			if (!value.Name.IsNullOrEmpty())
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteString(value.Name);
+				written = true;
+			}
+			if (value.Boost != null)
+			{
+				if (written)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName("boost");
+				writer.WriteDouble(value.Boost.Value);
+				written = true;
+			}
+
+			if (written)
+				writer.WriteValueSeparator();
+
+			writer.WritePropertyName("script");
+
+			written = false;
+
+			writer.WriteBeginObject();
+			if (value.Id != null)
+			{
+				writer.WritePropertyName("id");
+				formatterResolver.GetFormatter<Id>().Serialize(ref writer, value.Id, formatterResolver);
+				written = true;
+			}
+			if (value.Source != null)
+			{
+				if (written)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName("source");
+				writer.WriteString(value.Source);
+				written = true;
+			}
+
+			if (value.Lang != null)
+			{
+				if (written)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName("lang");
+				writer.WriteString(value.Lang);
+				written = true;
+			}
+			if (value.Params != null)
+			{
+				if (written)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName("params");
+				var formatter = formatterResolver.GetFormatter<Dictionary<string, object>>();
+				formatter.Serialize(ref writer, value.Params, formatterResolver);
+			}
+			writer.WriteEndObject();
+			writer.WriteEndObject();
 		}
 	}
 }

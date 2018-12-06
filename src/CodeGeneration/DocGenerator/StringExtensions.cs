@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace DocGenerator
 {

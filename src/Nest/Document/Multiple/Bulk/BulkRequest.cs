@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(BulkRequestJsonConverter))]
+	[JsonFormatter(typeof(BulkRequestFormatter))]
 	public partial interface IBulkRequest
 	{
 		[IgnoreDataMember]

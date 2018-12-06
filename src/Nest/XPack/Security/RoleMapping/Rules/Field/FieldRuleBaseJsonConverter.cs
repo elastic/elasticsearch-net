@@ -53,7 +53,7 @@ namespace Nest
 				}
 				else
 				{
-					var name = Encoding.UTF8.GetString(propertyName.Array, propertyName.Offset, propertyName.Count);
+					var name = propertyName.Utf8String();
 					if (name.StartsWith("metadata."))
 					{
 						name = name.Replace("metadata.", string.Empty);

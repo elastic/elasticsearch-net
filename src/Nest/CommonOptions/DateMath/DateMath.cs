@@ -89,7 +89,7 @@ namespace Nest
 
 			var sb = new StringBuilder();
 			var anchor = Self.Anchor.Match(
-				d => d.ToJsonNetString() + separator,
+				d => JsonSerializer.ToJsonString(d) + separator,
 				s => s == "now" || s.EndsWith("||", StringComparison.Ordinal) ? s : s + separator
 			);
 			sb.Append(anchor);
@@ -111,24 +111,26 @@ namespace Nest
 		public DateMath Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var token = reader.GetCurrentJsonToken();
-			if (token == JsonToken.String)
+			if (token != JsonToken.String)
+				return null;
+
+			var value = reader.ReadString();
+
+			if (string.IsNullOrEmpty(value))
+				return null;
+
+			try
 			{
-				var value = reader.ReadString();
-
-				if (string.IsNullOrEmpty(value))
-					return null;
-
-				try
-				{
-					// TODO: possibly nicer way of doing this than brute try?
-					var dateTime = JsonSerializer.Deserialize<DateTime>(value, formatterResolver);
-					return DateMath.Anchored(dateTime);
-				}
-				catch
-				{
-					return DateMath.FromString(reader.ReadString());
-				}
+				// TODO: possibly nicer way of doing this than brute try?
+				var dateTime = JsonSerializer.Deserialize<DateTime>(value, formatterResolver);
+				return DateMath.Anchored(dateTime);
 			}
+			catch
+			{
+				return DateMath.FromString(reader.ReadString());
+			}
+
+			return null;
 		}
 
 		public void Serialize(ref JsonWriter writer, DateMath value, IJsonFormatterResolver formatterResolver) =>

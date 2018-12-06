@@ -8,23 +8,18 @@ using Utf8Json.Resolvers;
 
 namespace Nest
 {
-	internal class MultiSearchResponseFormatter : IJsonFormatter<IMultiSearchResponse>
+	internal class MultiSearchResponseFormatter : IJsonFormatter<MultiSearchResponse>
 	{
 		private static readonly MethodInfo MakeDelegateMethodInfo =
 			typeof(MultiSearchResponseFormatter).GetMethod(nameof(CreateSearchResponse), BindingFlags.Static | BindingFlags.NonPublic);
 
 		private readonly IRequest _request;
-		private readonly IConnectionSettingsValues _settings;
 
-		public MultiSearchResponseFormatter(IConnectionSettingsValues settings, IRequest request)
-		{
-			_settings = settings;
-			_request = request;
-		}
+		public MultiSearchResponseFormatter(IRequest request) => _request = request;
 
-		public IMultiSearchResponse Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		public MultiSearchResponse Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (_settings == null || _request == null)
+			if (_request == null)
 				return null;
 
 			var response = new MultiSearchResponse();
@@ -95,9 +90,10 @@ namespace Nest
 			return response;
 		}
 
-		public void Serialize(ref JsonWriter writer, IMultiSearchResponse value, IJsonFormatterResolver formatterResolver) => DynamicObjectResolver
-			.ExcludeNullCamelCase.GetFormatter<IMultiSearchResponse>()
-			.Serialize(ref writer, value, formatterResolver);
+		public void Serialize(ref JsonWriter writer, MultiSearchResponse value, IJsonFormatterResolver formatterResolver) =>
+			DynamicObjectResolver
+				.ExcludeNullCamelCase.GetFormatter<IMultiSearchResponse>()
+				.Serialize(ref writer, value, formatterResolver);
 
 		private static void CreateSearchResponse<T>(SearchHitTuple tuple, IJsonFormatterResolver formatterResolver,
 			IDictionary<string, IResponse> collection

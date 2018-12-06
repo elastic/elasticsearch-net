@@ -1,51 +1,54 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Elasticsearch.Net;
-using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	internal class ErrorJsonConverter : ErrorCauseJsonConverter<Error>
 	{
-		protected override bool ReadProperty(Error error, string propertyName, JsonReader reader, JsonSerializer serializer)
+		protected override bool ReadProperty(ref JsonReader reader, string propertyName, Error error, IJsonFormatterResolver formatterResolver)
 		{
 			if (propertyName == "root_cause")
-				return ExtractRootCauses(error, reader, serializer);
+				return ExtractRootCauses(ref reader, error, formatterResolver);
 
 			if (propertyName == "headers")
-				return ExtractHeaders(error, reader, serializer);
+				return ExtractHeaders(ref reader, error, formatterResolver);
 
-			return ExtractMetadata(propertyName, error, reader, serializer);
+			return ExtractMetadata(ref reader, propertyName, error, formatterResolver);
 		}
 
-		private static bool ExtractHeaders(Error error, JsonReader reader, JsonSerializer serializer)
+		private static bool ExtractHeaders(ref JsonReader reader, Error error, IJsonFormatterResolver formatterResolver)
 		{
-			reader.Read();
-			if (reader.TokenType != JsonToken.StartObject)
+			// reader.ReadNext();
+			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
 				return false;
 
-			var dict = serializer.Deserialize<Dictionary<string, string>>(reader);
-			if (dict == null) return false;
+			var headers = formatterResolver.GetFormatter<ReadOnlyDictionary<string, string>>()
+				.Deserialize(ref reader, formatterResolver);
 
-			error.Headers = new ReadOnlyDictionary<string, string>(dict);
+			if (headers == null)
+				return false;
+
+			error.Headers = headers;
 			return true;
 		}
 
-		private bool ExtractRootCauses(Error error, JsonReader reader, JsonSerializer serializer)
+		private bool ExtractRootCauses(ref JsonReader reader, Error error, IJsonFormatterResolver formatterResolver)
 		{
-			reader.Read();
-			if (reader.TokenType != JsonToken.StartArray)
+			// reader.ReadNext();
+			if (reader.GetCurrentJsonToken() != JsonToken.BeginArray)
 				return false;
 
-			var depth = reader.Depth;
+			var count = 0;
 			var rootCauses = new List<ErrorCause>();
-			do
+			while (reader.ReadIsInArray(ref count))
 			{
-				reader.Read();
-				var rootCause = ReadCausedBy(reader, serializer);
+				var rootCause = ReadCausedBy(ref reader, formatterResolver);
 				if (rootCause != null)
 					rootCauses.Add(rootCause);
-			} while (reader.Depth >= depth && reader.TokenType != JsonToken.EndArray);
+			}
+
 			error.RootCause = rootCauses;
 			return true;
 		}
