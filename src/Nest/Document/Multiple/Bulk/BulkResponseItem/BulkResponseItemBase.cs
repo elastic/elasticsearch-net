@@ -7,7 +7,7 @@ namespace Nest
 	/// An item within a bulk response
 	/// </summary>
 	[InterfaceDataContract]
-	[JsonFormatter(typeof(BulkResponseItemJsonConverter))]
+	[JsonFormatter(typeof(BulkResponseItemFormatter))]
 	public interface IBulkResponseItem
 	{
 		/// <summary>

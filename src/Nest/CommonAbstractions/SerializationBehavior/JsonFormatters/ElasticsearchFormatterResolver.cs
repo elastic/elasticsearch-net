@@ -53,7 +53,7 @@ namespace Nest
 				AttributeFormatterResolver.Instance, // [JsonFormatter]
 				ReadAsFormatterResolver.Instance,
 				NestGenericSourceTypeFormatterResolver.Instance,
-				DynamicObjectResolver.ExcludeNullCamelCase
+				DynamicObjectResolver.AllowPrivateExcludeNullCamelCase
 
 			};
 
