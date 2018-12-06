@@ -1,11 +1,12 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	[DataContract]
-	[JsonConverter(typeof(BulkResponseItemJsonConverter))]
+	[JsonFormatter(typeof(BulkResponseItemJsonConverter))]
 	public class BulkDeleteResponseItem : BulkResponseItemBase
 	{
-		public override string Operation { get; internal set; }
+		public override string Operation { get; } = "delete";
 	}
 }

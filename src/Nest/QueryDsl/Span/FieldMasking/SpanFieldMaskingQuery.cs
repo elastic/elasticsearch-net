@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(SpanFieldMaskingQueryDescriptor<object>))]
 	public interface ISpanFieldMaskingQuery : ISpanSubQuery
 	{

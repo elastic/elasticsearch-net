@@ -1,11 +1,12 @@
 ﻿using System;
 using Elasticsearch.Net;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IBulkOperation
 	{
 		Type ClrType { get; }
@@ -31,7 +32,6 @@ namespace Nest
 		long? Version { get; set; }
 
 		[DataMember(Name ="version_type")]
-
 		VersionType? VersionType { get; set; }
 
 		object GetBody();

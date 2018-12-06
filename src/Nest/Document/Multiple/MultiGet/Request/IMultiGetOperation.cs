@@ -1,10 +1,11 @@
 ﻿using System;
-using Elasticsearch.Net;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAs(typeof(MultiGetOperationDescriptor<object>))]
 	public interface IMultiGetOperation
 	{
@@ -12,25 +13,25 @@ namespace Nest
 
 		Type ClrType { get; }
 
-		[DataMember(Name ="_id")]
+		[DataMember(Name = "_id")]
 		Id Id { get; set; }
 
-		[DataMember(Name ="_index")]
+		[DataMember(Name = "_index")]
 		IndexName Index { get; set; }
 
-		[DataMember(Name ="routing")]
+		[DataMember(Name = "routing")]
 		string Routing { get; set; }
 
-		[DataMember(Name ="_source")]
+		[DataMember(Name = "_source")]
 		Union<bool, ISourceFilter> Source { get; set; }
 
-		[DataMember(Name ="stored_fields")]
+		[DataMember(Name = "stored_fields")]
 		Fields StoredFields { get; set; }
 
-		[DataMember(Name ="version")]
+		[DataMember(Name = "version")]
 		long? Version { get; set; }
 
-		[DataMember(Name ="version_type")]
+		[DataMember(Name = "version_type")]
 		VersionType? VersionType { get; set; }
 	}
 }

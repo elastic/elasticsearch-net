@@ -21,7 +21,7 @@ namespace Nest
 			var segmentReader = new JsonReader(segment.Array, segment.Offset);
 
 			var count = 0;
-			ArraySegment<byte> contextType;
+			ArraySegment<byte> contextType = default;
 			while (segmentReader.ReadIsInObject(ref count))
 			{
 				if (segmentReader.ReadPropertyName() == "type")

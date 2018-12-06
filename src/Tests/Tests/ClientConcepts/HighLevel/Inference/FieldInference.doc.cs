@@ -8,8 +8,8 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Nest.JsonNetSerializer;
 using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Tests.Core.Client;
 using Tests.Core.Client.Settings;
 using Tests.Core.Xunit;
@@ -355,7 +355,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		public class Both
 		{
 			[Text(Name = "naam")]
-			[PropertyName("nameInJson"), JsonProperty("nameInJson")]
+			[PropertyName("nameInJson"), DataMember(Name = "nameInJson")]
 			public string Name { get; set; }
 		}
 		[U]

@@ -1,9 +1,10 @@
 ﻿using System;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(KeyValueJsonConverter<TermsOrder, SortOrder>))]
-	public class TermsOrder
+	[JsonFormatter(typeof(SortOrderFormatter<TermsOrder>))]
+	public class TermsOrder : ISortOrder
 	{
 		public static TermsOrder CountAscending => new TermsOrder { Key = "_count", Order = SortOrder.Ascending };
 		public static TermsOrder CountDescending => new TermsOrder { Key = "_count", Order = SortOrder.Descending };

@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace Nest.JsonNetSerializer
 {

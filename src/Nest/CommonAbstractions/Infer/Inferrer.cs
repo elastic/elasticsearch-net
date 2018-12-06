@@ -2,8 +2,6 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Elasticsearch.Net;
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Serialization;
 using Utf8Json;
 
 namespace Nest
@@ -22,19 +20,20 @@ namespace Nest
 			FieldResolver = new FieldResolver(connectionSettings);
 			RoutingResolver = new RoutingResolver(connectionSettings, IdResolver);
 
-			Contracts = new ConcurrentDictionary<Type, JsonContract>();
 			CreateMultiHitDelegates =
-				new ConcurrentDictionary<Type, Action<MultiGetResponseFormatter.MultiHitTuple, JsonSerializer, ICollection<IMultiGetHit<object>>>>();
+				new ConcurrentDictionary<Type,
+					Action<MultiGetResponseFormatter.MultiHitTuple, IJsonFormatterResolver, ICollection<IMultiGetHit<object>>>>();
 			CreateSearchResponseDelegates =
-				new ConcurrentDictionary<Type, Action<MultiSearchResponseFormatter.SearchHitTuple, IJsonFormatterResolver, IDictionary<string, IResponse>>>();
+				new ConcurrentDictionary<Type,
+					Action<MultiSearchResponseFormatter.SearchHitTuple, IJsonFormatterResolver, IDictionary<string, IResponse>>>();
 		}
 
-		internal ConcurrentDictionary<Type, JsonContract> Contracts { get; }
-
-		internal ConcurrentDictionary<Type, Action<MultiGetResponseFormatter.MultiHitTuple, JsonSerializer, ICollection<IMultiGetHit<object>>>>
+		internal ConcurrentDictionary<Type, Action<MultiGetResponseFormatter.MultiHitTuple, IJsonFormatterResolver, ICollection<IMultiGetHit<object>>>
+			>
 			CreateMultiHitDelegates { get; }
 
-		internal ConcurrentDictionary<Type, Action<MultiSearchResponseFormatter.SearchHitTuple, IJsonFormatterResolver, IDictionary<string, IResponse>>>
+		internal ConcurrentDictionary<Type,
+				Action<MultiSearchResponseFormatter.SearchHitTuple, IJsonFormatterResolver, IDictionary<string, IResponse>>>
 			CreateSearchResponseDelegates { get; }
 
 		private FieldResolver FieldResolver { get; }

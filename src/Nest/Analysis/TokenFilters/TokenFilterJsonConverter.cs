@@ -1,7 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Linq;
-using Utf8Json;
+﻿using Utf8Json;
 using Utf8Json.Resolvers;
 
 namespace Nest

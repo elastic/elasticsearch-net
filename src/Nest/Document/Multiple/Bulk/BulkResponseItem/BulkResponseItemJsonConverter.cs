@@ -1,56 +1,55 @@
 ﻿using System;
-using System.Runtime.Serialization;
+using Utf8Json;
+using Utf8Json.Internal;
 
 namespace Nest
 {
-	internal class BulkResponseItemJsonConverter : JsonConverter
+	internal class BulkResponseItemJsonConverter : IJsonFormatter<IBulkResponseItem>
 	{
-		public override bool CanRead => true;
-		public override bool CanWrite => false;
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
-			JsonSerializer serializer
-		)
+		private static readonly AutomataDictionary Operations = new AutomataDictionary
 		{
-			reader.Read();
-			if (reader.TokenType != JsonToken.PropertyName)
-				return null;
+			{ "delete", 0 },
+			{ "update", 1 },
+			{ "index", 2 },
+			{ "create", 3 }
+		};
 
-			var key = (string)reader.Value;
-			reader.Read();
-			switch (key)
+		public IBulkResponseItem Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
 			{
-				case "delete":
-					var deleteItem = new BulkDeleteResponseItem();
-					serializer.Populate(reader, deleteItem);
-					deleteItem.Operation = key;
-					reader.Read();
-					return deleteItem;
-				case "update":
-					var updateItem = new BulkUpdateResponseItem();
-					serializer.Populate(reader, updateItem);
-					updateItem.Operation = key;
-					reader.Read();
-					return updateItem;
-				case "index":
-					var indexItem = new BulkIndexResponseItem();
-					serializer.Populate(reader, indexItem);
-					indexItem.Operation = key;
-					reader.Read();
-					return indexItem;
-				case "create":
-					var createItem = new BulkCreateResponseItem();
-					serializer.Populate(reader, createItem);
-					createItem.Operation = key;
-					reader.Read();
-					return createItem;
-				default:
-					return null;
+				reader.ReadNextBlock();
+				return null;
 			}
+
+			// read to first property
+			reader.ReadNext();
+
+			var operation = reader.ReadPropertyNameSegmentRaw();
+			if (Operations.TryGetValue(operation, out var value))
+			{
+				switch (value)
+				{
+					case 0:
+						return formatterResolver.GetFormatter<BulkDeleteResponseItem>()
+							.Deserialize(ref reader, formatterResolver);
+					case 1:
+						return formatterResolver.GetFormatter<BulkUpdateResponseItem>()
+							.Deserialize(ref reader, formatterResolver);
+					case 2:
+						return formatterResolver.GetFormatter<BulkIndexResponseItem>()
+							.Deserialize(ref reader, formatterResolver);
+					case 3:
+						return formatterResolver.GetFormatter<BulkCreateResponseItem>()
+							.Deserialize(ref reader, formatterResolver);
+				}
+			}
+
+			reader.ReadNextBlock();
+			return null;
 		}
 
-		public override bool CanConvert(Type objectType) => true;
+		public void Serialize(ref JsonWriter writer, IBulkResponseItem value, IJsonFormatterResolver formatterResolver) =>
+			throw new NotSupportedException();
 	}
 }

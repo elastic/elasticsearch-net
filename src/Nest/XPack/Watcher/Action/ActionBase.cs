@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Elasticsearch.Net;
 using System.Runtime.Serialization;
-using Newtonsoft.Json.Linq;
+using Elasticsearch.Net;
 using Utf8Json;
 
 namespace Nest
@@ -20,7 +18,7 @@ namespace Nest
 		[IgnoreDataMember]
 		Time ThrottlePeriod { get; set; }
 
-		[DataMember(Name ="transform")]
+		[DataMember(Name = "transform")]
 		TransformContainer Transform { get; set; }
 	}
 
@@ -70,38 +68,6 @@ namespace Nest
 
 	internal class ActionsFormatter : IJsonFormatter<Actions>
 	{
-		public void Serialize(ref JsonWriter writer, Actions value, IJsonFormatterResolver formatterResolver)
-		{
-			writer.WriteBeginObject();
-			if (value != null)
-			{
-				var count = 0;
-				foreach (var kvp in value.Where(kv => kv.Value != null))
-				{
-					if (count > 0)
-						writer.WriteValueSeparator();
-
-					var action = kvp.Value;
-					writer.WritePropertyName(kvp.Key);
-					writer.WriteBeginObject();
-					if (action.ThrottlePeriod != null)
-					{
-						writer.WritePropertyName("throttle_period");
-						var timeFormatter = formatterResolver.GetFormatter<Time>();
-						timeFormatter.Serialize(ref writer, action.ThrottlePeriod, formatterResolver);
-						writer.WriteValueSeparator();
-					}
-					writer.WritePropertyName(kvp.Value.ActionType.GetStringValue());
-					var actionFormatter = formatterResolver.GetFormatter<IAction>();
-					actionFormatter.Serialize(ref writer, action, formatterResolver);
-					writer.WriteEndObject();
-
-					count++;
-				}
-			}
-			writer.WriteEndObject();
-		}
-
 		public Actions Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var dictionary = new Dictionary<string, IAction>();
@@ -169,6 +135,38 @@ namespace Nest
 			}
 
 			return new Actions(dictionary);
+		}
+
+		public void Serialize(ref JsonWriter writer, Actions value, IJsonFormatterResolver formatterResolver)
+		{
+			writer.WriteBeginObject();
+			if (value != null)
+			{
+				var count = 0;
+				foreach (var kvp in value.Where(kv => kv.Value != null))
+				{
+					if (count > 0)
+						writer.WriteValueSeparator();
+
+					var action = kvp.Value;
+					writer.WritePropertyName(kvp.Key);
+					writer.WriteBeginObject();
+					if (action.ThrottlePeriod != null)
+					{
+						writer.WritePropertyName("throttle_period");
+						var timeFormatter = formatterResolver.GetFormatter<Time>();
+						timeFormatter.Serialize(ref writer, action.ThrottlePeriod, formatterResolver);
+						writer.WriteValueSeparator();
+					}
+					writer.WritePropertyName(kvp.Value.ActionType.GetStringValue());
+					var actionFormatter = formatterResolver.GetFormatter<IAction>();
+					actionFormatter.Serialize(ref writer, action, formatterResolver);
+					writer.WriteEndObject();
+
+					count++;
+				}
+			}
+			writer.WriteEndObject();
 		}
 	}
 }

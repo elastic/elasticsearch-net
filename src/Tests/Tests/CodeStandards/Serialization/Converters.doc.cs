@@ -8,22 +8,23 @@ using Tests.Framework;
 using System.Runtime.Serialization;
 using System.Collections.Generic;
 using Elastic.Xunit.XunitPlumbing;
+using Utf8Json;
 
 namespace Tests.CodeStandards.Serialization
 {
 	public class Converters
 	{
 		[U]
-		public void CustomConvertersShouldBeInternal()
+		public void CustomFormattersShouldBeInternal()
 		{
-			var converters = typeof(IElasticClient).Assembly().GetTypes()
-				.Where(t => typeof(JsonConverter).IsAssignableFrom(t))
+			var formatters = typeof(IElasticClient).Assembly().GetTypes()
+				.Where(t => typeof(IJsonFormatter<>).IsAssignableFrom(t))
 				.ToList();
 			var visible = new List<string>();
-			foreach (var converter in converters)
+			foreach (var formatter in formatters)
 			{
-				if (converter.IsVisible())
-					visible.Add(converter.Name);
+				if (formatter.IsVisible())
+					visible.Add(formatter.Name);
 			}
 			visible.Should().BeEmpty();
 		}

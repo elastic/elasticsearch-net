@@ -5,7 +5,6 @@ using Utf8Json;
 
 namespace Nest
 {
-	[ContractJsonConverter(typeof(RelationNameJsonConverter))]
 	[JsonFormatter(typeof(RelationNameFormatter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class RelationName : IEquatable<RelationName>, IUrlParameter

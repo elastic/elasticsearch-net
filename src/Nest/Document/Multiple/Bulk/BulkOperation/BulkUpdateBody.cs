@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -10,7 +11,7 @@ namespace Nest
 		public bool? _DocAsUpsert { get; set; }
 
 		[DataMember(Name ="doc")]
-		[JsonConverter(typeof(CollapsedSourceConverter))]
+		[JsonFormatter(typeof(CollapsedSourceFormatter<>))]
 		internal TPartialUpdate _PartialUpdate { get; set; }
 
 		[DataMember(Name ="script")]
@@ -20,7 +21,7 @@ namespace Nest
 		internal bool? _ScriptedUpsert { get; set; }
 
 		[DataMember(Name ="upsert")]
-		[JsonConverter(typeof(CollapsedSourceConverter))]
+		[JsonFormatter(typeof(CollapsedSourceFormatter<>))]
 		internal TDocument _Upsert { get; set; }
 	}
 }
