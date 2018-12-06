@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Linq;
 using Utf8Json;
 using Utf8Json.Resolvers;
 
@@ -10,27 +7,6 @@ namespace Nest
 {
 	internal class GetRepositoryResponseFormatter : IJsonFormatter<IGetRepositoryResponse>
 	{
-		private TRepository GetRepository<TRepository, TSettings>(ArraySegment<byte> settings, IJsonFormatterResolver formatterResolver)
-			where TRepository : ISnapshotRepository
-			where TSettings : IRepositorySettings
-		{
-			if (settings == default)
-				return (TRepository)typeof(TRepository).CreateInstance();
-
-			var formatter = formatterResolver.GetFormatter<TSettings>();
-
-			var reader = new JsonReader(settings.Array, settings.Offset);
-			var resolvedSettings = formatter.Deserialize(ref reader, formatterResolver);
-
-			return (TRepository)typeof(TRepository).CreateInstance(resolvedSettings);
-		}
-
-		public void Serialize(ref JsonWriter writer, IGetRepositoryResponse value, IJsonFormatterResolver formatterResolver)
-		{
-			var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IGetRepositoryResponse>();
-			formatter.Serialize(ref writer, value, formatterResolver);
-		}
-
 		public IGetRepositoryResponse Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var response = new GetRepositoryResponse();
@@ -56,7 +32,7 @@ namespace Nest
 				var segmentCount = 0;
 
 				string repositoryType = null;
-				ArraySegment<byte> settings;
+				ArraySegment<byte> settings = default;
 
 				while (snapshotSegmentReader.ReadIsInObject(ref segmentCount))
 				{
@@ -99,6 +75,27 @@ namespace Nest
 
 			response.Repositories = d;
 			return response;
+		}
+
+		public void Serialize(ref JsonWriter writer, IGetRepositoryResponse value, IJsonFormatterResolver formatterResolver)
+		{
+			var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IGetRepositoryResponse>();
+			formatter.Serialize(ref writer, value, formatterResolver);
+		}
+
+		private TRepository GetRepository<TRepository, TSettings>(ArraySegment<byte> settings, IJsonFormatterResolver formatterResolver)
+			where TRepository : ISnapshotRepository
+			where TSettings : IRepositorySettings
+		{
+			if (settings == default)
+				return (TRepository)typeof(TRepository).CreateInstance();
+
+			var formatter = formatterResolver.GetFormatter<TSettings>();
+
+			var reader = new JsonReader(settings.Array, settings.Offset);
+			var resolvedSettings = formatter.Deserialize(ref reader, formatterResolver);
+
+			return (TRepository)typeof(TRepository).CreateInstance(resolvedSettings);
 		}
 	}
 }

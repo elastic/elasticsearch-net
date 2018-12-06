@@ -78,6 +78,6 @@ namespace Nest
 		);
 
 		private MultiSearchResponseFormatter CreateMultiSearchTemplateResponseFormatter(IMultiSearchTemplateRequest request) =>
-			new MultiSearchResponseFormatter(ConnectionSettings, request);
+			new MultiSearchResponseFormatter(request);
 	}
 }

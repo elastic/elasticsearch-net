@@ -15,15 +15,16 @@ namespace Tests.CodeStandards
 	{
 		protected static PropertyInfo[] QueryProperties = typeof(IQueryContainer).GetProperties();
 		protected static PropertyInfo[] QueryPlaceHolderProperties = typeof(IQueryContainer).GetProperties()
-			.Where(a=>!a.GetCustomAttributes<JsonIgnoreAttribute>().Any()).ToArray();
+			.Where(a=>!a.GetCustomAttributes<IgnoreDataMemberAttribute>().Any()).ToArray();
 
 		/*
-		* All properties must be either marked with JsonIgnore or JsonProperty
+		* All properties must be either marked with IgnoreDataMemberAttribute or DataMemberAttribute
 		*/
 		[U] public void InterfacePropertiesMustBeMarkedExplicitly()
 		{
 			var properties = from p in QueryProperties
-							 let a = p.GetCustomAttributes<JsonIgnoreAttribute>().Concat<Attribute>(p.GetCustomAttributes<JsonPropertyAttribute>())
+							 let a = p.GetCustomAttributes<IgnoreDataMemberAttribute>()
+								 .Concat<Attribute>(p.GetCustomAttributes<DataMemberAttribute>())
 							 where a.Count() != 1
 							 select p;
 			properties.Should().BeEmpty();

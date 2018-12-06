@@ -7,6 +7,7 @@ namespace Nest
 	internal class ElasticsearchFormatterResolver : IJsonFormatterResolver
 	{
 		private static readonly IJsonFormatter<object> FallbackFormatter = new DynamicObjectTypeFallbackFormatter(InnerResolver.Instance);
+
 		public IConnectionSettingsValues Settings { get; }
 
 		public ElasticsearchFormatterResolver(IConnectionSettingsValues settings) => Settings = settings;
@@ -42,6 +43,9 @@ namespace Nest
 				{
 					new QueryContainerCollectionFormatter(),
 					new SimpleQueryStringFlagsFormatter(),
+					// TODO: condition on these to only take effect when StringTimeSpanAttribute not present.
+					new TimeSpanToStringConverter(),
+					new NullableTimeSpanFormatter(),
 				}, new IJsonFormatterResolver[0]),
 				BuiltinResolver.Instance, // Builtin
 				EnumResolver.Default, // Enum(default => string)

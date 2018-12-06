@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	[DataContract]
-	[JsonConverter(typeof(BulkResponseItemJsonConverter))]
+	[JsonFormatter(typeof(BulkResponseItemJsonConverter))]
 	public class BulkIndexResponseItem : BulkResponseItemBase
 	{
 		/// <summary>
@@ -14,6 +15,6 @@ namespace Nest
 		[DataMember(Name ="matches")]
 		public IEnumerable<string> Matches { get; internal set; }
 
-		public override string Operation { get; internal set; }
+		public override string Operation { get; } = "index";
 	}
 }

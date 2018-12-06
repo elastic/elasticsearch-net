@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using Newtonsoft.Json.Linq;
 using Utf8Json;
 using Utf8Json.Internal;
 using Utf8Json.Resolvers;
@@ -11,6 +7,8 @@ namespace Nest
 {
 	internal class GeoShapeQueryFieldNameFormatter : IJsonFormatter<IGeoShapeQuery>
 	{
+		public IGeoShapeQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) => throw new NotSupportedException();
+
 		public void Serialize(ref JsonWriter writer, IGeoShapeQuery value, IJsonFormatterResolver formatterResolver)
 		{
 			var fieldName = value.Field;
@@ -58,20 +56,10 @@ namespace Nest
 			shapeFormatter.Serialize(ref writer, value, formatterResolver);
 			writer.WriteEndObject();
 		}
-
-		public IGeoShapeQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
-		{
-			throw new NotSupportedException();
-		}
 	}
 
 	internal class GeoShapeQueryFormatter : IJsonFormatter<IGeoShapeQuery>
 	{
-		public void Serialize(ref JsonWriter writer, IGeoShapeQuery value, IJsonFormatterResolver formatterResolver)
-		{
-			throw new NotSupportedException();
-		}
-
 		private static readonly AutomataDictionary AutomataDictionary = new AutomataDictionary
 		{
 			{ "boost", 0 },
@@ -93,7 +81,7 @@ namespace Nest
 			if (token == JsonToken.Null)
 				return null;
 
-			int count = 0;
+			var count = 0;
 			string field = null;
 			double? boost = null;
 			string name = null;
@@ -125,7 +113,7 @@ namespace Nest
 				}
 				else
 				{
-					field = Encoding.UTF8.GetString(propertyName.Array, propertyName.Offset, propertyName.Count);
+					field = propertyName.Utf8String();
 					if (reader.ReadIsBeginObject())
 					{
 						reader.ReadNext();
@@ -164,5 +152,8 @@ namespace Nest
 			query.IgnoreUnmapped = ignoreUnmapped;
 			return query;
 		}
+
+		public void Serialize(ref JsonWriter writer, IGeoShapeQuery value, IJsonFormatterResolver formatterResolver) =>
+			throw new NotSupportedException();
 	}
 }

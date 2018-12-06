@@ -1,9 +1,11 @@
 ﻿using System;
 using Elasticsearch.Net;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
+	[ReadAs(typeof(MultiGetHit<>))]
 	public interface IMultiGetHit<out TDocument> where TDocument : class
 	{
 		Error Error { get; }
@@ -32,6 +34,7 @@ namespace Nest
 		[DataMember(Name ="error")]
 		public Error Error { get; internal set; }
 
+		[DataMember(Name = "fields")]
 		public FieldValues Fields { get; internal set; }
 
 		[DataMember(Name ="found")]
@@ -50,7 +53,7 @@ namespace Nest
 		public string Routing { get; internal set; }
 
 		[DataMember(Name ="_source")]
-		[JsonConverter(typeof(SourceConverter))]
+		[JsonFormatter(typeof(SourceFormatter<>))]
 		public TDocument Source { get; internal set; }
 
 		[DataMember(Name ="_type")]

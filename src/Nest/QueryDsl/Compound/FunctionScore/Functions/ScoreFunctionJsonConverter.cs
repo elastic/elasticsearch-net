@@ -52,7 +52,7 @@ namespace Nest
 										.Deserialize(ref reader, formatterResolver);
 								else
 								{
-									var name = Encoding.UTF8.GetString(propertyName.Array, propertyName.Offset, propertyName.Count);
+									var name = propertyName.Utf8String();
 									decayFunction = ReadDecayFunction(ref reader, name, formatterResolver);
 									decayFunction.Field = functionPropertyName;
 								}
@@ -354,6 +354,8 @@ namespace Nest
 					return Deserialize<LinearDateDecayFunction>(ref segmentReader, formatterResolver);
 				case "linear_geo":
 					return Deserialize<LinearGeoDecayFunction>(ref segmentReader, formatterResolver);
+				default:
+					return null;
 			}
 		}
 

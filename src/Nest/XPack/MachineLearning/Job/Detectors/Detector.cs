@@ -75,7 +75,7 @@ namespace Nest
 			var segment = reader.ReadNextBlockSegment();
 			var segmentReader = new JsonReader(segment.Array, segment.Offset);
 			var count = 0;
-			ArraySegment<byte> function;
+			ArraySegment<byte> function = default;
 
 			while (segmentReader.ReadIsInObject(ref count))
 			{

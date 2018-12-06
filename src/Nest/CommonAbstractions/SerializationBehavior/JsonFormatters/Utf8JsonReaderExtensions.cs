@@ -51,9 +51,5 @@ namespace Nest
 
 			return false;
 		}
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static string ToUTF8String(this ref ArraySegment<byte> arraySegment) =>
-			Encoding.UTF8.GetString(arraySegment.Array, arraySegment.Offset, arraySegment.Count);
 	}
 }

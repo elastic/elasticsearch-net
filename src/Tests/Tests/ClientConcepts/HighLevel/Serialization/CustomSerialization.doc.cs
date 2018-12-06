@@ -11,6 +11,7 @@ using Nest;
 using Nest.JsonNetSerializer;
 using System.Runtime.Serialization;
 using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
 using Tests.Framework;
 using static Tests.Core.Serialization.SerializationTestHelper;
 

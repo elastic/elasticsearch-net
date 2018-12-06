@@ -5,6 +5,7 @@ using BenchmarkDotNet.Attributes;
 using Elasticsearch.Net;
 using Nest;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 using Tests.Benchmarking.Framework;
 using Tests.Core.Client;
 

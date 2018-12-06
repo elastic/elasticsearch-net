@@ -37,8 +37,6 @@ namespace Tests.Domain
 		public long SizeInBytes { get; set; }
 
 		[Text]
-		[StringTimeSpan]
-		[JsonConverter(typeof(StringTimeSpanConverter))]
 		public TimeSpan? StringDuration
 		{
 			get => Duration;

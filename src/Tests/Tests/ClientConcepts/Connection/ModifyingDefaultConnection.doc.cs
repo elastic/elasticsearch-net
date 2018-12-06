@@ -11,6 +11,7 @@ using System.Runtime.Serialization;
 using Tests.Core.Extensions;
 using Tests.Domain;
 using Tests.Framework;
+using Newtonsoft.Json;
 
 namespace Tests.ClientConcepts.Connection
 {

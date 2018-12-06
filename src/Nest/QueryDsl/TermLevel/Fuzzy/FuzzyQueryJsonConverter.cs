@@ -36,7 +36,7 @@ namespace Nest
 			{
 				var field = reader.ReadPropertyName();
 				// ReSharper disable once TooWideLocalVariableScope
-				ArraySegment<byte> fuzzinessSegment;
+				ArraySegment<byte> fuzzinessSegment = default;
 				var valueCount = 0;
 				while (reader.ReadIsInObject(ref valueCount))
 				{

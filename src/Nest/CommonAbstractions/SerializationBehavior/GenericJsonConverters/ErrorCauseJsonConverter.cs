@@ -2,158 +2,171 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Elasticsearch.Net;
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Linq;
+using Utf8Json;
 
 namespace Nest
 {
 	internal class ErrorCauseJsonConverter : ErrorCauseJsonConverter<ErrorCause> { }
 
-	internal class ErrorCauseJsonConverter<TErrorCause> : JsonConverter
+	internal class ErrorCauseJsonConverter<TErrorCause> : IJsonFormatter<TErrorCause>
 		where TErrorCause : ErrorCause, new()
 	{
-		public override bool CanRead => true;
-		public override bool CanWrite => false;
+		public TErrorCause Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
+			ReadError<TErrorCause>(ref reader, formatterResolver, MaybeSkipProperty);
 
-		public override bool CanConvert(Type objectType) => objectType == typeof(Error);
+		public void Serialize(ref JsonWriter writer, TErrorCause value, IJsonFormatterResolver formatterResolver) =>
+			throw new NotSupportedException();
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }
+		private void MaybeSkipProperty(ref JsonReader reader, TErrorCause error, string propertyName, IJsonFormatterResolver formatterResolver)
+		{
+			if (!ReadProperty(ref reader, propertyName, error, formatterResolver))
+				reader.ReadNextBlock();
+		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
-			ReadError<TErrorCause>(reader, serializer, (e, prop) =>
-			{
-				if (!ReadProperty(e, prop, reader, serializer))
-					reader.Skip();
-			});
+		protected virtual bool ReadProperty(ref JsonReader reader, string propertyName, TErrorCause error, IJsonFormatterResolver formatterResolver) =>
+			false;
 
-		protected virtual bool ReadProperty(TErrorCause error, string propertyName, JsonReader reader, JsonSerializer serializer) => false;
+		private static void ReadNextBlock<TInnerError>(ref JsonReader reader, TInnerError error, string prop, IJsonFormatterResolver formatterResolver)
+			where TInnerError : ErrorCause, new() => reader.ReadNextBlock();
 
-		protected ErrorCause ReadCausedBy(JsonReader reader, JsonSerializer serializer) =>
-			ReadError<ErrorCause>(reader, serializer, (e, prop) => { reader.Skip(); });
+		protected ErrorCause ReadCausedBy(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
+			ReadError<ErrorCause>(ref reader, formatterResolver, ReadNextBlock);
 
-		private TInnerError ReadError<TInnerError>(JsonReader reader, JsonSerializer serializer, Action<TInnerError, string> readMore)
+		private TInnerError ReadError<TInnerError>(ref JsonReader reader, IJsonFormatterResolver formatterResolver, ReadMore<TInnerError> readMore)
 			where TInnerError : ErrorCause, new()
 		{
-			if (reader.TokenType == JsonToken.String)
+			var token = reader.GetCurrentJsonToken();
+
+			if (token == JsonToken.String)
 			{
-				var reason = (string)reader.Value;
+				var reason = reader.ReadString();
 				return new TInnerError { Reason = reason };
 			}
-			if (reader.TokenType != JsonToken.StartObject)
+			if (token != JsonToken.BeginObject)
 			{
-				reader.Skip();
+				reader.ReadNextBlock();
 				return null;
 			}
 
 			var error = new TInnerError { Metadata = new ErrorCause.ErrorCauseMetadata() };
-			var depth = reader.Depth;
-			reader.Read();
-			do
+
+			var count = 0;
+			while (reader.ReadIsInObject(ref count))
 			{
-				var propertyName = (string)reader.Value;
+				var propertyName = reader.ReadPropertyName();
 				switch (propertyName)
 				{
 					case "type":
-						error.Type = reader.ReadAsString();
+						error.Type = reader.ReadString();
 						break;
 					case "stack_trace":
-						error.StackTrace = reader.ReadAsString();
+						error.StackTrace = reader.ReadString();
 						break;
 					case "reason":
-						error.Reason = reader.ReadAsString();
+						error.Reason = reader.ReadString();
 						break;
 					case "caused_by":
-						reader.Read();
-						error.CausedBy = ReadCausedBy(reader, serializer);
+						error.CausedBy = ReadCausedBy(ref reader, formatterResolver);
 						break;
 					default:
-						if (!ExtractMetadata(propertyName, error, reader, serializer))
-							readMore(error, propertyName);
+						if (!ExtractMetadata(ref reader, propertyName, error, formatterResolver))
+							readMore(ref reader, error, propertyName, formatterResolver);
 						break;
 				}
-				reader.Read();
-			} while (reader.Depth >= depth && reader.TokenType != JsonToken.EndObject);
+			}
+
 			return error;
 		}
 
-		protected static bool ExtractMetadata(string propertyName, ErrorCause error, JsonReader reader, JsonSerializer serializer)
+		protected static bool ExtractMetadata(ref JsonReader reader, string propertyName, ErrorCause error, IJsonFormatterResolver formatterResolver)
 		{
 			var m = error.Metadata;
 			switch (propertyName)
 			{
 				case "license.expired.feature":
-					m.LicensedExpiredFeature = reader.ReadAsString();
+					m.LicensedExpiredFeature = reader.ReadString();
 					break;
 				case "index":
-					m.Index = reader.ReadAsString();
+					m.Index = reader.ReadString();
 					break;
 				case "index_uuid":
-					m.IndexUUID = reader.ReadAsString();
+					m.IndexUUID = reader.ReadString();
 					break;
 				case "resource.type":
-					m.ResourceType = reader.ReadAsString();
+					m.ResourceType = reader.ReadString();
 					break;
 				case "resource.id":
-					m.ResourceId = ReadArray(reader);
+					m.ResourceId = ReadArray(ref reader, formatterResolver);
 					break;
 				case "shard":
-					m.Shard = reader.ReadAsInt32();
+					m.Shard = reader.ReadInt32();
 					break;
 				case "line":
-					m.Line = reader.ReadAsInt32();
+					m.Line = reader.ReadInt32();
 					break;
 				case "col":
-					m.Column = reader.ReadAsInt32();
+					m.Column = reader.ReadInt32();
 					break;
 				case "bytes_wanted":
-					reader.Read();
-					m.BytesWanted = reader.Value as long?;
+					m.BytesWanted = reader.ReadInt64();
 					break;
 				case "bytes_limit":
-					reader.Read();
-					m.BytesLimit = reader.Value as long?;
+					m.BytesLimit = reader.ReadInt64();
 					break;
 				case "phase":
-					m.Phase = reader.ReadAsString();
+					m.Phase = reader.ReadString();
 					break;
 				case "grouped":
-					m.Grouped = reader.ReadAsBoolean();
+					m.Grouped = reader.ReadBoolean();
 					break;
 				case "script_stack":
-					m.ScriptStack = ReadArray(reader);
+					m.ScriptStack = ReadArray(ref reader, formatterResolver);
 					break;
 				case "script":
-					m.Script = reader.ReadAsString();
+					m.Script = reader.ReadString();
 					break;
 				case "lang":
-					m.Language = reader.ReadAsString();
+					m.Language = reader.ReadString();
 					break;
 				case "failed_shards":
-					m.FailedShards = ExtractFailedShards(reader, serializer);
+					m.FailedShards = ExtractFailedShards(ref reader, formatterResolver);
 					break;
 				default: return false;
 			}
 			return true;
 		}
 
-		protected static IReadOnlyCollection<ShardFailure> ExtractFailedShards(JsonReader reader, JsonSerializer serializer)
+		protected static IReadOnlyCollection<ShardFailure> ExtractFailedShards(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			reader.Read();
-			if (reader.TokenType != JsonToken.StartArray) return EmptyReadOnly<ShardFailure>.Collection;
+			//reader.ReadNext();
+			if (reader.GetCurrentJsonToken() != JsonToken.BeginArray)
+				return EmptyReadOnly<ShardFailure>.Collection;
 
-			var shardFailures = serializer.Deserialize<List<ShardFailure>>(reader);
-			return new ReadOnlyCollection<ShardFailure>(shardFailures);
+			var formatter = formatterResolver.GetFormatter<ReadOnlyCollection<ShardFailure>>();
+			return formatter.Deserialize(ref reader, formatterResolver);
 		}
 
-		private static IReadOnlyCollection<string> ReadArray(JsonReader reader)
+		private static IReadOnlyCollection<string> ReadArray(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var a = new string[0] { };
-			reader.Read();
-			if (reader.TokenType == JsonToken.String)
-				a = new[] { reader.Value as string };
-			else if (reader.TokenType == JsonToken.StartArray)
-				a = JArray.Load(reader).ToObject<List<string>>().ToArray();
+
+			//reader.ReadNext();
+
+			var token = reader.GetCurrentJsonToken();
+
+			switch (token)
+			{
+				case JsonToken.String:
+					a = new[] { reader.ReadString() };
+					break;
+				case JsonToken.BeginArray:
+					a = formatterResolver.GetFormatter<string[]>().Deserialize(ref reader, formatterResolver);
+					break;
+			}
 			return new ReadOnlyCollection<string>(a);
 		}
+
+		private delegate void ReadMore<in TInnerError>(ref JsonReader reader, TInnerError e, string prop, IJsonFormatterResolver formatterResolver)
+			where TInnerError : ErrorCause, new();
 	}
 }

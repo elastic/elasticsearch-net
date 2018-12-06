@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	public interface IBulkIndexOperation<T> : IBulkOperation
 	{
-		[JsonConverter(typeof(SourceConverter))]
+		[JsonFormatter(typeof(SourceWriteFormatter<>))]
 		T Document { get; set; }
 
 		[DataMember(Name ="_percolate")]

@@ -5,7 +5,6 @@
   </PropertyGroup>
   <ItemGroup Condition="'$(TestPackageVersion)'!=''">
     <PackageReference Include="NEST" Version="$(TestPackageVersion)" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
   </ItemGroup>
   <ItemGroup Condition="'$(TestPackageVersion)'==''">
     <ProjectReference Include="..\..\Nest\Nest.csproj" />
@@ -13,6 +12,7 @@
   <ItemGroup>
     <PackageReference Include="Bogus" Version="22.1.2" />
     <PackageReference Include="Elastic.Managed" Version="0.1.0-ci20180925T171717" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
     <ProjectReference Include="..\Tests.Configuration\Tests.Configuration.csproj" />
   </ItemGroup>
 </Project>

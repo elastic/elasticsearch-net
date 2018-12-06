@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
-	[JsonConverter(typeof(SpanGapQueryJsonConverter))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(SpanGapQueryFormatter))]
 	public interface ISpanGapQuery : ISpanSubQuery
 	{
 		Field Field { get; set; }
@@ -41,38 +42,17 @@ namespace Nest
 		public SpanGapQueryDescriptor<T> Width(int? width) => Assign(a => a.Width = width);
 	}
 
-	internal class SpanGapQueryJsonConverter : JsonConverter
+	internal class SpanGapQueryFormatter : ConcreteInterfaceFormatter<SpanGapQuery, ISpanGapQuery>
 	{
-		public override bool CanRead => true;
-		public override bool CanWrite => true;
-
-		public override bool CanConvert(Type objectType) => typeof(ISpanGapQuery).IsAssignableFrom(objectType);
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public override void Serialize(ref JsonWriter writer, ISpanGapQuery value, IJsonFormatterResolver formatterResolver)
 		{
-			var gapQuery = value as ISpanGapQuery;
-			if (value == null || SpanGapQuery.IsConditionless(gapQuery))
+			if (value == null || SpanGapQuery.IsConditionless(value))
 			{
 				writer.WriteNull();
 				return;
 			}
-			var settings = serializer.GetConnectionSettings();
-			var fieldName = settings.Inferrer.Field(gapQuery.Field);
-			writer.WriteStartObject();
-			writer.WritePropertyName(fieldName);
-			writer.WriteValue(gapQuery.Width);
-			writer.WriteEndObject();
-		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			if (reader.TokenType != JsonToken.StartObject) return null;
-
-			reader.Read();
-			var field = (Field)reader.Value.ToString(); // field
-			var width = reader.ReadAsInt32();
-			reader.Read();
-			return new SpanGapQuery { Field = field, Width = width };
+			base.Serialize(ref writer, value, formatterResolver);
 		}
 	}
 }

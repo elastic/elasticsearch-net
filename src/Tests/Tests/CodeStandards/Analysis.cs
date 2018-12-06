@@ -59,8 +59,8 @@ namespace Tests.CodeStandards
 				where t.IsInterface() && type.IsAssignableFrom(t)
 				let properties = t.GetProperties()
 				from p in properties
-				where p.GetCustomAttribute(typeof(JsonPropertyAttribute)) == null
-				select $"{p.Name} on {t.Name} does not have {nameof(JsonPropertyAttribute)} applied";
+				where p.GetCustomAttribute(typeof(DataMemberAttribute)) == null
+				select $"{p.Name} on {t.Name} does not have {nameof(DataMemberAttribute)} applied";
 
 			types.Should().BeEmpty();
 		}

@@ -14,6 +14,7 @@ using Tests.Core.Client.Settings;
 using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch;
 using Xunit;
+using Newtonsoft.Json;
 
 namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {

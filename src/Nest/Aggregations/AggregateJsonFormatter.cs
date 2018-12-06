@@ -9,11 +9,11 @@ using Utf8Json.Internal;
 
 namespace Nest
 {
-	internal class AggregateJsonFormatter : IJsonFormatter<IAggregate>
+	internal class AggregateFormatter : IJsonFormatter<IAggregate>
 	{
 		private static readonly Regex _numeric = new Regex(@"^[\d.]+(\.[\d.]+)?$");
 
-		static AggregateJsonFormatter()
+		static AggregateFormatter()
 		{
 			AllReservedAggregationNames = typeof(Parser)
 				.GetFields(BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public)

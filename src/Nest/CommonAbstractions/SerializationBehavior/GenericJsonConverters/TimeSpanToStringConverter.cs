@@ -1,32 +1,44 @@
 using System;
-using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-//	internal class TimeSpanToStringConverter : JsonConverter
-//	{
-//		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-//		{
-//			if (value == null)
-//				writer.WriteNull();
-//			else
-//			{
-//				var timeSpan = (TimeSpan)value;
-//				writer.WriteValue(timeSpan.Ticks);
-//			}
-//		}
-//
-//		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-//		{
-//			switch (reader.TokenType)
-//			{
-//				case JsonToken.Null: return null;
-//				case JsonToken.String: return TimeSpan.Parse((string)reader.Value);
-//				case JsonToken.Integer: return new TimeSpan((long)reader.Value);
-//			}
-//			throw new JsonSerializationException($"Cannot convert token of type {reader.TokenType} to {objectType}.");
-//		}
-//
-//		public override bool CanConvert(Type objectType) => objectType == typeof(TimeSpan) || objectType == typeof(TimeSpan?);
-//	}
+	internal class TimeSpanToStringConverter : IJsonFormatter<TimeSpan>
+	{
+		public TimeSpan Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			var token = reader.GetCurrentJsonToken();
+			switch (token)
+			{
+				case JsonToken.String: return TimeSpan.Parse(reader.ReadString());
+				case JsonToken.Number: return new TimeSpan(reader.ReadInt64());
+			}
+			throw new Exception($"Cannot convert token of type {token} to {nameof(TimeSpan)}.");
+		}
+
+		public void Serialize(ref JsonWriter writer, TimeSpan value, IJsonFormatterResolver formatterResolver) => writer.WriteInt64(value.Ticks);
+	}
+
+	internal class NullableTimeSpanToStringConverter : IJsonFormatter<TimeSpan?>
+	{
+		public TimeSpan? Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			var token = reader.GetCurrentJsonToken();
+			switch (token)
+			{
+				case JsonToken.Null: return null;
+				case JsonToken.String: return TimeSpan.Parse(reader.ReadString());
+				case JsonToken.Number: return new TimeSpan(reader.ReadInt64());
+			}
+			throw new Exception($"Cannot convert token of type {token} to {nameof(TimeSpan)}?.");
+		}
+
+		public void Serialize(ref JsonWriter writer, TimeSpan? value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null)
+				writer.WriteNull();
+			else
+				writer.WriteInt64(value.Value.Ticks);
+		}
+	}
 }

@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using Elasticsearch.Net;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ScriptQueryConverter))]
-	[DataContract]
+	[JsonFormatter(typeof(ScriptQueryFormatter))]
+	[InterfaceDataContract]
 	public interface IScriptQuery : IQuery
 	{
 		[DataMember(Name ="id")]

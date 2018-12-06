@@ -1,8 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Text;
-using Newtonsoft.Json.Linq;
 using Utf8Json;
 using Utf8Json.Internal;
 using Utf8Json.Resolvers;
@@ -11,13 +7,7 @@ namespace Nest
 {
 	internal class FieldMappingFormatter : IJsonFormatter<IReadOnlyDictionary<Field, IFieldMapping>>
 	{
-		public void Serialize(ref JsonWriter writer, IReadOnlyDictionary<Field, IFieldMapping> value, IJsonFormatterResolver formatterResolver)
-		{
-			var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IReadOnlyDictionary<Field, IFieldMapping>>();
-			formatter.Serialize(ref writer, value, formatterResolver);
-		}
-
-		private static readonly AutomataDictionary _automataDictionary = new AutomataDictionary
+		private static readonly AutomataDictionary Fields = new AutomataDictionary
 		{
 			{ "_all", 0 },
 			{ "_source", 1 },
@@ -42,7 +32,7 @@ namespace Nest
 			while (reader.ReadIsInObject(ref count))
 			{
 				var propertyName = reader.ReadPropertyNameSegmentRaw();
-				if (_automataDictionary.TryGetValue(propertyName, out var value))
+				if (Fields.TryGetValue(propertyName, out var value))
 				{
 					switch (value)
 					{
@@ -76,14 +66,14 @@ namespace Nest
 
 					if (property != null)
 						property.Name =
-							Encoding.UTF8.GetString(propertyName.Array, propertyName.Offset, propertyName.Count);
+							propertyName.Utf8String();
 
 					mapping = property;
 				}
 
 				if (mapping != null)
 				{
-					var name = Encoding.UTF8.GetString(propertyName.Array, propertyName.Offset, propertyName.Count);
+					var name = propertyName.Utf8String();
 					fieldMappings.Add(name, mapping);
 				}
 			}
@@ -91,6 +81,12 @@ namespace Nest
 			var settings = formatterResolver.GetConnectionSettings();
 			var resolvableDictionary = new ResolvableDictionaryProxy<Field, IFieldMapping>(settings, fieldMappings);
 			return resolvableDictionary;
+		}
+
+		public void Serialize(ref JsonWriter writer, IReadOnlyDictionary<Field, IFieldMapping> value, IJsonFormatterResolver formatterResolver)
+		{
+			var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IReadOnlyDictionary<Field, IFieldMapping>>();
+			formatter.Serialize(ref writer, value, formatterResolver);
 		}
 	}
 }

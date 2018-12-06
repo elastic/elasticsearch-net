@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -79,7 +80,7 @@ namespace Nest
 		public static License LoadFromDisk(string path)
 		{
 			var contents = File.ReadAllText(path);
-			var license = JsonConvert.DeserializeObject<Wrapped>(contents)?.License;
+			var license = JsonSerializer.Deserialize<Wrapped>(contents)?.License;
 			return license;
 		}
 

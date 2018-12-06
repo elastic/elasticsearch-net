@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	public interface IAliasRemoveAction : IAliasAction
 	{
-		[DataMember(Name ="remove")]
+		[DataMember(Name = "remove")]
 		AliasRemoveOperation Remove { get; set; }
 	}
 

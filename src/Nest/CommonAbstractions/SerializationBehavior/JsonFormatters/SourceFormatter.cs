@@ -3,6 +3,11 @@ using Utf8Json;
 
 namespace Nest
 {
+	internal class CollapsedSourceFormatter<T> : SourceFormatter<T>
+	{
+		public override SerializationFormatting? ForceFormatting { get; } = SerializationFormatting.None;
+	}
+
 	internal class SourceFormatter<T> : IJsonFormatter<T>
 	{
 		public virtual SerializationFormatting? ForceFormatting { get; } = null;

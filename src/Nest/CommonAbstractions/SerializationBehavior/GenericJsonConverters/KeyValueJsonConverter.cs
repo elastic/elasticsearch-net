@@ -1,95 +1,40 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Linq;
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Serialization;
+﻿using Utf8Json;
 
 namespace Nest
 {
-	internal class KeyValueConversion
+	internal class SortOrderFormatter<TSortOrder> : IJsonFormatter<TSortOrder>
+		where TSortOrder : class, ISortOrder, new()
 	{
-		private static readonly ConcurrentDictionary<Type, KeyValueConversion> KnownTypes = new ConcurrentDictionary<Type, KeyValueConversion>();
-
-		public JsonProperty KeyProperty { get; set; }
-		public JsonProperty ValueProperty { get; set; }
-
-		public static KeyValueConversion Create<TContainer, TValue>() where TContainer : class, new()
+		public TSortOrder Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var t = typeof(TContainer);
-			KeyValueConversion conversion;
-			if (KnownTypes.TryGetValue(t, out conversion)) return conversion;
+			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
+				return null;
 
-			var properties = t.GetCachedObjectProperties(MemberSerialization.OptOut);
-			var keyProp = properties.FirstOrDefault(p => p.PropertyType != typeof(TValue));
-			var valueProp = properties.FirstOrDefault(p => p.PropertyType == typeof(TValue));
-			if (keyProp == null) throw new Exception($"No key property found on type {t.Name}");
-			if (valueProp == null) throw new Exception($"No value property found on type {t.Name}");
+			var count = 0;
+			var sortOrder = new TSortOrder();
+			while (reader.ReadIsInObject(ref count))
+			{
+				sortOrder.Key = reader.ReadPropertyName();
+				sortOrder.Order = formatterResolver.GetFormatter<SortOrder>()
+					.Deserialize(ref reader, formatterResolver);
+			}
 
-			conversion = new KeyValueConversion { KeyProperty = keyProp, ValueProperty = valueProp };
-			KnownTypes.TryAdd(t, conversion);
-			return conversion;
+			return sortOrder;
 		}
-	}
 
-	internal class KeyValueJsonConverter<TContainer, TValue> : JsonConverter
-		where TContainer : class, new()
-	{
-		public override bool CanRead => true;
-		public override bool CanWrite => true;
-
-		public override bool CanConvert(Type objectType) => true;
-
-		public override void WriteJson(JsonWriter writer, object v, JsonSerializer serializer)
+		public void Serialize(ref JsonWriter writer, TSortOrder value, IJsonFormatterResolver formatterResolver)
 		{
-			var conversion = KeyValueConversion.Create<TContainer, TValue>();
-			if (conversion == null)
+			if (value?.Key == null)
 			{
 				writer.WriteNull();
 				return;
 			}
-			;
 
-			var key = conversion.KeyProperty.ValueProvider.GetValue(v).ToString();
-			var value = conversion.ValueProperty.ValueProvider.GetValue(v);
-			if (key.IsNullOrEmpty() || value == null)
-			{
-				writer.WriteNull();
-				return;
-			}
-			;
-
-			writer.WriteStartObject();
-			writer.WritePropertyName(key);
-			serializer.Serialize(writer, value);
-
+			writer.WriteBeginObject();
+			// TODO: Should this be a Field?
+			writer.WritePropertyName(value.Key);
+			formatterResolver.GetFormatter<SortOrder>().Serialize(ref writer, value.Order, formatterResolver);
 			writer.WriteEndObject();
-		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			if (reader.TokenType != JsonToken.StartObject) return null;
-
-			var depth = reader.Depth;
-
-			reader.Read(); //property name
-			var key = reader.Value as string;
-			reader.Read(); //{
-			var value = serializer.Deserialize<TValue>(reader);
-
-			if (reader.Depth > depth)
-			{
-				do
-					reader.Read();
-				while (reader.Depth >= depth && reader.TokenType != JsonToken.EndObject);
-			}
-
-			var conversion = KeyValueConversion.Create<TContainer, TValue>();
-			if (conversion == null) return null;
-
-			var o = new TContainer();
-			conversion.KeyProperty.ValueProvider.SetValue(o, key);
-			conversion.ValueProperty.ValueProvider.SetValue(o, value);
-			return o;
 		}
 	}
 }

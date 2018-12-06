@@ -6,7 +6,7 @@ namespace Nest
 	/// <summary>
 	/// Aggregation response for an aggregation request
 	/// </summary>
-	[JsonFormatter(typeof(AggregateJsonFormatter))]
+	[JsonFormatter(typeof(AggregateFormatter))]
 	public interface IAggregate
 	{
 		//TODO this public set is problematic

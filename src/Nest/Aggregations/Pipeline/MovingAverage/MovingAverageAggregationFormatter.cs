@@ -35,8 +35,8 @@ namespace Nest
 
 			var count = 0;
 			var aggregation = new MovingAverageAggregation();
-			ArraySegment<byte> model;
-			ArraySegment<byte> modelSegment;
+			ArraySegment<byte> model = default;
+			ArraySegment<byte> modelSegment = default;
 
 			while (reader.ReadIsInObject(ref count))
 			{

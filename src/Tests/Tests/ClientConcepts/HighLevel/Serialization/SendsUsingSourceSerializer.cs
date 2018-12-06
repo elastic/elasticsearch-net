@@ -6,7 +6,8 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
 using System.Runtime.Serialization;
-
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Tests.Core.Client.Serializers;
 using Tests.Domain;
 using static Tests.Core.Serialization.SerializationTestHelper;

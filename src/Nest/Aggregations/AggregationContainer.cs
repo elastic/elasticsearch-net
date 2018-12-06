@@ -56,9 +56,9 @@ namespace Nest
 
 		protected override string ValidateKey(string key)
 		{
-			if (AggregateJsonConverter.AllReservedAggregationNames.Contains(key))
+			if (AggregateFormatter.AllReservedAggregationNames.Contains(key))
 				throw new ArgumentException(
-					string.Format(AggregateJsonConverter.UsingReservedAggNameFormat, key), nameof(key));
+					string.Format(AggregateFormatter.UsingReservedAggNameFormat, key), nameof(key));
 
 			return key;
 		}

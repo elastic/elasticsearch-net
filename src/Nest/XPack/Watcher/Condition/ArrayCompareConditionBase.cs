@@ -178,7 +178,7 @@ namespace Nest
 						}
 					}
 					else
-						path = Encoding.UTF8.GetString(property.Array, property.Offset, property.Count);
+						path = property.Utf8String();
 				}
 			}
 

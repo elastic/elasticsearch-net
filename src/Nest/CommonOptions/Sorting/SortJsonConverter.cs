@@ -37,7 +37,7 @@ namespace Nest
 								var nameSegment = geoDistanceReader.ReadPropertyNameSegmentRaw();
 								if (geoDistanceReader.GetCurrentJsonToken() == JsonToken.BeginArray)
 								{
-									field = Encoding.UTF8.GetString(nameSegment.Array, nameSegment.Offset, nameSegment.Count);
+									field = nameSegment.Utf8String();
 									points = formatterResolver.GetFormatter<IEnumerable<GeoLocation>>()
 										.Deserialize(ref geoDistanceReader, formatterResolver);
 									break;
@@ -58,7 +58,7 @@ namespace Nest
 				}
 				else
 				{
-					var field = Encoding.UTF8.GetString(sortProperty.Array, sortProperty.Offset, sortProperty.Count);
+					var field = sortProperty.Utf8String();
 					var sortField = formatterResolver.GetFormatter<SortField>()
 						.Deserialize(ref reader, formatterResolver);
 					sortField.Field = field;

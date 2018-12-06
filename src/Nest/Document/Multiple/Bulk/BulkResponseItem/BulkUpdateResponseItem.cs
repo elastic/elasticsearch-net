@@ -7,6 +7,6 @@ namespace Nest
 	[JsonFormatter(typeof(BulkResponseItemJsonConverter))]
 	public class BulkUpdateResponseItem : BulkResponseItemBase
 	{
-		public override string Operation { get; internal set; }
+		public override string Operation { get; } = "update";
 	}
 }
