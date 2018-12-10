@@ -5,7 +5,7 @@
   </PropertyGroup>
   <ItemGroup Condition="'$(TestPackageVersion)'!=''">
     <PackageReference Include="NEST" Version="$(TestPackageVersion)" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
   </ItemGroup>
   <ItemGroup Condition="'$(TestPackageVersion)'==''">
     <ProjectReference Include="..\..\Nest\Nest.csproj" />
