@@ -4,54 +4,82 @@ using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;
 using Elasticsearch.Net;
+using Newtonsoft.Json;
 
 namespace Nest
 {
-	[ContractJsonConverter(typeof(FieldJsonConverter))]
+	/// <summary>
+	/// A field within Elasticsearch
+	/// </summary>
+	[JsonConverter(typeof(FieldJsonConverter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Field : IEquatable<Field>, IUrlParameter
 	{
 		private readonly object _comparisonValue;
 		private readonly Type _type;
 
-		public Field(string name, double? boost = null)
+		public Field(string name, double? boost = null, string format = null)
 		{
 			name.ThrowIfNullOrEmpty(nameof(name));
-			double? b;
-			Name = ParseFieldName(name, out b);
+			Name = ParseFieldName(name, out var b);
 			Boost = b ?? boost;
+			Format = format;
 			_comparisonValue = Name;
 		}
 
-		public Field(Expression expression, double? boost = null)
+		public Field(Expression expression, double? boost = null, string format = null)
 		{
 			Expression = expression ?? throw new ArgumentNullException(nameof(expression));
 			Boost = boost;
+			Format = format;
 			_comparisonValue = expression.ComparisonValueFromExpression(out var type);
 			_type = type;
 			CachableExpression = !new HasVariableExpressionVisitor(expression).Found;
 		}
 
-		public Field(PropertyInfo property, double? boost = null)
+		public Field(PropertyInfo property, double? boost = null, string format = null)
 		{
 			Property = property ?? throw new ArgumentNullException(nameof(property));
 			Boost = boost;
+			Format = format;
 			_comparisonValue = property;
 			_type = property.DeclaringType;
 		}
 
+		/// <summary>
+		/// A boost to apply to the field
+		/// </summary>
 		public double? Boost { get; set; }
+
+		/// <summary>
+		/// A format to apply to the field.
+		/// </summary>
+		/// <remarks>
+		/// Can be used only for Doc Value Fields Elasticsearch 6.4.0+
+		/// </remarks>
+		public string Format { get; set; }
 
 		public bool CachableExpression { get; }
 
+		/// <summary>
+		/// An expression from which the name of the field can be inferred
+		/// </summary>
 		public Expression Expression { get; }
 
+		/// <summary>
+		/// The name of the field
+		/// </summary>
 		public string Name { get; }
 
+		/// <summary>
+		/// A property from which the name of the field can be inferred
+		/// </summary>
 		public PropertyInfo Property { get; }
 
 		internal string DebugDisplay =>
-			$"{Expression?.ToString() ?? PropertyDebug ?? Name}{(Boost.HasValue ? "^" + Boost.Value : "")}{(_type == null ? "" : " typeof: " + _type.Name)}";
+			$"{Expression?.ToString() ?? PropertyDebug ?? Name}{(Boost.HasValue ? "^" + Boost.Value : string.Empty)}"
+			+ $"{(!string.IsNullOrEmpty(Format) ? " format: " + Format : string.Empty)}"
+			+ $"{(_type == null ? string.Empty : " typeof: " + _type.Name)}";
 
 		private string PropertyDebug => Property == null ? null : $"PropertyInfo: {Property.Name}";
 
@@ -70,21 +98,25 @@ namespace Nest
 
 		public Fields And(Field field) => new Fields(new[] { this, field });
 
-		public Fields And<T>(Expression<Func<T, object>> field, double? boost = null) where T : class =>
-			new Fields(new[] { this, new Field(field, boost) });
+		public Fields And<T>(Expression<Func<T, object>> field, double? boost = null, string format = null) where T : class =>
+			new Fields(new[] { this, new Field(field, boost, format) });
 
-		public Fields And(string field, double? boost = null) => new Fields(new[] { this, new Field(field, boost) });
+		public Fields And(string field, double? boost = null, string format = null) =>
+			new Fields(new[] { this, new Field(field, boost, format) });
 
-		public Fields And(PropertyInfo property, double? boost = null) => new Fields(new[] { this, new Field(property, boost) });
+		public Fields And(PropertyInfo property, double? boost = null, string format = null) =>
+			new Fields(new[] { this, new Field(property, boost, format) });
 
 		private static string ParseFieldName(string name, out double? boost)
 		{
 			boost = null;
 			if (name == null) return null;
 
-			var parts = name.Split(new[] { '^' }, StringSplitOptions.RemoveEmptyEntries);
-			if (parts.Length <= 1) return name;
+			var caretIndex = name.IndexOf('^');
+			if (caretIndex == -1)
+				return name;
 
+			var parts = name.Split(new[] { '^' }, 2, StringSplitOptions.RemoveEmptyEntries);
 			name = parts[0];
 			boost = double.Parse(parts[1], CultureInfo.InvariantCulture);
 			return name;
