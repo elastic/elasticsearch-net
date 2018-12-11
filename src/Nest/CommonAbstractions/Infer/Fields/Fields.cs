@@ -6,10 +6,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Elasticsearch.Net;
+using Newtonsoft.Json;
 
 namespace Nest
 {
-	[ContractJsonConverter(typeof(FieldsJsonConverter))]
+	[JsonConverter(typeof(FieldsJsonConverter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Fields : IUrlParameter, IEnumerable<Field>, IEquatable<Fields>
 	{
@@ -37,33 +38,33 @@ namespace Nest
 			return string.Join(",", ListOfFields.Where(f => f != null).Select(f => ((IUrlParameter)f).GetString(nestSettings)));
 		}
 
-		public static implicit operator Fields(string[] fields) => fields.IsEmpty() ? null : new Fields(fields.Select(f => (Field)f));
+		public static implicit operator Fields(string[] fields) => fields.IsEmpty() ? null : new Fields(fields.Select(f => new Field(f)));
 
 		public static implicit operator Fields(string field) => field.IsNullOrEmptyCommaSeparatedList(out var split)
 			? null
-			: new Fields(split.Select(f => (Field)f));
+			: new Fields(split.Select(f => new Field(f)));
 
-		public static implicit operator Fields(Expression[] fields) => fields.IsEmpty() ? null : new Fields(fields.Select(f => (Field)f));
+		public static implicit operator Fields(Expression[] fields) => fields.IsEmpty() ? null : new Fields(fields.Select(f => new Field(f)));
 
-		public static implicit operator Fields(Expression field) => field == null ? null : new Fields(new[] { (Field)field });
+		public static implicit operator Fields(Expression field) => field == null ? null : new Fields(new[] { new Field(field) });
 
 		public static implicit operator Fields(Field field) => field == null ? null : new Fields(new[] { field });
 
 		public static implicit operator Fields(PropertyInfo field) => field == null ? null : new Fields(new Field[] { field });
 
-		public static implicit operator Fields(PropertyInfo[] fields) => fields.IsEmpty() ? null : new Fields(fields.Select(f => (Field)f));
+		public static implicit operator Fields(PropertyInfo[] fields) => fields.IsEmpty() ? null : new Fields(fields.Select(f => new Field(f)));
 
 		public static implicit operator Fields(Field[] fields) => fields.IsEmpty() ? null : new Fields(fields);
 
-		public Fields And<T>(Expression<Func<T, object>> field, double? boost = null) where T : class
+		public Fields And<T>(Expression<Func<T, object>> field, double? boost = null, string format = null) where T : class
 		{
-			ListOfFields.Add(new Field(field, boost));
+			ListOfFields.Add(new Field(field, boost, format));
 			return this;
 		}
 
-		public Fields And(string field, double? boost = null)
+		public Fields And(string field, double? boost = null, string format = null)
 		{
-			ListOfFields.Add(new Field(field, boost));
+			ListOfFields.Add(new Field(field, boost, format));
 			return this;
 		}
 
@@ -75,19 +76,19 @@ namespace Nest
 
 		public Fields And<T>(params Expression<Func<T, object>>[] fields) where T : class
 		{
-			ListOfFields.AddRange(fields.Select(f => (Field)f));
+			ListOfFields.AddRange(fields.Select(f => new Field(f)));
 			return this;
 		}
 
 		public Fields And(params string[] fields)
 		{
-			ListOfFields.AddRange(fields.Select(f => (Field)f));
+			ListOfFields.AddRange(fields.Select(f => new Field(f)));
 			return this;
 		}
 
 		public Fields And(params PropertyInfo[] properties)
 		{
-			ListOfFields.AddRange(properties.Select(f => (Field)f));
+			ListOfFields.AddRange(properties.Select(f => new Field(f)));
 			return this;
 		}
 

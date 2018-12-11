@@ -46,25 +46,24 @@ namespace Nest
 		public static Id Id<T>(T document) where T : class => Nest.Id.From(document);
 
 		public static Fields Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
-			new Fields(fields.Select(f => (Field)f));
+			new Fields(fields.Select(f => new Field(f)));
 
-		public static Fields Fields(params string[] fields) => new Fields(fields.Select(f => (Field)f));
+		public static Fields Fields(params string[] fields) => new Fields(fields.Select(f => new Field(f)));
 
-		public static Fields Fields(params PropertyInfo[] properties) => new Fields(properties.Select(f => (Field)f));
+		public static Fields Fields(params PropertyInfo[] properties) => new Fields(properties.Select(f => new Field(f)));
 
 		/// <summary>
 		/// Create a strongly typed string field name representation of the path to a property
 		/// <para>e.g. p => p.Array.First().SubProperty.Field will return 'array.subProperty.field'</para>
 		/// </summary>
-		/// <typeparam name="T">The type of the object</typeparam>
-		/// <param name="path">The path we want to specify</param>
-		/// <param name="boost">An optional ^boost postfix, only make sense with certain queries</param>
-		public static Field Field<T>(Expression<Func<T, object>> path, double? boost = null)
-			where T : class => new Field(path, boost);
+		public static Field Field<T>(Expression<Func<T, object>> path, double? boost = null, string format = null)
+			where T : class => new Field(path, boost, format);
 
-		public static Field Field(string field, double? boost = null) => new Field(field, boost);
+		public static Field Field(string field, double? boost = null, string format = null) =>
+			new Field(field, boost, format);
 
-		public static Field Field(PropertyInfo property, double? boost = null) => new Field(property, boost);
+		public static Field Field(PropertyInfo property, double? boost = null, string format = null) =>
+			new Field(property, boost, format);
 
 		public static PropertyName Property(string property) => property;
 

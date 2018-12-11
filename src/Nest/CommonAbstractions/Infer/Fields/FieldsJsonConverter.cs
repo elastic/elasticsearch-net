@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -17,37 +18,22 @@ namespace Nest
 			writer.WriteStartArray();
 			if (fields != null)
 			{
-				var infer = serializer.GetConnectionSettings().Inferrer;
-				foreach (var f in fields.ListOfFields) writer.WriteValue(infer.Field(f));
+				// overridden Equals() method means a Fields with only one Field
+				// results in Equality, which triggers Json.NET's Reference loop detection
+				var referenceLoopHandling = serializer.ReferenceLoopHandling;
+				serializer.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
+
+				foreach (var field in fields.ListOfFields)
+					serializer.Serialize(writer, field);
+
+				serializer.ReferenceLoopHandling = referenceLoopHandling;
 			}
 			writer.WriteEndArray();
 		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			if (reader.TokenType != JsonToken.StartArray) return null;
-
-			var fields = new Fields();
-			while (reader.TokenType != JsonToken.EndArray)
-			{
-				// as per https://github.com/elastic/elasticsearch/pull/29639 this can now be an array of objects
-				reader.Read();
-				switch (reader.TokenType)
-				{
-					case JsonToken.String:
-						fields.And((string)reader.Value);
-						break;
-					case JsonToken.StartObject:
-						/// TODO 6.4 this is temporary until we add proper support for doc_values format
-						reader.Read(); // "field";
-						var field = reader.ReadAsString();
-						fields.And(field);
-						while (reader.TokenType != JsonToken.EndObject) reader.Read();
-						reader.Read(); // "}";
-						break;
-				}
-			}
-			return fields;
-		}
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
+			reader.TokenType != JsonToken.StartArray
+				? null
+				: new Fields(serializer.Deserialize<IEnumerable<Field>>(reader));
 	}
 }
