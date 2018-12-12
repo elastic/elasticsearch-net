@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
+	[InterfaceDataContract]
+	[ReadAs(typeof(Analysis))]
 	public interface IAnalysis
 	{
 		[DataMember(Name ="analyzer")]

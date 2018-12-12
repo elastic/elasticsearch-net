@@ -33,6 +33,24 @@ namespace Nest
 			return new StopWords(stopword);
 		}
 
-		public void Serialize(ref JsonWriter writer, StopWords value, IJsonFormatterResolver formatterResolver) => throw new NotSupportedException();
+		public void Serialize(ref JsonWriter writer, StopWords value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
+
+			switch (value._tag)
+			{
+				case 0:
+					writer.WriteString(value.Item1);
+					break;
+				case 1:
+					var formatter = formatterResolver.GetFormatter<IEnumerable<string>>();
+					formatter.Serialize(ref writer, value.Item2, formatterResolver);
+					break;
+			}
+		}
 	}
 }
