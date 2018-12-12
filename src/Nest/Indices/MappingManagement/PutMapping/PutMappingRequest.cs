@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	[ReadAs(typeof(PutMappingRequest))]
 	public partial interface IPutMappingRequest : ITypeMapping { }
 
+	[InterfaceDataContract]
 	public interface IPutMappingRequest<T> : IPutMappingRequest where T : class { }
 
+	[DataContract]
+	[WriteAs(typeof(IPutMappingRequest))]
 	public partial class PutMappingRequest
 	{
 		// Needed for ReadAsType
@@ -54,6 +58,7 @@ namespace Nest
 		public ISourceField SourceField { get; set; }
 	}
 
+	[WriteAs(typeof(IPutMappingRequest))]
 	public partial class PutMappingRequest<T> where T : class
 	{
 		public PutMappingRequest() : this(typeof(T), typeof(T)) { }
@@ -99,6 +104,8 @@ namespace Nest
 	}
 
 	[DescriptorFor("IndicesPutMapping")]
+	[WriteAs(typeof(IPutMappingRequest))]
+	[DataContract]
 	public partial class PutMappingDescriptor<T> where T : class
 	{
 		public PutMappingDescriptor() : this(typeof(T), typeof(T)) { }
