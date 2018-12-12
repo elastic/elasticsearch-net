@@ -9,4 +9,11 @@ namespace Nest
 
 		public Type Type { get; }
 	}
+
+	internal class WriteAsAttribute : Attribute
+	{
+		public WriteAsAttribute(Type readAs) => Type = readAs;
+
+		public Type Type { get; }
+	}
 }

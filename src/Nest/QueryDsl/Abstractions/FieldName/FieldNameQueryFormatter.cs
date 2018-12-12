@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	internal class FieldNameQueryFormatter<T, TInterface> : ConcreteInterfaceFormatter<T, TInterface>
+	internal class FieldNameQueryFormatter<T, TInterface> : ReadAsFormatter<T, TInterface>
 		where T : class, TInterface, IFieldNameQuery, new()
 		where TInterface : class, IFieldNameQuery
 	{
