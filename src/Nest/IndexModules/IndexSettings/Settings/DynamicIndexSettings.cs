@@ -7,7 +7,8 @@ namespace Nest
 	/// <summary>
 	/// Dynamic index settings
 	/// </summary>
-	[JsonFormatter(typeof(IndexSettingsFormatter))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(DynamicIndexSettingsFormatter))]
 	public interface IDynamicIndexSettings : IIsADictionary<string, object>
 	{
 		/// <summary>

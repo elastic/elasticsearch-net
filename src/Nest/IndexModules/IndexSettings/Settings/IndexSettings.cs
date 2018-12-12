@@ -7,6 +7,7 @@ namespace Nest
 	/// <summary>
 	/// The settings for an index
 	/// </summary>
+	[InterfaceDataContract]
 	[JsonFormatter(typeof(IndexSettingsFormatter))]
 	public interface IIndexSettings : IDynamicIndexSettings
 	{
