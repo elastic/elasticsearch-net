@@ -12,7 +12,7 @@ namespace Nest
 	/// In NEST Aggregation always refers to an aggregation
 	/// sent to Elasticsearch and an Aggregate describes an aggregation returned from Elasticsearch.
 	/// </summary>
-	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, IAggregationContainer>))]
+	[JsonFormatter(typeof(AggregationDictionaryFormatter))]
 	public class AggregationDictionary : IsADictionaryBase<string, IAggregationContainer>
 	{
 		public AggregationDictionary() { }
@@ -64,6 +64,21 @@ namespace Nest
 		}
 	}
 
+	internal class AggregationDictionaryFormatter : IJsonFormatter<AggregationDictionary>
+	{
+		private static readonly VerbatimDictionaryKeysFormatter<string, IAggregationContainer> DictionaryKeysFormatter =
+			new VerbatimDictionaryKeysFormatter<string, IAggregationContainer>();
+
+		public void Serialize(ref JsonWriter writer, AggregationDictionary value, IJsonFormatterResolver formatterResolver)
+		{
+			DictionaryKeysFormatter.Serialize(ref writer, value, formatterResolver);
+		}
+
+		public AggregationDictionary Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			return new AggregationDictionary(DictionaryKeysFormatter.Deserialize(ref reader, formatterResolver));
+		}
+	}
 
 	[InterfaceDataContract]
 	[ReadAs(typeof(AggregationContainer))]

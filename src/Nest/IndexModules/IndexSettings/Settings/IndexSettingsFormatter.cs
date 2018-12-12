@@ -89,25 +89,32 @@ namespace Nest
 			Set(UpdatableIndexSettings.Analysis, value.Analysis);
 			Set(Similarity, value.Similarity);
 
-			var indexSettings = value as IIndexSettings;
-
-			Set(StoreType, indexSettings?.FileSystemStorageImplementation);
-			Set(QueriesCacheEnabled, indexSettings?.Queries?.Cache?.Enabled);
-			Set(NumberOfShards, indexSettings?.NumberOfShards);
-			Set(NumberOfRoutingShards, indexSettings?.NumberOfRoutingShards);
-			Set(RoutingPartitionSize, indexSettings?.RoutingPartitionSize);
-			if (indexSettings?.SoftDeletes != null)
+			if (value is IIndexSettings indexSettings)
 			{
-				Set(SoftDeletesEnabled, indexSettings?.SoftDeletes?.Enabled);
-				Set(SoftDeletesRetentionOperations, indexSettings?.SoftDeletes?.Retention?.Operations);
-			}
+				Set(StoreType, indexSettings.FileSystemStorageImplementation);
+				Set(QueriesCacheEnabled, indexSettings.Queries?.Cache?.Enabled);
+				Set(NumberOfShards, indexSettings.NumberOfShards);
+				Set(NumberOfRoutingShards, indexSettings.NumberOfRoutingShards);
+				Set(RoutingPartitionSize, indexSettings.RoutingPartitionSize);
 
-			if (indexSettings?.Sorting != null)
-			{
-				Set(IndexSortSettings.Fields, AsArrayOrSingleItem(indexSettings.Sorting.Fields));
-				Set(Order, AsArrayOrSingleItem(indexSettings.Sorting.Order));
-				Set(Mode, AsArrayOrSingleItem(indexSettings.Sorting.Mode));
-				Set(Missing, AsArrayOrSingleItem(indexSettings.Sorting.Missing));
+				Set(StoreType, indexSettings.FileSystemStorageImplementation);
+				Set(QueriesCacheEnabled, indexSettings.Queries?.Cache?.Enabled);
+				Set(NumberOfShards, indexSettings.NumberOfShards);
+				Set(NumberOfRoutingShards, indexSettings.NumberOfRoutingShards);
+				Set(RoutingPartitionSize, indexSettings.RoutingPartitionSize);
+				if (indexSettings.SoftDeletes != null)
+				{
+					Set(SoftDeletesEnabled, indexSettings.SoftDeletes.Enabled);
+					Set(SoftDeletesRetentionOperations, indexSettings.SoftDeletes.Retention?.Operations);
+				}
+
+				if (indexSettings?.Sorting != null)
+				{
+					Set(IndexSortSettings.Fields, AsArrayOrSingleItem(indexSettings.Sorting.Fields));
+					Set(Order, AsArrayOrSingleItem(indexSettings.Sorting.Order));
+					Set(Mode, AsArrayOrSingleItem(indexSettings.Sorting.Mode));
+					Set(Missing, AsArrayOrSingleItem(indexSettings.Sorting.Missing));
+				}
 			}
 
 			Formatter.Serialize(ref writer, d, formatterResolver);

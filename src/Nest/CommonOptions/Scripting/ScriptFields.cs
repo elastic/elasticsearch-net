@@ -28,7 +28,7 @@ namespace Nest
 			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
 	}
 
-	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<ScriptFields, string, IScriptField>))]
+	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<ScriptFields, IScriptFields, string, IScriptField>))]
 	public interface IScriptFields : IIsADictionary<string, IScriptField> { }
 
 	public class ScriptFields : IsADictionaryBase<string, IScriptField>, IScriptFields

@@ -23,7 +23,7 @@ namespace Nest
 		/// <summary>
 		/// The name of the property
 		/// </summary>
-		[DataMember(Name = "name")]
+		//[DataMember(Name = "name")]
 		PropertyName Name { get; set; }
 
 		/// <summary>

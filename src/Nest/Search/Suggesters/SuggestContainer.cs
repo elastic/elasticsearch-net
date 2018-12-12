@@ -5,7 +5,7 @@ using Utf8Json;
 
 namespace Nest
 {
-	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<SuggestContainer, string, ISuggestBucket>))]
+	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<SuggestContainer, ISuggestContainer, string, ISuggestBucket>))]
 	public interface ISuggestContainer : IIsADictionary<string, ISuggestBucket> { }
 
 	public class SuggestContainer : IsADictionaryBase<string, ISuggestBucket>, ISuggestContainer

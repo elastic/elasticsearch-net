@@ -6,7 +6,7 @@ using Utf8Json;
 
 namespace Nest
 {
-	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<NamedFiltersContainer, string, IQueryContainer>))]
+	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<NamedFiltersContainer, INamedFiltersContainer, string, IQueryContainer>))]
 	public interface INamedFiltersContainer : IIsADictionary<string, IQueryContainer> { }
 
 	public class NamedFiltersContainer : IsADictionaryBase<string, IQueryContainer>, INamedFiltersContainer
