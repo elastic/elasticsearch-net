@@ -11,7 +11,6 @@ namespace Nest
 			var segmentReader = new JsonReader(arraySegment.Array, arraySegment.Offset);
 			var count = 0;
 			string charFilterType = null;
-			var tokenizerPresent = false;
 			while (segmentReader.ReadIsInObject(ref count))
 			{
 				var propertyName = reader.ReadPropertyName();

@@ -1,11 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization;
-
 
 namespace Nest
 {
-
 	public enum KeepTypesMode
 	{
 		[EnumMember(Value = "include")]
@@ -21,11 +18,11 @@ namespace Nest
 	public interface IKeepTypesTokenFilter : ITokenFilter
 	{
 		/// <summary> Whether to include or exclude the types provided on <see cref="Types" /> </summary>
-		[DataMember(Name ="mode")]
+		[DataMember(Name = "mode")]
 		KeepTypesMode? Mode { get; set; }
 
 		/// <summary> A list of types to keep. </summary>
-		[DataMember(Name ="types")]
+		[DataMember(Name = "types")]
 		IEnumerable<string> Types { get; set; }
 	}
 
