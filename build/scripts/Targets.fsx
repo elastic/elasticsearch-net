@@ -67,7 +67,7 @@ Target "Benchmark" <| fun _ ->
     let password = getBuildParam "password"
     Benchmarker.IndexResults (url, username, password)
 
-Target "InternalizeDependencies" Build.ILRepack
+Target "InternalizeDependencies" (fun _ -> ignore()) //Build.ILRepack
 
 Target "InheritDoc" InheritDoc.PatchInheritDocs
 
