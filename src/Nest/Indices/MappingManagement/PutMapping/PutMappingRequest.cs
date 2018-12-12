@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -8,8 +9,11 @@ namespace Nest
 	[ReadAs(typeof(PutMappingRequest))]
 	public partial interface IPutMappingRequest : ITypeMapping { }
 
+	[InterfaceDataContract]
 	public partial interface IPutMappingRequest<T> where T : class { }
 
+	[DataContract]
+	[WriteAs(typeof(IPutMappingRequest))]
 	public partial class PutMappingRequest
 	{
 		/// <inheritdoc />
@@ -52,8 +56,55 @@ namespace Nest
 		public ISourceField SourceField { get; set; }
 	}
 
+	[WriteAs(typeof(IPutMappingRequest))]
+	public partial class PutMappingRequest<T> where T : class
+	{
+		public PutMappingRequest() : this(typeof(T), typeof(T)) { }
+
+		/// <inheritdoc />
+		public IAllField AllField { get; set; }
+
+		/// <inheritdoc />
+		public bool? DateDetection { get; set; }
+
+		/// <inheritdoc />
+		public Union<bool, DynamicMapping> Dynamic { get; set; }
+
+		/// <inheritdoc />
+		public IEnumerable<string> DynamicDateFormats { get; set; }
+
+		/// <inheritdoc />
+		public IDynamicTemplateContainer DynamicTemplates { get; set; }
+
+		/// <inheritdoc />
+		public IFieldNamesField FieldNamesField { get; set; }
+
+		/// <inheritdoc />
+		public IIndexField IndexField { get; set; }
+
+		/// <inheritdoc />
+		public IDictionary<string, object> Meta { get; set; }
+
+		/// <inheritdoc />
+		public bool? NumericDetection { get; set; }
+
+		/// <inheritdoc />
+		public IProperties Properties { get; set; }
+
+		/// <inheritdoc />
+		public IRoutingField RoutingField { get; set; }
+
+		/// <inheritdoc />
+		public ISizeField SizeField { get; set; }
+
+		/// <inheritdoc />
+		public ISourceField SourceField { get; set; }
+	}
+
 	public partial class PutMappingRequest<T> where T : class { }
 
+	[DataContract]
+	[WriteAs(typeof(IPutMappingRequest))]
 	public partial class PutMappingDescriptor<T> where T : class
 	{
 		IAllField ITypeMapping.AllField { get; set; }
