@@ -42,7 +42,7 @@ namespace Nest
 		public SpanGapQueryDescriptor<T> Width(int? width) => Assign(a => a.Width = width);
 	}
 
-	internal class SpanGapQueryFormatter : ConcreteInterfaceFormatter<SpanGapQuery, ISpanGapQuery>
+	internal class SpanGapQueryFormatter : ReadAsFormatter<SpanGapQuery, ISpanGapQuery>
 	{
 		public override void Serialize(ref JsonWriter writer, ISpanGapQuery value, IJsonFormatterResolver formatterResolver)
 		{
