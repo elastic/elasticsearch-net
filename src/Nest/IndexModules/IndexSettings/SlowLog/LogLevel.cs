@@ -1,10 +1,7 @@
 using System.Runtime.Serialization;
-using System.Runtime.Serialization;
-
 
 namespace Nest
 {
-
 	public enum LogLevel
 	{
 		[EnumMember(Value = "error")]

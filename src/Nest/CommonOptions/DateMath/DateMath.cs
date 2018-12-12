@@ -129,8 +129,6 @@ namespace Nest
 			{
 				return DateMath.FromString(reader.ReadString());
 			}
-
-			return null;
 		}
 
 		public void Serialize(ref JsonWriter writer, DateMath value, IJsonFormatterResolver formatterResolver) =>

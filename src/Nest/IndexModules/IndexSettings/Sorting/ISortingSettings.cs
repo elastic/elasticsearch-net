@@ -1,7 +1,5 @@
 using System;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization;
-
 
 namespace Nest
 {
@@ -46,12 +44,14 @@ namespace Nest
 	public interface ISortingSettings
 	{
 		/// <summary>
-		/// The list of fields used to sort the index. Only boolean, numeric, date and keyword fields with doc_values are allowed here.
+		/// The list of fields used to sort the index. Only boolean, numeric, date and keyword fields with doc_values are allowed
+		/// here.
 		/// </summary>
 		Fields Fields { get; set; }
 
 		/// <summary>
-		/// The missing parameter specifies how docs which are missing the field should be treated. The missing value can have the following values:
+		/// The missing parameter specifies how docs which are missing the field should be treated. The missing value can have the
+		/// following values:
 		/// <see cref="IndexSortMissing.Last" />: Documents without value for the field are sorted last.
 		/// <see cref="IndexSortMissing.First" />: Documents without value for the field are sorted first.
 		/// </summary>
@@ -66,7 +66,8 @@ namespace Nest
 		IndexSortMode[] Mode { get; set; }
 
 		/// <summary>
-		/// The sort order to use for each field. The order option can have the following values: <see cref="IndexSortOrder.Ascending" /> and
+		/// The sort order to use for each field. The order option can have the following values:
+		/// <see cref="IndexSortOrder.Ascending" /> and
 		/// <see cref="IndexSortOrder.Descending" />.
 		/// </summary>
 		IndexSortOrder[] Order { get; set; }

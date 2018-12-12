@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization;
 using Utf8Json;
 
 /*
