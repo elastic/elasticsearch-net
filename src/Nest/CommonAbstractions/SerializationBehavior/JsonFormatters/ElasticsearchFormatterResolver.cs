@@ -52,6 +52,7 @@ namespace Nest
 				DynamicGenericResolver.Instance, // T[], List<T>, etc...
 				AttributeFormatterResolver.Instance, // [JsonFormatter]
 				ReadAsFormatterResolver.Instance,
+				WriteAsFormatterResolver.Instance,
 				NestGenericSourceTypeFormatterResolver.Instance,
 				DynamicObjectResolver.AllowPrivateExcludeNullCamelCase
 
