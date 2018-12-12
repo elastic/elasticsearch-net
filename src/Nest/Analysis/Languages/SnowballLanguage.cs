@@ -1,13 +1,10 @@
 ﻿using System.Runtime.Serialization;
-using System.Runtime.Serialization;
-
 
 namespace Nest
 {
 	/// <summary>
 	/// Snowball compatible languages
 	/// </summary>
-
 	public enum SnowballLanguage
 	{
 		[EnumMember(Value = "Armenian")]

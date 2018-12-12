@@ -2,7 +2,6 @@
 using System.Runtime.Serialization;
 using System.Text;
 using Elasticsearch.Net;
-using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -22,7 +21,8 @@ namespace Nest
 		/// This property can be used to check if a response is functionally valid or not.
 		/// This is a NEST abstraction to have a single point to check whether something wrong happened with the request.
 		/// <para>
-		/// For instance an elasticsearch bulk response always returns 200 and individual bulk items may fail, <see cref="IsValid" /> will be
+		/// For instance an elasticsearch bulk response always returns 200 and individual bulk items may fail,
+		/// <see cref="IsValid" /> will be
 		/// false in that case
 		/// </para>
 		/// <para>
@@ -36,7 +36,8 @@ namespace Nest
 		/// <summary>
 		/// If the request resulted in an exception on the client side this will hold the exception that was thrown.
 		/// <para>
-		/// This property is a shortcut to <see cref="IElasticsearchResponse.ApiCall" />'s <see cref="IApiCallDetails.OriginalException" /> and
+		/// This property is a shortcut to <see cref="IElasticsearchResponse.ApiCall" />'s
+		/// <see cref="IApiCallDetails.OriginalException" /> and
 		/// is possibly set when <see cref="IsValid" /> is false depending on the cause of the error
 		/// </para>
 		/// <para>
@@ -48,7 +49,8 @@ namespace Nest
 		Exception OriginalException { get; }
 
 		/// <summary>
-		/// If the response results in an error on elasticsearch's side an <pre>error</pre> element will be returned, this is mapped to
+		/// If the response results in an error on elasticsearch's side an <pre>error</pre> element will be returned, this is
+		/// mapped to
 		/// <see cref="ServerError" /> in NEST.
 		/// <para>Possibly set when <see cref="IsValid" /> is false, depending on the cause of the error</para>
 		/// <para>
@@ -103,7 +105,7 @@ namespace Nest
 			}
 		}
 
-		[DataMember(Name ="error")]
+		[DataMember(Name = "error")]
 		internal Error Error
 		{
 			get => _error;
@@ -114,7 +116,7 @@ namespace Nest
 			}
 		}
 
-		[DataMember(Name ="status")]
+		[DataMember(Name = "status")]
 		internal int? StatusCode
 		{
 			get => _statusCode;
