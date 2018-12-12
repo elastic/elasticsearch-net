@@ -1,5 +1,4 @@
 ﻿using Utf8Json;
-using Utf8Json.Resolvers;
 
 namespace Nest
 {
@@ -63,8 +62,58 @@ namespace Nest
 
 		public void Serialize(ref JsonWriter writer, IAnalyzer value, IJsonFormatterResolver formatterResolver)
 		{
-			var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IAnalyzer>();
-			formatter.Serialize(ref writer, value, formatterResolver);
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
+
+			switch (value.Type)
+			{
+				case "stop":
+					Serialize<IStopAnalyzer>(ref writer, value, formatterResolver);
+					break;
+				case "standard":
+					Serialize<IStandardAnalyzer>(ref writer, value, formatterResolver);
+					break;
+				case "snowball":
+					Serialize<ISnowballAnalyzer>(ref writer, value, formatterResolver);
+					break;
+				case "pattern":
+					Serialize<IPatternAnalyzer>(ref writer, value, formatterResolver);
+					break;
+				case "keyword":
+					Serialize<IKeywordAnalyzer>(ref writer, value, formatterResolver);
+					break;
+				case "whitespace":
+					Serialize<IWhitespaceAnalyzer>(ref writer, value, formatterResolver);
+					break;
+				case "simple":
+					Serialize<ISimpleAnalyzer>(ref writer, value, formatterResolver);
+					break;
+				case "fingerprint":
+					Serialize<IFingerprintAnalyzer>(ref writer, value, formatterResolver);
+					break;
+				case "kuromoji":
+					Serialize<IKuromojiAnalyzer>(ref writer, value, formatterResolver);
+					break;
+				case "nori":
+					Serialize<INoriAnalyzer>(ref writer, value, formatterResolver);
+					break;
+				case "custom":
+					Serialize<ICustomAnalyzer>(ref writer, value, formatterResolver);
+					break;
+				default:
+					Serialize<ILanguageAnalyzer>(ref writer, value, formatterResolver);
+					break;
+			}
+		}
+
+		private static void Serialize<TAnalyzer>(ref JsonWriter writer, IAnalyzer value, IJsonFormatterResolver formatterResolver)
+			where TAnalyzer : class, IAnalyzer
+		{
+			var formatter = formatterResolver.GetFormatter<TAnalyzer>();
+			formatter.Serialize(ref writer, value as TAnalyzer, formatterResolver);
 		}
 
 		private static TAnalyzer Deserialize<TAnalyzer>(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
