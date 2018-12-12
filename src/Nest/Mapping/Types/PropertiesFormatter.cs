@@ -1,12 +1,10 @@
-using System.Collections.Generic;
-using System.Linq;
 using Utf8Json;
 
 namespace Nest
 {
-	internal class PropertiesFormatter : IJsonFormatter<Properties>
+	internal class PropertiesFormatter : IJsonFormatter<IProperties>
 	{
-		public Properties Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		public IProperties Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var settings = formatterResolver.GetConnectionSettings();
 			var properties = new Properties(settings);
@@ -29,7 +27,7 @@ namespace Nest
 			return properties;
 		}
 
-		public void Serialize(ref JsonWriter writer, Properties value, IJsonFormatterResolver formatterResolver)
+		public void Serialize(ref JsonWriter writer, IProperties value, IJsonFormatterResolver formatterResolver)
 		{
 			if (value == null)
 			{
@@ -38,7 +36,11 @@ namespace Nest
 			}
 
 			var settings = formatterResolver.GetConnectionSettings();
-			var properties = new Dictionary<PropertyName, IProperty>(value.Count());
+			var propertyNameFormatter = formatterResolver.GetFormatter<PropertyName>();
+			var propertyFormatter = formatterResolver.GetFormatter<IProperty>();
+			var written = false;
+
+			writer.WriteBeginObject();
 
 			foreach (var kv in value)
 			{
@@ -46,26 +48,45 @@ namespace Nest
 				var propertyInfo = clrOrigin?.ClrOrigin;
 				if (propertyInfo == null)
 				{
-					properties.Add(kv.Key, kv.Value);
+					if (written)
+						writer.WriteValueSeparator();
+
+					propertyNameFormatter.Serialize(ref writer, kv.Key, formatterResolver);
+					writer.WriteNameSeparator();
+					propertyFormatter.Serialize(ref writer, kv.Value, formatterResolver);
+					written = true;
 					continue;
 				}
 				// Check against connection settings mappings
 				if (settings.PropertyMappings.TryGetValue(propertyInfo, out var propertyMapping))
 				{
-					if (propertyMapping.Ignore) continue;
+					if (propertyMapping.Ignore)
+						continue;
 
-					properties.Add(propertyMapping.Name, kv.Value);
+					if (written)
+						writer.WriteValueSeparator();
+
+					writer.WritePropertyName(propertyMapping.Name);
+					propertyFormatter.Serialize(ref writer, kv.Value, formatterResolver);
+					written = true;
 					continue;
 				}
 				// Check against attribute mapping, CreatePropertyMapping caches.
 				// We do not have to take .Name into account from serializer PropertyName (kv.Key) already handles this
 				propertyMapping = settings.PropertyMappingProvider?.CreatePropertyMapping(propertyInfo);
 				if (propertyMapping == null || !propertyMapping.Ignore)
-					properties.Add(kv.Key, kv.Value);
+				{
+					if (written)
+						writer.WriteValueSeparator();
+
+					propertyNameFormatter.Serialize(ref writer, kv.Key, formatterResolver);
+					writer.WriteNameSeparator();
+					propertyFormatter.Serialize(ref writer, kv.Value, formatterResolver);
+					written = true;
+				}
 			}
 
-			var formatter = formatterResolver.GetFormatter<Dictionary<PropertyName, IProperty>>();
-			formatter.Serialize(ref writer, properties, formatterResolver);
+			writer.WriteEndObject();
 		}
 	}
 }

@@ -17,10 +17,7 @@ namespace Nest
 				return;
 			}
 
-			writer.WriteQuotation();
-			writer.WriteRaw(Encoding.UTF8.GetBytes(value.Precision.ToString()));
-			writer.WriteRaw(Encoding.UTF8.GetBytes(value.Unit.GetStringValue()));
-			writer.WriteQuotation();
+			writer.WriteString(value.ToString());
 		}
 
 		public Distance Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)

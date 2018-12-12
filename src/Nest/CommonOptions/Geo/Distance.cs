@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using Elasticsearch.Net;
 using Utf8Json;
 
 namespace Nest
@@ -64,5 +65,7 @@ namespace Nest
 		public static Distance NauticalMiles(double nauticalMiles) => new Distance(nauticalMiles, DistanceUnit.NauticalMiles);
 
 		public static implicit operator Distance(string distanceUnit) => new Distance(distanceUnit);
+
+		public override string ToString() => $"{Precision}{Unit.GetStringValue()}";
 	}
 }

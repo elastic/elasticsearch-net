@@ -103,7 +103,7 @@ namespace Nest
 	{
 		public PutMappingDescriptor() : this(typeof(T), typeof(T)) { }
 
-		public PutMappingDescriptor(IndexName index, TypeName type) : base(r => r.Required("index", index).Required("type", type)) { }
+		public PutMappingDescriptor(Indices index, TypeName type) : base(r => r.Required("index", index).Required("type", type)) { }
 
 		IAllField ITypeMapping.AllField { get; set; }
 		bool? ITypeMapping.DateDetection { get; set; }

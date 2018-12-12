@@ -5,7 +5,7 @@ using Utf8Json;
 
 namespace Nest
 {
-	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<Relations, RelationName, Children>))]
+	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<Relations, IRelations, RelationName, Children>))]
 	public interface IRelations : IIsADictionary<RelationName, Children> { }
 
 	public class Relations : IsADictionaryBase<RelationName, Children>, IRelations

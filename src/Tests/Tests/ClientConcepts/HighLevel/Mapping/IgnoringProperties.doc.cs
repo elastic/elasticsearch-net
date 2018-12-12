@@ -52,7 +52,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		{
 			/** All of the properties except `Name` have been ignored in the mapping */
 			var connectionSettings = new ConnectionSettings(new InMemoryConnection()) // <1> we're using an in-memory connection, but in your application, you'll want to use an `IConnection` that actually sends a request.
-				.DisableDirectStreaming() // <2> we disable direct streaming here to capture the request and response bytes. In your application however, you'll like not want to do this in production.
+				.DisableDirectStreaming() // <2> we disable direct streaming here to capture the request and response bytes. In a production application, you would likely not call this as it adds overhead to each call.
 				.DefaultMappingFor<CompanyWithAttributesAndPropertiesToIgnore>(m => m
 					.Ignore(p => p.AnotherPropertyToIgnore)
 				);
