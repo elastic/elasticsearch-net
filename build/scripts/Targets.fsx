@@ -48,7 +48,7 @@ Target "Integrate" Tests.RunIntegrationTests
 
 Target "Benchmark" Benchmarker.Run
 
-Target "InternalizeDependencies" Build.ILRepack
+Target "InternalizeDependencies" (fun _ -> ignore()) //Build.ILRepack
 
 Target "InheritDoc" InheritDoc.PatchInheritDocs
 
