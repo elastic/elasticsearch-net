@@ -9,7 +9,19 @@ using static Nest.UpdatableIndexSettings;
 
 namespace Nest
 {
-	internal class IndexSettingsFormatter : IJsonFormatter<IDynamicIndexSettings>
+	internal class IndexSettingsFormatter : IJsonFormatter<IIndexSettings>
+	{
+		private static readonly DynamicIndexSettingsFormatter DynamicIndexSettingsFormatter =
+			new DynamicIndexSettingsFormatter();
+
+		public void Serialize(ref JsonWriter writer, IIndexSettings value, IJsonFormatterResolver formatterResolver) =>
+			DynamicIndexSettingsFormatter.Serialize(ref writer, value, formatterResolver);
+
+		public IIndexSettings Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
+			(IIndexSettings)DynamicIndexSettingsFormatter.Deserialize(ref reader, formatterResolver);
+	}
+
+	internal class DynamicIndexSettingsFormatter : IJsonFormatter<IDynamicIndexSettings>
 	{
 		private static readonly IndexSettingsDictionaryFormatter Formatter = new IndexSettingsDictionaryFormatter();
 
@@ -22,7 +34,11 @@ namespace Nest
 
 		public void Serialize(ref JsonWriter writer, IDynamicIndexSettings value, IJsonFormatterResolver formatterResolver)
 		{
-			if (value == null) return;
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
 
 			IDictionary<string, object> d = value;
 
