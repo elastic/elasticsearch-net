@@ -6,7 +6,7 @@ namespace Nest
 {
 	internal class PropertyFormatter : IJsonFormatter<IProperty>
 	{
-		private static readonly AutomataDictionary _automataDictionary = new AutomataDictionary
+		private static readonly AutomataDictionary AutomataDictionary = new AutomataDictionary
 		{
 			{ "type", 0 },
 			{ "properties", 1 }
@@ -24,7 +24,7 @@ namespace Nest
 			while (segmentReader.ReadIsInObject(ref count))
 			{
 				var propertyName = segmentReader.ReadPropertyNameSegmentRaw();
-				if (_automataDictionary.TryGetValue(propertyName, out var value))
+				if (AutomataDictionary.TryGetValue(propertyName, out var value))
 				{
 					switch (value)
 					{
@@ -85,7 +85,104 @@ namespace Nest
 			return null;
 		}
 
-		public void Serialize(ref JsonWriter writer, IProperty value, IJsonFormatterResolver formatterResolver) => throw new NotSupportedException();
+		public void Serialize(ref JsonWriter writer, IProperty value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
+
+			switch (value.Type)
+			{
+				case "text":
+					Serialize<ITextProperty>(ref writer, value, formatterResolver);
+					break;
+				case "keyword":
+					Serialize<IKeywordProperty>(ref writer, value, formatterResolver);
+					break;
+				case "float":
+				case "double":
+				case "byte":
+				case "short":
+				case "integer":
+				case "long":
+				case "scaled_float":
+				case "half_float":
+					Serialize<INumberProperty>(ref writer, value, formatterResolver);
+					break;
+				case "date":
+					Serialize<IDateProperty>(ref writer, value, formatterResolver);
+					break;
+				case "boolean":
+					Serialize<IBooleanProperty>(ref writer, value, formatterResolver);
+					break;
+				case "binary":
+					Serialize<IBinaryProperty>(ref writer, value, formatterResolver);
+					break;
+				case "object":
+					Serialize<IObjectProperty>(ref writer, value, formatterResolver);
+					break;
+				case "nested":
+					Serialize<INestedProperty>(ref writer, value, formatterResolver);
+					break;
+				case "ip":
+					Serialize<IIpProperty>(ref writer, value, formatterResolver);
+					break;
+				case "geo_point":
+					Serialize<IGeoPointProperty>(ref writer, value, formatterResolver);
+					break;
+				case "geo_shape":
+					Serialize<IGeoShapeProperty>(ref writer, value, formatterResolver);
+					break;
+				case "completion":
+					Serialize<ICompletionProperty>(ref writer, value, formatterResolver);
+					break;
+				case "token_count":
+					Serialize<ITokenCountProperty>(ref writer, value, formatterResolver);
+					break;
+				case "murmur3":
+					Serialize<IMurmur3HashProperty>(ref writer, value, formatterResolver);
+					break;
+				case "percolator":
+					Serialize<IPercolatorProperty>(ref writer, value, formatterResolver);
+					break;
+				case "date_range":
+					Serialize<IDateRangeProperty>(ref writer, value, formatterResolver);
+					break;
+				case "double_range":
+					Serialize<IDoubleRangeProperty>(ref writer, value, formatterResolver);
+					break;
+				case "float_range":
+					Serialize<IFloatRangeProperty>(ref writer, value, formatterResolver);
+					break;
+				case "integer_range":
+					Serialize<IIntegerRangeProperty>(ref writer, value, formatterResolver);
+					break;
+				case "long_range":
+					Serialize<ILongRangeProperty>(ref writer, value, formatterResolver);
+					break;
+				case "ip_range":
+					Serialize<IIpRangeProperty>(ref writer, value, formatterResolver);
+					break;
+				case "join":
+					Serialize<IJoinProperty>(ref writer, value, formatterResolver);
+					break;
+				case "alias":
+					Serialize<IFieldAliasProperty>(ref writer, value, formatterResolver);
+					break;
+				default:
+					Serialize<IProperty>(ref writer, value, formatterResolver);
+					break;
+			}
+		}
+
+		private static void Serialize<TProperty>(ref JsonWriter writer, IProperty value, IJsonFormatterResolver formatterResolver)
+			where TProperty : class, IProperty
+		{
+			var formatter = formatterResolver.GetFormatter<TProperty>();
+			formatter.Serialize(ref writer, value as TProperty, formatterResolver);
+		}
 
 		private static TProperty Deserialize<TProperty>(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 			where TProperty : IProperty

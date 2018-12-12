@@ -89,7 +89,7 @@ namespace Tests.Core.Serialization
 
 			deserializationResult = Tester.Deserializes<T>(serializationResult.Serialized, PreserveNullInExpected);
 			deserializationResult.ShouldBeValid($"{origin} did not deserialize into {typeof(T).Name} a 2nd time");
-			assert?.Invoke("seond deserialization", deserializationResult.Result);
+			assert?.Invoke("second deserialization", deserializationResult.Result);
 			return deserializationResult.Result;
 		}
 

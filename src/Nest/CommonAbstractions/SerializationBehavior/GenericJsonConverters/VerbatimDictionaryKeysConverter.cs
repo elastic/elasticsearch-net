@@ -194,13 +194,22 @@ namespace Nest
 //		}
 //	}
 
-	internal class VerbatimDictionaryKeysFormatter<TIsADictionary, TKey, TValue> : VerbatimDictionaryKeysFormatter<TKey, TValue>
-		where TIsADictionary : IIsADictionary<TKey, TValue>
+	internal class VerbatimDictionaryKeysFormatter<TDictionary, TInterface, TKey, TValue> : IJsonFormatter<TInterface>
+		where TDictionary : TInterface, IIsADictionary<TKey, TValue>
+		where TInterface : IIsADictionary<TKey, TValue>
 	{
-		public override IDictionary<TKey, TValue> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		private static readonly VerbatimDictionaryKeysFormatter<TKey, TValue> DictionaryFormatter =
+			new VerbatimDictionaryKeysFormatter<TKey, TValue>();
+
+		public void Serialize(ref JsonWriter writer, TInterface value, IJsonFormatterResolver formatterResolver)
 		{
-			var dictionary = base.Deserialize(ref reader, formatterResolver);
-			return typeof(TIsADictionary).CreateInstance<TIsADictionary>(dictionary);
+			DictionaryFormatter.Serialize(ref writer, value, formatterResolver);
+		}
+
+		public TInterface Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			var dictionary = DictionaryFormatter.Deserialize(ref reader, formatterResolver);
+			return typeof(TDictionary).CreateInstance<TDictionary>(dictionary);
 		}
 	}
 

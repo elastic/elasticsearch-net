@@ -6,7 +6,7 @@ using Utf8Json;
 
 namespace Nest
 {
-	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<PerFieldAnalyzer, Field, string>))]
+	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<PerFieldAnalyzer, IPerFieldAnalyzer, Field, string>))]
 	public interface IPerFieldAnalyzer : IIsADictionary<Field, string> { }
 
 	public class PerFieldAnalyzer : IsADictionaryBase<Field, string>, IPerFieldAnalyzer

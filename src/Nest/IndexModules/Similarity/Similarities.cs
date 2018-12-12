@@ -4,7 +4,7 @@ using Utf8Json;
 
 namespace Nest
 {
-	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<Similarities, string, ISimilarity>))]
+	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<Similarities, ISimilarities, string, ISimilarity>))]
 	public interface ISimilarities : IIsADictionary<string, ISimilarity> { }
 
 	public class Similarities : IsADictionaryBase<string, ISimilarity>, ISimilarities
