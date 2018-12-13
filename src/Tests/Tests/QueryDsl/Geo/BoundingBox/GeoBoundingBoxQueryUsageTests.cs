@@ -42,13 +42,13 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 				{
 					top_left = new
 					{
-						lat = 34.0,
-						lon = -34.0
+						lat = 34,
+						lon = -34
 					},
 					bottom_right = new
 					{
-						lat = -34.0,
-						lon = 34.0
+						lat = -34,
+						lon = 34
 					}
 				}
 			}

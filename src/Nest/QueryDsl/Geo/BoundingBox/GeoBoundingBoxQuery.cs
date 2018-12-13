@@ -152,7 +152,7 @@ namespace Nest
 				if (written)
 					writer.WriteValueSeparator();
 
-				writer.WritePropertyName("distance");
+				writer.WritePropertyName("type");
 				formatterResolver.GetFormatter<GeoExecution>()
 					.Serialize(ref writer, value.Type.Value, formatterResolver);
 				written = true;

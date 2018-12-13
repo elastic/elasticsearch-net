@@ -23,7 +23,7 @@ namespace Tests.QueryDsl.Geo.Distance
 			Field = Infer.Field<Project>(p => p.Location),
 			DistanceType = GeoDistanceType.Arc,
 			Location = new GeoLocation(34, -34),
-			Distance = "200.0m",
+			Distance = "200m",
 			ValidationMethod = GeoValidationMethod.IgnoreMalformed
 		};
 
@@ -33,13 +33,13 @@ namespace Tests.QueryDsl.Geo.Distance
 			{
 				_name = "named_query",
 				boost = 1.1,
-				distance = "200.0m",
+				distance = "200m",
 				distance_type = "arc",
 				validation_method = "ignore_malformed",
 				location = new
 				{
-					lat = 34.0,
-					lon = -34.0
+					lat = 34,
+					lon = -34
 				}
 			}
 		};
@@ -51,7 +51,7 @@ namespace Tests.QueryDsl.Geo.Distance
 				.Field(p => p.Location)
 				.DistanceType(GeoDistanceType.Arc)
 				.Location(34, -34)
-				.Distance("200.0m")
+				.Distance("200m")
 				.ValidationMethod(GeoValidationMethod.IgnoreMalformed)
 			);
 	}

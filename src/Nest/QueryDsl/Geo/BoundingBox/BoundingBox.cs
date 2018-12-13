@@ -5,13 +5,13 @@ namespace Nest
 	[ReadAs(typeof(BoundingBox))]
 	public interface IBoundingBox
 	{
-		[DataMember(Name ="bottom_right")]
+		[DataMember(Name = "bottom_right")]
 		GeoLocation BottomRight { get; set; }
 
-		[DataMember(Name ="top_left")]
+		[DataMember(Name = "top_left")]
 		GeoLocation TopLeft { get; set; }
 
-		[DataMember(Name ="wkt")]
+		[DataMember(Name = "wkt")]
 		string WellKnownText { get; set; }
 	}
 
