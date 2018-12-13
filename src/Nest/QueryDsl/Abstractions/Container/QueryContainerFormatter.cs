@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 using Utf8Json;
 using Utf8Json.Resolvers;
@@ -60,14 +59,41 @@ namespace Nest
 		}
 	}
 
-	internal class QueryContainerCollectionFormatter : IJsonFormatter<IEnumerable<QueryContainer>>
+	public class QueryContainerCollectionFormatter : IJsonFormatter<IEnumerable<QueryContainer>>
 	{
+		public IEnumerable<QueryContainer> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			var formatter = formatterResolver.GetFormatter<QueryContainer>();
+			var token = reader.GetCurrentJsonToken();
+			switch (token) {
+				case JsonToken.BeginArray:
+				{
+					var count = 0;
+					var queryContainers = new List<QueryContainer>();
+					while (reader.ReadIsInArray(ref count))
+						queryContainers.Add(formatter.Deserialize(ref reader, formatterResolver));
+
+					return queryContainers;
+				}
+				case JsonToken.BeginObject:
+				{
+					var queryContainers = new List<QueryContainer>
+					{
+						formatter.Deserialize(ref reader, formatterResolver)
+					};
+
+					return queryContainers;
+				}
+				default:
+					reader.ReadNextBlock();
+					return null;
+			}
+		}
+
 		public void Serialize(ref JsonWriter writer, IEnumerable<QueryContainer> value, IJsonFormatterResolver formatterResolver)
 		{
 			if (value == null)
-			{
 				writer.WriteNull();
-			}
 			else
 			{
 				writer.WriteBeginArray();
@@ -81,9 +107,7 @@ namespace Nest
 					while (e.MoveNext())
 					{
 						if (isFirst)
-						{
 							isFirst = false;
-						}
 						else if (wroteLast)
 						{
 							wroteLast = false;
@@ -104,12 +128,6 @@ namespace Nest
 
 				writer.WriteEndArray();
 			}
-		}
-
-		public IEnumerable<QueryContainer> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
-		{
-			var queryFormatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IEnumerable<QueryContainer>>();
-			return queryFormatter.Deserialize(ref reader, formatterResolver);
 		}
 	}
 }
