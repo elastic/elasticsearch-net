@@ -8,13 +8,12 @@ namespace Nest
 	public interface ITermQuery : IFieldNameQuery
 	{
 		[DataMember(Name ="value")]
-		[JsonFormatter(typeof(SourceWriteFormatter<>))]
+		[JsonFormatter(typeof(SourceWriteFormatter<object>))]
 		object Value { get; set; }
 	}
 
 	public class TermQuery : FieldNameQueryBase, ITermQuery
 	{
-		[JsonFormatter(typeof(SourceWriteFormatter<>))]
 		public object Value { get; set; }
 
 		protected override bool Conditionless => IsConditionless(this);
