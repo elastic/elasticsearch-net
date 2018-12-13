@@ -37,8 +37,8 @@ namespace Tests.QueryDsl.Geo.Polygon
 				{
 					points = new[]
 					{
-						new { lat = 45.0, lon = -45.0 },
-						new { lat = -34.0, lon = 34.0 }
+						new { lat = 45, lon = -45 },
+						new { lat = -34, lon = 34 }
 					}
 				}
 			}
