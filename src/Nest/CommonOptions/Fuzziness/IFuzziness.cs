@@ -3,7 +3,7 @@ using Utf8Json;
 
 namespace Nest
 {
-	[JsonFormatter(typeof(FuzzinessFormatter))]
+	[JsonFormatter(typeof(FuzzinessInterfaceFormatter))]
 	public interface IFuzziness
 	{
 		bool Auto { get; }
