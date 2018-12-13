@@ -9,7 +9,7 @@ namespace Nest
 	/// A query that uses a query parser in order to parse its content
 	/// </summary>
 	[InterfaceDataContract]
-	[ReadAs(typeof(QueryStringQueryDescriptor<object>))]
+	[ReadAs(typeof(QueryStringQuery))]
 	public interface IQueryStringQuery : IQuery
 	{
 		/// <summary>
@@ -184,6 +184,7 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="IQueryStringQuery" />
+	[DataContract]
 	public class QueryStringQuery : QueryBase, IQueryStringQuery
 	{
 		/// <inheritdoc />
