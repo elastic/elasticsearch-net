@@ -18,7 +18,6 @@ namespace Nest
 			var count = 0;
 			while (reader.ReadIsInArray(ref count))
 			{
-				reader.ReadNext();
 				token = reader.GetCurrentJsonToken();
 				switch (token)
 				{
