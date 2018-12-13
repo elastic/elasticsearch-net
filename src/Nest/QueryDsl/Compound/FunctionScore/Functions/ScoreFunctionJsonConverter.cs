@@ -94,27 +94,46 @@ namespace Nest
 		{
 			if (value == null) return;
 
+			var written = false;
+
 			writer.WriteBeginObject();
 			if (value.Filter != null)
 			{
 				writer.WritePropertyName("filter");
 				var formatter = formatterResolver.GetFormatter<QueryContainer>();
 				formatter.Serialize(ref writer, value.Filter, formatterResolver);
+				written = true;
 			}
 
 			switch (value)
 			{
 				case IDecayFunction decayFunction:
+					if (written)
+						writer.WriteValueSeparator();
+
 					WriteDecay(ref writer, decayFunction, formatterResolver);
+					written = true;
 					break;
 				case IFieldValueFactorFunction fieldValueFactorFunction:
+					if (written)
+						writer.WriteValueSeparator();
+
 					WriteFieldValueFactor(ref writer, fieldValueFactorFunction, formatterResolver);
+					written = true;
 					break;
 				case IRandomScoreFunction randomScoreFunction:
+					if (written)
+						writer.WriteValueSeparator();
+
 					WriteRandomScore(ref writer, randomScoreFunction, formatterResolver);
+					written = true;
 					break;
 				case IScriptScoreFunction scriptScoreFunction:
+					if (written)
+						writer.WriteValueSeparator();
+
 					WriteScriptScore(ref writer, scriptScoreFunction, formatterResolver);
+					written = true;
 					break;
 				case IWeightFunction _:
 					break;
@@ -124,6 +143,9 @@ namespace Nest
 
 			if (value.Weight.HasValue)
 			{
+				if(written)
+					writer.WriteValueSeparator();
+
 				writer.WritePropertyName("weight");
 				writer.WriteDouble(value.Weight.Value);
 			}
