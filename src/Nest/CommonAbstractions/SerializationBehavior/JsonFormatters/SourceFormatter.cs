@@ -8,7 +8,7 @@ namespace Nest
 		public override SerializationFormatting? ForceFormatting { get; } = SerializationFormatting.None;
 	}
 
-	internal class SourceFormatter<T> : IJsonFormatter<T>
+	public class SourceFormatter<T> : IJsonFormatter<T>
 	{
 		public virtual SerializationFormatting? ForceFormatting { get; } = null;
 
