@@ -19,7 +19,7 @@ namespace Tests.Core.Serialization
 			if (@object == null) return;
 			if (ExpectJson == null) return;
 
-			if (SupportsDeserialization) Tester.AssertRoundTrip<T>(@object, ExpectJson, preserveNullInExpected: IncludeNullInExpected);
+			if (SupportsDeserialization) Tester.AssertRoundTrip(@object, ExpectJson, preserveNullInExpected: IncludeNullInExpected);
 			else Tester.AssertSerialize(@object, ExpectJson, preserveNullInExpected: IncludeNullInExpected);
 		}
 	}
