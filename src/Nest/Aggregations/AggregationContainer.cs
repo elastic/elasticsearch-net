@@ -69,55 +69,51 @@ namespace Nest
 		private static readonly VerbatimDictionaryKeysFormatter<string, IAggregationContainer> DictionaryKeysFormatter =
 			new VerbatimDictionaryKeysFormatter<string, IAggregationContainer>();
 
-		public void Serialize(ref JsonWriter writer, AggregationDictionary value, IJsonFormatterResolver formatterResolver)
-		{
-			DictionaryKeysFormatter.Serialize(ref writer, value, formatterResolver);
-		}
+		public AggregationDictionary Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
+			new AggregationDictionary(DictionaryKeysFormatter.Deserialize(ref reader, formatterResolver));
 
-		public AggregationDictionary Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
-		{
-			return new AggregationDictionary(DictionaryKeysFormatter.Deserialize(ref reader, formatterResolver));
-		}
+		public void Serialize(ref JsonWriter writer, AggregationDictionary value, IJsonFormatterResolver formatterResolver) =>
+			DictionaryKeysFormatter.Serialize(ref writer, value, formatterResolver);
 	}
 
 	[InterfaceDataContract]
 	[ReadAs(typeof(AggregationContainer))]
 	public interface IAggregationContainer
 	{
-		[DataMember(Name ="adjacency_matrix")]
+		[DataMember(Name = "adjacency_matrix")]
 		IAdjacencyMatrixAggregation AdjacencyMatrix { get; set; }
 
-		[DataMember(Name ="aggs")]
+		[DataMember(Name = "aggs")]
 		AggregationDictionary Aggregations { get; set; }
 
-		[DataMember(Name ="avg")]
+		[DataMember(Name = "avg")]
 		IAverageAggregation Average { get; set; }
 
-		[DataMember(Name ="avg_bucket")]
+		[DataMember(Name = "avg_bucket")]
 		IAverageBucketAggregation AverageBucket { get; set; }
 
-		[DataMember(Name ="bucket_script")]
+		[DataMember(Name = "bucket_script")]
 		IBucketScriptAggregation BucketScript { get; set; }
 
-		[DataMember(Name ="bucket_selector")]
+		[DataMember(Name = "bucket_selector")]
 		IBucketSelectorAggregation BucketSelector { get; set; }
 
-		[DataMember(Name ="bucket_sort")]
+		[DataMember(Name = "bucket_sort")]
 		IBucketSortAggregation BucketSort { get; set; }
 
-		[DataMember(Name ="cardinality")]
+		[DataMember(Name = "cardinality")]
 		ICardinalityAggregation Cardinality { get; set; }
 
-		[DataMember(Name ="children")]
+		[DataMember(Name = "children")]
 		IChildrenAggregation Children { get; set; }
 
-		[DataMember(Name ="composite")]
+		[DataMember(Name = "composite")]
 		ICompositeAggregation Composite { get; set; }
 
-		[DataMember(Name ="cumulative_sum")]
+		[DataMember(Name = "cumulative_sum")]
 		ICumulativeSumAggregation CumulativeSum { get; set; }
 
-		[DataMember(Name ="date_histogram")]
+		[DataMember(Name = "date_histogram")]
 		IDateHistogramAggregation DateHistogram { get; set; }
 
 		[DataMember(Name ="auto_date_histogram")]
@@ -126,125 +122,125 @@ namespace Nest
 		[DataMember(Name = "date_range")]
 		IDateRangeAggregation DateRange { get; set; }
 
-		[DataMember(Name ="derivative")]
+		[DataMember(Name = "derivative")]
 		IDerivativeAggregation Derivative { get; set; }
 
-		[DataMember(Name ="extended_stats")]
+		[DataMember(Name = "extended_stats")]
 		IExtendedStatsAggregation ExtendedStats { get; set; }
 
-		[DataMember(Name ="extended_stats_bucket")]
+		[DataMember(Name = "extended_stats_bucket")]
 		IExtendedStatsBucketAggregation ExtendedStatsBucket { get; set; }
 
-		[DataMember(Name ="filter")]
+		[DataMember(Name = "filter")]
 		IFilterAggregation Filter { get; set; }
 
-		[DataMember(Name ="filters")]
+		[DataMember(Name = "filters")]
 		IFiltersAggregation Filters { get; set; }
 
-		[DataMember(Name ="geo_bounds")]
+		[DataMember(Name = "geo_bounds")]
 		IGeoBoundsAggregation GeoBounds { get; set; }
 
-		[DataMember(Name ="geo_centroid")]
+		[DataMember(Name = "geo_centroid")]
 		IGeoCentroidAggregation GeoCentroid { get; set; }
 
-		[DataMember(Name ="geo_distance")]
+		[DataMember(Name = "geo_distance")]
 		IGeoDistanceAggregation GeoDistance { get; set; }
 
-		[DataMember(Name ="geohash_grid")]
+		[DataMember(Name = "geohash_grid")]
 		IGeoHashGridAggregation GeoHash { get; set; }
 
-		[DataMember(Name ="global")]
+		[DataMember(Name = "global")]
 		IGlobalAggregation Global { get; set; }
 
-		[DataMember(Name ="histogram")]
+		[DataMember(Name = "histogram")]
 		IHistogramAggregation Histogram { get; set; }
 
-		[DataMember(Name ="ip_range")]
+		[DataMember(Name = "ip_range")]
 		IIpRangeAggregation IpRange { get; set; }
 
-		[DataMember(Name ="matrix_stats")]
+		[DataMember(Name = "matrix_stats")]
 		IMatrixStatsAggregation MatrixStats { get; set; }
 
-		[DataMember(Name ="max")]
+		[DataMember(Name = "max")]
 		IMaxAggregation Max { get; set; }
 
-		[DataMember(Name ="max_bucket")]
+		[DataMember(Name = "max_bucket")]
 		IMaxBucketAggregation MaxBucket { get; set; }
 
-		[DataMember(Name ="meta")]
+		[DataMember(Name = "meta")]
 		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, object>))]
 		IDictionary<string, object> Meta { get; set; }
 
-		[DataMember(Name ="min")]
+		[DataMember(Name = "min")]
 		IMinAggregation Min { get; set; }
 
-		[DataMember(Name ="min_bucket")]
+		[DataMember(Name = "min_bucket")]
 		IMinBucketAggregation MinBucket { get; set; }
 
-		[DataMember(Name ="missing")]
+		[DataMember(Name = "missing")]
 		IMissingAggregation Missing { get; set; }
 
-		[DataMember(Name ="moving_avg")]
+		[DataMember(Name = "moving_avg")]
 		IMovingAverageAggregation MovingAverage { get; set; }
 
-		[DataMember(Name ="moving_fn")]
+		[DataMember(Name = "moving_fn")]
 		IMovingFunctionAggregation MovingFunction { get; set; }
 
-		[DataMember(Name ="nested")]
+		[DataMember(Name = "nested")]
 		INestedAggregation Nested { get; set; }
 
-		[DataMember(Name ="percentile_ranks")]
+		[DataMember(Name = "percentile_ranks")]
 		IPercentileRanksAggregation PercentileRanks { get; set; }
 
-		[DataMember(Name ="percentiles")]
+		[DataMember(Name = "percentiles")]
 		IPercentilesAggregation Percentiles { get; set; }
 
-		[DataMember(Name ="percentiles_bucket")]
+		[DataMember(Name = "percentiles_bucket")]
 		IPercentilesBucketAggregation PercentilesBucket { get; set; }
 
-		[DataMember(Name ="range")]
+		[DataMember(Name = "range")]
 		IRangeAggregation Range { get; set; }
 
-		[DataMember(Name ="reverse_nested")]
+		[DataMember(Name = "reverse_nested")]
 		IReverseNestedAggregation ReverseNested { get; set; }
 
-		[DataMember(Name ="sampler")]
+		[DataMember(Name = "sampler")]
 		ISamplerAggregation Sampler { get; set; }
 
-		[DataMember(Name ="scripted_metric")]
+		[DataMember(Name = "scripted_metric")]
 		IScriptedMetricAggregation ScriptedMetric { get; set; }
 
-		[DataMember(Name ="serial_diff")]
+		[DataMember(Name = "serial_diff")]
 		ISerialDifferencingAggregation SerialDifferencing { get; set; }
 
-		[DataMember(Name ="significant_terms")]
+		[DataMember(Name = "significant_terms")]
 		ISignificantTermsAggregation SignificantTerms { get; set; }
 
-		[DataMember(Name ="significant_text")]
+		[DataMember(Name = "significant_text")]
 		ISignificantTextAggregation SignificantText { get; set; }
 
-		[DataMember(Name ="stats")]
+		[DataMember(Name = "stats")]
 		IStatsAggregation Stats { get; set; }
 
-		[DataMember(Name ="stats_bucket")]
+		[DataMember(Name = "stats_bucket")]
 		IStatsBucketAggregation StatsBucket { get; set; }
 
-		[DataMember(Name ="sum")]
+		[DataMember(Name = "sum")]
 		ISumAggregation Sum { get; set; }
 
-		[DataMember(Name ="sum_bucket")]
+		[DataMember(Name = "sum_bucket")]
 		ISumBucketAggregation SumBucket { get; set; }
 
-		[DataMember(Name ="terms")]
+		[DataMember(Name = "terms")]
 		ITermsAggregation Terms { get; set; }
 
-		[DataMember(Name ="top_hits")]
+		[DataMember(Name = "top_hits")]
 		ITopHitsAggregation TopHits { get; set; }
 
-		[DataMember(Name ="value_count")]
+		[DataMember(Name = "value_count")]
 		IValueCountAggregation ValueCount { get; set; }
 
-		[DataMember(Name ="weighted_avg")]
+		[DataMember(Name = "weighted_avg")]
 		IWeightedAverageAggregation WeightedAverage { get; set; }
 
 		void Accept(IAggregationVisitor visitor);
@@ -759,7 +755,8 @@ namespace Nest
 			_SetInnerAggregation(name, selector, (a, d) => a.WeightedAverage = d);
 
 		/// <summary>
-		/// Fluent methods do not assign to properties on `this` directly but on IAggregationContainers inside `this.Aggregations[string, IContainer]
+		/// Fluent methods do not assign to properties on `this` directly but on IAggregationContainers inside
+		/// `this.Aggregations[string, IContainer]
 		/// </summary>
 		private AggregationContainerDescriptor<T> _SetInnerAggregation<TAggregator, TAggregatorInterface>(
 			string key,
