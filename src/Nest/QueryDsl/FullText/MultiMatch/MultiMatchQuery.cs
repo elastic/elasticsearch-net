@@ -8,7 +8,7 @@ namespace Nest
 	/// A match query across multiple fields.
 	/// </summary>
 	[InterfaceDataContract]
-	[ReadAs(typeof(MultiMatchQueryDescriptor<object>))]
+	[ReadAs(typeof(MultiMatchQuery))]
 	public interface IMultiMatchQuery : IQuery
 	{
 		/// <summary>
