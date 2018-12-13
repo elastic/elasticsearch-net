@@ -52,11 +52,11 @@ namespace Tests.Core.Serialization
 
 	public class RoundTripResult<T> : DeserializationResult<T>
 	{
-		public int Itterations { get; set; }
+		public int Iterations { get; set; }
 
 		public override string ToString()
 		{
-			var s = $"RoundTrip: {Itterations.ToOrdinal()} itteration";
+			var s = $"RoundTrip: {Iterations.ToOrdinal()} iteration";
 			s += Environment.NewLine;
 			s += base.ToString();
 			return s;
@@ -95,7 +95,7 @@ namespace Tests.Core.Serialization
 				return result;
 
 			@object = Deserialize<T>(result.Serialized);
-			result.Itterations += 1;
+			result.Iterations += 1;
 
 			if (!SerializesAndMatches(@object, expectedJsonToken, result))
 				return result;
@@ -158,7 +158,7 @@ namespace Tests.Core.Serialization
 				: TokenMatches(expectedJsonToken, result);
 		}
 
-		private string SerializeUsingClientDefault(object o)
+		private string SerializeUsingClientDefault<T>(T o)
 		{
 			switch (o)
 			{
@@ -192,7 +192,7 @@ namespace Tests.Core.Serialization
 		{
 			var actualJson = itemJson ?? result.Serialized;
 			var message = "This is the first time I am serializing";
-			if (result.Itterations > 0)
+			if (result.Iterations > 0)
 				message = "This is the second time I am serializing, this usually indicates a problem when deserializing";
 			if (item > -1) message += $". This is while comparing the {item.ToOrdinal()} item";
 
