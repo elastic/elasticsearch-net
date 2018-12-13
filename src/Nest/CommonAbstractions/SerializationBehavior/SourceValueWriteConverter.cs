@@ -6,7 +6,7 @@ using Utf8Json;
 
 namespace Nest
 {
-	internal class SourceWriteFormatter<T> : SourceFormatter<T>
+	public class SourceWriteFormatter<T> : SourceFormatter<T>
 	{
 		public override void Serialize(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver)
 		{
