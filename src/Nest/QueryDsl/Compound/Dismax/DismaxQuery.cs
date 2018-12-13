@@ -17,6 +17,7 @@ namespace Nest
 		double? TieBreaker { get; set; }
 	}
 
+	[DataContract]
 	public class DisMaxQuery : QueryBase, IDisMaxQuery
 	{
 		public IEnumerable<QueryContainer> Queries { get; set; }
@@ -28,6 +29,7 @@ namespace Nest
 		internal static bool IsConditionless(IDisMaxQuery q) => q.Queries.NotWritable();
 	}
 
+	[DataContract]
 	public class DisMaxQueryDescriptor<T>
 		: QueryDescriptorBase<DisMaxQueryDescriptor<T>, IDisMaxQuery>
 			, IDisMaxQuery where T : class

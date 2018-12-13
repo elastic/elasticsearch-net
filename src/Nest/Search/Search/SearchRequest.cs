@@ -78,8 +78,10 @@ namespace Nest
 	}
 
 	[ReadAs(typeof(SearchRequest<>))]
+	[InterfaceDataContract]
 	public partial interface ISearchRequest<T> : ISearchRequest { }
 
+	[DataContract]
 	public partial class SearchRequest
 	{
 		public Fields StoredFields { get; set; }
@@ -121,6 +123,7 @@ namespace Nest
 		protected sealed override void Initialize() => TypedKeys = true;
 	}
 
+	[DataContract]
 	public partial class SearchRequest<T> : ISearchRequest<T>
 	{
 		Type ICovariantSearchRequest.ClrType => typeof(T);
@@ -129,6 +132,7 @@ namespace Nest
 	/// <summary>
 	/// A descriptor which describes a search operation for _search and _msearch
 	/// </summary>
+	[DataContract]
 	public partial class SearchDescriptor<T> where T : class
 	{
 		protected override HttpMethod HttpMethod =>
