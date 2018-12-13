@@ -127,7 +127,7 @@ namespace Tests.QueryDsl.Compound.Bool
 					new { match_all = new { } }
 				},
 				minimum_should_match = 1,
-				boost = 2.0,
+				boost = 2,
 			}
 		};
 
