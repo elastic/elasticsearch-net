@@ -1,5 +1,8 @@
-﻿namespace Nest
+﻿using Utf8Json;
+
+namespace Nest
 {
+	[JsonFormatter(typeof(FuzzinessFormatter))]
 	public class Fuzziness : IFuzziness
 	{
 		private bool _auto;
