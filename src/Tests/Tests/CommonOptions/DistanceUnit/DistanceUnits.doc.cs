@@ -28,7 +28,7 @@ namespace Tests.CommonOptions.DistanceUnit
 			* `Distance` serializes to a string composed of a factor and distance unit.
 			* The factor is a double so always has at least one decimal place when serialized
 			*/
-			Expect("25.0m")
+			Expect("25m")
 				.WhenSerializing(unitComposed)
 				.WhenSerializing(unitComposedWithUnits);
 		}
@@ -44,7 +44,7 @@ namespace Tests.CommonOptions.DistanceUnit
 			Distance distanceString = "25";
 			Distance distanceStringWithUnits = "25m";
 
-			Expect("25.0m")
+			Expect("25m")
 				.WhenSerializing(distanceString)
 				.WhenSerializing(distanceStringWithUnits);
 		}
@@ -59,7 +59,7 @@ namespace Tests.CommonOptions.DistanceUnit
 			/** ===== Metric
 			*`mm` (Millimeters)
 			*/
-			Expect("2.0mm").WhenSerializing(new Distance(2, Nest.DistanceUnit.Millimeters));
+			Expect("2mm").WhenSerializing(new Distance(2, Nest.DistanceUnit.Millimeters));
 
 			/**
 			*`cm` (Centimeters)
@@ -69,7 +69,7 @@ namespace Tests.CommonOptions.DistanceUnit
 			/**
 			*`m` (Meters)
 			*/
-			Expect("400.0m").WhenSerializing(new Distance(400, Nest.DistanceUnit.Meters));
+			Expect("400m").WhenSerializing(new Distance(400, Nest.DistanceUnit.Meters));
 
 			/**
 			*`km` (Kilometers)
@@ -89,7 +89,7 @@ namespace Tests.CommonOptions.DistanceUnit
 			/**
 			*`yd` (Yards)
 			*/
-			Expect("9.0yd").WhenSerializing(new Distance(9, Nest.DistanceUnit.Yards));
+			Expect("9yd").WhenSerializing(new Distance(9, Nest.DistanceUnit.Yards));
 
 			/**
 			*`mi` (Miles)
