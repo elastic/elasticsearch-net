@@ -8,7 +8,6 @@ namespace Nest
 	public class Watch
 	{
 		[DataMember(Name ="actions")]
-		[JsonFormatter(typeof(ActionsFormatter))]
 		public Actions Actions { get; internal set; }
 
 		[DataMember(Name ="condition")]
