@@ -1,7 +1,5 @@
 using System;
 using Utf8Json;
-using static Nest.DateTimeUtil;
-
 
 namespace Nest
 {
@@ -13,7 +11,7 @@ namespace Nest
 				return null;
 
 			var secondsSinceEpoch = reader.ReadDouble();
-			var dateTimeOffset = Epoch.AddSeconds(secondsSinceEpoch);
+			var dateTimeOffset = DateTimeUtil.Epoch.AddSeconds(secondsSinceEpoch);
 			return dateTimeOffset;
 		}
 
@@ -25,7 +23,7 @@ namespace Nest
 				return;
 			}
 
-			var dateTimeOffsetDifference = (value.Value - Epoch).TotalSeconds;
+			var dateTimeOffsetDifference = (value.Value - DateTimeUtil.Epoch).TotalSeconds;
 			writer.WriteInt64((long)dateTimeOffsetDifference);
 		}
 	}

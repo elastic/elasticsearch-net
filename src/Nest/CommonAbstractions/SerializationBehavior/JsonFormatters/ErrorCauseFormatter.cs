@@ -6,9 +6,9 @@ using Utf8Json;
 
 namespace Nest
 {
-	internal class ErrorCauseJsonConverter : ErrorCauseJsonConverter<ErrorCause> { }
+	internal class ErrorCauseFormatter : ErrorCauseFormatter<ErrorCause> { }
 
-	internal class ErrorCauseJsonConverter<TErrorCause> : IJsonFormatter<TErrorCause>
+	internal class ErrorCauseFormatter<TErrorCause> : IJsonFormatter<TErrorCause>
 		where TErrorCause : ErrorCause, new()
 	{
 		public TErrorCause Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>

@@ -44,7 +44,7 @@ namespace Nest
 					new QueryContainerCollectionFormatter(),
 					new SimpleQueryStringFlagsFormatter(),
 					// TODO: condition on these to only take effect when StringTimeSpanAttribute not present.
-					new TimeSpanToStringConverter(),
+					new TimeSpanToStringFormatter(),
 					new NullableTimeSpanFormatter(),
 				}, new IJsonFormatterResolver[0]),
 				BuiltinResolver.Instance, // Builtin
