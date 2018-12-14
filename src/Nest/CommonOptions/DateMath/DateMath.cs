@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using Utf8Json;
+using Utf8Json.Formatters;
 
 namespace Nest
 {
@@ -89,7 +90,7 @@ namespace Nest
 
 			var sb = new StringBuilder();
 			var anchor = Self.Anchor.Match(
-				d => JsonSerializer.ToJsonString(d) + separator,
+				d => d.ToString("yyyy-MM-ddTHH:mm:ss") + separator,
 				s => s == "now" || s.EndsWith("||", StringComparison.Ordinal) ? s : s + separator
 			);
 			sb.Append(anchor);
@@ -114,20 +115,19 @@ namespace Nest
 			if (token != JsonToken.String)
 				return null;
 
-			var value = reader.ReadString();
-
-			if (string.IsNullOrEmpty(value))
-				return null;
+			var segment = reader.ReadStringSegmentUnsafe();
+			var segmentReader = new JsonReader(segment.Array, segment.Offset - 1); // include opening "
 
 			try
 			{
 				// TODO: possibly nicer way of doing this than brute try?
-				var dateTime = JsonSerializer.Deserialize<DateTime>(value, formatterResolver);
+				var dateTime = ISO8601DateTimeFormatter.Default.Deserialize(ref segmentReader, formatterResolver);
 				return DateMath.Anchored(dateTime);
 			}
-			catch
+			catch (InvalidOperationException)
 			{
-				return DateMath.FromString(reader.ReadString());
+				var value = segment.Utf8String();
+				return DateMath.FromString(value);
 			}
 		}
 
