@@ -8,7 +8,8 @@ namespace Nest
 	{
 		public static InternalSerializer CreateStateful<T>(this IConnectionSettingsValues settings, IJsonFormatter<T> formatter)
 		{
-			var formatterResolver = new StatefulFormatterResolver<T>(formatter, JsonSerializer.DefaultResolver);
+			var currentFormatterResolver = ((InternalSerializer)settings.RequestResponseSerializer).FormatterResolver;
+			var formatterResolver = new StatefulFormatterResolver<T>(formatter, currentFormatterResolver);
 			return StatefulSerializerFactory.CreateStateful(settings, formatterResolver);
 		}
 	}

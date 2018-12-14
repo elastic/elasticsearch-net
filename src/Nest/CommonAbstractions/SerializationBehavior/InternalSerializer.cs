@@ -13,8 +13,6 @@ namespace Nest
 	{
 		internal const int DefaultBufferSize = 1024;
 
-		internal static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
-
 		public InternalSerializer(IConnectionSettingsValues settings, IJsonFormatterResolver formatterResolver)
 		{
 			Settings = settings;
@@ -53,7 +51,6 @@ namespace Nest
 
 			return JsonSerializer.DeserializeAsync<T>(stream, FormatterResolver);
 		}
-
 
 		public Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default(CancellationToken))
 		{
