@@ -32,7 +32,7 @@ namespace Nest
 		public NodeIngestStats Ingest { get; internal set; }
 
 		[DataMember(Name = "ip")]
-		[JsonFormatter(typeof(ReadSingleOrEnumerableFormatter<string>))]
+		[JsonFormatter(typeof(SingleOrEnumerableFormatter<string>))]
 		public IEnumerable<string> Ip { get; internal set; }
 
 		[DataMember(Name = "jvm")]

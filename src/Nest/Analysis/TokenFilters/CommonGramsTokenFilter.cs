@@ -14,7 +14,7 @@ namespace Nest
 		/// A list of common words to use.
 		/// </summary>
 		[DataMember(Name ="common_words")]
-		[JsonFormatter(typeof(ReadSingleOrEnumerableFormatter<string>))]
+		[JsonFormatter(typeof(SingleOrEnumerableFormatter<string>))]
 		IEnumerable<string> CommonWords { get; set; }
 
 		/// <summary>

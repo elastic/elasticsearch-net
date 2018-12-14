@@ -9,11 +9,11 @@ namespace Nest
 	public interface ITimeOfMonth
 	{
 		[DataMember(Name ="at")]
-		[JsonFormatter(typeof(ReadSingleOrEnumerableFormatter<string>))]
+		[JsonFormatter(typeof(SingleOrEnumerableFormatter<string>))]
 		IEnumerable<string> At { get; set; }
 
 		[DataMember(Name ="on")]
-		[JsonFormatter(typeof(ReadSingleOrEnumerableFormatter<int>))]
+		[JsonFormatter(typeof(SingleOrEnumerableFormatter<int>))]
 		IEnumerable<int> On { get; set; }
 	}
 

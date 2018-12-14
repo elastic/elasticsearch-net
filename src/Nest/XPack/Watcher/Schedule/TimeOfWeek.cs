@@ -9,11 +9,11 @@ namespace Nest
 	public interface ITimeOfWeek
 	{
 		[DataMember(Name ="at")]
-		[JsonFormatter(typeof(ReadSingleOrEnumerableFormatter<string>))]
+		[JsonFormatter(typeof(SingleOrEnumerableFormatter<string>))]
 		IEnumerable<string> At { get; set; }
 
 		[DataMember(Name ="on")]
-		[JsonFormatter(typeof(ReadSingleOrEnumerableFormatter<Day>))]
+		[JsonFormatter(typeof(SingleOrEnumerableFormatter<Day>))]
 		IEnumerable<Day> On { get; set; }
 	}
 

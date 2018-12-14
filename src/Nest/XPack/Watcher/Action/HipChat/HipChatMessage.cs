@@ -24,11 +24,11 @@ namespace Nest
 		bool? Notify { get; set; }
 
 		[DataMember(Name = "room")]
-		[JsonFormatter(typeof(ReadSingleOrEnumerableFormatter<string>))]
+		[JsonFormatter(typeof(SingleOrEnumerableFormatter<string>))]
 		IEnumerable<string> Room { get; set; }
 
 		[DataMember(Name = "user")]
-		[JsonFormatter(typeof(ReadSingleOrEnumerableFormatter<string>))]
+		[JsonFormatter(typeof(SingleOrEnumerableFormatter<string>))]
 		IEnumerable<string> User { get; set; }
 	}
 
