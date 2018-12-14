@@ -108,7 +108,52 @@ namespace Nest
 			return scriptCondition;
 		}
 
-		public void Serialize(ref JsonWriter writer, IScriptCondition value, IJsonFormatterResolver formatterResolver) =>
-			throw new NotSupportedException();
+		public void Serialize(ref JsonWriter writer, IScriptCondition value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
+
+			writer.WriteBeginObject();
+			var written = false;
+
+			switch (value)
+			{
+				case IIndexedScriptCondition indexedScriptCondition:
+					writer.WritePropertyName("id");
+					writer.WriteString(indexedScriptCondition.Id);
+					written = true;
+					break;
+				case IInlineScriptCondition inlineScriptCondition:
+					writer.WritePropertyName("source");
+					writer.WriteString(inlineScriptCondition.Source);
+					written = true;
+					break;
+			}
+
+			if (value.Lang != null)
+			{
+				if (written)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName("lang");
+				writer.WriteString(value.Lang);
+				written = true;
+			}
+
+			if (value.Params != null)
+			{
+				if (written)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName("params");
+				var formatter = formatterResolver.GetFormatter<IDictionary<string, object>>();
+				formatter.Serialize(ref writer, value.Params, formatterResolver);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 }

@@ -10,7 +10,6 @@ namespace Nest
 	public class IWatch
 	{
 		[DataMember(Name ="actions")]
-		[JsonFormatter(typeof(ActionsFormatter))]
 		public Actions Actions { get; internal set; }
 
 		[DataMember(Name ="condition")]
