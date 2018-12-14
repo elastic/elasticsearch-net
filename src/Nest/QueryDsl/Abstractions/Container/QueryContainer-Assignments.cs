@@ -330,9 +330,10 @@ namespace Nest
 
 		private T Set<T>(T value) where T : IQuery
 		{
-			if (ContainedQuery != null && value != null)
+			if (ContainedQuery != null)
 				throw new Exception(
-					$"{nameof(QueryContainer)} can only hold a single query; Instance already contains a {ContainedQuery.GetType().Name}");
+					$"Cannot assign {typeof(T).Name} to {nameof(QueryContainer)}. "
+					+ $"It can only hold a single query and already contains a {ContainedQuery.GetType().Name}");
 
 			ContainedQuery = value;
 			return value;
