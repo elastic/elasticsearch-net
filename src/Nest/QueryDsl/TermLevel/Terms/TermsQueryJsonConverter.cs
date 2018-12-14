@@ -68,78 +68,78 @@ namespace Nest
 			var field = settings.Inferrer.Field(value.Field);
 			var written = false;
 			writer.WriteBeginObject();
+
+			if (value.IsVerbatim)
 			{
-				if (value.IsVerbatim)
+				if (value.TermsLookup != null)
 				{
-					if (value.TermsLookup != null)
-					{
-						writer.WritePropertyName(field);
-						var formatter = formatterResolver.GetFormatter<IFieldLookup>();
-						formatter.Serialize(ref writer, value.TermsLookup, formatterResolver);
-						written = true;
-					}
-					else if (value.Terms != null)
-					{
-						writer.WritePropertyName(field);
-						writer.WriteBeginArray();
-						var count = 0;
-						foreach (var o in value.Terms)
-						{
-							if (count > 0)
-								writer.WriteValueSeparator();
-
-							SourceWriteFormatter.Serialize(ref writer, o, formatterResolver);
-							count++;
-						}
-						writer.WriteEndArray();
-						written = true;
-					}
-				}
-				else
-				{
-					if (value.Terms.HasAny())
-					{
-						writer.WritePropertyName(field);
-						writer.WriteBeginArray();
-						var count = 0;
-						foreach (var o in value.Terms)
-						{
-							if (count > 0)
-								writer.WriteValueSeparator();
-
-							SourceWriteFormatter.Serialize(ref writer, o, formatterResolver);
-							count++;
-						}
-						writer.WriteEndArray();
-						written = true;
-					}
-					else if (value.TermsLookup != null)
-					{
-						writer.WritePropertyName(field);
-						var formatter = formatterResolver.GetFormatter<IFieldLookup>();
-						formatter.Serialize(ref writer, value.TermsLookup, formatterResolver);
-						written = true;
-					}
-				}
-
-				if (value.Boost.HasValue)
-				{
-					if (written)
-						writer.WriteValueSeparator();
-
-					writer.WritePropertyName("boost");
-					writer.WriteDouble(value.Boost.Value);
+					writer.WritePropertyName(field);
+					var formatter = formatterResolver.GetFormatter<IFieldLookup>();
+					formatter.Serialize(ref writer, value.TermsLookup, formatterResolver);
 					written = true;
 				}
-				if (!value.Name.IsNullOrEmpty())
+				else if (value.Terms != null)
 				{
-					if (written)
-						writer.WriteValueSeparator();
+					writer.WritePropertyName(field);
+					writer.WriteBeginArray();
+					var count = 0;
+					foreach (var o in value.Terms)
+					{
+						if (count > 0)
+							writer.WriteValueSeparator();
 
-					writer.WritePropertyName("_name");
-					writer.WriteString(value.Name);
+						SourceWriteFormatter.Serialize(ref writer, o, formatterResolver);
+						count++;
+					}
+					writer.WriteEndArray();
+					written = true;
 				}
 			}
+			else
+			{
+				if (value.Terms.HasAny())
+				{
+					writer.WritePropertyName(field);
+					writer.WriteBeginArray();
+					var count = 0;
+					foreach (var o in value.Terms)
+					{
+						if (count > 0)
+							writer.WriteValueSeparator();
+
+						SourceWriteFormatter.Serialize(ref writer, o, formatterResolver);
+						count++;
+					}
+					writer.WriteEndArray();
+					written = true;
+				}
+				else if (value.TermsLookup != null)
+				{
+					writer.WritePropertyName(field);
+					var formatter = formatterResolver.GetFormatter<IFieldLookup>();
+					formatter.Serialize(ref writer, value.TermsLookup, formatterResolver);
+					written = true;
+				}
+			}
+
+			if (value.Boost.HasValue)
+			{
+				if (written)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName("boost");
+				writer.WriteDouble(value.Boost.Value);
+				written = true;
+			}
+			if (!value.Name.IsNullOrEmpty())
+			{
+				if (written)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName("_name");
+				writer.WriteString(value.Name);
+			}
+
 			writer.WriteEndObject();
 		}
 
