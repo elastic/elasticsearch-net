@@ -159,14 +159,50 @@ namespace Nest
 						writer.WriteValueSeparator();
 					}
 					writer.WritePropertyName(kvp.Value.ActionType.GetStringValue());
-					var actionFormatter = formatterResolver.GetFormatter<IAction>();
-					actionFormatter.Serialize(ref writer, action, formatterResolver);
-					writer.WriteEndObject();
 
+					switch (action.ActionType)
+					{
+						case ActionType.Email:
+							Serialize<IEmailAction>(ref writer, action, formatterResolver);
+							break;
+						case ActionType.Webhook:
+							Serialize<IWebhookAction>(ref writer, action, formatterResolver);
+							break;
+						case ActionType.Index:
+							Serialize<IIndexAction>(ref writer, action, formatterResolver);
+							break;
+						case ActionType.Logging:
+							Serialize<ILoggingAction>(ref writer, action, formatterResolver);
+							break;
+						case ActionType.HipChat:
+							Serialize<IHipChatAction>(ref writer, action, formatterResolver);
+							break;
+						case ActionType.Slack:
+							Serialize<ISlackAction>(ref writer, action, formatterResolver);
+							break;
+						case ActionType.PagerDuty:
+							Serialize<IPagerDutyAction>(ref writer, action, formatterResolver);
+							break;
+						default:
+							var actionFormatter = formatterResolver.GetFormatter<IAction>();
+							actionFormatter.Serialize(ref writer, action, formatterResolver);
+							break;
+
+					}
+
+					writer.WriteEndObject();
 					count++;
 				}
 			}
 			writer.WriteEndObject();
 		}
+
+		private static void Serialize<TAction>(ref JsonWriter writer, IAction value, IJsonFormatterResolver formatterResolver)
+			where TAction : class, IAction
+		{
+			var formatter = formatterResolver.GetFormatter<TAction>();
+			formatter.Serialize(ref writer, value as TAction, formatterResolver);
+		}
+
 	}
 }
