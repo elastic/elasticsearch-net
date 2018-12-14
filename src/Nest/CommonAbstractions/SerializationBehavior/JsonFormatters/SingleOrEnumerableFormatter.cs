@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using Utf8Json;
 
 namespace Nest
 {
-	internal class ReadSingleOrEnumerableFormatter<T> : IJsonFormatter<IEnumerable<T>>
+	public class SingleOrEnumerableFormatter<T> : IJsonFormatter<IEnumerable<T>>
 	{
 		public IEnumerable<T> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{

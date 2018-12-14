@@ -5,7 +5,7 @@ using Utf8Json;
 namespace Nest
 {
 	[DataContract]
-	[JsonFormatter(typeof(ErrorCauseJsonConverter<BulkError>))]
+	[JsonFormatter(typeof(ErrorCauseFormatter<BulkError>))]
 	public class BulkError : Error
 	{
 		public string Index => Metadata?.Index;

@@ -14,8 +14,8 @@ namespace Nest
 			{ "except", 3 },
 		};
 
-		private static readonly ReadSingleOrEnumerableFormatter<RoleMappingRuleBase> SingleOrEnumerableFormatter =
-			new ReadSingleOrEnumerableFormatter<RoleMappingRuleBase>();
+		private static readonly SingleOrEnumerableFormatter<RoleMappingRuleBase> SingleOrEnumerableFormatter =
+			new SingleOrEnumerableFormatter<RoleMappingRuleBase>();
 
 		public RoleMappingRuleBase Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{

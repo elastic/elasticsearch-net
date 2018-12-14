@@ -24,7 +24,7 @@ namespace Nest
 	}
 
 	[DataContract]
-	[JsonFormatter(typeof(ErrorCauseJsonConverter<BulkIndexFailureCause>))]
+	[JsonFormatter(typeof(ErrorCauseFormatter<BulkIndexFailureCause>))]
 	public class BulkIndexFailureCause : Error
 	{
 		public string Index => Metadata?.Index;

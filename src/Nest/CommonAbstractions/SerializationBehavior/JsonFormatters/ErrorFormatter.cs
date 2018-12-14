@@ -5,7 +5,7 @@ using Utf8Json;
 
 namespace Nest
 {
-	internal class ErrorJsonConverter : ErrorCauseJsonConverter<Error>
+	internal class ErrorFormatter : ErrorCauseFormatter<Error>
 	{
 		protected override bool ReadProperty(ref JsonReader reader, string propertyName, Error error, IJsonFormatterResolver formatterResolver)
 		{
