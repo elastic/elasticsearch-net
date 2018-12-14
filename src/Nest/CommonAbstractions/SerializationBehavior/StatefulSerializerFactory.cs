@@ -5,10 +5,7 @@ namespace Nest
 {
 	internal static class StatefulSerializerFactory
 	{
-		public static InternalSerializer CreateStateful(IConnectionSettingsValues settings, IJsonFormatterResolver converter)
-		{
-			// TODO: get the current resolver from settings
-			return new InternalSerializer(settings, converter);
-		}
+		public static InternalSerializer CreateStateful(IConnectionSettingsValues settings, IJsonFormatterResolver formatterResolver) =>
+			new InternalSerializer(settings, formatterResolver);
 	}
 }
