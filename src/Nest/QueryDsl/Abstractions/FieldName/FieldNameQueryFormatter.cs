@@ -33,10 +33,18 @@ namespace Nest
 
 		public override TInterface Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			reader.ReadNext();
-			var fieldName = reader.ReadPropertyName();
+			reader.ReadIsBeginObjectWithVerify();
+			var token = reader.GetCurrentJsonToken();
 
-			var query = base.Deserialize(ref reader, formatterResolver);
+			TInterface query = null;
+			string fieldName = null;
+			if (token != JsonToken.EndObject)
+			{
+				fieldName = reader.ReadPropertyName();
+				query = base.Deserialize(ref reader, formatterResolver);
+			}
+
+			reader.ReadIsEndObjectWithVerify();
 
 			if (query == null)
 				return null;

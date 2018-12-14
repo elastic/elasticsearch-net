@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using Utf8Json;
 
 namespace Nest
@@ -14,6 +15,7 @@ namespace Nest
 		IFieldLookup TermsLookup { get; set; }
 	}
 
+	[DataContract]
 	public class TermsQuery : FieldNameQueryBase, ITermsQuery
 	{
 		public IEnumerable<object> Terms { get; set; }
@@ -41,6 +43,7 @@ namespace Nest
 	/// This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 	/// </summary>
 	/// <typeparam name="T">The type that represents the expected hit type</typeparam>
+	[DataContract]
 	public class TermsQueryDescriptor<T>
 		: FieldNameQueryDescriptorBase<TermsQueryDescriptor<T>, ITermsQuery, T>
 			, ITermsQuery where T : class
