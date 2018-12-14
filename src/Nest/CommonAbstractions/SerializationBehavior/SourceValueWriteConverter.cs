@@ -1,7 +1,3 @@
-using System;
-using Elasticsearch.Net;
-using System.Runtime.Serialization;
-using System.Xml;
 using Utf8Json;
 
 namespace Nest
@@ -10,6 +6,12 @@ namespace Nest
 	{
 		public override void Serialize(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver)
 		{
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
+
 			var nestType = value.GetType().Assembly() == typeof(SourceWriteFormatter<>).Assembly();
 			if (nestType)
 				formatterResolver.GetFormatter<T>().Serialize(ref writer, value, formatterResolver);
