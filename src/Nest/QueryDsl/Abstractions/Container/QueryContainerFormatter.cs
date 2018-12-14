@@ -97,7 +97,7 @@ namespace Nest
 			else
 			{
 				writer.WriteBeginArray();
-				var formatter = formatterResolver.GetFormatter<QueryContainer>();
+				var formatter = formatterResolver.GetFormatter<IQueryContainer>();
 
 				var e = value.GetEnumerator();
 				try
