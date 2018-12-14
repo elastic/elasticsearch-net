@@ -6,7 +6,7 @@ using Utf8Json;
 namespace Nest
 {
 	[InterfaceDataContract]
-	[ReadAs(typeof(SpanQueryDescriptor<object>))]
+	[ReadAs(typeof(SpanQuery))]
 	public interface ISpanQuery : IQuery
 	{
 		[DataMember(Name ="span_containing")]
