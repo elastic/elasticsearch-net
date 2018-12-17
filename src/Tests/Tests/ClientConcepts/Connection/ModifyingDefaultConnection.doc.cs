@@ -118,6 +118,10 @@ namespace Tests.ClientConcepts.Connection
 		* There may be a need to change how the default `HttpConnection` works, for example, to add an X509 certificate
 		* to the request, change the maximum number of connections allowed to an endpoint, etc.
 		*
+		* By deriving from `HttpConnection`, it is possible to change the behaviour of the connection. The following
+		* provides some examples
+		*
+		*
 		* [[servicepoint-behaviour]]
 		* ===== ServicePoint behaviour
 		*
@@ -185,9 +189,6 @@ namespace Tests.ClientConcepts.Connection
 		/*
 		* [[kerberos-authentication]]
 		* ===== Kerberos Authentication
-		*
-		* By deriving from `HttpConnection`, it is possible to change the behaviour of the connection. The following
-		* provides some examples
 		*
 		* For a lot of use cases subclassing HttpConnection is a great way to customize the http connection for your needs.
 		* E.g if you want to authenticate with Kerberos, creating a custom HttpConnection as followed allows you to set the right HTTP headers.
