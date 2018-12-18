@@ -2394,7 +2394,7 @@ namespace Nest
 					if (AllSetNoFallback(p.RouteValues.TaskId)) return _lowLevel.ReindexRethrottle<TResponse>(p.RouteValues.TaskId,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("ReindexRethrottle", p, new [] { POST }, "/_reindex/{task_id}/_rethrottle", "/_update_by_query/{task_id}/_rethrottle", "/_delete_by_query/{task_id}/_rethrottle");
+			throw InvalidDispatch("ReindexRethrottle", p, new [] { POST }, "/_reindex/{task_id}/_rethrottle");
 		}
 		
 		internal Task<TResponse> ReindexRethrottleDispatchAsync<TResponse>(IRequest<ReindexRethrottleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -2405,7 +2405,7 @@ namespace Nest
 					if (AllSetNoFallback(p.RouteValues.TaskId)) return _lowLevel.ReindexRethrottleAsync<TResponse>(p.RouteValues.TaskId,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("ReindexRethrottle", p, new [] { POST }, "/_reindex/{task_id}/_rethrottle", "/_update_by_query/{task_id}/_rethrottle", "/_delete_by_query/{task_id}/_rethrottle");
+			throw InvalidDispatch("ReindexRethrottle", p, new [] { POST }, "/_reindex/{task_id}/_rethrottle");
 		}
 		
 		internal TResponse RenderSearchTemplateDispatch<TResponse>(IRequest<RenderSearchTemplateRequestParameters> p,SerializableData<IRenderSearchTemplateRequest> body) where TResponse : class, IElasticsearchResponse, new()

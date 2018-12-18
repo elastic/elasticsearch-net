@@ -38,15 +38,21 @@ namespace ApiGenerator
 			"xpack.ml.put_calendar.json",
 			"xpack.ml.put_calendar_job.json",
 			"xpack.ml.get_calendar_job.json",
+			"xpack.ml.delete_forecast.json",
+			"xpack.ml.find_file_structure.json",
 			"xpack.ssl.certificates.json",
+			"delete_by_query_rethrottle.json",
+			"update_by_query_rethrottle.json",
 
-			// 6.4 new  API's
 			"xpack.ml.update_filter.json",
 			"xpack.security.delete_privileges.json",
 			"xpack.security.get_privileges.json",
+			"xpack.security.get_user_privileges.json",
+			"xpack.security.get_index_privileges.json",
 			"xpack.security.has_privileges.json",
 			"xpack.security.put_privilege.json",
 			"xpack.security.put_privileges.json",
+			"xpack.rollup.get_rollup_index_caps.json",
 			"nodes.reload_secure_settings.json"
 		};
 
