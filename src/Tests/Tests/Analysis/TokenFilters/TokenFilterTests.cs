@@ -896,6 +896,32 @@ namespace Tests.Analysis.TokenFilters
 			public override string Name => "nori_pos";
 		}
 
+		[SkipVersion("<6.5.0", "Introduced in 6.5.0")]
+		public class ConditionTests : TokenFilterAssertionBase<ConditionTests>
+		{
+			private readonly string _predicate = "token.getTerm().length() < 5";
+
+			public override FuncTokenFilters Fluent => (n, tf) => tf
+				.Condition(n, t => t
+					.Filters("lowercase", "lowercase, porter_stem")
+					.Script(_predicate)
+				);
+
+			public override ITokenFilter Initializer => new ConditionTokenFilter
+			{
+				Filters = new[] { "lowercase", "lowercase, porter_stem" },
+				Script = new InlineScript(_predicate)
+			};
+
+			public override object Json => new
+			{
+				filters = new[] { "lowercase", "lowercase, porter_stem" },
+				script = new { source = _predicate }
+			};
+
+			public override string Name => "multiplexer";
+		}
+
 		[SkipVersion("<6.4.0", "Introduced in 6.4.0")]
 		public class MultiplexerTests : TokenFilterAssertionBase<PhoneticTests>
 		{
