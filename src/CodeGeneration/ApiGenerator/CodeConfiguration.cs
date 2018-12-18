@@ -10,6 +10,15 @@ namespace ApiGenerator
 	{
 		private static string _root = null;
 
+		// @formatter:off — disable formatter after this line
+		public static string EsNetFolder { get; } = $@"{Root}..\..\..\src\Elasticsearch.Net\";
+		public static string LastDownloadedVersionFile { get; } = Path.Combine(Root, "last_downloaded_version.txt");
+
+		public static string NestFolder { get; } = $@"{Root}..\..\..\src\Nest\";
+		public static string RestSpecificationFolder { get; } = $@"{Root}RestSpecification\";
+		public static string ViewFolder { get; } = $@"{Root}Views\";
+		// @formatter:on — enable formatter after this line
+
 		public static readonly Assembly Assembly = typeof(ApiGenerator).Assembly;
 
 		public static readonly Dictionary<string, string> ApiNameMapping =
@@ -49,13 +58,6 @@ namespace ApiGenerator
 			.DistinctBy(v => v.Key)
 			.ToDictionary(k => k.Key, v => v.Value);
 
-
-		public static string EsNetFolder { get; } = $@"{Root}..\..\..\src\Elasticsearch.Net\";
-		public static string LastDownloadedVersionFile { get; } = Path.Combine(Root, "last_downloaded_version.txt");
-
-		public static string NestFolder { get; } = $@"{Root}..\..\..\src\Nest\";
-		public static string RestSpecificationFolder { get; } = $@"{Root}RestSpecification\";
-		public static string ViewFolder { get; } = $@"{Root}Views\";
 
 		private static string Root
 		{
