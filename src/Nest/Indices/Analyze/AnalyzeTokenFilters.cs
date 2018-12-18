@@ -236,8 +236,10 @@ namespace Nest
 		/// <summary>
 		/// A token filter of type standard that normalizes tokens extracted with the Standard Tokenizer.
 		/// </summary>
+#pragma warning disable 618
 		public AnalyzeTokenFiltersDescriptor Standard(Func<StandardTokenFilterDescriptor, IStandardTokenFilter> selector = null) =>
 			AssignIfNotNull(selector.InvokeOrDefault(new StandardTokenFilterDescriptor()));
+#pragma warning restore 618
 
 		/// <summary>
 		/// A filter that stems words (similar to snowball, but with more options).
