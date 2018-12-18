@@ -104,6 +104,9 @@ namespace Nest
 		[JsonProperty("date_histogram")]
 		IDateHistogramAggregation DateHistogram { get; set; }
 
+		[JsonProperty("auto_date_histogram")]
+		IAutoDateHistogramAggregation AutoDateHistogram { get; set; }
+
 		[JsonProperty("date_range")]
 		IDateRangeAggregation DateRange { get; set; }
 
@@ -253,11 +256,15 @@ namespace Nest
 		public ICompositeAggregation Composite { get; set; }
 
 		public ICumulativeSumAggregation CumulativeSum { get; set; }
+
 		public IDateHistogramAggregation DateHistogram { get; set; }
+
+		public IAutoDateHistogramAggregation AutoDateHistogram { get; set; }
 
 		public IDateRangeAggregation DateRange { get; set; }
 
 		public IDerivativeAggregation Derivative { get; set; }
+
 		public IExtendedStatsAggregation ExtendedStats { get; set; }
 
 		public IExtendedStatsBucketAggregation ExtendedStatsBucket { get; set; }
@@ -386,6 +393,8 @@ namespace Nest
 
 		IDateHistogramAggregation IAggregationContainer.DateHistogram { get; set; }
 
+		IAutoDateHistogramAggregation IAggregationContainer.AutoDateHistogram { get; set; }
+
 		IDateRangeAggregation IAggregationContainer.DateRange { get; set; }
 
 		IDerivativeAggregation IAggregationContainer.Derivative { get; set; }
@@ -482,6 +491,11 @@ namespace Nest
 			Func<DateHistogramAggregationDescriptor<T>, IDateHistogramAggregation> selector
 		) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.DateHistogram = d);
+
+		public AggregationContainerDescriptor<T> AutoDateHistogram(string name,
+			Func<AutoDateHistogramAggregationDescriptor<T>, IAutoDateHistogramAggregation> selector
+		) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.AutoDateHistogram = d);
 
 		public AggregationContainerDescriptor<T> Percentiles(string name,
 			Func<PercentilesAggregationDescriptor<T>, IPercentilesAggregation> selector
