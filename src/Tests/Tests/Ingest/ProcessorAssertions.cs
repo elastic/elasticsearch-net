@@ -393,12 +393,44 @@ namespace Tests.Ingest
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
 				.Bytes<Project>(ud => ud
 					.Field(p => p.Description)
+					.IgnoreMissing()
 				);
 
 			public override IProcessor Initializer => new BytesProcessor { Field = "description", IgnoreMissing = true };
 
 			public override object Json => new { field = "description", ignore_missing = true };
 			public override string Key => "bytes";
+		}
+
+		[SkipVersion("<6.5.0", "")]
+		public class Dissect : ProcessorAssertion
+		{
+			private readonly string _pattern = "%{clientip} %{ident} %{auth} [%{@timestamp}] \"%{verb} %{request} HTTP/%{httpversion}\" %{status} %{size}";
+
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
+				.Dissect<Project>(ud => ud
+					.Field(p => p.Description)
+					.IgnoreMissing()
+					.Pattern(_pattern)
+					.AppendSeparator(" ")
+				);
+
+			public override IProcessor Initializer => new DissectProcessor
+			{
+				Field = "description",
+				IgnoreMissing = true,
+				Pattern = _pattern,
+				AppendSeparator = " "
+			};
+
+			public override object Json => new
+			{
+				field = "description",
+				ignore_missing = true,
+				pattern = _pattern,
+				append_separator = " "
+			};
+			public override string Key => "dissect";
 		}
 
 		public class KeyValue : ProcessorAssertion

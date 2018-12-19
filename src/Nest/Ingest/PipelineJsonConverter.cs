@@ -110,6 +110,9 @@ namespace Nest
 					case "bytes":
 						processors.Add(jsonProcessor.ToObject<BytesProcessor>(serializer));
 						break;
+					case "dissect":
+						processors.Add(jsonProcessor.ToObject<DissectProcessor>(serializer));
+						break;
 				}
 			}
 			return processors;

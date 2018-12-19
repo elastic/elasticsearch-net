@@ -141,5 +141,9 @@ namespace Nest
 		/// <inheritdoc cref="IBytesProcessor" />
 		public ProcessorsDescriptor Bytes<T>(Func<BytesProcessorDescriptor<T>, IBytesProcessor> selector) where T : class =>
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new BytesProcessorDescriptor<T>())));
+
+		/// <inheritdoc cref="IDissectProcessor" />
+		public ProcessorsDescriptor Dissect<T>(Func<DissectProcessorDescriptor<T>, IDissectProcessor> selector) where T : class =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new DissectProcessorDescriptor<T>())));
 	}
 }
