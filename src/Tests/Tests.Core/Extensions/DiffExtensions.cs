@@ -10,19 +10,28 @@ namespace Tests.Core.Extensions
 {
 	public static class DiffExtensions
 	{
-		public static void DeepSort(this JObject jObj)
+		public static void DeepSort(this JToken token)
 		{
-			if (jObj == null) return;
+			if (token == null) return;
 
-			var props = jObj.Properties().ToList();
-			foreach (var prop in props) prop.Remove();
-
-			foreach (var prop in props.OrderBy(p => p.Name))
+			if (token is JObject jObj)
 			{
-				jObj.Add(prop);
-				var o = prop.Value as JObject;
-				o?.DeepSort();
+				var props = jObj.Properties().ToList();
+				foreach (var prop in props) prop.Remove();
+
+				foreach (var prop in props.OrderBy(p => p.Name))
+				{
+					jObj.Add(prop);
+					prop.Value?.DeepSort();
+				}
 			}
+			if (token is JArray jArray)
+			{
+				foreach (var v in jArray.Values())
+					v?.DeepSort();
+			}
+			if (token is JProperty jProp)
+				jProp.Value?.DeepSort();
 		}
 
 		public static string CreateCharacterDifference(this string expected, string actual, string message = null)
@@ -58,7 +67,6 @@ namespace Tests.Core.Extensions
 			var result = inlineBuilder.BuildDiffModel(expected, actual);
 			var hasChanges = result.Lines.Any(l => l.Type != ChangeType.Unchanged);
 			if (!hasChanges) return string.Empty;
-
 
 			return result.Lines.Aggregate(new StringBuilder().AppendLine(message), (sb, line) =>
 			{
