@@ -116,6 +116,9 @@ namespace Nest
 					case "dissect":
 						processors.Add(jsonProcessor.ToObject<DissectProcessor>(serializer));
 						break;
+					case "set_security_user":
+						processors.Add(jsonProcessor.ToObject<SetSecurityUserProcessor>(serializer));
+						break;
 				}
 			}
 			return processors;

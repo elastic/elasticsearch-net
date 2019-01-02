@@ -518,5 +518,26 @@ namespace Tests.Ingest
 
 			public override string Key => "kv";
 		}
+
+		[SkipVersion("<6.5.0", "a")]
+		public class SetSecurityUser: ProcessorAssertion
+		{
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
+				.SetSecurityUser<Project>(ud => ud
+					.Field(p => p.Name)
+				);
+
+			public override IProcessor Initializer => new SetSecurityUserProcessor
+			{
+				Field = "name",
+			};
+
+			public override object Json => new
+			{
+				field = "name",
+			};
+
+			public override string Key => "set_security_user";
+		}
 	}
 }

@@ -149,5 +149,10 @@ namespace Nest
 		/// <inheritdoc cref="IDropProcessor" />
 		public ProcessorsDescriptor Drop(Func<DropProcessorDescriptor, IDropProcessor> selector) =>
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new DropProcessorDescriptor())));
+
+		/// <inheritdoc cref="ISetSecurityUserProcessor" />
+		public ProcessorsDescriptor SetSecurityUser<T>(Func<SetSecurityUserProcessorDescriptor<T>, ISetSecurityUserProcessor> selector) where T : class =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new SetSecurityUserProcessorDescriptor<T>())));
+
 	}
 }
