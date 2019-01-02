@@ -24,5 +24,7 @@
 		<PackageLicenseUrl>https://github.com/elastic/elasticsearch-net/blob/master/license.txt</PackageLicenseUrl>
 		<ReleaseNotes>See https://github.com/elastic/elasticsearch-net/releases</ReleaseNotes>
 		<PackageIconUrl>https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png</PackageIconUrl>
+    
+    <LangVersion>latest</LangVersion>
 	</PropertyGroup>
 </Project>
