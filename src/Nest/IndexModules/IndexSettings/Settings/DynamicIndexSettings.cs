@@ -97,6 +97,13 @@ namespace Nest
 		/// delayed with this dynamic setting, which defaults to 1m.
 		/// </summary>
 		Time UnassignedNodeLeftDelayedTimeout { get; set; }
+
+		/// <summary>
+		/// The default ingest node pipeline for this index. Index requests will fail if the default pipeline is set and
+		/// the pipeline does not exist. The default may be overridden using the pipeline parameter.
+		/// The special pipeline name _none indicates no ingest pipeline should be run.`
+		/// </summary>
+		string DefaultPipeline { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -108,37 +115,37 @@ namespace Nest
 
 		public DynamicIndexSettings(IDictionary<string, object> container) : base(container) { }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IDynamicIndexSettings.Analysis" />
 		public IAnalysis Analysis { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IDynamicIndexSettings.AutoExpandReplicas" />
 		public AutoExpandReplicas AutoExpandReplicas { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IDynamicIndexSettings.BlocksMetadata" />
 		public bool? BlocksMetadata { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IDynamicIndexSettings.BlocksRead" />
 		public bool? BlocksRead { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IDynamicIndexSettings.BlocksReadOnly" />
 		public bool? BlocksReadOnly { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IDynamicIndexSettings.BlocksWrite" />
 		public bool? BlocksWrite { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IDynamicIndexSettings.Merge" />
 		public IMergeSettings Merge { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IDynamicIndexSettings.NumberOfReplicas" />
 		public int? NumberOfReplicas { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IDynamicIndexSettings.Priority" />
 		public int? Priority { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IDynamicIndexSettings.RecoveryInitialShards" />
 		public Union<int, RecoveryInitialShards> RecoveryInitialShards { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IDynamicIndexSettings.RefreshInterval" />
 		public Time RefreshInterval
 		{
 			get => _refreshInterval;
@@ -149,31 +156,32 @@ namespace Nest
 			}
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IDynamicIndexSettings.RequestsCacheEnabled" />
 		public bool? RequestsCacheEnabled { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IDynamicIndexSettings.RoutingAllocationTotalShardsPerNode" />
 		public int? RoutingAllocationTotalShardsPerNode { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IDynamicIndexSettings.Similarity" />
 		public ISimilarities Similarity { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IDynamicIndexSettings.SlowLog" />
 		public ISlowLog SlowLog { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IDynamicIndexSettings.Translog" />
 		public ITranslogSettings Translog { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IDynamicIndexSettings.UnassignedNodeLeftDelayedTimeout" />
 		public Time UnassignedNodeLeftDelayedTimeout { get; set; }
 
-		/// <summary>
-		/// Add any setting to the index
-		/// </summary>
+		/// <inheritdoc cref="IDynamicIndexSettings.DefaultPipeline" />
+		public string DefaultPipeline { get; set; }
+
+		/// <summary> Add any setting to the index </summary>
 		public void Add(string setting, object value) => BackingDictionary[setting] = value;
 	}
 
-	/// <inheritdoc cref="DynamicIndexSettings" />
+	/// <inheritdoc cref="IDynamicIndexSettings" />
 	public class DynamicIndexSettingsDescriptor : DynamicIndexSettingsDescriptorBase<DynamicIndexSettingsDescriptor, DynamicIndexSettings>
 	{
 		public DynamicIndexSettingsDescriptor() : base(new DynamicIndexSettings()) { }
@@ -194,64 +202,67 @@ namespace Nest
 			return (TDescriptor)this;
 		}
 
-		/// <inheritdoc cref="DynamicIndexSettings.NumberOfReplicas" />
+		/// <inheritdoc cref="IDynamicIndexSettings.NumberOfReplicas" />
 		public TDescriptor NumberOfReplicas(int? numberOfReplicas) => Assign(a => a.NumberOfReplicas = numberOfReplicas);
 
-		/// <inheritdoc cref="DynamicIndexSettings.AutoExpandReplicas" />
+		/// <inheritdoc cref="IDynamicIndexSettings.AutoExpandReplicas" />
 		public TDescriptor AutoExpandReplicas(AutoExpandReplicas autoExpandReplicas) => Assign(a => a.AutoExpandReplicas = autoExpandReplicas);
 
-		/// <inheritdoc cref="DynamicIndexSettings.BlocksMetadata" />
+		/// <inheritdoc cref="IDynamicIndexSettings.DefaultPipeline" />
+		public TDescriptor DefaultPipeline(string defaultPipeline) => Assign(a => a.DefaultPipeline = defaultPipeline);
+
+		/// <inheritdoc cref="IDynamicIndexSettings.BlocksMetadata" />
 		public TDescriptor BlocksMetadata(bool? blocksMetadata = true) => Assign(a => a.BlocksMetadata = blocksMetadata);
 
-		/// <inheritdoc cref="DynamicIndexSettings.BlocksRead" />
+		/// <inheritdoc cref="IDynamicIndexSettings.BlocksRead" />
 		public TDescriptor BlocksRead(bool? blocksRead = true) => Assign(a => a.BlocksRead = blocksRead);
 
-		/// <inheritdoc cref="DynamicIndexSettings.BlocksReadOnly" />
+		/// <inheritdoc cref="IDynamicIndexSettings.BlocksReadOnly" />
 		public TDescriptor BlocksReadOnly(bool? blocksReadOnly = true) => Assign(a => a.BlocksReadOnly = blocksReadOnly);
 
-		/// <inheritdoc cref="DynamicIndexSettings.BlocksWrite" />
+		/// <inheritdoc cref="IDynamicIndexSettings.BlocksWrite" />
 		public TDescriptor BlocksWrite(bool? blocksWrite = true) => Assign(a => a.BlocksWrite = blocksWrite);
 
-		/// <inheritdoc cref="DynamicIndexSettings.Priority" />
+		/// <inheritdoc cref="IDynamicIndexSettings.Priority" />
 		public TDescriptor Priority(int? priority) => Assign(a => a.Priority = priority);
 
-		/// <inheritdoc cref="DynamicIndexSettings.Merge" />
+		/// <inheritdoc cref="IDynamicIndexSettings.Merge" />
 		public TDescriptor Merge(Func<MergeSettingsDescriptor, IMergeSettings> merge) =>
 			Assign(a => a.Merge = merge?.Invoke(new MergeSettingsDescriptor()));
 
-		/// <inheritdoc cref="DynamicIndexSettings.RecoveryInitialShards" />
+		/// <inheritdoc cref="IDynamicIndexSettings.RecoveryInitialShards" />
 		public TDescriptor RecoveryInitialShards(Union<int, RecoveryInitialShards> initialShards) =>
 			Assign(a => a.RecoveryInitialShards = initialShards);
 
-		/// <inheritdoc cref="DynamicIndexSettings.RequestsCacheEnabled" />
+		/// <inheritdoc cref="IDynamicIndexSettings.RequestsCacheEnabled" />
 		public TDescriptor RequestsCacheEnabled(bool? enable = true) =>
 			Assign(a => a.RequestsCacheEnabled = enable);
 
-		/// <inheritdoc cref="DynamicIndexSettings.RefreshInterval" />
+		/// <inheritdoc cref="IDynamicIndexSettings.RefreshInterval" />
 		public TDescriptor RefreshInterval(Time time) => Assign(a => a.RefreshInterval = time);
 
 		// TODO: align name for 7.x
-		/// <inheritdoc cref="DynamicIndexSettings.RoutingAllocationTotalShardsPerNode" />
+		/// <inheritdoc cref="IDynamicIndexSettings.RoutingAllocationTotalShardsPerNode" />
 		public TDescriptor TotalShardsPerNode(int? totalShardsPerNode) =>
 			Assign(a => a.RoutingAllocationTotalShardsPerNode = totalShardsPerNode);
 
-		/// <inheritdoc cref="DynamicIndexSettings.SlowLog" />
+		/// <inheritdoc cref="IDynamicIndexSettings.SlowLog" />
 		public TDescriptor SlowLog(Func<SlowLogDescriptor, ISlowLog> slowLogSelector) =>
 			Assign(a => a.SlowLog = slowLogSelector?.Invoke(new SlowLogDescriptor()));
 
-		/// <inheritdoc cref="DynamicIndexSettings.Translog" />
+		/// <inheritdoc cref="IDynamicIndexSettings.Translog" />
 		public TDescriptor Translog(Func<TranslogSettingsDescriptor, ITranslogSettings> translogSelector) =>
 			Assign(a => a.Translog = translogSelector?.Invoke(new TranslogSettingsDescriptor()));
 
-		/// <inheritdoc cref="DynamicIndexSettings.UnassignedNodeLeftDelayedTimeout" />
+		/// <inheritdoc cref="IDynamicIndexSettings.UnassignedNodeLeftDelayedTimeout" />
 		public TDescriptor UnassignedNodeLeftDelayedTimeout(Time time) =>
 			Assign(a => a.UnassignedNodeLeftDelayedTimeout = time);
 
-		/// <inheritdoc cref="DynamicIndexSettings.Analysis" />
+		/// <inheritdoc cref="IDynamicIndexSettings.Analysis" />
 		public TDescriptor Analysis(Func<AnalysisDescriptor, IAnalysis> selector) =>
 			Assign(a => a.Analysis = selector?.Invoke(new AnalysisDescriptor()));
 
-		/// <inheritdoc cref="DynamicIndexSettings.Similarity" />
+		/// <inheritdoc cref="IDynamicIndexSettings.Similarity" />
 		public TDescriptor Similarity(Func<SimilaritiesDescriptor, IPromise<ISimilarities>> selector) =>
 			Assign(a => a.Similarity = selector?.Invoke(new SimilaritiesDescriptor())?.Value);
 	}

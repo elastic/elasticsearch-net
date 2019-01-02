@@ -44,6 +44,8 @@ namespace Nest
 		/// https://www.elastic.co/guide/en/elasticsearch/reference/6.0/index-modules-index-sorting.html
 		/// </summary>
 		ISortingSettings Sorting { get; set; }
+
+
 	}
 
 	/// <inheritdoc cref="IIndexSettings" />
@@ -53,22 +55,22 @@ namespace Nest
 
 		public IndexSettings(IDictionary<string, object> container) : base(container) { }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IIndexSettings.FileSystemStorageImplementation" />
 		public FileSystemStorageImplementation? FileSystemStorageImplementation { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IIndexSettings.NumberOfRoutingShards" />
 		public int? NumberOfRoutingShards { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IIndexSettings.NumberOfShards" />
 		public int? NumberOfShards { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IIndexSettings.Queries" />
 		public IQueriesSettings Queries { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IIndexSettings.RoutingPartitionSize" />
 		public int? RoutingPartitionSize { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IIndexSettings.Sorting" />
 		public ISortingSettings Sorting { get; set; }
 	}
 
