@@ -82,7 +82,6 @@ namespace Nest
 		IEnumerable<string> IGeoIpProcessor.Properties { get; set; }
 		Field IGeoIpProcessor.TargetField { get; set; }
 
-
 		public GeoIpProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
 		public GeoIpProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>

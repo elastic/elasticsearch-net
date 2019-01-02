@@ -8,7 +8,13 @@ namespace Nest
 		string Type { get; }
 	}
 
-	public interface IRepository<TSettings> : ISnapshotRepository
+	public interface IRepositoryWithSettings: ISnapshotRepository
+	{
+		[JsonIgnore]
+		object DelegateSettings { get; }
+	}
+
+	public interface IRepository<TSettings> : IRepositoryWithSettings
 		where TSettings : class, IRepositorySettings
 	{
 		[JsonProperty("settings")]
