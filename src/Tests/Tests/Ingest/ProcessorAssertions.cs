@@ -432,6 +432,24 @@ namespace Tests.Ingest
 			};
 			public override string Key => "dissect";
 		}
+		[SkipVersion("<6.5.0", "")]
+		public class Drop : ProcessorAssertion
+		{
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
+				.Drop(ud => ud.If("true"));
+
+			public override IProcessor Initializer => new DropProcessor
+			{
+				If = "true"
+			};
+
+			public override object Json => new
+			{
+				@if = "true"
+			};
+			public override string Key => "drop";
+		}
+
 
 		public class KeyValue : ProcessorAssertion
 		{
