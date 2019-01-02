@@ -154,5 +154,9 @@ namespace Nest
 		public ProcessorsDescriptor SetSecurityUser<T>(Func<SetSecurityUserProcessorDescriptor<T>, ISetSecurityUserProcessor> selector) where T : class =>
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new SetSecurityUserProcessorDescriptor<T>())));
 
+		/// <inheritdoc cref="IPipelineProcessor" />
+		public ProcessorsDescriptor Pipeline(Func<PipelineProcessorDescriptor, IPipelineProcessor> selector) =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new PipelineProcessorDescriptor())));
+
 	}
 }

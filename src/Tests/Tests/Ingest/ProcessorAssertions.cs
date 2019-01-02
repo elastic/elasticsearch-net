@@ -519,7 +519,7 @@ namespace Tests.Ingest
 			public override string Key => "kv";
 		}
 
-		[SkipVersion("<6.5.0", "a")]
+		[SkipVersion("<6.5.0", "")]
 		public class SetSecurityUser: ProcessorAssertion
 		{
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
@@ -538,6 +538,27 @@ namespace Tests.Ingest
 			};
 
 			public override string Key => "set_security_user";
+		}
+
+		[SkipVersion("<6.5.0", "")]
+		public class Pipeline : ProcessorAssertion
+		{
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
+				.Pipeline(ud => ud
+					.ProcessorName("x")
+				);
+
+			public override IProcessor Initializer => new PipelineProcessor
+			{
+				ProcessorName = "x",
+			};
+
+			public override object Json => new
+			{
+				name = "x",
+			};
+
+			public override string Key => "pipeline";
 		}
 	}
 }

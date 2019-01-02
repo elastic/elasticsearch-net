@@ -119,6 +119,9 @@ namespace Nest
 					case "set_security_user":
 						processors.Add(jsonProcessor.ToObject<SetSecurityUserProcessor>(serializer));
 						break;
+					case PipelineProcessor.ProcessorTypeName:
+						processors.Add(jsonProcessor.ToObject<PipelineProcessor>(serializer));
+						break;
 				}
 			}
 			return processors;

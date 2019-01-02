@@ -7,7 +7,11 @@ namespace Nest
 	/// <summary> Ingest pipelines are composed of one or more processors </summary>
 	public interface IProcessor
 	{
+		// TODO: eventhough this property is ignored it has a JsonProperty because our GetCachedProperties helper prefers
+		// this property over the differently named subclass property that has JsonProperty("name"). Needs fixing outside the
+		// scope of the current branch and warrants deeper investigation. Hence the current hack of __ignored__
 		/// <summary> The name of the processor, will be used as the key when persisting the processor on the pipeline </summary>
+		[JsonIgnore, JsonProperty("__ignored__")]
 		string Name { get; }
 
 		/// <summary>
