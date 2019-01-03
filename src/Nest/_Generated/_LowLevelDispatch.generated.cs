@@ -2924,7 +2924,7 @@ namespace Nest
 			throw InvalidDispatch("UpdateByQuery", p, new [] { POST }, "/{index}/_update_by_query", "/{index}/{type}/_update_by_query");
 		}
 		
-		internal TResponse CcrDeleteAutoFollowPatternDispatch<TResponse>(IRequest<CcrDeleteAutoFollowPatternRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse CcrDeleteAutoFollowPatternDispatch<TResponse>(IRequest<DeleteAutoFollowPatternRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2935,7 +2935,7 @@ namespace Nest
 			throw InvalidDispatch("CcrDeleteAutoFollowPattern", p, new [] { DELETE }, "/_ccr/auto_follow/{name}");
 		}
 		
-		internal Task<TResponse> CcrDeleteAutoFollowPatternDispatchAsync<TResponse>(IRequest<CcrDeleteAutoFollowPatternRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> CcrDeleteAutoFollowPatternDispatchAsync<TResponse>(IRequest<DeleteAutoFollowPatternRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2946,7 +2946,7 @@ namespace Nest
 			throw InvalidDispatch("CcrDeleteAutoFollowPattern", p, new [] { DELETE }, "/_ccr/auto_follow/{name}");
 		}
 		
-		internal TResponse CcrFollowDispatch<TResponse>(IRequest<CcrFollowRequestParameters> p,SerializableData<ICcrFollowRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse CcrFollowDispatch<TResponse>(IRequest<CreateFollowIndexRequestParameters> p,SerializableData<ICreateFollowIndexRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2957,7 +2957,7 @@ namespace Nest
 			throw InvalidDispatch("CcrFollow", p, new [] { PUT }, "/{index}/_ccr/follow");
 		}
 		
-		internal Task<TResponse> CcrFollowDispatchAsync<TResponse>(IRequest<CcrFollowRequestParameters> p,SerializableData<ICcrFollowRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> CcrFollowDispatchAsync<TResponse>(IRequest<CreateFollowIndexRequestParameters> p,SerializableData<ICreateFollowIndexRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2968,7 +2968,7 @@ namespace Nest
 			throw InvalidDispatch("CcrFollow", p, new [] { PUT }, "/{index}/_ccr/follow");
 		}
 		
-		internal TResponse CcrFollowStatsDispatch<TResponse>(IRequest<CcrFollowStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse CcrFollowStatsDispatch<TResponse>(IRequest<FollowIndexStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2979,7 +2979,7 @@ namespace Nest
 			throw InvalidDispatch("CcrFollowStats", p, new [] { GET }, "/{index}/_ccr/stats");
 		}
 		
-		internal Task<TResponse> CcrFollowStatsDispatchAsync<TResponse>(IRequest<CcrFollowStatsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> CcrFollowStatsDispatchAsync<TResponse>(IRequest<FollowIndexStatsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2990,7 +2990,7 @@ namespace Nest
 			throw InvalidDispatch("CcrFollowStats", p, new [] { GET }, "/{index}/_ccr/stats");
 		}
 		
-		internal TResponse CcrGetAutoFollowPatternDispatch<TResponse>(IRequest<CcrGetAutoFollowPatternRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse CcrGetAutoFollowPatternDispatch<TResponse>(IRequest<GetAutoFollowPatternRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3001,7 +3001,7 @@ namespace Nest
 			throw InvalidDispatch("CcrGetAutoFollowPattern", p, new [] { GET }, "/_ccr/auto_follow", "/_ccr/auto_follow/{name}");
 		}
 		
-		internal Task<TResponse> CcrGetAutoFollowPatternDispatchAsync<TResponse>(IRequest<CcrGetAutoFollowPatternRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> CcrGetAutoFollowPatternDispatchAsync<TResponse>(IRequest<GetAutoFollowPatternRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3012,7 +3012,7 @@ namespace Nest
 			throw InvalidDispatch("CcrGetAutoFollowPattern", p, new [] { GET }, "/_ccr/auto_follow", "/_ccr/auto_follow/{name}");
 		}
 		
-		internal TResponse CcrPauseFollowDispatch<TResponse>(IRequest<CcrPauseFollowRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse CcrPauseFollowDispatch<TResponse>(IRequest<PauseFollowIndexRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3023,7 +3023,7 @@ namespace Nest
 			throw InvalidDispatch("CcrPauseFollow", p, new [] { POST }, "/{index}/_ccr/pause_follow");
 		}
 		
-		internal Task<TResponse> CcrPauseFollowDispatchAsync<TResponse>(IRequest<CcrPauseFollowRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> CcrPauseFollowDispatchAsync<TResponse>(IRequest<PauseFollowIndexRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3034,7 +3034,7 @@ namespace Nest
 			throw InvalidDispatch("CcrPauseFollow", p, new [] { POST }, "/{index}/_ccr/pause_follow");
 		}
 		
-		internal TResponse CcrPutAutoFollowPatternDispatch<TResponse>(IRequest<CcrPutAutoFollowPatternRequestParameters> p,SerializableData<ICcrPutAutoFollowPatternRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse CcrPutAutoFollowPatternDispatch<TResponse>(IRequest<CreateAutoFollowPatternRequestParameters> p,SerializableData<ICreateAutoFollowPatternRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3045,7 +3045,7 @@ namespace Nest
 			throw InvalidDispatch("CcrPutAutoFollowPattern", p, new [] { PUT }, "/_ccr/auto_follow/{name}");
 		}
 		
-		internal Task<TResponse> CcrPutAutoFollowPatternDispatchAsync<TResponse>(IRequest<CcrPutAutoFollowPatternRequestParameters> p,SerializableData<ICcrPutAutoFollowPatternRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> CcrPutAutoFollowPatternDispatchAsync<TResponse>(IRequest<CreateAutoFollowPatternRequestParameters> p,SerializableData<ICreateAutoFollowPatternRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3056,7 +3056,7 @@ namespace Nest
 			throw InvalidDispatch("CcrPutAutoFollowPattern", p, new [] { PUT }, "/_ccr/auto_follow/{name}");
 		}
 		
-		internal TResponse CcrResumeFollowDispatch<TResponse>(IRequest<CcrResumeFollowRequestParameters> p,SerializableData<ICcrResumeFollowRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse CcrResumeFollowDispatch<TResponse>(IRequest<ResumeFollowIndexRequestParameters> p,SerializableData<IResumeFollowIndexRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3067,7 +3067,7 @@ namespace Nest
 			throw InvalidDispatch("CcrResumeFollow", p, new [] { POST }, "/{index}/_ccr/resume_follow");
 		}
 		
-		internal Task<TResponse> CcrResumeFollowDispatchAsync<TResponse>(IRequest<CcrResumeFollowRequestParameters> p,SerializableData<ICcrResumeFollowRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> CcrResumeFollowDispatchAsync<TResponse>(IRequest<ResumeFollowIndexRequestParameters> p,SerializableData<IResumeFollowIndexRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3098,7 +3098,7 @@ namespace Nest
 			throw InvalidDispatch("CcrStats", p, new [] { GET }, "/_ccr/stats");
 		}
 		
-		internal TResponse CcrUnfollowDispatch<TResponse>(IRequest<CcrUnfollowRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse CcrUnfollowDispatch<TResponse>(IRequest<UnfollowIndexRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3109,7 +3109,7 @@ namespace Nest
 			throw InvalidDispatch("CcrUnfollow", p, new [] { POST }, "/{index}/_ccr/unfollow");
 		}
 		
-		internal Task<TResponse> CcrUnfollowDispatchAsync<TResponse>(IRequest<CcrUnfollowRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> CcrUnfollowDispatchAsync<TResponse>(IRequest<UnfollowIndexRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{

@@ -38,7 +38,7 @@ namespace Nest
 			if (right == null) return new Dictionary<string, object>(left);
 
 			foreach (var kv in right) left[kv.Key] = kv.Value;
-			return left;
+			return new Dictionary<string, object>(left);
 		}
 	}
 }

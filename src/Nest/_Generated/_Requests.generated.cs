@@ -862,134 +862,6 @@ namespace Nest
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICcrDeleteAutoFollowPatternRequest : IRequest<CcrDeleteAutoFollowPatternRequestParameters>
-	{
-		Name Name { get; }
-	}
-	///<summary>Request parameters for CcrDeleteAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</pre></summary>
-	public partial class CcrDeleteAutoFollowPatternRequest : PlainRequestBase<CcrDeleteAutoFollowPatternRequestParameters>, ICcrDeleteAutoFollowPatternRequest
-	{
-		protected ICcrDeleteAutoFollowPatternRequest Self => this;
-		///<summary>/_ccr/auto_follow/{name}</summary>
-		///<param name="name">this parameter is required</param>
-		public CcrDeleteAutoFollowPatternRequest(Name name) : base(r=>r.Required("name", name)){}
-		// values part of the url path
-		Name ICcrDeleteAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
-
-		// Request parameters
-		//TODO THIS METHOD IS UNMAPPED!
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICcrFollowRequest : IRequest<CcrFollowRequestParameters>
-	{
-		IndexName Index { get; }
-	}
-	///<summary>Request parameters for CcrFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html</pre></summary>
-	public partial class CcrFollowRequest : PlainRequestBase<CcrFollowRequestParameters>, ICcrFollowRequest
-	{
-		protected ICcrFollowRequest Self => this;
-		///<summary>/{index}/_ccr/follow</summary>
-		///<param name="index">this parameter is required</param>
-		public CcrFollowRequest(IndexName index) : base(r=>r.Required("index", index)){}
-		// values part of the url path
-		IndexName ICcrFollowRequest.Index => Self.RouteValues.Get<IndexName>("index");
-
-		// Request parameters
-		//TODO THIS METHOD IS UNMAPPED!
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICcrFollowStatsRequest : IRequest<CcrFollowStatsRequestParameters>
-	{
-		Indices Index { get; }
-	}
-	///<summary>Request parameters for CcrFollowStats <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</pre></summary>
-	public partial class CcrFollowStatsRequest : PlainRequestBase<CcrFollowStatsRequestParameters>, ICcrFollowStatsRequest
-	{
-		protected ICcrFollowStatsRequest Self => this;
-		///<summary>/{index}/_ccr/stats</summary>
-		///<param name="index">Optional, accepts null</param>
-		public CcrFollowStatsRequest(Indices index) : base(r=>r.Optional("index", index)){}
-		// values part of the url path
-		Indices ICcrFollowStatsRequest.Index => Self.RouteValues.Get<Indices>("index");
-
-		// Request parameters
-		//TODO THIS METHOD IS UNMAPPED!
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICcrGetAutoFollowPatternRequest : IRequest<CcrGetAutoFollowPatternRequestParameters>
-	{
-		Name Name { get; }
-	}
-	///<summary>Request parameters for CcrGetAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</pre></summary>
-	public partial class CcrGetAutoFollowPatternRequest : PlainRequestBase<CcrGetAutoFollowPatternRequestParameters>, ICcrGetAutoFollowPatternRequest
-	{
-		protected ICcrGetAutoFollowPatternRequest Self => this;
-		///<summary>/_ccr/auto_follow</summary>
-		public CcrGetAutoFollowPatternRequest() : base(){}
-		///<summary>/_ccr/auto_follow/{name}</summary>
-		///<param name="name">Optional, accepts null</param>
-		public CcrGetAutoFollowPatternRequest(Name name) : base(r=>r.Optional("name", name)){}
-		// values part of the url path
-		Name ICcrGetAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
-
-		// Request parameters
-		//TODO THIS METHOD IS UNMAPPED!
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICcrPauseFollowRequest : IRequest<CcrPauseFollowRequestParameters>
-	{
-		IndexName Index { get; }
-	}
-	///<summary>Request parameters for CcrPauseFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</pre></summary>
-	public partial class CcrPauseFollowRequest : PlainRequestBase<CcrPauseFollowRequestParameters>, ICcrPauseFollowRequest
-	{
-		protected ICcrPauseFollowRequest Self => this;
-		///<summary>/{index}/_ccr/pause_follow</summary>
-		///<param name="index">this parameter is required</param>
-		public CcrPauseFollowRequest(IndexName index) : base(r=>r.Required("index", index)){}
-		// values part of the url path
-		IndexName ICcrPauseFollowRequest.Index => Self.RouteValues.Get<IndexName>("index");
-
-		// Request parameters
-		//TODO THIS METHOD IS UNMAPPED!
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICcrPutAutoFollowPatternRequest : IRequest<CcrPutAutoFollowPatternRequestParameters>
-	{
-		Name Name { get; }
-	}
-	///<summary>Request parameters for CcrPutAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</pre></summary>
-	public partial class CcrPutAutoFollowPatternRequest : PlainRequestBase<CcrPutAutoFollowPatternRequestParameters>, ICcrPutAutoFollowPatternRequest
-	{
-		protected ICcrPutAutoFollowPatternRequest Self => this;
-		///<summary>/_ccr/auto_follow/{name}</summary>
-		///<param name="name">this parameter is required</param>
-		public CcrPutAutoFollowPatternRequest(Name name) : base(r=>r.Required("name", name)){}
-		// values part of the url path
-		Name ICcrPutAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
-
-		// Request parameters
-		//TODO THIS METHOD IS UNMAPPED!
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICcrResumeFollowRequest : IRequest<CcrResumeFollowRequestParameters>
-	{
-		IndexName Index { get; }
-	}
-	///<summary>Request parameters for CcrResumeFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</pre></summary>
-	public partial class CcrResumeFollowRequest : PlainRequestBase<CcrResumeFollowRequestParameters>, ICcrResumeFollowRequest
-	{
-		protected ICcrResumeFollowRequest Self => this;
-		///<summary>/{index}/_ccr/resume_follow</summary>
-		///<param name="index">this parameter is required</param>
-		public CcrResumeFollowRequest(IndexName index) : base(r=>r.Required("index", index)){}
-		// values part of the url path
-		IndexName ICcrResumeFollowRequest.Index => Self.RouteValues.Get<IndexName>("index");
-
-		// Request parameters
-		//TODO THIS METHOD IS UNMAPPED!
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICcrStatsRequest : IRequest<CcrStatsRequestParameters>
 	{
 	}
@@ -1000,25 +872,6 @@ namespace Nest
 		// values part of the url path
 
 		// Request parameters
-		//TODO THIS METHOD IS UNMAPPED!
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICcrUnfollowRequest : IRequest<CcrUnfollowRequestParameters>
-	{
-		IndexName Index { get; }
-	}
-	///<summary>Request parameters for CcrUnfollow <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current</pre></summary>
-	public partial class CcrUnfollowRequest : PlainRequestBase<CcrUnfollowRequestParameters>, ICcrUnfollowRequest
-	{
-		protected ICcrUnfollowRequest Self => this;
-		///<summary>/{index}/_ccr/unfollow</summary>
-		///<param name="index">this parameter is required</param>
-		public CcrUnfollowRequest(IndexName index) : base(r=>r.Required("index", index)){}
-		// values part of the url path
-		IndexName ICcrUnfollowRequest.Index => Self.RouteValues.Get<IndexName>("index");
-
-		// Request parameters
-		//TODO THIS METHOD IS UNMAPPED!
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IChangePasswordRequest : IRequest<ChangePasswordRequestParameters>
@@ -1510,6 +1363,40 @@ namespace Nest
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ICreateAutoFollowPatternRequest : IRequest<CreateAutoFollowPatternRequestParameters>
+	{
+		Name Name { get; }
+	}
+	///<summary>Request parameters for CcrPutAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</pre></summary>
+	public partial class CreateAutoFollowPatternRequest : PlainRequestBase<CreateAutoFollowPatternRequestParameters>, ICreateAutoFollowPatternRequest
+	{
+		protected ICreateAutoFollowPatternRequest Self => this;
+		///<summary>/_ccr/auto_follow/{name}</summary>
+		///<param name="name">this parameter is required</param>
+		public CreateAutoFollowPatternRequest(Name name) : base(r=>r.Required("name", name)){}
+		// values part of the url path
+		Name ICreateAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ICreateFollowIndexRequest : IRequest<CreateFollowIndexRequestParameters>
+	{
+		IndexName Index { get; }
+	}
+	///<summary>Request parameters for CcrFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html</pre></summary>
+	public partial class CreateFollowIndexRequest : PlainRequestBase<CreateFollowIndexRequestParameters>, ICreateFollowIndexRequest
+	{
+		protected ICreateFollowIndexRequest Self => this;
+		///<summary>/{index}/_ccr/follow</summary>
+		///<param name="index">this parameter is required</param>
+		public CreateFollowIndexRequest(IndexName index) : base(r=>r.Required("index", index)){}
+		// values part of the url path
+		IndexName ICreateFollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICreateIndexRequest : IRequest<CreateIndexRequestParameters>
 	{
 		IndexName Index { get; }
@@ -1677,6 +1564,23 @@ namespace Nest
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeleteAutoFollowPatternRequest : IRequest<DeleteAutoFollowPatternRequestParameters>
+	{
+		Name Name { get; }
+	}
+	///<summary>Request parameters for CcrDeleteAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</pre></summary>
+	public partial class DeleteAutoFollowPatternRequest : PlainRequestBase<DeleteAutoFollowPatternRequestParameters>, IDeleteAutoFollowPatternRequest
+	{
+		protected IDeleteAutoFollowPatternRequest Self => this;
+		///<summary>/_ccr/auto_follow/{name}</summary>
+		///<param name="name">this parameter is required</param>
+		public DeleteAutoFollowPatternRequest(Name name) : base(r=>r.Required("name", name)){}
+		// values part of the url path
+		Name IDeleteAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteByQueryRequest : IRequest<DeleteByQueryRequestParameters>
@@ -2645,6 +2549,23 @@ namespace Nest
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IFollowIndexStatsRequest : IRequest<FollowIndexStatsRequestParameters>
+	{
+		Indices Index { get; }
+	}
+	///<summary>Request parameters for CcrFollowStats <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</pre></summary>
+	public partial class FollowIndexStatsRequest : PlainRequestBase<FollowIndexStatsRequestParameters>, IFollowIndexStatsRequest
+	{
+		protected IFollowIndexStatsRequest Self => this;
+		///<summary>/{index}/_ccr/stats</summary>
+		///<param name="index">Optional, accepts null</param>
+		public FollowIndexStatsRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		// values part of the url path
+		Indices IFollowIndexStatsRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IForceMergeRequest : IRequest<ForceMergeRequestParameters>
 	{
 		Indices Index { get; }
@@ -2760,6 +2681,25 @@ namespace Nest
 	{
 		protected IGetBasicLicenseStatusRequest Self => this;
 		// values part of the url path
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetAutoFollowPatternRequest : IRequest<GetAutoFollowPatternRequestParameters>
+	{
+		Name Name { get; }
+	}
+	///<summary>Request parameters for CcrGetAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</pre></summary>
+	public partial class GetAutoFollowPatternRequest : PlainRequestBase<GetAutoFollowPatternRequestParameters>, IGetAutoFollowPatternRequest
+	{
+		protected IGetAutoFollowPatternRequest Self => this;
+		///<summary>/_ccr/auto_follow</summary>
+		public GetAutoFollowPatternRequest() : base(){}
+		///<summary>/_ccr/auto_follow/{name}</summary>
+		///<param name="name">Optional, accepts null</param>
+		public GetAutoFollowPatternRequest(Name name) : base(r=>r.Optional("name", name)){}
+		// values part of the url path
+		Name IGetAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
 
 		// Request parameters
 	}
@@ -4264,6 +4204,23 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IPauseFollowIndexRequest : IRequest<PauseFollowIndexRequestParameters>
+	{
+		IndexName Index { get; }
+	}
+	///<summary>Request parameters for CcrPauseFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</pre></summary>
+	public partial class PauseFollowIndexRequest : PlainRequestBase<PauseFollowIndexRequestParameters>, IPauseFollowIndexRequest
+	{
+		protected IPauseFollowIndexRequest Self => this;
+		///<summary>/{index}/_ccr/pause_follow</summary>
+		///<param name="index">this parameter is required</param>
+		public PauseFollowIndexRequest(IndexName index) : base(r=>r.Required("index", index)){}
+		// values part of the url path
+		IndexName IPauseFollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPingRequest : IRequest<PingRequestParameters>
 	{
 	}
@@ -4819,6 +4776,23 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IResumeFollowIndexRequest : IRequest<ResumeFollowIndexRequestParameters>
+	{
+		IndexName Index { get; }
+	}
+	///<summary>Request parameters for CcrResumeFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</pre></summary>
+	public partial class ResumeFollowIndexRequest : PlainRequestBase<ResumeFollowIndexRequestParameters>, IResumeFollowIndexRequest
+	{
+		protected IResumeFollowIndexRequest Self => this;
+		///<summary>/{index}/_ccr/resume_follow</summary>
+		///<param name="index">this parameter is required</param>
+		public ResumeFollowIndexRequest(IndexName index) : base(r=>r.Required("index", index)){}
+		// values part of the url path
+		IndexName IResumeFollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRevertModelSnapshotRequest : IRequest<RevertModelSnapshotRequestParameters>
@@ -5854,6 +5828,23 @@ namespace Nest
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IUnfollowIndexRequest : IRequest<UnfollowIndexRequestParameters>
+	{
+		IndexName Index { get; }
+	}
+	///<summary>Request parameters for CcrUnfollow <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current</pre></summary>
+	public partial class UnfollowIndexRequest : PlainRequestBase<UnfollowIndexRequestParameters>, IUnfollowIndexRequest
+	{
+		protected IUnfollowIndexRequest Self => this;
+		///<summary>/{index}/_ccr/unfollow</summary>
+		///<param name="index">this parameter is required</param>
+		public UnfollowIndexRequest(IndexName index) : base(r=>r.Required("index", index)){}
+		// values part of the url path
+		IndexName IUnfollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IUpdateByQueryRequest : IRequest<UpdateByQueryRequestParameters>
