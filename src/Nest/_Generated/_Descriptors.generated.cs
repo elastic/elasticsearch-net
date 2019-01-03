@@ -3831,6 +3831,162 @@ namespace Nest
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public UpdateByQueryDescriptor<T> Slices(long? slices) => Qs("slices", slices);
 	}
+	///<summary>descriptor for CcrDeleteAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</pre></summary>
+	public partial class CcrDeleteAutoFollowPatternDescriptor  : RequestDescriptorBase<CcrDeleteAutoFollowPatternDescriptor,CcrDeleteAutoFollowPatternRequestParameters, ICcrDeleteAutoFollowPatternRequest>, ICcrDeleteAutoFollowPatternRequest
+	{ 
+		/// <summary>/_ccr/auto_follow/{name}</summary>
+		///<param name="name"> this parameter is required</param>
+		public CcrDeleteAutoFollowPatternDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		// values part of the url path
+		Name ICcrDeleteAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	}
+	///<summary>descriptor for CcrFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html</pre></summary>
+	public partial class CcrFollowDescriptor  : RequestDescriptorBase<CcrFollowDescriptor,CcrFollowRequestParameters, ICcrFollowRequest>, ICcrFollowRequest
+	{ 
+		/// <summary>/{index}/_ccr/follow</summary>
+		///<param name="index"> this parameter is required</param>
+		public CcrFollowDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
+		// values part of the url path
+		IndexName ICcrFollowRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		///<summary>The name of the follower index</summary>
+		public CcrFollowDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public CcrFollowDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+
+		// Request parameters
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	}
+	///<summary>descriptor for CcrFollowStats <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</pre></summary>
+	public partial class CcrFollowStatsDescriptor  : RequestDescriptorBase<CcrFollowStatsDescriptor,CcrFollowStatsRequestParameters, ICcrFollowStatsRequest>, ICcrFollowStatsRequest
+	{ 
+		/// <summary>/{index}/_ccr/stats</summary>
+		public CcrFollowStatsDescriptor() : base(){}
+		// values part of the url path
+		Indices ICcrFollowStatsRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		///<summary>A comma-separated list of index patterns; use `_all` to perform the operation on all indices</summary>
+		public CcrFollowStatsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public CcrFollowStatsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+
+		///<summary>A shortcut into calling Index(Indices.All)</summary>
+		public CcrFollowStatsDescriptor AllIndices() => this.Index(Indices.All);
+
+		// Request parameters
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	}
+	///<summary>descriptor for CcrGetAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</pre></summary>
+	public partial class CcrGetAutoFollowPatternDescriptor  : RequestDescriptorBase<CcrGetAutoFollowPatternDescriptor,CcrGetAutoFollowPatternRequestParameters, ICcrGetAutoFollowPatternRequest>, ICcrGetAutoFollowPatternRequest
+	{ 
+		/// <summary>/_ccr/auto_follow</summary>
+		public CcrGetAutoFollowPatternDescriptor() : base(){}
+		// values part of the url path
+		Name ICcrGetAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		///<summary>The name of the auto follow pattern.</summary>
+		public CcrGetAutoFollowPatternDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
+
+		// Request parameters
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	}
+	///<summary>descriptor for CcrPauseFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</pre></summary>
+	public partial class CcrPauseFollowDescriptor  : RequestDescriptorBase<CcrPauseFollowDescriptor,CcrPauseFollowRequestParameters, ICcrPauseFollowRequest>, ICcrPauseFollowRequest
+	{ 
+		/// <summary>/{index}/_ccr/pause_follow</summary>
+		///<param name="index"> this parameter is required</param>
+		public CcrPauseFollowDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
+		// values part of the url path
+		IndexName ICcrPauseFollowRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		///<summary>The name of the follower index that should pause following its leader index.</summary>
+		public CcrPauseFollowDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public CcrPauseFollowDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+
+		// Request parameters
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	}
+	///<summary>descriptor for CcrPutAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</pre></summary>
+	public partial class CcrPutAutoFollowPatternDescriptor  : RequestDescriptorBase<CcrPutAutoFollowPatternDescriptor,CcrPutAutoFollowPatternRequestParameters, ICcrPutAutoFollowPatternRequest>, ICcrPutAutoFollowPatternRequest
+	{ 
+		/// <summary>/_ccr/auto_follow/{name}</summary>
+		///<param name="name"> this parameter is required</param>
+		public CcrPutAutoFollowPatternDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		// values part of the url path
+		Name ICcrPutAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	}
+	///<summary>descriptor for CcrResumeFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</pre></summary>
+	public partial class CcrResumeFollowDescriptor  : RequestDescriptorBase<CcrResumeFollowDescriptor,CcrResumeFollowRequestParameters, ICcrResumeFollowRequest>, ICcrResumeFollowRequest
+	{ 
+		/// <summary>/{index}/_ccr/resume_follow</summary>
+		///<param name="index"> this parameter is required</param>
+		public CcrResumeFollowDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
+		// values part of the url path
+		IndexName ICcrResumeFollowRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		///<summary>The name of the follow index to resume following.</summary>
+		public CcrResumeFollowDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public CcrResumeFollowDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+
+		// Request parameters
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	}
+	///<summary>descriptor for CcrStats <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html</pre></summary>
+	public partial class CcrStatsDescriptor  : RequestDescriptorBase<CcrStatsDescriptor,CcrStatsRequestParameters, ICcrStatsRequest>, ICcrStatsRequest
+	{ 
+		// values part of the url path
+
+		// Request parameters
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	}
+	///<summary>descriptor for CcrUnfollow <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current</pre></summary>
+	public partial class CcrUnfollowDescriptor  : RequestDescriptorBase<CcrUnfollowDescriptor,CcrUnfollowRequestParameters, ICcrUnfollowRequest>, ICcrUnfollowRequest
+	{ 
+		/// <summary>/{index}/_ccr/unfollow</summary>
+		///<param name="index"> this parameter is required</param>
+		public CcrUnfollowDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
+		// values part of the url path
+		IndexName ICcrUnfollowRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		///<summary>The name of the follower index that should be turned into a regular index.</summary>
+		public CcrUnfollowDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public CcrUnfollowDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+
+		// Request parameters
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	}
 	///<summary>descriptor for XpackGraphExplore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
 	public partial class GraphExploreDescriptor<T>  : RequestDescriptorBase<GraphExploreDescriptor<T>,GraphExploreRequestParameters, IGraphExploreRequest>, IGraphExploreRequest
 	{ 

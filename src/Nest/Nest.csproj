@@ -12,4 +12,7 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="XPack\CrossClusterReplication" />
+  </ItemGroup>
 </Project>

@@ -40,7 +40,7 @@ namespace ApiGenerator
 				RestSpecDownloader.Download(downloadBranch);
 
 			ApiGenerator.Generate(downloadBranch, "Core", "Graph", "License", "Security", "Watcher", "Info", "MachineLearning", "Migration", "Sql",
-				"Rollup", "Ssl");
+				"Rollup", "Ccr", "Ssl");
 		}
 	}
 }

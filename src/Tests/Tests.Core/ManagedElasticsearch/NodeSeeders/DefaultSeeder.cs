@@ -17,6 +17,8 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		public const string ProjectsAliasName = "projects-alias";
 		public const string TestsIndexTemplateName = "nest_tests";
 
+		public const string RemoteClusterName = "remote-cluster";
+
 		public const string PipelineName = "nest-pipeline";
 
 		private readonly IIndexSettings _defaultIndexSettings = new IndexSettings()
@@ -83,11 +85,21 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		{
 			if (TestConfiguration.Instance.InRange("<6.1.0")) return;
 
-			var putSettingsResponse = await Client.ClusterPutSettingsAsync(s => s
-				.Transient(t => t
-					.Add("cluster.routing.use_adaptive_replica_selection", true)
-				)
-			);
+			var clusterConfiguration = new Dictionary<string, object>()
+			{
+				{ "cluster.routing.use_adaptive_replica_selection", true }
+			};
+
+			if (TestConfiguration.Instance.InRange(">=6.5.0"))
+				clusterConfiguration += new RemoteClusterConfiguration()
+				{
+					{ RemoteClusterName, "127.0.0.1:9300" }
+				};
+
+			var putSettingsResponse = Client.ClusterPutSettings(new ClusterPutSettingsRequest
+			{
+				Transient = clusterConfiguration
+			});
 
 			putSettingsResponse.ShouldBeValid();
 		}

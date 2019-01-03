@@ -2376,6 +2376,88 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> UpdateByQueryAsync<TResponse>(string index, string type, PostData body, UpdateByQueryRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>DELETE on /_ccr/auto_follow/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</para></summary>
+		///<param name="name">The name of the auto follow pattern.</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse CcrDeleteAutoFollowPattern<TResponse>(string name, CcrDeleteAutoFollowPatternRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>DELETE on /_ccr/auto_follow/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</para></summary>
+		///<param name="name">The name of the auto follow pattern.</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> CcrDeleteAutoFollowPatternAsync<TResponse>(string name, CcrDeleteAutoFollowPatternRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>PUT on /{index}/_ccr/follow <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html</para></summary>
+		///<param name="index">The name of the follower index</param>
+		///<param name="body">The name of the leader index and other optional ccr related parameters</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse CcrFollow<TResponse>(string index, PostData body, CcrFollowRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>PUT on /{index}/_ccr/follow <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html</para></summary>
+		///<param name="index">The name of the follower index</param>
+		///<param name="body">The name of the leader index and other optional ccr related parameters</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> CcrFollowAsync<TResponse>(string index, PostData body, CcrFollowRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /{index}/_ccr/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</para></summary>
+		///<param name="index">A comma-separated list of index patterns; use `_all` to perform the operation on all indices</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse CcrFollowStats<TResponse>(string index, CcrFollowStatsRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /{index}/_ccr/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</para></summary>
+		///<param name="index">A comma-separated list of index patterns; use `_all` to perform the operation on all indices</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> CcrFollowStatsAsync<TResponse>(string index, CcrFollowStatsRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_ccr/auto_follow <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse CcrGetAutoFollowPattern<TResponse>(CcrGetAutoFollowPatternRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_ccr/auto_follow <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> CcrGetAutoFollowPatternAsync<TResponse>(CcrGetAutoFollowPatternRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_ccr/auto_follow/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</para></summary>
+		///<param name="name">The name of the auto follow pattern.</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse CcrGetAutoFollowPattern<TResponse>(string name, CcrGetAutoFollowPatternRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_ccr/auto_follow/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</para></summary>
+		///<param name="name">The name of the auto follow pattern.</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> CcrGetAutoFollowPatternAsync<TResponse>(string name, CcrGetAutoFollowPatternRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /{index}/_ccr/pause_follow <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</para></summary>
+		///<param name="index">The name of the follower index that should pause following its leader index.</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse CcrPauseFollow<TResponse>(string index, CcrPauseFollowRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /{index}/_ccr/pause_follow <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</para></summary>
+		///<param name="index">The name of the follower index that should pause following its leader index.</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> CcrPauseFollowAsync<TResponse>(string index, CcrPauseFollowRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>PUT on /_ccr/auto_follow/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</para></summary>
+		///<param name="name">The name of the auto follow pattern.</param>
+		///<param name="body">The specification of the auto follow pattern</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse CcrPutAutoFollowPattern<TResponse>(string name, PostData body, CcrPutAutoFollowPatternRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>PUT on /_ccr/auto_follow/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</para></summary>
+		///<param name="name">The name of the auto follow pattern.</param>
+		///<param name="body">The specification of the auto follow pattern</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> CcrPutAutoFollowPatternAsync<TResponse>(string name, PostData body, CcrPutAutoFollowPatternRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /{index}/_ccr/resume_follow <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</para></summary>
+		///<param name="index">The name of the follow index to resume following.</param>
+		///<param name="body">The name of the leader index and other optional ccr related parameters</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse CcrResumeFollow<TResponse>(string index, PostData body, CcrResumeFollowRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /{index}/_ccr/resume_follow <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</para></summary>
+		///<param name="index">The name of the follow index to resume following.</param>
+		///<param name="body">The name of the leader index and other optional ccr related parameters</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> CcrResumeFollowAsync<TResponse>(string index, PostData body, CcrResumeFollowRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_ccr/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html</para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse CcrStats<TResponse>(CcrStatsRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_ccr/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html</para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> CcrStatsAsync<TResponse>(CcrStatsRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /{index}/_ccr/unfollow <para>http://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
+		///<param name="index">The name of the follower index that should be turned into a regular index.</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse CcrUnfollow<TResponse>(string index, CcrUnfollowRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /{index}/_ccr/unfollow <para>http://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
+		///<param name="index">The name of the follower index that should be turned into a regular index.</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> CcrUnfollowAsync<TResponse>(string index, CcrUnfollowRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_xpack/graph/_explore <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</para></summary>
 		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
