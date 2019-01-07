@@ -5,7 +5,6 @@ using System.Text;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
@@ -235,7 +234,7 @@ namespace Tests.Core.Serialization
 				ContractResolver = new DefaultContractResolver { NamingStrategy = new DefaultNamingStrategy() },
 				NullValueHandling = preserveNullInExpected ? NullValueHandling.Include : NullValueHandling.Ignore,
 				//copied here because anonymyzing geocoordinates is too tedious
-				Converters = new List<JsonConverter> { new TestGeoCoordinateJsonConverter() }
+				Converters = new List<JsonConverter> { new TestGeoCoordinateJsonConverter(), new Utf8JsonDecimalConverter() }
 			};
 	}
 }

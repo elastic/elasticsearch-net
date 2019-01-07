@@ -10,7 +10,7 @@ namespace Nest
 		/// For example, a query with a boost of 2 is twice as important as a query with a boost of 1,
 		/// although the actual boost value that is applied undergoes normalization and internal optimization.
 		/// </summary>
-		[DataMember(Name ="boost")]
+		[DataMember(Name = "boost")]
 		double? Boost { get; set; }
 
 		/// <summary>
@@ -28,7 +28,8 @@ namespace Nest
 		bool IsStrict { get; set; }
 
 		/// <summary>
-		/// Whether the query should be treated as verbatim. A verbatim query will be serialized as part of the request, irrespective
+		/// Whether the query should be treated as verbatim. A verbatim query will be serialized as part of the request,
+		/// irrespective
 		/// of whether it is <see cref="Conditionless" /> or not.
 		/// </summary>
 		[IgnoreDataMember]
@@ -43,7 +44,7 @@ namespace Nest
 		/// <summary>
 		/// The name of the query. Allows you to retrieve for each document what part of the query it matched on.
 		/// </summary>
-		[DataMember(Name ="_name")]
+		[DataMember(Name = "_name")]
 		string Name { get; set; }
 	}
 
