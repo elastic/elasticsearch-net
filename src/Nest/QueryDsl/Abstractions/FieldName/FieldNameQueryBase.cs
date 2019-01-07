@@ -1,6 +1,5 @@
 ﻿namespace Nest
 {
-
 	public interface IFieldNameQuery : IQuery
 	{
 		Field Field { get; set; }
