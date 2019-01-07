@@ -34,7 +34,7 @@ namespace Nest
 		/// The required terms to match
 		/// </summary>
 		[DataMember(Name = "terms")]
-		[JsonFormatter(typeof(SourceWriteFormatter<>))]
+		[JsonFormatter(typeof(SourceWriteFormatter<IEnumerable<object>>))]
 		IEnumerable<object> Terms { get; set; }
 	}
 
