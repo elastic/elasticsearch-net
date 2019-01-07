@@ -45,7 +45,7 @@ namespace Nest
 							while (reader.ReadIsInObject(ref scriptCount))
 							{
 								var scriptProperty = reader.ReadPropertyNameSegmentRaw();
-								if (Fields.TryGetValue(scriptProperty, out var scriptValue))
+								if (ScriptFields.TryGetValue(scriptProperty, out var scriptValue))
 								{
 									switch (scriptValue)
 									{
@@ -97,13 +97,14 @@ namespace Nest
 			}
 
 			if (written)
+			{
 				writer.WriteValueSeparator();
+				written = false;
+			}
 
 			writer.WritePropertyName("script");
-
-			written = false;
-
 			writer.WriteBeginObject();
+
 			if (value.Id != null)
 			{
 				writer.WritePropertyName("id");

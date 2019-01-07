@@ -7,7 +7,7 @@ namespace Nest
 	[InterfaceDataContract]
 	public interface IScriptScoreFunction : IScoreFunction
 	{
-		[DataMember(Name ="script")]
+		[DataMember(Name = "script")]
 		IScriptQuery Script { get; set; }
 	}
 
