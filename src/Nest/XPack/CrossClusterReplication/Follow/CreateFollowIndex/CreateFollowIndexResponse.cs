@@ -5,16 +5,20 @@ namespace Nest
 {
 	public interface ICreateFollowIndexResponse : IResponse
 	{
-		/// <summary>
-		///
-		/// </summary>
-		[JsonProperty("columns")]
-		IReadOnlyCollection<SqlColumn> Columns { get; }
+		[JsonProperty("follow_index_created")]
+		bool FollowIndexCreated { get; }
+
+		[JsonProperty("follow_index_shards_acked")]
+		bool FollowIndexShardsAcked { get; }
+
+		[JsonProperty("index_following_started")]
+		bool IndexFollowingStarted { get; }
 	}
 
 	public class CreateFollowIndexResponse : ResponseBase, ICreateFollowIndexResponse
 	{
-		/// <inheritdoc cref="ICreateFollowIndexResponse.Columns" />
-		public IReadOnlyCollection<SqlColumn> Columns { get; internal set; } = EmptyReadOnly<SqlColumn>.Collection;
+		public bool FollowIndexCreated { get; internal set; }
+		public bool FollowIndexShardsAcked { get; internal set; }
+		public bool IndexFollowingStarted { get; internal set; }
 	}
 }

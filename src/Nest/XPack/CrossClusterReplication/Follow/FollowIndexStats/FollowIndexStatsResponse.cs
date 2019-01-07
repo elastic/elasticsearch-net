@@ -5,16 +5,23 @@ namespace Nest
 {
 	public interface IFollowIndexStatsResponse : IResponse
 	{
-		/// <summary>
-		///
-		/// </summary>
-		[JsonProperty("columns")]
-		IReadOnlyCollection<SqlColumn> Columns { get; }
+		[JsonProperty("indices")]
+		IReadOnlyCollection<FollowIndexStats> Indices { get; }
 	}
 
 	public class FollowIndexStatsResponse : ResponseBase, IFollowIndexStatsResponse
 	{
-		/// <inheritdoc cref="IFollowIndexStatsResponse.Columns" />
-		public IReadOnlyCollection<SqlColumn> Columns { get; internal set; } = EmptyReadOnly<SqlColumn>.Collection;
+		/// <inheritdoc cref="IFollowIndexStatsResponse.Indices" />
+		[JsonProperty("indices")]
+		public IReadOnlyCollection<FollowIndexStats> Indices { get; internal set; } = EmptyReadOnly<FollowIndexStats>.Collection;
+	}
+
+	public class FollowIndexStats
+	{
+		[JsonProperty("index")]
+		public string Index { get; internal set; }
+
+		[JsonProperty("shards")]
+		public IReadOnlyCollection<FollowIndexShardStats> Shards { get; internal set; } = EmptyReadOnly<FollowIndexShardStats>.Collection;
 	}
 }

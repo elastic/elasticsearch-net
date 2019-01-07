@@ -3,18 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IResumeFollowIndexResponse : IResponse
-	{
-		/// <summary>
-		///
-		/// </summary>
-		[JsonProperty("columns")]
-		IReadOnlyCollection<SqlColumn> Columns { get; }
-	}
+	public interface IResumeFollowIndexResponse : IAcknowledgedResponse { }
 
-	public class ResumeFollowIndexResponse : ResponseBase, IResumeFollowIndexResponse
-	{
-		/// <inheritdoc cref="IResumeFollowIndexResponse.Columns" />
-		public IReadOnlyCollection<SqlColumn> Columns { get; internal set; } = EmptyReadOnly<SqlColumn>.Collection;
-	}
+	public class ResumeFollowIndexResponse : AcknowledgedResponseBase, IResumeFollowIndexResponse { }
 }

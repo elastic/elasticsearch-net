@@ -7,7 +7,11 @@ namespace Nest
 {
 	public partial interface IElasticClient
 	{
-		/// <summary></summary>
+		/// <summary>
+		/// This API stops the following task associated with a follower index and removes index metadata and settings associated with
+		/// cross-cluster replication. This enables the index to treated as a regular index. The follower index must be paused and closed
+		/// before invoking the unfollow API.
+		/// </summary>
 		IUnfollowIndexResponse UnfollowIndex(IndexName index, Func<UnfollowIndexDescriptor, IUnfollowIndexRequest> selector = null);
 
 		/// <inheritdoc cref="UnfollowIndex(IndexName, System.Func{Nest.UnfollowIndexDescriptor,Nest.IUnfollowIndexRequest})" />

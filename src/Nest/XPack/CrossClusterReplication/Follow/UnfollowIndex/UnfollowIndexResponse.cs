@@ -1,20 +1,8 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
-
-namespace Nest
+﻿namespace Nest
 {
-	public interface IUnfollowIndexResponse : IResponse
-	{
-		/// <summary>
-		///
-		/// </summary>
-		[JsonProperty("columns")]
-		IReadOnlyCollection<SqlColumn> Columns { get; }
-	}
+	public interface IUnfollowIndexResponse : IAcknowledgedResponse { }
 
-	public class UnfollowIndexResponse : ResponseBase, IUnfollowIndexResponse
+	public class UnfollowIndexResponse : AcknowledgedResponseBase, IUnfollowIndexResponse
 	{
-		/// <inheritdoc cref="IUnfollowIndexResponse.Columns" />
-		public IReadOnlyCollection<SqlColumn> Columns { get; internal set; } = EmptyReadOnly<SqlColumn>.Collection;
 	}
 }
