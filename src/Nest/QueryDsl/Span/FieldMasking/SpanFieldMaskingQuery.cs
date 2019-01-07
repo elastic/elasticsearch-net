@@ -6,13 +6,13 @@ using Utf8Json;
 namespace Nest
 {
 	[InterfaceDataContract]
-	[ReadAs(typeof(SpanFieldMaskingQueryDescriptor<object>))]
+	[ReadAs(typeof(SpanFieldMaskingQuery))]
 	public interface ISpanFieldMaskingQuery : ISpanSubQuery
 	{
-		[DataMember(Name ="field")]
+		[DataMember(Name = "field")]
 		Field Field { get; set; }
 
-		[DataMember(Name ="query")]
+		[DataMember(Name = "query")]
 		ISpanQuery Query { get; set; }
 	}
 
