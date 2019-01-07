@@ -1,5 +1,6 @@
 ﻿using System;
 using Utf8Json;
+using Utf8Json.Formatters;
 using Utf8Json.Internal;
 
 namespace Nest
@@ -17,6 +18,34 @@ namespace Nest
 			{ "_name", 6 },
 			{ "boost", 7 },
 		};
+
+		public override void SerializeInternal(ref JsonWriter writer, IFuzzyQuery value, IJsonFormatterResolver formatterResolver)
+		{
+			switch (value)
+			{
+				case IFuzzyStringQuery fuzzyStringQuery:
+					{
+						var formatter = formatterResolver.GetFormatter<IFuzzyStringQuery>();
+						formatter.Serialize(ref writer, fuzzyStringQuery, formatterResolver);
+						break;
+					}
+				case IFuzzyDateQuery fuzzyDateQuery:
+					{
+						var formatter = formatterResolver.GetFormatter<IFuzzyDateQuery>();
+						formatter.Serialize(ref writer, fuzzyDateQuery, formatterResolver);
+						break;
+					}
+				case IFuzzyNumericQuery fuzzyNumericQuery:
+					{
+						var formatter = formatterResolver.GetFormatter<IFuzzyNumericQuery>();
+						formatter.Serialize(ref writer, fuzzyNumericQuery, formatterResolver);
+						break;
+					}
+				default:
+					base.SerializeInternal(ref writer, value, formatterResolver);
+					break;
+			}
+		}
 
 		public override IFuzzyQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
@@ -51,11 +80,12 @@ namespace Nest
 								switch (token)
 								{
 									case JsonToken.String:
-										var str = reader.ReadString();
+										var valueSegment = reader.ReadStringSegmentUnsafe();
 										try
 										{
 											// TODO: possibly nicer way of doing this than brute try?
-											var dateTime = JsonSerializer.Deserialize<DateTime>(str, formatterResolver);
+											var dateTimeReader = new JsonReader(valueSegment.Array, valueSegment.Offset - 1); // include opening "
+											var dateTime = ISO8601DateTimeFormatter.Default.Deserialize(ref dateTimeReader, formatterResolver);
 											query = new FuzzyDateQuery
 											{
 												Field = field,
@@ -67,7 +97,7 @@ namespace Nest
 											query = new FuzzyQuery
 											{
 												Field = field,
-												Value = str
+												Value = valueSegment.Utf8String()
 											};
 										}
 										break;
@@ -132,16 +162,16 @@ namespace Nest
 		{
 			switch (query)
 			{
-				case FuzzyQuery fuzzyQuery:
-					fuzzyQuery.Fuzziness = formatterResolver.GetFormatter<Fuzziness>()
-						.Deserialize(ref reader, formatterResolver);
-					break;
 				case FuzzyDateQuery fuzzyDateQuery:
 					fuzzyDateQuery.Fuzziness = formatterResolver.GetFormatter<Time>()
 						.Deserialize(ref reader, formatterResolver);
 					break;
 				case FuzzyNumericQuery fuzzyNumericQuery:
 					fuzzyNumericQuery.Fuzziness = reader.ReadDouble();
+					break;
+				case FuzzyQuery fuzzyQuery:
+					fuzzyQuery.Fuzziness = formatterResolver.GetFormatter<Fuzziness>()
+						.Deserialize(ref reader, formatterResolver);
 					break;
 			}
 		}
