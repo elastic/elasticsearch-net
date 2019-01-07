@@ -3,8 +3,8 @@ using Utf8Json;
 
 namespace Nest
 {
-	[ReadAs(typeof(TypeQueryDescriptor))]
 	[InterfaceDataContract]
+	[ReadAs(typeof(TypeQuery))]
 	public interface ITypeQuery : IQuery
 	{
 		[DataMember(Name = "value")]
@@ -27,7 +27,6 @@ namespace Nest
 	{
 		protected override bool Conditionless => TypeQuery.IsConditionless(this);
 
-		[DataMember(Name = "value")]
 		TypeName ITypeQuery.Value { get; set; }
 
 		public TypeQueryDescriptor Value<T>() => Assign(a => a.Value = typeof(T));
