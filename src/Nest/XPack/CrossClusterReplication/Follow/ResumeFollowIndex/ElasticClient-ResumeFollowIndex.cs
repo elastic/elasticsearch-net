@@ -23,7 +23,7 @@ namespace Nest
 		);
 
 		/// <inheritdoc cref="ResumeFollowIndex(IndexName, System.Func{Nest.ResumeFollowIndexDescriptor,Nest.IResumeFollowIndexRequest})" />
-		Task<IResumeFollowIndexResponse> ResumeFollowIndexAsync(IResumeFollowIndexRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IResumeFollowIndexResponse> ResumeFollowIndexAsync(IResumeFollowIndexRequest request, CancellationToken cancellationToken = default);
 	}
 
 	public partial class ElasticClient

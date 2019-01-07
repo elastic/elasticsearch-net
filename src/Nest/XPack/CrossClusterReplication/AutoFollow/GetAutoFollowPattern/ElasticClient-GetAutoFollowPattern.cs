@@ -15,11 +15,11 @@ namespace Nest
 
 		/// <inheritdoc cref="GetAutoFollowPattern(System.Func{Nest.GetAutoFollowPatternDescriptor,Nest.IGetAutoFollowPatternRequest})" />
 		Task<IGetAutoFollowPatternResponse> GetAutoFollowPatternAsync(Func<GetAutoFollowPatternDescriptor, IGetAutoFollowPatternRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc cref="GetAutoFollowPattern(System.Func{Nest.GetAutoFollowPatternDescriptor,Nest.IGetAutoFollowPatternRequest})" />
-		Task<IGetAutoFollowPatternResponse> GetAutoFollowPatternAsync(IGetAutoFollowPatternRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IGetAutoFollowPatternResponse> GetAutoFollowPatternAsync(IGetAutoFollowPatternRequest request, CancellationToken cancellationToken = default);
 	}
 
 	public partial class ElasticClient
@@ -37,12 +37,12 @@ namespace Nest
 
 		/// <inheritdoc cref="GetAutoFollowPattern(System.Func{Nest.GetAutoFollowPatternDescriptor,Nest.IGetAutoFollowPatternRequest})" />
 		public Task<IGetAutoFollowPatternResponse> GetAutoFollowPatternAsync(Func<GetAutoFollowPatternDescriptor, IGetAutoFollowPatternRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		) =>
 			GetAutoFollowPatternAsync(selector.InvokeOrDefault(new GetAutoFollowPatternDescriptor()), cancellationToken);
 
 		/// <inheritdoc cref="GetAutoFollowPattern(System.Func{Nest.GetAutoFollowPatternDescriptor,Nest.IGetAutoFollowPatternRequest})" />
-		public Task<IGetAutoFollowPatternResponse> GetAutoFollowPatternAsync(IGetAutoFollowPatternRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
+		public Task<IGetAutoFollowPatternResponse> GetAutoFollowPatternAsync(IGetAutoFollowPatternRequest request, CancellationToken cancellationToken = default) =>
 			Dispatcher.DispatchAsync<IGetAutoFollowPatternRequest, GetAutoFollowPatternRequestParameters, GetAutoFollowPatternResponse, IGetAutoFollowPatternResponse>(
 				request,
 				cancellationToken,

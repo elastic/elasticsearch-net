@@ -23,7 +23,7 @@ namespace Nest
 		);
 
 		/// <inheritdoc cref="CreateFollowIndex(IndexName, System.Func{Nest.CreateFollowIndexDescriptor,Nest.ICreateFollowIndexRequest})" />
-		Task<ICreateFollowIndexResponse> CreateFollowIndexAsync(ICreateFollowIndexRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<ICreateFollowIndexResponse> CreateFollowIndexAsync(ICreateFollowIndexRequest request, CancellationToken cancellationToken = default);
 	}
 
 	public partial class ElasticClient
@@ -46,7 +46,7 @@ namespace Nest
 			CreateFollowIndexAsync(selector.InvokeOrDefault(new CreateFollowIndexDescriptor(index)), cancellationToken);
 
 		/// <inheritdoc cref="CreateFollowIndex(IndexName, System.Func{Nest.CreateFollowIndexDescriptor,Nest.ICreateFollowIndexRequest})" />
-		public Task<ICreateFollowIndexResponse> CreateFollowIndexAsync(ICreateFollowIndexRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
+		public Task<ICreateFollowIndexResponse> CreateFollowIndexAsync(ICreateFollowIndexRequest request, CancellationToken cancellationToken = default) =>
 			Dispatcher.DispatchAsync<ICreateFollowIndexRequest, CreateFollowIndexRequestParameters, CreateFollowIndexResponse, ICreateFollowIndexResponse>(
 				request,
 				cancellationToken,

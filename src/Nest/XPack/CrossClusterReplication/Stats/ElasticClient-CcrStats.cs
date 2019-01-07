@@ -23,7 +23,7 @@ namespace Nest
 		);
 
 		/// <inheritdoc cref="CcrStats(System.Func{Nest.CcrStatsDescriptor,Nest.ICcrStatsRequest})" />
-		Task<ICcrStatsResponse> CcrStatsAsync(ICcrStatsRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<ICcrStatsResponse> CcrStatsAsync(ICcrStatsRequest request, CancellationToken cancellationToken = default);
 	}
 
 	public partial class ElasticClient
@@ -46,7 +46,7 @@ namespace Nest
 			CcrStatsAsync(selector.InvokeOrDefault(new CcrStatsDescriptor()), cancellationToken);
 
 		/// <inheritdoc cref="CcrStats(System.Func{Nest.CcrStatsDescriptor,Nest.ICcrStatsRequest})" />
-		public Task<ICcrStatsResponse> CcrStatsAsync(ICcrStatsRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
+		public Task<ICcrStatsResponse> CcrStatsAsync(ICcrStatsRequest request, CancellationToken cancellationToken = default) =>
 			Dispatcher.DispatchAsync<ICcrStatsRequest, CcrStatsRequestParameters, CcrStatsResponse, ICcrStatsResponse>(
 				request,
 				cancellationToken,
