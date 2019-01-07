@@ -83,16 +83,17 @@ namespace Tests.XPack.CrossClusterReplication
 					)
 			},
 			{
-				IndexDataStep, u => u.Call(async (v, c) =>
+				IndexDataStep, u => u.Call((v, c) =>
 				{
 					var seenPages = 0;
 					var tokenSource = new CancellationTokenSource();
 					var bulkAllObservable = c.BulkAll(Data, b => b.Index(v).Size(1000).RefreshOnCompleted(), tokenSource.Token);
 					bulkAllObservable.Wait(TimeSpan.FromSeconds(20), x => Interlocked.Increment(ref seenPages));
+					return Task.CompletedTask;
 				})
 			},
 			{
-				CountBeforeStep, u => u.Call(async (v, c) => c.Count<Project>(d => d.Index(v)))
+				CountBeforeStep, u => u.Call(async (v, c) => await c.CountAsync<Project>(d => d.Index(v)))
 			},
 			{
 				PauseFollowStep, u =>
@@ -117,7 +118,7 @@ namespace Tests.XPack.CrossClusterReplication
 					)
 			},
 			{
-				CountAfterStep, u => u.Call(async (v, c) => c.Count<Project>(d => d.Index(CopyIndex(v))))
+				CountAfterStep, u => u.Call(async (v, c) => await c.CountAsync<Project>(d => d.Index(CopyIndex(v))))
 			},
 			{
 				FollowStatsStep, u =>
@@ -175,10 +176,10 @@ namespace Tests.XPack.CrossClusterReplication
 				)
 			},
 			{
-				PauseForCloseStep, u => u.Call(async (v, c) => c.PauseFollowIndex(CopyIndex(v)))
+				PauseForCloseStep, u => u.Call(async (v, c) => await c.PauseFollowIndexAsync(CopyIndex(v)))
 			},
 			{
-				CloseIndexStep, u => u.Call(async (v, c) => c.CloseIndex(CopyIndex(v)))
+				CloseIndexStep, u => u.Call(async (v, c) => await c.CloseIndexAsync(CopyIndex(v)))
 			},
 			{
 				UnfollowAgainStep, u => u.Calls<UnfollowIndexDescriptor, UnfollowIndexRequest, IUnfollowIndexRequest, IUnfollowIndexResponse>
@@ -228,13 +229,14 @@ namespace Tests.XPack.CrossClusterReplication
 				i.Shards.Should().NotBeEmpty();
 				foreach (var s in i.Shards)
 				{
+					var because = $"index: {i.Index} shard: {s.ShardId}";
 					s.RemoteCluster.Should().Be(DefaultSeeder.RemoteClusterName);
 					s.LeaderIndex.Should().NotBeNullOrWhiteSpace("leader_index");
 					s.FollowerIndex.Should().NotBeNullOrWhiteSpace("follower_index");
 					s.LeaderGlobalCheckpoint.Should().BeGreaterOrEqualTo(-1, nameof(FollowIndexShardStats.LeaderGlobalCheckpoint));
 					s.LeaderMaxSequenceNumber.Should().BeGreaterOrEqualTo(-1, nameof(FollowIndexShardStats.LeaderMaxSequenceNumber));
 					s.LastRequestedSequenceNumber.Should().BeGreaterOrEqualTo(-1, nameof(FollowIndexShardStats.LastRequestedSequenceNumber));
-					s.ReadExceptions.Should().NotBeNull().And.BeEmpty();
+					s.ReadExceptions.Should().NotBeNull(because).And.BeEmpty(because);
 				}
 			}
 		});
@@ -248,21 +250,7 @@ namespace Tests.XPack.CrossClusterReplication
 			indices.Count.Should().BeGreaterOrEqualTo(4);
 			var currentIndices = indices.Where(i => i.Index.StartsWith(Prefix)).ToArray();
 			currentIndices.Should().HaveCount(4);
-			foreach (var i in currentIndices)
-			{
-				i.Index.Should().NotBeNullOrWhiteSpace("index name");
-				i.Shards.Should().NotBeEmpty();
-				foreach (var s in i.Shards)
-				{
-					s.RemoteCluster.Should().Be(DefaultSeeder.RemoteClusterName);
-					s.LeaderIndex.Should().NotBeNullOrWhiteSpace("leader_index");
-					s.FollowerIndex.Should().NotBeNullOrWhiteSpace("follower_index");
-					s.LeaderGlobalCheckpoint.Should().BeGreaterOrEqualTo(-1, nameof(FollowIndexShardStats.LeaderGlobalCheckpoint));
-					s.LeaderMaxSequenceNumber.Should().BeGreaterOrEqualTo(-1, nameof(FollowIndexShardStats.LeaderMaxSequenceNumber));
-					s.LastRequestedSequenceNumber.Should().BeGreaterOrEqualTo(-1, nameof(FollowIndexShardStats.LastRequestedSequenceNumber));
-					s.ReadExceptions.Should().NotBeNull().And.BeEmpty();
-				}
-			}
+			AssertErrorsOnShardStats(currentIndices);
 		});
 
 		[I] public async Task LeadersAreDeleted() =>
@@ -274,6 +262,11 @@ namespace Tests.XPack.CrossClusterReplication
 			r.Indices.Should().NotBeEmpty();
 			var currentIndices = r.Indices.Where(i => i.Index.StartsWith(Prefix)).ToArray();
 			currentIndices.Should().HaveCount(4);
+			AssertErrorsOnShardStats(currentIndices);
+		});
+
+		private static void AssertErrorsOnShardStats(FollowIndexStats[] currentIndices)
+		{
 			foreach (var i in currentIndices)
 			{
 				i.Index.Should().NotBeNullOrWhiteSpace("index name");
@@ -297,7 +290,7 @@ namespace Tests.XPack.CrossClusterReplication
 					}
 				}
 			}
-		});
+		}
 
 		[I] public async Task UnfollowReturns() => await AssertRunsToCompletion(UnfollowAgainStep);
 

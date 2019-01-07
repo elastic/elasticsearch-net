@@ -96,7 +96,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 					{ RemoteClusterName, "127.0.0.1:9300" }
 				};
 
-			var putSettingsResponse = Client.ClusterPutSettings(new ClusterPutSettingsRequest
+			var putSettingsResponse = await Client.ClusterPutSettingsAsync(new ClusterPutSettingsRequest
 			{
 				Transient = clusterConfiguration
 			});

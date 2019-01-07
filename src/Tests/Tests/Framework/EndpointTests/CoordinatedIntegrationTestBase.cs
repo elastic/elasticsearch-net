@@ -14,9 +14,7 @@ namespace Tests.Framework
 		: IClusterFixture<TCluster>, IClassFixture<EndpointUsage>
 		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster, new()
 	{
-		private readonly TCluster _cluster;
 		private readonly CoordinatedUsage _coordinatedUsage;
-		private readonly EndpointUsage _usage;
 
 		protected CoordinatedIntegrationTestBase(CoordinatedUsage coordinatedUsage) => _coordinatedUsage = coordinatedUsage;
 

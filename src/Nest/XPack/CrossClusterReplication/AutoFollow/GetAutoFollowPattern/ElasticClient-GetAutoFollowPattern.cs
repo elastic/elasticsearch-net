@@ -7,10 +7,7 @@ namespace Nest
 {
 	public partial interface IElasticClient
 	{
-		// TODO: should we force names as first argument (i think this is inline with other gets)
-		// TODO: I THINK we need to patch the json spec for {name} to be a list of names
-
-		/// <summary></summary>
+		/// <summary> This API gets configured auto-follow patterns. This API will return the specified auto-follow pattern collection. </summary>
 		IGetAutoFollowPatternResponse GetAutoFollowPattern(Func<GetAutoFollowPatternDescriptor, IGetAutoFollowPatternRequest> selector = null);
 
 		/// <inheritdoc cref="GetAutoFollowPattern(System.Func{Nest.GetAutoFollowPatternDescriptor,Nest.IGetAutoFollowPatternRequest})" />

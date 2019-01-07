@@ -3,30 +3,14 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	/// <summary> This API gets configured auto-follow patterns. This API will return the specified auto-follow pattern collection. </summary>
 	[MapsApi("ccr.get_auto_follow_pattern.json")]
 	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<GetAutoFollowPatternRequest>))]
-	public partial interface IGetAutoFollowPatternRequest
-	{
-		/// <summary>
-		///
-		/// <para>
-		/// </para>
-		/// </summary>
-		[JsonProperty("cursor")]
-		string Cursor { get; set; }
-	}
+	public partial interface IGetAutoFollowPatternRequest { }
 
-	public partial class GetAutoFollowPatternRequest
-	{
-		/// <inheritdoc cref="IGetAutoFollowPatternRequest.Cursor" />
-		public string Cursor { get; set; }
-	}
+	/// <inheritdoc cref="IGetAutoFollowPatternRequest"/>
+	public partial class GetAutoFollowPatternRequest { }
 
-	public partial class GetAutoFollowPatternDescriptor
-	{
-		string IGetAutoFollowPatternRequest.Cursor { get; set; }
-
-		/// <inheritdoc cref="IGetAutoFollowPatternRequest.Cursor" />
-		public GetAutoFollowPatternDescriptor Cursor(string cursor) => Assign(a => a.Cursor = cursor);
-	}
+	/// <inheritdoc cref="IGetAutoFollowPatternRequest"/>
+	public partial class GetAutoFollowPatternDescriptor { }
 }
