@@ -71,7 +71,7 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 						{
 							numberOfCommits = new
 							{
-								origin = 1.0,
+								origin = 1,
 								scale = 0.1,
 								decay = 0.5
 							}
@@ -98,10 +98,10 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 							{
 								origin = new
 								{
-									lat = 70.0,
-									lon = -70.0
+									lat = 70,
+									lon = -70
 								},
-								scale = "1.0mi"
+								scale = "1mi"
 							},
 							multi_value_mode = "avg"
 						}
@@ -118,7 +118,7 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 					},
 					new { random_score = new { seed = 1337, field = "_seq_no" } },
 					new { random_score = new { seed = "randomstring", field = "_seq_no" } },
-					new { weight = 1.0 },
+					new { weight = 1 },
 					new
 					{
 						script_score = new
@@ -130,8 +130,8 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 						}
 					}
 				},
-				max_boost = 20.0,
-				min_score = 1.0,
+				max_boost = 20,
+				min_score = 1,
 				query = new
 				{
 					match_all = new { }

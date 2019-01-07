@@ -70,8 +70,9 @@ namespace Nest
 							function = fieldValueFormatter.Deserialize(ref reader, formatterResolver);
 							break;
 						case 5:
-							var scriptScoreFormatter = formatterResolver.GetFormatter<ScriptScoreFunction>();
-							function = scriptScoreFormatter.Deserialize(ref reader, formatterResolver);
+							var scriptFormatter = formatterResolver.GetFormatter<IScriptQuery>();
+							var script = scriptFormatter.Deserialize(ref reader, formatterResolver);
+							function = new ScriptScoreFunction { Script = script };
 							break;
 					}
 				}

@@ -7,8 +7,6 @@ using Utf8Json;
 
 namespace Nest
 {
-	using MultiGetConverter = Func<IApiCallDetails, Stream, MultiGetResponse>;
-
 	public partial interface IElasticClient
 	{
 		/// <summary>
