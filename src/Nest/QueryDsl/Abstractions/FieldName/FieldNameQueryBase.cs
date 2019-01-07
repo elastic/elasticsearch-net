@@ -1,7 +1,10 @@
-﻿namespace Nest
+﻿using System.Runtime.Serialization;
+
+namespace Nest
 {
 	public interface IFieldNameQuery : IQuery
 	{
+		[IgnoreDataMember]
 		Field Field { get; set; }
 	}
 
