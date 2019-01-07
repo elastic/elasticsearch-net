@@ -108,7 +108,10 @@ namespace Nest
 			return formatter.Deserialize(ref reader, formatterResolver);
 		}
 
-		public virtual void Serialize(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver)
+		public virtual void Serialize(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver) =>
+			SerializeInternal(ref writer, value, formatterResolver);
+
+		public virtual void SerializeInternal(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver)
 		{
 			var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<T>();
 			formatter.Serialize(ref writer, value, formatterResolver);
