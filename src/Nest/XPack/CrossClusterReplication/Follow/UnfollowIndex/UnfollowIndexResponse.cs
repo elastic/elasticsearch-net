@@ -2,7 +2,5 @@
 {
 	public interface IUnfollowIndexResponse : IAcknowledgedResponse { }
 
-	public class UnfollowIndexResponse : AcknowledgedResponseBase, IUnfollowIndexResponse
-	{
-	}
+	public class UnfollowIndexResponse : AcknowledgedResponseBase, IUnfollowIndexResponse { }
 }

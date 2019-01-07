@@ -7,7 +7,11 @@ namespace Nest
 {
 	public partial interface IElasticClient
 	{
-		/// <summary></summary>
+		/// <summary>
+		/// This API resumes a follower index that has been paused either explicitly with the pause follower API or
+		/// implicitly due to execution that can not be retried due to failure during following. When this API returns,
+		/// the follower index will resume fetching operations from the leader index.
+		/// </summary>
 		IResumeFollowIndexResponse ResumeFollowIndex(IndexName index, Func<ResumeFollowIndexDescriptor, IResumeFollowIndexRequest> selector = null);
 
 		/// <inheritdoc cref="ResumeFollowIndex(IndexName, System.Func{Nest.ResumeFollowIndexDescriptor,Nest.IResumeFollowIndexRequest})" />

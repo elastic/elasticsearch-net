@@ -3,6 +3,11 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// This API resumes a follower index that has been paused either explicitly with the pause follower API or
+	/// implicitly due to execution that can not be retried due to failure during following. When this API returns,
+	/// the follower index will resume fetching operations from the leader index.
+	/// </summary>
 	[MapsApi("ccr.resume_follow.json")]
 	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<ResumeFollowIndexRequest>))]
 	public partial interface IResumeFollowIndexRequest
@@ -38,6 +43,7 @@ namespace Nest
 		Time ReadPollTimeout { get; set; }
 	}
 
+	/// <inheritdoc cref="IResumeFollowIndexRequest"/>
 	public partial class ResumeFollowIndexRequest
 	{
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxReadRequestOperationCount"/>
@@ -72,6 +78,7 @@ namespace Nest
 
 	}
 
+	/// <inheritdoc cref="IResumeFollowIndexRequest"/>
 	public partial class ResumeFollowIndexDescriptor
 	{
 		long? IResumeFollowIndexRequest.MaxReadRequestOperationCount { get; set; }

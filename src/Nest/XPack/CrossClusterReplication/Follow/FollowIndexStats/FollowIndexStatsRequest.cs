@@ -3,30 +3,17 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// This API gets follower stats. This API will return shard-level stats about the following tasks
+	/// associated with each shard for the specified indices.
+	/// </summary>
 	[MapsApi("ccr.follow_stats.json")]
 	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<FollowIndexStatsRequest>))]
-	public partial interface IFollowIndexStatsRequest
-	{
-		/// <summary>
-		///
-		/// <para>
-		/// </para>
-		/// </summary>
-		[JsonProperty("cursor")]
-		string Cursor { get; set; }
-	}
+	public partial interface IFollowIndexStatsRequest { }
 
-	public partial class FollowIndexStatsRequest
-	{
-		/// <inheritdoc cref="IFollowIndexStatsRequest.Cursor" />
-		public string Cursor { get; set; }
-	}
+	/// <inheritdoc cref="IFollowIndexStatsRequest"/>
+	public partial class FollowIndexStatsRequest { }
 
-	public partial class FollowIndexStatsDescriptor
-	{
-		string IFollowIndexStatsRequest.Cursor { get; set; }
-
-		/// <inheritdoc cref="IFollowIndexStatsRequest.Cursor" />
-		public FollowIndexStatsDescriptor Cursor(string cursor) => Assign(a => a.Cursor = cursor);
-	}
+	/// <inheritdoc cref="IFollowIndexStatsRequest"/>
+	public partial class FollowIndexStatsDescriptor { }
 }

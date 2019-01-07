@@ -3,30 +3,18 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// This API pauses a follower index. When this API returns, the follower index will not fetch any additional operations from
+	/// the leader index. You can resume following with the resume follower API. Pausing and resuming a follower index can be
+	/// used to change the configuration of the following task.
+	/// </summary>
 	[MapsApi("ccr.pause_follow.json")]
 	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<PauseFollowIndexRequest>))]
-	public partial interface IPauseFollowIndexRequest
-	{
-		/// <summary>
-		///
-		/// <para>
-		/// </para>
-		/// </summary>
-		[JsonProperty("cursor")]
-		string Cursor { get; set; }
-	}
+	public partial interface IPauseFollowIndexRequest { }
 
-	public partial class PauseFollowIndexRequest
-	{
-		/// <inheritdoc cref="IPauseFollowIndexRequest.Cursor" />
-		public string Cursor { get; set; }
-	}
+	/// <inheritdoc cref="IPauseFollowIndexRequest"/>
+	public partial class PauseFollowIndexRequest { }
 
-	public partial class PauseFollowIndexDescriptor
-	{
-		string IPauseFollowIndexRequest.Cursor { get; set; }
-
-		/// <inheritdoc cref="IPauseFollowIndexRequest.Cursor" />
-		public PauseFollowIndexDescriptor Cursor(string cursor) => Assign(a => a.Cursor = cursor);
-	}
+	/// <inheritdoc cref="IPauseFollowIndexRequest"/>
+	public partial class PauseFollowIndexDescriptor { }
 }

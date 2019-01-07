@@ -7,7 +7,11 @@ namespace Nest
 {
 	public partial interface IElasticClient
 	{
-		/// <summary></summary>
+		/// <summary>
+		/// This API pauses a follower index. When this API returns, the follower index will not fetch any additional operations from
+		/// the leader index. You can resume following with the resume follower API. Pausing and resuming a follower index can be
+		/// used to change the configuration of the following task.
+		/// </summary>
 		IPauseFollowIndexResponse PauseFollowIndex(IndexName index, Func<PauseFollowIndexDescriptor, IPauseFollowIndexRequest> selector = null);
 
 		/// <inheritdoc cref="PauseFollowIndex(IndexName, System.Func{Nest.PauseFollowIndexDescriptor,Nest.IPauseFollowIndexRequest})" />

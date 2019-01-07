@@ -3,30 +3,18 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// This API stops the following task associated with a follower index and removes index metadata and settings associated with
+	/// cross-cluster replication. This enables the index to treated as a regular index. The follower index must be paused and closed
+	/// before invoking the unfollow API.
+	/// </summary>
 	[MapsApi("ccr.unfollow.json")]
 	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<UnfollowIndexRequest>))]
-	public partial interface IUnfollowIndexRequest
-	{
-		/// <summary>
-		///
-		/// <para>
-		/// </para>
-		/// </summary>
-		[JsonProperty("cursor")]
-		string Cursor { get; set; }
-	}
+	public partial interface IUnfollowIndexRequest { }
 
-	public partial class UnfollowIndexRequest
-	{
-		/// <inheritdoc cref="IUnfollowIndexRequest.Cursor" />
-		public string Cursor { get; set; }
-	}
+	/// <inheritdoc cref="IUnfollowIndexRequest"/>
+	public partial class UnfollowIndexRequest { }
 
-	public partial class UnfollowIndexDescriptor
-	{
-		string IUnfollowIndexRequest.Cursor { get; set; }
-
-		/// <inheritdoc cref="IUnfollowIndexRequest.Cursor" />
-		public UnfollowIndexDescriptor Cursor(string cursor) => Assign(a => a.Cursor = cursor);
-	}
+	/// <inheritdoc cref="IUnfollowIndexRequest"/>
+	public partial class UnfollowIndexDescriptor { }
 }
