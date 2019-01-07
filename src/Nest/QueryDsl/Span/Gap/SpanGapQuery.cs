@@ -6,10 +6,11 @@ using Utf8Json;
 namespace Nest
 {
 	[InterfaceDataContract]
-	[ReadAs(typeof(SpanGapQueryFormatter))]
+	[JsonFormatter(typeof(SpanGapQueryFormatter))]
 	public interface ISpanGapQuery : ISpanSubQuery
 	{
 		Field Field { get; set; }
+
 		int? Width { get; set; }
 	}
 
@@ -42,9 +43,9 @@ namespace Nest
 		public SpanGapQueryDescriptor<T> Width(int? width) => Assign(a => a.Width = width);
 	}
 
-	internal class SpanGapQueryFormatter : ReadAsFormatter<SpanGapQuery, ISpanGapQuery>
+	internal class SpanGapQueryFormatter : IJsonFormatter<ISpanGapQuery>
 	{
-		public override void Serialize(ref JsonWriter writer, ISpanGapQuery value, IJsonFormatterResolver formatterResolver)
+		public void Serialize(ref JsonWriter writer, ISpanGapQuery value, IJsonFormatterResolver formatterResolver)
 		{
 			if (value == null || SpanGapQuery.IsConditionless(value))
 			{
@@ -52,7 +53,31 @@ namespace Nest
 				return;
 			}
 
-			base.Serialize(ref writer, value, formatterResolver);
+			writer.WriteBeginObject();
+			var inferrer = formatterResolver.GetConnectionSettings().Inferrer;
+			writer.WritePropertyName(inferrer.Field(value.Field));
+			writer.WriteInt32(value.Width.Value);
+			writer.WriteEndObject();
+		}
+
+		public ISpanGapQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			if (reader.GetCurrentJsonToken() == JsonToken.Null)
+				return null;
+
+			var count = 0;
+			var query = new SpanGapQuery();
+
+			while (reader.ReadIsInObject(ref count))
+			{
+				if (count > 1)
+					continue;
+
+				query.Field = reader.ReadPropertyName();
+				query.Width = reader.ReadInt32();
+			}
+
+			return query;
 		}
 	}
 }

@@ -7,7 +7,7 @@ namespace Nest
 	[JsonFormatter(typeof(FieldNameQueryFormatter<TermQuery, ITermQuery>))]
 	public interface ITermQuery : IFieldNameQuery
 	{
-		[DataMember(Name ="value")]
+		[DataMember(Name = "value")]
 		[JsonFormatter(typeof(SourceWriteFormatter<object>))]
 		object Value { get; set; }
 	}
