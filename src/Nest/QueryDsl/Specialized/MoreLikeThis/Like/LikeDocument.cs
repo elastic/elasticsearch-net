@@ -9,7 +9,7 @@ namespace Nest
 	public interface ILikeDocument
 	{
 		[DataMember(Name = "doc")]
-		[JsonFormatter(typeof(SourceFormatter<>))]
+		[JsonFormatter(typeof(SourceFormatter<object>))]
 		object Document { get; set; }
 
 		[DataMember(Name = "fields")]
@@ -33,6 +33,7 @@ namespace Nest
 
 	public abstract class LikeDocumentBase : ILikeDocument
 	{
+		[IgnoreDataMember]
 		private Routing _routing;
 
 		public object Document { get; set; }
@@ -86,7 +87,6 @@ namespace Nest
 		}
 
 		object ILikeDocument.Document { get; set; }
-
 		Fields ILikeDocument.Fields { get; set; }
 		Id ILikeDocument.Id { get; set; }
 		IndexName ILikeDocument.Index { get; set; }
