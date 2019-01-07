@@ -49,7 +49,6 @@ namespace Nest
 				{
 					query.Field = property.Utf8String();
 					ReadTerms(ref reader, query, formatterResolver);
-					break;
 				}
 			}
 

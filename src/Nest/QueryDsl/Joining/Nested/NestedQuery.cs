@@ -6,7 +6,7 @@ using Utf8Json;
 namespace Nest
 {
 	[InterfaceDataContract]
-	[ReadAs(typeof(NestedQueryDescriptor<object>))]
+	[ReadAs(typeof(NestedQuery))]
 	public interface INestedQuery : IQuery
 	{
 		[DataMember(Name ="ignore_unmapped")]
@@ -39,7 +39,6 @@ namespace Nest
 		internal static bool IsConditionless(INestedQuery q) => q.Path == null || q.Query.IsConditionless();
 	}
 
-	[DataContract]
 	public class NestedQueryDescriptor<T>
 		: QueryDescriptorBase<NestedQueryDescriptor<T>, INestedQuery>
 			, INestedQuery where T : class
