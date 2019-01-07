@@ -14,6 +14,7 @@ using Tests.Framework.Integration;
 
 namespace Tests.XPack.CrossClusterReplication
 {
+	[SkipVersion("<6.5.0", "")]
 	public class CrossClusterReplicationAutoFollowTests : CoordinatedIntegrationTestBase<WritableCluster>
 	{
 		private const string CreateAutoFollowStep = nameof(CreateAutoFollowStep);
