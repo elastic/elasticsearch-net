@@ -77,7 +77,7 @@ namespace Nest
 				}
 				catch (Exception ex)
 				{
-					throw new InvalidOperationException($"Can not create formatter from {nameof(ReadAsAttribute)} for {writeAsAttribute.Type.Name}", ex);
+					throw new InvalidOperationException($"Can not create formatter from {nameof(WriteAsAttribute)} for {writeAsAttribute.Type.Name}", ex);
 				}
 			}
 		}
