@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Utf8Json;
 using Utf8Json.Internal;
+using Utf8Json.Resolvers;
 
 namespace Nest
 {
@@ -59,7 +60,33 @@ namespace Nest
 
 		public void Serialize(ref JsonWriter writer, IScript value, IJsonFormatterResolver formatterResolver)
 		{
-			var formatter = formatterResolver;
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
+
+			switch (value)
+			{
+				case IInlineScript inlineScript:
+				{
+					var formatter = formatterResolver.GetFormatter<IInlineScript>();
+					formatter.Serialize(ref writer, inlineScript, formatterResolver);
+					break;
+				}
+				case IIndexedScript indexedScript:
+				{
+					var formatter = formatterResolver.GetFormatter<IIndexedScript>();
+					formatter.Serialize(ref writer, indexedScript, formatterResolver);
+					break;
+				}
+				default:
+				{
+					var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IScript>();
+					formatter.Serialize(ref writer, value, formatterResolver);
+					break;
+				}
+			}
 		}
 	}
 }
