@@ -49,9 +49,13 @@ namespace Nest
 			switch (value._tag)
 			{
 				case 0:
-					formatterResolver.GetFormatter<JoinField.Parent>().Serialize(ref writer, value._parent, formatterResolver);
+				{
+					var relationNameFormatter = formatterResolver.GetFormatter<RelationName>();
+					relationNameFormatter.Serialize(ref writer, value._parent.Name, formatterResolver);
 					break;
+				}
 				case 1:
+				{
 					var child = value._child;
 					writer.WriteBeginObject();
 					writer.WritePropertyName("name");
@@ -63,6 +67,7 @@ namespace Nest
 					writer.WriteString(id);
 					writer.WriteEndObject();
 					break;
+				}
 			}
 		}
 	}
