@@ -8,7 +8,7 @@ using Utf8Json;
 namespace Nest
 {
 	[InterfaceDataContract]
-	[ReadAs(typeof(MoreLikeThisQueryDescriptor<object>))]
+	[ReadAs(typeof(MoreLikeThisQuery))]
 	public interface IMoreLikeThisQuery : IQuery
 	{
 		[DataMember(Name ="analyzer")]
