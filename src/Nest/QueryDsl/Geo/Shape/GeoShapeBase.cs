@@ -211,6 +211,8 @@ namespace Nest
 				if (propertyName == "geometries")
 					geoShapes = formatterResolver.GetFormatter<IEnumerable<IGeoShape>>()
 						.Deserialize(ref reader, formatterResolver);
+				else
+					reader.ReadNextBlock();
 			}
 
 			return new GeometryCollection { Geometries = geoShapes };
@@ -260,6 +262,9 @@ namespace Nest
 					case "radius":
 						radius = reader.ReadString();
 						break;
+					default:
+						reader.ReadNextBlock();
+						break;
 				}
 			}
 
@@ -273,17 +278,20 @@ namespace Nest
 		private static T GetCoordinates<T>(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var count = 0;
+			T coordinates = default(T);
 			while (reader.ReadIsInObject(ref count))
 			{
 				var propertyName = reader.ReadPropertyName();
 				if (propertyName == "coordinates")
 				{
 					var formatter = formatterResolver.GetFormatter<T>();
-					return formatter.Deserialize(ref reader, formatterResolver);
+					coordinates = formatter.Deserialize(ref reader, formatterResolver);
 				}
+				else
+					reader.ReadNextBlock();
 			}
 
-			return default(T);
+			return coordinates;
 		}
 	}
 }

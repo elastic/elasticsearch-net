@@ -7,7 +7,8 @@ namespace Nest
 {
 	internal class GeoShapeQueryFieldNameFormatter : IJsonFormatter<IGeoShapeQuery>
 	{
-		public IGeoShapeQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) => throw new NotSupportedException();
+		public IGeoShapeQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
+			throw new NotSupportedException();
 
 		public void Serialize(ref JsonWriter writer, IGeoShapeQuery value, IJsonFormatterResolver formatterResolver)
 		{
@@ -52,26 +53,55 @@ namespace Nest
 			}
 
 			writer.WritePropertyName(field);
-			var shapeFormatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IGeoShapeQuery>();
-			shapeFormatter.Serialize(ref writer, value, formatterResolver);
+
+			writer.WriteBeginObject();
+
+			var written = false;
+
+			if (value.Shape != null)
+			{
+				writer.WritePropertyName("shape");
+				var shapeFormatter = formatterResolver.GetFormatter<IGeoShape>();
+				shapeFormatter.Serialize(ref writer, value.Shape, formatterResolver);
+				written = true;
+			}
+			else if (value.IndexedShape != null)
+			{
+				writer.WritePropertyName("indexed_shape");
+				var fieldLookupFormatter = formatterResolver.GetFormatter<IFieldLookup>();
+				fieldLookupFormatter.Serialize(ref writer, value.IndexedShape, formatterResolver);
+				written = true;
+			}
+
+			if (value.Relation.HasValue)
+			{
+				if (written)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName("relation");
+				formatterResolver.GetFormatter<GeoShapeRelation>()
+					.Serialize(ref writer, value.Relation.Value, formatterResolver);
+			}
+
+			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 	}
 
 	internal class GeoShapeQueryFormatter : IJsonFormatter<IGeoShapeQuery>
 	{
-		private static readonly AutomataDictionary AutomataDictionary = new AutomataDictionary
+		private static readonly AutomataDictionary Fields = new AutomataDictionary
 		{
 			{ "boost", 0 },
 			{ "_name", 1 },
-			{ "ignore_unmapped", 2 },
-			{ "relation", 3 }
+			{ "ignore_unmapped", 2 }
 		};
 
-		private static readonly AutomataDictionary ShapeDictionary = new AutomataDictionary
+		private static readonly AutomataDictionary ShapeFields = new AutomataDictionary
 		{
 			{ "shape", 0 },
-			{ "indexed_shape", 1 }
+			{ "indexed_shape", 1 },
+			{ "relation", 2 }
 		};
 
 		public IGeoShapeQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -92,7 +122,7 @@ namespace Nest
 			while (reader.ReadIsInObject(ref count))
 			{
 				var propertyName = reader.ReadPropertyNameSegmentRaw();
-				if (AutomataDictionary.TryGetValue(propertyName, out var value))
+				if (Fields.TryGetValue(propertyName, out var value))
 				{
 					switch (value)
 					{
@@ -105,20 +135,16 @@ namespace Nest
 						case 2:
 							ignoreUnmapped = reader.ReadBoolean();
 							break;
-						case 3:
-							relation = formatterResolver.GetFormatter<GeoShapeRelation>()
-								.Deserialize(ref reader, formatterResolver);
-							break;
 					}
 				}
 				else
 				{
 					field = propertyName.Utf8String();
-					if (reader.ReadIsBeginObject())
+					var shapeCount = 0;
+					while (reader.ReadIsInObject(ref shapeCount))
 					{
-						reader.ReadNext();
 						var shapeProperty = reader.ReadPropertyNameSegmentRaw();
-						if (ShapeDictionary.TryGetValue(shapeProperty, out var shapeValue))
+						if (ShapeFields.TryGetValue(shapeProperty, out var shapeValue))
 						{
 							switch (shapeValue)
 							{
@@ -135,6 +161,10 @@ namespace Nest
 									{
 										IndexedShape = fieldLookupFormatter.Deserialize(ref reader, formatterResolver)
 									};
+									break;
+								case 2:
+									relation = formatterResolver.GetFormatter<GeoShapeRelation>()
+										.Deserialize(ref reader, formatterResolver);
 									break;
 							}
 						}
