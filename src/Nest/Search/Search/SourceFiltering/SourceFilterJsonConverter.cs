@@ -1,10 +1,11 @@
 using System;
 using Utf8Json;
 using Utf8Json.Internal;
+using Utf8Json.Resolvers;
 
 namespace Nest
 {
-	internal class SourceFilterFormatter : IJsonFormatter<SourceFilter>
+	internal class SourceFilterFormatter : IJsonFormatter<ISourceFilter>
 	{
 		private static readonly AutomataDictionary Fields = new AutomataDictionary
 		{
@@ -12,7 +13,7 @@ namespace Nest
 			{ "excludes", 1 }
 		};
 
-		public SourceFilter Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		public ISourceFilter Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var token = reader.GetCurrentJsonToken();
 			if (token == JsonToken.Null)
@@ -36,7 +37,7 @@ namespace Nest
 						var propertyName = reader.ReadPropertyNameSegmentRaw();
 						if (Fields.TryGetValue(propertyName, out var value))
 						{
-							var includeExclude = formatterResolver.GetFormatter<string[]>()
+							var includeExclude = formatterResolver.GetFormatter<Fields>()
 								.Deserialize(ref reader, formatterResolver);
 
 							switch (value)
@@ -49,6 +50,8 @@ namespace Nest
 									break;
 							}
 						}
+						else
+							reader.ReadNextBlock();
 					}
 					break;
 			}
@@ -56,7 +59,16 @@ namespace Nest
 			return filter;
 		}
 
-		public void Serialize(ref JsonWriter writer, SourceFilter value, IJsonFormatterResolver formatterResolver) =>
-			throw new NotSupportedException();
+		public void Serialize(ref JsonWriter writer, ISourceFilter value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
+
+			DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<ISourceFilter>()
+				.Serialize(ref writer, value, formatterResolver);
+		}
 	}
 }
