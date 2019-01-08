@@ -158,16 +158,20 @@ namespace Nest
 						switch (value)
 						{
 							case 0:
-								fieldLookup.Id = reader.ReadString();
+								fieldLookup.Id = formatterResolver.GetFormatter<Id>()
+									.Deserialize(ref reader, formatterResolver);
 								break;
 							case 1:
-								fieldLookup.Index = reader.ReadString();
+								fieldLookup.Index = formatterResolver.GetFormatter<IndexName>()
+									.Deserialize(ref reader, formatterResolver);
 								break;
 							case 2:
-								fieldLookup.Path = reader.ReadString();
+								fieldLookup.Path = formatterResolver.GetFormatter<Field>()
+									.Deserialize(ref reader, formatterResolver);
 								break;
 							case 3:
-								fieldLookup.Routing = reader.ReadString();
+								fieldLookup.Routing = formatterResolver.GetFormatter<Routing>()
+									.Deserialize(ref reader, formatterResolver);
 								break;
 						}
 					}

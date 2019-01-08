@@ -81,18 +81,15 @@ namespace Nest
 								{
 									case JsonToken.String:
 										var valueSegment = reader.ReadStringSegmentUnsafe();
-										try
+										if (valueSegment.IsDateTime(formatterResolver, out var dateTime))
 										{
-											// TODO: possibly nicer way of doing this than brute try?
-											var dateTimeReader = new JsonReader(valueSegment.Array, valueSegment.Offset - 1); // include opening "
-											var dateTime = ISO8601DateTimeFormatter.Default.Deserialize(ref dateTimeReader, formatterResolver);
 											query = new FuzzyDateQuery
 											{
 												Field = field,
 												Value = dateTime
 											};
 										}
-										catch
+										else
 										{
 											query = new FuzzyQuery
 											{
