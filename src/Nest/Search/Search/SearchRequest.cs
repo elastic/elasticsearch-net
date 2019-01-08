@@ -25,7 +25,7 @@ namespace Nest
 		IHighlight Highlight { get; set; }
 
 		[DataMember(Name = "indices_boost")]
-		//[JsonFormatter(typeof(IndicesBoostFormatter))]
+		[JsonFormatter(typeof(IndicesBoostFormatter))]
 		IDictionary<IndexName, double> IndicesBoost { get; set; }
 
 		[DataMember(Name = "min_score")]
@@ -91,6 +91,8 @@ namespace Nest
 		public bool? Explain { get; set; }
 		public int? From { get; set; }
 		public IHighlight Highlight { get; set; }
+		// TODO: Change Utf8Json to look up JsonFormatterType from implemented interface
+		[JsonFormatter(typeof(IndicesBoostFormatter))]
 		public IDictionary<IndexName, double> IndicesBoost { get; set; }
 		public double? MinScore { get; set; }
 		public QueryContainer PostFilter { get; set; }
