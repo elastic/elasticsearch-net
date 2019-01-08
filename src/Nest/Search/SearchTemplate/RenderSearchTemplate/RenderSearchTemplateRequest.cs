@@ -7,18 +7,18 @@ namespace Nest
 {
 	public partial interface IRenderSearchTemplateRequest
 	{
-		[DataMember(Name ="file")]
+		[DataMember(Name = "file")]
 		string File { get; set; }
 
 		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
 		[IgnoreDataMember]
 		string Inline { get; set; }
 
-		[DataMember(Name ="params")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, object>))]
+		[DataMember(Name = "params")]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatterBase<Dictionary<string, object>, string, object>))]
 		Dictionary<string, object> Params { get; set; }
 
-		[DataMember(Name ="source")]
+		[DataMember(Name = "source")]
 		string Source { get; set; }
 	}
 
