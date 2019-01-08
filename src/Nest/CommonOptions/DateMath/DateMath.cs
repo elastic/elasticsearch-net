@@ -40,6 +40,9 @@ namespace Nest
 
 		public static implicit operator DateMath(string dateMath) => FromString(dateMath);
 
+		public static bool IsValid(string dateMath) =>
+			dateMath != null && DateMathRegex.IsMatch(dateMath);
+
 		public static DateMath FromString(string dateMath)
 		{
 			if (dateMath == null) return null;
@@ -89,7 +92,7 @@ namespace Nest
 
 			var sb = new StringBuilder();
 			var anchor = Self.Anchor.Match(
-				d => d.ToString("yyyy-MM-ddTHH:mm:ss") + separator,
+				d => d.ToString("yyyy-MM-ddTHH:mm:ss.fff") + separator,
 				s => s == "now" || s.EndsWith("||", StringComparison.Ordinal) ? s : s + separator
 			);
 			sb.Append(anchor);
@@ -115,19 +118,12 @@ namespace Nest
 				return null;
 
 			var segment = reader.ReadStringSegmentUnsafe();
-			var segmentReader = new JsonReader(segment.Array, segment.Offset - 1); // include opening "
 
-			try
-			{
-				// TODO: possibly nicer way of doing this than brute try?
-				var dateTime = ISO8601DateTimeFormatter.Default.Deserialize(ref segmentReader, formatterResolver);
+			if (!segment.ContainsDateMathSeparator() && segment.IsDateTime(formatterResolver, out var dateTime))
 				return DateMath.Anchored(dateTime);
-			}
-			catch (InvalidOperationException)
-			{
-				var value = segment.Utf8String();
-				return DateMath.FromString(value);
-			}
+
+			var value = segment.Utf8String();
+			return DateMath.FromString(value);
 		}
 
 		public void Serialize(ref JsonWriter writer, DateMath value, IJsonFormatterResolver formatterResolver) =>

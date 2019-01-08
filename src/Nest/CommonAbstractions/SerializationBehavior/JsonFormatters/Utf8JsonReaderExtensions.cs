@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Text;
 using Utf8Json;
+using Utf8Json.Formatters;
 
 namespace Nest
 {
@@ -40,13 +41,52 @@ namespace Nest
 
 	internal static class ArraySegmentBytesExtensions
 	{
+		private const byte DateMathSeparator = (byte)'|';
+
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool IsDouble(this ref ArraySegment<byte> arraySegment)
 		{
-			for (var i = arraySegment.Offset; i < arraySegment.Count; i++)
+			var i = 0;
+			while (i < arraySegment.Count)
 			{
-				if (arraySegment.Array[i] == 48)
+				if (arraySegment.Array[arraySegment.Offset + i] == 46)
 					return true;
+
+				i++;
+			}
+
+			return false;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsDateTime(this ref ArraySegment<byte> arraySegment, IJsonFormatterResolver formatterResolver, out DateTime dateTime)
+		{
+			dateTime = default;
+
+			// TODO: Nicer way to do this
+			var reader = new JsonReader(arraySegment.Array, arraySegment.Offset - 1); // include opening quote "
+            try
+            {
+            	dateTime = ISO8601DateTimeFormatter.Default.Deserialize(ref reader, formatterResolver);
+				return true;
+			}
+            catch
+			{
+				return false;
+			}
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool ContainsDateMathSeparator(this ref ArraySegment<byte> segment)
+		{
+			var i = 0;
+			while (i < segment.Count)
+			{
+				if (segment.Array[segment.Offset + i] == DateMathSeparator &&
+					i + 1 < segment.Count && segment.Array[segment.Offset + i + 1] == DateMathSeparator)
+					return true;
+
+				i++;
 			}
 
 			return false;

@@ -3,7 +3,7 @@ using Utf8Json;
 
 namespace Nest
 {
-//	[InterfaceDataContract]
-//	[JsonFormatter(typeof(RangeQueryJsonConverter))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(RangeQueryFormatter))]
 	public interface IRangeQuery : IFieldNameQuery { }
 }
