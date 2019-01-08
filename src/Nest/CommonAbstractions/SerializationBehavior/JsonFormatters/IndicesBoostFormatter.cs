@@ -3,64 +3,57 @@ using Utf8Json;
 
 namespace Nest
 {
-	// TODO: See if needed
-	internal class IndicesBoostFormatter : IJsonFormatter<Dictionary<IndexName, double>>
+	public class IndicesBoostFormatter : IJsonFormatter<IDictionary<IndexName, double>>
 	{
-		public void Serialize(ref JsonWriter writer, Dictionary<IndexName, double> value, IJsonFormatterResolver formatterResolver) { }
+		public void Serialize(ref JsonWriter writer, IDictionary<IndexName, double> value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
 
-		public Dictionary<IndexName, double> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) => null;
+			var settings = formatterResolver.GetConnectionSettings();
+			writer.WriteBeginArray();
+			var count = 0;
+			foreach (var entry in value)
+			{
+				if (count > 0)
+					writer.WriteValueSeparator();
+				writer.WriteBeginObject();
+				var indexName = settings.Inferrer.IndexName(entry.Key);
+				writer.WritePropertyName(indexName);
+				writer.WriteDouble(entry.Value);
+				writer.WriteEndObject();
+				count++;
+			}
+			writer.WriteEndArray();
+		}
+
+		public IDictionary<IndexName, double> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			var token = reader.GetCurrentJsonToken();
+			switch (token)
+			{
+				case JsonToken.BeginObject:
+					return formatterResolver.GetFormatter<Dictionary<IndexName, double>>()
+						.Deserialize(ref reader, formatterResolver);
+				case JsonToken.BeginArray:
+					var dictionary = new Dictionary<IndexName, double>();
+					var count = 0;
+					var indexNameFormatter = formatterResolver.GetFormatter<IndexName>();
+					while (reader.ReadIsInArray(ref count))
+					{
+						reader.ReadIsBeginObjectWithVerify();
+						var indexName = indexNameFormatter.Deserialize(ref reader, formatterResolver);
+						reader.ReadIsNameSeparatorWithVerify();
+						dictionary.Add(indexName, reader.ReadDouble());
+						reader.ReadIsEndObjectWithVerify();
+					}
+					return dictionary;
+				default:
+					return null;
+			}
+		}
 	}
-
-//	internal class IndicesBoostJsonConverter : JsonConverter
-//	{
-//		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-//		{
-//			var dictionary = (IDictionary<IndexName, double>)value;
-//			if (dictionary == null)
-//			{
-//				writer.WriteNull();
-//				return;
-//			}
-//
-//			var settings = serializer.GetConnectionSettings();
-//			writer.WriteStartArray();
-//			foreach (var entry in dictionary)
-//			{
-//				writer.WriteStartObject();
-//				var indexName = settings.Inferrer.IndexName(entry.Key);
-//				if (indexName != null)
-//				{
-//					writer.WritePropertyName(indexName);
-//					serializer.Serialize(writer, entry.Value);
-//				}
-//				writer.WriteEndObject();
-//			}
-//			writer.WriteEndArray();
-//		}
-//
-//		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-//		{
-//			switch (reader.TokenType)
-//			{
-//				case JsonToken.StartObject:
-//					return serializer.Deserialize<Dictionary<IndexName, double>>(reader);
-//				case JsonToken.StartArray:
-//					var dictionary = new Dictionary<IndexName, double>();
-//					while (reader.TokenType != JsonToken.EndArray)
-//					{
-//						reader.Read();
-//						if (reader.TokenType == JsonToken.PropertyName)
-//						{
-//							var indexName = (IndexName)(string)reader.Value;
-//							dictionary.Add(indexName, reader.ReadAsDouble().GetValueOrDefault());
-//						}
-//					}
-//					return dictionary;
-//				default:
-//					return null;
-//			}
-//		}
-//
-//		public override bool CanConvert(Type objectType) => true;
-//	}
 }

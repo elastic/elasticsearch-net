@@ -65,7 +65,8 @@ namespace Nest
 		{
 			var formatter = formatterResolver.GetFormatter<QueryContainer>();
 			var token = reader.GetCurrentJsonToken();
-			switch (token) {
+			switch (token)
+			{
 				case JsonToken.BeginArray:
 				{
 					var count = 0;
