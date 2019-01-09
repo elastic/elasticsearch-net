@@ -131,6 +131,18 @@ namespace Tests.XPack.Rollup
 					)
 			},
 			{
+				"rollup_index_caps", () =>
+					Calls<GetRollupIndexCapabilitiesDescriptor, GetRollupIndexCapabilitiesRequest, IGetRollupIndexCapabilitiesRequest, IGetRollupIndexCapabilitiesResponse
+					>(
+						IndexCapsInitializer,
+						IndexCapsFluent,
+						(s, c, f) => c.GetRollupIndexCapabilities(CreateRollupName(s), f),
+						(s, c, f) => c.GetRollupIndexCapabilitiesAsync(CreateRollupName(s), f),
+						(s, c, r) => c.GetRollupIndexCapabilities(r),
+						(s, c, r) => c.GetRollupIndexCapabilitiesAsync(r)
+					)
+			},
+			{
 				"stop", () => Calls<StopRollupJobDescriptor, StopRollupJobRequest, IStopRollupJobRequest, IStopRollupJobResponse>(
 					StopInitializer,
 					StopFluent,
@@ -149,6 +161,10 @@ namespace Tests.XPack.Rollup
 		protected StopRollupJobRequest StopInitializer(string role) => new StopRollupJobRequest(CreateRollupName(role));
 
 		protected IStopRollupJobRequest StopFluent(string role, StopRollupJobDescriptor d) => d;
+
+		protected GetRollupIndexCapabilitiesRequest IndexCapsInitializer(string role) => new GetRollupIndexCapabilitiesRequest(CreateRollupName(role));
+
+		protected IGetRollupIndexCapabilitiesRequest IndexCapsFluent(string role, GetRollupIndexCapabilitiesDescriptor d) => d;
 
 		protected GetRollupCapabilitiesRequest CapsInitializer(string role) => new GetRollupCapabilitiesRequest(TimeSeriesSeeder.IndicesWildCard);
 
@@ -243,6 +259,27 @@ namespace Tests.XPack.Rollup
 				foreach (var c in capabilities)
 					c.Should().ContainKey("agg");
 			});
+
+		[I] public async Task GetRollupIndexCapabilities() =>
+			await AssertOnAfterCreateResponse<IGetRollupIndexCapabilitiesResponse>("rollup_index_caps", r =>
+			{
+				r.IsValid.Should().BeTrue();
+				r.Indices.Should().NotBeEmpty().And.HaveCount(1);
+
+				var indexCaps = r.Indices.First().Value;
+				indexCaps.Should().NotBeNull();
+				indexCaps.RollupJobs.Should().NotBeEmpty();
+				var job = indexCaps.RollupJobs.First();
+				job.JobId.Should().NotBeNullOrWhiteSpace();
+				job.RollupIndex.Should().NotBeNullOrWhiteSpace();
+				job.IndexPattern.Should().Be(TimeSeriesSeeder.IndicesWildCard);
+				job.Fields.Should().NotBeEmpty();
+				var capabilities = job.Fields.Field<Log>(p => p.Temperature);
+				capabilities.Should().NotBeEmpty();
+				foreach (var c in capabilities)
+					c.Should().ContainKey("agg");
+			});
+
 
 
 		// ignored because we mark SupportsUpdates => false

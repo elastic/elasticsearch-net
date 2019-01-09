@@ -6,7 +6,7 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.Rollup.GetRollupCapabilities
 {
-	public class GetRollupCapabilitiesTests : UrlTestsBase
+	public class GetRollupCapabilitiesUrlTests : UrlTestsBase
 	{
 		[U] public override async Task Urls()
 		{
