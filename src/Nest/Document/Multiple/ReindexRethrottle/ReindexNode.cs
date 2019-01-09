@@ -7,7 +7,7 @@ namespace Nest
 	public class ReindexNode
 	{
 		[DataMember(Name ="attributes")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, string>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, string>))]
 		public IReadOnlyDictionary<string, string> Attributes { get; internal set; } =
 			EmptyReadOnly<string, string>.Dictionary;
 
@@ -24,7 +24,7 @@ namespace Nest
 		public IEnumerable<string> Roles { get; internal set; }
 
 		[DataMember(Name ="tasks")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<TaskId, ReindexTask>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<TaskId, ReindexTask>))]
 		public IReadOnlyDictionary<TaskId, ReindexTask> Tasks { get; internal set; } =
 			EmptyReadOnly<TaskId, ReindexTask>.Dictionary;
 

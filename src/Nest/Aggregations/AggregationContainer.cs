@@ -66,8 +66,8 @@ namespace Nest
 
 	internal class AggregationDictionaryFormatter : IJsonFormatter<AggregationDictionary>
 	{
-		private static readonly VerbatimDictionaryKeysFormatter<string, IAggregationContainer> DictionaryKeysFormatter =
-			new VerbatimDictionaryKeysFormatter<string, IAggregationContainer>();
+		private static readonly VerbatimDictionaryInterfaceKeysFormatter<string, IAggregationContainer> DictionaryKeysFormatter =
+			new VerbatimDictionaryInterfaceKeysFormatter<string, IAggregationContainer>();
 
 		public AggregationDictionary Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
 			new AggregationDictionary(DictionaryKeysFormatter.Deserialize(ref reader, formatterResolver));
@@ -168,7 +168,7 @@ namespace Nest
 		IMaxBucketAggregation MaxBucket { get; set; }
 
 		[DataMember(Name = "meta")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, object>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, object>))]
 		IDictionary<string, object> Meta { get; set; }
 
 		[DataMember(Name = "min")]

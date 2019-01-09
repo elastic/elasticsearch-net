@@ -11,7 +11,7 @@ namespace Nest
 		///  A dictionary of nodeId => nodeinfo of nodes that verified the repository
 		/// </summary>
 		[DataMember(Name = "nodes")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, CompactNodeInfo>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, CompactNodeInfo>))]
 		IReadOnlyDictionary<string, CompactNodeInfo> Nodes { get; }
 	}
 

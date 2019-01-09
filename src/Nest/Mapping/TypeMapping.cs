@@ -31,7 +31,7 @@ namespace Nest
 		IIndexField IndexField { get; set; }
 
 		[DataMember(Name = "_meta")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, object>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, object>))]
 		IDictionary<string, object> Meta { get; set; }
 
 		[DataMember(Name = "numeric_detection")]

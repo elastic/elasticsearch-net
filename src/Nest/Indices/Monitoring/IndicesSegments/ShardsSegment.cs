@@ -19,7 +19,7 @@ namespace Nest
 		public int SearchSegments { get; internal set; }
 
 		[DataMember(Name = "segments")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, Segment>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, Segment>))]
 		public IReadOnlyDictionary<string, Segment> Segments { get; internal set; } =
 			EmptyReadOnly<string, Segment>.Dictionary;
 
