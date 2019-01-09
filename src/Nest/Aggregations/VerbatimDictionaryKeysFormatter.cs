@@ -80,17 +80,22 @@ namespace Nest
 					seenEntries[key] = entry.Value;
 			}
 
-			writer.WriteBeginObject();
-			var count = 0;
-			foreach (var entry in seenEntries)
-			{
-				if (count != 0)
-					writer.WriteValueSeparator();
-				writer.WritePropertyName(entry.Key);
-				JsonSerializer.Serialize(ref writer, entry.Value);
-				count++;
-			}
-			writer.WriteEndObject();
+			var formatter = formatterResolver.GetFormatter<Dictionary<string, TValue>>();
+			formatter.Serialize(ref writer, seenEntries, formatterResolver);
+
+//			writer.WriteBeginObject();
+//			var count = 0;
+//
+//
+//			foreach (var entry in seenEntries)
+//			{
+//				if (count != 0)
+//					writer.WriteValueSeparator();
+//				writer.WritePropertyName(entry.Key);
+//				JsonSerializer.Serialize(ref writer, entry.Value);
+//				count++;
+//			}
+//			writer.WriteEndObject();
 		}
 
 		protected virtual bool SkipValue(KeyValuePair<TKey, TValue> entry) =>

@@ -59,6 +59,80 @@ namespace Nest
 		}
 	}
 
+	// TODO: Unify with QueryContainerCollectionFormatter
+	public class QueryContainerListFormatter : IJsonFormatter<List<QueryContainer>>
+	{
+		public List<QueryContainer> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			var formatter = formatterResolver.GetFormatter<QueryContainer>();
+			var token = reader.GetCurrentJsonToken();
+			switch (token)
+			{
+				case JsonToken.BeginArray:
+				{
+					var count = 0;
+					var queryContainers = new List<QueryContainer>();
+					while (reader.ReadIsInArray(ref count))
+						queryContainers.Add(formatter.Deserialize(ref reader, formatterResolver));
+
+					return queryContainers;
+				}
+				case JsonToken.BeginObject:
+				{
+					var queryContainers = new List<QueryContainer>
+					{
+						formatter.Deserialize(ref reader, formatterResolver)
+					};
+
+					return queryContainers;
+				}
+				default:
+					reader.ReadNextBlock();
+					return null;
+			}
+		}
+
+		public void Serialize(ref JsonWriter writer, List<QueryContainer> value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null)
+				writer.WriteNull();
+			else
+			{
+				writer.WriteBeginArray();
+				var formatter = formatterResolver.GetFormatter<IQueryContainer>();
+
+				var e = value.GetEnumerator();
+				try
+				{
+					var isFirst = true;
+					var wroteLast = false;
+					while (e.MoveNext())
+					{
+						if (isFirst)
+							isFirst = false;
+						else if (wroteLast)
+						{
+							wroteLast = false;
+							writer.WriteValueSeparator();
+						}
+
+						if (e.Current != null && e.Current.IsWritable)
+						{
+							formatter.Serialize(ref writer, e.Current, formatterResolver);
+							wroteLast = true;
+						}
+					}
+				}
+				finally
+				{
+					e.Dispose();
+				}
+
+				writer.WriteEndArray();
+			}
+		}
+	}
+
 	public class QueryContainerCollectionFormatter : IJsonFormatter<IEnumerable<QueryContainer>>
 	{
 		public IEnumerable<QueryContainer> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
