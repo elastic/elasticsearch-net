@@ -55,6 +55,7 @@ namespace Nest
 		/// <summary>
 		/// The field on which to sort
 		/// </summary>
+		[IgnoreDataMember]
 		Field SortKey { get; }
 	}
 
