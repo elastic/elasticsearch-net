@@ -25,7 +25,8 @@ namespace Nest
 			var token = reader.GetCurrentJsonToken();
 			if (token == JsonToken.BeginArray)
 			{
-				var stopwords = formatterResolver.GetFormatter<IEnumerable<string>>().Deserialize(ref reader, formatterResolver);
+				var stopwords = formatterResolver.GetFormatter<IEnumerable<string>>()
+					.Deserialize(ref reader, formatterResolver);
 				return new StopWords(stopwords);
 			}
 

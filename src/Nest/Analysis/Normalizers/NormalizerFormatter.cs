@@ -1,5 +1,6 @@
 ﻿using System;
 using Utf8Json;
+using Utf8Json.Resolvers;
 
 namespace Nest
 {
@@ -9,7 +10,8 @@ namespace Nest
 			Deserialize<CustomNormalizer>(ref reader, formatterResolver);
 
 		public void Serialize(ref JsonWriter writer, INormalizer value, IJsonFormatterResolver formatterResolver) =>
-			throw new NotSupportedException();
+			DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<ICustomNormalizer>()
+				.Serialize(ref writer, value as ICustomNormalizer, formatterResolver);
 
 		private static TNormalizer Deserialize<TNormalizer>(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 			where TNormalizer : INormalizer
