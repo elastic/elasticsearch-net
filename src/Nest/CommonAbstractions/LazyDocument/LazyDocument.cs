@@ -6,7 +6,7 @@ namespace Nest
 	/// <summary>
 	/// A lazily deserialized document
 	/// </summary>
-	[JsonFormatter(typeof(LazyDocumentJsonFormatter))]
+	[JsonFormatter(typeof(LazyDocumentInterfaceFormatter))]
 	public interface ILazyDocument
 	{
 		/// <summary>
@@ -25,6 +25,7 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
+	[JsonFormatter(typeof(LazyDocumentFormatter))]
 	public class LazyDocument : ILazyDocument
 	{
 		private readonly IJsonFormatterResolver _formatterResolver;

@@ -19,10 +19,8 @@ namespace Nest
 			if (reader.GetCurrentJsonToken() == JsonToken.Null)
 				return null;
 
-			// TODO: ensure this handles all types. May need switch () { reader.ReadNumberSegment(), etc. }
 			var arraySegment = reader.ReadNextBlockSegment();
-
-			return new SqlValue(BinaryUtil.ToArray(arraySegment), formatterResolver);
+			return new SqlValue(BinaryUtil.ToArray(ref arraySegment), formatterResolver);
 		}
 
 		public void Serialize(ref JsonWriter writer, SqlValue value, IJsonFormatterResolver formatterResolver)
