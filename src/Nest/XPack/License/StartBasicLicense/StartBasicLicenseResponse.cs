@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -31,7 +32,7 @@ namespace Nest
 	}
 
 	[JsonConverter(typeof(StartBasicLicenseFeatureAcknowledgementsJsonConverter))]
-	public class StartBasicLicenseFeatureAcknowledgements : Dictionary<string, string[]>
+	public class StartBasicLicenseFeatureAcknowledgements : ReadOnlyDictionary<string, string[]>
 	{
 		internal StartBasicLicenseFeatureAcknowledgements(IDictionary<string, string[]> dictionary)
 			: base(dictionary) { }
