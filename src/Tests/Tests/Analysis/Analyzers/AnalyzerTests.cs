@@ -169,7 +169,7 @@ namespace Tests.Analysis.Analyzers
 		}
 
 
-		public class KuromojuTests : AnalyzerAssertionBase<KuromojuTests>
+		public class KuromojiTests : AnalyzerAssertionBase<KuromojiTests>
 		{
 			public override FuncTokenizer Fluent => (n, an) => an
 				.Kuromoji("kuro", a => a

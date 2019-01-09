@@ -34,6 +34,7 @@ namespace Nest
 		public ITokenizers Tokenizers { get; set; }
 	}
 
+	[DataContract]
 	public class AnalysisDescriptor : DescriptorBase<AnalysisDescriptor, IAnalysis>, IAnalysis
 	{
 		IAnalyzers IAnalysis.Analyzers { get; set; }

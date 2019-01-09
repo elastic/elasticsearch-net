@@ -10,19 +10,19 @@ namespace Nest
 		/// <summary>
 		/// The regular expression flags.
 		/// </summary>
-		[DataMember(Name ="flags")]
+		[DataMember(Name = "flags")]
 		string Flags { get; set; }
 
 		/// <summary>
 		/// Which group to extract into tokens. Defaults to -1 (split).
 		/// </summary>
-		[DataMember(Name ="group")]
+		[DataMember(Name = "group")]
 		int? Group { get; set; }
 
 		/// <summary>
 		/// The regular expression pattern, defaults to \W+.
 		/// </summary>
-		[DataMember(Name ="pattern")]
+		[DataMember(Name = "pattern")]
 		string Pattern { get; set; }
 	}
 

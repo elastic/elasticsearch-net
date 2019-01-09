@@ -1,5 +1,4 @@
-﻿using System;
-using Utf8Json;
+﻿using Utf8Json;
 
 namespace Nest
 {
@@ -13,10 +12,10 @@ namespace Nest
 			string charFilterType = null;
 			while (segmentReader.ReadIsInObject(ref count))
 			{
-				var propertyName = reader.ReadPropertyName();
+				var propertyName = segmentReader.ReadPropertyName();
 				if (propertyName == "type")
 				{
-					charFilterType = reader.ReadString();
+					charFilterType = segmentReader.ReadString();
 					break;
 				}
 			}
@@ -43,8 +42,43 @@ namespace Nest
 			}
 		}
 
-		public void Serialize(ref JsonWriter writer, ICharFilter value, IJsonFormatterResolver formatterResolver) =>
-			throw new NotSupportedException();
+		public void Serialize(ref JsonWriter writer, ICharFilter value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
+
+			switch (value.Type)
+			{
+				case "html_strip":
+					Serialize<IHtmlStripCharFilter>(ref writer, value, formatterResolver);
+					break;
+				case "mapping":
+					Serialize<IMappingCharFilter>(ref writer, value, formatterResolver);
+					break;
+				case "pattern_replace":
+					Serialize<IPatternReplaceCharFilter>(ref writer, value, formatterResolver);
+					break;
+				case "kuromoji_iteration_mark":
+					Serialize<IKuromojiIterationMarkCharFilter>(ref writer, value, formatterResolver);
+					break;
+				case "icu_normalizer":
+					Serialize<IIcuNormalizationCharFilter>(ref writer, value, formatterResolver);
+					break;
+				default:
+					Serialize<ICharFilter>(ref writer, value, formatterResolver);
+					break;
+			}
+		}
+
+		private static void Serialize<TCharFilter>(ref JsonWriter writer, ICharFilter value, IJsonFormatterResolver formatterResolver)
+			where TCharFilter : class, ICharFilter
+		{
+			var formatter = formatterResolver.GetFormatter<TCharFilter>();
+			formatter.Serialize(ref writer, value as TCharFilter, formatterResolver);
+		}
 
 		private static TCharFilter Deserialize<TCharFilter>(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 			where TCharFilter : ICharFilter

@@ -13,13 +13,14 @@ namespace Nest
 			var tokenizerPresent = false;
 			while (segmentReader.ReadIsInObject(ref count))
 			{
-				var propertyName = reader.ReadPropertyName();
+				var propertyName = segmentReader.ReadPropertyName();
 				switch (propertyName)
 				{
 					case "type":
-						analyzerType = reader.ReadString();
+						analyzerType = segmentReader.ReadString();
 						break;
 					case "tokenizer":
+						segmentReader.ReadNext();
 						tokenizerPresent = true;
 						break;
 				}
