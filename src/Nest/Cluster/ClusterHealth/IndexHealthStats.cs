@@ -27,7 +27,7 @@ namespace Nest
 		public int RelocatingShards { get; internal set; }
 
 		[DataMember(Name ="shards")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, ShardHealthStats>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, ShardHealthStats>))]
 		public IReadOnlyDictionary<string, ShardHealthStats> Shards { get; internal set; } = EmptyReadOnly<string, ShardHealthStats>.Dictionary;
 
 		[DataMember(Name ="status")]

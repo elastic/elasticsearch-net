@@ -33,7 +33,7 @@ namespace Nest
 		/// Metadata that will be copied into the history entries
 		/// </summary>
 		[DataMember(Name = "metadata")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, object>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, object>))]
 		IDictionary<string, object> Metadata { get; set; }
 
 		/// <summary>

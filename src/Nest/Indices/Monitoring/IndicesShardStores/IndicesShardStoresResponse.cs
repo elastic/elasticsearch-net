@@ -7,7 +7,7 @@ namespace Nest
 	public interface IIndicesShardStoresResponse : IResponse
 	{
 		[DataMember(Name = "indices")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, IndicesShardStores>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, IndicesShardStores>))]
 		IReadOnlyDictionary<string, IndicesShardStores> Indices { get; }
 	}
 
@@ -20,7 +20,7 @@ namespace Nest
 	public class IndicesShardStores
 	{
 		[DataMember(Name = "shards")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, ShardStoreWrapper>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, ShardStoreWrapper>))]
 		public IReadOnlyDictionary<string, ShardStoreWrapper> Shards { get; internal set; } = EmptyReadOnly<string, ShardStoreWrapper>.Dictionary;
 	}
 
@@ -40,7 +40,7 @@ namespace Nest
 		public string AllocationId { get; internal set; }
 
 		[DataMember(Name = "attributes")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, object>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, object>))]
 		public IReadOnlyDictionary<string, object> Attributes { get; internal set; } = EmptyReadOnly<string, object>.Dictionary;
 
 		[DataMember(Name = "id")]

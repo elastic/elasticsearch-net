@@ -7,7 +7,7 @@ namespace Nest
 	public class IndexRoutingTable
 	{
 		[DataMember(Name = "shards")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, List<RoutingShard>>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, List<RoutingShard>>))]
 		public IReadOnlyDictionary<string, List<RoutingShard>> Shards { get; internal set; }
 	}
 }

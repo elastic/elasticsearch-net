@@ -14,7 +14,7 @@ namespace Nest
 		public string MasterNode { get; internal set; }
 
 		[DataMember(Name ="nodes")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, NodeState>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, NodeState>))]
 		public IReadOnlyDictionary<string, NodeState> Nodes { get; internal set; }
 
 		[DataMember(Name ="routing_nodes")]

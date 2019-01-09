@@ -15,8 +15,8 @@ namespace Nest
 			{ "groups", 3 }
 		};
 
-		private static readonly VerbatimDictionaryKeysFormatter<string, object> Formatter =
-			new VerbatimDictionaryKeysFormatter<string, object>();
+		private static readonly VerbatimDictionaryInterfaceKeysFormatter<string, object> Formatter =
+			new VerbatimDictionaryInterfaceKeysFormatter<string, object>();
 
 		public FieldRuleBase Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{

@@ -324,7 +324,7 @@ namespace Nest
 			settings.Remove(key);
 		}
 
-		private class IndexSettingsDictionaryFormatter : VerbatimDictionaryKeysFormatter<string, object>
+		private class IndexSettingsDictionaryFormatter : VerbatimDictionaryInterfaceKeysFormatter<string, object>
 		{
 			protected override bool SkipValue(KeyValuePair<string, object> entry) =>
 				entry.Key != RefreshInterval && base.SkipValue(entry);

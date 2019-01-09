@@ -193,8 +193,8 @@ namespace Nest
 		where TDictionary : TInterface, IIsADictionary<TKey, TValue>
 		where TInterface : IIsADictionary<TKey, TValue>
 	{
-		private static readonly VerbatimDictionaryKeysFormatter<TKey, TValue> DictionaryFormatter =
-			new VerbatimDictionaryKeysFormatter<TKey, TValue>();
+		private static readonly VerbatimDictionaryInterfaceKeysFormatter<TKey, TValue> DictionaryFormatter =
+			new VerbatimDictionaryInterfaceKeysFormatter<TKey, TValue>();
 
 		public void Serialize(ref JsonWriter writer, TInterface value, IJsonFormatterResolver formatterResolver)
 		{
@@ -208,7 +208,7 @@ namespace Nest
 		}
 	}
 
-	internal class VerbatimDictionaryKeysPreservingNullFormatter<TKey, TValue> : VerbatimDictionaryKeysFormatter<TKey, TValue>
+	internal class VerbatimDictionaryKeysPreservingNullFormatter<TKey, TValue> : VerbatimDictionaryInterfaceKeysFormatter<TKey, TValue>
 	{
 		protected override bool SkipValue(KeyValuePair<TKey, TValue> entry) => false;
 	}

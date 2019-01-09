@@ -11,7 +11,7 @@ namespace Nest
 		/// The node attributes
 		/// </summary>
 		[DataMember(Name = "attributes")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, string>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, string>))]
 		public IReadOnlyDictionary<string, string> Attributes { get; internal set; } = EmptyReadOnly<string, string>.Dictionary;
 
 		/// <summary>

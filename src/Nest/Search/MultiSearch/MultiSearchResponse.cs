@@ -19,7 +19,7 @@ namespace Nest
 
 		public int TotalResponses => Responses.HasAny() ? Responses.Count() : 0;
 
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, IResponse>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, IResponse>))]
 		internal IDictionary<string, IResponse> Responses { get; set; }
 
 		public IEnumerable<IResponse> GetInvalidResponses() => _allResponses<IResponse>().Where(r => !r.IsValid);
