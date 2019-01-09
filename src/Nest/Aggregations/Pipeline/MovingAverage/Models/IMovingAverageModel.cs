@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IMovingAverageModel
 	{
+		[IgnoreDataMember]
 		string Name { get; }
 	}
 
