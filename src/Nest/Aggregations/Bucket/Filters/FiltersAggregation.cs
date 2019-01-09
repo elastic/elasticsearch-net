@@ -10,6 +10,7 @@ namespace Nest
 	[ReadAs(typeof(FiltersAggregation))]
 	public interface IFiltersAggregation : IBucketAggregation
 	{
+		// TODO: List<QueryContainer> should be IEnumerable<QueryContainer>?
 		[DataMember(Name ="filters")]
 		Union<INamedFiltersContainer, List<QueryContainer>> Filters { get; set; }
 
