@@ -9,7 +9,7 @@ namespace Nest
 	/// Contains aggregates that are returned by Elasticsearch. In NEST `Aggregation` always refers to an aggregation
 	/// going to elasticsearch and an `Aggregate` describes an aggregation going out.
 	/// </summary>
-	[JsonFormatter(typeof(IReadOnlyDictionary<string, IAggregate>))]
+	[JsonFormatter(typeof(AggregateDictionaryFormatter))]
 	public class AggregateDictionary : IsAReadOnlyDictionaryBase<string, IAggregate>
 	{
 		internal static readonly char[] TypedKeysSeparator = { '#' };

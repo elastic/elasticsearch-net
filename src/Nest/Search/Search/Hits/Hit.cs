@@ -92,7 +92,7 @@ namespace Nest
 		public string Index { get; internal set; }
 
 		[DataMember(Name ="inner_hits")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, InnerHitsResult>))]
+		[JsonFormatter(typeof(VerbatimReadOnlyDictionaryKeysFormatter<string, InnerHitsResult>))]
 		public IReadOnlyDictionary<string, InnerHitsResult> InnerHits { get; internal set; } =
 			EmptyReadOnly<string, InnerHitsResult>.Dictionary;
 
@@ -126,7 +126,7 @@ namespace Nest
 		public long? Version { get; internal set; }
 
 		[DataMember(Name ="highlight")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, List<string>>))]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatterBase<Dictionary<string, List<string>>, string, List<string>>))]
 		internal Dictionary<string, List<string>> _Highlight { get; set; }
 	}
 }
