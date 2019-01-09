@@ -15,7 +15,6 @@ namespace Nest
 		/// metadata to associate with the individual aggregation at request time that
 		/// will be returned in place at response time
 		/// </summary>
-		[DataMember(Name = "meta")]
 		IDictionary<string, object> Meta { get; set; }
 
 		/// <summary>
