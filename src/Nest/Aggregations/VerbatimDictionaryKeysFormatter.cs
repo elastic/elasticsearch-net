@@ -80,6 +80,7 @@ namespace Nest
 					seenEntries[key] = entry.Value;
 			}
 
+			// TODO: hold formatter in private static field
 			var formatter = formatterResolver.GetFormatter<Dictionary<string, TValue>>();
 			formatter.Serialize(ref writer, seenEntries, formatterResolver);
 
@@ -102,7 +103,8 @@ namespace Nest
 			entry.Value == null; //TODO: Check connection settings for allow nulls
 	}
 
-	public class VerbatimReadOnlyDictionaryKeysFormatter<TKey, TValue> : VerbatimDictionaryKeysFormatterBase<IReadOnlyDictionary<TKey, TValue>, TKey, TValue>
+	public class VerbatimReadOnlyDictionaryKeysFormatter<TKey, TValue>
+		: VerbatimDictionaryKeysFormatterBase<IReadOnlyDictionary<TKey, TValue>, TKey, TValue>
 	{
 		public override IReadOnlyDictionary<TKey, TValue> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
@@ -112,7 +114,13 @@ namespace Nest
 		}
 	}
 
-	public class VerbatimDictionaryKeysFormatter<TKey, TValue> : VerbatimDictionaryKeysFormatterBase<IDictionary<TKey, TValue>, TKey, TValue>
+	public class VerbatimDictionaryKeysFormatter<TKey, TValue>
+		: VerbatimDictionaryKeysFormatterBase<Dictionary<TKey, TValue>, TKey, TValue>
+	{
+	}
+
+	public class VerbatimDictionaryInterfaceKeysFormatter<TKey, TValue>
+		: VerbatimDictionaryKeysFormatterBase<IDictionary<TKey, TValue>, TKey, TValue>
 	{
 	}
 }

@@ -8,12 +8,12 @@ namespace Nest
 	public class NodeStats
 	{
 		[DataMember(Name = "adaptive_selection")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, AdaptiveSelectionStats>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, AdaptiveSelectionStats>))]
 		public IReadOnlyDictionary<string, AdaptiveSelectionStats> AdaptiveSelection { get; internal set; }
 			= EmptyReadOnly<string, AdaptiveSelectionStats>.Dictionary;
 
 		[DataMember(Name = "breakers")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, BreakerStats>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, BreakerStats>))]
 		public Dictionary<string, BreakerStats> Breakers { get; internal set; }
 
 		[DataMember(Name = "fs")]
@@ -58,7 +58,7 @@ namespace Nest
 		public ScriptStats Script { get; internal set; }
 
 		[DataMember(Name = "thread_pool")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, ThreadCountStats>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, ThreadCountStats>))]
 		public Dictionary<string, ThreadCountStats> ThreadPool { get; internal set; }
 
 		[DataMember(Name = "timestamp")]
@@ -242,7 +242,7 @@ namespace Nest
 	public class NodeJvmStats
 	{
 		[DataMember(Name = "buffer_pools")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, NodeBufferPool>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, NodeBufferPool>))]
 		public Dictionary<string, NodeBufferPool> BufferPools { get; internal set; }
 
 		[DataMember(Name = "classes")]
@@ -316,7 +316,7 @@ namespace Nest
 			public long NonHeapUsedInBytes { get; internal set; }
 
 			[DataMember(Name = "pools")]
-			[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, JVMPool>))]
+			[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, JVMPool>))]
 			public Dictionary<string, JVMPool> Pools { get; internal set; }
 
 			[DataContract]
@@ -362,7 +362,7 @@ namespace Nest
 		public class GarbageCollectionStats
 		{
 			[DataMember(Name = "collectors")]
-			[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, GarbageCollectionGenerationStats>))]
+			[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, GarbageCollectionGenerationStats>))]
 			public Dictionary<string, GarbageCollectionGenerationStats> Collectors { get; internal set; }
 		}
 

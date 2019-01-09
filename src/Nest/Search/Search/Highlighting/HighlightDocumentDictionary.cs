@@ -4,7 +4,7 @@ using Utf8Json;
 
 namespace Nest
 {
-	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, HighlightHit>))]
+	[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, HighlightHit>))]
 	public class HighlightFieldDictionary : Dictionary<string, HighlightHit>
 	{
 		public HighlightFieldDictionary(IDictionary<string, HighlightHit> dictionary = null)

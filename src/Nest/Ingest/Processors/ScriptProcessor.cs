@@ -32,7 +32,7 @@ namespace Nest
 		/// Parameters for the script
 		/// </summary>
 		[DataMember(Name ="params")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, object>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, object>))]
 		Dictionary<string, object> Params { get; set; }
 
 		/// <summary>

@@ -10,7 +10,7 @@ namespace Nest
 		string ClusterName { get; }
 
 		[DataMember(Name = "nodes")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, NodeStats>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, NodeStats>))]
 		IReadOnlyDictionary<string, NodeStats> Nodes { get; }
 	}
 

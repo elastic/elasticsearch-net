@@ -11,7 +11,7 @@ namespace Nest
 		/// Determines how to handle the watch actions as part of the watch execution.
 		/// </summary>
 		[DataMember(Name = "action_modes")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, ActionExecutionMode>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, ActionExecutionMode>))]
 		IDictionary<string, ActionExecutionMode> ActionModes { get; set; }
 
 		/// <summary>
@@ -19,7 +19,7 @@ namespace Nest
 		/// instead of executing its own input.
 		/// </summary>
 		[DataMember(Name = "alternative_input")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, object>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, object>))]
 		IDictionary<string, object> AlternativeInput { get; set; }
 
 		/// <summary>

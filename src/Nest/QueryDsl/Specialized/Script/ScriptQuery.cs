@@ -21,7 +21,7 @@ namespace Nest
 		string Lang { get; set; }
 
 		[DataMember(Name ="params")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, object>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, object>))]
 		Dictionary<string, object> Params { get; set; }
 
 		[DataMember(Name ="source")]

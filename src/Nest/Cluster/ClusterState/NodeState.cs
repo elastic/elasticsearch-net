@@ -7,7 +7,7 @@ namespace Nest
 	public class NodeState
 	{
 		[DataMember(Name ="attributes")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, string>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, string>))]
 		public Dictionary<string, string> Attributes { get; internal set; }
 
 		[DataMember(Name ="name")]

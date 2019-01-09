@@ -32,7 +32,7 @@ namespace Nest
 		public string SizeToUpgradeAncientInBytes { get; internal set; }
 		public string SizeToUpgradeInBytes { get; internal set; }
 
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, UpgradeStatus>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, UpgradeStatus>))]
 		public IReadOnlyDictionary<string, UpgradeStatus> Upgrades { get; internal set; } = EmptyReadOnly<string, UpgradeStatus>.Dictionary;
 	}
 }
