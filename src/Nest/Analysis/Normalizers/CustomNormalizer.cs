@@ -12,6 +12,7 @@ namespace Nest
 	/// which needs to look at the keyword as a whole.
 	/// <para>Elasticsearch does not ship with built-in normalizers so far, so the only way to create one is through composing a custom one</para>
 	/// </summary>
+	[InterfaceDataContract]
 	public interface ICustomNormalizer : INormalizer
 	{
 		/// <summary>

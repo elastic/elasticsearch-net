@@ -1,5 +1,4 @@
 ﻿using Utf8Json;
-using Utf8Json.Resolvers;
 
 namespace Nest
 {
@@ -13,11 +12,11 @@ namespace Nest
 			string tokenFilterType = null;
 			while (segmentReader.ReadIsInObject(ref count))
 			{
-				var propertyName = reader.ReadPropertyName();
+				var propertyName = segmentReader.ReadPropertyName();
 				switch (propertyName)
 				{
 					case "type":
-						tokenFilterType = reader.ReadString();
+						tokenFilterType = segmentReader.ReadString();
 						break;
 				}
 			}
@@ -78,8 +77,154 @@ namespace Nest
 
 		public void Serialize(ref JsonWriter writer, ITokenFilter value, IJsonFormatterResolver formatterResolver)
 		{
-			var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<ITokenFilter>();
-			formatter.Serialize(ref writer, value, formatterResolver);
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
+
+			switch (value.Type)
+			{
+				case "asciifolding":
+					Serialize<IAsciiFoldingTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "common_grams":
+					Serialize<ICommonGramsTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "delimited_payload":
+					Serialize<DelimitedPayloadTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "dictionary_decompounder":
+					Serialize<DictionaryDecompounderTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "edge_ngram":
+					Serialize<EdgeNGramTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "elision":
+					Serialize<ElisionTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "hunspell":
+					Serialize<HunspellTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "hyphenation_decompounder":
+					Serialize<HyphenationDecompounderTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "keep_types":
+					Serialize<KeepTypesTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "keep":
+					Serialize<KeepWordsTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "keyword_marker":
+					Serialize<KeywordMarkerTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "kstem":
+					Serialize<KStemTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "length":
+					Serialize<LengthTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "limit":
+					Serialize<LimitTokenCountTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "lowercase":
+					Serialize<LowercaseTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "ngram":
+					Serialize<NGramTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "pattern_capture":
+					Serialize<PatternCaptureTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "pattern_replace":
+					Serialize<PatternReplaceTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "porter_stem":
+					Serialize<PorterStemTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "phonetic":
+					Serialize<PhoneticTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "reverse":
+					Serialize<ReverseTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "shingle":
+					Serialize<ShingleTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "snowball":
+					Serialize<SnowballTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "stemmer":
+					Serialize<StemmerTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "stemmer_override":
+					Serialize<StemmerOverrideTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "stop":
+					Serialize<StopTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "standard":
+					Serialize<IStandardTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "synonym":
+					Serialize<ISynonymTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "synonym_graph":
+					Serialize<ISynonymGraphTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "trim":
+					Serialize<ITrimTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "truncate":
+					Serialize<ITruncateTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "unique":
+					Serialize<IUniqueTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "uppercase":
+					Serialize<IUppercaseTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "word_delimiter":
+					Serialize<IWordDelimiterTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "word_delimiter_graph":
+					Serialize<IWordDelimiterGraphTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "fingerprint":
+					Serialize<IFingerprintTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "kuromoji_readingform":
+					Serialize<IKuromojiReadingFormTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "kuromoji_part_of_speech":
+					Serialize<IKuromojiPartOfSpeechTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "kuromoji_stemmer":
+					Serialize<IKuromojiStemmerTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "icu_collation":
+					Serialize<IIcuCollationTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "icu_folding":
+					Serialize<IIcuFoldingTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "icu_normalizer":
+					Serialize<IIcuNormalizationTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "icu_transform":
+					Serialize<IIcuTransformTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				default:
+					Serialize<ITokenFilter>(ref writer, value, formatterResolver);
+					break;
+			}
+		}
+
+		private static void Serialize<TTokenFilter>(ref JsonWriter writer, ITokenFilter value, IJsonFormatterResolver formatterResolver)
+			where TTokenFilter : class, ITokenFilter
+		{
+			var formatter = formatterResolver.GetFormatter<TTokenFilter>();
+			formatter.Serialize(ref writer, value as TTokenFilter, formatterResolver);
 		}
 
 		private static TTokenFilter Deserialize<TTokenFilter>(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
