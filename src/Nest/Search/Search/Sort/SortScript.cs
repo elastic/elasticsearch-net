@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
+	[ReadAs(typeof(ScriptSort))]
+	[InterfaceDataContract]
 	public interface IScriptSort : ISort
 	{
 		[DataMember(Name ="script")]
