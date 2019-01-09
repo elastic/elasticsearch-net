@@ -5,7 +5,7 @@ namespace Nest
 {
 	public abstract class MetricAggregateBase : IAggregate
 	{
-		[DataMember(Name ="meta")]
+		[DataMember(Name = "meta")]
 		public IReadOnlyDictionary<string, object> Meta { get; set; } = EmptyReadOnly<string, object>.Dictionary;
 	}
 }

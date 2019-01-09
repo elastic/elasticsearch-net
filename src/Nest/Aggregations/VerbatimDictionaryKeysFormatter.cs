@@ -99,6 +99,12 @@ namespace Nest
 
 	public class VerbatimReadOnlyDictionaryKeysFormatter<TKey, TValue> : VerbatimDictionaryKeysFormatterBase<IReadOnlyDictionary<TKey, TValue>, TKey, TValue>
 	{
+		public override IReadOnlyDictionary<TKey, TValue> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			// needed as Utf8Json does not handle the ctor for a IReadOnlyDictionary<TKey, TValue>
+			var formatter = formatterResolver.GetFormatter<Dictionary<TKey, TValue>>();
+			return formatter.Deserialize(ref reader, formatterResolver);
+		}
 	}
 
 	public class VerbatimDictionaryKeysFormatter<TKey, TValue> : VerbatimDictionaryKeysFormatterBase<IDictionary<TKey, TValue>, TKey, TValue>
