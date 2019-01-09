@@ -179,10 +179,37 @@ namespace Nest
 				writer.WriteString(value.Model.Name);
 				writer.WriteValueSeparator();
 				writer.WritePropertyName("settings");
-				var formatter = formatterResolver.GetFormatter<IMovingAverageModel>();
-				formatter.Serialize(ref writer, value.Model, formatterResolver);
+
+				switch (value.Model.Name)
+				{
+					case "ewma":
+						Serialize(ref writer, (IEwmaModel)value.Model, formatterResolver);
+						break;
+					case "linear":
+						Serialize(ref writer, (ILinearModel)value.Model, formatterResolver);
+						break;
+					case "simple":
+						Serialize(ref writer, (ISimpleModel)value.Model, formatterResolver);
+						break;
+					case "holt":
+						Serialize(ref writer, (IHoltLinearModel)value.Model, formatterResolver);
+						break;
+					case "holt_winters":
+						Serialize(ref writer, (IHoltWintersModel)value.Model, formatterResolver);
+						break;
+					default:
+						Serialize(ref writer, value.Model, formatterResolver);
+						break;
+				}
 			}
 			writer.WriteEndObject();
+		}
+
+		private static void Serialize<TModel>(ref JsonWriter writer, TModel model, IJsonFormatterResolver formatterResolver)
+			where TModel : IMovingAverageModel
+		{
+			var formatter = formatterResolver.GetFormatter<TModel>();
+			formatter.Serialize(ref writer, model, formatterResolver);
 		}
 	}
 }
