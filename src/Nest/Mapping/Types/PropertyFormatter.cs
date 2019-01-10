@@ -1,6 +1,7 @@
 ﻿using System;
 using Utf8Json;
 using Utf8Json.Internal;
+using Utf8Json.Resolvers;
 
 namespace Nest
 {
@@ -29,14 +30,18 @@ namespace Nest
 					switch (value)
 					{
 						case 0:
-							typeString = reader.ReadString();
+							typeString = segmentReader.ReadString();
 							type = typeString.ToEnum<FieldType>().GetValueOrDefault(type);
 							break;
 						case 1:
 							type = FieldType.Object;
 							break;
 					}
+
+					break;
 				}
+				else
+					segmentReader.ReadNextBlock();
 			}
 
 			segmentReader = new JsonReader(arraySegment.Array, arraySegment.Offset);
@@ -172,7 +177,8 @@ namespace Nest
 					Serialize<IFieldAliasProperty>(ref writer, value, formatterResolver);
 					break;
 				default:
-					Serialize<IProperty>(ref writer, value, formatterResolver);
+					var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IProperty>();
+					formatter.Serialize(ref writer, value, formatterResolver);
 					break;
 			}
 		}
