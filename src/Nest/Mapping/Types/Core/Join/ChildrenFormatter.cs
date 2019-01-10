@@ -11,28 +11,31 @@ namespace Nest
 		{
 			var children = new Children();
 			var token = reader.GetCurrentJsonToken();
-
-			if (token == JsonToken.String)
+			switch (token)
 			{
-				var type = reader.ReadString();
-				children.Add(type);
-				return children;
+				case JsonToken.String:
+				{
+					var type = reader.ReadString();
+					children.Add(type);
+					return children;
+				}
+				case JsonToken.BeginArray:
+				{
+					var types = new List<RelationName>();
+					var count = 0;
+					while (reader.ReadIsInArray(ref count))
+					{
+						var type = reader.ReadString();
+						types.Add(type);
+					}
+
+					children.AddRange(types);
+					return children;
+				}
+				default:
+					reader.ReadNextBlock();
+					return children;
 			}
-
-			if (token != JsonToken.BeginArray)
-				return null;
-
-			var types = new List<RelationName>();
-			var count = 0;
-			while (reader.ReadIsInArray(ref count))
-			{
-				var type = reader.ReadString();
-				if (reader.GetCurrentJsonToken() == JsonToken.String)
-					types.Add(type);
-			}
-
-			children.AddRange(types);
-			return children;
 		}
 
 		public void Serialize(ref JsonWriter writer, Children value, IJsonFormatterResolver formatterResolver)
