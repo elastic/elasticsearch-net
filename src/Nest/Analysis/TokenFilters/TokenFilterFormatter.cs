@@ -1,4 +1,5 @@
 ﻿using Utf8Json;
+using Utf8Json.Resolvers;
 
 namespace Nest
 {
@@ -64,6 +65,7 @@ namespace Nest
 				case "word_delimiter": return Deserialize<WordDelimiterTokenFilter>(ref segmentReader, formatterResolver);
 				case "word_delimiter_graph": return Deserialize<WordDelimiterGraphTokenFilter>(ref segmentReader, formatterResolver);
 				case "fingerprint": return Deserialize<FingerprintTokenFilter>(ref segmentReader, formatterResolver);
+				case "nori_part_of_speech": return Deserialize<NoriPartOfSpeechTokenFilter>(ref segmentReader, formatterResolver);
 				case "kuromoji_readingform": return Deserialize<KuromojiReadingFormTokenFilter>(ref segmentReader, formatterResolver);
 				case "kuromoji_part_of_speech": return Deserialize<KuromojiPartOfSpeechTokenFilter>(ref segmentReader, formatterResolver);
 				case "kuromoji_stemmer": return Deserialize<KuromojiStemmerTokenFilter>(ref segmentReader, formatterResolver);
@@ -92,76 +94,76 @@ namespace Nest
 					Serialize<ICommonGramsTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				case "delimited_payload":
-					Serialize<DelimitedPayloadTokenFilter>(ref writer, value, formatterResolver);
+					Serialize<IDelimitedPayloadTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				case "dictionary_decompounder":
-					Serialize<DictionaryDecompounderTokenFilter>(ref writer, value, formatterResolver);
+					Serialize<IDictionaryDecompounderTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				case "edge_ngram":
-					Serialize<EdgeNGramTokenFilter>(ref writer, value, formatterResolver);
+					Serialize<IEdgeNGramTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				case "elision":
-					Serialize<ElisionTokenFilter>(ref writer, value, formatterResolver);
+					Serialize<IElisionTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				case "hunspell":
-					Serialize<HunspellTokenFilter>(ref writer, value, formatterResolver);
+					Serialize<IHunspellTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				case "hyphenation_decompounder":
-					Serialize<HyphenationDecompounderTokenFilter>(ref writer, value, formatterResolver);
+					Serialize<IHyphenationDecompounderTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				case "keep_types":
-					Serialize<KeepTypesTokenFilter>(ref writer, value, formatterResolver);
+					Serialize<IKeepTypesTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				case "keep":
-					Serialize<KeepWordsTokenFilter>(ref writer, value, formatterResolver);
+					Serialize<IKeepWordsTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				case "keyword_marker":
-					Serialize<KeywordMarkerTokenFilter>(ref writer, value, formatterResolver);
+					Serialize<IKeywordMarkerTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				case "kstem":
-					Serialize<KStemTokenFilter>(ref writer, value, formatterResolver);
+					Serialize<IKStemTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				case "length":
-					Serialize<LengthTokenFilter>(ref writer, value, formatterResolver);
+					Serialize<ILengthTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				case "limit":
-					Serialize<LimitTokenCountTokenFilter>(ref writer, value, formatterResolver);
+					Serialize<ILimitTokenCountTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				case "lowercase":
-					Serialize<LowercaseTokenFilter>(ref writer, value, formatterResolver);
+					Serialize<ILowercaseTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				case "ngram":
-					Serialize<NGramTokenFilter>(ref writer, value, formatterResolver);
+					Serialize<INGramTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				case "pattern_capture":
-					Serialize<PatternCaptureTokenFilter>(ref writer, value, formatterResolver);
+					Serialize<IPatternCaptureTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				case "pattern_replace":
-					Serialize<PatternReplaceTokenFilter>(ref writer, value, formatterResolver);
+					Serialize<IPatternReplaceTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				case "porter_stem":
-					Serialize<PorterStemTokenFilter>(ref writer, value, formatterResolver);
+					Serialize<IPorterStemTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				case "phonetic":
-					Serialize<PhoneticTokenFilter>(ref writer, value, formatterResolver);
+					Serialize<IPhoneticTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				case "reverse":
-					Serialize<ReverseTokenFilter>(ref writer, value, formatterResolver);
+					Serialize<IReverseTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				case "shingle":
-					Serialize<ShingleTokenFilter>(ref writer, value, formatterResolver);
+					Serialize<IShingleTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				case "snowball":
-					Serialize<SnowballTokenFilter>(ref writer, value, formatterResolver);
+					Serialize<ISnowballTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				case "stemmer":
-					Serialize<StemmerTokenFilter>(ref writer, value, formatterResolver);
+					Serialize<IStemmerTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				case "stemmer_override":
-					Serialize<StemmerOverrideTokenFilter>(ref writer, value, formatterResolver);
+					Serialize<IStemmerOverrideTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				case "stop":
-					Serialize<StopTokenFilter>(ref writer, value, formatterResolver);
+					Serialize<IStopTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				case "standard":
 					Serialize<IStandardTokenFilter>(ref writer, value, formatterResolver);
@@ -193,6 +195,9 @@ namespace Nest
 				case "fingerprint":
 					Serialize<IFingerprintTokenFilter>(ref writer, value, formatterResolver);
 					break;
+				case "nori_part_of_speech":
+					Serialize<INoriPartOfSpeechTokenFilter>(ref writer, value, formatterResolver);
+					break;
 				case "kuromoji_readingform":
 					Serialize<IKuromojiReadingFormTokenFilter>(ref writer, value, formatterResolver);
 					break;
@@ -215,7 +220,8 @@ namespace Nest
 					Serialize<IIcuTransformTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				default:
-					Serialize<ITokenFilter>(ref writer, value, formatterResolver);
+					var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<ITokenFilter>();
+					formatter.Serialize(ref writer, value, formatterResolver);
 					break;
 			}
 		}
