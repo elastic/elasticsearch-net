@@ -10,14 +10,41 @@ namespace Nest
 
 		public void Serialize(ref JsonWriter writer, ICreateRepositoryRequest value, IJsonFormatterResolver formatterResolver)
 		{
-			if (value == null)
+			if (value?.Repository == null)
 			{
-				writer.WriteNull();
+				writer.WriteBeginObject();
+				writer.WriteEndObject();
 				return;
 			}
 
-			var formatter = formatterResolver.GetFormatter<ISnapshotRepository>();
-			formatter.Serialize(ref writer, value.Repository, formatterResolver);
+			switch (value.Repository.Type)
+			{
+				case "s3":
+					Serialize<IS3Repository>(ref writer, value.Repository, formatterResolver);
+					break;
+				case "azure":
+					Serialize<IAzureRepository>(ref writer, value.Repository, formatterResolver);
+					break;
+				case "url":
+					Serialize<IReadOnlyUrlRepository>(ref writer, value.Repository, formatterResolver);
+					break;
+				case "hdfs":
+					Serialize<IHdfsRepository>(ref writer, value.Repository, formatterResolver);
+					break;
+				case "fs":
+					Serialize<IFileSystemRepository>(ref writer, value.Repository, formatterResolver);
+					break;
+				default:
+					Serialize<ISnapshotRepository>(ref writer, value.Repository, formatterResolver);
+					break;
+			}
+		}
+
+		private static void Serialize<TRepository>(ref JsonWriter writer, ISnapshotRepository value, IJsonFormatterResolver formatterResolver)
+			where TRepository : class, ISnapshotRepository
+		{
+			var formatter = formatterResolver.GetFormatter<TRepository>();
+			formatter.Serialize(ref writer, value as TRepository, formatterResolver);
 		}
 	}
 }
