@@ -54,7 +54,6 @@ namespace Nest
 				EnumResolver.Default, // Enum(default => string)
 				AttributeFormatterResolver.Instance, // [JsonFormatter]
 				ReadAsFormatterResolver.Instance,
-				WriteAsFormatterResolver.Instance,
 				DynamicGenericResolver.Instance, // T[], List<T>, etc...
 				NestGenericSourceTypeFormatterResolver.Instance,
 				DynamicObjectResolver.AllowPrivateExcludeNullCamelCase

@@ -10,10 +10,10 @@ namespace Nest
 	public partial interface IPutMappingRequest : ITypeMapping { }
 
 	[InterfaceDataContract]
+	[ReadAs(typeof(PutMappingRequest<object>))]
 	public partial interface IPutMappingRequest<T> where T : class { }
 
 	[DataContract]
-	[WriteAs(typeof(IPutMappingRequest))]
 	public partial class PutMappingRequest
 	{
 		/// <inheritdoc />
@@ -56,7 +56,6 @@ namespace Nest
 		public ISourceField SourceField { get; set; }
 	}
 
-	[WriteAs(typeof(IPutMappingRequest))]
 	public partial class PutMappingRequest<T> where T : class
 	{
 		public PutMappingRequest() : this(typeof(T), typeof(T)) { }
