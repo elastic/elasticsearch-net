@@ -158,8 +158,19 @@ namespace Nest
 		protected override Id GetIdForOperation(Inferrer inferrer) =>
 			Self.Id ?? new Id(new[] { Self.IdFrom, Self.Upsert }.FirstOrDefault(o => o != null));
 
-		protected override Routing GetRoutingForOperation(Inferrer inferrer) =>
-			Self.Routing ?? new Routing(new[] { Self.IdFrom, Self.Upsert }.FirstOrDefault(o => o != null));
+		protected override Routing GetRoutingForOperation(Inferrer inferrer)
+		{
+			if (Self.Routing != null)
+				return Self.Routing;
+
+			if (Self.IdFrom != null)
+				return new Routing(Self.IdFrom);
+
+			if (Self.Upsert != null)
+				return new Routing(Self.Upsert);
+
+			return null;
+		}
 
 		/// <summary>
 		/// Infers the id of the object to update from the provided
