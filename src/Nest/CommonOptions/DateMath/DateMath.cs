@@ -93,7 +93,7 @@ namespace Nest
 
 			var sb = new StringBuilder();
 			var anchor = Self.Anchor.Match(
-				d => d.ToString("yyyy-MM-ddTHH:mm:ss.fff") + separator,
+				d => d.ToString("yyyy-MM-ddTHH:mm:ss.FFFFFFF") + separator,
 				s => s == "now" || s.EndsWith("||", StringComparison.Ordinal) ? s : s + separator
 			);
 			sb.Append(anchor);
