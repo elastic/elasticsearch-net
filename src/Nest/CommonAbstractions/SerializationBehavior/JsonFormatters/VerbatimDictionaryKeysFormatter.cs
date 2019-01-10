@@ -10,10 +10,8 @@ namespace Nest
 		private static readonly VerbatimDictionaryInterfaceKeysFormatter<TKey, TValue> DictionaryFormatter =
 			new VerbatimDictionaryInterfaceKeysFormatter<TKey, TValue>();
 
-		public void Serialize(ref JsonWriter writer, TInterface value, IJsonFormatterResolver formatterResolver)
-		{
+		public void Serialize(ref JsonWriter writer, TInterface value, IJsonFormatterResolver formatterResolver) =>
 			DictionaryFormatter.Serialize(ref writer, value, formatterResolver);
-		}
 
 		public TInterface Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
@@ -22,7 +20,12 @@ namespace Nest
 		}
 	}
 
-	internal class VerbatimDictionaryKeysPreservingNullFormatter<TKey, TValue> : VerbatimDictionaryInterfaceKeysFormatter<TKey, TValue>
+	internal class VerbatimDictionaryInterfaceKeysPreservingNullFormatter<TKey, TValue> : VerbatimDictionaryInterfaceKeysFormatter<TKey, TValue>
+	{
+		protected override bool SkipValue(KeyValuePair<TKey, TValue> entry) => false;
+	}
+
+	internal class VerbatimDictionaryKeysPreservingNullFormatter<TKey, TValue> : VerbatimDictionaryKeysFormatter<TKey, TValue>
 	{
 		protected override bool SkipValue(KeyValuePair<TKey, TValue> entry) => false;
 	}

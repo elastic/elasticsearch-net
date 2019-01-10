@@ -42,6 +42,9 @@ namespace Nest
 										.Deserialize(ref geoDistanceReader, formatterResolver);
 									break;
 								}
+
+								// skip value if not array
+								geoDistanceReader.ReadNextBlock();
 							}
 							geoDistanceReader = new JsonReader(geoDistanceSegment.Array, geoDistanceSegment.Offset);
 							var geoDistanceSort = formatterResolver.GetFormatter<GeoDistanceSort>()
@@ -89,8 +92,8 @@ namespace Nest
 					writer.WritePropertyName(geo.SortKey.Name);
 
 					var innerWriter = new JsonWriter();
-					var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<ISort>();
-					formatter.Serialize(ref innerWriter, value, formatterResolver);
+					var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IGeoDistanceSort>();
+					formatter.Serialize(ref innerWriter, geo, formatterResolver);
 
 					var buffer = innerWriter.GetBuffer();
 					// get all the written bytes except the closing }
@@ -107,8 +110,8 @@ namespace Nest
 					break;
 				default:
 					writer.WritePropertyName(settings.Inferrer.Field(value.SortKey));
-					var sortFormatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<ISort>();
-					sortFormatter.Serialize(ref writer, value, formatterResolver);
+					var sortFormatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IFieldSort>();
+					sortFormatter.Serialize(ref writer, value as IFieldSort, formatterResolver);
 					break;
 			}
 			writer.WriteEndObject();

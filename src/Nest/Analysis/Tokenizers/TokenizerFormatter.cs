@@ -1,4 +1,5 @@
 ﻿using Utf8Json;
+using Utf8Json.Resolvers;
 
 namespace Nest
 {
@@ -26,6 +27,8 @@ namespace Nest
 
 			switch (tokenizerType)
 			{
+				case "char_group":
+					return Deserialize<CharGroupTokenizer>(ref segmentReader, formatterResolver);
 				case "edgengram":
 				case "edge_ngram":
 					return Deserialize<EdgeNGramTokenizer>(ref segmentReader, formatterResolver);
@@ -62,6 +65,9 @@ namespace Nest
 
 			switch (value.Type)
 			{
+				case "char_group":
+					Serialize<ICharGroupTokenizer>(ref writer, value, formatterResolver);
+					break;
 				case "edge_ngram":
 					Serialize<IEdgeNGramTokenizer>(ref writer, value, formatterResolver);
 					break;
@@ -93,7 +99,8 @@ namespace Nest
 					Serialize<INoriTokenizer>(ref writer, value, formatterResolver);
 					break;
 				default:
-					Serialize<ITokenizer>(ref writer, value, formatterResolver);
+					var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<ITokenizer>();
+					formatter.Serialize(ref writer, value, formatterResolver);
 					break;
 			}
 		}
