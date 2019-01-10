@@ -29,7 +29,7 @@ namespace Nest
 		/// the management of application privileges.
 		/// </summary>
 		[DataMember(Name = "global")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysPreservingNullFormatter<string, object>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysPreservingNullFormatter<string, object>))]
 		IDictionary<string, object> Global { get; set; }
 
 		/// <summary>
@@ -42,7 +42,7 @@ namespace Nest
 		/// Optional meta-data. Within the metadata object, keys that begin with _ are reserved for system usage.
 		/// </summary>
 		[DataMember(Name = "metadata")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysPreservingNullFormatter<string, object>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysPreservingNullFormatter<string, object>))]
 		IDictionary<string, object> Metadata { get; set; }
 
 		/// <summary>

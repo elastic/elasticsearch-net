@@ -52,13 +52,12 @@ namespace Nest
 				}, new IJsonFormatterResolver[0]),
 				BuiltinResolver.Instance, // Builtin
 				EnumResolver.Default, // Enum(default => string)
-				DynamicGenericResolver.Instance, // T[], List<T>, etc...
 				AttributeFormatterResolver.Instance, // [JsonFormatter]
 				ReadAsFormatterResolver.Instance,
 				WriteAsFormatterResolver.Instance,
+				DynamicGenericResolver.Instance, // T[], List<T>, etc...
 				NestGenericSourceTypeFormatterResolver.Instance,
 				DynamicObjectResolver.AllowPrivateExcludeNullCamelCase
-
 			};
 
 			private InnerResolver() { }

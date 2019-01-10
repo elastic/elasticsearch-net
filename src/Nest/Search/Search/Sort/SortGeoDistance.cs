@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary> Allows you to sort based on a proximity to one or more <see cref="GeoLocation" /> </summary>
+	[InterfaceDataContract]
 	public interface IGeoDistanceSort : ISort
 	{
 		/// <summary>

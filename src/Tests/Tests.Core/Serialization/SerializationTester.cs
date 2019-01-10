@@ -23,7 +23,10 @@ namespace Tests.Core.Serialization
 		private string DiffFromExpectedExcerpt =>
 			string.IsNullOrEmpty(DiffFromExpected)
 				? string.Empty
-				: DiffFromExpected?.Substring(0, DiffFromExpected.Length > 4896 ? 4896 : DiffFromExpected.Length);
+				: DiffFromExpected?
+//					.Replace("{", "{{") // escape for string format in FluentAssertion
+//					.Replace("}", "}}")
+					.Substring(0, DiffFromExpected.Length > 4896 ? 4896 : DiffFromExpected.Length);
 
 		public override string ToString()
 		{

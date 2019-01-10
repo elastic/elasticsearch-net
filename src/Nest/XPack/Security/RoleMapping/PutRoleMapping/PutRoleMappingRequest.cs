@@ -12,7 +12,7 @@ namespace Nest
 		bool? Enabled { get; set; }
 
 		[DataMember(Name = "metadata")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysPreservingNullFormatter<string, object>))]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysPreservingNullFormatter<string, object>))]
 		IDictionary<string, object> Metadata { get; set; }
 
 		[DataMember(Name = "roles")]
