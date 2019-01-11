@@ -3,7 +3,7 @@ using Utf8Json;
 
 namespace Nest
 {
-	internal class EpochSecondsNullableDateTimeOffsetFormatter : IJsonFormatter<DateTimeOffset?>
+	public class EpochSecondsNullableDateTimeOffsetFormatter : IJsonFormatter<DateTimeOffset?>
 	{
 		public DateTimeOffset? Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
