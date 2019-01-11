@@ -58,6 +58,23 @@ namespace Nest
 			return false;
 		}
 
+		public static bool EqualsBytes(this ref ArraySegment<byte> arraySegment, byte[] bytes)
+		{
+			if (arraySegment == default || bytes == null || bytes.Length == 0)
+				return false;
+
+			if (arraySegment.Count != bytes.Length)
+				return false;
+
+			for (int i = 0; i < bytes.Length; i++)
+			{
+				if (bytes[i] != arraySegment.Array[arraySegment.Offset + i])
+					return false;
+			}
+
+			return true;
+		}
+
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool IsDateTime(this ref ArraySegment<byte> arraySegment, IJsonFormatterResolver formatterResolver, out DateTime dateTime)
 		{
