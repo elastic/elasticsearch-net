@@ -54,9 +54,8 @@ namespace Nest
 				foreach (var transform in value.Transforms)
 				{
 					if (count > 0)
-					{
 						writer.WriteValueSeparator();
-					}
+
 					formatter.Serialize(ref writer, transform, formatterResolver);
 					count++;
 				}

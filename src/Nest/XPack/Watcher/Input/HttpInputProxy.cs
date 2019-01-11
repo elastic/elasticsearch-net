@@ -7,7 +7,10 @@ namespace Nest
 	[ReadAs(typeof(HttpInputProxy))]
 	public interface IHttpInputProxy
 	{
+		[DataMember(Name = "host")]
 		string Host { get; set; }
+
+		[DataMember(Name = "port")]
 		int? Port { get; set; }
 	}
 

@@ -138,7 +138,10 @@ namespace Nest
 		public IArrayCompareCondition Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
+			{
+				reader.ReadNextBlock();
 				return null;
+			}
 
 			var count = 0;
 			string arrayPath = null;
@@ -175,10 +178,12 @@ namespace Nest
 										break;
 								}
 							}
+							else
+								reader.ReadNextBlock();
 						}
 					}
 					else
-						path = property.Utf8String();
+						path = reader.ReadString();
 				}
 			}
 
@@ -204,6 +209,7 @@ namespace Nest
 			writer.WriteBeginObject();
 			writer.WritePropertyName("path");
 			writer.WriteString(value.Path);
+			writer.WriteValueSeparator();
 			writer.WritePropertyName(value.Comparison);
 			writer.WriteBeginObject();
 
