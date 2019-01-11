@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	internal class PropertyNameFormatter : IJsonFormatter<PropertyName>
+	internal class PropertyNameFormatter : IJsonFormatter<PropertyName>, IObjectPropertyNameFormatter<PropertyName>
 	{
 		public PropertyName Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
@@ -27,5 +27,11 @@ namespace Nest
 			var infer = formatterResolver.GetConnectionSettings().Inferrer;
 			writer.WriteString(infer.PropertyName(value));
 		}
+
+		public void SerializeToPropertyName(ref JsonWriter writer, PropertyName value, IJsonFormatterResolver formatterResolver) =>
+			Serialize(ref writer, value, formatterResolver);
+
+		public PropertyName DeserializeFromPropertyName(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
+			Deserialize(ref reader, formatterResolver);
 	}
 }

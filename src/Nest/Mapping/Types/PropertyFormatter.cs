@@ -177,8 +177,13 @@ namespace Nest
 					Serialize<IFieldAliasProperty>(ref writer, value, formatterResolver);
 					break;
 				default:
-					var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IProperty>();
-					formatter.Serialize(ref writer, value, formatterResolver);
+					if (value is IGenericProperty genericProperty)
+						Serialize<IGenericProperty>(ref writer, genericProperty, formatterResolver);
+					else
+					{
+						var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IProperty>();
+						formatter.Serialize(ref writer, value, formatterResolver);
+					}
 					break;
 			}
 		}
