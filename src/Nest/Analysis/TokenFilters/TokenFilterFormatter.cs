@@ -14,12 +14,13 @@ namespace Nest
 			while (segmentReader.ReadIsInObject(ref count))
 			{
 				var propertyName = segmentReader.ReadPropertyName();
-				switch (propertyName)
+				if (propertyName == "type")
 				{
-					case "type":
-						tokenFilterType = segmentReader.ReadString();
-						break;
+					tokenFilterType = segmentReader.ReadString();
+					break;
 				}
+
+				segmentReader.ReadNextBlock();
 			}
 
 			if (tokenFilterType == null)

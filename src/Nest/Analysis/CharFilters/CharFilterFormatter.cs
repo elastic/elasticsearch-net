@@ -18,6 +18,9 @@ namespace Nest
 					charFilterType = segmentReader.ReadString();
 					break;
 				}
+
+				// skip value
+				segmentReader.ReadNextBlock();
 			}
 
 			if (charFilterType == null)
