@@ -88,7 +88,6 @@ namespace Nest
 		/// The url scheme
 		/// </summary>
 		[DataMember(Name = "scheme")]
-
 		ConnectionScheme? Scheme { get; set; }
 
 		/// <summary>

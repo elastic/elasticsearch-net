@@ -30,7 +30,7 @@ namespace Nest
 
 	public interface IEmailAttachment { }
 
-	internal class EmailAttachmentsFormatter : IJsonFormatter<EmailAttachments>
+	internal class EmailAttachmentsFormatter : IJsonFormatter<IEmailAttachments>
 	{
 		private static readonly AutomataDictionary AttachmentType = new AutomataDictionary
 		{
@@ -38,7 +38,7 @@ namespace Nest
 			{ "data", 1 }
 		};
 
-		public EmailAttachments Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		public IEmailAttachments Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
 				return null;
@@ -75,7 +75,7 @@ namespace Nest
 			return new EmailAttachments(attachments);
 		}
 
-		public void Serialize(ref JsonWriter writer, EmailAttachments value, IJsonFormatterResolver formatterResolver)
+		public void Serialize(ref JsonWriter writer, IEmailAttachments value, IJsonFormatterResolver formatterResolver)
 		{
 			writer.WriteBeginObject();
 			var attachments = (IDictionary<string, IEmailAttachment>)value;
