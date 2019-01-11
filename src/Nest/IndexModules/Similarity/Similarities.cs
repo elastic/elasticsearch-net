@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Utf8Json;
 
 namespace Nest
@@ -7,6 +8,7 @@ namespace Nest
 	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<Similarities, ISimilarities, string, ISimilarity>))]
 	public interface ISimilarities : IIsADictionary<string, ISimilarity> { }
 
+	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<Similarities, Similarities, string, ISimilarity>))]
 	public class Similarities : IsADictionaryBase<string, ISimilarity>, ISimilarities
 	{
 		public Similarities() { }

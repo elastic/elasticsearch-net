@@ -18,6 +18,8 @@ namespace Nest
 					tokenizerType = segmentReader.ReadString();
 					break;
 				}
+
+				segmentReader.ReadNextBlock();
 			}
 
 			if (tokenizerType == null)

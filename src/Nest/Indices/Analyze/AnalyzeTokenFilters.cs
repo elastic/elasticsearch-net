@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// A list of string references to stored token filters and/or inline token filter definitions
 	/// </summary>
+	[JsonFormatter(typeof(UnionListFormatter<AnalyzeTokenFilters, string, ITokenFilter>))]
 	public class AnalyzeTokenFilters : List<Union<string, ITokenFilter>>
 	{
 		public AnalyzeTokenFilters() { }
