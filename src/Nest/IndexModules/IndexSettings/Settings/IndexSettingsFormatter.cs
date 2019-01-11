@@ -309,7 +309,7 @@ namespace Nest
 			if (!settings.ContainsKey(key)) return;
 
 			var v = settings[key];
-			if (v is IEnumerable)
+			if (!(v is string) && v is IEnumerable)
 			{
 				var value = ConvertToValue<TArray>(v, formatterResolver);
 				assign(value);
