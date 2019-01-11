@@ -58,6 +58,7 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
+	[DataContract]
 	public class ConditionContainer : IConditionContainer, IDescriptor
 	{
 		internal ConditionContainer() { }
