@@ -6,9 +6,10 @@ using Utf8Json;
 
 namespace Nest
 {
-	[JsonFormatter(typeof(DynamicTemplatesFormatter))]
+	[JsonFormatter(typeof(DynamicTemplatesInterfaceFormatter))]
 	public interface IDynamicTemplateContainer : IIsADictionary<string, IDynamicTemplate> { }
 
+	[JsonFormatter(typeof(DynamicTemplatesFormatter))]
 	public class DynamicTemplateContainer : IsADictionaryBase<string, IDynamicTemplate>, IDynamicTemplateContainer
 	{
 		public DynamicTemplateContainer() : base() { }
