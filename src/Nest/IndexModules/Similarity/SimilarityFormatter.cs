@@ -37,6 +37,8 @@ namespace Nest
 					type = segmentReader.ReadStringSegmentUnsafe();
 					break;
 				}
+
+				segmentReader.ReadNextBlock();
 			}
 
 			segmentReader = new JsonReader(arraySegment.Array, arraySegment.Offset);

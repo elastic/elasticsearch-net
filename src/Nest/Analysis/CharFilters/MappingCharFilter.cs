@@ -8,10 +8,10 @@ namespace Nest
 	/// </summary>
 	public interface IMappingCharFilter : ICharFilter
 	{
-		[DataMember(Name ="mappings")]
+		[DataMember(Name = "mappings")]
 		IEnumerable<string> Mappings { get; set; }
 
-		[DataMember(Name ="mappings_path")]
+		[DataMember(Name = "mappings_path")]
 		string MappingsPath { get; set; }
 	}
 

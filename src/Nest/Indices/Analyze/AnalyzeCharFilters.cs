@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Utf8Json;
 
 namespace Nest
 {
+	[JsonFormatter(typeof(UnionListFormatter<AnalyzeCharFilters, string, ICharFilter>))]
 	public class AnalyzeCharFilters : List<Union<string, ICharFilter>>
 	{
 		public AnalyzeCharFilters() { }
@@ -22,6 +24,8 @@ namespace Nest
 		}
 
 		public void Add(ICharFilter filter) => Add(new Union<string, ICharFilter>(filter));
+
+		public void Add(string filter) => Add(new Union<string, ICharFilter>(filter));
 
 		public static implicit operator AnalyzeCharFilters(CharFilterBase tokenFilter) =>
 			tokenFilter == null ? null : new AnalyzeCharFilters { tokenFilter };
@@ -67,7 +71,8 @@ namespace Nest
 
 		/// <summary>
 		/// The kuromoji_iteration_mark normalizes Japanese horizontal iteration marks (odoriji) to their expanded form.
-		/// Part of the `analysis-kuromoji` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
+		/// Part of the `analysis-kuromoji` plugin:
+		/// https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
 		/// </summary>
 		public AnalyzeCharFiltersDescriptor KuromojiIterationMark(
 			Func<KuromojiIterationMarkCharFilterDescriptor, IKuromojiIterationMarkCharFilter> selector = null

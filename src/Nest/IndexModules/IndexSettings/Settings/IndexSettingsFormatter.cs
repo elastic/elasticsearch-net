@@ -261,15 +261,23 @@ namespace Nest
 			IDictionary<string, object> dict = s;
 			foreach (var kv in settings)
 			{
-				// TODO: Fix
-//				var setting = kv.Value;
-//				if (kv.Key == UpdatableIndexSettings.Analysis || kv.Key == "index.analysis")
-//					s.Analysis = setting.Value.Value<JObject>().ToObject<Analysis>(formatterResolver);
-//				if (kv.Key == Similarity || kv.Key == "index.similarity")
-//					s.Similarity = setting.Value.Value<JObject>().ToObject<Similarities>(formatterResolver);
-//				else
-//					dict?.Add(kv.Key, formatterResolver.Deserialize(kv.Value.Value.CreateReader()));
+				var setting = kv.Value;
+				// TODO: Find a nicer way to avoid the serialization/deserialization roundtrip
+				if (kv.Key == UpdatableIndexSettings.Analysis || kv.Key == "index.analysis")
+					s.Analysis = ReserializeAndDeserialize<Analysis>(setting, formatterResolver);
+				if (kv.Key == Similarity || kv.Key == "index.similarity")
+					s.Similarity = ReserializeAndDeserialize<Similarities>(setting, formatterResolver);
+				else
+					dict.Add(kv.Key, setting);
 			}
+		}
+
+		private static T ReserializeAndDeserialize<T>(object setting, IJsonFormatterResolver formatterResolver)
+		{
+			var bytes = JsonSerializer.Serialize(setting);
+			var analysisFormatter = formatterResolver.GetFormatter<T>();
+			var reader = new JsonReader(bytes);
+			return analysisFormatter.Deserialize(ref reader, formatterResolver);
 		}
 
 		private static void Set<T>(IIndexSettings s, IDictionary<string, object> settings, string key, Action<T> assign,
