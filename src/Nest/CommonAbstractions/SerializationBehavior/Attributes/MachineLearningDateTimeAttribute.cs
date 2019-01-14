@@ -1,5 +1,6 @@
 ﻿using System;
 using Utf8Json;
+using Utf8Json.Formatters;
 
 namespace Nest
 {
@@ -38,10 +39,8 @@ namespace Nest
 			throw new Exception($"Cannot deserialize {nameof(DateTimeOffset)} from token {token}");
 		}
 
-		public virtual void Serialize(ref JsonWriter writer, DateTimeOffset value, IJsonFormatterResolver formatterResolver)
-		{
-			throw new NotSupportedException();
-		}
+		public virtual void Serialize(ref JsonWriter writer, DateTimeOffset value, IJsonFormatterResolver formatterResolver) =>
+			ISO8601DateTimeOffsetFormatter.Default.Serialize(ref writer, value, formatterResolver);
 	}
 
 	internal class MachineLearningDateTimeFormatter : IJsonFormatter<DateTime>
@@ -67,6 +66,7 @@ namespace Nest
 			throw new Exception($"Cannot deserialize {nameof(DateTimeOffset)} from token {token}");
 		}
 
-		public void Serialize(ref JsonWriter writer, DateTime value, IJsonFormatterResolver formatterResolver) => throw new NotSupportedException();
+		public void Serialize(ref JsonWriter writer, DateTime value, IJsonFormatterResolver formatterResolver) =>
+			ISO8601DateTimeFormatter.Default.Serialize(ref writer, value, formatterResolver);
 	}
 }

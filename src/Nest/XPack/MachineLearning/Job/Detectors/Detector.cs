@@ -79,11 +79,14 @@ namespace Nest
 
 			while (segmentReader.ReadIsInObject(ref count))
 			{
-				if (reader.ReadPropertyName() == "function")
+				if (segmentReader.ReadPropertyName() == "function")
 				{
-					function = reader.ReadStringSegmentRaw();
+					function = segmentReader.ReadStringSegmentRaw();
 					break;
 				}
+
+				// skip value
+				segmentReader.ReadNextBlock();
 			}
 
 			segmentReader = new JsonReader(segment.Array, segment.Offset);
@@ -165,11 +168,83 @@ namespace Nest
 				}
 			}
 
-			throw new Exception($"Unknown function {Encoding.UTF8.GetString(function.Array, function.Offset, function.Count)}");
+			throw new Exception($"Unknown function {function.Utf8String()}");
 		}
 
-		public void Serialize(ref JsonWriter writer, IDetector value, IJsonFormatterResolver formatterResolver) =>
-			throw new NotSupportedException();
+		public void Serialize(ref JsonWriter writer, IDetector value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
+
+			switch (value.Function)
+			{
+				case "count":
+				case "high_count":
+				case "low_count":
+					Serialize<ICountDetector>(ref writer, value, formatterResolver);
+					break;
+				case "non_zero_count":
+				case "high_non_zero_count":
+				case "low_non_zero_count":
+					Serialize<INonZeroCountDetector>(ref writer, value, formatterResolver);
+					break;
+				case "distinct_count":
+				case "high_distinct_count":
+				case "low_distinct_count":
+					Serialize<IDistinctCountDetector>(ref writer, value, formatterResolver);
+					break;
+				case "lat_long":
+					Serialize<IGeographicDetector>(ref writer, value, formatterResolver);
+					break;
+				case "info_content":
+				case "high_info_content":
+				case "low_info_content":
+					Serialize<IInfoContentDetector>(ref writer, value, formatterResolver);
+					break;
+				case "min":
+				case "max":
+				case "median":
+				case "high_median":
+				case "low_median":
+				case "mean":
+				case "high_mean":
+				case "low_mean":
+				case "metric":
+				case "varp":
+				case "high_varp":
+				case "low_varp":
+					Serialize<IMetricDetector>(ref writer, value, formatterResolver);
+					break;
+				case "rare":
+				case "freq_rare":
+					Serialize<IRareDetector>(ref writer, value, formatterResolver);
+					break;
+				case "sum":
+				case "high_sum":
+				case "low_sum":
+					Serialize<ISumDetector>(ref writer, value, formatterResolver);
+					break;
+				case "non_null_sum":
+				case "high_non_null_sum":
+				case "low_non_null_sum":
+					Serialize<INonNullSumDetector>(ref writer, value, formatterResolver);
+					break;
+				case "time_of_day":
+				case "time_of_week":
+					Serialize<ITimeDetector>(ref writer, value, formatterResolver);
+					break;
+			}
+		}
+
+		private static void Serialize<TDetector>(ref JsonWriter writer, IDetector value, IJsonFormatterResolver formatterResolver)
+			where TDetector : class, IDetector
+		{
+			var formatter = formatterResolver.GetFormatter<TDetector>();
+			formatter.Serialize(ref writer, value as TDetector, formatterResolver);
+		}
 
 		private static TDetector Deserialize<TDetector>(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 			where TDetector : IDetector
