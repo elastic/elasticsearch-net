@@ -59,6 +59,7 @@ namespace ApiGenerator.Domain
 						return "Metrics";
 					case "feature": return "Features";
 					case "action_id": return "ActionIds";
+					case "application": return "ApplicationName";
 					case "repository":
 					case "snapshot":
 					case "lang":
@@ -69,6 +70,7 @@ namespace ApiGenerator.Domain
 					case "alias":
 					case "context":
 					case "name":
+					case "user":
 					case "thread_pool_patterns":
 						return Type == "string" ? "Name" : "Names";
 					case "parent_task_id":

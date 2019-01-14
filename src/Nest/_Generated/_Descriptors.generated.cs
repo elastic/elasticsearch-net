@@ -4547,6 +4547,22 @@ namespace Nest
 		// Request parameters
 
 	}
+	///<summary>descriptor for XpackSecurityDeletePrivileges <pre>TODO</pre></summary>
+	public partial class DeletePrivilegesDescriptor  : RequestDescriptorBase<DeletePrivilegesDescriptor,DeletePrivilegesRequestParameters, IDeletePrivilegesRequest>, IDeletePrivilegesRequest
+	{ 
+		/// <summary>/_xpack/security/privilege/{application}/{name}</summary>
+		///<param name="application"> this parameter is required</param>
+		///<param name="name"> this parameter is required</param>
+		public DeletePrivilegesDescriptor(ApplicationName application, Name name) : base(r=>r.Required("application", application).Required("name", name)){}
+		// values part of the url path
+		ApplicationName IDeletePrivilegesRequest.Application => Self.RouteValues.Get<ApplicationName>("application");
+		Name IDeletePrivilegesRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public DeletePrivilegesDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
+	}
 	///<summary>descriptor for XpackSecurityDeleteRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html</pre></summary>
 	public partial class DeleteRoleDescriptor  : RequestDescriptorBase<DeleteRoleDescriptor,DeleteRoleRequestParameters, IDeleteRoleRequest>, IDeleteRoleRequest
 	{ 
@@ -4621,6 +4637,24 @@ namespace Nest
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public EnableUserDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	}
+	///<summary>descriptor for XpackSecurityGetPrivileges <pre>TODO</pre></summary>
+	public partial class GetPrivilegesDescriptor  : RequestDescriptorBase<GetPrivilegesDescriptor,GetPrivilegesRequestParameters, IGetPrivilegesRequest>, IGetPrivilegesRequest
+	{ 
+		/// <summary>/_xpack/security/privilege/{application}/{name}</summary>
+		public GetPrivilegesDescriptor() : base(){}
+		// values part of the url path
+		ApplicationName IGetPrivilegesRequest.Application => Self.RouteValues.Get<ApplicationName>("application");
+		Name IGetPrivilegesRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		///<summary>Application name</summary>
+		public GetPrivilegesDescriptor Application(ApplicationName application) => Assign(a=>a.RouteValues.Optional("application", application));
+
+		///<summary>Privilege name</summary>
+		public GetPrivilegesDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
+
+		// Request parameters
+
+	}
 	///<summary>descriptor for XpackSecurityGetRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</pre></summary>
 	public partial class GetRoleDescriptor  : RequestDescriptorBase<GetRoleDescriptor,GetRoleRequestParameters, IGetRoleRequest>, IGetRoleRequest
 	{ 
@@ -4671,6 +4705,28 @@ namespace Nest
 		// Request parameters
 
 	}
+	///<summary>descriptor for XpackSecurityGetUserPrivileges <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</pre></summary>
+	public partial class GetUserPrivilegesDescriptor  : RequestDescriptorBase<GetUserPrivilegesDescriptor,GetUserPrivilegesRequestParameters, IGetUserPrivilegesRequest>, IGetUserPrivilegesRequest
+	{ 
+		// values part of the url path
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for XpackSecurityHasPrivileges <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</pre></summary>
+	public partial class HasPrivilegesDescriptor  : RequestDescriptorBase<HasPrivilegesDescriptor,HasPrivilegesRequestParameters, IHasPrivilegesRequest>, IHasPrivilegesRequest
+	{ 
+		/// <summary>/_xpack/security/user/_has_privileges</summary>
+		public HasPrivilegesDescriptor() : base(){}
+		// values part of the url path
+		Name IHasPrivilegesRequest.User => Self.RouteValues.Get<Name>("user");
+
+		///<summary>Username</summary>
+		public HasPrivilegesDescriptor User(Name user) => Assign(a=>a.RouteValues.Optional("user", user));
+
+		// Request parameters
+
+	}
 	///<summary>descriptor for XpackSecurityInvalidateToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</pre></summary>
 	public partial class InvalidateUserAccessTokenDescriptor  : RequestDescriptorBase<InvalidateUserAccessTokenDescriptor,InvalidateUserAccessTokenRequestParameters, IInvalidateUserAccessTokenRequest>, IInvalidateUserAccessTokenRequest
 	{ 
@@ -4678,6 +4734,16 @@ namespace Nest
 
 		// Request parameters
 
+	}
+	///<summary>descriptor for XpackSecurityPutPrivileges <pre>TODO</pre></summary>
+	public partial class PutPrivilegesDescriptor  : RequestDescriptorBase<PutPrivilegesDescriptor,PutPrivilegesRequestParameters, IPutPrivilegesRequest>, IPutPrivilegesRequest
+	{ 
+		// values part of the url path
+
+		// Request parameters
+
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public PutPrivilegesDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	}
 	///<summary>descriptor for XpackSecurityPutRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</pre></summary>
 	public partial class PutRoleDescriptor  : RequestDescriptorBase<PutRoleDescriptor,PutRoleRequestParameters, IPutRoleRequest>, IPutRoleRequest
