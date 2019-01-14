@@ -6,7 +6,7 @@ using Utf8Json;
 namespace Nest
 {
 	[InterfaceDataContract]
-	[JsonFormatter(typeof(PipelineFormatter))]
+	[ReadAs(typeof(Pipeline))]
 	public interface IPipeline
 	{
 		[DataMember(Name ="description")]

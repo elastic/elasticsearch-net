@@ -9,7 +9,6 @@ namespace Nest
 	/// Converts a JSON string into a structured JSON object.
 	/// </summary>
 	[InterfaceDataContract]
-	[JsonFormatter(typeof(ProcessorFormatter<JsonProcessor>))]
 	public interface IJsonProcessor : IProcessor
 	{
 		/// <summary>

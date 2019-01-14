@@ -7,7 +7,6 @@ using Utf8Json;
 namespace Nest
 {
 	[InterfaceDataContract]
-	[JsonFormatter(typeof(ProcessorFormatter<GrokProcessor>))]
 	public interface IGrokProcessor : IProcessor
 	{
 		[DataMember(Name ="field")]

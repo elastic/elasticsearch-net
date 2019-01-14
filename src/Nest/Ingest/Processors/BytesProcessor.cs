@@ -11,7 +11,6 @@ namespace Nest
 	/// An error will occur if the field is not a supported format or resultant value exceeds 2^63.
 	/// </summary>
 	[InterfaceDataContract]
-	[JsonFormatter(typeof(ProcessorFormatter<BytesProcessor>))]
 	public interface IBytesProcessor : IProcessor
 	{
 		/// <summary> The field to convert bytes from </summary>

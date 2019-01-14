@@ -15,7 +15,7 @@ namespace Nest
 		string Inline { get; set; }
 
 		[DataMember(Name = "params")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatterBase<Dictionary<string, object>, string, object>))]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysBaseFormatter<Dictionary<string, object>, string, object>))]
 		Dictionary<string, object> Params { get; set; }
 
 		[DataMember(Name = "source")]

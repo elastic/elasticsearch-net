@@ -11,7 +11,6 @@ namespace Nest
 	///  of strings and numbers will be sorted lexicographically.
 	/// </summary>
 	[InterfaceDataContract]
-	[JsonFormatter(typeof(ProcessorFormatter<SortProcessor>))]
 	public interface ISortProcessor : IProcessor
 	{
 		/// <summary>

@@ -33,7 +33,7 @@ namespace Tests.ClientConcepts.ServerError
 				""reason"" : ""Parse failure at index [2] of [-1m]""
 			}
 		},
-		""status"" : ""x"",
+		""status"" : ""x""
 	}
 	],
 	""headers"" : {
