@@ -33,4 +33,19 @@ namespace Nest
 				writer.WriteString(value.StringValue);
 		}
 	}
+
+	internal class IdStringFormatter : IJsonFormatter<string>
+	{
+		public string Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			var token = reader.GetCurrentJsonToken();
+
+			return token == JsonToken.Number
+				? reader.ReadInt64().ToString()
+				: reader.ReadString();
+		}
+
+		public void Serialize(ref JsonWriter writer, string value, IJsonFormatterResolver formatterResolver) =>
+			writer.WriteString(value);
+	}
 }
