@@ -38,8 +38,13 @@ namespace Nest
 				var o = settings.SourceSerializer.Deserialize(genericType, ms);
 				var path = typeof(DocumentPath<>).CreateGenericInstance(genericType, o);
 				// index, type and id are optional parameters on _genericRequestType but need to be passed to construct through reflection
-				var x = (TRequest)typeof(TRequest).CreateGenericInstance(genericType, path, null, null, null);
-				return x;
+
+				// TRequest might be an open or closed generic type
+				var request = typeof(TRequest).IsGenericTypeDefinition
+					? (TRequest)typeof(TRequest).CreateGenericInstance(genericType, path, null, null, null)
+					: (TRequest)typeof(TRequest).CreateInstance(path, null, null, null);
+
+				return request;
 			}
 		}
 	}
