@@ -9,7 +9,6 @@ namespace Nest
 	/// Allows inline, stored, and file scripts to be executed within ingest pipelines.
 	/// </summary>
 	[InterfaceDataContract]
-	[JsonFormatter(typeof(ProcessorFormatter<ScriptProcessor>))]
 	public interface IScriptProcessor : IProcessor
 	{
 		/// <summary>

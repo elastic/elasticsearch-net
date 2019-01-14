@@ -16,7 +16,6 @@ namespace Nest
 	/// Requires the UserAgent Processor Plugin to be installed on the cluster.
 	/// </remarks>
 	[InterfaceDataContract]
-	[JsonFormatter(typeof(ProcessorFormatter<UserAgentProcessor>))]
 	public interface IUserAgentProcessor : IProcessor
 	{
 		[DataMember(Name ="field")]

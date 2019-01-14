@@ -275,9 +275,9 @@ namespace Nest
 		private static T ReserializeAndDeserialize<T>(object setting, IJsonFormatterResolver formatterResolver)
 		{
 			var bytes = JsonSerializer.Serialize(setting);
-			var analysisFormatter = formatterResolver.GetFormatter<T>();
+			var formatter = formatterResolver.GetFormatter<T>();
 			var reader = new JsonReader(bytes);
-			return analysisFormatter.Deserialize(ref reader, formatterResolver);
+			return formatter.Deserialize(ref reader, formatterResolver);
 		}
 
 		private static void Set<T>(IIndexSettings s, IDictionary<string, object> settings, string key, Action<T> assign,

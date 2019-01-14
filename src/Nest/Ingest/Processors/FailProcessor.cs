@@ -4,7 +4,6 @@ using Utf8Json;
 namespace Nest
 {
 	[InterfaceDataContract]
-	[JsonFormatter(typeof(ProcessorFormatter<FailProcessor>))]
 	public interface IFailProcessor : IProcessor
 	{
 		[DataMember(Name ="message")]

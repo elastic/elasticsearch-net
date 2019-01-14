@@ -20,7 +20,7 @@ namespace Tests.ClientConcepts.ServerError
 		private IElasticClient HighLevelClient { get; }
 		private IElasticLowLevelClient LowLevelClient { get; }
 
-		private string ResponseJson => string.Concat(@"{ ""error"": ", Json, @",  ""status"":500 }");
+		private string ResponseJson => string.Concat(@"{ ""error"": ", Json, @", ""status"":500 }");
 
 		protected virtual void AssertServerError()
 		{

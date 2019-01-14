@@ -6,7 +6,7 @@ using Utf8Json;
 
 namespace Nest
 {
-	public class VerbatimDictionaryKeysFormatterBase<TDictionary, TKey, TValue> : IJsonFormatter<TDictionary>
+	public class VerbatimDictionaryKeysBaseFormatter<TDictionary, TKey, TValue> : IJsonFormatter<TDictionary>
 		where TDictionary : IEnumerable<KeyValuePair<TKey, TValue>>
 	{
 		private readonly bool _keyIsField = typeof(TKey) == typeof(Field);
@@ -80,23 +80,8 @@ namespace Nest
 					seenEntries[key] = entry.Value;
 			}
 
-			// TODO: hold formatter in private static field
 			var formatter = formatterResolver.GetFormatter<Dictionary<string, TValue>>();
 			formatter.Serialize(ref writer, seenEntries, formatterResolver);
-
-//			writer.WriteBeginObject();
-//			var count = 0;
-//
-//
-//			foreach (var entry in seenEntries)
-//			{
-//				if (count != 0)
-//					writer.WriteValueSeparator();
-//				writer.WritePropertyName(entry.Key);
-//				JsonSerializer.Serialize(ref writer, entry.Value);
-//				count++;
-//			}
-//			writer.WriteEndObject();
 		}
 
 		protected virtual bool SkipValue(KeyValuePair<TKey, TValue> entry) =>
@@ -104,7 +89,7 @@ namespace Nest
 	}
 
 	public class VerbatimReadOnlyDictionaryKeysFormatter<TKey, TValue>
-		: VerbatimDictionaryKeysFormatterBase<IReadOnlyDictionary<TKey, TValue>, TKey, TValue>
+		: VerbatimDictionaryKeysBaseFormatter<IReadOnlyDictionary<TKey, TValue>, TKey, TValue>
 	{
 		public override IReadOnlyDictionary<TKey, TValue> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
@@ -115,12 +100,12 @@ namespace Nest
 	}
 
 	public class VerbatimDictionaryKeysFormatter<TKey, TValue>
-		: VerbatimDictionaryKeysFormatterBase<Dictionary<TKey, TValue>, TKey, TValue>
+		: VerbatimDictionaryKeysBaseFormatter<Dictionary<TKey, TValue>, TKey, TValue>
 	{
 	}
 
 	public class VerbatimDictionaryInterfaceKeysFormatter<TKey, TValue>
-		: VerbatimDictionaryKeysFormatterBase<IDictionary<TKey, TValue>, TKey, TValue>
+		: VerbatimDictionaryKeysBaseFormatter<IDictionary<TKey, TValue>, TKey, TValue>
 	{
 	}
 }

@@ -7,7 +7,6 @@ using Utf8Json;
 namespace Nest
 {
 	[InterfaceDataContract]
-	[JsonFormatter(typeof(ProcessorFormatter<ConvertProcessor>))]
 	public interface IConvertProcessor : IProcessor
 	{
 		[DataMember(Name ="field")]

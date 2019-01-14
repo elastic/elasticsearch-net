@@ -9,7 +9,6 @@ namespace Nest
 	/// URL-decodes a string
 	/// </summary>
 	[InterfaceDataContract]
-	[JsonFormatter(typeof(ProcessorFormatter<UrlDecodeProcessor>))]
 	public interface IUrlDecodeProcessor : IProcessor
 	{
 		/// <summary>

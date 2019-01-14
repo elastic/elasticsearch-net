@@ -22,7 +22,7 @@ namespace Nest
 				return null;
 			}
 
-			// read to first property
+			// read opening {
 			reader.ReadNext();
 
 			var operation = reader.ReadPropertyNameSegmentRaw();

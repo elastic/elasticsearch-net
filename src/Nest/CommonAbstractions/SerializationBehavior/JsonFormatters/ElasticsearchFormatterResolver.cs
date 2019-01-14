@@ -6,7 +6,8 @@ namespace Nest
 {
 	internal class ElasticsearchFormatterResolver : IJsonFormatterResolver
 	{
-		private static readonly IJsonFormatter<object> FallbackFormatter = new DynamicObjectTypeFallbackFormatter(InnerResolver.Instance);
+		private static readonly IJsonFormatter<object> FallbackFormatter =
+			new DynamicObjectTypeFallbackFormatter(InnerResolver.Instance);
 
 		public IConnectionSettingsValues Settings { get; }
 
@@ -49,13 +50,14 @@ namespace Nest
 					new NullableTimeSpanFormatter(),
 					// TODO: set up resolver to determine whether enum is serialized as string or value
 					new StaticNullableFormatter<GeoHashPrecision>(new EnumFormatter<GeoHashPrecision>(false)),
+					new JsonNetCompatibleUriFormatter(),
 				}, new IJsonFormatterResolver[0]),
-				BuiltinResolver.Instance, // Builtin
+				BuiltinResolver.Instance, // Builtin primitives
 				EnumResolver.Default, // Enum(default => string)
 				AttributeFormatterResolver.Instance, // [JsonFormatter]
-				ReadAsFormatterResolver.Instance,
+				ReadAsFormatterResolver.Instance, // [ReadAs]
 				DynamicGenericResolver.Instance, // T[], List<T>, etc...
-				NestGenericSourceTypeFormatterResolver.Instance,
+				//NestGenericSourceTypeFormatterResolver.Instance,
 				DynamicObjectResolver.AllowPrivateExcludeNullCamelCase
 			};
 

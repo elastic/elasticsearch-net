@@ -126,7 +126,7 @@ namespace Nest
 		public long? Version { get; internal set; }
 
 		[DataMember(Name ="highlight")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatterBase<Dictionary<string, List<string>>, string, List<string>>))]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysBaseFormatter<Dictionary<string, List<string>>, string, List<string>>))]
 		internal Dictionary<string, List<string>> _Highlight { get; set; }
 	}
 }
