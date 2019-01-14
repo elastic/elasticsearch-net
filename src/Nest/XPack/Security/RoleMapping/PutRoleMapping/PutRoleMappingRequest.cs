@@ -24,6 +24,7 @@ namespace Nest
 		IEnumerable<string> RunAs { get; set; }
 	}
 
+	[DataContract]
 	public partial class PutRoleMappingRequest
 	{
 		public bool? Enabled { get; set; }

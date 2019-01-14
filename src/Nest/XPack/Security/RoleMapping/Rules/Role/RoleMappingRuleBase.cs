@@ -4,7 +4,8 @@ using Utf8Json;
 
 namespace Nest
 {
-	[JsonFormatter(typeof(RoleMappingRuleBaseJsonConverter))]
+	[DataContract]
+	[JsonFormatter(typeof(RoleMappingRuleBaseFormatter))]
 	public abstract class RoleMappingRuleBase
 	{
 		[DataMember(Name ="all")]
@@ -14,10 +15,10 @@ namespace Nest
 		protected internal IEnumerable<RoleMappingRuleBase> AnyRules { get; set; }
 
 		[DataMember(Name ="except")]
-		protected RoleMappingRuleBase ExceptRule { get; set; }
+		protected internal RoleMappingRuleBase ExceptRule { get; set; }
 
 		[DataMember(Name ="field")]
-		protected FieldRuleBase FieldRule { get; set; }
+		protected internal FieldRuleBase FieldRule { get; set; }
 
 		public static AnyRoleMappingRule operator |(RoleMappingRuleBase leftContainer, RoleMappingRuleBase rightContainer) =>
 			CombineAny(leftContainer, rightContainer);
