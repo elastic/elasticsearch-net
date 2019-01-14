@@ -7,7 +7,6 @@ using Utf8Json;
 namespace Nest
 {
 	[InterfaceDataContract]
-	[JsonFormatter(typeof(ProcessorFormatter<KeyValueProcessor>))]
 	public interface IKeyValueProcessor : IProcessor
 	{
 		/// <summary> The field to be parsed </summary>

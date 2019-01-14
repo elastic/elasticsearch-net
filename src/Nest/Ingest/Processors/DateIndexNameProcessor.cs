@@ -12,7 +12,6 @@ namespace Nest
 	/// by using the date math index name support.
 	/// </summary>
 	[InterfaceDataContract]
-	[JsonFormatter(typeof(ProcessorFormatter<DateIndexNameProcessor>))]
 	public interface IDateIndexNameProcessor : IProcessor
 	{
 		/// <summary>

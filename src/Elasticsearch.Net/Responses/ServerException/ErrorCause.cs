@@ -1,28 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Runtime.Serialization;
+using Utf8Json;
+using Utf8Json.Resolvers;
 
 namespace Elasticsearch.Net
 {
+	[JsonFormatter(typeof(ErrorCauseFormatter))]
 	public class ErrorCause
 	{
+		[DataMember(Name = "caused_by")]
 		public ErrorCause CausedBy { get; set; }
+
 		public ErrorCauseMetadata Metadata { get; set; }
+
+		[DataMember(Name = "reason")]
 		public string Reason { get; set; }
+
+		[DataMember(Name = "stack_trace")]
 		public string StackTrace { get; set; }
+
+		[DataMember(Name = "type")]
 		public string Type { get; set; }
-
-		internal static ErrorCause CreateErrorCause(IDictionary<string, object> dict, IJsonSerializerStrategy strategy)
-		{
-			var causedBy = new ErrorCause();
-			causedBy.FillValues(dict);
-			if (dict.TryGetValue("caused_by", out var innerCausedBy))
-				causedBy.CausedBy = (ErrorCause)strategy.DeserializeObject(innerCausedBy, typeof(ErrorCause));
-
-			causedBy.Metadata = ErrorCauseMetadata.CreateCauseMetadata(dict, strategy);
-
-			return causedBy;
-		}
 
 		public override string ToString() => CausedBy == null
 			? $"Type: {Type} Reason: \"{Reason}\""
@@ -59,14 +59,14 @@ namespace Elasticsearch.Net
 			public IReadOnlyCollection<string> ScriptStack { get; set; } = DefaultCollection;
 			public int? Shard { get; set; }
 
-			internal static ErrorCauseMetadata CreateCauseMetadata(IDictionary<string, object> dict, IJsonSerializerStrategy strategy)
+			internal static ErrorCauseMetadata CreateCauseMetadata(IDictionary<string, object> dict, IJsonFormatterResolver formatterResolver)
 			{
 				var m = new ErrorCauseMetadata();
 				if (dict.TryGetValue("license.expired.feature", out var feature)) m.LicensedExpiredFeature = Convert.ToString(feature);
 				if (dict.TryGetValue("index", out var index)) m.Index = Convert.ToString(index);
 				if (dict.TryGetValue("index_uuid", out var indexUUID)) m.IndexUUID = Convert.ToString(indexUUID);
 				if (dict.TryGetValue("resource.type", out var resourceType)) m.ResourceType = Convert.ToString(resourceType);
-				if (dict.TryGetValue("resource.id", out var resourceId)) m.ResourceId = GetStringArray(resourceId, strategy);
+				if (dict.TryGetValue("resource.id", out var resourceId)) m.ResourceId = GetStringArray(resourceId);
 				if (dict.TryGetValue("shard", out var shard)) m.Shard = Convert.ToInt32(shard);
 				if (dict.TryGetValue("line", out var line)) m.Line = Convert.ToInt32(line);
 				if (dict.TryGetValue("col", out var column)) m.Column = Convert.ToInt32(column);
@@ -76,33 +76,33 @@ namespace Elasticsearch.Net
 				if (dict.TryGetValue("phase", out var phase)) m.Phase = Convert.ToString(phase);
 				if (dict.TryGetValue("grouped", out var grouped)) m.Grouped = Convert.ToBoolean(grouped);
 
-				if (dict.TryGetValue("script_stack", out var scriptStack)) m.ScriptStack = GetStringArray(scriptStack, strategy);
+				if (dict.TryGetValue("script_stack", out var scriptStack)) m.ScriptStack = GetStringArray(scriptStack);
 				if (dict.TryGetValue("script", out var script)) m.Script = Convert.ToString(script);
 				if (dict.TryGetValue("lang", out var language)) m.Language = Convert.ToString(language);
 				if (dict.TryGetValue("failed_shards", out var failedShards))
-					m.FailedShards = GetShardFailures(failedShards, strategy);
+					m.FailedShards = GetShardFailures(failedShards, formatterResolver);
 				return m;
 			}
 
-			private static IReadOnlyCollection<ShardFailure> GetShardFailures(object value, IJsonSerializerStrategy strategy)
+			private static IReadOnlyCollection<ShardFailure> GetShardFailures(object value, IJsonFormatterResolver formatterResolver)
 			{
-				if (!(value is object[] objects))
+				if (!(value is List<object> objects))
 					return DefaultFailedShards;
 
 				var values = new List<ShardFailure>();
 				foreach (var v in objects)
 				{
-					var cause = (ShardFailure)strategy.DeserializeObject(v, typeof(ShardFailure));
+					var cause = formatterResolver.ReserializeAndDeserialize<ShardFailure>(v);
 					if (cause != null) values.Add(cause);
 				}
 				return new ReadOnlyCollection<ShardFailure>(values.ToArray());
 			}
 
-			private static IReadOnlyCollection<string> GetStringArray(object value, IJsonSerializerStrategy strategy)
+			private static IReadOnlyCollection<string> GetStringArray(object value)
 			{
 				if (value is string s) return new ReadOnlyCollection<string>(new[] { s });
 
-				if (value is object[] objects)
+				if (value is List<object> objects)
 				{
 					var values = new List<string>();
 					foreach (var v in objects)
@@ -114,5 +114,42 @@ namespace Elasticsearch.Net
 				return DefaultCollection;
 			}
 		}
+	}
+
+	public class ErrorCauseFormatter : IJsonFormatter<ErrorCause>
+	{
+		public ErrorCause Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			var token = reader.GetCurrentJsonToken();
+
+			switch (token)
+			{
+				case JsonToken.BeginObject:
+				{
+					var formatter = formatterResolver.GetFormatter<Dictionary<string, object>>();
+					var dict = formatter.Deserialize(ref reader, formatterResolver);
+					var errorCause = new ErrorCause();
+					errorCause.FillValues(dict);
+
+					if (dict.TryGetValue("caused_by", out var causedBy))
+						errorCause.CausedBy = formatterResolver.ReserializeAndDeserialize<ErrorCause>(causedBy);
+
+					errorCause.Metadata = ErrorCause.ErrorCauseMetadata.CreateCauseMetadata(dict, formatterResolver);
+
+					return errorCause;
+				}
+				case JsonToken.String:
+				{
+					var errorCause = new ErrorCause { Reason = reader.ReadString() };
+					return errorCause;
+				}
+				default:
+					reader.ReadNextBlock();
+					return null;
+			}
+		}
+
+		public void Serialize(ref JsonWriter writer, ErrorCause value, IJsonFormatterResolver formatterResolver) =>
+			throw new NotSupportedException();
 	}
 }

@@ -11,7 +11,6 @@ namespace Nest
 	/// Otherwise these fields can’t be accessed by any processor.
 	/// </summary>
 	[InterfaceDataContract]
-	[JsonFormatter(typeof(ProcessorFormatter<DotExpanderProcessor>))]
 	public interface IDotExpanderProcessor : IProcessor
 	{
 		/// <summary>

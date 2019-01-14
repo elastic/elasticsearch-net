@@ -15,7 +15,6 @@ namespace Nest
 	/// Requires the Ingest Attachment Processor Plugin to be installed on the cluster.
 	/// </remarks>
 	[InterfaceDataContract]
-	[JsonFormatter(typeof(ProcessorFormatter<AttachmentProcessor>))]
 	public interface IAttachmentProcessor : IProcessor
 	{
 		/// <summary> The field to get the base64 encoded field from </summary>

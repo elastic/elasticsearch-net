@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Utf8Json;
 
 namespace Nest
 {
@@ -7,6 +8,11 @@ namespace Nest
 
 	public partial class PutPipelineRequest
 	{
+		// TODO: Added for deserialization
+		public PutPipelineRequest()
+		{
+		}
+
 		public string Description { get; set; }
 		public IEnumerable<IProcessor> OnFailure { get; set; }
 		public IEnumerable<IProcessor> Processors { get; set; }
