@@ -64,7 +64,7 @@ namespace Nest
 		: IDetector, IByFieldNameDetector, IOverFieldNameDetector,
 			IPartitionFieldNameDetector, IFieldNameDetector { }
 
-	public abstract class MetricDetectorBase : DetectorBase, IGeographicDetector
+	public abstract class MetricDetectorBase : DetectorBase, IMetricDetector
 	{
 		protected MetricDetectorBase(MetricFunction function) : base(function.GetStringValue()) { }
 
