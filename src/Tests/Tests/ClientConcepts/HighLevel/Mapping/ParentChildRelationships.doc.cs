@@ -183,7 +183,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				ParentProperty = "a parent prop",
 				MyJoinField = "myparent" // <2> this lets the join data type know this is a root document of type `myparent`
 			};
-			var indexParent = client.IndexDocument<MyDocument>(parentDocument);
+			var indexParent = client.IndexDocument(parentDocument);
 
 			//json
 			var expected = new
@@ -200,7 +200,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			 * Linking the child document to its parent follows a similar pattern.
 			 * Here we create a link by inferring the id from our parent instance `parentDocument`
 			 */
-			var indexChild = client.IndexDocument<MyDocument>(new MyChild
+			var indexChild = client.IndexDocument(new MyChild
 			{
 				MyJoinField = JoinField.Link<MyChild, MyParent>(parentDocument)
 			});
@@ -209,7 +209,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			 * or here we are simply stating this document is of type `mychild` and should be linked
 			 * to parent id 1 from `parentDocument`.
 			 */
-			indexChild = client.IndexDocument<MyDocument>(new MyChild
+			indexChild = client.IndexDocument(new MyChild
 			{
 				Id = 2,
 				MyJoinField = JoinField.Link<MyChild>(1)
