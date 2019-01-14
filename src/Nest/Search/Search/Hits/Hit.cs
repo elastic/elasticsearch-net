@@ -86,6 +86,7 @@ namespace Nest
 		}
 
 		[DataMember(Name ="_id")]
+		[JsonFormatter(typeof(IdStringFormatter))]
 		public string Id { get; internal set; }
 
 		[DataMember(Name ="_index")]
