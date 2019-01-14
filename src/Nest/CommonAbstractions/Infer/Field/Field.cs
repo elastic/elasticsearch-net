@@ -27,6 +27,8 @@ namespace Nest
 			_comparisonValue = Name;
 		}
 
+		public Field(Expression expression, double? boost = null) : this(expression, boost, format: null) { }
+
 		public Field(Expression expression, double? boost = null, string format = null)
 		{
 			Expression = expression ?? throw new ArgumentNullException(nameof(expression));
@@ -36,6 +38,8 @@ namespace Nest
 			_type = type;
 			CachableExpression = !new HasVariableExpressionVisitor(expression).Found;
 		}
+
+		public Field(PropertyInfo property, double? boost = null) : this(property, boost, format: null) { }
 
 		public Field(PropertyInfo property, double? boost = null, string format = null)
 		{
