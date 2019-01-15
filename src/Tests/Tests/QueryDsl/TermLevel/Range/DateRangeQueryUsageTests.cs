@@ -66,4 +66,48 @@ namespace Tests.QueryDsl.TermLevel.Range
 				.TimeZone("+01:00")
 			);
 	}
+
+	public class DateRangeDefaultDateTimeQueryUsageTests : QueryDslUsageTestsBase
+	{
+		public DateRangeDefaultDateTimeQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IDateRangeQuery>(q => q.Range as IDateRangeQuery)
+			{ };
+
+		protected override QueryContainer QueryInitializer => new DateRangeQuery
+		{
+			Field = "description",
+			GreaterThan = default,
+			GreaterThanOrEqualTo = default,
+			LessThan = default,
+			LessThanOrEqualTo = default,
+			Format = "dd/MM/yyyy||yyyy",
+			TimeZone = "+01:00"
+		};
+
+		//TODO in 7.0 DateMath should make its DateTime nullable so that DateTime.MinValue is sent out as well.
+		// this is only marginally better then sending an empty string.
+		protected override object QueryJson => new
+		{
+			range = new
+			{
+				description = new
+				{
+					format = "dd/MM/yyyy||yyyy",
+					time_zone = "+01:00"
+				}
+			}
+		};
+
+		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
+			.DateRange(c => c
+				.Field(p => p.Description)
+				.GreaterThan(default)
+				.GreaterThanOrEquals(default)
+				.LessThan(default)
+				.LessThanOrEquals(default)
+				.Format("dd/MM/yyyy||yyyy")
+				.TimeZone("+01:00")
+			);
+	}
 }

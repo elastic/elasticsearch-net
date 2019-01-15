@@ -79,10 +79,11 @@ namespace Nest
 			return math;
 		}
 
+		internal bool IsValid => Self.Anchor.Match(d => d != default, s => !s.IsNullOrEmpty());
+
 		public override string ToString()
 		{
-			var isValid = Self.Anchor.Match(d => d != default(DateTime), s => !s.IsNullOrEmpty());
-			if (!isValid) return string.Empty;
+			if (!IsValid) return string.Empty;
 
 			var separator = Self.Round.HasValue || Self.Ranges.HasAny() ? "||" : string.Empty;
 
