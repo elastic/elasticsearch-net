@@ -48,12 +48,10 @@ namespace Nest
 					// TODO: condition on these to only take effect when StringTimeSpanAttribute not present.
 					new TimeSpanToStringFormatter(),
 					new NullableTimeSpanFormatter(),
-					// TODO: set up resolver to determine whether enum is serialized as string or value
-					new StaticNullableFormatter<GeoHashPrecision>(new EnumFormatter<GeoHashPrecision>(false)),
 					new JsonNetCompatibleUriFormatter(),
 				}, new IJsonFormatterResolver[0]),
 				BuiltinResolver.Instance, // Builtin primitives
-				EnumResolver.Default, // Enum(default => string)
+				NestEnumResolver.Instance, // Specialized Enum handling
 				AttributeFormatterResolver.Instance, // [JsonFormatter]
 				ReadAsFormatterResolver.Instance, // [ReadAs]
 				DynamicGenericResolver.Instance, // T[], List<T>, etc...
