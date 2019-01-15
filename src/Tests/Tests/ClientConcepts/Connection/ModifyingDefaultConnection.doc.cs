@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Elastic.Xunit.XunitPlumbing;
@@ -108,5 +110,27 @@ namespace Tests.ClientConcepts.Connection
 			searchResponse.ShouldBeValid();
 			searchResponse.Documents.Count.Should().Be(25);
 		}
+
+		/**
+		/**==== Customize HttpConnection
+		 *
+		 * For a lot of use cases subclassing HttpConnection is a great way to customize the http connection for your needs.
+		 * E.g if you want to authenticate with Kerberos, creating a custom HttpConnection as followed allows you to set the right HTTP headers.
+		 *
+		 *
+		 * TIP use something like https://www.nuget.org/packages/Kerberos.NET/ to fill in the actual blanks of this implementation
+		 */
+		public class KerberosConnection : HttpConnection
+		{
+			protected override HttpRequestMessage CreateRequestMessage(RequestData requestData)
+			{
+				var message = base.CreateRequestMessage(requestData);
+				var header = string.Empty;
+				message.Headers.Authorization = new AuthenticationHeaderValue("Negotiate", header);
+				return message;
+			}
+		}
+
+
 	}
 }
