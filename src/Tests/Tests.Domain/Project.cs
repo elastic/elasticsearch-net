@@ -44,7 +44,6 @@ namespace Tests.Domain
 		public string Type => TypeName;
 
 		//the first applies when using internal source serializer the latter when using JsonNetSourceSerializer
-		[StringEnum]
 		public Visibility Visibility { get; set; }
 
 		// @formatter:off — enable formatter after this line
@@ -138,6 +137,7 @@ namespace Tests.Domain
 		VeryActive
 	}
 
+	[StringEnum]
 	public enum Visibility
 	{
 		Public,
