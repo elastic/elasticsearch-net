@@ -272,8 +272,8 @@ namespace Tests.Search.Search
 				Field = "state",
 				Value = "Stable"
 			}),
-			DocValueFields = Infer.Field<Project>(p => p.Name, format: "use_field_mapping")
-				.And<Project>(p => p.LastActivity, format: "weekyear")
+			DocValueFields = Infer.Field<Project>(p => p.Name, boost: null, format: "use_field_mapping")
+				.And<Project>(p => p.LastActivity, boost: null, format: "weekyear")
 		};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
