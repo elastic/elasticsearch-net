@@ -43,10 +43,10 @@ namespace Nest
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Range = this;
 
 		internal static bool IsConditionless(IDateRangeQuery q) => q.Field.IsConditionless()
-			|| q.GreaterThanOrEqualTo == null
-			&& q.LessThanOrEqualTo == null
-			&& q.GreaterThan == null
-			&& q.LessThan == null;
+			&& (q.GreaterThanOrEqualTo == null || !q.GreaterThanOrEqualTo.IsValid)
+			&& (q.LessThanOrEqualTo == null || !q.LessThanOrEqualTo.IsValid)
+			&& (q.GreaterThan == null || !q.GreaterThan.IsValid)
+			&& (q.LessThan == null || !q.LessThan.IsValid);
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
