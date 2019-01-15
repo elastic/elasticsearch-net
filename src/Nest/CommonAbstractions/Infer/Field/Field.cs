@@ -102,13 +102,21 @@ namespace Nest
 
 		public Fields And(Field field) => new Fields(new[] { this, field });
 
-		public Fields And<T>(Expression<Func<T, object>> field, double? boost = null, string format = null) where T : class =>
+		public Fields And<T>(Expression<Func<T, object>> field, double? boost = null) where T : class =>
+			new Fields(new[] { this, new Field(field, boost, format: null) });
+
+		public Fields And<T>(Expression<Func<T, object>> field, double? boost, string format = null) where T : class =>
 			new Fields(new[] { this, new Field(field, boost, format) });
 
-		public Fields And(string field, double? boost = null, string format = null) =>
+		public Fields And(string field, double? boost = null) => new Fields(new[] { this, new Field(field, boost, format: null) });
+
+		public Fields And(string field, double? boost, string format = null) =>
 			new Fields(new[] { this, new Field(field, boost, format) });
 
-		public Fields And(PropertyInfo property, double? boost = null, string format = null) =>
+		public Fields And(PropertyInfo property, double? boost = null) =>
+			new Fields(new[] { this, new Field(property, boost, format: null) });
+
+		public Fields And(PropertyInfo property, double? boost, string format = null) =>
 			new Fields(new[] { this, new Field(property, boost, format) });
 
 		private static string ParseFieldName(string name, out double? boost)

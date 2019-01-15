@@ -66,7 +66,7 @@ namespace Nest
 		public static Field Field(string field, double? boost, string format = null) => new Field(field, boost, format);
 
 		public static Field Field(PropertyInfo property, double? boost = null) => Field(property, boost, format: null);
-		public static Field Field(PropertyInfo property, double? boost = null, string format = null) =>
+		public static Field Field(PropertyInfo property, double? boost, string format = null) =>
 			new Field(property, boost, format);
 
 		public static PropertyName Property(string property) => property;
