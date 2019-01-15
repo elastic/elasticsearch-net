@@ -18,7 +18,9 @@ namespace Nest
 		private readonly object _comparisonValue;
 		private readonly Type _type;
 
-		public Field(string name, double? boost = null, string format = null)
+		public Field(string name, double? boost = null) : this(name, boost, format: null) {}
+
+		public Field(string name, double? boost, string format = null)
 		{
 			name.ThrowIfNullOrEmpty(nameof(name));
 			Name = ParseFieldName(name, out var b);
