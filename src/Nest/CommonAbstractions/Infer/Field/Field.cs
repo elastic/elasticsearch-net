@@ -29,7 +29,7 @@ namespace Nest
 
 		public Field(Expression expression, double? boost = null) : this(expression, boost, format: null) { }
 
-		public Field(Expression expression, double? boost = null, string format = null)
+		public Field(Expression expression, double? boost, string format = null)
 		{
 			Expression = expression ?? throw new ArgumentNullException(nameof(expression));
 			Boost = boost;
@@ -41,7 +41,7 @@ namespace Nest
 
 		public Field(PropertyInfo property, double? boost = null) : this(property, boost, format: null) { }
 
-		public Field(PropertyInfo property, double? boost = null, string format = null)
+		public Field(PropertyInfo property, double? boost, string format = null)
 		{
 			Property = property ?? throw new ArgumentNullException(nameof(property));
 			Boost = boost;
