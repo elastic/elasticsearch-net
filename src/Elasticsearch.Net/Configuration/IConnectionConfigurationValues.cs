@@ -206,7 +206,7 @@ namespace Elasticsearch.Net
 		bool SniffsOnStartup { get; }
 
 		/// <summary>
-		/// Instead of following a c/go like error checking on response.IsValid always throw an exception
+		/// Instead of following a c/go like error checking on response.IsValid do throw an exception (except when <see cref="IApiCallDetails.SuccessOrKnownError"/> is false)
 		/// on the client when a call resulted in an exception on either the client or the Elasticsearch server.
 		/// <para>Reasons for such exceptions could be search parser errors, index missing exceptions, etc...</para>
 		/// </summary>
