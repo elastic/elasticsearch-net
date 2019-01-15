@@ -500,7 +500,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			usingSettings.Expect("data").ForField(Field<Precedence>(p => p.DataMember));
 			usingSettings.Expect("DEFAULTFIELDNAMEINFERRER").ForField(Field<Precedence>(p => p.DefaultFieldNameInferrer));
 
-
+			var x = Field<Project>(p => p.Name, 1.0);
 			/** The same naming rules also apply when indexing a document */
 			usingSettings.Expect(new []
 			{
