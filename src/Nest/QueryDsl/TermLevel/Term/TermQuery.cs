@@ -12,6 +12,7 @@ namespace Nest
 		object Value { get; set; }
 	}
 
+	[DataContract]
 	public class TermQuery : FieldNameQueryBase, ITermQuery
 	{
 		public object Value { get; set; }

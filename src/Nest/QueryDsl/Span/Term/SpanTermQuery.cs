@@ -7,6 +7,7 @@ namespace Nest
 	[JsonFormatter(typeof(FieldNameQueryFormatter<SpanTermQuery, ISpanTermQuery>))]
 	public interface ISpanTermQuery : ITermQuery, ISpanSubQuery { }
 
+	[DataContract]
 	public class SpanTermQuery : FieldNameQueryBase, ISpanTermQuery
 	{
 		public object Value { get; set; }
