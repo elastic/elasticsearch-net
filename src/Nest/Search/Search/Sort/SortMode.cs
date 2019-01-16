@@ -7,7 +7,7 @@ namespace Nest
 	/// Elasticsearch supports sorting by array or multi-valued fields. The mode option controls what array value is picked for
 	/// sorting the document it belongs to.
 	/// </summary>
-
+	[StringEnum]
 	public enum SortMode
 	{
 		/// <summary> Pick the lowest value. </summary>

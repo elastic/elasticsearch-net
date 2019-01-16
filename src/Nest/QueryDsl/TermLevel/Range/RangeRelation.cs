@@ -3,7 +3,7 @@
 
 namespace Nest
 {
-
+	[StringEnum]
 	public enum RangeRelation
 	{
 		[EnumMember(Value = "within")] Within,

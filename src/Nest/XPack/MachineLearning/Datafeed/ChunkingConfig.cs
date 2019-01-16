@@ -53,6 +53,7 @@ namespace Nest
 	/// <summary>
 	/// The chunking mode
 	/// </summary>
+	[StringEnum]
 	public enum ChunkingMode
 	{
 		/// <summary>

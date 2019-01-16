@@ -49,16 +49,48 @@ namespace Nest
 						formatter = new EnumFormatter<T>(true);
 					else
 					{
-						// check for the presence of attributes on any of the enum values
-						if (typeof(T).GetFields()
-							.Any(fi => fi.FieldType == typeof(T) &&
-								(fi.GetCustomAttribute<EnumMemberAttribute>(true) != null ||
-									fi.GetCustomAttribute<DataMemberAttribute>(true) != null)))
-							formatter = new EnumFormatter<T>(true);
-						else
-							// default to serialize as numeric value
-							formatter = new EnumFormatter<T>(false);
+						formatter = new EnumFormatter<T>(false);
 					}
+				}
+			}
+		}
+	}
+
+	// TODO: Move to Elasticsearch.Net and register with serializer in low level client
+	internal sealed class ElasticsearchNetEnumResolver : IJsonFormatterResolver
+	{
+		public static readonly IJsonFormatterResolver Instance = new ElasticsearchNetEnumResolver();
+
+		private ElasticsearchNetEnumResolver() { }
+
+		public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.formatter;
+
+		private static class FormatterCache<T>
+		{
+			public static readonly IJsonFormatter<T> formatter;
+
+			static FormatterCache()
+			{
+				var ti = typeof(T).GetTypeInfo();
+
+				if (ti.IsNullable())
+				{
+					// build underlying type and use wrapped formatter.
+					ti = ti.GenericTypeArguments[0].GetTypeInfo();
+					if (!ti.IsEnum) return;
+
+					var innerFormatter = Instance.GetFormatterDynamic(ti.AsType());
+					if (innerFormatter == null) return;
+
+					formatter = (IJsonFormatter<T>)Activator.CreateInstance(typeof(StaticNullableFormatter<>).MakeGenericType(ti.AsType()),
+						new object[] { innerFormatter });
+				}
+				else if (typeof(T).IsEnum)
+				{
+					var stringEnumAttribute = typeof(T).GetCustomAttribute<Elasticsearch.Net.StringEnumAttribute>();
+
+					if (stringEnumAttribute != null)
+						formatter = new EnumFormatter<T>(true);
 				}
 			}
 		}

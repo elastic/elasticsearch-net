@@ -3,7 +3,7 @@
 
 namespace Nest
 {
-
+	[StringEnum]
 	public enum FielddataLoading
 	{
 		[EnumMember(Value = "eager")]

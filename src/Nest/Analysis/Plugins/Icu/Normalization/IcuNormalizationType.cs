@@ -5,6 +5,7 @@ namespace Nest
 	/// <summary>
 	/// Normalization forms https://en.wikipedia.org/wiki/Unicode_equivalence#Normal_forms
 	/// </summary>
+	[StringEnum]
 	public enum IcuNormalizationType
 	{
 		/// <summary>

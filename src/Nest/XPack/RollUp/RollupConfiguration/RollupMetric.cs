@@ -3,7 +3,7 @@
 
 namespace Nest
 {
-
+	[StringEnum]
 	public enum RollupMetric
 	{
 		[EnumMember(Value = "min")] Min,

@@ -3,7 +3,7 @@
 
 namespace Nest
 {
-
+	[StringEnum]
 	public enum SuggestSort
 	{
 		[EnumMember(Value = "score")]

@@ -7,6 +7,7 @@ namespace Nest
 	/// The mode parameter controls what array value the aggregation will use for array or
 	/// multi-valued fields.
 	/// </summary>
+	[StringEnum]
 	public enum MatrixStatsMode
 	{
 		/// <summary>

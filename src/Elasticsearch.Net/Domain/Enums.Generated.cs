@@ -12,13 +12,13 @@ using System.Runtime.Serialization;
 namespace Elasticsearch.Net
 {
 
-	public enum Refresh
+	[StringEnum]public enum Refresh
 	{
 		[EnumMember(Value = "true")] True,
 		[EnumMember(Value = "false")] False,
 		[EnumMember(Value = "wait_for")] WaitFor
 	}
-	public enum Bytes
+	[StringEnum]public enum Bytes
 	{
 		[EnumMember(Value = "b")] B,
 		[EnumMember(Value = "k")] K,
@@ -32,13 +32,13 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "p")] P,
 		[EnumMember(Value = "pb")] Pb
 	}
-	public enum Health
+	[StringEnum]public enum Health
 	{
 		[EnumMember(Value = "green")] Green,
 		[EnumMember(Value = "yellow")] Yellow,
 		[EnumMember(Value = "red")] Red
 	}
-	public enum Size
+	[StringEnum]public enum Size
 	{
 		[EnumMember(Value = "")] Raw,
 		[EnumMember(Value = "k")] K,
@@ -47,13 +47,13 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "t")] T,
 		[EnumMember(Value = "p")] P
 	}
-	public enum Level
+	[StringEnum]public enum Level
 	{
 		[EnumMember(Value = "cluster")] Cluster,
 		[EnumMember(Value = "indices")] Indices,
 		[EnumMember(Value = "shards")] Shards
 	}
-	public enum WaitForEvents
+	[StringEnum]public enum WaitForEvents
 	{
 		[EnumMember(Value = "immediate")] Immediate,
 		[EnumMember(Value = "urgent")] Urgent,
@@ -62,70 +62,70 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "low")] Low,
 		[EnumMember(Value = "languid")] Languid
 	}
-	public enum WaitForStatus
+	[StringEnum]public enum WaitForStatus
 	{
 		[EnumMember(Value = "green")] Green,
 		[EnumMember(Value = "yellow")] Yellow,
 		[EnumMember(Value = "red")] Red
 	}
-	public enum ExpandWildcards
+	[StringEnum]public enum ExpandWildcards
 	{
 		[EnumMember(Value = "open")] Open,
 		[EnumMember(Value = "closed")] Closed,
 		[EnumMember(Value = "none")] None,
 		[EnumMember(Value = "all")] All
 	}
-	public enum DefaultOperator
+	[StringEnum]public enum DefaultOperator
 	{
 		[EnumMember(Value = "AND")] And,
 		[EnumMember(Value = "OR")] Or
 	}
-	public enum VersionType
+	[StringEnum]public enum VersionType
 	{
 		[EnumMember(Value = "internal")] Internal,
 		[EnumMember(Value = "external")] External,
 		[EnumMember(Value = "external_gte")] ExternalGte,
 		[EnumMember(Value = "force")] Force
 	}
-	public enum Conflicts
+	[StringEnum]public enum Conflicts
 	{
 		[EnumMember(Value = "abort")] Abort,
 		[EnumMember(Value = "proceed")] Proceed
 	}
-	public enum SearchType
+	[StringEnum]public enum SearchType
 	{
 		[EnumMember(Value = "query_then_fetch")] QueryThenFetch,
 		[EnumMember(Value = "dfs_query_then_fetch")] DfsQueryThenFetch
 	}
-	public enum OpType
+	[StringEnum]public enum OpType
 	{
 		[EnumMember(Value = "index")] Index,
 		[EnumMember(Value = "create")] Create
 	}
-	public enum Format
+	[StringEnum]public enum Format
 	{
 		[EnumMember(Value = "detailed")] Detailed,
 		[EnumMember(Value = "text")] Text
 	}
-	public enum ThreadType
+	[StringEnum]public enum ThreadType
 	{
 		[EnumMember(Value = "cpu")] Cpu,
 		[EnumMember(Value = "wait")] Wait,
 		[EnumMember(Value = "block")] Block
 	}
-	public enum SuggestMode
+	[StringEnum]public enum SuggestMode
 	{
 		[EnumMember(Value = "missing")] Missing,
 		[EnumMember(Value = "popular")] Popular,
 		[EnumMember(Value = "always")] Always
 	}
-	public enum GroupBy
+	[StringEnum]public enum GroupBy
 	{
 		[EnumMember(Value = "nodes")] Nodes,
 		[EnumMember(Value = "parents")] Parents,
 		[EnumMember(Value = "none")] None
 	}
-	[Flags]public enum ClusterStateMetric
+	[Flags, StringEnum]public enum ClusterStateMetric
 	{
 		[EnumMember(Value = "blocks")] Blocks = 1 << 0,
 		[EnumMember(Value = "metadata")] Metadata = 1 << 1,
@@ -136,7 +136,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "version")] Version = 1 << 6,
 		[EnumMember(Value = "_all")] All = 1 << 7
 	}
-	[Flags]public enum IndicesStatsMetric
+	[Flags, StringEnum]public enum IndicesStatsMetric
 	{
 		[EnumMember(Value = "completion")] Completion = 1 << 0,
 		[EnumMember(Value = "docs")] Docs = 1 << 1,
@@ -156,7 +156,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "suggest")] Suggest = 1 << 14,
 		[EnumMember(Value = "_all")] All = 1 << 15
 	}
-	[Flags]public enum NodesInfoMetric
+	[Flags, StringEnum]public enum NodesInfoMetric
 	{
 		[EnumMember(Value = "settings")] Settings = 1 << 0,
 		[EnumMember(Value = "os")] Os = 1 << 1,
@@ -168,7 +168,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "plugins")] Plugins = 1 << 7,
 		[EnumMember(Value = "ingest")] Ingest = 1 << 8
 	}
-	[Flags]public enum NodesStatsMetric
+	[Flags, StringEnum]public enum NodesStatsMetric
 	{
 		[EnumMember(Value = "breaker")] Breaker = 1 << 0,
 		[EnumMember(Value = "fs")] Fs = 1 << 1,
@@ -182,7 +182,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "discovery")] Discovery = 1 << 9,
 		[EnumMember(Value = "_all")] All = 1 << 10
 	}
-	[Flags]public enum NodesStatsIndexMetric
+	[Flags, StringEnum]public enum NodesStatsIndexMetric
 	{
 		[EnumMember(Value = "completion")] Completion = 1 << 0,
 		[EnumMember(Value = "docs")] Docs = 1 << 1,
@@ -202,12 +202,12 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "suggest")] Suggest = 1 << 14,
 		[EnumMember(Value = "_all")] All = 1 << 15
 	}
-	[Flags]public enum NodesUsageMetric
+	[Flags, StringEnum]public enum NodesUsageMetric
 	{
 		[EnumMember(Value = "rest_actions")] RestActions = 1 << 0,
 		[EnumMember(Value = "_all")] All = 1 << 1
 	}
-	[Flags]public enum WatcherStatsMetric
+	[Flags, StringEnum]public enum WatcherStatsMetric
 	{
 		[EnumMember(Value = "queued_watches")] QueuedWatches = 1 << 0,
 		[EnumMember(Value = "pending_watches")] PendingWatches = 1 << 1,

@@ -6,7 +6,7 @@ namespace Nest
 	/// <summary>
 	/// Language types used for language analyzers
 	/// </summary>
-
+	[StringEnum]
 	public enum Language
 	{
 		Arabic,

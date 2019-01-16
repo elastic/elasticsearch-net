@@ -3,7 +3,7 @@
 
 namespace Nest
 {
-
+	[StringEnum]
 	public enum IndexOptions
 	{
 		[EnumMember(Value = "docs")]

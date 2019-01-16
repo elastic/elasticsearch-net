@@ -78,7 +78,7 @@ namespace Nest
 		public HipChatMessageDescriptor User(params string[] user) => Assign(a => a.User = user);
 	}
 
-
+	[StringEnum]
 	public enum HipChatMessageFormat
 	{
 		[EnumMember(Value = "html")]
@@ -88,7 +88,7 @@ namespace Nest
 		Text
 	}
 
-
+	[StringEnum]
 	public enum HipChatMessageColor
 	{
 		[EnumMember(Value = "gray")]

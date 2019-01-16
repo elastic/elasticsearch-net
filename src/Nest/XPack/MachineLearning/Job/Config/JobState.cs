@@ -6,7 +6,7 @@ namespace Nest
 	/// <summary>
 	/// The state of a machine learning job
 	/// </summary>
-
+	[StringEnum]
 	public enum JobState
 	{
 		/// <summary>

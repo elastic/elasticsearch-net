@@ -5,6 +5,7 @@ namespace Nest
 	/// <summary>
 	/// Snowball compatible languages
 	/// </summary>
+	[StringEnum]
 	public enum SnowballLanguage
 	{
 		[EnumMember(Value = "Armenian")]

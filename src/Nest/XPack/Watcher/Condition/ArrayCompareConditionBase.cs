@@ -16,7 +16,7 @@ namespace Nest
 		object Value { get; set; }
 	}
 
-
+	[StringEnum]
 	public enum Quantifier
 	{
 		[EnumMember(Value = "some")]

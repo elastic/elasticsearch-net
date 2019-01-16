@@ -23,7 +23,7 @@ namespace Nest
 		public DataAttachmentDescriptor Format(DataAttachmentFormat? format) => Assign(a => a.Format = format);
 	}
 
-
+	[StringEnum]
 	public enum DataAttachmentFormat
 	{
 		[EnumMember(Value = "json")]

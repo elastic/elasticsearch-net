@@ -3,7 +3,7 @@
 
 namespace Nest
 {
-
+	[StringEnum]
 	public enum Status
 	{
 		[EnumMember(Value = "success")]

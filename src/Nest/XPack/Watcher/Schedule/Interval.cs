@@ -7,6 +7,7 @@ using Utf8Json;
 
 namespace Nest
 {
+	[StringEnum]
 	public enum IntervalUnit
 	{
 		[EnumMember(Value = "s")]

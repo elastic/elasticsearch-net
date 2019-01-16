@@ -45,7 +45,7 @@ namespace Nest
 		public WatcherState WatcherState { get; internal set; }
 	}
 
-
+	[StringEnum]
 	public enum WatcherState
 	{
 		[EnumMember(Value = "stopped")]
@@ -92,7 +92,7 @@ namespace Nest
 		public long QueueSize { get; internal set; }
 	}
 
-
+	[StringEnum]
 	public enum ExecutionPhase
 	{
 		[EnumMember(Value = "awaits_execution")]
