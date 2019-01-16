@@ -6,6 +6,7 @@ using System.Text;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
+using System.Runtime.Serialization;
 using Utf8Json;
 
 //This file contains all the typed querystring parameters that are generated of the client spec.
