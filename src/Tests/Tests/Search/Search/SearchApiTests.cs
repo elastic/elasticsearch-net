@@ -254,8 +254,8 @@ namespace Tests.Search.Search
 				.Term(p => p.State, StateOfBeing.Stable)
 			)
 			.DocValueFields(fs => fs
-				.Field(p => p.Name, format: "use_field_mapping")
-				.Field(p => p.LastActivity, format: "weekyear")
+				.Field(p => p.Name, null, format: "use_field_mapping")
+				.Field(p => p.LastActivity, null, format: "weekyear")
 			);
 
 		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()

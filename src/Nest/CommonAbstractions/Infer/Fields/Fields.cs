@@ -56,21 +56,39 @@ namespace Nest
 
 		public static implicit operator Fields(Field[] fields) => fields.IsEmpty() ? null : new Fields(fields);
 
-		public Fields And<T>(Expression<Func<T, object>> field, double? boost = null, string format = null) where T : class
+		public Fields And<T>(Expression<Func<T, object>> field, double? boost, string format = null) where T : class
 		{
 			ListOfFields.Add(new Field(field, boost, format));
 			return this;
 		}
 
-		public Fields And(string field, double? boost = null, string format = null)
+		public Fields And<T>(Expression<Func<T, object>> field, double? boost = null) where T : class
+		{
+			ListOfFields.Add(new Field(field, boost));
+			return this;
+		}
+
+		public Fields And(string field, double? boost, string format = null)
 		{
 			ListOfFields.Add(new Field(field, boost, format));
+			return this;
+		}
+
+		public Fields And(string field, double? boost = null)
+		{
+			ListOfFields.Add(new Field(field, boost));
 			return this;
 		}
 
 		public Fields And(PropertyInfo property, double? boost = null)
 		{
 			ListOfFields.Add(new Field(property, boost));
+			return this;
+		}
+
+		public Fields And(PropertyInfo property, double? boost, string format = null)
+		{
+			ListOfFields.Add(new Field(property, boost, format));
 			return this;
 		}
 
