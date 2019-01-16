@@ -43,7 +43,7 @@ namespace Nest
 		public PagerDutyContextDescriptor Src(string src) => Assign(a => a.Src = src);
 	}
 
-
+	[StringEnum]
 	public enum PagerDutyContextType
 	{
 		[EnumMember(Value = "link")]

@@ -3,7 +3,7 @@
 
 namespace Nest
 {
-
+	[StringEnum]
 	public enum GeoTree
 	{
 		[EnumMember(Value = "geohash")]

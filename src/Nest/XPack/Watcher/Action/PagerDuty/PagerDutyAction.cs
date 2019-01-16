@@ -73,7 +73,7 @@ namespace Nest
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new PagerDutyContextDescriptor(type))));
 	}
 
-
+	[StringEnum]
 	public enum PagerDutyEventType
 	{
 		[EnumMember(Value = "trigger")]

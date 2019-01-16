@@ -48,7 +48,7 @@ namespace Nest
 		public ConvertProcessorDescriptor<T> Type(ConvertProcessorType? type) => Assign(a => a.Type = type);
 	}
 
-
+	[StringEnum]
 	public enum ConvertProcessorType
 	{
 		[EnumMember(Value = "integer")]

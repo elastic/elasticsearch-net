@@ -6,7 +6,7 @@ namespace Nest
 	/// <summary>
 	/// Type of highlighter
 	/// </summary>
-
+	[StringEnum]
 	public enum HighlighterType
 	{
 		/// <summary>

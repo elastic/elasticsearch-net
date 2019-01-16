@@ -22,7 +22,7 @@ namespace Nest
 		public WatchRecord WatchRecord { get; set; }
 	}
 
-
+	[StringEnum]
 	public enum ActionExecutionState
 	{
 		[EnumMember(Value = "awaits_execution")]

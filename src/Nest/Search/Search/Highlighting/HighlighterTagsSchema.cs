@@ -6,7 +6,7 @@ namespace Nest
 	/// <summary>
 	/// Use a built-in tag schema
 	/// </summary>
-
+	[StringEnum]
 	public enum HighlighterTagsSchema
 	{
 		/// <summary>

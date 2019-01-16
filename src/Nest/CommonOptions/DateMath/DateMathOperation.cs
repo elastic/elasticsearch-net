@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
+	[StringEnum]
 	public enum DateMathOperation
 	{
 		[EnumMember(Value = "+")]

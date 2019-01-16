@@ -51,6 +51,7 @@ namespace Nest
 					new JsonNetCompatibleUriFormatter(),
 				}, new IJsonFormatterResolver[0]),
 				BuiltinResolver.Instance, // Builtin primitives
+				ElasticsearchNetEnumResolver.Instance, // Specialized Enum handling
 				NestEnumResolver.Instance, // Specialized Enum handling
 				AttributeFormatterResolver.Instance, // [JsonFormatter]
 				ReadAsFormatterResolver.Instance, // [ReadAs]

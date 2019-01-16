@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-
+	[StringEnum]
 	public enum NumberType
 	{
 		[EnumMember(Value = "float")]

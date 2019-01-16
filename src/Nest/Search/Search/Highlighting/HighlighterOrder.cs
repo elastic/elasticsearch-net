@@ -6,7 +6,7 @@ namespace Nest
 	/// <summary>
 	/// Sorts highlighted fragments
 	/// </summary>
-
+	[StringEnum]
 	public enum HighlighterOrder
 	{
 		/// <summary>

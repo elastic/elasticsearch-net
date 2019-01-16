@@ -3,6 +3,7 @@ using Utf8Json;
 
 namespace Nest
 {
+	[StringEnum]
 	public enum HoltWintersType
 	{
 		[EnumMember(Value = "add")]

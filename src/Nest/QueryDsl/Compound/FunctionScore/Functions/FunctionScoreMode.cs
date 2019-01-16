@@ -3,7 +3,7 @@
 
 namespace Nest
 {
-
+	[StringEnum]
 	public enum FunctionScoreMode
 	{
 		[EnumMember(Value = "multiply")]

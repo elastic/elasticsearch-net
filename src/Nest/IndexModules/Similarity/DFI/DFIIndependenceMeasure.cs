@@ -6,7 +6,7 @@ namespace Nest
 	/// <summary>
 	/// <see cref="IDFISimilarity" /> independence measure
 	/// </summary>
-
+	[StringEnum]
 	public enum DFIIndependenceMeasure
 	{
 		[EnumMember(Value = "standardized")]

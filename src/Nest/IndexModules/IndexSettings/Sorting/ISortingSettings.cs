@@ -11,7 +11,7 @@ namespace Nest
 		public const string Order = "index.sort.order";
 	}
 
-
+	[StringEnum]
 	public enum IndexSortMode
 	{
 		[EnumMember(Value = "min")]
@@ -21,7 +21,7 @@ namespace Nest
 		Maximum
 	}
 
-
+	[StringEnum]
 	public enum IndexSortMissing
 	{
 		[EnumMember(Value = "_first")]
@@ -31,7 +31,7 @@ namespace Nest
 		Last
 	}
 
-
+	[StringEnum]
 	public enum IndexSortOrder
 	{
 		[EnumMember(Value = "asc")]

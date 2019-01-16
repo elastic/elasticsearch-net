@@ -2,6 +2,7 @@
 
 namespace Nest
 {
+	[StringEnum]
 	public enum NodeRole
 	{
 		[EnumMember(Value = "master")]

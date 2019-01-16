@@ -124,7 +124,7 @@ namespace Nest
 			Assign(a => a.ResultsIndexName = typeof(TIndex));
 	}
 
-
+	[StringEnum]
 	public enum ExcludeFrequent
 	{
 		[EnumMember(Value = "all")]

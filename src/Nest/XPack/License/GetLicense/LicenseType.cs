@@ -3,7 +3,7 @@
 
 namespace Nest
 {
-
+	[StringEnum]
 	public enum LicenseType
 	{
 		[EnumMember(Value = "missing")]

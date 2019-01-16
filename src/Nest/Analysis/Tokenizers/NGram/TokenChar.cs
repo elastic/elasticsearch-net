@@ -2,6 +2,7 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
+	[StringEnum]
 	public enum TokenChar
 	{
 		[EnumMember(Value = "letter")]
