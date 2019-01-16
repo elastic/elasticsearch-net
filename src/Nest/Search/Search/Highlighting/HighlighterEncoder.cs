@@ -6,7 +6,7 @@ namespace Nest
 	/// <summary>
 	/// Indicates if the highlighted text should be HTML encoded
 	/// </summary>
-
+	[StringEnum]
 	public enum HighlighterEncoder
 	{
 		/// <summary>

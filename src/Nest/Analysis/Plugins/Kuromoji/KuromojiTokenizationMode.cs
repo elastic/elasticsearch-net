@@ -7,6 +7,7 @@ namespace Nest
 	/// Part of the `analysis-kuromoji` plugin:
 	/// https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
 	/// </summary>
+	[StringEnum]
 	public enum KuromojiTokenizationMode
 	{
 		/// <summary>

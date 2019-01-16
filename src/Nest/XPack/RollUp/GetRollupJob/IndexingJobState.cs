@@ -3,7 +3,7 @@
 
 namespace Nest
 {
-
+	[StringEnum]
 	public enum IndexingJobState
 	{
 		/// <summary> Indexer is running, but not actively indexing data (e.g. it's idle) </summary>

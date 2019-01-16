@@ -7,7 +7,7 @@ namespace Nest
 	/// <summary>
 	/// The deprecation warning level
 	/// </summary>
-
+	[StringEnum]
 	public enum DeprecationWarningLevel
 	{
 		/// <summary>

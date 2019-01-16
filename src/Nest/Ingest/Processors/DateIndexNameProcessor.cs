@@ -188,6 +188,7 @@ namespace Nest
 			Assign(a => a.IndexNameFormat = indexNameFormat);
 	}
 
+	[StringEnum]
 	public enum DateRounding
 	{
 		[EnumMember(Value = "s")]

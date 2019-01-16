@@ -90,7 +90,7 @@ namespace Nest
 		public DateTimeOffset Timestamp { get; set; }
 	}
 
-
+	[StringEnum]
 	public enum AcknowledgementState
 	{
 		[EnumMember(Value = "awaits_successful_execution")]

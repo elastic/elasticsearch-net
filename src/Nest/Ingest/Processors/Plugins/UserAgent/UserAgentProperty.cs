@@ -2,6 +2,7 @@
 
 namespace Nest
 {
+	[StringEnum]
 	public enum UserAgentProperty
 	{
 		[EnumMember(Value = "NAME")] Name,

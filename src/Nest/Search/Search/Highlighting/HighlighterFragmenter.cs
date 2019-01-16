@@ -7,7 +7,7 @@ namespace Nest
 	/// Fragmenter can control how text should be broken up in highlight snippets. However, this option is
 	/// applicable only for the Plain Highlighter
 	/// </summary>
-
+	[StringEnum]
 	public enum HighlighterFragmenter
 	{
 		/// <summary>

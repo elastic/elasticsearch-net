@@ -2,6 +2,7 @@
 
 namespace Nest
 {
+	[StringEnum]
 	public enum GeoShapeRelation
 	{
 		[EnumMember(Value = "intersects")]

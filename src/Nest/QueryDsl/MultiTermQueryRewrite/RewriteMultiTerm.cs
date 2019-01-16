@@ -7,6 +7,7 @@ namespace Nest
 	/// <summary>
 	/// Multi term query rewrite method
 	/// </summary>
+	[StringEnum]
 	public enum RewriteMultiTerm
 	{
 		/// <summary>

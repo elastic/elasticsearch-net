@@ -2,6 +2,7 @@
 
 namespace Nest
 {
+	[StringEnum]
 	public enum PhoneticRuleType
 	{
 		[EnumMember(Value = "approx")]

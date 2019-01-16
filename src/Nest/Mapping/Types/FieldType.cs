@@ -6,7 +6,7 @@ namespace Nest
 	/// <summary>
 	/// Define the type of field content.
 	/// </summary>
-
+	[StringEnum]
 	public enum FieldType
 	{
 		/// <summary>

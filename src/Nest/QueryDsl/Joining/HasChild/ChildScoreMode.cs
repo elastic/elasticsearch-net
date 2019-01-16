@@ -3,7 +3,7 @@
 
 namespace Nest
 {
-
+	[StringEnum]
 	public enum ChildScoreMode
 	{
 		[EnumMember(Value = "none")]

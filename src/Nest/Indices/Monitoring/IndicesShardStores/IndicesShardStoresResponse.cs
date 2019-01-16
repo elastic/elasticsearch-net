@@ -68,7 +68,7 @@ namespace Nest
 		public string Type { get; internal set; }
 	}
 
-
+	[StringEnum]
 	public enum ShardStoreAllocation
 	{
 		[EnumMember(Value = "primary")]

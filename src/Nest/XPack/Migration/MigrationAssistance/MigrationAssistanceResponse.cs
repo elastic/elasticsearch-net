@@ -22,7 +22,7 @@ namespace Nest
 		public UpgradeActionRequired ActionRequired { get; internal set; }
 	}
 
-
+	[StringEnum]
 	public enum UpgradeActionRequired
 	{
 		[EnumMember(Value = "not_applicable")]

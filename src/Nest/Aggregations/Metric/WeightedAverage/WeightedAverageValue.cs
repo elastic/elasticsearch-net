@@ -85,6 +85,7 @@ namespace Nest
 	/// <summary>
 	/// The type of value
 	/// </summary>
+	[StringEnum]
 	public enum ValueType
 	{
 		/// <summary>A string value</summary>

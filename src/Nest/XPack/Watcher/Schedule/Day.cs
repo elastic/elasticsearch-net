@@ -3,7 +3,7 @@
 
 namespace Nest
 {
-
+	[StringEnum]
 	public enum Day
 	{
 		[EnumMember(Value = "sunday")]

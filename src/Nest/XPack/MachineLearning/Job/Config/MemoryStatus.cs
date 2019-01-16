@@ -6,7 +6,7 @@ namespace Nest
 	/// <summary>
 	/// The status of the mathematical models.
 	/// </summary>
-
+	[StringEnum]
 	public enum MemoryStatus
 	{
 		/// <summary>

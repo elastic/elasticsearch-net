@@ -3,6 +3,7 @@
 namespace Nest
 {
 	/// <summary> The decompound mode determines how the tokenizer handles compound tokens. </summary>
+	[StringEnum]
 	public enum NoriDecompoundMode
 	{
 		/// <summary> Decomposes compounds and discards the original form (default). </summary>

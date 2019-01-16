@@ -146,7 +146,7 @@ namespace Nest
 		public string WeightRanking { get; internal set; }
 	}
 
-
+	[StringEnum]
 	public enum AllocationExplainDecision
 	{
 		[EnumMember(Value = "NO")]
@@ -190,7 +190,7 @@ namespace Nest
 		public int? WeightRanking { get; set; }
 	}
 
-
+	[StringEnum]
 	public enum Decision
 	{
 		[EnumMember(Value = "yes")]
@@ -218,7 +218,7 @@ namespace Nest
 		NoAttempt
 	}
 
-
+	[StringEnum]
 	public enum StoreCopy
 	{
 		[EnumMember(Value = "NONE")]
@@ -302,7 +302,7 @@ namespace Nest
 		public bool Primary { get; set; }
 	}
 
-
+	[StringEnum]
 	public enum UnassignedInformationReason
 	{
 		/// <summary>

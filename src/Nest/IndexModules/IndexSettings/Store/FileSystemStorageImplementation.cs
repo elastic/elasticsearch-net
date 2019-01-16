@@ -6,7 +6,7 @@ namespace Nest
 	/// <summary>
 	/// The store module allows you to control how index data is stored and accessed on disk.
 	/// </summary>
-
+	[StringEnum]
 	public enum FileSystemStorageImplementation
 	{
 		/// <summary>

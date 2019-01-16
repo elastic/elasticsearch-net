@@ -130,7 +130,7 @@ namespace Nest
 	/// <summary>
 	/// Dynamic match pattern type
 	/// </summary>
-
+	[StringEnum]
 	public enum MatchType
 	{
 		/// <summary>
