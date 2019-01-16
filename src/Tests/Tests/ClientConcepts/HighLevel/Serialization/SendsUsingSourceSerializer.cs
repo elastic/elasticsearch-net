@@ -149,22 +149,22 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		}
 
 		[U] public void TermQuery() =>
-			SerializesEnumValue(new TermQuery { Field = Infer.Field<Project>(p => p.Name), Value = SomeEnum.AnotherValue });
+			SerializesEnumValue<ITermQuery>(new TermQuery { Field = Infer.Field<Project>(p => p.Name), Value = SomeEnum.AnotherValue });
 
 		[U] public void TermsQuery() =>
-			Serializes(new TermsQuery { Field = Infer.Field<Project>(p => p.Name), Terms = new object[] { SomeEnum.AnotherValue } },
+			Serializes<ITermsQuery>(new TermsQuery { Field = Infer.Field<Project>(p => p.Name), Terms = new object[] { SomeEnum.AnotherValue } },
 				new { name = new[] { 1 } },
 				new { name = new[] { "different" } }
 			);
 
 		[U] public void WildcardQuery() =>
-			SerializesEnumValue(new WildcardQuery { Field = Infer.Field<Project>(p => p.Name), Value = SomeEnum.AnotherValue });
+			SerializesEnumValue<IWildcardQuery>(new WildcardQuery { Field = Infer.Field<Project>(p => p.Name), Value = SomeEnum.AnotherValue });
 
 		[U] public void PrefixQuery() =>
-			SerializesEnumValue(new PrefixQuery { Field = Infer.Field<Project>(p => p.Name), Value = SomeEnum.AnotherValue });
+			SerializesEnumValue<IPrefixQuery>(new PrefixQuery { Field = Infer.Field<Project>(p => p.Name), Value = SomeEnum.AnotherValue });
 
 		[U] public void SpanTermQueryInitializer() =>
-			SerializesEnumValue(new SpanTermQuery { Field = Infer.Field<Project>(p => p.Name), Value = SomeEnum.AnotherValue });
+			SerializesEnumValue<ISpanTermQuery>(new SpanTermQuery { Field = Infer.Field<Project>(p => p.Name), Value = SomeEnum.AnotherValue });
 
 		[U] public void SpanTermQueryFluent() =>
 			SerializesEnumValue<ISpanTermQuery>(new SpanTermQueryDescriptor<Project>().Field(p => p.Name).Value(SomeEnum.AnotherValue));

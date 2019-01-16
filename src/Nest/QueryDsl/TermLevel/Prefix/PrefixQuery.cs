@@ -11,6 +11,7 @@ namespace Nest
 		MultiTermQueryRewrite Rewrite { get; set; }
 	}
 
+	[DataContract]
 	public class PrefixQuery : FieldNameQueryBase, IPrefixQuery
 	{
 		public MultiTermQueryRewrite Rewrite { get; set; }
