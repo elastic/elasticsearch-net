@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Utf8Json;
 using static Nest.FixedIndexSettings;
 using static Nest.IndexSortSettings;
@@ -129,7 +130,7 @@ namespace Nest
 					Set(IndexSortSettings.Fields, AsArrayOrSingleItem(indexSettings.Sorting.Fields));
 					Set(Order, AsArrayOrSingleItem(indexSettings.Sorting.Order));
 					Set(Mode, AsArrayOrSingleItem(indexSettings.Sorting.Mode));
-					Set(Missing, AsArrayOrSingleItem(indexSettings.Sorting.Missing));
+					Set(IndexSortSettings.Missing, AsArrayOrSingleItem(indexSettings.Sorting.Missing));
 				}
 			}
 
@@ -246,7 +247,7 @@ namespace Nest
 			SetArray<IndexSortOrder[], IndexSortOrder>(s, settings, Order, v => sorting.Order = v, v => sorting.Order = new[] { v },
 				formatterResolver);
 			SetArray<IndexSortMode[], IndexSortMode>(s, settings, Mode, v => sorting.Mode = v, v => sorting.Mode = new[] { v }, formatterResolver);
-			SetArray<IndexSortMissing[], IndexSortMissing>(s, settings, Missing, v => sorting.Missing = v, v => sorting.Missing = new[] { v },
+			SetArray<IndexSortMissing[], IndexSortMissing>(s, settings, IndexSortSettings.Missing, v => sorting.Missing = v, v => sorting.Missing = new[] { v },
 				formatterResolver);
 
 			var queries = s.Queries = new QueriesSettings();
@@ -296,16 +297,33 @@ namespace Nest
 
 		private static T ConvertToValue<T>(object setting, IJsonFormatterResolver formatterResolver)
 		{
-			T value;
 			if (setting is T t)
-				value = t;
-			else
+				return t;
+
+			if (setting == null)
+				return default;
+
+			if (setting is IConvertible)
 			{
-				var writer = new JsonWriter();
-				formatterResolver.GetFormatter<object>().Serialize(ref writer, setting, formatterResolver);
-				var reader = new JsonReader(writer.GetBuffer().Array, 0);
-				value = formatterResolver.GetFormatter<T>().Deserialize(ref reader, formatterResolver);
+				var type = typeof(T).GetTypeInfo().IsNullable()
+					? Nullable.GetUnderlyingType(typeof(T))
+					: typeof(T);
+
+				try
+				{
+					return (T)Convert.ChangeType(setting, type);
+				}
+				catch (Exception e)
+				{
+					// swallow exception and fall through to reserializing
+				}
 			}
+
+			var writer = new JsonWriter();
+			formatterResolver.GetFormatter<object>().Serialize(ref writer, setting, formatterResolver);
+			var reader = new JsonReader(writer.GetBuffer().Array, 0);
+			var value = formatterResolver.GetFormatter<T>().Deserialize(ref reader, formatterResolver);
+
 			return value;
 		}
 
