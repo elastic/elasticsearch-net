@@ -14,20 +14,18 @@ namespace Nest
 			while (segmentReader.ReadIsInObject(ref count))
 			{
 				var propertyName = segmentReader.ReadPropertyName();
-				if (propertyName == "type")
-				{
-					analyzerType = segmentReader.ReadString();
-					break;
+				switch (propertyName) {
+					case "type":
+						analyzerType = segmentReader.ReadString();
+						break;
+					case "tokenizer":
+						segmentReader.ReadNext();
+						tokenizerPresent = true;
+						break;
+					default:
+						segmentReader.ReadNextBlock();
+						break;
 				}
-
-				if (propertyName == "tokenizer")
-				{
-					segmentReader.ReadNext();
-					tokenizerPresent = true;
-					break;
-				}
-
-				segmentReader.ReadNextBlock();
 			}
 
 			if (analyzerType == null)
