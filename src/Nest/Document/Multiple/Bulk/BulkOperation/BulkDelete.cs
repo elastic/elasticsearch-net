@@ -1,20 +1,23 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
+	[InterfaceDataContract]
 	public interface IBulkDeleteOperation<T> : IBulkOperation
 		where T : class
 	{
 		T Document { get; set; }
 
-		[JsonProperty("if_seq_no")]
+		[DataMember(Name = "if_seq_no")]
 		long? IfSeqNo { get; set; }
 
-		[JsonProperty("if_primary_term")]
+		[DataMember(Name = "if_primary_term")]
 		long? IfPrimaryTerm { get; set; }
 	}
 
+	[DataContract]
 	public class BulkDeleteOperation<T> : BulkOperationBase, IBulkDeleteOperation<T>
 		where T : class
 	{
@@ -39,6 +42,7 @@ namespace Nest
 		protected override Routing GetRoutingForOperation(Inferrer inferrer) => Routing ?? new Routing(Document);
 	}
 
+	[DataContract]
 	public class BulkDeleteDescriptor<T> : BulkOperationDescriptorBase<BulkDeleteDescriptor<T>, IBulkDeleteOperation<T>>, IBulkDeleteOperation<T>
 		where T : class
 	{

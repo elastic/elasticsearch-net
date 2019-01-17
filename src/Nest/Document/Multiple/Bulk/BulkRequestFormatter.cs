@@ -20,7 +20,7 @@ namespace Nest
 			var requestResponseSerializer = settings.RequestResponseSerializer;
 			var sourceSerializer = settings.SourceSerializer;
 			var inferrer = settings.Inferrer;
-			var formatter = formatterResolver.GetFormatter<IBulkOperation>();
+			var formatter = formatterResolver.GetFormatter<object>();
 
 			for (var index = 0; index < value.Operations.Count; index++)
 			{
@@ -32,6 +32,7 @@ namespace Nest
 
 				writer.WriteBeginObject();
 				writer.WritePropertyName(op.Operation);
+
 				formatter.Serialize(ref writer, op, formatterResolver);
 				writer.WriteEndObject();
 				writer.WriteRaw(Newline);
