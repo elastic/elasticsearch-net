@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
+	[InterfaceDataContract]
 	public interface IBulkCreateOperation<T> : IBulkOperation
 		where T : class
 	{
@@ -12,6 +14,7 @@ namespace Nest
 		string Pipeline { get; set; }
 	}
 
+	[DataContract]
 	public class BulkCreateOperation<T> : BulkOperationBase, IBulkCreateOperation<T>
 		where T : class
 	{
@@ -32,7 +35,7 @@ namespace Nest
 		protected override Routing GetRoutingForOperation(Inferrer inferrer) => Routing ?? new Routing(Document);
 	}
 
-
+	[DataContract]
 	public class BulkCreateDescriptor<T> : BulkOperationDescriptorBase<BulkCreateDescriptor<T>, IBulkCreateOperation<T>>, IBulkCreateOperation<T>
 		where T : class
 	{

@@ -5,7 +5,6 @@ using Utf8Json;
 namespace Nest
 {
 	[DataContract]
-	[JsonFormatter(typeof(BulkResponseItemFormatter))]
 	public class BulkIndexResponseItem : BulkResponseItemBase
 	{
 		/// <summary>

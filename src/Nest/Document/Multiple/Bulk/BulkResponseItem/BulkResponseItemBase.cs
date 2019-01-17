@@ -13,19 +13,19 @@ namespace Nest
 		/// <summary>
 		/// The error associated with the bulk operation
 		/// </summary>
-		[DataMember(Name ="error")]
+		[DataMember(Name = "error")]
 		BulkError Error { get; }
 
 		/// <summary>
 		/// The id of the document for the bulk operation
 		/// </summary>
-		[DataMember(Name ="_id")]
+		[DataMember(Name = "_id")]
 		string Id { get; }
 
 		/// <summary>
 		/// The index against which the bulk operation ran
 		/// </summary>
-		[DataMember(Name ="_index")]
+		[DataMember(Name = "_index")]
 		string Index { get; }
 
 		/// <summary>
@@ -38,40 +38,40 @@ namespace Nest
 		/// </summary>
 		string Operation { get; }
 
-		[DataMember(Name ="_primary_term")]
+		[DataMember(Name = "_primary_term")]
 		long PrimaryTerm { get; }
 
 		/// <summary>
 		/// The result of the bulk operation
 		/// </summary>
-		[DataMember(Name ="result")]
+		[DataMember(Name = "result")]
 		string Result { get; }
 
-		[DataMember(Name ="_seq_no")]
+		[DataMember(Name = "_seq_no")]
 		long SequenceNumber { get; }
 
 		/// <summary>
 		/// The shards associated with the bulk operation
 		/// </summary>
-		[DataMember(Name ="_shards")]
+		[DataMember(Name = "_shards")]
 		ShardStatistics Shards { get; }
 
 		/// <summary>
 		/// The status of the bulk operation
 		/// </summary>
-		[DataMember(Name ="status")]
+		[DataMember(Name = "status")]
 		int Status { get; }
 
 		/// <summary>
 		/// The type against which the bulk operation ran
 		/// </summary>
-		[DataMember(Name ="_type")]
+		[DataMember(Name = "_type")]
 		string Type { get; }
 
 		/// <summary>
 		/// The version of the document
 		/// </summary>
-		[DataMember(Name ="_version")]
+		[DataMember(Name = "_version")]
 		long Version { get; }
 	}
 
