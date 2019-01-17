@@ -16,37 +16,45 @@ namespace Nest
 
 		public IBulkResponseItem Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
+			IBulkResponseItem bulkResponseItem = null;
+
 			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
 			{
 				reader.ReadNextBlock();
-				return null;
+				return bulkResponseItem;
 			}
 
-			// read opening {
-			reader.ReadNext();
-
+			reader.ReadIsBeginObjectWithVerify();
 			var operation = reader.ReadPropertyNameSegmentRaw();
 			if (Operations.TryGetValue(operation, out var value))
 			{
 				switch (value)
 				{
 					case 0:
-						return formatterResolver.GetFormatter<BulkDeleteResponseItem>()
+						bulkResponseItem = formatterResolver.GetFormatter<BulkDeleteResponseItem>()
 							.Deserialize(ref reader, formatterResolver);
+						break;
 					case 1:
-						return formatterResolver.GetFormatter<BulkUpdateResponseItem>()
+						bulkResponseItem = formatterResolver.GetFormatter<BulkUpdateResponseItem>()
 							.Deserialize(ref reader, formatterResolver);
+						break;
 					case 2:
-						return formatterResolver.GetFormatter<BulkIndexResponseItem>()
+						bulkResponseItem = formatterResolver.GetFormatter<BulkIndexResponseItem>()
 							.Deserialize(ref reader, formatterResolver);
+						break;
 					case 3:
-						return formatterResolver.GetFormatter<BulkCreateResponseItem>()
+						bulkResponseItem = formatterResolver.GetFormatter<BulkCreateResponseItem>()
 							.Deserialize(ref reader, formatterResolver);
+						break;
 				}
 			}
+			else
+			{
+				reader.ReadNextBlock();
+			}
 
-			reader.ReadNextBlock();
-			return null;
+			reader.ReadIsEndObjectWithVerify();
+			return bulkResponseItem;
 		}
 
 		public void Serialize(ref JsonWriter writer, IBulkResponseItem value, IJsonFormatterResolver formatterResolver) =>

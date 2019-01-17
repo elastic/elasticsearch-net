@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
+	[InterfaceDataContract]
 	public interface IBulkDeleteOperation<T> : IBulkOperation
 		where T : class
 	{
 		T Document { get; set; }
 	}
 
+	[DataContract]
 	public class BulkDeleteOperation<T> : BulkOperationBase, IBulkDeleteOperation<T>
 		where T : class
 	{
@@ -28,6 +32,7 @@ namespace Nest
 		protected override Routing GetRoutingForOperation(Inferrer inferrer) => Routing ?? new Routing(Document);
 	}
 
+	[DataContract]
 	public class BulkDeleteDescriptor<T> : BulkOperationDescriptorBase<BulkDeleteDescriptor<T>, IBulkDeleteOperation<T>>, IBulkDeleteOperation<T>
 		where T : class
 	{

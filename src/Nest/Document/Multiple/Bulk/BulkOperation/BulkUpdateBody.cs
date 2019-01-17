@@ -3,6 +3,7 @@ using Utf8Json;
 
 namespace Nest
 {
+	[DataContract]
 	internal class BulkUpdateBody<TDocument, TPartialUpdate>
 		where TDocument : class
 		where TPartialUpdate : class

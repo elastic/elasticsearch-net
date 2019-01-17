@@ -4,6 +4,7 @@ using Utf8Json;
 
 namespace Nest
 {
+	[InterfaceDataContract]
 	public interface IBulkIndexOperation<T> : IBulkOperation
 	{
 		[JsonFormatter(typeof(SourceWriteFormatter<>))]
@@ -16,6 +17,7 @@ namespace Nest
 		string Pipeline { get; set; }
 	}
 
+	[DataContract]
 	public class BulkIndexOperation<T> : BulkOperationBase, IBulkIndexOperation<T>
 		where T : class
 	{
@@ -38,7 +40,7 @@ namespace Nest
 		protected override Routing GetRoutingForOperation(Inferrer inferrer) => Routing ?? new Routing(Document);
 	}
 
-
+	[DataContract]
 	public class BulkIndexDescriptor<T> : BulkOperationDescriptorBase<BulkIndexDescriptor<T>, IBulkIndexOperation<T>>, IBulkIndexOperation<T>
 		where T : class
 	{
