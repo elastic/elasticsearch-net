@@ -49,7 +49,7 @@ namespace Nest
 					{
 						case 0:
 							if (segmentReader.GetCurrentJsonToken() == JsonToken.String)
-								error = new Error { Reason = reader.ReadString() };
+								error = new Error { Reason = segmentReader.ReadString() };
 							else
 							{
 								var formatter = formatterResolver.GetFormatter<Error>();
@@ -61,6 +61,10 @@ namespace Nest
 								statusCode = segmentReader.ReadInt32();
 							break;
 					}
+				}
+				else
+				{
+					segmentReader.ReadNextBlock();
 				}
 			}
 
