@@ -5,6 +5,7 @@ namespace Nest
 	/// <summary>
 	/// Determines how the terms aggregation is executed
 	/// </summary>
+	[StringEnum]
 	public enum TermsAggregationCollectMode
 	{
 		/// <summary>
