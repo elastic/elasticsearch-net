@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Linq;
-using System.Reflection;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
-using System.Runtime.Serialization;
 using System.Collections.Generic;
 using Elastic.Xunit.XunitPlumbing;
 using Utf8Json;
@@ -17,8 +15,9 @@ namespace Tests.CodeStandards.Serialization
 		[U]
 		public void CustomFormattersShouldBeInternal()
 		{
+			// TODO: Make internals visible to IL generated modules
 			var formatters = typeof(IElasticClient).Assembly().GetTypes()
-				.Where(t => typeof(IJsonFormatter<>).IsAssignableFrom(t))
+				.Where(t => t.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IJsonFormatter<>)))
 				.ToList();
 			var visible = new List<string>();
 			foreach (var formatter in formatters)
