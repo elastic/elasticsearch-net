@@ -147,5 +147,13 @@ namespace Nest
 				return result;
 			}
 		}
+
+		// TODO: public for now, so IL emit serialization can call it
+		public bool ShouldSerialize(IJsonFormatterResolver formatterResolver)
+		{
+			var inferrer = formatterResolver.GetConnectionSettings().Inferrer;
+			var resolved = inferrer.Resolve(this);
+			return !resolved.IsNullOrEmpty();
+		}
 	}
 }
