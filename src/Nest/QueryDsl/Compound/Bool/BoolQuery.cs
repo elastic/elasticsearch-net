@@ -45,6 +45,11 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name = "should")]
 		IEnumerable<QueryContainer> Should { get; set; }
+
+		bool ShouldSerializeShould();
+		bool ShouldSerializeMust();
+		bool ShouldSerializeMustNot();
+		bool ShouldSerializeFilter();
 	}
 
 	public class BoolQuery : QueryBase, IBoolQuery
@@ -110,6 +115,12 @@ namespace Nest
 
 		internal static bool IsConditionless(IBoolQuery q) =>
 			q.Must.NotWritable() && q.MustNot.NotWritable() && q.Should.NotWritable() && q.Filter.NotWritable();
+
+		// TODO: Introduce QueryContainerCollection type to implement this logic once?
+		public bool ShouldSerializeShould() => (Should?.Any(qq => qq != null && qq.IsWritable)).GetValueOrDefault(false);
+		public bool ShouldSerializeMust() => (Must?.Any(qq => qq != null && qq.IsWritable)).GetValueOrDefault(false);
+		public bool ShouldSerializeMustNot() => (MustNot?.Any(qq => qq != null && qq.IsWritable)).GetValueOrDefault(false);
+		public bool ShouldSerializeFilter() => (Filter?.Any(qq => qq != null && qq.IsWritable)).GetValueOrDefault(false);
 	}
 
 	public class BoolQueryDescriptor<T>
@@ -256,5 +267,10 @@ namespace Nest
 		/// <returns></returns>
 		public BoolQueryDescriptor<T> Filter(params QueryContainer[] queries) =>
 			Assign(a => a.Filter = queries.ToListOrNullIfEmpty());
+
+		public bool ShouldSerializeShould() => (Self.Should?.Any(qq => qq != null && qq.IsWritable)).GetValueOrDefault(false);
+		public bool ShouldSerializeMust() => (Self.Must?.Any(qq => qq != null && qq.IsWritable)).GetValueOrDefault(false);
+		public bool ShouldSerializeMustNot() => (Self.MustNot?.Any(qq => qq != null && qq.IsWritable)).GetValueOrDefault(false);
+		public bool ShouldSerializeFilter() => (Self.Filter?.Any(qq => qq != null && qq.IsWritable)).GetValueOrDefault(false);
 	}
 }
