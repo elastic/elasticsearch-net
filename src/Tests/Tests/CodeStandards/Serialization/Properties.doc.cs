@@ -10,7 +10,7 @@ namespace Tests.CodeStandards.Serialization
 	public class JsonProperties
 	{
 		/**
-		* Our Json.NET contract resolver picks up attributes set on the interface
+		* Our Utf8Json formatter resolver picks up attributes set on the interface
 		*/
 		[U]
 		public void SeesInterfaceProperties()
