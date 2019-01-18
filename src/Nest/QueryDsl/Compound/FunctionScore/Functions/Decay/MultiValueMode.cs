@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-
+	[StringEnum]
 	public enum MultiValueMode
 	{
 		[EnumMember(Value = "min")]
