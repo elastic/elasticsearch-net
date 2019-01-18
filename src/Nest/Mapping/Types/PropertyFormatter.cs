@@ -34,11 +34,16 @@ namespace Nest
 							type = typeString.ToEnum<FieldType>().GetValueOrDefault(type);
 							break;
 						case 1:
-							type = FieldType.Object;
+							if (type == FieldType.None)
+								type = FieldType.Object;
+
+							segmentReader.ReadNextBlock();
 							break;
 					}
 
-					break;
+					// explicit type has been set
+					if (value == 0)
+						break;
 				}
 				else
 					segmentReader.ReadNextBlock();
