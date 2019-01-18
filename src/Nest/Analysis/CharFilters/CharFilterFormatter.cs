@@ -1,4 +1,5 @@
 ﻿using Utf8Json;
+using Utf8Json.Resolvers;
 
 namespace Nest
 {
@@ -71,7 +72,8 @@ namespace Nest
 					Serialize<IIcuNormalizationCharFilter>(ref writer, value, formatterResolver);
 					break;
 				default:
-					Serialize<ICharFilter>(ref writer, value, formatterResolver);
+					var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<ICharFilter>();
+					formatter.Serialize(ref writer, value, formatterResolver);
 					break;
 			}
 		}
