@@ -3,7 +3,7 @@
 
 namespace Nest
 {
-
+	[StringEnum]
 	public enum TextQueryType
 	{
 		[EnumMember(Value = "best_fields")]
