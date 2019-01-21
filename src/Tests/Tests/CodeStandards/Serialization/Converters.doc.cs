@@ -10,7 +10,7 @@ using Utf8Json;
 
 namespace Tests.CodeStandards.Serialization
 {
-	public class Converters
+	public class Formatters
 	{
 		[U]
 		public void CustomFormattersShouldBeInternal()

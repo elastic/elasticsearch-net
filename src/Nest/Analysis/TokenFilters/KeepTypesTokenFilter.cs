@@ -28,7 +28,7 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="IKeepTypesTokenFilter" />
-	public class KeepTypesTokenFilter : TokenFilterBase
+	public class KeepTypesTokenFilter : TokenFilterBase, IKeepTypesTokenFilter
 	{
 		public KeepTypesTokenFilter() : base("keep_types") { }
 
