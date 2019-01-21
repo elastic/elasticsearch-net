@@ -9,9 +9,9 @@ namespace Elasticsearch.Net
 		{
 			if (dict == null) return;
 
-			if (dict.TryGetValue("reason", out var reason)) rootCause.Reason = Convert.ToString(reason);
-			if (dict.TryGetValue("type", out var type)) rootCause.Type = Convert.ToString(type);
-			if (dict.TryGetValue("stack_trace", out var stackTrace)) rootCause.StackTrace = Convert.ToString(stackTrace);
+			if (dict.TryGetValue("reason", out var reason) && reason != null) rootCause.Reason = Convert.ToString(reason);
+			if (dict.TryGetValue("type", out var type) && type != null) rootCause.Type = Convert.ToString(type);
+			if (dict.TryGetValue("stack_trace", out var stackTrace) && stackTrace != null) rootCause.StackTrace = Convert.ToString(stackTrace);
 
 //			if (dict.TryGetValue("index", out var index)) rootCause.Index = Convert.ToString(index);
 //			if (dict.TryGetValue("resource.id", out var resourceId)) rootCause.ResourceId = Convert.ToString(resourceId);
