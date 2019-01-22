@@ -85,7 +85,7 @@ namespace Nest
 		)
 			: base(connectionPool, connection, null)
 		{
-			var formatterResolver = new ElasticsearchFormatterResolver(this);
+			var formatterResolver = new NestFormatterResolver(this);
 			//Utf8Json.JsonSerializer.SetDefaultResolver(formatterResolver);
 			var defaultSerializer = new InternalSerializer(this, formatterResolver);
 			_sourceSerializer = sourceSerializerFactory?.Invoke(defaultSerializer, this) ?? defaultSerializer;
