@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Elastic.Xunit.XunitPlumbing;
@@ -56,7 +56,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			/**
 			* Auto mapping can take the pain out of having to define a manual mapping for all properties
 			* on the POCO. In this case we want to index two subclasses into a single index. We call Map
-			* for the base class and then call AutoMap foreach of the types we want it it the implement
+			* for the base class and then call AutoMap foreach of the types we want it to implement
 			*/
 
 			var createIndexResponse = _client.CreateIndex("myindex", c => c
