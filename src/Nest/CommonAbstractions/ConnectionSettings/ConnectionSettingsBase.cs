@@ -218,6 +218,15 @@ namespace Nest
 					throw new ArgumentException($"Expression {e} does contain any member access");
 
 				var memberInfo = memberInfoResolver.Members.Last();
+
+				// memberInfo will be the declaringType, which may not be TDocument in the case of an inherited property.
+				// Get the correct memberinfo
+				if (typeof(TDocument) != memberInfo.DeclaringType)
+				{
+					var bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
+					memberInfo = typeof(TDocument).GetMember(memberInfo.Name, bindingFlags).First();
+				}
+
 				if (_propertyMappings.ContainsKey(memberInfo))
 				{
 					var newName = mapping.NewName;
