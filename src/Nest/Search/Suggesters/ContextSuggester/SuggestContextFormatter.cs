@@ -1,6 +1,7 @@
 using System;
 using Utf8Json;
 using Utf8Json.Internal;
+using Utf8Json.Resolvers;
 
 namespace Nest
 {
@@ -29,6 +30,8 @@ namespace Nest
 					contextType = segmentReader.ReadStringSegmentRaw();
 					break;
 				}
+
+				segmentReader.ReadNextBlock();
 			}
 
 			segmentReader = new JsonReader(segment.Array, segment.Offset);
@@ -47,8 +50,16 @@ namespace Nest
 			return Deserialize<CategorySuggestContext>(ref segmentReader, formatterResolver);
 		}
 
-		public void Serialize(ref JsonWriter writer, ISuggestContext value, IJsonFormatterResolver formatterResolver) =>
-			throw new NotSupportedException();
+		public void Serialize(ref JsonWriter writer, ISuggestContext value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
+
+			formatterResolver.GetFormatter<object>().Serialize(ref writer, value, formatterResolver);
+		}
 
 		private static TContext Deserialize<TContext>(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 			where TContext : ISuggestContext
