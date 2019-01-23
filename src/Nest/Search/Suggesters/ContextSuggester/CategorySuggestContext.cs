@@ -10,6 +10,7 @@ namespace Nest
 		public override string Type => "category";
 	}
 
+	[DataContract]
 	public class CategorySuggestContextDescriptor<T>
 		: SuggestContextDescriptorBase<CategorySuggestContextDescriptor<T>, ICategorySuggestContext, T>, ICategorySuggestContext
 		where T : class
