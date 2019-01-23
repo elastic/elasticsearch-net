@@ -91,14 +91,14 @@ namespace Nest
 					var afterKeys = dictionaryFormatter.Deserialize(ref reader, formatterResolver);
 					var bucketsPropertyName = reader.ReadString();
 					var bucketAggregate = bucketsPropertyName == Parser.Buckets
-						? GetMultiBucketAggregate(ref reader, formatterResolver) as BucketAggregate ?? new BucketAggregate()
+						? GetMultiBucketAggregate(ref reader, formatterResolver, bucketsPropertyName) as BucketAggregate ?? new BucketAggregate()
 						: new BucketAggregate();
 					bucketAggregate.AfterKey = afterKeys;
 					aggregate = bucketAggregate;
 					break;
 				case Parser.Buckets:
 				case Parser.DocCountErrorUpperBound:
-					aggregate = GetMultiBucketAggregate(ref reader, formatterResolver);
+					aggregate = GetMultiBucketAggregate(ref reader, formatterResolver, propertyName);
 					break;
 				case Parser.Count:
 					aggregate = GetStatsAggregate(ref reader);
@@ -310,7 +310,7 @@ namespace Nest
 
 			if (propertyName == Parser.Buckets)
 			{
-				var b = GetMultiBucketAggregate(ref reader, formatterResolver) as BucketAggregate;
+				var b = GetMultiBucketAggregate(ref reader, formatterResolver, propertyName) as BucketAggregate;
 				return new BucketAggregate
 				{
 					BgCount = bgCount,
@@ -331,23 +331,29 @@ namespace Nest
 
 		private IAggregate GetStatsAggregate(ref JsonReader reader)
 		{
-			reader.ReadNext();
 			var count = reader.ReadNullableLong().GetValueOrDefault(0);
-			reader.ReadNext();
 
 			if (reader.GetCurrentJsonToken() == JsonToken.EndObject)
+			{
+				reader.ReadNext();
 				return new GeoCentroidAggregate { Count = count };
+			}
 
-			reader.ReadNext();
+			reader.ReadNext(); // ,
+			reader.ReadNext(); // "min"
+			reader.ReadNext(); // :
 			var min = reader.ReadNullableDouble();
-			reader.ReadNext();
-			reader.ReadNext();
+			reader.ReadNext(); // ,
+			reader.ReadNext(); // "max"
+			reader.ReadNext(); // :
 			var max = reader.ReadNullableDouble();
-			reader.ReadNext();
-			reader.ReadNext();
+			reader.ReadNext(); // ,
+			reader.ReadNext(); // avg
+			reader.ReadNext(); // :
 			var average = reader.ReadNullableDouble();
-			reader.ReadNext();
-			reader.ReadNext();
+			reader.ReadNext(); // ,
+			reader.ReadNext(); // sum
+			reader.ReadNext(); // :
 			var sum = reader.ReadNullableDouble();
 
 			var statsMetric = new StatsAggregate()
@@ -359,11 +365,13 @@ namespace Nest
 				Sum = sum
 			};
 
-			reader.ReadNext();
-
 			if (reader.GetCurrentJsonToken() == JsonToken.EndObject)
+			{
+				reader.ReadNext();
 				return statsMetric;
+			}
 
+			reader.ReadNext(); // ,
 			var propertyName = reader.ReadPropertyName();
 			while (reader.GetCurrentJsonToken() != JsonToken.EndObject && propertyName.Contains(Parser.AsStringSuffix))
 			{
@@ -473,27 +481,26 @@ namespace Nest
 			return nestedAggs;
 		}
 
-		private IAggregate GetMultiBucketAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		private IAggregate GetMultiBucketAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver, string propertyName)
 		{
 			var bucket = new BucketAggregate();
-			var propertyName = reader.ReadPropertyName();
 			if (propertyName == Parser.DocCountErrorUpperBound)
 			{
-				//reader.ReadNext();
 				bucket.DocCountErrorUpperBound = reader.ReadNullableLong();
-				reader.ReadNext();
+				reader.ReadIsValueSeparatorWithVerify();
+				propertyName = reader.ReadPropertyName();
 			}
-			propertyName = reader.ReadPropertyName();
+
 			if (propertyName == Parser.SumOtherDocCount)
 			{
-				//reader.ReadNext();
 				bucket.SumOtherDocCount = reader.ReadNullableLong();
-				reader.ReadNext();
+				reader.ReadIsValueSeparatorWithVerify();
+				reader.ReadPropertyName();
 			}
-			var items = new List<IBucket>();
-			reader.ReadNext();
 
+			var items = new List<IBucket>();
 			var count = 0;
+
 			if (reader.GetCurrentJsonToken() == JsonToken.BeginObject)
 			{
 				reader.ReadNext();
@@ -502,10 +509,8 @@ namespace Nest
 				while (reader.ReadIsInObject(ref count))
 				{
 					var name = reader.ReadPropertyName();
-					//reader.ReadNext();
 					var innerAgg = ReadAggregate(ref reader, formatterResolver);
 					aggs[name] = innerAgg;
-					reader.ReadNext();
 				}
 
 				reader.ReadNext();
@@ -513,13 +518,9 @@ namespace Nest
 			}
 
 			if (reader.GetCurrentJsonToken() != JsonToken.BeginArray)
-				return null;
-
-			if (reader.ReadIsEndArray())
 			{
-				reader.ReadNext();
-				bucket.Items = EmptyReadOnly<IBucket>.Collection;
-				return bucket;
+				reader.ReadNextBlock();
+				return null;
 			}
 
 			while (reader.ReadIsInArray(ref count))
@@ -535,7 +536,6 @@ namespace Nest
 
 		private IAggregate GetValueAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			reader.ReadNext();
 			var valueMetric = new ValueAggregate
 			{
 				Value = reader.ReadNullableDouble()
@@ -675,18 +675,21 @@ namespace Nest
 		private IBucket GetDateHistogramBucket(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var keyAsString = reader.ReadString();
-			reader.ReadNext();
-			reader.ReadNext();
+
+			reader.ReadNext(); // ,
+			reader.ReadNext(); // "key"
+			reader.ReadNext(); // :
 			var key = reader.ReadNullableLong().GetValueOrDefault(0);
-			reader.ReadNext();
-			reader.ReadNext();
+			reader.ReadNext(); // ,
+			reader.ReadNext(); // "doc_count"
+			reader.ReadNext(); // :
 			var docCount = reader.ReadNullableLong().GetValueOrDefault(0);
-			reader.ReadNext();
+			reader.ReadNext(); // ,
 
 			var propertyName = reader.ReadPropertyName();
-			var nestedAggregations = GetSubAggregates(ref reader, propertyName, formatterResolver);
+			var subAggregates = GetSubAggregates(ref reader, propertyName, formatterResolver);
 
-			var dateHistogram = new DateHistogramBucket(nestedAggregations)
+			var dateHistogram = new DateHistogramBucket(subAggregates)
 			{
 				Key = key,
 				KeyAsString = keyAsString,
