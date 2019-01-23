@@ -30,6 +30,7 @@ namespace Nest
 		where TDescriptor : SuggestContextDescriptorBase<TDescriptor, TInterface, T>, TInterface, ISuggestContext
 		where TInterface : class, ISuggestContext
 	{
+		[IgnoreDataMember]
 		protected abstract string Type { get; }
 		string ISuggestContext.Name { get; set; }
 		Field ISuggestContext.Path { get; set; }

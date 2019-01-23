@@ -7,10 +7,10 @@ namespace Nest
 	[InterfaceDataContract]
 	public interface IGeoSuggestContext : ISuggestContext
 	{
-		[DataMember(Name ="neighbors")]
+		[DataMember(Name = "neighbors")]
 		bool? Neighbors { get; set; }
 
-		[DataMember(Name ="precision")]
+		[DataMember(Name = "precision")]
 		IEnumerable<string> Precision { get; set; }
 	}
 
@@ -23,6 +23,7 @@ namespace Nest
 		public override string Type => "geo";
 	}
 
+	[DataContract]
 	public class GeoSuggestContextDescriptor<T>
 		: SuggestContextDescriptorBase<GeoSuggestContextDescriptor<T>, IGeoSuggestContext, T>, IGeoSuggestContext
 		where T : class

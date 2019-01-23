@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -13,6 +14,7 @@ namespace Nest
 
 		protected DescriptorBase() => _self = (TDescriptor)this;
 
+		[IgnoreDataMember]
 		protected TInterface Self => _self;
 
 		protected TDescriptor Assign(Action<TInterface> assigner) => Fluent.Assign(_self, assigner);
