@@ -622,10 +622,18 @@ namespace Nest
 				switch (propertyName)
 				{
 					case Parser.From:
-						fromDouble = reader.ReadDouble();
+						// TODO: handle string "from" e.g. ip_range
+						if (reader.GetCurrentJsonToken() == JsonToken.Number)
+							fromDouble = reader.ReadDouble();
+						else
+							reader.ReadNext();
 						break;
 					case Parser.To:
-						toDouble = reader.ReadDouble();
+						// TODO: handle string "to" e.g. ip_range
+						if (reader.GetCurrentJsonToken() == JsonToken.Number)
+							toDouble = reader.ReadDouble();
+						else
+							reader.ReadNext();
 						break;
 					case Parser.Key:
 						key = reader.ReadString();
@@ -704,62 +712,68 @@ namespace Nest
 
 		private IBucket GetKeyedBucket(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			//reader.ReadNext();
-
-			if (reader.GetCurrentJsonToken() == JsonToken.BeginObject)
+			var token = reader.GetCurrentJsonToken();
+			if (token == JsonToken.BeginObject)
 				return GetCompositeBucket(ref reader, formatterResolver);
 
-			var key = reader.ReadString();
-			reader.ReadNext();
+			object key;
+			if (token == JsonToken.String)
+				key = reader.ReadString();
+			else
+				key = reader.ReadDouble();
+
+			reader.ReadNext(); // ,
 			var propertyName = reader.ReadPropertyName();
 			if (propertyName == Parser.From || propertyName == Parser.To)
-				return GetRangeBucket(ref reader, formatterResolver, key, propertyName);
+				return GetRangeBucket(ref reader, formatterResolver, (string)key, propertyName);
 
 			string keyAsString = null;
-
 			if (propertyName == Parser.KeyAsString)
 			{
 				keyAsString = reader.ReadString();
 				reader.ReadNext(); // ,
-				reader.ReadNext(); // doc_count
+				reader.ReadNext(); // "doc_count"
 			}
 
-			var docCount = reader.ReadNullableLong();
+			var docCount = reader.ReadInt64();
 			Dictionary<string, IAggregate> subAggregates = null;
 			long? docCountErrorUpperBound = null;
 
-			var token = reader.GetCurrentJsonToken();
+			token = reader.GetCurrentJsonToken();
 			if (token == JsonToken.ValueSeparator)
 			{
 				reader.ReadNext();
 
-				var nextProperty = reader.ReadPropertyName();
-				if (nextProperty == Parser.Score)
+				propertyName = reader.ReadPropertyName();
+				if (propertyName == Parser.Score)
 					return GetSignificantTermsBucket(ref reader, formatterResolver, key, keyAsString, docCount);
 
-				if (nextProperty == Parser.DocCountErrorUpperBound)
+				if (propertyName == Parser.DocCountErrorUpperBound)
 				{
-					reader.ReadNext();
 					docCountErrorUpperBound = reader.ReadNullableLong();
-					reader.ReadNext(); // ,
-
-					// TODO: read property into nextProperty?
-					// nextProperty = reader.ReadPropertyName();
+					token = reader.GetCurrentJsonToken();
+					if (token == JsonToken.ValueSeparator)
+					{
+						reader.ReadNext(); // ,
+						propertyName = reader.ReadPropertyName();
+						subAggregates = GetSubAggregates(ref reader, propertyName, formatterResolver);
+					}
+					else
+						reader.ReadIsEndObjectWithVerify();
 				}
-
-				subAggregates = GetSubAggregates(ref reader, nextProperty, formatterResolver);
+				else
+					subAggregates = GetSubAggregates(ref reader, propertyName, formatterResolver);
 			}
 			else
 				reader.ReadIsEndObjectWithVerify();
 
-			var bucket = new KeyedBucket<object>(subAggregates)
+			return new KeyedBucket<object>(subAggregates)
 			{
 				Key = key,
 				KeyAsString = keyAsString,
-				DocCount = docCount.GetValueOrDefault(0),
+				DocCount = docCount,
 				DocCountErrorUpperBound = docCountErrorUpperBound
 			};
-			return bucket;
 		}
 
 		private IBucket GetCompositeBucket(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -784,22 +798,29 @@ namespace Nest
 			long? docCount
 		)
 		{
-			reader.ReadNext();
-			var score = reader.ReadNullableDouble();
-			reader.ReadNext();
-			reader.ReadNext();
-			var bgCount = reader.ReadNullableLong();
-			reader.ReadNext();
+			var score = reader.ReadDouble();
+			reader.ReadNext(); // ,
+			reader.ReadNext(); // "bg_count"
+			reader.ReadNext(); // :
+			var bgCount = reader.ReadInt64();
 
-			var propertyName = reader.ReadPropertyName();
+			Dictionary<string, IAggregate> subAggregates = null;
 
-			var nestedAggregations = GetSubAggregates(ref reader, propertyName, formatterResolver);
-			var significantTermItem = new SignificantTermsBucket(nestedAggregations)
+			if (reader.GetCurrentJsonToken() == JsonToken.ValueSeparator)
 			{
-				Key = key as string,
+				reader.ReadNext(); // ,
+				var propertyName = reader.ReadPropertyName();
+				subAggregates = GetSubAggregates(ref reader, propertyName, formatterResolver);
+			}
+			else
+				reader.ReadNext(); // }
+
+			var significantTermItem = new SignificantTermsBucket(subAggregates)
+			{
+				Key = (string)key,
 				DocCount = docCount.GetValueOrDefault(0),
-				BgCount = bgCount.GetValueOrDefault(0),
-				Score = score.GetValueOrDefault(0)
+				BgCount = bgCount,
+				Score = score
 			};
 			return significantTermItem;
 		}
