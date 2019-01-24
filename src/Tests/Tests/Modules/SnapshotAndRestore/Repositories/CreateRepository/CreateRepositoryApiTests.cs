@@ -1,4 +1,5 @@
 ﻿using System;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
@@ -127,6 +128,70 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 
 		protected override CreateRepositoryDescriptor NewDescriptor() => new CreateRepositoryDescriptor(_name);
 	}
+
+	[SkipVersion("<6.5.0", "new feature")]
+	public class CreateSourceOnlyRepositoryApiTests
+		: ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
+	{
+		private static readonly string _name = "repository10";
+
+		public CreateSourceOnlyRepositoryApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override object ExpectJson { get; } = new
+		{
+			type = "source",
+			settings = new
+			{
+				delegate_type = "fs",
+				location = "some/location",
+				compress = true,
+				concurrent_streams = 5,
+				chunk_size = "64mb",
+				max_restore_bytes_per_second = "100mb",
+				max_snapshot_bytes_per_second = "200mb"
+			}
+		};
+
+		protected override Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> Fluent => d => d
+			.SourceOnly(o => o
+				.FileSystem(fs=>fs
+					.Settings("some/location", s => s
+						.Compress()
+						.ConcurrentStreams(5)
+						.ChunkSize("64mb")
+						.RestoreBytesPerSecondMaximum("100mb")
+						.SnapshotBytesPerSecondMaximum("200mb")
+					)
+				)
+			);
+
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+
+		protected override CreateRepositoryRequest Initializer => new CreateRepositoryRequest(_name)
+		{
+			Repository = new SourceOnlyRepository(new FileSystemRepository(new FileSystemRepositorySettings("some/location")
+			{
+				Compress = true,
+				ConcurrentStreams = 5,
+				ChunkSize = "64mb",
+				RestoreBytesPerSecondMaximum = "100mb",
+				SnapshotBytesPerSecondMaximum = "200mb"
+			}))
+		};
+
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/_snapshot/{_name}";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.CreateRepository(_name, f),
+			(client, f) => client.CreateRepositoryAsync(_name, f),
+			(client, r) => client.CreateRepository(r),
+			(client, r) => client.CreateRepositoryAsync(r)
+		);
+
+		protected override CreateRepositoryDescriptor NewDescriptor() => new CreateRepositoryDescriptor(_name);
+	}
+
 
 	public class CreateFileSystemRepositoryApiTests
 		: ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
