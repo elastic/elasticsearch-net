@@ -320,9 +320,8 @@ namespace Nest
 				};
 			}
 
-
-			var nestedAggregations = GetSubAggregates(ref reader, propertyName, formatterResolver);
-			var bucket = new SingleBucketAggregate(nestedAggregations)
+			var subAggregates = GetSubAggregates(ref reader, propertyName, formatterResolver);
+			var bucket = new SingleBucketAggregate(subAggregates)
 			{
 				DocCount = docCount
 			};
@@ -549,7 +548,7 @@ namespace Nest
 			// above code just checks for long through reader.ValueType, this is not always the case
 			if (valueMetric.Value != null || reader.GetCurrentJsonToken() == JsonToken.Null)
 			{
-				reader.ReadNext();
+				//reader.ReadNext();
 				var token = reader.GetCurrentJsonToken();
 				if (token != JsonToken.EndObject)
 				{
@@ -590,6 +589,9 @@ namespace Nest
 						reader.ReadNext();
 					}
 				}
+				else
+					reader.ReadNext(); // }
+
 				return valueMetric;
 			}
 
