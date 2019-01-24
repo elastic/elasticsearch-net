@@ -10,6 +10,7 @@ namespace Nest
 		public S3Repository(IS3RepositorySettings settings) => Settings = settings;
 
 		public IS3RepositorySettings Settings { get; set; }
+		object IRepositoryWithSettings.DelegateSettings => Settings;
 		public string Type { get; } = "s3";
 	}
 
@@ -166,6 +167,7 @@ namespace Nest
 		: DescriptorBase<S3RepositoryDescriptor, IS3Repository>, IS3Repository
 	{
 		IS3RepositorySettings IRepository<IS3RepositorySettings>.Settings { get; set; }
+		object IRepositoryWithSettings.DelegateSettings => Self.Settings;
 		string ISnapshotRepository.Type { get; } = "s3";
 
 		public S3RepositoryDescriptor Settings(string bucket, Func<S3RepositorySettingsDescriptor, IS3RepositorySettings> settingsSelector = null) =>

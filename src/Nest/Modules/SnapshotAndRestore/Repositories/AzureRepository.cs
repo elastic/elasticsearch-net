@@ -12,6 +12,7 @@ namespace Nest
 		public AzureRepository(IAzureRepositorySettings settings) => Settings = settings;
 
 		public IAzureRepositorySettings Settings { get; set; }
+		object IRepositoryWithSettings.DelegateSettings => Settings;
 		public string Type { get; } = "azure";
 	}
 
@@ -87,6 +88,7 @@ namespace Nest
 	{
 		IAzureRepositorySettings IRepository<IAzureRepositorySettings>.Settings { get; set; }
 		string ISnapshotRepository.Type { get; } = "azure";
+		object IRepositoryWithSettings.DelegateSettings => Self.Settings;
 
 		public AzureRepositoryDescriptor Settings(Func<AzureRepositorySettingsDescriptor, IAzureRepositorySettings> settingsSelector) =>
 			Assign(a => a.Settings = settingsSelector?.Invoke(new AzureRepositorySettingsDescriptor()));
