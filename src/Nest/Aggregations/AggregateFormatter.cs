@@ -167,7 +167,6 @@ namespace Nest
 
 		private IAggregate GetMatrixStatsAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver, long? docCount = null)
 		{
-			reader.ReadNext();
 			var matrixStats = new MatrixStatsAggregate { DocCount = docCount };
 			var matrixStatsListFormatter = formatterResolver.GetFormatter<List<MatrixStatsField>>();
 			matrixStats.Fields = matrixStatsListFormatter.Deserialize(ref reader, formatterResolver);
