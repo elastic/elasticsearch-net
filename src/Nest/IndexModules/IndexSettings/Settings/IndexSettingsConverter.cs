@@ -34,6 +34,7 @@ namespace Nest
 
 			Set(NumberOfReplicas, ds.NumberOfReplicas);
 			Set(RefreshInterval, ds.RefreshInterval);
+			Set(DefaultPipeline, ds.DefaultPipeline);
 			Set(BlocksReadOnly, ds.BlocksReadOnly);
 			Set(BlocksRead, ds.BlocksRead);
 			Set(BlocksWrite, ds.BlocksWrite);
@@ -155,6 +156,8 @@ namespace Nest
 			Set<bool?>(s, settings, BlocksWrite, v => s.BlocksWrite = v);
 			Set<bool?>(s, settings, BlocksMetadata, v => s.BlocksMetadata = v);
 			Set<int?>(s, settings, Priority, v => s.Priority = v);
+			Set<string>(s, settings, DefaultPipeline, v => s.DefaultPipeline = v);
+
 			Set<Union<int, RecoveryInitialShards>>(s, settings, UpdatableIndexSettings.RecoveryInitialShards,
 				v => s.RecoveryInitialShards = v, serializer);
 			Set<bool?>(s, settings, RequestsCacheEnable, v => s.RequestsCacheEnabled = v);
