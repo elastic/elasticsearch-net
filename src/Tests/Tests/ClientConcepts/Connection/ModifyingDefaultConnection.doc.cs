@@ -13,6 +13,10 @@ using Newtonsoft.Json;
 using Tests.Core.Extensions;
 using Tests.Domain;
 using Tests.Framework;
+#if DOTNETCORE
+using System.Net.Http;
+using System.Net.Http.Headers;
+#endif
 
 namespace Tests.ClientConcepts.Connection
 {
@@ -112,14 +116,60 @@ namespace Tests.ClientConcepts.Connection
 		}
 
 		/**
-		/**==== Customize HttpConnection
-		 *
-		 * For a lot of use cases subclassing HttpConnection is a great way to customize the http connection for your needs.
-		 * E.g if you want to authenticate with Kerberos, creating a custom HttpConnection as followed allows you to set the right HTTP headers.
-		 *
-		 *
-		 * TIP use something like https://www.nuget.org/packages/Kerberos.NET/ to fill in the actual blanks of this implementation
+		* ==== Changing HttpConnection
+		*
+		* There may be a need to change how the default `HttpConnection` works, for example, to add an X509 certificate
+		* to the request, change the maximum number of connections allowed to an endpoint, etc.
+		*
+		* By deriving from `HttpConnection`, it is possible to change the behaviour of the connection. The following
+		* provides some examples
+		*
+		*
+		* [[servicepoint-behaviour]]
+		* ===== ServicePoint behaviour
+		*
+		* If you are running on the Desktop CLR you can override specific properties for the current `ServicePoint` easily
+		* by overriding `AlterServicePoint` on an `IConnection` implementation deriving from `HttpConnection`
+		*/
+#if !DOTNETCORE
+		public class MyCustomHttpConnection : HttpConnection
+		{
+			protected override HttpRequestMessage CreateRequestMessage(RequestData requestData)
+			{
+				var message = base.CreateRequestMessage(requestData);
+				var header = string.Empty;
+				message.Headers.Authorization = new AuthenticationHeaderValue("Negotiate", header);
+				return message;
+			}
+		}
+
+
+		/**
+		 * As before, a new instance of the custom connection is passed to `ConnectionSettings` in order to
+		 * use
 		 */
+		public void UseX509CertificateHttpConnection()
+		{
+			var connection = new X509CertificateHttpConnection();
+			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+			var settings = new ConnectionSettings(connectionPool, connection);
+			var client = new ElasticClient(settings);
+		}
+		/**
+		 * See <<working-with-certificates, Working with certificates>> for further details.
+		 */
+#endif
+#if DOTNETCORE
+		/*
+		* [[kerberos-authentication]]
+		* ===== Kerberos Authentication
+		*
+		* For a lot of use cases subclassing HttpConnection is a great way to customize the http connection for your needs.
+		* E.g if you want to authenticate with Kerberos, creating a custom HttpConnection as followed allows you to set the right HTTP headers.
+		*
+		*
+		* TIP use something like https://www.nuget.org/packages/Kerberos.NET/ to fill in the actual blanks of this implementation
+		*/
 		public class KerberosConnection : HttpConnection
 		{
 			protected override HttpRequestMessage CreateRequestMessage(RequestData requestData)
@@ -130,6 +180,8 @@ namespace Tests.ClientConcepts.Connection
 				return message;
 			}
 		}
+#endif
+
 
 
 	}
