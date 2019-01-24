@@ -87,6 +87,7 @@ namespace Nest
 		ExtendedBounds<DateMath> IDateHistogramAggregation.ExtendedBounds { get; set; }
 		Field IDateHistogramAggregation.Field { get; set; }
 
+		//see: https://github.com/elastic/elasticsearch/issues/9725
 		string IDateHistogramAggregation.Format
 		{
 			get => !string.IsNullOrEmpty(_format) &&

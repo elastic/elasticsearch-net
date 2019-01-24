@@ -490,6 +490,12 @@ namespace Nest
 			} while (reader.TokenType != JsonToken.EndArray);
 			bucket.Items = items;
 			reader.Read();
+			if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == Parser.Interval)
+			{
+				var interval = reader.ReadAsString();
+				bucket.Interval = new Time(interval);
+			}
+
 			return bucket;
 		}
 
@@ -755,6 +761,7 @@ namespace Nest
 			public const string DocCountErrorUpperBound = "doc_count_error_upper_bound";
 			public const string Fields = "fields";
 			public const string From = "from";
+			public const string Interval = "interval";
 
 			public const string FromAsString = "from_as_string";
 			public const string Hits = "hits";
