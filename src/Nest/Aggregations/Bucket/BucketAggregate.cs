@@ -70,5 +70,6 @@ namespace Nest
 		public IReadOnlyCollection<IBucket> Items { get; set; } = EmptyReadOnly<IBucket>.Collection;
 		public IReadOnlyDictionary<string, object> Meta { get; set; } = EmptyReadOnly<string, object>.Dictionary;
 		public long? SumOtherDocCount { get; set; }
+		public Time Interval { get; set; }
 	}
 }
