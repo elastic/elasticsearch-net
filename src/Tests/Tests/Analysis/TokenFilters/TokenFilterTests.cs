@@ -953,7 +953,7 @@ namespace Tests.Analysis.TokenFilters
 		{
 			public override FuncTokenFilters Fluent => (n, tf) => tf.RemoveDuplicates(n);
 			public override ITokenFilter Initializer => new RemoveDuplicatesTokenFilter { };
-			public override object Json => new { };
+			public override object Json => new { type = "remove_duplicates" };
 			public override string Name => "dupes";
 		}
 	}
