@@ -145,7 +145,7 @@ namespace Nest
 					break;
 				case Parser.From:
 				case Parser.To:
-					item = GetRangeBucket(ref reader, formatterResolver);
+					item = GetRangeBucket(ref reader, formatterResolver, null, property);
 					break;
 				case Parser.KeyAsString:
 					item = GetDateHistogramBucket(ref reader, formatterResolver);
@@ -603,66 +603,61 @@ namespace Nest
 			return valueMetric;
 		}
 
-		public IBucket GetRangeBucket(ref JsonReader reader, IJsonFormatterResolver formatterResolver, string key = null)
+		public IBucket GetRangeBucket(ref JsonReader reader, IJsonFormatterResolver formatterResolver, string key, string propertyName)
 		{
 			string fromAsString = null;
 			string toAsString = null;
 			long? docCount = null;
 			double? toDouble = null;
 			double? fromDouble = null;
+			var isSubAggregateName = false;
 
-			var readExpectedProperty = true;
-			string propertyName = null;
-
-			while (readExpectedProperty)
+			while (true)
 			{
-				if (reader.GetCurrentJsonToken() != JsonToken.String)
-					break;
-
-				// TODO: Should be ReadPropertyName()?
-
-				propertyName = reader.ReadString();
-
 				switch (propertyName)
 				{
 					case Parser.From:
-						reader.ReadNext();
-						if (reader.GetCurrentJsonToken() == JsonToken.Number)
-							fromDouble = reader.ReadDouble();
-						reader.ReadNext();
+						fromDouble = reader.ReadDouble();
 						break;
 					case Parser.To:
-						reader.ReadNext();
-						if (reader.GetCurrentJsonToken() == JsonToken.Number)
-							toDouble = reader.ReadDouble();
-						reader.ReadNext();
+						toDouble = reader.ReadDouble();
 						break;
 					case Parser.Key:
 						key = reader.ReadString();
-						reader.ReadNext();
 						break;
 					case Parser.FromAsString:
 						fromAsString = reader.ReadString();
-						reader.ReadNext();
 						break;
 					case Parser.ToAsString:
 						toAsString = reader.ReadString();
-						reader.ReadNext();
 						break;
 					case Parser.DocCount:
-						reader.ReadNext();
 						docCount = reader.ReadNullableLong().GetValueOrDefault(0);
-						reader.ReadNext();
 						break;
 					default:
-						readExpectedProperty = false;
+						isSubAggregateName = true;
 						break;
 				}
+
+				if (isSubAggregateName)
+					break;
+
+				if (reader.GetCurrentJsonToken() == JsonToken.EndObject)
+				{
+					reader.ReadNext();
+					break;
+				}
+
+				reader.ReadNext(); // ,
+				propertyName = reader.ReadPropertyName();
 			}
 
-			var nestedAggregations = GetSubAggregates(ref reader, propertyName, formatterResolver);
+			Dictionary<string, IAggregate> subAggregates = null;
 
-			var bucket = new RangeBucket(nestedAggregations)
+			if (isSubAggregateName)
+				subAggregates = GetSubAggregates(ref reader, propertyName, formatterResolver);
+
+			var bucket = new RangeBucket(subAggregates)
 			{
 				Key = key,
 				From = fromDouble,
@@ -713,7 +708,7 @@ namespace Nest
 			reader.ReadNext();
 			var propertyName = reader.ReadPropertyName();
 			if (propertyName == Parser.From || propertyName == Parser.To)
-				return GetRangeBucket(ref reader, formatterResolver, key);
+				return GetRangeBucket(ref reader, formatterResolver, key, propertyName);
 
 			string keyAsString = null;
 
