@@ -33,6 +33,8 @@ namespace Nest
 		public const string RecoveryInitialShards = "index.recovery.initial_shards";
 		public const string RefreshInterval = "index.refresh_interval";
 
+		public const string DefaultPipeline = "index.default_pipeline";
+
 		public const string RequestsCacheEnable = "index.requests.cache.enable";
 		public const string RoutingAllocationDisableAllication = "index.routing.allocation.disable_allocation";
 		public const string RoutingAllocationDisableNewAllocation = "index.routing.allocation.disable_new_allocation";
