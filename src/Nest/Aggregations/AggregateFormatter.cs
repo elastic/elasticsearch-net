@@ -294,33 +294,41 @@ namespace Nest
 		private IAggregate GetSingleBucketAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var docCount = reader.ReadInt64();
-			reader.ReadIsValueSeparatorWithVerify();
-
-			long bgCount = 0;
-			var propertyName = reader.ReadPropertyName();
-
-			if (propertyName == Parser.BgCount)
+			var token = reader.GetCurrentJsonToken();
+			Dictionary<string, IAggregate> subAggregates = null;
+			if (token == JsonToken.ValueSeparator)
 			{
-				bgCount = reader.ReadInt64();
-				reader.ReadIsValueSeparatorWithVerify();
-				propertyName = reader.ReadPropertyName();
-			}
+				reader.ReadNext(); // ,
 
-			if (propertyName == Parser.Fields)
-				return GetMatrixStatsAggregate(ref reader, formatterResolver, docCount);
+				long bgCount = 0;
+				var propertyName = reader.ReadPropertyName();
 
-			if (propertyName == Parser.Buckets)
-			{
-				var b = GetMultiBucketAggregate(ref reader, formatterResolver, propertyName) as BucketAggregate;
-				return new BucketAggregate
+				if (propertyName == Parser.BgCount)
 				{
-					BgCount = bgCount,
-					DocCount = docCount,
-					Items = b?.Items ?? EmptyReadOnly<IBucket>.Collection
-				};
-			}
+					bgCount = reader.ReadInt64();
+					reader.ReadIsValueSeparatorWithVerify();
+					propertyName = reader.ReadPropertyName();
+				}
 
-			var subAggregates = GetSubAggregates(ref reader, propertyName, formatterResolver);
+				if (propertyName == Parser.Fields)
+					return GetMatrixStatsAggregate(ref reader, formatterResolver, docCount);
+
+				if (propertyName == Parser.Buckets)
+				{
+					var b = GetMultiBucketAggregate(ref reader, formatterResolver, propertyName) as BucketAggregate;
+					return new BucketAggregate
+					{
+						BgCount = bgCount,
+						DocCount = docCount,
+						Items = b?.Items ?? EmptyReadOnly<IBucket>.Collection
+					};
+				}
+
+				subAggregates = GetSubAggregates(ref reader, propertyName, formatterResolver);
+			}
+			else
+				reader.ReadIsEndObjectWithVerify();
+
 			var bucket = new SingleBucketAggregate(subAggregates)
 			{
 				DocCount = docCount
@@ -495,29 +503,26 @@ namespace Nest
 			{
 				bucket.SumOtherDocCount = reader.ReadNullableLong();
 				reader.ReadIsValueSeparatorWithVerify();
-				reader.ReadPropertyName();
+				reader.ReadPropertyName(); // "buckets"
 			}
 
 			var items = new List<IBucket>();
 			var count = 0;
+			var token = reader.GetCurrentJsonToken();
 
-			if (reader.GetCurrentJsonToken() == JsonToken.BeginObject)
+			if (token == JsonToken.BeginObject)
 			{
-				reader.ReadNext();
-				var aggs = new Dictionary<string, IAggregate>();
-
+				var filterAggregates = new Dictionary<string, IAggregate>();
 				while (reader.ReadIsInObject(ref count))
 				{
 					var name = reader.ReadPropertyName();
 					var innerAgg = ReadAggregate(ref reader, formatterResolver);
-					aggs[name] = innerAgg;
+					filterAggregates[name] = innerAgg;
 				}
-
-				reader.ReadNext();
-				return new FiltersAggregate(aggs);
+				return new FiltersAggregate(filterAggregates);
 			}
 
-			if (reader.GetCurrentJsonToken() != JsonToken.BeginArray)
+			if (token != JsonToken.BeginArray)
 			{
 				reader.ReadNextBlock();
 				return null;
@@ -530,7 +535,7 @@ namespace Nest
 			}
 
 			bucket.Items = items;
-			reader.ReadNext();
+			reader.ReadNext(); // close outer }
 			return bucket;
 		}
 
@@ -801,14 +806,12 @@ namespace Nest
 
 		private IBucket GetFiltersBucket(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			reader.ReadNext();
+			//reader.ReadNext();
 			var docCount = reader.ReadNullableLong().GetValueOrDefault(0);
-			reader.ReadNext();
-
+			reader.ReadNext(); // ,
 			var propertyName = reader.ReadPropertyName();
-
-			var nestedAggregations = GetSubAggregates(ref reader, propertyName, formatterResolver);
-			var filtersBucketItem = new FiltersBucketItem(nestedAggregations)
+			var subAggregates = GetSubAggregates(ref reader, propertyName, formatterResolver);
+			var filtersBucketItem = new FiltersBucketItem(subAggregates)
 			{
 				DocCount = docCount
 			};
