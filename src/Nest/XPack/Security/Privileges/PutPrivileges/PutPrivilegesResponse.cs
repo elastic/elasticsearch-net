@@ -1,16 +1,18 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Nest
 {
 	public interface IPutPrivilegesResponse : IResponse
 	{
-		[JsonProperty("user")]
-		PutPrivilegesStatus Privileges { get; }
+		IReadOnlyDictionary<string, IDictionary<string, PutPrivilegesStatus>> Applications { get; }
 	}
 
-	public class PutPrivilegesResponse : ResponseBase, IPutPrivilegesResponse
+	[JsonConverter(typeof(DictionaryResponseJsonConverter<PutPrivilegesResponse, string, IDictionary<string, PutPrivilegesStatus>>))]
+	public class PutPrivilegesResponse : DictionaryResponseBase<string, IDictionary<string, PutPrivilegesStatus>>, IPutPrivilegesResponse
 	{
-		public PutPrivilegesStatus Privileges { get; internal set; }
+		[JsonIgnore]
+		public IReadOnlyDictionary<string, IDictionary<string, PutPrivilegesStatus>> Applications => Self.BackingDictionary;
 	}
 
 	public class PutPrivilegesStatus

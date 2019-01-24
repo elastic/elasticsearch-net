@@ -24,7 +24,16 @@ namespace Tests.Framework
 			var lazyResponses = await ExecuteOnceInOrderUntil(name);
 			if (lazyResponses == null) throw new Exception($"{name} is defined but it yields no LazyResponses object");
 
-			await AssertOnAllResponses(lazyResponses, assert);
+			await AssertOnAllResponses<TResponse>(name, lazyResponses, (v, r) => assert(r));
+		}
+
+		protected async Task Assert<TResponse>(string name, Action<string, TResponse> assert)
+			where TResponse : class, IResponse
+		{
+			var lazyResponses = await ExecuteOnceInOrderUntil(name);
+			if (lazyResponses == null) throw new Exception($"{name} is defined but it yields no LazyResponses object");
+
+			await AssertOnAllResponses(name, lazyResponses, assert);
 		}
 
 		protected async Task AssertRunsToCompletion(string name)
@@ -33,15 +42,18 @@ namespace Tests.Framework
 			if (lazyResponses == null) throw new Exception($"{name} is defined but it yields no LazyResponses object");
 		}
 
-		protected async Task AssertOnAllResponses<TResponse>(LazyResponses responses, Action<TResponse> assert)
+		private async Task AssertOnAllResponses<TResponse>(string name, LazyResponses responses, Action<string, TResponse> assert)
 			where TResponse : class, IResponse
 		{
-			foreach (var (_, value) in await responses)
+			foreach (var (key, value) in await responses)
 			{
 				if (!(value is TResponse response))
 					throw new Exception($"{value.GetType()} is not expected response type {typeof(TResponse)}");
 
-				assert(response);
+				if (!_coordinatedUsage.MethodIsolatedValues.TryGetValue(key, out var isolatedValue))
+					throw new Exception($"{name} is not a request observed and so no call isolated values could be located for it");
+
+				assert(isolatedValue, response);
 			}
 		}
 

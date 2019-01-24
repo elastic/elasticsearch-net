@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using Elasticsearch.Net;
+using Newtonsoft.Json;
 
 namespace Nest
 {
 	[MapsApi("xpack.security.put_privileges.json")]
+	[JsonConverter(typeof(PutPrivilegesConverter))]
 	public partial interface IPutPrivilegesRequest : IProxyRequest
 	{
 		IAppPrivileges Applications { get; set; }
@@ -31,61 +33,21 @@ namespace Nest
 
 	}
 
-	public interface IAppPrivileges : IIsADictionary<string, IPrivileges> { }
-
-	public class AppPrivileges : IsADictionaryBase<string, IPrivileges>, IAppPrivileges
+	internal class PutPrivilegesConverter : VerbatimDictionaryKeysJsonConverter<string, IPrivileges>
 	{
-		public void Add(string name, IPrivileges privileges) => BackingDictionary.Add(name, privileges);
-	}
-	public class AppPrivilegesDescriptor : IsADictionaryDescriptorBase<AppPrivilegesDescriptor, IAppPrivileges, string, IPrivileges>
-	{
-		public AppPrivilegesDescriptor() : base(new AppPrivileges()) { }
 
-		public AppPrivilegesDescriptor Application(string applicationName, IPrivileges privileges) => Assign(applicationName, privileges);
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		{
+			if (!(value is IPutPrivilegesRequest request)) return;
+			base.WriteJson(writer, request.Applications, serializer);
+		}
 
-		public AppPrivilegesDescriptor Application(string applicationName, Func<PrivilegesDescriptor, IPromise<IPrivileges>> selector) =>
-			Assign(applicationName, selector?.Invoke(new PrivilegesDescriptor())?.Value);
-	}
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			var appPrivileges = serializer.Deserialize<AppPrivileges>(reader);
+			return new PutPrivilegesRequest { Applications = appPrivileges };
+		}
 
-	public interface IPrivileges : IIsADictionary<string, IPrivilegesActions> { }
-
-	public class Privileges : IsADictionaryBase<string, IPrivilegesActions>, IPrivileges
-	{
-		public void Add(string name, IPrivilegesActions actions) => BackingDictionary.Add(name, actions);
-	}
-	public class PrivilegesDescriptor : IsADictionaryDescriptorBase<PrivilegesDescriptor, IPrivileges, string, IPrivilegesActions>
-	{
-		public PrivilegesDescriptor() : base(new Privileges()) { }
-
-		public PrivilegesDescriptor Privilege(string privilegesName, IPrivilegesActions actions) => Assign(privilegesName, actions);
-
-		public PrivilegesDescriptor Privilege(string privilegesName, Func<PrivilegesActionsDescriptor, IPrivilegesActions> selector) =>
-			Assign(privilegesName, selector?.Invoke(new PrivilegesActionsDescriptor()));
 	}
 
-	public interface IPrivilegesActions
-	{
-		IEnumerable<string> Actions { get; set; }
-		IDictionary<string, object> Metadata { get; set; }
-	}
-	public class PrivilegesActions : IPrivilegesActions
-	{
-		public IEnumerable<string> Actions { get; set; }
-		public IDictionary<string, object> Metadata { get; set; }
-	}
-	public class PrivilegesActionsDescriptor : DescriptorBase<PrivilegesActionsDescriptor, IPrivilegesActions>, IPrivilegesActions
-	{
-		IEnumerable<string> IPrivilegesActions.Actions { get; set; }
-		IDictionary<string, object> IPrivilegesActions.Metadata { get; set; }
-
-		public PrivilegesActionsDescriptor Actions(params string[] actions) => Assign(a => a.Actions = actions);
-
-		public PrivilegesActionsDescriptor Actions(IEnumerable<string> actions) => Assign(a => a.Actions = actions);
-
-		public PrivilegesActionsDescriptor Metadata(IDictionary<string, object> meta) => Assign(a => a.Metadata = meta);
-
-		public PrivilegesActionsDescriptor Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> meta) =>
-			Assign(a => a.Metadata = meta?.Invoke(new FluentDictionary<string, object>()));
-
-	}
 }

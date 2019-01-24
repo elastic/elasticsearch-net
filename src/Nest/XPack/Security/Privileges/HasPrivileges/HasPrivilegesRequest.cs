@@ -7,52 +7,115 @@ namespace Nest
 	[MapsApi("xpack.security.has_privileges.json")]
 	public partial interface IHasPrivilegesRequest
 	{
-		[JsonProperty("email")]
-		string Email { get; set; }
+		[JsonProperty("cluster")]
+		IEnumerable<string> Cluster { get; set; }
 
-		[JsonProperty("full_name")]
-		string FullName { get; set; }
+		[JsonProperty("index")]
+		IEnumerable<IndexPrivilegesCheck> Index { get; set; }
 
-		[JsonProperty("metadata")]
-		IDictionary<string, object> Metadata { get; set; }
-
-		[JsonProperty("password")]
-		string Password { get; set; }
-
-		[JsonProperty("roles")]
-		IEnumerable<string> Roles { get; set; }
+		[JsonProperty("application")]
+		IEnumerable<IApplicationPrivilegesCheck> Application { get; set; }
 	}
 
 	public partial class HasPrivilegesRequest
 	{
-		public string Email { get; set; }
-		public string FullName { get; set; }
-		public IDictionary<string, object> Metadata { get; set; }
-		public string Password { get; set; }
-		public IEnumerable<string> Roles { get; set; }
+		public IEnumerable<string> Cluster { get; set; }
+		public IEnumerable<IndexPrivilegesCheck> Index { get; set; }
+		public IEnumerable<IApplicationPrivilegesCheck> Application { get; set; }
 	}
 
 	public partial class HasPrivilegesDescriptor
 	{
-		string IHasPrivilegesRequest.Email { get; set; }
-		string IHasPrivilegesRequest.FullName { get; set; }
-		IDictionary<string, object> IHasPrivilegesRequest.Metadata { get; set; }
-		string IHasPrivilegesRequest.Password { get; set; }
-		IEnumerable<string> IHasPrivilegesRequest.Roles { get; set; }
+		IEnumerable<string> IHasPrivilegesRequest.Cluster { get; set; }
+		IEnumerable<IndexPrivilegesCheck> IHasPrivilegesRequest.Index { get; set; }
+		IEnumerable<IApplicationPrivilegesCheck> IHasPrivilegesRequest.Application { get; set; }
 
-		public HasPrivilegesDescriptor Password(string password) => Assign(a => a.Password = password);
+		public HasPrivilegesDescriptor Cluster(IEnumerable<string> cluster) => Assign(a => a.Cluster = cluster);
 
-		public HasPrivilegesDescriptor Roles(IEnumerable<string> roles) => Assign(a => a.Roles = roles);
+		public HasPrivilegesDescriptor Cluster(params string[] cluster) => Assign(a => a.Cluster = cluster);
 
-		public HasPrivilegesDescriptor Roles(params string[] roles) => Assign(a => a.Roles = roles);
+		public HasPrivilegesDescriptor Indicees(Func<ApplicationPrivilegesChecksDescriptor, IPromise<List<IApplicationPrivilegesCheck>>> selector) =>
+			Assign(a => a.Application = selector?.Invoke(new ApplicationPrivilegesChecksDescriptor())?.Value);
 
-		public HasPrivilegesDescriptor FullName(string fullName) => Assign(a => a.FullName = fullName);
+		public HasPrivilegesDescriptor Applications(Func<ApplicationPrivilegesChecksDescriptor, IPromise<List<IApplicationPrivilegesCheck>>> selector
+		) =>
+			Assign(a => a.Application = selector?.Invoke(new ApplicationPrivilegesChecksDescriptor())?.Value);
+	}
 
-		public HasPrivilegesDescriptor Email(string email) => Assign(a => a.Email = email);
+	public interface IIndexPrivilegesCheck
+	{
+		IEnumerable<string> Names { get; set; }
+		IEnumerable<string> Privileges { get; set; }
+	}
 
-		public HasPrivilegesDescriptor Metadata(IDictionary<string, object> metadata) => Assign(a => a.Metadata = metadata);
+	public class IndexPrivilegesCheck : IIndexPrivilegesCheck
+	{
+		public IEnumerable<string> Names { get; set; }
+		public IEnumerable<string> Privileges { get; set; }
+	}
 
-		public HasPrivilegesDescriptor Metadata(Func<FluentDictionary<string, object>, IDictionary<string, object>> selector) =>
-			Assign(a => a.Metadata = selector?.Invoke(new FluentDictionary<string, object>()));
+	public class IndexPrivilegesChecksDescriptor : DescriptorPromiseBase<IndexPrivilegesChecksDescriptor, List<IIndexPrivilegesCheck>>
+	{
+		public IndexPrivilegesChecksDescriptor() : base(new List<IIndexPrivilegesCheck>()) { }
+
+		public IndexPrivilegesChecksDescriptor Index(Func<IndexPrivilegesCheckDesciptor, IIndexPrivilegesCheck> selector) =>
+			Assign(a => a.Add(selector.InvokeOrDefault(new IndexPrivilegesCheckDesciptor())));
+
+		public class IndexPrivilegesCheckDesciptor : DescriptorBase<IndexPrivilegesCheckDesciptor, IIndexPrivilegesCheck>, IIndexPrivilegesCheck
+		{
+			IEnumerable<string> IIndexPrivilegesCheck.Names { get; set; }
+			IEnumerable<string> IIndexPrivilegesCheck.Privileges { get; set; }
+
+			public IndexPrivilegesCheckDesciptor Privileges(params string[] privileges) => Assign(a => a.Privileges = privileges);
+
+			public IndexPrivilegesCheckDesciptor Privileges(IEnumerable<string> privileges) => Assign(a => a.Privileges = privileges);
+
+			public IndexPrivilegesCheckDesciptor Names(params string[] names) => Assign(a => a.Names = names);
+
+			public IndexPrivilegesCheckDesciptor Names(IEnumerable<string> names) => Assign(a => a.Names = names);
+
+		}
+	}
+
+	public interface IApplicationPrivilegesCheck
+	{
+		[JsonProperty("application")]
+		string Name { get; set; }
+		IEnumerable<string> Privileges { get; set; }
+		IEnumerable<string> Resources { get; set; }
+	}
+
+	public class ApplicationPrivilegesCheck : IApplicationPrivilegesCheck
+	{
+		public string Name { get; set; }
+		public IEnumerable<string> Privileges { get; set; }
+		public IEnumerable<string> Resources { get; set; }
+	}
+
+	public class ApplicationPrivilegesChecksDescriptor
+		: DescriptorPromiseBase<ApplicationPrivilegesChecksDescriptor, List<IApplicationPrivilegesCheck>>
+	{
+		public ApplicationPrivilegesChecksDescriptor() : base(new List<IApplicationPrivilegesCheck>()) { }
+
+		public ApplicationPrivilegesChecksDescriptor Application(Func<ApplicationPrivilegesCheckDescriptor, IApplicationPrivilegesCheck> selector) =>
+			Assign(a => a.Add(selector.InvokeOrDefault(new ApplicationPrivilegesCheckDescriptor())));
+
+		public class ApplicationPrivilegesCheckDescriptor
+			: DescriptorBase<ApplicationPrivilegesCheckDescriptor, IApplicationPrivilegesCheck>, IApplicationPrivilegesCheck
+		{
+			string IApplicationPrivilegesCheck.Name { get; set; }
+			IEnumerable<string> IApplicationPrivilegesCheck.Privileges { get; set; }
+			IEnumerable<string> IApplicationPrivilegesCheck.Resources { get; set; }
+
+			public ApplicationPrivilegesCheckDescriptor Name(string name) => Assign(a => a.Name = name);
+
+			public ApplicationPrivilegesCheckDescriptor Privileges(params string[] privileges) => Assign(a => a.Privileges = privileges);
+
+			public ApplicationPrivilegesCheckDescriptor Privileges(IEnumerable<string> privileges) => Assign(a => a.Privileges = privileges);
+
+			public ApplicationPrivilegesCheckDescriptor Resources(params string[] resources) => Assign(a => a.Resources = resources);
+
+			public ApplicationPrivilegesCheckDescriptor Resources(IEnumerable<string> resources) => Assign(a => a.Resources = resources);
+		}
 	}
 }
