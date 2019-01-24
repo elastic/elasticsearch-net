@@ -86,10 +86,11 @@ namespace Nest
 					aggregate = GetValueAggregate(ref reader, formatterResolver);
 					break;
 				case Parser.AfterKey:
-					reader.ReadNext();
+					//reader.ReadNext();
 					var dictionaryFormatter = formatterResolver.GetFormatter<Dictionary<string, object>>();
 					var afterKeys = dictionaryFormatter.Deserialize(ref reader, formatterResolver);
-					var bucketsPropertyName = reader.ReadString();
+					reader.ReadNext(); // ,
+					var bucketsPropertyName = reader.ReadPropertyName();
 					var bucketAggregate = bucketsPropertyName == Parser.Buckets
 						? GetMultiBucketAggregate(ref reader, formatterResolver, bucketsPropertyName) as BucketAggregate ?? new BucketAggregate()
 						: new BucketAggregate();
@@ -319,7 +320,7 @@ namespace Nest
 				};
 			}
 
-			// TODO: Need the property name!
+
 			var nestedAggregations = GetSubAggregates(ref reader, propertyName, formatterResolver);
 			var bucket = new SingleBucketAggregate(nestedAggregations)
 			{
@@ -701,7 +702,7 @@ namespace Nest
 
 		private IBucket GetKeyedBucket(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			reader.ReadNext();
+			//reader.ReadNext();
 
 			if (reader.GetCurrentJsonToken() == JsonToken.BeginObject)
 				return GetCompositeBucket(ref reader, formatterResolver);
@@ -717,28 +718,39 @@ namespace Nest
 			if (propertyName == Parser.KeyAsString)
 			{
 				keyAsString = reader.ReadString();
-				reader.ReadNext();
+				reader.ReadNext(); // ,
+				reader.ReadNext(); // doc_count
 			}
 
-			reader.ReadNext(); //doc_count;
 			var docCount = reader.ReadNullableLong();
-			reader.ReadNext();
-
-			var nextProperty = reader.ReadPropertyName();
-			if (nextProperty == Parser.Score)
-				return GetSignificantTermsBucket(ref reader, formatterResolver, key, keyAsString, docCount);
-
+			Dictionary<string, IAggregate> subAggregates = null;
 			long? docCountErrorUpperBound = null;
-			if (nextProperty == Parser.DocCountErrorUpperBound)
+
+			var token = reader.GetCurrentJsonToken();
+			if (token == JsonToken.ValueSeparator)
 			{
 				reader.ReadNext();
-				docCountErrorUpperBound = reader.ReadNullableLong();
-				reader.ReadNext();
 
-				// TODO: read property into nextProperty?
+				var nextProperty = reader.ReadPropertyName();
+				if (nextProperty == Parser.Score)
+					return GetSignificantTermsBucket(ref reader, formatterResolver, key, keyAsString, docCount);
+
+				if (nextProperty == Parser.DocCountErrorUpperBound)
+				{
+					reader.ReadNext();
+					docCountErrorUpperBound = reader.ReadNullableLong();
+					reader.ReadNext(); // ,
+
+					// TODO: read property into nextProperty?
+					// nextProperty = reader.ReadPropertyName();
+				}
+
+				subAggregates = GetSubAggregates(ref reader, nextProperty, formatterResolver);
 			}
-			var nestedAggregates = GetSubAggregates(ref reader, nextProperty, formatterResolver);
-			var bucket = new KeyedBucket<object>(nestedAggregates)
+			else
+				reader.ReadIsEndObjectWithVerify();
+
+			var bucket = new KeyedBucket<object>(subAggregates)
 			{
 				Key = key,
 				KeyAsString = keyAsString,
@@ -752,18 +764,15 @@ namespace Nest
 		{
 			var readonlyDictionaryFormatter = formatterResolver.GetFormatter<IReadOnlyDictionary<string, object>>();
 			var key = new CompositeKey(readonlyDictionaryFormatter.Deserialize(ref reader, formatterResolver));
-			reader.ReadNext();
+			reader.ReadNext(); // ,
 			long? docCount = null;
 			string propertyName = null;
-			if (reader.GetCurrentJsonToken() == JsonToken.String && (propertyName = reader.ReadString()) == Parser.DocCount)
+			if (reader.GetCurrentJsonToken() == JsonToken.String && (propertyName = reader.ReadPropertyName()) == Parser.DocCount)
 			{
-				//reader.ReadNext();
 				docCount = reader.ReadNullableLong();
-				reader.ReadNext();
-
-				// TODO: read next property into propertyName?
+				reader.ReadNext(); // ,
+				propertyName = reader.ReadPropertyName();
 			}
-
 
 			var nestedAggregates = GetSubAggregates(ref reader, propertyName, formatterResolver);
 			return new CompositeBucket(nestedAggregates, key) { DocCount = docCount };
