@@ -5,6 +5,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -73,6 +74,19 @@ namespace Tests.Cluster.NodesStats
 			nodeIngestStats.Should().NotBeNull();
 			nodeIngestStats.Total.Should().NotBeNull();
 			nodeIngestStats.Pipelines.Should().NotBeNull();
+			nodeIngestStats.Pipelines.Should().ContainKey(DefaultSeeder.PipelineName);
+
+			var pipelineStats = nodeIngestStats.Pipelines[DefaultSeeder.PipelineName];
+
+			pipelineStats.Should().NotBeNull();
+			pipelineStats.Processors.Should().NotBeNull().And.HaveCount(1);
+
+			var processorStats = pipelineStats.Processors.First();
+
+			processorStats.Type.Should().Be("set");
+			processorStats.Statistics.Should().NotBeNull();
+
+
 		}
 
 		protected void Assert(IReadOnlyDictionary<string, AdaptiveSelectionStats> adaptiveSelectionStats) =>
