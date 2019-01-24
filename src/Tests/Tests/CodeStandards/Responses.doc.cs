@@ -27,6 +27,7 @@ namespace Tests.CodeStandards
 				typeof(TypeMapping).GetProperty(nameof(TypeMapping.DynamicDateFormats)),
 				typeof(TypeMapping).GetProperty(nameof(TypeMapping.Meta)),
 				typeof(IBulkResponse).GetProperty(nameof(IBulkResponse.ItemsWithErrors)),
+				typeof(IStartBasicLicenseResponse).GetProperty(nameof(IStartBasicLicenseResponse.Acknowledge)),
 				typeof(IFieldCapabilitiesResponse).GetProperty(nameof(IFieldCapabilitiesResponse.Fields)),
 				typeof(IMultiSearchResponse).GetProperty(nameof(IMultiSearchResponse.AllResponses)),
 			};

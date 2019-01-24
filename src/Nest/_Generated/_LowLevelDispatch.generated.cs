@@ -3042,6 +3042,26 @@ namespace Nest
 			throw InvalidDispatch("XpackLicenseGet", p, new [] { GET }, "/_xpack/license");
 		}
 		
+		internal TResponse XpackLicenseGetBasicStatusDispatch<TResponse>(IRequest<GetBasicLicenseStatusRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.XpackLicenseGetBasicStatus<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackLicenseGetBasicStatus", p, new [] { GET }, "/_xpack/license/basic_status");
+		}
+		
+		internal Task<TResponse> XpackLicenseGetBasicStatusDispatchAsync<TResponse>(IRequest<GetBasicLicenseStatusRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.XpackLicenseGetBasicStatusAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackLicenseGetBasicStatus", p, new [] { GET }, "/_xpack/license/basic_status");
+		}
+		
 		internal TResponse XpackLicenseGetTrialStatusDispatch<TResponse>(IRequest<GetTrialLicenseStatusRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -3080,6 +3100,26 @@ namespace Nest
 						return _lowLevel.XpackLicensePostAsync<TResponse>(body,p.RequestParameters,ct);
 			}
 			throw InvalidDispatch("XpackLicensePost", p, new [] { PUT }, "/_xpack/license");
+		}
+		
+		internal TResponse XpackLicensePostStartBasicDispatch<TResponse>(IRequest<StartBasicLicenseRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.XpackLicensePostStartBasic<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackLicensePostStartBasic", p, new [] { POST }, "/_xpack/license/start_basic");
+		}
+		
+		internal Task<TResponse> XpackLicensePostStartBasicDispatchAsync<TResponse>(IRequest<StartBasicLicenseRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.XpackLicensePostStartBasicAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackLicensePostStartBasic", p, new [] { POST }, "/_xpack/license/start_basic");
 		}
 		
 		internal TResponse XpackLicensePostStartTrialDispatch<TResponse>(IRequest<StartTrialLicenseRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
