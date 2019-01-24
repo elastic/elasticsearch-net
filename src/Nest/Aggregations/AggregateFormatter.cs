@@ -374,7 +374,7 @@ namespace Nest
 
 			if (reader.GetCurrentJsonToken() == JsonToken.EndObject)
 			{
-				reader.ReadNext();
+				reader.ReadNext(); // }
 				return statsMetric;
 			}
 
@@ -382,12 +382,19 @@ namespace Nest
 			var propertyName = reader.ReadPropertyName();
 			while (reader.GetCurrentJsonToken() != JsonToken.EndObject && propertyName.Contains(Parser.AsStringSuffix))
 			{
-				reader.ReadNext();
-				reader.ReadNext();
+				reader.ReadNext(); // <value>
+				if (reader.GetCurrentJsonToken() == JsonToken.ValueSeparator)
+				{
+					reader.ReadNext(); // ,
+					propertyName = reader.ReadPropertyName();
+				}
 			}
 
 			if (reader.GetCurrentJsonToken() == JsonToken.EndObject)
+			{
+				reader.ReadNext(); // }
 				return statsMetric;
+			}
 
 			return GetExtendedStatsAggregate(ref reader, statsMetric);
 		}
@@ -403,67 +410,53 @@ namespace Nest
 				Sum = statsMetric.Sum
 			};
 
-			reader.ReadNext();
 			extendedStatsMetric.SumOfSquares = reader.ReadNullableDouble();
-			reader.ReadNext();
-			reader.ReadNext();
+			reader.ReadNext(); // ,
+			reader.ReadNext(); // "variance"
+			reader.ReadNext(); // :
 			extendedStatsMetric.Variance = reader.ReadNullableDouble();
-			reader.ReadNext();
-			reader.ReadNext();
+			reader.ReadNext(); // ,
+			reader.ReadNext(); // "std_deviation"
+			reader.ReadNext(); // :
 			extendedStatsMetric.StdDeviation = reader.ReadNullableDouble();
-			reader.ReadNext();
-
-			string propertyName;
 
 			if (reader.GetCurrentJsonToken() != JsonToken.EndObject)
 			{
 				var bounds = new StandardDeviationBounds();
-				reader.ReadNext();
-				reader.ReadNext();
+				reader.ReadNext(); // ,
+				reader.ReadNext(); // "std_deviation_bounds"
+				reader.ReadNext(); // :
+				reader.ReadNext(); // {
 
-				propertyName = reader.ReadPropertyName();
-				if (propertyName == Parser.Upper)
-				{
-					reader.ReadNext();
-					bounds.Upper = reader.ReadNullableDouble();
-				}
-				reader.ReadNext();
+				reader.ReadNext(); // "upper"
+				reader.ReadNext(); // :
 
-				propertyName = reader.ReadPropertyName();
-				if (propertyName == Parser.Lower)
-				{
-					reader.ReadNext();
-					bounds.Lower = reader.ReadNullableDouble();
-				}
+				bounds.Upper = reader.ReadNullableDouble();
+				reader.ReadNext(); // ,
+
+				reader.ReadNext(); // "lower"
+				reader.ReadNext(); // :
+				bounds.Lower = reader.ReadNullableDouble();
+				reader.ReadNext(); // }
+
 				extendedStatsMetric.StdDeviationBounds = bounds;
-				reader.ReadNext();
-				reader.ReadNext();
 			}
 
-			propertyName = reader.ReadPropertyName();
-			while (reader.GetCurrentJsonToken() != JsonToken.EndObject && propertyName.Contains(Parser.AsStringSuffix))
-			{
-				// std_deviation_bounds is an object, so we need to skip its properties
-				if (propertyName.Equals(Parser.StdDeviationBoundsAsString))
-				{
-					reader.ReadNext();
-					reader.ReadNext();
-					reader.ReadNext();
-					reader.ReadNext();
-				}
-				reader.ReadNext();
-				reader.ReadNext();
-			}
+			// read any remaining _as_string fields
+			while (reader.GetCurrentJsonToken() != JsonToken.EndObject)
+				reader.ReadNextBlock();
+
+			reader.ReadIsEndObjectWithVerify();
 			return extendedStatsMetric;
 		}
 
 		private Dictionary<string, IAggregate> GetSubAggregates(ref JsonReader reader, string name, IJsonFormatterResolver formatterResolver)
 		{
-			var nestedAggs = new Dictionary<string, IAggregate>();
+			var subAggregates = new Dictionary<string, IAggregate>();
 
 			// deserialize the first aggregate
 			var aggregate = Deserialize(ref reader, formatterResolver);
-			nestedAggs.Add(name, aggregate);
+			subAggregates.Add(name, aggregate);
 
 			// start at 1 to skip the BeginObject check
 			var count = 1;
@@ -471,21 +464,10 @@ namespace Nest
 			{
 				name = reader.ReadPropertyName();
 				aggregate = Deserialize(ref reader, formatterResolver);
-				nestedAggs.Add(name, aggregate);
+				subAggregates.Add(name, aggregate);
 			}
 
-//			var currentDepth = reader.Depth;
-//			do
-//			{
-//				var fieldName = (string)reader.Value;
-//				reader.Read();
-//				var agg = ReadAggregate(ref reader, formatterResolver);
-//				nestedAggs.Add(fieldName, agg);
-//				reader.Read();
-//				if (reader.Depth == currentDepth && reader.TokenType == JsonToken.EndObject || reader.Depth < currentDepth)
-//					break;
-//			} while (true);
-			return nestedAggs;
+			return subAggregates;
 		}
 
 		private IAggregate GetMultiBucketAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver, string propertyName)
