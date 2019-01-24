@@ -47,7 +47,9 @@ namespace Nest
 				case "stemmer": return o.ToObject<StemmerTokenFilter>(ElasticContractResolver.Empty);
 				case "stemmer_override": return o.ToObject<StemmerOverrideTokenFilter>(ElasticContractResolver.Empty);
 				case "stop": return o.ToObject<StopTokenFilter>(ElasticContractResolver.Empty);
+#pragma warning disable 618
 				case "standard": return o.ToObject<StandardTokenFilter>(ElasticContractResolver.Empty);
+#pragma warning restore 618
 				case "synonym": return o.ToObject<SynonymTokenFilter>(ElasticContractResolver.Empty);
 				case "synonym_graph": return o.ToObject<SynonymGraphTokenFilter>(ElasticContractResolver.Empty);
 				case "trim": return o.ToObject<TrimTokenFilter>(ElasticContractResolver.Empty);

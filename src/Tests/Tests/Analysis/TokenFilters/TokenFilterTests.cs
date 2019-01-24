@@ -561,7 +561,9 @@ namespace Tests.Analysis.TokenFilters
 		{
 			public override FuncTokenFilters Fluent => (n, tf) => tf.Standard(n);
 
+#pragma warning disable 618
 			public override ITokenFilter Initializer => new StandardTokenFilter();
+#pragma warning restore 618
 
 			public override object Json => new { type = "standard" };
 			public override string Name => "standard";
