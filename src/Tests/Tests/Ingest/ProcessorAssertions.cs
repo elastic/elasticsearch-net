@@ -393,6 +393,7 @@ namespace Tests.Ingest
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
 				.Bytes<Project>(ud => ud
 					.Field(p => p.Description)
+					.IgnoreMissing()
 				);
 
 			public override IProcessor Initializer => new BytesProcessor { Field = "description", IgnoreMissing = true };
@@ -400,6 +401,55 @@ namespace Tests.Ingest
 			public override object Json => new { field = "description", ignore_missing = true };
 			public override string Key => "bytes";
 		}
+
+		[SkipVersion("<6.5.0", "")]
+		public class Dissect : ProcessorAssertion
+		{
+			private readonly string _pattern = "%{clientip} %{ident} %{auth} [%{@timestamp}] \"%{verb} %{request} HTTP/%{httpversion}\" %{status} %{size}";
+
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
+				.Dissect<Project>(ud => ud
+					.Field(p => p.Description)
+					.IgnoreMissing()
+					.Pattern(_pattern)
+					.AppendSeparator(" ")
+				);
+
+			public override IProcessor Initializer => new DissectProcessor
+			{
+				Field = "description",
+				IgnoreMissing = true,
+				Pattern = _pattern,
+				AppendSeparator = " "
+			};
+
+			public override object Json => new
+			{
+				field = "description",
+				ignore_missing = true,
+				pattern = _pattern,
+				append_separator = " "
+			};
+			public override string Key => "dissect";
+		}
+		[SkipVersion("<6.5.0", "")]
+		public class Drop : ProcessorAssertion
+		{
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
+				.Drop(ud => ud.If("true"));
+
+			public override IProcessor Initializer => new DropProcessor
+			{
+				If = "true"
+			};
+
+			public override object Json => new
+			{
+				@if = "true"
+			};
+			public override string Key => "drop";
+		}
+
 
 		public class KeyValue : ProcessorAssertion
 		{
@@ -467,6 +517,48 @@ namespace Tests.Ingest
 			};
 
 			public override string Key => "kv";
+		}
+
+		[SkipVersion("<6.5.0", "")]
+		public class SetSecurityUser: ProcessorAssertion
+		{
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
+				.SetSecurityUser<Project>(ud => ud
+					.Field(p => p.Name)
+				);
+
+			public override IProcessor Initializer => new SetSecurityUserProcessor
+			{
+				Field = "name",
+			};
+
+			public override object Json => new
+			{
+				field = "name",
+			};
+
+			public override string Key => "set_security_user";
+		}
+
+		[SkipVersion("<6.5.0", "")]
+		public class Pipeline : ProcessorAssertion
+		{
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
+				.Pipeline(ud => ud
+					.ProcessorName("x")
+				);
+
+			public override IProcessor Initializer => new PipelineProcessor
+			{
+				ProcessorName = "x",
+			};
+
+			public override object Json => new
+			{
+				name = "x",
+			};
+
+			public override string Key => "pipeline";
 		}
 	}
 }

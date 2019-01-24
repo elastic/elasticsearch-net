@@ -141,5 +141,22 @@ namespace Nest
 		/// <inheritdoc cref="IBytesProcessor" />
 		public ProcessorsDescriptor Bytes<T>(Func<BytesProcessorDescriptor<T>, IBytesProcessor> selector) where T : class =>
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new BytesProcessorDescriptor<T>())));
+
+		/// <inheritdoc cref="IDissectProcessor" />
+		public ProcessorsDescriptor Dissect<T>(Func<DissectProcessorDescriptor<T>, IDissectProcessor> selector) where T : class =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new DissectProcessorDescriptor<T>())));
+
+		/// <inheritdoc cref="IDropProcessor" />
+		public ProcessorsDescriptor Drop(Func<DropProcessorDescriptor, IDropProcessor> selector) =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new DropProcessorDescriptor())));
+
+		/// <inheritdoc cref="ISetSecurityUserProcessor" />
+		public ProcessorsDescriptor SetSecurityUser<T>(Func<SetSecurityUserProcessorDescriptor<T>, ISetSecurityUserProcessor> selector) where T : class =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new SetSecurityUserProcessorDescriptor<T>())));
+
+		/// <inheritdoc cref="IPipelineProcessor" />
+		public ProcessorsDescriptor Pipeline(Func<PipelineProcessorDescriptor, IPipelineProcessor> selector) =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new PipelineProcessorDescriptor())));
+
 	}
 }
