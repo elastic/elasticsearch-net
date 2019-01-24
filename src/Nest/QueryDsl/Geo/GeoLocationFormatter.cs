@@ -1,29 +1,44 @@
 ﻿using Utf8Json;
+using Utf8Json.Internal;
 
 namespace Nest
 {
 	internal class GeoLocationFormatter : IJsonFormatter<GeoLocation>
 	{
+		private static readonly AutomataDictionary Fields = new AutomataDictionary
+		{
+			{ "lat", 0 },
+			{ "lon", 1 }
+		};
+
 		public GeoLocation Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.GetCurrentJsonToken() == JsonToken.Null)
+			{
+				reader.ReadNext();
 				return null;
+			}
 
 			var count = 0;
 			double lat = 0;
 			double lon = 0;
 			while (reader.ReadIsInObject(ref count))
 			{
-				var propertyName = reader.ReadPropertyName();
-				switch (propertyName)
+				var propertyName = reader.ReadPropertyNameSegmentRaw();
+				if (Fields.TryGetValue(propertyName, out var value))
 				{
-					case "lat":
-						lat = reader.ReadDouble();
-						break;
-					case "lon":
-						lon = reader.ReadDouble();
-						break;
+					switch (value)
+					{
+						case 0:
+							lat = reader.ReadDouble();
+							break;
+						case 1:
+							lon = reader.ReadDouble();
+							break;
+					}
 				}
+				else
+					reader.ReadNextBlock();
 			}
 
 			return new GeoCoordinate(lat, lon);
