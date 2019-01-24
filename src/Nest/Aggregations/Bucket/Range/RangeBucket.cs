@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	public class RangeBucket : BucketBase, IBucket
+	public class RangeBucket : BucketBase
 	{
 		public RangeBucket(IReadOnlyDictionary<string, IAggregate> dict) : base(dict) { }
 
