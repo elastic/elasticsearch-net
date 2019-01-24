@@ -155,6 +155,9 @@ All the calls have async variants:
 
 ```csharp
 var response = client.IndexAsync(tweet, idx => idx.Index("mytweetindex")); // returns a Task<IndexResponse>
+
+// Or, in an async-context
+var response = await client.IndexAsync(tweet, idx => idx.Index("mytweetindex")); // awaits a Task<IndexResponse>
 ```
 
 ### Getting a document
