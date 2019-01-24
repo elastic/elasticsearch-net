@@ -915,15 +915,16 @@ namespace Tests.Analysis.TokenFilters
 
 			public override object Json => new
 			{
-				filters = new[] { "lowercase", "lowercase, porter_stem" },
+				type = "condition",
+				filter = new[] { "lowercase", "lowercase, porter_stem" },
 				script = new { source = _predicate }
 			};
 
-			public override string Name => "multiplexer";
+			public override string Name => "condition";
 		}
 
 		[SkipVersion("<6.4.0", "Introduced in 6.4.0")]
-		public class MultiplexerTests : TokenFilterAssertionBase<PhoneticTests>
+		public class MultiplexerTests : TokenFilterAssertionBase<MultiplexerTests>
 		{
 			public override FuncTokenFilters Fluent => (n, tf) => tf
 				.Multiplexer(n, t => t
@@ -939,6 +940,7 @@ namespace Tests.Analysis.TokenFilters
 
 			public override object Json => new
 			{
+				type = "multiplexer",
 				filters = new[] { "lowercase", "lowercase, porter_stem" },
 				preserve_original = true
 			};
@@ -947,7 +949,7 @@ namespace Tests.Analysis.TokenFilters
 		}
 
 		[SkipVersion("<6.4.0", "Introduced in 6.4.0")]
-		public class RemoveDuplicatesTests : TokenFilterAssertionBase<PhoneticTests>
+		public class RemoveDuplicatesTests : TokenFilterAssertionBase<RemoveDuplicatesTests>
 		{
 			public override FuncTokenFilters Fluent => (n, tf) => tf.RemoveDuplicates(n);
 			public override ITokenFilter Initializer => new RemoveDuplicatesTokenFilter { };
