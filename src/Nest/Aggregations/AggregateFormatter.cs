@@ -209,43 +209,46 @@ namespace Nest
 
 		private IAggregate GetGeoCentroidAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			reader.ReadNext();
-
 			var geoLocationFormatter = formatterResolver.GetFormatter<GeoLocation>();
 			var geoCentroid = new GeoCentroidAggregate
 			{
 				Location = geoLocationFormatter.Deserialize(ref reader, formatterResolver)
 			};
 
-			reader.ReadNext();
-
-			if (reader.GetCurrentJsonToken() == JsonToken.String && reader.ReadPropertyName() == Parser.Count)
+			if (reader.GetCurrentJsonToken() == JsonToken.EndObject)
 			{
-				reader.ReadNext();
-				geoCentroid.Count = reader.ReadInt64();
-				reader.ReadNext();
+				reader.ReadNext(); // }
+				return geoCentroid;
 			}
+
+			reader.ReadNext(); // ,
+
+			if (reader.ReadPropertyName() == Parser.Count)
+				geoCentroid.Count = reader.ReadInt64();
+
+			reader.ReadNext(); // }
 			return geoCentroid;
 		}
 
 		private IAggregate GetGeoBoundsAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			reader.ReadNext();
-
 			if (reader.GetCurrentJsonToken() == JsonToken.Null)
+			{
+				reader.ReadNext();
 				return null;
+			}
 
 			var latLonDictionaryFormatter = formatterResolver.GetFormatter<Dictionary<string, LatLon>>();
-			var latLons = latLonDictionaryFormatter.Deserialize(ref reader, formatterResolver);
+			var latLon = latLonDictionaryFormatter.Deserialize(ref reader, formatterResolver);
 
 			var geoBoundsMetric = new GeoBoundsAggregate();
-			if (latLons.TryGetValue(Parser.TopLeft, out var topLeft) && topLeft != null)
+			if (latLon.TryGetValue(Parser.TopLeft, out var topLeft) && topLeft != null)
 				geoBoundsMetric.Bounds.TopLeft = topLeft;
 
-			if (latLons.TryGetValue(Parser.BottomRight, out var bottomRight) && bottomRight != null)
+			if (latLon.TryGetValue(Parser.BottomRight, out var bottomRight) && bottomRight != null)
 				geoBoundsMetric.Bounds.BottomRight = bottomRight;
 
-			reader.ReadNext();
+			reader.ReadNext(); // }
 			return geoBoundsMetric;
 		}
 
