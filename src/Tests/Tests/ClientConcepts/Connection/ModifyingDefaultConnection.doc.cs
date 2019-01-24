@@ -11,6 +11,10 @@ using Newtonsoft.Json;
 using Tests.Core.Extensions;
 using Tests.Domain;
 using Tests.Framework;
+#if DOTNETCORE
+using System.Net.Http;
+using System.Net.Http.Headers;
+#endif
 
 namespace Tests.ClientConcepts.Connection
 {
@@ -117,6 +121,7 @@ namespace Tests.ClientConcepts.Connection
 		* By deriving from `HttpConnection`, it is possible to change the behaviour of the connection. The following
 		* provides some examples
 		*
+		*
 		* [[servicepoint-behaviour]]
 		* ===== ServicePoint behaviour
 		*
@@ -180,5 +185,30 @@ namespace Tests.ClientConcepts.Connection
 		 * See <<working-with-certificates, Working with certificates>> for further details.
 		 */
 #endif
+#if DOTNETCORE
+		/*
+		* [[kerberos-authentication]]
+		* ===== Kerberos Authentication
+		*
+		* For a lot of use cases subclassing HttpConnection is a great way to customize the http connection for your needs.
+		* E.g if you want to authenticate with Kerberos, creating a custom HttpConnection as followed allows you to set the right HTTP headers.
+		*
+		*
+		* TIP use something like https://www.nuget.org/packages/Kerberos.NET/ to fill in the actual blanks of this implementation
+		*/
+		public class KerberosConnection : HttpConnection
+		{
+			protected override HttpRequestMessage CreateRequestMessage(RequestData requestData)
+			{
+				var message = base.CreateRequestMessage(requestData);
+				var header = string.Empty;
+				message.Headers.Authorization = new AuthenticationHeaderValue("Negotiate", header);
+				return message;
+			}
+		}
+#endif
+
+
+
 	}
 }
