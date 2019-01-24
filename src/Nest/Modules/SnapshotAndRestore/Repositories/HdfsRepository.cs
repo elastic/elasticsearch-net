@@ -11,6 +11,7 @@ namespace Nest
 		public HdfsRepository(HdfsRepositorySettings settings) => Settings = settings;
 
 		public IHdfsRepositorySettings Settings { get; set; }
+		object IRepositoryWithSettings.DelegateSettings => Settings;
 		public string Type { get; } = "hdfs";
 	}
 
@@ -127,6 +128,7 @@ namespace Nest
 		: DescriptorBase<HdfsRepositoryDescriptor, IHdfsRepository>, IHdfsRepository
 	{
 		IHdfsRepositorySettings IRepository<IHdfsRepositorySettings>.Settings { get; set; }
+		object IRepositoryWithSettings.DelegateSettings => Self.Settings;
 		string ISnapshotRepository.Type => "hdfs";
 
 		public HdfsRepositoryDescriptor Settings(string path, Func<HdfsRepositorySettingsDescriptor, IHdfsRepositorySettings> settingsSelector = null
