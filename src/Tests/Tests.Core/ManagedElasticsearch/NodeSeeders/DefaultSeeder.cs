@@ -17,6 +17,8 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		public const string ProjectsAliasName = "projects-alias";
 		public const string TestsIndexTemplateName = "nest_tests";
 
+		public const string PipelineName = "nest-pipeline";
+
 		private readonly IIndexSettings _defaultIndexSettings = new IndexSettings()
 		{
 			NumberOfShards = 2,
@@ -63,6 +65,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			// Ensure a clean slate by deleting everything regardless of whether they may already exist
 			await DeleteIndicesAndTemplatesAsync();
 			await ClusterSettingsAsync();
+			await PutPipeline();
 			// and now recreate everything
 			await CreateIndicesAndSeedIndexDataAsync();
 		}
@@ -88,6 +91,20 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 
 			putSettingsResponse.ShouldBeValid();
 		}
+
+		public async Task PutPipeline()
+		{
+			if (TestConfiguration.Instance.InRange("<6.1.0")) return;
+
+			var putProcessors = await Client.PutPipelineAsync(PipelineName, pi => pi
+				.Description("A pipeline registered by the NEST test framework")
+				.Processors(pp => pp
+					.Set<Project>(s => s.Field(p => p.Metadata).Value(new { x = "y" }))
+				)
+			);
+			putProcessors.ShouldBeValid();
+		}
+
 
 		public async Task DeleteIndicesAndTemplatesAsync()
 		{
