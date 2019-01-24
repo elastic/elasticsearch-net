@@ -8,7 +8,7 @@ namespace Nest
 	/// <summary>
 	/// Similar to the Grok Processor, dissect also extracts structured fields out of a single text field
 	/// within a document. However unlike the Grok Processor, dissect does not use Regular Expressions.
-	/// This allows dissect’s syntax to be simple and for some cases faster than the Grok Processor.
+	/// This allows dissect’s syntax to be simple and, for some cases faster, than the Grok Processor.
 	/// </summary>
 	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ProcessorJsonConverter<DissectProcessor>))]

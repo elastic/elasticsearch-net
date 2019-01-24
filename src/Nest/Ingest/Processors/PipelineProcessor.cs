@@ -9,7 +9,7 @@ namespace Nest
 	[JsonConverter(typeof(ProcessorJsonConverter<PipelineProcessor>))]
 	public interface IPipelineProcessor : IProcessor
 	{
-		//TODO this property clashes with the Name property on the IProcessor, need to rename base in master
+		//TODO 7.x: this property clashes with the Name property on the IProcessor, need to rename base in master
 		/// <summary>The name of the pipeline to execute. </summary>
 		[JsonProperty("name")]
 		string ProcessorName { get; set; }
