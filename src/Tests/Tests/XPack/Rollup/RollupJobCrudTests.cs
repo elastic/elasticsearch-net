@@ -13,7 +13,7 @@ using Tests.Framework.Integration;
 
 namespace Tests.XPack.Rollup
 {
-	[SkipVersion("6.5.0", "")]
+	[SkipVersion("<6.5.0", "")]
 	public class RollupJobCrudTests
 		: CrudTestBase<TimeSeriesCluster, ICreateRollupJobResponse, IGetRollupJobResponse, ICreateRollupJobResponse, IDeleteRollupJobResponse>
 	{
