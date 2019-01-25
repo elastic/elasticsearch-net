@@ -2645,6 +2645,18 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetCertificatesRequest : IRequest<GetCertificatesRequestParameters>
+	{
+	}
+	///<summary>Request parameters for XpackSslCertificates <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-ssl.html</pre></summary>
+	public partial class GetCertificatesRequest : PlainRequestBase<GetCertificatesRequestParameters>, IGetCertificatesRequest
+	{
+		protected IGetCertificatesRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetDatafeedsRequest : IRequest<GetDatafeedsRequestParameters>
 	{
 		Id DatafeedId { get; }
