@@ -4,6 +4,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.Xunit;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using static Elasticsearch.Net.HttpMethod;
@@ -11,6 +12,7 @@ using static Elasticsearch.Net.HttpMethod;
 namespace Tests.XPack.License.GetBasicLicenseStatus
 {
 	[SkipVersion("<6.5.0", "")]
+	[SkipOnTeamCity]
 	public class GetBasicLicenseStatusApiTests
 		: ApiIntegrationTestBase<XPackCluster, IGetBasicLicenseStatusResponse, IGetBasicLicenseStatusRequest, GetBasicLicenseStatusDescriptor, GetBasicLicenseStatusRequest>
 	{
