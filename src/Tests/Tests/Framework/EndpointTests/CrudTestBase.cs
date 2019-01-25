@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Elastic.Managed.Ephemeral;
@@ -128,7 +131,6 @@ namespace Tests.Framework
 		private readonly LazyResponses _updateGetResponse;
 		private readonly LazyResponses _updateResponse;
 		private readonly EndpointUsage _usage;
-
 
 		[SuppressMessage("Potential Code Quality Issues", "RECS0021:Warns about calls to virtual member functions occuring in the constructor",
 			Justification = "Expected behaviour")]
