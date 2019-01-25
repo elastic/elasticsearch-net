@@ -53,9 +53,6 @@ namespace Nest
 
 			var propertyName = reader.ReadPropertyName();
 
-			if (_numeric.IsMatch(propertyName))
-				aggregate = GetPercentilesAggregate(ref reader, true);
-
 			Dictionary<string, object> meta = null;
 
 			if (propertyName == Parser.Meta)
@@ -67,32 +64,21 @@ namespace Nest
 				propertyName = reader.ReadPropertyName();
 			}
 
-			if (aggregate != null)
-			{
-				// TODO: Close aggregate object here?
-
-				aggregate.Meta = meta;
-				return aggregate;
-			}
-
 			switch (propertyName)
 			{
 				case Parser.Values:
-					reader.ReadNext();
-					reader.ReadNext();
 					aggregate = GetPercentilesAggregate(ref reader);
 					break;
 				case Parser.Value:
 					aggregate = GetValueAggregate(ref reader, formatterResolver);
 					break;
 				case Parser.AfterKey:
-					//reader.ReadNext();
 					var dictionaryFormatter = formatterResolver.GetFormatter<Dictionary<string, object>>();
 					var afterKeys = dictionaryFormatter.Deserialize(ref reader, formatterResolver);
 					reader.ReadNext(); // ,
-					var bucketsPropertyName = reader.ReadPropertyName();
-					var bucketAggregate = bucketsPropertyName == Parser.Buckets
-						? GetMultiBucketAggregate(ref reader, formatterResolver, bucketsPropertyName) as BucketAggregate ?? new BucketAggregate()
+					propertyName = reader.ReadPropertyName();
+					var bucketAggregate = propertyName == Parser.Buckets
+						? GetMultiBucketAggregate(ref reader, formatterResolver, propertyName) as BucketAggregate ?? new BucketAggregate()
 						: new BucketAggregate();
 					bucketAggregate.AfterKey = afterKeys;
 					aggregate = bucketAggregate;
@@ -200,6 +186,7 @@ namespace Nest
 				}
 			}
 
+			reader.ReadNext(); // }
 			return new TopHitsAggregate(topHits)
 			{
 				Total = total,
@@ -252,43 +239,55 @@ namespace Nest
 			return geoBoundsMetric;
 		}
 
-		private IAggregate GetPercentilesAggregate(ref JsonReader reader, bool oldFormat = false)
+		private IAggregate GetPercentilesAggregate(ref JsonReader reader)
 		{
 			var metric = new PercentilesAggregate();
-			var percentileItems = new List<PercentileItem>();
-			metric.Items = percentileItems;
 
-			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
-				return metric;
-
-			var count = 0;
-			while (reader.ReadIsInObject(ref count))
+			var token = reader.GetCurrentJsonToken();
+			if (token != JsonToken.BeginObject && token != JsonToken.BeginArray)
 			{
-				var propertyName = reader.ReadPropertyName();
-				if (propertyName.Contains(Parser.AsStringSuffix))
-				{
-					reader.ReadNext();
-					reader.ReadNext();
-				}
-
-				if (reader.GetCurrentJsonToken() != JsonToken.EndObject)
-				{
-					var percentileValue = reader.ReadString();
-					var percentile = double.Parse(percentileValue, CultureInfo.InvariantCulture);
-					reader.ReadNext();
-
-					var value = reader.ReadNullableDouble();
-					percentileItems.Add(new PercentileItem
-					{
-						Percentile = percentile,
-						Value = value.GetValueOrDefault(0)
-					});
-					reader.ReadNext();
-				}
+				reader.ReadNextBlock();
+				return metric;
 			}
 
-			if (!oldFormat)
-				reader.ReadNext();
+			var count = 0;
+			if (token == JsonToken.BeginObject)
+			{
+				while (reader.ReadIsInObject(ref count))
+				{
+					var propertyName = reader.ReadPropertyName();
+					if (propertyName.Contains(Parser.AsStringSuffix))
+					{
+						reader.ReadNextBlock();
+						continue;
+					}
+
+					metric.Items.Add(new PercentileItem
+					{
+						Percentile = double.Parse(propertyName),
+						Value = reader.ReadDouble()
+					});
+				}
+			}
+			else
+			{
+				while (reader.ReadIsInArray(ref count))
+				{
+					reader.ReadNext(); // {
+					reader.ReadNext(); // "key"
+					reader.ReadNext(); // :
+					var percentile = reader.ReadDouble();
+					reader.ReadNext(); // ,
+					reader.ReadNext(); // "value"
+					reader.ReadNext(); // :
+					metric.Items.Add(new PercentileItem
+					{
+						Percentile = percentile,
+						Value = reader.ReadDouble()
+					});
+					reader.ReadNext(); // }
+				}
+			}
 
 			return metric;
 		}
@@ -366,7 +365,7 @@ namespace Nest
 			reader.ReadNext(); // :
 			var sum = reader.ReadNullableDouble();
 
-			var statsMetric = new StatsAggregate()
+			var statsMetric = new StatsAggregate
 			{
 				Average = average,
 				Count = count,
@@ -430,18 +429,14 @@ namespace Nest
 				reader.ReadNext(); // "std_deviation_bounds"
 				reader.ReadNext(); // :
 				reader.ReadNext(); // {
-
 				reader.ReadNext(); // "upper"
 				reader.ReadNext(); // :
-
 				bounds.Upper = reader.ReadNullableDouble();
 				reader.ReadNext(); // ,
-
 				reader.ReadNext(); // "lower"
 				reader.ReadNext(); // :
 				bounds.Lower = reader.ReadNullableDouble();
 				reader.ReadNext(); // }
-
 				extendedStatsMetric.StdDeviationBounds = bounds;
 			}
 
@@ -525,19 +520,13 @@ namespace Nest
 
 		private IAggregate GetValueAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var valueMetric = new ValueAggregate
+			var token = reader.GetCurrentJsonToken();
+			if (token == JsonToken.Number || token == JsonToken.Null)
 			{
-				Value = reader.ReadNullableDouble()
-			};
+				var value = reader.ReadNullableDouble();
+				string valueAsString = null;
 
-			if (valueMetric.Value == null && reader.GetCurrentJsonToken() == JsonToken.Number)
-				valueMetric.Value = reader.ReadNullableLong();
-
-			// https://github.com/elastic/elasticsearch-net/issues/3311
-			// above code just checks for long through reader.ValueType, this is not always the case
-			if (valueMetric.Value != null || reader.GetCurrentJsonToken() == JsonToken.Null)
-			{
-				var token = reader.GetCurrentJsonToken();
+				token = reader.GetCurrentJsonToken();
 				if (token != JsonToken.EndObject)
 				{
 					reader.ReadNext(); // ,
@@ -545,59 +534,56 @@ namespace Nest
 					var propertyName = reader.ReadPropertyName();
 					if (propertyName == Parser.ValueAsString)
 					{
-						valueMetric.ValueAsString = reader.ReadString();
+						valueAsString = reader.ReadString();
 						token = reader.GetCurrentJsonToken();
-					}
 
-					if (token != JsonToken.EndObject)
-					{
+						if (token == JsonToken.EndObject)
+						{
+							reader.ReadNext();
+							return new ValueAggregate
+							{
+								Value = value,
+								ValueAsString = valueAsString
+							};
+						}
+
 						reader.ReadNext(); // ,
 						propertyName = reader.ReadPropertyName();
-						if (propertyName == Parser.Keys)
-						{
-							var keyedValueMetric = new KeyedValueAggregate
-							{
-								Value = valueMetric.Value
-							};
-							var keys = new List<string>();
-							reader.ReadNext();
-							reader.ReadNext();
-
-							var count = 0;
-							while (reader.ReadIsInArray(ref count))
-								keys.Add(reader.ReadString());
-
-							reader.ReadNext();
-							keyedValueMetric.Keys = keys;
-							return keyedValueMetric;
-						}
-
-						// skip any remaining properties for now
-						while (token != JsonToken.EndObject)
-						{
-							reader.ReadNextBlock();
-							token = reader.GetCurrentJsonToken();
-						}
-
-						reader.ReadNext(); // }
 					}
-					else
+
+					if (propertyName == Parser.Keys)
 					{
+						var keyedValueMetric = new KeyedValueAggregate
+						{
+							Value = value
+						};
+
+						var formatter = formatterResolver.GetFormatter<List<string>>();
+						keyedValueMetric.Keys = formatter.Deserialize(ref reader, formatterResolver);
+
 						reader.ReadNext(); // }
+						return keyedValueMetric;
+					}
+
+					// skip any remaining properties for now
+					while (token != JsonToken.EndObject)
+					{
+						reader.ReadNextBlock();
+						token = reader.GetCurrentJsonToken();
 					}
 				}
-				else
-					reader.ReadNext(); // }
 
-				return valueMetric;
+				reader.ReadNext(); // }
+				return new ValueAggregate
+				{
+					Value = value,
+					ValueAsString = valueAsString
+				};
 			}
 
 			var scriptedMetric = reader.ReadNextBlockSegment();
-			reader.ReadNext();
-			if (scriptedMetric != default)
-				return new ScriptedMetricAggregate(new LazyDocument(BinaryUtil.ToArray(ref scriptedMetric), formatterResolver));
-
-			return valueMetric;
+			reader.ReadNext(); // }
+			return new ScriptedMetricAggregate(new LazyDocument(BinaryUtil.ToArray(ref scriptedMetric), formatterResolver));
 		}
 
 		public IBucket GetRangeBucket(ref JsonReader reader, IJsonFormatterResolver formatterResolver, string key, string propertyName)
@@ -754,7 +740,10 @@ namespace Nest
 						reader.ReadIsEndObjectWithVerify();
 				}
 				else
+				{
 					subAggregates = GetSubAggregates(ref reader, propertyName, formatterResolver);
+					//reader.ReadNext(); // }
+				}
 			}
 			else
 				reader.ReadIsEndObjectWithVerify();
