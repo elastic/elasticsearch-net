@@ -4542,6 +4542,26 @@ namespace Nest
 			throw InvalidDispatch("XpackSqlTranslate", p, new [] { POST, GET }, "/_xpack/sql/translate");
 		}
 		
+		internal TResponse XpackSslCertificatesDispatch<TResponse>(IRequest<GetCertificatesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.XpackSslCertificates<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackSslCertificates", p, new [] { GET }, "/_xpack/ssl/certificates");
+		}
+		
+		internal Task<TResponse> XpackSslCertificatesDispatchAsync<TResponse>(IRequest<GetCertificatesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.XpackSslCertificatesAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackSslCertificates", p, new [] { GET }, "/_xpack/ssl/certificates");
+		}
+		
 		internal TResponse XpackWatcherAckWatchDispatch<TResponse>(IRequest<AcknowledgeWatchRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
