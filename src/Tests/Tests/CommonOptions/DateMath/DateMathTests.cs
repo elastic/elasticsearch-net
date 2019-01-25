@@ -22,6 +22,17 @@ namespace Tests.CommonOptions.DateMath
 			dateMath.Should().BeNull();
 		}
 
+		[U] // F# backticks would be great in C# :)
+		public void ImplicitConversionFromDefaultDateTimeIsNotNullButEmptyString()
+		{
+			// in 6.x DateMath is backed by a DateTime instance
+			// for 7.x we will adress this
+			DateTime nullableDateTime = default;
+			Nest.DateMath dateMath = nullableDateTime;
+			dateMath.Should().NotBeNull();
+			dateMath.ToString().Should().BeEmpty();
+		}
+
 		[U]
 		public void ImplicitConversionFromDateMathString()
 		{
@@ -38,4 +49,5 @@ namespace Tests.CommonOptions.DateMath
 			dateMath.Should().NotBeNull();
 		}
 	}
+
 }
