@@ -74,10 +74,11 @@ namespace Tests.Cluster.NodesStats
 		{
 			nodeIngestStats.Should().NotBeNull();
 			nodeIngestStats.Total.Should().NotBeNull();
-			nodeIngestStats.Pipelines.Should().NotBeNull();
-			nodeIngestStats.Pipelines.Should().ContainKey(DefaultSeeder.PipelineName);
 
 			if (TestClient.Configuration.InRange("<6.5.0")) return;
+
+			nodeIngestStats.Pipelines.Should().NotBeNull();
+			nodeIngestStats.Pipelines.Should().ContainKey(DefaultSeeder.PipelineName);
 
 			var pipelineStats = nodeIngestStats.Pipelines[DefaultSeeder.PipelineName];
 
