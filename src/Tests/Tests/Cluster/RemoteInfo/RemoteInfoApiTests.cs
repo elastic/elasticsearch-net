@@ -23,33 +23,43 @@ namespace Tests.Cluster.RemoteInfo
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			var enableRemoteClusters = client.ClusterPutSettings(new ClusterPutSettingsRequest
+			var oldWay = new M
 			{
-				Transient = new M
 				{
+					"search", new M
 					{
-						"search", new M
 						{
+							"remote", new M
 							{
-								"remote", new M
 								{
+									"cluster_one", new M
 									{
-										"cluster_one", new M
-										{
-											{ "seeds", new[] { "127.0.0.1:9300", "127.0.0.1:9301" } }
-										}
-									},
+										{ "seeds", new[] { "127.0.0.1:9300", "127.0.0.1:9301" } }
+									}
+								},
+								{
+									"cluster_two", new M
 									{
-										"cluster_two", new M
-										{
-											{ "seeds", new[] { "127.0.0.1:9300" } }
-										}
+										{ "seeds", new[] { "127.0.0.1:9300" } }
 									}
 								}
 							}
 						}
 					}
 				}
+			};
+			/**
+			 * As of 6.5.0 you can also use the following helper class which uses
+			 * the new way to configure remote clusters.
+			 */
+			var newWay = new RemoteClusterConfiguration()
+			{
+				{ "cluster_one", "127.0.0.1:9300", "127.0.0.1:9301" },
+				{ "cluster_two", "127.0.0.1:9300" }
+			};
+			var enableRemoteClusters = client.ClusterPutSettings(new ClusterPutSettingsRequest
+			{
+				Transient = oldWay
 			});
 			enableRemoteClusters.ShouldBeValid();
 

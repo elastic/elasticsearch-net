@@ -2952,6 +2952,202 @@ namespace Nest
 			throw InvalidDispatch("UpdateByQuery", p, new [] { POST }, "/{index}/_update_by_query", "/{index}/{type}/_update_by_query");
 		}
 		
+		internal TResponse CcrDeleteAutoFollowPatternDispatch<TResponse>(IRequest<DeleteAutoFollowPatternRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.CcrDeleteAutoFollowPattern<TResponse>(p.RouteValues.Name,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("CcrDeleteAutoFollowPattern", p, new [] { DELETE }, "/_ccr/auto_follow/{name}");
+		}
+		
+		internal Task<TResponse> CcrDeleteAutoFollowPatternDispatchAsync<TResponse>(IRequest<DeleteAutoFollowPatternRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.CcrDeleteAutoFollowPatternAsync<TResponse>(p.RouteValues.Name,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("CcrDeleteAutoFollowPattern", p, new [] { DELETE }, "/_ccr/auto_follow/{name}");
+		}
+		
+		internal TResponse CcrFollowDispatch<TResponse>(IRequest<CreateFollowIndexRequestParameters> p,SerializableData<ICreateFollowIndexRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.CcrFollow<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("CcrFollow", p, new [] { PUT }, "/{index}/_ccr/follow");
+		}
+		
+		internal Task<TResponse> CcrFollowDispatchAsync<TResponse>(IRequest<CreateFollowIndexRequestParameters> p,SerializableData<ICreateFollowIndexRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.CcrFollowAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("CcrFollow", p, new [] { PUT }, "/{index}/_ccr/follow");
+		}
+		
+		internal TResponse CcrFollowStatsDispatch<TResponse>(IRequest<FollowIndexStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.CcrFollowStats<TResponse>(p.RouteValues.Index,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("CcrFollowStats", p, new [] { GET }, "/{index}/_ccr/stats");
+		}
+		
+		internal Task<TResponse> CcrFollowStatsDispatchAsync<TResponse>(IRequest<FollowIndexStatsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.CcrFollowStatsAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("CcrFollowStats", p, new [] { GET }, "/{index}/_ccr/stats");
+		}
+		
+		internal TResponse CcrGetAutoFollowPatternDispatch<TResponse>(IRequest<GetAutoFollowPatternRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Name)) return _lowLevel.CcrGetAutoFollowPattern<TResponse>(p.RouteValues.Name,p.RequestParameters);
+						return _lowLevel.CcrGetAutoFollowPattern<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("CcrGetAutoFollowPattern", p, new [] { GET }, "/_ccr/auto_follow", "/_ccr/auto_follow/{name}");
+		}
+		
+		internal Task<TResponse> CcrGetAutoFollowPatternDispatchAsync<TResponse>(IRequest<GetAutoFollowPatternRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Name)) return _lowLevel.CcrGetAutoFollowPatternAsync<TResponse>(p.RouteValues.Name,p.RequestParameters,ct);
+						return _lowLevel.CcrGetAutoFollowPatternAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("CcrGetAutoFollowPattern", p, new [] { GET }, "/_ccr/auto_follow", "/_ccr/auto_follow/{name}");
+		}
+		
+		internal TResponse CcrPauseFollowDispatch<TResponse>(IRequest<PauseFollowIndexRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.CcrPauseFollow<TResponse>(p.RouteValues.Index,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("CcrPauseFollow", p, new [] { POST }, "/{index}/_ccr/pause_follow");
+		}
+		
+		internal Task<TResponse> CcrPauseFollowDispatchAsync<TResponse>(IRequest<PauseFollowIndexRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.CcrPauseFollowAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("CcrPauseFollow", p, new [] { POST }, "/{index}/_ccr/pause_follow");
+		}
+		
+		internal TResponse CcrPutAutoFollowPatternDispatch<TResponse>(IRequest<CreateAutoFollowPatternRequestParameters> p,SerializableData<ICreateAutoFollowPatternRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.CcrPutAutoFollowPattern<TResponse>(p.RouteValues.Name,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("CcrPutAutoFollowPattern", p, new [] { PUT }, "/_ccr/auto_follow/{name}");
+		}
+		
+		internal Task<TResponse> CcrPutAutoFollowPatternDispatchAsync<TResponse>(IRequest<CreateAutoFollowPatternRequestParameters> p,SerializableData<ICreateAutoFollowPatternRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.CcrPutAutoFollowPatternAsync<TResponse>(p.RouteValues.Name,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("CcrPutAutoFollowPattern", p, new [] { PUT }, "/_ccr/auto_follow/{name}");
+		}
+		
+		internal TResponse CcrResumeFollowDispatch<TResponse>(IRequest<ResumeFollowIndexRequestParameters> p,SerializableData<IResumeFollowIndexRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.CcrResumeFollow<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("CcrResumeFollow", p, new [] { POST }, "/{index}/_ccr/resume_follow");
+		}
+		
+		internal Task<TResponse> CcrResumeFollowDispatchAsync<TResponse>(IRequest<ResumeFollowIndexRequestParameters> p,SerializableData<IResumeFollowIndexRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.CcrResumeFollowAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("CcrResumeFollow", p, new [] { POST }, "/{index}/_ccr/resume_follow");
+		}
+		
+		internal TResponse CcrStatsDispatch<TResponse>(IRequest<CcrStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.CcrStats<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("CcrStats", p, new [] { GET }, "/_ccr/stats");
+		}
+		
+		internal Task<TResponse> CcrStatsDispatchAsync<TResponse>(IRequest<CcrStatsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.CcrStatsAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("CcrStats", p, new [] { GET }, "/_ccr/stats");
+		}
+		
+		internal TResponse CcrUnfollowDispatch<TResponse>(IRequest<UnfollowIndexRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.CcrUnfollow<TResponse>(p.RouteValues.Index,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("CcrUnfollow", p, new [] { POST }, "/{index}/_ccr/unfollow");
+		}
+		
+		internal Task<TResponse> CcrUnfollowDispatchAsync<TResponse>(IRequest<UnfollowIndexRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.CcrUnfollowAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("CcrUnfollow", p, new [] { POST }, "/{index}/_ccr/unfollow");
+		}
+		
 		internal TResponse XpackGraphExploreDispatch<TResponse>(IRequest<GraphExploreRequestParameters> p,SerializableData<IGraphExploreRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)

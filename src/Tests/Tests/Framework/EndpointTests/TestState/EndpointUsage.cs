@@ -16,7 +16,7 @@ namespace Tests.Framework.Integration
 	public class EndpointUsage
 	{
 		private readonly object _lock = new object();
-		private readonly ConcurrentDictionary<int, LazyResponses> _usages = new ConcurrentDictionary<int, LazyResponses>();
+		private readonly ConcurrentDictionary<string, LazyResponses> _usages = new ConcurrentDictionary<string, LazyResponses>();
 
 		public EndpointUsage() : this("nest") { }
 
@@ -27,19 +27,21 @@ namespace Tests.Framework.Integration
 
 		public CallUniqueValues CallUniqueValues { get; }
 
-		public LazyResponses CallOnce(Func<LazyResponses> clientUsage, int k = 0)
+		public LazyResponses CallOnce(Func<LazyResponses> clientUsage, string key)
 		{
-			if (_usages.TryGetValue(k, out var lazyResponses)) return lazyResponses;
+			if (_usages.TryGetValue(key, out var lazyResponses)) return lazyResponses;
 
 			lock (_lock)
 			{
-				if (_usages.TryGetValue(k, out lazyResponses)) return lazyResponses;
+				if (_usages.TryGetValue(key, out lazyResponses)) return lazyResponses;
 
 				var response = clientUsage();
-				_usages.TryAdd(k, response);
+				_usages.TryAdd(key, response);
 				return response;
 			}
 		}
+
+		public LazyResponses CallOnce(Func<LazyResponses> clientUsage, int k = 0) => CallOnce(clientUsage, k.ToString());
 	}
 
 	public class SingleEndpointUsage<TResponse> : EndpointUsage
