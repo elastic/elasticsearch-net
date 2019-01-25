@@ -33,7 +33,6 @@ namespace Tests.XPack.License.StartTrialLicense
 
 		protected override void ExpectResponse(IStartTrialLicenseResponse response)
 		{
-			response.ShouldNotBeValid();
             response.TrialWasStarted.Should().BeFalse();
 			if (!BootstrappedWithLicense)
 			{
