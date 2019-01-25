@@ -78,12 +78,12 @@ namespace Tests.Cluster.RemoteInfo
 		{
 			response.Remotes.Should()
 				.NotBeEmpty()
-				.And.HaveCount(2)
 				.And.ContainKey("cluster_one")
 				.And.ContainKey("cluster_two");
 
-			foreach (var remote in response.Remotes.Values)
+			foreach (var (name, remote) in response.Remotes)
 			{
+				if (!name.StartsWith("cluster_")) continue;
 				remote.Connected.Should().BeTrue();
 				remote.HttpAddresses.Should().NotBeNullOrEmpty();
 				remote.Seeds.Should().NotBeNullOrEmpty();
