@@ -596,6 +596,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			{
 				"gexo",
 			}).AsPropertiesOf(new SourceModel { Geo = new GeoModel { CountryIsoCode = "nl" } });
+
+			usingSettings.Expect("gexo.country_iso_code").ForField(Field<SourceModel>(p=>p.Geo.CountryIsoCode));
 		}
 
 
