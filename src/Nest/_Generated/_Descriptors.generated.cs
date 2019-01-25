@@ -4495,6 +4495,24 @@ namespace Nest
 		// Request parameters
 
 	}
+	///<summary>descriptor for XpackRollupGetRollupIndexCaps <pre></pre></summary>
+	public partial class GetRollupIndexCapabilitiesDescriptor  : RequestDescriptorBase<GetRollupIndexCapabilitiesDescriptor,GetRollupIndexCapabilitiesRequestParameters, IGetRollupIndexCapabilitiesRequest>, IGetRollupIndexCapabilitiesRequest
+	{ 
+		/// <summary>/{index}/_xpack/rollup/data</summary>
+		///<param name="index"> this parameter is required</param>
+		public GetRollupIndexCapabilitiesDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
+		// values part of the url path
+		IndexName IGetRollupIndexCapabilitiesRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		///<summary>The rollup index or index pattern to obtain rollup capabilities from.</summary>
+		public GetRollupIndexCapabilitiesDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public GetRollupIndexCapabilitiesDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+
+		// Request parameters
+
+	}
 	///<summary>descriptor for XpackRollupPutJob <pre></pre></summary>
 	public partial class CreateRollupJobDescriptor<T>  : RequestDescriptorBase<CreateRollupJobDescriptor<T>,CreateRollupJobRequestParameters, ICreateRollupJobRequest>, ICreateRollupJobRequest
 	{ 

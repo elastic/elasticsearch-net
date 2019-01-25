@@ -2966,6 +2966,14 @@ namespace Elasticsearch.Net
 		///<summary>GET on /_xpack/rollup/data/ <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/rollup-get-rollup-caps.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> XpackRollupGetRollupCapsAsync<TResponse>(GetRollupCapabilitiesRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /{index}/_xpack/rollup/data <para></para></summary>
+		///<param name="index">The rollup index or index pattern to obtain rollup capabilities from.</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse XpackRollupGetRollupIndexCaps<TResponse>(string index, GetRollupIndexCapabilitiesRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /{index}/_xpack/rollup/data <para></para></summary>
+		///<param name="index">The rollup index or index pattern to obtain rollup capabilities from.</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> XpackRollupGetRollupIndexCapsAsync<TResponse>(string index, GetRollupIndexCapabilitiesRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_xpack/rollup/job/{id} <para></para></summary>
 		///<param name="id">The ID of the job to create</param>
 		///<param name="body">The job configuration</param>

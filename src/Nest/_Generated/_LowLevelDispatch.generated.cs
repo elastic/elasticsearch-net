@@ -3994,6 +3994,28 @@ namespace Nest
 			throw InvalidDispatch("XpackRollupGetRollupCaps", p, new [] { GET }, "/_xpack/rollup/data/{index}", "/_xpack/rollup/data/");
 		}
 		
+		internal TResponse XpackRollupGetRollupIndexCapsDispatch<TResponse>(IRequest<GetRollupIndexCapabilitiesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackRollupGetRollupIndexCaps<TResponse>(p.RouteValues.Index,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackRollupGetRollupIndexCaps", p, new [] { GET }, "/{index}/_xpack/rollup/data");
+		}
+		
+		internal Task<TResponse> XpackRollupGetRollupIndexCapsDispatchAsync<TResponse>(IRequest<GetRollupIndexCapabilitiesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackRollupGetRollupIndexCapsAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackRollupGetRollupIndexCaps", p, new [] { GET }, "/{index}/_xpack/rollup/data");
+		}
+		
 		internal TResponse XpackRollupPutJobDispatch<TResponse>(IRequest<CreateRollupJobRequestParameters> p,SerializableData<ICreateRollupJobRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)

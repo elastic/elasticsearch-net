@@ -3207,6 +3207,23 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetRollupIndexCapabilitiesRequest : IRequest<GetRollupIndexCapabilitiesRequestParameters>
+	{
+		IndexName Index { get; }
+	}
+	///<summary>Request parameters for XpackRollupGetRollupIndexCaps <pre></pre></summary>
+	public partial class GetRollupIndexCapabilitiesRequest : PlainRequestBase<GetRollupIndexCapabilitiesRequestParameters>, IGetRollupIndexCapabilitiesRequest
+	{
+		protected IGetRollupIndexCapabilitiesRequest Self => this;
+		///<summary>/{index}/_xpack/rollup/data</summary>
+		///<param name="index">this parameter is required</param>
+		public GetRollupIndexCapabilitiesRequest(IndexName index) : base(r=>r.Required("index", index)){}
+		// values part of the url path
+		IndexName IGetRollupIndexCapabilitiesRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetRollupJobRequest : IRequest<GetRollupJobRequestParameters>
 	{
 		Id Id { get; }
