@@ -4586,6 +4586,27 @@ namespace Nest
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IReloadSecureSettingsRequest : IRequest<ReloadSecureSettingsRequestParameters>
+	{
+		NodeIds NodeId { get; }
+	}
+	///<summary>Request parameters for NodesReloadSecureSettingsForAll <pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.5/secure-settings.html#reloadable-secure-settings</pre></summary>
+	public partial class ReloadSecureSettingsRequest : PlainRequestBase<ReloadSecureSettingsRequestParameters>, IReloadSecureSettingsRequest
+	{
+		protected IReloadSecureSettingsRequest Self => this;
+		///<summary>/_nodes/reload_secure_settings</summary>
+		public ReloadSecureSettingsRequest() : base(){}
+		///<summary>/_nodes/{node_id}/reload_secure_settings</summary>
+		///<param name="node_id">Optional, accepts null</param>
+		public ReloadSecureSettingsRequest(NodeIds node_id) : base(r=>r.Optional("node_id", node_id)){}
+		// values part of the url path
+		NodeIds IReloadSecureSettingsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
+
+		// Request parameters
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRemoteInfoRequest : IRequest<RemoteInfoRequestParameters>
 	{
 	}

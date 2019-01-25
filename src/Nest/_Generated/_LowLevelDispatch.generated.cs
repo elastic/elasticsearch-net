@@ -2230,6 +2230,28 @@ namespace Nest
 			throw InvalidDispatch("NodesInfo", p, new [] { GET }, "/_nodes", "/_nodes/{node_id}", "/_nodes/{metric}", "/_nodes/{node_id}/{metric}");
 		}
 		
+		internal TResponse NodesReloadSecureSettingsDispatch<TResponse>(IRequest<ReloadSecureSettingsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSet(p.RouteValues.NodeId)) return _lowLevel.NodesReloadSecureSettings<TResponse>(p.RouteValues.NodeId,p.RequestParameters);
+						return _lowLevel.NodesReloadSecureSettingsForAll<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("NodesReloadSecureSettings", p, new [] { POST }, "/_nodes/reload_secure_settings", "/_nodes/{node_id}/reload_secure_settings");
+		}
+		
+		internal Task<TResponse> NodesReloadSecureSettingsDispatchAsync<TResponse>(IRequest<ReloadSecureSettingsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSet(p.RouteValues.NodeId)) return _lowLevel.NodesReloadSecureSettingsAsync<TResponse>(p.RouteValues.NodeId,p.RequestParameters,ct);
+						return _lowLevel.NodesReloadSecureSettingsForAllAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("NodesReloadSecureSettings", p, new [] { POST }, "/_nodes/reload_secure_settings", "/_nodes/{node_id}/reload_secure_settings");
+		}
+		
 		internal TResponse NodesStatsDispatch<TResponse>(IRequest<NodesStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)

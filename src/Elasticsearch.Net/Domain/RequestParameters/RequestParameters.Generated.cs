@@ -1695,6 +1695,13 @@ namespace Elasticsearch.Net
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
+	///<summary>Request options for NodesReloadSecureSettingsForAll<pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.5/secure-settings.html#reloadable-secure-settings</pre></summary>
+	public partial class ReloadSecureSettingsRequestParameters : RequestParameters<ReloadSecureSettingsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>Explicit operation timeout</summary>
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
+	}
 	///<summary>Request options for NodesStatsForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
 	public class NodesStatsRequestParameters : RequestParameters<NodesStatsRequestParameters>
 	{
