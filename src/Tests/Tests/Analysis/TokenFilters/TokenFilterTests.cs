@@ -896,8 +896,35 @@ namespace Tests.Analysis.TokenFilters
 			public override string Name => "nori_pos";
 		}
 
+		[SkipVersion("<6.5.0", "Introduced in 6.5.0")]
+		public class ConditionTests : TokenFilterAssertionBase<ConditionTests>
+		{
+			private readonly string _predicate = "token.getTerm().length() < 5";
+
+			public override FuncTokenFilters Fluent => (n, tf) => tf
+				.Condition(n, t => t
+					.Filters("lowercase", "lowercase, porter_stem")
+					.Script(_predicate)
+				);
+
+			public override ITokenFilter Initializer => new ConditionTokenFilter
+			{
+				Filters = new[] { "lowercase", "lowercase, porter_stem" },
+				Script = new InlineScript(_predicate)
+			};
+
+			public override object Json => new
+			{
+				type = "condition",
+				filter = new[] { "lowercase", "lowercase, porter_stem" },
+				script = new { source = _predicate }
+			};
+
+			public override string Name => "condition";
+		}
+
 		[SkipVersion("<6.4.0", "Introduced in 6.4.0")]
-		public class MultiplexerTests : TokenFilterAssertionBase<PhoneticTests>
+		public class MultiplexerTests : TokenFilterAssertionBase<MultiplexerTests>
 		{
 			public override FuncTokenFilters Fluent => (n, tf) => tf
 				.Multiplexer(n, t => t
@@ -913,6 +940,7 @@ namespace Tests.Analysis.TokenFilters
 
 			public override object Json => new
 			{
+				type = "multiplexer",
 				filters = new[] { "lowercase", "lowercase, porter_stem" },
 				preserve_original = true
 			};
@@ -921,11 +949,11 @@ namespace Tests.Analysis.TokenFilters
 		}
 
 		[SkipVersion("<6.4.0", "Introduced in 6.4.0")]
-		public class RemoveDuplicatesTests : TokenFilterAssertionBase<PhoneticTests>
+		public class RemoveDuplicatesTests : TokenFilterAssertionBase<RemoveDuplicatesTests>
 		{
 			public override FuncTokenFilters Fluent => (n, tf) => tf.RemoveDuplicates(n);
 			public override ITokenFilter Initializer => new RemoveDuplicatesTokenFilter { };
-			public override object Json => new { };
+			public override object Json => new { type = "remove_duplicates" };
 			public override string Name => "dupes";
 		}
 	}
