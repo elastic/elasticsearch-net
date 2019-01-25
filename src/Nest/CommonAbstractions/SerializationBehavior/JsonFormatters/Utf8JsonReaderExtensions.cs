@@ -58,6 +58,7 @@ namespace Nest
 			return false;
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool EqualsBytes(this ref ArraySegment<byte> arraySegment, byte[] bytes)
 		{
 			if (arraySegment == default || bytes == null || bytes.Length == 0)
