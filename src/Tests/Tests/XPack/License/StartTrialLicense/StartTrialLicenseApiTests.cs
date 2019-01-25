@@ -16,8 +16,10 @@ namespace Tests.XPack.License.StartTrialLicense
 	{
 		public StartTrialLicenseApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override bool ExpectIsValid => false;
-		protected override int ExpectStatusCode => 403;
+		protected bool BootstrappedWithLicense => !string.IsNullOrEmpty(Cluster.ClusterConfiguration.XPackLicenseJson);
+
+		protected override bool ExpectIsValid => BootstrappedWithLicense;
+		protected override int ExpectStatusCode => BootstrappedWithLicense ? 200 : 403;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsDeserialization => false;
 		protected override string UrlPath => $"/_xpack/license/start_trial";
@@ -32,9 +34,18 @@ namespace Tests.XPack.License.StartTrialLicense
 		protected override void ExpectResponse(IStartTrialLicenseResponse response)
 		{
 			response.ShouldNotBeValid();
-			// license already applied
-			response.TrialWasStarted.Should().BeFalse();
-			response.ErrorMessage.Should().Be("Operation failed: Trial was already activated.");
+            response.TrialWasStarted.Should().BeFalse();
+			if (!BootstrappedWithLicense)
+			{
+                // license already applied
+                response.ErrorMessage.Should().Be("Operation failed: Trial was already activated.");
+			}
+			else
+			{
+				// running with a license means you have to pass the acknowledge flag to forcefully go
+				// into trial mode
+				response.ErrorMessage.Should().Contain(" Needs acknowledgement");
+			}
 		}
 	}
 }
