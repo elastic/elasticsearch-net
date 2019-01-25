@@ -3,6 +3,7 @@ using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
@@ -76,6 +77,8 @@ namespace Tests.Cluster.NodesStats
 			nodeIngestStats.Pipelines.Should().NotBeNull();
 			nodeIngestStats.Pipelines.Should().ContainKey(DefaultSeeder.PipelineName);
 
+			if (TestClient.Configuration.InRange("<6.5.0")) return;
+
 			var pipelineStats = nodeIngestStats.Pipelines[DefaultSeeder.PipelineName];
 
 			pipelineStats.Should().NotBeNull();
@@ -85,6 +88,7 @@ namespace Tests.Cluster.NodesStats
 
 			processorStats.Type.Should().Be("set");
 			processorStats.Statistics.Should().NotBeNull();
+
 
 
 		}
