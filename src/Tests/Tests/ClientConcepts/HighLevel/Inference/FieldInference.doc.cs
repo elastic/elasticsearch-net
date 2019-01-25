@@ -8,6 +8,7 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Nest.JsonNetSerializer;
 using Newtonsoft.Json;
 using Tests.Core.Client;
 using Tests.Core.Client.Settings;
@@ -564,5 +565,42 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			});
 
 		}
+
+
+		public class SourceModel
+		{
+			[PropertyName("gexo")]
+			public GeoModel Geo { get; set; }
+		}
+
+		public class GeoModel
+		{
+			[JsonProperty("country_iso_code")]
+			public string CountryIsoCode { get; set; }
+		}
+
+		/// this tests runs both during development as wel as during canary builds which reference
+		/// all the artifacts as nuget packages instead of project references
+		[U]
+		public void JsonPropertyIsPickedWhenSerializerIsInternalized()
+		{
+			var usingSettings = WithConnectionSettings(s => s)
+				.WithSourceSerializer(JsonNetSerializer.Default);
+
+			usingSettings.Expect("gexo").ForField(Field<SourceModel>(p=>p.Geo));
+			usingSettings.Expect("country_iso_code").ForField(Field<GeoModel>(p=>p.CountryIsoCode));
+			usingSettings.Expect(new []
+			{
+				"country_iso_code",
+			}).AsPropertiesOf(new GeoModel { CountryIsoCode = "nl" });
+			usingSettings.Expect(new []
+			{
+				"gexo",
+			}).AsPropertiesOf(new SourceModel { Geo = new GeoModel { CountryIsoCode = "nl" } });
+
+			usingSettings.Expect("gexo.country_iso_code").ForField(Field<SourceModel>(p=>p.Geo.CountryIsoCode));
+		}
+
+
 	}
 }

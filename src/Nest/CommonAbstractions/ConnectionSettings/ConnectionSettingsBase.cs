@@ -88,7 +88,8 @@ namespace Nest
 			var defaultSerializer = new InternalSerializer(this);
 			_sourceSerializer = sourceSerializerFactory?.Invoke(defaultSerializer, this) ?? defaultSerializer;
 			UseThisRequestResponseSerializer = defaultSerializer;
-			_propertyMappingProvider = propertyMappingProvider ?? new PropertyMappingProvider();
+			var serializerAsMappingProvider = _sourceSerializer as IPropertyMappingProvider;
+			_propertyMappingProvider = propertyMappingProvider ?? serializerAsMappingProvider ?? new PropertyMappingProvider();
 
 			_defaultTypeNameInferrer = t => !_defaultTypeName.IsNullOrEmpty() ? _defaultTypeName : t.Name.ToLowerInvariant();
 			_defaultFieldNameInferrer = p => p.ToCamelCase();
