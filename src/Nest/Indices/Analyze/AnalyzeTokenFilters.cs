@@ -241,6 +241,10 @@ namespace Nest
 			AssignIfNotNull(selector.InvokeOrDefault(new StandardTokenFilterDescriptor()));
 #pragma warning restore 618
 
+		/// <inheritdoc cref="IConditionTokenFilter" />
+		public AnalyzeTokenFiltersDescriptor Condition(Func<ConditionTokenFilterDescriptor, IConditionTokenFilter> selector) =>
+			AssignIfNotNull(selector?.Invoke(new ConditionTokenFilterDescriptor()));
+
 		/// <summary>
 		/// A filter that stems words (similar to snowball, but with more options).
 		/// </summary>
