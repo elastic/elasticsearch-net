@@ -2474,6 +2474,11 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
+	///<summary>Request options for XpackRollupGetRollupIndexCaps<pre></pre></summary>
+	public partial class GetRollupIndexCapabilitiesRequestParameters : RequestParameters<GetRollupIndexCapabilitiesRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
 	///<summary>Request options for XpackRollupPutJob<pre></pre></summary>
 	public partial class CreateRollupJobRequestParameters : RequestParameters<CreateRollupJobRequestParameters> 
 	{
