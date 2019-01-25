@@ -537,45 +537,53 @@ namespace Nest
 			// above code just checks for long through reader.ValueType, this is not always the case
 			if (valueMetric.Value != null || reader.GetCurrentJsonToken() == JsonToken.Null)
 			{
-				//reader.ReadNext();
 				var token = reader.GetCurrentJsonToken();
 				if (token != JsonToken.EndObject)
 				{
-					if (token == JsonToken.String)
+					reader.ReadNext(); // ,
+
+					var propertyName = reader.ReadPropertyName();
+					if (propertyName == Parser.ValueAsString)
 					{
-						var propertyName = reader.ReadPropertyName();
+						valueMetric.ValueAsString = reader.ReadString();
+						token = reader.GetCurrentJsonToken();
+					}
 
-						if (propertyName == Parser.ValueAsString)
+					if (token != JsonToken.EndObject)
+					{
+						reader.ReadNext(); // ,
+						propertyName = reader.ReadPropertyName();
+						if (propertyName == Parser.Keys)
 						{
-							valueMetric.ValueAsString = reader.ReadString();
-							reader.ReadNext();
-						}
-
-						if (reader.GetCurrentJsonToken() == JsonToken.String)
-						{
-							propertyName = reader.ReadPropertyName();
-							if (propertyName == Parser.Keys)
+							var keyedValueMetric = new KeyedValueAggregate
 							{
-								var keyedValueMetric = new KeyedValueAggregate
-								{
-									Value = valueMetric.Value
-								};
-								var keys = new List<string>();
-								reader.ReadNext();
-								reader.ReadNext();
+								Value = valueMetric.Value
+							};
+							var keys = new List<string>();
+							reader.ReadNext();
+							reader.ReadNext();
 
-								var count = 0;
-								while (reader.ReadIsInArray(ref count)) keys.Add(reader.ReadString());
-								reader.ReadNext();
-								keyedValueMetric.Keys = keys;
-								return keyedValueMetric;
-							}
+							var count = 0;
+							while (reader.ReadIsInArray(ref count))
+								keys.Add(reader.ReadString());
+
+							reader.ReadNext();
+							keyedValueMetric.Keys = keys;
+							return keyedValueMetric;
 						}
+
+						// skip any remaining properties for now
+						while (token != JsonToken.EndObject)
+						{
+							reader.ReadNextBlock();
+							token = reader.GetCurrentJsonToken();
+						}
+
+						reader.ReadNext(); // }
 					}
 					else
 					{
-						reader.ReadNext();
-						reader.ReadNext();
+						reader.ReadNext(); // }
 					}
 				}
 				else
