@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// This API creates a new named collection of auto-follow patterns against the remote cluster specified
+	/// Creates a new named collection of auto-follow patterns against the remote cluster specified
 	/// in the request body. Newly created indices on the remote cluster matching any of the specified patterns
 	/// will be automatically configured as follower indices.
 	/// </summary>

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// This API resumes a follower index that has been paused either explicitly with the pause follower API or
+	/// Resumes a follower index that has been paused either explicitly with the pause follower API or
 	/// implicitly due to execution that can not be retried due to failure during following. When this API returns,
 	/// the follower index will resume fetching operations from the leader index.
 	/// </summary>

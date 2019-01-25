@@ -5,8 +5,7 @@ using System.Linq;
 namespace Nest
 {
 	/// <summary>
-	/// This is a custom dictionary that helps in the creation of remote cluster configuration
-	/// you can pass to the Put Cluster Settings API
+	/// Simplifies the creation of remote cluster configuration, can be combined with a dictionary using the overloaded + operator
 	/// </summary>
 	public class RemoteClusterConfiguration : IsADictionaryBase<string, object>
 	{

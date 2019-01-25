@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	/// <summary> This API deletes a configured collection of auto-follow patterns. </summary>
+	/// <summary> Deletes a configured collection of auto-follow patterns. </summary>
 	[MapsApi("ccr.delete_auto_follow_pattern.json")]
 	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<DeleteAutoFollowPatternRequest>))]
 	public partial interface IDeleteAutoFollowPatternRequest { }

@@ -7,7 +7,7 @@ namespace Nest
 {
 	public partial interface IElasticClient
 	{
-		/// <summary> This API gets configured auto-follow patterns. This API will return the specified auto-follow pattern collection. </summary>
+		/// <summary> Gets configured auto-follow patterns. Returns the specified auto-follow pattern collection. </summary>
 		IGetAutoFollowPatternResponse GetAutoFollowPattern(Func<GetAutoFollowPatternDescriptor, IGetAutoFollowPatternRequest> selector = null);
 
 		/// <inheritdoc cref="GetAutoFollowPattern(System.Func{Nest.GetAutoFollowPatternDescriptor,Nest.IGetAutoFollowPatternRequest})" />

@@ -8,7 +8,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// This API creates a new follower index that is configured to follow the referenced leader index.
+		/// Creates a new follower index that is configured to follow the referenced leader index.
 		/// When this API returns, the follower index exists, and cross-cluster replication starts replicating
 		/// operations from the leader index to the follower index.
 		/// </summary>

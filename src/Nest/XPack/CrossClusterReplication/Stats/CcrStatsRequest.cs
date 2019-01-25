@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// This API gets cross-cluster replication stats. This API will return all stats related to cross-cluster replication.
+	/// Gets cross-cluster replication stats. Returns all stats related to cross-cluster replication.
 	/// In particular, this API returns stats about auto-following, and returns the same shard-level stats as in the get
 	/// follower stats API. <see cref="IElasticClient.FollowIndexStats(Nest.Indices,System.Func{Nest.FollowIndexStatsDescriptor,Nest.IFollowIndexStatsRequest})"/>
 	/// </summary>

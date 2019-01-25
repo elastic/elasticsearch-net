@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// This API stops the following task associated with a follower index and removes index metadata and settings associated with
+	/// Stops the following task associated with a follower index and removes index metadata and settings associated with
 	/// cross-cluster replication. This enables the index to treated as a regular index. The follower index must be paused and closed
 	/// before invoking the unfollow API.
 	/// </summary>

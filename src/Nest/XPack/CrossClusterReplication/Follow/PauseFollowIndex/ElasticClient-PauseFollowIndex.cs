@@ -8,7 +8,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// This API pauses a follower index. When this API returns, the follower index will not fetch any additional operations from
+		/// Pauses a follower index. When this API returns, the follower index will not fetch any additional operations from
 		/// the leader index. You can resume following with the resume follower API. Pausing and resuming a follower index can be
 		/// used to change the configuration of the following task.
 		/// </summary>

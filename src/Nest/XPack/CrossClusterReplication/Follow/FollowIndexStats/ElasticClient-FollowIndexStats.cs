@@ -8,8 +8,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// This API gets follower stats. This API will return shard-level stats about the
-		/// following tasks associated with each shard for the specified indices.
+		/// Gets follower stats. Returns shard-level stats about the following tasks associated with each shard for the specified indices.
 		/// </summary>
 		IFollowIndexStatsResponse FollowIndexStats(Indices indices, Func<FollowIndexStatsDescriptor, IFollowIndexStatsRequest> selector = null);
 

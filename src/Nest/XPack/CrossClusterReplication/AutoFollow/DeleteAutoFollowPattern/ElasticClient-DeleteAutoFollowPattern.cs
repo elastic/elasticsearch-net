@@ -7,7 +7,7 @@ namespace Nest
 {
 	public partial interface IElasticClient
 	{
-		/// <summary>This API deletes a configured collection of auto-follow patterns.</summary>
+		/// <summary>Deletes a configured collection of auto-follow patterns.</summary>
 		IDeleteAutoFollowPatternResponse DeleteAutoFollowPattern(Name name, Func<DeleteAutoFollowPatternDescriptor, IDeleteAutoFollowPatternRequest> selector = null);
 
 		/// <inheritdoc cref="DeleteAutoFollowPattern(Name,System.Func{Nest.DeleteAutoFollowPatternDescriptor,Nest.IDeleteAutoFollowPatternRequest})" />
