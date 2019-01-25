@@ -15,7 +15,8 @@ namespace Nest
 			{ "script", 3 },
 			{ "missing", 4 },
 			{ "percents", 5 },
-			{ "meta", 6 }
+			{ "meta", 6 },
+			{ "keyed", 7 }
 		};
 
 		public IPercentilesAggregation Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -58,6 +59,9 @@ namespace Nest
 						case 6:
 							percentiles.Meta = formatterResolver.GetFormatter<IDictionary<string, object>>()
 								.Deserialize(ref reader, formatterResolver);
+							break;
+						case 7:
+							percentiles.Keyed = reader.ReadBoolean();
 							break;
 					}
 				}
@@ -109,36 +113,38 @@ namespace Nest
 
 			if (value.Method != null)
 			{
-				if (value.Method is ITDigestMethod tdigest)
-				{
-					if (propertyWritten)
-						writer.WriteValueSeparator();
+				if (propertyWritten)
+					writer.WriteValueSeparator();
 
-					writer.WritePropertyName("tdigest");
-					writer.WriteBeginObject();
-					if (tdigest.Compression.HasValue)
-					{
-						writer.WritePropertyName("compression");
-						writer.WriteDouble(tdigest.Compression.Value);
-					}
-					writer.WriteEndObject();
-					propertyWritten = true;
-				}
-				else if (value.Method is IHDRHistogramMethod hdr)
+				switch (value.Method)
 				{
-					if (propertyWritten)
-						writer.WriteValueSeparator();
-
-					writer.WritePropertyName("hdr");
-					writer.WriteBeginObject();
-					if (hdr.NumberOfSignificantValueDigits.HasValue)
+					case ITDigestMethod tdigest:
 					{
-						writer.WritePropertyName("number_of_significant_value_digits");
-						writer.WriteInt32(hdr.NumberOfSignificantValueDigits.Value);
+						writer.WritePropertyName("tdigest");
+						writer.WriteBeginObject();
+						if (tdigest.Compression.HasValue)
+						{
+							writer.WritePropertyName("compression");
+							writer.WriteDouble(tdigest.Compression.Value);
+						}
+						writer.WriteEndObject();
+						break;
 					}
-					writer.WriteEndObject();
-					propertyWritten = true;
+					case IHDRHistogramMethod hdr:
+					{
+						writer.WritePropertyName("hdr");
+						writer.WriteBeginObject();
+						if (hdr.NumberOfSignificantValueDigits.HasValue)
+						{
+							writer.WritePropertyName("number_of_significant_value_digits");
+							writer.WriteInt32(hdr.NumberOfSignificantValueDigits.Value);
+						}
+						writer.WriteEndObject();
+						break;
+					}
 				}
+
+				propertyWritten = true;
 			}
 
 			if (value.Missing.HasValue)
@@ -159,6 +165,16 @@ namespace Nest
 				writer.WritePropertyName("percents");
 				var formatter = formatterResolver.GetFormatter<IEnumerable<double>>();
 				formatter.Serialize(ref writer, value.Percents, formatterResolver);
+				propertyWritten = true;
+			}
+
+			if (value.Keyed.HasValue)
+			{
+				if (propertyWritten)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName("keyed");
+				writer.WriteBoolean(value.Keyed.Value);
 			}
 
 			writer.WriteEndObject();
