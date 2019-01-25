@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -11,7 +10,30 @@ namespace Nest
 {
 	internal class AggregateFormatter : IJsonFormatter<IAggregate>
 	{
-		private static readonly Regex _numeric = new Regex(@"^[\d.]+(\.[\d.]+)?$");
+		private static readonly byte[] BgCountField = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.BgCount);
+		private static readonly byte[] BucketsField = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.Buckets);
+		private static readonly byte[] DocCountErrorUpperBound = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.DocCountErrorUpperBound);
+		private static readonly byte[] FieldsField = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.Fields);
+		private static readonly byte[] KeysField = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.Keys);
+		private static readonly byte[] MetaField = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.Meta);
+
+		private static readonly AutomataDictionary RootFields = new AutomataDictionary
+		{
+			{ Parser.Values, 0 },
+			{ Parser.Value, 1 },
+			{ Parser.AfterKey, 2 },
+			{ Parser.Buckets, 3 },
+			{ Parser.DocCountErrorUpperBound, 4 },
+			{ Parser.Count, 5 },
+			{ Parser.DocCount, 6 },
+			{ Parser.Bounds, 7 },
+			{ Parser.Hits, 8 },
+			{ Parser.Location, 9 },
+			{ Parser.Fields, 10 },
+		};
+
+		private static readonly byte[] SumOtherDocCount = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.SumOtherDocCount);
+		private static readonly byte[] ValueAsStringField = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.ValueAsString);
 
 		static AggregateFormatter()
 		{
@@ -41,74 +63,70 @@ namespace Nest
 
 		private IAggregate ReadAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
-				return null;
-
-			reader.ReadNext();
-
-			if (reader.GetCurrentJsonToken() != JsonToken.String)
-				return null;
+			reader.ReadIsBeginObjectWithVerify();
 
 			IAggregate aggregate = null;
-
-			var propertyName = reader.ReadPropertyName();
-
+			var propertyName = reader.ReadPropertyNameSegmentRaw();
 			Dictionary<string, object> meta = null;
 
-			if (propertyName == Parser.Meta)
+			if (propertyName.EqualsBytes(MetaField))
 			{
 				meta = GetMetadata(ref reader, formatterResolver);
-
-				// meta should never be the only property
 				reader.ReadIsValueSeparatorWithVerify();
-				propertyName = reader.ReadPropertyName();
+				propertyName = reader.ReadPropertyNameSegmentRaw();
 			}
 
-			switch (propertyName)
+			if (RootFields.TryGetValue(propertyName, out var value))
 			{
-				case Parser.Values:
-					aggregate = GetPercentilesAggregate(ref reader);
-					break;
-				case Parser.Value:
-					aggregate = GetValueAggregate(ref reader, formatterResolver);
-					break;
-				case Parser.AfterKey:
-					var dictionaryFormatter = formatterResolver.GetFormatter<Dictionary<string, object>>();
-					var afterKeys = dictionaryFormatter.Deserialize(ref reader, formatterResolver);
-					reader.ReadNext(); // ,
-					propertyName = reader.ReadPropertyName();
-					var bucketAggregate = propertyName == Parser.Buckets
-						? GetMultiBucketAggregate(ref reader, formatterResolver, propertyName) as BucketAggregate ?? new BucketAggregate()
-						: new BucketAggregate();
-					bucketAggregate.AfterKey = afterKeys;
-					aggregate = bucketAggregate;
-					break;
-				case Parser.Buckets:
-				case Parser.DocCountErrorUpperBound:
-					aggregate = GetMultiBucketAggregate(ref reader, formatterResolver, propertyName);
-					break;
-				case Parser.Count:
-					aggregate = GetStatsAggregate(ref reader);
-					break;
-				case Parser.DocCount:
-					aggregate = GetSingleBucketAggregate(ref reader, formatterResolver);
-					break;
-				case Parser.Bounds:
-					aggregate = GetGeoBoundsAggregate(ref reader, formatterResolver);
-					break;
-				case Parser.Hits:
-					aggregate = GetTopHitsAggregate(ref reader, formatterResolver);
-					break;
-				case Parser.Location:
-					aggregate = GetGeoCentroidAggregate(ref reader, formatterResolver);
-					break;
-				case Parser.Fields:
-					aggregate = GetMatrixStatsAggregate(ref reader, formatterResolver);
-					break;
-				default:
-					return null;
+				switch (value)
+				{
+					case 0:
+						aggregate = GetPercentilesAggregate(ref reader);
+						break;
+					case 1:
+						aggregate = GetValueAggregate(ref reader, formatterResolver);
+						break;
+					case 2:
+						var dictionaryFormatter = formatterResolver.GetFormatter<Dictionary<string, object>>();
+						var afterKeys = dictionaryFormatter.Deserialize(ref reader, formatterResolver);
+						reader.ReadNext(); // ,
+						propertyName = reader.ReadPropertyNameSegmentRaw();
+						var bucketAggregate = propertyName.EqualsBytes(BucketsField)
+							? GetMultiBucketAggregate(ref reader, formatterResolver, ref propertyName) as BucketAggregate ?? new BucketAggregate()
+							: new BucketAggregate();
+						bucketAggregate.AfterKey = afterKeys;
+						aggregate = bucketAggregate;
+						break;
+					case 3:
+					case 4:
+						aggregate = GetMultiBucketAggregate(ref reader, formatterResolver, ref propertyName);
+						break;
+					case 5:
+						aggregate = GetStatsAggregate(ref reader);
+						break;
+					case 6:
+						aggregate = GetSingleBucketAggregate(ref reader, formatterResolver);
+						break;
+					case 7:
+						aggregate = GetGeoBoundsAggregate(ref reader, formatterResolver);
+						break;
+					case 8:
+						aggregate = GetTopHitsAggregate(ref reader, formatterResolver);
+						break;
+					case 9:
+						aggregate = GetGeoCentroidAggregate(ref reader, formatterResolver);
+						break;
+					case 10:
+						aggregate = GetMatrixStatsAggregate(ref reader, formatterResolver);
+						break;
+				}
 			}
-			aggregate.Meta = meta;
+			else
+				reader.ReadNextBlock();
+
+			if (aggregate != null)
+				aggregate.Meta = meta;
+
 			return aggregate;
 		}
 
@@ -302,21 +320,21 @@ namespace Nest
 				reader.ReadNext(); // ,
 
 				long bgCount = 0;
-				var propertyName = reader.ReadPropertyName();
+				var propertyName = reader.ReadPropertyNameSegmentRaw();
 
-				if (propertyName == Parser.BgCount)
+				if (propertyName.EqualsBytes(BgCountField))
 				{
 					bgCount = reader.ReadInt64();
 					reader.ReadIsValueSeparatorWithVerify();
-					propertyName = reader.ReadPropertyName();
+					propertyName = reader.ReadPropertyNameSegmentRaw();
 				}
 
-				if (propertyName == Parser.Fields)
+				if (propertyName.EqualsBytes(FieldsField))
 					return GetMatrixStatsAggregate(ref reader, formatterResolver, docCount);
 
-				if (propertyName == Parser.Buckets)
+				if (propertyName.EqualsBytes(BucketsField))
 				{
-					var b = GetMultiBucketAggregate(ref reader, formatterResolver, propertyName) as BucketAggregate;
+					var b = GetMultiBucketAggregate(ref reader, formatterResolver, ref propertyName) as BucketAggregate;
 					return new BucketAggregate
 					{
 						BgCount = bgCount,
@@ -325,7 +343,7 @@ namespace Nest
 					};
 				}
 
-				subAggregates = GetSubAggregates(ref reader, propertyName, formatterResolver);
+				subAggregates = GetSubAggregates(ref reader, propertyName.Utf8String(), formatterResolver);
 			}
 			else
 				reader.ReadIsEndObjectWithVerify();
@@ -468,21 +486,24 @@ namespace Nest
 			return subAggregates;
 		}
 
-		private IAggregate GetMultiBucketAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver, string propertyName)
+		private IAggregate GetMultiBucketAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver,
+			ref ArraySegment<byte> propertyName
+		)
 		{
 			var bucket = new BucketAggregate();
-			if (propertyName == Parser.DocCountErrorUpperBound)
+			if (propertyName.EqualsBytes(DocCountErrorUpperBound))
 			{
 				bucket.DocCountErrorUpperBound = reader.ReadNullableLong();
 				reader.ReadIsValueSeparatorWithVerify();
-				propertyName = reader.ReadPropertyName();
+				propertyName = reader.ReadPropertyNameSegmentRaw();
 			}
 
-			if (propertyName == Parser.SumOtherDocCount)
+			if (propertyName.EqualsBytes(SumOtherDocCount))
 			{
 				bucket.SumOtherDocCount = reader.ReadNullableLong();
 				reader.ReadIsValueSeparatorWithVerify();
-				reader.ReadPropertyName(); // "buckets"
+				reader.ReadNext(); // "buckets"
+				reader.ReadNext(); // :
 			}
 
 			var items = new List<IBucket>();
@@ -499,12 +520,6 @@ namespace Nest
 					filterAggregates[name] = innerAgg;
 				}
 				return new FiltersAggregate(filterAggregates);
-			}
-
-			if (token != JsonToken.BeginArray)
-			{
-				reader.ReadNextBlock();
-				return null;
 			}
 
 			while (reader.ReadIsInArray(ref count))
@@ -531,8 +546,8 @@ namespace Nest
 				{
 					reader.ReadNext(); // ,
 
-					var propertyName = reader.ReadPropertyName();
-					if (propertyName == Parser.ValueAsString)
+					var propertyName = reader.ReadPropertyNameSegmentRaw();
+					if (propertyName.EqualsBytes(ValueAsStringField))
 					{
 						valueAsString = reader.ReadString();
 						token = reader.GetCurrentJsonToken();
@@ -548,10 +563,10 @@ namespace Nest
 						}
 
 						reader.ReadNext(); // ,
-						propertyName = reader.ReadPropertyName();
+						propertyName = reader.ReadPropertyNameSegmentRaw();
 					}
 
-					if (propertyName == Parser.Keys)
+					if (propertyName.EqualsBytes(KeysField))
 					{
 						var keyedValueMetric = new KeyedValueAggregate
 						{
@@ -740,10 +755,7 @@ namespace Nest
 						reader.ReadIsEndObjectWithVerify();
 				}
 				else
-				{
 					subAggregates = GetSubAggregates(ref reader, propertyName, formatterResolver);
-					//reader.ReadNext(); // }
-				}
 			}
 			else
 				reader.ReadIsEndObjectWithVerify();
@@ -808,7 +820,6 @@ namespace Nest
 
 		private IBucket GetFiltersBucket(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			//reader.ReadNext();
 			var docCount = reader.ReadNullableLong().GetValueOrDefault(0);
 			reader.ReadNext(); // ,
 			var propertyName = reader.ReadPropertyName();
