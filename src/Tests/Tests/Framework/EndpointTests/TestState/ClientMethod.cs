@@ -5,6 +5,6 @@ namespace Tests.Framework.Integration
 		Fluent,
 		FluentAsync,
 		Initializer,
-		InitializerAsync
+		InitializerAsync,
 	}
 }

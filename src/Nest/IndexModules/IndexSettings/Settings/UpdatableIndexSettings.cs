@@ -30,6 +30,9 @@ namespace Nest
 
 		public const string QueriesCacheEnabled = "index.queries.cache.enabled";
 
+		public const string SoftDeletesEnabled = "index.soft_deletes.enabled";
+		public const string SoftDeletesRetentionOperations = "index.soft_deletes.retention.operations";
+
 		public const string RecoveryInitialShards = "index.recovery.initial_shards";
 		public const string RefreshInterval = "index.refresh_interval";
 
