@@ -21,24 +21,24 @@ namespace Nest
 	{
 
 		[JsonProperty("path")]
-		public string Path { get; set; }
+		public string Path { get; internal set; }
 
 		[JsonProperty("alias")]
-		public string Alias { get; set; }
+		public string Alias { get; internal set; }
 
 		[JsonProperty("format")]
-		public string Format { get; set; }
+		public string Format { get; internal set; }
 
 		[JsonProperty("subject_dn")]
-		public string SubjectDomainName { get; set; }
+		public string SubjectDomainName { get; internal set; }
 
 		[JsonProperty("serial_number")]
-		public string SerialNumber { get; set; }
+		public string SerialNumber { get; internal set; }
 
 		[JsonProperty("has_private_key")]
-		public bool HasPrivateKey { get; set; }
+		public bool HasPrivateKey { get; internal set; }
 
 		[JsonProperty("expiry")]
-		public DateTimeOffset Expiry { get; set; }
+		public DateTimeOffset Expiry { get; internal set; }
 	}
 }
