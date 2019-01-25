@@ -22,6 +22,8 @@ namespace Tests.XPack.License.GetTrialLicenseStatus
 		protected override bool SupportsDeserialization => false;
 		protected override string UrlPath => $"/_xpack/license/trial_status";
 
+		protected bool BootstrappedWithLicense => !string.IsNullOrEmpty(Cluster.ClusterConfiguration.XPackLicenseJson);
+
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.GetTrialLicenseStatus(f),
 			(client, f) => client.GetTrialLicenseStatusAsync(f),
@@ -32,7 +34,8 @@ namespace Tests.XPack.License.GetTrialLicenseStatus
 		protected override void ExpectResponse(IGetTrialLicenseStatusResponse response)
 		{
 			response.ShouldBeValid();
-			response.EligibleToStartTrial.Should().BeFalse();
+			// returns false if bootstrap already started the trial
+			response.EligibleToStartTrial.Should().Be(BootstrappedWithLicense);
 		}
 	}
 }
