@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
@@ -23,6 +24,7 @@ namespace Tests.Aggregations.Bucket.AutoDateHistogram
 	 *
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-autodatehistogram-aggregation.html[Auto Date Histogram Aggregation].
 	*/
+	[SkipVersion("<6.5.0", "")]
 	public class AutoDateHistogramAggregationUsageTests : ProjectsOnlyAggregationUsageTestBase
 	{
 		public AutoDateHistogramAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
