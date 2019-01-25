@@ -225,6 +225,10 @@ namespace Nest
 		public TokenFiltersDescriptor Stemmer(string name, Func<StemmerTokenFilterDescriptor, IStemmerTokenFilter> selector) =>
 			Assign(name, selector?.Invoke(new StemmerTokenFilterDescriptor()));
 
+		/// <inheritdoc cref="IPredicateTokenFilter" />
+		public TokenFiltersDescriptor Predicate(string name, Func<PredicateTokenFilterDescriptor, IPredicateTokenFilter> selector) =>
+			Assign(name, selector?.Invoke(new PredicateTokenFilterDescriptor()));
+
 		/// <inheritdoc cref="IConditionTokenFilter" />
 		public TokenFiltersDescriptor Condition(string name, Func<ConditionTokenFilterDescriptor, IConditionTokenFilter> selector) =>
 			Assign(name, selector?.Invoke(new ConditionTokenFilterDescriptor()));

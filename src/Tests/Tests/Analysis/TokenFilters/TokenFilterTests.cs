@@ -584,6 +584,28 @@ namespace Tests.Analysis.TokenFilters
 			public override string Name => "stem";
 		}
 
+		[SkipVersion("<6.5.0", "predicate token filter not available in earlier versions")]
+		public class PredicateTests : TokenFilterAssertionBase<PredicateTests>
+		{
+			private readonly string _predicate = "token.getTerm().length() > 5";
+
+			public override FuncTokenFilters Fluent => (n, tf) => tf.Predicate(n, t => t.Script(_predicate));
+
+			public override ITokenFilter Initializer => new PredicateTokenFilter { Script = new InlineScript(_predicate) };
+
+			public override object Json => new
+			{
+				type = "predicate_token_filter",
+				script = new
+				{
+					source = _predicate
+				}
+			};
+
+			public override string Name => "predicate";
+		}
+
+
 		public class StemmerOverrideTests : TokenFilterAssertionBase<StemmerOverrideTests>
 		{
 			public override FuncTokenFilters Fluent => (n, tf) => tf.StemmerOverride(n, t => t.RulesPath("analysis/custom_stems.txt"));
