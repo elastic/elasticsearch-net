@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	public interface IStartTrialLicenseResponse : IResponse
+	public interface IStartTrialLicenseResponse : IAcknowledgedResponse
 	{
 		[JsonProperty("error_message")]
 		string ErrorMessage { get; }
@@ -11,7 +11,7 @@ namespace Nest
 		bool TrialWasStarted { get; }
 	}
 
-	public class StartTrialLicenseResponse : ResponseBase, IStartTrialLicenseResponse
+	public class StartTrialLicenseResponse : AcknowledgedResponseBase, IStartTrialLicenseResponse
 	{
 		public string ErrorMessage { get; internal set; }
 		public bool TrialWasStarted { get; internal set; }
