@@ -275,6 +275,10 @@ namespace Tests.XPack.CrossClusterReplication
 				foreach (var s in i.Shards)
 				{
 					var because = $"index: {i.Index} shard: {s.ShardId}";
+
+					//We can call follow stats to quickly and read exceptions is not propagated yet
+					if (s.ReadExceptions.Count == 0) continue;
+
 					s.ReadExceptions.Should().NotBeEmpty(because);
 					foreach (var e in s.ReadExceptions)
 					{
