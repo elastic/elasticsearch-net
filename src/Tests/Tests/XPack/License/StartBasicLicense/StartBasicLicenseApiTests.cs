@@ -1,5 +1,4 @@
-﻿using System;
-using Elastic.Xunit.XunitPlumbing;
+﻿using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -10,11 +9,13 @@ using static Elasticsearch.Net.HttpMethod;
 
 namespace Tests.XPack.License.StartBasicLicense
 {
+	public class BasicLicenseCluster : ClientTestClusterBase { }
+
 	[SkipVersion("<6.5.0", "")]
 	public class StartBasicLicenseApiTests
-		: ApiIntegrationTestBase<XPackCluster, IStartBasicLicenseResponse, IStartBasicLicenseRequest, StartBasicLicenseDescriptor, StartBasicLicenseRequest>
+		: ApiIntegrationTestBase<BasicLicenseCluster, IStartBasicLicenseResponse, IStartBasicLicenseRequest, StartBasicLicenseDescriptor, StartBasicLicenseRequest>
 	{
-		public StartBasicLicenseApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public StartBasicLicenseApiTests(BasicLicenseCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 200;
