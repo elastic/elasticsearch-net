@@ -49,7 +49,7 @@ new DateHistogramAggregation("projects_started_per_month")
         new SumAggregation("commits", "numberOfCommits") &&
         new BucketSelectorAggregation("commits_bucket_filter", new MultiBucketsPath
         {
-            {"totalCommits", "commits"},
+            { "totalCommits", "commits" },
         })
         {
             Script = new InlineScript("params.totalCommits >= 500")

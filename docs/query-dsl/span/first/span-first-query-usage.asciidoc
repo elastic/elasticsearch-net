@@ -23,8 +23,8 @@ q
 .SpanFirst(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Match(sq=>sq
-        .SpanTerm(st=>st.Field(p=>p.Name).Value("value"))
+    .Match(sq => sq
+        .SpanTerm(st => st.Field(p => p.Name).Value("value"))
     )
     .End(3)
 )

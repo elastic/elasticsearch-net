@@ -49,7 +49,7 @@ new TermsSetQuery
     Name = "named_query",
     Boost = 1.1,
     Field = Infer.Field<Project>(p => p.Branches),
-    Terms = new [] { "master", "dev" },
+    Terms = new[] { "master", "dev" },
     MinimumShouldMatchField = Infer.Field<Project>(p => p.RequiredBranches)
 }
 ----
@@ -105,7 +105,7 @@ new TermsSetQuery
     Name = "named_query",
     Boost = 1.1,
     Field = Infer.Field<Project>(p => p.Branches),
-    Terms = new [] { "master", "dev" },
+    Terms = new[] { "master", "dev" },
     MinimumShouldMatchScript = new InlineScript("Math.min(params.num_terms, doc['requiredBranches'].value)")
 }
 ----

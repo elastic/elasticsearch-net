@@ -21,9 +21,9 @@ please modify the original csharp file found at the link and submit the PR with 
 ----
 q
 .MoreLikeThis(sn => sn
-    .Fields(f=>f.Field(p=>p.Name))
-    .Like(l=>l
-        .Document(d=>d.Document(Project.Instance))
+    .Fields(f => f.Field(p => p.Name))
+    .Like(l => l
+        .Document(d => d.Document(Project.Instance))
         .Text("some long text")
     )
 )
@@ -35,7 +35,7 @@ q
 ----
 new MoreLikeThisQuery
 {
-    Fields = Fields<Project>(p=>p.Name),
+    Fields = Fields<Project>(p => p.Name),
     Like = new List<Like>
     {
         new LikeDocument<Project>(Project.Instance),

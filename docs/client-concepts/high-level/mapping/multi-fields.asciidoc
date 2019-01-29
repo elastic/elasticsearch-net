@@ -44,7 +44,7 @@ var createIndexResponse = _client.CreateIndex("myindex", c => c
             .AutoMap()
         )
     )
-            );
+);
 ----
 
 This results in the following JSON request
@@ -160,7 +160,7 @@ var createIndexResponse = _client.CreateIndex("myindex", c => c
             )
         )
     )
-            );
+);
 ----
 <1> Use the stop analyzer on this sub field
 

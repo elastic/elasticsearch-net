@@ -37,9 +37,9 @@ new AdjacencyMatrixAggregation("interactions")
 {
     Filters = new NamedFiltersContainer
     {
-        {"grpA", new TermQuery {Field = "state", Value = StateOfBeing.BellyUp}},
-        {"grpB", new TermQuery {Field = "state", Value = StateOfBeing.Stable}},
-        {"grpC", new TermQuery {Field = "state", Value = StateOfBeing.VeryActive}},
+        { "grpA", new TermQuery { Field = "state", Value = StateOfBeing.BellyUp } },
+        { "grpB", new TermQuery { Field = "state", Value = StateOfBeing.Stable } },
+        { "grpC", new TermQuery { Field = "state", Value = StateOfBeing.VeryActive } },
     }
 }
 ----

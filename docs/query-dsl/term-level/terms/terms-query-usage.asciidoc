@@ -91,7 +91,7 @@ new TermsQuery
 {
     IsVerbatim = true,
     Field = "description",
-    Terms = new string[] {},
+    Terms = new string[] { },
 }
 ----
 
@@ -113,7 +113,7 @@ q
 .Terms(c => c
     .Verbatim()
     .Field(p => p.Description)
-    .Terms(new string[] {})
+    .Terms(new string[] { })
 )
 ----
 

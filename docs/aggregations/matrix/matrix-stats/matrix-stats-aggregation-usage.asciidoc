@@ -44,12 +44,12 @@ new MatrixStatsAggregation("matrixstats", Field<Project>(p => p.NumberOfCommits)
 {
     Meta = new Dictionary<string, object>
     {
-        {"foo", "bar"}
+        { "foo", "bar" }
     },
     Missing = new Dictionary<Field, double>
     {
-        {"numberOfCommits", 0.0},
-        {"numberOfContributors", 1.0},
+        { "numberOfCommits", 0.0 },
+        { "numberOfContributors", 1.0 },
     },
     Mode = MatrixStatsMode.Median,
     Fields = Field<Project>(p => p.NumberOfCommits).And("numberOfContributors")

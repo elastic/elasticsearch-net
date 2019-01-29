@@ -39,7 +39,7 @@ a => a
 ----
 new PercentilesAggregation("commits_outlier", Field<Project>(p => p.NumberOfCommits))
 {
-    Percents = new[] {95, 99, 99.9},
+    Percents = new[] { 95, 99, 99.9 },
     Method = new HDRHistogramMethod
     {
         NumberOfSignificantValueDigits = 3

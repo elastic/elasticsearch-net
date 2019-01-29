@@ -38,8 +38,8 @@ new IpRangeAggregation("ip_ranges")
     Field = Field((Project p) => p.LeadDeveloper.IpAddress),
     Ranges = new List<Nest.IpRange>
     {
-        new Nest.IpRange {To = "127.0.0.1"},
-        new Nest.IpRange {From = "127.0.0.1"}
+        new Nest.IpRange { To = "127.0.0.1" },
+        new Nest.IpRange { From = "127.0.0.1" }
     }
 }
 ----

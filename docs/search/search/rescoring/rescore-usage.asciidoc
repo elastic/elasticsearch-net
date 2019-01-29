@@ -54,7 +54,7 @@ s => s
             .Query(q => q
                 .FunctionScore(fs => fs
                     .Functions(f => f
-                        .RandomScore(rs=>rs.Seed(1337).Field("_seq_no"))
+                        .RandomScore(rs => rs.Seed(1337).Field("_seq_no"))
                     )
                 )
             )
@@ -84,7 +84,7 @@ new SearchRequest<Project>
                 {
                     Filter = new TermsQuery
                     {
-                        Field = Infer.Field<Project>(p => p.Tags.First()),
+                        Field = Field<Project>(p => p.Tags.First()),
                         Terms = new[] { "eos", "sit", "sed" }
                     }
                 }

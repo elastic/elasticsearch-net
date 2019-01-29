@@ -23,9 +23,9 @@ q
 .HasParent<Developer>(c => c
     .Name("named_query")
     .Boost(1.1)
-    .InnerHits(i=>i.Explain())
+    .InnerHits(i => i.Explain())
     .Score(true)
-    .Query(qq=>qq.MatchAll())
+    .Query(qq => qq.MatchAll())
     .IgnoreUnmapped(true)
 )
 ----

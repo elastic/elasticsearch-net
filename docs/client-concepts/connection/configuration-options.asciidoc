@@ -62,7 +62,7 @@ Disables the automatic detection of a proxy
 
 Ensures the response bytes are always available on the `ElasticsearchResponse<T>`
 +
-IMPORTANT: Depending on the registered serializer,             this may cause the response to be buffered in memory first, potentially affecting performance.
+IMPORTANT: Depending on the registered serializer, this may cause the response to be buffered in memory first, potentially affecting performance.
 
 `DisablePing`::
 
@@ -120,7 +120,7 @@ When not specified, defaults to `RequestTimeout` , which itself defaults to `60`
 
 `NodePredicate`::
 
-Register a predicate to select which nodes that you want to execute API calls on. Note that sniffing requests omit this predicate and always execute on all nodes. When using an `IConnectionPool` implementation that supports reseeding of nodes, this will default to omitting master only node from regular API calls.             When using static or single node connection pooling it is assumed the list of node you instantiate the client with should be taken verbatim.
+Register a predicate to select which nodes that you want to execute API calls on. Note that sniffing requests omit this predicate and always execute on all nodes. When using an `IConnectionPool` implementation that supports reseeding of nodes, this will default to omitting master only             node from regular API calls.             When using static or single node connection pooling it is assumed the list of node you instantiate the client with should be taken             verbatim.
 
 `OnRequestCompleted`::
 

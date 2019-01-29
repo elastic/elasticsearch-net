@@ -38,7 +38,7 @@ new AverageAggregation("average_commits", Field<Project>(p => p.NumberOfCommits)
 {
     Meta = new Dictionary<string, object>
     {
-        {"foo", "bar"}
+        { "foo", "bar" }
     },
     Missing = 10,
     Script = new InlineScript("_value * 1.2")

@@ -57,7 +57,8 @@ new SearchRequest<Project>
     ScriptFields = new ScriptFields
     {
         { "test1", new ScriptField { Script = new InlineScript("doc['my_field_name'].value * 2") } },
-        { "test2", new InlineScript("doc['my_field_name'].value * params.factor")
+        {
+            "test2", new InlineScript("doc['my_field_name'].value * params.factor")
             {
                 Params = new FluentDictionary<string, object>
                 {

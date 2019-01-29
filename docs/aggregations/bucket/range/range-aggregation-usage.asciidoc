@@ -39,9 +39,9 @@ new RangeAggregation("commit_ranges")
     Field = Field<Project>(p => p.NumberOfCommits),
     Ranges = new List<AggregationRange>
     {
-        {new AggregationRange {To = 100}},
-        {new AggregationRange {From = 100, To = 500}},
-        {new AggregationRange {From = 500}}
+        { new AggregationRange { To = 100 } },
+        { new AggregationRange { From = 100, To = 500 } },
+        { new AggregationRange { From = 500 } }
     }
 }
 ----

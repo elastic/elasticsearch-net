@@ -110,7 +110,7 @@ projectsPerMonth.Buckets.Count.Should().Be(3);
 double previousCommits = -1;
 
 // sum of commits should descend over buckets
-foreach(var item in projectsPerMonth.Buckets)
+foreach (var item in projectsPerMonth.Buckets)
 {
     var numberOfCommits = item.Sum("commits").Value.Value;
     if (previousCommits != -1)

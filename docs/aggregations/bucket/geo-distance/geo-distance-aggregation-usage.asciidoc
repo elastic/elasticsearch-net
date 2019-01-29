@@ -41,9 +41,9 @@ new GeoDistanceAggregation("rings_around_amsterdam")
     Origin = "52.376, 4.894",
     Ranges = new List<AggregationRange>
     {
-        new AggregationRange {To = 100},
-        new AggregationRange {From = 100, To = 300},
-        new AggregationRange {From = 300}
+        new AggregationRange { To = 100 },
+        new AggregationRange { From = 100, To = 300 },
+        new AggregationRange { From = 300 }
     }
 }
 ----

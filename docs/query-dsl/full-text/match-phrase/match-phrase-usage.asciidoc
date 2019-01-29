@@ -36,7 +36,7 @@ q
 ----
 new MatchPhraseQuery
 {
-    Field = Field<Project>(p=>p.Description),
+    Field = Field<Project>(p => p.Description),
     Analyzer = "standard",
     Boost = 1.1,
     Name = "named_query",

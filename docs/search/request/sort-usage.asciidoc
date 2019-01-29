@@ -29,7 +29,6 @@ s => s
     .Descending(p => p.Name)
     .Descending(SortSpecialField.Score)
     .Ascending(SortSpecialField.DocumentIndexOrder)
-
     .Field(f => f
         .Field(p => p.Tags.First().Added)
         .Order(SortOrder.Descending)
@@ -78,12 +77,12 @@ new SearchRequest<Project>
         new SortField { Field = "_doc", Order = SortOrder.Ascending },
         new SortField
         {
-            Field = Field<Project>(p=>p.Tags.First().Added),
+            Field = Field<Project>(p => p.Tags.First().Added),
             Order = SortOrder.Descending,
             Missing = "_last",
             UnmappedType = FieldType.Date,
             Mode = SortMode.Average,
-            NestedPath = Field<Project>(p=>p.Tags),
+            NestedPath = Field<Project>(p => p.Tags),
             NestedFilter = new MatchAllQuery(),
         },
         new SortField
@@ -99,7 +98,7 @@ new SearchRequest<Project>
             DistanceType = GeoDistanceType.Arc,
             GeoUnit = DistanceUnit.Centimeters,
             Mode = SortMode.Min,
-            Points = new[] {new GeoLocation(70, -70), new GeoLocation(-12, 12)}
+            Points = new[] { new GeoLocation(70, -70), new GeoLocation(-12, 12) }
         },
         new ScriptSort
         {
@@ -109,7 +108,7 @@ new SearchRequest<Project>
             {
                 Params = new Dictionary<string, object>
                 {
-                    {"factor", 1.1}
+                    { "factor", 1.1 }
                 }
             }
         }

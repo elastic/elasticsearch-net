@@ -1,0 +1,124 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/Aggregations/Bucket/AutoDateHistogram/AutoDateHistogramAggregationUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[auto-date-histogram-aggregation-usage]]
+=== Auto Date Histogram Aggregation Usage
+
+A multi-bucket aggregation similar to the Date Histogram Aggregation except instead of providing an interval to
+use as the width of each bucket, a target number of buckets is provided indicating the number of buckets needed
+and the interval of the buckets is automatically chosen to best achieve that target. The number of buckets
+returned will always be less than or equal to this target number.
+
+NOTE: When specifying a `format` **and** `extended_bounds` or `missing`, in order for Elasticsearch to be able to parse
+the serialized `DateTime` of `extended_bounds` or `missing` correctly, the `date_optional_time` format is included
+as part of the `format` value.
+
+Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-autodatehistogram-aggregation.html[Auto Date Histogram Aggregation].
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+a => a
+.AutoDateHistogram("projects_started_per_month", date => date
+    .Field(p => p.StartedOn)
+    .Format("yyyy-MM-dd'T'HH:mm:ss")
+    .Missing(FixedDate)
+    .Aggregations(childAggs => childAggs
+        .Nested("project_tags", n => n
+            .Path(p => p.Tags)
+            .Aggregations(nestedAggs => nestedAggs
+                .Terms("tags", avg => avg.Field(p => p.Tags.First().Name))
+            )
+        )
+    )
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new AutoDateHistogramAggregation("projects_started_per_month")
+{
+    Field = Field<Project>(p => p.StartedOn),
+    Format = "yyyy-MM-dd'T'HH:mm:ss",
+    Missing = FixedDate,
+    Aggregations = new NestedAggregation("project_tags")
+    {
+        Path = Field<Project>(p => p.Tags),
+        Aggregations = new TermsAggregation("tags")
+        {
+            Field = Field<Project>(p => p.Tags.First().Name)
+        }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "projects_started_per_month": {
+    "auto_date_histogram": {
+      "field": "startedOn",
+      "format": "yyyy-MM-dd'T'HH:mm:ss||date_optional_time",
+      "missing": "2015-06-06T12:01:02.123"
+    },
+    "aggs": {
+      "project_tags": {
+        "nested": {
+          "path": "tags"
+        },
+        "aggs": {
+          "tags": {
+            "terms": {
+              "field": "tags.name"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+==== Handling responses
+
+The `AggregateDictionary found on `.Aggregations` on `ISearchResponse<T>` has several helper methods
+so we can fetch our aggregation results easily in the correct type.
+<<handling-aggregate-response, Be sure to read more about these helper methods>>
+
+[source,csharp]
+----
+response.ShouldBeValid();
+
+var dateHistogram = response.Aggregations.AutoDateHistogram("projects_started_per_month");
+dateHistogram.Should().NotBeNull();
+dateHistogram.Interval.Should().NotBeNull();
+dateHistogram.Buckets.Should().NotBeNull();
+dateHistogram.Buckets.Count.Should().BeGreaterThan(1);
+foreach (var item in dateHistogram.Buckets)
+{
+    item.Date.Should().NotBe(default);
+    item.DocCount.Should().BeGreaterThan(0);
+
+    var nested = item.Nested("project_tags");
+    nested.Should().NotBeNull();
+
+    var nestedTerms = nested.Terms("tags");
+    nestedTerms.Buckets.Count.Should().BeGreaterThan(0);
+}
+----
+

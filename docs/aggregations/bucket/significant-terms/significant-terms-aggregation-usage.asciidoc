@@ -170,7 +170,7 @@ a => a
         .BackgroundIsSuperSet()
         .IncludeNegatives()
     )
-    .Exclude(new[] {"pierce"})
+    .Exclude(new[] { "pierce" })
 )
 ----
 
@@ -187,7 +187,7 @@ new SignificantTermsAggregation("significant_names")
         BackgroundIsSuperSet = true,
         IncludeNegatives = true
     },
-    Exclude = new SignificantTermsIncludeExclude(new[] {"pierce"})
+    Exclude = new SignificantTermsIncludeExclude(new[] { "pierce" })
 }
 ----
 

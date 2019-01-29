@@ -554,6 +554,8 @@ usingSettings.Expect("jsonProp").ForField(Field<Precedence>(p => p.JsonProperty)
 usingSettings.Expect("ask").ForField(Field<Precedence>(p => p.AskSerializer));
 usingSettings.Expect("data").ForField(Field<Precedence>(p => p.DataMember));
 usingSettings.Expect("DEFAULTFIELDNAMEINFERRER").ForField(Field<Precedence>(p => p.DefaultFieldNameInferrer));
+
+var x = Field<Project>(p => p.Name, 1.0);
 ----
 <1> Rename on the mapping for the `Precedence` type
 
@@ -622,5 +624,33 @@ usingSettings.Expect(new []
         Description = "this property will be renamed for Child",
         IgnoreMe = "this property will be ignored (won't be serialized) for Child",
     });
+
+public class SourceModel
+{
+    [PropertyName("gexo")]
+    public GeoModel Geo { get; set; }
+}
+
+public class GeoModel
+{
+    [JsonProperty("country_iso_code")]
+    public string CountryIsoCode { get; set; }
+}
+
+var usingSettings = WithConnectionSettings(s => s)
+        .WithSourceSerializer(JsonNetSerializer.Default);
+
+usingSettings.Expect("gexo").ForField(Field<SourceModel>(p=>p.Geo));
+usingSettings.Expect("country_iso_code").ForField(Field<GeoModel>(p=>p.CountryIsoCode));
+usingSettings.Expect(new []
+    {
+        "country_iso_code",
+    }).AsPropertiesOf(new GeoModel { CountryIsoCode = "nl" });
+usingSettings.Expect(new []
+    {
+        "gexo",
+    }).AsPropertiesOf(new SourceModel { Geo = new GeoModel { CountryIsoCode = "nl" } });
+
+usingSettings.Expect("gexo.country_iso_code").ForField(Field<SourceModel>(p=>p.Geo.CountryIsoCode));
 ----
 

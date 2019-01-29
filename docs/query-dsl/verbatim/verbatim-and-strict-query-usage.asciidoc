@@ -28,15 +28,15 @@ sent in the request to Elasticsearch, bypassing NEST's conditionless checks.
 q
 .Bool(b => b
     .Must(qt => qt
-        .Term(t => t
-            .Verbatim()
-            .Field(p => p.Description)
-            .Value("")
-        ), qt => qt
-        .Term(t => t
-            .Field(p => p.Name)
-            .Value("foo")
-        )
+            .Term(t => t
+                .Verbatim()
+                .Field(p => p.Description)
+                .Value("")
+            ), qt => qt
+            .Term(t => t
+                .Field(p => p.Name)
+                .Value("foo")
+            )
     )
 )
 ----
@@ -160,14 +160,14 @@ Leaf queries within a compound query marked as verbatim will also be serialized 
 q
 .Bool(b => b
     .Filter(f => !f
-        .Term(t => t
-            .Verbatim()
-            .Field(p => p.Name)
-            .Value("")
-        ) && f
-        .Exists(e => e
-            .Field(p => p.NumberOfCommits)
-        )
+            .Term(t => t
+                .Verbatim()
+                .Field(p => p.Name)
+                .Value("")
+            ) && f
+            .Exists(e => e
+                .Field(p => p.NumberOfCommits)
+            )
     )
 )
 ----
@@ -178,7 +178,8 @@ q
 ----
 new BoolQuery
 {
-    Filter = new QueryContainer[] {
+    Filter = new QueryContainer[]
+    {
         !new TermQuery
         {
             IsVerbatim = true,

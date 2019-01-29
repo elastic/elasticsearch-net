@@ -39,7 +39,7 @@ a => a
 ----
 new PercentileRanksAggregation("commits_outlier", Field<Project>(p => p.NumberOfCommits))
 {
-    Values = new List<double> {15, 30},
+    Values = new List<double> { 15, 30 },
     Method = new TDigestMethod
     {
         Compression = 200

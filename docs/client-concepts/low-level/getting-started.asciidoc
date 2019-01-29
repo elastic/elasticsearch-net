@@ -144,14 +144,14 @@ If you need to index many documents, Elasticsearch has a {ref_current}/docs-bulk
 [source,csharp]
 ----
 var people = new object[]
-            {
-                new { index = new { _index = "people", _type = "person", _id = "1"  }},
-                new { FirstName = "Martijn", LastName = "Laarman" },
-                new { index = new { _index = "people", _type = "person", _id = "2"  }},
-                new { FirstName = "Greg", LastName = "Marzouka" },
-                new { index = new { _index = "people", _type = "person", _id = "3"  }},
-                new { FirstName = "Russ", LastName = "Cam" },
-            };
+{
+    new { index = new { _index = "people", _type = "person", _id = "1"  }},
+    new { FirstName = "Martijn", LastName = "Laarman" },
+    new { index = new { _index = "people", _type = "person", _id = "2"  }},
+    new { FirstName = "Greg", LastName = "Marzouka" },
+    new { index = new { _index = "people", _type = "person", _id = "3"  }},
+    new { FirstName = "Russ", LastName = "Cam" },
+};
 
 var indexResponse = lowlevelClient.Bulk<StringResponse>(PostData.MultiJson(people));
 string responseStream = indexResponse.Body;

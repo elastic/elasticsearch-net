@@ -23,14 +23,14 @@ q
 .GeoShapeGeometryCollection(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Field(p=>p.Location)
+    .Field(p => p.Location)
     .Geometries(
-        new PointGeoShape(this._pointCoordinates),
-        new MultiPointGeoShape(this._multiPointCoordinates),
-        new LineStringGeoShape(this._lineStringCoordinates),
-        new MultiLineStringGeoShape(this._multiLineStringCoordinates),
-        new PolygonGeoShape(this._polygonCoordinates),
-        new MultiPolygonGeoShape(this._multiPolygonCoordinates)
+        new PointGeoShape(_pointCoordinates),
+        new MultiPointGeoShape(_multiPointCoordinates),
+        new LineStringGeoShape(_lineStringCoordinates),
+        new MultiLineStringGeoShape(_multiLineStringCoordinates),
+        new PolygonGeoShape(_polygonCoordinates),
+        new MultiPolygonGeoShape(_multiPolygonCoordinates)
     )
     .Relation(GeoShapeRelation.Intersects)
 )
@@ -44,17 +44,17 @@ new GeoShapeGeometryCollectionQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Field = Infer.Field<Project>(p=>p.Location),
+    Field = Infer.Field<Project>(p => p.Location),
     Shape = new Nest.GeometryCollection
     {
         Geometries = new IGeoShape[]
         {
-            new PointGeoShape(this._pointCoordinates),
-            new MultiPointGeoShape(this._multiPointCoordinates),
-            new LineStringGeoShape(this._lineStringCoordinates),
+            new PointGeoShape(_pointCoordinates),
+            new MultiPointGeoShape(_multiPointCoordinates),
+            new LineStringGeoShape(_lineStringCoordinates),
             new MultiLineStringGeoShape(_multiLineStringCoordinates),
-            new PolygonGeoShape(this._polygonCoordinates),
-            new MultiPolygonGeoShape(this._multiPolygonCoordinates),
+            new PolygonGeoShape(_polygonCoordinates),
+            new MultiPolygonGeoShape(_multiPolygonCoordinates),
         }
     },
     Relation = GeoShapeRelation.Intersects,
