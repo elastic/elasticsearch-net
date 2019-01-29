@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text.RegularExpressions;
 using Utf8Json;
 using Utf8Json.Internal;
 
@@ -11,9 +10,26 @@ namespace Nest
 	internal class AggregateFormatter : IJsonFormatter<IAggregate>
 	{
 		private static readonly byte[] BgCountField = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.BgCount);
+
+		private static readonly AutomataDictionary BucketFields = new AutomataDictionary
+		{
+			{ Parser.Key, 0 },
+			{ Parser.From, 1 },
+			{ Parser.To, 2 },
+			{ Parser.KeyAsString, 3 },
+			{ Parser.DocCount, 4 }
+		};
+
 		private static readonly byte[] BucketsField = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.Buckets);
 		private static readonly byte[] DocCountErrorUpperBound = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.DocCountErrorUpperBound);
 		private static readonly byte[] FieldsField = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.Fields);
+
+		private static readonly AutomataDictionary GeoBoundsFields = new AutomataDictionary
+		{
+			{ Parser.TopLeft, 0 },
+			{ Parser.BottomRight, 1 },
+		};
+
 		private static readonly byte[] KeysField = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.Keys);
 		private static readonly byte[] MetaField = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.Meta);
 
@@ -33,6 +49,14 @@ namespace Nest
 		};
 
 		private static readonly byte[] SumOtherDocCount = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.SumOtherDocCount);
+
+		private static readonly AutomataDictionary TopHitsFields = new AutomataDictionary
+		{
+			{ Parser.Total, 0 },
+			{ Parser.MaxScore, 1 },
+			{ Parser.Hits, 2 },
+		};
+
 		private static readonly byte[] ValueAsStringField = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.ValueAsString);
 
 		static AggregateFormatter()
@@ -135,31 +159,32 @@ namespace Nest
 			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
 				return null;
 
-			reader.ReadNext();
+			reader.ReadNext(); // {
+			var property = reader.ReadPropertyNameSegmentRaw();
 
-			if (reader.GetCurrentJsonToken() != JsonToken.String)
-				return null;
-
-			IBucket item;
-			var property = reader.ReadPropertyName();
-			switch (property)
+			IBucket item = null;
+			if (BucketFields.TryGetValue(property, out var value))
 			{
-				case Parser.Key:
-					item = GetKeyedBucket(ref reader, formatterResolver);
-					break;
-				case Parser.From:
-				case Parser.To:
-					item = GetRangeBucket(ref reader, formatterResolver, null, property);
-					break;
-				case Parser.KeyAsString:
-					item = GetDateHistogramBucket(ref reader, formatterResolver);
-					break;
-				case Parser.DocCount:
-					item = GetFiltersBucket(ref reader, formatterResolver);
-					break;
-				default:
-					return null;
+				switch (value)
+				{
+					case 0:
+						item = GetKeyedBucket(ref reader, formatterResolver);
+						break;
+					case 1:
+					case 2:
+						item = GetRangeBucket(ref reader, formatterResolver, null, property.Utf8String());
+						break;
+					case 3:
+						item = GetDateHistogramBucket(ref reader, formatterResolver);
+						break;
+					case 4:
+						item = GetFiltersBucket(ref reader, formatterResolver);
+						break;
+				}
 			}
+			else
+				reader.ReadNextBlock();
+
 			return item;
 		}
 
@@ -186,22 +211,25 @@ namespace Nest
 
 			while (reader.ReadIsInObject(ref count))
 			{
-				// TODO: use AutomataDictionary and don't allocate strings
-				var propertyName = reader.ReadPropertyName();
-
-				switch (propertyName)
+				var propertyName = reader.ReadPropertyNameSegmentRaw();
+				if (TopHitsFields.TryGetValue(propertyName, out var value))
 				{
-					case Parser.Total:
-						total = reader.ReadInt64();
-						break;
-					case Parser.MaxScore:
-						maxScore = reader.ReadNullableDouble();
-						break;
-					case Parser.Hits:
-						var lazyDocumentsFormatter = formatterResolver.GetFormatter<List<LazyDocument>>();
-						topHits = lazyDocumentsFormatter.Deserialize(ref reader, formatterResolver);
-						break;
+					switch (value)
+					{
+						case 0:
+							total = reader.ReadInt64();
+							break;
+						case 1:
+							maxScore = reader.ReadNullableDouble();
+							break;
+						case 2:
+							var lazyDocumentsFormatter = formatterResolver.GetFormatter<List<LazyDocument>>();
+							topHits = lazyDocumentsFormatter.Deserialize(ref reader, formatterResolver);
+							break;
+					}
 				}
+				else
+					reader.ReadNextBlock();
 			}
 
 			reader.ReadNext(); // }
@@ -243,15 +271,29 @@ namespace Nest
 				return null;
 			}
 
-			var latLonDictionaryFormatter = formatterResolver.GetFormatter<Dictionary<string, LatLon>>();
-			var latLon = latLonDictionaryFormatter.Deserialize(ref reader, formatterResolver);
-
 			var geoBoundsMetric = new GeoBoundsAggregate();
-			if (latLon.TryGetValue(Parser.TopLeft, out var topLeft) && topLeft != null)
-				geoBoundsMetric.Bounds.TopLeft = topLeft;
-
-			if (latLon.TryGetValue(Parser.BottomRight, out var bottomRight) && bottomRight != null)
-				geoBoundsMetric.Bounds.BottomRight = bottomRight;
+			var latLonFormatter = formatterResolver.GetFormatter<LatLon>();
+			var count = 0;
+			while (reader.ReadIsInObject(ref count))
+			{
+				var propertyName = reader.ReadPropertyNameSegmentRaw();
+				if (GeoBoundsFields.TryGetValue(propertyName, out var value))
+				{
+					switch (value)
+					{
+						case 0:
+							geoBoundsMetric.Bounds.TopLeft =
+								latLonFormatter.Deserialize(ref reader, formatterResolver);
+							break;
+						case 1:
+							geoBoundsMetric.Bounds.BottomRight =
+								latLonFormatter.Deserialize(ref reader, formatterResolver);
+							break;
+					}
+				}
+				else
+					reader.ReadNextBlock();
+			}
 
 			reader.ReadNext(); // }
 			return geoBoundsMetric;

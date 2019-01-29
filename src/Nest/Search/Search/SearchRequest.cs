@@ -153,6 +153,7 @@ namespace Nest
 		public string Timeout { get; set; }
 		public bool? TrackScores { get; set; }
 
+		// TODO: Remove?
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 		public bool? Version { get; set; }
 
