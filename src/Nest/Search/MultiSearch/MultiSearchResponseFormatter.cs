@@ -35,6 +35,8 @@ namespace Nest
 						responses.Add(reader.ReadNextBlockSegment());
 					break;
 				}
+
+				reader.ReadNextBlock();
 			}
 
 			if (responses.Count == 0)

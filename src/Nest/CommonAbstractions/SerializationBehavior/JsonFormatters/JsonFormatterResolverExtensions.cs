@@ -7,6 +7,6 @@ namespace Nest
 	{
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static IConnectionSettingsValues GetConnectionSettings(this IJsonFormatterResolver formatterResolver) =>
-			((NestFormatterResolver)formatterResolver).Settings;
+			((IJsonFormatterResolverWithSettings)formatterResolver).Settings;
 	}
 }
