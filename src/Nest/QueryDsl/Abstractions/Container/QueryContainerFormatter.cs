@@ -62,9 +62,14 @@ namespace Nest
 	// TODO: Unify with QueryContainerCollectionFormatter
 	public class QueryContainerListFormatter : IJsonFormatter<List<QueryContainer>>
 	{
+		private static readonly QueryContainerFormatter QueryContainerFormatter =
+			new QueryContainerFormatter();
+
+		private static readonly QueryContainerInterfaceFormatter QueryContainerInterfaceFormatter =
+			new QueryContainerInterfaceFormatter();
+
 		public List<QueryContainer> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var formatter = formatterResolver.GetFormatter<QueryContainer>();
 			var token = reader.GetCurrentJsonToken();
 			switch (token)
 			{
@@ -73,7 +78,7 @@ namespace Nest
 					var count = 0;
 					var queryContainers = new List<QueryContainer>();
 					while (reader.ReadIsInArray(ref count))
-						queryContainers.Add(formatter.Deserialize(ref reader, formatterResolver));
+						queryContainers.Add(QueryContainerFormatter.Deserialize(ref reader, formatterResolver));
 
 					return queryContainers;
 				}
@@ -81,7 +86,7 @@ namespace Nest
 				{
 					var queryContainers = new List<QueryContainer>
 					{
-						formatter.Deserialize(ref reader, formatterResolver)
+						QueryContainerFormatter.Deserialize(ref reader, formatterResolver)
 					};
 
 					return queryContainers;
@@ -99,27 +104,19 @@ namespace Nest
 			else
 			{
 				writer.WriteBeginArray();
-				var formatter = formatterResolver.GetFormatter<IQueryContainer>();
-
 				var e = value.GetEnumerator();
 				try
 				{
-					var isFirst = true;
-					var wroteLast = false;
+					var written = false;
 					while (e.MoveNext())
 					{
-						if (isFirst)
-							isFirst = false;
-						else if (wroteLast)
-						{
-							wroteLast = false;
-							writer.WriteValueSeparator();
-						}
-
 						if (e.Current != null && e.Current.IsWritable)
 						{
-							formatter.Serialize(ref writer, e.Current, formatterResolver);
-							wroteLast = true;
+							if (written)
+								writer.WriteValueSeparator();
+
+							QueryContainerInterfaceFormatter.Serialize(ref writer, e.Current, formatterResolver);
+							written = true;
 						}
 					}
 				}
@@ -135,9 +132,14 @@ namespace Nest
 
 	public class QueryContainerCollectionFormatter : IJsonFormatter<IEnumerable<QueryContainer>>
 	{
+		private static readonly QueryContainerFormatter QueryContainerFormatter =
+			new QueryContainerFormatter();
+
+		private static readonly QueryContainerInterfaceFormatter QueryContainerInterfaceFormatter =
+			new QueryContainerInterfaceFormatter();
+
 		public IEnumerable<QueryContainer> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var formatter = formatterResolver.GetFormatter<QueryContainer>();
 			var token = reader.GetCurrentJsonToken();
 			switch (token)
 			{
@@ -146,7 +148,7 @@ namespace Nest
 					var count = 0;
 					var queryContainers = new List<QueryContainer>();
 					while (reader.ReadIsInArray(ref count))
-						queryContainers.Add(formatter.Deserialize(ref reader, formatterResolver));
+						queryContainers.Add(QueryContainerFormatter.Deserialize(ref reader, formatterResolver));
 
 					return queryContainers;
 				}
@@ -154,7 +156,7 @@ namespace Nest
 				{
 					var queryContainers = new List<QueryContainer>
 					{
-						formatter.Deserialize(ref reader, formatterResolver)
+						QueryContainerFormatter.Deserialize(ref reader, formatterResolver)
 					};
 
 					return queryContainers;
@@ -172,27 +174,19 @@ namespace Nest
 			else
 			{
 				writer.WriteBeginArray();
-				var formatter = formatterResolver.GetFormatter<IQueryContainer>();
-
 				var e = value.GetEnumerator();
 				try
 				{
-					var isFirst = true;
-					var wroteLast = false;
+					var written = false;
 					while (e.MoveNext())
 					{
-						if (isFirst)
-							isFirst = false;
-						else if (wroteLast)
-						{
-							wroteLast = false;
-							writer.WriteValueSeparator();
-						}
-
 						if (e.Current != null && e.Current.IsWritable)
 						{
-							formatter.Serialize(ref writer, e.Current, formatterResolver);
-							wroteLast = true;
+							if (written)
+								writer.WriteValueSeparator();
+
+							QueryContainerInterfaceFormatter.Serialize(ref writer, e.Current, formatterResolver);
+							written = true;
 						}
 					}
 				}
