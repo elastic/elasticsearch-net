@@ -8,7 +8,12 @@ using Utf8Json.Resolvers;
 
 namespace Nest
 {
-	internal class NestFormatterResolver : IJsonFormatterResolver
+	internal interface IJsonFormatterResolverWithSettings
+	{
+		IConnectionSettingsValues Settings { get; }
+	}
+
+	internal class NestFormatterResolver : IJsonFormatterResolver, IJsonFormatterResolverWithSettings
 	{
 		private readonly IJsonFormatter<object> _fallbackFormatter;
 

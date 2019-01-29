@@ -14,7 +14,7 @@ namespace Nest
 		}
 	}
 
-	internal class StatefulFormatterResolver<TStateful> : IJsonFormatterResolver
+	internal class StatefulFormatterResolver<TStateful> : IJsonFormatterResolver, IJsonFormatterResolverWithSettings
 	{
 		private readonly IJsonFormatter<TStateful> _jsonFormatter;
 		private readonly IJsonFormatterResolver _formatterResolver;
@@ -32,5 +32,7 @@ namespace Nest
 
 			return _formatterResolver.GetFormatter<T>();
 		}
+
+		public IConnectionSettingsValues Settings => ((IJsonFormatterResolverWithSettings)_formatterResolver).Settings;
 	}
 }
