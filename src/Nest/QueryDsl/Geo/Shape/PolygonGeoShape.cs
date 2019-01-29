@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
+	[JsonFormatter(typeof(GeoShapeFormatter<IPolygonGeoShape>))]
 	public interface IPolygonGeoShape : IGeoShape
 	{
 		[DataMember(Name ="coordinates")]
 		IEnumerable<IEnumerable<GeoCoordinate>> Coordinates { get; set; }
 	}
 
+	[JsonFormatter(typeof(GeoShapeFormatter<PolygonGeoShape>))]
 	public class PolygonGeoShape : GeoShapeBase, IPolygonGeoShape
 	{
 		internal PolygonGeoShape() : base("polygon") { }
