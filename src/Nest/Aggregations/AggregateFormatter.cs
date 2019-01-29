@@ -768,6 +768,7 @@ namespace Nest
 				keyAsString = reader.ReadString();
 				reader.ReadNext(); // ,
 				reader.ReadNext(); // "doc_count"
+				reader.ReadNext(); // :
 			}
 
 			var docCount = reader.ReadInt64();
