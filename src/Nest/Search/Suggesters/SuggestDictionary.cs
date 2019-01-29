@@ -3,7 +3,7 @@ using Utf8Json;
 
 namespace Nest
 {
-	internal class SuggestDictionaryConverter<T> : IJsonFormatter<SuggestDictionary<T>>
+	internal class SuggestDictionaryFormatter<T> : IJsonFormatter<SuggestDictionary<T>>
 		where T : class
 	{
 		public SuggestDictionary<T> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -20,6 +20,7 @@ namespace Nest
 		}
 	}
 
+	[JsonFormatter(typeof(SuggestDictionaryFormatter<>))]
 	public class SuggestDictionary<T> : IsAReadOnlyDictionaryBase<string, Suggest<T>[]>
 		where T : class
 	{
