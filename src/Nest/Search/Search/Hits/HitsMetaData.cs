@@ -9,7 +9,7 @@ namespace Nest
 		public IReadOnlyCollection<IHit<T>> Hits { get; internal set; } = EmptyReadOnly<IHit<T>>.Collection;
 
 		[DataMember(Name ="max_score")]
-		public double MaxScore { get; internal set; }
+		public double? MaxScore { get; internal set; }
 
 		[DataMember(Name ="total")]
 		public HitsTotal Total { get; internal set; }
