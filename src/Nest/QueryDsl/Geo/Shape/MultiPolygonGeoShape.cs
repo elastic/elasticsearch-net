@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
+	[JsonFormatter(typeof(GeoShapeFormatter<IMultiPolygonGeoShape>))]
 	public interface IMultiPolygonGeoShape : IGeoShape
 	{
 		[DataMember(Name ="coordinates")]
 		IEnumerable<IEnumerable<IEnumerable<GeoCoordinate>>> Coordinates { get; set; }
 	}
 
+	[JsonFormatter(typeof(GeoShapeFormatter<MultiPolygonGeoShape>))]
 	public class MultiPolygonGeoShape : GeoShapeBase, IMultiPolygonGeoShape
 	{
 		internal MultiPolygonGeoShape() : base("multipolygon") { }

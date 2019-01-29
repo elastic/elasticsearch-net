@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
+	[JsonFormatter(typeof(GeoShapeFormatter<ICircleGeoShape>))]
 	public interface ICircleGeoShape : IGeoShape
 	{
 		[DataMember(Name ="coordinates")]
@@ -12,6 +14,7 @@ namespace Nest
 		string Radius { get; set; }
 	}
 
+	[JsonFormatter(typeof(GeoShapeFormatter<CircleGeoShape>))]
 	public class CircleGeoShape : GeoShapeBase, ICircleGeoShape
 	{
 		internal CircleGeoShape() : base("circle") { }

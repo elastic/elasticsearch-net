@@ -5,7 +5,7 @@ using Utf8Json;
 
 namespace Nest
 {
-	[JsonFormatter(typeof(GeoShapeConverter))]
+	[JsonFormatter(typeof(GeoShapeFormatter))]
 	public interface IGeoShape
 	{
 		/// <summary>
@@ -49,7 +49,19 @@ namespace Nest
 		internal GeoShapeFormat Format { get; set; }
 	}
 
-	internal class GeoShapeConverter : IJsonFormatter<IGeoShape>
+	internal class GeoShapeFormatter<TShape> : IJsonFormatter<TShape>
+		where TShape : IGeoShape
+	{
+		private static readonly GeoShapeFormatter ShapeFormatter = new GeoShapeFormatter();
+
+		public void Serialize(ref JsonWriter writer, TShape value, IJsonFormatterResolver formatterResolver) =>
+			ShapeFormatter.Serialize(ref writer, value, formatterResolver);
+
+		public TShape Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
+			(TShape)ShapeFormatter.Deserialize(ref reader, formatterResolver);
+	}
+
+	internal class GeoShapeFormatter : IJsonFormatter<IGeoShape>
 	{
 		public IGeoShape Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
@@ -57,6 +69,7 @@ namespace Nest
 			switch (token)
 			{
 				case JsonToken.Null:
+					reader.ReadNext();
 					return null;
 				case JsonToken.String:
 					return GeoWKTReader.Read(reader.ReadString());
