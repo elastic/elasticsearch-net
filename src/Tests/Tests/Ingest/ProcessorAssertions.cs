@@ -393,6 +393,7 @@ namespace Tests.Ingest
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
 				.Bytes<Project>(ud => ud
 					.Field(p => p.Description)
+					.IgnoreMissing()
 				);
 
 			public override IProcessor Initializer => new BytesProcessor { Field = "description", IgnoreMissing = true };
