@@ -11,7 +11,7 @@ namespace Nest
 {
 	internal static class TypeExtensions
 	{
-		private static readonly MethodInfo GetActivatorMethodInfo =
+		internal static readonly MethodInfo GetActivatorMethodInfo =
 			typeof(TypeExtensions).GetMethod(nameof(GetActivator), BindingFlags.Static | BindingFlags.NonPublic);
 
 		private static readonly ConcurrentDictionary<string, ObjectActivator<object>> CachedActivators =
@@ -82,7 +82,7 @@ namespace Nest
 				: null;
 
 		//do not remove this is referenced through GetActivatorMethod
-		private static ObjectActivator<T> GetActivator<T>(ConstructorInfo ctor)
+		internal static ObjectActivator<T> GetActivator<T>(ConstructorInfo ctor)
 		{
 			var type = ctor.DeclaringType;
 			var paramsInfo = ctor.GetParameters();
@@ -208,7 +208,7 @@ namespace Nest
 			return derivedGetMethod?.ReturnType != propertyInfo.PropertyType;
 		}
 
-		private delegate T ObjectActivator<out T>(params object[] args);
+		internal delegate T ObjectActivator<out T>(params object[] args);
 	}
 
 	// TODO: Temporary shim for JsonProperty

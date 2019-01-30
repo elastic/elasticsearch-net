@@ -96,6 +96,7 @@ namespace Nest
 			return response;
 		}
 
-		public void Serialize(ref JsonWriter writer, TResponse value, IJsonFormatterResolver formatterResolver) => throw new NotSupportedException();
+		public void Serialize(ref JsonWriter writer, TResponse value, IJsonFormatterResolver formatterResolver) =>
+			throw new NotSupportedException();
 	}
 }
