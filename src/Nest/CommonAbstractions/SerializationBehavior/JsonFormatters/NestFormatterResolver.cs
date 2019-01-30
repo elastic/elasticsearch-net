@@ -53,7 +53,10 @@ namespace Nest
 				NestEnumResolver.Instance, // Specialized Enum handling
 				AttributeFormatterResolver.Instance, // [JsonFormatter]
 				ReadAsFormatterResolver.Instance, // [ReadAs]
+				IsADictionaryFormatterResolver.Instance, // IsADictionaryBase<TKey, TValue>
 				DynamicGenericResolver.Instance, // T[], List<T>, etc...
+				InterfaceGenericDictionaryResolver.Instance,
+				InterfaceGenericReadOnlyDictionaryResolver.Instance,
 				//NestGenericSourceTypeFormatterResolver.Instance,
 			};
 
