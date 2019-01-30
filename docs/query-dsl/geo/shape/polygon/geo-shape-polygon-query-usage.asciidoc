@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.5
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -42,6 +42,70 @@ new GeoShapePolygonQuery
     Shape = new PolygonGeoShape(_polygonCoordinates),
     Relation = GeoShapeRelation.Intersects,
     IgnoreUnmapped = true
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "geo_shape": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "ignore_unmapped": true,
+    "location": {
+      "relation": "intersects",
+      "shape": {
+        "type": "polygon",
+        "coordinates": [
+          [
+            [
+              10.0,
+              -17.0
+            ],
+            [
+              15.0,
+              16.0
+            ],
+            [
+              0.0,
+              12.0
+            ],
+            [
+              -15.0,
+              16.0
+            ],
+            [
+              -10.0,
+              -17.0
+            ],
+            [
+              10.0,
+              -17.0
+            ]
+          ],
+          [
+            [
+              8.2,
+              18.2
+            ],
+            [
+              8.2,
+              -18.8
+            ],
+            [
+              -8.8,
+              -10.8
+            ],
+            [
+              8.8,
+              18.2
+            ]
+          ]
+        ]
+      }
+    }
+  }
 }
 ----
 
