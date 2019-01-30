@@ -18,8 +18,7 @@ namespace Nest
 		public Field(string name, double? boost = null)
 		{
 			name.ThrowIfNullOrEmpty(nameof(name));
-			double? b;
-			Name = ParseFieldName(name, out b);
+			Name = ParseFieldName(name, out var b);
 			Boost = b ?? boost;
 			_comparisonValue = Name;
 		}
