@@ -15,7 +15,7 @@ namespace Nest
 	public class FieldCapabilitiesResponse : ResponseBase, IFieldCapabilitiesResponse
 	{
 		public FieldCapabilitiesFields Fields { get; internal set; }
-		public ShardStatistics Shards { get; internal set; }
+		//public ShardStatistics Shards { get; internal set; }
 	}
 
 	[JsonFormatter(typeof(Converter))]
@@ -78,12 +78,15 @@ namespace Nest
 		public bool Aggregatable { get; internal set; }
 
 		[DataMember(Name ="indices")]
+		[JsonFormatter(typeof(IndicesFormatter))]
 		public Indices Indices { get; internal set; }
 
 		[DataMember(Name ="non_aggregatable_indices")]
+		[JsonFormatter(typeof(IndicesFormatter))]
 		public Indices NonAggregatableIndices { get; internal set; }
 
 		[DataMember(Name ="non_searchable_indices")]
+		[JsonFormatter(typeof(IndicesFormatter))]
 		public Indices NonSearchableIndices { get; internal set; }
 
 		[DataMember(Name ="searchable")]
