@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -20,9 +21,11 @@ namespace Nest
 		string ChunkSize { get; set; }
 
 		[DataMember(Name ="compress")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? Compress { get; set; }
 
 		[DataMember(Name ="concurrent_streams")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? ConcurrentStreams { get; set; }
 
 		[DataMember(Name ="location")]

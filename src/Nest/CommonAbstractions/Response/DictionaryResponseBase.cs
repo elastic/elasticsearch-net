@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Elasticsearch.Net;
 using Utf8Json;
 using Utf8Json.Internal;
@@ -13,6 +14,7 @@ namespace Nest
 
 	public abstract class DictionaryResponseBase<TKey, TValue> : ResponseBase, IDictionaryResponse<TKey, TValue>
 	{
+		[IgnoreDataMember]
 		protected IDictionaryResponse<TKey, TValue> Self => this;
 
 		IReadOnlyDictionary<TKey, TValue> IDictionaryResponse<TKey, TValue>.BackingDictionary { get; set; } =
@@ -59,13 +61,13 @@ namespace Nest
 						case 1:
 							if (segmentReader.GetCurrentJsonToken() == JsonToken.Number)
 								statusCode = segmentReader.ReadInt32();
+							else
+								segmentReader.ReadNextBlock();
 							break;
 					}
 				}
 				else
-				{
 					segmentReader.ReadNextBlock();
-				}
 			}
 
 			return segment;
@@ -83,13 +85,12 @@ namespace Nest
 			var formatter = formatterResolver.GetFormatter<Dictionary<TKey, TValue>>();
 			var dict = formatter.Deserialize(ref segmentReader, formatterResolver);
 
-			var response = new TResponse
+			return new TResponse
 			{
 				BackingDictionary = dict,
 				Error = error,
 				StatusCode = statusCode
 			};
-			return response;
 		}
 
 		public void Serialize(ref JsonWriter writer, TResponse value, IJsonFormatterResolver formatterResolver) => throw new NotSupportedException();
