@@ -19,7 +19,7 @@ namespace Nest
 		public int SearchSegments { get; internal set; }
 
 		[DataMember(Name = "segments")]
-		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, Segment>))]
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, Segment>))]
 		public IReadOnlyDictionary<string, Segment> Segments { get; internal set; } =
 			EmptyReadOnly<string, Segment>.Dictionary;
 
@@ -27,7 +27,7 @@ namespace Nest
 		{
 			public ShardsSegment Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 			{
-				var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<ShardsSegment>();
+				var formatter = DynamicObjectResolver.AllowPrivateExcludeNullCamelCase.GetFormatter<ShardsSegment>();
 				ShardsSegment segment = null;
 
 				if (reader.GetCurrentJsonToken() == JsonToken.BeginArray)
@@ -37,6 +37,8 @@ namespace Nest
 					{
 						if (count == 1)
 							segment = formatter.Deserialize(ref reader, formatterResolver);
+						else
+							reader.ReadNextBlock();
 					}
 				}
 				else

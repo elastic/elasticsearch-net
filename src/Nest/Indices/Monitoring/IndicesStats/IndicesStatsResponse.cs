@@ -15,7 +15,7 @@ namespace Nest
 	public class IndicesStatsResponse : ResponseBase, IIndicesStatsResponse
 	{
 		[DataMember(Name ="indices")]
-		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, IndicesStats>))]
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, IndicesStats>))]
 		public IReadOnlyDictionary<string, IndicesStats> Indices { get; internal set; } = EmptyReadOnly<string, IndicesStats>.Dictionary;
 
 		[DataMember(Name ="_shards")]

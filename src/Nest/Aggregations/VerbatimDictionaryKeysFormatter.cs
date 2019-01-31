@@ -88,7 +88,7 @@ namespace Nest
 			entry.Value == null; //TODO: Check connection settings for allow nulls
 	}
 
-	public class VerbatimReadOnlyDictionaryKeysFormatter<TKey, TValue>
+	public class VerbatimInterfaceReadOnlyDictionaryKeysFormatter<TKey, TValue>
 		: VerbatimDictionaryKeysBaseFormatter<IReadOnlyDictionary<TKey, TValue>, TKey, TValue>
 	{
 		public override IReadOnlyDictionary<TKey, TValue> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
