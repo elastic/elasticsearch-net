@@ -93,7 +93,7 @@ namespace Nest
 		public string Index { get; internal set; }
 
 		[DataMember(Name ="inner_hits")]
-		[JsonFormatter(typeof(VerbatimReadOnlyDictionaryKeysFormatter<string, InnerHitsResult>))]
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, InnerHitsResult>))]
 		public IReadOnlyDictionary<string, InnerHitsResult> InnerHits { get; internal set; } =
 			EmptyReadOnly<string, InnerHitsResult>.Dictionary;
 

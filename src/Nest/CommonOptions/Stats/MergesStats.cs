@@ -33,7 +33,7 @@ namespace Nest
 		public string TotalSize { get; set; }
 
 		[DataMember(Name ="total_size_in_bytes")]
-		public string TotalSizeInBytes { get; set; }
+		public long TotalSizeInBytes { get; set; }
 
 		[DataMember(Name ="total_stopped_time")]
 		public string TotalStoppedTime { get; set; }

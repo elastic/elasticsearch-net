@@ -15,7 +15,7 @@ namespace Nest
 
 		public void Serialize(ref JsonWriter writer, SuggestDictionary<T> value, IJsonFormatterResolver formatterResolver)
 		{
-			var formatter = new VerbatimReadOnlyDictionaryKeysFormatter<string, Suggest<T>[]>();
+			var formatter = new VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, Suggest<T>[]>();
 			formatter.Serialize(ref writer, value, formatterResolver);
 		}
 	}

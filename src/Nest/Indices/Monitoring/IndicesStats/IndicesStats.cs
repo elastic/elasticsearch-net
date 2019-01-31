@@ -11,7 +11,7 @@ namespace Nest
 		public IndexStats Primaries { get; internal set; }
 
 		[DataMember(Name = "shards")]
-		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, ShardStats[]>))]
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, ShardStats[]>))]
 		public IReadOnlyDictionary<string, ShardStats[]> Shards { get; internal set; } = EmptyReadOnly<string, ShardStats[]>.Dictionary;
 
 		[DataMember(Name = "total")]
