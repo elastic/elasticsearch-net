@@ -72,7 +72,7 @@ namespace Tests.Modules.Scripting.ExecutePainlessScript
 
 	[SkipVersion("<6.4.0", "Context only tested on 6.4.0 when they were introduced")]
 	public class ExecutePainlessScriptContextApiTests
-		: ApiIntegrationTestBase<WritableCluster, IExecutePainlessScriptResponse<string>, IExecutePainlessScriptRequest,
+		: ApiIntegrationTestBase<WritableCluster, IExecutePainlessScriptResponse<double>, IExecutePainlessScriptRequest,
 			ExecutePainlessScriptDescriptor, ExecutePainlessScriptRequest>
 	{
 		private static readonly string _painlessScript = "doc['rank'].value / params.max_rank";
@@ -135,10 +135,10 @@ namespace Tests.Modules.Scripting.ExecutePainlessScript
 		protected override string UrlPath => "/_scripts/painless/_execute";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.ExecutePainlessScript<string>(f),
-			(client, f) => client.ExecutePainlessScriptAsync<string>(f),
-			(client, r) => client.ExecutePainlessScript<string>(r),
-			(client, r) => client.ExecutePainlessScriptAsync<string>(r)
+			(client, f) => client.ExecutePainlessScript<double>(f),
+			(client, f) => client.ExecutePainlessScriptAsync<double>(f),
+			(client, r) => client.ExecutePainlessScript<double>(r),
+			(client, r) => client.ExecutePainlessScriptAsync<double>(r)
 		);
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
@@ -147,10 +147,10 @@ namespace Tests.Modules.Scripting.ExecutePainlessScript
 			create.ShouldBeValid();
 		}
 
-		protected override void ExpectResponse(IExecutePainlessScriptResponse<string> response)
+		protected override void ExpectResponse(IExecutePainlessScriptResponse<double> response)
 		{
 			response.ShouldBeValid();
-			response.Result.Should().NotBeNullOrWhiteSpace();
+			response.Result.Should().BeGreaterOrEqualTo(0);
 		}
 
 		private class ScriptDocument
