@@ -68,10 +68,10 @@ namespace Nest
 	}
 
 	internal class ResolvableDictionaryFormatter<TKey, TValue>
-		: ResolvableDictionaryFormatterBase<ResolvableDictionaryProxy<TKey, TValue>, TKey, TValue>
+		: ResolvableDictionaryFormatterBase<IReadOnlyDictionary<TKey, TValue>, TKey, TValue>
 		where TKey : IUrlParameter
 	{
-		protected override ResolvableDictionaryProxy<TKey, TValue> Create(IConnectionSettingsValues settings, Dictionary<TKey, TValue> dictionary) =>
+		protected override IReadOnlyDictionary<TKey, TValue> Create(IConnectionSettingsValues settings, Dictionary<TKey, TValue> dictionary) =>
 			new ResolvableDictionaryProxy<TKey, TValue>(settings, dictionary);
 	}
 
