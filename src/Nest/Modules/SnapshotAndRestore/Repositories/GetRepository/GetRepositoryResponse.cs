@@ -5,7 +5,7 @@ using Utf8Json;
 namespace Nest
 {
 	[InterfaceDataContract]
-	[JsonFormatter(typeof(GetRepositoryResponseFormatter))]
+	[ReadAs(typeof(GetRepositoryResponse))]
 	public interface IGetRepositoryResponse : IResponse
 	{
 		IReadOnlyDictionary<string, ISnapshotRepository> Repositories { get; }
@@ -22,6 +22,7 @@ namespace Nest
 	}
 
 	[DataContract]
+	[JsonFormatter(typeof(GetRepositoryResponseFormatter))]
 	public class GetRepositoryResponse : ResponseBase, IGetRepositoryResponse
 	{
 		public IReadOnlyDictionary<string, ISnapshotRepository> Repositories { get; internal set; } =

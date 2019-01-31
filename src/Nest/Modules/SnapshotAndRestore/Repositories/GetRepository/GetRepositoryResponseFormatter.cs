@@ -5,9 +5,9 @@ using Utf8Json.Resolvers;
 
 namespace Nest
 {
-	internal class GetRepositoryResponseFormatter : IJsonFormatter<IGetRepositoryResponse>
+	internal class GetRepositoryResponseFormatter : IJsonFormatter<GetRepositoryResponse>
 	{
-		public IGetRepositoryResponse Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		public GetRepositoryResponse Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var response = new GetRepositoryResponse();
 
@@ -19,15 +19,18 @@ namespace Nest
 
 			var segmentReader = new JsonReader(segment.Array, segment.Offset);
 			var count = 0;
-			var d = new Dictionary<string, ISnapshotRepository>();
+			var repositories = new Dictionary<string, ISnapshotRepository>();
 
 			while (segmentReader.ReadIsInObject(ref count))
 			{
 				var name = segmentReader.ReadPropertyName();
 				if (name == "error" || name == "status")
+				{
+					segmentReader.ReadNextBlock();
 					continue;
+				};
 
-				var snapshotSegment = reader.ReadNextBlockSegment();
+				var snapshotSegment = segmentReader.ReadNextBlockSegment();
 				var snapshotSegmentReader = new JsonReader(snapshotSegment.Array, snapshotSegment.Offset);
 				var segmentCount = 0;
 
@@ -45,6 +48,9 @@ namespace Nest
 						case "settings":
 							settings = snapshotSegmentReader.ReadNextBlockSegment();
 							break;
+						default:
+							snapshotSegmentReader.ReadNextBlock();
+							break;
 					}
 				}
 
@@ -52,32 +58,32 @@ namespace Nest
 				{
 					case "fs":
 						var fs = GetRepository<FileSystemRepository, FileSystemRepositorySettings>(settings, formatterResolver);
-						d.Add(name, fs);
+						repositories.Add(name, fs);
 						break;
 					case "url":
 						var url = GetRepository<ReadOnlyUrlRepository, ReadOnlyUrlRepositorySettings>(settings, formatterResolver);
-						d.Add(name, url);
+						repositories.Add(name, url);
 						break;
 					case "azure":
 						var azure = GetRepository<AzureRepository, AzureRepositorySettings>(settings, formatterResolver);
-						d.Add(name, azure);
+						repositories.Add(name, azure);
 						break;
 					case "s3":
 						var s3 = GetRepository<S3Repository, S3RepositorySettings>(settings, formatterResolver);
-						d.Add(name, s3);
+						repositories.Add(name, s3);
 						break;
 					case "hdfs":
 						var hdfs = GetRepository<HdfsRepository, HdfsRepositorySettings>(settings, formatterResolver);
-						d.Add(name, hdfs);
+						repositories.Add(name, hdfs);
 						break;
 				}
 			}
 
-			response.Repositories = d;
+			response.Repositories = repositories;
 			return response;
 		}
 
-		public void Serialize(ref JsonWriter writer, IGetRepositoryResponse value, IJsonFormatterResolver formatterResolver)
+		public void Serialize(ref JsonWriter writer, GetRepositoryResponse value, IJsonFormatterResolver formatterResolver)
 		{
 			var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IGetRepositoryResponse>();
 			formatter.Serialize(ref writer, value, formatterResolver);
@@ -88,14 +94,13 @@ namespace Nest
 			where TSettings : IRepositorySettings
 		{
 			if (settings == default)
-				return (TRepository)typeof(TRepository).CreateInstance();
+				return typeof(TRepository).CreateInstance<TRepository>();
 
 			var formatter = formatterResolver.GetFormatter<TSettings>();
-
 			var reader = new JsonReader(settings.Array, settings.Offset);
 			var resolvedSettings = formatter.Deserialize(ref reader, formatterResolver);
 
-			return (TRepository)typeof(TRepository).CreateInstance(resolvedSettings);
+			return typeof(TRepository).CreateInstance<TRepository>(resolvedSettings);
 		}
 	}
 }
