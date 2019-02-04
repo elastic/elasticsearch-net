@@ -50,7 +50,7 @@ namespace ApiGenerator.Domain
 				//make sure source_enabled takes a boolean only
 				if (preferredName == "source_enabled") kv.Value.Type = "boolean";
 
-				patchedParams.Add(preferredName, kv.Value);
+				patchedParams[preferredName] = kv.Value;
 			}
 
 			return patchedParams;
