@@ -25,7 +25,7 @@ namespace Nest
 	public class TypeFieldMappings
 	{
 		[DataMember(Name = "mappings")]
-		[JsonFormatter(typeof(ResolvableDictionaryFormatter<TypeName, FieldMappingProperties>))]
+		[JsonFormatter(typeof(ResolvableReadOnlyDictionaryFormatter<TypeName, FieldMappingProperties>))]
 		public IReadOnlyDictionary<TypeName, FieldMappingProperties> Mappings { get; internal set; } =
 			EmptyReadOnly<TypeName, FieldMappingProperties>.Dictionary;
 	}

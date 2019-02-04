@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -11,7 +12,8 @@ namespace Nest
 		/// Determines whether overlap tokens (tokens with 0 position increment) are ignored when computing norm.
 		/// By default this is <c>true</c>, meaning overlap tokens do not count when computing norms.
 		/// </summary>
-		[DataMember(Name ="discount_overlaps")]
+		[DataMember(Name = "discount_overlaps")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? DiscountOverlaps { get; set; }
 	}
 

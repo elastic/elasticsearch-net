@@ -1,20 +1,19 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
-	public interface IIndicesResponse : IResponse
+	[InterfaceDataContract]
+	public interface IIndicesResponse : IAcknowledgedResponse
 	{
-		bool Acknowledged { get; }
+		[DataMember(Name = "_shards")]
 		ShardStatistics ShardsHit { get; }
 	}
 
 	[DataContract]
-	public abstract class IndicesResponseBase : ResponseBase, IIndicesResponse
+	public abstract class IndicesResponseBase : AcknowledgedResponseBase, IIndicesResponse
 	{
-		[DataMember(Name ="acknowledged")]
-		public bool Acknowledged { get; private set; }
-
-		[DataMember(Name ="_shards")]
-		public ShardStatistics ShardsHit { get; private set; }
+		[DataMember(Name = "_shards")]
+		public ShardStatistics ShardsHit { get; internal set; }
 	}
 }

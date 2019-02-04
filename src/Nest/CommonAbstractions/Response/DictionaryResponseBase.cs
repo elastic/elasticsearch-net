@@ -23,55 +23,11 @@ namespace Nest
 
 	internal class DictionaryResponseFormatterHelpers
 	{
-		private static readonly AutomataDictionary AutomataDictionary = new AutomataDictionary
+		internal static readonly AutomataDictionary ServerErrorFields = new AutomataDictionary
 		{
 			{ "error", 0 },
 			{ "status", 1 }
 		};
-
-		public static ArraySegment<byte> ReadServerErrorFirst(
-			ref JsonReader reader,
-			IJsonFormatterResolver formatterResolver,
-			out Error error,
-			out int? statusCode
-		)
-		{
-			var segment = reader.ReadNextBlockSegment();
-			var segmentReader = new JsonReader(segment.Array, segment.Offset);
-			var count = 0;
-			error = null;
-			statusCode = null;
-
-			while (segmentReader.ReadIsInObject(ref count))
-			{
-				var propertyName = segmentReader.ReadPropertyNameSegmentRaw();
-				if (AutomataDictionary.TryGetValue(propertyName, out var value))
-				{
-					switch (value)
-					{
-						case 0:
-							if (segmentReader.GetCurrentJsonToken() == JsonToken.String)
-								error = new Error { Reason = segmentReader.ReadString() };
-							else
-							{
-								var formatter = formatterResolver.GetFormatter<Error>();
-								error = formatter.Deserialize(ref segmentReader, formatterResolver);
-							}
-							break;
-						case 1:
-							if (segmentReader.GetCurrentJsonToken() == JsonToken.Number)
-								statusCode = segmentReader.ReadInt32();
-							else
-								segmentReader.ReadNextBlock();
-							break;
-					}
-				}
-				else
-					segmentReader.ReadNextBlock();
-			}
-
-			return segment;
-		}
 	}
 
 	internal class DictionaryResponseFormatter<TResponse, TKey, TValue> : IJsonFormatter<TResponse>
@@ -79,18 +35,48 @@ namespace Nest
 	{
 		public TResponse Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var segment = DictionaryResponseFormatterHelpers.ReadServerErrorFirst(ref reader, formatterResolver, out var error,
-				out var statusCode);
-			var segmentReader = new JsonReader(segment.Array, segment.Offset);
-			var formatter = formatterResolver.GetFormatter<Dictionary<TKey, TValue>>();
-			var dict = formatter.Deserialize(ref segmentReader, formatterResolver);
+			var response = new TResponse();
+			var keyFormatter = formatterResolver.GetFormatter<TKey>();
+			var valueFormatter = formatterResolver.GetFormatter<TValue>();
+			var dictionary = new Dictionary<TKey, TValue>();
+			var count = 0;
 
-			return new TResponse
+			while (reader.ReadIsInObject(ref count))
 			{
-				BackingDictionary = dict,
-				Error = error,
-				StatusCode = statusCode
-			};
+				var property = reader.ReadPropertyNameSegmentRaw();
+				if (DictionaryResponseFormatterHelpers.ServerErrorFields.TryGetValue(property, out var errorValue))
+				{
+					switch (errorValue)
+					{
+						case 0:
+							if (reader.GetCurrentJsonToken() == JsonToken.String)
+								response.Error = new Error { Reason = reader.ReadString() };
+							else
+							{
+								var formatter = formatterResolver.GetFormatter<Error>();
+								response.Error  = formatter.Deserialize(ref reader, formatterResolver);
+							}
+							break;
+						case 1:
+							if (reader.GetCurrentJsonToken() == JsonToken.Number)
+								response.StatusCode = reader.ReadInt32();
+							else
+								reader.ReadNextBlock();
+							break;
+					}
+				}
+				else
+				{
+					// include opening string quote in reader (offset - 1)
+					var propertyReader = new JsonReader(property.Array, property.Offset - 1);
+					var key = keyFormatter.Deserialize(ref propertyReader, formatterResolver);
+					var value = valueFormatter.Deserialize(ref reader, formatterResolver);
+					dictionary.Add(key, value);
+				}
+			}
+
+			response.BackingDictionary = dictionary;
+			return response;
 		}
 
 		public void Serialize(ref JsonWriter writer, TResponse value, IJsonFormatterResolver formatterResolver) => throw new NotSupportedException();

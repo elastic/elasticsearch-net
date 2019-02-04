@@ -16,7 +16,6 @@ namespace Nest
 	internal class NestFormatterResolver : IJsonFormatterResolver, IJsonFormatterResolverWithSettings
 	{
 		private readonly IJsonFormatter<object> _fallbackFormatter;
-
 		private readonly InnerResolver _innerFormatterResolver;
 
 		public NestFormatterResolver(IConnectionSettingsValues settings)
@@ -43,9 +42,9 @@ namespace Nest
 					new QueryContainerCollectionFormatter(),
 					new QueryContainerListFormatter(),
 					new SimpleQueryStringFlagsFormatter(),
-					// TODO: condition on these to only take effect when StringTimeSpanAttribute not present.
+					// TODO: condition on TimeSpanToStringFormatter and NullableTimeSpanToStringFormatter to only take effect when StringTimeSpanAttribute is not present.
 					new TimeSpanToStringFormatter(),
-					new NullableTimeSpanFormatter(),
+					new NullableTimeSpanToStringFormatter(),
 					new JsonNetCompatibleUriFormatter(),
 				}, new IJsonFormatterResolver[0]),
 				BuiltinResolver.Instance, // Builtin primitives
@@ -88,7 +87,7 @@ namespace Nest
 
 			private IJsonProperty GetMapping(MemberInfo member)
 			{
-				// TODO: Skip calling this method for NEST and Elasticsearch.Net types
+				// TODO: Skip calling this method for NEST and Elasticsearch.Net types, at the type level
 
 				if (!_settings.PropertyMappings.TryGetValue(member, out var propertyMapping))
 					propertyMapping = ElasticsearchPropertyAttributeBase.From(member);
@@ -102,6 +101,9 @@ namespace Nest
 				var overrideIgnore = propertyMapping?.Ignore ?? serializerMapping?.Ignore;
 				if (overrideIgnore.HasValue)
 					property.Ignore = overrideIgnore.Value;
+
+				if (propertyMapping != null || serializerMapping != null)
+					property.AllowPrivate = true;
 
 				return property;
 			}

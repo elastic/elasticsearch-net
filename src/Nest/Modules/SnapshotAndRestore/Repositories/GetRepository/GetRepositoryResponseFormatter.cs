@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Elasticsearch.Net;
 using Utf8Json;
 using Utf8Json.Resolvers;
 
@@ -10,72 +11,83 @@ namespace Nest
 		public GetRepositoryResponse Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var response = new GetRepositoryResponse();
-
-			var segment = DictionaryResponseFormatterHelpers
-				.ReadServerErrorFirst(ref reader, formatterResolver, out var error, out var statusCode);
-
-			response.Error = error;
-			response.StatusCode = statusCode;
-
-			var segmentReader = new JsonReader(segment.Array, segment.Offset);
-			var count = 0;
 			var repositories = new Dictionary<string, ISnapshotRepository>();
+			var count = 0;
 
-			while (segmentReader.ReadIsInObject(ref count))
+			while (reader.ReadIsInObject(ref count))
 			{
-				var name = segmentReader.ReadPropertyName();
-				if (name == "error" || name == "status")
+				var property = reader.ReadPropertyNameSegmentRaw();
+				if (DictionaryResponseFormatterHelpers.ServerErrorFields.TryGetValue(property, out var errorValue))
 				{
-					segmentReader.ReadNextBlock();
-					continue;
-				};
-
-				var snapshotSegment = segmentReader.ReadNextBlockSegment();
-				var snapshotSegmentReader = new JsonReader(snapshotSegment.Array, snapshotSegment.Offset);
-				var segmentCount = 0;
-
-				string repositoryType = null;
-				ArraySegment<byte> settings = default;
-
-				while (snapshotSegmentReader.ReadIsInObject(ref segmentCount))
-				{
-					var propertyName = snapshotSegmentReader.ReadPropertyName();
-					switch (propertyName)
+					switch (errorValue)
 					{
-						case "type":
-							repositoryType = snapshotSegmentReader.ReadString();
+						case 0:
+							if (reader.GetCurrentJsonToken() == JsonToken.String)
+								response.Error = new Error { Reason = reader.ReadString() };
+							else
+							{
+								var formatter = formatterResolver.GetFormatter<Error>();
+								response.Error = formatter.Deserialize(ref reader, formatterResolver);
+							}
 							break;
-						case "settings":
-							settings = snapshotSegmentReader.ReadNextBlockSegment();
-							break;
-						default:
-							snapshotSegmentReader.ReadNextBlock();
+						case 1:
+							if (reader.GetCurrentJsonToken() == JsonToken.Number)
+								response.StatusCode = reader.ReadInt32();
+							else
+								reader.ReadNextBlock();
 							break;
 					}
 				}
-
-				switch (repositoryType)
+				else
 				{
-					case "fs":
-						var fs = GetRepository<FileSystemRepository, FileSystemRepositorySettings>(settings, formatterResolver);
-						repositories.Add(name, fs);
-						break;
-					case "url":
-						var url = GetRepository<ReadOnlyUrlRepository, ReadOnlyUrlRepositorySettings>(settings, formatterResolver);
-						repositories.Add(name, url);
-						break;
-					case "azure":
-						var azure = GetRepository<AzureRepository, AzureRepositorySettings>(settings, formatterResolver);
-						repositories.Add(name, azure);
-						break;
-					case "s3":
-						var s3 = GetRepository<S3Repository, S3RepositorySettings>(settings, formatterResolver);
-						repositories.Add(name, s3);
-						break;
-					case "hdfs":
-						var hdfs = GetRepository<HdfsRepository, HdfsRepositorySettings>(settings, formatterResolver);
-						repositories.Add(name, hdfs);
-						break;
+					var name = property.Utf8String();
+					var snapshotSegment = reader.ReadNextBlockSegment();
+					var snapshotSegmentReader = new JsonReader(snapshotSegment.Array, snapshotSegment.Offset);
+					var segmentCount = 0;
+
+					string repositoryType = null;
+					ArraySegment<byte> settings = default;
+
+					while (snapshotSegmentReader.ReadIsInObject(ref segmentCount))
+					{
+						var propertyName = snapshotSegmentReader.ReadPropertyName();
+						switch (propertyName)
+						{
+							case "type":
+								repositoryType = snapshotSegmentReader.ReadString();
+								break;
+							case "settings":
+								settings = snapshotSegmentReader.ReadNextBlockSegment();
+								break;
+							default:
+								snapshotSegmentReader.ReadNextBlock();
+								break;
+						}
+					}
+
+					switch (repositoryType)
+					{
+						case "fs":
+							var fs = GetRepository<FileSystemRepository, FileSystemRepositorySettings>(settings, formatterResolver);
+							repositories.Add(name, fs);
+							break;
+						case "url":
+							var url = GetRepository<ReadOnlyUrlRepository, ReadOnlyUrlRepositorySettings>(settings, formatterResolver);
+							repositories.Add(name, url);
+							break;
+						case "azure":
+							var azure = GetRepository<AzureRepository, AzureRepositorySettings>(settings, formatterResolver);
+							repositories.Add(name, azure);
+							break;
+						case "s3":
+							var s3 = GetRepository<S3Repository, S3RepositorySettings>(settings, formatterResolver);
+							repositories.Add(name, s3);
+							break;
+						case "hdfs":
+							var hdfs = GetRepository<HdfsRepository, HdfsRepositorySettings>(settings, formatterResolver);
+							repositories.Add(name, hdfs);
+							break;
+					}
 				}
 			}
 
