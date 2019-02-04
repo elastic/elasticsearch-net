@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -12,6 +13,7 @@ namespace Nest
 		/// The lambda parameter
 		/// </summary>
 		[DataMember(Name ="lambda")]
+		[JsonFormatter(typeof(NullableStringDoubleFormatter))]
 		double? Lambda { get; set; }
 	}
 

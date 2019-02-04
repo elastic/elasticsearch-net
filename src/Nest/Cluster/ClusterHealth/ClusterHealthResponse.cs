@@ -34,7 +34,7 @@ namespace Nest
 		public string ClusterName { get; internal set; }
 
 		[DataMember(Name = "indices")]
-		[JsonFormatter(typeof(ResolvableDictionaryFormatter<IndexName, IndexHealthStats>))]
+		[JsonFormatter(typeof(ResolvableReadOnlyDictionaryFormatter<IndexName, IndexHealthStats>))]
 		public IReadOnlyDictionary<IndexName, IndexHealthStats> Indices { get; internal set; } =
 			EmptyReadOnly<IndexName, IndexHealthStats>.Dictionary;
 

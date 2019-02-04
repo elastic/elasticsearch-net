@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -19,18 +20,21 @@ namespace Nest
 		/// The maximum shingle size. Defaults to 2.
 		/// </summary>
 		[DataMember(Name ="max_shingle_size")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? MaxShingleSize { get; set; }
 
 		/// <summary>
 		/// The minimum shingle size. Defaults to 2.
 		/// </summary>
 		[DataMember(Name ="min_shingle_size")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? MinShingleSize { get; set; }
 
 		/// <summary>
 		/// If true the output will contain the input tokens (unigrams) as well as the shingles. Defaults to true.
 		/// </summary>
 		[DataMember(Name ="output_unigrams")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? OutputUnigrams { get; set; }
 
 		/// <summary>
@@ -38,6 +42,7 @@ namespace Nest
 		/// <para>Note if output_unigrams is set to true this setting has no effect. Defaults to false.</para>
 		/// </summary>
 		[DataMember(Name ="output_unigrams_if_no_shingles")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? OutputUnigramsIfNoShingles { get; set; }
 
 		/// <summary>

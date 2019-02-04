@@ -1,16 +1,17 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
+	[InterfaceDataContract]
 	public interface IAcknowledgedResponse : IResponse
 	{
+		[DataMember(Name = "acknowledged")]
 		bool Acknowledged { get; }
 	}
 
-	[DataContract]
 	public abstract class AcknowledgedResponseBase : ResponseBase, IAcknowledgedResponse
 	{
-		[DataMember(Name ="acknowledged")]
 		public bool Acknowledged { get; internal set; }
 	}
 }

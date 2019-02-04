@@ -11,5 +11,6 @@ namespace Nest
 		public string Name { get; set; }
 		public int Order { get; } = -1;
 		public bool Ignore { get; set; }
+		public bool? AllowPrivate { get; set; } = true;
 	}
 }
