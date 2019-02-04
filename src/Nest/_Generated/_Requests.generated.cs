@@ -211,9 +211,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
 	}
@@ -1214,6 +1214,10 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+		///<summary>Wait for the metadata version to be equal or greater than the specified metadata version</summary>
+		public long? WaitForMetadataVersion { get => Q<long?>("wait_for_metadata_version"); set => Q("wait_for_metadata_version", value); }
+		///<summary>The maximum time to wait for wait_for_metadata_version before timing out</summary>
+		public Time WaitForTimeout { get => Q<Time>("wait_for_timeout"); set => Q("wait_for_timeout", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
@@ -1273,6 +1277,8 @@ namespace Nest
 		// Request parameters
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -1327,6 +1333,8 @@ namespace Nest
 		// Request parameters
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -1653,9 +1661,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
@@ -1747,9 +1755,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
@@ -2004,6 +2012,10 @@ namespace Nest
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+		///<summary>only perform the delete operation if the last operation that has changed the document has the specified sequence number</summary>
+		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+		///<summary>only perform the delete operation if the last operation that has changed the document has the specified primary term</summary>
+		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -2049,6 +2061,10 @@ namespace Nest
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+		///<summary>only perform the delete operation if the last operation that has changed the document has the specified sequence number</summary>
+		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+		///<summary>only perform the delete operation if the last operation that has changed the document has the specified primary term</summary>
+		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -2291,9 +2307,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -2337,9 +2353,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -2457,9 +2473,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IFieldCapabilitiesRequest : IRequest<FieldCapabilitiesRequestParameters>
@@ -2673,18 +2689,6 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetBasicLicenseStatusRequest : IRequest<GetBasicLicenseStatusRequestParameters>
-	{
-	}
-	///<summary>Request parameters for XpackLicenseGetBasicStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
-	public partial class GetBasicLicenseStatusRequest : PlainRequestBase<GetBasicLicenseStatusRequestParameters>, IGetBasicLicenseStatusRequest
-	{
-		protected IGetBasicLicenseStatusRequest Self => this;
-		// values part of the url path
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetAutoFollowPatternRequest : IRequest<GetAutoFollowPatternRequestParameters>
 	{
 		Name Name { get; }
@@ -2700,6 +2704,18 @@ namespace Nest
 		public GetAutoFollowPatternRequest(Name name) : base(r=>r.Optional("name", name)){}
 		// values part of the url path
 		Name IGetAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetBasicLicenseStatusRequest : IRequest<GetBasicLicenseStatusRequestParameters>
+	{
+	}
+	///<summary>Request parameters for XpackLicenseGetBasicStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	public partial class GetBasicLicenseStatusRequest : PlainRequestBase<GetBasicLicenseStatusRequestParameters>, IGetBasicLicenseStatusRequest
+	{
+		protected IGetBasicLicenseStatusRequest Self => this;
+		// values part of the url path
 
 		// Request parameters
 	}
@@ -3633,6 +3649,10 @@ namespace Nest
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
+		///<summary>only perform the index operation if the last operation that has changed the document has the specified sequence number</summary>
+		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+		///<summary>only perform the index operation if the last operation that has changed the document has the specified primary term</summary>
+		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
 	}
@@ -3862,9 +3882,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMultiSearchRequest : IRequest<MultiSearchRequestParameters>
@@ -3908,6 +3928,11 @@ namespace Nest
 		/// on the cluster in order to limit the number of concurrent shard requests
 		///</summary>
 		public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+		///<summary>
+		/// This parameter is ignored in this version. It is used in the next major version to control whether the rest response should render the
+		/// total.hits as an object or a number
+		///</summary>
+		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMultiSearchTemplateRequest : IRequest<MultiSearchTemplateRequestParameters>
@@ -3939,6 +3964,11 @@ namespace Nest
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
 		public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
+		///<summary>
+		/// This parameter is ignored in this version. It is used in the next major version to control whether the rest response should render the
+		/// total.hits as an object or a number
+		///</summary>
+		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMultiTermVectorsRequest : IRequest<MultiTermVectorsRequestParameters>
@@ -4694,7 +4724,7 @@ namespace Nest
 	{
 		NodeIds NodeId { get; }
 	}
-	///<summary>Request parameters for NodesReloadSecureSettingsForAll <pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.5/secure-settings.html#reloadable-secure-settings</pre></summary>
+	///<summary>Request parameters for NodesReloadSecureSettingsForAll <pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.x/secure-settings.html#reloadable-secure-settings</pre></summary>
 	public partial class ReloadSecureSettingsRequest : PlainRequestBase<ReloadSecureSettingsRequestParameters>, IReloadSecureSettingsRequest
 	{
 		protected IReloadSecureSettingsRequest Self => this;
@@ -4867,6 +4897,8 @@ namespace Nest
 		TypeName IRollupSearchRequest.Type => Self.RouteValues.Get<TypeName>("type");
 
 		// Request parameters
+		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
+		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRootNodeInfoRequest : IRequest<RootNodeInfoRequestParameters>
@@ -4891,6 +4923,11 @@ namespace Nest
 		// values part of the url path
 
 		// Request parameters
+		///<summary>
+		/// This parameter is ignored in this version. It is used in the next major version to control whether the rest response should render the
+		/// total.hits as an object or a number
+		///</summary>
+		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISearchRequest : IRequest<SearchRequestParameters>
@@ -4926,6 +4963,8 @@ namespace Nest
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -4985,6 +5024,11 @@ namespace Nest
 		/// disjoint.
 		///</summary>
 		public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
+		///<summary>
+		/// This parameter is ignored in this version. It is used in the next major version to control whether the rest response should render the
+		/// total.hits as an object or a number
+		///</summary>
+		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 	}	///<summary>Request parameters for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
 	public partial class SearchRequest : PlainRequestBase<SearchRequestParameters>, ISearchRequest
 	{
@@ -5013,6 +5057,8 @@ namespace Nest
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -5072,6 +5118,11 @@ namespace Nest
 		/// disjoint.
 		///</summary>
 		public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
+		///<summary>
+		/// This parameter is ignored in this version. It is used in the next major version to control whether the rest response should render the
+		/// total.hits as an object or a number
+		///</summary>
+		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISearchShardsRequest : IRequest<SearchShardsRequestParameters>
@@ -5175,6 +5226,8 @@ namespace Nest
 		// Request parameters
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -5203,6 +5256,11 @@ namespace Nest
 		public bool? Profile { get => Q<bool?>("profile"); set => Q("profile", value); }
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
+		///<summary>
+		/// This parameter is ignored in this version. It is used in the next major version to control whether the rest response should render the
+		/// total.hits as an object or a number
+		///</summary>
+		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISegmentsRequest : IRequest<SegmentsRequestParameters>
@@ -5386,9 +5444,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -5430,9 +5488,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -5487,9 +5545,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -5531,9 +5589,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -5679,6 +5737,10 @@ namespace Nest
 		Id IStopRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
 
 		// Request parameters
+		///<summary>True if the API should block until the job has fully stopped, false if should be executed async. Defaults to false.</summary>
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+		///<summary>Block for (at maximum) the specified duration while waiting for the job to stop. Defaults to 30s.</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStopWatcherRequest : IRequest<StopWatcherRequestParameters>
@@ -5919,9 +5981,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
@@ -6017,9 +6079,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>

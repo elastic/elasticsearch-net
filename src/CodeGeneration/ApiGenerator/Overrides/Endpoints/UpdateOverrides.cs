@@ -7,7 +7,9 @@ namespace ApiGenerator.Overrides.Endpoints
 	{
 		public override IEnumerable<string> SkipQueryStringParams => new[]
 		{
-			"fields", "_source_include", "_source_exclude"
+			"fields",
+			"_source_include", "_source_exclude",
+			"_source_includes", "_source_excludes"
 		};
 	}
 }
