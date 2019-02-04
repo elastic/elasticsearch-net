@@ -3,7 +3,7 @@ using Utf8Json;
 
 namespace Nest
 {
-	internal class NullableTimeSpanToStringConverter : IJsonFormatter<TimeSpan?>
+	internal class NullableTimeSpanToStringFormatter : IJsonFormatter<TimeSpan?>
 	{
 		public TimeSpan? Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{

@@ -10,7 +10,7 @@ namespace Nest
 		public QueryContainer Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var token = reader.GetCurrentJsonToken();
-			var queryFormatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<QueryContainer>();
+			var queryFormatter = DynamicObjectResolver.AllowPrivateExcludeNullCamelCase.GetFormatter<QueryContainer>();
 
 			if (token == JsonToken.BeginObject)
 				return queryFormatter.Deserialize(ref reader, formatterResolver);

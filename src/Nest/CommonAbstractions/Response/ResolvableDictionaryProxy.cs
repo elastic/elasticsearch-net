@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Elasticsearch.Net;
 using Utf8Json;
+using Utf8Json.Internal;
 
 namespace Nest
 {
@@ -67,7 +68,7 @@ namespace Nest
 		protected abstract TDictionary Create(IConnectionSettingsValues settings, Dictionary<TKey, TValue> dictionary);
 	}
 
-	internal class ResolvableDictionaryFormatter<TKey, TValue>
+	internal class ResolvableReadOnlyDictionaryFormatter<TKey, TValue>
 		: ResolvableDictionaryFormatterBase<IReadOnlyDictionary<TKey, TValue>, TKey, TValue>
 		where TKey : IUrlParameter
 	{
@@ -81,18 +82,49 @@ namespace Nest
 	{
 		public TResponse Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var arraySegment = DictionaryResponseFormatterHelpers
-				.ReadServerErrorFirst(ref reader, formatterResolver, out var error, out var statusCode);
-
 			var response = new TResponse();
-			var formatter = formatterResolver.GetFormatter<Dictionary<TKey, TValue>>();
-			var segmentReader = new JsonReader(arraySegment.Array, arraySegment.Offset);
-			var d = formatter.Deserialize(ref segmentReader, formatterResolver);
+			var dictionary = new Dictionary<TKey, TValue>();
+			var count = 0;
+			var keyFormatter = formatterResolver.GetFormatter<TKey>();
+			var valueFormatter = formatterResolver.GetFormatter<TValue>();
+
+			while (reader.ReadIsInObject(ref count))
+			{
+				var property = reader.ReadPropertyNameSegmentRaw();
+				if (DictionaryResponseFormatterHelpers.ServerErrorFields.TryGetValue(property, out var errorValue))
+				{
+					switch (errorValue)
+					{
+						case 0:
+							if (reader.GetCurrentJsonToken() == JsonToken.String)
+								response.Error = new Error { Reason = reader.ReadString() };
+							else
+							{
+								var formatter = formatterResolver.GetFormatter<Error>();
+								response.Error = formatter.Deserialize(ref reader, formatterResolver);
+							}
+							break;
+						case 1:
+							if (reader.GetCurrentJsonToken() == JsonToken.Number)
+								response.StatusCode = reader.ReadInt32();
+							else
+								reader.ReadNextBlock();
+							break;
+					}
+				}
+				else
+				{
+					// include opening string quote in reader (offset - 1)
+					var propertyReader = new JsonReader(property.Array, property.Offset - 1);
+					var key = keyFormatter.Deserialize(ref propertyReader, formatterResolver);
+					var value = valueFormatter.Deserialize(ref reader, formatterResolver);
+					dictionary.Add(key, value);
+				}
+			}
+
 			var settings = formatterResolver.GetConnectionSettings();
-			var dict = new ResolvableDictionaryProxy<TKey, TValue>(settings, d);
-			response.BackingDictionary = dict;
-			response.Error = error;
-			response.StatusCode = statusCode;
+			var resolvableDictionary = new ResolvableDictionaryProxy<TKey, TValue>(settings, dictionary);
+			response.BackingDictionary = resolvableDictionary;
 			return response;
 		}
 

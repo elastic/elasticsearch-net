@@ -19,6 +19,8 @@ namespace Nest
 
 		public int Order { get; } = -2;
 
+		public bool? AllowPrivate { get; set; } = true;
+
 		IDictionary<string, object> IProperty.LocalMetadata { get; set; }
 
 		PropertyName IProperty.Name { get; set; }

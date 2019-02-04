@@ -1,7 +1,8 @@
 using System;
 using Utf8Json;
 
-namespace Nest {
+namespace Nest
+{
 	internal class TimeSpanToStringFormatter : IJsonFormatter<TimeSpan>
 	{
 		public TimeSpan Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -16,5 +17,10 @@ namespace Nest {
 		}
 
 		public void Serialize(ref JsonWriter writer, TimeSpan value, IJsonFormatterResolver formatterResolver) => writer.WriteInt64(value.Ticks);
+	}
+
+	internal class TimeSpanToStringFormatterResolver : IJsonFormatterResolver
+	{
+		public IJsonFormatter<T> GetFormatter<T>() => null;
 	}
 }

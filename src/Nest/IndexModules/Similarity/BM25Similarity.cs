@@ -1,29 +1,34 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// BM25 Similarity. Introduced in Stephen E. Robertson, Steve Walker, Susan Jones, Micheline Hancock-Beaulieu,
-	/// and Mike Gatford. Okapi at TREC-3. In Proceedings of the Third Text Retrieval Conference (TREC 1994). Gaithersburg, USA, November 1994.
+	/// and Mike Gatford. Okapi at TREC-3. In Proceedings of the Third Text Retrieval Conference (TREC 1994). Gaithersburg,
+	/// USA, November 1994.
 	/// </summary>
 	public interface IBM25Similarity : ISimilarity
 	{
 		/// <summary>
 		/// Controls to what degree document length normalizes tf values.
 		/// </summary>
-		[DataMember(Name ="b")]
+		[DataMember(Name = "b")]
+		[JsonFormatter(typeof(NullableStringDoubleFormatter))]
 		double? B { get; set; }
 
 		/// <summary>
 		/// Sets whether overlap tokens (Tokens with 0 position increment) are ignored when computing norm.
 		/// </summary>
-		[DataMember(Name ="discount_overlaps")]
+		[DataMember(Name = "discount_overlaps")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? DiscountOverlaps { get; set; }
 
 		/// <summary>
 		/// Controls non-linear term frequency normalization (saturation).
 		/// </summary>
-		[DataMember(Name ="k1")]
+		[DataMember(Name = "k1")]
+		[JsonFormatter(typeof(NullableStringDoubleFormatter))]
 		double? K1 { get; set; }
 	}
 

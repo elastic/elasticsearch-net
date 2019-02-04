@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -11,6 +12,7 @@ namespace Nest
 		/// The mu parameter. Defaults to 2000.
 		/// </summary>
 		[DataMember(Name ="mu")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? Mu { get; set; }
 	}
 

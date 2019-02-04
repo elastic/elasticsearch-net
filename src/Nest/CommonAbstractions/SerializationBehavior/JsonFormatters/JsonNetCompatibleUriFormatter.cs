@@ -26,6 +26,7 @@ namespace Nest
 				case JsonToken.String:
 					return new Uri(reader.ReadString(), UriKind.RelativeOrAbsolute);
 				case JsonToken.Null:
+					reader.ReadNext();
 					return null;
 				default:
 					throw new Exception($"Cannot deserialize {typeof(Uri).FullName} from {token}");

@@ -28,7 +28,7 @@ namespace Nest
 		public string Index { get; internal set; }
 
 		[DataMember(Name ="term_vectors")]
-		[JsonFormatter(typeof(ResolvableDictionaryFormatter<Field, TermVector>))]
+		[JsonFormatter(typeof(ResolvableReadOnlyDictionaryFormatter<Field, TermVector>))]
 		public IReadOnlyDictionary<Field, TermVector> TermVectors { get; internal set; } = EmptyReadOnly<Field, TermVector>.Dictionary;
 
 		[DataMember(Name ="took")]
