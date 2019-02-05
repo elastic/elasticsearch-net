@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -17,6 +18,7 @@ namespace Nest
 		/// Which group to extract into tokens. Defaults to -1 (split).
 		/// </summary>
 		[DataMember(Name = "group")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? Group { get; set; }
 
 		/// <summary>

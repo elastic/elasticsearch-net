@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -11,6 +12,7 @@ namespace Nest
 		/// The term buffer size. Defaults to 256.
 		/// </summary>
 		[DataMember(Name ="buffer_size")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? BufferSize { get; set; }
 	}
 

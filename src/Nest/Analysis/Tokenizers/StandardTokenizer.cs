@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -13,6 +14,7 @@ namespace Nest
 		/// The maximum token length. If a token is seen that exceeds this length then it is discarded. Defaults to 255.
 		/// </summary>
 		[DataMember(Name = "max_token_length")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? MaxTokenLength { get; set; }
 	}
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -13,18 +14,21 @@ namespace Nest
 		/// If true causes all subword parts to be catenated: "wi-fi-4000" ⇒ "wifi4000". Defaults to false.
 		/// </summary>
 		[DataMember(Name ="catenate_all")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? CatenateAll { get; set; }
 
 		/// <summary>
 		/// If true causes maximum runs of number parts to be catenated: "500-42" ⇒ "50042". Defaults to false.
 		/// </summary>
 		[DataMember(Name ="catenate_numbers")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? CatenateNumbers { get; set; }
 
 		/// <summary>
 		/// If true causes maximum runs of word parts to be catenated: "wi-fi" ⇒ "wifi". Defaults to false.
 		/// </summary>
 		[DataMember(Name ="catenate_words")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? CatenateWords { get; set; }
 
 		/// <summary>
@@ -37,12 +41,14 @@ namespace Nest
 		/// If true causes parts of words to be generated: "PowerShot" ⇒ "Power" "Shot". Defaults to true.
 		/// </summary>
 		[DataMember(Name ="generate_word_parts")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? GenerateWordParts { get; set; }
 
 		/// <summary>
 		/// If true includes original words in subwords: "500-42" ⇒ "500-42" "500" "42". Defaults to false.
 		/// </summary>
 		[DataMember(Name ="preserve_original")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? PreserveOriginal { get; set; }
 
 		/// <summary>
@@ -62,18 +68,21 @@ namespace Nest
 		/// If true causes "PowerShot" to be two tokens; ("Power-Shot" remains two parts regards). Defaults to true.
 		/// </summary>
 		[DataMember(Name ="split_on_case_change")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? SplitOnCaseChange { get; set; }
 
 		/// <summary>
 		/// If true causes "j2se" to be three tokens; "j" "2" "se". Defaults to true.
 		/// </summary>
 		[DataMember(Name ="split_on_numerics")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? SplitOnNumerics { get; set; }
 
 		/// <summary>
 		/// If true causes trailing "'s" to be removed for each subword: "O’Neil’s" ⇒ "O", "Neil". Defaults to true.
 		/// </summary>
 		[DataMember(Name ="stem_english_possessive")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? StemEnglishPossessive { get; set; }
 
 		/// <summary>

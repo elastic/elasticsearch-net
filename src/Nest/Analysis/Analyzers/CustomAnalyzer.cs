@@ -33,6 +33,7 @@ namespace Nest
 		/// field using this analyzer.
 		/// </summary>
 		[DataMember(Name ="position_offset_gap")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? PositionOffsetGap { get; set; }
 
 		/// <summary>

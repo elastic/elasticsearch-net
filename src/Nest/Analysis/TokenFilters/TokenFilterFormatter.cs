@@ -5,6 +5,8 @@ namespace Nest
 {
 	internal class TokenFilterFormatter : IJsonFormatter<ITokenFilter>
 	{
+		private static byte[] TypeField = JsonWriter.GetEncodedPropertyName("type");
+
 		public ITokenFilter Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var arraySegment = reader.ReadNextBlockSegment();
@@ -13,8 +15,8 @@ namespace Nest
 			string tokenFilterType = null;
 			while (segmentReader.ReadIsInObject(ref count))
 			{
-				var propertyName = segmentReader.ReadPropertyName();
-				if (propertyName == "type")
+				var propertyName = segmentReader.ReadPropertyNameSegmentRaw();
+				if (propertyName.EqualsBytes(TypeField))
 				{
 					tokenFilterType = segmentReader.ReadString();
 					break;
@@ -28,6 +30,7 @@ namespace Nest
 
 			segmentReader = new JsonReader(arraySegment.Array, arraySegment.Offset);
 
+			// TODO: Move to AutomataDictionary
 			switch (tokenFilterType)
 			{
 				case "asciifolding": return Deserialize<AsciiFoldingTokenFilter>(ref segmentReader, formatterResolver);

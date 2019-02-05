@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -12,6 +13,7 @@ namespace Nest
 		/// Set to true to lower case all words first. Defaults to false.
 		/// </summary>
 		[DataMember(Name ="ignore_case")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? IgnoreCase { get; set; }
 
 		/// <summary>

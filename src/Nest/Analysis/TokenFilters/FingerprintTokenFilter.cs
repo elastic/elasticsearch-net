@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -14,6 +15,7 @@ namespace Nest
 		/// The maximum token size to emit. Defaults to 255.
 		/// </summary>
 		[DataMember(Name ="max_output_size")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? MaxOutputSize { get; set; }
 
 		/// <summary>

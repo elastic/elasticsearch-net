@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -18,6 +19,7 @@ namespace Nest
 		/// A boolean indicating whether to lower case the words.
 		/// </summary>
 		[DataMember(Name ="keep_words_case")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? KeepWordsCase { get; set; }
 
 		/// <summary>
