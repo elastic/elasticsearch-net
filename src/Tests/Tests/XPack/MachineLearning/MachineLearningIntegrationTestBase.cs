@@ -37,6 +37,18 @@ namespace Tests.XPack.MachineLearning
 
 		[I] public override Task ReturnsExpectedResponse() => base.ReturnsExpectedResponse();
 
+		protected IPutCalendarResponse PutCalendar(IElasticClient client, string calendarId)
+		{
+			var putCalendarResponse = client.PutCalendar(calendarId, f => f
+				.Description("Planned outages")
+			);
+
+			if (!putCalendarResponse.IsValid)
+				throw new Exception($"Problem putting calendar {calendarId} for integration test: {putCalendarResponse.DebugInformation}");
+
+			return putCalendarResponse;
+		}
+
 		protected IPutJobResponse PutJob(IElasticClient client, string jobId)
 		{
 			var putJobResponse = client.PutJob<Metric>(jobId, f => f

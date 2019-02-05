@@ -3354,6 +3354,50 @@ namespace Nest
 			throw InvalidDispatch("XpackMlCloseJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_close");
 		}
 		
+		internal TResponse XpackMlDeleteCalendarDispatch<TResponse>(IRequest<DeleteCalendarRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.XpackMlDeleteCalendar<TResponse>(p.RouteValues.CalendarId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlDeleteCalendar", p, new [] { DELETE }, "/_xpack/ml/calendars/{calendar_id}");
+		}
+		
+		internal Task<TResponse> XpackMlDeleteCalendarDispatchAsync<TResponse>(IRequest<DeleteCalendarRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.XpackMlDeleteCalendarAsync<TResponse>(p.RouteValues.CalendarId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlDeleteCalendar", p, new [] { DELETE }, "/_xpack/ml/calendars/{calendar_id}");
+		}
+		
+		internal TResponse XpackMlDeleteCalendarEventDispatch<TResponse>(IRequest<DeleteCalendarEventRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.EventId)) return _lowLevel.XpackMlDeleteCalendarEvent<TResponse>(p.RouteValues.CalendarId,p.RouteValues.EventId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlDeleteCalendarEvent", p, new [] { DELETE }, "/_xpack/ml/calendars/{calendar_id}/events/{event_id}");
+		}
+		
+		internal Task<TResponse> XpackMlDeleteCalendarEventDispatchAsync<TResponse>(IRequest<DeleteCalendarEventRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.EventId)) return _lowLevel.XpackMlDeleteCalendarEventAsync<TResponse>(p.RouteValues.CalendarId,p.RouteValues.EventId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlDeleteCalendarEvent", p, new [] { DELETE }, "/_xpack/ml/calendars/{calendar_id}/events/{event_id}");
+		}
+		
 		internal TResponse XpackMlDeleteDatafeedDispatch<TResponse>(IRequest<DeleteDatafeedRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -3812,6 +3856,50 @@ namespace Nest
 					break;
 			}
 			throw InvalidDispatch("XpackMlPreviewDatafeed", p, new [] { GET }, "/_xpack/ml/datafeeds/{datafeed_id}/_preview");
+		}
+		
+		internal TResponse XpackMlPutCalendarDispatch<TResponse>(IRequest<PutCalendarRequestParameters> p,SerializableData<IPutCalendarRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.XpackMlPutCalendar<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlPutCalendar", p, new [] { PUT }, "/_xpack/ml/calendars/{calendar_id}");
+		}
+		
+		internal Task<TResponse> XpackMlPutCalendarDispatchAsync<TResponse>(IRequest<PutCalendarRequestParameters> p,SerializableData<IPutCalendarRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.XpackMlPutCalendarAsync<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlPutCalendar", p, new [] { PUT }, "/_xpack/ml/calendars/{calendar_id}");
+		}
+		
+		internal TResponse XpackMlPutCalendarJobDispatch<TResponse>(IRequest<PutCalendarJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.JobId)) return _lowLevel.XpackMlPutCalendarJob<TResponse>(p.RouteValues.CalendarId,p.RouteValues.JobId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlPutCalendarJob", p, new [] { PUT }, "/_xpack/ml/calendars/{calendar_id}/jobs/{job_id}");
+		}
+		
+		internal Task<TResponse> XpackMlPutCalendarJobDispatchAsync<TResponse>(IRequest<PutCalendarJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.JobId)) return _lowLevel.XpackMlPutCalendarJobAsync<TResponse>(p.RouteValues.CalendarId,p.RouteValues.JobId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlPutCalendarJob", p, new [] { PUT }, "/_xpack/ml/calendars/{calendar_id}/jobs/{job_id}");
 		}
 		
 		internal TResponse XpackMlPutDatafeedDispatch<TResponse>(IRequest<PutDatafeedRequestParameters> p,SerializableData<IPutDatafeedRequest> body) where TResponse : class, IElasticsearchResponse, new()

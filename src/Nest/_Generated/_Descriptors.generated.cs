@@ -4114,6 +4114,32 @@ namespace Nest
 		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
 		public CloseJobDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
+	///<summary>descriptor for XpackMlDeleteCalendar <pre></pre></summary>
+	public partial class DeleteCalendarDescriptor  : RequestDescriptorBase<DeleteCalendarDescriptor,DeleteCalendarRequestParameters, IDeleteCalendarRequest>, IDeleteCalendarRequest
+	{ 
+		/// <summary>/_xpack/ml/calendars/{calendar_id}</summary>
+		///<param name="calendar_id"> this parameter is required</param>
+		public DeleteCalendarDescriptor(Id calendar_id) : base(r=>r.Required("calendar_id", calendar_id)){}
+		// values part of the url path
+		Id IDeleteCalendarRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for XpackMlDeleteCalendarEvent <pre></pre></summary>
+	public partial class DeleteCalendarEventDescriptor  : RequestDescriptorBase<DeleteCalendarEventDescriptor,DeleteCalendarEventRequestParameters, IDeleteCalendarEventRequest>, IDeleteCalendarEventRequest
+	{ 
+		/// <summary>/_xpack/ml/calendars/{calendar_id}/events/{event_id}</summary>
+		///<param name="calendar_id"> this parameter is required</param>
+		///<param name="event_id"> this parameter is required</param>
+		public DeleteCalendarEventDescriptor(Id calendar_id, Id event_id) : base(r=>r.Required("calendar_id", calendar_id).Required("event_id", event_id)){}
+		// values part of the url path
+		Id IDeleteCalendarEventRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+		Id IDeleteCalendarEventRequest.EventId => Self.RouteValues.Get<Id>("event_id");
+
+		// Request parameters
+
+	}
 	///<summary>descriptor for XpackMlDeleteDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
 	public partial class DeleteDatafeedDescriptor  : RequestDescriptorBase<DeleteDatafeedDescriptor,DeleteDatafeedRequestParameters, IDeleteDatafeedRequest>, IDeleteDatafeedRequest
 	{ 
@@ -4372,6 +4398,32 @@ namespace Nest
 		public PreviewDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
 		// values part of the url path
 		Id IPreviewDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for XpackMlPutCalendar <pre></pre></summary>
+	public partial class PutCalendarDescriptor  : RequestDescriptorBase<PutCalendarDescriptor,PutCalendarRequestParameters, IPutCalendarRequest>, IPutCalendarRequest
+	{ 
+		/// <summary>/_xpack/ml/calendars/{calendar_id}</summary>
+		///<param name="calendar_id"> this parameter is required</param>
+		public PutCalendarDescriptor(Id calendar_id) : base(r=>r.Required("calendar_id", calendar_id)){}
+		// values part of the url path
+		Id IPutCalendarRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for XpackMlPutCalendarJob <pre></pre></summary>
+	public partial class PutCalendarJobDescriptor  : RequestDescriptorBase<PutCalendarJobDescriptor,PutCalendarJobRequestParameters, IPutCalendarJobRequest>, IPutCalendarJobRequest
+	{ 
+		/// <summary>/_xpack/ml/calendars/{calendar_id}/jobs/{job_id}</summary>
+		///<param name="calendar_id"> this parameter is required</param>
+		///<param name="job_id"> this parameter is required</param>
+		public PutCalendarJobDescriptor(Id calendar_id, Id job_id) : base(r=>r.Required("calendar_id", calendar_id).Required("job_id", job_id)){}
+		// values part of the url path
+		Id IPutCalendarJobRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+		Id IPutCalendarJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
 		// Request parameters
 

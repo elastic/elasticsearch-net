@@ -2562,6 +2562,24 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The name of the job to close</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> XpackMlCloseJobAsync<TResponse>(string job_id, CloseJobRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>DELETE on /_xpack/ml/calendars/{calendar_id} <para></para></summary>
+		///<param name="calendar_id">The ID of the calendar to delete</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse XpackMlDeleteCalendar<TResponse>(string calendar_id, DeleteCalendarRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>DELETE on /_xpack/ml/calendars/{calendar_id} <para></para></summary>
+		///<param name="calendar_id">The ID of the calendar to delete</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> XpackMlDeleteCalendarAsync<TResponse>(string calendar_id, DeleteCalendarRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>DELETE on /_xpack/ml/calendars/{calendar_id}/events/{event_id} <para></para></summary>
+		///<param name="calendar_id">The ID of the calendar to modify</param>
+		///<param name="event_id">The ID of the event to remove from the calendar</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse XpackMlDeleteCalendarEvent<TResponse>(string calendar_id, string event_id, DeleteCalendarEventRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>DELETE on /_xpack/ml/calendars/{calendar_id}/events/{event_id} <para></para></summary>
+		///<param name="calendar_id">The ID of the calendar to modify</param>
+		///<param name="event_id">The ID of the event to remove from the calendar</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> XpackMlDeleteCalendarEventAsync<TResponse>(string calendar_id, string event_id, DeleteCalendarEventRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_xpack/ml/datafeeds/{datafeed_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</para></summary>
 		///<param name="datafeed_id">The ID of the datafeed to delete</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -2846,6 +2864,26 @@ namespace Elasticsearch.Net
 		///<param name="datafeed_id">The ID of the datafeed to preview</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> XpackMlPreviewDatafeedAsync<TResponse>(string datafeed_id, PreviewDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>PUT on /_xpack/ml/calendars/{calendar_id} <para></para></summary>
+		///<param name="calendar_id">The ID of the calendar to create</param>
+		///<param name="body">The calendar details</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse XpackMlPutCalendar<TResponse>(string calendar_id, PostData body, PutCalendarRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>PUT on /_xpack/ml/calendars/{calendar_id} <para></para></summary>
+		///<param name="calendar_id">The ID of the calendar to create</param>
+		///<param name="body">The calendar details</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> XpackMlPutCalendarAsync<TResponse>(string calendar_id, PostData body, PutCalendarRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>PUT on /_xpack/ml/calendars/{calendar_id}/jobs/{job_id} <para></para></summary>
+		///<param name="calendar_id">The ID of the calendar to modify</param>
+		///<param name="job_id">The ID of the job to add to the calendar</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse XpackMlPutCalendarJob<TResponse>(string calendar_id, string job_id, PutCalendarJobRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>PUT on /_xpack/ml/calendars/{calendar_id}/jobs/{job_id} <para></para></summary>
+		///<param name="calendar_id">The ID of the calendar to modify</param>
+		///<param name="job_id">The ID of the job to add to the calendar</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> XpackMlPutCalendarJobAsync<TResponse>(string calendar_id, string job_id, PutCalendarJobRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_xpack/ml/datafeeds/{datafeed_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</para></summary>
 		///<param name="datafeed_id">The ID of the datafeed to create</param>
 		///<param name="body">The datafeed config</param>

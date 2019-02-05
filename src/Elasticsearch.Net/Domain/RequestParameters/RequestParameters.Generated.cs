@@ -2311,6 +2311,16 @@ namespace Elasticsearch.Net
 		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
+	///<summary>Request options for XpackMlDeleteCalendar<pre></pre></summary>
+	public partial class DeleteCalendarRequestParameters : RequestParameters<DeleteCalendarRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
+	///<summary>Request options for XpackMlDeleteCalendarEvent<pre></pre></summary>
+	public partial class DeleteCalendarEventRequestParameters : RequestParameters<DeleteCalendarEventRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
 	///<summary>Request options for XpackMlDeleteDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
 	public partial class DeleteDatafeedRequestParameters : RequestParameters<DeleteDatafeedRequestParameters> 
 	{
@@ -2425,6 +2435,16 @@ namespace Elasticsearch.Net
 	public partial class PreviewDatafeedRequestParameters : RequestParameters<PreviewDatafeedRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	///<summary>Request options for XpackMlPutCalendar<pre></pre></summary>
+	public partial class PutCalendarRequestParameters : RequestParameters<PutCalendarRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+	}
+	///<summary>Request options for XpackMlPutCalendarJob<pre></pre></summary>
+	public partial class PutCalendarJobRequestParameters : RequestParameters<PutCalendarJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 	}
 	///<summary>Request options for XpackMlPutDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</pre></summary>
 	public partial class PutDatafeedRequestParameters : RequestParameters<PutDatafeedRequestParameters> 

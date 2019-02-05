@@ -1778,6 +1778,43 @@ namespace Nest
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeleteCalendarEventRequest : IRequest<DeleteCalendarEventRequestParameters>
+	{
+		Id CalendarId { get; }
+		Id EventId { get; }
+	}
+	///<summary>Request parameters for XpackMlDeleteCalendarEvent <pre></pre></summary>
+	public partial class DeleteCalendarEventRequest : PlainRequestBase<DeleteCalendarEventRequestParameters>, IDeleteCalendarEventRequest
+	{
+		protected IDeleteCalendarEventRequest Self => this;
+		///<summary>/_xpack/ml/calendars/{calendar_id}/events/{event_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		///<param name="event_id">this parameter is required</param>
+		public DeleteCalendarEventRequest(Id calendar_id, Id event_id) : base(r=>r.Required("calendar_id", calendar_id).Required("event_id", event_id)){}
+		// values part of the url path
+		Id IDeleteCalendarEventRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+		Id IDeleteCalendarEventRequest.EventId => Self.RouteValues.Get<Id>("event_id");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeleteCalendarRequest : IRequest<DeleteCalendarRequestParameters>
+	{
+		Id CalendarId { get; }
+	}
+	///<summary>Request parameters for XpackMlDeleteCalendar <pre></pre></summary>
+	public partial class DeleteCalendarRequest : PlainRequestBase<DeleteCalendarRequestParameters>, IDeleteCalendarRequest
+	{
+		protected IDeleteCalendarRequest Self => this;
+		///<summary>/_xpack/ml/calendars/{calendar_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		public DeleteCalendarRequest(Id calendar_id) : base(r=>r.Required("calendar_id", calendar_id)){}
+		// values part of the url path
+		Id IDeleteCalendarRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteDatafeedRequest : IRequest<DeleteDatafeedRequestParameters>
 	{
 		Id DatafeedId { get; }
@@ -2673,18 +2710,6 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetBasicLicenseStatusRequest : IRequest<GetBasicLicenseStatusRequestParameters>
-	{
-	}
-	///<summary>Request parameters for XpackLicenseGetBasicStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
-	public partial class GetBasicLicenseStatusRequest : PlainRequestBase<GetBasicLicenseStatusRequestParameters>, IGetBasicLicenseStatusRequest
-	{
-		protected IGetBasicLicenseStatusRequest Self => this;
-		// values part of the url path
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetAutoFollowPatternRequest : IRequest<GetAutoFollowPatternRequestParameters>
 	{
 		Name Name { get; }
@@ -2700,6 +2725,18 @@ namespace Nest
 		public GetAutoFollowPatternRequest(Name name) : base(r=>r.Optional("name", name)){}
 		// values part of the url path
 		Name IGetAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetBasicLicenseStatusRequest : IRequest<GetBasicLicenseStatusRequestParameters>
+	{
+	}
+	///<summary>Request parameters for XpackLicenseGetBasicStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	public partial class GetBasicLicenseStatusRequest : PlainRequestBase<GetBasicLicenseStatusRequestParameters>, IGetBasicLicenseStatusRequest
+	{
+		protected IGetBasicLicenseStatusRequest Self => this;
+		// values part of the url path
 
 		// Request parameters
 	}
@@ -4307,6 +4344,43 @@ namespace Nest
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IPutCalendarJobRequest : IRequest<PutCalendarJobRequestParameters>
+	{
+		Id CalendarId { get; }
+		Id JobId { get; }
+	}
+	///<summary>Request parameters for XpackMlPutCalendarJob <pre></pre></summary>
+	public partial class PutCalendarJobRequest : PlainRequestBase<PutCalendarJobRequestParameters>, IPutCalendarJobRequest
+	{
+		protected IPutCalendarJobRequest Self => this;
+		///<summary>/_xpack/ml/calendars/{calendar_id}/jobs/{job_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		///<param name="job_id">this parameter is required</param>
+		public PutCalendarJobRequest(Id calendar_id, Id job_id) : base(r=>r.Required("calendar_id", calendar_id).Required("job_id", job_id)){}
+		// values part of the url path
+		Id IPutCalendarJobRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+		Id IPutCalendarJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IPutCalendarRequest : IRequest<PutCalendarRequestParameters>
+	{
+		Id CalendarId { get; }
+	}
+	///<summary>Request parameters for XpackMlPutCalendar <pre></pre></summary>
+	public partial class PutCalendarRequest : PlainRequestBase<PutCalendarRequestParameters>, IPutCalendarRequest
+	{
+		protected IPutCalendarRequest Self => this;
+		///<summary>/_xpack/ml/calendars/{calendar_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		public PutCalendarRequest(Id calendar_id) : base(r=>r.Required("calendar_id", calendar_id)){}
+		// values part of the url path
+		Id IPutCalendarRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutDatafeedRequest : IRequest<PutDatafeedRequestParameters>
