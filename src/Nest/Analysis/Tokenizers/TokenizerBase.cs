@@ -6,10 +6,10 @@ namespace Nest
 	[JsonFormatter(typeof(TokenizerFormatter))]
 	public interface ITokenizer
 	{
-		[DataMember(Name ="type")]
+		[DataMember(Name = "type")]
 		string Type { get; }
 
-		[DataMember(Name ="version")]
+		[DataMember(Name = "version")]
 		string Version { get; set; }
 	}
 

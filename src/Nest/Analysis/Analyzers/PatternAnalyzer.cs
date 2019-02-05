@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -12,6 +13,7 @@ namespace Nest
 		string Flags { get; set; }
 
 		[DataMember(Name ="lowercase")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? Lowercase { get; set; }
 
 		[DataMember(Name ="pattern")]

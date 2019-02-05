@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -9,6 +10,7 @@ namespace Nest
 	public interface IAsciiFoldingTokenFilter : ITokenFilter
 	{
 		[DataMember(Name ="preserve_original")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? PreserveOriginal { get; set; }
 	}
 

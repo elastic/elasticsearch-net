@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -12,6 +13,7 @@ namespace Nest
 		/// length parameter which control the number of characters to truncate to, defaults to 10.
 		/// </summary>
 		[DataMember(Name ="length")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? Length { get; set; }
 	}
 

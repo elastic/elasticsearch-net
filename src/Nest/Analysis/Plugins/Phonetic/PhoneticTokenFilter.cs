@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -34,6 +35,7 @@ namespace Nest
 		/// Valid for <see cref="PhoneticEncoder.DoubleMetaphone" /> only
 		/// </remarks>
 		[DataMember(Name ="max_code_len")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? MaxCodeLength { get; set; }
 
 		/// <summary>
@@ -50,6 +52,7 @@ namespace Nest
 		///  with the encoded one (set it to true), or added (set it to false).
 		/// </summary>
 		[DataMember(Name ="replace")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? Replace { get; set; }
 
 		/// <summary>

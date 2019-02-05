@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -11,6 +12,7 @@ namespace Nest
 	public interface ISynonymGraphTokenFilter : ITokenFilter
 	{
 		[DataMember(Name ="expand")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? Expand { get; set; }
 
 		[DataMember(Name ="format")]
@@ -18,10 +20,12 @@ namespace Nest
 
 		[DataMember(Name ="ignore_case")]
 		[Obsolete("Will be removed in Elasticsearch 7.x, if you need to ignore case add a lowercase filter before this synonym filter")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? IgnoreCase { get; set; }
 
 		/// <inheritdoc cref="ISynonymTokenFilter.Lenient" />
 		[DataMember(Name ="lenient")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? Lenient { get; set; }
 
 		[DataMember(Name ="synonyms")]

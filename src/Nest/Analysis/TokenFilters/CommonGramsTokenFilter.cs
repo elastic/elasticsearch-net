@@ -27,12 +27,14 @@ namespace Nest
 		/// If true, common words matching will be case insensitive.
 		/// </summary>
 		[DataMember(Name ="ignore_case")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? IgnoreCase { get; set; }
 
 		/// <summary>
 		/// Generates bigrams then removes common words and single terms followed by a common word.
 		/// </summary>
 		[DataMember(Name ="query_mode")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? QueryMode { get; set; }
 	}
 
