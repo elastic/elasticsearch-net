@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -12,9 +13,11 @@ namespace Nest
 		public string Name { get; set; }
 
 		[DataMember(Name ="order")]
+		[JsonFormatter(typeof(StringLongFormatter))]
 		public long Order { get; set; }
 
 		[DataMember(Name ="version")]
-		public long Version { get; set; }
+		[JsonFormatter(typeof(NullableStringLongFormatter))]
+		public long? Version { get; set; }
 	}
 }
