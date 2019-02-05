@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -6,10 +7,12 @@ namespace Nest
 	public class CatThreadPoolRecord : ICatRecord
 	{
 		[DataMember(Name ="active")]
+		[JsonFormatter(typeof(StringIntFormatter))]
 		public int Active { get; set; }
 
 		[DataMember(Name ="completed")]
-		public long Completed { get; set; }
+		[JsonFormatter(typeof(NullableStringLongFormatter))]
+		public long? Completed { get; set; }
 
 		[DataMember(Name ="ephemeral_node_id")]
 		public string EphemeralNodeId { get; set; }
@@ -24,13 +27,16 @@ namespace Nest
 		public Time KeepAlive { get; set; }
 
 		[DataMember(Name ="largest")]
-		public int Largest { get; set; }
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
+		public int? Largest { get; set; }
 
 		[DataMember(Name ="max")]
-		public int Maximum { get; set; }
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
+		public int? Maximum { get; set; }
 
 		[DataMember(Name ="min")]
-		public int Minimum { get; set; }
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
+		public int? Minimum { get; set; }
 
 		[DataMember(Name ="name")]
 		public string Name { get; set; }
@@ -42,22 +48,28 @@ namespace Nest
 		public string NodeName { get; set; }
 
 		[DataMember(Name ="port")]
-		public int Port { get; set; }
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
+		public int? Port { get; set; }
 
 		[DataMember(Name ="pid")]
-		public int ProcessId { get; set; }
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
+		public int? ProcessId { get; set; }
 
 		[DataMember(Name ="queue")]
+		[JsonFormatter(typeof(StringIntFormatter))]
 		public int Queue { get; set; }
 
 		[DataMember(Name ="queue_size")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		public int? QueueSize { get; set; }
 
 		[DataMember(Name ="rejected")]
+		[JsonFormatter(typeof(StringLongFormatter))]
 		public long Rejected { get; set; }
 
 		[DataMember(Name ="size")]
-		public int Size { get; set; }
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
+		public int? Size { get; set; }
 
 		[DataMember(Name ="type")]
 		public string Type { get; set; }
