@@ -10,11 +10,11 @@ namespace Nest
 		public string ClusterUUID { get; internal set; }
 
 		[DataMember(Name = "indices")]
-		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, MetadataIndexState>))]
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, MetadataIndexState>))]
 		public IReadOnlyDictionary<string, MetadataIndexState> Indices { get; internal set; }
 
 		[DataMember(Name = "templates")]
-		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, TemplateMapping>))]
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, TemplateMapping>))]
 		public IReadOnlyDictionary<string, TemplateMapping> Templates { get; internal set; }
 	}
 }

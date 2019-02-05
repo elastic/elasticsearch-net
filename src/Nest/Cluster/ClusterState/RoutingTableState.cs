@@ -7,7 +7,7 @@ namespace Nest
 	public class RoutingTableState
 	{
 		[DataMember(Name ="indices")]
-		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, IndexRoutingTable>))]
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, IndexRoutingTable>))]
 		public IReadOnlyDictionary<string, IndexRoutingTable> Indices { get; internal set; } = EmptyReadOnly<string, IndexRoutingTable>.Dictionary;
 	}
 }

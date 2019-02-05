@@ -8,7 +8,7 @@ namespace Nest
 	public interface IReindexRethrottleResponse : IResponse
 	{
 		[DataMember(Name ="nodes")]
-		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, ReindexNode>))]
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, ReindexNode>))]
 		IReadOnlyDictionary<string, ReindexNode> Nodes { get; }
 	}
 

@@ -15,7 +15,6 @@ namespace Nest
 
 		// TODO: Why this uses DynamicBody
 		[DataMember(Name = "settings")]
-		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, object>))]
 		public DynamicBody Settings { get; internal set; }
 
 		[DataMember(Name = "state")]

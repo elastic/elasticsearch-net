@@ -8,12 +8,13 @@ namespace Nest
 	public class NodeStats
 	{
 		[DataMember(Name = "adaptive_selection")]
-		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, AdaptiveSelectionStats>))]
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, AdaptiveSelectionStats>))]
 		public IReadOnlyDictionary<string, AdaptiveSelectionStats> AdaptiveSelection { get; internal set; }
 			= EmptyReadOnly<string, AdaptiveSelectionStats>.Dictionary;
 
+		// TODO: IReadOnlyDictionary
 		[DataMember(Name = "breakers")]
-		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, BreakerStats>))]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, BreakerStats>))]
 		public Dictionary<string, BreakerStats> Breakers { get; internal set; }
 
 		[DataMember(Name = "fs")]
@@ -57,8 +58,9 @@ namespace Nest
 		[DataMember(Name = "script")]
 		public ScriptStats Script { get; internal set; }
 
+		// TODO: IReadOnlyDictinary
 		[DataMember(Name = "thread_pool")]
-		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, ThreadCountStats>))]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, ThreadCountStats>))]
 		public Dictionary<string, ThreadCountStats> ThreadPool { get; internal set; }
 
 		[DataMember(Name = "timestamp")]
@@ -241,8 +243,9 @@ namespace Nest
 	[DataContract]
 	public class NodeJvmStats
 	{
+		// TODO: IReadOnlyDictionary
 		[DataMember(Name = "buffer_pools")]
-		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, NodeBufferPool>))]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, NodeBufferPool>))]
 		public Dictionary<string, NodeBufferPool> BufferPools { get; internal set; }
 
 		[DataMember(Name = "classes")]
@@ -315,8 +318,9 @@ namespace Nest
 			[DataMember(Name = "non_heap_used_in_bytes")]
 			public long NonHeapUsedInBytes { get; internal set; }
 
+			// TODO: IReadOnlyDictionary
 			[DataMember(Name = "pools")]
-			[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, JVMPool>))]
+			[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, JVMPool>))]
 			public Dictionary<string, JVMPool> Pools { get; internal set; }
 
 			[DataContract]
@@ -361,8 +365,9 @@ namespace Nest
 		[DataContract]
 		public class GarbageCollectionStats
 		{
+			// TODO: IReadOnlyDictionary
 			[DataMember(Name = "collectors")]
-			[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, GarbageCollectionGenerationStats>))]
+			[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, GarbageCollectionGenerationStats>))]
 			public Dictionary<string, GarbageCollectionGenerationStats> Collectors { get; internal set; }
 		}
 
