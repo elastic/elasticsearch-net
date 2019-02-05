@@ -6,8 +6,9 @@ namespace Nest
 {
 	public class NodeState
 	{
+		// TODO: IReadOnlyDictionary
 		[DataMember(Name ="attributes")]
-		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, string>))]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, string>))]
 		public Dictionary<string, string> Attributes { get; internal set; }
 
 		[DataMember(Name ="name")]

@@ -8,11 +8,11 @@ namespace Nest
 	{
 		/// <summary> Per pipeline ingest statistics </summary>
 		[DataMember(Name = "pipelines")]
-		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, IngestStats>))]
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, IngestStats>))]
 		public IReadOnlyDictionary<string, IngestStats> Pipelines { get; internal set; }
 			= EmptyReadOnly<string, IngestStats>.Dictionary;
 
-		/// <summary> Overal global ingest statistics </summary>
+		/// <summary> Overall global ingest statistics </summary>
 		[DataMember(Name = "total")]
 		public IngestStats Total { get; set; }
 	}

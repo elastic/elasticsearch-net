@@ -10,7 +10,9 @@ namespace Nest
 			var token = reader.GetCurrentJsonToken();
 			switch (token)
 			{
-				case JsonToken.Null: return null;
+				case JsonToken.Null:
+					reader.ReadNext();
+					return null;
 				case JsonToken.String: return TimeSpan.Parse(reader.ReadString());
 				case JsonToken.Number: return new TimeSpan(reader.ReadInt64());
 			}

@@ -44,7 +44,7 @@ namespace Nest
 		public long Total { get; set; }
 
 		[DataMember(Name ="types")]
-		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, IndexingStats>))]
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, IndexingStats>))]
 		public IReadOnlyDictionary<string, IndexingStats> Types { get; set; }
 	}
 }

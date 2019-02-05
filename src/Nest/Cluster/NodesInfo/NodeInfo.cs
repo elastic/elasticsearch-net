@@ -47,11 +47,11 @@ namespace Nest
 
 		//TODO why is this using DynamicBody
 		[DataMember(Name = "settings")]
-		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, object>))]
 		public DynamicBody Settings { get; internal set; }
 
+		// TODO: IReadOnlyDictionary
 		[DataMember(Name = "thread_pool")]
-		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, NodeThreadPoolInfo>))]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, NodeThreadPoolInfo>))]
 		public Dictionary<string, NodeThreadPoolInfo> ThreadPool { get; internal set; }
 
 		[DataMember(Name = "transport")]
