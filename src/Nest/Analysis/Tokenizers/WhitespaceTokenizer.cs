@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -15,6 +16,7 @@ namespace Nest
 		/// Valid for Elasticsearch 6.1.0+
 		/// </remarks>
 		[DataMember(Name ="max_token_length")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? MaxTokenLength { get; set; }
 	}
 

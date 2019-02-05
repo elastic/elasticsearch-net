@@ -6,10 +6,10 @@ namespace Nest
 	[JsonFormatter(typeof(TokenFilterFormatter))]
 	public interface ITokenFilter
 	{
-		[DataMember(Name ="type")]
+		[DataMember(Name = "type")]
 		string Type { get; }
 
-		[DataMember(Name ="version")]
+		[DataMember(Name = "version")]
 		string Version { get; set; }
 	}
 
@@ -17,10 +17,10 @@ namespace Nest
 	{
 		protected TokenFilterBase(string type) => Type = type;
 
-		[DataMember(Name ="type")]
+		[DataMember(Name = "type")]
 		public string Type { get; protected set; }
 
-		[DataMember(Name ="version")]
+		[DataMember(Name = "version")]
 		public string Version { get; set; }
 	}
 

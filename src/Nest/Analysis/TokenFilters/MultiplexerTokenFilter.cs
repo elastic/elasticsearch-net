@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -13,6 +14,7 @@ namespace Nest
 		IEnumerable<string> Filters { get; set; }
 
 		[DataMember(Name ="preserve_original")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? PreserveOriginal { get; set; }
 	}
 

@@ -20,6 +20,7 @@ namespace Nest
 
 					return new Time(milliseconds);
 				default:
+					reader.ReadNextBlock();
 					return null;
 			}
 		}

@@ -5,6 +5,8 @@ namespace Nest
 {
 	internal class TokenizerFormatter : IJsonFormatter<ITokenizer>
 	{
+		private static byte[] TypeField = JsonWriter.GetEncodedPropertyName("type");
+
 		public ITokenizer Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var arraySegment = reader.ReadNextBlockSegment();
@@ -13,7 +15,8 @@ namespace Nest
 			string tokenizerType = null;
 			while (segmentReader.ReadIsInObject(ref count))
 			{
-				if (segmentReader.ReadPropertyName() == "type")
+				var propertyName = segmentReader.ReadPropertyNameSegmentRaw();
+				if (propertyName.EqualsBytes(TypeField))
 				{
 					tokenizerType = segmentReader.ReadString();
 					break;
@@ -27,6 +30,7 @@ namespace Nest
 
 			segmentReader = new JsonReader(arraySegment.Array, arraySegment.Offset);
 
+			// TODO: Move to AutomataDictionary
 			switch (tokenizerType)
 			{
 				case "char_group":

@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -13,6 +14,7 @@ namespace Nest
 		/// Katakana words shorter than the minimum length are not stemmed (default is 4).
 		/// </summary>
 		[DataMember(Name ="minimum_length")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? MinimumLength { get; set; }
 	}
 

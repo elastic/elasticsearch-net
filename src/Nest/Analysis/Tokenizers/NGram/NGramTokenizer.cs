@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -12,12 +13,14 @@ namespace Nest
 		/// Maximum size in codepoints of a single n-gram, defaults to 2.
 		/// </summary>
 		[DataMember(Name ="max_gram")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? MaxGram { get; set; }
 
 		/// <summary>
 		/// Minimum size in codepoints of a single n-gram, defaults to 1.
 		/// </summary>
 		[DataMember(Name ="min_gram")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? MinGram { get; set; }
 
 		/// <summary>

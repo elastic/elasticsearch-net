@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -11,12 +12,14 @@ namespace Nest
 		/// The maximum number. Defaults to Integer.MAX_VALUE.
 		/// </summary>
 		[DataMember(Name ="max")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? Max { get; set; }
 
 		/// <summary>
 		/// The minimum number. Defaults to 0.
 		/// </summary>
 		[DataMember(Name ="min")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? Min { get; set; }
 	}
 

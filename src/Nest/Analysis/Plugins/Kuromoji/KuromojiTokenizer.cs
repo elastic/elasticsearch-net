@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -12,6 +13,7 @@ namespace Nest
 		/// Whether punctuation should be discarded from the output. Defaults to true.
 		/// </summary>
 		[DataMember(Name ="discard_punctuation")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? DiscardPunctuation { get; set; }
 
 		/// <summary>
@@ -25,6 +27,7 @@ namespace Nest
 		/// Viterbi paths that are within the nbest_cost value of the best path.
 		/// </summary>
 		[DataMember(Name ="nbest_cost")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? NBestCost { get; set; }
 
 		/// <summary>

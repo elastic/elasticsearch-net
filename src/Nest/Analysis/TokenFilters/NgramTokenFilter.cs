@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -11,12 +12,14 @@ namespace Nest
 		/// Defaults to 2
 		/// </summary>
 		[DataMember(Name ="max_gram")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? MaxGram { get; set; }
 
 		/// <summary>
 		/// Defaults to 1.
 		/// </summary>
 		[DataMember(Name ="min_gram")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? MinGram { get; set; }
 	}
 

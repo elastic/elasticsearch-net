@@ -14,7 +14,8 @@ namespace Nest
 			while (segmentReader.ReadIsInObject(ref count))
 			{
 				var propertyName = segmentReader.ReadPropertyName();
-				switch (propertyName) {
+				switch (propertyName)
+				{
 					case "type":
 						analyzerType = segmentReader.ReadString();
 						break;

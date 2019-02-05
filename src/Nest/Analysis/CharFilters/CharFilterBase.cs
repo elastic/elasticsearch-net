@@ -6,10 +6,10 @@ namespace Nest
 	[JsonFormatter(typeof(CharFilterFormatter))]
 	public interface ICharFilter
 	{
-		[DataMember(Name ="type")]
+		[DataMember(Name = "type")]
 		string Type { get; }
 
-		[DataMember(Name ="version")]
+		[DataMember(Name = "version")]
 		string Version { get; set; }
 	}
 
