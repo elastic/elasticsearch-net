@@ -24,7 +24,7 @@ namespace Nest
 		MetadataState Metadata { get; }
 
 		[DataMember(Name = "nodes")]
-		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, NodeState>))]
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, NodeState>))]
 		IReadOnlyDictionary<string, NodeState> Nodes { get; }
 
 		[DataMember(Name = "routing_nodes")]

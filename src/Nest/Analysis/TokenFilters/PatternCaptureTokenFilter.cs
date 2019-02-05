@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -18,6 +19,7 @@ namespace Nest
 		/// If preserve_original is set to true then it would also emit the original token
 		/// </summary>
 		[DataMember(Name ="preserve_original")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? PreserveOriginal { get; set; }
 	}
 

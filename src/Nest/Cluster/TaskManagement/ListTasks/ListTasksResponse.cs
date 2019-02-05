@@ -92,7 +92,7 @@ namespace Nest
 		public long Noops { get; internal set; }
 
 		[DataMember(Name = "requests_per_second")]
-		public long RequestsPerSecond { get; internal set; }
+		public float RequestsPerSecond { get; internal set; }
 
 		[DataMember(Name = "retries")]
 		public TaskRetries Retries { get; internal set; }

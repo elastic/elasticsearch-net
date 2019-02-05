@@ -87,7 +87,8 @@ namespace Nest
 				case FieldType.Join: return Deserialize<JoinProperty>(ref segmentReader, formatterResolver);
 				case FieldType.Alias: return Deserialize<FieldAliasProperty>(ref segmentReader, formatterResolver);
 				case FieldType.None:
-					break;
+					// no "type" field in the property mapping
+					return Deserialize<ObjectProperty>(ref segmentReader, formatterResolver);
 				default:
 					throw new ArgumentOutOfRangeException(nameof(type), type, "mapping property converter does not know this value");
 			}

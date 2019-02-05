@@ -99,7 +99,9 @@ namespace Nest
 					m.ResourceId = ReadArray(ref reader, formatterResolver);
 					break;
 				case "shard":
-					m.Shard = reader.ReadInt32();
+					m.Shard = reader.GetCurrentJsonToken() == JsonToken.Number
+						? reader.ReadInt32()
+						: int.Parse(reader.ReadString());
 					break;
 				case "line":
 					m.Line = reader.ReadInt32();
@@ -148,12 +150,8 @@ namespace Nest
 
 		private static IReadOnlyCollection<string> ReadArray(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var a = new string[0] { };
-
-			//reader.ReadNext();
-
+			var a = Array.Empty<string>();
 			var token = reader.GetCurrentJsonToken();
-
 			switch (token)
 			{
 				case JsonToken.String:

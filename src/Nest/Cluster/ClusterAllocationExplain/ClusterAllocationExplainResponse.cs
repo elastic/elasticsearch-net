@@ -143,7 +143,7 @@ namespace Nest
 		public string TransportAddress { get; internal set; }
 
 		[DataMember(Name = "weight_ranking")]
-		public string WeightRanking { get; internal set; }
+		public int WeightRanking { get; internal set; }
 	}
 
 	[StringEnum]
