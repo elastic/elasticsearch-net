@@ -55,6 +55,8 @@ namespace Tests.XPack.MachineLearning.PutCalendar
 
 			response.JobIds.Should().NotBeNull();
 
+			response.JobIds.Should().BeEmpty();
+
 			response.Description.Should().Be("Planned outages");
 		}
 	}

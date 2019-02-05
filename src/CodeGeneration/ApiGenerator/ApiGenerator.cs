@@ -27,7 +27,6 @@ namespace ApiGenerator
 			"rank_eval.json",
 
 			// these API's are new and need to be mapped
-			"xpack.ml.delete_calendar_job.json",
 			"xpack.ml.get_calendar_events.json",
 			"xpack.ml.get_calendars.json",
 			"xpack.ml.info.json",

@@ -3398,6 +3398,28 @@ namespace Nest
 			throw InvalidDispatch("XpackMlDeleteCalendarEvent", p, new [] { DELETE }, "/_xpack/ml/calendars/{calendar_id}/events/{event_id}");
 		}
 		
+		internal TResponse XpackMlDeleteCalendarJobDispatch<TResponse>(IRequest<DeleteCalendarJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.JobId)) return _lowLevel.XpackMlDeleteCalendarJob<TResponse>(p.RouteValues.CalendarId,p.RouteValues.JobId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlDeleteCalendarJob", p, new [] { DELETE }, "/_xpack/ml/calendars/{calendar_id}/jobs/{job_id}");
+		}
+		
+		internal Task<TResponse> XpackMlDeleteCalendarJobDispatchAsync<TResponse>(IRequest<DeleteCalendarJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.JobId)) return _lowLevel.XpackMlDeleteCalendarJobAsync<TResponse>(p.RouteValues.CalendarId,p.RouteValues.JobId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlDeleteCalendarJob", p, new [] { DELETE }, "/_xpack/ml/calendars/{calendar_id}/jobs/{job_id}");
+		}
+		
 		internal TResponse XpackMlDeleteDatafeedDispatch<TResponse>(IRequest<DeleteDatafeedRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)

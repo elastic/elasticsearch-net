@@ -49,6 +49,16 @@ namespace Tests.XPack.MachineLearning
 			return putCalendarResponse;
 		}
 
+		protected IPutCalendarJobResponse PutCalendarJob(IElasticClient client, string calendarId, string jobId)
+		{
+			var putCalendarJobResponse = client.PutCalendarJob(calendarId, jobId, f => f);
+
+			if (!putCalendarJobResponse.IsValid)
+				throw new Exception($"Problem putting calendar job {calendarId} / {jobId} for integration test: {putCalendarJobResponse.DebugInformation}");
+
+			return putCalendarJobResponse;
+		}
+
 		protected IPutJobResponse PutJob(IElasticClient client, string jobId)
 		{
 			var putJobResponse = client.PutJob<Metric>(jobId, f => f
