@@ -280,6 +280,7 @@ namespace Nest
 			settings.Remove(key);
 		}
 
+		// TODO: Optimize this
 		private static T ConvertToValue<T>(object setting, IJsonFormatterResolver formatterResolver)
 		{
 			if (setting is T t)
@@ -298,7 +299,7 @@ namespace Nest
 				{
 					return (T)Convert.ChangeType(setting, type);
 				}
-				catch (Exception e)
+				catch
 				{
 					// swallow exception and fall through to reserializing
 				}
