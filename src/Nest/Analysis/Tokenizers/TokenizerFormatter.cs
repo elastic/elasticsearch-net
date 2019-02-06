@@ -5,7 +5,7 @@ namespace Nest
 {
 	internal class TokenizerFormatter : IJsonFormatter<ITokenizer>
 	{
-		private static byte[] TypeField = JsonWriter.GetEncodedPropertyName("type");
+		private static byte[] TypeField = JsonWriter.GetEncodedPropertyNameWithoutQuotation("type");
 
 		public ITokenizer Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{

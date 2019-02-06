@@ -5,7 +5,7 @@ namespace Nest
 {
 	internal class TokenFilterFormatter : IJsonFormatter<ITokenFilter>
 	{
-		private static byte[] TypeField = JsonWriter.GetEncodedPropertyName("type");
+		private static byte[] TypeField = JsonWriter.GetEncodedPropertyNameWithoutQuotation("type");
 
 		public ITokenFilter Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
