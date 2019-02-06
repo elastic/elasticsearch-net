@@ -1,40 +1,30 @@
 ﻿using System.Collections.Generic;
 using Utf8Json;
+using Utf8Json.Formatters;
 
 namespace Nest
 {
 	internal class FieldsFormatter : IJsonFormatter<Fields>
 	{
+		private static readonly FieldFormatter FieldFormatter = new FieldFormatter();
+
 		public Fields Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var token = reader.GetCurrentJsonToken();
-			if (token != JsonToken.BeginArray)
+			if (reader.GetCurrentJsonToken() != JsonToken.BeginArray)
 			{
-				reader.ReadNext();
+				reader.ReadNextBlock();
 				return null;
 			}
 
-			var fields = new Fields();
 			var count = 0;
+			var fields = new List<Field>();
 			while (reader.ReadIsInArray(ref count))
 			{
-				token = reader.GetCurrentJsonToken();
-				switch (token)
-				{
-					case JsonToken.String:
-						fields.And(reader.ReadString());
-						break;
-					case JsonToken.BeginObject:
-						/// TODO 6.4 this is temporary until we add proper support for doc_values format
-						var innerCount = 0;
-						while (reader.ReadIsInObject(ref innerCount))
-						{
-							if (reader.ReadPropertyName() == "field") fields.And(reader.ReadString());
-						}
-						break;
-				}
+				var field = FieldFormatter.Deserialize(ref reader, formatterResolver);
+				if (field != null)
+					fields.Add(field);
 			}
-			return fields;
+			return new Fields(fields);
 		}
 
 		public void Serialize(ref JsonWriter writer, Fields value, IJsonFormatterResolver formatterResolver)
@@ -45,8 +35,15 @@ namespace Nest
 				return;
 			}
 
-			var formatter = formatterResolver.GetFormatter<List<Field>>();
-			formatter.Serialize(ref writer, value.ListOfFields, formatterResolver);
+			var fields = value.ListOfFields;
+			writer.WriteBeginArray();
+			for (int i = 0; i < fields.Count; i++)
+			{
+				if (i > 0)
+					writer.WriteValueSeparator();
+				FieldFormatter.Serialize(ref writer, fields[i], formatterResolver);
+			}
+			writer.WriteEndArray();
 		}
 	}
 }
