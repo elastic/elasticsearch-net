@@ -252,6 +252,8 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 			webhookAction.Type.Should().Be(ActionType.Webhook);
 			webhookAction.Status.Should().Be(Status.Simulated);
 			webhookAction.Webhook.Should().NotBeNull();
+			webhookAction.Webhook.Request.Should().NotBeNull();
+			webhookAction.Webhook.Request.Host.Should().Be("foo.com");
 
 			var pagerDutyAction = resultActions.FirstOrDefault(a => a.Id == "pagerduty_action");
 			pagerDutyAction.Should().NotBeNull();

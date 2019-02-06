@@ -55,7 +55,7 @@ namespace Nest
 			}
 			catch
 			{
-				v = default(T);
+				v = default;
 				return false;
 			}
 		}

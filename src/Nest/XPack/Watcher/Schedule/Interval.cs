@@ -203,9 +203,10 @@ namespace Nest
 				case JsonToken.Number:
 					var seconds = Convert.ToInt64(reader.ReadDouble());
 					return new Interval(seconds);
+				default:
+					reader.ReadNextBlock();
+					return null;
 			}
-
-			return null;
 		}
 
 		public void Serialize(ref JsonWriter writer, Interval value, IJsonFormatterResolver formatterResolver)

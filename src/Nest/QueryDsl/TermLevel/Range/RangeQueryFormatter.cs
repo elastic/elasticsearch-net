@@ -18,9 +18,7 @@ namespace Nest
 
 		public IRangeQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var token = reader.GetCurrentJsonToken();
-
-			if (token == JsonToken.Null)
+			if (reader.ReadIsNull())
 				return null;
 
 			var segment = reader.ReadNextBlockSegment();
@@ -50,7 +48,7 @@ namespace Nest
 							case 3:
 							case 4:
 							case 5:
-								token = segmentReader.GetCurrentJsonToken();
+								var token = segmentReader.GetCurrentJsonToken();
 								switch (token)
 								{
 									case JsonToken.String:

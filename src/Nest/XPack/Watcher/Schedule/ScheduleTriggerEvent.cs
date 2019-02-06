@@ -8,10 +8,10 @@ namespace Nest
 	[ReadAs(typeof(ScheduleTriggerEvent))]
 	public interface IScheduleTriggerEvent : ITriggerEvent
 	{
-		[DataMember(Name ="scheduled_time")]
+		[DataMember(Name = "scheduled_time")]
 		Union<DateTimeOffset, string> ScheduledTime { get; set; }
 
-		[DataMember(Name ="triggered_time")]
+		[DataMember(Name = "triggered_time")]
 		Union<DateTimeOffset, string> TriggeredTime { get; set; }
 	}
 

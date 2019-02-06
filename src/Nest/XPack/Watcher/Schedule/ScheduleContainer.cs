@@ -8,25 +8,25 @@ namespace Nest
 	[ReadAs(typeof(ScheduleContainer))]
 	public interface IScheduleContainer
 	{
-		[DataMember(Name ="cron")]
+		[DataMember(Name = "cron")]
 		CronExpression Cron { get; set; }
 
-		[DataMember(Name ="daily")]
+		[DataMember(Name = "daily")]
 		IDailySchedule Daily { get; set; }
 
-		[DataMember(Name ="hourly")]
+		[DataMember(Name = "hourly")]
 		IHourlySchedule Hourly { get; set; }
 
-		[DataMember(Name ="interval")]
+		[DataMember(Name = "interval")]
 		Interval Interval { get; set; }
 
-		[DataMember(Name ="monthly")]
+		[DataMember(Name = "monthly")]
 		IMonthlySchedule Monthly { get; set; }
 
-		[DataMember(Name ="weekly")]
+		[DataMember(Name = "weekly")]
 		IWeeklySchedule Weekly { get; set; }
 
-		[DataMember(Name ="yearly")]
+		[DataMember(Name = "yearly")]
 		IYearlySchedule Yearly { get; set; }
 	}
 
