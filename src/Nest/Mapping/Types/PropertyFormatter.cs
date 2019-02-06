@@ -92,8 +92,6 @@ namespace Nest
 				default:
 					throw new ArgumentOutOfRangeException(nameof(type), type, "mapping property converter does not know this value");
 			}
-
-			return null;
 		}
 
 		public void Serialize(ref JsonWriter writer, IProperty value, IJsonFormatterResolver formatterResolver)
