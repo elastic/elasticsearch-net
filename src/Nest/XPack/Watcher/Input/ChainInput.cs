@@ -56,30 +56,30 @@ namespace Nest
 	{
 		public IChainInput Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject) return null;
+			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
+			{
+				reader.ReadNextBlock();
+				return null;
+			}
 
 			// inputs property
-			reader.ReadNext();
-
-			// property separator
-			reader.ReadNext();
+			reader.ReadNext(); // {
+			reader.ReadNext(); // "inputs"
+			reader.ReadNext(); // :
 
 			var count = 0;
 			var inputs = new Dictionary<string, InputContainer>();
+			var inputContainerFormatter = formatterResolver.GetFormatter<InputContainer>();
 			while (reader.ReadIsInArray(ref count))
 			{
-				var token = reader.GetCurrentJsonToken();
-				if (token == JsonToken.BeginObject)
-				{
-					reader.ReadNext();
-					var name = reader.ReadPropertyName();
-
-					var inputContainerFormatter = formatterResolver.GetFormatter<InputContainer>();
-					var input = inputContainerFormatter.Deserialize(ref reader, formatterResolver);
-
-					inputs.Add(name, input);
-				}
+				reader.ReadNext(); // {
+				var name = reader.ReadPropertyName();
+				var input = inputContainerFormatter.Deserialize(ref reader, formatterResolver);
+				reader.ReadNext(); // }
+				inputs.Add(name, input);
 			}
+
+			reader.ReadNext(); // }
 
 			return new ChainInput(inputs);
 		}
@@ -94,6 +94,7 @@ namespace Nest
 			writer.WriteBeginArray();
 
 			var count = 0;
+			var inputContainerFormatter = formatterResolver.GetFormatter<IInputContainer>();
 
 			foreach (var input in value.Inputs)
 			{
@@ -102,10 +103,8 @@ namespace Nest
 
 				writer.WriteBeginObject();
 				writer.WritePropertyName(input.Key);
-				var inputContainerFormatter = formatterResolver.GetFormatter<IInputContainer>();
 				inputContainerFormatter.Serialize(ref writer, input.Value, formatterResolver);
 				writer.WriteEndObject();
-
 				count++;
 			}
 			writer.WriteEndArray();

@@ -39,7 +39,7 @@ namespace Nest
 	{
 		public TriggerContainer Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<TriggerContainer>();
+			var formatter = DynamicObjectResolver.AllowPrivateExcludeNullCamelCase.GetFormatter<TriggerContainer>();
 			return formatter.Deserialize(ref reader, formatterResolver);
 		}
 

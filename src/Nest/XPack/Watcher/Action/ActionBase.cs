@@ -87,6 +87,7 @@ namespace Nest
 					switch (propertyName)
 					{
 						case "throttle_period":
+						case "throttle_period_in_millis":
 							throttlePeriod = formatterResolver.GetFormatter<Time>()
 								.Deserialize(ref reader, formatterResolver);
 							break;
@@ -120,6 +121,7 @@ namespace Nest
 										.Deserialize(ref reader, formatterResolver);
 									break;
 								case null:
+									reader.ReadNextBlock();
 									break;
 							}
 							break;
