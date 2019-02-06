@@ -7,21 +7,23 @@ namespace Nest
 {
 	internal class QueryContainerFormatter : IJsonFormatter<QueryContainer>
 	{
+		private static readonly IJsonFormatter<QueryContainer> QueryFormatter = 
+			DynamicObjectResolver.AllowPrivateExcludeNullCamelCase.GetFormatter<QueryContainer>();
+		
 		public QueryContainer Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var token = reader.GetCurrentJsonToken();
-			var queryFormatter = DynamicObjectResolver.AllowPrivateExcludeNullCamelCase.GetFormatter<QueryContainer>();
-
-			if (token == JsonToken.BeginObject)
-				return queryFormatter.Deserialize(ref reader, formatterResolver);
-
-			if (token != JsonToken.String)
-				return null;
-
-			var escapedJson = reader.ReadNextBlockSegment();
-			// add 1 to offset for escape value
-			var escapedReader = new JsonReader(escapedJson.Array, escapedJson.Offset + 1);
-			return queryFormatter.Deserialize(ref escapedReader, formatterResolver);
+			switch (reader.GetCurrentJsonToken())
+			{
+				case JsonToken.BeginObject:
+					return QueryFormatter.Deserialize(ref reader, formatterResolver);
+				case JsonToken.String:
+					var jsonString = reader.ReadStringSegmentUnsafe();
+					var jsonStringReader = new JsonReader(jsonString.Array, jsonString.Offset);
+					return QueryFormatter.Deserialize(ref jsonStringReader, formatterResolver);
+				default:
+					reader.ReadNextBlock();
+					return null;
+			}
 		}
 
 		public void Serialize(ref JsonWriter writer, QueryContainer value, IJsonFormatterResolver formatterResolver)
