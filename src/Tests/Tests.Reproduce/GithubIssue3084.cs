@@ -21,7 +21,7 @@ namespace Tests.Reproduce
 		{
 			var client = _cluster.Client;
 			var index = $"gh3084-{RandomString()}";
-			var document = new ObjectVersion1 { Id = 1, Numeric = 0 };
+			var document = new ObjectVersion1 { Id = 1, Numeric = 0.1 };
 
 			var indexResult = client.Index(document, i => i.Index(index));
 			indexResult.ShouldBeValid();
