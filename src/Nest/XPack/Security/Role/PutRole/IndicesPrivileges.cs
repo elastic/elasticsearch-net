@@ -9,17 +9,17 @@ namespace Nest
 	[ReadAs(typeof(IndicesPrivileges))]
 	public interface IIndicesPrivileges
 	{
-		[DataMember(Name ="field_security")]
+		[DataMember(Name = "field_security")]
 		IFieldSecurity FieldSecurity { get; set; }
 
-		[DataMember(Name ="names")]
+		[DataMember(Name = "names")]
 		[JsonFormatter(typeof(IndicesFormatter))]
 		Indices Names { get; set; }
 
-		[DataMember(Name ="privileges")]
+		[DataMember(Name = "privileges")]
 		IEnumerable<string> Privileges { get; set; }
 
-		[DataMember(Name ="query")]
+		[DataMember(Name = "query")]
 		QueryContainer Query { get; set; }
 	}
 

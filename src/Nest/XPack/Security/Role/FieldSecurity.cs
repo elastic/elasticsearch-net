@@ -6,10 +6,10 @@ namespace Nest
 	[ReadAs(typeof(FieldSecurity))]
 	public interface IFieldSecurity
 	{
-		[DataMember(Name ="except")]
+		[DataMember(Name = "except")]
 		Fields Except { get; set; }
 
-		[DataMember(Name ="grant")]
+		[DataMember(Name = "grant")]
 		Fields Grant { get; set; }
 	}
 
