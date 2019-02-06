@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
@@ -6,6 +7,7 @@ namespace Nest
 	public class CatPendingTasksRecord : ICatRecord
 	{
 		[DataMember(Name ="insertOrder")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		public int? InsertOrder { get; set; }
 
 		[DataMember(Name ="priority")]
