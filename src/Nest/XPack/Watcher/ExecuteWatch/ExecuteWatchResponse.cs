@@ -77,6 +77,9 @@ namespace Nest
 		[DataMember(Name = "user")]
 		public string User { get; set; }
 
+		[DataMember(Name = "node")]
+		public string Node { get; set; }
+
 		[DataMember(Name = "watch_id")]
 		public string WatchId { get; set; }
 	}

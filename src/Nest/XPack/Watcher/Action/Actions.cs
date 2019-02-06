@@ -6,6 +6,7 @@ using Utf8Json;
 
 namespace Nest
 {
+	[JsonFormatter(typeof(ActionsFormatter))]
 	public interface IActions : IIsADictionary<string, IAction> { }
 
 	[JsonFormatter(typeof(ActionsFormatter))]

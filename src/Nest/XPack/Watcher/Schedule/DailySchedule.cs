@@ -37,6 +37,7 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	[ReadAs(typeof(DailySchedule))]
 	public interface IDailySchedule : ISchedule
 	{
 		[DataMember(Name ="at")]

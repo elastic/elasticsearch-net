@@ -6,7 +6,7 @@ namespace Nest
 	[ReadAs(typeof(TriggerEventContainer))]
 	public interface ITriggerEventContainer
 	{
-		[DataMember(Name ="schedule")]
+		[DataMember(Name = "schedule")]
 		IScheduleTriggerEvent Schedule { get; set; }
 	}
 
