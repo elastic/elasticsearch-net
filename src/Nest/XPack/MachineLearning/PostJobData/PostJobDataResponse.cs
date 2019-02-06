@@ -19,7 +19,7 @@ namespace Nest
 		/// The earliest record timestamp
 		/// </summary>
 		[DataMember(Name = "earliest_record_timestamp")]
-		[JsonFormatter(typeof(EpochMillisecondsDateTimeOffsetFormatter))]
+		[JsonFormatter(typeof(EpochMillisecondsNullableDateTimeOffsetFormatter))]
 		DateTimeOffset? EarliestRecordTimestamp { get; }
 
 		/// <summary>

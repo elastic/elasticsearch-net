@@ -63,7 +63,6 @@ namespace Tests.XPack.MachineLearning.RevertModelSnapshot
 
 		protected override void ExpectResponse(IRevertModelSnapshotResponse response)
 		{
-			response.Acknowledged.Should().BeTrue();
 			response.Model.Should().NotBeNull();
 		}
 	}
