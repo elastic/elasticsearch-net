@@ -35,6 +35,7 @@ namespace Nest
 		/// If true causes number subwords to be generated: "500-42" ⇒ "500" "42". Defaults to true.
 		/// </summary>
 		[DataMember(Name ="generate_number_parts")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? GenerateNumberParts { get; set; }
 
 		/// <summary>
