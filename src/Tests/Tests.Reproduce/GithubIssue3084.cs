@@ -21,7 +21,7 @@ namespace Tests.Reproduce
 		{
 			var client = _cluster.Client;
 			var index = $"gh3084-{RandomString()}";
-			var document = new ObjectVersion1 { Id = 1, Numeric = 0 };
+			var document = new ObjectVersion1 { Id = 1, Numeric = 0.1 };
 
 			var indexResult = client.Index(document, i => i.Index(index).Type("doc"));
 			indexResult.ShouldBeValid();
@@ -29,7 +29,7 @@ namespace Tests.Reproduce
 			Action getDoc = () => client.Get<ObjectVersion2>(new GetRequest(index, "doc", 1));
 			Func<Task<IGetResponse<ObjectVersion2>>> getDocAsync = async () => await client.GetAsync<ObjectVersion2>(new GetRequest(index, "doc", 1));
 
-			getDoc.ShouldThrow<Exception>("synchonous code path should throw");
+			getDoc.ShouldThrow<Exception>("synchronous code path should throw");
 			getDocAsync.ShouldThrow<Exception>("async code path should throw");
 		}
 
