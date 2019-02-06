@@ -39,7 +39,7 @@ namespace Nest
 		public string RollupIndex { get; internal set; }
 	}
 
-	public class RollupFieldsCapabilities : IsADictionaryBase<string, string> { }
+	public class RollupFieldsCapabilities : IsADictionaryBase<string, object> { }
 
 	[JsonFormatter(typeof(Converter))]
 	public class RollupFieldsCapabilitiesDictionary : ResolvableDictionaryProxy<Field, IReadOnlyCollection<RollupFieldsCapabilities>>
