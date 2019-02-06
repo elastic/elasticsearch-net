@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Utf8Json;
 
 namespace Nest
 {
+	[InterfaceDataContract]
 	public interface IQuerySqlResponse : IResponse
 	{
 		/// <summary>
 		/// Describes the columns being returned, this property will only be set on the first page of results.
 		/// </summary>
-		[DataMember(Name ="columns")]
+		[DataMember(Name = "columns")]
 		IReadOnlyCollection<SqlColumn> Columns { get; }
 
 		/// <summary>
@@ -18,23 +20,22 @@ namespace Nest
 		/// Unlike scroll, receiving the last page is enough to guarantee that the Elasticsearch state is cleared.
 		/// </para>
 		/// </summary>
-		[DataMember(Name ="cursor")]
+		[DataMember(Name = "cursor")]
 		string Cursor { get; }
 
-		[DataMember(Name ="rows")]
+		[DataMember(Name = "rows")]
 		IReadOnlyCollection<SqlRow> Rows { get; }
 	}
 
 	public class QuerySqlResponse : ResponseBase, IQuerySqlResponse
 	{
 		/// <inheritdoc cref="IQuerySqlResponse.Columns" />
-		/// >
 		public IReadOnlyCollection<SqlColumn> Columns { get; internal set; } = EmptyReadOnly<SqlColumn>.Collection;
 
 		/// <inheritdoc cref="IQuerySqlResponse.Cursor" />
-		/// >
 		public string Cursor { get; internal set; }
 
+		/// <inheritdoc cref="IQuerySqlResponse.Rows" />
 		public IReadOnlyCollection<SqlRow> Rows { get; internal set; } = EmptyReadOnly<SqlRow>.Collection;
 	}
 }

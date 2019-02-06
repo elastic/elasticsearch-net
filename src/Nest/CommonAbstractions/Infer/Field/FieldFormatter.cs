@@ -1,16 +1,60 @@
 ﻿using Utf8Json;
+using Utf8Json.Internal;
 
 namespace Nest
 {
 	internal class FieldFormatter : IJsonFormatter<Field>, IObjectPropertyNameFormatter<Field>
 	{
+		private static readonly AutomataDictionary Fields = new AutomataDictionary
+		{
+			{ "field", 0 },
+			{ "boost", 1 },
+			{ "format", 2 },
+		};
+		
 		public Field Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (reader.GetCurrentJsonToken() != JsonToken.String)
-				return null;
-
-			Field field = reader.ReadString();
-			return field;
+			var token = reader.GetCurrentJsonToken();
+			switch (token)
+			{
+				case JsonToken.Null:
+					reader.ReadNext();
+					return null;
+				case JsonToken.String:
+					return new Field(reader.ReadString());
+				case JsonToken.BeginObject:
+					var count = 0;
+					string field = null;
+					double? boost = null;
+					string format = null;
+					
+					// TODO: include Format in Field ctor
+					while (reader.ReadIsInObject(ref count))
+					{
+						var property = reader.ReadPropertyNameSegmentRaw();
+						if (Fields.TryGetValue(property, out var value))
+						{
+							switch (value)
+							{
+								case 0:
+									field = reader.ReadString();
+									break;
+								case 1:
+									boost = reader.ReadDouble();
+									break;
+								case 2:
+									format = reader.ReadString();
+									break;
+							}
+						}
+						else
+							reader.ReadNextBlock();
+					}
+					
+					return new Field(field, boost);
+				default:
+					throw new JsonParsingException($"Cannot deserialize {typeof(Field).FullName} from {token}");
+			}
 		}
 
 		public void Serialize(ref JsonWriter writer, Field value, IJsonFormatterResolver formatterResolver)

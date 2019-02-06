@@ -5,14 +5,14 @@ using Utf8Json.Internal;
 
 namespace Nest
 {
-	[JsonFormatter(typeof(SqlValueJsonFormatter))]
+	[JsonFormatter(typeof(SqlValueFormatter))]
 	public class SqlValue : LazyDocument
 	{
 		internal SqlValue(byte[] bytes, IJsonFormatterResolver formatterResolver)
 			: base(bytes, formatterResolver) { }
 	}
 
-	internal class SqlValueJsonFormatter : IJsonFormatter<SqlValue>
+	internal class SqlValueFormatter : IJsonFormatter<SqlValue>
 	{
 		public SqlValue Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
