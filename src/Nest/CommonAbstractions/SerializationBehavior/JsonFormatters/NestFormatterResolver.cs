@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Reflection;
-using System.Runtime.Serialization;
 using Utf8Json;
 using Utf8Json.Formatters;
 using Utf8Json.Resolvers;
@@ -46,7 +45,6 @@ namespace Nest
 					new TimeSpanToStringFormatter(),
 					new NullableTimeSpanToStringFormatter(),
 					new JsonNetCompatibleUriFormatter(),
-					new DynamicBodyFormatter(),
 				}, new IJsonFormatterResolver[0]),
 				BuiltinResolver.Instance, // Builtin primitives
 				ElasticsearchNetEnumResolver.Instance, // Specialized Enum handling
@@ -60,17 +58,18 @@ namespace Nest
 				//NestGenericSourceTypeFormatterResolver.Instance,
 			};
 
+			private readonly IJsonFormatterResolver _finalFormatter;
+
 			private readonly ConcurrentDictionary<Type, object> _formatters =
 				new ConcurrentDictionary<Type, object>();
 
 			private readonly IConnectionSettingsValues _settings;
 
-			private readonly IJsonFormatterResolver _finalFormatter;
-
 			internal InnerResolver(IConnectionSettingsValues settings)
 			{
 				_settings = settings;
-				_finalFormatter = DynamicObjectResolver.Create(GetMapping, new Lazy<Func<string, string>>(() => settings.DefaultFieldNameInferrer), true);
+				_finalFormatter =
+					DynamicObjectResolver.Create(GetMapping, new Lazy<Func<string, string>>(() => settings.DefaultFieldNameInferrer), true);
 			}
 
 			public IJsonFormatter<T> GetFormatter<T>() =>

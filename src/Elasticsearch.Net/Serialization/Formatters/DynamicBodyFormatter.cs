@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using Elasticsearch.Net;
 using Utf8Json;
 using Utf8Json.Formatters;
 
-namespace Nest
+namespace Elasticsearch.Net
 {
 	internal class DynamicBodyFormatter : IJsonFormatter<DynamicBody>
 	{
