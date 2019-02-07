@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
+using Utf8Json;
 
 // ReSharper disable ArrangeMethodOrOperatorBody
 // ReSharper disable RemoveRedundantBraces
@@ -16,6 +17,7 @@ namespace Elasticsearch.Net
 	/// <summary>
 	/// A dictionary that supports dynamic access.
 	/// </summary>
+	[JsonFormatter(typeof(DynamicBodyFormatter))]
 	public class DynamicBody
 		: DynamicObject,
 			IEquatable<DynamicBody>,
