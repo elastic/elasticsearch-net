@@ -77,7 +77,7 @@ namespace Tests.Search.MultiSearch
 			o.Should().NotBeNull();
 
 			var b = response.Body;
-			object[] responses = b.responses;
+			List<object> responses = b.responses;
 			responses.Count().Should().Be(4);
 
 			object r = b.responses[0];
