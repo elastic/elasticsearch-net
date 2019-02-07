@@ -67,7 +67,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			AssertExtensionMethods(response);
 
 			//hide
-			AssertVisitedProperies(response);
+			AssertVisitedProperties(response);
 		}
 
 		//hide
@@ -80,16 +80,16 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		}
 
 		//hide
-		private static void AssertVisitedProperies(IGetMappingResponse response)
+		private static void AssertVisitedProperties(IGetMappingResponse response)
 		{
 			var visitor = new TestVisitor();
 			var b = TestClient.Configuration.Random.SourceSerializer;
 			response.Accept(visitor);
 			visitor.CountsShouldContainKeyAndCountBe("type", 1);
-			visitor.CountsShouldContainKeyAndCountBe("text", b ? 19 : 18);
-			visitor.CountsShouldContainKeyAndCountBe("keyword", b ? 20 : 19);
+			visitor.CountsShouldContainKeyAndCountBe("text", b ? 18 : 17);
+			visitor.CountsShouldContainKeyAndCountBe("keyword", b ? 19 : 18);
 			visitor.CountsShouldContainKeyAndCountBe("object", 8);
-			visitor.CountsShouldContainKeyAndCountBe("number", 8);
+			visitor.CountsShouldContainKeyAndCountBe("number", 9);
 			visitor.CountsShouldContainKeyAndCountBe("ip", 2);
 			visitor.CountsShouldContainKeyAndCountBe("geo_point", 3);
 			visitor.CountsShouldContainKeyAndCountBe("date", 4);
