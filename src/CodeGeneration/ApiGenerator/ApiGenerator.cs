@@ -28,7 +28,6 @@ namespace ApiGenerator
 
 			// these API's are new and need to be mapped
 			"xpack.ml.get_calendar_events.json",
-			"xpack.ml.get_calendars.json",
 			"xpack.ml.info.json",
 			"xpack.ml.post_calendar_events.json",
 			"xpack.ml.delete_forecast.json",

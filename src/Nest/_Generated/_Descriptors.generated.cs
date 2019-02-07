@@ -4244,6 +4244,20 @@ namespace Nest
 		// Request parameters
 
 	}
+	///<summary>descriptor for XpackMlGetCalendars <pre></pre></summary>
+	public partial class GetCalendarsDescriptor  : RequestDescriptorBase<GetCalendarsDescriptor,GetCalendarsRequestParameters, IGetCalendarsRequest>, IGetCalendarsRequest
+	{ 
+		/// <summary>/_xpack/ml/calendars</summary>
+		public GetCalendarsDescriptor() : base(){}
+		// values part of the url path
+		Id IGetCalendarsRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		///<summary>The ID of the calendar to fetch</summary>
+		public GetCalendarsDescriptor CalendarId(Id calendarId) => Assign(a=>a.RouteValues.Optional("calendar_id", calendarId));
+
+		// Request parameters
+
+	}
 	///<summary>descriptor for XpackMlGetCategories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
 	public partial class GetCategoriesDescriptor  : RequestDescriptorBase<GetCategoriesDescriptor,GetCategoriesRequestParameters, IGetCategoriesRequest>, IGetCategoriesRequest
 	{ 

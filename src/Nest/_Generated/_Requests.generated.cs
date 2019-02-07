@@ -2778,6 +2778,25 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetCalendarsRequest : IRequest<GetCalendarsRequestParameters>
+	{
+		Id CalendarId { get; }
+	}
+	///<summary>Request parameters for XpackMlGetCalendars <pre></pre></summary>
+	public partial class GetCalendarsRequest : PlainRequestBase<GetCalendarsRequestParameters>, IGetCalendarsRequest
+	{
+		protected IGetCalendarsRequest Self => this;
+		///<summary>/_xpack/ml/calendars</summary>
+		public GetCalendarsRequest() : base(){}
+		///<summary>/_xpack/ml/calendars/{calendar_id}</summary>
+		///<param name="calendar_id">Optional, accepts null</param>
+		public GetCalendarsRequest(Id calendar_id) : base(r=>r.Optional("calendar_id", calendar_id)){}
+		// values part of the url path
+		Id IGetCalendarsRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetCategoriesRequest : IRequest<GetCategoriesRequestParameters>
 	{
 		Id JobId { get; }

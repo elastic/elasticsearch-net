@@ -3578,6 +3578,34 @@ namespace Nest
 			throw InvalidDispatch("XpackMlGetBuckets", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/results/buckets");
 		}
 		
+		internal TResponse XpackMlGetCalendarsDispatch<TResponse>(IRequest<GetCalendarsRequestParameters> p,SerializableData<IGetCalendarsRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.CalendarId)) return _lowLevel.XpackMlGetCalendars<TResponse>(p.RouteValues.CalendarId,p.RequestParameters);
+						return _lowLevel.XpackMlGetCalendars<TResponse>(p.RequestParameters);
+				case POST:
+					if (AllSet(p.RouteValues.CalendarId)) return _lowLevel.XpackMlGetCalendars<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters);
+						return _lowLevel.XpackMlGetCalendars<TResponse>(body,p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackMlGetCalendars", p, new [] { GET, POST }, "/_xpack/ml/calendars", "/_xpack/ml/calendars/{calendar_id}");
+		}
+		
+		internal Task<TResponse> XpackMlGetCalendarsDispatchAsync<TResponse>(IRequest<GetCalendarsRequestParameters> p,SerializableData<IGetCalendarsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.CalendarId)) return _lowLevel.XpackMlGetCalendarsAsync<TResponse>(p.RouteValues.CalendarId,p.RequestParameters,ct);
+						return _lowLevel.XpackMlGetCalendarsAsync<TResponse>(p.RequestParameters,ct);
+				case POST:
+					if (AllSet(p.RouteValues.CalendarId)) return _lowLevel.XpackMlGetCalendarsAsync<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters,ct);
+						return _lowLevel.XpackMlGetCalendarsAsync<TResponse>(body,p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackMlGetCalendars", p, new [] { GET, POST }, "/_xpack/ml/calendars", "/_xpack/ml/calendars/{calendar_id}");
+		}
+		
 		internal TResponse XpackMlGetCategoriesDispatch<TResponse>(IRequest<GetCategoriesRequestParameters> p,SerializableData<IGetCategoriesRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)

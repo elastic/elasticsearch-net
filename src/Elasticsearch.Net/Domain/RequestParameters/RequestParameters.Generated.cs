@@ -2369,6 +2369,11 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
+	///<summary>Request options for XpackMlGetCalendars<pre></pre></summary>
+	public partial class GetCalendarsRequestParameters : RequestParameters<GetCalendarsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
 	///<summary>Request options for XpackMlGetCategories<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
 	public partial class GetCategoriesRequestParameters : RequestParameters<GetCategoriesRequestParameters> 
 	{
