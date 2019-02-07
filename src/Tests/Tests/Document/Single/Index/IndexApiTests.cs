@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.Xunit;
 using Tests.Domain;
 using Tests.Domain.Extensions;
 using Tests.Framework;
@@ -141,6 +142,7 @@ namespace Tests.Document.Single.Index
 		}
 	}
 
+	[JsonNetSerializerOnly]
 	public class IndexJObjectIntegrationTests : IntegrationDocumentationTestBase, IClusterFixture<WritableCluster>
 	{
 		public IndexJObjectIntegrationTests(WritableCluster cluster) : base(cluster) { }
