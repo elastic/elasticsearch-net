@@ -39,10 +39,10 @@ namespace Nest
 	public partial class AcknowledgeWatchRequest : PlainRequestBase<AcknowledgeWatchRequestParameters>, IAcknowledgeWatchRequest
 	{
 		protected IAcknowledgeWatchRequest Self => this;
-		///<summary>/_xpack/watcher/watch/{watch_id}/_ack</summary>
+		///<summary>/_watcher/watch/{watch_id}/_ack</summary>
 		///<param name="watch_id">this parameter is required</param>
 		public AcknowledgeWatchRequest(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
-		///<summary>/_xpack/watcher/watch/{watch_id}/_ack/{action_id}</summary>
+		///<summary>/_watcher/watch/{watch_id}/_ack/{action_id}</summary>
 		///<param name="watch_id">this parameter is required</param>
 		///<param name="action_id">Optional, accepts null</param>
 		public AcknowledgeWatchRequest(Id watch_id, ActionIds action_id) : base(r=>r.Required("watch_id", watch_id).Optional("action_id", action_id)){}
@@ -51,8 +51,6 @@ namespace Nest
 		ActionIds IAcknowledgeWatchRequest.ActionId => Self.RouteValues.Get<ActionIds>("action_id");
 
 		// Request parameters
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IActivateWatchRequest : IRequest<ActivateWatchRequestParameters>
@@ -63,15 +61,13 @@ namespace Nest
 	public partial class ActivateWatchRequest : PlainRequestBase<ActivateWatchRequestParameters>, IActivateWatchRequest
 	{
 		protected IActivateWatchRequest Self => this;
-		///<summary>/_xpack/watcher/watch/{watch_id}/_activate</summary>
+		///<summary>/_watcher/watch/{watch_id}/_activate</summary>
 		///<param name="watch_id">this parameter is required</param>
 		public ActivateWatchRequest(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
 		// values part of the url path
 		Id IActivateWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
 
 		// Request parameters
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IAliasExistsRequest : IRequest<AliasExistsRequestParameters>
@@ -123,24 +119,6 @@ namespace Nest
 		public AnalyzeRequest(IndexName index) : base(r=>r.Optional("index", index)){}
 		// values part of the url path
 		IndexName IAnalyzeRequest.Index => Self.RouteValues.Get<IndexName>("index");
-
-		// Request parameters
-		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
-		[Obsolete("Scheduled to be removed in 7.0, Erroneously documented as a valid option, no longer document from 6.4 onwards as per https://github.com/elastic/elasticsearch/pull/31795")]
-		public bool? PreferLocal { get => Q<bool?>("prefer_local"); set => Q("prefer_local", value); }
-		///<summary>Format of the output</summary>
-		[Obsolete("Scheduled to be removed in 7.0, Erroneously documented as a valid option, no longer document from 6.4 onwards as per https://github.com/elastic/elasticsearch/pull/31795")]
-		public Format? Format { get => Q<Format?>("format"); set => Q("format", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IAuthenticateRequest : IRequest<AuthenticateRequestParameters>
-	{
-	}
-	///<summary>Request parameters for XpackSecurityAuthenticate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
-	public partial class AuthenticateRequest : PlainRequestBase<AuthenticateRequestParameters>, IAuthenticateRequest
-	{
-		protected IAuthenticateRequest Self => this;
-		// values part of the url path
 
 		// Request parameters
 	}
@@ -206,14 +184,12 @@ namespace Nest
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
-		///<summary>Default comma-separated list of fields to return in the response for updates, can be overridden on each sub-request</summary>
-		public Fields Fields { get => Q<Fields>("fields"); set => Q("fields", value); }
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
 	}
@@ -244,9 +220,6 @@ namespace Nest
 		public string[] Actions { get => Q<string[]>("actions"); set => Q("actions", value); }
 		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
 		public string ParentTaskId { get => Q<string>("parent_task_id"); set => Q("parent_task_id", value); }
-		///<summary>Cancel tasks with specified parent node.</summary>
-		[Obsolete("Scheduled to be removed in 7.0, Removed in 6.3.0 from the server see https://github.com/elastic/elasticsearch/pull/28841")]
-		public string ParentNode { get => Q<string>("parent_node"); set => Q("parent_node", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatAliasesRequest : IRequest<CatAliasesRequestParameters>
@@ -789,9 +762,6 @@ namespace Nest
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
-		///<summary>Return tasks with the specified parent node</summary>
-		[Obsolete("Scheduled to be removed in 7.0, Removed in 6.3.0 from the server see https://github.com/elastic/elasticsearch/pull/28841")]
-		public string ParentNode { get => Q<string>("parent_node"); set => Q("parent_node", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatTemplatesRequest : IRequest<CatTemplatesRequestParameters>
@@ -862,78 +832,6 @@ namespace Nest
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICcrStatsRequest : IRequest<CcrStatsRequestParameters>
-	{
-	}
-	///<summary>Request parameters for CcrStats <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html</pre></summary>
-	public partial class CcrStatsRequest : PlainRequestBase<CcrStatsRequestParameters>, ICcrStatsRequest
-	{
-		protected ICcrStatsRequest Self => this;
-		// values part of the url path
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IChangePasswordRequest : IRequest<ChangePasswordRequestParameters>
-	{
-		Name Username { get; }
-	}
-	///<summary>Request parameters for XpackSecurityChangePassword <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</pre></summary>
-	public partial class ChangePasswordRequest : PlainRequestBase<ChangePasswordRequestParameters>, IChangePasswordRequest
-	{
-		protected IChangePasswordRequest Self => this;
-		///<summary>/_xpack/security/user/{username}/_password</summary>
-		///<param name="username">Optional, accepts null</param>
-		public ChangePasswordRequest(Name username) : base(r=>r.Optional("username", username)){}
-		///<summary>/_xpack/security/user/_password</summary>
-		public ChangePasswordRequest() : base(){}
-		// values part of the url path
-		Name IChangePasswordRequest.Username => Self.RouteValues.Get<Name>("username");
-
-		// Request parameters
-		///<summary>
-		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
-		/// to make this operation visible to search, if `false` then do nothing with refreshes.
-		///</summary>
-		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IClearCachedRealmsRequest : IRequest<ClearCachedRealmsRequestParameters>
-	{
-		Names Realms { get; }
-	}
-	///<summary>Request parameters for XpackSecurityClearCachedRealms <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</pre></summary>
-	public partial class ClearCachedRealmsRequest : PlainRequestBase<ClearCachedRealmsRequestParameters>, IClearCachedRealmsRequest
-	{
-		protected IClearCachedRealmsRequest Self => this;
-		///<summary>/_xpack/security/realm/{realms}/_clear_cache</summary>
-		///<param name="realms">this parameter is required</param>
-		public ClearCachedRealmsRequest(Names realms) : base(r=>r.Required("realms", realms)){}
-		// values part of the url path
-		Names IClearCachedRealmsRequest.Realms => Self.RouteValues.Get<Names>("realms");
-
-		// Request parameters
-		///<summary>Comma-separated list of usernames to clear from the cache</summary>
-		public string[] Usernames { get => Q<string[]>("usernames"); set => Q("usernames", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IClearCachedRolesRequest : IRequest<ClearCachedRolesRequestParameters>
-	{
-		Names Name { get; }
-	}
-	///<summary>Request parameters for XpackSecurityClearCachedRoles <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html</pre></summary>
-	public partial class ClearCachedRolesRequest : PlainRequestBase<ClearCachedRolesRequestParameters>, IClearCachedRolesRequest
-	{
-		protected IClearCachedRolesRequest Self => this;
-		///<summary>/_xpack/security/role/{name}/_clear_cache</summary>
-		///<param name="name">this parameter is required</param>
-		public ClearCachedRolesRequest(Names name) : base(r=>r.Required("name", name)){}
-		// values part of the url path
-		Names IClearCachedRolesRequest.Name => Self.RouteValues.Get<Names>("name");
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClearCacheRequest : IRequest<ClearCacheRequestParameters>
 	{
 		Indices Index { get; }
@@ -967,12 +865,7 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Clear request cache</summary>
-		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
-		///<summary>Clear request cache</summary>
 		public bool? Request { get => Q<bool?>("request"); set => Q("request", value); }
-		///<summary>Clear the recycle cache</summary>
-		[Obsolete("Scheduled to be removed in 7.0, Removed in 6.3.0 from the server see https://github.com/elastic/elasticsearch/pull/28866")]
-		public bool? Recycler { get => Q<bool?>("recycler"); set => Q("recycler", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClearScrollRequest : IRequest<ClearScrollRequestParameters>
@@ -1027,29 +920,6 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICloseJobRequest : IRequest<CloseJobRequestParameters>
-	{
-		Id JobId { get; }
-	}
-	///<summary>Request parameters for XpackMlCloseJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</pre></summary>
-	public partial class CloseJobRequest : PlainRequestBase<CloseJobRequestParameters>, ICloseJobRequest
-	{
-		protected ICloseJobRequest Self => this;
-		///<summary>/_xpack/ml/anomaly_detectors/{job_id}/_close</summary>
-		///<param name="job_id">this parameter is required</param>
-		public CloseJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
-		// values part of the url path
-		Id ICloseJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-
-		// Request parameters
-		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
-		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
-		///<summary>True if the job should be forcefully closed</summary>
-		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
-		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClusterAllocationExplainRequest : IRequest<ClusterAllocationExplainRequestParameters>
@@ -1214,6 +1084,10 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+		///<summary>Wait for the metadata version to be equal or greater than the specified metadata version</summary>
+		public long? WaitForMetadataVersion { get => Q<long?>("wait_for_metadata_version"); set => Q("wait_for_metadata_version", value); }
+		///<summary>The maximum time to wait for wait_for_metadata_version before timing out</summary>
+		public Time WaitForTimeout { get => Q<Time>("wait_for_timeout"); set => Q("wait_for_timeout", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
@@ -1273,6 +1147,8 @@ namespace Nest
 		// Request parameters
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -1327,6 +1203,8 @@ namespace Nest
 		// Request parameters
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -1363,40 +1241,6 @@ namespace Nest
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICreateAutoFollowPatternRequest : IRequest<CreateAutoFollowPatternRequestParameters>
-	{
-		Name Name { get; }
-	}
-	///<summary>Request parameters for CcrPutAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</pre></summary>
-	public partial class CreateAutoFollowPatternRequest : PlainRequestBase<CreateAutoFollowPatternRequestParameters>, ICreateAutoFollowPatternRequest
-	{
-		protected ICreateAutoFollowPatternRequest Self => this;
-		///<summary>/_ccr/auto_follow/{name}</summary>
-		///<param name="name">this parameter is required</param>
-		public CreateAutoFollowPatternRequest(Name name) : base(r=>r.Required("name", name)){}
-		// values part of the url path
-		Name ICreateAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICreateFollowIndexRequest : IRequest<CreateFollowIndexRequestParameters>
-	{
-		IndexName Index { get; }
-	}
-	///<summary>Request parameters for CcrFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html</pre></summary>
-	public partial class CreateFollowIndexRequest : PlainRequestBase<CreateFollowIndexRequestParameters>, ICreateFollowIndexRequest
-	{
-		protected ICreateFollowIndexRequest Self => this;
-		///<summary>/{index}/_ccr/follow</summary>
-		///<param name="index">this parameter is required</param>
-		public CreateFollowIndexRequest(IndexName index) : base(r=>r.Required("index", index)){}
-		// values part of the url path
-		IndexName ICreateFollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICreateIndexRequest : IRequest<CreateIndexRequestParameters>
 	{
 		IndexName Index { get; }
@@ -1412,15 +1256,14 @@ namespace Nest
 		IndexName ICreateIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
 		// Request parameters
+		///<summary>Whether a type should be expected in the body of the mappings.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Set the number of active shards to wait for before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
-		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
-		[Obsolete("Scheduled to be removed in 7.0, Elasticsearch 6.x only allows a single type per index so this parameter is now useless")]
-		public bool? UpdateAllTypes { get => Q<bool?>("update_all_types"); set => Q("update_all_types", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICreateRepositoryRequest : IRequest<CreateRepositoryRequestParameters>
@@ -1456,13 +1299,18 @@ namespace Nest
 	public partial class CreateRequest<TDocument> : PlainRequestBase<CreateRequestParameters>, ICreateRequest<TDocument>
 	{
 		protected ICreateRequest<TDocument> Self => this;
+		///<summary>/{index}/_create/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
+		public CreateRequest(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
+		 => Q("routing", new Routing(() => AutoRouteDocument()));
 		///<summary>/{index}/{type}/{id}/_create</summary>
 		///<param name="index">this parameter is required</param>
-		///<param name="type">this parameter is required</param>
+		///<param name="type">Optional, accepts null</param>
 		///<param name="id">this parameter is required</param>
-		public CreateRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		public CreateRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Optional("type", type).Required("id", id))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/{type}/{id}/_create</summary>
+		/// <summary>/{index}/_create/{id}</summary>
 		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public CreateRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document)); }
@@ -1510,11 +1358,11 @@ namespace Nest
 	{
 		Id Id { get; }
 	}
-	///<summary>Request parameters for XpackRollupPutJob <pre></pre></summary>
+	///<summary>Request parameters for XpackRollupPutJob <pre>TODO</pre></summary>
 	public partial class CreateRollupJobRequest : PlainRequestBase<CreateRollupJobRequestParameters>, ICreateRollupJobRequest
 	{
 		protected ICreateRollupJobRequest Self => this;
-		///<summary>/_xpack/rollup/job/{id}</summary>
+		///<summary>/_rollup/job/{id}</summary>
 		///<param name="id">this parameter is required</param>
 		public CreateRollupJobRequest(Id id) : base(r=>r.Required("id", id)){}
 		// values part of the url path
@@ -1531,15 +1379,13 @@ namespace Nest
 	public partial class DeactivateWatchRequest : PlainRequestBase<DeactivateWatchRequestParameters>, IDeactivateWatchRequest
 	{
 		protected IDeactivateWatchRequest Self => this;
-		///<summary>/_xpack/watcher/watch/{watch_id}/_deactivate</summary>
+		///<summary>/_watcher/watch/{watch_id}/_deactivate</summary>
 		///<param name="watch_id">this parameter is required</param>
 		public DeactivateWatchRequest(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
 		// values part of the url path
 		Id IDeactivateWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
 
 		// Request parameters
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteAliasRequest : IRequest<DeleteAliasRequestParameters>
@@ -1564,23 +1410,6 @@ namespace Nest
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteAutoFollowPatternRequest : IRequest<DeleteAutoFollowPatternRequestParameters>
-	{
-		Name Name { get; }
-	}
-	///<summary>Request parameters for CcrDeleteAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</pre></summary>
-	public partial class DeleteAutoFollowPatternRequest : PlainRequestBase<DeleteAutoFollowPatternRequestParameters>, IDeleteAutoFollowPatternRequest
-	{
-		protected IDeleteAutoFollowPatternRequest Self => this;
-		///<summary>/_ccr/auto_follow/{name}</summary>
-		///<param name="name">this parameter is required</param>
-		public DeleteAutoFollowPatternRequest(Name name) : base(r=>r.Required("name", name)){}
-		// values part of the url path
-		Name IDeleteAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
-
-		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteByQueryRequest : IRequest<DeleteByQueryRequestParameters>
@@ -1653,9 +1482,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
@@ -1747,9 +1576,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
@@ -1776,37 +1605,6 @@ namespace Nest
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteDatafeedRequest : IRequest<DeleteDatafeedRequestParameters>
-	{
-		Id DatafeedId { get; }
-	}
-	///<summary>Request parameters for XpackMlDeleteDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
-	public partial class DeleteDatafeedRequest : PlainRequestBase<DeleteDatafeedRequestParameters>, IDeleteDatafeedRequest
-	{
-		protected IDeleteDatafeedRequest Self => this;
-		///<summary>/_xpack/ml/datafeeds/{datafeed_id}</summary>
-		///<param name="datafeed_id">this parameter is required</param>
-		public DeleteDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
-		// values part of the url path
-		Id IDeleteDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
-
-		// Request parameters
-		///<summary>True if the datafeed should be forcefully deleted</summary>
-		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteExpiredDataRequest : IRequest<DeleteExpiredDataRequestParameters>
-	{
-	}
-	///<summary>Request parameters for XpackMlDeleteExpiredData <pre></pre></summary>
-	public partial class DeleteExpiredDataRequest : PlainRequestBase<DeleteExpiredDataRequestParameters>, IDeleteExpiredDataRequest
-	{
-		protected IDeleteExpiredDataRequest Self => this;
-		// values part of the url path
-
-		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteIndexRequest : IRequest<DeleteIndexRequestParameters>
@@ -1857,27 +1655,6 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteJobRequest : IRequest<DeleteJobRequestParameters>
-	{
-		Id JobId { get; }
-	}
-	///<summary>Request parameters for XpackMlDeleteJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</pre></summary>
-	public partial class DeleteJobRequest : PlainRequestBase<DeleteJobRequestParameters>, IDeleteJobRequest
-	{
-		protected IDeleteJobRequest Self => this;
-		///<summary>/_xpack/ml/anomaly_detectors/{job_id}</summary>
-		///<param name="job_id">this parameter is required</param>
-		public DeleteJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
-		// values part of the url path
-		Id IDeleteJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-
-		// Request parameters
-		///<summary>True if the job should be forcefully deleted</summary>
-		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
-		///<summary>Should this request wait until the operation has completed before returning</summary>
-		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteLicenseRequest : IRequest<DeleteLicenseRequestParameters>
 	{
 	}
@@ -1886,26 +1663,6 @@ namespace Nest
 	{
 		protected IDeleteLicenseRequest Self => this;
 		// values part of the url path
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteModelSnapshotRequest : IRequest<DeleteModelSnapshotRequestParameters>
-	{
-		Id JobId { get; }
-		Id SnapshotId { get; }
-	}
-	///<summary>Request parameters for XpackMlDeleteModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</pre></summary>
-	public partial class DeleteModelSnapshotRequest : PlainRequestBase<DeleteModelSnapshotRequestParameters>, IDeleteModelSnapshotRequest
-	{
-		protected IDeleteModelSnapshotRequest Self => this;
-		///<summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
-		///<param name="job_id">this parameter is required</param>
-		///<param name="snapshot_id">this parameter is required</param>
-		public DeleteModelSnapshotRequest(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
-		// values part of the url path
-		Id IDeleteModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-		Id IDeleteModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
 
 		// Request parameters
 	}
@@ -1964,11 +1721,16 @@ namespace Nest
 		protected IDeleteRequest Self => this;
 		///<summary>/{index}/{type}/{id}</summary>
 		///<param name="index">this parameter is required</param>
-		///<param name="type">this parameter is required</param>
+		///<param name="type">Optional, accepts null</param>
 		///<param name="id">this parameter is required</param>
-		public DeleteRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		public DeleteRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Optional("type", type).Required("id", id))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/{type}/{id}</summary>
+		///<summary>/{index}/_doc/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
+		public DeleteRequest(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
+		 => Q("routing", new Routing(() => AutoRouteDocument()));
+		/// <summary>/{index}/_doc/{id}</summary>
 		///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public DeleteRequest(DocumentPath<T> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document)); }
@@ -2004,6 +1766,10 @@ namespace Nest
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+		///<summary>only perform the delete operation if the last operation that has changed the document has the specified sequence number</summary>
+		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+		///<summary>only perform the delete operation if the last operation that has changed the document has the specified primary term</summary>
+		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -2014,9 +1780,14 @@ namespace Nest
 		protected IDeleteRequest Self => this;
 		///<summary>/{index}/{type}/{id}</summary>
 		///<param name="index">this parameter is required</param>
-		///<param name="type">this parameter is required</param>
+		///<param name="type">Optional, accepts null</param>
 		///<param name="id">this parameter is required</param>
-		public DeleteRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		public DeleteRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Optional("type", type).Required("id", id))
+		 => Q("routing", new Routing(() => AutoRouteDocument()));
+		///<summary>/{index}/_doc/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
+		public DeleteRequest(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
 		// values part of the url path
 		Id IDeleteRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -2049,65 +1820,25 @@ namespace Nest
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+		///<summary>only perform the delete operation if the last operation that has changed the document has the specified sequence number</summary>
+		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+		///<summary>only perform the delete operation if the last operation that has changed the document has the specified primary term</summary>
+		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteRoleMappingRequest : IRequest<DeleteRoleMappingRequestParameters>
-	{
-		Name Name { get; }
-	}
-	///<summary>Request parameters for XpackSecurityDeleteRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html</pre></summary>
-	public partial class DeleteRoleMappingRequest : PlainRequestBase<DeleteRoleMappingRequestParameters>, IDeleteRoleMappingRequest
-	{
-		protected IDeleteRoleMappingRequest Self => this;
-		///<summary>/_xpack/security/role_mapping/{name}</summary>
-		///<param name="name">this parameter is required</param>
-		public DeleteRoleMappingRequest(Name name) : base(r=>r.Required("name", name)){}
-		// values part of the url path
-		Name IDeleteRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
-
-		// Request parameters
-		///<summary>
-		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
-		/// to make this operation visible to search, if `false` then do nothing with refreshes.
-		///</summary>
-		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteRoleRequest : IRequest<DeleteRoleRequestParameters>
-	{
-		Name Name { get; }
-	}
-	///<summary>Request parameters for XpackSecurityDeleteRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html</pre></summary>
-	public partial class DeleteRoleRequest : PlainRequestBase<DeleteRoleRequestParameters>, IDeleteRoleRequest
-	{
-		protected IDeleteRoleRequest Self => this;
-		///<summary>/_xpack/security/role/{name}</summary>
-		///<param name="name">this parameter is required</param>
-		public DeleteRoleRequest(Name name) : base(r=>r.Required("name", name)){}
-		// values part of the url path
-		Name IDeleteRoleRequest.Name => Self.RouteValues.Get<Name>("name");
-
-		// Request parameters
-		///<summary>
-		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
-		/// to make this operation visible to search, if `false` then do nothing with refreshes.
-		///</summary>
-		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteRollupJobRequest : IRequest<DeleteRollupJobRequestParameters>
 	{
 		Id Id { get; }
 	}
-	///<summary>Request parameters for XpackRollupDeleteJob <pre></pre></summary>
+	///<summary>Request parameters for XpackRollupDeleteJob <pre>TODO</pre></summary>
 	public partial class DeleteRollupJobRequest : PlainRequestBase<DeleteRollupJobRequestParameters>, IDeleteRollupJobRequest
 	{
 		protected IDeleteRollupJobRequest Self => this;
-		///<summary>/_xpack/rollup/job/{id}</summary>
+		///<summary>/_rollup/job/{id}</summary>
 		///<param name="id">this parameter is required</param>
 		public DeleteRollupJobRequest(Id id) : base(r=>r.Required("id", id)){}
 		// values part of the url path
@@ -2159,28 +1890,6 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteUserRequest : IRequest<DeleteUserRequestParameters>
-	{
-		Name Username { get; }
-	}
-	///<summary>Request parameters for XpackSecurityDeleteUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html</pre></summary>
-	public partial class DeleteUserRequest : PlainRequestBase<DeleteUserRequestParameters>, IDeleteUserRequest
-	{
-		protected IDeleteUserRequest Self => this;
-		///<summary>/_xpack/security/user/{username}</summary>
-		///<param name="username">this parameter is required</param>
-		public DeleteUserRequest(Name username) : base(r=>r.Required("username", username)){}
-		// values part of the url path
-		Name IDeleteUserRequest.Username => Self.RouteValues.Get<Name>("username");
-
-		// Request parameters
-		///<summary>
-		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
-		/// to make this operation visible to search, if `false` then do nothing with refreshes.
-		///</summary>
-		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteWatchRequest : IRequest<DeleteWatchRequestParameters>
 	{
 		Id Id { get; }
@@ -2189,15 +1898,13 @@ namespace Nest
 	public partial class DeleteWatchRequest : PlainRequestBase<DeleteWatchRequestParameters>, IDeleteWatchRequest
 	{
 		protected IDeleteWatchRequest Self => this;
-		///<summary>/_xpack/watcher/watch/{id}</summary>
+		///<summary>/_watcher/watch/{id}</summary>
 		///<param name="id">this parameter is required</param>
 		public DeleteWatchRequest(Id id) : base(r=>r.Required("id", id)){}
 		// values part of the url path
 		Id IDeleteWatchRequest.Id => Self.RouteValues.Get<Id>("id");
 
 		// Request parameters
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeprecationInfoRequest : IRequest<DeprecationInfoRequestParameters>
@@ -2208,37 +1915,15 @@ namespace Nest
 	public partial class DeprecationInfoRequest : PlainRequestBase<DeprecationInfoRequestParameters>, IDeprecationInfoRequest
 	{
 		protected IDeprecationInfoRequest Self => this;
-		///<summary>/_xpack/migration/deprecations</summary>
+		///<summary>/_migration/deprecations</summary>
 		public DeprecationInfoRequest() : base(){}
-		///<summary>/{index}/_xpack/migration/deprecations</summary>
+		///<summary>/{index}/_migration/deprecations</summary>
 		///<param name="index">Optional, accepts null</param>
 		public DeprecationInfoRequest(IndexName index) : base(r=>r.Optional("index", index)){}
 		// values part of the url path
 		IndexName IDeprecationInfoRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
 		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDisableUserRequest : IRequest<DisableUserRequestParameters>
-	{
-		Name Username { get; }
-	}
-	///<summary>Request parameters for XpackSecurityDisableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html</pre></summary>
-	public partial class DisableUserRequest : PlainRequestBase<DisableUserRequestParameters>, IDisableUserRequest
-	{
-		protected IDisableUserRequest Self => this;
-		///<summary>/_xpack/security/user/{username}/_disable</summary>
-		///<param name="username">Optional, accepts null</param>
-		public DisableUserRequest(Name username) : base(r=>r.Optional("username", username)){}
-		// values part of the url path
-		Name IDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
-
-		// Request parameters
-		///<summary>
-		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
-		/// to make this operation visible to search, if `false` then do nothing with refreshes.
-		///</summary>
-		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDocumentExistsRequest : IRequest<DocumentExistsRequestParameters>
@@ -2251,13 +1936,18 @@ namespace Nest
 	public partial class DocumentExistsRequest<T> : PlainRequestBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
 	{
 		protected IDocumentExistsRequest Self => this;
+		///<summary>/{index}/_doc/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
+		public DocumentExistsRequest(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
+		 => Q("routing", new Routing(() => AutoRouteDocument()));
 		///<summary>/{index}/{type}/{id}</summary>
 		///<param name="index">this parameter is required</param>
-		///<param name="type">this parameter is required</param>
+		///<param name="type">Optional, accepts null</param>
 		///<param name="id">this parameter is required</param>
-		public DocumentExistsRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		public DocumentExistsRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Optional("type", type).Required("id", id))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/{type}/{id}</summary>
+		/// <summary>/{index}/_doc/{id}</summary>
 		///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public DocumentExistsRequest(DocumentPath<T> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document)); }
@@ -2291,9 +1981,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -2302,11 +1992,16 @@ namespace Nest
 	public partial class DocumentExistsRequest : PlainRequestBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
 	{
 		protected IDocumentExistsRequest Self => this;
+		///<summary>/{index}/_doc/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
+		public DocumentExistsRequest(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
+		 => Q("routing", new Routing(() => AutoRouteDocument()));
 		///<summary>/{index}/{type}/{id}</summary>
 		///<param name="index">this parameter is required</param>
-		///<param name="type">this parameter is required</param>
+		///<param name="type">Optional, accepts null</param>
 		///<param name="id">this parameter is required</param>
-		public DocumentExistsRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		public DocumentExistsRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Optional("type", type).Required("id", id))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
 		// values part of the url path
 		Id IDocumentExistsRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -2337,35 +2032,13 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IEnableUserRequest : IRequest<EnableUserRequestParameters>
-	{
-		Name Username { get; }
-	}
-	///<summary>Request parameters for XpackSecurityEnableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html</pre></summary>
-	public partial class EnableUserRequest : PlainRequestBase<EnableUserRequestParameters>, IEnableUserRequest
-	{
-		protected IEnableUserRequest Self => this;
-		///<summary>/_xpack/security/user/{username}/_enable</summary>
-		///<param name="username">Optional, accepts null</param>
-		public EnableUserRequest(Name username) : base(r=>r.Optional("username", username)){}
-		// values part of the url path
-		Name IEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
-
-		// Request parameters
-		///<summary>
-		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
-		/// to make this operation visible to search, if `false` then do nothing with refreshes.
-		///</summary>
-		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IExecutePainlessScriptRequest : IRequest<ExecutePainlessScriptRequestParameters>
@@ -2388,10 +2061,10 @@ namespace Nest
 	public partial class ExecuteWatchRequest : PlainRequestBase<ExecuteWatchRequestParameters>, IExecuteWatchRequest
 	{
 		protected IExecuteWatchRequest Self => this;
-		///<summary>/_xpack/watcher/watch/{id}/_execute</summary>
+		///<summary>/_watcher/watch/{id}/_execute</summary>
 		///<param name="id">Optional, accepts null</param>
 		public ExecuteWatchRequest(Id id) : base(r=>r.Optional("id", id)){}
-		///<summary>/_xpack/watcher/watch/_execute</summary>
+		///<summary>/_watcher/watch/_execute</summary>
 		public ExecuteWatchRequest() : base(){}
 		// values part of the url path
 		Id IExecuteWatchRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -2411,13 +2084,18 @@ namespace Nest
 	public partial class ExplainRequest<TDocument> : PlainRequestBase<ExplainRequestParameters>, IExplainRequest<TDocument>
 	{
 		protected IExplainRequest<TDocument> Self => this;
+		///<summary>/{index}/_explain/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
+		public ExplainRequest(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
+		 => Q("routing", new Routing(() => AutoRouteDocument()));
 		///<summary>/{index}/{type}/{id}/_explain</summary>
 		///<param name="index">this parameter is required</param>
-		///<param name="type">this parameter is required</param>
+		///<param name="type">Optional, accepts null</param>
 		///<param name="id">this parameter is required</param>
-		public ExplainRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		public ExplainRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Optional("type", type).Required("id", id))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/{type}/{id}/_explain</summary>
+		/// <summary>/{index}/_explain/{id}</summary>
 		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public ExplainRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document)); }
@@ -2457,9 +2135,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IFieldCapabilitiesRequest : IRequest<FieldCapabilitiesRequestParameters>
@@ -2490,25 +2168,6 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IFlushJobRequest : IRequest<FlushJobRequestParameters>
-	{
-		Id JobId { get; }
-	}
-	///<summary>Request parameters for XpackMlFlushJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</pre></summary>
-	public partial class FlushJobRequest : PlainRequestBase<FlushJobRequestParameters>, IFlushJobRequest
-	{
-		protected IFlushJobRequest Self => this;
-		///<summary>/_xpack/ml/anomaly_detectors/{job_id}/_flush</summary>
-		///<param name="job_id">this parameter is required</param>
-		public FlushJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
-		// values part of the url path
-		Id IFlushJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-
-		// Request parameters
-		///<summary>Skips time to the given value without generating results or updating the model for the skipped interval</summary>
-		public string SkipTime { get => Q<string>("skip_time"); set => Q("skip_time", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IFlushRequest : IRequest<FlushRequestParameters>
@@ -2549,23 +2208,6 @@ namespace Nest
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IFollowIndexStatsRequest : IRequest<FollowIndexStatsRequestParameters>
-	{
-		Indices Index { get; }
-	}
-	///<summary>Request parameters for CcrFollowStats <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</pre></summary>
-	public partial class FollowIndexStatsRequest : PlainRequestBase<FollowIndexStatsRequestParameters>, IFollowIndexStatsRequest
-	{
-		protected IFollowIndexStatsRequest Self => this;
-		///<summary>/{index}/_ccr/stats</summary>
-		///<param name="index">Optional, accepts null</param>
-		public FollowIndexStatsRequest(Indices index) : base(r=>r.Optional("index", index)){}
-		// values part of the url path
-		Indices IFollowIndexStatsRequest.Index => Self.RouteValues.Get<Indices>("index");
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IForceMergeRequest : IRequest<ForceMergeRequestParameters>
 	{
 		Indices Index { get; }
@@ -2598,23 +2240,6 @@ namespace Nest
 		public long? MaxNumSegments { get => Q<long?>("max_num_segments"); set => Q("max_num_segments", value); }
 		///<summary>Specify whether the operation should only expunge deleted documents</summary>
 		public bool? OnlyExpungeDeletes { get => Q<bool?>("only_expunge_deletes"); set => Q("only_expunge_deletes", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IForecastJobRequest : IRequest<ForecastJobRequestParameters>
-	{
-		Id JobId { get; }
-	}
-	///<summary>Request parameters for XpackMlForecast <pre></pre></summary>
-	public partial class ForecastJobRequest : PlainRequestBase<ForecastJobRequestParameters>, IForecastJobRequest
-	{
-		protected IForecastJobRequest Self => this;
-		///<summary>/_xpack/ml/anomaly_detectors/{job_id}/_forecast</summary>
-		///<param name="job_id">this parameter is required</param>
-		public ForecastJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
-		// values part of the url path
-		Id IForecastJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-
-		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetAliasRequest : IRequest<GetAliasRequestParameters>
@@ -2656,23 +2281,6 @@ namespace Nest
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetAnomalyRecordsRequest : IRequest<GetAnomalyRecordsRequestParameters>
-	{
-		Id JobId { get; }
-	}
-	///<summary>Request parameters for XpackMlGetRecords <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</pre></summary>
-	public partial class GetAnomalyRecordsRequest : PlainRequestBase<GetAnomalyRecordsRequestParameters>, IGetAnomalyRecordsRequest
-	{
-		protected IGetAnomalyRecordsRequest Self => this;
-		///<summary>/_xpack/ml/anomaly_detectors/{job_id}/results/records</summary>
-		///<param name="job_id">this parameter is required</param>
-		public GetAnomalyRecordsRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
-		// values part of the url path
-		Id IGetAnomalyRecordsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetBasicLicenseStatusRequest : IRequest<GetBasicLicenseStatusRequestParameters>
 	{
 	}
@@ -2683,119 +2291,6 @@ namespace Nest
 		// values part of the url path
 
 		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetAutoFollowPatternRequest : IRequest<GetAutoFollowPatternRequestParameters>
-	{
-		Name Name { get; }
-	}
-	///<summary>Request parameters for CcrGetAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</pre></summary>
-	public partial class GetAutoFollowPatternRequest : PlainRequestBase<GetAutoFollowPatternRequestParameters>, IGetAutoFollowPatternRequest
-	{
-		protected IGetAutoFollowPatternRequest Self => this;
-		///<summary>/_ccr/auto_follow</summary>
-		public GetAutoFollowPatternRequest() : base(){}
-		///<summary>/_ccr/auto_follow/{name}</summary>
-		///<param name="name">Optional, accepts null</param>
-		public GetAutoFollowPatternRequest(Name name) : base(r=>r.Optional("name", name)){}
-		// values part of the url path
-		Name IGetAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetBucketsRequest : IRequest<GetBucketsRequestParameters>
-	{
-		Id JobId { get; }
-	}
-	///<summary>Request parameters for XpackMlGetBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</pre></summary>
-	public partial class GetBucketsRequest : PlainRequestBase<GetBucketsRequestParameters>, IGetBucketsRequest
-	{
-		protected IGetBucketsRequest Self => this;
-		///<summary>/_xpack/ml/anomaly_detectors/{job_id}/results/buckets</summary>
-		///<param name="job_id">this parameter is required</param>
-		public GetBucketsRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
-		// values part of the url path
-		Id IGetBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetCategoriesRequest : IRequest<GetCategoriesRequestParameters>
-	{
-		Id JobId { get; }
-		CategoryId CategoryId { get; }
-	}
-	///<summary>Request parameters for XpackMlGetCategories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
-	public partial class GetCategoriesRequest : PlainRequestBase<GetCategoriesRequestParameters>, IGetCategoriesRequest
-	{
-		protected IGetCategoriesRequest Self => this;
-		///<summary>/_xpack/ml/anomaly_detectors/{job_id}/results/categories/{category_id}</summary>
-		///<param name="job_id">this parameter is required</param>
-		///<param name="category_id">Optional, accepts null</param>
-		public GetCategoriesRequest(Id job_id, CategoryId category_id) : base(r=>r.Required("job_id", job_id).Optional("category_id", category_id)){}
-		///<summary>/_xpack/ml/anomaly_detectors/{job_id}/results/categories/</summary>
-		///<param name="job_id">this parameter is required</param>
-		public GetCategoriesRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
-		// values part of the url path
-		Id IGetCategoriesRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-		CategoryId IGetCategoriesRequest.CategoryId => Self.RouteValues.Get<CategoryId>("category_id");
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetCertificatesRequest : IRequest<GetCertificatesRequestParameters>
-	{
-	}
-	///<summary>Request parameters for XpackSslCertificates <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-ssl.html</pre></summary>
-	public partial class GetCertificatesRequest : PlainRequestBase<GetCertificatesRequestParameters>, IGetCertificatesRequest
-	{
-		protected IGetCertificatesRequest Self => this;
-		// values part of the url path
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetDatafeedsRequest : IRequest<GetDatafeedsRequestParameters>
-	{
-		Id DatafeedId { get; }
-	}
-	///<summary>Request parameters for XpackMlGetDatafeeds <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</pre></summary>
-	public partial class GetDatafeedsRequest : PlainRequestBase<GetDatafeedsRequestParameters>, IGetDatafeedsRequest
-	{
-		protected IGetDatafeedsRequest Self => this;
-		///<summary>/_xpack/ml/datafeeds/{datafeed_id}</summary>
-		///<param name="datafeed_id">Optional, accepts null</param>
-		public GetDatafeedsRequest(Id datafeed_id) : base(r=>r.Optional("datafeed_id", datafeed_id)){}
-		///<summary>/_xpack/ml/datafeeds</summary>
-		public GetDatafeedsRequest() : base(){}
-		// values part of the url path
-		Id IGetDatafeedsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
-
-		// Request parameters
-		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
-		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetDatafeedStatsRequest : IRequest<GetDatafeedStatsRequestParameters>
-	{
-		Id DatafeedId { get; }
-	}
-	///<summary>Request parameters for XpackMlGetDatafeedStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</pre></summary>
-	public partial class GetDatafeedStatsRequest : PlainRequestBase<GetDatafeedStatsRequestParameters>, IGetDatafeedStatsRequest
-	{
-		protected IGetDatafeedStatsRequest Self => this;
-		///<summary>/_xpack/ml/datafeeds/{datafeed_id}/_stats</summary>
-		///<param name="datafeed_id">Optional, accepts null</param>
-		public GetDatafeedStatsRequest(Id datafeed_id) : base(r=>r.Optional("datafeed_id", datafeed_id)){}
-		///<summary>/_xpack/ml/datafeeds/_stats</summary>
-		public GetDatafeedStatsRequest() : base(){}
-		// values part of the url path
-		Id IGetDatafeedStatsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
-
-		// Request parameters
-		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
-		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetFieldMappingRequest : IRequest<GetFieldMappingRequestParameters>
@@ -2830,6 +2325,8 @@ namespace Nest
 		Fields IGetFieldMappingRequest.Fields => Self.RouteValues.Get<Fields>("fields");
 
 		// Request parameters
+		///<summary>Whether a type should be returned in the body of the mappings.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Whether the default mapping values should be returned as well</summary>
 		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -2860,6 +2357,8 @@ namespace Nest
 		Indices IGetIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
+		///<summary>Whether to add the type name to the response (default: false)</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Ignore unavailable indexes (default: false)</summary>
@@ -2938,71 +2437,14 @@ namespace Nest
 		Names IGetIndexTemplateRequest.Name => Self.RouteValues.Get<Names>("name");
 
 		// Request parameters
+		///<summary>Whether a type should be returned in the body of the mappings.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetInfluencersRequest : IRequest<GetInfluencersRequestParameters>
-	{
-		Id JobId { get; }
-	}
-	///<summary>Request parameters for XpackMlGetInfluencers <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
-	public partial class GetInfluencersRequest : PlainRequestBase<GetInfluencersRequestParameters>, IGetInfluencersRequest
-	{
-		protected IGetInfluencersRequest Self => this;
-		///<summary>/_xpack/ml/anomaly_detectors/{job_id}/results/influencers</summary>
-		///<param name="job_id">this parameter is required</param>
-		public GetInfluencersRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
-		// values part of the url path
-		Id IGetInfluencersRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetJobsRequest : IRequest<GetJobsRequestParameters>
-	{
-		Id JobId { get; }
-	}
-	///<summary>Request parameters for XpackMlGetJobs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</pre></summary>
-	public partial class GetJobsRequest : PlainRequestBase<GetJobsRequestParameters>, IGetJobsRequest
-	{
-		protected IGetJobsRequest Self => this;
-		///<summary>/_xpack/ml/anomaly_detectors/{job_id}</summary>
-		///<param name="job_id">Optional, accepts null</param>
-		public GetJobsRequest(Id job_id) : base(r=>r.Optional("job_id", job_id)){}
-		///<summary>/_xpack/ml/anomaly_detectors</summary>
-		public GetJobsRequest() : base(){}
-		// values part of the url path
-		Id IGetJobsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-
-		// Request parameters
-		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
-		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetJobStatsRequest : IRequest<GetJobStatsRequestParameters>
-	{
-		Id JobId { get; }
-	}
-	///<summary>Request parameters for XpackMlGetJobStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</pre></summary>
-	public partial class GetJobStatsRequest : PlainRequestBase<GetJobStatsRequestParameters>, IGetJobStatsRequest
-	{
-		protected IGetJobStatsRequest Self => this;
-		///<summary>/_xpack/ml/anomaly_detectors/_stats</summary>
-		public GetJobStatsRequest() : base(){}
-		///<summary>/_xpack/ml/anomaly_detectors/{job_id}/_stats</summary>
-		///<param name="job_id">Optional, accepts null</param>
-		public GetJobStatsRequest(Id job_id) : base(r=>r.Optional("job_id", job_id)){}
-		// values part of the url path
-		Id IGetJobStatsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-
-		// Request parameters
-		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
-		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetLicenseRequest : IRequest<GetLicenseRequestParameters>
@@ -3045,6 +2487,8 @@ namespace Nest
 		Types IGetMappingRequest.Type => Self.RouteValues.Get<Types>("type");
 
 		// Request parameters
+		///<summary>Whether to add the type name to the response (default: false)</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
@@ -3058,46 +2502,6 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetModelSnapshotsRequest : IRequest<GetModelSnapshotsRequestParameters>
-	{
-		Id JobId { get; }
-		Id SnapshotId { get; }
-	}
-	///<summary>Request parameters for XpackMlGetModelSnapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</pre></summary>
-	public partial class GetModelSnapshotsRequest : PlainRequestBase<GetModelSnapshotsRequestParameters>, IGetModelSnapshotsRequest
-	{
-		protected IGetModelSnapshotsRequest Self => this;
-		///<summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
-		///<param name="job_id">this parameter is required</param>
-		///<param name="snapshot_id">Optional, accepts null</param>
-		public GetModelSnapshotsRequest(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Optional("snapshot_id", snapshot_id)){}
-		///<summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots</summary>
-		///<param name="job_id">this parameter is required</param>
-		public GetModelSnapshotsRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
-		// values part of the url path
-		Id IGetModelSnapshotsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-		Id IGetModelSnapshotsRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetOverallBucketsRequest : IRequest<GetOverallBucketsRequestParameters>
-	{
-		Id JobId { get; }
-	}
-	///<summary>Request parameters for XpackMlGetOverallBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</pre></summary>
-	public partial class GetOverallBucketsRequest : PlainRequestBase<GetOverallBucketsRequestParameters>, IGetOverallBucketsRequest
-	{
-		protected IGetOverallBucketsRequest Self => this;
-		///<summary>/_xpack/ml/anomaly_detectors/{job_id}/results/overall_buckets</summary>
-		///<param name="job_id">this parameter is required</param>
-		public GetOverallBucketsRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
-		// values part of the url path
-		Id IGetOverallBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-
-		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetPipelineRequest : IRequest<GetPipelineRequestParameters>
@@ -3154,13 +2558,18 @@ namespace Nest
 	public partial class GetRequest<T> : PlainRequestBase<GetRequestParameters>, IGetRequest
 	{
 		protected IGetRequest Self => this;
+		///<summary>/{index}/_doc/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
+		public GetRequest(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
+		 => Q("routing", new Routing(() => AutoRouteDocument()));
 		///<summary>/{index}/{type}/{id}</summary>
 		///<param name="index">this parameter is required</param>
-		///<param name="type">this parameter is required</param>
+		///<param name="type">Optional, accepts null</param>
 		///<param name="id">this parameter is required</param>
-		public GetRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		public GetRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Optional("type", type).Required("id", id))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/{type}/{id}</summary>
+		/// <summary>/{index}/_doc/{id}</summary>
 		///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public GetRequest(DocumentPath<T> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document)); }
@@ -3194,9 +2603,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -3205,11 +2614,16 @@ namespace Nest
 	public partial class GetRequest : PlainRequestBase<GetRequestParameters>, IGetRequest
 	{
 		protected IGetRequest Self => this;
+		///<summary>/{index}/_doc/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
+		public GetRequest(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
+		 => Q("routing", new Routing(() => AutoRouteDocument()));
 		///<summary>/{index}/{type}/{id}</summary>
 		///<param name="index">this parameter is required</param>
-		///<param name="type">this parameter is required</param>
+		///<param name="type">Optional, accepts null</param>
 		///<param name="id">this parameter is required</param>
-		public GetRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		public GetRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Optional("type", type).Required("id", id))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
 		// values part of the url path
 		Id IGetRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -3240,68 +2654,30 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetRoleMappingRequest : IRequest<GetRoleMappingRequestParameters>
-	{
-		Name Name { get; }
-	}
-	///<summary>Request parameters for XpackSecurityGetRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</pre></summary>
-	public partial class GetRoleMappingRequest : PlainRequestBase<GetRoleMappingRequestParameters>, IGetRoleMappingRequest
-	{
-		protected IGetRoleMappingRequest Self => this;
-		///<summary>/_xpack/security/role_mapping/{name}</summary>
-		///<param name="name">Optional, accepts null</param>
-		public GetRoleMappingRequest(Name name) : base(r=>r.Optional("name", name)){}
-		///<summary>/_xpack/security/role_mapping</summary>
-		public GetRoleMappingRequest() : base(){}
-		// values part of the url path
-		Name IGetRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetRoleRequest : IRequest<GetRoleRequestParameters>
-	{
-		Name Name { get; }
-	}
-	///<summary>Request parameters for XpackSecurityGetRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</pre></summary>
-	public partial class GetRoleRequest : PlainRequestBase<GetRoleRequestParameters>, IGetRoleRequest
-	{
-		protected IGetRoleRequest Self => this;
-		///<summary>/_xpack/security/role/{name}</summary>
-		///<param name="name">Optional, accepts null</param>
-		public GetRoleRequest(Name name) : base(r=>r.Optional("name", name)){}
-		///<summary>/_xpack/security/role</summary>
-		public GetRoleRequest() : base(){}
-		// values part of the url path
-		Name IGetRoleRequest.Name => Self.RouteValues.Get<Name>("name");
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetRollupCapabilitiesRequest : IRequest<GetRollupCapabilitiesRequestParameters>
 	{
-		Indices Index { get; }
+		Id Id { get; }
 	}
-	///<summary>Request parameters for XpackRollupGetRollupCaps <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/rollup-get-rollup-caps.html</pre></summary>
+	///<summary>Request parameters for XpackRollupGetRollupCaps <pre>TODO</pre></summary>
 	public partial class GetRollupCapabilitiesRequest : PlainRequestBase<GetRollupCapabilitiesRequestParameters>, IGetRollupCapabilitiesRequest
 	{
 		protected IGetRollupCapabilitiesRequest Self => this;
-		///<summary>/_xpack/rollup/data/{index}</summary>
-		///<param name="index">Optional, accepts null</param>
-		public GetRollupCapabilitiesRequest(Indices index) : base(r=>r.Optional("index", index)){}
-		///<summary>/_xpack/rollup/data/</summary>
+		///<summary>/_rollup/data/{id}</summary>
+		///<param name="id">Optional, accepts null</param>
+		public GetRollupCapabilitiesRequest(Id id) : base(r=>r.Optional("id", id)){}
+		///<summary>/_rollup/data/</summary>
 		public GetRollupCapabilitiesRequest() : base(){}
 		// values part of the url path
-		Indices IGetRollupCapabilitiesRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Id IGetRollupCapabilitiesRequest.Id => Self.RouteValues.Get<Id>("id");
 
 		// Request parameters
 	}
@@ -3310,11 +2686,11 @@ namespace Nest
 	{
 		IndexName Index { get; }
 	}
-	///<summary>Request parameters for XpackRollupGetRollupIndexCaps <pre></pre></summary>
+	///<summary>Request parameters for XpackRollupGetRollupIndexCaps <pre>TODO</pre></summary>
 	public partial class GetRollupIndexCapabilitiesRequest : PlainRequestBase<GetRollupIndexCapabilitiesRequestParameters>, IGetRollupIndexCapabilitiesRequest
 	{
 		protected IGetRollupIndexCapabilitiesRequest Self => this;
-		///<summary>/{index}/_xpack/rollup/data</summary>
+		///<summary>/{index}/_rollup/data</summary>
 		///<param name="index">this parameter is required</param>
 		public GetRollupIndexCapabilitiesRequest(IndexName index) : base(r=>r.Required("index", index)){}
 		// values part of the url path
@@ -3327,14 +2703,14 @@ namespace Nest
 	{
 		Id Id { get; }
 	}
-	///<summary>Request parameters for XpackRollupGetJobs <pre></pre></summary>
+	///<summary>Request parameters for XpackRollupGetJobs <pre>TODO</pre></summary>
 	public partial class GetRollupJobRequest : PlainRequestBase<GetRollupJobRequestParameters>, IGetRollupJobRequest
 	{
 		protected IGetRollupJobRequest Self => this;
-		///<summary>/_xpack/rollup/job/{id}</summary>
+		///<summary>/_rollup/job/{id}</summary>
 		///<param name="id">Optional, accepts null</param>
 		public GetRollupJobRequest(Id id) : base(r=>r.Optional("id", id)){}
-		///<summary>/_xpack/rollup/job/</summary>
+		///<summary>/_rollup/job/</summary>
 		public GetRollupJobRequest() : base(){}
 		// values part of the url path
 		Id IGetRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -3420,37 +2796,6 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetUserAccessTokenRequest : IRequest<GetUserAccessTokenRequestParameters>
-	{
-	}
-	///<summary>Request parameters for XpackSecurityGetToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html</pre></summary>
-	public partial class GetUserAccessTokenRequest : PlainRequestBase<GetUserAccessTokenRequestParameters>, IGetUserAccessTokenRequest
-	{
-		protected IGetUserAccessTokenRequest Self => this;
-		// values part of the url path
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetUserRequest : IRequest<GetUserRequestParameters>
-	{
-		Names Username { get; }
-	}
-	///<summary>Request parameters for XpackSecurityGetUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html</pre></summary>
-	public partial class GetUserRequest : PlainRequestBase<GetUserRequestParameters>, IGetUserRequest
-	{
-		protected IGetUserRequest Self => this;
-		///<summary>/_xpack/security/user/{username}</summary>
-		///<param name="username">Optional, accepts null</param>
-		public GetUserRequest(Names username) : base(r=>r.Optional("username", username)){}
-		///<summary>/_xpack/security/user</summary>
-		public GetUserRequest() : base(){}
-		// values part of the url path
-		Names IGetUserRequest.Username => Self.RouteValues.Get<Names>("username");
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetWatchRequest : IRequest<GetWatchRequestParameters>
 	{
 		Id Id { get; }
@@ -3459,7 +2804,7 @@ namespace Nest
 	public partial class GetWatchRequest : PlainRequestBase<GetWatchRequestParameters>, IGetWatchRequest
 	{
 		protected IGetWatchRequest Self => this;
-		///<summary>/_xpack/watcher/watch/{id}</summary>
+		///<summary>/_watcher/watch/{id}</summary>
 		///<param name="id">this parameter is required</param>
 		public GetWatchRequest(Id id) : base(r=>r.Required("id", id)){}
 		// values part of the url path
@@ -3477,10 +2822,10 @@ namespace Nest
 	public partial class GraphExploreRequest<T> : PlainRequestBase<GraphExploreRequestParameters>, IGraphExploreRequest
 	{
 		protected IGraphExploreRequest Self => this;
-		///<summary>/{index}/_xpack/graph/_explore</summary>
+		///<summary>/{index}/_graph/explore</summary>
 		///<param name="index">this parameter is required</param>
 		public GraphExploreRequest(Indices index) : base(r=>r.Required("index", index)){}
-		///<summary>/{index}/{type}/_xpack/graph/_explore</summary>
+		///<summary>/{index}/{type}/_graph/explore</summary>
 		///<param name="index">this parameter is required</param>
 		///<param name="type">Optional, accepts null</param>
 		public GraphExploreRequest(Indices index, Types type) : base(r=>r.Required("index", index).Optional("type", type)){}
@@ -3504,10 +2849,10 @@ namespace Nest
 	public partial class GraphExploreRequest : PlainRequestBase<GraphExploreRequestParameters>, IGraphExploreRequest
 	{
 		protected IGraphExploreRequest Self => this;
-		///<summary>/{index}/_xpack/graph/_explore</summary>
+		///<summary>/{index}/_graph/explore</summary>
 		///<param name="index">this parameter is required</param>
 		public GraphExploreRequest(Indices index) : base(r=>r.Required("index", index)){}
-		///<summary>/{index}/{type}/_xpack/graph/_explore</summary>
+		///<summary>/{index}/{type}/_graph/explore</summary>
 		///<param name="index">this parameter is required</param>
 		///<param name="type">Optional, accepts null</param>
 		public GraphExploreRequest(Indices index, Types type) : base(r=>r.Required("index", index).Optional("type", type)){}
@@ -3582,16 +2927,25 @@ namespace Nest
 		protected IIndexRequest<TDocument> Self => this;
 		///<summary>/{index}/{type}</summary>
 		///<param name="index">this parameter is required</param>
-		///<param name="type">this parameter is required</param>
-		public IndexRequest(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type))
+		///<param name="type">Optional, accepts null</param>
+		public IndexRequest(IndexName index, TypeName type) : base(r=>r.Required("index", index).Optional("type", type))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
 		///<summary>/{index}/{type}/{id}</summary>
 		///<param name="index">this parameter is required</param>
-		///<param name="type">this parameter is required</param>
+		///<param name="type">Optional, accepts null</param>
 		///<param name="id">Optional, accepts null</param>
-		public IndexRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Optional("id", id))
+		public IndexRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Optional("type", type).Optional("id", id))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/{type}</summary>
+		///<summary>/{index}/_doc/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="id">Optional, accepts null</param>
+		public IndexRequest(IndexName index, Id id) : base(r=>r.Required("index", index).Optional("id", id))
+		 => Q("routing", new Routing(() => AutoRouteDocument()));
+		///<summary>/{index}/_doc</summary>
+		///<param name="index">this parameter is required</param>
+		public IndexRequest(IndexName index) : base(r=>r.Required("index", index))
+		 => Q("routing", new Routing(() => AutoRouteDocument()));
+		/// <summary>/{index}/_doc</summary>
 		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public IndexRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document)); }
@@ -3633,6 +2987,10 @@ namespace Nest
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
+		///<summary>only perform the index operation if the last operation that has changed the document has the specified sequence number</summary>
+		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+		///<summary>only perform the index operation if the last operation that has changed the document has the specified primary term</summary>
+		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
 	}
@@ -3730,18 +3088,6 @@ namespace Nest
 		public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IInvalidateUserAccessTokenRequest : IRequest<InvalidateUserAccessTokenRequestParameters>
-	{
-	}
-	///<summary>Request parameters for XpackSecurityInvalidateToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</pre></summary>
-	public partial class InvalidateUserAccessTokenRequest : PlainRequestBase<InvalidateUserAccessTokenRequestParameters>, IInvalidateUserAccessTokenRequest
-	{
-		protected IInvalidateUserAccessTokenRequest Self => this;
-		// values part of the url path
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IListTasksRequest : IRequest<ListTasksRequestParameters>
 	{
 	}
@@ -3769,9 +3115,6 @@ namespace Nest
 		public GroupBy? GroupBy { get => Q<GroupBy?>("group_by"); set => Q("group_by", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
-		///<summary>Return tasks with the specified parent node</summary>
-		[Obsolete("Scheduled to be removed in 7.0, Removed in 6.3.0 from the server see https://github.com/elastic/elasticsearch/pull/28841")]
-		public string ParentNode { get => Q<string>("parent_node"); set => Q("parent_node", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMigrationAssistanceRequest : IRequest<MigrationAssistanceRequestParameters>
@@ -3782,9 +3125,9 @@ namespace Nest
 	public partial class MigrationAssistanceRequest : PlainRequestBase<MigrationAssistanceRequestParameters>, IMigrationAssistanceRequest
 	{
 		protected IMigrationAssistanceRequest Self => this;
-		///<summary>/_xpack/migration/assistance</summary>
+		///<summary>/_migration/assistance</summary>
 		public MigrationAssistanceRequest() : base(){}
-		///<summary>/_xpack/migration/assistance/{index}</summary>
+		///<summary>/_migration/assistance/{index}</summary>
 		///<param name="index">Optional, accepts null</param>
 		public MigrationAssistanceRequest(Indices index) : base(r=>r.Optional("index", index)){}
 		// values part of the url path
@@ -3810,7 +3153,7 @@ namespace Nest
 	public partial class MigrationUpgradeRequest : PlainRequestBase<MigrationUpgradeRequestParameters>, IMigrationUpgradeRequest
 	{
 		protected IMigrationUpgradeRequest Self => this;
-		///<summary>/_xpack/migration/upgrade/{index}</summary>
+		///<summary>/_migration/upgrade/{index}</summary>
 		///<param name="index">this parameter is required</param>
 		public MigrationUpgradeRequest(IndexName index) : base(r=>r.Required("index", index)){}
 		// values part of the url path
@@ -3819,6 +3162,762 @@ namespace Nest
 		// Request parameters
 		///<summary>Should the request block until the upgrade operation is completed</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlCloseJobRequest : IRequest<MlCloseJobRequestParameters>
+	{
+		Id JobId { get; }
+	}
+	///<summary>Request parameters for MlCloseJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</pre></summary>
+	public partial class MlCloseJobRequest : PlainRequestBase<MlCloseJobRequestParameters>, IMlCloseJobRequest
+	{
+		protected IMlCloseJobRequest Self => this;
+		///<summary>/_ml/anomaly_detectors/{job_id}/_close</summary>
+		///<param name="job_id">this parameter is required</param>
+		public MlCloseJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		// values part of the url path
+		Id IMlCloseJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
+		///<summary>True if the job should be forcefully closed</summary>
+		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
+		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlDeleteDatafeedRequest : IRequest<MlDeleteDatafeedRequestParameters>
+	{
+		Id DatafeedId { get; }
+	}
+	///<summary>Request parameters for MlDeleteDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
+	public partial class MlDeleteDatafeedRequest : PlainRequestBase<MlDeleteDatafeedRequestParameters>, IMlDeleteDatafeedRequest
+	{
+		protected IMlDeleteDatafeedRequest Self => this;
+		///<summary>/_ml/datafeeds/{datafeed_id}</summary>
+		///<param name="datafeed_id">this parameter is required</param>
+		public MlDeleteDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		// values part of the url path
+		Id IMlDeleteDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+		///<summary>True if the datafeed should be forcefully deleted</summary>
+		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlDeleteExpiredDataRequest : IRequest<MlDeleteExpiredDataRequestParameters>
+	{
+	}
+	///<summary>Request parameters for MlDeleteExpiredData <pre>TODO</pre></summary>
+	public partial class MlDeleteExpiredDataRequest : PlainRequestBase<MlDeleteExpiredDataRequestParameters>, IMlDeleteExpiredDataRequest
+	{
+		protected IMlDeleteExpiredDataRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlDeleteFilterRequest : IRequest<MlDeleteFilterRequestParameters>
+	{
+		Id FilterId { get; }
+	}
+	///<summary>Request parameters for MlDeleteFilter <pre>TODO</pre></summary>
+	public partial class MlDeleteFilterRequest : PlainRequestBase<MlDeleteFilterRequestParameters>, IMlDeleteFilterRequest
+	{
+		protected IMlDeleteFilterRequest Self => this;
+		///<summary>/_ml/filters/{filter_id}</summary>
+		///<param name="filter_id">this parameter is required</param>
+		public MlDeleteFilterRequest(Id filter_id) : base(r=>r.Required("filter_id", filter_id)){}
+		// values part of the url path
+		Id IMlDeleteFilterRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
+
+		// Request parameters
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlDeleteJobRequest : IRequest<MlDeleteJobRequestParameters>
+	{
+		Id JobId { get; }
+	}
+	///<summary>Request parameters for MlDeleteJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</pre></summary>
+	public partial class MlDeleteJobRequest : PlainRequestBase<MlDeleteJobRequestParameters>, IMlDeleteJobRequest
+	{
+		protected IMlDeleteJobRequest Self => this;
+		///<summary>/_ml/anomaly_detectors/{job_id}</summary>
+		///<param name="job_id">this parameter is required</param>
+		public MlDeleteJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		// values part of the url path
+		Id IMlDeleteJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+		///<summary>True if the job should be forcefully deleted</summary>
+		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
+		///<summary>Should this request wait until the operation has completed before returning</summary>
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlDeleteModelSnapshotRequest : IRequest<MlDeleteModelSnapshotRequestParameters>
+	{
+		Id JobId { get; }
+		Id SnapshotId { get; }
+	}
+	///<summary>Request parameters for MlDeleteModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</pre></summary>
+	public partial class MlDeleteModelSnapshotRequest : PlainRequestBase<MlDeleteModelSnapshotRequestParameters>, IMlDeleteModelSnapshotRequest
+	{
+		protected IMlDeleteModelSnapshotRequest Self => this;
+		///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
+		///<param name="job_id">this parameter is required</param>
+		///<param name="snapshot_id">this parameter is required</param>
+		public MlDeleteModelSnapshotRequest(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+		// values part of the url path
+		Id IMlDeleteModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IMlDeleteModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
+
+		// Request parameters
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlFlushJobRequest : IRequest<MlFlushJobRequestParameters>
+	{
+		Id JobId { get; }
+	}
+	///<summary>Request parameters for MlFlushJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</pre></summary>
+	public partial class MlFlushJobRequest : PlainRequestBase<MlFlushJobRequestParameters>, IMlFlushJobRequest
+	{
+		protected IMlFlushJobRequest Self => this;
+		///<summary>/_ml/anomaly_detectors/{job_id}/_flush</summary>
+		///<param name="job_id">this parameter is required</param>
+		public MlFlushJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		// values part of the url path
+		Id IMlFlushJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+		///<summary>Calculates interim results for the most recent bucket or all buckets within the latency period</summary>
+		public bool? CalcInterim { get => Q<bool?>("calc_interim"); set => Q("calc_interim", value); }
+		///<summary>When used in conjunction with calc_interim, specifies the range of buckets on which to calculate interim results</summary>
+		public string Start { get => Q<string>("start"); set => Q("start", value); }
+		///<summary>When used in conjunction with calc_interim, specifies the range of buckets on which to calculate interim results</summary>
+		public string End { get => Q<string>("end"); set => Q("end", value); }
+		///<summary>Advances time to the given value generating results and updating the model for the advanced interval</summary>
+		public string AdvanceTime { get => Q<string>("advance_time"); set => Q("advance_time", value); }
+		///<summary>Skips time to the given value without generating results or updating the model for the skipped interval</summary>
+		public string SkipTime { get => Q<string>("skip_time"); set => Q("skip_time", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlForecastRequest : IRequest<MlForecastRequestParameters>
+	{
+		Id JobId { get; }
+	}
+	///<summary>Request parameters for MlForecast <pre>TODO</pre></summary>
+	public partial class MlForecastRequest : PlainRequestBase<MlForecastRequestParameters>, IMlForecastRequest
+	{
+		protected IMlForecastRequest Self => this;
+		///<summary>/_ml/anomaly_detectors/{job_id}/_forecast</summary>
+		///<param name="job_id">this parameter is required</param>
+		public MlForecastRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		// values part of the url path
+		Id IMlForecastRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+		///<summary>The duration of the forecast</summary>
+		public Time Duration { get => Q<Time>("duration"); set => Q("duration", value); }
+		///<summary>The time interval after which the forecast expires. Expired forecasts will be deleted at the first opportunity.</summary>
+		public Time ExpiresIn { get => Q<Time>("expires_in"); set => Q("expires_in", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlGetBucketsRequest : IRequest<MlGetBucketsRequestParameters>
+	{
+		Id JobId { get; }
+		Timestamp Timestamp { get; }
+	}
+	///<summary>Request parameters for MlGetBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</pre></summary>
+	public partial class MlGetBucketsRequest : PlainRequestBase<MlGetBucketsRequestParameters>, IMlGetBucketsRequest
+	{
+		protected IMlGetBucketsRequest Self => this;
+		///<summary>/_ml/anomaly_detectors/{job_id}/results/buckets/{timestamp}</summary>
+		///<param name="job_id">this parameter is required</param>
+		///<param name="timestamp">Optional, accepts null</param>
+		public MlGetBucketsRequest(Id job_id, Timestamp timestamp) : base(r=>r.Required("job_id", job_id).Optional("timestamp", timestamp)){}
+		///<summary>/_ml/anomaly_detectors/{job_id}/results/buckets</summary>
+		///<param name="job_id">this parameter is required</param>
+		public MlGetBucketsRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		// values part of the url path
+		Id IMlGetBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Timestamp IMlGetBucketsRequest.Timestamp => Self.RouteValues.Get<Timestamp>("timestamp");
+
+		// Request parameters
+		///<summary>Include anomaly records</summary>
+		public bool? Expand { get => Q<bool?>("expand"); set => Q("expand", value); }
+		///<summary>Exclude interim results</summary>
+		public bool? ExcludeInterim { get => Q<bool?>("exclude_interim"); set => Q("exclude_interim", value); }
+		///<summary>skips a number of buckets</summary>
+		public int From { get => Q<int>("from"); set => Q("from", value); }
+		///<summary>specifies a max number of buckets to get</summary>
+		public int Size { get => Q<int>("size"); set => Q("size", value); }
+		///<summary>Start time filter for buckets</summary>
+		public string Start { get => Q<string>("start"); set => Q("start", value); }
+		///<summary>End time filter for buckets</summary>
+		public string End { get => Q<string>("end"); set => Q("end", value); }
+		///<summary>Filter for the most anomalous buckets</summary>
+		public double AnomalyScore { get => Q<double>("anomaly_score"); set => Q("anomaly_score", value); }
+		///<summary>Sort buckets by a particular field</summary>
+		public string Sort { get => Q<string>("sort"); set => Q("sort", value); }
+		///<summary>Set the sort direction</summary>
+		public bool? Desc { get => Q<bool?>("desc"); set => Q("desc", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlGetCategoriesRequest : IRequest<MlGetCategoriesRequestParameters>
+	{
+		Id JobId { get; }
+		CategoryId CategoryId { get; }
+	}
+	///<summary>Request parameters for MlGetCategories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
+	public partial class MlGetCategoriesRequest : PlainRequestBase<MlGetCategoriesRequestParameters>, IMlGetCategoriesRequest
+	{
+		protected IMlGetCategoriesRequest Self => this;
+		///<summary>/_ml/anomaly_detectors/{job_id}/results/categories/{category_id}</summary>
+		///<param name="job_id">this parameter is required</param>
+		///<param name="category_id">Optional, accepts null</param>
+		public MlGetCategoriesRequest(Id job_id, CategoryId category_id) : base(r=>r.Required("job_id", job_id).Optional("category_id", category_id)){}
+		///<summary>/_ml/anomaly_detectors/{job_id}/results/categories/</summary>
+		///<param name="job_id">this parameter is required</param>
+		public MlGetCategoriesRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		// values part of the url path
+		Id IMlGetCategoriesRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		CategoryId IMlGetCategoriesRequest.CategoryId => Self.RouteValues.Get<CategoryId>("category_id");
+
+		// Request parameters
+		///<summary>skips a number of categories</summary>
+		public int From { get => Q<int>("from"); set => Q("from", value); }
+		///<summary>specifies a max number of categories to get</summary>
+		public int Size { get => Q<int>("size"); set => Q("size", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlGetDatafeedsRequest : IRequest<MlGetDatafeedsRequestParameters>
+	{
+		Id DatafeedId { get; }
+	}
+	///<summary>Request parameters for MlGetDatafeeds <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</pre></summary>
+	public partial class MlGetDatafeedsRequest : PlainRequestBase<MlGetDatafeedsRequestParameters>, IMlGetDatafeedsRequest
+	{
+		protected IMlGetDatafeedsRequest Self => this;
+		///<summary>/_ml/datafeeds/{datafeed_id}</summary>
+		///<param name="datafeed_id">Optional, accepts null</param>
+		public MlGetDatafeedsRequest(Id datafeed_id) : base(r=>r.Optional("datafeed_id", datafeed_id)){}
+		///<summary>/_ml/datafeeds</summary>
+		public MlGetDatafeedsRequest() : base(){}
+		// values part of the url path
+		Id IMlGetDatafeedsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlGetDatafeedStatsRequest : IRequest<MlGetDatafeedStatsRequestParameters>
+	{
+		Id DatafeedId { get; }
+	}
+	///<summary>Request parameters for MlGetDatafeedStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</pre></summary>
+	public partial class MlGetDatafeedStatsRequest : PlainRequestBase<MlGetDatafeedStatsRequestParameters>, IMlGetDatafeedStatsRequest
+	{
+		protected IMlGetDatafeedStatsRequest Self => this;
+		///<summary>/_ml/datafeeds/{datafeed_id}/_stats</summary>
+		///<param name="datafeed_id">Optional, accepts null</param>
+		public MlGetDatafeedStatsRequest(Id datafeed_id) : base(r=>r.Optional("datafeed_id", datafeed_id)){}
+		///<summary>/_ml/datafeeds/_stats</summary>
+		public MlGetDatafeedStatsRequest() : base(){}
+		// values part of the url path
+		Id IMlGetDatafeedStatsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlGetFiltersRequest : IRequest<MlGetFiltersRequestParameters>
+	{
+		Id FilterId { get; }
+	}
+	///<summary>Request parameters for MlGetFilters <pre>TODO</pre></summary>
+	public partial class MlGetFiltersRequest : PlainRequestBase<MlGetFiltersRequestParameters>, IMlGetFiltersRequest
+	{
+		protected IMlGetFiltersRequest Self => this;
+		///<summary>/_ml/filters</summary>
+		public MlGetFiltersRequest() : base(){}
+		///<summary>/_ml/filters/{filter_id}</summary>
+		///<param name="filter_id">Optional, accepts null</param>
+		public MlGetFiltersRequest(Id filter_id) : base(r=>r.Optional("filter_id", filter_id)){}
+		// values part of the url path
+		Id IMlGetFiltersRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
+
+		// Request parameters
+		///<summary>skips a number of filters</summary>
+		public int From { get => Q<int>("from"); set => Q("from", value); }
+		///<summary>specifies a max number of filters to get</summary>
+		public int Size { get => Q<int>("size"); set => Q("size", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlGetInfluencersRequest : IRequest<MlGetInfluencersRequestParameters>
+	{
+		Id JobId { get; }
+	}
+	///<summary>Request parameters for MlGetInfluencers <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
+	public partial class MlGetInfluencersRequest : PlainRequestBase<MlGetInfluencersRequestParameters>, IMlGetInfluencersRequest
+	{
+		protected IMlGetInfluencersRequest Self => this;
+		///<summary>/_ml/anomaly_detectors/{job_id}/results/influencers</summary>
+		///<param name="job_id">this parameter is required</param>
+		public MlGetInfluencersRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		// values part of the url path
+		Id IMlGetInfluencersRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+		///<summary>Exclude interim results</summary>
+		public bool? ExcludeInterim { get => Q<bool?>("exclude_interim"); set => Q("exclude_interim", value); }
+		///<summary>skips a number of influencers</summary>
+		public int From { get => Q<int>("from"); set => Q("from", value); }
+		///<summary>specifies a max number of influencers to get</summary>
+		public int Size { get => Q<int>("size"); set => Q("size", value); }
+		///<summary>start timestamp for the requested influencers</summary>
+		public string Start { get => Q<string>("start"); set => Q("start", value); }
+		///<summary>end timestamp for the requested influencers</summary>
+		public string End { get => Q<string>("end"); set => Q("end", value); }
+		///<summary>influencer score threshold for the requested influencers</summary>
+		public double InfluencerScore { get => Q<double>("influencer_score"); set => Q("influencer_score", value); }
+		///<summary>sort field for the requested influencers</summary>
+		public string Sort { get => Q<string>("sort"); set => Q("sort", value); }
+		///<summary>whether the results should be sorted in decending order</summary>
+		public bool? Desc { get => Q<bool?>("desc"); set => Q("desc", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlGetJobsRequest : IRequest<MlGetJobsRequestParameters>
+	{
+		Id JobId { get; }
+	}
+	///<summary>Request parameters for MlGetJobs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</pre></summary>
+	public partial class MlGetJobsRequest : PlainRequestBase<MlGetJobsRequestParameters>, IMlGetJobsRequest
+	{
+		protected IMlGetJobsRequest Self => this;
+		///<summary>/_ml/anomaly_detectors/{job_id}</summary>
+		///<param name="job_id">Optional, accepts null</param>
+		public MlGetJobsRequest(Id job_id) : base(r=>r.Optional("job_id", job_id)){}
+		///<summary>/_ml/anomaly_detectors</summary>
+		public MlGetJobsRequest() : base(){}
+		// values part of the url path
+		Id IMlGetJobsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlGetJobStatsRequest : IRequest<MlGetJobStatsRequestParameters>
+	{
+		Id JobId { get; }
+	}
+	///<summary>Request parameters for MlGetJobStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</pre></summary>
+	public partial class MlGetJobStatsRequest : PlainRequestBase<MlGetJobStatsRequestParameters>, IMlGetJobStatsRequest
+	{
+		protected IMlGetJobStatsRequest Self => this;
+		///<summary>/_ml/anomaly_detectors/_stats</summary>
+		public MlGetJobStatsRequest() : base(){}
+		///<summary>/_ml/anomaly_detectors/{job_id}/_stats</summary>
+		///<param name="job_id">Optional, accepts null</param>
+		public MlGetJobStatsRequest(Id job_id) : base(r=>r.Optional("job_id", job_id)){}
+		// values part of the url path
+		Id IMlGetJobStatsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlGetModelSnapshotsRequest : IRequest<MlGetModelSnapshotsRequestParameters>
+	{
+		Id JobId { get; }
+		Id SnapshotId { get; }
+	}
+	///<summary>Request parameters for MlGetModelSnapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</pre></summary>
+	public partial class MlGetModelSnapshotsRequest : PlainRequestBase<MlGetModelSnapshotsRequestParameters>, IMlGetModelSnapshotsRequest
+	{
+		protected IMlGetModelSnapshotsRequest Self => this;
+		///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
+		///<param name="job_id">this parameter is required</param>
+		///<param name="snapshot_id">Optional, accepts null</param>
+		public MlGetModelSnapshotsRequest(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Optional("snapshot_id", snapshot_id)){}
+		///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots</summary>
+		///<param name="job_id">this parameter is required</param>
+		public MlGetModelSnapshotsRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		// values part of the url path
+		Id IMlGetModelSnapshotsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IMlGetModelSnapshotsRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
+
+		// Request parameters
+		///<summary>Skips a number of documents</summary>
+		public int From { get => Q<int>("from"); set => Q("from", value); }
+		///<summary>The default number of documents returned in queries as a string.</summary>
+		public int Size { get => Q<int>("size"); set => Q("size", value); }
+		///<summary>The filter 'start' query parameter</summary>
+		public DateTimeOffset? Start { get => Q<DateTimeOffset?>("start"); set => Q("start", value); }
+		///<summary>The filter 'end' query parameter</summary>
+		public DateTimeOffset? End { get => Q<DateTimeOffset?>("end"); set => Q("end", value); }
+		///<summary>Name of the field to sort on</summary>
+		public string Sort { get => Q<string>("sort"); set => Q("sort", value); }
+		///<summary>True if the results should be sorted in descending order</summary>
+		public bool? Desc { get => Q<bool?>("desc"); set => Q("desc", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlGetOverallBucketsRequest : IRequest<MlGetOverallBucketsRequestParameters>
+	{
+		Id JobId { get; }
+	}
+	///<summary>Request parameters for MlGetOverallBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</pre></summary>
+	public partial class MlGetOverallBucketsRequest : PlainRequestBase<MlGetOverallBucketsRequestParameters>, IMlGetOverallBucketsRequest
+	{
+		protected IMlGetOverallBucketsRequest Self => this;
+		///<summary>/_ml/anomaly_detectors/{job_id}/results/overall_buckets</summary>
+		///<param name="job_id">this parameter is required</param>
+		public MlGetOverallBucketsRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		// values part of the url path
+		Id IMlGetOverallBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+		///<summary>The number of top job bucket scores to be used in the overall_score calculation</summary>
+		public int TopN { get => Q<int>("top_n"); set => Q("top_n", value); }
+		///<summary>The span of the overall buckets. Defaults to the longest job bucket_span</summary>
+		public string BucketSpan { get => Q<string>("bucket_span"); set => Q("bucket_span", value); }
+		///<summary>Returns overall buckets with overall scores higher than this value</summary>
+		public double OverallScore { get => Q<double>("overall_score"); set => Q("overall_score", value); }
+		///<summary>If true overall buckets that include interim buckets will be excluded</summary>
+		public bool? ExcludeInterim { get => Q<bool?>("exclude_interim"); set => Q("exclude_interim", value); }
+		///<summary>Returns overall buckets with timestamps after this time</summary>
+		public string Start { get => Q<string>("start"); set => Q("start", value); }
+		///<summary>Returns overall buckets with timestamps earlier than this time</summary>
+		public string End { get => Q<string>("end"); set => Q("end", value); }
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlGetRecordsRequest : IRequest<MlGetRecordsRequestParameters>
+	{
+		Id JobId { get; }
+	}
+	///<summary>Request parameters for MlGetRecords <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</pre></summary>
+	public partial class MlGetRecordsRequest : PlainRequestBase<MlGetRecordsRequestParameters>, IMlGetRecordsRequest
+	{
+		protected IMlGetRecordsRequest Self => this;
+		///<summary>/_ml/anomaly_detectors/{job_id}/results/records</summary>
+		///<param name="job_id">this parameter is required</param>
+		public MlGetRecordsRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		// values part of the url path
+		Id IMlGetRecordsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+		///<summary>Exclude interim results</summary>
+		public bool? ExcludeInterim { get => Q<bool?>("exclude_interim"); set => Q("exclude_interim", value); }
+		///<summary>skips a number of records</summary>
+		public int From { get => Q<int>("from"); set => Q("from", value); }
+		///<summary>specifies a max number of records to get</summary>
+		public int Size { get => Q<int>("size"); set => Q("size", value); }
+		///<summary>Start time filter for records</summary>
+		public string Start { get => Q<string>("start"); set => Q("start", value); }
+		///<summary>End time filter for records</summary>
+		public string End { get => Q<string>("end"); set => Q("end", value); }
+		///<summary>TODO</summary>
+		public double RecordScore { get => Q<double>("record_score"); set => Q("record_score", value); }
+		///<summary>Sort records by a particular field</summary>
+		public string Sort { get => Q<string>("sort"); set => Q("sort", value); }
+		///<summary>Set the sort direction</summary>
+		public bool? Desc { get => Q<bool?>("desc"); set => Q("desc", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlOpenJobRequest : IRequest<MlOpenJobRequestParameters>
+	{
+		Id JobId { get; }
+	}
+	///<summary>Request parameters for MlOpenJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</pre></summary>
+	public partial class MlOpenJobRequest : PlainRequestBase<MlOpenJobRequestParameters>, IMlOpenJobRequest
+	{
+		protected IMlOpenJobRequest Self => this;
+		///<summary>/_ml/anomaly_detectors/{job_id}/_open</summary>
+		///<param name="job_id">this parameter is required</param>
+		public MlOpenJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		// values part of the url path
+		Id IMlOpenJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlPostDataRequest : IRequest<MlPostDataRequestParameters>
+	{
+		Id JobId { get; }
+	}
+	///<summary>Request parameters for MlPostData <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
+	public partial class MlPostDataRequest : PlainRequestBase<MlPostDataRequestParameters>, IMlPostDataRequest
+	{
+		protected IMlPostDataRequest Self => this;
+		///<summary>/_ml/anomaly_detectors/{job_id}/_data</summary>
+		///<param name="job_id">this parameter is required</param>
+		public MlPostDataRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		// values part of the url path
+		Id IMlPostDataRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+		///<summary>Optional parameter to specify the start of the bucket resetting range</summary>
+		public string ResetStart { get => Q<string>("reset_start"); set => Q("reset_start", value); }
+		///<summary>Optional parameter to specify the end of the bucket resetting range</summary>
+		public string ResetEnd { get => Q<string>("reset_end"); set => Q("reset_end", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlPreviewDatafeedRequest : IRequest<MlPreviewDatafeedRequestParameters>
+	{
+		Id DatafeedId { get; }
+	}
+	///<summary>Request parameters for MlPreviewDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</pre></summary>
+	public partial class MlPreviewDatafeedRequest : PlainRequestBase<MlPreviewDatafeedRequestParameters>, IMlPreviewDatafeedRequest
+	{
+		protected IMlPreviewDatafeedRequest Self => this;
+		///<summary>/_ml/datafeeds/{datafeed_id}/_preview</summary>
+		///<param name="datafeed_id">this parameter is required</param>
+		public MlPreviewDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		// values part of the url path
+		Id IMlPreviewDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlPutDatafeedRequest : IRequest<MlPutDatafeedRequestParameters>
+	{
+		Id DatafeedId { get; }
+	}
+	///<summary>Request parameters for MlPutDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</pre></summary>
+	public partial class MlPutDatafeedRequest : PlainRequestBase<MlPutDatafeedRequestParameters>, IMlPutDatafeedRequest
+	{
+		protected IMlPutDatafeedRequest Self => this;
+		///<summary>/_ml/datafeeds/{datafeed_id}</summary>
+		///<param name="datafeed_id">this parameter is required</param>
+		public MlPutDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		// values part of the url path
+		Id IMlPutDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlPutFilterRequest : IRequest<MlPutFilterRequestParameters>
+	{
+		Id FilterId { get; }
+	}
+	///<summary>Request parameters for MlPutFilter <pre>TODO</pre></summary>
+	public partial class MlPutFilterRequest : PlainRequestBase<MlPutFilterRequestParameters>, IMlPutFilterRequest
+	{
+		protected IMlPutFilterRequest Self => this;
+		///<summary>/_ml/filters/{filter_id}</summary>
+		///<param name="filter_id">this parameter is required</param>
+		public MlPutFilterRequest(Id filter_id) : base(r=>r.Required("filter_id", filter_id)){}
+		// values part of the url path
+		Id IMlPutFilterRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
+
+		// Request parameters
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlPutJobRequest : IRequest<MlPutJobRequestParameters>
+	{
+		Id JobId { get; }
+	}
+	///<summary>Request parameters for MlPutJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
+	public partial class MlPutJobRequest : PlainRequestBase<MlPutJobRequestParameters>, IMlPutJobRequest
+	{
+		protected IMlPutJobRequest Self => this;
+		///<summary>/_ml/anomaly_detectors/{job_id}</summary>
+		///<param name="job_id">this parameter is required</param>
+		public MlPutJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		// values part of the url path
+		Id IMlPutJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlRevertModelSnapshotRequest : IRequest<MlRevertModelSnapshotRequestParameters>
+	{
+		Id JobId { get; }
+		Id SnapshotId { get; }
+	}
+	///<summary>Request parameters for MlRevertModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</pre></summary>
+	public partial class MlRevertModelSnapshotRequest : PlainRequestBase<MlRevertModelSnapshotRequestParameters>, IMlRevertModelSnapshotRequest
+	{
+		protected IMlRevertModelSnapshotRequest Self => this;
+		///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert</summary>
+		///<param name="job_id">this parameter is required</param>
+		///<param name="snapshot_id">this parameter is required</param>
+		public MlRevertModelSnapshotRequest(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+		// values part of the url path
+		Id IMlRevertModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IMlRevertModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
+
+		// Request parameters
+		///<summary>Should we reset the results back to the time of the snapshot?</summary>
+		public bool? DeleteInterveningResults { get => Q<bool?>("delete_intervening_results"); set => Q("delete_intervening_results", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlSetUpgradeModeRequest : IRequest<MlSetUpgradeModeRequestParameters>
+	{
+	}
+	///<summary>Request parameters for MlSetUpgradeMode <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-set-upgrade-mode.html</pre></summary>
+	public partial class MlSetUpgradeModeRequest : PlainRequestBase<MlSetUpgradeModeRequestParameters>, IMlSetUpgradeModeRequest
+	{
+		protected IMlSetUpgradeModeRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+		///<summary>Whether to enable upgrade_mode ML setting or not. Defaults to false.</summary>
+		public bool? Enabled { get => Q<bool?>("enabled"); set => Q("enabled", value); }
+		///<summary>Controls the time to wait before action times out. Defaults to 30 seconds</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlStartDatafeedRequest : IRequest<MlStartDatafeedRequestParameters>
+	{
+		Id DatafeedId { get; }
+	}
+	///<summary>Request parameters for MlStartDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</pre></summary>
+	public partial class MlStartDatafeedRequest : PlainRequestBase<MlStartDatafeedRequestParameters>, IMlStartDatafeedRequest
+	{
+		protected IMlStartDatafeedRequest Self => this;
+		///<summary>/_ml/datafeeds/{datafeed_id}/_start</summary>
+		///<param name="datafeed_id">this parameter is required</param>
+		public MlStartDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		// values part of the url path
+		Id IMlStartDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+		///<summary>The start time from where the datafeed should begin</summary>
+		public string Start { get => Q<string>("start"); set => Q("start", value); }
+		///<summary>The end time when the datafeed should stop. When not set, the datafeed continues in real time</summary>
+		public string End { get => Q<string>("end"); set => Q("end", value); }
+		///<summary>Controls the time to wait until a datafeed has started. Default to 20 seconds</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlStopDatafeedRequest : IRequest<MlStopDatafeedRequestParameters>
+	{
+		Id DatafeedId { get; }
+	}
+	///<summary>Request parameters for MlStopDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</pre></summary>
+	public partial class MlStopDatafeedRequest : PlainRequestBase<MlStopDatafeedRequestParameters>, IMlStopDatafeedRequest
+	{
+		protected IMlStopDatafeedRequest Self => this;
+		///<summary>/_ml/datafeeds/{datafeed_id}/_stop</summary>
+		///<param name="datafeed_id">this parameter is required</param>
+		public MlStopDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		// values part of the url path
+		Id IMlStopDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
+		///<summary>True if the datafeed should be forcefully stopped.</summary>
+		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
+		///<summary>Controls the time to wait until a datafeed has stopped. Default to 20 seconds</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlUpdateDatafeedRequest : IRequest<MlUpdateDatafeedRequestParameters>
+	{
+		Id DatafeedId { get; }
+	}
+	///<summary>Request parameters for MlUpdateDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</pre></summary>
+	public partial class MlUpdateDatafeedRequest : PlainRequestBase<MlUpdateDatafeedRequestParameters>, IMlUpdateDatafeedRequest
+	{
+		protected IMlUpdateDatafeedRequest Self => this;
+		///<summary>/_ml/datafeeds/{datafeed_id}/_update</summary>
+		///<param name="datafeed_id">this parameter is required</param>
+		public MlUpdateDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		// values part of the url path
+		Id IMlUpdateDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlUpdateJobRequest : IRequest<MlUpdateJobRequestParameters>
+	{
+		Id JobId { get; }
+	}
+	///<summary>Request parameters for MlUpdateJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</pre></summary>
+	public partial class MlUpdateJobRequest : PlainRequestBase<MlUpdateJobRequestParameters>, IMlUpdateJobRequest
+	{
+		protected IMlUpdateJobRequest Self => this;
+		///<summary>/_ml/anomaly_detectors/{job_id}/_update</summary>
+		///<param name="job_id">this parameter is required</param>
+		public MlUpdateJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		// values part of the url path
+		Id IMlUpdateJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlUpdateModelSnapshotRequest : IRequest<MlUpdateModelSnapshotRequestParameters>
+	{
+		Id JobId { get; }
+		Id SnapshotId { get; }
+	}
+	///<summary>Request parameters for MlUpdateModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</pre></summary>
+	public partial class MlUpdateModelSnapshotRequest : PlainRequestBase<MlUpdateModelSnapshotRequestParameters>, IMlUpdateModelSnapshotRequest
+	{
+		protected IMlUpdateModelSnapshotRequest Self => this;
+		///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update</summary>
+		///<param name="job_id">this parameter is required</param>
+		///<param name="snapshot_id">this parameter is required</param>
+		public MlUpdateModelSnapshotRequest(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+		// values part of the url path
+		Id IMlUpdateModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IMlUpdateModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
+
+		// Request parameters
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMlValidateRequest : IRequest<MlValidateRequestParameters>
+	{
+	}
+	///<summary>Request parameters for MlValidate <pre>TODO</pre></summary>
+	public partial class MlValidateRequest : PlainRequestBase<MlValidateRequestParameters>, IMlValidateRequest
+	{
+		protected IMlValidateRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+		//TODO THIS METHOD IS UNMAPPED!
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMultiGetRequest : IRequest<MultiGetRequestParameters>
@@ -3862,9 +3961,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMultiSearchRequest : IRequest<MultiSearchRequestParameters>
@@ -3908,6 +4007,10 @@ namespace Nest
 		/// on the cluster in order to limit the number of concurrent shard requests
 		///</summary>
 		public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
+		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
+		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
+		public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMultiSearchTemplateRequest : IRequest<MultiSearchTemplateRequestParameters>
@@ -3939,6 +4042,10 @@ namespace Nest
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
 		public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
+		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
+		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
+		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
+		public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMultiTermVectorsRequest : IRequest<MultiTermVectorsRequestParameters>
@@ -4187,40 +4294,6 @@ namespace Nest
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IOpenJobRequest : IRequest<OpenJobRequestParameters>
-	{
-		Id JobId { get; }
-	}
-	///<summary>Request parameters for XpackMlOpenJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</pre></summary>
-	public partial class OpenJobRequest : PlainRequestBase<OpenJobRequestParameters>, IOpenJobRequest
-	{
-		protected IOpenJobRequest Self => this;
-		///<summary>/_xpack/ml/anomaly_detectors/{job_id}/_open</summary>
-		///<param name="job_id">this parameter is required</param>
-		public OpenJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
-		// values part of the url path
-		Id IOpenJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPauseFollowIndexRequest : IRequest<PauseFollowIndexRequestParameters>
-	{
-		IndexName Index { get; }
-	}
-	///<summary>Request parameters for CcrPauseFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</pre></summary>
-	public partial class PauseFollowIndexRequest : PlainRequestBase<PauseFollowIndexRequestParameters>, IPauseFollowIndexRequest
-	{
-		protected IPauseFollowIndexRequest Self => this;
-		///<summary>/{index}/_ccr/pause_follow</summary>
-		///<param name="index">this parameter is required</param>
-		public PauseFollowIndexRequest(IndexName index) : base(r=>r.Required("index", index)){}
-		// values part of the url path
-		IndexName IPauseFollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPingRequest : IRequest<PingRequestParameters>
 	{
 	}
@@ -4231,27 +4304,6 @@ namespace Nest
 		// values part of the url path
 
 		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPostJobDataRequest : IRequest<PostJobDataRequestParameters>
-	{
-		Id JobId { get; }
-	}
-	///<summary>Request parameters for XpackMlPostData <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
-	public partial class PostJobDataRequest : PlainRequestBase<PostJobDataRequestParameters>, IPostJobDataRequest
-	{
-		protected IPostJobDataRequest Self => this;
-		///<summary>/_xpack/ml/anomaly_detectors/{job_id}/_data</summary>
-		///<param name="job_id">this parameter is required</param>
-		public PostJobDataRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
-		// values part of the url path
-		Id IPostJobDataRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-
-		// Request parameters
-		///<summary>Optional parameter to specify the start of the bucket resetting range</summary>
-		public DateTimeOffset? ResetStart { get => Q<DateTimeOffset?>("reset_start"); set => Q("reset_start", value); }
-		///<summary>Optional parameter to specify the end of the bucket resetting range</summary>
-		public DateTimeOffset? ResetEnd { get => Q<DateTimeOffset?>("reset_end"); set => Q("reset_end", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPostLicenseRequest : IRequest<PostLicenseRequestParameters>
@@ -4266,23 +4318,6 @@ namespace Nest
 		// Request parameters
 		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
 		public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPreviewDatafeedRequest : IRequest<PreviewDatafeedRequestParameters>
-	{
-		Id DatafeedId { get; }
-	}
-	///<summary>Request parameters for XpackMlPreviewDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</pre></summary>
-	public partial class PreviewDatafeedRequest : PlainRequestBase<PreviewDatafeedRequestParameters>, IPreviewDatafeedRequest
-	{
-		protected IPreviewDatafeedRequest Self => this;
-		///<summary>/_xpack/ml/datafeeds/{datafeed_id}/_preview</summary>
-		///<param name="datafeed_id">this parameter is required</param>
-		public PreviewDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
-		// values part of the url path
-		Id IPreviewDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
-
-		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutAliasRequest : IRequest<PutAliasRequestParameters>
@@ -4309,23 +4344,6 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPutDatafeedRequest : IRequest<PutDatafeedRequestParameters>
-	{
-		Id DatafeedId { get; }
-	}
-	///<summary>Request parameters for XpackMlPutDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</pre></summary>
-	public partial class PutDatafeedRequest : PlainRequestBase<PutDatafeedRequestParameters>, IPutDatafeedRequest
-	{
-		protected IPutDatafeedRequest Self => this;
-		///<summary>/_xpack/ml/datafeeds/{datafeed_id}</summary>
-		///<param name="datafeed_id">this parameter is required</param>
-		public PutDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
-		// values part of the url path
-		Id IPutDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutIndexTemplateRequest : IRequest<PutIndexTemplateRequestParameters>
 	{
 		Name Name { get; }
@@ -4341,6 +4359,8 @@ namespace Nest
 		Name IPutIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
 
 		// Request parameters
+		///<summary>Whether a type should be returned in the body of the mappings.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 		///<summary>Explicit operation timeout</summary>
@@ -4349,23 +4369,6 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPutJobRequest : IRequest<PutJobRequestParameters>
-	{
-		Id JobId { get; }
-	}
-	///<summary>Request parameters for XpackMlPutJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
-	public partial class PutJobRequest : PlainRequestBase<PutJobRequestParameters>, IPutJobRequest
-	{
-		protected IPutJobRequest Self => this;
-		///<summary>/_xpack/ml/anomaly_detectors/{job_id}</summary>
-		///<param name="job_id">this parameter is required</param>
-		public PutJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
-		// values part of the url path
-		Id IPutJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-
-		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutMappingRequest : IRequest<PutMappingRequestParameters>
@@ -4379,16 +4382,21 @@ namespace Nest
 		protected IPutMappingRequest Self => this;
 		///<summary>/{index}/{type}/_mapping</summary>
 		///<param name="index">Optional, accepts null</param>
-		///<param name="type">this parameter is required</param>
-		public PutMappingRequest(Indices index, TypeName type) : base(r=>r.Optional("index", index).Required("type", type)){}
+		///<param name="type">Optional, accepts null</param>
+		public PutMappingRequest(Indices index, TypeName type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 		///<summary>/_mapping/{type}</summary>
-		///<param name="type">this parameter is required</param>
-		public PutMappingRequest(TypeName type) : base(r=>r.Required("type", type)){}
+		///<param name="type">Optional, accepts null</param>
+		public PutMappingRequest(TypeName type) : base(r=>r.Optional("type", type)){}
+		///<summary>/{index}/_mappings</summary>
+		///<param name="index">Optional, accepts null</param>
+		public PutMappingRequest(Indices index) : base(r=>r.Optional("index", index)){}
 		// values part of the url path
 		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		TypeName IPutMappingRequest.Type => Self.RouteValues.Get<TypeName>("type");
 
 		// Request parameters
+		///<summary>Whether a type should be expected in the body of the mappings.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
@@ -4402,25 +4410,27 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
-		[Obsolete("Scheduled to be removed in 7.0, Elasticsearch 6.x only allows a single type per index so this parameter is now useless")]
-		public bool? UpdateAllTypes { get => Q<bool?>("update_all_types"); set => Q("update_all_types", value); }
 	}	///<summary>Request parameters for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
 	public partial class PutMappingRequest : PlainRequestBase<PutMappingRequestParameters>, IPutMappingRequest
 	{
 		protected IPutMappingRequest Self => this;
 		///<summary>/{index}/{type}/_mapping</summary>
 		///<param name="index">Optional, accepts null</param>
-		///<param name="type">this parameter is required</param>
-		public PutMappingRequest(Indices index, TypeName type) : base(r=>r.Optional("index", index).Required("type", type)){}
+		///<param name="type">Optional, accepts null</param>
+		public PutMappingRequest(Indices index, TypeName type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 		///<summary>/_mapping/{type}</summary>
-		///<param name="type">this parameter is required</param>
-		public PutMappingRequest(TypeName type) : base(r=>r.Required("type", type)){}
+		///<param name="type">Optional, accepts null</param>
+		public PutMappingRequest(TypeName type) : base(r=>r.Optional("type", type)){}
+		///<summary>/{index}/_mappings</summary>
+		///<param name="index">Optional, accepts null</param>
+		public PutMappingRequest(Indices index) : base(r=>r.Optional("index", index)){}
 		// values part of the url path
 		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		TypeName IPutMappingRequest.Type => Self.RouteValues.Get<TypeName>("type");
 
 		// Request parameters
+		///<summary>Whether a type should be expected in the body of the mappings.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
@@ -4434,9 +4444,6 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
-		[Obsolete("Scheduled to be removed in 7.0, Elasticsearch 6.x only allows a single type per index so this parameter is now useless")]
-		public bool? UpdateAllTypes { get => Q<bool?>("update_all_types"); set => Q("update_all_types", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutPipelineRequest : IRequest<PutPipelineRequestParameters>
@@ -4458,50 +4465,6 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPutRoleMappingRequest : IRequest<PutRoleMappingRequestParameters>
-	{
-		Name Name { get; }
-	}
-	///<summary>Request parameters for XpackSecurityPutRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html</pre></summary>
-	public partial class PutRoleMappingRequest : PlainRequestBase<PutRoleMappingRequestParameters>, IPutRoleMappingRequest
-	{
-		protected IPutRoleMappingRequest Self => this;
-		///<summary>/_xpack/security/role_mapping/{name}</summary>
-		///<param name="name">this parameter is required</param>
-		public PutRoleMappingRequest(Name name) : base(r=>r.Required("name", name)){}
-		// values part of the url path
-		Name IPutRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
-
-		// Request parameters
-		///<summary>
-		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
-		/// to make this operation visible to search, if `false` then do nothing with refreshes.
-		///</summary>
-		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPutRoleRequest : IRequest<PutRoleRequestParameters>
-	{
-		Name Name { get; }
-	}
-	///<summary>Request parameters for XpackSecurityPutRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</pre></summary>
-	public partial class PutRoleRequest : PlainRequestBase<PutRoleRequestParameters>, IPutRoleRequest
-	{
-		protected IPutRoleRequest Self => this;
-		///<summary>/_xpack/security/role/{name}</summary>
-		///<param name="name">this parameter is required</param>
-		public PutRoleRequest(Name name) : base(r=>r.Required("name", name)){}
-		// values part of the url path
-		Name IPutRoleRequest.Name => Self.RouteValues.Get<Name>("name");
-
-		// Request parameters
-		///<summary>
-		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
-		/// to make this operation visible to search, if `false` then do nothing with refreshes.
-		///</summary>
-		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutScriptRequest : IRequest<PutScriptRequestParameters>
@@ -4531,28 +4494,6 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPutUserRequest : IRequest<PutUserRequestParameters>
-	{
-		Name Username { get; }
-	}
-	///<summary>Request parameters for XpackSecurityPutUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html</pre></summary>
-	public partial class PutUserRequest : PlainRequestBase<PutUserRequestParameters>, IPutUserRequest
-	{
-		protected IPutUserRequest Self => this;
-		///<summary>/_xpack/security/user/{username}</summary>
-		///<param name="username">this parameter is required</param>
-		public PutUserRequest(Name username) : base(r=>r.Required("username", username)){}
-		// values part of the url path
-		Name IPutUserRequest.Username => Self.RouteValues.Get<Name>("username");
-
-		// Request parameters
-		///<summary>
-		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
-		/// to make this operation visible to search, if `false` then do nothing with refreshes.
-		///</summary>
-		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutWatchRequest : IRequest<PutWatchRequestParameters>
 	{
 		Id Id { get; }
@@ -4561,19 +4502,21 @@ namespace Nest
 	public partial class PutWatchRequest : PlainRequestBase<PutWatchRequestParameters>, IPutWatchRequest
 	{
 		protected IPutWatchRequest Self => this;
-		///<summary>/_xpack/watcher/watch/{id}</summary>
+		///<summary>/_watcher/watch/{id}</summary>
 		///<param name="id">this parameter is required</param>
 		public PutWatchRequest(Id id) : base(r=>r.Required("id", id)){}
 		// values part of the url path
 		Id IPutWatchRequest.Id => Self.RouteValues.Get<Id>("id");
 
 		// Request parameters
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Specify whether the watch is in/active by default</summary>
 		public bool? Active { get => Q<bool?>("active"); set => Q("active", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
+		///<summary>only update the watch if the last operation that has changed the watch has the specified sequence number</summary>
+		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+		///<summary>only update the watch if the last operation that has changed the watch has the specified primary term</summary>
+		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IQuerySqlRequest : IRequest<QuerySqlRequestParameters>
@@ -4588,35 +4531,6 @@ namespace Nest
 		// Request parameters
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IRankEvalRequest : IRequest<RankEvalRequestParameters>
-	{
-		Indices Index { get; }
-	}
-	///<summary>Request parameters for RankEval <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html</pre></summary>
-	public partial class RankEvalRequest : PlainRequestBase<RankEvalRequestParameters>, IRankEvalRequest
-	{
-		protected IRankEvalRequest Self => this;
-		///<summary>/_rank_eval</summary>
-		public RankEvalRequest() : base(){}
-		///<summary>/{index}/_rank_eval</summary>
-		///<param name="index">Optional, accepts null</param>
-		public RankEvalRequest(Indices index) : base(r=>r.Optional("index", index)){}
-		// values part of the url path
-		Indices IRankEvalRequest.Index => Self.RouteValues.Get<Indices>("index");
-
-		// Request parameters
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		///<summary>
-		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
-		/// been specified)
-		///</summary>
-		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		//TODO THIS METHOD IS UNMAPPED!
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRecoveryStatusRequest : IRequest<RecoveryStatusRequestParameters>
@@ -4723,7 +4637,7 @@ namespace Nest
 	{
 		NodeIds NodeId { get; }
 	}
-	///<summary>Request parameters for NodesReloadSecureSettingsForAll <pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.5/secure-settings.html#reloadable-secure-settings</pre></summary>
+	///<summary>Request parameters for NodesReloadSecureSettingsForAll <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings</pre></summary>
 	public partial class ReloadSecureSettingsRequest : PlainRequestBase<ReloadSecureSettingsRequestParameters>, IReloadSecureSettingsRequest
 	{
 		protected IReloadSecureSettingsRequest Self => this;
@@ -4771,18 +4685,6 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IRestartWatcherRequest : IRequest<RestartWatcherRequestParameters>
-	{
-	}
-	///<summary>Request parameters for XpackWatcherRestart <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-restart.html</pre></summary>
-	public partial class RestartWatcherRequest : PlainRequestBase<RestartWatcherRequestParameters>, IRestartWatcherRequest
-	{
-		protected IRestartWatcherRequest Self => this;
-		// values part of the url path
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRestoreRequest : IRequest<RestoreRequestParameters>
 	{
 		Name RepositoryName { get; }
@@ -4807,43 +4709,6 @@ namespace Nest
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IResumeFollowIndexRequest : IRequest<ResumeFollowIndexRequestParameters>
-	{
-		IndexName Index { get; }
-	}
-	///<summary>Request parameters for CcrResumeFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</pre></summary>
-	public partial class ResumeFollowIndexRequest : PlainRequestBase<ResumeFollowIndexRequestParameters>, IResumeFollowIndexRequest
-	{
-		protected IResumeFollowIndexRequest Self => this;
-		///<summary>/{index}/_ccr/resume_follow</summary>
-		///<param name="index">this parameter is required</param>
-		public ResumeFollowIndexRequest(IndexName index) : base(r=>r.Required("index", index)){}
-		// values part of the url path
-		IndexName IResumeFollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IRevertModelSnapshotRequest : IRequest<RevertModelSnapshotRequestParameters>
-	{
-		Id JobId { get; }
-		Id SnapshotId { get; }
-	}
-	///<summary>Request parameters for XpackMlRevertModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</pre></summary>
-	public partial class RevertModelSnapshotRequest : PlainRequestBase<RevertModelSnapshotRequestParameters>, IRevertModelSnapshotRequest
-	{
-		protected IRevertModelSnapshotRequest Self => this;
-		///<summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert</summary>
-		///<param name="job_id">this parameter is required</param>
-		///<param name="snapshot_id">this parameter is required</param>
-		public RevertModelSnapshotRequest(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
-		// values part of the url path
-		Id IRevertModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-		Id IRevertModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRolloverIndexRequest : IRequest<RolloverIndexRequestParameters>
 	{
 		Name Alias { get; }
@@ -4865,6 +4730,8 @@ namespace Nest
 		IndexName IRolloverIndexRequest.NewIndex => Self.RouteValues.Get<IndexName>("new_index");
 
 		// Request parameters
+		///<summary>Whether a type should be included in the body of the mappings.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>If set to true the rollover action will only be validated but not actually performed even if a condition matches. The default is false</summary>
@@ -4877,25 +4744,29 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRollupSearchRequest : IRequest<RollupSearchRequestParameters>
 	{
-		Indices Index { get; }
+		IndexName Index { get; }
 		TypeName Type { get; }
 	}
-	///<summary>Request parameters for XpackRollupRollupSearch <pre></pre></summary>
+	///<summary>Request parameters for XpackRollupRollupSearch <pre>TODO</pre></summary>
 	public partial class RollupSearchRequest : PlainRequestBase<RollupSearchRequestParameters>, IRollupSearchRequest
 	{
 		protected IRollupSearchRequest Self => this;
 		///<summary>/{index}/_rollup_search</summary>
 		///<param name="index">this parameter is required</param>
-		public RollupSearchRequest(Indices index) : base(r=>r.Required("index", index)){}
+		public RollupSearchRequest(IndexName index) : base(r=>r.Required("index", index)){}
 		///<summary>/{index}/{type}/_rollup_search</summary>
 		///<param name="index">this parameter is required</param>
 		///<param name="type">Optional, accepts null</param>
-		public RollupSearchRequest(Indices index, TypeName type) : base(r=>r.Required("index", index).Optional("type", type)){}
+		public RollupSearchRequest(IndexName index, TypeName type) : base(r=>r.Required("index", index).Optional("type", type)){}
 		// values part of the url path
-		Indices IRollupSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
+		IndexName IRollupSearchRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IRollupSearchRequest.Type => Self.RouteValues.Get<TypeName>("type");
 
 		// Request parameters
+		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
+		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
+		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
+		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRootNodeInfoRequest : IRequest<RootNodeInfoRequestParameters>
@@ -4920,6 +4791,8 @@ namespace Nest
 		// values part of the url path
 
 		// Request parameters
+		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
+		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISearchRequest : IRequest<SearchRequestParameters>
@@ -4949,12 +4822,16 @@ namespace Nest
 		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
+		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
+		public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 		///<summary>The default operator for query string query (AND or OR)</summary>
 		public DefaultOperator? DefaultOperator { get => Q<DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -4995,6 +4872,8 @@ namespace Nest
 		public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
+		///<summary>Specify whether to return sequence number and primary term of the last modification of each hit</summary>
+		public bool? SeqNoPrimaryTerm { get => Q<bool?>("seq_no_primary_term"); set => Q("seq_no_primary_term", value); }
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 		///<summary>
@@ -5003,8 +4882,8 @@ namespace Nest
 		///</summary>
 		public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
 		///<summary>
-		/// The number of concurrent shard requests this search executes concurrently. This value should be used to limit the impact of the search on
-		/// the cluster in order to limit the number of concurrent shard requests
+		/// The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the
+		/// search on the cluster in order to limit the number of concurrent shard requests
 		///</summary>
 		public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 		///<summary>
@@ -5014,6 +4893,8 @@ namespace Nest
 		/// disjoint.
 		///</summary>
 		public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
+		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
+		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 	}	///<summary>Request parameters for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
 	public partial class SearchRequest : PlainRequestBase<SearchRequestParameters>, ISearchRequest
 	{
@@ -5036,12 +4917,16 @@ namespace Nest
 		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
+		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
+		public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 		///<summary>The default operator for query string query (AND or OR)</summary>
 		public DefaultOperator? DefaultOperator { get => Q<DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -5082,6 +4967,8 @@ namespace Nest
 		public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
+		///<summary>Specify whether to return sequence number and primary term of the last modification of each hit</summary>
+		public bool? SeqNoPrimaryTerm { get => Q<bool?>("seq_no_primary_term"); set => Q("seq_no_primary_term", value); }
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 		///<summary>
@@ -5090,8 +4977,8 @@ namespace Nest
 		///</summary>
 		public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
 		///<summary>
-		/// The number of concurrent shard requests this search executes concurrently. This value should be used to limit the impact of the search on
-		/// the cluster in order to limit the number of concurrent shard requests
+		/// The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the
+		/// search on the cluster in order to limit the number of concurrent shard requests
 		///</summary>
 		public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 		///<summary>
@@ -5101,6 +4988,8 @@ namespace Nest
 		/// disjoint.
 		///</summary>
 		public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
+		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
+		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISearchShardsRequest : IRequest<SearchShardsRequestParameters>
@@ -5204,6 +5093,8 @@ namespace Nest
 		// Request parameters
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -5232,6 +5123,408 @@ namespace Nest
 		public bool? Profile { get => Q<bool?>("profile"); set => Q("profile", value); }
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
+		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
+		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
+		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
+		public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISecurityAuthenticateRequest : IRequest<SecurityAuthenticateRequestParameters>
+	{
+	}
+	///<summary>Request parameters for SecurityAuthenticate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
+	public partial class SecurityAuthenticateRequest : PlainRequestBase<SecurityAuthenticateRequestParameters>, ISecurityAuthenticateRequest
+	{
+		protected ISecurityAuthenticateRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISecurityChangePasswordRequest : IRequest<SecurityChangePasswordRequestParameters>
+	{
+		Name Username { get; }
+	}
+	///<summary>Request parameters for SecurityChangePassword <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</pre></summary>
+	public partial class SecurityChangePasswordRequest : PlainRequestBase<SecurityChangePasswordRequestParameters>, ISecurityChangePasswordRequest
+	{
+		protected ISecurityChangePasswordRequest Self => this;
+		///<summary>/_security/user/{username}/_password</summary>
+		///<param name="username">Optional, accepts null</param>
+		public SecurityChangePasswordRequest(Name username) : base(r=>r.Optional("username", username)){}
+		///<summary>/_security/user/_password</summary>
+		public SecurityChangePasswordRequest() : base(){}
+		// values part of the url path
+		Name ISecurityChangePasswordRequest.Username => Self.RouteValues.Get<Name>("username");
+
+		// Request parameters
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISecurityClearCachedRealmsRequest : IRequest<SecurityClearCachedRealmsRequestParameters>
+	{
+		Names Realms { get; }
+	}
+	///<summary>Request parameters for SecurityClearCachedRealms <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</pre></summary>
+	public partial class SecurityClearCachedRealmsRequest : PlainRequestBase<SecurityClearCachedRealmsRequestParameters>, ISecurityClearCachedRealmsRequest
+	{
+		protected ISecurityClearCachedRealmsRequest Self => this;
+		///<summary>/_security/realm/{realms}/_clear_cache</summary>
+		///<param name="realms">this parameter is required</param>
+		public SecurityClearCachedRealmsRequest(Names realms) : base(r=>r.Required("realms", realms)){}
+		// values part of the url path
+		Names ISecurityClearCachedRealmsRequest.Realms => Self.RouteValues.Get<Names>("realms");
+
+		// Request parameters
+		///<summary>Comma-separated list of usernames to clear from the cache</summary>
+		public string[] Usernames { get => Q<string[]>("usernames"); set => Q("usernames", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISecurityClearCachedRolesRequest : IRequest<SecurityClearCachedRolesRequestParameters>
+	{
+		Names Name { get; }
+	}
+	///<summary>Request parameters for SecurityClearCachedRoles <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html</pre></summary>
+	public partial class SecurityClearCachedRolesRequest : PlainRequestBase<SecurityClearCachedRolesRequestParameters>, ISecurityClearCachedRolesRequest
+	{
+		protected ISecurityClearCachedRolesRequest Self => this;
+		///<summary>/_security/role/{name}/_clear_cache</summary>
+		///<param name="name">this parameter is required</param>
+		public SecurityClearCachedRolesRequest(Names name) : base(r=>r.Required("name", name)){}
+		// values part of the url path
+		Names ISecurityClearCachedRolesRequest.Name => Self.RouteValues.Get<Names>("name");
+
+		// Request parameters
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISecurityCreateApiKeyRequest : IRequest<SecurityCreateApiKeyRequestParameters>
+	{
+	}
+	///<summary>Request parameters for SecurityCreateApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</pre></summary>
+	public partial class SecurityCreateApiKeyRequest : PlainRequestBase<SecurityCreateApiKeyRequestParameters>, ISecurityCreateApiKeyRequest
+	{
+		protected ISecurityCreateApiKeyRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISecurityDeleteRoleMappingRequest : IRequest<SecurityDeleteRoleMappingRequestParameters>
+	{
+		Name Name { get; }
+	}
+	///<summary>Request parameters for SecurityDeleteRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html</pre></summary>
+	public partial class SecurityDeleteRoleMappingRequest : PlainRequestBase<SecurityDeleteRoleMappingRequestParameters>, ISecurityDeleteRoleMappingRequest
+	{
+		protected ISecurityDeleteRoleMappingRequest Self => this;
+		///<summary>/_security/role_mapping/{name}</summary>
+		///<param name="name">this parameter is required</param>
+		public SecurityDeleteRoleMappingRequest(Name name) : base(r=>r.Required("name", name)){}
+		// values part of the url path
+		Name ISecurityDeleteRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISecurityDeleteRoleRequest : IRequest<SecurityDeleteRoleRequestParameters>
+	{
+		Name Name { get; }
+	}
+	///<summary>Request parameters for SecurityDeleteRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html</pre></summary>
+	public partial class SecurityDeleteRoleRequest : PlainRequestBase<SecurityDeleteRoleRequestParameters>, ISecurityDeleteRoleRequest
+	{
+		protected ISecurityDeleteRoleRequest Self => this;
+		///<summary>/_security/role/{name}</summary>
+		///<param name="name">this parameter is required</param>
+		public SecurityDeleteRoleRequest(Name name) : base(r=>r.Required("name", name)){}
+		// values part of the url path
+		Name ISecurityDeleteRoleRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISecurityDeleteUserRequest : IRequest<SecurityDeleteUserRequestParameters>
+	{
+		Name Username { get; }
+	}
+	///<summary>Request parameters for SecurityDeleteUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html</pre></summary>
+	public partial class SecurityDeleteUserRequest : PlainRequestBase<SecurityDeleteUserRequestParameters>, ISecurityDeleteUserRequest
+	{
+		protected ISecurityDeleteUserRequest Self => this;
+		///<summary>/_security/user/{username}</summary>
+		///<param name="username">this parameter is required</param>
+		public SecurityDeleteUserRequest(Name username) : base(r=>r.Required("username", username)){}
+		// values part of the url path
+		Name ISecurityDeleteUserRequest.Username => Self.RouteValues.Get<Name>("username");
+
+		// Request parameters
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISecurityDisableUserRequest : IRequest<SecurityDisableUserRequestParameters>
+	{
+		Name Username { get; }
+	}
+	///<summary>Request parameters for SecurityDisableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html</pre></summary>
+	public partial class SecurityDisableUserRequest : PlainRequestBase<SecurityDisableUserRequestParameters>, ISecurityDisableUserRequest
+	{
+		protected ISecurityDisableUserRequest Self => this;
+		///<summary>/_security/user/{username}/_disable</summary>
+		///<param name="username">Optional, accepts null</param>
+		public SecurityDisableUserRequest(Name username) : base(r=>r.Optional("username", username)){}
+		// values part of the url path
+		Name ISecurityDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
+
+		// Request parameters
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISecurityEnableUserRequest : IRequest<SecurityEnableUserRequestParameters>
+	{
+		Name Username { get; }
+	}
+	///<summary>Request parameters for SecurityEnableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html</pre></summary>
+	public partial class SecurityEnableUserRequest : PlainRequestBase<SecurityEnableUserRequestParameters>, ISecurityEnableUserRequest
+	{
+		protected ISecurityEnableUserRequest Self => this;
+		///<summary>/_security/user/{username}/_enable</summary>
+		///<param name="username">Optional, accepts null</param>
+		public SecurityEnableUserRequest(Name username) : base(r=>r.Optional("username", username)){}
+		// values part of the url path
+		Name ISecurityEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
+
+		// Request parameters
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISecurityGetApiKeyRequest : IRequest<SecurityGetApiKeyRequestParameters>
+	{
+	}
+	///<summary>Request parameters for SecurityGetApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html</pre></summary>
+	public partial class SecurityGetApiKeyRequest : PlainRequestBase<SecurityGetApiKeyRequestParameters>, ISecurityGetApiKeyRequest
+	{
+		protected ISecurityGetApiKeyRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+		///<summary>API key id of the API key to be retrieved</summary>
+		public string Id { get => Q<string>("id"); set => Q("id", value); }
+		///<summary>API key name of the API key to be retrieved</summary>
+		public string Name { get => Q<string>("name"); set => Q("name", value); }
+		///<summary>user name of the user who created this API key to be retrieved</summary>
+		public string Username { get => Q<string>("username"); set => Q("username", value); }
+		///<summary>realm name of the user who created this API key to be retrieved</summary>
+		public string RealmName { get => Q<string>("realm_name"); set => Q("realm_name", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISecurityGetRoleMappingRequest : IRequest<SecurityGetRoleMappingRequestParameters>
+	{
+		Name Name { get; }
+	}
+	///<summary>Request parameters for SecurityGetRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</pre></summary>
+	public partial class SecurityGetRoleMappingRequest : PlainRequestBase<SecurityGetRoleMappingRequestParameters>, ISecurityGetRoleMappingRequest
+	{
+		protected ISecurityGetRoleMappingRequest Self => this;
+		///<summary>/_security/role_mapping/{name}</summary>
+		///<param name="name">Optional, accepts null</param>
+		public SecurityGetRoleMappingRequest(Name name) : base(r=>r.Optional("name", name)){}
+		///<summary>/_security/role_mapping</summary>
+		public SecurityGetRoleMappingRequest() : base(){}
+		// values part of the url path
+		Name ISecurityGetRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISecurityGetRoleRequest : IRequest<SecurityGetRoleRequestParameters>
+	{
+		Name Name { get; }
+	}
+	///<summary>Request parameters for SecurityGetRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</pre></summary>
+	public partial class SecurityGetRoleRequest : PlainRequestBase<SecurityGetRoleRequestParameters>, ISecurityGetRoleRequest
+	{
+		protected ISecurityGetRoleRequest Self => this;
+		///<summary>/_security/role/{name}</summary>
+		///<param name="name">Optional, accepts null</param>
+		public SecurityGetRoleRequest(Name name) : base(r=>r.Optional("name", name)){}
+		///<summary>/_security/role</summary>
+		public SecurityGetRoleRequest() : base(){}
+		// values part of the url path
+		Name ISecurityGetRoleRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISecurityGetTokenRequest : IRequest<SecurityGetTokenRequestParameters>
+	{
+	}
+	///<summary>Request parameters for SecurityGetToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html</pre></summary>
+	public partial class SecurityGetTokenRequest : PlainRequestBase<SecurityGetTokenRequestParameters>, ISecurityGetTokenRequest
+	{
+		protected ISecurityGetTokenRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISecurityGetUserRequest : IRequest<SecurityGetUserRequestParameters>
+	{
+		Names Username { get; }
+	}
+	///<summary>Request parameters for SecurityGetUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html</pre></summary>
+	public partial class SecurityGetUserRequest : PlainRequestBase<SecurityGetUserRequestParameters>, ISecurityGetUserRequest
+	{
+		protected ISecurityGetUserRequest Self => this;
+		///<summary>/_security/user/{username}</summary>
+		///<param name="username">Optional, accepts null</param>
+		public SecurityGetUserRequest(Names username) : base(r=>r.Optional("username", username)){}
+		///<summary>/_security/user</summary>
+		public SecurityGetUserRequest() : base(){}
+		// values part of the url path
+		Names ISecurityGetUserRequest.Username => Self.RouteValues.Get<Names>("username");
+
+		// Request parameters
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISecurityInvalidateApiKeyRequest : IRequest<SecurityInvalidateApiKeyRequestParameters>
+	{
+	}
+	///<summary>Request parameters for SecurityInvalidateApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</pre></summary>
+	public partial class SecurityInvalidateApiKeyRequest : PlainRequestBase<SecurityInvalidateApiKeyRequestParameters>, ISecurityInvalidateApiKeyRequest
+	{
+		protected ISecurityInvalidateApiKeyRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISecurityInvalidateTokenRequest : IRequest<SecurityInvalidateTokenRequestParameters>
+	{
+	}
+	///<summary>Request parameters for SecurityInvalidateToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</pre></summary>
+	public partial class SecurityInvalidateTokenRequest : PlainRequestBase<SecurityInvalidateTokenRequestParameters>, ISecurityInvalidateTokenRequest
+	{
+		protected ISecurityInvalidateTokenRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISecurityPutRoleMappingRequest : IRequest<SecurityPutRoleMappingRequestParameters>
+	{
+		Name Name { get; }
+	}
+	///<summary>Request parameters for SecurityPutRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html</pre></summary>
+	public partial class SecurityPutRoleMappingRequest : PlainRequestBase<SecurityPutRoleMappingRequestParameters>, ISecurityPutRoleMappingRequest
+	{
+		protected ISecurityPutRoleMappingRequest Self => this;
+		///<summary>/_security/role_mapping/{name}</summary>
+		///<param name="name">this parameter is required</param>
+		public SecurityPutRoleMappingRequest(Name name) : base(r=>r.Required("name", name)){}
+		// values part of the url path
+		Name ISecurityPutRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISecurityPutRoleRequest : IRequest<SecurityPutRoleRequestParameters>
+	{
+		Name Name { get; }
+	}
+	///<summary>Request parameters for SecurityPutRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</pre></summary>
+	public partial class SecurityPutRoleRequest : PlainRequestBase<SecurityPutRoleRequestParameters>, ISecurityPutRoleRequest
+	{
+		protected ISecurityPutRoleRequest Self => this;
+		///<summary>/_security/role/{name}</summary>
+		///<param name="name">this parameter is required</param>
+		public SecurityPutRoleRequest(Name name) : base(r=>r.Required("name", name)){}
+		// values part of the url path
+		Name ISecurityPutRoleRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISecurityPutUserRequest : IRequest<SecurityPutUserRequestParameters>
+	{
+		Name Username { get; }
+	}
+	///<summary>Request parameters for SecurityPutUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html</pre></summary>
+	public partial class SecurityPutUserRequest : PlainRequestBase<SecurityPutUserRequestParameters>, ISecurityPutUserRequest
+	{
+		protected ISecurityPutUserRequest Self => this;
+		///<summary>/_security/user/{username}</summary>
+		///<param name="username">this parameter is required</param>
+		public SecurityPutUserRequest(Name username) : base(r=>r.Required("username", username)){}
+		// values part of the url path
+		Name ISecurityPutUserRequest.Username => Self.RouteValues.Get<Name>("username");
+
+		// Request parameters
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+		//TODO THIS METHOD IS UNMAPPED!
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISegmentsRequest : IRequest<SegmentsRequestParameters>
@@ -5377,13 +5670,18 @@ namespace Nest
 	public partial class SourceExistsRequest<T> : PlainRequestBase<SourceExistsRequestParameters>, ISourceExistsRequest
 	{
 		protected ISourceExistsRequest Self => this;
+		///<summary>/{index}/_source/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
+		public SourceExistsRequest(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
+		 => Q("routing", new Routing(() => AutoRouteDocument()));
 		///<summary>/{index}/{type}/{id}/_source</summary>
 		///<param name="index">this parameter is required</param>
-		///<param name="type">this parameter is required</param>
+		///<param name="type">Optional, accepts null</param>
 		///<param name="id">this parameter is required</param>
-		public SourceExistsRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		public SourceExistsRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Optional("type", type).Required("id", id))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/{type}/{id}/_source</summary>
+		/// <summary>/{index}/_source/{id}</summary>
 		///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public SourceExistsRequest(DocumentPath<T> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document)); }
@@ -5415,9 +5713,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -5426,11 +5724,16 @@ namespace Nest
 	public partial class SourceExistsRequest : PlainRequestBase<SourceExistsRequestParameters>, ISourceExistsRequest
 	{
 		protected ISourceExistsRequest Self => this;
+		///<summary>/{index}/_source/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
+		public SourceExistsRequest(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
+		 => Q("routing", new Routing(() => AutoRouteDocument()));
 		///<summary>/{index}/{type}/{id}/_source</summary>
 		///<param name="index">this parameter is required</param>
-		///<param name="type">this parameter is required</param>
+		///<param name="type">Optional, accepts null</param>
 		///<param name="id">this parameter is required</param>
-		public SourceExistsRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		public SourceExistsRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Optional("type", type).Required("id", id))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
 		// values part of the url path
 		Id ISourceExistsRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -5459,9 +5762,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -5478,13 +5781,18 @@ namespace Nest
 	public partial class SourceRequest<T> : PlainRequestBase<SourceRequestParameters>, ISourceRequest
 	{
 		protected ISourceRequest Self => this;
+		///<summary>/{index}/_source/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
+		public SourceRequest(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
+		 => Q("routing", new Routing(() => AutoRouteDocument()));
 		///<summary>/{index}/{type}/{id}/_source</summary>
 		///<param name="index">this parameter is required</param>
-		///<param name="type">this parameter is required</param>
+		///<param name="type">Optional, accepts null</param>
 		///<param name="id">this parameter is required</param>
-		public SourceRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		public SourceRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Optional("type", type).Required("id", id))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/{type}/{id}/_source</summary>
+		/// <summary>/{index}/_source/{id}</summary>
 		///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public SourceRequest(DocumentPath<T> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document)); }
@@ -5516,9 +5824,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -5527,11 +5835,16 @@ namespace Nest
 	public partial class SourceRequest : PlainRequestBase<SourceRequestParameters>, ISourceRequest
 	{
 		protected ISourceRequest Self => this;
+		///<summary>/{index}/_source/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
+		public SourceRequest(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
+		 => Q("routing", new Routing(() => AutoRouteDocument()));
 		///<summary>/{index}/{type}/{id}/_source</summary>
 		///<param name="index">this parameter is required</param>
-		///<param name="type">this parameter is required</param>
+		///<param name="type">Optional, accepts null</param>
 		///<param name="id">this parameter is required</param>
-		public SourceRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		public SourceRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Optional("type", type).Required("id", id))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
 		// values part of the url path
 		Id ISourceRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -5560,9 +5873,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -5598,6 +5911,19 @@ namespace Nest
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISslCertificatesRequest : IRequest<SslCertificatesRequestParameters>
+	{
+	}
+	///<summary>Request parameters for SslCertificates <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-ssl.html</pre></summary>
+	public partial class SslCertificatesRequest : PlainRequestBase<SslCertificatesRequestParameters>, ISslCertificatesRequest
+	{
+		protected ISslCertificatesRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStartBasicLicenseRequest : IRequest<StartBasicLicenseRequestParameters>
 	{
 	}
@@ -5612,32 +5938,15 @@ namespace Nest
 		public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IStartDatafeedRequest : IRequest<StartDatafeedRequestParameters>
-	{
-		Id DatafeedId { get; }
-	}
-	///<summary>Request parameters for XpackMlStartDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</pre></summary>
-	public partial class StartDatafeedRequest : PlainRequestBase<StartDatafeedRequestParameters>, IStartDatafeedRequest
-	{
-		protected IStartDatafeedRequest Self => this;
-		///<summary>/_xpack/ml/datafeeds/{datafeed_id}/_start</summary>
-		///<param name="datafeed_id">this parameter is required</param>
-		public StartDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
-		// values part of the url path
-		Id IStartDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStartRollupJobRequest : IRequest<StartRollupJobRequestParameters>
 	{
 		Id Id { get; }
 	}
-	///<summary>Request parameters for XpackRollupStartJob <pre></pre></summary>
+	///<summary>Request parameters for XpackRollupStartJob <pre>TODO</pre></summary>
 	public partial class StartRollupJobRequest : PlainRequestBase<StartRollupJobRequestParameters>, IStartRollupJobRequest
 	{
 		protected IStartRollupJobRequest Self => this;
-		///<summary>/_xpack/rollup/job/{id}/_start</summary>
+		///<summary>/_rollup/job/{id}/_start</summary>
 		///<param name="id">this parameter is required</param>
 		public StartRollupJobRequest(Id id) : base(r=>r.Required("id", id)){}
 		// values part of the url path
@@ -5674,40 +5983,25 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IStopDatafeedRequest : IRequest<StopDatafeedRequestParameters>
-	{
-		Id DatafeedId { get; }
-	}
-	///<summary>Request parameters for XpackMlStopDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</pre></summary>
-	public partial class StopDatafeedRequest : PlainRequestBase<StopDatafeedRequestParameters>, IStopDatafeedRequest
-	{
-		protected IStopDatafeedRequest Self => this;
-		///<summary>/_xpack/ml/datafeeds/{datafeed_id}/_stop</summary>
-		///<param name="datafeed_id">this parameter is required</param>
-		public StopDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
-		// values part of the url path
-		Id IStopDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
-
-		// Request parameters
-		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
-		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStopRollupJobRequest : IRequest<StopRollupJobRequestParameters>
 	{
 		Id Id { get; }
 	}
-	///<summary>Request parameters for XpackRollupStopJob <pre></pre></summary>
+	///<summary>Request parameters for XpackRollupStopJob <pre>TODO</pre></summary>
 	public partial class StopRollupJobRequest : PlainRequestBase<StopRollupJobRequestParameters>, IStopRollupJobRequest
 	{
 		protected IStopRollupJobRequest Self => this;
-		///<summary>/_xpack/rollup/job/{id}/_stop</summary>
+		///<summary>/_rollup/job/{id}/_stop</summary>
 		///<param name="id">this parameter is required</param>
 		public StopRollupJobRequest(Id id) : base(r=>r.Required("id", id)){}
 		// values part of the url path
 		Id IStopRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
 
 		// Request parameters
+		///<summary>True if the API should block until the job has fully stopped, false if should be executed async. Defaults to false.</summary>
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+		///<summary>Block for (at maximum) the specified duration while waiting for the job to stop. Defaults to 30s.</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStopWatcherRequest : IRequest<StopWatcherRequestParameters>
@@ -5760,18 +6054,27 @@ namespace Nest
 	public partial class TermVectorsRequest<TDocument> : PlainRequestBase<TermVectorsRequestParameters>, ITermVectorsRequest<TDocument>
 	{
 		protected ITermVectorsRequest<TDocument> Self => this;
-		///<summary>/{index}/{type}/_termvectors</summary>
+		///<summary>/{index}/_termvectors/{id}</summary>
 		///<param name="index">this parameter is required</param>
-		///<param name="type">this parameter is required</param>
-		public TermVectorsRequest(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type))
+		///<param name="id">Optional, accepts null</param>
+		public TermVectorsRequest(IndexName index, Id id) : base(r=>r.Required("index", index).Optional("id", id))
+		 => Q("routing", new Routing(() => AutoRouteDocument()));
+		///<summary>/{index}/_termvectors/</summary>
+		///<param name="index">this parameter is required</param>
+		public TermVectorsRequest(IndexName index) : base(r=>r.Required("index", index))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
 		///<summary>/{index}/{type}/{id}/_termvectors</summary>
 		///<param name="index">this parameter is required</param>
-		///<param name="type">this parameter is required</param>
+		///<param name="type">Optional, accepts null</param>
 		///<param name="id">Optional, accepts null</param>
-		public TermVectorsRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Optional("id", id))
+		public TermVectorsRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Optional("type", type).Optional("id", id))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/{type}/_termvectors</summary>
+		///<summary>/{index}/{type}/_termvectors</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="type">Optional, accepts null</param>
+		public TermVectorsRequest(IndexName index, TypeName type) : base(r=>r.Required("index", index).Optional("type", type))
+		 => Q("routing", new Routing(() => AutoRouteDocument()));
+		/// <summary>/{index}/_termvectors/{id}</summary>
 		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public TermVectorsRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document)); }
@@ -5859,23 +6162,6 @@ namespace Nest
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IUnfollowIndexRequest : IRequest<UnfollowIndexRequestParameters>
-	{
-		IndexName Index { get; }
-	}
-	///<summary>Request parameters for CcrUnfollow <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current</pre></summary>
-	public partial class UnfollowIndexRequest : PlainRequestBase<UnfollowIndexRequestParameters>, IUnfollowIndexRequest
-	{
-		protected IUnfollowIndexRequest Self => this;
-		///<summary>/{index}/_ccr/unfollow</summary>
-		///<param name="index">this parameter is required</param>
-		public UnfollowIndexRequest(IndexName index) : base(r=>r.Required("index", index)){}
-		// values part of the url path
-		IndexName IUnfollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IUpdateByQueryRequest : IRequest<UpdateByQueryRequestParameters>
 	{
 		Indices Index { get; }
@@ -5948,9 +6234,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
@@ -6046,9 +6332,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
@@ -6077,23 +6363,6 @@ namespace Nest
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IUpdateDatafeedRequest : IRequest<UpdateDatafeedRequestParameters>
-	{
-		Id DatafeedId { get; }
-	}
-	///<summary>Request parameters for XpackMlUpdateDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</pre></summary>
-	public partial class UpdateDatafeedRequest : PlainRequestBase<UpdateDatafeedRequestParameters>, IUpdateDatafeedRequest
-	{
-		protected IUpdateDatafeedRequest Self => this;
-		///<summary>/_xpack/ml/datafeeds/{datafeed_id}/_update</summary>
-		///<param name="datafeed_id">this parameter is required</param>
-		public UpdateDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
-		// values part of the url path
-		Id IUpdateDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
-
-		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IUpdateIndexSettingsRequest : IRequest<UpdateIndexSettingsRequestParameters>
@@ -6132,43 +6401,6 @@ namespace Nest
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IUpdateJobRequest : IRequest<UpdateJobRequestParameters>
-	{
-		Id JobId { get; }
-	}
-	///<summary>Request parameters for XpackMlUpdateJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</pre></summary>
-	public partial class UpdateJobRequest : PlainRequestBase<UpdateJobRequestParameters>, IUpdateJobRequest
-	{
-		protected IUpdateJobRequest Self => this;
-		///<summary>/_xpack/ml/anomaly_detectors/{job_id}/_update</summary>
-		///<param name="job_id">this parameter is required</param>
-		public UpdateJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
-		// values part of the url path
-		Id IUpdateJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IUpdateModelSnapshotRequest : IRequest<UpdateModelSnapshotRequestParameters>
-	{
-		Id JobId { get; }
-		Id SnapshotId { get; }
-	}
-	///<summary>Request parameters for XpackMlUpdateModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</pre></summary>
-	public partial class UpdateModelSnapshotRequest : PlainRequestBase<UpdateModelSnapshotRequestParameters>, IUpdateModelSnapshotRequest
-	{
-		protected IUpdateModelSnapshotRequest Self => this;
-		///<summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update</summary>
-		///<param name="job_id">this parameter is required</param>
-		///<param name="snapshot_id">this parameter is required</param>
-		public UpdateModelSnapshotRequest(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
-		// values part of the url path
-		Id IUpdateModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-		Id IUpdateModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IUpdateRequest<TDocument, TPartialDocument> : IRequest<UpdateRequestParameters>
 	{
 		Id Id { get; }
@@ -6179,13 +6411,18 @@ namespace Nest
 	public partial class UpdateRequest<TDocument, TPartialDocument> : PlainRequestBase<UpdateRequestParameters>, IUpdateRequest<TDocument, TPartialDocument>
 	{
 		protected IUpdateRequest<TDocument, TPartialDocument> Self => this;
+		///<summary>/{index}/_update/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
+		public UpdateRequest(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
+		 => Q("routing", new Routing(() => AutoRouteDocument()));
 		///<summary>/{index}/{type}/{id}/_update</summary>
 		///<param name="index">this parameter is required</param>
-		///<param name="type">this parameter is required</param>
+		///<param name="type">Optional, accepts null</param>
 		///<param name="id">this parameter is required</param>
-		public UpdateRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		public UpdateRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Optional("type", type).Required("id", id))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/{type}/{id}/_update</summary>
+		/// <summary>/{index}/_update/{id}</summary>
 		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public UpdateRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document)); }
@@ -6227,10 +6464,10 @@ namespace Nest
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
-		///<summary>Explicit version number for concurrency control</summary>
-		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-		///<summary>Specific version type</summary>
-		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
+		///<summary>only perform the update operation if the last operation that has changed the document has the specified sequence number</summary>
+		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+		///<summary>only perform the update operation if the last operation that has changed the document has the specified primary term</summary>
+		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IUpgradeRequest : IRequest<UpgradeRequestParameters>
@@ -6291,30 +6528,6 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IValidateDetectorRequest : IRequest<ValidateDetectorRequestParameters>
-	{
-	}
-	///<summary>Request parameters for XpackMlValidateDetector <pre></pre></summary>
-	public partial class ValidateDetectorRequest : PlainRequestBase<ValidateDetectorRequestParameters>, IValidateDetectorRequest
-	{
-		protected IValidateDetectorRequest Self => this;
-		// values part of the url path
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IValidateJobRequest : IRequest<ValidateJobRequestParameters>
-	{
-	}
-	///<summary>Request parameters for XpackMlValidate <pre></pre></summary>
-	public partial class ValidateJobRequest : PlainRequestBase<ValidateJobRequestParameters>, IValidateJobRequest
-	{
-		protected IValidateJobRequest Self => this;
-		// values part of the url path
-
-		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IValidateQueryRequest : IRequest<ValidateQueryRequestParameters>
@@ -6443,9 +6656,9 @@ namespace Nest
 	public partial class WatcherStatsRequest : PlainRequestBase<WatcherStatsRequestParameters>, IWatcherStatsRequest
 	{
 		protected IWatcherStatsRequest Self => this;
-		///<summary>/_xpack/watcher/stats</summary>
+		///<summary>/_watcher/stats</summary>
 		public WatcherStatsRequest() : base(){}
-		///<summary>/_xpack/watcher/stats/{watcher_stats_metric}</summary>
+		///<summary>/_watcher/stats/{watcher_stats_metric}</summary>
 		///<param name="watcher_stats_metric">Optional, accepts null</param>
 		public WatcherStatsRequest(WatcherStatsMetric watcher_stats_metric) : base(r=>r.Optional("watcher_stats_metric", (Metrics)watcher_stats_metric)){}
 		// values part of the url path

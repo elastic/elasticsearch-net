@@ -59,22 +59,17 @@ namespace Nest
 		public BulkDescriptor Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Explicit operation timeout</summary>
 		public BulkDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Default comma-separated list of fields to return in the response for updates, can be overridden on each sub-request</summary>
-		public BulkDescriptor Fields(Fields fields) => Qs("fields", fields);
-		///<summary>Default comma-separated list of fields to return in the response for updates, can be overridden on each sub-request</summary>
-		public BulkDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("fields", fields?.Select(e=>(Field)e));
-
 		///<summary>Whether the _source should be included in the response.</summary>
 		public BulkDescriptor SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
-		public BulkDescriptor SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
+		public BulkDescriptor SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
-		public BulkDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_exclude", fields?.Select(e=>(Field)e));
+		public BulkDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_excludes", fields?.Select(e=>(Field)e));
 
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
-		public BulkDescriptor SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
+		public BulkDescriptor SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
-		public BulkDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_include", fields?.Select(e=>(Field)e));
+		public BulkDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_includes", fields?.Select(e=>(Field)e));
 
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public BulkDescriptor Pipeline(string pipeline) => Qs("pipeline", pipeline);
@@ -569,9 +564,6 @@ namespace Nest
 		public CatTasksDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatTasksDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
-		///<summary>Return tasks with the specified parent node</summary>
-		[Obsolete("Scheduled to be removed in 7.0, Removed in 6.3.0 from the server see https://github.com/elastic/elasticsearch/pull/28841")]
-		public CatTasksDescriptor ParentNode(string parentNode) => Qs("parent_node", parentNode);
 	}
 	///<summary>descriptor for CatTemplates <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</pre></summary>
 	public partial class CatTemplatesDescriptor  : RequestDescriptorBase<CatTemplatesDescriptor,CatTemplatesRequestParameters, ICatTemplatesRequest>, ICatTemplatesRequest
@@ -792,6 +784,10 @@ namespace Nest
 		public ClusterStateDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Return settings in flat format (default: false)</summary>
 		public ClusterStateDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
+		///<summary>Wait for the metadata version to be equal or greater than the specified metadata version</summary>
+		public ClusterStateDescriptor WaitForMetadataVersion(long? waitForMetadataVersion) => Qs("wait_for_metadata_version", waitForMetadataVersion);
+		///<summary>The maximum time to wait for wait_for_metadata_version before timing out</summary>
+		public ClusterStateDescriptor WaitForTimeout(Time waitForTimeout) => Qs("wait_for_timeout", waitForTimeout);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public ClusterStateDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
@@ -848,6 +844,8 @@ namespace Nest
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public CountDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public CountDescriptor<T> IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public CountDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
@@ -882,13 +880,12 @@ namespace Nest
 	///<summary>descriptor for Create <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
 	public partial class CreateDescriptor<TDocument>  : RequestDescriptorBase<CreateDescriptor<TDocument>,CreateRequestParameters, ICreateRequest<TDocument>>, ICreateRequest<TDocument>
 	{ 
-		/// <summary>/{index}/{type}/{id}/_create</summary>
+		/// <summary>/{index}/_create/{id}</summary>
 		///<param name="index"> this parameter is required</param>
-		///<param name="type"> this parameter is required</param>
 		///<param name="id"> this parameter is required</param>
-		public CreateDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		public CreateDescriptor(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
 		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/{type}/{id}/_create</summary>
+		/// <summary>/{index}/_create/{id}</summary>
 		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public CreateDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
@@ -905,10 +902,10 @@ namespace Nest
 		public CreateDescriptor<TDocument> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
 
 		///<summary>The type of the document</summary>
-		public CreateDescriptor<TDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+		public CreateDescriptor<TDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public CreateDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+		public CreateDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
 		// Request parameters
 
@@ -941,11 +938,10 @@ namespace Nest
 	{ 
 		/// <summary>/{index}/{type}/{id}</summary>
 		///<param name="index"> this parameter is required</param>
-		///<param name="type"> this parameter is required</param>
 		///<param name="id"> this parameter is required</param>
-		public DeleteDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		public DeleteDescriptor(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
 		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/{type}/{id}</summary>
+		/// <summary>/{index}/_doc/{id}</summary>
 		///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public DeleteDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
@@ -962,10 +958,10 @@ namespace Nest
 		public DeleteDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
 
 		///<summary>The type of the document</summary>
-		public DeleteDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+		public DeleteDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public DeleteDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+		public DeleteDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
 		// Request parameters
 
@@ -986,6 +982,10 @@ namespace Nest
 		public DeleteDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Explicit operation timeout</summary>
 		public DeleteDescriptor<T> Timeout(Time timeout) => Qs("timeout", timeout);
+		///<summary>only perform the delete operation if the last operation that has changed the document has the specified sequence number</summary>
+		public DeleteDescriptor<T> IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
+		///<summary>only perform the delete operation if the last operation that has changed the document has the specified primary term</summary>
+		public DeleteDescriptor<T> IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
 		///<summary>Explicit version number for concurrency control</summary>
 		public DeleteDescriptor<T> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
@@ -1066,14 +1066,14 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public DeleteByQueryDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public DeleteByQueryDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
+		public DeleteByQueryDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public DeleteByQueryDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
+		public DeleteByQueryDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_excludes", fields?.Select(e=>(Field)e));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public DeleteByQueryDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
+		public DeleteByQueryDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public DeleteByQueryDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
+		public DeleteByQueryDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_includes", fields?.Select(e=>(Field)e));
 
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public DeleteByQueryDescriptor<T> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
@@ -1117,13 +1117,12 @@ namespace Nest
 	///<summary>descriptor for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class DocumentExistsDescriptor<T>  : RequestDescriptorBase<DocumentExistsDescriptor<T>,DocumentExistsRequestParameters, IDocumentExistsRequest>, IDocumentExistsRequest
 	{ 
-		/// <summary>/{index}/{type}/{id}</summary>
+		/// <summary>/{index}/_doc/{id}</summary>
 		///<param name="index"> this parameter is required</param>
-		///<param name="type"> this parameter is required</param>
 		///<param name="id"> this parameter is required</param>
-		public DocumentExistsDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		public DocumentExistsDescriptor(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
 		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/{type}/{id}</summary>
+		/// <summary>/{index}/_doc/{id}</summary>
 		///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public DocumentExistsDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
@@ -1140,10 +1139,10 @@ namespace Nest
 		public DocumentExistsDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
 
 		///<summary>The type of the document (use `_all` to fetch the first document matching the ID across all types)</summary>
-		public DocumentExistsDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+		public DocumentExistsDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public DocumentExistsDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+		public DocumentExistsDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
 		// Request parameters
 
@@ -1172,14 +1171,14 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public DocumentExistsDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public DocumentExistsDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
+		public DocumentExistsDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public DocumentExistsDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
+		public DocumentExistsDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_excludes", fields?.Select(e=>(Field)e));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public DocumentExistsDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
+		public DocumentExistsDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public DocumentExistsDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
+		public DocumentExistsDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_includes", fields?.Select(e=>(Field)e));
 
 		///<summary>Explicit version number for concurrency control</summary>
 		public DocumentExistsDescriptor<T> Version(long? version) => Qs("version", version);
@@ -1189,13 +1188,12 @@ namespace Nest
 	///<summary>descriptor for ExistsSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceExistsDescriptor<T>  : RequestDescriptorBase<SourceExistsDescriptor<T>,SourceExistsRequestParameters, ISourceExistsRequest>, ISourceExistsRequest
 	{ 
-		/// <summary>/{index}/{type}/{id}/_source</summary>
+		/// <summary>/{index}/_source/{id}</summary>
 		///<param name="index"> this parameter is required</param>
-		///<param name="type"> this parameter is required</param>
 		///<param name="id"> this parameter is required</param>
-		public SourceExistsDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		public SourceExistsDescriptor(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
 		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/{type}/{id}/_source</summary>
+		/// <summary>/{index}/_source/{id}</summary>
 		///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public SourceExistsDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
@@ -1211,11 +1209,11 @@ namespace Nest
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public SourceExistsDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
 
-		///<summary>The type of the document; use `_all` to fetch the first document matching the ID across all types</summary>
-		public SourceExistsDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+		///<summary>The type of the document; deprecated and optional starting with 7.0</summary>
+		public SourceExistsDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public SourceExistsDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+		public SourceExistsDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
 		// Request parameters
 
@@ -1239,14 +1237,14 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public SourceExistsDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceExistsDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
+		public SourceExistsDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceExistsDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
+		public SourceExistsDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_excludes", fields?.Select(e=>(Field)e));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceExistsDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
+		public SourceExistsDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceExistsDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
+		public SourceExistsDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_includes", fields?.Select(e=>(Field)e));
 
 		///<summary>Explicit version number for concurrency control</summary>
 		public SourceExistsDescriptor<T> Version(long? version) => Qs("version", version);
@@ -1256,13 +1254,12 @@ namespace Nest
 	///<summary>descriptor for Explain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</pre></summary>
 	public partial class ExplainDescriptor<TDocument>  : RequestDescriptorBase<ExplainDescriptor<TDocument>,ExplainRequestParameters, IExplainRequest<TDocument>>, IExplainRequest<TDocument>
 	{ 
-		/// <summary>/{index}/{type}/{id}/_explain</summary>
+		/// <summary>/{index}/_explain/{id}</summary>
 		///<param name="index"> this parameter is required</param>
-		///<param name="type"> this parameter is required</param>
 		///<param name="id"> this parameter is required</param>
-		public ExplainDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		public ExplainDescriptor(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
 		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/{type}/{id}/_explain</summary>
+		/// <summary>/{index}/_explain/{id}</summary>
 		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public ExplainDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
@@ -1279,10 +1276,10 @@ namespace Nest
 		public ExplainDescriptor<TDocument> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
 
 		///<summary>The type of the document</summary>
-		public ExplainDescriptor<TDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+		public ExplainDescriptor<TDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public ExplainDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+		public ExplainDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
 		// Request parameters
 
@@ -1314,14 +1311,14 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public ExplainDescriptor<TDocument> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExplainDescriptor<TDocument> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
+		public ExplainDescriptor<TDocument> SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExplainDescriptor<TDocument> SourceExclude(params Expression<Func<TDocument, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
+		public ExplainDescriptor<TDocument> SourceExclude(params Expression<Func<TDocument, object>>[] fields)  => Qs("_source_excludes", fields?.Select(e=>(Field)e));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExplainDescriptor<TDocument> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
+		public ExplainDescriptor<TDocument> SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExplainDescriptor<TDocument> SourceInclude(params Expression<Func<TDocument, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
+		public ExplainDescriptor<TDocument> SourceInclude(params Expression<Func<TDocument, object>>[] fields)  => Qs("_source_includes", fields?.Select(e=>(Field)e));
 
 	}
 	///<summary>descriptor for FieldCaps <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</pre></summary>
@@ -1358,13 +1355,12 @@ namespace Nest
 	///<summary>descriptor for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class GetDescriptor<T>  : RequestDescriptorBase<GetDescriptor<T>,GetRequestParameters, IGetRequest>, IGetRequest
 	{ 
-		/// <summary>/{index}/{type}/{id}</summary>
+		/// <summary>/{index}/_doc/{id}</summary>
 		///<param name="index"> this parameter is required</param>
-		///<param name="type"> this parameter is required</param>
 		///<param name="id"> this parameter is required</param>
-		public GetDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		public GetDescriptor(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
 		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/{type}/{id}</summary>
+		/// <summary>/{index}/_doc/{id}</summary>
 		///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public GetDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
@@ -1381,10 +1377,10 @@ namespace Nest
 		public GetDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
 
 		///<summary>The type of the document (use `_all` to fetch the first document matching the ID across all types)</summary>
-		public GetDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+		public GetDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public GetDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+		public GetDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
 		// Request parameters
 
@@ -1413,14 +1409,14 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public GetDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
+		public GetDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
+		public GetDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_excludes", fields?.Select(e=>(Field)e));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
+		public GetDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
+		public GetDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_includes", fields?.Select(e=>(Field)e));
 
 		///<summary>Explicit version number for concurrency control</summary>
 		public GetDescriptor<T> Version(long? version) => Qs("version", version);
@@ -1444,13 +1440,12 @@ namespace Nest
 	///<summary>descriptor for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceDescriptor<T>  : RequestDescriptorBase<SourceDescriptor<T>,SourceRequestParameters, ISourceRequest>, ISourceRequest
 	{ 
-		/// <summary>/{index}/{type}/{id}/_source</summary>
+		/// <summary>/{index}/_source/{id}</summary>
 		///<param name="index"> this parameter is required</param>
-		///<param name="type"> this parameter is required</param>
 		///<param name="id"> this parameter is required</param>
-		public SourceDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		public SourceDescriptor(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
 		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/{type}/{id}/_source</summary>
+		/// <summary>/{index}/_source/{id}</summary>
 		///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public SourceDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
@@ -1466,11 +1461,11 @@ namespace Nest
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public SourceDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
 
-		///<summary>The type of the document; use `_all` to fetch the first document matching the ID across all types</summary>
-		public SourceDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+		///<summary>The type of the document; deprecated and optional starting with 7.0</summary>
+		public SourceDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public SourceDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+		public SourceDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
 		// Request parameters
 
@@ -1494,14 +1489,14 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public SourceDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
+		public SourceDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
+		public SourceDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_excludes", fields?.Select(e=>(Field)e));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
+		public SourceDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
+		public SourceDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_includes", fields?.Select(e=>(Field)e));
 
 		///<summary>Explicit version number for concurrency control</summary>
 		public SourceDescriptor<T> Version(long? version) => Qs("version", version);
@@ -1513,10 +1508,9 @@ namespace Nest
 	{ 
 		/// <summary>/{index}/{type}</summary>
 		///<param name="index"> this parameter is required</param>
-		///<param name="type"> this parameter is required</param>
-		public IndexDescriptor(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type))
+		public IndexDescriptor(IndexName index) : base(r=>r.Required("index", index))
 		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/{type}</summary>
+		/// <summary>/{index}/_doc</summary>
 		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public IndexDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
@@ -1536,10 +1530,10 @@ namespace Nest
 		public IndexDescriptor<TDocument> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
 
 		///<summary>The type of the document</summary>
-		public IndexDescriptor<TDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+		public IndexDescriptor<TDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public IndexDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+		public IndexDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
 		// Request parameters
 
@@ -1566,6 +1560,10 @@ namespace Nest
 		public IndexDescriptor<TDocument> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
 		public IndexDescriptor<TDocument> VersionType(VersionType? versionType) => Qs("version_type", versionType);
+		///<summary>only perform the index operation if the last operation that has changed the document has the specified sequence number</summary>
+		public IndexDescriptor<TDocument> IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
+		///<summary>only perform the index operation if the last operation that has changed the document has the specified primary term</summary>
+		public IndexDescriptor<TDocument> IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public IndexDescriptor<TDocument> Pipeline(string pipeline) => Qs("pipeline", pipeline);
 	}
@@ -1585,12 +1583,6 @@ namespace Nest
 
 		// Request parameters
 
-		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
-		[Obsolete("Scheduled to be removed in 7.0, Erroneously documented as a valid option, no longer document from 6.4 onwards as per https://github.com/elastic/elasticsearch/pull/31795")]
-		public AnalyzeDescriptor PreferLocal(bool? preferLocal = true) => Qs("prefer_local", preferLocal);
-		///<summary>Format of the output</summary>
-		[Obsolete("Scheduled to be removed in 7.0, Erroneously documented as a valid option, no longer document from 6.4 onwards as per https://github.com/elastic/elasticsearch/pull/31795")]
-		public AnalyzeDescriptor Format(Format? format) => Qs("format", format);
 	}
 	///<summary>descriptor for IndicesClearCacheForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</pre></summary>
 	public partial class ClearCacheDescriptor  : RequestDescriptorBase<ClearCacheDescriptor,ClearCacheRequestParameters, IClearCacheRequest>, IClearCacheRequest
@@ -1627,12 +1619,7 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ClearCacheDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Clear request cache</summary>
-		public ClearCacheDescriptor RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
-		///<summary>Clear request cache</summary>
 		public ClearCacheDescriptor Request(bool? request = true) => Qs("request", request);
-		///<summary>Clear the recycle cache</summary>
-		[Obsolete("Scheduled to be removed in 7.0, Removed in 6.3.0 from the server see https://github.com/elastic/elasticsearch/pull/28866")]
-		public ClearCacheDescriptor Recycler(bool? recycler = true) => Qs("recycler", recycler);
 	}
 	///<summary>descriptor for IndicesClose <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 	public partial class CloseIndexDescriptor  : RequestDescriptorBase<CloseIndexDescriptor,CloseIndexRequestParameters, ICloseIndexRequest>, ICloseIndexRequest
@@ -1682,15 +1669,14 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>Whether a type should be expected in the body of the mappings.</summary>
+		public CreateIndexDescriptor IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
 		///<summary>Set the number of active shards to wait for before the operation returns.</summary>
 		public CreateIndexDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		///<summary>Explicit operation timeout</summary>
 		public CreateIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
 		public CreateIndexDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
-		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
-		[Obsolete("Scheduled to be removed in 7.0, Elasticsearch 6.x only allows a single type per index so this parameter is now useless")]
-		public CreateIndexDescriptor UpdateAllTypes(bool? updateAllTypes = true) => Qs("update_all_types", updateAllTypes);
 	}
 	///<summary>descriptor for IndicesDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</pre></summary>
 	public partial class DeleteIndexDescriptor  : RequestDescriptorBase<DeleteIndexDescriptor,DeleteIndexRequestParameters, IDeleteIndexRequest>, IDeleteIndexRequest
@@ -1995,6 +1981,8 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>Whether to add the type name to the response (default: false)</summary>
+		public GetIndexDescriptor IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetIndexDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Ignore unavailable indexes (default: false)</summary>
@@ -2073,6 +2061,8 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>Whether a type should be returned in the body of the mappings.</summary>
+		public GetFieldMappingDescriptor<T> IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
 		///<summary>Whether the default mapping values should be returned as well</summary>
 		public GetFieldMappingDescriptor<T> IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -2113,6 +2103,8 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>Whether to add the type name to the response (default: false)</summary>
+		public GetMappingDescriptor<T> IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public GetMappingDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
@@ -2175,6 +2167,8 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>Whether a type should be returned in the body of the mappings.</summary>
+		public GetIndexTemplateDescriptor IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
 		///<summary>Return settings in flat format (default: false)</summary>
 		public GetIndexTemplateDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -2272,8 +2266,7 @@ namespace Nest
 	public partial class PutMappingDescriptor<T>  : RequestDescriptorBase<PutMappingDescriptor<T>,PutMappingRequestParameters, IPutMappingRequest>, IPutMappingRequest
 	{ 
 		/// <summary>/{index}/{type}/_mapping</summary>
-		///<param name="type"> this parameter is required</param>
-		public PutMappingDescriptor(TypeName type) : base(r=>r.Required("type", type)){}
+		public PutMappingDescriptor() : base(){}
 		// values part of the url path
 		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		TypeName IPutMappingRequest.Type => Self.RouteValues.Get<TypeName>("type");
@@ -2288,13 +2281,15 @@ namespace Nest
 		public PutMappingDescriptor<T> AllIndices() => this.Index(Indices.All);
 
 		///<summary>The name of the document type</summary>
-		public PutMappingDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+		public PutMappingDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public PutMappingDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+		public PutMappingDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
 		// Request parameters
 
+		///<summary>Whether a type should be expected in the body of the mappings.</summary>
+		public PutMappingDescriptor<T> IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
 		///<summary>Explicit operation timeout</summary>
 		public PutMappingDescriptor<T> Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
@@ -2305,9 +2300,6 @@ namespace Nest
 		public PutMappingDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public PutMappingDescriptor<T> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
-		[Obsolete("Scheduled to be removed in 7.0, Elasticsearch 6.x only allows a single type per index so this parameter is now useless")]
-		public PutMappingDescriptor<T> UpdateAllTypes(bool? updateAllTypes = true) => Qs("update_all_types", updateAllTypes);
 	}
 	///<summary>descriptor for IndicesPutSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</pre></summary>
 	public partial class UpdateIndexSettingsDescriptor  : RequestDescriptorBase<UpdateIndexSettingsDescriptor,UpdateIndexSettingsRequestParameters, IUpdateIndexSettingsRequest>, IUpdateIndexSettingsRequest
@@ -2354,6 +2346,8 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>Whether a type should be returned in the body of the mappings.</summary>
+		public PutIndexTemplateDescriptor IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public PutIndexTemplateDescriptor Create(bool? create = true) => Qs("create", create);
 		///<summary>Explicit operation timeout</summary>
@@ -2428,6 +2422,8 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>Whether a type should be included in the body of the mappings.</summary>
+		public RolloverIndexDescriptor IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
 		///<summary>Explicit operation timeout</summary>
 		public RolloverIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>If set to true the rollover action will only be validated but not actually performed even if a condition matches. The default is false</summary>
@@ -2812,14 +2808,14 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public MultiGetDescriptor SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public MultiGetDescriptor SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
+		public MultiGetDescriptor SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public MultiGetDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_exclude", fields?.Select(e=>(Field)e));
+		public MultiGetDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_excludes", fields?.Select(e=>(Field)e));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public MultiGetDescriptor SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
+		public MultiGetDescriptor SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public MultiGetDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_include", fields?.Select(e=>(Field)e));
+		public MultiGetDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_includes", fields?.Select(e=>(Field)e));
 
 	}
 	///<summary>descriptor for Msearch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</pre></summary>
@@ -2861,6 +2857,10 @@ namespace Nest
 		public MultiSearchDescriptor PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
 		///<summary>The number of concurrent shard requests each sub search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests</summary>
 		public MultiSearchDescriptor MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
+		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
+		public MultiSearchDescriptor TotalHitsAsInteger(bool? totalHitsAsInteger = true) => Qs("rest_total_hits_as_int", totalHitsAsInteger);
+		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
+		public MultiSearchDescriptor CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
 	}
 	///<summary>descriptor for MsearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html</pre></summary>
 	public partial class MultiSearchTemplateDescriptor  : RequestDescriptorBase<MultiSearchTemplateDescriptor,MultiSearchTemplateRequestParameters, IMultiSearchTemplateRequest>, IMultiSearchTemplateRequest
@@ -2897,6 +2897,10 @@ namespace Nest
 		public MultiSearchTemplateDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
 		public MultiSearchTemplateDescriptor MaxConcurrentSearches(long? maxConcurrentSearches) => Qs("max_concurrent_searches", maxConcurrentSearches);
+		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
+		public MultiSearchTemplateDescriptor TotalHitsAsInteger(bool? totalHitsAsInteger = true) => Qs("rest_total_hits_as_int", totalHitsAsInteger);
+		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
+		public MultiSearchTemplateDescriptor CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
 	}
 	///<summary>descriptor for Mtermvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</pre></summary>
 	public partial class MultiTermVectorsDescriptor  : RequestDescriptorBase<MultiTermVectorsDescriptor,MultiTermVectorsRequestParameters, IMultiTermVectorsRequest>, IMultiTermVectorsRequest
@@ -3004,7 +3008,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public NodesInfoDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
-	///<summary>descriptor for NodesReloadSecureSettingsForAll <pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.5/secure-settings.html#reloadable-secure-settings</pre></summary>
+	///<summary>descriptor for NodesReloadSecureSettingsForAll <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings</pre></summary>
 	public partial class ReloadSecureSettingsDescriptor  : RequestDescriptorBase<ReloadSecureSettingsDescriptor,ReloadSecureSettingsRequestParameters, IReloadSecureSettingsRequest>, IReloadSecureSettingsRequest
 	{ 
 		/// <summary>/_nodes/reload_secure_settings</summary>
@@ -3115,34 +3119,6 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public PutScriptDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
-	///<summary>descriptor for RankEval <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html</pre></summary>
-	public partial class RankEvalDescriptor  : RequestDescriptorBase<RankEvalDescriptor,RankEvalRequestParameters, IRankEvalRequest>, IRankEvalRequest
-	{ 
-		/// <summary>/_rank_eval</summary>
-		public RankEvalDescriptor() : base(){}
-		// values part of the url path
-		Indices IRankEvalRequest.Index => Self.RouteValues.Get<Indices>("index");
-
-		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public RankEvalDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
-		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public RankEvalDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
-		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public RankEvalDescriptor AllIndices() => this.Index(Indices.All);
-
-		// Request parameters
-
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public RankEvalDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public RankEvalDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public RankEvalDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-		//TODO THIS METHOD IS UNMAPPED!
-		
-	}
 	///<summary>descriptor for Reindex <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>
 	public partial class ReindexOnServerDescriptor  : RequestDescriptorBase<ReindexOnServerDescriptor,ReindexOnServerRequestParameters, IReindexOnServerRequest>, IReindexOnServerRequest
 	{ 
@@ -3210,6 +3186,8 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
+		public ScrollDescriptor<T> TotalHitsAsInteger(bool? totalHitsAsInteger = true) => Qs("rest_total_hits_as_int", totalHitsAsInteger);
 	}
 	///<summary>descriptor for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
 	public partial class SearchDescriptor<T>  : RequestDescriptorBase<SearchDescriptor<T>,SearchRequestParameters, ISearchRequest>, ISearchRequest
@@ -3244,12 +3222,16 @@ namespace Nest
 		public SearchDescriptor<T> Analyzer(string analyzer) => Qs("analyzer", analyzer);
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public SearchDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
+		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
+		public SearchDescriptor<T> CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
 		///<summary>The default operator for query string query (AND or OR)</summary>
 		public SearchDescriptor<T> DefaultOperator(DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public SearchDescriptor<T> Df(string df) => Qs("df", df);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SearchDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public SearchDescriptor<T> IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public SearchDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
@@ -3288,14 +3270,18 @@ namespace Nest
 		public SearchDescriptor<T> AllowPartialSearchResults(bool? allowPartialSearchResults = true) => Qs("allow_partial_search_results", allowPartialSearchResults);
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public SearchDescriptor<T> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
+		///<summary>Specify whether to return sequence number and primary term of the last modification of each hit</summary>
+		public SearchDescriptor<T> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true) => Qs("seq_no_primary_term", seqNoPrimaryTerm);
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public SearchDescriptor<T> RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
 		///<summary>The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.</summary>
 		public SearchDescriptor<T> BatchedReduceSize(long? batchedReduceSize) => Qs("batched_reduce_size", batchedReduceSize);
-		///<summary>The number of concurrent shard requests this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests</summary>
+		///<summary>The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests</summary>
 		public SearchDescriptor<T> MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
 		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
 		public SearchDescriptor<T> PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
+		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
+		public SearchDescriptor<T> TotalHitsAsInteger(bool? totalHitsAsInteger = true) => Qs("rest_total_hits_as_int", totalHitsAsInteger);
 	}
 	///<summary>descriptor for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
 	public partial class SearchShardsDescriptor<T>  : RequestDescriptorBase<SearchShardsDescriptor<T>,SearchShardsRequestParameters, ISearchShardsRequest>, ISearchShardsRequest
@@ -3366,6 +3352,8 @@ namespace Nest
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SearchTemplateDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public SearchTemplateDescriptor<T> IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public SearchTemplateDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
@@ -3390,6 +3378,10 @@ namespace Nest
 		public SearchTemplateDescriptor<T> Profile(bool? profile = true) => Qs("profile", profile);
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public SearchTemplateDescriptor<T> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
+		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
+		public SearchTemplateDescriptor<T> TotalHitsAsInteger(bool? totalHitsAsInteger = true) => Qs("rest_total_hits_as_int", totalHitsAsInteger);
+		///<summary>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</summary>
+		public SearchTemplateDescriptor<T> CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
 	}
 	///<summary>descriptor for SnapshotCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class SnapshotDescriptor  : RequestDescriptorBase<SnapshotDescriptor,SnapshotRequestParameters, ISnapshotRequest>, ISnapshotRequest
@@ -3572,9 +3564,6 @@ namespace Nest
 		public CancelTasksDescriptor Actions(params string[] actions) => Qs("actions", actions);
 		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
 		public CancelTasksDescriptor ParentTaskId(string parentTaskId) => Qs("parent_task_id", parentTaskId);
-		///<summary>Cancel tasks with specified parent node.</summary>
-		[Obsolete("Scheduled to be removed in 7.0, Removed in 6.3.0 from the server see https://github.com/elastic/elasticsearch/pull/28841")]
-		public CancelTasksDescriptor ParentNode(string parentNode) => Qs("parent_node", parentNode);
 	}
 	///<summary>descriptor for TasksGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class GetTaskDescriptor  : RequestDescriptorBase<GetTaskDescriptor,GetTaskRequestParameters, IGetTaskRequest>, IGetTaskRequest
@@ -3613,19 +3602,15 @@ namespace Nest
 		public ListTasksDescriptor GroupBy(GroupBy? groupBy) => Qs("group_by", groupBy);
 		///<summary>Explicit operation timeout</summary>
 		public ListTasksDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Return tasks with the specified parent node</summary>
-		[Obsolete("Scheduled to be removed in 7.0, Removed in 6.3.0 from the server see https://github.com/elastic/elasticsearch/pull/28841")]
-		public ListTasksDescriptor ParentNode(string parentNode) => Qs("parent_node", parentNode);
 	}
 	///<summary>descriptor for Termvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
 	public partial class TermVectorsDescriptor<TDocument>  : RequestDescriptorBase<TermVectorsDescriptor<TDocument>,TermVectorsRequestParameters, ITermVectorsRequest<TDocument>>, ITermVectorsRequest<TDocument>
 	{ 
-		/// <summary>/{index}/{type}/_termvectors</summary>
+		/// <summary>/{index}/_termvectors/{id}</summary>
 		///<param name="index"> this parameter is required</param>
-		///<param name="type"> this parameter is required</param>
-		public TermVectorsDescriptor(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type))
+		public TermVectorsDescriptor(IndexName index) : base(r=>r.Required("index", index))
 		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/{type}/_termvectors</summary>
+		/// <summary>/{index}/_termvectors/{id}</summary>
 		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public TermVectorsDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
@@ -3642,10 +3627,10 @@ namespace Nest
 		public TermVectorsDescriptor<TDocument> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
 
 		///<summary>The type of the document.</summary>
-		public TermVectorsDescriptor<TDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+		public TermVectorsDescriptor<TDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public TermVectorsDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+		public TermVectorsDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
 		///<summary>The id of the document, when not specified a doc param should be supplied.</summary>
 		public TermVectorsDescriptor<TDocument> Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
@@ -3690,13 +3675,12 @@ namespace Nest
 	///<summary>descriptor for Update <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</pre></summary>
 	public partial class UpdateDescriptor<TDocument, TPartialDocument>  : RequestDescriptorBase<UpdateDescriptor<TDocument, TPartialDocument>,UpdateRequestParameters, IUpdateRequest<TDocument, TPartialDocument>>, IUpdateRequest<TDocument, TPartialDocument>
 	{ 
-		/// <summary>/{index}/{type}/{id}/_update</summary>
+		/// <summary>/{index}/_update/{id}</summary>
 		///<param name="index"> this parameter is required</param>
-		///<param name="type"> this parameter is required</param>
 		///<param name="id"> this parameter is required</param>
-		public UpdateDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		public UpdateDescriptor(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
 		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/{type}/{id}/_update</summary>
+		/// <summary>/{index}/_update/{id}</summary>
 		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public UpdateDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
@@ -3713,10 +3697,10 @@ namespace Nest
 		public UpdateDescriptor<TDocument, TPartialDocument> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
 
 		///<summary>The type of the document</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+		public UpdateDescriptor<TDocument, TPartialDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+		public UpdateDescriptor<TDocument, TPartialDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
 		// Request parameters
 
@@ -3743,10 +3727,10 @@ namespace Nest
 		public UpdateDescriptor<TDocument, TPartialDocument> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Explicit operation timeout</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Explicit version number for concurrency control</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> Version(long? version) => Qs("version", version);
-		///<summary>Specific version type</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> VersionType(VersionType? versionType) => Qs("version_type", versionType);
+		///<summary>only perform the update operation if the last operation that has changed the document has the specified sequence number</summary>
+		public UpdateDescriptor<TDocument, TPartialDocument> IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
+		///<summary>only perform the update operation if the last operation that has changed the document has the specified primary term</summary>
+		public UpdateDescriptor<TDocument, TPartialDocument> IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
 	}
 	///<summary>descriptor for UpdateByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html</pre></summary>
 	public partial class UpdateByQueryDescriptor<T>  : RequestDescriptorBase<UpdateByQueryDescriptor<T>,UpdateByQueryRequestParameters, IUpdateByQueryRequest>, IUpdateByQueryRequest
@@ -3825,14 +3809,14 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public UpdateByQueryDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public UpdateByQueryDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
+		public UpdateByQueryDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public UpdateByQueryDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
+		public UpdateByQueryDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_excludes", fields?.Select(e=>(Field)e));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public UpdateByQueryDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
+		public UpdateByQueryDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public UpdateByQueryDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
+		public UpdateByQueryDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_includes", fields?.Select(e=>(Field)e));
 
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public UpdateByQueryDescriptor<T> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
@@ -3859,148 +3843,10 @@ namespace Nest
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public UpdateByQueryDescriptor<T> Slices(long? slices) => Qs("slices", slices);
 	}
-	///<summary>descriptor for CcrDeleteAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</pre></summary>
-	public partial class DeleteAutoFollowPatternDescriptor  : RequestDescriptorBase<DeleteAutoFollowPatternDescriptor,DeleteAutoFollowPatternRequestParameters, IDeleteAutoFollowPatternRequest>, IDeleteAutoFollowPatternRequest
-	{ 
-		/// <summary>/_ccr/auto_follow/{name}</summary>
-		///<param name="name"> this parameter is required</param>
-		public DeleteAutoFollowPatternDescriptor(Name name) : base(r=>r.Required("name", name)){}
-		// values part of the url path
-		Name IDeleteAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
-
-		// Request parameters
-
-	}
-	///<summary>descriptor for CcrFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html</pre></summary>
-	public partial class CreateFollowIndexDescriptor  : RequestDescriptorBase<CreateFollowIndexDescriptor,CreateFollowIndexRequestParameters, ICreateFollowIndexRequest>, ICreateFollowIndexRequest
-	{ 
-		/// <summary>/{index}/_ccr/follow</summary>
-		///<param name="index"> this parameter is required</param>
-		public CreateFollowIndexDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
-		// values part of the url path
-		IndexName ICreateFollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
-
-		///<summary>The name of the follower index</summary>
-		public CreateFollowIndexDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
-
-		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public CreateFollowIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
-
-		// Request parameters
-
-	}
-	///<summary>descriptor for CcrFollowStats <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</pre></summary>
-	public partial class FollowIndexStatsDescriptor  : RequestDescriptorBase<FollowIndexStatsDescriptor,FollowIndexStatsRequestParameters, IFollowIndexStatsRequest>, IFollowIndexStatsRequest
-	{ 
-		/// <summary>/{index}/_ccr/stats</summary>
-		public FollowIndexStatsDescriptor() : base(){}
-		// values part of the url path
-		Indices IFollowIndexStatsRequest.Index => Self.RouteValues.Get<Indices>("index");
-
-		///<summary>A comma-separated list of index patterns; use `_all` to perform the operation on all indices</summary>
-		public FollowIndexStatsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
-		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public FollowIndexStatsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
-		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public FollowIndexStatsDescriptor AllIndices() => this.Index(Indices.All);
-
-		// Request parameters
-
-	}
-	///<summary>descriptor for CcrGetAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</pre></summary>
-	public partial class GetAutoFollowPatternDescriptor  : RequestDescriptorBase<GetAutoFollowPatternDescriptor,GetAutoFollowPatternRequestParameters, IGetAutoFollowPatternRequest>, IGetAutoFollowPatternRequest
-	{ 
-		/// <summary>/_ccr/auto_follow</summary>
-		public GetAutoFollowPatternDescriptor() : base(){}
-		// values part of the url path
-		Name IGetAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
-
-		///<summary>The name of the auto follow pattern.</summary>
-		public GetAutoFollowPatternDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
-
-		// Request parameters
-
-	}
-	///<summary>descriptor for CcrPauseFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</pre></summary>
-	public partial class PauseFollowIndexDescriptor  : RequestDescriptorBase<PauseFollowIndexDescriptor,PauseFollowIndexRequestParameters, IPauseFollowIndexRequest>, IPauseFollowIndexRequest
-	{ 
-		/// <summary>/{index}/_ccr/pause_follow</summary>
-		///<param name="index"> this parameter is required</param>
-		public PauseFollowIndexDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
-		// values part of the url path
-		IndexName IPauseFollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
-
-		///<summary>The name of the follower index that should pause following its leader index.</summary>
-		public PauseFollowIndexDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
-
-		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public PauseFollowIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
-
-		// Request parameters
-
-	}
-	///<summary>descriptor for CcrPutAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</pre></summary>
-	public partial class CreateAutoFollowPatternDescriptor  : RequestDescriptorBase<CreateAutoFollowPatternDescriptor,CreateAutoFollowPatternRequestParameters, ICreateAutoFollowPatternRequest>, ICreateAutoFollowPatternRequest
-	{ 
-		/// <summary>/_ccr/auto_follow/{name}</summary>
-		///<param name="name"> this parameter is required</param>
-		public CreateAutoFollowPatternDescriptor(Name name) : base(r=>r.Required("name", name)){}
-		// values part of the url path
-		Name ICreateAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
-
-		// Request parameters
-
-	}
-	///<summary>descriptor for CcrResumeFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</pre></summary>
-	public partial class ResumeFollowIndexDescriptor  : RequestDescriptorBase<ResumeFollowIndexDescriptor,ResumeFollowIndexRequestParameters, IResumeFollowIndexRequest>, IResumeFollowIndexRequest
-	{ 
-		/// <summary>/{index}/_ccr/resume_follow</summary>
-		///<param name="index"> this parameter is required</param>
-		public ResumeFollowIndexDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
-		// values part of the url path
-		IndexName IResumeFollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
-
-		///<summary>The name of the follow index to resume following.</summary>
-		public ResumeFollowIndexDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
-
-		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public ResumeFollowIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
-
-		// Request parameters
-
-	}
-	///<summary>descriptor for CcrStats <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html</pre></summary>
-	public partial class CcrStatsDescriptor  : RequestDescriptorBase<CcrStatsDescriptor,CcrStatsRequestParameters, ICcrStatsRequest>, ICcrStatsRequest
-	{ 
-		// values part of the url path
-
-		// Request parameters
-
-	}
-	///<summary>descriptor for CcrUnfollow <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current</pre></summary>
-	public partial class UnfollowIndexDescriptor  : RequestDescriptorBase<UnfollowIndexDescriptor,UnfollowIndexRequestParameters, IUnfollowIndexRequest>, IUnfollowIndexRequest
-	{ 
-		/// <summary>/{index}/_ccr/unfollow</summary>
-		///<param name="index"> this parameter is required</param>
-		public UnfollowIndexDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
-		// values part of the url path
-		IndexName IUnfollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
-
-		///<summary>The name of the follower index that should be turned into a regular index.</summary>
-		public UnfollowIndexDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
-
-		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public UnfollowIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
-
-		// Request parameters
-
-	}
 	///<summary>descriptor for XpackGraphExplore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
 	public partial class GraphExploreDescriptor<T>  : RequestDescriptorBase<GraphExploreDescriptor<T>,GraphExploreRequestParameters, IGraphExploreRequest>, IGraphExploreRequest
 	{ 
-		/// <summary>/{index}/_xpack/graph/_explore</summary>
+		/// <summary>/{index}/_graph/explore</summary>
 		///<param name="index"> this parameter is required</param>
 		public GraphExploreDescriptor(Indices index) : base(r=>r.Required("index", index)){}
 		// values part of the url path
@@ -4124,410 +3970,628 @@ namespace Nest
 		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
 		public StartTrialLicenseDescriptor Acknowledge(bool? acknowledge = true) => Qs("acknowledge", acknowledge);
 	}
-	///<summary>descriptor for XpackMlCloseJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</pre></summary>
-	public partial class CloseJobDescriptor  : RequestDescriptorBase<CloseJobDescriptor,CloseJobRequestParameters, ICloseJobRequest>, ICloseJobRequest
+	///<summary>descriptor for MlCloseJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</pre></summary>
+	public partial class MlCloseJobDescriptor  : RequestDescriptorBase<MlCloseJobDescriptor,MlCloseJobRequestParameters, IMlCloseJobRequest>, IMlCloseJobRequest
 	{ 
-		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_close</summary>
+		/// <summary>/_ml/anomaly_detectors/{job_id}/_close</summary>
 		///<param name="job_id"> this parameter is required</param>
-		public CloseJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		public MlCloseJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 		// values part of the url path
-		Id ICloseJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IMlCloseJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
 		// Request parameters
 
 		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
-		public CloseJobDescriptor AllowNoJobs(bool? allowNoJobs = true) => Qs("allow_no_jobs", allowNoJobs);
+		public MlCloseJobDescriptor AllowNoJobs(bool? allowNoJobs = true) => Qs("allow_no_jobs", allowNoJobs);
 		///<summary>True if the job should be forcefully closed</summary>
-		public CloseJobDescriptor Force(bool? force = true) => Qs("force", force);
+		public MlCloseJobDescriptor Force(bool? force = true) => Qs("force", force);
 		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
-		public CloseJobDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+		public MlCloseJobDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlDeleteDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
-	public partial class DeleteDatafeedDescriptor  : RequestDescriptorBase<DeleteDatafeedDescriptor,DeleteDatafeedRequestParameters, IDeleteDatafeedRequest>, IDeleteDatafeedRequest
+	///<summary>descriptor for MlDeleteDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
+	public partial class MlDeleteDatafeedDescriptor  : RequestDescriptorBase<MlDeleteDatafeedDescriptor,MlDeleteDatafeedRequestParameters, IMlDeleteDatafeedRequest>, IMlDeleteDatafeedRequest
 	{ 
-		/// <summary>/_xpack/ml/datafeeds/{datafeed_id}</summary>
+		/// <summary>/_ml/datafeeds/{datafeed_id}</summary>
 		///<param name="datafeed_id"> this parameter is required</param>
-		public DeleteDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		public MlDeleteDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
 		// values part of the url path
-		Id IDeleteDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+		Id IMlDeleteDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 
 		// Request parameters
 
 		///<summary>True if the datafeed should be forcefully deleted</summary>
-		public DeleteDatafeedDescriptor Force(bool? force = true) => Qs("force", force);
+		public MlDeleteDatafeedDescriptor Force(bool? force = true) => Qs("force", force);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlDeleteExpiredData <pre></pre></summary>
-	public partial class DeleteExpiredDataDescriptor  : RequestDescriptorBase<DeleteExpiredDataDescriptor,DeleteExpiredDataRequestParameters, IDeleteExpiredDataRequest>, IDeleteExpiredDataRequest
+	///<summary>descriptor for MlDeleteExpiredData <pre>TODO</pre></summary>
+	public partial class MlDeleteExpiredDataDescriptor  : RequestDescriptorBase<MlDeleteExpiredDataDescriptor,MlDeleteExpiredDataRequestParameters, IMlDeleteExpiredDataRequest>, IMlDeleteExpiredDataRequest
 	{ 
 		// values part of the url path
 
 		// Request parameters
 
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlDeleteJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</pre></summary>
-	public partial class DeleteJobDescriptor  : RequestDescriptorBase<DeleteJobDescriptor,DeleteJobRequestParameters, IDeleteJobRequest>, IDeleteJobRequest
+	///<summary>descriptor for MlDeleteFilter <pre>TODO</pre></summary>
+	public partial class MlDeleteFilterDescriptor  : RequestDescriptorBase<MlDeleteFilterDescriptor,MlDeleteFilterRequestParameters, IMlDeleteFilterRequest>, IMlDeleteFilterRequest
 	{ 
-		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}</summary>
-		///<param name="job_id"> this parameter is required</param>
-		public DeleteJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		/// <summary>/_ml/filters/{filter_id}</summary>
+		///<param name="filter_id"> this parameter is required</param>
+		public MlDeleteFilterDescriptor(Id filter_id) : base(r=>r.Required("filter_id", filter_id)){}
 		// values part of the url path
-		Id IDeleteJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IMlDeleteFilterRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
+
+		// Request parameters
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	}
+	///<summary>descriptor for MlDeleteJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</pre></summary>
+	public partial class MlDeleteJobDescriptor  : RequestDescriptorBase<MlDeleteJobDescriptor,MlDeleteJobRequestParameters, IMlDeleteJobRequest>, IMlDeleteJobRequest
+	{ 
+		/// <summary>/_ml/anomaly_detectors/{job_id}</summary>
+		///<param name="job_id"> this parameter is required</param>
+		public MlDeleteJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		// values part of the url path
+		Id IMlDeleteJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
 		// Request parameters
 
 		///<summary>True if the job should be forcefully deleted</summary>
-		public DeleteJobDescriptor Force(bool? force = true) => Qs("force", force);
+		public MlDeleteJobDescriptor Force(bool? force = true) => Qs("force", force);
 		///<summary>Should this request wait until the operation has completed before returning</summary>
-		public DeleteJobDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
+		public MlDeleteJobDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlDeleteModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</pre></summary>
-	public partial class DeleteModelSnapshotDescriptor  : RequestDescriptorBase<DeleteModelSnapshotDescriptor,DeleteModelSnapshotRequestParameters, IDeleteModelSnapshotRequest>, IDeleteModelSnapshotRequest
+	///<summary>descriptor for MlDeleteModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</pre></summary>
+	public partial class MlDeleteModelSnapshotDescriptor  : RequestDescriptorBase<MlDeleteModelSnapshotDescriptor,MlDeleteModelSnapshotRequestParameters, IMlDeleteModelSnapshotRequest>, IMlDeleteModelSnapshotRequest
 	{ 
-		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
+		/// <summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
 		///<param name="job_id"> this parameter is required</param>
 		///<param name="snapshot_id"> this parameter is required</param>
-		public DeleteModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+		public MlDeleteModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
 		// values part of the url path
-		Id IDeleteModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-		Id IDeleteModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
+		Id IMlDeleteModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IMlDeleteModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
 
 		// Request parameters
 
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlFlushJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</pre></summary>
-	public partial class FlushJobDescriptor  : RequestDescriptorBase<FlushJobDescriptor,FlushJobRequestParameters, IFlushJobRequest>, IFlushJobRequest
+	///<summary>descriptor for MlFlushJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</pre></summary>
+	public partial class MlFlushJobDescriptor  : RequestDescriptorBase<MlFlushJobDescriptor,MlFlushJobRequestParameters, IMlFlushJobRequest>, IMlFlushJobRequest
 	{ 
-		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_flush</summary>
+		/// <summary>/_ml/anomaly_detectors/{job_id}/_flush</summary>
 		///<param name="job_id"> this parameter is required</param>
-		public FlushJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		public MlFlushJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 		// values part of the url path
-		Id IFlushJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IMlFlushJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
 		// Request parameters
 
+		///<summary>Calculates interim results for the most recent bucket or all buckets within the latency period</summary>
+		public MlFlushJobDescriptor CalcInterim(bool? calcInterim = true) => Qs("calc_interim", calcInterim);
+		///<summary>When used in conjunction with calc_interim, specifies the range of buckets on which to calculate interim results</summary>
+		public MlFlushJobDescriptor Start(string start) => Qs("start", start);
+		///<summary>When used in conjunction with calc_interim, specifies the range of buckets on which to calculate interim results</summary>
+		public MlFlushJobDescriptor End(string end) => Qs("end", end);
+		///<summary>Advances time to the given value generating results and updating the model for the advanced interval</summary>
+		public MlFlushJobDescriptor AdvanceTime(string advanceTime) => Qs("advance_time", advanceTime);
 		///<summary>Skips time to the given value without generating results or updating the model for the skipped interval</summary>
-		public FlushJobDescriptor SkipTime(string skipTime) => Qs("skip_time", skipTime);
+		public MlFlushJobDescriptor SkipTime(string skipTime) => Qs("skip_time", skipTime);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlForecast <pre></pre></summary>
-	public partial class ForecastJobDescriptor  : RequestDescriptorBase<ForecastJobDescriptor,ForecastJobRequestParameters, IForecastJobRequest>, IForecastJobRequest
+	///<summary>descriptor for MlForecast <pre>TODO</pre></summary>
+	public partial class MlForecastDescriptor  : RequestDescriptorBase<MlForecastDescriptor,MlForecastRequestParameters, IMlForecastRequest>, IMlForecastRequest
 	{ 
-		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_forecast</summary>
+		/// <summary>/_ml/anomaly_detectors/{job_id}/_forecast</summary>
 		///<param name="job_id"> this parameter is required</param>
-		public ForecastJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		public MlForecastDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 		// values part of the url path
-		Id IForecastJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IMlForecastRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
 		// Request parameters
 
+		///<summary>The duration of the forecast</summary>
+		public MlForecastDescriptor Duration(Time duration) => Qs("duration", duration);
+		///<summary>The time interval after which the forecast expires. Expired forecasts will be deleted at the first opportunity.</summary>
+		public MlForecastDescriptor ExpiresIn(Time expiresIn) => Qs("expires_in", expiresIn);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlGetBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</pre></summary>
-	public partial class GetBucketsDescriptor  : RequestDescriptorBase<GetBucketsDescriptor,GetBucketsRequestParameters, IGetBucketsRequest>, IGetBucketsRequest
+	///<summary>descriptor for MlGetBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</pre></summary>
+	public partial class MlGetBucketsDescriptor  : RequestDescriptorBase<MlGetBucketsDescriptor,MlGetBucketsRequestParameters, IMlGetBucketsRequest>, IMlGetBucketsRequest
 	{ 
-		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/buckets</summary>
+		/// <summary>/_ml/anomaly_detectors/{job_id}/results/buckets/{timestamp}</summary>
 		///<param name="job_id"> this parameter is required</param>
-		public GetBucketsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		public MlGetBucketsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 		// values part of the url path
-		Id IGetBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IMlGetBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Timestamp IMlGetBucketsRequest.Timestamp => Self.RouteValues.Get<Timestamp>("timestamp");
+
+		///<summary>The timestamp of the desired single bucket result</summary>
+		public MlGetBucketsDescriptor Timestamp(Timestamp timestamp) => Assign(a=>a.RouteValues.Optional("timestamp", timestamp));
 
 		// Request parameters
 
+		///<summary>Include anomaly records</summary>
+		public MlGetBucketsDescriptor Expand(bool? expand = true) => Qs("expand", expand);
+		///<summary>Exclude interim results</summary>
+		public MlGetBucketsDescriptor ExcludeInterim(bool? excludeInterim = true) => Qs("exclude_interim", excludeInterim);
+		///<summary>skips a number of buckets</summary>
+		public MlGetBucketsDescriptor From(int from) => Qs("from", from);
+		///<summary>specifies a max number of buckets to get</summary>
+		public MlGetBucketsDescriptor Size(int size) => Qs("size", size);
+		///<summary>Start time filter for buckets</summary>
+		public MlGetBucketsDescriptor Start(string start) => Qs("start", start);
+		///<summary>End time filter for buckets</summary>
+		public MlGetBucketsDescriptor End(string end) => Qs("end", end);
+		///<summary>Filter for the most anomalous buckets</summary>
+		public MlGetBucketsDescriptor AnomalyScore(double anomalyScore) => Qs("anomaly_score", anomalyScore);
+		///<summary>Sort buckets by a particular field</summary>
+		public MlGetBucketsDescriptor Sort(string sort) => Qs("sort", sort);
+		///<summary>Set the sort direction</summary>
+		public MlGetBucketsDescriptor Desc(bool? desc = true) => Qs("desc", desc);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlGetCategories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
-	public partial class GetCategoriesDescriptor  : RequestDescriptorBase<GetCategoriesDescriptor,GetCategoriesRequestParameters, IGetCategoriesRequest>, IGetCategoriesRequest
+	///<summary>descriptor for MlGetCategories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
+	public partial class MlGetCategoriesDescriptor  : RequestDescriptorBase<MlGetCategoriesDescriptor,MlGetCategoriesRequestParameters, IMlGetCategoriesRequest>, IMlGetCategoriesRequest
 	{ 
-		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/categories/{category_id}</summary>
+		/// <summary>/_ml/anomaly_detectors/{job_id}/results/categories/{category_id}</summary>
 		///<param name="job_id"> this parameter is required</param>
-		public GetCategoriesDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		public MlGetCategoriesDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 		// values part of the url path
-		Id IGetCategoriesRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-		CategoryId IGetCategoriesRequest.CategoryId => Self.RouteValues.Get<CategoryId>("category_id");
+		Id IMlGetCategoriesRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		CategoryId IMlGetCategoriesRequest.CategoryId => Self.RouteValues.Get<CategoryId>("category_id");
 
 		///<summary>The identifier of the category definition of interest</summary>
-		public GetCategoriesDescriptor CategoryId(CategoryId categoryId) => Assign(a=>a.RouteValues.Optional("category_id", categoryId));
+		public MlGetCategoriesDescriptor CategoryId(CategoryId categoryId) => Assign(a=>a.RouteValues.Optional("category_id", categoryId));
 
 		// Request parameters
 
+		///<summary>skips a number of categories</summary>
+		public MlGetCategoriesDescriptor From(int from) => Qs("from", from);
+		///<summary>specifies a max number of categories to get</summary>
+		public MlGetCategoriesDescriptor Size(int size) => Qs("size", size);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlGetDatafeeds <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</pre></summary>
-	public partial class GetDatafeedsDescriptor  : RequestDescriptorBase<GetDatafeedsDescriptor,GetDatafeedsRequestParameters, IGetDatafeedsRequest>, IGetDatafeedsRequest
+	///<summary>descriptor for MlGetDatafeeds <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</pre></summary>
+	public partial class MlGetDatafeedsDescriptor  : RequestDescriptorBase<MlGetDatafeedsDescriptor,MlGetDatafeedsRequestParameters, IMlGetDatafeedsRequest>, IMlGetDatafeedsRequest
 	{ 
-		/// <summary>/_xpack/ml/datafeeds/{datafeed_id}</summary>
-		public GetDatafeedsDescriptor() : base(){}
+		/// <summary>/_ml/datafeeds/{datafeed_id}</summary>
+		public MlGetDatafeedsDescriptor() : base(){}
 		// values part of the url path
-		Id IGetDatafeedsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+		Id IMlGetDatafeedsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 
 		///<summary>The ID of the datafeeds to fetch</summary>
-		public GetDatafeedsDescriptor DatafeedId(Id datafeedId) => Assign(a=>a.RouteValues.Optional("datafeed_id", datafeedId));
+		public MlGetDatafeedsDescriptor DatafeedId(Id datafeedId) => Assign(a=>a.RouteValues.Optional("datafeed_id", datafeedId));
 
 		// Request parameters
 
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
-		public GetDatafeedsDescriptor AllowNoDatafeeds(bool? allowNoDatafeeds = true) => Qs("allow_no_datafeeds", allowNoDatafeeds);
+		public MlGetDatafeedsDescriptor AllowNoDatafeeds(bool? allowNoDatafeeds = true) => Qs("allow_no_datafeeds", allowNoDatafeeds);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlGetDatafeedStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</pre></summary>
-	public partial class GetDatafeedStatsDescriptor  : RequestDescriptorBase<GetDatafeedStatsDescriptor,GetDatafeedStatsRequestParameters, IGetDatafeedStatsRequest>, IGetDatafeedStatsRequest
+	///<summary>descriptor for MlGetDatafeedStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</pre></summary>
+	public partial class MlGetDatafeedStatsDescriptor  : RequestDescriptorBase<MlGetDatafeedStatsDescriptor,MlGetDatafeedStatsRequestParameters, IMlGetDatafeedStatsRequest>, IMlGetDatafeedStatsRequest
 	{ 
-		/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_stats</summary>
-		public GetDatafeedStatsDescriptor() : base(){}
+		/// <summary>/_ml/datafeeds/{datafeed_id}/_stats</summary>
+		public MlGetDatafeedStatsDescriptor() : base(){}
 		// values part of the url path
-		Id IGetDatafeedStatsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+		Id IMlGetDatafeedStatsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 
 		///<summary>The ID of the datafeeds stats to fetch</summary>
-		public GetDatafeedStatsDescriptor DatafeedId(Id datafeedId) => Assign(a=>a.RouteValues.Optional("datafeed_id", datafeedId));
+		public MlGetDatafeedStatsDescriptor DatafeedId(Id datafeedId) => Assign(a=>a.RouteValues.Optional("datafeed_id", datafeedId));
 
 		// Request parameters
 
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
-		public GetDatafeedStatsDescriptor AllowNoDatafeeds(bool? allowNoDatafeeds = true) => Qs("allow_no_datafeeds", allowNoDatafeeds);
+		public MlGetDatafeedStatsDescriptor AllowNoDatafeeds(bool? allowNoDatafeeds = true) => Qs("allow_no_datafeeds", allowNoDatafeeds);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlGetInfluencers <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
-	public partial class GetInfluencersDescriptor  : RequestDescriptorBase<GetInfluencersDescriptor,GetInfluencersRequestParameters, IGetInfluencersRequest>, IGetInfluencersRequest
+	///<summary>descriptor for MlGetFilters <pre>TODO</pre></summary>
+	public partial class MlGetFiltersDescriptor  : RequestDescriptorBase<MlGetFiltersDescriptor,MlGetFiltersRequestParameters, IMlGetFiltersRequest>, IMlGetFiltersRequest
 	{ 
-		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/influencers</summary>
-		///<param name="job_id"> this parameter is required</param>
-		public GetInfluencersDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		/// <summary>/_ml/filters</summary>
+		public MlGetFiltersDescriptor() : base(){}
 		// values part of the url path
-		Id IGetInfluencersRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IMlGetFiltersRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
+
+		///<summary>The ID of the filter to fetch</summary>
+		public MlGetFiltersDescriptor FilterId(Id filterId) => Assign(a=>a.RouteValues.Optional("filter_id", filterId));
 
 		// Request parameters
 
+		///<summary>skips a number of filters</summary>
+		public MlGetFiltersDescriptor From(int from) => Qs("from", from);
+		///<summary>specifies a max number of filters to get</summary>
+		public MlGetFiltersDescriptor Size(int size) => Qs("size", size);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlGetJobs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</pre></summary>
-	public partial class GetJobsDescriptor  : RequestDescriptorBase<GetJobsDescriptor,GetJobsRequestParameters, IGetJobsRequest>, IGetJobsRequest
+	///<summary>descriptor for MlGetInfluencers <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
+	public partial class MlGetInfluencersDescriptor  : RequestDescriptorBase<MlGetInfluencersDescriptor,MlGetInfluencersRequestParameters, IMlGetInfluencersRequest>, IMlGetInfluencersRequest
 	{ 
-		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}</summary>
-		public GetJobsDescriptor() : base(){}
+		/// <summary>/_ml/anomaly_detectors/{job_id}/results/influencers</summary>
+		///<param name="job_id"> this parameter is required</param>
+		public MlGetInfluencersDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 		// values part of the url path
-		Id IGetJobsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IMlGetInfluencersRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+
+		///<summary>Exclude interim results</summary>
+		public MlGetInfluencersDescriptor ExcludeInterim(bool? excludeInterim = true) => Qs("exclude_interim", excludeInterim);
+		///<summary>skips a number of influencers</summary>
+		public MlGetInfluencersDescriptor From(int from) => Qs("from", from);
+		///<summary>specifies a max number of influencers to get</summary>
+		public MlGetInfluencersDescriptor Size(int size) => Qs("size", size);
+		///<summary>start timestamp for the requested influencers</summary>
+		public MlGetInfluencersDescriptor Start(string start) => Qs("start", start);
+		///<summary>end timestamp for the requested influencers</summary>
+		public MlGetInfluencersDescriptor End(string end) => Qs("end", end);
+		///<summary>influencer score threshold for the requested influencers</summary>
+		public MlGetInfluencersDescriptor InfluencerScore(double influencerScore) => Qs("influencer_score", influencerScore);
+		///<summary>sort field for the requested influencers</summary>
+		public MlGetInfluencersDescriptor Sort(string sort) => Qs("sort", sort);
+		///<summary>whether the results should be sorted in decending order</summary>
+		public MlGetInfluencersDescriptor Desc(bool? desc = true) => Qs("desc", desc);
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	}
+	///<summary>descriptor for MlGetJobs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</pre></summary>
+	public partial class MlGetJobsDescriptor  : RequestDescriptorBase<MlGetJobsDescriptor,MlGetJobsRequestParameters, IMlGetJobsRequest>, IMlGetJobsRequest
+	{ 
+		/// <summary>/_ml/anomaly_detectors/{job_id}</summary>
+		public MlGetJobsDescriptor() : base(){}
+		// values part of the url path
+		Id IMlGetJobsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
 		///<summary>The ID of the jobs to fetch</summary>
-		public GetJobsDescriptor JobId(Id jobId) => Assign(a=>a.RouteValues.Optional("job_id", jobId));
+		public MlGetJobsDescriptor JobId(Id jobId) => Assign(a=>a.RouteValues.Optional("job_id", jobId));
 
 		// Request parameters
 
 		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
-		public GetJobsDescriptor AllowNoJobs(bool? allowNoJobs = true) => Qs("allow_no_jobs", allowNoJobs);
+		public MlGetJobsDescriptor AllowNoJobs(bool? allowNoJobs = true) => Qs("allow_no_jobs", allowNoJobs);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlGetJobStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</pre></summary>
-	public partial class GetJobStatsDescriptor  : RequestDescriptorBase<GetJobStatsDescriptor,GetJobStatsRequestParameters, IGetJobStatsRequest>, IGetJobStatsRequest
+	///<summary>descriptor for MlGetJobStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</pre></summary>
+	public partial class MlGetJobStatsDescriptor  : RequestDescriptorBase<MlGetJobStatsDescriptor,MlGetJobStatsRequestParameters, IMlGetJobStatsRequest>, IMlGetJobStatsRequest
 	{ 
-		/// <summary>/_xpack/ml/anomaly_detectors/_stats</summary>
-		public GetJobStatsDescriptor() : base(){}
+		/// <summary>/_ml/anomaly_detectors/_stats</summary>
+		public MlGetJobStatsDescriptor() : base(){}
 		// values part of the url path
-		Id IGetJobStatsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IMlGetJobStatsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
 		///<summary>The ID of the jobs stats to fetch</summary>
-		public GetJobStatsDescriptor JobId(Id jobId) => Assign(a=>a.RouteValues.Optional("job_id", jobId));
+		public MlGetJobStatsDescriptor JobId(Id jobId) => Assign(a=>a.RouteValues.Optional("job_id", jobId));
 
 		// Request parameters
 
 		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
-		public GetJobStatsDescriptor AllowNoJobs(bool? allowNoJobs = true) => Qs("allow_no_jobs", allowNoJobs);
+		public MlGetJobStatsDescriptor AllowNoJobs(bool? allowNoJobs = true) => Qs("allow_no_jobs", allowNoJobs);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlGetModelSnapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</pre></summary>
-	public partial class GetModelSnapshotsDescriptor  : RequestDescriptorBase<GetModelSnapshotsDescriptor,GetModelSnapshotsRequestParameters, IGetModelSnapshotsRequest>, IGetModelSnapshotsRequest
+	///<summary>descriptor for MlGetModelSnapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</pre></summary>
+	public partial class MlGetModelSnapshotsDescriptor  : RequestDescriptorBase<MlGetModelSnapshotsDescriptor,MlGetModelSnapshotsRequestParameters, IMlGetModelSnapshotsRequest>, IMlGetModelSnapshotsRequest
 	{ 
-		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
+		/// <summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
 		///<param name="job_id"> this parameter is required</param>
-		public GetModelSnapshotsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		public MlGetModelSnapshotsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 		// values part of the url path
-		Id IGetModelSnapshotsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-		Id IGetModelSnapshotsRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
+		Id IMlGetModelSnapshotsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IMlGetModelSnapshotsRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
 
 		///<summary>The ID of the snapshot to fetch</summary>
-		public GetModelSnapshotsDescriptor SnapshotId(Id snapshotId) => Assign(a=>a.RouteValues.Optional("snapshot_id", snapshotId));
+		public MlGetModelSnapshotsDescriptor SnapshotId(Id snapshotId) => Assign(a=>a.RouteValues.Optional("snapshot_id", snapshotId));
 
 		// Request parameters
 
+		///<summary>Skips a number of documents</summary>
+		public MlGetModelSnapshotsDescriptor From(int from) => Qs("from", from);
+		///<summary>The default number of documents returned in queries as a string.</summary>
+		public MlGetModelSnapshotsDescriptor Size(int size) => Qs("size", size);
+		///<summary>The filter 'start' query parameter</summary>
+		public MlGetModelSnapshotsDescriptor Start(DateTimeOffset? start) => Qs("start", start);
+		///<summary>The filter 'end' query parameter</summary>
+		public MlGetModelSnapshotsDescriptor End(DateTimeOffset? end) => Qs("end", end);
+		///<summary>Name of the field to sort on</summary>
+		public MlGetModelSnapshotsDescriptor Sort(string sort) => Qs("sort", sort);
+		///<summary>True if the results should be sorted in descending order</summary>
+		public MlGetModelSnapshotsDescriptor Desc(bool? desc = true) => Qs("desc", desc);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlGetOverallBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</pre></summary>
-	public partial class GetOverallBucketsDescriptor  : RequestDescriptorBase<GetOverallBucketsDescriptor,GetOverallBucketsRequestParameters, IGetOverallBucketsRequest>, IGetOverallBucketsRequest
+	///<summary>descriptor for MlGetOverallBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</pre></summary>
+	public partial class MlGetOverallBucketsDescriptor  : RequestDescriptorBase<MlGetOverallBucketsDescriptor,MlGetOverallBucketsRequestParameters, IMlGetOverallBucketsRequest>, IMlGetOverallBucketsRequest
 	{ 
-		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/overall_buckets</summary>
+		/// <summary>/_ml/anomaly_detectors/{job_id}/results/overall_buckets</summary>
 		///<param name="job_id"> this parameter is required</param>
-		public GetOverallBucketsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		public MlGetOverallBucketsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 		// values part of the url path
-		Id IGetOverallBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IMlGetOverallBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
 		// Request parameters
 
+		///<summary>The number of top job bucket scores to be used in the overall_score calculation</summary>
+		public MlGetOverallBucketsDescriptor TopN(int topN) => Qs("top_n", topN);
+		///<summary>The span of the overall buckets. Defaults to the longest job bucket_span</summary>
+		public MlGetOverallBucketsDescriptor BucketSpan(string bucketSpan) => Qs("bucket_span", bucketSpan);
+		///<summary>Returns overall buckets with overall scores higher than this value</summary>
+		public MlGetOverallBucketsDescriptor OverallScore(double overallScore) => Qs("overall_score", overallScore);
+		///<summary>If true overall buckets that include interim buckets will be excluded</summary>
+		public MlGetOverallBucketsDescriptor ExcludeInterim(bool? excludeInterim = true) => Qs("exclude_interim", excludeInterim);
+		///<summary>Returns overall buckets with timestamps after this time</summary>
+		public MlGetOverallBucketsDescriptor Start(string start) => Qs("start", start);
+		///<summary>Returns overall buckets with timestamps earlier than this time</summary>
+		public MlGetOverallBucketsDescriptor End(string end) => Qs("end", end);
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public MlGetOverallBucketsDescriptor AllowNoJobs(bool? allowNoJobs = true) => Qs("allow_no_jobs", allowNoJobs);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlGetRecords <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</pre></summary>
-	public partial class GetAnomalyRecordsDescriptor  : RequestDescriptorBase<GetAnomalyRecordsDescriptor,GetAnomalyRecordsRequestParameters, IGetAnomalyRecordsRequest>, IGetAnomalyRecordsRequest
+	///<summary>descriptor for MlGetRecords <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</pre></summary>
+	public partial class MlGetRecordsDescriptor  : RequestDescriptorBase<MlGetRecordsDescriptor,MlGetRecordsRequestParameters, IMlGetRecordsRequest>, IMlGetRecordsRequest
 	{ 
-		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/records</summary>
+		/// <summary>/_ml/anomaly_detectors/{job_id}/results/records</summary>
 		///<param name="job_id"> this parameter is required</param>
-		public GetAnomalyRecordsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		public MlGetRecordsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 		// values part of the url path
-		Id IGetAnomalyRecordsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IMlGetRecordsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
 		// Request parameters
 
+		///<summary>Exclude interim results</summary>
+		public MlGetRecordsDescriptor ExcludeInterim(bool? excludeInterim = true) => Qs("exclude_interim", excludeInterim);
+		///<summary>skips a number of records</summary>
+		public MlGetRecordsDescriptor From(int from) => Qs("from", from);
+		///<summary>specifies a max number of records to get</summary>
+		public MlGetRecordsDescriptor Size(int size) => Qs("size", size);
+		///<summary>Start time filter for records</summary>
+		public MlGetRecordsDescriptor Start(string start) => Qs("start", start);
+		///<summary>End time filter for records</summary>
+		public MlGetRecordsDescriptor End(string end) => Qs("end", end);
+		///<summary>TODO</summary>
+		public MlGetRecordsDescriptor RecordScore(double recordScore) => Qs("record_score", recordScore);
+		///<summary>Sort records by a particular field</summary>
+		public MlGetRecordsDescriptor Sort(string sort) => Qs("sort", sort);
+		///<summary>Set the sort direction</summary>
+		public MlGetRecordsDescriptor Desc(bool? desc = true) => Qs("desc", desc);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlOpenJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</pre></summary>
-	public partial class OpenJobDescriptor  : RequestDescriptorBase<OpenJobDescriptor,OpenJobRequestParameters, IOpenJobRequest>, IOpenJobRequest
+	///<summary>descriptor for MlOpenJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</pre></summary>
+	public partial class MlOpenJobDescriptor  : RequestDescriptorBase<MlOpenJobDescriptor,MlOpenJobRequestParameters, IMlOpenJobRequest>, IMlOpenJobRequest
 	{ 
-		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_open</summary>
+		/// <summary>/_ml/anomaly_detectors/{job_id}/_open</summary>
 		///<param name="job_id"> this parameter is required</param>
-		public OpenJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		public MlOpenJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 		// values part of the url path
-		Id IOpenJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IMlOpenJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
 		// Request parameters
 
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlPostData <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
-	public partial class PostJobDataDescriptor  : RequestDescriptorBase<PostJobDataDescriptor,PostJobDataRequestParameters, IPostJobDataRequest>, IPostJobDataRequest
+	///<summary>descriptor for MlPostData <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
+	public partial class MlPostDataDescriptor  : RequestDescriptorBase<MlPostDataDescriptor,MlPostDataRequestParameters, IMlPostDataRequest>, IMlPostDataRequest
 	{ 
-		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_data</summary>
+		/// <summary>/_ml/anomaly_detectors/{job_id}/_data</summary>
 		///<param name="job_id"> this parameter is required</param>
-		public PostJobDataDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		public MlPostDataDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 		// values part of the url path
-		Id IPostJobDataRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IMlPostDataRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
 		// Request parameters
 
 		///<summary>Optional parameter to specify the start of the bucket resetting range</summary>
-		public PostJobDataDescriptor ResetStart(DateTimeOffset? resetStart) => Qs("reset_start", resetStart);
+		public MlPostDataDescriptor ResetStart(string resetStart) => Qs("reset_start", resetStart);
 		///<summary>Optional parameter to specify the end of the bucket resetting range</summary>
-		public PostJobDataDescriptor ResetEnd(DateTimeOffset? resetEnd) => Qs("reset_end", resetEnd);
+		public MlPostDataDescriptor ResetEnd(string resetEnd) => Qs("reset_end", resetEnd);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlPreviewDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</pre></summary>
-	public partial class PreviewDatafeedDescriptor  : RequestDescriptorBase<PreviewDatafeedDescriptor,PreviewDatafeedRequestParameters, IPreviewDatafeedRequest>, IPreviewDatafeedRequest
+	///<summary>descriptor for MlPreviewDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</pre></summary>
+	public partial class MlPreviewDatafeedDescriptor  : RequestDescriptorBase<MlPreviewDatafeedDescriptor,MlPreviewDatafeedRequestParameters, IMlPreviewDatafeedRequest>, IMlPreviewDatafeedRequest
 	{ 
-		/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_preview</summary>
+		/// <summary>/_ml/datafeeds/{datafeed_id}/_preview</summary>
 		///<param name="datafeed_id"> this parameter is required</param>
-		public PreviewDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		public MlPreviewDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
 		// values part of the url path
-		Id IPreviewDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+		Id IMlPreviewDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 
 		// Request parameters
 
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlPutDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</pre></summary>
-	public partial class PutDatafeedDescriptor<T>  : RequestDescriptorBase<PutDatafeedDescriptor<T>,PutDatafeedRequestParameters, IPutDatafeedRequest>, IPutDatafeedRequest
+	///<summary>descriptor for MlPutDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</pre></summary>
+	public partial class MlPutDatafeedDescriptor  : RequestDescriptorBase<MlPutDatafeedDescriptor,MlPutDatafeedRequestParameters, IMlPutDatafeedRequest>, IMlPutDatafeedRequest
 	{ 
-		/// <summary>/_xpack/ml/datafeeds/{datafeed_id}. Will infer the index and type from the generic type</summary>
+		/// <summary>/_ml/datafeeds/{datafeed_id}</summary>
 		///<param name="datafeed_id"> this parameter is required</param>
-		public PutDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id))
-		{ Self.Indices = typeof(T); Self.Types = typeof(T);  }
+		public MlPutDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
 		// values part of the url path
-		Id IPutDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+		Id IMlPutDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 
 		// Request parameters
 
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlPutJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
-	public partial class PutJobDescriptor<T>  : RequestDescriptorBase<PutJobDescriptor<T>,PutJobRequestParameters, IPutJobRequest>, IPutJobRequest
+	///<summary>descriptor for MlPutFilter <pre>TODO</pre></summary>
+	public partial class MlPutFilterDescriptor  : RequestDescriptorBase<MlPutFilterDescriptor,MlPutFilterRequestParameters, IMlPutFilterRequest>, IMlPutFilterRequest
 	{ 
-		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}</summary>
+		/// <summary>/_ml/filters/{filter_id}</summary>
+		///<param name="filter_id"> this parameter is required</param>
+		public MlPutFilterDescriptor(Id filter_id) : base(r=>r.Required("filter_id", filter_id)){}
+		// values part of the url path
+		Id IMlPutFilterRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
+
+		// Request parameters
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	}
+	///<summary>descriptor for MlPutJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
+	public partial class MlPutJobDescriptor  : RequestDescriptorBase<MlPutJobDescriptor,MlPutJobRequestParameters, IMlPutJobRequest>, IMlPutJobRequest
+	{ 
+		/// <summary>/_ml/anomaly_detectors/{job_id}</summary>
 		///<param name="job_id"> this parameter is required</param>
-		public PutJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		public MlPutJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 		// values part of the url path
-		Id IPutJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IMlPutJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
 		// Request parameters
 
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlRevertModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</pre></summary>
-	public partial class RevertModelSnapshotDescriptor  : RequestDescriptorBase<RevertModelSnapshotDescriptor,RevertModelSnapshotRequestParameters, IRevertModelSnapshotRequest>, IRevertModelSnapshotRequest
+	///<summary>descriptor for MlRevertModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</pre></summary>
+	public partial class MlRevertModelSnapshotDescriptor  : RequestDescriptorBase<MlRevertModelSnapshotDescriptor,MlRevertModelSnapshotRequestParameters, IMlRevertModelSnapshotRequest>, IMlRevertModelSnapshotRequest
 	{ 
-		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert</summary>
+		/// <summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert</summary>
 		///<param name="job_id"> this parameter is required</param>
 		///<param name="snapshot_id"> this parameter is required</param>
-		public RevertModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+		public MlRevertModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
 		// values part of the url path
-		Id IRevertModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-		Id IRevertModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
+		Id IMlRevertModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IMlRevertModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
 
 		// Request parameters
 
+		///<summary>Should we reset the results back to the time of the snapshot?</summary>
+		public MlRevertModelSnapshotDescriptor DeleteInterveningResults(bool? deleteInterveningResults = true) => Qs("delete_intervening_results", deleteInterveningResults);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlStartDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</pre></summary>
-	public partial class StartDatafeedDescriptor  : RequestDescriptorBase<StartDatafeedDescriptor,StartDatafeedRequestParameters, IStartDatafeedRequest>, IStartDatafeedRequest
+	///<summary>descriptor for MlSetUpgradeMode <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-set-upgrade-mode.html</pre></summary>
+	public partial class MlSetUpgradeModeDescriptor  : RequestDescriptorBase<MlSetUpgradeModeDescriptor,MlSetUpgradeModeRequestParameters, IMlSetUpgradeModeRequest>, IMlSetUpgradeModeRequest
 	{ 
-		/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_start</summary>
-		///<param name="datafeed_id"> this parameter is required</param>
-		public StartDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
 		// values part of the url path
-		Id IStartDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 
 		// Request parameters
 
+		///<summary>Whether to enable upgrade_mode ML setting or not. Defaults to false.</summary>
+		public MlSetUpgradeModeDescriptor Enabled(bool? enabled = true) => Qs("enabled", enabled);
+		///<summary>Controls the time to wait before action times out. Defaults to 30 seconds</summary>
+		public MlSetUpgradeModeDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlStopDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</pre></summary>
-	public partial class StopDatafeedDescriptor  : RequestDescriptorBase<StopDatafeedDescriptor,StopDatafeedRequestParameters, IStopDatafeedRequest>, IStopDatafeedRequest
+	///<summary>descriptor for MlStartDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</pre></summary>
+	public partial class MlStartDatafeedDescriptor  : RequestDescriptorBase<MlStartDatafeedDescriptor,MlStartDatafeedRequestParameters, IMlStartDatafeedRequest>, IMlStartDatafeedRequest
 	{ 
-		/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_stop</summary>
+		/// <summary>/_ml/datafeeds/{datafeed_id}/_start</summary>
 		///<param name="datafeed_id"> this parameter is required</param>
-		public StopDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		public MlStartDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
 		// values part of the url path
-		Id IStopDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+		Id IMlStartDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+
+		///<summary>The start time from where the datafeed should begin</summary>
+		public MlStartDatafeedDescriptor Start(string start) => Qs("start", start);
+		///<summary>The end time when the datafeed should stop. When not set, the datafeed continues in real time</summary>
+		public MlStartDatafeedDescriptor End(string end) => Qs("end", end);
+		///<summary>Controls the time to wait until a datafeed has started. Default to 20 seconds</summary>
+		public MlStartDatafeedDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	}
+	///<summary>descriptor for MlStopDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</pre></summary>
+	public partial class MlStopDatafeedDescriptor  : RequestDescriptorBase<MlStopDatafeedDescriptor,MlStopDatafeedRequestParameters, IMlStopDatafeedRequest>, IMlStopDatafeedRequest
+	{ 
+		/// <summary>/_ml/datafeeds/{datafeed_id}/_stop</summary>
+		///<param name="datafeed_id"> this parameter is required</param>
+		public MlStopDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		// values part of the url path
+		Id IMlStopDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 
 		// Request parameters
 
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
-		public StopDatafeedDescriptor AllowNoDatafeeds(bool? allowNoDatafeeds = true) => Qs("allow_no_datafeeds", allowNoDatafeeds);
+		public MlStopDatafeedDescriptor AllowNoDatafeeds(bool? allowNoDatafeeds = true) => Qs("allow_no_datafeeds", allowNoDatafeeds);
+		///<summary>True if the datafeed should be forcefully stopped.</summary>
+		public MlStopDatafeedDescriptor Force(bool? force = true) => Qs("force", force);
+		///<summary>Controls the time to wait until a datafeed has stopped. Default to 20 seconds</summary>
+		public MlStopDatafeedDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlUpdateDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</pre></summary>
-	public partial class UpdateDatafeedDescriptor<T>  : RequestDescriptorBase<UpdateDatafeedDescriptor<T>,UpdateDatafeedRequestParameters, IUpdateDatafeedRequest>, IUpdateDatafeedRequest
+	///<summary>descriptor for MlUpdateDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</pre></summary>
+	public partial class MlUpdateDatafeedDescriptor  : RequestDescriptorBase<MlUpdateDatafeedDescriptor,MlUpdateDatafeedRequestParameters, IMlUpdateDatafeedRequest>, IMlUpdateDatafeedRequest
 	{ 
-		/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_update. Will infer the index and type from the generic type</summary>
+		/// <summary>/_ml/datafeeds/{datafeed_id}/_update</summary>
 		///<param name="datafeed_id"> this parameter is required</param>
-		public UpdateDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id))
-		{ Self.Indices = typeof(T); Self.Types = typeof(T);  }
+		public MlUpdateDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
 		// values part of the url path
-		Id IUpdateDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+		Id IMlUpdateDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 
 		// Request parameters
 
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlUpdateJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</pre></summary>
-	public partial class UpdateJobDescriptor<T>  : RequestDescriptorBase<UpdateJobDescriptor<T>,UpdateJobRequestParameters, IUpdateJobRequest>, IUpdateJobRequest
+	///<summary>descriptor for MlUpdateJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</pre></summary>
+	public partial class MlUpdateJobDescriptor  : RequestDescriptorBase<MlUpdateJobDescriptor,MlUpdateJobRequestParameters, IMlUpdateJobRequest>, IMlUpdateJobRequest
 	{ 
-		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_update</summary>
+		/// <summary>/_ml/anomaly_detectors/{job_id}/_update</summary>
 		///<param name="job_id"> this parameter is required</param>
-		public UpdateJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		public MlUpdateJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 		// values part of the url path
-		Id IUpdateJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IMlUpdateJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
 		// Request parameters
 
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlUpdateModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</pre></summary>
-	public partial class UpdateModelSnapshotDescriptor  : RequestDescriptorBase<UpdateModelSnapshotDescriptor,UpdateModelSnapshotRequestParameters, IUpdateModelSnapshotRequest>, IUpdateModelSnapshotRequest
+	///<summary>descriptor for MlUpdateModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</pre></summary>
+	public partial class MlUpdateModelSnapshotDescriptor  : RequestDescriptorBase<MlUpdateModelSnapshotDescriptor,MlUpdateModelSnapshotRequestParameters, IMlUpdateModelSnapshotRequest>, IMlUpdateModelSnapshotRequest
 	{ 
-		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update</summary>
+		/// <summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update</summary>
 		///<param name="job_id"> this parameter is required</param>
 		///<param name="snapshot_id"> this parameter is required</param>
-		public UpdateModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+		public MlUpdateModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
 		// values part of the url path
-		Id IUpdateModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-		Id IUpdateModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
+		Id IMlUpdateModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IMlUpdateModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
 
 		// Request parameters
 
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackMlValidate <pre></pre></summary>
-	public partial class ValidateJobDescriptor<T>  : RequestDescriptorBase<ValidateJobDescriptor<T>,ValidateJobRequestParameters, IValidateJobRequest>, IValidateJobRequest
+	///<summary>descriptor for MlValidate <pre>TODO</pre></summary>
+	public partial class MlValidateDescriptor  : RequestDescriptorBase<MlValidateDescriptor,MlValidateRequestParameters, IMlValidateRequest>, IMlValidateRequest
 	{ 
 		// values part of the url path
 
 		// Request parameters
 
-	}
-	///<summary>descriptor for XpackMlValidateDetector <pre></pre></summary>
-	public partial class ValidateDetectorDescriptor<T>  : RequestDescriptorBase<ValidateDetectorDescriptor<T>,ValidateDetectorRequestParameters, IValidateDetectorRequest>, IValidateDetectorRequest
-	{ 
-		// values part of the url path
-
-		// Request parameters
-
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
 	///<summary>descriptor for XpackMigrationDeprecations <pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
 	public partial class DeprecationInfoDescriptor  : RequestDescriptorBase<DeprecationInfoDescriptor,DeprecationInfoRequestParameters, IDeprecationInfoRequest>, IDeprecationInfoRequest
 	{ 
-		/// <summary>/_xpack/migration/deprecations</summary>
+		/// <summary>/_migration/deprecations</summary>
 		public DeprecationInfoDescriptor() : base(){}
 		// values part of the url path
 		IndexName IDeprecationInfoRequest.Index => Self.RouteValues.Get<IndexName>("index");
@@ -4544,7 +4608,7 @@ namespace Nest
 	///<summary>descriptor for XpackMigrationGetAssistance <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</pre></summary>
 	public partial class MigrationAssistanceDescriptor  : RequestDescriptorBase<MigrationAssistanceDescriptor,MigrationAssistanceRequestParameters, IMigrationAssistanceRequest>, IMigrationAssistanceRequest
 	{ 
-		/// <summary>/_xpack/migration/assistance</summary>
+		/// <summary>/_migration/assistance</summary>
 		public MigrationAssistanceDescriptor() : base(){}
 		// values part of the url path
 		Indices IMigrationAssistanceRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -4570,7 +4634,7 @@ namespace Nest
 	///<summary>descriptor for XpackMigrationUpgrade <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</pre></summary>
 	public partial class MigrationUpgradeDescriptor  : RequestDescriptorBase<MigrationUpgradeDescriptor,MigrationUpgradeRequestParameters, IMigrationUpgradeRequest>, IMigrationUpgradeRequest
 	{ 
-		/// <summary>/_xpack/migration/upgrade/{index}</summary>
+		/// <summary>/_migration/upgrade/{index}</summary>
 		///<param name="index"> this parameter is required</param>
 		public MigrationUpgradeDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
 		// values part of the url path
@@ -4587,10 +4651,10 @@ namespace Nest
 		///<summary>Should the request block until the upgrade operation is completed</summary>
 		public MigrationUpgradeDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 	}
-	///<summary>descriptor for XpackRollupDeleteJob <pre></pre></summary>
+	///<summary>descriptor for XpackRollupDeleteJob <pre>TODO</pre></summary>
 	public partial class DeleteRollupJobDescriptor  : RequestDescriptorBase<DeleteRollupJobDescriptor,DeleteRollupJobRequestParameters, IDeleteRollupJobRequest>, IDeleteRollupJobRequest
 	{ 
-		/// <summary>/_xpack/rollup/job/{id}</summary>
+		/// <summary>/_rollup/job/{id}</summary>
 		///<param name="id"> this parameter is required</param>
 		public DeleteRollupJobDescriptor(Id id) : base(r=>r.Required("id", id)){}
 		// values part of the url path
@@ -4599,10 +4663,10 @@ namespace Nest
 		// Request parameters
 
 	}
-	///<summary>descriptor for XpackRollupGetJobs <pre></pre></summary>
+	///<summary>descriptor for XpackRollupGetJobs <pre>TODO</pre></summary>
 	public partial class GetRollupJobDescriptor  : RequestDescriptorBase<GetRollupJobDescriptor,GetRollupJobRequestParameters, IGetRollupJobRequest>, IGetRollupJobRequest
 	{ 
-		/// <summary>/_xpack/rollup/job/{id}</summary>
+		/// <summary>/_rollup/job/{id}</summary>
 		public GetRollupJobDescriptor() : base(){}
 		// values part of the url path
 		Id IGetRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -4613,30 +4677,24 @@ namespace Nest
 		// Request parameters
 
 	}
-	///<summary>descriptor for XpackRollupGetRollupCaps <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/rollup-get-rollup-caps.html</pre></summary>
+	///<summary>descriptor for XpackRollupGetRollupCaps <pre>TODO</pre></summary>
 	public partial class GetRollupCapabilitiesDescriptor  : RequestDescriptorBase<GetRollupCapabilitiesDescriptor,GetRollupCapabilitiesRequestParameters, IGetRollupCapabilitiesRequest>, IGetRollupCapabilitiesRequest
 	{ 
-		/// <summary>/_xpack/rollup/data/{index}</summary>
+		/// <summary>/_rollup/data/{id}</summary>
 		public GetRollupCapabilitiesDescriptor() : base(){}
 		// values part of the url path
-		Indices IGetRollupCapabilitiesRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Id IGetRollupCapabilitiesRequest.Id => Self.RouteValues.Get<Id>("id");
 
-		///<summary> Index, indices or index-pattern to return rollup capabilities for. _all may be used to fetch rollup capabilities from all job</summary>
-		public GetRollupCapabilitiesDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
-		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public GetRollupCapabilitiesDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
-		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public GetRollupCapabilitiesDescriptor AllIndices() => this.Index(Indices.All);
+		///<summary>The ID of the index to check rollup capabilities on, or left blank for all jobs</summary>
+		public GetRollupCapabilitiesDescriptor Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
 
 		// Request parameters
 
 	}
-	///<summary>descriptor for XpackRollupGetRollupIndexCaps <pre></pre></summary>
+	///<summary>descriptor for XpackRollupGetRollupIndexCaps <pre>TODO</pre></summary>
 	public partial class GetRollupIndexCapabilitiesDescriptor  : RequestDescriptorBase<GetRollupIndexCapabilitiesDescriptor,GetRollupIndexCapabilitiesRequestParameters, IGetRollupIndexCapabilitiesRequest>, IGetRollupIndexCapabilitiesRequest
 	{ 
-		/// <summary>/{index}/_xpack/rollup/data</summary>
+		/// <summary>/{index}/_rollup/data</summary>
 		///<param name="index"> this parameter is required</param>
 		public GetRollupIndexCapabilitiesDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
 		// values part of the url path
@@ -4651,10 +4709,10 @@ namespace Nest
 		// Request parameters
 
 	}
-	///<summary>descriptor for XpackRollupPutJob <pre></pre></summary>
+	///<summary>descriptor for XpackRollupPutJob <pre>TODO</pre></summary>
 	public partial class CreateRollupJobDescriptor<T>  : RequestDescriptorBase<CreateRollupJobDescriptor<T>,CreateRollupJobRequestParameters, ICreateRollupJobRequest>, ICreateRollupJobRequest
 	{ 
-		/// <summary>/_xpack/rollup/job/{id}</summary>
+		/// <summary>/_rollup/job/{id}</summary>
 		///<param name="id"> this parameter is required</param>
 		public CreateRollupJobDescriptor(Id id) : base(r=>r.Required("id", id)){}
 		// values part of the url path
@@ -4663,24 +4721,21 @@ namespace Nest
 		// Request parameters
 
 	}
-	///<summary>descriptor for XpackRollupRollupSearch <pre></pre></summary>
+	///<summary>descriptor for XpackRollupRollupSearch <pre>TODO</pre></summary>
 	public partial class RollupSearchDescriptor<T>  : RequestDescriptorBase<RollupSearchDescriptor<T>,RollupSearchRequestParameters, IRollupSearchRequest>, IRollupSearchRequest
 	{ 
 		/// <summary>/{index}/_rollup_search</summary>
 		///<param name="index"> this parameter is required</param>
-		public RollupSearchDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+		public RollupSearchDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
 		// values part of the url path
-		Indices IRollupSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
+		IndexName IRollupSearchRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IRollupSearchRequest.Type => Self.RouteValues.Get<TypeName>("type");
 
 		///<summary>The index or index-pattern (containing rollup or regular data) that should be searched</summary>
-		public RollupSearchDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
+		public RollupSearchDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public RollupSearchDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
-
-		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public RollupSearchDescriptor<T> AllIndices() => this.Index(Indices.All);
+		public RollupSearchDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
 
 		///<summary>The doc type inside the index</summary>
 		public RollupSearchDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
@@ -4690,11 +4745,15 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
+		public RollupSearchDescriptor<T> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
+		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
+		public RollupSearchDescriptor<T> TotalHitsAsInteger(bool? totalHitsAsInteger = true) => Qs("rest_total_hits_as_int", totalHitsAsInteger);
 	}
-	///<summary>descriptor for XpackRollupStartJob <pre></pre></summary>
+	///<summary>descriptor for XpackRollupStartJob <pre>TODO</pre></summary>
 	public partial class StartRollupJobDescriptor  : RequestDescriptorBase<StartRollupJobDescriptor,StartRollupJobRequestParameters, IStartRollupJobRequest>, IStartRollupJobRequest
 	{ 
-		/// <summary>/_xpack/rollup/job/{id}/_start</summary>
+		/// <summary>/_rollup/job/{id}/_start</summary>
 		///<param name="id"> this parameter is required</param>
 		public StartRollupJobDescriptor(Id id) : base(r=>r.Required("id", id)){}
 		// values part of the url path
@@ -4703,10 +4762,10 @@ namespace Nest
 		// Request parameters
 
 	}
-	///<summary>descriptor for XpackRollupStopJob <pre></pre></summary>
+	///<summary>descriptor for XpackRollupStopJob <pre>TODO</pre></summary>
 	public partial class StopRollupJobDescriptor  : RequestDescriptorBase<StopRollupJobDescriptor,StopRollupJobRequestParameters, IStopRollupJobRequest>, IStopRollupJobRequest
 	{ 
-		/// <summary>/_xpack/rollup/job/{id}/_stop</summary>
+		/// <summary>/_rollup/job/{id}/_stop</summary>
 		///<param name="id"> this parameter is required</param>
 		public StopRollupJobDescriptor(Id id) : base(r=>r.Required("id", id)){}
 		// values part of the url path
@@ -4714,230 +4773,308 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>True if the API should block until the job has fully stopped, false if should be executed async. Defaults to false.</summary>
+		public StopRollupJobDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
+		///<summary>Block for (at maximum) the specified duration while waiting for the job to stop.  Defaults to 30s.</summary>
+		public StopRollupJobDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
-	///<summary>descriptor for XpackSecurityAuthenticate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
-	public partial class AuthenticateDescriptor  : RequestDescriptorBase<AuthenticateDescriptor,AuthenticateRequestParameters, IAuthenticateRequest>, IAuthenticateRequest
+	///<summary>descriptor for SecurityAuthenticate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
+	public partial class SecurityAuthenticateDescriptor  : RequestDescriptorBase<SecurityAuthenticateDescriptor,SecurityAuthenticateRequestParameters, ISecurityAuthenticateRequest>, ISecurityAuthenticateRequest
 	{ 
 		// values part of the url path
 
 		// Request parameters
 
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackSecurityChangePassword <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</pre></summary>
-	public partial class ChangePasswordDescriptor  : RequestDescriptorBase<ChangePasswordDescriptor,ChangePasswordRequestParameters, IChangePasswordRequest>, IChangePasswordRequest
+	///<summary>descriptor for SecurityChangePassword <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</pre></summary>
+	public partial class SecurityChangePasswordDescriptor  : RequestDescriptorBase<SecurityChangePasswordDescriptor,SecurityChangePasswordRequestParameters, ISecurityChangePasswordRequest>, ISecurityChangePasswordRequest
 	{ 
-		/// <summary>/_xpack/security/user/{username}/_password</summary>
-		public ChangePasswordDescriptor() : base(){}
+		/// <summary>/_security/user/{username}/_password</summary>
+		public SecurityChangePasswordDescriptor() : base(){}
 		// values part of the url path
-		Name IChangePasswordRequest.Username => Self.RouteValues.Get<Name>("username");
+		Name ISecurityChangePasswordRequest.Username => Self.RouteValues.Get<Name>("username");
 
 		///<summary>The username of the user to change the password for</summary>
-		public ChangePasswordDescriptor Username(Name username) => Assign(a=>a.RouteValues.Optional("username", username));
+		public SecurityChangePasswordDescriptor Username(Name username) => Assign(a=>a.RouteValues.Optional("username", username));
 
 		// Request parameters
 
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public ChangePasswordDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
+		public SecurityChangePasswordDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackSecurityClearCachedRealms <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</pre></summary>
-	public partial class ClearCachedRealmsDescriptor  : RequestDescriptorBase<ClearCachedRealmsDescriptor,ClearCachedRealmsRequestParameters, IClearCachedRealmsRequest>, IClearCachedRealmsRequest
+	///<summary>descriptor for SecurityClearCachedRealms <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</pre></summary>
+	public partial class SecurityClearCachedRealmsDescriptor  : RequestDescriptorBase<SecurityClearCachedRealmsDescriptor,SecurityClearCachedRealmsRequestParameters, ISecurityClearCachedRealmsRequest>, ISecurityClearCachedRealmsRequest
 	{ 
-		/// <summary>/_xpack/security/realm/{realms}/_clear_cache</summary>
+		/// <summary>/_security/realm/{realms}/_clear_cache</summary>
 		///<param name="realms"> this parameter is required</param>
-		public ClearCachedRealmsDescriptor(Names realms) : base(r=>r.Required("realms", realms)){}
+		public SecurityClearCachedRealmsDescriptor(Names realms) : base(r=>r.Required("realms", realms)){}
 		// values part of the url path
-		Names IClearCachedRealmsRequest.Realms => Self.RouteValues.Get<Names>("realms");
+		Names ISecurityClearCachedRealmsRequest.Realms => Self.RouteValues.Get<Names>("realms");
 
 		// Request parameters
 
 		///<summary>Comma-separated list of usernames to clear from the cache</summary>
-		public ClearCachedRealmsDescriptor Usernames(params string[] usernames) => Qs("usernames", usernames);
+		public SecurityClearCachedRealmsDescriptor Usernames(params string[] usernames) => Qs("usernames", usernames);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackSecurityClearCachedRoles <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html</pre></summary>
-	public partial class ClearCachedRolesDescriptor  : RequestDescriptorBase<ClearCachedRolesDescriptor,ClearCachedRolesRequestParameters, IClearCachedRolesRequest>, IClearCachedRolesRequest
+	///<summary>descriptor for SecurityClearCachedRoles <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html</pre></summary>
+	public partial class SecurityClearCachedRolesDescriptor  : RequestDescriptorBase<SecurityClearCachedRolesDescriptor,SecurityClearCachedRolesRequestParameters, ISecurityClearCachedRolesRequest>, ISecurityClearCachedRolesRequest
 	{ 
-		/// <summary>/_xpack/security/role/{name}/_clear_cache</summary>
+		/// <summary>/_security/role/{name}/_clear_cache</summary>
 		///<param name="name"> this parameter is required</param>
-		public ClearCachedRolesDescriptor(Names name) : base(r=>r.Required("name", name)){}
+		public SecurityClearCachedRolesDescriptor(Names name) : base(r=>r.Required("name", name)){}
 		// values part of the url path
-		Names IClearCachedRolesRequest.Name => Self.RouteValues.Get<Names>("name");
+		Names ISecurityClearCachedRolesRequest.Name => Self.RouteValues.Get<Names>("name");
 
 		// Request parameters
 
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackSecurityDeleteRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html</pre></summary>
-	public partial class DeleteRoleDescriptor  : RequestDescriptorBase<DeleteRoleDescriptor,DeleteRoleRequestParameters, IDeleteRoleRequest>, IDeleteRoleRequest
+	///<summary>descriptor for SecurityCreateApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</pre></summary>
+	public partial class SecurityCreateApiKeyDescriptor  : RequestDescriptorBase<SecurityCreateApiKeyDescriptor,SecurityCreateApiKeyRequestParameters, ISecurityCreateApiKeyRequest>, ISecurityCreateApiKeyRequest
 	{ 
-		/// <summary>/_xpack/security/role/{name}</summary>
-		///<param name="name"> this parameter is required</param>
-		public DeleteRoleDescriptor(Name name) : base(r=>r.Required("name", name)){}
 		// values part of the url path
-		Name IDeleteRoleRequest.Name => Self.RouteValues.Get<Name>("name");
-
-		// Request parameters
-
-		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public DeleteRoleDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
-	}
-	///<summary>descriptor for XpackSecurityDeleteRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html</pre></summary>
-	public partial class DeleteRoleMappingDescriptor  : RequestDescriptorBase<DeleteRoleMappingDescriptor,DeleteRoleMappingRequestParameters, IDeleteRoleMappingRequest>, IDeleteRoleMappingRequest
-	{ 
-		/// <summary>/_xpack/security/role_mapping/{name}</summary>
-		///<param name="name"> this parameter is required</param>
-		public DeleteRoleMappingDescriptor(Name name) : base(r=>r.Required("name", name)){}
-		// values part of the url path
-		Name IDeleteRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
 
 		// Request parameters
 
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public DeleteRoleMappingDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
+		public SecurityCreateApiKeyDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackSecurityDeleteUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html</pre></summary>
-	public partial class DeleteUserDescriptor  : RequestDescriptorBase<DeleteUserDescriptor,DeleteUserRequestParameters, IDeleteUserRequest>, IDeleteUserRequest
+	///<summary>descriptor for SecurityDeleteRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html</pre></summary>
+	public partial class SecurityDeleteRoleDescriptor  : RequestDescriptorBase<SecurityDeleteRoleDescriptor,SecurityDeleteRoleRequestParameters, ISecurityDeleteRoleRequest>, ISecurityDeleteRoleRequest
 	{ 
-		/// <summary>/_xpack/security/user/{username}</summary>
+		/// <summary>/_security/role/{name}</summary>
+		///<param name="name"> this parameter is required</param>
+		public SecurityDeleteRoleDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		// values part of the url path
+		Name ISecurityDeleteRoleRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public SecurityDeleteRoleDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	}
+	///<summary>descriptor for SecurityDeleteRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html</pre></summary>
+	public partial class SecurityDeleteRoleMappingDescriptor  : RequestDescriptorBase<SecurityDeleteRoleMappingDescriptor,SecurityDeleteRoleMappingRequestParameters, ISecurityDeleteRoleMappingRequest>, ISecurityDeleteRoleMappingRequest
+	{ 
+		/// <summary>/_security/role_mapping/{name}</summary>
+		///<param name="name"> this parameter is required</param>
+		public SecurityDeleteRoleMappingDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		// values part of the url path
+		Name ISecurityDeleteRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public SecurityDeleteRoleMappingDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	}
+	///<summary>descriptor for SecurityDeleteUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html</pre></summary>
+	public partial class SecurityDeleteUserDescriptor  : RequestDescriptorBase<SecurityDeleteUserDescriptor,SecurityDeleteUserRequestParameters, ISecurityDeleteUserRequest>, ISecurityDeleteUserRequest
+	{ 
+		/// <summary>/_security/user/{username}</summary>
 		///<param name="username"> this parameter is required</param>
-		public DeleteUserDescriptor(Name username) : base(r=>r.Required("username", username)){}
+		public SecurityDeleteUserDescriptor(Name username) : base(r=>r.Required("username", username)){}
 		// values part of the url path
-		Name IDeleteUserRequest.Username => Self.RouteValues.Get<Name>("username");
+		Name ISecurityDeleteUserRequest.Username => Self.RouteValues.Get<Name>("username");
 
 		// Request parameters
 
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public DeleteUserDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
+		public SecurityDeleteUserDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackSecurityDisableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html</pre></summary>
-	public partial class DisableUserDescriptor  : RequestDescriptorBase<DisableUserDescriptor,DisableUserRequestParameters, IDisableUserRequest>, IDisableUserRequest
+	///<summary>descriptor for SecurityDisableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html</pre></summary>
+	public partial class SecurityDisableUserDescriptor  : RequestDescriptorBase<SecurityDisableUserDescriptor,SecurityDisableUserRequestParameters, ISecurityDisableUserRequest>, ISecurityDisableUserRequest
 	{ 
-		/// <summary>/_xpack/security/user/{username}/_disable</summary>
-		public DisableUserDescriptor() : base(){}
+		/// <summary>/_security/user/{username}/_disable</summary>
+		public SecurityDisableUserDescriptor() : base(){}
 		// values part of the url path
-		Name IDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
+		Name ISecurityDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
 
 		///<summary>The username of the user to disable</summary>
-		public DisableUserDescriptor Username(Name username) => Assign(a=>a.RouteValues.Optional("username", username));
+		public SecurityDisableUserDescriptor Username(Name username) => Assign(a=>a.RouteValues.Optional("username", username));
 
 		// Request parameters
 
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public DisableUserDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
+		public SecurityDisableUserDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackSecurityEnableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html</pre></summary>
-	public partial class EnableUserDescriptor  : RequestDescriptorBase<EnableUserDescriptor,EnableUserRequestParameters, IEnableUserRequest>, IEnableUserRequest
+	///<summary>descriptor for SecurityEnableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html</pre></summary>
+	public partial class SecurityEnableUserDescriptor  : RequestDescriptorBase<SecurityEnableUserDescriptor,SecurityEnableUserRequestParameters, ISecurityEnableUserRequest>, ISecurityEnableUserRequest
 	{ 
-		/// <summary>/_xpack/security/user/{username}/_enable</summary>
-		public EnableUserDescriptor() : base(){}
+		/// <summary>/_security/user/{username}/_enable</summary>
+		public SecurityEnableUserDescriptor() : base(){}
 		// values part of the url path
-		Name IEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
+		Name ISecurityEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
 
 		///<summary>The username of the user to enable</summary>
-		public EnableUserDescriptor Username(Name username) => Assign(a=>a.RouteValues.Optional("username", username));
+		public SecurityEnableUserDescriptor Username(Name username) => Assign(a=>a.RouteValues.Optional("username", username));
 
 		// Request parameters
 
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public EnableUserDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
+		public SecurityEnableUserDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackSecurityGetRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</pre></summary>
-	public partial class GetRoleDescriptor  : RequestDescriptorBase<GetRoleDescriptor,GetRoleRequestParameters, IGetRoleRequest>, IGetRoleRequest
+	///<summary>descriptor for SecurityGetApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html</pre></summary>
+	public partial class SecurityGetApiKeyDescriptor  : RequestDescriptorBase<SecurityGetApiKeyDescriptor,SecurityGetApiKeyRequestParameters, ISecurityGetApiKeyRequest>, ISecurityGetApiKeyRequest
 	{ 
-		/// <summary>/_xpack/security/role/{name}</summary>
-		public GetRoleDescriptor() : base(){}
 		// values part of the url path
-		Name IGetRoleRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+
+		///<summary>API key id of the API key to be retrieved</summary>
+		public SecurityGetApiKeyDescriptor Id(string id) => Qs("id", id);
+		///<summary>API key name of the API key to be retrieved</summary>
+		public SecurityGetApiKeyDescriptor Name(string name) => Qs("name", name);
+		///<summary>user name of the user who created this API key to be retrieved</summary>
+		public SecurityGetApiKeyDescriptor Username(string username) => Qs("username", username);
+		///<summary>realm name of the user who created this API key to be retrieved</summary>
+		public SecurityGetApiKeyDescriptor RealmName(string realmName) => Qs("realm_name", realmName);
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	}
+	///<summary>descriptor for SecurityGetRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</pre></summary>
+	public partial class SecurityGetRoleDescriptor  : RequestDescriptorBase<SecurityGetRoleDescriptor,SecurityGetRoleRequestParameters, ISecurityGetRoleRequest>, ISecurityGetRoleRequest
+	{ 
+		/// <summary>/_security/role/{name}</summary>
+		public SecurityGetRoleDescriptor() : base(){}
+		// values part of the url path
+		Name ISecurityGetRoleRequest.Name => Self.RouteValues.Get<Name>("name");
 
 		///<summary>Role name</summary>
-		public GetRoleDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
+		public SecurityGetRoleDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
 
 		// Request parameters
 
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackSecurityGetRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</pre></summary>
-	public partial class GetRoleMappingDescriptor  : RequestDescriptorBase<GetRoleMappingDescriptor,GetRoleMappingRequestParameters, IGetRoleMappingRequest>, IGetRoleMappingRequest
+	///<summary>descriptor for SecurityGetRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</pre></summary>
+	public partial class SecurityGetRoleMappingDescriptor  : RequestDescriptorBase<SecurityGetRoleMappingDescriptor,SecurityGetRoleMappingRequestParameters, ISecurityGetRoleMappingRequest>, ISecurityGetRoleMappingRequest
 	{ 
-		/// <summary>/_xpack/security/role_mapping/{name}</summary>
-		public GetRoleMappingDescriptor() : base(){}
+		/// <summary>/_security/role_mapping/{name}</summary>
+		public SecurityGetRoleMappingDescriptor() : base(){}
 		// values part of the url path
-		Name IGetRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
+		Name ISecurityGetRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
 
 		///<summary>Role-Mapping name</summary>
-		public GetRoleMappingDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
+		public SecurityGetRoleMappingDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
 
 		// Request parameters
 
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackSecurityGetToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html</pre></summary>
-	public partial class GetUserAccessTokenDescriptor  : RequestDescriptorBase<GetUserAccessTokenDescriptor,GetUserAccessTokenRequestParameters, IGetUserAccessTokenRequest>, IGetUserAccessTokenRequest
+	///<summary>descriptor for SecurityGetToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html</pre></summary>
+	public partial class SecurityGetTokenDescriptor  : RequestDescriptorBase<SecurityGetTokenDescriptor,SecurityGetTokenRequestParameters, ISecurityGetTokenRequest>, ISecurityGetTokenRequest
 	{ 
 		// values part of the url path
 
 		// Request parameters
 
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackSecurityGetUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html</pre></summary>
-	public partial class GetUserDescriptor  : RequestDescriptorBase<GetUserDescriptor,GetUserRequestParameters, IGetUserRequest>, IGetUserRequest
+	///<summary>descriptor for SecurityGetUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html</pre></summary>
+	public partial class SecurityGetUserDescriptor  : RequestDescriptorBase<SecurityGetUserDescriptor,SecurityGetUserRequestParameters, ISecurityGetUserRequest>, ISecurityGetUserRequest
 	{ 
-		/// <summary>/_xpack/security/user/{username}</summary>
-		public GetUserDescriptor() : base(){}
+		/// <summary>/_security/user/{username}</summary>
+		public SecurityGetUserDescriptor() : base(){}
 		// values part of the url path
-		Names IGetUserRequest.Username => Self.RouteValues.Get<Names>("username");
+		Names ISecurityGetUserRequest.Username => Self.RouteValues.Get<Names>("username");
 
 		///<summary>A comma-separated list of usernames</summary>
-		public GetUserDescriptor Username(Names username) => Assign(a=>a.RouteValues.Optional("username", username));
+		public SecurityGetUserDescriptor Username(Names username) => Assign(a=>a.RouteValues.Optional("username", username));
 
 		// Request parameters
 
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackSecurityInvalidateToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</pre></summary>
-	public partial class InvalidateUserAccessTokenDescriptor  : RequestDescriptorBase<InvalidateUserAccessTokenDescriptor,InvalidateUserAccessTokenRequestParameters, IInvalidateUserAccessTokenRequest>, IInvalidateUserAccessTokenRequest
+	///<summary>descriptor for SecurityInvalidateApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</pre></summary>
+	public partial class SecurityInvalidateApiKeyDescriptor  : RequestDescriptorBase<SecurityInvalidateApiKeyDescriptor,SecurityInvalidateApiKeyRequestParameters, ISecurityInvalidateApiKeyRequest>, ISecurityInvalidateApiKeyRequest
 	{ 
 		// values part of the url path
 
 		// Request parameters
 
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackSecurityPutRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</pre></summary>
-	public partial class PutRoleDescriptor  : RequestDescriptorBase<PutRoleDescriptor,PutRoleRequestParameters, IPutRoleRequest>, IPutRoleRequest
+	///<summary>descriptor for SecurityInvalidateToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</pre></summary>
+	public partial class SecurityInvalidateTokenDescriptor  : RequestDescriptorBase<SecurityInvalidateTokenDescriptor,SecurityInvalidateTokenRequestParameters, ISecurityInvalidateTokenRequest>, ISecurityInvalidateTokenRequest
 	{ 
-		/// <summary>/_xpack/security/role/{name}</summary>
+		// values part of the url path
+
+		// Request parameters
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	}
+	///<summary>descriptor for SecurityPutRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</pre></summary>
+	public partial class SecurityPutRoleDescriptor  : RequestDescriptorBase<SecurityPutRoleDescriptor,SecurityPutRoleRequestParameters, ISecurityPutRoleRequest>, ISecurityPutRoleRequest
+	{ 
+		/// <summary>/_security/role/{name}</summary>
 		///<param name="name"> this parameter is required</param>
-		public PutRoleDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		public SecurityPutRoleDescriptor(Name name) : base(r=>r.Required("name", name)){}
 		// values part of the url path
-		Name IPutRoleRequest.Name => Self.RouteValues.Get<Name>("name");
+		Name ISecurityPutRoleRequest.Name => Self.RouteValues.Get<Name>("name");
 
 		// Request parameters
 
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public PutRoleDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
+		public SecurityPutRoleDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackSecurityPutRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html</pre></summary>
-	public partial class PutRoleMappingDescriptor  : RequestDescriptorBase<PutRoleMappingDescriptor,PutRoleMappingRequestParameters, IPutRoleMappingRequest>, IPutRoleMappingRequest
+	///<summary>descriptor for SecurityPutRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html</pre></summary>
+	public partial class SecurityPutRoleMappingDescriptor  : RequestDescriptorBase<SecurityPutRoleMappingDescriptor,SecurityPutRoleMappingRequestParameters, ISecurityPutRoleMappingRequest>, ISecurityPutRoleMappingRequest
 	{ 
-		/// <summary>/_xpack/security/role_mapping/{name}</summary>
+		/// <summary>/_security/role_mapping/{name}</summary>
 		///<param name="name"> this parameter is required</param>
-		public PutRoleMappingDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		public SecurityPutRoleMappingDescriptor(Name name) : base(r=>r.Required("name", name)){}
 		// values part of the url path
-		Name IPutRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
+		Name ISecurityPutRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
 
 		// Request parameters
 
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public PutRoleMappingDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
+		public SecurityPutRoleMappingDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
-	///<summary>descriptor for XpackSecurityPutUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html</pre></summary>
-	public partial class PutUserDescriptor  : RequestDescriptorBase<PutUserDescriptor,PutUserRequestParameters, IPutUserRequest>, IPutUserRequest
+	///<summary>descriptor for SecurityPutUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html</pre></summary>
+	public partial class SecurityPutUserDescriptor  : RequestDescriptorBase<SecurityPutUserDescriptor,SecurityPutUserRequestParameters, ISecurityPutUserRequest>, ISecurityPutUserRequest
 	{ 
-		/// <summary>/_xpack/security/user/{username}</summary>
+		/// <summary>/_security/user/{username}</summary>
 		///<param name="username"> this parameter is required</param>
-		public PutUserDescriptor(Name username) : base(r=>r.Required("username", username)){}
+		public SecurityPutUserDescriptor(Name username) : base(r=>r.Required("username", username)){}
 		// values part of the url path
-		Name IPutUserRequest.Username => Self.RouteValues.Get<Name>("username");
+		Name ISecurityPutUserRequest.Username => Self.RouteValues.Get<Name>("username");
 
 		// Request parameters
 
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public PutUserDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
+		public SecurityPutUserDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
 	///<summary>descriptor for XpackSqlClearCursor <pre>Clear SQL cursor</pre></summary>
 	public partial class ClearSqlCursorDescriptor  : RequestDescriptorBase<ClearSqlCursorDescriptor,ClearSqlCursorRequestParameters, IClearSqlCursorRequest>, IClearSqlCursorRequest
@@ -4965,18 +5102,20 @@ namespace Nest
 		// Request parameters
 
 	}
-	///<summary>descriptor for XpackSslCertificates <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-ssl.html</pre></summary>
-	public partial class GetCertificatesDescriptor  : RequestDescriptorBase<GetCertificatesDescriptor,GetCertificatesRequestParameters, IGetCertificatesRequest>, IGetCertificatesRequest
+	///<summary>descriptor for SslCertificates <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-ssl.html</pre></summary>
+	public partial class SslCertificatesDescriptor  : RequestDescriptorBase<SslCertificatesDescriptor,SslCertificatesRequestParameters, ISslCertificatesRequest>, ISslCertificatesRequest
 	{ 
 		// values part of the url path
 
 		// Request parameters
 
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	}
 	///<summary>descriptor for XpackWatcherAckWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</pre></summary>
 	public partial class AcknowledgeWatchDescriptor  : RequestDescriptorBase<AcknowledgeWatchDescriptor,AcknowledgeWatchRequestParameters, IAcknowledgeWatchRequest>, IAcknowledgeWatchRequest
 	{ 
-		/// <summary>/_xpack/watcher/watch/{watch_id}/_ack</summary>
+		/// <summary>/_watcher/watch/{watch_id}/_ack</summary>
 		///<param name="watch_id"> this parameter is required</param>
 		public AcknowledgeWatchDescriptor(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
 		// values part of the url path
@@ -4988,13 +5127,11 @@ namespace Nest
 
 		// Request parameters
 
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public AcknowledgeWatchDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 	///<summary>descriptor for XpackWatcherActivateWatch <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</pre></summary>
 	public partial class ActivateWatchDescriptor  : RequestDescriptorBase<ActivateWatchDescriptor,ActivateWatchRequestParameters, IActivateWatchRequest>, IActivateWatchRequest
 	{ 
-		/// <summary>/_xpack/watcher/watch/{watch_id}/_activate</summary>
+		/// <summary>/_watcher/watch/{watch_id}/_activate</summary>
 		///<param name="watch_id"> this parameter is required</param>
 		public ActivateWatchDescriptor(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
 		// values part of the url path
@@ -5002,13 +5139,11 @@ namespace Nest
 
 		// Request parameters
 
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ActivateWatchDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 	///<summary>descriptor for XpackWatcherDeactivateWatch <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</pre></summary>
 	public partial class DeactivateWatchDescriptor  : RequestDescriptorBase<DeactivateWatchDescriptor,DeactivateWatchRequestParameters, IDeactivateWatchRequest>, IDeactivateWatchRequest
 	{ 
-		/// <summary>/_xpack/watcher/watch/{watch_id}/_deactivate</summary>
+		/// <summary>/_watcher/watch/{watch_id}/_deactivate</summary>
 		///<param name="watch_id"> this parameter is required</param>
 		public DeactivateWatchDescriptor(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
 		// values part of the url path
@@ -5016,13 +5151,11 @@ namespace Nest
 
 		// Request parameters
 
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public DeactivateWatchDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 	///<summary>descriptor for XpackWatcherDeleteWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</pre></summary>
 	public partial class DeleteWatchDescriptor  : RequestDescriptorBase<DeleteWatchDescriptor,DeleteWatchRequestParameters, IDeleteWatchRequest>, IDeleteWatchRequest
 	{ 
-		/// <summary>/_xpack/watcher/watch/{id}</summary>
+		/// <summary>/_watcher/watch/{id}</summary>
 		///<param name="id"> this parameter is required</param>
 		public DeleteWatchDescriptor(Id id) : base(r=>r.Required("id", id)){}
 		// values part of the url path
@@ -5030,13 +5163,11 @@ namespace Nest
 
 		// Request parameters
 
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public DeleteWatchDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 	///<summary>descriptor for XpackWatcherExecuteWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</pre></summary>
 	public partial class ExecuteWatchDescriptor  : RequestDescriptorBase<ExecuteWatchDescriptor,ExecuteWatchRequestParameters, IExecuteWatchRequest>, IExecuteWatchRequest
 	{ 
-		/// <summary>/_xpack/watcher/watch/{id}/_execute</summary>
+		/// <summary>/_watcher/watch/{id}/_execute</summary>
 		public ExecuteWatchDescriptor() : base(){}
 		// values part of the url path
 		Id IExecuteWatchRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -5052,7 +5183,7 @@ namespace Nest
 	///<summary>descriptor for XpackWatcherGetWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</pre></summary>
 	public partial class GetWatchDescriptor  : RequestDescriptorBase<GetWatchDescriptor,GetWatchRequestParameters, IGetWatchRequest>, IGetWatchRequest
 	{ 
-		/// <summary>/_xpack/watcher/watch/{id}</summary>
+		/// <summary>/_watcher/watch/{id}</summary>
 		///<param name="id"> this parameter is required</param>
 		public GetWatchDescriptor(Id id) : base(r=>r.Required("id", id)){}
 		// values part of the url path
@@ -5064,7 +5195,7 @@ namespace Nest
 	///<summary>descriptor for XpackWatcherPutWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</pre></summary>
 	public partial class PutWatchDescriptor  : RequestDescriptorBase<PutWatchDescriptor,PutWatchRequestParameters, IPutWatchRequest>, IPutWatchRequest
 	{ 
-		/// <summary>/_xpack/watcher/watch/{id}</summary>
+		/// <summary>/_watcher/watch/{id}</summary>
 		///<param name="id"> this parameter is required</param>
 		public PutWatchDescriptor(Id id) : base(r=>r.Required("id", id)){}
 		// values part of the url path
@@ -5072,20 +5203,14 @@ namespace Nest
 
 		// Request parameters
 
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public PutWatchDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Specify whether the watch is in/active by default</summary>
 		public PutWatchDescriptor Active(bool? active = true) => Qs("active", active);
 		///<summary>Explicit version number for concurrency control</summary>
 		public PutWatchDescriptor Version(long? version) => Qs("version", version);
-	}
-	///<summary>descriptor for XpackWatcherRestart <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-restart.html</pre></summary>
-	public partial class RestartWatcherDescriptor  : RequestDescriptorBase<RestartWatcherDescriptor,RestartWatcherRequestParameters, IRestartWatcherRequest>, IRestartWatcherRequest
-	{ 
-		// values part of the url path
-
-		// Request parameters
-
+		///<summary>only update the watch if the last operation that has changed the watch has the specified sequence number</summary>
+		public PutWatchDescriptor IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
+		///<summary>only update the watch if the last operation that has changed the watch has the specified primary term</summary>
+		public PutWatchDescriptor IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
 	}
 	///<summary>descriptor for XpackWatcherStart <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</pre></summary>
 	public partial class StartWatcherDescriptor  : RequestDescriptorBase<StartWatcherDescriptor,StartWatcherRequestParameters, IStartWatcherRequest>, IStartWatcherRequest
@@ -5098,7 +5223,7 @@ namespace Nest
 	///<summary>descriptor for XpackWatcherStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</pre></summary>
 	public partial class WatcherStatsDescriptor  : RequestDescriptorBase<WatcherStatsDescriptor,WatcherStatsRequestParameters, IWatcherStatsRequest>, IWatcherStatsRequest
 	{ 
-		/// <summary>/_xpack/watcher/stats</summary>
+		/// <summary>/_watcher/stats</summary>
 		public WatcherStatsDescriptor() : base(){}
 		// values part of the url path
 		Metrics IWatcherStatsRequest.WatcherStatsMetric => Self.RouteValues.Get<Metrics>("watcher_stats_metric");

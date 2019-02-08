@@ -163,7 +163,13 @@ namespace ApiGenerator.Domain
 			}
 		}
 
-		public string Documentation { get; set; }
+		private string _documentation;
+		public string Documentation
+		{
+			get => string.IsNullOrWhiteSpace(_documentation) ? "TODO" : _documentation;
+			set => _documentation = value;
+		}
+
 		public IEnumerable<string> Methods { get; set; }
 
 		public IDictionary<string, IEnumerable<RawDispatchInfo>> RawDispatches => GetCsharpMethods()

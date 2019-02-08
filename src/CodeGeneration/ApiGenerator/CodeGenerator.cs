@@ -66,6 +66,7 @@ namespace ApiGenerator.Domain
 
 		private static string[] WrapDocumentation(string documentation)
 		{
+			if (string.IsNullOrWhiteSpace(documentation)) return Array.Empty<string>();
 			const int max = 140;
 			var lines = documentation.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 			var charCount = 0;

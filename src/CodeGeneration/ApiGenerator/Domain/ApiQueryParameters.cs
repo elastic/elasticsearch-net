@@ -44,7 +44,7 @@ namespace ApiGenerator.Domain
 
 						yield break;
 					default:
-						yield return Description;
+						yield return Description ?? "TODO";
 
 						yield break;
 				}

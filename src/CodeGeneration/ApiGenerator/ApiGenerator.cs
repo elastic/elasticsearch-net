@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using ApiGenerator.Domain;
+using CsQuery.EquationParser.Implementation;
 using Newtonsoft.Json.Linq;
 using RazorLight;
 using ShellProgressBar;
@@ -27,29 +28,30 @@ namespace ApiGenerator
 			"rank_eval.json",
 
 			// these API's are new and need to be mapped
-			"xpack.ml.delete_calendar.json",
-			"xpack.ml.delete_calendar_event.json",
-			"xpack.ml.delete_calendar_job.json",
-			"xpack.ml.get_calendar_events.json",
-			"xpack.ml.get_calendars.json",
-			"xpack.ml.info.json",
-			"xpack.ml.post_calendar_events.json",
-			"xpack.ml.put_calendar.json",
-			"xpack.ml.put_calendar_job.json",
-			"xpack.ml.get_calendar_job.json",
-			"xpack.ml.delete_forecast.json",
-			"xpack.ml.find_file_structure.json",
+			"ml.delete_calendar.json",
+			"ml.delete_calendar_event.json",
+			"ml.delete_calendar_job.json",
+			"ml.get_calendar_events.json",
+			"ml.get_calendars.json",
+			"ml.info.json",
+			"ml.post_calendar_events.json",
+			"ml.put_calendar.json",
+			"ml.put_calendar_job.json",
+			"ml.get_calendar_job.json",
+			"ml.delete_forecast.json",
+			"ml.find_file_structure.json",
 			"delete_by_query_rethrottle.json",
 			"update_by_query_rethrottle.json",
 
-			"xpack.ml.update_filter.json",
-			"xpack.security.delete_privileges.json",
-			"xpack.security.get_privileges.json",
-			"xpack.security.get_user_privileges.json",
-			"xpack.security.get_index_privileges.json",
-			"xpack.security.has_privileges.json",
-			"xpack.security.put_privilege.json",
-			"xpack.security.put_privileges.json",
+			"ml.update_filter.json",
+			"ml.validate_detector.json",
+			"security.delete_privileges.json",
+			"security.get_privileges.json",
+			"security.get_user_privileges.json",
+			"security.get_index_privileges.json",
+			"security.has_privileges.json",
+			"security.put_privilege.json",
+			"security.put_privileges.json",
 		};
 
 		public static void Generate(string downloadBranch, params string[] folders)
@@ -186,8 +188,14 @@ namespace ApiGenerator
 
 		private static string CreateMethodName(string apiEndpointKey) => PascalCase(apiEndpointKey);
 
-		private static string DoRazor(string name, string template, RestApiSpec model) =>
-			Razor.CompileRenderAsync(name, template, model).GetAwaiter().GetResult();
+		private static string DoRazor(string name, string template, RestApiSpec model)
+		{
+			var engine = new RazorLightEngineBuilder()
+				.AddPrerenderCallbacks(t =>
+				{
+				}).Build();
+			return engine.CompileRenderAsync(name, template, model).GetAwaiter().GetResult();
+		}
 
 		private static void GenerateClientInterface(RestApiSpec model)
 		{

@@ -102,11 +102,6 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "index")] Index,
 		[EnumMember(Value = "create")] Create
 	}
-	public enum Format
-	{
-		[EnumMember(Value = "detailed")] Detailed,
-		[EnumMember(Value = "text")] Text
-	}
 	public enum ThreadType
 	{
 		[EnumMember(Value = "cpu")] Cpu,
@@ -210,8 +205,9 @@ namespace Elasticsearch.Net
 	[Flags]public enum WatcherStatsMetric
 	{
 		[EnumMember(Value = "queued_watches")] QueuedWatches = 1 << 0,
-		[EnumMember(Value = "pending_watches")] PendingWatches = 1 << 1,
-		[EnumMember(Value = "_all")] All = 1 << 2
+		[EnumMember(Value = "current_watches")] CurrentWatches = 1 << 1,
+		[EnumMember(Value = "pending_watches")] PendingWatches = 1 << 2,
+		[EnumMember(Value = "_all")] All = 1 << 3
 	}
 	public static class KnownEnums
 	{
@@ -232,7 +228,6 @@ namespace Elasticsearch.Net
 			EnumStringResolvers.TryAdd(typeof(Conflicts), (e) => GetStringValue((Conflicts)e));
 			EnumStringResolvers.TryAdd(typeof(SearchType), (e) => GetStringValue((SearchType)e));
 			EnumStringResolvers.TryAdd(typeof(OpType), (e) => GetStringValue((OpType)e));
-			EnumStringResolvers.TryAdd(typeof(Format), (e) => GetStringValue((Format)e));
 			EnumStringResolvers.TryAdd(typeof(ThreadType), (e) => GetStringValue((ThreadType)e));
 			EnumStringResolvers.TryAdd(typeof(SuggestMode), (e) => GetStringValue((SuggestMode)e));
 			EnumStringResolvers.TryAdd(typeof(GroupBy), (e) => GetStringValue((GroupBy)e));
@@ -394,15 +389,6 @@ namespace Elasticsearch.Net
 			}
 			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'OpType'");
 		}
-		public static string GetStringValue(this Format enumValue)
-		{
-			switch (enumValue)
-			{
-				case Format.Detailed: return "detailed";
-				case Format.Text: return "text";
-			}
-			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Format'");
-		}
 		public static string GetStringValue(this ThreadType enumValue)
 		{
 			switch (enumValue)
@@ -534,6 +520,7 @@ namespace Elasticsearch.Net
 			if ((enumValue & WatcherStatsMetric.All) != 0) return "_all";
 			var list = new List<string>();
 			if ((enumValue & WatcherStatsMetric.QueuedWatches) != 0) list.Add("queued_watches");
+			if ((enumValue & WatcherStatsMetric.CurrentWatches) != 0) list.Add("current_watches");
 			if ((enumValue & WatcherStatsMetric.PendingWatches) != 0) list.Add("pending_watches");
 			return string.Join(",", list);
 		}
