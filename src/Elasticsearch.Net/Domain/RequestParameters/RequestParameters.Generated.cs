@@ -2374,6 +2374,21 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
+	///<summary>Request options for XpackMlGetCalendarEvents<pre></pre></summary>
+	public partial class GetCalendarEventsRequestParameters : RequestParameters<GetCalendarEventsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Get events for the job. When this option is used calendar_id must be '_all'</summary>
+		public string JobId { get => Q<string>("job_id"); set => Q("job_id", value); }
+		///<summary>Get events after this time</summary>
+		public string Start { get => Q<string>("start"); set => Q("start", value); }
+		///<summary>Get events before this time</summary>
+		public DateTimeOffset? End { get => Q<DateTimeOffset?>("end"); set => Q("end", value); }
+		///<summary>Skips a number of events</summary>
+		public int From { get => Q<int>("from"); set => Q("from", value); }
+		///<summary>Specifies a max number of events to get</summary>
+		public int Size { get => Q<int>("size"); set => Q("size", value); }
+	}
 	///<summary>Request options for XpackMlGetCategories<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
 	public partial class GetCategoriesRequestParameters : RequestParameters<GetCategoriesRequestParameters> 
 	{

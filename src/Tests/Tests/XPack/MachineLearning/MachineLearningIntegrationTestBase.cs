@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
@@ -47,6 +48,32 @@ namespace Tests.XPack.MachineLearning
 				throw new Exception($"Problem putting calendar {calendarId} for integration test: {putCalendarResponse.DebugInformation}");
 
 			return putCalendarResponse;
+		}
+
+		private IEnumerable<ScheduledEvent> GetScheduledEvents(string calendarId)
+		{
+			var startDate = DateTime.Now.Year;
+
+			for (var i = 0; i < 10; i++)
+			{
+				yield return new ScheduledEvent
+				{
+					StartTime = new DateTimeOffset(startDate + i, 1, 1, 0, 0, 0, TimeSpan.Zero),
+					EndTime = new DateTimeOffset(startDate + 1 + i, 1, 1, 0, 0, 0, TimeSpan.Zero),
+					Description = $"Event {i}",
+					CalendarId = calendarId
+				};
+			}
+		}
+
+		protected IPostCalendarEventsResponse PostCalendarEvents(IElasticClient client, string calendarId)
+		{
+			var postCalendarEventsResponse = client.PostCalendarEvents(calendarId, f => f.Events(GetScheduledEvents(calendarId)));
+
+			if (!postCalendarEventsResponse.IsValid)
+				throw new Exception($"Problem posting calendar events {calendarId} for integration test: {postCalendarEventsResponse.DebugInformation}");
+
+			return postCalendarEventsResponse;
 		}
 
 		protected IPutCalendarJobResponse PutCalendarJob(IElasticClient client, string calendarId, string jobId)

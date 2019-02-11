@@ -3606,6 +3606,28 @@ namespace Nest
 			throw InvalidDispatch("XpackMlGetCalendars", p, new [] { GET, POST }, "/_xpack/ml/calendars", "/_xpack/ml/calendars/{calendar_id}");
 		}
 		
+		internal TResponse XpackMlGetCalendarEventsDispatch<TResponse>(IRequest<GetCalendarEventsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.XpackMlGetCalendarEvents<TResponse>(p.RouteValues.CalendarId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlGetCalendarEvents", p, new [] { GET }, "/_xpack/ml/calendars/{calendar_id}/events");
+		}
+		
+		internal Task<TResponse> XpackMlGetCalendarEventsDispatchAsync<TResponse>(IRequest<GetCalendarEventsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.XpackMlGetCalendarEventsAsync<TResponse>(p.RouteValues.CalendarId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlGetCalendarEvents", p, new [] { GET }, "/_xpack/ml/calendars/{calendar_id}/events");
+		}
+		
 		internal TResponse XpackMlGetCategoriesDispatch<TResponse>(IRequest<GetCategoriesRequestParameters> p,SerializableData<IGetCategoriesRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)

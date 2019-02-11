@@ -4258,6 +4258,28 @@ namespace Nest
 		// Request parameters
 
 	}
+	///<summary>descriptor for XpackMlGetCalendarEvents <pre></pre></summary>
+	public partial class GetCalendarEventsDescriptor  : RequestDescriptorBase<GetCalendarEventsDescriptor,GetCalendarEventsRequestParameters, IGetCalendarEventsRequest>, IGetCalendarEventsRequest
+	{ 
+		/// <summary>/_xpack/ml/calendars/{calendar_id}/events</summary>
+		///<param name="calendar_id"> this parameter is required</param>
+		public GetCalendarEventsDescriptor(Id calendar_id) : base(r=>r.Required("calendar_id", calendar_id)){}
+		// values part of the url path
+		Id IGetCalendarEventsRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+
+		///<summary>Get events for the job. When this option is used calendar_id must be '_all'</summary>
+		public GetCalendarEventsDescriptor JobId(string jobId) => Qs("job_id", jobId);
+		///<summary>Get events after this time</summary>
+		public GetCalendarEventsDescriptor Start(string start) => Qs("start", start);
+		///<summary>Get events before this time</summary>
+		public GetCalendarEventsDescriptor End(DateTimeOffset? end) => Qs("end", end);
+		///<summary>Skips a number of events</summary>
+		public GetCalendarEventsDescriptor From(int from) => Qs("from", from);
+		///<summary>Specifies a max number of events to get</summary>
+		public GetCalendarEventsDescriptor Size(int size) => Qs("size", size);
+	}
 	///<summary>descriptor for XpackMlGetCategories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
 	public partial class GetCategoriesDescriptor  : RequestDescriptorBase<GetCategoriesDescriptor,GetCategoriesRequestParameters, IGetCategoriesRequest>, IGetCategoriesRequest
 	{ 
