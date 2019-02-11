@@ -4402,6 +4402,18 @@ namespace Nest
 		// Request parameters
 
 	}
+	///<summary>descriptor for XpackMlPostCalendarEvents <pre></pre></summary>
+	public partial class PostCalendarEventsDescriptor  : RequestDescriptorBase<PostCalendarEventsDescriptor,PostCalendarEventsRequestParameters, IPostCalendarEventsRequest>, IPostCalendarEventsRequest
+	{ 
+		/// <summary>/_xpack/ml/calendars/{calendar_id}/events</summary>
+		///<param name="calendar_id"> this parameter is required</param>
+		public PostCalendarEventsDescriptor(Id calendar_id) : base(r=>r.Required("calendar_id", calendar_id)){}
+		// values part of the url path
+		Id IPostCalendarEventsRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+
+	}
 	///<summary>descriptor for XpackMlPostData <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
 	public partial class PostJobDataDescriptor  : RequestDescriptorBase<PostJobDataDescriptor,PostJobDataRequestParameters, IPostJobDataRequest>, IPostJobDataRequest
 	{ 

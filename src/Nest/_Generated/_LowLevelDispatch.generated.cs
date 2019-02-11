@@ -3864,6 +3864,28 @@ namespace Nest
 			throw InvalidDispatch("XpackMlOpenJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_open");
 		}
 		
+		internal TResponse XpackMlPostCalendarEventsDispatch<TResponse>(IRequest<PostCalendarEventsRequestParameters> p,SerializableData<IPostCalendarEventsRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.XpackMlPostCalendarEvents<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlPostCalendarEvents", p, new [] { POST }, "/_xpack/ml/calendars/{calendar_id}/events");
+		}
+		
+		internal Task<TResponse> XpackMlPostCalendarEventsDispatchAsync<TResponse>(IRequest<PostCalendarEventsRequestParameters> p,SerializableData<IPostCalendarEventsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.XpackMlPostCalendarEventsAsync<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlPostCalendarEvents", p, new [] { POST }, "/_xpack/ml/calendars/{calendar_id}/events");
+		}
+		
 		internal TResponse XpackMlPostDataDispatch<TResponse>(IRequest<PostJobDataRequestParameters> p,SerializableData<IPostJobDataRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)

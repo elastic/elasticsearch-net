@@ -2432,6 +2432,11 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
+	///<summary>Request options for XpackMlPostCalendarEvents<pre></pre></summary>
+	public partial class PostCalendarEventsRequestParameters : RequestParameters<PostCalendarEventsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
 	///<summary>Request options for XpackMlPostData<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
 	public partial class PostJobDataRequestParameters : RequestParameters<PostJobDataRequestParameters> 
 	{

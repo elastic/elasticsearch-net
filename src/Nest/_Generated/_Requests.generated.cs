@@ -4309,6 +4309,23 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IPostCalendarEventsRequest : IRequest<PostCalendarEventsRequestParameters>
+	{
+		Id CalendarId { get; }
+	}
+	///<summary>Request parameters for XpackMlPostCalendarEvents <pre></pre></summary>
+	public partial class PostCalendarEventsRequest : PlainRequestBase<PostCalendarEventsRequestParameters>, IPostCalendarEventsRequest
+	{
+		protected IPostCalendarEventsRequest Self => this;
+		///<summary>/_xpack/ml/calendars/{calendar_id}/events</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		public PostCalendarEventsRequest(Id calendar_id) : base(r=>r.Required("calendar_id", calendar_id)){}
+		// values part of the url path
+		Id IPostCalendarEventsRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPostJobDataRequest : IRequest<PostJobDataRequestParameters>
 	{
 		Id JobId { get; }
