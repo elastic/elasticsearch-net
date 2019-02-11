@@ -12,7 +12,7 @@ namespace Nest
 		///  A list of one of more scheduled events.
 		/// </summary>
 		[JsonProperty("events")]
-		IEnumerable<ScheduledEvent> Events { get; }
+		IReadOnlyCollection<ScheduledEvent> Events { get; }
 	}
 
 	/// <inheritdoc cref="IPostCalendarEventsResponse" />
@@ -20,6 +20,6 @@ namespace Nest
 	{
 		/// <inheritdoc cref="IPostCalendarEventsResponse.Events"/>
 		[JsonProperty("events")]
-		public IEnumerable<ScheduledEvent> Events { get; internal set;  }
+		public IReadOnlyCollection<ScheduledEvent> Events { get; internal set; } = EmptyReadOnly<ScheduledEvent>.Collection;
 	}
 }

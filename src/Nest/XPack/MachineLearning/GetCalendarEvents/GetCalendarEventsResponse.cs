@@ -18,7 +18,7 @@ namespace Nest
 		/// 	An array of scheduled event resources.
 		/// </summary>
 		[JsonProperty("events")]
-		IEnumerable<ScheduledEvent> Events { get; }
+		IReadOnlyCollection<ScheduledEvent> Events { get; }
 	}
 
 	public class GetCalendarEventsResponse : ResponseBase, IGetCalendarEventsResponse
@@ -29,6 +29,6 @@ namespace Nest
 
 		/// <inheritdoc cref="IGetCalendarEventsResponse.Events"/>
 		[JsonProperty("events")]
-		public IEnumerable<ScheduledEvent> Events { get; internal set; }
+		public IReadOnlyCollection<ScheduledEvent> Events { get; internal set; } = EmptyReadOnly<ScheduledEvent>.Collection;
 	}
 }

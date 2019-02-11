@@ -2799,10 +2799,6 @@ namespace Nest
 		public string Start { get => Q<string>("start"); set => Q("start", value); }
 		///<summary>Get events before this time</summary>
 		public DateTimeOffset? End { get => Q<DateTimeOffset?>("end"); set => Q("end", value); }
-		///<summary>Skips a number of events</summary>
-		public int From { get => Q<int>("from"); set => Q("from", value); }
-		///<summary>Specifies a max number of events to get</summary>
-		public int Size { get => Q<int>("size"); set => Q("size", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetCalendarsRequest : IRequest<GetCalendarsRequestParameters>

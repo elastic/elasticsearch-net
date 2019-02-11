@@ -35,7 +35,7 @@ namespace Tests.XPack.MachineLearning.DeleteCalendarJob
 
 		protected override Func<DeleteCalendarJobDescriptor, IDeleteCalendarJobRequest> Fluent => f => f;
 
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 
 		protected override DeleteCalendarJobRequest Initializer => new DeleteCalendarJobRequest(CallIsolatedValue + "_calendar",CallIsolatedValue + "_job");
 

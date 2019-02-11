@@ -4275,10 +4275,6 @@ namespace Nest
 		public GetCalendarEventsDescriptor Start(string start) => Qs("start", start);
 		///<summary>Get events before this time</summary>
 		public GetCalendarEventsDescriptor End(DateTimeOffset? end) => Qs("end", end);
-		///<summary>Skips a number of events</summary>
-		public GetCalendarEventsDescriptor From(int from) => Qs("from", from);
-		///<summary>Specifies a max number of events to get</summary>
-		public GetCalendarEventsDescriptor Size(int size) => Qs("size", size);
 	}
 	///<summary>descriptor for XpackMlGetCategories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
 	public partial class GetCategoriesDescriptor  : RequestDescriptorBase<GetCategoriesDescriptor,GetCategoriesRequestParameters, IGetCategoriesRequest>, IGetCategoriesRequest

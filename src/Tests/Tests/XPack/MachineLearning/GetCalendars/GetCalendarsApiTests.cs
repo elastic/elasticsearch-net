@@ -34,15 +34,16 @@ namespace Tests.XPack.MachineLearning.GetCalendars
 
 		protected override Func<GetCalendarsDescriptor, IGetCalendarsRequest> Fluent => f => f.CalendarId(CallIsolatedValue);
 
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected override GetCalendarsRequest Initializer => new GetCalendarsRequest(CallIsolatedValue);
 
 		protected override bool SupportsDeserialization => false;
+
 		protected override string UrlPath => $"_xpack/ml/calendars/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetCalendars(),
+			(client, f) => client.GetCalendars(f),
 			(client, f) => client.GetCalendarsAsync(f),
 			(client, r) => client.GetCalendars(r),
 			(client, r) => client.GetCalendarsAsync(r)
@@ -92,9 +93,9 @@ namespace Tests.XPack.MachineLearning.GetCalendars
 
 		protected override Func<GetCalendarsDescriptor, IGetCalendarsRequest> Fluent => f => f.Page(p => p.Size(10).From(10));
 
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override GetCalendarsRequest Initializer => new GetCalendarsRequest()
+		protected override GetCalendarsRequest Initializer => new GetCalendarsRequest
 		{
 			Page = new Page
 			{
@@ -104,7 +105,8 @@ namespace Tests.XPack.MachineLearning.GetCalendars
 		};
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"_xpack/ml/calendars/";
+
+		protected override string UrlPath => $"_xpack/ml/calendars";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.GetCalendars(),
