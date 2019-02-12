@@ -49,6 +49,25 @@ namespace Tests.XPack.MachineLearning
 
 			return putCalendarResponse;
 		}
+		protected IPostCalendarEventsResponse PostCalendarEvent(IElasticClient client, string calendarId)
+		{
+			var startDate = DateTime.Now.Year;
+
+			var postCalendarEventsResponse = client.PostCalendarEvents(calendarId, f => f
+				.Events(new ScheduledEvent
+					{
+						StartTime = new DateTimeOffset(startDate, 1, 1, 0, 0, 0, TimeSpan.Zero),
+						EndTime = new DateTimeOffset(startDate + 1, 1, 1, 0, 0, 0, TimeSpan.Zero),
+						Description = $"Event",
+						CalendarId = calendarId
+					})
+			);
+
+			if (!postCalendarEventsResponse.IsValid)
+				throw new Exception($"Problem posting calendar event for calendar {calendarId} for integration test: {postCalendarEventsResponse.DebugInformation}");
+
+			return postCalendarEventsResponse;
+		}
 
 		private IEnumerable<ScheduledEvent> GetScheduledEvents(string calendarId)
 		{
