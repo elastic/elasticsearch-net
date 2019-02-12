@@ -4336,6 +4336,14 @@ namespace Nest
 		// Request parameters
 
 	}
+	///<summary>descriptor for XpackMlInfo <pre></pre></summary>
+	public partial class MlInfoDescriptor  : RequestDescriptorBase<MlInfoDescriptor,MlInfoRequestParameters, IMlInfoRequest>, IMlInfoRequest
+	{ 
+		// values part of the url path
+
+		// Request parameters
+
+	}
 	///<summary>descriptor for XpackMlOpenJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</pre></summary>
 	public partial class OpenJobDescriptor  : RequestDescriptorBase<OpenJobDescriptor,OpenJobRequestParameters, IOpenJobRequest>, IOpenJobRequest
 	{ 

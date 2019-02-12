@@ -32,7 +32,6 @@ namespace ApiGenerator
 			"xpack.ml.delete_calendar_job.json",
 			"xpack.ml.get_calendar_events.json",
 			"xpack.ml.get_calendars.json",
-			"xpack.ml.info.json",
 			"xpack.ml.post_calendar_events.json",
 			"xpack.ml.put_calendar.json",
 			"xpack.ml.put_calendar_job.json",

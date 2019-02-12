@@ -2407,6 +2407,11 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
+	///<summary>Request options for XpackMlInfo<pre></pre></summary>
+	public partial class MlInfoRequestParameters : RequestParameters<MlInfoRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
 	///<summary>Request options for XpackMlOpenJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</pre></summary>
 	public partial class OpenJobRequestParameters : RequestParameters<OpenJobRequestParameters> 
 	{
