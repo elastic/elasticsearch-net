@@ -13,29 +13,42 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("articles")]
 		IEnumerable<string> Articles { get; set; }
+
+		/// <summary>
+		/// Whether articles should be handled case-insensitively. Defaults to <c>false</c>.
+		/// </summary>
+		[JsonProperty("articles_case")]
+		bool? ArticlesCase { get; set; }
 	}
 
-	/// <inheritdoc />
+	/// <inheritdoc cref="IElisionTokenFilter"/>
 	public class ElisionTokenFilter : TokenFilterBase, IElisionTokenFilter
 	{
 		public ElisionTokenFilter() : base("elision") { }
 
 		/// <inheritdoc />
 		public IEnumerable<string> Articles { get; set; }
+
+		/// <inheritdoc />
+		public bool? ArticlesCase { get; set; }
 	}
 
-	/// <inheritdoc />
+	/// <inheritdoc cref="IElisionTokenFilter"/>
 	public class ElisionTokenFilterDescriptor
 		: TokenFilterDescriptorBase<ElisionTokenFilterDescriptor, IElisionTokenFilter>, IElisionTokenFilter
 	{
 		protected override string Type => "elision";
 
 		IEnumerable<string> IElisionTokenFilter.Articles { get; set; }
+		bool? IElisionTokenFilter.ArticlesCase { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IElisionTokenFilter.Articles"/>
 		public ElisionTokenFilterDescriptor Articles(IEnumerable<string> articles) => Assign(a => a.Articles = articles);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IElisionTokenFilter.Articles"/>
 		public ElisionTokenFilterDescriptor Articles(params string[] articles) => Assign(a => a.Articles = articles);
+
+		/// <inheritdoc cref="IElisionTokenFilter.ArticlesCase"/>
+		public ElisionTokenFilterDescriptor ArticlesCase(bool? articlesCase = true) => Assign(a => a.ArticlesCase = articlesCase);
 	}
 }
