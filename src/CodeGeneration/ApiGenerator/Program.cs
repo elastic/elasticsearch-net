@@ -39,8 +39,7 @@ namespace ApiGenerator
 			if (redownloadCoreSpecification)
 				RestSpecDownloader.Download(downloadBranch);
 
-			ApiGenerator.Generate(downloadBranch, "Core", "Graph", "License", "Security", "Watcher", "Info", "MachineLearning", "Migration", "Sql",
-				"Rollup", "Ccr", "Ssl");
+			ApiGenerator.Generate(downloadBranch, "Core", "XPack");
 		}
 	}
 }
