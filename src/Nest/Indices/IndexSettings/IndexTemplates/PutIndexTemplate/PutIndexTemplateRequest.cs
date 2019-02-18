@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace Nest
 {
+	[MapsApi("indices.put_template.json")]
 	public partial interface IPutIndexTemplateRequest : ITemplateMapping { }
 
 	public partial class PutIndexTemplateRequest
@@ -20,7 +21,6 @@ namespace Nest
 		public int? Version { get; set; }
 	}
 
-	[DescriptorFor("IndicesPutTemplate")]
 	public partial class PutIndexTemplateDescriptor
 	{
 		IAliases ITemplateMapping.Aliases { get; set; }

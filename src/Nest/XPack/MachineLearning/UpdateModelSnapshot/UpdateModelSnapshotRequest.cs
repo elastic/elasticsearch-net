@@ -5,6 +5,7 @@ namespace Nest
 	/// <summary>
 	/// Update a machine learning model snapshot.
 	/// </summary>
+	[MapsApi("ml.update_model_snapshot.json")]
 	public partial interface IUpdateModelSnapshotRequest
 	{
 		/// <summary>
@@ -32,7 +33,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	[DescriptorFor("XpackMlUpdateModelSnapshot")]
 	public partial class UpdateModelSnapshotDescriptor
 	{
 		string IUpdateModelSnapshotRequest.Description { get; set; }

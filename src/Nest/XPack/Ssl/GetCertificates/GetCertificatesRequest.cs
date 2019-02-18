@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	[MapsApi("xpack.ssl.certificates.json")]
+	[MapsApi("ssl.certificates.json")]
 	public partial interface IGetCertificatesRequest { }
 
 	public partial class GetCertificatesRequest { }

@@ -6,6 +6,7 @@ namespace Nest
 	/// <summary>
 	/// Retrieve results for machine learning job influencers.
 	/// </summary>
+	[MapsApi("ml.get_influencers.json")]
 	public partial interface IGetInfluencersRequest
 	{
 		/// <summary>
@@ -78,7 +79,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	[DescriptorFor("XpackMlGetInfluencers")]
 	public partial class GetInfluencersDescriptor
 	{
 		public GetInfluencersDescriptor() { }

@@ -6,6 +6,7 @@ namespace Nest
 	/// <summary>
 	/// Creates a datafeed for a machine learning job.
 	/// </summary>
+	[MapsApi("ml.put_datafeed.json")]
 	public partial interface IPutDatafeedRequest
 	{
 		/// <summary>
@@ -110,7 +111,6 @@ namespace Nest
 		public Types Types { get; set; }
 	}
 
-	[DescriptorFor("XpackMlPutDatafeed")]
 	public partial class PutDatafeedDescriptor<T> where T : class
 	{
 		AggregationDictionary IPutDatafeedRequest.Aggregations { get; set; }

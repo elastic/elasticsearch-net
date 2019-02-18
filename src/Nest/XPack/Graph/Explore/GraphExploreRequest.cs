@@ -32,7 +32,6 @@ namespace Nest
 		public IEnumerable<IGraphVertexDefinition> Vertices { get; set; }
 	}
 
-	[DescriptorFor("XpackGraphExplore")]
 	public partial class GraphExploreDescriptor<T> : IGraphExploreRequest<T>
 		where T : class
 	{

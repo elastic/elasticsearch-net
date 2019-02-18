@@ -2,11 +2,11 @@
 
 namespace Nest
 {
+	[MapsApi("cat.templates.json")]
 	public partial interface ICatTemplatesRequest { }
 
 	public partial class CatTemplatesRequest { }
 
-	[DescriptorFor("CatTemplates")]
 	public partial class CatTemplatesDescriptor { }
 }
 

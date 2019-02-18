@@ -6,6 +6,7 @@ namespace Nest
 	/// <summary>
 	/// Retrieve usage information for machine learning jobs.
 	/// </summary>
+	[MapsApi("ml.get_model_snapshots.json")]
 	public partial interface IGetModelSnapshotsRequest
 	{
 		/// <summary>
@@ -61,7 +62,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	[DescriptorFor("XpackMlGetModelSnapshots")]
 	public partial class GetModelSnapshotsDescriptor
 	{
 		bool? IGetModelSnapshotsRequest.Descending { get; set; }

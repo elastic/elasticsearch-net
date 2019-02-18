@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[MapsApi("cluster.put_settings.json")]
 	public partial interface IClusterPutSettingsRequest
 	{
 		[JsonProperty("persistent")]
@@ -20,7 +21,6 @@ namespace Nest
 		public IDictionary<string, object> Transient { get; set; }
 	}
 
-	[DescriptorFor("ClusterPutSettings")]
 	public partial class ClusterPutSettingsDescriptor
 	{
 		IDictionary<string, object> IClusterPutSettingsRequest.Persistent { get; set; }

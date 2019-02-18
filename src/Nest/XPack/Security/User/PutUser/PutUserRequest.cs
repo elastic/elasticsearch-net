@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[MapsApi("security.put_user.json")]
 	public partial interface IPutUserRequest
 	{
 		[JsonProperty("email")]
@@ -31,7 +32,6 @@ namespace Nest
 		public IEnumerable<string> Roles { get; set; }
 	}
 
-	[DescriptorFor("XpackSecurityPutUser")]
 	public partial class PutUserDescriptor
 	{
 		string IPutUserRequest.Email { get; set; }

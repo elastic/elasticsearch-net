@@ -7,6 +7,7 @@ namespace Nest
 	/// <summary>
 	/// Retrieves overall bucket results that summarize the bucket results of multiple jobs.
 	/// </summary>
+	[MapsApi("ml.get_overall_buckets.json")]
 	public partial interface IGetOverallBucketsRequest
 	{
 		/// <summary>
@@ -86,7 +87,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="IGetOverallBucketsRequest" />
-	[DescriptorFor("XpackMlGetOverallBuckets")]
 	public partial class GetOverallBucketsDescriptor
 	{
 		bool? IGetOverallBucketsRequest.AllowNoJobs { get; set; }

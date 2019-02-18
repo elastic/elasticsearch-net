@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[MapsApi("clear_scroll.json")]
 	public partial interface IClearScrollRequest
 	{
 		[JsonProperty("scroll_id")]
@@ -18,7 +19,6 @@ namespace Nest
 		public IEnumerable<string> ScrollIds { get; set; }
 	}
 
-	[DescriptorFor("ClearScroll")]
 	public partial class ClearScrollDescriptor
 	{
 		IEnumerable<string> IClearScrollRequest.ScrollIds { get; set; }

@@ -1,9 +1,9 @@
 ﻿namespace Nest
 {
+	[MapsApi("watcher.stop.json")]
 	public partial interface IStopWatcherRequest { }
 
 	public partial class StopWatcherRequest { }
 
-	[DescriptorFor("XpackWatcherStop")]
 	public partial class StopWatcherDescriptor { }
 }

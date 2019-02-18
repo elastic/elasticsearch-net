@@ -1,5 +1,6 @@
 ﻿namespace Nest
 {
+	[MapsApi("get_source.json")]
 	public partial interface ISourceRequest { }
 
 	public interface ISourceRequest<T> : ISourceRequest where T : class { }
@@ -14,7 +15,6 @@
 		private object AutoRouteDocument() => null;
 	}
 
-	[DescriptorFor("GetSource")]
 	public partial class SourceDescriptor<T> where T : class
 	{
 		private object AutoRouteDocument() => null;

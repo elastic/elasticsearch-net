@@ -1,5 +1,6 @@
 ﻿namespace Nest
 {
+	[MapsApi("exists.json")]
 	public partial interface IDocumentExistsRequest { }
 
 	public interface IDocumentExistsRequest<T> : IDocumentExistsRequest where T : class { }
@@ -14,7 +15,6 @@
 		private object AutoRouteDocument() => null;
 	}
 
-	[DescriptorFor("Exists")]
 	public partial class DocumentExistsDescriptor<T> where T : class
 	{
 		private object AutoRouteDocument() => null;

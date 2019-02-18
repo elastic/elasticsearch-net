@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[MapsApi("ml.stop_datafeed.json")]
 	public partial interface IStopDatafeedRequest
 	{
 		/// <summary>
@@ -28,7 +29,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	[DescriptorFor("XpackMlStopDatafeed")]
 	public partial class StopDatafeedDescriptor
 	{
 		bool? IStopDatafeedRequest.Force { get; set; }

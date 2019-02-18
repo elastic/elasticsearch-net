@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[MapsApi("indices.rollover.json")]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<RolloverIndexRequest>))]
 	public partial interface IRolloverIndexRequest : IIndexState
 	{
@@ -20,7 +21,6 @@ namespace Nest
 		public IIndexSettings Settings { get; set; }
 	}
 
-	[DescriptorFor("IndicesRollover")]
 	public partial class RolloverIndexDescriptor
 	{
 		IAliases IIndexState.Aliases { get; set; }

@@ -5,6 +5,7 @@ namespace Nest
 	/// <summary>
 	/// Uses historical behavior to predict the future behavior of a time series.
 	/// </summary>
+	[MapsApi("ml.forecast.json")]
 	public partial interface IForecastJobRequest
 	{
 		/// <summary>
@@ -32,7 +33,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="IForecastJobRequest" />
-	[DescriptorFor("XpackMlForecast")]
 	public partial class ForecastJobDescriptor
 	{
 		Time IForecastJobRequest.Duration { get; set; }

@@ -7,6 +7,7 @@ namespace Nest
 	/// <summary>
 	/// Retrieve job results for one or more buckets.
 	/// </summary>
+	[MapsApi("ml.get_buckets.json")]
 	public partial interface IGetBucketsRequest
 	{
 		/// <summary>
@@ -102,7 +103,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	[DescriptorFor("XpackMlGetBuckets")]
 	public partial class GetBucketsDescriptor
 	{
 		double? IGetBucketsRequest.AnomalyScore { get; set; }

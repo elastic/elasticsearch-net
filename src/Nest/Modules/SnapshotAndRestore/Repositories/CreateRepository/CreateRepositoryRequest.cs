@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[MapsApi("snapshot.create_repository.json")]
 	[JsonConverter(typeof(CreateRepositoryJsonConverter))]
 	public partial interface ICreateRepositoryRequest
 	{
@@ -14,7 +15,6 @@ namespace Nest
 		public ISnapshotRepository Repository { get; set; }
 	}
 
-	[DescriptorFor("SnapshotCreateRepository")]
 	public partial class CreateRepositoryDescriptor
 	{
 		ISnapshotRepository ICreateRepositoryRequest.Repository { get; set; }

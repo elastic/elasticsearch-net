@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[MapsApi("security.put_role_mapping.json")]
 	public partial interface IPutRoleMappingRequest
 	{
 		[JsonProperty("enabled")]
@@ -35,7 +36,6 @@ namespace Nest
 		public IEnumerable<string> RunAs { get; set; }
 	}
 
-	[DescriptorFor("XpackSecurityPutRoleMapping")]
 	public partial class PutRoleMappingDescriptor
 	{
 		bool? IPutRoleMappingRequest.Enabled { get; set; }

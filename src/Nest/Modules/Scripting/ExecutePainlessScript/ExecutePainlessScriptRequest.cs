@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary> The Painless execute API allows an arbitrary script to be executed and a result to be returned. </summary>
+	[MapsApi("script_painless_execute.json")]
 	public partial interface IExecutePainlessScriptRequest
 	{
 		/// <summary> The context the script should be executed in </summary>
@@ -33,7 +34,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="IExecutePainlessScriptRequest" />
-	[DescriptorFor("ScriptsPainlessExecute")]
 	public partial class ExecutePainlessScriptDescriptor
 	{
 		string IExecutePainlessScriptRequest.Context { get; set; }

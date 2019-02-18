@@ -6,6 +6,7 @@ namespace Nest
 	/// <summary>
 	/// Retrieve job results for one or more categories.
 	/// </summary>
+	[[MapsApi("ml.get_categories.json")]
 	public partial interface IGetCategoriesRequest
 	{
 		/// <summary>
@@ -23,7 +24,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	[DescriptorFor("XpackMlGetCategories")]
 	public partial class GetCategoriesDescriptor
 	{
 		/// <inheritdoc />

@@ -5,6 +5,7 @@ namespace Nest
 	/// <summary>
 	/// Revert a specific snapshot for a machine learning job
 	/// </summary>
+	[MapsApi("ml.rever_model_snapshot.json")]
 	public partial interface IRevertModelSnapshotRequest
 	{
 		/// <summary>
@@ -24,7 +25,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	[DescriptorFor("XpackMlRevertModelSnapshot")]
 	public partial class RevertModelSnapshotDescriptor
 	{
 		bool? IRevertModelSnapshotRequest.DeleteInterveningResults { get; set; }

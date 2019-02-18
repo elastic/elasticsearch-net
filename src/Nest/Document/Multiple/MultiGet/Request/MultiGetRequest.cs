@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[MapsApi("mget.json")]
 	[JsonConverter(typeof(MultiGetRequestJsonConverter))]
 	public partial interface IMultiGetRequest
 	{
@@ -23,7 +24,6 @@ namespace Nest
 		}
 	}
 
-	[DescriptorFor("Mget")]
 	public partial class MultiGetDescriptor
 	{
 		private List<IMultiGetOperation> _operations = new List<IMultiGetOperation>();

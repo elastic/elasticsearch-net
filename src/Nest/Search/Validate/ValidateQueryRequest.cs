@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[MapsApi("indices.validate_query.json")]
 	public partial interface IValidateQueryRequest
 	{
 		[JsonProperty("query")]
@@ -24,7 +25,6 @@ namespace Nest
 		public QueryContainer Query { get; set; }
 	}
 
-	[DescriptorFor("IndicesValidateQuery")]
 	public partial class ValidateQueryDescriptor<T> where T : class
 	{
 		QueryContainer IValidateQueryRequest.Query { get; set; }

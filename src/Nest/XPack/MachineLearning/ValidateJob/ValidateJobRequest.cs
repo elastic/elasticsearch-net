@@ -6,6 +6,7 @@ namespace Nest
 	/// <summary>
 	/// Validates a machine learning job
 	/// </summary>
+	[MapsApi("ml.validate.json")]
 	public partial interface IValidateJobRequest
 	{
 		/// <summary>
@@ -80,7 +81,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	[DescriptorFor("XpackMlValidate")]
 	public partial class ValidateJobDescriptor<T> where T : class
 	{
 		IAnalysisConfig IValidateJobRequest.AnalysisConfig { get; set; }

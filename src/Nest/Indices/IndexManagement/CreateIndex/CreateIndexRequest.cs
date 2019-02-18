@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[MapsApi("indices.create.json")]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<CreateIndexRequest>))]
 	public partial interface ICreateIndexRequest : IIndexState { }
 
@@ -44,7 +45,6 @@ namespace Nest
 		}
 	}
 
-	[DescriptorFor("IndicesCreate")]
 	public partial class CreateIndexDescriptor
 	{
 		IAliases IIndexState.Aliases { get; set; }

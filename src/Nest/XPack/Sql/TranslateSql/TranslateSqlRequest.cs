@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	[MapsApi("xpack.sql.translate.json")]
+	[MapsApi("sql.translate.json")]
 	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<TranslateSqlRequest>))]
 	public partial interface ITranslateSqlRequest : ISqlRequest { }
 

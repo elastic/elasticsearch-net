@@ -6,6 +6,7 @@ namespace Nest
 	/// <summary>
 	/// Updates a datafeed for a machine learning job.
 	/// </summary>
+	[MapsApi("ml.update_datafeed.json")]
 	public partial interface IUpdateDatafeedRequest
 	{
 		/// <summary>
@@ -108,7 +109,6 @@ namespace Nest
 		public Types Types { get; set; }
 	}
 
-	[DescriptorFor("XpackMlUpdateDatafeed")]
 	public partial class UpdateDatafeedDescriptor<T> where T : class
 	{
 		AggregationDictionary IUpdateDatafeedRequest.Aggregations { get; set; }

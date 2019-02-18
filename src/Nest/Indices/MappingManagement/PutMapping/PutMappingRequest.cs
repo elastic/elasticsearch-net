@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[MapsApi("indices.put_mapping.json")]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<PutMappingRequest>))]
 	public partial interface IPutMappingRequest : ITypeMapping { }
 
@@ -98,7 +99,6 @@ namespace Nest
 		public ISourceField SourceField { get; set; }
 	}
 
-	[DescriptorFor("IndicesPutMapping")]
 	public partial class PutMappingDescriptor<T> where T : class
 	{
 		public PutMappingDescriptor() : this(typeof(T), typeof(T)) { }

@@ -8,6 +8,7 @@ namespace Nest
 	/// <summary>
 	/// A request to Reindex API
 	/// </summary>
+	[MapsApi("reindex.json")]
 	public partial interface IReindexOnServerRequest
 	{
 		/// <summary>
@@ -66,7 +67,6 @@ namespace Nest
 		public IReindexSource Source { get; set; }
 	}
 
-	[DescriptorFor("Reindex")]
 	public partial class ReindexOnServerDescriptor
 	{
 		Conflicts? IReindexOnServerRequest.Conflicts { get; set; }

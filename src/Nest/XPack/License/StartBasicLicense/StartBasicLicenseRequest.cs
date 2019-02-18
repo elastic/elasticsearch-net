@@ -6,7 +6,7 @@
 	/// available with your current license, however, you are notified in the response. You must then
 	/// re-submit the API request with the acknowledge parameter set to true.
 	/// </summary>
-	[MapsApi("xpack.license.post_start_basic.json")]
+	[MapsApi("license.post_start_basic.json")]
 	public partial interface IStartBasicLicenseRequest { }
 
 	/// <inheritdoc cref="IStartBasicLicenseRequest"/>

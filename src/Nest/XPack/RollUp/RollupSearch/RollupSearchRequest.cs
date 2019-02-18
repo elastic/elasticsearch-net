@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[MapsApi("xpack.rollup.rollup_search.json")]
+	[MapsApi("rollup.rollup_search.json")]
 	public partial interface IRollupSearchRequest
 	{
 		/// <summary> Describe the aggregations to perform</summary>

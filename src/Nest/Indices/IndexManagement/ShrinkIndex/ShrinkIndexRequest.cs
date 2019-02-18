@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[MapsApi("indices.shrink.json")]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<ShrinkIndexRequest>))]
 	public partial interface IShrinkIndexRequest
 	{
@@ -23,7 +24,6 @@ namespace Nest
 		public IIndexSettings Settings { get; set; }
 	}
 
-	[DescriptorFor("IndicesShrink")]
 	public partial class ShrinkIndexDescriptor
 	{
 		IAliases IShrinkIndexRequest.Aliases { get; set; }

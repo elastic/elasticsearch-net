@@ -1,9 +1,9 @@
 ﻿namespace Nest
 {
+	[MapsApi("security.get_role.json")]
 	public partial interface IGetRoleRequest { }
 
 	public partial class GetRoleRequest { }
 
-	[DescriptorFor("XpackSecurityGetRole")]
 	public partial class GetRoleDescriptor { }
 }

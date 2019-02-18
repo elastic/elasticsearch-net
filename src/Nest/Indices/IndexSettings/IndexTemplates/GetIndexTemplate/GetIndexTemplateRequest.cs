@@ -1,9 +1,9 @@
 ﻿namespace Nest
 {
+	[MapsApi("indices.get_template.json")]
 	public partial interface IGetIndexTemplateRequest { }
 
 	public partial class GetIndexTemplateRequest { }
 
-	[DescriptorFor("IndicesGetTemplate")]
 	public partial class GetIndexTemplateDescriptor { }
 }

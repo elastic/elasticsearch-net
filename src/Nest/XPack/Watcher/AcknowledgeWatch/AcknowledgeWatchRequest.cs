@@ -1,9 +1,9 @@
 ﻿namespace Nest
 {
+	[MapsApi("watcher.ack_watch.json")]
 	public partial interface IAcknowledgeWatchRequest { }
 
 	public partial class AcknowledgeWatchRequest { }
 
-	[DescriptorFor("XpackWatcherAckWatch")]
 	public partial class AcknowledgeWatchDescriptor { }
 }

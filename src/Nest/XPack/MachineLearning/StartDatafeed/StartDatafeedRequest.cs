@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[MapsApi("ml.start_datafeed.json")]
 	public partial interface IStartDatafeedRequest
 	{
 		/// <summary>
@@ -40,7 +41,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	[DescriptorFor("XpackMlStartDatafeed")]
 	public partial class StartDatafeedDescriptor
 	{
 		DateTimeOffset? IStartDatafeedRequest.End { get; set; }

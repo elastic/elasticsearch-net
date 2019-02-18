@@ -7,6 +7,7 @@ namespace Nest
 	/// <summary>
 	/// Restores a snapshot
 	/// </summary>
+	[MapsApi("snapshot.restore.json")]
 	public partial interface IRestoreRequest
 	{
 		/// <summary>
@@ -109,7 +110,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="IRestoreRequest" />
-	[DescriptorFor("SnapshotRestore")]
 	public partial class RestoreDescriptor
 	{
 		List<string> IRestoreRequest.IgnoreIndexSettings { get; set; }

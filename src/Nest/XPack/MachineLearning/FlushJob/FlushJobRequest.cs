@@ -4,6 +4,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
+	[MapsApi("ml.flush_job.json")]
 	public partial interface IFlushJobRequest
 	{
 		/// <summary>
@@ -54,7 +55,6 @@ namespace Nest
 		public DateTimeOffset? Start { get; set; }
 	}
 
-	[DescriptorFor("XpackMlFlushJob")]
 	public partial class FlushJobDescriptor
 	{
 		DateTimeOffset? IFlushJobRequest.AdvanceTime { get; set; }

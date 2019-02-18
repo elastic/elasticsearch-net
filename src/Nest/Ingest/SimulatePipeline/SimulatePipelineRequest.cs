@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[MapsApi("ingest.simulate.json")]
 	public partial interface ISimulatePipelineRequest
 	{
 		[JsonProperty("docs")]
@@ -19,7 +20,6 @@ namespace Nest
 		public IPipeline Pipeline { get; set; }
 	}
 
-	[DescriptorFor("IngestSimulate")]
 	public partial class SimulatePipelineDescriptor
 	{
 		IEnumerable<ISimulatePipelineDocument> ISimulatePipelineRequest.Documents { get; set; }

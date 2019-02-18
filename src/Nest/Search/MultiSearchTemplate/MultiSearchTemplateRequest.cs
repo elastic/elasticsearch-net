@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[MapsApi("msearch_template.json")]
 	[JsonConverter(typeof(MultiSearchTemplateJsonConverter))]
 	public partial interface IMultiSearchTemplateRequest
 	{
@@ -17,7 +18,6 @@ namespace Nest
 		protected sealed override void Initialize() => TypedKeys = true;
 	}
 
-	[DescriptorFor("MsearchTemplate")]
 	public partial class MultiSearchTemplateDescriptor
 	{
 		internal IDictionary<string, ISearchTemplateRequest> _operations = new Dictionary<string, ISearchTemplateRequest>();

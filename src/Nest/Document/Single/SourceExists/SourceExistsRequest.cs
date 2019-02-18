@@ -1,5 +1,6 @@
 ﻿namespace Nest
 {
+	[MapsApi("exists_source.json")]
 	public partial interface ISourceExistsRequest { }
 
 	public interface ISourceExistsRequest<T> : ISourceExistsRequest where T : class { }
@@ -14,7 +15,6 @@
 		private object AutoRouteDocument() => null;
 	}
 
-	[DescriptorFor("ExistsSource")]
 	public partial class SourceExistsDescriptor<T> where T : class
 	{
 		private object AutoRouteDocument() => null;

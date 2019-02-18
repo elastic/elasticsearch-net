@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[MapsApi("explain.json")]
 	public partial interface IExplainRequest<TDocument> where TDocument : class
 	{
 		[JsonProperty("query")]
@@ -25,7 +26,6 @@ namespace Nest
 		private object AutoRouteDocument() => null;
 	}
 
-	[DescriptorFor("Explain")]
 	public partial class ExplainDescriptor<TDocument> : IExplainRequest<TDocument>
 		where TDocument : class
 	{

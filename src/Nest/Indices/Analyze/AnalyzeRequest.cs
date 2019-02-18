@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[MapsApi("indices.analyze.json")]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<AnalyzeRequest>))]
 	public partial interface IAnalyzeRequest
 	{
@@ -79,7 +80,6 @@ namespace Nest
 		public Union<string, ITokenizer> Tokenizer { get; set; }
 	}
 
-	[DescriptorFor("IndicesAnalyze")]
 	public partial class AnalyzeDescriptor
 	{
 		string IAnalyzeRequest.Analyzer { get; set; }

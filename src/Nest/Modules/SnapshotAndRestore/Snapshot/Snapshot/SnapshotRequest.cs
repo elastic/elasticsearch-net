@@ -2,6 +2,7 @@
 
 namespace Nest
 {
+	[MapsApi("snapshot.create.json")]
 	public partial interface ISnapshotRequest
 	{
 		[JsonProperty("ignore_unavailable")]
@@ -28,7 +29,6 @@ namespace Nest
 		public bool? Partial { get; set; }
 	}
 
-	[DescriptorFor("SnapshotCreate")]
 	public partial class SnapshotDescriptor
 	{
 		bool? ISnapshotRequest.IgnoreUnavailable { get; set; }

@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[MapsApi("count.json")]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<CountRequest>))]
 	public partial interface ICountRequest
 	{
@@ -36,7 +37,6 @@ namespace Nest
 				: HttpMethod.POST;
 	}
 
-	[DescriptorFor("Count")]
 	public partial class CountDescriptor<T> where T : class
 	{
 		protected override HttpMethod HttpMethod =>

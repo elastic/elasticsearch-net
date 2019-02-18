@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(PostJobDataConverter))]
+	[MapsApi("ml.post_data.json")]
 	public partial interface IPostJobDataRequest
 	{
 		/// <summary>
@@ -28,7 +29,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	[DescriptorFor("XpackMlPostData")]
 	public partial class PostJobDataDescriptor
 	{
 		/// <inheritdoc />

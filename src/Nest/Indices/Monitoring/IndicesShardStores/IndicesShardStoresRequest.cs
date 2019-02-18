@@ -2,6 +2,7 @@
 
 namespace Nest
 {
+	[MapsApi("indices.shard_stores.json")]
 	public partial interface IIndicesShardStoresRequest
 	{
 		IEnumerable<TypeName> Types { get; set; }
@@ -22,7 +23,6 @@ namespace Nest
 		}
 	}
 
-	[DescriptorFor("IndicesShardStores")]
 	public partial class IndicesShardStoresDescriptor
 	{
 		private IEnumerable<TypeName> _types;

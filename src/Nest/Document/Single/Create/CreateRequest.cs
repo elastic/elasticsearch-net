@@ -3,6 +3,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	[MapsApi("create.json")]
 	[ContractJsonConverter(typeof(CreateJsonConverter))]
 	public partial interface ICreateRequest<TDocument> : IProxyRequest where TDocument : class
 	{
@@ -21,7 +22,6 @@ namespace Nest
 		private TDocument AutoRouteDocument() => Document;
 	}
 
-	[DescriptorFor("Create")]
 	public partial class CreateDescriptor<TDocument> where TDocument : class
 	{
 		TDocument ICreateRequest<TDocument>.Document { get; set; }

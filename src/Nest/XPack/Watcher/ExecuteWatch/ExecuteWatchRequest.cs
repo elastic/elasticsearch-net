@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[MapsApi("watcher.execute_watch.json")]
 	public partial interface IExecuteWatchRequest
 	{
 		/// <summary>
@@ -74,7 +75,6 @@ namespace Nest
 		public IPutWatchRequest Watch { get; set; }
 	}
 
-	[DescriptorFor("XpackWatcherExecuteWatch")]
 	public partial class ExecuteWatchDescriptor
 	{
 		IDictionary<string, ActionExecutionMode> IExecuteWatchRequest.ActionModes { get; set; }

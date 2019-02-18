@@ -6,6 +6,7 @@ namespace Nest
 	/// <summary>
 	/// Retrieve anomaly records for a machine learning job.
 	/// </summary>
+	[[MapsApi("ml.get_records.json")]
 	public partial interface IGetAnomalyRecordsRequest
 	{
 		/// <summary>
@@ -79,7 +80,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	[DescriptorFor("XpackMlGetRecords")]
 	public partial class GetAnomalyRecordsDescriptor
 	{
 		public GetAnomalyRecordsDescriptor() : base() { }

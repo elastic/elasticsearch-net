@@ -7,6 +7,7 @@ namespace Nest
 	/// <summary>
 	/// Adds and updates roles in the native realm.
 	/// </summary>
+	[MapsApi("security.put_role.json")]
 	public partial interface IPutRoleRequest
 	{
 		/// <summary>
@@ -73,7 +74,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="IPutRoleRequest" />
-	[DescriptorFor("XpackSecurityPutRole")]
 	public partial class PutRoleDescriptor
 	{
 		/// <inheritdoc cref="IPutRoleRequest.Applications" />

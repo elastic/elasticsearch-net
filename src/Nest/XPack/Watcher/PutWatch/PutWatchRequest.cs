@@ -7,6 +7,7 @@ namespace Nest
 	/// <summary>
 	/// A PutWatch request
 	/// </summary>
+	[MapsApi("watcher.put_watch.json")]
 	public partial interface IPutWatchRequest
 	{
 		/// <summary>
@@ -84,7 +85,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="IPutWatchRequest" />
-	[DescriptorFor("XpackWatcherPutWatch")]
 	public partial class PutWatchDescriptor
 	{
 		public PutWatchDescriptor() { }

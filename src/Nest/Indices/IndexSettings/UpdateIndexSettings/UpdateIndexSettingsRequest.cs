@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[MapsApi("indices.put_settings.json")]
 	[JsonConverter(typeof(IndexSettingsConverter))]
 	public partial interface IUpdateIndexSettingsRequest
 	{
@@ -14,7 +15,6 @@ namespace Nest
 		public IDynamicIndexSettings IndexSettings { get; set; }
 	}
 
-	[DescriptorFor("IndicesPutSettings")]
 	public partial class UpdateIndexSettingsDescriptor
 	{
 		IDynamicIndexSettings IUpdateIndexSettingsRequest.IndexSettings { get; set; }

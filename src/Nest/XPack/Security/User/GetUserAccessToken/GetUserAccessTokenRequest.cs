@@ -2,6 +2,7 @@
 
 namespace Nest
 {
+	[MapsApi("security.get_token.json")]
 	public partial interface IGetUserAccessTokenRequest
 	{
 		[JsonProperty("grant_type")]
@@ -37,7 +38,6 @@ namespace Nest
 		string IGetUserAccessTokenRequest.Username { get; set; }
 	}
 
-	[DescriptorFor("XpackSecurityGetToken")]
 	public partial class GetUserAccessTokenDescriptor
 	{
 		public GetUserAccessTokenDescriptor(string username, string password)

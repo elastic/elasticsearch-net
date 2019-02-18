@@ -5,6 +5,7 @@ namespace Nest
 	/// <summary>
 	/// Open a machine learning job.
 	/// </summary>
+	[MapsApi("ml.open_job.json")]
 	public partial interface IOpenJobRequest
 	{
 		/// <summary>
@@ -22,7 +23,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	[DescriptorFor("XpackMlOpenJob")]
 	public partial class OpenJobDescriptor
 	{
 		Time IOpenJobRequest.Timeout { get; set; }

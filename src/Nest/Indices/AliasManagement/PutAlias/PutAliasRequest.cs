@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[MapsApi("indices.put_alias.json")]
 	public partial interface IPutAliasRequest
 	{
 		[JsonProperty("filter")]
@@ -34,7 +35,6 @@ namespace Nest
 		public Routing SearchRouting { get; set; }
 	}
 
-	[DescriptorFor("IndicesPutAlias")]
 	public partial class PutAliasDescriptor
 	{
 		QueryContainer IPutAliasRequest.Filter { get; set; }

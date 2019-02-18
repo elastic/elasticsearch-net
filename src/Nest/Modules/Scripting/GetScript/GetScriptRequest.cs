@@ -1,9 +1,9 @@
 namespace Nest
 {
+	[MapsApi("get_script.json")]
 	public partial interface IGetScriptRequest { }
 
 	public partial class GetScriptRequest { }
 
-	[DescriptorFor("ScriptGet")]
 	public partial class GetScriptDescriptor { }
 }

@@ -8,6 +8,7 @@ namespace Nest
 	/// <summary>
 	/// A Multi termvectors API request
 	/// </summary>
+	[MapsApi("mtermvectors.json")]
 	public partial interface IMultiTermVectorsRequest
 	{
 		/// <summary>
@@ -36,7 +37,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="IMultiTermVectorsRequest" />
-	[DescriptorFor("Mtermvectors")]
 	public partial class MultiTermVectorsDescriptor
 	{
 		private List<IMultiTermVectorOperation> _operations;

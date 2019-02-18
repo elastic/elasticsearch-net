@@ -1,9 +1,9 @@
 ﻿namespace Nest
 {
+	[MapsApi("indices.recovery.json")]
 	public partial interface IRecoveryStatusRequest { }
 
 	public partial class RecoveryStatusRequest { }
 
-	[DescriptorFor("IndicesRecovery")]
 	public partial class RecoveryStatusDescriptor { }
 }

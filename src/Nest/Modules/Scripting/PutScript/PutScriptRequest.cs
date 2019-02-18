@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[MapsApi("put_script.json")]
 	public partial interface IPutScriptRequest
 	{
 		[JsonProperty("script")]
@@ -14,7 +15,6 @@ namespace Nest
 		public IStoredScript Script { get; set; }
 	}
 
-	[DescriptorFor("ScriptPut")]
 	public partial class PutScriptDescriptor
 	{
 		IStoredScript IPutScriptRequest.Script { get; set; }

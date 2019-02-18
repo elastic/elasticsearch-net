@@ -1,7 +1,7 @@
 ﻿namespace Nest
 {
 	/// <summary>This API enables you to check the status of your basic license</summary>
-	[MapsApi("xpack.license.get_basic_status.json")]
+	[MapsApi("license.get_basic_status.json")]
 	public partial interface IGetBasicLicenseStatusRequest { }
 
 	/// <inheritdoc cref="IGetBasicLicenseStatusRequest"/>

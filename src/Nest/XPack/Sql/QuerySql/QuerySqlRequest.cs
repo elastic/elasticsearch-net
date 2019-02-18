@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[MapsApi("xpack.sql.query.json")]
+	[MapsApi("sql.query.json")]
 	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<QuerySqlRequest>))]
 	public partial interface IQuerySqlRequest : ISqlRequest
 	{

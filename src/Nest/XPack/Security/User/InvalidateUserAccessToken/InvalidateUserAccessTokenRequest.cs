@@ -2,6 +2,7 @@
 
 namespace Nest
 {
+	[MapsApi("security.invalidate_token.json")]
 	public partial interface IInvalidateUserAccessTokenRequest
 	{
 		[JsonProperty("token")]
@@ -16,7 +17,6 @@ namespace Nest
 		string IInvalidateUserAccessTokenRequest.Token { get; set; }
 	}
 
-	[DescriptorFor("XpackSecurityInvalidateToken")]
 	public partial class InvalidateUserAccessTokenDescriptor
 	{
 		public InvalidateUserAccessTokenDescriptor(string token) => ((IInvalidateUserAccessTokenRequest)this).Token = token;

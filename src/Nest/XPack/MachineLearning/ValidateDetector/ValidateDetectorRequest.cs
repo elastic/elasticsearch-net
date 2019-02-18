@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(ValidateDetectorRequestConverter))]
+	[MapsApi("ml.validate_detector.json")]
 	public partial interface IValidateDetectorRequest
 	{
 		[JsonIgnore]
@@ -18,7 +19,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	[DescriptorFor("XpackMlValidateDetector")]
 	public partial class ValidateDetectorDescriptor<T> where T : class
 	{
 		IDetector IValidateDetectorRequest.Detector { get; set; }

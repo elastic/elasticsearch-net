@@ -7,6 +7,7 @@ namespace Nest
 	/// A request to split an existing index into a new index, where each original primary
 	/// shard is split into two or more primary shards in the new index.
 	/// </summary>
+	[MapsApi("indices.split.json")]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<SplitIndexRequest>))]
 	public partial interface ISplitIndexRequest
 	{
@@ -37,7 +38,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="ISplitIndexRequest" />
-	[DescriptorFor("IndicesSplit")]
 	public partial class SplitIndexDescriptor
 	{
 		IAliases ISplitIndexRequest.Aliases { get; set; }

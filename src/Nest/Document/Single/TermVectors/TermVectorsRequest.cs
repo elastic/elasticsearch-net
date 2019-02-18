@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[MapsApi("termvectors.json")]
 	public partial interface ITermVectorsRequest<TDocument>
 		where TDocument : class
 	{
@@ -61,7 +62,6 @@ namespace Nest
 		}
 	}
 
-	[DescriptorFor("Termvectors")]
 	public partial class TermVectorsDescriptor<TDocument> where TDocument : class
 	{
 		TDocument ITermVectorsRequest<TDocument>.Document { get; set; }

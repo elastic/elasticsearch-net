@@ -2,6 +2,7 @@
 
 namespace Nest
 {
+	[MapsApi("indices.stats.json")]
 	public partial interface IIndicesStatsRequest
 	{
 		IEnumerable<TypeName> Types { get; set; }
@@ -22,7 +23,6 @@ namespace Nest
 		}
 	}
 
-	[DescriptorFor("IndicesStats")]
 	public partial class IndicesStatsDescriptor
 	{
 		private IEnumerable<TypeName> _types;

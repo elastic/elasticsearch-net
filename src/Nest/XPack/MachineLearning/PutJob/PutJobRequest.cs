@@ -8,6 +8,7 @@ namespace Nest
 	/// <summary>
 	/// Creates a machine learning job
 	/// </summary>
+	[MapsApi("ml.put_job.json")]
 	public partial interface IPutJobRequest
 	{
 		/// <summary>
@@ -82,7 +83,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	[DescriptorFor("XpackMlPutJob")]
 	public partial class PutJobDescriptor<T> where T : class
 	{
 		IAnalysisConfig IPutJobRequest.AnalysisConfig { get; set; }

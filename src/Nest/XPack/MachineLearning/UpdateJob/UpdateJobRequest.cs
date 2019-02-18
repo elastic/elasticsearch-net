@@ -7,6 +7,7 @@ namespace Nest
 	/// <summary>
 	/// Update a machine learning Job
 	/// </summary>
+	[MapsApi("ml.update_job.json")]
 	public partial interface IUpdateJobRequest
 	{
 		/// <summary>
@@ -80,7 +81,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	[DescriptorFor("XpackMlUpdateJob")]
 	public partial class UpdateJobDescriptor<T> where T : class
 	{
 		IAnalysisMemoryLimit IUpdateJobRequest.AnalysisLimits { get; set; }
