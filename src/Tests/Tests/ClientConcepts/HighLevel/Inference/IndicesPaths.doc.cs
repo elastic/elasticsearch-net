@@ -133,9 +133,6 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 			manyStringRequest = new SearchDescriptor<Project>().Index(new[] { "name1", "name2" });
 			((IUrlParameter)manyStringRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("name1,name2");
-
-			manyStringRequest = new SearchDescriptor<Project>().Type(new[] { "name1", "name2" });
-			((IUrlParameter)manyStringRequest.Type).GetString(this.Client.ConnectionSettings).Should().Be("name1,name2");
 		}
 
 		/**===== All Indices

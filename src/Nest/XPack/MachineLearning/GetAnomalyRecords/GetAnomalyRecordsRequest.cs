@@ -6,7 +6,7 @@ namespace Nest
 	/// <summary>
 	/// Retrieve anomaly records for a machine learning job.
 	/// </summary>
-	[[MapsApi("ml.get_records.json")]
+	[MapsApi("ml.get_records.json")]
 	public partial interface IGetAnomalyRecordsRequest
 	{
 		/// <summary>

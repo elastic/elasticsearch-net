@@ -34,7 +34,7 @@ namespace Nest
 		public IDeleteLicenseResponse DeleteLicense(IDeleteLicenseRequest request) =>
 			Dispatcher.Dispatch<IDeleteLicenseRequest, DeleteLicenseRequestParameters, DeleteLicenseResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackLicenseDeleteDispatch<DeleteLicenseResponse>(p)
+				(p, d) => LowLevelDispatch.LicenseDeleteDispatch<DeleteLicenseResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -50,7 +50,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IDeleteLicenseRequest, DeleteLicenseRequestParameters, DeleteLicenseResponse, IDeleteLicenseResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackLicenseDeleteDispatchAsync<DeleteLicenseResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.LicenseDeleteDispatchAsync<DeleteLicenseResponse>(p, c)
 			);
 	}
 }

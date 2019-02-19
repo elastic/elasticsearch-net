@@ -21,15 +21,13 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.Bulk<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.Bulk<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
 						return _lowLevel.Bulk<TResponse>(body,p.RequestParameters);
 				case PUT:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.BulkPut<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.BulkPut<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
 						return _lowLevel.BulkPut<TResponse>(body,p.RequestParameters);
 			}
-			throw InvalidDispatch("Bulk", p, new [] { POST, PUT }, "/_bulk", "/{index}/_bulk", "/{index}/{type}/_bulk");
+			throw InvalidDispatch("Bulk", p, new [] { POST, PUT }, "/_bulk", "/{index}/_bulk");
 		}
 		
 		internal Task<TResponse> BulkDispatchAsync<TResponse>(IRequest<BulkRequestParameters> p,SerializableData<IBulkRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -37,15 +35,13 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.BulkAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.BulkAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
 						return _lowLevel.BulkAsync<TResponse>(body,p.RequestParameters,ct);
 				case PUT:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.BulkPutAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.BulkPutAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
 						return _lowLevel.BulkPutAsync<TResponse>(body,p.RequestParameters,ct);
 			}
-			throw InvalidDispatch("Bulk", p, new [] { POST, PUT }, "/_bulk", "/{index}/_bulk", "/{index}/{type}/_bulk");
+			throw InvalidDispatch("Bulk", p, new [] { POST, PUT }, "/_bulk", "/{index}/_bulk");
 		}
 		
 		internal TResponse CatAliasesDispatch<TResponse>(IRequest<CatAliasesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
@@ -687,15 +683,13 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.Count<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.Count<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
 						return _lowLevel.Count<TResponse>(body,p.RequestParameters);
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.CountGet<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RequestParameters);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.CountGet<TResponse>(p.RouteValues.Index,p.RequestParameters);
 						return _lowLevel.CountGet<TResponse>(p.RequestParameters);
 			}
-			throw InvalidDispatch("Count", p, new [] { POST, GET }, "/_count", "/{index}/_count", "/{index}/{type}/_count");
+			throw InvalidDispatch("Count", p, new [] { POST, GET }, "/_count", "/{index}/_count");
 		}
 		
 		internal Task<TResponse> CountDispatchAsync<TResponse>(IRequest<CountRequestParameters> p,SerializableData<ICountRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -703,15 +697,13 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.CountAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.CountAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
 						return _lowLevel.CountAsync<TResponse>(body,p.RequestParameters,ct);
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.CountGetAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RequestParameters,ct);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.CountGetAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
 						return _lowLevel.CountGetAsync<TResponse>(p.RequestParameters,ct);
 			}
-			throw InvalidDispatch("Count", p, new [] { POST, GET }, "/_count", "/{index}/_count", "/{index}/{type}/_count");
+			throw InvalidDispatch("Count", p, new [] { POST, GET }, "/_count", "/{index}/_count");
 		}
 		
 		internal TResponse CreateDispatch<TResponse,TDocument>(IRequest<CreateRequestParameters> p,SerializableData<ICreateRequest<TDocument>> body) where TResponse : class, IElasticsearchResponse, new() where TDocument : class
@@ -719,15 +711,13 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case PUT:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.Create<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,body,p.RequestParameters);
 					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.Create<TResponse>(p.RouteValues.Index,p.RouteValues.Id,body,p.RequestParameters);
 					break;
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.CreatePost<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,body,p.RequestParameters);
 					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.CreatePost<TResponse>(p.RouteValues.Index,p.RouteValues.Id,body,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("Create", p, new [] { PUT, POST }, "/{index}/_create/{id}", "/{index}/{type}/{id}/_create");
+			throw InvalidDispatch("Create", p, new [] { PUT, POST }, "/{index}/_create/{id}");
 		}
 		
 		internal Task<TResponse> CreateDispatchAsync<TResponse,TDocument>(IRequest<CreateRequestParameters> p,SerializableData<ICreateRequest<TDocument>> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new() where TDocument : class
@@ -735,15 +725,13 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case PUT:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.CreateAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,body,p.RequestParameters,ct);
 					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.CreateAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Id,body,p.RequestParameters,ct);
 					break;
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.CreatePostAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,body,p.RequestParameters,ct);
 					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.CreatePostAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Id,body,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("Create", p, new [] { PUT, POST }, "/{index}/_create/{id}", "/{index}/{type}/{id}/_create");
+			throw InvalidDispatch("Create", p, new [] { PUT, POST }, "/{index}/_create/{id}");
 		}
 		
 		internal TResponse DeleteDispatch<TResponse>(IRequest<DeleteRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
@@ -751,11 +739,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case DELETE:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.Delete<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,p.RequestParameters);
 					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.Delete<TResponse>(p.RouteValues.Index,p.RouteValues.Id,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("Delete", p, new [] { DELETE }, "/{index}/{type}/{id}", "/{index}/_doc/{id}");
+			throw InvalidDispatch("Delete", p, new [] { DELETE }, "/{index}/_doc/{id}");
 		}
 		
 		internal Task<TResponse> DeleteDispatchAsync<TResponse>(IRequest<DeleteRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -763,11 +750,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case DELETE:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.DeleteAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,p.RequestParameters,ct);
 					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.DeleteAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Id,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("Delete", p, new [] { DELETE }, "/{index}/{type}/{id}", "/{index}/_doc/{id}");
+			throw InvalidDispatch("Delete", p, new [] { DELETE }, "/{index}/_doc/{id}");
 		}
 		
 		internal TResponse DeleteByQueryDispatch<TResponse>(IRequest<DeleteByQueryRequestParameters> p,SerializableData<IDeleteByQueryRequest> body) where TResponse : class, IElasticsearchResponse, new()
@@ -775,11 +761,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.DeleteByQuery<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
 					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.DeleteByQuery<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("DeleteByQuery", p, new [] { POST }, "/{index}/_delete_by_query", "/{index}/{type}/_delete_by_query");
+			throw InvalidDispatch("DeleteByQuery", p, new [] { POST }, "/{index}/_delete_by_query");
 		}
 		
 		internal Task<TResponse> DeleteByQueryDispatchAsync<TResponse>(IRequest<DeleteByQueryRequestParameters> p,SerializableData<IDeleteByQueryRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -787,11 +772,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.DeleteByQueryAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
 					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.DeleteByQueryAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("DeleteByQuery", p, new [] { POST }, "/{index}/_delete_by_query", "/{index}/{type}/_delete_by_query");
+			throw InvalidDispatch("DeleteByQuery", p, new [] { POST }, "/{index}/_delete_by_query");
 		}
 		
 		internal TResponse DeleteScriptDispatch<TResponse>(IRequest<DeleteScriptRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
@@ -821,11 +805,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case HEAD:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.Exists<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,p.RequestParameters);
 					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.Exists<TResponse>(p.RouteValues.Index,p.RouteValues.Id,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("Exists", p, new [] { HEAD }, "/{index}/_doc/{id}", "/{index}/{type}/{id}");
+			throw InvalidDispatch("Exists", p, new [] { HEAD }, "/{index}/_doc/{id}");
 		}
 		
 		internal Task<TResponse> ExistsDispatchAsync<TResponse>(IRequest<DocumentExistsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -833,11 +816,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case HEAD:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.ExistsAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,p.RequestParameters,ct);
 					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.ExistsAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Id,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("Exists", p, new [] { HEAD }, "/{index}/_doc/{id}", "/{index}/{type}/{id}");
+			throw InvalidDispatch("Exists", p, new [] { HEAD }, "/{index}/_doc/{id}");
 		}
 		
 		internal TResponse ExistsSourceDispatch<TResponse>(IRequest<SourceExistsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
@@ -845,11 +827,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case HEAD:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.ExistsSource<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,p.RequestParameters);
 					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.ExistsSource<TResponse>(p.RouteValues.Index,p.RouteValues.Id,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("ExistsSource", p, new [] { HEAD }, "/{index}/_source/{id}", "/{index}/{type}/{id}/_source");
+			throw InvalidDispatch("ExistsSource", p, new [] { HEAD }, "/{index}/_source/{id}");
 		}
 		
 		internal Task<TResponse> ExistsSourceDispatchAsync<TResponse>(IRequest<SourceExistsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -857,11 +838,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case HEAD:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.ExistsSourceAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,p.RequestParameters,ct);
 					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.ExistsSourceAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Id,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("ExistsSource", p, new [] { HEAD }, "/{index}/_source/{id}", "/{index}/{type}/{id}/_source");
+			throw InvalidDispatch("ExistsSource", p, new [] { HEAD }, "/{index}/_source/{id}");
 		}
 		
 		internal TResponse ExplainDispatch<TResponse,TDocument>(IRequest<ExplainRequestParameters> p,SerializableData<IExplainRequest<TDocument>> body) where TResponse : class, IElasticsearchResponse, new() where TDocument : class
@@ -869,15 +849,13 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.ExplainGet<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,p.RequestParameters);
 					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.ExplainGet<TResponse>(p.RouteValues.Index,p.RouteValues.Id,p.RequestParameters);
 					break;
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.Explain<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,body,p.RequestParameters);
 					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.Explain<TResponse>(p.RouteValues.Index,p.RouteValues.Id,body,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("Explain", p, new [] { GET, POST }, "/{index}/_explain/{id}", "/{index}/{type}/{id}/_explain");
+			throw InvalidDispatch("Explain", p, new [] { GET, POST }, "/{index}/_explain/{id}");
 		}
 		
 		internal Task<TResponse> ExplainDispatchAsync<TResponse,TDocument>(IRequest<ExplainRequestParameters> p,SerializableData<IExplainRequest<TDocument>> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new() where TDocument : class
@@ -885,15 +863,13 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.ExplainGetAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,p.RequestParameters,ct);
 					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.ExplainGetAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Id,p.RequestParameters,ct);
 					break;
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.ExplainAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,body,p.RequestParameters,ct);
 					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.ExplainAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Id,body,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("Explain", p, new [] { GET, POST }, "/{index}/_explain/{id}", "/{index}/{type}/{id}/_explain");
+			throw InvalidDispatch("Explain", p, new [] { GET, POST }, "/{index}/_explain/{id}");
 		}
 		
 		internal TResponse FieldCapsDispatch<TResponse>(IRequest<FieldCapabilitiesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
@@ -929,11 +905,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.Get<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,p.RequestParameters);
 					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.Get<TResponse>(p.RouteValues.Index,p.RouteValues.Id,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("Get", p, new [] { GET }, "/{index}/_doc/{id}", "/{index}/{type}/{id}");
+			throw InvalidDispatch("Get", p, new [] { GET }, "/{index}/_doc/{id}");
 		}
 		
 		internal Task<TResponse> GetDispatchAsync<TResponse>(IRequest<GetRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -941,11 +916,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.GetAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,p.RequestParameters,ct);
 					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.GetAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Id,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("Get", p, new [] { GET }, "/{index}/_doc/{id}", "/{index}/{type}/{id}");
+			throw InvalidDispatch("Get", p, new [] { GET }, "/{index}/_doc/{id}");
 		}
 		
 		internal TResponse GetScriptDispatch<TResponse>(IRequest<GetScriptRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
@@ -975,11 +949,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.GetSource<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,p.RequestParameters);
 					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.GetSource<TResponse>(p.RouteValues.Index,p.RouteValues.Id,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("GetSource", p, new [] { GET }, "/{index}/_source/{id}", "/{index}/{type}/{id}/_source");
+			throw InvalidDispatch("GetSource", p, new [] { GET }, "/{index}/_source/{id}");
 		}
 		
 		internal Task<TResponse> GetSourceDispatchAsync<TResponse>(IRequest<SourceRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -987,11 +960,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.GetSourceAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,p.RequestParameters,ct);
 					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.GetSourceAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Id,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("GetSource", p, new [] { GET }, "/{index}/_source/{id}", "/{index}/{type}/{id}/_source");
+			throw InvalidDispatch("GetSource", p, new [] { GET }, "/{index}/_source/{id}");
 		}
 		
 		internal TResponse IndexDispatch<TResponse,TDocument>(IRequest<IndexRequestParameters> p,SerializableData<IIndexRequest<TDocument>> body) where TResponse : class, IElasticsearchResponse, new() where TDocument : class
@@ -999,19 +971,15 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.Index<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,body,p.RequestParameters);
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.Index<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.Index<TResponse>(p.RouteValues.Index,p.RouteValues.Id,body,p.RequestParameters);
 					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.Index<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
 					break;
 				case PUT:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.IndexPut<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,body,p.RequestParameters);
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.IndexPut<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.IndexPut<TResponse>(p.RouteValues.Index,p.RouteValues.Id,body,p.RequestParameters);
 					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.IndexPut<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("Index", p, new [] { POST, PUT }, "/{index}/{type}", "/{index}/{type}/{id}", "/{index}/_doc/{id}", "/{index}/_doc");
+			throw InvalidDispatch("Index", p, new [] { POST, PUT }, "/{index}/_doc/{id}", "/{index}/_doc");
 		}
 		
 		internal Task<TResponse> IndexDispatchAsync<TResponse,TDocument>(IRequest<IndexRequestParameters> p,SerializableData<IIndexRequest<TDocument>> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new() where TDocument : class
@@ -1019,19 +987,15 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.IndexAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,body,p.RequestParameters,ct);
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.IndexAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.IndexAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Id,body,p.RequestParameters,ct);
 					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.IndexAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
 					break;
 				case PUT:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.IndexPutAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,body,p.RequestParameters,ct);
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.IndexPutAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.IndexPutAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Id,body,p.RequestParameters,ct);
 					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.IndexPutAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("Index", p, new [] { POST, PUT }, "/{index}/{type}", "/{index}/{type}/{id}", "/{index}/_doc/{id}", "/{index}/_doc");
+			throw InvalidDispatch("Index", p, new [] { POST, PUT }, "/{index}/_doc/{id}", "/{index}/_doc");
 		}
 		
 		internal TResponse IndicesAnalyzeDispatch<TResponse>(IRequest<AnalyzeRequestParameters> p,SerializableData<IAnalyzeRequest> body) where TResponse : class, IElasticsearchResponse, new()
@@ -1415,13 +1379,11 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Fields)) return _lowLevel.IndicesGetFieldMapping<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Fields,p.RequestParameters);
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Fields)) return _lowLevel.IndicesGetFieldMapping<TResponse>(p.RouteValues.Index,p.RouteValues.Fields,p.RequestParameters);
-					if (AllSet(p.RouteValues.Type, p.RouteValues.Fields)) return _lowLevel.IndicesGetFieldMappingForAll<TResponse>(p.RouteValues.Type,p.RouteValues.Fields,p.RequestParameters);
 					if (AllSetNoFallback(p.RouteValues.Fields)) return _lowLevel.IndicesGetFieldMappingForAll<TResponse>(p.RouteValues.Fields,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("IndicesGetFieldMapping", p, new [] { GET }, "/_mapping/field/{fields}", "/{index}/_mapping/field/{fields}", "/_mapping/{type}/field/{fields}", "/{index}/_mapping/{type}/field/{fields}");
+			throw InvalidDispatch("IndicesGetFieldMapping", p, new [] { GET }, "/_mapping/field/{fields}", "/{index}/_mapping/field/{fields}");
 		}
 		
 		internal Task<TResponse> IndicesGetFieldMappingDispatchAsync<TResponse>(IRequest<GetFieldMappingRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -1429,13 +1391,11 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Fields)) return _lowLevel.IndicesGetFieldMappingAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Fields,p.RequestParameters,ct);
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Fields)) return _lowLevel.IndicesGetFieldMappingAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Fields,p.RequestParameters,ct);
-					if (AllSet(p.RouteValues.Type, p.RouteValues.Fields)) return _lowLevel.IndicesGetFieldMappingForAllAsync<TResponse>(p.RouteValues.Type,p.RouteValues.Fields,p.RequestParameters,ct);
 					if (AllSetNoFallback(p.RouteValues.Fields)) return _lowLevel.IndicesGetFieldMappingForAllAsync<TResponse>(p.RouteValues.Fields,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("IndicesGetFieldMapping", p, new [] { GET }, "/_mapping/field/{fields}", "/{index}/_mapping/field/{fields}", "/_mapping/{type}/field/{fields}", "/{index}/_mapping/{type}/field/{fields}");
+			throw InvalidDispatch("IndicesGetFieldMapping", p, new [] { GET }, "/_mapping/field/{fields}", "/{index}/_mapping/field/{fields}");
 		}
 		
 		internal TResponse IndicesGetMappingDispatch<TResponse>(IRequest<GetMappingRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
@@ -1443,12 +1403,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.IndicesGetMapping<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RequestParameters);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesGetMapping<TResponse>(p.RouteValues.Index,p.RequestParameters);
-					if (AllSet(p.RouteValues.Type)) return _lowLevel.IndicesGetMappingForAll<TResponse>(p.RouteValues.Type,p.RequestParameters);
 						return _lowLevel.IndicesGetMappingForAll<TResponse>(p.RequestParameters);
 			}
-			throw InvalidDispatch("IndicesGetMapping", p, new [] { GET }, "/_mapping", "/{index}/_mapping", "/_mapping/{type}", "/{index}/_mapping/{type}");
+			throw InvalidDispatch("IndicesGetMapping", p, new [] { GET }, "/_mapping", "/{index}/_mapping");
 		}
 		
 		internal Task<TResponse> IndicesGetMappingDispatchAsync<TResponse>(IRequest<GetMappingRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -1456,12 +1414,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.IndicesGetMappingAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RequestParameters,ct);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesGetMappingAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
-					if (AllSet(p.RouteValues.Type)) return _lowLevel.IndicesGetMappingForAllAsync<TResponse>(p.RouteValues.Type,p.RequestParameters,ct);
 						return _lowLevel.IndicesGetMappingForAllAsync<TResponse>(p.RequestParameters,ct);
 			}
-			throw InvalidDispatch("IndicesGetMapping", p, new [] { GET }, "/_mapping", "/{index}/_mapping", "/_mapping/{type}", "/{index}/_mapping/{type}");
+			throw InvalidDispatch("IndicesGetMapping", p, new [] { GET }, "/_mapping", "/{index}/_mapping");
 		}
 		
 		internal TResponse IndicesGetSettingsDispatch<TResponse>(IRequest<GetIndexSettingsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
@@ -1589,17 +1545,13 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case PUT:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.IndicesPutMapping<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
-					if (AllSet(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingForAll<TResponse>(p.RouteValues.Type,body,p.RequestParameters);
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesPutMapping<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.IndicesPutMapping<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
 					break;
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.IndicesPutMappingPost<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
-					if (AllSet(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingPostForAll<TResponse>(p.RouteValues.Type,body,p.RequestParameters);
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesPutMappingPost<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.IndicesPutMappingPost<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("IndicesPutMapping", p, new [] { PUT, POST }, "/{index}/{type}/_mapping", "/{index}/_mapping/{type}", "/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}", "/_mappings/{type}", "/{index}/_mappings", "/{index}/_mapping");
+			throw InvalidDispatch("IndicesPutMapping", p, new [] { PUT, POST }, "/{index}/_mapping");
 		}
 		
 		internal Task<TResponse> IndicesPutMappingDispatchAsync<TResponse>(IRequest<PutMappingRequestParameters> p,SerializableData<IPutMappingRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -1607,17 +1559,13 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case PUT:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.IndicesPutMappingAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
-					if (AllSet(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingForAllAsync<TResponse>(p.RouteValues.Type,body,p.RequestParameters,ct);
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesPutMappingAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.IndicesPutMappingAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
 					break;
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.IndicesPutMappingPostAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
-					if (AllSet(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingPostForAllAsync<TResponse>(p.RouteValues.Type,body,p.RequestParameters,ct);
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesPutMappingPostAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.IndicesPutMappingPostAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("IndicesPutMapping", p, new [] { PUT, POST }, "/{index}/{type}/_mapping", "/{index}/_mapping/{type}", "/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}", "/_mappings/{type}", "/{index}/_mappings", "/{index}/_mapping");
+			throw InvalidDispatch("IndicesPutMapping", p, new [] { PUT, POST }, "/{index}/_mapping");
 		}
 		
 		internal TResponse IndicesPutSettingsDispatch<TResponse>(IRequest<UpdateIndexSettingsRequestParameters> p,SerializableData<IUpdateIndexSettingsRequest> body) where TResponse : class, IElasticsearchResponse, new()
@@ -1917,15 +1865,13 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.IndicesValidateQueryGet<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RequestParameters);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesValidateQueryGet<TResponse>(p.RouteValues.Index,p.RequestParameters);
 						return _lowLevel.IndicesValidateQueryGetForAll<TResponse>(p.RequestParameters);
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.IndicesValidateQuery<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesValidateQuery<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
 						return _lowLevel.IndicesValidateQueryForAll<TResponse>(body,p.RequestParameters);
 			}
-			throw InvalidDispatch("IndicesValidateQuery", p, new [] { GET, POST }, "/_validate/query", "/{index}/_validate/query", "/{index}/{type}/_validate/query");
+			throw InvalidDispatch("IndicesValidateQuery", p, new [] { GET, POST }, "/_validate/query", "/{index}/_validate/query");
 		}
 		
 		internal Task<TResponse> IndicesValidateQueryDispatchAsync<TResponse>(IRequest<ValidateQueryRequestParameters> p,SerializableData<IValidateQueryRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -1933,15 +1879,13 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.IndicesValidateQueryGetAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RequestParameters,ct);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesValidateQueryGetAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
 						return _lowLevel.IndicesValidateQueryGetForAllAsync<TResponse>(p.RequestParameters,ct);
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.IndicesValidateQueryAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesValidateQueryAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
 						return _lowLevel.IndicesValidateQueryForAllAsync<TResponse>(body,p.RequestParameters,ct);
 			}
-			throw InvalidDispatch("IndicesValidateQuery", p, new [] { GET, POST }, "/_validate/query", "/{index}/_validate/query", "/{index}/{type}/_validate/query");
+			throw InvalidDispatch("IndicesValidateQuery", p, new [] { GET, POST }, "/_validate/query", "/{index}/_validate/query");
 		}
 		
 		internal TResponse InfoDispatch<TResponse>(IRequest<RootNodeInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
@@ -2083,15 +2027,13 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.MgetGet<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RequestParameters);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.MgetGet<TResponse>(p.RouteValues.Index,p.RequestParameters);
 						return _lowLevel.MgetGet<TResponse>(p.RequestParameters);
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.Mget<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.Mget<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
 						return _lowLevel.Mget<TResponse>(body,p.RequestParameters);
 			}
-			throw InvalidDispatch("Mget", p, new [] { GET, POST }, "/_mget", "/{index}/_mget", "/{index}/{type}/_mget");
+			throw InvalidDispatch("Mget", p, new [] { GET, POST }, "/_mget", "/{index}/_mget");
 		}
 		
 		internal Task<TResponse> MgetDispatchAsync<TResponse>(IRequest<MultiGetRequestParameters> p,SerializableData<IMultiGetRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -2099,15 +2041,13 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.MgetGetAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RequestParameters,ct);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.MgetGetAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
 						return _lowLevel.MgetGetAsync<TResponse>(p.RequestParameters,ct);
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.MgetAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.MgetAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
 						return _lowLevel.MgetAsync<TResponse>(body,p.RequestParameters,ct);
 			}
-			throw InvalidDispatch("Mget", p, new [] { GET, POST }, "/_mget", "/{index}/_mget", "/{index}/{type}/_mget");
+			throw InvalidDispatch("Mget", p, new [] { GET, POST }, "/_mget", "/{index}/_mget");
 		}
 		
 		internal TResponse MsearchDispatch<TResponse>(IRequest<MultiSearchRequestParameters> p,SerializableData<IMultiSearchRequest> body) where TResponse : class, IElasticsearchResponse, new()
@@ -2115,15 +2055,13 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.MsearchGet<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RequestParameters);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.MsearchGet<TResponse>(p.RouteValues.Index,p.RequestParameters);
 						return _lowLevel.MsearchGet<TResponse>(p.RequestParameters);
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.Msearch<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.Msearch<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
 						return _lowLevel.Msearch<TResponse>(body,p.RequestParameters);
 			}
-			throw InvalidDispatch("Msearch", p, new [] { GET, POST }, "/_msearch", "/{index}/_msearch", "/{index}/{type}/_msearch");
+			throw InvalidDispatch("Msearch", p, new [] { GET, POST }, "/_msearch", "/{index}/_msearch");
 		}
 		
 		internal Task<TResponse> MsearchDispatchAsync<TResponse>(IRequest<MultiSearchRequestParameters> p,SerializableData<IMultiSearchRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -2131,15 +2069,13 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.MsearchGetAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RequestParameters,ct);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.MsearchGetAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
 						return _lowLevel.MsearchGetAsync<TResponse>(p.RequestParameters,ct);
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.MsearchAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.MsearchAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
 						return _lowLevel.MsearchAsync<TResponse>(body,p.RequestParameters,ct);
 			}
-			throw InvalidDispatch("Msearch", p, new [] { GET, POST }, "/_msearch", "/{index}/_msearch", "/{index}/{type}/_msearch");
+			throw InvalidDispatch("Msearch", p, new [] { GET, POST }, "/_msearch", "/{index}/_msearch");
 		}
 		
 		internal TResponse MsearchTemplateDispatch<TResponse>(IRequest<MultiSearchTemplateRequestParameters> p,SerializableData<IMultiSearchTemplateRequest> body) where TResponse : class, IElasticsearchResponse, new()
@@ -2147,15 +2083,13 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.MsearchTemplateGet<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RequestParameters);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.MsearchTemplateGet<TResponse>(p.RouteValues.Index,p.RequestParameters);
 						return _lowLevel.MsearchTemplateGet<TResponse>(p.RequestParameters);
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.MsearchTemplate<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.MsearchTemplate<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
 						return _lowLevel.MsearchTemplate<TResponse>(body,p.RequestParameters);
 			}
-			throw InvalidDispatch("MsearchTemplate", p, new [] { GET, POST }, "/_msearch/template", "/{index}/_msearch/template", "/{index}/{type}/_msearch/template");
+			throw InvalidDispatch("MsearchTemplate", p, new [] { GET, POST }, "/_msearch/template", "/{index}/_msearch/template");
 		}
 		
 		internal Task<TResponse> MsearchTemplateDispatchAsync<TResponse>(IRequest<MultiSearchTemplateRequestParameters> p,SerializableData<IMultiSearchTemplateRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -2163,15 +2097,13 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.MsearchTemplateGetAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RequestParameters,ct);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.MsearchTemplateGetAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
 						return _lowLevel.MsearchTemplateGetAsync<TResponse>(p.RequestParameters,ct);
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.MsearchTemplateAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.MsearchTemplateAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
 						return _lowLevel.MsearchTemplateAsync<TResponse>(body,p.RequestParameters,ct);
 			}
-			throw InvalidDispatch("MsearchTemplate", p, new [] { GET, POST }, "/_msearch/template", "/{index}/_msearch/template", "/{index}/{type}/_msearch/template");
+			throw InvalidDispatch("MsearchTemplate", p, new [] { GET, POST }, "/_msearch/template", "/{index}/_msearch/template");
 		}
 		
 		internal TResponse MtermvectorsDispatch<TResponse>(IRequest<MultiTermVectorsRequestParameters> p,SerializableData<IMultiTermVectorsRequest> body) where TResponse : class, IElasticsearchResponse, new()
@@ -2179,15 +2111,13 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.MtermvectorsGet<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RequestParameters);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.MtermvectorsGet<TResponse>(p.RouteValues.Index,p.RequestParameters);
 						return _lowLevel.MtermvectorsGet<TResponse>(p.RequestParameters);
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.Mtermvectors<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.Mtermvectors<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
 						return _lowLevel.Mtermvectors<TResponse>(body,p.RequestParameters);
 			}
-			throw InvalidDispatch("Mtermvectors", p, new [] { GET, POST }, "/_mtermvectors", "/{index}/_mtermvectors", "/{index}/{type}/_mtermvectors");
+			throw InvalidDispatch("Mtermvectors", p, new [] { GET, POST }, "/_mtermvectors", "/{index}/_mtermvectors");
 		}
 		
 		internal Task<TResponse> MtermvectorsDispatchAsync<TResponse>(IRequest<MultiTermVectorsRequestParameters> p,SerializableData<IMultiTermVectorsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -2195,15 +2125,13 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.MtermvectorsGetAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RequestParameters,ct);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.MtermvectorsGetAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
 						return _lowLevel.MtermvectorsGetAsync<TResponse>(p.RequestParameters,ct);
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.MtermvectorsAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.MtermvectorsAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
 						return _lowLevel.MtermvectorsAsync<TResponse>(body,p.RequestParameters,ct);
 			}
-			throw InvalidDispatch("Mtermvectors", p, new [] { GET, POST }, "/_mtermvectors", "/{index}/_mtermvectors", "/{index}/{type}/_mtermvectors");
+			throw InvalidDispatch("Mtermvectors", p, new [] { GET, POST }, "/_mtermvectors", "/{index}/_mtermvectors");
 		}
 		
 		internal TResponse NodesHotThreadsDispatch<TResponse>(IRequest<NodesHotThreadsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
@@ -2214,7 +2142,7 @@ namespace Nest
 					if (AllSet(p.RouteValues.NodeId)) return _lowLevel.NodesHotThreads<TResponse>(p.RouteValues.NodeId,p.RequestParameters);
 						return _lowLevel.NodesHotThreadsForAll<TResponse>(p.RequestParameters);
 			}
-			throw InvalidDispatch("NodesHotThreads", p, new [] { GET }, "/_cluster/nodes/hotthreads", "/_cluster/nodes/hot_threads", "/_cluster/nodes/{node_id}/hotthreads", "/_cluster/nodes/{node_id}/hot_threads", "/_nodes/hotthreads", "/_nodes/hot_threads", "/_nodes/{node_id}/hotthreads", "/_nodes/{node_id}/hot_threads");
+			throw InvalidDispatch("NodesHotThreads", p, new [] { GET }, "/_nodes/hot_threads", "/_nodes/{node_id}/hot_threads");
 		}
 		
 		internal Task<TResponse> NodesHotThreadsDispatchAsync<TResponse>(IRequest<NodesHotThreadsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -2225,7 +2153,7 @@ namespace Nest
 					if (AllSet(p.RouteValues.NodeId)) return _lowLevel.NodesHotThreadsAsync<TResponse>(p.RouteValues.NodeId,p.RequestParameters,ct);
 						return _lowLevel.NodesHotThreadsForAllAsync<TResponse>(p.RequestParameters,ct);
 			}
-			throw InvalidDispatch("NodesHotThreads", p, new [] { GET }, "/_cluster/nodes/hotthreads", "/_cluster/nodes/hot_threads", "/_cluster/nodes/{node_id}/hotthreads", "/_cluster/nodes/{node_id}/hot_threads", "/_nodes/hotthreads", "/_nodes/hot_threads", "/_nodes/{node_id}/hotthreads", "/_nodes/{node_id}/hot_threads");
+			throw InvalidDispatch("NodesHotThreads", p, new [] { GET }, "/_nodes/hot_threads", "/_nodes/{node_id}/hot_threads");
 		}
 		
 		internal TResponse NodesInfoDispatch<TResponse>(IRequest<NodesInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
@@ -2507,15 +2435,13 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.SearchGet<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RequestParameters);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.SearchGet<TResponse>(p.RouteValues.Index,p.RequestParameters);
 						return _lowLevel.SearchGet<TResponse>(p.RequestParameters);
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.Search<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.Search<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
 						return _lowLevel.Search<TResponse>(body,p.RequestParameters);
 			}
-			throw InvalidDispatch("Search", p, new [] { GET, POST }, "/_search", "/{index}/_search", "/{index}/{type}/_search");
+			throw InvalidDispatch("Search", p, new [] { GET, POST }, "/_search", "/{index}/_search");
 		}
 		
 		internal Task<TResponse> SearchDispatchAsync<TResponse>(IRequest<SearchRequestParameters> p,SerializableData<ISearchRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -2523,15 +2449,13 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.SearchGetAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RequestParameters,ct);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.SearchGetAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
 						return _lowLevel.SearchGetAsync<TResponse>(p.RequestParameters,ct);
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.SearchAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.SearchAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
 						return _lowLevel.SearchAsync<TResponse>(body,p.RequestParameters,ct);
 			}
-			throw InvalidDispatch("Search", p, new [] { GET, POST }, "/_search", "/{index}/_search", "/{index}/{type}/_search");
+			throw InvalidDispatch("Search", p, new [] { GET, POST }, "/_search", "/{index}/_search");
 		}
 		
 		internal TResponse SearchShardsDispatch<TResponse>(IRequest<SearchShardsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
@@ -2567,15 +2491,13 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.SearchTemplateGet<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RequestParameters);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.SearchTemplateGet<TResponse>(p.RouteValues.Index,p.RequestParameters);
 						return _lowLevel.SearchTemplateGet<TResponse>(p.RequestParameters);
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.SearchTemplate<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.SearchTemplate<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
 						return _lowLevel.SearchTemplate<TResponse>(body,p.RequestParameters);
 			}
-			throw InvalidDispatch("SearchTemplate", p, new [] { GET, POST }, "/_search/template", "/{index}/_search/template", "/{index}/{type}/_search/template");
+			throw InvalidDispatch("SearchTemplate", p, new [] { GET, POST }, "/_search/template", "/{index}/_search/template");
 		}
 		
 		internal Task<TResponse> SearchTemplateDispatchAsync<TResponse>(IRequest<SearchTemplateRequestParameters> p,SerializableData<ISearchTemplateRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -2583,15 +2505,13 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.SearchTemplateGetAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RequestParameters,ct);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.SearchTemplateGetAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
 						return _lowLevel.SearchTemplateGetAsync<TResponse>(p.RequestParameters,ct);
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.SearchTemplateAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.SearchTemplateAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
 						return _lowLevel.SearchTemplateAsync<TResponse>(body,p.RequestParameters,ct);
 			}
-			throw InvalidDispatch("SearchTemplate", p, new [] { GET, POST }, "/_search/template", "/{index}/_search/template", "/{index}/{type}/_search/template");
+			throw InvalidDispatch("SearchTemplate", p, new [] { GET, POST }, "/_search/template", "/{index}/_search/template");
 		}
 		
 		internal TResponse SnapshotCreateDispatch<TResponse>(IRequest<SnapshotRequestParameters> p,SerializableData<ISnapshotRequest> body) where TResponse : class, IElasticsearchResponse, new()
@@ -2875,19 +2795,15 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.TermvectorsGet<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,p.RequestParameters);
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.TermvectorsGet<TResponse>(p.RouteValues.Index,p.RouteValues.Id,p.RequestParameters);
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.TermvectorsGet<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RequestParameters);
 					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.TermvectorsGet<TResponse>(p.RouteValues.Index,p.RequestParameters);
 					break;
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.Termvectors<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,body,p.RequestParameters);
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.Termvectors<TResponse>(p.RouteValues.Index,p.RouteValues.Id,body,p.RequestParameters);
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.Termvectors<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
 					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.Termvectors<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("Termvectors", p, new [] { GET, POST }, "/{index}/_termvectors/{id}", "/{index}/_termvectors/", "/{index}/{type}/{id}/_termvectors", "/{index}/{type}/_termvectors");
+			throw InvalidDispatch("Termvectors", p, new [] { GET, POST }, "/{index}/_termvectors/{id}", "/{index}/_termvectors");
 		}
 		
 		internal Task<TResponse> TermvectorsDispatchAsync<TResponse,TDocument>(IRequest<TermVectorsRequestParameters> p,SerializableData<ITermVectorsRequest<TDocument>> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new() where TDocument : class
@@ -2895,19 +2811,15 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.TermvectorsGetAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,p.RequestParameters,ct);
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.TermvectorsGetAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Id,p.RequestParameters,ct);
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.TermvectorsGetAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RequestParameters,ct);
 					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.TermvectorsGetAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
 					break;
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.TermvectorsAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,body,p.RequestParameters,ct);
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.TermvectorsAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Id,body,p.RequestParameters,ct);
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.TermvectorsAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
 					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.TermvectorsAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("Termvectors", p, new [] { GET, POST }, "/{index}/_termvectors/{id}", "/{index}/_termvectors/", "/{index}/{type}/{id}/_termvectors", "/{index}/{type}/_termvectors");
+			throw InvalidDispatch("Termvectors", p, new [] { GET, POST }, "/{index}/_termvectors/{id}", "/{index}/_termvectors");
 		}
 		
 		internal TResponse UpdateDispatch<TResponse,TDocument,TPartialDocument>(IRequest<UpdateRequestParameters> p,SerializableData<IUpdateRequest<TDocument, TPartialDocument>> body) where TResponse : class, IElasticsearchResponse, new() where TDocument : class where TPartialDocument : class
@@ -2915,11 +2827,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.Update<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,body,p.RequestParameters);
 					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.Update<TResponse>(p.RouteValues.Index,p.RouteValues.Id,body,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("Update", p, new [] { POST }, "/{index}/_update/{id}", "/{index}/{type}/{id}/_update");
+			throw InvalidDispatch("Update", p, new [] { POST }, "/{index}/_update/{id}");
 		}
 		
 		internal Task<TResponse> UpdateDispatchAsync<TResponse,TDocument,TPartialDocument>(IRequest<UpdateRequestParameters> p,SerializableData<IUpdateRequest<TDocument, TPartialDocument>> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new() where TDocument : class where TPartialDocument : class
@@ -2927,11 +2838,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.UpdateAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,body,p.RequestParameters,ct);
 					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Id)) return _lowLevel.UpdateAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Id,body,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("Update", p, new [] { POST }, "/{index}/_update/{id}", "/{index}/{type}/{id}/_update");
+			throw InvalidDispatch("Update", p, new [] { POST }, "/{index}/_update/{id}");
 		}
 		
 		internal TResponse UpdateByQueryDispatch<TResponse>(IRequest<UpdateByQueryRequestParameters> p,SerializableData<IUpdateByQueryRequest> body) where TResponse : class, IElasticsearchResponse, new()
@@ -2939,11 +2849,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.UpdateByQuery<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
 					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.UpdateByQuery<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("UpdateByQuery", p, new [] { POST }, "/{index}/_update_by_query", "/{index}/{type}/_update_by_query");
+			throw InvalidDispatch("UpdateByQuery", p, new [] { POST }, "/{index}/_update_by_query");
 		}
 		
 		internal Task<TResponse> UpdateByQueryDispatchAsync<TResponse>(IRequest<UpdateByQueryRequestParameters> p,SerializableData<IUpdateByQueryRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -2951,43 +2860,2066 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.UpdateByQueryAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
 					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.UpdateByQueryAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("UpdateByQuery", p, new [] { POST }, "/{index}/_update_by_query", "/{index}/{type}/_update_by_query");
+			throw InvalidDispatch("UpdateByQuery", p, new [] { POST }, "/{index}/_update_by_query");
 		}
 		
-		internal TResponse XpackGraphExploreDispatch<TResponse>(IRequest<GraphExploreRequestParameters> p,SerializableData<IGraphExploreRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse CcrDeleteAutoFollowPatternDispatch<TResponse>(IRequest<DeleteAutoFollowPatternRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.CcrDeleteAutoFollowPattern<TResponse>(p.RouteValues.Name,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("CcrDeleteAutoFollowPattern", p, new [] { DELETE }, "/_ccr/auto_follow/{name}");
+		}
+		
+		internal Task<TResponse> CcrDeleteAutoFollowPatternDispatchAsync<TResponse>(IRequest<DeleteAutoFollowPatternRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.CcrDeleteAutoFollowPatternAsync<TResponse>(p.RouteValues.Name,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("CcrDeleteAutoFollowPattern", p, new [] { DELETE }, "/_ccr/auto_follow/{name}");
+		}
+		
+		internal TResponse CcrFollowDispatch<TResponse>(IRequest<CreateFollowIndexRequestParameters> p,SerializableData<ICreateFollowIndexRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.CcrFollow<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("CcrFollow", p, new [] { PUT }, "/{index}/_ccr/follow");
+		}
+		
+		internal Task<TResponse> CcrFollowDispatchAsync<TResponse>(IRequest<CreateFollowIndexRequestParameters> p,SerializableData<ICreateFollowIndexRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.CcrFollowAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("CcrFollow", p, new [] { PUT }, "/{index}/_ccr/follow");
+		}
+		
+		internal TResponse CcrFollowStatsDispatch<TResponse>(IRequest<FollowIndexStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.XpackGraphExploreGet<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackGraphExploreGet<TResponse>(p.RouteValues.Index,p.RequestParameters);
-					break;
-				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.XpackGraphExplore<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackGraphExplore<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.CcrFollowStats<TResponse>(p.RouteValues.Index,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("XpackGraphExplore", p, new [] { GET, POST }, "/{index}/_graph/explore", "/{index}/{type}/_graph/explore");
+			throw InvalidDispatch("CcrFollowStats", p, new [] { GET }, "/{index}/_ccr/stats");
 		}
 		
-		internal Task<TResponse> XpackGraphExploreDispatchAsync<TResponse>(IRequest<GraphExploreRequestParameters> p,SerializableData<IGraphExploreRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> CcrFollowStatsDispatchAsync<TResponse>(IRequest<FollowIndexStatsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.XpackGraphExploreGetAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RequestParameters,ct);
-					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackGraphExploreGetAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
-					break;
-				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.XpackGraphExploreAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
-					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackGraphExploreAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.CcrFollowStatsAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("XpackGraphExplore", p, new [] { GET, POST }, "/{index}/_graph/explore", "/{index}/{type}/_graph/explore");
+			throw InvalidDispatch("CcrFollowStats", p, new [] { GET }, "/{index}/_ccr/stats");
+		}
+		
+		internal TResponse CcrGetAutoFollowPatternDispatch<TResponse>(IRequest<GetAutoFollowPatternRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Name)) return _lowLevel.CcrGetAutoFollowPattern<TResponse>(p.RouteValues.Name,p.RequestParameters);
+						return _lowLevel.CcrGetAutoFollowPattern<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("CcrGetAutoFollowPattern", p, new [] { GET }, "/_ccr/auto_follow", "/_ccr/auto_follow/{name}");
+		}
+		
+		internal Task<TResponse> CcrGetAutoFollowPatternDispatchAsync<TResponse>(IRequest<GetAutoFollowPatternRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Name)) return _lowLevel.CcrGetAutoFollowPatternAsync<TResponse>(p.RouteValues.Name,p.RequestParameters,ct);
+						return _lowLevel.CcrGetAutoFollowPatternAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("CcrGetAutoFollowPattern", p, new [] { GET }, "/_ccr/auto_follow", "/_ccr/auto_follow/{name}");
+		}
+		
+		internal TResponse CcrPauseFollowDispatch<TResponse>(IRequest<PauseFollowIndexRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.CcrPauseFollow<TResponse>(p.RouteValues.Index,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("CcrPauseFollow", p, new [] { POST }, "/{index}/_ccr/pause_follow");
+		}
+		
+		internal Task<TResponse> CcrPauseFollowDispatchAsync<TResponse>(IRequest<PauseFollowIndexRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.CcrPauseFollowAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("CcrPauseFollow", p, new [] { POST }, "/{index}/_ccr/pause_follow");
+		}
+		
+		internal TResponse CcrPutAutoFollowPatternDispatch<TResponse>(IRequest<CreateAutoFollowPatternRequestParameters> p,SerializableData<ICreateAutoFollowPatternRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.CcrPutAutoFollowPattern<TResponse>(p.RouteValues.Name,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("CcrPutAutoFollowPattern", p, new [] { PUT }, "/_ccr/auto_follow/{name}");
+		}
+		
+		internal Task<TResponse> CcrPutAutoFollowPatternDispatchAsync<TResponse>(IRequest<CreateAutoFollowPatternRequestParameters> p,SerializableData<ICreateAutoFollowPatternRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.CcrPutAutoFollowPatternAsync<TResponse>(p.RouteValues.Name,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("CcrPutAutoFollowPattern", p, new [] { PUT }, "/_ccr/auto_follow/{name}");
+		}
+		
+		internal TResponse CcrResumeFollowDispatch<TResponse>(IRequest<ResumeFollowIndexRequestParameters> p,SerializableData<IResumeFollowIndexRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.CcrResumeFollow<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("CcrResumeFollow", p, new [] { POST }, "/{index}/_ccr/resume_follow");
+		}
+		
+		internal Task<TResponse> CcrResumeFollowDispatchAsync<TResponse>(IRequest<ResumeFollowIndexRequestParameters> p,SerializableData<IResumeFollowIndexRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.CcrResumeFollowAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("CcrResumeFollow", p, new [] { POST }, "/{index}/_ccr/resume_follow");
+		}
+		
+		internal TResponse CcrStatsDispatch<TResponse>(IRequest<CcrStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.CcrStats<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("CcrStats", p, new [] { GET }, "/_ccr/stats");
+		}
+		
+		internal Task<TResponse> CcrStatsDispatchAsync<TResponse>(IRequest<CcrStatsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.CcrStatsAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("CcrStats", p, new [] { GET }, "/_ccr/stats");
+		}
+		
+		internal TResponse CcrUnfollowDispatch<TResponse>(IRequest<UnfollowIndexRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.CcrUnfollow<TResponse>(p.RouteValues.Index,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("CcrUnfollow", p, new [] { POST }, "/{index}/_ccr/unfollow");
+		}
+		
+		internal Task<TResponse> CcrUnfollowDispatchAsync<TResponse>(IRequest<UnfollowIndexRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.CcrUnfollowAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("CcrUnfollow", p, new [] { POST }, "/{index}/_ccr/unfollow");
+		}
+		
+		internal TResponse GraphExploreDispatch<TResponse>(IRequest<GraphExploreRequestParameters> p,SerializableData<IGraphExploreRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.GraphExploreGet<TResponse>(p.RouteValues.Index,p.RequestParameters);
+					break;
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.GraphExplore<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("GraphExplore", p, new [] { GET, POST }, "/{index}/_graph/explore");
+		}
+		
+		internal Task<TResponse> GraphExploreDispatchAsync<TResponse>(IRequest<GraphExploreRequestParameters> p,SerializableData<IGraphExploreRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.GraphExploreGetAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+					break;
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.GraphExploreAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("GraphExplore", p, new [] { GET, POST }, "/{index}/_graph/explore");
+		}
+		
+		internal TResponse LicenseDeleteDispatch<TResponse>(IRequest<DeleteLicenseRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+						return _lowLevel.LicenseDelete<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("LicenseDelete", p, new [] { DELETE }, "/_license");
+		}
+		
+		internal Task<TResponse> LicenseDeleteDispatchAsync<TResponse>(IRequest<DeleteLicenseRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+						return _lowLevel.LicenseDeleteAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("LicenseDelete", p, new [] { DELETE }, "/_license");
+		}
+		
+		internal TResponse LicenseGetDispatch<TResponse>(IRequest<GetLicenseRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.LicenseGet<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("LicenseGet", p, new [] { GET }, "/_license");
+		}
+		
+		internal Task<TResponse> LicenseGetDispatchAsync<TResponse>(IRequest<GetLicenseRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.LicenseGetAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("LicenseGet", p, new [] { GET }, "/_license");
+		}
+		
+		internal TResponse LicenseGetBasicStatusDispatch<TResponse>(IRequest<GetBasicLicenseStatusRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.LicenseGetBasicStatus<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("LicenseGetBasicStatus", p, new [] { GET }, "/_license/basic_status");
+		}
+		
+		internal Task<TResponse> LicenseGetBasicStatusDispatchAsync<TResponse>(IRequest<GetBasicLicenseStatusRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.LicenseGetBasicStatusAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("LicenseGetBasicStatus", p, new [] { GET }, "/_license/basic_status");
+		}
+		
+		internal TResponse LicenseGetTrialStatusDispatch<TResponse>(IRequest<GetTrialLicenseStatusRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.LicenseGetTrialStatus<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("LicenseGetTrialStatus", p, new [] { GET }, "/_license/trial_status");
+		}
+		
+		internal Task<TResponse> LicenseGetTrialStatusDispatchAsync<TResponse>(IRequest<GetTrialLicenseStatusRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.LicenseGetTrialStatusAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("LicenseGetTrialStatus", p, new [] { GET }, "/_license/trial_status");
+		}
+		
+		internal TResponse LicensePostDispatch<TResponse>(IRequest<PostLicenseRequestParameters> p,SerializableData<IPostLicenseRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+						return _lowLevel.LicensePost<TResponse>(body,p.RequestParameters);
+			}
+			throw InvalidDispatch("LicensePost", p, new [] { PUT }, "/_license");
+		}
+		
+		internal Task<TResponse> LicensePostDispatchAsync<TResponse>(IRequest<PostLicenseRequestParameters> p,SerializableData<IPostLicenseRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+						return _lowLevel.LicensePostAsync<TResponse>(body,p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("LicensePost", p, new [] { PUT }, "/_license");
+		}
+		
+		internal TResponse LicensePostStartBasicDispatch<TResponse>(IRequest<StartBasicLicenseRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.LicensePostStartBasic<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("LicensePostStartBasic", p, new [] { POST }, "/_license/start_basic");
+		}
+		
+		internal Task<TResponse> LicensePostStartBasicDispatchAsync<TResponse>(IRequest<StartBasicLicenseRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.LicensePostStartBasicAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("LicensePostStartBasic", p, new [] { POST }, "/_license/start_basic");
+		}
+		
+		internal TResponse LicensePostStartTrialDispatch<TResponse>(IRequest<StartTrialLicenseRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.LicensePostStartTrial<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("LicensePostStartTrial", p, new [] { POST }, "/_license/start_trial");
+		}
+		
+		internal Task<TResponse> LicensePostStartTrialDispatchAsync<TResponse>(IRequest<StartTrialLicenseRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.LicensePostStartTrialAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("LicensePostStartTrial", p, new [] { POST }, "/_license/start_trial");
+		}
+		
+		internal TResponse MigrationDeprecationsDispatch<TResponse>(IRequest<DeprecationInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.MigrationDeprecations<TResponse>(p.RouteValues.Index,p.RequestParameters);
+						return _lowLevel.MigrationDeprecations<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("MigrationDeprecations", p, new [] { GET }, "/_migration/deprecations", "/{index}/_migration/deprecations");
+		}
+		
+		internal Task<TResponse> MigrationDeprecationsDispatchAsync<TResponse>(IRequest<DeprecationInfoRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.MigrationDeprecationsAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+						return _lowLevel.MigrationDeprecationsAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("MigrationDeprecations", p, new [] { GET }, "/_migration/deprecations", "/{index}/_migration/deprecations");
+		}
+		
+		internal TResponse MigrationGetAssistanceDispatch<TResponse>(IRequest<MigrationAssistanceRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.MigrationGetAssistance<TResponse>(p.RouteValues.Index,p.RequestParameters);
+						return _lowLevel.MigrationGetAssistance<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("MigrationGetAssistance", p, new [] { GET }, "/_migration/assistance", "/_migration/assistance/{index}");
+		}
+		
+		internal Task<TResponse> MigrationGetAssistanceDispatchAsync<TResponse>(IRequest<MigrationAssistanceRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.MigrationGetAssistanceAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+						return _lowLevel.MigrationGetAssistanceAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("MigrationGetAssistance", p, new [] { GET }, "/_migration/assistance", "/_migration/assistance/{index}");
+		}
+		
+		internal TResponse MigrationUpgradeDispatch<TResponse>(IRequest<MigrationUpgradeRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.MigrationUpgrade<TResponse>(p.RouteValues.Index,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MigrationUpgrade", p, new [] { POST }, "/_migration/upgrade/{index}");
+		}
+		
+		internal Task<TResponse> MigrationUpgradeDispatchAsync<TResponse>(IRequest<MigrationUpgradeRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.MigrationUpgradeAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MigrationUpgrade", p, new [] { POST }, "/_migration/upgrade/{index}");
+		}
+		
+		internal TResponse MlCloseJobDispatch<TResponse>(IRequest<CloseJobRequestParameters> p,SerializableData<ICloseJobRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlCloseJob<TResponse>(p.RouteValues.JobId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlCloseJob", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_close");
+		}
+		
+		internal Task<TResponse> MlCloseJobDispatchAsync<TResponse>(IRequest<CloseJobRequestParameters> p,SerializableData<ICloseJobRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlCloseJobAsync<TResponse>(p.RouteValues.JobId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlCloseJob", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_close");
+		}
+		
+		internal TResponse MlDeleteDatafeedDispatch<TResponse>(IRequest<DeleteDatafeedRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.MlDeleteDatafeed<TResponse>(p.RouteValues.DatafeedId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlDeleteDatafeed", p, new [] { DELETE }, "/_ml/datafeeds/{datafeed_id}");
+		}
+		
+		internal Task<TResponse> MlDeleteDatafeedDispatchAsync<TResponse>(IRequest<DeleteDatafeedRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.MlDeleteDatafeedAsync<TResponse>(p.RouteValues.DatafeedId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlDeleteDatafeed", p, new [] { DELETE }, "/_ml/datafeeds/{datafeed_id}");
+		}
+		
+		internal TResponse MlDeleteExpiredDataDispatch<TResponse>(IRequest<DeleteExpiredDataRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+						return _lowLevel.MlDeleteExpiredData<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("MlDeleteExpiredData", p, new [] { DELETE }, "/_ml/_delete_expired_data");
+		}
+		
+		internal Task<TResponse> MlDeleteExpiredDataDispatchAsync<TResponse>(IRequest<DeleteExpiredDataRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+						return _lowLevel.MlDeleteExpiredDataAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("MlDeleteExpiredData", p, new [] { DELETE }, "/_ml/_delete_expired_data");
+		}
+		
+		internal TResponse MlDeleteJobDispatch<TResponse>(IRequest<DeleteJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlDeleteJob<TResponse>(p.RouteValues.JobId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlDeleteJob", p, new [] { DELETE }, "/_ml/anomaly_detectors/{job_id}");
+		}
+		
+		internal Task<TResponse> MlDeleteJobDispatchAsync<TResponse>(IRequest<DeleteJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlDeleteJobAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlDeleteJob", p, new [] { DELETE }, "/_ml/anomaly_detectors/{job_id}");
+		}
+		
+		internal TResponse MlDeleteModelSnapshotDispatch<TResponse>(IRequest<DeleteModelSnapshotRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.MlDeleteModelSnapshot<TResponse>(p.RouteValues.JobId,p.RouteValues.SnapshotId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlDeleteModelSnapshot", p, new [] { DELETE }, "/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}");
+		}
+		
+		internal Task<TResponse> MlDeleteModelSnapshotDispatchAsync<TResponse>(IRequest<DeleteModelSnapshotRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.MlDeleteModelSnapshotAsync<TResponse>(p.RouteValues.JobId,p.RouteValues.SnapshotId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlDeleteModelSnapshot", p, new [] { DELETE }, "/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}");
+		}
+		
+		internal TResponse MlFlushJobDispatch<TResponse>(IRequest<FlushJobRequestParameters> p,SerializableData<IFlushJobRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlFlushJob<TResponse>(p.RouteValues.JobId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlFlushJob", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_flush");
+		}
+		
+		internal Task<TResponse> MlFlushJobDispatchAsync<TResponse>(IRequest<FlushJobRequestParameters> p,SerializableData<IFlushJobRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlFlushJobAsync<TResponse>(p.RouteValues.JobId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlFlushJob", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_flush");
+		}
+		
+		internal TResponse MlForecastDispatch<TResponse>(IRequest<ForecastJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlForecast<TResponse>(p.RouteValues.JobId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlForecast", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_forecast");
+		}
+		
+		internal Task<TResponse> MlForecastDispatchAsync<TResponse>(IRequest<ForecastJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlForecastAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlForecast", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_forecast");
+		}
+		
+		internal TResponse MlGetBucketsDispatch<TResponse>(IRequest<GetBucketsRequestParameters> p,SerializableData<IGetBucketsRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.JobId, p.RouteValues.Timestamp)) return _lowLevel.MlGetBuckets<TResponse>(p.RouteValues.JobId,p.RouteValues.Timestamp,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetBuckets<TResponse>(p.RouteValues.JobId,p.RequestParameters);
+					break;
+				case POST:
+					if (AllSet(p.RouteValues.JobId, p.RouteValues.Timestamp)) return _lowLevel.MlGetBuckets<TResponse>(p.RouteValues.JobId,p.RouteValues.Timestamp,body,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetBuckets<TResponse>(p.RouteValues.JobId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlGetBuckets", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/results/buckets/{timestamp}", "/_ml/anomaly_detectors/{job_id}/results/buckets");
+		}
+		
+		internal Task<TResponse> MlGetBucketsDispatchAsync<TResponse>(IRequest<GetBucketsRequestParameters> p,SerializableData<IGetBucketsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.JobId, p.RouteValues.Timestamp)) return _lowLevel.MlGetBucketsAsync<TResponse>(p.RouteValues.JobId,p.RouteValues.Timestamp,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetBucketsAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
+					break;
+				case POST:
+					if (AllSet(p.RouteValues.JobId, p.RouteValues.Timestamp)) return _lowLevel.MlGetBucketsAsync<TResponse>(p.RouteValues.JobId,p.RouteValues.Timestamp,body,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetBucketsAsync<TResponse>(p.RouteValues.JobId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlGetBuckets", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/results/buckets/{timestamp}", "/_ml/anomaly_detectors/{job_id}/results/buckets");
+		}
+		
+		internal TResponse MlGetCategoriesDispatch<TResponse>(IRequest<GetCategoriesRequestParameters> p,SerializableData<IGetCategoriesRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.JobId, p.RouteValues.CategoryId)) return _lowLevel.MlGetCategories<TResponse>(p.RouteValues.JobId,long.Parse(p.RouteValues.CategoryId),p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetCategories<TResponse>(p.RouteValues.JobId,p.RequestParameters);
+					break;
+				case POST:
+					if (AllSet(p.RouteValues.JobId, p.RouteValues.CategoryId)) return _lowLevel.MlGetCategories<TResponse>(p.RouteValues.JobId,long.Parse(p.RouteValues.CategoryId),body,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetCategories<TResponse>(p.RouteValues.JobId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlGetCategories", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/results/categories/{category_id}", "/_ml/anomaly_detectors/{job_id}/results/categories/");
+		}
+		
+		internal Task<TResponse> MlGetCategoriesDispatchAsync<TResponse>(IRequest<GetCategoriesRequestParameters> p,SerializableData<IGetCategoriesRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.JobId, p.RouteValues.CategoryId)) return _lowLevel.MlGetCategoriesAsync<TResponse>(p.RouteValues.JobId,long.Parse(p.RouteValues.CategoryId),p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetCategoriesAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
+					break;
+				case POST:
+					if (AllSet(p.RouteValues.JobId, p.RouteValues.CategoryId)) return _lowLevel.MlGetCategoriesAsync<TResponse>(p.RouteValues.JobId,long.Parse(p.RouteValues.CategoryId),body,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetCategoriesAsync<TResponse>(p.RouteValues.JobId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlGetCategories", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/results/categories/{category_id}", "/_ml/anomaly_detectors/{job_id}/results/categories/");
+		}
+		
+		internal TResponse MlGetDatafeedsDispatch<TResponse>(IRequest<GetDatafeedsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.DatafeedId)) return _lowLevel.MlGetDatafeeds<TResponse>(p.RouteValues.DatafeedId,p.RequestParameters);
+						return _lowLevel.MlGetDatafeeds<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("MlGetDatafeeds", p, new [] { GET }, "/_ml/datafeeds/{datafeed_id}", "/_ml/datafeeds");
+		}
+		
+		internal Task<TResponse> MlGetDatafeedsDispatchAsync<TResponse>(IRequest<GetDatafeedsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.DatafeedId)) return _lowLevel.MlGetDatafeedsAsync<TResponse>(p.RouteValues.DatafeedId,p.RequestParameters,ct);
+						return _lowLevel.MlGetDatafeedsAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("MlGetDatafeeds", p, new [] { GET }, "/_ml/datafeeds/{datafeed_id}", "/_ml/datafeeds");
+		}
+		
+		internal TResponse MlGetDatafeedStatsDispatch<TResponse>(IRequest<GetDatafeedStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.DatafeedId)) return _lowLevel.MlGetDatafeedStats<TResponse>(p.RouteValues.DatafeedId,p.RequestParameters);
+						return _lowLevel.MlGetDatafeedStats<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("MlGetDatafeedStats", p, new [] { GET }, "/_ml/datafeeds/{datafeed_id}/_stats", "/_ml/datafeeds/_stats");
+		}
+		
+		internal Task<TResponse> MlGetDatafeedStatsDispatchAsync<TResponse>(IRequest<GetDatafeedStatsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.DatafeedId)) return _lowLevel.MlGetDatafeedStatsAsync<TResponse>(p.RouteValues.DatafeedId,p.RequestParameters,ct);
+						return _lowLevel.MlGetDatafeedStatsAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("MlGetDatafeedStats", p, new [] { GET }, "/_ml/datafeeds/{datafeed_id}/_stats", "/_ml/datafeeds/_stats");
+		}
+		
+		internal TResponse MlGetInfluencersDispatch<TResponse>(IRequest<GetInfluencersRequestParameters> p,SerializableData<IGetInfluencersRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetInfluencers<TResponse>(p.RouteValues.JobId,p.RequestParameters);
+					break;
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetInfluencers<TResponse>(p.RouteValues.JobId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlGetInfluencers", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/results/influencers");
+		}
+		
+		internal Task<TResponse> MlGetInfluencersDispatchAsync<TResponse>(IRequest<GetInfluencersRequestParameters> p,SerializableData<IGetInfluencersRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetInfluencersAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
+					break;
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetInfluencersAsync<TResponse>(p.RouteValues.JobId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlGetInfluencers", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/results/influencers");
+		}
+		
+		internal TResponse MlGetJobsDispatch<TResponse>(IRequest<GetJobsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.JobId)) return _lowLevel.MlGetJobs<TResponse>(p.RouteValues.JobId,p.RequestParameters);
+						return _lowLevel.MlGetJobs<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("MlGetJobs", p, new [] { GET }, "/_ml/anomaly_detectors/{job_id}", "/_ml/anomaly_detectors");
+		}
+		
+		internal Task<TResponse> MlGetJobsDispatchAsync<TResponse>(IRequest<GetJobsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.JobId)) return _lowLevel.MlGetJobsAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
+						return _lowLevel.MlGetJobsAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("MlGetJobs", p, new [] { GET }, "/_ml/anomaly_detectors/{job_id}", "/_ml/anomaly_detectors");
+		}
+		
+		internal TResponse MlGetJobStatsDispatch<TResponse>(IRequest<GetJobStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.JobId)) return _lowLevel.MlGetJobStats<TResponse>(p.RouteValues.JobId,p.RequestParameters);
+						return _lowLevel.MlGetJobStats<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("MlGetJobStats", p, new [] { GET }, "/_ml/anomaly_detectors/_stats", "/_ml/anomaly_detectors/{job_id}/_stats");
+		}
+		
+		internal Task<TResponse> MlGetJobStatsDispatchAsync<TResponse>(IRequest<GetJobStatsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.JobId)) return _lowLevel.MlGetJobStatsAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
+						return _lowLevel.MlGetJobStatsAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("MlGetJobStats", p, new [] { GET }, "/_ml/anomaly_detectors/_stats", "/_ml/anomaly_detectors/{job_id}/_stats");
+		}
+		
+		internal TResponse MlGetModelSnapshotsDispatch<TResponse>(IRequest<GetModelSnapshotsRequestParameters> p,SerializableData<IGetModelSnapshotsRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.MlGetModelSnapshots<TResponse>(p.RouteValues.JobId,p.RouteValues.SnapshotId,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetModelSnapshots<TResponse>(p.RouteValues.JobId,p.RequestParameters);
+					break;
+				case POST:
+					if (AllSet(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.MlGetModelSnapshots<TResponse>(p.RouteValues.JobId,p.RouteValues.SnapshotId,body,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetModelSnapshots<TResponse>(p.RouteValues.JobId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlGetModelSnapshots", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}", "/_ml/anomaly_detectors/{job_id}/model_snapshots");
+		}
+		
+		internal Task<TResponse> MlGetModelSnapshotsDispatchAsync<TResponse>(IRequest<GetModelSnapshotsRequestParameters> p,SerializableData<IGetModelSnapshotsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.MlGetModelSnapshotsAsync<TResponse>(p.RouteValues.JobId,p.RouteValues.SnapshotId,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetModelSnapshotsAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
+					break;
+				case POST:
+					if (AllSet(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.MlGetModelSnapshotsAsync<TResponse>(p.RouteValues.JobId,p.RouteValues.SnapshotId,body,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetModelSnapshotsAsync<TResponse>(p.RouteValues.JobId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlGetModelSnapshots", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}", "/_ml/anomaly_detectors/{job_id}/model_snapshots");
+		}
+		
+		internal TResponse MlGetOverallBucketsDispatch<TResponse>(IRequest<GetOverallBucketsRequestParameters> p,SerializableData<IGetOverallBucketsRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetOverallBuckets<TResponse>(p.RouteValues.JobId,p.RequestParameters);
+					break;
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetOverallBuckets<TResponse>(p.RouteValues.JobId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlGetOverallBuckets", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/results/overall_buckets");
+		}
+		
+		internal Task<TResponse> MlGetOverallBucketsDispatchAsync<TResponse>(IRequest<GetOverallBucketsRequestParameters> p,SerializableData<IGetOverallBucketsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetOverallBucketsAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
+					break;
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetOverallBucketsAsync<TResponse>(p.RouteValues.JobId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlGetOverallBuckets", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/results/overall_buckets");
+		}
+		
+		internal TResponse MlGetRecordsDispatch<TResponse>(IRequest<GetAnomalyRecordsRequestParameters> p,SerializableData<IGetAnomalyRecordsRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetRecords<TResponse>(p.RouteValues.JobId,p.RequestParameters);
+					break;
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetRecords<TResponse>(p.RouteValues.JobId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlGetRecords", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/results/records");
+		}
+		
+		internal Task<TResponse> MlGetRecordsDispatchAsync<TResponse>(IRequest<GetAnomalyRecordsRequestParameters> p,SerializableData<IGetAnomalyRecordsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetRecordsAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
+					break;
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetRecordsAsync<TResponse>(p.RouteValues.JobId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlGetRecords", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/results/records");
+		}
+		
+		internal TResponse MlOpenJobDispatch<TResponse>(IRequest<OpenJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlOpenJob<TResponse>(p.RouteValues.JobId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlOpenJob", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_open");
+		}
+		
+		internal Task<TResponse> MlOpenJobDispatchAsync<TResponse>(IRequest<OpenJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlOpenJobAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlOpenJob", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_open");
+		}
+		
+		internal TResponse MlPostDataDispatch<TResponse>(IRequest<PostJobDataRequestParameters> p,SerializableData<IPostJobDataRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlPostData<TResponse>(p.RouteValues.JobId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlPostData", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_data");
+		}
+		
+		internal Task<TResponse> MlPostDataDispatchAsync<TResponse>(IRequest<PostJobDataRequestParameters> p,SerializableData<IPostJobDataRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlPostDataAsync<TResponse>(p.RouteValues.JobId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlPostData", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_data");
+		}
+		
+		internal TResponse MlPreviewDatafeedDispatch<TResponse>(IRequest<PreviewDatafeedRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.MlPreviewDatafeed<TResponse>(p.RouteValues.DatafeedId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlPreviewDatafeed", p, new [] { GET }, "/_ml/datafeeds/{datafeed_id}/_preview");
+		}
+		
+		internal Task<TResponse> MlPreviewDatafeedDispatchAsync<TResponse>(IRequest<PreviewDatafeedRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.MlPreviewDatafeedAsync<TResponse>(p.RouteValues.DatafeedId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlPreviewDatafeed", p, new [] { GET }, "/_ml/datafeeds/{datafeed_id}/_preview");
+		}
+		
+		internal TResponse MlPutDatafeedDispatch<TResponse>(IRequest<PutDatafeedRequestParameters> p,SerializableData<IPutDatafeedRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.MlPutDatafeed<TResponse>(p.RouteValues.DatafeedId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlPutDatafeed", p, new [] { PUT }, "/_ml/datafeeds/{datafeed_id}");
+		}
+		
+		internal Task<TResponse> MlPutDatafeedDispatchAsync<TResponse>(IRequest<PutDatafeedRequestParameters> p,SerializableData<IPutDatafeedRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.MlPutDatafeedAsync<TResponse>(p.RouteValues.DatafeedId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlPutDatafeed", p, new [] { PUT }, "/_ml/datafeeds/{datafeed_id}");
+		}
+		
+		internal TResponse MlPutJobDispatch<TResponse>(IRequest<PutJobRequestParameters> p,SerializableData<IPutJobRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlPutJob<TResponse>(p.RouteValues.JobId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlPutJob", p, new [] { PUT }, "/_ml/anomaly_detectors/{job_id}");
+		}
+		
+		internal Task<TResponse> MlPutJobDispatchAsync<TResponse>(IRequest<PutJobRequestParameters> p,SerializableData<IPutJobRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlPutJobAsync<TResponse>(p.RouteValues.JobId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlPutJob", p, new [] { PUT }, "/_ml/anomaly_detectors/{job_id}");
+		}
+		
+		internal TResponse MlRevertModelSnapshotDispatch<TResponse>(IRequest<RevertModelSnapshotRequestParameters> p,SerializableData<IRevertModelSnapshotRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.MlRevertModelSnapshot<TResponse>(p.RouteValues.JobId,p.RouteValues.SnapshotId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlRevertModelSnapshot", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert");
+		}
+		
+		internal Task<TResponse> MlRevertModelSnapshotDispatchAsync<TResponse>(IRequest<RevertModelSnapshotRequestParameters> p,SerializableData<IRevertModelSnapshotRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.MlRevertModelSnapshotAsync<TResponse>(p.RouteValues.JobId,p.RouteValues.SnapshotId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlRevertModelSnapshot", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert");
+		}
+		
+		internal TResponse MlStartDatafeedDispatch<TResponse>(IRequest<StartDatafeedRequestParameters> p,SerializableData<IStartDatafeedRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.MlStartDatafeed<TResponse>(p.RouteValues.DatafeedId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlStartDatafeed", p, new [] { POST }, "/_ml/datafeeds/{datafeed_id}/_start");
+		}
+		
+		internal Task<TResponse> MlStartDatafeedDispatchAsync<TResponse>(IRequest<StartDatafeedRequestParameters> p,SerializableData<IStartDatafeedRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.MlStartDatafeedAsync<TResponse>(p.RouteValues.DatafeedId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlStartDatafeed", p, new [] { POST }, "/_ml/datafeeds/{datafeed_id}/_start");
+		}
+		
+		internal TResponse MlStopDatafeedDispatch<TResponse>(IRequest<StopDatafeedRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.MlStopDatafeed<TResponse>(p.RouteValues.DatafeedId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlStopDatafeed", p, new [] { POST }, "/_ml/datafeeds/{datafeed_id}/_stop");
+		}
+		
+		internal Task<TResponse> MlStopDatafeedDispatchAsync<TResponse>(IRequest<StopDatafeedRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.MlStopDatafeedAsync<TResponse>(p.RouteValues.DatafeedId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlStopDatafeed", p, new [] { POST }, "/_ml/datafeeds/{datafeed_id}/_stop");
+		}
+		
+		internal TResponse MlUpdateDatafeedDispatch<TResponse>(IRequest<UpdateDatafeedRequestParameters> p,SerializableData<IUpdateDatafeedRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.MlUpdateDatafeed<TResponse>(p.RouteValues.DatafeedId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlUpdateDatafeed", p, new [] { POST }, "/_ml/datafeeds/{datafeed_id}/_update");
+		}
+		
+		internal Task<TResponse> MlUpdateDatafeedDispatchAsync<TResponse>(IRequest<UpdateDatafeedRequestParameters> p,SerializableData<IUpdateDatafeedRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.MlUpdateDatafeedAsync<TResponse>(p.RouteValues.DatafeedId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlUpdateDatafeed", p, new [] { POST }, "/_ml/datafeeds/{datafeed_id}/_update");
+		}
+		
+		internal TResponse MlUpdateJobDispatch<TResponse>(IRequest<UpdateJobRequestParameters> p,SerializableData<IUpdateJobRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlUpdateJob<TResponse>(p.RouteValues.JobId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlUpdateJob", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_update");
+		}
+		
+		internal Task<TResponse> MlUpdateJobDispatchAsync<TResponse>(IRequest<UpdateJobRequestParameters> p,SerializableData<IUpdateJobRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlUpdateJobAsync<TResponse>(p.RouteValues.JobId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlUpdateJob", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_update");
+		}
+		
+		internal TResponse MlUpdateModelSnapshotDispatch<TResponse>(IRequest<UpdateModelSnapshotRequestParameters> p,SerializableData<IUpdateModelSnapshotRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.MlUpdateModelSnapshot<TResponse>(p.RouteValues.JobId,p.RouteValues.SnapshotId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlUpdateModelSnapshot", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update");
+		}
+		
+		internal Task<TResponse> MlUpdateModelSnapshotDispatchAsync<TResponse>(IRequest<UpdateModelSnapshotRequestParameters> p,SerializableData<IUpdateModelSnapshotRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.MlUpdateModelSnapshotAsync<TResponse>(p.RouteValues.JobId,p.RouteValues.SnapshotId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlUpdateModelSnapshot", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update");
+		}
+		
+		internal TResponse MlValidateDispatch<TResponse>(IRequest<ValidateJobRequestParameters> p,SerializableData<IValidateJobRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.MlValidate<TResponse>(body,p.RequestParameters);
+			}
+			throw InvalidDispatch("MlValidate", p, new [] { POST }, "/_ml/anomaly_detectors/_validate");
+		}
+		
+		internal Task<TResponse> MlValidateDispatchAsync<TResponse>(IRequest<ValidateJobRequestParameters> p,SerializableData<IValidateJobRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.MlValidateAsync<TResponse>(body,p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("MlValidate", p, new [] { POST }, "/_ml/anomaly_detectors/_validate");
+		}
+		
+		internal TResponse MlValidateDetectorDispatch<TResponse>(IRequest<ValidateDetectorRequestParameters> p,SerializableData<IValidateDetectorRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.MlValidateDetector<TResponse>(body,p.RequestParameters);
+			}
+			throw InvalidDispatch("MlValidateDetector", p, new [] { POST }, "/_ml/anomaly_detectors/_validate/detector");
+		}
+		
+		internal Task<TResponse> MlValidateDetectorDispatchAsync<TResponse>(IRequest<ValidateDetectorRequestParameters> p,SerializableData<IValidateDetectorRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.MlValidateDetectorAsync<TResponse>(body,p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("MlValidateDetector", p, new [] { POST }, "/_ml/anomaly_detectors/_validate/detector");
+		}
+		
+		internal TResponse RollupDeleteJobDispatch<TResponse>(IRequest<DeleteRollupJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.RollupDeleteJob<TResponse>(p.RouteValues.Id,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("RollupDeleteJob", p, new [] { DELETE }, "/_rollup/job/{id}");
+		}
+		
+		internal Task<TResponse> RollupDeleteJobDispatchAsync<TResponse>(IRequest<DeleteRollupJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.RollupDeleteJobAsync<TResponse>(p.RouteValues.Id,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("RollupDeleteJob", p, new [] { DELETE }, "/_rollup/job/{id}");
+		}
+		
+		internal TResponse RollupGetJobsDispatch<TResponse>(IRequest<GetRollupJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Id)) return _lowLevel.RollupGetJobs<TResponse>(p.RouteValues.Id,p.RequestParameters);
+						return _lowLevel.RollupGetJobs<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("RollupGetJobs", p, new [] { GET }, "/_rollup/job/{id}", "/_rollup/job/");
+		}
+		
+		internal Task<TResponse> RollupGetJobsDispatchAsync<TResponse>(IRequest<GetRollupJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Id)) return _lowLevel.RollupGetJobsAsync<TResponse>(p.RouteValues.Id,p.RequestParameters,ct);
+						return _lowLevel.RollupGetJobsAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("RollupGetJobs", p, new [] { GET }, "/_rollup/job/{id}", "/_rollup/job/");
+		}
+		
+		internal TResponse RollupGetRollupCapsDispatch<TResponse>(IRequest<GetRollupCapabilitiesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Id)) return _lowLevel.RollupGetRollupCaps<TResponse>(p.RouteValues.Id,p.RequestParameters);
+						return _lowLevel.RollupGetRollupCaps<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("RollupGetRollupCaps", p, new [] { GET }, "/_rollup/data/{id}", "/_rollup/data/");
+		}
+		
+		internal Task<TResponse> RollupGetRollupCapsDispatchAsync<TResponse>(IRequest<GetRollupCapabilitiesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Id)) return _lowLevel.RollupGetRollupCapsAsync<TResponse>(p.RouteValues.Id,p.RequestParameters,ct);
+						return _lowLevel.RollupGetRollupCapsAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("RollupGetRollupCaps", p, new [] { GET }, "/_rollup/data/{id}", "/_rollup/data/");
+		}
+		
+		internal TResponse RollupGetRollupIndexCapsDispatch<TResponse>(IRequest<GetRollupIndexCapabilitiesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.RollupGetRollupIndexCaps<TResponse>(p.RouteValues.Index,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("RollupGetRollupIndexCaps", p, new [] { GET }, "/{index}/_rollup/data");
+		}
+		
+		internal Task<TResponse> RollupGetRollupIndexCapsDispatchAsync<TResponse>(IRequest<GetRollupIndexCapabilitiesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.RollupGetRollupIndexCapsAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("RollupGetRollupIndexCaps", p, new [] { GET }, "/{index}/_rollup/data");
+		}
+		
+		internal TResponse RollupPutJobDispatch<TResponse>(IRequest<CreateRollupJobRequestParameters> p,SerializableData<ICreateRollupJobRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.RollupPutJob<TResponse>(p.RouteValues.Id,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("RollupPutJob", p, new [] { PUT }, "/_rollup/job/{id}");
+		}
+		
+		internal Task<TResponse> RollupPutJobDispatchAsync<TResponse>(IRequest<CreateRollupJobRequestParameters> p,SerializableData<ICreateRollupJobRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.RollupPutJobAsync<TResponse>(p.RouteValues.Id,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("RollupPutJob", p, new [] { PUT }, "/_rollup/job/{id}");
+		}
+		
+		internal TResponse RollupRollupSearchDispatch<TResponse>(IRequest<RollupSearchRequestParameters> p,SerializableData<IRollupSearchRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.RollupRollupSearchGet<TResponse>(p.RouteValues.Index,p.RequestParameters);
+					break;
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.RollupRollupSearch<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("RollupRollupSearch", p, new [] { GET, POST }, "/{index}/_rollup_search");
+		}
+		
+		internal Task<TResponse> RollupRollupSearchDispatchAsync<TResponse>(IRequest<RollupSearchRequestParameters> p,SerializableData<IRollupSearchRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.RollupRollupSearchGetAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+					break;
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.RollupRollupSearchAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("RollupRollupSearch", p, new [] { GET, POST }, "/{index}/_rollup_search");
+		}
+		
+		internal TResponse RollupStartJobDispatch<TResponse>(IRequest<StartRollupJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.RollupStartJob<TResponse>(p.RouteValues.Id,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("RollupStartJob", p, new [] { POST }, "/_rollup/job/{id}/_start");
+		}
+		
+		internal Task<TResponse> RollupStartJobDispatchAsync<TResponse>(IRequest<StartRollupJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.RollupStartJobAsync<TResponse>(p.RouteValues.Id,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("RollupStartJob", p, new [] { POST }, "/_rollup/job/{id}/_start");
+		}
+		
+		internal TResponse RollupStopJobDispatch<TResponse>(IRequest<StopRollupJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.RollupStopJob<TResponse>(p.RouteValues.Id,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("RollupStopJob", p, new [] { POST }, "/_rollup/job/{id}/_stop");
+		}
+		
+		internal Task<TResponse> RollupStopJobDispatchAsync<TResponse>(IRequest<StopRollupJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.RollupStopJobAsync<TResponse>(p.RouteValues.Id,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("RollupStopJob", p, new [] { POST }, "/_rollup/job/{id}/_stop");
+		}
+		
+		internal TResponse SecurityAuthenticateDispatch<TResponse>(IRequest<AuthenticateRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.SecurityAuthenticate<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("SecurityAuthenticate", p, new [] { GET }, "/_security/_authenticate");
+		}
+		
+		internal Task<TResponse> SecurityAuthenticateDispatchAsync<TResponse>(IRequest<AuthenticateRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.SecurityAuthenticateAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("SecurityAuthenticate", p, new [] { GET }, "/_security/_authenticate");
+		}
+		
+		internal TResponse SecurityChangePasswordDispatch<TResponse>(IRequest<ChangePasswordRequestParameters> p,SerializableData<IChangePasswordRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSet(p.RouteValues.Username)) return _lowLevel.SecurityChangePassword<TResponse>(p.RouteValues.Username,body,p.RequestParameters);
+						return _lowLevel.SecurityChangePassword<TResponse>(body,p.RequestParameters);
+				case POST:
+					if (AllSet(p.RouteValues.Username)) return _lowLevel.SecurityChangePasswordPost<TResponse>(p.RouteValues.Username,body,p.RequestParameters);
+						return _lowLevel.SecurityChangePasswordPost<TResponse>(body,p.RequestParameters);
+			}
+			throw InvalidDispatch("SecurityChangePassword", p, new [] { PUT, POST }, "/_security/user/{username}/_password", "/_security/user/_password");
+		}
+		
+		internal Task<TResponse> SecurityChangePasswordDispatchAsync<TResponse>(IRequest<ChangePasswordRequestParameters> p,SerializableData<IChangePasswordRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSet(p.RouteValues.Username)) return _lowLevel.SecurityChangePasswordAsync<TResponse>(p.RouteValues.Username,body,p.RequestParameters,ct);
+						return _lowLevel.SecurityChangePasswordAsync<TResponse>(body,p.RequestParameters,ct);
+				case POST:
+					if (AllSet(p.RouteValues.Username)) return _lowLevel.SecurityChangePasswordPostAsync<TResponse>(p.RouteValues.Username,body,p.RequestParameters,ct);
+						return _lowLevel.SecurityChangePasswordPostAsync<TResponse>(body,p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("SecurityChangePassword", p, new [] { PUT, POST }, "/_security/user/{username}/_password", "/_security/user/_password");
+		}
+		
+		internal TResponse SecurityClearCachedRealmsDispatch<TResponse>(IRequest<ClearCachedRealmsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Realms)) return _lowLevel.SecurityClearCachedRealms<TResponse>(p.RouteValues.Realms,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("SecurityClearCachedRealms", p, new [] { POST }, "/_security/realm/{realms}/_clear_cache");
+		}
+		
+		internal Task<TResponse> SecurityClearCachedRealmsDispatchAsync<TResponse>(IRequest<ClearCachedRealmsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Realms)) return _lowLevel.SecurityClearCachedRealmsAsync<TResponse>(p.RouteValues.Realms,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("SecurityClearCachedRealms", p, new [] { POST }, "/_security/realm/{realms}/_clear_cache");
+		}
+		
+		internal TResponse SecurityClearCachedRolesDispatch<TResponse>(IRequest<ClearCachedRolesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityClearCachedRoles<TResponse>(p.RouteValues.Name,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("SecurityClearCachedRoles", p, new [] { POST }, "/_security/role/{name}/_clear_cache");
+		}
+		
+		internal Task<TResponse> SecurityClearCachedRolesDispatchAsync<TResponse>(IRequest<ClearCachedRolesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityClearCachedRolesAsync<TResponse>(p.RouteValues.Name,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("SecurityClearCachedRoles", p, new [] { POST }, "/_security/role/{name}/_clear_cache");
+		}
+		
+		internal TResponse SecurityDeleteRoleDispatch<TResponse>(IRequest<DeleteRoleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityDeleteRole<TResponse>(p.RouteValues.Name,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("SecurityDeleteRole", p, new [] { DELETE }, "/_security/role/{name}");
+		}
+		
+		internal Task<TResponse> SecurityDeleteRoleDispatchAsync<TResponse>(IRequest<DeleteRoleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityDeleteRoleAsync<TResponse>(p.RouteValues.Name,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("SecurityDeleteRole", p, new [] { DELETE }, "/_security/role/{name}");
+		}
+		
+		internal TResponse SecurityDeleteRoleMappingDispatch<TResponse>(IRequest<DeleteRoleMappingRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityDeleteRoleMapping<TResponse>(p.RouteValues.Name,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("SecurityDeleteRoleMapping", p, new [] { DELETE }, "/_security/role_mapping/{name}");
+		}
+		
+		internal Task<TResponse> SecurityDeleteRoleMappingDispatchAsync<TResponse>(IRequest<DeleteRoleMappingRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityDeleteRoleMappingAsync<TResponse>(p.RouteValues.Name,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("SecurityDeleteRoleMapping", p, new [] { DELETE }, "/_security/role_mapping/{name}");
+		}
+		
+		internal TResponse SecurityDeleteUserDispatch<TResponse>(IRequest<DeleteUserRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.SecurityDeleteUser<TResponse>(p.RouteValues.Username,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("SecurityDeleteUser", p, new [] { DELETE }, "/_security/user/{username}");
+		}
+		
+		internal Task<TResponse> SecurityDeleteUserDispatchAsync<TResponse>(IRequest<DeleteUserRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.SecurityDeleteUserAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("SecurityDeleteUser", p, new [] { DELETE }, "/_security/user/{username}");
+		}
+		
+		internal TResponse SecurityDisableUserDispatch<TResponse>(IRequest<DisableUserRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.SecurityDisableUser<TResponse>(p.RouteValues.Username,p.RequestParameters);
+					break;
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.SecurityDisableUserPost<TResponse>(p.RouteValues.Username,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("SecurityDisableUser", p, new [] { PUT, POST }, "/_security/user/{username}/_disable");
+		}
+		
+		internal Task<TResponse> SecurityDisableUserDispatchAsync<TResponse>(IRequest<DisableUserRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.SecurityDisableUserAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
+					break;
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.SecurityDisableUserPostAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("SecurityDisableUser", p, new [] { PUT, POST }, "/_security/user/{username}/_disable");
+		}
+		
+		internal TResponse SecurityEnableUserDispatch<TResponse>(IRequest<EnableUserRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.SecurityEnableUser<TResponse>(p.RouteValues.Username,p.RequestParameters);
+					break;
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.SecurityEnableUserPost<TResponse>(p.RouteValues.Username,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("SecurityEnableUser", p, new [] { PUT, POST }, "/_security/user/{username}/_enable");
+		}
+		
+		internal Task<TResponse> SecurityEnableUserDispatchAsync<TResponse>(IRequest<EnableUserRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.SecurityEnableUserAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
+					break;
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.SecurityEnableUserPostAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("SecurityEnableUser", p, new [] { PUT, POST }, "/_security/user/{username}/_enable");
+		}
+		
+		internal TResponse SecurityGetRoleDispatch<TResponse>(IRequest<GetRoleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Name)) return _lowLevel.SecurityGetRole<TResponse>(p.RouteValues.Name,p.RequestParameters);
+						return _lowLevel.SecurityGetRole<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("SecurityGetRole", p, new [] { GET }, "/_security/role/{name}", "/_security/role");
+		}
+		
+		internal Task<TResponse> SecurityGetRoleDispatchAsync<TResponse>(IRequest<GetRoleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Name)) return _lowLevel.SecurityGetRoleAsync<TResponse>(p.RouteValues.Name,p.RequestParameters,ct);
+						return _lowLevel.SecurityGetRoleAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("SecurityGetRole", p, new [] { GET }, "/_security/role/{name}", "/_security/role");
+		}
+		
+		internal TResponse SecurityGetRoleMappingDispatch<TResponse>(IRequest<GetRoleMappingRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Name)) return _lowLevel.SecurityGetRoleMapping<TResponse>(p.RouteValues.Name,p.RequestParameters);
+						return _lowLevel.SecurityGetRoleMapping<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("SecurityGetRoleMapping", p, new [] { GET }, "/_security/role_mapping/{name}", "/_security/role_mapping");
+		}
+		
+		internal Task<TResponse> SecurityGetRoleMappingDispatchAsync<TResponse>(IRequest<GetRoleMappingRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Name)) return _lowLevel.SecurityGetRoleMappingAsync<TResponse>(p.RouteValues.Name,p.RequestParameters,ct);
+						return _lowLevel.SecurityGetRoleMappingAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("SecurityGetRoleMapping", p, new [] { GET }, "/_security/role_mapping/{name}", "/_security/role_mapping");
+		}
+		
+		internal TResponse SecurityGetTokenDispatch<TResponse>(IRequest<GetUserAccessTokenRequestParameters> p,SerializableData<IGetUserAccessTokenRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.SecurityGetToken<TResponse>(body,p.RequestParameters);
+			}
+			throw InvalidDispatch("SecurityGetToken", p, new [] { POST }, "/_security/oauth2/token");
+		}
+		
+		internal Task<TResponse> SecurityGetTokenDispatchAsync<TResponse>(IRequest<GetUserAccessTokenRequestParameters> p,SerializableData<IGetUserAccessTokenRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.SecurityGetTokenAsync<TResponse>(body,p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("SecurityGetToken", p, new [] { POST }, "/_security/oauth2/token");
+		}
+		
+		internal TResponse SecurityGetUserDispatch<TResponse>(IRequest<GetUserRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Username)) return _lowLevel.SecurityGetUser<TResponse>(p.RouteValues.Username,p.RequestParameters);
+						return _lowLevel.SecurityGetUser<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("SecurityGetUser", p, new [] { GET }, "/_security/user/{username}", "/_security/user");
+		}
+		
+		internal Task<TResponse> SecurityGetUserDispatchAsync<TResponse>(IRequest<GetUserRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Username)) return _lowLevel.SecurityGetUserAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
+						return _lowLevel.SecurityGetUserAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("SecurityGetUser", p, new [] { GET }, "/_security/user/{username}", "/_security/user");
+		}
+		
+		internal TResponse SecurityInvalidateTokenDispatch<TResponse>(IRequest<InvalidateUserAccessTokenRequestParameters> p,SerializableData<IInvalidateUserAccessTokenRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+						return _lowLevel.SecurityInvalidateToken<TResponse>(body,p.RequestParameters);
+			}
+			throw InvalidDispatch("SecurityInvalidateToken", p, new [] { DELETE }, "/_security/oauth2/token");
+		}
+		
+		internal Task<TResponse> SecurityInvalidateTokenDispatchAsync<TResponse>(IRequest<InvalidateUserAccessTokenRequestParameters> p,SerializableData<IInvalidateUserAccessTokenRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+						return _lowLevel.SecurityInvalidateTokenAsync<TResponse>(body,p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("SecurityInvalidateToken", p, new [] { DELETE }, "/_security/oauth2/token");
+		}
+		
+		internal TResponse SecurityPutRoleDispatch<TResponse>(IRequest<PutRoleRequestParameters> p,SerializableData<IPutRoleRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityPutRole<TResponse>(p.RouteValues.Name,body,p.RequestParameters);
+					break;
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityPutRolePost<TResponse>(p.RouteValues.Name,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("SecurityPutRole", p, new [] { PUT, POST }, "/_security/role/{name}");
+		}
+		
+		internal Task<TResponse> SecurityPutRoleDispatchAsync<TResponse>(IRequest<PutRoleRequestParameters> p,SerializableData<IPutRoleRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityPutRoleAsync<TResponse>(p.RouteValues.Name,body,p.RequestParameters,ct);
+					break;
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityPutRolePostAsync<TResponse>(p.RouteValues.Name,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("SecurityPutRole", p, new [] { PUT, POST }, "/_security/role/{name}");
+		}
+		
+		internal TResponse SecurityPutRoleMappingDispatch<TResponse>(IRequest<PutRoleMappingRequestParameters> p,SerializableData<IPutRoleMappingRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityPutRoleMapping<TResponse>(p.RouteValues.Name,body,p.RequestParameters);
+					break;
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityPutRoleMappingPost<TResponse>(p.RouteValues.Name,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("SecurityPutRoleMapping", p, new [] { PUT, POST }, "/_security/role_mapping/{name}");
+		}
+		
+		internal Task<TResponse> SecurityPutRoleMappingDispatchAsync<TResponse>(IRequest<PutRoleMappingRequestParameters> p,SerializableData<IPutRoleMappingRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityPutRoleMappingAsync<TResponse>(p.RouteValues.Name,body,p.RequestParameters,ct);
+					break;
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityPutRoleMappingPostAsync<TResponse>(p.RouteValues.Name,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("SecurityPutRoleMapping", p, new [] { PUT, POST }, "/_security/role_mapping/{name}");
+		}
+		
+		internal TResponse SecurityPutUserDispatch<TResponse>(IRequest<PutUserRequestParameters> p,SerializableData<IPutUserRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.SecurityPutUser<TResponse>(p.RouteValues.Username,body,p.RequestParameters);
+					break;
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.SecurityPutUserPost<TResponse>(p.RouteValues.Username,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("SecurityPutUser", p, new [] { PUT, POST }, "/_security/user/{username}");
+		}
+		
+		internal Task<TResponse> SecurityPutUserDispatchAsync<TResponse>(IRequest<PutUserRequestParameters> p,SerializableData<IPutUserRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.SecurityPutUserAsync<TResponse>(p.RouteValues.Username,body,p.RequestParameters,ct);
+					break;
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.SecurityPutUserPostAsync<TResponse>(p.RouteValues.Username,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("SecurityPutUser", p, new [] { PUT, POST }, "/_security/user/{username}");
+		}
+		
+		internal TResponse SqlClearCursorDispatch<TResponse>(IRequest<ClearSqlCursorRequestParameters> p,SerializableData<IClearSqlCursorRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.SqlClearCursor<TResponse>(body,p.RequestParameters);
+			}
+			throw InvalidDispatch("SqlClearCursor", p, new [] { POST }, "/_sql/close");
+		}
+		
+		internal Task<TResponse> SqlClearCursorDispatchAsync<TResponse>(IRequest<ClearSqlCursorRequestParameters> p,SerializableData<IClearSqlCursorRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.SqlClearCursorAsync<TResponse>(body,p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("SqlClearCursor", p, new [] { POST }, "/_sql/close");
+		}
+		
+		internal TResponse SqlQueryDispatch<TResponse>(IRequest<QuerySqlRequestParameters> p,SerializableData<IQuerySqlRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.SqlQuery<TResponse>(body,p.RequestParameters);
+				case GET:
+						return _lowLevel.SqlQueryGet<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("SqlQuery", p, new [] { POST, GET }, "/_sql");
+		}
+		
+		internal Task<TResponse> SqlQueryDispatchAsync<TResponse>(IRequest<QuerySqlRequestParameters> p,SerializableData<IQuerySqlRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.SqlQueryAsync<TResponse>(body,p.RequestParameters,ct);
+				case GET:
+						return _lowLevel.SqlQueryGetAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("SqlQuery", p, new [] { POST, GET }, "/_sql");
+		}
+		
+		internal TResponse SqlTranslateDispatch<TResponse>(IRequest<TranslateSqlRequestParameters> p,SerializableData<ITranslateSqlRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.SqlTranslate<TResponse>(body,p.RequestParameters);
+				case GET:
+						return _lowLevel.SqlTranslateGet<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("SqlTranslate", p, new [] { POST, GET }, "/_sql/translate");
+		}
+		
+		internal Task<TResponse> SqlTranslateDispatchAsync<TResponse>(IRequest<TranslateSqlRequestParameters> p,SerializableData<ITranslateSqlRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.SqlTranslateAsync<TResponse>(body,p.RequestParameters,ct);
+				case GET:
+						return _lowLevel.SqlTranslateGetAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("SqlTranslate", p, new [] { POST, GET }, "/_sql/translate");
+		}
+		
+		internal TResponse SslCertificatesDispatch<TResponse>(IRequest<GetCertificatesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.SslCertificates<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("SslCertificates", p, new [] { GET }, "/_ssl/certificates");
+		}
+		
+		internal Task<TResponse> SslCertificatesDispatchAsync<TResponse>(IRequest<GetCertificatesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.SslCertificatesAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("SslCertificates", p, new [] { GET }, "/_ssl/certificates");
+		}
+		
+		internal TResponse WatcherAckWatchDispatch<TResponse>(IRequest<AcknowledgeWatchRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSet(p.RouteValues.WatchId, p.RouteValues.ActionId)) return _lowLevel.WatcherAckWatch<TResponse>(p.RouteValues.WatchId,p.RouteValues.ActionId,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.WatcherAckWatch<TResponse>(p.RouteValues.WatchId,p.RequestParameters);
+					break;
+				case POST:
+					if (AllSet(p.RouteValues.WatchId, p.RouteValues.ActionId)) return _lowLevel.WatcherAckWatchPost<TResponse>(p.RouteValues.WatchId,p.RouteValues.ActionId,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.WatcherAckWatchPost<TResponse>(p.RouteValues.WatchId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("WatcherAckWatch", p, new [] { PUT, POST }, "/_watcher/watch/{watch_id}/_ack", "/_watcher/watch/{watch_id}/_ack/{action_id}");
+		}
+		
+		internal Task<TResponse> WatcherAckWatchDispatchAsync<TResponse>(IRequest<AcknowledgeWatchRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSet(p.RouteValues.WatchId, p.RouteValues.ActionId)) return _lowLevel.WatcherAckWatchAsync<TResponse>(p.RouteValues.WatchId,p.RouteValues.ActionId,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.WatcherAckWatchAsync<TResponse>(p.RouteValues.WatchId,p.RequestParameters,ct);
+					break;
+				case POST:
+					if (AllSet(p.RouteValues.WatchId, p.RouteValues.ActionId)) return _lowLevel.WatcherAckWatchPostAsync<TResponse>(p.RouteValues.WatchId,p.RouteValues.ActionId,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.WatcherAckWatchPostAsync<TResponse>(p.RouteValues.WatchId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("WatcherAckWatch", p, new [] { PUT, POST }, "/_watcher/watch/{watch_id}/_ack", "/_watcher/watch/{watch_id}/_ack/{action_id}");
+		}
+		
+		internal TResponse WatcherActivateWatchDispatch<TResponse>(IRequest<ActivateWatchRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.WatcherActivateWatch<TResponse>(p.RouteValues.WatchId,p.RequestParameters);
+					break;
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.WatcherActivateWatchPost<TResponse>(p.RouteValues.WatchId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("WatcherActivateWatch", p, new [] { PUT, POST }, "/_watcher/watch/{watch_id}/_activate");
+		}
+		
+		internal Task<TResponse> WatcherActivateWatchDispatchAsync<TResponse>(IRequest<ActivateWatchRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.WatcherActivateWatchAsync<TResponse>(p.RouteValues.WatchId,p.RequestParameters,ct);
+					break;
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.WatcherActivateWatchPostAsync<TResponse>(p.RouteValues.WatchId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("WatcherActivateWatch", p, new [] { PUT, POST }, "/_watcher/watch/{watch_id}/_activate");
+		}
+		
+		internal TResponse WatcherDeactivateWatchDispatch<TResponse>(IRequest<DeactivateWatchRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.WatcherDeactivateWatch<TResponse>(p.RouteValues.WatchId,p.RequestParameters);
+					break;
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.WatcherDeactivateWatchPost<TResponse>(p.RouteValues.WatchId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("WatcherDeactivateWatch", p, new [] { PUT, POST }, "/_watcher/watch/{watch_id}/_deactivate");
+		}
+		
+		internal Task<TResponse> WatcherDeactivateWatchDispatchAsync<TResponse>(IRequest<DeactivateWatchRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.WatcherDeactivateWatchAsync<TResponse>(p.RouteValues.WatchId,p.RequestParameters,ct);
+					break;
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.WatcherDeactivateWatchPostAsync<TResponse>(p.RouteValues.WatchId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("WatcherDeactivateWatch", p, new [] { PUT, POST }, "/_watcher/watch/{watch_id}/_deactivate");
+		}
+		
+		internal TResponse WatcherDeleteWatchDispatch<TResponse>(IRequest<DeleteWatchRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.WatcherDeleteWatch<TResponse>(p.RouteValues.Id,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("WatcherDeleteWatch", p, new [] { DELETE }, "/_watcher/watch/{id}");
+		}
+		
+		internal Task<TResponse> WatcherDeleteWatchDispatchAsync<TResponse>(IRequest<DeleteWatchRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.WatcherDeleteWatchAsync<TResponse>(p.RouteValues.Id,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("WatcherDeleteWatch", p, new [] { DELETE }, "/_watcher/watch/{id}");
+		}
+		
+		internal TResponse WatcherExecuteWatchDispatch<TResponse>(IRequest<ExecuteWatchRequestParameters> p,SerializableData<IExecuteWatchRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSet(p.RouteValues.Id)) return _lowLevel.WatcherExecuteWatch<TResponse>(p.RouteValues.Id,body,p.RequestParameters);
+						return _lowLevel.WatcherExecuteWatch<TResponse>(body,p.RequestParameters);
+				case POST:
+					if (AllSet(p.RouteValues.Id)) return _lowLevel.WatcherExecuteWatchPost<TResponse>(p.RouteValues.Id,body,p.RequestParameters);
+						return _lowLevel.WatcherExecuteWatchPost<TResponse>(body,p.RequestParameters);
+			}
+			throw InvalidDispatch("WatcherExecuteWatch", p, new [] { PUT, POST }, "/_watcher/watch/{id}/_execute", "/_watcher/watch/_execute");
+		}
+		
+		internal Task<TResponse> WatcherExecuteWatchDispatchAsync<TResponse>(IRequest<ExecuteWatchRequestParameters> p,SerializableData<IExecuteWatchRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSet(p.RouteValues.Id)) return _lowLevel.WatcherExecuteWatchAsync<TResponse>(p.RouteValues.Id,body,p.RequestParameters,ct);
+						return _lowLevel.WatcherExecuteWatchAsync<TResponse>(body,p.RequestParameters,ct);
+				case POST:
+					if (AllSet(p.RouteValues.Id)) return _lowLevel.WatcherExecuteWatchPostAsync<TResponse>(p.RouteValues.Id,body,p.RequestParameters,ct);
+						return _lowLevel.WatcherExecuteWatchPostAsync<TResponse>(body,p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("WatcherExecuteWatch", p, new [] { PUT, POST }, "/_watcher/watch/{id}/_execute", "/_watcher/watch/_execute");
+		}
+		
+		internal TResponse WatcherGetWatchDispatch<TResponse>(IRequest<GetWatchRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.WatcherGetWatch<TResponse>(p.RouteValues.Id,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("WatcherGetWatch", p, new [] { GET }, "/_watcher/watch/{id}");
+		}
+		
+		internal Task<TResponse> WatcherGetWatchDispatchAsync<TResponse>(IRequest<GetWatchRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.WatcherGetWatchAsync<TResponse>(p.RouteValues.Id,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("WatcherGetWatch", p, new [] { GET }, "/_watcher/watch/{id}");
+		}
+		
+		internal TResponse WatcherPutWatchDispatch<TResponse>(IRequest<PutWatchRequestParameters> p,SerializableData<IPutWatchRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.WatcherPutWatch<TResponse>(p.RouteValues.Id,body,p.RequestParameters);
+					break;
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.WatcherPutWatchPost<TResponse>(p.RouteValues.Id,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("WatcherPutWatch", p, new [] { PUT, POST }, "/_watcher/watch/{id}");
+		}
+		
+		internal Task<TResponse> WatcherPutWatchDispatchAsync<TResponse>(IRequest<PutWatchRequestParameters> p,SerializableData<IPutWatchRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.WatcherPutWatchAsync<TResponse>(p.RouteValues.Id,body,p.RequestParameters,ct);
+					break;
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.WatcherPutWatchPostAsync<TResponse>(p.RouteValues.Id,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("WatcherPutWatch", p, new [] { PUT, POST }, "/_watcher/watch/{id}");
+		}
+		
+		internal TResponse WatcherStartDispatch<TResponse>(IRequest<StartWatcherRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.WatcherStart<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("WatcherStart", p, new [] { POST }, "/_watcher/_start");
+		}
+		
+		internal Task<TResponse> WatcherStartDispatchAsync<TResponse>(IRequest<StartWatcherRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.WatcherStartAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("WatcherStart", p, new [] { POST }, "/_watcher/_start");
+		}
+		
+		internal TResponse WatcherStatsDispatch<TResponse>(IRequest<WatcherStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Metric)) return _lowLevel.WatcherStats<TResponse>(p.RouteValues.Metric,p.RequestParameters);
+						return _lowLevel.WatcherStats<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("WatcherStats", p, new [] { GET }, "/_watcher/stats", "/_watcher/stats/{metric}");
+		}
+		
+		internal Task<TResponse> WatcherStatsDispatchAsync<TResponse>(IRequest<WatcherStatsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Metric)) return _lowLevel.WatcherStatsAsync<TResponse>(p.RouteValues.Metric,p.RequestParameters,ct);
+						return _lowLevel.WatcherStatsAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("WatcherStats", p, new [] { GET }, "/_watcher/stats", "/_watcher/stats/{metric}");
+		}
+		
+		internal TResponse WatcherStopDispatch<TResponse>(IRequest<StopWatcherRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.WatcherStop<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("WatcherStop", p, new [] { POST }, "/_watcher/_stop");
+		}
+		
+		internal Task<TResponse> WatcherStopDispatchAsync<TResponse>(IRequest<StopWatcherRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.WatcherStopAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("WatcherStop", p, new [] { POST }, "/_watcher/_stop");
 		}
 		
 		internal TResponse XpackInfoDispatch<TResponse>(IRequest<XPackInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
@@ -3028,1972 +4960,6 @@ namespace Nest
 						return _lowLevel.XpackUsageAsync<TResponse>(p.RequestParameters,ct);
 			}
 			throw InvalidDispatch("XpackUsage", p, new [] { GET }, "/_xpack/usage");
-		}
-		
-		internal TResponse XpackLicenseDeleteDispatch<TResponse>(IRequest<DeleteLicenseRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-						return _lowLevel.XpackLicenseDelete<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("XpackLicenseDelete", p, new [] { DELETE }, "/_license");
-		}
-		
-		internal Task<TResponse> XpackLicenseDeleteDispatchAsync<TResponse>(IRequest<DeleteLicenseRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-						return _lowLevel.XpackLicenseDeleteAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("XpackLicenseDelete", p, new [] { DELETE }, "/_license");
-		}
-		
-		internal TResponse XpackLicenseGetDispatch<TResponse>(IRequest<GetLicenseRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-						return _lowLevel.XpackLicenseGet<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("XpackLicenseGet", p, new [] { GET }, "/_license");
-		}
-		
-		internal Task<TResponse> XpackLicenseGetDispatchAsync<TResponse>(IRequest<GetLicenseRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-						return _lowLevel.XpackLicenseGetAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("XpackLicenseGet", p, new [] { GET }, "/_license");
-		}
-		
-		internal TResponse XpackLicenseGetBasicStatusDispatch<TResponse>(IRequest<GetBasicLicenseStatusRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-						return _lowLevel.XpackLicenseGetBasicStatus<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("XpackLicenseGetBasicStatus", p, new [] { GET }, "/_license/basic_status");
-		}
-		
-		internal Task<TResponse> XpackLicenseGetBasicStatusDispatchAsync<TResponse>(IRequest<GetBasicLicenseStatusRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-						return _lowLevel.XpackLicenseGetBasicStatusAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("XpackLicenseGetBasicStatus", p, new [] { GET }, "/_license/basic_status");
-		}
-		
-		internal TResponse XpackLicenseGetTrialStatusDispatch<TResponse>(IRequest<GetTrialLicenseStatusRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-						return _lowLevel.XpackLicenseGetTrialStatus<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("XpackLicenseGetTrialStatus", p, new [] { GET }, "/_license/trial_status");
-		}
-		
-		internal Task<TResponse> XpackLicenseGetTrialStatusDispatchAsync<TResponse>(IRequest<GetTrialLicenseStatusRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-						return _lowLevel.XpackLicenseGetTrialStatusAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("XpackLicenseGetTrialStatus", p, new [] { GET }, "/_license/trial_status");
-		}
-		
-		internal TResponse XpackLicensePostDispatch<TResponse>(IRequest<PostLicenseRequestParameters> p,SerializableData<IPostLicenseRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-						return _lowLevel.XpackLicensePost<TResponse>(body,p.RequestParameters);
-			}
-			throw InvalidDispatch("XpackLicensePost", p, new [] { PUT }, "/_license");
-		}
-		
-		internal Task<TResponse> XpackLicensePostDispatchAsync<TResponse>(IRequest<PostLicenseRequestParameters> p,SerializableData<IPostLicenseRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-						return _lowLevel.XpackLicensePostAsync<TResponse>(body,p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("XpackLicensePost", p, new [] { PUT }, "/_license");
-		}
-		
-		internal TResponse XpackLicensePostStartBasicDispatch<TResponse>(IRequest<StartBasicLicenseRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-						return _lowLevel.XpackLicensePostStartBasic<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("XpackLicensePostStartBasic", p, new [] { POST }, "/_license/start_basic");
-		}
-		
-		internal Task<TResponse> XpackLicensePostStartBasicDispatchAsync<TResponse>(IRequest<StartBasicLicenseRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-						return _lowLevel.XpackLicensePostStartBasicAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("XpackLicensePostStartBasic", p, new [] { POST }, "/_license/start_basic");
-		}
-		
-		internal TResponse XpackLicensePostStartTrialDispatch<TResponse>(IRequest<StartTrialLicenseRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-						return _lowLevel.XpackLicensePostStartTrial<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("XpackLicensePostStartTrial", p, new [] { POST }, "/_license/start_trial");
-		}
-		
-		internal Task<TResponse> XpackLicensePostStartTrialDispatchAsync<TResponse>(IRequest<StartTrialLicenseRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-						return _lowLevel.XpackLicensePostStartTrialAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("XpackLicensePostStartTrial", p, new [] { POST }, "/_license/start_trial");
-		}
-		
-		internal TResponse MlCloseJobDispatch<TResponse>(IRequest<MlCloseJobRequestParameters> p,SerializableData<IMlCloseJobRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlCloseJob<TResponse>(p.RouteValues.JobId,body,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("MlCloseJob", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_close");
-		}
-		
-		internal Task<TResponse> MlCloseJobDispatchAsync<TResponse>(IRequest<MlCloseJobRequestParameters> p,SerializableData<IMlCloseJobRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlCloseJobAsync<TResponse>(p.RouteValues.JobId,body,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("MlCloseJob", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_close");
-		}
-		
-		internal TResponse MlDeleteDatafeedDispatch<TResponse>(IRequest<MlDeleteDatafeedRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.MlDeleteDatafeed<TResponse>(p.RouteValues.DatafeedId,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("MlDeleteDatafeed", p, new [] { DELETE }, "/_ml/datafeeds/{datafeed_id}");
-		}
-		
-		internal Task<TResponse> MlDeleteDatafeedDispatchAsync<TResponse>(IRequest<MlDeleteDatafeedRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.MlDeleteDatafeedAsync<TResponse>(p.RouteValues.DatafeedId,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("MlDeleteDatafeed", p, new [] { DELETE }, "/_ml/datafeeds/{datafeed_id}");
-		}
-		
-		internal TResponse MlDeleteExpiredDataDispatch<TResponse>(IRequest<MlDeleteExpiredDataRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-						return _lowLevel.MlDeleteExpiredData<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("MlDeleteExpiredData", p, new [] { DELETE }, "/_ml/_delete_expired_data");
-		}
-		
-		internal Task<TResponse> MlDeleteExpiredDataDispatchAsync<TResponse>(IRequest<MlDeleteExpiredDataRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-						return _lowLevel.MlDeleteExpiredDataAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("MlDeleteExpiredData", p, new [] { DELETE }, "/_ml/_delete_expired_data");
-		}
-		
-		internal TResponse MlDeleteFilterDispatch<TResponse>(IRequest<MlDeleteFilterRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-					if (AllSetNoFallback(p.RouteValues.FilterId)) return _lowLevel.MlDeleteFilter<TResponse>(p.RouteValues.FilterId,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("MlDeleteFilter", p, new [] { DELETE }, "/_ml/filters/{filter_id}");
-		}
-		
-		internal Task<TResponse> MlDeleteFilterDispatchAsync<TResponse>(IRequest<MlDeleteFilterRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-					if (AllSetNoFallback(p.RouteValues.FilterId)) return _lowLevel.MlDeleteFilterAsync<TResponse>(p.RouteValues.FilterId,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("MlDeleteFilter", p, new [] { DELETE }, "/_ml/filters/{filter_id}");
-		}
-		
-		internal TResponse MlDeleteJobDispatch<TResponse>(IRequest<MlDeleteJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlDeleteJob<TResponse>(p.RouteValues.JobId,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("MlDeleteJob", p, new [] { DELETE }, "/_ml/anomaly_detectors/{job_id}");
-		}
-		
-		internal Task<TResponse> MlDeleteJobDispatchAsync<TResponse>(IRequest<MlDeleteJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlDeleteJobAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("MlDeleteJob", p, new [] { DELETE }, "/_ml/anomaly_detectors/{job_id}");
-		}
-		
-		internal TResponse MlDeleteModelSnapshotDispatch<TResponse>(IRequest<MlDeleteModelSnapshotRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-					if (AllSetNoFallback(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.MlDeleteModelSnapshot<TResponse>(p.RouteValues.JobId,p.RouteValues.SnapshotId,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("MlDeleteModelSnapshot", p, new [] { DELETE }, "/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}");
-		}
-		
-		internal Task<TResponse> MlDeleteModelSnapshotDispatchAsync<TResponse>(IRequest<MlDeleteModelSnapshotRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-					if (AllSetNoFallback(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.MlDeleteModelSnapshotAsync<TResponse>(p.RouteValues.JobId,p.RouteValues.SnapshotId,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("MlDeleteModelSnapshot", p, new [] { DELETE }, "/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}");
-		}
-		
-		internal TResponse MlFlushJobDispatch<TResponse>(IRequest<MlFlushJobRequestParameters> p,SerializableData<IMlFlushJobRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlFlushJob<TResponse>(p.RouteValues.JobId,body,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("MlFlushJob", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_flush");
-		}
-		
-		internal Task<TResponse> MlFlushJobDispatchAsync<TResponse>(IRequest<MlFlushJobRequestParameters> p,SerializableData<IMlFlushJobRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlFlushJobAsync<TResponse>(p.RouteValues.JobId,body,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("MlFlushJob", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_flush");
-		}
-		
-		internal TResponse MlForecastDispatch<TResponse>(IRequest<MlForecastRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlForecast<TResponse>(p.RouteValues.JobId,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("MlForecast", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_forecast");
-		}
-		
-		internal Task<TResponse> MlForecastDispatchAsync<TResponse>(IRequest<MlForecastRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlForecastAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("MlForecast", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_forecast");
-		}
-		
-		internal TResponse MlGetBucketsDispatch<TResponse>(IRequest<MlGetBucketsRequestParameters> p,SerializableData<IMlGetBucketsRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.JobId, p.RouteValues.Timestamp)) return _lowLevel.MlGetBuckets<TResponse>(p.RouteValues.JobId,p.RouteValues.Timestamp,p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetBuckets<TResponse>(p.RouteValues.JobId,p.RequestParameters);
-					break;
-				case POST:
-					if (AllSet(p.RouteValues.JobId, p.RouteValues.Timestamp)) return _lowLevel.MlGetBuckets<TResponse>(p.RouteValues.JobId,p.RouteValues.Timestamp,body,p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetBuckets<TResponse>(p.RouteValues.JobId,body,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("MlGetBuckets", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/results/buckets/{timestamp}", "/_ml/anomaly_detectors/{job_id}/results/buckets");
-		}
-		
-		internal Task<TResponse> MlGetBucketsDispatchAsync<TResponse>(IRequest<MlGetBucketsRequestParameters> p,SerializableData<IMlGetBucketsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.JobId, p.RouteValues.Timestamp)) return _lowLevel.MlGetBucketsAsync<TResponse>(p.RouteValues.JobId,p.RouteValues.Timestamp,p.RequestParameters,ct);
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetBucketsAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
-					break;
-				case POST:
-					if (AllSet(p.RouteValues.JobId, p.RouteValues.Timestamp)) return _lowLevel.MlGetBucketsAsync<TResponse>(p.RouteValues.JobId,p.RouteValues.Timestamp,body,p.RequestParameters,ct);
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetBucketsAsync<TResponse>(p.RouteValues.JobId,body,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("MlGetBuckets", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/results/buckets/{timestamp}", "/_ml/anomaly_detectors/{job_id}/results/buckets");
-		}
-		
-		internal TResponse MlGetCategoriesDispatch<TResponse>(IRequest<MlGetCategoriesRequestParameters> p,SerializableData<IMlGetCategoriesRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.JobId, p.RouteValues.CategoryId)) return _lowLevel.MlGetCategories<TResponse>(p.RouteValues.JobId,long.Parse(p.RouteValues.CategoryId),p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetCategories<TResponse>(p.RouteValues.JobId,p.RequestParameters);
-					break;
-				case POST:
-					if (AllSet(p.RouteValues.JobId, p.RouteValues.CategoryId)) return _lowLevel.MlGetCategories<TResponse>(p.RouteValues.JobId,long.Parse(p.RouteValues.CategoryId),body,p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetCategories<TResponse>(p.RouteValues.JobId,body,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("MlGetCategories", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/results/categories/{category_id}", "/_ml/anomaly_detectors/{job_id}/results/categories/");
-		}
-		
-		internal Task<TResponse> MlGetCategoriesDispatchAsync<TResponse>(IRequest<MlGetCategoriesRequestParameters> p,SerializableData<IMlGetCategoriesRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.JobId, p.RouteValues.CategoryId)) return _lowLevel.MlGetCategoriesAsync<TResponse>(p.RouteValues.JobId,long.Parse(p.RouteValues.CategoryId),p.RequestParameters,ct);
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetCategoriesAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
-					break;
-				case POST:
-					if (AllSet(p.RouteValues.JobId, p.RouteValues.CategoryId)) return _lowLevel.MlGetCategoriesAsync<TResponse>(p.RouteValues.JobId,long.Parse(p.RouteValues.CategoryId),body,p.RequestParameters,ct);
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetCategoriesAsync<TResponse>(p.RouteValues.JobId,body,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("MlGetCategories", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/results/categories/{category_id}", "/_ml/anomaly_detectors/{job_id}/results/categories/");
-		}
-		
-		internal TResponse MlGetDatafeedsDispatch<TResponse>(IRequest<MlGetDatafeedsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.DatafeedId)) return _lowLevel.MlGetDatafeeds<TResponse>(p.RouteValues.DatafeedId,p.RequestParameters);
-						return _lowLevel.MlGetDatafeeds<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("MlGetDatafeeds", p, new [] { GET }, "/_ml/datafeeds/{datafeed_id}", "/_ml/datafeeds");
-		}
-		
-		internal Task<TResponse> MlGetDatafeedsDispatchAsync<TResponse>(IRequest<MlGetDatafeedsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.DatafeedId)) return _lowLevel.MlGetDatafeedsAsync<TResponse>(p.RouteValues.DatafeedId,p.RequestParameters,ct);
-						return _lowLevel.MlGetDatafeedsAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("MlGetDatafeeds", p, new [] { GET }, "/_ml/datafeeds/{datafeed_id}", "/_ml/datafeeds");
-		}
-		
-		internal TResponse MlGetDatafeedStatsDispatch<TResponse>(IRequest<MlGetDatafeedStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.DatafeedId)) return _lowLevel.MlGetDatafeedStats<TResponse>(p.RouteValues.DatafeedId,p.RequestParameters);
-						return _lowLevel.MlGetDatafeedStats<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("MlGetDatafeedStats", p, new [] { GET }, "/_ml/datafeeds/{datafeed_id}/_stats", "/_ml/datafeeds/_stats");
-		}
-		
-		internal Task<TResponse> MlGetDatafeedStatsDispatchAsync<TResponse>(IRequest<MlGetDatafeedStatsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.DatafeedId)) return _lowLevel.MlGetDatafeedStatsAsync<TResponse>(p.RouteValues.DatafeedId,p.RequestParameters,ct);
-						return _lowLevel.MlGetDatafeedStatsAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("MlGetDatafeedStats", p, new [] { GET }, "/_ml/datafeeds/{datafeed_id}/_stats", "/_ml/datafeeds/_stats");
-		}
-		
-		internal TResponse MlGetFiltersDispatch<TResponse>(IRequest<MlGetFiltersRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.FilterId)) return _lowLevel.MlGetFilters<TResponse>(p.RouteValues.FilterId,p.RequestParameters);
-						return _lowLevel.MlGetFilters<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("MlGetFilters", p, new [] { GET }, "/_ml/filters", "/_ml/filters/{filter_id}");
-		}
-		
-		internal Task<TResponse> MlGetFiltersDispatchAsync<TResponse>(IRequest<MlGetFiltersRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.FilterId)) return _lowLevel.MlGetFiltersAsync<TResponse>(p.RouteValues.FilterId,p.RequestParameters,ct);
-						return _lowLevel.MlGetFiltersAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("MlGetFilters", p, new [] { GET }, "/_ml/filters", "/_ml/filters/{filter_id}");
-		}
-		
-		internal TResponse MlGetInfluencersDispatch<TResponse>(IRequest<MlGetInfluencersRequestParameters> p,SerializableData<IMlGetInfluencersRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetInfluencers<TResponse>(p.RouteValues.JobId,p.RequestParameters);
-					break;
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetInfluencers<TResponse>(p.RouteValues.JobId,body,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("MlGetInfluencers", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/results/influencers");
-		}
-		
-		internal Task<TResponse> MlGetInfluencersDispatchAsync<TResponse>(IRequest<MlGetInfluencersRequestParameters> p,SerializableData<IMlGetInfluencersRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetInfluencersAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
-					break;
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetInfluencersAsync<TResponse>(p.RouteValues.JobId,body,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("MlGetInfluencers", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/results/influencers");
-		}
-		
-		internal TResponse MlGetJobsDispatch<TResponse>(IRequest<MlGetJobsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.JobId)) return _lowLevel.MlGetJobs<TResponse>(p.RouteValues.JobId,p.RequestParameters);
-						return _lowLevel.MlGetJobs<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("MlGetJobs", p, new [] { GET }, "/_ml/anomaly_detectors/{job_id}", "/_ml/anomaly_detectors");
-		}
-		
-		internal Task<TResponse> MlGetJobsDispatchAsync<TResponse>(IRequest<MlGetJobsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.JobId)) return _lowLevel.MlGetJobsAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
-						return _lowLevel.MlGetJobsAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("MlGetJobs", p, new [] { GET }, "/_ml/anomaly_detectors/{job_id}", "/_ml/anomaly_detectors");
-		}
-		
-		internal TResponse MlGetJobStatsDispatch<TResponse>(IRequest<MlGetJobStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.JobId)) return _lowLevel.MlGetJobStats<TResponse>(p.RouteValues.JobId,p.RequestParameters);
-						return _lowLevel.MlGetJobStats<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("MlGetJobStats", p, new [] { GET }, "/_ml/anomaly_detectors/_stats", "/_ml/anomaly_detectors/{job_id}/_stats");
-		}
-		
-		internal Task<TResponse> MlGetJobStatsDispatchAsync<TResponse>(IRequest<MlGetJobStatsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.JobId)) return _lowLevel.MlGetJobStatsAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
-						return _lowLevel.MlGetJobStatsAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("MlGetJobStats", p, new [] { GET }, "/_ml/anomaly_detectors/_stats", "/_ml/anomaly_detectors/{job_id}/_stats");
-		}
-		
-		internal TResponse MlGetModelSnapshotsDispatch<TResponse>(IRequest<MlGetModelSnapshotsRequestParameters> p,SerializableData<IMlGetModelSnapshotsRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.MlGetModelSnapshots<TResponse>(p.RouteValues.JobId,p.RouteValues.SnapshotId,p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetModelSnapshots<TResponse>(p.RouteValues.JobId,p.RequestParameters);
-					break;
-				case POST:
-					if (AllSet(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.MlGetModelSnapshots<TResponse>(p.RouteValues.JobId,p.RouteValues.SnapshotId,body,p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetModelSnapshots<TResponse>(p.RouteValues.JobId,body,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("MlGetModelSnapshots", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}", "/_ml/anomaly_detectors/{job_id}/model_snapshots");
-		}
-		
-		internal Task<TResponse> MlGetModelSnapshotsDispatchAsync<TResponse>(IRequest<MlGetModelSnapshotsRequestParameters> p,SerializableData<IMlGetModelSnapshotsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.MlGetModelSnapshotsAsync<TResponse>(p.RouteValues.JobId,p.RouteValues.SnapshotId,p.RequestParameters,ct);
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetModelSnapshotsAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
-					break;
-				case POST:
-					if (AllSet(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.MlGetModelSnapshotsAsync<TResponse>(p.RouteValues.JobId,p.RouteValues.SnapshotId,body,p.RequestParameters,ct);
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetModelSnapshotsAsync<TResponse>(p.RouteValues.JobId,body,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("MlGetModelSnapshots", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}", "/_ml/anomaly_detectors/{job_id}/model_snapshots");
-		}
-		
-		internal TResponse MlGetOverallBucketsDispatch<TResponse>(IRequest<MlGetOverallBucketsRequestParameters> p,SerializableData<IMlGetOverallBucketsRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetOverallBuckets<TResponse>(p.RouteValues.JobId,p.RequestParameters);
-					break;
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetOverallBuckets<TResponse>(p.RouteValues.JobId,body,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("MlGetOverallBuckets", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/results/overall_buckets");
-		}
-		
-		internal Task<TResponse> MlGetOverallBucketsDispatchAsync<TResponse>(IRequest<MlGetOverallBucketsRequestParameters> p,SerializableData<IMlGetOverallBucketsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetOverallBucketsAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
-					break;
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetOverallBucketsAsync<TResponse>(p.RouteValues.JobId,body,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("MlGetOverallBuckets", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/results/overall_buckets");
-		}
-		
-		internal TResponse MlGetRecordsDispatch<TResponse>(IRequest<MlGetRecordsRequestParameters> p,SerializableData<IMlGetRecordsRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetRecords<TResponse>(p.RouteValues.JobId,p.RequestParameters);
-					break;
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetRecords<TResponse>(p.RouteValues.JobId,body,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("MlGetRecords", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/results/records");
-		}
-		
-		internal Task<TResponse> MlGetRecordsDispatchAsync<TResponse>(IRequest<MlGetRecordsRequestParameters> p,SerializableData<IMlGetRecordsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetRecordsAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
-					break;
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlGetRecordsAsync<TResponse>(p.RouteValues.JobId,body,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("MlGetRecords", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/results/records");
-		}
-		
-		internal TResponse MlOpenJobDispatch<TResponse>(IRequest<MlOpenJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlOpenJob<TResponse>(p.RouteValues.JobId,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("MlOpenJob", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_open");
-		}
-		
-		internal Task<TResponse> MlOpenJobDispatchAsync<TResponse>(IRequest<MlOpenJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlOpenJobAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("MlOpenJob", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_open");
-		}
-		
-		internal TResponse MlPostDataDispatch<TResponse>(IRequest<MlPostDataRequestParameters> p,SerializableData<IMlPostDataRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlPostData<TResponse>(p.RouteValues.JobId,body,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("MlPostData", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_data");
-		}
-		
-		internal Task<TResponse> MlPostDataDispatchAsync<TResponse>(IRequest<MlPostDataRequestParameters> p,SerializableData<IMlPostDataRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlPostDataAsync<TResponse>(p.RouteValues.JobId,body,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("MlPostData", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_data");
-		}
-		
-		internal TResponse MlPreviewDatafeedDispatch<TResponse>(IRequest<MlPreviewDatafeedRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.MlPreviewDatafeed<TResponse>(p.RouteValues.DatafeedId,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("MlPreviewDatafeed", p, new [] { GET }, "/_ml/datafeeds/{datafeed_id}/_preview");
-		}
-		
-		internal Task<TResponse> MlPreviewDatafeedDispatchAsync<TResponse>(IRequest<MlPreviewDatafeedRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.MlPreviewDatafeedAsync<TResponse>(p.RouteValues.DatafeedId,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("MlPreviewDatafeed", p, new [] { GET }, "/_ml/datafeeds/{datafeed_id}/_preview");
-		}
-		
-		internal TResponse MlPutDatafeedDispatch<TResponse>(IRequest<MlPutDatafeedRequestParameters> p,SerializableData<IMlPutDatafeedRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.MlPutDatafeed<TResponse>(p.RouteValues.DatafeedId,body,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("MlPutDatafeed", p, new [] { PUT }, "/_ml/datafeeds/{datafeed_id}");
-		}
-		
-		internal Task<TResponse> MlPutDatafeedDispatchAsync<TResponse>(IRequest<MlPutDatafeedRequestParameters> p,SerializableData<IMlPutDatafeedRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.MlPutDatafeedAsync<TResponse>(p.RouteValues.DatafeedId,body,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("MlPutDatafeed", p, new [] { PUT }, "/_ml/datafeeds/{datafeed_id}");
-		}
-		
-		internal TResponse MlPutFilterDispatch<TResponse>(IRequest<MlPutFilterRequestParameters> p,SerializableData<IMlPutFilterRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSetNoFallback(p.RouteValues.FilterId)) return _lowLevel.MlPutFilter<TResponse>(p.RouteValues.FilterId,body,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("MlPutFilter", p, new [] { PUT }, "/_ml/filters/{filter_id}");
-		}
-		
-		internal Task<TResponse> MlPutFilterDispatchAsync<TResponse>(IRequest<MlPutFilterRequestParameters> p,SerializableData<IMlPutFilterRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSetNoFallback(p.RouteValues.FilterId)) return _lowLevel.MlPutFilterAsync<TResponse>(p.RouteValues.FilterId,body,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("MlPutFilter", p, new [] { PUT }, "/_ml/filters/{filter_id}");
-		}
-		
-		internal TResponse MlPutJobDispatch<TResponse>(IRequest<MlPutJobRequestParameters> p,SerializableData<IMlPutJobRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlPutJob<TResponse>(p.RouteValues.JobId,body,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("MlPutJob", p, new [] { PUT }, "/_ml/anomaly_detectors/{job_id}");
-		}
-		
-		internal Task<TResponse> MlPutJobDispatchAsync<TResponse>(IRequest<MlPutJobRequestParameters> p,SerializableData<IMlPutJobRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlPutJobAsync<TResponse>(p.RouteValues.JobId,body,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("MlPutJob", p, new [] { PUT }, "/_ml/anomaly_detectors/{job_id}");
-		}
-		
-		internal TResponse MlRevertModelSnapshotDispatch<TResponse>(IRequest<MlRevertModelSnapshotRequestParameters> p,SerializableData<IMlRevertModelSnapshotRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.MlRevertModelSnapshot<TResponse>(p.RouteValues.JobId,p.RouteValues.SnapshotId,body,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("MlRevertModelSnapshot", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert");
-		}
-		
-		internal Task<TResponse> MlRevertModelSnapshotDispatchAsync<TResponse>(IRequest<MlRevertModelSnapshotRequestParameters> p,SerializableData<IMlRevertModelSnapshotRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.MlRevertModelSnapshotAsync<TResponse>(p.RouteValues.JobId,p.RouteValues.SnapshotId,body,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("MlRevertModelSnapshot", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert");
-		}
-		
-		internal TResponse MlSetUpgradeModeDispatch<TResponse>(IRequest<MlSetUpgradeModeRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-						return _lowLevel.MlSetUpgradeMode<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("MlSetUpgradeMode", p, new [] { POST }, "/_ml/set_upgrade_mode");
-		}
-		
-		internal Task<TResponse> MlSetUpgradeModeDispatchAsync<TResponse>(IRequest<MlSetUpgradeModeRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-						return _lowLevel.MlSetUpgradeModeAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("MlSetUpgradeMode", p, new [] { POST }, "/_ml/set_upgrade_mode");
-		}
-		
-		internal TResponse MlStartDatafeedDispatch<TResponse>(IRequest<MlStartDatafeedRequestParameters> p,SerializableData<IMlStartDatafeedRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.MlStartDatafeed<TResponse>(p.RouteValues.DatafeedId,body,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("MlStartDatafeed", p, new [] { POST }, "/_ml/datafeeds/{datafeed_id}/_start");
-		}
-		
-		internal Task<TResponse> MlStartDatafeedDispatchAsync<TResponse>(IRequest<MlStartDatafeedRequestParameters> p,SerializableData<IMlStartDatafeedRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.MlStartDatafeedAsync<TResponse>(p.RouteValues.DatafeedId,body,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("MlStartDatafeed", p, new [] { POST }, "/_ml/datafeeds/{datafeed_id}/_start");
-		}
-		
-		internal TResponse MlStopDatafeedDispatch<TResponse>(IRequest<MlStopDatafeedRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.MlStopDatafeed<TResponse>(p.RouteValues.DatafeedId,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("MlStopDatafeed", p, new [] { POST }, "/_ml/datafeeds/{datafeed_id}/_stop");
-		}
-		
-		internal Task<TResponse> MlStopDatafeedDispatchAsync<TResponse>(IRequest<MlStopDatafeedRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.MlStopDatafeedAsync<TResponse>(p.RouteValues.DatafeedId,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("MlStopDatafeed", p, new [] { POST }, "/_ml/datafeeds/{datafeed_id}/_stop");
-		}
-		
-		internal TResponse MlUpdateDatafeedDispatch<TResponse>(IRequest<MlUpdateDatafeedRequestParameters> p,SerializableData<IMlUpdateDatafeedRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.MlUpdateDatafeed<TResponse>(p.RouteValues.DatafeedId,body,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("MlUpdateDatafeed", p, new [] { POST }, "/_ml/datafeeds/{datafeed_id}/_update");
-		}
-		
-		internal Task<TResponse> MlUpdateDatafeedDispatchAsync<TResponse>(IRequest<MlUpdateDatafeedRequestParameters> p,SerializableData<IMlUpdateDatafeedRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.MlUpdateDatafeedAsync<TResponse>(p.RouteValues.DatafeedId,body,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("MlUpdateDatafeed", p, new [] { POST }, "/_ml/datafeeds/{datafeed_id}/_update");
-		}
-		
-		internal TResponse MlUpdateJobDispatch<TResponse>(IRequest<MlUpdateJobRequestParameters> p,SerializableData<IMlUpdateJobRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlUpdateJob<TResponse>(p.RouteValues.JobId,body,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("MlUpdateJob", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_update");
-		}
-		
-		internal Task<TResponse> MlUpdateJobDispatchAsync<TResponse>(IRequest<MlUpdateJobRequestParameters> p,SerializableData<IMlUpdateJobRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.MlUpdateJobAsync<TResponse>(p.RouteValues.JobId,body,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("MlUpdateJob", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_update");
-		}
-		
-		internal TResponse MlUpdateModelSnapshotDispatch<TResponse>(IRequest<MlUpdateModelSnapshotRequestParameters> p,SerializableData<IMlUpdateModelSnapshotRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.MlUpdateModelSnapshot<TResponse>(p.RouteValues.JobId,p.RouteValues.SnapshotId,body,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("MlUpdateModelSnapshot", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update");
-		}
-		
-		internal Task<TResponse> MlUpdateModelSnapshotDispatchAsync<TResponse>(IRequest<MlUpdateModelSnapshotRequestParameters> p,SerializableData<IMlUpdateModelSnapshotRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.MlUpdateModelSnapshotAsync<TResponse>(p.RouteValues.JobId,p.RouteValues.SnapshotId,body,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("MlUpdateModelSnapshot", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update");
-		}
-		
-		internal TResponse MlValidateDispatch<TResponse>(IRequest<MlValidateRequestParameters> p,SerializableData<IMlValidateRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-						return _lowLevel.MlValidate<TResponse>(body,p.RequestParameters);
-			}
-			throw InvalidDispatch("MlValidate", p, new [] { POST }, "/_ml/anomaly_detectors/_validate");
-		}
-		
-		internal Task<TResponse> MlValidateDispatchAsync<TResponse>(IRequest<MlValidateRequestParameters> p,SerializableData<IMlValidateRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-						return _lowLevel.MlValidateAsync<TResponse>(body,p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("MlValidate", p, new [] { POST }, "/_ml/anomaly_detectors/_validate");
-		}
-		
-		internal TResponse XpackMigrationDeprecationsDispatch<TResponse>(IRequest<DeprecationInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.XpackMigrationDeprecations<TResponse>(p.RouteValues.Index,p.RequestParameters);
-						return _lowLevel.XpackMigrationDeprecations<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("XpackMigrationDeprecations", p, new [] { GET }, "/_migration/deprecations", "/{index}/_migration/deprecations");
-		}
-		
-		internal Task<TResponse> XpackMigrationDeprecationsDispatchAsync<TResponse>(IRequest<DeprecationInfoRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.XpackMigrationDeprecationsAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
-						return _lowLevel.XpackMigrationDeprecationsAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("XpackMigrationDeprecations", p, new [] { GET }, "/_migration/deprecations", "/{index}/_migration/deprecations");
-		}
-		
-		internal TResponse XpackMigrationGetAssistanceDispatch<TResponse>(IRequest<MigrationAssistanceRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.XpackMigrationGetAssistance<TResponse>(p.RouteValues.Index,p.RequestParameters);
-						return _lowLevel.XpackMigrationGetAssistance<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("XpackMigrationGetAssistance", p, new [] { GET }, "/_migration/assistance", "/_migration/assistance/{index}");
-		}
-		
-		internal Task<TResponse> XpackMigrationGetAssistanceDispatchAsync<TResponse>(IRequest<MigrationAssistanceRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.XpackMigrationGetAssistanceAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
-						return _lowLevel.XpackMigrationGetAssistanceAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("XpackMigrationGetAssistance", p, new [] { GET }, "/_migration/assistance", "/_migration/assistance/{index}");
-		}
-		
-		internal TResponse XpackMigrationUpgradeDispatch<TResponse>(IRequest<MigrationUpgradeRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackMigrationUpgrade<TResponse>(p.RouteValues.Index,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("XpackMigrationUpgrade", p, new [] { POST }, "/_migration/upgrade/{index}");
-		}
-		
-		internal Task<TResponse> XpackMigrationUpgradeDispatchAsync<TResponse>(IRequest<MigrationUpgradeRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackMigrationUpgradeAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("XpackMigrationUpgrade", p, new [] { POST }, "/_migration/upgrade/{index}");
-		}
-		
-		internal TResponse XpackRollupDeleteJobDispatch<TResponse>(IRequest<DeleteRollupJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackRollupDeleteJob<TResponse>(p.RouteValues.Id,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("XpackRollupDeleteJob", p, new [] { DELETE }, "/_rollup/job/{id}");
-		}
-		
-		internal Task<TResponse> XpackRollupDeleteJobDispatchAsync<TResponse>(IRequest<DeleteRollupJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackRollupDeleteJobAsync<TResponse>(p.RouteValues.Id,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("XpackRollupDeleteJob", p, new [] { DELETE }, "/_rollup/job/{id}");
-		}
-		
-		internal TResponse XpackRollupGetJobsDispatch<TResponse>(IRequest<GetRollupJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Id)) return _lowLevel.XpackRollupGetJobs<TResponse>(p.RouteValues.Id,p.RequestParameters);
-						return _lowLevel.XpackRollupGetJobs<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("XpackRollupGetJobs", p, new [] { GET }, "/_rollup/job/{id}", "/_rollup/job/");
-		}
-		
-		internal Task<TResponse> XpackRollupGetJobsDispatchAsync<TResponse>(IRequest<GetRollupJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Id)) return _lowLevel.XpackRollupGetJobsAsync<TResponse>(p.RouteValues.Id,p.RequestParameters,ct);
-						return _lowLevel.XpackRollupGetJobsAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("XpackRollupGetJobs", p, new [] { GET }, "/_rollup/job/{id}", "/_rollup/job/");
-		}
-		
-		internal TResponse XpackRollupGetRollupCapsDispatch<TResponse>(IRequest<GetRollupCapabilitiesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Id)) return _lowLevel.XpackRollupGetRollupCaps<TResponse>(p.RouteValues.Id,p.RequestParameters);
-						return _lowLevel.XpackRollupGetRollupCaps<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("XpackRollupGetRollupCaps", p, new [] { GET }, "/_rollup/data/{id}", "/_rollup/data/");
-		}
-		
-		internal Task<TResponse> XpackRollupGetRollupCapsDispatchAsync<TResponse>(IRequest<GetRollupCapabilitiesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Id)) return _lowLevel.XpackRollupGetRollupCapsAsync<TResponse>(p.RouteValues.Id,p.RequestParameters,ct);
-						return _lowLevel.XpackRollupGetRollupCapsAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("XpackRollupGetRollupCaps", p, new [] { GET }, "/_rollup/data/{id}", "/_rollup/data/");
-		}
-		
-		internal TResponse XpackRollupGetRollupIndexCapsDispatch<TResponse>(IRequest<GetRollupIndexCapabilitiesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackRollupGetRollupIndexCaps<TResponse>(p.RouteValues.Index,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("XpackRollupGetRollupIndexCaps", p, new [] { GET }, "/{index}/_rollup/data");
-		}
-		
-		internal Task<TResponse> XpackRollupGetRollupIndexCapsDispatchAsync<TResponse>(IRequest<GetRollupIndexCapabilitiesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackRollupGetRollupIndexCapsAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("XpackRollupGetRollupIndexCaps", p, new [] { GET }, "/{index}/_rollup/data");
-		}
-		
-		internal TResponse XpackRollupPutJobDispatch<TResponse>(IRequest<CreateRollupJobRequestParameters> p,SerializableData<ICreateRollupJobRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackRollupPutJob<TResponse>(p.RouteValues.Id,body,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("XpackRollupPutJob", p, new [] { PUT }, "/_rollup/job/{id}");
-		}
-		
-		internal Task<TResponse> XpackRollupPutJobDispatchAsync<TResponse>(IRequest<CreateRollupJobRequestParameters> p,SerializableData<ICreateRollupJobRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackRollupPutJobAsync<TResponse>(p.RouteValues.Id,body,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("XpackRollupPutJob", p, new [] { PUT }, "/_rollup/job/{id}");
-		}
-		
-		internal TResponse XpackRollupRollupSearchDispatch<TResponse>(IRequest<RollupSearchRequestParameters> p,SerializableData<IRollupSearchRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.XpackRollupRollupSearchGet<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackRollupRollupSearchGet<TResponse>(p.RouteValues.Index,p.RequestParameters);
-					break;
-				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.XpackRollupRollupSearch<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackRollupRollupSearch<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("XpackRollupRollupSearch", p, new [] { GET, POST }, "/{index}/_rollup_search", "/{index}/{type}/_rollup_search");
-		}
-		
-		internal Task<TResponse> XpackRollupRollupSearchDispatchAsync<TResponse>(IRequest<RollupSearchRequestParameters> p,SerializableData<IRollupSearchRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.XpackRollupRollupSearchGetAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RequestParameters,ct);
-					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackRollupRollupSearchGetAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
-					break;
-				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.XpackRollupRollupSearchAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
-					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackRollupRollupSearchAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("XpackRollupRollupSearch", p, new [] { GET, POST }, "/{index}/_rollup_search", "/{index}/{type}/_rollup_search");
-		}
-		
-		internal TResponse XpackRollupStartJobDispatch<TResponse>(IRequest<StartRollupJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackRollupStartJob<TResponse>(p.RouteValues.Id,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("XpackRollupStartJob", p, new [] { POST }, "/_rollup/job/{id}/_start");
-		}
-		
-		internal Task<TResponse> XpackRollupStartJobDispatchAsync<TResponse>(IRequest<StartRollupJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackRollupStartJobAsync<TResponse>(p.RouteValues.Id,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("XpackRollupStartJob", p, new [] { POST }, "/_rollup/job/{id}/_start");
-		}
-		
-		internal TResponse XpackRollupStopJobDispatch<TResponse>(IRequest<StopRollupJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackRollupStopJob<TResponse>(p.RouteValues.Id,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("XpackRollupStopJob", p, new [] { POST }, "/_rollup/job/{id}/_stop");
-		}
-		
-		internal Task<TResponse> XpackRollupStopJobDispatchAsync<TResponse>(IRequest<StopRollupJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackRollupStopJobAsync<TResponse>(p.RouteValues.Id,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("XpackRollupStopJob", p, new [] { POST }, "/_rollup/job/{id}/_stop");
-		}
-		
-		internal TResponse SecurityAuthenticateDispatch<TResponse>(IRequest<SecurityAuthenticateRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-						return _lowLevel.SecurityAuthenticate<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("SecurityAuthenticate", p, new [] { GET }, "/_security/_authenticate");
-		}
-		
-		internal Task<TResponse> SecurityAuthenticateDispatchAsync<TResponse>(IRequest<SecurityAuthenticateRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-						return _lowLevel.SecurityAuthenticateAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("SecurityAuthenticate", p, new [] { GET }, "/_security/_authenticate");
-		}
-		
-		internal TResponse SecurityChangePasswordDispatch<TResponse>(IRequest<SecurityChangePasswordRequestParameters> p,SerializableData<ISecurityChangePasswordRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.SecurityChangePassword<TResponse>(p.RouteValues.Username,body,p.RequestParameters);
-						return _lowLevel.SecurityChangePassword<TResponse>(body,p.RequestParameters);
-				case POST:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.SecurityChangePasswordPost<TResponse>(p.RouteValues.Username,body,p.RequestParameters);
-						return _lowLevel.SecurityChangePasswordPost<TResponse>(body,p.RequestParameters);
-			}
-			throw InvalidDispatch("SecurityChangePassword", p, new [] { PUT, POST }, "/_security/user/{username}/_password", "/_security/user/_password");
-		}
-		
-		internal Task<TResponse> SecurityChangePasswordDispatchAsync<TResponse>(IRequest<SecurityChangePasswordRequestParameters> p,SerializableData<ISecurityChangePasswordRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.SecurityChangePasswordAsync<TResponse>(p.RouteValues.Username,body,p.RequestParameters,ct);
-						return _lowLevel.SecurityChangePasswordAsync<TResponse>(body,p.RequestParameters,ct);
-				case POST:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.SecurityChangePasswordPostAsync<TResponse>(p.RouteValues.Username,body,p.RequestParameters,ct);
-						return _lowLevel.SecurityChangePasswordPostAsync<TResponse>(body,p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("SecurityChangePassword", p, new [] { PUT, POST }, "/_security/user/{username}/_password", "/_security/user/_password");
-		}
-		
-		internal TResponse SecurityClearCachedRealmsDispatch<TResponse>(IRequest<SecurityClearCachedRealmsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.Realms)) return _lowLevel.SecurityClearCachedRealms<TResponse>(p.RouteValues.Realms,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("SecurityClearCachedRealms", p, new [] { POST }, "/_security/realm/{realms}/_clear_cache");
-		}
-		
-		internal Task<TResponse> SecurityClearCachedRealmsDispatchAsync<TResponse>(IRequest<SecurityClearCachedRealmsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.Realms)) return _lowLevel.SecurityClearCachedRealmsAsync<TResponse>(p.RouteValues.Realms,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("SecurityClearCachedRealms", p, new [] { POST }, "/_security/realm/{realms}/_clear_cache");
-		}
-		
-		internal TResponse SecurityClearCachedRolesDispatch<TResponse>(IRequest<SecurityClearCachedRolesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityClearCachedRoles<TResponse>(p.RouteValues.Name,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("SecurityClearCachedRoles", p, new [] { POST }, "/_security/role/{name}/_clear_cache");
-		}
-		
-		internal Task<TResponse> SecurityClearCachedRolesDispatchAsync<TResponse>(IRequest<SecurityClearCachedRolesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityClearCachedRolesAsync<TResponse>(p.RouteValues.Name,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("SecurityClearCachedRoles", p, new [] { POST }, "/_security/role/{name}/_clear_cache");
-		}
-		
-		internal TResponse SecurityCreateApiKeyDispatch<TResponse>(IRequest<SecurityCreateApiKeyRequestParameters> p,SerializableData<ISecurityCreateApiKeyRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-						return _lowLevel.SecurityCreateApiKey<TResponse>(body,p.RequestParameters);
-				case POST:
-						return _lowLevel.SecurityCreateApiKeyPost<TResponse>(body,p.RequestParameters);
-			}
-			throw InvalidDispatch("SecurityCreateApiKey", p, new [] { PUT, POST }, "/_security/api_key");
-		}
-		
-		internal Task<TResponse> SecurityCreateApiKeyDispatchAsync<TResponse>(IRequest<SecurityCreateApiKeyRequestParameters> p,SerializableData<ISecurityCreateApiKeyRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-						return _lowLevel.SecurityCreateApiKeyAsync<TResponse>(body,p.RequestParameters,ct);
-				case POST:
-						return _lowLevel.SecurityCreateApiKeyPostAsync<TResponse>(body,p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("SecurityCreateApiKey", p, new [] { PUT, POST }, "/_security/api_key");
-		}
-		
-		internal TResponse SecurityDeleteRoleDispatch<TResponse>(IRequest<SecurityDeleteRoleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityDeleteRole<TResponse>(p.RouteValues.Name,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("SecurityDeleteRole", p, new [] { DELETE }, "/_security/role/{name}");
-		}
-		
-		internal Task<TResponse> SecurityDeleteRoleDispatchAsync<TResponse>(IRequest<SecurityDeleteRoleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityDeleteRoleAsync<TResponse>(p.RouteValues.Name,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("SecurityDeleteRole", p, new [] { DELETE }, "/_security/role/{name}");
-		}
-		
-		internal TResponse SecurityDeleteRoleMappingDispatch<TResponse>(IRequest<SecurityDeleteRoleMappingRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityDeleteRoleMapping<TResponse>(p.RouteValues.Name,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("SecurityDeleteRoleMapping", p, new [] { DELETE }, "/_security/role_mapping/{name}");
-		}
-		
-		internal Task<TResponse> SecurityDeleteRoleMappingDispatchAsync<TResponse>(IRequest<SecurityDeleteRoleMappingRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityDeleteRoleMappingAsync<TResponse>(p.RouteValues.Name,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("SecurityDeleteRoleMapping", p, new [] { DELETE }, "/_security/role_mapping/{name}");
-		}
-		
-		internal TResponse SecurityDeleteUserDispatch<TResponse>(IRequest<SecurityDeleteUserRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.SecurityDeleteUser<TResponse>(p.RouteValues.Username,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("SecurityDeleteUser", p, new [] { DELETE }, "/_security/user/{username}");
-		}
-		
-		internal Task<TResponse> SecurityDeleteUserDispatchAsync<TResponse>(IRequest<SecurityDeleteUserRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.SecurityDeleteUserAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("SecurityDeleteUser", p, new [] { DELETE }, "/_security/user/{username}");
-		}
-		
-		internal TResponse SecurityDisableUserDispatch<TResponse>(IRequest<SecurityDisableUserRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.SecurityDisableUser<TResponse>(p.RouteValues.Username,p.RequestParameters);
-					break;
-				case POST:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.SecurityDisableUserPost<TResponse>(p.RouteValues.Username,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("SecurityDisableUser", p, new [] { PUT, POST }, "/_security/user/{username}/_disable");
-		}
-		
-		internal Task<TResponse> SecurityDisableUserDispatchAsync<TResponse>(IRequest<SecurityDisableUserRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.SecurityDisableUserAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
-					break;
-				case POST:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.SecurityDisableUserPostAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("SecurityDisableUser", p, new [] { PUT, POST }, "/_security/user/{username}/_disable");
-		}
-		
-		internal TResponse SecurityEnableUserDispatch<TResponse>(IRequest<SecurityEnableUserRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.SecurityEnableUser<TResponse>(p.RouteValues.Username,p.RequestParameters);
-					break;
-				case POST:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.SecurityEnableUserPost<TResponse>(p.RouteValues.Username,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("SecurityEnableUser", p, new [] { PUT, POST }, "/_security/user/{username}/_enable");
-		}
-		
-		internal Task<TResponse> SecurityEnableUserDispatchAsync<TResponse>(IRequest<SecurityEnableUserRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.SecurityEnableUserAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
-					break;
-				case POST:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.SecurityEnableUserPostAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("SecurityEnableUser", p, new [] { PUT, POST }, "/_security/user/{username}/_enable");
-		}
-		
-		internal TResponse SecurityGetApiKeyDispatch<TResponse>(IRequest<SecurityGetApiKeyRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-						return _lowLevel.SecurityGetApiKey<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("SecurityGetApiKey", p, new [] { GET }, "/_security/api_key");
-		}
-		
-		internal Task<TResponse> SecurityGetApiKeyDispatchAsync<TResponse>(IRequest<SecurityGetApiKeyRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-						return _lowLevel.SecurityGetApiKeyAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("SecurityGetApiKey", p, new [] { GET }, "/_security/api_key");
-		}
-		
-		internal TResponse SecurityGetRoleDispatch<TResponse>(IRequest<SecurityGetRoleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Name)) return _lowLevel.SecurityGetRole<TResponse>(p.RouteValues.Name,p.RequestParameters);
-						return _lowLevel.SecurityGetRole<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("SecurityGetRole", p, new [] { GET }, "/_security/role/{name}", "/_security/role");
-		}
-		
-		internal Task<TResponse> SecurityGetRoleDispatchAsync<TResponse>(IRequest<SecurityGetRoleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Name)) return _lowLevel.SecurityGetRoleAsync<TResponse>(p.RouteValues.Name,p.RequestParameters,ct);
-						return _lowLevel.SecurityGetRoleAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("SecurityGetRole", p, new [] { GET }, "/_security/role/{name}", "/_security/role");
-		}
-		
-		internal TResponse SecurityGetRoleMappingDispatch<TResponse>(IRequest<SecurityGetRoleMappingRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Name)) return _lowLevel.SecurityGetRoleMapping<TResponse>(p.RouteValues.Name,p.RequestParameters);
-						return _lowLevel.SecurityGetRoleMapping<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("SecurityGetRoleMapping", p, new [] { GET }, "/_security/role_mapping/{name}", "/_security/role_mapping");
-		}
-		
-		internal Task<TResponse> SecurityGetRoleMappingDispatchAsync<TResponse>(IRequest<SecurityGetRoleMappingRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Name)) return _lowLevel.SecurityGetRoleMappingAsync<TResponse>(p.RouteValues.Name,p.RequestParameters,ct);
-						return _lowLevel.SecurityGetRoleMappingAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("SecurityGetRoleMapping", p, new [] { GET }, "/_security/role_mapping/{name}", "/_security/role_mapping");
-		}
-		
-		internal TResponse SecurityGetTokenDispatch<TResponse>(IRequest<SecurityGetTokenRequestParameters> p,SerializableData<ISecurityGetTokenRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-						return _lowLevel.SecurityGetToken<TResponse>(body,p.RequestParameters);
-			}
-			throw InvalidDispatch("SecurityGetToken", p, new [] { POST }, "/_security/oauth2/token");
-		}
-		
-		internal Task<TResponse> SecurityGetTokenDispatchAsync<TResponse>(IRequest<SecurityGetTokenRequestParameters> p,SerializableData<ISecurityGetTokenRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-						return _lowLevel.SecurityGetTokenAsync<TResponse>(body,p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("SecurityGetToken", p, new [] { POST }, "/_security/oauth2/token");
-		}
-		
-		internal TResponse SecurityGetUserDispatch<TResponse>(IRequest<SecurityGetUserRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.SecurityGetUser<TResponse>(p.RouteValues.Username,p.RequestParameters);
-						return _lowLevel.SecurityGetUser<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("SecurityGetUser", p, new [] { GET }, "/_security/user/{username}", "/_security/user");
-		}
-		
-		internal Task<TResponse> SecurityGetUserDispatchAsync<TResponse>(IRequest<SecurityGetUserRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.SecurityGetUserAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
-						return _lowLevel.SecurityGetUserAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("SecurityGetUser", p, new [] { GET }, "/_security/user/{username}", "/_security/user");
-		}
-		
-		internal TResponse SecurityInvalidateApiKeyDispatch<TResponse>(IRequest<SecurityInvalidateApiKeyRequestParameters> p,SerializableData<ISecurityInvalidateApiKeyRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-						return _lowLevel.SecurityInvalidateApiKey<TResponse>(body,p.RequestParameters);
-			}
-			throw InvalidDispatch("SecurityInvalidateApiKey", p, new [] { DELETE }, "/_security/api_key");
-		}
-		
-		internal Task<TResponse> SecurityInvalidateApiKeyDispatchAsync<TResponse>(IRequest<SecurityInvalidateApiKeyRequestParameters> p,SerializableData<ISecurityInvalidateApiKeyRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-						return _lowLevel.SecurityInvalidateApiKeyAsync<TResponse>(body,p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("SecurityInvalidateApiKey", p, new [] { DELETE }, "/_security/api_key");
-		}
-		
-		internal TResponse SecurityInvalidateTokenDispatch<TResponse>(IRequest<SecurityInvalidateTokenRequestParameters> p,SerializableData<ISecurityInvalidateTokenRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-						return _lowLevel.SecurityInvalidateToken<TResponse>(body,p.RequestParameters);
-			}
-			throw InvalidDispatch("SecurityInvalidateToken", p, new [] { DELETE }, "/_security/oauth2/token");
-		}
-		
-		internal Task<TResponse> SecurityInvalidateTokenDispatchAsync<TResponse>(IRequest<SecurityInvalidateTokenRequestParameters> p,SerializableData<ISecurityInvalidateTokenRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-						return _lowLevel.SecurityInvalidateTokenAsync<TResponse>(body,p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("SecurityInvalidateToken", p, new [] { DELETE }, "/_security/oauth2/token");
-		}
-		
-		internal TResponse SecurityPutRoleDispatch<TResponse>(IRequest<SecurityPutRoleRequestParameters> p,SerializableData<ISecurityPutRoleRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityPutRole<TResponse>(p.RouteValues.Name,body,p.RequestParameters);
-					break;
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityPutRolePost<TResponse>(p.RouteValues.Name,body,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("SecurityPutRole", p, new [] { PUT, POST }, "/_security/role/{name}");
-		}
-		
-		internal Task<TResponse> SecurityPutRoleDispatchAsync<TResponse>(IRequest<SecurityPutRoleRequestParameters> p,SerializableData<ISecurityPutRoleRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityPutRoleAsync<TResponse>(p.RouteValues.Name,body,p.RequestParameters,ct);
-					break;
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityPutRolePostAsync<TResponse>(p.RouteValues.Name,body,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("SecurityPutRole", p, new [] { PUT, POST }, "/_security/role/{name}");
-		}
-		
-		internal TResponse SecurityPutRoleMappingDispatch<TResponse>(IRequest<SecurityPutRoleMappingRequestParameters> p,SerializableData<ISecurityPutRoleMappingRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityPutRoleMapping<TResponse>(p.RouteValues.Name,body,p.RequestParameters);
-					break;
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityPutRoleMappingPost<TResponse>(p.RouteValues.Name,body,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("SecurityPutRoleMapping", p, new [] { PUT, POST }, "/_security/role_mapping/{name}");
-		}
-		
-		internal Task<TResponse> SecurityPutRoleMappingDispatchAsync<TResponse>(IRequest<SecurityPutRoleMappingRequestParameters> p,SerializableData<ISecurityPutRoleMappingRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityPutRoleMappingAsync<TResponse>(p.RouteValues.Name,body,p.RequestParameters,ct);
-					break;
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.SecurityPutRoleMappingPostAsync<TResponse>(p.RouteValues.Name,body,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("SecurityPutRoleMapping", p, new [] { PUT, POST }, "/_security/role_mapping/{name}");
-		}
-		
-		internal TResponse SecurityPutUserDispatch<TResponse>(IRequest<SecurityPutUserRequestParameters> p,SerializableData<ISecurityPutUserRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.SecurityPutUser<TResponse>(p.RouteValues.Username,body,p.RequestParameters);
-					break;
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.SecurityPutUserPost<TResponse>(p.RouteValues.Username,body,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("SecurityPutUser", p, new [] { PUT, POST }, "/_security/user/{username}");
-		}
-		
-		internal Task<TResponse> SecurityPutUserDispatchAsync<TResponse>(IRequest<SecurityPutUserRequestParameters> p,SerializableData<ISecurityPutUserRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.SecurityPutUserAsync<TResponse>(p.RouteValues.Username,body,p.RequestParameters,ct);
-					break;
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.SecurityPutUserPostAsync<TResponse>(p.RouteValues.Username,body,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("SecurityPutUser", p, new [] { PUT, POST }, "/_security/user/{username}");
-		}
-		
-		internal TResponse XpackSqlClearCursorDispatch<TResponse>(IRequest<ClearSqlCursorRequestParameters> p,SerializableData<IClearSqlCursorRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-						return _lowLevel.XpackSqlClearCursor<TResponse>(body,p.RequestParameters);
-			}
-			throw InvalidDispatch("XpackSqlClearCursor", p, new [] { POST }, "/_sql/close");
-		}
-		
-		internal Task<TResponse> XpackSqlClearCursorDispatchAsync<TResponse>(IRequest<ClearSqlCursorRequestParameters> p,SerializableData<IClearSqlCursorRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-						return _lowLevel.XpackSqlClearCursorAsync<TResponse>(body,p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("XpackSqlClearCursor", p, new [] { POST }, "/_sql/close");
-		}
-		
-		internal TResponse XpackSqlQueryDispatch<TResponse>(IRequest<QuerySqlRequestParameters> p,SerializableData<IQuerySqlRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-						return _lowLevel.XpackSqlQuery<TResponse>(body,p.RequestParameters);
-				case GET:
-						return _lowLevel.XpackSqlQueryGet<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("XpackSqlQuery", p, new [] { POST, GET }, "/_sql");
-		}
-		
-		internal Task<TResponse> XpackSqlQueryDispatchAsync<TResponse>(IRequest<QuerySqlRequestParameters> p,SerializableData<IQuerySqlRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-						return _lowLevel.XpackSqlQueryAsync<TResponse>(body,p.RequestParameters,ct);
-				case GET:
-						return _lowLevel.XpackSqlQueryGetAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("XpackSqlQuery", p, new [] { POST, GET }, "/_sql");
-		}
-		
-		internal TResponse XpackSqlTranslateDispatch<TResponse>(IRequest<TranslateSqlRequestParameters> p,SerializableData<ITranslateSqlRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-						return _lowLevel.XpackSqlTranslate<TResponse>(body,p.RequestParameters);
-				case GET:
-						return _lowLevel.XpackSqlTranslateGet<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("XpackSqlTranslate", p, new [] { POST, GET }, "/_sql/translate");
-		}
-		
-		internal Task<TResponse> XpackSqlTranslateDispatchAsync<TResponse>(IRequest<TranslateSqlRequestParameters> p,SerializableData<ITranslateSqlRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-						return _lowLevel.XpackSqlTranslateAsync<TResponse>(body,p.RequestParameters,ct);
-				case GET:
-						return _lowLevel.XpackSqlTranslateGetAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("XpackSqlTranslate", p, new [] { POST, GET }, "/_sql/translate");
-		}
-		
-		internal TResponse SslCertificatesDispatch<TResponse>(IRequest<SslCertificatesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-						return _lowLevel.SslCertificates<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("SslCertificates", p, new [] { GET }, "/_ssl/certificates");
-		}
-		
-		internal Task<TResponse> SslCertificatesDispatchAsync<TResponse>(IRequest<SslCertificatesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-						return _lowLevel.SslCertificatesAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("SslCertificates", p, new [] { GET }, "/_ssl/certificates");
-		}
-		
-		internal TResponse XpackWatcherAckWatchDispatch<TResponse>(IRequest<AcknowledgeWatchRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSet(p.RouteValues.WatchId, p.RouteValues.ActionId)) return _lowLevel.XpackWatcherAckWatch<TResponse>(p.RouteValues.WatchId,p.RouteValues.ActionId,p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.XpackWatcherAckWatch<TResponse>(p.RouteValues.WatchId,p.RequestParameters);
-					break;
-				case POST:
-					if (AllSet(p.RouteValues.WatchId, p.RouteValues.ActionId)) return _lowLevel.XpackWatcherAckWatchPost<TResponse>(p.RouteValues.WatchId,p.RouteValues.ActionId,p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.XpackWatcherAckWatchPost<TResponse>(p.RouteValues.WatchId,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("XpackWatcherAckWatch", p, new [] { PUT, POST }, "/_watcher/watch/{watch_id}/_ack", "/_watcher/watch/{watch_id}/_ack/{action_id}");
-		}
-		
-		internal Task<TResponse> XpackWatcherAckWatchDispatchAsync<TResponse>(IRequest<AcknowledgeWatchRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSet(p.RouteValues.WatchId, p.RouteValues.ActionId)) return _lowLevel.XpackWatcherAckWatchAsync<TResponse>(p.RouteValues.WatchId,p.RouteValues.ActionId,p.RequestParameters,ct);
-					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.XpackWatcherAckWatchAsync<TResponse>(p.RouteValues.WatchId,p.RequestParameters,ct);
-					break;
-				case POST:
-					if (AllSet(p.RouteValues.WatchId, p.RouteValues.ActionId)) return _lowLevel.XpackWatcherAckWatchPostAsync<TResponse>(p.RouteValues.WatchId,p.RouteValues.ActionId,p.RequestParameters,ct);
-					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.XpackWatcherAckWatchPostAsync<TResponse>(p.RouteValues.WatchId,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("XpackWatcherAckWatch", p, new [] { PUT, POST }, "/_watcher/watch/{watch_id}/_ack", "/_watcher/watch/{watch_id}/_ack/{action_id}");
-		}
-		
-		internal TResponse XpackWatcherActivateWatchDispatch<TResponse>(IRequest<ActivateWatchRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.XpackWatcherActivateWatch<TResponse>(p.RouteValues.WatchId,p.RequestParameters);
-					break;
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.XpackWatcherActivateWatchPost<TResponse>(p.RouteValues.WatchId,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("XpackWatcherActivateWatch", p, new [] { PUT, POST }, "/_watcher/watch/{watch_id}/_activate");
-		}
-		
-		internal Task<TResponse> XpackWatcherActivateWatchDispatchAsync<TResponse>(IRequest<ActivateWatchRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.XpackWatcherActivateWatchAsync<TResponse>(p.RouteValues.WatchId,p.RequestParameters,ct);
-					break;
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.XpackWatcherActivateWatchPostAsync<TResponse>(p.RouteValues.WatchId,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("XpackWatcherActivateWatch", p, new [] { PUT, POST }, "/_watcher/watch/{watch_id}/_activate");
-		}
-		
-		internal TResponse XpackWatcherDeactivateWatchDispatch<TResponse>(IRequest<DeactivateWatchRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.XpackWatcherDeactivateWatch<TResponse>(p.RouteValues.WatchId,p.RequestParameters);
-					break;
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.XpackWatcherDeactivateWatchPost<TResponse>(p.RouteValues.WatchId,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("XpackWatcherDeactivateWatch", p, new [] { PUT, POST }, "/_watcher/watch/{watch_id}/_deactivate");
-		}
-		
-		internal Task<TResponse> XpackWatcherDeactivateWatchDispatchAsync<TResponse>(IRequest<DeactivateWatchRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.XpackWatcherDeactivateWatchAsync<TResponse>(p.RouteValues.WatchId,p.RequestParameters,ct);
-					break;
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.XpackWatcherDeactivateWatchPostAsync<TResponse>(p.RouteValues.WatchId,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("XpackWatcherDeactivateWatch", p, new [] { PUT, POST }, "/_watcher/watch/{watch_id}/_deactivate");
-		}
-		
-		internal TResponse XpackWatcherDeleteWatchDispatch<TResponse>(IRequest<DeleteWatchRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackWatcherDeleteWatch<TResponse>(p.RouteValues.Id,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("XpackWatcherDeleteWatch", p, new [] { DELETE }, "/_watcher/watch/{id}");
-		}
-		
-		internal Task<TResponse> XpackWatcherDeleteWatchDispatchAsync<TResponse>(IRequest<DeleteWatchRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackWatcherDeleteWatchAsync<TResponse>(p.RouteValues.Id,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("XpackWatcherDeleteWatch", p, new [] { DELETE }, "/_watcher/watch/{id}");
-		}
-		
-		internal TResponse XpackWatcherExecuteWatchDispatch<TResponse>(IRequest<ExecuteWatchRequestParameters> p,SerializableData<IExecuteWatchRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSet(p.RouteValues.Id)) return _lowLevel.XpackWatcherExecuteWatch<TResponse>(p.RouteValues.Id,body,p.RequestParameters);
-						return _lowLevel.XpackWatcherExecuteWatch<TResponse>(body,p.RequestParameters);
-				case POST:
-					if (AllSet(p.RouteValues.Id)) return _lowLevel.XpackWatcherExecuteWatchPost<TResponse>(p.RouteValues.Id,body,p.RequestParameters);
-						return _lowLevel.XpackWatcherExecuteWatchPost<TResponse>(body,p.RequestParameters);
-			}
-			throw InvalidDispatch("XpackWatcherExecuteWatch", p, new [] { PUT, POST }, "/_watcher/watch/{id}/_execute", "/_watcher/watch/_execute");
-		}
-		
-		internal Task<TResponse> XpackWatcherExecuteWatchDispatchAsync<TResponse>(IRequest<ExecuteWatchRequestParameters> p,SerializableData<IExecuteWatchRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSet(p.RouteValues.Id)) return _lowLevel.XpackWatcherExecuteWatchAsync<TResponse>(p.RouteValues.Id,body,p.RequestParameters,ct);
-						return _lowLevel.XpackWatcherExecuteWatchAsync<TResponse>(body,p.RequestParameters,ct);
-				case POST:
-					if (AllSet(p.RouteValues.Id)) return _lowLevel.XpackWatcherExecuteWatchPostAsync<TResponse>(p.RouteValues.Id,body,p.RequestParameters,ct);
-						return _lowLevel.XpackWatcherExecuteWatchPostAsync<TResponse>(body,p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("XpackWatcherExecuteWatch", p, new [] { PUT, POST }, "/_watcher/watch/{id}/_execute", "/_watcher/watch/_execute");
-		}
-		
-		internal TResponse XpackWatcherGetWatchDispatch<TResponse>(IRequest<GetWatchRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackWatcherGetWatch<TResponse>(p.RouteValues.Id,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("XpackWatcherGetWatch", p, new [] { GET }, "/_watcher/watch/{id}");
-		}
-		
-		internal Task<TResponse> XpackWatcherGetWatchDispatchAsync<TResponse>(IRequest<GetWatchRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackWatcherGetWatchAsync<TResponse>(p.RouteValues.Id,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("XpackWatcherGetWatch", p, new [] { GET }, "/_watcher/watch/{id}");
-		}
-		
-		internal TResponse XpackWatcherPutWatchDispatch<TResponse>(IRequest<PutWatchRequestParameters> p,SerializableData<IPutWatchRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackWatcherPutWatch<TResponse>(p.RouteValues.Id,body,p.RequestParameters);
-					break;
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackWatcherPutWatchPost<TResponse>(p.RouteValues.Id,body,p.RequestParameters);
-					break;
-			}
-			throw InvalidDispatch("XpackWatcherPutWatch", p, new [] { PUT, POST }, "/_watcher/watch/{id}");
-		}
-		
-		internal Task<TResponse> XpackWatcherPutWatchDispatchAsync<TResponse>(IRequest<PutWatchRequestParameters> p,SerializableData<IPutWatchRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackWatcherPutWatchAsync<TResponse>(p.RouteValues.Id,body,p.RequestParameters,ct);
-					break;
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackWatcherPutWatchPostAsync<TResponse>(p.RouteValues.Id,body,p.RequestParameters,ct);
-					break;
-			}
-			throw InvalidDispatch("XpackWatcherPutWatch", p, new [] { PUT, POST }, "/_watcher/watch/{id}");
-		}
-		
-		internal TResponse XpackWatcherStartDispatch<TResponse>(IRequest<StartWatcherRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-						return _lowLevel.XpackWatcherStart<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("XpackWatcherStart", p, new [] { POST }, "/_watcher/_start");
-		}
-		
-		internal Task<TResponse> XpackWatcherStartDispatchAsync<TResponse>(IRequest<StartWatcherRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-						return _lowLevel.XpackWatcherStartAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("XpackWatcherStart", p, new [] { POST }, "/_watcher/_start");
-		}
-		
-		internal TResponse XpackWatcherStatsDispatch<TResponse>(IRequest<WatcherStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.WatcherStatsMetric)) return _lowLevel.XpackWatcherStats<TResponse>(p.RouteValues.WatcherStatsMetric.Value,p.RequestParameters);
-						return _lowLevel.XpackWatcherStats<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("XpackWatcherStats", p, new [] { GET }, "/_watcher/stats", "/_watcher/stats/{watcher_stats_metric}");
-		}
-		
-		internal Task<TResponse> XpackWatcherStatsDispatchAsync<TResponse>(IRequest<WatcherStatsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.WatcherStatsMetric)) return _lowLevel.XpackWatcherStatsAsync<TResponse>(p.RouteValues.WatcherStatsMetric.Value,p.RequestParameters,ct);
-						return _lowLevel.XpackWatcherStatsAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("XpackWatcherStats", p, new [] { GET }, "/_watcher/stats", "/_watcher/stats/{watcher_stats_metric}");
-		}
-		
-		internal TResponse XpackWatcherStopDispatch<TResponse>(IRequest<StopWatcherRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-						return _lowLevel.XpackWatcherStop<TResponse>(p.RequestParameters);
-			}
-			throw InvalidDispatch("XpackWatcherStop", p, new [] { POST }, "/_watcher/_stop");
-		}
-		
-		internal Task<TResponse> XpackWatcherStopDispatchAsync<TResponse>(IRequest<StopWatcherRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-						return _lowLevel.XpackWatcherStopAsync<TResponse>(p.RequestParameters,ct);
-			}
-			throw InvalidDispatch("XpackWatcherStop", p, new [] { POST }, "/_watcher/_stop");
 		}
 			}
 }

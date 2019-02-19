@@ -3,19 +3,19 @@
 	[MapsApi("exists.json")]
 	public partial interface IDocumentExistsRequest { }
 
-	public interface IDocumentExistsRequest<T> : IDocumentExistsRequest where T : class { }
+	public partial interface IDocumentExistsRequest<TDocument> where TDocument : class { }
 
 	public partial class DocumentExistsRequest
 	{
 		private object AutoRouteDocument() => null;
 	}
 
-	public partial class DocumentExistsRequest<T> where T : class
+	public partial class DocumentExistsRequest<TDocument> where TDocument : class
 	{
 		private object AutoRouteDocument() => null;
 	}
 
-	public partial class DocumentExistsDescriptor<T> where T : class
+	public partial class DocumentExistsDescriptor<TDocument> where TDocument : class
 	{
 		private object AutoRouteDocument() => null;
 	}

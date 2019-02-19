@@ -95,7 +95,7 @@ namespace Tests.XPack.Graph.Explore
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override GraphExploreRequest Initializer => new GraphExploreRequest(Index<Project>(), Type<Project>())
+		protected override GraphExploreRequest Initializer => new GraphExploreRequest(Index<Project>())
 		{
 			Query = new TermQuery { Field = Field<Project>(p => p.State), Value = StateOfBeing.VeryActive },
 			Vertices = new List<IGraphVertexDefinition>

@@ -38,7 +38,7 @@ namespace Nest
 		public IDeleteWatchResponse DeleteWatch(IDeleteWatchRequest request) =>
 			Dispatcher.Dispatch<IDeleteWatchRequest, DeleteWatchRequestParameters, DeleteWatchResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackWatcherDeleteWatchDispatch<DeleteWatchResponse>(p)
+				(p, d) => LowLevelDispatch.WatcherDeleteWatchDispatch<DeleteWatchResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -54,7 +54,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IDeleteWatchRequest, DeleteWatchRequestParameters, DeleteWatchResponse, IDeleteWatchResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackWatcherDeleteWatchDispatchAsync<DeleteWatchResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.WatcherDeleteWatchDispatchAsync<DeleteWatchResponse>(p, c)
 			);
 	}
 }

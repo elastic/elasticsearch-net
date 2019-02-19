@@ -26,7 +26,7 @@ namespace Nest
 
 		partial void DocumentFromPath(TDocument document) => Document = document;
 
-		private TDocument AutoRouteDocument() => Self.Document;
+		private TDocument AutoRouteDocument() => Document;
 	}
 
 	public partial class IndexDescriptor<TDocument> where TDocument : class

@@ -35,26 +35,25 @@ namespace Tests.Search.MultiSearch
 
 		protected override Func<MultiSearchDescriptor, IMultiSearchRequest> Fluent => ms => ms
 			.Index(typeof(Project))
-			.Type(typeof(Project))
 			.Search<Project>(s => s.Query(q => q.MatchAll()).From(0).Size(10))
 			.Search<Project>(s => s.Index("otherindex").Query(q => q.Match(m => m.Field(p => p.Name).Query("nest"))))
-			.Search<Project>(s => s.Index("otherindex").Type("othertype").SearchType(SearchType.DfsQueryThenFetch).Query(q => q.MatchAll()));
+			.Search<Project>(s => s.Index("otherindex").SearchType(SearchType.DfsQueryThenFetch).Query(q => q.MatchAll()));
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override MultiSearchRequest Initializer => new MultiSearchRequest(typeof(Project), typeof(Project))
+		protected override MultiSearchRequest Initializer => new MultiSearchRequest(typeof(Project))
 		{
 			Operations = new Dictionary<string, ISearchRequest>
 			{
 				{ "s1", new SearchRequest<Project> { From = 0, Size = 10, Query = new QueryContainer(new MatchAllQuery()) } },
 				{
 					"s2",
-					new SearchRequest<Project>("otherindex", typeof(Project))
+					new SearchRequest<Project>("otherindex")
 						{ Query = new QueryContainer(new MatchQuery { Field = "name", Query = "nest" }) }
 				},
 				{
 					"s3",
-					new SearchRequest<Project>("otherindex", "othertype")
+					new SearchRequest<Project>("otherindex")
 						{ SearchType = SearchType.DfsQueryThenFetch, Query = new QueryContainer(new MatchAllQuery()) }
 				},
 			}

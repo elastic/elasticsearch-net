@@ -5,7 +5,7 @@ namespace Nest
 	/// <summary>
 	/// Revert a specific snapshot for a machine learning job
 	/// </summary>
-	[MapsApi("ml.rever_model_snapshot.json")]
+	[MapsApi("ml.revert_model_snapshot.json")]
 	public partial interface IRevertModelSnapshotRequest
 	{
 		/// <summary>

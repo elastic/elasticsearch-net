@@ -17,7 +17,7 @@ namespace Tests.Framework.SerializationTests
 				exception: new Exception("problem with the request as a result of 401")
 			);
 
-			var stringResponse = client.LowLevel.Search<StringResponse>("project", "project", PostData.Serializable(new { }));
+			var stringResponse = client.LowLevel.Search<StringResponse>("project", PostData.Serializable(new { }));
 
 			stringResponse.Body.Should().NotBeNull();
 			stringResponse.Body.Should().Be(StubResponse.NginxHtml401Response);
@@ -33,7 +33,7 @@ namespace Tests.Framework.SerializationTests
 				exception: new Exception("problem with the request as a result of 401")
 			);
 
-			var stringResponse = client.LowLevel.Search<StringResponse>("project", "project", PostData.Serializable(new { }));
+			var stringResponse = client.LowLevel.Search<StringResponse>("project", PostData.Serializable(new { }));
 
 			stringResponse.Body.Should().NotBeNull();
 			stringResponse.Body.Should().Be(StubResponse.NginxHtml401Response);

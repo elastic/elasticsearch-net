@@ -19,9 +19,9 @@ namespace Tests.XPack.Watcher.WatcherStats
 				;
 
 			await GET("/_xpack/watcher/stats/_all")
-					.Fluent(c => c.WatcherStats(r => r.WatcherStatsMetric(WatcherStatsMetric.All)))
+					.Fluent(c => c.WatcherStats(r => r.Metric(WatcherStatsMetric.All)))
 					.Request(c => c.WatcherStats(new WatcherStatsRequest(WatcherStatsMetric.All)))
-					.FluentAsync(c => c.WatcherStatsAsync(r => r.WatcherStatsMetric(WatcherStatsMetric.All)))
+					.FluentAsync(c => c.WatcherStatsAsync(r => r.Metric(WatcherStatsMetric.All)))
 					.RequestAsync(c => c.WatcherStatsAsync(new WatcherStatsRequest(WatcherStatsMetric.All)))
 				;
 		}

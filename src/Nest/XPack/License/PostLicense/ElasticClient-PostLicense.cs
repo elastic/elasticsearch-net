@@ -32,7 +32,7 @@ namespace Nest
 		public IPostLicenseResponse PostLicense(IPostLicenseRequest request) =>
 			Dispatcher.Dispatch<IPostLicenseRequest, PostLicenseRequestParameters, PostLicenseResponse>(
 				request,
-				LowLevelDispatch.XpackLicensePostDispatch<PostLicenseResponse>
+				LowLevelDispatch.LicensePostDispatch<PostLicenseResponse>
 			);
 
 		/// <inheritdoc />
@@ -48,7 +48,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IPostLicenseRequest, PostLicenseRequestParameters, PostLicenseResponse, IPostLicenseResponse>(
 				request,
 				cancellationToken,
-				LowLevelDispatch.XpackLicensePostDispatchAsync<PostLicenseResponse>
+				LowLevelDispatch.LicensePostDispatchAsync<PostLicenseResponse>
 			);
 	}
 }

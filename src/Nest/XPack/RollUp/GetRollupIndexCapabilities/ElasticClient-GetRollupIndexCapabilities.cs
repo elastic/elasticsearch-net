@@ -43,7 +43,7 @@ namespace Nest
 		public IGetRollupIndexCapabilitiesResponse GetRollupIndexCapabilities(IGetRollupIndexCapabilitiesRequest request) =>
 			Dispatcher.Dispatch<IGetRollupIndexCapabilitiesRequest, GetRollupIndexCapabilitiesRequestParameters, GetRollupIndexCapabilitiesResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackRollupGetRollupIndexCapsDispatch<GetRollupIndexCapabilitiesResponse>(p)
+				(p, d) => LowLevelDispatch.RollupGetRollupIndexCapsDispatch<GetRollupIndexCapabilitiesResponse>(p)
 			);
 
 		/// <inheritdoc cref="GetRollupIndexCapabilities(IndexName, System.Func{Nest.GetRollupIndexCapabilitiesDescriptor,Nest.IGetRollupIndexCapabilitiesRequest})" />
@@ -63,7 +63,7 @@ namespace Nest
 					IGetRollupIndexCapabilitiesResponse>(
 					request,
 					cancellationToken,
-					(p, d, c) => LowLevelDispatch.XpackRollupGetRollupIndexCapsDispatchAsync<GetRollupIndexCapabilitiesResponse>(p, c)
+					(p, d, c) => LowLevelDispatch.RollupGetRollupIndexCapsDispatchAsync<GetRollupIndexCapabilitiesResponse>(p, c)
 				);
 	}
 }

@@ -32,7 +32,7 @@ namespace Nest
 		public IAuthenticateResponse Authenticate(IAuthenticateRequest request) =>
 			Dispatcher.Dispatch<IAuthenticateRequest, AuthenticateRequestParameters, AuthenticateResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackSecurityAuthenticateDispatch<AuthenticateResponse>(p)
+				(p, d) => LowLevelDispatch.SecurityAuthenticateDispatch<AuthenticateResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -48,7 +48,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IAuthenticateRequest, AuthenticateRequestParameters, AuthenticateResponse, IAuthenticateResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackSecurityAuthenticateDispatchAsync<AuthenticateResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.SecurityAuthenticateDispatchAsync<AuthenticateResponse>(p, c)
 			);
 	}
 }

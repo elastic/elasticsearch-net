@@ -14,26 +14,26 @@ namespace Tests.Search.SearchTemplate
 			var hardcoded = "hardcoded";
 
 			await UrlTester.POST("/hardcoded/doc/_search/template")
-					.Request(c => c.SearchTemplate<Project>(new SearchTemplateRequest(hardcoded, "doc")))
-					.Request(c => c.SearchTemplate<Project>(new SearchTemplateRequest<Project>(hardcoded, Type<Project>())))
-					.FluentAsync(c => c.SearchTemplateAsync<Project>(s => s.Index(hardcoded).Type<Project>()))
-					.RequestAsync(c => c.SearchTemplateAsync<Project>(new SearchTemplateRequest<Project>(hardcoded, Type<Project>())))
-					.FluentAsync(c => c.SearchTemplateAsync<Project>(s => s.Index(hardcoded).Type<Project>()))
+					.Request(c => c.SearchTemplate<Project>(new SearchTemplateRequest(hardcoded)))
+					.Request(c => c.SearchTemplate<Project>(new SearchTemplateRequest<Project>(hardcoded)))
+					.FluentAsync(c => c.SearchTemplateAsync<Project>(s => s.Index(hardcoded)))
+					.RequestAsync(c => c.SearchTemplateAsync<Project>(new SearchTemplateRequest<Project>(hardcoded)))
+					.FluentAsync(c => c.SearchTemplateAsync<Project>(s => s.Index(hardcoded)))
 				;
 
 			await UrlTester.POST("/project/_search/template")
 				.Request(c => c.SearchTemplate<Project>(new SearchTemplateRequest("project")))
-				.Fluent(c => c.SearchTemplate<Project>(s => s.Index("project").AllTypes()))
+				.Fluent(c => c.SearchTemplate<Project>(s => s.Index("project")))
 				.Request(c => c.SearchTemplate<Project>(new SearchTemplateRequest<Project>(typeof(Project))))
-				.FluentAsync(c => c.SearchTemplateAsync<Project>(s => s.Index("project").AllTypes()))
+				.FluentAsync(c => c.SearchTemplateAsync<Project>(s => s.Index("project")))
 				.RequestAsync(c => c.SearchTemplateAsync<Project>(new SearchTemplateRequest<Project>(typeof(Project))));
 
 			await UrlTester.POST("/_search/template")
-					.Fluent(c => c.SearchTemplate<Project>(s => s.AllIndices().AllTypes()))
+					.Fluent(c => c.SearchTemplate<Project>(s => s.AllIndices()))
 					.Request(c => c.SearchTemplate<Project>(new SearchTemplateRequest()))
-					.Request(c => c.SearchTemplate<Project>(new SearchTemplateRequest<Project>(Nest.Indices.All, Types.All)))
-					.FluentAsync(c => c.SearchTemplateAsync<Project>(s => s.AllIndices().AllTypes()))
-					.RequestAsync(c => c.SearchTemplateAsync<Project>(new SearchTemplateRequest<Project>(Nest.Indices.All, Types.All)))
+					.Request(c => c.SearchTemplate<Project>(new SearchTemplateRequest<Project>(Nest.Indices.All)))
+					.FluentAsync(c => c.SearchTemplateAsync<Project>(s => s.AllIndices()))
+					.RequestAsync(c => c.SearchTemplateAsync<Project>(new SearchTemplateRequest<Project>(Nest.Indices.All)))
 					.RequestAsync(c => c.SearchTemplateAsync<Project>(new SearchTemplateRequest()))
 				;
 		}

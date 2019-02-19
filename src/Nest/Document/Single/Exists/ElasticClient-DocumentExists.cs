@@ -15,20 +15,20 @@ namespace Nest
 		/// <para> </para>
 		/// <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html</a>
 		/// </summary>
-		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
+		/// <typeparam name="TDocument">The type used to infer the default index and typename</typeparam>
 		/// <param name="selector">Describe what document we are looking for</param>
-		IExistsResponse DocumentExists<T>(DocumentPath<T> document, Func<DocumentExistsDescriptor<T>, IDocumentExistsRequest> selector = null)
-			where T : class;
+		IExistsResponse DocumentExists<TDocument>(DocumentPath<TDocument> document, Func<DocumentExistsDescriptor<TDocument>, IDocumentExistsRequest> selector = null)
+			where TDocument : class;
 
 		/// <inheritdoc />
 		IExistsResponse DocumentExists(IDocumentExistsRequest request);
 
 		/// <inheritdoc />
-		Task<IExistsResponse> DocumentExistsAsync<T>(DocumentPath<T> document,
-			Func<DocumentExistsDescriptor<T>, IDocumentExistsRequest> selector = null,
+		Task<IExistsResponse> DocumentExistsAsync<TDocument>(DocumentPath<TDocument> document,
+			Func<DocumentExistsDescriptor<TDocument>, IDocumentExistsRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
 		)
-			where T : class;
+			where TDocument : class;
 
 		/// <inheritdoc />
 		Task<IExistsResponse> DocumentExistsAsync(IDocumentExistsRequest request, CancellationToken cancellationToken = default(CancellationToken));
@@ -37,9 +37,9 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IExistsResponse DocumentExists<T>(DocumentPath<T> document, Func<DocumentExistsDescriptor<T>, IDocumentExistsRequest> selector = null)
-			where T : class =>
-			DocumentExists(selector.InvokeOrDefault(new DocumentExistsDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
+		public IExistsResponse DocumentExists<TDocument>(DocumentPath<TDocument> document, Func<DocumentExistsDescriptor<TDocument>, IDocumentExistsRequest> selector = null)
+			where TDocument : class =>
+			DocumentExists(selector.InvokeOrDefault(new DocumentExistsDescriptor<TDocument>(document.Self.Index, document.Self.Id)));
 
 		/// <inheritdoc />
 		public IExistsResponse DocumentExists(IDocumentExistsRequest request) =>
@@ -49,11 +49,11 @@ namespace Nest
 			);
 
 		/// <inheritdoc />
-		public Task<IExistsResponse> DocumentExistsAsync<T>(DocumentPath<T> document,
-			Func<DocumentExistsDescriptor<T>, IDocumentExistsRequest> selector = null,
+		public Task<IExistsResponse> DocumentExistsAsync<TDocument>(DocumentPath<TDocument> document,
+			Func<DocumentExistsDescriptor<TDocument>, IDocumentExistsRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
-		) where T : class =>
-			DocumentExistsAsync(selector.InvokeOrDefault(new DocumentExistsDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)),
+		) where TDocument : class =>
+			DocumentExistsAsync(selector.InvokeOrDefault(new DocumentExistsDescriptor<TDocument>(document.Self.Index, document.Self.Id)),
 				cancellationToken);
 
 		/// <inheritdoc />

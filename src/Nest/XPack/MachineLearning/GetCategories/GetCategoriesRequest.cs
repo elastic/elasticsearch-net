@@ -6,7 +6,7 @@ namespace Nest
 	/// <summary>
 	/// Retrieve job results for one or more categories.
 	/// </summary>
-	[[MapsApi("ml.get_categories.json")]
+	[MapsApi("ml.get_categories.json")]
 	public partial interface IGetCategoriesRequest
 	{
 		/// <summary>

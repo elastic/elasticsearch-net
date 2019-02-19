@@ -112,10 +112,10 @@ namespace Tests.ClientConcepts.LowLevel
 				LastName = "Laarman"
 			};
 
-			var indexResponse = lowlevelClient.Index<BytesResponse>("people", "person", "1", PostData.Serializable(person)); //<1> synchronous method that returns an `IIndexResponse`
+			var indexResponse = lowlevelClient.Index<BytesResponse>("people", "1", PostData.Serializable(person)); //<1> synchronous method that returns an `IIndexResponse`
 			byte[] responseBytes = indexResponse.Body;
 
-			var asyncIndexResponse = await lowlevelClient.IndexAsync<StringResponse>("people", "person", "1", PostData.Serializable(person)); //<2> asynchronous method that returns a `Task<IIndexResponse>` that can be awaited
+			var asyncIndexResponse = await lowlevelClient.IndexAsync<StringResponse>("people", "1", PostData.Serializable(person)); //<2> asynchronous method that returns a `Task<IIndexResponse>` that can be awaited
 			string responseString = asyncIndexResponse.Body;
 		}
 
@@ -135,7 +135,7 @@ namespace Tests.ClientConcepts.LowLevel
 				LastName = "Laarman"
 			};
 
-			var indexResponse = await lowlevelClient.IndexAsync<BytesResponse>("people", "person", "1", PostData.Serializable(person));
+			var indexResponse = await lowlevelClient.IndexAsync<BytesResponse>("people", "1", PostData.Serializable(person));
 			byte[] responseStream = indexResponse.Body;
 		}
 
@@ -181,7 +181,7 @@ namespace Tests.ClientConcepts.LowLevel
 		*/
 		public void SearchingWithAnonymousTypes()
 		{
-			var searchResponse = lowlevelClient.Search<StringResponse>("people", "person", PostData.Serializable(new
+			var searchResponse = lowlevelClient.Search<StringResponse>("people", PostData.Serializable(new
 			{
 				from = 0,
 				size = 10,
@@ -208,7 +208,7 @@ namespace Tests.ClientConcepts.LowLevel
 		 */
 		 public void SearchingWithStrings()
 		{
-			var searchResponse = lowlevelClient.Search<BytesResponse>("people", "person", @"
+			var searchResponse = lowlevelClient.Search<BytesResponse>("people", @"
 			{
 				""from"": 0,
 				""size"": 10,
@@ -249,7 +249,7 @@ namespace Tests.ClientConcepts.LowLevel
 		*/
 		public void ResponseProperties()
 		{
-			var searchResponse = lowlevelClient.Search<BytesResponse>("people", "person", PostData.Serializable(new { match_all = new {} }));
+			var searchResponse = lowlevelClient.Search<BytesResponse>("people", PostData.Serializable(new { match_all = new {} }));
 
 			var success = searchResponse.Success; // <1> Response is in the 200 range, or an expected response for the given request
 			var successOrKnownError = searchResponse.SuccessOrKnownError; // <2> Response is successful, or has a response code between 400-599 that indicates the request cannot be retried.

@@ -2,25 +2,24 @@
 {
 	public partial interface IGetRequest { }
 
-	public interface IGetRequest<T> : IGetRequest where T : class { }
+	public partial interface IGetRequest<TDocument> where TDocument : class { }
 
 	public partial class GetRequest
 	{
 		private object AutoRouteDocument() => null;
 	}
 
-	public partial class GetRequest<T>
-		where T : class
+	public partial class GetRequest<TDocument> where TDocument : class
 	{
 		private object AutoRouteDocument() => null;
 	}
 
-	public partial class GetDescriptor<T> where T : class
+	public partial class GetDescriptor<TDocument> where TDocument : class
 	{
 		private object AutoRouteDocument() => null;
 
-		public GetDescriptor<T> ExecuteOnPrimary() => Preference("_primary");
+		public GetDescriptor<TDocument> ExecuteOnPrimary() => Preference("_primary");
 
-		public GetDescriptor<T> ExecuteOnLocalShard() => Preference("_local");
+		public GetDescriptor<TDocument> ExecuteOnLocalShard() => Preference("_local");
 	}
 }

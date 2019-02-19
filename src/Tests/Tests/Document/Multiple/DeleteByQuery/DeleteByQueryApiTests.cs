@@ -48,7 +48,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(Indices, Type<Project>())
+		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(Indices)
 		{
 			IgnoreUnavailable = true,
 			Query = new IdsQuery
@@ -130,7 +130,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 			.WaitForCompletion(false)
 			.Conflicts(Conflicts.Proceed);
 
-		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(CallIsolatedValue, Type<Project>())
+		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(CallIsolatedValue)
 		{
 			Query = new MatchAllQuery(),
 			WaitForCompletion = false,
@@ -173,7 +173,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 				)
 			);
 
-		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(CallIsolatedValue, Type<Project>())
+		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(CallIsolatedValue)
 		{
 			Query = new MatchQuery
 			{
@@ -250,7 +250,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 				)
 			);
 
-		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(CallIsolatedValue, Type<Project>())
+		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(CallIsolatedValue)
 		{
 			Slice = new SlicedScroll
 			{

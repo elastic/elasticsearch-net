@@ -57,7 +57,7 @@ namespace Nest
 		public IGetTrialLicenseStatusResponse GetTrialLicenseStatus(IGetTrialLicenseStatusRequest request) =>
 			Dispatcher.Dispatch<IGetTrialLicenseStatusRequest, GetTrialLicenseStatusRequestParameters, GetTrialLicenseStatusResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackLicenseGetTrialStatusDispatch<GetTrialLicenseStatusResponse>(p)
+				(p, d) => LowLevelDispatch.LicenseGetTrialStatusDispatch<GetTrialLicenseStatusResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -76,7 +76,7 @@ namespace Nest
 					IGetTrialLicenseStatusResponse>(
 					request,
 					cancellationToken,
-					(p, d, c) => LowLevelDispatch.XpackLicenseGetTrialStatusDispatchAsync<GetTrialLicenseStatusResponse>(p, c)
+					(p, d, c) => LowLevelDispatch.LicenseGetTrialStatusDispatchAsync<GetTrialLicenseStatusResponse>(p, c)
 				);
 	}
 }

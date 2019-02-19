@@ -36,7 +36,7 @@ namespace Nest
 		public IDeleteDatafeedResponse DeleteDatafeed(IDeleteDatafeedRequest request) =>
 			Dispatcher.Dispatch<IDeleteDatafeedRequest, DeleteDatafeedRequestParameters, DeleteDatafeedResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackMlDeleteDatafeedDispatch<DeleteDatafeedResponse>(p)
+				(p, d) => LowLevelDispatch.MlDeleteDatafeedDispatch<DeleteDatafeedResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -52,7 +52,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IDeleteDatafeedRequest, DeleteDatafeedRequestParameters, DeleteDatafeedResponse, IDeleteDatafeedResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackMlDeleteDatafeedDispatchAsync<DeleteDatafeedResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.MlDeleteDatafeedDispatchAsync<DeleteDatafeedResponse>(p, c)
 			);
 	}
 }

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public partial interface IUpdateRequest<TDocument, TPartialDocument>
+	public partial interface IUpdateRequest<TDocument, TPartialDocument> : IUpdateRequest
 		where TDocument : class
 		where TPartialDocument : class
 	{
@@ -69,7 +69,7 @@ namespace Nest
 		/// <inheritdoc />
 		public TDocument Upsert { get; set; }
 
-		private object AutoRouteDocument() => (object)Self.Upsert ?? Self.Doc;
+		private object AutoRouteDocument() => (object)Upsert ?? Doc;
 	}
 
 	public partial class UpdateDescriptor<TDocument, TPartialDocument>

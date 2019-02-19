@@ -2213,7 +2213,57 @@ namespace Elasticsearch.Net
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
 	}
-	///<summary>Request options for XpackGraphExplore<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
+	///<summary>Request options for CcrDeleteAutoFollowPattern<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</pre></summary>
+	public class DeleteAutoFollowPatternRequestParameters : RequestParameters<DeleteAutoFollowPatternRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
+	///<summary>Request options for CcrFollow<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html</pre></summary>
+	public class CreateFollowIndexRequestParameters : RequestParameters<CreateFollowIndexRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>
+		/// Sets the number of shard copies that must be active before returning. Defaults to 0. Set to `all` for all shard copies, otherwise set to
+		/// any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
+		///</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+	}
+	///<summary>Request options for CcrFollowStats<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</pre></summary>
+	public class FollowIndexStatsRequestParameters : RequestParameters<FollowIndexStatsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	///<summary>Request options for CcrGetAutoFollowPattern<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</pre></summary>
+	public class GetAutoFollowPatternRequestParameters : RequestParameters<GetAutoFollowPatternRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	///<summary>Request options for CcrPauseFollow<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</pre></summary>
+	public class PauseFollowIndexRequestParameters : RequestParameters<PauseFollowIndexRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for CcrPutAutoFollowPattern<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</pre></summary>
+	public class CreateAutoFollowPatternRequestParameters : RequestParameters<CreateAutoFollowPatternRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+	}
+	///<summary>Request options for CcrResumeFollow<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</pre></summary>
+	public class ResumeFollowIndexRequestParameters : RequestParameters<ResumeFollowIndexRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for CcrStats<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-stats.html</pre></summary>
+	public class CcrStatsRequestParameters : RequestParameters<CcrStatsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	///<summary>Request options for CcrUnfollow<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current</pre></summary>
+	public class UnfollowIndexRequestParameters : RequestParameters<UnfollowIndexRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for GraphExplore<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
 	public class GraphExploreRequestParameters : RequestParameters<GraphExploreRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -2221,6 +2271,519 @@ namespace Elasticsearch.Net
 		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
+	}
+	///<summary>Request options for LicenseDelete<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	public class DeleteLicenseRequestParameters : RequestParameters<DeleteLicenseRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
+	///<summary>Request options for LicenseGet<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	public class GetLicenseRequestParameters : RequestParameters<GetLicenseRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+	}
+	///<summary>Request options for LicenseGetBasicStatus<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	public class GetBasicLicenseStatusRequestParameters : RequestParameters<GetBasicLicenseStatusRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	///<summary>Request options for LicenseGetTrialStatus<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	public class GetTrialLicenseStatusRequestParameters : RequestParameters<GetTrialLicenseStatusRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	///<summary>Request options for LicensePost<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	public class PostLicenseRequestParameters : RequestParameters<PostLicenseRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
+		public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
+	}
+	///<summary>Request options for LicensePostStartBasic<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	public class StartBasicLicenseRequestParameters : RequestParameters<StartBasicLicenseRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
+		public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
+	}
+	///<summary>Request options for LicensePostStartTrial<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	public class StartTrialLicenseRequestParameters : RequestParameters<StartTrialLicenseRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>The type of trial license to generate (default: "trial")</summary>
+		public string TypeQueryString { get => Q<string>("type"); set => Q("type", value); }
+		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
+		public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
+	}
+	///<summary>Request options for MigrationDeprecations<pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
+	public class DeprecationInfoRequestParameters : RequestParameters<DeprecationInfoRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	///<summary>Request options for MigrationGetAssistance<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</pre></summary>
+	public class MigrationAssistanceRequestParameters : RequestParameters<MigrationAssistanceRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+	}
+	///<summary>Request options for MigrationUpgrade<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</pre></summary>
+	public class MigrationUpgradeRequestParameters : RequestParameters<MigrationUpgradeRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>Should the request block until the upgrade operation is completed</summary>
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+	}
+	///<summary>Request options for MlCloseJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</pre></summary>
+	public class CloseJobRequestParameters : RequestParameters<CloseJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
+		///<summary>True if the job should be forcefully closed</summary>
+		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
+		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
+	}
+	///<summary>Request options for MlDeleteDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
+	public class DeleteDatafeedRequestParameters : RequestParameters<DeleteDatafeedRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		///<summary>True if the datafeed should be forcefully deleted</summary>
+		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
+	}
+	///<summary>Request options for MlDeleteExpiredData<pre>TODO</pre></summary>
+	public class DeleteExpiredDataRequestParameters : RequestParameters<DeleteExpiredDataRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
+	///<summary>Request options for MlDeleteJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</pre></summary>
+	public class DeleteJobRequestParameters : RequestParameters<DeleteJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		///<summary>True if the job should be forcefully deleted</summary>
+		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
+		///<summary>Should this request wait until the operation has completed before returning</summary>
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+	}
+	///<summary>Request options for MlDeleteModelSnapshot<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</pre></summary>
+	public class DeleteModelSnapshotRequestParameters : RequestParameters<DeleteModelSnapshotRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
+	///<summary>Request options for MlFlushJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</pre></summary>
+	public class FlushJobRequestParameters : RequestParameters<FlushJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>Skips time to the given value without generating results or updating the model for the skipped interval</summary>
+		public string SkipTime { get => Q<string>("skip_time"); set => Q("skip_time", value); }
+	}
+	///<summary>Request options for MlForecast<pre>TODO</pre></summary>
+	public class ForecastJobRequestParameters : RequestParameters<ForecastJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for MlGetBuckets<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</pre></summary>
+	public class GetBucketsRequestParameters : RequestParameters<GetBucketsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for MlGetCategories<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
+	public class GetCategoriesRequestParameters : RequestParameters<GetCategoriesRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for MlGetDatafeeds<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</pre></summary>
+	public class GetDatafeedsRequestParameters : RequestParameters<GetDatafeedsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
+	}
+	///<summary>Request options for MlGetDatafeedStats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</pre></summary>
+	public class GetDatafeedStatsRequestParameters : RequestParameters<GetDatafeedStatsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
+	}
+	///<summary>Request options for MlGetInfluencers<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
+	public class GetInfluencersRequestParameters : RequestParameters<GetInfluencersRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for MlGetJobs<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</pre></summary>
+	public class GetJobsRequestParameters : RequestParameters<GetJobsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
+	}
+	///<summary>Request options for MlGetJobStats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</pre></summary>
+	public class GetJobStatsRequestParameters : RequestParameters<GetJobStatsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
+	}
+	///<summary>Request options for MlGetModelSnapshots<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</pre></summary>
+	public class GetModelSnapshotsRequestParameters : RequestParameters<GetModelSnapshotsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for MlGetOverallBuckets<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</pre></summary>
+	public class GetOverallBucketsRequestParameters : RequestParameters<GetOverallBucketsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for MlGetRecords<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</pre></summary>
+	public class GetAnomalyRecordsRequestParameters : RequestParameters<GetAnomalyRecordsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for MlOpenJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</pre></summary>
+	public class OpenJobRequestParameters : RequestParameters<OpenJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for MlPostData<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
+	public class PostJobDataRequestParameters : RequestParameters<PostJobDataRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>Optional parameter to specify the start of the bucket resetting range</summary>
+		public DateTimeOffset? ResetStart { get => Q<DateTimeOffset?>("reset_start"); set => Q("reset_start", value); }
+		///<summary>Optional parameter to specify the end of the bucket resetting range</summary>
+		public DateTimeOffset? ResetEnd { get => Q<DateTimeOffset?>("reset_end"); set => Q("reset_end", value); }
+	}
+	///<summary>Request options for MlPreviewDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</pre></summary>
+	public class PreviewDatafeedRequestParameters : RequestParameters<PreviewDatafeedRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	///<summary>Request options for MlPutDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</pre></summary>
+	public class PutDatafeedRequestParameters : RequestParameters<PutDatafeedRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+	}
+	///<summary>Request options for MlPutJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
+	public class PutJobRequestParameters : RequestParameters<PutJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+	}
+	///<summary>Request options for MlRevertModelSnapshot<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</pre></summary>
+	public class RevertModelSnapshotRequestParameters : RequestParameters<RevertModelSnapshotRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for MlStartDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</pre></summary>
+	public class StartDatafeedRequestParameters : RequestParameters<StartDatafeedRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for MlStopDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</pre></summary>
+	public class StopDatafeedRequestParameters : RequestParameters<StopDatafeedRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
+	}
+	///<summary>Request options for MlUpdateDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</pre></summary>
+	public class UpdateDatafeedRequestParameters : RequestParameters<UpdateDatafeedRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for MlUpdateJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</pre></summary>
+	public class UpdateJobRequestParameters : RequestParameters<UpdateJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for MlUpdateModelSnapshot<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</pre></summary>
+	public class UpdateModelSnapshotRequestParameters : RequestParameters<UpdateModelSnapshotRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for MlValidate<pre>TODO</pre></summary>
+	public class ValidateJobRequestParameters : RequestParameters<ValidateJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for MlValidateDetector<pre>TODO</pre></summary>
+	public class ValidateDetectorRequestParameters : RequestParameters<ValidateDetectorRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for RollupDeleteJob<pre>TODO</pre></summary>
+	public class DeleteRollupJobRequestParameters : RequestParameters<DeleteRollupJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
+	///<summary>Request options for RollupGetJobs<pre>TODO</pre></summary>
+	public class GetRollupJobRequestParameters : RequestParameters<GetRollupJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	///<summary>Request options for RollupGetRollupCaps<pre>TODO</pre></summary>
+	public class GetRollupCapabilitiesRequestParameters : RequestParameters<GetRollupCapabilitiesRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	///<summary>Request options for RollupGetRollupIndexCaps<pre>TODO</pre></summary>
+	public class GetRollupIndexCapabilitiesRequestParameters : RequestParameters<GetRollupIndexCapabilitiesRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	///<summary>Request options for RollupPutJob<pre>TODO</pre></summary>
+	public class CreateRollupJobRequestParameters : RequestParameters<CreateRollupJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+	}
+	///<summary>Request options for RollupRollupSearch<pre>TODO</pre></summary>
+	public class RollupSearchRequestParameters : RequestParameters<RollupSearchRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
+		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
+		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
+		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
+	}
+	///<summary>Request options for RollupStartJob<pre>TODO</pre></summary>
+	public class StartRollupJobRequestParameters : RequestParameters<StartRollupJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for RollupStopJob<pre>TODO</pre></summary>
+	public class StopRollupJobRequestParameters : RequestParameters<StopRollupJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>True if the API should block until the job has fully stopped, false if should be executed async. Defaults to false.</summary>
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+		///<summary>Block for (at maximum) the specified duration while waiting for the job to stop. Defaults to 30s.</summary>
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
+	}
+	///<summary>Request options for SecurityAuthenticate<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
+	public class AuthenticateRequestParameters : RequestParameters<AuthenticateRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	///<summary>Request options for SecurityChangePassword<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</pre></summary>
+	public class ChangePasswordRequestParameters : RequestParameters<ChangePasswordRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+	}
+	///<summary>Request options for SecurityClearCachedRealms<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</pre></summary>
+	public class ClearCachedRealmsRequestParameters : RequestParameters<ClearCachedRealmsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>Comma-separated list of usernames to clear from the cache</summary>
+		public string[] Usernames { get => Q<string[]>("usernames"); set => Q("usernames", value); }
+	}
+	///<summary>Request options for SecurityClearCachedRoles<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html</pre></summary>
+	public class ClearCachedRolesRequestParameters : RequestParameters<ClearCachedRolesRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for SecurityDeleteRole<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html</pre></summary>
+	public class DeleteRoleRequestParameters : RequestParameters<DeleteRoleRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+	}
+	///<summary>Request options for SecurityDeleteRoleMapping<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html</pre></summary>
+	public class DeleteRoleMappingRequestParameters : RequestParameters<DeleteRoleMappingRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+	}
+	///<summary>Request options for SecurityDeleteUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html</pre></summary>
+	public class DeleteUserRequestParameters : RequestParameters<DeleteUserRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+	}
+	///<summary>Request options for SecurityDisableUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html</pre></summary>
+	public class DisableUserRequestParameters : RequestParameters<DisableUserRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+	}
+	///<summary>Request options for SecurityEnableUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html</pre></summary>
+	public class EnableUserRequestParameters : RequestParameters<EnableUserRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+	}
+	///<summary>Request options for SecurityGetRole<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</pre></summary>
+	public class GetRoleRequestParameters : RequestParameters<GetRoleRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	///<summary>Request options for SecurityGetRoleMapping<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</pre></summary>
+	public class GetRoleMappingRequestParameters : RequestParameters<GetRoleMappingRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	///<summary>Request options for SecurityGetToken<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html</pre></summary>
+	public class GetUserAccessTokenRequestParameters : RequestParameters<GetUserAccessTokenRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for SecurityGetUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html</pre></summary>
+	public class GetUserRequestParameters : RequestParameters<GetUserRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	///<summary>Request options for SecurityInvalidateToken<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</pre></summary>
+	public class InvalidateUserAccessTokenRequestParameters : RequestParameters<InvalidateUserAccessTokenRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
+	///<summary>Request options for SecurityPutRole<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</pre></summary>
+	public class PutRoleRequestParameters : RequestParameters<PutRoleRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+	}
+	///<summary>Request options for SecurityPutRoleMapping<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html</pre></summary>
+	public class PutRoleMappingRequestParameters : RequestParameters<PutRoleMappingRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+	}
+	///<summary>Request options for SecurityPutUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html</pre></summary>
+	public class PutUserRequestParameters : RequestParameters<PutUserRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+	}
+	///<summary>Request options for SqlClearCursor<pre>Clear SQL cursor</pre></summary>
+	public class ClearSqlCursorRequestParameters : RequestParameters<ClearSqlCursorRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for SqlQuery<pre>Execute SQL</pre></summary>
+	public class QuerySqlRequestParameters : RequestParameters<QuerySqlRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
+	}
+	///<summary>Request options for SqlTranslate<pre>Translate SQL into Elasticsearch queries</pre></summary>
+	public class TranslateSqlRequestParameters : RequestParameters<TranslateSqlRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for SslCertificates<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-ssl.html</pre></summary>
+	public class GetCertificatesRequestParameters : RequestParameters<GetCertificatesRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	///<summary>Request options for WatcherAckWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</pre></summary>
+	public class AcknowledgeWatchRequestParameters : RequestParameters<AcknowledgeWatchRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+	}
+	///<summary>Request options for WatcherActivateWatch<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</pre></summary>
+	public class ActivateWatchRequestParameters : RequestParameters<ActivateWatchRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+	}
+	///<summary>Request options for WatcherDeactivateWatch<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</pre></summary>
+	public class DeactivateWatchRequestParameters : RequestParameters<DeactivateWatchRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+	}
+	///<summary>Request options for WatcherDeleteWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</pre></summary>
+	public class DeleteWatchRequestParameters : RequestParameters<DeleteWatchRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
+	///<summary>Request options for WatcherExecuteWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</pre></summary>
+	public class ExecuteWatchRequestParameters : RequestParameters<ExecuteWatchRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>indicates whether the watch should execute in debug mode</summary>
+		public bool? Debug { get => Q<bool?>("debug"); set => Q("debug", value); }
+	}
+	///<summary>Request options for WatcherGetWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</pre></summary>
+	public class GetWatchRequestParameters : RequestParameters<GetWatchRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	///<summary>Request options for WatcherPutWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</pre></summary>
+	public class PutWatchRequestParameters : RequestParameters<PutWatchRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>Specify whether the watch is in/active by default</summary>
+		public bool? Active { get => Q<bool?>("active"); set => Q("active", value); }
+		///<summary>Explicit version number for concurrency control</summary>
+		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
+		///<summary>only update the watch if the last operation that has changed the watch has the specified sequence number</summary>
+		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+		///<summary>only update the watch if the last operation that has changed the watch has the specified primary term</summary>
+		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
+	}
+	///<summary>Request options for WatcherStart<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</pre></summary>
+	public class StartWatcherRequestParameters : RequestParameters<StartWatcherRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for WatcherStats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</pre></summary>
+	public class WatcherStatsRequestParameters : RequestParameters<WatcherStatsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Emits stack traces of currently running watches</summary>
+		public bool? EmitStacktraces { get => Q<bool?>("emit_stacktraces"); set => Q("emit_stacktraces", value); }
+	}
+	///<summary>Request options for WatcherStop<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</pre></summary>
+	public class StopWatcherRequestParameters : RequestParameters<StopWatcherRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 	///<summary>Request options for XpackInfo<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</pre></summary>
 	public class XPackInfoRequestParameters : RequestParameters<XPackInfoRequestParameters> 
@@ -2235,671 +2798,4 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Specify timeout for watch write operation</summary>
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
-	}
-	///<summary>Request options for XpackLicenseDelete<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
-	public class DeleteLicenseRequestParameters : RequestParameters<DeleteLicenseRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-	}
-	///<summary>Request options for XpackLicenseGet<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
-	public class GetLicenseRequestParameters : RequestParameters<GetLicenseRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-	}
-	///<summary>Request options for XpackLicenseGetBasicStatus<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
-	public class GetBasicLicenseStatusRequestParameters : RequestParameters<GetBasicLicenseStatusRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-	}
-	///<summary>Request options for XpackLicenseGetTrialStatus<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
-	public class GetTrialLicenseStatusRequestParameters : RequestParameters<GetTrialLicenseStatusRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-	}
-	///<summary>Request options for XpackLicensePost<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
-	public class PostLicenseRequestParameters : RequestParameters<PostLicenseRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
-		public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
-	}
-	///<summary>Request options for XpackLicensePostStartBasic<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
-	public class StartBasicLicenseRequestParameters : RequestParameters<StartBasicLicenseRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
-		public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
-	}
-	///<summary>Request options for XpackLicensePostStartTrial<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
-	public class StartTrialLicenseRequestParameters : RequestParameters<StartTrialLicenseRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>The type of trial license to generate (default: "trial")</summary>
-		public string TypeQueryString { get => Q<string>("type"); set => Q("type", value); }
-		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
-		public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
-	}
-	///<summary>Request options for MlCloseJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</pre></summary>
-	public class MlCloseJobRequestParameters : RequestParameters<MlCloseJobRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
-		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
-		///<summary>True if the job should be forcefully closed</summary>
-		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
-		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
-	}
-	///<summary>Request options for MlDeleteDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
-	public class MlDeleteDatafeedRequestParameters : RequestParameters<MlDeleteDatafeedRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		///<summary>True if the datafeed should be forcefully deleted</summary>
-		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
-	}
-	///<summary>Request options for MlDeleteExpiredData<pre>TODO</pre></summary>
-	public class MlDeleteExpiredDataRequestParameters : RequestParameters<MlDeleteExpiredDataRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-	}
-	///<summary>Request options for MlDeleteFilter<pre>TODO</pre></summary>
-	public class MlDeleteFilterRequestParameters : RequestParameters<MlDeleteFilterRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-	}
-	///<summary>Request options for MlDeleteJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</pre></summary>
-	public class MlDeleteJobRequestParameters : RequestParameters<MlDeleteJobRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		///<summary>True if the job should be forcefully deleted</summary>
-		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
-		///<summary>Should this request wait until the operation has completed before returning</summary>
-		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-	}
-	///<summary>Request options for MlDeleteModelSnapshot<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</pre></summary>
-	public class MlDeleteModelSnapshotRequestParameters : RequestParameters<MlDeleteModelSnapshotRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-	}
-	///<summary>Request options for MlFlushJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</pre></summary>
-	public class MlFlushJobRequestParameters : RequestParameters<MlFlushJobRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Calculates interim results for the most recent bucket or all buckets within the latency period</summary>
-		public bool? CalcInterim { get => Q<bool?>("calc_interim"); set => Q("calc_interim", value); }
-		///<summary>When used in conjunction with calc_interim, specifies the range of buckets on which to calculate interim results</summary>
-		public string Start { get => Q<string>("start"); set => Q("start", value); }
-		///<summary>When used in conjunction with calc_interim, specifies the range of buckets on which to calculate interim results</summary>
-		public string End { get => Q<string>("end"); set => Q("end", value); }
-		///<summary>Advances time to the given value generating results and updating the model for the advanced interval</summary>
-		public string AdvanceTime { get => Q<string>("advance_time"); set => Q("advance_time", value); }
-		///<summary>Skips time to the given value without generating results or updating the model for the skipped interval</summary>
-		public string SkipTime { get => Q<string>("skip_time"); set => Q("skip_time", value); }
-	}
-	///<summary>Request options for MlForecast<pre>TODO</pre></summary>
-	public class MlForecastRequestParameters : RequestParameters<MlForecastRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>The duration of the forecast</summary>
-		public TimeSpan Duration { get => Q<TimeSpan>("duration"); set => Q("duration", value); }
-		///<summary>The time interval after which the forecast expires. Expired forecasts will be deleted at the first opportunity.</summary>
-		public TimeSpan ExpiresIn { get => Q<TimeSpan>("expires_in"); set => Q("expires_in", value); }
-	}
-	///<summary>Request options for MlGetBuckets<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</pre></summary>
-	public class MlGetBucketsRequestParameters : RequestParameters<MlGetBucketsRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Include anomaly records</summary>
-		public bool? Expand { get => Q<bool?>("expand"); set => Q("expand", value); }
-		///<summary>Exclude interim results</summary>
-		public bool? ExcludeInterim { get => Q<bool?>("exclude_interim"); set => Q("exclude_interim", value); }
-		///<summary>skips a number of buckets</summary>
-		public int From { get => Q<int>("from"); set => Q("from", value); }
-		///<summary>specifies a max number of buckets to get</summary>
-		public int Size { get => Q<int>("size"); set => Q("size", value); }
-		///<summary>Start time filter for buckets</summary>
-		public string Start { get => Q<string>("start"); set => Q("start", value); }
-		///<summary>End time filter for buckets</summary>
-		public string End { get => Q<string>("end"); set => Q("end", value); }
-		///<summary>Filter for the most anomalous buckets</summary>
-		public double AnomalyScore { get => Q<double>("anomaly_score"); set => Q("anomaly_score", value); }
-		///<summary>Sort buckets by a particular field</summary>
-		public string Sort { get => Q<string>("sort"); set => Q("sort", value); }
-		///<summary>Set the sort direction</summary>
-		public bool? Desc { get => Q<bool?>("desc"); set => Q("desc", value); }
-	}
-	///<summary>Request options for MlGetCategories<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
-	public class MlGetCategoriesRequestParameters : RequestParameters<MlGetCategoriesRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>skips a number of categories</summary>
-		public int From { get => Q<int>("from"); set => Q("from", value); }
-		///<summary>specifies a max number of categories to get</summary>
-		public int Size { get => Q<int>("size"); set => Q("size", value); }
-	}
-	///<summary>Request options for MlGetDatafeeds<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</pre></summary>
-	public class MlGetDatafeedsRequestParameters : RequestParameters<MlGetDatafeedsRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
-		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
-	}
-	///<summary>Request options for MlGetDatafeedStats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</pre></summary>
-	public class MlGetDatafeedStatsRequestParameters : RequestParameters<MlGetDatafeedStatsRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
-		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
-	}
-	///<summary>Request options for MlGetFilters<pre>TODO</pre></summary>
-	public class MlGetFiltersRequestParameters : RequestParameters<MlGetFiltersRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>skips a number of filters</summary>
-		public int From { get => Q<int>("from"); set => Q("from", value); }
-		///<summary>specifies a max number of filters to get</summary>
-		public int Size { get => Q<int>("size"); set => Q("size", value); }
-	}
-	///<summary>Request options for MlGetInfluencers<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
-	public class MlGetInfluencersRequestParameters : RequestParameters<MlGetInfluencersRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Exclude interim results</summary>
-		public bool? ExcludeInterim { get => Q<bool?>("exclude_interim"); set => Q("exclude_interim", value); }
-		///<summary>skips a number of influencers</summary>
-		public int From { get => Q<int>("from"); set => Q("from", value); }
-		///<summary>specifies a max number of influencers to get</summary>
-		public int Size { get => Q<int>("size"); set => Q("size", value); }
-		///<summary>start timestamp for the requested influencers</summary>
-		public string Start { get => Q<string>("start"); set => Q("start", value); }
-		///<summary>end timestamp for the requested influencers</summary>
-		public string End { get => Q<string>("end"); set => Q("end", value); }
-		///<summary>influencer score threshold for the requested influencers</summary>
-		public double InfluencerScore { get => Q<double>("influencer_score"); set => Q("influencer_score", value); }
-		///<summary>sort field for the requested influencers</summary>
-		public string Sort { get => Q<string>("sort"); set => Q("sort", value); }
-		///<summary>whether the results should be sorted in decending order</summary>
-		public bool? Desc { get => Q<bool?>("desc"); set => Q("desc", value); }
-	}
-	///<summary>Request options for MlGetJobs<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</pre></summary>
-	public class MlGetJobsRequestParameters : RequestParameters<MlGetJobsRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
-		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
-	}
-	///<summary>Request options for MlGetJobStats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</pre></summary>
-	public class MlGetJobStatsRequestParameters : RequestParameters<MlGetJobStatsRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
-		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
-	}
-	///<summary>Request options for MlGetModelSnapshots<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</pre></summary>
-	public class MlGetModelSnapshotsRequestParameters : RequestParameters<MlGetModelSnapshotsRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Skips a number of documents</summary>
-		public int From { get => Q<int>("from"); set => Q("from", value); }
-		///<summary>The default number of documents returned in queries as a string.</summary>
-		public int Size { get => Q<int>("size"); set => Q("size", value); }
-		///<summary>The filter 'start' query parameter</summary>
-		public DateTimeOffset? Start { get => Q<DateTimeOffset?>("start"); set => Q("start", value); }
-		///<summary>The filter 'end' query parameter</summary>
-		public DateTimeOffset? End { get => Q<DateTimeOffset?>("end"); set => Q("end", value); }
-		///<summary>Name of the field to sort on</summary>
-		public string Sort { get => Q<string>("sort"); set => Q("sort", value); }
-		///<summary>True if the results should be sorted in descending order</summary>
-		public bool? Desc { get => Q<bool?>("desc"); set => Q("desc", value); }
-	}
-	///<summary>Request options for MlGetOverallBuckets<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</pre></summary>
-	public class MlGetOverallBucketsRequestParameters : RequestParameters<MlGetOverallBucketsRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>The number of top job bucket scores to be used in the overall_score calculation</summary>
-		public int TopN { get => Q<int>("top_n"); set => Q("top_n", value); }
-		///<summary>The span of the overall buckets. Defaults to the longest job bucket_span</summary>
-		public string BucketSpan { get => Q<string>("bucket_span"); set => Q("bucket_span", value); }
-		///<summary>Returns overall buckets with overall scores higher than this value</summary>
-		public double OverallScore { get => Q<double>("overall_score"); set => Q("overall_score", value); }
-		///<summary>If true overall buckets that include interim buckets will be excluded</summary>
-		public bool? ExcludeInterim { get => Q<bool?>("exclude_interim"); set => Q("exclude_interim", value); }
-		///<summary>Returns overall buckets with timestamps after this time</summary>
-		public string Start { get => Q<string>("start"); set => Q("start", value); }
-		///<summary>Returns overall buckets with timestamps earlier than this time</summary>
-		public string End { get => Q<string>("end"); set => Q("end", value); }
-		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
-		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
-	}
-	///<summary>Request options for MlGetRecords<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</pre></summary>
-	public class MlGetRecordsRequestParameters : RequestParameters<MlGetRecordsRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Exclude interim results</summary>
-		public bool? ExcludeInterim { get => Q<bool?>("exclude_interim"); set => Q("exclude_interim", value); }
-		///<summary>skips a number of records</summary>
-		public int From { get => Q<int>("from"); set => Q("from", value); }
-		///<summary>specifies a max number of records to get</summary>
-		public int Size { get => Q<int>("size"); set => Q("size", value); }
-		///<summary>Start time filter for records</summary>
-		public string Start { get => Q<string>("start"); set => Q("start", value); }
-		///<summary>End time filter for records</summary>
-		public string End { get => Q<string>("end"); set => Q("end", value); }
-		public double RecordScore { get => Q<double>("record_score"); set => Q("record_score", value); }
-		///<summary>Sort records by a particular field</summary>
-		public string Sort { get => Q<string>("sort"); set => Q("sort", value); }
-		///<summary>Set the sort direction</summary>
-		public bool? Desc { get => Q<bool?>("desc"); set => Q("desc", value); }
-	}
-	///<summary>Request options for MlOpenJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</pre></summary>
-	public class MlOpenJobRequestParameters : RequestParameters<MlOpenJobRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-	}
-	///<summary>Request options for MlPostData<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
-	public class MlPostDataRequestParameters : RequestParameters<MlPostDataRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Optional parameter to specify the start of the bucket resetting range</summary>
-		public string ResetStart { get => Q<string>("reset_start"); set => Q("reset_start", value); }
-		///<summary>Optional parameter to specify the end of the bucket resetting range</summary>
-		public string ResetEnd { get => Q<string>("reset_end"); set => Q("reset_end", value); }
-	}
-	///<summary>Request options for MlPreviewDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</pre></summary>
-	public class MlPreviewDatafeedRequestParameters : RequestParameters<MlPreviewDatafeedRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-	}
-	///<summary>Request options for MlPutDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</pre></summary>
-	public class MlPutDatafeedRequestParameters : RequestParameters<MlPutDatafeedRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-	}
-	///<summary>Request options for MlPutFilter<pre>TODO</pre></summary>
-	public class MlPutFilterRequestParameters : RequestParameters<MlPutFilterRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-	}
-	///<summary>Request options for MlPutJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
-	public class MlPutJobRequestParameters : RequestParameters<MlPutJobRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-	}
-	///<summary>Request options for MlRevertModelSnapshot<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</pre></summary>
-	public class MlRevertModelSnapshotRequestParameters : RequestParameters<MlRevertModelSnapshotRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Should we reset the results back to the time of the snapshot?</summary>
-		public bool? DeleteInterveningResults { get => Q<bool?>("delete_intervening_results"); set => Q("delete_intervening_results", value); }
-	}
-	///<summary>Request options for MlSetUpgradeMode<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-set-upgrade-mode.html</pre></summary>
-	public class MlSetUpgradeModeRequestParameters : RequestParameters<MlSetUpgradeModeRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Whether to enable upgrade_mode ML setting or not. Defaults to false.</summary>
-		public bool? Enabled { get => Q<bool?>("enabled"); set => Q("enabled", value); }
-		///<summary>Controls the time to wait before action times out. Defaults to 30 seconds</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
-	}
-	///<summary>Request options for MlStartDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</pre></summary>
-	public class MlStartDatafeedRequestParameters : RequestParameters<MlStartDatafeedRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>The start time from where the datafeed should begin</summary>
-		public string Start { get => Q<string>("start"); set => Q("start", value); }
-		///<summary>The end time when the datafeed should stop. When not set, the datafeed continues in real time</summary>
-		public string End { get => Q<string>("end"); set => Q("end", value); }
-		///<summary>Controls the time to wait until a datafeed has started. Default to 20 seconds</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
-	}
-	///<summary>Request options for MlStopDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</pre></summary>
-	public class MlStopDatafeedRequestParameters : RequestParameters<MlStopDatafeedRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
-		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
-		///<summary>True if the datafeed should be forcefully stopped.</summary>
-		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
-		///<summary>Controls the time to wait until a datafeed has stopped. Default to 20 seconds</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
-	}
-	///<summary>Request options for MlUpdateDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</pre></summary>
-	public class MlUpdateDatafeedRequestParameters : RequestParameters<MlUpdateDatafeedRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-	}
-	///<summary>Request options for MlUpdateJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</pre></summary>
-	public class MlUpdateJobRequestParameters : RequestParameters<MlUpdateJobRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-	}
-	///<summary>Request options for MlUpdateModelSnapshot<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</pre></summary>
-	public class MlUpdateModelSnapshotRequestParameters : RequestParameters<MlUpdateModelSnapshotRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-	}
-	///<summary>Request options for MlValidate<pre>TODO</pre></summary>
-	public class MlValidateRequestParameters : RequestParameters<MlValidateRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-	}
-	///<summary>Request options for XpackMigrationDeprecations<pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
-	public class DeprecationInfoRequestParameters : RequestParameters<DeprecationInfoRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-	}
-	///<summary>Request options for XpackMigrationGetAssistance<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</pre></summary>
-	public class MigrationAssistanceRequestParameters : RequestParameters<MigrationAssistanceRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>
-		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
-		/// been specified)
-		///</summary>
-		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-	}
-	///<summary>Request options for XpackMigrationUpgrade<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</pre></summary>
-	public class MigrationUpgradeRequestParameters : RequestParameters<MigrationUpgradeRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Should the request block until the upgrade operation is completed</summary>
-		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-	}
-	///<summary>Request options for XpackRollupDeleteJob<pre>TODO</pre></summary>
-	public class DeleteRollupJobRequestParameters : RequestParameters<DeleteRollupJobRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-	}
-	///<summary>Request options for XpackRollupGetJobs<pre>TODO</pre></summary>
-	public class GetRollupJobRequestParameters : RequestParameters<GetRollupJobRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-	}
-	///<summary>Request options for XpackRollupGetRollupCaps<pre>TODO</pre></summary>
-	public class GetRollupCapabilitiesRequestParameters : RequestParameters<GetRollupCapabilitiesRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-	}
-	///<summary>Request options for XpackRollupGetRollupIndexCaps<pre>TODO</pre></summary>
-	public class GetRollupIndexCapabilitiesRequestParameters : RequestParameters<GetRollupIndexCapabilitiesRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-	}
-	///<summary>Request options for XpackRollupPutJob<pre>TODO</pre></summary>
-	public class CreateRollupJobRequestParameters : RequestParameters<CreateRollupJobRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-	}
-	///<summary>Request options for XpackRollupRollupSearch<pre>TODO</pre></summary>
-	public class RollupSearchRequestParameters : RequestParameters<RollupSearchRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
-		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
-		///<summary>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</summary>
-		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
-	}
-	///<summary>Request options for XpackRollupStartJob<pre>TODO</pre></summary>
-	public class StartRollupJobRequestParameters : RequestParameters<StartRollupJobRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-	}
-	///<summary>Request options for XpackRollupStopJob<pre>TODO</pre></summary>
-	public class StopRollupJobRequestParameters : RequestParameters<StopRollupJobRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>True if the API should block until the job has fully stopped, false if should be executed async. Defaults to false.</summary>
-		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-		///<summary>Block for (at maximum) the specified duration while waiting for the job to stop. Defaults to 30s.</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
-	}
-	///<summary>Request options for SecurityAuthenticate<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
-	public class SecurityAuthenticateRequestParameters : RequestParameters<SecurityAuthenticateRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-	}
-	///<summary>Request options for SecurityChangePassword<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</pre></summary>
-	public class SecurityChangePasswordRequestParameters : RequestParameters<SecurityChangePasswordRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		///<summary>
-		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
-		/// to make this operation visible to search, if `false` then do nothing with refreshes.
-		///</summary>
-		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
-	}
-	///<summary>Request options for SecurityClearCachedRealms<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</pre></summary>
-	public class SecurityClearCachedRealmsRequestParameters : RequestParameters<SecurityClearCachedRealmsRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Comma-separated list of usernames to clear from the cache</summary>
-		public string[] Usernames { get => Q<string[]>("usernames"); set => Q("usernames", value); }
-	}
-	///<summary>Request options for SecurityClearCachedRoles<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html</pre></summary>
-	public class SecurityClearCachedRolesRequestParameters : RequestParameters<SecurityClearCachedRolesRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-	}
-	///<summary>Request options for SecurityCreateApiKey<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</pre></summary>
-	public class SecurityCreateApiKeyRequestParameters : RequestParameters<SecurityCreateApiKeyRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		///<summary>
-		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
-		/// to make this operation visible to search, if `false` then do nothing with refreshes.
-		///</summary>
-		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
-	}
-	///<summary>Request options for SecurityDeleteRole<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html</pre></summary>
-	public class SecurityDeleteRoleRequestParameters : RequestParameters<SecurityDeleteRoleRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		///<summary>
-		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
-		/// to make this operation visible to search, if `false` then do nothing with refreshes.
-		///</summary>
-		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
-	}
-	///<summary>Request options for SecurityDeleteRoleMapping<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html</pre></summary>
-	public class SecurityDeleteRoleMappingRequestParameters : RequestParameters<SecurityDeleteRoleMappingRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		///<summary>
-		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
-		/// to make this operation visible to search, if `false` then do nothing with refreshes.
-		///</summary>
-		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
-	}
-	///<summary>Request options for SecurityDeleteUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html</pre></summary>
-	public class SecurityDeleteUserRequestParameters : RequestParameters<SecurityDeleteUserRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		///<summary>
-		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
-		/// to make this operation visible to search, if `false` then do nothing with refreshes.
-		///</summary>
-		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
-	}
-	///<summary>Request options for SecurityDisableUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html</pre></summary>
-	public class SecurityDisableUserRequestParameters : RequestParameters<SecurityDisableUserRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		///<summary>
-		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
-		/// to make this operation visible to search, if `false` then do nothing with refreshes.
-		///</summary>
-		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
-	}
-	///<summary>Request options for SecurityEnableUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html</pre></summary>
-	public class SecurityEnableUserRequestParameters : RequestParameters<SecurityEnableUserRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		///<summary>
-		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
-		/// to make this operation visible to search, if `false` then do nothing with refreshes.
-		///</summary>
-		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
-	}
-	///<summary>Request options for SecurityGetApiKey<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html</pre></summary>
-	public class SecurityGetApiKeyRequestParameters : RequestParameters<SecurityGetApiKeyRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>API key id of the API key to be retrieved</summary>
-		public string Id { get => Q<string>("id"); set => Q("id", value); }
-		///<summary>API key name of the API key to be retrieved</summary>
-		public string Name { get => Q<string>("name"); set => Q("name", value); }
-		///<summary>user name of the user who created this API key to be retrieved</summary>
-		public string Username { get => Q<string>("username"); set => Q("username", value); }
-		///<summary>realm name of the user who created this API key to be retrieved</summary>
-		public string RealmName { get => Q<string>("realm_name"); set => Q("realm_name", value); }
-	}
-	///<summary>Request options for SecurityGetRole<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</pre></summary>
-	public class SecurityGetRoleRequestParameters : RequestParameters<SecurityGetRoleRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-	}
-	///<summary>Request options for SecurityGetRoleMapping<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</pre></summary>
-	public class SecurityGetRoleMappingRequestParameters : RequestParameters<SecurityGetRoleMappingRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-	}
-	///<summary>Request options for SecurityGetToken<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html</pre></summary>
-	public class SecurityGetTokenRequestParameters : RequestParameters<SecurityGetTokenRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-	}
-	///<summary>Request options for SecurityGetUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html</pre></summary>
-	public class SecurityGetUserRequestParameters : RequestParameters<SecurityGetUserRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-	}
-	///<summary>Request options for SecurityInvalidateApiKey<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</pre></summary>
-	public class SecurityInvalidateApiKeyRequestParameters : RequestParameters<SecurityInvalidateApiKeyRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-	}
-	///<summary>Request options for SecurityInvalidateToken<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</pre></summary>
-	public class SecurityInvalidateTokenRequestParameters : RequestParameters<SecurityInvalidateTokenRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-	}
-	///<summary>Request options for SecurityPutRole<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</pre></summary>
-	public class SecurityPutRoleRequestParameters : RequestParameters<SecurityPutRoleRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		///<summary>
-		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
-		/// to make this operation visible to search, if `false` then do nothing with refreshes.
-		///</summary>
-		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
-	}
-	///<summary>Request options for SecurityPutRoleMapping<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html</pre></summary>
-	public class SecurityPutRoleMappingRequestParameters : RequestParameters<SecurityPutRoleMappingRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		///<summary>
-		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
-		/// to make this operation visible to search, if `false` then do nothing with refreshes.
-		///</summary>
-		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
-	}
-	///<summary>Request options for SecurityPutUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html</pre></summary>
-	public class SecurityPutUserRequestParameters : RequestParameters<SecurityPutUserRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		///<summary>
-		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
-		/// to make this operation visible to search, if `false` then do nothing with refreshes.
-		///</summary>
-		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
-	}
-	///<summary>Request options for XpackSqlClearCursor<pre>Clear SQL cursor</pre></summary>
-	public class ClearSqlCursorRequestParameters : RequestParameters<ClearSqlCursorRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-	}
-	///<summary>Request options for XpackSqlQuery<pre>Execute SQL</pre></summary>
-	public class QuerySqlRequestParameters : RequestParameters<QuerySqlRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format { get => Q<string>("format"); set => Q("format", value); }
-	}
-	///<summary>Request options for XpackSqlTranslate<pre>Translate SQL into Elasticsearch queries</pre></summary>
-	public class TranslateSqlRequestParameters : RequestParameters<TranslateSqlRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-	}
-	///<summary>Request options for SslCertificates<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-ssl.html</pre></summary>
-	public class SslCertificatesRequestParameters : RequestParameters<SslCertificatesRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-	}
-	///<summary>Request options for XpackWatcherAckWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</pre></summary>
-	public class AcknowledgeWatchRequestParameters : RequestParameters<AcknowledgeWatchRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-	}
-	///<summary>Request options for XpackWatcherActivateWatch<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</pre></summary>
-	public class ActivateWatchRequestParameters : RequestParameters<ActivateWatchRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-	}
-	///<summary>Request options for XpackWatcherDeactivateWatch<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</pre></summary>
-	public class DeactivateWatchRequestParameters : RequestParameters<DeactivateWatchRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-	}
-	///<summary>Request options for XpackWatcherDeleteWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</pre></summary>
-	public class DeleteWatchRequestParameters : RequestParameters<DeleteWatchRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-	}
-	///<summary>Request options for XpackWatcherExecuteWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</pre></summary>
-	public class ExecuteWatchRequestParameters : RequestParameters<ExecuteWatchRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		///<summary>indicates whether the watch should execute in debug mode</summary>
-		public bool? Debug { get => Q<bool?>("debug"); set => Q("debug", value); }
-	}
-	///<summary>Request options for XpackWatcherGetWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</pre></summary>
-	public class GetWatchRequestParameters : RequestParameters<GetWatchRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-	}
-	///<summary>Request options for XpackWatcherPutWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</pre></summary>
-	public class PutWatchRequestParameters : RequestParameters<PutWatchRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		///<summary>Specify whether the watch is in/active by default</summary>
-		public bool? Active { get => Q<bool?>("active"); set => Q("active", value); }
-		///<summary>Explicit version number for concurrency control</summary>
-		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-		///<summary>only update the watch if the last operation that has changed the watch has the specified sequence number</summary>
-		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
-		///<summary>only update the watch if the last operation that has changed the watch has the specified primary term</summary>
-		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
-	}
-	///<summary>Request options for XpackWatcherStart<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</pre></summary>
-	public class StartWatcherRequestParameters : RequestParameters<StartWatcherRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-	}
-	///<summary>Request options for XpackWatcherStats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</pre></summary>
-	public class WatcherStatsRequestParameters : RequestParameters<WatcherStatsRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Emits stack traces of currently running watches</summary>
-		public bool? EmitStacktraces { get => Q<bool?>("emit_stacktraces"); set => Q("emit_stacktraces", value); }
-	}
-	///<summary>Request options for XpackWatcherStop<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</pre></summary>
-	public class StopWatcherRequestParameters : RequestParameters<StopWatcherRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}}

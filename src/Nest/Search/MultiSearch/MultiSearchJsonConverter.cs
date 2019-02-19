@@ -35,10 +35,6 @@ namespace Nest
 					? operation.Index
 					: null;
 
-				IUrlParameter types = request.Type == null || !request.Type.Equals(operation.Type)
-					? operation.Type
-					: null;
-
 				var searchType = GetString("search_type");
 				if (searchType == "query_then_fetch")
 					searchType = null;
@@ -46,7 +42,6 @@ namespace Nest
 				var header = new
 				{
 					index = indices?.GetString(settings),
-					type = types?.GetString(settings),
 					search_type = searchType,
 					preference = GetString("preference"),
 					routing = GetString("routing"),

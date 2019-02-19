@@ -24,27 +24,18 @@ namespace Tests.Document.Single.Update
 
 			await POST($"/project/doc/{otherId}/_update")
 					.Fluent(c => c.Update<Project>(otherId, u => u))
-					.Request(c => c.Update(new UpdateRequest<Project, object>(typeof(Project), typeof(Project), otherId)))
+					.Request(c => c.Update(new UpdateRequest<Project, object>(typeof(Project), otherId)))
 					.FluentAsync(c => c.UpdateAsync<Project>(otherId, u => u))
-					.RequestAsync(c => c.UpdateAsync(new UpdateRequest<Project, object>(typeof(Project), typeof(Project), otherId)))
+					.RequestAsync(c => c.UpdateAsync(new UpdateRequest<Project, object>(typeof(Project), otherId)))
 				;
 
 			var otherIndex = "other-index";
 
 			await POST($"/{otherIndex}/doc/{otherId}/_update")
 					.Fluent(c => c.Update<Project>(otherId, u => u.Index(otherIndex)))
-					.Request(c => c.Update(new UpdateRequest<Project, object>(otherIndex, typeof(Project), otherId)))
+					.Request(c => c.Update(new UpdateRequest<Project, object>(otherIndex, otherId)))
 					.FluentAsync(c => c.UpdateAsync<Project>(otherId, u => u.Index(otherIndex)))
-					.RequestAsync(c => c.UpdateAsync(new UpdateRequest<Project, object>(otherIndex, typeof(Project), otherId)))
-				;
-
-			var otherType = "other-type";
-
-			await POST($"/{otherIndex}/{otherType}/{otherId}/_update")
-					.Fluent(c => c.Update<Project>(otherId, u => u.Index(otherIndex).Type(otherType)))
-					.Request(c => c.Update(new UpdateRequest<Project, object>(otherIndex, otherType, otherId)))
-					.FluentAsync(c => c.UpdateAsync<Project>(otherId, u => u.Index(otherIndex).Type(otherType)))
-					.RequestAsync(c => c.UpdateAsync(new UpdateRequest<Project, object>(otherIndex, otherType, otherId)))
+					.RequestAsync(c => c.UpdateAsync(new UpdateRequest<Project, object>(otherIndex, otherId)))
 				;
 		}
 	}

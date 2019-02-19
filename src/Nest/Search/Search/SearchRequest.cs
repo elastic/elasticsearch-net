@@ -82,7 +82,6 @@ namespace Nest
 	{
 		public AggregationDictionary Aggregations { get; set; }
 		public IFieldCollapse Collapse { get; set; }
-		public Fields DocValueFields { get; set; }
 		public bool? Explain { get; set; }
 		public int? From { get; set; }
 		public IHighlight Highlight { get; set; }
@@ -98,7 +97,6 @@ namespace Nest
 		public ISlicedScroll Slice { get; set; }
 		public IList<ISort> Sort { get; set; }
 		public Union<bool, ISourceFilter> Source { get; set; }
-		public Fields StoredFields { get; set; }
 		public ISuggestContainer Suggest { get; set; }
 		public long? TerminateAfter { get; set; }
 
@@ -121,42 +119,7 @@ namespace Nest
 
 	public partial class SearchRequest<T>
 	{
-		public AggregationDictionary Aggregations { get; set; }
-		public IFieldCollapse Collapse { get; set; }
-		public Fields DocValueFields { get; set; }
-		public bool? Explain { get; set; }
-		public int? From { get; set; }
-		public IHighlight Highlight { get; set; }
-		public IDictionary<IndexName, double> IndicesBoost { get; set; }
-		public double? MinScore { get; set; }
-		public QueryContainer PostFilter { get; set; }
-		public bool? Profile { get; set; }
-		public QueryContainer Query { get; set; }
-		public IList<IRescore> Rescore { get; set; }
-		public IScriptFields ScriptFields { get; set; }
-		public IList<object> SearchAfter { get; set; }
-		public int? Size { get; set; }
-		public ISlicedScroll Slice { get; set; }
-		public IList<ISort> Sort { get; set; }
-		public Union<bool, ISourceFilter> Source { get; set; }
-		public Fields StoredFields { get; set; }
-		public ISuggestContainer Suggest { get; set; }
-		public long? TerminateAfter { get; set; }
-
-		public string Timeout { get; set; }
-		public bool? TrackScores { get; set; }
-
-		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
-		public bool? Version { get; set; }
-
-		protected override HttpMethod HttpMethod =>
-			RequestState.RequestParameters?.ContainsQueryString("source") == true || RequestState.RequestParameters?.ContainsQueryString("q") == true
-				? HttpMethod.GET
-				: HttpMethod.POST;
-
 		Type ICovariantSearchRequest.ClrType => typeof(T);
-
-		protected sealed override void Initialize() => TypedKeys = true;
 	}
 
 	/// <summary>
@@ -172,7 +135,6 @@ namespace Nest
 		AggregationDictionary ISearchRequest.Aggregations { get; set; }
 		Type ICovariantSearchRequest.ClrType => typeof(T);
 		IFieldCollapse ISearchRequest.Collapse { get; set; }
-		Fields ISearchRequest.DocValueFields { get; set; }
 		bool? ISearchRequest.Explain { get; set; }
 		int? ISearchRequest.From { get; set; }
 		IHighlight ISearchRequest.Highlight { get; set; }
@@ -189,7 +151,6 @@ namespace Nest
 		ISlicedScroll ISearchRequest.Slice { get; set; }
 		IList<ISort> ISearchRequest.Sort { get; set; }
 		Union<bool, ISourceFilter> ISearchRequest.Source { get; set; }
-		Fields ISearchRequest.StoredFields { get; set; }
 		ISuggestContainer ISearchRequest.Suggest { get; set; }
 		long? ISearchRequest.TerminateAfter { get; set; }
 
@@ -338,17 +299,13 @@ namespace Nest
 		/// represented by a search hit. Defaults to load the internal _source field.
 		/// </summary>
 		public SearchDescriptor<T> StoredFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(a => a.StoredFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
-
-		public SearchDescriptor<T> StoredFields(Fields fields) => Assign(a => a.StoredFields = fields);
+			StoredFields(fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		public SearchDescriptor<T> ScriptFields(Func<ScriptFieldsDescriptor, IPromise<IScriptFields>> selector) =>
 			Assign(a => a.ScriptFields = selector?.Invoke(new ScriptFieldsDescriptor())?.Value);
 
 		public SearchDescriptor<T> DocValueFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(a => a.DocValueFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
-
-		public SearchDescriptor<T> DocValueFields(Fields fields) => Assign(a => a.DocValueFields = fields);
+			DocValueFields(fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		/// <summary>
 		/// A comma-separated list of fields to return as the field data representation of a field for each hit

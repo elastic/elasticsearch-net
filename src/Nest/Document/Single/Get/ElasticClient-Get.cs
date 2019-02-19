@@ -12,51 +12,51 @@ namespace Nest
 		/// <para> </para>
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html#_source
 		/// </summary>
-		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
+		/// <typeparam name="TDocument">The type used to infer the default index and typename</typeparam>
 		/// <param name="selector">A descriptor that describes which document's source to fetch</param>
-		IGetResponse<T> Get<T>(DocumentPath<T> document, Func<GetDescriptor<T>, IGetRequest> selector = null) where T : class;
+		IGetResponse<TDocument> Get<TDocument>(DocumentPath<TDocument> document, Func<GetDescriptor<TDocument>, IGetRequest> selector = null) where TDocument : class;
 
 		/// <inheritdoc />
-		IGetResponse<T> Get<T>(IGetRequest request) where T : class;
+		IGetResponse<TDocument> Get<TDocument>(IGetRequest request) where TDocument : class;
 
 		/// <inheritdoc />
-		Task<IGetResponse<T>> GetAsync<T>(
-			DocumentPath<T> document,
-			Func<GetDescriptor<T>, IGetRequest> selector = null,
+		Task<IGetResponse<TDocument>> GetAsync<TDocument>(
+			DocumentPath<TDocument> document,
+			Func<GetDescriptor<TDocument>, IGetRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
-		) where T : class;
+		) where TDocument : class;
 
 		/// <inheritdoc />
-		Task<IGetResponse<T>> GetAsync<T>(IGetRequest request, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		Task<IGetResponse<TDocument>> GetAsync<TDocument>(IGetRequest request, CancellationToken cancellationToken = default(CancellationToken)) where TDocument : class;
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IGetResponse<T> Get<T>(DocumentPath<T> document, Func<GetDescriptor<T>, IGetRequest> selector = null) where T : class =>
-			Get<T>(selector.InvokeOrDefault(new GetDescriptor<T>(document)));
+		public IGetResponse<TDocument> Get<TDocument>(DocumentPath<TDocument> document, Func<GetDescriptor<TDocument>, IGetRequest> selector = null) where TDocument : class =>
+			Get<TDocument>(selector.InvokeOrDefault(new GetDescriptor<TDocument>(document)));
 
 		/// <inheritdoc />
-		public IGetResponse<T> Get<T>(IGetRequest request) where T : class =>
-			Dispatcher.Dispatch<IGetRequest, GetRequestParameters, GetResponse<T>>(
+		public IGetResponse<TDocument> Get<TDocument>(IGetRequest request) where TDocument : class =>
+			Dispatcher.Dispatch<IGetRequest, GetRequestParameters, GetResponse<TDocument>>(
 				request,
-				(p, d) => LowLevelDispatch.GetDispatch<GetResponse<T>>(p)
+				(p, d) => LowLevelDispatch.GetDispatch<GetResponse<TDocument>>(p)
 			);
 
 		/// <inheritdoc />
-		public Task<IGetResponse<T>> GetAsync<T>(
-			DocumentPath<T> document,
-			Func<GetDescriptor<T>, IGetRequest> selector = null,
+		public Task<IGetResponse<TDocument>> GetAsync<TDocument>(
+			DocumentPath<TDocument> document,
+			Func<GetDescriptor<TDocument>, IGetRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
-		) where T : class => GetAsync<T>(selector.InvokeOrDefault(new GetDescriptor<T>(document)), cancellationToken);
+		) where TDocument : class => GetAsync<TDocument>(selector.InvokeOrDefault(new GetDescriptor<TDocument>(document)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IGetResponse<T>> GetAsync<T>(IGetRequest request, CancellationToken cancellationToken = default(CancellationToken))
-			where T : class =>
-			Dispatcher.DispatchAsync<IGetRequest, GetRequestParameters, GetResponse<T>, IGetResponse<T>>(
+		public Task<IGetResponse<TDocument>> GetAsync<TDocument>(IGetRequest request, CancellationToken cancellationToken = default(CancellationToken))
+			where TDocument : class =>
+			Dispatcher.DispatchAsync<IGetRequest, GetRequestParameters, GetResponse<TDocument>, IGetResponse<TDocument>>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.GetDispatchAsync<GetResponse<T>>(p, c)
+				(p, d, c) => LowLevelDispatch.GetDispatchAsync<GetResponse<TDocument>>(p, c)
 			);
 	}
 }

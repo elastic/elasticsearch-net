@@ -22,7 +22,7 @@ namespace Tests.Search.Explain
 
 			await POST("/project/doc/NEST/_explain")
 					.Fluent(c => c.Explain<Project>("NEST", e => e.Query(q => q.MatchAll())))
-					.Request(c => c.Explain(new ExplainRequest<Project>("project", "doc", "NEST") { }))
+					.Request(c => c.Explain(new ExplainRequest<Project>("project", "NEST") { }))
 					.FluentAsync(c => c.ExplainAsync<Project>("NEST", e => e.Query(q => q.MatchAll())))
 					.RequestAsync(c => c.ExplainAsync(new ExplainRequest<Project>("NEST")))
 				;

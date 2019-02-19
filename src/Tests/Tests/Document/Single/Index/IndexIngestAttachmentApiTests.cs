@@ -50,7 +50,7 @@ namespace Tests.Document.Single.Index
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 
 		protected override IndexRequest<IngestedAttachment> Initializer =>
-			new IndexRequest<IngestedAttachment>(Document, CallIsolatedValue)
+			new IndexRequest<IngestedAttachment>(CallIsolatedValue, Id.From(Document))
 			{
 				Refresh = Refresh.True,
 				Pipeline = PipelineId

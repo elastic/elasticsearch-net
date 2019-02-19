@@ -36,7 +36,7 @@ namespace Nest
 		public IDeleteRoleMappingResponse DeleteRoleMapping(IDeleteRoleMappingRequest request) =>
 			Dispatcher.Dispatch<IDeleteRoleMappingRequest, DeleteRoleMappingRequestParameters, DeleteRoleMappingResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackSecurityDeleteRoleMappingDispatch<DeleteRoleMappingResponse>(p)
+				(p, d) => LowLevelDispatch.SecurityDeleteRoleMappingDispatch<DeleteRoleMappingResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -54,7 +54,7 @@ namespace Nest
 				.DispatchAsync<IDeleteRoleMappingRequest, DeleteRoleMappingRequestParameters, DeleteRoleMappingResponse, IDeleteRoleMappingResponse>(
 					request,
 					cancellationToken,
-					(p, d, c) => LowLevelDispatch.XpackSecurityDeleteRoleMappingDispatchAsync<DeleteRoleMappingResponse>(p, c)
+					(p, d, c) => LowLevelDispatch.SecurityDeleteRoleMappingDispatchAsync<DeleteRoleMappingResponse>(p, c)
 				);
 	}
 }

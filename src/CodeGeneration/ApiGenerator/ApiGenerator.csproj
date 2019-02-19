@@ -8,6 +8,7 @@
     <VersionSuffix>alpha</VersionSuffix>
     <NoWarn>NU1701</NoWarn>
     <PreserveCompilationContext>true</PreserveCompilationContext>
+    <LangVersion>Latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />

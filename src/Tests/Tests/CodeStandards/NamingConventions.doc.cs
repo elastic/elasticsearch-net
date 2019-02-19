@@ -105,7 +105,7 @@ namespace Tests.CodeStandards
 				//TODO These are new API's should be removed, also add test that no request or response starts with Xpack
 				//only XPack
 				//TODO MAP THIS
-				typeof(RankEvalRequest),
+				//typeof(RankEvalRequest),
 				//TODO add unit tests that we have no requests starting with Exists
 				typeof(SourceExistsRequest),
 				typeof(SourceExistsRequest<>),

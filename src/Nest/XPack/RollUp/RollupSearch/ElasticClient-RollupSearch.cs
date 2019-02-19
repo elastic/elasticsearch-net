@@ -45,15 +45,12 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IRollupSearchResponse<THit> RollupSearch<THit>(Indices indices,
-			Func<RollupSearchDescriptor<THit>, IRollupSearchRequest> selector = null
-		)
+		public IRollupSearchResponse<THit> RollupSearch<THit>(Indices indices, Func<RollupSearchDescriptor<THit>, IRollupSearchRequest> selector = null)
 			where THit : class =>
 			RollupSearch<THit>(selector.InvokeOrDefault(new RollupSearchDescriptor<THit>(indices)));
 
 		/// <inheritdoc />
-		public IRollupSearchResponse<THit> RollupSearch<T, THit>(Indices indices,
-			Func<RollupSearchDescriptor<T>, IRollupSearchRequest> selector = null
+		public IRollupSearchResponse<THit> RollupSearch<T, THit>(Indices indices, Func<RollupSearchDescriptor<T>, IRollupSearchRequest> selector = null
 		)
 			where T : class
 			where THit : class =>
@@ -63,7 +60,7 @@ namespace Nest
 		public IRollupSearchResponse<THit> RollupSearch<THit>(IRollupSearchRequest request) where THit : class =>
 			Dispatcher.Dispatch<IRollupSearchRequest, RollupSearchRequestParameters, RollupSearchResponse<THit>>(
 				request,
-				(p, d) => LowLevelDispatch.XpackRollupRollupSearchDispatch<RollupSearchResponse<THit>>(p, d)
+				(p, d) => LowLevelDispatch.RollupRollupSearchDispatch<RollupSearchResponse<THit>>(p, d)
 			);
 
 		/// <inheritdoc />
@@ -86,7 +83,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IRollupSearchRequest, RollupSearchRequestParameters, RollupSearchResponse<THit>, IRollupSearchResponse<THit>>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackRollupRollupSearchDispatchAsync<RollupSearchResponse<THit>>(p, d, c)
+				(p, d, c) => LowLevelDispatch.RollupRollupSearchDispatchAsync<RollupSearchResponse<THit>>(p, d, c)
 			);
 	}
 }

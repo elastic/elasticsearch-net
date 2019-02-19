@@ -37,7 +37,7 @@ namespace Nest
 		public IValidateDetectorResponse ValidateDetector(IValidateDetectorRequest request) =>
 			Dispatcher.Dispatch<IValidateDetectorRequest, ValidateDetectorRequestParameters, ValidateDetectorResponse>(
 				request,
-				LowLevelDispatch.XpackMlValidateDetectorDispatch<ValidateDetectorResponse>
+				LowLevelDispatch.MlValidateDetectorDispatch<ValidateDetectorResponse>
 			);
 
 		/// <inheritdoc />
@@ -54,7 +54,7 @@ namespace Nest
 				.DispatchAsync<IValidateDetectorRequest, ValidateDetectorRequestParameters, ValidateDetectorResponse, IValidateDetectorResponse>(
 					request,
 					cancellationToken,
-					LowLevelDispatch.XpackMlValidateDetectorDispatchAsync<ValidateDetectorResponse>
+					LowLevelDispatch.MlValidateDetectorDispatchAsync<ValidateDetectorResponse>
 				);
 	}
 }

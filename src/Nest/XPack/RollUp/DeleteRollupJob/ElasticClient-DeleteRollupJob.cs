@@ -35,7 +35,7 @@ namespace Nest
 		public IDeleteRollupJobResponse DeleteRollupJob(IDeleteRollupJobRequest request) =>
 			Dispatcher.Dispatch<IDeleteRollupJobRequest, DeleteRollupJobRequestParameters, DeleteRollupJobResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackRollupDeleteJobDispatch<DeleteRollupJobResponse>(p)
+				(p, d) => LowLevelDispatch.RollupDeleteJobDispatch<DeleteRollupJobResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -49,7 +49,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IDeleteRollupJobRequest, DeleteRollupJobRequestParameters, DeleteRollupJobResponse, IDeleteRollupJobResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackRollupDeleteJobDispatchAsync<DeleteRollupJobResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.RollupDeleteJobDispatchAsync<DeleteRollupJobResponse>(p, c)
 			);
 	}
 }

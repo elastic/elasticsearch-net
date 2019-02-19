@@ -45,7 +45,7 @@ namespace Tests.Indices.Monitoring.IndicesShardStores
 					.NumberOfReplicas(2)
 				)
 			);
-			client.Index(new IndexRequest<object>(IndexWithUnassignedShards)
+			client.Index(new IndexRequest<object>((IndexName)IndexWithUnassignedShards)
 			{
 				Document = new { x = 1 },
 				Refresh = Refresh.True

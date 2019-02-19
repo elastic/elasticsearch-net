@@ -34,7 +34,7 @@ namespace Nest
 		public IChangePasswordResponse ChangePassword(IChangePasswordRequest request) =>
 			Dispatcher.Dispatch<IChangePasswordRequest, ChangePasswordRequestParameters, ChangePasswordResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackSecurityChangePasswordDispatch<ChangePasswordResponse>(p, d)
+				(p, d) => LowLevelDispatch.SecurityChangePasswordDispatch<ChangePasswordResponse>(p, d)
 			);
 
 		/// <inheritdoc />
@@ -50,7 +50,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IChangePasswordRequest, ChangePasswordRequestParameters, ChangePasswordResponse, IChangePasswordResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackSecurityChangePasswordDispatchAsync<ChangePasswordResponse>(p, d, c)
+				(p, d, c) => LowLevelDispatch.SecurityChangePasswordDispatchAsync<ChangePasswordResponse>(p, d, c)
 			);
 	}
 }

@@ -1,6 +1,6 @@
 ﻿namespace Nest
 {
-	[MapsApi("info.json")]
+	[MapsApi("xpack.info.json")]
 	public partial interface IXPackInfoRequest { }
 
 	public partial class XPackInfoRequest { }

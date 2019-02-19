@@ -50,7 +50,6 @@ namespace Tests.Search.MultiSearch
 
 		protected override Func<MultiSearchDescriptor, IMultiSearchRequest> Fluent => ms => ms
 			.Index(typeof(Project))
-			.Type(typeof(Project))
 			.Search<Project>("10projects", s => s.Query(q => q.MatchAll()).From(0).Size(10))
 			.Search<Project>("dfs_projects", s => s.SearchType(SearchType.DfsQueryThenFetch))
 			.Search<Developer>("5developers", s => s.Query(q => q.MatchAll()).From(0).Size(5))
@@ -80,7 +79,7 @@ namespace Tests.Search.MultiSearch
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override MultiSearchRequest Initializer => new MultiSearchRequest(typeof(Project), typeof(Project))
+		protected override MultiSearchRequest Initializer => new MultiSearchRequest(typeof(Project))
 		{
 			Operations = new Dictionary<string, ISearchRequest>
 			{

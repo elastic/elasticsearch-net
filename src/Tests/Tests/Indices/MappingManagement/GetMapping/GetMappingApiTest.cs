@@ -29,7 +29,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
-		protected override GetMappingRequest Initializer => new GetMappingRequest(Index<Project>(), Type<Project>())
+		protected override GetMappingRequest Initializer => new GetMappingRequest(Index<Project>())
 		{
 			IgnoreUnavailable = true
 		};
@@ -117,13 +117,11 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;
 
-		protected override Func<GetMappingDescriptor<Project>, IGetMappingRequest> Fluent => d => d
-			.Index(_nonExistentIndex)
-			.AllTypes();
+		protected override Func<GetMappingDescriptor<Project>, IGetMappingRequest> Fluent => d => d.Index(_nonExistentIndex);
 
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
-		protected override GetMappingRequest Initializer => new GetMappingRequest(_nonExistentIndex, AllTypes);
+		protected override GetMappingRequest Initializer => new GetMappingRequest(_nonExistentIndex);
 		protected override string UrlPath => $"/{_nonExistentIndex}/_mapping";
 
 		protected override LazyResponses ClientUsage() => Calls(

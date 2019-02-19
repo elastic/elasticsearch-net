@@ -23,7 +23,6 @@ namespace Nest
 			var docs = request.Documents.Select(d =>
 				{
 					if (request.Index != null) d.Index = null;
-					if (request.Type != null) d.Type = null;
 					return d;
 				})
 				.ToList();

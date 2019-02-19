@@ -170,7 +170,7 @@ namespace Tests.XPack.Rollup
 		protected GetRollupCapabilitiesRequest CapsInitializer(string role) => new GetRollupCapabilitiesRequest(TimeSeriesSeeder.IndicesWildCard);
 
 		protected IGetRollupCapabilitiesRequest CapsFluent(string role, GetRollupCapabilitiesDescriptor d) =>
-			d.Index(TimeSeriesSeeder.IndicesWildCard);
+			d.Id(TimeSeriesSeeder.IndicesWildCard);
 
 		[I] public async Task StartsJob() =>
 			await AssertOnAfterCreateResponse<IStartRollupJobResponse>("start", r => r.Started.Should().BeTrue());

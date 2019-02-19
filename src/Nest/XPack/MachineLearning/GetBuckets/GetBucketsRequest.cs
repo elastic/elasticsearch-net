@@ -61,14 +61,6 @@ namespace Nest
 		// Forced to prevent override, ML API always expects ISO8601 format
 		[JsonConverter(typeof(IsoDateTimeConverter))]
 		DateTimeOffset? Start { get; set; }
-
-		/// <summary>
-		/// Returns buckets with matching timestamps.
-		/// </summary>
-		[JsonProperty("timestamp")]
-		// Forced to prevent override, ML API always expects ISO8601 format
-		[JsonConverter(typeof(IsoDateTimeConverter))]
-		DateTimeOffset? Timestamp { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -97,9 +89,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public DateTimeOffset? Start { get; set; }
-
-		/// <inheritdoc />
-		public DateTimeOffset? Timestamp { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -113,7 +102,6 @@ namespace Nest
 		IPage IGetBucketsRequest.Page { get; set; }
 		Field IGetBucketsRequest.Sort { get; set; }
 		DateTimeOffset? IGetBucketsRequest.Start { get; set; }
-		DateTimeOffset? IGetBucketsRequest.Timestamp { get; set; }
 
 		/// <inheritdoc />
 		public GetBucketsDescriptor AnomalyScore(double? anomalyScore) => Assign(a => a.AnomalyScore = anomalyScore);
@@ -138,8 +126,5 @@ namespace Nest
 
 		/// <inheritdoc />
 		public GetBucketsDescriptor Start(DateTimeOffset? start) => Assign(a => a.Start = start);
-
-		/// <inheritdoc />
-		public GetBucketsDescriptor Timestamp(DateTimeOffset? timestamp) => Assign(a => a.Timestamp = timestamp);
 	}
 }

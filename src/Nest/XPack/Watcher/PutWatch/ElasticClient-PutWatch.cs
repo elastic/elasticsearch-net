@@ -36,7 +36,7 @@ namespace Nest
 		public IPutWatchResponse PutWatch(IPutWatchRequest request) =>
 			Dispatcher.Dispatch<IPutWatchRequest, PutWatchRequestParameters, PutWatchResponse>(
 				request,
-				LowLevelDispatch.XpackWatcherPutWatchDispatch<PutWatchResponse>
+				LowLevelDispatch.WatcherPutWatchDispatch<PutWatchResponse>
 			);
 
 		/// <inheritdoc />
@@ -50,7 +50,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IPutWatchRequest, PutWatchRequestParameters, PutWatchResponse, IPutWatchResponse>(
 				request,
 				cancellationToken,
-				LowLevelDispatch.XpackWatcherPutWatchDispatchAsync<PutWatchResponse>
+				LowLevelDispatch.WatcherPutWatchDispatchAsync<PutWatchResponse>
 			);
 	}
 }

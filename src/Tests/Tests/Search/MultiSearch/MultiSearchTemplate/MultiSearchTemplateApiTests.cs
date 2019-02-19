@@ -33,7 +33,6 @@ namespace Tests.Search.MultiSearch.MultiSearchTemplate
 
 		protected override Func<MultiSearchTemplateDescriptor, IMultiSearchTemplateRequest> Fluent => ms => ms
 			.Index(typeof(Project))
-			.Type(typeof(Project))
 			.Template<Project>("inline", s => s
 				.Source("{\"query\": {\"match\":  {\"state\" : \"{{state}}\" }}}")
 				.Params(p => p
@@ -44,7 +43,7 @@ namespace Tests.Search.MultiSearch.MultiSearchTemplate
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override MultiSearchTemplateRequest Initializer => new MultiSearchTemplateRequest(typeof(Project), typeof(Project))
+		protected override MultiSearchTemplateRequest Initializer => new MultiSearchTemplateRequest(typeof(Project))
 		{
 			Operations = new Dictionary<string, ISearchTemplateRequest>
 			{

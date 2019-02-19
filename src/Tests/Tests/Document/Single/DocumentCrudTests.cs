@@ -19,7 +19,7 @@ namespace Tests.Document.Single
 
 		protected override LazyResponses Exists() =>
 			Calls<DocumentExistsDescriptor<Project>, DocumentExistsRequest<Project>, IDocumentExistsRequest, IExistsResponse>(
-				id => new DocumentExistsRequest<Project>(Project.Instance, id: id),
+				id => new DocumentExistsRequest<Project>(id),
 				(id, d) => d.Routing(Project.Instance.Name),
 				(s, c, f) => c.DocumentExists<Project>(s, f),
 				(s, c, f) => c.DocumentExistsAsync<Project>(s, f),

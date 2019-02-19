@@ -31,13 +31,12 @@ namespace Tests.Document.Multiple.MultiGet
 
 		protected override Func<MultiGetDescriptor, IMultiGetRequest> Fluent => d => d
 			.Index<Developer>()
-			.Type<Developer>()
 			.GetMany<Developer>(_ids);
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 
-		protected override MultiGetRequest Initializer => new MultiGetRequest(Index<Developer>(), Type<Developer>())
+		protected override MultiGetRequest Initializer => new MultiGetRequest(Index<Developer>())
 		{
 			Documents = _ids
 				.Select(n => new MultiGetOperation<Developer>(n))
@@ -139,12 +138,11 @@ namespace Tests.Document.Multiple.MultiGet
 
 		protected override Func<MultiGetDescriptor, IMultiGetRequest> Fluent => d => d
 			.Index<Project>()
-			.Type<Project>()
 			.GetMany<Project>(_ids, (op, id) => op.Routing(id));
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override MultiGetRequest Initializer => new MultiGetRequest(Index<Project>(), Type<Project>())
+		protected override MultiGetRequest Initializer => new MultiGetRequest(Index<Project>())
 		{
 			Documents = _ids.Select(n => new MultiGetOperation<Project>(n) { Routing = n })
 		};
@@ -193,12 +191,11 @@ namespace Tests.Document.Multiple.MultiGet
 
 		protected override Func<MultiGetDescriptor, IMultiGetRequest> Fluent => d => d
 			.Index<Project>()
-			.Type<CommitActivity>()
 			.GetMany<CommitActivity>(_activities.Select(c => c.Id), (m, id) => m.Routing(_activities.Single(a => a.Id == id).ProjectName));
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override MultiGetRequest Initializer => new MultiGetRequest(Index<Project>(), Type<CommitActivity>())
+		protected override MultiGetRequest Initializer => new MultiGetRequest(Index<Project>())
 		{
 			Documents = _activities.Select(n => new MultiGetOperation<CommitActivity>(n.Id) { Routing = n.ProjectName })
 		};

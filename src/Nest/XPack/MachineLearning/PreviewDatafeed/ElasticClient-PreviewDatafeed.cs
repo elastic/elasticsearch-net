@@ -41,7 +41,7 @@ namespace Nest
 			Dispatcher.Dispatch<IPreviewDatafeedRequest, PreviewDatafeedRequestParameters, PreviewDatafeedResponse<T>>(
 				request,
 				PreviewDatafeedResponse<T>,
-				(p, d) => LowLevelDispatch.XpackMlPreviewDatafeedDispatch<PreviewDatafeedResponse<T>>(p)
+				(p, d) => LowLevelDispatch.MlPreviewDatafeedDispatch<PreviewDatafeedResponse<T>>(p)
 			);
 
 		/// <inheritdoc />
@@ -59,7 +59,7 @@ namespace Nest
 					request,
 					cancellationToken,
 					PreviewDatafeedResponse<T>,
-					(p, d, c) => LowLevelDispatch.XpackMlPreviewDatafeedDispatchAsync<PreviewDatafeedResponse<T>>(p, c)
+					(p, d, c) => LowLevelDispatch.MlPreviewDatafeedDispatchAsync<PreviewDatafeedResponse<T>>(p, c)
 				);
 
 		private PreviewDatafeedResponse<T> PreviewDatafeedResponse<T>(IApiCallDetails response, Stream stream) => response.Success

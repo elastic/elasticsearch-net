@@ -37,7 +37,7 @@ namespace Nest
 		public IStartBasicLicenseResponse StartBasicLicense(IStartBasicLicenseRequest request) =>
 			Dispatcher.Dispatch<IStartBasicLicenseRequest, StartBasicLicenseRequestParameters, StartBasicLicenseResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackLicensePostStartBasicDispatch<StartBasicLicenseResponse>(p)
+				(p, d) => LowLevelDispatch.LicensePostStartBasicDispatch<StartBasicLicenseResponse>(p)
 			);
 
 		/// <inheritdoc cref="StartBasicLicense(System.Func{Nest.StartBasicLicenseDescriptor,Nest.IStartBasicLicenseRequest})"/>
@@ -52,7 +52,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IStartBasicLicenseRequest, StartBasicLicenseRequestParameters, StartBasicLicenseResponse, IStartBasicLicenseResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackLicensePostStartBasicDispatchAsync<StartBasicLicenseResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.LicensePostStartBasicDispatchAsync<StartBasicLicenseResponse>(p, c)
 			);
 	}
 }

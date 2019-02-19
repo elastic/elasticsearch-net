@@ -40,7 +40,7 @@ namespace Nest
 		public IForecastJobResponse ForecastJob(IForecastJobRequest request) =>
 			Dispatcher.Dispatch<IForecastJobRequest, ForecastJobRequestParameters, ForecastJobResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackMlForecastDispatch<ForecastJobResponse>(p)
+				(p, d) => LowLevelDispatch.MlForecastDispatch<ForecastJobResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -56,7 +56,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IForecastJobRequest, ForecastJobRequestParameters, ForecastJobResponse, IForecastJobResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackMlForecastDispatchAsync<ForecastJobResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.MlForecastDispatchAsync<ForecastJobResponse>(p, c)
 			);
 	}
 }

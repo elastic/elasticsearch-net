@@ -46,7 +46,7 @@ namespace Nest
 		public IMigrationAssistanceResponse MigrationAssistance(IMigrationAssistanceRequest request) =>
 			Dispatcher.Dispatch<IMigrationAssistanceRequest, MigrationAssistanceRequestParameters, MigrationAssistanceResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackMigrationGetAssistanceDispatch<MigrationAssistanceResponse>(p)
+				(p, d) => LowLevelDispatch.MigrationGetAssistanceDispatch<MigrationAssistanceResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -65,7 +65,7 @@ namespace Nest
 					IMigrationAssistanceResponse>(
 					request,
 					cancellationToken,
-					(p, d, c) => LowLevelDispatch.XpackMigrationGetAssistanceDispatchAsync<MigrationAssistanceResponse>(p, c)
+					(p, d, c) => LowLevelDispatch.MigrationGetAssistanceDispatchAsync<MigrationAssistanceResponse>(p, c)
 				);
 	}
 }

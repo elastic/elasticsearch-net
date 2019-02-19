@@ -40,7 +40,7 @@ namespace Nest
 			Dispatcher.Dispatch<IGetCertificatesRequest, GetCertificatesRequestParameters, GetCertificatesResponse>(
 				request,
 				ToCertificatesResponse,
-				(p, d) => LowLevelDispatch.XpackSslCertificatesDispatch<GetCertificatesResponse>(p)
+				(p, d) => LowLevelDispatch.SslCertificatesDispatch<GetCertificatesResponse>(p)
 			);
 
 		/// <inheritdoc cref="GetCertificates(System.Func{Nest.GetCertificatesDescriptor,Nest.IGetCertificatesRequest})" />
@@ -59,7 +59,7 @@ namespace Nest
 					request,
 					cancellationToken,
 					ToCertificatesResponse,
-					(p, d, c) => LowLevelDispatch.XpackSslCertificatesDispatchAsync<GetCertificatesResponse>(p, c)
+					(p, d, c) => LowLevelDispatch.SslCertificatesDispatchAsync<GetCertificatesResponse>(p, c)
 				);
 
 		private GetCertificatesResponse ToCertificatesResponse(IApiCallDetails apiCallDetails, Stream stream)

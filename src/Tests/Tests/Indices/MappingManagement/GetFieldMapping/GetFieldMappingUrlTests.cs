@@ -30,19 +30,18 @@ namespace Tests.Indices.MappingManagement.GetFieldMapping
 					.RequestAsync(c => c.GetFieldMappingAsync(new GetFieldMappingRequest(indices, fields)))
 				;
 
-			var types = Type<Project>().And<Developer>();
 			await GET($"/_mapping/doc%2Cdeveloper/field/name%2Cfield")
-					.Fluent(c => c.GetFieldMapping<Project>(fields, g => g.Type(types)))
-					.Request(c => c.GetFieldMapping(new GetFieldMappingRequest(types, fields)))
-					.FluentAsync(c => c.GetFieldMappingAsync<Project>(fields, g => g.Type(types)))
-					.RequestAsync(c => c.GetFieldMappingAsync(new GetFieldMappingRequest(types, fields)))
+					.Fluent(c => c.GetFieldMapping<Project>(fields, g => g))
+					.Request(c => c.GetFieldMapping(new GetFieldMappingRequest(fields)))
+					.FluentAsync(c => c.GetFieldMappingAsync<Project>(fields, g => g))
+					.RequestAsync(c => c.GetFieldMappingAsync(new GetFieldMappingRequest(fields)))
 				;
 
 			await GET($"/index1%2Cindex2/_mapping/doc%2Cdeveloper/field/name%2Cfield")
-					.Fluent(c => c.GetFieldMapping<Project>(fields, g => g.Index(indices).Type(types)))
-					.Request(c => c.GetFieldMapping(new GetFieldMappingRequest(indices, types, fields)))
-					.FluentAsync(c => c.GetFieldMappingAsync<Project>(fields, g => g.Index(indices).Type(types)))
-					.RequestAsync(c => c.GetFieldMappingAsync(new GetFieldMappingRequest(indices, types, fields)))
+					.Fluent(c => c.GetFieldMapping<Project>(fields, g => g.Index(indices)))
+					.Request(c => c.GetFieldMapping(new GetFieldMappingRequest(indices, fields)))
+					.FluentAsync(c => c.GetFieldMappingAsync<Project>(fields, g => g.Index(indices)))
+					.RequestAsync(c => c.GetFieldMappingAsync(new GetFieldMappingRequest(indices, fields)))
 				;
 		}
 	}

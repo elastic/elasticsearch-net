@@ -16,7 +16,8 @@ namespace ApiGenerator
 			while (answer != "y" && answer != "n" && answer != "")
 			{
 				Console.Write("Download online rest specifications? [Y/N] (default N): ");
-				answer = Console.ReadLine()?.Trim().ToLowerInvariant();
+				//answer = Console.ReadLine()?.Trim().ToLowerInvariant();
+				answer = "n";
 				redownloadCoreSpecification = answer == "y";
 			}
 

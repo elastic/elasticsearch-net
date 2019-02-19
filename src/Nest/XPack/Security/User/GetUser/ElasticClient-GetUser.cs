@@ -32,7 +32,7 @@ namespace Nest
 		public IGetUserResponse GetUser(IGetUserRequest request) =>
 			Dispatcher.Dispatch<IGetUserRequest, GetUserRequestParameters, GetUserResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackSecurityGetUserDispatch<GetUserResponse>(p)
+				(p, d) => LowLevelDispatch.SecurityGetUserDispatch<GetUserResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -46,7 +46,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IGetUserRequest, GetUserRequestParameters, GetUserResponse, IGetUserResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackSecurityGetUserDispatchAsync<GetUserResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.SecurityGetUserDispatchAsync<GetUserResponse>(p, c)
 			);
 	}
 }

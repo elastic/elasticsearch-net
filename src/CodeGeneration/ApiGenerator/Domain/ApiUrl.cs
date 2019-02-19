@@ -1,29 +1,40 @@
 ﻿using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
+using HtmlParserSharp;
 
 namespace ApiGenerator.Domain
 {
 	// ReSharper disable once ClassNeverInstantiated.Global
 	public class ApiUrl
 	{
-		//these are aliases we much rather pass along inside the querystring (or body)
-		//allowing these will cause too many overloads being generated which helps noone
-		public static readonly string[] BlackListRouteValues = { "{search_groups}", "{indexing_types}", "{body}", "{scroll_id}" };
-		private IEnumerable<string> _paths;
+		private IList<string> _paths;
+		private IList<ApiPath> _exposedPaths;
 		public IDictionary<string, ApiQueryParameters> Params { get; set; }
-
-		public IDictionary<string, ApiUrlPart> Parts { get; set; }
 
 		public string Path { get; set; }
 
 		public IEnumerable<string> Paths
 		{
-			get => _paths?.Where(p => !BlackListRouteValues.Any(p.Contains))
-				.ToList() ?? _paths;
-			set => _paths = EnsureBackslash(value);
+			private get => _paths ?? Enumerable.Empty<string>();
+			set => _paths = (value ?? Enumerable.Empty<string>()).ToList();
 		}
 
-		public IList<string> EnsureBackslash(IEnumerable<string> paths) =>
-			paths?.Select(p => p.StartsWith("/") ? p : $"/{p}").ToList();
+		public IDictionary<string, ApiUrlPart> Parts { private get; set; }
+
+		public IEnumerable<ApiPath> ExposedApiPaths
+		{
+			get
+			{
+                if (_exposedPaths != null) return _exposedPaths;
+				_exposedPaths = Paths.Select(p => new ApiPath(p, Parts)).ToList();
+				return _exposedPaths;
+			}
+		}
+
+		public IEnumerable<ApiUrlPart> ExposedApiParts => ExposedApiPaths.SelectMany(p=>p.Parts).DistinctBy(p=>p.Name).ToList();
+
+		private static readonly string[] documentApiParts = { "index", "id" };
+		public bool IsDocumentApi => ExposedApiParts.All(p => documentApiParts.Contains(p.Name));
 	}
 }

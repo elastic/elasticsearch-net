@@ -19,7 +19,7 @@ namespace Tests.Framework.SerializationTests
 		{
 			var client = _cluster.Client;
 
-			var bytesResponse = client.LowLevel.Search<BytesResponse>("project", "project", PostData.Serializable(new { }));
+			var bytesResponse = client.LowLevel.Search<BytesResponse>("project", PostData.Serializable(new { }));
 			bytesResponse.Body.Should().NotBeNull();
 			bytesResponse.Body.Should().BeEquivalentTo(bytesResponse.ResponseBodyInBytes);
 		}
@@ -29,7 +29,7 @@ namespace Tests.Framework.SerializationTests
 			var settings  = new ConnectionConfiguration(new Uri($"http://localhost:{_cluster.Nodes.First().Port ?? 9200}"));
 			var lowLevelClient = new ElasticLowLevelClient(settings);
 
-			var bytesResponse = lowLevelClient.Search<BytesResponse>("project", "project", PostData.Serializable(new { }));
+			var bytesResponse = lowLevelClient.Search<BytesResponse>("project", PostData.Serializable(new { }));
 
 			bytesResponse.Body.Should().NotBeNull();
 			bytesResponse.Body.Should().BeEquivalentTo(bytesResponse.ResponseBodyInBytes);
@@ -46,7 +46,7 @@ namespace Tests.Framework.SerializationTests
 				exception: new Exception("problem with the request as a result of 401")
 			);
 
-			var bytesResponse = client.LowLevel.Search<BytesResponse>("project", "project", PostData.Serializable(new { }));
+			var bytesResponse = client.LowLevel.Search<BytesResponse>("project", PostData.Serializable(new { }));
 
 			bytesResponse.Body.Should().NotBeNull();
 			bytesResponse.Body.Should().BeEquivalentTo(responseBytes);
@@ -64,7 +64,7 @@ namespace Tests.Framework.SerializationTests
 				exception: new Exception("problem with the request as a result of 401")
 			);
 
-			var bytesResponse = client.LowLevel.Search<BytesResponse>("project", "project", PostData.Serializable(new { }));
+			var bytesResponse = client.LowLevel.Search<BytesResponse>("project", PostData.Serializable(new { }));
 
 			bytesResponse.Body.Should().NotBeNull();
 			bytesResponse.Body.Should().BeEquivalentTo(responseBytes);

@@ -145,7 +145,6 @@ namespace Tests.Document.Multiple.MultiTermVectors
 
 		protected override Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> Fluent => d => d
 			.Index<Developer>()
-			.Type<Developer>()
 			.Ids(Developer.Developers.Select(p => (Id)p.Id).Take(2))
 			.FieldStatistics()
 			.Payloads()
@@ -155,7 +154,7 @@ namespace Tests.Document.Multiple.MultiTermVectors
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override MultiTermVectorsRequest Initializer => new MultiTermVectorsRequest(Index<Developer>(), Type<Developer>())
+		protected override MultiTermVectorsRequest Initializer => new MultiTermVectorsRequest(Index<Developer>())
 		{
 			Ids = Developer.Developers.Select(p => (Id)p.Id).Take(2),
 			FieldStatistics = true,

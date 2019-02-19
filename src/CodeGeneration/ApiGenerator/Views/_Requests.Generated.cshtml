@@ -48,33 +48,33 @@ namespace Nest
 	public partial interface @(Raw(method.InterfaceType)) : IRequest@(Raw(string.Format("<{0}>", method.QueryStringParamName)))
 	{
 </text>
-	foreach (ApiUrlPart part in method.AllParts.Where(p=>!ApiUrl.BlackListRouteValues.Contains(p.Name)))
+	foreach (ApiUrlPart part in method.Url.ExposedApiParts)
 	{
 <text>		@(Raw(part.ClrTypeName)) @(part.InterfaceName) { get; }
 </text>
 	}
-	//render partial methods as interface properties forcing us to implement them on request and request descriptors
-	if (method.HttpMethod != "GET" && method.HttpMethod != "HEAD")
-	{
-		foreach (var partialParam in method.Url.Params.Values.Where(p=>p.RenderPartial))
-		{
-		<text>[JsonProperty("@(partialParam.QueryStringKey)")] @(Raw(partialParam.TypeHighLevel)) @(partialParam.ClsName) { get; set; }</text>
-		}
-	}
 <text>	}
 </text>
+		var concreteInterface = method.InterfaceTypeGeneric == null ? method.InterfaceType : method.InterfaceTypeGeneric;
+		if (!string.IsNullOrWhiteSpace(method.InterfaceTypeGeneric))
+		{
+	<text>
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface @(Raw(method.InterfaceTypeGeneric)) : @(Raw(method.InterfaceType)) { }
+</text>
 	}
-<text>	///<summary>Request parameters for @method.FullName <pre>@method.Documentation</pre></summary>
-	public partial class @Raw(method.RequestType + method.RequestTypeGeneric) @Raw(string.Format(": PlainRequestBase<{0}>, {1}", method.QueryStringParamName, method.InterfaceType))
+<text>
+	///<summary>Request parameters for @method.FullName <pre>@method.Documentation</pre></summary>
+	public partial class @Raw(method.RequestType) @Raw(string.Format(": PlainRequestBase<{0}>, {1}", method.QueryStringParamName, method.InterfaceType))
 	{
 		protected @(Raw(method.InterfaceType)) Self => this;
-@foreach (Constructor c in method.RequestConstructors())
+@foreach (Constructor c in method.RequestConstructors(inheritsFromPlainRequestBase: true))
 {
 <text>		@(Raw(CodeGenerator.Constructor(c)))
 </text>
 }
 		// values part of the url path
-@foreach (var part in method.AllParts.Where(p=>!ApiUrl.BlackListRouteValues.Contains(p.Name)))
+@foreach (var part in method.Url.ExposedApiParts)
 {
 <text>		@(Raw(part.ClrTypeName)) @(Raw(method.InterfaceType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>", part.ClrTypeName)))("@(part.Name)");
 </text>
@@ -85,12 +85,7 @@ namespace Nest
 {
 	var original = param.QueryStringKey;
 	//skip parameters already part of the path portion of the url
-	if (method.Url.Parts != null && method.Url.Parts.ContainsKey(original))
-	{
-		continue;
-	}
-	//we prefer this parameter to be explictly implemented on the request body
-	if (param.RenderPartial && (method.HttpMethod != "GET" && method.HttpMethod != "HEAD"))
+	if (method.Url.ExposedApiParts.Any(p=>p.Name == original))
 	{
 		continue;
 	}
@@ -103,5 +98,18 @@ namespace Nest
 </text>
 }
 	}</text>
+	if (!string.IsNullOrWhiteSpace(method.InterfaceTypeGeneric))
+	{<text>
+	public partial class @Raw(method.RequestType + method.RequestTypeGeneric) @Raw(string.Format(": {0}, {1}", method.RequestType, method.InterfaceTypeGeneric))
+	{
+		protected @(Raw(method.InterfaceTypeGeneric)) TypedSelf => this;
+@foreach (Constructor c in method.RequestConstructors(inheritsFromPlainRequestBase: false))
+{
+<text>		@(Raw(CodeGenerator.Constructor(c)))
+</text>
+}
+	}
+	 </text>}
+	}
 }
 }

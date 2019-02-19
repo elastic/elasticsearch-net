@@ -287,7 +287,6 @@ namespace Tests.Search.Request
 
 		protected override Func<SearchDescriptor<King>, ISearchRequest> Fluent => s => s
 			.Index(Index)
-			.Type(RoyalSeeder.RoyalType)
 			.Query(q =>
 				q.HasChild<Prince>(hc => hc
 					.Query(hcq => hcq.Match(m => m.Field(p => p.FullTextField).Query("default")))
@@ -308,7 +307,7 @@ namespace Tests.Search.Request
 
 		protected override IndexName Index => IndexName;
 
-		protected override SearchRequest<King> Initializer => new SearchRequest<King>(Index, RoyalSeeder.RoyalType)
+		protected override SearchRequest<King> Initializer => new SearchRequest<King>(Index)
 		{
 			Query = new HasChildQuery
 			{

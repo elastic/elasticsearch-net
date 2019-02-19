@@ -116,7 +116,6 @@ namespace Tests.ClientConcepts.Troubleshooting
 			var client = new ElasticClient(settings);
 
 			var syncResponse = client.Search<object>(s => s // <4> Make a synchronous call
-				.AllTypes()
 				.AllIndices()
 				.Scroll("2m")
 				.Sort(ss => ss
@@ -127,7 +126,6 @@ namespace Tests.ClientConcepts.Troubleshooting
 			list.Count.Should().Be(2);
 
 			var asyncResponse = await client.SearchAsync<object>(s => s // <5> Make an asynchronous call
-				.AllTypes()
 				.AllIndices()
 				.Scroll("10m")
 				.Sort(ss => ss
@@ -192,7 +190,6 @@ namespace Tests.ClientConcepts.Troubleshooting
 			var client = new ElasticClient(settings);
 
 			var syncResponse = client.Search<object>(s => s // <1> Make a synchronous call where the request and response bytes will not be buffered
-				.AllTypes()
 				.AllIndices()
 				.Scroll("2m")
 				.Sort(ss => ss
@@ -206,7 +203,6 @@ namespace Tests.ClientConcepts.Troubleshooting
 				.RequestConfiguration(r => r
 					.DisableDirectStreaming()
 				)
-				.AllTypes()
 				.AllIndices()
 				.Scroll("10m")
 				.Sort(ss => ss

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[MapsApi("bulk.json")]
+	[MapsApi("indices.update_aliases.json")]
 	public partial interface IBulkAliasRequest
 	{
 		[JsonProperty("actions")]

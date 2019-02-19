@@ -20,7 +20,7 @@ namespace Tests.XPack.Watcher.WatcherStats
 		protected override int ExpectStatusCode => 200;
 
 		protected override Func<WatcherStatsDescriptor, IWatcherStatsRequest> Fluent => f => f
-			.WatcherStatsMetric(WatcherStatsMetric.All);
+			.Metric(WatcherStatsMetric.All);
 
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 

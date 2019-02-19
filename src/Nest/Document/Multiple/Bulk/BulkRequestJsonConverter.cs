@@ -23,8 +23,7 @@ namespace Nest
 			{
 				op.Index = op.Index ?? bulk.Index ?? op.ClrType;
 				if (op.Index.Equals(bulk.Index)) op.Index = null;
-				op.Type = op.Type ?? bulk.Type ?? op.ClrType;
-				if (op.Type.Equals(bulk.Type)) op.Type = null;
+				op.Type = op.Type ?? op.ClrType;
 				op.Id = op.GetIdForOperation(settings.Inferrer);
 				op.Routing = op.GetRoutingForOperation(settings.Inferrer);
 

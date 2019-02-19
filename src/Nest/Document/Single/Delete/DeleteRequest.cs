@@ -3,21 +3,18 @@
 namespace Nest
 {
 	[MapsApi("delete.json")]
-	public partial interface IDeleteRequest : IRequest<DeleteRequestParameters> { }
+	public partial interface IDeleteRequest { }
 
-	public interface IDeleteRequest<T> : IDeleteRequest where T : class { }
+	public partial interface IDeleteRequest<TDocument> where TDocument : class { }
 
-	public partial class DeleteRequest
+	public partial class DeleteRequest { }
+
+	public partial class DeleteRequest<TDocument> where TDocument : class
 	{
 		private object AutoRouteDocument() => null;
 	}
 
-	public partial class DeleteRequest<T> where T : class
-	{
-		private object AutoRouteDocument() => null;
-	}
-
-	public partial class DeleteDescriptor<T> where T : class
+	public partial class DeleteDescriptor<TDocument> where TDocument : class
 	{
 		private object AutoRouteDocument() => null;
 	}

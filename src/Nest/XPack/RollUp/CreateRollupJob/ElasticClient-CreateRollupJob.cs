@@ -36,7 +36,7 @@ namespace Nest
 		public ICreateRollupJobResponse CreateRollupJob(ICreateRollupJobRequest request) =>
 			Dispatcher.Dispatch<ICreateRollupJobRequest, CreateRollupJobRequestParameters, CreateRollupJobResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackRollupPutJobDispatch<CreateRollupJobResponse>(p, d)
+				(p, d) => LowLevelDispatch.RollupPutJobDispatch<CreateRollupJobResponse>(p, d)
 			);
 
 		/// <inheritdoc />
@@ -50,7 +50,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<ICreateRollupJobRequest, CreateRollupJobRequestParameters, CreateRollupJobResponse, ICreateRollupJobResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackRollupPutJobDispatchAsync<CreateRollupJobResponse>(p, d, c)
+				(p, d, c) => LowLevelDispatch.RollupPutJobDispatchAsync<CreateRollupJobResponse>(p, d, c)
 			);
 	}
 }

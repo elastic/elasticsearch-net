@@ -33,11 +33,6 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 			pathOther = new DocumentPath<Project>(2).Index("x");
 			(pathOther != path).Should().BeTrue();
 			pathOther.Should().NotBe(path);
-
-			path = new DocumentPath<Project>(2);
-			pathOther = new DocumentPath<Project>(2).Type("x");
-			(pathOther != path).Should().BeTrue();
-			pathOther.Should().NotBe(path);
 		}
 
 		[U] public void Null()

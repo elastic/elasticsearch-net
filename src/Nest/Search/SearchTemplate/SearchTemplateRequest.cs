@@ -48,8 +48,6 @@ namespace Nest
 		public SearchTemplateRequest() : base(typeof(T)) => ClrType = typeof(T);
 
 		public SearchTemplateRequest(Indices indices) : base(indices) => ClrType = typeof(T);
-
-		public SearchTemplateRequest(Indices indices, Types types) : base(indices, types) => ClrType = typeof(T);
 	}
 
 	public partial class SearchTemplateDescriptor<T> where T : class

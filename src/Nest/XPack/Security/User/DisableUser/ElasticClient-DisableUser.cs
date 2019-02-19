@@ -26,20 +26,20 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public IDisableUserResponse DisableUser(Name username, Func<DisableUserDescriptor, IDisableUserRequest> selector = null) =>
-			DisableUser(selector.InvokeOrDefault(new DisableUserDescriptor().Username(username)));
+			DisableUser(selector.InvokeOrDefault(new DisableUserDescriptor(username)));
 
 		/// <inheritdoc />
 		public IDisableUserResponse DisableUser(IDisableUserRequest request) =>
 			Dispatcher.Dispatch<IDisableUserRequest, DisableUserRequestParameters, DisableUserResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackSecurityDisableUserDispatch<DisableUserResponse>(p)
+				(p, d) => LowLevelDispatch.SecurityDisableUserDispatch<DisableUserResponse>(p)
 			);
 
 		/// <inheritdoc />
 		public Task<IDisableUserResponse> DisableUserAsync(Name username, Func<DisableUserDescriptor, IDisableUserRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
 		) =>
-			DisableUserAsync(selector.InvokeOrDefault(new DisableUserDescriptor().Username(username)), cancellationToken);
+			DisableUserAsync(selector.InvokeOrDefault(new DisableUserDescriptor(username)), cancellationToken);
 
 		/// <inheritdoc />
 		public Task<IDisableUserResponse> DisableUserAsync(IDisableUserRequest request,
@@ -48,7 +48,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IDisableUserRequest, DisableUserRequestParameters, DisableUserResponse, IDisableUserResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackSecurityDisableUserDispatchAsync<DisableUserResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.SecurityDisableUserDispatchAsync<DisableUserResponse>(p, c)
 			);
 	}
 }

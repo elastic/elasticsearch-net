@@ -22,20 +22,15 @@ namespace Tests.Document.Single.Get
 
 			//new GetRequest<Project>(null, null, 1) is still an error
 			await GET("/project/doc/1")
-					.Fluent(c => c.Get<Project>(1, g => g.Index(null).Type(null)))
-					.Request(c => c.Get<Project>(new GetRequest<Project>(new DocumentPath<Project>(1).Index(null).Type(null))))
-					.FluentAsync(c => c.GetAsync<Project>(1, g => g.Index(null).Type(null)))
-					.RequestAsync(c => c.GetAsync<Project>(new GetRequest<Project>(new DocumentPath<Project>(1).Index(null).Type(null))))
+					.Fluent(c => c.Get<Project>(1, g => g.Index(null)))
+					.FluentAsync(c => c.GetAsync<Project>(1, g => g.Index(null)))
 				;
 
 			await GET("/testindex/typeindex/1")
-					.Fluent(c => c.Get<Project>(1, g => g.Index("testindex").Type("typeindex")))
-					.Request(c => c.Get<Project>(new GetRequest<Project>(new DocumentPath<Project>(1).Index("testindex").Type("typeindex"))))
-					.Request(c => c.Get<Project>(new GetRequest<Project>("testindex", "typeindex", 1)))
-					.FluentAsync(c => c.GetAsync<Project>(1, g => g.Index("testindex").Type("typeindex")))
-					.RequestAsync(
-						c => c.GetAsync<Project>(new GetRequest<Project>(new DocumentPath<Project>(1).Index("testindex").Type("typeindex"))))
-					.RequestAsync(c => c.GetAsync<Project>(new GetRequest<Project>("testindex", "typeindex", 1)))
+					.Fluent(c => c.Get<Project>(1, g => g.Index("testindex")))
+					.Request(c => c.Get<Project>(new GetRequest<Project>("testindex", 1)))
+					.FluentAsync(c => c.GetAsync<Project>(1, g => g.Index("testindex")))
+					.RequestAsync(c => c.GetAsync<Project>(new GetRequest<Project>("testindex", 1)))
 				;
 
 			var urlId = "http://id.mynamespace/metainformation?x=y,2";
@@ -55,7 +50,7 @@ namespace Tests.Document.Single.Get
 				;
 
 			GET($"/project/doc/{escaped}?routing={escaped}")
-				.LowLevel(c => c.Get<DynamicResponse>("project", "doc", urlId, new GetRequestParameters
+				.LowLevel(c => c.Get<DynamicResponse>("project", urlId, new GetRequestParameters
 					{
 						Routing = urlId
 					})

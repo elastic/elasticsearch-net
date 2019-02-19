@@ -28,7 +28,6 @@ namespace Tests.Search.SearchTemplate
 		protected override int ExpectStatusCode => 200;
 
 		protected override Func<SearchTemplateDescriptor<Project>, ISearchTemplateRequest> Fluent => s => s
-			.AllTypes()
 			.Source("{\"query\": {\"match\":  {\"state\" : \"{{state}}\" }}}")
 			.Params(p => p
 				.Add("state", "Stable")
@@ -76,7 +75,6 @@ namespace Tests.Search.SearchTemplate
 		protected override int ExpectStatusCode => 400;
 
 		protected override Func<SearchTemplateDescriptor<Project>, ISearchTemplateRequest> Fluent => s => s
-			.AllTypes()
 			.Source(_templateString)
 			.Params(p => p
 				.Add("state", "Stable")

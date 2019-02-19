@@ -10,19 +10,15 @@ namespace Nest
 		QueryContainer Query { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IValidateQueryRequest<T> : IValidateQueryRequest
-		where T : class { }
+	public partial interface IValidateQueryRequest<T> where T : class { }
 
 	public partial class ValidateQueryRequest
 	{
 		public QueryContainer Query { get; set; }
 	}
 
-	public partial class ValidateQueryRequest<T>
-		where T : class
+	public partial class ValidateQueryRequest<T> where T : class
 	{
-		public QueryContainer Query { get; set; }
 	}
 
 	public partial class ValidateQueryDescriptor<T> where T : class

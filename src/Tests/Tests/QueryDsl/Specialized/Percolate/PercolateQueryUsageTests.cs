@@ -109,11 +109,11 @@ namespace Tests.QueryDsl.Specialized.Percolate
 
 		//hide
 		protected override Func<SearchDescriptor<ProjectPercolation>, ISearchRequest> Fluent => f =>
-			f.Query(QueryFluent).Index(PercolationIndex).AllTypes();
+			f.Query(QueryFluent).Index(PercolationIndex);
 
 		//hide
 		protected override SearchRequest<ProjectPercolation> Initializer =>
-			new SearchRequest<ProjectPercolation>(PercolationIndex, Types.All)
+			new SearchRequest<ProjectPercolation>(PercolationIndex)
 			{
 				Query = QueryInitializer
 			};
@@ -171,11 +171,11 @@ namespace Tests.QueryDsl.Specialized.Percolate
 
 		//hide
 		protected override Func<SearchDescriptor<ProjectPercolation>, ISearchRequest> Fluent => f =>
-			f.Query(QueryFluent).Index(PercolationIndex).AllTypes();
+			f.Query(QueryFluent).Index(PercolationIndex);
 
 		//hide
 		protected override SearchRequest<ProjectPercolation> Initializer =>
-			new SearchRequest<ProjectPercolation>(PercolationIndex, Types.All)
+			new SearchRequest<ProjectPercolation>(PercolationIndex)
 			{
 				Query = QueryInitializer
 			};
@@ -241,11 +241,11 @@ namespace Tests.QueryDsl.Specialized.Percolate
 
 		//hide
 		protected override Func<SearchDescriptor<ProjectPercolation>, ISearchRequest> Fluent => f =>
-			f.Query(QueryFluent).Index(PercolationIndex).AllTypes();
+			f.Query(QueryFluent).Index(PercolationIndex);
 
 		//hide
 		protected override SearchRequest<ProjectPercolation> Initializer =>
-			new SearchRequest<ProjectPercolation>(PercolationIndex, Types.All)
+			new SearchRequest<ProjectPercolation>(PercolationIndex)
 			{
 				Query = QueryInitializer
 			};

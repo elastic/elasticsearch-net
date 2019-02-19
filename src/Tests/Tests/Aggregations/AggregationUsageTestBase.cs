@@ -33,7 +33,6 @@ namespace Tests.Aggregations
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Size(0)
 			.Index(AgainstIndex)
-			.Type<Project>()
 			.TypedKeys(TestClient.Configuration.Random.TypedKeys)
 			.Query(q => QueryScope)
 			.Aggregations(FluentAggs);
@@ -42,7 +41,7 @@ namespace Tests.Aggregations
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>(AgainstIndex, Type<Project>())
+			new SearchRequest<Project>(AgainstIndex)
 			{
 				Query = QueryScope,
 				Size = 0,

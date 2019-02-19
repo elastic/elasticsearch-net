@@ -48,7 +48,7 @@ namespace Nest
 		public IMigrationUpgradeResponse MigrationUpgrade(IMigrationUpgradeRequest request) =>
 			Dispatcher.Dispatch<IMigrationUpgradeRequest, MigrationUpgradeRequestParameters, MigrationUpgradeResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackMigrationUpgradeDispatch<MigrationUpgradeResponse>(p)
+				(p, d) => LowLevelDispatch.MigrationUpgradeDispatch<MigrationUpgradeResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -66,7 +66,7 @@ namespace Nest
 				.DispatchAsync<IMigrationUpgradeRequest, MigrationUpgradeRequestParameters, MigrationUpgradeResponse, IMigrationUpgradeResponse>(
 					request,
 					cancellationToken,
-					(p, d, c) => LowLevelDispatch.XpackMigrationUpgradeDispatchAsync<MigrationUpgradeResponse>(p, c)
+					(p, d, c) => LowLevelDispatch.MigrationUpgradeDispatchAsync<MigrationUpgradeResponse>(p, c)
 				);
 	}
 }

@@ -12,18 +12,18 @@ namespace Nest
 		/// <para> </para>
 		/// <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-delete.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-delete.html</a>
 		/// </summary>
-		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
+		/// <typeparam name="TDocument">The type used to infer the default index and typename</typeparam>
 		/// <param name="selector">Describe the delete operation, i.e type/index/id</param>
-		IDeleteResponse Delete<T>(DocumentPath<T> document, Func<DeleteDescriptor<T>, IDeleteRequest> selector = null) where T : class;
+		IDeleteResponse Delete<TDocument>(DocumentPath<TDocument> document, Func<DeleteDescriptor<TDocument>, IDeleteRequest> selector = null) where TDocument : class;
 
 		/// <inheritdoc />
 		IDeleteResponse Delete(IDeleteRequest request);
 
 		/// <inheritdoc />
-		Task<IDeleteResponse> DeleteAsync<T>(
-			DocumentPath<T> document, Func<DeleteDescriptor<T>, IDeleteRequest> selector = null,
+		Task<IDeleteResponse> DeleteAsync<TDocument>(
+			DocumentPath<TDocument> document, Func<DeleteDescriptor<TDocument>, IDeleteRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
-		) where T : class;
+		) where TDocument : class;
 
 		/// <inheritdoc />
 		Task<IDeleteResponse> DeleteAsync(IDeleteRequest request, CancellationToken cancellationToken = default(CancellationToken));
@@ -32,8 +32,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IDeleteResponse Delete<T>(DocumentPath<T> document, Func<DeleteDescriptor<T>, IDeleteRequest> selector = null) where T : class =>
-			Delete(selector.InvokeOrDefault(new DeleteDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
+		public IDeleteResponse Delete<TDocument>(DocumentPath<TDocument> document, Func<DeleteDescriptor<TDocument>, IDeleteRequest> selector = null) where TDocument : class =>
+			Delete(selector.InvokeOrDefault(new DeleteDescriptor<TDocument>(document.Self.Index, document.Self.Id)));
 
 		/// <inheritdoc />
 		public IDeleteResponse Delete(IDeleteRequest request) =>
@@ -43,10 +43,10 @@ namespace Nest
 			);
 
 		/// <inheritdoc />
-		public Task<IDeleteResponse> DeleteAsync<T>(
-			DocumentPath<T> document, Func<DeleteDescriptor<T>, IDeleteRequest> selector = null,
+		public Task<IDeleteResponse> DeleteAsync<TDocument>(
+			DocumentPath<TDocument> document, Func<DeleteDescriptor<TDocument>, IDeleteRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
-		) where T : class => DeleteAsync(selector.InvokeOrDefault(new DeleteDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)),
+		) where TDocument : class => DeleteAsync(selector.InvokeOrDefault(new DeleteDescriptor<TDocument>(document.Self.Index, document.Self.Id)),
 			cancellationToken);
 
 		/// <inheritdoc />

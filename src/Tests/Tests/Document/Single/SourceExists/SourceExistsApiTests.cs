@@ -57,7 +57,7 @@ namespace Tests.Document.Single.SourceExists
 		protected override Func<SourceExistsDescriptor<Project>, ISourceExistsRequest> Fluent => d => d.Routing(Project.Routing);
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 
-		protected override SourceExistsRequest<Project> Initializer => new SourceExistsRequest<Project>(Doc(CallIsolatedValue))
+		protected override SourceExistsRequest<Project> Initializer => new SourceExistsRequest<Project>(IndexWithNoSource, CallIsolatedValue)
 		{
 			Routing = Project.Routing
 		};
@@ -105,7 +105,7 @@ namespace Tests.Document.Single.SourceExists
 		protected override int ExpectStatusCode => 404;
 		protected override Func<SourceExistsDescriptor<Project>, ISourceExistsRequest> Fluent => f => null;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override SourceExistsRequest<Project> Initializer => new SourceExistsRequest<Project>(Doc(CallIsolatedValue));
+		protected override SourceExistsRequest<Project> Initializer => new SourceExistsRequest<Project>(IndexWithNoSource, CallIsolatedValue);
 		protected override bool SupportsDeserialization => false;
 		protected override string UrlPath => $"/{IndexWithNoSource.Name}/doc/{CallIsolatedValue}/_source";
 

@@ -19,41 +19,6 @@ namespace ApiGenerator
 
 		public static List<string> Warnings { get; private set; }
 
-		private static string[] IgnoredApis { get; } =
-		{
-			// these API's are not ready for primetime yet
-			"xpack.ml.delete_filter.json",
-			"xpack.ml.get_filters.json",
-			"xpack.ml.put_filter.json",
-			"rank_eval.json",
-
-			// these API's are new and need to be mapped
-			"ml.delete_calendar.json",
-			"ml.delete_calendar_event.json",
-			"ml.delete_calendar_job.json",
-			"ml.get_calendar_events.json",
-			"ml.get_calendars.json",
-			"ml.info.json",
-			"ml.post_calendar_events.json",
-			"ml.put_calendar.json",
-			"ml.put_calendar_job.json",
-			"ml.get_calendar_job.json",
-			"ml.delete_forecast.json",
-			"ml.find_file_structure.json",
-			"delete_by_query_rethrottle.json",
-			"update_by_query_rethrottle.json",
-
-			"ml.update_filter.json",
-			"ml.validate_detector.json",
-			"security.delete_privileges.json",
-			"security.get_privileges.json",
-			"security.get_user_privileges.json",
-			"security.get_index_privileges.json",
-			"security.has_privileges.json",
-			"security.put_privilege.json",
-			"security.put_privileges.json",
-		};
-
 		public static void Generate(string downloadBranch, params string[] folders)
 		{
 			Warnings = new List<string>();
@@ -94,12 +59,13 @@ namespace ApiGenerator
 				.ToList();
 
 			var endpoints = new Dictionary<string, ApiEndpoint>();
+			var seenFiles = new HashSet<string>();
 			using (var pbar = new ProgressBar(directories.Count, $"Listing {directories.Count} directories",
 				new ProgressBarOptions { BackgroundColor = ConsoleColor.DarkGray }))
 			{
 				var folderFiles = directories.Select(dir =>
 					Directory.GetFiles(dir)
-						.Where(f => f.EndsWith(".json") && !IgnoredApis.Contains(new FileInfo(f).Name))
+						.Where(f => f.EndsWith(".json") && !CodeConfiguration.IgnoredApis.Contains(new FileInfo(f).Name))
 						.ToList()
 				);
 				var commonFile = Path.Combine(CodeConfiguration.RestSpecificationFolder, "Core", "_common.json");
@@ -121,6 +87,8 @@ namespace ApiGenerator
 							else
 							{
 								var endpoint = CreateApiEndpoint(file);
+								endpoint.Value.FileName = Path.GetFileName(file);
+								seenFiles.Add(Path.GetFileNameWithoutExtension(file));
 								endpoints.Add(endpoint.Key, endpoint.Value);
 							}
 
@@ -129,6 +97,14 @@ namespace ApiGenerator
 					}
 					pbar.Tick();
 				}
+			}
+			var wrongMapsApi = CodeConfiguration.ApiNameMapping.Where(k =>!string.IsNullOrWhiteSpace(k.Key) && !seenFiles.Contains(k.Key));
+			foreach (var (key, value) in wrongMapsApi)
+			{
+				var isIgnored = CodeConfiguration.IgnoredApis.Contains($"{value}.json");
+				if (isIgnored) Warnings.Add($"{value} uses MapsApi: {key} ignored in ${nameof(CodeConfiguration)}.{nameof(CodeConfiguration.IgnoredApis)}");
+				else Warnings.Add($"{value} uses MapsApi: {key} which does not exist");
+
 			}
 
 			return new RestApiSpec { Endpoints = endpoints, Commit = downloadBranch };

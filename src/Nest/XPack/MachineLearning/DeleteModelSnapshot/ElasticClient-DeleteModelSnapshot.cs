@@ -44,7 +44,7 @@ namespace Nest
 		public IDeleteModelSnapshotResponse DeleteModelSnapshot(IDeleteModelSnapshotRequest request) =>
 			Dispatcher.Dispatch<IDeleteModelSnapshotRequest, DeleteModelSnapshotRequestParameters, DeleteModelSnapshotResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackMlDeleteModelSnapshotDispatch<DeleteModelSnapshotResponse>(p)
+				(p, d) => LowLevelDispatch.MlDeleteModelSnapshotDispatch<DeleteModelSnapshotResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -63,7 +63,7 @@ namespace Nest
 					IDeleteModelSnapshotResponse>(
 					request,
 					cancellationToken,
-					(p, d, c) => LowLevelDispatch.XpackMlDeleteModelSnapshotDispatchAsync<DeleteModelSnapshotResponse>(p, c)
+					(p, d, c) => LowLevelDispatch.MlDeleteModelSnapshotDispatchAsync<DeleteModelSnapshotResponse>(p, c)
 				);
 	}
 }

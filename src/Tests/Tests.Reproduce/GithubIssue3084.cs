@@ -23,11 +23,11 @@ namespace Tests.Reproduce
 			var index = $"gh3084-{RandomString()}";
 			var document = new ObjectVersion1 { Id = 1, Numeric = 0 };
 
-			var indexResult = client.Index(document, i => i.Index(index).Type("doc"));
+			var indexResult = client.Index(document, i => i.Index(index));
 			indexResult.ShouldBeValid();
 
-			Action getDoc = () => client.Get<ObjectVersion2>(new GetRequest(index, "doc", 1));
-			Func<Task<IGetResponse<ObjectVersion2>>> getDocAsync = async () => await client.GetAsync<ObjectVersion2>(new GetRequest(index, "doc", 1));
+			Action getDoc = () => client.Get<ObjectVersion2>(new GetRequest(index, 1));
+			Func<Task<IGetResponse<ObjectVersion2>>> getDocAsync = async () => await client.GetAsync<ObjectVersion2>(new GetRequest(index, 1));
 
 			getDoc.ShouldThrow<Exception>("synchonous code path should throw");
 			getDocAsync.ShouldThrow<Exception>("async code path should throw");

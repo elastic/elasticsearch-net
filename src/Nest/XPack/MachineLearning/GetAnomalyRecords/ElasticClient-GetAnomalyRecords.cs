@@ -37,7 +37,7 @@ namespace Nest
 		public IGetAnomalyRecordsResponse GetAnomalyRecords(IGetAnomalyRecordsRequest request) =>
 			Dispatcher.Dispatch<IGetAnomalyRecordsRequest, GetAnomalyRecordsRequestParameters, GetAnomalyRecordsResponse>(
 				request,
-				LowLevelDispatch.XpackMlGetRecordsDispatch<GetAnomalyRecordsResponse>
+				LowLevelDispatch.MlGetRecordsDispatch<GetAnomalyRecordsResponse>
 			);
 
 		/// <inheritdoc />
@@ -55,7 +55,7 @@ namespace Nest
 				.DispatchAsync<IGetAnomalyRecordsRequest, GetAnomalyRecordsRequestParameters, GetAnomalyRecordsResponse, IGetAnomalyRecordsResponse>(
 					request,
 					cancellationToken,
-					LowLevelDispatch.XpackMlGetRecordsDispatchAsync<GetAnomalyRecordsResponse>
+					LowLevelDispatch.MlGetRecordsDispatchAsync<GetAnomalyRecordsResponse>
 				);
 	}
 }

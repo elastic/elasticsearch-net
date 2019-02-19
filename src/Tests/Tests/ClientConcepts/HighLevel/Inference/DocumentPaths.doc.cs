@@ -23,20 +23,15 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			/** here we create a new document path based on Project with the id 1 */
 			IDocumentPath path = new DocumentPath<Project>(1);
 			Expect("project").WhenSerializing(path.Index);
-			Expect("doc").WhenSerializing(path.Type);
 			Expect(1).WhenSerializing(path.Id);
 
 			/** You can still override the inferred index and type name*/
-			path = new DocumentPath<Project>(1).Type("project1");
-			Expect("project1").WhenSerializing(path.Type);
-
 			path = new DocumentPath<Project>(1).Index("project1");
 			Expect("project1").WhenSerializing(path.Index);
 
 			/** and there is also a static way to describe such paths */
 			path = DocumentPath<Project>.Id(1);
 			Expect("project").WhenSerializing(path.Index);
-			Expect("doc").WhenSerializing(path.Type);
 			Expect(1).WhenSerializing(path.Id);
 		}
 
@@ -51,21 +46,15 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			/** here we create a new document path based on the instance of `Project`, project */
 			IDocumentPath path = new DocumentPath<Project>(project);
 			Expect("project").WhenSerializing(path.Index);
-			Expect("doc").WhenSerializing(path.Type);
 			Expect("hello-world").WhenSerializing(path.Id);
 
 			/** You can still override the inferred index and type name*/
-			path = new DocumentPath<Project>(project).Type("project1");
-			Expect("project1").WhenSerializing(path.Type);
-
 			path = new DocumentPath<Project>(project).Index("project1");
 			Expect("project1").WhenSerializing(path.Index);
 
 			/** and again, there is also a static way to describe such paths */
 			path = DocumentPath<Project>.Id(project);
 			Expect("project").WhenSerializing(path.Index);
-			Expect("doc").WhenSerializing(path.Type);
-			Expect("hello-world").WhenSerializing(path.Id);
 
 			DocumentPath<Project> p = project;
 		}
@@ -85,7 +74,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			* `DocumentPath<T>`'s benefits become apparent. Compare the following request that doesn't
 			* use `DocumentPath<T>` with the former examples
 			*/
-			request = new IndexRequest<Project>(IndexName.From<Project>(), TypeName.From<Project>(), 2)
+			request = new IndexRequest<Project>(IndexName.From<Project>(), 2)
 			{
 				Document = project
 			};

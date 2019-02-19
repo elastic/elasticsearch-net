@@ -27,7 +27,7 @@ namespace Tests.Mapping.Types
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 
 
-		protected override PutMappingRequest<Project> Initializer => new PutMappingRequest<Project>(CallIsolatedValue, typeof(Project))
+		protected override PutMappingRequest<Project> Initializer => new PutMappingRequest<Project>(CallIsolatedValue)
 		{
 			Properties = InitializerProperties
 		};

@@ -28,7 +28,7 @@ namespace Nest
 	{
 		/// <inheritdoc cref="FollowIndexStats(Indices, System.Func{Nest.FollowIndexStatsDescriptor,Nest.IFollowIndexStatsRequest})" />
 		public IFollowIndexStatsResponse FollowIndexStats(Indices indices, Func<FollowIndexStatsDescriptor, IFollowIndexStatsRequest> selector = null) =>
-			FollowIndexStats(selector.InvokeOrDefault(new FollowIndexStatsDescriptor().Index(indices)));
+			FollowIndexStats(selector.InvokeOrDefault(new FollowIndexStatsDescriptor(indices)));
 
 		/// <inheritdoc cref="FollowIndexStats(Indices, System.Func{Nest.FollowIndexStatsDescriptor,Nest.IFollowIndexStatsRequest})" />
 		public IFollowIndexStatsResponse FollowIndexStats(IFollowIndexStatsRequest request) =>
@@ -41,7 +41,7 @@ namespace Nest
 		public Task<IFollowIndexStatsResponse> FollowIndexStatsAsync(Indices indices, Func<FollowIndexStatsDescriptor, IFollowIndexStatsRequest> selector = null,
 			CancellationToken cancellationToken = default
 		) =>
-			FollowIndexStatsAsync(selector.InvokeOrDefault(new FollowIndexStatsDescriptor().Index(indices)), cancellationToken);
+			FollowIndexStatsAsync(selector.InvokeOrDefault(new FollowIndexStatsDescriptor(indices)), cancellationToken);
 
 		/// <inheritdoc cref="FollowIndexStats(Indices, System.Func{Nest.FollowIndexStatsDescriptor,Nest.IFollowIndexStatsRequest})" />
 		public Task<IFollowIndexStatsResponse> FollowIndexStatsAsync(IFollowIndexStatsRequest request, CancellationToken cancellationToken = default) =>

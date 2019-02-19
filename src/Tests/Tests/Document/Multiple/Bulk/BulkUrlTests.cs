@@ -24,13 +24,6 @@ namespace Tests.Document.Multiple.Bulk
 					.FluentAsync(c => c.BulkAsync(b => b.Index<Project>()))
 					.RequestAsync(c => c.BulkAsync(new BulkRequest(typeof(Project))))
 				;
-
-			await POST("/project/doc/_bulk")
-					.Fluent(c => c.Bulk(b => b.Index(typeof(Project)).Type(typeof(Project))))
-					.Request(c => c.Bulk(new BulkRequest(typeof(Project), typeof(Project))))
-					.FluentAsync(c => c.BulkAsync(b => b.Index(typeof(Project)).Type(typeof(Project))))
-					.RequestAsync(c => c.BulkAsync(new BulkRequest(typeof(Project), typeof(Project))))
-				;
 		}
 	}
 }

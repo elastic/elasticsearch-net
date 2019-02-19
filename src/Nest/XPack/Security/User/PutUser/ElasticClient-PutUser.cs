@@ -32,7 +32,7 @@ namespace Nest
 		public IPutUserResponse PutUser(IPutUserRequest request) =>
 			Dispatcher.Dispatch<IPutUserRequest, PutUserRequestParameters, PutUserResponse>(
 				request,
-				LowLevelDispatch.XpackSecurityPutUserDispatch<PutUserResponse>
+				LowLevelDispatch.SecurityPutUserDispatch<PutUserResponse>
 			);
 
 		/// <inheritdoc />
@@ -46,7 +46,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IPutUserRequest, PutUserRequestParameters, PutUserResponse, IPutUserResponse>(
 				request,
 				cancellationToken,
-				LowLevelDispatch.XpackSecurityPutUserDispatchAsync<PutUserResponse>
+				LowLevelDispatch.SecurityPutUserDispatchAsync<PutUserResponse>
 			);
 	}
 }

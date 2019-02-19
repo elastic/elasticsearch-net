@@ -33,9 +33,7 @@ namespace Nest
 	public partial class TermVectorsRequest<TDocument>
 		where TDocument : class
 	{
-		/// <summary>
-		/// An optional document to get term vectors for instead of using an already indexed document
-		/// </summary>
+		/// <inheritdoc cref="ITermVectorsRequest{TDocument}.Document"/>
 		public TDocument Document { get; set; }
 
 		/// <summary>
@@ -52,13 +50,12 @@ namespace Nest
 
 		HttpMethod IRequest.HttpMethod => Document != null || Filter != null ? HttpMethod.POST : HttpMethod.GET;
 
-		private TDocument AutoRouteDocument() => Self.Document;
+		private TDocument AutoRouteDocument() => Document;
 
 		partial void DocumentFromPath(TDocument document)
 		{
-			Self.Document = document;
-			if (Self.Document != null)
-				Self.RouteValues.Remove("id");
+			Document = document;
+			if (Document != null) Self.RouteValues.Remove("id");
 		}
 	}
 

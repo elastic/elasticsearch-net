@@ -12,8 +12,7 @@ namespace Nest
 		QueryContainer Query { get; set; }
 	}
 
-	public partial interface ICountRequest<T> : ICountRequest
-		where T : class { }
+	public partial interface ICountRequest<T> where T : class { }
 
 	public partial class CountRequest
 	{
@@ -26,15 +25,8 @@ namespace Nest
 				: HttpMethod.POST;
 	}
 
-	public partial class CountRequest<T>
+	public partial class CountRequest<T> where T : class
 	{
-		public QueryContainer Query { get; set; }
-
-		protected override HttpMethod HttpMethod =>
-			Self.RequestParameters.ContainsQueryString("source") || Self.RequestParameters.ContainsQueryString("q") || Self.Query == null
-			|| Self.Query.IsConditionless()
-				? HttpMethod.GET
-				: HttpMethod.POST;
 	}
 
 	public partial class CountDescriptor<T> where T : class

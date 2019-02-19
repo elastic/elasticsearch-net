@@ -13,14 +13,14 @@ namespace Tests.Indices.MappingManagement.PutMapping
 		{
 			await PUT($"/project/doc/_mapping")
 				.Fluent(c => c.Map<Project>(m => m))
-				.Request(c => c.Map(new PutMappingRequest("project", TypeName.From<Project>())))
+				.Request(c => c.Map(new PutMappingRequest("project")))
 				.Request(c => c.Map(new PutMappingRequest<Project>()))
 				.FluentAsync(c => c.MapAsync<Project>(m => m))
 				.RequestAsync(c => c.MapAsync(new PutMappingRequest<Project>()));
 
 			await PUT($"/project/project/_mapping")
-					.Request(c => c.Map(new PutMappingRequest("project", "project")))
-					.RequestAsync(c => c.MapAsync(new PutMappingRequest("project", "project")))
+					.Request(c => c.Map(new PutMappingRequest("project")))
+					.RequestAsync(c => c.MapAsync(new PutMappingRequest("project")))
 				;
 		}
 	}

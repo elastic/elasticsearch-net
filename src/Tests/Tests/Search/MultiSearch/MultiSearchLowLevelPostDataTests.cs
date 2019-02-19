@@ -32,7 +32,7 @@ namespace Tests.Search.MultiSearch
 
 		[I] public void PostEnumerableOfObjects()
 		{
-			var response = _client.LowLevel.Msearch<DynamicResponse>("project", "project", PostData.MultiJson(Search));
+			var response = _client.LowLevel.Msearch<DynamicResponse>("project", PostData.MultiJson(Search));
 			AssertResponse(response);
 		}
 
@@ -42,7 +42,7 @@ namespace Tests.Search.MultiSearch
 				.Select(s => _client.RequestResponseSerializer.SerializeToString(s, SerializationFormatting.None))
 				.ToList();
 
-			var response = _client.LowLevel.Msearch<DynamicResponse>("project", "project", PostData.MultiJson(listOfStrings));
+			var response = _client.LowLevel.Msearch<DynamicResponse>("project", PostData.MultiJson(listOfStrings));
 			AssertResponse(response);
 		}
 
@@ -53,7 +53,7 @@ namespace Tests.Search.MultiSearch
 				.ToList()
 				.Aggregate(new StringBuilder(), (sb, s) => sb.Append(s + "\n"), sb => sb.ToString());
 
-			var response = _client.LowLevel.Msearch<DynamicResponse>("project", "project", str);
+			var response = _client.LowLevel.Msearch<DynamicResponse>("project", str);
 			AssertResponse(response);
 		}
 
@@ -66,7 +66,7 @@ namespace Tests.Search.MultiSearch
 
 			var bytes = Encoding.UTF8.GetBytes(str);
 
-			var response = _client.LowLevel.Msearch<DynamicResponse>("project", "project", bytes);
+			var response = _client.LowLevel.Msearch<DynamicResponse>("project", bytes);
 			AssertResponse(response);
 		}
 

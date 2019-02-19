@@ -74,10 +74,8 @@ namespace Tests.XPack.MachineLearning.GetBuckets
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override GetBucketsRequest Initializer => new GetBucketsRequest(CallIsolatedValue)
-		{
-			Timestamp = new DateTimeOffset(2016, 6, 2, 00, 00, 00, TimeSpan.Zero)
-		};
+		protected override GetBucketsRequest Initializer =>
+			new GetBucketsRequest(CallIsolatedValue, new DateTimeOffset(2016, 6, 2, 00, 00, 00, TimeSpan.Zero));
 
 		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/results/buckets";
 

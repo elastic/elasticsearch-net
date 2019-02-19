@@ -34,7 +34,7 @@ namespace Nest
 		public IClearCachedRolesResponse ClearCachedRoles(IClearCachedRolesRequest request) =>
 			Dispatcher.Dispatch<IClearCachedRolesRequest, ClearCachedRolesRequestParameters, ClearCachedRolesResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackSecurityClearCachedRolesDispatch<ClearCachedRolesResponse>(p)
+				(p, d) => LowLevelDispatch.SecurityClearCachedRolesDispatch<ClearCachedRolesResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -52,7 +52,7 @@ namespace Nest
 				.DispatchAsync<IClearCachedRolesRequest, ClearCachedRolesRequestParameters, ClearCachedRolesResponse, IClearCachedRolesResponse>(
 					request,
 					cancellationToken,
-					(p, d, c) => LowLevelDispatch.XpackSecurityClearCachedRolesDispatchAsync<ClearCachedRolesResponse>(p, c)
+					(p, d, c) => LowLevelDispatch.SecurityClearCachedRolesDispatchAsync<ClearCachedRolesResponse>(p, c)
 				);
 	}
 }

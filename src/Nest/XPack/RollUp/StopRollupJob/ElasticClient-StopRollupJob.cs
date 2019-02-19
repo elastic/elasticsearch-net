@@ -35,7 +35,7 @@ namespace Nest
 		public IStopRollupJobResponse StopRollupJob(IStopRollupJobRequest request) =>
 			Dispatcher.Dispatch<IStopRollupJobRequest, StopRollupJobRequestParameters, StopRollupJobResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackRollupStopJobDispatch<StopRollupJobResponse>(p)
+				(p, d) => LowLevelDispatch.RollupStopJobDispatch<StopRollupJobResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -49,7 +49,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IStopRollupJobRequest, StopRollupJobRequestParameters, StopRollupJobResponse, IStopRollupJobResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackRollupStopJobDispatchAsync<StopRollupJobResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.RollupStopJobDispatchAsync<StopRollupJobResponse>(p, c)
 			);
 	}
 }

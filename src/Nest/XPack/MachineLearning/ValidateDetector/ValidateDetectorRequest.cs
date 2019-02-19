@@ -3,8 +3,8 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ValidateDetectorRequestConverter))]
 	[MapsApi("ml.validate_detector.json")]
+	[JsonConverter(typeof(ValidateDetectorRequestConverter))]
 	public partial interface IValidateDetectorRequest
 	{
 		[JsonIgnore]

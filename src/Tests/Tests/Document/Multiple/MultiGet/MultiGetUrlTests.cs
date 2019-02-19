@@ -24,13 +24,6 @@ namespace Tests.Document.Multiple.MultiGet
 					.FluentAsync(c => c.MultiGetAsync(m => m.Index<Project>()))
 					.RequestAsync(c => c.MultiGetAsync(new MultiGetRequest(typeof(Project))))
 				;
-
-			await POST("/project/doc/_mget")
-					.Fluent(c => c.MultiGet(m => m.Index<Project>().Type<Project>()))
-					.Request(c => c.MultiGet(new MultiGetRequest(typeof(Project), typeof(Project))))
-					.FluentAsync(c => c.MultiGetAsync(m => m.Index<Project>().Type<Project>()))
-					.RequestAsync(c => c.MultiGetAsync(new MultiGetRequest(typeof(Project), typeof(Project))))
-				;
 		}
 	}
 }

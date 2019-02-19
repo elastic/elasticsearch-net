@@ -10,7 +10,7 @@ namespace Nest
 		IGraphExploreControls Controls { get; set; }
 	}
 
-	public interface IGraphExploreRequest<T> : IGraphExploreRequest where T : class { }
+	public partial interface IGraphExploreRequest<T> : IGraphExploreRequest where T : class { }
 
 	public partial class GraphExploreRequest
 	{
@@ -20,16 +20,8 @@ namespace Nest
 		public IEnumerable<IGraphVertexDefinition> Vertices { get; set; }
 	}
 
-	public partial class GraphExploreRequest<T> : IGraphExploreRequest<T>
-		where T : class
+	public partial class GraphExploreRequest<T> : IGraphExploreRequest<T> where T : class
 	{
-		public GraphExploreRequest() : this(typeof(T), typeof(T)) { }
-
-		public IHop Connections { get; set; }
-		public IGraphExploreControls Controls { get; set; }
-
-		public QueryContainer Query { get; set; }
-		public IEnumerable<IGraphVertexDefinition> Vertices { get; set; }
 	}
 
 	public partial class GraphExploreDescriptor<T> : IGraphExploreRequest<T>

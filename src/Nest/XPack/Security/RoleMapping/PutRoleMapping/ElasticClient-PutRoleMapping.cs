@@ -34,7 +34,7 @@ namespace Nest
 		public IPutRoleMappingResponse PutRoleMapping(IPutRoleMappingRequest request) =>
 			Dispatcher.Dispatch<IPutRoleMappingRequest, PutRoleMappingRequestParameters, PutRoleMappingResponse>(
 				request,
-				LowLevelDispatch.XpackSecurityPutRoleMappingDispatch<PutRoleMappingResponse>
+				LowLevelDispatch.SecurityPutRoleMappingDispatch<PutRoleMappingResponse>
 			);
 
 		/// <inheritdoc />
@@ -50,7 +50,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IPutRoleMappingRequest, PutRoleMappingRequestParameters, PutRoleMappingResponse, IPutRoleMappingResponse>(
 				request,
 				cancellationToken,
-				LowLevelDispatch.XpackSecurityPutRoleMappingDispatchAsync<PutRoleMappingResponse>
+				LowLevelDispatch.SecurityPutRoleMappingDispatchAsync<PutRoleMappingResponse>
 			);
 	}
 }

@@ -57,6 +57,7 @@ namespace ApiGenerator.Domain
 		private List<CsharpMethod> _csharpMethods;
 		public ApiBody Body { get; set; }
 		public string CsharpMethodName { get; set; }
+		public string FileName { get; set; }
 
 		public IEnumerable<CsharpMethod> CsharpMethods
 		{
@@ -82,20 +83,9 @@ namespace ApiGenerator.Domain
 					var method = kv.Key;
 					var obsoleteVersion = kv.Value;
 					var methodName = CsharpMethodName + OptionallyAppendHttpMethod(methods.Keys, method);
-					//the distinctby here catches aliases routes i.e
-					//  /_cluster/nodes/{node_id}/hotthreads vs  /_cluster/nodes/{node_id}/hot_threads
-					foreach (var path in Url.Paths.DistinctBy(p => p.Replace("_", "")))
+					foreach (var path in Url.ExposedApiPaths)
 					{
-						var parts = (Url.Parts ?? new Dictionary<string, ApiUrlPart>())
-							.Where(p => path.Contains("{" + p.Key + "}"))
-							.OrderBy(p => path.IndexOf("{" + p.Key, StringComparison.Ordinal))
-							.Select(p =>
-							{
-								p.Value.Name = p.Key;
-								return p.Value;
-							})
-							.ToList();
-
+						var parts = new List<ApiUrlPart>(path.Parts);
 						var args = parts.Select(p => p.Argument);
 
 						//.NET does not allow get requests to have a body payload.
@@ -106,6 +96,7 @@ namespace ApiGenerator.Domain
 								Type = "PostData",
 								Description = Body.Description
 							});
+
 						if (Url.Params == null || !Url.Params.Any()) Url.Params = new Dictionary<string, ApiQueryParameters>();
 						var queryStringParamName = CsharpMethodName + "RequestParameters";
 						var apiMethod = new CsharpMethod
@@ -119,7 +110,7 @@ namespace ApiGenerator.Domain
 							HttpMethod = method,
 							Documentation = Documentation,
 							ObsoleteMethodVersion = obsoleteVersion,
-							Path = path,
+							Path = path.Path,
 							Parts = parts,
 							Url = Url
 						};
@@ -151,7 +142,7 @@ namespace ApiGenerator.Domain
 							Documentation = Documentation,
 							ObsoleteMethodVersion = obsoleteVersion,
 							Arguments = string.Join(", ", args),
-							Path = path,
+							Path = path.Path,
 							Parts = parts,
 							Url = Url
 						};
@@ -227,21 +218,6 @@ namespace ApiGenerator.Domain
 		{
 			var overrides = GetOverrides();
 			PatchRequestParameters(overrides);
-
-			//rename the {metric} route param to something more specific on XpackWatcherStats
-			// TODO: find a better place to do this
-			if (CsharpMethodName == "XpackWatcherStats")
-			{
-				var metric = Url.Parts.First(p => p.Key == "metric");
-
-				var apiUrlPart = metric.Value;
-				apiUrlPart.Name = "watcher_stats_metric";
-
-				if (Url.Parts.Remove("metric")) Url.Parts.Add("watcher_stats_metric", apiUrlPart);
-
-				Url.Path = RenameMetricUrlPathParam(Url.Path);
-				Url.Paths = Url.Paths.Select(RenameMetricUrlPathParam);
-			}
 		}
 
 
@@ -250,8 +226,6 @@ namespace ApiGenerator.Domain
 			var newParams = ApiQueryParametersPatcher.Patch(Url.Path, Url.Params, overrides);
 			Url.Params = newParams;
 		}
-
-		private static string RenameMetricUrlPathParam(string path) => path.Replace("{metric}", "{watcher_stats_metric}");
 
 		//Patches a method name for the exceptions (IndicesStats needs better unique names for all the url endpoints)
 		//or to get rid of double verbs in an method name i,e ClusterGetSettingsGet > ClusterGetSettings
@@ -284,7 +258,12 @@ namespace ApiGenerator.Domain
 			method.DescriptorType = method.QueryStringParamName.Replace("RequestParameters", "Descriptor");
 			method.RequestType = method.QueryStringParamName.Replace("RequestParameters", "Request");
 			if (CodeConfiguration.KnownRequests.TryGetValue("I" + method.RequestType, out var requestGeneric))
+			{
 				method.RequestTypeGeneric = requestGeneric;
+				if (CodeConfiguration.NumberOfDeclaredRequests.TryGetValue("I" + method.RequestType, out var number))
+					method.GenericAndNonGeneric = number > 1;
+
+			}
 			else method.RequestTypeUnmapped = true;
 
 			if (CodeConfiguration.KnownDescriptors.TryGetValue(method.DescriptorType, out var generic))

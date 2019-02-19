@@ -1,6 +1,6 @@
 namespace Nest
 {
-	[MapsApi("ml_delete_model_snapshosts.json")]
+	[MapsApi("ml.delete_model_snapshot.json")]
 	public partial interface IDeleteModelSnapshotRequest { }
 
 	public partial class DeleteModelSnapshotRequest { }

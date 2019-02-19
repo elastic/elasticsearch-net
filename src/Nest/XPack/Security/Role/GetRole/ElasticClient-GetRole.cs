@@ -32,7 +32,7 @@ namespace Nest
 		public IGetRoleResponse GetRole(IGetRoleRequest request) =>
 			Dispatcher.Dispatch<IGetRoleRequest, GetRoleRequestParameters, GetRoleResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackSecurityGetRoleDispatch<GetRoleResponse>(p)
+				(p, d) => LowLevelDispatch.SecurityGetRoleDispatch<GetRoleResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -46,7 +46,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IGetRoleRequest, GetRoleRequestParameters, GetRoleResponse, IGetRoleResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackSecurityGetRoleDispatchAsync<GetRoleResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.SecurityGetRoleDispatchAsync<GetRoleResponse>(p, c)
 			);
 	}
 }

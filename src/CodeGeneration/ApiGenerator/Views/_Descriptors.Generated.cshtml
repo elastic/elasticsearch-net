@@ -32,9 +32,10 @@ namespace Nest
 	@foreach (CsharpMethod method in Model.CsharpMethodsWithQueryStringInfo)
 	{
 		var type = method.DescriptorType + method.DescriptorTypeGeneric;
+		var concreteInterface = method.InterfaceTypeGeneric == null ? method.InterfaceType : method.InterfaceTypeGeneric;
 	<text>
 	///<summary>descriptor for @method.FullName <pre>@method.Documentation</pre></summary>
-	public partial class @Raw(type) @(Raw(string.Format(" : RequestDescriptorBase<{0},{1}, {2}>, {2}", type, method.QueryStringParamName, method.InterfaceType)))
+	public partial class @Raw(type) @(Raw(string.Format(" : RequestDescriptorBase<{0},{1}, {2}>, {2}", type, method.QueryStringParamName, concreteInterface)))
 	{ 
 @foreach (Constructor c in method.DescriptorConstructors())
 {
@@ -42,7 +43,7 @@ namespace Nest
 </text>
 }
 		// values part of the url path
-@foreach (ApiUrlPart part in method.AllParts.Where(p=>!ApiUrl.BlackListRouteValues.Contains(p.Name)))
+@foreach (ApiUrlPart part in method.Url.ExposedApiParts)
 {
 <text>		@(Raw(part.ClrTypeName)) @(Raw(method.InterfaceType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");
 </text>
@@ -61,12 +62,7 @@ foreach (var param in method.Url.Params.Values)
 {
 	var original = param.QueryStringKey;
 	//skip parameters already part of the path portion of the url
-		if (method.Url.Parts != null && method.Url.Parts.ContainsKey(original))
-		{
-			continue;
-		}
-		//we prefer this parameter to be explictly implemented on the request body
-		if (param.RenderPartial && (method.HttpMethod != "GET" && method.HttpMethod != "HEAD"))
+		if (method.Url.ExposedApiParts.Any(p=>p.Name == original))
 		{
 			continue;
 		}

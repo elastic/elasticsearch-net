@@ -51,7 +51,7 @@ namespace Tests.Document.Single.TermVectors
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override TermVectorsRequest<Project> Initializer => new TermVectorsRequest<Project>(Project.Instance.Name)
+		protected override TermVectorsRequest<Project> Initializer => new TermVectorsRequest<Project>((Id)Project.Instance.Name)
 		{
 			Routing = Project.Routing,
 			Offsets = true,
@@ -77,7 +77,7 @@ namespace Tests.Document.Single.TermVectors
 			(client, r) => client.TermVectorsAsync(r)
 		);
 
-		protected override TermVectorsDescriptor<Project> NewDescriptor() => new TermVectorsDescriptor<Project>(typeof(Project), typeof(Project));
+		protected override TermVectorsDescriptor<Project> NewDescriptor() => new TermVectorsDescriptor<Project>(typeof(Project));
 
 		protected override void ExpectResponse(ITermVectorsResponse response)
 		{

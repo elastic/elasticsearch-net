@@ -39,7 +39,7 @@ namespace Nest
 		public IAcknowledgeWatchResponse AcknowledgeWatch(IAcknowledgeWatchRequest request) =>
 			Dispatcher.Dispatch<IAcknowledgeWatchRequest, AcknowledgeWatchRequestParameters, AcknowledgeWatchResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackWatcherAckWatchDispatch<AcknowledgeWatchResponse>(p)
+				(p, d) => LowLevelDispatch.WatcherAckWatchDispatch<AcknowledgeWatchResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -57,7 +57,7 @@ namespace Nest
 				.DispatchAsync<IAcknowledgeWatchRequest, AcknowledgeWatchRequestParameters, AcknowledgeWatchResponse, IAcknowledgeWatchResponse>(
 					request,
 					cancellationToken,
-					(p, d, c) => LowLevelDispatch.XpackWatcherAckWatchDispatchAsync<AcknowledgeWatchResponse>(p, c)
+					(p, d, c) => LowLevelDispatch.WatcherAckWatchDispatchAsync<AcknowledgeWatchResponse>(p, c)
 				);
 	}
 }
