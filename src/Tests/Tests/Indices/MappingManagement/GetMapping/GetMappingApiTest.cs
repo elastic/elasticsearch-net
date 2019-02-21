@@ -34,7 +34,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			IgnoreUnavailable = true
 		};
 
-		protected override string UrlPath => "/project/_mapping/doc?ignore_unavailable=true";
+		protected override string UrlPath => "/project/_mapping?ignore_unavailable=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.GetMapping<Project>(f),

@@ -85,7 +85,7 @@ namespace Tests.QueryDsl.Geo
 			}
 		};
 
-		protected override string UrlPath => $"/{Index}/doc/_search";
+		protected override string UrlPath => $"/{Index}/_search";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.Search<Domain.Shape>(f),

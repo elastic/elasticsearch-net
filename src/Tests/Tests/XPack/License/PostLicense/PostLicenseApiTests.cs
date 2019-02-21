@@ -41,7 +41,7 @@ namespace Tests.XPack.License.PostLicense
 		};
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/_xpack/license?acknowledge=true";
+		protected override string UrlPath => $"/_license?acknowledge=true";
 
 		private Nest.License FakeLicense { get; } = new Nest.License
 		{

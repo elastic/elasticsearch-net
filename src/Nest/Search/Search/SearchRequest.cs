@@ -80,6 +80,8 @@ namespace Nest
 
 	public partial class SearchRequest
 	{
+		public Fields StoredFields { get; set; }
+		public Fields DocValueFields { get; set; }
 		public AggregationDictionary Aggregations { get; set; }
 		public IFieldCollapse Collapse { get; set; }
 		public bool? Explain { get; set; }
@@ -135,6 +137,7 @@ namespace Nest
 		AggregationDictionary ISearchRequest.Aggregations { get; set; }
 		Type ICovariantSearchRequest.ClrType => typeof(T);
 		IFieldCollapse ISearchRequest.Collapse { get; set; }
+		Fields ISearchRequest.DocValueFields { get; set; }
 		bool? ISearchRequest.Explain { get; set; }
 		int? ISearchRequest.From { get; set; }
 		IHighlight ISearchRequest.Highlight { get; set; }
@@ -151,6 +154,7 @@ namespace Nest
 		ISlicedScroll ISearchRequest.Slice { get; set; }
 		IList<ISort> ISearchRequest.Sort { get; set; }
 		Union<bool, ISourceFilter> ISearchRequest.Source { get; set; }
+		Fields ISearchRequest.StoredFields { get; set; }
 		ISuggestContainer ISearchRequest.Suggest { get; set; }
 		long? ISearchRequest.TerminateAfter { get; set; }
 
@@ -299,13 +303,17 @@ namespace Nest
 		/// represented by a search hit. Defaults to load the internal _source field.
 		/// </summary>
 		public SearchDescriptor<T> StoredFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			StoredFields(fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+			Assign(a => a.StoredFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+
+		public SearchDescriptor<T> StoredFields(Fields fields) => Assign(a => a.StoredFields = fields);
 
 		public SearchDescriptor<T> ScriptFields(Func<ScriptFieldsDescriptor, IPromise<IScriptFields>> selector) =>
 			Assign(a => a.ScriptFields = selector?.Invoke(new ScriptFieldsDescriptor())?.Value);
 
 		public SearchDescriptor<T> DocValueFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			DocValueFields(fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+			Assign(a => a.DocValueFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+
+		public SearchDescriptor<T> DocValueFields(Fields fields) => Assign(a => a.DocValueFields = fields);
 
 		/// <summary>
 		/// A comma-separated list of fields to return as the field data representation of a field for each hit

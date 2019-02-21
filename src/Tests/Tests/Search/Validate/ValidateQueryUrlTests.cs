@@ -12,14 +12,14 @@ namespace Tests.Search.Validate
 		[U] public async Task Urls()
 		{
 			var hardcoded = "hardcoded";
-			await POST("/devs/developer/_validate/query")
+			await POST("/devs/_validate/query")
 					.Fluent(c => c.ValidateQuery<Developer>(s => s))
 					.Request(c => c.ValidateQuery(new ValidateQueryRequest<Developer>()))
 					.FluentAsync(c => c.ValidateQueryAsync<Developer>(s => s))
 					.RequestAsync(c => c.ValidateQueryAsync(new ValidateQueryRequest<Developer>()))
 				;
 
-			await POST("/devs/hardcoded/_validate/query")
+			await POST("/devs/_validate/query")
 					.Fluent(c => c.ValidateQuery<Developer>(s => s))
 					.Request(c => c.ValidateQuery(new ValidateQueryRequest<Project>(typeof(Developer))))
 					.Request(c => c.ValidateQuery(new ValidateQueryRequest(typeof(Developer))))

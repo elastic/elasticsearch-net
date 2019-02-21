@@ -12,7 +12,7 @@ namespace Tests.XPack.Security.User.InvalidateUserAccessToken
 		public override async Task Urls()
 		{
 			var token = "some_token";
-			await DELETE("/_xpack/security/oauth2/token")
+			await DELETE("/_security/oauth2/token")
 				.Fluent(c => c.InvalidateUserAccessToken(token))
 				.Request(c => c.InvalidateUserAccessToken(new InvalidateUserAccessTokenRequest(token)))
 				.FluentAsync(c => c.InvalidateUserAccessTokenAsync(token))

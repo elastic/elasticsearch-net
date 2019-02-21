@@ -34,7 +34,7 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public IGetResponse<TDocument> Get<TDocument>(DocumentPath<TDocument> document, Func<GetDescriptor<TDocument>, IGetRequest> selector = null) where TDocument : class =>
-			Get<TDocument>(selector.InvokeOrDefault(new GetDescriptor<TDocument>(document)));
+			Get<TDocument>(selector.InvokeOrDefault(new GetDescriptor<TDocument>(document.Document, document.Self.Index, document.Self.Id)));
 
 		/// <inheritdoc />
 		public IGetResponse<TDocument> Get<TDocument>(IGetRequest request) where TDocument : class =>
@@ -48,7 +48,7 @@ namespace Nest
 			DocumentPath<TDocument> document,
 			Func<GetDescriptor<TDocument>, IGetRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
-		) where TDocument : class => GetAsync<TDocument>(selector.InvokeOrDefault(new GetDescriptor<TDocument>(document)), cancellationToken);
+		) where TDocument : class => GetAsync<TDocument>(selector.InvokeOrDefault(new GetDescriptor<TDocument>(document.Document, document.Self.Index, document.Self.Id)), cancellationToken);
 
 		/// <inheritdoc />
 		public Task<IGetResponse<TDocument>> GetAsync<TDocument>(IGetRequest request, CancellationToken cancellationToken = default(CancellationToken))

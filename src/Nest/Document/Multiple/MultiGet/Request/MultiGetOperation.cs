@@ -9,7 +9,6 @@ namespace Nest
 		{
 			Id = id;
 			Index = typeof(T);
-			Type = typeof(T);
 		}
 
 
@@ -25,15 +24,12 @@ namespace Nest
 
 		public Fields StoredFields { get; set; }
 
-		public TypeName Type { get; set; }
-
 		public long? Version { get; set; }
 
 		public VersionType? VersionType { get; set; }
 
 		bool IMultiGetOperation.CanBeFlattened =>
 			Index == null
-			&& Type == null
 			&& Routing == null
 			&& Source == null
 			&& StoredFields == null;
@@ -44,11 +40,7 @@ namespace Nest
 	public class MultiGetOperationDescriptor<T> : DescriptorBase<MultiGetOperationDescriptor<T>, IMultiGetOperation>, IMultiGetOperation
 		where T : class
 	{
-		public MultiGetOperationDescriptor()
-		{
-			Self.Index = Self.ClrType;
-			Self.Type = Self.ClrType;
-		}
+		public MultiGetOperationDescriptor() => Self.Index = Self.ClrType;
 
 		/// <summary>
 		/// when rest.action.multi.allow_explicit_index is set to false you can use this constructor to generate a multiget operation
@@ -67,7 +59,6 @@ namespace Nest
 
 		bool IMultiGetOperation.CanBeFlattened =>
 			Self.Index == null
-			&& Self.Type == null
 			&& Self.Routing == null
 			&& Self.Source == null
 			&& Self.StoredFields == null;
@@ -78,7 +69,6 @@ namespace Nest
 		string IMultiGetOperation.Routing { get; set; }
 		Union<bool, ISourceFilter> IMultiGetOperation.Source { get; set; }
 		Fields IMultiGetOperation.StoredFields { get; set; }
-		TypeName IMultiGetOperation.Type { get; set; }
 		long? IMultiGetOperation.Version { get; set; }
 		VersionType? IMultiGetOperation.VersionType { get; set; }
 
@@ -86,12 +76,6 @@ namespace Nest
 		/// Manually set the index, default to the default index or the index set for the type on the connectionsettings.
 		/// </summary>
 		public MultiGetOperationDescriptor<T> Index(IndexName index) => Assign(a => a.Index = index);
-
-		/// <summary>
-		/// Manualy set the type to get the object from, default to whatever
-		/// T will be inferred to if not passed.
-		/// </summary>
-		public MultiGetOperationDescriptor<T> Type(TypeName type) => Assign(a => a.Type = type);
 
 		public MultiGetOperationDescriptor<T> Id(Id id) => Assign(a => a.Id = id);
 

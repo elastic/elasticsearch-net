@@ -12,7 +12,7 @@ namespace Tests.XPack.Rollup.CreateRollupJob
 		[U] public override async Task Urls()
 		{
 			const string id = "rollup-id";
-			await PUT($"/_xpack/rollup/job/{id}")
+			await PUT($"/_rollup/job/{id}")
 				.Fluent(c => c.CreateRollupJob<Project>(id, s => s))
 				.Request(c => c.CreateRollupJob(new CreateRollupJobRequest(id)))
 				.FluentAsync(c => c.CreateRollupJobAsync<Project>(id, s => s))

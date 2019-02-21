@@ -19,7 +19,7 @@ namespace Tests.XPack.MachineLearning.StartDatafeed
 		protected override Func<StartDatafeedDescriptor, IStartDatafeedRequest> Fluent => f => f;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override StartDatafeedRequest Initializer => new StartDatafeedRequest(CallIsolatedValue + "-datafeed");
-		protected override string UrlPath => $"_xpack/ml/datafeeds/{CallIsolatedValue}-datafeed/_start";
+		protected override string UrlPath => $"_ml/datafeeds/{CallIsolatedValue}-datafeed/_start";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

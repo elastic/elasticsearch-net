@@ -62,7 +62,7 @@ namespace Tests.XPack.MachineLearning.PostJobData
 		};
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/_xpack/ml/anomaly_detectors/{CallIsolatedValue}/_data";
+		protected override string UrlPath => $"/_ml/anomaly_detectors/{CallIsolatedValue}/_data";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -165,7 +165,7 @@ namespace Tests.XPack.MachineLearning.PostJobData
 		protected override bool SupportsDeserialization => false;
 
 		protected override string UrlPath =>
-			$"/_xpack/ml/anomaly_detectors/{CallIsolatedValue}/_data" +
+			$"/_ml/anomaly_detectors/{CallIsolatedValue}/_data" +
 			$"?reset_start={Uri.EscapeDataString(new DateTimeOffset(2017, 1, 1, 0, 0, 0, TimeSpan.Zero).ToString("o"))}" +
 			$"&reset_end={Uri.EscapeDataString(new DateTimeOffset(2018, 1, 1, 0, 0, 0, TimeSpan.Zero).ToString("o"))}";
 

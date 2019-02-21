@@ -18,8 +18,6 @@ namespace Nest
 			sourceSerializer.Serialize(Document, stream, formatting);
 
 		partial void DocumentFromPath(TDocument document) => Document = document;
-
-		private TDocument AutoRouteDocument() => Document;
 	}
 
 	public partial class CreateDescriptor<TDocument> where TDocument : class
@@ -30,8 +28,6 @@ namespace Nest
 			sourceSerializer.Serialize(Self.Document, stream, formatting);
 
 		partial void DocumentFromPath(TDocument document) => Assign(a => a.Document = document);
-
-		private TDocument AutoRouteDocument() => Self.Document;
 
 		/// <summary>
 		/// Sets the id for the document. Overrides the id that may be inferred from the document.

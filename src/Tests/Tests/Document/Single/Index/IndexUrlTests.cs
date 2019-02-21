@@ -15,9 +15,9 @@ namespace Tests.Document.Single.Index
 		{
 			var project = new Project { Name = "NEST" };
 
-			await POST("/project/doc?routing=NEST")
+			await POST("/project/_doc")
 				.Fluent(c => c.Index(project, i => i.Id(null)))
-				.Request(c => c.Index(new IndexRequest<Project>("project", "doc") { Document = project }))
+				.Request(c => c.Index(new IndexRequest<Project>(index: "project") { Document = project }))
 				.FluentAsync(c => c.IndexAsync(project, i => i.Id(null)))
 				.RequestAsync(c => c.IndexAsync(new IndexRequest<Project>(typeof(Project))
 				{
@@ -25,18 +25,18 @@ namespace Tests.Document.Single.Index
 				}));
 
 			//no explicit ID is provided and none can be inferred on the anonymous object so this falls back to a POST to /index/type
-			await POST("/project/doc")
+			await POST("/project/_doc")
 				.Fluent(c => c.Index(new { }, i => i.Index(typeof(Project))))
-				.Request(c => c.Index(new IndexRequest<object>("project", "doc") { Document = new { } }))
+				.Request(c => c.Index(new IndexRequest<object>(index: "project") { Document = new { } }))
 				.FluentAsync(c => c.IndexAsync(new { }, i => i.Index(typeof(Project))))
 				.RequestAsync(c => c.IndexAsync(new IndexRequest<object>(typeof(Project))
 				{
 					Document = new { }
 				}));
 
-			await PUT("/project/doc/NEST?routing=NEST")
+			await PUT("/project/_doc/NEST")
 				.Fluent(c => c.IndexDocument(project))
-				.Request(c => c.Index(new IndexRequest<Project>("project", "NEST") { Document = project }))
+				.Request(c => c.Index(new IndexRequest<Project>(index: "project", id: "NEST") { Document = project }))
 				.Request(c => c.Index(new IndexRequest<Project>(project)))
 				.FluentAsync(c => c.IndexDocumentAsync(project))
 				.RequestAsync(c => c.IndexAsync(new IndexRequest<Project>(project)));
@@ -49,7 +49,7 @@ namespace Tests.Document.Single.Index
 			escaped.Should().NotContain("/").And.NotContain("?");
 			var project = new Project { Name = "name" };
 
-			await PUT($"/project/doc/{escaped}?routing=name")
+			await PUT($"/project/_doc/{escaped}")
 				.Fluent(c => c.Index(project, i => i.Id(id)))
 				.Request(c => c.Index(new IndexRequest<Project>("project", id) { Document = project }))
 				.FluentAsync(c => c.IndexAsync(project, i => i.Id(id)))
@@ -59,7 +59,7 @@ namespace Tests.Document.Single.Index
 				}));
 
 			project = new Project { Name = id };
-			await PUT($"/project/doc/{escaped}?routing={escaped}")
+			await PUT($"/project/_doc/{escaped}")
 				.Fluent(c => c.Index(project, i => i.Id(id)))
 				.Request(c => c.Index(new IndexRequest<Project>("project", id) { Document = project }))
 				.FluentAsync(c => c.IndexAsync(project, i => i.Id(id)))

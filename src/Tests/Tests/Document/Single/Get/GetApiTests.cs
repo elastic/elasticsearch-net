@@ -29,7 +29,7 @@ namespace Tests.Document.Single.Get
 		protected string ProjectId => Project.First.Name;
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/project/doc/{U(ProjectId)}?routing={U(ProjectId)}";
+		protected override string UrlPath => $"/project/_doc/{U(ProjectId)}?routing={U(ProjectId)}";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.Get<Project>(ProjectId, f),
@@ -66,7 +66,7 @@ namespace Tests.Document.Single.Get
 		protected string ProjectId => CallIsolatedValue;
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/project/doc/{U(ProjectId)}?routing={U(ProjectId)}";
+		protected override string UrlPath => $"/project/_doc/{U(ProjectId)}?routing={U(ProjectId)}";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.Get<Project>(ProjectId, f),
@@ -99,11 +99,11 @@ namespace Tests.Document.Single.Get
 		protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => (g) => g.Index(BadIndex);
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
-		protected override GetRequest<Project> Initializer => new GetRequest<Project>(ProjectId, BadIndex);
+		protected override GetRequest<Project> Initializer => new GetRequest<Project>(BadIndex, ProjectId);
 		protected string ProjectId => CallIsolatedValue;
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/{BadIndex}/doc/{U(ProjectId)}";
+		protected override string UrlPath => $"/{BadIndex}/_doc/{U(ProjectId)}";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.Get<Project>(ProjectId, f),
@@ -113,7 +113,7 @@ namespace Tests.Document.Single.Get
 		);
 
 		protected override GetDescriptor<Project> NewDescriptor() =>
-			new GetDescriptor<Project>(DocumentPath<Project>.Id(ProjectId).Index(BadIndex));
+			new GetDescriptor<Project>(index: BadIndex, id: ProjectId);
 
 		protected override void ExpectResponse(IGetResponse<Project> response)
 		{
@@ -147,7 +147,7 @@ namespace Tests.Document.Single.Get
 		};
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/project/doc/{U(CommitActivityId)}?routing={U(CommitActivity.ProjectName)}";
+		protected override string UrlPath => $"/project/_doc/{U(CommitActivityId)}?routing={U(CommitActivity.ProjectName)}";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.Get<CommitActivity>(CommitActivityId, f),
@@ -186,7 +186,7 @@ namespace Tests.Document.Single.Get
 			StoredFields = Infer.Fields<Project>(p => p.Name, p => p.NumberOfCommits)
 		};
 
-		protected override string UrlPath => $"/project/doc/{U(ProjectId)}?stored_fields=name%2CnumberOfCommits&routing={U(ProjectId)}";
+		protected override string UrlPath => $"/project/_doc/{U(ProjectId)}?stored_fields=name%2CnumberOfCommits&routing={U(ProjectId)}";
 
 		protected override void ExpectResponse(IGetResponse<Project> response)
 		{

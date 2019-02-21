@@ -17,16 +17,13 @@ namespace Tests.Document.Single.Exists
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
-		protected override Func<DocumentExistsDescriptor<Project>, IDocumentExistsRequest> Fluent => d => d.Routing(Project.Routing);
+		protected override Func<DocumentExistsDescriptor<Project>, IDocumentExistsRequest> Fluent => d => d;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 
-		protected override DocumentExistsRequest<Project> Initializer => new DocumentExistsRequest<Project>(CallIsolatedValue)
-		{
-			Routing = Project.Routing
-		};
+		protected override DocumentExistsRequest<Project> Initializer => new DocumentExistsRequest<Project>(CallIsolatedValue);
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/project/doc/{CallIsolatedValue}?routing={U(Project.Routing)}";
+		protected override string UrlPath => $"/project/_doc/{CallIsolatedValue}";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

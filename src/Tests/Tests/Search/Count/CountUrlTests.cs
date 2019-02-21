@@ -12,20 +12,20 @@ namespace Tests.Search.Count
 		[U] public async Task Urls()
 		{
 			var hardcoded = "hardcoded";
-			await GET("/devs/developer/_count")
+			await GET("/devs/_count")
 					.Fluent(c => c.Count<Developer>())
 					.Request(c => c.Count<Project>(new CountRequest<Developer>()))
 					.FluentAsync(c => c.CountAsync<Developer>())
 					.RequestAsync(c => c.CountAsync<Project>(new CountRequest<Developer>()))
 				;
 
-			await GET("/devs/developer/_count?q=querystring")
+			await GET("/devs/_count?q=querystring")
 					.Fluent(c => c.Count<Developer>(s => s.QueryOnQueryString("querystring")))
 					.Request(c => c.Count<Project>(new CountRequest<Developer>() { QueryOnQueryString = "querystring" }))
 					.FluentAsync(c => c.CountAsync<Developer>(s => s.QueryOnQueryString("querystring")))
 					.RequestAsync(c => c.CountAsync<Project>(new CountRequest<Developer>() { QueryOnQueryString = "querystring" }))
 				;
-			await GET($"/devs/{hardcoded}/_count")
+			await GET($"/devs/_count")
 					.Fluent(c => c.Count<Developer>(s => s))
 					.Request(c => c.Count<Project>(new CountRequest<Developer>()))
 					.FluentAsync(c => c.CountAsync<Developer>(s => s))

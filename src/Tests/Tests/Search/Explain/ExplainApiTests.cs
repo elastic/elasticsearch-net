@@ -60,7 +60,7 @@ namespace Tests.Search.Explain
 		protected override bool SupportsDeserialization => false;
 
 		protected override string UrlPath =>
-			$"/project/doc/{U(Project.Instance.Name)}/_explain?_source=true&routing={U(Project.Instance.Name)}";
+			$"/project/_explain/{U(Project.Instance.Name)}?_source=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(c, f) => c.Explain(_project, f),

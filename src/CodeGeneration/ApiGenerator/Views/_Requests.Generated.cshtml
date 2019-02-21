@@ -53,6 +53,15 @@ namespace Nest
 <text>		@(Raw(part.ClrTypeName)) @(part.InterfaceName) { get; }
 </text>
 	}
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+	if (method.HttpMethod != "GET" && method.HttpMethod != "HEAD")
+	{
+		foreach (var partialParam in method.Url.Params.Values.Where(p=>p.RenderPartial))
+		{
+		<text>[JsonProperty("@(partialParam.QueryStringKey)")] @(Raw(partialParam.TypeHighLevel)) @(partialParam.ClsName) { get; set; }
+		</text>
+		}
+	}
 <text>	}
 </text>
 		var concreteInterface = method.InterfaceTypeGeneric == null ? method.InterfaceType : method.InterfaceTypeGeneric;
@@ -68,7 +77,7 @@ namespace Nest
 	public partial class @Raw(method.RequestType) @Raw(string.Format(": PlainRequestBase<{0}>, {1}", method.QueryStringParamName, method.InterfaceType))
 	{
 		protected @(Raw(method.InterfaceType)) Self => this;
-@foreach (Constructor c in method.RequestConstructors(inheritsFromPlainRequestBase: true))
+@foreach (Constructor c in Constructor.RequestConstructors(method, inheritsFromPlainRequestBase: true))
 {
 <text>		@(Raw(CodeGenerator.Constructor(c)))
 </text>
@@ -89,6 +98,11 @@ namespace Nest
 	{
 		continue;
 	}
+	//we prefer this parameter to be explictly implemented on the request body
+	if (param.RenderPartial && (method.HttpMethod != "GET" && method.HttpMethod != "HEAD"))
+	{
+		continue;
+	}
 	var doc = param.DescriptionHighLevel.ToArray();
 <text>		@Raw(param.InitializerGenerator(param.TypeHighLevel, param.ClsName, original, param.SetterHighLevel, doc))
 </text>
@@ -103,7 +117,7 @@ namespace Nest
 	public partial class @Raw(method.RequestType + method.RequestTypeGeneric) @Raw(string.Format(": {0}, {1}", method.RequestType, method.InterfaceTypeGeneric))
 	{
 		protected @(Raw(method.InterfaceTypeGeneric)) TypedSelf => this;
-@foreach (Constructor c in method.RequestConstructors(inheritsFromPlainRequestBase: false))
+@foreach (Constructor c in Constructor.RequestConstructors(method, inheritsFromPlainRequestBase: false))
 {
 <text>		@(Raw(CodeGenerator.Constructor(c)))
 </text>

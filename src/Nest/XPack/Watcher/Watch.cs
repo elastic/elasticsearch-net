@@ -1,34 +1,104 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
 {
+	//TODO find a way to combine with IWatchRequest
+
 	[JsonObject]
-	public class Watch
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<Watch>))]
+	public interface IWatch
 	{
 		[JsonProperty("actions")]
 		[JsonConverter(typeof(ActionsJsonConverter))]
-		public Actions Actions { get; internal set; }
+		Actions Actions { get; set; }
 
 		[JsonProperty("condition")]
-		public IConditionContainer Condition { get; internal set; }
+		ConditionContainer Condition { get; set; }
 
 		[JsonProperty("input")]
-		public IInputContainer Input { get; internal set; }
+		InputContainer Input { get; set; }
 
 		[JsonProperty("metadata")]
-		public IReadOnlyDictionary<string, object> Meta { get; internal set; }
+		IDictionary<string, object> Metadata { get; set; }
 
 		[JsonProperty("status")]
-		public WatchStatus Status { get; internal set; }
+		WatchStatus Status { get; set; }
 
 		[JsonProperty("throttle_period")]
-		public string ThrottlePeriod { get; internal set; }
+		string ThrottlePeriod { get; set; }
 
 		[JsonProperty("transform")]
-		public ITransformContainer Transform { get; internal set; }
+		TransformContainer Transform { get; set; }
 
 		[JsonProperty("trigger")]
-		public ITriggerContainer Trigger { get; internal set; }
+		TriggerContainer Trigger { get; set; }
+
+	}
+
+	public class Watch : IWatch
+	{
+		WatchStatus IWatch.Status { get; set; } //only used on the response
+
+		public Actions Actions { get; set; }
+
+		public ConditionContainer Condition { get; set; }
+
+		public InputContainer Input { get; set; }
+
+		public IDictionary<string, object> Metadata { get; set; }
+
+		public WatchStatus Status { get; set; }
+
+		public string ThrottlePeriod { get; set; }
+
+		public TransformContainer Transform { get; set; }
+
+		public TriggerContainer Trigger { get; set; }
+	}
+
+	public class WatchDescriptor : DescriptorBase<WatchDescriptor, IWatch>, IWatch
+	{
+		Actions IWatch.Actions { get; set; }
+		ConditionContainer IWatch.Condition { get; set; }
+		InputContainer IWatch.Input { get; set; }
+		IDictionary<string, object> IWatch.Metadata { get; set; }
+		string IWatch.ThrottlePeriod { get; set; }
+		TransformContainer IWatch.Transform { get; set; }
+		TriggerContainer IWatch.Trigger { get; set; }
+		WatchStatus IWatch.Status { get; set; } //only used on the response
+
+		/// <inheritdoc cref="IWatch.Actions" />
+		public WatchDescriptor Actions(Func<ActionsDescriptor, IPromise<Actions>> actions) =>
+			Assign(a => a.Actions = actions?.Invoke(new ActionsDescriptor())?.Value);
+
+		/// <inheritdoc cref="IWatch.Condition" />
+		public WatchDescriptor Condition(Func<ConditionDescriptor, ConditionContainer> selector) =>
+			Assign(a => a.Condition = selector.InvokeOrDefault(new ConditionDescriptor()));
+
+		/// <inheritdoc cref="IWatch.Input" />
+		public WatchDescriptor Input(Func<InputDescriptor, InputContainer> selector) =>
+			Assign(a => a.Input = selector.InvokeOrDefault(new InputDescriptor()));
+
+		/// <inheritdoc cref="IWatch.Metadata" />
+		public WatchDescriptor Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramsDictionary) =>
+			Assign(a => a.Metadata = paramsDictionary(new FluentDictionary<string, object>()));
+
+		/// <inheritdoc cref="IWatch.Metadata" />
+		public WatchDescriptor Metadata(Dictionary<string, object> paramsDictionary) =>
+			Assign(a => a.Metadata = paramsDictionary);
+
+		/// <inheritdoc cref="IWatch.ThrottlePeriod" />
+		public WatchDescriptor ThrottlePeriod(string throttlePeriod) => Assign(a => a.ThrottlePeriod = throttlePeriod);
+
+		/// <inheritdoc cref="IWatch.Transform" />
+		public WatchDescriptor Transform(Func<TransformDescriptor, TransformContainer> selector) =>
+			Assign(a => a.Transform = selector.InvokeOrDefault(new TransformDescriptor()));
+
+		/// <inheritdoc cref="IWatch.Trigger" />
+		public WatchDescriptor Trigger(Func<TriggerDescriptor, TriggerContainer> selector) =>
+			Assign(a => a.Trigger = selector.InvokeOrDefault(new TriggerDescriptor()));
+
 	}
 }

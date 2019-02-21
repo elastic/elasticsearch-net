@@ -5,18 +5,9 @@
 
 	public partial interface IDocumentExistsRequest<TDocument> where TDocument : class { }
 
-	public partial class DocumentExistsRequest
-	{
-		private object AutoRouteDocument() => null;
-	}
+	public partial class DocumentExistsRequest { }
 
-	public partial class DocumentExistsRequest<TDocument> where TDocument : class
-	{
-		private object AutoRouteDocument() => null;
-	}
+	public partial class DocumentExistsRequest<TDocument> where TDocument : class { }
 
-	public partial class DocumentExistsDescriptor<TDocument> where TDocument : class
-	{
-		private object AutoRouteDocument() => null;
-	}
+	public partial class DocumentExistsDescriptor<TDocument> where TDocument : class { }
 }

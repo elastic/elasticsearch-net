@@ -289,10 +289,6 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			indexResponse = client.Index(child, i => i.Routing(Route(child)));
 			indexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
 
-			/** Wouldn't be handy if NEST does this automatically? It does! */
-			indexResponse = client.IndexDocument(child);
-			indexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
-
 			/** You can always override the default inferred routing though */
 			indexResponse = client.Index(child, i => i.Routing("explicit"));
 			indexResponse.ApiCall.Uri.Query.Should().Contain("routing=explicit");
@@ -300,11 +296,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			indexResponse = client.Index(child, i => i.Routing(null));
 			indexResponse.ApiCall.Uri.Query.Should().NotContain("routing");
 
-			/**
-			 * This works for both the fluent and object initializer syntax
-			 */
-
-			var indexRequest = new IndexRequest<MyChild>(child);
+			var indexRequest = new IndexRequest<MyChild>(child) { Routing = Route(child) } ;
 			indexResponse = client.Index(indexRequest);
 			indexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
 			/**

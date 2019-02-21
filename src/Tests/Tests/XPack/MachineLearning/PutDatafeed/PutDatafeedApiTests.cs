@@ -32,6 +32,8 @@ namespace Tests.XPack.MachineLearning.PutDatafeed
 		protected override int ExpectStatusCode => 200;
 
 		protected override Func<PutDatafeedDescriptor<Metric>, IPutDatafeedRequest> Fluent => f => f
+			.Indices("server-metrics") //goes on body not in the url
+			.Types("metric") //goes on body not in the url
 			.JobId(CallIsolatedValue)
 			.Query(q => q.MatchAll());
 
@@ -47,7 +49,7 @@ namespace Tests.XPack.MachineLearning.PutDatafeed
 			};
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"_xpack/ml/datafeeds/{CallIsolatedValue}";
+		protected override string UrlPath => $"_ml/datafeeds/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.PutDatafeed(CallIsolatedValue, f),

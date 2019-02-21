@@ -90,7 +90,7 @@ namespace Tests.XPack.Security.RoleMapping.PutRoleMapping
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override string UrlPath => $"/_xpack/security/role_mapping/{Role}";
+		protected override string UrlPath => $"/_security/role_mapping/{Role}";
 
 		//callisolated value can sometimes start with a digit which is not allowed for rolenames
 		private string Role => $"role-{CallIsolatedValue}";

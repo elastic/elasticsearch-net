@@ -60,8 +60,6 @@ namespace Nest
 	/// <inheritdoc cref="IPutWatchRequest" />
 	public partial class PutWatchRequest
 	{
-		public PutWatchRequest() { }
-
 		/// <inheritdoc />
 		public Actions Actions { get; set; }
 
@@ -87,8 +85,6 @@ namespace Nest
 	/// <inheritdoc cref="IPutWatchRequest" />
 	public partial class PutWatchDescriptor
 	{
-		public PutWatchDescriptor() { }
-
 		Actions IPutWatchRequest.Actions { get; set; }
 		ConditionContainer IPutWatchRequest.Condition { get; set; }
 		InputContainer IPutWatchRequest.Input { get; set; }

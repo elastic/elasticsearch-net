@@ -81,8 +81,6 @@ namespace Nest
 	/// <inheritdoc />
 	public partial class GetInfluencersDescriptor
 	{
-		public GetInfluencersDescriptor() { }
-
 		bool? IGetInfluencersRequest.Descending { get; set; }
 		DateTimeOffset? IGetInfluencersRequest.End { get; set; }
 		bool? IGetInfluencersRequest.ExcludeInterim { get; set; }

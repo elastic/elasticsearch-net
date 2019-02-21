@@ -20,7 +20,7 @@ namespace Tests.XPack.MachineLearning.DeleteExpiredData
 		protected override Func<DeleteExpiredDataDescriptor, IDeleteExpiredDataRequest> Fluent => f => f;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override DeleteExpiredDataRequest Initializer => new DeleteExpiredDataRequest();
-		protected override string UrlPath => $"_xpack/ml/_delete_expired_data";
+		protected override string UrlPath => $"_ml/_delete_expired_data";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.DeleteExpiredData(f),

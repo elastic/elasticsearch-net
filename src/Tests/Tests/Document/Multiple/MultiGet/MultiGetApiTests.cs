@@ -43,7 +43,7 @@ namespace Tests.Document.Multiple.MultiGet
 		};
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/devs/developer/_mget";
+		protected override string UrlPath => $"/devs/_mget";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.MultiGet(f),
@@ -148,7 +148,7 @@ namespace Tests.Document.Multiple.MultiGet
 		};
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/project/doc/_mget";
+		protected override string UrlPath => $"/project/_mget";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.MultiGet(f),
@@ -201,7 +201,7 @@ namespace Tests.Document.Multiple.MultiGet
 		};
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/project/doc/_mget";
+		protected override string UrlPath => $"/project/_mget";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.MultiGet(f),

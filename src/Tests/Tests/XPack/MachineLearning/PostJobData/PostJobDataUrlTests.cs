@@ -8,7 +8,7 @@ namespace Tests.XPack.MachineLearning.PostJobData
 {
 	public class PostJobDataUrlTests : UrlTestsBase
 	{
-		[U] public override async Task Urls() => await POST("/_xpack/ml/anomaly_detectors/job_id/_data")
+		[U] public override async Task Urls() => await POST("/_ml/anomaly_detectors/job_id/_data")
 			.Fluent(c => c.PostJobData("job_id", p => p))
 			.Request(c => c.PostJobData(new PostJobDataRequest("job_id")))
 			.FluentAsync(c => c.PostJobDataAsync("job_id", p => p))

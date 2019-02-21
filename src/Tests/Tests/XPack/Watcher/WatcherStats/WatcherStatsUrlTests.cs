@@ -11,14 +11,14 @@ namespace Tests.XPack.Watcher.WatcherStats
 	{
 		[U] public override async Task Urls()
 		{
-			await GET("/_xpack/watcher/stats")
-					.Fluent(c => c.WatcherStats())
-					.Request(c => c.WatcherStats(new WatcherStatsRequest()))
-					.FluentAsync(c => c.WatcherStatsAsync())
-					.RequestAsync(c => c.WatcherStatsAsync(new WatcherStatsRequest()))
-				;
+//			await GET("/_watcher/stats")
+//					.Fluent(c => c.WatcherStats())
+//					.Request(c => c.WatcherStats(new WatcherStatsRequest()))
+//					.FluentAsync(c => c.WatcherStatsAsync())
+//					.RequestAsync(c => c.WatcherStatsAsync(new WatcherStatsRequest()))
+//				;
 
-			await GET("/_xpack/watcher/stats/_all")
+			await GET("/_watcher/stats/_all")
 					.Fluent(c => c.WatcherStats(r => r.Metric(WatcherStatsMetric.All)))
 					.Request(c => c.WatcherStats(new WatcherStatsRequest(WatcherStatsMetric.All)))
 					.FluentAsync(c => c.WatcherStatsAsync(r => r.Metric(WatcherStatsMetric.All)))

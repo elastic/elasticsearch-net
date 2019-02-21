@@ -27,9 +27,6 @@ namespace Nest
 	/// <inheritdoc cref="ISplitIndexRequest" />
 	public partial class SplitIndexRequest
 	{
-		// For ReadAsType()
-		internal SplitIndexRequest() { }
-
 		/// <inheritdoc />
 		public IAliases Aliases { get; set; }
 

@@ -60,7 +60,7 @@ namespace Tests.Document.Single.Index
 			};
 
 		protected override string UrlPath
-			=> $"/project/doc/{CallIsolatedValue}?wait_for_active_shards=1&op_type=index&refresh=true&routing=route";
+			=> $"/project/_doc/{CallIsolatedValue}?wait_for_active_shards=1&op_type=index&refresh=true&routing=route";
 
 		private Project Document => new Project
 		{

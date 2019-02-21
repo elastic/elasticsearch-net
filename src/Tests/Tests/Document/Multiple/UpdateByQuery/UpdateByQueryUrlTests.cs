@@ -18,7 +18,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 					.RequestAsync(c => c.UpdateByQueryAsync(new UpdateByQueryRequest<Project>("project")))
 				;
 
-			await POST("/project2/doc/_update_by_query")
+			await POST("/project2/_update_by_query")
 					.Fluent(c => c.UpdateByQuery<Project>(d => d.Index("project2")))
 					.Request(c => c.UpdateByQuery(new UpdateByQueryRequest<Project>("project2")))
 					.FluentAsync(c => c.UpdateByQueryAsync<Project>(d => d.Index("project2")))

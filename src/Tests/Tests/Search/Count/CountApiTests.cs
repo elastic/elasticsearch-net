@@ -50,7 +50,7 @@ namespace Tests.Search.Count
 			})
 		};
 
-		protected override string UrlPath => "/project/doc/_count";
+		protected override string UrlPath => "/project/_count";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(c, f) => c.Count(f),

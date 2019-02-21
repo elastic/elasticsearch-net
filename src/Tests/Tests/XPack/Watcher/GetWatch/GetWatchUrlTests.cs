@@ -8,7 +8,7 @@ namespace Tests.XPack.Watcher.GetWatch
 {
 	public class GetWatchUrlTests : UrlTestsBase
 	{
-		[U] public override async Task Urls() => await GET("/_xpack/watcher/watch/watch_id")
+		[U] public override async Task Urls() => await GET("/_watcher/watch/watch_id")
 			.Fluent(c => c.GetWatch("watch_id"))
 			.Request(c => c.GetWatch(new GetWatchRequest("watch_id")))
 			.FluentAsync(c => c.GetWatchAsync("watch_id"))

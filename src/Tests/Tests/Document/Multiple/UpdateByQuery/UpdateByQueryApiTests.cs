@@ -40,7 +40,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override string UrlPath => $"/{CallIsolatedValue}/test/_update_by_query?refresh=true&conflicts=proceed";
+		protected override string UrlPath => $"/{CallIsolatedValue}/_update_by_query?refresh=true&conflicts=proceed";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -125,7 +125,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 			Conflicts = Conflicts.Proceed
 		};
 
-		protected override string UrlPath => $"/{CallIsolatedValue}/test/_update_by_query?wait_for_completion=false&conflicts=proceed";
+		protected override string UrlPath => $"/{CallIsolatedValue}/_update_by_query?wait_for_completion=false&conflicts=proceed";
 
 		protected override void ExpectResponse(IUpdateByQueryResponse response)
 		{
@@ -169,7 +169,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 			Script = new InlineScript(_script),
 		};
 
-		protected override string UrlPath => $"/{CallIsolatedValue}/test/_update_by_query";
+		protected override string UrlPath => $"/{CallIsolatedValue}/_update_by_query";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

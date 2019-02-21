@@ -68,7 +68,7 @@ namespace Tests.Document.Single.TermVectors
 		};
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/project/doc/{U(Project.Instance.Name)}/_termvectors?offsets=true&routing={U(Project.Routing)}";
+		protected override string UrlPath => $"/project/_termvectors/{U(Project.Instance.Name)}?offsets=true&routing={U(Project.Routing)}";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.TermVectors(f),

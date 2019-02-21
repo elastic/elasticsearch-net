@@ -10,14 +10,14 @@ namespace Tests.XPack.MachineLearning.GetJobStats
 	{
 		[U] public override async Task Urls()
 		{
-			await GET("/_xpack/ml/anomaly_detectors/_stats")
+			await GET("/_ml/anomaly_detectors/_stats")
 					.Fluent(c => c.GetJobStats())
 					.Request(c => c.GetJobStats(new GetJobStatsRequest()))
 					.FluentAsync(c => c.GetJobStatsAsync())
 					.RequestAsync(c => c.GetJobStatsAsync(new GetJobStatsRequest()))
 				;
 
-			await GET("/_xpack/ml/anomaly_detectors/job_id/_stats")
+			await GET("/_ml/anomaly_detectors/job_id/_stats")
 					.Fluent(c => c.GetJobStats(r => r.JobId("job_id")))
 					.Request(c => c.GetJobStats(new GetJobStatsRequest("job_id")))
 					.FluentAsync(c => c.GetJobStatsAsync(r => r.JobId("job_id")))

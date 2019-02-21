@@ -54,7 +54,7 @@ namespace Tests.Aggregations
 		protected virtual QueryContainer QueryScope { get; }
 
 		protected virtual object QueryScopeJson { get; }
-		protected override string UrlPath => $"/project/doc/_search";
+		protected override string UrlPath => $"/project/_search";
 
 		// https://youtrack.jetbrains.com/issue/RIDER-19912
 		[U] protected override Task HitsTheCorrectUrl() => base.HitsTheCorrectUrl();
@@ -84,7 +84,7 @@ namespace Tests.Aggregations
 		protected ProjectsOnlyAggregationUsageTestBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override Nest.Indices AgainstIndex => DefaultSeeder.ProjectsAliasFilter;
-		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/doc/_search";
+		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/_search";
 
 		// https://youtrack.jetbrains.com/issue/RIDER-19912
 		[U] protected override Task HitsTheCorrectUrl() => base.HitsTheCorrectUrl();

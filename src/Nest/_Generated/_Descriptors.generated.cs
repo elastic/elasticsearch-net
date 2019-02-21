@@ -25,11 +25,11 @@ namespace Nest
 	///<summary>descriptor for Bulk <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</pre></summary>
 	public partial class BulkDescriptor  : RequestDescriptorBase<BulkDescriptor,BulkRequestParameters, IBulkRequest>, IBulkRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_bulk</summary>
 		public BulkDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public BulkDescriptor(IndexName index) : base(r=>r.Optional("index", index)){}
+		///<summary>/{index}/_bulk</summary>
+		///<param name="index">Optional, accepts null</param>
+		public BulkDescriptor(IndexName index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		IndexName IBulkRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
@@ -75,11 +75,11 @@ namespace Nest
 	///<summary>descriptor for CatAliases <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</pre></summary>
 	public partial class CatAliasesDescriptor  : RequestDescriptorBase<CatAliasesDescriptor,CatAliasesRequestParameters, ICatAliasesRequest>, ICatAliasesRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_cat/aliases</summary>
 		public CatAliasesDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="name"> this parameter is required</param>
-		public CatAliasesDescriptor(Names name) : base(r=>r.Optional("name", name)){}
+		///<summary>/_cat/aliases/{name}</summary>
+		///<param name="name">Optional, accepts null</param>
+		public CatAliasesDescriptor(Names name) : base(r => r.Optional("name", name)){}
 		// values part of the url path
 		Names ICatAliasesRequest.Name => Self.RouteValues.Get<Names>("name");
 
@@ -106,11 +106,11 @@ namespace Nest
 	///<summary>descriptor for CatAllocation <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</pre></summary>
 	public partial class CatAllocationDescriptor  : RequestDescriptorBase<CatAllocationDescriptor,CatAllocationRequestParameters, ICatAllocationRequest>, ICatAllocationRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_cat/allocation</summary>
 		public CatAllocationDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="node_id"> this parameter is required</param>
-		public CatAllocationDescriptor(NodeIds node_id) : base(r=>r.Optional("node_id", node_id)){}
+		///<summary>/_cat/allocation/{node_id}</summary>
+		///<param name="node_id">Optional, accepts null</param>
+		public CatAllocationDescriptor(NodeIds node_id) : base(r => r.Optional("node_id", node_id)){}
 		// values part of the url path
 		NodeIds ICatAllocationRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 
@@ -139,11 +139,11 @@ namespace Nest
 	///<summary>descriptor for CatCount <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</pre></summary>
 	public partial class CatCountDescriptor  : RequestDescriptorBase<CatCountDescriptor,CatCountRequestParameters, ICatCountRequest>, ICatCountRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_cat/count</summary>
 		public CatCountDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public CatCountDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/_cat/count/{index}</summary>
+		///<param name="index">Optional, accepts null</param>
+		public CatCountDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices ICatCountRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -176,11 +176,11 @@ namespace Nest
 	///<summary>descriptor for CatFielddata <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
 	public partial class CatFielddataDescriptor  : RequestDescriptorBase<CatFielddataDescriptor,CatFielddataRequestParameters, ICatFielddataRequest>, ICatFielddataRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_cat/fielddata</summary>
 		public CatFielddataDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="fields"> this parameter is required</param>
-		public CatFielddataDescriptor(Fields fields) : base(r=>r.Optional("fields", fields)){}
+		///<summary>/_cat/fielddata/{fields}</summary>
+		///<param name="fields">Optional, accepts null</param>
+		public CatFielddataDescriptor(Fields fields) : base(r => r.Optional("fields", fields)){}
 		// values part of the url path
 		Fields ICatFielddataRequest.Fields => Self.RouteValues.Get<Fields>("fields");
 
@@ -248,11 +248,11 @@ namespace Nest
 	///<summary>descriptor for CatIndices <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</pre></summary>
 	public partial class CatIndicesDescriptor  : RequestDescriptorBase<CatIndicesDescriptor,CatIndicesRequestParameters, ICatIndicesRequest>, ICatIndicesRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_cat/indices</summary>
 		public CatIndicesDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public CatIndicesDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/_cat/indices/{index}</summary>
+		///<param name="index">Optional, accepts null</param>
+		public CatIndicesDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices ICatIndicesRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -403,11 +403,11 @@ namespace Nest
 	///<summary>descriptor for CatRecovery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</pre></summary>
 	public partial class CatRecoveryDescriptor  : RequestDescriptorBase<CatRecoveryDescriptor,CatRecoveryRequestParameters, ICatRecoveryRequest>, ICatRecoveryRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_cat/recovery</summary>
 		public CatRecoveryDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public CatRecoveryDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/_cat/recovery/{index}</summary>
+		///<param name="index">Optional, accepts null</param>
+		public CatRecoveryDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices ICatRecoveryRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -462,11 +462,11 @@ namespace Nest
 	///<summary>descriptor for CatSegments <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</pre></summary>
 	public partial class CatSegmentsDescriptor  : RequestDescriptorBase<CatSegmentsDescriptor,CatSegmentsRequestParameters, ICatSegmentsRequest>, ICatSegmentsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_cat/segments</summary>
 		public CatSegmentsDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public CatSegmentsDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/_cat/segments/{index}</summary>
+		///<param name="index">Optional, accepts null</param>
+		public CatSegmentsDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices ICatSegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -497,11 +497,11 @@ namespace Nest
 	///<summary>descriptor for CatShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</pre></summary>
 	public partial class CatShardsDescriptor  : RequestDescriptorBase<CatShardsDescriptor,CatShardsRequestParameters, ICatShardsRequest>, ICatShardsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_cat/shards</summary>
 		public CatShardsDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public CatShardsDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/_cat/shards/{index}</summary>
+		///<param name="index">Optional, accepts null</param>
+		public CatShardsDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices ICatShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -536,11 +536,11 @@ namespace Nest
 	///<summary>descriptor for CatSnapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</pre></summary>
 	public partial class CatSnapshotsDescriptor  : RequestDescriptorBase<CatSnapshotsDescriptor,CatSnapshotsRequestParameters, ICatSnapshotsRequest>, ICatSnapshotsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_cat/snapshots</summary>
 		public CatSnapshotsDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="repository"> this parameter is required</param>
-		public CatSnapshotsDescriptor(Names repository) : base(r=>r.Optional("repository", repository)){}
+		///<summary>/_cat/snapshots/{repository}</summary>
+		///<param name="repository">Optional, accepts null</param>
+		public CatSnapshotsDescriptor(Names repository) : base(r => r.Optional("repository", repository)){}
 		// values part of the url path
 		Names ICatSnapshotsRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
 
@@ -593,11 +593,11 @@ namespace Nest
 	///<summary>descriptor for CatTemplates <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</pre></summary>
 	public partial class CatTemplatesDescriptor  : RequestDescriptorBase<CatTemplatesDescriptor,CatTemplatesRequestParameters, ICatTemplatesRequest>, ICatTemplatesRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_cat/templates</summary>
 		public CatTemplatesDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="name"> this parameter is required</param>
-		public CatTemplatesDescriptor(Name name) : base(r=>r.Optional("name", name)){}
+		///<summary>/_cat/templates/{name}</summary>
+		///<param name="name">Optional, accepts null</param>
+		public CatTemplatesDescriptor(Name name) : base(r => r.Optional("name", name)){}
 		// values part of the url path
 		Name ICatTemplatesRequest.Name => Self.RouteValues.Get<Name>("name");
 
@@ -624,11 +624,11 @@ namespace Nest
 	///<summary>descriptor for CatThreadPool <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
 	public partial class CatThreadPoolDescriptor  : RequestDescriptorBase<CatThreadPoolDescriptor,CatThreadPoolRequestParameters, ICatThreadPoolRequest>, ICatThreadPoolRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_cat/thread_pool</summary>
 		public CatThreadPoolDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="thread_pool_patterns"> this parameter is required</param>
-		public CatThreadPoolDescriptor(Names thread_pool_patterns) : base(r=>r.Optional("thread_pool_patterns", thread_pool_patterns)){}
+		///<summary>/_cat/thread_pool/{thread_pool_patterns}</summary>
+		///<param name="thread_pool_patterns">Optional, accepts null</param>
+		public CatThreadPoolDescriptor(Names thread_pool_patterns) : base(r => r.Optional("thread_pool_patterns", thread_pool_patterns)){}
 		// values part of the url path
 		Names ICatThreadPoolRequest.ThreadPoolPatterns => Self.RouteValues.Get<Names>("thread_pool_patterns");
 
@@ -693,11 +693,11 @@ namespace Nest
 	///<summary>descriptor for ClusterHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</pre></summary>
 	public partial class ClusterHealthDescriptor  : RequestDescriptorBase<ClusterHealthDescriptor,ClusterHealthRequestParameters, IClusterHealthRequest>, IClusterHealthRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_cluster/health</summary>
 		public ClusterHealthDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public ClusterHealthDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/_cluster/health/{index}</summary>
+		///<param name="index">Optional, accepts null</param>
+		public ClusterHealthDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices IClusterHealthRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -790,15 +790,15 @@ namespace Nest
 	///<summary>descriptor for ClusterState <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</pre></summary>
 	public partial class ClusterStateDescriptor  : RequestDescriptorBase<ClusterStateDescriptor,ClusterStateRequestParameters, IClusterStateRequest>, IClusterStateRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_cluster/state</summary>
 		public ClusterStateDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="metric"> this parameter is required</param>
-		public ClusterStateDescriptor(Metrics metric) : base(r=>r.Optional("metric", (Metrics)metric)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="metric"> this parameter is required</param>
-		///<param name="index"> this parameter is required</param>
-		public ClusterStateDescriptor(Metrics metric, Indices index) : base(r=>r.Optional("metric", (Metrics)metric).Optional("index", index)){}
+		///<summary>/_cluster/state/{metric}</summary>
+		///<param name="metric">Optional, accepts null</param>
+		public ClusterStateDescriptor(Metrics metric) : base(r => r.Optional("metric", metric)){}
+		///<summary>/_cluster/state/{metric}/{index}</summary>
+		///<param name="metric">Optional, accepts null</param>
+		///<param name="index">Optional, accepts null</param>
+		public ClusterStateDescriptor(Metrics metric, Indices index) : base(r => r.Optional("metric", metric).Optional("index", index)){}
 		// values part of the url path
 		Metrics IClusterStateRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 		Indices IClusterStateRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -837,11 +837,11 @@ namespace Nest
 	///<summary>descriptor for ClusterStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</pre></summary>
 	public partial class ClusterStatsDescriptor  : RequestDescriptorBase<ClusterStatsDescriptor,ClusterStatsRequestParameters, IClusterStatsRequest>, IClusterStatsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_cluster/stats</summary>
 		public ClusterStatsDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="node_id"> this parameter is required</param>
-		public ClusterStatsDescriptor(NodeIds node_id) : base(r=>r.Optional("node_id", node_id)){}
+		///<summary>/_cluster/stats/nodes/{node_id}</summary>
+		///<param name="node_id">Optional, accepts null</param>
+		public ClusterStatsDescriptor(NodeIds node_id) : base(r => r.Optional("node_id", node_id)){}
 		// values part of the url path
 		NodeIds IClusterStatsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 
@@ -858,11 +858,11 @@ namespace Nest
 	///<summary>descriptor for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
 	public partial class CountDescriptor<T>  : RequestDescriptorBase<CountDescriptor<T>,CountRequestParameters, ICountRequest<T>>, ICountRequest<T>
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		public CountDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public CountDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/{index}/_count</summary>
+		public CountDescriptor() : this(typeof(T)){}
+		///<summary>/{index}/_count</summary>
+		///<param name="index">Optional, accepts null</param>
+		public CountDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -915,16 +915,20 @@ namespace Nest
 	///<summary>descriptor for Create <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
 	public partial class CreateDescriptor<TDocument>  : RequestDescriptorBase<CreateDescriptor<TDocument>,CreateRequestParameters, ICreateRequest<TDocument>>, ICreateRequest<TDocument>
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		///<param name="id"> this parameter is required</param>
-		public CreateDescriptor(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
-		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/_create/{id}</summary>
-		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
-		public CreateDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("id", document.Self.Id))
-		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
+		///<summary>/{index}/_create/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
+		public CreateDescriptor(IndexName index, Id id) : base(r => r.Required("index", index).Required("id", id)){}
+		///<summary>/{index}/_create/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public CreateDescriptor(Id id) : this(typeof(TDocument), id){}
+		///<summary>/{index}/_create/{id}</summary>
+		///<param name="id">The document used to resolve the path from</param>
+		public CreateDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Nest.Id.From(documentWithId))
+		=> DocumentFromPath(documentWithId);
 		partial void DocumentFromPath(TDocument document);
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal CreateDescriptor() : base(){}
 		// values part of the url path
 		IndexName ICreateRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		Id ICreateRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -964,16 +968,20 @@ namespace Nest
 	///<summary>descriptor for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</pre></summary>
 	public partial class DeleteDescriptor<TDocument>  : RequestDescriptorBase<DeleteDescriptor<TDocument>,DeleteRequestParameters, IDeleteRequest<TDocument>>, IDeleteRequest<TDocument>
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		///<param name="id"> this parameter is required</param>
-		public DeleteDescriptor(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
-		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/_doc/{id}</summary>
-		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
-		public DeleteDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("id", document.Self.Id))
-		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
+		///<summary>/{index}/_doc/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
+		public DeleteDescriptor(IndexName index, Id id) : base(r => r.Required("index", index).Required("id", id)){}
+		///<summary>/{index}/_doc/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public DeleteDescriptor(Id id) : this(typeof(TDocument), id){}
+		///<summary>/{index}/_doc/{id}</summary>
+		///<param name="id">The document used to resolve the path from</param>
+		public DeleteDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Nest.Id.From(documentWithId))
+		=> DocumentFromPath(documentWithId);
 		partial void DocumentFromPath(TDocument document);
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteDescriptor() : base(){}
 		// values part of the url path
 		IndexName IDeleteRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		Id IDeleteRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -1015,9 +1023,11 @@ namespace Nest
 	///<summary>descriptor for DeleteByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html</pre></summary>
 	public partial class DeleteByQueryDescriptor<T>  : RequestDescriptorBase<DeleteByQueryDescriptor<T>,DeleteByQueryRequestParameters, IDeleteByQueryRequest<T>>, IDeleteByQueryRequest<T>
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public DeleteByQueryDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+		///<summary>/{index}/_delete_by_query</summary>
+		///<param name="index">this parameter is required</param>
+		public DeleteByQueryDescriptor(Indices index) : base(r => r.Required("index", index)){}
+		///<summary>/{index}/_delete_by_query</summary>
+		public DeleteByQueryDescriptor() : this(typeof(T)){}
 		// values part of the url path
 		Indices IDeleteByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -1112,9 +1122,11 @@ namespace Nest
 	///<summary>descriptor for DeleteScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class DeleteScriptDescriptor  : RequestDescriptorBase<DeleteScriptDescriptor,DeleteScriptRequestParameters, IDeleteScriptRequest>, IDeleteScriptRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="id"> this parameter is required</param>
-		public DeleteScriptDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		///<summary>/_scripts/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public DeleteScriptDescriptor(Id id) : base(r => r.Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteScriptDescriptor() : base(){}
 		// values part of the url path
 		Id IDeleteScriptRequest.Id => Self.RouteValues.Get<Id>("id");
 
@@ -1128,16 +1140,20 @@ namespace Nest
 	///<summary>descriptor for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class DocumentExistsDescriptor<TDocument>  : RequestDescriptorBase<DocumentExistsDescriptor<TDocument>,DocumentExistsRequestParameters, IDocumentExistsRequest<TDocument>>, IDocumentExistsRequest<TDocument>
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		///<param name="id"> this parameter is required</param>
-		public DocumentExistsDescriptor(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
-		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/_doc/{id}</summary>
-		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
-		public DocumentExistsDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("id", document.Self.Id))
-		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
+		///<summary>/{index}/_doc/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
+		public DocumentExistsDescriptor(IndexName index, Id id) : base(r => r.Required("index", index).Required("id", id)){}
+		///<summary>/{index}/_doc/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public DocumentExistsDescriptor(Id id) : this(typeof(TDocument), id){}
+		///<summary>/{index}/_doc/{id}</summary>
+		///<param name="id">The document used to resolve the path from</param>
+		public DocumentExistsDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Nest.Id.From(documentWithId))
+		=> DocumentFromPath(documentWithId);
 		partial void DocumentFromPath(TDocument document);
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DocumentExistsDescriptor() : base(){}
 		// values part of the url path
 		IndexName IDocumentExistsRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		Id IDocumentExistsRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -1192,16 +1208,20 @@ namespace Nest
 	///<summary>descriptor for ExistsSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceExistsDescriptor<TDocument>  : RequestDescriptorBase<SourceExistsDescriptor<TDocument>,SourceExistsRequestParameters, ISourceExistsRequest<TDocument>>, ISourceExistsRequest<TDocument>
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		///<param name="id"> this parameter is required</param>
-		public SourceExistsDescriptor(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
-		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/_source/{id}</summary>
-		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
-		public SourceExistsDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("id", document.Self.Id))
-		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
+		///<summary>/{index}/_source/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
+		public SourceExistsDescriptor(IndexName index, Id id) : base(r => r.Required("index", index).Required("id", id)){}
+		///<summary>/{index}/_source/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public SourceExistsDescriptor(Id id) : this(typeof(TDocument), id){}
+		///<summary>/{index}/_source/{id}</summary>
+		///<param name="id">The document used to resolve the path from</param>
+		public SourceExistsDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Nest.Id.From(documentWithId))
+		=> DocumentFromPath(documentWithId);
 		partial void DocumentFromPath(TDocument document);
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal SourceExistsDescriptor() : base(){}
 		// values part of the url path
 		IndexName ISourceExistsRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		Id ISourceExistsRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -1251,16 +1271,20 @@ namespace Nest
 	///<summary>descriptor for Explain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</pre></summary>
 	public partial class ExplainDescriptor<TDocument>  : RequestDescriptorBase<ExplainDescriptor<TDocument>,ExplainRequestParameters, IExplainRequest<TDocument>>, IExplainRequest<TDocument>
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		///<param name="id"> this parameter is required</param>
-		public ExplainDescriptor(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
-		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/_explain/{id}</summary>
-		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
-		public ExplainDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("id", document.Self.Id))
-		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
+		///<summary>/{index}/_explain/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
+		public ExplainDescriptor(IndexName index, Id id) : base(r => r.Required("index", index).Required("id", id)){}
+		///<summary>/{index}/_explain/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public ExplainDescriptor(Id id) : this(typeof(TDocument), id){}
+		///<summary>/{index}/_explain/{id}</summary>
+		///<param name="id">The document used to resolve the path from</param>
+		public ExplainDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Nest.Id.From(documentWithId))
+		=> DocumentFromPath(documentWithId);
 		partial void DocumentFromPath(TDocument document);
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal ExplainDescriptor() : base(){}
 		// values part of the url path
 		IndexName IExplainRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		Id IExplainRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -1281,11 +1305,6 @@ namespace Nest
 		public ExplainDescriptor<TDocument> DefaultOperator(DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
 		///<summary>The default field for query string query (default: _all)</summary>
 		public ExplainDescriptor<TDocument> Df(string df) => Qs("df", df);
-		///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public ExplainDescriptor<TDocument> StoredFields(Fields storedFields) => Qs("stored_fields", storedFields);
-		///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public ExplainDescriptor<TDocument> StoredFields(params Expression<Func<TDocument, object>>[] fields)  => Qs("stored_fields", fields?.Select(e=>(Field)e));
-
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public ExplainDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		///<summary>The ID of the parent document</summary>
@@ -1319,11 +1338,11 @@ namespace Nest
 	///<summary>descriptor for FieldCaps <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</pre></summary>
 	public partial class FieldCapabilitiesDescriptor  : RequestDescriptorBase<FieldCapabilitiesDescriptor,FieldCapabilitiesRequestParameters, IFieldCapabilitiesRequest>, IFieldCapabilitiesRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_field_caps</summary>
 		public FieldCapabilitiesDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public FieldCapabilitiesDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/{index}/_field_caps</summary>
+		///<param name="index">Optional, accepts null</param>
+		public FieldCapabilitiesDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices IFieldCapabilitiesRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -1353,16 +1372,20 @@ namespace Nest
 	///<summary>descriptor for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class GetDescriptor<TDocument>  : RequestDescriptorBase<GetDescriptor<TDocument>,GetRequestParameters, IGetRequest<TDocument>>, IGetRequest<TDocument>
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		///<param name="id"> this parameter is required</param>
-		public GetDescriptor(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
-		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/_doc/{id}</summary>
-		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
-		public GetDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("id", document.Self.Id))
-		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
+		///<summary>/{index}/_doc/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
+		public GetDescriptor(IndexName index, Id id) : base(r => r.Required("index", index).Required("id", id)){}
+		///<summary>/{index}/_doc/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public GetDescriptor(Id id) : this(typeof(TDocument), id){}
+		///<summary>/{index}/_doc/{id}</summary>
+		///<param name="id">The document used to resolve the path from</param>
+		public GetDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Nest.Id.From(documentWithId))
+		=> DocumentFromPath(documentWithId);
 		partial void DocumentFromPath(TDocument document);
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetDescriptor() : base(){}
 		// values part of the url path
 		IndexName IGetRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		Id IGetRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -1417,9 +1440,11 @@ namespace Nest
 	///<summary>descriptor for GetScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class GetScriptDescriptor  : RequestDescriptorBase<GetScriptDescriptor,GetScriptRequestParameters, IGetScriptRequest>, IGetScriptRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="id"> this parameter is required</param>
-		public GetScriptDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		///<summary>/_scripts/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public GetScriptDescriptor(Id id) : base(r => r.Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetScriptDescriptor() : base(){}
 		// values part of the url path
 		Id IGetScriptRequest.Id => Self.RouteValues.Get<Id>("id");
 
@@ -1431,16 +1456,20 @@ namespace Nest
 	///<summary>descriptor for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceDescriptor<TDocument>  : RequestDescriptorBase<SourceDescriptor<TDocument>,SourceRequestParameters, ISourceRequest<TDocument>>, ISourceRequest<TDocument>
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		///<param name="id"> this parameter is required</param>
-		public SourceDescriptor(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
-		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/_source/{id}</summary>
-		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
-		public SourceDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("id", document.Self.Id))
-		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
+		///<summary>/{index}/_source/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
+		public SourceDescriptor(IndexName index, Id id) : base(r => r.Required("index", index).Required("id", id)){}
+		///<summary>/{index}/_source/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public SourceDescriptor(Id id) : this(typeof(TDocument), id){}
+		///<summary>/{index}/_source/{id}</summary>
+		///<param name="id">The document used to resolve the path from</param>
+		public SourceDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Nest.Id.From(documentWithId))
+		=> DocumentFromPath(documentWithId);
 		partial void DocumentFromPath(TDocument document);
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal SourceDescriptor() : base(){}
 		// values part of the url path
 		IndexName ISourceRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		Id ISourceRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -1490,19 +1519,22 @@ namespace Nest
 	///<summary>descriptor for Index <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
 	public partial class IndexDescriptor<TDocument>  : RequestDescriptorBase<IndexDescriptor<TDocument>,IndexRequestParameters, IIndexRequest<TDocument>>, IIndexRequest<TDocument>
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		///<param name="id"> this parameter is required</param>
-		public IndexDescriptor(IndexName index, Id id) : base(r=>r.Required("index", index).Optional("id", id))
-		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public IndexDescriptor(IndexName index) : base(r=>r.Required("index", index))
-		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/_doc</summary>
-		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
-		public IndexDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("id", document.Self.Id))
-		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
+		///<summary>/{index}/_doc/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="id">Optional, accepts null</param>
+		public IndexDescriptor(IndexName index, Id id) : base(r => r.Required("index", index).Optional("id", id)){}
+		///<summary>/{index}/_doc</summary>
+		///<param name="index">this parameter is required</param>
+		public IndexDescriptor(IndexName index) : base(r => r.Required("index", index)){}
+		///<summary>/{index}/_doc/{id}</summary>
+		///<param name="id">Optional, accepts null</param>
+		public IndexDescriptor(Id id) : this(typeof(TDocument), id){}
+		///<summary>/{index}/_doc</summary>
+		public IndexDescriptor() : this(typeof(TDocument)){}
+		///<summary>/{index}/_doc/{id}</summary>
+		///<param name="id">The document used to resolve the path from</param>
+		public IndexDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Nest.Id.From(documentWithId))
+		=> DocumentFromPath(documentWithId);
 		partial void DocumentFromPath(TDocument document);
 		// values part of the url path
 		IndexName IIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
@@ -1552,11 +1584,11 @@ namespace Nest
 	///<summary>descriptor for IndicesAnalyzeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</pre></summary>
 	public partial class AnalyzeDescriptor  : RequestDescriptorBase<AnalyzeDescriptor,AnalyzeRequestParameters, IAnalyzeRequest>, IAnalyzeRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_analyze</summary>
 		public AnalyzeDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public AnalyzeDescriptor(IndexName index) : base(r=>r.Optional("index", index)){}
+		///<summary>/{index}/_analyze</summary>
+		///<param name="index">Optional, accepts null</param>
+		public AnalyzeDescriptor(IndexName index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		IndexName IAnalyzeRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
@@ -1572,11 +1604,11 @@ namespace Nest
 	///<summary>descriptor for IndicesClearCacheForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</pre></summary>
 	public partial class ClearCacheDescriptor  : RequestDescriptorBase<ClearCacheDescriptor,ClearCacheRequestParameters, IClearCacheRequest>, IClearCacheRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_cache/clear</summary>
 		public ClearCacheDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public ClearCacheDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/{index}/_cache/clear</summary>
+		///<param name="index">Optional, accepts null</param>
+		public ClearCacheDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices IClearCacheRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -1612,9 +1644,11 @@ namespace Nest
 	///<summary>descriptor for IndicesClose <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 	public partial class CloseIndexDescriptor  : RequestDescriptorBase<CloseIndexDescriptor,CloseIndexRequestParameters, ICloseIndexRequest>, ICloseIndexRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public CloseIndexDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+		///<summary>/{index}/_close</summary>
+		///<param name="index">this parameter is required</param>
+		public CloseIndexDescriptor(Indices index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal CloseIndexDescriptor() : base(){}
 		// values part of the url path
 		Indices ICloseIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -1643,9 +1677,11 @@ namespace Nest
 	///<summary>descriptor for IndicesCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html</pre></summary>
 	public partial class CreateIndexDescriptor  : RequestDescriptorBase<CreateIndexDescriptor,CreateIndexRequestParameters, ICreateIndexRequest>, ICreateIndexRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public CreateIndexDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
+		///<summary>/{index}</summary>
+		///<param name="index">this parameter is required</param>
+		public CreateIndexDescriptor(IndexName index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal CreateIndexDescriptor() : base(){}
 		// values part of the url path
 		IndexName ICreateIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
@@ -1669,9 +1705,11 @@ namespace Nest
 	///<summary>descriptor for IndicesDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</pre></summary>
 	public partial class DeleteIndexDescriptor  : RequestDescriptorBase<DeleteIndexDescriptor,DeleteIndexRequestParameters, IDeleteIndexRequest>, IDeleteIndexRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public DeleteIndexDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+		///<summary>/{index}</summary>
+		///<param name="index">this parameter is required</param>
+		public DeleteIndexDescriptor(Indices index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteIndexDescriptor() : base(){}
 		// values part of the url path
 		Indices IDeleteIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -1700,10 +1738,12 @@ namespace Nest
 	///<summary>descriptor for IndicesDeleteAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class DeleteAliasDescriptor  : RequestDescriptorBase<DeleteAliasDescriptor,DeleteAliasRequestParameters, IDeleteAliasRequest>, IDeleteAliasRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		///<param name="name"> this parameter is required</param>
-		public DeleteAliasDescriptor(Indices index, Names name) : base(r=>r.Required("index", index).Required("name", name)){}
+		///<summary>/{index}/_aliases/{name}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="name">this parameter is required</param>
+		public DeleteAliasDescriptor(Indices index, Names name) : base(r => r.Required("index", index).Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteAliasDescriptor() : base(){}
 		// values part of the url path
 		Indices IDeleteAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Names IDeleteAliasRequest.Name => Self.RouteValues.Get<Names>("name");
@@ -1727,9 +1767,11 @@ namespace Nest
 	///<summary>descriptor for IndicesDeleteTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class DeleteIndexTemplateDescriptor  : RequestDescriptorBase<DeleteIndexTemplateDescriptor,DeleteIndexTemplateRequestParameters, IDeleteIndexTemplateRequest>, IDeleteIndexTemplateRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="name"> this parameter is required</param>
-		public DeleteIndexTemplateDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		///<summary>/_template/{name}</summary>
+		///<param name="name">this parameter is required</param>
+		public DeleteIndexTemplateDescriptor(Name name) : base(r => r.Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteIndexTemplateDescriptor() : base(){}
 		// values part of the url path
 		Name IDeleteIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
 
@@ -1743,9 +1785,11 @@ namespace Nest
 	///<summary>descriptor for IndicesExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html</pre></summary>
 	public partial class IndexExistsDescriptor  : RequestDescriptorBase<IndexExistsDescriptor,IndexExistsRequestParameters, IIndexExistsRequest>, IIndexExistsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public IndexExistsDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+		///<summary>/{index}</summary>
+		///<param name="index">this parameter is required</param>
+		public IndexExistsDescriptor(Indices index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal IndexExistsDescriptor() : base(){}
 		// values part of the url path
 		Indices IIndexExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -1776,13 +1820,15 @@ namespace Nest
 	///<summary>descriptor for IndicesExistsAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class AliasExistsDescriptor  : RequestDescriptorBase<AliasExistsDescriptor,AliasExistsRequestParameters, IAliasExistsRequest>, IAliasExistsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="name"> this parameter is required</param>
-		public AliasExistsDescriptor(Names name) : base(r=>r.Required("name", name)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		///<param name="name"> this parameter is required</param>
-		public AliasExistsDescriptor(Indices index, Names name) : base(r=>r.Optional("index", index).Required("name", name)){}
+		///<summary>/_alias/{name}</summary>
+		///<param name="name">this parameter is required</param>
+		public AliasExistsDescriptor(Names name) : base(r => r.Required("name", name)){}
+		///<summary>/{index}/_alias/{name}</summary>
+		///<param name="index">Optional, accepts null</param>
+		///<param name="name">this parameter is required</param>
+		public AliasExistsDescriptor(Indices index, Names name) : base(r => r.Optional("index", index).Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal AliasExistsDescriptor() : base(){}
 		// values part of the url path
 		Names IAliasExistsRequest.Name => Self.RouteValues.Get<Names>("name");
 		Indices IAliasExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -1810,9 +1856,11 @@ namespace Nest
 	///<summary>descriptor for IndicesExistsTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class IndexTemplateExistsDescriptor  : RequestDescriptorBase<IndexTemplateExistsDescriptor,IndexTemplateExistsRequestParameters, IIndexTemplateExistsRequest>, IIndexTemplateExistsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="name"> this parameter is required</param>
-		public IndexTemplateExistsDescriptor(Names name) : base(r=>r.Required("name", name)){}
+		///<summary>/_template/{name}</summary>
+		///<param name="name">this parameter is required</param>
+		public IndexTemplateExistsDescriptor(Names name) : base(r => r.Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal IndexTemplateExistsDescriptor() : base(){}
 		// values part of the url path
 		Names IIndexTemplateExistsRequest.Name => Self.RouteValues.Get<Names>("name");
 
@@ -1828,10 +1876,12 @@ namespace Nest
 	///<summary>descriptor for IndicesExistsType <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</pre></summary>
 	public partial class TypeExistsDescriptor  : RequestDescriptorBase<TypeExistsDescriptor,TypeExistsRequestParameters, ITypeExistsRequest>, ITypeExistsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		///<param name="type"> this parameter is required</param>
-		public TypeExistsDescriptor(Indices index, Types type) : base(r=>r.Required("index", index).Required("type", type)){}
+		///<summary>/{index}/_mapping/{type}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="type">this parameter is required</param>
+		public TypeExistsDescriptor(Indices index, Types type) : base(r => r.Required("index", index).Required("type", type)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal TypeExistsDescriptor() : base(){}
 		// values part of the url path
 		Indices ITypeExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ITypeExistsRequest.Type => Self.RouteValues.Get<Types>("type");
@@ -1859,11 +1909,11 @@ namespace Nest
 	///<summary>descriptor for IndicesFlushForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</pre></summary>
 	public partial class FlushDescriptor  : RequestDescriptorBase<FlushDescriptor,FlushRequestParameters, IFlushRequest>, IFlushRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_flush</summary>
 		public FlushDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public FlushDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/{index}/_flush</summary>
+		///<param name="index">Optional, accepts null</param>
+		public FlushDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices IFlushRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -1892,11 +1942,11 @@ namespace Nest
 	///<summary>descriptor for IndicesFlushSyncedForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</pre></summary>
 	public partial class SyncedFlushDescriptor  : RequestDescriptorBase<SyncedFlushDescriptor,SyncedFlushRequestParameters, ISyncedFlushRequest>, ISyncedFlushRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_flush/synced</summary>
 		public SyncedFlushDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public SyncedFlushDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/{index}/_flush/synced</summary>
+		///<param name="index">Optional, accepts null</param>
+		public SyncedFlushDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices ISyncedFlushRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -1921,11 +1971,11 @@ namespace Nest
 	///<summary>descriptor for IndicesForcemergeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html</pre></summary>
 	public partial class ForceMergeDescriptor  : RequestDescriptorBase<ForceMergeDescriptor,ForceMergeRequestParameters, IForceMergeRequest>, IForceMergeRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_forcemerge</summary>
 		public ForceMergeDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public ForceMergeDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/{index}/_forcemerge</summary>
+		///<param name="index">Optional, accepts null</param>
+		public ForceMergeDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices IForceMergeRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -1956,9 +2006,11 @@ namespace Nest
 	///<summary>descriptor for IndicesGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</pre></summary>
 	public partial class GetIndexDescriptor  : RequestDescriptorBase<GetIndexDescriptor,GetIndexRequestParameters, IGetIndexRequest>, IGetIndexRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public GetIndexDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+		///<summary>/{index}</summary>
+		///<param name="index">this parameter is required</param>
+		public GetIndexDescriptor(Indices index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetIndexDescriptor() : base(){}
 		// values part of the url path
 		Indices IGetIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -1993,18 +2045,18 @@ namespace Nest
 	///<summary>descriptor for IndicesGetAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class GetAliasDescriptor  : RequestDescriptorBase<GetAliasDescriptor,GetAliasRequestParameters, IGetAliasRequest>, IGetAliasRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_alias</summary>
 		public GetAliasDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="name"> this parameter is required</param>
-		public GetAliasDescriptor(Names name) : base(r=>r.Optional("name", name)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		///<param name="name"> this parameter is required</param>
-		public GetAliasDescriptor(Indices index, Names name) : base(r=>r.Optional("index", index).Optional("name", name)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public GetAliasDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/_alias/{name}</summary>
+		///<param name="name">Optional, accepts null</param>
+		public GetAliasDescriptor(Names name) : base(r => r.Optional("name", name)){}
+		///<summary>/{index}/_alias/{name}</summary>
+		///<param name="index">Optional, accepts null</param>
+		///<param name="name">Optional, accepts null</param>
+		public GetAliasDescriptor(Indices index, Names name) : base(r => r.Optional("index", index).Optional("name", name)){}
+		///<summary>/{index}/_alias</summary>
+		///<param name="index">Optional, accepts null</param>
+		public GetAliasDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Names IGetAliasRequest.Name => Self.RouteValues.Get<Names>("name");
 		Indices IGetAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2035,13 +2087,15 @@ namespace Nest
 	///<summary>descriptor for IndicesGetFieldMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</pre></summary>
 	public partial class GetFieldMappingDescriptor<T>  : RequestDescriptorBase<GetFieldMappingDescriptor<T>,GetFieldMappingRequestParameters, IGetFieldMappingRequest>, IGetFieldMappingRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="fields"> this parameter is required</param>
-		public GetFieldMappingDescriptor(Fields fields) : base(r=>r.Required("fields", fields)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		///<param name="fields"> this parameter is required</param>
-		public GetFieldMappingDescriptor(Indices index, Fields fields) : base(r=>r.Optional("index", index).Required("fields", fields)){}
+		///<summary>/{index}/_mapping/field/{fields}</summary>
+		///<param name="fields">this parameter is required</param>
+		public GetFieldMappingDescriptor(Fields fields) : this(typeof(T), fields){}
+		///<summary>/{index}/_mapping/field/{fields}</summary>
+		///<param name="index">Optional, accepts null</param>
+		///<param name="fields">this parameter is required</param>
+		public GetFieldMappingDescriptor(Indices index, Fields fields) : base(r => r.Optional("index", index).Required("fields", fields)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetFieldMappingDescriptor() : base(){}
 		// values part of the url path
 		Fields IGetFieldMappingRequest.Fields => Self.RouteValues.Get<Fields>("fields");
 		Indices IGetFieldMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2073,11 +2127,11 @@ namespace Nest
 	///<summary>descriptor for IndicesGetMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</pre></summary>
 	public partial class GetMappingDescriptor<T>  : RequestDescriptorBase<GetMappingDescriptor<T>,GetMappingRequestParameters, IGetMappingRequest>, IGetMappingRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		public GetMappingDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public GetMappingDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/{index}/_mapping</summary>
+		public GetMappingDescriptor() : this(typeof(T)){}
+		///<summary>/{index}/_mapping</summary>
+		///<param name="index">Optional, accepts null</param>
+		public GetMappingDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices IGetMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -2108,18 +2162,18 @@ namespace Nest
 	///<summary>descriptor for IndicesGetSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</pre></summary>
 	public partial class GetIndexSettingsDescriptor  : RequestDescriptorBase<GetIndexSettingsDescriptor,GetIndexSettingsRequestParameters, IGetIndexSettingsRequest>, IGetIndexSettingsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_settings</summary>
 		public GetIndexSettingsDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public GetIndexSettingsDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		///<param name="name"> this parameter is required</param>
-		public GetIndexSettingsDescriptor(Indices index, Names name) : base(r=>r.Optional("index", index).Optional("name", name)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="name"> this parameter is required</param>
-		public GetIndexSettingsDescriptor(Names name) : base(r=>r.Optional("name", name)){}
+		///<summary>/{index}/_settings</summary>
+		///<param name="index">Optional, accepts null</param>
+		public GetIndexSettingsDescriptor(Indices index) : base(r => r.Optional("index", index)){}
+		///<summary>/{index}/_settings/{name}</summary>
+		///<param name="index">Optional, accepts null</param>
+		///<param name="name">Optional, accepts null</param>
+		public GetIndexSettingsDescriptor(Indices index, Names name) : base(r => r.Optional("index", index).Optional("name", name)){}
+		///<summary>/_settings/{name}</summary>
+		///<param name="name">Optional, accepts null</param>
+		public GetIndexSettingsDescriptor(Names name) : base(r => r.Optional("name", name)){}
 		// values part of the url path
 		Indices IGetIndexSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Names IGetIndexSettingsRequest.Name => Self.RouteValues.Get<Names>("name");
@@ -2156,11 +2210,11 @@ namespace Nest
 	///<summary>descriptor for IndicesGetTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class GetIndexTemplateDescriptor  : RequestDescriptorBase<GetIndexTemplateDescriptor,GetIndexTemplateRequestParameters, IGetIndexTemplateRequest>, IGetIndexTemplateRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_template</summary>
 		public GetIndexTemplateDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="name"> this parameter is required</param>
-		public GetIndexTemplateDescriptor(Names name) : base(r=>r.Optional("name", name)){}
+		///<summary>/_template/{name}</summary>
+		///<param name="name">Optional, accepts null</param>
+		public GetIndexTemplateDescriptor(Names name) : base(r => r.Optional("name", name)){}
 		// values part of the url path
 		Names IGetIndexTemplateRequest.Name => Self.RouteValues.Get<Names>("name");
 
@@ -2181,11 +2235,11 @@ namespace Nest
 	///<summary>descriptor for IndicesGetUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
 	public partial class UpgradeStatusDescriptor  : RequestDescriptorBase<UpgradeStatusDescriptor,UpgradeStatusRequestParameters, IUpgradeStatusRequest>, IUpgradeStatusRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_upgrade</summary>
 		public UpgradeStatusDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public UpgradeStatusDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/{index}/_upgrade</summary>
+		///<param name="index">Optional, accepts null</param>
+		public UpgradeStatusDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices IUpgradeStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -2210,9 +2264,11 @@ namespace Nest
 	///<summary>descriptor for IndicesOpen <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 	public partial class OpenIndexDescriptor  : RequestDescriptorBase<OpenIndexDescriptor,OpenIndexRequestParameters, IOpenIndexRequest>, IOpenIndexRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public OpenIndexDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+		///<summary>/{index}/_open</summary>
+		///<param name="index">this parameter is required</param>
+		public OpenIndexDescriptor(Indices index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal OpenIndexDescriptor() : base(){}
 		// values part of the url path
 		Indices IOpenIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -2243,10 +2299,12 @@ namespace Nest
 	///<summary>descriptor for IndicesPutAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class PutAliasDescriptor  : RequestDescriptorBase<PutAliasDescriptor,PutAliasRequestParameters, IPutAliasRequest>, IPutAliasRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		///<param name="name"> this parameter is required</param>
-		public PutAliasDescriptor(Indices index, Name name) : base(r=>r.Required("index", index).Required("name", name)){}
+		///<summary>/{index}/_aliases/{name}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="name">this parameter is required</param>
+		public PutAliasDescriptor(Indices index, Name name) : base(r => r.Required("index", index).Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PutAliasDescriptor() : base(){}
 		// values part of the url path
 		Indices IPutAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Name IPutAliasRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -2270,9 +2328,11 @@ namespace Nest
 	///<summary>descriptor for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
 	public partial class PutMappingDescriptor<T>  : RequestDescriptorBase<PutMappingDescriptor<T>,PutMappingRequestParameters, IPutMappingRequest<T>>, IPutMappingRequest<T>
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public PutMappingDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+		///<summary>/{index}/_mapping</summary>
+		///<param name="index">this parameter is required</param>
+		public PutMappingDescriptor(Indices index) : base(r => r.Required("index", index)){}
+		///<summary>/{index}/_mapping</summary>
+		public PutMappingDescriptor() : this(typeof(T)){}
 		// values part of the url path
 		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -2303,11 +2363,11 @@ namespace Nest
 	///<summary>descriptor for IndicesPutSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</pre></summary>
 	public partial class UpdateIndexSettingsDescriptor  : RequestDescriptorBase<UpdateIndexSettingsDescriptor,UpdateIndexSettingsRequestParameters, IUpdateIndexSettingsRequest>, IUpdateIndexSettingsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_settings</summary>
 		public UpdateIndexSettingsDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public UpdateIndexSettingsDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/{index}/_settings</summary>
+		///<param name="index">Optional, accepts null</param>
+		public UpdateIndexSettingsDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices IUpdateIndexSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -2340,9 +2400,11 @@ namespace Nest
 	///<summary>descriptor for IndicesPutTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class PutIndexTemplateDescriptor  : RequestDescriptorBase<PutIndexTemplateDescriptor,PutIndexTemplateRequestParameters, IPutIndexTemplateRequest>, IPutIndexTemplateRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="name"> this parameter is required</param>
-		public PutIndexTemplateDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		///<summary>/_template/{name}</summary>
+		///<param name="name">this parameter is required</param>
+		public PutIndexTemplateDescriptor(Name name) : base(r => r.Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PutIndexTemplateDescriptor() : base(){}
 		// values part of the url path
 		Name IPutIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
 
@@ -2362,11 +2424,11 @@ namespace Nest
 	///<summary>descriptor for IndicesRecoveryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</pre></summary>
 	public partial class RecoveryStatusDescriptor  : RequestDescriptorBase<RecoveryStatusDescriptor,RecoveryStatusRequestParameters, IRecoveryStatusRequest>, IRecoveryStatusRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_recovery</summary>
 		public RecoveryStatusDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public RecoveryStatusDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/{index}/_recovery</summary>
+		///<param name="index">Optional, accepts null</param>
+		public RecoveryStatusDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices IRecoveryStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -2389,11 +2451,11 @@ namespace Nest
 	///<summary>descriptor for IndicesRefreshForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html</pre></summary>
 	public partial class RefreshDescriptor  : RequestDescriptorBase<RefreshDescriptor,RefreshRequestParameters, IRefreshRequest>, IRefreshRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_refresh</summary>
 		public RefreshDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public RefreshDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/{index}/_refresh</summary>
+		///<param name="index">Optional, accepts null</param>
+		public RefreshDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices IRefreshRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -2418,13 +2480,15 @@ namespace Nest
 	///<summary>descriptor for IndicesRolloverForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</pre></summary>
 	public partial class RolloverIndexDescriptor  : RequestDescriptorBase<RolloverIndexDescriptor,RolloverIndexRequestParameters, IRolloverIndexRequest>, IRolloverIndexRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="alias"> this parameter is required</param>
-		public RolloverIndexDescriptor(Name alias) : base(r=>r.Required("alias", alias)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="alias"> this parameter is required</param>
-		///<param name="new_index"> this parameter is required</param>
-		public RolloverIndexDescriptor(Name alias, IndexName new_index) : base(r=>r.Required("alias", alias).Optional("new_index", new_index)){}
+		///<summary>/{alias}/_rollover</summary>
+		///<param name="alias">this parameter is required</param>
+		public RolloverIndexDescriptor(Name alias) : base(r => r.Required("alias", alias)){}
+		///<summary>/{alias}/_rollover/{new_index}</summary>
+		///<param name="alias">this parameter is required</param>
+		///<param name="new_index">Optional, accepts null</param>
+		public RolloverIndexDescriptor(Name alias, IndexName new_index) : base(r => r.Required("alias", alias).Optional("new_index", new_index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal RolloverIndexDescriptor() : base(){}
 		// values part of the url path
 		Name IRolloverIndexRequest.Alias => Self.RouteValues.Get<Name>("alias");
 		IndexName IRolloverIndexRequest.NewIndex => Self.RouteValues.Get<IndexName>("new_index");
@@ -2448,11 +2512,11 @@ namespace Nest
 	///<summary>descriptor for IndicesSegmentsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html</pre></summary>
 	public partial class SegmentsDescriptor  : RequestDescriptorBase<SegmentsDescriptor,SegmentsRequestParameters, ISegmentsRequest>, ISegmentsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_segments</summary>
 		public SegmentsDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public SegmentsDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/{index}/_segments</summary>
+		///<param name="index">Optional, accepts null</param>
+		public SegmentsDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices ISegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -2479,11 +2543,11 @@ namespace Nest
 	///<summary>descriptor for IndicesShardStoresForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</pre></summary>
 	public partial class IndicesShardStoresDescriptor  : RequestDescriptorBase<IndicesShardStoresDescriptor,IndicesShardStoresRequestParameters, IIndicesShardStoresRequest>, IIndicesShardStoresRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_shard_stores</summary>
 		public IndicesShardStoresDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public IndicesShardStoresDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/{index}/_shard_stores</summary>
+		///<param name="index">Optional, accepts null</param>
+		public IndicesShardStoresDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices IIndicesShardStoresRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -2510,10 +2574,12 @@ namespace Nest
 	///<summary>descriptor for IndicesShrink <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html</pre></summary>
 	public partial class ShrinkIndexDescriptor  : RequestDescriptorBase<ShrinkIndexDescriptor,ShrinkIndexRequestParameters, IShrinkIndexRequest>, IShrinkIndexRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		///<param name="target"> this parameter is required</param>
-		public ShrinkIndexDescriptor(IndexName index, IndexName target) : base(r=>r.Required("index", index).Required("target", target)){}
+		///<summary>/{index}/_shrink/{target}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="target">this parameter is required</param>
+		public ShrinkIndexDescriptor(IndexName index, IndexName target) : base(r => r.Required("index", index).Required("target", target)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal ShrinkIndexDescriptor() : base(){}
 		// values part of the url path
 		IndexName IShrinkIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		IndexName IShrinkIndexRequest.Target => Self.RouteValues.Get<IndexName>("target");
@@ -2539,10 +2605,12 @@ namespace Nest
 	///<summary>descriptor for IndicesSplit <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</pre></summary>
 	public partial class SplitIndexDescriptor  : RequestDescriptorBase<SplitIndexDescriptor,SplitIndexRequestParameters, ISplitIndexRequest>, ISplitIndexRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		///<param name="target"> this parameter is required</param>
-		public SplitIndexDescriptor(IndexName index, IndexName target) : base(r=>r.Required("index", index).Required("target", target)){}
+		///<summary>/{index}/_split/{target}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="target">this parameter is required</param>
+		public SplitIndexDescriptor(IndexName index, IndexName target) : base(r => r.Required("index", index).Required("target", target)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal SplitIndexDescriptor() : base(){}
 		// values part of the url path
 		IndexName ISplitIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		IndexName ISplitIndexRequest.Target => Self.RouteValues.Get<IndexName>("target");
@@ -2568,18 +2636,18 @@ namespace Nest
 	///<summary>descriptor for IndicesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</pre></summary>
 	public partial class IndicesStatsDescriptor  : RequestDescriptorBase<IndicesStatsDescriptor,IndicesStatsRequestParameters, IIndicesStatsRequest>, IIndicesStatsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_stats</summary>
 		public IndicesStatsDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="metric"> this parameter is required</param>
-		public IndicesStatsDescriptor(Metrics metric) : base(r=>r.Optional("metric", (Metrics)metric)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public IndicesStatsDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		///<param name="metric"> this parameter is required</param>
-		public IndicesStatsDescriptor(Indices index, Metrics metric) : base(r=>r.Optional("index", index).Optional("metric", (Metrics)metric)){}
+		///<summary>/_stats/{metric}</summary>
+		///<param name="metric">Optional, accepts null</param>
+		public IndicesStatsDescriptor(Metrics metric) : base(r => r.Optional("metric", metric)){}
+		///<summary>/{index}/_stats</summary>
+		///<param name="index">Optional, accepts null</param>
+		public IndicesStatsDescriptor(Indices index) : base(r => r.Optional("index", index)){}
+		///<summary>/{index}/_stats/{metric}</summary>
+		///<param name="index">Optional, accepts null</param>
+		///<param name="metric">Optional, accepts null</param>
+		public IndicesStatsDescriptor(Indices index, Metrics metric) : base(r => r.Optional("index", index).Optional("metric", metric)){}
 		// values part of the url path
 		Metrics IIndicesStatsRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 		Indices IIndicesStatsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2635,11 +2703,11 @@ namespace Nest
 	///<summary>descriptor for IndicesUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
 	public partial class UpgradeDescriptor  : RequestDescriptorBase<UpgradeDescriptor,UpgradeRequestParameters, IUpgradeRequest>, IUpgradeRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_upgrade</summary>
 		public UpgradeDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public UpgradeDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/{index}/_upgrade</summary>
+		///<param name="index">Optional, accepts null</param>
+		public UpgradeDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices IUpgradeRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -2668,11 +2736,11 @@ namespace Nest
 	///<summary>descriptor for IndicesValidateQueryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
 	public partial class ValidateQueryDescriptor<T>  : RequestDescriptorBase<ValidateQueryDescriptor<T>,ValidateQueryRequestParameters, IValidateQueryRequest<T>>, IValidateQueryRequest<T>
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		public ValidateQueryDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public ValidateQueryDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/{index}/_validate/query</summary>
+		public ValidateQueryDescriptor() : this(typeof(T)){}
+		///<summary>/{index}/_validate/query</summary>
+		///<param name="index">Optional, accepts null</param>
+		public ValidateQueryDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices IValidateQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -2723,9 +2791,11 @@ namespace Nest
 	///<summary>descriptor for IngestDeletePipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class DeletePipelineDescriptor  : RequestDescriptorBase<DeletePipelineDescriptor,DeletePipelineRequestParameters, IDeletePipelineRequest>, IDeletePipelineRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="id"> this parameter is required</param>
-		public DeletePipelineDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		///<summary>/_ingest/pipeline/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public DeletePipelineDescriptor(Id id) : base(r => r.Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeletePipelineDescriptor() : base(){}
 		// values part of the url path
 		Id IDeletePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
 
@@ -2739,11 +2809,11 @@ namespace Nest
 	///<summary>descriptor for IngestGetPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class GetPipelineDescriptor  : RequestDescriptorBase<GetPipelineDescriptor,GetPipelineRequestParameters, IGetPipelineRequest>, IGetPipelineRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_ingest/pipeline</summary>
 		public GetPipelineDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="id"> this parameter is required</param>
-		public GetPipelineDescriptor(Id id) : base(r=>r.Optional("id", id)){}
+		///<summary>/_ingest/pipeline/{id}</summary>
+		///<param name="id">Optional, accepts null</param>
+		public GetPipelineDescriptor(Id id) : base(r => r.Optional("id", id)){}
 		// values part of the url path
 		Id IGetPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
 
@@ -2766,9 +2836,11 @@ namespace Nest
 	///<summary>descriptor for IngestPutPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class PutPipelineDescriptor  : RequestDescriptorBase<PutPipelineDescriptor,PutPipelineRequestParameters, IPutPipelineRequest>, IPutPipelineRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="id"> this parameter is required</param>
-		public PutPipelineDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		///<summary>/_ingest/pipeline/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public PutPipelineDescriptor(Id id) : base(r => r.Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PutPipelineDescriptor() : base(){}
 		// values part of the url path
 		Id IPutPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
 
@@ -2782,11 +2854,11 @@ namespace Nest
 	///<summary>descriptor for IngestSimulate <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class SimulatePipelineDescriptor  : RequestDescriptorBase<SimulatePipelineDescriptor,SimulatePipelineRequestParameters, ISimulatePipelineRequest>, ISimulatePipelineRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_ingest/pipeline/_simulate</summary>
 		public SimulatePipelineDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="id"> this parameter is required</param>
-		public SimulatePipelineDescriptor(Id id) : base(r=>r.Optional("id", id)){}
+		///<summary>/_ingest/pipeline/{id}/_simulate</summary>
+		///<param name="id">Optional, accepts null</param>
+		public SimulatePipelineDescriptor(Id id) : base(r => r.Optional("id", id)){}
 		// values part of the url path
 		Id ISimulatePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
 
@@ -2801,11 +2873,11 @@ namespace Nest
 	///<summary>descriptor for Mget <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</pre></summary>
 	public partial class MultiGetDescriptor  : RequestDescriptorBase<MultiGetDescriptor,MultiGetRequestParameters, IMultiGetRequest>, IMultiGetRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_mget</summary>
 		public MultiGetDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public MultiGetDescriptor(IndexName index) : base(r=>r.Optional("index", index)){}
+		///<summary>/{index}/_mget</summary>
+		///<param name="index">Optional, accepts null</param>
+		public MultiGetDescriptor(IndexName index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		IndexName IMultiGetRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
@@ -2816,11 +2888,6 @@ namespace Nest
 		public MultiGetDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
 
 		// Request parameters
-
-		///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public MultiGetDescriptor StoredFields(Fields storedFields) => Qs("stored_fields", storedFields);
-		///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public MultiGetDescriptor StoredFields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("stored_fields", fields?.Select(e=>(Field)e));
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public MultiGetDescriptor Preference(string preference) => Qs("preference", preference);
@@ -2852,11 +2919,11 @@ namespace Nest
 	///<summary>descriptor for Msearch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</pre></summary>
 	public partial class MultiSearchDescriptor  : RequestDescriptorBase<MultiSearchDescriptor,MultiSearchRequestParameters, IMultiSearchRequest>, IMultiSearchRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_msearch</summary>
 		public MultiSearchDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public MultiSearchDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/{index}/_msearch</summary>
+		///<param name="index">Optional, accepts null</param>
+		public MultiSearchDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices IMultiSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -2889,11 +2956,11 @@ namespace Nest
 	///<summary>descriptor for MsearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html</pre></summary>
 	public partial class MultiSearchTemplateDescriptor  : RequestDescriptorBase<MultiSearchTemplateDescriptor,MultiSearchTemplateRequestParameters, IMultiSearchTemplateRequest>, IMultiSearchTemplateRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_msearch/template</summary>
 		public MultiSearchTemplateDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public MultiSearchTemplateDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/{index}/_msearch/template</summary>
+		///<param name="index">Optional, accepts null</param>
+		public MultiSearchTemplateDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices IMultiSearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -2922,11 +2989,11 @@ namespace Nest
 	///<summary>descriptor for Mtermvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</pre></summary>
 	public partial class MultiTermVectorsDescriptor  : RequestDescriptorBase<MultiTermVectorsDescriptor,MultiTermVectorsRequestParameters, IMultiTermVectorsRequest>, IMultiTermVectorsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_mtermvectors</summary>
 		public MultiTermVectorsDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public MultiTermVectorsDescriptor(IndexName index) : base(r=>r.Optional("index", index)){}
+		///<summary>/{index}/_mtermvectors</summary>
+		///<param name="index">Optional, accepts null</param>
+		public MultiTermVectorsDescriptor(IndexName index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		IndexName IMultiTermVectorsRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
@@ -2976,11 +3043,11 @@ namespace Nest
 	///<summary>descriptor for NodesHotThreadsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</pre></summary>
 	public partial class NodesHotThreadsDescriptor  : RequestDescriptorBase<NodesHotThreadsDescriptor,NodesHotThreadsRequestParameters, INodesHotThreadsRequest>, INodesHotThreadsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_nodes/hot_threads</summary>
 		public NodesHotThreadsDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="node_id"> this parameter is required</param>
-		public NodesHotThreadsDescriptor(NodeIds node_id) : base(r=>r.Optional("node_id", node_id)){}
+		///<summary>/_nodes/{node_id}/hot_threads</summary>
+		///<param name="node_id">Optional, accepts null</param>
+		public NodesHotThreadsDescriptor(NodeIds node_id) : base(r => r.Optional("node_id", node_id)){}
 		// values part of the url path
 		NodeIds INodesHotThreadsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 
@@ -3005,18 +3072,18 @@ namespace Nest
 	///<summary>descriptor for NodesInfoForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</pre></summary>
 	public partial class NodesInfoDescriptor  : RequestDescriptorBase<NodesInfoDescriptor,NodesInfoRequestParameters, INodesInfoRequest>, INodesInfoRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_nodes</summary>
 		public NodesInfoDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="node_id"> this parameter is required</param>
-		public NodesInfoDescriptor(NodeIds node_id) : base(r=>r.Optional("node_id", node_id)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="metric"> this parameter is required</param>
-		public NodesInfoDescriptor(Metrics metric) : base(r=>r.Optional("metric", (Metrics)metric)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="node_id"> this parameter is required</param>
-		///<param name="metric"> this parameter is required</param>
-		public NodesInfoDescriptor(NodeIds node_id, Metrics metric) : base(r=>r.Optional("node_id", node_id).Optional("metric", (Metrics)metric)){}
+		///<summary>/_nodes/{node_id}</summary>
+		///<param name="node_id">Optional, accepts null</param>
+		public NodesInfoDescriptor(NodeIds node_id) : base(r => r.Optional("node_id", node_id)){}
+		///<summary>/_nodes/{metric}</summary>
+		///<param name="metric">Optional, accepts null</param>
+		public NodesInfoDescriptor(Metrics metric) : base(r => r.Optional("metric", metric)){}
+		///<summary>/_nodes/{node_id}/{metric}</summary>
+		///<param name="node_id">Optional, accepts null</param>
+		///<param name="metric">Optional, accepts null</param>
+		public NodesInfoDescriptor(NodeIds node_id, Metrics metric) : base(r => r.Optional("node_id", node_id).Optional("metric", metric)){}
 		// values part of the url path
 		NodeIds INodesInfoRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 		Metrics INodesInfoRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
@@ -3037,11 +3104,11 @@ namespace Nest
 	///<summary>descriptor for NodesReloadSecureSettingsForAll <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings</pre></summary>
 	public partial class ReloadSecureSettingsDescriptor  : RequestDescriptorBase<ReloadSecureSettingsDescriptor,ReloadSecureSettingsRequestParameters, IReloadSecureSettingsRequest>, IReloadSecureSettingsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_nodes/reload_secure_settings</summary>
 		public ReloadSecureSettingsDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="node_id"> this parameter is required</param>
-		public ReloadSecureSettingsDescriptor(NodeIds node_id) : base(r=>r.Optional("node_id", node_id)){}
+		///<summary>/_nodes/{node_id}/reload_secure_settings</summary>
+		///<param name="node_id">Optional, accepts null</param>
+		public ReloadSecureSettingsDescriptor(NodeIds node_id) : base(r => r.Optional("node_id", node_id)){}
 		// values part of the url path
 		NodeIds IReloadSecureSettingsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 
@@ -3056,27 +3123,27 @@ namespace Nest
 	///<summary>descriptor for NodesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
 	public partial class NodesStatsDescriptor  : RequestDescriptorBase<NodesStatsDescriptor,NodesStatsRequestParameters, INodesStatsRequest>, INodesStatsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_nodes/stats</summary>
 		public NodesStatsDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="node_id"> this parameter is required</param>
-		public NodesStatsDescriptor(NodeIds node_id) : base(r=>r.Optional("node_id", node_id)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="metric"> this parameter is required</param>
-		public NodesStatsDescriptor(Metrics metric) : base(r=>r.Optional("metric", (Metrics)metric)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="node_id"> this parameter is required</param>
-		///<param name="metric"> this parameter is required</param>
-		public NodesStatsDescriptor(NodeIds node_id, Metrics metric) : base(r=>r.Optional("node_id", node_id).Optional("metric", (Metrics)metric)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="metric"> this parameter is required</param>
-		///<param name="index_metric"> this parameter is required</param>
-		public NodesStatsDescriptor(Metrics metric, IndexMetrics index_metric) : base(r=>r.Optional("metric", (Metrics)metric).Optional("index_metric", (IndexMetrics)index_metric)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="node_id"> this parameter is required</param>
-		///<param name="metric"> this parameter is required</param>
-		///<param name="index_metric"> this parameter is required</param>
-		public NodesStatsDescriptor(NodeIds node_id, Metrics metric, IndexMetrics index_metric) : base(r=>r.Optional("node_id", node_id).Optional("metric", (Metrics)metric).Optional("index_metric", (IndexMetrics)index_metric)){}
+		///<summary>/_nodes/{node_id}/stats</summary>
+		///<param name="node_id">Optional, accepts null</param>
+		public NodesStatsDescriptor(NodeIds node_id) : base(r => r.Optional("node_id", node_id)){}
+		///<summary>/_nodes/stats/{metric}</summary>
+		///<param name="metric">Optional, accepts null</param>
+		public NodesStatsDescriptor(Metrics metric) : base(r => r.Optional("metric", metric)){}
+		///<summary>/_nodes/{node_id}/stats/{metric}</summary>
+		///<param name="node_id">Optional, accepts null</param>
+		///<param name="metric">Optional, accepts null</param>
+		public NodesStatsDescriptor(NodeIds node_id, Metrics metric) : base(r => r.Optional("node_id", node_id).Optional("metric", metric)){}
+		///<summary>/_nodes/stats/{metric}/{index_metric}</summary>
+		///<param name="metric">Optional, accepts null</param>
+		///<param name="index_metric">Optional, accepts null</param>
+		public NodesStatsDescriptor(Metrics metric, IndexMetrics index_metric) : base(r => r.Optional("metric", metric).Optional("index_metric", index_metric)){}
+		///<summary>/_nodes/{node_id}/stats/{metric}/{index_metric}</summary>
+		///<param name="node_id">Optional, accepts null</param>
+		///<param name="metric">Optional, accepts null</param>
+		///<param name="index_metric">Optional, accepts null</param>
+		public NodesStatsDescriptor(NodeIds node_id, Metrics metric, IndexMetrics index_metric) : base(r => r.Optional("node_id", node_id).Optional("metric", metric).Optional("index_metric", index_metric)){}
 		// values part of the url path
 		NodeIds INodesStatsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 		Metrics INodesStatsRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
@@ -3122,18 +3189,18 @@ namespace Nest
 	///<summary>descriptor for NodesUsageForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</pre></summary>
 	public partial class NodesUsageDescriptor  : RequestDescriptorBase<NodesUsageDescriptor,NodesUsageRequestParameters, INodesUsageRequest>, INodesUsageRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_nodes/usage</summary>
 		public NodesUsageDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="node_id"> this parameter is required</param>
-		public NodesUsageDescriptor(NodeIds node_id) : base(r=>r.Optional("node_id", node_id)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="metric"> this parameter is required</param>
-		public NodesUsageDescriptor(Metrics metric) : base(r=>r.Optional("metric", (Metrics)metric)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="node_id"> this parameter is required</param>
-		///<param name="metric"> this parameter is required</param>
-		public NodesUsageDescriptor(NodeIds node_id, Metrics metric) : base(r=>r.Optional("node_id", node_id).Optional("metric", (Metrics)metric)){}
+		///<summary>/_nodes/{node_id}/usage</summary>
+		///<param name="node_id">Optional, accepts null</param>
+		public NodesUsageDescriptor(NodeIds node_id) : base(r => r.Optional("node_id", node_id)){}
+		///<summary>/_nodes/usage/{metric}</summary>
+		///<param name="metric">Optional, accepts null</param>
+		public NodesUsageDescriptor(Metrics metric) : base(r => r.Optional("metric", metric)){}
+		///<summary>/_nodes/{node_id}/usage/{metric}</summary>
+		///<param name="node_id">Optional, accepts null</param>
+		///<param name="metric">Optional, accepts null</param>
+		public NodesUsageDescriptor(NodeIds node_id, Metrics metric) : base(r => r.Optional("node_id", node_id).Optional("metric", metric)){}
 		// values part of the url path
 		NodeIds INodesUsageRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 		Metrics INodesUsageRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
@@ -3160,13 +3227,15 @@ namespace Nest
 	///<summary>descriptor for PutScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class PutScriptDescriptor  : RequestDescriptorBase<PutScriptDescriptor,PutScriptRequestParameters, IPutScriptRequest>, IPutScriptRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="id"> this parameter is required</param>
-		public PutScriptDescriptor(Id id) : base(r=>r.Required("id", id)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="id"> this parameter is required</param>
-		///<param name="context"> this parameter is required</param>
-		public PutScriptDescriptor(Id id, Name context) : base(r=>r.Required("id", id).Optional("context", context)){}
+		///<summary>/_scripts/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public PutScriptDescriptor(Id id) : base(r => r.Required("id", id)){}
+		///<summary>/_scripts/{id}/{context}</summary>
+		///<param name="id">this parameter is required</param>
+		///<param name="context">Optional, accepts null</param>
+		public PutScriptDescriptor(Id id, Name context) : base(r => r.Required("id", id).Optional("context", context)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PutScriptDescriptor() : base(){}
 		// values part of the url path
 		Id IPutScriptRequest.Id => Self.RouteValues.Get<Id>("id");
 		Name IPutScriptRequest.Context => Self.RouteValues.Get<Name>("context");
@@ -3206,9 +3275,11 @@ namespace Nest
 	///<summary>descriptor for ReindexRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>
 	public partial class ReindexRethrottleDescriptor  : RequestDescriptorBase<ReindexRethrottleDescriptor,ReindexRethrottleRequestParameters, IReindexRethrottleRequest>, IReindexRethrottleRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="task_id"> this parameter is required</param>
-		public ReindexRethrottleDescriptor(TaskId task_id) : base(r=>r.Required("task_id", task_id)){}
+		///<summary>/_reindex/{task_id}/_rethrottle</summary>
+		///<param name="task_id">this parameter is required</param>
+		public ReindexRethrottleDescriptor(TaskId task_id) : base(r => r.Required("task_id", task_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal ReindexRethrottleDescriptor() : base(){}
 		// values part of the url path
 		TaskId IReindexRethrottleRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
 
@@ -3220,11 +3291,11 @@ namespace Nest
 	///<summary>descriptor for RenderSearchTemplate <pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
 	public partial class RenderSearchTemplateDescriptor  : RequestDescriptorBase<RenderSearchTemplateDescriptor,RenderSearchTemplateRequestParameters, IRenderSearchTemplateRequest>, IRenderSearchTemplateRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_render/template</summary>
 		public RenderSearchTemplateDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="id"> this parameter is required</param>
-		public RenderSearchTemplateDescriptor(Id id) : base(r=>r.Optional("id", id)){}
+		///<summary>/_render/template/{id}</summary>
+		///<param name="id">Optional, accepts null</param>
+		public RenderSearchTemplateDescriptor(Id id) : base(r => r.Optional("id", id)){}
 		// values part of the url path
 		Id IRenderSearchTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
 
@@ -3255,11 +3326,11 @@ namespace Nest
 	///<summary>descriptor for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
 	public partial class SearchDescriptor<T>  : RequestDescriptorBase<SearchDescriptor<T>,SearchRequestParameters, ISearchRequest<T>>, ISearchRequest<T>
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		public SearchDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public SearchDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/{index}/_search</summary>
+		public SearchDescriptor() : this(typeof(T)){}
+		///<summary>/{index}/_search</summary>
+		///<param name="index">Optional, accepts null</param>
+		public SearchDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices ISearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -3284,16 +3355,6 @@ namespace Nest
 		public SearchDescriptor<T> DefaultOperator(DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public SearchDescriptor<T> Df(string df) => Qs("df", df);
-		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		public SearchDescriptor<T> StoredFields(Fields storedFields) => Qs("stored_fields", storedFields);
-		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		public SearchDescriptor<T> StoredFields(params Expression<Func<T, object>>[] fields)  => Qs("stored_fields", fields?.Select(e=>(Field)e));
-
-		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public SearchDescriptor<T> DocValueFields(Fields docValueFields) => Qs("docvalue_fields", docValueFields);
-		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public SearchDescriptor<T> DocValueFields(params Expression<Func<T, object>>[] fields)  => Qs("docvalue_fields", fields?.Select(e=>(Field)e));
-
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SearchDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
@@ -3352,11 +3413,11 @@ namespace Nest
 	///<summary>descriptor for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
 	public partial class SearchShardsDescriptor<T>  : RequestDescriptorBase<SearchShardsDescriptor<T>,SearchShardsRequestParameters, ISearchShardsRequest<T>>, ISearchShardsRequest<T>
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath. Will infer the index from the generic type</summary>
-		public SearchShardsDescriptor() : base(r => r.Optional("index", (Indices)typeof(T))){}
-		/// <summary>ApiGenerator.Domain.ApiPath. Will infer the index from the generic type</summary>
-		///<param name="index"> this parameter is required</param>
-		public SearchShardsDescriptor(Indices index) : base(r => r.Optional("index", (Indices)typeof(T))){}
+		///<summary>/{index}/_search_shards</summary>
+		public SearchShardsDescriptor() : this(typeof(T)){}
+		///<summary>/{index}/_search_shards</summary>
+		///<param name="index">Optional, accepts null</param>
+		public SearchShardsDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -3393,11 +3454,11 @@ namespace Nest
 	///<summary>descriptor for SearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
 	public partial class SearchTemplateDescriptor<T>  : RequestDescriptorBase<SearchTemplateDescriptor<T>,SearchTemplateRequestParameters, ISearchTemplateRequest>, ISearchTemplateRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		public SearchTemplateDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public SearchTemplateDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/{index}/_search/template</summary>
+		public SearchTemplateDescriptor() : this(typeof(T)){}
+		///<summary>/{index}/_search/template</summary>
+		///<param name="index">Optional, accepts null</param>
+		public SearchTemplateDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices ISearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -3448,10 +3509,12 @@ namespace Nest
 	///<summary>descriptor for SnapshotCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class SnapshotDescriptor  : RequestDescriptorBase<SnapshotDescriptor,SnapshotRequestParameters, ISnapshotRequest>, ISnapshotRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="repository"> this parameter is required</param>
-		///<param name="snapshot"> this parameter is required</param>
-		public SnapshotDescriptor(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
+		///<summary>/_snapshot/{repository}/{snapshot}</summary>
+		///<param name="repository">this parameter is required</param>
+		///<param name="snapshot">this parameter is required</param>
+		public SnapshotDescriptor(Name repository, Name snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal SnapshotDescriptor() : base(){}
 		// values part of the url path
 		Name ISnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Name ISnapshotRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
@@ -3466,9 +3529,11 @@ namespace Nest
 	///<summary>descriptor for SnapshotCreateRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class CreateRepositoryDescriptor  : RequestDescriptorBase<CreateRepositoryDescriptor,CreateRepositoryRequestParameters, ICreateRepositoryRequest>, ICreateRepositoryRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="repository"> this parameter is required</param>
-		public CreateRepositoryDescriptor(Name repository) : base(r=>r.Required("repository", repository)){}
+		///<summary>/_snapshot/{repository}</summary>
+		///<param name="repository">this parameter is required</param>
+		public CreateRepositoryDescriptor(Name repository) : base(r => r.Required("repository", repository)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal CreateRepositoryDescriptor() : base(){}
 		// values part of the url path
 		Name ICreateRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 
@@ -3484,10 +3549,12 @@ namespace Nest
 	///<summary>descriptor for SnapshotDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class DeleteSnapshotDescriptor  : RequestDescriptorBase<DeleteSnapshotDescriptor,DeleteSnapshotRequestParameters, IDeleteSnapshotRequest>, IDeleteSnapshotRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="repository"> this parameter is required</param>
-		///<param name="snapshot"> this parameter is required</param>
-		public DeleteSnapshotDescriptor(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
+		///<summary>/_snapshot/{repository}/{snapshot}</summary>
+		///<param name="repository">this parameter is required</param>
+		///<param name="snapshot">this parameter is required</param>
+		public DeleteSnapshotDescriptor(Name repository, Name snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteSnapshotDescriptor() : base(){}
 		// values part of the url path
 		Name IDeleteSnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Name IDeleteSnapshotRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
@@ -3500,9 +3567,11 @@ namespace Nest
 	///<summary>descriptor for SnapshotDeleteRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class DeleteRepositoryDescriptor  : RequestDescriptorBase<DeleteRepositoryDescriptor,DeleteRepositoryRequestParameters, IDeleteRepositoryRequest>, IDeleteRepositoryRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="repository"> this parameter is required</param>
-		public DeleteRepositoryDescriptor(Names repository) : base(r=>r.Required("repository", repository)){}
+		///<summary>/_snapshot/{repository}</summary>
+		///<param name="repository">this parameter is required</param>
+		public DeleteRepositoryDescriptor(Names repository) : base(r => r.Required("repository", repository)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteRepositoryDescriptor() : base(){}
 		// values part of the url path
 		Names IDeleteRepositoryRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
 
@@ -3516,10 +3585,12 @@ namespace Nest
 	///<summary>descriptor for SnapshotGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class GetSnapshotDescriptor  : RequestDescriptorBase<GetSnapshotDescriptor,GetSnapshotRequestParameters, IGetSnapshotRequest>, IGetSnapshotRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="repository"> this parameter is required</param>
-		///<param name="snapshot"> this parameter is required</param>
-		public GetSnapshotDescriptor(Name repository, Names snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
+		///<summary>/_snapshot/{repository}/{snapshot}</summary>
+		///<param name="repository">this parameter is required</param>
+		///<param name="snapshot">this parameter is required</param>
+		public GetSnapshotDescriptor(Name repository, Names snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetSnapshotDescriptor() : base(){}
 		// values part of the url path
 		Name IGetSnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Names IGetSnapshotRequest.Snapshot => Self.RouteValues.Get<Names>("snapshot");
@@ -3536,11 +3607,11 @@ namespace Nest
 	///<summary>descriptor for SnapshotGetRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class GetRepositoryDescriptor  : RequestDescriptorBase<GetRepositoryDescriptor,GetRepositoryRequestParameters, IGetRepositoryRequest>, IGetRepositoryRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_snapshot</summary>
 		public GetRepositoryDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="repository"> this parameter is required</param>
-		public GetRepositoryDescriptor(Names repository) : base(r=>r.Optional("repository", repository)){}
+		///<summary>/_snapshot/{repository}</summary>
+		///<param name="repository">Optional, accepts null</param>
+		public GetRepositoryDescriptor(Names repository) : base(r => r.Optional("repository", repository)){}
 		// values part of the url path
 		Names IGetRepositoryRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
 
@@ -3557,10 +3628,12 @@ namespace Nest
 	///<summary>descriptor for SnapshotRestore <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class RestoreDescriptor  : RequestDescriptorBase<RestoreDescriptor,RestoreRequestParameters, IRestoreRequest>, IRestoreRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="repository"> this parameter is required</param>
-		///<param name="snapshot"> this parameter is required</param>
-		public RestoreDescriptor(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
+		///<summary>/_snapshot/{repository}/{snapshot}/_restore</summary>
+		///<param name="repository">this parameter is required</param>
+		///<param name="snapshot">this parameter is required</param>
+		public RestoreDescriptor(Name repository, Name snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal RestoreDescriptor() : base(){}
 		// values part of the url path
 		Name IRestoreRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Name IRestoreRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
@@ -3575,15 +3648,15 @@ namespace Nest
 	///<summary>descriptor for SnapshotStatus <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class SnapshotStatusDescriptor  : RequestDescriptorBase<SnapshotStatusDescriptor,SnapshotStatusRequestParameters, ISnapshotStatusRequest>, ISnapshotStatusRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_snapshot/_status</summary>
 		public SnapshotStatusDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="repository"> this parameter is required</param>
-		public SnapshotStatusDescriptor(Name repository) : base(r=>r.Optional("repository", repository)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="repository"> this parameter is required</param>
-		///<param name="snapshot"> this parameter is required</param>
-		public SnapshotStatusDescriptor(Name repository, Names snapshot) : base(r=>r.Optional("repository", repository).Optional("snapshot", snapshot)){}
+		///<summary>/_snapshot/{repository}/_status</summary>
+		///<param name="repository">Optional, accepts null</param>
+		public SnapshotStatusDescriptor(Name repository) : base(r => r.Optional("repository", repository)){}
+		///<summary>/_snapshot/{repository}/{snapshot}/_status</summary>
+		///<param name="repository">Optional, accepts null</param>
+		///<param name="snapshot">Optional, accepts null</param>
+		public SnapshotStatusDescriptor(Name repository, Names snapshot) : base(r => r.Optional("repository", repository).Optional("snapshot", snapshot)){}
 		// values part of the url path
 		Name ISnapshotStatusRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Names ISnapshotStatusRequest.Snapshot => Self.RouteValues.Get<Names>("snapshot");
@@ -3604,9 +3677,11 @@ namespace Nest
 	///<summary>descriptor for SnapshotVerifyRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class VerifyRepositoryDescriptor  : RequestDescriptorBase<VerifyRepositoryDescriptor,VerifyRepositoryRequestParameters, IVerifyRepositoryRequest>, IVerifyRepositoryRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="repository"> this parameter is required</param>
-		public VerifyRepositoryDescriptor(Name repository) : base(r=>r.Required("repository", repository)){}
+		///<summary>/_snapshot/{repository}/_verify</summary>
+		///<param name="repository">this parameter is required</param>
+		public VerifyRepositoryDescriptor(Name repository) : base(r => r.Required("repository", repository)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal VerifyRepositoryDescriptor() : base(){}
 		// values part of the url path
 		Name IVerifyRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 
@@ -3620,11 +3695,11 @@ namespace Nest
 	///<summary>descriptor for TasksCancel <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class CancelTasksDescriptor  : RequestDescriptorBase<CancelTasksDescriptor,CancelTasksRequestParameters, ICancelTasksRequest>, ICancelTasksRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_tasks/_cancel</summary>
 		public CancelTasksDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="task_id"> this parameter is required</param>
-		public CancelTasksDescriptor(TaskId task_id) : base(r=>r.Optional("task_id", task_id)){}
+		///<summary>/_tasks/{task_id}/_cancel</summary>
+		///<param name="task_id">Optional, accepts null</param>
+		public CancelTasksDescriptor(TaskId task_id) : base(r => r.Optional("task_id", task_id)){}
 		// values part of the url path
 		TaskId ICancelTasksRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
 
@@ -3643,9 +3718,11 @@ namespace Nest
 	///<summary>descriptor for TasksGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class GetTaskDescriptor  : RequestDescriptorBase<GetTaskDescriptor,GetTaskRequestParameters, IGetTaskRequest>, IGetTaskRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="task_id"> this parameter is required</param>
-		public GetTaskDescriptor(TaskId task_id) : base(r=>r.Required("task_id", task_id)){}
+		///<summary>/_tasks/{task_id}</summary>
+		///<param name="task_id">this parameter is required</param>
+		public GetTaskDescriptor(TaskId task_id) : base(r => r.Required("task_id", task_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetTaskDescriptor() : base(){}
 		// values part of the url path
 		TaskId IGetTaskRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
 
@@ -3681,19 +3758,22 @@ namespace Nest
 	///<summary>descriptor for Termvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
 	public partial class TermVectorsDescriptor<TDocument>  : RequestDescriptorBase<TermVectorsDescriptor<TDocument>,TermVectorsRequestParameters, ITermVectorsRequest<TDocument>>, ITermVectorsRequest<TDocument>
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		///<param name="id"> this parameter is required</param>
-		public TermVectorsDescriptor(IndexName index, Id id) : base(r=>r.Required("index", index).Optional("id", id))
-		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public TermVectorsDescriptor(IndexName index) : base(r=>r.Required("index", index))
-		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/_termvectors/{id}</summary>
-		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
-		public TermVectorsDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("id", document.Self.Id))
-		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
+		///<summary>/{index}/_termvectors/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="id">Optional, accepts null</param>
+		public TermVectorsDescriptor(IndexName index, Id id) : base(r => r.Required("index", index).Optional("id", id)){}
+		///<summary>/{index}/_termvectors</summary>
+		///<param name="index">this parameter is required</param>
+		public TermVectorsDescriptor(IndexName index) : base(r => r.Required("index", index)){}
+		///<summary>/{index}/_termvectors/{id}</summary>
+		///<param name="id">Optional, accepts null</param>
+		public TermVectorsDescriptor(Id id) : this(typeof(TDocument), id){}
+		///<summary>/{index}/_termvectors</summary>
+		public TermVectorsDescriptor() : this(typeof(TDocument)){}
+		///<summary>/{index}/_termvectors/{id}</summary>
+		///<param name="id">The document used to resolve the path from</param>
+		public TermVectorsDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Nest.Id.From(documentWithId))
+		=> DocumentFromPath(documentWithId);
 		partial void DocumentFromPath(TDocument document);
 		// values part of the url path
 		IndexName ITermVectorsRequest.Index => Self.RouteValues.Get<IndexName>("index");
@@ -3748,16 +3828,20 @@ namespace Nest
 	///<summary>descriptor for Update <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</pre></summary>
 	public partial class UpdateDescriptor<TDocument, TPartialDocument>  : RequestDescriptorBase<UpdateDescriptor<TDocument, TPartialDocument>,UpdateRequestParameters, IUpdateRequest<TDocument, TPartialDocument>>, IUpdateRequest<TDocument, TPartialDocument>
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		///<param name="id"> this parameter is required</param>
-		public UpdateDescriptor(IndexName index, Id id) : base(r=>r.Required("index", index).Required("id", id))
-		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		/// <summary>/{index}/_update/{id}</summary>
-		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
-		public UpdateDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("id", document.Self.Id))
-		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
+		///<summary>/{index}/_update/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
+		public UpdateDescriptor(IndexName index, Id id) : base(r => r.Required("index", index).Required("id", id)){}
+		///<summary>/{index}/_update/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public UpdateDescriptor(Id id) : this(typeof(TDocument), id){}
+		///<summary>/{index}/_update/{id}</summary>
+		///<param name="id">The document used to resolve the path from</param>
+		public UpdateDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Nest.Id.From(documentWithId))
+		=> DocumentFromPath(documentWithId);
 		partial void DocumentFromPath(TDocument document);
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal UpdateDescriptor() : base(){}
 		// values part of the url path
 		IndexName IUpdateRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		Id IUpdateRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -3801,9 +3885,11 @@ namespace Nest
 	///<summary>descriptor for UpdateByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html</pre></summary>
 	public partial class UpdateByQueryDescriptor<T>  : RequestDescriptorBase<UpdateByQueryDescriptor<T>,UpdateByQueryRequestParameters, IUpdateByQueryRequest<T>>, IUpdateByQueryRequest<T>
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public UpdateByQueryDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+		///<summary>/{index}/_update_by_query</summary>
+		///<param name="index">this parameter is required</param>
+		public UpdateByQueryDescriptor(Indices index) : base(r => r.Required("index", index)){}
+		///<summary>/{index}/_update_by_query</summary>
+		public UpdateByQueryDescriptor() : this(typeof(T)){}
 		// values part of the url path
 		Indices IUpdateByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -3902,9 +3988,11 @@ namespace Nest
 	///<summary>descriptor for CcrDeleteAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</pre></summary>
 	public partial class DeleteAutoFollowPatternDescriptor  : RequestDescriptorBase<DeleteAutoFollowPatternDescriptor,DeleteAutoFollowPatternRequestParameters, IDeleteAutoFollowPatternRequest>, IDeleteAutoFollowPatternRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="name"> this parameter is required</param>
-		public DeleteAutoFollowPatternDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		///<summary>/_ccr/auto_follow/{name}</summary>
+		///<param name="name">this parameter is required</param>
+		public DeleteAutoFollowPatternDescriptor(Name name) : base(r => r.Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteAutoFollowPatternDescriptor() : base(){}
 		// values part of the url path
 		Name IDeleteAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
 
@@ -3914,9 +4002,11 @@ namespace Nest
 	///<summary>descriptor for CcrFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-follow.html</pre></summary>
 	public partial class CreateFollowIndexDescriptor  : RequestDescriptorBase<CreateFollowIndexDescriptor,CreateFollowIndexRequestParameters, ICreateFollowIndexRequest>, ICreateFollowIndexRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public CreateFollowIndexDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
+		///<summary>/{index}/_ccr/follow</summary>
+		///<param name="index">this parameter is required</param>
+		public CreateFollowIndexDescriptor(IndexName index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal CreateFollowIndexDescriptor() : base(){}
 		// values part of the url path
 		IndexName ICreateFollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
@@ -3934,9 +4024,11 @@ namespace Nest
 	///<summary>descriptor for CcrFollowStats <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</pre></summary>
 	public partial class FollowIndexStatsDescriptor  : RequestDescriptorBase<FollowIndexStatsDescriptor,FollowIndexStatsRequestParameters, IFollowIndexStatsRequest>, IFollowIndexStatsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public FollowIndexStatsDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+		///<summary>/{index}/_ccr/stats</summary>
+		///<param name="index">this parameter is required</param>
+		public FollowIndexStatsDescriptor(Indices index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal FollowIndexStatsDescriptor() : base(){}
 		// values part of the url path
 		Indices IFollowIndexStatsRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -3955,11 +4047,11 @@ namespace Nest
 	///<summary>descriptor for CcrGetAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-auto-follow-pattern.html</pre></summary>
 	public partial class GetAutoFollowPatternDescriptor  : RequestDescriptorBase<GetAutoFollowPatternDescriptor,GetAutoFollowPatternRequestParameters, IGetAutoFollowPatternRequest>, IGetAutoFollowPatternRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_ccr/auto_follow</summary>
 		public GetAutoFollowPatternDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="name"> this parameter is required</param>
-		public GetAutoFollowPatternDescriptor(Name name) : base(r=>r.Optional("name", name)){}
+		///<summary>/_ccr/auto_follow/{name}</summary>
+		///<param name="name">Optional, accepts null</param>
+		public GetAutoFollowPatternDescriptor(Name name) : base(r => r.Optional("name", name)){}
 		// values part of the url path
 		Name IGetAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
 
@@ -3972,9 +4064,11 @@ namespace Nest
 	///<summary>descriptor for CcrPauseFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-pause-follow.html</pre></summary>
 	public partial class PauseFollowIndexDescriptor  : RequestDescriptorBase<PauseFollowIndexDescriptor,PauseFollowIndexRequestParameters, IPauseFollowIndexRequest>, IPauseFollowIndexRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public PauseFollowIndexDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
+		///<summary>/{index}/_ccr/pause_follow</summary>
+		///<param name="index">this parameter is required</param>
+		public PauseFollowIndexDescriptor(IndexName index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PauseFollowIndexDescriptor() : base(){}
 		// values part of the url path
 		IndexName IPauseFollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
@@ -3990,9 +4084,11 @@ namespace Nest
 	///<summary>descriptor for CcrPutAutoFollowPattern <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-put-auto-follow-pattern.html</pre></summary>
 	public partial class CreateAutoFollowPatternDescriptor  : RequestDescriptorBase<CreateAutoFollowPatternDescriptor,CreateAutoFollowPatternRequestParameters, ICreateAutoFollowPatternRequest>, ICreateAutoFollowPatternRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="name"> this parameter is required</param>
-		public CreateAutoFollowPatternDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		///<summary>/_ccr/auto_follow/{name}</summary>
+		///<param name="name">this parameter is required</param>
+		public CreateAutoFollowPatternDescriptor(Name name) : base(r => r.Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal CreateAutoFollowPatternDescriptor() : base(){}
 		// values part of the url path
 		Name ICreateAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
 
@@ -4002,9 +4098,11 @@ namespace Nest
 	///<summary>descriptor for CcrResumeFollow <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-resume-follow.html</pre></summary>
 	public partial class ResumeFollowIndexDescriptor  : RequestDescriptorBase<ResumeFollowIndexDescriptor,ResumeFollowIndexRequestParameters, IResumeFollowIndexRequest>, IResumeFollowIndexRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public ResumeFollowIndexDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
+		///<summary>/{index}/_ccr/resume_follow</summary>
+		///<param name="index">this parameter is required</param>
+		public ResumeFollowIndexDescriptor(IndexName index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal ResumeFollowIndexDescriptor() : base(){}
 		// values part of the url path
 		IndexName IResumeFollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
@@ -4028,9 +4126,11 @@ namespace Nest
 	///<summary>descriptor for CcrUnfollow <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current</pre></summary>
 	public partial class UnfollowIndexDescriptor  : RequestDescriptorBase<UnfollowIndexDescriptor,UnfollowIndexRequestParameters, IUnfollowIndexRequest>, IUnfollowIndexRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public UnfollowIndexDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
+		///<summary>/{index}/_ccr/unfollow</summary>
+		///<param name="index">this parameter is required</param>
+		public UnfollowIndexDescriptor(IndexName index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal UnfollowIndexDescriptor() : base(){}
 		// values part of the url path
 		IndexName IUnfollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
@@ -4046,9 +4146,11 @@ namespace Nest
 	///<summary>descriptor for GraphExplore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
 	public partial class GraphExploreDescriptor<T>  : RequestDescriptorBase<GraphExploreDescriptor<T>,GraphExploreRequestParameters, IGraphExploreRequest<T>>, IGraphExploreRequest<T>
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public GraphExploreDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+		///<summary>/{index}/_graph/explore</summary>
+		///<param name="index">this parameter is required</param>
+		public GraphExploreDescriptor(Indices index) : base(r => r.Required("index", index)){}
+		///<summary>/{index}/_graph/explore</summary>
+		public GraphExploreDescriptor() : this(typeof(T)){}
 		// values part of the url path
 		Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -4143,11 +4245,11 @@ namespace Nest
 	///<summary>descriptor for MigrationDeprecations <pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
 	public partial class DeprecationInfoDescriptor  : RequestDescriptorBase<DeprecationInfoDescriptor,DeprecationInfoRequestParameters, IDeprecationInfoRequest>, IDeprecationInfoRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_migration/deprecations</summary>
 		public DeprecationInfoDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public DeprecationInfoDescriptor(IndexName index) : base(r=>r.Optional("index", index)){}
+		///<summary>/{index}/_migration/deprecations</summary>
+		///<param name="index">Optional, accepts null</param>
+		public DeprecationInfoDescriptor(IndexName index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		IndexName IDeprecationInfoRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
@@ -4163,11 +4265,11 @@ namespace Nest
 	///<summary>descriptor for MigrationGetAssistance <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</pre></summary>
 	public partial class MigrationAssistanceDescriptor  : RequestDescriptorBase<MigrationAssistanceDescriptor,MigrationAssistanceRequestParameters, IMigrationAssistanceRequest>, IMigrationAssistanceRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_migration/assistance</summary>
 		public MigrationAssistanceDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public MigrationAssistanceDescriptor(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/_migration/assistance/{index}</summary>
+		///<param name="index">Optional, accepts null</param>
+		public MigrationAssistanceDescriptor(Indices index) : base(r => r.Optional("index", index)){}
 		// values part of the url path
 		Indices IMigrationAssistanceRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -4192,9 +4294,11 @@ namespace Nest
 	///<summary>descriptor for MigrationUpgrade <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</pre></summary>
 	public partial class MigrationUpgradeDescriptor  : RequestDescriptorBase<MigrationUpgradeDescriptor,MigrationUpgradeRequestParameters, IMigrationUpgradeRequest>, IMigrationUpgradeRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public MigrationUpgradeDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
+		///<summary>/_migration/upgrade/{index}</summary>
+		///<param name="index">this parameter is required</param>
+		public MigrationUpgradeDescriptor(IndexName index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal MigrationUpgradeDescriptor() : base(){}
 		// values part of the url path
 		IndexName IMigrationUpgradeRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
@@ -4212,9 +4316,11 @@ namespace Nest
 	///<summary>descriptor for MlCloseJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</pre></summary>
 	public partial class CloseJobDescriptor  : RequestDescriptorBase<CloseJobDescriptor,CloseJobRequestParameters, ICloseJobRequest>, ICloseJobRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="job_id"> this parameter is required</param>
-		public CloseJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		///<summary>/_ml/anomaly_detectors/{job_id}/_close</summary>
+		///<param name="job_id">this parameter is required</param>
+		public CloseJobDescriptor(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal CloseJobDescriptor() : base(){}
 		// values part of the url path
 		Id ICloseJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
@@ -4230,9 +4336,11 @@ namespace Nest
 	///<summary>descriptor for MlDeleteDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
 	public partial class DeleteDatafeedDescriptor  : RequestDescriptorBase<DeleteDatafeedDescriptor,DeleteDatafeedRequestParameters, IDeleteDatafeedRequest>, IDeleteDatafeedRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="datafeed_id"> this parameter is required</param>
-		public DeleteDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		///<summary>/_ml/datafeeds/{datafeed_id}</summary>
+		///<param name="datafeed_id">this parameter is required</param>
+		public DeleteDatafeedDescriptor(Id datafeed_id) : base(r => r.Required("datafeed_id", datafeed_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteDatafeedDescriptor() : base(){}
 		// values part of the url path
 		Id IDeleteDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 
@@ -4252,9 +4360,11 @@ namespace Nest
 	///<summary>descriptor for MlDeleteJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</pre></summary>
 	public partial class DeleteJobDescriptor  : RequestDescriptorBase<DeleteJobDescriptor,DeleteJobRequestParameters, IDeleteJobRequest>, IDeleteJobRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="job_id"> this parameter is required</param>
-		public DeleteJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		///<summary>/_ml/anomaly_detectors/{job_id}</summary>
+		///<param name="job_id">this parameter is required</param>
+		public DeleteJobDescriptor(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteJobDescriptor() : base(){}
 		// values part of the url path
 		Id IDeleteJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
@@ -4268,10 +4378,12 @@ namespace Nest
 	///<summary>descriptor for MlDeleteModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</pre></summary>
 	public partial class DeleteModelSnapshotDescriptor  : RequestDescriptorBase<DeleteModelSnapshotDescriptor,DeleteModelSnapshotRequestParameters, IDeleteModelSnapshotRequest>, IDeleteModelSnapshotRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="job_id"> this parameter is required</param>
-		///<param name="snapshot_id"> this parameter is required</param>
-		public DeleteModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+		///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
+		///<param name="job_id">this parameter is required</param>
+		///<param name="snapshot_id">this parameter is required</param>
+		public DeleteModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r => r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteModelSnapshotDescriptor() : base(){}
 		// values part of the url path
 		Id IDeleteModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		Id IDeleteModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
@@ -4282,9 +4394,11 @@ namespace Nest
 	///<summary>descriptor for MlFlushJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</pre></summary>
 	public partial class FlushJobDescriptor  : RequestDescriptorBase<FlushJobDescriptor,FlushJobRequestParameters, IFlushJobRequest>, IFlushJobRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="job_id"> this parameter is required</param>
-		public FlushJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		///<summary>/_ml/anomaly_detectors/{job_id}/_flush</summary>
+		///<param name="job_id">this parameter is required</param>
+		public FlushJobDescriptor(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal FlushJobDescriptor() : base(){}
 		// values part of the url path
 		Id IFlushJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
@@ -4296,9 +4410,11 @@ namespace Nest
 	///<summary>descriptor for MlForecast <pre>TODO</pre></summary>
 	public partial class ForecastJobDescriptor  : RequestDescriptorBase<ForecastJobDescriptor,ForecastJobRequestParameters, IForecastJobRequest>, IForecastJobRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="job_id"> this parameter is required</param>
-		public ForecastJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		///<summary>/_ml/anomaly_detectors/{job_id}/_forecast</summary>
+		///<param name="job_id">this parameter is required</param>
+		public ForecastJobDescriptor(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal ForecastJobDescriptor() : base(){}
 		// values part of the url path
 		Id IForecastJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
@@ -4308,13 +4424,15 @@ namespace Nest
 	///<summary>descriptor for MlGetBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</pre></summary>
 	public partial class GetBucketsDescriptor  : RequestDescriptorBase<GetBucketsDescriptor,GetBucketsRequestParameters, IGetBucketsRequest>, IGetBucketsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="job_id"> this parameter is required</param>
-		///<param name="timestamp"> this parameter is required</param>
-		public GetBucketsDescriptor(Id job_id, Timestamp timestamp) : base(r=>r.Required("job_id", job_id).Optional("timestamp", timestamp)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="job_id"> this parameter is required</param>
-		public GetBucketsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		///<summary>/_ml/anomaly_detectors/{job_id}/results/buckets/{timestamp}</summary>
+		///<param name="job_id">this parameter is required</param>
+		///<param name="timestamp">Optional, accepts null</param>
+		public GetBucketsDescriptor(Id job_id, Timestamp timestamp) : base(r => r.Required("job_id", job_id).Optional("timestamp", timestamp)){}
+		///<summary>/_ml/anomaly_detectors/{job_id}/results/buckets</summary>
+		///<param name="job_id">this parameter is required</param>
+		public GetBucketsDescriptor(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetBucketsDescriptor() : base(){}
 		// values part of the url path
 		Id IGetBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		Timestamp IGetBucketsRequest.Timestamp => Self.RouteValues.Get<Timestamp>("timestamp");
@@ -4328,13 +4446,15 @@ namespace Nest
 	///<summary>descriptor for MlGetCategories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
 	public partial class GetCategoriesDescriptor  : RequestDescriptorBase<GetCategoriesDescriptor,GetCategoriesRequestParameters, IGetCategoriesRequest>, IGetCategoriesRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="job_id"> this parameter is required</param>
-		///<param name="category_id"> this parameter is required</param>
-		public GetCategoriesDescriptor(Id job_id, CategoryId category_id) : base(r=>r.Required("job_id", job_id).Optional("category_id", category_id)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="job_id"> this parameter is required</param>
-		public GetCategoriesDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		///<summary>/_ml/anomaly_detectors/{job_id}/results/categories/{category_id}</summary>
+		///<param name="job_id">this parameter is required</param>
+		///<param name="category_id">Optional, accepts null</param>
+		public GetCategoriesDescriptor(Id job_id, CategoryId category_id) : base(r => r.Required("job_id", job_id).Optional("category_id", category_id)){}
+		///<summary>/_ml/anomaly_detectors/{job_id}/results/categories/</summary>
+		///<param name="job_id">this parameter is required</param>
+		public GetCategoriesDescriptor(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetCategoriesDescriptor() : base(){}
 		// values part of the url path
 		Id IGetCategoriesRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		CategoryId IGetCategoriesRequest.CategoryId => Self.RouteValues.Get<CategoryId>("category_id");
@@ -4348,10 +4468,10 @@ namespace Nest
 	///<summary>descriptor for MlGetDatafeeds <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</pre></summary>
 	public partial class GetDatafeedsDescriptor  : RequestDescriptorBase<GetDatafeedsDescriptor,GetDatafeedsRequestParameters, IGetDatafeedsRequest>, IGetDatafeedsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="datafeed_id"> this parameter is required</param>
-		public GetDatafeedsDescriptor(Id datafeed_id) : base(r=>r.Optional("datafeed_id", datafeed_id)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_ml/datafeeds/{datafeed_id}</summary>
+		///<param name="datafeed_id">Optional, accepts null</param>
+		public GetDatafeedsDescriptor(Id datafeed_id) : base(r => r.Optional("datafeed_id", datafeed_id)){}
+		///<summary>/_ml/datafeeds</summary>
 		public GetDatafeedsDescriptor() : base(){}
 		// values part of the url path
 		Id IGetDatafeedsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
@@ -4367,10 +4487,10 @@ namespace Nest
 	///<summary>descriptor for MlGetDatafeedStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</pre></summary>
 	public partial class GetDatafeedStatsDescriptor  : RequestDescriptorBase<GetDatafeedStatsDescriptor,GetDatafeedStatsRequestParameters, IGetDatafeedStatsRequest>, IGetDatafeedStatsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="datafeed_id"> this parameter is required</param>
-		public GetDatafeedStatsDescriptor(Id datafeed_id) : base(r=>r.Optional("datafeed_id", datafeed_id)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_ml/datafeeds/{datafeed_id}/_stats</summary>
+		///<param name="datafeed_id">Optional, accepts null</param>
+		public GetDatafeedStatsDescriptor(Id datafeed_id) : base(r => r.Optional("datafeed_id", datafeed_id)){}
+		///<summary>/_ml/datafeeds/_stats</summary>
 		public GetDatafeedStatsDescriptor() : base(){}
 		// values part of the url path
 		Id IGetDatafeedStatsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
@@ -4386,9 +4506,11 @@ namespace Nest
 	///<summary>descriptor for MlGetInfluencers <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
 	public partial class GetInfluencersDescriptor  : RequestDescriptorBase<GetInfluencersDescriptor,GetInfluencersRequestParameters, IGetInfluencersRequest>, IGetInfluencersRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="job_id"> this parameter is required</param>
-		public GetInfluencersDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		///<summary>/_ml/anomaly_detectors/{job_id}/results/influencers</summary>
+		///<param name="job_id">this parameter is required</param>
+		public GetInfluencersDescriptor(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetInfluencersDescriptor() : base(){}
 		// values part of the url path
 		Id IGetInfluencersRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
@@ -4398,10 +4520,10 @@ namespace Nest
 	///<summary>descriptor for MlGetJobs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</pre></summary>
 	public partial class GetJobsDescriptor  : RequestDescriptorBase<GetJobsDescriptor,GetJobsRequestParameters, IGetJobsRequest>, IGetJobsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="job_id"> this parameter is required</param>
-		public GetJobsDescriptor(Id job_id) : base(r=>r.Optional("job_id", job_id)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_ml/anomaly_detectors/{job_id}</summary>
+		///<param name="job_id">Optional, accepts null</param>
+		public GetJobsDescriptor(Id job_id) : base(r => r.Optional("job_id", job_id)){}
+		///<summary>/_ml/anomaly_detectors</summary>
 		public GetJobsDescriptor() : base(){}
 		// values part of the url path
 		Id IGetJobsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
@@ -4417,11 +4539,11 @@ namespace Nest
 	///<summary>descriptor for MlGetJobStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</pre></summary>
 	public partial class GetJobStatsDescriptor  : RequestDescriptorBase<GetJobStatsDescriptor,GetJobStatsRequestParameters, IGetJobStatsRequest>, IGetJobStatsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_ml/anomaly_detectors/_stats</summary>
 		public GetJobStatsDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="job_id"> this parameter is required</param>
-		public GetJobStatsDescriptor(Id job_id) : base(r=>r.Optional("job_id", job_id)){}
+		///<summary>/_ml/anomaly_detectors/{job_id}/_stats</summary>
+		///<param name="job_id">Optional, accepts null</param>
+		public GetJobStatsDescriptor(Id job_id) : base(r => r.Optional("job_id", job_id)){}
 		// values part of the url path
 		Id IGetJobStatsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
@@ -4436,13 +4558,15 @@ namespace Nest
 	///<summary>descriptor for MlGetModelSnapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</pre></summary>
 	public partial class GetModelSnapshotsDescriptor  : RequestDescriptorBase<GetModelSnapshotsDescriptor,GetModelSnapshotsRequestParameters, IGetModelSnapshotsRequest>, IGetModelSnapshotsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="job_id"> this parameter is required</param>
-		///<param name="snapshot_id"> this parameter is required</param>
-		public GetModelSnapshotsDescriptor(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Optional("snapshot_id", snapshot_id)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="job_id"> this parameter is required</param>
-		public GetModelSnapshotsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
+		///<param name="job_id">this parameter is required</param>
+		///<param name="snapshot_id">Optional, accepts null</param>
+		public GetModelSnapshotsDescriptor(Id job_id, Id snapshot_id) : base(r => r.Required("job_id", job_id).Optional("snapshot_id", snapshot_id)){}
+		///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots</summary>
+		///<param name="job_id">this parameter is required</param>
+		public GetModelSnapshotsDescriptor(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetModelSnapshotsDescriptor() : base(){}
 		// values part of the url path
 		Id IGetModelSnapshotsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		Id IGetModelSnapshotsRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
@@ -4456,9 +4580,11 @@ namespace Nest
 	///<summary>descriptor for MlGetOverallBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</pre></summary>
 	public partial class GetOverallBucketsDescriptor  : RequestDescriptorBase<GetOverallBucketsDescriptor,GetOverallBucketsRequestParameters, IGetOverallBucketsRequest>, IGetOverallBucketsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="job_id"> this parameter is required</param>
-		public GetOverallBucketsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		///<summary>/_ml/anomaly_detectors/{job_id}/results/overall_buckets</summary>
+		///<param name="job_id">this parameter is required</param>
+		public GetOverallBucketsDescriptor(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetOverallBucketsDescriptor() : base(){}
 		// values part of the url path
 		Id IGetOverallBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
@@ -4468,9 +4594,11 @@ namespace Nest
 	///<summary>descriptor for MlGetRecords <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</pre></summary>
 	public partial class GetAnomalyRecordsDescriptor  : RequestDescriptorBase<GetAnomalyRecordsDescriptor,GetAnomalyRecordsRequestParameters, IGetAnomalyRecordsRequest>, IGetAnomalyRecordsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="job_id"> this parameter is required</param>
-		public GetAnomalyRecordsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		///<summary>/_ml/anomaly_detectors/{job_id}/results/records</summary>
+		///<param name="job_id">this parameter is required</param>
+		public GetAnomalyRecordsDescriptor(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetAnomalyRecordsDescriptor() : base(){}
 		// values part of the url path
 		Id IGetAnomalyRecordsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
@@ -4480,9 +4608,11 @@ namespace Nest
 	///<summary>descriptor for MlOpenJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</pre></summary>
 	public partial class OpenJobDescriptor  : RequestDescriptorBase<OpenJobDescriptor,OpenJobRequestParameters, IOpenJobRequest>, IOpenJobRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="job_id"> this parameter is required</param>
-		public OpenJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		///<summary>/_ml/anomaly_detectors/{job_id}/_open</summary>
+		///<param name="job_id">this parameter is required</param>
+		public OpenJobDescriptor(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal OpenJobDescriptor() : base(){}
 		// values part of the url path
 		Id IOpenJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
@@ -4492,9 +4622,11 @@ namespace Nest
 	///<summary>descriptor for MlPostData <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
 	public partial class PostJobDataDescriptor  : RequestDescriptorBase<PostJobDataDescriptor,PostJobDataRequestParameters, IPostJobDataRequest>, IPostJobDataRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="job_id"> this parameter is required</param>
-		public PostJobDataDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		///<summary>/_ml/anomaly_detectors/{job_id}/_data</summary>
+		///<param name="job_id">this parameter is required</param>
+		public PostJobDataDescriptor(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PostJobDataDescriptor() : base(){}
 		// values part of the url path
 		Id IPostJobDataRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
@@ -4508,9 +4640,11 @@ namespace Nest
 	///<summary>descriptor for MlPreviewDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</pre></summary>
 	public partial class PreviewDatafeedDescriptor  : RequestDescriptorBase<PreviewDatafeedDescriptor,PreviewDatafeedRequestParameters, IPreviewDatafeedRequest>, IPreviewDatafeedRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="datafeed_id"> this parameter is required</param>
-		public PreviewDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		///<summary>/_ml/datafeeds/{datafeed_id}/_preview</summary>
+		///<param name="datafeed_id">this parameter is required</param>
+		public PreviewDatafeedDescriptor(Id datafeed_id) : base(r => r.Required("datafeed_id", datafeed_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PreviewDatafeedDescriptor() : base(){}
 		// values part of the url path
 		Id IPreviewDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 
@@ -4520,10 +4654,11 @@ namespace Nest
 	///<summary>descriptor for MlPutDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</pre></summary>
 	public partial class PutDatafeedDescriptor<T>  : RequestDescriptorBase<PutDatafeedDescriptor<T>,PutDatafeedRequestParameters, IPutDatafeedRequest>, IPutDatafeedRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath. Will infer the index and type from the generic type</summary>
-		///<param name="datafeed_id"> this parameter is required</param>
-		public PutDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id))
-		{ Self.Indices = typeof(T);  }
+		///<summary>/_ml/datafeeds/{datafeed_id}</summary>
+		///<param name="datafeed_id">this parameter is required</param>
+		public PutDatafeedDescriptor(Id datafeed_id) : base(r => r.Required("datafeed_id", datafeed_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PutDatafeedDescriptor() : base(){}
 		// values part of the url path
 		Id IPutDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 
@@ -4533,9 +4668,11 @@ namespace Nest
 	///<summary>descriptor for MlPutJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
 	public partial class PutJobDescriptor<T>  : RequestDescriptorBase<PutJobDescriptor<T>,PutJobRequestParameters, IPutJobRequest>, IPutJobRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="job_id"> this parameter is required</param>
-		public PutJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		///<summary>/_ml/anomaly_detectors/{job_id}</summary>
+		///<param name="job_id">this parameter is required</param>
+		public PutJobDescriptor(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PutJobDescriptor() : base(){}
 		// values part of the url path
 		Id IPutJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
@@ -4545,10 +4682,12 @@ namespace Nest
 	///<summary>descriptor for MlRevertModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</pre></summary>
 	public partial class RevertModelSnapshotDescriptor  : RequestDescriptorBase<RevertModelSnapshotDescriptor,RevertModelSnapshotRequestParameters, IRevertModelSnapshotRequest>, IRevertModelSnapshotRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="job_id"> this parameter is required</param>
-		///<param name="snapshot_id"> this parameter is required</param>
-		public RevertModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+		///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert</summary>
+		///<param name="job_id">this parameter is required</param>
+		///<param name="snapshot_id">this parameter is required</param>
+		public RevertModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r => r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal RevertModelSnapshotDescriptor() : base(){}
 		// values part of the url path
 		Id IRevertModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		Id IRevertModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
@@ -4559,9 +4698,11 @@ namespace Nest
 	///<summary>descriptor for MlStartDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</pre></summary>
 	public partial class StartDatafeedDescriptor  : RequestDescriptorBase<StartDatafeedDescriptor,StartDatafeedRequestParameters, IStartDatafeedRequest>, IStartDatafeedRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="datafeed_id"> this parameter is required</param>
-		public StartDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		///<summary>/_ml/datafeeds/{datafeed_id}/_start</summary>
+		///<param name="datafeed_id">this parameter is required</param>
+		public StartDatafeedDescriptor(Id datafeed_id) : base(r => r.Required("datafeed_id", datafeed_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal StartDatafeedDescriptor() : base(){}
 		// values part of the url path
 		Id IStartDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 
@@ -4571,9 +4712,11 @@ namespace Nest
 	///<summary>descriptor for MlStopDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</pre></summary>
 	public partial class StopDatafeedDescriptor  : RequestDescriptorBase<StopDatafeedDescriptor,StopDatafeedRequestParameters, IStopDatafeedRequest>, IStopDatafeedRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="datafeed_id"> this parameter is required</param>
-		public StopDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		///<summary>/_ml/datafeeds/{datafeed_id}/_stop</summary>
+		///<param name="datafeed_id">this parameter is required</param>
+		public StopDatafeedDescriptor(Id datafeed_id) : base(r => r.Required("datafeed_id", datafeed_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal StopDatafeedDescriptor() : base(){}
 		// values part of the url path
 		Id IStopDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 
@@ -4585,10 +4728,11 @@ namespace Nest
 	///<summary>descriptor for MlUpdateDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</pre></summary>
 	public partial class UpdateDatafeedDescriptor<T>  : RequestDescriptorBase<UpdateDatafeedDescriptor<T>,UpdateDatafeedRequestParameters, IUpdateDatafeedRequest>, IUpdateDatafeedRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath. Will infer the index and type from the generic type</summary>
-		///<param name="datafeed_id"> this parameter is required</param>
-		public UpdateDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id))
-		{ Self.Indices = typeof(T);  }
+		///<summary>/_ml/datafeeds/{datafeed_id}/_update</summary>
+		///<param name="datafeed_id">this parameter is required</param>
+		public UpdateDatafeedDescriptor(Id datafeed_id) : base(r => r.Required("datafeed_id", datafeed_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal UpdateDatafeedDescriptor() : base(){}
 		// values part of the url path
 		Id IUpdateDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 
@@ -4598,9 +4742,11 @@ namespace Nest
 	///<summary>descriptor for MlUpdateJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</pre></summary>
 	public partial class UpdateJobDescriptor<T>  : RequestDescriptorBase<UpdateJobDescriptor<T>,UpdateJobRequestParameters, IUpdateJobRequest>, IUpdateJobRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="job_id"> this parameter is required</param>
-		public UpdateJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		///<summary>/_ml/anomaly_detectors/{job_id}/_update</summary>
+		///<param name="job_id">this parameter is required</param>
+		public UpdateJobDescriptor(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal UpdateJobDescriptor() : base(){}
 		// values part of the url path
 		Id IUpdateJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
@@ -4610,10 +4756,12 @@ namespace Nest
 	///<summary>descriptor for MlUpdateModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</pre></summary>
 	public partial class UpdateModelSnapshotDescriptor  : RequestDescriptorBase<UpdateModelSnapshotDescriptor,UpdateModelSnapshotRequestParameters, IUpdateModelSnapshotRequest>, IUpdateModelSnapshotRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="job_id"> this parameter is required</param>
-		///<param name="snapshot_id"> this parameter is required</param>
-		public UpdateModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+		///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update</summary>
+		///<param name="job_id">this parameter is required</param>
+		///<param name="snapshot_id">this parameter is required</param>
+		public UpdateModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r => r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal UpdateModelSnapshotDescriptor() : base(){}
 		// values part of the url path
 		Id IUpdateModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		Id IUpdateModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
@@ -4640,9 +4788,11 @@ namespace Nest
 	///<summary>descriptor for RollupDeleteJob <pre>TODO</pre></summary>
 	public partial class DeleteRollupJobDescriptor  : RequestDescriptorBase<DeleteRollupJobDescriptor,DeleteRollupJobRequestParameters, IDeleteRollupJobRequest>, IDeleteRollupJobRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="id"> this parameter is required</param>
-		public DeleteRollupJobDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		///<summary>/_rollup/job/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public DeleteRollupJobDescriptor(Id id) : base(r => r.Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteRollupJobDescriptor() : base(){}
 		// values part of the url path
 		Id IDeleteRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
 
@@ -4652,10 +4802,10 @@ namespace Nest
 	///<summary>descriptor for RollupGetJobs <pre>TODO</pre></summary>
 	public partial class GetRollupJobDescriptor  : RequestDescriptorBase<GetRollupJobDescriptor,GetRollupJobRequestParameters, IGetRollupJobRequest>, IGetRollupJobRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="id"> this parameter is required</param>
-		public GetRollupJobDescriptor(Id id) : base(r=>r.Optional("id", id)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_rollup/job/{id}</summary>
+		///<param name="id">Optional, accepts null</param>
+		public GetRollupJobDescriptor(Id id) : base(r => r.Optional("id", id)){}
+		///<summary>/_rollup/job/</summary>
 		public GetRollupJobDescriptor() : base(){}
 		// values part of the url path
 		Id IGetRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -4669,10 +4819,10 @@ namespace Nest
 	///<summary>descriptor for RollupGetRollupCaps <pre>TODO</pre></summary>
 	public partial class GetRollupCapabilitiesDescriptor  : RequestDescriptorBase<GetRollupCapabilitiesDescriptor,GetRollupCapabilitiesRequestParameters, IGetRollupCapabilitiesRequest>, IGetRollupCapabilitiesRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="id"> this parameter is required</param>
-		public GetRollupCapabilitiesDescriptor(Id id) : base(r=>r.Optional("id", id)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_rollup/data/{id}</summary>
+		///<param name="id">Optional, accepts null</param>
+		public GetRollupCapabilitiesDescriptor(Id id) : base(r => r.Optional("id", id)){}
+		///<summary>/_rollup/data/</summary>
 		public GetRollupCapabilitiesDescriptor() : base(){}
 		// values part of the url path
 		Id IGetRollupCapabilitiesRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -4686,9 +4836,11 @@ namespace Nest
 	///<summary>descriptor for RollupGetRollupIndexCaps <pre>TODO</pre></summary>
 	public partial class GetRollupIndexCapabilitiesDescriptor  : RequestDescriptorBase<GetRollupIndexCapabilitiesDescriptor,GetRollupIndexCapabilitiesRequestParameters, IGetRollupIndexCapabilitiesRequest>, IGetRollupIndexCapabilitiesRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public GetRollupIndexCapabilitiesDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
+		///<summary>/{index}/_rollup/data</summary>
+		///<param name="index">this parameter is required</param>
+		public GetRollupIndexCapabilitiesDescriptor(IndexName index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetRollupIndexCapabilitiesDescriptor() : base(){}
 		// values part of the url path
 		IndexName IGetRollupIndexCapabilitiesRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
@@ -4704,9 +4856,11 @@ namespace Nest
 	///<summary>descriptor for RollupPutJob <pre>TODO</pre></summary>
 	public partial class CreateRollupJobDescriptor<T>  : RequestDescriptorBase<CreateRollupJobDescriptor<T>,CreateRollupJobRequestParameters, ICreateRollupJobRequest>, ICreateRollupJobRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="id"> this parameter is required</param>
-		public CreateRollupJobDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		///<summary>/_rollup/job/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public CreateRollupJobDescriptor(Id id) : base(r => r.Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal CreateRollupJobDescriptor() : base(){}
 		// values part of the url path
 		Id ICreateRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
 
@@ -4716,9 +4870,11 @@ namespace Nest
 	///<summary>descriptor for RollupRollupSearch <pre>TODO</pre></summary>
 	public partial class RollupSearchDescriptor<T>  : RequestDescriptorBase<RollupSearchDescriptor<T>,RollupSearchRequestParameters, IRollupSearchRequest>, IRollupSearchRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="index"> this parameter is required</param>
-		public RollupSearchDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+		///<summary>/{index}/_rollup_search</summary>
+		///<param name="index">this parameter is required</param>
+		public RollupSearchDescriptor(Indices index) : base(r => r.Required("index", index)){}
+		///<summary>/{index}/_rollup_search</summary>
+		public RollupSearchDescriptor() : this(typeof(T)){}
 		// values part of the url path
 		Indices IRollupSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -4741,9 +4897,11 @@ namespace Nest
 	///<summary>descriptor for RollupStartJob <pre>TODO</pre></summary>
 	public partial class StartRollupJobDescriptor  : RequestDescriptorBase<StartRollupJobDescriptor,StartRollupJobRequestParameters, IStartRollupJobRequest>, IStartRollupJobRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="id"> this parameter is required</param>
-		public StartRollupJobDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		///<summary>/_rollup/job/{id}/_start</summary>
+		///<param name="id">this parameter is required</param>
+		public StartRollupJobDescriptor(Id id) : base(r => r.Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal StartRollupJobDescriptor() : base(){}
 		// values part of the url path
 		Id IStartRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
 
@@ -4753,9 +4911,11 @@ namespace Nest
 	///<summary>descriptor for RollupStopJob <pre>TODO</pre></summary>
 	public partial class StopRollupJobDescriptor  : RequestDescriptorBase<StopRollupJobDescriptor,StopRollupJobRequestParameters, IStopRollupJobRequest>, IStopRollupJobRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="id"> this parameter is required</param>
-		public StopRollupJobDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		///<summary>/_rollup/job/{id}/_stop</summary>
+		///<param name="id">this parameter is required</param>
+		public StopRollupJobDescriptor(Id id) : base(r => r.Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal StopRollupJobDescriptor() : base(){}
 		// values part of the url path
 		Id IStopRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
 
@@ -4777,10 +4937,10 @@ namespace Nest
 	///<summary>descriptor for SecurityChangePassword <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</pre></summary>
 	public partial class ChangePasswordDescriptor  : RequestDescriptorBase<ChangePasswordDescriptor,ChangePasswordRequestParameters, IChangePasswordRequest>, IChangePasswordRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="username"> this parameter is required</param>
-		public ChangePasswordDescriptor(Name username) : base(r=>r.Optional("username", username)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_security/user/{username}/_password</summary>
+		///<param name="username">Optional, accepts null</param>
+		public ChangePasswordDescriptor(Name username) : base(r => r.Optional("username", username)){}
+		///<summary>/_security/user/_password</summary>
 		public ChangePasswordDescriptor() : base(){}
 		// values part of the url path
 		Name IChangePasswordRequest.Username => Self.RouteValues.Get<Name>("username");
@@ -4796,9 +4956,11 @@ namespace Nest
 	///<summary>descriptor for SecurityClearCachedRealms <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</pre></summary>
 	public partial class ClearCachedRealmsDescriptor  : RequestDescriptorBase<ClearCachedRealmsDescriptor,ClearCachedRealmsRequestParameters, IClearCachedRealmsRequest>, IClearCachedRealmsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="realms"> this parameter is required</param>
-		public ClearCachedRealmsDescriptor(Names realms) : base(r=>r.Required("realms", realms)){}
+		///<summary>/_security/realm/{realms}/_clear_cache</summary>
+		///<param name="realms">this parameter is required</param>
+		public ClearCachedRealmsDescriptor(Names realms) : base(r => r.Required("realms", realms)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal ClearCachedRealmsDescriptor() : base(){}
 		// values part of the url path
 		Names IClearCachedRealmsRequest.Realms => Self.RouteValues.Get<Names>("realms");
 
@@ -4810,9 +4972,11 @@ namespace Nest
 	///<summary>descriptor for SecurityClearCachedRoles <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html</pre></summary>
 	public partial class ClearCachedRolesDescriptor  : RequestDescriptorBase<ClearCachedRolesDescriptor,ClearCachedRolesRequestParameters, IClearCachedRolesRequest>, IClearCachedRolesRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="name"> this parameter is required</param>
-		public ClearCachedRolesDescriptor(Names name) : base(r=>r.Required("name", name)){}
+		///<summary>/_security/role/{name}/_clear_cache</summary>
+		///<param name="name">this parameter is required</param>
+		public ClearCachedRolesDescriptor(Names name) : base(r => r.Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal ClearCachedRolesDescriptor() : base(){}
 		// values part of the url path
 		Names IClearCachedRolesRequest.Name => Self.RouteValues.Get<Names>("name");
 
@@ -4822,9 +4986,11 @@ namespace Nest
 	///<summary>descriptor for SecurityDeleteRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html</pre></summary>
 	public partial class DeleteRoleDescriptor  : RequestDescriptorBase<DeleteRoleDescriptor,DeleteRoleRequestParameters, IDeleteRoleRequest>, IDeleteRoleRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="name"> this parameter is required</param>
-		public DeleteRoleDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		///<summary>/_security/role/{name}</summary>
+		///<param name="name">this parameter is required</param>
+		public DeleteRoleDescriptor(Name name) : base(r => r.Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteRoleDescriptor() : base(){}
 		// values part of the url path
 		Name IDeleteRoleRequest.Name => Self.RouteValues.Get<Name>("name");
 
@@ -4836,9 +5002,11 @@ namespace Nest
 	///<summary>descriptor for SecurityDeleteRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html</pre></summary>
 	public partial class DeleteRoleMappingDescriptor  : RequestDescriptorBase<DeleteRoleMappingDescriptor,DeleteRoleMappingRequestParameters, IDeleteRoleMappingRequest>, IDeleteRoleMappingRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="name"> this parameter is required</param>
-		public DeleteRoleMappingDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		///<summary>/_security/role_mapping/{name}</summary>
+		///<param name="name">this parameter is required</param>
+		public DeleteRoleMappingDescriptor(Name name) : base(r => r.Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteRoleMappingDescriptor() : base(){}
 		// values part of the url path
 		Name IDeleteRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
 
@@ -4850,9 +5018,11 @@ namespace Nest
 	///<summary>descriptor for SecurityDeleteUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html</pre></summary>
 	public partial class DeleteUserDescriptor  : RequestDescriptorBase<DeleteUserDescriptor,DeleteUserRequestParameters, IDeleteUserRequest>, IDeleteUserRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="username"> this parameter is required</param>
-		public DeleteUserDescriptor(Name username) : base(r=>r.Required("username", username)){}
+		///<summary>/_security/user/{username}</summary>
+		///<param name="username">this parameter is required</param>
+		public DeleteUserDescriptor(Name username) : base(r => r.Required("username", username)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteUserDescriptor() : base(){}
 		// values part of the url path
 		Name IDeleteUserRequest.Username => Self.RouteValues.Get<Name>("username");
 
@@ -4864,9 +5034,11 @@ namespace Nest
 	///<summary>descriptor for SecurityDisableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html</pre></summary>
 	public partial class DisableUserDescriptor  : RequestDescriptorBase<DisableUserDescriptor,DisableUserRequestParameters, IDisableUserRequest>, IDisableUserRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="username"> this parameter is required</param>
-		public DisableUserDescriptor(Name username) : base(r=>r.Required("username", username)){}
+		///<summary>/_security/user/{username}/_disable</summary>
+		///<param name="username">this parameter is required</param>
+		public DisableUserDescriptor(Name username) : base(r => r.Required("username", username)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DisableUserDescriptor() : base(){}
 		// values part of the url path
 		Name IDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
 
@@ -4878,9 +5050,11 @@ namespace Nest
 	///<summary>descriptor for SecurityEnableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html</pre></summary>
 	public partial class EnableUserDescriptor  : RequestDescriptorBase<EnableUserDescriptor,EnableUserRequestParameters, IEnableUserRequest>, IEnableUserRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="username"> this parameter is required</param>
-		public EnableUserDescriptor(Name username) : base(r=>r.Required("username", username)){}
+		///<summary>/_security/user/{username}/_enable</summary>
+		///<param name="username">this parameter is required</param>
+		public EnableUserDescriptor(Name username) : base(r => r.Required("username", username)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal EnableUserDescriptor() : base(){}
 		// values part of the url path
 		Name IEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
 
@@ -4892,10 +5066,10 @@ namespace Nest
 	///<summary>descriptor for SecurityGetRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</pre></summary>
 	public partial class GetRoleDescriptor  : RequestDescriptorBase<GetRoleDescriptor,GetRoleRequestParameters, IGetRoleRequest>, IGetRoleRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="name"> this parameter is required</param>
-		public GetRoleDescriptor(Name name) : base(r=>r.Optional("name", name)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_security/role/{name}</summary>
+		///<param name="name">Optional, accepts null</param>
+		public GetRoleDescriptor(Name name) : base(r => r.Optional("name", name)){}
+		///<summary>/_security/role</summary>
 		public GetRoleDescriptor() : base(){}
 		// values part of the url path
 		Name IGetRoleRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -4909,10 +5083,10 @@ namespace Nest
 	///<summary>descriptor for SecurityGetRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</pre></summary>
 	public partial class GetRoleMappingDescriptor  : RequestDescriptorBase<GetRoleMappingDescriptor,GetRoleMappingRequestParameters, IGetRoleMappingRequest>, IGetRoleMappingRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="name"> this parameter is required</param>
-		public GetRoleMappingDescriptor(Name name) : base(r=>r.Optional("name", name)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_security/role_mapping/{name}</summary>
+		///<param name="name">Optional, accepts null</param>
+		public GetRoleMappingDescriptor(Name name) : base(r => r.Optional("name", name)){}
+		///<summary>/_security/role_mapping</summary>
 		public GetRoleMappingDescriptor() : base(){}
 		// values part of the url path
 		Name IGetRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -4934,10 +5108,10 @@ namespace Nest
 	///<summary>descriptor for SecurityGetUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html</pre></summary>
 	public partial class GetUserDescriptor  : RequestDescriptorBase<GetUserDescriptor,GetUserRequestParameters, IGetUserRequest>, IGetUserRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="username"> this parameter is required</param>
-		public GetUserDescriptor(Names username) : base(r=>r.Optional("username", username)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_security/user/{username}</summary>
+		///<param name="username">Optional, accepts null</param>
+		public GetUserDescriptor(Names username) : base(r => r.Optional("username", username)){}
+		///<summary>/_security/user</summary>
 		public GetUserDescriptor() : base(){}
 		// values part of the url path
 		Names IGetUserRequest.Username => Self.RouteValues.Get<Names>("username");
@@ -4959,9 +5133,11 @@ namespace Nest
 	///<summary>descriptor for SecurityPutRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</pre></summary>
 	public partial class PutRoleDescriptor  : RequestDescriptorBase<PutRoleDescriptor,PutRoleRequestParameters, IPutRoleRequest>, IPutRoleRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="name"> this parameter is required</param>
-		public PutRoleDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		///<summary>/_security/role/{name}</summary>
+		///<param name="name">this parameter is required</param>
+		public PutRoleDescriptor(Name name) : base(r => r.Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PutRoleDescriptor() : base(){}
 		// values part of the url path
 		Name IPutRoleRequest.Name => Self.RouteValues.Get<Name>("name");
 
@@ -4973,9 +5149,11 @@ namespace Nest
 	///<summary>descriptor for SecurityPutRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html</pre></summary>
 	public partial class PutRoleMappingDescriptor  : RequestDescriptorBase<PutRoleMappingDescriptor,PutRoleMappingRequestParameters, IPutRoleMappingRequest>, IPutRoleMappingRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="name"> this parameter is required</param>
-		public PutRoleMappingDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		///<summary>/_security/role_mapping/{name}</summary>
+		///<param name="name">this parameter is required</param>
+		public PutRoleMappingDescriptor(Name name) : base(r => r.Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PutRoleMappingDescriptor() : base(){}
 		// values part of the url path
 		Name IPutRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
 
@@ -4987,9 +5165,11 @@ namespace Nest
 	///<summary>descriptor for SecurityPutUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html</pre></summary>
 	public partial class PutUserDescriptor  : RequestDescriptorBase<PutUserDescriptor,PutUserRequestParameters, IPutUserRequest>, IPutUserRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="username"> this parameter is required</param>
-		public PutUserDescriptor(Name username) : base(r=>r.Required("username", username)){}
+		///<summary>/_security/user/{username}</summary>
+		///<param name="username">this parameter is required</param>
+		public PutUserDescriptor(Name username) : base(r => r.Required("username", username)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PutUserDescriptor() : base(){}
 		// values part of the url path
 		Name IPutUserRequest.Username => Self.RouteValues.Get<Name>("username");
 
@@ -5035,13 +5215,15 @@ namespace Nest
 	///<summary>descriptor for WatcherAckWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</pre></summary>
 	public partial class AcknowledgeWatchDescriptor  : RequestDescriptorBase<AcknowledgeWatchDescriptor,AcknowledgeWatchRequestParameters, IAcknowledgeWatchRequest>, IAcknowledgeWatchRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="watch_id"> this parameter is required</param>
-		public AcknowledgeWatchDescriptor(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="watch_id"> this parameter is required</param>
-		///<param name="action_id"> this parameter is required</param>
-		public AcknowledgeWatchDescriptor(Id watch_id, ActionIds action_id) : base(r=>r.Required("watch_id", watch_id).Optional("action_id", action_id)){}
+		///<summary>/_watcher/watch/{watch_id}/_ack</summary>
+		///<param name="watch_id">this parameter is required</param>
+		public AcknowledgeWatchDescriptor(Id watch_id) : base(r => r.Required("watch_id", watch_id)){}
+		///<summary>/_watcher/watch/{watch_id}/_ack/{action_id}</summary>
+		///<param name="watch_id">this parameter is required</param>
+		///<param name="action_id">Optional, accepts null</param>
+		public AcknowledgeWatchDescriptor(Id watch_id, ActionIds action_id) : base(r => r.Required("watch_id", watch_id).Optional("action_id", action_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal AcknowledgeWatchDescriptor() : base(){}
 		// values part of the url path
 		Id IAcknowledgeWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
 		ActionIds IAcknowledgeWatchRequest.ActionId => Self.RouteValues.Get<ActionIds>("action_id");
@@ -5055,9 +5237,11 @@ namespace Nest
 	///<summary>descriptor for WatcherActivateWatch <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</pre></summary>
 	public partial class ActivateWatchDescriptor  : RequestDescriptorBase<ActivateWatchDescriptor,ActivateWatchRequestParameters, IActivateWatchRequest>, IActivateWatchRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="watch_id"> this parameter is required</param>
-		public ActivateWatchDescriptor(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
+		///<summary>/_watcher/watch/{watch_id}/_activate</summary>
+		///<param name="watch_id">this parameter is required</param>
+		public ActivateWatchDescriptor(Id watch_id) : base(r => r.Required("watch_id", watch_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal ActivateWatchDescriptor() : base(){}
 		// values part of the url path
 		Id IActivateWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
 
@@ -5067,9 +5251,11 @@ namespace Nest
 	///<summary>descriptor for WatcherDeactivateWatch <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</pre></summary>
 	public partial class DeactivateWatchDescriptor  : RequestDescriptorBase<DeactivateWatchDescriptor,DeactivateWatchRequestParameters, IDeactivateWatchRequest>, IDeactivateWatchRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="watch_id"> this parameter is required</param>
-		public DeactivateWatchDescriptor(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
+		///<summary>/_watcher/watch/{watch_id}/_deactivate</summary>
+		///<param name="watch_id">this parameter is required</param>
+		public DeactivateWatchDescriptor(Id watch_id) : base(r => r.Required("watch_id", watch_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeactivateWatchDescriptor() : base(){}
 		// values part of the url path
 		Id IDeactivateWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
 
@@ -5079,9 +5265,11 @@ namespace Nest
 	///<summary>descriptor for WatcherDeleteWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</pre></summary>
 	public partial class DeleteWatchDescriptor  : RequestDescriptorBase<DeleteWatchDescriptor,DeleteWatchRequestParameters, IDeleteWatchRequest>, IDeleteWatchRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="id"> this parameter is required</param>
-		public DeleteWatchDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		///<summary>/_watcher/watch/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public DeleteWatchDescriptor(Id id) : base(r => r.Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteWatchDescriptor() : base(){}
 		// values part of the url path
 		Id IDeleteWatchRequest.Id => Self.RouteValues.Get<Id>("id");
 
@@ -5091,10 +5279,10 @@ namespace Nest
 	///<summary>descriptor for WatcherExecuteWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</pre></summary>
 	public partial class ExecuteWatchDescriptor  : RequestDescriptorBase<ExecuteWatchDescriptor,ExecuteWatchRequestParameters, IExecuteWatchRequest>, IExecuteWatchRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="id"> this parameter is required</param>
-		public ExecuteWatchDescriptor(Id id) : base(r=>r.Optional("id", id)){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_watcher/watch/{id}/_execute</summary>
+		///<param name="id">Optional, accepts null</param>
+		public ExecuteWatchDescriptor(Id id) : base(r => r.Optional("id", id)){}
+		///<summary>/_watcher/watch/_execute</summary>
 		public ExecuteWatchDescriptor() : base(){}
 		// values part of the url path
 		Id IExecuteWatchRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -5110,9 +5298,11 @@ namespace Nest
 	///<summary>descriptor for WatcherGetWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</pre></summary>
 	public partial class GetWatchDescriptor  : RequestDescriptorBase<GetWatchDescriptor,GetWatchRequestParameters, IGetWatchRequest>, IGetWatchRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="id"> this parameter is required</param>
-		public GetWatchDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		///<summary>/_watcher/watch/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public GetWatchDescriptor(Id id) : base(r => r.Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetWatchDescriptor() : base(){}
 		// values part of the url path
 		Id IGetWatchRequest.Id => Self.RouteValues.Get<Id>("id");
 
@@ -5122,9 +5312,11 @@ namespace Nest
 	///<summary>descriptor for WatcherPutWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</pre></summary>
 	public partial class PutWatchDescriptor  : RequestDescriptorBase<PutWatchDescriptor,PutWatchRequestParameters, IPutWatchRequest>, IPutWatchRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="id"> this parameter is required</param>
-		public PutWatchDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		///<summary>/_watcher/watch/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public PutWatchDescriptor(Id id) : base(r => r.Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PutWatchDescriptor() : base(){}
 		// values part of the url path
 		Id IPutWatchRequest.Id => Self.RouteValues.Get<Id>("id");
 
@@ -5150,11 +5342,11 @@ namespace Nest
 	///<summary>descriptor for WatcherStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</pre></summary>
 	public partial class WatcherStatsDescriptor  : RequestDescriptorBase<WatcherStatsDescriptor,WatcherStatsRequestParameters, IWatcherStatsRequest>, IWatcherStatsRequest
 	{ 
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
+		///<summary>/_watcher/stats</summary>
 		public WatcherStatsDescriptor() : base(){}
-		/// <summary>ApiGenerator.Domain.ApiPath</summary>
-		///<param name="metric"> this parameter is required</param>
-		public WatcherStatsDescriptor(Metrics metric) : base(r=>r.Optional("metric", (Metrics)metric)){}
+		///<summary>/_watcher/stats/{metric}</summary>
+		///<param name="metric">Optional, accepts null</param>
+		public WatcherStatsDescriptor(Metrics metric) : base(r => r.Optional("metric", metric)){}
 		// values part of the url path
 		Metrics IWatcherStatsRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 

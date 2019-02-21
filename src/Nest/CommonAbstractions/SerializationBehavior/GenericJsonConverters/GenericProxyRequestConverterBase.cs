@@ -27,9 +27,8 @@ namespace Nest
 				//not optimized but deserializing create requests is far from common practice
 				var genericType = objectType.GetTypeInfo().GenericTypeArguments[0];
 				var o = serializer.GetConnectionSettings().SourceSerializer.Deserialize(genericType, ms);
-				var path = typeof(DocumentPath<>).CreateGenericInstance(genericType, o);
-				// index, type and id are optional parameters on _genericRequestType but need to be passed to construct through reflection
-				var x = _genericRequestType.CreateGenericInstance(genericType, path, null, null, null);
+				// index, id are optional parameters on _genericRequestType but need to be passed to construct through reflection
+				var x = _genericRequestType.CreateGenericInstance(genericType, o, null, null);
 				return x;
 			}
 		}

@@ -13,7 +13,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		[U] public async Task Urls()
 		{
 			var index = "index1,index2";
-			await GET($"/index1%2Cindex2/_mapping/doc%2Cdeveloper")
+			await GET($"/index1%2Cindex2/_mapping")
 					.Fluent(c => c.GetMapping<Project>(m => m.Index(index)))
 					.Request(c => c.GetMapping(new GetMappingRequest(index)))
 					.FluentAsync(c => c.GetMappingAsync<Project>(m => m.Index(index)))

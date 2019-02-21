@@ -33,7 +33,7 @@ namespace Tests.Mapping.Types
 		};
 
 		protected abstract IProperties InitializerProperties { get; }
-		protected override string UrlPath => $"/{CallIsolatedValue}/doc/_mapping";
+		protected override string UrlPath => $"/{CallIsolatedValue}/_mapping";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.Map(f),

@@ -23,7 +23,7 @@ namespace Tests.XPack.Watcher.StartWatcher
 
 		protected override StartWatcherRequest Initializer => new StartWatcherRequest();
 
-		protected override string UrlPath => "/_xpack/watcher/_start";
+		protected override string UrlPath => "/_watcher/_start";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.StartWatcher(f),

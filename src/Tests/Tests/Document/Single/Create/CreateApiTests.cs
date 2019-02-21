@@ -58,7 +58,7 @@ namespace Tests.Document.Single.Create
 			};
 
 		protected override string UrlPath
-			=> $"/project/doc/{CallIsolatedValue}/_create?wait_for_active_shards=1&refresh=true&routing=route";
+			=> $"/project/_create/{CallIsolatedValue}?wait_for_active_shards=1&refresh=true&routing=route";
 
 		private Project Document => new Project
 		{

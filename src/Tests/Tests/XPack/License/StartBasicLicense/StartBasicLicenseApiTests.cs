@@ -23,7 +23,7 @@ namespace Tests.XPack.License.StartBasicLicense
 
 		protected override StartBasicLicenseRequest Initializer => new StartBasicLicenseRequest();
 
-		protected override string UrlPath => $"/_xpack/license/start_basic";
+		protected override string UrlPath => $"/_license/start_basic";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.StartBasicLicense(f),

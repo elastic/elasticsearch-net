@@ -10,14 +10,14 @@ namespace Tests.XPack.MachineLearning.GetDatafeeds
 	{
 		[U] public override async Task Urls()
 		{
-			await GET("/_xpack/ml/datafeeds")
+			await GET("/_ml/datafeeds")
 					.Fluent(c => c.GetDatafeeds())
 					.Request(c => c.GetDatafeeds(new GetDatafeedsRequest()))
 					.FluentAsync(c => c.GetDatafeedsAsync())
 					.RequestAsync(c => c.GetDatafeedsAsync(new GetDatafeedsRequest()))
 				;
 
-			await GET("/_xpack/ml/datafeeds/datafeed_id")
+			await GET("/_ml/datafeeds/datafeed_id")
 					.Fluent(c => c.GetDatafeeds(r => r.DatafeedId("datafeed_id")))
 					.Request(c => c.GetDatafeeds(new GetDatafeedsRequest("datafeed_id")))
 					.FluentAsync(c => c.GetDatafeedsAsync(r => r.DatafeedId("datafeed_id")))

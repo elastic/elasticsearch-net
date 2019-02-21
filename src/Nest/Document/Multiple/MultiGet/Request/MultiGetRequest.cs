@@ -15,6 +15,7 @@ namespace Nest
 
 	public partial class MultiGetRequest
 	{
+		public Fields StoredFields { get; set; }
 		public IEnumerable<IMultiGetOperation> Documents { get; set; }
 	}
 
@@ -26,6 +27,12 @@ namespace Nest
 		{
 			get => _operations;
 			set => _operations = value?.ToList();
+		}
+
+		Fields IMultiGetRequest.StoredFields
+		{
+			get => Q<Fields>("stored_fields");
+			set => Q("stored_fields", value);
 		}
 
 		public MultiGetDescriptor Get<T>(Func<MultiGetOperationDescriptor<T>, IMultiGetOperation> getSelector)
@@ -50,7 +57,9 @@ namespace Nest
 
 		/// <summary> Default stored fields to load for each document. </summary>
 		public MultiGetDescriptor StoredFields<T>(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) where T : class =>
-			StoredFields(fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+			Assign(a => a.StoredFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
+		/// <summary> Default stored fields to load for each document. </summary>
+		public MultiGetDescriptor StoredFields(Fields fields) => Assign(a => a.StoredFields = fields);
 	}
 }

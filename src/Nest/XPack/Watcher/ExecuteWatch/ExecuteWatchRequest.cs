@@ -56,7 +56,7 @@ namespace Nest
 		/// This watch is not persisted to the index and record_execution cannot be set.
 		/// </summary>
 		[JsonProperty("watch")]
-		IPutWatchRequest Watch { get; set; }
+		IWatch Watch { get; set; }
 	}
 
 	public partial class ExecuteWatchRequest
@@ -72,7 +72,7 @@ namespace Nest
 		public SimulatedActions SimulatedActions { get; set; }
 		public IScheduleTriggerEvent TriggerData { get; set; }
 
-		public IPutWatchRequest Watch { get; set; }
+		public IWatch Watch { get; set; }
 	}
 
 	public partial class ExecuteWatchDescriptor
@@ -83,7 +83,7 @@ namespace Nest
 		bool? IExecuteWatchRequest.RecordExecution { get; set; }
 		SimulatedActions IExecuteWatchRequest.SimulatedActions { get; set; }
 		IScheduleTriggerEvent IExecuteWatchRequest.TriggerData { get; set; }
-		IPutWatchRequest IExecuteWatchRequest.Watch { get; set; }
+		IWatch IExecuteWatchRequest.Watch { get; set; }
 
 		public ExecuteWatchDescriptor TriggerData(Func<ScheduleTriggerEventDescriptor, IScheduleTriggerEvent> selector) =>
 			Assign(a => a.TriggerData = selector?.InvokeOrDefault(new ScheduleTriggerEventDescriptor()));
@@ -113,7 +113,7 @@ namespace Nest
 		public ExecuteWatchDescriptor SimulatedActions(SimulatedActions simulatedActions) =>
 			Assign(a => a.SimulatedActions = simulatedActions);
 
-		public ExecuteWatchDescriptor Watch(Func<PutWatchDescriptor, IPutWatchRequest> watch) =>
-			Assign(a => a.Watch = watch?.InvokeOrDefault(new PutWatchDescriptor()));
+		public ExecuteWatchDescriptor Watch(Func<WatchDescriptor, IWatch> watch) =>
+			Assign(a => a.Watch = watch?.InvokeOrDefault(new WatchDescriptor()));
 	}
 }

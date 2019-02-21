@@ -135,7 +135,7 @@ namespace Tests.XPack.Graph.Explore
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override string UrlPath => $"/project/doc/_xpack/graph/_explore";
+		protected override string UrlPath => $"/project/_graph/explore";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.GraphExplore<Project>(f),

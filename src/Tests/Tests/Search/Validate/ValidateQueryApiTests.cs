@@ -17,7 +17,7 @@ namespace Tests.Search.Validate
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/project/doc/_validate/query";
+		protected override string UrlPath => "/project/_validate/query";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(c, f) => c.ValidateQuery<Project>(v => v.Query(q => q.MatchAll())),
@@ -55,7 +55,7 @@ namespace Tests.Search.Validate
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/project/doc/_validate/query";
+		protected override string UrlPath => "/project/_validate/query";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(c, f) => c.ValidateQuery<Project>(v => _descriptor),

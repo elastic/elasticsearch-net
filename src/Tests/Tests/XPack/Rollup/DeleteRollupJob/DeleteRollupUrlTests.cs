@@ -11,7 +11,7 @@ namespace Tests.XPack.Rollup.DeleteRollupJob
 		[U] public override async Task Urls()
 		{
 			const string id = "rollup-id";
-			await DELETE($"/_xpack/rollup/job/{id}")
+			await DELETE($"/_rollup/job/{id}")
 				.Fluent(c => c.DeleteRollupJob(id))
 				.Request(c => c.DeleteRollupJob(new DeleteRollupJobRequest(id)))
 				.FluentAsync(c => c.DeleteRollupJobAsync(id))

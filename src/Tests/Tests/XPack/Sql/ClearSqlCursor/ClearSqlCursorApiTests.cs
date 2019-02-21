@@ -40,7 +40,7 @@ ORDER BY numberOfContributors DESC";
 			Cursor = _currentCursor,
 		};
 
-		protected override string UrlPath => $"/_xpack/sql/close";
+		protected override string UrlPath => $"/_sql/close";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.ClearSqlCursor(f),

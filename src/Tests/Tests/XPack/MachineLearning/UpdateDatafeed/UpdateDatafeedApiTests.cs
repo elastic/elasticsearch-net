@@ -35,6 +35,8 @@ namespace Tests.XPack.MachineLearning.UpdateDatafeed
 		protected override int ExpectStatusCode => 200;
 
 		protected override Func<UpdateDatafeedDescriptor<Metric>, IUpdateDatafeedRequest> Fluent => f => f
+			.Indices("server-metrics") //goes on body not in the url
+			.Types("metric") //goes on body not in the url
 			.JobId(CallIsolatedValue)
 			.Query(q => q
 				.MatchAll(m => m.Boost(2))
@@ -55,7 +57,7 @@ namespace Tests.XPack.MachineLearning.UpdateDatafeed
 			};
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"_xpack/ml/datafeeds/{CallIsolatedValue}-datafeed/_update";
+		protected override string UrlPath => $"_ml/datafeeds/{CallIsolatedValue}-datafeed/_update";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.UpdateDatafeed(CallIsolatedValue + "-datafeed", f),

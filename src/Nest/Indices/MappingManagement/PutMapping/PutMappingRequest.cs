@@ -12,9 +12,6 @@ namespace Nest
 
 	public partial class PutMappingRequest
 	{
-		// Needed for ReadAsType
-		internal PutMappingRequest() { }
-
 		/// <inheritdoc />
 		public IAllField AllField { get; set; }
 
@@ -59,10 +56,6 @@ namespace Nest
 
 	public partial class PutMappingDescriptor<T> where T : class
 	{
-		public PutMappingDescriptor() : this(typeof(T), typeof(T)) { }
-
-		public PutMappingDescriptor(IndexName index, TypeName type) : base(r => r.Required("index", index).Required("type", type)) { }
-
 		IAllField ITypeMapping.AllField { get; set; }
 		bool? ITypeMapping.DateDetection { get; set; }
 		Union<bool, DynamicMapping> ITypeMapping.Dynamic { get; set; }

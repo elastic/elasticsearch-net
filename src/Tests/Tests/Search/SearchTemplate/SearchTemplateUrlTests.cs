@@ -13,7 +13,7 @@ namespace Tests.Search.SearchTemplate
 		{
 			var hardcoded = "hardcoded";
 
-			await UrlTester.POST("/hardcoded/doc/_search/template")
+			await UrlTester.POST("/hardcoded/_search/template")
 					.Request(c => c.SearchTemplate<Project>(new SearchTemplateRequest(hardcoded)))
 					.Request(c => c.SearchTemplate<Project>(new SearchTemplateRequest<Project>(hardcoded)))
 					.FluentAsync(c => c.SearchTemplateAsync<Project>(s => s.Index(hardcoded)))

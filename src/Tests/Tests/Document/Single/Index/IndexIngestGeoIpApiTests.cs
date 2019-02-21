@@ -59,7 +59,7 @@ namespace Tests.Document.Single.Index
 		protected override bool SupportsDeserialization => false;
 
 		protected override string UrlPath
-			=> $"/project/doc/{CallIsolatedValue}?refresh=true&pipeline={PipelineId}&routing={CallIsolatedValue}";
+			=> $"/project/_doc/{CallIsolatedValue}?refresh=true&pipeline={PipelineId}";
 
 		private Project Document => new Project
 		{

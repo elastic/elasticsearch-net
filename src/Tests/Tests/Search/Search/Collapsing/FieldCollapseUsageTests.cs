@@ -57,7 +57,7 @@ namespace Tests.Search.Search.Collapsing
 			}
 		};
 
-		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/doc/_search";
+		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/_search";
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
@@ -141,7 +141,7 @@ namespace Tests.Search.Search.Collapsing
 			}
 		};
 
-		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/doc/_search";
+		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/_search";
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{

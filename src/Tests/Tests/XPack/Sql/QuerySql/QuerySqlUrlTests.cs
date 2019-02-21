@@ -8,7 +8,7 @@ namespace Tests.XPack.Graph.Explore
 {
 	public class QuerySqlUrlTests : UrlTestsBase
 	{
-		[U] public override async Task Urls() => await POST("_xpack/sql")
+		[U] public override async Task Urls() => await POST("_sql")
 			.Fluent(c => c.QuerySql(d => d))
 			.Request(c => c.QuerySql(new QuerySqlRequest()))
 			.FluentAsync(c => c.QuerySqlAsync(d => d))

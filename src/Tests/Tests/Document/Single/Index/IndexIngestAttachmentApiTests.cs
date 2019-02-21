@@ -53,13 +53,14 @@ namespace Tests.Document.Single.Index
 			new IndexRequest<IngestedAttachment>(CallIsolatedValue, Id.From(Document))
 			{
 				Refresh = Refresh.True,
-				Pipeline = PipelineId
+				Pipeline = PipelineId,
+				Document = Document
 			};
 
 		protected override bool SupportsDeserialization => false;
 
 		protected override string UrlPath
-			=> $"/{CallIsolatedValue}/ingestedattachment/1?refresh=true&pipeline={PipelineId}";
+			=> $"/{CallIsolatedValue}/_doc/1?refresh=true&pipeline={PipelineId}";
 
 		private static string Content => TestDocument.TestPdfDocument;
 

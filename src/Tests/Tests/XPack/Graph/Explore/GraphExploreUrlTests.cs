@@ -12,7 +12,7 @@ namespace Tests.XPack.Graph.Explore
 	{
 		[U] public override async Task Urls()
 		{
-			await POST("/project/_xpack/graph/_explore")
+			await POST("/project/_graph/explore")
 					.Fluent(c => c.GraphExplore<Project>(d => d))
 					.Request(c => c.GraphExplore(new GraphExploreRequest<Project>(typeof(Project))))
 					.FluentAsync(c => c.GraphExploreAsync<Project>(d => d))
@@ -20,7 +20,7 @@ namespace Tests.XPack.Graph.Explore
 				;
 
 			var index = "another-index";
-			await POST($"/{index}/_xpack/graph/_explore")
+			await POST($"/{index}/_graph/explore")
 					.Fluent(c => c.GraphExplore<Project>(d => d.Index(index)))
 					.Request(c => c.GraphExplore(new GraphExploreRequest<Project>(index)))
 					.FluentAsync(c => c.GraphExploreAsync<Project>(d => d.Index(index)))

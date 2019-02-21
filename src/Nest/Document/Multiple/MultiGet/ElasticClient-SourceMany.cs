@@ -33,7 +33,6 @@ namespace Nest
 				.RequestConfiguration(r => r.ThrowExceptions())
 				.GetMany<T>(ids, (gs, i) => gs
 					.Index(index)
-					.Type(type)
 				)
 			);
 			return result.SourceMany<T>(ids);
@@ -82,7 +81,6 @@ namespace Nest
 					.RequestConfiguration(r => r.ThrowExceptions())
 					.GetMany<T>(ids, (gs, i) => gs
 						.Index(index)
-						.Type(type)
 					), cancellationToken)
 				.ConfigureAwait(false);
 			return response.SourceMany<T>(ids);

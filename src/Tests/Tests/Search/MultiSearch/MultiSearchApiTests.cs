@@ -29,13 +29,13 @@ namespace Tests.Search.MultiSearch
 			new { from = 0, size = 10, query = new { match_all = new { } } },
 			new { search_type = "dfs_query_then_fetch" },
 			new { },
-			new { index = "devs", type = "developer" },
+			new { index = "devs" },
 			new { from = 0, size = 5, query = new { match_all = new { } } },
-			new { index = "devs", type = "developer" },
+			new { index = "devs" },
 			new { from = 0, size = 5, query = new { match_all = new { } } },
-			new { index = "queries", type = PercolatorType },
+			new { index = "queries" },
 			new { query = new { percolate = new { document = Project.InstanceAnonymous, field = "query", routing = Project.First.Name } } },
-			new { index = "queries", type = PercolatorType },
+			new { index = "queries" },
 			new
 			{
 				query = new
@@ -115,7 +115,7 @@ namespace Tests.Search.MultiSearch
 		};
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => "/project/doc/_msearch";
+		protected override string UrlPath => "/project/_msearch";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(c, f) => c.MultiSearch(f),

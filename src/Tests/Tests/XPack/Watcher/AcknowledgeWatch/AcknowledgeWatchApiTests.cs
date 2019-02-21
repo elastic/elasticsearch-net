@@ -28,7 +28,7 @@ namespace Tests.XPack.Watcher.AcknowledgeWatch
 		protected override AcknowledgeWatchRequest Initializer =>
 			new AcknowledgeWatchRequest(CallIsolatedValue, "test_index");
 
-		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}/_ack/test_index";
+		protected override string UrlPath => $"/_watcher/watch/{CallIsolatedValue}/_ack/test_index";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

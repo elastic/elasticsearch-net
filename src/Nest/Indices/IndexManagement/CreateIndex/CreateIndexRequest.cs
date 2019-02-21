@@ -17,9 +17,6 @@ namespace Nest
 			"index.provided_name"
 		};
 
-		//Only here for ReadAsType new() constraint needs to be updated
-		internal CreateIndexRequest() { }
-
 		public CreateIndexRequest(IndexName index, IIndexState state) : this(index)
 		{
 			Settings = state.Settings;

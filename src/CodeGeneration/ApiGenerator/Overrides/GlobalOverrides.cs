@@ -40,8 +40,12 @@ namespace ApiGenerator.Overrides
 			{ "ts", "include_timestamp" },
 		};
 
-		// TODO REMOVE
-		public override IEnumerable<string> RenderPartial => new string[] { };
+		public override IEnumerable<string> RenderPartial => new[]
+		{
+			"stored_fields",
+			"script_fields",
+			"docvalue_fields"
+		};
 
 		public override IEnumerable<string> SkipQueryStringParams { get; } = new[]
 		{

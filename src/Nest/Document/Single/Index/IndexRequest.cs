@@ -25,8 +25,6 @@ namespace Nest
 			request.Id?.StringOrLongValue != null || request.RouteValues.Id != null ? HttpMethod.PUT : HttpMethod.POST;
 
 		partial void DocumentFromPath(TDocument document) => Document = document;
-
-		private TDocument AutoRouteDocument() => Document;
 	}
 
 	public partial class IndexDescriptor<TDocument> where TDocument : class
@@ -38,7 +36,5 @@ namespace Nest
 			sourceSerializer.Serialize(Self.Document, stream, formatting);
 
 		partial void DocumentFromPath(TDocument document) => Assign(a => a.Document = document);
-
-		private TDocument AutoRouteDocument() => Self.Document;
 	}
 }

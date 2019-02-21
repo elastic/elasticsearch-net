@@ -85,7 +85,7 @@ namespace Tests.Search.Search
 			})
 		};
 
-		protected override string UrlPath => $"/project/doc/_search";
+		protected override string UrlPath => $"/project/_search";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(c, f) => c.Search(f),

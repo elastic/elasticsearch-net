@@ -18,7 +18,7 @@ namespace Tests.XPack.MachineLearning.DeleteJob
 		protected override Func<DeleteJobDescriptor, IDeleteJobRequest> Fluent => f => f;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override DeleteJobRequest Initializer => new DeleteJobRequest(CallIsolatedValue);
-		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}";
+		protected override string UrlPath => $"_ml/anomaly_detectors/{CallIsolatedValue}";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

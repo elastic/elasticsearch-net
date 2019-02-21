@@ -42,7 +42,7 @@ namespace Tests.Document.Single.Update
 		};
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/project/doc/{CallIsolatedValue}/_update?routing={U(Project.Routing)}";
+		protected override string UrlPath => $"/project/_update/{CallIsolatedValue}";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -58,7 +58,7 @@ namespace Tests.Document.Single.Update
 		);
 
 		protected override UpdateDescriptor<Project, Project> NewDescriptor() =>
-			new UpdateDescriptor<Project, Project>(DocumentPath<Project>.Id(CallIsolatedValue));
+			new UpdateDescriptor<Project, Project>(CallIsolatedValue);
 
 		protected override void ExpectResponse(IUpdateResponse<Project> response)
 		{

@@ -728,7 +728,7 @@ namespace Tests.XPack.Watcher.PutWatch
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}";
+		protected override string UrlPath => $"/_watcher/watch/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.PutWatch(CallIsolatedValue, f),

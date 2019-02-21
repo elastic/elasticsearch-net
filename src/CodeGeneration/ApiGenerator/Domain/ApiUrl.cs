@@ -26,15 +26,31 @@ namespace ApiGenerator.Domain
 		{
 			get
 			{
-                if (_exposedPaths != null) return _exposedPaths;
+				if (_exposedPaths != null) return _exposedPaths;
+
 				_exposedPaths = Paths.Select(p => new ApiPath(p, Parts)).ToList();
 				return _exposedPaths;
 			}
 		}
 
-		public IEnumerable<ApiUrlPart> ExposedApiParts => ExposedApiPaths.SelectMany(p=>p.Parts).DistinctBy(p=>p.Name).ToList();
+		public bool IsPartless => !ExposedApiParts.Any();
 
-		private static readonly string[] documentApiParts = { "index", "id" };
-		public bool IsDocumentApi => ExposedApiParts.All(p => documentApiParts.Contains(p.Name));
+		public bool TryGetDocumentApiPath(out ApiPath path)
+		{
+			path = null;
+			if (!IsDocumentApi) return false;
+
+			var mostVerbosePath = _exposedPaths.OrderByDescending(p => p.Parts.Count()).First();
+			path = new ApiPath(mostVerbosePath.Path, Parts, mostVerbosePath.Parts);
+			return true;
+		}
+
+
+		public IEnumerable<ApiUrlPart> ExposedApiParts => ExposedApiPaths.SelectMany(p => p.Parts).DistinctBy(p => p.Name).ToList();
+
+		private static readonly string[] DocumentApiParts = { "index", "id" };
+		public bool IsDocumentApi =>
+			ExposedApiParts.Count() == DocumentApiParts.Length
+			&& ExposedApiParts.All(p => DocumentApiParts.Contains(p.Name));
 	}
 }

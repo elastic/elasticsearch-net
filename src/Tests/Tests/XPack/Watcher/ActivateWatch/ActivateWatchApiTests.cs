@@ -25,7 +25,7 @@ namespace Tests.XPack.Watcher.ActivateWatch
 		protected override ActivateWatchRequest Initializer =>
 			new ActivateWatchRequest(CallIsolatedValue);
 
-		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}/_activate";
+		protected override string UrlPath => $"/_watcher/watch/{CallIsolatedValue}/_activate";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

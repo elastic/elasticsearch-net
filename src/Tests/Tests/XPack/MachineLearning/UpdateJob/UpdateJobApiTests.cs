@@ -38,7 +38,7 @@ namespace Tests.XPack.MachineLearning.UpdateJob
 			};
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/_update";
+		protected override string UrlPath => $"_ml/anomaly_detectors/{CallIsolatedValue}/_update";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.UpdateJob(CallIsolatedValue, f),

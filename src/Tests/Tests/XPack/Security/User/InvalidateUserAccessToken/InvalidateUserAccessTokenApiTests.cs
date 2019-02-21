@@ -39,7 +39,7 @@ namespace Tests.XPack.Security.User.InvalidateUserAccessToken
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override string UrlPath => "/_xpack/security/oauth2/token";
+		protected override string UrlPath => "/_security/oauth2/token";
 
 		protected override void OnBeforeCall(IElasticClient client)
 		{

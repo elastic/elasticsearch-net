@@ -5,12 +5,14 @@ using System.Linq;
 namespace ApiGenerator.Domain {
 	public class ApiPath
 	{
+		private readonly List<ApiUrlPart> _additionalPartsForConstructor;
 		public string Path { get; }
 
 		public List<ApiUrlPart> Parts { get; }
 
-		public ApiPath(string path, IDictionary<string, ApiUrlPart> allParts)
+		public ApiPath(string path, IDictionary<string, ApiUrlPart> allParts, List<ApiUrlPart> additionalPartsForConstructor = null)
 		{
+			_additionalPartsForConstructor = additionalPartsForConstructor ?? new List<ApiUrlPart>();
 			Path = LeadingBackslash(path);
 			if (allParts == null)
 			{
@@ -39,6 +41,13 @@ namespace ApiGenerator.Domain {
 		public string AutoResolveConstructorArguments => string.Join(", ", Parts.Where(p  => !ResolvabeFromT.Contains(p.Name)).Select(p => $"{p.ClrTypeName} {p.Name}"));
 
 		public string AutoResolveBaseArguments(string generic) => string.Join(", ", Parts.Select(p => !ResolvabeFromT.Contains(p.Name) ? p.Name : $"typeof({generic})"));
+
+		public string DocumentPathBaseArgument(string generic) => string.Join(", ",
+			_additionalPartsForConstructor.Select(p => p.Name =="id" ? $"id ?? Nest.Id.From(documentWithId)"
+				: ResolvabeFromT.Contains(p.Name) ? $"{p.Name} ?? typeof({generic})" : p.Name));
+
+		public string DocumentPathConstructorArgument(string generic) => string.Join(", ",
+			new [] { $"{generic} documentWithId" }.Concat(_additionalPartsForConstructor.Select(p => $"{p.ClrTypeName} {p.Name} = null")));
 
 		public string GetXmlDocs(string indent, bool skipResolvable = false, bool documentConstructor = false)
 		{

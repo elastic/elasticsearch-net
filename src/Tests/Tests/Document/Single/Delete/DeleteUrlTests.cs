@@ -9,7 +9,7 @@ namespace Tests.Document.Single.Delete
 {
 	public class DeleteUrlTests
 	{
-		[U] public async Task Urls() => await DELETE("/project/doc/1")
+		[U] public async Task Urls() => await DELETE("/project/_doc/1")
 			.Fluent(c => c.Delete<Project>(1))
 			.Request(c => c.Delete(new DeleteRequest<Project>(1)))
 			.FluentAsync(c => c.DeleteAsync<Project>(1))

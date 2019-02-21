@@ -92,7 +92,7 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}/_execute";
+		protected override string UrlPath => $"/_watcher/watch/{CallIsolatedValue}/_execute";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -498,7 +498,7 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 					{ "foo", "bar" }
 				},
 				IgnoreCondition = true,
-				Watch = new PutWatchRequest
+				Watch = new Watch
 				{
 					Trigger = new ScheduleContainer
 					{
@@ -559,7 +559,7 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override string UrlPath => $"/_xpack/watcher/watch/_execute";
+		protected override string UrlPath => $"/_watcher/watch/_execute";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

@@ -28,7 +28,7 @@ namespace Tests.XPack.Migration.MigrationUpgrade
 
 		protected override MigrationUpgradeRequest Initializer => new MigrationUpgradeRequest(CallIsolatedValue);
 
-		protected override string UrlPath => $"/_xpack/migration/upgrade/{CallIsolatedValue}";
+		protected override string UrlPath => $"/_migration/upgrade/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(c, f) => c.MigrationUpgrade(CallIsolatedValue, f),

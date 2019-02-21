@@ -24,6 +24,6 @@ namespace Tests.Search.Request
 				Slice = new SlicedScroll { Id = 0, Max = 5 }
 			};
 
-		protected override string UrlPath => "/project/doc/_search?scroll=1m";
+		protected override string UrlPath => "/project/_search?scroll=1m";
 	}
 }

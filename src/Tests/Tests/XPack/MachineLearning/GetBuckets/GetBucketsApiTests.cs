@@ -21,7 +21,7 @@ namespace Tests.XPack.MachineLearning.GetBuckets
 		protected override Func<GetBucketsDescriptor, IGetBucketsRequest> Fluent => f => f;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override GetBucketsRequest Initializer => new GetBucketsRequest(CallIsolatedValue);
-		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/results/buckets";
+		protected override string UrlPath => $"_ml/anomaly_detectors/{CallIsolatedValue}/results/buckets";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -69,15 +69,15 @@ namespace Tests.XPack.MachineLearning.GetBuckets
 		protected override object ExpectJson => null;
 		protected override int ExpectStatusCode => 200;
 
-		protected override Func<GetBucketsDescriptor, IGetBucketsRequest> Fluent =>
-			f => f.Timestamp(new DateTimeOffset(2016, 6, 2, 00, 00, 00, TimeSpan.Zero));
+		protected static DateTimeOffset TheTimestamp = new DateTimeOffset(2016, 6, 2, 00, 00, 00, TimeSpan.Zero);
+
+		protected override Func<GetBucketsDescriptor, IGetBucketsRequest> Fluent => f => f.Timestamp(TheTimestamp);
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override GetBucketsRequest Initializer =>
-			new GetBucketsRequest(CallIsolatedValue, new DateTimeOffset(2016, 6, 2, 00, 00, 00, TimeSpan.Zero));
+		protected override GetBucketsRequest Initializer => new GetBucketsRequest(CallIsolatedValue, TheTimestamp);
 
-		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/results/buckets";
+		protected override string UrlPath => $"_ml/anomaly_detectors/{CallIsolatedValue}/results/buckets/{TheTimestamp.ToUnixTimeMilliseconds()}";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

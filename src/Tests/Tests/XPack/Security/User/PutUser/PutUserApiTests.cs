@@ -57,7 +57,7 @@ namespace Tests.XPack.Security.User.PutUser
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override string UrlPath => $"/_xpack/security/user/{CallIsolatedValue}";
+		protected override string UrlPath => $"/_security/user/{CallIsolatedValue}";
 
 		private string Email => $"{CallIsolatedValue}@example.example";
 

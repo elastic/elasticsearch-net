@@ -21,7 +21,7 @@ namespace Tests.XPack.Security.Authenticate
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
-		protected override string UrlPath => $"/_xpack/security/_authenticate";
+		protected override string UrlPath => $"/_security/_authenticate";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.Authenticate(f),

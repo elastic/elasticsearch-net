@@ -82,8 +82,6 @@ namespace Nest
 	/// <inheritdoc />
 	public partial class GetAnomalyRecordsDescriptor
 	{
-		public GetAnomalyRecordsDescriptor() : base() { }
-
 		bool? IGetAnomalyRecordsRequest.Descending { get; set; }
 		DateTimeOffset? IGetAnomalyRecordsRequest.End { get; set; }
 		bool? IGetAnomalyRecordsRequest.ExcludeInterim { get; set; }

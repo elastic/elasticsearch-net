@@ -167,7 +167,7 @@ namespace Tests.Document.Multiple.MultiTermVectors
 		protected override bool SupportsDeserialization => false;
 
 		protected override string UrlPath =>
-			$"/devs/developer/_mtermvectors?field_statistics=true&payloads=true&term_statistics=true&positions=true&offsets=true";
+			$"/devs/_mtermvectors?field_statistics=true&payloads=true&term_statistics=true&positions=true&offsets=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.MultiTermVectors(f),

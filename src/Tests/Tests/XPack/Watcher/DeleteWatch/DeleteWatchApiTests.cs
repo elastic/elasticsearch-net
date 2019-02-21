@@ -23,7 +23,7 @@ namespace Tests.XPack.Watcher.DeleteWatch
 
 		protected override DeleteWatchRequest Initializer => new DeleteWatchRequest(CallIsolatedValue);
 
-		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}";
+		protected override string UrlPath => $"/_watcher/watch/{CallIsolatedValue}";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -88,7 +88,7 @@ namespace Tests.XPack.Watcher.DeleteWatch
 
 		protected override DeleteWatchRequest Initializer => new DeleteWatchRequest(CallIsolatedValue);
 
-		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}";
+		protected override string UrlPath => $"/_watcher/watch/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.DeleteWatch(CallIsolatedValue, f),

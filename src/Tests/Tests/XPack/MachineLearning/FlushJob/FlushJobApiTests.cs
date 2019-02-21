@@ -35,7 +35,7 @@ namespace Tests.XPack.MachineLearning.FlushJob
 		};
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/_flush";
+		protected override string UrlPath => $"_ml/anomaly_detectors/{CallIsolatedValue}/_flush";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

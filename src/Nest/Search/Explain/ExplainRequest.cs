@@ -11,6 +11,11 @@ namespace Nest
 		QueryContainer Query { get; set; }
 	}
 
+	public partial class ExplainRequest
+	{
+		public Fields StoredFields { get; set; }
+	}
+
 	public partial class ExplainRequest<TDocument> where TDocument : class
 	{
 		public QueryContainer Query { get; set; }
@@ -20,7 +25,6 @@ namespace Nest
 				? HttpMethod.GET
 				: HttpMethod.POST;
 
-		private object AutoRouteDocument() => null;
 	}
 
 	public partial class ExplainDescriptor<TDocument> where TDocument : class
@@ -30,9 +34,8 @@ namespace Nest
 				? HttpMethod.GET
 				: HttpMethod.POST;
 
+		Fields IExplainRequest.StoredFields { get; set; }
 		QueryContainer IExplainRequest<TDocument>.Query { get; set; }
-
-		private object AutoRouteDocument() => null;
 
 		public ExplainDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> querySelector) =>
 			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<TDocument>()));
@@ -43,6 +46,8 @@ namespace Nest
 		/// represented by a search hit. Defaults to load the internal _source field.
 		/// </summary>
 		public ExplainDescriptor<TDocument> StoredFields(Func<FieldsDescriptor<TDocument>, IPromise<Fields>> fields) =>
-			StoredFields(fields?.Invoke(new FieldsDescriptor<TDocument>())?.Value);
+			Assign(a => a.StoredFields = fields?.Invoke(new FieldsDescriptor<TDocument>())?.Value);
+
+		public ExplainDescriptor<TDocument> StoredFields(Fields fields) => Assign(a => a.StoredFields = fields);
 	}
 }

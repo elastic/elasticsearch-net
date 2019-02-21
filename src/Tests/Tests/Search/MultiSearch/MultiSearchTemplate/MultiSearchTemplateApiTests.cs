@@ -62,7 +62,7 @@ namespace Tests.Search.MultiSearch.MultiSearchTemplate
 		};
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => "/project/doc/_msearch/template";
+		protected override string UrlPath => "/project/_msearch/template";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(c, f) => c.MultiSearchTemplate(f),

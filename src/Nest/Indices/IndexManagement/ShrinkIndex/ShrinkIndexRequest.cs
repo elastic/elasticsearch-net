@@ -16,9 +16,6 @@ namespace Nest
 
 	public partial class ShrinkIndexRequest
 	{
-		// For ReadAsType()
-		internal ShrinkIndexRequest() { }
-
 		public IAliases Aliases { get; set; }
 
 		public IIndexSettings Settings { get; set; }

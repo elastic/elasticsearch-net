@@ -37,7 +37,7 @@ namespace Nest
 	///<summary>descriptor for @method.FullName <pre>@method.Documentation</pre></summary>
 	public partial class @Raw(type) @(Raw(string.Format(" : RequestDescriptorBase<{0},{1}, {2}>, {2}", type, method.QueryStringParamName, concreteInterface)))
 	{ 
-@foreach (Constructor c in method.DescriptorConstructors())
+@foreach (Constructor c in Constructor.DescriptorConstructors(method))
 {
 <text>		@(Raw(CodeGenerator.Constructor(c)))
 </text>
@@ -63,6 +63,11 @@ foreach (var param in method.Url.Params.Values)
 	var original = param.QueryStringKey;
 	//skip parameters already part of the path portion of the url
 		if (method.Url.ExposedApiParts.Any(p=>p.Name == original))
+		{
+			continue;
+		}
+		//we prefer this parameter to be explictly implemented on the request body
+		if (param.RenderPartial && (method.HttpMethod != "GET" && method.HttpMethod != "HEAD"))
 		{
 			continue;
 		}

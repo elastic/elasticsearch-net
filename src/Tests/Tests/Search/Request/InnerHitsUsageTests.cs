@@ -219,7 +219,7 @@ namespace Tests.Search.Request
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected abstract IndexName Index { get; }
-		protected override string UrlPath => $"/{Index}/{RoyalSeeder.RoyalType}/_search";
+		protected override string UrlPath => $"/{Index}/_search";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values) => new RoyalSeeder(Client, Index).Seed();
 

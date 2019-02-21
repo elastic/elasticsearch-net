@@ -47,6 +47,8 @@ namespace Nest
 		///<param name="watch_id">this parameter is required</param>
 		///<param name="action_id">Optional, accepts null</param>
 		public AcknowledgeWatchRequest(Id watch_id, ActionIds action_id) : base(r => r.Required("watch_id", watch_id).Optional("action_id", action_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal AcknowledgeWatchRequest() : base(){}
 		// values part of the url path
 		Id IAcknowledgeWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
 		ActionIds IAcknowledgeWatchRequest.ActionId => Self.RouteValues.Get<ActionIds>("action_id");
@@ -66,6 +68,8 @@ namespace Nest
 		///<summary>/_watcher/watch/{watch_id}/_activate</summary>
 		///<param name="watch_id">this parameter is required</param>
 		public ActivateWatchRequest(Id watch_id) : base(r => r.Required("watch_id", watch_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal ActivateWatchRequest() : base(){}
 		// values part of the url path
 		Id IActivateWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
 
@@ -89,6 +93,8 @@ namespace Nest
 		///<param name="index">Optional, accepts null</param>
 		///<param name="name">this parameter is required</param>
 		public AliasExistsRequest(Indices index, Names name) : base(r => r.Optional("index", index).Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal AliasExistsRequest() : base(){}
 		// values part of the url path
 		Names IAliasExistsRequest.Name => Self.RouteValues.Get<Names>("name");
 		Indices IAliasExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -918,6 +924,8 @@ namespace Nest
 		///<summary>/_security/realm/{realms}/_clear_cache</summary>
 		///<param name="realms">this parameter is required</param>
 		public ClearCachedRealmsRequest(Names realms) : base(r => r.Required("realms", realms)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal ClearCachedRealmsRequest() : base(){}
 		// values part of the url path
 		Names IClearCachedRealmsRequest.Realms => Self.RouteValues.Get<Names>("realms");
 
@@ -938,6 +946,8 @@ namespace Nest
 		///<summary>/_security/role/{name}/_clear_cache</summary>
 		///<param name="name">this parameter is required</param>
 		public ClearCachedRolesRequest(Names name) : base(r => r.Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal ClearCachedRolesRequest() : base(){}
 		// values part of the url path
 		Names IClearCachedRolesRequest.Name => Self.RouteValues.Get<Names>("name");
 
@@ -1019,6 +1029,8 @@ namespace Nest
 		///<summary>/{index}/_close</summary>
 		///<param name="index">this parameter is required</param>
 		public CloseIndexRequest(Indices index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal CloseIndexRequest() : base(){}
 		// values part of the url path
 		Indices ICloseIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -1050,6 +1062,8 @@ namespace Nest
 		///<summary>/_ml/anomaly_detectors/{job_id}/_close</summary>
 		///<param name="job_id">this parameter is required</param>
 		public CloseJobRequest(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal CloseJobRequest() : base(){}
 		// values part of the url path
 		Id ICloseJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
@@ -1353,6 +1367,8 @@ namespace Nest
 		///<summary>/_ccr/auto_follow/{name}</summary>
 		///<param name="name">this parameter is required</param>
 		public CreateAutoFollowPatternRequest(Name name) : base(r => r.Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal CreateAutoFollowPatternRequest() : base(){}
 		// values part of the url path
 		Name ICreateAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
 
@@ -1371,6 +1387,8 @@ namespace Nest
 		///<summary>/{index}/_ccr/follow</summary>
 		///<param name="index">this parameter is required</param>
 		public CreateFollowIndexRequest(IndexName index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal CreateFollowIndexRequest() : base(){}
 		// values part of the url path
 		IndexName ICreateFollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
@@ -1394,6 +1412,8 @@ namespace Nest
 		///<summary>/{index}</summary>
 		///<param name="index">this parameter is required</param>
 		public CreateIndexRequest(IndexName index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal CreateIndexRequest() : base(){}
 		// values part of the url path
 		IndexName ICreateIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
@@ -1420,6 +1440,8 @@ namespace Nest
 		///<summary>/_snapshot/{repository}</summary>
 		///<param name="repository">this parameter is required</param>
 		public CreateRepositoryRequest(Name repository) : base(r => r.Required("repository", repository)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal CreateRepositoryRequest() : base(){}
 		// values part of the url path
 		Name ICreateRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 
@@ -1449,6 +1471,8 @@ namespace Nest
 		///<param name="index">this parameter is required</param>
 		///<param name="id">this parameter is required</param>
 		public CreateRequest(IndexName index, Id id) : base(r => r.Required("index", index).Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal CreateRequest() : base(){}
 		// values part of the url path
 		IndexName ICreateRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		Id ICreateRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -1498,9 +1522,11 @@ namespace Nest
 		public CreateRequest(Id id) : base(typeof(TDocument), id){}
 		///<summary>/{index}/_create/{id}</summary>
 		///<param name="id">The document used to resolve the path from</param>
-		public CreateRequest(TDocument id) : this(Id.From(id))
-		=> DocumentFromPath(id);
+		public CreateRequest(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Nest.Id.From(documentWithId))
+		=> DocumentFromPath(documentWithId);
 		partial void DocumentFromPath(TDocument document);
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal CreateRequest() : base(){}
 	}
 	 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1516,6 +1542,8 @@ namespace Nest
 		///<summary>/_rollup/job/{id}</summary>
 		///<param name="id">this parameter is required</param>
 		public CreateRollupJobRequest(Id id) : base(r => r.Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal CreateRollupJobRequest() : base(){}
 		// values part of the url path
 		Id ICreateRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
 
@@ -1534,6 +1562,8 @@ namespace Nest
 		///<summary>/_watcher/watch/{watch_id}/_deactivate</summary>
 		///<param name="watch_id">this parameter is required</param>
 		public DeactivateWatchRequest(Id watch_id) : base(r => r.Required("watch_id", watch_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeactivateWatchRequest() : base(){}
 		// values part of the url path
 		Id IDeactivateWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
 
@@ -1554,6 +1584,8 @@ namespace Nest
 		///<param name="index">this parameter is required</param>
 		///<param name="name">this parameter is required</param>
 		public DeleteAliasRequest(Indices index, Names name) : base(r => r.Required("index", index).Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteAliasRequest() : base(){}
 		// values part of the url path
 		Indices IDeleteAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Names IDeleteAliasRequest.Name => Self.RouteValues.Get<Names>("name");
@@ -1577,6 +1609,8 @@ namespace Nest
 		///<summary>/_ccr/auto_follow/{name}</summary>
 		///<param name="name">this parameter is required</param>
 		public DeleteAutoFollowPatternRequest(Name name) : base(r => r.Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteAutoFollowPatternRequest() : base(){}
 		// values part of the url path
 		Name IDeleteAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
 
@@ -1598,6 +1632,8 @@ namespace Nest
 		///<summary>/{index}/_delete_by_query</summary>
 		///<param name="index">this parameter is required</param>
 		public DeleteByQueryRequest(Indices index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteByQueryRequest() : base(){}
 		// values part of the url path
 		Indices IDeleteByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -1704,6 +1740,8 @@ namespace Nest
 		///<summary>/_ml/datafeeds/{datafeed_id}</summary>
 		///<param name="datafeed_id">this parameter is required</param>
 		public DeleteDatafeedRequest(Id datafeed_id) : base(r => r.Required("datafeed_id", datafeed_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteDatafeedRequest() : base(){}
 		// values part of the url path
 		Id IDeleteDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 
@@ -1737,6 +1775,8 @@ namespace Nest
 		///<summary>/{index}</summary>
 		///<param name="index">this parameter is required</param>
 		public DeleteIndexRequest(Indices index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteIndexRequest() : base(){}
 		// values part of the url path
 		Indices IDeleteIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -1765,6 +1805,8 @@ namespace Nest
 		///<summary>/_template/{name}</summary>
 		///<param name="name">this parameter is required</param>
 		public DeleteIndexTemplateRequest(Name name) : base(r => r.Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteIndexTemplateRequest() : base(){}
 		// values part of the url path
 		Name IDeleteIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
 
@@ -1787,6 +1829,8 @@ namespace Nest
 		///<summary>/_ml/anomaly_detectors/{job_id}</summary>
 		///<param name="job_id">this parameter is required</param>
 		public DeleteJobRequest(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteJobRequest() : base(){}
 		// values part of the url path
 		Id IDeleteJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
@@ -1824,6 +1868,8 @@ namespace Nest
 		///<param name="job_id">this parameter is required</param>
 		///<param name="snapshot_id">this parameter is required</param>
 		public DeleteModelSnapshotRequest(Id job_id, Id snapshot_id) : base(r => r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteModelSnapshotRequest() : base(){}
 		// values part of the url path
 		Id IDeleteModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		Id IDeleteModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
@@ -1843,6 +1889,8 @@ namespace Nest
 		///<summary>/_ingest/pipeline/{id}</summary>
 		///<param name="id">this parameter is required</param>
 		public DeletePipelineRequest(Id id) : base(r => r.Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeletePipelineRequest() : base(){}
 		// values part of the url path
 		Id IDeletePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
 
@@ -1865,6 +1913,8 @@ namespace Nest
 		///<summary>/_snapshot/{repository}</summary>
 		///<param name="repository">this parameter is required</param>
 		public DeleteRepositoryRequest(Names repository) : base(r => r.Required("repository", repository)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteRepositoryRequest() : base(){}
 		// values part of the url path
 		Names IDeleteRepositoryRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
 
@@ -1892,6 +1942,8 @@ namespace Nest
 		///<param name="index">this parameter is required</param>
 		///<param name="id">this parameter is required</param>
 		public DeleteRequest(IndexName index, Id id) : base(r => r.Required("index", index).Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteRequest() : base(){}
 		// values part of the url path
 		IndexName IDeleteRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		Id IDeleteRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -1943,9 +1995,11 @@ namespace Nest
 		public DeleteRequest(Id id) : base(typeof(TDocument), id){}
 		///<summary>/{index}/_doc/{id}</summary>
 		///<param name="id">The document used to resolve the path from</param>
-		public DeleteRequest(TDocument id) : this(Id.From(id))
-		=> DocumentFromPath(id);
+		public DeleteRequest(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Nest.Id.From(documentWithId))
+		=> DocumentFromPath(documentWithId);
 		partial void DocumentFromPath(TDocument document);
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteRequest() : base(){}
 	}
 	 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1961,6 +2015,8 @@ namespace Nest
 		///<summary>/_security/role_mapping/{name}</summary>
 		///<param name="name">this parameter is required</param>
 		public DeleteRoleMappingRequest(Name name) : base(r => r.Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteRoleMappingRequest() : base(){}
 		// values part of the url path
 		Name IDeleteRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
 
@@ -1984,6 +2040,8 @@ namespace Nest
 		///<summary>/_security/role/{name}</summary>
 		///<param name="name">this parameter is required</param>
 		public DeleteRoleRequest(Name name) : base(r => r.Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteRoleRequest() : base(){}
 		// values part of the url path
 		Name IDeleteRoleRequest.Name => Self.RouteValues.Get<Name>("name");
 
@@ -2007,6 +2065,8 @@ namespace Nest
 		///<summary>/_rollup/job/{id}</summary>
 		///<param name="id">this parameter is required</param>
 		public DeleteRollupJobRequest(Id id) : base(r => r.Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteRollupJobRequest() : base(){}
 		// values part of the url path
 		Id IDeleteRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
 
@@ -2025,6 +2085,8 @@ namespace Nest
 		///<summary>/_scripts/{id}</summary>
 		///<param name="id">this parameter is required</param>
 		public DeleteScriptRequest(Id id) : base(r => r.Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteScriptRequest() : base(){}
 		// values part of the url path
 		Id IDeleteScriptRequest.Id => Self.RouteValues.Get<Id>("id");
 
@@ -2049,6 +2111,8 @@ namespace Nest
 		///<param name="repository">this parameter is required</param>
 		///<param name="snapshot">this parameter is required</param>
 		public DeleteSnapshotRequest(Name repository, Name snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteSnapshotRequest() : base(){}
 		// values part of the url path
 		Name IDeleteSnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Name IDeleteSnapshotRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
@@ -2070,6 +2134,8 @@ namespace Nest
 		///<summary>/_security/user/{username}</summary>
 		///<param name="username">this parameter is required</param>
 		public DeleteUserRequest(Name username) : base(r => r.Required("username", username)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteUserRequest() : base(){}
 		// values part of the url path
 		Name IDeleteUserRequest.Username => Self.RouteValues.Get<Name>("username");
 
@@ -2093,6 +2159,8 @@ namespace Nest
 		///<summary>/_watcher/watch/{id}</summary>
 		///<param name="id">this parameter is required</param>
 		public DeleteWatchRequest(Id id) : base(r => r.Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DeleteWatchRequest() : base(){}
 		// values part of the url path
 		Id IDeleteWatchRequest.Id => Self.RouteValues.Get<Id>("id");
 
@@ -2131,6 +2199,8 @@ namespace Nest
 		///<summary>/_security/user/{username}/_disable</summary>
 		///<param name="username">this parameter is required</param>
 		public DisableUserRequest(Name username) : base(r => r.Required("username", username)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DisableUserRequest() : base(){}
 		// values part of the url path
 		Name IDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
 
@@ -2159,6 +2229,8 @@ namespace Nest
 		///<param name="index">this parameter is required</param>
 		///<param name="id">this parameter is required</param>
 		public DocumentExistsRequest(IndexName index, Id id) : base(r => r.Required("index", index).Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DocumentExistsRequest() : base(){}
 		// values part of the url path
 		IndexName IDocumentExistsRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		Id IDocumentExistsRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -2207,9 +2279,11 @@ namespace Nest
 		public DocumentExistsRequest(Id id) : base(typeof(TDocument), id){}
 		///<summary>/{index}/_doc/{id}</summary>
 		///<param name="id">The document used to resolve the path from</param>
-		public DocumentExistsRequest(TDocument id) : this(Id.From(id))
-		=> DocumentFromPath(id);
+		public DocumentExistsRequest(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Nest.Id.From(documentWithId))
+		=> DocumentFromPath(documentWithId);
 		partial void DocumentFromPath(TDocument document);
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal DocumentExistsRequest() : base(){}
 	}
 	 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2225,6 +2299,8 @@ namespace Nest
 		///<summary>/_security/user/{username}/_enable</summary>
 		///<param name="username">this parameter is required</param>
 		public EnableUserRequest(Name username) : base(r => r.Required("username", username)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal EnableUserRequest() : base(){}
 		// values part of the url path
 		Name IEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
 
@@ -2275,7 +2351,8 @@ namespace Nest
 	{
 		IndexName Index { get; }
 		Id Id { get; }
-	}
+[JsonProperty("stored_fields")] Fields StoredFields { get; set; }
+			}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IExplainRequest<TDocument> : IExplainRequest { }
@@ -2288,6 +2365,8 @@ namespace Nest
 		///<param name="index">this parameter is required</param>
 		///<param name="id">this parameter is required</param>
 		public ExplainRequest(IndexName index, Id id) : base(r => r.Required("index", index).Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal ExplainRequest() : base(){}
 		// values part of the url path
 		IndexName IExplainRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		Id IExplainRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -2301,8 +2380,6 @@ namespace Nest
 		public DefaultOperator? DefaultOperator { get => Q<DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
 		///<summary>The default field for query string query (default: _all)</summary>
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
-		///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public Fields StoredFields { get => Q<Fields>("stored_fields"); set => Q("stored_fields", value); }
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 		///<summary>The ID of the parent document</summary>
@@ -2340,9 +2417,11 @@ namespace Nest
 		public ExplainRequest(Id id) : base(typeof(TDocument), id){}
 		///<summary>/{index}/_explain/{id}</summary>
 		///<param name="id">The document used to resolve the path from</param>
-		public ExplainRequest(TDocument id) : this(Id.From(id))
-		=> DocumentFromPath(id);
+		public ExplainRequest(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Nest.Id.From(documentWithId))
+		=> DocumentFromPath(documentWithId);
 		partial void DocumentFromPath(TDocument document);
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal ExplainRequest() : base(){}
 	}
 	 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2389,6 +2468,8 @@ namespace Nest
 		///<summary>/_ml/anomaly_detectors/{job_id}/_flush</summary>
 		///<param name="job_id">this parameter is required</param>
 		public FlushJobRequest(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal FlushJobRequest() : base(){}
 		// values part of the url path
 		Id IFlushJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
@@ -2448,6 +2529,8 @@ namespace Nest
 		///<summary>/{index}/_ccr/stats</summary>
 		///<param name="index">this parameter is required</param>
 		public FollowIndexStatsRequest(Indices index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal FollowIndexStatsRequest() : base(){}
 		// values part of the url path
 		Indices IFollowIndexStatsRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -2501,6 +2584,8 @@ namespace Nest
 		///<summary>/_ml/anomaly_detectors/{job_id}/_forecast</summary>
 		///<param name="job_id">this parameter is required</param>
 		public ForecastJobRequest(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal ForecastJobRequest() : base(){}
 		// values part of the url path
 		Id IForecastJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
@@ -2559,6 +2644,8 @@ namespace Nest
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/records</summary>
 		///<param name="job_id">this parameter is required</param>
 		public GetAnomalyRecordsRequest(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetAnomalyRecordsRequest() : base(){}
 		// values part of the url path
 		Id IGetAnomalyRecordsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
@@ -2615,6 +2702,8 @@ namespace Nest
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/buckets</summary>
 		///<param name="job_id">this parameter is required</param>
 		public GetBucketsRequest(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetBucketsRequest() : base(){}
 		// values part of the url path
 		Id IGetBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		Timestamp IGetBucketsRequest.Timestamp => Self.RouteValues.Get<Timestamp>("timestamp");
@@ -2639,6 +2728,8 @@ namespace Nest
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/categories/</summary>
 		///<param name="job_id">this parameter is required</param>
 		public GetCategoriesRequest(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetCategoriesRequest() : base(){}
 		// values part of the url path
 		Id IGetCategoriesRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		CategoryId IGetCategoriesRequest.CategoryId => Self.RouteValues.Get<CategoryId>("category_id");
@@ -2720,6 +2811,8 @@ namespace Nest
 		///<param name="index">Optional, accepts null</param>
 		///<param name="fields">this parameter is required</param>
 		public GetFieldMappingRequest(Indices index, Fields fields) : base(r => r.Optional("index", index).Required("fields", fields)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetFieldMappingRequest() : base(){}
 		// values part of the url path
 		Fields IGetFieldMappingRequest.Fields => Self.RouteValues.Get<Fields>("fields");
 		Indices IGetFieldMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2754,6 +2847,8 @@ namespace Nest
 		///<summary>/{index}</summary>
 		///<param name="index">this parameter is required</param>
 		public GetIndexRequest(Indices index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetIndexRequest() : base(){}
 		// values part of the url path
 		Indices IGetIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -2862,6 +2957,8 @@ namespace Nest
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/influencers</summary>
 		///<param name="job_id">this parameter is required</param>
 		public GetInfluencersRequest(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetInfluencersRequest() : base(){}
 		// values part of the url path
 		Id IGetInfluencersRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
@@ -2979,6 +3076,8 @@ namespace Nest
 		///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots</summary>
 		///<param name="job_id">this parameter is required</param>
 		public GetModelSnapshotsRequest(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetModelSnapshotsRequest() : base(){}
 		// values part of the url path
 		Id IGetModelSnapshotsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		Id IGetModelSnapshotsRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
@@ -2998,6 +3097,8 @@ namespace Nest
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/overall_buckets</summary>
 		///<param name="job_id">this parameter is required</param>
 		public GetOverallBucketsRequest(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetOverallBucketsRequest() : base(){}
 		// values part of the url path
 		Id IGetOverallBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
@@ -3067,6 +3168,8 @@ namespace Nest
 		///<param name="index">this parameter is required</param>
 		///<param name="id">this parameter is required</param>
 		public GetRequest(IndexName index, Id id) : base(r => r.Required("index", index).Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetRequest() : base(){}
 		// values part of the url path
 		IndexName IGetRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		Id IGetRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -3115,9 +3218,11 @@ namespace Nest
 		public GetRequest(Id id) : base(typeof(TDocument), id){}
 		///<summary>/{index}/_doc/{id}</summary>
 		///<param name="id">The document used to resolve the path from</param>
-		public GetRequest(TDocument id) : this(Id.From(id))
-		=> DocumentFromPath(id);
+		public GetRequest(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Nest.Id.From(documentWithId))
+		=> DocumentFromPath(documentWithId);
 		partial void DocumentFromPath(TDocument document);
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetRequest() : base(){}
 	}
 	 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3193,6 +3298,8 @@ namespace Nest
 		///<summary>/{index}/_rollup/data</summary>
 		///<param name="index">this parameter is required</param>
 		public GetRollupIndexCapabilitiesRequest(IndexName index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetRollupIndexCapabilitiesRequest() : base(){}
 		// values part of the url path
 		IndexName IGetRollupIndexCapabilitiesRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
@@ -3231,6 +3338,8 @@ namespace Nest
 		///<summary>/_scripts/{id}</summary>
 		///<param name="id">this parameter is required</param>
 		public GetScriptRequest(Id id) : base(r => r.Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetScriptRequest() : base(){}
 		// values part of the url path
 		Id IGetScriptRequest.Id => Self.RouteValues.Get<Id>("id");
 
@@ -3253,6 +3362,8 @@ namespace Nest
 		///<param name="repository">this parameter is required</param>
 		///<param name="snapshot">this parameter is required</param>
 		public GetSnapshotRequest(Name repository, Names snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetSnapshotRequest() : base(){}
 		// values part of the url path
 		Name IGetSnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Names IGetSnapshotRequest.Snapshot => Self.RouteValues.Get<Names>("snapshot");
@@ -3278,6 +3389,8 @@ namespace Nest
 		///<summary>/_tasks/{task_id}</summary>
 		///<param name="task_id">this parameter is required</param>
 		public GetTaskRequest(TaskId task_id) : base(r => r.Required("task_id", task_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetTaskRequest() : base(){}
 		// values part of the url path
 		TaskId IGetTaskRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
 
@@ -3346,6 +3459,8 @@ namespace Nest
 		///<summary>/_watcher/watch/{id}</summary>
 		///<param name="id">this parameter is required</param>
 		public GetWatchRequest(Id id) : base(r => r.Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GetWatchRequest() : base(){}
 		// values part of the url path
 		Id IGetWatchRequest.Id => Self.RouteValues.Get<Id>("id");
 
@@ -3367,6 +3482,8 @@ namespace Nest
 		///<summary>/{index}/_graph/explore</summary>
 		///<param name="index">this parameter is required</param>
 		public GraphExploreRequest(Indices index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal GraphExploreRequest() : base(){}
 		// values part of the url path
 		Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -3419,6 +3536,8 @@ namespace Nest
 		///<summary>/{index}</summary>
 		///<param name="index">this parameter is required</param>
 		public IndexExistsRequest(Indices index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal IndexExistsRequest() : base(){}
 		// values part of the url path
 		Indices IIndexExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -3457,6 +3576,8 @@ namespace Nest
 		///<summary>/{index}/_doc</summary>
 		///<param name="index">this parameter is required</param>
 		public IndexRequest(IndexName index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal IndexRequest() : base(){}
 		// values part of the url path
 		IndexName IIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		Id IIndexRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -3513,13 +3634,13 @@ namespace Nest
 		///<summary>/{index}/_doc/{id}</summary>
 		///<param name="id">Optional, accepts null</param>
 		public IndexRequest(Id id) : base(typeof(TDocument), id){}
-		///<summary>/{index}/_doc/{id}</summary>
-		///<param name="id">The document used to resolve the path from</param>
-		public IndexRequest(TDocument id) : this(Id.From(id))
-		=> DocumentFromPath(id);
-		partial void DocumentFromPath(TDocument document);
 		///<summary>/{index}/_doc</summary>
 		public IndexRequest() : base(typeof(TDocument)){}
+		///<summary>/{index}/_doc/{id}</summary>
+		///<param name="id">The document used to resolve the path from</param>
+		public IndexRequest(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Nest.Id.From(documentWithId))
+		=> DocumentFromPath(documentWithId);
+		partial void DocumentFromPath(TDocument document);
 	}
 	 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3535,6 +3656,8 @@ namespace Nest
 		///<summary>/_template/{name}</summary>
 		///<param name="name">this parameter is required</param>
 		public IndexTemplateExistsRequest(Names name) : base(r => r.Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal IndexTemplateExistsRequest() : base(){}
 		// values part of the url path
 		Names IIndexTemplateExistsRequest.Name => Self.RouteValues.Get<Names>("name");
 
@@ -3703,6 +3826,8 @@ namespace Nest
 		///<summary>/_migration/upgrade/{index}</summary>
 		///<param name="index">this parameter is required</param>
 		public MigrationUpgradeRequest(IndexName index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal MigrationUpgradeRequest() : base(){}
 		// values part of the url path
 		IndexName IMigrationUpgradeRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
@@ -3714,7 +3839,8 @@ namespace Nest
 	public partial interface IMultiGetRequest : IRequest<MultiGetRequestParameters>
 	{
 		IndexName Index { get; }
-	}
+[JsonProperty("stored_fields")] Fields StoredFields { get; set; }
+			}
 
 	///<summary>Request parameters for Mget <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</pre></summary>
 	public partial class MultiGetRequest : PlainRequestBase<MultiGetRequestParameters>, IMultiGetRequest
@@ -3729,8 +3855,6 @@ namespace Nest
 		IndexName IMultiGetRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
 		// Request parameters
-		///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public Fields StoredFields { get => Q<Fields>("stored_fields"); set => Q("stored_fields", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
@@ -4051,6 +4175,8 @@ namespace Nest
 		///<summary>/{index}/_open</summary>
 		///<param name="index">this parameter is required</param>
 		public OpenIndexRequest(Indices index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal OpenIndexRequest() : base(){}
 		// values part of the url path
 		Indices IOpenIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -4084,6 +4210,8 @@ namespace Nest
 		///<summary>/_ml/anomaly_detectors/{job_id}/_open</summary>
 		///<param name="job_id">this parameter is required</param>
 		public OpenJobRequest(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal OpenJobRequest() : base(){}
 		// values part of the url path
 		Id IOpenJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
@@ -4102,6 +4230,8 @@ namespace Nest
 		///<summary>/{index}/_ccr/pause_follow</summary>
 		///<param name="index">this parameter is required</param>
 		public PauseFollowIndexRequest(IndexName index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PauseFollowIndexRequest() : base(){}
 		// values part of the url path
 		IndexName IPauseFollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
@@ -4133,6 +4263,8 @@ namespace Nest
 		///<summary>/_ml/anomaly_detectors/{job_id}/_data</summary>
 		///<param name="job_id">this parameter is required</param>
 		public PostJobDataRequest(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PostJobDataRequest() : base(){}
 		// values part of the url path
 		Id IPostJobDataRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
@@ -4170,6 +4302,8 @@ namespace Nest
 		///<summary>/_ml/datafeeds/{datafeed_id}/_preview</summary>
 		///<param name="datafeed_id">this parameter is required</param>
 		public PreviewDatafeedRequest(Id datafeed_id) : base(r => r.Required("datafeed_id", datafeed_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PreviewDatafeedRequest() : base(){}
 		// values part of the url path
 		Id IPreviewDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 
@@ -4190,6 +4324,8 @@ namespace Nest
 		///<param name="index">this parameter is required</param>
 		///<param name="name">this parameter is required</param>
 		public PutAliasRequest(Indices index, Name name) : base(r => r.Required("index", index).Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PutAliasRequest() : base(){}
 		// values part of the url path
 		Indices IPutAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Name IPutAliasRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -4213,6 +4349,8 @@ namespace Nest
 		///<summary>/_ml/datafeeds/{datafeed_id}</summary>
 		///<param name="datafeed_id">this parameter is required</param>
 		public PutDatafeedRequest(Id datafeed_id) : base(r => r.Required("datafeed_id", datafeed_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PutDatafeedRequest() : base(){}
 		// values part of the url path
 		Id IPutDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 
@@ -4231,6 +4369,8 @@ namespace Nest
 		///<summary>/_template/{name}</summary>
 		///<param name="name">this parameter is required</param>
 		public PutIndexTemplateRequest(Name name) : base(r => r.Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PutIndexTemplateRequest() : base(){}
 		// values part of the url path
 		Name IPutIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
 
@@ -4259,6 +4399,8 @@ namespace Nest
 		///<summary>/_ml/anomaly_detectors/{job_id}</summary>
 		///<param name="job_id">this parameter is required</param>
 		public PutJobRequest(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PutJobRequest() : base(){}
 		// values part of the url path
 		Id IPutJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
@@ -4280,6 +4422,8 @@ namespace Nest
 		///<summary>/{index}/_mapping</summary>
 		///<param name="index">this parameter is required</param>
 		public PutMappingRequest(Indices index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PutMappingRequest() : base(){}
 		// values part of the url path
 		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -4323,6 +4467,8 @@ namespace Nest
 		///<summary>/_ingest/pipeline/{id}</summary>
 		///<param name="id">this parameter is required</param>
 		public PutPipelineRequest(Id id) : base(r => r.Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PutPipelineRequest() : base(){}
 		// values part of the url path
 		Id IPutPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
 
@@ -4345,6 +4491,8 @@ namespace Nest
 		///<summary>/_security/role_mapping/{name}</summary>
 		///<param name="name">this parameter is required</param>
 		public PutRoleMappingRequest(Name name) : base(r => r.Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PutRoleMappingRequest() : base(){}
 		// values part of the url path
 		Name IPutRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
 
@@ -4368,6 +4516,8 @@ namespace Nest
 		///<summary>/_security/role/{name}</summary>
 		///<param name="name">this parameter is required</param>
 		public PutRoleRequest(Name name) : base(r => r.Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PutRoleRequest() : base(){}
 		// values part of the url path
 		Name IPutRoleRequest.Name => Self.RouteValues.Get<Name>("name");
 
@@ -4396,6 +4546,8 @@ namespace Nest
 		///<param name="id">this parameter is required</param>
 		///<param name="context">Optional, accepts null</param>
 		public PutScriptRequest(Id id, Name context) : base(r => r.Required("id", id).Optional("context", context)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PutScriptRequest() : base(){}
 		// values part of the url path
 		Id IPutScriptRequest.Id => Self.RouteValues.Get<Id>("id");
 		Name IPutScriptRequest.Context => Self.RouteValues.Get<Name>("context");
@@ -4419,6 +4571,8 @@ namespace Nest
 		///<summary>/_security/user/{username}</summary>
 		///<param name="username">this parameter is required</param>
 		public PutUserRequest(Name username) : base(r => r.Required("username", username)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PutUserRequest() : base(){}
 		// values part of the url path
 		Name IPutUserRequest.Username => Self.RouteValues.Get<Name>("username");
 
@@ -4442,6 +4596,8 @@ namespace Nest
 		///<summary>/_watcher/watch/{id}</summary>
 		///<param name="id">this parameter is required</param>
 		public PutWatchRequest(Id id) : base(r => r.Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal PutWatchRequest() : base(){}
 		// values part of the url path
 		Id IPutWatchRequest.Id => Self.RouteValues.Get<Id>("id");
 
@@ -4567,6 +4723,8 @@ namespace Nest
 		///<summary>/_reindex/{task_id}/_rethrottle</summary>
 		///<param name="task_id">this parameter is required</param>
 		public ReindexRethrottleRequest(TaskId task_id) : base(r => r.Required("task_id", task_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal ReindexRethrottleRequest() : base(){}
 		// values part of the url path
 		TaskId IReindexRethrottleRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
 
@@ -4644,6 +4802,8 @@ namespace Nest
 		///<param name="repository">this parameter is required</param>
 		///<param name="snapshot">this parameter is required</param>
 		public RestoreRequest(Name repository, Name snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal RestoreRequest() : base(){}
 		// values part of the url path
 		Name IRestoreRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Name IRestoreRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
@@ -4667,6 +4827,8 @@ namespace Nest
 		///<summary>/{index}/_ccr/resume_follow</summary>
 		///<param name="index">this parameter is required</param>
 		public ResumeFollowIndexRequest(IndexName index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal ResumeFollowIndexRequest() : base(){}
 		// values part of the url path
 		IndexName IResumeFollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
@@ -4687,6 +4849,8 @@ namespace Nest
 		///<param name="job_id">this parameter is required</param>
 		///<param name="snapshot_id">this parameter is required</param>
 		public RevertModelSnapshotRequest(Id job_id, Id snapshot_id) : base(r => r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal RevertModelSnapshotRequest() : base(){}
 		// values part of the url path
 		Id IRevertModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		Id IRevertModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
@@ -4711,6 +4875,8 @@ namespace Nest
 		///<param name="alias">this parameter is required</param>
 		///<param name="new_index">Optional, accepts null</param>
 		public RolloverIndexRequest(Name alias, IndexName new_index) : base(r => r.Required("alias", alias).Optional("new_index", new_index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal RolloverIndexRequest() : base(){}
 		// values part of the url path
 		Name IRolloverIndexRequest.Alias => Self.RouteValues.Get<Name>("alias");
 		IndexName IRolloverIndexRequest.NewIndex => Self.RouteValues.Get<IndexName>("new_index");
@@ -4740,6 +4906,8 @@ namespace Nest
 		///<summary>/{index}/_rollup_search</summary>
 		///<param name="index">this parameter is required</param>
 		public RollupSearchRequest(Indices index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal RollupSearchRequest() : base(){}
 		// values part of the url path
 		Indices IRollupSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -4781,7 +4949,9 @@ namespace Nest
 	public partial interface ISearchRequest : IRequest<SearchRequestParameters>
 	{
 		Indices Index { get; }
-	}
+[JsonProperty("stored_fields")] Fields StoredFields { get; set; }
+		[JsonProperty("docvalue_fields")] Fields DocValueFields { get; set; }
+			}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISearchRequest<T> : ISearchRequest { }
@@ -4809,10 +4979,6 @@ namespace Nest
 		public DefaultOperator? DefaultOperator { get => Q<DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
-		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		public Fields StoredFields { get => Q<Fields>("stored_fields"); set => Q("stored_fields", value); }
-		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public Fields DocValueFields { get => Q<Fields>("docvalue_fields"); set => Q("docvalue_fields", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
@@ -5048,6 +5214,8 @@ namespace Nest
 		///<param name="index">this parameter is required</param>
 		///<param name="target">this parameter is required</param>
 		public ShrinkIndexRequest(IndexName index, IndexName target) : base(r => r.Required("index", index).Required("target", target)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal ShrinkIndexRequest() : base(){}
 		// values part of the url path
 		IndexName IShrinkIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		IndexName IShrinkIndexRequest.Target => Self.RouteValues.Get<IndexName>("target");
@@ -5100,6 +5268,8 @@ namespace Nest
 		///<param name="repository">this parameter is required</param>
 		///<param name="snapshot">this parameter is required</param>
 		public SnapshotRequest(Name repository, Name snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal SnapshotRequest() : base(){}
 		// values part of the url path
 		Name ISnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Name ISnapshotRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
@@ -5158,6 +5328,8 @@ namespace Nest
 		///<param name="index">this parameter is required</param>
 		///<param name="id">this parameter is required</param>
 		public SourceExistsRequest(IndexName index, Id id) : base(r => r.Required("index", index).Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal SourceExistsRequest() : base(){}
 		// values part of the url path
 		IndexName ISourceExistsRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		Id ISourceExistsRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -5204,9 +5376,11 @@ namespace Nest
 		public SourceExistsRequest(Id id) : base(typeof(TDocument), id){}
 		///<summary>/{index}/_source/{id}</summary>
 		///<param name="id">The document used to resolve the path from</param>
-		public SourceExistsRequest(TDocument id) : this(Id.From(id))
-		=> DocumentFromPath(id);
+		public SourceExistsRequest(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Nest.Id.From(documentWithId))
+		=> DocumentFromPath(documentWithId);
 		partial void DocumentFromPath(TDocument document);
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal SourceExistsRequest() : base(){}
 	}
 	 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5227,6 +5401,8 @@ namespace Nest
 		///<param name="index">this parameter is required</param>
 		///<param name="id">this parameter is required</param>
 		public SourceRequest(IndexName index, Id id) : base(r => r.Required("index", index).Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal SourceRequest() : base(){}
 		// values part of the url path
 		IndexName ISourceRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		Id ISourceRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -5273,9 +5449,11 @@ namespace Nest
 		public SourceRequest(Id id) : base(typeof(TDocument), id){}
 		///<summary>/{index}/_source/{id}</summary>
 		///<param name="id">The document used to resolve the path from</param>
-		public SourceRequest(TDocument id) : this(Id.From(id))
-		=> DocumentFromPath(id);
+		public SourceRequest(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Nest.Id.From(documentWithId))
+		=> DocumentFromPath(documentWithId);
 		partial void DocumentFromPath(TDocument document);
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal SourceRequest() : base(){}
 	}
 	 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5293,6 +5471,8 @@ namespace Nest
 		///<param name="index">this parameter is required</param>
 		///<param name="target">this parameter is required</param>
 		public SplitIndexRequest(IndexName index, IndexName target) : base(r => r.Required("index", index).Required("target", target)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal SplitIndexRequest() : base(){}
 		// values part of the url path
 		IndexName ISplitIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		IndexName ISplitIndexRequest.Target => Self.RouteValues.Get<IndexName>("target");
@@ -5336,6 +5516,8 @@ namespace Nest
 		///<summary>/_ml/datafeeds/{datafeed_id}/_start</summary>
 		///<param name="datafeed_id">this parameter is required</param>
 		public StartDatafeedRequest(Id datafeed_id) : base(r => r.Required("datafeed_id", datafeed_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal StartDatafeedRequest() : base(){}
 		// values part of the url path
 		Id IStartDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 
@@ -5354,6 +5536,8 @@ namespace Nest
 		///<summary>/_rollup/job/{id}/_start</summary>
 		///<param name="id">this parameter is required</param>
 		public StartRollupJobRequest(Id id) : base(r => r.Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal StartRollupJobRequest() : base(){}
 		// values part of the url path
 		Id IStartRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
 
@@ -5402,6 +5586,8 @@ namespace Nest
 		///<summary>/_ml/datafeeds/{datafeed_id}/_stop</summary>
 		///<param name="datafeed_id">this parameter is required</param>
 		public StopDatafeedRequest(Id datafeed_id) : base(r => r.Required("datafeed_id", datafeed_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal StopDatafeedRequest() : base(){}
 		// values part of the url path
 		Id IStopDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 
@@ -5422,6 +5608,8 @@ namespace Nest
 		///<summary>/_rollup/job/{id}/_stop</summary>
 		///<param name="id">this parameter is required</param>
 		public StopRollupJobRequest(Id id) : base(r => r.Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal StopRollupJobRequest() : base(){}
 		// values part of the url path
 		Id IStopRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
 
@@ -5494,6 +5682,8 @@ namespace Nest
 		///<summary>/{index}/_termvectors</summary>
 		///<param name="index">this parameter is required</param>
 		public TermVectorsRequest(IndexName index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal TermVectorsRequest() : base(){}
 		// values part of the url path
 		IndexName ITermVectorsRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		Id ITermVectorsRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -5545,13 +5735,13 @@ namespace Nest
 		///<summary>/{index}/_termvectors/{id}</summary>
 		///<param name="id">Optional, accepts null</param>
 		public TermVectorsRequest(Id id) : base(typeof(TDocument), id){}
-		///<summary>/{index}/_termvectors/{id}</summary>
-		///<param name="id">The document used to resolve the path from</param>
-		public TermVectorsRequest(TDocument id) : this(Id.From(id))
-		=> DocumentFromPath(id);
-		partial void DocumentFromPath(TDocument document);
 		///<summary>/{index}/_termvectors</summary>
 		public TermVectorsRequest() : base(typeof(TDocument)){}
+		///<summary>/{index}/_termvectors/{id}</summary>
+		///<param name="id">The document used to resolve the path from</param>
+		public TermVectorsRequest(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Nest.Id.From(documentWithId))
+		=> DocumentFromPath(documentWithId);
+		partial void DocumentFromPath(TDocument document);
 	}
 	 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5582,6 +5772,8 @@ namespace Nest
 		///<param name="index">this parameter is required</param>
 		///<param name="type">this parameter is required</param>
 		public TypeExistsRequest(Indices index, Types type) : base(r => r.Required("index", index).Required("type", type)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal TypeExistsRequest() : base(){}
 		// values part of the url path
 		Indices ITypeExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ITypeExistsRequest.Type => Self.RouteValues.Get<Types>("type");
@@ -5612,6 +5804,8 @@ namespace Nest
 		///<summary>/{index}/_ccr/unfollow</summary>
 		///<param name="index">this parameter is required</param>
 		public UnfollowIndexRequest(IndexName index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal UnfollowIndexRequest() : base(){}
 		// values part of the url path
 		IndexName IUnfollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
@@ -5633,6 +5827,8 @@ namespace Nest
 		///<summary>/{index}/_update_by_query</summary>
 		///<param name="index">this parameter is required</param>
 		public UpdateByQueryRequest(Indices index) : base(r => r.Required("index", index)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal UpdateByQueryRequest() : base(){}
 		// values part of the url path
 		Indices IUpdateByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 
@@ -5743,6 +5939,8 @@ namespace Nest
 		///<summary>/_ml/datafeeds/{datafeed_id}/_update</summary>
 		///<param name="datafeed_id">this parameter is required</param>
 		public UpdateDatafeedRequest(Id datafeed_id) : base(r => r.Required("datafeed_id", datafeed_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal UpdateDatafeedRequest() : base(){}
 		// values part of the url path
 		Id IUpdateDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 
@@ -5798,6 +5996,8 @@ namespace Nest
 		///<summary>/_ml/anomaly_detectors/{job_id}/_update</summary>
 		///<param name="job_id">this parameter is required</param>
 		public UpdateJobRequest(Id job_id) : base(r => r.Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal UpdateJobRequest() : base(){}
 		// values part of the url path
 		Id IUpdateJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
@@ -5818,6 +6018,8 @@ namespace Nest
 		///<param name="job_id">this parameter is required</param>
 		///<param name="snapshot_id">this parameter is required</param>
 		public UpdateModelSnapshotRequest(Id job_id, Id snapshot_id) : base(r => r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal UpdateModelSnapshotRequest() : base(){}
 		// values part of the url path
 		Id IUpdateModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		Id IUpdateModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
@@ -5842,6 +6044,8 @@ namespace Nest
 		///<param name="index">this parameter is required</param>
 		///<param name="id">this parameter is required</param>
 		public UpdateRequest(IndexName index, Id id) : base(r => r.Required("index", index).Required("id", id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal UpdateRequest() : base(){}
 		// values part of the url path
 		IndexName IUpdateRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		Id IUpdateRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -5895,9 +6099,11 @@ namespace Nest
 		public UpdateRequest(Id id) : base(typeof(TDocument), id){}
 		///<summary>/{index}/_update/{id}</summary>
 		///<param name="id">The document used to resolve the path from</param>
-		public UpdateRequest(TDocument id) : this(Id.From(id))
-		=> DocumentFromPath(id);
+		public UpdateRequest(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Nest.Id.From(documentWithId))
+		=> DocumentFromPath(documentWithId);
 		partial void DocumentFromPath(TDocument document);
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal UpdateRequest() : base(){}
 	}
 	 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -6061,6 +6267,8 @@ namespace Nest
 		///<summary>/_snapshot/{repository}/_verify</summary>
 		///<param name="repository">this parameter is required</param>
 		public VerifyRepositoryRequest(Name repository) : base(r => r.Required("repository", repository)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		internal VerifyRepositoryRequest() : base(){}
 		// values part of the url path
 		Name IVerifyRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 

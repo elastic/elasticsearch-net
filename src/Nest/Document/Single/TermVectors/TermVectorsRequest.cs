@@ -50,8 +50,6 @@ namespace Nest
 
 		HttpMethod IRequest.HttpMethod => Document != null || Filter != null ? HttpMethod.POST : HttpMethod.GET;
 
-		private TDocument AutoRouteDocument() => Document;
-
 		partial void DocumentFromPath(TDocument document)
 		{
 			Document = document;
@@ -67,8 +65,6 @@ namespace Nest
 		HttpMethod IRequest.HttpMethod => Self.Document != null || Self.Filter != null ? HttpMethod.POST : HttpMethod.GET;
 
 		IPerFieldAnalyzer ITermVectorsRequest<TDocument>.PerFieldAnalyzer { get; set; }
-
-		private TDocument AutoRouteDocument() => Self.Document;
 
 		/// <summary>
 		/// An optional document to get term vectors for instead of using an already indexed document

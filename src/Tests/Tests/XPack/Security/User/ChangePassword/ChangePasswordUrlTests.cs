@@ -11,14 +11,14 @@ namespace Tests.XPack.Security.User.ChangePassword
 		[U]
 		public override async Task Urls()
 		{
-			await PUT("/_xpack/security/user/forloop/_password")
+			await PUT("/_security/user/forloop/_password")
 					.Fluent(c => c.ChangePassword(p => p.Username("forloop").Password("password")))
 					.Request(c => c.ChangePassword(new ChangePasswordRequest("forloop") { Password = "password" }))
 					.FluentAsync(c => c.ChangePasswordAsync(p => p.Username("forloop").Password("password")))
 					.RequestAsync(c => c.ChangePasswordAsync(new ChangePasswordRequest("forloop") { Password = "password" }))
 				;
 
-			await PUT("/_xpack/security/user/_password")
+			await PUT("/_security/user/_password")
 					.Fluent(c => c.ChangePassword(p => p.Password("password")))
 					.Request(c => c.ChangePassword(new ChangePasswordRequest() { Password = "password" }))
 					.FluentAsync(c => c.ChangePasswordAsync(p => p.Password("password")))

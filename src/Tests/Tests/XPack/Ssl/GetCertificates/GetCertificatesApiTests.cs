@@ -21,7 +21,7 @@ namespace Tests.XPack.Ssl.GetCertificates
 
 		protected override GetCertificatesRequest Initializer => new GetCertificatesRequest();
 
-		protected override string UrlPath => $"/_xpack/ssl/certificates";
+		protected override string UrlPath => $"/_ssl/certificates";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.GetCertificates(f),

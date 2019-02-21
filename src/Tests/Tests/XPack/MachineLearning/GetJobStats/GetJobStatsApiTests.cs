@@ -21,7 +21,7 @@ namespace Tests.XPack.MachineLearning.GetJobStats
 		protected override Func<GetJobStatsDescriptor, IGetJobStatsRequest> Fluent => f => f;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override GetJobStatsRequest Initializer => new GetJobStatsRequest();
-		protected override string UrlPath => $"/_xpack/ml/anomaly_detectors/_stats";
+		protected override string UrlPath => $"/_ml/anomaly_detectors/_stats";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -81,7 +81,7 @@ namespace Tests.XPack.MachineLearning.GetJobStats
 		protected override Func<GetJobStatsDescriptor, IGetJobStatsRequest> Fluent => f => f.JobId(CallIsolatedValue);
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override GetJobStatsRequest Initializer => new GetJobStatsRequest(CallIsolatedValue);
-		protected override string UrlPath => $"/_xpack/ml/anomaly_detectors/{CallIsolatedValue}/_stats";
+		protected override string UrlPath => $"/_ml/anomaly_detectors/{CallIsolatedValue}/_stats";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

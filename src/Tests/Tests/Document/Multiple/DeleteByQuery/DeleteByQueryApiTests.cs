@@ -60,7 +60,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override string UrlPath => $"/{CallIsolatedValue}%2C{SecondIndex}/doc/_delete_by_query?ignore_unavailable=true";
+		protected override string UrlPath => $"/{CallIsolatedValue}%2C{SecondIndex}/_delete_by_query?ignore_unavailable=true";
 		private Nest.Indices Indices => Index(CallIsolatedValue).And(SecondIndex);
 
 		private string SecondIndex => $"{CallIsolatedValue}-clone";
@@ -137,7 +137,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 			Conflicts = Conflicts.Proceed
 		};
 
-		protected override string UrlPath => $"/{CallIsolatedValue}/doc/_delete_by_query?wait_for_completion=false&conflicts=proceed";
+		protected override string UrlPath => $"/{CallIsolatedValue}/_delete_by_query?wait_for_completion=false&conflicts=proceed";
 
 		protected override DeleteByQueryDescriptor<Project> NewDescriptor() => new DeleteByQueryDescriptor<Project>(CallIsolatedValue);
 
@@ -182,7 +182,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 			},
 		};
 
-		protected override string UrlPath => $"/{CallIsolatedValue}/doc/_delete_by_query";
+		protected override string UrlPath => $"/{CallIsolatedValue}/_delete_by_query";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -264,7 +264,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 			},
 		};
 
-		protected override string UrlPath => $"/{CallIsolatedValue}/doc/_delete_by_query";
+		protected override string UrlPath => $"/{CallIsolatedValue}/_delete_by_query";
 		private static List<string> FirstTenProjectNames => Project.Projects.Take(10).Select(p => p.Name).ToList();
 
 		protected override DeleteByQueryDescriptor<Project> NewDescriptor() => new DeleteByQueryDescriptor<Project>(CallIsolatedValue);

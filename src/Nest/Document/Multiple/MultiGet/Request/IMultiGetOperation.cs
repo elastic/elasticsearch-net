@@ -27,9 +27,6 @@ namespace Nest
 		[JsonProperty("stored_fields")]
 		Fields StoredFields { get; set; }
 
-		[JsonProperty("_type")]
-		TypeName Type { get; set; }
-
 		[JsonProperty("version")]
 		long? Version { get; set; }
 

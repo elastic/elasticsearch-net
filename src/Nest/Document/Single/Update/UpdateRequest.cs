@@ -68,8 +68,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public TDocument Upsert { get; set; }
-
-		private object AutoRouteDocument() => (object)Upsert ?? Doc;
 	}
 
 	public partial class UpdateDescriptor<TDocument, TPartialDocument>
@@ -89,8 +87,6 @@ namespace Nest
 		Union<bool, ISourceFilter> IUpdateRequest<TDocument, TPartialDocument>.Source { get; set; }
 
 		TDocument IUpdateRequest<TDocument, TPartialDocument>.Upsert { get; set; }
-
-		private object AutoRouteDocument() => (object)Self.Upsert ?? Self.Doc;
 
 		/// <summary>
 		/// The full document to be created if an existing document does not exist for a partial merge.

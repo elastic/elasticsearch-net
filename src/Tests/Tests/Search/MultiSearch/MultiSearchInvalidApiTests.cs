@@ -27,7 +27,7 @@ namespace Tests.Search.MultiSearch
 			new { query = new { match_all = new { } }, from = 0, size = 10 },
 			new { index = "otherindex" },
 			new { query = new { match = new { name = new { query = "nest" } } } },
-			new { index = "otherindex", type = "othertype", search_type = "dfs_query_then_fetch" },
+			new { index = "otherindex", search_type = "dfs_query_then_fetch" },
 			new { query = new { match_all = new { } } }
 		};
 
@@ -60,7 +60,7 @@ namespace Tests.Search.MultiSearch
 		};
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => "/project/doc/_msearch";
+		protected override string UrlPath => "/project/_msearch";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(c, f) => c.MultiSearch(f),
