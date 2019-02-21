@@ -557,18 +557,6 @@ namespace Tests.Analysis.TokenFilters
 			public override string Name => "snow";
 		}
 
-		public class StandardTests : TokenFilterAssertionBase<StandardTests>
-		{
-			public override FuncTokenFilters Fluent => (n, tf) => tf.Standard(n);
-
-#pragma warning disable 618
-			public override ITokenFilter Initializer => new StandardTokenFilter();
-#pragma warning restore 618
-
-			public override object Json => new { type = "standard" };
-			public override string Name => "standard";
-		}
-
 		public class StemmerTests : TokenFilterAssertionBase<StemmerTests>
 		{
 			public override FuncTokenFilters Fluent => (n, tf) => tf.Stemmer(n, t => t.Language("arabic"));

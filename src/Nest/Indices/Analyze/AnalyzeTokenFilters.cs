@@ -233,14 +233,6 @@ namespace Nest
 		public AnalyzeTokenFiltersDescriptor Snowball(Func<SnowballTokenFilterDescriptor, ISnowballTokenFilter> selector) =>
 			AssignIfNotNull(selector?.Invoke(new SnowballTokenFilterDescriptor()));
 
-		/// <summary>
-		/// A token filter of type standard that normalizes tokens extracted with the Standard Tokenizer.
-		/// </summary>
-#pragma warning disable 618
-		public AnalyzeTokenFiltersDescriptor Standard(Func<StandardTokenFilterDescriptor, IStandardTokenFilter> selector = null) =>
-			AssignIfNotNull(selector.InvokeOrDefault(new StandardTokenFilterDescriptor()));
-#pragma warning restore 618
-
 		/// <inheritdoc cref="IConditionTokenFilter" />
 		public AnalyzeTokenFiltersDescriptor Condition(Func<ConditionTokenFilterDescriptor, IConditionTokenFilter> selector) =>
 			AssignIfNotNull(selector?.Invoke(new ConditionTokenFilterDescriptor()));
