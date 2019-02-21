@@ -101,7 +101,7 @@ namespace Tests.Document.Single.Delete
 
 		protected override Func<DeleteDescriptor<Project>, IDeleteRequest> Fluent => f => f.Index(BadIndex);
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override DeleteRequest<Project> Initializer => new DeleteRequest<Project>(CallIsolatedValue, BadIndex);
+		protected override DeleteRequest<Project> Initializer => new DeleteRequest<Project>(BadIndex, CallIsolatedValue);
 
 		protected override bool SupportsDeserialization => false;
 		protected override string UrlPath => $"/{BadIndex}/_doc/{CallIsolatedValue}";

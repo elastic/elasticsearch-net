@@ -23,8 +23,8 @@ namespace Tests.Indices.MappingManagement.GetFieldMapping
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
-		protected override GetFieldMappingRequest Initializer => new GetFieldMappingRequest(Fields);
-		protected override string UrlPath => $"/_mapping/field/name%2CleadDeveloper.ipAddress";
+		protected override GetFieldMappingRequest Initializer => new GetFieldMappingRequest("project", Fields);
+		protected override string UrlPath => $"/project/_mapping/field/name%2CleadDeveloper.ipAddress";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.GetFieldMapping<Project>(Fields),

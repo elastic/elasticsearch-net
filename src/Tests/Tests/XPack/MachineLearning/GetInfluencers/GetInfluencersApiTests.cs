@@ -23,6 +23,8 @@ namespace Tests.XPack.MachineLearning.GetInfluencers
 		protected override GetInfluencersRequest Initializer => new GetInfluencersRequest(CallIsolatedValue);
 		protected override string UrlPath => $"/_ml/anomaly_detectors/{CallIsolatedValue}/results/influencers";
 
+		protected override GetInfluencersDescriptor NewDescriptor() => new GetInfluencersDescriptor(CallIsolatedValue);
+
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var callUniqueValue in values)

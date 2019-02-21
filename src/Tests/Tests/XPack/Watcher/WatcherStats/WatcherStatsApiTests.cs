@@ -26,7 +26,7 @@ namespace Tests.XPack.Watcher.WatcherStats
 
 		protected override WatcherStatsRequest Initializer => new WatcherStatsRequest(WatcherStatsMetric.All);
 
-		protected override string UrlPath => "/_watcher/stats/_all";
+		protected override string UrlPath => "/_watcher/stats";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
