@@ -8,9 +8,19 @@ jobs:
   steps:
   - script: ./build.sh test-one skipdocs
     displayName: build and unit test
+  - task: PublishTestResults@2
+    inputs:
+        testRunner: VSTest
+        testResultsFiles: '**/*.trx'
+
 - job: Windows
   pool:
     vmImage: 'vs2017-win2016'
   steps:
-  - script: build.bat canary
+  - script: build.bat canary skipdocs
     displayName: build and unit test
+  - task: PublishTestResults@2
+    inputs:
+      testRunner: VSTest
+      testResultsFiles: '**/*.trx'
+    
