@@ -15,9 +15,10 @@ open Versioning
 
 
 module Tests =
+    open Fake.Core
     open System
 
-    let private buildingOnTravis = getEnvironmentVarAsBool "TRAVIS"
+    let private buildingOnAzurePipeline = getEnvironmentVarAsBool "TF_BUILD"
     let private buildingOnTeamCity = match environVarOrNone "TEAMCITY_VERSION" with | Some x -> true | None -> false
 
     let private setLocalEnvVars() = 
@@ -39,15 +40,19 @@ module Tests =
     let private dotnetTest (target: Commandline.MultiTarget) =
         CreateDir Paths.BuildOutput
         let command = 
-            let p = ["xunit"; "-parallel"; "all"; "-xml"; "../../.." @@ Paths.Output("TestResults-Desktop-Clr.xml")] 
-            match (target, buildingOnTravis) with 
-            //make sure we don't test against net46 on mono or travis systems
+            let p = ["test"; "."]
+            //make sure we only test netcoreapp on linux or requested on the command line to only test-one
+            match (target, Environment.isLinux) with 
             | (_, true) 
-            | (Commandline.MultiTarget.One, _) -> ["-framework"; "netcoreapp2.1"] |> List.append p
+            | (Commandline.MultiTarget.One, _) -> ["--framework"; "netcoreapp2.1"] |> List.append p
             | _  -> p
-
+        let commandWithCodeCoverage =
+            match (buildingOnAzurePipeline) with
+            | (true) -> [ "--logger"; "trx"; "--collect"; "\"Code Coverage\""] |> List.append command
+            | _  -> command
+            
         let dotnet = Tooling.BuildTooling("dotnet")
-        let exitCode = dotnet.ExecWithTimeoutIn "src/Tests/Tests" command (TimeSpan.FromMinutes 30.) 
+        let exitCode = dotnet.ExecWithTimeoutIn "src/Tests/Tests" commandWithCodeCoverage (TimeSpan.FromMinutes 30.) 
         if exitCode > 0 && not buildingOnTeamCity then raise (Exception <| (sprintf "test finished with exitCode %d" exitCode))
 
     let RunReleaseUnitTests() =
