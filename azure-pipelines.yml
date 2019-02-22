@@ -1,30 +1,30 @@
 jobs:
-- job: 'Linux Unit Tests'
+- job: LinuxUnitTests
   pool:
     vmImage: 'ubuntu-16.04'
   steps:
   - script: ./build.sh test-one skipdocs
-    displayName: build and unit test
+    displayName: 'build and unit test'
   - task: PublishTestResults@2
     inputs:
         testRunner: VSTest
-        testResultsFiles: '**/*.trx'
+        testResultsFiles: 'src/Tests/Tests/**/*.trx'
         testRunTitle: Linux Unit Tests
 
-- job: 'Windows Nuget Package Tests'
+- job: WindowsCanaryTests
   pool:
     vmImage: 'vs2017-win2016'
   steps:
   - script: build.bat canary skipdocs
-    displayName: build and unit test
+    displayName: 'build and unit test'
   - task: PublishTestResults@2
     inputs:
       testRunner: VSTest
-      testResultsFiles: '**/*.trx'
+      testResultsFiles: 'src/Tests/Tests/**/*.trx'
       testRunTitle: Windows Unit Tests
 
-- job: 'Windows Integration Tests'
-  dependsOn: 'Windows Nuget Package Tests'
+- job: WindowsIntegrationTests
+  dependsOn: WindowsCanaryTests
   pool:
       vmImage: 'vs2017-win2016'
   strategy:
@@ -33,7 +33,7 @@ jobs:
       es653:
         esVersion: '6.5.3'
       es632:
-          esVersion: '6.3.2'
+        esVersion: '6.3.2'
   steps:
       - script: 'build.bat integrate $(esVersion) skipdocs'
         displayName: '$(esVersion) integration tests'
