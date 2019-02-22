@@ -1,8 +1,5 @@
-trigger:
-- master
-
 jobs:
-- job: Linux
+- job: 'Linux Unit Tests'
   pool:
     vmImage: 'ubuntu-16.04'
   steps:
@@ -14,7 +11,7 @@ jobs:
         testResultsFiles: '**/*.trx'
         testRunTitle: Linux Unit Tests
 
-- job: Windows
+- job: 'Windows Nuget Package Tests'
   pool:
     vmImage: 'vs2017-win2016'
   steps:
@@ -25,4 +22,18 @@ jobs:
       testRunner: VSTest
       testResultsFiles: '**/*.trx'
       testRunTitle: Windows Unit Tests
-    
+
+- job: 'Windows Integration Tests'
+  dependsOn: 'Windows Nuget Package Tests'
+  pool:
+      vmImage: 'vs2017-win2016'
+  strategy:
+    maxParallel: 3 
+    matrix:
+      es653:
+        esVersion: '6.5.3'
+      es632:
+          esVersion: '6.3.2'
+  steps:
+      - script: 'build.bat integrate $(esVersion) skipdocs'
+        displayName: '$(esVersion) integration tests'
