@@ -12,6 +12,7 @@ jobs:
     inputs:
         testRunner: VSTest
         testResultsFiles: '**/*.trx'
+        testRunTitle: Linux Unit Tests
 
 - job: Windows
   pool:
@@ -23,4 +24,5 @@ jobs:
     inputs:
       testRunner: VSTest
       testResultsFiles: '**/*.trx'
+      testRunTitle: Windows Unit Tests
     

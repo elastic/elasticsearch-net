@@ -40,15 +40,20 @@ module Tests =
     let private dotnetTest (target: Commandline.MultiTarget) =
         CreateDir Paths.BuildOutput
         let command = 
-            let p = ["test"; "."]
+            let p = ["test"; "."; "-c"; "RELEASE"]
             //make sure we only test netcoreapp on linux or requested on the command line to only test-one
             match (target, Environment.isLinux) with 
             | (_, true) 
             | (Commandline.MultiTarget.One, _) -> ["--framework"; "netcoreapp2.1"] |> List.append p
             | _  -> p
         let commandWithCodeCoverage =
+            // TODO /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
+            // Using coverlet.msbuild package
+            // https://github.com/tonerdo/coverlet/issues/110
+            // Bites us here as well a PR is up already but not merged will try again afterwards
+            // https://github.com/tonerdo/coverlet/pull/329
             match (buildingOnAzurePipeline) with
-            | (true) -> [ "--logger"; "trx"; "--collect"; "\"Code Coverage\""] |> List.append command
+            | (true) -> [ "--logger"; "trx"; "--collect"; "\"Code Coverage\""; "-v"; "m"] |> List.append command
             | _  -> command
             
         let dotnet = Tooling.BuildTooling("dotnet")
