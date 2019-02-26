@@ -1,0 +1,162 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#
+    var types = new[]
+    {
+        typeof(sbyte),
+        typeof(Int16),
+        typeof(Int32),
+        typeof(Int64),
+        typeof(byte), 
+        typeof(UInt16),
+        typeof(UInt32),
+        typeof(UInt64),
+        typeof(Single),
+        typeof(Double),
+        typeof(bool), 
+    };
+#>
+using System;
+using Utf8Json.Internal;
+
+namespace Utf8Json.Formatters
+{
+<# foreach(var t in types) {  #>
+    public sealed class <#= t.Name #>Formatter : IJsonFormatter<<#= t.Name #>>, IObjectPropertyNameFormatter<<#= t.Name #>>
+    {
+        public static readonly <#= t.Name #>Formatter Default = new <#= t.Name #>Formatter();
+
+        public void Serialize(ref JsonWriter writer, <#= t.Name #> value, IJsonFormatterResolver formatterResolver)
+        {
+            writer.Write<#= t.Name #>(value);
+        }
+
+        public <#= t.Name #> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+        {
+            return reader.Read<#= t.Name #>();
+        }
+
+        public void SerializeToPropertyName(ref JsonWriter writer, <#= t.Name #> value, IJsonFormatterResolver formatterResolver)
+        {
+            writer.WriteQuotation();
+            writer.Write<#= t.Name #>(value);
+            writer.WriteQuotation();
+        }
+
+        public <#= t.Name #> DeserializeFromPropertyName(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+        {
+            var key = reader.ReadStringSegmentRaw();
+            int _;
+            return NumberConverter.Read<#= t.Name #>(key.Array, key.Offset, out _);
+        }
+    }
+
+    public sealed class Nullable<#= t.Name #>Formatter : IJsonFormatter<<#= t.Name #>?>, IObjectPropertyNameFormatter<<#= t.Name #>?>
+    {
+        public static readonly Nullable<#= t.Name #>Formatter Default = new Nullable<#= t.Name #>Formatter();
+
+        public void Serialize(ref JsonWriter writer, <#= t.Name #>? value, IJsonFormatterResolver formatterResolver)
+        {
+            if (value == null)
+            {
+                writer.WriteNull();
+            }
+            else
+            {
+                writer.Write<#= t.Name #>(value.Value);
+            }
+        }
+
+        public <#= t.Name #>? Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+        {
+            if (reader.ReadIsNull())
+            {
+                return null;
+            }
+            else
+            {
+                return reader.Read<#= t.Name #>();
+            }
+        }
+
+        public void SerializeToPropertyName(ref JsonWriter writer, <#= t.Name #>? value, IJsonFormatterResolver formatterResolver)
+        {
+            if (value == null) { writer.WriteNull(); return; }
+
+            writer.WriteQuotation();
+            writer.Write<#= t.Name #>(value.Value);
+            writer.WriteQuotation();
+        }
+
+        public <#= t.Name #>? DeserializeFromPropertyName(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+        {
+            if (reader.ReadIsNull()) return null;
+
+            var key = reader.ReadStringSegmentRaw();
+            int _;
+            return NumberConverter.Read<#= t.Name #>(key.Array, key.Offset, out _);
+        }
+    }
+
+<# if(t.Name != "Byte") { #>
+    public sealed class <#= t.Name #>ArrayFormatter : IJsonFormatter<<#= t.Name #>[]>
+    {
+        public static readonly <#= t.Name #>ArrayFormatter Default = new <#= t.Name #>ArrayFormatter();
+
+        public void Serialize(ref JsonWriter writer, <#= t.Name #>[] value, IJsonFormatterResolver formatterResolver)
+        {
+            if (value == null)
+            {
+                writer.WriteNull();
+            }
+            else
+            {
+                writer.WriteBeginArray();
+
+                if (value.Length != 0)
+                {
+                    writer.Write<#= t.Name #>(value[0]);
+                }
+                for (int i = 1; i < value.Length; i++)
+                {
+                    writer.WriteValueSeparator();
+                    writer.Write<#= t.Name #>(value[i]);
+                }
+
+                writer.WriteEndArray();
+            }
+        }
+
+        public <#= t.Name #>[] Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+        {
+            if (reader.ReadIsNull())
+            {
+                return null;
+            }
+            else
+            {
+                reader.ReadIsBeginArrayWithVerify();
+                var array = new <#= t.Name #>[4];
+                var count = 0;
+                while (!reader.ReadIsEndArrayWithSkipValueSeparator(ref count))
+                {
+                    if (array.Length < count)
+                    {
+                        Array.Resize(ref array, count * 2);
+                    }
+                    array[count - 1] = reader.Read<#= t.Name #>();
+                }
+
+                Array.Resize(ref array, count);
+                return array;
+            }
+        }
+    }
+<# } #>
+
+<# } #>
+}
