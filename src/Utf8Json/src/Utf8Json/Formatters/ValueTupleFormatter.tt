@@ -1,0 +1,110 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+#if NETSTANDARD
+
+using System;
+using Utf8Json.Internal;
+using Utf8Json.Formatters.Internal;
+
+namespace Utf8Json.Formatters.Internal
+{
+    // reduce static constructor generate size on generics(especially IL2CPP on Unity)
+    internal static class ValueTupleFormatterHelper
+    {
+<# for(var i = 1; i <= 8; i++) { #>
+        internal static readonly byte[][] nameCache<#= i #>;
+        internal static readonly AutomataDictionary dictionary<#= i #>;
+<# } #>
+
+        static ValueTupleFormatterHelper()
+        {
+<# for(var i = 1; i <= 8; i++) { Func<int, string> toItem = x => ((x == 8) ? "Rest" : "Item" + x); #>
+            nameCache<#= i #> = new byte[][]
+            {
+<# for (var j = 1; j <= i; j++) { if (j == 1) { #>
+                JsonWriter.GetEncodedPropertyNameWithBeginObject("<#= toItem(j) #>"),
+<# } else if (j == i) { #>
+                JsonWriter.GetEncodedPropertyNameWithPrefixValueSeparator("<#= toItem(j) #>"),
+<# } else { #>
+                JsonWriter.GetEncodedPropertyNameWithPrefixValueSeparator("<#= toItem(j) #>"),
+<# } } #>
+            };
+            dictionary<#= i #> = new AutomataDictionary
+            {
+<# for (var j = 1; j <= i; j++) { #>
+                {JsonWriter.GetEncodedPropertyNameWithoutQuotation("<#= toItem(j) #>"), <#= j - 1 #> },
+<# } #>
+            };
+<# } #>
+        }
+    }
+}
+
+namespace Utf8Json.Formatters
+{
+<# for(var i = 1; i <= 8; i++) { 
+    Func<int, string> toT = x => "T" + ((x == 8) ? "Rest" : x.ToString());
+    Func<int, string> toItem = x => ((x == 8) ? "Rest" : "Item" + x);
+    var ts = string.Join(", ", Enumerable.Range(1, i).Select(x => toT(x))); 
+    var t = "ValueTuple<" + ts + ">"; 
+#>
+
+    public sealed class ValueTupleFormatter<<#= ts #>> : IJsonFormatter<<#= t #>><#= (t.Contains("TRest") ? " where TRest : struct" : "") #>
+    {
+        static readonly byte[][] cache = TupleFormatterHelper.nameCache<#= i #>;
+        static readonly AutomataDictionary dictionary = TupleFormatterHelper.dictionary<#= i #>;
+
+        public void Serialize(ref JsonWriter writer, <#= t #> value, IJsonFormatterResolver formatterResolver)
+        {
+<# for(var j = 1; j <= i; j++) { #>
+            writer.WriteRaw(cache[<#= j - 1 #>]);
+            formatterResolver.GetFormatterWithVerify<<#= toT(j) #>>().Serialize(ref writer, value.<#= toItem(j) #>, formatterResolver);
+<# } #>
+            writer.WriteEndObject();
+        }
+
+        public <#= t #> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+        {
+            if (reader.ReadIsNull()) throw new InvalidOperationException("Data is Nil, ValueTuple can not be null.");
+
+<# for(var j = 1; j <= i; j++) { #>
+            <#= toT(j) #> item<#= j #> = default(<#= toT(j) #>);
+<# } #>
+            
+            var count = 0;
+            reader.ReadIsBeginObjectWithVerify();
+            while (!reader.ReadIsEndObjectWithSkipValueSeparator(ref count))
+            {
+                var keyString = reader.ReadPropertyNameSegmentRaw();
+                int key;
+#if NETSTANDARD
+                dictionary.TryGetValue(keyString, out key);
+#else
+                dictionary.TryGetValueSafe(keyString, out key);
+#endif
+
+                switch (key)
+                {
+<# for(var j = 1; j <= i; j++) { #>
+                    case <#= j - 1 #>:
+                        item<#= j #> = formatterResolver.GetFormatterWithVerify<<#= toT(j) #>>().Deserialize(ref reader, formatterResolver);
+                        break;
+<# } #>
+                    default:
+                        reader.ReadNextBlock();
+                        break;
+                }
+            }
+            
+            return new ValueTuple<<#= ts #>>(<#= string.Join(", ", Enumerable.Range(1, i).Select(x => "item" + x)) #>);
+        }
+    }
+
+<# } #>
+}
+
+#endif
