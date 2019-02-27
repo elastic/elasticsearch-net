@@ -5,6 +5,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	[Obsolete("Types have been removed from 7.x")]
 	[ContractJsonConverter(typeof(TypeNameJsonConverter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class TypeName : IEquatable<TypeName>, IUrlParameter
