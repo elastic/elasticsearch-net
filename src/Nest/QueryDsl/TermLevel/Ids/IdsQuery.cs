@@ -15,7 +15,6 @@ namespace Nest
 
 	public class IdsQuery : QueryBase, IIdsQuery
 	{
-		public Types Types { get; set; }
 		public IEnumerable<Id> Values { get; set; }
 		protected override bool Conditionless => IsConditionless(this);
 

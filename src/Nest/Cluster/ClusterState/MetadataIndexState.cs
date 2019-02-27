@@ -10,7 +10,7 @@ namespace Nest
 		public IEnumerable<string> Aliases { get; internal set; }
 
 		[JsonProperty("mappings")]
-		public IMappings Mappings { get; internal set; }
+		public ITypeMapping Mappings { get; internal set; }
 
 		[JsonProperty("settings")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]

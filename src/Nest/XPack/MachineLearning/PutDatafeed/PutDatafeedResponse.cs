@@ -107,8 +107,5 @@ namespace Nest
 
 		/// <inheritdoc />
 		public int? ScrollSize { get; internal set; }
-
-		/// <inheritdoc />
-		public Types Types { get; internal set; }
 	}
 }

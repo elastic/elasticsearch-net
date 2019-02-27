@@ -9,7 +9,7 @@ namespace Nest
 		IAliases Aliases { get; set; }
 
 		[JsonProperty("mappings")]
-		IMappings Mappings { get; set; }
+		ITypeMapping Mappings { get; set; }
 
 		[JsonProperty("settings")]
 		IIndexSettings Settings { get; set; }
@@ -19,7 +19,7 @@ namespace Nest
 	{
 		public IAliases Aliases { get; set; }
 
-		public IMappings Mappings { get; set; }
+		public ITypeMapping Mappings { get; set; }
 		public IIndexSettings Settings { get; set; }
 	}
 }

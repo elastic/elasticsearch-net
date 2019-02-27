@@ -12,7 +12,7 @@ namespace Nest
 		public IAliases Aliases { get; set; }
 		public IReadOnlyCollection<string> IndexPatterns { get; set; }
 
-		public IMappings Mappings { get; set; }
+		public ITypeMapping Mappings { get; set; }
 
 		public int? Order { get; set; }
 
@@ -27,7 +27,7 @@ namespace Nest
 
 		IReadOnlyCollection<string> ITemplateMapping.IndexPatterns { get; set; }
 
-		IMappings ITemplateMapping.Mappings { get; set; }
+		ITypeMapping ITemplateMapping.Mappings { get; set; }
 		int? ITemplateMapping.Order { get; set; }
 
 		IIndexSettings ITemplateMapping.Settings { get; set; }
@@ -45,8 +45,8 @@ namespace Nest
 		public PutIndexTemplateDescriptor Settings(Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> settingsSelector) =>
 			Assign(a => a.Settings = settingsSelector?.Invoke(new IndexSettingsDescriptor())?.Value);
 
-		public PutIndexTemplateDescriptor Mappings(Func<MappingsDescriptor, IPromise<IMappings>> mappingSelector) =>
-			Assign(a => a.Mappings = mappingSelector?.Invoke(new MappingsDescriptor())?.Value);
+		public PutIndexTemplateDescriptor Mappings(Func<MappingsDescriptor, ITypeMapping> mappingSelector) =>
+			Assign(a => a.Mappings = mappingSelector?.Invoke(new MappingsDescriptor()));
 
 		public PutIndexTemplateDescriptor Aliases(Func<AliasesDescriptor, IPromise<IAliases>> aliasDescriptor) =>
 			Assign(a => a.Aliases = aliasDescriptor?.Invoke(new AliasesDescriptor())?.Value);

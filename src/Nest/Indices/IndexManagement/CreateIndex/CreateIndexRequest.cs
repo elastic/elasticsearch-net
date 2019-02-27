@@ -26,7 +26,7 @@ namespace Nest
 
 		public IAliases Aliases { get; set; }
 
-		public IMappings Mappings { get; set; }
+		public ITypeMapping Mappings { get; set; }
 
 		public IIndexSettings Settings { get; set; }
 
@@ -46,7 +46,7 @@ namespace Nest
 	{
 		IAliases IIndexState.Aliases { get; set; }
 
-		IMappings IIndexState.Mappings { get; set; }
+		ITypeMapping IIndexState.Mappings { get; set; }
 		IIndexSettings IIndexState.Settings { get; set; }
 
 		public CreateIndexDescriptor InitializeUsing(IIndexState indexSettings) => Assign(a =>
@@ -60,8 +60,8 @@ namespace Nest
 		public CreateIndexDescriptor Settings(Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> selector) =>
 			Assign(a => a.Settings = selector?.Invoke(new IndexSettingsDescriptor())?.Value);
 
-		public CreateIndexDescriptor Mappings(Func<MappingsDescriptor, IPromise<IMappings>> selector) =>
-			Assign(a => a.Mappings = selector?.Invoke(new MappingsDescriptor())?.Value);
+		public CreateIndexDescriptor Mappings(Func<MappingsDescriptor, ITypeMapping> selector) =>
+			Assign(a => a.Mappings = selector?.Invoke(new MappingsDescriptor()));
 
 		public CreateIndexDescriptor Aliases(Func<AliasesDescriptor, IPromise<IAliases>> selector) =>
 			Assign(a => a.Aliases = selector?.Invoke(new AliasesDescriptor())?.Value);

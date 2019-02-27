@@ -12,7 +12,7 @@ namespace Nest
 		IReadOnlyCollection<string> IndexPatterns { get; set; }
 
 		[JsonProperty("mappings")]
-		IMappings Mappings { get; set; }
+		ITypeMapping Mappings { get; set; }
 
 		[JsonProperty("order")]
 		int? Order { get; set; }
@@ -29,7 +29,7 @@ namespace Nest
 		public IAliases Aliases { get; set; }
 		public IReadOnlyCollection<string> IndexPatterns { get; set; } = EmptyReadOnly<string>.Collection;
 
-		public IMappings Mappings { get; set; }
+		public ITypeMapping Mappings { get; set; }
 
 		public int? Order { get; set; }
 

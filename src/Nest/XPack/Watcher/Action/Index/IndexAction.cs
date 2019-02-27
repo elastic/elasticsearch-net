@@ -23,8 +23,6 @@ namespace Nest
 
 		public override ActionType ActionType => ActionType.Index;
 
-		public TypeName DocType { get; set; }
-
 		public Field ExecutionTimeField { get; set; }
 
 		public IndexName Index { get; set; }

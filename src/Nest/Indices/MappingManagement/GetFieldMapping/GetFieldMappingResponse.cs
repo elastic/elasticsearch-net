@@ -24,9 +24,9 @@ namespace Nest
 	public class TypeFieldMappings
 	{
 		[JsonProperty("mappings")]
-		[JsonConverter(typeof(ResolvableDictionaryJsonConverter<TypeName, FieldMappingProperties>))]
-		public IReadOnlyDictionary<TypeName, FieldMappingProperties> Mappings { get; internal set; } =
-			EmptyReadOnly<TypeName, FieldMappingProperties>.Dictionary;
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, FieldMappingProperties>))]
+		public IReadOnlyDictionary<string, FieldMappingProperties> Mappings { get; internal set; } =
+			EmptyReadOnly<string, FieldMappingProperties>.Dictionary;
 	}
 
 	public class FieldMapping
