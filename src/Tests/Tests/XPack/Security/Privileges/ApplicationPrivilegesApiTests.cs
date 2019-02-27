@@ -12,6 +12,7 @@ using Tests.Framework.Integration;
 
 namespace Tests.XPack.Security.Privileges
 {
+	[SkipVersion("<6.4.0", "Only exists in Elasticsearch 6.4.0+")]
 	public class ApplicationPrivilegesApiTests : CoordinatedIntegrationTestBase<XPackCluster>
 	{
 		private const string PutPrivilegesStep = nameof(PutPrivilegesStep);
@@ -82,7 +83,8 @@ namespace Tests.XPack.Security.Privileges
 				))
 			},
 			{
-				PutUserStep, u => u.Call((v, c) => c.PutUserAsync($"user-{v}", r => r.Roles("admin", $"role-{v}").Password($"pass-{v}")))
+				PutUserStep, u => u.Call((v, c) => c.PutUserAsync($"user-{v}",
+					r => r.Roles("admin", $"role-{v}").Password($"pass-{v}")))
 			},
 			{
 				HasPrivilegesStep, u => u.Calls<HasPrivilegesDescriptor, HasPrivilegesRequest, IHasPrivilegesRequest, IHasPrivilegesResponse>(
@@ -157,7 +159,6 @@ namespace Tests.XPack.Security.Privileges
 			privilege.Should().NotBeNull($"expect `{privilegeName}`'s value not to be null");
 			privilege.Actions.Should().NotBeEmpty($"expect `{privilegeName}` to return its actions");
 			privilege.Metadata.Should().NotBeEmpty($"expect `{privilegeName}` to return its metadata");
-
 		});
 
 		[I] public async Task PutRoleResponse() => await Assert<PutRoleResponse>(PutRoleStep, (v, r) =>
@@ -178,7 +179,6 @@ namespace Tests.XPack.Security.Privileges
 		{
 			r.IsValid.Should().BeTrue();
 			r.ApiCall.HttpStatusCode.Should().Be(200);
-
 		});
 
 	}

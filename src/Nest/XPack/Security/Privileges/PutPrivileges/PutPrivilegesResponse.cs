@@ -17,6 +17,10 @@ namespace Nest
 
 	public class PutPrivilegesStatus
 	{
+		/// <summary>
+		/// Whether the privilege has been created or updated.
+		/// When an existing privilege is updated, created is set to false.
+		/// </summary>
 		[JsonProperty("created")]
 		public bool Created { get; internal set; }
 	}

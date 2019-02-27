@@ -30,12 +30,10 @@ namespace Nest
 
 		public PutPrivilegesDescriptor Applications(Func<AppPrivilegesDescriptor, IPromise<IAppPrivileges>> selector) =>
 			Assign(a => a.Applications = selector?.Invoke(new AppPrivilegesDescriptor())?.Value);
-
 	}
 
 	internal class PutPrivilegesConverter : VerbatimDictionaryKeysJsonConverter<string, IPrivileges>
 	{
-
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			if (!(value is IPutPrivilegesRequest request)) return;
@@ -47,7 +45,5 @@ namespace Nest
 			var appPrivileges = serializer.Deserialize<AppPrivileges>(reader);
 			return new PutPrivilegesRequest { Applications = appPrivileges };
 		}
-
 	}
-
 }

@@ -24,5 +24,4 @@ namespace Nest
 		public PrivilegesDescriptor Privilege(string privilegesName, Func<PrivilegesActionsDescriptor, IPrivilegesActions> selector) =>
 			Assign(privilegesName, selector?.Invoke(new PrivilegesActionsDescriptor()));
 	}
-
 }
