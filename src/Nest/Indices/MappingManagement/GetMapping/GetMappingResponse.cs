@@ -15,23 +15,11 @@ namespace Nest
 
 	public class IndexMappings
 	{
-		public TypeMapping this[TypeName type] => Mappings?[type];
+		[Obsolete("Mapping are no longer grouped by type, this indexer is ignored and simply returns Mapppings")]
+		public TypeMapping this[string type] => Mappings;
 
 		[JsonProperty("mappings")]
-		public TypeMappings Mappings { get; internal set; }
-	}
-
-	[JsonConverter(typeof(TypeMappingsJsonConverter))]
-	public class TypeMappings : ResolvableDictionaryProxy<TypeName, TypeMapping>
-	{
-		internal TypeMappings(IConnectionConfigurationValues connectionSettings, IReadOnlyDictionary<TypeName, TypeMapping> backingDictionary)
-			: base(connectionSettings, backingDictionary) { }
-
-		internal class TypeMappingsJsonConverter : ResolvableDictionaryJsonConverterBase<TypeMappings, TypeName, TypeMapping>
-		{
-			protected override TypeMappings Create(IConnectionSettingsValues s, Dictionary<TypeName, TypeMapping> d) =>
-				new TypeMappings(s, d);
-		}
+		public TypeMapping Mappings { get; internal set; }
 	}
 
 	[JsonConverter(typeof(ResolvableDictionaryResponseJsonConverter<GetMappingResponse, IndexName, IndexMappings>))]
@@ -55,11 +43,7 @@ namespace Nest
 		{
 			if (index.IsNullOrEmpty()) return null;
 
-			TypeMapping mapping = null;
-			var hasValue = response.Indices.TryGetValue(index, out var typeMapping)
-				&& typeMapping?.Mappings != null
-				&& typeMapping.Mappings.TryGetValue(null, out mapping);
-			return mapping;
+			return response.Indices.TryGetValue(index, out var indexMappings) ? indexMappings.Mappings : null;
 		}
 	}
 }

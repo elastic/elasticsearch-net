@@ -55,12 +55,6 @@ namespace Nest
 		[JsonProperty("text")]
 		public string Text { get; internal set; }
 
-		/// <summary>
-		/// Completion suggester only, the type of the completed document
-		/// </summary>
-		[JsonProperty("_type")]
-		public TypeName Type { get; internal set; }
-
 		[JsonProperty("_score")]
 		internal double? DocumentScore { get; set; }
 
