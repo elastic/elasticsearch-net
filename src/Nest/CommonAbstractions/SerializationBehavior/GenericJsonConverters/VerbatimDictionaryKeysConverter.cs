@@ -56,8 +56,6 @@ namespace Nest
 						}
 						else if (AsType(entry.Key, out IndexName indexName))
 							key = settings.Inferrer.IndexName(indexName);
-						else if (AsType(entry.Key, out TypeName typeName))
-							key = settings.Inferrer.TypeName(typeName);
 						else if (AsType(entry.Key, out RelationName relationName))
 							key = settings.Inferrer.RelationName(relationName);
 						else
@@ -97,7 +95,6 @@ namespace Nest
 		private readonly bool _keyIsPropertyName = typeof(TKey) == typeof(PropertyName);
 		private readonly bool _keyIsRelationName = typeof(TKey) == typeof(RelationName);
 		private readonly bool _keyIsString = typeof(TKey) == typeof(string);
-		private readonly bool _keyIsTypeName = typeof(TKey) == typeof(TypeName);
 
 		public override bool CanRead => false;
 
@@ -148,11 +145,6 @@ namespace Nest
 				{
 					var indexName = entry.Key as IndexName;
 					key = settings.Inferrer.IndexName(indexName);
-				}
-				else if (_keyIsTypeName)
-				{
-					var typeName = entry.Key as TypeName;
-					key = settings.Inferrer.TypeName(typeName);
 				}
 				else if (_keyIsRelationName)
 				{

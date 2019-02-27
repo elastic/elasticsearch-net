@@ -32,7 +32,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 	*/
 	public class IgnoringProperties
 	{
-		[ElasticsearchType(Name = "company")]
+		[ElasticsearchType(RelationName = "company")]
 		public class CompanyWithAttributesAndPropertiesToIgnore
 		{
 			public string Name { get; set; }

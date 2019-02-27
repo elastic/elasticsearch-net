@@ -103,12 +103,10 @@ namespace Tests.Ingest.SimulatePipeline
 				.Document(doc => doc
 					.Source(Project.Instance)
 					.Index("otherindex")
-					.Type("othertype")
 					.Id("otherid")
 				)
 				.Document(doc => doc
 					.Index("otherindex")
-					.Type("anotherType")
 					.Source(new AnotherType { Id = "2", Colors = new[] { "red" } })
 				)
 			);
@@ -148,13 +146,11 @@ namespace Tests.Ingest.SimulatePipeline
 				{
 					Source = Project.Instance,
 					Index = "otherindex",
-					Type = "othertype",
 					Id = "otherid"
 				},
 				new SimulatePipelineDocument
 				{
 					Index = "otherindex",
-					Type = "anotherType",
 					Source = new AnotherType { Id = "2", Colors = new[] { "red" } }
 				}
 			}

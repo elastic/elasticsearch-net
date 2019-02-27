@@ -20,7 +20,7 @@ namespace Tests.QueryDsl.Joining.HasChild
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Type = Infer.Type<Developer>(),
+			Type = Infer.Relation<Developer>(),
 			InnerHits = new InnerHits { Explain = true },
 			MaxChildren = 5,
 			MinChildren = 1,

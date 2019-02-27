@@ -13,7 +13,6 @@ namespace Nest
 
 		public int? RetriesOnConflict { get; set; }
 		public Routing Routing { get; set; }
-		public TypeName Type { get; set; }
 		public long? Version { get; set; }
 		public VersionType? VersionType { get; set; }
 		protected abstract Type ClrType { get; }
@@ -55,7 +54,6 @@ namespace Nest
 
 		int? IBulkOperation.RetriesOnConflict { get; set; }
 		Routing IBulkOperation.Routing { get; set; }
-		TypeName IBulkOperation.Type { get; set; }
 		long? IBulkOperation.Version { get; set; }
 		VersionType? IBulkOperation.VersionType { get; set; }
 
@@ -81,14 +79,6 @@ namespace Nest
 		public TDescriptor Index(IndexName index) => Assign(a => a.Index = index);
 
 		public TDescriptor Index<T>() => Assign(a => a.Index = typeof(T));
-
-		/// <summary>
-		/// Manualy set the type to get the object from, default to whatever
-		/// T will be inferred to if not passed or the fixed type set on the parent bulk operation
-		/// </summary>
-		public TDescriptor Type(TypeName type) => Assign(a => a.Type = type);
-
-		public TDescriptor Type<T>() => Assign(a => a.Type = typeof(T));
 
 		/// <summary>
 		/// Manually set the id for the newly created object

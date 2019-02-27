@@ -33,7 +33,6 @@ namespace Tests.XPack.MachineLearning.PutDatafeed
 
 		protected override Func<PutDatafeedDescriptor<Metric>, IPutDatafeedRequest> Fluent => f => f
 			.Indices("server-metrics") //goes on body not in the url
-			.Types("metric") //goes on body not in the url
 			.JobId(CallIsolatedValue)
 			.Query(q => q.MatchAll());
 
@@ -44,7 +43,6 @@ namespace Tests.XPack.MachineLearning.PutDatafeed
 			{
 				JobId = CallIsolatedValue,
 				Indices = "server-metrics",
-				Types = "metric",
 				Query = new MatchAllQuery()
 			};
 
@@ -77,9 +75,6 @@ namespace Tests.XPack.MachineLearning.PutDatafeed
 
 			response.Indices.Should().NotBeNull("Indices");
 			response.Indices.Should().Be(Nest.Indices.Parse("server-metrics"));
-
-			response.Types.Should().NotBeNull("Types");
-			response.Types.Should().Be(Types.Parse("metric"));
 
 			response.ScrollSize.Should().Be(1000);
 

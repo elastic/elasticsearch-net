@@ -7,9 +7,6 @@ namespace Nest
 	[JsonObject]
 	public interface IIndexAction : IAction
 	{
-		[JsonProperty("doc_type")]
-		TypeName DocType { get; set; }
-
 		[JsonProperty("execution_time_field")]
 		Field ExecutionTimeField { get; set; }
 
@@ -40,7 +37,6 @@ namespace Nest
 		public IndexActionDescriptor(string name) : base(name) { }
 
 		protected override ActionType ActionType => ActionType.Index;
-		TypeName IIndexAction.DocType { get; set; }
 		Field IIndexAction.ExecutionTimeField { get; set; }
 		IndexName IIndexAction.Index { get; set; }
 		Time IIndexAction.Timeout { get; set; }
@@ -48,10 +44,6 @@ namespace Nest
 		public IndexActionDescriptor Index(IndexName index) => Assign(a => a.Index = index);
 
 		public IndexActionDescriptor Index<T>() => Assign(a => a.Index = typeof(T));
-
-		public IndexActionDescriptor DocType(TypeName type) => Assign(a => a.DocType = type);
-
-		public IndexActionDescriptor DocType<T>() => Assign(a => a.DocType = typeof(T));
 
 		public IndexActionDescriptor ExecutionTimeField(Field field) => Assign(a => a.ExecutionTimeField = field);
 

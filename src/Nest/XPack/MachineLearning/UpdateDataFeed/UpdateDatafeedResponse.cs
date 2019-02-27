@@ -70,11 +70,6 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("scroll_size")]
 		int? ScrollSize { get; }
-
-		///<summary>A list of types to search for within the specified indices</summary>
-		[JsonProperty("types")]
-		[JsonConverter(typeof(TypesJsonConverter))]
-		Types Types { get; }
 	}
 
 	public class UpdateDatafeedResponse : ResponseBase, IUpdateDatafeedResponse
@@ -89,6 +84,5 @@ namespace Nest
 		public Time QueryDelay { get; internal set; }
 		public IScriptFields ScriptFields { get; internal set; }
 		public int? ScrollSize { get; internal set; }
-		public Types Types { get; internal set; }
 	}
 }

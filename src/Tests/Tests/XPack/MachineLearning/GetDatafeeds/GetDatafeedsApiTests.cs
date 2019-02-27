@@ -55,9 +55,6 @@ namespace Tests.XPack.MachineLearning.GetDatafeeds
 			firstDatafeed.Indices.Should().NotBeNull("Indices");
 			firstDatafeed.Indices.Should().Be(Nest.Indices.Parse("server-metrics"));
 
-			firstDatafeed.Types.Should().NotBeNull("Types");
-			firstDatafeed.Types.Should().Be(Types.Parse("metric"));
-
 			firstDatafeed.ScrollSize.Should().Be(1000);
 
 			firstDatafeed.ChunkingConfig.Should().NotBeNull();
@@ -114,9 +111,6 @@ namespace Tests.XPack.MachineLearning.GetDatafeeds
 
 			firstDatafeed.Indices.Should().NotBeNull("Indices");
 			firstDatafeed.Indices.Should().Be(Nest.Indices.Parse("server-metrics"));
-
-			firstDatafeed.Types.Should().NotBeNull("Types");
-			firstDatafeed.Types.Should().Be(Types.Parse("metric"));
 
 			firstDatafeed.ScrollSize.Should().Be(1000);
 

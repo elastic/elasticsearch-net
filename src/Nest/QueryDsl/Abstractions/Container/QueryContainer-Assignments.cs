@@ -50,7 +50,6 @@ namespace Nest
 		private ITermQuery _term;
 		private ITermsQuery _terms;
 		private ITermsSetQuery _termsSet;
-		private ITypeQuery _type;
 		private IWildcardQuery _wildcard;
 
 		internal IQuery ContainedQuery { get; set; }
@@ -319,12 +318,6 @@ namespace Nest
 		{
 			get => _termsSet;
 			set => _termsSet = Set(value);
-		}
-
-		ITypeQuery IQueryContainer.Type
-		{
-			get => _type;
-			set => _type = Set(value);
 		}
 
 		IWildcardQuery IQueryContainer.Wildcard

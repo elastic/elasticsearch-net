@@ -34,8 +34,8 @@ namespace Nest
 			}
 
 			var att = ElasticsearchTypeAttribute.From(type);
-			if (att != null && !att.Name.IsNullOrEmpty())
-				typeName = att.Name;
+			if (att != null && !att.RelationName.IsNullOrEmpty())
+				typeName = att.RelationName;
 			else
 				typeName = _connectionSettings.DefaultTypeNameInferrer(type);
 

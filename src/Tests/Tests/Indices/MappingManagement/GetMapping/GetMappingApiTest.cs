@@ -47,10 +47,10 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		{
 			response.ShouldBeValid();
 
-			response.Indices["project"]["doc"].Properties.Should().NotBeEmpty();
-			response.Indices[Index<Project>()].Mappings[Type<Project>()].Properties.Should().NotBeEmpty();
-			response.Indices[Index<Project>()][Type<Project>()].Properties.Should().NotBeEmpty();
-			var properties = response.Indices[Index<Project>()][Type<Project>()].Properties;
+			response.Indices["project"]["_doc"].Properties.Should().NotBeEmpty();
+			response.Indices[Index<Project>()].Mappings["_doc"].Properties.Should().NotBeEmpty();
+			response.Indices[Index<Project>()]["_doc"].Properties.Should().NotBeEmpty();
+			var properties = response.Indices["project"]["_doc"].Properties;
 
 			var leadDev = properties[Property<Project>(p => p.LeadDeveloper)];
 			leadDev.Should().NotBeNull();
@@ -70,13 +70,12 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		{
 			/** The `GetMappingFor` extension method can be used to get a type mapping easily and safely */
 			response.GetMappingFor<Project>().Should().NotBeNull();
-			response.GetMappingFor(typeof(Project), typeof(Project)).Should().NotBeNull();
 			response.GetMappingFor(typeof(Project)).Should().NotBeNull();
 
 			/** The following should all return a `null` because we had asked for the mapping of type `doc` in index `project` */
 			response.GetMappingFor<Developer>().Should().BeNull();
-			response.GetMappingFor("dev", "dev").Should().BeNull();
-			response.GetMappingFor(typeof(Project), "x").Should().BeNull();
+			response.GetMappingFor("dev").Should().BeNull();
+			response.GetMappingFor(typeof(Project)).Should().BeNull();
 			response.GetMappingFor("dev").Should().BeNull();
 		}
 

@@ -82,8 +82,6 @@
 
 		void Visit(ITermsQuery query);
 
-		void Visit(ITypeQuery query);
-
 		void Visit(IScriptQuery query);
 
 		void Visit(IGeoPolygonQuery query);
@@ -232,8 +230,6 @@
 		public virtual void Visit(IWildcardQuery query) { }
 
 		public virtual void Visit(ITermsQuery query) { }
-
-		public virtual void Visit(ITypeQuery query) { }
 
 		public virtual void Visit(IScriptQuery query) { }
 

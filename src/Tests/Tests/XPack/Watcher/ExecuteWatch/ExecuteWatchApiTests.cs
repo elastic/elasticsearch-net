@@ -137,7 +137,6 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 						)
 						.Index("index_action", i => i
 							.Index("test")
-							.DocType("doctype2")
 						)
 						.Logging("logging_action", l => l
 							.Text("404 recently encountered")
@@ -248,7 +247,6 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 			indexAction.Status.Should().Be(Status.Success);
 			indexAction.Index.Response.Should().NotBeNull();
 			indexAction.Index.Response.Index.Should().Be("test");
-			indexAction.Index.Response.Type.Should().Be("doctype2");
 			indexAction.Index.Response.Created.Should().BeTrue();
 			indexAction.Index.Response.Version.Should().Be(1);
 
@@ -465,7 +463,6 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 					)
 					.Index("index_action", i => i
 						.Index("test")
-						.DocType("doctype2")
 					)
 					.Logging("logging_action", l => l
 						.Text("404 recently encountered")
@@ -604,7 +601,6 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 						)
 						.Index("index_action", i => i
 							.Index("test")
-							.DocType("doctype2")
 						)
 						.Logging("logging_action", l => l
 							.Text("404 recently encountered")

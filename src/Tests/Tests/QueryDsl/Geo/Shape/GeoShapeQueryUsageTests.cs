@@ -674,7 +674,6 @@ namespace Tests.QueryDsl.Geo.Shape
 			q => q.IndexedShape = null,
 			q => q.IndexedShape.Id = null,
 			q => q.IndexedShape.Index = null,
-			q => q.IndexedShape.Type = null,
 			q => q.IndexedShape.Path = null,
 		};
 
@@ -687,7 +686,6 @@ namespace Tests.QueryDsl.Geo.Shape
 			{
 				Id = 2,
 				Index = Infer.Index<Project>(),
-				Type = Infer.Type<Project>(),
 				Path = Infer.Field<Project>(p => p.Location),
 			},
 			Relation = GeoShapeRelation.Intersects

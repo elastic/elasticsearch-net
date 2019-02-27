@@ -167,8 +167,6 @@ namespace Nest
 
 		public virtual void Visit(ITermsQuery query) => Write("terms");
 
-		public virtual void Visit(ITypeQuery query) => Write("type");
-
 		public virtual void Visit(IGeoPolygonQuery query) => Write("geo_polygon");
 
 		public virtual void Visit(IGeoDistanceQuery query) => Write("geo_distance");

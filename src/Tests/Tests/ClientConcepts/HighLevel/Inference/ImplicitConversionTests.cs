@@ -163,29 +163,5 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Implicit<TaskId>("    ").Should().BeNull();
 			Implicit<TaskId>("").Should().BeNull();
 		}
-
-		[U] public void TypeName()
-		{
-			Implicit<TypeName>((Type)null).Should().BeNull();
-			Implicit<TypeName>((string)null).Should().BeNull();
-			Implicit<TypeName>("").Should().BeNull();
-			Implicit<TypeName>("   ").Should().BeNull();
-		}
-
-		[U] public void Types()
-		{
-			Implicit<Types>((TypeName)null).Should().BeNull();
-			Implicit<Types>((Type)null).Should().BeNull();
-			Implicit<Types>((Types.ManyTypes)null).Should().BeNull();
-			Implicit<Types>((Types.AllTypesMarker)null).Should().BeNull();
-			Implicit<Types>((string)null).Should().BeNull();
-			Implicit<Types>("").Should().BeNull();
-			Implicit<Types>(" ,,, ").Should().BeNull();
-			Implicit<Types>("  ").Should().BeNull();
-			Implicit<Types>(new string[] { }).Should().BeNull();
-			Implicit<Types>(new TypeName[] { }).Should().BeNull();
-			Implicit<Types>(new string[] { null, null }).Should().BeNull();
-			Implicit<Types>(new TypeName[] { null, null }).Should().BeNull();
-		}
 	}
 }

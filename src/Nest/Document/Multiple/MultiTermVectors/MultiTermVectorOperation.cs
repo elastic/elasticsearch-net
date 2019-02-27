@@ -103,12 +103,6 @@ namespace Nest
 		bool? TermStatistics { get; set; }
 
 		/// <summary>
-		/// The type of the document
-		/// </summary>
-		[JsonProperty("_type")]
-		TypeName Type { get; set; }
-
-		/// <summary>
 		/// The version number
 		/// </summary>
 		[JsonProperty("version")]
@@ -131,7 +125,6 @@ namespace Nest
 		{
 			Id = id;
 			Index = typeof(T);
-			Type = typeof(T);
 		}
 
 		/// <inheritdoc />
@@ -172,9 +165,6 @@ namespace Nest
 		public bool? TermStatistics { get; set; }
 
 		/// <inheritdoc />
-		public TypeName Type { get; set; }
-
-		/// <inheritdoc />
 		public long? Version { get; set; }
 
 		/// <inheritdoc />
@@ -205,7 +195,6 @@ namespace Nest
 
 		Fields IMultiTermVectorOperation.StoredFields { get; set; }
 		bool? IMultiTermVectorOperation.TermStatistics { get; set; }
-		TypeName IMultiTermVectorOperation.Type { get; set; } = typeof(T);
 		long? IMultiTermVectorOperation.Version { get; set; }
 		VersionType? IMultiTermVectorOperation.VersionType { get; set; }
 
@@ -223,9 +212,6 @@ namespace Nest
 
 		/// <inheritdoc cref="IMultiTermVectorOperation.Index" />
 		public MultiTermVectorOperationDescriptor<T> Index(IndexName index) => Assign(a => a.Index = index);
-
-		/// <inheritdoc cref="IMultiTermVectorOperation.Type" />
-		public MultiTermVectorOperationDescriptor<T> Type(TypeName type) => Assign(a => a.Type = type);
 
 		/// <inheritdoc cref="IMultiTermVectorOperation.Document" />
 		public MultiTermVectorOperationDescriptor<T> Document(T document) => Assign(a => a.Document = document);

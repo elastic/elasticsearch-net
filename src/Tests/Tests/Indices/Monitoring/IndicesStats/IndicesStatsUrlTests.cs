@@ -36,14 +36,11 @@ namespace Tests.Indices.Monitoring.IndicesStats
 				;
 
 			metrics = IndicesStatsMetric.Completion | IndicesStatsMetric.Flush | IndicesStatsMetric.All;
-			var request = new IndicesStatsRequest(index, metrics)
-			{
-				Types = new TypeName[] { typeof(Project) }
-			};
+			var request = new IndicesStatsRequest(index, metrics) { };
 			await GET($"/index1%2Cindex2/_stats/_all?types=doc")
-					.Fluent(c => c.IndicesStats(index, i => i.Metric(metrics).Types(typeof(Project))))
+					.Fluent(c => c.IndicesStats(index, i => i.Metric(metrics)))
 					.Request(c => c.IndicesStats(request))
-					.FluentAsync(c => c.IndicesStatsAsync(index, i => i.Metric(metrics).Types(typeof(Project))))
+					.FluentAsync(c => c.IndicesStatsAsync(index, i => i.Metric(metrics)))
 					.RequestAsync(c => c.IndicesStatsAsync(request))
 				;
 		}

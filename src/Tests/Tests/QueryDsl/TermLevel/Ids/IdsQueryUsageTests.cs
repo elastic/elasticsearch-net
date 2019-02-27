@@ -23,7 +23,6 @@ namespace Tests.QueryDsl.TermLevel.Ids
 			Name = "named_query",
 			Boost = 1.1,
 			Values = new List<Id> { 1, 2, 3, 4 },
-			Types = Type<Project>().And<Developer>()
 		};
 
 		protected override object QueryJson => new
@@ -32,7 +31,6 @@ namespace Tests.QueryDsl.TermLevel.Ids
 			{
 				_name = "named_query",
 				boost = 1.1,
-				type = new[] { "doc", "developer" },
 				values = new[] { 1, 2, 3, 4 }
 			}
 		};
@@ -42,7 +40,6 @@ namespace Tests.QueryDsl.TermLevel.Ids
 				.Name("named_query")
 				.Boost(1.1)
 				.Values(1, 2, 3, 4)
-				.Types(typeof(Project), typeof(Developer))
 			);
 	}
 }

@@ -459,7 +459,6 @@ namespace Tests.XPack.Watcher.PutWatch
 				)
 				.Index("reminder_index", i => i
 					.Index("put-watch-test-index")
-					.DocType("reminder")
 					.ExecutionTimeField("execution_time")
 				)
 				.PagerDuty("reminder_pagerduty", pd => pd

@@ -182,7 +182,6 @@ namespace Tests.QueryDsl.Specialized.Percolate
 
 		protected QueryContainer QueryInitializer => new PercolateQuery
 		{
-			Type = typeof(Project),
 			Index = IndexName.From<Project>(),
 			Id = Project.Instance.Name,
 			Routing = Project.Instance.Name,
@@ -203,7 +202,6 @@ namespace Tests.QueryDsl.Specialized.Percolate
 
 		protected QueryContainer QueryFluent(QueryContainerDescriptor<ProjectPercolation> q) => q
 			.Percolate(p => p
-				.Type<Project>()
 				.Index<Project>()
 				.Id(Project.Instance.Name)
 				.Routing(Project.Instance.Name)

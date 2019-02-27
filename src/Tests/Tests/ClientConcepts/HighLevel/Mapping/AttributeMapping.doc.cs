@@ -34,7 +34,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 	{
 		private readonly IElasticClient _client = TestClient.DisabledStreaming;
 
-		[ElasticsearchType(Name = "employee")]
+		[ElasticsearchType(RelationName = "employee")]
 		public class Employee
 		{
 			[Text(Name = "first_name", Norms = false, Similarity = "LMDirichlet")]

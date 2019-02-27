@@ -25,9 +25,6 @@ namespace Nest
 
 		[JsonProperty("_routing")]
 		Routing Routing { get; set; }
-
-		[JsonProperty("_type")]
-		TypeName Type { get; set; }
 	}
 
 	public abstract class LikeDocumentBase : ILikeDocument
@@ -48,8 +45,6 @@ namespace Nest
 			get => _routing ?? (Document == null ? null : new Routing(Document));
 			set => _routing = value;
 		}
-
-		public TypeName Type { get; set; }
 	}
 
 	public class LikeDocument<TDocument> : LikeDocumentBase
@@ -61,7 +56,6 @@ namespace Nest
 		{
 			Id = id;
 			Index = typeof(TDocument);
-			Type = typeof(TDocument);
 		}
 
 		public LikeDocument(TDocument document)
@@ -69,7 +63,6 @@ namespace Nest
 			Id = Id.From(document);
 			Document = document;
 			Index = typeof(TDocument);
-			Type = typeof(TDocument);
 		}
 	}
 
@@ -78,11 +71,7 @@ namespace Nest
 	{
 		private Routing _routing;
 
-		public LikeDocumentDescriptor()
-		{
-			Self.Index = typeof(TDocument);
-			Self.Type = typeof(TDocument);
-		}
+		public LikeDocumentDescriptor() => Self.Index = typeof(TDocument);
 
 		object ILikeDocument.Document { get; set; }
 
@@ -97,11 +86,7 @@ namespace Nest
 			set => _routing = value;
 		}
 
-		TypeName ILikeDocument.Type { get; set; }
-
 		public LikeDocumentDescriptor<TDocument> Index(IndexName index) => Assign(a => a.Index = index);
-
-		public LikeDocumentDescriptor<TDocument> Type(TypeName type) => Assign(a => a.Type = type);
 
 		public LikeDocumentDescriptor<TDocument> Id(Id id) => Assign(a => a.Id = id);
 

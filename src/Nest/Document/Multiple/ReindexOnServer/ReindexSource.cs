@@ -57,12 +57,6 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("_source")]
 		Fields Source { get; set; }
-
-		/// <summary>
-		/// The types of documents to target
-		/// </summary>
-		[JsonProperty("type")]
-		Types Type { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -88,9 +82,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Fields Source { get; set; }
-
-		/// <inheritdoc />
-		public Types Type { get; set; }
 	}
 
 	/// <inheritdoc cref="IReindexSource" />
@@ -103,7 +94,6 @@ namespace Nest
 		ISlicedScroll IReindexSource.Slice { get; set; }
 		IList<ISort> IReindexSource.Sort { get; set; }
 		Fields IReindexSource.Source { get; set; }
-		Types IReindexSource.Type { get; set; }
 
 		/// <inheritdoc cref="IReindexSource.Query" />
 		public ReindexSourceDescriptor Query<T>(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) where T : class =>
@@ -119,9 +109,6 @@ namespace Nest
 
 		/// <inheritdoc cref="IReindexSource.Index" />
 		public ReindexSourceDescriptor Index(Indices indices) => Assign(a => a.Index = indices);
-
-		/// <inheritdoc cref="IReindexSource.Type" />
-		public ReindexSourceDescriptor Type(Types types) => Assign(a => a.Type = types);
 
 		/// <inheritdoc cref="IReindexSource.Size" />
 		public ReindexSourceDescriptor Size(int? size) => Assign(a => a.Size = size);

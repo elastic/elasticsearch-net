@@ -13,7 +13,10 @@ namespace Nest
 
 		public string IdProperty { get; set; }
 
+		[Obsolete("types are gone, if you want to set the join datatype name use RelationName instead")]
 		public string Name { get; set; }
+
+		public string RelationName { get; set; }
 
 		public static ElasticsearchTypeAttribute From(Type type)
 		{

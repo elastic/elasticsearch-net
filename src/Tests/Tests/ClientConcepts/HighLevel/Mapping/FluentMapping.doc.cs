@@ -230,7 +230,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		 *
 		 * Consider the following two POCOS
 		 */
-		[ElasticsearchType(Name = "company")]
+		[ElasticsearchType(RelationName = "company")]
 		public class CompanyWithAttributes
 		{
 			[Keyword(NullValue = "null", Similarity = "BM25")]
@@ -243,7 +243,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			public List<EmployeeWithAttributes> Employees { get; set; }
 		}
 
-		[ElasticsearchType(Name = "employee")]
+		[ElasticsearchType(RelationName = "employee")]
 		public class EmployeeWithAttributes
 		{
 			[Text(Name = "first_name")]

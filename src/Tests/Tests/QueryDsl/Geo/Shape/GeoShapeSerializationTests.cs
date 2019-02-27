@@ -191,11 +191,9 @@ namespace Tests.QueryDsl.Geo
 
 			var bulk = new List<object>();
 
-			// use the low level client to force WKT
-			var typeName = Client.Infer.TypeName<Domain.Shape>();
 			foreach (var shape in Domain.Shape.Shapes)
 			{
-				bulk.Add(new { index = new { _index = Index, _type = typeName, _id = shape.Id } });
+				bulk.Add(new { index = new { _index = Index, _id = shape.Id } });
 				bulk.Add(new
 				{
 					id = shape.Id,

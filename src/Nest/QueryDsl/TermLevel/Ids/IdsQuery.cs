@@ -9,9 +9,6 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<IdsQueryDescriptor>))]
 	public interface IIdsQuery : IQuery
 	{
-		[JsonProperty("type")]
-		Types Types { get; set; }
-
 		[JsonProperty("values")]
 		IEnumerable<Id> Values { get; set; }
 	}
@@ -32,14 +29,7 @@ namespace Nest
 			, IIdsQuery
 	{
 		protected override bool Conditionless => IdsQuery.IsConditionless(this);
-		Types IIdsQuery.Types { get; set; }
 		IEnumerable<Id> IIdsQuery.Values { get; set; }
-
-		public IdsQueryDescriptor Types(params TypeName[] types) => Assign(a => a.Types = types);
-
-		public IdsQueryDescriptor Types(IEnumerable<TypeName> values) => Types(values?.ToArray());
-
-		public IdsQueryDescriptor Types(Types types) => Assign(a => a.Types = types);
 
 		public IdsQueryDescriptor Values(params Id[] values) => Assign(a => a.Values = values);
 

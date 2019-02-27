@@ -34,7 +34,6 @@ namespace Tests.Reproduce
 				""throttled_until_millis"": 0,
 				""failures"": [{
 					""index"": ""employees-v2"",
-					""type"": ""employee"",
 					""id"": ""57f7ce8df8a10336a0cf935b"",
 					""cause"": {
 						""type"": ""mapper_parsing_exception"",
@@ -55,7 +54,6 @@ namespace Tests.Reproduce
 			var reindexResponse = client.ReindexOnServer(r => r
 				.Source(s => s
 					.Index("employees-v1")
-					.Type("employee")
 				)
 				.Destination(d => d
 					.Index("employees-v2")

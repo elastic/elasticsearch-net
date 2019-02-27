@@ -3,7 +3,6 @@ using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Domain;
 using Tests.Framework;
-using static Nest.Types;
 using static Tests.Framework.UrlTester;
 
 namespace Tests.Indices.MappingManagement.GetMapping

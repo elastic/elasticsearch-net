@@ -161,11 +161,6 @@ namespace Nest
 		public static QueryContainer TermsSet(Func<TermsSetQueryDescriptor<T>, ITermsSetQuery> selector) =>
 			new QueryContainerDescriptor<T>().TermsSet(selector);
 
-		public static QueryContainer Type(Func<TypeQueryDescriptor, ITypeQuery> selector) =>
-			new QueryContainerDescriptor<T>().Type(selector);
-
-		public static QueryContainer Type<TOther>() => Type(q => q.Value<TOther>());
-
 		public static QueryContainer Wildcard(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null,
 			MultiTermQueryRewrite rewrite = null, string name = null
 		) =>
