@@ -73,10 +73,6 @@ namespace Nest
 		[JsonProperty("scroll_size")]
 		int? ScrollSize { get; }
 
-		///<summary>A list of types to search for within the specified indices</summary>
-		[JsonProperty("types")]
-		[JsonConverter(typeof(TypesJsonConverter))]
-		Types Types { get; }
 	}
 
 	/// <inheritdoc />

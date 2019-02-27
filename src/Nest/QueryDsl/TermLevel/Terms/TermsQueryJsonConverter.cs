@@ -122,7 +122,6 @@ namespace Nest
 							break;
 						case "type":
 							reader.Read();
-							ef.Type = reader.Value as string;
 							break;
 						case "path":
 							reader.Read();

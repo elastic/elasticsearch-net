@@ -150,9 +150,6 @@ namespace Nest
 		[JsonProperty("terms_set")]
 		ITermsSetQuery TermsSet { get; set; }
 
-		[JsonProperty("type")]
-		ITypeQuery Type { get; set; }
-
 		[JsonProperty("wildcard")]
 		IWildcardQuery Wildcard { get; set; }
 

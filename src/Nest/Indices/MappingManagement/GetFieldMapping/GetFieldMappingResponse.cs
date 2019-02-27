@@ -43,11 +43,11 @@ namespace Nest
 	{
 		IReadOnlyDictionary<IndexName, TypeFieldMappings> Indices { get; }
 
-		IFieldMapping GetMapping(IndexName index, TypeName type, Field property);
+		IFieldMapping GetMapping(IndexName index, Field property);
 
-		IFieldMapping MappingFor<T>(Field property, IndexName index = null, TypeName type = null);
+		IFieldMapping MappingFor<T>(Field property, IndexName index = null);
 
-		IFieldMapping MappingFor<T>(Expression<Func<T, object>> objectPath, IndexName index = null, TypeName type = null) where T : class;
+		IFieldMapping MappingFor<T>(Expression<Func<T, object>> objectPath, IndexName index = null) where T : class;
 	}
 
 	[JsonConverter(typeof(ResolvableDictionaryResponseJsonConverter<GetFieldMappingResponse, IndexName, TypeFieldMappings>))]
@@ -59,11 +59,11 @@ namespace Nest
 		//if you call get mapping on an existing type and index but no fields match you still get back a 200.
 		public override bool IsValid => base.IsValid && Indices.HasAny();
 
-		public IFieldMapping GetMapping(IndexName index, TypeName type, Field property)
+		public IFieldMapping GetMapping(IndexName index, Field property)
 		{
 			if (property == null) return null;
 
-			var mappings = MappingsFor(index, type);
+			var mappings = MappingsFor(index);
 			if (mappings == null) return null;
 
 			if (!mappings.TryGetValue(property, out var fieldMapping) || fieldMapping.Mapping == null) return null;
@@ -71,18 +71,18 @@ namespace Nest
 			return fieldMapping.Mapping.TryGetValue(property, out var field) ? field : null;
 		}
 
-		public IFieldMapping MappingFor<T>(Field property, IndexName index, TypeName type) =>
-			GetMapping(index ?? Index<T>(), type ?? Type<T>(), property);
+		public IFieldMapping MappingFor<T>(Field property, IndexName index) =>
+			GetMapping(index ?? Index<T>(), property);
 
-		public IFieldMapping MappingFor<T>(Expression<Func<T, object>> objectPath, IndexName index = null, TypeName type = null)
+		public IFieldMapping MappingFor<T>(Expression<Func<T, object>> objectPath, IndexName index = null)
 			where T : class =>
-			GetMapping(index ?? Index<T>(), type ?? Type<T>(), Field(objectPath));
+			GetMapping(index ?? Index<T>(), Field(objectPath));
 
-		private FieldMappingProperties MappingsFor(IndexName index, TypeName type)
+		private FieldMappingProperties MappingsFor(IndexName index)
 		{
 			if (!Indices.TryGetValue(index, out var indexMapping) || indexMapping.Mappings == null) return null;
 
-			return !indexMapping.Mappings.TryGetValue(type, out var typeFieldMapping) ? null : typeFieldMapping;
+			return !indexMapping.Mappings.TryGetValue(null, out var typeFieldMapping) ? null : typeFieldMapping;
 		}
 	}
 }

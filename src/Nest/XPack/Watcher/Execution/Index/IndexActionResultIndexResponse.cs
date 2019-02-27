@@ -17,9 +17,6 @@ namespace Nest
 		[JsonProperty("result")]
 		public Result Result { get; set; }
 
-		[JsonProperty("type")]
-		public TypeName Type { get; set; }
-
 		[JsonProperty("version")]
 		public int Version { get; set; }
 	}

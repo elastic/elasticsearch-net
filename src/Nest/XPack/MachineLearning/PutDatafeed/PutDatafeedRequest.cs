@@ -68,13 +68,6 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("scroll_size")]
 		int? ScrollSize { get; set; }
-
-		/// <summary>
-		///  A list of types to search for within the specified indices.
-		/// </summary>
-		[JsonProperty("types")]
-		[JsonConverter(typeof(TypesJsonConverter))]
-		Types Types { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -107,8 +100,6 @@ namespace Nest
 		/// <inheritdoc />
 		public int? ScrollSize { get; set; }
 
-		/// <inheritdoc />
-		public Types Types { get; set; }
 	}
 
 	public partial class PutDatafeedDescriptor<T> where T : class
@@ -122,7 +113,6 @@ namespace Nest
 		Time IPutDatafeedRequest.QueryDelay { get; set; }
 		IScriptFields IPutDatafeedRequest.ScriptFields { get; set; }
 		int? IPutDatafeedRequest.ScrollSize { get; set; }
-		Types IPutDatafeedRequest.Types { get; set; }
 
 		/// <inheritdoc />
 		public PutDatafeedDescriptor<T> Aggregations(Func<AggregationContainerDescriptor<T>, IAggregationContainer> aggregationsSelector) =>
@@ -161,13 +151,5 @@ namespace Nest
 		/// <inheritdoc />
 		public PutDatafeedDescriptor<T> ScrollSize(int? scrollSize) => Assign(a => a.ScrollSize = scrollSize);
 
-		/// <inheritdoc />
-		public PutDatafeedDescriptor<T> Types(Types types) => Assign(a => a.Types = types);
-
-		///<summary>a shortcut into calling Types(typeof(TOther))</summary>
-		public PutDatafeedDescriptor<T> Types<TOther>() => Assign(a => a.Types = typeof(TOther));
-
-		///<summary>a shortcut into calling Types(Types.All)</summary>
-		public PutDatafeedDescriptor<T> AllTypes() => Types(Nest.Types.All);
 	}
 }

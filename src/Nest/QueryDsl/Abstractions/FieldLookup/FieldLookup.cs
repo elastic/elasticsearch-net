@@ -18,9 +18,6 @@ namespace Nest
 
 		[JsonProperty("routing")]
 		Routing Routing { get; set; }
-
-		[JsonProperty("type")]
-		TypeName Type { get; set; }
 	}
 
 	public class FieldLookup : IFieldLookup
@@ -29,17 +26,12 @@ namespace Nest
 		public IndexName Index { get; set; }
 		public Field Path { get; set; }
 		public Routing Routing { get; set; }
-		public TypeName Type { get; set; }
 	}
 
 	public class FieldLookupDescriptor<T> : DescriptorBase<FieldLookupDescriptor<T>, IFieldLookup>, IFieldLookup
 		where T : class
 	{
-		public FieldLookupDescriptor()
-		{
-			Self.Type = _ClrType;
-			Self.Index = _ClrType;
-		}
+		public FieldLookupDescriptor() => Self.Index = _ClrType;
 
 		internal Type _ClrType => typeof(T);
 
@@ -51,13 +43,9 @@ namespace Nest
 
 		Routing IFieldLookup.Routing { get; set; }
 
-		TypeName IFieldLookup.Type { get; set; }
-
 		public FieldLookupDescriptor<T> Index(IndexName index) => Assign(a => a.Index = index);
 
 		public FieldLookupDescriptor<T> Id(Id id) => Assign(a => a.Id = id);
-
-		public FieldLookupDescriptor<T> Type(TypeName type) => Assign(a => a.Type = type);
 
 		public FieldLookupDescriptor<T> Path(Field path) => Assign(a => a.Path = path);
 

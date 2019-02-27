@@ -51,7 +51,6 @@ namespace Tests.Document.Multiple.ReindexOnServer
 		protected override Func<ReindexOnServerDescriptor, IReindexOnServerRequest> Fluent => d => d
 			.Source(s => s
 				.Index(CallIsolatedValue)
-				.Type("test")
 				.Size(100)
 				.Query<Test>(q => q
 					.Match(m => m
@@ -65,7 +64,6 @@ namespace Tests.Document.Multiple.ReindexOnServer
 			)
 			.Destination(s => s
 				.Index(CallIsolatedValue + "-clone")
-				.Type("test")
 				.OpType(OpType.Create)
 				.VersionType(VersionType.Internal)
 				.Routing(ReindexRouting.Discard)
@@ -81,7 +79,6 @@ namespace Tests.Document.Multiple.ReindexOnServer
 			Source = new ReindexSource
 			{
 				Index = CallIsolatedValue,
-				Type = "test",
 				Query = new MatchQuery { Field = Field<Test>(p => p.Flag), Query = "bar" },
 				Sort = new List<ISort> { new SortField { Field = "id", Order = SortOrder.Ascending } },
 				Size = 100
@@ -89,7 +86,6 @@ namespace Tests.Document.Multiple.ReindexOnServer
 			Destination = new ReindexDestination
 			{
 				Index = CallIsolatedValue + "-clone",
-				Type = Type<Test>(),
 				OpType = OpType.Create,
 				VersionType = VersionType.Internal,
 				Routing = ReindexRouting.Discard

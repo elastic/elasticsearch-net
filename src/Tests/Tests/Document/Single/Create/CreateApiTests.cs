@@ -96,7 +96,7 @@ namespace Tests.Document.Single.Create
 			createResponse.ApiCall.HttpStatusCode.Should().Be(201);
 			createResponse.Result.Should().Be(Result.Created);
 			createResponse.Index.Should().Be(index);
-			createResponse.Type.Should().Be(Client.Infer.TypeName<Project>());
+			createResponse.Type.Should().Be("_doc");
 			createResponse.Id.Should().Be(project.Name);
 
 			createResponse.Shards.Should().NotBeNull();

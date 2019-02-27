@@ -33,7 +33,6 @@ namespace Nest
 				|| q.TermsLookup.Id == null
 				|| q.TermsLookup.Path.IsConditionless()
 				|| q.TermsLookup.Index == null
-				|| q.TermsLookup.Type == null
 			);
 	}
 

@@ -98,7 +98,7 @@ namespace Tests.Document.Single.Index
 			indexResult.ApiCall.HttpStatusCode.Should().Be(201);
 			indexResult.Result.Should().Be(Result.Created);
 			indexResult.Index.Should().Be(indexName);
-			indexResult.Type.Should().Be(Client.Infer.TypeName<Project>());
+			indexResult.Type.Should().Be("_doc");
 			indexResult.Id.Should().Be(project.Name);
 
 			indexResult = Client.Index(project, f => f
@@ -123,7 +123,7 @@ namespace Tests.Document.Single.Index
 			indexResult.ApiCall.HttpStatusCode.Should().Be(201);
 			indexResult.Result.Should().Be(Result.Created);
 			indexResult.Index.Should().Be(indexName);
-			indexResult.Type.Should().Be(Client.Infer.TypeName<CommitActivity>());
+			indexResult.Type.Should().Be("_doc");
 			indexResult.Id.Should().Be(commitActivity.Id);
 			indexResult.Version.Should().Be(1);
 			indexResult.Shards.Should().NotBeNull();

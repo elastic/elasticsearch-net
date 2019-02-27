@@ -430,11 +430,6 @@ namespace Nest
 		public QueryContainer Exists(Func<ExistsQueryDescriptor<T>, IExistsQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.Exists = query);
 
-		public QueryContainer Type(Func<TypeQueryDescriptor, ITypeQuery> selector) =>
-			WrapInContainer(selector, (query, container) => container.Type = query);
-
-		public QueryContainer Type<TOther>() => Type(q => q.Value<TOther>());
-
 		/// <summary>
 		/// Used to match queries stored in an index.
 		/// The percolate query itself contains the document that will be used as query

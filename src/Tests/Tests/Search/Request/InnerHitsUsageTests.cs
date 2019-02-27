@@ -179,7 +179,7 @@ namespace Tests.Search.Request
 				var royal1 = royal;
 				if (parent == null) royal.Join = JoinField.Root<TRoyal>();
 				if (royal.Join == null) royal.Join = JoinField.Link<TRoyal, TParent>(parent);
-				bulk.Index<TRoyal>(i => i.Document(royal1).Index(_index).Type(RoyalType).Routing(parent == null ? royal.Name : parent.Name));
+				bulk.Index<TRoyal>(i => i.Document(royal1).Index(_index).Routing(parent == null ? royal.Name : parent.Name));
 			}
 			if (indexChildren == null) return;
 

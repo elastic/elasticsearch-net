@@ -102,7 +102,6 @@ namespace Nest
 			if (bulkAllRequest == null)
 				throw new Exception("BulkAll must set on ReindexRequest in order to get the target of a Reindex operation");
 
-			bulkAllRequest.Type = null;
 			bulkAllRequest.BackPressure = backPressure;
 			bulkAllRequest.BufferToBulk = (bulk, hits) =>
 			{
@@ -110,7 +109,6 @@ namespace Nest
 				{
 					var item = new BulkIndexOperation<TTarget>(hit.Source)
 					{
-						Type = hit.Type,
 						Index = toIndex,
 						Id = hit.Id,
 						Routing = hit.Routing,

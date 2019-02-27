@@ -41,7 +41,6 @@ namespace Tests.Document.Multiple.DeleteByQuery
 			.IgnoreUnavailable()
 			.Query(q => q
 				.Ids(ids => ids
-					.Types(typeof(Project))
 					.Values(Project.First.Name, "x")
 				)
 			);
@@ -53,7 +52,6 @@ namespace Tests.Document.Multiple.DeleteByQuery
 			IgnoreUnavailable = true,
 			Query = new IdsQuery
 			{
-				Types = Types.Type<Project>(),
 				Values = new Id[] { Project.First.Name, "x" }
 			}
 		};

@@ -84,9 +84,6 @@ namespace Nest
 		///<summary>Explicit per operation timeout</summary>
 		Time Timeout { get; set; }
 
-		///<summary>Default document type for items which don't provide one</summary>
-		TypeName Type { get; set; }
-
 		/// <summary>
 		/// Sets the number of shard copies that must be active before proceeding with the bulk operation.
 		/// Defaults to <c>1</c>, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any
@@ -102,7 +99,6 @@ namespace Nest
 		{
 			Documents = documents;
 			Index = typeof(T);
-			Type = typeof(T);
 		}
 
 		/// <inheritdoc />
@@ -157,9 +153,6 @@ namespace Nest
 		public Time Timeout { get; set; }
 
 		/// <inheritdoc />
-		public TypeName Type { get; set; }
-
-		/// <inheritdoc />
 		public int? WaitForActiveShards { get; set; }
 	}
 
@@ -172,7 +165,6 @@ namespace Nest
 		{
 			_documents = documents;
 			((IBulkAllRequest<T>)this).Index = typeof(T);
-			((IBulkAllRequest<T>)this).Type = typeof(T);
 		}
 
 		int? IBulkAllRequest<T>.BackOffRetries { get; set; }
@@ -193,7 +185,6 @@ namespace Nest
 		Routing IBulkAllRequest<T>.Routing { get; set; }
 		int? IBulkAllRequest<T>.Size { get; set; }
 		Time IBulkAllRequest<T>.Timeout { get; set; }
-		TypeName IBulkAllRequest<T>.Type { get; set; }
 		int? IBulkAllRequest<T>.WaitForActiveShards { get; set; }
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.MaxDegreeOfParallelism" />
@@ -215,12 +206,6 @@ namespace Nest
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.Index" />
 		public BulkAllDescriptor<T> Index<TOther>() where TOther : class => Assign(a => a.Index = typeof(TOther));
-
-		/// <inheritdoc cref="IBulkAllRequest{T}.Type" />
-		public BulkAllDescriptor<T> Type(TypeName type) => Assign(a => a.Type = type);
-
-		/// <inheritdoc cref="IBulkAllRequest{T}.Type" />
-		public BulkAllDescriptor<T> Type<TOther>() where TOther : class => Assign(a => a.Type = typeof(TOther));
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.RefreshOnCompleted" />
 		public BulkAllDescriptor<T> RefreshOnCompleted(bool refresh = true) => Assign(p => p.RefreshOnCompleted = refresh);

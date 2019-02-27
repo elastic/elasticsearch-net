@@ -115,8 +115,6 @@ namespace Nest
 
 		internal static byte[] Utf8Bytes(this string s) => s.IsNullOrEmpty() ? null : Encoding.UTF8.GetBytes(s);
 
-		internal static bool IsNullOrEmpty(this TypeName value) => value == null || value.GetHashCode() == 0;
-
 		internal static bool IsNullOrEmpty(this IndexName value) => value == null || value.GetHashCode() == 0;
 
 		internal static bool IsValueType(this Type type) => type.GetTypeInfo().IsValueType;

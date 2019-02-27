@@ -109,7 +109,6 @@ namespace Tests.Cluster.TaskManagement.TasksList
 			var response = client.ReindexOnServer(r => r
 				.Source(s => s
 					.Index(Infer.Index<Project>())
-					.Type(typeof(Project))
 				)
 				.Destination(d => d
 					.Index("tasks-list-projects")

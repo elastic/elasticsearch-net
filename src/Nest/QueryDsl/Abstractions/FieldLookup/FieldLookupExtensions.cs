@@ -6,7 +6,6 @@
 			fieldLookup == null ||
 			fieldLookup.Id == null ||
 			fieldLookup.Index == null ||
-			fieldLookup.Type == null ||
 			fieldLookup.Path == null;
 	}
 }

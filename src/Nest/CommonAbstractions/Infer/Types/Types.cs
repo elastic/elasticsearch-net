@@ -7,7 +7,6 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[Obsolete("Types have been removed from 7.x")]
-	[ContractJsonConverter(typeof(TypesJsonConverter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Types : Union<Types.AllTypesMarker, Types.ManyTypes>, IUrlParameter, IEquatable<Types>
 	{
@@ -38,17 +37,7 @@ namespace Nest
 			);
 		}
 
-		string IUrlParameter.GetString(IConnectionConfigurationValues settings) => Match(
-			all => null,
-			many =>
-			{
-				if (!(settings is IConnectionSettingsValues nestSettings))
-					throw new ArgumentNullException(nameof(settings), $"Can not resolve Types if no {nameof(IConnectionSettingsValues)} is provided");
-
-				var types = many.Types.Select(t => nestSettings.Inferrer.TypeName(t)).Distinct();
-				return string.Join(",", types);
-			}
-		);
+		string IUrlParameter.GetString(IConnectionConfigurationValues settings) => Match(all => null, many => string.Empty);
 
 		public static TypeName Type(TypeName type) => type;
 

@@ -57,7 +57,6 @@ namespace Tests.XPack.Watcher.AcknowledgeWatch
 						.Index("test_index", i => i
 							.ThrottlePeriod("15m")
 							.Index("test-" + CallIsolatedValue)
-							.DocType("acknowledgement")
 						)
 					)
 				);

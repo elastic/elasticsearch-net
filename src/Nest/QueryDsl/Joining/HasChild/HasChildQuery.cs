@@ -29,7 +29,7 @@ namespace Nest
 		ChildScoreMode? ScoreMode { get; set; }
 
 		[JsonProperty("type")]
-		TypeName Type { get; set; }
+		RelationName Type { get; set; }
 	}
 
 	public class HasChildQuery : QueryBase, IHasChildQuery
@@ -45,7 +45,7 @@ namespace Nest
 		public int? MinChildren { get; set; }
 		public QueryContainer Query { get; set; }
 		public ChildScoreMode? ScoreMode { get; set; }
-		public TypeName Type { get; set; }
+		public RelationName Type { get; set; }
 		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.HasChild = this;
@@ -57,7 +57,7 @@ namespace Nest
 		: QueryDescriptorBase<HasChildQueryDescriptor<T>, IHasChildQuery>
 			, IHasChildQuery where T : class
 	{
-		public HasChildQueryDescriptor() => ((IHasChildQuery)this).Type = TypeName.Create<T>();
+		public HasChildQueryDescriptor() => Self.Type = RelationName.Create<T>();
 
 		protected override bool Conditionless => HasChildQuery.IsConditionless(this);
 		bool? IHasChildQuery.IgnoreUnmapped { get; set; }
@@ -71,7 +71,7 @@ namespace Nest
 		int? IHasChildQuery.MinChildren { get; set; }
 		QueryContainer IHasChildQuery.Query { get; set; }
 		ChildScoreMode? IHasChildQuery.ScoreMode { get; set; }
-		TypeName IHasChildQuery.Type { get; set; }
+		RelationName IHasChildQuery.Type { get; set; }
 
 		public HasChildQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
 			Assign(a => a.Query = selector?.Invoke(new QueryContainerDescriptor<T>()));

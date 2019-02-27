@@ -94,7 +94,7 @@ namespace ApiGenerator.Domain
 					$"public {returnType} {p.InterfaceName}({p.ClrTypeName} {paramName}) => Assign(a=>a.RouteValues.{routeSetter}(\"{p.Name}\", {routeValue}));";
 				var xmlDoc = $"///<summary>{p.Description}</summary>";
 				setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
-				if (paramName == "index" || paramName == "type")
+				if (paramName == "index")
 				{
 					code = $"public {returnType} {p.InterfaceName}<TOther>() where TOther : class ";
 					code += $"=> Assign(a=>a.RouteValues.{routeSetter}(\"{p.Name}\", ({p.ClrTypeName})typeof(TOther)));";

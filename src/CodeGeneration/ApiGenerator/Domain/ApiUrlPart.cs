@@ -41,7 +41,7 @@ namespace ApiGenerator.Domain
 						return Type == "string" ? "IndexName" : "Indices";
 					case "target":
 						return "IndexName";
-					case "type": return Type == "string" ? "TypeName" : "Types";
+					case "type": return Type == "string" ? "Name" : "Names";
 					case "watch_id":
 					case "job_id":
 					case "datafeed_id":

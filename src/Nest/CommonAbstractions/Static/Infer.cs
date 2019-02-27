@@ -8,8 +8,7 @@ namespace Nest
 {
 	public static class Infer
 	{
-		public static Indices AllIndices = Nest.Indices.All;
-		public static Types AllTypes = Types.All;
+		public static readonly Indices AllIndices = Nest.Indices.All;
 
 		public static IndexName Index(IndexName index) => index;
 
@@ -22,14 +21,6 @@ namespace Nest
 		public static Indices Indices(params IndexName[] indices) => indices;
 
 		public static Indices Indices(IEnumerable<IndexName> indices) => indices.ToArray();
-
-		public static TypeName Type(TypeName type) => type;
-
-		public static TypeName Type<T>() => typeof(T);
-
-		public static Types Type(IEnumerable<TypeName> types) => new Types.ManyTypes(types);
-
-		public static Types Type(params TypeName[] types) => new Types.ManyTypes(types);
 
 		public static RelationName Relation(string type) => type;
 

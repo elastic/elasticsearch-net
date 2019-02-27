@@ -68,7 +68,6 @@ namespace Tests.Search.MultiSearch
 				.Query(q => q
 					.Percolate(p => p
 						.Index<Project>()
-						.Type<Project>()
 						.Id(Project.First.Name)
 						.Version(1)
 						.Routing(Project.First.Name)
@@ -103,7 +102,6 @@ namespace Tests.Search.MultiSearch
 						Query = new QueryContainer(new PercolateQuery
 						{
 							Index = typeof(Project),
-							Type = typeof(Project),
 							Id = Project.First.Name,
 							Version = 1,
 							Routing = Project.First.Name,

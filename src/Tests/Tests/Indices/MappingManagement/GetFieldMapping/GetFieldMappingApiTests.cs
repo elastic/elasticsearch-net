@@ -46,9 +46,9 @@ namespace Tests.Indices.MappingManagement.GetFieldMapping
 			projectMappings.Should().NotBeNull("project mapping value in the dictionary should not point to a null value");
 			projectMappings.Mappings.Should()
 				.NotBeEmpty("project has fields so should contain a type mapping")
-				.And.ContainKey(Type<Project>(), "the inferred type for project should be found in the index mapping");
+				.And.ContainKey("project", "the type for project should be found in the index mapping");
 
-			var projectTypeMappings = projectMappings.Mappings[Type<Project>()];
+			var projectTypeMappings = projectMappings.Mappings["project"];
 			projectTypeMappings.Should().NotBeNull("project type mapping value should not point to a null value");
 
 			projectTypeMappings.Should()

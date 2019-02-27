@@ -15,7 +15,6 @@ namespace Tests.QueryDsl.TermLevel.Terms
 			q => q.Field = null,
 			q => q.TermsLookup = null,
 			q => q.TermsLookup.Id = null,
-			q => q.TermsLookup.Type = null,
 			q => q.TermsLookup.Index = null,
 			q => q.TermsLookup.Path = null,
 		};
@@ -29,7 +28,6 @@ namespace Tests.QueryDsl.TermLevel.Terms
 			{
 				Id = 12,
 				Index = Index<Developer>(),
-				Type = Type<Developer>(),
 				Path = Field<Developer>(p => p.LastName),
 				Routing = "myroutingvalue"
 			}

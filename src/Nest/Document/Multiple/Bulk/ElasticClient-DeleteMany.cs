@@ -39,7 +39,7 @@ namespace Nest
 		/// <param name="index">Override the inferred indexname for T</param>
 		/// <param name="type">Override the inferred typename for T</param>
 		public static Task<IBulkResponse> DeleteManyAsync<T>(this IElasticClient client, IEnumerable<T> objects, IndexName index = null,
-			TypeName type = null, CancellationToken cancellationToken = default
+			 CancellationToken cancellationToken = default
 		)
 			where T : class
 		{

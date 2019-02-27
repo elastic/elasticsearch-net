@@ -8,16 +8,17 @@ namespace Nest
 {
 	using TypeExistConverter = Func<IApiCallDetails, Stream, ExistsResponse>;
 
+	// TODO should we keep this around in 7.x
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc />
-		IExistsResponse TypeExists(Indices indices, Types types, Func<TypeExistsDescriptor, ITypeExistsRequest> selector = null);
+		IExistsResponse TypeExists(Indices indices, string type, Func<TypeExistsDescriptor, ITypeExistsRequest> selector = null);
 
 		/// <inheritdoc />
 		IExistsResponse TypeExists(ITypeExistsRequest request);
 
 		/// <inheritdoc />
-		Task<IExistsResponse> TypeExistsAsync(Indices indices, Types types, Func<TypeExistsDescriptor, ITypeExistsRequest> selector = null,
+		Task<IExistsResponse> TypeExistsAsync(Indices indices, string type, Func<TypeExistsDescriptor, ITypeExistsRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
 		);
 
@@ -28,8 +29,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IExistsResponse TypeExists(Indices indices, Types types, Func<TypeExistsDescriptor, ITypeExistsRequest> selector = null) =>
-			TypeExists(selector.InvokeOrDefault(new TypeExistsDescriptor(indices, types)));
+		public IExistsResponse TypeExists(Indices indices, string type, Func<TypeExistsDescriptor, ITypeExistsRequest> selector = null) =>
+			TypeExists(selector.InvokeOrDefault(new TypeExistsDescriptor(indices, type)));
 
 		/// <inheritdoc />
 		public IExistsResponse TypeExists(ITypeExistsRequest request) =>
@@ -39,10 +40,10 @@ namespace Nest
 			);
 
 		/// <inheritdoc />
-		public Task<IExistsResponse> TypeExistsAsync(Indices indices, Types types, Func<TypeExistsDescriptor, ITypeExistsRequest> selector = null,
+		public Task<IExistsResponse> TypeExistsAsync(Indices indices, string type, Func<TypeExistsDescriptor, ITypeExistsRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
 		) =>
-			TypeExistsAsync(selector.InvokeOrDefault(new TypeExistsDescriptor(indices, types)), cancellationToken);
+			TypeExistsAsync(selector.InvokeOrDefault(new TypeExistsDescriptor(indices, type)), cancellationToken);
 
 		/// <inheritdoc />
 		public Task<IExistsResponse> TypeExistsAsync(ITypeExistsRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
