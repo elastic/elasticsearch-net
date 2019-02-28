@@ -29,7 +29,11 @@ namespace Nest
 				op.Routing = op.GetRoutingForOperation(settings.Inferrer);
 
 				var opJson = requestResponseSerializer.SerializeToString(op, SerializationFormatting.None);
-				writer.WriteRaw($"{{\"{op.Operation}\":" + opJson + "}\n");
+				writer.WriteRaw("{\"");
+				writer.WriteRaw(op.Operation);
+				writer.WriteRaw("\":");
+				writer.WriteRaw(opJson);
+				writer.WriteRaw("}\n");
 				var body = op.GetBody();
 				if (body == null) continue;
 
@@ -40,7 +44,8 @@ namespace Nest
 					)
 					.SerializeToString(body, SerializationFormatting.None);
 
-				writer.WriteRaw(bodyJson + "\n");
+				writer.WriteRaw(bodyJson);
+				writer.WriteRaw("\n");
 			}
 		}
 
