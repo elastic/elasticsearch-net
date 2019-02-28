@@ -34,6 +34,13 @@ namespace Nest
 		public RolloverIndexDescriptor Settings(Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> selector) =>
 			Assign(a => a.Settings = selector?.Invoke(new IndexSettingsDescriptor())?.Value);
 
+		public RolloverIndexDescriptor Map<T>(Func<TypeMappingDescriptor<T>, ITypeMapping> selector) where T : class =>
+			Assign(a => a.Mappings = selector?.Invoke(new TypeMappingDescriptor<T>()));
+
+		public RolloverIndexDescriptor Map(Func<TypeMappingDescriptor<object>, ITypeMapping> selector) =>
+			Assign(a => a.Mappings = selector?.Invoke(new TypeMappingDescriptor<object>()));
+
+		[Obsolete("Mappings is no longer a dictionary in 7.x, please use the simplified Map() method on this descriptor instead")]
 		public RolloverIndexDescriptor Mappings(Func<MappingsDescriptor, ITypeMapping> selector) =>
 			Assign(a => a.Mappings = selector?.Invoke(new MappingsDescriptor()));
 

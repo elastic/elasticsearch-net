@@ -37,7 +37,7 @@ namespace Tests.Indices.Monitoring.IndicesStats
 
 			metrics = IndicesStatsMetric.Completion | IndicesStatsMetric.Flush | IndicesStatsMetric.All;
 			var request = new IndicesStatsRequest(index, metrics) { };
-			await GET($"/index1%2Cindex2/_stats/_all?types=doc")
+			await GET($"/index1%2Cindex2/_stats/_all")
 					.Fluent(c => c.IndicesStats(index, i => i.Metric(metrics)))
 					.Request(c => c.IndicesStats(request))
 					.FluentAsync(c => c.IndicesStatsAsync(index, i => i.Metric(metrics)))

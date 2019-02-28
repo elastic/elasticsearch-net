@@ -93,31 +93,28 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					company = new
+					properties = new
 					{
-						properties = new
+						name = new
 						{
-							name = new
+							type = "text"
+						},
+						employees = new
+						{
+							type = "object",
+							properties = new
 							{
-								type = "text"
-							},
-							employees = new
-							{
-								type = "object",
-								properties = new
+								firstName = new
 								{
-									firstName = new
-									{
-										type = "text"
-									},
-									lastName = new
-									{
-										type = "text"
-									},
-									salary = new
-									{
-										type = "integer"
-									}
+									type = "text"
+								},
+								lastName = new
+								{
+									type = "text"
+								},
+								salary = new
+								{
+									type = "integer"
 								}
 							}
 						}
@@ -171,26 +168,23 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					company = new
+					properties = new
 					{
-						properties = new
+						name = new
 						{
-							name = new
+							type = "text",
+							fields = new
 							{
-								type = "text",
-								fields = new
+								keyword = new
 								{
-									keyword = new
-									{
-										type = "keyword",
-										ignore_above = 256
-									}
+									type = "keyword",
+									ignore_above = 256
 								}
-							},
-							employees = new
-							{
-								type = "nested",
 							}
+						},
+						employees = new
+						{
+							type = "nested",
 						}
 					}
 				}
@@ -315,115 +309,112 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					company = new
+					properties = new
 					{
-						properties = new
+						employees = new
 						{
-							employees = new
+							type = "nested",
+							properties = new
 							{
-								type = "nested",
-								properties = new
+								birthday = new
 								{
-									birthday = new
+									format = "MM-dd-yy",
+									type = "date"
+								},
+								empl = new
+								{
+									properties = new
 									{
-										format = "MM-dd-yy",
-										type = "date"
-									},
-									empl = new
-									{
-										properties = new
+										birthday = new
 										{
-											birthday = new
-											{
-												type = "date"
-											},
-											employees = new
-											{
-												properties = new {},
-												type = "object"
-											},
-											firstName = new
-											{
-												fields = new
-												{
-													keyword = new
-													{
-														type = "keyword",
-														ignore_above = 256
-													}
-												},
-												type = "text"
-											},
-											hours = new
-											{
-												type = "long"
-											},
-											isManager = new
-											{
-												type = "boolean"
-											},
-											lastName = new
-											{
-												fields = new
-												{
-													keyword = new
-													{
-														type = "keyword",
-														ignore_above = 256
-													}
-												},
-												type = "text"
-											},
-											salary = new
-											{
-												type = "integer"
-											}
+											type = "date"
 										},
-										type = "nested"
-									},
-									first_name = new
-									{
-										fields = new
+										employees = new
 										{
-											firstNameRaw = new
-											{
-												type = "keyword"
-											},
-											length = new
-											{
-												analyzer = "standard",
-												type = "token_count"
-											}
+											properties = new {},
+											type = "object"
 										},
-										type = "text"
+										firstName = new
+										{
+											fields = new
+											{
+												keyword = new
+												{
+													type = "keyword",
+													ignore_above = 256
+												}
+											},
+											type = "text"
+										},
+										hours = new
+										{
+											type = "long"
+										},
+										isManager = new
+										{
+											type = "boolean"
+										},
+										lastName = new
+										{
+											fields = new
+											{
+												keyword = new
+												{
+													type = "keyword",
+													ignore_above = 256
+												}
+											},
+											type = "text"
+										},
+										salary = new
+										{
+											type = "integer"
+										}
 									},
-									isManager = new
+									type = "nested"
+								},
+								first_name = new
+								{
+									fields = new
 									{
-										null_value = false,
-										store = true,
-										type = "boolean"
+										firstNameRaw = new
+										{
+											type = "keyword"
+										},
+										length = new
+										{
+											analyzer = "standard",
+											type = "token_count"
+										}
 									},
-									last_name = new
-									{
-										type = "text"
-									},
-									salary = new
-									{
-										ignore_malformed = false,
-										type = "double"
-									}
+									type = "text"
+								},
+								isManager = new
+								{
+									null_value = false,
+									store = true,
+									type = "boolean"
+								},
+								last_name = new
+								{
+									type = "text"
+								},
+								salary = new
+								{
+									ignore_malformed = false,
+									type = "double"
 								}
-							},
-							name = new
-							{
-								null_value = "null",
-								similarity = "BM25",
-								type = "keyword"
-							},
-							office_hours = new
-							{
-								type = "text"
 							}
+						},
+						name = new
+						{
+							null_value = "null",
+							similarity = "BM25",
+							type = "keyword"
+						},
+						office_hours = new
+						{
+							type = "text"
 						}
 					}
 				}

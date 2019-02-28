@@ -24,10 +24,10 @@ namespace Tests.Reproduce
 			var client = new ElasticClient(connectionSettings);
 			var response = client.Search<ESLogEvent>(s => s);
 
-			response.ApiCall.Uri.AbsolutePath.Should().Be("/logstash-%2A/eslogevent/_search");
+			response.ApiCall.Uri.AbsolutePath.Should().Be("/logstash-%2A/_search");
 
 			response = client.Search<ESLogEvent>(new SearchRequest<ESLogEvent> { });
-			response.ApiCall.Uri.AbsolutePath.Should().Be("/logstash-%2A/eslogevent/_search");
+			response.ApiCall.Uri.AbsolutePath.Should().Be("/logstash-%2A/_search");
 
 			response = client.Search<ESLogEvent>(new SearchRequest { });
 			response.ApiCall.Uri.AbsolutePath.Should().Be("/_search");

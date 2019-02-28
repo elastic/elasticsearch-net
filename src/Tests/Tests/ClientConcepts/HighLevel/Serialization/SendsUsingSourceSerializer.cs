@@ -102,12 +102,12 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 
 		private static IEnumerable<object> ExpectBulk(object document)
 		{
-			yield return new { delete = new { _index = "default-index", _type = "adocument", _id = "1" } };
-			yield return new { index = new { _index = "default-index", _type = "adocument", _id = "1" } };
+			yield return new { delete = new { _index = "default-index", _id = "1" } };
+			yield return new { index = new { _index = "default-index",  _id = "1" } };
 			yield return document;
-			yield return new { create = new { _index = "default-index", _type = "adocument", _id = "1" } };
+			yield return new { create = new { _index = "default-index", _id = "1" } };
 			yield return document;
-			yield return new { update = new { _index = "default-index", _type = "adocument", _id = "1" } };
+			yield return new { update = new { _index = "default-index", _id = "1" } };
 			yield return new { doc = document, upsert = document };
 		}
 
@@ -130,8 +130,8 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		{
 			docs = new object[]
 			{
-				new { _index = "default-index", _type = "adocument", doc = document },
-				new { _index = "default-index", _type = "adocument", doc = document }
+				new { _index = "default-index", doc = document },
+				new { _index = "default-index", doc = document }
 			}
 		};
 

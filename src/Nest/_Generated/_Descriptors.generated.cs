@@ -1879,12 +1879,12 @@ namespace Nest
 		///<summary>/{index}/_mapping/{type}</summary>
 		///<param name="index">this parameter is required</param>
 		///<param name="type">this parameter is required</param>
-		public TypeExistsDescriptor(Indices index, Types type) : base(r => r.Required("index", index).Required("type", type)){}
+		public TypeExistsDescriptor(Indices index, Names type) : base(r => r.Required("index", index).Required("type", type)){}
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		internal TypeExistsDescriptor() : base(){}
 		// values part of the url path
 		Indices ITypeExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types ITypeExistsRequest.Type => Self.RouteValues.Get<Types>("type");
+		Names ITypeExistsRequest.Type => Self.RouteValues.Get<Names>("type");
 
 		///<summary>A comma-separated list of index names; use `_all` to check the types across all indices</summary>
 		public TypeExistsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));

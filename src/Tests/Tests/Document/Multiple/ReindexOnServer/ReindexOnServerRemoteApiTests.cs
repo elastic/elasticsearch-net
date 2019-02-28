@@ -22,7 +22,6 @@ namespace Tests.Document.Multiple.ReindexOnServer
 				dest = new
 				{
 					index = $"{CallIsolatedValue}-clone",
-					type = "test"
 				},
 				source = new
 				{
@@ -33,7 +32,6 @@ namespace Tests.Document.Multiple.ReindexOnServer
 						password = "changeme"
 					},
 					index = CallIsolatedValue,
-					type = new[] { "test" },
 					size = 100
 				}
 			};

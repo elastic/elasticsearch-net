@@ -66,6 +66,8 @@ namespace Nest
 	{
 		protected ObjectPropertyDescriptorBase() : base(FieldType.Object) { }
 
+		protected ObjectPropertyDescriptorBase(FieldType fieldType) : base(fieldType) { }
+
 		Union<bool, DynamicMapping> IObjectProperty.Dynamic { get; set; }
 		bool? IObjectProperty.Enabled { get; set; }
 		IProperties IObjectProperty.Properties { get; set; }

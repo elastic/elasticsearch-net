@@ -28,7 +28,6 @@ namespace Tests.Document.Multiple.ReindexOnServer
 					index = $"{CallIsolatedValue}-clone",
 					op_type = "create",
 					routing = "discard",
-					type = "test",
 					version_type = "internal"
 				},
 				script = new
@@ -40,7 +39,6 @@ namespace Tests.Document.Multiple.ReindexOnServer
 					index = CallIsolatedValue,
 					query = new { match = new { flag = new { query = "bar" } } },
 					sort = new[] { new { id = new { order = "asc" } } },
-					type = new[] { "test" },
 					size = 100
 				},
 				conflicts = "proceed"

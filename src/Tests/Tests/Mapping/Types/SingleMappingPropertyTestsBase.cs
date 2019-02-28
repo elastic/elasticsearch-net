@@ -23,19 +23,16 @@ namespace Tests.Mapping.Types
 			settings = new Dictionary<string, object> { { "index.number_of_shards", 1 } },
 			mappings = new
 			{
-				doc = new
+				dynamic_templates = new object[]
 				{
-					dynamic_templates = new object[]
+					new
 					{
-						new
+						@base = new
 						{
-							@base = new
-							{
-								match = "*",
-								match_pattern = "simple",
-								match_mapping_type = "*",
-								mapping = SingleMappingJson
-							}
+							match = "*",
+							match_pattern = "simple",
+							match_mapping_type = "*",
+							mapping = SingleMappingJson
 						}
 					}
 				}

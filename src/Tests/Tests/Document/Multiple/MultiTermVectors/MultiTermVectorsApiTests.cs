@@ -25,7 +25,6 @@ namespace Tests.Document.Multiple.MultiTermVectors
 			docs = Developer.Developers.Select(p => new
 				{
 					_index = "devs",
-					_type = "developer",
 					_id = p.Id,
 					payloads = true,
 					field_statistics = true,

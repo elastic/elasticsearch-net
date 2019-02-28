@@ -26,7 +26,6 @@ namespace Tests.XPack.MachineLearning.PutDatafeed
 			{
 				match_all = new { }
 			},
-			types = new[] { "metric" }
 		};
 
 		protected override int ExpectStatusCode => 200;

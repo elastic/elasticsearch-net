@@ -75,16 +75,13 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			{
 				mappings = new
 				{
-					doc = new
+					properties = new
 					{
-						properties = new
+						fieldName = new
 						{
-							fieldName = new
-							{
-								type = "my_plugin_property",
-								language = "dutch",
-								numeric = true
-							}
+							type = "my_plugin_property",
+							language = "dutch",
+							numeric = true
 						}
 					}
 				}

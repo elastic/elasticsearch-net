@@ -33,20 +33,17 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 			},
 			mappings = new
 			{
-				doc = new
+				properties = new
 				{
-					properties = new
+					branches = new
 					{
-						branches = new
+						type = "text",
+						fields = new
 						{
-							type = "text",
-							fields = new
+							keyword = new
 							{
-								keyword = new
-								{
-									type = "keyword",
-									ignore_above = 256
-								}
+								type = "keyword",
+								ignore_above = 256
 							}
 						}
 					}

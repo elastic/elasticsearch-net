@@ -48,7 +48,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			response.ShouldBeValid();
 
 			response.Indices["project"]["_doc"].Properties.Should().NotBeEmpty();
-			response.Indices[Index<Project>()].Mappings["_doc"].Properties.Should().NotBeEmpty();
+			response.Indices[Index<Project>()].Mappings.Properties.Should().NotBeEmpty();
 			response.Indices[Index<Project>()]["_doc"].Properties.Should().NotBeEmpty();
 			var properties = response.Indices["project"]["_doc"].Properties;
 
