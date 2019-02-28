@@ -13,7 +13,7 @@ namespace Elasticsearch.Net
 		private static readonly string ResponseAlreadyCaptured =
 			"<Response stream not captured or already read to completion by serializer. Set DisableDirectStreaming() on ConnectionSettings to force it to be set on the response.>";
 
-		public static string DebugInformationBuilder(IApiCallDetails r, StringBuilder sb)
+		public static string DebugInformationBuilder(IApiCallDetails r, System.Text.StringBuilder sb)
 		{
 			if (r.DeprecationWarnings.HasAny())
 			{
@@ -35,14 +35,14 @@ namespace Elasticsearch.Net
 			return sb.ToString();
 		}
 
-		public static void DebugAuditTrailExceptions(List<Audit> auditTrail, StringBuilder sb)
+		public static void DebugAuditTrailExceptions(List<Audit> auditTrail, System.Text.StringBuilder sb)
 		{
 			var auditExceptions = auditTrail.Select((audit, i) => new { audit, i }).Where(a => a.audit.Exception != null);
 			foreach (var a in auditExceptions)
 				sb.AppendLine($"# Audit exception in step {a.i + 1} {a.audit.Event.GetStringValue()}:\r\n{a.audit.Exception}");
 		}
 
-		public static void DebugAuditTrail(List<Audit> auditTrail, StringBuilder sb)
+		public static void DebugAuditTrail(List<Audit> auditTrail, System.Text.StringBuilder sb)
 		{
 			if (auditTrail == null) return;
 

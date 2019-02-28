@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Utf8Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -52,7 +52,7 @@ namespace Nest
 		string TitleLink { get; set; }
 
 		[DataMember(Name = "ts")]
-		[JsonFormatter(typeof(EpochSecondsNullableDateTimeOffsetFormatter))]
+		[JsonFormatter(typeof(NullableDateTimeOffsetEpochSecondsFormatter))]
 		DateTimeOffset? Ts { get; set; }
 	}
 

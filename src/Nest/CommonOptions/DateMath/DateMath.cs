@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
-using Utf8Json;
-using Utf8Json.Formatters;
+using Elasticsearch.Net;
 
 namespace Nest
 {

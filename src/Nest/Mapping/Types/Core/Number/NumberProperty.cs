@@ -1,33 +1,32 @@
 using System;
 using System.Diagnostics;
-using Elasticsearch.Net;
 using System.Runtime.Serialization;
-using Utf8Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	[InterfaceDataContract]
 	public interface INumberProperty : IDocValuesProperty
 	{
-		[DataMember(Name ="boost")]
+		[DataMember(Name = "boost")]
 		double? Boost { get; set; }
 
-		[DataMember(Name ="coerce")]
+		[DataMember(Name = "coerce")]
 		bool? Coerce { get; set; }
 
-		[DataMember(Name ="fielddata")]
+		[DataMember(Name = "fielddata")]
 		INumericFielddata Fielddata { get; set; }
 
-		[DataMember(Name ="ignore_malformed")]
+		[DataMember(Name = "ignore_malformed")]
 		bool? IgnoreMalformed { get; set; }
 
-		[DataMember(Name ="index")]
+		[DataMember(Name = "index")]
 		bool? Index { get; set; }
 
-		[DataMember(Name ="null_value")]
+		[DataMember(Name = "null_value")]
 		double? NullValue { get; set; }
 
-		[DataMember(Name ="scaling_factor")]
+		[DataMember(Name = "scaling_factor")]
 		double? ScalingFactor { get; set; }
 	}
 

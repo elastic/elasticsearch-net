@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Reflection;
 using Elasticsearch.Net;
-using Utf8Json;
 
 namespace Nest
 {

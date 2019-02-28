@@ -3,11 +3,10 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Utf8Json;
-using Utf8Json.Resolvers;
 
 namespace Elasticsearch.Net
 {
+	// TODO: Add a resolver that uses Utf8Json formatters defined in this assembly
 	public class LowLevelRequestResponseSerializer : IElasticsearchSerializer
 	{
 		public static readonly LowLevelRequestResponseSerializer Instance = new LowLevelRequestResponseSerializer();

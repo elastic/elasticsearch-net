@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Elasticsearch.Net;
 using System.Runtime.Serialization;
-using Utf8Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -15,7 +14,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="lang">language</param>
 		/// <returns>this</returns>
-		[DataMember(Name ="lang")]
+		[DataMember(Name = "lang")]
 		string Lang { get; set; }
 
 		/// <summary>
@@ -29,7 +28,7 @@ namespace Nest
 		/// </example>
 		/// <param name="paramsDictionary">param</param>
 		/// <returns>this</returns>
-		[DataMember(Name ="params")]
+		[DataMember(Name = "params")]
 		[JsonFormatter(typeof(VerbatimDictionaryKeysPreservingNullFormatter<string, object>))]
 		Dictionary<string, object> Params { get; set; }
 	}

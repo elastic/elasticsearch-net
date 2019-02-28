@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Utf8Json;
 
 namespace Elasticsearch.Net
 {
@@ -47,7 +46,7 @@ namespace Elasticsearch.Net
 
 		public override string ToString()
 		{
-			var sb = new StringBuilder();
+			var sb = new System.Text.StringBuilder();
 			sb.Append($"ServerError: {Status}");
 			if (Error != null)
 				sb.Append(Error);

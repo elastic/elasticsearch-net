@@ -26,7 +26,7 @@ namespace Elasticsearch.Net
 		{
 			get
 			{
-				var sb = new StringBuilder();
+				var sb = new System.Text.StringBuilder();
 				var failureReason = FailureReason.GetStringValue();
 				if (FailureReason == PipelineFailure.Unexpected && AuditTrail.HasAny())
 					failureReason = "Unrecoverable/Unexpected " + AuditTrail.Last().Event.GetStringValue();

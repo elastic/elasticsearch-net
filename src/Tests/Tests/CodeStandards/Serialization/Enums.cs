@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using Elastic.Xunit.XunitPlumbing;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;

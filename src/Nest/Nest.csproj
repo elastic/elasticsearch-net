@@ -8,6 +8,5 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Elasticsearch.Net\Elasticsearch.Net.csproj" />
-    <ProjectReference Include="..\Utf8Json\src\Utf8Json\Utf8Json.csproj" />
   </ItemGroup>
 </Project>

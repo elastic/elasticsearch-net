@@ -1,5 +1,5 @@
-﻿using Utf8Json;
-using Utf8Json.Resolvers;
+﻿using Elasticsearch.Net;
+
 
 namespace Nest
 {

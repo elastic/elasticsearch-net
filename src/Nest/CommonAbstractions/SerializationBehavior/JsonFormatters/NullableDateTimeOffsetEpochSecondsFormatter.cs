@@ -1,9 +1,9 @@
 using System;
-using Utf8Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class EpochSecondsNullableDateTimeOffsetFormatter : IJsonFormatter<DateTimeOffset?>
+	public class NullableDateTimeOffsetEpochSecondsFormatter : IJsonFormatter<DateTimeOffset?>
 	{
 		public DateTimeOffset? Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{

@@ -1,5 +1,5 @@
-﻿using Utf8Json;
-using Utf8Json.Internal;
+﻿using Elasticsearch.Net;
+
 
 namespace Nest
 {
@@ -11,7 +11,7 @@ namespace Nest
 			{ "boost", 1 },
 			{ "format", 2 },
 		};
-		
+
 		public Field Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var token = reader.GetCurrentJsonToken();
@@ -27,7 +27,7 @@ namespace Nest
 					string field = null;
 					double? boost = null;
 					string format = null;
-					
+
 					// TODO: include Format in Field ctor
 					while (reader.ReadIsInObject(ref count))
 					{
@@ -50,7 +50,7 @@ namespace Nest
 						else
 							reader.ReadNextBlock();
 					}
-					
+
 					return new Field(field, boost);
 				default:
 					throw new JsonParsingException($"Cannot deserialize {typeof(Field).FullName} from {token}");

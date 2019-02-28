@@ -1,5 +1,4 @@
 ﻿using System.Runtime.Serialization;
-using Utf8Json;
 
 namespace Nest
 {

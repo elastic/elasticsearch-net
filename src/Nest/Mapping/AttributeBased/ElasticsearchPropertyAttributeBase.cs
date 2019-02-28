@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Elasticsearch.Net;
 using System.Runtime.Serialization;
-using Utf8Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -13,13 +12,13 @@ namespace Nest
 	{
 		protected ElasticsearchPropertyAttributeBase(FieldType type) => Self.Type = type.GetStringValue();
 
+		public bool? AllowPrivate { get; set; } = true;
+
 		public bool Ignore { get; set; }
 
 		public string Name { get; set; }
 
 		public int Order { get; } = -2;
-
-		public bool? AllowPrivate { get; set; } = true;
 
 		IDictionary<string, object> IProperty.LocalMetadata { get; set; }
 

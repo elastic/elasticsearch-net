@@ -72,10 +72,6 @@ ProjectSection(SolutionItems) = preProject
 	..\readme.md = ..\readme.md
 EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utf8Json", "Utf8Json\src\Utf8Json\Utf8Json.csproj", "{3DAA58E6-A2A1-4203-8BCA-89BE6AC58449}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utf8Json.Tests", "Utf8Json\tests\Utf8Json.Tests\Utf8Json.Tests.csproj", "{ABA570B4-A8B2-4FF4-8FCC-3A827857E954}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,7 +98,6 @@ Global
 		{EAE89579-CCA9-45CE-AF83-3DCD98690EA8} = {432D5575-2347-4D3C-BF8C-3E38410C46CA}
 		{C7865979-1D1C-46AF-BDE8-1DA6F3ED81B3} = {432D5575-2347-4D3C-BF8C-3E38410C46CA}
 		{2FABB663-F4DB-499A-89F8-3A08828D1D91} = {432D5575-2347-4D3C-BF8C-3E38410C46CA}
-		{ABA570B4-A8B2-4FF4-8FCC-3A827857E954} = {6C4A2627-AF22-4388-9DF7-7A9AEACFD635}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5B393962-7586-49BA-BD99-3B1E35F48E94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -161,13 +156,5 @@ Global
 		{D6997ADC-E933-418E-831C-DE1A78897493}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6997ADC-E933-418E-831C-DE1A78897493}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6997ADC-E933-418E-831C-DE1A78897493}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3DAA58E6-A2A1-4203-8BCA-89BE6AC58449}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3DAA58E6-A2A1-4203-8BCA-89BE6AC58449}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3DAA58E6-A2A1-4203-8BCA-89BE6AC58449}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3DAA58E6-A2A1-4203-8BCA-89BE6AC58449}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ABA570B4-A8B2-4FF4-8FCC-3A827857E954}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ABA570B4-A8B2-4FF4-8FCC-3A827857E954}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ABA570B4-A8B2-4FF4-8FCC-3A827857E954}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ABA570B4-A8B2-4FF4-8FCC-3A827857E954}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

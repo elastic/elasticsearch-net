@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.Serialization;
-using Utf8Json;
-using Utf8Json.Formatters;
 
 namespace Nest
 {

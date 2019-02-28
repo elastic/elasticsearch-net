@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Utf8Json;
-using Utf8Json.Resolvers;
+using Elasticsearch.Net;
+
 
 namespace Nest
 {
