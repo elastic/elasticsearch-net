@@ -2,7 +2,6 @@ using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using Elasticsearch.Net;
-using Utf8Json;
 
 namespace Nest
 {

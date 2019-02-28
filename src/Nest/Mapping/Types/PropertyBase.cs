@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
-using Elasticsearch.Net;
 using System.Runtime.Serialization;
-using Utf8Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -29,7 +28,7 @@ namespace Nest
 		/// <summary>
 		/// The datatype of the property
 		/// </summary>
-		[DataMember(Name ="type")]
+		[DataMember(Name = "type")]
 		string Type { get; set; }
 	}
 

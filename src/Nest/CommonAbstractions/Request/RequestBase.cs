@@ -1,9 +1,8 @@
 using System;
 using System.ComponentModel;
 using System.IO;
-using Elasticsearch.Net;
 using System.Runtime.Serialization;
-using Utf8Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -19,7 +18,8 @@ namespace Nest
 		where TParameters : IRequestParameters, new()
 	{
 		/// <summary>
-		/// Used to describe request parameters that are not part of the body. e.g. query string, connection configuration overrides, etc.
+		/// Used to describe request parameters that are not part of the body. e.g. query string, connection configuration
+		/// overrides, etc.
 		/// </summary>
 		TParameters RequestParameters { get; set; }
 	}

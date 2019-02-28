@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
-using Utf8Json;
 
 namespace Nest
 {
@@ -90,10 +89,13 @@ namespace Nest
 		public IFieldCollapse Collapse { get; set; }
 		public bool? Explain { get; set; }
 		public int? From { get; set; }
+
 		public IHighlight Highlight { get; set; }
+
 		// TODO: Change Utf8Json to look up JsonFormatterType from implemented interface
 		[JsonFormatter(typeof(IndicesBoostFormatter))]
 		public IDictionary<IndexName, double> IndicesBoost { get; set; }
+
 		public double? MinScore { get; set; }
 		public QueryContainer PostFilter { get; set; }
 		public bool? Profile { get; set; }

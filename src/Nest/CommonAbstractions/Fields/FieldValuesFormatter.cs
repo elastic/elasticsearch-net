@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Utf8Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	internal class FieldValuesFormatter : IJsonFormatter<FieldValues>
 	{
 		private static readonly LazyDocumentFormatter LazyDocumentFormatter = new LazyDocumentFormatter();
-		
+
 		public FieldValues Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)

@@ -1,6 +1,4 @@
-﻿using Nest;
-using System.Runtime.Serialization;
-
+﻿using Elasticsearch.Net;
 
 namespace Tests.Domain
 {

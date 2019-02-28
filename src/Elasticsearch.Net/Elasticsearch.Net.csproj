@@ -3,11 +3,60 @@
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\PublishArtifacts.build.props" />
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.6.0-preview3.19128.7" />
+    <PackageReference Include="System.Buffers" Version="4.5.0" />
+    <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
+    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
+    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.4.0" />
+    <PackageReference Include="System.ValueTuple" Version="4.4.0" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\Utf8Json\src\Utf8Json\Utf8Json.csproj" />
+    <None Remove="Utf8Json\*.meta" />
+    <None Remove="Utf8Json\Resolvers\*.meta" />
+    <None Remove="Utf8Json\Internal\*.meta" />
+    <None Remove="Utf8Json\Formatters\*.meta" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="Utf8Json\Formatters\PrimitiveFormatter.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Utf8Json\PrimitiveFormatter.cs</LastGenOutput>
+    </None>
+    <None Update="Utf8Json\Formatters\ValueTupleFormatter.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Utf8Json\ValueTupleFormatter.cs</LastGenOutput>
+    </None>
+    <None Update="Utf8Json\Formatters\TupleFormatter.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Utf8Json\TupleFormatter.cs</LastGenOutput>
+    </None>
+    <None Update="Utf8Json\Internal\UnsafeMemory.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Utf8Json\UnsafeMemory.cs</LastGenOutput>
+    </None>
+    <Compile Update="Utf8Json\Formatters\PrimitiveFormatter.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Utf8Json\PrimitiveFormatter.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Utf8Json\Formatters\TupleFormatter.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Utf8Json\TupleFormatter.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Utf8Json\Formatters\ValueTupleFormatter.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Utf8Json\ValueTupleFormatter.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Utf8Json\Internal\UnsafeMemory.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Utf8Json\UnsafeMemory.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

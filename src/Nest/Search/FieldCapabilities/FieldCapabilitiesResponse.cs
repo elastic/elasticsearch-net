@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
-using Elasticsearch.Net;
 using System.Runtime.Serialization;
-using Utf8Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	[InterfaceDataContract]
 	public interface IFieldCapabilitiesResponse : IResponse
 	{
-		[DataMember(Name ="fields")]
+		[DataMember(Name = "fields")]
 		FieldCapabilitiesFields Fields { get; }
 	}
 
@@ -74,22 +73,22 @@ namespace Nest
 
 	public class FieldCapabilities
 	{
-		[DataMember(Name ="aggregatable")]
+		[DataMember(Name = "aggregatable")]
 		public bool Aggregatable { get; internal set; }
 
-		[DataMember(Name ="indices")]
+		[DataMember(Name = "indices")]
 		[JsonFormatter(typeof(IndicesFormatter))]
 		public Indices Indices { get; internal set; }
 
-		[DataMember(Name ="non_aggregatable_indices")]
+		[DataMember(Name = "non_aggregatable_indices")]
 		[JsonFormatter(typeof(IndicesFormatter))]
 		public Indices NonAggregatableIndices { get; internal set; }
 
-		[DataMember(Name ="non_searchable_indices")]
+		[DataMember(Name = "non_searchable_indices")]
 		[JsonFormatter(typeof(IndicesFormatter))]
 		public Indices NonSearchableIndices { get; internal set; }
 
-		[DataMember(Name ="searchable")]
+		[DataMember(Name = "searchable")]
 		public bool Searchable { get; internal set; }
 	}
 }

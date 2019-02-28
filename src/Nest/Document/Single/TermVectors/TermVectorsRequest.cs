@@ -1,7 +1,6 @@
 ﻿using System;
-using Elasticsearch.Net;
 using System.Runtime.Serialization;
-using Utf8Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -12,7 +11,7 @@ namespace Nest
 		/// <summary>
 		/// An optional document to get term vectors for instead of using an already indexed document
 		/// </summary>
-		[DataMember(Name ="doc")]
+		[DataMember(Name = "doc")]
 		[JsonFormatter(typeof(SourceFormatter<>))]
 		TDocument Document { get; set; }
 
@@ -20,14 +19,14 @@ namespace Nest
 		/// Filter the terms returned based on their TF-IDF scores.
 		/// This can be useful in order find out a good characteristic vector of a document.
 		/// </summary>
-		[DataMember(Name ="filter")]
+		[DataMember(Name = "filter")]
 		ITermVectorFilter Filter { get; set; }
 
 		/// <summary>
 		/// Provide a different analyzer than the one at the field.
 		/// This is useful in order to generate term vectors in any fashion, especially when using artificial documents.
 		/// </summary>
-		[DataMember(Name ="per_field_analyzer")]
+		[DataMember(Name = "per_field_analyzer")]
 		IPerFieldAnalyzer PerFieldAnalyzer { get; set; }
 	}
 

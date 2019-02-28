@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Utf8Json;
-using Utf8Json.Resolvers;
 
 namespace Nest
 {

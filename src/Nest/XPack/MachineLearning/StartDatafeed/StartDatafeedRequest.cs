@@ -1,6 +1,6 @@
 using System;
 using System.Runtime.Serialization;
-using Utf8Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -11,14 +11,14 @@ namespace Nest
 		/// The time that the datafeed should end. This value is exclusive.
 		/// </summary>
 		[DataMember(Name = "end")]
-		[JsonFormatter(typeof(EpochMillisecondsNullableDateTimeOffsetFormatter))]
+		[JsonFormatter(typeof(NullableDateTimeOffsetEpochMillisecondsFormatter))]
 		DateTimeOffset? End { get; set; }
 
 		/// <summary>
 		/// The time that the datafeed should begin. This value is inclusive.
 		/// </summary>
 		[DataMember(Name = "start")]
-		[JsonFormatter(typeof(EpochMillisecondsNullableDateTimeOffsetFormatter))]
+		[JsonFormatter(typeof(NullableDateTimeOffsetEpochMillisecondsFormatter))]
 		DateTimeOffset? Start { get; set; }
 
 		/// <summary>

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Utf8Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -33,7 +33,7 @@ namespace Nest
 		/// <summary>
 		/// The time the job was created.
 		/// </summary>
-		[JsonFormatter(typeof(EpochMillisecondsDateTimeOffsetFormatter))]
+		[JsonFormatter(typeof(DateTimeOffsetEpochMillisecondsFormatter))]
 		[DataMember(Name ="create_time")]
 		DateTimeOffset CreateTime { get; }
 

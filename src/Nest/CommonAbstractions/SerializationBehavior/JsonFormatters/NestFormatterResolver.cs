@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Reflection;
-using Utf8Json;
-using Utf8Json.Formatters;
-using Utf8Json.Resolvers;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -48,21 +46,16 @@ namespace Nest
 				}, new IJsonFormatterResolver[0]),
 				BuiltinResolver.Instance, // Builtin primitives
 				ElasticsearchNetEnumResolver.Instance, // Specialized Enum handling
-				NestEnumResolver.Instance, // Specialized Enum handling
 				AttributeFormatterResolver.Instance, // [JsonFormatter]
 				ReadAsFormatterResolver.Instance, // [ReadAs]
 				IsADictionaryFormatterResolver.Instance, // IsADictionaryBase<TKey, TValue>
 				DynamicGenericResolver.Instance, // T[], List<T>, etc...
 				InterfaceGenericDictionaryResolver.Instance,
-				InterfaceGenericReadOnlyDictionaryResolver.Instance,
-				//NestGenericSourceTypeFormatterResolver.Instance,
+				InterfaceGenericReadOnlyDictionaryResolver.Instance
 			};
 
 			private readonly IJsonFormatterResolver _finalFormatter;
-
-			private readonly ConcurrentDictionary<Type, object> _formatters =
-				new ConcurrentDictionary<Type, object>();
-
+			private readonly ConcurrentDictionary<Type, object> _formatters = new ConcurrentDictionary<Type, object>();
 			private readonly IConnectionSettingsValues _settings;
 
 			internal InnerResolver(IConnectionSettingsValues settings)
@@ -88,7 +81,6 @@ namespace Nest
 			private IJsonProperty GetMapping(MemberInfo member)
 			{
 				// TODO: Skip calling this method for NEST and Elasticsearch.Net types, at the type level
-
 				if (!_settings.PropertyMappings.TryGetValue(member, out var propertyMapping))
 					propertyMapping = ElasticsearchPropertyAttributeBase.From(member);
 

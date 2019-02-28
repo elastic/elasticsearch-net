@@ -1,7 +1,5 @@
-﻿using Elasticsearch.Net;
-using System.Runtime.Serialization;
-using Utf8Json;
-
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -9,14 +7,13 @@ namespace Nest
 	[ReadAs(typeof(IndicesOptions))]
 	public interface IIndicesOptions
 	{
-		[DataMember(Name ="allow_no_indices")]
+		[DataMember(Name = "allow_no_indices")]
 		bool? AllowNoIndices { get; set; }
 
-		[DataMember(Name ="expand_wildcards")]
-
+		[DataMember(Name = "expand_wildcards")]
 		ExpandWildcards? ExpandWildcards { get; set; }
 
-		[DataMember(Name ="ignore_unavailable")]
+		[DataMember(Name = "ignore_unavailable")]
 		bool? IgnoreUnavailable { get; set; }
 	}
 
@@ -25,7 +22,6 @@ namespace Nest
 	{
 		public bool? AllowNoIndices { get; set; }
 		public ExpandWildcards? ExpandWildcards { get; set; }
-
 		public bool? IgnoreUnavailable { get; set; }
 	}
 

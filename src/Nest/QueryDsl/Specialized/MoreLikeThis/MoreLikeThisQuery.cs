@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Elasticsearch.Net;
 using System.Runtime.Serialization;
-using Utf8Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -11,62 +10,62 @@ namespace Nest
 	[ReadAs(typeof(MoreLikeThisQuery))]
 	public interface IMoreLikeThisQuery : IQuery
 	{
-		[DataMember(Name ="analyzer")]
+		[DataMember(Name = "analyzer")]
 		string Analyzer { get; set; }
 
-		[DataMember(Name ="boost_terms")]
+		[DataMember(Name = "boost_terms")]
 		double? BoostTerms { get; set; }
 
-		[DataMember(Name ="fields")]
+		[DataMember(Name = "fields")]
 		Fields Fields { get; set; }
 
-		[DataMember(Name ="include")]
+		[DataMember(Name = "include")]
 		bool? Include { get; set; }
 
-		[DataMember(Name ="like")]
+		[DataMember(Name = "like")]
 		IEnumerable<Like> Like { get; set; }
 
-		[DataMember(Name ="max_doc_freq")]
+		[DataMember(Name = "max_doc_freq")]
 		int? MaxDocumentFrequency { get; set; }
 
-		[DataMember(Name ="max_query_terms")]
+		[DataMember(Name = "max_query_terms")]
 		int? MaxQueryTerms { get; set; }
 
-		[DataMember(Name ="max_word_length")]
+		[DataMember(Name = "max_word_length")]
 		int? MaxWordLength { get; set; }
 
-		[DataMember(Name ="min_doc_freq")]
+		[DataMember(Name = "min_doc_freq")]
 		int? MinDocumentFrequency { get; set; }
 
-		[DataMember(Name ="minimum_should_match")]
+		[DataMember(Name = "minimum_should_match")]
 		MinimumShouldMatch MinimumShouldMatch { get; set; }
 
-		[DataMember(Name ="min_term_freq")]
+		[DataMember(Name = "min_term_freq")]
 		int? MinTermFrequency { get; set; }
 
-		[DataMember(Name ="min_word_length")]
+		[DataMember(Name = "min_word_length")]
 		int? MinWordLength { get; set; }
 
 		/// <summary>
 		/// Provide a different analyzer than the one at the field.
 		/// This is useful in order to generate term vectors in any fashion, especially when using artificial documents.
 		/// </summary>
-		[DataMember(Name ="per_field_analyzer")]
+		[DataMember(Name = "per_field_analyzer")]
 		IPerFieldAnalyzer PerFieldAnalyzer { get; set; }
 
-		[DataMember(Name ="routing")]
+		[DataMember(Name = "routing")]
 		Routing Routing { get; set; }
 
-		[DataMember(Name ="stop_words")]
+		[DataMember(Name = "stop_words")]
 		StopWords StopWords { get; set; }
 
-		[DataMember(Name ="unlike")]
+		[DataMember(Name = "unlike")]
 		IEnumerable<Like> Unlike { get; set; }
 
-		[DataMember(Name ="version")]
+		[DataMember(Name = "version")]
 		long? Version { get; set; }
 
-		[DataMember(Name ="version_type")]
+		[DataMember(Name = "version_type")]
 		VersionType? VersionType { get; set; }
 	}
 

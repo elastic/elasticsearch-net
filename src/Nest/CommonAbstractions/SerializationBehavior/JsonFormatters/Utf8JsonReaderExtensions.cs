@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using System.Text;
-using Utf8Json;
-using Utf8Json.Formatters;
+using Elasticsearch.Net;
+
 
 namespace Nest
 {
@@ -42,6 +42,7 @@ namespace Nest
 	internal static class ArraySegmentBytesExtensions
 	{
 		private const byte DateMathSeparator = (byte)'|';
+		private const byte DecimalPoint = (byte)'.';
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool IsDouble(this ref ArraySegment<byte> arraySegment)
@@ -49,7 +50,7 @@ namespace Nest
 			var i = 0;
 			while (i < arraySegment.Count)
 			{
-				if (arraySegment.Array[arraySegment.Offset + i] == 46)
+				if (arraySegment.Array[arraySegment.Offset + i] == DecimalPoint)
 					return true;
 
 				i++;

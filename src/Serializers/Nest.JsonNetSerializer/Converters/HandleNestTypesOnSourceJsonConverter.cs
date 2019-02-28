@@ -27,7 +27,7 @@ namespace Nest.JsonNetSerializer.Converters
 		public override bool CanRead => true;
 		public override bool CanWrite => true;
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public override void WriteJson(Newtonsoft.Json.JsonWriter writer, object value, Newtonsoft.Json.JsonSerializer serializer)
 		{
 			var formatting = serializer.Formatting == Formatting.Indented
 				? SerializationFormatting.Indented
@@ -44,7 +44,7 @@ namespace Nest.JsonNetSerializer.Converters
 			}
 		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public override object ReadJson(Newtonsoft.Json.JsonReader reader, Type objectType, object existingValue, Newtonsoft.Json.JsonSerializer serializer)
 		{
 			var token = reader.ReadTokenWithDateParseHandlingNone();
 			//in place because JsonConverter.Deserialize() only works on full json objects.

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
-using Utf8Json;
 
 namespace Nest
 {
@@ -21,7 +20,6 @@ namespace Nest
 		IIndicesOptions IndicesOptions { get; set; }
 
 		[DataMember(Name = "search_type")]
-
 		SearchType? SearchType { get; set; }
 
 		[DataMember(Name = "template")]

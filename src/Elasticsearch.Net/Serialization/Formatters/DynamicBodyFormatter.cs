@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using Utf8Json;
-using Utf8Json.Formatters;
 
 namespace Elasticsearch.Net
 {

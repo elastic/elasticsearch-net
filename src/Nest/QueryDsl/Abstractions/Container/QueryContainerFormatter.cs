@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Text;
-using Utf8Json;
-using Utf8Json.Resolvers;
+using Elasticsearch.Net;
+
 
 namespace Nest
 {
 	internal class QueryContainerFormatter : IJsonFormatter<QueryContainer>
 	{
-		private static readonly IJsonFormatter<QueryContainer> QueryFormatter = 
+		private static readonly IJsonFormatter<QueryContainer> QueryFormatter =
 			DynamicObjectResolver.AllowPrivateExcludeNullCamelCase.GetFormatter<QueryContainer>();
-		
+
 		public QueryContainer Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			switch (reader.GetCurrentJsonToken())

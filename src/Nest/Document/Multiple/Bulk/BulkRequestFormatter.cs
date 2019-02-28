@@ -1,6 +1,5 @@
 ﻿using System;
 using Elasticsearch.Net;
-using Utf8Json;
 
 namespace Nest
 {

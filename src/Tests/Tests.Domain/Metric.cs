@@ -1,7 +1,7 @@
 using System;
+using Elasticsearch.Net;
+
 using Nest;
-using Utf8Json;
-using Utf8Json.Formatters;
 
 namespace Tests.Domain
 {
