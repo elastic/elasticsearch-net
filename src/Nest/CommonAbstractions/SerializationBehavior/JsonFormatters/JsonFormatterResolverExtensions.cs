@@ -1,5 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
-using Utf8Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {

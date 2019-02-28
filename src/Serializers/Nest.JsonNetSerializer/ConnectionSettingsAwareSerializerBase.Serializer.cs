@@ -47,7 +47,7 @@ namespace Nest.JsonNetSerializer
 		private List<JsonConverter> Converters { get; }
 
 
-		private JsonSerializer CreateSerializer(SerializationFormatting formatting)
+		private Newtonsoft.Json.JsonSerializer CreateSerializer(SerializationFormatting formatting)
 		{
 			var s = CreateJsonSerializerSettings() ?? new JsonSerializerSettings();
 			;
@@ -58,7 +58,7 @@ namespace Nest.JsonNetSerializer
 			foreach (var converter in converters.Concat(Converters))
 				s.Converters.Add(converter);
 
-			return JsonSerializer.Create(s);
+			return Newtonsoft.Json.JsonSerializer.Create(s);
 		}
 
 		private IContractResolver CreateContractResolver()

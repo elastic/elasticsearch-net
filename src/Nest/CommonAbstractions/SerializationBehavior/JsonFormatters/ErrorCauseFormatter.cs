@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Elasticsearch.Net;
-using Utf8Json;
 
 namespace Nest
 {
@@ -23,10 +22,12 @@ namespace Nest
 				reader.ReadNextBlock();
 		}
 
-		protected virtual bool ReadProperty(ref JsonReader reader, string propertyName, TErrorCause error, IJsonFormatterResolver formatterResolver) =>
+		protected virtual bool ReadProperty(ref JsonReader reader, string propertyName, TErrorCause error, IJsonFormatterResolver formatterResolver
+		) =>
 			false;
 
-		private static void ReadNextBlock<TInnerError>(ref JsonReader reader, TInnerError error, string prop, IJsonFormatterResolver formatterResolver)
+		private static void ReadNextBlock<TInnerError>(ref JsonReader reader, TInnerError error, string prop, IJsonFormatterResolver formatterResolver
+		)
 			where TInnerError : ErrorCause, new() => reader.ReadNextBlock();
 
 		protected ErrorCause ReadCausedBy(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>

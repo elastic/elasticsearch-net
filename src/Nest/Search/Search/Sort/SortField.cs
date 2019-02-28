@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using Utf8Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {

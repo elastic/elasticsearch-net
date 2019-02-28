@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Utf8Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -19,7 +19,7 @@ namespace Nest
 		/// The earliest record timestamp
 		/// </summary>
 		[DataMember(Name = "earliest_record_timestamp")]
-		[JsonFormatter(typeof(EpochMillisecondsNullableDateTimeOffsetFormatter))]
+		[JsonFormatter(typeof(NullableDateTimeOffsetEpochMillisecondsFormatter))]
 		DateTimeOffset? EarliestRecordTimestamp { get; }
 
 		/// <summary>
@@ -62,14 +62,14 @@ namespace Nest
 		/// The time of the last data item.
 		/// </summary>
 		[DataMember(Name = "last_data_time")]
-		[JsonFormatter(typeof(EpochMillisecondsDateTimeOffsetFormatter))]
+		[JsonFormatter(typeof(DateTimeOffsetEpochMillisecondsFormatter))]
 		DateTimeOffset LastDataTime { get; }
 
 		/// <summary>
 		/// The latest record timestamp
 		/// </summary>
 		[DataMember(Name = "latest_record_timestamp")]
-		[JsonFormatter(typeof(EpochMillisecondsNullableDateTimeOffsetFormatter))]
+		[JsonFormatter(typeof(NullableDateTimeOffsetEpochMillisecondsFormatter))]
 		DateTimeOffset? LatestRecordTimestamp { get; }
 
 		/// <summary>

@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Elasticsearch.Net;
-using Utf8Json;
-using Utf8Json.Internal;
 
 namespace Nest
 {

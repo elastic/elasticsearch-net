@@ -1,8 +1,7 @@
-using Utf8Json;
 
 namespace Elasticsearch.Net
 {
-	public static class JsonFormatterResolverExtensions
+	public static class JsonFormatterResolverReserializeExtensions
 	{
 		internal static T ReserializeAndDeserialize<T>(this IJsonFormatterResolver formatterResolver, object value)
 		{

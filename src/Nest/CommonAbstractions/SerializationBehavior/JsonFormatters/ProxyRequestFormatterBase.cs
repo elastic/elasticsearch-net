@@ -1,31 +1,12 @@
 using System.Reflection;
 using Elasticsearch.Net;
-using Utf8Json;
 
 namespace Nest
 {
 	internal abstract class ProxyRequestFormatterBase<TRequestInterface, TRequest> : IJsonFormatter<TRequestInterface>
 		where TRequestInterface : IProxyRequest
-		where TRequest: TRequestInterface
+		where TRequest : TRequestInterface
 	{
-		public void Serialize(ref JsonWriter writer, TRequestInterface value, IJsonFormatterResolver formatterResolver)
-		{
-			var untypedDocumentRequest = (IProxyRequest)value;
-
-			// TODO: Allow formatting
-			//var f = writer.Formatting == Formatting.Indented ? Indented : None;
-
-			var settings = formatterResolver.GetConnectionSettings();
-			var serializer = settings.SourceSerializer;
-
-			using (var ms = settings.MemoryStreamFactory.Create())
-			{
-				untypedDocumentRequest.WriteJson(serializer, ms, SerializationFormatting.None);
-				var v = ms.ToArray();
-				writer.WriteRaw(v);
-			}
-		}
-
 		public TRequestInterface Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			// TODO: Look at optimizing this. It looks like this could be replaced with SourceFormatter<T> on Document and a serialization ctor
@@ -45,6 +26,24 @@ namespace Nest
 					: (TRequest)typeof(TRequest).CreateInstance(path, null, null, null);
 
 				return request;
+			}
+		}
+
+		public void Serialize(ref JsonWriter writer, TRequestInterface value, IJsonFormatterResolver formatterResolver)
+		{
+			var untypedDocumentRequest = (IProxyRequest)value;
+
+			// TODO: Allow formatting
+			//var f = writer.Formatting == Formatting.Indented ? Indented : None;
+
+			var settings = formatterResolver.GetConnectionSettings();
+			var serializer = settings.SourceSerializer;
+
+			using (var ms = settings.MemoryStreamFactory.Create())
+			{
+				untypedDocumentRequest.WriteJson(serializer, ms, SerializationFormatting.None);
+				var v = ms.ToArray();
+				writer.WriteRaw(v);
 			}
 		}
 	}

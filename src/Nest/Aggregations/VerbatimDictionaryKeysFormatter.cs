@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Utf8Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {

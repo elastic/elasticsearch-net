@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
-using Utf8Json;
-using Utf8Json.Internal;
 
 namespace Nest
 {
@@ -54,7 +52,7 @@ namespace Nest
 							else
 							{
 								var formatter = formatterResolver.GetFormatter<Error>();
-								response.Error  = formatter.Deserialize(ref reader, formatterResolver);
+								response.Error = formatter.Deserialize(ref reader, formatterResolver);
 							}
 							break;
 						case 1:

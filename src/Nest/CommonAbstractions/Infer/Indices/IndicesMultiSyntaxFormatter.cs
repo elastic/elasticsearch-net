@@ -1,5 +1,4 @@
 ﻿using Elasticsearch.Net;
-using Utf8Json;
 
 namespace Nest
 {
@@ -13,6 +12,7 @@ namespace Nest
 				return indices;
 			}
 
+			reader.ReadNextBlock();
 			return null;
 		}
 

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Elasticsearch.Net;
 using System.Runtime.Serialization;
-using Utf8Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -10,21 +9,21 @@ namespace Nest
 	[InterfaceDataContract]
 	public interface IScriptQuery : IQuery
 	{
-		[DataMember(Name ="id")]
+		[DataMember(Name = "id")]
 		Id Id { get; set; }
 
 		[Obsolete("Use Source. Inline is deprecated and scheduled to be removed in Elasticsearch 7.0")]
 		[IgnoreDataMember]
 		string Inline { get; set; }
 
-		[DataMember(Name ="lang")]
+		[DataMember(Name = "lang")]
 		string Lang { get; set; }
 
-		[DataMember(Name ="params")]
+		[DataMember(Name = "params")]
 		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, object>))]
 		Dictionary<string, object> Params { get; set; }
 
-		[DataMember(Name ="source")]
+		[DataMember(Name = "source")]
 		string Source { get; set; }
 	}
 

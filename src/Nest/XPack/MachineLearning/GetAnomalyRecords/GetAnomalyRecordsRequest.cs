@@ -1,6 +1,6 @@
 using System;
 using System.Runtime.Serialization;
-using Utf8Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -19,7 +19,7 @@ namespace Nest
 		/// Returns records with timestamps earlier than this time.
 		/// </summary>
 		[DataMember(Name ="end")]
-		[JsonFormatter(typeof(EpochMillisecondsNullableDateTimeOffsetFormatter))]
+		[JsonFormatter(typeof(NullableDateTimeOffsetEpochMillisecondsFormatter))]
 		DateTimeOffset? End { get; set; }
 
 		/// <summary>
@@ -50,7 +50,7 @@ namespace Nest
 		/// Returns records with timestamps after this time.
 		/// </summary>
 		[DataMember(Name ="start")]
-		[JsonFormatter(typeof(EpochMillisecondsNullableDateTimeOffsetFormatter))]
+		[JsonFormatter(typeof(NullableDateTimeOffsetEpochMillisecondsFormatter))]
 		DateTimeOffset? Start { get; set; }
 	}
 

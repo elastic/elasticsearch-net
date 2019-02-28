@@ -1,6 +1,5 @@
-﻿using Elasticsearch.Net;
-using System.Runtime.Serialization;
-using Utf8Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -14,13 +13,13 @@ namespace Nest
 		/// <summary>
 		/// The script language
 		/// </summary>
-		[DataMember(Name ="lang")]
+		[DataMember(Name = "lang")]
 		string Lang { get; set; }
 
 		/// <summary>
 		/// The script source
 		/// </summary>
-		[DataMember(Name ="source")]
+		[DataMember(Name = "source")]
 		string Source { get; set; }
 	}
 
@@ -42,10 +41,10 @@ namespace Nest
 			self.Source = source;
 		}
 
-		[DataMember(Name ="lang")]
+		[DataMember(Name = "lang")]
 		string IStoredScript.Lang { get; set; }
 
-		[DataMember(Name ="source")]
+		[DataMember(Name = "source")]
 		string IStoredScript.Source { get; set; }
 	}
 

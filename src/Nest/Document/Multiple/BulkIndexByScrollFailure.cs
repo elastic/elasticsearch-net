@@ -1,25 +1,24 @@
-using Elasticsearch.Net;
 using System.Runtime.Serialization;
-using Utf8Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	[DataContract]
 	public class BulkIndexByScrollFailure
 	{
-		[DataMember(Name ="cause")]
+		[DataMember(Name = "cause")]
 		public BulkIndexFailureCause Cause { get; set; }
 
-		[DataMember(Name ="id")]
+		[DataMember(Name = "id")]
 		public string Id { get; internal set; }
 
-		[DataMember(Name ="index")]
+		[DataMember(Name = "index")]
 		public string Index { get; set; }
 
-		[DataMember(Name ="status")]
+		[DataMember(Name = "status")]
 		public int Status { get; set; }
 
-		[DataMember(Name ="type")]
+		[DataMember(Name = "type")]
 		public string Type { get; internal set; }
 	}
 

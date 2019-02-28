@@ -2,7 +2,6 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Elasticsearch.Net;
-using Utf8Json;
 
 namespace Nest
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Utf8Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -34,7 +34,7 @@ namespace Nest
 		/// The time the job was created.
 		/// </summary>
 		[DataMember(Name = "create_time")]
-		[JsonFormatter(typeof(EpochMillisecondsDateTimeOffsetFormatter))]
+		[JsonFormatter(typeof(DateTimeOffsetEpochMillisecondsFormatter))]
 		public DateTimeOffset CreateTime { get; set; }
 
 		/// <summary>
@@ -53,7 +53,7 @@ namespace Nest
 		/// If the job closed or failed, this is the time the job finished, otherwise it is null.
 		/// </summary>
 		[DataMember(Name = "finished_time")]
-		[JsonFormatter(typeof(EpochMillisecondsNullableDateTimeOffsetFormatter))]
+		[JsonFormatter(typeof(NullableDateTimeOffsetEpochMillisecondsFormatter))]
 		public DateTimeOffset? FinishedTime { get; set; }
 
 		/// <summary>

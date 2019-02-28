@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Utf8Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -27,7 +27,7 @@ namespace Nest
 		/// The timestamp according to server time.
 		/// </summary>
 		[DataMember(Name = "log_time")]
-		[JsonFormatter(typeof(EpochMillisecondsDateTimeOffsetFormatter))]
+		[JsonFormatter(typeof(DateTimeOffsetEpochMillisecondsFormatter))]
 		public DateTimeOffset LogTime { get; internal set; }
 
 		/// <summary>
@@ -53,7 +53,7 @@ namespace Nest
 		/// The timestamp according to the timestamp of the data.
 		/// </summary>
 		[DataMember(Name = "timestamp")]
-		[JsonFormatter(typeof(EpochMillisecondsNullableDateTimeOffsetFormatter))]
+		[JsonFormatter(typeof(NullableDateTimeOffsetEpochMillisecondsFormatter))]
 		public DateTimeOffset? Timestamp { get; internal set; }
 
 		/// <summary>

@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.Serialization;
-using Utf8Json;
-using Utf8Json.Internal;
+using Elasticsearch.Net;
+
 
 namespace Nest
 {

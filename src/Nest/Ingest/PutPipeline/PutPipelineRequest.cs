@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Utf8Json;
 
 namespace Nest
 {

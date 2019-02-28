@@ -12,7 +12,7 @@ namespace Elasticsearch.Net
 		{
 			get
 			{
-				var sb = new StringBuilder();
+				var sb = new System.Text.StringBuilder();
 				sb.AppendLine(ToString());
 				return ResponseStatics.DebugInformationBuilder(this, sb);
 			}

@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
-using Utf8Json;
 
 namespace Nest
 {
@@ -193,7 +192,6 @@ namespace Nest
 							var actionFormatter = formatterResolver.GetFormatter<IAction>();
 							actionFormatter.Serialize(ref writer, action, formatterResolver);
 							break;
-
 					}
 
 					writer.WriteEndObject();
@@ -209,6 +207,5 @@ namespace Nest
 			var formatter = formatterResolver.GetFormatter<TAction>();
 			formatter.Serialize(ref writer, value as TAction, formatterResolver);
 		}
-
 	}
 }
