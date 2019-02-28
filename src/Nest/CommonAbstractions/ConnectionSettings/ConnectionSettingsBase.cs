@@ -173,9 +173,9 @@ namespace Nest
 			var memberInfo = new MemberInfoResolver(objectPath);
 			var fieldName = memberInfo.Members.Single().Name;
 
-			if (_idProperties.ContainsKey(typeof(TDocument)))
+			if (_idProperties.TryGetValue(typeof(TDocument), out string idPropertyFieldName))
 			{
-				if (_idProperties[typeof(TDocument)].Equals(fieldName)) return;
+				if (idPropertyFieldName.Equals(fieldName)) return;
 
 				throw new ArgumentException(
 					$"Cannot map '{fieldName}' as the id property for type '{typeof(TDocument).Name}': it already has '{_idProperties[typeof(TDocument)]}' mapped.");
@@ -191,9 +191,9 @@ namespace Nest
 			var memberInfo = new MemberInfoResolver(objectPath);
 			var fieldName = memberInfo.Members.Single().Name;
 
-			if (_routeProperties.ContainsKey(typeof(TDocument)))
+			if (_routeProperties.TryGetValue(typeof(TDocument), out string routePropertyFieldName))
 			{
-				if (_routeProperties[typeof(TDocument)].Equals(fieldName)) return;
+				if (routePropertyFieldName.Equals(fieldName)) return;
 
 				throw new ArgumentException(
 					$"Cannot map '{fieldName}' as the route property for type '{typeof(TDocument).Name}': it already has '{_routeProperties[typeof(TDocument)]}' mapped.");
@@ -216,10 +216,10 @@ namespace Nest
 					throw new ArgumentException($"Expression {e} does contain any member access");
 
 				var memberInfo = memberInfoResolver.Members.Last();
-				if (_propertyMappings.ContainsKey(memberInfo))
+				if (_propertyMappings.TryGetValue(memberInfo, out IPropertyMapping propertyMapping))
 				{
 					var newName = mapping.NewName;
-					var mappedAs = _propertyMappings[memberInfo].Name;
+					var mappedAs = propertyMapping.Name;
 					var typeName = typeof(TDocument).Name;
 					if (mappedAs.IsNullOrEmpty() && newName.IsNullOrEmpty())
 						throw new ArgumentException($"Property mapping '{e}' on type is already ignored");
