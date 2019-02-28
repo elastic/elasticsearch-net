@@ -234,7 +234,6 @@ namespace Tests.XPack.Watcher.PutWatch
 						index = new
 						{
 							index = "put-watch-test-index",
-							doc_type = "reminder",
 							execution_time_field = "execution_time"
 						}
 					},
@@ -665,7 +664,6 @@ namespace Tests.XPack.Watcher.PutWatch
 				} && new IndexAction("reminder_index")
 				{
 					Index = "put-watch-test-index",
-					DocType = "reminder",
 					ExecutionTimeField = "execution_time"
 				} && new PagerDutyAction("reminder_pagerduty")
 				{

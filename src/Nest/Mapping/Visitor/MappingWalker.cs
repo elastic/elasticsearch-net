@@ -20,8 +20,7 @@ namespace Nest
 			{
 				if (indexMapping.Value?.Mappings == null) continue;
 
-				foreach (var typeMapping in indexMapping.Value.Mappings)
-					Accept(typeMapping.Value);
+				Accept(indexMapping.Value.Mappings);
 			}
 		}
 

@@ -21,7 +21,6 @@ namespace Tests.Reproduce
 			var indexResponse = client.IndexDocument(document);
 			var requestJson = Encoding.UTF8.GetString(indexResponse.ApiCall.RequestBodyInBytes);
 			requestJson.Should().Contain("display_name");
-			indexResponse.ApiCall.Uri.AbsoluteUri.Should().Contain("source_entity");
 
 			var searchResponse = client.Search<SourceEntity>(s => s
 				.Query(q => q

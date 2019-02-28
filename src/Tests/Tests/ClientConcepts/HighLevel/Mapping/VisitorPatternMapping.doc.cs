@@ -82,58 +82,55 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					employee = new
+					properties = new
 					{
-						properties = new
+						birthday = new
 						{
-							birthday = new
+							type = "date"
+						},
+						employees = new
+						{
+							properties = new { },
+							type = "object"
+						},
+						firstName = new
+						{
+							type = "text",
+							fields = new
 							{
-								type = "date"
-							},
-							employees = new
-							{
-								properties = new { },
-								type = "object"
-							},
-							firstName = new
-							{
-								type = "text",
-								fields = new
+								keyword = new
 								{
-									keyword = new
-									{
-										type = "keyword",
-										ignore_above = 256
-									}
+									type = "keyword",
+									ignore_above = 256
 								}
-							},
-							isManager = new
-							{
-								doc_values = false,
-								type = "boolean"
-							},
-							lastName = new
-							{
-								type = "text",
-								fields = new
-								{
-									keyword = new
-									{
-										type = "keyword",
-										ignore_above = 256
-									}
-								}
-							},
-							salary = new
-							{
-								doc_values = false,
-								type = "integer"
-							},
-							hours = new
-							{
-								doc_values = false,
-								type = "long"
 							}
+						},
+						isManager = new
+						{
+							doc_values = false,
+							type = "boolean"
+						},
+						lastName = new
+						{
+							type = "text",
+							fields = new
+							{
+								keyword = new
+								{
+									type = "keyword",
+									ignore_above = 256
+								}
+							}
+						},
+						salary = new
+						{
+							doc_values = false,
+							type = "integer"
+						},
+						hours = new
+						{
+							doc_values = false,
+							type = "long"
 						}
 					}
 				}
@@ -171,38 +168,35 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					employee = new
+					properties = new
 					{
-						properties = new
+						birthday = new
 						{
-							birthday = new
-							{
-								type = "text"
-							},
-							employees = new
-							{
-								type = "text"
-							},
-							firstName = new
-							{
-								type = "text"
-							},
-							isManager = new
-							{
-								type = "text"
-							},
-							lastName = new
-							{
-								type = "text"
-							},
-							salary = new
-							{
-								type = "text"
-							},
-							hours = new
-							{
-								type = "text"
-							}
+							type = "text"
+						},
+						employees = new
+						{
+							type = "text"
+						},
+						firstName = new
+						{
+							type = "text"
+						},
+						isManager = new
+						{
+							type = "text"
+						},
+						lastName = new
+						{
+							type = "text"
+						},
+						salary = new
+						{
+							type = "text"
+						},
+						hours = new
+						{
+							type = "text"
 						}
 					}
 				}
@@ -247,14 +241,11 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					dictionarydocument = new
+					properties = new
 					{
-						properties = new
+						id = new
 						{
-							id = new
-							{
-								type = "integer"
-							}
+							type = "integer"
 						}
 					}
 				}

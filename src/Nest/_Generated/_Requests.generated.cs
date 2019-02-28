@@ -5761,7 +5761,7 @@ namespace Nest
 	public partial interface ITypeExistsRequest : IRequest<TypeExistsRequestParameters>
 	{
 		Indices Index { get; }
-		Types Type { get; }
+		Names Type { get; }
 	}
 
 	///<summary>Request parameters for IndicesExistsType <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</pre></summary>
@@ -5771,12 +5771,12 @@ namespace Nest
 		///<summary>/{index}/_mapping/{type}</summary>
 		///<param name="index">this parameter is required</param>
 		///<param name="type">this parameter is required</param>
-		public TypeExistsRequest(Indices index, Types type) : base(r => r.Required("index", index).Required("type", type)){}
+		public TypeExistsRequest(Indices index, Names type) : base(r => r.Required("index", index).Required("type", type)){}
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		internal TypeExistsRequest() : base(){}
 		// values part of the url path
 		Indices ITypeExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types ITypeExistsRequest.Type => Self.RouteValues.Get<Types>("type");
+		Names ITypeExistsRequest.Type => Self.RouteValues.Get<Names>("type");
 
 		// Request parameters
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>

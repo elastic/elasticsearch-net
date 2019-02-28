@@ -76,77 +76,74 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					document = new
+					properties = new
 					{
-						properties = new
+						birthday = new {type = "date"},
+						employees = new
 						{
-							birthday = new {type = "date"},
-							employees = new
+							properties = new
 							{
-								properties = new
+								birthday = new {type = "date"},
+								employees = new
 								{
-									birthday = new {type = "date"},
-									employees = new
+									properties = new { },
+									type = "object"
+								},
+								hours = new {type = "long"},
+								isManager = new {type = "boolean"},
+								join = new
+								{
+									properties = new { },
+									type = "object"
+								},
+								lastName = new
+								{
+									fields = new
 									{
-										properties = new { },
-										type = "object"
-									},
-									hours = new {type = "long"},
-									isManager = new {type = "boolean"},
-									join = new
-									{
-										properties = new { },
-										type = "object"
-									},
-									lastName = new
-									{
-										fields = new
+										keyword = new
 										{
-											keyword = new
-											{
-												ignore_above = 256,
-												type = "keyword"
-											}
-										},
-										type = "text"
+											ignore_above = 256,
+											type = "keyword"
+										}
 									},
-									salary = new {type = "integer"}
+									type = "text"
 								},
-								type = "object"
+								salary = new {type = "integer"}
 							},
-							hours = new {type = "long"},
-							isManager = new {type = "boolean"},
-							join = new
+							type = "object"
+						},
+						hours = new {type = "long"},
+						isManager = new {type = "boolean"},
+						join = new
+						{
+							properties = new { },
+							type = "object"
+						},
+						lastName = new
+						{
+							fields = new
 							{
-								properties = new { },
-								type = "object"
-							},
-							lastName = new
-							{
-								fields = new
+								keyword = new
 								{
-									keyword = new
-									{
-										ignore_above = 256,
-										type = "keyword"
-									}
-								},
-								type = "text"
+									ignore_above = 256,
+									type = "keyword"
+								}
 							},
-							name = new
+							type = "text"
+						},
+						name = new
+						{
+							fields = new
 							{
-								fields = new
+								keyword = new
 								{
-									keyword = new
-									{
-										ignore_above = 256,
-										type = "keyword"
-									}
-								},
-								type = "text"
+									ignore_above = 256,
+									type = "keyword"
+								}
 							},
-							salary = new {type = "integer"}
-						}
+							type = "text"
+						},
+						salary = new {type = "integer"}
 					}
 				}
 			};
@@ -186,20 +183,17 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					parent = new
+					properties = new
 					{
-						properties = new
+						id = new
 						{
-							id = new
+							type = "text",
+							fields = new
 							{
-								type = "text",
-								fields = new
+								keyword = new
 								{
-									keyword = new
-									{
-										ignore_above = 256,
-										type = "keyword"
-									}
+									ignore_above = 256,
+									type = "keyword"
 								}
 							}
 						}
@@ -316,15 +310,12 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					a = new
+					properties = new
 					{
-						properties = new
+						child = new
 						{
-							child = new
-							{
-								properties = new { },
-								type = "object"
-							}
+							properties = new { },
+							type = "object"
 						}
 					}
 				}
@@ -346,30 +337,27 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					a = new
+					properties = new
 					{
-						properties = new
+						child = new
 						{
-							child = new
+							type = "object",
+							properties = new
 							{
-								type = "object",
-								properties = new
+								child = new
 								{
-									child = new
+									type = "object",
+									properties = new
 									{
-										type = "object",
-										properties = new
+										child = new
 										{
-											child = new
+											type = "object",
+											properties = new
 											{
-												type = "object",
-												properties = new
+												child = new
 												{
-													child = new
-													{
-														type = "object",
-														properties = new { }
-													}
+													type = "object",
+													properties = new { }
 												}
 											}
 										}

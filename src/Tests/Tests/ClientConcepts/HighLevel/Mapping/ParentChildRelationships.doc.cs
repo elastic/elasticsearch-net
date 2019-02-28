@@ -121,21 +121,18 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					doc = new
+					_routing = new { required = true },
+					properties = new
 					{
-						_routing = new { required = true },
-						properties = new
+						parentProperty = new {type = "text"},
+						childProperty = new {type = "text"},
+						id = new {type = "integer"},
+						myJoinField = new
 						{
-							parentProperty = new {type = "text"},
-							childProperty = new {type = "text"},
-							id = new {type = "integer"},
-							myJoinField = new
+							type = "join",
+							relations = new
 							{
-								type = "join",
-								relations = new
-								{
-									parent = "mychild"
-								}
+								parent = "mychild"
 							}
 						}
 					}

@@ -23,13 +23,11 @@ namespace Tests.Document.Multiple.ReindexOnServer
 				dest = new
 				{
 					index = $"{CallIsolatedValue}-clone",
-					type = "test",
 				},
 				source = new
 				{
 					index = CallIsolatedValue,
 					_source = new[] { "id", "flag" },
-					type = new[] { "test" },
 				},
 				conflicts = "proceed"
 			};

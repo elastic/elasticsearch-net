@@ -60,6 +60,13 @@ namespace Nest
 		public CreateIndexDescriptor Settings(Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> selector) =>
 			Assign(a => a.Settings = selector?.Invoke(new IndexSettingsDescriptor())?.Value);
 
+		public CreateIndexDescriptor Mappings<T>(Func<TypeMappingDescriptor<T>, ITypeMapping> selector) where T : class =>
+			Assign(a => a.Mappings = selector?.Invoke(new TypeMappingDescriptor<T>()));
+
+		public CreateIndexDescriptor Map(Func<TypeMappingDescriptor<object>, ITypeMapping> selector) =>
+			Assign(a => a.Mappings = selector?.Invoke(new TypeMappingDescriptor<object>()));
+
+		[Obsolete("Mappings is no longer a dictionary in 7.x, please use the simplified Map() method on this descriptor instead")]
 		public CreateIndexDescriptor Mappings(Func<MappingsDescriptor, ITypeMapping> selector) =>
 			Assign(a => a.Mappings = selector?.Invoke(new MappingsDescriptor()));
 

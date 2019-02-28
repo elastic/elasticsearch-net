@@ -702,7 +702,6 @@ namespace Tests.QueryDsl.Geo.Shape
 					indexed_shape = new
 					{
 						id = 2,
-						type = "doc",
 						index = "project",
 						path = "location"
 					},

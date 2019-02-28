@@ -22,7 +22,7 @@ namespace Tests.Indices.IndexManagement.TypesExists
 
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 
-		protected override TypeExistsRequest Initializer => new TypeExistsRequest(Index<Project>(), "project")
+		protected override TypeExistsRequest Initializer => new TypeExistsRequest(Index<Project>(), "doc")
 		{
 			IgnoreUnavailable = true
 		};
@@ -30,12 +30,12 @@ namespace Tests.Indices.IndexManagement.TypesExists
 		protected override string UrlPath => $"/project/_mapping/doc?ignore_unavailable=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.TypeExists(Index<Project>(), "project", f),
-			(client, f) => client.TypeExistsAsync(Index<Project>(), "project", f),
+			(client, f) => client.TypeExists(Index<Project>(), "doc", f),
+			(client, f) => client.TypeExistsAsync(Index<Project>(), "doc", f),
 			(client, r) => client.TypeExists(r),
 			(client, r) => client.TypeExistsAsync(r)
 		);
 
-		protected override TypeExistsDescriptor NewDescriptor() => new TypeExistsDescriptor(Index<Project>(), "project");
+		protected override TypeExistsDescriptor NewDescriptor() => new TypeExistsDescriptor(Index<Project>(), "doc");
 	}
 }

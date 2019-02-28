@@ -56,21 +56,18 @@ namespace Tests.Ingest.SimulatePipeline
 				new
 				{
 					_index = "project",
-					_type = "doc",
 					_id = Project.Instance.Name,
 					_source = Project.InstanceAnonymous
 				},
 				new
 				{
 					_index = "otherindex",
-					_type = "othertype",
 					_id = "otherid",
 					_source = Project.InstanceAnonymous
 				},
 				new
 				{
 					_index = "otherindex",
-					_type = "anotherType",
 					_id = "2",
 					_source = new { id = "2", colors = new[] { "red" } }
 				}

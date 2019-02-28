@@ -26,7 +26,7 @@ namespace Tests.Document.Multiple.BulkAll
 				yield return new SmallObject() { Id = i };
 		}
 
-		protected async Task CreateIndexAsync(string indexName, int numberOfShards, Func<MappingsDescriptor, IPromise<IMappings>> mappings = null)
+		protected async Task CreateIndexAsync(string indexName, int numberOfShards, Func<MappingsDescriptor, ITypeMapping> mappings = null)
 		{
 			var result = await Client.CreateIndexAsync(indexName, s => s
 				.Settings(settings => settings

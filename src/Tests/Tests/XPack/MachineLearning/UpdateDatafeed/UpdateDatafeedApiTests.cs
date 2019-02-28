@@ -29,7 +29,6 @@ namespace Tests.XPack.MachineLearning.UpdateDatafeed
 					boost = 2.0
 				}
 			},
-			types = new[] { "metric" }
 		};
 
 		protected override int ExpectStatusCode => 200;

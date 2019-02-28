@@ -39,7 +39,6 @@ namespace Tests.QueryDsl.Specialized.MoreLikeThis
 					new
 					{
 						_index = "project",
-						_type = "doc",
 						_id = Project.Instance.Name,
 						_routing = Project.Instance.Name,
 						doc = Project.InstanceAnonymous

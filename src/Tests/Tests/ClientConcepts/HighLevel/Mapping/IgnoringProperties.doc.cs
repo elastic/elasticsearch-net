@@ -74,20 +74,17 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					company = new
+					properties = new
 					{
-						properties = new
+						name = new
 						{
-							name = new
+							type = "text",
+							fields = new
 							{
-								type = "text",
-								fields = new
+								keyword = new
 								{
-									keyword = new
-									{
-										type = "keyword",
-										ignore_above = 256
-									}
+									type = "keyword",
+									ignore_above = 256
 								}
 							}
 						}
@@ -140,23 +137,20 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					child = new
+					properties = new
 					{
-						properties = new
+						id = new
 						{
-							id = new
-							{
-								type = "integer"
+							type = "integer"
+						},
+						desc = new {
+							fields = new {
+								keyword = new {
+									ignore_above = 256,
+									type = "keyword"
+								}
 							},
-							desc = new {
-								fields = new {
-									keyword = new {
-										ignore_above = 256,
-										type = "keyword"
-									}
-								},
-								type = "text"
-							}
+							type = "text"
 						}
 					}
 				}

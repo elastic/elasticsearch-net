@@ -26,20 +26,17 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 			settings = new Dictionary<string, object> { { "index.number_of_shards", 1 } },
 			mappings = new
 			{
-				doc = new
+				dynamic_templates = new object[]
 				{
-					dynamic_templates = new object[]
+					new
 					{
-						new
+						@base = new
 						{
-							@base = new
+							match = "*",
+							match_mapping_type = "*",
+							mapping = new
 							{
-								match = "*",
-								match_mapping_type = "*",
-								mapping = new
-								{
-									index = false
-								}
+								index = false
 							}
 						}
 					}

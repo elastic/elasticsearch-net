@@ -322,7 +322,6 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 					{
 						index = new
 						{
-							doc_type = "doctype2",
 							index = "test"
 						}
 					},
@@ -534,7 +533,6 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 						} && new IndexAction("index_action")
 						{
 							Index = "test",
-							DocType = "doctype2"
 						} && new LoggingAction("logging_action")
 						{
 							Text = "404 recently encountered"

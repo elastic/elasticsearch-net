@@ -89,62 +89,59 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					employee = new
+					properties = new
 					{
-						properties = new
+						birthday = new
 						{
-							birthday = new
+							format = "MMddyyyy",
+							type = "date"
+						},
+						empl = new
+						{
+							properties = new {},
+							type = "nested"
+						},
+						first_name = new
+						{
+							type = "text",
+							norms = false,
+							similarity = "LMDirichlet"
+						},
+						isManager = new
+						{
+							null_value = false,
+							store = true,
+							type = "boolean"
+						},
+						last_name = new
+						{
+							type = "text"
+						},
+						office_hours = new
+						{
+							type = "text"
+						},
+						salary = new
+						{
+							coerce = true,
+							doc_values = false,
+							ignore_malformed = true,
+							type = "float"
+						},
+						skills = new
+						{
+							properties = new
 							{
-								format = "MMddyyyy",
-								type = "date"
-							},
-							empl = new
-							{
-								properties = new {},
-								type = "nested"
-							},
-							first_name = new
-							{
-								type = "text",
-								norms = false,
-								similarity = "LMDirichlet"
-							},
-							isManager = new
-							{
-								null_value = false,
-								store = true,
-								type = "boolean"
-							},
-							last_name = new
-							{
-								type = "text"
-							},
-							office_hours = new
-							{
-								type = "text"
-							},
-							salary = new
-							{
-								coerce = true,
-								doc_values = false,
-								ignore_malformed = true,
-								type = "float"
-							},
-							skills = new
-							{
-								properties = new
+								level = new
 								{
-									level = new
-									{
-										type = "byte"
-									},
-									name = new
-									{
-										type = "text"
-									}
+									type = "byte"
 								},
-								type = "object"
-							}
+								name = new
+								{
+									type = "text"
+								}
+							},
+							type = "object"
 						}
 					}
 				}

@@ -125,15 +125,12 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 				},
 				mappings = new
 				{
-					doc = new // <3> our connection settings map `Project` to `doc`
+					properties = new
 					{
-						properties = new
+						name = new
 						{
-							name = new
-							{
-								type = "text",
-								analyzer = "standard_english"
-							}
+							type = "text",
+							analyzer = "standard_english"
 						}
 					}
 				}

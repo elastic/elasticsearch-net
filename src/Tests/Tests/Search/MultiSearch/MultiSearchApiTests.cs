@@ -41,7 +41,7 @@ namespace Tests.Search.MultiSearch
 				query = new
 				{
 					percolate = new
-						{ index = "project", type = "doc", id = Project.First.Name, version = 1, field = "query", routing = Project.First.Name }
+						{ index = "project", id = Project.First.Name, version = 1, field = "query", routing = Project.First.Name }
 				}
 			},
 		};

@@ -44,7 +44,6 @@ namespace Tests.QueryDsl.TermLevel.Terms
 					id = 12,
 					index = "devs",
 					path = "lastName",
-					type = "developer",
 					routing = "myroutingvalue"
 				}
 			}

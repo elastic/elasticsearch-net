@@ -28,7 +28,6 @@ namespace Tests.Document.Multiple.DeleteByQuery
 			{
 				ids = new
 				{
-					type = new[] { "doc" },
 					values = new[] { Project.First.Name, "x" }
 				}
 			}

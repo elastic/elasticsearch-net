@@ -59,20 +59,17 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					person = new
+					properties = new
 					{
-						properties = new
+						name = new
 						{
-							name = new
+							type = "text",
+							fields = new
 							{
-								type = "text",
-								fields = new
+								keyword = new
 								{
-									keyword = new
-									{
-										type = "keyword",
-										ignore_above = 256
-									}
+									type = "keyword",
+									ignore_above = 256
 								}
 							}
 						}
@@ -196,30 +193,27 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					person = new
+					properties = new
 					{
-						properties = new
+						name = new
 						{
-							name = new
+							type = "text",
+							fields = new
 							{
-								type = "text",
-								fields = new
+								stop = new
 								{
-									stop = new
-									{
-										type = "text",
-										analyzer = "stop"
-									},
-									shingles = new
-									{
-										type = "text",
-										analyzer = "name_shingles"
-									},
-									keyword = new
-									{
-										type = "keyword",
-										ignore_above = 256
-									}
+									type = "text",
+									analyzer = "stop"
+								},
+								shingles = new
+								{
+									type = "text",
+									analyzer = "name_shingles"
+								},
+								keyword = new
+								{
+									type = "keyword",
+									ignore_above = 256
 								}
 							}
 						}

@@ -21,12 +21,12 @@ namespace Tests.Reproduce
 			};
 
 			var client = new ElasticClient();
-			var serializedDates = client.RequestResponseSerializer.SerializeToString(dates, SerializationFormatting.None);
+			var serializedDates = client.SourceSerializer.SerializeToString(dates, SerializationFormatting.None);
 
 			serializedDates.Should()
-				.Be("{\"dateTimeUtcKind\":\"2016-01-01T01:01:01Z\"," +
-					"\"dateTimeOffset\":\"1999-01-01T01:01:01.001+05:00\"," +
-					"\"dateTimeOffsetUtc\":\"1999-01-01T01:01:01.001+00:00\"}");
+				.Contain("2016-01-01T01:01:01Z")
+				.And.Contain("1999-01-01T01:01:01.001+05:00")
+				.And.Contain("1999-01-01T01:01:01.001+00:00");
 
 			using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(serializedDates)))
 			{
