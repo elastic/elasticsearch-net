@@ -17,7 +17,7 @@
 		<tags>elasticsearch,elastic,search,lucene,nest</tags>
 		<dependencies>
 			<group targetFramework=".NETStandard2.0">
-				<dependency id="Elasticsearch.Net" version="[$version$, $nextMajorVersion$)" />
+				<dependency id="Elasticsearch.Net" version="[$version$, $version$)" />
 				<!--<dependency id="System.Collections.Specialized" version="[4.3.0, )" />-->
 				<!--<dependency id="System.Reflection.TypeExtensions" version="[4.3.0, )" />-->
 				<!--<dependency id="System.Linq.Queryable" version="[4.0.1, )" />-->
