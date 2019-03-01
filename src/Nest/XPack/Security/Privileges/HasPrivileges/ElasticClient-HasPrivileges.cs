@@ -8,7 +8,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Determine whether the user has a specified list of privileges.
+		/// Determine whether the authenticated user has a specified list of privileges.
 		/// </summary>
 		IHasPrivilegesResponse HasPrivileges(Func<HasPrivilegesDescriptor, IHasPrivilegesRequest> selector = null);
 

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Managed.Ephemeral;
 using Elastic.Xunit.XunitPlumbing;
@@ -12,14 +13,16 @@ using Tests.Framework.Integration;
 
 namespace Tests.XPack.Security.Privileges
 {
-	[SkipVersion("<6.4.0", "Only exists in Elasticsearch 6.4.0+")]
+	[SkipVersion("<6.5.0", "All APIs exist in Elasticsearch 6.4.0, except Has Privileges, which is a 6.50+ feature")]
 	public class ApplicationPrivilegesApiTests : CoordinatedIntegrationTestBase<XPackCluster>
 	{
 		private const string PutPrivilegesStep = nameof(PutPrivilegesStep);
 		private const string GetPrivilegesStep = nameof(GetPrivilegesStep);
+		private const string GetUserPrivilegesStep = nameof(GetUserPrivilegesStep);
 		private const string PutRoleStep = nameof(PutRoleStep);
 		private const string PutUserStep = nameof(PutUserStep);
 		private const string HasPrivilegesStep = nameof(HasPrivilegesStep);
+		private const string DeletePrivilegesStep = nameof(DeletePrivilegesStep);
 
 		public ApplicationPrivilegesApiTests(XPackCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
 		{
@@ -95,7 +98,7 @@ namespace Tests.XPack.Security.Privileges
 							BasicAuthenticationCredentials = new BasicAuthenticationCredentials
 							{
 								Username = $"user-{v}", Password = $"pass-{v}"
-							},
+							}
 						},
 						Application = new[]
 						{
@@ -122,6 +125,35 @@ namespace Tests.XPack.Security.Privileges
 					(v, c, r) => c.HasPrivileges(r),
 					(v, c, r) => c.HasPrivilegesAsync(r)
 				)
+			},
+			{
+				GetUserPrivilegesStep, u => u.Calls<GetUserPrivilegesDescriptor, GetUserPrivilegesRequest, IGetUserPrivilegesRequest, IGetUserPrivilegesResponse>(
+					v => new GetUserPrivilegesRequest
+					{
+						RequestConfiguration = new RequestConfiguration
+						{
+							BasicAuthenticationCredentials = new BasicAuthenticationCredentials
+							{
+								Username = $"user-{v}", Password = $"pass-{v}"
+							}
+						}
+					},
+					(v, d) => d.RequestConfiguration(r=>r.BasicAuthentication($"user-{v}", $"pass-{v}")),
+					(v, c, f) => c.GetUserPrivileges(f),
+					(v, c, f) => c.GetUserPrivilegesAsync(f),
+					(v, c, r) => c.GetUserPrivileges(r),
+					(v, c, r) => c.GetUserPrivilegesAsync(r)
+				)
+			},
+			{
+				DeletePrivilegesStep, u => u.Calls<DeletePrivilegesDescriptor, DeletePrivilegesRequest, IDeletePrivilegesRequest, IDeletePrivilegesResponse>(
+					v => new DeletePrivilegesRequest($"app-{v}", $"p1-{v}"),
+					(v, d) => d,
+					(v, c, f) => c.DeletePrivileges($"app-{v}", $"p1-{v}"),
+					(v, c, f) => c.DeletePrivilegesAsync($"app-{v}", $"p1-{v}"),
+					(v, c, r) => c.DeletePrivileges(r),
+					(v, c, r) => c.DeletePrivilegesAsync(r)
+				)
 			}
 		}) { }
 
@@ -140,7 +172,6 @@ namespace Tests.XPack.Security.Privileges
 			hasP1.Should().BeTrue($"expect `{privilege}` to be returned");
 			createdValue.Should().NotBeNull($"expect `{privilege}`'s value not to be null");
 			createdValue.Created.Should().BeTrue($"expect `{privilege}` to be created in the response");
-
 		});
 
 		[I] public async Task GetPrivilegesResponse() => await Assert<GetPrivilegesResponse>(GetPrivilegesStep, (v, r) =>
@@ -179,7 +210,59 @@ namespace Tests.XPack.Security.Privileges
 		{
 			r.IsValid.Should().BeTrue();
 			r.ApiCall.HttpStatusCode.Should().Be(200);
+
+			r.Username.Should().Be($"user-{v}");
+
+			r.HasAllRequested.Should().Be(true);
+
+			r.Application.Should().NotBeEmpty();
+			var app = $"app-{v}";
+			var hasApp = r.Application.TryGetValue(app, out var privilegesDict);
+			hasApp.Should().BeTrue($"expect `{app}` to be returned");
+			privilegesDict.Should().NotBeNull($"expect `{app}`'s value not to be null");
 		});
 
+		[I] public async Task GetUserPrivilegesResponse() => await Assert<GetUserPrivilegesResponse>(GetUserPrivilegesStep, (v, r) =>
+		{
+			r.IsValid.Should().BeTrue();
+
+			r.Cluster.Count.Should().Be(1);
+			r.Cluster.First().Should().Be("all");
+
+			r.Global.Count.Should().Be(0);
+
+			r.Indices.Count.Should().Be(1);
+			var index = r.Indices.First();
+			index.Names.Count.Should().Be(1);
+			index.Names.First().Should().Be("*");
+			index.Privileges.Count.Should().Be(1);
+			index.Privileges.First().Should().Be("all");
+
+			r.Applications.Count.Should().Be(1);
+			var application = r.Applications.First();
+			application.Application.Should().Be($"app-{v}");
+			application.Privileges.Count.Should().Be(1);
+			application.Privileges.First().Should().Be($"p1-{v}");
+			application.Resources.Count.Should().Be(1);
+			application.Resources.First().Should().Be("*");
+
+			r.RunAs.Count.Should().Be(0);
+		});
+
+		[I] public async Task DeletePrivilegesResponse() => await Assert<DeletePrivilegesResponse>(DeletePrivilegesStep, (v, r) =>
+		{
+			r.IsValid.Should().BeTrue();
+
+			r.Applications.Should().NotBeEmpty();
+			var app = $"app-{v}";
+			var hasApp = r.Applications.TryGetValue(app, out var privilegesDict);
+			hasApp.Should().BeTrue($"expect `{app}` to be returned");
+			privilegesDict.Should().NotBeNull($"expect `{app}`'s value not to be null");
+
+			var privilegeName = $"p1-{v}";
+			var hasP1 = privilegesDict.TryGetValue(privilegeName, out var found);
+			hasP1.Should().BeTrue($"expect `{privilegeName}` to be returned");
+			found.Found.Should().Be(true);
+		});
 	}
 }
