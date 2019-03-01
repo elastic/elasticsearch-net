@@ -237,7 +237,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 				)
 				.Analyzers(analyzers => analyzers
 					.Custom("shingle", shingle => shingle
-						.Filters("standard", "shingle")
+						.Filters("shingle")
 						.Tokenizer("standard")
 					)
 				);

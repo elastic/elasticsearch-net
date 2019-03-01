@@ -186,7 +186,7 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 							.Custom("question", ca => ca
 								.CharFilters("html_strip", "programming_language")
 								.Tokenizer("standard")
-								.Filters("standard", "lowercase", "stop")
+								.Filters("lowercase", "stop")
 							)
 						)
 					)
@@ -247,12 +247,12 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 							.Custom("index_question", ca => ca // <1> Use an analyzer at index time that strips HTML tags
 								.CharFilters("html_strip", "programming_language")
 								.Tokenizer("standard")
-								.Filters("standard", "lowercase", "stop")
+								.Filters("lowercase", "stop")
 							)
 							.Custom("search_question", ca => ca // <2> Use an analyzer at search time that does not strip HTML tags
 								.CharFilters("programming_language")
 								.Tokenizer("standard")
-								.Filters("standard", "lowercase", "stop")
+								.Filters("lowercase", "stop")
 							)
 						)
 					)
