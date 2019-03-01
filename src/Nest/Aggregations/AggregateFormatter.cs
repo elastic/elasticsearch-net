@@ -232,7 +232,7 @@ namespace Nest
 			}
 
 			reader.ReadNext(); // }
-			return new TopHitsAggregate(topHits)
+			return new TopHitsAggregate(topHits, formatterResolver)
 			{
 				Total = total,
 				MaxScore = maxScore
