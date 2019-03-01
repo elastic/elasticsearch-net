@@ -2,7 +2,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class SourceWriteFormatter<T> : SourceFormatter<T>
+	internal class SourceWriteFormatter<T> : SourceFormatter<T>
 	{
 		public override void Serialize(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver)
 		{

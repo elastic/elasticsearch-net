@@ -9,7 +9,7 @@ namespace Nest
 	[JsonFormatter(typeof(AliasActionFormatter))]
 	public interface IAliasAction { }
 
-	public class AliasActionFormatter : IJsonFormatter<IAliasAction>
+	internal class AliasActionFormatter : IJsonFormatter<IAliasAction>
 	{
 		private static readonly AutomataDictionary Actions = new AutomataDictionary
 		{

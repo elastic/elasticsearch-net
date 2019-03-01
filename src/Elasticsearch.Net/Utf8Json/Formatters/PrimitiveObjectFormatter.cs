@@ -28,13 +28,13 @@ using System.Collections.Generic;
 
 namespace Elasticsearch.Net
 {
-    public sealed class PrimitiveObjectFormatter : IJsonFormatter<object>
+	internal sealed class PrimitiveObjectFormatter : IJsonFormatter<object>
     {
         public static readonly IJsonFormatter<object> Default = new PrimitiveObjectFormatter();
 
         static readonly Dictionary<Type, int> typeToJumpCode = new Dictionary<Type, int>()
         {
-            { typeof(Boolean), 0 },
+            { typeof(bool), 0 },
             { typeof(Char), 1 },
             { typeof(SByte), 2 },
             { typeof(Byte), 3 },
@@ -44,8 +44,8 @@ namespace Elasticsearch.Net
             { typeof(UInt32), 7 },
             { typeof(Int64), 8 },
             { typeof(UInt64),9  },
-            { typeof(Single), 10 },
-            { typeof(Double), 11 },
+            { typeof(float), 10 },
+            { typeof(double), 11 },
             { typeof(DateTime), 12 },
             { typeof(string), 13 },
             { typeof(byte[]), 14 }
@@ -154,8 +154,14 @@ namespace Elasticsearch.Net
                         return list;
                     }
                 case JsonToken.Number:
-                    return reader.ReadDouble();
-                case JsonToken.String:
+					var numberSegment = reader.ReadNumberSegment();
+					// conditional operator here would cast both to double, so don't use.
+					if (numberSegment.IsDouble())
+						return NumberConverter.ReadDouble(numberSegment.Array, numberSegment.Offset, out _);
+
+					// TODO: Check array to determine if larger than int32?
+					return NumberConverter.ReadInt32(numberSegment.Array, numberSegment.Offset, out _);
+				case JsonToken.String:
                     return reader.ReadString();
                 case JsonToken.True:
                     return reader.ReadBoolean(); // require advance

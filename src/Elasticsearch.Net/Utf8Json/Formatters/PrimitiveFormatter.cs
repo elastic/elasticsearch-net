@@ -26,7 +26,7 @@ using System;
 
 namespace Elasticsearch.Net
 {
-    public sealed class SByteFormatter : IJsonFormatter<SByte>, IObjectPropertyNameFormatter<SByte>
+	internal sealed class SByteFormatter : IJsonFormatter<SByte>, IObjectPropertyNameFormatter<SByte>
     {
         public static readonly SByteFormatter Default = new SByteFormatter();
 
@@ -55,7 +55,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class NullableSByteFormatter : IJsonFormatter<SByte?>, IObjectPropertyNameFormatter<SByte?>
+	internal sealed class NullableSByteFormatter : IJsonFormatter<SByte?>, IObjectPropertyNameFormatter<SByte?>
     {
         public static readonly NullableSByteFormatter Default = new NullableSByteFormatter();
 
@@ -102,7 +102,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class SByteArrayFormatter : IJsonFormatter<SByte[]>
+	internal sealed class SByteArrayFormatter : IJsonFormatter<SByte[]>
     {
         public static readonly SByteArrayFormatter Default = new SByteArrayFormatter();
 
@@ -156,7 +156,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class Int16Formatter : IJsonFormatter<Int16>, IObjectPropertyNameFormatter<Int16>
+	internal sealed class Int16Formatter : IJsonFormatter<Int16>, IObjectPropertyNameFormatter<Int16>
     {
         public static readonly Int16Formatter Default = new Int16Formatter();
 
@@ -185,7 +185,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class NullableInt16Formatter : IJsonFormatter<Int16?>, IObjectPropertyNameFormatter<Int16?>
+	internal sealed class NullableInt16Formatter : IJsonFormatter<Int16?>, IObjectPropertyNameFormatter<Int16?>
     {
         public static readonly NullableInt16Formatter Default = new NullableInt16Formatter();
 
@@ -232,7 +232,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class Int16ArrayFormatter : IJsonFormatter<Int16[]>
+	internal sealed class Int16ArrayFormatter : IJsonFormatter<Int16[]>
     {
         public static readonly Int16ArrayFormatter Default = new Int16ArrayFormatter();
 
@@ -286,7 +286,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class Int32Formatter : IJsonFormatter<Int32>, IObjectPropertyNameFormatter<Int32>
+	internal sealed class Int32Formatter : IJsonFormatter<Int32>, IObjectPropertyNameFormatter<Int32>
     {
         public static readonly Int32Formatter Default = new Int32Formatter();
 
@@ -315,7 +315,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class NullableInt32Formatter : IJsonFormatter<Int32?>, IObjectPropertyNameFormatter<Int32?>
+	internal sealed class NullableInt32Formatter : IJsonFormatter<Int32?>, IObjectPropertyNameFormatter<Int32?>
     {
         public static readonly NullableInt32Formatter Default = new NullableInt32Formatter();
 
@@ -362,7 +362,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class Int32ArrayFormatter : IJsonFormatter<Int32[]>
+	internal sealed class Int32ArrayFormatter : IJsonFormatter<Int32[]>
     {
         public static readonly Int32ArrayFormatter Default = new Int32ArrayFormatter();
 
@@ -416,7 +416,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class Int64Formatter : IJsonFormatter<Int64>, IObjectPropertyNameFormatter<Int64>
+	internal sealed class Int64Formatter : IJsonFormatter<Int64>, IObjectPropertyNameFormatter<Int64>
     {
         public static readonly Int64Formatter Default = new Int64Formatter();
 
@@ -445,7 +445,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class NullableInt64Formatter : IJsonFormatter<Int64?>, IObjectPropertyNameFormatter<Int64?>
+	internal sealed class NullableInt64Formatter : IJsonFormatter<Int64?>, IObjectPropertyNameFormatter<Int64?>
     {
         public static readonly NullableInt64Formatter Default = new NullableInt64Formatter();
 
@@ -492,7 +492,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class Int64ArrayFormatter : IJsonFormatter<Int64[]>
+	internal sealed class Int64ArrayFormatter : IJsonFormatter<Int64[]>
     {
         public static readonly Int64ArrayFormatter Default = new Int64ArrayFormatter();
 
@@ -546,7 +546,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class ByteFormatter : IJsonFormatter<Byte>, IObjectPropertyNameFormatter<Byte>
+	internal sealed class ByteFormatter : IJsonFormatter<Byte>, IObjectPropertyNameFormatter<Byte>
     {
         public static readonly ByteFormatter Default = new ByteFormatter();
 
@@ -575,7 +575,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class NullableByteFormatter : IJsonFormatter<Byte?>, IObjectPropertyNameFormatter<Byte?>
+	internal sealed class NullableByteFormatter : IJsonFormatter<Byte?>, IObjectPropertyNameFormatter<Byte?>
     {
         public static readonly NullableByteFormatter Default = new NullableByteFormatter();
 
@@ -623,7 +623,7 @@ namespace Elasticsearch.Net
     }
 
 
-    public sealed class UInt16Formatter : IJsonFormatter<UInt16>, IObjectPropertyNameFormatter<UInt16>
+	internal sealed class UInt16Formatter : IJsonFormatter<UInt16>, IObjectPropertyNameFormatter<UInt16>
     {
         public static readonly UInt16Formatter Default = new UInt16Formatter();
 
@@ -652,7 +652,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class NullableUInt16Formatter : IJsonFormatter<UInt16?>, IObjectPropertyNameFormatter<UInt16?>
+	internal sealed class NullableUInt16Formatter : IJsonFormatter<UInt16?>, IObjectPropertyNameFormatter<UInt16?>
     {
         public static readonly NullableUInt16Formatter Default = new NullableUInt16Formatter();
 
@@ -699,7 +699,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class UInt16ArrayFormatter : IJsonFormatter<UInt16[]>
+	internal sealed class UInt16ArrayFormatter : IJsonFormatter<UInt16[]>
     {
         public static readonly UInt16ArrayFormatter Default = new UInt16ArrayFormatter();
 
@@ -753,7 +753,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class UInt32Formatter : IJsonFormatter<UInt32>, IObjectPropertyNameFormatter<UInt32>
+	internal sealed class UInt32Formatter : IJsonFormatter<UInt32>, IObjectPropertyNameFormatter<UInt32>
     {
         public static readonly UInt32Formatter Default = new UInt32Formatter();
 
@@ -782,7 +782,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class NullableUInt32Formatter : IJsonFormatter<UInt32?>, IObjectPropertyNameFormatter<UInt32?>
+	internal sealed class NullableUInt32Formatter : IJsonFormatter<UInt32?>, IObjectPropertyNameFormatter<UInt32?>
     {
         public static readonly NullableUInt32Formatter Default = new NullableUInt32Formatter();
 
@@ -829,7 +829,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class UInt32ArrayFormatter : IJsonFormatter<UInt32[]>
+	internal sealed class UInt32ArrayFormatter : IJsonFormatter<UInt32[]>
     {
         public static readonly UInt32ArrayFormatter Default = new UInt32ArrayFormatter();
 
@@ -883,7 +883,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class UInt64Formatter : IJsonFormatter<UInt64>, IObjectPropertyNameFormatter<UInt64>
+	internal sealed class UInt64Formatter : IJsonFormatter<UInt64>, IObjectPropertyNameFormatter<UInt64>
     {
         public static readonly UInt64Formatter Default = new UInt64Formatter();
 
@@ -912,7 +912,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class NullableUInt64Formatter : IJsonFormatter<UInt64?>, IObjectPropertyNameFormatter<UInt64?>
+	internal sealed class NullableUInt64Formatter : IJsonFormatter<UInt64?>, IObjectPropertyNameFormatter<UInt64?>
     {
         public static readonly NullableUInt64Formatter Default = new NullableUInt64Formatter();
 
@@ -959,7 +959,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class UInt64ArrayFormatter : IJsonFormatter<UInt64[]>
+	internal sealed class UInt64ArrayFormatter : IJsonFormatter<UInt64[]>
     {
         public static readonly UInt64ArrayFormatter Default = new UInt64ArrayFormatter();
 
@@ -1013,7 +1013,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class SingleFormatter : IJsonFormatter<float>, IObjectPropertyNameFormatter<float>
+	internal sealed class SingleFormatter : IJsonFormatter<float>, IObjectPropertyNameFormatter<float>
     {
         public static readonly SingleFormatter Default = new SingleFormatter();
 
@@ -1042,7 +1042,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class NullableSingleFormatter : IJsonFormatter<float?>, IObjectPropertyNameFormatter<float?>
+	internal sealed class NullableSingleFormatter : IJsonFormatter<float?>, IObjectPropertyNameFormatter<float?>
     {
         public static readonly NullableSingleFormatter Default = new NullableSingleFormatter();
 
@@ -1089,7 +1089,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class SingleArrayFormatter : IJsonFormatter<float[]>
+	internal sealed class SingleArrayFormatter : IJsonFormatter<float[]>
     {
         public static readonly SingleArrayFormatter Default = new SingleArrayFormatter();
 
@@ -1143,7 +1143,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class DoubleFormatter : IJsonFormatter<double>, IObjectPropertyNameFormatter<double>
+	internal sealed class DoubleFormatter : IJsonFormatter<double>, IObjectPropertyNameFormatter<double>
     {
         public static readonly DoubleFormatter Default = new DoubleFormatter();
 
@@ -1172,7 +1172,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class NullableDoubleFormatter : IJsonFormatter<double?>, IObjectPropertyNameFormatter<double?>
+	internal sealed class NullableDoubleFormatter : IJsonFormatter<double?>, IObjectPropertyNameFormatter<double?>
     {
         public static readonly NullableDoubleFormatter Default = new NullableDoubleFormatter();
 
@@ -1219,7 +1219,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class DoubleArrayFormatter : IJsonFormatter<double[]>
+	internal sealed class DoubleArrayFormatter : IJsonFormatter<double[]>
     {
         public static readonly DoubleArrayFormatter Default = new DoubleArrayFormatter();
 
@@ -1273,7 +1273,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class BooleanFormatter : IJsonFormatter<bool>, IObjectPropertyNameFormatter<bool>
+	internal sealed class BooleanFormatter : IJsonFormatter<bool>, IObjectPropertyNameFormatter<bool>
     {
         public static readonly BooleanFormatter Default = new BooleanFormatter();
 
@@ -1302,7 +1302,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class NullableBooleanFormatter : IJsonFormatter<bool?>, IObjectPropertyNameFormatter<bool?>
+	internal sealed class NullableBooleanFormatter : IJsonFormatter<bool?>, IObjectPropertyNameFormatter<bool?>
     {
         public static readonly NullableBooleanFormatter Default = new NullableBooleanFormatter();
 
@@ -1349,7 +1349,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class BooleanArrayFormatter : IJsonFormatter<bool[]>
+	internal sealed class BooleanArrayFormatter : IJsonFormatter<bool[]>
     {
         public static readonly BooleanArrayFormatter Default = new BooleanArrayFormatter();
 

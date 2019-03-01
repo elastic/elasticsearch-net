@@ -651,7 +651,7 @@ namespace Elasticsearch.Net
 			var hasShouldSerialize = serializationInfo.Members.Any(x => x.ShouldSerializeMethodInfo != null);
 
 			var formatterType = typeof(IJsonFormatter<>).MakeGenericType(type);
-			var typeBuilder = assembly.DefineType("Elasticsearch.Net." + SubtractFullNameRegex.Replace(type.FullName, "").Replace(".", "_") + "Formatter" + Interlocked.Increment(ref nameSequence), TypeAttributes.Public | TypeAttributes.Sealed, null, new[] { formatterType });
+			var typeBuilder = assembly.DefineType("Elasticsearch.Net." + SubtractFullNameRegex.Replace(type.FullName, "").Replace(".", "_") + "Formatter" + Interlocked.Increment(ref nameSequence), TypeAttributes.NotPublic | TypeAttributes.Sealed, null, new[] { formatterType });
 
 			FieldBuilder stringByteKeysField;
 			Dictionary<MetaMember, FieldInfo> customFormatterLookup;

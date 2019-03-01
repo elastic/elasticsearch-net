@@ -3,7 +3,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class SingleOrEnumerableFormatter<T> : IJsonFormatter<IEnumerable<T>>
+	internal class SingleOrEnumerableFormatter<T> : IJsonFormatter<IEnumerable<T>>
 	{
 		public IEnumerable<T> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
