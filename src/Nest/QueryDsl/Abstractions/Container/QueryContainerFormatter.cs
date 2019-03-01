@@ -62,7 +62,7 @@ namespace Nest
 	}
 
 	// TODO: Unify with QueryContainerCollectionFormatter
-	public class QueryContainerListFormatter : IJsonFormatter<List<QueryContainer>>
+	internal class QueryContainerListFormatter : IJsonFormatter<List<QueryContainer>>
 	{
 		private static readonly QueryContainerFormatter QueryContainerFormatter =
 			new QueryContainerFormatter();
@@ -132,7 +132,7 @@ namespace Nest
 		}
 	}
 
-	public class QueryContainerCollectionFormatter : IJsonFormatter<IEnumerable<QueryContainer>>
+	internal class QueryContainerCollectionFormatter : IJsonFormatter<IEnumerable<QueryContainer>>
 	{
 		private static readonly QueryContainerFormatter QueryContainerFormatter =
 			new QueryContainerFormatter();

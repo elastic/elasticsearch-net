@@ -27,7 +27,7 @@ using System.Globalization;
 
 namespace Elasticsearch.Net
 {
-    public sealed class DateTimeFormatter : IJsonFormatter<DateTime>
+	internal sealed class DateTimeFormatter : IJsonFormatter<DateTime>
     {
         readonly string formatString;
 
@@ -60,7 +60,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class NullableDateTimeFormatter : IJsonFormatter<DateTime?>
+	internal sealed class NullableDateTimeFormatter : IJsonFormatter<DateTime?>
     {
         readonly DateTimeFormatter innerFormatter;
 
@@ -89,7 +89,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class ISO8601DateTimeFormatter : IJsonFormatter<DateTime>
+	internal sealed class ISO8601DateTimeFormatter : IJsonFormatter<DateTime>
     {
         public static readonly IJsonFormatter<DateTime> Default = new ISO8601DateTimeFormatter();
 
@@ -380,7 +380,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class UnixTimestampDateTimeFormatter : IJsonFormatter<DateTime>
+	internal sealed class UnixTimestampDateTimeFormatter : IJsonFormatter<DateTime>
     {
         static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
@@ -402,7 +402,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class DateTimeOffsetFormatter : IJsonFormatter<DateTimeOffset>
+	internal sealed class DateTimeOffsetFormatter : IJsonFormatter<DateTimeOffset>
     {
         readonly string formatString;
 
@@ -435,7 +435,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class NullableDateTimeOffsetFormatter : IJsonFormatter<DateTimeOffset?>
+	internal sealed class NullableDateTimeOffsetFormatter : IJsonFormatter<DateTimeOffset?>
     {
         readonly DateTimeOffsetFormatter innerFormatter;
 
@@ -464,7 +464,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class ISO8601DateTimeOffsetFormatter : IJsonFormatter<DateTimeOffset>
+	internal sealed class ISO8601DateTimeOffsetFormatter : IJsonFormatter<DateTimeOffset>
     {
         public static readonly IJsonFormatter<DateTimeOffset> Default = new ISO8601DateTimeOffsetFormatter();
 
@@ -725,7 +725,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class TimeSpanFormatter : IJsonFormatter<TimeSpan>
+	internal sealed class TimeSpanFormatter : IJsonFormatter<TimeSpan>
     {
 #if NETSTANDARD
         readonly string formatString;
@@ -768,7 +768,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class NullableTimeSpanFormatter : IJsonFormatter<TimeSpan?>
+	internal sealed class NullableTimeSpanFormatter : IJsonFormatter<TimeSpan?>
     {
         readonly TimeSpanFormatter innerFormatter;
 
@@ -799,7 +799,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class ISO8601TimeSpanFormatter : IJsonFormatter<TimeSpan>
+	internal sealed class ISO8601TimeSpanFormatter : IJsonFormatter<TimeSpan>
     {
         public static readonly IJsonFormatter<TimeSpan> Default = new ISO8601TimeSpanFormatter();
 

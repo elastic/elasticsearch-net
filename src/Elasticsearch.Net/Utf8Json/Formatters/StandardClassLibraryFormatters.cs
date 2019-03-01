@@ -35,7 +35,7 @@ namespace Elasticsearch.Net
 {
 	// MEMO:should write/read base64 directly like corefxlab/System.Binary.Base64
 	// https://github.com/dotnet/corefxlab/tree/master/src/System.Binary.Base64/System/Binary
-	public sealed class ByteArrayFormatter : IJsonFormatter<byte[]>
+	internal sealed class ByteArrayFormatter : IJsonFormatter<byte[]>
 	{
 		public static readonly IJsonFormatter<byte[]> Default = new ByteArrayFormatter();
 
@@ -55,7 +55,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class ByteArraySegmentFormatter : IJsonFormatter<ArraySegment<byte>>
+	internal sealed class ByteArraySegmentFormatter : IJsonFormatter<ArraySegment<byte>>
 	{
 		public static readonly IJsonFormatter<ArraySegment<byte>> Default = new ByteArraySegmentFormatter();
 
@@ -76,7 +76,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class NullableStringFormatter : IJsonFormatter<string>, IObjectPropertyNameFormatter<string>
+	internal sealed class NullableStringFormatter : IJsonFormatter<string>, IObjectPropertyNameFormatter<string>
 	{
 		public static readonly IJsonFormatter<string> Default = new NullableStringFormatter();
 
@@ -101,7 +101,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class NullableStringArrayFormatter : IJsonFormatter<string[]>
+	internal sealed class NullableStringArrayFormatter : IJsonFormatter<string[]>
 	{
 		public static readonly NullableStringArrayFormatter Default = new NullableStringArrayFormatter();
 
@@ -155,7 +155,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class CharFormatter : IJsonFormatter<char>
+	internal sealed class CharFormatter : IJsonFormatter<char>
 	{
 		public static readonly CharFormatter Default = new CharFormatter();
 
@@ -171,7 +171,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class NullableCharFormatter : IJsonFormatter<Char?>
+	internal sealed class NullableCharFormatter : IJsonFormatter<Char?>
 	{
 		public static readonly NullableCharFormatter Default = new NullableCharFormatter();
 
@@ -200,7 +200,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class CharArrayFormatter : IJsonFormatter<char[]>
+	internal sealed class CharArrayFormatter : IJsonFormatter<char[]>
 	{
 		public static readonly CharArrayFormatter Default = new CharArrayFormatter();
 
@@ -254,7 +254,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class GuidFormatter : IJsonFormatter<Guid>, IObjectPropertyNameFormatter<Guid>
+	internal sealed class GuidFormatter : IJsonFormatter<Guid>, IObjectPropertyNameFormatter<Guid>
 	{
 		public static readonly IJsonFormatter<Guid> Default = new GuidFormatter();
 
@@ -288,7 +288,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class DecimalFormatter : IJsonFormatter<decimal>
+	internal sealed class DecimalFormatter : IJsonFormatter<decimal>
 	{
 		public static readonly IJsonFormatter<decimal> Default = new DecimalFormatter();
 
@@ -337,7 +337,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class UriFormatter : IJsonFormatter<Uri>
+	internal sealed class UriFormatter : IJsonFormatter<Uri>
 	{
 		public static readonly IJsonFormatter<Uri> Default = new UriFormatter();
 
@@ -366,7 +366,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class VersionFormatter : IJsonFormatter<Version>
+	internal sealed class VersionFormatter : IJsonFormatter<Version>
 	{
 		public static readonly IJsonFormatter<Version> Default = new VersionFormatter();
 
@@ -395,7 +395,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class KeyValuePairFormatter<TKey, TValue> : IJsonFormatter<KeyValuePair<TKey, TValue>>
+	internal sealed class KeyValuePairFormatter<TKey, TValue> : IJsonFormatter<KeyValuePair<TKey, TValue>>
 	{
 		public void Serialize(ref JsonWriter writer, KeyValuePair<TKey, TValue> value, IJsonFormatterResolver formatterResolver)
 		{
@@ -445,7 +445,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class StringBuilderFormatter : IJsonFormatter<System.Text.StringBuilder>
+	internal sealed class StringBuilderFormatter : IJsonFormatter<System.Text.StringBuilder>
 	{
 		public static readonly IJsonFormatter<System.Text.StringBuilder> Default = new StringBuilderFormatter();
 
@@ -463,7 +463,7 @@ namespace Elasticsearch.Net
 	}
 
 // BitArray can be represents other format...
-	public sealed class BitArrayFormatter : IJsonFormatter<BitArray>
+	internal sealed class BitArrayFormatter : IJsonFormatter<BitArray>
 	{
 		public static readonly IJsonFormatter<BitArray> Default = new BitArrayFormatter();
 
@@ -494,7 +494,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class TypeFormatter : IJsonFormatter<Type>
+	internal sealed class TypeFormatter : IJsonFormatter<Type>
 	{
 		public static readonly TypeFormatter Default = new TypeFormatter();
 
@@ -551,7 +551,7 @@ namespace Elasticsearch.Net
 
 #if NETSTANDARD
 
-	public sealed class BigIntegerFormatter : IJsonFormatter<BigInteger>
+	internal sealed class BigIntegerFormatter : IJsonFormatter<BigInteger>
 	{
 		public static readonly IJsonFormatter<BigInteger> Default = new BigIntegerFormatter();
 
@@ -569,7 +569,7 @@ namespace Elasticsearch.Net
 	}
 
 // Convert to [Real, Imaginary]
-	public sealed class ComplexFormatter : IJsonFormatter<Complex>
+	internal sealed class ComplexFormatter : IJsonFormatter<Complex>
 	{
 		public static readonly IJsonFormatter<Complex> Default = new ComplexFormatter();
 
@@ -594,7 +594,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class ExpandoObjectFormatter : IJsonFormatter<ExpandoObject>
+	internal sealed class ExpandoObjectFormatter : IJsonFormatter<ExpandoObject>
 	{
 		public static readonly IJsonFormatter<ExpandoObject> Default = new ExpandoObjectFormatter();
 
@@ -621,7 +621,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class LazyFormatter<T> : IJsonFormatter<Lazy<T>>
+	internal sealed class LazyFormatter<T> : IJsonFormatter<Lazy<T>>
 	{
 		public void Serialize(ref JsonWriter writer, Lazy<T> value, IJsonFormatterResolver formatterResolver)
 		{
@@ -643,7 +643,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class TaskUnitFormatter : IJsonFormatter<Task>
+	internal sealed class TaskUnitFormatter : IJsonFormatter<Task>
 	{
 		public static readonly IJsonFormatter<Task> Default = new TaskUnitFormatter();
 		static readonly Task CompletedTask = Task.FromResult<object>(null);
@@ -664,7 +664,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class TaskValueFormatter<T> : IJsonFormatter<Task<T>>
+	internal sealed class TaskValueFormatter<T> : IJsonFormatter<Task<T>>
 	{
 		public void Serialize(ref JsonWriter writer, Task<T> value, IJsonFormatterResolver formatterResolver)
 		{
@@ -683,7 +683,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class ValueTaskFormatter<T> : IJsonFormatter<ValueTask<T>>
+	internal sealed class ValueTaskFormatter<T> : IJsonFormatter<ValueTask<T>>
 	{
 		public void Serialize(ref JsonWriter writer, ValueTask<T> value, IJsonFormatterResolver formatterResolver)
 		{

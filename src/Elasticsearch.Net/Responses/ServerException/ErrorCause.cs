@@ -114,7 +114,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public class ErrorCauseFormatter : IJsonFormatter<ErrorCause>
+	internal class ErrorCauseFormatter : IJsonFormatter<ErrorCause>
 	{
 		public ErrorCause Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{

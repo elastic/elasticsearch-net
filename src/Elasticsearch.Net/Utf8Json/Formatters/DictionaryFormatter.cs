@@ -30,7 +30,7 @@ using System.Collections.ObjectModel;
 namespace Elasticsearch.Net
 {
     // unfortunately, can't use IDictionary<KVP> because supports IReadOnlyDictionary.
-    public abstract class DictionaryFormatterBase<TKey, TValue, TIntermediate, TEnumerator, TDictionary> : IJsonFormatter<TDictionary>
+	internal abstract class DictionaryFormatterBase<TKey, TValue, TIntermediate, TEnumerator, TDictionary> : IJsonFormatter<TDictionary>
         where TDictionary : class, IEnumerable<KeyValuePair<TKey, TValue>>
         where TEnumerator : IEnumerator<KeyValuePair<TKey, TValue>>
     {
@@ -147,7 +147,7 @@ namespace Elasticsearch.Net
         protected abstract TDictionary Complete(ref TIntermediate intermediateCollection);
     }
 
-    public abstract class DictionaryFormatterBase<TKey, TValue, TIntermediate, TDictionary> : DictionaryFormatterBase<TKey, TValue, TIntermediate, IEnumerator<KeyValuePair<TKey, TValue>>, TDictionary>
+	internal abstract class DictionaryFormatterBase<TKey, TValue, TIntermediate, TDictionary> : DictionaryFormatterBase<TKey, TValue, TIntermediate, IEnumerator<KeyValuePair<TKey, TValue>>, TDictionary>
         where TDictionary : class, IEnumerable<KeyValuePair<TKey, TValue>>
     {
         protected override IEnumerator<KeyValuePair<TKey, TValue>> GetSourceEnumerator(TDictionary source)
@@ -156,7 +156,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public abstract class DictionaryFormatterBase<TKey, TValue, TDictionary> : DictionaryFormatterBase<TKey, TValue, TDictionary, TDictionary>
+	internal abstract class DictionaryFormatterBase<TKey, TValue, TDictionary> : DictionaryFormatterBase<TKey, TValue, TDictionary, TDictionary>
         where TDictionary : class, IDictionary<TKey, TValue>
     {
         protected override TDictionary Complete(ref TDictionary intermediateCollection)
@@ -166,7 +166,7 @@ namespace Elasticsearch.Net
     }
 
 
-    public sealed class DictionaryFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue, Dictionary<TKey, TValue>, Dictionary<TKey, TValue>.Enumerator, Dictionary<TKey, TValue>>
+	internal sealed class DictionaryFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue, Dictionary<TKey, TValue>, Dictionary<TKey, TValue>.Enumerator, Dictionary<TKey, TValue>>
     {
         protected override void Add(ref Dictionary<TKey, TValue> collection, int index, TKey key, TValue value)
         {
@@ -189,7 +189,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class GenericDictionaryFormatter<TKey, TValue, TDictionary> : DictionaryFormatterBase<TKey, TValue, TDictionary>
+	internal sealed class GenericDictionaryFormatter<TKey, TValue, TDictionary> : DictionaryFormatterBase<TKey, TValue, TDictionary>
         where TDictionary : class, IDictionary<TKey, TValue>, new()
     {
         protected override void Add(ref TDictionary collection, int index, TKey key, TValue value)
@@ -203,7 +203,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class InterfaceDictionaryFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue, Dictionary<TKey, TValue>, IDictionary<TKey, TValue>>
+	internal sealed class InterfaceDictionaryFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue, Dictionary<TKey, TValue>, IDictionary<TKey, TValue>>
     {
         protected override void Add(ref Dictionary<TKey, TValue> collection, int index, TKey key, TValue value)
         {
@@ -221,7 +221,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class SortedListFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue, SortedList<TKey, TValue>>
+	internal sealed class SortedListFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue, SortedList<TKey, TValue>>
     {
         protected override void Add(ref SortedList<TKey, TValue> collection, int index, TKey key, TValue value)
         {
@@ -234,7 +234,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class SortedDictionaryFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue, SortedDictionary<TKey, TValue>, SortedDictionary<TKey, TValue>.Enumerator, SortedDictionary<TKey, TValue>>
+	internal sealed class SortedDictionaryFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue, SortedDictionary<TKey, TValue>, SortedDictionary<TKey, TValue>.Enumerator, SortedDictionary<TKey, TValue>>
     {
         protected override void Add(ref SortedDictionary<TKey, TValue> collection, int index, TKey key, TValue value)
         {
@@ -259,7 +259,7 @@ namespace Elasticsearch.Net
 
 #if NETSTANDARD
 
-    public sealed class ReadOnlyDictionaryFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue, Dictionary<TKey, TValue>, ReadOnlyDictionary<TKey, TValue>>
+	internal sealed class ReadOnlyDictionaryFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue, Dictionary<TKey, TValue>, ReadOnlyDictionary<TKey, TValue>>
     {
         protected override void Add(ref Dictionary<TKey, TValue> collection, int index, TKey key, TValue value)
         {
@@ -277,7 +277,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class InterfaceReadOnlyDictionaryFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue, Dictionary<TKey, TValue>, IReadOnlyDictionary<TKey, TValue>>
+	internal sealed class InterfaceReadOnlyDictionaryFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue, Dictionary<TKey, TValue>, IReadOnlyDictionary<TKey, TValue>>
     {
         protected override void Add(ref Dictionary<TKey, TValue> collection, int index, TKey key, TValue value)
         {
@@ -295,7 +295,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class ConcurrentDictionaryFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue, System.Collections.Concurrent.ConcurrentDictionary<TKey, TValue>>
+	internal sealed class ConcurrentDictionaryFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue, System.Collections.Concurrent.ConcurrentDictionary<TKey, TValue>>
     {
         protected override void Add(ref ConcurrentDictionary<TKey, TValue> collection, int index, TKey key, TValue value)
         {
@@ -311,7 +311,7 @@ namespace Elasticsearch.Net
 
 #endif
 
-    public sealed class NonGenericDictionaryFormatter<T> : IJsonFormatter<T>
+	internal sealed class NonGenericDictionaryFormatter<T> : IJsonFormatter<T>
         where T : class, System.Collections.IDictionary, new()
     {
         public void Serialize(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver)
@@ -389,7 +389,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class NonGenericInterfaceDictionaryFormatter : IJsonFormatter<System.Collections.IDictionary>
+	internal sealed class NonGenericInterfaceDictionaryFormatter : IJsonFormatter<System.Collections.IDictionary>
     {
         public static readonly IJsonFormatter<System.Collections.IDictionary> Default = new NonGenericInterfaceDictionaryFormatter();
 

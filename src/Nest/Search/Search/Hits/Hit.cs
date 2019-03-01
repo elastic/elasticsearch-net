@@ -60,10 +60,10 @@ namespace Nest
 
 	public class Hit<TDocument> : IHit<TDocument> where TDocument : class
 	{
-		[DataMember(Name ="_explanation")]
+		[DataMember(Name = "_explanation")]
 		public Explanation Explanation { get; internal set; }
 
-		[DataMember(Name ="fields")]
+		[DataMember(Name = "fields")]
 		public FieldValues Fields { get; internal set; }
 
 		public HighlightFieldDictionary Highlights
@@ -85,48 +85,48 @@ namespace Nest
 			}
 		}
 
-		[DataMember(Name ="_id")]
+		[DataMember(Name = "_id")]
 		[JsonFormatter(typeof(IdStringFormatter))]
 		public string Id { get; internal set; }
 
-		[DataMember(Name ="_index")]
+		[DataMember(Name = "_index")]
 		public string Index { get; internal set; }
 
-		[DataMember(Name ="inner_hits")]
+		[DataMember(Name = "inner_hits")]
 		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, InnerHitsResult>))]
 		public IReadOnlyDictionary<string, InnerHitsResult> InnerHits { get; internal set; } =
 			EmptyReadOnly<string, InnerHitsResult>.Dictionary;
 
-		[DataMember(Name ="matched_queries")]
+		[DataMember(Name = "matched_queries")]
 		public IReadOnlyCollection<string> MatchedQueries { get; internal set; } = EmptyReadOnly<string>.Collection;
 
-		[DataMember(Name ="_nested")]
+		[DataMember(Name = "_nested")]
 		public NestedIdentity Nested { get; internal set; }
 
-		[DataMember(Name ="_parent")]
+		[DataMember(Name = "_parent")]
 		[Obsolete("This property is no longer returned on indices created in Elasticsearch 6.0.0 and up, use Routing instead")]
 		public string Parent { get; internal set; }
 
-		[DataMember(Name ="_routing")]
+		[DataMember(Name = "_routing")]
 		public string Routing { get; internal set; }
 
-		[DataMember(Name ="_score")]
+		[DataMember(Name = "_score")]
 		public double? Score { get; set; }
 
-		[DataMember(Name ="sort")]
+		[DataMember(Name = "sort")]
 		public IReadOnlyCollection<object> Sorts { get; internal set; } = EmptyReadOnly<object>.Collection;
 
-		[DataMember(Name ="_source")]
+		[DataMember(Name = "_source")]
 		[JsonFormatter(typeof(SourceFormatter<>))]
 		public TDocument Source { get; internal set; }
 
-		[DataMember(Name ="_type")]
+		[DataMember(Name = "_type")]
 		public string Type { get; internal set; }
 
-		[DataMember(Name ="_version")]
+		[DataMember(Name = "_version")]
 		public long? Version { get; internal set; }
 
-		[DataMember(Name ="highlight")]
+		[DataMember(Name = "highlight")]
 		[JsonFormatter(typeof(VerbatimDictionaryKeysBaseFormatter<Dictionary<string, List<string>>, string, List<string>>))]
 		internal Dictionary<string, List<string>> _Highlight { get; set; }
 	}

@@ -3,7 +3,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class JsonNetCompatibleUriFormatter : IJsonFormatter<Uri>
+	internal class JsonNetCompatibleUriFormatter : IJsonFormatter<Uri>
 	{
 		public void Serialize(ref JsonWriter writer, Uri value, IJsonFormatterResolver formatterResolver)
 		{

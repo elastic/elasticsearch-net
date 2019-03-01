@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using JsonProperty = Newtonsoft.Json.Serialization.JsonProperty;
 
 namespace Nest.JsonNetSerializer
 {
@@ -19,6 +22,15 @@ namespace Nest.JsonNetSerializer
 			ConnectionSettings.DefaultFieldNameInferrer != null
 				? ConnectionSettings.DefaultFieldNameInferrer(fieldName)
 				: base.ResolvePropertyName(fieldName);
+
+		protected override JsonContract CreateContract(Type objectType)
+		{
+			var contract = base.CreateContract(objectType);
+			if (objectType.IsEnum && objectType.GetCustomAttribute<StringEnumAttribute>() != null)
+				contract.Converter = new StringEnumConverter();
+
+			return contract;
+		}
 
 		protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
 		{

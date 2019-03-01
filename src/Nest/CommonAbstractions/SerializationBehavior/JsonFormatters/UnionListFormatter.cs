@@ -3,7 +3,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class UnionListFormatter<TCollection, TFirst, TSecond> : IJsonFormatter<TCollection>
+	internal class UnionListFormatter<TCollection, TFirst, TSecond> : IJsonFormatter<TCollection>
 		where TCollection : List<Union<TFirst, TSecond>>, new()
 	{
 		private static readonly UnionFormatter<TFirst, TSecond> CharFilterFormatter =
