@@ -6,7 +6,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class VerbatimDictionaryKeysBaseFormatter<TDictionary, TKey, TValue> : IJsonFormatter<TDictionary>
+	internal class VerbatimDictionaryKeysBaseFormatter<TDictionary, TKey, TValue> : IJsonFormatter<TDictionary>
 		where TDictionary : IEnumerable<KeyValuePair<TKey, TValue>>
 	{
 		private readonly bool _keyIsField = typeof(TKey) == typeof(Field);
@@ -88,7 +88,7 @@ namespace Nest
 			entry.Value == null; //TODO: Check connection settings for allow nulls
 	}
 
-	public class VerbatimInterfaceReadOnlyDictionaryKeysFormatter<TKey, TValue>
+	internal class VerbatimInterfaceReadOnlyDictionaryKeysFormatter<TKey, TValue>
 		: VerbatimDictionaryKeysBaseFormatter<IReadOnlyDictionary<TKey, TValue>, TKey, TValue>
 	{
 		public override IReadOnlyDictionary<TKey, TValue> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -99,12 +99,12 @@ namespace Nest
 		}
 	}
 
-	public class VerbatimDictionaryKeysFormatter<TKey, TValue>
+	internal class VerbatimDictionaryKeysFormatter<TKey, TValue>
 		: VerbatimDictionaryKeysBaseFormatter<Dictionary<TKey, TValue>, TKey, TValue>
 	{
 	}
 
-	public class VerbatimDictionaryInterfaceKeysFormatter<TKey, TValue>
+	internal class VerbatimDictionaryInterfaceKeysFormatter<TKey, TValue>
 		: VerbatimDictionaryKeysBaseFormatter<IDictionary<TKey, TValue>, TKey, TValue>
 	{
 	}

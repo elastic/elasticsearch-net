@@ -13,7 +13,7 @@ namespace Elasticsearch.Net
 		public string Status { get; set; }
 	}
 
-	public class ShardFailureFormatter : IJsonFormatter<ShardFailure>
+	internal class ShardFailureFormatter : IJsonFormatter<ShardFailure>
 	{
 		public void Serialize(ref JsonWriter writer, ShardFailure value, IJsonFormatterResolver formatterResolver) =>
 			throw new NotSupportedException();

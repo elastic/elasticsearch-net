@@ -14,14 +14,12 @@
     <PackageReference Include="System.ValueTuple" Version="4.4.0" />
   </ItemGroup>
 
+  <!-- from Utf8Json -->
   <ItemGroup>
     <None Remove="Utf8Json\*.meta" />
     <None Remove="Utf8Json\Resolvers\*.meta" />
     <None Remove="Utf8Json\Internal\*.meta" />
     <None Remove="Utf8Json\Formatters\*.meta" />
-  </ItemGroup>
-  
-  <ItemGroup>
     <None Update="Utf8Json\Formatters\PrimitiveFormatter.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Utf8Json\PrimitiveFormatter.cs</LastGenOutput>

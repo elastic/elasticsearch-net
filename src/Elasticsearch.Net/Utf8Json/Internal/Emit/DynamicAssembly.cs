@@ -1,18 +1,18 @@
 #region Utf8Json License https://github.com/neuecc/Utf8Json/blob/master/LICENSE
 // MIT License
-// 
+//
 // Copyright (c) 2017 Yoshifumi Kawai
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in all
 // copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -23,13 +23,17 @@
 #endregion
 
 using System;
+using System.IO;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Resources;
 
 namespace Elasticsearch.Net
 {
     public class DynamicAssembly
-    {
+	{
+		private static readonly byte[] PublicKey = Assembly.GetExecutingAssembly().GetName().GetPublicKey();
+
 #if NET45 || NET47
         readonly string moduleName;
 #endif
@@ -69,15 +73,17 @@ namespace Elasticsearch.Net
 
         public DynamicAssembly(string moduleName)
         {
+			var assemblyName = new AssemblyName(moduleName);
+			assemblyName.SetPublicKey(PublicKey);
 #if NET45 || NET47
             this.moduleName = moduleName;
-            this.assemblyBuilder = System.AppDomain.CurrentDomain.DefineDynamicAssembly(new AssemblyName(moduleName), AssemblyBuilderAccess.RunAndSave);
+            this.assemblyBuilder = System.AppDomain.CurrentDomain.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.RunAndSave);
 			this.moduleBuilder = assemblyBuilder.DefineDynamicModule(moduleName, moduleName + ".dll");
 #else
 #if NETSTANDARD
-            this.assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(moduleName), AssemblyBuilderAccess.Run);
+            this.assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
 #else
-            this.assemblyBuilder = System.AppDomain.CurrentDomain.DefineDynamicAssembly(new AssemblyName(moduleName), AssemblyBuilderAccess.Run);
+            this.assemblyBuilder = System.AppDomain.CurrentDomain.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
 #endif
 
             this.moduleBuilder = assemblyBuilder.DefineDynamicModule(moduleName);

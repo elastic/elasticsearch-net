@@ -3,7 +3,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class IndicesBoostFormatter : IJsonFormatter<IDictionary<IndexName, double>>
+	internal class IndicesBoostFormatter : IJsonFormatter<IDictionary<IndexName, double>>
 	{
 		public void Serialize(ref JsonWriter writer, IDictionary<IndexName, double> value, IJsonFormatterResolver formatterResolver)
 		{

@@ -63,7 +63,7 @@ namespace Elasticsearch.Net
 		{
 			{typeof(List<>), typeof(ListFormatter<>)},
 			{typeof(LinkedList<>), typeof(LinkedListFormatter<>)},
-			{typeof(Queue<>), typeof(QeueueFormatter<>)},
+			{typeof(Queue<>), typeof(QueueFormatter<>)},
 			{typeof(Stack<>), typeof(StackFormatter<>)},
 			{typeof(HashSet<>), typeof(HashSetFormatter<>)},
 			{typeof(ReadOnlyCollection<>), typeof(ReadOnlyCollectionFormatter<>)},

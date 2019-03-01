@@ -26,7 +26,7 @@ namespace Elasticsearch.Net
 {
     // multi dimentional array serialize to [[seq], [seq]]
 
-    public sealed class TwoDimentionalArrayFormatter<T> : IJsonFormatter<T[,]>
+	internal sealed class TwoDimentionalArrayFormatter<T> : IJsonFormatter<T[,]>
     {
         public void Serialize(ref JsonWriter writer, T[,] value, IJsonFormatterResolver formatterResolver)
         {
@@ -94,7 +94,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class ThreeDimentionalArrayFormatter<T> : IJsonFormatter<T[,,]>
+	internal sealed class ThreeDimentionalArrayFormatter<T> : IJsonFormatter<T[,,]>
     {
         public void Serialize(ref JsonWriter writer, T[,,] value, IJsonFormatterResolver formatterResolver)
         {
@@ -182,7 +182,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class FourDimentionalArrayFormatter<T> : IJsonFormatter<T[,,,]>
+	internal sealed class FourDimentionalArrayFormatter<T> : IJsonFormatter<T[,,,]>
     {
         public void Serialize(ref JsonWriter writer, T[,,,] value, IJsonFormatterResolver formatterResolver)
         {

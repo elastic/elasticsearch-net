@@ -148,7 +148,7 @@ namespace Elasticsearch.Net
 	}
 
 	// can inherit for set optimize manual serialize/deserialize func.
-	public class EnumFormatter<T> : IJsonFormatter<T>, IObjectPropertyNameFormatter<T>
+	internal class EnumFormatter<T> : IJsonFormatter<T>, IObjectPropertyNameFormatter<T>
 	{
 		readonly static ByteArrayStringHashTable<T> nameValueMapping;
 		readonly static Dictionary<T, string> valueNameMapping;

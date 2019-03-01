@@ -32,7 +32,7 @@ using System.Linq;
 
 namespace Elasticsearch.Net
 {
-	public class ArrayFormatter<T> : IJsonFormatter<T[]>
+	internal class ArrayFormatter<T> : IJsonFormatter<T[]>
 	{
 		static readonly ArrayPool<T> arrayPool = new ArrayPool<T>(99);
 
@@ -88,7 +88,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public class ArraySegmentFormatter<T> : IJsonFormatter<ArraySegment<T>>
+	internal class ArraySegmentFormatter<T> : IJsonFormatter<ArraySegment<T>>
 	{
 		static readonly ArrayPool<T> arrayPool = new ArrayPool<T>(99);
 
@@ -149,7 +149,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public class ListFormatter<T> : IJsonFormatter<List<T>>
+	internal class ListFormatter<T> : IJsonFormatter<List<T>>
 	{
 		public void Serialize(ref JsonWriter writer, List<T> value, IJsonFormatterResolver formatterResolver)
 		{
@@ -187,7 +187,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public abstract class CollectionFormatterBase<TElement, TIntermediate, TEnumerator, TCollection> : IJsonFormatter<TCollection>
+	internal abstract class CollectionFormatterBase<TElement, TIntermediate, TEnumerator, TCollection> : IJsonFormatter<TCollection>
 		where TCollection : class, IEnumerable<TElement>
 		where TEnumerator : IEnumerator<TElement>
 	{
@@ -260,7 +260,7 @@ namespace Elasticsearch.Net
 		protected abstract TCollection Complete(ref TIntermediate intermediateCollection);
 	}
 
-	public abstract class CollectionFormatterBase<TElement, TIntermediate, TCollection> : CollectionFormatterBase<TElement, TIntermediate, IEnumerator<TElement>, TCollection>
+	internal abstract class CollectionFormatterBase<TElement, TIntermediate, TCollection> : CollectionFormatterBase<TElement, TIntermediate, IEnumerator<TElement>, TCollection>
 		where TCollection : class, IEnumerable<TElement>
 	{
 		protected override IEnumerator<TElement> GetSourceEnumerator(TCollection source)
@@ -269,7 +269,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public abstract class CollectionFormatterBase<TElement, TCollection> : CollectionFormatterBase<TElement, TCollection, TCollection>
+	internal abstract class CollectionFormatterBase<TElement, TCollection> : CollectionFormatterBase<TElement, TCollection, TCollection>
 		where TCollection : class, IEnumerable<TElement>
 	{
 		protected sealed override TCollection Complete(ref TCollection intermediateCollection)
@@ -278,7 +278,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class GenericCollectionFormatter<TElement, TCollection> : CollectionFormatterBase<TElement, TCollection>
+	internal sealed class GenericCollectionFormatter<TElement, TCollection> : CollectionFormatterBase<TElement, TCollection>
 		where TCollection : class, ICollection<TElement>, new()
 	{
 		protected override TCollection Create()
@@ -292,7 +292,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class LinkedListFormatter<T> : CollectionFormatterBase<T, LinkedList<T>, LinkedList<T>.Enumerator, LinkedList<T>>
+	internal sealed class LinkedListFormatter<T> : CollectionFormatterBase<T, LinkedList<T>, LinkedList<T>.Enumerator, LinkedList<T>>
 	{
 		protected override void Add(ref LinkedList<T> collection, int index, T value)
 		{
@@ -315,7 +315,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class QeueueFormatter<T> : CollectionFormatterBase<T, Queue<T>, Queue<T>.Enumerator, Queue<T>>
+	internal sealed class QueueFormatter<T> : CollectionFormatterBase<T, Queue<T>, Queue<T>.Enumerator, Queue<T>>
 	{
 		protected override void Add(ref Queue<T> collection, int index, T value)
 		{
@@ -340,7 +340,7 @@ namespace Elasticsearch.Net
 
 
 // should deserialize reverse order.
-	public sealed class StackFormatter<T> : CollectionFormatterBase<T, ArrayBuffer<T>, Stack<T>.Enumerator, Stack<T>>
+	internal sealed class StackFormatter<T> : CollectionFormatterBase<T, ArrayBuffer<T>, Stack<T>.Enumerator, Stack<T>>
 	{
 		protected override void Add(ref ArrayBuffer<T> collection, int index, T value)
 		{
@@ -369,7 +369,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class HashSetFormatter<T> : CollectionFormatterBase<T, HashSet<T>, HashSet<T>.Enumerator, HashSet<T>>
+	internal sealed class HashSetFormatter<T> : CollectionFormatterBase<T, HashSet<T>, HashSet<T>.Enumerator, HashSet<T>>
 	{
 		protected override void Add(ref HashSet<T> collection, int index, T value)
 		{
@@ -392,7 +392,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class ReadOnlyCollectionFormatter<T> : CollectionFormatterBase<T, ArrayBuffer<T>, ReadOnlyCollection<T>>
+	internal sealed class ReadOnlyCollectionFormatter<T> : CollectionFormatterBase<T, ArrayBuffer<T>, ReadOnlyCollection<T>>
 	{
 		protected override void Add(ref ArrayBuffer<T> collection, int index, T value)
 		{
@@ -410,7 +410,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class InterfaceListFormatter<T> : CollectionFormatterBase<T, List<T>, IList<T>>
+	internal sealed class InterfaceListFormatter<T> : CollectionFormatterBase<T, List<T>, IList<T>>
 	{
 		protected override void Add(ref List<T> collection, int index, T value)
 		{
@@ -428,7 +428,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class InterfaceCollectionFormatter<T> : CollectionFormatterBase<T, List<T>, ICollection<T>>
+	internal sealed class InterfaceCollectionFormatter<T> : CollectionFormatterBase<T, List<T>, ICollection<T>>
 	{
 		protected override void Add(ref List<T> collection, int index, T value)
 		{
@@ -446,8 +446,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-
-	public sealed class InterfaceEnumerableFormatter<T> : CollectionFormatterBase<T, ArrayBuffer<T>, IEnumerable<T>>
+	internal sealed class InterfaceEnumerableFormatter<T> : CollectionFormatterBase<T, ArrayBuffer<T>, IEnumerable<T>>
 	{
 		protected override void Add(ref ArrayBuffer<T> collection, int index, T value)
 		{
@@ -466,7 +465,7 @@ namespace Elasticsearch.Net
 	}
 
 // {Key:key, Elements:[Array]}  (not compatible with JSON.NET)
-	public sealed class InterfaceGroupingFormatter<TKey, TElement> : IJsonFormatter<IGrouping<TKey, TElement>>
+	internal sealed class InterfaceGroupingFormatter<TKey, TElement> : IJsonFormatter<IGrouping<TKey, TElement>>
 	{
 		public void Serialize(ref JsonWriter writer, IGrouping<TKey, TElement> value, IJsonFormatterResolver formatterResolver)
 		{
@@ -529,7 +528,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class InterfaceLookupFormatter<TKey, TElement> : IJsonFormatter<ILookup<TKey, TElement>>
+	internal sealed class InterfaceLookupFormatter<TKey, TElement> : IJsonFormatter<ILookup<TKey, TElement>>
 	{
 		public void Serialize(ref JsonWriter writer, ILookup<TKey, TElement> value, IJsonFormatterResolver formatterResolver)
 		{
@@ -644,7 +643,7 @@ namespace Elasticsearch.Net
 
 // NonGenerics
 
-	public sealed class NonGenericListFormatter<T> : IJsonFormatter<T>
+	internal sealed class NonGenericListFormatter<T> : IJsonFormatter<T>
 		where T : class, IList, new()
 	{
 		public void Serialize(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver)
@@ -688,7 +687,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class NonGenericInterfaceEnumerableFormatter : IJsonFormatter<IEnumerable>
+	internal sealed class NonGenericInterfaceEnumerableFormatter : IJsonFormatter<IEnumerable>
 	{
 		public static readonly IJsonFormatter<IEnumerable> Default = new NonGenericInterfaceEnumerableFormatter();
 
@@ -732,7 +731,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class NonGenericInterfaceCollectionFormatter : IJsonFormatter<ICollection>
+	internal sealed class NonGenericInterfaceCollectionFormatter : IJsonFormatter<ICollection>
 	{
 		public static readonly IJsonFormatter<ICollection> Default = new NonGenericInterfaceCollectionFormatter();
 
@@ -786,7 +785,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class NonGenericInterfaceListFormatter : IJsonFormatter<IList>
+	internal sealed class NonGenericInterfaceListFormatter : IJsonFormatter<IList>
 	{
 		public static readonly IJsonFormatter<IList> Default = new NonGenericInterfaceListFormatter();
 
@@ -834,7 +833,7 @@ namespace Elasticsearch.Net
 
 #if NETSTANDARD
 
-	public sealed class ObservableCollectionFormatter<T> : CollectionFormatterBase<T, ObservableCollection<T>>
+	internal sealed class ObservableCollectionFormatter<T> : CollectionFormatterBase<T, ObservableCollection<T>>
 	{
 		protected override void Add(ref ObservableCollection<T> collection, int index, T value)
 		{
@@ -847,7 +846,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class ReadOnlyObservableCollectionFormatter<T> : CollectionFormatterBase<T, ObservableCollection<T>, ReadOnlyObservableCollection<T>>
+	internal sealed class ReadOnlyObservableCollectionFormatter<T> : CollectionFormatterBase<T, ObservableCollection<T>, ReadOnlyObservableCollection<T>>
 	{
 		protected override void Add(ref ObservableCollection<T> collection, int index, T value)
 		{
@@ -865,7 +864,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class InterfaceReadOnlyListFormatter<T> : CollectionFormatterBase<T, ArrayBuffer<T>, IReadOnlyList<T>>
+	internal sealed class InterfaceReadOnlyListFormatter<T> : CollectionFormatterBase<T, ArrayBuffer<T>, IReadOnlyList<T>>
 	{
 		protected override void Add(ref ArrayBuffer<T> collection, int index, T value)
 		{
@@ -883,7 +882,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class InterfaceReadOnlyCollectionFormatter<T> : CollectionFormatterBase<T, ArrayBuffer<T>, IReadOnlyCollection<T>>
+	internal sealed class InterfaceReadOnlyCollectionFormatter<T> : CollectionFormatterBase<T, ArrayBuffer<T>, IReadOnlyCollection<T>>
 	{
 		protected override void Add(ref ArrayBuffer<T> collection, int index, T value)
 		{
@@ -901,7 +900,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class InterfaceSetFormatter<T> : CollectionFormatterBase<T, HashSet<T>, ISet<T>>
+	internal sealed class InterfaceSetFormatter<T> : CollectionFormatterBase<T, HashSet<T>, ISet<T>>
 	{
 		protected override void Add(ref HashSet<T> collection, int index, T value)
 		{
@@ -919,7 +918,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class ConcurrentBagFormatter<T> : CollectionFormatterBase<T, System.Collections.Concurrent.ConcurrentBag<T>>
+	internal sealed class ConcurrentBagFormatter<T> : CollectionFormatterBase<T, System.Collections.Concurrent.ConcurrentBag<T>>
 	{
 		protected override void Add(ref ConcurrentBag<T> collection, int index, T value)
 		{
@@ -932,7 +931,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class ConcurrentQueueFormatter<T> : CollectionFormatterBase<T, System.Collections.Concurrent.ConcurrentQueue<T>>
+	internal sealed class ConcurrentQueueFormatter<T> : CollectionFormatterBase<T, System.Collections.Concurrent.ConcurrentQueue<T>>
 	{
 		protected override void Add(ref ConcurrentQueue<T> collection, int index, T value)
 		{
@@ -945,7 +944,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class ConcurrentStackFormatter<T> : CollectionFormatterBase<T, ArrayBuffer<T>, ConcurrentStack<T>>
+	internal sealed class ConcurrentStackFormatter<T> : CollectionFormatterBase<T, ArrayBuffer<T>, ConcurrentStack<T>>
 	{
 		protected override void Add(ref ArrayBuffer<T> collection, int index, T value)
 		{

@@ -28,7 +28,7 @@ using System.Reflection.Emit;
 
 namespace Elasticsearch.Net
 {
-    public sealed class DynamicObjectTypeFallbackFormatter : IJsonFormatter<object>
+    internal sealed class DynamicObjectTypeFallbackFormatter : IJsonFormatter<object>
     {
         delegate void SerializeMethod(object dynamicFormatter, ref JsonWriter writer, object value, IJsonFormatterResolver formatterResolver);
 

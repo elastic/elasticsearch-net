@@ -3,7 +3,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class IndicesFormatter : IJsonFormatter<Indices>
+	internal class IndicesFormatter : IJsonFormatter<Indices>
 	{
 		public Indices Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{

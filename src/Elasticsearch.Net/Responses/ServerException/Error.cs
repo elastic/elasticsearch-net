@@ -18,7 +18,7 @@ namespace Elasticsearch.Net
 		public IReadOnlyCollection<ErrorCause> RootCause { get; set; }
 	}
 
-	public class ErrorFormatter : IJsonFormatter<Error>
+	internal class ErrorFormatter : IJsonFormatter<Error>
 	{
 		public void Serialize(ref JsonWriter writer, Error value, IJsonFormatterResolver formatterResolver) { }
 

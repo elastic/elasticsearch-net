@@ -172,7 +172,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public sealed class ValueTupleFormatter<T1> : IJsonFormatter<ValueTuple<T1>>
+	internal sealed class ValueTupleFormatter<T1> : IJsonFormatter<ValueTuple<T1>>
 	{
 		static readonly byte[][] cache = TupleFormatterHelper.nameCache1;
 		static readonly AutomataDictionary dictionary = TupleFormatterHelper.dictionary1;
@@ -218,7 +218,7 @@ namespace Elasticsearch.Net
 	}
 
 
-	public sealed class ValueTupleFormatter<T1, T2> : IJsonFormatter<ValueTuple<T1, T2>>
+	internal sealed class ValueTupleFormatter<T1, T2> : IJsonFormatter<ValueTuple<T1, T2>>
 	{
 		static readonly byte[][] cache = TupleFormatterHelper.nameCache2;
 		static readonly AutomataDictionary dictionary = TupleFormatterHelper.dictionary2;
@@ -270,7 +270,7 @@ namespace Elasticsearch.Net
 	}
 
 
-	public sealed class ValueTupleFormatter<T1, T2, T3> : IJsonFormatter<ValueTuple<T1, T2, T3>>
+	internal sealed class ValueTupleFormatter<T1, T2, T3> : IJsonFormatter<ValueTuple<T1, T2, T3>>
 	{
 		static readonly byte[][] cache = TupleFormatterHelper.nameCache3;
 		static readonly AutomataDictionary dictionary = TupleFormatterHelper.dictionary3;
@@ -328,7 +328,7 @@ namespace Elasticsearch.Net
 	}
 
 
-	public sealed class ValueTupleFormatter<T1, T2, T3, T4> : IJsonFormatter<ValueTuple<T1, T2, T3, T4>>
+	internal sealed class ValueTupleFormatter<T1, T2, T3, T4> : IJsonFormatter<ValueTuple<T1, T2, T3, T4>>
 	{
 		static readonly byte[][] cache = TupleFormatterHelper.nameCache4;
 		static readonly AutomataDictionary dictionary = TupleFormatterHelper.dictionary4;
@@ -392,7 +392,7 @@ namespace Elasticsearch.Net
 	}
 
 
-	public sealed class ValueTupleFormatter<T1, T2, T3, T4, T5> : IJsonFormatter<ValueTuple<T1, T2, T3, T4, T5>>
+	internal sealed class ValueTupleFormatter<T1, T2, T3, T4, T5> : IJsonFormatter<ValueTuple<T1, T2, T3, T4, T5>>
 	{
 		static readonly byte[][] cache = TupleFormatterHelper.nameCache5;
 		static readonly AutomataDictionary dictionary = TupleFormatterHelper.dictionary5;
@@ -462,7 +462,7 @@ namespace Elasticsearch.Net
 	}
 
 
-	public sealed class ValueTupleFormatter<T1, T2, T3, T4, T5, T6> : IJsonFormatter<ValueTuple<T1, T2, T3, T4, T5, T6>>
+	internal sealed class ValueTupleFormatter<T1, T2, T3, T4, T5, T6> : IJsonFormatter<ValueTuple<T1, T2, T3, T4, T5, T6>>
 	{
 		static readonly byte[][] cache = TupleFormatterHelper.nameCache6;
 		static readonly AutomataDictionary dictionary = TupleFormatterHelper.dictionary6;
@@ -538,7 +538,7 @@ namespace Elasticsearch.Net
 	}
 
 
-	public sealed class ValueTupleFormatter<T1, T2, T3, T4, T5, T6, T7> : IJsonFormatter<ValueTuple<T1, T2, T3, T4, T5, T6, T7>>
+	internal sealed class ValueTupleFormatter<T1, T2, T3, T4, T5, T6, T7> : IJsonFormatter<ValueTuple<T1, T2, T3, T4, T5, T6, T7>>
 	{
 		static readonly byte[][] cache = TupleFormatterHelper.nameCache7;
 		static readonly AutomataDictionary dictionary = TupleFormatterHelper.dictionary7;
@@ -620,7 +620,7 @@ namespace Elasticsearch.Net
 	}
 
 
-	public sealed class ValueTupleFormatter<T1, T2, T3, T4, T5, T6, T7, TRest> : IJsonFormatter<ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>> where TRest : struct
+	internal sealed class ValueTupleFormatter<T1, T2, T3, T4, T5, T6, T7, TRest> : IJsonFormatter<ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>> where TRest : struct
 	{
 		static readonly byte[][] cache = TupleFormatterHelper.nameCache8;
 		static readonly AutomataDictionary dictionary = TupleFormatterHelper.dictionary8;
