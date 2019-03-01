@@ -16,10 +16,6 @@
 
   <!-- from Utf8Json -->
   <ItemGroup>
-    <None Remove="Utf8Json\*.meta" />
-    <None Remove="Utf8Json\Resolvers\*.meta" />
-    <None Remove="Utf8Json\Internal\*.meta" />
-    <None Remove="Utf8Json\Formatters\*.meta" />
     <None Update="Utf8Json\Formatters\PrimitiveFormatter.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Utf8Json\PrimitiveFormatter.cs</LastGenOutput>
