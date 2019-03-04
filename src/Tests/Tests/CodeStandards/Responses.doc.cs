@@ -31,7 +31,7 @@ namespace Tests.CodeStandards
 				typeof(IMultiSearchResponse).GetProperty(nameof(IMultiSearchResponse.AllResponses)),
 			};
 
-			var responseInterfaceTypes = from t in typeof(IResponse).Assembly().Types()
+			var responseInterfaceTypes = from t in typeof(IResponse).Assembly.Types()
 							    where t.IsInterface() && typeof(IResponse).IsAssignableFrom(t)
 							    select t;
 
@@ -74,7 +74,7 @@ namespace Tests.CodeStandards
 						ruleBreakers.Add($"{type.FullName}.{propertyInfo.Name} is of type {propertyInfo.PropertyType.Name}");
 					}
 				}
-				else if (propertyInfo.PropertyType.IsClass() &&
+				else if (propertyInfo.PropertyType.IsClass &&
 				         (propertyInfo.PropertyType.Namespace.StartsWith("Nest") || propertyInfo.PropertyType.Namespace.StartsWith("Elasticsearch.Net"))
 				         //Do not traverse known response dictionaries
 				         && !ResponseDictionaries.Contains(propertyInfo.PropertyType)

@@ -29,7 +29,7 @@ using System.Text;
 
 namespace Elasticsearch.Net
 {
-	public static class EnumResolver
+	internal static class EnumResolver
 	{
 		/// <summary>Serialize as Name.</summary>
 		public static readonly IJsonFormatterResolver Default = EnumDefaultResolver.Instance;

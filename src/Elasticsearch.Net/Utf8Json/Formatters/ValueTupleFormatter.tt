@@ -66,7 +66,7 @@ namespace Elasticsearch.Net
     }
 }
 
-namespace Utf8Json.Formatters
+namespace Elasticsearch.Net
 {
 <# for(var i = 1; i <= 8; i++) { 
     Func<int, string> toT = x => "T" + ((x == 8) ? "Rest" : x.ToString());
@@ -75,7 +75,7 @@ namespace Utf8Json.Formatters
     var t = "ValueTuple<" + ts + ">"; 
 #>
 
-    public sealed class ValueTupleFormatter<<#= ts #>> : IJsonFormatter<<#= t #>><#= (t.Contains("TRest") ? " where TRest : struct" : "") #>
+    internal sealed class ValueTupleFormatter<<#= ts #>> : IJsonFormatter<<#= t #>><#= (t.Contains("TRest") ? " where TRest : struct" : "") #>
     {
         static readonly byte[][] cache = TupleFormatterHelper.nameCache<#= i #>;
         static readonly AutomataDictionary dictionary = TupleFormatterHelper.dictionary<#= i #>;

@@ -30,7 +30,7 @@ namespace Elasticsearch.Net
     /// <summary>
     /// zero-allocate itoa, dtoa, atoi, atod converters.
     /// </summary>
-    public static class NumberConverter
+	internal static class NumberConverter
     {
 		/// <summary>
 		/// e or E

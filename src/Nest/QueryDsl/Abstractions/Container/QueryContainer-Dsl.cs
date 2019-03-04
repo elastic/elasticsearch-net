@@ -102,6 +102,6 @@ namespace Nest
 		public static bool operator true(QueryContainer a) => false;
 
 		// ReSharper disable once UnusedMember.Global
-		public bool ShouldSerialize(IJsonFormatterResolver formatterResolver) => IsWritable;
+		internal bool ShouldSerialize(IJsonFormatterResolver formatterResolver) => IsWritable;
 	}
 }

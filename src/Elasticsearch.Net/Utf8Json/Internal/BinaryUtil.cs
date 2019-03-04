@@ -27,7 +27,7 @@ using System.Runtime.CompilerServices;
 
 namespace Elasticsearch.Net
 {
-    public static class BinaryUtil
+	internal static class BinaryUtil
     {
         const int ArrayMaxSize = 0x7FFFFFC7; // https://msdn.microsoft.com/en-us/library/system.array
 

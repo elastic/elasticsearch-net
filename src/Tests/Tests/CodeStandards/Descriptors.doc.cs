@@ -21,8 +21,8 @@ namespace Tests.CodeStandards
 			var notDescriptors = new[] {typeof(ClusterProcessOpenFileDescriptors).Name, "DescriptorForAttribute"};
 
 			var descriptors =
-				from t in typeof(DescriptorBase<,>).Assembly().Types()
-				where t.IsClass()
+				from t in typeof(DescriptorBase<,>).Assembly.Types()
+				where t.IsClass
 				      && t.Name.Contains("Descriptor")
 				      && !t.Namespace.StartsWith("Nest.Json")
 				      && !notDescriptors.Contains(t.Name)
@@ -43,8 +43,8 @@ namespace Tests.CodeStandards
 		{
 			var notSelectors = new[] {typeof(BucketSelectorAggregationDescriptor).Name, typeof(BucketSelectorAggregation).Name};
 			var selectors =
-				from t in typeof(SelectorBase<>).Assembly().Types()
-				where t.IsClass()
+				from t in typeof(SelectorBase<>).Assembly.Types()
+				where t.IsClass
 				      && t.Name.Contains("Selector")
 				      && !t.Namespace.StartsWith("Nest.Json")
 				      && !notSelectors.Contains(t.Name)
@@ -64,8 +64,8 @@ namespace Tests.CodeStandards
 		public void DescriptorSelectorsReturnInterface()
 		{
 			var descriptors =
-				from t in typeof(DescriptorBase<,>).Assembly().Types()
-				where t.IsClass() && typeof(IDescriptor).IsAssignableFrom(t)
+				from t in typeof(DescriptorBase<,>).Assembly.Types()
+				where t.IsClass && typeof(IDescriptor).IsAssignableFrom(t)
 				select t;
 
 			var exclusions = new Dictionary<Type, Type>
@@ -123,14 +123,14 @@ namespace Tests.CodeStandards
 		public void DescriptorMethodsAcceptNullableBoolsForQueriesWithNullableBoolProperties()
 		{
 			var queries =
-				from t in typeof(IQuery).Assembly().Types()
+				from t in typeof(IQuery).Assembly.Types()
 				where t.IsInterface() && typeof(IQuery).IsAssignableFrom(t)
 				where t.GetProperties().Any(p => p.PropertyType == typeof(bool?))
 				select t;
 
 			var descriptors =
-				from t in typeof(DescriptorBase<,>).Assembly().Types()
-				where t.IsClass() && typeof(IDescriptor).IsAssignableFrom(t)
+				from t in typeof(DescriptorBase<,>).Assembly.Types()
+				where t.IsClass && typeof(IDescriptor).IsAssignableFrom(t)
 				where t.GetInterfaces().Intersect(queries).Any()
 				select t;
 
@@ -168,7 +168,7 @@ namespace Tests.CodeStandards
 		{
 
 			var processors = (
-				from t in typeof(IProcessor).Assembly().Types()
+				from t in typeof(IProcessor).Assembly.Types()
 				where typeof(IProcessor).IsAssignableFrom(t)
 				select t.Name).ToList();
 
@@ -182,7 +182,7 @@ namespace Tests.CodeStandards
 			var methods = from d in YieldAllDescriptors()
 				from m in d.GetMethods()
 				let ps = m.GetParameters()
-				where ps.Length == 1 && ps.Any(pp => pp.ParameterType.IsValueType())
+				where ps.Length == 1 && ps.Any(pp => pp.ParameterType.IsValueType)
 				let p = ps.First()
 				let pt = p.ParameterType
 				where (!pt.IsGenericType() || pt.GetGenericTypeDefinition() != typeof(Nullable<>))
@@ -232,7 +232,7 @@ namespace Tests.CodeStandards
 			var methods = from d in YieldAllDescriptors()
 				from m in d.GetMethods()
 				let ps = m.GetParameters()
-				where ps.Length == 1 && ps.Any(pp => pp.ParameterType.IsValueType())
+				where ps.Length == 1 && ps.Any(pp => pp.ParameterType.IsValueType)
 				let p = ps.First()
 				let pt = p.ParameterType
 				where pt == typeof(bool?)
@@ -270,8 +270,8 @@ namespace Tests.CodeStandards
 		private static IEnumerable<Type> YieldAllDescriptors()
 		{
 			var descriptors =
-				from t in typeof(DescriptorBase<,>).Assembly().Types()
-				where t.IsClass() && typeof(IDescriptor).IsAssignableFrom(t)
+				from t in typeof(DescriptorBase<,>).Assembly.Types()
+				where t.IsClass && typeof(IDescriptor).IsAssignableFrom(t)
 				where !t.IsAbstract()
 				select t;
 			return descriptors;

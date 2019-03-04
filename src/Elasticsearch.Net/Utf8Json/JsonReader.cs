@@ -30,7 +30,7 @@ namespace Elasticsearch.Net
 {
     // JSON RFC: https://www.ietf.org/rfc/rfc4627.txt
 
-    public struct JsonReader
+	internal struct JsonReader
     {
         static readonly ArraySegment<byte> nullTokenSegment = new ArraySegment<byte>(new byte[] { 110, 117, 108, 108 }, 0, 4);
         static readonly byte[] bom = Encoding.UTF8.GetPreamble();

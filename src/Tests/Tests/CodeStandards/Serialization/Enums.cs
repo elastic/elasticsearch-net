@@ -21,7 +21,7 @@ namespace Tests.CodeStandards.Serialization
 				typeof(SimpleQueryStringFlags)
 			};
 
-			var enums = typeof(IElasticClient).Assembly()
+			var enums = typeof(IElasticClient).Assembly
 				.GetTypes()
 				.Where(t => t.IsEnum)
 				.Except(exceptions)

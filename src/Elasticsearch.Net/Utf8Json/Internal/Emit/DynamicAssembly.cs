@@ -24,13 +24,15 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Resources;
+using System.Runtime.CompilerServices;
 
 namespace Elasticsearch.Net
 {
-    public class DynamicAssembly
+	internal class DynamicAssembly
 	{
 		private static readonly byte[] PublicKey = Assembly.GetExecutingAssembly().GetName().GetPublicKey();
 
@@ -85,7 +87,6 @@ namespace Elasticsearch.Net
 #else
             this.assemblyBuilder = System.AppDomain.CurrentDomain.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
 #endif
-
             this.moduleBuilder = assemblyBuilder.DefineDynamicModule(moduleName);
 #endif
         }
