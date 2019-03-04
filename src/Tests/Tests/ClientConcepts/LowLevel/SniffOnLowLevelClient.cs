@@ -21,7 +21,7 @@ namespace Tests.ClientConcepts.LowLevel
 			var sniffingConnectionPool = new SniffingConnectionPool(new[] { uri });
 			var elasticClient = new ElasticLowLevelClient(new ConnectionConfiguration(sniffingConnectionPool));
 
-			Func<DynamicResponse> act = () => elasticClient.ClusterHealth<DynamicResponse>();
+			Func<ElasticsearchResponse<DynamicResponse>> act = () => elasticClient.ClusterHealth<DynamicResponse>();
 			act.Invoking(s => s.Invoke()).ShouldNotThrow();
 		}
 
