@@ -3,4 +3,8 @@
 	<PropertyGroup Condition="'$(TestPackageVersion)'!=''">
 		<RestoreSources>../../../build/output/_packages;https://api.nuget.org/v3/index.json</RestoreSources>
 	</PropertyGroup>
+	<PropertyGroup>
+		<SignAssembly>true</SignAssembly>
+		<AssemblyOriginatorKeyFile>../../../build/keys/keypair.snk</AssemblyOriginatorKeyFile>
+	</PropertyGroup>
 </Project>

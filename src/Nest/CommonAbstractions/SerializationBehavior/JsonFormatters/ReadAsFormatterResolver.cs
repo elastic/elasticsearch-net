@@ -5,7 +5,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public sealed class ReadAsFormatterResolver : IJsonFormatterResolver
+	internal sealed class ReadAsFormatterResolver : IJsonFormatterResolver
 	{
 		public static readonly IJsonFormatterResolver Instance = new ReadAsFormatterResolver();
 

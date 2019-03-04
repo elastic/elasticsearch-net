@@ -1,18 +1,18 @@
 #region Utf8Json License https://github.com/neuecc/Utf8Json/blob/master/LICENSE
 // MIT License
-// 
+//
 // Copyright (c) 2017 Yoshifumi Kawai
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in all
 // copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -27,7 +27,7 @@ using System;
 namespace Elasticsearch.Net
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-    public class JsonFormatterAttribute : Attribute
+	internal class JsonFormatterAttribute : Attribute
     {
         public Type FormatterType { get; private set; }
         public object[] Arguments { get; private set; }
@@ -45,13 +45,13 @@ namespace Elasticsearch.Net
     }
 
     [AttributeUsage(AttributeTargets.Constructor, AllowMultiple = false, Inherited = true)]
-    public class SerializationConstructorAttribute : Attribute
+	internal class SerializationConstructorAttribute : Attribute
     {
 
     }
 
     [AttributeUsage(AttributeTargets.Interface, AllowMultiple = false, Inherited = false)]
-    public class InterfaceDataContractAttribute : Attribute
+	internal class InterfaceDataContractAttribute : Attribute
     {
 
     }

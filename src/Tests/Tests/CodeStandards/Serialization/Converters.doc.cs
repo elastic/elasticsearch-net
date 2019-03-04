@@ -15,8 +15,8 @@ namespace Tests.CodeStandards.Serialization
 		public void CustomFormattersShouldBeInternal()
 		{
 			// TODO: Make internals visible to IL generated modules
-			var formatters = typeof(IElasticClient).Assembly().GetTypes()
-				.Concat(typeof(IElasticLowLevelClient).Assembly().GetTypes())
+			var formatters = typeof(IElasticClient).Assembly.GetTypes()
+				.Concat(typeof(IElasticLowLevelClient).Assembly.GetTypes())
 				.Where(t => t.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IJsonFormatter<>)))
 				.ToList();
 			var visible = new List<string>();

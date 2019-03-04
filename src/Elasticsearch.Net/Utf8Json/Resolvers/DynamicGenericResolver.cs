@@ -32,7 +32,7 @@ using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
-	public sealed class DynamicGenericResolver : IJsonFormatterResolver
+	internal sealed class DynamicGenericResolver : IJsonFormatterResolver
 	{
 		public static readonly IJsonFormatterResolver Instance = new DynamicGenericResolver();
 

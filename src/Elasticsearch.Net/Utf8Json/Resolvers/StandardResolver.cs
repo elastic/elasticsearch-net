@@ -26,7 +26,7 @@ using System.Linq;
 
 namespace Elasticsearch.Net
 {
-	public static class StandardResolver
+	internal static class StandardResolver
 	{
 		/// <summary>AllowPrivate:False, ExcludeNull:False, NameMutate:Original</summary>
 		public static readonly IJsonFormatterResolver Default = DefaultStandardResolver.Instance;

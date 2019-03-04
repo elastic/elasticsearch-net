@@ -31,7 +31,7 @@ using System.Reflection.Emit;
 namespace Elasticsearch.Net
 {
     // NonGeneric API
-    public static partial class JsonSerializer
+    internal static partial class JsonSerializer
     {
         public static class NonGeneric
         {

@@ -14,7 +14,7 @@ namespace Tests.Ingest
 		public void CanSerializeAndDeserializeAllProcessors()
 		{
 			var processorTypes =
-				from t in typeof(IProcessor).Assembly().Types()
+				from t in typeof(IProcessor).Assembly.Types()
 				where typeof(ProcessorBase).IsAssignableFrom(t) && !t.IsAbstract()
 				select t;
 

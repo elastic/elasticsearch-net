@@ -12,7 +12,7 @@ namespace Tests.Aggregations
 		[U] public void VisitMethodForEachTypeOfAggregation()
 		{
 			var aggregationTypes =
-				from t in typeof(IAggregation).Assembly().Types()
+				from t in typeof(IAggregation).Assembly.Types()
 				where typeof(IAggregation).IsAssignableFrom(t)
 				where t.IsInterface()
 				select t;
