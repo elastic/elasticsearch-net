@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Elasticsearch.Net;
 
@@ -20,6 +21,9 @@ namespace Nest
 		IPropertyMappingProvider PropertyMappingProvider { get; }
 		FluentDictionary<MemberInfo, IPropertyMapping> PropertyMappings { get; }
 		FluentDictionary<Type, string> RouteProperties { get; }
+
+		HashSet<Type> DisableIdInference { get; }
+		bool DisableAllIdInference { get; }
 
 		IElasticsearchSerializer SourceSerializer { get; }
 	}

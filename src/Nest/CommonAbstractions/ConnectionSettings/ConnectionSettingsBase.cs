@@ -77,6 +77,9 @@ namespace Nest
 
 		private Func<Type, string> _defaultTypeNameInferrer;
 
+		private HashSet<Type> _disableIdInference = new HashSet<Type>();
+		private bool _disableAllIdInference;
+
 		protected ConnectionSettingsBase(
 			IConnectionPool connectionPool,
 			IConnection connection,
@@ -113,6 +116,8 @@ namespace Nest
 		FluentDictionary<MemberInfo, IPropertyMapping> IConnectionSettingsValues.PropertyMappings => _propertyMappings;
 		FluentDictionary<Type, string> IConnectionSettingsValues.RouteProperties => _routeProperties;
 		IElasticsearchSerializer IConnectionSettingsValues.SourceSerializer => _sourceSerializer;
+		HashSet<Type> IConnectionSettingsValues.DisableIdInference => _disableIdInference;
+		bool IConnectionSettingsValues.DisableAllIdInference => _disableAllIdInference;
 
 		/// <summary>
 		/// The default index to use when no index is specified.
@@ -147,6 +152,16 @@ namespace Nest
 		public TConnectionSettings DefaultFieldNameInferrer(Func<string, string> fieldNameInferrer)
 		{
 			_defaultFieldNameInferrer = fieldNameInferrer;
+			return (TConnectionSettings)this;
+		}
+
+		/// <summary>
+		/// Disables all automatic Id inference. NEST by default will use the value of a property named Id on your class as
+		/// the _id to send to Elasticsearch.
+		/// </summary>
+		public TConnectionSettings DisableAllIdInference(bool disable = true)
+		{
+			_disableAllIdInference = disable;
 			return (TConnectionSettings)this;
 		}
 
@@ -272,6 +287,9 @@ namespace Nest
 
 			if (inferMapping.Properties != null)
 				ApplyPropertyMappings<TDocument>(inferMapping.Properties);
+
+			if (inferMapping.DisableIdInference) _disableIdInference.Add(inferMapping.ClrType);
+			else _disableIdInference.Remove(inferMapping.ClrType);
 
 			return (TConnectionSettings)this;
 		}

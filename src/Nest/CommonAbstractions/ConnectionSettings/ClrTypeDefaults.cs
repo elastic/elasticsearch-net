@@ -30,6 +30,9 @@ namespace Nest
 		/// The default Elasticsearch type name for <see cref="ClrType" />
 		/// </summary>
 		string TypeName { get; set; }
+
+		/// <summary> This disables id inference for <see cref="ClrType"/> </summary>
+		bool DisableIdInference { get; set; }
 	}
 
 	public interface IClrTypeMapping<TDocument> : IClrTypeMapping where TDocument : class
@@ -44,6 +47,7 @@ namespace Nest
 
 		/// <summary> Provide a default routing parameter lookup based on <typeparamref name="TDocument" /> </summary>
 		Expression<Func<TDocument, object>> RoutingProperty { get; set; }
+
 	}
 
 	public class ClrTypeMapping : IClrTypeMapping
@@ -67,6 +71,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public string TypeName { get; set; }
+
+		/// <inheritdoc />
+		public bool DisableIdInference { get; set; }
 	}
 
 	public class ClrTypeMapping<TDocument> : ClrTypeMapping, IClrTypeMapping<TDocument> where TDocument : class
@@ -98,6 +105,7 @@ namespace Nest
 		string IClrTypeMapping.IndexName { get; set; }
 		string IClrTypeMapping.RelationName { get; set; }
 		string IClrTypeMapping.TypeName { get; set; }
+		bool IClrTypeMapping.DisableIdInference { get; set; }
 
 		/// <summary>
 		/// The default Elasticsearch index name for the CLR type
@@ -118,6 +126,9 @@ namespace Nest
 		/// The name of the property on the CLR type to resolve an Id from.
 		/// </summary>
 		public ClrTypeMappingDescriptor IdProperty(string idProperty) => Assign(a => a.IdPropertyName = idProperty);
+
+		/// <inheritdoc cref="IClrTypeMapping.DisableIdInference"/>
+		public ClrTypeMappingDescriptor DisableIdInference(bool disable = true) => Assign(a => a.DisableIdInference = disable);
 	}
 
 	public class ClrTypeMappingDescriptor<TDocument>
@@ -132,6 +143,7 @@ namespace Nest
 		string IClrTypeMapping.RelationName { get; set; }
 		Expression<Func<TDocument, object>> IClrTypeMapping<TDocument>.RoutingProperty { get; set; }
 		string IClrTypeMapping.TypeName { get; set; }
+		bool IClrTypeMapping.DisableIdInference { get; set; }
 
 		/// <summary>
 		/// The default Elasticsearch index name for <typeparamref name="TDocument" />
@@ -173,5 +185,8 @@ namespace Nest
 		/// </summary>
 		public ClrTypeMappingDescriptor<TDocument> PropertyName(Expression<Func<TDocument, object>> property, string newName) =>
 			Assign(a => a.Properties.Add(new RenameClrPropertyMapping<TDocument>(property, newName)));
+
+		/// <inheritdoc cref="IClrTypeMapping.DisableIdInference"/>
+		public ClrTypeMappingDescriptor<TDocument> DisableIdInference(bool disable = true) => Assign(a => a.DisableIdInference = disable);
 	}
 }
