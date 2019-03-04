@@ -50,7 +50,7 @@ using Utf8Json.Internal;
 namespace Elasticsearch.Net
 {
 <# foreach(var t in types) {  #>
-    public sealed class <#= t.Name #>Formatter : IJsonFormatter<<#= t.Name #>>, IObjectPropertyNameFormatter<<#= t.Name #>>
+    internal sealed class <#= t.Name #>Formatter : IJsonFormatter<<#= t.Name #>>, IObjectPropertyNameFormatter<<#= t.Name #>>
     {
         public static readonly <#= t.Name #>Formatter Default = new <#= t.Name #>Formatter();
 
@@ -79,7 +79,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public sealed class Nullable<#= t.Name #>Formatter : IJsonFormatter<<#= t.Name #>?>, IObjectPropertyNameFormatter<<#= t.Name #>?>
+    internal sealed class Nullable<#= t.Name #>Formatter : IJsonFormatter<<#= t.Name #>?>, IObjectPropertyNameFormatter<<#= t.Name #>?>
     {
         public static readonly Nullable<#= t.Name #>Formatter Default = new Nullable<#= t.Name #>Formatter();
 
@@ -127,7 +127,7 @@ namespace Elasticsearch.Net
     }
 
 <# if(t.Name != "Byte") { #>
-    public sealed class <#= t.Name #>ArrayFormatter : IJsonFormatter<<#= t.Name #>[]>
+    internal sealed class <#= t.Name #>ArrayFormatter : IJsonFormatter<<#= t.Name #>[]>
     {
         public static readonly <#= t.Name #>ArrayFormatter Default = new <#= t.Name #>ArrayFormatter();
 

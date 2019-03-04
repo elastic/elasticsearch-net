@@ -17,6 +17,7 @@ namespace Nest.JsonNetSerializer.Converters
 			typeof(CompletionField),
 			typeof(Attachment),
 			typeof(ILazyDocument),
+			typeof(LazyDocument),
 			typeof(GeoCoordinate)
 		};
 

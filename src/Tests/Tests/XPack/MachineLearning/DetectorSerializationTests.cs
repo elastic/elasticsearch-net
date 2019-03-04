@@ -13,7 +13,7 @@ namespace Tests.XPack.MachineLearning
 		[U] public void CanSerializeAndDeserializeAllDetectors()
 		{
 			var detectorTypes =
-				from t in typeof(IDetector).Assembly().Types()
+				from t in typeof(IDetector).Assembly.Types()
 				where typeof(IDetector).IsAssignableFrom(t) &&
 					!t.IsAbstract() &&
 					!typeof(IDescriptor).IsAssignableFrom(t)

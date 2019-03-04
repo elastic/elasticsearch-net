@@ -29,7 +29,7 @@ using System.Text;
 
 namespace Elasticsearch.Net
 {
-    public sealed class BuiltinResolver : IJsonFormatterResolver
+	internal sealed class BuiltinResolver : IJsonFormatterResolver
     {
         public static readonly IJsonFormatterResolver Instance = new BuiltinResolver();
 

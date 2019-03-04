@@ -36,7 +36,7 @@ namespace Elasticsearch.Net
 	/// <summary>
 	/// ObjectResolver by dynamic code generation.
 	/// </summary>
-	public static class DynamicObjectResolver
+	internal static class DynamicObjectResolver
 	{
 		/// <summary>AllowPrivate:False, ExcludeNull:False, NameMutate:Original</summary>
 		public static readonly IJsonFormatterResolver Default = DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal.Instance;

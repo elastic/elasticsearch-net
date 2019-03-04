@@ -15,7 +15,7 @@ namespace Tests.Document.Single.Index
 	{
 		static TestDocument()
 		{
-			using (var stream = typeof(TestDocument).Assembly().GetManifestResourceStream("Tests.Document.Single.Index.Attachment_Test_Document.pdf"))
+			using (var stream = typeof(TestDocument).Assembly.GetManifestResourceStream("Tests.Document.Single.Index.Attachment_Test_Document.pdf"))
 			{
 				using (var memoryStream = new MemoryStream())
 				{

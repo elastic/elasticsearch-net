@@ -30,7 +30,7 @@ namespace Elasticsearch.Net
 {
     // JSON RFC: https://www.ietf.org/rfc/rfc4627.txt
 
-    public struct JsonWriter
+    internal struct JsonWriter
     {
         static readonly byte[] emptyBytes = new byte[0];
 

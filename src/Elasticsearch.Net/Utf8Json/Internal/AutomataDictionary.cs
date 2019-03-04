@@ -34,7 +34,7 @@ namespace Elasticsearch.Net
 {
     // Key = long, Value = int for UTF8String Dictionary
 
-    public class AutomataDictionary : IEnumerable<KeyValuePair<string, int>>
+	internal class AutomataDictionary : IEnumerable<KeyValuePair<string, int>>
     {
         readonly AutomataNode root;
 
@@ -485,7 +485,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public static class AutomataKeyGen
+	internal static class AutomataKeyGen
     {
         public static readonly MethodInfo GetKeyMethod = typeof(AutomataKeyGen).GetRuntimeMethod("GetKey", new[] { typeof(byte*).MakeByRefType(), typeof(int).MakeByRefType() });
         // public static readonly MethodInfo GetKeySafeMethod = typeof(AutomataKeyGen).GetRuntimeMethod("GetKeySafe", new[] { typeof(byte[]), typeof(int).MakeByRefType(), typeof(int).MakeByRefType() });

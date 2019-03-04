@@ -90,7 +90,7 @@ namespace Elasticsearch.Net
 #if DEBUG && NETSTANDARD
 
     // not yet completed so only for debug.
-    public static class ILViewer
+	internal static class ILViewer
     {
         public static string ToPrettyPrintInstruction(MethodBase method)
         {
@@ -208,7 +208,7 @@ namespace Elasticsearch.Net
                 }
             }
         }
-        public struct Instruction
+		internal struct Instruction
         {
             public readonly int Offset;
             public readonly OpCode OpCode;

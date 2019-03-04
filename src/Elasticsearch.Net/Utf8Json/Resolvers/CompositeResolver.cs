@@ -28,7 +28,7 @@ using System.Reflection.Emit;
 
 namespace Elasticsearch.Net
 {
-    public sealed class CompositeResolver : IJsonFormatterResolver
+	internal sealed class CompositeResolver : IJsonFormatterResolver
     {
         public static readonly CompositeResolver Instance = new CompositeResolver();
 
@@ -144,7 +144,7 @@ namespace Elasticsearch.Net
         }
     }
 
-    public abstract class DynamicCompositeResolver : IJsonFormatterResolver
+	internal abstract class DynamicCompositeResolver : IJsonFormatterResolver
     {
         const string ModuleName = "Elasticsearch.Net.DynamicCompositeResolver";
 
@@ -165,8 +165,8 @@ namespace Elasticsearch.Net
         public static IJsonFormatterResolver Create(IJsonFormatter[] formatters, IJsonFormatterResolver[] resolvers)
         {
             var id = Guid.NewGuid().ToString().Replace("-", "");
-            var resolverType = assembly.DefineType("DynamicCompositeResolver_" + id, TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.Sealed, typeof(DynamicCompositeResolver));
-            var cacheType = assembly.DefineType("DynamicCompositeResolverCache_" + id, TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.Sealed, null);
+            var resolverType = assembly.DefineType("DynamicCompositeResolver_" + id, TypeAttributes.Class | TypeAttributes.NotPublic | TypeAttributes.Sealed, typeof(DynamicCompositeResolver));
+            var cacheType = assembly.DefineType("DynamicCompositeResolverCache_" + id, TypeAttributes.Class | TypeAttributes.NotPublic | TypeAttributes.Sealed, null);
             var genericP = cacheType.DefineGenericParameters("T")[0];
 
             var resolverInstanceField = resolverType.DefineField("instance", resolverType, FieldAttributes.Public | FieldAttributes.Static);
