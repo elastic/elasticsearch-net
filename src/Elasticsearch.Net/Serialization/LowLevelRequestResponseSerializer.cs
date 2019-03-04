@@ -14,32 +14,32 @@ namespace Elasticsearch.Net
 		public object Deserialize(Type type, Stream stream)
 		{
 			if (stream == null || stream.CanSeek && stream.Length == 0) return Task.FromResult(type.DefaultValue());
-			return JsonSerializer.NonGeneric.Deserialize(type, stream, null);
+			return JsonSerializer.NonGeneric.Deserialize(type, stream, ElasticsearchNetFormatterResolver.Instance);
 		}
 
 		public T Deserialize<T>(Stream stream)
 		{
 			if (stream == null || stream.CanSeek && stream.Length == 0) return default(T);
-			return JsonSerializer.Deserialize<T>(stream, null);
+			return JsonSerializer.Deserialize<T>(stream, ElasticsearchNetFormatterResolver.Instance);
 		}
 
 		public Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default(CancellationToken))
 		{
 			if (stream == null || stream.CanSeek && stream.Length == 0) return Task.FromResult(type.DefaultValue());
-			return JsonSerializer.NonGeneric.DeserializeAsync(type, stream, null);
+			return JsonSerializer.NonGeneric.DeserializeAsync(type, stream, ElasticsearchNetFormatterResolver.Instance);
 		}
 
 		public Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken))
 		{
 			if (stream == null || stream.CanSeek && stream.Length == 0) return Task.FromResult(default(T));
-			return JsonSerializer.DeserializeAsync<T>(stream, null);
+			return JsonSerializer.DeserializeAsync<T>(stream, ElasticsearchNetFormatterResolver.Instance);
 		}
 
 		public void Serialize<T>(T data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented) =>
-			JsonSerializer.Serialize(writableStream, data, null); // TODO: format indentation
+			JsonSerializer.Serialize(writableStream, data, ElasticsearchNetFormatterResolver.Instance); // TODO: format indentation
 
 		public Task SerializeAsync<T>(T data, Stream writableStream, SerializationFormatting formatting,
 			CancellationToken cancellationToken = default(CancellationToken)) =>
-			JsonSerializer.SerializeAsync(writableStream, data, null); // TODO: format indentation
+			JsonSerializer.SerializeAsync(writableStream, data, ElasticsearchNetFormatterResolver.Instance); // TODO: format indentation
 	}
 }
