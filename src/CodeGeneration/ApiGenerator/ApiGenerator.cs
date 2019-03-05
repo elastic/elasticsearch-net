@@ -37,7 +37,6 @@ namespace ApiGenerator
 			"xpack.ml.put_calendar.json",
 			"xpack.ml.put_calendar_job.json",
 			"xpack.ml.get_calendar_job.json",
-			"xpack.ml.delete_forecast.json",
 			"xpack.ml.find_file_structure.json",
 			"delete_by_query_rethrottle.json",
 			"update_by_query_rethrottle.json",

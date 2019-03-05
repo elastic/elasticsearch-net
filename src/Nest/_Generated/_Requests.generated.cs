@@ -1809,6 +1809,30 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeleteForecastRequest : IRequest<DeleteForecastRequestParameters>
+	{
+		Id JobId { get; }
+		Id ForecastId { get; }
+	}
+	///<summary>Request parameters for XpackMlDeleteForecast <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</pre></summary>
+	public partial class DeleteForecastRequest : PlainRequestBase<DeleteForecastRequestParameters>, IDeleteForecastRequest
+	{
+		protected IDeleteForecastRequest Self => this;
+		///<summary>/_xpack/ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}</summary>
+		///<param name="job_id">this parameter is required</param>
+		///<param name="forecast_id">this parameter is required</param>
+		public DeleteForecastRequest(Id job_id, Id forecast_id) : base(r=>r.Required("job_id", job_id).Required("forecast_id", forecast_id)){}
+		// values part of the url path
+		Id IDeleteForecastRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IDeleteForecastRequest.ForecastId => Self.RouteValues.Get<Id>("forecast_id");
+
+		// Request parameters
+		///<summary>Whether to ignore if `_all` matches no forecasts</summary>
+		public bool? AllowNoForecasts { get => Q<bool?>("allow_no_forecasts"); set => Q("allow_no_forecasts", value); }
+		///<summary>Controls the time to wait until the forecast(s) are deleted. Default to 30 seconds</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteIndexRequest : IRequest<DeleteIndexRequestParameters>
 	{
 		Indices Index { get; }
@@ -2673,18 +2697,6 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetBasicLicenseStatusRequest : IRequest<GetBasicLicenseStatusRequestParameters>
-	{
-	}
-	///<summary>Request parameters for XpackLicenseGetBasicStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
-	public partial class GetBasicLicenseStatusRequest : PlainRequestBase<GetBasicLicenseStatusRequestParameters>, IGetBasicLicenseStatusRequest
-	{
-		protected IGetBasicLicenseStatusRequest Self => this;
-		// values part of the url path
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetAutoFollowPatternRequest : IRequest<GetAutoFollowPatternRequestParameters>
 	{
 		Name Name { get; }
@@ -2700,6 +2712,18 @@ namespace Nest
 		public GetAutoFollowPatternRequest(Name name) : base(r=>r.Optional("name", name)){}
 		// values part of the url path
 		Name IGetAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetBasicLicenseStatusRequest : IRequest<GetBasicLicenseStatusRequestParameters>
+	{
+	}
+	///<summary>Request parameters for XpackLicenseGetBasicStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	public partial class GetBasicLicenseStatusRequest : PlainRequestBase<GetBasicLicenseStatusRequestParameters>, IGetBasicLicenseStatusRequest
+	{
+		protected IGetBasicLicenseStatusRequest Self => this;
+		// values part of the url path
 
 		// Request parameters
 	}

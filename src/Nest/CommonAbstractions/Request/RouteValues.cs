@@ -10,6 +10,7 @@ namespace Nest
 		public string ActionId => GetResolved("action_id");
 		public string Alias => GetResolved("alias");
 		public string CategoryId => GetResolved("category_id");
+		public string ForecastId => GetResolved("forecast_id");
 		public string Context => GetResolved("context");
 		public string DatafeedId => GetResolved("datafeed_id");
 		public string Feature => GetResolved("feature");
