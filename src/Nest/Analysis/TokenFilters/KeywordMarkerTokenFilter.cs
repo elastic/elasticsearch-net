@@ -12,24 +12,30 @@ namespace Nest
 		/// <summary>
 		/// Set to true to lower case all words first. Defaults to false.
 		/// </summary>
-		[DataMember(Name ="ignore_case")]
+		[DataMember(Name = "ignore_case")]
 		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? IgnoreCase { get; set; }
 
 		/// <summary>
 		/// A list of words to use.
 		/// </summary>
-		[DataMember(Name ="keywords")]
+		[DataMember(Name = "keywords")]
 		IEnumerable<string> Keywords { get; set; }
 
 		/// <summary>
 		/// A path (either relative to config location, or absolute) to a list of words.
 		/// </summary>
-		[DataMember(Name ="keywords_path")]
+		[DataMember(Name = "keywords_path")]
 		string KeywordsPath { get; set; }
+
+		/// <summary>
+		/// A regular expression pattern to match against words in the text.
+		/// </summary>
+		[DataMember(Name = "keywords_pattern")]
+		string KeywordsPattern { get; set; }
 	}
 
-	/// <inheritdoc />
+	/// <inheritdoc cref="IKeywordMarkerTokenFilter" />
 	public class KeywordMarkerTokenFilter : TokenFilterBase, IKeywordMarkerTokenFilter
 	{
 		public KeywordMarkerTokenFilter() : base("keyword_marker") { }
@@ -42,9 +48,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		public string KeywordsPath { get; set; }
+
+		/// <inheritdoc />
+		public string KeywordsPattern { get; set; }
 	}
 
-	/// <inheritdoc />
+	/// <inheritdoc cref="IKeywordMarkerTokenFilter" />
 	public class KeywordMarkerTokenFilterDescriptor
 		: TokenFilterDescriptorBase<KeywordMarkerTokenFilterDescriptor, IKeywordMarkerTokenFilter>, IKeywordMarkerTokenFilter
 	{
@@ -54,16 +63,21 @@ namespace Nest
 		IEnumerable<string> IKeywordMarkerTokenFilter.Keywords { get; set; }
 		string IKeywordMarkerTokenFilter.KeywordsPath { get; set; }
 
-		/// <inheritdoc />
+		string IKeywordMarkerTokenFilter.KeywordsPattern { get; set; }
+
+		/// <inheritdoc cref="IKeywordMarkerTokenFilter.IgnoreCase" />
 		public KeywordMarkerTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true) => Assign(a => a.IgnoreCase = ignoreCase);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IKeywordMarkerTokenFilter.KeywordsPath" />
 		public KeywordMarkerTokenFilterDescriptor KeywordsPath(string path) => Assign(a => a.KeywordsPath = path);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IKeywordMarkerTokenFilter.KeywordsPattern" />
+		public KeywordMarkerTokenFilterDescriptor KeywordsPattern(string pattern) => Assign(a => a.KeywordsPattern = pattern);
+
+		/// <inheritdoc cref="IKeywordMarkerTokenFilter.Keywords" />
 		public KeywordMarkerTokenFilterDescriptor Keywords(IEnumerable<string> keywords) => Assign(a => a.Keywords = keywords);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IKeywordMarkerTokenFilter.Keywords" />
 		public KeywordMarkerTokenFilterDescriptor Keywords(params string[] keywords) => Assign(a => a.Keywords = keywords);
 	}
 }
