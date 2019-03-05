@@ -1,3 +1,0 @@
-[submodule "src/Utf8Json"]
-	path = src/Utf8Json
-	url = git@github.com:elastic/Utf8Json.git
