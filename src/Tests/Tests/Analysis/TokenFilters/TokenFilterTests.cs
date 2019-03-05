@@ -334,15 +334,19 @@ namespace Tests.Analysis.TokenFilters
 				.KeywordMarker("marker", t => t
 					.IgnoreCase()
 					.Keywords("a", "b")
+					.KeywordsPattern(".*")
+					.KeywordsPath("path")
 				);
 
-			public override ITokenFilter Initializer => new KeywordMarkerTokenFilter { IgnoreCase = true, Keywords = new[] { "a", "b" } };
+			public override ITokenFilter Initializer => new KeywordMarkerTokenFilter { IgnoreCase = true, Keywords = new[] { "a", "b" }, KeywordsPath = "path", KeywordsPattern = ".*" };
 
 			public override object Json => new
 			{
 				type = "keyword_marker",
 				keywords = new[] { "a", "b" },
-				ignore_case = true
+				ignore_case = true,
+				keywords_path = "path",
+				keywords_pattern = ".*"
 			};
 
 			public override string Name => "marker";
