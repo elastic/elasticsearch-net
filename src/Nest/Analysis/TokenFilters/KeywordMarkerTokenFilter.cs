@@ -25,6 +25,12 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("keywords_path")]
 		string KeywordsPath { get; set; }
+
+		/// <summary>
+		/// A regular expression pattern to match against words in the text.
+		/// </summary>
+		[JsonProperty("keywords_pattern")]
+		string KeywordsPattern { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -40,6 +46,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public string KeywordsPath { get; set; }
+
+		/// <inheritdoc />
+		public string KeywordsPattern { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -52,11 +61,16 @@ namespace Nest
 		IEnumerable<string> IKeywordMarkerTokenFilter.Keywords { get; set; }
 		string IKeywordMarkerTokenFilter.KeywordsPath { get; set; }
 
+		string IKeywordMarkerTokenFilter.KeywordsPattern { get; set; }
+
 		/// <inheritdoc />
 		public KeywordMarkerTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true) => Assign(a => a.IgnoreCase = ignoreCase);
 
 		/// <inheritdoc />
 		public KeywordMarkerTokenFilterDescriptor KeywordsPath(string path) => Assign(a => a.KeywordsPath = path);
+
+		/// <inheritdoc />
+		public KeywordMarkerTokenFilterDescriptor KeywordsPattern(string pattern) => Assign(a => a.KeywordsPattern = pattern);
 
 		/// <inheritdoc />
 		public KeywordMarkerTokenFilterDescriptor Keywords(IEnumerable<string> keywords) => Assign(a => a.Keywords = keywords);
