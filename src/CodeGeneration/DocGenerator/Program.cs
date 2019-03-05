@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace DocGenerator
 {
@@ -14,6 +16,7 @@ namespace DocGenerator
 			}
 
 			var currentDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
+			var globalJson = P(@"..\..\..\global.json");
 			if (currentDirectory.Name == "DocGenerator" && currentDirectory.Parent.Name == "CodeGeneration")
 			{
 				Console.WriteLine("IDE: " + currentDirectory);
@@ -23,11 +26,20 @@ namespace DocGenerator
 			}
 			else
 			{
+			    globalJson = P(@"..\..\..\..\global.json");
 				Console.WriteLine("CMD: " + currentDirectory);
 				InputDirPath = P(@"..\..\..\..\src");
 				OutputDirPath = P(@"..\..\..\..\docs");
 				BuildOutputPath = P(@"..\..\..\..\build\output");
 			}
+
+			var globalJsonVersion = string.Join(".", Regex.Matches(File.ReadAllText(globalJson), "\"version\": \"(.*)\"")
+										 .Last().Groups
+										 .Last().Value
+										 .Split(".")
+										 .Take(2));
+			Console.WriteLine("Using global.json version: " + globalJsonVersion);
+			DocVersion = globalJsonVersion;
 
 			var process = new Process
 			{
@@ -62,7 +74,10 @@ namespace DocGenerator
 
 		public static string BuildOutputPath { get; }
 
-		public static string DocVersion => "5.6";
+		/// <summary>
+		/// The Elasticsearch documentation version to link to
+		/// </summary>
+		public static string DocVersion { get; set; }
 
 		public static string InputDirPath { get; }
 
