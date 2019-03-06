@@ -51,7 +51,8 @@ namespace Tests.Analysis.TokenFilters
 					elision = new
 					{
 						type = "elision",
-						articles = new[] { "a", "b", "c" }
+						articles = new[] { "a", "b", "c" },
+						articles_case = false
 					},
 					hunspell = new
 					{
@@ -329,6 +330,7 @@ namespace Tests.Analysis.TokenFilters
 					)
 					.Elision("elision", t => t
 						.Articles("a", "b", "c")
+						.ArticlesCase(false)
 					)
 #pragma warning disable 618 // Use of HunSpell IgnoreCase
 					.Hunspell("hunspell", t => t
@@ -506,7 +508,7 @@ namespace Tests.Analysis.TokenFilters
 							}
 						},
 						{ "etf", new EdgeNGramTokenFilter { MaxGram = 2, MinGram = 1 } },
-						{ "elision", new ElisionTokenFilter { Articles = new[] { "a", "b", "c" } } },
+						{ "elision", new ElisionTokenFilter { Articles = new[] { "a", "b", "c" }, ArticlesCase = false } },
 						{
 							"hunspell", new HunspellTokenFilter
 							{
