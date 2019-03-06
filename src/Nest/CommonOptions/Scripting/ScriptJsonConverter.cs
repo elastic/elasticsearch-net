@@ -20,28 +20,28 @@ namespace Nest
 			if (!dict.HasAny()) return null;
 
 			IScript script = null;
-			if (dict.ContainsKey("inline"))
+			if (dict.TryGetValue("inline", out JToken inlineToken))
 			{
-				var inline = dict["inline"].ToString();
+				var inline = inlineToken.ToString();
 				script = new InlineScript(inline);
 			}
-			if (dict.ContainsKey("source"))
+			if (dict.TryGetValue("source", out JToken sourceToken))
 			{
-				var inline = dict["source"].ToString();
+				var inline = sourceToken.ToString();
 				script = new InlineScript(inline);
 			}
-			if (dict.ContainsKey("id"))
+			if (dict.TryGetValue("id", out JToken idToken))
 			{
-				var id = dict["id"].ToString();
+				var id = idToken.ToString();
 				script = new IndexedScript(id);
 			}
 
 			if (script == null) return null;
 
-			if (dict.ContainsKey("lang"))
-				script.Lang = dict["lang"].ToString();
-			if (dict.ContainsKey("params"))
-				script.Params = dict["params"].ToObject<Dictionary<string, object>>();
+			if (dict.TryGetValue("lang", out JToken langToken))
+				script.Lang = langToken.ToString();
+			if (dict.TryGetValue("params", out JToken paramsToken))
+				script.Params = paramsToken.ToObject<Dictionary<string, object>>();
 
 			return script;
 		}

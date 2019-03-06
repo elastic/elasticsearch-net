@@ -42,10 +42,13 @@ namespace Nest
 		/// <inheritdoc />
 		public ChainInputDescriptor Input(string name, Func<InputDescriptor, InputContainer> selector)
 		{
-			if (Self.Inputs == null) Self.Inputs = new Dictionary<string, InputContainer>();
-
-			if (Self.Inputs.ContainsKey(name))
-				throw new InvalidOperationException($"An input named '{name}' has already been specified. Choose a different name");
+			if (Self.Inputs != null)
+			{
+				if (Self.Inputs.ContainsKey(name))
+					throw new InvalidOperationException($"An input named '{name}' has already been specified. Choose a different name");
+			}
+			else
+				Self.Inputs = new Dictionary<string, InputContainer>();
 
 			Self.Inputs.Add(name, selector.InvokeOrDefault(new InputDescriptor()));
 			return this;
