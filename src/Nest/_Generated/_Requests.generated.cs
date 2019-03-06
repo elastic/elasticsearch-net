@@ -1827,6 +1827,85 @@ namespace Nest
 	}
 	 
 	[InterfaceDataContract]
+	public partial interface IDeleteCalendarEventRequest : IRequest<DeleteCalendarEventRequestParameters>
+	{
+		[IgnoreDataMember]
+			Id CalendarId { get; }
+		[IgnoreDataMember]
+			Id EventId { get; }
+	}
+
+	///<summary>Request parameters for MlDeleteCalendarEvent <pre>TODO</pre></summary>
+	public partial class DeleteCalendarEventRequest : PlainRequestBase<DeleteCalendarEventRequestParameters>, IDeleteCalendarEventRequest
+	{
+		protected IDeleteCalendarEventRequest Self => this;
+		///<summary>/_ml/calendars/{calendar_id}/events/{event_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		///<param name="event_id">this parameter is required</param>
+		public DeleteCalendarEventRequest(Id calendar_id, Id event_id) : base(r => r.Required("calendar_id", calendar_id).Required("event_id", event_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal DeleteCalendarEventRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IDeleteCalendarEventRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+		[IgnoreDataMember]
+		Id IDeleteCalendarEventRequest.EventId => Self.RouteValues.Get<Id>("event_id");
+
+		// Request parameters
+	}
+	[InterfaceDataContract]
+	public partial interface IDeleteCalendarJobRequest : IRequest<DeleteCalendarJobRequestParameters>
+	{
+		[IgnoreDataMember]
+			Id CalendarId { get; }
+		[IgnoreDataMember]
+			Id JobId { get; }
+	}
+
+	///<summary>Request parameters for MlDeleteCalendarJob <pre>TODO</pre></summary>
+	public partial class DeleteCalendarJobRequest : PlainRequestBase<DeleteCalendarJobRequestParameters>, IDeleteCalendarJobRequest
+	{
+		protected IDeleteCalendarJobRequest Self => this;
+		///<summary>/_ml/calendars/{calendar_id}/jobs/{job_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		///<param name="job_id">this parameter is required</param>
+		public DeleteCalendarJobRequest(Id calendar_id, Id job_id) : base(r => r.Required("calendar_id", calendar_id).Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal DeleteCalendarJobRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IDeleteCalendarJobRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+		[IgnoreDataMember]
+		Id IDeleteCalendarJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+	}
+	[InterfaceDataContract]
+	public partial interface IDeleteCalendarRequest : IRequest<DeleteCalendarRequestParameters>
+	{
+		[IgnoreDataMember]
+			Id CalendarId { get; }
+	}
+
+	///<summary>Request parameters for MlDeleteCalendar <pre>TODO</pre></summary>
+	public partial class DeleteCalendarRequest : PlainRequestBase<DeleteCalendarRequestParameters>, IDeleteCalendarRequest
+	{
+		protected IDeleteCalendarRequest Self => this;
+		///<summary>/_ml/calendars/{calendar_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		public DeleteCalendarRequest(Id calendar_id) : base(r => r.Required("calendar_id", calendar_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal DeleteCalendarRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IDeleteCalendarRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+	}
+	[InterfaceDataContract]
 	public partial interface IDeleteDatafeedRequest : IRequest<DeleteDatafeedRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -2905,6 +2984,57 @@ namespace Nest
 		Id IGetBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		[IgnoreDataMember]
 		Timestamp IGetBucketsRequest.Timestamp => Self.RouteValues.Get<Timestamp>("timestamp");
+
+		// Request parameters
+	}
+	[InterfaceDataContract]
+	public partial interface IGetCalendarEventsRequest : IRequest<GetCalendarEventsRequestParameters>
+	{
+		[IgnoreDataMember]
+			Id CalendarId { get; }
+	}
+
+	///<summary>Request parameters for MlGetCalendarEvents <pre>TODO</pre></summary>
+	public partial class GetCalendarEventsRequest : PlainRequestBase<GetCalendarEventsRequestParameters>, IGetCalendarEventsRequest
+	{
+		protected IGetCalendarEventsRequest Self => this;
+		///<summary>/_ml/calendars/{calendar_id}/events</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		public GetCalendarEventsRequest(Id calendar_id) : base(r => r.Required("calendar_id", calendar_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal GetCalendarEventsRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IGetCalendarEventsRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+		///<summary>Get events for the job. When this option is used calendar_id must be '_all'</summary>
+		public string JobId { get => Q<string>("job_id"); set => Q("job_id", value); }
+		///<summary>Get events after this time</summary>
+		public string Start { get => Q<string>("start"); set => Q("start", value); }
+		///<summary>Get events before this time</summary>
+		public DateTimeOffset? End { get => Q<DateTimeOffset?>("end"); set => Q("end", value); }
+	}
+	[InterfaceDataContract]
+	public partial interface IGetCalendarsRequest : IRequest<GetCalendarsRequestParameters>
+	{
+		[IgnoreDataMember]
+			Id CalendarId { get; }
+	}
+
+	///<summary>Request parameters for MlGetCalendars <pre>TODO</pre></summary>
+	public partial class GetCalendarsRequest : PlainRequestBase<GetCalendarsRequestParameters>, IGetCalendarsRequest
+	{
+		protected IGetCalendarsRequest Self => this;
+		///<summary>/_ml/calendars</summary>
+		public GetCalendarsRequest() : base(){}
+		///<summary>/_ml/calendars/{calendar_id}</summary>
+		///<param name="calendar_id">Optional, accepts null</param>
+		public GetCalendarsRequest(Id calendar_id) : base(r => r.Optional("calendar_id", calendar_id)){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IGetCalendarsRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
 
 		// Request parameters
 	}
@@ -4580,6 +4710,29 @@ namespace Nest
 		// Request parameters
 	}
 	[InterfaceDataContract]
+	public partial interface IPostCalendarEventsRequest : IRequest<PostCalendarEventsRequestParameters>
+	{
+		[IgnoreDataMember]
+			Id CalendarId { get; }
+	}
+
+	///<summary>Request parameters for MlPostCalendarEvents <pre>TODO</pre></summary>
+	public partial class PostCalendarEventsRequest : PlainRequestBase<PostCalendarEventsRequestParameters>, IPostCalendarEventsRequest
+	{
+		protected IPostCalendarEventsRequest Self => this;
+		///<summary>/_ml/calendars/{calendar_id}/events</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		public PostCalendarEventsRequest(Id calendar_id) : base(r => r.Required("calendar_id", calendar_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal PostCalendarEventsRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IPostCalendarEventsRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+	}
+	[InterfaceDataContract]
 	public partial interface IPostJobDataRequest : IRequest<PostJobDataRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -4675,6 +4828,57 @@ namespace Nest
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+	}
+	[InterfaceDataContract]
+	public partial interface IPutCalendarJobRequest : IRequest<PutCalendarJobRequestParameters>
+	{
+		[IgnoreDataMember]
+			Id CalendarId { get; }
+		[IgnoreDataMember]
+			Id JobId { get; }
+	}
+
+	///<summary>Request parameters for MlPutCalendarJob <pre>TODO</pre></summary>
+	public partial class PutCalendarJobRequest : PlainRequestBase<PutCalendarJobRequestParameters>, IPutCalendarJobRequest
+	{
+		protected IPutCalendarJobRequest Self => this;
+		///<summary>/_ml/calendars/{calendar_id}/jobs/{job_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		///<param name="job_id">this parameter is required</param>
+		public PutCalendarJobRequest(Id calendar_id, Id job_id) : base(r => r.Required("calendar_id", calendar_id).Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal PutCalendarJobRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IPutCalendarJobRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+		[IgnoreDataMember]
+		Id IPutCalendarJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+	}
+	[InterfaceDataContract]
+	public partial interface IPutCalendarRequest : IRequest<PutCalendarRequestParameters>
+	{
+		[IgnoreDataMember]
+			Id CalendarId { get; }
+	}
+
+	///<summary>Request parameters for MlPutCalendar <pre>TODO</pre></summary>
+	public partial class PutCalendarRequest : PlainRequestBase<PutCalendarRequestParameters>, IPutCalendarRequest
+	{
+		protected IPutCalendarRequest Self => this;
+		///<summary>/_ml/calendars/{calendar_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		public PutCalendarRequest(Id calendar_id) : base(r => r.Required("calendar_id", calendar_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal PutCalendarRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IPutCalendarRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
 	}
 	[InterfaceDataContract]
 	public partial interface IPutDatafeedRequest : IRequest<PutDatafeedRequestParameters>

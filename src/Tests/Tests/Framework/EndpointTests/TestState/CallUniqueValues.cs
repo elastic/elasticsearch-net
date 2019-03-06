@@ -40,6 +40,13 @@ namespace Tests.Framework.Integration
 
 		public T ExtendedValue<T>(string key) where T : class => ExtendedValues[CurrentView][key] as T;
 
+		public bool TryGetExtendedValue<T>(string key, out T t) where T : class
+		{
+			var tryGetValue = ExtendedValues[CurrentView].TryGetValue(key, out var o);
+			t = o as T;
+			return tryGetValue;
+		}
+
 		public void ExtendedValue<T>(string key, T value) where T : class => ExtendedValues[CurrentView][key] = value;
 
 		public T ExtendedValue<T>(string key, Func<T> value) where T : class =>

@@ -3318,6 +3318,72 @@ namespace Nest
 			throw InvalidDispatch("MlCloseJob", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_close");
 		}
 		
+		internal TResponse MlDeleteCalendarDispatch<TResponse>(IRequest<DeleteCalendarRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.MlDeleteCalendar<TResponse>(p.RouteValues.CalendarId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlDeleteCalendar", p, new [] { DELETE }, "/_ml/calendars/{calendar_id}");
+		}
+		
+		internal Task<TResponse> MlDeleteCalendarDispatchAsync<TResponse>(IRequest<DeleteCalendarRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.MlDeleteCalendarAsync<TResponse>(p.RouteValues.CalendarId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlDeleteCalendar", p, new [] { DELETE }, "/_ml/calendars/{calendar_id}");
+		}
+		
+		internal TResponse MlDeleteCalendarEventDispatch<TResponse>(IRequest<DeleteCalendarEventRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.EventId)) return _lowLevel.MlDeleteCalendarEvent<TResponse>(p.RouteValues.CalendarId,p.RouteValues.EventId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlDeleteCalendarEvent", p, new [] { DELETE }, "/_ml/calendars/{calendar_id}/events/{event_id}");
+		}
+		
+		internal Task<TResponse> MlDeleteCalendarEventDispatchAsync<TResponse>(IRequest<DeleteCalendarEventRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.EventId)) return _lowLevel.MlDeleteCalendarEventAsync<TResponse>(p.RouteValues.CalendarId,p.RouteValues.EventId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlDeleteCalendarEvent", p, new [] { DELETE }, "/_ml/calendars/{calendar_id}/events/{event_id}");
+		}
+		
+		internal TResponse MlDeleteCalendarJobDispatch<TResponse>(IRequest<DeleteCalendarJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.JobId)) return _lowLevel.MlDeleteCalendarJob<TResponse>(p.RouteValues.CalendarId,p.RouteValues.JobId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlDeleteCalendarJob", p, new [] { DELETE }, "/_ml/calendars/{calendar_id}/jobs/{job_id}");
+		}
+		
+		internal Task<TResponse> MlDeleteCalendarJobDispatchAsync<TResponse>(IRequest<DeleteCalendarJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.JobId)) return _lowLevel.MlDeleteCalendarJobAsync<TResponse>(p.RouteValues.CalendarId,p.RouteValues.JobId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlDeleteCalendarJob", p, new [] { DELETE }, "/_ml/calendars/{calendar_id}/jobs/{job_id}");
+		}
+		
 		internal TResponse MlDeleteDatafeedDispatch<TResponse>(IRequest<DeleteDatafeedRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -3478,6 +3544,56 @@ namespace Nest
 					break;
 			}
 			throw InvalidDispatch("MlGetBuckets", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/results/buckets/{timestamp}", "/_ml/anomaly_detectors/{job_id}/results/buckets");
+		}
+		
+		internal TResponse MlGetCalendarsDispatch<TResponse>(IRequest<GetCalendarsRequestParameters> p,SerializableData<IGetCalendarsRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.CalendarId)) return _lowLevel.MlGetCalendars<TResponse>(p.RouteValues.CalendarId,p.RequestParameters);
+						return _lowLevel.MlGetCalendars<TResponse>(p.RequestParameters);
+				case POST:
+					if (AllSet(p.RouteValues.CalendarId)) return _lowLevel.MlGetCalendars<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters);
+						return _lowLevel.MlGetCalendars<TResponse>(body,p.RequestParameters);
+			}
+			throw InvalidDispatch("MlGetCalendars", p, new [] { GET, POST }, "/_ml/calendars", "/_ml/calendars/{calendar_id}");
+		}
+		
+		internal Task<TResponse> MlGetCalendarsDispatchAsync<TResponse>(IRequest<GetCalendarsRequestParameters> p,SerializableData<IGetCalendarsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.CalendarId)) return _lowLevel.MlGetCalendarsAsync<TResponse>(p.RouteValues.CalendarId,p.RequestParameters,ct);
+						return _lowLevel.MlGetCalendarsAsync<TResponse>(p.RequestParameters,ct);
+				case POST:
+					if (AllSet(p.RouteValues.CalendarId)) return _lowLevel.MlGetCalendarsAsync<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters,ct);
+						return _lowLevel.MlGetCalendarsAsync<TResponse>(body,p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("MlGetCalendars", p, new [] { GET, POST }, "/_ml/calendars", "/_ml/calendars/{calendar_id}");
+		}
+		
+		internal TResponse MlGetCalendarEventsDispatch<TResponse>(IRequest<GetCalendarEventsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.MlGetCalendarEvents<TResponse>(p.RouteValues.CalendarId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlGetCalendarEvents", p, new [] { GET }, "/_ml/calendars/{calendar_id}/events");
+		}
+		
+		internal Task<TResponse> MlGetCalendarEventsDispatchAsync<TResponse>(IRequest<GetCalendarEventsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.MlGetCalendarEventsAsync<TResponse>(p.RouteValues.CalendarId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlGetCalendarEvents", p, new [] { GET }, "/_ml/calendars/{calendar_id}/events");
 		}
 		
 		internal TResponse MlGetCategoriesDispatch<TResponse>(IRequest<GetCategoriesRequestParameters> p,SerializableData<IGetCategoriesRequest> body) where TResponse : class, IElasticsearchResponse, new()
@@ -3738,6 +3854,28 @@ namespace Nest
 			throw InvalidDispatch("MlOpenJob", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_open");
 		}
 		
+		internal TResponse MlPostCalendarEventsDispatch<TResponse>(IRequest<PostCalendarEventsRequestParameters> p,SerializableData<IPostCalendarEventsRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.MlPostCalendarEvents<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlPostCalendarEvents", p, new [] { POST }, "/_ml/calendars/{calendar_id}/events");
+		}
+		
+		internal Task<TResponse> MlPostCalendarEventsDispatchAsync<TResponse>(IRequest<PostCalendarEventsRequestParameters> p,SerializableData<IPostCalendarEventsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.MlPostCalendarEventsAsync<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlPostCalendarEvents", p, new [] { POST }, "/_ml/calendars/{calendar_id}/events");
+		}
+		
 		internal TResponse MlPostDataDispatch<TResponse>(IRequest<PostJobDataRequestParameters> p,SerializableData<IPostJobDataRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -3780,6 +3918,50 @@ namespace Nest
 					break;
 			}
 			throw InvalidDispatch("MlPreviewDatafeed", p, new [] { GET }, "/_ml/datafeeds/{datafeed_id}/_preview");
+		}
+		
+		internal TResponse MlPutCalendarDispatch<TResponse>(IRequest<PutCalendarRequestParameters> p,SerializableData<IPutCalendarRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.MlPutCalendar<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlPutCalendar", p, new [] { PUT }, "/_ml/calendars/{calendar_id}");
+		}
+		
+		internal Task<TResponse> MlPutCalendarDispatchAsync<TResponse>(IRequest<PutCalendarRequestParameters> p,SerializableData<IPutCalendarRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.MlPutCalendarAsync<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlPutCalendar", p, new [] { PUT }, "/_ml/calendars/{calendar_id}");
+		}
+		
+		internal TResponse MlPutCalendarJobDispatch<TResponse>(IRequest<PutCalendarJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.JobId)) return _lowLevel.MlPutCalendarJob<TResponse>(p.RouteValues.CalendarId,p.RouteValues.JobId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlPutCalendarJob", p, new [] { PUT }, "/_ml/calendars/{calendar_id}/jobs/{job_id}");
+		}
+		
+		internal Task<TResponse> MlPutCalendarJobDispatchAsync<TResponse>(IRequest<PutCalendarJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.JobId)) return _lowLevel.MlPutCalendarJobAsync<TResponse>(p.RouteValues.CalendarId,p.RouteValues.JobId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlPutCalendarJob", p, new [] { PUT }, "/_ml/calendars/{calendar_id}/jobs/{job_id}");
 		}
 		
 		internal TResponse MlPutDatafeedDispatch<TResponse>(IRequest<PutDatafeedRequestParameters> p,SerializableData<IPutDatafeedRequest> body) where TResponse : class, IElasticsearchResponse, new()

@@ -17,14 +17,14 @@ namespace ApiGenerator.Domain
 		public static IEnumerable<Constructor> DescriptorConstructors(CsharpMethod method)
 		{
 			var m = method.DescriptorType;
-			var generic = method.DescriptorTypeGeneric.Replace("<", "").Replace(">", "").Split(",").First().Trim();
+			var generic = method.DescriptorTypeGeneric?.Replace("<", "").Replace(">", "").Split(",").First().Trim();
 			var generateGeneric = !string.IsNullOrEmpty(method.DescriptorTypeGeneric);
 			return GenerateConstructors(method, true, generateGeneric, m, generic);
 		}
 
 		public static IEnumerable<Constructor> RequestConstructors(CsharpMethod method, bool inheritsFromPlainRequestBase)
 		{
-			var generic = method.RequestTypeGeneric.Replace("<", "").Replace(">", "").Split(",").First().Trim();
+			var generic = method.RequestTypeGeneric?.Replace("<", "").Replace(">", "").Split(",").First().Trim();
 			return GenerateConstructors(method, inheritsFromPlainRequestBase, !inheritsFromPlainRequestBase, method.RequestType, generic);
 		}
 

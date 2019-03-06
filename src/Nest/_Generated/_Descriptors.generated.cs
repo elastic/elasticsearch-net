@@ -4381,6 +4381,55 @@ namespace Nest
 		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
 		public CloseJobDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
+	///<summary>descriptor for MlDeleteCalendar <pre>TODO</pre></summary>
+	public partial class DeleteCalendarDescriptor  : RequestDescriptorBase<DeleteCalendarDescriptor,DeleteCalendarRequestParameters, IDeleteCalendarRequest>, IDeleteCalendarRequest
+	{ 
+		///<summary>/_ml/calendars/{calendar_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		public DeleteCalendarDescriptor(Id calendar_id) : base(r => r.Required("calendar_id", calendar_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal DeleteCalendarDescriptor() : base(){}
+		// values part of the url path
+		Id IDeleteCalendarRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for MlDeleteCalendarEvent <pre>TODO</pre></summary>
+	public partial class DeleteCalendarEventDescriptor  : RequestDescriptorBase<DeleteCalendarEventDescriptor,DeleteCalendarEventRequestParameters, IDeleteCalendarEventRequest>, IDeleteCalendarEventRequest
+	{ 
+		///<summary>/_ml/calendars/{calendar_id}/events/{event_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		///<param name="event_id">this parameter is required</param>
+		public DeleteCalendarEventDescriptor(Id calendar_id, Id event_id) : base(r => r.Required("calendar_id", calendar_id).Required("event_id", event_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal DeleteCalendarEventDescriptor() : base(){}
+		// values part of the url path
+		Id IDeleteCalendarEventRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+		Id IDeleteCalendarEventRequest.EventId => Self.RouteValues.Get<Id>("event_id");
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for MlDeleteCalendarJob <pre>TODO</pre></summary>
+	public partial class DeleteCalendarJobDescriptor  : RequestDescriptorBase<DeleteCalendarJobDescriptor,DeleteCalendarJobRequestParameters, IDeleteCalendarJobRequest>, IDeleteCalendarJobRequest
+	{ 
+		///<summary>/_ml/calendars/{calendar_id}/jobs/{job_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		///<param name="job_id">this parameter is required</param>
+		public DeleteCalendarJobDescriptor(Id calendar_id, Id job_id) : base(r => r.Required("calendar_id", calendar_id).Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal DeleteCalendarJobDescriptor() : base(){}
+		// values part of the url path
+		Id IDeleteCalendarJobRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+		Id IDeleteCalendarJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+
+	}
 	///<summary>descriptor for MlDeleteDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
 	public partial class DeleteDatafeedDescriptor  : RequestDescriptorBase<DeleteDatafeedDescriptor,DeleteDatafeedRequestParameters, IDeleteDatafeedRequest>, IDeleteDatafeedRequest
 	{ 
@@ -4496,6 +4545,44 @@ namespace Nest
 
 		// Request parameters
 
+	}
+	///<summary>descriptor for MlGetCalendars <pre>TODO</pre></summary>
+	public partial class GetCalendarsDescriptor  : RequestDescriptorBase<GetCalendarsDescriptor,GetCalendarsRequestParameters, IGetCalendarsRequest>, IGetCalendarsRequest
+	{ 
+		///<summary>/_ml/calendars</summary>
+		public GetCalendarsDescriptor() : base(){}
+		///<summary>/_ml/calendars/{calendar_id}</summary>
+		///<param name="calendar_id">Optional, accepts null</param>
+		public GetCalendarsDescriptor(Id calendar_id) : base(r => r.Optional("calendar_id", calendar_id)){}
+		// values part of the url path
+		Id IGetCalendarsRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		///<summary>The ID of the calendar to fetch</summary>
+		public GetCalendarsDescriptor CalendarId(Id calendarId) => Assign(a=>a.RouteValues.Optional("calendar_id", calendarId));
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for MlGetCalendarEvents <pre>TODO</pre></summary>
+	public partial class GetCalendarEventsDescriptor  : RequestDescriptorBase<GetCalendarEventsDescriptor,GetCalendarEventsRequestParameters, IGetCalendarEventsRequest>, IGetCalendarEventsRequest
+	{ 
+		///<summary>/_ml/calendars/{calendar_id}/events</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		public GetCalendarEventsDescriptor(Id calendar_id) : base(r => r.Required("calendar_id", calendar_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal GetCalendarEventsDescriptor() : base(){}
+		// values part of the url path
+		Id IGetCalendarEventsRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+
+		///<summary>Get events for the job. When this option is used calendar_id must be '_all'</summary>
+		public GetCalendarEventsDescriptor JobId(string jobId) => Qs("job_id", jobId);
+		///<summary>Get events after this time</summary>
+		public GetCalendarEventsDescriptor Start(string start) => Qs("start", start);
+		///<summary>Get events before this time</summary>
+		public GetCalendarEventsDescriptor End(DateTimeOffset? end) => Qs("end", end);
 	}
 	///<summary>descriptor for MlGetCategories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
 	public partial class GetCategoriesDescriptor  : RequestDescriptorBase<GetCategoriesDescriptor,GetCategoriesRequestParameters, IGetCategoriesRequest>, IGetCategoriesRequest
@@ -4679,6 +4766,21 @@ namespace Nest
 		// Request parameters
 
 	}
+	///<summary>descriptor for MlPostCalendarEvents <pre>TODO</pre></summary>
+	public partial class PostCalendarEventsDescriptor  : RequestDescriptorBase<PostCalendarEventsDescriptor,PostCalendarEventsRequestParameters, IPostCalendarEventsRequest>, IPostCalendarEventsRequest
+	{ 
+		///<summary>/_ml/calendars/{calendar_id}/events</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		public PostCalendarEventsDescriptor(Id calendar_id) : base(r => r.Required("calendar_id", calendar_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal PostCalendarEventsDescriptor() : base(){}
+		// values part of the url path
+		Id IPostCalendarEventsRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+
+	}
 	///<summary>descriptor for MlPostData <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
 	public partial class PostJobDataDescriptor  : RequestDescriptorBase<PostJobDataDescriptor,PostJobDataRequestParameters, IPostJobDataRequest>, IPostJobDataRequest
 	{ 
@@ -4709,6 +4811,38 @@ namespace Nest
 		internal PreviewDatafeedDescriptor() : base(){}
 		// values part of the url path
 		Id IPreviewDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for MlPutCalendar <pre>TODO</pre></summary>
+	public partial class PutCalendarDescriptor  : RequestDescriptorBase<PutCalendarDescriptor,PutCalendarRequestParameters, IPutCalendarRequest>, IPutCalendarRequest
+	{ 
+		///<summary>/_ml/calendars/{calendar_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		public PutCalendarDescriptor(Id calendar_id) : base(r => r.Required("calendar_id", calendar_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal PutCalendarDescriptor() : base(){}
+		// values part of the url path
+		Id IPutCalendarRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for MlPutCalendarJob <pre>TODO</pre></summary>
+	public partial class PutCalendarJobDescriptor  : RequestDescriptorBase<PutCalendarJobDescriptor,PutCalendarJobRequestParameters, IPutCalendarJobRequest>, IPutCalendarJobRequest
+	{ 
+		///<summary>/_ml/calendars/{calendar_id}/jobs/{job_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		///<param name="job_id">this parameter is required</param>
+		public PutCalendarJobDescriptor(Id calendar_id, Id job_id) : base(r => r.Required("calendar_id", calendar_id).Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal PutCalendarJobDescriptor() : base(){}
+		// values part of the url path
+		Id IPutCalendarJobRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+		Id IPutCalendarJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
 		// Request parameters
 

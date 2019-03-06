@@ -57,6 +57,8 @@ namespace Tests.Framework
 
 		protected T ExtendedValue<T>(string key) where T : class => UniqueValues.ExtendedValue<T>(key);
 
+		protected bool TryGetExtendedValue<T>(string key, out T t) where T : class => UniqueValues.TryGetExtendedValue(key, out t);
+
 		protected void ExtendedValue<T>(string key, T value) where T : class => UniqueValues.ExtendedValue(key, value);
 
 		protected virtual TDescriptor NewDescriptor() => Activator.CreateInstance<TDescriptor>();
