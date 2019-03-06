@@ -13,7 +13,6 @@ namespace Elasticsearch.Net
 	{
 		private const int BufferSize = 81920;
 		private static readonly IDisposable EmptyDisposable = new MemoryStream();
-		private static readonly VoidResponse Void = new VoidResponse();
 		private readonly CancellationToken _cancellationToken;
 		private readonly bool _disableDirectStreaming;
 
@@ -187,7 +186,7 @@ namespace Elasticsearch.Net
 		private void SetVoidResult(ElasticsearchResponse<VoidResponse> result, Stream response)
 		{
 			response.Dispose();
-			result.Body = Void;
+			result.Body = new VoidResponse();
 		}
 	}
 }
