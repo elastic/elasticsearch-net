@@ -8,7 +8,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Retrieves configuration for machine learning jobs.
+		/// Retrieves calendar configuration information for machine learning jobs.
 		/// </summary>
 		IGetCalendarsResponse GetCalendars(Func<GetCalendarsDescriptor, IGetCalendarsRequest> selector = null);
 

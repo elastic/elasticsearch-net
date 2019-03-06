@@ -8,7 +8,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Instantiates a machine learning calendar.
+		/// Creates a machine learning calendar.
 		/// </summary>
 		IPutCalendarResponse PutCalendar(Id calendarId, Func<PutCalendarDescriptor, IPutCalendarRequest> selector = null);
 

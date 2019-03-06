@@ -9,7 +9,7 @@ namespace Nest
 	public partial interface IDeleteCalendarJobResponse : IResponse
 	{
 		[JsonProperty("calendar_id")]
-		Id CalendarId { get; }
+		string CalendarId { get; }
 
 		[JsonProperty("job_ids")]
 		IReadOnlyCollection<Id> JobIds { get; }
@@ -21,7 +21,7 @@ namespace Nest
 	/// <inheritdoc cref="IDeleteCalendarJobResponse" />
 	public class DeleteCalendarJobResponse : ResponseBase, IDeleteCalendarJobResponse
 	{
-		public Id CalendarId { get; internal set; }
+		public string CalendarId { get; internal set; }
 
 		public string Description { get; internal set; }
 
