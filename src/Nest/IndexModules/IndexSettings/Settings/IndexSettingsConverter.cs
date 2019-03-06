@@ -256,9 +256,8 @@ namespace Nest
 			JsonSerializer serializer = null
 		)
 		{
-			if (!settings.ContainsKey(key)) return;
+			if (!settings.TryGetValue(key, out JProperty v)) return;
 
-			var v = settings[key];
 			var value = serializer == null ? v.Value.ToObject<T>() : v.Value.ToObject<T>(serializer);
 			assign(value);
 			s.Add(key, value);
@@ -269,9 +268,8 @@ namespace Nest
 			Action<TItem> assign2, JsonSerializer serializer = null
 		)
 		{
-			if (!settings.ContainsKey(key)) return;
+			if (!settings.TryGetValue(key, out JProperty v)) return;
 
-			var v = settings[key];
 			if (v.Value is JArray)
 			{
 				var value = serializer == null ? v.Value.ToObject<TArray>() : v.Value.ToObject<TArray>(serializer);

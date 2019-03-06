@@ -83,11 +83,11 @@ namespace Nest
 
 		private T GetOrDefault<T>(string key, Dictionary<string, JToken> properties)
 		{
-			if (!properties.ContainsKey(key)) return default(T);
+			if (!properties.TryGetValue(key, out JToken value)) return default(T);
 #if DOTNETCORE
-			return properties[key].ToObject<T>();
+			return value.ToObject<T>();
 #else
-			return (T)Convert.ChangeType(properties[key], typeof(T));
+			return (T)Convert.ChangeType(value, typeof(T));
 #endif
 		}
 
