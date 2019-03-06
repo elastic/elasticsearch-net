@@ -94,11 +94,11 @@ namespace Tests.Analysis.TokenFilters
 
 		public class ElisionTests : TokenFilterAssertionBase<ElisionTests>
 		{
-			public override FuncTokenFilters Fluent => (n, tf) => tf.Elision(n, t => t.Articles("a", "b", "c"));
+			public override FuncTokenFilters Fluent => (n, tf) => tf.Elision(n, t => t.Articles("a", "b", "c").ArticlesCase());
 
-			public override ITokenFilter Initializer => new ElisionTokenFilter { Articles = new[] { "a", "b", "c" } };
+			public override ITokenFilter Initializer => new ElisionTokenFilter { Articles = new[] { "a", "b", "c" }, ArticlesCase = true };
 
-			public override object Json => new { type = "elision", articles = new[] { "a", "b", "c" } };
+			public override object Json => new { type = "elision", articles = new[] { "a", "b", "c" }, articles_case = true };
 			public override string Name => "el";
 		}
 
