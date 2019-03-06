@@ -8,7 +8,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Retrieves configuration for machine learning jobs.
+		/// Retrieves machine learning job configuration information
 		/// </summary>
 		IGetJobsResponse GetJobs(Func<GetJobsDescriptor, IGetJobsRequest> selector = null);
 

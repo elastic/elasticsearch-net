@@ -1786,6 +1786,63 @@ namespace Nest
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeleteCalendarEventRequest : IRequest<DeleteCalendarEventRequestParameters>
+	{
+		Id CalendarId { get; }
+		Id EventId { get; }
+	}
+	///<summary>Request parameters for XpackMlDeleteCalendarEvent <pre></pre></summary>
+	public partial class DeleteCalendarEventRequest : PlainRequestBase<DeleteCalendarEventRequestParameters>, IDeleteCalendarEventRequest
+	{
+		protected IDeleteCalendarEventRequest Self => this;
+		///<summary>/_xpack/ml/calendars/{calendar_id}/events/{event_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		///<param name="event_id">this parameter is required</param>
+		public DeleteCalendarEventRequest(Id calendar_id, Id event_id) : base(r=>r.Required("calendar_id", calendar_id).Required("event_id", event_id)){}
+		// values part of the url path
+		Id IDeleteCalendarEventRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+		Id IDeleteCalendarEventRequest.EventId => Self.RouteValues.Get<Id>("event_id");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeleteCalendarJobRequest : IRequest<DeleteCalendarJobRequestParameters>
+	{
+		Id CalendarId { get; }
+		Id JobId { get; }
+	}
+	///<summary>Request parameters for XpackMlDeleteCalendarJob <pre></pre></summary>
+	public partial class DeleteCalendarJobRequest : PlainRequestBase<DeleteCalendarJobRequestParameters>, IDeleteCalendarJobRequest
+	{
+		protected IDeleteCalendarJobRequest Self => this;
+		///<summary>/_xpack/ml/calendars/{calendar_id}/jobs/{job_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		///<param name="job_id">this parameter is required</param>
+		public DeleteCalendarJobRequest(Id calendar_id, Id job_id) : base(r=>r.Required("calendar_id", calendar_id).Required("job_id", job_id)){}
+		// values part of the url path
+		Id IDeleteCalendarJobRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+		Id IDeleteCalendarJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeleteCalendarRequest : IRequest<DeleteCalendarRequestParameters>
+	{
+		Id CalendarId { get; }
+	}
+	///<summary>Request parameters for XpackMlDeleteCalendar <pre></pre></summary>
+	public partial class DeleteCalendarRequest : PlainRequestBase<DeleteCalendarRequestParameters>, IDeleteCalendarRequest
+	{
+		protected IDeleteCalendarRequest Self => this;
+		///<summary>/_xpack/ml/calendars/{calendar_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		public DeleteCalendarRequest(Id calendar_id) : base(r=>r.Required("calendar_id", calendar_id)){}
+		// values part of the url path
+		Id IDeleteCalendarRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteDatafeedRequest : IRequest<DeleteDatafeedRequestParameters>
 	{
 		Id DatafeedId { get; }
@@ -2733,6 +2790,48 @@ namespace Nest
 		public GetBucketsRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 		// values part of the url path
 		Id IGetBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetCalendarEventsRequest : IRequest<GetCalendarEventsRequestParameters>
+	{
+		Id CalendarId { get; }
+	}
+	///<summary>Request parameters for XpackMlGetCalendarEvents <pre></pre></summary>
+	public partial class GetCalendarEventsRequest : PlainRequestBase<GetCalendarEventsRequestParameters>, IGetCalendarEventsRequest
+	{
+		protected IGetCalendarEventsRequest Self => this;
+		///<summary>/_xpack/ml/calendars/{calendar_id}/events</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		public GetCalendarEventsRequest(Id calendar_id) : base(r=>r.Required("calendar_id", calendar_id)){}
+		// values part of the url path
+		Id IGetCalendarEventsRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+		///<summary>Get events for the job. When this option is used calendar_id must be '_all'</summary>
+		public string JobId { get => Q<string>("job_id"); set => Q("job_id", value); }
+		///<summary>Get events after this time</summary>
+		public string Start { get => Q<string>("start"); set => Q("start", value); }
+		///<summary>Get events before this time</summary>
+		public DateTimeOffset? End { get => Q<DateTimeOffset?>("end"); set => Q("end", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetCalendarsRequest : IRequest<GetCalendarsRequestParameters>
+	{
+		Id CalendarId { get; }
+	}
+	///<summary>Request parameters for XpackMlGetCalendars <pre></pre></summary>
+	public partial class GetCalendarsRequest : PlainRequestBase<GetCalendarsRequestParameters>, IGetCalendarsRequest
+	{
+		protected IGetCalendarsRequest Self => this;
+		///<summary>/_xpack/ml/calendars</summary>
+		public GetCalendarsRequest() : base(){}
+		///<summary>/_xpack/ml/calendars/{calendar_id}</summary>
+		///<param name="calendar_id">Optional, accepts null</param>
+		public GetCalendarsRequest(Id calendar_id) : base(r=>r.Optional("calendar_id", calendar_id)){}
+		// values part of the url path
+		Id IGetCalendarsRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
 
 		// Request parameters
 	}
@@ -4263,6 +4362,23 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IPostCalendarEventsRequest : IRequest<PostCalendarEventsRequestParameters>
+	{
+		Id CalendarId { get; }
+	}
+	///<summary>Request parameters for XpackMlPostCalendarEvents <pre></pre></summary>
+	public partial class PostCalendarEventsRequest : PlainRequestBase<PostCalendarEventsRequestParameters>, IPostCalendarEventsRequest
+	{
+		protected IPostCalendarEventsRequest Self => this;
+		///<summary>/_xpack/ml/calendars/{calendar_id}/events</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		public PostCalendarEventsRequest(Id calendar_id) : base(r=>r.Required("calendar_id", calendar_id)){}
+		// values part of the url path
+		Id IPostCalendarEventsRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPostJobDataRequest : IRequest<PostJobDataRequestParameters>
 	{
 		Id JobId { get; }
@@ -4337,6 +4453,43 @@ namespace Nest
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IPutCalendarJobRequest : IRequest<PutCalendarJobRequestParameters>
+	{
+		Id CalendarId { get; }
+		Id JobId { get; }
+	}
+	///<summary>Request parameters for XpackMlPutCalendarJob <pre></pre></summary>
+	public partial class PutCalendarJobRequest : PlainRequestBase<PutCalendarJobRequestParameters>, IPutCalendarJobRequest
+	{
+		protected IPutCalendarJobRequest Self => this;
+		///<summary>/_xpack/ml/calendars/{calendar_id}/jobs/{job_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		///<param name="job_id">this parameter is required</param>
+		public PutCalendarJobRequest(Id calendar_id, Id job_id) : base(r=>r.Required("calendar_id", calendar_id).Required("job_id", job_id)){}
+		// values part of the url path
+		Id IPutCalendarJobRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+		Id IPutCalendarJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IPutCalendarRequest : IRequest<PutCalendarRequestParameters>
+	{
+		Id CalendarId { get; }
+	}
+	///<summary>Request parameters for XpackMlPutCalendar <pre></pre></summary>
+	public partial class PutCalendarRequest : PlainRequestBase<PutCalendarRequestParameters>, IPutCalendarRequest
+	{
+		protected IPutCalendarRequest Self => this;
+		///<summary>/_xpack/ml/calendars/{calendar_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		public PutCalendarRequest(Id calendar_id) : base(r=>r.Required("calendar_id", calendar_id)){}
+		// values part of the url path
+		Id IPutCalendarRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutDatafeedRequest : IRequest<PutDatafeedRequestParameters>
