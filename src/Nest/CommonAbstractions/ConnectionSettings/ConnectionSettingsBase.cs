@@ -200,9 +200,9 @@ namespace Nest
 			var memberInfo = new MemberInfoResolver(objectPath);
 			var fieldName = memberInfo.Members.Single().Name;
 
-			if (_idProperties.ContainsKey(typeof(TDocument)))
+			if (_idProperties.TryGetValue(typeof(TDocument), out var idProperty))
 			{
-				if (_idProperties[typeof(TDocument)].Equals(fieldName))
+				if (idProperty.Equals(fieldName))
 					return (TConnectionSettings)this;
 
 				throw new ArgumentException(
@@ -245,10 +245,10 @@ namespace Nest
 					throw new ArgumentException($"Expression {e} does contain any member access");
 
 				var memberInfo = memberInfoResolver.Members.Last();
-				if (_propertyMappings.ContainsKey(memberInfo))
+				if (_propertyMappings.TryGetValue(memberInfo, out var propertyMapping))
 				{
 					var newName = mapping.NewName;
-					var mappedAs = _propertyMappings[memberInfo].Name;
+					var mappedAs = propertyMapping.Name;
 					var typeName = typeof(TDocument).Name;
 					if (mappedAs.IsNullOrEmpty() && newName.IsNullOrEmpty())
 						throw new ArgumentException($"Property mapping '{e}' on type is already ignored");

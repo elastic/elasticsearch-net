@@ -17,39 +17,39 @@ namespace Nest
 			var percentiles = new PercentilesAggregation();
 			ReadMetricProperties(percentiles, properties);
 			percentiles.Method = ReadMethodProperty(properties);
-			if (properties.ContainsKey("percents"))
-				percentiles.Percents = properties["percents"].ToObject<List<double>>();
+			if (properties.TryGetValue("percents", out JToken percentsToken))
+				percentiles.Percents = percentsToken.ToObject<List<double>>();
 			return percentiles;
 		}
 
 		protected IPercentilesMethod ReadMethodProperty(Dictionary<string, JToken> properties)
 		{
 			IPercentilesMethod method = null;
-			if (properties.ContainsKey("hdr"))
-				method = properties["hdr"].ToObject<HDRHistogramMethod>();
-			else if (properties.ContainsKey("tdigest"))
-				method = properties["tdigest"].ToObject<TDigestMethod>();
+			if (properties.TryGetValue("hdr", out JToken hdrToken))
+				method = hdrToken.ToObject<HDRHistogramMethod>();
+			else if (properties.TryGetValue("tdigest", out JToken tdigestToken))
+				method = tdigestToken.ToObject<TDigestMethod>();
 			return method;
 		}
 
 		protected void ReadMetricProperties(IMetricAggregation metric, Dictionary<string, JToken> properties)
 		{
-			if (properties.ContainsKey("field"))
-				metric.Field = properties["field"].ToString();
+			if (properties.TryGetValue("field", out JToken fieldToken))
+				metric.Field = fieldToken.ToString();
 
-			if (properties.ContainsKey("script"))
+			if (properties.TryGetValue("script", out JToken scriptToken))
 			{
-				var scriptProps = JObject.FromObject(properties["script"]).Properties().ToDictionary(p => p.Name, p => p.Value);
+				var scriptProps = JObject.FromObject(scriptToken).Properties().ToDictionary(p => p.Name, p => p.Value);
 				if (scriptProps.ContainsKey("inline"))
-					metric.Script = properties["script"].ToObject<InlineScript>();
-				else if (scriptProps.ContainsKey("file"))
-					metric.Script = properties["script"].ToObject<FileScript>();
-				else if (scriptProps.ContainsKey("id"))
-					metric.Script = properties["id"].ToObject<IndexedScript>();
+					metric.Script = scriptToken.ToObject<InlineScript>();
+			    else if (scriptProps.ContainsKey("file"))
+					metric.Script = scriptToken.ToObject<FileScript>();
+				else if (scriptProps.TryGetValue("id", out JToken idToken))
+					metric.Script = idToken.ToObject<IndexedScript>();
 			}
 
-			if (properties.ContainsKey("missing"))
-				metric.Missing = double.Parse(properties["missing"].ToString());
+			if (properties.TryGetValue("missing", out JToken missingToken))
+				metric.Missing = double.Parse(missingToken.ToString());
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

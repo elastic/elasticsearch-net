@@ -64,33 +64,28 @@ namespace Nest
 			if (!dict.HasAny()) return null;
 
 			IScriptTransform scriptTransform = null;
-			if (dict.ContainsKey("inline"))
+			if (dict.TryGetValue("source", out JToken sourceToken))
 			{
-				var inline = dict["inline"].ToString();
+				var inline = sourceToken.ToString();
 				scriptTransform = new InlineScriptTransform(inline);
 			}
-			else if (dict.ContainsKey("source"))
+			else if (dict.TryGetValue("file", out var fileToken))
 			{
-				var inline = dict["source"].ToString();
-				scriptTransform = new InlineScriptTransform(inline);
-			}
-			else if (dict.ContainsKey("file"))
-			{
-				var file = dict["file"].ToString();
+				var file = fileToken.ToString();
 				scriptTransform = new FileScriptTransform(file);
 			}
-			else if (dict.ContainsKey("id"))
+			else if (dict.TryGetValue("id", out JToken idToken))
 			{
-				var id = dict["id"].ToString();
+				var id = idToken.ToString();
 				scriptTransform = new IndexedScriptTransform(id);
 			}
 
 			if (scriptTransform == null) return null;
 
-			if (dict.ContainsKey("lang"))
-				scriptTransform.Lang = dict["lang"].ToString();
-			if (dict.ContainsKey("params"))
-				scriptTransform.Params = dict["params"].ToObject<Dictionary<string, object>>();
+			if (dict.TryGetValue("lang", out JToken langToken))
+				scriptTransform.Lang = langToken.ToString();
+			if (dict.TryGetValue("params", out JToken paramsToken))
+				scriptTransform.Params = paramsToken.ToObject<Dictionary<string, object>>();
 
 			return scriptTransform;
 		}
