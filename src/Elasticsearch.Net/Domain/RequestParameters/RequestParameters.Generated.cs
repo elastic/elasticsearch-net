@@ -2354,6 +2354,21 @@ namespace Elasticsearch.Net
 		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
+	///<summary>Request options for XpackMlDeleteCalendar<pre></pre></summary>
+	public partial class DeleteCalendarRequestParameters : RequestParameters<DeleteCalendarRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
+	///<summary>Request options for XpackMlDeleteCalendarEvent<pre></pre></summary>
+	public partial class DeleteCalendarEventRequestParameters : RequestParameters<DeleteCalendarEventRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
+	///<summary>Request options for XpackMlDeleteCalendarJob<pre></pre></summary>
+	public partial class DeleteCalendarJobRequestParameters : RequestParameters<DeleteCalendarJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
 	///<summary>Request options for XpackMlDeleteDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
 	public partial class DeleteDatafeedRequestParameters : RequestParameters<DeleteDatafeedRequestParameters> 
 	{
@@ -2396,6 +2411,22 @@ namespace Elasticsearch.Net
 	public partial class GetBucketsRequestParameters : RequestParameters<GetBucketsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for XpackMlGetCalendars<pre></pre></summary>
+	public partial class GetCalendarsRequestParameters : RequestParameters<GetCalendarsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for XpackMlGetCalendarEvents<pre></pre></summary>
+	public partial class GetCalendarEventsRequestParameters : RequestParameters<GetCalendarEventsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Get events for the job. When this option is used calendar_id must be '_all'</summary>
+		public string JobId { get => Q<string>("job_id"); set => Q("job_id", value); }
+		///<summary>Get events after this time</summary>
+		public string Start { get => Q<string>("start"); set => Q("start", value); }
+		///<summary>Get events before this time</summary>
+		public DateTimeOffset? End { get => Q<DateTimeOffset?>("end"); set => Q("end", value); }
 	}
 	///<summary>Request options for XpackMlGetCategories<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
 	public partial class GetCategoriesRequestParameters : RequestParameters<GetCategoriesRequestParameters> 
@@ -2455,6 +2486,11 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
+	///<summary>Request options for XpackMlPostCalendarEvents<pre></pre></summary>
+	public partial class PostCalendarEventsRequestParameters : RequestParameters<PostCalendarEventsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
 	///<summary>Request options for XpackMlPostData<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
 	public partial class PostJobDataRequestParameters : RequestParameters<PostJobDataRequestParameters> 
 	{
@@ -2468,6 +2504,16 @@ namespace Elasticsearch.Net
 	public partial class PreviewDatafeedRequestParameters : RequestParameters<PreviewDatafeedRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	///<summary>Request options for XpackMlPutCalendar<pre></pre></summary>
+	public partial class PutCalendarRequestParameters : RequestParameters<PutCalendarRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+	}
+	///<summary>Request options for XpackMlPutCalendarJob<pre></pre></summary>
+	public partial class PutCalendarJobRequestParameters : RequestParameters<PutCalendarJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 	}
 	///<summary>Request options for XpackMlPutDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</pre></summary>
 	public partial class PutDatafeedRequestParameters : RequestParameters<PutDatafeedRequestParameters> 
