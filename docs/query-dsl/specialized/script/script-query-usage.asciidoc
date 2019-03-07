@@ -28,7 +28,7 @@ q
     .Name("named_query")
     .Boost(1.1)
     .Inline(_templateString)
-    .Params(p=>p.Add("param1", 50))
+    .Params(p => p.Add("param1", 50))
 )
 ----
 

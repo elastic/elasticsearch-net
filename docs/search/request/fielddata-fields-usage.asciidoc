@@ -37,7 +37,7 @@ s => s
 ----
 new SearchRequest<Project>
 {
-    FielddataFields = new string [] { "name", "leadDeveloper", "startedOn" }
+    FielddataFields = new string[] { "name", "leadDeveloper", "startedOn" }
 }
 ----
 

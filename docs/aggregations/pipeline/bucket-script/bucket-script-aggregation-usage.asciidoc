@@ -44,7 +44,7 @@ s => s
                     .Add("totalCommits", "commits")
                     .Add("stableCommits", "stable_state>commits")
                 )
-                .Script(ss =>ss.Inline("stableCommits / totalCommits * 100").Lang("groovy"))
+                .Script(ss => ss.Inline("stableCommits / totalCommits * 100").Lang("groovy"))
             )
         )
     )
@@ -74,10 +74,10 @@ new SearchRequest<Project>()
                 Aggregations = new SumAggregation("commits", "numberOfCommits")
             } &&
             new BucketScriptAggregation("stable_percentage", new MultiBucketsPath
-                {
-                    { "totalCommits", "commits" },
-                    { "stableCommits", "stable_state>commits" }
-                })
+            {
+                { "totalCommits", "commits" },
+                { "stableCommits", "stable_state>commits" }
+            })
             {
                 Script = new InlineScript("stableCommits / totalCommits * 100") { Lang = "groovy" }
             }
@@ -147,7 +147,7 @@ projectsPerMonth.Should().NotBeNull();
 projectsPerMonth.Buckets.Should().NotBeNull();
 projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
 
-foreach(var item in projectsPerMonth.Buckets)
+foreach (var item in projectsPerMonth.Buckets)
 {
     var stablePercentage = item.BucketScript("stable_percentage");
     stablePercentage.Should().NotBeNull();

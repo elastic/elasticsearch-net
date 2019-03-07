@@ -31,8 +31,8 @@ allows you to configure the maximum amount of hits to be returned.
 [source,csharp]
 ----
 s => s
-    .From(10)
-    .Size(12)
+.From(10)
+.Size(12)
 ----
 
 [float]

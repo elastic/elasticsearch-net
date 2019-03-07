@@ -113,9 +113,7 @@ foreach (var item in projectsPerMonth.Buckets)
     // serial differencing specified a lag of 2, so
     // only expect values from the 3rd bucket onwards
     if (differenceCount <= 2)
-    {
         secondDifference.Should().BeNull();
-    }
     else
     {
         secondDifference.Should().NotBeNull();

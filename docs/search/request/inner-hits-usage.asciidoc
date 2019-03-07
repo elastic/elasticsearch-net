@@ -44,7 +44,7 @@ s => s
     q.HasChild<Prince>(hc => hc
         .Query(hcq => hcq.MatchAll())
         .InnerHits(ih => ih
-            .DocValueFields(f=>f.Field(p=>p.Name))
+            .DocValueFields(f => f.Field(p => p.Name))
             .Name("princes")
         )
     ) || q.Nested(n => n
@@ -69,7 +69,7 @@ new SearchRequest<King>(Index, typeof(King))
         InnerHits = new InnerHits
         {
             Name = "princes",
-            DocValueFields = Field<Prince>(p=>p.Name)
+            DocValueFields = Field<Prince>(p => p.Name)
         }
     } || new NestedQuery
     {
@@ -129,13 +129,13 @@ foreach (var hit in response.Hits)
     foreach (var princeHit in hit.InnerHits["princes"].Hits.Hits)
     {
         princeHit.Fields.Should().NotBeNull("all princes have a keyword name so fields should be returned");
-        var docValueName = princeHit.Fields.ValueOf<Prince, string>(p=>p.Name);
+        var docValueName = princeHit.Fields.ValueOf<Prince, string>(p => p.Name);
         docValueName.Should().NotBeNullOrWhiteSpace("value of name on Fields");
-
     }
 
     var foes = hit.InnerHits["foes"].Documents<King>();
     foes.Should().NotBeEmpty();
-};
+}
+;
 ----
 

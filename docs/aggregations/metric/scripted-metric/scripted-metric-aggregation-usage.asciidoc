@@ -38,10 +38,11 @@ new SearchRequest<Project>
 {
     Aggregations = new ScriptedMetricAggregation("sum_the_hard_way")
     {
-        InitScript = new InlineScript("_agg['commits'] = []") {Lang = "groovy"},
-        MapScript = new InlineScript("if (doc['state'].value == \"Stable\") { _agg.commits.add(doc['numberOfCommits']) }") {Lang = "groovy"},
-        CombineScript = new InlineScript("sum = 0; for (c in _agg.commits) { sum += c }; return sum") {Lang = "groovy"},
-        ReduceScript = new InlineScript("sum = 0; for (a in _aggs) { sum += a }; return sum") {Lang = "groovy"}
+        InitScript = new InlineScript("_agg['commits'] = []") { Lang = "groovy" },
+        MapScript = new InlineScript("if (doc['state'].value == \"Stable\") { _agg.commits.add(doc['numberOfCommits']) }")
+            { Lang = "groovy" },
+        CombineScript = new InlineScript("sum = 0; for (c in _agg.commits) { sum += c }; return sum") { Lang = "groovy" },
+        ReduceScript = new InlineScript("sum = 0; for (a in _aggs) { sum += a }; return sum") { Lang = "groovy" }
     }
 }
 ----
@@ -114,16 +115,16 @@ new SearchRequest<Project>
     Aggregations =
         new ScriptedMetricAggregation("by_state_total")
         {
-            InitScript = new InlineScript(First.Init) {Lang = First.Language},
-            MapScript = new InlineScript(First.Map) {Lang = First.Language},
-            ReduceScript = new InlineScript(First.Reduce) {Lang = First.Language}
+            InitScript = new InlineScript(First.Init) { Lang = First.Language },
+            MapScript = new InlineScript(First.Map) { Lang = First.Language },
+            ReduceScript = new InlineScript(First.Reduce) { Lang = First.Language }
         } &&
         new ScriptedMetricAggregation("total_commits")
         {
-            InitScript = new InlineScript(Second.Init) {Lang = Second.Language},
-            MapScript = new InlineScript(Second.Map) {Lang = Second.Language},
-            CombineScript = new InlineScript(Second.Combine) {Lang = Second.Language},
-            ReduceScript = new InlineScript(Second.Reduce) {Lang = Second.Language}
+            InitScript = new InlineScript(Second.Init) { Lang = Second.Language },
+            MapScript = new InlineScript(Second.Map) { Lang = Second.Language },
+            CombineScript = new InlineScript(Second.Combine) { Lang = Second.Language },
+            ReduceScript = new InlineScript(Second.Reduce) { Lang = Second.Language }
         }
 }
 ----

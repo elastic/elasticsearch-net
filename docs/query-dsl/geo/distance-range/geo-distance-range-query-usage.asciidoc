@@ -20,10 +20,10 @@ please modify the original csharp file found at the link and submit the PR with 
 [source,csharp]
 ----
 q
-.GeoDistanceRange(g=>g
+.GeoDistanceRange(g => g
     .Boost(1.1)
     .Name("named_query")
-    .Field(p=>p.Location)
+    .Field(p => p.Location)
     .DistanceType(GeoDistanceType.Arc)
     .GreaterThanOrEqualTo(200, DistanceUnit.Kilometers)
     .GreaterThan(200, DistanceUnit.Kilometers)
@@ -43,7 +43,7 @@ new GeoDistanceRangeQuery
 {
     Boost = 1.1,
     Name = "named_query",
-    Field = Infer.Field<Project>(p=>p.Location),
+    Field = Infer.Field<Project>(p => p.Location),
     DistanceType = GeoDistanceType.Arc,
     GreaterThanOrEqualTo = Nest.Distance.Kilometers(200),
     GreaterThan = Nest.Distance.Kilometers(200),

@@ -23,9 +23,9 @@ q
 .GeoShapeEnvelope(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Field(p=>p.Location)
+    .Field(p => p.Location)
     .IgnoreUnmapped()
-    .Coordinates(this._coordinates)
+    .Coordinates(_coordinates)
     .Relation(GeoShapeRelation.Intersects)
 )
 ----
@@ -38,8 +38,8 @@ new GeoShapeEnvelopeQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Field = Field<Project>(p=>p.Location),
-    Shape = new EnvelopeGeoShape(this._coordinates),
+    Field = Field<Project>(p => p.Location),
+    Shape = new EnvelopeGeoShape(_coordinates),
     Relation = GeoShapeRelation.Intersects,
     IgnoreUnmapped = false
 }

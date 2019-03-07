@@ -39,8 +39,7 @@ new IndicesQuery()
     Boost = 1.1,
     Indices = Index<Project>(),
     Query = new MatchAllQuery(),
-    NoMatchQuery = new MatchAllQuery { Name ="no_match" }
-
+    NoMatchQuery = new MatchAllQuery { Name = "no_match" }
 }
 ----
 

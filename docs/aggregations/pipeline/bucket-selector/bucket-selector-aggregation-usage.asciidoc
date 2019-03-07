@@ -54,9 +54,9 @@ new SearchRequest<Project>()
         Aggregations =
             new SumAggregation("commits", "numberOfCommits") &&
             new BucketSelectorAggregation("commits_bucket_filter", new MultiBucketsPath
-                {
-                    { "totalCommits", "commits" },
-                })
+            {
+                { "totalCommits", "commits" },
+            })
             {
                 Script = new InlineScript("totalCommits >= 500") { Lang = "groovy" }
             }

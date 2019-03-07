@@ -45,12 +45,12 @@ new SearchRequest<Project>()
 {
     Size = 0,
     Aggregations = new DateHistogramAggregation("projects_started_per_month")
-    {
-        Field = "startedOn",
-        Interval = DateInterval.Month,
-        Aggregations = new SumAggregation("commits", "numberOfCommits")
-    }
-    && new SumBucketAggregation("sum_of_commits", "projects_started_per_month>commits")
+        {
+            Field = "startedOn",
+            Interval = DateInterval.Month,
+            Aggregations = new SumAggregation("commits", "numberOfCommits")
+        }
+        && new SumBucketAggregation("sum_of_commits", "projects_started_per_month>commits")
 }
 ----
 

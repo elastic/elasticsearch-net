@@ -46,7 +46,7 @@ new TermsQuery
         Id = 12,
         Index = Index<Developer>(),
         Type = Type<Developer>(),
-        Path = Field<Developer>(p=>p.LastName),
+        Path = Field<Developer>(p => p.LastName),
         Routing = "myroutingvalue"
     }
 }

@@ -23,8 +23,8 @@ q
 .SpanMultiTerm(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Match(sq=>sq
-        .Prefix(pr=>pr.Field(p=>p.Name).Value("pre-*"))
+    .Match(sq => sq
+        .Prefix(pr => pr.Field(p => p.Name).Value("pre-*"))
     )
 )
 ----

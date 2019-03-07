@@ -57,9 +57,9 @@ new SearchRequest<Project>
         OtherBucketKey = "other_states_of_being",
         Filters = new NamedFiltersContainer
         {
-                { "belly_up", Query<Project>.Term(p=>p.State, StateOfBeing.BellyUp) },
-                { "stable", Query<Project>.Term(p=>p.State, StateOfBeing.Stable) },
-                { "very_active", Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive) }
+            { "belly_up", Query<Project>.Term(p => p.State, StateOfBeing.BellyUp) },
+            { "stable", Query<Project>.Term(p => p.State, StateOfBeing.Stable) },
+            { "very_active", Query<Project>.Term(p => p.State, StateOfBeing.VeryActive) }
         },
         Aggregations =
             new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword")) }
@@ -175,9 +175,9 @@ new SearchRequest<Project>
         OtherBucket = true,
         Filters = new List<QueryContainer>
         {
-                 Query<Project>.Term(p=>p.State, StateOfBeing.BellyUp) ,
-                 Query<Project>.Term(p=>p.State, StateOfBeing.Stable) ,
-                 Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive)
+            Query<Project>.Term(p => p.State, StateOfBeing.BellyUp),
+            Query<Project>.Term(p => p.State, StateOfBeing.Stable),
+            Query<Project>.Term(p => p.State, StateOfBeing.VeryActive)
         },
         Aggregations =
             new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword")) }
@@ -243,10 +243,7 @@ filterAgg.Should().NotBeNull();
 var results = filterAgg.AnonymousBuckets();
 results.Count.Should().Be(4);
 
-foreach (var singleBucket in results.Take(3))
-{
-    singleBucket.DocCount.Should().BeGreaterThan(0);
-}
+foreach (var singleBucket in results.Take(3)) singleBucket.DocCount.Should().BeGreaterThan(0);
 
 results.Last().DocCount.Should().Be(0); <1>
 ----

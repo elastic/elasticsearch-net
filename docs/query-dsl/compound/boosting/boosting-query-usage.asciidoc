@@ -37,8 +37,8 @@ new BoostingQuery()
 {
     Name = "named_query",
     Boost = 1.1,
-    PositiveQuery = new MatchAllQuery { Name ="filter" },
-    NegativeQuery= new MatchAllQuery() { Name = "query" },
+    PositiveQuery = new MatchAllQuery { Name = "filter" },
+    NegativeQuery = new MatchAllQuery() { Name = "query" },
     NegativeBoost = 1.12
 }
 ----

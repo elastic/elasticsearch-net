@@ -38,7 +38,7 @@ s => s
 ----
 new SearchRequest<Project>
 {
-    Size =  0,
+    Size = 0,
     Aggregations = new AdjacencyMatrixAggregation("interactions")
     {
         Filters = new NamedFiltersContainer

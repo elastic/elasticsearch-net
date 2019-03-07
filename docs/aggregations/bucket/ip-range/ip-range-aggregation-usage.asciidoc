@@ -40,8 +40,8 @@ new SearchRequest<Project>
         Field = Field((Project p) => p.LeadDeveloper.IPAddress),
         Ranges = new List<Nest.IpRange>
         {
-            new Nest.IpRange {To = "127.0.0.1"},
-            new Nest.IpRange {From = "127.0.0.1"}
+            new Nest.IpRange { To = "127.0.0.1" },
+            new Nest.IpRange { From = "127.0.0.1" }
         }
     }
 }

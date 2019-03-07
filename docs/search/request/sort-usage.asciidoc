@@ -78,17 +78,17 @@ new SearchRequest<Project>
         new SortField { Field = "_doc", Order = SortOrder.Ascending },
         new SortField
         {
-            Field = Field<Project>(p=>p.LastActivity),
+            Field = Field<Project>(p => p.LastActivity),
             Order = SortOrder.Descending,
             MissingValue = "_last",
             UnmappedType = FieldType.Date,
             Mode = SortMode.Average,
-            NestedPath = Field<Project>(p=>p.Tags),
+            NestedPath = Field<Project>(p => p.Tags),
             NestedFilter = new MatchAllQuery(),
         },
         new SortField
         {
-            Field = Field<Project>(p=>p.NumberOfCommits),
+            Field = Field<Project>(p => p.NumberOfCommits),
             Order = SortOrder.Descending,
             MissingValue = -1
         },
@@ -99,13 +99,13 @@ new SearchRequest<Project>
             DistanceType = GeoDistanceType.Arc,
             GeoUnit = DistanceUnit.Centimeters,
             Mode = SortMode.Min,
-            Points = new [] {new GeoLocation(70, -70), new GeoLocation(-12, 12) }
+            Points = new[] { new GeoLocation(70, -70), new GeoLocation(-12, 12) }
         },
         new ScriptSort
         {
             Type = "number",
             Order = SortOrder.Ascending,
-            Script =  new InlineScript("doc['numberOfCommits'].value * factor")
+            Script = new InlineScript("doc['numberOfCommits'].value * factor")
             {
                 Lang = "groovy",
                 Params = new Dictionary<string, object>

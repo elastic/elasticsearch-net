@@ -39,7 +39,7 @@ After issuing the following request
 ----
 var response = client.Search<Project>(s => s
     .MatchAll()
-            );
+);
 ----
 
 The response contains an audit trail with four events

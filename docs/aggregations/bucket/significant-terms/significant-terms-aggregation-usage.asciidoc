@@ -185,7 +185,7 @@ s => s
             .BackgroundIsSuperSet()
             .IncludeNegatives()
         )
-        .Exclude(new [] { "pierce" })
+        .Exclude(new[] { "pierce" })
     )
 )
 ----

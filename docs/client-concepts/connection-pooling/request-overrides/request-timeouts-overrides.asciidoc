@@ -57,7 +57,7 @@ audit = await audit.TraceCalls(
 [float]
 === Connect timeouts
 
-Connect timeouts can be overridden on a per request basis. 
+Connect timeouts can be overridden on a per request basis.
 
 Whilst the underlying `WebRequest` in the case of Desktop CLR
 and `HttpClient` in the case of Core CLR cannot distinguish between connect and retry timeouts,

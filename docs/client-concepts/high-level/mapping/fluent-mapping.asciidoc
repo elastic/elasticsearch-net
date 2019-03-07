@@ -77,7 +77,7 @@ var createIndexResponse = _client.CreateIndex("myindex", c => c
             )
         )
     )
-            );
+);
 ----
 
 Here, the Name property of the `Company` type has been mapped as a {ref_current}/text.html[text datatype] and
@@ -148,7 +148,7 @@ var createIndexResponse = _client.CreateIndex("myindex", c => c
             )
         )
     )
-            );
+);
 ----
 
 [source,javascript]
@@ -192,7 +192,7 @@ createIndexResponse = _client.CreateIndex("myindex", c => c
             .AutoMap()
         )
     )
-            );
+);
 ----
 
 Just as we were able to override the inferred properties from auto mapping in the previous example,
@@ -282,14 +282,11 @@ var createIndexResponse = _client.CreateIndex("myindex", c => c
             )
         )
     )
-            );
+);
 ----
 <1> Automap company
-
 <2> Override company inferred mappings
-
 <3> Auto map employee
-
 <4> Override employee inferred mappings
 
 [source,javascript]
@@ -421,14 +418,11 @@ var createIndexResponse = _client.CreateIndex("myindex", c => c
             )
         )
     )
-            );
+);
 ----
 <1> Automap `Company`
-
 <2> Override specific `Company` mappings
-
 <3> Automap `Employees` property
-
 <4> Override specific `Employee` properties
 
 [source,javascript]

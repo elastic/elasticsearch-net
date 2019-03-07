@@ -23,11 +23,11 @@ q
 .SpanWithin(sn => sn
     .Name("named_query")
     .Boost(1.1)
-    .Little(i=>i
-        .SpanTerm(st=>st.Field("field1").Value("hoya"))
+    .Little(i => i
+        .SpanTerm(st => st.Field("field1").Value("hoya"))
     )
-    .Big(e=>e
-        .SpanTerm(st=>st.Field("field1").Value("hoya2"))
+    .Big(e => e
+        .SpanTerm(st => st.Field("field1").Value("hoya2"))
     )
 )
 ----
@@ -40,8 +40,8 @@ new SpanWithinQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Little = new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field1", Value = "hoya"} },
-    Big = new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field1", Value = "hoya2"} },
+    Little = new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field1", Value = "hoya" } },
+    Big = new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field1", Value = "hoya2" } },
 }
 ----
 

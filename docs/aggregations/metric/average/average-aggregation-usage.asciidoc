@@ -27,7 +27,7 @@ s => s
         )
         .Field(p => p.NumberOfCommits)
         .Missing(10)
-        .Script(ss=>ss.Inline("_value * 1.2").Lang("groovy"))
+        .Script(ss => ss.Inline("_value * 1.2").Lang("groovy"))
     )
 )
 ----

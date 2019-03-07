@@ -46,15 +46,15 @@ new SearchRequest<Project>()
 {
     Size = 0,
     Aggregations = new DateHistogramAggregation("projects_started_per_month")
-    {
-        Field = "startedOn",
-        Interval = DateInterval.Month,
-        Aggregations = new SumAggregation("commits", "numberOfCommits")
-    }
-    && new AverageBucketAggregation("average_commits_per_month", "projects_started_per_month>commits")
-    {
-        GapPolicy = GapPolicy.InsertZeros
-    }
+        {
+            Field = "startedOn",
+            Interval = DateInterval.Month,
+            Aggregations = new SumAggregation("commits", "numberOfCommits")
+        }
+        && new AverageBucketAggregation("average_commits_per_month", "projects_started_per_month>commits")
+        {
+            GapPolicy = GapPolicy.InsertZeros
+        }
 }
 ----
 

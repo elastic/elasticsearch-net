@@ -43,7 +43,7 @@ new SearchRequest<Project>
 {
     Aggregations = new FilterAggregation("bethels_projects")
     {
-        Filter = new TermQuery {Field = Field<Project>(p => p.LeadDeveloper.FirstName), Value = FirstNameToFind},
+        Filter = new TermQuery { Field = Field<Project>(p => p.LeadDeveloper.FirstName), Value = FirstNameToFind },
         Aggregations =
             new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword")) }
     }

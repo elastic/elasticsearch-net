@@ -69,7 +69,7 @@ if (seenTypes.Add(type))
             }
         }
         else if (propertyInfo.PropertyType.IsClass() && (propertyInfo.PropertyType.Namespace.StartsWith("Nest") ||
-                                               propertyInfo.PropertyType.Namespace.StartsWith("Elasticsearch.Net")))
+                                                         propertyInfo.PropertyType.Namespace.StartsWith("Elasticsearch.Net")))
         {
             FindPropertiesBreakingRule(propertyInfo.PropertyType, exceptions, seenTypes, ruleBreakers);
         }

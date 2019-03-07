@@ -24,8 +24,8 @@ q
     .Name("named_query")
     .Boost(1.1)
     .Field(p => p.Name)
-    .Query(sq=>sq
-        .SpanTerm(st=>st.Field(p=>p.Description).Value("dolorem"))
+    .Query(sq => sq
+        .SpanTerm(st => st.Field(p => p.Description).Value("dolorem"))
     )
 )
 ----

@@ -23,8 +23,8 @@ q
 .GeoShapeLineString(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Field(p=>p.Location)
-    .Coordinates(this._coordinates)
+    .Field(p => p.Location)
+    .Coordinates(_coordinates)
     .Relation(GeoShapeRelation.Intersects)
     .IgnoreUnmapped()
 )
@@ -38,8 +38,8 @@ new GeoShapeLineStringQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Field = Field<Project>(p=>p.Location),
-    Shape = new LineStringGeoShape(this._coordinates),
+    Field = Field<Project>(p => p.Location),
+    Shape = new LineStringGeoShape(_coordinates),
     Relation = GeoShapeRelation.Intersects,
     IgnoreUnmapped = false
 }

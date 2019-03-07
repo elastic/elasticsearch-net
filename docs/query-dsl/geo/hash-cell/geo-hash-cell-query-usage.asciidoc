@@ -23,7 +23,7 @@ q
 .GeoHashCell(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Field(p=>p.Location)
+    .Field(p => p.Location)
     .Location(new GeoLocation(13.4080, 52.5186))
     .Neighbors()
     .Precision(Nest.Distance.Meters(3))
@@ -38,7 +38,7 @@ new GeoHashCellQuery
 {
     Boost = 1.1,
     Name = "named_query",
-    Field = Infer.Field<Project>(p=>p.Location),
+    Field = Infer.Field<Project>(p => p.Location),
     Location = new GeoLocation(13.4080, 52.5186),
     Neighbors = true,
     Precision = Nest.Distance.Meters(3)

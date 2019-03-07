@@ -115,11 +115,11 @@ See the Elasticsearch documentation on {ref_current}/query-dsl-percolate-query.h
 ----
 q
 .Percolate(p => p
-    .Type<Project>()
-    .Index<Project>()
-    .Id(Project.Instance.Name)
-    .Field(f => f.Query)
-    .DocumentType<Project>() <1>
+        .Type<Project>()
+        .Index<Project>()
+        .Id(Project.Instance.Name)
+        .Field(f => f.Query)
+        .DocumentType<Project>() <1>
 )
 ----
 <1> specify the `type`, `index`, `id`, `field`, `document_type` of the document to fetch, to percolate.

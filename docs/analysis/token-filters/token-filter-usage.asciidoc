@@ -77,7 +77,8 @@ InitializerExample
           "a",
           "b",
           "c"
-        ]
+        ],
+        "articles_case": false
       },
       "hunspell": {
         "type": "hunspell",

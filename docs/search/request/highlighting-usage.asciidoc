@@ -95,7 +95,8 @@ new SearchRequest<Project>
         Encoder = "html",
         Fields = new Dictionary<Field, IHighlightField>
         {
-            { "name.standard", new HighlightField
+            {
+                "name.standard", new HighlightField
                 {
                     Type = HighlighterType.Plain,
                     ForceSource = true,
@@ -105,13 +106,14 @@ new SearchRequest<Project>
                     NoMatchSize = 150
                 }
             },
-            { "leadDeveloper.firstName", new HighlightField
+            {
+                "leadDeveloper.firstName", new HighlightField
                 {
                     Type = "fvh",
                     PhraseLimit = 10,
                     BoundaryMaxScan = 50,
-                    PreTags = new[] { "<name>"},
-                    PostTags = new[] { "</name>"},
+                    PreTags = new[] { "<name>" },
+                    PostTags = new[] { "</name>" },
                     HighlightQuery = new MatchQuery
                     {
                         Field = "leadDeveloper.firstName",
@@ -119,15 +121,16 @@ new SearchRequest<Project>
                     }
                 }
             },
-            { "state.offsets", new HighlightField
+            {
+                "state.offsets", new HighlightField
                 {
                     Type = HighlighterType.Postings,
-                    PreTags = new[] { "<state>"},
-                    PostTags = new[] { "</state>"},
+                    PreTags = new[] { "<state>" },
+                    PostTags = new[] { "</state>" },
                     HighlightQuery = new TermsQuery
                     {
                         Field = "state.offsets",
-                        Terms = new [] { "stable", "bellyup" }
+                        Terms = new[] { "stable", "bellyup" }
                     }
                 }
             }
@@ -211,7 +214,7 @@ new SearchRequest<Project>
 ----
 response.ShouldBeValid();
 
-foreach (var highlightsInEachHit in response.Hits.Select(d=>d.Highlights))
+foreach (var highlightsInEachHit in response.Hits.Select(d => d.Highlights))
 {
     foreach (var highlightField in highlightsInEachHit)
     {
@@ -240,9 +243,7 @@ foreach (var highlightsInEachHit in response.Hits.Select(d=>d.Highlights))
             }
         }
         else
-        {
             Assert.True(false, $"highlights contains unexpected key {highlightField.Key}");
-        }
     }
 }
 ----
@@ -313,11 +314,12 @@ new SearchRequest<Project>
     {
         Fields = new Dictionary<Field, IHighlightField>
         {
-            { "leadDeveloper.lastName", new HighlightField
+            {
+                "leadDeveloper.lastName", new HighlightField
                 {
                     Type = HighlighterType.Unified,
-                    PreTags = new[] { "<name>"},
-                    PostTags = new[] { "</name>"},
+                    PreTags = new[] { "<name>" },
+                    PostTags = new[] { "</name>" },
                     HighlightQuery = new MatchQuery
                     {
                         Field = "leadDeveloper.lastName",
@@ -384,9 +386,7 @@ foreach (var highlightsInEachHit in response.Hits.Select(d => d.Highlights))
             }
         }
         else
-        {
             Assert.True(false, $"highlights contains unexpected key {highlightField.Key}");
-        }
     }
 }
 ----

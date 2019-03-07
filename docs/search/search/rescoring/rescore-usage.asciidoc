@@ -84,7 +84,7 @@ new SearchRequest<Project>
                 {
                     Filter = new TermsQuery
                     {
-                        Field = Infer.Field<Project>(p => p.Tags.First()),
+                        Field = Field<Project>(p => p.Tags.First()),
                         Terms = new[] { "eos", "sit", "sed" }
                     }
                 }

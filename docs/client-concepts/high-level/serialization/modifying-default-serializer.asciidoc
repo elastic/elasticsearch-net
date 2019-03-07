@@ -133,21 +133,21 @@ public class CustomContractsJsonNetSerializer : CustomJsonNetSerializer
 {
     public CustomContractsJsonNetSerializer(IConnectionSettingsValues settings) : base(settings) { }
     public CustomContractsJsonNetSerializer(IConnectionSettingsValues settings, JsonConverter statefulConverter)
-         : base(settings, statefulConverter) { }
+        : base(settings, statefulConverter) { }
 
-     protected override IList<Func<Type, JsonConverter>> ContractConverters { get; } = new List<Func<Type, JsonConverter>>
-     {
-((t) => t == typeof(Project) ? new MyCustomJsonConverter() : null)
-     };
+    protected override IList<Func<Type, JsonConverter>> ContractConverters { get; } = new List<Func<Type, JsonConverter>>
+    {
+        ((t) => t == typeof(Project) ? new MyCustomJsonConverter() : null)
+    };
 }
 
 public class MyCustomJsonConverter : JsonConverter
-        {
+{
     public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }
 
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) => null;
 
     public override bool CanConvert(Type objectType) => false;
-        }
+}
 ----
 

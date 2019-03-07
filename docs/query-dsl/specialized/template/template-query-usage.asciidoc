@@ -24,7 +24,7 @@ q
     .Name("named_query")
     .Boost(1.1)
     .Inline(_templateString)
-    .Params(p=>p.Add("query_string", "all about search"))
+    .Params(p => p.Add("query_string", "all about search"))
 )
 ----
 

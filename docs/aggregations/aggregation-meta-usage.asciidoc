@@ -44,7 +44,7 @@ new SearchRequest<Project>()
     Size = 0,
     Aggregations = new MinAggregation("min_last_activity", Infer.Field<Project>(p => p.LastActivity))
     {
-        Meta = new Dictionary<string,object>
+        Meta = new Dictionary<string, object>
         {
             { "meta_1", "value_1" },
             { "meta_2", 2 },

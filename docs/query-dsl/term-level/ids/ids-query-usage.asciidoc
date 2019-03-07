@@ -36,7 +36,7 @@ new IdsQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Values = new List<Id> { 1, 2,3,4 },
+    Values = new List<Id> { 1, 2, 3, 4 },
     Types = Type<Project>().And<Developer>()
 }
 ----
