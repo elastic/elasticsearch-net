@@ -13,9 +13,17 @@ namespace Nest
 		[JsonProperty("cluster")]
 		IEnumerable<string> Cluster { get; set; }
 
+		/// <summary>
+		/// A list of indices and a list of the privileges that you want to check for the specified indices.
+		/// </summary>
 		[JsonProperty("index")]
 		IEnumerable<IndexPrivilegesCheck> Index { get; set; }
 
+		/// <summary>
+		/// The name of the application, a list of the privileges that you want to check for the specified resources,
+		/// (may be either application privilege names, or the names of actions that are granted by those privileges,
+		/// a list of resource names against which the privileges should be checked.
+		/// </summary>
 		[JsonProperty("application")]
 		IEnumerable<IApplicationPrivilegesCheck> Application { get; set; }
 	}
