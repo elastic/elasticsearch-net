@@ -9,22 +9,22 @@ namespace Nest
 	public partial interface IPutCalendarResponse : IResponse
 	{
 		[DataMember(Name = "calendar_id")]
-		Id CalendarId { get; }
+		string CalendarId { get; }
 
 		[DataMember(Name = "description")]
 		string Description { get; }
 
 		[DataMember(Name = "job_ids")]
-		IReadOnlyCollection<Id> JobIds { get; }
+		IReadOnlyCollection<string> JobIds { get; }
 	}
 
 	/// <inheritdoc cref="IPutCalendarResponse" />
 	public class PutCalendarResponse : ResponseBase, IPutCalendarResponse
 	{
-		public Id CalendarId { get; internal set; }
+		public string CalendarId { get; internal set; }
 
 		public string Description { get; internal set; }
 
-		public IReadOnlyCollection<Id> JobIds { get; internal set; } = EmptyReadOnly<Id>.Collection;
+		public IReadOnlyCollection<string> JobIds { get; internal set; } = EmptyReadOnly<string>.Collection;
 	}
 }

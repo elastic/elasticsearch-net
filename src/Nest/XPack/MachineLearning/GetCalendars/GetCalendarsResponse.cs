@@ -24,10 +24,10 @@ namespace Nest
 	public class Calendar
 	{
 		[DataMember(Name = "calendar_id")]
-		public Id CalendarId { get; set; }
+		public string CalendarId { get; set; }
 
 		[DataMember(Name = "job_ids")]
-		public IReadOnlyCollection<Id> JobIds { get; set; } = EmptyReadOnly<Id>.Collection;
+		public IReadOnlyCollection<string> JobIds { get; set; } = EmptyReadOnly<string>.Collection;
 
 		[DataMember(Name = "description")]
 		public string Description { get; set; }
