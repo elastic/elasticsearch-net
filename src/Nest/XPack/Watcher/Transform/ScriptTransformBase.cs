@@ -64,9 +64,9 @@ namespace Nest
 			if (!dict.HasAny()) return null;
 
 			IScriptTransform scriptTransform = null;
-			if (dict.TryGetValue("source", out JToken sourceToken))
+			if (dict.TryGetValue("inline", out var inlineToken))
 			{
-				var inline = sourceToken.ToString();
+				var inline = inlineToken.ToString();
 				scriptTransform = new InlineScriptTransform(inline);
 			}
 			else if (dict.TryGetValue("file", out var fileToken))
@@ -74,7 +74,7 @@ namespace Nest
 				var file = fileToken.ToString();
 				scriptTransform = new FileScriptTransform(file);
 			}
-			else if (dict.TryGetValue("id", out JToken idToken))
+			else if (dict.TryGetValue("id", out var idToken))
 			{
 				var id = idToken.ToString();
 				scriptTransform = new IndexedScriptTransform(id);
