@@ -132,13 +132,13 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 				var movingAverage = item.MovingAverage("commits_moving_avg");
 
 				// Moving Average specifies a window of 4 so
-				// moving average values should exist from 5th bucketr onwards
+				// moving average values should exist from 5th bucket onwards
 				if (bucketCount <= 4)
 					movingAverage.Should().BeNull();
 				else
 				{
 					movingAverage.Should().NotBeNull();
-					movingAverage.Value.Should().BeGreaterThan(0);
+					movingAverage.Value.Should().NotBeNull();
 				}
 			}
 		}
