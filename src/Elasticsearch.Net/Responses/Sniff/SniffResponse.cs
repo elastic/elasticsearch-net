@@ -78,8 +78,8 @@ namespace Elasticsearch.Net
 		{
 			get
 			{
-				if (settings != null && settings.ContainsKey("http.enabled"))
-					return Convert.ToBoolean(settings["http.enabled"]);
+				if (settings != null && settings.TryGetValue("http.enabled", out object httpEnabled))
+					return Convert.ToBoolean(httpEnabled);
 
 				return http != null;
 			}

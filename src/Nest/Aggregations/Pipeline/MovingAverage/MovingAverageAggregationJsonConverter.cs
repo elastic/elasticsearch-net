@@ -79,12 +79,8 @@ namespace Nest
 
 		private T GetOrDefault<T>(string key, Dictionary<string, JToken> properties)
 		{
-			if (!properties.ContainsKey(key)) return default(T);
-
-			return properties[key].ToObject<T>();
-
-			//TODO decide if this works too for .NET core, looks like it
-			//return (T)Convert.ChangeType(properties[key], typeof(T));
+			if (!properties.TryGetValue(key, out JToken value)) return default(T);
+			return value.ToObject<T>();
 		}
 
 		private GapPolicy? GetGapPolicy(Dictionary<string, JToken> properties)

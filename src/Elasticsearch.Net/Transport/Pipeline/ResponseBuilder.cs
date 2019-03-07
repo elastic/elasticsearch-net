@@ -14,8 +14,6 @@ namespace Elasticsearch.Net
 		private static readonly Type[] SpecialTypes =
 			{ typeof(StringResponse), typeof(BytesResponse), typeof(VoidResponse), typeof(DynamicResponse) };
 
-		private static readonly VoidResponse StaticVoid = new VoidResponse { Body = new VoidResponse.VoidBody() };
-
 		public static TResponse ToResponse<TResponse>(
 			RequestData requestData,
 			Exception ex,
@@ -150,7 +148,7 @@ namespace Elasticsearch.Net
 			else if (responseType == typeof(BytesResponse))
 				cs = new BytesResponse(bytes) as TResponse;
 			else if (responseType == typeof(VoidResponse))
-				cs = StaticVoid as TResponse;
+				cs = new VoidResponse() as TResponse;
 			else if (responseType == typeof(DynamicResponse))
 			{
 				using (var ms = new MemoryStream(bytes))

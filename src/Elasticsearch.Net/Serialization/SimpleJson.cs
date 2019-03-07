@@ -48,7 +48,6 @@
 
 // original json parsing code from http://techblog.procurios.nl/k/618/news/view/14605/14863/How-do-I-write-my-own-parser-for-JSON.html
 
-#define SIMPLE_JSON_TYPEINFO
 using System;
 using System.CodeDom.Compiler;
 using System.Collections;
@@ -267,7 +266,7 @@ namespace Elasticsearch.Net
 		/// </returns>
 		public bool Contains(KeyValuePair<string, object> item)
 		{
-			return _members.ContainsKey(item.Key) && _members[item.Key] == item.Value;
+			return _members.TryGetValue(item.Key, out object value) && value == item.Value;
 		}
 
 		/// <summary>
