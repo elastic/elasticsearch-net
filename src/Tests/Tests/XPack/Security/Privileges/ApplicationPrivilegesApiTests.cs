@@ -210,14 +210,11 @@ namespace Tests.XPack.Security.Privileges
 		{
 			r.IsValid.Should().BeTrue();
 			r.ApiCall.HttpStatusCode.Should().Be(200);
-
 			r.Username.Should().Be($"user-{v}");
-
 			r.HasAllRequested.Should().Be(true);
-
-			r.Application.Should().NotBeEmpty();
+			r.Applications.Should().NotBeEmpty();
 			var app = $"app-{v}";
-			var hasApp = r.Application.TryGetValue(app, out var privilegesDict);
+			var hasApp = r.Applications.TryGetValue(app, out var privilegesDict);
 			hasApp.Should().BeTrue($"expect `{app}` to be returned");
 			privilegesDict.Should().NotBeNull($"expect `{app}`'s value not to be null");
 		});
