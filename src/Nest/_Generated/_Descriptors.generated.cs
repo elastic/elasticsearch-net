@@ -67,14 +67,14 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public BulkDescriptor SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
-		public BulkDescriptor SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
+		public BulkDescriptor SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
-		public BulkDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_exclude", fields?.Select(e=>(Field)e));
+		public BulkDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_excludes", fields?.Select(e=>(Field)e));
 
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
-		public BulkDescriptor SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
+		public BulkDescriptor SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
-		public BulkDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_include", fields?.Select(e=>(Field)e));
+		public BulkDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_includes", fields?.Select(e=>(Field)e));
 
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public BulkDescriptor Pipeline(string pipeline) => Qs("pipeline", pipeline);
@@ -792,6 +792,10 @@ namespace Nest
 		public ClusterStateDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Return settings in flat format (default: false)</summary>
 		public ClusterStateDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
+		///<summary>Wait for the metadata version to be equal or greater than the specified metadata version</summary>
+		public ClusterStateDescriptor WaitForMetadataVersion(long? waitForMetadataVersion) => Qs("wait_for_metadata_version", waitForMetadataVersion);
+		///<summary>The maximum time to wait for wait_for_metadata_version before timing out</summary>
+		public ClusterStateDescriptor WaitForTimeout(Time waitForTimeout) => Qs("wait_for_timeout", waitForTimeout);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public ClusterStateDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
@@ -848,6 +852,8 @@ namespace Nest
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public CountDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public CountDescriptor<T> IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public CountDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
@@ -986,6 +992,10 @@ namespace Nest
 		public DeleteDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Explicit operation timeout</summary>
 		public DeleteDescriptor<T> Timeout(Time timeout) => Qs("timeout", timeout);
+		///<summary>only perform the delete operation if the last operation that has changed the document has the specified sequence number</summary>
+		public DeleteDescriptor<T> IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
+		///<summary>only perform the delete operation if the last operation that has changed the document has the specified primary term</summary>
+		public DeleteDescriptor<T> IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
 		///<summary>Explicit version number for concurrency control</summary>
 		public DeleteDescriptor<T> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
@@ -1066,14 +1076,14 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public DeleteByQueryDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public DeleteByQueryDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
+		public DeleteByQueryDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public DeleteByQueryDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
+		public DeleteByQueryDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_excludes", fields?.Select(e=>(Field)e));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public DeleteByQueryDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
+		public DeleteByQueryDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public DeleteByQueryDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
+		public DeleteByQueryDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_includes", fields?.Select(e=>(Field)e));
 
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public DeleteByQueryDescriptor<T> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
@@ -1172,14 +1182,14 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public DocumentExistsDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public DocumentExistsDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
+		public DocumentExistsDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public DocumentExistsDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
+		public DocumentExistsDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_excludes", fields?.Select(e=>(Field)e));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public DocumentExistsDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
+		public DocumentExistsDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public DocumentExistsDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
+		public DocumentExistsDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_includes", fields?.Select(e=>(Field)e));
 
 		///<summary>Explicit version number for concurrency control</summary>
 		public DocumentExistsDescriptor<T> Version(long? version) => Qs("version", version);
@@ -1239,14 +1249,14 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public SourceExistsDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceExistsDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
+		public SourceExistsDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceExistsDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
+		public SourceExistsDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_excludes", fields?.Select(e=>(Field)e));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceExistsDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
+		public SourceExistsDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceExistsDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
+		public SourceExistsDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_includes", fields?.Select(e=>(Field)e));
 
 		///<summary>Explicit version number for concurrency control</summary>
 		public SourceExistsDescriptor<T> Version(long? version) => Qs("version", version);
@@ -1314,14 +1324,14 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public ExplainDescriptor<TDocument> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExplainDescriptor<TDocument> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
+		public ExplainDescriptor<TDocument> SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExplainDescriptor<TDocument> SourceExclude(params Expression<Func<TDocument, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
+		public ExplainDescriptor<TDocument> SourceExclude(params Expression<Func<TDocument, object>>[] fields)  => Qs("_source_excludes", fields?.Select(e=>(Field)e));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExplainDescriptor<TDocument> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
+		public ExplainDescriptor<TDocument> SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExplainDescriptor<TDocument> SourceInclude(params Expression<Func<TDocument, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
+		public ExplainDescriptor<TDocument> SourceInclude(params Expression<Func<TDocument, object>>[] fields)  => Qs("_source_includes", fields?.Select(e=>(Field)e));
 
 	}
 	///<summary>descriptor for FieldCaps <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</pre></summary>
@@ -1494,14 +1504,14 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public SourceDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
+		public SourceDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
+		public SourceDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_excludes", fields?.Select(e=>(Field)e));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
+		public SourceDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
+		public SourceDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_includes", fields?.Select(e=>(Field)e));
 
 		///<summary>Explicit version number for concurrency control</summary>
 		public SourceDescriptor<T> Version(long? version) => Qs("version", version);
@@ -1566,6 +1576,10 @@ namespace Nest
 		public IndexDescriptor<TDocument> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
 		public IndexDescriptor<TDocument> VersionType(VersionType? versionType) => Qs("version_type", versionType);
+		///<summary>only perform the index operation if the last operation that has changed the document has the specified sequence number</summary>
+		public IndexDescriptor<TDocument> IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
+		///<summary>only perform the index operation if the last operation that has changed the document has the specified primary term</summary>
+		public IndexDescriptor<TDocument> IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public IndexDescriptor<TDocument> Pipeline(string pipeline) => Qs("pipeline", pipeline);
 	}
@@ -2812,14 +2826,14 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public MultiGetDescriptor SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public MultiGetDescriptor SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
+		public MultiGetDescriptor SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public MultiGetDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_exclude", fields?.Select(e=>(Field)e));
+		public MultiGetDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_excludes", fields?.Select(e=>(Field)e));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public MultiGetDescriptor SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
+		public MultiGetDescriptor SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public MultiGetDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_include", fields?.Select(e=>(Field)e));
+		public MultiGetDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_includes", fields?.Select(e=>(Field)e));
 
 	}
 	///<summary>descriptor for Msearch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</pre></summary>
@@ -2861,6 +2875,8 @@ namespace Nest
 		public MultiSearchDescriptor PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
 		///<summary>The number of concurrent shard requests each sub search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests</summary>
 		public MultiSearchDescriptor MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
+		///<summary>This parameter is ignored in this version. It is used in the next major version to control whether the rest response should render the total.hits as an object or a number</summary>
+		public MultiSearchDescriptor TotalHitsAsInteger(bool? totalHitsAsInteger = true) => Qs("rest_total_hits_as_int", totalHitsAsInteger);
 	}
 	///<summary>descriptor for MsearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html</pre></summary>
 	public partial class MultiSearchTemplateDescriptor  : RequestDescriptorBase<MultiSearchTemplateDescriptor,MultiSearchTemplateRequestParameters, IMultiSearchTemplateRequest>, IMultiSearchTemplateRequest
@@ -2897,6 +2913,8 @@ namespace Nest
 		public MultiSearchTemplateDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
 		public MultiSearchTemplateDescriptor MaxConcurrentSearches(long? maxConcurrentSearches) => Qs("max_concurrent_searches", maxConcurrentSearches);
+		///<summary>This parameter is ignored in this version. It is used in the next major version to control whether the rest response should render the total.hits as an object or a number</summary>
+		public MultiSearchTemplateDescriptor TotalHitsAsInteger(bool? totalHitsAsInteger = true) => Qs("rest_total_hits_as_int", totalHitsAsInteger);
 	}
 	///<summary>descriptor for Mtermvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</pre></summary>
 	public partial class MultiTermVectorsDescriptor  : RequestDescriptorBase<MultiTermVectorsDescriptor,MultiTermVectorsRequestParameters, IMultiTermVectorsRequest>, IMultiTermVectorsRequest
@@ -3004,7 +3022,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public NodesInfoDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
-	///<summary>descriptor for NodesReloadSecureSettingsForAll <pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.5/secure-settings.html#reloadable-secure-settings</pre></summary>
+	///<summary>descriptor for NodesReloadSecureSettingsForAll <pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.x/secure-settings.html#reloadable-secure-settings</pre></summary>
 	public partial class ReloadSecureSettingsDescriptor  : RequestDescriptorBase<ReloadSecureSettingsDescriptor,ReloadSecureSettingsRequestParameters, IReloadSecureSettingsRequest>, IReloadSecureSettingsRequest
 	{ 
 		/// <summary>/_nodes/reload_secure_settings</summary>
@@ -3182,6 +3200,8 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>This parameter is ignored in this version. It is used in the next major version to control whether the rest response should render the total.hits as an object or a number</summary>
+		public ScrollDescriptor<T> TotalHitsAsInteger(bool? totalHitsAsInteger = true) => Qs("rest_total_hits_as_int", totalHitsAsInteger);
 	}
 	///<summary>descriptor for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
 	public partial class SearchDescriptor<T>  : RequestDescriptorBase<SearchDescriptor<T>,SearchRequestParameters, ISearchRequest>, ISearchRequest
@@ -3222,6 +3242,8 @@ namespace Nest
 		public SearchDescriptor<T> Df(string df) => Qs("df", df);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SearchDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public SearchDescriptor<T> IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public SearchDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
@@ -3268,6 +3290,8 @@ namespace Nest
 		public SearchDescriptor<T> MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
 		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
 		public SearchDescriptor<T> PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
+		///<summary>This parameter is ignored in this version. It is used in the next major version to control whether the rest response should render the total.hits as an object or a number</summary>
+		public SearchDescriptor<T> TotalHitsAsInteger(bool? totalHitsAsInteger = true) => Qs("rest_total_hits_as_int", totalHitsAsInteger);
 	}
 	///<summary>descriptor for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
 	public partial class SearchShardsDescriptor<T>  : RequestDescriptorBase<SearchShardsDescriptor<T>,SearchShardsRequestParameters, ISearchShardsRequest>, ISearchShardsRequest
@@ -3338,6 +3362,8 @@ namespace Nest
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SearchTemplateDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public SearchTemplateDescriptor<T> IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public SearchTemplateDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
@@ -3362,6 +3388,8 @@ namespace Nest
 		public SearchTemplateDescriptor<T> Profile(bool? profile = true) => Qs("profile", profile);
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public SearchTemplateDescriptor<T> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
+		///<summary>This parameter is ignored in this version. It is used in the next major version to control whether the rest response should render the total.hits as an object or a number</summary>
+		public SearchTemplateDescriptor<T> TotalHitsAsInteger(bool? totalHitsAsInteger = true) => Qs("rest_total_hits_as_int", totalHitsAsInteger);
 	}
 	///<summary>descriptor for SnapshotCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class SnapshotDescriptor  : RequestDescriptorBase<SnapshotDescriptor,SnapshotRequestParameters, ISnapshotRequest>, ISnapshotRequest
@@ -3797,14 +3825,14 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public UpdateByQueryDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public UpdateByQueryDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
+		public UpdateByQueryDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public UpdateByQueryDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
+		public UpdateByQueryDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_excludes", fields?.Select(e=>(Field)e));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public UpdateByQueryDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
+		public UpdateByQueryDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public UpdateByQueryDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
+		public UpdateByQueryDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_includes", fields?.Select(e=>(Field)e));
 
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public UpdateByQueryDescriptor<T> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
@@ -4114,6 +4142,46 @@ namespace Nest
 		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
 		public CloseJobDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
+	///<summary>descriptor for XpackMlDeleteCalendar <pre></pre></summary>
+	public partial class DeleteCalendarDescriptor  : RequestDescriptorBase<DeleteCalendarDescriptor,DeleteCalendarRequestParameters, IDeleteCalendarRequest>, IDeleteCalendarRequest
+	{ 
+		/// <summary>/_xpack/ml/calendars/{calendar_id}</summary>
+		///<param name="calendar_id"> this parameter is required</param>
+		public DeleteCalendarDescriptor(Id calendar_id) : base(r=>r.Required("calendar_id", calendar_id)){}
+		// values part of the url path
+		Id IDeleteCalendarRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for XpackMlDeleteCalendarEvent <pre></pre></summary>
+	public partial class DeleteCalendarEventDescriptor  : RequestDescriptorBase<DeleteCalendarEventDescriptor,DeleteCalendarEventRequestParameters, IDeleteCalendarEventRequest>, IDeleteCalendarEventRequest
+	{ 
+		/// <summary>/_xpack/ml/calendars/{calendar_id}/events/{event_id}</summary>
+		///<param name="calendar_id"> this parameter is required</param>
+		///<param name="event_id"> this parameter is required</param>
+		public DeleteCalendarEventDescriptor(Id calendar_id, Id event_id) : base(r=>r.Required("calendar_id", calendar_id).Required("event_id", event_id)){}
+		// values part of the url path
+		Id IDeleteCalendarEventRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+		Id IDeleteCalendarEventRequest.EventId => Self.RouteValues.Get<Id>("event_id");
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for XpackMlDeleteCalendarJob <pre></pre></summary>
+	public partial class DeleteCalendarJobDescriptor  : RequestDescriptorBase<DeleteCalendarJobDescriptor,DeleteCalendarJobRequestParameters, IDeleteCalendarJobRequest>, IDeleteCalendarJobRequest
+	{ 
+		/// <summary>/_xpack/ml/calendars/{calendar_id}/jobs/{job_id}</summary>
+		///<param name="calendar_id"> this parameter is required</param>
+		///<param name="job_id"> this parameter is required</param>
+		public DeleteCalendarJobDescriptor(Id calendar_id, Id job_id) : base(r=>r.Required("calendar_id", calendar_id).Required("job_id", job_id)){}
+		// values part of the url path
+		Id IDeleteCalendarJobRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+		Id IDeleteCalendarJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+
+	}
 	///<summary>descriptor for XpackMlDeleteDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
 	public partial class DeleteDatafeedDescriptor  : RequestDescriptorBase<DeleteDatafeedDescriptor,DeleteDatafeedRequestParameters, IDeleteDatafeedRequest>, IDeleteDatafeedRequest
 	{ 
@@ -4203,6 +4271,38 @@ namespace Nest
 
 		// Request parameters
 
+	}
+	///<summary>descriptor for XpackMlGetCalendars <pre></pre></summary>
+	public partial class GetCalendarsDescriptor  : RequestDescriptorBase<GetCalendarsDescriptor,GetCalendarsRequestParameters, IGetCalendarsRequest>, IGetCalendarsRequest
+	{ 
+		/// <summary>/_xpack/ml/calendars</summary>
+		public GetCalendarsDescriptor() : base(){}
+		// values part of the url path
+		Id IGetCalendarsRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		///<summary>The ID of the calendar to fetch</summary>
+		public GetCalendarsDescriptor CalendarId(Id calendarId) => Assign(a=>a.RouteValues.Optional("calendar_id", calendarId));
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for XpackMlGetCalendarEvents <pre></pre></summary>
+	public partial class GetCalendarEventsDescriptor  : RequestDescriptorBase<GetCalendarEventsDescriptor,GetCalendarEventsRequestParameters, IGetCalendarEventsRequest>, IGetCalendarEventsRequest
+	{ 
+		/// <summary>/_xpack/ml/calendars/{calendar_id}/events</summary>
+		///<param name="calendar_id"> this parameter is required</param>
+		public GetCalendarEventsDescriptor(Id calendar_id) : base(r=>r.Required("calendar_id", calendar_id)){}
+		// values part of the url path
+		Id IGetCalendarEventsRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+
+		///<summary>Get events for the job. When this option is used calendar_id must be '_all'</summary>
+		public GetCalendarEventsDescriptor JobId(string jobId) => Qs("job_id", jobId);
+		///<summary>Get events after this time</summary>
+		public GetCalendarEventsDescriptor Start(string start) => Qs("start", start);
+		///<summary>Get events before this time</summary>
+		public GetCalendarEventsDescriptor End(DateTimeOffset? end) => Qs("end", end);
 	}
 	///<summary>descriptor for XpackMlGetCategories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
 	public partial class GetCategoriesDescriptor  : RequestDescriptorBase<GetCategoriesDescriptor,GetCategoriesRequestParameters, IGetCategoriesRequest>, IGetCategoriesRequest
@@ -4356,6 +4456,18 @@ namespace Nest
 		// Request parameters
 
 	}
+	///<summary>descriptor for XpackMlPostCalendarEvents <pre></pre></summary>
+	public partial class PostCalendarEventsDescriptor  : RequestDescriptorBase<PostCalendarEventsDescriptor,PostCalendarEventsRequestParameters, IPostCalendarEventsRequest>, IPostCalendarEventsRequest
+	{ 
+		/// <summary>/_xpack/ml/calendars/{calendar_id}/events</summary>
+		///<param name="calendar_id"> this parameter is required</param>
+		public PostCalendarEventsDescriptor(Id calendar_id) : base(r=>r.Required("calendar_id", calendar_id)){}
+		// values part of the url path
+		Id IPostCalendarEventsRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+
+	}
 	///<summary>descriptor for XpackMlPostData <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
 	public partial class PostJobDataDescriptor  : RequestDescriptorBase<PostJobDataDescriptor,PostJobDataRequestParameters, IPostJobDataRequest>, IPostJobDataRequest
 	{ 
@@ -4380,6 +4492,32 @@ namespace Nest
 		public PreviewDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
 		// values part of the url path
 		Id IPreviewDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for XpackMlPutCalendar <pre></pre></summary>
+	public partial class PutCalendarDescriptor  : RequestDescriptorBase<PutCalendarDescriptor,PutCalendarRequestParameters, IPutCalendarRequest>, IPutCalendarRequest
+	{ 
+		/// <summary>/_xpack/ml/calendars/{calendar_id}</summary>
+		///<param name="calendar_id"> this parameter is required</param>
+		public PutCalendarDescriptor(Id calendar_id) : base(r=>r.Required("calendar_id", calendar_id)){}
+		// values part of the url path
+		Id IPutCalendarRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for XpackMlPutCalendarJob <pre></pre></summary>
+	public partial class PutCalendarJobDescriptor  : RequestDescriptorBase<PutCalendarJobDescriptor,PutCalendarJobRequestParameters, IPutCalendarJobRequest>, IPutCalendarJobRequest
+	{ 
+		/// <summary>/_xpack/ml/calendars/{calendar_id}/jobs/{job_id}</summary>
+		///<param name="calendar_id"> this parameter is required</param>
+		///<param name="job_id"> this parameter is required</param>
+		public PutCalendarJobDescriptor(Id calendar_id, Id job_id) : base(r=>r.Required("calendar_id", calendar_id).Required("job_id", job_id)){}
+		// values part of the url path
+		Id IPutCalendarJobRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+		Id IPutCalendarJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
 		// Request parameters
 
@@ -4670,6 +4808,8 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
+		public RollupSearchDescriptor<T> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
 	}
 	///<summary>descriptor for XpackRollupStartJob <pre></pre></summary>
 	public partial class StartRollupJobDescriptor  : RequestDescriptorBase<StartRollupJobDescriptor,StartRollupJobRequestParameters, IStartRollupJobRequest>, IStartRollupJobRequest
@@ -4694,6 +4834,10 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>True if the API should block until the job has fully stopped, false if should be executed async. Defaults to false.</summary>
+		public StopRollupJobDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
+		///<summary>Block for (at maximum) the specified duration while waiting for the job to stop.  Defaults to 30s.</summary>
+		public StopRollupJobDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 	///<summary>descriptor for XpackSecurityAuthenticate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
 	public partial class AuthenticateDescriptor  : RequestDescriptorBase<AuthenticateDescriptor,AuthenticateRequestParameters, IAuthenticateRequest>, IAuthenticateRequest

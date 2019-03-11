@@ -43,6 +43,8 @@ namespace ApiGenerator.Domain
 					case "type": return Type == "string" ? "TypeName" : "Types";
 					case "watch_id":
 					case "job_id":
+					case "calendar_id":
+					case "event_id":
 					case "datafeed_id":
 					case "snapshot_id":
 					case "filter_id":

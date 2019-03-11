@@ -6,7 +6,10 @@ namespace ApiGenerator.Domain
 {
 	public class ApiQueryParameters
 	{
-		private static readonly string[] FieldsParams = { "fields", "_source_include", "_source_exclude" };
+		private static readonly string[] FieldsParams =
+		{
+			"fields", "_source_include", "_source_exclude", "_source_includes", "_source_excludes",
+		};
 
 		public string ClsArgumentName => ClsName.ToCamelCase();
 

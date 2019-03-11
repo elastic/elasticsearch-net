@@ -210,8 +210,9 @@ namespace Elasticsearch.Net
 	[Flags]public enum WatcherStatsMetric
 	{
 		[EnumMember(Value = "queued_watches")] QueuedWatches = 1 << 0,
-		[EnumMember(Value = "pending_watches")] PendingWatches = 1 << 1,
-		[EnumMember(Value = "_all")] All = 1 << 2
+		[EnumMember(Value = "current_watches")] CurrentWatches = 1 << 1,
+		[EnumMember(Value = "pending_watches")] PendingWatches = 1 << 2,
+		[EnumMember(Value = "_all")] All = 1 << 3
 	}
 	public static class KnownEnums
 	{
@@ -534,6 +535,7 @@ namespace Elasticsearch.Net
 			if ((enumValue & WatcherStatsMetric.All) != 0) return "_all";
 			var list = new List<string>();
 			if ((enumValue & WatcherStatsMetric.QueuedWatches) != 0) list.Add("queued_watches");
+			if ((enumValue & WatcherStatsMetric.CurrentWatches) != 0) list.Add("current_watches");
 			if ((enumValue & WatcherStatsMetric.PendingWatches) != 0) list.Add("pending_watches");
 			return string.Join(",", list);
 		}

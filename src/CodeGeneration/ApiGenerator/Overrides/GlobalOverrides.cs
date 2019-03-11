@@ -26,8 +26,11 @@ namespace ApiGenerator.Overrides
 		public override IDictionary<string, string> RenameQueryStringParams { get; } = new Dictionary<string, string>
 		{
 			{ "_source", "source_enabled" },
+			{ "_source_includes", "source_include" },
+			{ "_source_excludes", "source_exclude" },
 			{ "_source_include", "source_include" },
 			{ "_source_exclude", "source_exclude" },
+			{ "rest_total_hits_as_int", "total_hits_as_integer" },
 			{ "docvalue_fields", "doc_value_fields" },
 			{ "q", "query_on_query_string" },
 			//make cat parameters more descriptive

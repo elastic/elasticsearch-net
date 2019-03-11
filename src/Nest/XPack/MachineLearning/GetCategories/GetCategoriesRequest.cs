@@ -18,18 +18,18 @@ namespace Nest
 	/// <inheritdoc />
 	public partial class GetCategoriesRequest
 	{
-		/// <inheritdoc />
+		/// <inheritdoc cref="IGetCategoriesRequest.Page" />
 		public IPage Page { get; set; }
 	}
 
-	/// <inheritdoc />
 	[DescriptorFor("XpackMlGetCategories")]
 	public partial class GetCategoriesDescriptor
 	{
-		/// <inheritdoc />
+		/// <inheritdoc cref="IGetCategoriesRequest.Page" />
 		IPage IGetCategoriesRequest.Page { get; set; }
 
-		/// <inheritdoc />
+
+		/// <inheritdoc cref="IGetCategoriesRequest.Page" />
 		public GetCategoriesDescriptor Page(Func<PageDescriptor, IPage> selector) => Assign(a => a.Page = selector?.Invoke(new PageDescriptor()));
 	}
 }
