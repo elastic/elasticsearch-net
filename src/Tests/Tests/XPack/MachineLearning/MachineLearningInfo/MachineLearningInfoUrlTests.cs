@@ -11,10 +11,10 @@ namespace Tests.XPack.MachineLearning.GetCategories
 		[U] public override async Task Urls()
 		{
 			await GET("_xpack/ml/info")
-					.Fluent(c => c.MlInfo())
-					.Request(c => c.MlInfo(new MlInfoRequest()))
-					.FluentAsync(c => c.MlInfoAsync())
-					.RequestAsync(c => c.MlInfoAsync(new MlInfoRequest()));
+					.Fluent(c => c.MachineLearningInfo())
+					.Request(c => c.MachineLearningInfo(new MachineLearningInfoRequest()))
+					.FluentAsync(c => c.MachineLearningInfoAsync())
+					.RequestAsync(c => c.MachineLearningInfoAsync(new MachineLearningInfoRequest()));
 		}
 	}
 }

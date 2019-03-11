@@ -6,12 +6,12 @@ namespace Nest
 	/// <summary>
 	/// Retrieve job results for one or more categories.
 	/// </summary>
-	public partial interface IMlInfoRequest { }
+	public partial interface IMachineLearningInfoRequest { }
 
 	/// <inheritdoc />
-	public partial class MlInfoRequest { }
+	public partial class MachineLearningInfoRequest { }
 
 	/// <inheritdoc />
 	[DescriptorFor("XpackMlInfo")]
-	public partial class MlInfoDescriptor { }
+	public partial class MachineLearningInfoDescriptor { }
 }

@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	public interface IMlInfoResponse : IResponse
+	public interface IMachineLearningInfoResponse : IResponse
 	{
 		[JsonProperty("defaults")]
 		Defaults Defaults { get; }
@@ -14,7 +14,7 @@ namespace Nest
 		bool? UpgradeMode { get; }
 	}
 
-	public class MlInfoResponse : ResponseBase, IMlInfoResponse
+	public class MachineLearningInfoResponse : ResponseBase, IMachineLearningInfoResponse
 	{
 		[JsonProperty("defaults")]
 		public Defaults Defaults { get; internal set; }

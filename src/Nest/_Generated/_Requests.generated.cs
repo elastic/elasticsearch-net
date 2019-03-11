@@ -3774,6 +3774,18 @@ namespace Nest
 		public string ParentNode { get => Q<string>("parent_node"); set => Q("parent_node", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMachineLearningInfoRequest : IRequest<MachineLearningInfoRequestParameters>
+	{
+	}
+	///<summary>Request parameters for XpackMlInfo <pre></pre></summary>
+	public partial class MachineLearningInfoRequest : PlainRequestBase<MachineLearningInfoRequestParameters>, IMachineLearningInfoRequest
+	{
+		protected IMachineLearningInfoRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMigrationAssistanceRequest : IRequest<MigrationAssistanceRequestParameters>
 	{
 		Indices Index { get; }
@@ -3819,18 +3831,6 @@ namespace Nest
 		// Request parameters
 		///<summary>Should the request block until the upgrade operation is completed</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IMlInfoRequest : IRequest<MlInfoRequestParameters>
-	{
-	}
-	///<summary>Request parameters for XpackMlInfo <pre></pre></summary>
-	public partial class MlInfoRequest : PlainRequestBase<MlInfoRequestParameters>, IMlInfoRequest
-	{
-		protected IMlInfoRequest Self => this;
-		// values part of the url path
-
-		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMultiGetRequest : IRequest<MultiGetRequestParameters>

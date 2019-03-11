@@ -10,30 +10,30 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.MachineLearning.Info
 {
-	public class MlInfoApiTests
-		: MachineLearningIntegrationTestBase<IMlInfoResponse, IMlInfoRequest, MlInfoDescriptor, MlInfoRequest>
+	public class MachineLearningInfoApiTests
+		: MachineLearningIntegrationTestBase<IMachineLearningInfoResponse, IMachineLearningInfoRequest, MachineLearningInfoDescriptor, MachineLearningInfoRequest>
 	{
-		public MlInfoApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public MachineLearningInfoApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 		protected override object ExpectJson => null;
 		protected override int ExpectStatusCode => 200;
-		protected override Func<MlInfoDescriptor, IMlInfoRequest> Fluent => f => f;
+		protected override Func<MachineLearningInfoDescriptor, IMachineLearningInfoRequest> Fluent => f => f;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
-		protected override MlInfoRequest Initializer => new MlInfoRequest();
+		protected override MachineLearningInfoRequest Initializer => new MachineLearningInfoRequest();
 
 		protected override string UrlPath => $"_xpack/ml/info";
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.MlInfo(f),
-			(client, f) => client.MlInfoAsync(f),
-			(client, r) => client.MlInfo(r),
-			(client, r) => client.MlInfoAsync(r)
+			(client, f) => client.MachineLearningInfo(f),
+			(client, f) => client.MachineLearningInfoAsync(f),
+			(client, r) => client.MachineLearningInfo(r),
+			(client, r) => client.MachineLearningInfoAsync(r)
 		);
 
-		protected override MlInfoDescriptor NewDescriptor() => new MlInfoDescriptor();
+		protected override MachineLearningInfoDescriptor NewDescriptor() => new MachineLearningInfoDescriptor();
 
-		protected override void ExpectResponse(IMlInfoResponse response)
+		protected override void ExpectResponse(IMachineLearningInfoResponse response)
 		{
 			response.ShouldBeValid();
 

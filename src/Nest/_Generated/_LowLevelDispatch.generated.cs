@@ -3748,7 +3748,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlGetRecords", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/results/records");
 		}
 		
-		internal TResponse XpackMlInfoDispatch<TResponse>(IRequest<MlInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse XpackMlInfoDispatch<TResponse>(IRequest<MachineLearningInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3758,7 +3758,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlInfo", p, new [] { GET }, "/_xpack/ml/info");
 		}
 		
-		internal Task<TResponse> XpackMlInfoDispatchAsync<TResponse>(IRequest<MlInfoRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> XpackMlInfoDispatchAsync<TResponse>(IRequest<MachineLearningInfoRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{

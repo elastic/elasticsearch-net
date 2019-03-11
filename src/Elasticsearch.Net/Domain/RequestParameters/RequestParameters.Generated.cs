@@ -2408,7 +2408,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 	///<summary>Request options for XpackMlInfo<pre></pre></summary>
-	public partial class MlInfoRequestParameters : RequestParameters<MlInfoRequestParameters> 
+	public partial class MachineLearningInfoRequestParameters : RequestParameters<MachineLearningInfoRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}

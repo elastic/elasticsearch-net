@@ -4337,7 +4337,7 @@ namespace Nest
 
 	}
 	///<summary>descriptor for XpackMlInfo <pre></pre></summary>
-	public partial class MlInfoDescriptor  : RequestDescriptorBase<MlInfoDescriptor,MlInfoRequestParameters, IMlInfoRequest>, IMlInfoRequest
+	public partial class MachineLearningInfoDescriptor  : RequestDescriptorBase<MachineLearningInfoDescriptor,MachineLearningInfoRequestParameters, IMachineLearningInfoRequest>, IMachineLearningInfoRequest
 	{ 
 		// values part of the url path
 
