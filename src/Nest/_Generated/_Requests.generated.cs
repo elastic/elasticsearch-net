@@ -1812,7 +1812,7 @@ namespace Nest
 	public partial interface IDeleteForecastRequest : IRequest<DeleteForecastRequestParameters>
 	{
 		Id JobId { get; }
-		Id ForecastId { get; }
+		ForecastIds ForecastId { get; }
 	}
 	///<summary>Request parameters for XpackMlDeleteForecast <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</pre></summary>
 	public partial class DeleteForecastRequest : PlainRequestBase<DeleteForecastRequestParameters>, IDeleteForecastRequest
@@ -1821,10 +1821,10 @@ namespace Nest
 		///<summary>/_xpack/ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}</summary>
 		///<param name="job_id">this parameter is required</param>
 		///<param name="forecast_id">this parameter is required</param>
-		public DeleteForecastRequest(Id job_id, Id forecast_id) : base(r=>r.Required("job_id", job_id).Required("forecast_id", forecast_id)){}
+		public DeleteForecastRequest(Id job_id, ForecastIds forecast_id) : base(r=>r.Required("job_id", job_id).Required("forecast_id", forecast_id)){}
 		// values part of the url path
 		Id IDeleteForecastRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-		Id IDeleteForecastRequest.ForecastId => Self.RouteValues.Get<Id>("forecast_id");
+		ForecastIds IDeleteForecastRequest.ForecastId => Self.RouteValues.Get<ForecastIds>("forecast_id");
 
 		// Request parameters
 		///<summary>Whether to ignore if `_all` matches no forecasts</summary>
