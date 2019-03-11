@@ -3893,6 +3893,18 @@ namespace Nest
 		public string ParentNode { get => Q<string>("parent_node"); set => Q("parent_node", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMachineLearningInfoRequest : IRequest<MachineLearningInfoRequestParameters>
+	{
+	}
+	///<summary>Request parameters for XpackMlInfo <pre></pre></summary>
+	public partial class MachineLearningInfoRequest : PlainRequestBase<MachineLearningInfoRequestParameters>, IMachineLearningInfoRequest
+	{
+		protected IMachineLearningInfoRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMigrationAssistanceRequest : IRequest<MigrationAssistanceRequestParameters>
 	{
 		Indices Index { get; }
