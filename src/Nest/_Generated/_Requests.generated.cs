@@ -4207,6 +4207,19 @@ namespace Nest
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	[InterfaceDataContract]
+	public partial interface IMachineLearningInfoRequest : IRequest<MachineLearningInfoRequestParameters>
+	{
+	}
+
+	///<summary>Request parameters for MlInfo <pre>TODO</pre></summary>
+	public partial class MachineLearningInfoRequest : PlainRequestBase<MachineLearningInfoRequestParameters>, IMachineLearningInfoRequest
+	{
+		protected IMachineLearningInfoRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+	}
+	[InterfaceDataContract]
 	public partial interface IMigrationAssistanceRequest : IRequest<MigrationAssistanceRequestParameters>
 	{
 		[IgnoreDataMember]

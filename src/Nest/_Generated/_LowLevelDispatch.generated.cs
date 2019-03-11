@@ -3832,6 +3832,26 @@ namespace Nest
 			throw InvalidDispatch("MlGetRecords", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/results/records");
 		}
 		
+		internal TResponse MlInfoDispatch<TResponse>(IRequest<MachineLearningInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.MlInfo<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("MlInfo", p, new [] { GET }, "/_ml/info");
+		}
+		
+		internal Task<TResponse> MlInfoDispatchAsync<TResponse>(IRequest<MachineLearningInfoRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.MlInfoAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("MlInfo", p, new [] { GET }, "/_ml/info");
+		}
+		
 		internal TResponse MlOpenJobDispatch<TResponse>(IRequest<OpenJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
