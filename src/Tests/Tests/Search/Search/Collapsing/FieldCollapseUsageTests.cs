@@ -68,8 +68,9 @@ namespace Tests.Search.Search.Collapsing
 			{
 				var name = nameof(StateOfBeing).ToLowerInvariant();
 				hit.InnerHits.Should().NotBeNull().And.ContainKey(name);
-				var innherHits = hit.InnerHits[name];
-				innherHits.Hits.Total.Should().BeGreaterThan(0);
+				var innerHits = hit.InnerHits[name];
+				innerHits.Hits.Total.Should().NotBeNull();
+				innerHits.Hits.Total.Value.Should().BeGreaterThan(0);
 			}
 		}
 	}
@@ -153,7 +154,9 @@ namespace Tests.Search.Search.Collapsing
 				var name = nameof(StateOfBeing).ToLowerInvariant();
 				hit.InnerHits.Should().NotBeNull().And.ContainKey(name);
 				var innerHits = hit.InnerHits[name];
-				innerHits.Hits.Total.Should().BeGreaterThan(0);
+				innerHits.Hits.Total.Should().NotBeNull();
+				innerHits.Hits.Total.Value.Should().BeGreaterThan(0);
+
 				var i = 0;
 				foreach (var innerHit in innerHits.Hits.Hits)
 				{

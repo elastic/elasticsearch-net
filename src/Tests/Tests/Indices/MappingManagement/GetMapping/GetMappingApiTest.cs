@@ -47,10 +47,15 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		{
 			response.ShouldBeValid();
 
+			/** For backwards compatible reasons you can still ask per type mappings, this is obsolete and will be removed in 8.0 **/
+#pragma warning disable 618
 			response.Indices["project"]["_doc"].Properties.Should().NotBeEmpty();
 			response.Indices[Index<Project>()].Mappings.Properties.Should().NotBeEmpty();
 			response.Indices[Index<Project>()]["_doc"].Properties.Should().NotBeEmpty();
-			var properties = response.Indices["project"]["_doc"].Properties;
+#pragma warning restore 618
+
+			var mappings = response.Indices[Index<Project>()].Mappings;
+			var properties = mappings.Properties;
 
 			var leadDev = properties[Property<Project>(p => p.LeadDeveloper)];
 			leadDev.Should().NotBeNull();
@@ -72,11 +77,6 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			response.GetMappingFor<Project>().Should().NotBeNull();
 			response.GetMappingFor(typeof(Project)).Should().NotBeNull();
 
-			/** The following should all return a `null` because we had asked for the mapping of type `doc` in index `project` */
-			response.GetMappingFor<Developer>().Should().BeNull();
-			response.GetMappingFor("dev").Should().BeNull();
-			response.GetMappingFor(typeof(Project)).Should().BeNull();
-			response.GetMappingFor("dev").Should().BeNull();
 		}
 
 		//hide

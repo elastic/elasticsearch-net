@@ -14,6 +14,9 @@ namespace Tests.Search.Search
 	{
 		public InvalidSearchApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
+		/// <summary> This is rather noisy on the console out, we only need to test 1 of our overloads randomly really. </summary>
+		protected override bool TestOnlyOne => true;
+
 		protected override bool ExpectIsValid => false;
 
 		protected override object ExpectJson => new

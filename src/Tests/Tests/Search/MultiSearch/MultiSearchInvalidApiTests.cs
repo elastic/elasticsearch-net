@@ -94,7 +94,7 @@ namespace Tests.Search.MultiSearch
 			searchResponse.ServerError.Status.Should().Be(404);
 			searchResponse.ServerError.Error.Should().NotBeNull();
 			searchResponse.ServerError.Error.Type.Should().Be("index_not_found_exception");
-			searchResponse.ServerError.Error.Reason.Should().Be("no such index");
+			searchResponse.ServerError.Error.Reason.Should().StartWith("no such index");
 		}
 	}
 }

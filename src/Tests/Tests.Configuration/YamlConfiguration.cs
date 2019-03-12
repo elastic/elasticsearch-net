@@ -21,6 +21,7 @@ namespace Tests.Configuration
 			var version = _config["elasticsearch_version"];
 			ElasticsearchVersion = string.IsNullOrWhiteSpace(version) ? DefaultVersion : version;
 			ForceReseed = BoolConfig("force_reseed", false);
+			TestOnlyOne = BoolConfig("test_only_one", false);
 			TestAgainstAlreadyRunningElasticsearch = BoolConfig("test_against_already_running_elasticsearch", false);
 			ShowElasticsearchOutputAfterStarted = BoolConfig("elasticsearch_out_after_started", false);
 			ClusterFilter = _config.ContainsKey("cluster_filter") ? _config["cluster_filter"] : null;
@@ -39,6 +40,7 @@ namespace Tests.Configuration
 		public sealed override string ClusterFilter { get; protected set; }
 		public sealed override string ElasticsearchVersion { get; protected set; }
 		public sealed override bool ForceReseed { get; protected set; } = true;
+		public sealed override bool TestOnlyOne { get; protected set; }
 		public sealed override TestMode Mode { get; protected set; } = TestMode.Unit;
 		public sealed override int Seed { get; protected set; }
 		public sealed override bool ShowElasticsearchOutputAfterStarted { get; protected set; }

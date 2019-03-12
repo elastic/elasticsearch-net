@@ -43,17 +43,17 @@ namespace Tests.Search.FieldCapabilities
 
 		protected override void ExpectResponse(IFieldCapabilitiesResponse response)
 		{
-			response.Fields.Should().ContainKey("_uid");
 
-			var uidFieldCaps = response.Fields.First(kv => kv.Value.Uid != null).Value.Uid;
-			uidFieldCaps.Aggregatable.Should().BeTrue();
-			uidFieldCaps.Searchable.Should().BeFalse();
+			var sourceField = response.Fields.First(kv => kv.Value.Source != null).Value.Source;
+			sourceField.Aggregatable.Should().BeFalse();
+			sourceField.Searchable.Should().BeFalse();
 
-			uidFieldCaps = response.Fields["_uid"].Uid;
-			uidFieldCaps.Should().NotBeNull();
+			response.Fields.Should().ContainKey("_index");
+			var indexField = response.Fields["_index"].Index;
+			indexField.Should().NotBeNull();
 
-			uidFieldCaps.Aggregatable.Should().BeTrue();
-			uidFieldCaps.Searchable.Should().BeFalse();
+			indexField.Aggregatable.Should().BeTrue();
+			indexField.Searchable.Should().BeTrue();
 
 			response.Fields.Should().ContainKey("state");
 			var stateCapabilities = response.Fields["state"].Keyword;
