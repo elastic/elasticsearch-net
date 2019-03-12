@@ -179,7 +179,7 @@ namespace Nest
 			if (o == null)
 				return null;
 
-			var total = o[Parser.Total].ToObject<long>();
+			var total = o[Parser.Total].ToObject<HitsTotal>();
 			var maxScore = o[Parser.MaxScore].ToObject<double?>();
 			var hits = o[Parser.Hits].Children().OfType<JObject>();
 			reader.Read();

@@ -1,4 +1,5 @@
-﻿using Elasticsearch.Net;
+﻿using System;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
@@ -16,6 +17,7 @@ namespace Tests.Indices.MappingManagement.GetFieldMapping
 	{
 		private static readonly Fields Fields = Fields<Project>(p => p.Name, p => p.LeadDeveloper.IpAddress);
 		private static readonly Field NameField = Field<Project>(p => p.Name);
+		private static readonly Nest.Indices OnIndices = Index<Project>().And<ProjectPercolation>();
 
 		public GetFieldMappingApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -23,12 +25,14 @@ namespace Tests.Indices.MappingManagement.GetFieldMapping
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
-		protected override GetFieldMappingRequest Initializer => new GetFieldMappingRequest("project", Fields);
-		protected override string UrlPath => $"/project/_mapping/field/name%2CleadDeveloper.ipAddress";
+		protected override GetFieldMappingRequest Initializer => new GetFieldMappingRequest(OnIndices, Fields);
+		protected override Func<GetFieldMappingDescriptor<Project>, IGetFieldMappingRequest> Fluent => d => d.Index(OnIndices);
+
+		protected override string UrlPath => $"/project,queries/_mapping/field/name%2CleadDeveloper.ipAddress";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetFieldMapping<Project>(Fields),
-			(client, f) => client.GetFieldMappingAsync<Project>(Fields),
+			(client, f) => client.GetFieldMapping<Project>(Fields, f),
+			(client, f) => client.GetFieldMappingAsync<Project>(Fields, f),
 			(client, r) => client.GetFieldMapping(r),
 			(client, r) => client.GetFieldMappingAsync(r)
 		);
@@ -46,17 +50,9 @@ namespace Tests.Indices.MappingManagement.GetFieldMapping
 			projectMappings.Should().NotBeNull("project mapping value in the dictionary should not point to a null value");
 			projectMappings.Mappings.Should()
 				.NotBeEmpty("project has fields so should contain a type mapping")
-				.And.ContainKey("project", "the type for project should be found in the index mapping");
+				.And.ContainKey(NameField, "project mappings should have 'name'");
 
-			var projectTypeMappings = projectMappings.Mappings["project"];
-			projectTypeMappings.Should().NotBeNull("project type mapping value should not point to a null value");
-
-			projectTypeMappings.Should()
-				.NotBeEmpty("project mappings should return fields")
-				.And.HaveCount(2, "project mapping should return both fields")
-				.And.ContainKey(NameField, "name is a field in the project index");
-
-			var fieldTypeMapping = projectTypeMappings[NameField];
+			var fieldTypeMapping = projectMappings.Mappings[NameField];
 			fieldTypeMapping.Should().NotBeNull("name field mapping should exist");
 			fieldTypeMapping.FullName.Should().NotBeNullOrEmpty();
 			fieldTypeMapping.Mapping.Should()

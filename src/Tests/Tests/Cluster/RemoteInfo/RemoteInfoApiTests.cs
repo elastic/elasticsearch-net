@@ -85,7 +85,6 @@ namespace Tests.Cluster.RemoteInfo
 			{
 				if (!name.StartsWith("cluster_")) continue;
 				remote.Connected.Should().BeTrue();
-				remote.HttpAddresses.Should().NotBeNullOrEmpty();
 				remote.Seeds.Should().NotBeNullOrEmpty();
 				remote.InitialConnectTimeout.Should().NotBeNull().And.Be("30s");
 				remote.MaxConnectionsPerCluster.Should().BeGreaterThan(0, "max_connections_per_cluster");

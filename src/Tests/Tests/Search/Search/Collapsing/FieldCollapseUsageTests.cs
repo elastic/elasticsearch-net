@@ -62,7 +62,7 @@ namespace Tests.Search.Search.Collapsing
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			var numberOfStates = Enum.GetValues(typeof(StateOfBeing)).Length;
-			response.HitsMetadata.Total.Should().BeGreaterThan(numberOfStates);
+			response.HitsMetadata.Total.Value.Should().BeGreaterThan(numberOfStates);
 			response.Hits.Count.Should().Be(numberOfStates);
 			foreach (var hit in response.Hits)
 			{
@@ -146,7 +146,7 @@ namespace Tests.Search.Search.Collapsing
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			var numberOfStates = Enum.GetValues(typeof(StateOfBeing)).Length;
-			response.HitsMetadata.Total.Should().BeGreaterThan(numberOfStates);
+			response.HitsMetadata.Total.Value.Should().BeGreaterThan(numberOfStates);
 			response.Hits.Count.Should().Be(numberOfStates);
 			foreach (var hit in response.Hits)
 			{

@@ -33,8 +33,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 
 				match.Success.Should().BeTrue();
 
-				match.Groups["ip"].Value.ShouldBeEquivalentTo(ip);
-				match.Groups["port"].Value.ShouldBeEquivalentTo(port);
+				match.Groups["ip"].Value.Should().BeEquivalentTo(ip);
+				match.Groups["port"].Value.Should().BeEquivalentTo(port);
 			}
 		}
 
@@ -58,9 +58,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 
 				match.Success.Should().BeTrue();
 
-				match.Groups["fqdn"].Value.ShouldBeEquivalentTo(fqdn);
-				match.Groups["ip"].Value.ShouldBeEquivalentTo(ip);
-				match.Groups["port"].Value.ShouldBeEquivalentTo(port);
+				match.Groups["fqdn"].Value.Should().BeEquivalentTo(fqdn);
+				match.Groups["ip"].Value.Should().BeEquivalentTo(ip);
+				match.Groups["port"].Value.Should().BeEquivalentTo(port);
 			}
 		}
 	}

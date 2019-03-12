@@ -194,7 +194,7 @@ namespace Tests.Aggregations.Metric.TopHits
 				state.DocCount.Should().BeGreaterThan(0);
 				var topStateHits = state.TopHits("top_state_hits");
 				topStateHits.Should().NotBeNull();
-				topStateHits.Total.Should().BeGreaterThan(0);
+				topStateHits.Total.Value.Should().BeGreaterThan(0);
 				var hits = topStateHits.Hits<Project>();
 				hits.Should().NotBeNullOrEmpty();
 				hits.All(h => h.Explanation != null).Should().BeTrue();

@@ -41,10 +41,7 @@ namespace Tests.Core.Extensions
 			if (dictionary != null) Subject = dictionary;
 		}
 
-		/// <summary>
-		/// Returns the type of the subject the assertion applies on.
-		/// </summary>
-		protected override string Context => "dictionary";
+		protected override string Identifier => "dictionary";
 
 		/// <summary>
 		/// Asserts that the number of items in the dictionary matches the supplied <paramref name="expected" /> amount.

@@ -117,8 +117,6 @@ namespace Tests.Cluster.NodesInfo
 			var pool = pools["fetch_shard_store"];
 			pool.KeepAlive.Should().NotBeNullOrWhiteSpace();
 			pool.Type.Should().Be("scaling");
-			pool.Min.Should().BeGreaterThan(0);
-			pool.Max.Should().BeGreaterThan(0);
 			pool.QueueSize.Should().BeGreaterOrEqualTo(-1);
 		}
 

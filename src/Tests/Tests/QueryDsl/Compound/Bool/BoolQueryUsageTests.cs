@@ -154,7 +154,7 @@ namespace Tests.QueryDsl.Compound.Bool
 				)
 			);
 
-			query.ShouldNotThrow();
+			query.Should().NotThrow();
 		}
 	}
 }

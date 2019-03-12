@@ -102,7 +102,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			{
 				for (var i = 0; i < Iterations; i++) container |= q;
 			};
-			act.ShouldNotThrow();
+			act.Should().NotThrow();
 			LotsOfOrs(container);
 			return container;
 		}

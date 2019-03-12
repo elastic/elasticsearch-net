@@ -17,7 +17,7 @@ namespace Tests.Reproduce
 				var scroll = searchRequest.Scroll;
 			};
 
-			getScroll.ShouldNotThrow();
+			getScroll.Should().NotThrow();
 		}
 	}
 }
