@@ -37,6 +37,7 @@ namespace Tests.Search.Explain
 		protected override int ExpectStatusCode => 200;
 
 		protected override Func<ExplainDescriptor<Project>, IExplainRequest<Project>> Fluent => e => e
+			.Routing(Project.Instance.Name)
 			.SourceEnabled()
 			.Query(q => q
 				.Match(m => m
@@ -49,6 +50,7 @@ namespace Tests.Search.Explain
 
 		protected override ExplainRequest<Project> Initializer => new ExplainRequest<Project>(_project)
 		{
+			Routing = Project.Instance.Name,
 			SourceEnabled = true,
 			Query = new QueryContainer(new MatchQuery
 			{
@@ -60,7 +62,7 @@ namespace Tests.Search.Explain
 		protected override bool SupportsDeserialization => false;
 
 		protected override string UrlPath =>
-			$"/project/_explain/{U(Project.Instance.Name)}?_source=true";
+			$"/project/_explain/{U(Project.Instance.Name)}?_source=true&routing={Q(Project.Instance.Name)}";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(c, f) => c.Explain(_project, f),

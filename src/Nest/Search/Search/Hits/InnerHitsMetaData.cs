@@ -13,7 +13,7 @@ namespace Nest
 		public double? MaxScore { get; internal set; }
 
 		[JsonProperty("total")]
-		public long Total { get; internal set; }
+		public HitsTotal Total { get; internal set; }
 
 		public IEnumerable<T> Documents<T>() where T : class
 		{

@@ -21,3 +21,7 @@ test_against_already_running_elasticsearch: true
 #random_source_serializer: true
 #random_old_connection: true
 seed: 69819
+
+# Can be helpful to speed up tests runs as setting this to true only randomly tests a single overload of the api rather than all 4.
+# Can also help keep the noise down in case of test failures
+test_only_one: true

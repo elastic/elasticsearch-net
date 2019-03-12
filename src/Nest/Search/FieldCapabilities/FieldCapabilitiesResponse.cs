@@ -67,6 +67,7 @@ namespace Nest
 		public FieldCapabilities TokenCount => BackingDictionary.TryGetValue("token_count", out var f) ? f : null;
 		public FieldCapabilities Type => BackingDictionary.TryGetValue("_type", out var f) ? f : null;
 		public FieldCapabilities Uid => BackingDictionary.TryGetValue("_uid", out var f) ? f : null;
+		public FieldCapabilities ParentJoin => BackingDictionary.TryGetValue("_parent_join", out var f) ? f : null;
 		public FieldCapabilities Version => BackingDictionary.TryGetValue("_version", out var f) ? f : null;
 	}
 

@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Managed.Ephemeral;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using Tests.Aggregations;
 using Tests.Core.Client;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.Serialization;
+using Tests.Domain.Helpers;
 using Tests.Framework.Integration;
 using Xunit;
 
@@ -43,11 +46,14 @@ namespace Tests.Framework
 		protected bool RanIntegrationSetup => _usage?.CalledSetup ?? false;
 		protected LazyResponses Responses { get; }
 
+		protected virtual bool TestOnlyOne => TestClient.Configuration.TestOnlyOne;
+
 		protected CallUniqueValues UniqueValues { get; }
 
 		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
 
 		protected string U(string s) => Uri.EscapeDataString(s);
+		protected string Q(string s) => Uri.EscapeUriString(s);
 
 		protected T ExtendedValue<T>(string key) where T : class => UniqueValues.ExtendedValue<T>(key);
 
@@ -87,27 +93,25 @@ namespace Tests.Framework
 				_usage.CalledSetup = true;
 			}
 
+			(ClientMethod, Func<ValueTask<TResponse>>) Api(ClientMethod method, Func<ValueTask<TResponse>> action) => (method, action);
+
 			var dict = new Dictionary<ClientMethod, IResponse>();
-			UniqueValues.CurrentView = ClientMethod.Fluent;
+			var views = new[]
+			{
+				Api(ClientMethod.Fluent, () => new ValueTask<TResponse>(fluent(client, Fluent))),
+				Api(ClientMethod.Initializer, () => new ValueTask<TResponse>(request(client, Initializer))),
+				Api(ClientMethod.FluentAsync, async () => await fluentAsync(client, Fluent)),
+				Api(ClientMethod.InitializerAsync, async () => await requestAsync(client, Initializer)),
+			};
+			foreach (var (v, m) in views.OrderBy((t)=> Gimme.Random.Int()))
+			{
+                UniqueValues.CurrentView = v;
 
-			IntegrateOnly(OnBeforeCall);
-			dict.Add(ClientMethod.Fluent, fluent(client, Fluent));
-			IntegrateOnly(OnAfterCall);
-
-			UniqueValues.CurrentView = ClientMethod.FluentAsync;
-			IntegrateOnly(OnBeforeCall);
-			dict.Add(ClientMethod.FluentAsync, await fluentAsync(client, Fluent));
-			IntegrateOnly(OnAfterCall);
-
-			UniqueValues.CurrentView = ClientMethod.Initializer;
-			IntegrateOnly(OnBeforeCall);
-			dict.Add(ClientMethod.Initializer, request(client, Initializer));
-			IntegrateOnly(OnAfterCall);
-
-			UniqueValues.CurrentView = ClientMethod.InitializerAsync;
-			IntegrateOnly(OnBeforeCall);
-			dict.Add(ClientMethod.InitializerAsync, await requestAsync(client, Initializer));
-			IntegrateOnly(OnAfterCall);
+                IntegrateOnly(OnBeforeCall);
+                dict.Add(v, await m());
+                IntegrateOnly(OnAfterCall);
+				if (TestOnlyOne) break;
+			}
 
 			if (TestClient.Configuration.RunIntegrationTests)
 			{
