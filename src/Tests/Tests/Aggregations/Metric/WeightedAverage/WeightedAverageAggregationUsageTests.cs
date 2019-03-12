@@ -42,7 +42,7 @@ namespace Tests.Aggregations.Metric.WeightedAverage
 					{
 						script = new
 						{
-							source = "doc.numberOfContributors.value + 1"
+							source = "(doc['numberOfContributors']?.value ?: 0) + 1"
 						}
 					},
 					value_type = "long"
@@ -53,7 +53,7 @@ namespace Tests.Aggregations.Metric.WeightedAverage
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.WeightedAverage("weighted_avg_commits", avg => avg
 				.Value(v => v.Field(p => p.NumberOfCommits).Missing(0))
-				.Weight(w => w.Script("doc.numberOfContributors.value + 1"))
+				.Weight(w => w.Script("(doc['numberOfContributors']?.value ?: 0) + 1"))
 				.ValueType(ValueType.Long)
 			);
 
@@ -64,7 +64,7 @@ namespace Tests.Aggregations.Metric.WeightedAverage
 				{
 					Missing = 0
 				},
-				Weight = new WeightedAverageValue(new InlineScript("doc.numberOfContributors.value + 1")),
+				Weight = new WeightedAverageValue(new InlineScript("(doc['numberOfContributors']?.value ?: 0) + 1")),
 				ValueType = ValueType.Long
 			};
 

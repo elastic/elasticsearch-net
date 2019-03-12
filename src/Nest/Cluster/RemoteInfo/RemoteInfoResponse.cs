@@ -21,8 +21,8 @@ namespace Nest
 		[JsonProperty("connected")]
 		public bool Connected { get; internal set; }
 
-		[JsonProperty("http_addresses")]
-		public IReadOnlyCollection<string> HttpAddresses { get; internal set; } = EmptyReadOnly<string>.Collection;
+		[JsonProperty("skip_unavailable")]
+		public bool SkipUnavailable { get; internal set; }
 
 		[JsonProperty("initial_connect_timeout")]
 		public Time InitialConnectTimeout { get; internal set; }

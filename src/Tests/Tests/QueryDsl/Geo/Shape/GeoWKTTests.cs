@@ -272,7 +272,7 @@ namespace Tests.QueryDsl.Geo
 		{
 			var wkt = "UNKNOWN (100 0)";
 			Action action = () => GeoWKTReader.Read(wkt);
-			action.ShouldThrow<GeoWKTException>().Which.Message.Should().Be("Unknown geometry type: UNKNOWN");
+			action.Should().Throw<GeoWKTException>().Which.Message.Should().Be("Unknown geometry type: UNKNOWN");
 		}
 
 		[U]
@@ -280,7 +280,7 @@ namespace Tests.QueryDsl.Geo
 		{
 			var wkt = "POLYGON ((100, 5) (100, 10) (90, 10), (90, 5), (100, 5)";
 			Action action = () => GeoWKTReader.Read(wkt);
-			action.ShouldThrow<GeoWKTException>().Which.Message.Should().Be("Expected number but found: , at line 1, position 14");
+			action.Should().Throw<GeoWKTException>().Which.Message.Should().Be("Expected number but found: , at line 1, position 14");
 		}
 
 		[U]
@@ -288,7 +288,7 @@ namespace Tests.QueryDsl.Geo
 		{
 			var wkt = "POLYGON (\n(100, 5) (100, 10) (90, 10), (90, 5), (100, 5)";
 			Action action = () => GeoWKTReader.Read(wkt);
-			action.ShouldThrow<GeoWKTException>().Which.Message.Should().Be("Expected number but found: , at line 2, position 5");
+			action.Should().Throw<GeoWKTException>().Which.Message.Should().Be("Expected number but found: , at line 2, position 5");
 		}
 	}
 }

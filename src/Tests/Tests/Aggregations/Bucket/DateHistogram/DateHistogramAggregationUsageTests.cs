@@ -4,6 +4,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.Xunit;
 using Tests.Domain;
 using Tests.Framework.Integration;
 using static Nest.Infer;
@@ -22,6 +23,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 	 *
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-datehistogram-aggregation.html[Date Histogram Aggregation].
 	*/
+	[BlockedByIssue("https://github.com/elastic/elasticsearch/issues/39916")]
 	public class DateHistogramAggregationUsageTests : ProjectsOnlyAggregationUsageTestBase
 	{
 		public DateHistogramAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -70,6 +72,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 				.Interval(DateInterval.Month)
 				.MinimumDocumentCount(2)
 				.Format("yyyy-MM-dd'T'HH:mm:ss")
+				//.Format("date_optional_time")
 				.ExtendedBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
 				.Order(HistogramOrder.CountAscending)
 				.Missing(FixedDate)
@@ -90,6 +93,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 				Interval = DateInterval.Month,
 				MinimumDocumentCount = 2,
 				Format = "yyyy-MM-dd'T'HH:mm:ss",
+				//Format = "date_optional_time",
 				ExtendedBounds = new ExtendedBounds<DateMath>
 				{
 					Minimum = FixedDate.AddYears(-1),

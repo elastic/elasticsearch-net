@@ -134,7 +134,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 			);
 
 			list.Count.Should().Be(4);
-			list.ShouldAllBeEquivalentTo(new[] // <6> Assert the list contains the contents written in the delegate passed to `OnRequestCompleted`
+			list.Should().BeEquivalentTo(new[] // <6> Assert the list contains the contents written in the delegate passed to `OnRequestCompleted`
 			{
 				@"POST http://localhost:9200/_search?typed_keys=true&scroll=2m {""sort"":[{""_doc"":{""order"":""asc""}}]}",
 				@"Status: 200",
@@ -211,7 +211,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 			);
 
 			list.Count.Should().Be(4);
-			list.ShouldAllBeEquivalentTo(new[]
+			list.Should().BeEquivalentTo(new[]
 			{
 				@"POST http://localhost:9200/_search?typed_keys=true&scroll=2m", // <3> Only the method and url for the first request is captured
 				@"Status: 200",

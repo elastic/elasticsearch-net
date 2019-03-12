@@ -87,7 +87,7 @@ namespace Tests.Framework
 			AssertPoolBeforeCall?.Invoke(_cluster.ConnectionPool);
 
 			Action call = () => _cluster.ClientCall(callTrace?.RequestOverrides);
-			var exception = call.ShouldThrowExactly<TException>()
+			var exception = call.Should().ThrowExactly<TException>()
 				.Subject.First();
 			assert(exception);
 
@@ -97,7 +97,7 @@ namespace Tests.Framework
 			_clusterAsync = _clusterAsync ?? Cluster();
 			_clusterAsync.ClientThrows(true);
 			Func<Task> callAsync = async () => await _clusterAsync.ClientCallAsync(callTrace?.RequestOverrides);
-			exception = callAsync.ShouldThrowExactly<TException>()
+			exception = callAsync.Should().ThrowExactly<TException>()
 				.Subject.First();
 			assert(exception);
 
@@ -127,7 +127,7 @@ namespace Tests.Framework
 			AssertPoolBeforeCall?.Invoke(_cluster.ConnectionPool);
 
 			Action call = () => { Response = _cluster.ClientCall(callTrace?.RequestOverrides); };
-			call.ShouldNotThrow();
+			call.Should().NotThrow();
 
 			Response.ShouldNotBeValid();
 			var exception = Response.ApiCall.OriginalException as ElasticsearchClientException;
@@ -140,7 +140,7 @@ namespace Tests.Framework
 			_clusterAsync = _clusterAsync ?? Cluster();
 			_clusterAsync.ClientThrows(false);
 			Func<Task> callAsync = async () => { ResponseAsync = await _clusterAsync.ClientCallAsync(callTrace?.RequestOverrides); };
-			callAsync.ShouldNotThrow();
+			callAsync.Should().NotThrow();
 			ResponseAsync.ShouldNotBeValid();
 			exception = ResponseAsync.ApiCall.OriginalException as ElasticsearchClientException;
 			exception.Should().NotBeNull("OriginalException on response is not expected ElasticsearchClientException");
@@ -161,7 +161,7 @@ namespace Tests.Framework
 			AssertPoolBeforeCall?.Invoke(_cluster.ConnectionPool);
 
 			Action call = () => _cluster.ClientCall(callTrace?.RequestOverrides);
-			var exception = call.ShouldThrowExactly<UnexpectedElasticsearchClientException>()
+			var exception = call.Should().ThrowExactly<UnexpectedElasticsearchClientException>()
 				.Subject.First();
 			assert(exception);
 
@@ -170,7 +170,7 @@ namespace Tests.Framework
 
 			_clusterAsync = _clusterAsync ?? Cluster();
 			Func<Task> callAsync = async () => await _clusterAsync.ClientCallAsync(callTrace?.RequestOverrides);
-			exception = callAsync.ShouldThrowExactly<UnexpectedElasticsearchClientException>()
+			exception = callAsync.Should().ThrowExactly<UnexpectedElasticsearchClientException>()
 				.Subject.First();
 			assert(exception);
 

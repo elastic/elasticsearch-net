@@ -299,7 +299,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				e.FailureReason.Should().Be(PipelineFailure.Unexpected);
 
 				Func<string> debug = () => e.DebugInformation;
-				debug.Invoking(s => s.Invoke()).ShouldNotThrow();
+				debug.Invoking(s => s.Invoke()).Should().NotThrow();
 			});
 			/**
 			 * An example of the debug information that the client response returns for the previous exception

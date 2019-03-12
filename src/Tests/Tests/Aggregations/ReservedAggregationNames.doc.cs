@@ -111,12 +111,12 @@ namespace Tests.Aggregations
 
 		//hide
 		private void DoesNotThrowOn(string name, Action<string> act, string origin) =>
-			act.Invoking(s => s(name)).ShouldNotThrow<ArgumentException>(origin);
+			act.Invoking(s => s(name)).Should().NotThrow<ArgumentException>(origin);
 
 		//hide
 		private void ThrowsOn(string name, Action<string> act, string origin)
 		{
-			var e = act.Invoking(s => s(name)).ShouldThrow<ArgumentException>(origin).Subject.First();
+			var e = act.Invoking(s => s(name)).Should().Throw<ArgumentException>(origin).Subject.First();
 			AssertArgumentException(name, e);
 		}
 

@@ -25,7 +25,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 
 			Action callSniffing = () => AssertCreateView(sniffingPool);
 
-			callSniffing.ShouldNotThrow();
+			callSniffing.Should().NotThrow();
 		}
 
 		[U] public void StaticPoolWithstandsConcurrentReadAndWrites()
@@ -35,7 +35,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 
 			Action callStatic = () => AssertCreateView(staticPool);
 
-			callStatic.ShouldNotThrow();
+			callStatic.Should().NotThrow();
 		}
 
 		// hide

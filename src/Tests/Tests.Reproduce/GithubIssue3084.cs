@@ -29,8 +29,8 @@ namespace Tests.Reproduce
 			Action getDoc = () => client.Get<ObjectVersion2>(new GetRequest(index, 1));
 			Func<Task<IGetResponse<ObjectVersion2>>> getDocAsync = async () => await client.GetAsync<ObjectVersion2>(new GetRequest(index, 1));
 
-			getDoc.ShouldThrow<Exception>("synchonous code path should throw");
-			getDocAsync.ShouldThrow<Exception>("async code path should throw");
+			getDoc.Should().Throw<Exception>("synchonous code path should throw");
+			getDocAsync.Should().Throw<Exception>("async code path should throw");
 		}
 
 		public class ObjectVersion1

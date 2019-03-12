@@ -30,7 +30,7 @@ namespace Tests.Document.Multiple.BulkAll
 			var seenPages = 0;
 			var observableBulk = KickOff(index, documents);
 			Action bulkObserver = () => observableBulk.Wait(TimeSpan.FromMinutes(5), b => Interlocked.Increment(ref seenPages));
-			bulkObserver.ShouldThrow<ElasticsearchClientException>()
+			bulkObserver.Should().Throw<ElasticsearchClientException>()
 				.And.Message.Should()
 				.StartWith("BulkAll halted after receiving failures that can not");
 

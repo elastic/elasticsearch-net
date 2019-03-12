@@ -156,7 +156,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 				ParentName = "my-parent"
 			};
 			Action resolve = () => Expect("8080").WhenInferringRoutingOn(dto);
-			resolve.ShouldThrow<ArgumentException>().WithMessage("BadDTO has more than one JoinField property");
+			resolve.Should().Throw<ArgumentException>().WithMessage("BadDTO has more than one JoinField property");
 
 			/** unless you configure the ConnectionSettings to use an alternate property: */
 			WithConnectionSettings(x => x

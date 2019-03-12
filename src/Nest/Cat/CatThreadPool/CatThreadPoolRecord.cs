@@ -26,11 +26,13 @@ namespace Nest
 		[JsonProperty("largest")]
 		public int Largest { get; set; }
 
+		//TODO: This is now often reported back as null since 7.x (investigate)
 		[JsonProperty("max")]
-		public int Maximum { get; set; }
+		public int? Maximum { get; set; }
 
+		//TODO: this appears to no longer be reported
 		[JsonProperty("min")]
-		public int Minimum { get; set; }
+		public int? Minimum { get; set; }
 
 		[JsonProperty("name")]
 		public string Name { get; set; }

@@ -7,26 +7,11 @@ using static Nest.Infer;
 
 namespace Nest
 {
-	internal class FieldMappingPropertiesJsonConverter
-		: ResolvableDictionaryJsonConverterBase<FieldMappingProperties, Field, FieldMapping>
-	{
-		protected override FieldMappingProperties Create(IConnectionSettingsValues s, Dictionary<Field, FieldMapping> d) =>
-			new FieldMappingProperties(s, d);
-	}
-
-	[JsonConverter(typeof(FieldMappingPropertiesJsonConverter))]
-	public class FieldMappingProperties : ResolvableDictionaryProxy<Field, FieldMapping>
-	{
-		internal FieldMappingProperties(IConnectionConfigurationValues connectionSettings, IReadOnlyDictionary<Field, FieldMapping> backingDictionary)
-			: base(connectionSettings, backingDictionary) { }
-	}
-
 	public class TypeFieldMappings
 	{
 		[JsonProperty("mappings")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, FieldMappingProperties>))]
-		public IReadOnlyDictionary<string, FieldMappingProperties> Mappings { get; internal set; } =
-			EmptyReadOnly<string, FieldMappingProperties>.Dictionary;
+		[JsonConverter(typeof(ResolvableDictionaryJsonConverter<Field, FieldMapping>))]
+		public IReadOnlyDictionary<Field, FieldMapping> Mappings { get; internal set; } = EmptyReadOnly<Field, FieldMapping>.Dictionary;
 	}
 
 	public class FieldMapping
@@ -78,11 +63,11 @@ namespace Nest
 			where T : class =>
 			GetMapping(index ?? Index<T>(), Field(objectPath));
 
-		private FieldMappingProperties MappingsFor(IndexName index)
+		private IReadOnlyDictionary<Field, FieldMapping> MappingsFor(IndexName index)
 		{
 			if (!Indices.TryGetValue(index, out var indexMapping) || indexMapping.Mappings == null) return null;
 
-			return !indexMapping.Mappings.TryGetValue(null, out var typeFieldMapping) ? null : typeFieldMapping;
+			return indexMapping.Mappings;
 		}
 	}
 }

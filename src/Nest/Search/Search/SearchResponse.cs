@@ -166,6 +166,6 @@ namespace Nest
 		public long Took { get; internal set; }
 
 		[JsonIgnore]
-		public long Total => HitsMetadata?.Total ?? 0;
+		public long Total => HitsMetadata?.Total.Value ?? 0;
 	}
 }

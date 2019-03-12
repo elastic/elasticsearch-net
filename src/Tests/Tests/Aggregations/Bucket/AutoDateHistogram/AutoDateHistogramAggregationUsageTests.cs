@@ -5,6 +5,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.Xunit;
 using Tests.Domain;
 using Tests.Framework.Integration;
 using static Nest.Infer;
@@ -24,7 +25,7 @@ namespace Tests.Aggregations.Bucket.AutoDateHistogram
 	 *
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-autodatehistogram-aggregation.html[Auto Date Histogram Aggregation].
 	*/
-	[SkipVersion("<6.5.0", "")]
+	[BlockedByIssue("https://github.com/elastic/elasticsearch/issues/39916")]
 	public class AutoDateHistogramAggregationUsageTests : ProjectsOnlyAggregationUsageTestBase
 	{
 		public AutoDateHistogramAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
