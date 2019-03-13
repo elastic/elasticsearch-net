@@ -1,0 +1,109 @@
+﻿using System;
+using System.Linq;
+using Elasticsearch.Net;
+using FluentAssertions;
+using Nest;
+using Tests.Document.Multiple.Reindex;
+using Tests.Domain;
+using Tests.Framework;
+using Tests.Framework.Integration;
+using Tests.Core.Extensions;
+
+namespace Tests.Document.Multiple.UpdateByQueryRethrottle
+{
+	public class UpdateByQueryRethrottleApiTests
+		: ApiIntegrationTestBase<ReindexCluster, IListTasksResponse, IUpdateByQueryRethrottleRequest,
+			UpdateByQueryRethrottleDescriptor, UpdateByQueryRethrottleRequest>
+	{
+		protected const string TaskIdKey = "taskId";
+
+		public UpdateByQueryRethrottleApiTests(ReindexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+		protected override object ExpectJson => null;
+		protected override int ExpectStatusCode => 200;
+
+		protected override Func<UpdateByQueryRethrottleDescriptor, IUpdateByQueryRethrottleRequest> Fluent => d => d
+			.RequestsPerSecond(-1);
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
+		protected override UpdateByQueryRethrottleRequest Initializer => new UpdateByQueryRethrottleRequest(TaskId)
+		{
+			RequestsPerSecond = -1
+		};
+
+		protected override bool SupportsDeserialization => false;
+		protected TaskId TaskId => RanIntegrationSetup ? ExtendedValue<TaskId>(TaskIdKey) : "foo:1";
+
+		protected override string UrlPath => $"/_update_by_query/{TaskId.NodeId}%3A{TaskId.TaskNumber}/_rethrottle?requests_per_second=-1";
+
+		protected override UpdateByQueryRethrottleDescriptor NewDescriptor() => new UpdateByQueryRethrottleDescriptor(TaskId);
+
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
+		{
+			foreach (var callUniqueValue in values)
+			{
+				client.IndexMany(Project.Projects, callUniqueValue.Value);
+				client.Refresh(callUniqueValue.Value);
+			}
+		}
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.UpdateByQueryRethrottle(TaskId, f),
+			(client, f) => client.UpdateByQueryRethrottleAsync(TaskId, f),
+			(client, r) => client.UpdateByQueryRethrottle(r),
+			(client, r) => client.UpdateByQueryRethrottleAsync(r)
+		);
+
+		protected override void OnBeforeCall(IElasticClient client)
+		{
+			client.IndexMany(Project.Projects, CallIsolatedValue);
+			client.Refresh(CallIsolatedValue);
+
+			var updateByQuery = client.UpdateByQuery<Project>(u => u
+				.Index(CallIsolatedValue)
+				.Conflicts(Conflicts.Proceed)
+				.Query(q => q.MatchAll())
+				.Script(s => s.Source("ctx._source.numberOfCommits+=10"))
+				.Refresh()
+				.RequestsPerSecond(1)
+				.WaitForCompletion(false)
+			);
+
+			updateByQuery.ShouldBeValid();
+			ExtendedValue(TaskIdKey, updateByQuery.Task);
+		}
+
+		protected override void ExpectResponse(IListTasksResponse response)
+		{
+			response.ShouldBeValid();
+
+			response.Nodes.Should().NotBeEmpty().And.HaveCount(1);
+			var node = response.Nodes.First().Value;
+
+			node.Name.Should().NotBeNullOrEmpty();
+			node.TransportAddress.Should().NotBeNullOrEmpty();
+			node.Host.Should().NotBeNullOrEmpty();
+			node.Ip.Should().NotBeNullOrEmpty();
+			node.Roles.Should().NotBeEmpty();
+			node.Attributes.Should().NotBeEmpty();
+
+			node.Tasks.Should().NotBeEmpty().And.HaveCount(1);
+			node.Tasks.First().Key.Should().Be(TaskId);
+
+			var task = node.Tasks.First().Value;
+
+			task.Node.Should().NotBeNullOrEmpty().And.Be(TaskId.NodeId);
+			task.Id.Should().Be(TaskId.TaskNumber);
+			task.Type.Should().NotBeNullOrEmpty();
+			task.Action.Should().NotBeNullOrEmpty();
+
+			task.Status.RequestsPerSecond.Should().Be(-1);
+
+			task.StartTimeInMilliseconds.Should().BeGreaterThan(0);
+			task.RunningTimeInNanoSeconds.Should().BeGreaterThan(0);
+			task.Cancellable.Should().BeTrue();
+		}
+	}
+}
