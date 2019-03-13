@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	internal class FuzzinessJsonConverter : JsonConverter
 	{
-		private static readonly Regex AutoLengthRegex = new Regex(@"^AUTO:(?<low>\+?\d+),(?<high>\+?\d+)$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
 		public override bool CanRead => true;
 		public override bool CanWrite => true;
 
@@ -33,12 +30,13 @@ namespace Nest
 			if (reader.TokenType == JsonToken.String)
 			{
 				var rawAuto = (string)reader.Value;
-				var match = AutoLengthRegex.Match(rawAuto);
-				if (!match.Success)
+				var colonIndex = rawAuto.IndexOf(':');
+				var commaIndex = rawAuto.IndexOf(',');
+				if (colonIndex == -1 || commaIndex == -1)
 					return Fuzziness.Auto;
 
-				var low = int.Parse(match.Groups["low"].Value);
-				var high = int.Parse(match.Groups["high"].Value);
+				var low = int.Parse(rawAuto.Substring(colonIndex + 1, commaIndex - colonIndex - 1));
+				var high = int.Parse(rawAuto.Substring(commaIndex + 1));
 				return Fuzziness.AutoLength(low, high);
 			}
 
