@@ -9,6 +9,7 @@ namespace Nest
 		/// Provides a boost to this query to influence its relevance score.
 		/// For example, a query with a boost of 2 is twice as important as a query with a boost of 1,
 		/// although the actual boost value that is applied undergoes normalization and internal optimization.
+		/// Setting a boost with a span_or query will throw a parsing exception on the server.
 		/// </summary>
 		[JsonProperty("boost")]
 		double? Boost { get; set; }
