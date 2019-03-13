@@ -788,6 +788,28 @@ namespace Nest
 			throw InvalidDispatch("DeleteByQuery", p, new [] { POST }, "/{index}/_delete_by_query", "/{index}/{type}/_delete_by_query");
 		}
 		
+		internal TResponse DeleteByQueryRethrottleDispatch<TResponse>(IRequest<DeleteByQueryRethrottleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.TaskId)) return _lowLevel.DeleteByQueryRethrottle<TResponse>(p.RouteValues.TaskId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("DeleteByQueryRethrottle", p, new [] { POST }, "/_delete_by_query/{task_id}/_rethrottle");
+		}
+		
+		internal Task<TResponse> DeleteByQueryRethrottleDispatchAsync<TResponse>(IRequest<DeleteByQueryRethrottleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.TaskId)) return _lowLevel.DeleteByQueryRethrottleAsync<TResponse>(p.RouteValues.TaskId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("DeleteByQueryRethrottle", p, new [] { POST }, "/_delete_by_query/{task_id}/_rethrottle");
+		}
+		
 		internal TResponse DeleteScriptDispatch<TResponse>(IRequest<DeleteScriptRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)

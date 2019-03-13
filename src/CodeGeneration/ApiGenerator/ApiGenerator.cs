@@ -29,7 +29,6 @@ namespace ApiGenerator
 			// these API's are new and need to be mapped
 			"xpack.ml.delete_forecast.json",
 			"xpack.ml.find_file_structure.json",
-			"delete_by_query_rethrottle.json",
 			"update_by_query_rethrottle.json",
 
 			"xpack.ml.update_filter.json",
