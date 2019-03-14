@@ -5,6 +5,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// A response to a search request
+	/// </summary>
+	/// <typeparam name="T">The document type</typeparam>
 	public interface ISearchResponse<T> : IResponse where T : class
 	{
 		/// <summary>
@@ -12,8 +16,17 @@ namespace Nest
 		/// </summary>
 		AggregateDictionary Aggregations { get; }
 
+		/// <inheritdoc cref="Aggregations"/>
 		[Obsolete("Aggs has been renamed to Aggregations and will be removed in NEST 7.x")]
 		AggregateDictionary Aggs { get; }
+
+		/// <summary>
+		/// Gets the statistics about the clusters on which the search query was executed.
+		/// </summary>
+		/// <remarks>
+		/// Valid for cross cluster searches and Elasticsearch 6.1.0+
+		/// </remarks>
+		ClusterStatistics Clusters { get; }
 
 		/// <summary>
 		/// Gets the documents inside the hits, by deserializing <see cref="IHitMetadata{T}.Source" /> into T.
@@ -70,7 +83,7 @@ namespace Nest
 		string ScrollId { get; }
 
 		/// <summary>
-		/// Gets the meta data about the shards on which the search query was executed.
+		/// Gets the statistics about the shards on which the search query was executed.
 		/// </summary>
 		ShardStatistics Shards { get; }
 
@@ -100,20 +113,25 @@ namespace Nest
 		long Total { get; }
 	}
 
+	/// <inheritdoc cref="ISearchResponse{T}"/>
 	[JsonObject]
 	public class SearchResponse<T> : ResponseBase, ISearchResponse<T> where T : class
 	{
 		private IReadOnlyCollection<T> _documents;
-
 		private IReadOnlyCollection<FieldValues> _fields;
-
 		private IReadOnlyCollection<IHit<T>> _hits;
 
+		/// <inheritdoc />
 		[JsonProperty("aggregations")]
 		public AggregateDictionary Aggregations { get; internal set; } = AggregateDictionary.Default;
 
+		/// <inheritdoc />
 		[JsonIgnore]
 		public AggregateDictionary Aggs => Aggregations;
+
+		/// <inheritdoc />
+		[JsonProperty("_clusters")]
+		public ClusterStatistics Clusters { get; internal set; }
 
 		/// <inheritdoc />
 		[JsonIgnore]
@@ -128,43 +146,52 @@ namespace Nest
 				.Select(h => h.Fields)
 				.ToList());
 
+		/// <inheritdoc />
 		[JsonIgnore]
 		public IReadOnlyCollection<IHit<T>> Hits =>
 			_hits ?? (_hits = HitsMetadata?.Hits ?? EmptyReadOnly<IHit<T>>.Collection);
 
+		/// <inheritdoc />
 		[JsonProperty("hits")]
 		public HitsMetadata<T> HitsMetadata { get; internal set; }
 
+		/// <inheritdoc />
 		[JsonIgnore]
 		public double MaxScore => HitsMetadata?.MaxScore ?? 0;
 
+		/// <inheritdoc />
 		[JsonProperty("num_reduce_phases")]
 		public long NumberOfReducePhases { get; internal set; }
 
+		/// <inheritdoc />
 		[JsonProperty("profile")]
 		public Profile Profile { get; internal set; }
 
-		/// <summary>
-		/// Only set when search type = scan and scroll specified
-		/// </summary>
+		/// <inheritdoc />
 		[JsonProperty("_scroll_id")]
 		public string ScrollId { get; internal set; }
 
+		/// <inheritdoc />
 		[JsonProperty("_shards")]
 		public ShardStatistics Shards { get; internal set; }
 
+		/// <inheritdoc />
 		[JsonProperty("suggest")]
 		public SuggestDictionary<T> Suggest { get; internal set; } = SuggestDictionary<T>.Default;
 
+		/// <inheritdoc />
 		[JsonProperty("terminated_early")]
 		public bool TerminatedEarly { get; internal set; }
 
+		/// <inheritdoc />
 		[JsonProperty("timed_out")]
 		public bool TimedOut { get; internal set; }
 
+		/// <inheritdoc />
 		[JsonProperty("took")]
 		public long Took { get; internal set; }
 
+		/// <inheritdoc />
 		[JsonIgnore]
 		public long Total => HitsMetadata?.Total ?? 0;
 	}
