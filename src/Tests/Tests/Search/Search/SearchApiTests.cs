@@ -534,7 +534,7 @@ namespace Tests.Search.Search
 			Query = new QueryContainer(new MatchAllQuery())
 		};
 
-		protected override string UrlPath => $"/project,cluster_two:project/doc/_search";
+		protected override string UrlPath => $"/project%2Ccluster_two%3Aproject/doc/_search";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(c, f) => c.Search(f),
