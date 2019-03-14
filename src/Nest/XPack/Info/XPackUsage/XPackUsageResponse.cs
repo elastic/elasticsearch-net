@@ -164,6 +164,9 @@ namespace Nest
 
 	public class MachineLearningUsage : XPackUsage
 	{
+		[JsonProperty("node_count")]
+		public int NodeCount { get; internal set; }
+
 		[JsonProperty("datafeeds")]
 		public IReadOnlyDictionary<string, DataFeed> Datafeeds { get; set; } = EmptyReadOnly<string, DataFeed>.Dictionary;
 
