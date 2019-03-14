@@ -14,7 +14,12 @@ namespace Nest
 			}
 
 			if (value.Auto)
-				writer.WriteString("AUTO");
+			{
+				if (!value.Low.HasValue || !value.High.HasValue)
+					writer.WriteString("AUTO");
+				else
+					writer.WriteString($"AUTO:{value.Low},{value.High}");
+			}
 			else if (value.EditDistance.HasValue)
 				writer.WriteInt32(value.EditDistance.Value);
 			else if (value.Ratio.HasValue)
@@ -38,8 +43,18 @@ namespace Nest
 
 			switch (token) {
 				case JsonToken.String:
-					reader.ReadNextBlock();
-					return Fuzziness.Auto;
+				{
+					// TODO: read bytes from reader and avoid string allocation
+					var rawAuto = reader.ReadString();
+					var colonIndex = rawAuto.IndexOf(':');
+					var commaIndex = rawAuto.IndexOf(',');
+					if (colonIndex == -1 || commaIndex == -1)
+						return Fuzziness.Auto;
+
+					var low = int.Parse(rawAuto.Substring(colonIndex + 1, commaIndex - colonIndex - 1));
+					var high = int.Parse(rawAuto.Substring(commaIndex + 1));
+					return Fuzziness.AutoLength(low, high);
+				}
 				case JsonToken.Number: {
 					var value = reader.ReadNumberSegment();
 
