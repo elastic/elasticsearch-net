@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -39,6 +40,21 @@ namespace Tests.QueryDsl.Specialized.Percolate
 			(client, r) => client.Search<ProjectPercolation>(r),
 			(client, r) => client.SearchAsync<ProjectPercolation>(r)
 		);
+
+		// https://youtrack.jetbrains.com/issue/RIDER-19912
+		[U] protected override Task HitsTheCorrectUrl() => base.HitsTheCorrectUrl();
+
+		[U] protected override Task UsesCorrectHttpMethod() => base.UsesCorrectHttpMethod();
+
+		[U] protected override void SerializesInitializer() => base.SerializesInitializer();
+
+		[U] protected override void SerializesFluent() => base.SerializesFluent();
+
+		[I] public override async Task ReturnsExpectedStatusCode() => await base.ReturnsExpectedResponse();
+
+		[I] public override async Task ReturnsExpectedIsValid() => await base.ReturnsExpectedIsValid();
+
+		[I] public override async Task ReturnsExpectedResponse() => await base.AssertOnAllResponses(ExpectResponse);
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
