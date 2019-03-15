@@ -107,14 +107,14 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			/**
 			 * or globally type:
 			*/
-			WithConnectionSettings(x => x.DisableAllIdInference())
+			WithConnectionSettings(x => x.DefaultDisableIdInference())
 				.Expect(null).WhenInferringIdOn(dto);
 
 			/**
 			 * Once disabled globally the id inference can not be enabled per type.
 			*/
 			WithConnectionSettings(x => x
-				.DisableAllIdInference()
+				.DefaultDisableIdInference()
 				.DefaultMappingFor<MyDTO>(m => m
 					.DisableIdInference(disable: false)
 				)

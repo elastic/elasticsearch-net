@@ -33,12 +33,12 @@ namespace Nest
 
 		//TODO where T : class prevents boxing on null check.
 		public string Resolve<T>(T @object) =>
-			_connectionSettings.DisableAllIdInference || @object == null ? null : Resolve(@object.GetType(), @object);
+			_connectionSettings.DefaultDisableIdInference || @object == null ? null : Resolve(@object.GetType(), @object);
 
 		public string Resolve(Type type, object @object)
 		{
 			if (type == null || @object == null) return null;
-			if (_connectionSettings.DisableAllIdInference || _connectionSettings.DisableIdInference.Contains(type))
+			if (_connectionSettings.DefaultDisableIdInference || _connectionSettings.DisableIdInference.Contains(type))
 				return null;
 
 			var preferLocal = _connectionSettings.IdProperties.TryGetValue(type, out _);

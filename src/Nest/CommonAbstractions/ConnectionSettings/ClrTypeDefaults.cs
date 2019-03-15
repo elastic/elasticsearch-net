@@ -12,26 +12,29 @@ namespace Nest
 		Type ClrType { get; }
 
 		/// <summary>
-		/// The property for <see cref="ClrType" /> to resolve ids from.
+		/// The property for the given <see cref="ClrType" /> to resolve ids from.
 		/// </summary>
 		string IdPropertyName { get; set; }
 
 		/// <summary>
-		/// The default Elasticsearch index name for <see cref="ClrType" />
+		/// The default Elasticsearch index name for the given <see cref="ClrType" />
 		/// </summary>
 		string IndexName { get; set; }
 
 		/// <summary>
-		/// The relation name for <see cref="ClrType" /> to resolve to.
+		/// The relation name for the given <see cref="ClrType" /> to resolve to.
 		/// </summary>
 		string RelationName { get; set; }
 
 		/// <summary>
-		/// The default Elasticsearch type name for <see cref="ClrType" />
+		/// The default Elasticsearch type name for the given <see cref="ClrType" />
 		/// </summary>
 		string TypeName { get; set; }
 
-		/// <summary> This disables id inference for <see cref="ClrType"/> </summary>
+		/// <summary>Disables Id inference for the given <see cref="ClrType"/>.
+		/// By default, the _id value for a document is inferred from a property named Id,
+		/// or from the property named by <see cref="IdPropertyName"/>, if set.
+		/// </summary>
 		bool DisableIdInference { get; set; }
 	}
 
@@ -47,7 +50,6 @@ namespace Nest
 
 		/// <summary> Provide a default routing parameter lookup based on <typeparamref name="TDocument" /> </summary>
 		Expression<Func<TDocument, object>> RoutingProperty { get; set; }
-
 	}
 
 	public class ClrTypeMapping : IClrTypeMapping
@@ -107,24 +109,16 @@ namespace Nest
 		string IClrTypeMapping.TypeName { get; set; }
 		bool IClrTypeMapping.DisableIdInference { get; set; }
 
-		/// <summary>
-		/// The default Elasticsearch index name for the CLR type
-		/// </summary>
+		/// <inheritdoc cref="IClrTypeMapping.IndexName"/>
 		public ClrTypeMappingDescriptor IndexName(string indexName) => Assign(a => a.IndexName = indexName);
 
-		/// <summary>
-		/// The default Elasticsearch type name for the CLR type
-		/// </summary>
+		/// <inheritdoc cref="IClrTypeMapping.TypeName"/>
 		public ClrTypeMappingDescriptor TypeName(string typeName) => Assign(a => a.TypeName = typeName);
 
-		/// <summary>
-		/// The relation name for the CLR type to resolve to.
-		/// </summary>
+		/// <inheritdoc cref="IClrTypeMapping.RelationName"/>
 		public ClrTypeMappingDescriptor RelationName(string relationName) => Assign(a => a.RelationName = relationName);
 
-		/// <summary>
-		/// The name of the property on the CLR type to resolve an Id from.
-		/// </summary>
+		/// <inheritdoc cref="IClrTypeMapping.IdPropertyName"/>
 		public ClrTypeMappingDescriptor IdProperty(string idProperty) => Assign(a => a.IdPropertyName = idProperty);
 
 		/// <inheritdoc cref="IClrTypeMapping.DisableIdInference"/>
