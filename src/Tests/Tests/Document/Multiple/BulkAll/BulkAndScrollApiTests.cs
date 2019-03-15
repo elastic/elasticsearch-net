@@ -50,7 +50,7 @@ namespace Tests.Document.Multiple.BulkAll
 
 			seenDocuments.Should().Be(numberOfDocuments);
 			var groups = seenSlices.GroupBy(s => s).ToList();
-			groups.Count().Should().Be(numberOfShards);
+			groups.Count.Should().Be(numberOfShards);
 			groups.Should().OnlyContain(g => g.Count() > 1);
 		}
 
@@ -70,7 +70,15 @@ namespace Tests.Document.Multiple.BulkAll
 				.Index(index)
 			);
 			//we set up an observer
-			var bulkObserver = observableBulk.Wait(TimeSpan.FromMinutes(5), b => Interlocked.Increment(ref seenPages));
+			var bulkObserver = observableBulk.Wait(TimeSpan.FromMinutes(5), b =>
+			{
+				Interlocked.Increment(ref seenPages);
+				foreach (var item in b.Items)
+				{
+					item.IsValid.Should().BeTrue();
+					item.Id.Should().NotBeNullOrEmpty();
+				}
+			});
 
 			droppedDocuments.Take(10).Should().BeEmpty();
 			bulkObserver.TotalNumberOfFailedBuffers.Should().Be(0, "All buffers are expected to be indexed");
