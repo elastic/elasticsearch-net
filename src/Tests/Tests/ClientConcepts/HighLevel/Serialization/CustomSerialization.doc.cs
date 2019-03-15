@@ -10,6 +10,7 @@ using Elasticsearch.Net;
 using Nest;
 using Nest.JsonNetSerializer;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using Tests.Framework;
 using static Tests.Core.Serialization.SerializationTestHelper;
@@ -159,13 +160,10 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		 * If you'd like to be more explicit, you can also derive from `ConnectionSettingsAwareSerializerBase`
 		 * and override the `CreateJsonSerializerSettings` and `ModifyContractResolver` methods
 		 */
-		public class MyCustomJsonNetSerializer : ConnectionSettingsAwareSerializerBase
+		public class MyFirstCustomJsonNetSerializer : ConnectionSettingsAwareSerializerBase
 		{
-			public MyCustomJsonNetSerializer(IElasticsearchSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
+			public MyFirstCustomJsonNetSerializer(IElasticsearchSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
 				: base(builtinSerializer, connectionSettings) { }
-
-			protected override IEnumerable<JsonConverter> CreateJsonConverters() =>
-				Enumerable.Empty<JsonConverter>();
 
 			protected override JsonSerializerSettings CreateJsonSerializerSettings() =>
 				new JsonSerializerSettings
@@ -176,6 +174,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			protected override void ModifyContractResolver(ConnectionSettingsAwareContractResolver resolver) =>
 				resolver.NamingStrategy = new SnakeCaseNamingStrategy();
 		}
+
 		/**
 		 * Using `MyCustomJsonNetSerializer`, we can serialize using
 		 *
@@ -197,6 +196,13 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			public string FilePath { get; set; }
 
 			public int OwnerId { get; set; }
+
+			public IEnumerable<MySubDocument> SubDocuments { get; set; }
+		}
+
+		public class MySubDocument
+		{
+			public string Name { get; set; }
 		}
 
 		/**
@@ -208,7 +214,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			var connectionSettings = new ConnectionSettings(
 				pool,
 				connection: new InMemoryConnection(), // <1> an _in-memory_ connection is used here for example purposes. In your production application, you would use an `IConnection` implementation that actually sends a request.
-				sourceSerializer: (builtin, settings) => new MyCustomJsonNetSerializer(builtin, settings))
+				sourceSerializer: (builtin, settings) => new MyFirstCustomJsonNetSerializer(builtin, settings))
 				.DefaultIndex("my-index");
 
 			//hide
@@ -233,7 +239,8 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 				id = 1,
 				name = "My first document",
 				file_path = (string) null,
-				owner_id = 2
+				owner_id = 2,
+				sub_documents = (object) null
 			};
 			/**
 			 * which adheres to the conventions of our configured `MyCustomJsonNetSerializer` serializer.
@@ -241,6 +248,113 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 
 			// hide
 			Expect(expected, preserveNullInExpected: true).FromRequest(indexResponse);
+		}
+
+		/** ==== Serializing Type Information
+		 * Here's another example that implements a custom contract resolver. The custom contract resolver
+		 * will include the type name within the serialized JSON for the document, which can be useful when
+		 * returning covariant document types within a collection.
+		 */
+		public class MySecondCustomContractResolver : ConnectionSettingsAwareContractResolver
+		{
+			public MySecondCustomContractResolver(IConnectionSettingsValues connectionSettings) : base(connectionSettings)
+			{
+			}
+
+			protected override JsonContract CreateContract(Type objectType)
+			{
+				var contract = base.CreateContract(objectType);
+				if (contract is JsonContainerContract containerContract)
+				{
+					if (containerContract.ItemTypeNameHandling == null)
+						containerContract.ItemTypeNameHandling = TypeNameHandling.None;
+				}
+
+				return contract;
+			}
+		}
+
+		public class MySecondCustomJsonNetSerializer : ConnectionSettingsAwareSerializerBase
+		{
+			public MySecondCustomJsonNetSerializer(IElasticsearchSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
+				: base(builtinSerializer, connectionSettings) { }
+
+			protected override JsonSerializerSettings CreateJsonSerializerSettings() =>
+				new JsonSerializerSettings
+				{
+					TypeNameHandling = TypeNameHandling.All,
+					NullValueHandling = NullValueHandling.Ignore,
+					TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple
+				};
+
+			protected override ConnectionSettingsAwareContractResolver CreateContractResolver() =>
+				new MySecondCustomContractResolver(ConnectionSettings); // <1> override the contract resolver
+		}
+
+		/**
+		 * Now, hooking up this serializer
+         */
+		[U] public void MySecondJsonNetSerializer()
+		{
+			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+			var connectionSettings = new ConnectionSettings(
+					pool,
+					connection: new InMemoryConnection(),
+					sourceSerializer: (builtin, settings) => new MySecondCustomJsonNetSerializer(builtin, settings))
+				.DefaultIndex("my-index");
+
+			//hide
+			connectionSettings.DisableDirectStreaming();
+
+			var client = new ElasticClient(connectionSettings);
+
+			/** and indexing an instance of our document type */
+			var document = new MyDocument
+			{
+				Id = 1,
+				Name = "My first document",
+				OwnerId = 2,
+				SubDocuments = new []
+				{
+					new MySubDocument { Name = "my first sub document" },
+					new MySubDocument { Name = "my second sub document" },
+				}
+			};
+
+			var indexResponse = client.IndexDocument(document);
+
+			/** serializes to */
+			//json
+			var expected = new JObject
+			{
+				{ "$type", "Tests.ClientConcepts.HighLevel.Serialization.GettingStarted+MyDocument, Tests" },
+				{ "id", 1 },
+				{ "name", "My first document" },
+				{ "ownerId", 2 },
+				{ "subDocuments", new JArray
+					{
+						new JObject { { "name", "my first sub document" } },
+						new JObject { { "name", "my second sub document" } },
+					}
+				}
+			};
+			/**
+			 * the type information is serialized for the outer `MyDocument` instance, but not for each
+			 * `MySubDocument` instance in the `SubDocuments` collection.
+			 *
+			 * When implementing a custom contract resolver derived from `ConnectionSettingsAwareContractResolver`,
+			 * be careful not to change the behaviour of the resolver for NEST types; doing so will result in
+			 * unexpected behaviour.
+			 *
+			 * [WARNING]
+			 * --
+			 * Per the https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_TypeNameHandling.htm[Json.NET documentation on TypeNameHandling],
+			 * it should be used with caution when your application deserializes JSON from an external source.
+			 * --
+			 */
+
+			// hide
+			Expect(expected).FromRequest(indexResponse);
 		}
 	}
 }

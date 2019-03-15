@@ -45,11 +45,9 @@ namespace Nest.JsonNetSerializer
 
 		private List<JsonConverter> Converters { get; }
 
-
 		private JsonSerializer CreateSerializer(SerializationFormatting formatting)
 		{
 			var s = CreateJsonSerializerSettings() ?? new JsonSerializerSettings();
-			;
 			var converters = CreateJsonConverters() ?? Enumerable.Empty<JsonConverter>();
 			var contract = CreateContractResolver();
 			s.Formatting = formatting == SerializationFormatting.Indented ? Formatting.Indented : Formatting.None;
@@ -60,7 +58,7 @@ namespace Nest.JsonNetSerializer
 			return JsonSerializer.Create(s);
 		}
 
-		private IContractResolver CreateContractResolver()
+		protected virtual ConnectionSettingsAwareContractResolver CreateContractResolver()
 		{
 			var contract = new ConnectionSettingsAwareContractResolver(ConnectionSettings);
 			ModifyContractResolver(contract);
