@@ -82,6 +82,12 @@ namespace Nest
 			entry.Value == null; //TODO: Check connection settings for allow nulls
 	}
 
+	internal class VerbatimInterfaceReadOnlyDictionaryKeysPreservingNullFormatter<TKey, TValue>
+		: VerbatimInterfaceReadOnlyDictionaryKeysFormatter<TKey, TValue>
+	{
+		protected override bool SkipValue(KeyValuePair<TKey, TValue> entry) => false;
+	}
+
 	internal class VerbatimInterfaceReadOnlyDictionaryKeysFormatter<TKey, TValue>
 		: VerbatimDictionaryKeysBaseFormatter<IReadOnlyDictionary<TKey, TValue>, TKey, TValue>
 	{

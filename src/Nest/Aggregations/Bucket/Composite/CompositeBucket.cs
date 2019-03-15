@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -25,6 +26,7 @@ namespace Nest
 	/// <summary>
 	/// A key for a <see cref="CompositeBucket" />
 	/// </summary>
+	[JsonFormatter(typeof(CompositeKeyFormatter))]
 	public class CompositeKey : IsAReadOnlyDictionaryBase<string, object>
 	{
 		private static readonly DateTimeOffset Epoch = new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero);
@@ -107,5 +109,16 @@ namespace Nest
 				return false;
 			}
 		}
+	}
+
+	internal class CompositeKeyFormatter : IJsonFormatter<CompositeKey>
+	{
+		private static readonly VerbatimInterfaceReadOnlyDictionaryKeysPreservingNullFormatter<string, object> DictionaryFormatter =
+			new VerbatimInterfaceReadOnlyDictionaryKeysPreservingNullFormatter<string, object>();
+
+		public void Serialize(ref JsonWriter writer, CompositeKey value, IJsonFormatterResolver formatterResolver) =>
+			DictionaryFormatter.Serialize(ref writer, value, formatterResolver);
+
+		public CompositeKey Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) => throw new NotSupportedException();
 	}
 }
