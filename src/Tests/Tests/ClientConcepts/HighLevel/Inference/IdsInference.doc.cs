@@ -94,6 +94,32 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 					.IdProperty(typeof(MyDTO).GetProperty(nameof(MyDTO.Name)).Name)
 				)
 			).Expect("x").WhenInferringIdOn(dto);
+
+			/**
+			 * You can configure the client to disable this Id inference behaviour per type:
+			*/
+			WithConnectionSettings(x => x
+				.DefaultMappingFor<MyDTO>(m => m
+					.DisableIdInference()
+				)
+			).Expect(null).WhenInferringIdOn(dto);
+
+			/**
+			 * or globally type:
+			*/
+			WithConnectionSettings(x => x.DefaultDisableIdInference())
+				.Expect(null).WhenInferringIdOn(dto);
+
+			/**
+			 * Once disabled globally the id inference can not be enabled per type.
+			*/
+			WithConnectionSettings(x => x
+				.DefaultDisableIdInference()
+				.DefaultMappingFor<MyDTO>(m => m
+					.DisableIdInference(disable: false)
+				)
+			).Expect(null).WhenInferringIdOn(dto);
+
 		}
 
 		/**

@@ -9,13 +9,13 @@ namespace Nest
 	public interface IPropertyMapping
 	{
 		/// <summary>
-		/// Ignore this property completely
+		/// Ignores this property.
 		/// <para>- When mapping automatically using <see cref="TypeMappingDescriptor{T}.AutoMap{TDocument}" /></para>
 		/// <para>- When Indexing this type do not serialize this property and its value</para>
 		/// </summary>
 		bool Ignore { get; set; }
 
-		/// <summary> Override the property name serialized to JSON for this property</summary>
+		/// <summary> Overrides the property name serialized to JSON for this property</summary>
 		string Name { get; set; }
 	}
 
@@ -32,7 +32,7 @@ namespace Nest
 	}
 
 	/// <summary>
-	/// Provides mappings for POCO properties
+	/// Provides mappings for CLR types
 	/// </summary>
 	public interface IPropertyMappingProvider
 	{
