@@ -24,6 +24,11 @@ namespace Nest
 
 	public class TaskExecutingNode
 	{
+		[JsonProperty("attributes")]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, string>))]
+		public IReadOnlyDictionary<string, string> Attributes { get; internal set; } =
+			EmptyReadOnly<string, string>.Dictionary;
+
 		[JsonProperty("host")]
 		public string Host { get; internal set; }
 
@@ -32,6 +37,9 @@ namespace Nest
 
 		[JsonProperty("name")]
 		public string Name { get; internal set; }
+
+		[JsonProperty("roles")]
+		public IEnumerable<string> Roles { get; internal set; }
 
 		[JsonProperty("tasks")]
 		public IReadOnlyDictionary<TaskId, TaskState> Tasks { get; internal set; } = EmptyReadOnly<TaskId, TaskState>.Dictionary;
