@@ -2213,6 +2213,13 @@ namespace Elasticsearch.Net
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
 	}
+	///<summary>Request options for UpdateByQueryRethrottle<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html</pre></summary>
+	public class UpdateByQueryRethrottleRequestParameters : RequestParameters<UpdateByQueryRethrottleRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
+		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+	}
 	///<summary>Request options for CcrDeleteAutoFollowPattern<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</pre></summary>
 	public class DeleteAutoFollowPatternRequestParameters : RequestParameters<DeleteAutoFollowPatternRequestParameters> 
 	{

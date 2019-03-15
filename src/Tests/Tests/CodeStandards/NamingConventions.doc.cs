@@ -125,7 +125,8 @@ namespace Tests.CodeStandards
 				typeof(IndicesShardStoresRequest),
 				typeof(RenderSearchTemplateRequest),
 				typeof(MultiSearchTemplateRequest),
-				typeof(CreateRequest<>)
+				typeof(CreateRequest<>),
+				typeof(UpdateByQueryRethrottleRequest) // uses ListTasksResponse
 			};
 
 			var types = typeof(IRequest).Assembly.GetTypes();
