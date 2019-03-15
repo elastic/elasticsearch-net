@@ -12,24 +12,30 @@ namespace Nest
 		Type ClrType { get; }
 
 		/// <summary>
-		/// The property for <see cref="ClrType" /> to resolve ids from.
+		/// The property for the given <see cref="ClrType" /> to resolve ids from.
 		/// </summary>
 		string IdPropertyName { get; set; }
 
 		/// <summary>
-		/// The default Elasticsearch index name for <see cref="ClrType" />
+		/// The default Elasticsearch index name for the given <see cref="ClrType" />
 		/// </summary>
 		string IndexName { get; set; }
 
 		/// <summary>
-		/// The relation name for <see cref="ClrType" /> to resolve to.
+		/// The relation name for the given <see cref="ClrType" /> to resolve to.
 		/// </summary>
 		string RelationName { get; set; }
 
 		/// <summary>
-		/// The default Elasticsearch type name for <see cref="ClrType" />
+		/// The default Elasticsearch type name for the given <see cref="ClrType" />
 		/// </summary>
 		string TypeName { get; set; }
+
+		/// <summary>Disables Id inference for the given <see cref="ClrType"/>.
+		/// By default, the _id value for a document is inferred from a property named Id,
+		/// or from the property named by <see cref="IdPropertyName"/>, if set.
+		/// </summary>
+		bool DisableIdInference { get; set; }
 	}
 
 	public interface IClrTypeMapping<TDocument> : IClrTypeMapping where TDocument : class
@@ -67,6 +73,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public string TypeName { get; set; }
+
+		/// <inheritdoc />
+		public bool DisableIdInference { get; set; }
 	}
 
 	public class ClrTypeMapping<TDocument> : ClrTypeMapping, IClrTypeMapping<TDocument> where TDocument : class
@@ -98,26 +107,22 @@ namespace Nest
 		string IClrTypeMapping.IndexName { get; set; }
 		string IClrTypeMapping.RelationName { get; set; }
 		string IClrTypeMapping.TypeName { get; set; }
+		bool IClrTypeMapping.DisableIdInference { get; set; }
 
-		/// <summary>
-		/// The default Elasticsearch index name for the CLR type
-		/// </summary>
+		/// <inheritdoc cref="IClrTypeMapping.IndexName"/>
 		public ClrTypeMappingDescriptor IndexName(string indexName) => Assign(a => a.IndexName = indexName);
 
-		/// <summary>
-		/// The default Elasticsearch type name for the CLR type
-		/// </summary>
+		/// <inheritdoc cref="IClrTypeMapping.TypeName"/>
 		public ClrTypeMappingDescriptor TypeName(string typeName) => Assign(a => a.TypeName = typeName);
 
-		/// <summary>
-		/// The relation name for the CLR type to resolve to.
-		/// </summary>
+		/// <inheritdoc cref="IClrTypeMapping.RelationName"/>
 		public ClrTypeMappingDescriptor RelationName(string relationName) => Assign(a => a.RelationName = relationName);
 
-		/// <summary>
-		/// The name of the property on the CLR type to resolve an Id from.
-		/// </summary>
+		/// <inheritdoc cref="IClrTypeMapping.IdPropertyName"/>
 		public ClrTypeMappingDescriptor IdProperty(string idProperty) => Assign(a => a.IdPropertyName = idProperty);
+
+		/// <inheritdoc cref="IClrTypeMapping.DisableIdInference"/>
+		public ClrTypeMappingDescriptor DisableIdInference(bool disable = true) => Assign(a => a.DisableIdInference = disable);
 	}
 
 	public class ClrTypeMappingDescriptor<TDocument>
@@ -132,6 +137,7 @@ namespace Nest
 		string IClrTypeMapping.RelationName { get; set; }
 		Expression<Func<TDocument, object>> IClrTypeMapping<TDocument>.RoutingProperty { get; set; }
 		string IClrTypeMapping.TypeName { get; set; }
+		bool IClrTypeMapping.DisableIdInference { get; set; }
 
 		/// <summary>
 		/// The default Elasticsearch index name for <typeparamref name="TDocument" />
@@ -173,5 +179,8 @@ namespace Nest
 		/// </summary>
 		public ClrTypeMappingDescriptor<TDocument> PropertyName(Expression<Func<TDocument, object>> property, string newName) =>
 			Assign(a => a.Properties.Add(new RenameClrPropertyMapping<TDocument>(property, newName)));
+
+		/// <inheritdoc cref="IClrTypeMapping.DisableIdInference"/>
+		public ClrTypeMappingDescriptor<TDocument> DisableIdInference(bool disable = true) => Assign(a => a.DisableIdInference = disable);
 	}
 }
