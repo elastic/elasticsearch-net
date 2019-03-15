@@ -18,11 +18,17 @@ namespace Nest
 		/// attachment.
 		/// </summary>
 		[JsonIgnore]
-		public bool ContainsMetadata => !Name.IsNullOrEmpty() ||
+		public bool ContainsMetadata =>
+			!Author.IsNullOrEmpty() ||
+			ContentLength.HasValue ||
 			!ContentType.IsNullOrEmpty() ||
-			!Language.IsNullOrEmpty() ||
+			Date.HasValue ||
 			DetectLanguage.HasValue ||
-			IndexedCharacters.HasValue;
+			IndexedCharacters.HasValue ||
+			!Keywords.IsNullOrEmpty() ||
+			!Language.IsNullOrEmpty() ||
+			!Name.IsNullOrEmpty() ||
+			!Title.IsNullOrEmpty();
 
 		/// <summary>
 		/// The base64 encoded content. Can be explicitly set
@@ -94,51 +100,86 @@ namespace Nest
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var attachment = (Attachment)value;
-			if (!attachment.ContainsMetadata)
-				writer.WriteValue(attachment.Content);
-			else
+			if (attachment.ContainsMetadata)
 			{
 				writer.WriteStartObject();
-				writer.WritePropertyName("_content");
-				writer.WriteValue(attachment.Content);
 
-				if (!string.IsNullOrEmpty(attachment.Name))
+				if (!string.IsNullOrEmpty(attachment.Content))
 				{
-					writer.WritePropertyName("_name");
-					writer.WriteValue(attachment.Name);
+					writer.WritePropertyName("content");
+					writer.WriteValue(attachment.Content);
+				}
+
+				if (!string.IsNullOrEmpty(attachment.Author))
+				{
+					writer.WritePropertyName("author");
+					writer.WriteValue(attachment.Author);
 				}
 
 				if (!string.IsNullOrEmpty(attachment.ContentType))
 				{
-					writer.WritePropertyName("_content_type");
+					writer.WritePropertyName("content_length");
+					writer.WriteValue(attachment.ContentLength);
+				}
+
+				if (!string.IsNullOrEmpty(attachment.ContentType))
+				{
+					writer.WritePropertyName("content_type");
 					writer.WriteValue(attachment.ContentType);
 				}
 
-				if (!string.IsNullOrEmpty(attachment.Language))
+				if (attachment.Date.HasValue)
 				{
-					writer.WritePropertyName("_language");
-					writer.WriteValue(attachment.Language);
+					writer.WritePropertyName("date");
+					writer.WriteValue(attachment.Date.Value);
 				}
 
 				if (attachment.DetectLanguage.HasValue)
 				{
-					writer.WritePropertyName("_detect_language");
+					writer.WritePropertyName("detect_language");
 					writer.WriteValue(attachment.DetectLanguage.Value);
 				}
 
 				if (attachment.IndexedCharacters.HasValue)
 				{
-					writer.WritePropertyName("_indexed_chars");
+					writer.WritePropertyName("indexed_chars");
 					writer.WriteValue(attachment.IndexedCharacters.Value);
+				}
+
+				if (!string.IsNullOrEmpty(attachment.Keywords))
+				{
+					writer.WritePropertyName("keywords");
+					writer.WriteValue(attachment.Keywords);
+				}
+
+				if (!string.IsNullOrEmpty(attachment.Language))
+				{
+					writer.WritePropertyName("language");
+					writer.WriteValue(attachment.Language);
+				}
+
+				if (!string.IsNullOrEmpty(attachment.Name))
+				{
+					writer.WritePropertyName("name");
+					writer.WriteValue(attachment.Name);
+				}
+
+				if (!string.IsNullOrEmpty(attachment.Title))
+				{
+					writer.WritePropertyName("title");
+					writer.WriteValue(attachment.Title);
 				}
 
 				writer.WriteEndObject();
 			}
+			else
+				writer.WriteValue(attachment.Content);
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			if (reader.TokenType == JsonToken.String) return new Attachment { Content = (string)reader.Value };
+			if (reader.TokenType == JsonToken.String)
+				return new Attachment { Content = (string)reader.Value };
 
 			if (reader.TokenType == JsonToken.StartObject)
 			{
@@ -181,13 +222,11 @@ namespace Nest
 							case "_content_type":
 							case "content_type":
 							case "contenttype":
-							case "contentType":
 								attachment.ContentType = reader.ReadAsString();
 								break;
 							case "_content_length":
 							case "content_length":
 							case "contentlength":
-							case "contentLength":
 								reader.Read();
 								switch (reader.TokenType)
 								{
@@ -207,6 +246,7 @@ namespace Nest
 								attachment.Language = reader.ReadAsString();
 								break;
 							case "_detect_language":
+							case "detect_language":
 								attachment.DetectLanguage = reader.ReadAsBoolean();
 								break;
 							case "_indexed_chars":
