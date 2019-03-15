@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -25,6 +26,7 @@ namespace Nest
 	/// <summary>
 	/// A key for a <see cref="CompositeBucket" />
 	/// </summary>
+	[JsonConverter(typeof(VerbatimDictionaryKeysPreservingNullJsonConverter<string, object>))]
 	public class CompositeKey : IsAReadOnlyDictionaryBase<string, object>
 	{
 		private static readonly DateTimeOffset Epoch = new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero);

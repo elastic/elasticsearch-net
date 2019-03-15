@@ -2946,6 +2946,28 @@ namespace Nest
 			throw InvalidDispatch("UpdateByQuery", p, new [] { POST }, "/{index}/_update_by_query", "/{index}/{type}/_update_by_query");
 		}
 		
+		internal TResponse UpdateByQueryRethrottleDispatch<TResponse>(IRequest<UpdateByQueryRethrottleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.TaskId)) return _lowLevel.UpdateByQueryRethrottle<TResponse>(p.RouteValues.TaskId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("UpdateByQueryRethrottle", p, new [] { POST }, "/_update_by_query/{task_id}/_rethrottle");
+		}
+		
+		internal Task<TResponse> UpdateByQueryRethrottleDispatchAsync<TResponse>(IRequest<UpdateByQueryRethrottleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.TaskId)) return _lowLevel.UpdateByQueryRethrottleAsync<TResponse>(p.RouteValues.TaskId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("UpdateByQueryRethrottle", p, new [] { POST }, "/_update_by_query/{task_id}/_rethrottle");
+		}
+		
 		internal TResponse CcrDeleteAutoFollowPatternDispatch<TResponse>(IRequest<DeleteAutoFollowPatternRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
