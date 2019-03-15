@@ -36,6 +36,12 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("time_zone")]
 		string TimeZone { get; set; }
+
+		/// <summary>
+		/// Date format. Supports expressive date format pattern.
+		/// </summary>
+		[JsonProperty("format")]
+		string Format { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -52,6 +58,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public string TimeZone { get; set; }
+
+		/// <inheritdoc />
+		public string Format { get; set; }
 	}
 
 	/// <inheritdoc cref="IDateHistogramRollupGrouping" />
@@ -63,6 +72,8 @@ namespace Nest
 		Field IDateHistogramRollupGrouping.Field { get; set; }
 		Time IDateHistogramRollupGrouping.Interval { get; set; }
 		string IDateHistogramRollupGrouping.TimeZone { get; set; }
+
+		string IDateHistogramRollupGrouping.Format { get; set; }
 
 		/// <inheritdoc cref="IDateHistogramRollupGrouping.Field" />
 		public DateHistogramRollupGroupingDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
@@ -78,5 +89,8 @@ namespace Nest
 
 		/// <inheritdoc cref="IDateHistogramRollupGrouping.TimeZone" />
 		public DateHistogramRollupGroupingDescriptor<T> TimeZone(string timeZone) => Assign(a => a.TimeZone = timeZone);
+
+		/// <inheritdoc cref="IDateHistogramRollupGrouping.Format" />
+		public DateHistogramRollupGroupingDescriptor<T> Format(string format) => Assign(a => a.Format = format);
 	}
 }
