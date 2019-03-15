@@ -1108,6 +1108,20 @@ namespace Nest
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public DeleteByQueryDescriptor<T> Slices(long? slices) => Qs("slices", slices);
 	}
+	///<summary>descriptor for DeleteByQueryRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html</pre></summary>
+	public partial class DeleteByQueryRethrottleDescriptor  : RequestDescriptorBase<DeleteByQueryRethrottleDescriptor,DeleteByQueryRethrottleRequestParameters, IDeleteByQueryRethrottleRequest>, IDeleteByQueryRethrottleRequest
+	{ 
+		/// <summary>/_delete_by_query/{task_id}/_rethrottle</summary>
+		///<param name="task_id"> this parameter is required</param>
+		public DeleteByQueryRethrottleDescriptor(TaskId task_id) : base(r=>r.Required("task_id", task_id)){}
+		// values part of the url path
+		TaskId IDeleteByQueryRethrottleRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
+
+		// Request parameters
+
+		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
+		public DeleteByQueryRethrottleDescriptor RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
+	}
 	///<summary>descriptor for DeleteScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class DeleteScriptDescriptor  : RequestDescriptorBase<DeleteScriptDescriptor,DeleteScriptRequestParameters, IDeleteScriptRequest>, IDeleteScriptRequest
 	{ 

@@ -1786,6 +1786,25 @@ namespace Nest
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeleteByQueryRethrottleRequest : IRequest<DeleteByQueryRethrottleRequestParameters>
+	{
+		TaskId TaskId { get; }
+	}
+	///<summary>Request parameters for DeleteByQueryRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html</pre></summary>
+	public partial class DeleteByQueryRethrottleRequest : PlainRequestBase<DeleteByQueryRethrottleRequestParameters>, IDeleteByQueryRethrottleRequest
+	{
+		protected IDeleteByQueryRethrottleRequest Self => this;
+		///<summary>/_delete_by_query/{task_id}/_rethrottle</summary>
+		///<param name="task_id">this parameter is required</param>
+		public DeleteByQueryRethrottleRequest(TaskId task_id) : base(r=>r.Required("task_id", task_id)){}
+		// values part of the url path
+		TaskId IDeleteByQueryRethrottleRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
+
+		// Request parameters
+		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
+		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteCalendarEventRequest : IRequest<DeleteCalendarEventRequestParameters>
 	{
 		Id CalendarId { get; }
