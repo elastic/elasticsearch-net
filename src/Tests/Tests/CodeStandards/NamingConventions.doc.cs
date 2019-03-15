@@ -126,6 +126,7 @@ namespace Tests.CodeStandards
 				typeof(RenderSearchTemplateRequest),
 				typeof(MultiSearchTemplateRequest),
 				typeof(CreateRequest<>),
+				typeof(DeleteByQueryRethrottleRequest), // uses ListTasksResponse
 				typeof(UpdateByQueryRethrottleRequest) // uses ListTasksResponse
 			};
 

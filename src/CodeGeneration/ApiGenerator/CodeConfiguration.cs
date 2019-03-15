@@ -37,7 +37,6 @@ namespace ApiGenerator
 			"ml.set_upgrade_mode.json",
 			"ml.find_file_structure.json",
 			"monitoring.bulk.json",
-			"delete_by_query_rethrottle.json",
 
 			"security.delete_privileges.json",
 			"security.get_privileges.json",
