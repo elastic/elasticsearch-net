@@ -2376,6 +2376,14 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> UpdateByQueryAsync<TResponse>(string index, string type, PostData body, UpdateByQueryRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /_update_by_query/{task_id}/_rethrottle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html</para></summary>
+		///<param name="task_id">The task id to rethrottle</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse UpdateByQueryRethrottle<TResponse>(string task_id, UpdateByQueryRethrottleRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /_update_by_query/{task_id}/_rethrottle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html</para></summary>
+		///<param name="task_id">The task id to rethrottle</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> UpdateByQueryRethrottleAsync<TResponse>(string task_id, UpdateByQueryRethrottleRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_ccr/auto_follow/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</para></summary>
 		///<param name="name">The name of the auto follow pattern.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>

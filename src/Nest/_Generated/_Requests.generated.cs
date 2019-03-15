@@ -6277,6 +6277,25 @@ namespace Nest
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IUpdateByQueryRethrottleRequest : IRequest<UpdateByQueryRethrottleRequestParameters>
+	{
+		TaskId TaskId { get; }
+	}
+	///<summary>Request parameters for UpdateByQueryRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html</pre></summary>
+	public partial class UpdateByQueryRethrottleRequest : PlainRequestBase<UpdateByQueryRethrottleRequestParameters>, IUpdateByQueryRethrottleRequest
+	{
+		protected IUpdateByQueryRethrottleRequest Self => this;
+		///<summary>/_update_by_query/{task_id}/_rethrottle</summary>
+		///<param name="task_id">this parameter is required</param>
+		public UpdateByQueryRethrottleRequest(TaskId task_id) : base(r=>r.Required("task_id", task_id)){}
+		// values part of the url path
+		TaskId IUpdateByQueryRethrottleRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
+
+		// Request parameters
+		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
+		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IUpdateDatafeedRequest : IRequest<UpdateDatafeedRequestParameters>
 	{
 		Id DatafeedId { get; }
