@@ -1,12 +1,12 @@
 ﻿using System;
 using System.IO;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IGetBasicLicenseStatusResponse : IResponse
 	{
-		[JsonProperty("eligible_to_start_basic")]
+		[DataMember(Name = "eligible_to_start_basic")]
 		bool EligableToStartBasic { get; }
 	}
 

@@ -9,8 +9,10 @@ namespace Nest
 	[InterfaceDataContract]
 	public interface IRequest
 	{
+		[IgnoreDataMember]
 		HttpMethod HttpMethod { get; }
 
+		[IgnoreDataMember]
 		RouteValues RouteValues { get; }
 	}
 
@@ -21,6 +23,7 @@ namespace Nest
 		/// Used to describe request parameters that are not part of the body. e.g. query string, connection configuration
 		/// overrides, etc.
 		/// </summary>
+		[IgnoreDataMember]
 		TParameters RequestParameters { get; set; }
 	}
 

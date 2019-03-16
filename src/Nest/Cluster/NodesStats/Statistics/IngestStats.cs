@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -35,7 +37,7 @@ namespace Nest
 			EmptyReadOnly<KeyedProcessorStats>.Collection;
 	}
 
-	[JsonConverter(typeof(KeyValueJsonConverter<KeyedProcessorStats, ProcessStats>))]
+	[JsonFormatter(typeof(KeyedProcessorStatsFormatter))]
 	public class KeyedProcessorStats
 	{
 		/// <summary> The type of the processor </summary>
@@ -43,6 +45,40 @@ namespace Nest
 
 		/// <summary>The statistics for this processor</summary>
 		public ProcessStats Statistics { get; set; }
+	}
+
+	internal class KeyedProcessorStatsFormatter : IJsonFormatter<KeyedProcessorStats>
+	{
+		public KeyedProcessorStats Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
+				return null;
+
+			var count = 0;
+			var stats = new KeyedProcessorStats();
+			while (reader.ReadIsInObject(ref count))
+			{
+				stats.Type = reader.ReadPropertyName();
+				stats.Statistics = formatterResolver.GetFormatter<ProcessStats>()
+					.Deserialize(ref reader, formatterResolver);
+			}
+
+			return stats;
+		}
+
+		public void Serialize(ref JsonWriter writer, KeyedProcessorStats value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value?.Type == null)
+			{
+				writer.WriteNull();
+				return;
+			}
+
+			writer.WriteBeginObject();
+			writer.WritePropertyName(value.Type);
+			formatterResolver.GetFormatter<ProcessStats>().Serialize(ref writer, value.Statistics, formatterResolver);
+			writer.WriteEndObject();
+		}
 	}
 
 	public class ProcessorStats

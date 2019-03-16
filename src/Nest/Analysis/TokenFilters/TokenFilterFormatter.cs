@@ -59,7 +59,6 @@ namespace Nest
 				case "stemmer": return Deserialize<StemmerTokenFilter>(ref segmentReader, formatterResolver);
 				case "stemmer_override": return Deserialize<StemmerOverrideTokenFilter>(ref segmentReader, formatterResolver);
 				case "stop": return Deserialize<StopTokenFilter>(ref segmentReader, formatterResolver);
-				case "standard": return Deserialize<StandardTokenFilter>(ref segmentReader, formatterResolver);
 				case "synonym": return Deserialize<SynonymTokenFilter>(ref segmentReader, formatterResolver);
 				case "synonym_graph": return Deserialize<SynonymGraphTokenFilter>(ref segmentReader, formatterResolver);
 				case "trim": return Deserialize<TrimTokenFilter>(ref segmentReader, formatterResolver);
@@ -77,6 +76,9 @@ namespace Nest
 				case "icu_folding": return Deserialize<IcuFoldingTokenFilter>(ref segmentReader, formatterResolver);
 				case "icu_normalizer": return Deserialize<IcuNormalizationTokenFilter>(ref segmentReader, formatterResolver);
 				case "icu_transform": return Deserialize<IcuTransformTokenFilter>(ref segmentReader, formatterResolver);
+				case "condition": return Deserialize<ConditionTokenFilter>(ref segmentReader, formatterResolver);
+				case "multiplexer": return Deserialize<MultiplexerTokenFilter>(ref segmentReader, formatterResolver);
+				case "predicate_token_filter": return Deserialize<PredicateTokenFilter>(ref segmentReader, formatterResolver);
 				default: return null;
 			}
 		}
@@ -169,9 +171,6 @@ namespace Nest
 				case "stop":
 					Serialize<IStopTokenFilter>(ref writer, value, formatterResolver);
 					break;
-				case "standard":
-					Serialize<IStandardTokenFilter>(ref writer, value, formatterResolver);
-					break;
 				case "synonym":
 					Serialize<ISynonymTokenFilter>(ref writer, value, formatterResolver);
 					break;
@@ -222,6 +221,15 @@ namespace Nest
 					break;
 				case "icu_transform":
 					Serialize<IIcuTransformTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "condition":
+					Serialize<IConditionTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "multiplexer":
+					Serialize<IMultiplexerTokenFilter>(ref writer, value, formatterResolver);
+					break;
+				case "predicate_token_filter":
+					Serialize<IPredicateTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				default:
 					var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<ITokenFilter>();

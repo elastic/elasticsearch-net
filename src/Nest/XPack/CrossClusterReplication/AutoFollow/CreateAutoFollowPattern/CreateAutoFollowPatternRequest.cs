@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -9,7 +8,7 @@ namespace Nest
 	/// will be automatically configured as follower indices.
 	/// </summary>
 	[MapsApi("ccr.put_auto_follow_pattern.json")]
-	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<CreateAutoFollowPatternRequest>))]
+	[ReadAs(typeof(CreateAutoFollowPatternRequest))]
 	public partial interface ICreateAutoFollowPatternRequest : IAutoFollowPattern { }
 
 	/// <inheritdoc cref="ICreateAutoFollowPatternRequest"/>

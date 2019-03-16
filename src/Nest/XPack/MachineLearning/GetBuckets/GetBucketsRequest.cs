@@ -57,12 +57,6 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name ="start")]
 		DateTimeOffset? Start { get; set; }
-
-		/// <summary>
-		/// Returns buckets with matching timestamps.
-		/// </summary>
-		[DataMember(Name ="timestamp")]
-		DateTimeOffset? Timestamp { get; set; }
 	}
 
 	/// <inheritdoc />

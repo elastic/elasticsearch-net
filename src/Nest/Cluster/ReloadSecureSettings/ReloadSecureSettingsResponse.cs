@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -9,7 +10,7 @@ namespace Nest
 		string ClusterName { get; }
 
 		[DataMember(Name = "nodes")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, NodeStats>))]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, NodeStats>))]
 		IReadOnlyDictionary<string, NodeStats> Nodes { get; }
 	}
 

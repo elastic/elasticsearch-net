@@ -55,7 +55,7 @@ namespace Nest
 										{
 											var valueSegment = segmentReader.ReadStringSegmentUnsafe();
 											isDate = valueSegment.IsDateTime(formatterResolver, out _) ||
-												valueSegment.ContainsDateMathSeparator() && DateMath.IsValid(valueSegment.Utf8String());
+												valueSegment.ContainsDateMathSeparator() && DateMath.IsValidDateMathString(valueSegment.Utf8String());
 										}
 										break;
 									case JsonToken.Number:

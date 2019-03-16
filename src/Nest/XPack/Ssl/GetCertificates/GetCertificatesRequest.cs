@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Nest
+﻿namespace Nest
 {
 	[MapsApi("ssl.certificates.json")]
 	public partial interface IGetCertificatesRequest { }

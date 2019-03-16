@@ -10,7 +10,7 @@ namespace Nest
 
 	public interface IRepositoryWithSettings: ISnapshotRepository
 	{
-		[JsonIgnore]
+		[IgnoreDataMember]
 		object DelegateSettings { get; }
 	}
 

@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface ICreateFollowIndexResponse : IResponse
 	{
-		[JsonProperty("follow_index_created")]
+		[DataMember(Name = "follow_index_created")]
 		bool FollowIndexCreated { get; }
 
-		[JsonProperty("follow_index_shards_acked")]
+		[DataMember(Name = "follow_index_shards_acked")]
 		bool FollowIndexShardsAcked { get; }
 
-		[JsonProperty("index_following_started")]
+		[DataMember(Name = "index_following_started")]
 		bool IndexFollowingStarted { get; }
 	}
 

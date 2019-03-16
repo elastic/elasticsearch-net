@@ -33,7 +33,11 @@ namespace Nest
 			{ "trim", 22 },
 			{ "uppercase", 23 },
 			{ "urldecode", 24 },
-			{ "bytes", 25 }
+			{ "bytes", 25 },
+			{ "dissect", 26 },
+			{ "set_security_user", 27 },
+			{ "pipeline", 28 },
+			{ "drop", 29 },
 		};
 
 		public IProcessor Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -131,6 +135,18 @@ namespace Nest
 						break;
 					case 25:
 						processor = Deserialize<BytesProcessor>(ref reader, formatterResolver);
+						break;
+					case 26:
+						processor = Deserialize<DissectProcessor>(ref reader, formatterResolver);
+						break;
+					case 27:
+						processor = Deserialize<SetSecurityUserProcessor>(ref reader, formatterResolver);
+						break;
+					case 28:
+						processor = Deserialize<PipelineProcessor>(ref reader, formatterResolver);
+						break;
+					case 29:
+						processor = Deserialize<DropProcessor>(ref reader, formatterResolver);
 						break;
 				}
 			}
@@ -232,6 +248,18 @@ namespace Nest
 					break;
 				case "bytes":
 					Serialize<IBytesProcessor>(ref writer, value, formatterResolver);
+					break;
+				case "dissect":
+					Serialize<IDissectProcessor>(ref writer, value, formatterResolver);
+					break;
+				case "set_security_user":
+					Serialize<ISetSecurityUserProcessor>(ref writer, value, formatterResolver);
+					break;
+				case "pipeline":
+					Serialize<IPipelineProcessor>(ref writer, value, formatterResolver);
+					break;
+				case "drop":
+					Serialize<IDropProcessor>(ref writer, value, formatterResolver);
 					break;
 				default:
 					var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IProcessor>();

@@ -1,5 +1,4 @@
 ﻿using System;
-using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -9,7 +8,7 @@ namespace Nest
 	/// before invoking the unfollow API.
 	/// </summary>
 	[MapsApi("ccr.unfollow.json")]
-	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<UnfollowIndexRequest>))]
+	[ReadAs(typeof(UnfollowIndexRequest))]
 	public partial interface IUnfollowIndexRequest { }
 
 	/// <inheritdoc cref="IUnfollowIndexRequest"/>

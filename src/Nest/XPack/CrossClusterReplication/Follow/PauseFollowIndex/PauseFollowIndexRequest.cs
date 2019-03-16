@@ -1,5 +1,4 @@
 ﻿using System;
-using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -9,7 +8,7 @@ namespace Nest
 	/// used to change the configuration of the following task.
 	/// </summary>
 	[MapsApi("ccr.pause_follow.json")]
-	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<PauseFollowIndexRequest>))]
+	[ReadAs(typeof(PauseFollowIndexRequest))]
 	public partial interface IPauseFollowIndexRequest { }
 
 	/// <inheritdoc cref="IPauseFollowIndexRequest"/>

@@ -1,5 +1,4 @@
 ﻿using System;
-using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -9,7 +8,7 @@ namespace Nest
 	/// follower stats API. <see cref="IElasticClient.FollowIndexStats(Nest.Indices,System.Func{Nest.FollowIndexStatsDescriptor,Nest.IFollowIndexStatsRequest})"/>
 	/// </summary>
 	[MapsApi("ccr.stats.json")]
-	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<CcrStatsRequest>))]
+	[ReadAs(typeof(CcrStatsRequest))]
 	public partial interface ICcrStatsRequest { }
 
 	/// <inheritdoc cref="ICcrStatsRequest"/>
