@@ -58,8 +58,6 @@ namespace Nest
 
 	public partial class PutMappingRequest<T> where T : class
 	{
-		public PutMappingRequest() : this(typeof(T), typeof(T)) { }
-
 		/// <inheritdoc />
 		public IAllField AllField { get; set; }
 

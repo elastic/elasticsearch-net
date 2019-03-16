@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -9,47 +9,47 @@ namespace Nest
 	/// the follower index will resume fetching operations from the leader index.
 	/// </summary>
 	[MapsApi("ccr.resume_follow.json")]
-	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<ResumeFollowIndexRequest>))]
+	[ReadAs(typeof(ResumeFollowIndexRequest))]
 	public partial interface IResumeFollowIndexRequest
 	{
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxReadRequestOperationCount"/>
-		[JsonProperty("max_read_request_operation_count")]
+		[DataMember(Name = "max_read_request_operation_count")]
 		long? MaxReadRequestOperationCount { get; set; }
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxOutstandingReadRequests"/>
-		[JsonProperty("max_outstanding_read_requests")]
+		[DataMember(Name = "max_outstanding_read_requests")]
 		long? MaxOutstandingReadRequests { get; set; }
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxRequestSize"/>
-		[JsonProperty("max_read_request_size")]
+		[DataMember(Name = "max_read_request_size")]
 		string MaxRequestSize { get; set; }
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxWriteRequestOperationCount"/>
-		[JsonProperty("max_write_request_operation_count")]
+		[DataMember(Name = "max_write_request_operation_count")]
 		long? MaxWriteRequestOperationCount { get; set; }
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxWriteRequestSize"/>
-		[JsonProperty("max_write_request_size")]
+		[DataMember(Name = "max_write_request_size")]
 		string MaxWriteRequestSize { get; set; }
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxOutstandingWriteRequests"/>
-		[JsonProperty("max_outstanding_write_requests")]
+		[DataMember(Name = "max_outstanding_write_requests")]
 		long? MaxOutstandingWriteRequests { get; set; }
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxWriteBufferCount"/>
-		[JsonProperty("max_write_buffer_count")]
+		[DataMember(Name = "max_write_buffer_count")]
 		long? MaxWriteBufferCount { get; set; }
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxWriteBufferSize"/>
-		[JsonProperty("max_write_buffer_size")]
+		[DataMember(Name = "max_write_buffer_size")]
 		string MaxWriteBufferSize { get; set; }
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxRetryDelay"/>
-		[JsonProperty("max_retry_delay")]
+		[DataMember(Name = "max_retry_delay")]
 		Time MaxRetryDelay { get; set; }
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.ReadPollTimeout"/>
-		[JsonProperty("read_poll_timeout")]
+		[DataMember(Name = "read_poll_timeout")]
 		Time ReadPollTimeout { get; set; }
 	}
 

@@ -8,6 +8,7 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Nest.JsonNetSerializer;
 using Newtonsoft.Json;
 using Tests.Core.Client;
 using Tests.Core.Client.Settings;

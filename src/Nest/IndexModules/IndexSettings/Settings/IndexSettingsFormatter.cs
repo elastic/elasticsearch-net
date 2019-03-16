@@ -255,9 +255,9 @@ namespace Nest
 			Set<bool?>(s, settings, QueriesCacheEnabled, v => queriesCache.Enabled = v, formatterResolver);
 
 			var softDeletes = s.SoftDeletes = new SoftDeleteSettings();
-			Set<bool?>(s, settings, SoftDeletesEnabled, v => softDeletes.Enabled = v);
+			Set<bool?>(s, settings, SoftDeletesEnabled, v => softDeletes.Enabled = v, formatterResolver);
 			var softDeletesRetention = s.SoftDeletes.Retention = new SoftDeleteRetentionSettings();
-			Set<long?>(s, settings, SoftDeletesEnabled, v => softDeletesRetention.Operations = v);
+			Set<long?>(s, settings, SoftDeletesEnabled, v => softDeletesRetention.Operations = v, formatterResolver);
 
 			IDictionary<string, object> dict = s;
 			foreach (var kv in settings)

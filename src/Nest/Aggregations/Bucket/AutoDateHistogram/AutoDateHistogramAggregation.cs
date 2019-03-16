@@ -7,7 +7,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[InterfaceDataContract]
-	[ReadAs(typeof(ChildrenAggregation))]
+	[ReadAs(typeof(AutoDateHistogramAggregation))]
 	public interface IAutoDateHistogramAggregation : IBucketAggregation
 	{
 		[DataMember(Name = "field")]

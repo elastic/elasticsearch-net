@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[DataContract]
+	[InterfaceDataContract]
 	[ReadAsAttribute(typeof(Watch))]
 	public interface IWatch
 	{
@@ -97,7 +98,5 @@ namespace Nest
 		public WatchDescriptor Trigger(Func<TriggerDescriptor, TriggerContainer> selector) =>
 			Assign(a => a.Trigger = selector.InvokeOrDefault(new TriggerDescriptor()));
 
-		[DataMember(Name ="trigger")]
-		public ITriggerContainer Trigger { get; internal set; }
 	}
 }

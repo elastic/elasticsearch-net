@@ -5,6 +5,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 
+	[JsonFormatter(typeof(SourceOnlyRepositoryFormatter))]
 	public interface ISourceOnlyRepository : IRepositoryWithSettings
 	{
 		[IgnoreDataMember]
@@ -79,58 +80,48 @@ namespace Nest
 		}
 	}
 
-	internal class SourceOnlyRepositorySerializer : ReserializeJsonConverter<SourceOnlyRepository, ISourceOnlyRepository>
+	internal class SourceOnlyRepositoryFormatter : IJsonFormatter<ISourceOnlyRepository>
 	{
-		protected override void SerializeJson(JsonWriter writer, object value, ISourceOnlyRepository castValue, JsonSerializer serializer)
+		public void Serialize(ref JsonWriter writer, ISourceOnlyRepository value, IJsonFormatterResolver formatterResolver)
 		{
-			if (castValue.DelegateType.IsNullOrEmpty())
+			if (value.DelegateType.IsNullOrEmpty())
 			{
 				writer.WriteNull();
 				return;
 			}
-			writer.WriteStartObject();
-			writer.WriteProperty(serializer, "type", "source");
-			if (castValue.DelegateSettings != null)
+			writer.WriteBeginObject();
+			writer.WritePropertyName("type");
+			writer.WriteString("source");
+			if (value.DelegateSettings != null)
 			{
 				writer.WritePropertyName("settings");
-				writer.WriteStartObject();
-				writer.WriteProperty(serializer, "delegate_type", castValue.DelegateType);
-				var properties = castValue.DelegateSettings.GetType().GetCachedObjectProperties();
-				foreach (var p in properties)
-				{
-					if (p.Ignored) continue;
+				writer.WriteBeginObject();
+				writer.WritePropertyName("delegate_type");
+				writer.WriteString(value.DelegateType);
 
-					var vv = p.ValueProvider.GetValue(castValue.DelegateSettings);
-					if (vv == null) continue;
+				var settings = value.DelegateSettings as IRepositorySettings;
+				var innerWriter = new JsonWriter();
+				var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IRepositorySettings>();
+				formatter.Serialize(ref innerWriter, settings, formatterResolver);
 
-					writer.WritePropertyName(p.PropertyName);
-					serializer.Serialize(writer, vv);
-				}
+				var buffer = innerWriter.GetBuffer();
+				// get all the written bytes except the closing }
+				for (var i = buffer.Offset; i < buffer.Count - 1; i++)
+					writer.WriteRawUnsafe(buffer.Array[i]);
+
 				writer.WriteEndObject();
 			}
 			writer.WriteEndObject();
 		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public ISourceOnlyRepository Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (reader.TokenType != JsonToken.StartObject) return null;
+			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject) return null;
 
-			var o = JObject.Load(reader);
-			if (o == null) return null;
+			//TODO read delegate type and settings
 
-			if (!o.TryGetValue("settings", out var token))
-				return null;
-
-			if (!(token is JObject settingsObject))
-				return null;
-
-			if (!settingsObject.TryGetValue("delegate_type", out var delegateTypeToken))
-				return null;
-
-			settingsObject.Remove("delegate_type");
-
-			var settings = settingsObject.ToObject<object>(serializer);
-			return new SourceOnlyRepository(delegateTypeToken.Value<string>(), settings);
+			return new SourceOnlyRepository("fs", null);
 		}
+
 	}
 }
