@@ -1,33 +1,34 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<AutoDateHistogramAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(ChildrenAggregation))]
 	public interface IAutoDateHistogramAggregation : IBucketAggregation
 	{
-		[JsonProperty("field")]
+		[DataMember(Name = "field")]
 		Field Field { get; set; }
 
-		[JsonProperty("format")]
+		[DataMember(Name = "format")]
 		string Format { get; set; }
 
-		[JsonProperty("missing")]
+		[DataMember(Name = "missing")]
 		DateTime? Missing { get; set; }
 
-		[JsonProperty("offset")]
+		[DataMember(Name = "offset")]
 		string Offset { get; set; }
 
-		[JsonProperty("params")]
+		[DataMember(Name = "params")]
 		IDictionary<string, object> Params { get; set; }
 
-		[JsonProperty("script")]
+		[DataMember(Name = "script")]
 		IScript Script { get; set; }
 
-		[JsonProperty("time_zone")]
+		[DataMember(Name = "time_zone")]
 		string TimeZone { get; set; }
 	}
 

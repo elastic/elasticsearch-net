@@ -6,10 +6,10 @@ namespace Nest
 {
 	[DataContract]
 	[ReadAsAttribute(typeof(Watch))]
-	public class IWatch
+	public interface IWatch
 	{
 		[DataMember(Name ="actions")]
-		public Actions Actions { get; internal set; }
+		Actions Actions { get; set; }
 
 		[DataMember(Name ="condition")]
 		ConditionContainer Condition { get; set; }
@@ -18,7 +18,7 @@ namespace Nest
 		InputContainer Input { get; set; }
 
 		[DataMember(Name ="metadata")]
-		IDictionary<string, object> Meta { get; set; }
+		IDictionary<string, object> Metadata { get; set; }
 
 		[DataMember(Name ="status")]
 		WatchStatus Status { get; set; }

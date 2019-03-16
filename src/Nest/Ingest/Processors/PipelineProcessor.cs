@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	/// <summary> Executes another pipeline.</summary>
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ProcessorJsonConverter<PipelineProcessor>))]
+	[InterfaceDataContract]
 	public interface IPipelineProcessor : IProcessor
 	{
 		//TODO 7.x: this property clashes with the Name property on the IProcessor, need to rename base in master
 		/// <summary>The name of the pipeline to execute. </summary>
-		[JsonProperty("name")]
+		[DataMember(Name = "name")]
 		string ProcessorName { get; set; }
 	}
 
@@ -19,7 +19,7 @@ namespace Nest
 	public class PipelineProcessor : ProcessorBase, IPipelineProcessor
 	{
 		/// <inheritdoc cref="IPipelineProcessor.ProcessorName"/>
-		[JsonProperty("name")]
+		[DataMember(Name = "name")]
 		public string ProcessorName { get; set; }
 
 		internal const string ProcessorTypeName = "pipeline";

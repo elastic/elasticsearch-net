@@ -5,7 +5,6 @@
 	/// specified indices.
 	/// </summary>
 	[MapsApi("ccr.follow_stats.json")]
-	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<FollowIndexStatsRequest>))]
 	public partial interface IFollowIndexStatsRequest { }
 
 	/// <inheritdoc cref="IFollowIndexStatsRequest" />

@@ -103,7 +103,6 @@ namespace Nest
 	public partial class PutMappingRequest<T> where T : class { }
 
 	[DataContract]
-	[WriteAs(typeof(IPutMappingRequest))]
 	public partial class PutMappingDescriptor<T> where T : class
 	{
 		IAllField ITypeMapping.AllField { get; set; }
