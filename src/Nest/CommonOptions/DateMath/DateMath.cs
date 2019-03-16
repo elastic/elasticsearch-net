@@ -39,9 +39,6 @@ namespace Nest
 
 		public static implicit operator DateMath(string dateMath) => FromString(dateMath);
 
-		public static bool IsValid(string dateMath) =>
-			dateMath != null && DateMathRegex.IsMatch(dateMath);
-
 		public static DateMath FromString(string dateMath)
 		{
 			if (dateMath == null) return null;

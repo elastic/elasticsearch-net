@@ -1,14 +1,13 @@
 ﻿using System;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 
-	[JsonConverter(typeof(SourceOnlyRepositorySerializer))]
 	public interface ISourceOnlyRepository : IRepositoryWithSettings
 	{
-		[JsonIgnore]
+		[IgnoreDataMember]
 		string DelegateType { get; }
 	}
 

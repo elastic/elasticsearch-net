@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -10,26 +11,25 @@ namespace Nest
 	/// within a document. However unlike the Grok Processor, dissect does not use Regular Expressions.
 	/// This allows dissect’s syntax to be simple and, for some cases faster, than the Grok Processor.
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ProcessorJsonConverter<DissectProcessor>))]
+	[InterfaceDataContract]
 	public interface IDissectProcessor : IProcessor
 	{
 		/// <summary> The field to dissect </summary>
-		[JsonProperty("field")]
+		[DataMember(Name = "field")]
 		Field Field { get; set; }
 
 		/// <summary> The pattern to apply to the field </summary>
-		[JsonProperty("pattern")]
+		[DataMember(Name = "pattern")]
 		string Pattern { get; set; }
 
 		/// <summary
 		/// If true and field does not exist or is null, the processor quietly exits without modifying the document>
 		/// </summary>
-		[JsonProperty("ignore_missing")]
+		[DataMember(Name = "ignore_missing")]
 		bool? IgnoreMissing { get; set; }
 
 		/// <summary> The character(s) that separate the appended fields. </summary>
-		[JsonProperty("append_separator")]
+		[DataMember(Name = "append_separator")]
 		string AppendSeparator { get; set; }
 	}
 
