@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -12,6 +14,9 @@ namespace Nest
 
 		/// <summary>The number of back off retries were needed to store this document.</summary>
 		int Retries { get; }
+
+		/// <summary>The items returned from the bulk response</summary>
+		IReadOnlyCollection<IBulkResponseItem> Items { get; }
 	}
 
 	/// <inheritdoc />
@@ -26,5 +31,8 @@ namespace Nest
 
 		/// <inheritdoc />
 		public int Retries { get; internal set; }
+
+		/// <inheritdoc />
+		public IReadOnlyCollection<IBulkResponseItem> Items { get; internal set; }
 	}
 }

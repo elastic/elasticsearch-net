@@ -112,18 +112,18 @@ namespace Nest
 		{
 			_compositeCancelToken.ThrowIfCancellationRequested();
 
-			var r = _partitionedBulkRequest;
+			var request = _partitionedBulkRequest;
 			var response = await _client.BulkAsync(s =>
 				{
-					s.Index(r.Index).Type(r.Type);
-					if (r.BufferToBulk != null) r.BufferToBulk(s, buffer);
+					s.Index(request.Index).Type(request.Type);
+					if (request.BufferToBulk != null) request.BufferToBulk(s, buffer);
 					else s.IndexMany(buffer);
-					if (!string.IsNullOrEmpty(r.Pipeline)) s.Pipeline(r.Pipeline);
+					if (!string.IsNullOrEmpty(request.Pipeline)) s.Pipeline(request.Pipeline);
 #pragma warning disable 618
-					if (r.Refresh.HasValue) s.Refresh(r.Refresh.Value);
+					if (request.Refresh.HasValue) s.Refresh(request.Refresh.Value);
 #pragma warning restore 618
-					if (r.Routing != null) s.Routing(r.Routing);
-					if (r.WaitForActiveShards.HasValue) s.WaitForActiveShards(r.WaitForActiveShards.ToString());
+					if (request.Routing != null) s.Routing(request.Routing);
+					if (request.WaitForActiveShards.HasValue) s.WaitForActiveShards(request.WaitForActiveShards.ToString());
 
 					return s;
 				}, _compositeCancelToken)
@@ -134,29 +134,38 @@ namespace Nest
 			if (!response.ApiCall.Success)
 				return await HandleBulkRequest(buffer, page, backOffRetries, response);
 
-			var documentsWithResponse = response.Items.Zip(buffer, Tuple.Create).ToList();
+			var successfulDocuments = new List<Tuple<IBulkResponseItem, T>>();
+			var retryableDocuments = new List<T>();
+			var droppedDocuments = new List<Tuple<IBulkResponseItem, T>>();
 
-			HandleDroppedDocuments(documentsWithResponse, response);
+			foreach (var documentWithResponse in response.Items.Zip(buffer, Tuple.Create))
+			{
+				if (documentWithResponse.Item1.IsValid)
+					successfulDocuments.Add(documentWithResponse);
+				else
+				{
+					if (_retryPredicate(documentWithResponse.Item1, documentWithResponse.Item2))
+						retryableDocuments.Add(documentWithResponse.Item2);
+					else
+						droppedDocuments.Add(documentWithResponse);
+				}
+			}
 
-			var retryDocuments = documentsWithResponse
-				.Where(x => !x.Item1.IsValid && _retryPredicate(x.Item1, x.Item2))
-				.Select(x => x.Item2)
-				.ToList();
+			HandleDroppedDocuments(droppedDocuments, response);
 
-			if (retryDocuments.Count > 0 && backOffRetries < _backOffRetries)
-				return await RetryDocuments(page, ++backOffRetries, retryDocuments);
-			else if (retryDocuments.Count > 0)
+			if (retryableDocuments.Count > 0 && backOffRetries < _backOffRetries)
+				return await RetryDocuments(page, ++backOffRetries, retryableDocuments).ConfigureAwait(false);
+
+			if (retryableDocuments.Count > 0)
 				throw ThrowOnBadBulk(response, $"Bulk indexing failed and after retrying {backOffRetries} times");
 
-			_partitionedBulkRequest.BackPressure?.Release();
-			return new BulkAllResponse { Retries = backOffRetries, Page = page };
+			request.BackPressure?.Release();
+
+			return new BulkAllResponse { Retries = backOffRetries, Page = page, Items = response.Items };
 		}
 
-		private void HandleDroppedDocuments(List<Tuple<IBulkResponseItem, T>> documentsWithResponse, IBulkResponse response)
+		private void HandleDroppedDocuments(List<Tuple<IBulkResponseItem, T>> droppedDocuments, IBulkResponse response)
 		{
-			var droppedDocuments = documentsWithResponse
-				.Where(x => !x.Item1.IsValid && !_retryPredicate(x.Item1, x.Item2))
-				.ToList();
 			if (droppedDocuments.Count <= 0) return;
 
 			foreach (var dropped in droppedDocuments) _droppedDocumentCallBack(dropped.Item1, dropped.Item2);
@@ -185,7 +194,7 @@ namespace Nest
 					throw ThrowOnBadBulk(response,
 						$"BulkAll halted after {nameof(PipelineFailure)}{failureReason.GetStringValue()} from _bulk");
 				default:
-					return await RetryDocuments(page, ++backOffRetries, buffer);
+					return await RetryDocuments(page, ++backOffRetries, buffer).ConfigureAwait(false);
 			}
 		}
 

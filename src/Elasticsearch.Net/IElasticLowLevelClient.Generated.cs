@@ -508,6 +508,14 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> DeleteByQueryAsync<TResponse>(string index, string type, PostData body, DeleteByQueryRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /_delete_by_query/{task_id}/_rethrottle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html</para></summary>
+		///<param name="task_id">The task id to rethrottle</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse DeleteByQueryRethrottle<TResponse>(string task_id, DeleteByQueryRethrottleRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /_delete_by_query/{task_id}/_rethrottle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html</para></summary>
+		///<param name="task_id">The task id to rethrottle</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> DeleteByQueryRethrottleAsync<TResponse>(string task_id, DeleteByQueryRethrottleRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_scripts/{id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para></summary>
 		///<param name="id">Script ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -1772,17 +1780,17 @@ namespace Elasticsearch.Net
 		///<param name="metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> NodesInfoAsync<TResponse>(string node_id, string metric, NodesInfoRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>POST on /_nodes/reload_secure_settings <para>https://www.elastic.co/guide/en/elasticsearch/reference/6.5/secure-settings.html#reloadable-secure-settings</para></summary>
+		///<summary>POST on /_nodes/reload_secure_settings <para>https://www.elastic.co/guide/en/elasticsearch/reference/6.x/secure-settings.html#reloadable-secure-settings</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		TResponse NodesReloadSecureSettingsForAll<TResponse>(ReloadSecureSettingsRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>POST on /_nodes/reload_secure_settings <para>https://www.elastic.co/guide/en/elasticsearch/reference/6.5/secure-settings.html#reloadable-secure-settings</para></summary>
+		///<summary>POST on /_nodes/reload_secure_settings <para>https://www.elastic.co/guide/en/elasticsearch/reference/6.x/secure-settings.html#reloadable-secure-settings</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> NodesReloadSecureSettingsForAllAsync<TResponse>(ReloadSecureSettingsRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>POST on /_nodes/{node_id}/reload_secure_settings <para>https://www.elastic.co/guide/en/elasticsearch/reference/6.5/secure-settings.html#reloadable-secure-settings</para></summary>
+		///<summary>POST on /_nodes/{node_id}/reload_secure_settings <para>https://www.elastic.co/guide/en/elasticsearch/reference/6.x/secure-settings.html#reloadable-secure-settings</para></summary>
 		///<param name="node_id">A comma-separated list of node IDs to span the reload/reinit call. Should stay empty because reloading usually involves all cluster nodes.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		TResponse NodesReloadSecureSettings<TResponse>(string node_id, ReloadSecureSettingsRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>POST on /_nodes/{node_id}/reload_secure_settings <para>https://www.elastic.co/guide/en/elasticsearch/reference/6.5/secure-settings.html#reloadable-secure-settings</para></summary>
+		///<summary>POST on /_nodes/{node_id}/reload_secure_settings <para>https://www.elastic.co/guide/en/elasticsearch/reference/6.x/secure-settings.html#reloadable-secure-settings</para></summary>
 		///<param name="node_id">A comma-separated list of node IDs to span the reload/reinit call. Should stay empty because reloading usually involves all cluster nodes.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> NodesReloadSecureSettingsAsync<TResponse>(string node_id, ReloadSecureSettingsRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
@@ -2376,6 +2384,14 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> UpdateByQueryAsync<TResponse>(string index, string type, PostData body, UpdateByQueryRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /_update_by_query/{task_id}/_rethrottle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html</para></summary>
+		///<param name="task_id">The task id to rethrottle</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse UpdateByQueryRethrottle<TResponse>(string task_id, UpdateByQueryRethrottleRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /_update_by_query/{task_id}/_rethrottle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html</para></summary>
+		///<param name="task_id">The task id to rethrottle</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> UpdateByQueryRethrottleAsync<TResponse>(string task_id, UpdateByQueryRethrottleRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_ccr/auto_follow/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</para></summary>
 		///<param name="name">The name of the auto follow pattern.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -2562,6 +2578,34 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The name of the job to close</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> XpackMlCloseJobAsync<TResponse>(string job_id, CloseJobRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>DELETE on /_xpack/ml/calendars/{calendar_id} <para></para></summary>
+		///<param name="calendar_id">The ID of the calendar to delete</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse XpackMlDeleteCalendar<TResponse>(string calendar_id, DeleteCalendarRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>DELETE on /_xpack/ml/calendars/{calendar_id} <para></para></summary>
+		///<param name="calendar_id">The ID of the calendar to delete</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> XpackMlDeleteCalendarAsync<TResponse>(string calendar_id, DeleteCalendarRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>DELETE on /_xpack/ml/calendars/{calendar_id}/events/{event_id} <para></para></summary>
+		///<param name="calendar_id">The ID of the calendar to modify</param>
+		///<param name="event_id">The ID of the event to remove from the calendar</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse XpackMlDeleteCalendarEvent<TResponse>(string calendar_id, string event_id, DeleteCalendarEventRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>DELETE on /_xpack/ml/calendars/{calendar_id}/events/{event_id} <para></para></summary>
+		///<param name="calendar_id">The ID of the calendar to modify</param>
+		///<param name="event_id">The ID of the event to remove from the calendar</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> XpackMlDeleteCalendarEventAsync<TResponse>(string calendar_id, string event_id, DeleteCalendarEventRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>DELETE on /_xpack/ml/calendars/{calendar_id}/jobs/{job_id} <para></para></summary>
+		///<param name="calendar_id">The ID of the calendar to modify</param>
+		///<param name="job_id">The ID of the job to remove from the calendar</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse XpackMlDeleteCalendarJob<TResponse>(string calendar_id, string job_id, DeleteCalendarJobRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>DELETE on /_xpack/ml/calendars/{calendar_id}/jobs/{job_id} <para></para></summary>
+		///<param name="calendar_id">The ID of the calendar to modify</param>
+		///<param name="job_id">The ID of the job to remove from the calendar</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> XpackMlDeleteCalendarJobAsync<TResponse>(string calendar_id, string job_id, DeleteCalendarJobRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		///<summary>DELETE on /_xpack/ml/datafeeds/{datafeed_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</para></summary>
 		///<param name="datafeed_id">The ID of the datafeed to delete</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -2640,6 +2684,46 @@ namespace Elasticsearch.Net
 		///<param name="body">Bucket selection details if not provided in URI</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> XpackMlGetBucketsAsync<TResponse>(string job_id, PostData body, GetBucketsRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_xpack/ml/calendars <para></para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse XpackMlGetCalendars<TResponse>(GetCalendarsRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_xpack/ml/calendars <para></para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> XpackMlGetCalendarsAsync<TResponse>(GetCalendarsRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_xpack/ml/calendars/{calendar_id} <para></para></summary>
+		///<param name="calendar_id">The ID of the calendar to fetch</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse XpackMlGetCalendars<TResponse>(string calendar_id, GetCalendarsRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_xpack/ml/calendars/{calendar_id} <para></para></summary>
+		///<param name="calendar_id">The ID of the calendar to fetch</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> XpackMlGetCalendarsAsync<TResponse>(string calendar_id, GetCalendarsRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /_xpack/ml/calendars <para></para></summary>
+		///<param name="body">Calendar selection details if not provided in URI</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse XpackMlGetCalendars<TResponse>(PostData body, GetCalendarsRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /_xpack/ml/calendars <para></para></summary>
+		///<param name="body">Calendar selection details if not provided in URI</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> XpackMlGetCalendarsAsync<TResponse>(PostData body, GetCalendarsRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /_xpack/ml/calendars/{calendar_id} <para></para></summary>
+		///<param name="calendar_id">The ID of the calendar to fetch</param>
+		///<param name="body">Calendar selection details if not provided in URI</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse XpackMlGetCalendars<TResponse>(string calendar_id, PostData body, GetCalendarsRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /_xpack/ml/calendars/{calendar_id} <para></para></summary>
+		///<param name="calendar_id">The ID of the calendar to fetch</param>
+		///<param name="body">Calendar selection details if not provided in URI</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> XpackMlGetCalendarsAsync<TResponse>(string calendar_id, PostData body, GetCalendarsRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_xpack/ml/calendars/{calendar_id}/events <para></para></summary>
+		///<param name="calendar_id">The ID of the calendar containing the events</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse XpackMlGetCalendarEvents<TResponse>(string calendar_id, GetCalendarEventsRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_xpack/ml/calendars/{calendar_id}/events <para></para></summary>
+		///<param name="calendar_id">The ID of the calendar containing the events</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> XpackMlGetCalendarEventsAsync<TResponse>(string calendar_id, GetCalendarEventsRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_xpack/ml/anomaly_detectors/{job_id}/results/categories/{category_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</para></summary>
 		///<param name="job_id">The name of the job</param>
 		///<param name="category_id">The identifier of the category definition of interest</param>
@@ -2830,6 +2914,12 @@ namespace Elasticsearch.Net
 		///<param name="body">Record selection criteria</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> XpackMlGetRecordsAsync<TResponse>(string job_id, PostData body, GetAnomalyRecordsRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_xpack/ml/info <para></para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse XpackMlInfo<TResponse>(MachineLearningInfoRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_xpack/ml/info <para></para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> XpackMlInfoAsync<TResponse>(MachineLearningInfoRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_xpack/ml/anomaly_detectors/{job_id}/_open <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</para></summary>
 		///<param name="job_id">The ID of the job to open</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -2838,6 +2928,16 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The ID of the job to open</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> XpackMlOpenJobAsync<TResponse>(string job_id, OpenJobRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /_xpack/ml/calendars/{calendar_id}/events <para></para></summary>
+		///<param name="calendar_id">The ID of the calendar to modify</param>
+		///<param name="body">A list of events</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse XpackMlPostCalendarEvents<TResponse>(string calendar_id, PostData body, PostCalendarEventsRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /_xpack/ml/calendars/{calendar_id}/events <para></para></summary>
+		///<param name="calendar_id">The ID of the calendar to modify</param>
+		///<param name="body">A list of events</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> XpackMlPostCalendarEventsAsync<TResponse>(string calendar_id, PostData body, PostCalendarEventsRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_xpack/ml/anomaly_detectors/{job_id}/_data <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</para></summary>
 		///<param name="job_id">The name of the job receiving the data</param>
 		///<param name="body">The data to process</param>
@@ -2856,6 +2956,26 @@ namespace Elasticsearch.Net
 		///<param name="datafeed_id">The ID of the datafeed to preview</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> XpackMlPreviewDatafeedAsync<TResponse>(string datafeed_id, PreviewDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>PUT on /_xpack/ml/calendars/{calendar_id} <para></para></summary>
+		///<param name="calendar_id">The ID of the calendar to create</param>
+		///<param name="body">The calendar details</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse XpackMlPutCalendar<TResponse>(string calendar_id, PostData body, PutCalendarRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>PUT on /_xpack/ml/calendars/{calendar_id} <para></para></summary>
+		///<param name="calendar_id">The ID of the calendar to create</param>
+		///<param name="body">The calendar details</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> XpackMlPutCalendarAsync<TResponse>(string calendar_id, PostData body, PutCalendarRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>PUT on /_xpack/ml/calendars/{calendar_id}/jobs/{job_id} <para></para></summary>
+		///<param name="calendar_id">The ID of the calendar to modify</param>
+		///<param name="job_id">The ID of the job to add to the calendar</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse XpackMlPutCalendarJob<TResponse>(string calendar_id, string job_id, PutCalendarJobRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>PUT on /_xpack/ml/calendars/{calendar_id}/jobs/{job_id} <para></para></summary>
+		///<param name="calendar_id">The ID of the calendar to modify</param>
+		///<param name="job_id">The ID of the job to add to the calendar</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> XpackMlPutCalendarJobAsync<TResponse>(string calendar_id, string job_id, PutCalendarJobRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_xpack/ml/datafeeds/{datafeed_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</para></summary>
 		///<param name="datafeed_id">The ID of the datafeed to create</param>
 		///<param name="body">The datafeed config</param>

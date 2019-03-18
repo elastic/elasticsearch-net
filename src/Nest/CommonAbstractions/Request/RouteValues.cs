@@ -18,6 +18,8 @@ namespace Nest
 		public string Fields => GetResolved("fields");
 		public string FilterId => GetResolved("filter_id");
 		public string Id => GetResolved("id");
+		public string CalendarId => GetResolved("calendar_id");
+		public string EventId => GetResolved("event_id");
 
 		public string Index => GetResolved("index");
 		public string IndexMetric => GetResolved("index_metric");
