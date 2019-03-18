@@ -40,8 +40,11 @@ namespace Nest
 
 		internal static object CreateGenericInstance(this Type t, Type[] closeOver, params object[] args)
 		{
-			var argKey = closeOver.Aggregate(new StringBuilder(), (sb, gt) => sb.Append("--" + gt.FullName), sb => sb.ToString());
-			var key = t.FullName + argKey;
+			var key = closeOver.Aggregate(new StringBuilder(t.FullName), (sb, gt) =>
+			{
+				sb.Append("--");
+				return sb.Append(gt.FullName);
+			}, sb => sb.ToString());
 			if (!CachedGenericClosedTypes.TryGetValue(key, out var closedType))
 			{
 				closedType = t.MakeGenericType(closeOver);
