@@ -167,6 +167,10 @@ namespace Nest
 
 	public class MachineLearningUsage : XPackUsage
 	{
+	    /// <remarks>Valid only for Elasticsearch 6.5.0+</remarks>
+		[DataMember(Name = "node_count")]
+		public int NodeCount { get; internal set; }
+	    
 		[DataMember(Name = "datafeeds")]
 		public IReadOnlyDictionary<string, DataFeed> Datafeeds { get; set; } = EmptyReadOnly<string, DataFeed>.Dictionary;
 
