@@ -13,10 +13,10 @@ namespace Nest
 
 		private readonly List<string> _forecastIds;
 
-		public ForecastIds(IEnumerable<string> forecastIds) => _forecastIds = forecastIds?.ToList();
+		public ForecastIds(IEnumerable<string> forecastIds) => _forecastIds = forecastIds?.ToList() ?? new List<string>();
 
 		public ForecastIds(string forecastIds) => _forecastIds = forecastIds.IsNullOrEmpty()
-			? null
+			? new List<string>()
 			: forecastIds.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries)
 				.Select(s => s.Trim())
 				.ToList();
@@ -36,9 +36,10 @@ namespace Nest
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings) => string.Join(",", _forecastIds);
 
 		public static implicit operator ForecastIds(string forecastIds) =>
-			forecastIds.IsNullOrEmptyCommaSeparatedList(out var list) ? null : new ForecastIds(list);
+			forecastIds.IsNullOrEmptyCommaSeparatedList(out var list) ? new ForecastIds(null) : new ForecastIds(list);
 
-		public static implicit operator ForecastIds(string[] forecastIds) => forecastIds.IsEmpty() ? null : new ForecastIds(forecastIds);
+		public static implicit operator ForecastIds(string[] forecastIds) =>
+			forecastIds.IsEmpty() ? new ForecastIds(null) : new ForecastIds(forecastIds);
 
 		public override bool Equals(object obj) => obj is ForecastIds other && Equals(other);
 
