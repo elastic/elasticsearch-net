@@ -123,9 +123,9 @@ namespace Nest
 
 		/// <summary>
 		/// Convenience method to map as much as it can based on ElasticType attributes set on the type.
-		/// <pre>This method also automatically sets up mappings for known values types (int, long, double, datetime, etcetera)</pre>
+		/// <pre>This method also automatically sets up mappings for primitive values types (e.g. int, long, double, DateTime...)</pre>
 		/// <pre>Class types default to object and Enums to int</pre>
-		/// <pre>Later calls can override whatever is set is by this call.</pre>
+		/// <pre>Later calls can override whatever is set by this call.</pre>
 		/// </summary>
 		public PutMappingDescriptor<T> AutoMap(IPropertyVisitor visitor = null, int maxRecursion = 0) =>
 			Assign(a => a.Properties = a.Properties.AutoMap<T>(visitor, maxRecursion));

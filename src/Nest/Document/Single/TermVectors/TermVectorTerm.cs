@@ -12,6 +12,9 @@ namespace Nest
 		[JsonProperty("term_freq")]
 		public int TermFrequency { get; internal set; }
 
+		[JsonProperty("score")]
+		public double Score { get; internal set; }
+
 		[JsonProperty("tokens")]
 		public IReadOnlyCollection<Token> Tokens { get; internal set; } =
 			EmptyReadOnly<Token>.Collection;
