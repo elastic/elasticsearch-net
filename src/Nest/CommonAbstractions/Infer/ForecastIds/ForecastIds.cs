@@ -13,10 +13,10 @@ namespace Nest
 
 		private readonly List<string> _forecastIds;
 
-		public ForecastIds(IEnumerable<string> forecastIds) => _forecastIds = forecastIds?.ToList() ?? new List<string>();
+		public ForecastIds(IEnumerable<string> forecastIds) => _forecastIds = forecastIds?.ToList();
 
 		public ForecastIds(string forecastIds) => _forecastIds = forecastIds.IsNullOrEmpty()
-			? new List<string>()
+			? null
 			: forecastIds.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries)
 				.Select(s => s.Trim())
 				.ToList();
