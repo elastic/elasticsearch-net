@@ -138,6 +138,8 @@ In addition to the buckets themselves, the bucket aggregations also compute and 
 
 * <<nested-aggregation-usage,Nested Aggregation Usage>>
 
+* <<parent-aggregation-usage,Parent Aggregation Usage>>
+
 * <<range-aggregation-usage,Range Aggregation Usage>>
 
 * <<reverse-nested-aggregation-usage,Reverse Nested Aggregation Usage>>
@@ -192,6 +194,8 @@ include::aggregations/bucket/ip-range/ip-range-aggregation-usage.asciidoc[]
 include::aggregations/bucket/missing/missing-aggregation-usage.asciidoc[]
 
 include::aggregations/bucket/nested/nested-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/parent/parent-aggregation-usage.asciidoc[]
 
 include::aggregations/bucket/range/range-aggregation-usage.asciidoc[]
 

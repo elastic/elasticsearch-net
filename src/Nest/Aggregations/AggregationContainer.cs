@@ -177,6 +177,9 @@ namespace Nest
 		[JsonProperty("nested")]
 		INestedAggregation Nested { get; set; }
 
+		[JsonProperty("parent")]
+		IParentAggregation Parent { get; set; }
+
 		[JsonProperty("percentile_ranks")]
 		IPercentileRanksAggregation PercentileRanks { get; set; }
 
@@ -303,6 +306,8 @@ namespace Nest
 		public IMovingFunctionAggregation MovingFunction { get; set; }
 
 		public INestedAggregation Nested { get; set; }
+
+		public IParentAggregation Parent { get; set; }
 
 		public IPercentileRanksAggregation PercentileRanks { get; set; }
 
@@ -439,6 +444,8 @@ namespace Nest
 		IMovingFunctionAggregation IAggregationContainer.MovingFunction { get; set; }
 
 		INestedAggregation IAggregationContainer.Nested { get; set; }
+
+		IParentAggregation IAggregationContainer.Parent { get; set; }
 
 		IPercentileRanksAggregation IAggregationContainer.PercentileRanks { get; set; }
 
@@ -581,6 +588,11 @@ namespace Nest
 			Func<NestedAggregationDescriptor<T>, INestedAggregation> selector
 		) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Nested = d);
+
+		public AggregationContainerDescriptor<T> Parent<TParent>(string name,
+			Func<ParentAggregationDescriptor<T, TParent>, IParentAggregation> selector
+		) where TParent : class =>
+			_SetInnerAggregation(name, selector, (a, d) => a.Parent = d);
 
 		public AggregationContainerDescriptor<T> ReverseNested(string name,
 			Func<ReverseNestedAggregationDescriptor<T>, IReverseNestedAggregation> selector
