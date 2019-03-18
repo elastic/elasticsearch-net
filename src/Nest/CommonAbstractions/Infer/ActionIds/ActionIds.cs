@@ -34,13 +34,13 @@ namespace Nest
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings) => string.Join(",", _actionIds);
 
 		public static implicit operator ActionIds(string actionIds) =>
-			actionIds.IsNullOrEmptyCommaSeparatedList(out var list) ? null : new ActionIds(list);
+			actionIds.IsNullOrEmptyCommaSeparatedList(out var list) ? new ActionIds(null) : new ActionIds(list);
 
-		public static implicit operator ActionIds(string[] actionIds) => actionIds.IsEmpty() ? null : new ActionIds(actionIds);
+		public static implicit operator ActionIds(string[] actionIds) => actionIds.IsEmpty() ? new ActionIds(null) : new ActionIds(actionIds);
 
 		public override bool Equals(object obj) => obj is ActionIds other && Equals(other);
 
-		public override int GetHashCode() => _actionIds.GetHashCode();
+		public override int GetHashCode() => _actionIds.OrderBy(s => s).GetHashCode();
 
 		public static bool operator ==(ActionIds left, ActionIds right) => Equals(left, right);
 
