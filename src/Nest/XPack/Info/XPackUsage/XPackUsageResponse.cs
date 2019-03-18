@@ -164,6 +164,7 @@ namespace Nest
 
 	public class MachineLearningUsage : XPackUsage
 	{
+	    /// <remarks>Valid only for Elasticsearch 6.5.0+</remarks>
 		[JsonProperty("node_count")]
 		public int NodeCount { get; internal set; }
 
