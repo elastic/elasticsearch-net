@@ -57,9 +57,11 @@ namespace Nest
 				};
 
 				var headerString = elasticsearchSerializer.SerializeToString(header, SerializationFormatting.None);
-				writer.WriteRaw($"{headerString}\n");
+				writer.WriteRaw(headerString);
+				writer.WriteRaw("\n");
 				var bodyString = elasticsearchSerializer.SerializeToString(operation, SerializationFormatting.None);
-				writer.WriteRaw($"{bodyString}\n");
+				writer.WriteRaw(bodyString);
+				writer.WriteRaw("\n");
 			}
 			;
 		}
