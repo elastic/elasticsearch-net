@@ -9,6 +9,8 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class ForecastIds : IUrlParameter, IEquatable<ForecastIds>
 	{
+		public static ForecastIds All => new ForecastIds("_all");
+
 		private readonly List<string> _forecastIds;
 
 		public ForecastIds(IEnumerable<string> forecastIds) => _forecastIds = forecastIds?.ToList() ?? new List<string>();
@@ -40,7 +42,7 @@ namespace Nest
 
 		public override bool Equals(object obj) => obj is ForecastIds other && Equals(other);
 
-		public override int GetHashCode() => _forecastIds.GetHashCode();
+		public override int GetHashCode() => _forecastIds.OrderBy(s => s).GetHashCode();
 
 		public static bool operator ==(ForecastIds left, ForecastIds right) => Equals(left, right);
 
