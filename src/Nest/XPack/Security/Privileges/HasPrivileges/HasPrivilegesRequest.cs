@@ -40,6 +40,7 @@ namespace Nest
 		public IEnumerable<IApplicationPrivilegesCheck> Application { get; set; }
 	}
 
+	[DescriptorFor("XpackSecurityHasPrivileges")]
 	public partial class HasPrivilegesDescriptor
 	{
 		/// <inheritdoc cref="IHasPrivilegesRequest.Cluster"/>

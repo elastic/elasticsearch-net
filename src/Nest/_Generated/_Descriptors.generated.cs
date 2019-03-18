@@ -4553,9 +4553,9 @@ namespace Nest
 		/// <summary>/_xpack/security/privilege/{application}/{name}</summary>
 		///<param name="application"> this parameter is required</param>
 		///<param name="name"> this parameter is required</param>
-		public DeletePrivilegesDescriptor(ApplicationName application, Name name) : base(r=>r.Required("application", application).Required("name", name)){}
+		public DeletePrivilegesDescriptor(Name application, Name name) : base(r=>r.Required("application", application).Required("name", name)){}
 		// values part of the url path
-		ApplicationName IDeletePrivilegesRequest.Application => Self.RouteValues.Get<ApplicationName>("application");
+		Name IDeletePrivilegesRequest.Application => Self.RouteValues.Get<Name>("application");
 		Name IDeletePrivilegesRequest.Name => Self.RouteValues.Get<Name>("name");
 
 		// Request parameters
@@ -4643,11 +4643,11 @@ namespace Nest
 		/// <summary>/_xpack/security/privilege/{application}/{name}</summary>
 		public GetPrivilegesDescriptor() : base(){}
 		// values part of the url path
-		ApplicationName IGetPrivilegesRequest.Application => Self.RouteValues.Get<ApplicationName>("application");
+		Name IGetPrivilegesRequest.Application => Self.RouteValues.Get<Name>("application");
 		Name IGetPrivilegesRequest.Name => Self.RouteValues.Get<Name>("name");
 
 		///<summary>Application name</summary>
-		public GetPrivilegesDescriptor Application(ApplicationName application) => Assign(a=>a.RouteValues.Optional("application", application));
+		public GetPrivilegesDescriptor Application(Name application) => Assign(a=>a.RouteValues.Optional("application", application));
 
 		///<summary>Privilege name</summary>
 		public GetPrivilegesDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));

@@ -1870,7 +1870,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeletePrivilegesRequest : IRequest<DeletePrivilegesRequestParameters>
 	{
-		ApplicationName Application { get; }
+		Name Application { get; }
 		Name Name { get; }
 	}
 	///<summary>Request parameters for XpackSecurityDeletePrivileges <pre>TODO</pre></summary>
@@ -1880,9 +1880,9 @@ namespace Nest
 		///<summary>/_xpack/security/privilege/{application}/{name}</summary>
 		///<param name="application">this parameter is required</param>
 		///<param name="name">this parameter is required</param>
-		public DeletePrivilegesRequest(ApplicationName application, Name name) : base(r=>r.Required("application", application).Required("name", name)){}
+		public DeletePrivilegesRequest(Name application, Name name) : base(r=>r.Required("application", application).Required("name", name)){}
 		// values part of the url path
-		ApplicationName IDeletePrivilegesRequest.Application => Self.RouteValues.Get<ApplicationName>("application");
+		Name IDeletePrivilegesRequest.Application => Self.RouteValues.Get<Name>("application");
 		Name IDeletePrivilegesRequest.Name => Self.RouteValues.Get<Name>("name");
 
 		// Request parameters
@@ -3025,7 +3025,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetPrivilegesRequest : IRequest<GetPrivilegesRequestParameters>
 	{
-		ApplicationName Application { get; }
+		Name Application { get; }
 		Name Name { get; }
 	}
 	///<summary>Request parameters for XpackSecurityGetPrivileges <pre>TODO</pre></summary>
@@ -3035,9 +3035,9 @@ namespace Nest
 		///<summary>/_xpack/security/privilege/{application}/{name}</summary>
 		///<param name="application">Optional, accepts null</param>
 		///<param name="name">Optional, accepts null</param>
-		public GetPrivilegesRequest(ApplicationName application, Name name) : base(r=>r.Optional("application", application).Optional("name", name)){}
+		public GetPrivilegesRequest(Name application, Name name) : base(r=>r.Optional("application", application).Optional("name", name)){}
 		// values part of the url path
-		ApplicationName IGetPrivilegesRequest.Application => Self.RouteValues.Get<ApplicationName>("application");
+		Name IGetPrivilegesRequest.Application => Self.RouteValues.Get<Name>("application");
 		Name IGetPrivilegesRequest.Name => Self.RouteValues.Get<Name>("name");
 
 		// Request parameters

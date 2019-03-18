@@ -59,7 +59,7 @@ namespace ApiGenerator.Domain
 						return "Metrics";
 					case "feature": return "Features";
 					case "action_id": return "ActionIds";
-					case "application": return "ApplicationName";
+					case "application":
 					case "repository":
 					case "snapshot":
 					case "lang":
