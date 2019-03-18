@@ -16,7 +16,7 @@ namespace Tests.XPack.MachineLearning.DeleteForecast
 				.FluentAsync(c => c.DeleteForecastAsync("job_id", "forecast_id"))
 				.RequestAsync(c => c.DeleteForecastAsync(new DeleteForecastRequest("job_id", "forecast_id")));
 
-			await DELETE("/_xpack/ml/anomaly_detectors/job_id/_forecast/forecast_id,forecast_id2")
+			await DELETE("/_xpack/ml/anomaly_detectors/job_id/_forecast/forecast_id%2Cforecast_id2")
 				.Fluent(c => c.DeleteForecast("job_id", "forecast_id,forecast_id2"))
 				.Request(c => c.DeleteForecast(new DeleteForecastRequest("job_id", "forecast_id,forecast_id2")))
 				.FluentAsync(c => c.DeleteForecastAsync("job_id", "forecast_id,forecast_id2"))

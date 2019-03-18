@@ -9,41 +9,46 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class ForecastIds : IUrlParameter, IEquatable<ForecastIds>
 	{
-		public static ForecastIds All => new ForecastIds("_all");
+		public static ForecastIds All { get; } = new ForecastIds("_all");
 
 		private readonly List<string> _forecastIds;
 
 		public ForecastIds(IEnumerable<string> forecastIds) => _forecastIds = forecastIds?.ToList() ?? new List<string>();
 
-		public ForecastIds(string forecastIds) => _forecastIds = forecastIds.IsNullOrEmpty()
+		public ForecastIds(string forecastIds) => _forecastIds = forecastIds.IsNullOrEmptyCommaSeparatedList(out var ids)
 			? new List<string>()
-			: forecastIds.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries)
-				.Select(s => s.Trim())
-				.ToList();
-
-		internal IReadOnlyList<string> Ids => _forecastIds;
+			: ids.ToList();
 
 		private string DebugDisplay => ((IUrlParameter)this).GetString(null);
 
 		public bool Equals(ForecastIds other)
 		{
-			if (Ids == null && other.Ids == null) return true;
-			if (Ids == null || other.Ids == null) return false;
+			if (other == null) return false;
+			if (_forecastIds == null && other._forecastIds == null) return true;
+			if (_forecastIds == null || other._forecastIds == null) return false;
 
-			return Ids.Count == other.Ids.Count && !Ids.Except(other.Ids).Any();
+			return _forecastIds.Count == other._forecastIds.Count && !_forecastIds.Except(other._forecastIds).Any();
 		}
 
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings) => string.Join(",", _forecastIds);
 
-		public static implicit operator ForecastIds(string forecastIds) =>
-			forecastIds.IsNullOrEmptyCommaSeparatedList(out var list) ? new ForecastIds((string)null) : new ForecastIds(list);
+		public static implicit operator ForecastIds(string forecastIds) => new ForecastIds(forecastIds);
 
-		public static implicit operator ForecastIds(string[] forecastIds) =>
-			forecastIds.IsEmpty() ? new ForecastIds((string)null) : new ForecastIds(forecastIds);
+		public static implicit operator ForecastIds(string[] forecastIds) => new ForecastIds(forecastIds);
 
 		public override bool Equals(object obj) => obj is ForecastIds other && Equals(other);
 
-		public override int GetHashCode() => _forecastIds.OrderBy(s => s).GetHashCode();
+		public override int GetHashCode()
+		{
+			_forecastIds.Sort();
+			unchecked
+			{
+				var hc = 0;
+				foreach (var id in _forecastIds)
+					hc = hc * 17 + id.GetHashCode();
+				return hc;
+			}
+		}
 
 		public static bool operator ==(ForecastIds left, ForecastIds right) => Equals(left, right);
 
