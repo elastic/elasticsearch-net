@@ -6,7 +6,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	[JsonConverter(typeof(HasPrivilegesResponseJsonConverter))]
 	public interface IHasPrivilegesResponse : IResponse
 	{
 		[JsonProperty("username")]
@@ -19,9 +18,11 @@ namespace Nest
 		IReadOnlyDictionary<string, bool> Clusters { get; }
 
 		[JsonProperty("index")]
+		[JsonConverter(typeof(IndicesPrivilegesResponseJsonConverter))]
 		IReadOnlyCollection<ResourcePrivileges> Indices { get; }
 
 		[JsonProperty("application")]
+		[JsonConverter(typeof(ApplicationsPrivilegesResponseJsonConverter))]
 		IReadOnlyDictionary<string, IReadOnlyCollection<ResourcePrivileges>> Applications { get; }
 	}
 
@@ -45,36 +46,33 @@ namespace Nest
 		public IReadOnlyDictionary<string, bool> Privileges { get; internal set; } = EmptyReadOnly<string, bool>.Dictionary;
 	}
 
-	internal class HasPrivilegesResponseJsonConverter : JsonConverter
+	internal class IndicesPrivilegesResponseJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => true;
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var response = new HasPrivilegesResponse();
 			var jsonObject = JObject.Load(reader);
+			return jsonObject.Properties()
+							 .Select(o => new ResourcePrivileges
+							 {
+								 Resource = o.Name,
+								 Privileges = o.Value.Value<JObject>()
+									 .Properties()
+									 .ToDictionary(p => p.Name, p => p.Value.Value<bool>())
+							 }).ToList().AsReadOnly();
+		}
+	}
 
-			response.Username = jsonObject.Property("username").Value.Value<string>();
-			response.HasAllRequested = jsonObject.Property("has_all_requested").Value.Value<bool>();
-
-			response.Clusters = jsonObject.Property("cluster")
-				.Value.Value<JObject>()
-				.Properties()
-				.ToDictionary(c => c.Name, c => c.Value.Value<bool>());
-
-			response.Indices = jsonObject.Property("index")
-										 .Value.Value<JObject>()
-										 .Properties()
-										 .Select(o => new ResourcePrivileges
-										 {
-											 Resource = o.Name,
-											 Privileges = o.Value.Value<JObject>()
-												 .Properties()
-												 .ToDictionary(p => p.Name, p => p.Value.Value<bool>())
-										 }).ToList().AsReadOnly();
-
+	internal class ApplicationsPrivilegesResponseJsonConverter : JsonConverter
+	{
+		public override bool CanConvert(Type objectType) => true;
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			var jsonObject = JObject.Load(reader);
 			var apps = new Dictionary<string, IReadOnlyCollection<ResourcePrivileges>>();
-			foreach (var applicationProp in jsonObject.Property("application").Value.Value<JObject>())
+			foreach (var applicationProp in jsonObject)
 			{
 				apps.Add(applicationProp.Key, applicationProp.Value.Value<JObject>()
 					.Properties()
@@ -86,9 +84,7 @@ namespace Nest
 							.ToDictionary(p => p.Name, p => p.Value.Value<bool>())
 					}).ToList().AsReadOnly());
 			}
-			response.Applications = apps;
-
-			return response;
+			return apps;
 		}
 	}
 }
