@@ -24,30 +24,12 @@ namespace ApiGenerator
 			"xpack.ml.delete_filter.json",
 			"xpack.ml.get_filters.json",
 			"xpack.ml.put_filter.json",
+			"xpack.ml.update_filter.json",
 			"rank_eval.json",
 
 			// these API's are new and need to be mapped
-			"xpack.license.get_basic_status.json",
-			"xpack.license.post_start_basic.json",
-			"xpack.ml.delete_calendar.json",
-			"xpack.ml.delete_calendar_event.json",
-			"xpack.ml.delete_calendar_job.json",
-			"xpack.ml.get_calendar_events.json",
-			"xpack.ml.get_calendars.json",
-			"xpack.ml.info.json",
-			"xpack.ml.post_calendar_events.json",
-			"xpack.ml.put_calendar.json",
-			"xpack.ml.put_calendar_job.json",
-			"xpack.ml.get_calendar_job.json",
 			"xpack.ml.delete_forecast.json",
 			"xpack.ml.find_file_structure.json",
-			"xpack.ssl.certificates.json",
-			"delete_by_query_rethrottle.json",
-			"update_by_query_rethrottle.json",
-
-			"xpack.ml.update_filter.json",
-			"xpack.rollup.get_rollup_index_caps.json",
-			"nodes.reload_secure_settings.json"
 		};
 
 		public static void Generate(string downloadBranch, params string[] folders)

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
+using Elastic.Managed.ConsoleWriters;
 using Elastic.Managed.Ephemeral;
 using Elastic.Managed.Ephemeral.Tasks;
 using ICSharpCode.SharpZipLib.GZip;
@@ -34,21 +36,34 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 	{
 		public override void Run(IEphemeralCluster<EphemeralClusterConfiguration> cluster)
 		{
+			void W(string m) => cluster.Writer.WriteDiagnostic(nameof(DownloadMachineLearningSampleDataDistribution), m);
 			var to = Path.Combine(cluster.FileSystem.LocalFolder, "server_metrics.tar.gz");
 			if (!File.Exists(to))
 			{
 				var from = "https://download.elasticsearch.org/demos/machine_learning/gettingstarted/server_metrics.tar.gz";
-				Console.WriteLine($"Download machine learning sample data from: {from}");
+				W($"Download machine learning sample data from: {from}");
 				DownloadFile(from, to);
-				Console.WriteLine($"Downloaded machine learning sample data to: {to}");
+				W($"Downloaded machine learning sample data to: {to}");
 			}
+			else
+				W($"{to} already exists on disk using cached copy");
 
 			var directoryTarget = Path.Combine(cluster.FileSystem.LocalFolder, "server_metrics");
 
-			if (Directory.Exists(directoryTarget)) return;
+			if (Directory.Exists(directoryTarget))
+			{
+				if (Directory.EnumerateFiles(directoryTarget).Any())
+				{
+					W($"{directoryTarget} already exists and appears to have files, bailing out");
+					return;
+				}
+				MoveFiles(directoryTarget, W);
+			}
+			else
+				W($"{directoryTarget} does not yet exist creating it now to unzip ML data into");
 
 			Directory.CreateDirectory(directoryTarget);
-			Console.WriteLine($"Unzipping machine learning sample data: {to} ...");
+			W($"Unzipping machine learning sample data: {to} ...");
 			using (var inStream = File.OpenRead(to))
 			using (var gzipStream = new GZipInputStream(inStream))
 			using (var tarArchive = TarArchive.CreateInputTarArchive(gzipStream))
@@ -56,6 +71,27 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 				tarArchive.ExtractContents(directoryTarget);
 				tarArchive.Close();
 			}
+
+			MoveFiles(directoryTarget, W);
+		}
+
+		private void MoveFiles(string directoryTarget, Action<string> w)
+		{
+			var filesSubDirectory = Path.Combine(directoryTarget, "files");
+			if (!Directory.Exists(filesSubDirectory))
+			{
+				w($"{filesSubDirectory} does not exist assuming this is an old download of the ML server metrics tar");
+				return;
+			}
+
+			w($" moving files in {filesSubDirectory} to expected location");
+			foreach (var file in Directory.EnumerateFiles(filesSubDirectory))
+			{
+				var fileInfo = new FileInfo(file);
+				fileInfo.MoveTo(Path.Combine(directoryTarget, fileInfo.Name));
+			}
+
+			Directory.Delete(filesSubDirectory, true);
 		}
 	}
 }

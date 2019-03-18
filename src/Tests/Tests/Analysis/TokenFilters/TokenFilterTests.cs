@@ -334,15 +334,19 @@ namespace Tests.Analysis.TokenFilters
 				.KeywordMarker("marker", t => t
 					.IgnoreCase()
 					.Keywords("a", "b")
+					.KeywordsPattern(".*")
+					.KeywordsPath("path")
 				);
 
-			public override ITokenFilter Initializer => new KeywordMarkerTokenFilter { IgnoreCase = true, Keywords = new[] { "a", "b" } };
+			public override ITokenFilter Initializer => new KeywordMarkerTokenFilter { IgnoreCase = true, Keywords = new[] { "a", "b" }, KeywordsPath = "path", KeywordsPattern = ".*" };
 
 			public override object Json => new
 			{
 				type = "keyword_marker",
 				keywords = new[] { "a", "b" },
-				ignore_case = true
+				ignore_case = true,
+				keywords_path = "path",
+				keywords_pattern = ".*"
 			};
 
 			public override string Name => "marker";
@@ -561,7 +565,9 @@ namespace Tests.Analysis.TokenFilters
 		{
 			public override FuncTokenFilters Fluent => (n, tf) => tf.Standard(n);
 
+#pragma warning disable 618
 			public override ITokenFilter Initializer => new StandardTokenFilter();
+#pragma warning restore 618
 
 			public override object Json => new { type = "standard" };
 			public override string Name => "standard";
@@ -581,6 +587,28 @@ namespace Tests.Analysis.TokenFilters
 
 			public override string Name => "stem";
 		}
+
+		[SkipVersion("<6.5.0", "predicate token filter not available in earlier versions")]
+		public class PredicateTests : TokenFilterAssertionBase<PredicateTests>
+		{
+			private readonly string _predicate = "token.getTerm().length() > 5";
+
+			public override FuncTokenFilters Fluent => (n, tf) => tf.Predicate(n, t => t.Script(_predicate));
+
+			public override ITokenFilter Initializer => new PredicateTokenFilter { Script = new InlineScript(_predicate) };
+
+			public override object Json => new
+			{
+				type = "predicate_token_filter",
+				script = new
+				{
+					source = _predicate
+				}
+			};
+
+			public override string Name => "predicate";
+		}
+
 
 		public class StemmerOverrideTests : TokenFilterAssertionBase<StemmerOverrideTests>
 		{
@@ -894,8 +922,35 @@ namespace Tests.Analysis.TokenFilters
 			public override string Name => "nori_pos";
 		}
 
+		[SkipVersion("<6.5.0", "Introduced in 6.5.0")]
+		public class ConditionTests : TokenFilterAssertionBase<ConditionTests>
+		{
+			private readonly string _predicate = "token.getTerm().length() < 5";
+
+			public override FuncTokenFilters Fluent => (n, tf) => tf
+				.Condition(n, t => t
+					.Filters("lowercase", "lowercase, porter_stem")
+					.Script(_predicate)
+				);
+
+			public override ITokenFilter Initializer => new ConditionTokenFilter
+			{
+				Filters = new[] { "lowercase", "lowercase, porter_stem" },
+				Script = new InlineScript(_predicate)
+			};
+
+			public override object Json => new
+			{
+				type = "condition",
+				filter = new[] { "lowercase", "lowercase, porter_stem" },
+				script = new { source = _predicate }
+			};
+
+			public override string Name => "condition";
+		}
+
 		[SkipVersion("<6.4.0", "Introduced in 6.4.0")]
-		public class MultiplexerTests : TokenFilterAssertionBase<PhoneticTests>
+		public class MultiplexerTests : TokenFilterAssertionBase<MultiplexerTests>
 		{
 			public override FuncTokenFilters Fluent => (n, tf) => tf
 				.Multiplexer(n, t => t
@@ -911,6 +966,7 @@ namespace Tests.Analysis.TokenFilters
 
 			public override object Json => new
 			{
+				type = "multiplexer",
 				filters = new[] { "lowercase", "lowercase, porter_stem" },
 				preserve_original = true
 			};
@@ -919,11 +975,11 @@ namespace Tests.Analysis.TokenFilters
 		}
 
 		[SkipVersion("<6.4.0", "Introduced in 6.4.0")]
-		public class RemoveDuplicatesTests : TokenFilterAssertionBase<PhoneticTests>
+		public class RemoveDuplicatesTests : TokenFilterAssertionBase<RemoveDuplicatesTests>
 		{
 			public override FuncTokenFilters Fluent => (n, tf) => tf.RemoveDuplicates(n);
 			public override ITokenFilter Initializer => new RemoveDuplicatesTokenFilter { };
-			public override object Json => new { };
+			public override object Json => new { type = "remove_duplicates" };
 			public override string Name => "dupes";
 		}
 	}

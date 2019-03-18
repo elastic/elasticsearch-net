@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.5
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -72,7 +72,7 @@ var tags = response.Aggregations.Nested("tags");
 tags.Should().NotBeNull();
 var tagNames = tags.Terms("tag_names");
 tagNames.Should().NotBeNull();
-foreach(var item in tagNames.Buckets)
+foreach (var item in tagNames.Buckets)
 {
     item.Key.Should().NotBeNullOrEmpty();
     item.DocCount.Should().BeGreaterThan(0);

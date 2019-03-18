@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.5
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -69,7 +69,7 @@ the resulting date math will assume the whole string is the anchor
 [source,csharp]
 ----
 Expect(nonsense)
-     .WhenSerializing<Nest.DateMath>(nonsense)
+    .WhenSerializing<Nest.DateMath>(nonsense)
     .AssertSubject(dateMath => ((IDateMath)dateMath)
         .Anchor.Match(
             d => d.Should().NotBe(default(DateTime)),

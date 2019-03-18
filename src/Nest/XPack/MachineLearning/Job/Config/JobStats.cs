@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -49,5 +50,60 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("state")]
 		public JobState State { get; internal set; }
+
+		/// <summary>
+		///  Contains job statistics if job contains a forecast.
+		/// </summary>
+		[JsonProperty("forecasts_stats")]
+		public JobForecastStatistics Forecasts { get; internal set; }
+	}
+
+	public class JobForecastStatistics
+	{
+		/// <summary>
+		/// The number of forecasts currently available for this model.
+		/// </summary>
+		[JsonProperty("total")]
+		public long Total { get; internal set; }
+
+		/// <summary>
+		/// Statistics about the memory usage: minimum, maximum, average and total.
+		/// </summary>
+		[JsonProperty("memory_bytes")]
+		public JobStatistics MemoryBytes { get; internal set; }
+
+		/// <summary>
+		/// Statistics about the forecast runtime in milliseconds: minimum, maximum, average and total.
+		/// </summary>
+		[JsonProperty("processing_time_ms")]
+		public JobStatistics ProcessingTimeMilliseconds { get; internal set; }
+
+		/// <summary>
+		/// Statistics about the number of forecast records: minimum, maximum, average and total.
+		/// </summary>
+		[JsonProperty("records")]
+		public JobStatistics Records { get; internal set; }
+
+		/// <summary>
+		/// Counts per forecast status.
+		/// </summary>
+		[JsonProperty("status")]
+		public IReadOnlyDictionary<string, long> Status { get; internal set; }
+			= EmptyReadOnly<string, long>.Dictionary;
+
+		public class JobStatistics
+		{
+			[JsonProperty("avg")]
+			public double Average { get; internal set; }
+
+			[JsonProperty("max")]
+			public double Maximum { get; internal set; }
+
+			[JsonProperty("min")]
+			public double Minimum { get; internal set; }
+
+			[JsonProperty("total")]
+			public double Total { get; internal set; }
+		}
 	}
 }

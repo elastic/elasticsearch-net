@@ -788,6 +788,28 @@ namespace Nest
 			throw InvalidDispatch("DeleteByQuery", p, new [] { POST }, "/{index}/_delete_by_query", "/{index}/{type}/_delete_by_query");
 		}
 		
+		internal TResponse DeleteByQueryRethrottleDispatch<TResponse>(IRequest<DeleteByQueryRethrottleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.TaskId)) return _lowLevel.DeleteByQueryRethrottle<TResponse>(p.RouteValues.TaskId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("DeleteByQueryRethrottle", p, new [] { POST }, "/_delete_by_query/{task_id}/_rethrottle");
+		}
+		
+		internal Task<TResponse> DeleteByQueryRethrottleDispatchAsync<TResponse>(IRequest<DeleteByQueryRethrottleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.TaskId)) return _lowLevel.DeleteByQueryRethrottleAsync<TResponse>(p.RouteValues.TaskId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("DeleteByQueryRethrottle", p, new [] { POST }, "/_delete_by_query/{task_id}/_rethrottle");
+		}
+		
 		internal TResponse DeleteScriptDispatch<TResponse>(IRequest<DeleteScriptRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -2230,6 +2252,28 @@ namespace Nest
 			throw InvalidDispatch("NodesInfo", p, new [] { GET }, "/_nodes", "/_nodes/{node_id}", "/_nodes/{metric}", "/_nodes/{node_id}/{metric}");
 		}
 		
+		internal TResponse NodesReloadSecureSettingsDispatch<TResponse>(IRequest<ReloadSecureSettingsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSet(p.RouteValues.NodeId)) return _lowLevel.NodesReloadSecureSettings<TResponse>(p.RouteValues.NodeId,p.RequestParameters);
+						return _lowLevel.NodesReloadSecureSettingsForAll<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("NodesReloadSecureSettings", p, new [] { POST }, "/_nodes/reload_secure_settings", "/_nodes/{node_id}/reload_secure_settings");
+		}
+		
+		internal Task<TResponse> NodesReloadSecureSettingsDispatchAsync<TResponse>(IRequest<ReloadSecureSettingsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSet(p.RouteValues.NodeId)) return _lowLevel.NodesReloadSecureSettingsAsync<TResponse>(p.RouteValues.NodeId,p.RequestParameters,ct);
+						return _lowLevel.NodesReloadSecureSettingsForAllAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("NodesReloadSecureSettings", p, new [] { POST }, "/_nodes/reload_secure_settings", "/_nodes/{node_id}/reload_secure_settings");
+		}
+		
 		internal TResponse NodesStatsDispatch<TResponse>(IRequest<NodesStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -2902,6 +2946,224 @@ namespace Nest
 			throw InvalidDispatch("UpdateByQuery", p, new [] { POST }, "/{index}/_update_by_query", "/{index}/{type}/_update_by_query");
 		}
 		
+		internal TResponse UpdateByQueryRethrottleDispatch<TResponse>(IRequest<UpdateByQueryRethrottleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.TaskId)) return _lowLevel.UpdateByQueryRethrottle<TResponse>(p.RouteValues.TaskId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("UpdateByQueryRethrottle", p, new [] { POST }, "/_update_by_query/{task_id}/_rethrottle");
+		}
+		
+		internal Task<TResponse> UpdateByQueryRethrottleDispatchAsync<TResponse>(IRequest<UpdateByQueryRethrottleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.TaskId)) return _lowLevel.UpdateByQueryRethrottleAsync<TResponse>(p.RouteValues.TaskId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("UpdateByQueryRethrottle", p, new [] { POST }, "/_update_by_query/{task_id}/_rethrottle");
+		}
+		
+		internal TResponse CcrDeleteAutoFollowPatternDispatch<TResponse>(IRequest<DeleteAutoFollowPatternRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.CcrDeleteAutoFollowPattern<TResponse>(p.RouteValues.Name,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("CcrDeleteAutoFollowPattern", p, new [] { DELETE }, "/_ccr/auto_follow/{name}");
+		}
+		
+		internal Task<TResponse> CcrDeleteAutoFollowPatternDispatchAsync<TResponse>(IRequest<DeleteAutoFollowPatternRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.CcrDeleteAutoFollowPatternAsync<TResponse>(p.RouteValues.Name,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("CcrDeleteAutoFollowPattern", p, new [] { DELETE }, "/_ccr/auto_follow/{name}");
+		}
+		
+		internal TResponse CcrFollowDispatch<TResponse>(IRequest<CreateFollowIndexRequestParameters> p,SerializableData<ICreateFollowIndexRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.CcrFollow<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("CcrFollow", p, new [] { PUT }, "/{index}/_ccr/follow");
+		}
+		
+		internal Task<TResponse> CcrFollowDispatchAsync<TResponse>(IRequest<CreateFollowIndexRequestParameters> p,SerializableData<ICreateFollowIndexRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.CcrFollowAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("CcrFollow", p, new [] { PUT }, "/{index}/_ccr/follow");
+		}
+		
+		internal TResponse CcrFollowStatsDispatch<TResponse>(IRequest<FollowIndexStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.CcrFollowStats<TResponse>(p.RouteValues.Index,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("CcrFollowStats", p, new [] { GET }, "/{index}/_ccr/stats");
+		}
+		
+		internal Task<TResponse> CcrFollowStatsDispatchAsync<TResponse>(IRequest<FollowIndexStatsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.CcrFollowStatsAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("CcrFollowStats", p, new [] { GET }, "/{index}/_ccr/stats");
+		}
+		
+		internal TResponse CcrGetAutoFollowPatternDispatch<TResponse>(IRequest<GetAutoFollowPatternRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Name)) return _lowLevel.CcrGetAutoFollowPattern<TResponse>(p.RouteValues.Name,p.RequestParameters);
+						return _lowLevel.CcrGetAutoFollowPattern<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("CcrGetAutoFollowPattern", p, new [] { GET }, "/_ccr/auto_follow", "/_ccr/auto_follow/{name}");
+		}
+		
+		internal Task<TResponse> CcrGetAutoFollowPatternDispatchAsync<TResponse>(IRequest<GetAutoFollowPatternRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Name)) return _lowLevel.CcrGetAutoFollowPatternAsync<TResponse>(p.RouteValues.Name,p.RequestParameters,ct);
+						return _lowLevel.CcrGetAutoFollowPatternAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("CcrGetAutoFollowPattern", p, new [] { GET }, "/_ccr/auto_follow", "/_ccr/auto_follow/{name}");
+		}
+		
+		internal TResponse CcrPauseFollowDispatch<TResponse>(IRequest<PauseFollowIndexRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.CcrPauseFollow<TResponse>(p.RouteValues.Index,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("CcrPauseFollow", p, new [] { POST }, "/{index}/_ccr/pause_follow");
+		}
+		
+		internal Task<TResponse> CcrPauseFollowDispatchAsync<TResponse>(IRequest<PauseFollowIndexRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.CcrPauseFollowAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("CcrPauseFollow", p, new [] { POST }, "/{index}/_ccr/pause_follow");
+		}
+		
+		internal TResponse CcrPutAutoFollowPatternDispatch<TResponse>(IRequest<CreateAutoFollowPatternRequestParameters> p,SerializableData<ICreateAutoFollowPatternRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.CcrPutAutoFollowPattern<TResponse>(p.RouteValues.Name,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("CcrPutAutoFollowPattern", p, new [] { PUT }, "/_ccr/auto_follow/{name}");
+		}
+		
+		internal Task<TResponse> CcrPutAutoFollowPatternDispatchAsync<TResponse>(IRequest<CreateAutoFollowPatternRequestParameters> p,SerializableData<ICreateAutoFollowPatternRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.CcrPutAutoFollowPatternAsync<TResponse>(p.RouteValues.Name,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("CcrPutAutoFollowPattern", p, new [] { PUT }, "/_ccr/auto_follow/{name}");
+		}
+		
+		internal TResponse CcrResumeFollowDispatch<TResponse>(IRequest<ResumeFollowIndexRequestParameters> p,SerializableData<IResumeFollowIndexRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.CcrResumeFollow<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("CcrResumeFollow", p, new [] { POST }, "/{index}/_ccr/resume_follow");
+		}
+		
+		internal Task<TResponse> CcrResumeFollowDispatchAsync<TResponse>(IRequest<ResumeFollowIndexRequestParameters> p,SerializableData<IResumeFollowIndexRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.CcrResumeFollowAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("CcrResumeFollow", p, new [] { POST }, "/{index}/_ccr/resume_follow");
+		}
+		
+		internal TResponse CcrStatsDispatch<TResponse>(IRequest<CcrStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.CcrStats<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("CcrStats", p, new [] { GET }, "/_ccr/stats");
+		}
+		
+		internal Task<TResponse> CcrStatsDispatchAsync<TResponse>(IRequest<CcrStatsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.CcrStatsAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("CcrStats", p, new [] { GET }, "/_ccr/stats");
+		}
+		
+		internal TResponse CcrUnfollowDispatch<TResponse>(IRequest<UnfollowIndexRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.CcrUnfollow<TResponse>(p.RouteValues.Index,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("CcrUnfollow", p, new [] { POST }, "/{index}/_ccr/unfollow");
+		}
+		
+		internal Task<TResponse> CcrUnfollowDispatchAsync<TResponse>(IRequest<UnfollowIndexRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.CcrUnfollowAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("CcrUnfollow", p, new [] { POST }, "/{index}/_ccr/unfollow");
+		}
+		
 		internal TResponse XpackGraphExploreDispatch<TResponse>(IRequest<GraphExploreRequestParameters> p,SerializableData<IGraphExploreRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -3014,6 +3276,26 @@ namespace Nest
 			throw InvalidDispatch("XpackLicenseGet", p, new [] { GET }, "/_xpack/license");
 		}
 		
+		internal TResponse XpackLicenseGetBasicStatusDispatch<TResponse>(IRequest<GetBasicLicenseStatusRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.XpackLicenseGetBasicStatus<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackLicenseGetBasicStatus", p, new [] { GET }, "/_xpack/license/basic_status");
+		}
+		
+		internal Task<TResponse> XpackLicenseGetBasicStatusDispatchAsync<TResponse>(IRequest<GetBasicLicenseStatusRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.XpackLicenseGetBasicStatusAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackLicenseGetBasicStatus", p, new [] { GET }, "/_xpack/license/basic_status");
+		}
+		
 		internal TResponse XpackLicenseGetTrialStatusDispatch<TResponse>(IRequest<GetTrialLicenseStatusRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -3052,6 +3334,26 @@ namespace Nest
 						return _lowLevel.XpackLicensePostAsync<TResponse>(body,p.RequestParameters,ct);
 			}
 			throw InvalidDispatch("XpackLicensePost", p, new [] { PUT }, "/_xpack/license");
+		}
+		
+		internal TResponse XpackLicensePostStartBasicDispatch<TResponse>(IRequest<StartBasicLicenseRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.XpackLicensePostStartBasic<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackLicensePostStartBasic", p, new [] { POST }, "/_xpack/license/start_basic");
+		}
+		
+		internal Task<TResponse> XpackLicensePostStartBasicDispatchAsync<TResponse>(IRequest<StartBasicLicenseRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.XpackLicensePostStartBasicAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackLicensePostStartBasic", p, new [] { POST }, "/_xpack/license/start_basic");
 		}
 		
 		internal TResponse XpackLicensePostStartTrialDispatch<TResponse>(IRequest<StartTrialLicenseRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
@@ -3094,6 +3396,72 @@ namespace Nest
 					break;
 			}
 			throw InvalidDispatch("XpackMlCloseJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_close");
+		}
+		
+		internal TResponse XpackMlDeleteCalendarDispatch<TResponse>(IRequest<DeleteCalendarRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.XpackMlDeleteCalendar<TResponse>(p.RouteValues.CalendarId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlDeleteCalendar", p, new [] { DELETE }, "/_xpack/ml/calendars/{calendar_id}");
+		}
+		
+		internal Task<TResponse> XpackMlDeleteCalendarDispatchAsync<TResponse>(IRequest<DeleteCalendarRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.XpackMlDeleteCalendarAsync<TResponse>(p.RouteValues.CalendarId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlDeleteCalendar", p, new [] { DELETE }, "/_xpack/ml/calendars/{calendar_id}");
+		}
+		
+		internal TResponse XpackMlDeleteCalendarEventDispatch<TResponse>(IRequest<DeleteCalendarEventRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.EventId)) return _lowLevel.XpackMlDeleteCalendarEvent<TResponse>(p.RouteValues.CalendarId,p.RouteValues.EventId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlDeleteCalendarEvent", p, new [] { DELETE }, "/_xpack/ml/calendars/{calendar_id}/events/{event_id}");
+		}
+		
+		internal Task<TResponse> XpackMlDeleteCalendarEventDispatchAsync<TResponse>(IRequest<DeleteCalendarEventRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.EventId)) return _lowLevel.XpackMlDeleteCalendarEventAsync<TResponse>(p.RouteValues.CalendarId,p.RouteValues.EventId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlDeleteCalendarEvent", p, new [] { DELETE }, "/_xpack/ml/calendars/{calendar_id}/events/{event_id}");
+		}
+		
+		internal TResponse XpackMlDeleteCalendarJobDispatch<TResponse>(IRequest<DeleteCalendarJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.JobId)) return _lowLevel.XpackMlDeleteCalendarJob<TResponse>(p.RouteValues.CalendarId,p.RouteValues.JobId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlDeleteCalendarJob", p, new [] { DELETE }, "/_xpack/ml/calendars/{calendar_id}/jobs/{job_id}");
+		}
+		
+		internal Task<TResponse> XpackMlDeleteCalendarJobDispatchAsync<TResponse>(IRequest<DeleteCalendarJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.JobId)) return _lowLevel.XpackMlDeleteCalendarJobAsync<TResponse>(p.RouteValues.CalendarId,p.RouteValues.JobId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlDeleteCalendarJob", p, new [] { DELETE }, "/_xpack/ml/calendars/{calendar_id}/jobs/{job_id}");
 		}
 		
 		internal TResponse XpackMlDeleteDatafeedDispatch<TResponse>(IRequest<DeleteDatafeedRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
@@ -3252,6 +3620,56 @@ namespace Nest
 					break;
 			}
 			throw InvalidDispatch("XpackMlGetBuckets", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/results/buckets");
+		}
+		
+		internal TResponse XpackMlGetCalendarsDispatch<TResponse>(IRequest<GetCalendarsRequestParameters> p,SerializableData<IGetCalendarsRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.CalendarId)) return _lowLevel.XpackMlGetCalendars<TResponse>(p.RouteValues.CalendarId,p.RequestParameters);
+						return _lowLevel.XpackMlGetCalendars<TResponse>(p.RequestParameters);
+				case POST:
+					if (AllSet(p.RouteValues.CalendarId)) return _lowLevel.XpackMlGetCalendars<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters);
+						return _lowLevel.XpackMlGetCalendars<TResponse>(body,p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackMlGetCalendars", p, new [] { GET, POST }, "/_xpack/ml/calendars", "/_xpack/ml/calendars/{calendar_id}");
+		}
+		
+		internal Task<TResponse> XpackMlGetCalendarsDispatchAsync<TResponse>(IRequest<GetCalendarsRequestParameters> p,SerializableData<IGetCalendarsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.CalendarId)) return _lowLevel.XpackMlGetCalendarsAsync<TResponse>(p.RouteValues.CalendarId,p.RequestParameters,ct);
+						return _lowLevel.XpackMlGetCalendarsAsync<TResponse>(p.RequestParameters,ct);
+				case POST:
+					if (AllSet(p.RouteValues.CalendarId)) return _lowLevel.XpackMlGetCalendarsAsync<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters,ct);
+						return _lowLevel.XpackMlGetCalendarsAsync<TResponse>(body,p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackMlGetCalendars", p, new [] { GET, POST }, "/_xpack/ml/calendars", "/_xpack/ml/calendars/{calendar_id}");
+		}
+		
+		internal TResponse XpackMlGetCalendarEventsDispatch<TResponse>(IRequest<GetCalendarEventsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.XpackMlGetCalendarEvents<TResponse>(p.RouteValues.CalendarId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlGetCalendarEvents", p, new [] { GET }, "/_xpack/ml/calendars/{calendar_id}/events");
+		}
+		
+		internal Task<TResponse> XpackMlGetCalendarEventsDispatchAsync<TResponse>(IRequest<GetCalendarEventsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.XpackMlGetCalendarEventsAsync<TResponse>(p.RouteValues.CalendarId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlGetCalendarEvents", p, new [] { GET }, "/_xpack/ml/calendars/{calendar_id}/events");
 		}
 		
 		internal TResponse XpackMlGetCategoriesDispatch<TResponse>(IRequest<GetCategoriesRequestParameters> p,SerializableData<IGetCategoriesRequest> body) where TResponse : class, IElasticsearchResponse, new()
@@ -3490,6 +3908,26 @@ namespace Nest
 			throw InvalidDispatch("XpackMlGetRecords", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/results/records");
 		}
 		
+		internal TResponse XpackMlInfoDispatch<TResponse>(IRequest<MachineLearningInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.XpackMlInfo<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackMlInfo", p, new [] { GET }, "/_xpack/ml/info");
+		}
+		
+		internal Task<TResponse> XpackMlInfoDispatchAsync<TResponse>(IRequest<MachineLearningInfoRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.XpackMlInfoAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackMlInfo", p, new [] { GET }, "/_xpack/ml/info");
+		}
+		
 		internal TResponse XpackMlOpenJobDispatch<TResponse>(IRequest<OpenJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -3510,6 +3948,28 @@ namespace Nest
 					break;
 			}
 			throw InvalidDispatch("XpackMlOpenJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_open");
+		}
+		
+		internal TResponse XpackMlPostCalendarEventsDispatch<TResponse>(IRequest<PostCalendarEventsRequestParameters> p,SerializableData<IPostCalendarEventsRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.XpackMlPostCalendarEvents<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlPostCalendarEvents", p, new [] { POST }, "/_xpack/ml/calendars/{calendar_id}/events");
+		}
+		
+		internal Task<TResponse> XpackMlPostCalendarEventsDispatchAsync<TResponse>(IRequest<PostCalendarEventsRequestParameters> p,SerializableData<IPostCalendarEventsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.XpackMlPostCalendarEventsAsync<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlPostCalendarEvents", p, new [] { POST }, "/_xpack/ml/calendars/{calendar_id}/events");
 		}
 		
 		internal TResponse XpackMlPostDataDispatch<TResponse>(IRequest<PostJobDataRequestParameters> p,SerializableData<IPostJobDataRequest> body) where TResponse : class, IElasticsearchResponse, new()
@@ -3554,6 +4014,50 @@ namespace Nest
 					break;
 			}
 			throw InvalidDispatch("XpackMlPreviewDatafeed", p, new [] { GET }, "/_xpack/ml/datafeeds/{datafeed_id}/_preview");
+		}
+		
+		internal TResponse XpackMlPutCalendarDispatch<TResponse>(IRequest<PutCalendarRequestParameters> p,SerializableData<IPutCalendarRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.XpackMlPutCalendar<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlPutCalendar", p, new [] { PUT }, "/_xpack/ml/calendars/{calendar_id}");
+		}
+		
+		internal Task<TResponse> XpackMlPutCalendarDispatchAsync<TResponse>(IRequest<PutCalendarRequestParameters> p,SerializableData<IPutCalendarRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.XpackMlPutCalendarAsync<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlPutCalendar", p, new [] { PUT }, "/_xpack/ml/calendars/{calendar_id}");
+		}
+		
+		internal TResponse XpackMlPutCalendarJobDispatch<TResponse>(IRequest<PutCalendarJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.JobId)) return _lowLevel.XpackMlPutCalendarJob<TResponse>(p.RouteValues.CalendarId,p.RouteValues.JobId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlPutCalendarJob", p, new [] { PUT }, "/_xpack/ml/calendars/{calendar_id}/jobs/{job_id}");
+		}
+		
+		internal Task<TResponse> XpackMlPutCalendarJobDispatchAsync<TResponse>(IRequest<PutCalendarJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.JobId)) return _lowLevel.XpackMlPutCalendarJobAsync<TResponse>(p.RouteValues.CalendarId,p.RouteValues.JobId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlPutCalendarJob", p, new [] { PUT }, "/_xpack/ml/calendars/{calendar_id}/jobs/{job_id}");
 		}
 		
 		internal TResponse XpackMlPutDatafeedDispatch<TResponse>(IRequest<PutDatafeedRequestParameters> p,SerializableData<IPutDatafeedRequest> body) where TResponse : class, IElasticsearchResponse, new()
@@ -3902,6 +4406,28 @@ namespace Nest
 						return _lowLevel.XpackRollupGetRollupCapsAsync<TResponse>(p.RequestParameters,ct);
 			}
 			throw InvalidDispatch("XpackRollupGetRollupCaps", p, new [] { GET }, "/_xpack/rollup/data/{index}", "/_xpack/rollup/data/");
+		}
+		
+		internal TResponse XpackRollupGetRollupIndexCapsDispatch<TResponse>(IRequest<GetRollupIndexCapabilitiesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackRollupGetRollupIndexCaps<TResponse>(p.RouteValues.Index,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackRollupGetRollupIndexCaps", p, new [] { GET }, "/{index}/_xpack/rollup/data");
+		}
+		
+		internal Task<TResponse> XpackRollupGetRollupIndexCapsDispatchAsync<TResponse>(IRequest<GetRollupIndexCapabilitiesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackRollupGetRollupIndexCapsAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackRollupGetRollupIndexCaps", p, new [] { GET }, "/{index}/_xpack/rollup/data");
 		}
 		
 		internal TResponse XpackRollupPutJobDispatch<TResponse>(IRequest<CreateRollupJobRequestParameters> p,SerializableData<ICreateRollupJobRequest> body) where TResponse : class, IElasticsearchResponse, new()
@@ -4588,6 +5114,26 @@ namespace Nest
 						return _lowLevel.XpackSqlTranslateGetAsync<TResponse>(p.RequestParameters,ct);
 			}
 			throw InvalidDispatch("XpackSqlTranslate", p, new [] { POST, GET }, "/_xpack/sql/translate");
+		}
+		
+		internal TResponse XpackSslCertificatesDispatch<TResponse>(IRequest<GetCertificatesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.XpackSslCertificates<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackSslCertificates", p, new [] { GET }, "/_xpack/ssl/certificates");
+		}
+		
+		internal Task<TResponse> XpackSslCertificatesDispatchAsync<TResponse>(IRequest<GetCertificatesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.XpackSslCertificatesAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackSslCertificates", p, new [] { GET }, "/_xpack/ssl/certificates");
 		}
 		
 		internal TResponse XpackWatcherAckWatchDispatch<TResponse>(IRequest<AcknowledgeWatchRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()

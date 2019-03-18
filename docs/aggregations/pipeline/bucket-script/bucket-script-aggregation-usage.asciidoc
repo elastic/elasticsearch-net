@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.5
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -69,8 +69,8 @@ new DateHistogramAggregation("projects_started_per_month")
         }
         && new BucketScriptAggregation("stable_percentage", new MultiBucketsPath
         {
-            {"totalCommits", "commits"},
-            {"stableCommits", "stable_state>commits"}
+            { "totalCommits", "commits" },
+            { "stableCommits", "stable_state>commits" }
         })
         {
             Script = new InlineScript("params.stableCommits / params.totalCommits * 100")
@@ -136,7 +136,7 @@ projectsPerMonth.Should().NotBeNull();
 projectsPerMonth.Buckets.Should().NotBeNull();
 projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
 
-foreach(var item in projectsPerMonth.Buckets)
+foreach (var item in projectsPerMonth.Buckets)
 {
     var stablePercentage = item.BucketScript("stable_percentage");
     stablePercentage.Should().NotBeNull();

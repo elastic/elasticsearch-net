@@ -10,6 +10,8 @@ namespace Tests.Framework.EndpointTests.TestState
 {
 	public class CoordinatedUsage : KeyedCollection<string, LazyResponses>
 	{
+		public static readonly IResponse VoidResponse = new PingResponse();
+
 		private readonly INestTestCluster _cluster;
 		private readonly EndpointUsage _usage;
 
@@ -66,6 +68,14 @@ namespace Tests.Framework.EndpointTests.TestState
 					async () => await CallAllClientMethodsOverloads(k, initializerBody, fluentBody, fluent, fluentAsync, request, requestAsync, client))
 				, k);
 		}
+
+		public Func<string, LazyResponses> Call(Func<string, IElasticClient, Task> call) =>
+			Call(async (s, c) =>
+			{
+				await call(s, c);
+
+				return VoidResponse;
+			});
 
 		public Func<string, LazyResponses> Call<TResponse>(Func<string, IElasticClient, Task<TResponse>> call) where TResponse : IResponse
 		{

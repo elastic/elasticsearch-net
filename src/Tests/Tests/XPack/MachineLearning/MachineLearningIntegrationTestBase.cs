@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
+using Tests.Core.Xunit;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -11,6 +13,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning
 {
 	[SkipVersion("<5.5.0", "Machine Learning does not exist in previous versions")]
+	[SkipOnTeamCity]
 	public abstract class MachineLearningIntegrationTestBase<TResponse, TInterface, TDescriptor, TInitializer>
 		: ApiIntegrationTestBase<MachineLearningCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		where TResponse : class, IResponse
@@ -34,6 +37,73 @@ namespace Tests.XPack.MachineLearning
 		[I] public override Task ReturnsExpectedIsValid() => base.ReturnsExpectedIsValid();
 
 		[I] public override Task ReturnsExpectedResponse() => base.ReturnsExpectedResponse();
+
+		protected IPutCalendarResponse PutCalendar(IElasticClient client, string calendarId)
+		{
+			var putCalendarResponse = client.PutCalendar(calendarId, f => f
+				.Description("Planned outages")
+			);
+
+			if (!putCalendarResponse.IsValid)
+				throw new Exception($"Problem putting calendar {calendarId} for integration test: {putCalendarResponse.DebugInformation}");
+
+			return putCalendarResponse;
+		}
+		protected IPostCalendarEventsResponse PostCalendarEvent(IElasticClient client, string calendarId)
+		{
+			var startDate = DateTime.Now.Year;
+
+			var postCalendarEventsResponse = client.PostCalendarEvents(calendarId, f => f
+				.Events(new ScheduledEvent
+					{
+						StartTime = new DateTimeOffset(startDate, 1, 1, 0, 0, 0, TimeSpan.Zero),
+						EndTime = new DateTimeOffset(startDate + 1, 1, 1, 0, 0, 0, TimeSpan.Zero),
+						Description = $"Event",
+						CalendarId = calendarId
+					})
+			);
+
+			if (!postCalendarEventsResponse.IsValid)
+				throw new Exception($"Problem posting calendar event for calendar {calendarId} for integration test: {postCalendarEventsResponse.DebugInformation}");
+
+			return postCalendarEventsResponse;
+		}
+
+		private IEnumerable<ScheduledEvent> GetScheduledEvents(string calendarId)
+		{
+			var startDate = DateTime.Now.Year;
+
+			for (var i = 0; i < 10; i++)
+			{
+				yield return new ScheduledEvent
+				{
+					StartTime = new DateTimeOffset(startDate + i, 1, 1, 0, 0, 0, TimeSpan.Zero),
+					EndTime = new DateTimeOffset(startDate + 1 + i, 1, 1, 0, 0, 0, TimeSpan.Zero),
+					Description = $"Event {i}",
+					CalendarId = calendarId
+				};
+			}
+		}
+
+		protected IPostCalendarEventsResponse PostCalendarEvents(IElasticClient client, string calendarId)
+		{
+			var postCalendarEventsResponse = client.PostCalendarEvents(calendarId, f => f.Events(GetScheduledEvents(calendarId)));
+
+			if (!postCalendarEventsResponse.IsValid)
+				throw new Exception($"Problem posting calendar events {calendarId} for integration test: {postCalendarEventsResponse.DebugInformation}");
+
+			return postCalendarEventsResponse;
+		}
+
+		protected IPutCalendarJobResponse PutCalendarJob(IElasticClient client, string calendarId, string jobId)
+		{
+			var putCalendarJobResponse = client.PutCalendarJob(calendarId, jobId, f => f);
+
+			if (!putCalendarJobResponse.IsValid)
+				throw new Exception($"Problem putting calendar job {calendarId} / {jobId} for integration test: {putCalendarJobResponse.DebugInformation}");
+
+			return putCalendarJobResponse;
+		}
 
 		protected IPutJobResponse PutJob(IElasticClient client, string jobId)
 		{

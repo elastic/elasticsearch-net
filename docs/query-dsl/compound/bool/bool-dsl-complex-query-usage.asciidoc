@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.5
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -21,15 +21,13 @@ please modify the original csharp file found at the link and submit the PR with 
 ----
 q.Query() && q.Query()
 //second bool
-|| (
-    //complex nested bool
-    (+q.Query() || +q.Query() || !q.Query() && (!q.Query() && !q.ConditionlessQuery()))
-    // simple nested or
-    && (q.Query() || q.Query() || q.Query())
-    //all conditionless bool
-    && (q.NullQuery() || +q.ConditionlessQuery() || !q.ConditionlessQuery())
-    // actual bool query
-    && (base.QueryFluent(q)))
+|| (+q.Query() || +q.Query() || !q.Query() && (!q.Query() && !q.ConditionlessQuery()))
+// simple nested or
+&& (q.Query() || q.Query() || q.Query())
+//all conditionless bool
+&& (q.NullQuery() || +q.ConditionlessQuery() || !q.ConditionlessQuery())
+// actual bool query
+&& base.QueryFluent(q)
 ----
 
 ==== Object Initializer syntax example
@@ -38,15 +36,13 @@ q.Query() && q.Query()
 ----
 Query && Query
 //second bool
-|| (
-    //complex nested bool
-    (+Query || +Query || !Query && (!Query && !ConditionlessQuery))
-    // simple nested or
-    && (Query || Query || Query)
-    //all conditionless bool
-    && (NullQuery || +ConditionlessQuery || !ConditionlessQuery)
-    // actual bool query
-    && (base.QueryInitializer))
+|| (+Query || +Query || !Query && (!Query && !ConditionlessQuery))
+// simple nested or
+&& (Query || Query || Query)
+//all conditionless bool
+&& (NullQuery || +ConditionlessQuery || !ConditionlessQuery)
+// actual bool query
+&& base.QueryInitializer
 ----
 
 [source,javascript]

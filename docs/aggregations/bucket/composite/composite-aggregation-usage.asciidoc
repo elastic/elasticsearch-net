@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.5
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -69,16 +69,16 @@ new CompositeAggregation("my_buckets")
     {
         new TermsCompositeAggregationSource("branches")
         {
-            Field = Infer.Field<Project>(f => f.Branches.Suffix("keyword"))
+            Field = Field<Project>(f => f.Branches.Suffix("keyword"))
         },
         new DateHistogramCompositeAggregationSource("started")
         {
-            Field = Infer.Field<Project>(f => f.StartedOn),
+            Field = Field<Project>(f => f.StartedOn),
             Interval = DateInterval.Month
         },
         new HistogramCompositeAggregationSource("branch_count")
         {
-            Field = Infer.Field<Project>(f => f.RequiredBranches),
+            Field = Field<Project>(f => f.RequiredBranches),
             Interval = 1
         }
     },
@@ -157,10 +157,9 @@ composite.Should().NotBeNull();
 composite.Buckets.Should().NotBeNullOrEmpty();
 composite.AfterKey.Should().NotBeNull();
 if (TestConfiguration.Instance.InRange(">=6.3.0"))
-{
-    composite.AfterKey.Should().HaveCount(3)
+    composite.AfterKey.Should()
+        .HaveCount(3)
         .And.ContainKeys("branches", "started", "branch_count");
-}
 foreach (var item in composite.Buckets)
 {
     var key = item.Key;
@@ -230,7 +229,7 @@ new CompositeAggregation("my_buckets")
     {
         new TermsCompositeAggregationSource("branches")
         {
-            Field = Infer.Field<Project>(f => f.Branches.Suffix("keyword")),
+            Field = Field<Project>(f => f.Branches.Suffix("keyword")),
             MissingBucket = true,
             Order = SortOrder.Ascending
         }

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.5
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -28,7 +28,7 @@ q
     .Name("named_query")
     .Boost(1.1)
     .Source(_templateString)
-    .Params(p=>p.Add("param1", 50))
+    .Params(p => p.Add("param1", 50))
 )
 ----
 

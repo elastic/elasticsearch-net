@@ -19,6 +19,13 @@ namespace Tests.QueryDsl.TermLevel.Range
 				q.GreaterThanOrEqualTo = null;
 				q.LessThan = null;
 				q.LessThanOrEqualTo = null;
+			},
+			q =>
+			{
+				q.GreaterThan = default;
+				q.GreaterThanOrEqualTo = default;
+				q.LessThan = default;
+				q.LessThanOrEqualTo = default;
 			}
 		};
 
@@ -66,4 +73,5 @@ namespace Tests.QueryDsl.TermLevel.Range
 				.TimeZone("+01:00")
 			);
 	}
+
 }

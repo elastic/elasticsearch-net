@@ -40,17 +40,17 @@ namespace Nest
 		public CreateRepositoryDescriptor Azure(Func<AzureRepositoryDescriptor, IAzureRepository> selector = null) =>
 			Assign(a => a.Repository = selector.InvokeOrDefault(new AzureRepositoryDescriptor()));
 
-		/// <summary>
-		/// Create an snapshot/restore repository that points to an HDFS filesystem
-		/// </summary>
+		/// <summary> Create an snapshot/restore repository that points to an HDFS filesystem </summary>
 		public CreateRepositoryDescriptor Hdfs(Func<HdfsRepositoryDescriptor, IHdfsRepository> selector) =>
 			Assign(a => a.Repository = selector?.Invoke(new HdfsRepositoryDescriptor()));
 
-		/// <summary>
-		/// Snapshot and restore to an Amazon S3 bucket
-		/// </summary>
+		/// <summary> Snapshot and restore to an Amazon S3 bucket </summary>
 		public CreateRepositoryDescriptor S3(Func<S3RepositoryDescriptor, IS3Repository> selector) =>
 			Assign(a => a.Repository = selector?.Invoke(new S3RepositoryDescriptor()));
+
+		/// <summary> Snapshot and restore to an Amazon S3 bucket </summary>
+		public CreateRepositoryDescriptor SourceOnly(Func<SourceOnlyRepositoryDescriptor, ISourceOnlyRepository> selector) =>
+			Assign(a => a.Repository = selector?.Invoke(new SourceOnlyRepositoryDescriptor()));
 
 		/// <summary>
 		/// Register a custom repository

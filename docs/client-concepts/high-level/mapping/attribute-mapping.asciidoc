@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.5
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -55,11 +55,11 @@ public class Employee
     [PropertyName("empl")]
     public List<Employee> Employees { get; set; }
 
-     [Text(Name = "office_hours")]
-     public TimeSpan? OfficeHours { get; set; }
+    [Text(Name = "office_hours")]
+    public TimeSpan? OfficeHours { get; set; }
 
-     [Object]
-     public List<Skill> Skills { get; set; }
+    [Object]
+    public List<Skill> Skills { get; set; }
 }
 
 public class Skill

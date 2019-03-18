@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -14,6 +15,8 @@ using static Tests.Domain.Helpers.TestValueHelper;
 
 namespace Tests.Document.Single.Index
 {
+	//TODO 6.6. release revalidate this ticket on server
+	[SkipVersion(">6.4.0", "https://github.com/elastic/elasticsearch/issues/37909")]
 	public class IndexIngestGeoIpApiTests
 		: ApiIntegrationTestBase<IntrusiveOperationCluster, IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
 	{

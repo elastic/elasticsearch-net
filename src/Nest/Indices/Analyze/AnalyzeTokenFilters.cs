@@ -236,14 +236,24 @@ namespace Nest
 		/// <summary>
 		/// A token filter of type standard that normalizes tokens extracted with the Standard Tokenizer.
 		/// </summary>
+#pragma warning disable 618
 		public AnalyzeTokenFiltersDescriptor Standard(Func<StandardTokenFilterDescriptor, IStandardTokenFilter> selector = null) =>
 			AssignIfNotNull(selector.InvokeOrDefault(new StandardTokenFilterDescriptor()));
+#pragma warning restore 618
+
+		/// <inheritdoc cref="IConditionTokenFilter" />
+		public AnalyzeTokenFiltersDescriptor Condition(Func<ConditionTokenFilterDescriptor, IConditionTokenFilter> selector) =>
+			AssignIfNotNull(selector?.Invoke(new ConditionTokenFilterDescriptor()));
 
 		/// <summary>
 		/// A filter that stems words (similar to snowball, but with more options).
 		/// </summary>
 		public AnalyzeTokenFiltersDescriptor Stemmer(Func<StemmerTokenFilterDescriptor, IStemmerTokenFilter> selector) =>
 			AssignIfNotNull(selector?.Invoke(new StemmerTokenFilterDescriptor()));
+
+		/// <inheritdoc cref="IPredicateTokenFilter" />
+		public AnalyzeTokenFiltersDescriptor Predicate(Func<PredicateTokenFilterDescriptor, IPredicateTokenFilter> selector) =>
+			AssignIfNotNull(selector?.Invoke(new PredicateTokenFilterDescriptor()));
 
 		/// <summary>
 		/// Overrides stemming algorithms, by applying a custom mapping, then protecting these terms from being modified by stemmers. Must be placed

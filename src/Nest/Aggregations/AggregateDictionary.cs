@@ -177,6 +177,20 @@ namespace Nest
 
 		public MultiBucketAggregate<DateHistogramBucket> DateHistogram(string key) => GetMultiBucketAggregate<DateHistogramBucket>(key);
 
+		public AutoDateHistogramAggregate AutoDateHistogram(string key)
+		{
+			var bucket = TryGet<BucketAggregate>(key);
+			if (bucket == null) return null;
+
+			return new AutoDateHistogramAggregate
+			{
+				Buckets = bucket.Items.OfType<DateHistogramBucket>().ToList(),
+				Meta = bucket.Meta,
+				Interval = bucket.Interval
+			};
+		}
+
+
 		public CompositeBucketAggregate Composite(string key)
 		{
 			var bucket = TryGet<BucketAggregate>(key);

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.5
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -29,10 +29,10 @@ q
 .GeoIndexedShape(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Field(p=>p.Location)
-    .IndexedShape(p=>p
+    .Field(p => p.Location)
+    .IndexedShape(p => p
         .Id(2)
-        .Path(pp=>pp.Location)
+        .Path(pp => pp.Location)
     )
     .Relation(GeoShapeRelation.Intersects)
 )
@@ -46,13 +46,13 @@ new GeoIndexedShapeQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Field = Field<Project>(p=>p.Location),
+    Field = Field<Project>(p => p.Location),
     IndexedShape = new FieldLookup
     {
         Id = 2,
         Index = Index<Project>(),
         Type = Type<Project>(),
-        Path = Field<Project>(p=>p.Location),
+        Path = Field<Project>(p => p.Location),
     },
     Relation = GeoShapeRelation.Intersects
 }

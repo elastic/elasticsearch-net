@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.5
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -106,7 +106,6 @@ var asyncIndexResponse = await lowlevelClient.IndexAsync<StringResponse>("people
 string responseString = asyncIndexResponse.Body;
 ----
 <1> synchronous method that returns an `IIndexResponse`
-
 <2> asynchronous method that returns a `Task<IIndexResponse>` that can be awaited
 
 NOTE: All available methods within Elasticsearch.Net are exposed as both synchronous and asynchronous versions,
@@ -144,14 +143,14 @@ If you need to index many documents, Elasticsearch has a {ref_current}/docs-bulk
 [source,csharp]
 ----
 var people = new object[]
-            {
-                new { index = new { _index = "people", _type = "person", _id = "1"  }},
-                new { FirstName = "Martijn", LastName = "Laarman" },
-                new { index = new { _index = "people", _type = "person", _id = "2"  }},
-                new { FirstName = "Greg", LastName = "Marzouka" },
-                new { index = new { _index = "people", _type = "person", _id = "3"  }},
-                new { FirstName = "Russ", LastName = "Cam" },
-            };
+{
+    new { index = new { _index = "people", _type = "person", _id = "1"  }},
+    new { FirstName = "Martijn", LastName = "Laarman" },
+    new { index = new { _index = "people", _type = "person", _id = "2"  }},
+    new { FirstName = "Greg", LastName = "Marzouka" },
+    new { index = new { _index = "people", _type = "person", _id = "3"  }},
+    new { FirstName = "Russ", LastName = "Cam" },
+};
 
 var indexResponse = lowlevelClient.Bulk<StringResponse>(PostData.MultiJson(people));
 string responseStream = indexResponse.Body;
@@ -243,9 +242,7 @@ var successOrKnownError = searchResponse.SuccessOrKnownError; <2>
 var exception = searchResponse.OriginalException; <3>
 ----
 <1> Response is in the 200 range, or an expected response for the given request
-
 <2> Response is successful, or has a response code between 400-599 that indicates the request cannot be retried.
-
 <3> If the response is unsuccessful, will hold the original exception.
 
 Using these details, it is possible to make decisions around what should be done in your application.

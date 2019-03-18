@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.5
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -20,11 +20,11 @@ please modify the original csharp file found at the link and submit the PR with 
 [source,csharp]
 ----
 q
-.GeoBoundingBox(g=>g
+.GeoBoundingBox(g => g
     .Boost(1.1)
     .Name("named_query")
-    .Field(p=>p.Location)
-    .BoundingBox(b=>b
+    .Field(p => p.Location)
+    .BoundingBox(b => b
         .TopLeft(34, -34)
         .BottomRight(-34, 34)
     )
@@ -44,8 +44,8 @@ new GeoBoundingBoxQuery
     Field = Infer.Field<Project>(p => p.Location),
     BoundingBox = new Nest.BoundingBox
     {
-        TopLeft = new GeoLocation(34,-34),
-        BottomRight = new GeoLocation(-34,34),
+        TopLeft = new GeoLocation(34, -34),
+        BottomRight = new GeoLocation(-34, 34),
     },
     Type = GeoExecution.Indexed,
     ValidationMethod = GeoValidationMethod.Strict
@@ -80,11 +80,11 @@ new GeoBoundingBoxQuery
 [source,csharp]
 ----
 q
-.GeoBoundingBox(g=>g
+.GeoBoundingBox(g => g
     .Boost(1.1)
     .Name("named_query")
-    .Field(p=>p.Location)
-    .BoundingBox(b=>b
+    .Field(p => p.Location)
+    .BoundingBox(b => b
         .WellKnownText("BBOX (34, -34, -34, 34)")
     )
     .ValidationMethod(GeoValidationMethod.Strict)

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.5
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -31,10 +31,11 @@ q
     .Functions(f => f
         .Exponential(b => b.Field(p => p.NumberOfCommits).Decay(0.5).Origin(1.0).Scale(0.1).Weight(2.1))
         .GaussDate(b => b.Field(p => p.LastActivity).Origin(DateMath.Now).Decay(0.5).Scale("1d"))
-        .LinearGeoLocation(b => b.Field(p => p.Location).Origin(new GeoLocation(70, -70)).Scale(Distance.Miles(1)).MultiValueMode(MultiValueMode.Average))
+        .LinearGeoLocation(b =>
+            b.Field(p => p.Location).Origin(new GeoLocation(70, -70)).Scale(Distance.Miles(1)).MultiValueMode(MultiValueMode.Average))
         .FieldValueFactor(b => b.Field("x").Factor(1.1).Missing(0.1).Modifier(FieldValueFactorModifier.Ln))
-        .RandomScore(r=>r.Seed(1337).Field("_seq_no"))
-        .RandomScore(r=>r.Seed("randomstring").Field("_seq_no"))
+        .RandomScore(r => r.Seed(1337).Field("_seq_no"))
+        .RandomScore(r => r.Seed("randomstring").Field("_seq_no"))
         .Weight(1.0)
         .ScriptScore(ss => ss.Script(s => s.Id("x")))
     )
@@ -56,16 +57,21 @@ new FunctionScoreQuery()
     MinScore = 1.0,
     Functions = new List<IScoreFunction>
     {
-        new ExponentialDecayFunction { Origin = 1.0, Decay =    0.5, Field = Field<Project>(p=>p.NumberOfCommits), Scale = 0.1, Weight = 2.1 },
-        new GaussDateDecayFunction { Origin = DateMath.Now, Field = Field<Project>(p=>p.LastActivity), Decay = 0.5, Scale = TimeSpan.FromDays(1) },
-        new LinearGeoDecayFunction { Origin = new GeoLocation(70, -70), Field = Field<Project>(p=>p.Location), Scale = Distance.Miles(1), MultiValueMode = MultiValueMode.Average },
+        new ExponentialDecayFunction { Origin = 1.0, Decay = 0.5, Field = Field<Project>(p => p.NumberOfCommits), Scale = 0.1, Weight = 2.1 },
+        new GaussDateDecayFunction
+            { Origin = DateMath.Now, Field = Field<Project>(p => p.LastActivity), Decay = 0.5, Scale = TimeSpan.FromDays(1) },
+        new LinearGeoDecayFunction
+        {
+            Origin = new GeoLocation(70, -70), Field = Field<Project>(p => p.Location), Scale = Distance.Miles(1),
+            MultiValueMode = MultiValueMode.Average
+        },
         new FieldValueFactorFunction
         {
-            Field = "x", Factor = 1.1,    Missing = 0.1, Modifier = FieldValueFactorModifier.Ln
+            Field = "x", Factor = 1.1, Missing = 0.1, Modifier = FieldValueFactorModifier.Ln
         },
         new RandomScoreFunction { Seed = 1337, Field = "_seq_no" },
         new RandomScoreFunction { Seed = "randomstring", Field = "_seq_no" },
-        new WeightFunction { Weight = 1.0},
+        new WeightFunction { Weight = 1.0 },
         new ScriptScoreFunction { Script = new ScriptQuery { Id = "x" } }
     }
 }

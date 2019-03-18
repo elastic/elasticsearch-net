@@ -18,7 +18,9 @@ namespace Nest
 		private readonly object _comparisonValue;
 		private readonly Type _type;
 
-		public Field(string name, double? boost = null, string format = null)
+		public Field(string name, double? boost = null) : this(name, boost, format: null) {}
+
+		public Field(string name, double? boost, string format = null)
 		{
 			name.ThrowIfNullOrEmpty(nameof(name));
 			Name = ParseFieldName(name, out var b);
@@ -27,7 +29,9 @@ namespace Nest
 			_comparisonValue = Name;
 		}
 
-		public Field(Expression expression, double? boost = null, string format = null)
+		public Field(Expression expression, double? boost = null) : this(expression, boost, format: null) { }
+
+		public Field(Expression expression, double? boost, string format = null)
 		{
 			Expression = expression ?? throw new ArgumentNullException(nameof(expression));
 			Boost = boost;
@@ -37,7 +41,9 @@ namespace Nest
 			CachableExpression = !new HasVariableExpressionVisitor(expression).Found;
 		}
 
-		public Field(PropertyInfo property, double? boost = null, string format = null)
+		public Field(PropertyInfo property, double? boost = null) : this(property, boost, format: null) { }
+
+		public Field(PropertyInfo property, double? boost, string format = null)
 		{
 			Property = property ?? throw new ArgumentNullException(nameof(property));
 			Boost = boost;
@@ -98,13 +104,22 @@ namespace Nest
 
 		public Fields And(Field field) => new Fields(new[] { this, field });
 
-		public Fields And<T>(Expression<Func<T, object>> field, double? boost = null, string format = null) where T : class =>
+		public Fields And<T>(Expression<Func<T, object>> field, double? boost = null) where T : class =>
+			new Fields(new[] { this, new Field(field, boost, format: null) });
+
+		public Fields And<T>(Expression<Func<T, object>> field, double? boost, string format = null) where T : class =>
 			new Fields(new[] { this, new Field(field, boost, format) });
 
-		public Fields And(string field, double? boost = null, string format = null) =>
+		public Fields And(string field, double? boost = null) =>
+			new Fields(new[] { this, new Field(field, boost, format: null) });
+
+		public Fields And(string field, double? boost, string format = null) =>
 			new Fields(new[] { this, new Field(field, boost, format) });
 
-		public Fields And(PropertyInfo property, double? boost = null, string format = null) =>
+		public Fields And(PropertyInfo property, double? boost = null) =>
+			new Fields(new[] { this, new Field(property, boost, format: null) });
+
+		public Fields And(PropertyInfo property, double? boost, string format = null) =>
 			new Fields(new[] { this, new Field(property, boost, format) });
 
 		private static string ParseFieldName(string name, out double? boost)

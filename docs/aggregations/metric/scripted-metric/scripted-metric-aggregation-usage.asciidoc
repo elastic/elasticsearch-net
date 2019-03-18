@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.5
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -14,18 +14,6 @@ please modify the original csharp file found at the link and submit the PR with 
 
 [[scripted-metric-aggregation-usage]]
 === Scripted Metric Aggregation Usage
-
-[source,csharp]
-----
-class Scripted
-{
-    public string Language { get; set; }
-    public string Combine { get; set; }
-    public string Reduce { get; set; }
-    public string Map { get; set; }
-    public string Init { get; set; }
-}
-----
 
 ==== Fluent DSL example
 
@@ -86,6 +74,18 @@ sumTheHardWay.Should().NotBeNull();
 sumTheHardWay.Value<int>().Should().BeGreaterThan(0);
 ----
 
+[source,csharp]
+----
+private class Scripted
+{
+    public string Combine { get; set; }
+    public string Init { get; set; }
+    public string Language { get; set; }
+    public string Map { get; set; }
+    public string Reduce { get; set; }
+}
+----
+
 ==== Fluent DSL example
 
 [source,csharp]
@@ -110,16 +110,16 @@ a => a
 ----
 new ScriptedMetricAggregation("by_state_total")
 {
-    InitScript = new InlineScript(First.Init) {Lang = First.Language},
-    MapScript = new InlineScript(First.Map) {Lang = First.Language},
-    ReduceScript = new InlineScript(First.Reduce) {Lang = First.Language}
+    InitScript = new InlineScript(First.Init) { Lang = First.Language },
+    MapScript = new InlineScript(First.Map) { Lang = First.Language },
+    ReduceScript = new InlineScript(First.Reduce) { Lang = First.Language }
 }
 && new ScriptedMetricAggregation("total_commits")
 {
-    InitScript = new InlineScript(Second.Init) {Lang = Second.Language},
-    MapScript = new InlineScript(Second.Map) {Lang = Second.Language},
-    CombineScript = new InlineScript(Second.Combine) {Lang = Second.Language},
-    ReduceScript = new InlineScript(Second.Reduce) {Lang = Second.Language}
+    InitScript = new InlineScript(Second.Init) { Lang = Second.Language },
+    MapScript = new InlineScript(Second.Map) { Lang = Second.Language },
+    CombineScript = new InlineScript(Second.Combine) { Lang = Second.Language },
+    ReduceScript = new InlineScript(Second.Reduce) { Lang = Second.Language }
 }
 ----
 

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.5
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -51,13 +51,13 @@ new DateRangeAggregation("projects_date_ranges")
     Field = Field<Project>(p => p.StartedOn),
     Ranges = new List<DateRangeExpression>
     {
-        new DateRangeExpression {From = DateMath.Anchored(FixedDate).Add("2d"), To = DateMath.Now},
-        new DateRangeExpression {To = DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(DateMathTimeUnit.Hour)},
-        new DateRangeExpression {From = DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m")}
+        new DateRangeExpression { From = DateMath.Anchored(FixedDate).Add("2d"), To = DateMath.Now },
+        new DateRangeExpression { To = DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(DateMathTimeUnit.Hour) },
+        new DateRangeExpression { From = DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m") }
     },
     TimeZone = "CET",
     Aggregations =
-        new TermsAggregation("project_tags") {Field = Field<Project>(p => p.Tags)}
+        new TermsAggregation("project_tags") { Field = Field<Project>(p => p.Tags) }
 }
 ----
 
@@ -113,9 +113,6 @@ We specified three ranges so we expect to have three of them in the response
 [source,csharp]
 ----
 dateHistogram.Buckets.Count.Should().Be(3);
-foreach (var item in dateHistogram.Buckets)
-{
-    item.DocCount.Should().BeGreaterThan(0);
-}
+foreach (var item in dateHistogram.Buckets) item.DocCount.Should().BeGreaterThan(0);
 ----
 

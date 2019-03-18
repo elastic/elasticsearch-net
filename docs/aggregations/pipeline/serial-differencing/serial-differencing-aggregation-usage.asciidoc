@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.5
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -103,9 +103,7 @@ foreach (var item in projectsPerMonth.Buckets)
     // serial differencing specified a lag of 2, so
     // only expect values from the 3rd bucket onwards
     if (differenceCount <= 2)
-    {
         secondDifference.Should().BeNull();
-    }
     else
     {
         secondDifference.Should().NotBeNull();

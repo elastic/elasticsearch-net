@@ -34,6 +34,7 @@ namespace Nest
 
 			Set(NumberOfReplicas, ds.NumberOfReplicas);
 			Set(RefreshInterval, ds.RefreshInterval);
+			Set(DefaultPipeline, ds.DefaultPipeline);
 			Set(BlocksReadOnly, ds.BlocksReadOnly);
 			Set(BlocksRead, ds.BlocksRead);
 			Set(BlocksWrite, ds.BlocksWrite);
@@ -96,6 +97,11 @@ namespace Nest
 			Set(NumberOfShards, indexSettings?.NumberOfShards);
 			Set(NumberOfRoutingShards, indexSettings?.NumberOfRoutingShards);
 			Set(RoutingPartitionSize, indexSettings?.RoutingPartitionSize);
+			if (indexSettings?.SoftDeletes != null)
+			{
+				Set(SoftDeletesEnabled, indexSettings?.SoftDeletes?.Enabled);
+				Set(SoftDeletesRetentionOperations, indexSettings?.SoftDeletes?.Retention?.Operations);
+			}
 
 			if (indexSettings?.Sorting != null)
 			{
@@ -155,6 +161,8 @@ namespace Nest
 			Set<bool?>(s, settings, BlocksWrite, v => s.BlocksWrite = v);
 			Set<bool?>(s, settings, BlocksMetadata, v => s.BlocksMetadata = v);
 			Set<int?>(s, settings, Priority, v => s.Priority = v);
+			Set<string>(s, settings, DefaultPipeline, v => s.DefaultPipeline = v);
+
 			Set<Union<int, RecoveryInitialShards>>(s, settings, UpdatableIndexSettings.RecoveryInitialShards,
 				v => s.RecoveryInitialShards = v, serializer);
 			Set<bool?>(s, settings, RequestsCacheEnable, v => s.RequestsCacheEnabled = v);
@@ -205,14 +213,10 @@ namespace Nest
 				v => fetch.ThresholdTrace = v);
 
 			var indexing = s.SlowLog.Indexing = new SlowLogIndexing();
-			Set<Time>(s, settings, SlowlogIndexingThresholdFetchWarn,
-				v => indexing.ThresholdWarn = v);
-			Set<Time>(s, settings, SlowlogIndexingThresholdFetchInfo,
-				v => indexing.ThresholdInfo = v);
-			Set<Time>(s, settings, SlowlogIndexingThresholdFetchDebug,
-				v => indexing.ThresholdDebug = v);
-			Set<Time>(s, settings, SlowlogIndexingThresholdFetchTrace,
-				v => indexing.ThresholdTrace = v);
+			Set<Time>(s, settings, SlowlogIndexingThresholdFetchWarn, v => indexing.ThresholdWarn = v);
+			Set<Time>(s, settings, SlowlogIndexingThresholdFetchInfo, v => indexing.ThresholdInfo = v);
+			Set<Time>(s, settings, SlowlogIndexingThresholdFetchDebug, v => indexing.ThresholdDebug = v);
+			Set<Time>(s, settings, SlowlogIndexingThresholdFetchTrace, v => indexing.ThresholdTrace = v);
 			Set<LogLevel?>(s, settings, SlowlogIndexingLevel, v => indexing.LogLevel = v);
 			Set<int?>(s, settings, SlowlogIndexingSource, v => indexing.Source = v);
 			Set<int?>(s, settings, NumberOfShards, v => s.NumberOfShards = v);
@@ -229,6 +233,11 @@ namespace Nest
 			var queries = s.Queries = new QueriesSettings();
 			var queriesCache = s.Queries.Cache = new QueriesCacheSettings();
 			Set<bool?>(s, settings, QueriesCacheEnabled, v => queriesCache.Enabled = v);
+
+			var softDeletes = s.SoftDeletes = new SoftDeleteSettings();
+			Set<bool?>(s, settings, SoftDeletesEnabled, v => softDeletes.Enabled = v);
+			var softDeletesRetention = s.SoftDeletes.Retention = new SoftDeleteRetentionSettings();
+			Set<long?>(s, settings, SoftDeletesEnabled, v => softDeletesRetention.Operations = v);
 
 			IDictionary<string, object> dict = s;
 			foreach (var kv in settings)

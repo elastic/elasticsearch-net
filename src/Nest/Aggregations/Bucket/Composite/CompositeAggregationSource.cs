@@ -26,6 +26,14 @@ namespace Nest
 		[JsonProperty("missing_bucket")]
 		bool? MissingBucket { get; set; }
 
+
+		/// <summary>
+		/// Allows an explicit value to be set when one is missing for the field.
+		/// </summary>
+		[Obsolete("Will be removed in Elasticsearch 7.x. Use MissingBucket")]
+		[JsonProperty("missing")]
+		object Missing { get; set; }
+
 		/// <summary>
 		/// The name of the source
 		/// </summary>
@@ -59,6 +67,10 @@ namespace Nest
 
 		/// <inheritdoc />
 		public bool? MissingBucket { get; set; }
+
+		/// <inheritdoc />
+		[Obsolete("Will be removed in Elasticsearch 7.x. Use MissingBucket")]
+		public object Missing { get; set; }
 
 		/// <inheritdoc />
 		public SortOrder? Order { get; set; }
@@ -114,7 +126,8 @@ namespace Nest
 
 		Field ICompositeAggregationSource.Field { get; set; }
 		bool? ICompositeAggregationSource.MissingBucket { get; set; }
-
+		[Obsolete("Will be removed in Elasticsearch 7.x. Use MissingBucket")]
+		object ICompositeAggregationSource.Missing { get; set; }
 		string ICompositeAggregationSource.Name { get; set; }
 		SortOrder? ICompositeAggregationSource.Order { get; set; }
 		string ICompositeAggregationSource.SourceType => _sourceType;
@@ -130,6 +143,10 @@ namespace Nest
 
 		/// <inheritdoc cref="ICompositeAggregationSource.MissingBucket" />
 		public TDescriptor MissingBucket(bool? includeMissing = true) => Assign(a => a.MissingBucket = includeMissing);
+
+		/// <inheritdoc cref="ICompositeAggregationSource.Missing" />
+		[Obsolete("Will be removed in Elasticsearch 7.x. Use MissingBucket")]
+		public TDescriptor Missing(object missingObject) => Assign(a => a.Missing = missingObject);
 	}
 
 	internal class CompositeAggregationSourceConverter : ReserializeJsonConverter<CompositeAggregationSourceBase, ICompositeAggregationSource>

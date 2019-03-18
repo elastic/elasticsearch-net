@@ -68,7 +68,7 @@ namespace DocGenerator
 		/// <summary>
 		/// The Elasticsearch documentation version to link to
 		/// </summary>
-		public static string DocVersion => "6.4";
+		public static string DocVersion => "6.5";
 
 		public static string InputDirPath { get; }
 
