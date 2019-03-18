@@ -34,9 +34,10 @@ namespace Nest
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings) => string.Join(",", _actionIds);
 
 		public static implicit operator ActionIds(string actionIds) =>
-			actionIds.IsNullOrEmptyCommaSeparatedList(out var list) ? new ActionIds(null) : new ActionIds(list);
+			actionIds.IsNullOrEmptyCommaSeparatedList(out var list) ? new ActionIds((string)null) : new ActionIds(list);
 
-		public static implicit operator ActionIds(string[] actionIds) => actionIds.IsEmpty() ? new ActionIds(null) : new ActionIds(actionIds);
+		public static implicit operator ActionIds(string[] actionIds) =>
+			actionIds.IsEmpty() ? new ActionIds((string)null) : new ActionIds(actionIds);
 
 		public override bool Equals(object obj) => obj is ActionIds other && Equals(other);
 
