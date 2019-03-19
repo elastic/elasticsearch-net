@@ -51,26 +51,7 @@ namespace Tests.XPack.MachineLearning.GetOverallBuckets
 					throw new Exception($"Problem putting job {callUniqueValue.Value} for integration test: {putJobResponse.DebugInformation}");
 
 				OpenJob(client, callUniqueValue.Value);
-
-				var timestamp = 1483228800000L; // 2017-01-01T00:00:00Z
-				var data = new List<object>(OverallBucketCount);
-				for (var i = 0; i < OverallBucketCount; i++)
-				{
-					data.Add(new { time = timestamp });
-					if (i % 1000 == 0)
-						data.AddRange(new[]
-						{
-							new { time = timestamp },
-							new { time = timestamp },
-							new { time = timestamp }
-						});
-					timestamp += BucketSpanSeconds * 1000;
-				}
-
-				var postJobDataResponse = client.PostJobData(callUniqueValue.Value, d => d.Data(data));
-				if (!postJobDataResponse.IsValid)
-					throw new Exception($"Problem posting data for integration test: {postJobDataResponse.DebugInformation}");
-
+				PostJobData(client, callUniqueValue.Value, OverallBucketCount, BucketSpanSeconds);
 				FlushJob(client, callUniqueValue.Value, true);
 				CloseJob(client, callUniqueValue.Value);
 			}

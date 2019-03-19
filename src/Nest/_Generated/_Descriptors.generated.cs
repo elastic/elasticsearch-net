@@ -4232,6 +4232,24 @@ namespace Nest
 		// Request parameters
 
 	}
+	///<summary>descriptor for XpackMlDeleteForecast <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</pre></summary>
+	public partial class DeleteForecastDescriptor  : RequestDescriptorBase<DeleteForecastDescriptor,DeleteForecastRequestParameters, IDeleteForecastRequest>, IDeleteForecastRequest
+	{ 
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}</summary>
+		///<param name="job_id"> this parameter is required</param>
+		///<param name="forecast_id"> this parameter is required</param>
+		public DeleteForecastDescriptor(Id job_id, ForecastIds forecast_id) : base(r=>r.Required("job_id", job_id).Required("forecast_id", forecast_id)){}
+		// values part of the url path
+		Id IDeleteForecastRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		ForecastIds IDeleteForecastRequest.ForecastId => Self.RouteValues.Get<ForecastIds>("forecast_id");
+
+		// Request parameters
+
+		///<summary>Whether to ignore if `_all` matches no forecasts</summary>
+		public DeleteForecastDescriptor AllowNoForecasts(bool? allowNoForecasts = true) => Qs("allow_no_forecasts", allowNoForecasts);
+		///<summary>Controls the time to wait until the forecast(s) are deleted. Default to 30 seconds</summary>
+		public DeleteForecastDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+	}
 	///<summary>descriptor for XpackMlDeleteJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</pre></summary>
 	public partial class DeleteJobDescriptor  : RequestDescriptorBase<DeleteJobDescriptor,DeleteJobRequestParameters, IDeleteJobRequest>, IDeleteJobRequest
 	{ 

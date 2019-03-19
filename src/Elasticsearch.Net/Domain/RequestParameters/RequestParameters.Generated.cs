@@ -2395,6 +2395,15 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
+	///<summary>Request options for XpackMlDeleteForecast<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</pre></summary>
+	public partial class DeleteForecastRequestParameters : RequestParameters<DeleteForecastRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		///<summary>Whether to ignore if `_all` matches no forecasts</summary>
+		public bool? AllowNoForecasts { get => Q<bool?>("allow_no_forecasts"); set => Q("allow_no_forecasts", value); }
+		///<summary>Controls the time to wait until the forecast(s) are deleted. Default to 30 seconds</summary>
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
+	}
 	///<summary>Request options for XpackMlDeleteJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</pre></summary>
 	public partial class DeleteJobRequestParameters : RequestParameters<DeleteJobRequestParameters> 
 	{
