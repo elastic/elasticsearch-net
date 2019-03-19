@@ -3236,6 +3236,18 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> XpackMlDeleteExpiredDataAsync<TResponse>(DeleteExpiredDataRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(DELETE, Url($"_xpack/ml/_delete_expired_data"), ctx, null, _params(requestParameters));
+		///<summary>DELETE on /_xpack/ml/anomaly_detectors/{job_id}/_forecast/{forecast_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</para></summary>
+		///<param name="job_id">The ID of the job from which to delete forecasts</param>
+		///<param name="forecast_id">The ID of the forecast to delete, can be comma delimited list or `_all`</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public TResponse XpackMlDeleteForecast<TResponse>(string job_id, string forecast_id, DeleteForecastRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(DELETE, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/_forecast/{forecast_id.NotNull("forecast_id")}"), null, _params(requestParameters));
+		///<summary>DELETE on /_xpack/ml/anomaly_detectors/{job_id}/_forecast/{forecast_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</para></summary>
+		///<param name="job_id">The ID of the job from which to delete forecasts</param>
+		///<param name="forecast_id">The ID of the forecast to delete, can be comma delimited list or `_all`</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> XpackMlDeleteForecastAsync<TResponse>(string job_id, string forecast_id, DeleteForecastRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(DELETE, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/_forecast/{forecast_id.NotNull("forecast_id")}"), ctx, null, _params(requestParameters));
 		///<summary>DELETE on /_xpack/ml/anomaly_detectors/{job_id} <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</para></summary>
 		///<param name="job_id">The ID of the job to delete</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>

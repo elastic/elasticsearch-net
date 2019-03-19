@@ -132,6 +132,30 @@ namespace Tests.XPack.MachineLearning
 			return openJobResponse;
 		}
 
+		protected IPostJobDataResponse PostJobData(IElasticClient client, string jobId, int bucketSize, int bucketSpanSeconds)
+		{
+			var timestamp = 1483228800000L; // 2017-01-01T00:00:00Z
+			var data = new List<object>(bucketSize);
+			for (var i = 0; i < bucketSize; i++)
+			{
+				data.Add(new { time = timestamp });
+				if (i % 1000 == 0)
+					data.AddRange(new[]
+					{
+						new { time = timestamp },
+						new { time = timestamp },
+						new { time = timestamp }
+					});
+				timestamp += bucketSpanSeconds * 1000;
+			}
+
+			var postJobDataResponse = client.PostJobData(jobId, d => d.Data(data));
+			if (!postJobDataResponse.IsValid)
+				throw new Exception($"Problem posting data for integration test: {postJobDataResponse.DebugInformation}");
+
+			return postJobDataResponse;
+		}
+
 		protected IFlushJobResponse FlushJob(IElasticClient client, string jobId, bool calculateInterim)
 		{
 			var flushJobResponse = client.FlushJob(jobId, f => f.CalculateInterim(calculateInterim));
@@ -268,5 +292,43 @@ namespace Tests.XPack.MachineLearning
 			result_type = "influencer",
 			bucket_span = 1
 		}, i => i.Type("doc").Index(".ml-anomalies-" + jobId).Refresh(Refresh.WaitFor));
+
+		protected void IndexForecast(IElasticClient client, string jobId, string forecastId)
+		{
+			client.Index<object>(new
+				{
+					job_id =  jobId,
+					forecast_id =  forecastId,
+					result_type =  "model_forecast",
+					bucket_span =  1800,
+					detector_index =  0,
+					timestamp =  1486591300000,
+					model_feature =  "'arithmetic mean value by person'",
+					forecast_lower =  5440.502250736747,
+					forecast_upper =  6294.296972680027,
+					forecast_prediction =  5867.399611708387
+				}
+				, i => i.Id($"{jobId}_model_forecast_{forecastId}_1486591300000_1800_0_961_0").Type("doc").Index(".ml-anomalies-shared").Refresh(Refresh.WaitFor));
+
+			client.Index<object>(new
+				{
+					job_id =  jobId,
+					result_type =  "model_forecast_request_stats",
+					forecast_id =  forecastId,
+					processed_record_count =  48,
+					forecast_messages =  new object[0],
+					timestamp =  1486575000000,
+					forecast_start_timestamp =  1486575000000,
+					forecast_end_timestamp =  1486661400000,
+					forecast_create_timestamp =  1535721789000,
+					forecast_expiry_timestamp =  1536931389000,
+					forecast_progress =  1,
+					processing_time_ms =  3,
+					forecast_memory_bytes =  7034,
+					forecast_status =  "finished"
+				}
+				, i => i.Id($"{jobId}_model_forecast_request_stats_{forecastId}").Type("doc").Index(".ml-anomalies-shared").Refresh(Refresh.WaitFor));
+
+		}
 	}
 }
