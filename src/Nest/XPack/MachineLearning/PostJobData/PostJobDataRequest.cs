@@ -64,7 +64,8 @@ namespace Nest
 			foreach (var data in request.Data)
 			{
 				var bodyJson = elasticsearchSerializer.SerializeToString(data, SerializationFormatting.None);
-				writer.WriteRaw(bodyJson + "\n");
+				writer.WriteRaw(bodyJson);
+				writer.WriteRaw("\n");
 			}
 		}
 
