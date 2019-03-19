@@ -40,8 +40,11 @@ namespace Nest
 
 		internal static object CreateGenericInstance(this Type t, Type[] closeOver, params object[] args)
 		{
-			var argKey = closeOver.Aggregate(new StringBuilder(), (sb, gt) => sb.Append("--" + gt.FullName), sb => sb.ToString());
-			var key = t.FullName + argKey;
+			var key = closeOver.Aggregate(new StringBuilder(t.FullName), (sb, gt) =>
+			{
+				sb.Append("--");
+				return sb.Append(gt.FullName);
+			}, sb => sb.ToString());
 			if (!CachedGenericClosedTypes.TryGetValue(key, out var closedType))
 			{
 				closedType = t.MakeGenericType(closeOver);
@@ -54,15 +57,16 @@ namespace Nest
 
 		internal static object CreateInstance(this Type t, params object[] args)
 		{
+			var key = t.FullName;
 			var argKey = args.Length;
-			var key = argKey + "--" + t.FullName;
+			if (args.Length > 0)
+				key = argKey + "--" + key;
 			if (CachedActivators.TryGetValue(key, out var activator))
 				return activator(args);
 
 			var generic = GetActivatorMethodInfo.MakeGenericMethod(t);
 			var constructors = from c in t.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
 				let p = c.GetParameters()
-				let k = string.Join(",", p.Select(a => a.ParameterType.Name))
 				where p.Length == args.Length
 				select c;
 
@@ -89,7 +93,6 @@ namespace Nest
 		//do not remove this is referenced through GetActivatorMethod
 		private static ObjectActivator<T> GetActivator<T>(ConstructorInfo ctor)
 		{
-			var type = ctor.DeclaringType;
 			var paramsInfo = ctor.GetParameters();
 
 			//create a single param of type object[]
