@@ -111,6 +111,11 @@ namespace Nest
 				v.Visit(d);
 				Accept(v, d.Aggregations);
 			});
+			AcceptAggregation(aggregation.Parent, visitor, (v, d) =>
+			{
+				v.Visit(d);
+				Accept(v, d.Aggregations);
+			});
 			AcceptAggregation(aggregation.PercentileRanks, visitor, (v, d) => v.Visit(d));
 			AcceptAggregation(aggregation.Percentiles, visitor, (v, d) => v.Visit(d));
 			AcceptAggregation(aggregation.Range, visitor, (v, d) =>
