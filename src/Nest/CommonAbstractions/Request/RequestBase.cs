@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel;
-using System.IO;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
 
@@ -25,14 +24,6 @@ namespace Nest
 		/// </summary>
 		[IgnoreDataMember]
 		TParameters RequestParameters { get; set; }
-	}
-
-	/// <summary>
-	/// A request that that does not necessarily (de)serializes itself
-	/// </summary>
-	public interface IProxyRequest : IRequest
-	{
-		void WriteJson(IElasticsearchSerializer sourceSerializer, Stream s, SerializationFormatting serializationFormatting);
 	}
 
 	public abstract class RequestBase<TParameters> : IRequest<TParameters> where TParameters : IRequestParameters, new()

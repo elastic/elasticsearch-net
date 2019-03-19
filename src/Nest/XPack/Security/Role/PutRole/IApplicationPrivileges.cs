@@ -42,21 +42,20 @@ namespace Nest
 		public IEnumerable<string> Resources { get; set; }
 	}
 
-	public class ApplicationPrivilegesDescriptor : DescriptorPromiseBase<ApplicationPrivilegesDescriptor, IList<IApplicationPrivileges>>
+	public class ApplicationPrivilegesListDescriptor : DescriptorPromiseBase<ApplicationPrivilegesListDescriptor, IList<IApplicationPrivileges>>
 	{
-		public ApplicationPrivilegesDescriptor() : base(new List<IApplicationPrivileges>()) { }
+		public ApplicationPrivilegesListDescriptor() : base(new List<IApplicationPrivileges>()) { }
 
 		/// <summary>
 		/// Adds an application privilege
 		/// </summary>
-		public ApplicationPrivilegesDescriptor Add<T>(Func<ApplicationPrivilegesDescriptor<T>, IApplicationPrivileges> selector) where T : class =>
-			Assign(a => a.AddIfNotNull(selector?.Invoke(new ApplicationPrivilegesDescriptor<T>())));
+		public ApplicationPrivilegesListDescriptor Add(Func<ApplicationPrivilegesDescriptor, IApplicationPrivileges> selector) =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new ApplicationPrivilegesDescriptor())));
 	}
 
 	/// <inheritdoc cref="IApplicationPrivileges" />
-	public class ApplicationPrivilegesDescriptor<T>
-		: DescriptorBase<ApplicationPrivilegesDescriptor<T>, IApplicationPrivileges>, IApplicationPrivileges
-		where T : class
+	public class ApplicationPrivilegesDescriptor
+		: DescriptorBase<ApplicationPrivilegesDescriptor, IApplicationPrivileges>, IApplicationPrivileges
 	{
 		/// <inheritdoc />
 		string IApplicationPrivileges.Application { get; set; }
@@ -68,18 +67,18 @@ namespace Nest
 		IEnumerable<string> IApplicationPrivileges.Resources { get; set; }
 
 		/// <inheritdoc cref="IApplicationPrivileges.Application" />
-		public ApplicationPrivilegesDescriptor<T> Application(string application) => Assign(a => a.Application = application);
+		public ApplicationPrivilegesDescriptor Application(string application) => Assign(a => a.Application = application);
 
 		/// <inheritdoc cref="IApplicationPrivileges.Privileges" />
-		public ApplicationPrivilegesDescriptor<T> Privileges(params string[] privileges) => Assign(a => a.Privileges = privileges);
+		public ApplicationPrivilegesDescriptor Privileges(params string[] privileges) => Assign(a => a.Privileges = privileges);
 
 		/// <inheritdoc cref="IApplicationPrivileges.Privileges" />
-		public ApplicationPrivilegesDescriptor<T> Privileges(IEnumerable<string> privileges) => Assign(a => a.Privileges = privileges);
+		public ApplicationPrivilegesDescriptor Privileges(IEnumerable<string> privileges) => Assign(a => a.Privileges = privileges);
 
 		/// <inheritdoc cref="IApplicationPrivileges.Resources" />
-		public ApplicationPrivilegesDescriptor<T> Resources(params string[] resources) => Assign(a => a.Resources = resources);
+		public ApplicationPrivilegesDescriptor Resources(params string[] resources) => Assign(a => a.Resources = resources);
 
 		/// <inheritdoc cref="IApplicationPrivileges.Resources" />
-		public ApplicationPrivilegesDescriptor<T> Resources(IEnumerable<string> resources) => Assign(a => a.Resources = resources);
+		public ApplicationPrivilegesDescriptor Resources(IEnumerable<string> resources) => Assign(a => a.Resources = resources);
 	}
 }

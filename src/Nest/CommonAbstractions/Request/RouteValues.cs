@@ -38,6 +38,8 @@ namespace Nest
 		public string ThreadPoolPatterns => GetResolved("thread_pool_patterns");
 		public string Timestamp => GetResolved("timestamp");
 		public string Type => GetResolved("type");
+		public string Application => GetResolved("application");
+		public string User => GetResolved("user");
 		public string Username => GetResolved("username");
 		public WatcherStatsMetric? WatcherStatsMetric => GetResolved("watcher_stats_metric").ToEnum<WatcherStatsMetric>();
 		public string WatchId => GetResolved("watch_id");

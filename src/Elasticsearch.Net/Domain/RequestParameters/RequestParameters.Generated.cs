@@ -2661,6 +2661,16 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
+	///<summary>Request options for SecurityDeletePrivileges<pre>TODO</pre></summary>
+	public class DeletePrivilegesRequestParameters : RequestParameters<DeletePrivilegesRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+	}
 	///<summary>Request options for SecurityDeleteRole<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html</pre></summary>
 	public class DeleteRoleRequestParameters : RequestParameters<DeleteRoleRequestParameters> 
 	{
@@ -2711,6 +2721,11 @@ namespace Elasticsearch.Net
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
+	///<summary>Request options for SecurityGetPrivileges<pre>TODO</pre></summary>
+	public class GetPrivilegesRequestParameters : RequestParameters<GetPrivilegesRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
 	///<summary>Request options for SecurityGetRole<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</pre></summary>
 	public class GetRoleRequestParameters : RequestParameters<GetRoleRequestParameters> 
 	{
@@ -2731,10 +2746,30 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
+	///<summary>Request options for SecurityGetUserPrivileges<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</pre></summary>
+	public class GetUserPrivilegesRequestParameters : RequestParameters<GetUserPrivilegesRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	///<summary>Request options for SecurityHasPrivileges<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</pre></summary>
+	public class HasPrivilegesRequestParameters : RequestParameters<HasPrivilegesRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
 	///<summary>Request options for SecurityInvalidateToken<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</pre></summary>
 	public class InvalidateUserAccessTokenRequestParameters : RequestParameters<InvalidateUserAccessTokenRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
+	///<summary>Request options for SecurityPutPrivileges<pre>TODO</pre></summary>
+	public class PutPrivilegesRequestParameters : RequestParameters<PutPrivilegesRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
 	///<summary>Request options for SecurityPutRole<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</pre></summary>
 	public class PutRoleRequestParameters : RequestParameters<PutRoleRequestParameters> 

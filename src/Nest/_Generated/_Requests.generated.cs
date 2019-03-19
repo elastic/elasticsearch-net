@@ -2124,6 +2124,39 @@ namespace Nest
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	[InterfaceDataContract]
+	public partial interface IDeletePrivilegesRequest : IRequest<DeletePrivilegesRequestParameters>
+	{
+		[IgnoreDataMember]
+			Name Application { get; }
+		[IgnoreDataMember]
+			Name Name { get; }
+	}
+
+	///<summary>Request parameters for SecurityDeletePrivileges <pre>TODO</pre></summary>
+	public partial class DeletePrivilegesRequest : PlainRequestBase<DeletePrivilegesRequestParameters>, IDeletePrivilegesRequest
+	{
+		protected IDeletePrivilegesRequest Self => this;
+		///<summary>/_security/privilege/{application}/{name}</summary>
+		///<param name="application">this parameter is required</param>
+		///<param name="name">this parameter is required</param>
+		public DeletePrivilegesRequest(Name application, Name name) : base(r => r.Required("application", application).Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal DeletePrivilegesRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Name IDeletePrivilegesRequest.Application => Self.RouteValues.Get<Name>("application");
+		[IgnoreDataMember]
+		Name IDeletePrivilegesRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+	}
+	[InterfaceDataContract]
 	public partial interface IDeleteRepositoryRequest : IRequest<DeleteRepositoryRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -3522,6 +3555,34 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	[InterfaceDataContract]
+	public partial interface IGetPrivilegesRequest : IRequest<GetPrivilegesRequestParameters>
+	{
+		[IgnoreDataMember]
+			Name Application { get; }
+		[IgnoreDataMember]
+			Name Name { get; }
+	}
+
+	///<summary>Request parameters for SecurityGetPrivileges <pre>TODO</pre></summary>
+	public partial class GetPrivilegesRequest : PlainRequestBase<GetPrivilegesRequestParameters>, IGetPrivilegesRequest
+	{
+		protected IGetPrivilegesRequest Self => this;
+		///<summary>/_security/privilege/{application}/{name}</summary>
+		///<param name="application">Optional, accepts null</param>
+		///<param name="name">Optional, accepts null</param>
+		public GetPrivilegesRequest(Name application, Name name) : base(r => r.Optional("application", application).Optional("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal GetPrivilegesRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Name IGetPrivilegesRequest.Application => Self.RouteValues.Get<Name>("application");
+		[IgnoreDataMember]
+		Name IGetPrivilegesRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+	}
+	[InterfaceDataContract]
 	public partial interface IGetRepositoryRequest : IRequest<GetRepositoryRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -3851,6 +3912,19 @@ namespace Nest
 		// Request parameters
 	}
 	[InterfaceDataContract]
+	public partial interface IGetUserPrivilegesRequest : IRequest<GetUserPrivilegesRequestParameters>
+	{
+	}
+
+	///<summary>Request parameters for SecurityGetUserPrivileges <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</pre></summary>
+	public partial class GetUserPrivilegesRequest : PlainRequestBase<GetUserPrivilegesRequestParameters>, IGetUserPrivilegesRequest
+	{
+		protected IGetUserPrivilegesRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+	}
+	[InterfaceDataContract]
 	public partial interface IGetUserRequest : IRequest<GetUserRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -3951,6 +4025,28 @@ namespace Nest
 	{
 		protected IGrokProcessorPatternsRequest Self => this;
 		// values part of the url path
+
+		// Request parameters
+	}
+	[InterfaceDataContract]
+	public partial interface IHasPrivilegesRequest : IRequest<HasPrivilegesRequestParameters>
+	{
+		[IgnoreDataMember]
+			Name User { get; }
+	}
+
+	///<summary>Request parameters for SecurityHasPrivileges <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</pre></summary>
+	public partial class HasPrivilegesRequest : PlainRequestBase<HasPrivilegesRequestParameters>, IHasPrivilegesRequest
+	{
+		protected IHasPrivilegesRequest Self => this;
+		///<summary>/_security/user/_has_privileges</summary>
+		public HasPrivilegesRequest() : base(){}
+		///<summary>/_security/user/{user}/_has_privileges</summary>
+		///<param name="user">Optional, accepts null</param>
+		public HasPrivilegesRequest(Name user) : base(r => r.Optional("user", user)){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Name IHasPrivilegesRequest.User => Self.RouteValues.Get<Name>("user");
 
 		// Request parameters
 	}
@@ -5073,6 +5169,24 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+	}
+	[InterfaceDataContract]
+	public partial interface IPutPrivilegesRequest : IRequest<PutPrivilegesRequestParameters>
+	{
+	}
+
+	///<summary>Request parameters for SecurityPutPrivileges <pre>TODO</pre></summary>
+	public partial class PutPrivilegesRequest : PlainRequestBase<PutPrivilegesRequestParameters>, IPutPrivilegesRequest
+	{
+		protected IPutPrivilegesRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IPutRoleMappingRequest : IRequest<PutRoleMappingRequestParameters>

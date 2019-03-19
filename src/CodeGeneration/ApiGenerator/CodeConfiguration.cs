@@ -38,13 +38,6 @@ namespace ApiGenerator
 			"ml.find_file_structure.json",
 			"monitoring.bulk.json",
 
-			"security.delete_privileges.json",
-			"security.get_privileges.json",
-			"security.put_privileges.json",
-			"security.get_user_privileges.json",
-			"security.get_index_privileges.json",
-			"security.has_privileges.json",
-			"security.put_privilege.json",
 			"security.create_api_key.json",
 			"security.get_api_key.json",
 			"security.invalidate_api_key.json",

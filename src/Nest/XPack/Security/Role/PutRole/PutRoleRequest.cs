@@ -100,8 +100,8 @@ namespace Nest
 			Assign(a => a.Applications = privileges.ToListOrNullIfEmpty());
 
 		/// <inheritdoc cref="IPutRoleRequest.Applications" />
-		public PutRoleDescriptor Applications(Func<ApplicationPrivilegesDescriptor, IPromise<IList<IApplicationPrivileges>>> selector) =>
-			Assign(a => a.Applications = selector?.Invoke(new ApplicationPrivilegesDescriptor())?.Value);
+		public PutRoleDescriptor Applications(Func<ApplicationPrivilegesListDescriptor, IPromise<IList<IApplicationPrivileges>>> selector) =>
+			Assign(a => a.Applications = selector?.Invoke(new ApplicationPrivilegesListDescriptor())?.Value);
 
 		/// <inheritdoc cref="IPutRoleRequest.Cluster" />
 		public PutRoleDescriptor Cluster(IEnumerable<string> clusters) => Assign(a => a.Cluster = clusters);
