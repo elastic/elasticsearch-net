@@ -111,7 +111,7 @@ namespace Nest
 
 		/// <inheritdoc cref="IPutWatchRequest.Metadata" />
 		public PutWatchDescriptor Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramsDictionary) =>
-			Assign(a => a.Metadata = paramsDictionary(new FluentDictionary<string, object>()));
+			Assign(a => a.Metadata = paramsDictionary?.Invoke(new FluentDictionary<string, object>()));
 
 		/// <inheritdoc cref="IPutWatchRequest.Metadata" />
 		public PutWatchDescriptor Metadata(Dictionary<string, object> paramsDictionary) =>

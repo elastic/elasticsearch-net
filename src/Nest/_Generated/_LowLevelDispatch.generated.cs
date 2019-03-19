@@ -4620,6 +4620,28 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityClearCachedRoles", p, new [] { POST }, "/_xpack/security/role/{name}/_clear_cache");
 		}
 		
+		internal TResponse XpackSecurityDeletePrivilegesDispatch<TResponse>(IRequest<DeletePrivilegesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Application, p.RouteValues.Name)) return _lowLevel.XpackSecurityDeletePrivileges<TResponse>(p.RouteValues.Application,p.RouteValues.Name,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackSecurityDeletePrivileges", p, new [] { DELETE }, "/_xpack/security/privilege/{application}/{name}");
+		}
+		
+		internal Task<TResponse> XpackSecurityDeletePrivilegesDispatchAsync<TResponse>(IRequest<DeletePrivilegesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Application, p.RouteValues.Name)) return _lowLevel.XpackSecurityDeletePrivilegesAsync<TResponse>(p.RouteValues.Application,p.RouteValues.Name,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackSecurityDeletePrivileges", p, new [] { DELETE }, "/_xpack/security/privilege/{application}/{name}");
+		}
+		
 		internal TResponse XpackSecurityDeleteRoleDispatch<TResponse>(IRequest<DeleteRoleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -4742,6 +4764,28 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityEnableUser", p, new [] { PUT, POST }, "/_xpack/security/user/{username}/_enable");
 		}
 		
+		internal TResponse XpackSecurityGetPrivilegesDispatch<TResponse>(IRequest<GetPrivilegesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Application, p.RouteValues.Name)) return _lowLevel.XpackSecurityGetPrivileges<TResponse>(p.RouteValues.Application,p.RouteValues.Name,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackSecurityGetPrivileges", p, new [] { GET }, "/_xpack/security/privilege/{application}/{name}");
+		}
+		
+		internal Task<TResponse> XpackSecurityGetPrivilegesDispatchAsync<TResponse>(IRequest<GetPrivilegesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Application, p.RouteValues.Name)) return _lowLevel.XpackSecurityGetPrivilegesAsync<TResponse>(p.RouteValues.Application,p.RouteValues.Name,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackSecurityGetPrivileges", p, new [] { GET }, "/_xpack/security/privilege/{application}/{name}");
+		}
+		
 		internal TResponse XpackSecurityGetRoleDispatch<TResponse>(IRequest<GetRoleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -4828,6 +4872,54 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityGetUser", p, new [] { GET }, "/_xpack/security/user/{username}", "/_xpack/security/user");
 		}
 		
+		internal TResponse XpackSecurityGetUserPrivilegesDispatch<TResponse>(IRequest<GetUserPrivilegesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.XpackSecurityGetUserPrivileges<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackSecurityGetUserPrivileges", p, new [] { GET }, "/_xpack/security/user/_privileges");
+		}
+		
+		internal Task<TResponse> XpackSecurityGetUserPrivilegesDispatchAsync<TResponse>(IRequest<GetUserPrivilegesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.XpackSecurityGetUserPrivilegesAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackSecurityGetUserPrivileges", p, new [] { GET }, "/_xpack/security/user/_privileges");
+		}
+		
+		internal TResponse XpackSecurityHasPrivilegesDispatch<TResponse>(IRequest<HasPrivilegesRequestParameters> p,SerializableData<IHasPrivilegesRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.User)) return _lowLevel.XpackSecurityHasPrivilegesGet<TResponse>(p.RouteValues.User,p.RequestParameters);
+						return _lowLevel.XpackSecurityHasPrivilegesGet<TResponse>(p.RequestParameters);
+				case POST:
+					if (AllSet(p.RouteValues.User)) return _lowLevel.XpackSecurityHasPrivileges<TResponse>(p.RouteValues.User,body,p.RequestParameters);
+						return _lowLevel.XpackSecurityHasPrivileges<TResponse>(body,p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackSecurityHasPrivileges", p, new [] { GET, POST }, "/_xpack/security/user/_has_privileges", "/_xpack/security/user/{user}/_has_privileges");
+		}
+		
+		internal Task<TResponse> XpackSecurityHasPrivilegesDispatchAsync<TResponse>(IRequest<HasPrivilegesRequestParameters> p,SerializableData<IHasPrivilegesRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.User)) return _lowLevel.XpackSecurityHasPrivilegesGetAsync<TResponse>(p.RouteValues.User,p.RequestParameters,ct);
+						return _lowLevel.XpackSecurityHasPrivilegesGetAsync<TResponse>(p.RequestParameters,ct);
+				case POST:
+					if (AllSet(p.RouteValues.User)) return _lowLevel.XpackSecurityHasPrivilegesAsync<TResponse>(p.RouteValues.User,body,p.RequestParameters,ct);
+						return _lowLevel.XpackSecurityHasPrivilegesAsync<TResponse>(body,p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackSecurityHasPrivileges", p, new [] { GET, POST }, "/_xpack/security/user/_has_privileges", "/_xpack/security/user/{user}/_has_privileges");
+		}
+		
 		internal TResponse XpackSecurityInvalidateTokenDispatch<TResponse>(IRequest<InvalidateUserAccessTokenRequestParameters> p,SerializableData<IInvalidateUserAccessTokenRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -4846,6 +4938,30 @@ namespace Nest
 						return _lowLevel.XpackSecurityInvalidateTokenAsync<TResponse>(body,p.RequestParameters,ct);
 			}
 			throw InvalidDispatch("XpackSecurityInvalidateToken", p, new [] { DELETE }, "/_xpack/security/oauth2/token");
+		}
+		
+		internal TResponse XpackSecurityPutPrivilegesDispatch<TResponse>(IRequest<PutPrivilegesRequestParameters> p,SerializableData<IPutPrivilegesRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+						return _lowLevel.XpackSecurityPutPrivileges<TResponse>(body,p.RequestParameters);
+				case POST:
+						return _lowLevel.XpackSecurityPutPrivilegesPost<TResponse>(body,p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackSecurityPutPrivileges", p, new [] { PUT, POST }, "/_xpack/security/privilege/");
+		}
+		
+		internal Task<TResponse> XpackSecurityPutPrivilegesDispatchAsync<TResponse>(IRequest<PutPrivilegesRequestParameters> p,SerializableData<IPutPrivilegesRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+						return _lowLevel.XpackSecurityPutPrivilegesAsync<TResponse>(body,p.RequestParameters,ct);
+				case POST:
+						return _lowLevel.XpackSecurityPutPrivilegesPostAsync<TResponse>(body,p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackSecurityPutPrivileges", p, new [] { PUT, POST }, "/_xpack/security/privilege/");
 		}
 		
 		internal TResponse XpackSecurityPutRoleDispatch<TResponse>(IRequest<PutRoleRequestParameters> p,SerializableData<IPutRoleRequest> body) where TResponse : class, IElasticsearchResponse, new()
