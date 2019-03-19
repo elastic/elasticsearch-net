@@ -33,7 +33,6 @@ namespace ApiGenerator
 			"rank_eval.json",
 
 			// these API's are new and need to be mapped
-			"ml.delete_forecast.json",
 			"ml.set_upgrade_mode.json",
 			"ml.find_file_structure.json",
 			"monitoring.bulk.json",

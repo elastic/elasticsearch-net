@@ -3470,6 +3470,28 @@ namespace Nest
 			throw InvalidDispatch("MlDeleteExpiredData", p, new [] { DELETE }, "/_ml/_delete_expired_data");
 		}
 		
+		internal TResponse MlDeleteForecastDispatch<TResponse>(IRequest<DeleteForecastRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.JobId, p.RouteValues.ForecastId)) return _lowLevel.MlDeleteForecast<TResponse>(p.RouteValues.JobId,p.RouteValues.ForecastId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlDeleteForecast", p, new [] { DELETE }, "/_ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}");
+		}
+		
+		internal Task<TResponse> MlDeleteForecastDispatchAsync<TResponse>(IRequest<DeleteForecastRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.JobId, p.RouteValues.ForecastId)) return _lowLevel.MlDeleteForecastAsync<TResponse>(p.RouteValues.JobId,p.RouteValues.ForecastId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlDeleteForecast", p, new [] { DELETE }, "/_ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}");
+		}
+		
 		internal TResponse MlDeleteJobDispatch<TResponse>(IRequest<DeleteJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
