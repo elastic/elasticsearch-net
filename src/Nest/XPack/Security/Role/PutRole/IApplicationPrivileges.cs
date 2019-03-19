@@ -53,6 +53,9 @@ namespace Nest
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new ApplicationPrivilegesDescriptor<T>())));
 	}
 
+
+	// TODO this should not be generic, fix in NEST 7.x
+
 	/// <inheritdoc cref="IApplicationPrivileges" />
 	public class ApplicationPrivilegesDescriptor<T>
 		: DescriptorBase<ApplicationPrivilegesDescriptor<T>, IApplicationPrivileges>, IApplicationPrivileges

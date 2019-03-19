@@ -7,11 +7,11 @@ using static Elasticsearch.Net.SerializationFormatting;
 
 namespace Nest
 {
-	internal abstract class GenericProxyRequestConverterBase : JsonConverter
+	internal abstract class DocumentProxyRequestConverterBase : JsonConverter
 	{
 		private readonly Type _genericRequestType;
 
-		protected GenericProxyRequestConverterBase(Type genericRequestType) =>
+		protected DocumentProxyRequestConverterBase(Type genericRequestType) =>
 			_genericRequestType = genericRequestType;
 
 		public override bool CanRead => true;

@@ -2015,6 +2015,31 @@ namespace Nest
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeletePrivilegesRequest : IRequest<DeletePrivilegesRequestParameters>
+	{
+		Name Application { get; }
+		Name Name { get; }
+	}
+	///<summary>Request parameters for XpackSecurityDeletePrivileges <pre>TODO</pre></summary>
+	public partial class DeletePrivilegesRequest : PlainRequestBase<DeletePrivilegesRequestParameters>, IDeletePrivilegesRequest
+	{
+		protected IDeletePrivilegesRequest Self => this;
+		///<summary>/_xpack/security/privilege/{application}/{name}</summary>
+		///<param name="application">this parameter is required</param>
+		///<param name="name">this parameter is required</param>
+		public DeletePrivilegesRequest(Name application, Name name) : base(r=>r.Required("application", application).Required("name", name)){}
+		// values part of the url path
+		Name IDeletePrivilegesRequest.Application => Self.RouteValues.Get<Name>("application");
+		Name IDeletePrivilegesRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteRepositoryRequest : IRequest<DeleteRepositoryRequestParameters>
 	{
 		Names RepositoryName { get; }
@@ -3255,6 +3280,26 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetPrivilegesRequest : IRequest<GetPrivilegesRequestParameters>
+	{
+		Name Application { get; }
+		Name Name { get; }
+	}
+	///<summary>Request parameters for XpackSecurityGetPrivileges <pre>TODO</pre></summary>
+	public partial class GetPrivilegesRequest : PlainRequestBase<GetPrivilegesRequestParameters>, IGetPrivilegesRequest
+	{
+		protected IGetPrivilegesRequest Self => this;
+		///<summary>/_xpack/security/privilege/{application}/{name}</summary>
+		///<param name="application">Optional, accepts null</param>
+		///<param name="name">Optional, accepts null</param>
+		public GetPrivilegesRequest(Name application, Name name) : base(r=>r.Optional("application", application).Optional("name", name)){}
+		// values part of the url path
+		Name IGetPrivilegesRequest.Application => Self.RouteValues.Get<Name>("application");
+		Name IGetPrivilegesRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetRepositoryRequest : IRequest<GetRepositoryRequestParameters>
 	{
 		Names RepositoryName { get; }
@@ -3566,6 +3611,18 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetUserPrivilegesRequest : IRequest<GetUserPrivilegesRequestParameters>
+	{
+	}
+	///<summary>Request parameters for XpackSecurityGetUserPrivileges <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</pre></summary>
+	public partial class GetUserPrivilegesRequest : PlainRequestBase<GetUserPrivilegesRequestParameters>, IGetUserPrivilegesRequest
+	{
+		protected IGetUserPrivilegesRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetUserRequest : IRequest<GetUserRequestParameters>
 	{
 		Names Username { get; }
@@ -3671,6 +3728,25 @@ namespace Nest
 	{
 		protected IGrokProcessorPatternsRequest Self => this;
 		// values part of the url path
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IHasPrivilegesRequest : IRequest<HasPrivilegesRequestParameters>
+	{
+		Name User { get; }
+	}
+	///<summary>Request parameters for XpackSecurityHasPrivileges <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</pre></summary>
+	public partial class HasPrivilegesRequest : PlainRequestBase<HasPrivilegesRequestParameters>, IHasPrivilegesRequest
+	{
+		protected IHasPrivilegesRequest Self => this;
+		///<summary>/_xpack/security/user/_has_privileges</summary>
+		public HasPrivilegesRequest() : base(){}
+		///<summary>/_xpack/security/user/{user}/_has_privileges</summary>
+		///<param name="user">Optional, accepts null</param>
+		public HasPrivilegesRequest(Name user) : base(r=>r.Optional("user", user)){}
+		// values part of the url path
+		Name IHasPrivilegesRequest.User => Self.RouteValues.Get<Name>("user");
 
 		// Request parameters
 	}
@@ -4672,6 +4748,23 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IPutPrivilegesRequest : IRequest<PutPrivilegesRequestParameters>
+	{
+	}
+	///<summary>Request parameters for XpackSecurityPutPrivileges <pre>TODO</pre></summary>
+	public partial class PutPrivilegesRequest : PlainRequestBase<PutPrivilegesRequestParameters>, IPutPrivilegesRequest
+	{
+		protected IPutPrivilegesRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutRoleMappingRequest : IRequest<PutRoleMappingRequestParameters>

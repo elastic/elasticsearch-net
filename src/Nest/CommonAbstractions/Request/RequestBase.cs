@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel;
-using System.IO;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
@@ -21,14 +20,6 @@ namespace Nest
 		/// Used to describe request parameters that are not part of the body. e.g. query string, connection configuration overrides, etc.
 		/// </summary>
 		TParameters RequestParameters { get; set; }
-	}
-
-	/// <summary>
-	/// A request that that does not necessarily (de)serializes itself
-	/// </summary>
-	public interface IProxyRequest : IRequest
-	{
-		void WriteJson(IElasticsearchSerializer sourceSerializer, Stream s, SerializationFormatting serializationFormatting);
 	}
 
 	public abstract class RequestBase<TParameters> : IRequest<TParameters> where TParameters : IRequestParameters, new()
