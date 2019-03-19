@@ -46,7 +46,12 @@ namespace Nest
 			}
 
 			var response = new MultiGetResponse();
+
+			var dateParseHandling = reader.DateParseHandling;
+			reader.DateParseHandling = DateParseHandling.None;
 			var jsonObject = JObject.Load(reader);
+			reader.DateParseHandling = dateParseHandling;
+
 			var docsJarray = (JArray)jsonObject["docs"];
 			if (_request == null || docsJarray == null)
 				return response;
