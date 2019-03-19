@@ -54,7 +54,7 @@ namespace Nest
 	}
 
 
-	//TODO this should not be generic
+	// TODO this should not be generic, fix in NEST 7.x
 
 	/// <inheritdoc cref="IApplicationPrivileges" />
 	public class ApplicationPrivilegesDescriptor<T>
