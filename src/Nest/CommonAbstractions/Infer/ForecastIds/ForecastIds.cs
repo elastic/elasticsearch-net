@@ -13,11 +13,13 @@ namespace Nest
 
 		private readonly List<string> _forecastIds;
 
-		public ForecastIds(IEnumerable<string> forecastIds) => _forecastIds = forecastIds?.ToList() ?? new List<string>();
+		public ForecastIds(IEnumerable<string> forecastIds) => _forecastIds = forecastIds?.ToList();
 
-		public ForecastIds(string forecastIds) => _forecastIds = forecastIds.IsNullOrEmptyCommaSeparatedList(out var ids)
-			? new List<string>()
-			: ids.ToList();
+		public ForecastIds(string forecastIds)
+		{
+			if (!forecastIds.IsNullOrEmptyCommaSeparatedList(out var ids))
+				_forecastIds = ids.ToList();
+		}
 
 		private string DebugDisplay => ((IUrlParameter)this).GetString(null);
 
@@ -27,24 +29,26 @@ namespace Nest
 			if (_forecastIds == null && other._forecastIds == null) return true;
 			if (_forecastIds == null || other._forecastIds == null) return false;
 
-			return _forecastIds.Count == other._forecastIds.Count && !_forecastIds.Except(other._forecastIds).Any();
+			return _forecastIds.Count == other._forecastIds.Count &&
+				_forecastIds.OrderBy(id => id).SequenceEqual(other._forecastIds.OrderBy(id => id));
 		}
 
-		string IUrlParameter.GetString(IConnectionConfigurationValues settings) => string.Join(",", _forecastIds);
+		string IUrlParameter.GetString(IConnectionConfigurationValues settings) => string.Join(",", _forecastIds ?? Enumerable.Empty<string>());
 
-		public static implicit operator ForecastIds(string forecastIds) => new ForecastIds(forecastIds);
+		public static implicit operator ForecastIds(string forecastIds) =>
+			forecastIds.IsNullOrEmptyCommaSeparatedList(out var arr) ? null : new ForecastIds(arr);
 
-		public static implicit operator ForecastIds(string[] forecastIds) => new ForecastIds(forecastIds);
+		public static implicit operator ForecastIds(string[] forecastIds) =>
+			forecastIds.IsEmpty() ? null : new ForecastIds(forecastIds);
 
 		public override bool Equals(object obj) => obj is ForecastIds other && Equals(other);
 
 		public override int GetHashCode()
 		{
-			_forecastIds.Sort();
 			unchecked
 			{
 				var hc = 0;
-				foreach (var id in _forecastIds)
+				foreach (var id in _forecastIds.OrderBy(id => id))
 					hc = hc * 17 + id.GetHashCode();
 				return hc;
 			}

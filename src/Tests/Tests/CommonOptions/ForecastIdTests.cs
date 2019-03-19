@@ -16,15 +16,6 @@ namespace Tests.CommonOptions
 			forecastIds1.GetHashCode().Should().Be(forecastIds2.GetHashCode());
 		}
 
-		[U] public void EqualImplicit()
-		{
-			ForecastIds forecastIds1 = (string)null;
-			ForecastIds forecastIds2 = (string[])null;
-
-			forecastIds1.Should().Be(forecastIds2);
-			forecastIds1.GetHashCode().Should().Be(forecastIds2.GetHashCode());
-		}
-
 		[U] public void NotEqual()
 		{
 			var forecastIds1 = new ForecastIds("1,2,3,3");
