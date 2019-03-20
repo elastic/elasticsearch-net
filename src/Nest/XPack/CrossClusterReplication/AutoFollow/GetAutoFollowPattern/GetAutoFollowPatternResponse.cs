@@ -1,19 +1,91 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	public interface IGetAutoFollowPatternResponse : IResponse
 	{
+		[JsonIgnore]
 		IReadOnlyDictionary<string, AutoFollowPattern> Patterns { get; }
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(DictionaryResponseJsonConverter<GetAutoFollowPatternResponse, string, AutoFollowPattern>))]
+	[JsonConverter(typeof(GetAutoFollowPatternResponseConverter))]
 	public class GetAutoFollowPatternResponse : DictionaryResponseBase<string, AutoFollowPattern>, IGetAutoFollowPatternResponse
 	{
 		[JsonIgnore]
 		public IReadOnlyDictionary<string, AutoFollowPattern> Patterns => Self.BackingDictionary;
+	}
+
+	// Custom converter required because format of response changed between 6.5 and 6.6.
+	internal class GetAutoFollowPatternResponseConverter : JsonConverter
+	{
+		public override bool CanWrite { get; } = false;
+
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
+
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			var response = new GetAutoFollowPatternResponse();
+			IDictionaryResponse<string, AutoFollowPattern> dictResponse = response;
+			var dict = new Dictionary<string, AutoFollowPattern>();
+			dictResponse.BackingDictionary = dict;
+			bool checkedError = false;
+
+			if (reader.TokenType != JsonToken.StartObject)
+				return response;
+
+			while (reader.Read() && reader.TokenType != JsonToken.EndObject)
+			{
+				var propertyName = (string)reader.Value;
+				if (propertyName == "patterns")
+				{
+					// 6.6
+					reader.Read(); // opening [ of patterns array
+					while (reader.Read() && reader.TokenType != JsonToken.EndArray)
+					{
+						string name = null;
+						AutoFollowPattern pattern = null;
+						while (reader.Read() && reader.TokenType != JsonToken.EndObject)
+						{
+							propertyName = (string)reader.Value;
+							if (propertyName == "name")
+								name = reader.ReadAsString();
+							else
+							{
+								reader.Read();
+								pattern = serializer.Deserialize<AutoFollowPattern>(reader);
+							}
+						}
+
+						dict.Add(name, pattern);
+					}
+				}
+				else if (!checkedError && propertyName == "error")
+				{
+					reader.Read();
+					response.Error = reader.TokenType == JsonToken.String
+						? new Error { Reason = (string)reader.Value }
+						: serializer.Deserialize<Error>(reader);
+				}
+				else if (!checkedError && propertyName == "status")
+					response.StatusCode = reader.ReadAsInt32();
+				else
+				{
+					checkedError = true;
+
+					// 6.5
+					reader.Read(); // opening { of AutoFollowPattern
+					dict.Add(propertyName, serializer.Deserialize<AutoFollowPattern>(reader));
+				}
+			}
+
+			return response;
+		}
+
+		public override bool CanConvert(Type objectType) => true;
 	}
 
 	public interface IAutoFollowPattern
