@@ -18,18 +18,24 @@ namespace Nest
 
 		/// <summary>
 		/// A list of words to use.
+		/// <para></para>
+		/// Cannot specify both <see cref="KeywordsPattern"/> and <see cref="Keywords"/> or <see cref="KeywordsPath"/>
 		/// </summary>
 		[DataMember(Name = "keywords")]
 		IEnumerable<string> Keywords { get; set; }
 
 		/// <summary>
 		/// A path (either relative to config location, or absolute) to a list of words.
+		/// <para></para>
+		/// Cannot specify both <see cref="KeywordsPattern"/> and <see cref="Keywords"/> or <see cref="KeywordsPath"/>
 		/// </summary>
 		[DataMember(Name = "keywords_path")]
 		string KeywordsPath { get; set; }
 
 		/// <summary>
 		/// A regular expression pattern to match against words in the text.
+		/// <para></para>
+		/// Cannot specify both <see cref="KeywordsPattern"/> and <see cref="Keywords"/> or <see cref="KeywordsPath"/>
 		/// </summary>
 		[DataMember(Name = "keywords_pattern")]
 		string KeywordsPattern { get; set; }
