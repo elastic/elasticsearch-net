@@ -18,7 +18,7 @@ namespace Nest
 			writer.WriteStartArray();
 			if (fields != null)
 			{
-				foreach (var field in fields?.ListOfFields)
+				foreach (var field in fields.ListOfFields)
 					FieldJsonConverter.WriteField(writer, field, serializer);
 			}
 			writer.WriteEndArray();
