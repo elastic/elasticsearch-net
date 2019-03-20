@@ -10,6 +10,8 @@ namespace Nest
 
 	public class RevertModelSnapshotResponse : AcknowledgedResponseBase, IRevertModelSnapshotResponse
 	{
+		public RevertModelSnapshotResponse() => Acknowledged = true;
+
 		public ModelSnapshot Model { get; internal set; }
 	}
 }
