@@ -128,6 +128,7 @@ namespace Tests.QueryDsl.Geo
 							)
 							.GeoShape(g => g
 								.Name(n => n.Circle)
+								.Strategy(GeoStrategy.Recursive)
 							)
 						)
 					)
@@ -178,6 +179,7 @@ namespace Tests.QueryDsl.Geo
 							)
 							.GeoShape(g => g
 								.Name(n => n.Circle)
+								.Strategy(GeoStrategy.Recursive)
 							)
 						)
 					)
