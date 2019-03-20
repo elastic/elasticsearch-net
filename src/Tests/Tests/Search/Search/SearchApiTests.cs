@@ -11,6 +11,7 @@ using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using static Tests.Core.ManagedElasticsearch.Clusters.CrossCluster;
 
 namespace Tests.Search.Search
 {
@@ -528,7 +529,7 @@ namespace Tests.Search.Search
 				.MatchAll()
 			);
 
-		private static string RemoteIndex => $"{DefaultSeeder.RemoteClusterName}:project";
+		private static string RemoteIndex => $"{ClusterTwo}:project";
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
@@ -537,7 +538,7 @@ namespace Tests.Search.Search
 			Query = new QueryContainer(new MatchAllQuery())
 		};
 
-		protected override string UrlPath => $"/project%2C{DefaultSeeder.RemoteClusterName}%3Aproject/doc/_search";
+		protected override string UrlPath => $"/project%2C{ClusterTwo}%3Aproject/doc/_search";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(c, f) => c.Search(f),
