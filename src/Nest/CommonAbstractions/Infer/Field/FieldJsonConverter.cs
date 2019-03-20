@@ -14,6 +14,11 @@ namespace Nest
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var field = (Field)value;
+			WriteField(writer, field, serializer);
+		}
+
+		internal static void WriteField(JsonWriter writer, Field field, JsonSerializer serializer)
+		{
 			if (field == null)
 			{
 				writer.WriteNull();

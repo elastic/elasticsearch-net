@@ -18,15 +18,8 @@ namespace Nest
 			writer.WriteStartArray();
 			if (fields != null)
 			{
-				// overridden Equals() method means a Fields with only one Field
-				// results in Equality, which triggers Json.NET's Reference loop detection
-				var referenceLoopHandling = serializer.ReferenceLoopHandling;
-				serializer.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
-
-				foreach (var field in fields.ListOfFields)
-					serializer.Serialize(writer, field);
-
-				serializer.ReferenceLoopHandling = referenceLoopHandling;
+				foreach (var field in fields?.ListOfFields)
+					FieldJsonConverter.WriteField(writer, field, serializer);
 			}
 			writer.WriteEndArray();
 		}
