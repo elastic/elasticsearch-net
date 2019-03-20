@@ -22,15 +22,13 @@ namespace Tests.Document.Single.SourceExists
 		protected override Func<SourceExistsDescriptor<Project>, ISourceExistsRequest> Fluent => d => d;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 
-		protected override SourceExistsRequest<Project> Initializer => new SourceExistsRequest<Project>(CallIsolatedValue);
-
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/project/_source/{CallIsolatedValue}";
+		protected override string UrlPath => $"/project/_source/{CallIsolatedValue}?routing={CallIsolatedValue}";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var id in values.Values)
-				Client.Index(Project.Instance, i => i.Id(id));
+				Client.Index(Project.Instance, i => i.Id(id).Routing(id));
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -40,7 +38,10 @@ namespace Tests.Document.Single.SourceExists
 			(client, r) => client.SourceExistsAsync(r)
 		);
 
-		protected override SourceExistsDescriptor<Project> NewDescriptor() => new SourceExistsDescriptor<Project>(CallIsolatedValue);
+		protected override SourceExistsDescriptor<Project> NewDescriptor() => new SourceExistsDescriptor<Project>(CallIsolatedValue).Routing(CallIsolatedValue);
+
+		protected override SourceExistsRequest<Project> Initializer => new SourceExistsRequest<Project>(CallIsolatedValue) { Routing = CallIsolatedValue };
+
 	}
 
 	public class SourceExistsNotFoundApiTests
@@ -54,10 +55,8 @@ namespace Tests.Document.Single.SourceExists
 		protected override Func<SourceExistsDescriptor<Project>, ISourceExistsRequest> Fluent => d => d;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 
-		protected override SourceExistsRequest<Project> Initializer => new SourceExistsRequest<Project>(IndexWithNoSource, CallIsolatedValue);
-
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/{IndexWithNoSource.Name}/_source/{CallIsolatedValue}";
+		protected override string UrlPath => $"/{IndexWithNoSource.Name}/_source/{CallIsolatedValue}?routing={CallIsolatedValue}";
 
 		private static IndexName IndexWithNoSource { get; } = "project-with-no-source";
 
@@ -75,7 +74,7 @@ namespace Tests.Document.Single.SourceExists
 			index.ShouldBeValid();
 
 			foreach (var id in values.Values)
-				Client.Index(Project.Instance, i => i.Id(id).Index(IndexWithNoSource));
+				Client.Index(Project.Instance, i => i.Id(id).Index(IndexWithNoSource).Routing(id));
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -86,7 +85,10 @@ namespace Tests.Document.Single.SourceExists
 		);
 
 		protected override SourceExistsDescriptor<Project> NewDescriptor() =>
-			new SourceExistsDescriptor<Project>(index: IndexWithNoSource, id: CallIsolatedValue);
+			new SourceExistsDescriptor<Project>(index: IndexWithNoSource, id: CallIsolatedValue).Routing(CallIsolatedValue);
+
+		protected override SourceExistsRequest<Project> Initializer => new SourceExistsRequest<Project>(IndexWithNoSource, CallIsolatedValue) { Routing = CallIsolatedValue };
+
 	}
 
 

@@ -33,12 +33,6 @@ namespace Nest
 			Assign(name, selector?.Invoke(new BM25SimilarityDescriptor()));
 
 		/// <summary>
-		/// The classic similarity that is based on the TF/IDF model.
-		/// </summary>
-		public SimilaritiesDescriptor Classic(string name, Func<ClassicSimilarityDescriptor, IClassicSimilarity> selector) =>
-			Assign(name, selector?.Invoke(new ClassicSimilarityDescriptor()));
-
-		/// <summary>
 		/// A similarity with Bayesian smoothing using Dirichlet priors.
 		/// </summary>
 		public SimilaritiesDescriptor LMDirichlet(string name, Func<LMDirichletSimilarityDescriptor, ILMDirichletSimilarity> selector) =>

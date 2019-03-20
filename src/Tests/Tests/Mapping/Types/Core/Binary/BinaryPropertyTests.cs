@@ -18,7 +18,7 @@ namespace Tests.Mapping.Types.Core.Binary
 				{
 					type = "binary",
 					doc_values = true,
-					similarity = "classic",
+					similarity = "bm25",
 					store = true
 				}
 			}
@@ -28,7 +28,7 @@ namespace Tests.Mapping.Types.Core.Binary
 			.Binary(b => b
 				.Name(p => p.Name)
 				.DocValues()
-				.Similarity(SimilarityOption.Classic)
+				.Similarity(SimilarityOption.BM25)
 				.Store()
 			);
 
@@ -38,7 +38,7 @@ namespace Tests.Mapping.Types.Core.Binary
 				"name", new BinaryProperty
 				{
 					DocValues = true,
-					Similarity = SimilarityOption.Classic,
+					Similarity = SimilarityOption.BM25,
 					Store = true
 				}
 			}

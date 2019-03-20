@@ -36,18 +36,19 @@ namespace Tests.Document.Single.Update
 
 		protected override UpdateRequest<Project, Project> Initializer => new UpdateRequest<Project, Project>(CallIsolatedValue)
 		{
+			Routing = CallIsolatedValue,
 			Doc = Project.Instance,
 			DocAsUpsert = true,
 			DetectNoop = true
 		};
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/project/_update/{CallIsolatedValue}";
+		protected override string UrlPath => $"/project/_update/{CallIsolatedValue}?routing={CallIsolatedValue}";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var id in values.Values)
-				Client.Index(Project.Instance, i => i.Id(id));
+				Client.Index(Project.Instance, i => i.Id(id).Routing(id));
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -58,7 +59,7 @@ namespace Tests.Document.Single.Update
 		);
 
 		protected override UpdateDescriptor<Project, Project> NewDescriptor() =>
-			new UpdateDescriptor<Project, Project>(CallIsolatedValue);
+			new UpdateDescriptor<Project, Project>(CallIsolatedValue).Routing(CallIsolatedValue);
 
 		protected override void ExpectResponse(IUpdateResponse<Project> response)
 		{

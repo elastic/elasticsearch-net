@@ -20,15 +20,14 @@ namespace Tests.Document.Single.Exists
 		protected override Func<DocumentExistsDescriptor<Project>, IDocumentExistsRequest> Fluent => d => d;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 
-		protected override DocumentExistsRequest<Project> Initializer => new DocumentExistsRequest<Project>(CallIsolatedValue);
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/project/_doc/{CallIsolatedValue}";
+		protected override string UrlPath => $"/project/_doc/{CallIsolatedValue}?routing={CallIsolatedValue}";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var id in values.Values)
-				Client.Index(Project.Instance, i => i.Id(id));
+				Client.Index(Project.Instance, i => i.Id(id).Routing(id));
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -37,8 +36,9 @@ namespace Tests.Document.Single.Exists
 			(client, r) => client.DocumentExists(r),
 			(client, r) => client.DocumentExistsAsync(r)
 		);
+		protected override DocumentExistsRequest<Project> Initializer => new DocumentExistsRequest<Project>(CallIsolatedValue) { Routing = CallIsolatedValue };
 
-		protected override DocumentExistsDescriptor<Project> NewDescriptor() => new DocumentExistsDescriptor<Project>(CallIsolatedValue);
+		protected override DocumentExistsDescriptor<Project> NewDescriptor() => new DocumentExistsDescriptor<Project>(CallIsolatedValue).Routing(CallIsolatedValue);
 
 		protected override void ExpectResponse(IExistsResponse response)
 		{

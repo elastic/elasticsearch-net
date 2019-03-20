@@ -188,15 +188,6 @@ namespace Tests.XPack.Watcher.GetWatch
 								)
 							)
 						)
-						.HipChat("reminder_hipchat", hc => hc
-							.Account("notify-monitoring")
-							.Message(hm => hm
-								.Body("hipchat message")
-								.Color(HipChatMessageColor.Purple)
-								.Room("nest")
-								.Notify()
-							)
-						)
 						.Webhook("webhook", w => w
 							.Scheme(ConnectionScheme.Https)
 							.Host("localhost")

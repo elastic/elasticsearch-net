@@ -13,6 +13,12 @@ namespace Nest
 
 		[JsonProperty("pipeline")]
 		string Pipeline { get; set; }
+
+		[JsonProperty("if_seq_no")]
+		long? IfSeqNo { get; set; }
+
+		[JsonProperty("if_primary_term")]
+		long? IfPrimaryTerm { get; set; }
 	}
 
 	public class BulkIndexOperation<T> : BulkOperationBase, IBulkIndexOperation<T>
@@ -25,6 +31,10 @@ namespace Nest
 		public string Percolate { get; set; }
 
 		public string Pipeline { get; set; }
+
+		public long? IfSeqNo { get; set; }
+
+		public long? IfPrimaryTerm { get; set; }
 
 		protected override Type ClrType => typeof(T);
 
@@ -46,6 +56,8 @@ namespace Nest
 		T IBulkIndexOperation<T>.Document { get; set; }
 		string IBulkIndexOperation<T>.Percolate { get; set; }
 		string IBulkIndexOperation<T>.Pipeline { get; set; }
+		long? IBulkIndexOperation<T>.IfSeqNo { get; set; }
+		long? IBulkIndexOperation<T>.IfPrimaryTerm { get; set; }
 
 		protected override object GetBulkOperationBody() => Self.Document;
 
@@ -64,5 +76,9 @@ namespace Nest
 		public BulkIndexDescriptor<T> Pipeline(string pipeline) => Assign(a => a.Pipeline = pipeline);
 
 		public BulkIndexDescriptor<T> Percolate(string percolate) => Assign(a => a.Percolate = percolate);
+
+		public BulkIndexDescriptor<T> IfSeqNo(long? seqNo) => Assign(a => a.IfSeqNo = seqNo);
+
+		public BulkIndexDescriptor<T> IfPrimaryTerm(long? primaryTerm) => Assign(a => a.IfSeqNo = primaryTerm);
 	}
 }

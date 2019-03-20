@@ -18,23 +18,6 @@ namespace Tests.Core.ManagedElasticsearch.Tasks
 			var prefix = v.Major >= 5 ? "xpack.notification" : "watcher.actions";
 			var postfix = v.Major >= 5 ? string.Empty : ".service";
 
-			// set up for Watcher HipChat action
-			if (!lines.Any(line => line.StartsWith($"{prefix}.hipchat{postfix}:")))
-			{
-				lines.AddRange(new[]
-				{
-					string.Empty,
-					$"{prefix}.hipchat{postfix}:",
-					"  account:",
-					"    notify-monitoring:",
-					"      profile: user",
-					"      auth_token: hipchat_auth_token",
-					string.Empty
-				});
-
-				saveFile = true;
-			}
-
 			// set up for Watcher Slack action
 			if (!lines.Any(line => line.StartsWith($"{prefix}.slack{postfix}:")))
 			{
@@ -44,7 +27,8 @@ namespace Tests.Core.ManagedElasticsearch.Tasks
 					$"{prefix}.slack{postfix}:",
 					"  account:",
 					"    monitoring:",
-					"      url: https://hooks.slack.com/services/foo/bar/baz",
+					"      message_defaults:",
+					"        from: x-pack",
 					string.Empty
 				});
 
@@ -60,7 +44,9 @@ namespace Tests.Core.ManagedElasticsearch.Tasks
 					$"{prefix}.pagerduty{postfix}:",
 					"  account:",
 					"    my_pagerduty_account:",
-					"      service_api_key: pager_duty_service_api_key",
+					"      event_defaults:",
+					"        description: pager_duty",
+					//"      service_api_key: pager_duty_service_api_key",
 					string.Empty
 				});
 

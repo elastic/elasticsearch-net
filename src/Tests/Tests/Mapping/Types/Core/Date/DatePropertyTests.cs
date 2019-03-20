@@ -18,7 +18,7 @@ namespace Tests.Mapping.Types.Core.Date
 				{
 					type = "date",
 					doc_values = false,
-					similarity = "classic",
+					similarity = "bm25",
 					store = true,
 					index = false,
 					boost = 1.2,
@@ -33,7 +33,7 @@ namespace Tests.Mapping.Types.Core.Date
 			.Date(b => b
 				.Name(p => p.LastActivity)
 				.DocValues(false)
-				.Similarity(SimilarityOption.Classic)
+				.Similarity(SimilarityOption.BM25)
 				.Store()
 				.Index(false)
 				.Boost(1.2)
@@ -48,7 +48,7 @@ namespace Tests.Mapping.Types.Core.Date
 				"lastActivity", new DateProperty
 				{
 					DocValues = false,
-					Similarity = SimilarityOption.Classic,
+					Similarity = SimilarityOption.BM25,
 					Store = true,
 					Index = false,
 					Boost = 1.2,

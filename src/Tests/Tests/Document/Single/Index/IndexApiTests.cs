@@ -177,7 +177,7 @@ namespace Tests.Document.Single.Index
 			indexResult.ApiCall.HttpStatusCode.Should().Be(201);
 			indexResult.Result.Should().Be(Result.Created);
 			indexResult.Index.Should().Be(index);
-			indexResult.Type.Should().Be("jobject");
+			indexResult.Type.Should().Be("_doc");
 			indexResult.Shards.Should().NotBeNull();
 			indexResult.Shards.Total.Should().BeGreaterOrEqualTo(1);
 			indexResult.Shards.Successful.Should().BeGreaterOrEqualTo(1);
@@ -209,8 +209,7 @@ namespace Tests.Document.Single.Index
 	{
 		public IndexAnonymousTypesIntegrationTests(WritableCluster cluster) : base(cluster) { }
 
-		[I]
-		public void Index()
+		[I] public void Index()
 		{
 			var index = RandomString();
 			var anonymousType = new
@@ -234,7 +233,7 @@ namespace Tests.Document.Single.Index
 			indexResult.ApiCall.HttpStatusCode.Should().Be(201);
 			indexResult.Result.Should().Be(Result.Created);
 			indexResult.Index.Should().Be(index);
-			indexResult.Type.Should().StartWith("<>");
+			indexResult.Type.Should().StartWith("_doc");
 			indexResult.Shards.Should().NotBeNull();
 			indexResult.Shards.Total.Should().BeGreaterOrEqualTo(1);
 			indexResult.Shards.Successful.Should().BeGreaterOrEqualTo(1);

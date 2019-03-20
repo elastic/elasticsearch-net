@@ -29,7 +29,7 @@ namespace Tests.Mapping.Types.Core.Keyword
 					index_options = "freqs",
 					null_value = "null",
 					norms = false,
-					similarity = "classic",
+					similarity = "bm25",
 					fields = new
 					{
 						foo = new
@@ -56,7 +56,7 @@ namespace Tests.Mapping.Types.Core.Keyword
 				.NullValue("null")
 				.Normalizer("myCustom")
 				.Norms(false)
-				.Similarity(SimilarityOption.Classic)
+				.Similarity(SimilarityOption.BM25)
 				.Store(true)
 				.Fields(fs => fs
 					.Keyword(k => k
@@ -81,7 +81,7 @@ namespace Tests.Mapping.Types.Core.Keyword
 					NullValue = "null",
 					Normalizer = "myCustom",
 					Norms = false,
-					Similarity = SimilarityOption.Classic,
+					Similarity = SimilarityOption.BM25,
 					Store = true,
 					Fields = new Properties
 					{

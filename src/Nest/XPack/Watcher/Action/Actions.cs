@@ -73,9 +73,6 @@ namespace Nest
 		public ActionsDescriptor Email(string name, Func<EmailActionDescriptor, IEmailAction> selector) =>
 			Assign(name, selector.InvokeOrDefault(new EmailActionDescriptor(name)));
 
-		public ActionsDescriptor HipChat(string name, Func<HipChatActionDescriptor, IHipChatAction> selector) =>
-			Assign(name, selector.InvokeOrDefault(new HipChatActionDescriptor(name)));
-
 		public ActionsDescriptor Index(string name, Func<IndexActionDescriptor, IIndexAction> selector) =>
 			Assign(name, selector.InvokeOrDefault(new IndexActionDescriptor(name)));
 

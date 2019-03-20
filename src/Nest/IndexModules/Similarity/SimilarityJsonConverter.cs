@@ -27,8 +27,6 @@ namespace Nest
 			{
 				case "BM25":
 					return o.ToObject<BM25Similarity>(ElasticContractResolver.Empty);
-				case "CLASSIC":
-					return o.ToObject<ClassicSimilarity>(ElasticContractResolver.Empty);
 				case "LMDIRICHLET":
 					return o.ToObject<LMDirichletSimilarity>(ElasticContractResolver.Empty);
 				case "DFR":

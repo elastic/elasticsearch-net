@@ -282,20 +282,6 @@ namespace Tests.XPack.Watcher.PutWatch
 							}
 						}
 					},
-					reminder_hipchat = new
-					{
-						hipchat = new
-						{
-							account = "notify-monitoring",
-							message = new
-							{
-								body = "hipchat message",
-								color = "purple",
-								room = new[] { "nest" },
-								notify = true
-							}
-						}
-					},
 					webhook = new
 					{
 						webhook = new
@@ -487,15 +473,6 @@ namespace Tests.XPack.Watcher.PutWatch
 								.AuthorName("Russ Cam")
 							)
 						)
-					)
-				)
-				.HipChat("reminder_hipchat", hc => hc
-					.Account("notify-monitoring")
-					.Message(hm => hm
-						.Body("hipchat message")
-						.Color(HipChatMessageColor.Purple)
-						.Room("nest")
-						.Notify()
 					)
 				)
 				.Webhook("webhook", w => w
@@ -693,16 +670,6 @@ namespace Tests.XPack.Watcher.PutWatch
 								AuthorName = "Russ Cam"
 							}
 						}
-					}
-				} && new HipChatAction("reminder_hipchat")
-				{
-					Account = "notify-monitoring",
-					Message = new HipChatMessage
-					{
-						Body = "hipchat message",
-						Color = HipChatMessageColor.Purple,
-						Room = new[] { "nest" },
-						Notify = true
 					}
 				} && new WebhookAction("webhook")
 				{

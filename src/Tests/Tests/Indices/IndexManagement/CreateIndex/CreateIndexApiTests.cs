@@ -34,11 +34,6 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 							discount_overlaps = true,
 							type = "BM25"
 						},
-						tfidf = new
-						{
-							discount_overlaps = true,
-							type = "classic"
-						},
 						dfi = new
 						{
 							independence_measure = "chisquared",
@@ -46,7 +41,7 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 						},
 						dfr = new Dictionary<string, object>
 						{
-							{ "basic_model", "d" },
+							{ "basic_model", "if" },
 							{ "after_effect", "b" },
 							{ "normalization", "h1" },
 							{ "normalization.h1.c", 1.1 },
@@ -67,7 +62,7 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 						},
 						lmj = new
 						{
-							lambda = 2.0,
+							lambda = 0.9,
 							type = "LMJelinekMercer"
 						},
 						scripted_tfidf = new
@@ -101,15 +96,12 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 						.K1(1.1)
 						.DiscountOverlaps()
 					)
-					.Classic("tfidf", c => c
-						.DiscountOverlaps()
-					)
 					.DFI("dfi", df => df
 						.IndependenceMeasure(DFIIndependenceMeasure.ChiSquared)
 					)
 					.DFR("dfr", df => df
 						.AfterEffect(DFRAfterEffect.B)
-						.BasicModel(DFRBasicModel.D)
+						.BasicModel(DFRBasicModel.IF)
 						.NormalizationH1(1.1)
 					)
 					.IB("ib", ib => ib
@@ -121,7 +113,7 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 						.Mu(2)
 					)
 					.LMJelinek("lmj", lm => lm
-						.Lamdba(2.0)
+						.Lamdba(0.9)
 					)
 					.Scripted("scripted_tfidf", sc => sc
 						.Script(ssc => ssc
@@ -158,12 +150,6 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 						}
 					},
 					{
-						"tfidf", new ClassicSimilarity
-						{
-							DiscountOverlaps = true
-						}
-					},
-					{
 						"dfi", new DFISimilarity
 						{
 							IndependenceMeasure = DFIIndependenceMeasure.ChiSquared
@@ -173,7 +159,7 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 						"dfr", new DFRSimilarity
 						{
 							AfterEffect = DFRAfterEffect.B,
-							BasicModel = DFRBasicModel.D,
+							BasicModel = DFRBasicModel.IF,
 							Normalization = Normalization.H1,
 							NormalizationH1C = 1.1
 						}
@@ -196,7 +182,7 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 					{
 						"lmj", new LMJelinekMercerSimilarity
 						{
-							Lambda = 2.0
+							Lambda = 0.9
 						}
 					},
 					{
@@ -242,7 +228,6 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 
 			similarities.Should().NotBeNull();
 			similarities.Should().ContainKey("bm25").WhichValue.Should().BeOfType<BM25Similarity>();
-			similarities.Should().ContainKey("tfidf").WhichValue.Should().BeOfType<ClassicSimilarity>();
 			similarities.Should().ContainKey("dfi").WhichValue.Should().BeOfType<DFISimilarity>();
 			similarities.Should().ContainKey("dfr").WhichValue.Should().BeOfType<DFRSimilarity>();
 			similarities.Should().ContainKey("ib").WhichValue.Should().BeOfType<IBSimilarity>();

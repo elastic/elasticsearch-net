@@ -19,7 +19,7 @@ namespace Tests.Document.Single
 
 		protected override LazyResponses Exists() =>
 			Calls<DocumentExistsDescriptor<Project>, DocumentExistsRequest<Project>, IDocumentExistsRequest, IExistsResponse>(
-				id => new DocumentExistsRequest<Project>(id),
+				id => new DocumentExistsRequest<Project>(id){ Routing = Project.Instance.Name },
 				(id, d) => d.Routing(Project.Instance.Name),
 				(s, c, f) => c.DocumentExists<Project>(s, f),
 				(s, c, f) => c.DocumentExistsAsync<Project>(s, f),
@@ -28,8 +28,8 @@ namespace Tests.Document.Single
 			);
 
 		protected override LazyResponses Create() => Calls<IndexDescriptor<Project>, IndexRequest<Project>, IIndexRequest<Project>, IIndexResponse>(
-			id => new IndexRequest<Project>(Project.Instance, id: id),
-			(id, d) => d.Id(id),
+			id => new IndexRequest<Project>(Project.Instance, id: id){ Routing = Project.Instance.Name },
+			(id, d) => d.Id(id).Routing(Project.Instance.Name),
 			(s, c, f) => c.Index(Project.Instance, f),
 			(s, c, f) => c.IndexAsync(Project.Instance, f),
 			(s, c, r) => c.Index(r),
