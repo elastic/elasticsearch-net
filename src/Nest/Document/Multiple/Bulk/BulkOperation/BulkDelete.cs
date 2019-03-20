@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -6,6 +7,12 @@ namespace Nest
 		where T : class
 	{
 		T Document { get; set; }
+
+		[JsonProperty("if_seq_no")]
+		long? IfSeqNo { get; set; }
+
+		[JsonProperty("if_primary_term")]
+		long? IfPrimaryTerm { get; set; }
 	}
 
 	public class BulkDeleteOperation<T> : BulkOperationBase, IBulkDeleteOperation<T>
@@ -16,6 +23,10 @@ namespace Nest
 		public BulkDeleteOperation(Id id) => Id = id;
 
 		public T Document { get; set; }
+
+		public long? IfSeqNo { get; set; }
+
+		public long? IfPrimaryTerm { get; set; }
 
 		protected override Type ClrType => typeof(T);
 
@@ -33,6 +44,8 @@ namespace Nest
 	{
 		protected override Type BulkOperationClrType => typeof(T);
 		protected override string BulkOperationType => "delete";
+		long? IBulkDeleteOperation<T>.IfSeqNo { get; set; }
+		long? IBulkDeleteOperation<T>.IfPrimaryTerm { get; set; }
 
 		T IBulkDeleteOperation<T>.Document { get; set; }
 
@@ -46,5 +59,9 @@ namespace Nest
 		/// The object to infer the id off, (if id is not passed using Id())
 		/// </summary>
 		public BulkDeleteDescriptor<T> Document(T @object) => Assign(a => a.Document = @object);
+
+		public BulkDeleteDescriptor<T> IfSeqNo(long? seqNo) => Assign(a => a.IfSeqNo = seqNo);
+
+		public BulkDeleteDescriptor<T> IfPrimaryTerm(long? primaryTerm) => Assign(a => a.IfSeqNo = primaryTerm);
 	}
 }

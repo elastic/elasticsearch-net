@@ -109,9 +109,6 @@ namespace Nest
 							case ActionType.Logging:
 								action = prop.Value.ToObject<LoggingAction>();
 								break;
-							case ActionType.HipChat:
-								action = prop.Value.ToObject<HipChatAction>();
-								break;
 							case ActionType.Slack:
 								action = prop.Value.ToObject<SlackAction>();
 								break;

@@ -19,9 +19,6 @@ namespace Nest
 		[EnumMember(Value = "logging")]
 		Logging,
 
-		[EnumMember(Value = "hipchat")]
-		HipChat,
-
 		[EnumMember(Value = "slack")]
 		Slack,
 

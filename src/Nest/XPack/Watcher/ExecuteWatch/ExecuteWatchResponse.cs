@@ -145,9 +145,6 @@ namespace Nest
 		[JsonProperty("email")]
 		public EmailActionResult Email { get; set; }
 
-		[JsonProperty("hipchat")]
-		public HipChatActionResult HipChat { get; set; }
-
 		[JsonProperty("id")]
 		public string Id { get; set; }
 

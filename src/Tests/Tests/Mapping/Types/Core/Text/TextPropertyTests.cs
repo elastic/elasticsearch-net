@@ -120,7 +120,7 @@ namespace Tests.Mapping.Types.Core.Text
 					position_increment_gap = 5,
 					search_analyzer = "standard",
 					search_quote_analyzer = "standard",
-					similarity = "classic",
+					similarity = "bm25",
 					store = true,
 					norms = false,
 					term_vector = "with_positions_offsets"
@@ -155,7 +155,7 @@ namespace Tests.Mapping.Types.Core.Text
 				.PositionIncrementGap(5)
 				.SearchAnalyzer("standard")
 				.SearchQuoteAnalyzer("standard")
-				.Similarity(SimilarityOption.Classic)
+				.Similarity(SimilarityOption.BM25)
 				.Store()
 				.Norms(false)
 				.TermVector(TermVectorOption.WithPositionsOffsets)
@@ -192,7 +192,7 @@ namespace Tests.Mapping.Types.Core.Text
 					PositionIncrementGap = 5,
 					SearchAnalyzer = "standard",
 					SearchQuoteAnalyzer = "standard",
-					Similarity = SimilarityOption.Classic,
+					Similarity = SimilarityOption.BM25,
 					Store = true,
 					Norms = false,
 					TermVector = TermVectorOption.WithPositionsOffsets

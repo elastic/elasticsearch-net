@@ -31,17 +31,16 @@ namespace Tests.Document.Multiple.Bulk
 		protected override Func<BulkDescriptor, IBulkRequest> Fluent => d => d
 			.Index(CallIsolatedValue)
 			.Index<Project>(i => i.Document(Project.Instance))
-			.Index<Project>(i => i.Version(0).Document(Project.Instance));
+			.Index<Project>(i => i.IfSeqNo(-1).Document(Project.Instance));
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-
 
 		protected override BulkRequest Initializer => new BulkRequest(CallIsolatedValue)
 		{
 			Operations = new List<IBulkOperation>
 			{
 				new BulkIndexOperation<Project>(Project.Instance),
-				new BulkIndexOperation<Project>(Project.Instance) { Version = 0 }
+				new BulkIndexOperation<Project>(Project.Instance) { IfSeqNo = -1 }
 			}
 		};
 
@@ -60,8 +59,8 @@ namespace Tests.Document.Multiple.Bulk
 			response.ShouldNotBeValid();
 			response.ServerError.Should().NotBeNull();
 			response.ServerError.Status.Should().Be(400);
-			response.ServerError.Error.Type.Should().Be("action_request_validation_exception");
-			response.ServerError.Error.Reason.Should().EndWith("illegal version value [0] for version type [INTERNAL];");
+			response.ServerError.Error.Type.Should().Be("illegal_argument_exception");
+			response.ServerError.Error.Reason.Should().StartWith("sequence numbers must be non negative.");
 		}
 	}
 }

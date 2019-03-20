@@ -28,7 +28,6 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 				email_admin = "force_simulate",
 				webhook_action = "force_simulate",
 				slack_action = "force_simulate",
-				hipchat_action = "force_simulate",
 				pagerduty_action = "force_simulate",
 			},
 			alternative_input = new
@@ -58,7 +57,6 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 				.Add("email_admin", ActionExecutionMode.ForceSimulate)
 				.Add("webhook_action", ActionExecutionMode.ForceSimulate)
 				.Add("slack_action", ActionExecutionMode.ForceSimulate)
-				.Add("hipchat_action", ActionExecutionMode.ForceSimulate)
 				.Add("pagerduty_action", ActionExecutionMode.ForceSimulate)
 			)
 			.RecordExecution();
@@ -84,7 +82,6 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 					{ "email_admin", ActionExecutionMode.ForceSimulate },
 					{ "webhook_action", ActionExecutionMode.ForceSimulate },
 					{ "slack_action", ActionExecutionMode.ForceSimulate },
-					{ "hipchat_action", ActionExecutionMode.ForceSimulate },
 					{ "pagerduty_action", ActionExecutionMode.ForceSimulate },
 				},
 				RecordExecution = true
@@ -177,15 +174,6 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 								)
 							)
 						)
-						.HipChat("hipchat_action", hc => hc
-							.Account("notify-monitoring")
-							.Message(hm => hm
-								.Body("hipchat message")
-								.Color(HipChatMessageColor.Purple)
-								.Room("nest")
-								.Notify()
-							)
-						)
 					)
 				);
 
@@ -273,12 +261,6 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 			slackAction.Type.Should().Be(ActionType.Slack);
 			slackAction.Status.Should().Be(Status.Simulated);
 			slackAction.Slack.Should().NotBeNull();
-
-			var hipchatAction = resultActions.FirstOrDefault(a => a.Id == "hipchat_action");
-			hipchatAction.Should().NotBeNull();
-			hipchatAction.Type.Should().Be(ActionType.HipChat);
-			hipchatAction.Status.Should().Be(Status.Simulated);
-			hipchatAction.HipChat.Should().NotBeNull();
 
 			response.WatchRecord.Result.ExecutionTime.Should().HaveValue();
 		}

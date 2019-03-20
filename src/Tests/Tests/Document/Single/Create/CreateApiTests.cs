@@ -150,7 +150,7 @@ namespace Tests.Document.Single.Create
 			createResponse.ApiCall.HttpStatusCode.Should().Be(201);
 			createResponse.Result.Should().Be(Result.Created);
 			createResponse.Index.Should().Be(index);
-			createResponse.Type.Should().Be("jobject");
+			createResponse.Type.Should().Be("_doc");
 
 			var bulkResponse = Client.Bulk(b => b
 				.Index(index)
@@ -172,8 +172,7 @@ namespace Tests.Document.Single.Create
 	{
 		public CreateAnonymousTypesIntegrationTests(WritableCluster cluster) : base(cluster) { }
 
-		[I]
-		public void Create()
+		[I] public void Create()
 		{
 			var index = RandomString();
 			var anonymousType = new
@@ -197,7 +196,7 @@ namespace Tests.Document.Single.Create
 			createResponse.ApiCall.HttpStatusCode.Should().Be(201);
 			createResponse.Index.Should().Be(index);
 			createResponse.Result.Should().Be(Result.Created);
-			createResponse.Type.Should().StartWith("<>");
+			createResponse.Type.Should().StartWith("_doc");
 		}
 	}
 }

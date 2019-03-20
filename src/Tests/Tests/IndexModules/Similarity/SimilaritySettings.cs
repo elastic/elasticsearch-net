@@ -21,11 +21,6 @@ namespace Tests.IndexModules.Similarity
 					discount_overlaps = true,
 					type = "BM25"
 				},
-				def = new
-				{
-					discount_overlaps = true,
-					type = "classic"
-				},
 				dfi = new
 				{
 					independence_measure = "chisquared",
@@ -82,7 +77,6 @@ namespace Tests.IndexModules.Similarity
 					.K1(1.1)
 					.DiscountOverlaps()
 				)
-				.Classic("def", d => d.DiscountOverlaps())
 				.DFI("dfi", d => d
 					.IndependenceMeasure(DFIIndependenceMeasure.ChiSquared)
 				)
@@ -118,12 +112,6 @@ namespace Tests.IndexModules.Similarity
 						{
 							B = 1.0,
 							K1 = 1.1,
-							DiscountOverlaps = true
-						}
-					},
-					{
-						"def", new ClassicSimilarity
-						{
 							DiscountOverlaps = true
 						}
 					},
