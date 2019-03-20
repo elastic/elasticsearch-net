@@ -76,7 +76,10 @@ namespace Tests.XPack.MachineLearning.PostJobData
 		protected override void IntegrationTeardown(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var callUniqueValue in values)
+			{
 				CloseJob(client, callUniqueValue.Value);
+				DeleteJob(client, callUniqueValue.Value);
+			}
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
