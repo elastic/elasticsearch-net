@@ -7,6 +7,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -505,9 +506,9 @@ namespace Tests.Search.Search
 
 	[SkipVersion("<6.1.0", "_clusters on response only available in 6.1.0+")]
 	public class CrossClusterSearchApiTests
-		: ApiIntegrationTestBase<CrossClusterSearchCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+		: ApiIntegrationTestBase<CrossCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
-		public CrossClusterSearchApiTests(CrossClusterSearchCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public CrossClusterSearchApiTests(CrossCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 
@@ -522,19 +523,21 @@ namespace Tests.Search.Search
 		protected override int ExpectStatusCode => 200;
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Index(Nest.Indices.Index<Project>().And("cluster_two:project"))
+			.Index(Nest.Indices.Index<Project>().And(RemoteIndex))
 			.Query(q => q
 				.MatchAll()
 			);
 
+		private static string RemoteIndex => $"{DefaultSeeder.RemoteClusterName}:project";
+
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>(Nest.Indices.Index<Project>().And("cluster_two:project"))
+		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>(Nest.Indices.Index<Project>().And(RemoteIndex))
 		{
 			Query = new QueryContainer(new MatchAllQuery())
 		};
 
-		protected override string UrlPath => $"/project%2Ccluster_two%3Aproject/doc/_search";
+		protected override string UrlPath => $"/project%2C{DefaultSeeder.RemoteClusterName}%3Aproject/doc/_search";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(c, f) => c.Search(f),
