@@ -57,6 +57,12 @@ namespace Tests.XPack.MachineLearning.GetOverallBuckets
 			}
 		}
 
+		protected override void IntegrationTeardown(IElasticClient client, CallUniqueValues values)
+		{
+			foreach (var callUniqueValue in values)
+				DeleteJob(client, callUniqueValue.Value);
+		}
+
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.GetOverallBuckets(CallIsolatedValue, f),
 			(client, f) => client.GetOverallBucketsAsync(CallIsolatedValue, f),
