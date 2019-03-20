@@ -7,6 +7,8 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 	/// </summary>
 	public class CrossCluster : ClientTestClusterBase
 	{
+		public static string ClusterTwo = "cluster_two";
+
 		protected override void SeedCluster()
 		{
 			new DefaultSeeder(Client).SeedNode();
@@ -14,8 +16,8 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 			// persist settings for cross cluster search, when remote-cluster is not available
 			Client.ClusterPutSettings(s => s
 				.Persistent(d => d
-					.Add($"cluster.remote.{DefaultSeeder.RemoteClusterName}.seeds", new [] { "127.0.0.1:9399" })
-					.Add($"cluster.remote.{DefaultSeeder.RemoteClusterName}.skip_unavailable", true)
+					.Add($"cluster.remote.{ClusterTwo}.seeds", new [] { "127.0.0.1:9399" })
+					.Add($"cluster.remote.{ClusterTwo}.skip_unavailable", true)
 				)
 			);
 		}
