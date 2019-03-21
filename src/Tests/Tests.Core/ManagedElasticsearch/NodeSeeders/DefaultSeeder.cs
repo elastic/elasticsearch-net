@@ -171,8 +171,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 						CommitActivity.CommitActivities,
 						(d, c) => d.Document(c).Routing(c.ProjectName)
 					)
-				)
-			};
+				) };
 			await Task.WhenAll(tasks);
 			await Client.RefreshAsync(Indices.Index(typeof(Project), typeof(Developer), typeof(ProjectPercolation)));
 		}
@@ -194,9 +193,8 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		);
 
 		private Task<ICreateIndexResponse> CreateProjectIndexAsync() => Client.CreateIndexAsync(typeof(Project), c => c
-			.Settings(settings => settings
-				.Analysis(ProjectAnalysisSettings)
-			)
+			.Settings(settings => settings.Analysis(ProjectAnalysisSettings))
+			.Mappings(ProjectMappings)
 			.Aliases(aliases => aliases
 				.Alias(ProjectsAliasName)
 				.Alias(ProjectsAliasFilter, a => a
@@ -206,25 +204,25 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 					.Filter<CommitActivity>(f => f.Term(p => p.Join, Infer.Relation<CommitActivity>()))
 				)
 			)
-			.Mappings(map => map
-				.Map<Project>(m => m
-					.RoutingField(r => r.Required())
-					.AutoMap()
-					.Properties(ProjectProperties)
-					.Properties<CommitActivity>(props => props
-						.Object<Developer>(o => o
-							.AutoMap()
-							.Name(p => p.Committer)
-							.Properties(DeveloperProperties)
-						)
-						.Text(t => t
-							.Name(p => p.ProjectName)
-							.Index(false)
-						)
+		);
+
+		public static ITypeMapping ProjectMappings(MappingsDescriptor map) => map
+			.Map<Project>(m => m
+				.RoutingField(r => r.Required())
+				.AutoMap()
+				.Properties(ProjectProperties)
+				.Properties<CommitActivity>(props => props
+					.Object<Developer>(o => o
+						.AutoMap()
+						.Name(p => p.Committer)
+						.Properties(DeveloperProperties)
+					)
+					.Text(t => t
+						.Name(p => p.ProjectName)
+						.Index(false)
 					)
 				)
-			)
-		);
+			);
 
 		public static IAnalysis ProjectAnalysisSettings(AnalysisDescriptor analysis)
 		{

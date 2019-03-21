@@ -4,6 +4,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -52,16 +53,22 @@ namespace Tests.Cluster.TaskManagement.GetTask
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			// get a suitable load of projects in order to get a decent task status out
-			var bulkResponse = client.IndexMany(Project.Generator.Generate(10000), "project-origin");
+			var sourceIndex = "project-get-task";
+			var targetIndex = "tasks-lists-get";
+			var bulkResponse = client.IndexMany(Project.Generator.Generate(10000), sourceIndex);
 			if (!bulkResponse.IsValid)
 				throw new Exception("failure in setting up integration");
 
+			var createIndex = client.CreateIndex(targetIndex, i => i
+				.Settings(settings => settings.Analysis(DefaultSeeder.ProjectAnalysisSettings))
+				.Mappings(DefaultSeeder.ProjectMappings)
+			);
+			createIndex.ShouldBeValid();
+
 			var response = client.ReindexOnServer(r => r
-				.Source(s => s
-					.Index("project-origin")
-				)
+				.Source(s => s.Index(sourceIndex))
 				.Destination(d => d
-					.Index("tasks-list-projects")
+					.Index(targetIndex)
 					.OpType(OpType.Create)
 				)
 				.Conflicts(Conflicts.Proceed)

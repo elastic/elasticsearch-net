@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
@@ -20,6 +21,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 
 		protected override void ExpectResponse(IReindexOnServerResponse response)
 		{
+			// hello
 			response.ServerError.Should().NotBeNull();
 			response.ServerError.Status.Should().Be(500);
 			response.ServerError.Error.Should().NotBeNull();
@@ -27,5 +29,13 @@ namespace Tests.Document.Multiple.ReindexOnServer
 			response.ServerError.Error.RootCause.First().Reason.Should().Contain("compil");
 			response.ServerError.Error.RootCause.First().Type.Should().Be("script_exception");
 		}
+
+		// https://youtrack.jetbrains.com/issue/RIDER-19912
+		[I] public override async Task ReturnsExpectedStatusCode() => base.ReturnsExpectedResponse();
+
+		[I] public override async Task ReturnsExpectedIsValid() => base.ReturnsExpectedIsValid();
+
+		[I] public override async Task ReturnsExpectedResponse() => base.ReturnsExpectedResponse();
+
 	}
 }

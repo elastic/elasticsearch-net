@@ -98,20 +98,25 @@ namespace Tests.Cluster.TaskManagement.TasksList
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			var seeder = new DefaultSeeder(Cluster.Client);
-			seeder.SeedNode();
-
 			// get a suitable load of projects in order to get a decent task status out
-			var bulkResponse = client.IndexMany(Project.Generator.Generate(20000));
+			var sourceIndex = "project-list-detailed";
+			var targetIndex = "tasks-lists-detailed";
+			var bulkResponse = client.IndexMany(Project.Generator.Generate(10000), sourceIndex);
 			if (!bulkResponse.IsValid)
 				throw new Exception("failure in setting up integration");
 
+			client.Refresh(sourceIndex);
+
+			var createIndex = client.CreateIndex(targetIndex, i => i
+				.Settings(settings => settings.Analysis(DefaultSeeder.ProjectAnalysisSettings))
+				.Mappings(DefaultSeeder.ProjectMappings)
+			);
+			createIndex.ShouldBeValid();
+
 			var response = client.ReindexOnServer(r => r
-				.Source(s => s
-					.Index(Infer.Index<Project>())
-				)
+				.Source(s => s.Index(sourceIndex))
 				.Destination(d => d
-					.Index("tasks-list-projects")
+					.Index(targetIndex)
 					.OpType(OpType.Create)
 				)
 				.Conflicts(Conflicts.Proceed)
