@@ -6,6 +6,9 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Configuration;
+using Tests.Core.Client;
+using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Core.Xunit;
@@ -202,6 +205,9 @@ namespace Tests.XPack.CrossClusterReplication
 
 		private static string CopyIndex(string v) => $"{v}-copy";
 
+		// see https://github.com/elastic/elasticsearch/pull/36647. difference in behaviour between <=6.5.3 and 6.5.4+
+		private static int ExpectedFollowerIndices => TestClient.Configuration.InRange("<=6.5.3") ? 4 : 1;
+
 		[I] public async Task CreateReadOnlyIndexIsOk() => await Assert<CreateIndexResponse>(CreateIndexStep, r => r.Acknowledged.Should().BeTrue());
 
 		[I] public async Task IndexingDataIsOk() => await AssertRunsToCompletion(IndexDataStep);
@@ -224,9 +230,9 @@ namespace Tests.XPack.CrossClusterReplication
 		{
 			r.IsValid.Should().BeTrue();
 			r.Indices.Should().NotBeEmpty();
-			r.Indices.Count.Should().BeGreaterOrEqualTo(4);
+			r.Indices.Count.Should().BeGreaterOrEqualTo(ExpectedFollowerIndices);
 			var currentIndices = r.Indices.Where(i => i.Index.StartsWith(Prefix)).ToArray();
-			currentIndices.Should().HaveCount(4);
+			currentIndices.Should().HaveCount(ExpectedFollowerIndices);
 			foreach (var i in currentIndices)
 			{
 				i.Index.Should().NotBeNullOrWhiteSpace("index name");
@@ -265,7 +271,7 @@ namespace Tests.XPack.CrossClusterReplication
 			r.IsValid.Should().BeTrue();
 			r.Indices.Should().NotBeEmpty();
 			var currentIndices = r.Indices.Where(i => i.Index.StartsWith(Prefix)).ToArray();
-			currentIndices.Should().HaveCount(4);
+			currentIndices.Should().HaveCount(ExpectedFollowerIndices);
 			AssertErrorsOnShardStats(currentIndices);
 		});
 
@@ -292,7 +298,7 @@ namespace Tests.XPack.CrossClusterReplication
 					}
 					if (s.FatalException != null)
 					{
-						//eventhough read exceptions is set fatal exception can still be null (race condition?).
+						//even though read exceptions is set fatal exception can still be null (race condition?).
 						s.FatalException.Should().NotBeNull($"{s.FollowerIndex}", because);
 						s.FatalException.Type.Should().NotBeNullOrWhiteSpace().And.EndWith("_exception", because);
 					}
