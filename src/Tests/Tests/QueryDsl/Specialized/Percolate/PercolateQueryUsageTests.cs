@@ -182,6 +182,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 	* See the Elasticsearch documentation on {ref_current}/query-dsl-percolate-query.html[percolate query] for more details.
 	*/
 	[SkipVersion("5.0.0-alpha1", "percolate query changed property in query dsl from 'percolator' to 'percolate'")]
+	[BlockedByIssue("https://github.com/elastic/elasticsearch/pull/39987")]
 	public class PercolateQueryExistingDocumentUsageTests : PercolateQueryUsageTestsBase
 	{
 		public PercolateQueryExistingDocumentUsageTests(WritableCluster i, EndpointUsage usage) : base(i, usage) { }
