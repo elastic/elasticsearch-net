@@ -189,6 +189,7 @@ namespace Nest
 		[DataMember(Name = "nested")]
 		INestedAggregation Nested { get; set; }
 
+		/// <inheritdoc cref="IParentAggregation"/>
 		[DataMember(Name = "parent")]
 		IParentAggregation Parent { get; set; }
 
@@ -319,6 +320,7 @@ namespace Nest
 
 		public INestedAggregation Nested { get; set; }
 
+		/// <inheritdoc cref="IParentAggregation"/>
 		public IParentAggregation Parent { get; set; }
 
 		public IPercentileRanksAggregation PercentileRanks { get; set; }
@@ -601,6 +603,7 @@ namespace Nest
 		) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Nested = d);
 
+		/// <inheritdoc cref="IParentAggregation"/>
 		public AggregationContainerDescriptor<T> Parent<TParent>(string name,
 			Func<ParentAggregationDescriptor<T, TParent>, IParentAggregation> selector
 		) where TParent : class =>

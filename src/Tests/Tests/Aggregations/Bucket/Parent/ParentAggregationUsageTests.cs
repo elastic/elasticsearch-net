@@ -20,6 +20,7 @@ namespace Tests.Aggregations.Bucket.Parent
 	 *
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-parent-aggregation.html[Parent Aggregation].
 	 */
+	[SkipVersion("<6.6.0", "Parent aggregation only available in Elasticsearch 6.6.0+")]
 	public class ParentAggregationUsageTests : ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<CommitActivity>, ISearchRequest, SearchDescriptor<CommitActivity>, SearchRequest<CommitActivity>>
 	{
 		public ParentAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
