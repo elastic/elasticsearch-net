@@ -16,7 +16,7 @@ using Tests.Framework.Integration;
 namespace Tests.XPack.CrossClusterReplication
 {
 	[SkipVersion("<6.5.0", "")]
-	[BlockedByIssue("CCR change in structure, will be fixed on 6.x and forward ported")]
+	[BlockedByIssue("CCR change i n structure, will be fixed on 6.x and forward ported")]
 	public class CrossClusterReplicationFollowTests : CoordinatedIntegrationTestBase<WritableCluster>
 	{
 		private const string CloseIndexStep = nameof(CloseIndexStep);

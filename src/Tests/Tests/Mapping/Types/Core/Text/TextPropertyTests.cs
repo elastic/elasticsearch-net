@@ -120,7 +120,7 @@ namespace Tests.Mapping.Types.Core.Text
 					position_increment_gap = 5,
 					search_analyzer = "standard",
 					search_quote_analyzer = "standard",
-					similarity = "bm25",
+					similarity = "BM25",
 					store = true,
 					norms = false,
 					term_vector = "with_positions_offsets"

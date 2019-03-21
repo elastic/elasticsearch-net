@@ -63,13 +63,6 @@ namespace Nest
 		Routing Routing { get; set; }
 
 		/// <summary>
-		/// The type of the document to fetch for percolation.
-		/// Can be specified to percolate an existing document instead of providing <see cref="Document" />
-		/// </summary>
-		[JsonProperty("type")]
-		string Type { get; }
-
-		/// <summary>
 		/// The expected version of the document to be fetched for percolation.
 		/// Can be specified to percolate an existing document instead of providing <see cref="Document" />
 		/// </summary>
@@ -108,9 +101,6 @@ namespace Nest
 			get => _routing ?? (Document == null ? null : new Routing(Document));
 			set => _routing = value;
 		}
-
-		/// <inheritdoc />
-		public string Type { get; } = "_doc";
 
 		/// <inheritdoc />
 		public long? Version { get; set; }
@@ -155,7 +145,6 @@ namespace Nest
 			set => _routing = value;
 		}
 
-		string IPercolateQuery.Type { get; } = "_doc";
 		long? IPercolateQuery.Version { get; set; }
 
 		/// <inheritdoc cref="IPercolateQuery.Field" />

@@ -18,7 +18,7 @@ namespace Tests.Mapping.Types.Core.Number
 				{
 					type = "integer",
 					doc_values = true,
-					similarity = "bm25",
+					similarity = "BM25",
 					store = true,
 					index = false,
 					boost = 1.5,
@@ -75,7 +75,7 @@ namespace Tests.Mapping.Types.Core.Number
 					type = "scaled_float",
 					scaling_factor = 10.0,
 					doc_values = true,
-					similarity = "classic",
+					similarity = "BM25",
 					store = true,
 					index = false,
 					boost = 1.5,

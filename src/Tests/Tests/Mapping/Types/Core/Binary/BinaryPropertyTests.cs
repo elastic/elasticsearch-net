@@ -18,7 +18,7 @@ namespace Tests.Mapping.Types.Core.Binary
 				{
 					type = "binary",
 					doc_values = true,
-					similarity = "bm25",
+					similarity = "BM25",
 					store = true
 				}
 			}

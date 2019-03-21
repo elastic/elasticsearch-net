@@ -191,9 +191,9 @@ namespace Tests.Document.Multiple.DeleteByQuery
 					)
 				);
 				Client.Index(new Project { Name = "project1", Description = "description" },
-					i => i.Index(index).Id(1).Refresh(Refresh.True).Routing(Project.Routing));
+					i => i.Index(index).Id(1).Refresh(Refresh.True).Routing(1));
 				Client.Index(new Project { Name = "project2", Description = "description" },
-					i => i.Index(index).Id(1).Routing(Project.Routing));
+					i => i.Index(index).Id(1).Routing(1));
 			}
 		}
 

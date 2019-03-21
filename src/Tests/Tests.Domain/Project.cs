@@ -92,8 +92,6 @@ namespace Tests.Domain
 			SourceOnly = TestConfiguration.Instance.Random.SourceSerializer ? new SourceOnlyObject() : null
 		};
 
-		public static readonly string Routing = Instance.Name;
-
 		private static readonly object InstanceAnonymousDefault = new
 		{
 			name = Projects.First().Name,

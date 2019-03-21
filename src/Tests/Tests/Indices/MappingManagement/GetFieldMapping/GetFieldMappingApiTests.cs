@@ -28,7 +28,7 @@ namespace Tests.Indices.MappingManagement.GetFieldMapping
 		protected override GetFieldMappingRequest Initializer => new GetFieldMappingRequest(OnIndices, Fields);
 		protected override Func<GetFieldMappingDescriptor<Project>, IGetFieldMappingRequest> Fluent => d => d.Index(OnIndices);
 
-		protected override string UrlPath => $"/project,queries/_mapping/field/name%2CleadDeveloper.ipAddress";
+		protected override string UrlPath => $"/project%2Cqueries/_mapping/field/name%2CleadDeveloper.ipAddress";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.GetFieldMapping<Project>(Fields, f),

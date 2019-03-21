@@ -29,7 +29,7 @@ namespace Tests.Mapping.Types.Core.Keyword
 					index_options = "freqs",
 					null_value = "null",
 					norms = false,
-					similarity = "bm25",
+					similarity = "BM25",
 					fields = new
 					{
 						foo = new

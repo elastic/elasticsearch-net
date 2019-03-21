@@ -19,7 +19,7 @@ namespace Tests.Document.Single.SourceExists
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
-		protected override Func<SourceExistsDescriptor<Project>, ISourceExistsRequest> Fluent => d => d;
+		protected override Func<SourceExistsDescriptor<Project>, ISourceExistsRequest> Fluent => d => d.Routing(CallIsolatedValue);
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 
 		protected override bool SupportsDeserialization => false;
@@ -38,7 +38,7 @@ namespace Tests.Document.Single.SourceExists
 			(client, r) => client.SourceExistsAsync(r)
 		);
 
-		protected override SourceExistsDescriptor<Project> NewDescriptor() => new SourceExistsDescriptor<Project>(CallIsolatedValue).Routing(CallIsolatedValue);
+		protected override SourceExistsDescriptor<Project> NewDescriptor() => new SourceExistsDescriptor<Project>(CallIsolatedValue);
 
 		protected override SourceExistsRequest<Project> Initializer => new SourceExistsRequest<Project>(CallIsolatedValue) { Routing = CallIsolatedValue };
 
@@ -52,7 +52,7 @@ namespace Tests.Document.Single.SourceExists
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 404;
-		protected override Func<SourceExistsDescriptor<Project>, ISourceExistsRequest> Fluent => d => d;
+		protected override Func<SourceExistsDescriptor<Project>, ISourceExistsRequest> Fluent => d => d.Routing(CallIsolatedValue);
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 
 		protected override bool SupportsDeserialization => false;
@@ -85,7 +85,7 @@ namespace Tests.Document.Single.SourceExists
 		);
 
 		protected override SourceExistsDescriptor<Project> NewDescriptor() =>
-			new SourceExistsDescriptor<Project>(index: IndexWithNoSource, id: CallIsolatedValue).Routing(CallIsolatedValue);
+			new SourceExistsDescriptor<Project>(index: IndexWithNoSource, id: CallIsolatedValue);
 
 		protected override SourceExistsRequest<Project> Initializer => new SourceExistsRequest<Project>(IndexWithNoSource, CallIsolatedValue) { Routing = CallIsolatedValue };
 

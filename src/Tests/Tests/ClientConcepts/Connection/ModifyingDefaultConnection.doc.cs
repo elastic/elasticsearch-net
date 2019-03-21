@@ -82,7 +82,7 @@ namespace Tests.ClientConcepts.Connection
 				},
 				hits = new
 				{
-					total = 25,
+					total = new { value = 25 },
 					max_score = 1.0,
 					hits = Enumerable.Range(1, 25).Select(i => (object)new
 					{
