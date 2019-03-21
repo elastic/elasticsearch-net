@@ -505,7 +505,7 @@ namespace Tests.Search.Search
 		}
 	}
 
-	[SkipVersion("<6.1.0", "_clusters on response only available in 6.1.0+")]
+	[SkipVersion("<6.5.0", "_clusters on response only available in 6.1.0+, but ability to skip_unavailable only works in 6.5.0+")]
 	public class CrossClusterSearchApiTests
 		: ApiIntegrationTestBase<CrossCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
