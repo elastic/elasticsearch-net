@@ -8,6 +8,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.Xunit;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -16,6 +17,7 @@ using static Tests.Domain.Helpers.TestValueHelper;
 namespace Tests.Search.MultiSearch
 {
 	[SkipVersion(">5.0.0-alpha1", "format of percolate query changed.")]
+	[BlockedByIssue("https://github.com/elastic/elasticsearch/pull/39987")]
 	public class MultiSearchApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, IMultiSearchResponse, IMultiSearchRequest, MultiSearchDescriptor, MultiSearchRequest>
 	{
