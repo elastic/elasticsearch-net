@@ -5,6 +5,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -17,6 +18,21 @@ namespace Tests.Cluster.ClusterReroute
 	{
 		public ClusterRerouteApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
+		{
+			// get a suitable load of projects in order to get a decent task status out
+			foreach (var (_, index) in values)
+			{
+				var createIndex = client.CreateIndex(index, i => i
+					.Settings(settings => settings.Analysis(DefaultSeeder.ProjectAnalysisSettings))
+					.Mappings(DefaultSeeder.ProjectMappings)
+				);
+				createIndex.ShouldBeValid();
+				client.IndexMany(Project.Generator.Generate(100), index).ShouldBeValid();
+				client.Refresh(index).ShouldBeValid();
+			}
+
+		}
 		protected override bool ExpectIsValid => false;
 
 		protected override object ExpectJson => new
@@ -28,7 +44,7 @@ namespace Tests.Cluster.ClusterReroute
 					{
 						"allocate_empty_primary", new
 						{
-							index = "project",
+							index = CallIsolatedValue,
 							node = "x",
 							shard = 0,
 							accept_data_loss = true
@@ -40,7 +56,7 @@ namespace Tests.Cluster.ClusterReroute
 					{
 						"allocate_stale_primary", new
 						{
-							index = "project",
+							index = CallIsolatedValue,
 							node = "x",
 							shard = 0,
 							accept_data_loss = true
@@ -52,7 +68,7 @@ namespace Tests.Cluster.ClusterReroute
 					{
 						"allocate_replica", new
 						{
-							index = "project",
+							index = CallIsolatedValue,
 							node = "x",
 							shard = 0
 						}
@@ -65,7 +81,7 @@ namespace Tests.Cluster.ClusterReroute
 						{
 							to_node = "y",
 							from_node = "x",
-							index = "project",
+							index = CallIsolatedValue,
 							shard = 0
 						}
 					}
@@ -75,7 +91,7 @@ namespace Tests.Cluster.ClusterReroute
 					{
 						"cancel", new
 						{
-							index = "project",
+							index = CallIsolatedValue,
 							node = "x",
 							shard = 1
 						}
@@ -88,30 +104,30 @@ namespace Tests.Cluster.ClusterReroute
 
 		protected override Func<ClusterRerouteDescriptor, IClusterRerouteRequest> Fluent => c => c
 			.AllocateEmptyPrimary(a => a
-				.Index<Project>()
+				.Index(CallIsolatedValue)
 				.Node("x")
 				.Shard(0)
 				.AcceptDataLoss(true)
 			)
 			.AllocateStalePrimary(a => a
-				.Index<Project>()
+				.Index(CallIsolatedValue)
 				.Node("x")
 				.Shard(0)
 				.AcceptDataLoss(true)
 			)
 			.AllocateReplica(a => a
-				.Index<Project>()
+				.Index(CallIsolatedValue)
 				.Node("x")
 				.Shard(0)
 			)
 			.Move(a => a
 				.ToNode("y")
 				.FromNode("x")
-				.Index("project")
+				.Index(CallIsolatedValue)
 				.Shard(0)
 			)
 			.Cancel(a => a
-				.Index("project")
+				.Index(CallIsolatedValue)
 				.Node("x")
 				.Shard(1)
 			);
@@ -122,10 +138,10 @@ namespace Tests.Cluster.ClusterReroute
 		{
 			Commands = new List<IClusterRerouteCommand>
 			{
-				new AllocateEmptyPrimaryRerouteCommand { Index = IndexName.From<Project>(), Node = "x", Shard = 0, AcceptDataLoss = true },
-				new AllocateStalePrimaryRerouteCommand { Index = IndexName.From<Project>(), Node = "x", Shard = 0, AcceptDataLoss = true },
-				new AllocateReplicaClusterRerouteCommand { Index = IndexName.From<Project>(), Node = "x", Shard = 0 },
-				new MoveClusterRerouteCommand { Index = IndexName.From<Project>(), FromNode = "x", ToNode = "y", Shard = 0 },
+				new AllocateEmptyPrimaryRerouteCommand { Index = CallIsolatedValue, Node = "x", Shard = 0, AcceptDataLoss = true },
+				new AllocateStalePrimaryRerouteCommand { Index = CallIsolatedValue, Node = "x", Shard = 0, AcceptDataLoss = true },
+				new AllocateReplicaClusterRerouteCommand { Index = CallIsolatedValue, Node = "x", Shard = 0 },
+				new MoveClusterRerouteCommand { Index = CallIsolatedValue, FromNode = "x", ToNode = "y", Shard = 0 },
 				new CancelClusterRerouteCommand() { Index = "project", Node = "x", Shard = 1 }
 			}
 		};
@@ -145,7 +161,8 @@ namespace Tests.Cluster.ClusterReroute
 			response.ServerError.Should().NotBeNull();
 			response.ServerError.Status.Should().Be(400);
 			response.ServerError.Error.Should().NotBeNull();
-			response.ServerError.Error.Reason.Should().Contain("failed to resolve");
+			//targetting unknown node x
+			response.ServerError.Error.Reason.Should().Contain("No data for shard [0] of index");
 			response.ServerError.Error.Type.Should().Contain("illegal_argument_exception");
 		}
 	}

@@ -5,7 +5,7 @@
 # tracked by git).
 
 # mode either u (unit test), i (integration test) or m (mixed mode)
-mode: u
+mode: i
 # the elasticsearch version that should be started
 # Can be a snapshot version of sonatype or "latest" to get the latest snapshot of sonatype
 elasticsearch_version: 7.0.0-beta1
@@ -20,7 +20,7 @@ test_against_already_running_elasticsearch: true
 
 #random_source_serializer: true
 #random_old_connection: true
-seed: 69819
+seed: 94620
 
 # Can be helpful to speed up tests runs as setting this to true only randomly tests a single overload of the api rather than all 4.
 # Can also help keep the noise down in case of test failures

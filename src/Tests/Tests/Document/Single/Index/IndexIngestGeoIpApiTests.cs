@@ -99,16 +99,19 @@ namespace Tests.Document.Single.Index
 					{
 						Field = "leadDeveloper.geoIp.city_name",
 						TargetField = "leadDeveloper.geoIp.cityName",
+						IgnoreMissing = true,
 					},
 					new RenameProcessor
 					{
 						Field = "leadDeveloper.geoIp.country_iso_code",
 						TargetField = "leadDeveloper.geoIp.countryIsoCode",
+						IgnoreMissing = true,
 					},
 					new RenameProcessor
 					{
 						Field = "leadDeveloper.geoIp.region_name",
 						TargetField = "leadDeveloper.geoIp.regionName",
+						IgnoreMissing = true,
 					}
 				}
 			});
@@ -136,12 +139,14 @@ namespace Tests.Document.Single.Index
 
 			geoIp.Should().NotBeNull();
 			geoIp.ContinentName.Should().Be("Europe");
-			geoIp.CityName.Should().Be("Reykjavik");
 			geoIp.CountryIsoCode.Should().Be("IS");
-			geoIp.RegionName.Should().Be("Capital Region");
+			// TODO: no longer returned find an IP that works?
+			// https://github.com/elastic/elasticsearch/issues/37909
+			//geoIp.RegionName.Should().Be("Capital Region");
+			//geoIp.CityName.Should().Be("Reykjavik");
 			geoIp.Location.Should().NotBeNull();
-			geoIp.Location.Latitude.Should().Be(64.1383);
-			geoIp.Location.Longitude.Should().Be(-21.8959);
+			geoIp.Location.Latitude.Should().Be(65);
+			geoIp.Location.Longitude.Should().Be(-18);
 		}
 	}
 }
