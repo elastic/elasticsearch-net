@@ -53,7 +53,7 @@ namespace Tests.Aggregations
 
 		protected virtual QueryContainer QueryScope { get; } = new TermQuery { Field = "type", Value = Project.TypeName};
 
-		protected virtual object QueryScopeJson { get; } = new { term = new { field = "type", value = Project.TypeName } };
+		protected virtual object QueryScopeJson { get; } = new { term = new { type = new { value = Project.TypeName } } };
 		protected override string UrlPath => $"/project/_search";
 
 		// https://youtrack.jetbrains.com/issue/RIDER-19912

@@ -23,7 +23,7 @@ namespace Tests.Document.Single.Delete
 		protected override DeleteRequest<Project> Initializer => new DeleteRequest<Project>(CallIsolatedValue) { Routing = CallIsolatedValue };
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/project/_doc/{CallIsolatedValue}";
+		protected override string UrlPath => $"/project/_doc/{CallIsolatedValue}?routing={U(CallIsolatedValue)}";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -66,7 +66,7 @@ namespace Tests.Document.Single.Delete
 		protected override DeleteRequest<Project> Initializer => new DeleteRequest<Project>(CallIsolatedValue) { Routing = CallIsolatedValue };
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/project/_doc/{CallIsolatedValue}";
+		protected override string UrlPath => $"/project/_doc/{CallIsolatedValue}?routing={U(CallIsolatedValue)}";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.Delete<Project>(CallIsolatedValue, f),
@@ -105,7 +105,7 @@ namespace Tests.Document.Single.Delete
 		protected override DeleteRequest<Project> Initializer => new DeleteRequest<Project>(BadIndex, CallIsolatedValue) { Routing = CallIsolatedValue };
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/{BadIndex}/_doc/{CallIsolatedValue}";
+		protected override string UrlPath => $"/{BadIndex}/_doc/{CallIsolatedValue}?routing={U(CallIsolatedValue)}";
 
 		private string BadIndex => CallIsolatedValue + "-bad-index";
 

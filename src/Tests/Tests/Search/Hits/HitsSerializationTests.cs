@@ -22,7 +22,7 @@ namespace Tests.Search.Hits
 				""failed"" : 0
 				},
 				""hits"" : {
-				""total"" : 1,
+				""total"" : { ""value"" : 4 },
 				""max_score"" : 0.0,
 				""hits"" : [ ]
 				},
@@ -33,7 +33,7 @@ namespace Tests.Search.Hits
 					""doc_count"" : 4,
 					""grand_children_top_hits"" : {
 						""hits"" : {
-						""total"" : 4,
+						""total"" : { ""value"" : 4 },
 						""max_score"" : 1.4E-45,
 						""hits"" : [ {
 							""_index"" : ""people"",
@@ -51,21 +51,21 @@ namespace Tests.Search.Hits
 							""inner_hits"" : {
 							""great_grand_children_inner_hits"" : {
 								""hits"" : {
-								""total"" : 0,
+								""total"" : { ""value"" : 0 },
 								""max_score"" : null,
 								""hits"" : [ ]
 								}
 							},
 							""children_inner_hits"" : {
 								""hits"" : {
-								""total"" : 0,
+								""total"" : { ""value"" : 0 },
 								""max_score"" : null,
 								""hits"" : [ ]
 								}
 							},
 							""grand_children_inner_hits"" : {
 								""hits"" : {
-								""total"" : 0,
+								""total"" : { ""value"" : 0 },
 								""max_score"" : null,
 								""hits"" : [ ]
 								}
@@ -87,7 +87,7 @@ namespace Tests.Search.Hits
 							""inner_hits"" : {
 							""great_grand_children_inner_hits"" : {
 								""hits"" : {
-								""total"" : 2,
+								""total"" : { ""value"" : 2 },
 								""max_score"" : 2.178655,
 								""hits"" : [ {
 									""_index"" : ""people"",
@@ -138,14 +138,14 @@ namespace Tests.Search.Hits
 							},
 							""children_inner_hits"" : {
 								""hits"" : {
-								""total"" : 0,
+								""total"" : { ""value"" : 0 },
 								""max_score"" : null,
 								""hits"" : [ ]
 								}
 							},
 							""grand_children_inner_hits"" : {
 								""hits"" : {
-								""total"" : 0,
+								""total"" : { ""value"" : 0 },
 								""max_score"" : null,
 								""hits"" : [ ]
 								}
@@ -167,14 +167,14 @@ namespace Tests.Search.Hits
 							""inner_hits"" : {
 							""great_grand_children_inner_hits"" : {
 								""hits"" : {
-								""total"" : 0,
+								""total"" : { ""value"" : 0 },
 								""max_score"" : null,
 								""hits"" : [ ]
 								}
 							},
 							""children_inner_hits"" : {
 								""hits"" : {
-								""total"" : 1,
+								""total"" : { ""value"" : 0 },
 								""max_score"" : 0.0,
 								""hits"" : [ {
 									""_index"" : ""people"",
@@ -190,7 +190,7 @@ namespace Tests.Search.Hits
 							},
 							""grand_children_inner_hits"" : {
 								""hits"" : {
-								""total"" : 0,
+								""total"" : { ""value"" : 0 },
 								""max_score"" : null,
 								""hits"" : [ ]
 								}
@@ -212,7 +212,7 @@ namespace Tests.Search.Hits
 							""inner_hits"" : {
 							""great_grand_children_inner_hits"" : {
 								""hits"" : {
-								""total"" : 1,
+								""total"" : { ""value"" : 1 },
 								""max_score"" : 2.178655,
 								""hits"" : [ {
 									""_index"" : ""people"",
@@ -241,7 +241,7 @@ namespace Tests.Search.Hits
 							},
 							""children_inner_hits"" : {
 								""hits"" : {
-								""total"" : 1,
+								""total"" : { ""value"" : 1 },
 								""max_score"" : 0.0,
 								""hits"" : [ {
 									""_index"" : ""people"",
@@ -257,7 +257,7 @@ namespace Tests.Search.Hits
 							},
 							""grand_children_inner_hits"" : {
 								""hits"" : {
-								""total"" : 0,
+								""total"" : { ""value"" : 0 },
 								""max_score"" : null,
 								""hits"" : [ ]
 								}

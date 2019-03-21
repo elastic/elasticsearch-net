@@ -22,7 +22,7 @@ namespace Tests.Document.Multiple.Bulk
 			new Dictionary<string, object> { { "index", new { _id = Project.Instance.Name, routing = Project.Instance.Name } } },
 			Project.InstanceAnonymous,
 			new Dictionary<string, object>
-				{ { "index", new { _id = Project.Instance.Name, routing = Project.Instance.Name, version = 0 } } },
+				{ { "index", new { _id = Project.Instance.Name, routing = Project.Instance.Name, if_seq_no = -1 } } },
 			Project.InstanceAnonymous,
 		};
 

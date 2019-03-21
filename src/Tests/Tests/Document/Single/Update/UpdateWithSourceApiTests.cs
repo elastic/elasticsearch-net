@@ -34,7 +34,7 @@ namespace Tests.Document.Single.Update
 		protected override int ExpectStatusCode => 200;
 
 		protected override Func<UpdateDescriptor<Project, Project>, IUpdateRequest<Project, Project>> Fluent => d => d
-			.Routing(Project.Routing)
+			.Routing(CallIsolatedValue)
 			.Doc(Project.Instance)
 			.Source(s => s.Includes(f => f.Field(p => p.Name).Field("sourceOnly")))
 			.DocAsUpsert();

@@ -37,7 +37,7 @@ namespace Tests.Document.Single.TermVectors
 
 		protected override Func<TermVectorsDescriptor<Project>, ITermVectorsRequest<Project>> Fluent => d => d
 			.Id(Id(Project.Instance))
-			.Routing(Project.Routing)
+			.Routing(Project.Instance.Name)
 			.Offsets()
 			.Filter(f => f
 				.MaximimumNumberOfTerms(3)
@@ -53,7 +53,7 @@ namespace Tests.Document.Single.TermVectors
 
 		protected override TermVectorsRequest<Project> Initializer => new TermVectorsRequest<Project>((Id)Project.Instance.Name)
 		{
-			Routing = Project.Routing,
+			Routing = Project.Instance.Name,
 			Offsets = true,
 			Filter = new TermVectorFilter
 			{
@@ -68,7 +68,7 @@ namespace Tests.Document.Single.TermVectors
 		};
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/project/_termvectors/{U(Project.Instance.Name)}?offsets=true&routing={U(Project.Routing)}";
+		protected override string UrlPath => $"/project/_termvectors/{U(Project.Instance.Name)}?offsets=true&routing={U(Project.Instance.Name)}";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.TermVectors(f),

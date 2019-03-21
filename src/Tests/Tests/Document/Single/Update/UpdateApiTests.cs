@@ -28,6 +28,7 @@ namespace Tests.Document.Single.Update
 		protected override int ExpectStatusCode => 200;
 
 		protected override Func<UpdateDescriptor<Project, Project>, IUpdateRequest<Project, Project>> Fluent => u => u
+			.Routing(CallIsolatedValue)
 			.Doc(Project.Instance)
 			.DocAsUpsert()
 			.DetectNoop();
@@ -59,7 +60,7 @@ namespace Tests.Document.Single.Update
 		);
 
 		protected override UpdateDescriptor<Project, Project> NewDescriptor() =>
-			new UpdateDescriptor<Project, Project>(CallIsolatedValue).Routing(CallIsolatedValue);
+			new UpdateDescriptor<Project, Project>(CallIsolatedValue);
 
 		protected override void ExpectResponse(IUpdateResponse<Project> response)
 		{

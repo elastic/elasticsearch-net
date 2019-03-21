@@ -18,7 +18,7 @@ namespace Tests.Mapping.Types.Core.Date
 				{
 					type = "date",
 					doc_values = false,
-					similarity = "bm25",
+					similarity = "BM25",
 					store = true,
 					index = false,
 					boost = 1.2,
