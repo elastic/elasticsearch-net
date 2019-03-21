@@ -61,7 +61,7 @@ module Versioning =
     let CurrentAssemblyFileVersion = parse (sprintf "%s.%s.%s.0" (CurrentVersion.Major.ToString()) (CurrentVersion.Minor.ToString()) (CurrentVersion.Patch.ToString()))
 
     let private sn = if isMono then "sn" else Paths.CheckedInTool("sn/sn.exe")
-    let private oficialToken = "96c599bbe3e70f5d"
+    let private officialToken = "96c599bbe3e70f5d"
 
     let private validate dll name = 
         let out = (ExecProcessAndReturnMessages(fun p ->
@@ -72,7 +72,7 @@ module Versioning =
         let valid = (out.ExitCode, out.Messages.FindIndex(fun s -> s.Contains("is valid")))
         match valid with
         | (0, i) when i >= 0 -> trace (sprintf "%s was signed correctly" name) 
-        | (_, _) -> failwithf "{0} was not validly signed"
+        | (_, _) -> failwithf "%s was not validly signed" name
         
         let out = (ExecProcessAndReturnMessages(fun p ->
                     p.FileName <- sn
@@ -84,9 +84,9 @@ module Versioning =
     
         let valid = (out.ExitCode, token)
         match valid with
-        | (0, t) when t = oficialToken  -> 
+        | (0, t) when t = officialToken  -> 
           trace (sprintf "%s was signed with official key token %s" name t) 
-        | (_, t) -> traceFAKE "%s was not signed with the official token: %s but %s" name oficialToken t
+        | (_, t) -> traceFAKE "%s was not signed with the official token: %s but %s" name officialToken t
         
     let private validateDllStrongName dll name =
         match fileExists dll with

@@ -45,17 +45,8 @@ module Release =
             let semanticVersion = SemVerHelper.parse version
             sprintf "%i" (semanticVersion.Major + 1)
             
-    let private addKeyValue (e:Expr<string>) (builder:StringBuilder) =
-        // the binding for this tuple looks like key/value should 
-        // be round the other way (but it's correct as is)...
-        let (value,key) = 
-            match e with
-            | PropertyGet (eo, pi, li) -> (pi.Name, (pi.GetValue(e) |> string))
-            | ValueWithName (obj,ty,nm) -> ((obj |> string), nm)
-            | _ -> failwith (sprintf "%A is not a let-bound value. %A" e (e.GetType()))
-            
-        if (isNotNullOrEmpty value) then builder.AppendFormat("{0}=\"{1}\";", key, value)
-        else builder
+    let private addKeyValue (key:string) (value:string) (builder:StringBuilder) =
+        builder.AppendFormat("{0}=\"{1}\";", key, value)
 
     let private currentVersion = sprintf "%O" <| Versioning.CurrentVersion
     let private currentMajorVersion = sprintf "%i" <| Versioning.CurrentVersion.Major
@@ -64,9 +55,9 @@ module Release =
 
     let private props() =
         new StringBuilder()
-        |> addKeyValue <@currentMajorVersion@>
-        |> addKeyValue <@nextMajorVersion@>
-        |> addKeyValue <@year@>
+        |> addKeyValue "currentMajorVersion" currentMajorVersion
+        |> addKeyValue "nextMajorVersion" nextMajorVersion
+        |> addKeyValue "year" year
 
     let pack file n properties = 
         Tooling.Nuget.Exec [ "pack"; file; 
@@ -147,8 +138,8 @@ module Release =
 
             let properties =
                 props()
-                |> addKeyValue <@jsonDotNetCurrentVersion@>
-                |> addKeyValue <@jsonDotNetNextVersion@>
+                |> addKeyValue "jsonDotNetCurrentVersion" jsonDotNetCurrentVersion
+                |> addKeyValue "jsonDotNetNextVersion" jsonDotNetNextVersion
                 |> toText
             let nugetId = p.NugetId 
             let nuspec = (sprintf @"build/%s.nuspec" nugetId)
