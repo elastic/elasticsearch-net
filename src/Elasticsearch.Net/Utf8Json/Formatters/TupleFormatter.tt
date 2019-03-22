@@ -31,7 +31,6 @@
 #if NETSTANDARD
 
 using System;
-using Utf8Json.Internal;
 
 namespace Elasticsearch.Net
 {
