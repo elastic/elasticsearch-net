@@ -6,12 +6,15 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.Xunit;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
 
 namespace Tests.XPack.Watcher.ExecuteWatch
 {
+	// TODO 7.x setup of slack now needs the secret store
+	[SkipNonStructuralChange]
 	public class ExecuteWatchApiTests
 		: ApiIntegrationTestBase<XPackCluster, IExecuteWatchResponse, IExecuteWatchRequest, ExecuteWatchDescriptor, ExecuteWatchRequest>
 	{

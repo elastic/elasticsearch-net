@@ -57,7 +57,7 @@ namespace Tests.XPack.Security.User.InvalidateUserAccessToken
 
 		protected override InvalidateUserAccessTokenDescriptor NewDescriptor() => new InvalidateUserAccessTokenDescriptor(CurrentAccessToken);
 
-		protected override void ExpectResponse(IInvalidateUserAccessTokenResponse response) => response.Created.Should().BeTrue();
+		protected override void ExpectResponse(IInvalidateUserAccessTokenResponse response) => response.InvalidatedTokens.Should().BeGreaterThan(0);
 	}
 
 	public class InvalidateUserAccessTokenBadPasswordApiTests : InvalidateUserAccessTokenApiTests

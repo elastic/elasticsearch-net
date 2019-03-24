@@ -11,7 +11,7 @@ using Tests.Domain.Extensions;
 
 namespace Tests.Core.ManagedElasticsearch.Clusters
 {
-	public class ClientTestClusterBase : XunitClusterBase<ClientTestClusterConfiguration>, INestTestCluster
+	public abstract class ClientTestClusterBase : XunitClusterBase<ClientTestClusterConfiguration>, INestTestCluster
 	{
 		public ClientTestClusterBase() : this(new ClientTestClusterConfiguration()) { }
 
