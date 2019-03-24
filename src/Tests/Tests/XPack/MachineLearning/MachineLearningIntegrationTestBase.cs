@@ -13,6 +13,8 @@ namespace Tests.XPack.MachineLearning
 {
 	[SkipVersion("<5.5.0", "Machine Learning does not exist in previous versions")]
 	[SkipOnTeamCity]
+	//TODO: seeder blows up on multiple types
+	[SkipNonStructuralChange]
 	public abstract class MachineLearningIntegrationTestBase<TResponse, TInterface, TDescriptor, TInitializer>
 		: ApiIntegrationTestBase<MachineLearningCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		where TResponse : class, IResponse
