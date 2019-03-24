@@ -3,11 +3,14 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.Xunit;
 using Tests.Framework;
 using Tests.Framework.Integration;
 
 namespace Tests.XPack.Watcher.DeleteWatch
 {
+	// TODO 7.x setup of slack now needs the secret store
+	[SkipNonStructuralChange]
 	public class DeleteWatchApiTests
 		: ApiIntegrationTestBase<XPackCluster, IDeleteWatchResponse, IDeleteWatchRequest, DeleteWatchDescriptor, DeleteWatchRequest>
 	{
@@ -73,6 +76,8 @@ namespace Tests.XPack.Watcher.DeleteWatch
 		}
 	}
 
+	// TODO 7.x setup of slack now needs the secret store
+	[SkipNonStructuralChange]
 	public class DeleteNonExistentWatchApiTests
 		: ApiIntegrationTestBase<XPackCluster, IDeleteWatchResponse, IDeleteWatchRequest, DeleteWatchDescriptor, DeleteWatchRequest>
 	{
