@@ -6,6 +6,7 @@ namespace ApiGenerator.Domain
 {
 	public class Constructor
 	{
+		private const string Indent = "\r\n\t\t";
 		public string AdditionalCode { get; set; } = string.Empty;
 		public bool Parameterless { get; set; }
 		public string Body { get; set; }
@@ -49,7 +50,7 @@ namespace ApiGenerator.Domain
 				{
 					Parameterless = string.IsNullOrEmpty(constParams),
 					Generated = generated,
-					Description = path.GetXmlDocs("\r\n\t\t"),
+					Description = path.GetXmlDocs(Indent),
 					//Body = isDocumentApi ? $" => Q(\"routing\", new Routing(() => AutoRouteDocument()));" : string.Empty
 					Body = string.Empty
 				});
@@ -65,7 +66,7 @@ namespace ApiGenerator.Domain
 					{
 						Parameterless = string.IsNullOrEmpty(constructorArgs),
 						Generated = generated,
-						Description = path.GetXmlDocs("\r\n\t\t", skipResolvable: true),
+						Description = path.GetXmlDocs(Indent, skipResolvable: true),
 						Body = string.Empty
 					});
 
@@ -78,7 +79,7 @@ namespace ApiGenerator.Domain
 						Parameterless = string.IsNullOrEmpty(docPathConstArgs),
 						Generated = $"public {typeName}({docPathConstArgs}) : this({docPathBaseArgs})",
 						AdditionalCode = $"partial void DocumentFromPath({generic} document);",
-						Description = docPath.GetXmlDocs("\r\n\t\t", skipResolvable: true, documentConstructor: true),
+						Description = docPath.GetXmlDocs(Indent, skipResolvable: true, documentConstructor: true),
 						Body = "=> DocumentFromPath(documentWithId);"
 					});
 				}
@@ -90,7 +91,8 @@ namespace ApiGenerator.Domain
 				{
 					Parameterless = true,
 					Generated = $"internal {typeName}() : base()",
-					Description = "///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>",
+					Description =
+						$"///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>{Indent}[SerializationConstructor]",
 				});
 			}
 			return constructors;
