@@ -1,0 +1,40 @@
+jobs:
+- job: LinuxUnitTests
+  pool:
+    vmImage: 'ubuntu-16.04'
+  steps:
+  - script: ./build.sh test-one skipdocs
+    displayName: 'build and unit test'
+  - task: PublishTestResults@2
+    inputs:
+        testRunner: VSTest
+        testResultsFiles: 'src/Tests/Tests/**/*.trx'
+        testRunTitle: Linux Unit Tests
+
+- job: WindowsCanaryTests
+  pool:
+    vmImage: 'vs2017-win2016'
+  steps:
+  - script: build.bat canary skipdocs
+    displayName: 'build and unit test'
+  - task: PublishTestResults@2
+    inputs:
+      testRunner: VSTest
+      testResultsFiles: 'src/Tests/Tests/**/*.trx'
+      testRunTitle: Windows Unit Tests
+
+# Enable this when backporting to 7.x 6.x and 5.x, master not in integratable state until 7.x stabalizes and merged to master again
+#- job: WindowsIntegrationTests
+#  dependsOn: WindowsCanaryTests
+#  pool:
+#      vmImage: 'vs2017-win2016'
+#  strategy:
+#    maxParallel: 5
+#    matrix:
+#      es653:
+#        esVersion: '6.5.3'
+#      es632:
+#        esVersion: '6.3.2'
+#  steps:
+#      - script: 'build.bat integrate $(esVersion) skipdocs'
+#        displayName: '$(esVersion) integration tests'
