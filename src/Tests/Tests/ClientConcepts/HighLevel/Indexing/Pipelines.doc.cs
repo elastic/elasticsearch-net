@@ -37,21 +37,24 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		*/
 		public async Task IngestionPipeline()
 		{
+			client.CreateIndex("people");
+
 			client.Map<Person>(p => p
+				.Index("people")
 				.AutoMap() //<1> automatically create the mapping from the type
 				.Properties(props => props
-					.Keyword(k => k.Name("Initials")) //<2> create an additional keyword field to store the initials
+						.Keyword(k => k.Name("initials")) //<2> create an additional field to store the initials
 				)
 			);
 
 			client.PutPipeline("person-pipeline", p => p
 				.Processors(ps => ps
 					.Uppercase<Person>(u => u
-						.Field(t => t.LastName) //<3> uppercase the lastname
+							.Field(t => t.LastName) //<3> uppercase the lastname
 					)
 					.Script(s => s
-						.Lang("painless") //<4> use a painless script to populate the Initials field
-						.Source("ctx.Initials = doc['Firstname.keyword'].value.substring(1) + doc['Lastname.keyword'].value.substring(1)"))
+						.Lang("painless") //<4> use a painless script to populate the new field
+						.Source("ctx.initials = ctx.firstName.substring(0,1) + ctx.lastName.substring(0,1)"))
 				)
 			);
 
@@ -62,7 +65,29 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				LastName = "Laarman"
 			};
 
-			var indexResponse = client.Index(person, p => p.Pipeline("person-pipeline")); //<5> index the document using the created pipeline
+			var indexResponse = client.Index(person, p => p.Index("people").Pipeline("person-pipeline")); //<5> index the document using the created pipeline
+		}
+
+		/**
+		* ==== Increasing timeouts
+		* When a pipeline is specified, there will be the added overhead of document enrichment when indexing, the example given above, the excution
+		* of the uppercasing and the painless script.
+		*
+		* For large bulk requests, it could be prudent to increase the default indexing timeout to avoid exceptions.
+		*/
+		public async Task IncreasingTimeouts()
+		{
+			client.Bulk(b => b
+				.Index("people")
+				.Pipeline("person-pipeline")
+				.Timeout("5m") //<1> increases the bulk timeout to 5 minutes
+				.Index<Person>(/*snip*/)
+				.Index<Person>(/*snip*/)
+				.Index<Person>(/*snip*/)
+				.RequestConfiguration(rc => rc
+						.RequestTimeout(TimeSpan.FromMinutes(5)) //<2> increases the request timeout to 5 minutes
+				)
+			);
 		}
 	}
 }
