@@ -18,7 +18,7 @@ namespace Nest
 		/// If <c>true</c> and <see cref="Field" /> does not exist or is null,
 		/// the processor quietly exits without modifying the document. Default is <c>false</c>
 		/// </summary>
-		[JsonProperty("ignore_missing")]
+		[DataMember(Name = "ignore_missing")]
 		bool? IgnoreMissing { get; set; }
 	}
 
