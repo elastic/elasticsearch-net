@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
 
@@ -15,14 +16,22 @@ namespace Nest
 		/// <summary>The field to store the user information into. </summary>
 		[JsonProperty("field")]
 		Field Field { get; set; }
-	}
 
+		/// <summary>
+		/// Controls what user related properties are added to the field.
+		/// Defaults to username, roles, email, full_name, metadata
+		/// </summary>
+		[JsonProperty("properties")]
+		IEnumerable<string> Properties { get; set; }
+	}
 
 	/// <inheritdoc cref="ISetSecurityUserProcessor" />
 	public class SetSecurityUserProcessor : ProcessorBase, ISetSecurityUserProcessor
 	{
-		/// <inheritdoc cref="ISetSecurityUserProcessor.Field"/>
+		/// <inheritdoc />
 		public Field Field { get; set; }
+		/// <inheritdoc />
+		public IEnumerable<string> Properties { get; set; }
 		protected override string Name => "set_security_user";
 	}
 
@@ -33,6 +42,7 @@ namespace Nest
 	{
 		protected override string Name => "set_security_user";
 		Field ISetSecurityUserProcessor.Field { get; set; }
+		IEnumerable<string> ISetSecurityUserProcessor.Properties { get; set; }
 
 		/// <inheritdoc cref="ISetSecurityUserProcessor.Field"/>
 		public SetSecurityUserProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
@@ -40,5 +50,13 @@ namespace Nest
 		/// <inheritdoc cref="ISetSecurityUserProcessor.Field"/>
 		public SetSecurityUserProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
 			Assign(a => a.Field = objectPath);
+
+		/// <inheritdoc cref="ISetSecurityUserProcessor.Properties"/>
+		public SetSecurityUserProcessorDescriptor<T> Properties(IEnumerable<string> properties) =>
+			Assign(a => a.Properties = properties);
+
+		/// <inheritdoc cref="ISetSecurityUserProcessor.Properties"/>
+		public SetSecurityUserProcessorDescriptor<T> Properties(params string[] properties) =>
+			Assign(a => a.Properties = properties);
 	}
 }

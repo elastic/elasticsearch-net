@@ -4,10 +4,17 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// Removes existing fields. If one field doesn't exist, an exception will be thrown.
+	/// </summary>
 	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ProcessorJsonConverter<RemoveProcessor>))]
 	public interface IRemoveProcessor : IProcessor
 	{
+		// TODO: Change to Fields in 7.x
+		/// <summary>
+		/// fields to be removed. Supports template snippets.
+		/// </summary>
 		[JsonProperty("field")]
 		Field Field { get; set; }
 
@@ -22,10 +29,10 @@ namespace Nest
 	/// <inheritdoc cref="IRemoveProcessor" />
 	public class RemoveProcessor : ProcessorBase, IRemoveProcessor
 	{
-		/// <inheritdoc cref="IRemoveProcessor.Field" />
+		/// <inheritdoc />
 		public Field Field { get; set; }
 
-		/// <inheritdoc cref="IRemoveProcessor.IgnoreMissing" />
+		/// <inheritdoc />
 		public bool? IgnoreMissing { get; set; }
 
 		protected override string Name => "remove";

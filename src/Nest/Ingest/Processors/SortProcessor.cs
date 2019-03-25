@@ -24,16 +24,30 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("order")]
 		SortOrder? Order { get; set; }
+
+		/// <summary>
+		/// The field to assign the sorted value to, by default field is updated in-place
+		/// </summary>
+		[JsonProperty("target_field")]
+		Field TargetField { get; set; }
 	}
 
+	/// <inheritdoc cref="ISortProcessor" />
 	public class SortProcessor : ProcessorBase, ISortProcessor
 	{
+		/// <inheritdoc />
 		public Field Field { get; set; }
 
+		/// <inheritdoc />
 		public SortOrder? Order { get; set; }
+
+		/// <inheritdoc />
+		public Field TargetField { get; set; }
+
 		protected override string Name => "sort";
 	}
 
+	/// <inheritdoc cref="ISortProcessor" />
 	public class SortProcessorDescriptor<T>
 		: ProcessorDescriptorBase<SortProcessorDescriptor<T>, ISortProcessor>, ISortProcessor
 		where T : class
@@ -42,12 +56,23 @@ namespace Nest
 
 		Field ISortProcessor.Field { get; set; }
 		SortOrder? ISortProcessor.Order { get; set; }
+		Field ISortProcessor.TargetField { get; set; }
 
+		/// <inheritdoc cref="ISortProcessor.Field" />
 		public SortProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
+		/// <inheritdoc cref="ISortProcessor.Field" />
 		public SortProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
 			Assign(a => a.Field = objectPath);
 
+		/// <inheritdoc cref="ISortProcessor.TargetField" />
+		public SortProcessorDescriptor<T> TargetField(Field field) => Assign(a => a.TargetField = field);
+
+		/// <inheritdoc cref="ISortProcessor.TargetField" />
+		public SortProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) =>
+			Assign(a => a.TargetField = objectPath);
+
+		/// <inheritdoc cref="ISortProcessor.Order" />
 		public SortProcessorDescriptor<T> Order(SortOrder? order = SortOrder.Ascending) =>
 			Assign(a => a.Order = order);
 	}

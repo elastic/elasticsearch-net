@@ -5,10 +5,17 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// Processor to automatically parse messages (or specific event fields) which are of the key=value variety.
+	/// </summary>
 	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ProcessorJsonConverter<KeyValueProcessor>))]
 	public interface IKeyValueProcessor : IProcessor
 	{
+		/// <summary> List of keys to exclude from document </summary>
+		[JsonProperty("exclude_keys")]
+		IEnumerable<string> ExcludeKeys { get; set; }
+
 		/// <summary> The field to be parsed </summary>
 		[JsonProperty("field")]
 		Field Field { get; set; }
@@ -18,7 +25,8 @@ namespace Nest
 		string FieldSplit { get; set; }
 
 		/// <summary>
-		/// If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document
+		/// If <c>true</c> and <see cref="Field" /> does not exist or is `null`,
+		/// the processor quietly exits without modifying the document
 		/// </summary>
 		[JsonProperty("ignore_missing")]
 		bool? IgnoreMissing { get; set; }
@@ -26,6 +34,10 @@ namespace Nest
 		/// <summary> List of keys to filter and insert into document. Defaults to including all keys </summary>
 		[JsonProperty("include_keys")]
 		IEnumerable<string> IncludeKeys { get; set; }
+
+		/// <summary> Prefix to be added to extracted keys </summary>
+		[JsonProperty("prefix")]
+		string Prefix { get; set; }
 
 		/// <summary> If true strip brackets (), &lt;&gt;, [] as well as quotes ' and " from extracted values </summary>
 		[JsonProperty("strip_brackets")]
@@ -52,6 +64,9 @@ namespace Nest
 	public class KeyValueProcessor : ProcessorBase, IKeyValueProcessor
 	{
 		/// <inheritdoc />
+		public IEnumerable<string> ExcludeKeys { get; set; }
+
+		/// <inheritdoc />
 		public Field Field { get; set; }
 
 		/// <inheritdoc />
@@ -62,6 +77,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IEnumerable<string> IncludeKeys { get; set; }
+
+		/// <inheritdoc />
+		public string Prefix { get; set; }
 
 		/// <inheritdoc />
 		public bool? StripBrackets { get; set; }
@@ -86,12 +104,13 @@ namespace Nest
 		where T : class
 	{
 		protected override string Name => "kv";
+		IEnumerable<string> IKeyValueProcessor.ExcludeKeys { get; set; }
 		Field IKeyValueProcessor.Field { get; set; }
 		string IKeyValueProcessor.FieldSplit { get; set; }
 		bool? IKeyValueProcessor.IgnoreMissing { get; set; }
 		IEnumerable<string> IKeyValueProcessor.IncludeKeys { get; set; }
+		string IKeyValueProcessor.Prefix { get; set; }
 		bool? IKeyValueProcessor.StripBrackets { get; set; }
-
 		Field IKeyValueProcessor.TargetField { get; set; }
 		string IKeyValueProcessor.TrimKey { get; set; }
 		string IKeyValueProcessor.TrimValue { get; set; }
@@ -115,6 +134,9 @@ namespace Nest
 		/// <inheritdoc cref="IKeyValueProcessor.ValueSplit" />
 		public KeyValueProcessorDescriptor<T> ValueSplit(string split) => Assign(a => a.ValueSplit = split);
 
+		/// <inheritdoc cref="IKeyValueProcessor.Prefix" />
+		public KeyValueProcessorDescriptor<T> Prefix(string prefix) => Assign(a => a.Prefix = prefix);
+
 		/// <inheritdoc cref="IKeyValueProcessor.IgnoreMissing" />
 		public KeyValueProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);
 
@@ -123,6 +145,12 @@ namespace Nest
 
 		/// <inheritdoc cref="IKeyValueProcessor.IncludeKeys" />
 		public KeyValueProcessorDescriptor<T> IncludeKeys(params string[] includeKeys) => Assign(a => a.IncludeKeys = includeKeys);
+
+		/// <inheritdoc cref="IKeyValueProcessor.ExcludeKeys" />
+		public KeyValueProcessorDescriptor<T> ExcludeKeys(IEnumerable<string> excludeKeys) => Assign(a => a.ExcludeKeys = excludeKeys);
+
+		/// <inheritdoc cref="IKeyValueProcessor.ExcludeKeys" />
+		public KeyValueProcessorDescriptor<T> ExcludeKeys(params string[] excludeKeys) => Assign(a => a.ExcludeKeys = excludeKeys);
 
 		/// <inheritdoc cref="IKeyValueProcessor.TrimKey" />
 		public KeyValueProcessorDescriptor<T> TrimKey(string trimKeys) => Assign(a => a.TrimKey = trimKeys);
