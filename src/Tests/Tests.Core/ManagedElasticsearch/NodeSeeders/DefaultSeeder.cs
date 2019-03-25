@@ -194,7 +194,11 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 
 		private Task<ICreateIndexResponse> CreateProjectIndexAsync() => Client.CreateIndexAsync(typeof(Project), c => c
 			.Settings(settings => settings.Analysis(ProjectAnalysisSettings))
+// this uses obsolete overload somewhat on purpose to make sure it works just as the rest
+// TODO 8.0 remove with once the overloads are gone too
+#pragma warning disable 618
 			.Mappings(ProjectMappings)
+#pragma warning restore 618
 			.Aliases(aliases => aliases
 				.Alias(ProjectsAliasName)
 				.Alias(ProjectsAliasFilter, a => a
@@ -206,21 +210,24 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			)
 		);
 
+#pragma warning disable 618
 		public static ITypeMapping ProjectMappings(MappingsDescriptor map) => map
-			.Map<Project>(m => m
-				.RoutingField(r => r.Required())
-				.AutoMap()
-				.Properties(ProjectProperties)
-				.Properties<CommitActivity>(props => props
-					.Object<Developer>(o => o
-						.AutoMap()
-						.Name(p => p.Committer)
-						.Properties(DeveloperProperties)
-					)
-					.Text(t => t
-						.Name(p => p.ProjectName)
-						.Index(false)
-					)
+			.Map<Project>(ProjectTypeMappings);
+#pragma warning restore 618
+
+		public static ITypeMapping ProjectTypeMappings(TypeMappingDescriptor<Project> m) => m
+			.RoutingField(r => r.Required())
+			.AutoMap()
+			.Properties(ProjectProperties)
+			.Properties<CommitActivity>(props => props
+				.Object<Developer>(o => o
+					.AutoMap()
+					.Name(p => p.Committer)
+					.Properties(DeveloperProperties)
+				)
+				.Text(t => t
+					.Name(p => p.ProjectName)
+					.Index(false)
 				)
 			);
 

@@ -34,12 +34,10 @@ namespace Tests.QueryDsl.BoolDsl
 		{
 			var client = Client;
 			var index = client.CreateIndex(Index<A>(), i => i
-				.Mappings(map => map
-					.Map<A>(m => m
-						.AutoMap()
-						.Properties(props => props
-							.Keyword(s => s.Name(p => p.Option))
-						)
+				.Map<A>(m => m
+					.AutoMap()
+					.Properties(props => props
+						.Keyword(s => s.Name(p => p.Option))
 					)
 				)
 			);

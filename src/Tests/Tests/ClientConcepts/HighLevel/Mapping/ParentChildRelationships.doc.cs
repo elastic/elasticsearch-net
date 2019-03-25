@@ -90,17 +90,15 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			*/
 			var createIndexResponse = client.CreateIndex("index", c => c
 				.Index<MyDocument>()
-				.Mappings(ms => ms
-					.Map<MyDocument>(m => m
-						.RoutingField(r => r.Required()) // <1> recommended to make the routing field mandatory so you can not accidentally forget
-						.AutoMap<MyParent>() // <2> Map all of the `MyParent` properties
-						.AutoMap<MyChild>() // <3> Map all of the `MyChild` properties
-						.Properties(props => props
-							.Join(j => j // <4> Additionally map the `JoinField` since it is not automatically mapped by `AutoMap()`
-								.Name(p => p.MyJoinField)
-								.Relations(r => r
-									.Join<MyParent, MyChild>()
-								)
+				.Map<MyDocument>(m => m
+					.RoutingField(r => r.Required()) // <1> recommended to make the routing field mandatory so you can not accidentally forget
+					.AutoMap<MyParent>() // <2> Map all of the `MyParent` properties
+					.AutoMap<MyChild>() // <3> Map all of the `MyChild` properties
+					.Properties(props => props
+						.Join(j => j // <4> Additionally map the `JoinField` since it is not automatically mapped by `AutoMap()`
+							.Name(p => p.MyJoinField)
+							.Relations(r => r
+								.Join<MyParent, MyChild>()
 							)
 						)
 					)

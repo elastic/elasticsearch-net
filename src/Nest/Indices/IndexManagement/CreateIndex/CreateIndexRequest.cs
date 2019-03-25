@@ -60,7 +60,7 @@ namespace Nest
 		public CreateIndexDescriptor Settings(Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> selector) =>
 			Assign(a => a.Settings = selector?.Invoke(new IndexSettingsDescriptor())?.Value);
 
-		public CreateIndexDescriptor Mappings<T>(Func<TypeMappingDescriptor<T>, ITypeMapping> selector) where T : class =>
+		public CreateIndexDescriptor Map<T>(Func<TypeMappingDescriptor<T>, ITypeMapping> selector) where T : class =>
 			Assign(a => a.Mappings = selector?.Invoke(new TypeMappingDescriptor<T>()));
 
 		public CreateIndexDescriptor Map(Func<TypeMappingDescriptor<object>, ITypeMapping> selector) =>

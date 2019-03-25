@@ -110,22 +110,20 @@ namespace Tests.Search.Request
 					.Alias(AliasFor<Earl>(), AliasFilterFor<Earl>)
 					.Alias(AliasFor<Baron>(), AliasFilterFor<Baron>)
 				)
-				.Mappings(map => map
-					.Map<King>(RoyalType, m => m
-						.AutoMap()
-						.Properties(props =>
-							RoyalProps(props)
-								.Nested<King>(n => n.Name(p => p.Foes).AutoMap())
-								.Join(j => j
-									.Name(p => p.Join)
-									.Relations(r => r
-										.Join<King, Prince>()
-										.Join<Prince, Duke>()
-										.Join<Duke, Earl>()
-										.Join<Earl, Baron>()
-									)
+				.Map<King>(m => m
+					.AutoMap()
+					.Properties(props =>
+						RoyalProps(props)
+							.Nested<King>(n => n.Name(p => p.Foes).AutoMap())
+							.Join(j => j
+								.Name(p => p.Join)
+								.Relations(r => r
+									.Join<King, Prince>()
+									.Join<Prince, Duke>()
+									.Join<Duke, Earl>()
+									.Join<Earl, Baron>()
 								)
-						)
+							)
 					)
 				)
 			);

@@ -94,16 +94,14 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 		private void CreateMetricIndex()
 		{
 			var createProjectIndex = Client.CreateIndex(MachineLearningTestsIndexTemplateName, c => c
-				.Mappings(map => map
-					.Map<Metric>(m => m
-						.AutoMap()
-						.Properties(props => props
-							.Keyword(t => t
-								.Name(p => p.Host)
-							)
-							.Keyword(t => t
-								.Name(p => p.Service)
-							)
+				.Map<Metric>(m => m
+					.AutoMap()
+					.Properties(props => props
+						.Keyword(t => t
+							.Name(p => p.Host)
+						)
+						.Keyword(t => t
+							.Name(p => p.Service)
 						)
 					)
 				)

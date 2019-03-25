@@ -143,7 +143,7 @@ namespace Tests.Modules.Scripting.ExecutePainlessScript
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			var create = client.CreateIndex(values.FixedForAllCallsValue, c => c.Mappings(map => map.Map<ScriptDocument>(m => m.AutoMap())));
+			var create = client.CreateIndex(values.FixedForAllCallsValue, c => c.Map<ScriptDocument>(m => m.AutoMap()));
 			create.ShouldBeValid();
 		}
 

@@ -46,15 +46,13 @@ namespace Tests.Mapping.Types
 			.IndexPatterns("nestx-*")
 			.Create(false)
 			.Settings(p => p.NumberOfShards(1))
-			.Mappings(m => m
-				.Map("doc", tm => tm
-					.DynamicTemplates(t => t
-						.DynamicTemplate("base", dt => dt
-							.Match("*")
-							.MatchPattern(MatchType.Simple)
-							.MatchMappingType("*")
-							.Mapping(FluentSingleMapping)
-						)
+			.Map(tm => tm
+				.DynamicTemplates(t => t
+					.DynamicTemplate("base", dt => dt
+						.Match("*")
+						.MatchPattern(MatchType.Simple)
+						.MatchMappingType("*")
+						.Mapping(FluentSingleMapping)
 					)
 				)
 			);
@@ -72,22 +70,17 @@ namespace Tests.Mapping.Types
 			{
 				NumberOfShards = 1
 			},
-			Mappings = new Mappings
+			Mappings = new TypeMapping
 			{
+				DynamicTemplates = new DynamicTemplateContainer
 				{
-					"doc", new TypeMapping
 					{
-						DynamicTemplates = new DynamicTemplateContainer
+						"base", new DynamicTemplate
 						{
-							{
-								"base", new DynamicTemplate
-								{
-									Match = "*",
-									MatchPattern = MatchType.Simple,
-									MatchMappingType = "*",
-									Mapping = InitializerSingleMapping
-								}
-							}
+							Match = "*",
+							MatchPattern = MatchType.Simple,
+							MatchMappingType = "*",
+							Mapping = InitializerSingleMapping
 						}
 					}
 				}

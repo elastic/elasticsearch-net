@@ -77,9 +77,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		public void UsingAutoMapWithAttributes()
 		{
 			var createIndexResponse = _client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<Employee>(m => m.AutoMap())
-				)
+				.Map<Employee>(m => m.AutoMap())
 			);
 
 			/**

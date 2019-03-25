@@ -60,11 +60,9 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			*/
 
 			var createIndexResponse = _client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<Document>(m => m
-						.AutoMap<Company>() // <1> Auto map `Company` using the generic method
-						.AutoMap(typeof(Employee)) // <2> Auto map `Employee` using the non-generic method
-					)
+				.Map<Document>(m => m
+					.AutoMap<Company>() // <1> Auto map `Company` using the generic method
+					.AutoMap(typeof(Employee)) // <2> Auto map `Employee` using the non-generic method
 				)
 			);
 
@@ -171,10 +169,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			var client = new ElasticClient(connectionSettings);
 
 			var createIndexResponse = client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<ParentWithStringId>(m => m
-						.AutoMap()
-					)
+				.Map<ParentWithStringId>(m => m
+					.AutoMap()
 				)
 			);
 
@@ -299,9 +295,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		{
 			/** By default, `.AutoMap()` only goes as far as depth 1 */
 			var createIndexResponse = _client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<A>(m => m.AutoMap())
-				)
+				.Map<A>(m => m.AutoMap())
 			);
 
 			/** Thus we do not map properties on the second occurrence of our Child property */
@@ -326,9 +320,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 
 			/** Now let's specify a maxRecursion of `3` */
 			createIndexResponse = _client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<A>(m => m.AutoMap(3))
-				)
+				.Map<A>(m => m.AutoMap(3))
 			);
 
 			/** `.AutoMap()` has now mapped three levels of our Child property */

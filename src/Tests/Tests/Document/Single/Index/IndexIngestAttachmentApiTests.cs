@@ -79,15 +79,13 @@ namespace Tests.Document.Single.Index
 				var index = value.Value;
 
 				client.CreateIndex(index, c => c
-					.Mappings(m => m
-						.Map<IngestedAttachment>(mm => mm
-							.Properties(p => p
-								.Text(s => s
-									.Name(f => f.Content)
-								)
-								.Object<Attachment>(o => o
-									.Name(f => f.Attachment)
-								)
+					.Map<IngestedAttachment>(mm => mm
+						.Properties(p => p
+							.Text(s => s
+								.Name(f => f.Content)
+							)
+							.Object<Attachment>(o => o
+								.Name(f => f.Attachment)
 							)
 						)
 					)

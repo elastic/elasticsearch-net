@@ -44,10 +44,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		public void DefaultMultiFields()
 		{
 			var createIndexResponse = _client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<Person>(m => m
-						.AutoMap()
-					)
+				.Map<Person>(m => m
+					.AutoMap()
 				)
 			);
 
@@ -161,24 +159,22 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		public void CreatingMultiFields()
 		{
 			var createIndexResponse = _client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<Person>(m => m
-						.Properties(p => p
-							.Text(t => t
-								.Name(n => n.Name)
-								.Fields(ff => ff
-									.Text(tt => tt
-										.Name("stop") // <1> Use the stop analyzer on this sub field
-										.Analyzer("stop")
-									)
-									.Text(tt => tt
-										.Name("shingles")
-										.Analyzer("name_shingles") // <2> Use a custom analyzer named "named_shingles" that is configured in the index
-									)
-									.Keyword(k => k
-										.Name("keyword") // <3> Index as not analyzed
-										.IgnoreAbove(256)
-									)
+				.Map<Person>(m => m
+					.Properties(p => p
+						.Text(t => t
+							.Name(n => n.Name)
+							.Fields(ff => ff
+								.Text(tt => tt
+									.Name("stop") // <1> Use the stop analyzer on this sub field
+									.Analyzer("stop")
+								)
+								.Text(tt => tt
+									.Name("shingles")
+									.Analyzer("name_shingles") // <2> Use a custom analyzer named "named_shingles" that is configured in the index
+								)
+								.Keyword(k => k
+									.Name("keyword") // <3> Index as not analyzed
+									.IgnoreAbove(256)
 								)
 							)
 						)

@@ -343,13 +343,11 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 
 					)
 				)
-				.Mappings(m => m
-					.Map<Project>(mm => mm
-						.Properties(p => p
-							.Text(t => t
-								.Name(n => n.Name)
-								.Analyzer("my_analyzer")
-							)
+				.Map<Project>(mm => mm
+					.Properties(p => p
+						.Text(t => t
+							.Name(n => n.Name)
+							.Analyzer("my_analyzer")
 						)
 					)
 				)

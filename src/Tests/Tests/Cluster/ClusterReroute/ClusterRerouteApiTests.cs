@@ -25,7 +25,7 @@ namespace Tests.Cluster.ClusterReroute
 			{
 				var createIndex = client.CreateIndex(index, i => i
 					.Settings(settings => settings.Analysis(DefaultSeeder.ProjectAnalysisSettings))
-					.Mappings(DefaultSeeder.ProjectMappings)
+					.Map<Project>(DefaultSeeder.ProjectTypeMappings)
 				);
 				createIndex.ShouldBeValid();
 				client.IndexMany(Project.Generator.Generate(100), index).ShouldBeValid();
