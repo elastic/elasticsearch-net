@@ -11,7 +11,7 @@ namespace Nest
 		/// <summary>
 		/// Which letters are folded can be controlled by specifying the unicodeSetFilter parameter, which accepts a UnicodeSet.
 		/// </summary>
-		[DataMember(Name ="unicodeSetFilter")]
+		[DataMember(Name ="unicode_set_filter")]
 		string UnicodeSetFilter { get; set; }
 	}
 

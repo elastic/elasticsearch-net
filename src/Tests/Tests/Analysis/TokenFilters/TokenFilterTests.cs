@@ -261,7 +261,7 @@ namespace Tests.Analysis.TokenFilters
 			public override object Json => new
 			{
 				type = "icu_folding",
-				unicodeSetFilter = "[^åäöÅÄÖ]"
+				unicode_set_filter = "[^åäöÅÄÖ]"
 			};
 
 			public override string Name => "icuf";
