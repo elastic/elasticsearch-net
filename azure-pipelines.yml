@@ -37,6 +37,7 @@ jobs:
         displayName: '$(esVersion) integration tests'
       - task: PublishTestResults@2
         inputs:
+            condition: succeededOrFailed()
             testRunner: VSTest
             testResultsFiles: 'src/Tests/Tests/**/*.trx'
             testRunTitle: Windows Integration Tests
