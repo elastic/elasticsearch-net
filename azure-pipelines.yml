@@ -35,3 +35,8 @@ jobs:
   steps:
       - script: 'build.bat integrate $(esVersion) skipdocs'
         displayName: '$(esVersion) integration tests'
+      - task: PublishTestResults@2
+        inputs:
+            testRunner: VSTest
+            testResultsFiles: 'src/Tests/Tests/**/*.trx'
+            testRunTitle: Windows Integration Tests
