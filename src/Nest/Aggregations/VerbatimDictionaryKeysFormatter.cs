@@ -14,7 +14,6 @@ namespace Nest
 		private readonly bool _keyIsPropertyName = typeof(TKey) == typeof(PropertyName);
 		private readonly bool _keyIsRelationName = typeof(TKey) == typeof(RelationName);
 		private readonly bool _keyIsString = typeof(TKey) == typeof(string);
-		private readonly bool _keyIsTypeName = typeof(TKey) == typeof(TypeName);
 
 		public virtual TDictionary Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
@@ -62,11 +61,6 @@ namespace Nest
 				{
 					var indexName = entry.Key as IndexName;
 					key = settings.Inferrer.IndexName(indexName);
-				}
-				else if (_keyIsTypeName)
-				{
-					var typeName = entry.Key as TypeName;
-					key = settings.Inferrer.TypeName(typeName);
 				}
 				else if (_keyIsRelationName)
 				{
