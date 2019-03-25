@@ -1,5 +1,6 @@
 ﻿using System;
 using Elastic.Xunit.XunitPlumbing;
+using Tests.Configuration;
 
 namespace Tests.Core.Xunit
 {
@@ -12,6 +13,7 @@ namespace Tests.Core.Xunit
 	}
 	//
 
+	//TODO 7.0: this attribute and all its usages have to be scrubbed before we can do a 7.x release
 	/// <summary> Indicates test can not run because of a presumed upstream bug </summary>
 	public class BlockedByIssueAttribute : SkipTestAttributeBase
 	{
@@ -24,6 +26,7 @@ namespace Tests.Core.Xunit
 		private string Url { get; }
 	}
 
+	//TODO 7.0: this attribute and all its usages have to be scrubbed before we can do a 7.x release
 	/// <summary>
 	/// Indicates a test that is failing due to a change not related to request/response structure changes
 	/// <pre>Warrants deeper investigation preferably as a separate PR</pre>
@@ -32,6 +35,7 @@ namespace Tests.Core.Xunit
 	{
 		public override string Reason => $"Tests is failing due to change not related to a structural change in request/response";
 
-		public override bool Skip => true;
+		//only skip non structural changes when running integration tests, we do want the unit tests to be green for these in the interim.
+		public override bool Skip => TestConfiguration.Instance.RunIntegrationTests;
 	}
 }

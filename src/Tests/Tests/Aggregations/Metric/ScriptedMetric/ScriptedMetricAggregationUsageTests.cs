@@ -138,6 +138,11 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 						source = First.Init,
 						lang = First.Language
 					},
+					combine_script = new
+					{
+						source = First.Combine,
+						lang = First.Language
+					},
 					map_script = new
 					{
 						source = First.Map,
