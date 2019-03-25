@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
-	// TODO: Add a resolver that uses Utf8Json formatters defined in this assembly
 	public class LowLevelRequestResponseSerializer : IElasticsearchSerializer
 	{
 		public static readonly LowLevelRequestResponseSerializer Instance = new LowLevelRequestResponseSerializer();

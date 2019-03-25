@@ -1,19 +1,20 @@
 using System;
 using System.Collections.Concurrent;
 
-namespace Elasticsearch.Net {
+namespace Elasticsearch.Net
+{
 	internal class ElasticsearchNetFormatterResolver : IJsonFormatterResolver
 	{
 		private readonly IJsonFormatter<object> _fallbackFormatter;
 		private readonly InnerResolver _innerFormatterResolver;
 
-		public static ElasticsearchNetFormatterResolver Instance => new ElasticsearchNetFormatterResolver();
-		
 		public ElasticsearchNetFormatterResolver()
 		{
 			_innerFormatterResolver = new InnerResolver();
 			_fallbackFormatter = new DynamicObjectTypeFallbackFormatter(_innerFormatterResolver);
 		}
+
+		public static ElasticsearchNetFormatterResolver Instance => new ElasticsearchNetFormatterResolver();
 
 		public IJsonFormatter<T> GetFormatter<T>() =>
 			typeof(T) == typeof(object)
@@ -32,12 +33,10 @@ namespace Elasticsearch.Net {
 
 			private readonly IJsonFormatterResolver _finalFormatter;
 			private readonly ConcurrentDictionary<Type, object> _formatters = new ConcurrentDictionary<Type, object>();
-	
-			internal InnerResolver()		
-			{
+
+			internal InnerResolver() =>
 				_finalFormatter =
 					DynamicObjectResolver.Create(null, new Lazy<Func<string, string>>(() => StringMutator.Original), true);
-			}
 
 			public IJsonFormatter<T> GetFormatter<T>() =>
 				(IJsonFormatter<T>)_formatters.GetOrAdd(typeof(T), type =>
