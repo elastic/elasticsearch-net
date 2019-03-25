@@ -52,9 +52,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{EAE89579-C
 ProjectSection(SolutionItems) = preProject
 	..\.editorconfig = ..\.editorconfig
 	..\.gitignore = ..\.gitignore
-	..\.travis.yml = ..\.travis.yml
 	..\appveyor.yml = ..\appveyor.yml
 	..\global.json = ..\global.json
+	..\azure-pipelines.yml = ..\azure-pipelines.yml
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget", "Nuget", "{C7865979-1D1C-46AF-BDE8-1DA6F3ED81B3}"
