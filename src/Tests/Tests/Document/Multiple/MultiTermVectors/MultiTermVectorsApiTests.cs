@@ -98,7 +98,6 @@ namespace Tests.Document.Multiple.MultiTermVectors
 
 			termvectorDoc.Should().NotBeNull();
 			termvectorDoc.Index.Should().NotBeNull();
-			termvectorDoc.Type.Should().NotBeNull();
 			termvectorDoc.Id.Should().NotBeNull();
 
 			termvectorDoc.TermVectors.Should().NotBeEmpty().And.ContainKey("firstName");
@@ -183,7 +182,6 @@ namespace Tests.Document.Multiple.MultiTermVectors
 
 			termvectorDoc.Should().NotBeNull();
 			termvectorDoc.Index.Should().NotBeNull();
-			termvectorDoc.Type.Should().NotBeNull();
 			termvectorDoc.Id.Should().NotBeNull();
 
 			termvectorDoc.TermVectors.Should().NotBeEmpty().And.ContainKey("firstName");

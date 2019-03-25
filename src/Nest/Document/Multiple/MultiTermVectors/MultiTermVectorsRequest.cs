@@ -14,7 +14,7 @@ namespace Nest
 		/// <summary>
 		/// The documents for which to generate term vectors
 		/// </summary>
-		[DataMember(Name ="docs")]
+		[DataMember(Name = "docs")]
 		IEnumerable<IMultiTermVectorOperation> Documents { get; set; }
 
 		/// <summary>
@@ -22,7 +22,7 @@ namespace Nest
 		/// for which to generate term vectors. Must be used in
 		/// conjunction with <see cref="Index" /> and <see cref="Type" />
 		/// </summary>
-		[DataMember(Name ="ids")]
+		[DataMember(Name = "ids")]
 		IEnumerable<Id> Ids { get; set; }
 	}
 
