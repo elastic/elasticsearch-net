@@ -1,0 +1,108 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.x
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/ClientConcepts/HighLevel/Indexing/Pipelines.doc.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[ingest-pipelines]]
+=== Ingest Pipelines
+
+Elasticsearch will automatically re-route index requests to ingest nodes,
+however with some careful consideration you can optimise this path.
+
+[source,csharp]
+----
+public class Person
+{
+    public int Id { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+}
+----
+
+==== Create an ingestion pipeline
+
+Assuming we are indexing Person documents, we can create an ingestion pipeline that manipulates the
+incoming values before they are indexed.
+
+Lets assume that our application always expects surnames to be capitalised, and for initials to
+be indexed into their own field.
+
+We could acheive this requirement by creating a custom mapping and creating an ingest pipeline.
+The Person type can then be used as-is, without making any changes.
+
+[source,csharp]
+----
+client.CreateIndex("people");
+
+client.Map<Person>(p => p
+    .Index("people")
+    .AutoMap() <1>
+    .Properties(props => props
+            .Keyword(k => k.Name("initials")) <2>
+    )
+);
+
+client.PutPipeline("person-pipeline", p => p
+    .Processors(ps => ps
+        .Uppercase<Person>(u => u
+                .Field(t => t.LastName) <3>
+        )
+        .Script(s => s
+            .Lang("painless") <4>
+            .Source("ctx.initials = ctx.firstName.substring(0,1) + ctx.lastName.substring(0,1)"))
+    )
+);
+
+var person = new Person
+{
+    Id = 1,
+    FirstName = "Martijn",
+    LastName = "Laarman"
+};
+
+var indexResponse = client.Index(person, p => p.Index("people").Pipeline("person-pipeline")); <5>
+----
+<1> automatically create the mapping from the type
+
+<2> create an additional field to store the initials
+
+<3> uppercase the lastname
+
+<4> use a painless script to populate the new field
+
+<5> index the document using the created pipeline
+
+==== Increasing timeouts
+
+When a pipeline is specified, there will be the added overhead of document enrichment when indexing, the example given above, the excution
+of the uppercasing and the painless script.
+
+For large bulk requests, it could be prudent to increase the default indexing timeout to avoid exceptions.
+
+[source,csharp]
+----
+client.Bulk(b => b
+    .Index("people")
+    .Pipeline("person-pipeline")
+    .Timeout("5m") <1>
+    .Index<Person>(/*snip*/)
+    .Index<Person>(/*snip*/)
+    .Index<Person>(/*snip*/)
+    .RequestConfiguration(rc => rc
+            .RequestTimeout(TimeSpan.FromMinutes(5)) <2>
+    )
+);
+----
+<1> increases the bulk timeout to 5 minutes
+
+<2> increases the request timeout to 5 minutes
+

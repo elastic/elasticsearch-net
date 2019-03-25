@@ -73,9 +73,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 
 			var bulkIndexResponse = client.IndexMany(people); //<1> synchronous method that returns an `IBulkResponse`
 
-			//<2> the response can be inspected for its success.
-			var hasErrors = bulkIndexResponse.Errors;
-			if (hasErrors)
+			if (bulkIndexResponse.Errors) //<2> the response can be inspected for its success.
 			{
 				//<3> If there are errors, they can be enumerated and inspected.
 				foreach (var itemWithError in bulkIndexResponse.ItemsWithErrors)
@@ -132,25 +130,21 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 			Exception exception = null;
 			var waitHandle = new ManualResetEvent(false);
 
-			// <4> register an observer to be notified of bulk events
-			bulkAllObservable.Subscribe(new BulkAllObserver(
+			bulkAllObservable.Subscribe(new BulkAllObserver( //<4> register an observer to be notified of bulk events
 				onNext: b =>
 				{
-					//<5> do something e.g. write number of pages to console
+					// Do something e.g. write number of pages to console
 				},
 				onError: e =>
 				{
-					//<6> capture the exception into the local variable; do not throw as it will be swallowed
-					exception = e;
+					exception = e; //<5> capture the exception into the local variable; do not throw as it will be swallowed
 					waitHandle.Set();
 				},
 				onCompleted: () => waitHandle.Set()));
 
-			// <7> wait for indexing
-			waitHandle.WaitOne();
+			waitHandle.WaitOne(); //<6> wait for indexing
 
-			// <8> if there was an exception, throw it now
-			if (exception != null)
+			if (exception != null) //<7> if there was an exception, throw it now
 				throw exception;
 		}
 	}

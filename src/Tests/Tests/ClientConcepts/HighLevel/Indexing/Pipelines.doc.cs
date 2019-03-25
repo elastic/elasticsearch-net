@@ -32,7 +32,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		* Lets assume that our application always expects surnames to be capitalised, and for initials to
 		* be indexed into their own field.
 		*
-		* We could acheive this requirement by creating a custom mapping and creating an ingest pipeline.
+		* We could achieve this requirement by creating a custom mapping and creating an ingest pipeline.
 		* The Person type can then be used as-is, without making any changes.
 		*/
 		public async Task IngestionPipeline()

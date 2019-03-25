@@ -1,0 +1,172 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.x
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/ClientConcepts/HighLevel/Indexing/Indexing.doc.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[indexing]]
+=== Indexing
+
+NEST has a number of ways in which documents can be indexed.
+
+==== Single Documents
+
+A single document can be indexed at a time, either synchronously or asynchronously
+
+[source,csharp]
+----
+var person = new Person
+{
+    Id = 1,
+    FirstName = "Martijn",
+    LastName = "Laarman"
+};
+
+var indexResponse = client.IndexDocument(person); <1>
+
+var asyncIndexResponse = await client.IndexDocumentAsync(person); <2>
+----
+<1> synchronous method that returns an `IIndexResponse`
+
+<2> asynchronous method that returns a `Task<IIndexResponse>` that can be awaited
+
+==== Multiple Documents
+
+Multiple documents can be indexed using the bulk methods, again either synchronously or asynchronously
+
+[source,csharp]
+----
+var people = new []
+{
+    new Person
+    {
+        Id = 1,
+        FirstName = "Martijn",
+        LastName = "Laarman"
+    },
+    new Person
+    {
+        Id = 2,
+        FirstName = "Stuart",
+        LastName = "Cam"
+    },
+    new Person
+    {
+        Id = 3,
+        FirstName = "Russell",
+        LastName = "Cam"
+    }
+};
+
+var bulkIndexResponse = client.IndexMany(people); <1>
+
+<2>
+var hasErrors = bulkIndexResponse.Errors;
+if (hasErrors)
+{
+    <3>
+    foreach (var itemWithError in bulkIndexResponse.ItemsWithErrors)
+    {
+        Console.WriteLine("Failed to index document {0}: {1}", itemWithError.Id, itemWithError.Error);
+    }
+}
+
+// Alternatively, documents can be indexed asynchronously
+var asyncBulkIndexResponse = await client.IndexManyAsync(people); <4>
+----
+<1> synchronous method that returns an `IBulkResponse`
+
+<2> the response can be inspected for its success.
+
+<3> If there are errors, they can be enumerated and inspected.
+
+<4> asynchronous method that returns a `Task<IBulkResponse>` that can be awaited
+
+==== Multiple Documents with BulkAll helper.
+
+Multiple documents can be indexed using the BulkAll helper. This helper exposes retry and backoff functionality
+to automatically retry in the event of a failure. This allows you to focus on the overall objective of indexing,
+without having to concern yourself with retry mechanics. Of course, if there is an eventual failure you have
+the ability to inspect any exceptions and indexing progress.
+
+[source,csharp]
+----
+var people = new []
+{
+    new Person
+    {
+        Id = 1,
+        FirstName = "Martijn",
+        LastName = "Laarman"
+    },
+    new Person
+    {
+        Id = 2,
+        FirstName = "Stuart",
+        LastName = "Cam"
+    },
+    new Person
+    {
+        Id = 3,
+        FirstName = "Russell",
+        LastName = "Cam"
+    }
+};
+
+var bulkAllObservable = client.BulkAll(people, b => b
+    .Index("people")
+    .BackOffTime("30s") <1>
+    .BackOffRetries(2) <2>
+    .RefreshOnCompleted()
+    .MaxDegreeOfParallelism(Environment.ProcessorCount)
+    .Size(1000) <3>
+);
+
+Exception exception = null;
+var waitHandle = new ManualResetEvent(false);
+
+<4>
+bulkAllObservable.Subscribe(new BulkAllObserver(
+    onNext: b =>
+    {
+        <5>
+    },
+    onError: e =>
+    {
+        <6>
+        exception = e;
+        waitHandle.Set();
+    },
+    onCompleted: () => waitHandle.Set()));
+
+<7>
+waitHandle.WaitOne();
+
+<8>
+if (exception != null)
+    throw exception;
+----
+<1> how long to wait between retries
+
+<2> how many reties should this bulk index attempt is unsuccessful
+
+<3> items per bulk request
+
+<4> register an observer to be notified of bulk events
+
+<5> do something e.g. write number of pages to console
+
+<6> capture the exception into the local variable; do not throw as it will be swallowed
+
+<7> wait for indexing
+
+<8> if there was an exception, throw it now
+
