@@ -51,13 +51,16 @@ namespace Nest
 							reader.ReadNextBlock();
 					}
 
-					return new Field(field, boost);
+					return new Field(field, boost, format);
 				default:
 					throw new JsonParsingException($"Cannot deserialize {typeof(Field).FullName} from {token}");
 			}
 		}
 
-		public void Serialize(ref JsonWriter writer, Field value, IJsonFormatterResolver formatterResolver)
+		public void Serialize(ref JsonWriter writer, Field value, IJsonFormatterResolver formatterResolver) =>
+			Serialize(ref writer, value, formatterResolver, false);
+
+		private static void Serialize(ref JsonWriter writer, Field value, IJsonFormatterResolver formatterResolver, bool serializeAsString)
 		{
 			if (value == null)
 			{
@@ -66,11 +69,23 @@ namespace Nest
 			}
 
 			var settings = formatterResolver.GetConnectionSettings();
-			writer.WriteString(settings.Inferrer.Field(value));
+			var fieldName = settings.Inferrer.Field(value);
+			if (serializeAsString || string.IsNullOrEmpty(value.Format))
+				writer.WriteString(fieldName);
+			else
+			{
+				writer.WriteBeginObject();
+				writer.WritePropertyName("field");
+				writer.WriteString(fieldName);
+				writer.WriteValueSeparator();
+				writer.WritePropertyName("format");
+				writer.WriteString(value.Format);
+				writer.WriteEndObject();
+			}
 		}
 
 		public void SerializeToPropertyName(ref JsonWriter writer, Field value, IJsonFormatterResolver formatterResolver) =>
-			Serialize(ref writer, value, formatterResolver);
+			Serialize(ref writer, value, formatterResolver, true);
 
 		public Field DeserializeFromPropertyName(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
 			Deserialize(ref reader, formatterResolver);
