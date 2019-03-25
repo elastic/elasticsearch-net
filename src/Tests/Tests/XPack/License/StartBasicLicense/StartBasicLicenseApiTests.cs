@@ -3,6 +3,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.Xunit;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using static Elasticsearch.Net.HttpMethod;
@@ -11,6 +12,8 @@ namespace Tests.XPack.License.StartBasicLicense
 {
 	public class BasicLicenseCluster : ClientTestClusterBase { }
 
+	// TODO: cluster starts with a basic license now, investigate further
+	[SkipNonStructuralChange]
 	[SkipVersion("<6.5.0", "")]
 	public class StartBasicLicenseApiTests
 		: ApiIntegrationTestBase<BasicLicenseCluster, IStartBasicLicenseResponse, IStartBasicLicenseRequest, StartBasicLicenseDescriptor, StartBasicLicenseRequest>
