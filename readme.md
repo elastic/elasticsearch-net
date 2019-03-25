@@ -6,17 +6,13 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasti
         <th><b>Elasticsearch<b></th>
         <th><b>Clients<b></th>
         <th><b>Supported<b></th>
-        <th><b>Windows CI</b></th>
-        <th><b>Linux CI</b></th>
-        <th><b>Nuget<b></th>
-        <th><b>CI Feed<b></th>
+        <th><b>Windows/Linux CI</b></th>
+        <th><b>Tests<b></th>
     </tr>
     <tr>
     	<td><code>0.x</code></td>
     	<td><code>0.x</code></td>
     	<td>:x:</td>
-    	<td>:heavy_minus_sign:</td>
-    	<td>:heavy_minus_sign:</td>
     	<td>:heavy_minus_sign:</td>
     	<td>:heavy_minus_sign:</td>
     </tr>
@@ -26,16 +22,12 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasti
     	<td>:x:</td>
     	<td>:heavy_minus_sign:</td>
     	<td>:heavy_minus_sign:</td>
-    	<td><a href="https://www.nuget.org/packages/NEST/1.9.2"><img src="https://img.shields.io/badge/nuget-v1.9.2-blue.svg?style=flat-square"></td>
-    	<td>:heavy_minus_sign:</td>
     </tr>
     <tr>
     	<td><code>2.x</code></td>
     	<td><code>2.x</code></td>
     	<td>:x:</td>
-      <td><a href="https://ci.appveyor.com/project/Mpdreamz/elasticsearch-net/branch/2.x"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=2.x&svg=true"></a></td>
-      <td><a href="https://travis-ci.org/elastic/elasticsearch-net/branches"><img src="https://travis-ci.org/elastic/elasticsearch-net.svg?branch=2.x"></a></td>
-    	<td><a href="https://www.nuget.org/packages/NEST/2.5.8"><img src="https://img.shields.io/badge/nuget-v2.5.8-blue.svg?style=flat-square"></a>
+    	<td>:heavy_minus_sign:</td>
     	<td>:heavy_minus_sign:</td>
     	</td>  
     </tr>
@@ -43,30 +35,29 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasti
     	<td><code>5.x</code></td>
     	<td><code>5.x</code></td>
     	<td>:white_check_mark:</td>
-        <td><a href="https://ci.appveyor.com/project/Mpdreamz/elasticsearch-net/branch/5.x"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=5.x&svg=true"></a></td>
-        <td><a href="https://travis-ci.org/elastic/elasticsearch-net/branches"><img src="https://travis-ci.org/elastic/elasticsearch-net.svg?branch=5.x"></a></td>
-    	<td><a href="https://www.nuget.org/packages/NEST/5.6.4"><img src="https://img.shields.io/badge/nuget-v5.6.4-blue.svg?style=flat-square"></a> </td>
-    	<td><a href="https://www.myget.org/gallery/elasticsearch-net"><img src="https://img.shields.io/myget/elasticsearch-net-legacy/vpre/NEST.svg?style=flat-square&label=myget&colorB=339900"></a></td>
+      <td><a href="https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/5.x"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=5.x&svg=true"></a></td>
+    	<td><a href="https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/5.x/tests"><img alt="5.x unit tests" src="https://img.shields.io/appveyor/tests/elastic/elasticsearch-net/5.x.svg?style=flat-square"></a></td>
     </tr>
     <tr>
     	<td><code>6.x</code></td>
     	<td><code>6.x</code></td>
     	<td>:white_check_mark:</td>
-        <td><a href="https://ci.appveyor.com/project/Mpdreamz/elasticsearch-net/branch/6.x"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=6.x&svg=true"></a></td>
-        <td><a href="https://travis-ci.org/elastic/elasticsearch-net/branches"><img src="https://travis-ci.org/elastic/elasticsearch-net.svg?branch=6.x"></a></td>
-    	<td><a href="https://www.nuget.org/packages/NEST"><img src="https://img.shields.io/nuget/v/NEST.svg?style=flat-square"></a> </td>
-    	<td><a href="https://www.myget.org/gallery/elasticsearch-net"><img src="https://img.shields.io/myget/elasticsearch-net/vpre/NEST.svg?style=flat-square&label=myget&colorB=339900"></a></td>
+      <td><a href="https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/6.x"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=6.x&svg=true"></a></td>
+    	<td><a href="https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/6.x/tests"><img alt="6.x unit tests" src="https://img.shields.io/appveyor/tests/elastic/elasticsearch-net/6.x.svg?style=flat-square"></a></td>
     </tr>
     <tr>
     	<td><code>master</code></td>
     	<td><code>master</code></td>
     	<td>:x:</td>
-        <td><a href="https://ci.appveyor.com/project/Mpdreamz/elasticsearch-net/branch/master"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=master&svg=true"></a></td>
-        <td><a href="https://travis-ci.org/elastic/elasticsearch-net/branches"><img src="https://travis-ci.org/elastic/elasticsearch-net.svg?branch=master"></a></td>
-    	<td>:heavy_minus_sign:</td>
-    	<td><a href="https://www.myget.org/gallery/elasticsearch-net-next"><img src="https://img.shields.io/myget/elasticsearch-net-next/vpre/NEST.svg?style=flat-square&label=myget&colorB=339900"></a></td>
+      <td><a href="https://ci.appveyor.com/project/Mpdreamz/elasticsearch-net/branch/master"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=master&svg=true"></a></td>
+    	<td><a href="https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/master/tests"><img alt="master unit tests" src="https://img.shields.io/appveyor/tests/elastic/elasticsearch-net/master.svg?style=flat-square"></a></td>
     </tr>
 </table>
+
+## Preview builds
+
+All branches push new nuget packages on successful CI builds to https://ci.appveyor.com/nuget/elasticsearch-net
+
           
 ### [Full documentation at https://www.elastic.co/guide/en/elasticsearch/client/net-api/current](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/index.html) 
 
