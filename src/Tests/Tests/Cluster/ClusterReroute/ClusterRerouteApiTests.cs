@@ -142,7 +142,7 @@ namespace Tests.Cluster.ClusterReroute
 				new AllocateStalePrimaryRerouteCommand { Index = CallIsolatedValue, Node = "x", Shard = 0, AcceptDataLoss = true },
 				new AllocateReplicaClusterRerouteCommand { Index = CallIsolatedValue, Node = "x", Shard = 0 },
 				new MoveClusterRerouteCommand { Index = CallIsolatedValue, FromNode = "x", ToNode = "y", Shard = 0 },
-				new CancelClusterRerouteCommand() { Index = "project", Node = "x", Shard = 1 }
+				new CancelClusterRerouteCommand() { Index = CallIsolatedValue, Node = "x", Shard = 1 }
 			}
 		};
 
