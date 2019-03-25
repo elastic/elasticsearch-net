@@ -7,8 +7,8 @@ using Tests.Framework;
 
 namespace Tests.ClientConcepts.HighLevel.Caching
 {
-	/**[[ingest-nodes]]
-	*=== Ingest Nodes
+	/**[[ingest-node]]
+	*=== Ingest Node
 	*
 	* Elasticsearch will automatically re-route index requests to ingest nodes,
 	* however with some careful consideration you can optimise this path.

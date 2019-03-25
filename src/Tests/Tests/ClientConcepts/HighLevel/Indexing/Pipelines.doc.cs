@@ -70,7 +70,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 
 		/**
 		* ==== Increasing timeouts
-		* When a pipeline is specified, there will be the added overhead of document enrichment when indexing, the example given above, the excution
+		* When a pipeline is specified, there will be the added overhead of document enrichment when indexing, the example given above, the execution
 		* of the uppercasing and the painless script.
 		*
 		* For large bulk requests, it could be prudent to increase the default indexing timeout to avoid exceptions.
