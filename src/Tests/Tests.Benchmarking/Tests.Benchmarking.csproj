@@ -11,8 +11,8 @@
     <ProjectReference Include="..\Tests.Core\Tests.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" Version="0.11.3" />
-    <PackageReference Include="Elastic.BenchmarkDotNetExporter" Version="0.1.0-ci20181120T172449" />
+    <PackageReference Include="BenchmarkDotNet" Version="0.11.4" />
+    <PackageReference Include="Elastic.BenchmarkDotNetExporter" Version="0.1.0-ci20190320T170700" />
     <PackageReference Include="LibGit2Sharp" Version="0.26.0-preview-0062" />
   </ItemGroup>
 </Project>
