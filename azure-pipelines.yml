@@ -46,4 +46,4 @@ jobs:
         esVersion: '6.0.1'
   steps:
       - script: 'build.bat integrate $(esVersion) skipdocs'
-        display
+        displayName: '$(esVersion) integration tests'
