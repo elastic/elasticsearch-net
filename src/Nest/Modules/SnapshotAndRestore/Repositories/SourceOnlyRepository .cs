@@ -94,19 +94,39 @@ namespace Nest
 			writer.WriteString("source");
 			if (value.DelegateSettings != null)
 			{
+				writer.WriteValueSeparator();
 				writer.WritePropertyName("settings");
 				writer.WriteBeginObject();
 				writer.WritePropertyName("delegate_type");
 				writer.WriteString(value.DelegateType);
+				writer.WriteValueSeparator();
 
-				var settings = value.DelegateSettings as IRepositorySettings;
 				var innerWriter = new JsonWriter();
-				var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IRepositorySettings>();
-				formatter.Serialize(ref innerWriter, settings, formatterResolver);
+				switch (value.DelegateType)
+				{
+					case "s3":
+						Serialize<IS3RepositorySettings>(ref innerWriter, value.DelegateSettings, formatterResolver);
+						break;
+					case "azure":
+						Serialize<IAzureRepositorySettings>(ref innerWriter, value.DelegateSettings, formatterResolver);
+						break;
+					case "url":
+						Serialize<IReadOnlyUrlRepositorySettings>(ref innerWriter, value.DelegateSettings, formatterResolver);
+						break;
+					case "hdfs":
+						Serialize<IHdfsRepositorySettings>(ref innerWriter, value.DelegateSettings, formatterResolver);
+						break;
+					case "fs":
+						Serialize<IFileSystemRepositorySettings>(ref innerWriter, value.DelegateSettings, formatterResolver);
+						break;
+					default:
+						Serialize<IRepositorySettings>(ref innerWriter, value.DelegateSettings, formatterResolver);
+						break;
+				}
 
 				var buffer = innerWriter.GetBuffer();
-				// get all the written bytes except the closing }
-				for (var i = buffer.Offset; i < buffer.Count - 1; i++)
+				// get all the written bytes between the opening and closing {}
+				for (var i = 1; i < buffer.Count - 1; i++)
 					writer.WriteRawUnsafe(buffer.Array[i]);
 
 				writer.WriteEndObject();
@@ -114,9 +134,20 @@ namespace Nest
 			writer.WriteEndObject();
 		}
 
+		private static void Serialize<TRepositorySettings>(ref JsonWriter writer, object value, IJsonFormatterResolver formatterResolver)
+			where TRepositorySettings : class, IRepositorySettings
+		{
+			var formatter = formatterResolver.GetFormatter<TRepositorySettings>();
+			formatter.Serialize(ref writer, value as TRepositorySettings, formatterResolver);
+		}
+
 		public ISourceOnlyRepository Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject) return null;
+			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
+			{
+				reader.ReadNextBlock();
+				return null;
+			}
 
 			//TODO read delegate type and settings
 
