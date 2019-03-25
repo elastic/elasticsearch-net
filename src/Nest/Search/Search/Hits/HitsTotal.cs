@@ -1,14 +1,15 @@
-using Newtonsoft.Json;
+
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
 	public class HitsTotal
 	{
+		//TODO 7.0: Still need to map relation
 //		[JsonProperty("max_score")]
 //		public double MaxScore { get; internal set; }
 
-		[JsonProperty("value")]
+		[DataMember(Name = "value")]
 		public long? Value { get; internal set; }
 
 	}
