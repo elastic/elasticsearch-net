@@ -56,7 +56,7 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasti
 
 ## Preview builds
 
-All branches push new nuget packages on succesfull CI builds to https://ci.appveyor.com/nuget/elasticsearch-net
+All branches push new nuget packages on successful CI builds to https://ci.appveyor.com/nuget/elasticsearch-net
 
           
 ### [Full documentation at https://www.elastic.co/guide/en/elasticsearch/client/net-api/current](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/index.html) 
