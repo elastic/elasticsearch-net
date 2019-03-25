@@ -26,14 +26,14 @@ namespace Tests.Document.Multiple.BulkAll
 				yield return new SmallObject() { Id = i };
 		}
 
-		protected async Task CreateIndexAsync(string indexName, int numberOfShards, Func<MappingsDescriptor, ITypeMapping> mappings = null)
+		protected async Task CreateIndexAsync(string indexName, int numberOfShards, Func<TypeMappingDescriptor<SmallObject>, ITypeMapping> mappings = null)
 		{
 			var result = await Client.CreateIndexAsync(indexName, s => s
 				.Settings(settings => settings
 					.NumberOfShards(numberOfShards)
 					.NumberOfReplicas(0)
 				)
-				.Mappings(mappings)
+				.Map<SmallObject>(mappings)
 			);
 			result.Should().NotBeNull();
 			result.ShouldBeValid();

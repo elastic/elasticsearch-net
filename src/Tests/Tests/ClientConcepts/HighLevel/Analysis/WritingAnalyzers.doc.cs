@@ -56,13 +56,11 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 		public void AddAnalyzerToFieldMapping()
 		{
 			var createIndexResponse = _client.CreateIndex("my-index", c => c
-				.Mappings(m => m
-					.Map<Project>(mm => mm
-						.Properties(p => p
-							.Text(t => t
-								.Name(n => n.Name)
-								.Analyzer("whitespace")
-							)
+				.Map<Project>(mm => mm
+					.Properties(p => p
+						.Text(t => t
+							.Name(n => n.Name)
+							.Analyzer("whitespace")
 						)
 					)
 				)
@@ -92,13 +90,11 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 						)
 					)
 				)
-				.Mappings(m => m
-					.Map<Project>(mm => mm
-						.Properties(p => p
-							.Text(t => t
-								.Name(n => n.Name)
-								.Analyzer("standard_english") // <2> Use the `standard_english` analyzer configured
-							)
+				.Map<Project>(mm => mm
+					.Properties(p => p
+						.Text(t => t
+							.Name(n => n.Name)
+							.Analyzer("standard_english") // <2> Use the `standard_english` analyzer configured
 						)
 					)
 				)
@@ -191,14 +187,12 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 						)
 					)
 				)
-				.Mappings(m => m
-					.Map<Question>(mm => mm
-						.AutoMap()
-						.Properties(p => p
-							.Text(t => t
-								.Name(n => n.Body)
-								.Analyzer("question")
-							)
+				.Map<Question>(mm => mm
+					.AutoMap()
+					.Properties(p => p
+						.Text(t => t
+							.Name(n => n.Body)
+							.Analyzer("question")
 						)
 					)
 				)
@@ -257,15 +251,13 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 						)
 					)
 				)
-				.Mappings(m => m
-					.Map<Question>(mm => mm
-						.AutoMap()
-						.Properties(p => p
-							.Text(t => t
-								.Name(n => n.Body)
-								.Analyzer("index_question")
-								.SearchAnalyzer("search_question")
-							)
+				.Map<Question>(mm => mm
+					.AutoMap()
+					.Properties(p => p
+						.Text(t => t
+							.Name(n => n.Body)
+							.Analyzer("index_question")
+							.SearchAnalyzer("search_question")
 						)
 					)
 				)

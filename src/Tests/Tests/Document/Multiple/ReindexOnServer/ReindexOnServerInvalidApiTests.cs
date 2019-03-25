@@ -31,11 +31,11 @@ namespace Tests.Document.Multiple.ReindexOnServer
 		}
 
 		// https://youtrack.jetbrains.com/issue/RIDER-19912
-		[I] public override async Task ReturnsExpectedStatusCode() => base.ReturnsExpectedResponse();
+		[I] public override async Task ReturnsExpectedStatusCode() => await base.ReturnsExpectedResponse();
 
-		[I] public override async Task ReturnsExpectedIsValid() => base.ReturnsExpectedIsValid();
+		[I] public override async Task ReturnsExpectedIsValid() => await base.ReturnsExpectedIsValid();
 
-		[I] public override async Task ReturnsExpectedResponse() => base.ReturnsExpectedResponse();
+		[I] public override async Task ReturnsExpectedResponse() => await base.ReturnsExpectedResponse();
 
 	}
 }

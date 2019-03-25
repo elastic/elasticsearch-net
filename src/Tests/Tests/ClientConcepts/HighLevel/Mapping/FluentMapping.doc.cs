@@ -55,25 +55,23 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			 * and map each property explicitly
 			 */
 			var createIndexResponse = _client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<Company>(m => m
-						.Properties(ps => ps
-							.Text(s => s
-								.Name(n => n.Name)
-							)
-							.Object<Employee>(o => o
-								.Name(n => n.Employees)
-								.Properties(eps => eps
-									.Text(s => s
-										.Name(e => e.FirstName)
-									)
-									.Text(s => s
-										.Name(e => e.LastName)
-									)
-									.Number(n => n
-										.Name(e => e.Salary)
-										.Type(NumberType.Integer)
-									)
+				.Map<Company>(m => m
+					.Properties(ps => ps
+						.Text(s => s
+							.Name(n => n.Name)
+						)
+						.Object<Employee>(o => o
+							.Name(n => n.Employees)
+							.Properties(eps => eps
+								.Text(s => s
+									.Name(e => e.FirstName)
+								)
+								.Text(s => s
+									.Name(e => e.LastName)
+								)
+								.Number(n => n
+									.Name(e => e.Salary)
+									.Type(NumberType.Integer)
 								)
 							)
 						)
@@ -151,13 +149,11 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			* `List<Employee>` property as an `object` datatype
 			*/
 			var createIndexResponse = _client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<Company>(m => m
-						.AutoMap()
-						.Properties(ps => ps
-							.Nested<Employee>(n => n
-								.Name(nn => nn.Employees)
-							)
+				.Map<Company>(m => m
+					.AutoMap()
+					.Properties(ps => ps
+						.Nested<Employee>(n => n
+							.Name(nn => nn.Employees)
 						)
 					)
 				)
@@ -199,15 +195,13 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			 * generates the same mapping as the previous
 			 */
 			createIndexResponse = _client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<Company>(m => m
-						.Properties(ps => ps
-							.Nested<Employee>(n => n
-								.Name(nn => nn.Employees)
-							)
+				.Map<Company>(m => m
+					.Properties(ps => ps
+						.Nested<Employee>(n => n
+							.Name(nn => nn.Employees)
 						)
-						.AutoMap()
 					)
+					.AutoMap()
 				)
 			);
 
@@ -268,35 +262,33 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		public void OverridingAutoMappedAttributes()
 		{
 			var createIndexResponse = _client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<CompanyWithAttributes>(m => m
-						.AutoMap() // <1> Automap company
-						.Properties(ps => ps // <2> Override company inferred mappings
-							.Nested<EmployeeWithAttributes>(n => n
-								.Name(nn => nn.Employees)
-								.AutoMap() // <3> Automap nested employee type
-								.Properties(pps => pps // <4> Override employee inferred mappings
-									.Text(s => s
-										.Name(e => e.FirstName)
-										.Fields(fs => fs
-											.Keyword(ss => ss
-												.Name("firstNameRaw")
-											)
-											.TokenCount(t => t
-												.Name("length")
-												.Analyzer("standard")
-											)
+				.Map<CompanyWithAttributes>(m => m
+					.AutoMap() // <1> Automap company
+					.Properties(ps => ps // <2> Override company inferred mappings
+						.Nested<EmployeeWithAttributes>(n => n
+							.Name(nn => nn.Employees)
+							.AutoMap() // <3> Automap nested employee type
+							.Properties(pps => pps // <4> Override employee inferred mappings
+								.Text(s => s
+									.Name(e => e.FirstName)
+									.Fields(fs => fs
+										.Keyword(ss => ss
+											.Name("firstNameRaw")
+										)
+										.TokenCount(t => t
+											.Name("length")
+											.Analyzer("standard")
 										)
 									)
-									.Number(nu => nu
-										.Name(e => e.Salary)
-										.Type(NumberType.Double)
-										.IgnoreMalformed(false)
-									)
-									.Date(d => d
-										.Name(e => e.Birthday)
-										.Format("MM-dd-yy")
-									)
+								)
+								.Number(nu => nu
+									.Name(e => e.Salary)
+									.Type(NumberType.Double)
+									.IgnoreMalformed(false)
+								)
+								.Date(d => d
+									.Name(e => e.Birthday)
+									.Format("MM-dd-yy")
 								)
 							)
 						)

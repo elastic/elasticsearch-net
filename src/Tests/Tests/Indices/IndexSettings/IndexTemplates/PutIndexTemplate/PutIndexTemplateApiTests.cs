@@ -52,21 +52,19 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 			.IndexPatterns("nestx-*")
 			.Create(false)
 			.Settings(p => p.NumberOfShards(1))
-			.Mappings(m => m
-				.Map("doc", tm => tm
-					.DynamicTemplates(t => t
-						.DynamicTemplate("base", dt => dt
-							.Match("*")
-							.MatchMappingType("*")
-							.Mapping(mm => mm
-								.Generic(g => g
-									.Index(false)
-								)
+			.Map(tm => tm
+				.DynamicTemplates(t => t
+					.DynamicTemplate("base", dt => dt
+						.Match("*")
+						.MatchMappingType("*")
+						.Mapping(mm => mm
+							.Generic(g => g
+								.Index(false)
 							)
 						)
 					)
-				)
-			);
+			)
+		);
 
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 
@@ -81,26 +79,16 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 			{
 				NumberOfShards = 1
 			},
-			Mappings = new Mappings
+			Mappings = new TypeMapping
 			{
+				DynamicTemplates = new DynamicTemplateContainer
 				{
-					"doc", new TypeMapping
+					{ "base", new DynamicTemplate
 					{
-						DynamicTemplates = new DynamicTemplateContainer
-						{
-							{
-								"base", new DynamicTemplate
-								{
-									Match = "*",
-									MatchMappingType = "*",
-									Mapping = new GenericProperty
-									{
-										Index = false
-									}
-								}
-							}
-						}
-					}
+						Match = "*",
+						MatchMappingType = "*",
+						Mapping = new GenericProperty { Index = false }
+					} }
 				}
 			}
 		};

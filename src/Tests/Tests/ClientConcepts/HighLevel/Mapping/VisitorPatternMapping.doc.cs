@@ -68,9 +68,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		{
 			/** Now we can pass an instance of our custom visitor to `.AutoMap()` */
 			var createIndexResponse = client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<Employee>(m => m.AutoMap(new DisableDocValuesPropertyVisitor()))
-				)
+				.Map<Employee>(m => m.AutoMap(new DisableDocValuesPropertyVisitor()))
 			);
 
 			/** and any time the client maps a property of the POCO (Employee in this example) as a number (INumberProperty) or boolean (IBooleanProperty),
@@ -156,9 +154,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		public void UsingACustomPropertyVisitorOnPropertyInfo()
 		{
 			var createIndexResponse = client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<Employee>(m => m.AutoMap(new EverythingIsATextPropertyVisitor()))
-				)
+				.Map<Employee>(m => m.AutoMap(new EverythingIsATextPropertyVisitor()))
 			);
 
 			/**
@@ -229,9 +225,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		[U] public void HidesInheritedMembers()
 		{
 			var createIndexResponse = client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<DictionaryDocument>(m => m.AutoMap(new IgnoreInheritedPropertiesVisitor<DictionaryDocument>()))
-				)
+				.Map<DictionaryDocument>(m => m.AutoMap(new IgnoreInheritedPropertiesVisitor<DictionaryDocument>()))
 			);
 
 			/**

@@ -60,7 +60,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			var leadDev = properties[Property<Project>(p => p.LeadDeveloper)];
 			leadDev.Should().NotBeNull();
 
-			var props = response.Indices["x"]?["y"].Properties;
+			var props = response.Indices["x"]?.Mappings.Properties;
 			props.Should().BeNull();
 
 			//hide

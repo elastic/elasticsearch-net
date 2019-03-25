@@ -147,8 +147,10 @@ namespace Tests.Document.Multiple.BulkAll
 		private async Task<IEnumerable<SmallObject>> CreateIndexAndReturnDocuments(string index)
 		{
 			await CreateIndexAsync(index, NumberOfShards, m => m
-				.Map<SmallObject>(mm => mm.Properties(p => p.Number(n => n.Name(pp => pp.Number).Coerce(false).IgnoreMalformed(false)))
-				));
+				.Properties(p => p
+					.Number(n => n.Name(pp => pp.Number).Coerce(false).IgnoreMalformed(false))
+				)
+			);
 
 			var documents = CreateLazyStreamOfDocuments(NumberOfDocuments)
 				.Select(s =>

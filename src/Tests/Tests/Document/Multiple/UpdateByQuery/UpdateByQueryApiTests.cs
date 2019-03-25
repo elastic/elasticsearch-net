@@ -47,12 +47,10 @@ namespace Tests.Document.Multiple.UpdateByQuery
 			foreach (var index in values.Values)
 			{
 				Client.CreateIndex(index, c => c
-					.Mappings(m => m
-						.Map<Test>(map => map
-							.Dynamic(false)
-							.Properties(props => props
-								.Text(s => s.Name(p => p.Text))
-							)
+					.Map<Test>(map => map
+						.Dynamic(false)
+						.Properties(props => props
+							.Text(s => s.Name(p => p.Text))
 						)
 					)
 				);

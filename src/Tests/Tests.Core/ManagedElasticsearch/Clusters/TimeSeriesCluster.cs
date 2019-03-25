@@ -23,9 +23,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 		{
 			_client.PutIndexTemplate("logs-template", p => p
 				.Create()
-				.Mappings(map => map
-					.Map<Log>(m => m.AutoMap())
-				)
+				.Map<Log>(m => m.AutoMap())
 				.IndexPatterns(IndicesWildCard)
 				.Settings(s => s
 					.NumberOfShards(1)

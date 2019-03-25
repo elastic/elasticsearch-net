@@ -67,10 +67,8 @@ namespace Tests.QueryDsl.Specialized.Percolate
 						.NumberOfReplicas(0)
 						.Analysis(DefaultSeeder.ProjectAnalysisSettings)
 					)
-					.Mappings(m => m
-						.Map<Project>(mm => mm.AutoMap()
-							.Properties(DefaultSeeder.ProjectProperties)
-						)
+					.Map<Project>(mm => mm.AutoMap()
+						.Properties(DefaultSeeder.ProjectProperties)
 					)
 				);
 				var percolationIndex = index + "-queries";
@@ -80,10 +78,8 @@ namespace Tests.QueryDsl.Specialized.Percolate
 						.NumberOfReplicas(0)
 						.Analysis(DefaultSeeder.ProjectAnalysisSettings)
 					)
-					.Mappings(m => m
-						.Map<ProjectPercolation>(mm => mm.AutoMap()
-							.Properties(DefaultSeeder.PercolatedQueryProperties)
-						)
+					.Map<ProjectPercolation>(mm => mm.AutoMap()
+						.Properties(DefaultSeeder.PercolatedQueryProperties)
 					)
 				);
 

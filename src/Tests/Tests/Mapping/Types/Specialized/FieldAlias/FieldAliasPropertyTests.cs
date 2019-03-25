@@ -41,10 +41,6 @@ namespace Tests.Mapping.Types.Specialized.FieldAlias
 		};
 
 		protected override ICreateIndexRequest CreateIndexSettings(CreateIndexDescriptor create) => create
-			.Mappings(m => m
-				.Map<Project>(mm => mm
-					.AutoMap()
-				)
-			);
+			.Map<Project>(mm => mm.AutoMap());
 	}
 }

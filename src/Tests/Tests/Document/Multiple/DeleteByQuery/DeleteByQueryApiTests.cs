@@ -72,11 +72,9 @@ namespace Tests.Document.Multiple.DeleteByQuery
 						.NumberOfReplicas(0)
 						.Analysis(DefaultSeeder.ProjectAnalysisSettings)
 					)
-					.Mappings(m => m
-						.Map<Project>(p => p
-							.AutoMap()
-							.Properties(DefaultSeeder.ProjectProperties)
-						)
+					.Map<Project>(p => p
+						.AutoMap()
+						.Properties(DefaultSeeder.ProjectProperties)
 					)
 				);
 

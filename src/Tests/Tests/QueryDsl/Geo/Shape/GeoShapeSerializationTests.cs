@@ -118,20 +118,18 @@ namespace Tests.QueryDsl.Geo
 					.NumberOfShards(1)
 					.NumberOfReplicas(0)
 				)
-				.Mappings(m => m
-					.Map<Domain.Shape>(mm => mm
-						.AutoMap()
-						.Properties(p => p
-							.GeoShape(g => g
-								.Name(n => n.GeometryCollection)
-							)
-							.GeoShape(g => g
-								.Name(n => n.Envelope)
-							)
-							.GeoShape(g => g
-								.Name(n => n.Circle)
-								.Strategy(GeoStrategy.Recursive)
-							)
+				.Map<Domain.Shape>(mm => mm
+					.AutoMap()
+					.Properties(p => p
+						.GeoShape(g => g
+							.Name(n => n.GeometryCollection)
+						)
+						.GeoShape(g => g
+							.Name(n => n.Envelope)
+						)
+						.GeoShape(g => g
+							.Name(n => n.Circle)
+							.Strategy(GeoStrategy.Recursive)
 						)
 					)
 				)
@@ -169,20 +167,18 @@ namespace Tests.QueryDsl.Geo
 					.NumberOfShards(1)
 					.NumberOfReplicas(0)
 				)
-				.Mappings(m => m
-					.Map<Domain.Shape>(mm => mm
-						.AutoMap()
-						.Properties(p => p
-							.GeoShape(g => g
-								.Name(n => n.GeometryCollection)
-							)
-							.GeoShape(g => g
-								.Name(n => n.Envelope)
-							)
-							.GeoShape(g => g
-								.Name(n => n.Circle)
-								.Strategy(GeoStrategy.Recursive)
-							)
+				.Map<Domain.Shape>(mm => mm
+					.AutoMap()
+					.Properties(p => p
+						.GeoShape(g => g
+							.Name(n => n.GeometryCollection)
+						)
+						.GeoShape(g => g
+							.Name(n => n.Envelope)
+						)
+						.GeoShape(g => g
+							.Name(n => n.Circle)
+							.Strategy(GeoStrategy.Recursive)
 						)
 					)
 				)
