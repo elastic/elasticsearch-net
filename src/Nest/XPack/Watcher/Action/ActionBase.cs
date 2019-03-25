@@ -175,9 +175,6 @@ namespace Nest
 						case ActionType.Logging:
 							Serialize<ILoggingAction>(ref writer, action, formatterResolver);
 							break;
-						case ActionType.HipChat:
-							Serialize<IHipChatAction>(ref writer, action, formatterResolver);
-							break;
 						case ActionType.Slack:
 							Serialize<ISlackAction>(ref writer, action, formatterResolver);
 							break;

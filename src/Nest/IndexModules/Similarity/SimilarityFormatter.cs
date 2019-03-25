@@ -10,13 +10,12 @@ namespace Nest
 		private static readonly AutomataDictionary Similarities = new AutomataDictionary
 		{
 			{ "BM25", 0 },
-			{ "classic", 1 },
-			{ "LMDirichlet", 2 },
-			{ "DFR", 3 },
-			{ "DFI", 4 },
-			{ "IB", 5 },
-			{ "LMJelinekMercer", 6 },
-			{ "scripted", 7 }
+			{ "LMDirichlet", 1 },
+			{ "DFR", 2 },
+			{ "DFI", 3 },
+			{ "IB", 4 },
+			{ "LMJelinekMercer", 5 },
+			{ "scripted", 6 }
 		};
 
 		private static readonly byte[] Type = JsonWriter.GetEncodedPropertyNameWithoutQuotation("type");
@@ -50,18 +49,16 @@ namespace Nest
 					case 0:
 						return Deserialize<BM25Similarity>(ref segmentReader, formatterResolver);
 					case 1:
-						return Deserialize<ClassicSimilarity>(ref segmentReader, formatterResolver);
-					case 2:
 						return Deserialize<LMDirichletSimilarity>(ref segmentReader, formatterResolver);
-					case 3:
+					case 2:
 						return Deserialize<DFRSimilarity>(ref segmentReader, formatterResolver);
-					case 4:
+					case 3:
 						return Deserialize<DFISimilarity>(ref segmentReader, formatterResolver);
-					case 5:
+					case 4:
 						return Deserialize<IBSimilarity>(ref segmentReader, formatterResolver);
-					case 6:
+					case 5:
 						return Deserialize<LMJelinekMercerSimilarity>(ref segmentReader, formatterResolver);
-					case 7:
+					case 6:
 						return Deserialize<ScriptedSimilarity>(ref segmentReader, formatterResolver);
 				}
 			}
@@ -83,9 +80,6 @@ namespace Nest
 			{
 				case "BM25":
 					Serialize<IBM25Similarity>(ref writer, value, formatterResolver);
-					break;
-				case "classic":
-					Serialize<IClassicSimilarity>(ref writer, value, formatterResolver);
 					break;
 				case "LMDirichlet":
 					Serialize<ILMDirichletSimilarity>(ref writer, value, formatterResolver);

@@ -204,8 +204,8 @@ namespace Nest
 		private IAggregate GetTopHitsAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var count = 0;
-			long total = 0;
 			double? maxScore = null;
+			HitsTotal total = null;
 			List<LazyDocument> topHits = null;
 
 			while (reader.ReadIsInObject(ref count))
@@ -216,7 +216,8 @@ namespace Nest
 					switch (value)
 					{
 						case 0:
-							total = reader.ReadInt64();
+							var hitsFormatter = formatterResolver.GetFormatter<HitsTotal>();
+							total = hitsFormatter.Deserialize(ref reader, formatterResolver);
 							break;
 						case 1:
 							maxScore = reader.ReadNullableDouble();
