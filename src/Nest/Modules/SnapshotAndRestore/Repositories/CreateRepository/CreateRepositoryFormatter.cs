@@ -34,6 +34,9 @@ namespace Nest
 				case "fs":
 					Serialize<IFileSystemRepository>(ref writer, value.Repository, formatterResolver);
 					break;
+				case "source":
+					Serialize<ISourceOnlyRepository>(ref writer, value.Repository, formatterResolver);
+					break;
 				default:
 					Serialize<ISnapshotRepository>(ref writer, value.Repository, formatterResolver);
 					break;
