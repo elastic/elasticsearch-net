@@ -12,7 +12,6 @@ namespace Nest
 		string Index { get; }
 		IReadOnlyDictionary<Field, TermVector> TermVectors { get; }
 		long Took { get; }
-		string Type { get; }
 		long Version { get; }
 	}
 
@@ -33,9 +32,6 @@ namespace Nest
 
 		[DataMember(Name ="took")]
 		public long Took { get; internal set; }
-
-		[DataMember(Name ="_type")]
-		public string Type { get; internal set; }
 
 		[DataMember(Name ="_version")]
 		public long Version { get; internal set; }

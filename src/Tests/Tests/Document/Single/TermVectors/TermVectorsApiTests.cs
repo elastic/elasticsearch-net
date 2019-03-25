@@ -88,7 +88,6 @@ namespace Tests.Document.Single.TermVectors
 			response.Version.Should().Be(1);
 			response.Id.Should().NotBeNullOrEmpty();
 			response.Index.Should().NotBeNullOrEmpty();
-			response.Type.Should().NotBeNullOrEmpty();
 
 			foreach (var termVector in response.TermVectors)
 			{
