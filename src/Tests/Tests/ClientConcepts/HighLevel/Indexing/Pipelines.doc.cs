@@ -22,6 +22,17 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 			public int Id { get; set; }
 			public string FirstName { get; set; }
 			public string LastName { get; set; }
+			public string IpAddress { get; set; }
+			public GeoIp GeoIp { get; set; }
+		}
+
+		public class GeoIp
+		{
+			public string CityName { get; set; }
+			public string ContinentName { get; set; }
+			public string CountryIsoCode { get; set; }
+			public GeoLocation Location { get; set; }
+			public string RegionName { get; set; }
 		}
 
 		/**
@@ -30,7 +41,8 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		* incoming values before they are indexed.
 		*
 		* Lets assume that our application always expects surnames to be capitalised, and for initials to
-		* be indexed into their own field.
+		* be indexed into their own field. We also have an IP address that we'd like to convert into
+		* a human-readable location.
 		*
 		* We could achieve this requirement by creating a custom mapping and creating an ingest pipeline.
 		* The Person type can then be used as-is, without making any changes.
@@ -43,18 +55,25 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				.Index("people")
 				.AutoMap() //<1> automatically create the mapping from the type
 				.Properties(props => props
-						.Keyword(k => k.Name("initials")) //<2> create an additional field to store the initials
+					.Keyword(t => t.Name("initials")) //<2> create an additional field to store the initials
+					.Ip(t => t.Name(dv => dv.IpAddress)) //<3> map field as IP Address type
+					.Object<GeoIp>(t => t.Name(dv => dv.GeoIp)) //<4> map GeoIp as object
 				)
 			);
 
 			client.PutPipeline("person-pipeline", p => p
 				.Processors(ps => ps
-					.Uppercase<Person>(u => u
-							.Field(t => t.LastName) //<3> uppercase the lastname
+					.Uppercase<Person>(s => s
+						.Field(t => t.LastName) //<5> uppercase the lastname
 					)
 					.Script(s => s
-						.Lang("painless") //<4> use a painless script to populate the new field
-						.Source("ctx.initials = ctx.firstName.substring(0,1) + ctx.lastName.substring(0,1)"))
+						.Lang("painless") //<6> use a painless script to populate the new field
+						.Source("ctx.initials = ctx.firstName.substring(0,1) + ctx.lastName.substring(0,1)")
+					)
+					.GeoIp<GeoIp>(s => s //<7> use GeoUp plugin to enrich the GeoIp object from the supplied IP Address
+						.Field("ipAddress")
+						.TargetField("geoIp")
+					)
 				)
 			);
 
@@ -62,10 +81,11 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 			{
 				Id = 1,
 				FirstName = "Martijn",
-				LastName = "Laarman"
+				LastName = "Laarman",
+				IpAddress = "139.130.4.5"
 			};
 
-			var indexResponse = client.Index(person, p => p.Index("people").Pipeline("person-pipeline")); //<5> index the document using the created pipeline
+			var indexResponse = client.Index(person, p => p.Index("people").Pipeline("person-pipeline")); //<8> index the document using the created pipeline
 		}
 
 		/**
