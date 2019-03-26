@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
@@ -120,18 +121,14 @@ namespace Tests.Document.Multiple.Bulk
 					.Set<Project>(t => t.Field(f => f.Description).Value("Default"))
 				)
 			);
-
-			if (!pipelineResponse.IsValid)
-				throw new Exception("Failed to set up pipeline named 'default-pipeline' required for bulk");
+			pipelineResponse.ShouldBeValid("Failed to set up pipeline named 'default-pipeline' required for bulk {p");
 
 			pipelineResponse = client.PutPipeline("pipeline", p => p
 				.Processors(pr => pr
 					.Set<Project>(t => t.Field(f => f.Description).Value("Overridden"))
 				)
 			);
-
-			if (!pipelineResponse.IsValid)
-				throw new Exception($"Failed to set up pipeline named 'pipeline' required for bulk");
+			pipelineResponse.ShouldBeValid($"Failed to set up pipeline named 'pipeline' required for bulk");
 
 			base.IntegrationSetup(client, values);
 		}
