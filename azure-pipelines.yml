@@ -45,5 +45,11 @@ jobs:
       es601:
         esVersion: '6.0.1'
   steps:
-      - script: 'build.bat integrate $(esVersion) skipdocs'
+      - script: 'build.bat integrate $(esVersion) "readonly,writable,bool,xpack" skipdocs'
         displayName: '$(esVersion) integration tests'
+      - task: PublishTestResults@2
+        condition: succeededOrFailed()
+        inputs:
+            testRunner: VSTest
+            testResultsFiles: 'src/Tests/Tests/**/*.trx'
+            testRunTitle: '$(esVersion)  Integration Tests'
