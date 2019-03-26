@@ -75,7 +75,6 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 	/// <summary>
 	/// Multiple scripted metric with dictionary result
 	/// </summary>
-	[SkipNonStructuralChange]
 	public class ScriptedMetricMultiAggregationTests : ProjectsOnlyAggregationUsageTestBase
 	{
 		private readonly Scripted First = new Scripted
@@ -90,9 +89,9 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 
 			Reduce =
 				"def reduce = [:];" +
-				"for (agg in states)" +
+				"for (map in states)" +
 				"{" +
-				"    for (entry in agg.map.entrySet())" +
+				"    for (entry in map.entrySet())" +
 				"    {" +
 				"        if (reduce.containsKey(entry.getKey()))" +
 				"            reduce[entry.getKey()] += entry.getValue();" +
@@ -101,19 +100,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 				"    }" +
 				"}" +
 				"return reduce;",
-			Combine =
-				"def combine = [:];" +
-				"for (agg in states)" +
-				"{" +
-				"    for (entry in agg.map.entrySet())" +
-				"    {" +
-				"        if (combine.containsKey(entry.getKey()))" +
-				"            combine[entry.getKey()] += entry.getValue();" +
-				"        else" +
-				"            combine[entry.getKey()] = entry.getValue();" +
-				"    }" +
-				"}" +
-				"return combine;",
+			Combine = "return state.map;"
 		};
 
 		private readonly Scripted Second = new Scripted
