@@ -16,7 +16,7 @@ namespace Nest
 		AggregateDictionary Aggs { get; }
 
 		/// <summary>
-		/// Gets the documents inside the hits, by deserializing <see cref="IHitMetadata{T}.Source" /> into T.
+		/// Gets the documents inside the hits, by deserializing <see cref="IHitMetadata{T}.Source" /> into <typeparamref name="T" />
 		/// <para>
 		/// NOTE: if you use <see cref="ISearchRequest.StoredFields" /> on the search request,
 		/// <see cref="Documents" /> will be empty and you should use <see cref="Fields" />
@@ -29,7 +29,7 @@ namespace Nest
 
 		/// <summary>
 		/// Gets the field values inside the hits, when the search request uses
-		/// <see cref="SearchRequest{T}.StoredFields" />.
+		/// <see cref="SearchRequest.StoredFields" />.
 		/// </summary>
 		IReadOnlyCollection<FieldValues> Fields { get; }
 
@@ -64,7 +64,7 @@ namespace Nest
 
 		/// <summary>
 		/// Gets the scroll id which can be passed to the Scroll API in order to retrieve the next batch
-		/// of results. Has a value only when <see cref="SearchRequest{T}.Scroll" /> is specified on the
+		/// of results. Has a value only when <see cref="SearchRequest.Scroll" /> is specified on the
 		/// search request
 		/// </summary>
 		string ScrollId { get; }
