@@ -69,7 +69,7 @@ namespace Tests.Document.Single.Update
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var id in values.Values)
-				Client.Index(Project.Instance, i => i.Id(id).Routing(CallIsolatedValue));
+				Client.Index(Project.Instance, i => i.Id(id).Routing(Project.Instance.Name));
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -80,6 +80,6 @@ namespace Tests.Document.Single.Update
 		);
 
 		protected override UpdateDescriptor<Project, Project> NewDescriptor() =>
-			new UpdateDescriptor<Project, Project>(CallIsolatedValue).Routing(CallIsolatedValue);
+			new UpdateDescriptor<Project, Project>(CallIsolatedValue).Routing(Project.Instance.Name);
 	}
 }
