@@ -144,8 +144,8 @@ namespace Tests.XPack.Security.RoleMapping
 
 			mapping.Enabled.Should().BeFalse();
 			mapping.Roles.Should().BeEquivalentTo("admin");
-			if (!TestConfiguration.Instance.Random.SourceSerializer)
-				mapping.Metadata.Should().HaveCount(1).And.ContainKeys("x");
+			mapping.Metadata.Should().HaveCount(2).And.ContainKeys("x");
+
 			mapping.Rules.Should().NotBeNull();
 
 			var allMapping = mapping.Rules as AllRoleMappingRule;
