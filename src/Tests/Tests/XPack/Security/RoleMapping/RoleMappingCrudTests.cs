@@ -4,6 +4,7 @@ using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
+using Tests.Configuration;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
@@ -143,7 +144,8 @@ namespace Tests.XPack.Security.RoleMapping
 
 			mapping.Enabled.Should().BeFalse();
 			mapping.Roles.Should().BeEquivalentTo("admin");
-			mapping.Metadata.Should().HaveCount(1).And.ContainKeys("x");
+			if (!TestConfiguration.Instance.Random.SourceSerializer)
+				mapping.Metadata.Should().HaveCount(1).And.ContainKeys("x");
 			mapping.Rules.Should().NotBeNull();
 
 			var allMapping = mapping.Rules as AllRoleMappingRule;
@@ -157,7 +159,8 @@ namespace Tests.XPack.Security.RoleMapping
 
 			mapping.Enabled.Should().BeTrue();
 			mapping.Roles.Should().BeEquivalentTo("admin", "user");
-			mapping.Metadata.Should().HaveCount(2).And.ContainKeys("x", "z");
+			if (!TestConfiguration.Instance.Random.SourceSerializer)
+				mapping.Metadata.Should().HaveCount(2).And.ContainKeys("x", "z");
 			mapping.Rules.Should().NotBeNull();
 
 			var allMapping = mapping.Rules as AllRoleMappingRule;

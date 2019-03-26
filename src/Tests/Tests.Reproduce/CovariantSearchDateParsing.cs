@@ -31,7 +31,7 @@ namespace Tests.Reproduce
 			var document = response.Documents.SingleOrDefault();
 			document.Should().NotBeNull();
 			document.DateAsString.Should().Be(date);
-			document.Date.ShouldBeEquivalentTo(DateTime.Parse(date));
+			document.Date.Should().Be(DateTime.Parse(date));
 		}
 
 		public interface ISearchResult

@@ -79,7 +79,7 @@ namespace Tests.QueryDsl.Compound.Dismax
 				)
 			);
 
-			query.ShouldNotThrow();
+			query.Should().NotThrow();
 		}
 	}
 }
