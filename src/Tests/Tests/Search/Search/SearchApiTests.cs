@@ -281,7 +281,8 @@ namespace Tests.Search.Search
 			response.Hits.Count().Should().BeGreaterThan(0);
 			response.Hits.First().Should().NotBeNull();
 			response.Hits.First().Fields.ValueOf<Project, string>(p => p.Name).Should().NotBeNullOrEmpty();
-			response.Hits.First().Fields.Value<int>("lastActivity").Should().BeGreaterThan(0);
+			var lastActivityYear = Convert.ToInt32(response.Hits.First().Fields.Value<string>("lastActivity"));
+			lastActivityYear.Should().BeGreaterThan(0);
 			response.Aggregations.Count.Should().BeGreaterThan(0);
 			var startDates = response.Aggregations.Terms("startDates");
 			startDates.Should().NotBeNull();
