@@ -13,8 +13,6 @@ using Xunit;
 
 namespace Tests.XPack.Watcher.ExecuteWatch
 {
-	// TODO 7.x setup of slack now needs the secret store
-	[SkipNonStructuralChange]
 	public class ExecuteWatchApiTests
 		: ApiIntegrationTestBase<XPackCluster, IExecuteWatchResponse, IExecuteWatchRequest, ExecuteWatchDescriptor, ExecuteWatchRequest>
 	{
@@ -216,7 +214,7 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 
 			var resultActions = response.WatchRecord.Result.Actions;
 			resultActions.Should().NotBeNullOrEmpty();
-			resultActions.Count.Should().Be(7);
+			resultActions.Count.Should().Be(6);
 
 			var inputContainer = response.WatchRecord.Input as IInputContainer;
 			inputContainer.Should().NotBeNull();

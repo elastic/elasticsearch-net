@@ -9,8 +9,6 @@ using Tests.Framework.Integration;
 
 namespace Tests.XPack.Watcher.DeleteWatch
 {
-	// TODO 7.x setup of slack now needs the secret store
-	[SkipNonStructuralChange]
 	public class DeleteWatchApiTests
 		: ApiIntegrationTestBase<XPackCluster, IDeleteWatchResponse, IDeleteWatchRequest, DeleteWatchDescriptor, DeleteWatchRequest>
 	{
@@ -76,8 +74,6 @@ namespace Tests.XPack.Watcher.DeleteWatch
 		}
 	}
 
-	// TODO 7.x setup of slack now needs the secret store
-	[SkipNonStructuralChange]
 	public class DeleteNonExistentWatchApiTests
 		: ApiIntegrationTestBase<XPackCluster, IDeleteWatchResponse, IDeleteWatchRequest, DeleteWatchDescriptor, DeleteWatchRequest>
 	{
@@ -109,7 +105,7 @@ namespace Tests.XPack.Watcher.DeleteWatch
 			//This API returns different results depending on whether `.watches` exists or not
 			if (response.ServerError?.Status == 404)
 			{
-				response.ServerError.Error.Reason.Should().Be("no such index");
+				response.ServerError.Error.Reason.Should().Contain("no such index");
 				return;
 			}
 

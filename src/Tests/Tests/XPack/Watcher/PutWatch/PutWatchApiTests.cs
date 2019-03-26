@@ -12,8 +12,6 @@ using Tests.Framework.Integration;
 
 namespace Tests.XPack.Watcher.PutWatch
 {
-	// TODO 7.x setup of slack now needs the secret store
-	[SkipNonStructuralChange]
 	public class PutWatchApiTests : ApiIntegrationTestBase<XPackCluster, IPutWatchResponse, IPutWatchRequest, PutWatchDescriptor, PutWatchRequest>
 	{
 		public PutWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
