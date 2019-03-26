@@ -7,4 +7,4 @@
 		<SignAssembly>true</SignAssembly>
 		<AssemblyOriginatorKeyFile>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\build\keys\keypair.snk</AssemblyOriginatorKeyFile>
 	</PropertyGroup>
-</Project>
+</Project>/home/mpdreamz/projects/elastic/net-master/src
