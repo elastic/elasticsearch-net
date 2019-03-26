@@ -11,7 +11,7 @@ using Tests.Framework.Integration;
 namespace Tests.XPack.Watcher.WatcherStats
 {
 	// can sometimes return an invalid cast exception
-	[SkipVersion("<6.6.2", "https://github.com/elastic/elasticsearch/pull/39821")]
+	[SkipVersion("<6.7.0", "https://github.com/elastic/elasticsearch/pull/39821")]
 	public class WatcherStatsApiTests
 		: ApiIntegrationTestBase<XPackCluster, IWatcherStatsResponse, IWatcherStatsRequest, WatcherStatsDescriptor, WatcherStatsRequest>
 	{
