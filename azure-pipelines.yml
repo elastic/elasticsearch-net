@@ -36,8 +36,8 @@ jobs:
       - script: 'build.bat integrate $(esVersion) "readonly,writable,intrusiveoperation,bool,xpack" skipdocs'
         displayName: '$(esVersion) integration tests'
       - task: PublishTestResults@2
+        condition: succeededOrFailed()
         inputs:
-            condition: succeededOrFailed()
             testRunner: VSTest
             testResultsFiles: 'src/Tests/Tests/**/*.trx'
-            testRunTitle: Windows Integration Tests
+            testRunTitle: '$(esVersion)  Integration Tests'
