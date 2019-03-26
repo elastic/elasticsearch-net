@@ -5,6 +5,6 @@
 	</PropertyGroup>
 	<PropertyGroup>
 		<SignAssembly>true</SignAssembly>
-		<AssemblyOriginatorKeyFile>../../../build/keys/keypair.snk</AssemblyOriginatorKeyFile>
+		<AssemblyOriginatorKeyFile>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\build\keys\keypair.snk</AssemblyOriginatorKeyFile>
 	</PropertyGroup>
 </Project>

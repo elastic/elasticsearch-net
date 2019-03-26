@@ -33,10 +33,11 @@ jobs:
       es7:
         esVersion: '7.0.0-beta1'
   steps:
-      - script: 'build.bat integrate $(esVersion) skipdocs'
+      - script: 'build.bat integrate $(esVersion) "readonly,writable,bool,xpack" skipdocs'
         displayName: '$(esVersion) integration tests'
       - task: PublishTestResults@2
+        condition: succeededOrFailed()
         inputs:
             testRunner: VSTest
             testResultsFiles: 'src/Tests/Tests/**/*.trx'
-            testRunTitle: Windows Integration Tests
+            testRunTitle: '$(esVersion)  Integration Tests'
