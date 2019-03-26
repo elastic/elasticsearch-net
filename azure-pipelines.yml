@@ -3,10 +3,6 @@ jobs:
   pool:
     vmImage: 'ubuntu-16.04'
   steps:
-  - task: DotNetCoreInstaller@0
-    inputs:
-      packageType: 'sdk' 
-      version: '2.2.105'
   - script: ./build.sh test-one skipdocs
     displayName: 'build and unit test'
   - task: PublishTestResults@2
