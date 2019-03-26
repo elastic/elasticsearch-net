@@ -159,8 +159,8 @@ namespace Elasticsearch.Net
 					if (numberSegment.IsDouble())
 						return NumberConverter.ReadDouble(numberSegment.Array, numberSegment.Offset, out _);
 
-					// TODO: Check array to determine if larger than int32?
-					return NumberConverter.ReadInt32(numberSegment.Array, numberSegment.Offset, out _);
+					// TODO: Check arraysegment to determine if larger than int64?
+					return NumberConverter.ReadInt64(numberSegment.Array, numberSegment.Offset, out _);
 				case JsonToken.String:
                     return reader.ReadString();
                 case JsonToken.True:
