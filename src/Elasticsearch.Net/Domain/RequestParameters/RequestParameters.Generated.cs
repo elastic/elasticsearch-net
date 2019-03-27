@@ -1018,6 +1018,8 @@ namespace Elasticsearch.Net
 	public partial class CreateIndexRequestParameters : RequestParameters<CreateIndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>Whether a type should be expected in the body of the mappings.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Set the number of active shards to wait for before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 		///<summary>Explicit operation timeout</summary>
@@ -1183,6 +1185,8 @@ namespace Elasticsearch.Net
 	public partial class GetIndexRequestParameters : RequestParameters<GetIndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Whether to add the type name to the response (default: true)</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Ignore unavailable indexes (default: false)</summary>
@@ -1218,6 +1222,8 @@ namespace Elasticsearch.Net
 	public partial class GetFieldMappingRequestParameters : RequestParameters<GetFieldMappingRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Whether a type should be returned in the body of the mappings.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Whether the default mapping values should be returned as well</summary>
 		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1236,6 +1242,8 @@ namespace Elasticsearch.Net
 	public partial class GetMappingRequestParameters : RequestParameters<GetMappingRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Whether to add the type name to the response.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
@@ -1276,6 +1284,8 @@ namespace Elasticsearch.Net
 	public partial class GetIndexTemplateRequestParameters : RequestParameters<GetIndexTemplateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Whether a type should be returned in the body of the mappings.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -1330,6 +1340,8 @@ namespace Elasticsearch.Net
 	public partial class PutMappingRequestParameters : RequestParameters<PutMappingRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>Whether a type should be expected in the body of the mappings.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
@@ -1373,6 +1385,8 @@ namespace Elasticsearch.Net
 	public partial class PutIndexTemplateRequestParameters : RequestParameters<PutIndexTemplateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>Whether a type should be returned in the body of the mappings.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 		///<summary>Explicit operation timeout</summary>
@@ -1409,6 +1423,8 @@ namespace Elasticsearch.Net
 	public partial class RolloverIndexRequestParameters : RequestParameters<RolloverIndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>Whether a type should be included in the body of the mappings.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>If set to true the rollover action will only be validated but not actually performed even if a condition matches. The default is false</summary>
@@ -1880,6 +1896,8 @@ namespace Elasticsearch.Net
 		public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
+		///<summary>Specify whether to return sequence number and primary term of the last modification of each hit</summary>
+		public bool? SeqNoPrimaryTerm { get => Q<bool?>("seq_no_primary_term"); set => Q("seq_no_primary_term", value); }
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 		///<summary>
@@ -2152,6 +2170,10 @@ namespace Elasticsearch.Net
 		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
+		///<summary>only perform the update operation if the last operation that has changed the document has the specified sequence number</summary>
+		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+		///<summary>only perform the update operation if the last operation that has changed the document has the specified primary term</summary>
+		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>

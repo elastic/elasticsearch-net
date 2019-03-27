@@ -1592,14 +1592,16 @@ namespace Nest
 			{
 				case PUT:
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.IndicesPutMapping<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingForAll<TResponse>(p.RouteValues.Type,body,p.RequestParameters);
+					if (AllSet(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingForAll<TResponse>(p.RouteValues.Type,body,p.RequestParameters);
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesPutMapping<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
 					break;
 				case POST:
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.IndicesPutMappingPost<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingPostForAll<TResponse>(p.RouteValues.Type,body,p.RequestParameters);
+					if (AllSet(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingPostForAll<TResponse>(p.RouteValues.Type,body,p.RequestParameters);
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesPutMappingPost<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("IndicesPutMapping", p, new [] { PUT, POST }, "/{index}/{type}/_mapping", "/{index}/_mapping/{type}", "/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}", "/_mappings/{type}");
+			throw InvalidDispatch("IndicesPutMapping", p, new [] { PUT, POST }, "/{index}/{type}/_mapping", "/{index}/_mapping/{type}", "/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}", "/_mappings/{type}", "/{index}/_mappings", "/{index}/_mapping");
 		}
 		
 		internal Task<TResponse> IndicesPutMappingDispatchAsync<TResponse>(IRequest<PutMappingRequestParameters> p,SerializableData<IPutMappingRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -1608,14 +1610,16 @@ namespace Nest
 			{
 				case PUT:
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.IndicesPutMappingAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
-					if (AllSetNoFallback(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingForAllAsync<TResponse>(p.RouteValues.Type,body,p.RequestParameters,ct);
+					if (AllSet(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingForAllAsync<TResponse>(p.RouteValues.Type,body,p.RequestParameters,ct);
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesPutMappingAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
 					break;
 				case POST:
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.IndicesPutMappingPostAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
-					if (AllSetNoFallback(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingPostForAllAsync<TResponse>(p.RouteValues.Type,body,p.RequestParameters,ct);
+					if (AllSet(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingPostForAllAsync<TResponse>(p.RouteValues.Type,body,p.RequestParameters,ct);
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesPutMappingPostAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("IndicesPutMapping", p, new [] { PUT, POST }, "/{index}/{type}/_mapping", "/{index}/_mapping/{type}", "/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}", "/_mappings/{type}");
+			throw InvalidDispatch("IndicesPutMapping", p, new [] { PUT, POST }, "/{index}/{type}/_mapping", "/{index}/_mapping/{type}", "/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}", "/_mappings/{type}", "/{index}/_mappings", "/{index}/_mapping");
 		}
 		
 		internal TResponse IndicesPutSettingsDispatch<TResponse>(IRequest<UpdateIndexSettingsRequestParameters> p,SerializableData<IUpdateIndexSettingsRequest> body) where TResponse : class, IElasticsearchResponse, new()
