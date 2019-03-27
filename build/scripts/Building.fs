@@ -1,17 +1,10 @@
-﻿#I @"../../packages/build/FAKE/tools"
-#I @"../../packages/build/FSharp.Data/lib/net45"
-#r @"FakeLib.dll"
-#r @"FSharp.Data.dll"
-#nowarn "0044" //TODO sort out FAKE 5
-
-#load @"Paths.fsx"
-#load @"Tooling.fsx"
-#load @"Versioning.fsx"
+﻿namespace Scripts
 
 open System 
 open System.IO
-open Fake 
-open FSharp.Data 
+open Fake
+
+open FSharp.Data
 
 open Paths
 open Projects

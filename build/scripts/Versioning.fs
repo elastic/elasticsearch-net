@@ -1,12 +1,4 @@
-﻿#I @"../../packages/build/FAKE/tools"
-#I @"../../packages/build/FSharp.Data/lib/net45"
-#r @"FakeLib.dll"
-#r @"FSharp.Data.dll"
-#r @"System.Xml.Linq.dll"
-#nowarn "0044" //TODO sort out FAKE 5
-
-#load @"Paths.fsx"
-#load @"Commandline.fsx"
+﻿namespace Scripts
 
 open System
 open System.Diagnostics
@@ -14,9 +6,9 @@ open System.IO
 open FSharp.Data 
 
 open Fake 
+open Commandline
 open SemVerHelper
 open Paths
-open Commandline
 
 module Versioning = 
     // We used to rely on AssemblyInfo.cs from NEST to read and write the current version.

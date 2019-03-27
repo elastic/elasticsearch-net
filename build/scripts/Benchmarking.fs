@@ -1,9 +1,4 @@
-﻿#I @"../../packages/build/FAKE/tools"
-#r @"FakeLib.dll"
-#nowarn "0044" //TODO sort out FAKE 5
-
-#load @"Commandline.fsx"
-#load @"Paths.fsx"
+﻿namespace Scripts
 
 open Fake
 open System.IO

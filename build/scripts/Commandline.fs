@@ -1,13 +1,12 @@
-#I @"../../packages/build/FAKE/tools"
-#r @"FakeLib.dll"
-#nowarn "0044" //TODO sort out FAKE 5
+namespace Scripts
 
 open System
 open Fake
 
 //this is ugly but a direct port of what used to be duplicated in our DOS and bash scripts
+module Commandline =
 
-let private usage = """
+    let private usage = """
 USAGE:
 
 build <target> [params] [skiptests]
@@ -49,7 +48,6 @@ Execution hints can be provided anywhere on the command line
   K can be: sourceserializer, typedkeys or oldconnection (only valid on windows)
 """
 
-module Commandline =
     type MultiTarget = All | One
 
     let private args = getBuildParamOrDefault "cmdline" "build" |> split ' '

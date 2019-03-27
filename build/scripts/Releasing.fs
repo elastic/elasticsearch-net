@@ -1,12 +1,4 @@
-﻿#I @"../../packages/build/Octokit/lib/net45"
-#r @"FakeLib.dll"
-#r "Octokit.dll"
-#nowarn "0044" //TODO sort out FAKE 5
-
-#load @"Projects.fsx"
-#load @"Paths.fsx"
-#load @"Tooling.fsx"
-#load @"Versioning.fsx"
+﻿namespace Scripts
 
 open System
 open System.Collections.Generic

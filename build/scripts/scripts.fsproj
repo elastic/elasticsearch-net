@@ -1,26 +1,77 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <OutputType>Exe</OutputType>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="Projects.fsx" />
-    <None Include="Paths.fsx" />
-    <None Include="Tooling.fsx" />
-    <None Include="Releasing.fsx" />
-    <None Include="Versioning.fsx" />
-    <None Include="Benchmarking.fsx" />
-    <None Include="XmlDocPatcher.fsx" />
-    <None Include="Building.fsx" />
-    <None Include="Testing.fsx" />
-    <None Include="Documentation.fsx" />
-    <None Include="Commandline.fsx" />
-    <None Include="Targets.fsx" />
+    <Compile Include="Commandline.fs" />
+    <Compile Include="Projects.fs" />
+    <Compile Include="Paths.fs" />
+    <Compile Include="Tooling.fs" />
+    <Compile Include="Versioning.fs" />
+    <Compile Include="Releasing.fs" />
+    <Compile Include="Benchmarking.fs" />
+    <Compile Include="XmlDocPatcher.fs" />
+    <Compile Include="Building.fs" />
+    <Compile Include="Testing.fs" />
+    <Compile Include="Documentation.fs" />
+    <Compile Include="Targets.fs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\paket.bat"><Link>paket.bat</Link></Content>
     <Content Include="..\..\paket.dependencies"><Link>paket.bat</Link></Content>
     <Content Include="..\..\build.sh"><Link>paket.bat</Link></Content>
     <Content Include="..\..\build.bat"><Link>paket.bat</Link></Content>
+  </ItemGroup>
+  <!-- Type providers currently can't run inside the .NET Core 2.0 hosted compiler, see https://github.com/Microsoft/visualfsharp/pull/3658#issuecomment-334773415 -->
+  <PropertyGroup>
+    <IsWindows Condition="'$(OS)' == 'Windows_NT'">true</IsWindows>
+    <IsOSX Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::OSX)))' == 'true'">true</IsOSX>
+    <IsLinux Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))' == 'true'">true</IsLinux>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(IsWindows)' == 'true' AND Exists('C:\Program Files (x86)\Microsoft SDKs\F#\4.1\Framework\v4.0\fsc.exe')">
+    <FscToolPath>C:\Program Files (x86)\Microsoft SDKs\F#\4.1\Framework\v4.0</FscToolPath>
+    <FscToolExe>fsc.exe</FscToolExe>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(IsWindows)' == 'true' AND Exists('C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\Common7\IDE\CommonExtensions\Microsoft\FSharp\fsc.exe')">
+    <FscToolPath>C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\Common7\IDE\CommonExtensions\Microsoft\FSharp</FscToolPath>
+    <FscToolExe>fsc.exe</FscToolExe>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(IsWindows)' == 'true' AND Exists('C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\CommonExtensions\Microsoft\FSharp\fsc.exe')">
+    <FscToolPath>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\CommonExtensions\Microsoft\FSharp</FscToolPath>
+    <FscToolExe>fsc.exe</FscToolExe>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(IsWindows)' == 'true' AND Exists('C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\CommonExtensions\Microsoft\FSharp\fsc.exe')">
+    <FscToolPath>C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\CommonExtensions\Microsoft\FSharp</FscToolPath>
+    <FscToolExe>fsc.exe</FscToolExe>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(IsWindows)' == 'true' AND Exists('C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\CommonExtensions\Microsoft\FSharp\fsc.exe')">
+    <FscToolPath>C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\CommonExtensions\Microsoft\FSharp</FscToolPath>
+    <FscToolExe>fsc.exe</FscToolExe>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(IsWindows)' == 'true' AND Exists('C:\Program Files (x86)\Microsoft SDKs\F#\10.1\Framework\v4.0\fsc.exe')">
+    <FscToolPath>C:\Program Files (x86)\Microsoft SDKs\F#\10.1\Framework\v4.0</FscToolPath>
+    <FscToolExe>fsc.exe</FscToolExe>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(IsOSX)' == 'true'  AND Exists('/Library/Frameworks/Mono.framework/Versions/Current/Commands/fsharpc')">
+    <FscToolPath>/Library/Frameworks/Mono.framework/Versions/Current/Commands</FscToolPath>
+    <FscToolExe>fsharpc</FscToolExe>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(IsLinux)' == 'true' AND Exists('/usr/bin/fsharpc')">
+    <FscToolPath>/usr/bin</FscToolPath>
+    <FscToolExe>fsharpc</FscToolExe>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FakeLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\build\FAKE\tools\FakeLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Bullseye" Version="2.3.0" />
+    <PackageReference Include="FSharp.Data" Version="3.0.1" />
+    <PackageReference Include="FSharp.Data.TypeProviders" Version="5.0.0.6" />
+    <PackageReference Include="Octokit" Version="0.32.0" />
+    <PackageReference Include="Proc" Version="0.4.2" />
   </ItemGroup>
 
 </Project>

@@ -1,11 +1,4 @@
-﻿#I @"../../packages/build/FAKE/tools"
-#r @"FakeLib.dll"
-#r "System.Xml.Linq.dll"
-#nowarn "0044" //TODO sort out FAKE 5
-
-#load @"Paths.fsx"
-
-namespace  XmlDocPatcher
+﻿namespace Scripts
 
 open System.Linq
 open System.Text.RegularExpressions
@@ -13,7 +6,6 @@ open System.Xml
 open System.Xml.Linq
 open System.Xml.XPath
 
-open Paths
 open Projects
 open Fake
 

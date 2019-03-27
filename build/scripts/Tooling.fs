@@ -1,19 +1,12 @@
-﻿#I @"../../packages/build/FAKE/tools"
-#r @"FakeLib.dll"
-#r @"System.IO.Compression.FileSystem.dll"
-#nowarn "0044" //TODO sort out FAKE 5
+﻿namespace Scripts
 
 open System
 open System.IO
 open System.Diagnostics
 open System.Net
 
-#load @"Paths.fsx"
-
 open Fake
 
-Fake.ProcessHelper.redirectOutputToTrace <-true
-    
 module Tooling = 
     open Paths
 
