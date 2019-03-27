@@ -7,6 +7,7 @@ using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
+using Xunit;
 
 namespace Tests.XPack.MachineLearning.PutDatafeed
 {
@@ -14,7 +15,12 @@ namespace Tests.XPack.MachineLearning.PutDatafeed
 		: MachineLearningIntegrationTestBase<IPutDatafeedResponse,
 			IPutDatafeedRequest, PutDatafeedDescriptor<Metric>, PutDatafeedRequest>
 	{
-		public PutDatafeedApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		private IElasticClient _client;
+
+		public PutDatafeedApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		{
+			_client = cluster.Client;
+		}
 
 		protected override bool ExpectIsValid => true;
 
@@ -31,7 +37,7 @@ namespace Tests.XPack.MachineLearning.PutDatafeed
 		protected override int ExpectStatusCode => 200;
 
 		protected override Func<PutDatafeedDescriptor<Metric>, IPutDatafeedRequest> Fluent => f => f
-			.Indices("server-metrics") //goes on body not in the url
+			.Indices(typeof(Metric)) //goes on body not in the url
 			.JobId(CallIsolatedValue)
 			.Query(q => q.MatchAll());
 
@@ -41,7 +47,7 @@ namespace Tests.XPack.MachineLearning.PutDatafeed
 			new PutDatafeedRequest(CallIsolatedValue)
 			{
 				JobId = CallIsolatedValue,
-				Indices = "server-metrics",
+				Indices = typeof(Metric),
 				Query = new MatchAllQuery()
 			};
 
@@ -73,13 +79,14 @@ namespace Tests.XPack.MachineLearning.PutDatafeed
 			response.QueryDelay.Should().BeGreaterThan(new Time("1nanos"));
 
 			response.Indices.Should().NotBeNull("Indices");
-			response.Indices.Should().Be(Nest.Indices.Parse("server-metrics"));
+			response.Indices.Match(
+				all => { Assert.True(false); },
+				many => { many.Indices.Should().HaveCount(1).And.Contain(_client.Infer.IndexName(typeof(Metric))); });
 
 			response.ScrollSize.Should().Be(1000);
 
 			response.ChunkingConfig.Should().NotBeNull();
 			response.ChunkingConfig.Mode.Should().Be(ChunkingMode.Auto);
-
 			response.Query.Should().NotBeNull();
 		}
 	}

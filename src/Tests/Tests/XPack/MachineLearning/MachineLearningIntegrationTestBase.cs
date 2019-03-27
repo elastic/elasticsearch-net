@@ -13,8 +13,6 @@ namespace Tests.XPack.MachineLearning
 {
 	[SkipVersion("<5.5.0", "Machine Learning does not exist in previous versions")]
 	[SkipOnTeamCity]
-	//TODO: seeder blows up on multiple types
-	[SkipNonStructuralChange]
 	public abstract class MachineLearningIntegrationTestBase<TResponse, TInterface, TDescriptor, TInitializer>
 		: ApiIntegrationTestBase<MachineLearningCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		where TResponse : class, IResponse
@@ -96,6 +94,7 @@ namespace Tests.XPack.MachineLearning
 		protected IPutDatafeedResponse PutDatafeed(IElasticClient client, string jobId)
 		{
 			var putDataFeedResponse = client.PutDatafeed<Metric>(jobId + "-datafeed", f => f
+				.Indices(typeof(Metric)) // TODO: This should be default inferred from T on method
 				.JobId(jobId)
 				.Query(q => q.MatchAll()));
 

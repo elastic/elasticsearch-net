@@ -68,8 +68,13 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 				.ForEach(i =>
 				{
 					var metricsFile = Path.Combine(folder, $"server-metrics_{i}.json");
+
+					// TODO: Remove metric type from server-metrics files. Remove this when example is patched for 7.x
+					var fileContents = File.ReadAllText(metricsFile);
+					fileContents = fileContents.Replace(",\"_type\":\"metric\",", ",");
+
 					var bulkResponse = Client.LowLevel.Bulk<BulkResponse>(
-						File.ReadAllBytes(metricsFile),
+						fileContents,
 						new BulkRequestParameters
 						{
 							RequestConfiguration = new RequestConfiguration

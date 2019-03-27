@@ -12,8 +12,6 @@ using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 
 namespace Tests.Framework.ManagedElasticsearch.Clusters
 {
-	//TODO: seeder blows up on multiple types
-	[SkipNonStructuralChange]
 	public class MachineLearningCluster : XPackCluster
 	{
 		public MachineLearningCluster() : base(new XPackClusterConfiguration

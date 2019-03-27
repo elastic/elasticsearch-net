@@ -62,7 +62,7 @@ namespace Tests.XPack.MachineLearning.GetJobStats
 			firstJob.ModelSizeStats.BucketAllocationFailuresCount.Should().Be(0);
 			firstJob.ModelSizeStats.LogTime.Should().BeAfter(new DateTime(2017, 9, 1));
 			firstJob.ModelSizeStats.MemoryStatus.Should().Be(MemoryStatus.Ok);
-			firstJob.ModelSizeStats.ModelBytes.Should().Be(0);
+			firstJob.ModelSizeStats.ModelBytes.Should().BeGreaterOrEqualTo(0);
 			firstJob.ModelSizeStats.ResultType.Should().Be("model_size_stats");
 			firstJob.ModelSizeStats.TotalByFieldCount.Should().Be(0);
 			firstJob.ModelSizeStats.TotalOverFieldCount.Should().Be(0);
