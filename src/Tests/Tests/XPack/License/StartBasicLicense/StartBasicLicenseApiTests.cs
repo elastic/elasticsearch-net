@@ -1,24 +1,21 @@
-﻿using Elastic.Xunit.XunitPlumbing;
+﻿using System;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Core.Xunit;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using static Elasticsearch.Net.HttpMethod;
 
 namespace Tests.XPack.License.StartBasicLicense
 {
-	public class BasicLicenseCluster : ClientTestClusterBase { }
-
-	// TODO: cluster starts with a basic license now, investigate further
-	[SkipNonStructuralChange]
 	[SkipVersion("<6.5.0", "")]
-	public class StartBasicLicenseApiTests
-		: ApiIntegrationTestBase<BasicLicenseCluster, IStartBasicLicenseResponse, IStartBasicLicenseRequest, StartBasicLicenseDescriptor, StartBasicLicenseRequest>
+	public class StartBasicLicenseInvalidApiTests
+		: ApiIntegrationTestBase<XPackCluster, IStartBasicLicenseResponse, IStartBasicLicenseRequest, StartBasicLicenseDescriptor,
+			StartBasicLicenseRequest>
 	{
-		public StartBasicLicenseApiTests(BasicLicenseCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public StartBasicLicenseInvalidApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 200;
