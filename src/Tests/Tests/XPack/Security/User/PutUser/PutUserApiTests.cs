@@ -13,8 +13,6 @@ using Tests.Framework.Integration;
 namespace Tests.XPack.Security.User.PutUser
 {
 	[SkipVersion("<2.3.0", "")]
-	// TODO 7.x barfs on run_as privilegs no longer being ok for the admin user. Needs deeper investigation
-	[SkipNonStructuralChange]
 	public class PutUserApiTests : ApiIntegrationTestBase<XPackCluster, IPutUserResponse, IPutUserRequest, PutUserDescriptor, PutUserRequest>
 	{
 		public PutUserApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -77,8 +75,7 @@ namespace Tests.XPack.Security.User.PutUser
 
 		protected override void ExpectResponse(IPutUserResponse response)
 		{
-			response.User.Should().NotBeNull();
-			response.User.Created.Should().BeTrue();
+			response.Created.Should().BeTrue();
 		}
 	}
 

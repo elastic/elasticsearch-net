@@ -4,18 +4,12 @@ namespace Nest
 {
 	public interface IPutUserResponse : IResponse
 	{
-		[DataMember(Name ="user")]
-		PutUserStatus User { get; }
+		[DataMember(Name ="created")]
+		bool Created { get; }
 	}
 
 	public class PutUserResponse : ResponseBase, IPutUserResponse
 	{
-		public PutUserStatus User { get; internal set; }
-	}
-
-	public class PutUserStatus
-	{
-		[DataMember(Name ="created")]
 		public bool Created { get; internal set; }
 	}
 }
