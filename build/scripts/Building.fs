@@ -22,9 +22,9 @@ module Build =
 
     let private sln = "src/Elasticsearch.sln"
     
-    let private compileCore incremental =
+    let private compileCore =
         if not (DotNetCli.isInstalled()) then failwith  "You need to install the dotnet command line SDK to build for .NET Core"
-        let sourceLink = if not incremental && not isMono && runningRelease then "1" else ""
+        let sourceLink = if not isMono && runningRelease then "1" else ""
         let props = 
             [ 
                 "CurrentVersion", (Versioning.CurrentVersion.ToString());
@@ -57,8 +57,7 @@ module Build =
                 }
             ) |> ignore
         
-    let Compile incremental = 
-        compileCore incremental
+    let Compile() = compileCore 
 
     let Clean() =
         tracefn "Cleaning known output folders"
@@ -107,7 +106,7 @@ module Build =
                 if p.VersionedMergeDependencies <> [] then Rewrite (Some currentMajor) f p.VersionedMergeDependencies
                 if p.MergeDependencies <> [] then Rewrite None f p.MergeDependencies
     
-    let ILRepack() = 
+    let ShadowDependencies() = 
         //ilrepack on mono crashes pretty hard on my machine
         match isMono with
         | true -> ignore()

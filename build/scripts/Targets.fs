@@ -74,64 +74,82 @@ module Main =
           |> ignore
 
         ignore()
-          
 
+    let private t name action = Targets.Target(name, new Action(action)) 
+    let private skip name = printfn "SKIPPED target '%s' evaluated not to run" name |> ignore
+    let private w optional name action = t name (if optional then action else (fun _ -> skip name)) 
+
+    let private command name dependencies action = Targets.Target(name, dependencies, new Action(action))
+          
     let [<EntryPoint>] main args = 
-    
-        printfn "Arguments passed to function : %A" args
 
         Commandline.parse()
 
-        Targets.Target("Touch", fun _ -> traceHeader "Touching build")
+        t "touch" <| fun _ -> printfn "Touching build"
 
-        Targets.Target("Build", fun _ -> traceHeader "STARTING BUILD")
-
-        Targets.Target("Start", fun _ -> 
+        t "start" <| fun _ -> 
             match (isMono, Commandline.validMonoTarget) with
             | (true, false) -> failwithf "%s is not a valid target on mono because it can not call ILRepack" (Commandline.target)
             | _ -> traceHeader "STARTING BUILD"
-        )
 
-        Targets.Target("Clean", Clean)
+        w Commandline.needsClean "clean" Clean 
 
-        Targets.Target("Restore", Restore)
+        w Commandline.needsFullBuild "full-build" Compile 
 
-        Targets.Target("FullBuild", ["Restore"], fun _ -> Compile Commandline.needsFullBuild)
-            
-        Targets.Target("Test", Tests.RunUnitTests)
-
-        Targets.Target("Integrate", Tests.RunIntegrationTests)
-
-        Targets.Target("Benchmark", Benchmarker.Run)
-
-        Targets.Target("InternalizeDependencies", fun _ -> ILRepack |> ignore)
-
-        Targets.Target("InheritDoc", InheritDoc.PatchInheritDocs)
-
-        Targets.Target("Documentation", Documentation.Generate)
-
-        Targets.Target("Version", fun _ -> 
+        w (hasBuildParam "version") "version" <| fun _ -> 
             tracefn "Current Version: %s" (Versioning.CurrentVersion.ToString())
-        )
 
-        Targets.Target("TestNugetPackage", fun _ -> 
+        w (not isMono) "internalize-dependencies" ShadowDependencies 
+
+        w Commandline.skipDocs "documentation" <| Documentation.Generate
+
+        w (Commandline.skipTests && Commandline.target <> "canary") "test" Tests.RunUnitTests
+
+        t "restore" Restore
+
+        t "inherit-doc" <| InheritDoc.PatchInheritDocs
+
+        t "test-nuget-package" <| fun _ -> 
             //RunReleaseUnitTests restores the canary nugetpackages in tests, since these end up being cached
             //its too evasive to run on development machines or TC, Run only on AppVeyor containers.
             if buildServer <> AppVeyor then Tests.RunUnitTests()
             else Tests.RunReleaseUnitTests()
-        )
             
-        Targets.Target("Canary", fun _ -> tracefn "Finished Release Build %O" Versioning.CurrentVersion)
-            
-        Targets.Target("Diff", fun _ ->
-            let differ = Paths.PaketDotNetGlobalTool "assembly-differ" @"tools\netcoreapp2.1\any\assembly-differ.dll"
-            let args = Commandline.arguments |> List.skip 1 |> String.concat " "
-            let command = sprintf @"%s %s" differ args
-            setProcessEnvironVar "NUGET" Tooling.nugetFile
-            DotNetCli.RunCommand (fun p -> { p with TimeOut = TimeSpan.FromMinutes(3.) }) command |> ignore
-        )
+        t "nuget-pack" <| Release.NugetPack
 
-        Targets.Target("Cluster", fun _ -> 
+        w (Commandline.target = "canary") "nuget-pack-versioned" <| Release.NugetPackVersioned
+
+        w (Commandline.target <> "canary") "generate-release-notes" <| Release.GenerateNotes
+
+        t "validate-artifacts" <| Versioning.ValidateArtifacts
+        
+
+
+        // the following are expected to be called as targets directly        
+        let buildChain = [
+            "clean"; "version"; "restore"; "full-build"; "test"; 
+            "internalize-dependencies"; "inherit-doc"; "documentation"; 
+        ]
+        command "build" buildChain <| fun _ -> traceHeader "STARTING BUILD"
+
+        command "benchmark" [ "clean"; "full-build"; ] Benchmarker.Run
+
+        command "canary" [ "version"; "release"; "test-nuget-package";] (fun _ -> tracefn "Finished Release Build %O" Versioning.CurrentVersion)
+
+        command "integrate" [ "clean"; "restore"; "full-build";] Tests.RunIntegrationTests
+
+        command "release" [ 
+           "build"; "nuget-pack"; "nuget-pack-versioned"; "validate-artifacts"; "generate-release-notes"
+        ] (fun _ -> traceHeader (sprintf "Finished Release Build %O" Versioning.CurrentVersion))
+
+        command "diff" [ "clean"; ] <| fun _ ->
+          let differ = Paths.PaketDotNetGlobalTool "assembly-differ" @"tools\netcoreapp2.1\any\assembly-differ.dll"
+          let args = Commandline.arguments |> List.skip 1 |> String.concat " "
+          let command = sprintf @"%s %s" differ args
+          setProcessEnvironVar "NUGET" Tooling.nugetFile
+          DotNetCli.RunCommand (fun p -> { p with TimeOut = TimeSpan.FromMinutes(3.) }) command 
+
+        command "cluster" [ "restore"; "full-build" ] <| fun _ -> 
             let clusterName = getBuildParam "clusterName"
             let clusterVersion = getBuildParam "clusterVersion"
             let testsProjectDirectory = Path.Combine(Path.GetFullPath(Paths.Output("Tests.ClusterLauncher")), "netcoreapp2.1")
@@ -155,35 +173,8 @@ module Main =
                 }) (sprintf "%s %s" (Path.Combine(tempDir, "Tests.ClusterLauncher.dll")) command)
             
             Shell.deleteDir tempDir
-        )
 
-        Targets.Target("Release", fun _ -> traceHeader (sprintf "Finished Release Build %O" Versioning.CurrentVersion))
-
-        Targets.Target("NugetPack", Release.NugetPack)
-
-        Targets.Target("NugetPackVersioned", Release.NugetPackVersioned)
-
-        Targets.Target("ValidateArtifacts", Versioning.ValidateArtifacts)
-
-        Targets.Target("GenerateReleaseNotes", Release.GenerateNotes)
-        
-        Targets.Target("Build", 
-          [
-            "Clean"; "Version"; "Restore"; "FullBuild"; "Test"; 
-            "InternalizeDependencies"; "InheritDoc"; "Documentation"; 
-          ]
-        )
-
-        Targets.Target("Benchmark", [ "Clean"; "FullBuild"; ])
-        Targets.Target("Canary", [ "Version"; "Release"; "TestNugetPackage";])
-        Targets.Target("Integrate", [ "Clean"; "Restore"; "FullBuild";])
-        Targets.Target("Release", [ 
-           "Build"; "NugetPack"; "NugetPackVersioned"; "ValidateArtifacts"; "GenerateReleaseNotes"
-        ])
-        Targets.Target("Diff", [ "Clean"; ])
-        Targets.Target("Cluster", [ "Restore"; "FullBuild" ])
-
-        Targets.RunTargetsAndExit(args)
+        Targets.RunTargetsAndExit([Commandline.target])
 
         0
 

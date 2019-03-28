@@ -17,7 +17,7 @@ module Versioning =
 
     //Versions in form of e.g 6.1.0 is inferred as datetime so we bake the json shape into the provider like this
     type private GlobalJson = JsonProvider<""" { "sdk": { "version":"x" }, "version": "x" } """ >
-    let globalJson = GlobalJson.Load("../../global.json");
+    let globalJson = GlobalJson.Load("../../../../../global.json");
     let writeVersionIntoGlobalJson version = 
         let newGlobalJson = GlobalJson.Root (GlobalJson.Sdk(globalJson.Sdk.Version), version.ToString())
         use tw = new StreamWriter("global.json")
