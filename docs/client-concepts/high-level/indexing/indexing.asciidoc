@@ -15,13 +15,12 @@ please modify the original csharp file found at the link and submit the PR with 
 [[indexing]]
 === Indexing
 
-NEST has a number of ways in which documents can be indexed.
+NEST has a number of ways to index documents.
 
-==== Single Documents
+==== Single documents
 
 A single document can be indexed at a time, either synchronously or asynchronously.
-
-NOTE: These methods use the `IndexDocument` methods, which is a simple way to index single documents.
+These methods use the `IndexDocument` methods, which is a simple way to index single documents.
 
 [source,csharp]
 ----
@@ -33,14 +32,18 @@ var person = new Person
 };
 
 var indexResponse = client.IndexDocument(person); <1>
+if (!indexResponse.IsValid)
+{
+    // If the request isn't valid, we can take action here
+}
 
-var asyncIndexResponse = await client.IndexDocumentAsync(person); <2>
+var indexResponseAsync = await client.IndexDocumentAsync(person); <2>
 ----
 <1> synchronous method that returns an `IIndexResponse`
 
 <2> asynchronous method that returns a `Task<IIndexResponse>` that can be awaited
 
-==== Single Documents With Parameters
+==== Single documents with parameters
 
 If you need to set additional parameters when indexing you can use the fluent or object initializer syntax.
 This will allow you finer control over the indexing of single documents.
@@ -62,7 +65,7 @@ client.Index(new IndexRequest<Person>(person, "people")); <2>
 
 <2> object initializer syntax
 
-==== Multiple Documents With IndexMany
+==== Multiple documents with `IndexMany`
 
 Multiple documents can be indexed using the `IndexMany` and `IndexManyAsync` methods, again either synchronously or asynchronously, respectively.
 These methods are specific to the NEST client and wrap calls to the `_bulk` endpoint, providing a convenient shortcut to indexing
@@ -87,7 +90,7 @@ var people = new []
     new Person
     {
         Id = 3,
-        FirstName = "Russell",
+        FirstName = "Russ",
         LastName = "Cam"
     }
 };
@@ -113,7 +116,7 @@ var indexManyAsyncResponse = await client.IndexManyAsync(people); <4>
 
 <4> asynchronous method that returns a `Task<IBulkResponse>` that can be awaited
 
-==== Multiple Documents With Bulk
+==== Multiple documents with bulk
 
 If you require finer grained control over indexing many documents you can use the `Bulk` and `BulkAsync` methods and use the descriptors to
 customise the bulk calls.
@@ -131,13 +134,13 @@ var bulkIndexResponse = client.Bulk(b => b
 // Alternatively, documents can be indexed asynchronously similar to `IndexManyAsync`
 var asyncBulkIndexResponse = await client.BulkAsync(b => b
     .Index("people")
-    .IndexMany(people)); <4>
+    .IndexMany(people)); <2>
 ----
 <1> synchronous method that returns an `IBulkResponse`, the same as `IndexMany` and can be inspected in the same way for errors
 
-<4> asynchronous method that returns a `Task<IBulkResponse>` that can be awaited
+<2> asynchronous method that returns a `Task<IBulkResponse>` that can be awaited
 
-==== Multiple Documents With BulkAllObservable Helper
+==== Multiple documents with `BulkAllObservable` helper
 
 Multiple documents can be indexed using the `BulkAllObservable` helper and `Wait()` extension method.
 
@@ -196,7 +199,7 @@ var bulkAllObservable = client.BulkAll(people, b => b
 
 <4> Perform the indexing and wait up to 15 minutes, whilst the BulkAll calls are asynchronous this is a blocking operation
 
-==== Advanced Bulk Indexing
+==== Advanced bulk indexing
 
 The BulkAllObservable helper has a number of advanced features.
 
@@ -209,8 +212,6 @@ The BulkAllObservable helper has a number of advanced features.
 [source,csharp]
 ----
 client.BulkAll(people, b => b
-      .Index(null)
-      .Type(null)
       .BufferToBulk((descriptor, list) => <1>
       {
           foreach (var item in list)
@@ -220,22 +221,17 @@ client.BulkAll(people, b => b
                   .Document(item)
               );
           }
-      }));
-
-// `RetryDocumentPredicate` example
-client.BulkAll(people, b => b
-      .RetryDocumentPredicate((item, person) => <2>
+      })
+      .RetryDocumentPredicate((item, person) => <3>
       {
-          if (item.Error.Index == "people" && person.FirstName == "Martijn")
+          if (item.Error.Index == "even-index"
+              && person.FirstName == "Martijn")
           {
               return true;
           }
           return false;
-      }));
-
-// `DroppedDocumentCallback` example
-client.BulkAll(people, b => b
-      .DroppedDocumentCallback((item, person) => <3>
+      })
+      .DroppedDocumentCallback((item, person) => <4>
       {
           Console.WriteLine($"Unable to index: {item} {person}");
       }));
@@ -244,7 +240,7 @@ client.BulkAll(people, b => b
 
 <2> Index each document into either `even-index` or `odd-index`
 
-<2> decide if a document should be retried in the event of a failure
+<3> decide if a document should be retried in the event of a failure
 
-<3> if a document cannot be indexed this delegate is called
+<4> if a document cannot be indexed this delegate is called
 

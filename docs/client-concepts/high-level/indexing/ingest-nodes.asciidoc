@@ -18,7 +18,7 @@ please modify the original csharp file found at the link and submit the PR with 
 Elasticsearch will automatically re-route index requests to ingest nodes,
 however with some careful consideration you can optimise this path.
 
-==== Custom Indexing Client
+==== Custom indexing client
 
 Since Elasticsearch will automatically reroute ingest requests to ingest nodes, you don't have to specify or configure any routing
 information. However, if you're doing heavy ingestion and have dedicated ingest nodes, it makes sense to send index requests to
@@ -40,7 +40,7 @@ var indexingClient = new ElasticClient(settings);
 ----
 <1> list of ingest nodes
 
-==== Determining Ingest Node Capability
+==== Determining ingest capability
 
 In complex cluster configurations it can be easier to use a sniffing connection pool along with a node predicate to
 filter out the nodes that have ingest capabilities. This allows you to customise the cluster and not have to reconfigure
@@ -54,8 +54,10 @@ var pool = new SniffingConnectionPool(new [] <1>
     new Uri("http://node2:9200"),
     new Uri("http://node3:9200")
 });
-var settings = new ConnectionSettings(pool).NodePredicate(n => n.IngestEnabled);
+var settings = new ConnectionSettings(pool).NodePredicate(n => n.IngestEnabled); <2>
 var indexingClient = new ElasticClient(settings);
 ----
 <1> list of cluster nodes
+
+<2> predicate to select only nodes with ingest capabilities
 
