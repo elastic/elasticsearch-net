@@ -10,8 +10,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 	/**[[ingest-pipelines]]
 	*=== Ingest Pipelines
 	*
-	* Elasticsearch will automatically re-route index requests to ingest nodes,
-	* however with some careful consideration you can optimise this path.
+	* An ingest pipeline is a series of processors that are to be executed in the same order as they are declared.
 	*/
 	public class IngestPipelines : DocumentationTestBase
 	{
@@ -49,15 +48,16 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		*/
 		public async Task IngestionPipeline()
 		{
-			client.CreateIndex("people");
-
-			client.Map<Person>(p => p
-				.Index("people")
-				.AutoMap() //<1> automatically create the mapping from the type
-				.Properties(props => props
-					.Keyword(t => t.Name("initials")) //<2> create an additional field to store the initials
-					.Ip(t => t.Name(dv => dv.IpAddress)) //<3> map field as IP Address type
-					.Object<GeoIp>(t => t.Name(dv => dv.GeoIp)) //<4> map GeoIp as object
+			client.CreateIndex("people", c => c
+				.Mappings(ms => ms
+					.Map<Person>(p => p
+						.AutoMap() //<1> automatically create the mapping from the type
+						.Properties(props => props
+								.Keyword(t => t.Name("initials")) //<2> create an additional field to store the initials
+								.Ip(t => t.Name(dv => dv.IpAddress)) //<3> map field as IP Address type
+								.Object<GeoIp>(t => t.Name(dv => dv.GeoIp)) //<4> map GeoIp as object
+						)
+					)
 				)
 			);
 
@@ -70,9 +70,9 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 						.Lang("painless") //<6> use a painless script to populate the new field
 						.Source("ctx.initials = ctx.firstName.substring(0,1) + ctx.lastName.substring(0,1)")
 					)
-					.GeoIp<GeoIp>(s => s //<7> use GeoUp plugin to enrich the GeoIp object from the supplied IP Address
-						.Field("ipAddress")
-						.TargetField("geoIp")
+					.GeoIp<Person>(s => s //<7> use `ingest-geoip` plugin to enrich the GeoIp object from the supplied IP Address
+						.Field(i => i.IpAddress)
+						.TargetField(i => i.GeoIp)
 					)
 				)
 			);
@@ -100,12 +100,12 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 			client.Bulk(b => b
 				.Index("people")
 				.Pipeline("person-pipeline")
-				.Timeout("5m") //<1> increases the bulk timeout to 5 minutes
+				.Timeout("5m") //<1> increases the server-side bulk timeout to 5 minutes
 				.Index<Person>(/*snip*/)
 				.Index<Person>(/*snip*/)
 				.Index<Person>(/*snip*/)
 				.RequestConfiguration(rc => rc
-						.RequestTimeout(TimeSpan.FromMinutes(5)) //<2> increases the request timeout to 5 minutes
+				    .RequestTimeout(TimeSpan.FromMinutes(5)) //<2> increases the HTTP request timeout to 5 minutes
 				)
 			);
 		}

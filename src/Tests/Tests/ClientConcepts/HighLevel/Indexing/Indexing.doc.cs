@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using FluentAssertions;
 using Nest;
 using Tests.Framework;
 
@@ -26,7 +27,9 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 
 		/**
 		* ==== Single Documents
-		* A single document can be indexed at a time, either synchronously or asynchronously
+		* A single document can be indexed at a time, either synchronously or asynchronously.
+		*
+		* NOTE: These methods use the `IndexDocument` methods, which is a simple way to index single documents.
 		*/
 		public async Task SingleDocument()
 		{
@@ -43,9 +46,28 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		}
 
 		/**
-		* ==== Multiple Documents with IndexMany
+		* ==== Single Documents With Parameters
+		* If you need to set additional parameters when indexing you can use the fluent or object initializer syntax.
+		* This will allow you finer control over the indexing of single documents.
+		*/
+		public async Task SingleDocumentWithParameters()
+		{
+			var person = new Person
+			{
+				Id = 1,
+				FirstName = "Martijn",
+				LastName = "Laarman"
+			};
+
+			client.Index(person, i => i.Index("people")); //<1> fluent syntax
+
+			client.Index(new IndexRequest<Person>(person, "people")); //<2> object initializer syntax
+		}
+
+		/**
+		* ==== Multiple Documents With IndexMany
 		*
-		* Multiple documents can be indexed using the `IndexMany` and `IndexManyAsync` methods, again either synchronously or asynchronously.
+		* Multiple documents can be indexed using the `IndexMany` and `IndexManyAsync` methods, again either synchronously or asynchronously, respectively.
 		* These methods are specific to the NEST client and wrap calls to the `_bulk` endpoint, providing a convenient shortcut to indexing
 		* multiple documents.
 		*/
@@ -75,10 +97,9 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 
 			var indexManyResponse = client.IndexMany(people); //<1> synchronous method that returns an `IBulkResponse`
 
-			if (indexManyResponse.Errors) //<2> the response can be inspected for its success
+			if (indexManyResponse.Errors) //<2> the response can be inspected to see if any of the bulk operations resulted in an error
 			{
-				//<3> If there are errors, they can be enumerated and inspected
-				foreach (var itemWithError in indexManyResponse.ItemsWithErrors)
+				foreach (var itemWithError in indexManyResponse.ItemsWithErrors) //<3> If there are errors, they can be enumerated and inspected
 				{
 					Console.WriteLine("Failed to index document {0}: {1}", itemWithError.Id, itemWithError.Error);
 				}
@@ -89,10 +110,14 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		}
 
 		/**
-		* ==== Multiple Documents with Bulk
+		* ==== Multiple Documents With Bulk
 		*
-		* If you require finer grained control over bulk indexing you can use the `Bulk` and `BulkAsync` methods and use the descriptors to
+		* If you require finer grained control over indexing many documents you can use the `Bulk` and `BulkAsync` methods and use the descriptors to
 		* customise the bulk calls.
+		*
+		* As with the `IndexMany` methods above, documents are sent to the `_bulk` endpoint in a single HTTP request.
+		* This does mean that consideration will need to be given to the overall size of the HTTP request. For indexing large numbers
+		* of documents it may be sensible to perform multiple seperate `Bulk` calls.
 		*/
 		public async Task BulkIndexDocuments()
 		{
@@ -110,12 +135,18 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		}
 
 		/**
-		* ==== Multiple Documents with BulkAllObservable helper
+		* ==== Multiple Documents With BulkAllObservable Helper
 		*
-		* Multiple documents can be indexed using the `BulkAllObservable` helper. This helper exposes retry and backoff functionality
-		* to automatically retry in the event of a failure. This allows you to focus on the overall objective of indexing,
-		* without having to concern yourself with retry mechanics. Of course, if there is an eventual failure you have
-		* the ability to inspect any exceptions and indexing progress.
+		* Multiple documents can be indexed using the `BulkAllObservable` helper and `Wait()` extension method.
+		*
+		* This helper exposes functionality to automatically retry / backoff in the event of an indexing failure,
+	    * and to control the number of documents indexed in a single HTTP request. In the example below each request will contain 1000 documents,
+		* chunked from the original input. In the event of a large number of documents this could result in many HTTP requests, each containing
+		* 1000 documents (the last request may contain less, depending on the total number).
+		*
+		* The helper will also lazily enumerate an `IEnumerable<T>` collection of documents, allowing to index a large number of documents easily.
+		*
+	    * This allows you to focus on the overall objective of indexing, without having to concern yourself with retry, backoff or chunking mechanics.
 		*/
 		public async Task BulkDocumentsWithObservableHelper()
 		{
@@ -139,36 +170,69 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 					FirstName = "Russell",
 					LastName = "Cam"
 				}
+				// Snip
 			};
 
 			var bulkAllObservable = client.BulkAll(people, b => b
 				.Index("people")
 				.BackOffTime("30s") //<1> how long to wait between retries
-				.BackOffRetries(2) //<2> how many reties should this bulk index attempt is unsuccessful
+				.BackOffRetries(2) //<2> how many retries are attempted
 				.RefreshOnCompleted()
 				.MaxDegreeOfParallelism(Environment.ProcessorCount)
 				.Size(1000) // <3> items per bulk request
-			);
+			)
+			.Wait(TimeSpan.FromMinutes(15), next => //<4> Perform the indexing and wait up to 15 minutes, whilst the BulkAll calls are asynchronous this is a blocking operation
+			{
+				// Do something e.g. write number of pages to console
+			});
+		}
 
-			Exception exception = null;
-			var waitHandle = new ManualResetEvent(false);
+		/**
+		* ==== Advanced Bulk Indexing
+		*
+		* The BulkAllObservable helper has a number of advanced features.
+		*
+		* 1. `BufferToBulk` allows for the customisation of individual operations within the bulk request before it is dispatched to the server.
+		* 2. `RetryDocumentPredicate` enables fine control on deciding if a document that failed to be indexed should be retried.
+		* 3. `DroppedDocumentCallback` in the event a document is not indexed, even after retrying, this delegate is called.
+		*/
+		public async Task AdvancedBulkIndexing()
+		{
+			//hide
+			var people = new[] { new Person() };
 
-			bulkAllObservable.Subscribe(new BulkAllObserver( //<4> register an observer to be notified of bulk events
-				onNext: b =>
-				{
-					// Do something e.g. write number of pages to console
-				},
-				onError: e =>
-				{
-					exception = e; //<5> capture the exception into the local variable; do not throw as it will be swallowed
-					waitHandle.Set();
-				},
-				onCompleted: () => waitHandle.Set()));
+			// `BufferToBulk` example
+			client.BulkAll(people, b => b
+				  .Index(null)
+				  .Type(null)
+				  .BufferToBulk((descriptor, list) => //<1> customise the individual operations in the bulk request before it is dispatched
+				  {
+					  foreach (var item in list)
+					  {
+						  descriptor.Index<Person>(bi => bi
+							  .Index(item.Id % 2 == 0 ? "even-index" : "odd-index") //<2> Index each document into either `even-index` or `odd-index`
+							  .Document(item)
+						  );
+					  }
+				  }));
 
-			waitHandle.WaitOne(); //<6> wait for indexing
+			// `RetryDocumentPredicate` example
+			client.BulkAll(people, b => b
+				  .RetryDocumentPredicate((item, person) => //<2> decide if a document should be retried in the event of a failure
+				  {
+					  if (item.Error.Index == "people" && person.FirstName == "Martijn")
+					  {
+						  return true;
+					  }
+					  return false;
+				  }));
 
-			if (exception != null) //<7> if there was an exception, throw it now
-				throw exception;
+			// `DroppedDocumentCallback` example
+			client.BulkAll(people, b => b
+				  .DroppedDocumentCallback((item, person) => //<3> if a document cannot be indexed this delegate is called
+				  {
+					  Console.WriteLine($"Unable to index: {item} {person}");
+				  }));
 		}
 	}
 }

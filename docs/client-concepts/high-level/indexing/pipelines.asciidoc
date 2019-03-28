@@ -15,8 +15,7 @@ please modify the original csharp file found at the link and submit the PR with 
 [[ingest-pipelines]]
 === Ingest Pipelines
 
-Elasticsearch will automatically re-route index requests to ingest nodes,
-however with some careful consideration you can optimise this path.
+An ingest pipeline is a series of processors that are to be executed in the same order as they are declared.
 
 [source,csharp]
 ----
@@ -53,15 +52,16 @@ The Person type can then be used as-is, without making any changes.
 
 [source,csharp]
 ----
-client.CreateIndex("people");
-
-client.Map<Person>(p => p
-    .Index("people")
-    .AutoMap() <1>
-    .Properties(props => props
-        .Keyword(t => t.Name("initials")) <2>
-        .Ip(t => t.Name(dv => dv.IpAddress)) <3>
-        .Object<GeoIp>(t => t.Name(dv => dv.GeoIp)) <4>
+client.CreateIndex("people", c => c
+    .Mappings(ms => ms
+        .Map<Person>(p => p
+            .AutoMap() <1>
+            .Properties(props => props
+                    .Keyword(t => t.Name("initials")) <2>
+                    .Ip(t => t.Name(dv => dv.IpAddress)) <3>
+                    .Object<GeoIp>(t => t.Name(dv => dv.GeoIp)) <4>
+            )
+        )
     )
 );
 
@@ -74,9 +74,9 @@ client.PutPipeline("person-pipeline", p => p
             .Lang("painless") <6>
             .Source("ctx.initials = ctx.firstName.substring(0,1) + ctx.lastName.substring(0,1)")
         )
-        .GeoIp<GeoIp>(s => s <7>
-            .Field("ipAddress")
-            .TargetField("geoIp")
+        .GeoIp<Person>(s => s <7>
+            .Field(i => i.IpAddress)
+            .TargetField(i => i.GeoIp)
         )
     )
 );
@@ -103,7 +103,7 @@ var indexResponse = client.Index(person, p => p.Index("people").Pipeline("person
 
 <6> use a painless script to populate the new field
 
-<7> use GeoUp plugin to enrich the GeoIp object from the supplied IP Address
+<7> use `ingest-geoip` plugin to enrich the GeoIp object from the supplied IP Address
 
 <8> index the document using the created pipeline
 
@@ -124,11 +124,11 @@ client.Bulk(b => b
     .Index<Person>(/*snip*/)
     .Index<Person>(/*snip*/)
     .RequestConfiguration(rc => rc
-            .RequestTimeout(TimeSpan.FromMinutes(5)) <2>
+        .RequestTimeout(TimeSpan.FromMinutes(5)) <2>
     )
 );
 ----
-<1> increases the bulk timeout to 5 minutes
+<1> increases the server-side bulk timeout to 5 minutes
 
-<2> increases the request timeout to 5 minutes
+<2> increases the HTTP request timeout to 5 minutes
 
