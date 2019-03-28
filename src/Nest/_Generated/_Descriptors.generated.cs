@@ -2309,8 +2309,8 @@ namespace Nest
 	///<summary>descriptor for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
 	public partial class PutMappingDescriptor<T>  : RequestDescriptorBase<PutMappingDescriptor<T>,PutMappingRequestParameters, IPutMappingRequest>, IPutMappingRequest
 	{ 
-		/// <summary>/{index}/{type}/_mapping</summary>
-		public PutMappingDescriptor() : base(){}
+		/// <summary>/{index}/{type}/_mapping. Will infer the index and type from the generic type</summary>
+		public PutMappingDescriptor() : this(typeof(T), typeof(T)){}
 		// values part of the url path
 		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		TypeName IPutMappingRequest.Type => Self.RouteValues.Get<TypeName>("type");

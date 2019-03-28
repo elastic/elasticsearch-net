@@ -267,6 +267,13 @@ namespace ApiGenerator.Domain
 					body = $"{{ Self.Indices = typeof({generic}); Self.Types = typeof({generic}); {body} }}";
 				}
 
+				if (m == "PutMappingDescriptor")
+				{
+					var generic = "T";
+					doc = AppendToSummary(doc, ". Will infer the index and type from the generic type");
+					generated = $"public {m}({par}) : this(typeof({generic}), typeof({generic}))";
+				}
+
 				var c = new Constructor
 				{
 					Generated = generated,
