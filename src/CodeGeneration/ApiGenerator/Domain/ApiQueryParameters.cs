@@ -104,6 +104,7 @@ namespace ApiGenerator.Domain
 				{
 					case "boolean": return "bool?";
 					case "list": return "string[]";
+					case "int":
 					case "integer": return "int?";
 					case "date": return "DateTimeOffset?";
 					case "enum": return $"{ClsName}?";
