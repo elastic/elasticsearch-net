@@ -39,6 +39,6 @@ namespace Nest
 
 		//<summary>A comma-separated list of fields for `completion` metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor Types(params TypeName[] types) =>
-			Assign(a => a.Types = types);
+			Assign(types, (a, v) => a.Types = v);
 	}
 }

@@ -10,9 +10,9 @@ namespace Nest
 		: FuzzyQueryDescriptorBase<FuzzyQueryDescriptor<T>, T, string, Fuzziness>
 			, IFuzzyStringQuery where T : class
 	{
-		public FuzzyQueryDescriptor<T> Fuzziness(Fuzziness fuzziness) => Assign(a => a.Fuzziness = fuzziness);
+		public FuzzyQueryDescriptor<T> Fuzziness(Fuzziness fuzziness) => Assign(fuzziness, (a, v) => a.Fuzziness = v);
 
-		public FuzzyQueryDescriptor<T> Value(string value) => Assign(a => a.Value = value);
+		public FuzzyQueryDescriptor<T> Value(string value) => Assign(value, (a, v) => a.Value = v);
 	}
 
 	public interface IFuzzyNumericQuery : IFuzzyQuery<double?, double?> { }
@@ -23,9 +23,9 @@ namespace Nest
 		: FuzzyQueryDescriptorBase<FuzzyNumericQueryDescriptor<T>, T, double?, double?>
 			, IFuzzyNumericQuery where T : class
 	{
-		public FuzzyNumericQueryDescriptor<T> Fuzziness(double? fuzziness) => Assign(a => a.Fuzziness = fuzziness);
+		public FuzzyNumericQueryDescriptor<T> Fuzziness(double? fuzziness) => Assign(fuzziness, (a, v) => a.Fuzziness = v);
 
-		public FuzzyNumericQueryDescriptor<T> Value(double? value) => Assign(a => a.Value = value);
+		public FuzzyNumericQueryDescriptor<T> Value(double? value) => Assign(value, (a, v) => a.Value = v);
 	}
 
 	public interface IFuzzyDateQuery : IFuzzyQuery<DateTime?, Time> { }
@@ -37,8 +37,8 @@ namespace Nest
 		: FuzzyQueryDescriptorBase<FuzzyDateQueryDescriptor<T>, T, DateTime?, Time>
 			, IFuzzyDateQuery where T : class
 	{
-		public FuzzyDateQueryDescriptor<T> Fuzziness(Time fuzziness) => Assign(a => a.Fuzziness = fuzziness);
+		public FuzzyDateQueryDescriptor<T> Fuzziness(Time fuzziness) => Assign(fuzziness, (a, v) => a.Fuzziness = v);
 
-		public FuzzyDateQueryDescriptor<T> Value(DateTime? value) => Assign(a => a.Value = value);
+		public FuzzyDateQueryDescriptor<T> Value(DateTime? value) => Assign(value, (a, v) => a.Value = v);
 	}
 }

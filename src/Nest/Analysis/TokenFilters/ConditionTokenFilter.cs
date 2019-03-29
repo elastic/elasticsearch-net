@@ -48,19 +48,19 @@ namespace Nest
 
 		/// <inheritdoc cref="IConditionTokenFilter.Script" />
 		public ConditionTokenFilterDescriptor Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
-			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
+			Assign(scriptSelector, (a, v) => a.Script = v?.Invoke(new ScriptDescriptor()));
 
 		/// <inheritdoc cref="IConditionTokenFilter.Script" />
 		public ConditionTokenFilterDescriptor Script(string predicate) =>
-			Assign(a => a.Script = new InlineScript(predicate));
+			Assign(new InlineScript(predicate), (a, v) => a.Script = v);
 
 		/// <inheritdoc cref="IConditionTokenFilter.Filters" />
 		public ConditionTokenFilterDescriptor Filters(params string[] filters) =>
-			Assign(a => a.Filters = filters);
+			Assign(filters, (a, v) => a.Filters = v);
 
 		/// <inheritdoc cref="IConditionTokenFilter.Filters" />
 		public ConditionTokenFilterDescriptor Filters(IEnumerable<string> filters) =>
-			Assign(a => a.Filters = filters);
+			Assign(filters, (a, v) => a.Filters = v);
 
 }
 }

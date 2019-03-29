@@ -44,14 +44,14 @@ namespace Nest
 		StopWords IStandardAnalyzer.StopWords { get; set; }
 
 		public StandardAnalyzerDescriptor StopWords(params string[] stopWords) =>
-			Assign(a => a.StopWords = stopWords);
+			Assign(stopWords, (a, v) => a.StopWords = v);
 
 		public StandardAnalyzerDescriptor StopWords(IEnumerable<string> stopWords) =>
-			Assign(a => a.StopWords = stopWords.ToListOrNullIfEmpty());
+			Assign(stopWords.ToListOrNullIfEmpty(), (a, v) => a.StopWords = v);
 
-		public StandardAnalyzerDescriptor StopWords(StopWords stopWords) => Assign(a => a.StopWords = stopWords);
+		public StandardAnalyzerDescriptor StopWords(StopWords stopWords) => Assign(stopWords, (a, v) => a.StopWords = v);
 
 		public StandardAnalyzerDescriptor MaxTokenLength(int? maxTokenLength) =>
-			Assign(a => a.MaxTokenLength = maxTokenLength);
+			Assign(maxTokenLength, (a, v) => a.MaxTokenLength = v);
 	}
 }

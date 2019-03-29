@@ -66,22 +66,22 @@ namespace Nest
 		IYearlySchedule IScheduleContainer.Yearly { get; set; }
 
 		public ScheduleDescriptor Daily(Func<DailyScheduleDescriptor, IDailySchedule> selector) =>
-			Assign(a => a.Daily = selector.Invoke(new DailyScheduleDescriptor()));
+			Assign(selector.Invoke(new DailyScheduleDescriptor()), (a, v) => a.Daily = v);
 
 		public ScheduleDescriptor Hourly(Func<HourlyScheduleDescriptor, IHourlySchedule> selector) =>
-			Assign(a => a.Hourly = selector.Invoke(new HourlyScheduleDescriptor()));
+			Assign(selector.Invoke(new HourlyScheduleDescriptor()), (a, v) => a.Hourly = v);
 
 		public ScheduleDescriptor Monthly(Func<MonthlyScheduleDescriptor, IPromise<IMonthlySchedule>> selector) =>
-			Assign(a => a.Monthly = selector.Invoke(new MonthlyScheduleDescriptor())?.Value);
+			Assign(selector.Invoke(new MonthlyScheduleDescriptor())?.Value, (a, v) => a.Monthly = v);
 
 		public ScheduleDescriptor Weekly(Func<WeeklyScheduleDescriptor, IPromise<IWeeklySchedule>> selector) =>
-			Assign(a => a.Weekly = selector.Invoke(new WeeklyScheduleDescriptor())?.Value);
+			Assign(selector.Invoke(new WeeklyScheduleDescriptor())?.Value, (a, v) => a.Weekly = v);
 
 		public ScheduleDescriptor Yearly(Func<YearlyScheduleDescriptor, IPromise<IYearlySchedule>> selector) =>
-			Assign(a => a.Yearly = selector.Invoke(new YearlyScheduleDescriptor())?.Value);
+			Assign(selector.Invoke(new YearlyScheduleDescriptor())?.Value, (a, v) => a.Yearly = v);
 
-		public ScheduleDescriptor Cron(CronExpression cron) => Assign(a => a.Cron = cron);
+		public ScheduleDescriptor Cron(CronExpression cron) => Assign(cron, (a, v) => a.Cron = v);
 
-		public ScheduleDescriptor Interval(Interval interval) => Assign(a => a.Interval = interval);
+		public ScheduleDescriptor Interval(Interval interval) => Assign(interval, (a, v) => a.Interval = v);
 	}
 }

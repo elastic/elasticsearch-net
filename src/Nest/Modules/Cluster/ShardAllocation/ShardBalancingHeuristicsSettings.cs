@@ -42,12 +42,12 @@ namespace Nest
 		float? IShardBalancingHeuristicsSettings.BalanceThreshold { get; set; }
 
 		/// <inheritdoc />
-		public ShardBalancingHeuristicsSettingsDescriptor BalanceShard(float? balance) => Assign(a => a.BalanceShard = balance);
+		public ShardBalancingHeuristicsSettingsDescriptor BalanceShard(float? balance) => Assign(balance, (a, v) => a.BalanceShard = v);
 
 		/// <inheritdoc />
-		public ShardBalancingHeuristicsSettingsDescriptor BalanceIndex(float? balance) => Assign(a => a.BalanceIndex = balance);
+		public ShardBalancingHeuristicsSettingsDescriptor BalanceIndex(float? balance) => Assign(balance, (a, v) => a.BalanceIndex = v);
 
 		/// <inheritdoc />
-		public ShardBalancingHeuristicsSettingsDescriptor BalanceThreshold(float? balance) => Assign(a => a.BalanceThreshold = balance);
+		public ShardBalancingHeuristicsSettingsDescriptor BalanceThreshold(float? balance) => Assign(balance, (a, v) => a.BalanceThreshold = v);
 	}
 }

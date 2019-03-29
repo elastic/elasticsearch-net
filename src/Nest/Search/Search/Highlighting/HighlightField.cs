@@ -252,83 +252,83 @@ namespace Nest
 		Union<HighlighterType, string> IHighlightField.Type { get; set; }
 
 		/// <inheritdoc />
-		public HighlightFieldDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public HighlightFieldDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc />
-		public HighlightFieldDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
+		public HighlightFieldDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc />
 		public HighlightFieldDescriptor<T> AllField() => Field("_all");
 
 		/// <inheritdoc />
-		public HighlightFieldDescriptor<T> TagsSchema(HighlighterTagsSchema? schema) => Assign(a => a.TagsSchema = schema);
+		public HighlightFieldDescriptor<T> TagsSchema(HighlighterTagsSchema? schema) => Assign(schema, (a, v) => a.TagsSchema = v);
 
 		/// <inheritdoc />
-		public HighlightFieldDescriptor<T> ForceSource(bool? force = true) => Assign(a => a.ForceSource = force);
+		public HighlightFieldDescriptor<T> ForceSource(bool? force = true) => Assign(force, (a, v) => a.ForceSource = v);
 
 		/// <inheritdoc />
-		public HighlightFieldDescriptor<T> Type(HighlighterType type) => Assign(a => a.Type = type);
+		public HighlightFieldDescriptor<T> Type(HighlighterType type) => Assign(type, (a, v) => a.Type = v);
 
 		/// <inheritdoc />
-		public HighlightFieldDescriptor<T> Type(string type) => Assign(a => a.Type = type);
+		public HighlightFieldDescriptor<T> Type(string type) => Assign(type, (a, v) => a.Type = v);
 
 		/// <inheritdoc />
-		public HighlightFieldDescriptor<T> PreTags(params string[] preTags) => Assign(a => a.PreTags = preTags);
+		public HighlightFieldDescriptor<T> PreTags(params string[] preTags) => Assign(preTags, (a, v) => a.PreTags = v);
 
 		/// <inheritdoc />
-		public HighlightFieldDescriptor<T> PostTags(params string[] postTags) => Assign(a => a.PostTags = postTags);
+		public HighlightFieldDescriptor<T> PostTags(params string[] postTags) => Assign(postTags, (a, v) => a.PostTags = v);
 
 		/// <inheritdoc />
-		public HighlightFieldDescriptor<T> PreTags(IEnumerable<string> preTags) => Assign(a => a.PreTags = preTags);
+		public HighlightFieldDescriptor<T> PreTags(IEnumerable<string> preTags) => Assign(preTags, (a, v) => a.PreTags = v);
 
 		/// <inheritdoc />
-		public HighlightFieldDescriptor<T> PostTags(IEnumerable<string> postTags) => Assign(a => a.PostTags = postTags);
+		public HighlightFieldDescriptor<T> PostTags(IEnumerable<string> postTags) => Assign(postTags, (a, v) => a.PostTags = v);
 
 		/// <inheritdoc />
-		public HighlightFieldDescriptor<T> FragmentSize(int? fragmentSize) => Assign(a => a.FragmentSize = fragmentSize);
+		public HighlightFieldDescriptor<T> FragmentSize(int? fragmentSize) => Assign(fragmentSize, (a, v) => a.FragmentSize = v);
 
 		/// <inheritdoc />
-		public HighlightFieldDescriptor<T> NoMatchSize(int? noMatchSize) => Assign(a => a.NoMatchSize = noMatchSize);
+		public HighlightFieldDescriptor<T> NoMatchSize(int? noMatchSize) => Assign(noMatchSize, (a, v) => a.NoMatchSize = v);
 
 		/// <inheritdoc />
-		public HighlightFieldDescriptor<T> NumberOfFragments(int? numberOfFragments) => Assign(a => a.NumberOfFragments = numberOfFragments);
+		public HighlightFieldDescriptor<T> NumberOfFragments(int? numberOfFragments) => Assign(numberOfFragments, (a, v) => a.NumberOfFragments = v);
 
 		/// <inheritdoc />
-		public HighlightFieldDescriptor<T> FragmentOffset(int? fragmentOffset) => Assign(a => a.FragmentOffset = fragmentOffset);
+		public HighlightFieldDescriptor<T> FragmentOffset(int? fragmentOffset) => Assign(fragmentOffset, (a, v) => a.FragmentOffset = v);
 
 		/// <inheritdoc />
-		public HighlightFieldDescriptor<T> Order(HighlighterOrder? order) => Assign(a => a.Order = order);
+		public HighlightFieldDescriptor<T> Order(HighlighterOrder? order) => Assign(order, (a, v) => a.Order = v);
 
 		/// <inheritdoc />
-		public HighlightFieldDescriptor<T> RequireFieldMatch(bool? requireFieldMatch = true) => Assign(a => a.RequireFieldMatch = requireFieldMatch);
+		public HighlightFieldDescriptor<T> RequireFieldMatch(bool? requireFieldMatch = true) => Assign(requireFieldMatch, (a, v) => a.RequireFieldMatch = v);
 
 		/// <inheritdoc />
-		public HighlightFieldDescriptor<T> BoundaryCharacters(string boundaryCharacters) => Assign(a => a.BoundaryChars = boundaryCharacters);
+		public HighlightFieldDescriptor<T> BoundaryCharacters(string boundaryCharacters) => Assign(boundaryCharacters, (a, v) => a.BoundaryChars = v);
 
 		/// <inheritdoc />
-		public HighlightFieldDescriptor<T> BoundaryMaxScan(int? boundaryMaxSize) => Assign(a => a.BoundaryMaxScan = boundaryMaxSize);
+		public HighlightFieldDescriptor<T> BoundaryMaxScan(int? boundaryMaxSize) => Assign(boundaryMaxSize, (a, v) => a.BoundaryMaxScan = v);
 
 		/// <inheritdoc />
 		public HighlightFieldDescriptor<T> MatchedFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(a => a.MatchedFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+			Assign(fields, (a, v) => a.MatchedFields = v?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		/// <inheritdoc />
 		public HighlightFieldDescriptor<T> HighlightQuery(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
-			Assign(a => a.HighlightQuery = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(querySelector, (a, v) => a.HighlightQuery = v?.Invoke(new QueryContainerDescriptor<T>()));
 
 		/// <inheritdoc />
-		public HighlightFieldDescriptor<T> MaxFragmentLength(int? maxFragmentLength) => Assign(a => a.MaxFragmentLength = maxFragmentLength);
+		public HighlightFieldDescriptor<T> MaxFragmentLength(int? maxFragmentLength) => Assign(maxFragmentLength, (a, v) => a.MaxFragmentLength = v);
 
 		/// <inheritdoc />
-		public HighlightFieldDescriptor<T> BoundaryScanner(BoundaryScanner? boundaryScanner) => Assign(a => a.BoundaryScanner = boundaryScanner);
+		public HighlightFieldDescriptor<T> BoundaryScanner(BoundaryScanner? boundaryScanner) => Assign(boundaryScanner, (a, v) => a.BoundaryScanner = v);
 
 		/// <inheritdoc />
-		public HighlightFieldDescriptor<T> BoundaryScannerLocale(string locale) => Assign(a => a.BoundaryScannerLocale = locale);
+		public HighlightFieldDescriptor<T> BoundaryScannerLocale(string locale) => Assign(locale, (a, v) => a.BoundaryScannerLocale = v);
 
 		/// <inheritdoc />
-		public HighlightFieldDescriptor<T> Fragmenter(HighlighterFragmenter? fragmenter) => Assign(a => a.Fragmenter = fragmenter);
+		public HighlightFieldDescriptor<T> Fragmenter(HighlighterFragmenter? fragmenter) => Assign(fragmenter, (a, v) => a.Fragmenter = v);
 
 		/// <inheritdoc />
-		public HighlightFieldDescriptor<T> PhraseLimit(int? phraseLimit) => Assign(a => a.PhraseLimit = phraseLimit);
+		public HighlightFieldDescriptor<T> PhraseLimit(int? phraseLimit) => Assign(phraseLimit, (a, v) => a.PhraseLimit = v);
 	}
 }

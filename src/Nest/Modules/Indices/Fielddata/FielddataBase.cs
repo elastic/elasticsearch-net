@@ -28,8 +28,8 @@ namespace Nest
 		FielddataLoading? IFielddata.Loading { get; set; }
 
 		public TDescriptor Filter(Func<FielddataFilterDescriptor, IFielddataFilter> filterSelector) =>
-			Assign(a => a.Filter = filterSelector(new FielddataFilterDescriptor()));
+			Assign(filterSelector(new FielddataFilterDescriptor()), (a, v) => a.Filter = v);
 
-		public TDescriptor Loading(FielddataLoading? loading) => Assign(a => a.Loading = loading);
+		public TDescriptor Loading(FielddataLoading? loading) => Assign(loading, (a, v) => a.Loading = v);
 	}
 }

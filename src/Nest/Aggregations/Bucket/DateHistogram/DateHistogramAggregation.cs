@@ -114,40 +114,40 @@ namespace Nest
 
 		string IDateHistogramAggregation.TimeZone { get; set; }
 
-		public DateHistogramAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public DateHistogramAggregationDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public DateHistogramAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public DateHistogramAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
 
-		public DateHistogramAggregationDescriptor<T> Script(string script) => Assign(a => a.Script = (InlineScript)script);
+		public DateHistogramAggregationDescriptor<T> Script(string script) => Assign((InlineScript)script, (a, v) => a.Script = v);
 
 		public DateHistogramAggregationDescriptor<T> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
-			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
+			Assign(scriptSelector, (a, v) => a.Script = v?.Invoke(new ScriptDescriptor()));
 
-		public DateHistogramAggregationDescriptor<T> Interval(Time interval) => Assign(a => a.Interval = interval);
+		public DateHistogramAggregationDescriptor<T> Interval(Time interval) => Assign(interval, (a, v) => a.Interval = v);
 
 		public DateHistogramAggregationDescriptor<T> Interval(DateInterval interval) =>
-			Assign(a => a.Interval = interval);
+			Assign(interval, (a, v) => a.Interval = v);
 
-		public DateHistogramAggregationDescriptor<T> Format(string format) => Assign(a => a.Format = format);
+		public DateHistogramAggregationDescriptor<T> Format(string format) => Assign(format, (a, v) => a.Format = v);
 
 		public DateHistogramAggregationDescriptor<T> MinimumDocumentCount(int? minimumDocumentCount) =>
-			Assign(a => a.MinimumDocumentCount = minimumDocumentCount);
+			Assign(minimumDocumentCount, (a, v) => a.MinimumDocumentCount = v);
 
-		public DateHistogramAggregationDescriptor<T> TimeZone(string timeZone) => Assign(a => a.TimeZone = timeZone);
+		public DateHistogramAggregationDescriptor<T> TimeZone(string timeZone) => Assign(timeZone, (a, v) => a.TimeZone = v);
 
-		public DateHistogramAggregationDescriptor<T> Offset(string offset) => Assign(a => a.Offset = offset);
+		public DateHistogramAggregationDescriptor<T> Offset(string offset) => Assign(offset, (a, v) => a.Offset = v);
 
-		public DateHistogramAggregationDescriptor<T> Order(HistogramOrder order) => Assign(a => a.Order = order);
+		public DateHistogramAggregationDescriptor<T> Order(HistogramOrder order) => Assign(order, (a, v) => a.Order = v);
 
 		public DateHistogramAggregationDescriptor<T> OrderAscending(string key) =>
-			Assign(a => a.Order = new HistogramOrder { Key = key, Order = SortOrder.Descending });
+			Assign(new HistogramOrder { Key = key, Order = SortOrder.Descending }, (a, v) => a.Order = v);
 
 		public DateHistogramAggregationDescriptor<T> OrderDescending(string key) =>
-			Assign(a => a.Order = new HistogramOrder { Key = key, Order = SortOrder.Descending });
+			Assign(new HistogramOrder { Key = key, Order = SortOrder.Descending }, (a, v) => a.Order = v);
 
 		public DateHistogramAggregationDescriptor<T> ExtendedBounds(DateMath min, DateMath max) =>
-			Assign(a => a.ExtendedBounds = new ExtendedBounds<DateMath> { Minimum = min, Maximum = max });
+			Assign(new ExtendedBounds<DateMath> { Minimum = min, Maximum = max }, (a, v) => a.ExtendedBounds = v);
 
-		public DateHistogramAggregationDescriptor<T> Missing(DateTime? missing) => Assign(a => a.Missing = missing);
+		public DateHistogramAggregationDescriptor<T> Missing(DateTime? missing) => Assign(missing, (a, v) => a.Missing = v);
 	}
 }

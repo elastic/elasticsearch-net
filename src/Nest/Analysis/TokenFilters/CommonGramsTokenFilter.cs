@@ -65,18 +65,18 @@ namespace Nest
 		bool? ICommonGramsTokenFilter.QueryMode { get; set; }
 
 		/// <inheritdoc />
-		public CommonGramsTokenFilterDescriptor QueryMode(bool? queryMode = true) => Assign(a => a.QueryMode = queryMode);
+		public CommonGramsTokenFilterDescriptor QueryMode(bool? queryMode = true) => Assign(queryMode, (a, v) => a.QueryMode = v);
 
 		/// <inheritdoc />
-		public CommonGramsTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true) => Assign(a => a.IgnoreCase = ignoreCase);
+		public CommonGramsTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true) => Assign(ignoreCase, (a, v) => a.IgnoreCase = v);
 
 		/// <inheritdoc />
-		public CommonGramsTokenFilterDescriptor CommonWordsPath(string path) => Assign(a => a.CommonWordsPath = path);
+		public CommonGramsTokenFilterDescriptor CommonWordsPath(string path) => Assign(path, (a, v) => a.CommonWordsPath = v);
 
 		/// <inheritdoc />
-		public CommonGramsTokenFilterDescriptor CommonWords(IEnumerable<string> commonWords) => Assign(a => a.CommonWords = commonWords);
+		public CommonGramsTokenFilterDescriptor CommonWords(IEnumerable<string> commonWords) => Assign(commonWords, (a, v) => a.CommonWords = v);
 
 		/// <inheritdoc />
-		public CommonGramsTokenFilterDescriptor CommonWords(params string[] commonWords) => Assign(a => a.CommonWords = commonWords);
+		public CommonGramsTokenFilterDescriptor CommonWords(params string[] commonWords) => Assign(commonWords, (a, v) => a.CommonWords = v);
 	}
 }

@@ -42,9 +42,9 @@ namespace Nest
 		int? ILengthTokenFilter.Min { get; set; }
 
 		/// <inheritdoc />
-		public LengthTokenFilterDescriptor Min(int? minimum) => Assign(a => a.Min = minimum);
+		public LengthTokenFilterDescriptor Min(int? minimum) => Assign(minimum, (a, v) => a.Min = v);
 
 		/// <inheritdoc />
-		public LengthTokenFilterDescriptor Max(int? maximum) => Assign(a => a.Max = maximum);
+		public LengthTokenFilterDescriptor Max(int? maximum) => Assign(maximum, (a, v) => a.Max = v);
 	}
 }

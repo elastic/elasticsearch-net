@@ -40,7 +40,7 @@ namespace Nest
 
 		//<summary>A comma-separated list of fields for `completion` metric (supports wildcards)</summary>
 		public IndicesShardStoresDescriptor Types(params TypeName[] types) =>
-			Assign(a => a.Types = types);
+			Assign(types, (a, v) => a.Types = v);
 
 		[Obsolete("Removed in Elasticsearch 6.2. Will be removed in NEST 7.x. Calling this is a no-op.")]
 		public IndicesShardStoresDescriptor OperationThreading(string operationThreading) => this;

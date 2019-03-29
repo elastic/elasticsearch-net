@@ -32,10 +32,10 @@ namespace Nest
 		string IIpRange.Mask { get; set; }
 		string IIpRange.To { get; set; }
 
-		public IpRangeDescriptor From(string from) => Assign(a => a.From = from);
+		public IpRangeDescriptor From(string from) => Assign(from, (a, v) => a.From = v);
 
-		public IpRangeDescriptor To(string to) => Assign(a => a.To = to);
+		public IpRangeDescriptor To(string to) => Assign(to, (a, v) => a.To = v);
 
-		public IpRangeDescriptor Mask(string mask) => Assign(a => a.Mask = mask);
+		public IpRangeDescriptor Mask(string mask) => Assign(mask, (a, v) => a.Mask = v);
 	}
 }

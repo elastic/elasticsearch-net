@@ -21,6 +21,6 @@ namespace Nest
 	{
 		double? ILaplaceSmoothingModel.Alpha { get; set; }
 
-		public LaplaceSmoothingModelDescriptor Alpha(double? alpha) => Assign(a => a.Alpha = alpha);
+		public LaplaceSmoothingModelDescriptor Alpha(double? alpha) => Assign(alpha, (a, v) => a.Alpha = v);
 	}
 }

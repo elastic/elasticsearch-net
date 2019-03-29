@@ -51,18 +51,18 @@ namespace Nest
 		object ISimulatePipelineDocument.Source { get; set; }
 		TypeName ISimulatePipelineDocument.Type { get; set; }
 
-		public SimulatePipelineDocumentDescriptor Id(Id id) => Assign(a => a.Id = id);
+		public SimulatePipelineDocumentDescriptor Id(Id id) => Assign(id, (a, v) => a.Id = v);
 
-		public SimulatePipelineDocumentDescriptor Index(IndexName index) => Assign(a => a.Index = index);
+		public SimulatePipelineDocumentDescriptor Index(IndexName index) => Assign(index, (a, v) => a.Index = v);
 
-		public SimulatePipelineDocumentDescriptor Type(TypeName type) => Assign(a => a.Type = type);
+		public SimulatePipelineDocumentDescriptor Type(TypeName type) => Assign(type, (a, v) => a.Type = v);
 
-		public SimulatePipelineDocumentDescriptor Source<T>(T source) where T : class => Assign(a =>
+		public SimulatePipelineDocumentDescriptor Source<T>(T source) where T : class => Assign(source, (a, v) =>
 		{
-			a.Source = source;
-			a.Index = a.Index ?? source.GetType();
-			a.Type = a.Type ?? source.GetType();
-			a.Id = a.Id ?? Nest.Id.From(source);
+			a.Source = v;
+			a.Index = a.Index ?? v.GetType();
+			a.Type = a.Type ?? v.GetType();
+			a.Id = a.Id ?? Nest.Id.From(v);
 		});
 	}
 

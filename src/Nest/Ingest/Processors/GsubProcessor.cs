@@ -38,13 +38,13 @@ namespace Nest
 		string IGsubProcessor.Pattern { get; set; }
 		string IGsubProcessor.Replacement { get; set; }
 
-		public GsubProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public GsubProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		public GsubProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
-		public GsubProcessorDescriptor<T> Pattern(string pattern) => Assign(a => a.Pattern = pattern);
+		public GsubProcessorDescriptor<T> Pattern(string pattern) => Assign(pattern, (a, v) => a.Pattern = v);
 
-		public GsubProcessorDescriptor<T> Replacement(string replacement) => Assign(a => a.Replacement = replacement);
+		public GsubProcessorDescriptor<T> Replacement(string replacement) => Assign(replacement, (a, v) => a.Replacement = v);
 	}
 }

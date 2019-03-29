@@ -28,6 +28,6 @@
 		string IRawQuery.Raw { get; set; }
 
 		public RawQueryDescriptor Raw(string rawQuery) =>
-			Assign(a => a.Raw = rawQuery);
+			Assign(rawQuery, (a, v) => a.Raw = v);
 	}
 }

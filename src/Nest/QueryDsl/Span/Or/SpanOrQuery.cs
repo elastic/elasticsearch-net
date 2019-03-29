@@ -30,10 +30,10 @@ namespace Nest
 		protected override bool Conditionless => SpanOrQuery.IsConditionless(this);
 		IEnumerable<ISpanQuery> ISpanOrQuery.Clauses { get; set; }
 
-		public SpanOrQueryDescriptor<T> Clauses(params Func<SpanQueryDescriptor<T>, SpanQueryDescriptor<T>>[] selectors) => Assign(a =>
+		public SpanOrQueryDescriptor<T> Clauses(params Func<SpanQueryDescriptor<T>, SpanQueryDescriptor<T>>[] selectors) => Assign(selectors, (a, v) =>
 		{
 			var clauses = (
-				from selector in selectors
+				from selector in v
 				select selector(new SpanQueryDescriptor<T>())
 				into q
 				where !(q as IQuery).Conditionless

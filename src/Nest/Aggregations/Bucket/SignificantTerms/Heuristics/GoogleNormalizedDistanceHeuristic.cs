@@ -21,6 +21,6 @@ namespace Nest
 		bool? IGoogleNormalizedDistanceHeuristic.BackgroundIsSuperSet { get; set; }
 
 		public GoogleNormalizedDistanceHeuristicDescriptor BackgroundIsSuperSet(bool? backroundIsSuperSet = true) =>
-			Assign(a => a.BackgroundIsSuperSet = backroundIsSuperSet);
+			Assign(backroundIsSuperSet, (a, v) => a.BackgroundIsSuperSet = v);
 	}
 }

@@ -63,15 +63,15 @@ namespace Nest
 		DateTimeOffset? IFlushJobRequest.Start { get; set; }
 
 		/// <inheritdoc />
-		public FlushJobDescriptor AdvanceTime(DateTimeOffset? advanceTime) => Assign(a => a.AdvanceTime = advanceTime);
+		public FlushJobDescriptor AdvanceTime(DateTimeOffset? advanceTime) => Assign(advanceTime, (a, v) => a.AdvanceTime = v);
 
 		/// <inheritdoc />
-		public FlushJobDescriptor CalculateInterim(bool? calculateInterim = true) => Assign(a => a.CalculateInterim = calculateInterim);
+		public FlushJobDescriptor CalculateInterim(bool? calculateInterim = true) => Assign(calculateInterim, (a, v) => a.CalculateInterim = v);
 
 		/// <inheritdoc />
-		public FlushJobDescriptor End(DateTimeOffset? end) => Assign(a => a.End = end);
+		public FlushJobDescriptor End(DateTimeOffset? end) => Assign(end, (a, v) => a.End = v);
 
 		/// <inheritdoc />
-		public FlushJobDescriptor Start(DateTimeOffset? start) => Assign(a => a.Start = start);
+		public FlushJobDescriptor Start(DateTimeOffset? start) => Assign(start, (a, v) => a.Start = v);
 	}
 }

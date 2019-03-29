@@ -64,15 +64,15 @@ namespace Nest
 		bool? IHunspellTokenFilter.LongestOnly { get; set; }
 
 		/// <inheritdoc />
-		public HunspellTokenFilterDescriptor LongestOnly(bool? longestOnly = true) => Assign(a => a.LongestOnly = longestOnly);
+		public HunspellTokenFilterDescriptor LongestOnly(bool? longestOnly = true) => Assign(longestOnly, (a, v) => a.LongestOnly = v);
 
 		/// <inheritdoc />
-		public HunspellTokenFilterDescriptor Dedup(bool? dedup = true) => Assign(a => a.Dedup = dedup);
+		public HunspellTokenFilterDescriptor Dedup(bool? dedup = true) => Assign(dedup, (a, v) => a.Dedup = v);
 
 		/// <inheritdoc />
-		public HunspellTokenFilterDescriptor Locale(string locale) => Assign(a => a.Locale = locale);
+		public HunspellTokenFilterDescriptor Locale(string locale) => Assign(locale, (a, v) => a.Locale = v);
 
 		/// <inheritdoc />
-		public HunspellTokenFilterDescriptor Dictionary(string dictionary) => Assign(a => a.Dictionary = dictionary);
+		public HunspellTokenFilterDescriptor Dictionary(string dictionary) => Assign(dictionary, (a, v) => a.Dictionary = v);
 	}
 }

@@ -41,10 +41,10 @@ namespace Nest
 
 		string ISlackAttachmentField.Value { get; set; }
 
-		public SlackAttachmentFieldDescriptor Title(string title) => Assign(a => a.Title = title);
+		public SlackAttachmentFieldDescriptor Title(string title) => Assign(title, (a, v) => a.Title = v);
 
-		public SlackAttachmentFieldDescriptor Value(string value) => Assign(a => a.Value = value);
+		public SlackAttachmentFieldDescriptor Value(string value) => Assign(value, (a, v) => a.Value = v);
 
-		public SlackAttachmentFieldDescriptor Short(bool? @short = true) => Assign(a => a.Short = @short);
+		public SlackAttachmentFieldDescriptor Short(bool? @short = true) => Assign(@short, (a, v) => a.Short = v);
 	}
 }

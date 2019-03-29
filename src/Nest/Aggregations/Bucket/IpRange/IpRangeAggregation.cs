@@ -38,11 +38,11 @@ namespace Nest
 
 		IEnumerable<IIpRange> IIpRangeAggregation.Ranges { get; set; }
 
-		public IpRangeAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public IpRangeAggregationDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public IpRangeAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public IpRangeAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
 
 		public IpRangeAggregationDescriptor<T> Ranges(params Func<IpRangeDescriptor, IIpRange>[] ranges) =>
-			Assign(a => a.Ranges = ranges?.Select(r => r(new IpRangeDescriptor())));
+			Assign(ranges?.Select(r => r(new IpRangeDescriptor())), (a, v) => a.Ranges = v);
 	}
 }

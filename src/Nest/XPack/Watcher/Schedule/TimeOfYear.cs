@@ -34,16 +34,16 @@ namespace Nest
 		IEnumerable<Month> ITimeOfYear.In { get; set; }
 		IEnumerable<int> ITimeOfYear.On { get; set; }
 
-		public TimeOfYearDescriptor In(IEnumerable<Month> @in) => Assign(a => a.In = @in);
+		public TimeOfYearDescriptor In(IEnumerable<Month> @in) => Assign(@in, (a, v) => a.In = v);
 
-		public TimeOfYearDescriptor In(params Month[] @in) => Assign(a => a.In = @in);
+		public TimeOfYearDescriptor In(params Month[] @in) => Assign(@in, (a, v) => a.In = v);
 
-		public TimeOfYearDescriptor On(IEnumerable<int> on) => Assign(a => a.On = on);
+		public TimeOfYearDescriptor On(IEnumerable<int> on) => Assign(on, (a, v) => a.On = v);
 
-		public TimeOfYearDescriptor On(params int[] on) => Assign(a => a.On = on);
+		public TimeOfYearDescriptor On(params int[] on) => Assign(on, (a, v) => a.On = v);
 
-		public TimeOfYearDescriptor At(IEnumerable<string> time) => Assign(a => a.At = time);
+		public TimeOfYearDescriptor At(IEnumerable<string> time) => Assign(time, (a, v) => a.At = v);
 
-		public TimeOfYearDescriptor At(params string[] time) => Assign(a => a.At = time);
+		public TimeOfYearDescriptor At(params string[] time) => Assign(time, (a, v) => a.At = v);
 	}
 }

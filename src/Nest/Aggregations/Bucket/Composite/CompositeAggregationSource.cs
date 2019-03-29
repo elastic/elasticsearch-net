@@ -133,20 +133,20 @@ namespace Nest
 		string ICompositeAggregationSource.SourceType => _sourceType;
 
 		/// <inheritdoc cref="ICompositeAggregationSource.Field" />
-		public TDescriptor Field(Field field) => Assign(a => a.Field = field);
+		public TDescriptor Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="ICompositeAggregationSource.Field" />
-		public TDescriptor Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
+		public TDescriptor Field(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="ICompositeAggregationSource.Order" />
-		public TDescriptor Order(SortOrder? order) => Assign(a => a.Order = order);
+		public TDescriptor Order(SortOrder? order) => Assign(order, (a, v) => a.Order = v);
 
 		/// <inheritdoc cref="ICompositeAggregationSource.MissingBucket" />
-		public TDescriptor MissingBucket(bool? includeMissing = true) => Assign(a => a.MissingBucket = includeMissing);
+		public TDescriptor MissingBucket(bool? includeMissing = true) => Assign(includeMissing, (a, v) => a.MissingBucket = v);
 
 		/// <inheritdoc cref="ICompositeAggregationSource.Missing" />
 		[Obsolete("Will be removed in Elasticsearch 7.x. Use MissingBucket")]
-		public TDescriptor Missing(object missingObject) => Assign(a => a.Missing = missingObject);
+		public TDescriptor Missing(object missingObject) => Assign(missingObject, (a, v) => a.Missing = v);
 	}
 
 	internal class CompositeAggregationSourceConverter : ReserializeJsonConverter<CompositeAggregationSourceBase, ICompositeAggregationSource>

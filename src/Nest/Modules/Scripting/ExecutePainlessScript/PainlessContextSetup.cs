@@ -49,13 +49,13 @@ namespace Nest
 		QueryContainer IPainlessContextSetup.Query { get; set; }
 
 		/// <inheritdoc cref="IPainlessContextSetup.Document" />
-		public PainlessContextSetupDescriptor Document<T>(T document) => Assign(a => a.Document = document);
+		public PainlessContextSetupDescriptor Document<T>(T document) => Assign(document, (a, v) => a.Document = v);
 
 		/// <inheritdoc cref="IPainlessContextSetup.Index" />
-		public PainlessContextSetupDescriptor Index(IndexName index) => Assign(a => a.Index = index);
+		public PainlessContextSetupDescriptor Index(IndexName index) => Assign(index, (a, v) => a.Index = v);
 
 		/// <inheritdoc cref="IPainlessContextSetup.Query" />
 		public PainlessContextSetupDescriptor Query<T>(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) where T : class =>
-			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(querySelector, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

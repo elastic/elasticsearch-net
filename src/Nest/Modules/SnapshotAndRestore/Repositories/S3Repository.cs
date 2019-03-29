@@ -163,43 +163,43 @@ namespace Nest
 
 		/// <inheritdoc cref="IS3RepositorySettings.AccessKey" />
 		[Obsolete("Removed in Elasticsearch 6.0, please specify secure settings in the keystore.")]
-		public S3RepositorySettingsDescriptor AccessKey(string accessKey) => Assign(a => a.AccessKey = accessKey);
+		public S3RepositorySettingsDescriptor AccessKey(string accessKey) => Assign(accessKey, (a, v) => a.AccessKey = v);
 
 		/// <inheritdoc cref="IS3RepositorySettings.SecretKey" />
 		[Obsolete("Removed in Elasticsearch 6.0, please specify secure settings in the keystore.")]
-		public S3RepositorySettingsDescriptor SecretKey(string secretKey) => Assign(a => a.SecretKey = secretKey);
+		public S3RepositorySettingsDescriptor SecretKey(string secretKey) => Assign(secretKey, (a, v) => a.SecretKey = v);
 
 		/// <inheritdoc cref="IS3RepositorySettings.ConcurrentStreams" />
 		[Obsolete("Removed in Elasticsearch 6.0")]
-		public S3RepositorySettingsDescriptor ConcurrentStreams(int? concurrentStreams) => Assign(a => a.ConcurrentStreams = concurrentStreams);
+		public S3RepositorySettingsDescriptor ConcurrentStreams(int? concurrentStreams) => Assign(concurrentStreams, (a, v) => a.ConcurrentStreams = v);
 
 		/// <inheritdoc cref="IS3RepositorySettings.Bucket" />
-		public S3RepositorySettingsDescriptor Bucket(string bucket) => Assign(a => a.Bucket = bucket);
+		public S3RepositorySettingsDescriptor Bucket(string bucket) => Assign(bucket, (a, v) => a.Bucket = v);
 
 		/// <inheritdoc cref="IS3RepositorySettings.Client" />
-		public S3RepositorySettingsDescriptor Client(string client) => Assign(a => a.Client = client);
+		public S3RepositorySettingsDescriptor Client(string client) => Assign(client, (a, v) => a.Client = v);
 
 		/// <inheritdoc cref="IS3RepositorySettings.BasePath" />
-		public S3RepositorySettingsDescriptor BasePath(string basePath) => Assign(a => a.BasePath = basePath);
+		public S3RepositorySettingsDescriptor BasePath(string basePath) => Assign(basePath, (a, v) => a.BasePath = v);
 
 		/// <inheritdoc cref="IS3RepositorySettings.Compress" />
-		public S3RepositorySettingsDescriptor Compress(bool? compress = true) => Assign(a => a.Compress = compress);
+		public S3RepositorySettingsDescriptor Compress(bool? compress = true) => Assign(compress, (a, v) => a.Compress = v);
 
 		/// <inheritdoc cref="IS3RepositorySettings.ChunkSize" />
-		public S3RepositorySettingsDescriptor ChunkSize(string chunkSize) => Assign(a => a.ChunkSize = chunkSize);
+		public S3RepositorySettingsDescriptor ChunkSize(string chunkSize) => Assign(chunkSize, (a, v) => a.ChunkSize = v);
 
 		/// <inheritdoc cref="IS3RepositorySettings.ServerSideEncryption" />
 		public S3RepositorySettingsDescriptor ServerSideEncryption(bool? serverSideEncryption = true) =>
-			Assign(a => a.ServerSideEncryption = serverSideEncryption);
+			Assign(serverSideEncryption, (a, v) => a.ServerSideEncryption = v);
 
 		/// <inheritdoc cref="IS3RepositorySettings.BufferSize" />
-		public S3RepositorySettingsDescriptor BufferSize(string bufferSize) => Assign(a => a.BufferSize = bufferSize);
+		public S3RepositorySettingsDescriptor BufferSize(string bufferSize) => Assign(bufferSize, (a, v) => a.BufferSize = v);
 
 		/// <inheritdoc cref="IS3RepositorySettings.CannedAcl" />
-		public S3RepositorySettingsDescriptor CannedAcl(string cannedAcl) => Assign(a => a.CannedAcl = cannedAcl);
+		public S3RepositorySettingsDescriptor CannedAcl(string cannedAcl) => Assign(cannedAcl, (a, v) => a.CannedAcl = v);
 
 		/// <inheritdoc cref="IS3RepositorySettings.StorageClass" />
-		public S3RepositorySettingsDescriptor StorageClass(string storageClass) => Assign(a => a.StorageClass = storageClass);
+		public S3RepositorySettingsDescriptor StorageClass(string storageClass) => Assign(storageClass, (a, v) => a.StorageClass = v);
 	}
 
 	public class S3RepositoryDescriptor
@@ -210,6 +210,6 @@ namespace Nest
 		string ISnapshotRepository.Type { get; } = "s3";
 
 		public S3RepositoryDescriptor Settings(string bucket, Func<S3RepositorySettingsDescriptor, IS3RepositorySettings> settingsSelector = null) =>
-			Assign(a => a.Settings = settingsSelector.InvokeOrDefault(new S3RepositorySettingsDescriptor(bucket)));
+			Assign(settingsSelector.InvokeOrDefault(new S3RepositorySettingsDescriptor(bucket)), (a, v) => a.Settings = v);
 	}
 }

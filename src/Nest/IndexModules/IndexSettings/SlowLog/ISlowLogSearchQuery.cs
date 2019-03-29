@@ -31,15 +31,15 @@ namespace Nest
 		Time ISlowLogSearchQuery.ThresholdWarn { get; set; }
 
 		/// <inheritdoc />
-		public SlowLogSearchQueryDescriptor ThresholdDebug(Time time) => Assign(a => a.ThresholdDebug = time);
+		public SlowLogSearchQueryDescriptor ThresholdDebug(Time time) => Assign(time, (a, v) => a.ThresholdDebug = v);
 
 		/// <inheritdoc />
-		public SlowLogSearchQueryDescriptor ThresholdInfo(Time time) => Assign(a => a.ThresholdInfo = time);
+		public SlowLogSearchQueryDescriptor ThresholdInfo(Time time) => Assign(time, (a, v) => a.ThresholdInfo = v);
 
 		/// <inheritdoc />
-		public SlowLogSearchQueryDescriptor ThresholdTrace(Time time) => Assign(a => a.ThresholdTrace = time);
+		public SlowLogSearchQueryDescriptor ThresholdTrace(Time time) => Assign(time, (a, v) => a.ThresholdTrace = v);
 
 		/// <inheritdoc />
-		public SlowLogSearchQueryDescriptor ThresholdWarn(Time time) => Assign(a => a.ThresholdWarn = time);
+		public SlowLogSearchQueryDescriptor ThresholdWarn(Time time) => Assign(time, (a, v) => a.ThresholdWarn = v);
 	}
 }

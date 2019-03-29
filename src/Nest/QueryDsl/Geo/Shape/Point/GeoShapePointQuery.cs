@@ -44,19 +44,19 @@ namespace Nest
 		IPointGeoShape IGeoShapePointQuery.Shape { get; set; }
 
 		public GeoShapePointQueryDescriptor<T> Coordinates(GeoCoordinate coordinates, bool? ignoreUnmapped = null) =>
-			Assign(a =>
+			Assign(coordinates, (a, v) =>
 			{
 				a.Shape = a.Shape ?? new PointGeoShape();
-				a.Shape.Coordinates = coordinates;
-				a.IgnoreUnmapped = ignoreUnmapped;
-			});
+				a.Shape.Coordinates = v;
+			})
+			.Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmapped = v);
 
 		public GeoShapePointQueryDescriptor<T> Coordinates(double longitude, double latitude, bool? ignoreUnmapped = null) =>
-			Assign(a =>
+			Assign(new GeoCoordinate(latitude, longitude), (a, v) =>
 			{
 				a.Shape = a.Shape ?? new PointGeoShape();
-				a.Shape.Coordinates = new GeoCoordinate(latitude, longitude);
-				a.IgnoreUnmapped = ignoreUnmapped;
-			});
+				a.Shape.Coordinates = v;
+			})
+			.Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmapped = v);
 	}
 }

@@ -31,6 +31,6 @@ namespace Nest
 		IFieldLookup IGeoIndexedShapeQuery.IndexedShape { get; set; }
 
 		public GeoIndexedShapeQueryDescriptor<T> IndexedShape(Func<FieldLookupDescriptor<T>, IFieldLookup> selector) =>
-			Assign(a => a.IndexedShape = selector?.Invoke(new FieldLookupDescriptor<T>()));
+			Assign(selector, (a, v) => a.IndexedShape = v?.Invoke(new FieldLookupDescriptor<T>()));
 	}
 }

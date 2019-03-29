@@ -53,15 +53,15 @@ namespace Nest
 		string IKeepWordsTokenFilter.KeepWordsPath { get; set; }
 
 		/// <inheritdoc />
-		public KeepWordsTokenFilterDescriptor KeepWordsCase(bool? keepCase = true) => Assign(a => a.KeepWordsCase = keepCase);
+		public KeepWordsTokenFilterDescriptor KeepWordsCase(bool? keepCase = true) => Assign(keepCase, (a, v) => a.KeepWordsCase = v);
 
 		/// <inheritdoc />
-		public KeepWordsTokenFilterDescriptor KeepWordsPath(string path) => Assign(a => a.KeepWordsPath = path);
+		public KeepWordsTokenFilterDescriptor KeepWordsPath(string path) => Assign(path, (a, v) => a.KeepWordsPath = v);
 
 		/// <inheritdoc />
-		public KeepWordsTokenFilterDescriptor KeepWords(IEnumerable<string> keepWords) => Assign(a => a.KeepWords = keepWords);
+		public KeepWordsTokenFilterDescriptor KeepWords(IEnumerable<string> keepWords) => Assign(keepWords, (a, v) => a.KeepWords = v);
 
 		/// <inheritdoc />
-		public KeepWordsTokenFilterDescriptor KeepWords(params string[] keepWords) => Assign(a => a.KeepWords = keepWords);
+		public KeepWordsTokenFilterDescriptor KeepWords(params string[] keepWords) => Assign(keepWords, (a, v) => a.KeepWords = v);
 	}
 }

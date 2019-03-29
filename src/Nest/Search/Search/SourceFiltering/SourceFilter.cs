@@ -29,13 +29,13 @@ namespace Nest
 		Fields ISourceFilter.Includes { get; set; }
 
 		public SourceFilterDescriptor<T> Includes(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(a => a.Includes = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+			Assign(fields, (a, v) => a.Includes = v?.Invoke(new FieldsDescriptor<T>())?.Value);
 
-		public SourceFilterDescriptor<T> IncludeAll() => Assign(a => a.Includes = new[] { "*" });
+		public SourceFilterDescriptor<T> IncludeAll() => Assign(new[] { "*" }, (a, v) => a.Includes = v);
 
 		public SourceFilterDescriptor<T> Excludes(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(a => a.Excludes = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+			Assign(fields, (a, v) => a.Excludes = v?.Invoke(new FieldsDescriptor<T>())?.Value);
 
-		public SourceFilterDescriptor<T> ExcludeAll() => Assign(a => a.Excludes = new[] { "*" });
+		public SourceFilterDescriptor<T> ExcludeAll() => Assign(new[] { "*" }, (a, v) => a.Excludes = v);
 	}
 }

@@ -69,18 +69,18 @@ namespace Nest
 
 		TScale IDecayFunction<TOrigin, TScale>.Scale { get; set; }
 
-		public TDescriptor Origin(TOrigin origin) => Assign(a => a.Origin = origin);
+		public TDescriptor Origin(TOrigin origin) => Assign(origin, (a, v) => a.Origin = v);
 
-		public TDescriptor Scale(TScale scale) => Assign(a => a.Scale = scale);
+		public TDescriptor Scale(TScale scale) => Assign(scale, (a, v) => a.Scale = v);
 
-		public TDescriptor Offset(TScale offset) => Assign(a => a.Offset = offset);
+		public TDescriptor Offset(TScale offset) => Assign(offset, (a, v) => a.Offset = v);
 
-		public TDescriptor Decay(double? decay) => Assign(a => a.Decay = decay);
+		public TDescriptor Decay(double? decay) => Assign(decay, (a, v) => a.Decay = v);
 
-		public TDescriptor MultiValueMode(MultiValueMode? mode) => Assign(a => a.MultiValueMode = mode);
+		public TDescriptor MultiValueMode(MultiValueMode? mode) => Assign(mode, (a, v) => a.MultiValueMode = v);
 
-		public TDescriptor Field(Field field) => Assign(a => a.Field = field);
+		public TDescriptor Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public TDescriptor Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public TDescriptor Field(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
 	}
 }

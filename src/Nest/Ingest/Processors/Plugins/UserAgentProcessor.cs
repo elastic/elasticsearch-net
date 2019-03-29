@@ -72,29 +72,29 @@ namespace Nest
 		Field IUserAgentProcessor.TargetField { get; set; }
 
 		/// <inheritdoc />
-		public UserAgentProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public UserAgentProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc />
 		public UserAgentProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc />
-		public UserAgentProcessorDescriptor<T> TargetField(Field field) => Assign(a => a.TargetField = field);
+		public UserAgentProcessorDescriptor<T> TargetField(Field field) => Assign(field, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc />
 		public UserAgentProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.TargetField = objectPath);
+			Assign(objectPath, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc />
-		public UserAgentProcessorDescriptor<T> RegexFile(string file) => Assign(a => a.RegexFile = file);
+		public UserAgentProcessorDescriptor<T> RegexFile(string file) => Assign(file, (a, v) => a.RegexFile = v);
 
 		/// <inheritdoc />
-		public UserAgentProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);
+		public UserAgentProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissing = v);
 
 		/// <inheritdoc />
-		public UserAgentProcessorDescriptor<T> Properties(IEnumerable<UserAgentProperty> properties) => Assign(a => a.Properties = properties);
+		public UserAgentProcessorDescriptor<T> Properties(IEnumerable<UserAgentProperty> properties) => Assign(properties, (a, v) => a.Properties = v);
 
 		/// <inheritdoc />
-		public UserAgentProcessorDescriptor<T> Properties(params UserAgentProperty[] properties) => Assign(a => a.Properties = properties);
+		public UserAgentProcessorDescriptor<T> Properties(params UserAgentProperty[] properties) => Assign(properties, (a, v) => a.Properties = v);
 	}
 }

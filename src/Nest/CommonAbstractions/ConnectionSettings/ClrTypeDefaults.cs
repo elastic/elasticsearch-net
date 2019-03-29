@@ -110,19 +110,19 @@ namespace Nest
 		bool IClrTypeMapping.DisableIdInference { get; set; }
 
 		/// <inheritdoc cref="IClrTypeMapping.IndexName"/>
-		public ClrTypeMappingDescriptor IndexName(string indexName) => Assign(a => a.IndexName = indexName);
+		public ClrTypeMappingDescriptor IndexName(string indexName) => Assign(indexName, (a, v) => a.IndexName = v);
 
 		/// <inheritdoc cref="IClrTypeMapping.TypeName"/>
-		public ClrTypeMappingDescriptor TypeName(string typeName) => Assign(a => a.TypeName = typeName);
+		public ClrTypeMappingDescriptor TypeName(string typeName) => Assign(typeName, (a, v) => a.TypeName = v);
 
 		/// <inheritdoc cref="IClrTypeMapping.RelationName"/>
-		public ClrTypeMappingDescriptor RelationName(string relationName) => Assign(a => a.RelationName = relationName);
+		public ClrTypeMappingDescriptor RelationName(string relationName) => Assign(relationName, (a, v) => a.RelationName = v);
 
 		/// <inheritdoc cref="IClrTypeMapping.IdPropertyName"/>
-		public ClrTypeMappingDescriptor IdProperty(string idProperty) => Assign(a => a.IdPropertyName = idProperty);
+		public ClrTypeMappingDescriptor IdProperty(string idProperty) => Assign(idProperty, (a, v) => a.IdPropertyName = v);
 
 		/// <inheritdoc cref="IClrTypeMapping.DisableIdInference"/>
-		public ClrTypeMappingDescriptor DisableIdInference(bool disable = true) => Assign(a => a.DisableIdInference = disable);
+		public ClrTypeMappingDescriptor DisableIdInference(bool disable = true) => Assign(disable, (a, v) => a.DisableIdInference = v);
 	}
 
 	public class ClrTypeMappingDescriptor<TDocument>
@@ -142,45 +142,45 @@ namespace Nest
 		/// <summary>
 		/// The default Elasticsearch index name for <typeparamref name="TDocument" />
 		/// </summary>
-		public ClrTypeMappingDescriptor<TDocument> IndexName(string indexName) => Assign(a => a.IndexName = indexName);
+		public ClrTypeMappingDescriptor<TDocument> IndexName(string indexName) => Assign(indexName, (a, v) => a.IndexName = v);
 
 		/// <summary>
 		/// The default Elasticsearch type name for <typeparamref name="TDocument" />
 		/// </summary>
-		public ClrTypeMappingDescriptor<TDocument> TypeName(string typeName) => Assign(a => a.TypeName = typeName);
+		public ClrTypeMappingDescriptor<TDocument> TypeName(string typeName) => Assign(typeName, (a, v) => a.TypeName = v);
 
 		/// <summary>
 		/// The relation name for <typeparamref name="TDocument" /> to resolve to.
 		/// </summary>
-		public ClrTypeMappingDescriptor<TDocument> RelationName(string relationName) => Assign(a => a.RelationName = relationName);
+		public ClrTypeMappingDescriptor<TDocument> RelationName(string relationName) => Assign(relationName, (a, v) => a.RelationName = v);
 
 		/// <summary>
 		/// Set a default Id property on CLR type <typeparamref name="TDocument" /> that NEST will evaluate
 		/// </summary>
-		public ClrTypeMappingDescriptor<TDocument> IdProperty(Expression<Func<TDocument, object>> property) => Assign(a => a.IdProperty = property);
+		public ClrTypeMappingDescriptor<TDocument> IdProperty(Expression<Func<TDocument, object>> property) => Assign(property, (a, v) => a.IdProperty = v);
 
 		/// <summary>
 		/// Set a default Id property on CLR type <typeparamref name="TDocument" /> that NEST will evaluate
 		/// </summary>
-		public ClrTypeMappingDescriptor<TDocument> IdProperty(string property) => Assign(a => a.IdPropertyName = property);
+		public ClrTypeMappingDescriptor<TDocument> IdProperty(string property) => Assign(property, (a, v) => a.IdPropertyName = v);
 
 		/// <summary> Provide a default routing parameter lookup based on <typeparamref name="TDocument" /> </summary>
 		public ClrTypeMappingDescriptor<TDocument> RoutingProperty(Expression<Func<TDocument, object>> property) =>
-			Assign(a => a.RoutingProperty = property);
+			Assign(property, (a, v) => a.RoutingProperty = v);
 
 		/// <summary>
 		/// Ignore <paramref name="property" /> on CLR type <typeparamref name="TDocument" />
 		/// </summary>
 		public ClrTypeMappingDescriptor<TDocument> Ignore(Expression<Func<TDocument, object>> property) =>
-			Assign(a => a.Properties.Add(new IgnoreClrPropertyMapping<TDocument>(property)));
+			Assign(property, (a, v) => a.Properties.Add(new IgnoreClrPropertyMapping<TDocument>(v)));
 
 		/// <summary>
 		/// Rename <paramref name="property" /> on CLR type <typeparamref name="TDocument" />
 		/// </summary>
 		public ClrTypeMappingDescriptor<TDocument> PropertyName(Expression<Func<TDocument, object>> property, string newName) =>
-			Assign(a => a.Properties.Add(new RenameClrPropertyMapping<TDocument>(property, newName)));
+			Assign(new RenameClrPropertyMapping<TDocument>(property, newName), (a, v) => a.Properties.Add(v));
 
 		/// <inheritdoc cref="IClrTypeMapping.DisableIdInference"/>
-		public ClrTypeMappingDescriptor<TDocument> DisableIdInference(bool disable = true) => Assign(a => a.DisableIdInference = disable);
+		public ClrTypeMappingDescriptor<TDocument> DisableIdInference(bool disable = true) => Assign(disable, (a, v) => a.DisableIdInference = v);
 	}
 }

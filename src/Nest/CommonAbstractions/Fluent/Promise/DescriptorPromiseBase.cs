@@ -24,6 +24,12 @@ namespace Nest
 			return (TDescriptor)this;
 		}
 
+		protected TDescriptor Assign<TNewValue>(TNewValue value, Action<TValue, TNewValue> assigner)
+		{
+			assigner(PromisedValue, value);
+			return (TDescriptor)this;
+		}
+
 		/// <summary>
 		/// Hides the <see cref="Equals" /> method.
 		/// </summary>

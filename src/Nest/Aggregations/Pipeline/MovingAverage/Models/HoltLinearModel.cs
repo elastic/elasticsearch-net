@@ -26,8 +26,8 @@ namespace Nest
 		float? IHoltLinearModel.Beta { get; set; }
 		string IMovingAverageModel.Name { get; } = "holt";
 
-		public HoltLinearModelDescriptor Alpha(float? alpha) => Assign(a => a.Alpha = alpha);
+		public HoltLinearModelDescriptor Alpha(float? alpha) => Assign(alpha, (a, v) => a.Alpha = v);
 
-		public HoltLinearModelDescriptor Beta(float? beta) => Assign(a => a.Beta = beta);
+		public HoltLinearModelDescriptor Beta(float? beta) => Assign(beta, (a, v) => a.Beta = v);
 	}
 }

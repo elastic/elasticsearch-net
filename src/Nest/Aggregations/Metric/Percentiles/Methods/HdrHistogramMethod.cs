@@ -20,6 +20,6 @@ namespace Nest
 		int? IHDRHistogramMethod.NumberOfSignificantValueDigits { get; set; }
 
 		public HDRHistogramMethodDescriptor NumberOfSignificantValueDigits(int? numDigits) =>
-			Assign(a => a.NumberOfSignificantValueDigits = numDigits);
+			Assign(numDigits, (a, v) => a.NumberOfSignificantValueDigits = v);
 	}
 }

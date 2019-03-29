@@ -53,18 +53,18 @@ namespace Nest
 		IEnumerable<IApplicationPrivilegesCheck> IHasPrivilegesRequest.Application { get; set; }
 
 		/// <inheritdoc cref="IHasPrivilegesRequest.Cluster"/>
-		public HasPrivilegesDescriptor Cluster(IEnumerable<string> cluster) => Assign(a => a.Cluster = cluster);
+		public HasPrivilegesDescriptor Cluster(IEnumerable<string> cluster) => Assign(cluster, (a, v) => a.Cluster = v);
 
 		/// <inheritdoc cref="IHasPrivilegesRequest.Cluster"/>
-		public HasPrivilegesDescriptor Cluster(params string[] cluster) => Assign(a => a.Cluster = cluster);
+		public HasPrivilegesDescriptor Cluster(params string[] cluster) => Assign(cluster, (a, v) => a.Cluster = v);
 
 		/// <inheritdoc cref="IHasPrivilegesRequest.Index"/>
 		public HasPrivilegesDescriptor Indices(Func<ApplicationPrivilegesChecksDescriptor, IPromise<List<IApplicationPrivilegesCheck>>> selector) =>
-			Assign(a => a.Application = selector?.Invoke(new ApplicationPrivilegesChecksDescriptor())?.Value);
+			Assign(selector, (a, v) => a.Application = v?.Invoke(new ApplicationPrivilegesChecksDescriptor())?.Value);
 
 		/// <inheritdoc cref="IHasPrivilegesRequest.Application"/>
 		public HasPrivilegesDescriptor Applications(Func<ApplicationPrivilegesChecksDescriptor, IPromise<List<IApplicationPrivilegesCheck>>> selector
-		) => Assign(a => a.Application = selector?.Invoke(new ApplicationPrivilegesChecksDescriptor())?.Value);
+		) => Assign(selector, (a, v) => a.Application = v?.Invoke(new ApplicationPrivilegesChecksDescriptor())?.Value);
 	}
 
 	public interface IIndexPrivilegesCheck
@@ -105,16 +105,16 @@ namespace Nest
 			IEnumerable<string> IIndexPrivilegesCheck.Privileges { get; set; }
 
 			/// <inheritdoc cref="IIndexPrivilegesCheck.Privileges"/>
-			public IndexPrivilegesCheckDesciptor Privileges(params string[] privileges) => Assign(a => a.Privileges = privileges);
+			public IndexPrivilegesCheckDesciptor Privileges(params string[] privileges) => Assign(privileges, (a, v) => a.Privileges = v);
 
 			/// <inheritdoc cref="IIndexPrivilegesCheck.Privileges"/>
-			public IndexPrivilegesCheckDesciptor Privileges(IEnumerable<string> privileges) => Assign(a => a.Privileges = privileges);
+			public IndexPrivilegesCheckDesciptor Privileges(IEnumerable<string> privileges) => Assign(privileges, (a, v) => a.Privileges = v);
 
 			/// <inheritdoc cref="IIndexPrivilegesCheck.Names"/>
-			public IndexPrivilegesCheckDesciptor Names(params string[] names) => Assign(a => a.Names = names);
+			public IndexPrivilegesCheckDesciptor Names(params string[] names) => Assign(names, (a, v) => a.Names = v);
 
 			/// <inheritdoc cref="IIndexPrivilegesCheck.Names"/>
-			public IndexPrivilegesCheckDesciptor Names(IEnumerable<string> names) => Assign(a => a.Names = names);
+			public IndexPrivilegesCheckDesciptor Names(IEnumerable<string> names) => Assign(names, (a, v) => a.Names = v);
 		}
 	}
 
@@ -172,19 +172,19 @@ namespace Nest
 			IEnumerable<string> IApplicationPrivilegesCheck.Resources { get; set; }
 
 			/// <inheritdoc cref="IApplicationPrivilegesCheck.Name"/>
-			public ApplicationPrivilegesCheckDescriptor Name(string name) => Assign(a => a.Name = name);
+			public ApplicationPrivilegesCheckDescriptor Name(string name) => Assign(name, (a, v) => a.Name = v);
 
 			/// <inheritdoc cref="IApplicationPrivilegesCheck.Privileges"/>
-			public ApplicationPrivilegesCheckDescriptor Privileges(params string[] privileges) => Assign(a => a.Privileges = privileges);
+			public ApplicationPrivilegesCheckDescriptor Privileges(params string[] privileges) => Assign(privileges, (a, v) => a.Privileges = v);
 
 			/// <inheritdoc cref="IApplicationPrivilegesCheck.Privileges"/>
-			public ApplicationPrivilegesCheckDescriptor Privileges(IEnumerable<string> privileges) => Assign(a => a.Privileges = privileges);
+			public ApplicationPrivilegesCheckDescriptor Privileges(IEnumerable<string> privileges) => Assign(privileges, (a, v) => a.Privileges = v);
 
 			/// <inheritdoc cref="IApplicationPrivilegesCheck.Resources"/>
-			public ApplicationPrivilegesCheckDescriptor Resources(params string[] resources) => Assign(a => a.Resources = resources);
+			public ApplicationPrivilegesCheckDescriptor Resources(params string[] resources) => Assign(resources, (a, v) => a.Resources = v);
 
 			/// <inheritdoc cref="IApplicationPrivilegesCheck.Resources"/>
-			public ApplicationPrivilegesCheckDescriptor Resources(IEnumerable<string> resources) => Assign(a => a.Resources = resources);
+			public ApplicationPrivilegesCheckDescriptor Resources(IEnumerable<string> resources) => Assign(resources, (a, v) => a.Resources = v);
 		}
 	}
 }

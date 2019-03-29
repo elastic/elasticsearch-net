@@ -49,17 +49,17 @@ namespace Nest
 
 		StopWords IPatternAnalyzer.StopWords { get; set; }
 
-		public PatternAnalyzerDescriptor StopWords(params string[] stopWords) => Assign(a => a.StopWords = stopWords);
+		public PatternAnalyzerDescriptor StopWords(params string[] stopWords) => Assign(stopWords, (a, v) => a.StopWords = v);
 
 		public PatternAnalyzerDescriptor StopWords(IEnumerable<string> stopWords) =>
-			Assign(a => a.StopWords = stopWords.ToListOrNullIfEmpty());
+			Assign(stopWords.ToListOrNullIfEmpty(), (a, v) => a.StopWords = v);
 
-		public PatternAnalyzerDescriptor StopWords(StopWords stopWords) => Assign(a => a.StopWords = stopWords);
+		public PatternAnalyzerDescriptor StopWords(StopWords stopWords) => Assign(stopWords, (a, v) => a.StopWords = v);
 
-		public PatternAnalyzerDescriptor Pattern(string pattern) => Assign(a => a.Pattern = pattern);
+		public PatternAnalyzerDescriptor Pattern(string pattern) => Assign(pattern, (a, v) => a.Pattern = v);
 
-		public PatternAnalyzerDescriptor Flags(string flags) => Assign(a => a.Flags = flags);
+		public PatternAnalyzerDescriptor Flags(string flags) => Assign(flags, (a, v) => a.Flags = v);
 
-		public PatternAnalyzerDescriptor Lowercase(bool? lowercase = true) => Assign(a => a.Lowercase = lowercase);
+		public PatternAnalyzerDescriptor Lowercase(bool? lowercase = true) => Assign(lowercase, (a, v) => a.Lowercase = v);
 	}
 }

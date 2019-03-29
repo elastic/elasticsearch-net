@@ -37,7 +37,7 @@ namespace Nest
 		void IProxyRequest.WriteJson(IElasticsearchSerializer sourceSerializer, Stream stream, SerializationFormatting formatting) =>
 			sourceSerializer.Serialize(Self.Document, stream, formatting);
 
-		partial void DocumentFromPath(TDocument document) => Assign(a => a.Document = document);
+		partial void DocumentFromPath(TDocument document) => Assign(document, (a, v) => a.Document = v);
 
 		private TDocument AutoRouteDocument() => Self.Document;
 	}

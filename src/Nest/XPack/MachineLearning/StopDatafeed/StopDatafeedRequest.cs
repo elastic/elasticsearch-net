@@ -35,9 +35,9 @@ namespace Nest
 		Time IStopDatafeedRequest.Timeout { get; set; }
 
 		/// <inheritdoc />
-		public StopDatafeedDescriptor Timeout(Time timeout) => Assign(a => a.Timeout = timeout);
+		public StopDatafeedDescriptor Timeout(Time timeout) => Assign(timeout, (a, v) => a.Timeout = v);
 
 		/// <inheritdoc />
-		public StopDatafeedDescriptor Force(bool? force = true) => Assign(a => a.Force = force);
+		public StopDatafeedDescriptor Force(bool? force = true) => Assign(force, (a, v) => a.Force = v);
 	}
 }

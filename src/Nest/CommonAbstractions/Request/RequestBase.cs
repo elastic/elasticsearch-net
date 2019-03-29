@@ -87,7 +87,10 @@ namespace Nest
 
 		protected TInterface Self => _descriptor;
 
+		[Obsolete("Use the overload that accepts TValue")]
 		protected TDescriptor Assign(Action<TInterface> assign) => Fluent.Assign(_descriptor, assign);
+
+		protected TDescriptor Assign<TValue>(TValue value, Action<TInterface, TValue> assign) => Fluent.Assign(_descriptor, value, assign);
 
 		protected TDescriptor AssignParam(Action<TParameters> assigner)
 		{

@@ -38,7 +38,7 @@ namespace Nest
 
 	public class GraphVertexDefinitionDescriptor : DescriptorBase<GraphVertexDefinitionDescriptor, IGraphVertexDefinition>, IGraphVertexDefinition
 	{
-		public GraphVertexDefinitionDescriptor(Field field) => Assign(a => a.Field = field);
+		public GraphVertexDefinitionDescriptor(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		IEnumerable<string> IGraphVertexDefinition.Exclude { get; set; }
 		Field IGraphVertexDefinition.Field { get; set; }
@@ -47,23 +47,23 @@ namespace Nest
 		long? IGraphVertexDefinition.ShardMinimumDocumentCount { get; set; }
 		int? IGraphVertexDefinition.Size { get; set; }
 
-		public GraphVertexDefinitionDescriptor Size(int? size) => Assign(a => a.Size = size);
+		public GraphVertexDefinitionDescriptor Size(int? size) => Assign(size, (a, v) => a.Size = v);
 
-		public GraphVertexDefinitionDescriptor MinimumDocumentCount(int? minDocCount) => Assign(a => a.MinimumDocumentCount = minDocCount);
+		public GraphVertexDefinitionDescriptor MinimumDocumentCount(int? minDocCount) => Assign(minDocCount, (a, v) => a.MinimumDocumentCount = v);
 
 		public GraphVertexDefinitionDescriptor ShardMinimumDocumentCount(int? shardMinDocCount) =>
-			Assign(a => a.ShardMinimumDocumentCount = shardMinDocCount);
+			Assign(shardMinDocCount, (a, v) => a.ShardMinimumDocumentCount = v);
 
-		public GraphVertexDefinitionDescriptor Exclude(params string[] excludes) => Assign(a => a.Exclude = excludes);
+		public GraphVertexDefinitionDescriptor Exclude(params string[] excludes) => Assign(excludes, (a, v) => a.Exclude = v);
 
-		public GraphVertexDefinitionDescriptor Exclude(IEnumerable<string> excludes) => Assign(a => a.Exclude = excludes);
+		public GraphVertexDefinitionDescriptor Exclude(IEnumerable<string> excludes) => Assign(excludes, (a, v) => a.Exclude = v);
 
 		public GraphVertexDefinitionDescriptor Include(params string[] includes) => Include(i => i.IncludeRange(includes));
 
 		public GraphVertexDefinitionDescriptor Include(IEnumerable<string> includes) => Include(i => i.IncludeRange(includes));
 
 		public GraphVertexDefinitionDescriptor Include(Func<GraphVertexIncludeDescriptor, IPromise<List<GraphVertexInclude>>> selector) =>
-			Assign(a => a.Include = selector?.Invoke(new GraphVertexIncludeDescriptor())?.Value);
+			Assign(selector, (a, v) => a.Include = v?.Invoke(new GraphVertexIncludeDescriptor())?.Value);
 	}
 
 	public class GraphVerticesDescriptor<T> : DescriptorPromiseBase<GraphVerticesDescriptor<T>, IList<IGraphVertexDefinition>>
