@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <!-- Type Providers are restored using net461, fine for netcoreapp2.2 so we kill the warning -->
     <NoWarn>$(NoWarn);NU1701</NoWarn>
+    <RestoreSources>https://ci.appveyor.com/nuget/assemblydiffer;https://ci.appveyor.com/nuget/assemblyrewriter;https://api.nuget.org/v3/index.json</RestoreSources>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Commandline.fs" />
@@ -67,11 +68,6 @@
     <FscToolPath>/usr/bin</FscToolPath>
     <FscToolExe>fsharpc</FscToolExe>
   </PropertyGroup>
-<!--  <ItemGroup>-->
-<!--    <Reference Include="FakeLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=null">-->
-<!--      <HintPath>..\..\packages\build\FAKE\tools\FakeLib.dll</HintPath>-->
-<!--    </Reference>-->
-<!--  </ItemGroup>-->
   <ItemGroup>
     <PackageReference Include="Bullseye" Version="2.3.0" />
     <PackageReference Include="Fake.Core.Environment" Version="5.12.6" />
@@ -82,6 +78,9 @@
     <PackageReference Include="FSharp.Data.TypeProviders" Version="5.0.0.6" />
     <PackageReference Include="Octokit" Version="0.32.0" />
     <PackageReference Include="Proc" Version="0.4.3" />
+
+<!--    <PackageReference Include="assembly-rewriter" Version="1.0.0-alpha20181126T140416" />-->
+<!--    <PackageReference Include="assembly-differ" Version="1.0.0-alpha20181126T222017" />-->
   </ItemGroup>
 
 </Project>

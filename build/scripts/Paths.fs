@@ -2,7 +2,6 @@
 
 open Projects
 
-
 module Paths =
 
     let OwnerName = "elastic"

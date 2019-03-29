@@ -12,8 +12,8 @@ group build
 	
     nuget ILRepack 2.0.16
 	
-    source https://ci.appveyor.com/nuget/assemblyrewriter
+    source 
     clitool assembly-rewriter
     
-    source https://ci.appveyor.com/nuget/assemblydiffer
+    source 
     clitool assembly-differ
