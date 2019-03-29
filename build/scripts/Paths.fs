@@ -1,6 +1,5 @@
 ﻿namespace Scripts
 
-open Fake
 open Projects
 
 
@@ -22,6 +21,8 @@ module Paths =
     let NugetOutput = sprintf "%s/_packages" BuildOutput
     let SourceFolder = "src"
     
+    let Solution = "src/Elasticsearch.sln"
+    
     let CheckedInTool(tool) = sprintf "%s/%s" CheckedInToolsFolder tool
     let PaketDotNetGlobalTool tool subPath = sprintf "%s/%s" (Tool tool) subPath
     let Keys(keyFile) = sprintf "%s/%s" KeysFolder keyFile
@@ -42,6 +43,6 @@ module Paths =
             | DocGenerator -> sprintf "%s/CodeGeneration/%s/%s.csproj" SourceFolder project.Name project.Name
         | _ -> null
 
-    let BinFolder(folder) = 
-        let f = replace @"\" "/" folder
+    let BinFolder (folder:string) = 
+        let f = folder.Replace(@"\", "/")
         sprintf "%s/%s/bin/Release" SourceFolder f

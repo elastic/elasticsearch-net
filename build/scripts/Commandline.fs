@@ -1,7 +1,8 @@
 namespace Scripts
 
 open System
-open Fake
+open System.Runtime.InteropServices
+open Fake.Core
 
 //this is ugly but a direct port of what used to be duplicated in our DOS and bash scripts
 module Commandline =
@@ -54,19 +55,19 @@ Execution hints can be provided anywhere on the command line
         | _ -> None
         
     let private (|IsDiff|_|) (candidate:string) =
-        let c = candidate |> toLower
+        let c = candidate.ToLowerInvariant() 
         match c with
         | "github" | "nuget" | "directories" | "assemblies" -> Some c
         | _ -> failwith (sprintf "Unknown diff type: %s" candidate)
         
     let private (|IsProject|_|) (candidate:string) =
-        let c = candidate |> toLower
+        let c = candidate.ToLowerInvariant()
         match c with
         | "nest" | "elasticsearch.net" | "nest.jsonnetserializer" -> Some c
         | _ -> None     
         
     let private (|IsFormat|_|) (candidate:string) =
-        let c = candidate |> toLower
+        let c = candidate.ToLowerInvariant()
         match c with
         | "xml" | "markdown" | "asciidoc" -> Some c
         | _ -> None 
@@ -100,10 +101,17 @@ Execution hints can be provided anywhere on the command line
         ValidMonoTarget: bool;
         NeedsFullBuild: bool;
         NeedsClean: bool;
+        DoSourceLink: bool;
 
         CommandArguments: CommandArguments;
     }
 
+    //TODO RENAME to notWindows
+    let isMono =
+        RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || 
+        RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX)
+        
+    let runningOnCi = Environment.hasEnvironVar "TF_BUILD" || Environment.hasEnvironVar "APPVEYOR_BUILD_VERSION"
     
     let parse (args: string list) =
         
@@ -170,6 +178,7 @@ Execution hints can be provided anywhere on the command line
                 | ("build", _) -> false
                 | _ -> true;
             CommandArguments = Unknown
+            DoSourceLink = false
         }
             
         let arguments =
@@ -239,5 +248,5 @@ Execution hints can be provided anywhere on the command line
                 parsed with CommandArguments = Cluster { Name = clusterName; Version = Some clusterVersion }
             }
         | _ ->
-            traceError usage
+            eprintf "%s" usage
             failwith "Please consult printed help text on how to call our build"

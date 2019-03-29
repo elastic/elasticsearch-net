@@ -2,95 +2,52 @@
 
 open System
 open System.IO
-open System.Diagnostics
 open System.Net
-
-open Fake
+open ProcNet
+open Fake.IO.Globbing.Operators
 
 module Tooling = 
-    open Paths
 
-    (* helper functions *)
-    #if mono_posix
-    #r "Mono.Posix.dll"
-    open Mono.Unix.Native
-    let private applyExecutionPermissionUnix path =
-        let _,stat = Syscall.lstat(path)
-        Syscall.chmod(path, FilePermissions.S_IXUSR ||| stat.st_mode) |> ignore
-    #else
-    let private applyExecutionPermissionUnix path = ()
-    #endif
+    type ExecResult = { ExitCode: int option; Output: Std.LineOut seq;}
+    
+    let private defaultTimeout = TimeSpan.FromMinutes(5.)
+    
+    let execInWithTimeout timeout workinDir bin args = 
+        let startArgs = StartArguments(bin, args |> List.toArray)
+        if (Option.isSome workinDir) then
+            startArgs.WorkingDirectory <- Option.defaultValue "" workinDir
+        let result = Proc.Start(startArgs, timeout)
+        if not result.Completed then failwithf "process did not execute before timeout: %s" bin
+        let exitCode = match result.ExitCode.HasValue with | false -> None | true -> Some result.ExitCode.Value
+        { ExitCode = exitCode; Output = seq result.ConsoleOut}
 
-    let private execAt (workingDir:string) (exePath:string) (args:string seq) =
-        let processStart (psi:ProcessStartInfo) =
-            let ps = Process.Start(psi)
-            ps.WaitForExit ()
-            ps.ExitCode
-        let fullExePath = exePath |> Path.GetFullPath
-        applyExecutionPermissionUnix fullExePath
-        let exitCode = 
-            ProcessStartInfo(
-                        fullExePath,
-                        args |> String.concat " ",
-                        WorkingDirectory = (workingDir |> Path.GetFullPath),
-                        UseShellExecute = false) 
-                   |> processStart
-        if exitCode <> 0 then
-            exit exitCode
-        ()
+    let execIn workingDir bin args = execInWithTimeout defaultTimeout workingDir bin args
+    
+    let exec bin args = execIn None bin args
 
-
-    let execProcessWithTimeout proc arguments timeout workingDir = 
-        let args = arguments |> String.concat " "
-        ExecProcess (fun info ->
-            info.FileName <- proc
-            info.WorkingDirectory <- workingDir
-            info.Arguments <- args
-        ) timeout
-
-    let execProcessWithTimeoutAndReturnMessages proc arguments timeout = 
-        let args = arguments |> String.concat " "
-        let code = 
-            ExecProcessAndReturnMessages (fun info ->
-            info.FileName <- proc
-            info.WorkingDirectory <- "."
-            info.Arguments <- args
-            ) timeout
-        code
-
-    let private defaultTimeout = TimeSpan.FromMinutes 20.0
-
-    let execProcessInDirectory proc arguments workingDir =
-        let exitCode = execProcessWithTimeout proc arguments defaultTimeout workingDir
-        match exitCode with
-        | 0 -> exitCode
-        | _ -> failwithf "Calling %s resulted in unexpected exitCode %i" proc exitCode 
-
-    let execProcess proc arguments = execProcessInDirectory proc arguments "."
-
-    let execProcessAndReturnMessages proc arguments =
-        execProcessWithTimeoutAndReturnMessages proc arguments defaultTimeout
+    type BuildTooling(timeout, path) =
+        let timeout = match timeout with | Some t -> t | None -> defaultTimeout
+        member this.Path = path
+        member this.ExecInWithTimeout workingDirectory arguments timeout = execInWithTimeout timeout (Some workingDirectory) this.Path arguments
+        member this.ExecWithTimeout arguments timeout = execInWithTimeout timeout None this.Path arguments
+        member this.ExecIn workingDirectory arguments = this.ExecInWithTimeout workingDirectory arguments timeout
+        member this.Exec arguments = this.ExecWithTimeout arguments timeout
 
     let nugetFile =
         let targetLocation = "build/tools/nuget/nuget.exe" 
         if (not (File.Exists targetLocation))
         then
-            trace (sprintf "Nuget not found at %s. Downloading now" targetLocation)
+            printfn "Nuget not found at %s. Downloading now" targetLocation
             let url = "http://dist.nuget.org/win-x86-commandline/latest/nuget.exe" 
             Directory.CreateDirectory("build/tools/nuget") |> ignore
             use webClient = new WebClient()
             webClient.DownloadFile(url, targetLocation)
-            trace "nuget downloaded"
+            printfn "nuget downloaded"
         targetLocation 
 
-    type BuildTooling(path) =
-        member this.Path = path
-        member this.Exec arguments = execProcess this.Path arguments
-        member this.ExecIn workingDirectory arguments = this.ExecWithTimeoutIn workingDirectory arguments defaultTimeout
-        member this.ExecWithTimeoutIn workingDirectory arguments timeout = execProcessWithTimeout this.Path arguments timeout workingDirectory
-
-    let Nuget = new BuildTooling(nugetFile)
-    let ILRepack = new BuildTooling("packages/build/ILRepack/tools/ILRepack.exe")
+    let Nuget = BuildTooling(None, nugetFile)
+    let ILRepack = BuildTooling(None, "packages/build/ILRepack/tools/ILRepack.exe")
+    let DotNet = BuildTooling(Some <| TimeSpan.FromMinutes(5.), "dotnet")
 
     type DotTraceTool = {
         Name:string;
@@ -98,27 +55,17 @@ module Tooling =
         TargetDir:string;
     }
 
-    type DotNetTooling(exe) =
-        member this.Exec arguments =
-            this.ExecWithTimeout arguments (TimeSpan.FromMinutes 30.)
-
-        member this.ExecWithTimeout arguments timeout =
-            let result = execProcessWithTimeout exe arguments timeout "."
-            if result <> 0 then failwith (sprintf "Failed to run dotnet tooling for %s args: %A" exe arguments)
-
-    let DotNet = DotNetTooling("dotnet.exe")
-
     type DiffTooling(exe) =       
-        let installPath = "C:\Program Files (x86)\Progress\JustAssembly\Libraries"  
+        let installPath = @"C:\Program Files (x86)\Progress\JustAssembly\Libraries"  
         let downloadPage = "https://www.telerik.com/download-trial-file/v2/justassembly"  
-        let toolPath = installPath @@ exe
+        let toolPath = Path.Combine(installPath,exe)
         
         member this.Exec arguments =
-            if (directoryExists installPath |> not) then
+            if (Directory.Exists installPath |> not) then
                 failwith (sprintf "JustAssembly is not installed in the default location %s. Download and install from %s" installPath downloadPage)
         
-            let result = execProcessWithTimeout toolPath arguments (TimeSpan.FromMinutes 5.) "."
-            if result <> 0 then failwith (sprintf "Failed to run diff tooling for %s args: %A" exe arguments)
+            let result = execInWithTimeout defaultTimeout (Some ".") toolPath arguments 
+            if result.ExitCode <> Some 0 then failwith (sprintf "Failed to run diff tooling for %s args: %A" exe arguments)
             
     let JustAssembly = DiffTooling("JustAssembly.CommandLineTool.exe")
     

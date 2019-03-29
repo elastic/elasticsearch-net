@@ -65,13 +65,17 @@
     <FscToolPath>/usr/bin</FscToolPath>
     <FscToolExe>fsharpc</FscToolExe>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="FakeLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\build\FAKE\tools\FakeLib.dll</HintPath>
-    </Reference>
-  </ItemGroup>
+<!--  <ItemGroup>-->
+<!--    <Reference Include="FakeLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=null">-->
+<!--      <HintPath>..\..\packages\build\FAKE\tools\FakeLib.dll</HintPath>-->
+<!--    </Reference>-->
+<!--  </ItemGroup>-->
   <ItemGroup>
     <PackageReference Include="Bullseye" Version="2.3.0" />
+    <PackageReference Include="Fake.Core.Environment" Version="5.12.6" />
+    <PackageReference Include="Fake.Core.SemVer" Version="5.12.6" />
+    <PackageReference Include="Fake.IO.FileSystem" Version="5.12.6" />
+    <PackageReference Include="Fake.IO.Zip" Version="5.12.6" />
     <PackageReference Include="FSharp.Data" Version="3.0.1" />
     <PackageReference Include="FSharp.Data.TypeProviders" Version="5.0.0.6" />
     <PackageReference Include="Octokit" Version="0.32.0" />

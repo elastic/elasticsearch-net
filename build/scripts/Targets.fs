@@ -1,12 +1,11 @@
 namespace Scripts
 
 open System
-open Fake
 open System.IO
 
 open Paths
 open Build
-open Test
+open Tests
 open Versioning
 open Documentation
 open Release
@@ -14,10 +13,11 @@ open ReleaseNotes
 open Benchmarker
 open InheritDoc
 open Commandline
-open Fake.IO
 open Tooling
 open Bullseye
 open Bullseye
+open Fake.Core
+open Fake.IO
 
 module Main =
 
@@ -42,28 +42,27 @@ module Main =
         t "start" <| fun _ -> 
             match (isMono, parsed.ValidMonoTarget) with
             | (true, false) -> failwithf "%s is not a valid target on mono because it can not call ILRepack" (parsed.Target)
-            | _ -> traceHeader "STARTING BUILD"
+            | _ -> printfn "STARTING BUILD"
 
         w parsed.NeedsClean "clean" Clean 
 
-        w parsed.NeedsFullBuild "full-build" <| fun _ -> Compile artifactsVersion
-
-        w (hasBuildParam "version") "version" <| fun _ -> tracefn "Artifacts Version: %O" artifactsVersion
+        w parsed.NeedsFullBuild "full-build" <| fun _ -> Compile parsed artifactsVersion
 
         w (not isMono) "internalize-dependencies" <| fun _ -> ShadowDependencies.ShadowDependencies artifactsVersion 
 
         w parsed.SkipDocs "documentation" <| fun _ -> Documentation.Generate parsed
 
         w (parsed.SkipTests && parsed.Target <> "canary") "test" <| fun _ -> Tests.RunUnitTests parsed
+        
+        t "version" <| fun _ -> printfn "Artifacts Version: %O" artifactsVersion
 
         t "restore" Restore
 
         t "inherit-doc" <| InheritDoc.PatchInheritDocs
 
         t "test-nuget-package" <| fun _ -> 
-            //RunReleaseUnitTests restores the canary nugetpackages in tests, since these end up being cached
-            //its too evasive to run on development machines or TC, Run only on AppVeyor containers.
-            if buildServer <> AppVeyor then Tests.RunUnitTests parsed
+            //run release unit tests puts packages in the system cache prevent this from happening locally
+            if not Commandline.runningOnCi then Tests.RunUnitTests parsed
             else Tests.RunReleaseUnitTests artifactsVersion
             
         t "nuget-pack" <| fun _ -> Release.NugetPack artifactsVersion
@@ -79,24 +78,24 @@ module Main =
             "clean"; "version"; "restore"; "full-build"; "test"; 
             "internalize-dependencies"; "inherit-doc"; "documentation"; 
         ]
-        command "build" buildChain <| fun _ -> traceHeader "STARTING BUILD"
+        command "build" buildChain <| fun _ -> printfn "STARTING BUILD"
 
         command "benchmark" [ "clean"; "full-build"; ] <| fun _ -> Benchmarker.Run parsed
 
-        command "canary" [ "version"; "release"; "test-nuget-package";] <| fun _ -> tracefn "Finished Release Build %O" artifactsVersion
+        command "canary" [ "version"; "release"; "test-nuget-package";] <| fun _ -> printfn "Finished Release Build %O" artifactsVersion
 
         command "integrate" [ "clean"; "restore"; "full-build";] <| fun _ -> Tests.RunIntegrationTests parsed
 
         command "release" [ 
            "build"; "nuget-pack"; "nuget-pack-versioned"; "validate-artifacts"; "generate-release-notes"
-        ] (fun _ -> traceHeader (sprintf "Finished Release Build %O" artifactsVersion))
+        ] (fun _ -> printfn "Finished Release Build %O" artifactsVersion)
 
         command "diff" [ "clean"; ] <| fun _ ->
           let differ = Paths.PaketDotNetGlobalTool "assembly-differ" @"tools\netcoreapp2.1\any\assembly-differ.dll"
           let args = parsed.RemainingArguments |> String.concat " "
           let command = sprintf @"%s %s" differ args
-          setProcessEnvironVar "NUGET" Tooling.nugetFile
-          DotNetCli.RunCommand (fun p -> { p with TimeOut = TimeSpan.FromMinutes(3.) }) command 
+          Environment.setEnvironVar "NUGET" Tooling.nugetFile
+          Tooling.DotNet.Exec [command] |> ignore
 
         command "cluster" [ "restore"; "full-build" ] <| fun _ -> 
             let clusterName = Option.defaultValue "" <| match parsed.CommandArguments with | Cluster c -> Some c.Name | _ -> None
@@ -110,17 +109,15 @@ module Main =
             let userYaml = Path.Combine(sourceDir, "tests.yaml");
             let e f = File.Exists f;
             match ((e userYaml), (e defaultYaml)) with
-            | (true, _) -> setProcessEnvironVar "NEST_YAML_FILE" (Path.GetFullPath(userYaml))
-            | (_, true) -> setProcessEnvironVar "NEST_YAML_FILE" (Path.GetFullPath(defaultYaml))
+            | (true, _) -> Environment.setEnvironVar "NEST_YAML_FILE" (Path.GetFullPath(userYaml))
+            | (_, true) -> Environment.setEnvironVar "NEST_YAML_FILE" (Path.GetFullPath(defaultYaml))
             | _ -> ignore()
             
             Shell.copyDir tempDir testsProjectDirectory (fun s -> true)
             let command = sprintf "%s %s" clusterName clusterVersion
-            DotNetCli.RunCommand(fun p ->
-                { p with
-                    WorkingDir = tempDir;
-                    TimeOut = TimeSpan.FromMinutes(120.)
-                }) (sprintf "%s %s" (Path.Combine(tempDir, "Tests.ClusterLauncher.dll")) command)
+            let timeout = TimeSpan.FromMinutes(120.)
+            let dll = Path.Combine(tempDir, "Tests.ClusterLauncher.dll");
+            Tooling.DotNet.ExecInWithTimeout tempDir ["run"; dll; command] timeout  |> ignore
             
             Shell.deleteDir tempDir
 

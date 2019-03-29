@@ -9,11 +9,8 @@ open System.Xml.Linq
 open System.Xml.XPath
 open Microsoft.FSharp.Quotations
 open Microsoft.FSharp.Quotations.Patterns
-open Fake
 
-open Paths
 open Projects
-open Tooling
 open Versioning
 
 module Release =
@@ -27,15 +24,15 @@ module Release =
         let packageReference = 
             doc.Descendants(xName "PackageReference")
                .FirstOrDefault(fun e -> e.Attribute(xName "Include").Value = "Newtonsoft.Json")
-        if (packageReference <> null) then packageReference.Attribute(xName "Version").Value
+        if (not (isNull packageReference)) then packageReference.Attribute(xName "Version").Value
         else String.Empty
         
     let private jsonNetVersionNext p =
         match jsonNetVersionCurrent p with
         | "" -> String.Empty
         | version -> 
-            let semanticVersion = SemVerHelper.parse version
-            sprintf "%i" (semanticVersion.Major + 1)
+            let semanticVersion = parse version
+            sprintf "%i" (semanticVersion.Major + 1u)
             
     let private addKeyValue (e:Expr<string>) (builder:StringBuilder) =
         // the binding for this tuple looks like key/value should 
@@ -46,11 +43,11 @@ module Release =
             | ValueWithName (obj,ty,nm) -> ((obj |> string), nm)
             | _ -> failwith (sprintf "%A is not a let-bound value. %A" e (e.GetType()))
             
-        if (isNotNullOrEmpty value) then builder.AppendFormat("{0}=\"{1}\";", key, value)
+        if (not (String.IsNullOrEmpty value)) then builder.AppendFormat("{0}=\"{1}\";", key, value)
         else builder
 
     let private currentMajorVersion version = sprintf "%i" <| version.Full.Major
-    let private nextMajorVersion version = sprintf "%i" <| version.Full.Major + 1
+    let private nextMajorVersion version = sprintf "%i" <| version.Full.Major + 1u
 
     let private props version =
         let currentMajorVersion = currentMajorVersion version
@@ -66,9 +63,9 @@ module Release =
              "-outputdirectory"; Paths.BuildOutput; 
              "-properties"; properties; 
         ] |> ignore
-        traceFAKE "%s" Paths.BuildOutput
+        printfn "%s" Paths.BuildOutput
         let nugetOutFile = Paths.Output(sprintf "%s.%O.nupkg" n version.Full)
-        MoveFile Paths.NugetOutput nugetOutFile
+        File.Move(Paths.NugetOutput, nugetOutFile)
 
     let private nugetPackMain (p:DotNetProject) nugetId nuspec properties version = 
         pack nuspec nugetId properties version
@@ -90,7 +87,7 @@ module Release =
         let descriptionNode = doc.XPathSelectElement("/x:package/x:metadata/x:description", nsManager) 
         descriptionNode.Value <- sprintf "%s.x namespaced package, can be installed alongside %s" currentMajorVersion nugetId
         let iconNode = doc.XPathSelectElement("/x:package/x:metadata/x:iconUrl", nsManager) 
-        iconNode.Value <- replace "icon" "icon-aux" iconNode.Value 
+        iconNode.Value <- iconNode.Value.Replace("icon", "icon-aux")
         let xmlConfig = sprintf "/x:package//x:file[contains(@src, '%s.xml')]" p.Name
         doc.XPathSelectElements(xmlConfig, nsManager).Remove();
 
@@ -102,7 +99,7 @@ module Release =
             let dllNodes = doc.XPathSelectElements(x, nsManager)
             dllNodes |> Seq.iter (fun e -> 
                 let src = e.Attribute(xName "src");
-                src.Value <- replace d r src.Value 
+                src.Value <- src.Value.Replace(d, r)
             )
 
         match p with 
@@ -123,14 +120,14 @@ module Release =
                 idAtt.Value <- sprintf "NEST.v%s" currentMajorVersion
             )
             rewriteDllFile p.Name
-        | _ -> traceError (sprintf "%s still needs special canary handling" p.Name)
+        | _ -> failwithf "%A still needs special canary handling" p
         doc.Save(nuspecVersioned) 
 
         pack nuspecVersioned newId properties version 
-        DeleteFile nuspecVersioned 
+        File.Delete nuspecVersioned 
     
     let private packProjects version callback  =
-        CreateDir Paths.NugetOutput
+        Directory.CreateDirectory Paths.NugetOutput |> ignore
             
         DotNetProject.AllPublishable
         |> Seq.iter(fun p ->
@@ -142,7 +139,8 @@ module Release =
                 props version
                 |> addKeyValue <@jsonDotNetCurrentVersion@>
                 |> addKeyValue <@jsonDotNetNextVersion@>
-                |> toText
+            let properties = properties.ToString()
+                
             let nugetId = p.NugetId 
             let nuspec = (sprintf @"build/%s.nuspec" nugetId)
 

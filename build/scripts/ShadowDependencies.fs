@@ -1,10 +1,10 @@
 ﻿namespace Scripts
 
 open System 
-open Fake
 open FSharp.Data
 open Projects
 open Versioning
+open Tooling
 
 module ShadowDependencies =
 
@@ -23,7 +23,7 @@ module ShadowDependencies =
             |> Seq.fold (+) " "
             
         let mergeCommand = sprintf @"%s %s" assemblyRewriter dlls
-        DotNetCli.RunCommand (fun p -> { p with TimeOut = TimeSpan.FromMinutes(3.) }) mergeCommand |> ignore
+        Tooling.DotNet.Exec ["run"; "--"; mergeCommand] |> ignore
         
         let mergedOutFile = fullOutput project
         let ilMergeArgs = [
@@ -37,8 +37,8 @@ module ShadowDependencies =
             |> Seq.filter (fun p -> p.Name = project.Name || not <| (DotNetProject.AllPublishable |> Seq.contains p)) 
             |> Seq.map fullOutput
         match project.NeedsMerge with 
-        | true -> Tooling.ILRepack.Exec (ilMergeArgs |> Seq.append mergeDlls) |> ignore
-        | _ -> Tooling.ILRepack.Exec (ilMergeArgs |> Seq.append [mergeDlls |> Seq.head]) |> ignore
+        | true -> Tooling.ILRepack.Exec (ilMergeArgs |> List.append (mergeDlls |> Seq.toList)) |> ignore
+        | _ -> Tooling.ILRepack.Exec (ilMergeArgs |> List.append [mergeDlls |> Seq.head]) |> ignore
 
     let ShadowDependencies (ArtifactsVersion(version)) = 
         let fw = DotNetFramework.All

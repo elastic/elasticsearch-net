@@ -1,18 +1,16 @@
 ﻿namespace Scripts
 
-open Fake 
-open Paths
+open System
 open Tooling
 open Commandline
 open Versioning
-
+open Fake.Core
+open System.IO
 
 module Tests =
-    open Fake.Core
-    open System
 
-    let private buildingOnAzurePipeline = getEnvironmentVarAsBool "TF_BUILD"
-    let private buildingOnTeamCity = match environVarOrNone "TEAMCITY_VERSION" with | Some x -> true | None -> false
+    let private buildingOnAzurePipeline = Environment.environVarAsBool "TF_BUILD"
+    let private buildingOnTeamCity = match Environment.environVarOrNone "TEAMCITY_VERSION" with | Some x -> true | None -> false
 
     let SetTestEnvironmentVariables args = 
         let clusterFilter = match args.CommandArguments with | Integration a -> a.ClusterFilter | _ -> None
@@ -20,7 +18,7 @@ module Tests =
         
         let env key v =
             match v with
-            | Some v -> setProcessEnvironVar key <| sprintf "%O" v
+            | Some v -> Environment.setEnvironVar key <| sprintf "%O" v
             | None -> ignore()
         
         env "NEST_INTEGRATION_CLUSTER" clusterFilter
@@ -38,7 +36,7 @@ module Tests =
         ignore()
 
     let private dotnetTest (target: Commandline.MultiTarget) =
-        CreateDir Paths.BuildOutput
+        Directory.CreateDirectory Paths.BuildOutput |> ignore
         let command = 
             let p = ["test"; "."; "-c"; "RELEASE"]
             //make sure we only test netcoreapp on linux or requested on the command line to only test-one
@@ -56,9 +54,8 @@ module Tests =
             | (true) -> [ "--logger"; "trx"; "--collect"; "\"Code Coverage\""; "-v"; "m"] |> List.append command
             | _  -> command
             
-        let dotnet = Tooling.BuildTooling("dotnet")
-        let exitCode = dotnet.ExecWithTimeoutIn "src/Tests/Tests" commandWithCodeCoverage (TimeSpan.FromMinutes 30.) 
-        if exitCode > 0 && not buildingOnTeamCity then raise (Exception <| (sprintf "test finished with exitCode %d" exitCode))
+        let result = Tooling.DotNet.ExecInWithTimeout "src/Tests/Tests" commandWithCodeCoverage (TimeSpan.FromMinutes 30.) 
+        if result.ExitCode > Some 0 && not buildingOnTeamCity then raise (Exception <| (sprintf "test finished with exitCode %A" result.ExitCode))
 
     let RunReleaseUnitTests (ArtifactsVersion(version)) =
         //xUnit always does its own build, this env var is picked up by Tests.csproj
@@ -69,10 +66,9 @@ module Tests =
         //<RestoreSources></RestoreSources>
         //This will download all packages but its the only way to make sure we reference the built
         //package and not one from cache...y
-        setProcessEnvironVar "TestPackageVersion" (version.Full.ToString())
-        let dotnet = Tooling.BuildTooling("dotnet")
-        dotnet.ExecIn "src/Tests/Tests" ["clean";] |> ignore
-        dotnet.ExecIn "src/Tests/Tests" ["restore";] |> ignore
+        Environment.setEnvironVar "TestPackageVersion" (version.Full.ToString())
+        Tooling.DotNet.ExecIn "src/Tests/Tests" ["clean";] |> ignore
+        Tooling.DotNet.ExecIn "src/Tests/Tests" ["restore";] |> ignore
         dotnetTest Commandline.MultiTarget.One 
 
     let RunUnitTests args = dotnetTest args.MultiTarget 
@@ -83,5 +79,5 @@ module Tests =
         | None -> failwith "No versions specified to run integration tests against"
         | Some esVersions ->
             for esVersion in esVersions do
-                setProcessEnvironVar "NEST_INTEGRATION_VERSION" esVersion
+                Environment.setEnvironVar "NEST_INTEGRATION_VERSION" esVersion
                 dotnetTest args.MultiTarget |> ignore

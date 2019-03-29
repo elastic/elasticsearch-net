@@ -1,6 +1,5 @@
 ﻿namespace Scripts
 
-open Fake
 open System.IO
 open Commandline
 
@@ -22,5 +21,5 @@ module Benchmarker =
             | (false, Some url, _) -> sprintf "%s -- --all \"%s\"" runCommandPrefix url
             | (false, _, _) -> sprintf "%s -- --all" runCommandPrefix 
             | (true, _, _) -> runCommandPrefix
-        
-        DotNetCli.RunCommand(fun p -> { p with WorkingDir = testsProjectDirectory }) runCommand
+            
+        Tooling.DotNet.ExecIn testsProjectDirectory [runCommand] |> ignore
