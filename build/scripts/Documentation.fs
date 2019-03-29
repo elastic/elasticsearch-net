@@ -9,10 +9,10 @@ open Commandline
 
 module Documentation = 
 
-    let Generate() = 
+    let Generate args = 
         let docGenerator = PrivateProject(DocGenerator)
         let path = Paths.ProjectOutputFolder docGenerator DotNetFramework.NetCoreApp2_1
-        let generator = sprintf "%s.dll %s" docGenerator.Name Commandline.docsBranch
+        let generator = sprintf "%s.dll %s" docGenerator.Name args.DocsBranch
         
         DotNetCli.RunCommand(fun p ->
             { p with

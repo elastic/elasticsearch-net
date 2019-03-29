@@ -48,80 +48,6 @@ Execution hints can be provided anywhere on the command line
   K can be: sourceserializer, typedkeys or oldconnection (only valid on windows)
 """
 
-    type MultiTarget = All | One
-
-    let private args = getBuildParamOrDefault "cmdline" "build" |> split ' '
-    
-    let nonInteractive = args |> List.exists (fun x -> x = "non-interactive")
-    let skipTests = args |> List.exists (fun x -> x = "skiptests")
-    let skipDocs = args |> List.exists (fun x -> x = "skipdocs") || isMono
-    let seed = 
-        match args |> List.tryFind (fun x -> x.StartsWith("seed:")) with
-        | Some t -> t.Replace("seed:", "")
-        | _ -> ""
-        
-    let randomArgs = 
-        args 
-        |> List.filter (fun x -> (x.StartsWith("random:")))
-        |> List.map (fun x -> (x.Replace("random:", "")))
-        
-    let docsBranch = 
-        match args |> List.tryFind (fun x -> x.StartsWith("docs:")) with
-        | Some t -> t.Replace("docs:", "")
-        | _ -> ""
-             
-    let private filteredArgs = 
-        args 
-        |> List.filter (
-            fun x -> 
-                x <> "skiptests" && 
-                x <> "skipdocs" && 
-                x <> "non-interactive" && 
-                not (x.StartsWith("seed:")) && 
-                not (x.StartsWith("random:")) && 
-                not (x.StartsWith("docs:"))
-        )
-
-    let multiTarget =
-        match (filteredArgs |> List.tryHead) with
-        | Some t when t.EndsWith("-one") -> MultiTarget.One
-        | _ -> MultiTarget.All
-
-    let target =
-        match (filteredArgs |> List.tryHead) with
-        | Some t -> t.Replace("-one", "")
-        | _ -> "build"
-
-    let validMonoTarget =
-        match target with
-        | "release"
-        | "canary" -> false
-        | _ -> true
-        
-    let needsFullBuild =
-        match (target, skipTests) with
-        | (_, true) -> true
-        //dotnet-xunit needs to a build of its own anyways
-        | ("test", _)
-        | ("cluster", _)
-        | ("integrate", _) -> false
-        | _ -> true
-        
-    let needsClean =
-        match (target, skipTests) with
-        | ("release", _) -> true
-        //dotnet-xunit needs to a build of its own anyways
-        | ("test", _)
-        | ("cluster", _)
-        | ("integrate", _) 
-        | ("build", _) -> false
-        | _ -> true
-
-    let arguments =
-        match filteredArgs with
-        | _ :: tail -> target :: tail
-        | [] -> [target]
-    
     let private (|IsUrl|_|) (candidate:string) =
         match Uri.TryCreate(candidate, UriKind.RelativeOrAbsolute) with
         | true, _ -> Some candidate
@@ -145,63 +71,173 @@ Execution hints can be provided anywhere on the command line
         | "xml" | "markdown" | "asciidoc" -> Some c
         | _ -> None 
 
-    let parse () =
-        setEnvironVar "FAKEBUILD" "1"
-        printfn "%A" arguments
-        match arguments with
-        | [] | ["build"] | ["test"] | ["clean"] | ["benchmark"] | ["profile"] -> ignore()
-        | ["release"; version] -> setBuildParam "version" version
+    type MultiTarget = All | One
 
-        | ["test"; testFilter] -> setBuildParam "testfilter" testFilter
+    type VersionArguments = { Version: string; }
+    type TestArguments = { TestFilter: string option; }
+    type IntegrationArguments = { TestFilter: string option; ClusterFilter: string option; ElasticsearchVersions: string list; }
+
+    type BenchmarkArguments = { Endpoint: string; Username: string option; Password: string option; }
+    type ClusterArguments = { Name: string; Version: string option; }
+    type CommandArguments =
+        | Unknown
+        | SetVersion of VersionArguments
+        | Test of TestArguments
+        | Integration of IntegrationArguments
+        | Benchmark of BenchmarkArguments
+        | Cluster of ClusterArguments
+
+    type PassedArguments = {
+        NonInteractive: bool;
+        SkipTests: bool;
+        SkipDocs: bool;
+        Seed: string;
+        RandomArguments: string list;
+        DocsBranch: string;
+        RemainingArguments: string list;
+        MultiTarget: MultiTarget;
+        Target: string;
+        ValidMonoTarget: bool;
+        NeedsFullBuild: bool;
+        NeedsClean: bool;
+
+        CommandArguments: CommandArguments;
+    }
+
+    
+    let parse (args: string list) =
+        
+        let filteredArgs = 
+            args
+            |> List.filter(fun x -> 
+               x <> "skiptests" && 
+               x <> "skipdocs" && 
+               x <> "non-interactive" && 
+               not (x.StartsWith("seed:")) && 
+               not (x.StartsWith("random:")) && 
+               not (x.StartsWith("docs:")))
+        let target = 
+            match (filteredArgs |> List.tryHead) with
+            | Some t -> t.Replace("-one", "")
+            | _ -> "build"
+        let skipTests = args |> List.exists (fun x -> x = "skiptests")
+
+        let parsed = {
+            NonInteractive = args |> List.exists (fun x -> x = "non-interactive")
+            SkipTests = skipTests
+            SkipDocs = args |> List.exists (fun x -> x = "skipdocs") || isMono
+            Seed = 
+                match args |> List.tryFind (fun x -> x.StartsWith("seed:")) with
+                | Some t -> t.Replace("seed:", "")
+                | _ -> ""
+            RandomArguments = 
+                args 
+                |> List.filter (fun x -> (x.StartsWith("random:")))
+                |> List.map (fun x -> (x.Replace("random:", "")))
+            DocsBranch = 
+                match args |> List.tryFind (fun x -> x.StartsWith("docs:")) with
+                | Some t -> t.Replace("docs:", "")
+                | _ -> ""
+            RemainingArguments = filteredArgs
+            MultiTarget = 
+                match (filteredArgs |> List.tryHead) with
+                | Some t when t.EndsWith("-one") -> MultiTarget.One
+                | _ -> MultiTarget.All
+            Target = 
+                match (filteredArgs |> List.tryHead) with
+                | Some t -> t.Replace("-one", "")
+                | _ -> "build"
+            ValidMonoTarget = 
+                match target with
+                | "release"
+                | "canary" -> false
+                | _ -> true
+            NeedsFullBuild = 
+                match (target, skipTests) with
+                | (_, true) -> true
+                //dotnet-xunit needs to a build of its own anyways
+                | ("test", _)
+                | ("cluster", _)
+                | ("integrate", _) -> false
+                | _ -> true;
+            NeedsClean = 
+                match (target, skipTests) with
+                | ("release", _) -> true
+                //dotnet-xunit needs to a build of its own anyways
+                | ("test", _)
+                | ("cluster", _)
+                | ("integrate", _) 
+                | ("build", _) -> false
+                | _ -> true;
+            CommandArguments = Unknown
+        }
+            
+        let arguments =
+            match filteredArgs with
+            | _ :: tail -> target :: tail
+            | [] -> [target]
+        
+        let split (s:string) = s.Split ',' |> Array.toList 
+
+        match arguments with
+        | [] | ["build"] | ["test"] | ["clean"] | ["benchmark"] | ["profile"] -> parsed
+        | ["touch"; ] -> parsed
+        | ["temp"; ] -> parsed
+        | "diff" :: tail -> parsed
+        | ["canary"; ] -> parsed
+        
+        | ["release"; version] -> { parsed with CommandArguments = SetVersion { Version = version }  }
+
+        | ["test"; testFilter] -> { parsed with CommandArguments = Test { TestFilter = Some testFilter }  }
 
         | ["benchmark"; IsUrl elasticsearch; username; password] ->
-            setBuildParam "elasticsearch" elasticsearch
-            setBuildParam "username" username
-            setBuildParam "password" password
+            {
+                parsed with CommandArguments = Benchmark {
+                        Endpoint = elasticsearch;
+                        Username = Some username;
+                        Password = Some password;
+                }
+            }
         | ["benchmark"; IsUrl elasticsearch] ->
-            setBuildParam "elasticsearch" elasticsearch
-            
-        | ["profile"; IsUrl elasticsearch] ->
-            setBuildParam "elasticsearch" elasticsearch
-
-        | ["profile"; esVersions] -> 
-            setBuildParam "esversions" esVersions
-
-        | ["profile"; esVersions; testFilter] ->
-            setBuildParam "esversions" esVersions
-            setBuildParam "testfilter" testFilter        
+            {
+                parsed with CommandArguments = Benchmark {
+                        Endpoint = elasticsearch;
+                        Username = None
+                        Password = None
+                }
+            }
           
-        | ["integrate"; esVersions] -> setBuildParam "esversions" esVersions
+        | ["integrate"; esVersions] -> 
+            {
+                parsed with CommandArguments = Integration {
+                        ElasticsearchVersions = split esVersions; ClusterFilter = None; TestFilter = None
+                }
+            }
         | ["integrate"; esVersions; clusterFilter] ->
-            setBuildParam "esversions" esVersions
-            setBuildParam "clusterfilter" clusterFilter
+            {
+                parsed with CommandArguments = Integration {
+                        ElasticsearchVersions = split esVersions;
+                        ClusterFilter = Some clusterFilter;
+                        TestFilter = None
+                }
+            }
         | ["integrate"; esVersions; clusterFilter; testFilter] ->
-            setBuildParam "esversions" esVersions
-            setBuildParam "clusterfilter" clusterFilter
-            setBuildParam "testfilter" testFilter
-
-        | ["connectionreuse"; esVersions] ->
-            setBuildParam "esversions" esVersions
-            setBuildParam "clusterfilter" "ConnectionReuse"
-        | ["connectionreuse"; esVersions; numberOfConnections] ->
-            setBuildParam "esversions" esVersions
-            setBuildParam "clusterfilter" "ConnectionReuse"
-            setBuildParam "numberOfConnections" numberOfConnections
- 
+            {
+                parsed with CommandArguments = Integration {
+                        ElasticsearchVersions = split esVersions;
+                        ClusterFilter = Some clusterFilter
+                        TestFilter = Some testFilter
+                }
+            }
+            
         | ["cluster"; clusterName] ->
-            setBuildParam "clusterName" clusterName
-            setBuildParam "clusterVersion" ""
+            {
+                parsed with CommandArguments = Cluster { Name = clusterName; Version = None }
+            }
         | ["cluster"; clusterName; clusterVersion] ->
-            setBuildParam "clusterName" clusterName
-            setBuildParam "clusterVersion" clusterVersion
-
-        | ["touch"; ] -> ignore()
-        | ["temp"; ] -> ignore()
-        | "diff" :: tail -> ignore()
-        | ["canary"; ] -> ignore()
+            {
+                parsed with CommandArguments = Cluster { Name = clusterName; Version = Some clusterVersion }
+            }
         | _ ->
             traceError usage
-            exit 2
-
-        setBuildParam "target" (if target = "connectionreuse" then "integrate" else target)
-        traceHeader target
+            failwith "Please consult printed help text on how to call our build"

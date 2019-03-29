@@ -10,6 +10,7 @@ open Test
 open Versioning
 open Documentation
 open Release
+open ReleaseNotes
 open Benchmarker
 open InheritDoc
 open Commandline
@@ -20,90 +21,40 @@ open Bullseye
 
 module Main =
 
-    let deps x = 
-        // Dependencies
-        "Start"
-          =?> ("Clean", Commandline.needsClean )
-          =?> ("Version", hasBuildParam "version")
-          ==> "Restore"
-          =?> ("FullBuild", Commandline.needsFullBuild)
-          =?> ("Test", (not Commandline.skipTests && Commandline.target <> "canary"))
-          =?> ("InternalizeDependencies", (not isMono))
-          ==> "InheritDoc"
-          =?> ("Documentation", (not Commandline.skipDocs))
-          ==> "Build"
-          |> ignore
-
-        "Start"
-          =?> ("Clean", Commandline.needsClean )
-          =?> ("FullBuild", Commandline.needsFullBuild)
-          ==> "Benchmark"
-          |> ignore
-
-        "Version"
-          ==> "Release"
-          =?> ("TestNugetPackage", (not isMono && not Commandline.skipTests))
-          ==> "Canary"
-          |> ignore
-
-        "Start"
-          =?> ("Clean", Commandline.needsClean )
-          ==> "Restore"
-          =?> ("FullBuild", Commandline.needsFullBuild)
-          ==> "Integrate"
-          |> ignore
-
-        "Build"
-          ==> "NugetPack"
-          =?> ("NugetPackVersioned", Commandline.target = "canary")
-          ==> "ValidateArtifacts"
-          =?> ("GenerateReleaseNotes", Commandline.target <> "canary")
-          ==> "Release"
-          |> ignore
-          
-        "Touch" |> ignore
-        "Start"
-          ==> "Clean"
-          ==> "Diff"
-          |> ignore
-          
-        "Start"
-          ==> "Restore"
-          ==> "FullBuild"
-          ==> "Cluster"
-          |> ignore
-
-        ignore()
-
     let private t name action = Targets.Target(name, new Action(action)) 
     let private skip name = printfn "SKIPPED target '%s' evaluated not to run" name |> ignore
     let private w optional name action = t name (if optional then action else (fun _ -> skip name)) 
-
     let private command name dependencies action = Targets.Target(name, dependencies, new Action(action))
           
     let [<EntryPoint>] main args = 
 
-        Commandline.parse()
+        let parsed = Commandline.parse (args |> Array.toList)
+        
+        let buildVersions = Versioning.BuildVersioning parsed
+        let artifactsVersion = Versioning.ArtifactsVersion buildVersions
+        Versioning.Validate parsed.Target buildVersions
+        
+        Tests.SetTestEnvironmentVariables parsed
+        
 
-        t "touch" <| fun _ -> printfn "Touching build"
+        t "touch" <| fun _ -> printfn "Touching build %O" artifactsVersion
 
         t "start" <| fun _ -> 
-            match (isMono, Commandline.validMonoTarget) with
-            | (true, false) -> failwithf "%s is not a valid target on mono because it can not call ILRepack" (Commandline.target)
+            match (isMono, parsed.ValidMonoTarget) with
+            | (true, false) -> failwithf "%s is not a valid target on mono because it can not call ILRepack" (parsed.Target)
             | _ -> traceHeader "STARTING BUILD"
 
-        w Commandline.needsClean "clean" Clean 
+        w parsed.NeedsClean "clean" Clean 
 
-        w Commandline.needsFullBuild "full-build" Compile 
+        w parsed.NeedsFullBuild "full-build" <| fun _ -> Compile artifactsVersion
 
-        w (hasBuildParam "version") "version" <| fun _ -> 
-            tracefn "Current Version: %s" (Versioning.CurrentVersion.ToString())
+        w (hasBuildParam "version") "version" <| fun _ -> tracefn "Artifacts Version: %O" artifactsVersion
 
-        w (not isMono) "internalize-dependencies" ShadowDependencies 
+        w (not isMono) "internalize-dependencies" <| fun _ -> ShadowDependencies.ShadowDependencies artifactsVersion 
 
-        w Commandline.skipDocs "documentation" <| Documentation.Generate
+        w parsed.SkipDocs "documentation" <| fun _ -> Documentation.Generate parsed
 
-        w (Commandline.skipTests && Commandline.target <> "canary") "test" Tests.RunUnitTests
+        w (parsed.SkipTests && parsed.Target <> "canary") "test" <| fun _ -> Tests.RunUnitTests parsed
 
         t "restore" Restore
 
@@ -112,19 +63,17 @@ module Main =
         t "test-nuget-package" <| fun _ -> 
             //RunReleaseUnitTests restores the canary nugetpackages in tests, since these end up being cached
             //its too evasive to run on development machines or TC, Run only on AppVeyor containers.
-            if buildServer <> AppVeyor then Tests.RunUnitTests()
-            else Tests.RunReleaseUnitTests()
+            if buildServer <> AppVeyor then Tests.RunUnitTests parsed
+            else Tests.RunReleaseUnitTests artifactsVersion
             
-        t "nuget-pack" <| Release.NugetPack
+        t "nuget-pack" <| fun _ -> Release.NugetPack artifactsVersion
 
-        w (Commandline.target = "canary") "nuget-pack-versioned" <| Release.NugetPackVersioned
+        w (parsed.Target = "canary") "nuget-pack-versioned" <| fun _ -> Release.NugetPackVersioned artifactsVersion
 
-        w (Commandline.target <> "canary") "generate-release-notes" <| Release.GenerateNotes
+        w (parsed.Target <> "canary") "generate-release-notes" <| fun _ -> ReleaseNotes.GenerateNotes buildVersions 
 
-        t "validate-artifacts" <| Versioning.ValidateArtifacts
+        t "validate-artifacts" <| fun _ -> Versioning.ValidateArtifacts artifactsVersion
         
-
-
         // the following are expected to be called as targets directly        
         let buildChain = [
             "clean"; "version"; "restore"; "full-build"; "test"; 
@@ -132,26 +81,27 @@ module Main =
         ]
         command "build" buildChain <| fun _ -> traceHeader "STARTING BUILD"
 
-        command "benchmark" [ "clean"; "full-build"; ] Benchmarker.Run
+        command "benchmark" [ "clean"; "full-build"; ] <| fun _ -> Benchmarker.Run parsed
 
-        command "canary" [ "version"; "release"; "test-nuget-package";] (fun _ -> tracefn "Finished Release Build %O" Versioning.CurrentVersion)
+        command "canary" [ "version"; "release"; "test-nuget-package";] <| fun _ -> tracefn "Finished Release Build %O" artifactsVersion
 
-        command "integrate" [ "clean"; "restore"; "full-build";] Tests.RunIntegrationTests
+        command "integrate" [ "clean"; "restore"; "full-build";] <| fun _ -> Tests.RunIntegrationTests parsed
 
         command "release" [ 
            "build"; "nuget-pack"; "nuget-pack-versioned"; "validate-artifacts"; "generate-release-notes"
-        ] (fun _ -> traceHeader (sprintf "Finished Release Build %O" Versioning.CurrentVersion))
+        ] (fun _ -> traceHeader (sprintf "Finished Release Build %O" artifactsVersion))
 
         command "diff" [ "clean"; ] <| fun _ ->
           let differ = Paths.PaketDotNetGlobalTool "assembly-differ" @"tools\netcoreapp2.1\any\assembly-differ.dll"
-          let args = Commandline.arguments |> List.skip 1 |> String.concat " "
+          let args = parsed.RemainingArguments |> String.concat " "
           let command = sprintf @"%s %s" differ args
           setProcessEnvironVar "NUGET" Tooling.nugetFile
           DotNetCli.RunCommand (fun p -> { p with TimeOut = TimeSpan.FromMinutes(3.) }) command 
 
         command "cluster" [ "restore"; "full-build" ] <| fun _ -> 
-            let clusterName = getBuildParam "clusterName"
-            let clusterVersion = getBuildParam "clusterVersion"
+            let clusterName = Option.defaultValue "" <| match parsed.CommandArguments with | Cluster c -> Some c.Name | _ -> None
+            let clusterVersion = Option.defaultValue "" <|match parsed.CommandArguments with | Cluster c -> c.Version | _ -> None
+            
             let testsProjectDirectory = Path.Combine(Path.GetFullPath(Paths.Output("Tests.ClusterLauncher")), "netcoreapp2.1")
             let tempDir = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
             
@@ -174,7 +124,7 @@ module Main =
             
             Shell.deleteDir tempDir
 
-        Targets.RunTargetsAndExit([Commandline.target])
+        Targets.RunTargetsAndExit([parsed.Target])
 
         0
 

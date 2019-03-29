@@ -1,7 +1,6 @@
 ﻿namespace Scripts
 
 open System
-open System.Collections.Generic
 open System.IO
 open System.Linq
 open System.Text
@@ -11,7 +10,6 @@ open System.Xml.XPath
 open Microsoft.FSharp.Quotations
 open Microsoft.FSharp.Quotations.Patterns
 open Fake
-open Octokit
 
 open Paths
 open Projects
@@ -19,6 +17,8 @@ open Tooling
 open Versioning
 
 module Release =
+    
+    let private year = sprintf "%i" DateTime.UtcNow.Year
     
     let private jsonNetVersionCurrent p = 
         let xName n = XName.op_Implicit n
@@ -49,31 +49,32 @@ module Release =
         if (isNotNullOrEmpty value) then builder.AppendFormat("{0}=\"{1}\";", key, value)
         else builder
 
-    let private currentVersion = sprintf "%O" <| Versioning.CurrentVersion
-    let private currentMajorVersion = sprintf "%i" <| Versioning.CurrentVersion.Major
-    let private nextMajorVersion = sprintf "%i" <| Versioning.CurrentVersion.Major + 1
-    let private year = sprintf "%i" DateTime.UtcNow.Year
+    let private currentMajorVersion version = sprintf "%i" <| version.Full.Major
+    let private nextMajorVersion version = sprintf "%i" <| version.Full.Major + 1
 
-    let private props() =
+    let private props version =
+        let currentMajorVersion = currentMajorVersion version
+        let nextMajorVersion = nextMajorVersion version
         new StringBuilder()
         |> addKeyValue <@currentMajorVersion@>
         |> addKeyValue <@nextMajorVersion@>
         |> addKeyValue <@year@>
 
-    let pack file n properties = 
+    let pack file n properties version  = 
         Tooling.Nuget.Exec [ "pack"; file; 
-             "-version"; currentVersion; 
+             "-version"; version.Full.ToString(); 
              "-outputdirectory"; Paths.BuildOutput; 
              "-properties"; properties; 
         ] |> ignore
         traceFAKE "%s" Paths.BuildOutput
-        let nugetOutFile = Paths.Output(sprintf "%s.%s.nupkg" n (Versioning.CurrentVersion.ToString()))
+        let nugetOutFile = Paths.Output(sprintf "%s.%O.nupkg" n version.Full)
         MoveFile Paths.NugetOutput nugetOutFile
 
-    let private nugetPackMain (p:DotNetProject) nugetId nuspec properties = 
-        pack nuspec nugetId properties
+    let private nugetPackMain (p:DotNetProject) nugetId nuspec properties version = 
+        pack nuspec nugetId properties version
         
-    let private nugetPackVersioned (p:DotNetProject) nugetId nuspec properties = 
+    let private nugetPackVersioned (p:DotNetProject) nugetId nuspec properties version =
+        let currentMajorVersion = currentMajorVersion version
         let newId = sprintf "%s.v%s" nugetId currentMajorVersion;
         let nuspecVersioned = sprintf @"build/%s.nuspec" newId
             
@@ -125,10 +126,10 @@ module Release =
         | _ -> traceError (sprintf "%s still needs special canary handling" p.Name)
         doc.Save(nuspecVersioned) 
 
-        pack nuspecVersioned newId properties
+        pack nuspecVersioned newId properties version 
         DeleteFile nuspecVersioned 
     
-    let private packProjects callback  =
+    let private packProjects version callback  =
         CreateDir Paths.NugetOutput
             
         DotNetProject.AllPublishable
@@ -138,77 +139,16 @@ module Release =
             let jsonDotNetNextVersion = jsonNetVersionNext p
 
             let properties =
-                props()
+                props version
                 |> addKeyValue <@jsonDotNetCurrentVersion@>
                 |> addKeyValue <@jsonDotNetNextVersion@>
                 |> toText
             let nugetId = p.NugetId 
             let nuspec = (sprintf @"build/%s.nuspec" nugetId)
 
-            callback p nugetId nuspec properties
+            callback p nugetId nuspec properties version
         )
             
-    let NugetPack()  = packProjects nugetPackMain 
+    let NugetPack (ArtifactsVersion(version))  = packProjects version nugetPackMain 
 
-    let NugetPackVersioned()  = packProjects nugetPackVersioned 
-                
-    let GenerateNotes() = 
-        let previousVersion = Versioning.GlobalJsonVersion.ToString()
-        let currentVersion = Versioning.CurrentVersion.ToString()
-        let label = sprintf "v%s" currentVersion
-        let releaseNotes = sprintf "ReleaseNotes-%s.md" currentVersion |> Paths.Output      
-        let client = new GitHubClient(new ProductHeaderValue("ReleaseNotesGenerator"))
-        client.Credentials <- Credentials.Anonymous
-              
-        let filter = new RepositoryIssueRequest()
-        filter.Labels.Add label
-        filter.State <- ItemStateFilter.Closed
-        
-        let labelHeaders =
-           [("Feature", "Features & Enhancements");
-            ("Bug", "Bug Fixes");
-            ("Deprecation", "Deprecations");
-            ("Uncategorized", "Uncategorized");]
-           |> Map.ofList
-           
-        let groupByLabel (issues:IReadOnlyList<Issue>) =
-            let dict = new Dictionary<string, Issue list>()     
-            for issue in issues do
-                let mutable categorized = false
-                for labelHeader in labelHeaders do
-                    if issue.Labels.Any(fun l -> l.Name = labelHeader.Key) then
-                        let exists,list = dict.TryGetValue(labelHeader.Key)
-                        match exists with 
-                        | true -> dict.[labelHeader.Key] <- issue :: list
-                        | false -> dict.Add(labelHeader.Key, [issue])
-                        categorized <- true
-                        
-                if (categorized = false) then
-                    let label = "Uncategorized"
-                    let exists,list = dict.TryGetValue(label)
-                    match exists with 
-                    | true ->                  
-                        match List.tryFind(fun (i:Issue)-> i.Number = issue.Number) list with 
-                        | Some _ -> ()
-                        | None -> dict.[label] <- issue :: list                         
-                    | false -> dict.Add(label, [issue])
-            dict
-        
-        let closedIssues = client.Issue.GetAllForRepository(Paths.OwnerName, Paths.RepositoryName, filter)
-                           |> Async.AwaitTask
-                           |> Async.RunSynchronously
-                           |> groupByLabel
-                              
-        use file = File.OpenWrite <| releaseNotes
-        use writer = new StreamWriter(file)                   
-        writer.WriteLine(sprintf "%s/compare/%s...%s" Paths.Repository previousVersion currentVersion)
-        writer.WriteLine()
-        for closedIssue in closedIssues do
-            labelHeaders.[closedIssue.Key] |> sprintf "## %s" |> writer.WriteLine    
-            writer.WriteLine()
-            for issue in closedIssue.Value do
-                sprintf "- #%i %s" issue.Number issue.Title |> writer.WriteLine
-            writer.WriteLine()
-              
-        sprintf "### [View the full list of issues and PRs](%s/issues?utf8=%%E2%%9C%%93&q=label%%3A%s)" Paths.Repository label
-        |> writer.WriteLine
+    let NugetPackVersioned (ArtifactsVersion(version))  = packProjects version nugetPackVersioned

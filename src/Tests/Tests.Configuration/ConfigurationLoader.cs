@@ -14,9 +14,9 @@ namespace Tests.Configuration
 
 		private static ITestConfiguration LoadConfiguration()
 		{
-			// The build script sets a FAKEBUILD env variable, so if it exists then
+			// The build script sets a NEST_COMMAND_LINE_BUILD env variable, so if it exists then
 			// we must be running tests from the build script
-			if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("FAKEBUILD")))
+			if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("NEST_COMMAND_LINE_BUILD")))
 			{
 				var yamlFile = Environment.GetEnvironmentVariable("NEST_YAML_FILE");
 				if (!string.IsNullOrWhiteSpace(yamlFile) && File.Exists(yamlFile))

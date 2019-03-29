@@ -2,25 +2,24 @@
 
 open Fake
 open System.IO
-open Paths
 open Commandline
 
 module Benchmarker =
 
     let private testsProjectDirectory = Path.GetFullPath(Paths.TestsSource("Tests.Benchmarking"))
 
-    let Run() =
-        let runInteractive = not Commandline.nonInteractive
-        let url = getBuildParam "elasticsearch"
-        let username = getBuildParam "username"
-        let password = getBuildParam "password"
-        let hasUrl = not <| isNullOrEmpty url
-        let hasCredentials = not <| (isNullOrEmpty username && isNullOrEmpty password)
+    let Run args =
+        
+        let url = match args.CommandArguments with | Benchmark b -> Some b.Endpoint | _ -> None
+        let username = match args.CommandArguments with | Benchmark b -> b.Username | _ -> None
+        let password = match args.CommandArguments with | Benchmark b -> b.Password | _ -> None
+        let runInteractive = not args.NonInteractive
+        let credentials  = (username, password)
         let runCommandPrefix = "run -f netcoreapp2.1 -c Release"
         let runCommand =
-            match (runInteractive, hasUrl, hasCredentials) with
-            | (false, true, true) -> sprintf "%s -- --all \"%s\" \"%s\" \"%s\"" runCommandPrefix url username password
-            | (false, true, false) -> sprintf "%s -- --all \"%s\"" runCommandPrefix url
+            match (runInteractive, url, credentials) with
+            | (false, Some url, (Some username, Some password)) -> sprintf "%s -- --all \"%s\" \"%s\" \"%s\"" runCommandPrefix url username password
+            | (false, Some url, _) -> sprintf "%s -- --all \"%s\"" runCommandPrefix url
             | (false, _, _) -> sprintf "%s -- --all" runCommandPrefix 
             | (true, _, _) -> runCommandPrefix
         

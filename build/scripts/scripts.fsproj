@@ -12,9 +12,11 @@
     <Compile Include="Tooling.fs" />
     <Compile Include="Versioning.fs" />
     <Compile Include="Releasing.fs" />
+    <Compile Include="ReleaseNotes.fs" />
     <Compile Include="Benchmarking.fs" />
     <Compile Include="XmlDocPatcher.fs" />
     <Compile Include="Building.fs" />
+    <Compile Include="ShadowDependencies.fs" />
     <Compile Include="Testing.fs" />
     <Compile Include="Documentation.fs" />
     <Compile Include="Targets.fs" />

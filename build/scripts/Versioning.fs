@@ -5,8 +5,16 @@ open System.Diagnostics
 open System.IO
 open FSharp.Data 
 
+open System.Diagnostics.Tracing
 open Fake 
 open Commandline
+open Fake.Core
+open Fake.Core
+open Fake.Core
+open Fake.Core
+open Fake.Core
+open Fake.SemVerHelper
+open Octokit
 open SemVerHelper
 open Paths
 
@@ -25,33 +33,58 @@ module Versioning =
         tracefn "Written (%s) to global.json as the current version will use this version from now on as current in the build" (version.ToString()) 
 
     let GlobalJsonVersion = parse(globalJson.Version)
-
-    let CurrentVersion =
-        Commandline.parse()
-        let currentVersion = GlobalJsonVersion
-        let bv = getBuildParam "version"
-        let buildVersion = if (isNullOrEmpty bv) then None else Some(parse(bv)) 
-        match (getBuildParam "target", buildVersion) with
-        | ("release", None) -> failwithf "cannot run release because no explicit version number was passed on the command line"
-        | ("release", Some v) -> 
-            // Warn if version is same as current version
-            if (currentVersion >= v) then traceImportant (sprintf "creating release %s when current version is already at %s" (v.ToString()) (currentVersion.ToString()))
-            writeVersionIntoGlobalJson v
-            v
-        | ("canary", Some v) -> failwithf "cannot run canary release, expected no version number to specified but received %s" (v.ToString())
-        | ("canary", None) -> 
-            let timestampedVersion = (sprintf "ci%s" (DateTime.UtcNow.ToString("yyyyMMddTHHmmss")))
-            tracefn "Canary suffix %s " timestampedVersion
-            let canaryVersion = parse ((sprintf "%d.%d.0-%s" currentVersion.Major (currentVersion.Minor + 1) timestampedVersion).Trim())
-            tracefn "Canary build increased currentVersion (%s) to (%s) " (currentVersion.ToString()) (canaryVersion.ToString())
-            canaryVersion
-        | _ -> 
-            tracefn "Not running 'release' or 'canary' target so using version in global.json (%s) as current" (currentVersion.ToString())
-            currentVersion
     
-    let CurrentAssemblyVersion = parse (sprintf "%s.0.0" (CurrentVersion.Major.ToString()))
-    let CurrentAssemblyFileVersion = parse (sprintf "%s.%s.%s.0" (CurrentVersion.Major.ToString()) (CurrentVersion.Minor.ToString()) (CurrentVersion.Patch.ToString()))
+    let private getVersion (args:Commandline.PassedArguments) =
+        match (args.Target, args.CommandArguments) with
+        | (_, SetVersion v) ->
+            match v.Version with
+            | v when String.isNullOrEmpty v -> None
+            | v -> Some <| parse v
+        | ("canary", _) ->
+            let v = GlobalJsonVersion
+            let timestampedVersion = (sprintf "ci%s" (DateTime.UtcNow.ToString("yyyyMMddTHHmmss")))
+            let canaryVersion = parse ((sprintf "%d.%d.0-%s" v.Major (v.Minor + 1) timestampedVersion).Trim())
+            Some canaryVersion
+        | _ -> None
+    
+    
+    type AnchoredVersion = { Full: SemVerInfo; Assembly:SemVerInfo; AssemblyFile:SemVerInfo }
+    type BuildVersions =
+        | Update of New: AnchoredVersion * Old: AnchoredVersion 
+        | NoChange of Current: AnchoredVersion
+        
+    type ArtifactsVersion = ArtifactsVersion of AnchoredVersion
 
+    let AnchoredVersion version = 
+        let av v = parse (sprintf "%s.0.0" (v.Major.ToString()))
+        let fv v = parse (sprintf "%s.%s.%s.0" (v.Major.ToString()) (v.Minor.ToString()) (v.Patch.ToString()))
+        { Full = version; Assembly = av version; AssemblyFile = fv version }
+    
+    let BuildVersioning args =
+        let currentVersion = GlobalJsonVersion
+        let buildVersion = getVersion args
+        match buildVersion with
+        | None -> NoChange(Current = AnchoredVersion currentVersion)
+        | Some v -> Update(New = AnchoredVersion v, Old = AnchoredVersion currentVersion)
+        
+    let Validate target version = 
+        match (target, version) with
+        | ("release", version) ->
+            match version with
+            | NoChange _ -> failwithf "cannot run release because no explicit version number was passed on the command line"
+            | Update (newVersion, currentVersion) -> 
+                // fail if current is greater or equal to the new version
+                if (currentVersion >= newVersion) then
+                    failwithf "Can not release %O its lower then current %O" newVersion.Full currentVersion.Full
+                writeVersionIntoGlobalJson newVersion
+        | _ -> 
+            tracefn "Build version information: %O" version
+    
+    let ArtifactsVersion buildVersions =
+        match buildVersions with
+        | NoChange n -> ArtifactsVersion n
+        | Update (newVersion, _) -> ArtifactsVersion newVersion
+    
     let private sn = if isMono then "sn" else Paths.CheckedInTool("sn/sn.exe")
     let private oficialToken = "96c599bbe3e70f5d"
 
@@ -85,9 +118,8 @@ module Versioning =
         | true -> validate dll name 
         | _ -> failwithf "Attemped to verify signature of %s but it was not found!" dll
 
-    let ValidateArtifacts() =
-        let fileVersion = CurrentVersion
-        let assemblyVersion = parse (sprintf "%i.0.0" fileVersion.Major)
+    let ValidateArtifacts (ArtifactsVersion(version)) =
+        let fileVersion = version.AssemblyFile
         let tmp = "build/output/_packages/tmp"
         !! "build/output/_packages/*.nupkg"
         |> Seq.iter(fun f -> 
@@ -98,7 +130,8 @@ module Versioning =
                 let a = GetAssemblyVersion f
                 traceFAKE "Assembly: %A File: %s Product: %s => %s" a fv.FileVersion fv.ProductVersion f
                 if (a.Minor > 0 || a.Revision > 0 || a.Build > 0) then failwith (sprintf "%s assembly version is not sticky to its major component" f)
-                if (parse (fv.ProductVersion) <> fileVersion) then failwith (sprintf "Expected product info %s to match new version %s " fv.ProductVersion (fileVersion.ToString()))
+                if (parse (fv.ProductVersion) <> version.AssemblyFile) then
+                    failwith (sprintf "Expected product info %s to match new version %O " fv.ProductVersion fileVersion)
 
                 validateDllStrongName f f
            )
