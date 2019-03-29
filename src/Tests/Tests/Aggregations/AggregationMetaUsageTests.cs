@@ -22,7 +22,7 @@ namespace Tests.Aggregations
 			{
 				min = new
 				{
-					field = "astActivity"
+					field = "lastActivity"
 				},
 				meta = new
 				{

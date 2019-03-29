@@ -22,8 +22,7 @@ module ShadowDependencies =
             |> Seq.map (fun p -> sprintf @"-i ""%s"" -o ""%s"" "  (dllFullPath p.Name) (fullOutput p))
             |> Seq.fold (+) " "
             
-        let mergeCommand = sprintf @"%s %s" assemblyRewriter dlls
-        Tooling.DotNet.Exec ["run"; "--"; mergeCommand] |> ignore
+        Tooling.DotNet.Exec [assemblyRewriter; dlls] |> ignore
         
         let mergedOutFile = fullOutput project
         let ilMergeArgs = [
