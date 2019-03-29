@@ -103,14 +103,14 @@ var indexResponse = client.Index(person, p => p.Index("people").Pipeline("person
 
 <6> use a painless script to populate the new field
 
-<7> use `ingest-geoip` plugin to enrich the GeoIp object from the supplied IP Address
+<7> use ingest-geoip plugin to enrich the GeoIp object from the supplied IP Address
 
 <8> index the document using the created pipeline
 
 ==== Increasing timeouts
 
 When a pipeline is specified, there will be the added overhead of document enrichment when indexing, the example given above, the execution
-of the uppercasing and the painless script.
+of the uppercasing and the Painless script.
 
 For large bulk requests, it could be prudent to increase the default indexing timeout to avoid exceptions.
 
@@ -128,7 +128,7 @@ client.Bulk(b => b
     )
 );
 ----
-<1> increases the server-side bulk timeout to 5 minutes
+<1> increases the server-side bulk timeout
 
-<2> increases the HTTP request timeout to 5 minutes
+<2> increases the HTTP request timeout
 

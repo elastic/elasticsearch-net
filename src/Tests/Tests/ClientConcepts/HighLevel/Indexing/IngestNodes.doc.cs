@@ -24,8 +24,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		* information. However, if you're doing heavy ingestion and have dedicated ingest nodes, it makes sense to send index requests to
 		* these nodes directly, to avoid any extra hops in the cluster.
 		*
-		* The simplest way to achieve this with any Elasticsearch client is to create a dedicated "indexing" client
-		* instance, and use it for indexing requests:
+		* The simplest way to achieve this is to create a dedicated "indexing" client instance, and use it for indexing requests.
 		*/
 		public async Task CustomClient()
 		{

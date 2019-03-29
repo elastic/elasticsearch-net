@@ -39,13 +39,13 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				LastName = "Laarman"
 			};
 
-			var indexResponse = client.IndexDocument(person); //<1> synchronous method that returns an `IIndexResponse`
+			var indexResponse = client.IndexDocument(person); //<1> synchronous method that returns an IIndexResponse
 			if (!indexResponse.IsValid)
 			{
 				// If the request isn't valid, we can take action here
 			}
 
-			var indexResponseAsync = await client.IndexDocumentAsync(person); //<2> asynchronous method that returns a `Task<IIndexResponse>` that can be awaited
+			var indexResponseAsync = await client.IndexDocumentAsync(person); //<2> asynchronous method that returns a Task<IIndexResponse> that can be awaited
 		}
 
 		/**
@@ -98,7 +98,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				}
 			};
 
-			var indexManyResponse = client.IndexMany(people); //<1> synchronous method that returns an `IBulkResponse`
+			var indexManyResponse = client.IndexMany(people); //<1> synchronous method that returns an IBulkResponse
 
 			if (indexManyResponse.Errors) //<2> the response can be inspected to see if any of the bulk operations resulted in an error
 			{
@@ -109,7 +109,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 			}
 
 			// Alternatively, documents can be indexed asynchronously
-			var indexManyAsyncResponse = await client.IndexManyAsync(people); //<4> asynchronous method that returns a `Task<IBulkResponse>` that can be awaited
+			var indexManyAsyncResponse = await client.IndexManyAsync(people); //<4> asynchronous method that returns a Task<IBulkResponse> that can be awaited
 		}
 
 		/**
@@ -120,7 +120,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		*
 		* As with the `IndexMany` methods above, documents are sent to the `_bulk` endpoint in a single HTTP request.
 		* This does mean that consideration will need to be given to the overall size of the HTTP request. For indexing large numbers
-		* of documents it may be sensible to perform multiple seperate `Bulk` calls.
+		* of documents it may be sensible to perform multiple separate `Bulk` calls.
 		*/
 		public async Task BulkIndexDocuments()
 		{
@@ -129,27 +129,27 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 
 			var bulkIndexResponse = client.Bulk(b => b
 				.Index("people")
-				.IndexMany(people)); //<1> synchronous method that returns an `IBulkResponse`, the same as `IndexMany` and can be inspected in the same way for errors
+				.IndexMany(people)); //<1> synchronous method that returns an IBulkResponse, the same as IndexMany and can be inspected in the same way for errors
 
-			// Alternatively, documents can be indexed asynchronously similar to `IndexManyAsync`
+			// Alternatively, documents can be indexed asynchronously similar to IndexManyAsync
 			var asyncBulkIndexResponse = await client.BulkAsync(b => b
 				.Index("people")
-				.IndexMany(people)); //<2> asynchronous method that returns a `Task<IBulkResponse>` that can be awaited
+				.IndexMany(people)); //<2> asynchronous method that returns a Task<IBulkResponse> that can be awaited
 		}
 
 		/**
 		* ==== Multiple documents with `BulkAllObservable` helper
 		*
-		* Multiple documents can be indexed using the `BulkAllObservable` helper and `Wait()` extension method.
+		* Using the `BulkAllObservable` helper allows you to focus on the overall objective of indexing, without having to
+		* concern yourself with retry, backoff or chunking mechanics.
+		* Multiple documents can be indexed using the `BulkAll` method and `Wait()` extension method.
 		*
 		* This helper exposes functionality to automatically retry / backoff in the event of an indexing failure,
 	    * and to control the number of documents indexed in a single HTTP request. In the example below each request will contain 1000 documents,
 		* chunked from the original input. In the event of a large number of documents this could result in many HTTP requests, each containing
 		* 1000 documents (the last request may contain less, depending on the total number).
 		*
-		* The helper will also lazily enumerate an `IEnumerable<T>` collection of documents, allowing to index a large number of documents easily.
-		*
-	    * This allows you to focus on the overall objective of indexing, without having to concern yourself with retry, backoff or chunking mechanics.
+		* The helper will also lazily enumerate an `IEnumerable<T>` collection, allowing you to index a large number of documents easily.
 		*/
 		public async Task BulkDocumentsWithObservableHelper()
 		{
@@ -173,27 +173,27 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 					FirstName = "Russell",
 					LastName = "Cam"
 				}
-				// Snip
+				// snip
 			};
 
 			var bulkAllObservable = client.BulkAll(people, b => b
 				.Index("people")
 				.BackOffTime("30s") //<1> how long to wait between retries
-				.BackOffRetries(2) //<2> how many retries are attempted
+				.BackOffRetries(2) //<2> how many retries are attempted if a failure occurs
 				.RefreshOnCompleted()
 				.MaxDegreeOfParallelism(Environment.ProcessorCount)
 				.Size(1000) // <3> items per bulk request
 			)
-			.Wait(TimeSpan.FromMinutes(15), next => //<4> Perform the indexing and wait up to 15 minutes, whilst the BulkAll calls are asynchronous this is a blocking operation
+			.Wait(TimeSpan.FromMinutes(15), next => //<4> perform the indexing and wait up to 15 minutes, whilst the BulkAll calls are asynchronous this is a blocking operation
 			{
-				// Do something e.g. write number of pages to console
+				// do something e.g. write number of pages to console
 			});
 		}
 
 		/**
 		* ==== Advanced bulk indexing
 		*
-		* The BulkAllObservable helper has a number of advanced features.
+		* The BulkAllObservable helper exposes a number of advanced features.
 		*
 		* 1. `BufferToBulk` allows for the customisation of individual operations within the bulk request before it is dispatched to the server.
 		* 2. `RetryDocumentPredicate` enables fine control on deciding if a document that failed to be indexed should be retried.
@@ -204,14 +204,13 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 			//hide
 			var people = new[] { new Person() };
 
-			// `BufferToBulk` example
 			client.BulkAll(people, b => b
 				  .BufferToBulk((descriptor, list) => //<1> customise the individual operations in the bulk request before it is dispatched
 				  {
 					  foreach (var item in list)
 					  {
 						  descriptor.Index<Person>(bi => bi
-							  .Index(item.Id % 2 == 0 ? "even-index" : "odd-index") //<2> Index each document into either `even-index` or `odd-index`
+							  .Index(item.Id % 2 == 0 ? "even-index" : "odd-index") //<2> Index each document into either even-index or odd-index
 							  .Document(item)
 						  );
 					  }

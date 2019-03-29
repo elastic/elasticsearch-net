@@ -70,7 +70,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 						.Lang("painless") //<6> use a painless script to populate the new field
 						.Source("ctx.initials = ctx.firstName.substring(0,1) + ctx.lastName.substring(0,1)")
 					)
-					.GeoIp<Person>(s => s //<7> use `ingest-geoip` plugin to enrich the GeoIp object from the supplied IP Address
+					.GeoIp<Person>(s => s //<7> use ingest-geoip plugin to enrich the GeoIp object from the supplied IP Address
 						.Field(i => i.IpAddress)
 						.TargetField(i => i.GeoIp)
 					)
@@ -91,7 +91,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		/**
 		* ==== Increasing timeouts
 		* When a pipeline is specified, there will be the added overhead of document enrichment when indexing, the example given above, the execution
-		* of the uppercasing and the painless script.
+		* of the uppercasing and the Painless script.
 		*
 		* For large bulk requests, it could be prudent to increase the default indexing timeout to avoid exceptions.
 		*/
@@ -100,12 +100,12 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 			client.Bulk(b => b
 				.Index("people")
 				.Pipeline("person-pipeline")
-				.Timeout("5m") //<1> increases the server-side bulk timeout to 5 minutes
+				.Timeout("5m") //<1> increases the server-side bulk timeout
 				.Index<Person>(/*snip*/)
 				.Index<Person>(/*snip*/)
 				.Index<Person>(/*snip*/)
 				.RequestConfiguration(rc => rc
-				    .RequestTimeout(TimeSpan.FromMinutes(5)) //<2> increases the HTTP request timeout to 5 minutes
+				    .RequestTimeout(TimeSpan.FromMinutes(5)) //<2> increases the HTTP request timeout
 				)
 			);
 		}

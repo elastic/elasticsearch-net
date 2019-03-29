@@ -39,9 +39,9 @@ if (!indexResponse.IsValid)
 
 var indexResponseAsync = await client.IndexDocumentAsync(person); <2>
 ----
-<1> synchronous method that returns an `IIndexResponse`
+<1> synchronous method that returns an IIndexResponse
 
-<2> asynchronous method that returns a `Task<IIndexResponse>` that can be awaited
+<2> asynchronous method that returns a Task<IIndexResponse> that can be awaited
 
 ==== Single documents with parameters
 
@@ -108,13 +108,13 @@ if (indexManyResponse.Errors) <2>
 // Alternatively, documents can be indexed asynchronously
 var indexManyAsyncResponse = await client.IndexManyAsync(people); <4>
 ----
-<1> synchronous method that returns an `IBulkResponse`
+<1> synchronous method that returns an IBulkResponse
 
 <2> the response can be inspected to see if any of the bulk operations resulted in an error
 
 <3> If there are errors, they can be enumerated and inspected
 
-<4> asynchronous method that returns a `Task<IBulkResponse>` that can be awaited
+<4> asynchronous method that returns a Task<IBulkResponse> that can be awaited
 
 ==== Multiple documents with bulk
 
@@ -123,7 +123,7 @@ customise the bulk calls.
 
 As with the `IndexMany` methods above, documents are sent to the `_bulk` endpoint in a single HTTP request.
 This does mean that consideration will need to be given to the overall size of the HTTP request. For indexing large numbers
-of documents it may be sensible to perform multiple seperate `Bulk` calls.
+of documents it may be sensible to perform multiple separate `Bulk` calls.
 
 [source,csharp]
 ----
@@ -131,27 +131,27 @@ var bulkIndexResponse = client.Bulk(b => b
     .Index("people")
     .IndexMany(people)); <1>
 
-// Alternatively, documents can be indexed asynchronously similar to `IndexManyAsync`
+// Alternatively, documents can be indexed asynchronously similar to IndexManyAsync
 var asyncBulkIndexResponse = await client.BulkAsync(b => b
     .Index("people")
     .IndexMany(people)); <2>
 ----
-<1> synchronous method that returns an `IBulkResponse`, the same as `IndexMany` and can be inspected in the same way for errors
+<1> synchronous method that returns an IBulkResponse, the same as IndexMany and can be inspected in the same way for errors
 
-<2> asynchronous method that returns a `Task<IBulkResponse>` that can be awaited
+<2> asynchronous method that returns a Task<IBulkResponse> that can be awaited
 
 ==== Multiple documents with `BulkAllObservable` helper
 
-Multiple documents can be indexed using the `BulkAllObservable` helper and `Wait()` extension method.
+Using the `BulkAllObservable` helper allows you to focus on the overall objective of indexing, without having to
+concern yourself with retry, backoff or chunking mechanics.
+Multiple documents can be indexed using the `BulkAll` method and `Wait()` extension method.
 
 This helper exposes functionality to automatically retry / backoff in the event of an indexing failure,
 and to control the number of documents indexed in a single HTTP request. In the example below each request will contain 1000 documents,
 chunked from the original input. In the event of a large number of documents this could result in many HTTP requests, each containing
 1000 documents (the last request may contain less, depending on the total number).
 
-The helper will also lazily enumerate an `IEnumerable<T>` collection of documents, allowing to index a large number of documents easily.
-
-This allows you to focus on the overall objective of indexing, without having to concern yourself with retry, backoff or chunking mechanics.
+The helper will also lazily enumerate an `IEnumerable<T>` collection, allowing you to index a large number of documents easily.
 
 [source,csharp]
 ----
@@ -175,7 +175,7 @@ var people = new []
         FirstName = "Russell",
         LastName = "Cam"
     }
-    // Snip
+    // snip
 };
 
 var bulkAllObservable = client.BulkAll(people, b => b
@@ -188,20 +188,20 @@ var bulkAllObservable = client.BulkAll(people, b => b
 )
 .Wait(TimeSpan.FromMinutes(15), next => <4>
 {
-    // Do something e.g. write number of pages to console
+    // do something e.g. write number of pages to console
 });
 ----
 <1> how long to wait between retries
 
-<2> how many retries are attempted
+<2> how many retries are attempted if a failure occurs
 
 <3> items per bulk request
 
-<4> Perform the indexing and wait up to 15 minutes, whilst the BulkAll calls are asynchronous this is a blocking operation
+<4> perform the indexing and wait up to 15 minutes, whilst the BulkAll calls are asynchronous this is a blocking operation
 
 ==== Advanced bulk indexing
 
-The BulkAllObservable helper has a number of advanced features.
+The BulkAllObservable helper exposes a number of advanced features.
 
 1. `BufferToBulk` allows for the customisation of individual operations within the bulk request before it is dispatched to the server.
 
@@ -238,7 +238,7 @@ client.BulkAll(people, b => b
 ----
 <1> customise the individual operations in the bulk request before it is dispatched
 
-<2> Index each document into either `even-index` or `odd-index`
+<2> Index each document into either even-index or odd-index
 
 <3> decide if a document should be retried in the event of a failure
 
