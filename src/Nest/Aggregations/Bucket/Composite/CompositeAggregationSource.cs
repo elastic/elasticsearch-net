@@ -95,19 +95,19 @@ namespace Nest
 		public CompositeAggregationSourcesDescriptor<T> Terms(string name,
 			Func<TermsCompositeAggregationSourceDescriptor<T>, ITermsCompositeAggregationSource> selector
 		) =>
-			Assign(a => a.Add(selector?.Invoke(new TermsCompositeAggregationSourceDescriptor<T>(name))));
+			Assign(selector?.Invoke(new TermsCompositeAggregationSourceDescriptor<T>(name)), (a, v) => a.Add(v));
 
 		/// <inheritdoc cref="IHistogramCompositeAggregationSource" />
 		public CompositeAggregationSourcesDescriptor<T> Histogram(string name,
 			Func<HistogramCompositeAggregationSourceDescriptor<T>, IHistogramCompositeAggregationSource> selector
 		) =>
-			Assign(a => a.Add(selector?.Invoke(new HistogramCompositeAggregationSourceDescriptor<T>(name))));
+			Assign(selector?.Invoke(new HistogramCompositeAggregationSourceDescriptor<T>(name)), (a, v) => a.Add(v));
 
 		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource" />
 		public CompositeAggregationSourcesDescriptor<T> DateHistogram(string name,
 			Func<DateHistogramCompositeAggregationSourceDescriptor<T>, IDateHistogramCompositeAggregationSource> selector
 		) =>
-			Assign(a => a.Add(selector?.Invoke(new DateHistogramCompositeAggregationSourceDescriptor<T>(name))));
+			Assign(selector?.Invoke(new DateHistogramCompositeAggregationSourceDescriptor<T>(name)), (a, v) => a.Add(v));
 	}
 
 	/// <inheritdoc cref="ICompositeAggregationSource" />

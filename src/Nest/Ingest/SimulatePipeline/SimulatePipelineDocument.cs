@@ -72,6 +72,6 @@ namespace Nest
 		public SimulatePipelineDocumentsDescriptor() : base(new List<ISimulatePipelineDocument>()) { }
 
 		public SimulatePipelineDocumentsDescriptor Document(Func<SimulatePipelineDocumentDescriptor, ISimulatePipelineDocument> selector) =>
-			Assign(a => a.AddIfNotNull(selector?.Invoke(new SimulatePipelineDocumentDescriptor())));
+			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new SimulatePipelineDocumentDescriptor())));
 	}
 }

@@ -94,7 +94,7 @@ namespace Nest
 		public IndexPrivilegesChecksDescriptor() : base(new List<IIndexPrivilegesCheck>()) { }
 
 		public IndexPrivilegesChecksDescriptor Index(Func<IndexPrivilegesCheckDesciptor, IIndexPrivilegesCheck> selector) =>
-			Assign(a => a.Add(selector.InvokeOrDefault(new IndexPrivilegesCheckDesciptor())));
+			Assign(selector, (a, v) => a.Add(v.InvokeOrDefault(new IndexPrivilegesCheckDesciptor())));
 
 		public class IndexPrivilegesCheckDesciptor : DescriptorBase<IndexPrivilegesCheckDesciptor, IIndexPrivilegesCheck>, IIndexPrivilegesCheck
 		{
@@ -157,7 +157,7 @@ namespace Nest
 		public ApplicationPrivilegesChecksDescriptor() : base(new List<IApplicationPrivilegesCheck>()) { }
 
 		public ApplicationPrivilegesChecksDescriptor Application(Func<ApplicationPrivilegesCheckDescriptor, IApplicationPrivilegesCheck> selector) =>
-			Assign(a => a.Add(selector.InvokeOrDefault(new ApplicationPrivilegesCheckDescriptor())));
+			Assign(selector, (a, v) => a.Add(v.InvokeOrDefault(new ApplicationPrivilegesCheckDescriptor())));
 
 		public class ApplicationPrivilegesCheckDescriptor
 			: DescriptorBase<ApplicationPrivilegesCheckDescriptor, IApplicationPrivilegesCheck>, IApplicationPrivilegesCheck

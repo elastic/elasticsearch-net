@@ -14,20 +14,26 @@ namespace Nest
 	{
 		internal readonly TValue PromisedValue;
 
-		protected DescriptorPromiseBase(TValue instance) => PromisedValue = instance;
+		protected DescriptorPromiseBase(TValue instance)
+		{
+			PromisedValue = instance;
+			Self = (TDescriptor)this;
+		}
 
 		TValue IPromise<TValue>.Value => PromisedValue;
+
+		protected TDescriptor Self { get; }
 
 		protected TDescriptor Assign(Action<TValue> assigner)
 		{
 			assigner(PromisedValue);
-			return (TDescriptor)this;
+			return Self;
 		}
 
 		protected TDescriptor Assign<TNewValue>(TNewValue value, Action<TValue, TNewValue> assigner)
 		{
 			assigner(PromisedValue, value);
-			return (TDescriptor)this;
+			return Self;
 		}
 
 		/// <summary>

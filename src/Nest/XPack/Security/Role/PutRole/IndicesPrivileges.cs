@@ -38,7 +38,7 @@ namespace Nest
 		public IndicesPrivilegesDescriptor() : base(new List<IIndicesPrivileges>()) { }
 
 		public IndicesPrivilegesDescriptor Add<T>(Func<IndicesPrivilegesDescriptor<T>, IIndicesPrivileges> selector) where T : class =>
-			Assign(a => a.AddIfNotNull(selector?.Invoke(new IndicesPrivilegesDescriptor<T>())));
+			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new IndicesPrivilegesDescriptor<T>())));
 	}
 
 	public class IndicesPrivilegesDescriptor<T> : DescriptorBase<IndicesPrivilegesDescriptor<T>, IIndicesPrivileges>, IIndicesPrivileges

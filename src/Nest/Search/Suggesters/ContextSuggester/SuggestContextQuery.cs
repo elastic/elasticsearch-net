@@ -74,7 +74,12 @@ namespace Nest
 		) =>
 			AddContextQueries(name, categoryDescriptors?.Select(d => d?.Invoke(new SuggestContextQueryDescriptor<T>())).ToList());
 
-		private SuggestContextQueriesDescriptor<T> AddContextQueries(string name, List<ISuggestContextQuery> contextQueries) =>
-			contextQueries == null ? this : Assign(a => a.Add(name, contextQueries));
+		private SuggestContextQueriesDescriptor<T> AddContextQueries(string name, List<ISuggestContextQuery> contextQueries)
+		{
+			if (contextQueries != null)
+				PromisedValue.Add(name, contextQueries);
+
+			return this;
+		}
 	}
 }

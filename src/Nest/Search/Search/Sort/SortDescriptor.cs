@@ -40,6 +40,6 @@ namespace Nest
 		public SortDescriptor<T> Script(Func<SortScriptDescriptor<T>, IScriptSort> sortSelector) =>
 			AddSort(sortSelector?.Invoke(new SortScriptDescriptor<T>()));
 
-		private SortDescriptor<T> AddSort(ISort sort) => sort == null ? this : Assign(a => a.Add(sort));
+		private SortDescriptor<T> AddSort(ISort sort) => sort == null ? this : Assign(sort, (a, v) => a.Add(v));
 	}
 }

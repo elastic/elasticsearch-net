@@ -92,7 +92,7 @@ namespace Nest
 		public SlackAttachmentsDescriptor() : base(new List<ISlackAttachment>()) { }
 
 		public SlackAttachmentsDescriptor Attachment(Func<SlackAttachmentDescriptor, ISlackAttachment> selector) =>
-			Assign(a => a.AddIfNotNull(selector?.Invoke(new SlackAttachmentDescriptor())));
+			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new SlackAttachmentDescriptor())));
 	}
 
 	public class SlackAttachmentDescriptor : DescriptorBase<SlackAttachmentDescriptor, ISlackAttachment>, ISlackAttachment

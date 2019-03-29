@@ -71,7 +71,7 @@ namespace Nest
 		public PagerDutyContextsDescriptor() : base(new List<IPagerDutyContext>()) { }
 
 		public PagerDutyContextsDescriptor Context(PagerDutyContextType type, Func<PagerDutyContextDescriptor, IPagerDutyContext> selector) =>
-			Assign(a => a.AddIfNotNull(selector?.Invoke(new PagerDutyContextDescriptor(type))));
+			Assign(selector?.Invoke(new PagerDutyContextDescriptor(type)), (a, v) => a.AddIfNotNull(v));
 	}
 
 	[JsonConverter(typeof(StringEnumConverter))]

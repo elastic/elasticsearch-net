@@ -50,7 +50,7 @@ namespace Nest
 		/// Adds an application privilege
 		/// </summary>
 		public ApplicationPrivilegesDescriptor Add<T>(Func<ApplicationPrivilegesDescriptor<T>, IApplicationPrivileges> selector) where T : class =>
-			Assign(a => a.AddIfNotNull(selector?.Invoke(new ApplicationPrivilegesDescriptor<T>())));
+			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new ApplicationPrivilegesDescriptor<T>())));
 	}
 
 

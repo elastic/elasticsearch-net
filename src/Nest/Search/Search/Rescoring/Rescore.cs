@@ -29,7 +29,7 @@ namespace Nest
 		public RescoringDescriptor<T> Rescore(Func<RescoreDescriptor<T>, IRescore> selector) =>
 			AddRescore(selector?.Invoke(new RescoreDescriptor<T>()));
 
-		private RescoringDescriptor<T> AddRescore(IRescore rescore) => rescore == null ? this : Assign(a => a.Add(rescore));
+		private RescoringDescriptor<T> AddRescore(IRescore rescore) => rescore == null ? this : Assign(rescore, (a, v) => a.Add(v));
 	}
 
 	public class RescoreDescriptor<T> : DescriptorBase<RescoreDescriptor<T>, IRescore>, IRescore
