@@ -52,7 +52,7 @@ module Main =
 
         w parsed.SkipDocs "documentation" <| fun _ -> Documentation.Generate parsed
 
-        w (parsed.SkipTests && parsed.Target <> "canary") "test" <| fun _ -> Tests.RunUnitTests parsed
+        w (not parsed.SkipTests && parsed.Target <> "canary") "test" <| fun _ -> Tests.RunUnitTests parsed
         
         t "version" <| fun _ -> printfn "Artifacts Version: %O" artifactsVersion
 

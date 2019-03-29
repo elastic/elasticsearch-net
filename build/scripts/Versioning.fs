@@ -72,8 +72,7 @@ module Versioning =
                 if (currentVersion >= newVersion) then
                     failwithf "Can not release %O its lower then current %O" newVersion.Full currentVersion.Full
                 writeVersionIntoGlobalJson newVersion
-        | _ -> 
-            printfn "Build version information: %O" version
+        | _ -> ignore()
     
     let ArtifactsVersion buildVersions =
         match buildVersions with
@@ -84,14 +83,14 @@ module Versioning =
     let private oficialToken = "96c599bbe3e70f5d"
 
     let private validate dll name =
-        let out = Tooling.exec sn ["-v"; dll;]
+        let out = Tooling.read sn ["-v"; dll;]
         
         let valid = (out.ExitCode, out.Output |> Seq.findIndex(fun s -> s.Line.Contains("is valid")))
         match valid with
         | (Some 0, i) when i >= 0 -> printfn "%s was signed correctly" name 
         | (_, _) -> failwithf "{0} was not validly signed"
         
-        let out = Tooling.exec sn ["-T"; dll;]
+        let out = Tooling.read sn ["-T"; dll;]
         
         let tokenMessage = (out.Output |> Seq.find(fun s -> s.Line.Contains("Public key token is")));
         

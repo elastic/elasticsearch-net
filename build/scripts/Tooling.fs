@@ -5,6 +5,7 @@ open System.IO
 open System.Net
 open ProcNet
 open Fake.IO.Globbing.Operators
+open ProcNet.Std
 
 module Tooling = 
 
@@ -12,14 +13,27 @@ module Tooling =
     
     let private defaultTimeout = TimeSpan.FromMinutes(5.)
     
-    let execInWithTimeout timeout workinDir bin args = 
+    let readInWithTimeout timeout workinDir bin args = 
         let startArgs = StartArguments(bin, args |> List.toArray)
         if (Option.isSome workinDir) then
             startArgs.WorkingDirectory <- Option.defaultValue "" workinDir
-        let result = Proc.Start(startArgs, timeout)
-        if not result.Completed then failwithf "process did not execute before timeout: %s" bin
+        let result = Proc.Start(startArgs, timeout, ConsoleOutColorWriter())
+        if not result.Completed then failwithf "process failed to complete within %O: %s" timeout bin
         let exitCode = match result.ExitCode.HasValue with | false -> None | true -> Some result.ExitCode.Value
         { ExitCode = exitCode; Output = seq result.ConsoleOut}
+        
+    let read bin args = readInWithTimeout defaultTimeout None bin args
+    
+    let execInWithTimeout timeout workinDir bin args = 
+        let startArgs = ExecArguments(bin, args |> List.toArray)
+        if (Option.isSome workinDir) then
+            startArgs.WorkingDirectory <- Option.defaultValue "" workinDir
+        let result = Proc.Exec(startArgs, timeout)
+        try
+            if not result.HasValue || result.Value > 0 then
+                failwithf "process returned %i: %s" result.Value bin
+        with
+        | :? ProcExecException as ex -> failwithf "%s" ex.Message
 
     let execIn workingDir bin args = execInWithTimeout defaultTimeout workingDir bin args
     
@@ -64,8 +78,7 @@ module Tooling =
             if (Directory.Exists installPath |> not) then
                 failwith (sprintf "JustAssembly is not installed in the default location %s. Download and install from %s" installPath downloadPage)
         
-            let result = execInWithTimeout defaultTimeout (Some ".") toolPath arguments 
-            if result.ExitCode <> Some 0 then failwith (sprintf "Failed to run diff tooling for %s args: %A" exe arguments)
+            execInWithTimeout defaultTimeout (Some ".") toolPath arguments 
             
     let JustAssembly = DiffTooling("JustAssembly.CommandLineTool.exe")
     
