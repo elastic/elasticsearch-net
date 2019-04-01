@@ -57,7 +57,7 @@ var person = new Person
     LastName = "Laarman"
 };
 
-client.Index(person, i => i.Index("people")); <1>
+var indexResponse = client.Index(person, i => i.Index("people")); <1>
 
 client.Index(new IndexRequest<Person>(person, "people")); <2>
 ----
