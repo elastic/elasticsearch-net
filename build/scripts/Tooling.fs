@@ -1,6 +1,7 @@
 ﻿namespace Scripts
 
 open System
+open System.IO
 open ProcNet
 open Fake.IO.Globbing.Operators
 open ProcNet.Std
@@ -45,7 +46,8 @@ module Tooling =
         member this.ExecIn workingDirectory arguments = this.ExecInWithTimeout workingDirectory arguments timeout
         member this.Exec arguments = this.ExecWithTimeout arguments timeout
 
-    let Nuget = BuildTooling(None, "build/scripts/bin/Release/netcoreapp2.2/nuget.exe")
+    let nugetFile = Path.GetFullPath "build/scripts/bin/Release/netcoreapp2.2/nuget.exe" 
+    let Nuget = BuildTooling(None, nugetFile)
     let ILRepack = BuildTooling(None, "build/scripts/bin/Release/netcoreapp2.2/ILRepack.exe")
     let DotNet = BuildTooling(Some <| TimeSpan.FromMinutes(5.), "dotnet")
 

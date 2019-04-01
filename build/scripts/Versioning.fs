@@ -10,6 +10,8 @@ open Commandline
 open Fake.Core
 open Fake.IO.Globbing.Operators
 open Fake.IO
+open Fake.Core
+open Fake.IO
 
 module Versioning = 
     // We used to rely on AssemblyInfo.cs from NEST to read and write the current version.
@@ -79,10 +81,29 @@ module Versioning =
         | NoChange n -> ArtifactsVersion n
         | Update (newVersion, _) -> ArtifactsVersion newVersion
     
-    let private sn = if isMono then "sn" else Paths.CheckedInTool("sn/sn.exe")
+    let private sn () =
+            match isMono with 
+            | true -> "sn"
+            | false ->
+                let programFiles = Environment.environVar "PROGRAMFILES(X86)"
+                if not (Directory.Exists programFiles) then failwith "Can not locate 64 bit program files"
+                let windowsSdks =  ["v10.0A"; "v8.1A"; "v8.1"; "v8.0"; "v7.0A";]
+                let dotNetVersion = ["4.7.2"; "4.7.1"; "4.7"; "4.6.2"; "4.6.1"; "4.0"]
+                let combinations = List.allPairs windowsSdks dotNetVersion
+                let winFolder w = Path.Combine(programFiles, "Microsoft SDKs", "Windows", w, "bin")
+                let sdkFolder w d = 
+                    let folder = sprintf "NETFX %s Tools" d
+                    Path.Combine(winFolder w, folder)
+                let snExe w d = Path.Combine(sdkFolder w d, "sn.exe")
+                let sn = combinations |> List.map (fun (w, d) -> snExe w d) |> List.tryFind File.exists
+                match sn with
+                | Some sn -> sn
+                | None -> failwithf "Could not locate sn.exe"
+
     let private oficialToken = "96c599bbe3e70f5d"
 
     let private validate dll name =
+        let sn = sn ()
         let out = Tooling.read sn ["-v"; dll;]
         
         let valid = (out.ExitCode, out.Output |> Seq.findIndex(fun s -> s.Line.Contains("is valid")))
