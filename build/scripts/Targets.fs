@@ -5,6 +5,7 @@ open System
 open Build
 open Commandline
 open Bullseye
+open ProcNet
 
 module Main =
 
@@ -80,7 +81,7 @@ module Main =
 
         command "cluster" [ "restore"; "full-build" ] <| fun _ -> Cluster.Run parsed
 
-        Targets.RunTargetsAndExit([parsed.Target])
+        Targets.RunTargetsAndExit([parsed.Target], fun e -> e.GetType() = typeof<ProcExecException>)
 
         0
 

@@ -165,7 +165,6 @@ Execution hints can be provided anywhere on the command line
                 | (_, true) -> true
                 //dotnet-xunit needs to a build of its own anyways
                 | ("test", _)
-                | ("cluster", _)
                 | ("integrate", _) -> false
                 | _ -> true;
             NeedsClean = 

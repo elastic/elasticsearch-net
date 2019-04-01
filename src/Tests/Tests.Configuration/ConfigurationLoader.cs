@@ -23,9 +23,7 @@ namespace Tests.Configuration
 				{
 					//load the test seed from the explicitly passed yaml file when running from FAKE
 					var tempYamlConfiguration = new YamlConfiguration(yamlFile);
-					Environment.SetEnvironmentVariable("NEST_TEST_SEED", tempYamlConfiguration.Seed.ToString(CultureInfo.InvariantCulture),
-						EnvironmentVariableTarget.Process);
-					Console.WriteLine("--->" + tempYamlConfiguration.Seed);
+					return new EnvironmentConfiguration(tempYamlConfiguration);
 				}
 				return new EnvironmentConfiguration();
 			}

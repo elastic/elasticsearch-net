@@ -22,14 +22,16 @@ module Cluster =
         match ((e userYaml), (e defaultYaml)) with
         | (true, _) -> Environment.setEnvironVar "NEST_YAML_FILE" (Path.GetFullPath(userYaml))
         | (_, true) -> Environment.setEnvironVar "NEST_YAML_FILE" (Path.GetFullPath(defaultYaml))
-        | _ -> ignore()
+        | _ -> failwithf "Expected to find a tests.default.yaml or tests.yaml in %s" sourceDir
+        
+        printfn "%s" testsProjectDirectory
         
         Shell.copyDir tempDir testsProjectDirectory (fun s -> true)
         
         let command = sprintf "%s %s" clusterName clusterVersion
         let timeout = TimeSpan.FromMinutes(120.)
         let dll = Path.Combine(tempDir, "Tests.ClusterLauncher.dll");
-        Tooling.DotNet.ExecInWithTimeout tempDir ["run"; dll; command] timeout  |> ignore
+        Tooling.DotNet.ExecInWithTimeout tempDir [dll; command] timeout  |> ignore
         
         Shell.deleteDir tempDir
          

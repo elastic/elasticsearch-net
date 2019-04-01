@@ -4,10 +4,15 @@ namespace Tests.Configuration
 {
 	public class EnvironmentConfiguration : TestConfigurationBase
 	{
+		public EnvironmentConfiguration(YamlConfiguration tempYamlConfiguration) : this()
+		{
+			ElasticsearchVersion = tempYamlConfiguration.ElasticsearchVersion;
+			Seed = tempYamlConfiguration.Seed;
+		}
+
 		public EnvironmentConfiguration()
 		{
-			//if env var NEST_INTEGRATION_VERSION is set assume integration mode
-			//used by the build script FAKE
+			//if env var NEST_INTEGRATION_VERSION is set assume integration mode used by the build script FAKE
 			var version = Environment.GetEnvironmentVariable("NEST_INTEGRATION_VERSION");
 			if (!string.IsNullOrEmpty(version)) Mode = TestMode.Integration;
 
