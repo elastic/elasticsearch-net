@@ -210,6 +210,8 @@ namespace Nest
 
 		public MatrixStatsAggregate MatrixStats(string key) => TryGet<MatrixStatsAggregate>(key);
 
+		public ValueAggregate MedianAbsoluteDeviation(string key) => TryGet<ValueAggregate>(key);
+
 		private TAggregate TryGet<TAggregate>(string key)
 			where TAggregate : class, IAggregate
 		{
