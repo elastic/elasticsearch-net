@@ -153,6 +153,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		*/
 		public async Task BulkDocumentsWithObservableHelper()
 		{
+                        // hide
 			var people = new []
 			{
 				new Person
