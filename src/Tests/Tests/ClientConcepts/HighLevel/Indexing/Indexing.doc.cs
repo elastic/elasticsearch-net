@@ -153,6 +153,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		*/
 		public async Task BulkDocumentsWithObservableHelper()
 		{
+                        // hide
 			var people = new []
 			{
 				new Person
@@ -170,7 +171,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				new Person
 				{
 					Id = 3,
-					FirstName = "Russell",
+					FirstName = "Russ",
 					LastName = "Cam"
 				}
 				// snip

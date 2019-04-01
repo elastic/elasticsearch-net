@@ -39,9 +39,9 @@ if (!indexResponse.IsValid)
 
 var indexResponseAsync = await client.IndexDocumentAsync(person); <2>
 ----
-<1> synchronous method that returns an IIndexResponse
+<1> synchronous method that returns an `IIndexResponse`
 
-<2> asynchronous method that returns a Task<IIndexResponse> that can be awaited
+<2> asynchronous method that returns a `Task<IIndexResponse>` that can be awaited
 
 ==== Single documents with parameters
 
@@ -57,7 +57,7 @@ var person = new Person
     LastName = "Laarman"
 };
 
-client.Index(person, i => i.Index("people")); <1>
+var indexResponse = client.Index(person, i => i.Index("people")); <1>
 
 client.Index(new IndexRequest<Person>(person, "people")); <2>
 ----
