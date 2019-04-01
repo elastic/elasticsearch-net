@@ -84,7 +84,7 @@
   </ItemGroup>
   <Target Name="CopyToolPackages" AfterTargets="Build">
     <Copy SourceFiles="$(PkgILRepack)\tools\ILRepack.exe" DestinationFolder="$(OutDir)" />
-    <Copy SourceFiles="$(PkgNuGet_CommandLine)\tools\nuget.exe" DestinationFolder="$(OutDir)" />
+    <Copy SourceFiles="$(PkgNuGet_CommandLine)\tools\NuGet.exe" DestinationFolder="$(OutDir)" />
   </Target>
 
 </Project>
