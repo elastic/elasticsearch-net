@@ -21,14 +21,26 @@ namespace Nest
 		IReadOnlyCollection<Filter> Filters { get; }
 	}
 
+	/// <summary>
+	/// A machine learning filter
+	/// </summary>
 	public class Filter
 	{
+		/// <summary>
+		/// The filter ID
+		/// </summary>
 		[JsonProperty("filter_id")]
 		public string FilterId { get; set; }
 
+		/// <summary>
+		/// The items of the filter
+		/// </summary>
 		[JsonProperty("items")]
 		public IReadOnlyCollection<string> Items { get; set; } = EmptyReadOnly<string>.Collection;
 
+		/// <summary>
+		/// A description of the filter
+		/// </summary>
 		[JsonProperty("description")]
 		public string Description { get; set; }
 	}
