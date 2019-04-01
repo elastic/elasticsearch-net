@@ -8,7 +8,7 @@ open Tooling
 
 module ShadowDependencies =
 
-    let private assemblyRewriter = Paths.PaketDotNetGlobalTool "assembly-rewriter" @"tools\netcoreapp2.1\any\assembly-rewriter.dll"
+    let private assemblyRewriter = "assembly-rewriter"
     let private keyFile = Paths.Keys "keypair.snk"
     let Rewrite majorVersion framework projects =
         let project = projects |> Seq.head

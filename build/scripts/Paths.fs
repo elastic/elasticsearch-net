@@ -23,7 +23,6 @@ module Paths =
     let Solution = "src/Elasticsearch.sln"
     
     let CheckedInTool(tool) = sprintf "%s/%s" CheckedInToolsFolder tool
-    let PaketDotNetGlobalTool tool subPath = sprintf "%s/%s" (Tool tool) subPath
     let Keys(keyFile) = sprintf "%s/%s" KeysFolder keyFile
     let Output(folder) = sprintf "%s/%s" BuildOutput folder
     let Source(folder) = sprintf "%s/%s" SourceFolder folder
