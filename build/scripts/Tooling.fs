@@ -1,8 +1,6 @@
 ﻿namespace Scripts
 
 open System
-open System.IO
-open System.Net
 open ProcNet
 open Fake.IO.Globbing.Operators
 open ProcNet.Std
@@ -47,38 +45,8 @@ module Tooling =
         member this.ExecIn workingDirectory arguments = this.ExecInWithTimeout workingDirectory arguments timeout
         member this.Exec arguments = this.ExecWithTimeout arguments timeout
 
-    let nugetFile =
-        let targetLocation = "build/tools/nuget/nuget.exe" 
-        if (not (File.Exists targetLocation))
-        then
-            printfn "Nuget not found at %s. Downloading now" targetLocation
-            let url = "http://dist.nuget.org/win-x86-commandline/latest/nuget.exe" 
-            Directory.CreateDirectory("build/tools/nuget") |> ignore
-            use webClient = new WebClient()
-            webClient.DownloadFile(url, targetLocation)
-            printfn "nuget downloaded"
-        targetLocation 
-
-    let Nuget = BuildTooling(None, nugetFile)
+    let Nuget = BuildTooling(None, "build/scripts/bin/Release/netcoreapp2.2/nuget.exe")
     let ILRepack = BuildTooling(None, "build/scripts/bin/Release/netcoreapp2.2/ILRepack.exe")
     let DotNet = BuildTooling(Some <| TimeSpan.FromMinutes(5.), "dotnet")
 
-    type DotTraceTool = {
-        Name:string;
-        Download:string;
-        TargetDir:string;
-    }
-
-    type DiffTooling(exe) =       
-        let installPath = @"C:\Program Files (x86)\Progress\JustAssembly\Libraries"  
-        let downloadPage = "https://www.telerik.com/download-trial-file/v2/justassembly"  
-        let toolPath = Path.Combine(installPath,exe)
-        
-        member this.Exec arguments =
-            if (Directory.Exists installPath |> not) then
-                failwith (sprintf "JustAssembly is not installed in the default location %s. Download and install from %s" installPath downloadPage)
-        
-            execInWithTimeout defaultTimeout (Some ".") toolPath arguments 
-            
-    let JustAssembly = DiffTooling("JustAssembly.CommandLineTool.exe")
     
