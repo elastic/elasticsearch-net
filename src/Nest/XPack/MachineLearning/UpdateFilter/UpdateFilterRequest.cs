@@ -48,18 +48,18 @@ namespace Nest
 		IEnumerable<string> IUpdateFilterRequest.RemoveItems { get; set; }
 
 		/// <inheritdoc cref="IUpdateFilterRequest.Description" />
-		public UpdateFilterDescriptor Description(string description) => Assign(a => a.Description = description);
+		public UpdateFilterDescriptor Description(string description) => Assign(description, (a, v) => a.Description = v);
 
 		/// <inheritdoc cref="IUpdateFilterRequest.AddItems" />
-		public UpdateFilterDescriptor AddItems(params string[] items) => Assign(a => a.AddItems = items);
+		public UpdateFilterDescriptor AddItems(params string[] items) => Assign(items, (a, v) => a.AddItems = v);
 
 		/// <inheritdoc cref="IUpdateFilterRequest.AddItems" />
-		public UpdateFilterDescriptor AddItems(IEnumerable<string> items) => Assign(a => a.AddItems = items);
+		public UpdateFilterDescriptor AddItems(IEnumerable<string> items) => Assign(items, (a, v) => a.AddItems = v);
 
 		/// <inheritdoc cref="IUpdateFilterRequest.RemoveItems" />
-		public UpdateFilterDescriptor RemoveItems(params string[] items) => Assign(a => a.RemoveItems = items);
+		public UpdateFilterDescriptor RemoveItems(params string[] items) => Assign(items, (a, v) => a.RemoveItems = v);
 
 		/// <inheritdoc cref="IUpdateFilterRequest.RemoveItems" />
-		public UpdateFilterDescriptor RemoveItems(IEnumerable<string> items) => Assign(a => a.RemoveItems = items);
+		public UpdateFilterDescriptor RemoveItems(IEnumerable<string> items) => Assign(items, (a, v) => a.RemoveItems = v);
 	}
 }

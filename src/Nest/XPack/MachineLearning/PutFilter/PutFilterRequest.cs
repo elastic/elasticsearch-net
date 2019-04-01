@@ -40,12 +40,12 @@ namespace Nest
 		IEnumerable<string> IPutFilterRequest.Items { get; set; }
 
 		/// <inheritdoc cref="IPutFilterRequest.Description" />
-		public PutFilterDescriptor Description(string description) => Assign(a => a.Description = description);
+		public PutFilterDescriptor Description(string description) => Assign(description, (a, v) => a.Description = v);
 
 		/// <inheritdoc cref="IPutFilterRequest.Items" />
-		public PutFilterDescriptor Items(params string[] items) => Assign(a => a.Items = items);
+		public PutFilterDescriptor Items(params string[] items) => Assign(items, (a, v) => a.Items = v);
 
 		/// <inheritdoc cref="IPutFilterRequest.Items" />
-		public PutFilterDescriptor Items(IEnumerable<string> items) => Assign(a => a.Items = items);
+		public PutFilterDescriptor Items(IEnumerable<string> items) => Assign(items, (a, v) => a.Items = v);
 	}
 }
