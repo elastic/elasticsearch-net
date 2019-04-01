@@ -11,9 +11,9 @@ module Documentation =
     let Generate args = 
         let docGenerator = PrivateProject(DocGenerator)
         let path = Paths.ProjectOutputFolder docGenerator DotNetFramework.NetCoreApp2_1
-        let generator = sprintf "%s.dll %s" docGenerator.Name args.DocsBranch
+        let generator = sprintf "%s.dll" docGenerator.Name 
         
-        Tooling.DotNet.ExecIn path ["run";] |> ignore
+        Tooling.DotNet.ExecIn path [generator; args.DocsBranch] |> ignore
 
     // TODO: hook documentation validation into the process
     let Validate() = 
