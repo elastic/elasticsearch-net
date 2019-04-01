@@ -52,6 +52,6 @@ namespace Nest
 		double? IMedianAbsoluteDeviationAggregation.Compression { get; set; }
 
 		/// <inheritdoc cref="IMedianAbsoluteDeviationAggregation.Compression"/>
-		public MedianAbsoluteDeviationAggregationDescriptor<T> Compression(double? compression) => Assign(a => a.Compression = compression);
+		public MedianAbsoluteDeviationAggregationDescriptor<T> Compression(double? compression) => Assign(compression, (a, v) => a.Compression = v);
 	}
 }

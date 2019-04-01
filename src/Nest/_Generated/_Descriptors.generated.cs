@@ -4419,7 +4419,7 @@ namespace Nest
 		Id IGetFiltersRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
 
 		///<summary>The ID of the filter to fetch</summary>
-		public GetFiltersDescriptor FilterId(Id filterId) => Assign(a=>a.RouteValues.Optional("filter_id", filterId));
+		public GetFiltersDescriptor FilterId(Id filterId) => Assign(filterId, (a,v)=>a.RouteValues.Optional("filter_id", v));
 
 		// Request parameters
 

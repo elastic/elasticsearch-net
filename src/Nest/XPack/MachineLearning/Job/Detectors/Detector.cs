@@ -258,7 +258,7 @@ namespace Nest
 
 		/// <inheritdoc cref="IDetector.CustomRules" />
 		public TDetectorDescriptor CustomRules(Func<DetectionRulesDescriptor, IPromise<List<IDetectionRule>>> selector) =>
-			Assign(a => a.CustomRules = selector.Invoke(new DetectionRulesDescriptor()).Value);
+			Assign(selector, (a, v) => a.CustomRules = v.Invoke(new DetectionRulesDescriptor()).Value);
 	}
 
 	public class DetectorsDescriptor<T> : DescriptorPromiseBase<DetectorsDescriptor<T>, IList<IDetector>> where T : class

@@ -66,15 +66,15 @@ namespace Nest
 		IEnumerable<IRuleCondition> IDetectionRule.Conditions { get; set; }
 		IReadOnlyDictionary<Field, FilterRef> IDetectionRule.Scope { get; set; }
 
-		public DetectionRuleDescriptor Actions(IEnumerable<RuleAction> actions) => Assign(a => a.Actions = actions);
+		public DetectionRuleDescriptor Actions(IEnumerable<RuleAction> actions) => Assign(actions, (a, v) => a.Actions = v);
 
-		public DetectionRuleDescriptor Actions(params RuleAction[] actions) => Assign(a => a.Actions = actions);
+		public DetectionRuleDescriptor Actions(params RuleAction[] actions) => Assign(actions, (a, v) => a.Actions = v);
 
 		public DetectionRuleDescriptor Scope<T>(Func<ScopeDescriptor<T>, IPromise<IReadOnlyDictionary<Field, FilterRef>>> selector) where T : class =>
-			Assign(a => a.Scope = selector.Invoke(new ScopeDescriptor<T>()).Value);
+			Assign(selector, (a, v) => a.Scope = v.Invoke(new ScopeDescriptor<T>()).Value);
 
 		public DetectionRuleDescriptor Conditions(Func<RuleConditionsDescriptor, IPromise<List<IRuleCondition>>> selector) =>
-			Assign(a => a.Conditions = selector?.Invoke(new RuleConditionsDescriptor())?.Value);
+			Assign(selector, (a, v) => a.Conditions = v?.Invoke(new RuleConditionsDescriptor())?.Value);
 	}
 
 	public class RuleConditionsDescriptor : DescriptorPromiseBase<RuleConditionsDescriptor, List<IRuleCondition>>
@@ -94,11 +94,11 @@ namespace Nest
 		ConditionOperator IRuleCondition.Operator { get; set; }
 		double IRuleCondition.Value { get; set; }
 
-		public RuleConditionDescriptor AppliesTo(AppliesTo appliesTo) => Assign(a => a.AppliesTo = appliesTo);
+		public RuleConditionDescriptor AppliesTo(AppliesTo appliesTo) => Assign(appliesTo, (a, v) => a.AppliesTo = v);
 
-		public RuleConditionDescriptor Operator(ConditionOperator @operator) => Assign(a => a.Operator = @operator);
+		public RuleConditionDescriptor Operator(ConditionOperator @operator) => Assign(@operator, (a, v) => a.Operator = v);
 
-		public RuleConditionDescriptor Value(double value) => Assign(a => a.Value = value);
+		public RuleConditionDescriptor Value(double value) => Assign(value, (a, v) => a.Value = v);
 	}
 
 	public class ScopeDescriptor<T> : DescriptorPromiseBase<ScopeDescriptor<T>, IReadOnlyDictionary<Field, FilterRef>> where T : class
