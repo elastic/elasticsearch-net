@@ -30,14 +30,14 @@ namespace Nest
 		QueryContainer IUpdateByQueryRequest.Query { get; set; }
 		IScript IUpdateByQueryRequest.Script { get; set; }
 
-		public UpdateByQueryDescriptor<T> MatchAll() => Assign(a => a.Query = new QueryContainerDescriptor<T>().MatchAll());
+		public UpdateByQueryDescriptor<T> MatchAll() => Assign(new QueryContainerDescriptor<T>().MatchAll(), (a, v) => a.Query = v);
 
 		public UpdateByQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
-			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(querySelector, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<T>()));
 
-		public UpdateByQueryDescriptor<T> Script(string script) => Assign(a => a.Script = (InlineScript)script);
+		public UpdateByQueryDescriptor<T> Script(string script) => Assign((InlineScript)script, (a, v) => a.Script = v);
 
 		public UpdateByQueryDescriptor<T> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
-			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
+			Assign(scriptSelector, (a, v) => a.Script = v?.Invoke(new ScriptDescriptor()));
 	}
 }

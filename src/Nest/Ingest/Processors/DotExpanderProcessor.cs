@@ -69,19 +69,19 @@ namespace Nest
 		/// <summary>
 		/// The field to expand into an object field
 		/// </summary>
-		public DotExpanderProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public DotExpanderProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <summary>
 		/// The field to expand into an object field
 		/// </summary>
 		public DotExpanderProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <summary>
 		/// The field that contains the field to expand.
 		/// Only required if the field to expand is part another object field,
 		/// because the field option can only understand leaf fields.
 		/// </summary>
-		public DotExpanderProcessorDescriptor<T> Path(string path) => Assign(a => a.Path = path);
+		public DotExpanderProcessorDescriptor<T> Path(string path) => Assign(path, (a, v) => a.Path = v);
 	}
 }

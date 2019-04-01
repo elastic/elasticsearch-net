@@ -30,10 +30,10 @@ namespace Nest
 		string IRemoteSource.Password { get; set; }
 		string IRemoteSource.Username { get; set; }
 
-		public RemoteSourceDescriptor Host(Uri host) => Assign(a => a.Host = host);
+		public RemoteSourceDescriptor Host(Uri host) => Assign(host, (a, v) => a.Host = v);
 
-		public RemoteSourceDescriptor Username(string username) => Assign(a => a.Username = username);
+		public RemoteSourceDescriptor Username(string username) => Assign(username, (a, v) => a.Username = v);
 
-		public RemoteSourceDescriptor Password(string password) => Assign(a => a.Password = password);
+		public RemoteSourceDescriptor Password(string password) => Assign(password, (a, v) => a.Password = v);
 	}
 }

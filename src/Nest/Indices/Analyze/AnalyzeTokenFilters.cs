@@ -45,13 +45,10 @@ namespace Nest
 		/// <summary>
 		/// A reference to a token filter that is part of the mapping
 		/// </summary>
-		public AnalyzeTokenFiltersDescriptor Name(string tokenFilter) => Assign(a => a.AddIfNotNull(tokenFilter));
+		public AnalyzeTokenFiltersDescriptor Name(string tokenFilter) => Assign(tokenFilter, (a, v) => a.AddIfNotNull(v));
 
 		private AnalyzeTokenFiltersDescriptor AssignIfNotNull(ITokenFilter filter) =>
-			Assign(a =>
-			{
-				if (filter != null) a.Add(filter);
-			});
+			Assign(filter, (a, v) => { if (v != null) a.Add(v); });
 
 		/// <summary>
 		/// Token filters that allow to decompose compound words using a dictionary

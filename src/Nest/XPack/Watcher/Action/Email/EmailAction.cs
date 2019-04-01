@@ -82,34 +82,34 @@ namespace Nest
 		string IEmailAction.Subject { get; set; }
 		IEnumerable<string> IEmailAction.To { get; set; }
 
-		public EmailActionDescriptor Account(string account) => Assign(a => a.Account = account);
+		public EmailActionDescriptor Account(string account) => Assign(account, (a, v) => a.Account = v);
 
-		public EmailActionDescriptor From(string from) => Assign(a => a.From = from);
+		public EmailActionDescriptor From(string from) => Assign(from, (a, v) => a.From = v);
 
-		public EmailActionDescriptor To(IEnumerable<string> to) => Assign(a => a.To = to);
+		public EmailActionDescriptor To(IEnumerable<string> to) => Assign(to, (a, v) => a.To = v);
 
-		public EmailActionDescriptor To(params string[] to) => Assign(a => a.To = to);
+		public EmailActionDescriptor To(params string[] to) => Assign(to, (a, v) => a.To = v);
 
-		public EmailActionDescriptor Cc(IEnumerable<string> cc) => Assign(a => a.Cc = cc);
+		public EmailActionDescriptor Cc(IEnumerable<string> cc) => Assign(cc, (a, v) => a.Cc = v);
 
-		public EmailActionDescriptor Cc(params string[] cc) => Assign(a => a.Cc = cc);
+		public EmailActionDescriptor Cc(params string[] cc) => Assign(cc, (a, v) => a.Cc = v);
 
-		public EmailActionDescriptor Bcc(IEnumerable<string> bcc) => Assign(a => a.Bcc = bcc);
+		public EmailActionDescriptor Bcc(IEnumerable<string> bcc) => Assign(bcc, (a, v) => a.Bcc = v);
 
-		public EmailActionDescriptor Bcc(params string[] bcc) => Assign(a => a.Bcc = bcc);
+		public EmailActionDescriptor Bcc(params string[] bcc) => Assign(bcc, (a, v) => a.Bcc = v);
 
-		public EmailActionDescriptor ReplyTo(IEnumerable<string> replyTo) => Assign(a => a.ReplyTo = replyTo);
+		public EmailActionDescriptor ReplyTo(IEnumerable<string> replyTo) => Assign(replyTo, (a, v) => a.ReplyTo = v);
 
-		public EmailActionDescriptor ReplyTo(params string[] replyTo) => Assign(a => a.ReplyTo = replyTo);
+		public EmailActionDescriptor ReplyTo(params string[] replyTo) => Assign(replyTo, (a, v) => a.ReplyTo = v);
 
-		public EmailActionDescriptor Subject(string subject) => Assign(a => a.Subject = subject);
+		public EmailActionDescriptor Subject(string subject) => Assign(subject, (a, v) => a.Subject = v);
 
 		public EmailActionDescriptor Body(Func<EmailBodyDescriptor, IEmailBody> selector) =>
-			Assign(a => a.Body = selector.InvokeOrDefault(new EmailBodyDescriptor()));
+			Assign(selector.InvokeOrDefault(new EmailBodyDescriptor()), (a, v) => a.Body = v);
 
-		public EmailActionDescriptor Priority(EmailPriority? priority) => Assign(a => a.Priority = priority);
+		public EmailActionDescriptor Priority(EmailPriority? priority) => Assign(priority, (a, v) => a.Priority = v);
 
 		public EmailActionDescriptor Attachments(Func<EmailAttachmentsDescriptor, IPromise<IEmailAttachments>> selector) =>
-			Assign(a => a.Attachments = selector?.Invoke(new EmailAttachmentsDescriptor())?.Value);
+			Assign(selector, (a, v) => a.Attachments = v?.Invoke(new EmailAttachmentsDescriptor())?.Value);
 	}
 }

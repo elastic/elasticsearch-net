@@ -28,6 +28,6 @@ namespace Nest
 		string IPutCalendarRequest.Description { get; set; }
 
 		/// <inheritdoc cref="IPutCalendarRequest.Description" />
-		public PutCalendarDescriptor Description(string description) => Assign(a => a.Description = description);
+		public PutCalendarDescriptor Description(string description) => Assign(description, (a, v) => a.Description = v);
 	}
 }

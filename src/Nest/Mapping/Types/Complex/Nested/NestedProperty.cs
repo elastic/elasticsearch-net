@@ -36,9 +36,9 @@ namespace Nest
 		bool? INestedProperty.IncludeInRoot { get; set; }
 
 		public NestedPropertyDescriptor<TParent, TChild> IncludeInParent(bool? includeInParent = true) =>
-			Assign(a => a.IncludeInParent = includeInParent);
+			Assign(includeInParent, (a, v) => a.IncludeInParent = v);
 
 		public NestedPropertyDescriptor<TParent, TChild> IncludeInRoot(bool? includeInRoot = true) =>
-			Assign(a => a.IncludeInRoot = includeInRoot);
+			Assign(includeInRoot, (a, v) => a.IncludeInRoot = v);
 	}
 }

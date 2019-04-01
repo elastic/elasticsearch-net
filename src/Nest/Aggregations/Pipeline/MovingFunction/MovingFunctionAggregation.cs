@@ -36,8 +36,8 @@ namespace Nest
 		string IMovingFunctionAggregation.Script { get; set; }
 		int? IMovingFunctionAggregation.Window { get; set; }
 
-		public MovingFunctionAggregationDescriptor Window(int? windowSize) => Assign(a => a.Window = windowSize);
+		public MovingFunctionAggregationDescriptor Window(int? windowSize) => Assign(windowSize, (a, v) => a.Window = v);
 
-		public MovingFunctionAggregationDescriptor Script(string script) => Assign(a => a.Script = script);
+		public MovingFunctionAggregationDescriptor Script(string script) => Assign(script, (a, v) => a.Script = v);
 	}
 }

@@ -37,12 +37,12 @@ namespace Nest
 		IEnumerable<string> ITimeOfMonth.At { get; set; }
 		IEnumerable<int> ITimeOfMonth.On { get; set; }
 
-		public TimeOfMonthDescriptor On(IEnumerable<int> dates) => Assign(a => a.On = dates);
+		public TimeOfMonthDescriptor On(IEnumerable<int> dates) => Assign(dates, (a, v) => a.On = v);
 
-		public TimeOfMonthDescriptor On(params int[] dates) => Assign(a => a.On = dates);
+		public TimeOfMonthDescriptor On(params int[] dates) => Assign(dates, (a, v) => a.On = v);
 
-		public TimeOfMonthDescriptor At(IEnumerable<string> time) => Assign(a => a.At = time);
+		public TimeOfMonthDescriptor At(IEnumerable<string> time) => Assign(time, (a, v) => a.At = v);
 
-		public TimeOfMonthDescriptor At(params string[] time) => Assign(a => a.At = time);
+		public TimeOfMonthDescriptor At(params string[] time) => Assign(time, (a, v) => a.At = v);
 	}
 }

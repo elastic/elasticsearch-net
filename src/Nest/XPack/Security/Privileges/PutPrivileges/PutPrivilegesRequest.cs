@@ -28,7 +28,7 @@ namespace Nest
 			sourceSerializer.Serialize(Self.Applications, stream, formatting);
 
 		public PutPrivilegesDescriptor Applications(Func<AppPrivilegesDescriptor, IPromise<IAppPrivileges>> selector) =>
-			Assign(a => a.Applications = selector?.Invoke(new AppPrivilegesDescriptor())?.Value);
+			Assign(selector, (a, v) => a.Applications = v?.Invoke(new AppPrivilegesDescriptor())?.Value);
 	}
 
 	internal class PutPrivilegesFormatter : IJsonFormatter<IPutPrivilegesRequest>

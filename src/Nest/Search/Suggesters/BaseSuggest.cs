@@ -39,12 +39,12 @@ namespace Nest
 
 		int? ISuggester.Size { get; set; }
 
-		public TDescriptor Size(int? size) => Assign(a => a.Size = size);
+		public TDescriptor Size(int? size) => Assign(size, (a, v) => a.Size = v);
 
-		public TDescriptor Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
+		public TDescriptor Analyzer(string analyzer) => Assign(analyzer, (a, v) => a.Analyzer = v);
 
-		public TDescriptor Field(Field field) => Assign(a => a.Field = field);
+		public TDescriptor Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public TDescriptor Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
+		public TDescriptor Field(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
 	}
 }

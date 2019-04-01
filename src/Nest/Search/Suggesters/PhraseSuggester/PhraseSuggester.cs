@@ -84,35 +84,35 @@ namespace Nest
 		string IPhraseSuggester.Text { get; set; }
 		int? IPhraseSuggester.TokenLimit { get; set; }
 
-		public PhraseSuggesterDescriptor<T> Text(string text) => Assign(a => a.Text = text);
+		public PhraseSuggesterDescriptor<T> Text(string text) => Assign(text, (a, v) => a.Text = v);
 
-		public PhraseSuggesterDescriptor<T> ShardSize(int? shardSize) => Assign(a => a.ShardSize = shardSize);
+		public PhraseSuggesterDescriptor<T> ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSize = v);
 
-		public PhraseSuggesterDescriptor<T> GramSize(int? gramSize) => Assign(a => a.GramSize = gramSize);
+		public PhraseSuggesterDescriptor<T> GramSize(int? gramSize) => Assign(gramSize, (a, v) => a.GramSize = v);
 
-		public PhraseSuggesterDescriptor<T> Confidence(double? confidence) => Assign(a => a.Confidence = confidence);
+		public PhraseSuggesterDescriptor<T> Confidence(double? confidence) => Assign(confidence, (a, v) => a.Confidence = v);
 
-		public PhraseSuggesterDescriptor<T> MaxErrors(double? maxErrors) => Assign(a => a.MaxErrors = maxErrors);
+		public PhraseSuggesterDescriptor<T> MaxErrors(double? maxErrors) => Assign(maxErrors, (a, v) => a.MaxErrors = v);
 
-		public PhraseSuggesterDescriptor<T> Separator(char? separator) => Assign(a => a.Separator = separator);
+		public PhraseSuggesterDescriptor<T> Separator(char? separator) => Assign(separator, (a, v) => a.Separator = v);
 
 		public PhraseSuggesterDescriptor<T> DirectGenerator(params Func<DirectGeneratorDescriptor<T>, IDirectGenerator>[] generators) =>
-			Assign(a => a.DirectGenerator = generators.Select(g => g(new DirectGeneratorDescriptor<T>())).ToList());
+			Assign(generators.Select(g => g(new DirectGeneratorDescriptor<T>())).ToList(), (a, v) => a.DirectGenerator = v);
 
 		public PhraseSuggesterDescriptor<T> RealWordErrorLikelihood(double? realWordErrorLikelihood) =>
-			Assign(a => a.RealWordErrorLikelihood = realWordErrorLikelihood);
+			Assign(realWordErrorLikelihood, (a, v) => a.RealWordErrorLikelihood = v);
 
 		public PhraseSuggesterDescriptor<T> Highlight(Func<PhraseSuggestHighlightDescriptor, IPhraseSuggestHighlight> selector) =>
-			Assign(a => a.Highlight = selector?.Invoke(new PhraseSuggestHighlightDescriptor()));
+			Assign(selector, (a, v) => a.Highlight = v?.Invoke(new PhraseSuggestHighlightDescriptor()));
 
 		public PhraseSuggesterDescriptor<T> Collate(Func<PhraseSuggestCollateDescriptor<T>, IPhraseSuggestCollate> selector) =>
-			Assign(a => a.Collate = selector?.Invoke(new PhraseSuggestCollateDescriptor<T>()));
+			Assign(selector, (a, v) => a.Collate = v?.Invoke(new PhraseSuggestCollateDescriptor<T>()));
 
 		public PhraseSuggesterDescriptor<T> Smoothing(Func<SmoothingModelContainerDescriptor, SmoothingModelContainer> selector) =>
-			Assign(a => a.Smoothing = selector?.Invoke(new SmoothingModelContainerDescriptor()));
+			Assign(selector, (a, v) => a.Smoothing = v?.Invoke(new SmoothingModelContainerDescriptor()));
 
-		public PhraseSuggesterDescriptor<T> TokenLimit(int? tokenLimit) => Assign(a => a.TokenLimit = tokenLimit);
+		public PhraseSuggesterDescriptor<T> TokenLimit(int? tokenLimit) => Assign(tokenLimit, (a, v) => a.TokenLimit = v);
 
-		public PhraseSuggesterDescriptor<T> ForceUnigrams(bool? forceUnigrams = true) => Assign(a => a.ForceUnigrams = forceUnigrams);
+		public PhraseSuggesterDescriptor<T> ForceUnigrams(bool? forceUnigrams = true) => Assign(forceUnigrams, (a, v) => a.ForceUnigrams = v);
 	}
 }

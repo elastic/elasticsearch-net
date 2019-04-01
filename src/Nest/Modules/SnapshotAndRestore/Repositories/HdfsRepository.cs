@@ -73,47 +73,45 @@ namespace Nest
 		/// <summary>
 		/// optional - Hadoop file-system URI
 		/// </summary>
-		public HdfsRepositorySettingsDescriptor Uri(string uri) => Assign(a => a.Uri = uri);
+		public HdfsRepositorySettingsDescriptor Uri(string uri) => Assign(uri, (a, v) => a.Uri = v);
 
 		/// <summary>
 		/// required - path with the file-system where data is stored/loaded
 		/// </summary>
-		public HdfsRepositorySettingsDescriptor Path(string path) => Assign(a => a.Path = path);
+		public HdfsRepositorySettingsDescriptor Path(string path) => Assign(path, (a, v) => a.Path = v);
 
 		/// <summary>
 		/// whether to load the default Hadoop configuration (default) or not
 		/// </summary>
 		/// <param name="loadDefaults"></param>
-		public HdfsRepositorySettingsDescriptor LoadDefaults(bool? loadDefaults = true) => Assign(a => a.LoadDefaults = loadDefaults);
+		public HdfsRepositorySettingsDescriptor LoadDefaults(bool? loadDefaults = true) => Assign(loadDefaults, (a, v) => a.LoadDefaults = v);
 
 		/// <summary>
 		/// Hadoop configuration XML to be loaded (use commas for multi values)
 		/// </summary>
 		/// <param name="configurationLocation"></param>
 		public HdfsRepositorySettingsDescriptor ConfigurationLocation(string configurationLocation) =>
-			Assign(a => a.ConfigurationLocation = configurationLocation);
+			Assign(configurationLocation, (a, v) => a.ConfigurationLocation = v);
 
 		/// <summary>
 		/// 'inlined' key=value added to the Hadoop configuration
 		/// </summary>
 		public HdfsRepositorySettingsDescriptor InlinedHadoopConfiguration(
 			Func<FluentDictionary<string, object>, FluentDictionary<string, object>> inlineConfig
-		) => Assign(a =>
-			a.InlineHadoopConfiguration = inlineConfig(new FluentDictionary<string, object>())
-		);
+		) => Assign(inlineConfig, (a, v) => a.InlineHadoopConfiguration = v(new FluentDictionary<string, object>()));
 
 		/// <summary>
 		/// When set to true metadata files are stored in compressed format. This setting doesn't
 		/// affect index files that are already compressed by default. Defaults to false.
 		/// </summary>
 		/// <param name="compress"></param>
-		public HdfsRepositorySettingsDescriptor Compress(bool? compress = true) => Assign(a => a.Compress = compress);
+		public HdfsRepositorySettingsDescriptor Compress(bool? compress = true) => Assign(compress, (a, v) => a.Compress = v);
 
 		/// <summary>
 		/// Throttles the number of streams (per node) preforming snapshot operation. Defaults to 5
 		/// </summary>
 		/// <param name="concurrentStreams"></param>
-		public HdfsRepositorySettingsDescriptor ConcurrentStreams(int? concurrentStreams) => Assign(a => a.ConcurrentStreams = concurrentStreams);
+		public HdfsRepositorySettingsDescriptor ConcurrentStreams(int? concurrentStreams) => Assign(concurrentStreams, (a, v) => a.ConcurrentStreams = v);
 
 		/// <summary>
 		///  Big files can be broken down into chunks during snapshotting if needed.
@@ -121,7 +119,7 @@ namespace Nest
 		///  i.e. 1g, 10m, 5k. Disabled by default
 		/// </summary>
 		/// <param name="chunkSize"></param>
-		public HdfsRepositorySettingsDescriptor ChunkSize(string chunkSize) => Assign(a => a.ChunkSize = chunkSize);
+		public HdfsRepositorySettingsDescriptor ChunkSize(string chunkSize) => Assign(chunkSize, (a, v) => a.ChunkSize = v);
 	}
 
 	public class HdfsRepositoryDescriptor
@@ -133,6 +131,6 @@ namespace Nest
 
 		public HdfsRepositoryDescriptor Settings(string path, Func<HdfsRepositorySettingsDescriptor, IHdfsRepositorySettings> settingsSelector = null
 		) =>
-			Assign(a => a.Settings = settingsSelector.InvokeOrDefault(new HdfsRepositorySettingsDescriptor().Path(path)));
+			Assign(settingsSelector.InvokeOrDefault(new HdfsRepositorySettingsDescriptor().Path(path)), (a, v) => a.Settings = v);
 	}
 }

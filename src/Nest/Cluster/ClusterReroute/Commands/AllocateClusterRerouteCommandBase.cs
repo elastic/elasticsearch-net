@@ -69,13 +69,13 @@ namespace Nest
 
 		int? IAllocateClusterRerouteCommand.Shard { get; set; }
 
-		public TDescriptor Index(IndexName index) => Assign(a => a.Index = index);
+		public TDescriptor Index(IndexName index) => Assign(index, (a, v) => a.Index = v);
 
-		public TDescriptor Index<T>() where T : class => Assign(a => a.Index = typeof(T));
+		public TDescriptor Index<T>() where T : class => Assign(typeof(T), (a, v) => a.Index = v);
 
-		public TDescriptor Shard(int? shard) => Assign(a => a.Shard = shard);
+		public TDescriptor Shard(int? shard) => Assign(shard, (a, v) => a.Shard = v);
 
-		public TDescriptor Node(string node) => Assign(a => a.Node = node);
+		public TDescriptor Node(string node) => Assign(node, (a, v) => a.Node = v);
 	}
 
 	public class AllocateReplicaClusterRerouteCommandDescriptor
@@ -94,7 +94,7 @@ namespace Nest
 		bool? IAllocateEmptyPrimaryRerouteCommand.AcceptDataLoss { get; set; }
 
 		public AllocateEmptyPrimaryRerouteCommandDescriptor AcceptDataLoss(bool? acceptDataLoss = true) =>
-			Assign(a => a.AcceptDataLoss = acceptDataLoss);
+			Assign(acceptDataLoss, (a, v) => a.AcceptDataLoss = v);
 	}
 
 	public class AllocateStalePrimaryRerouteCommandDescriptor
@@ -106,6 +106,6 @@ namespace Nest
 		bool? IAllocateStalePrimaryRerouteCommand.AcceptDataLoss { get; set; }
 
 		public AllocateStalePrimaryRerouteCommandDescriptor AcceptDataLoss(bool? acceptDataLoss = true) =>
-			Assign(a => a.AcceptDataLoss = acceptDataLoss);
+			Assign(acceptDataLoss, (a, v) => a.AcceptDataLoss = v);
 	}
 }

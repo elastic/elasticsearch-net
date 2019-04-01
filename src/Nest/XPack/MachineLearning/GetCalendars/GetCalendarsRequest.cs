@@ -28,6 +28,6 @@ namespace Nest
 		IPage IGetCalendarsRequest.Page { get; set; }
 
 		/// <inheritdoc cref="IGetCalendarsRequest.Page" />
-		public GetCalendarsDescriptor Page(Func<PageDescriptor, IPage> selector) => Assign(a => a.Page = selector?.Invoke(new PageDescriptor()));
+		public GetCalendarsDescriptor Page(Func<PageDescriptor, IPage> selector) => Assign(selector, (a, v) => a.Page = v?.Invoke(new PageDescriptor()));
 	}
 }

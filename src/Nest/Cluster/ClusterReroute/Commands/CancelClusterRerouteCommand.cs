@@ -41,14 +41,14 @@ namespace Nest
 
 		int? ICancelClusterRerouteCommand.Shard { get; set; }
 
-		public CancelClusterRerouteCommandDescriptor Index(IndexName index) => Assign(a => a.Index = index);
+		public CancelClusterRerouteCommandDescriptor Index(IndexName index) => Assign(index, (a, v) => a.Index = v);
 
-		public CancelClusterRerouteCommandDescriptor Index<T>() where T : class => Assign(a => a.Index = typeof(T));
+		public CancelClusterRerouteCommandDescriptor Index<T>() where T : class => Assign(typeof(T), (a, v) => a.Index = v);
 
-		public CancelClusterRerouteCommandDescriptor Shard(int? shard) => Assign(a => a.Shard = shard);
+		public CancelClusterRerouteCommandDescriptor Shard(int? shard) => Assign(shard, (a, v) => a.Shard = v);
 
-		public CancelClusterRerouteCommandDescriptor Node(string node) => Assign(a => a.Node = node);
+		public CancelClusterRerouteCommandDescriptor Node(string node) => Assign(node, (a, v) => a.Node = v);
 
-		public CancelClusterRerouteCommandDescriptor AllowPrimary(bool? allowPrimary = true) => Assign(a => a.AllowPrimary = allowPrimary);
+		public CancelClusterRerouteCommandDescriptor AllowPrimary(bool? allowPrimary = true) => Assign(allowPrimary, (a, v) => a.AllowPrimary = v);
 	}
 }

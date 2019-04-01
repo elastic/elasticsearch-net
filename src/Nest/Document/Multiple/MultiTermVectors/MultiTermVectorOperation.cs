@@ -201,48 +201,48 @@ namespace Nest
 		/// <inheritdoc cref="IMultiTermVectorOperation.StoredFields" />
 		// TODO: Rename to Fields in 7.x
 		public MultiTermVectorOperationDescriptor<T> StoredFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(a => a.StoredFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+			Assign(fields, (a, v) => a.StoredFields = v?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		/// <inheritdoc cref="IMultiTermVectorOperation.StoredFields" />
 		// TODO: Rename to Fields in 7.x
-		public MultiTermVectorOperationDescriptor<T> StoredFields(Fields fields) => Assign(a => a.StoredFields = fields);
+		public MultiTermVectorOperationDescriptor<T> StoredFields(Fields fields) => Assign(fields, (a, v) => a.StoredFields = v);
 
 		/// <inheritdoc cref="IMultiTermVectorOperation.Id" />
-		public MultiTermVectorOperationDescriptor<T> Id(Id id) => Assign(a => a.Id = id);
+		public MultiTermVectorOperationDescriptor<T> Id(Id id) => Assign(id, (a, v) => a.Id = v);
 
 		/// <inheritdoc cref="IMultiTermVectorOperation.Index" />
-		public MultiTermVectorOperationDescriptor<T> Index(IndexName index) => Assign(a => a.Index = index);
+		public MultiTermVectorOperationDescriptor<T> Index(IndexName index) => Assign(index, (a, v) => a.Index = v);
 
 		/// <inheritdoc cref="IMultiTermVectorOperation.Document" />
-		public MultiTermVectorOperationDescriptor<T> Document(T document) => Assign(a => a.Document = document);
+		public MultiTermVectorOperationDescriptor<T> Document(T document) => Assign(document, (a, v) => a.Document = v);
 
 		/// <inheritdoc cref="IMultiTermVectorOperation.Offsets" />
-		public MultiTermVectorOperationDescriptor<T> Offsets(bool? offsets = true) => Assign(a => a.Offsets = offsets);
+		public MultiTermVectorOperationDescriptor<T> Offsets(bool? offsets = true) => Assign(offsets, (a, v) => a.Offsets = v);
 
 		/// <inheritdoc cref="IMultiTermVectorOperation.Payloads" />
-		public MultiTermVectorOperationDescriptor<T> Payloads(bool? payloads = true) => Assign(a => a.Payloads = payloads);
+		public MultiTermVectorOperationDescriptor<T> Payloads(bool? payloads = true) => Assign(payloads, (a, v) => a.Payloads = v);
 
 		/// <inheritdoc cref="IMultiTermVectorOperation.Positions" />
-		public MultiTermVectorOperationDescriptor<T> Positions(bool? positions = true) => Assign(a => a.Positions = positions);
+		public MultiTermVectorOperationDescriptor<T> Positions(bool? positions = true) => Assign(positions, (a, v) => a.Positions = v);
 
 		/// <inheritdoc cref="IMultiTermVectorOperation.TermStatistics" />
-		public MultiTermVectorOperationDescriptor<T> TermStatistics(bool? termStatistics = true) => Assign(a => a.TermStatistics = termStatistics);
+		public MultiTermVectorOperationDescriptor<T> TermStatistics(bool? termStatistics = true) => Assign(termStatistics, (a, v) => a.TermStatistics = v);
 
 		/// <inheritdoc cref="IMultiTermVectorOperation.FieldStatistics" />
 		public MultiTermVectorOperationDescriptor<T> FieldStatistics(bool? fieldStatistics = true) =>
-			Assign(a => a.FieldStatistics = fieldStatistics);
+			Assign(fieldStatistics, (a, v) => a.FieldStatistics = v);
 
 		/// <inheritdoc cref="IMultiTermVectorOperation.Filter" />
 		public MultiTermVectorOperationDescriptor<T> Filter(Func<TermVectorFilterDescriptor, ITermVectorFilter> filterSelector) =>
-			Assign(a => a.Filter = filterSelector?.Invoke(new TermVectorFilterDescriptor()));
+			Assign(filterSelector, (a, v) => a.Filter = v?.Invoke(new TermVectorFilterDescriptor()));
 
 		/// <inheritdoc cref="IMultiTermVectorOperation.Version" />
-		public MultiTermVectorOperationDescriptor<T> Version(long? version) => Assign(a => a.Version = version);
+		public MultiTermVectorOperationDescriptor<T> Version(long? version) => Assign(version, (a, v) => a.Version = v);
 
 		/// <inheritdoc cref="IMultiTermVectorOperation.VersionType" />
-		public MultiTermVectorOperationDescriptor<T> VersionType(VersionType? versionType) => Assign(a => a.VersionType = versionType);
+		public MultiTermVectorOperationDescriptor<T> VersionType(VersionType? versionType) => Assign(versionType, (a, v) => a.VersionType = v);
 
 		/// <inheritdoc cref="IMultiTermVectorOperation.Routing" />
-		public MultiTermVectorOperationDescriptor<T> Routing(Routing routing) => Assign(a => a.Routing = routing);
+		public MultiTermVectorOperationDescriptor<T> Routing(Routing routing) => Assign(routing, (a, v) => a.Routing = v);
 	}
 }

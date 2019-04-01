@@ -49,11 +49,11 @@ namespace Nest
 			BoundingBox(f => f.WellKnownText(wkt));
 
 		public GeoBoundingBoxQueryDescriptor<T> BoundingBox(Func<BoundingBoxDescriptor, IBoundingBox> boundingBoxSelector) =>
-			Assign(a => a.BoundingBox = boundingBoxSelector?.Invoke(new BoundingBoxDescriptor()));
+			Assign(boundingBoxSelector, (a, v) => a.BoundingBox = v?.Invoke(new BoundingBoxDescriptor()));
 
-		public GeoBoundingBoxQueryDescriptor<T> Type(GeoExecution? type) => Assign(a => a.Type = type);
+		public GeoBoundingBoxQueryDescriptor<T> Type(GeoExecution? type) => Assign(type, (a, v) => a.Type = v);
 
-		public GeoBoundingBoxQueryDescriptor<T> ValidationMethod(GeoValidationMethod? validation) => Assign(a => a.ValidationMethod = validation);
+		public GeoBoundingBoxQueryDescriptor<T> ValidationMethod(GeoValidationMethod? validation) => Assign(validation, (a, v) => a.ValidationMethod = v);
 	}
 
 	internal class GeoBoundingBoxQueryFormatter : IJsonFormatter<IGeoBoundingBoxQuery>

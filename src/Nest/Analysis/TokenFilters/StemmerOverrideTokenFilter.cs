@@ -44,12 +44,12 @@ namespace Nest
 		string IStemmerOverrideTokenFilter.RulesPath { get; set; }
 
 		/// <inheritdoc />
-		public StemmerOverrideTokenFilterDescriptor Rules(IEnumerable<string> rules) => Assign(a => a.Rules = rules);
+		public StemmerOverrideTokenFilterDescriptor Rules(IEnumerable<string> rules) => Assign(rules, (a, v) => a.Rules = v);
 
 		/// <inheritdoc />
-		public StemmerOverrideTokenFilterDescriptor Rules(params string[] rules) => Assign(a => a.Rules = rules);
+		public StemmerOverrideTokenFilterDescriptor Rules(params string[] rules) => Assign(rules, (a, v) => a.Rules = v);
 
 		/// <inheritdoc />
-		public StemmerOverrideTokenFilterDescriptor RulesPath(string path) => Assign(a => a.RulesPath = path);
+		public StemmerOverrideTokenFilterDescriptor RulesPath(string path) => Assign(path, (a, v) => a.RulesPath = v);
 	}
 }

@@ -30,6 +30,6 @@ namespace Nest
 		double? IExtendedStatsAggregation.Sigma { get; set; }
 
 		public ExtendedStatsAggregationDescriptor<T> Sigma(double? sigma) =>
-			Assign(a => a.Sigma = sigma);
+			Assign(sigma, (a, v) => a.Sigma = v);
 	}
 }

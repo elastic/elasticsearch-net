@@ -46,13 +46,13 @@ namespace Nest
 		string IScriptCondition.Lang { get; set; }
 		IDictionary<string, object> IScriptCondition.Params { get; set; }
 
-		public TDescriptor Lang(string lang) => Assign(a => a.Lang = lang);
+		public TDescriptor Lang(string lang) => Assign(lang, (a, v) => a.Lang = v);
 
 		public TDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramsDictionary) =>
-			Assign(a => a.Params = paramsDictionary(new FluentDictionary<string, object>()));
+			Assign(paramsDictionary(new FluentDictionary<string, object>()), (a, v) => a.Params = v);
 
 		public TDescriptor Params(Dictionary<string, object> paramsDictionary) =>
-			Assign(a => a.Params = paramsDictionary);
+			Assign(paramsDictionary, (a, v) => a.Params = v);
 	}
 
 	internal class ScriptConditionFormatter : IJsonFormatter<IScriptCondition>

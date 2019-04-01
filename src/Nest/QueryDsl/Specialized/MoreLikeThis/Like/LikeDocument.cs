@@ -87,26 +87,26 @@ namespace Nest
 			set => _routing = value;
 		}
 
-		public LikeDocumentDescriptor<TDocument> Index(IndexName index) => Assign(a => a.Index = index);
+		public LikeDocumentDescriptor<TDocument> Index(IndexName index) => Assign(index, (a, v) => a.Index = v);
 
-		public LikeDocumentDescriptor<TDocument> Id(Id id) => Assign(a => a.Id = id);
+		public LikeDocumentDescriptor<TDocument> Id(Id id) => Assign(id, (a, v) => a.Id = v);
 
-		public LikeDocumentDescriptor<TDocument> Routing(Routing routing) => Assign(a => a.Routing = routing);
+		public LikeDocumentDescriptor<TDocument> Routing(Routing routing) => Assign(routing, (a, v) => a.Routing = v);
 
 		public LikeDocumentDescriptor<TDocument> Fields(Func<FieldsDescriptor<TDocument>, IPromise<Fields>> fields) =>
-			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<TDocument>())?.Value);
+			Assign(fields, (a, v) => a.Fields = v?.Invoke(new FieldsDescriptor<TDocument>())?.Value);
 
-		public LikeDocumentDescriptor<TDocument> Fields(Fields fields) => Assign(a => a.Fields = fields);
+		public LikeDocumentDescriptor<TDocument> Fields(Fields fields) => Assign(fields, (a, v) => a.Fields = v);
 
-		public LikeDocumentDescriptor<TDocument> Document(TDocument document) => Assign(a =>
+		public LikeDocumentDescriptor<TDocument> Document(TDocument document) => Assign(document,  (a, v) =>
 		{
-			a.Id = Infer.Id(document);
-			a.Document = document;
+			a.Id = Infer.Id(v);
+			a.Document = v;
 		});
 
 		public LikeDocumentDescriptor<TDocument> PerFieldAnalyzer(
 			Func<PerFieldAnalyzerDescriptor<TDocument>, IPromise<IPerFieldAnalyzer>> analyzerSelector
 		) =>
-			Assign(a => a.PerFieldAnalyzer = analyzerSelector?.Invoke(new PerFieldAnalyzerDescriptor<TDocument>())?.Value);
+			Assign(analyzerSelector, (a, v) => a.PerFieldAnalyzer = v?.Invoke(new PerFieldAnalyzerDescriptor<TDocument>())?.Value);
 	}
 }

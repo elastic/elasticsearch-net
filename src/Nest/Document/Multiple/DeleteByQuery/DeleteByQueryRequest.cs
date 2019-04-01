@@ -52,19 +52,19 @@ namespace Nest
 		/// A match_all query to select all documents. Convenient shorthand for specifying
 		/// a match_all query using <see cref="Query" />
 		/// </summary>
-		public DeleteByQueryDescriptor<T> MatchAll() => Assign(a => a.Query = new QueryContainerDescriptor<T>().MatchAll());
+		public DeleteByQueryDescriptor<T> MatchAll() => Assign(new QueryContainerDescriptor<T>().MatchAll(), (a, v) => a.Query = v);
 
 		/// <summary>
 		/// The query to use to select documents for deletion
 		/// </summary>
 		public DeleteByQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
-			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(querySelector, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<T>()));
 
 		/// <summary>
 		/// Parallelize the deleting process. This parallelization can improve efficiency and
 		/// provide a convenient way to break the request down into smaller parts.
 		/// </summary>
 		public DeleteByQueryDescriptor<T> Slice(Func<SlicedScrollDescriptor<T>, ISlicedScroll> selector) =>
-			Assign(a => a.Slice = selector?.Invoke(new SlicedScrollDescriptor<T>()));
+			Assign(selector, (a, v) => a.Slice = v?.Invoke(new SlicedScrollDescriptor<T>()));
 	}
 }

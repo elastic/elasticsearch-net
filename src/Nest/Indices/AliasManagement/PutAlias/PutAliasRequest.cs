@@ -43,16 +43,16 @@ namespace Nest
 		Routing IPutAliasRequest.Routing { get; set; }
 		Routing IPutAliasRequest.SearchRouting { get; set; }
 
-		public PutAliasDescriptor Routing(Routing routing) => Assign(a => a.Routing = routing);
+		public PutAliasDescriptor Routing(Routing routing) => Assign(routing, (a, v) => a.Routing = v);
 
-		public PutAliasDescriptor IndexRouting(Routing routing) => Assign(a => a.IndexRouting = routing);
+		public PutAliasDescriptor IndexRouting(Routing routing) => Assign(routing, (a, v) => a.IndexRouting = v);
 
-		public PutAliasDescriptor SearchRouting(Routing routing) => Assign(a => a.SearchRouting = routing);
+		public PutAliasDescriptor SearchRouting(Routing routing) => Assign(routing, (a, v) => a.SearchRouting = v);
 
 		/// <inheritdoc cref="AliasAddOperation.IsWriteIndex" />
-		public PutAliasDescriptor IsWriteIndex(bool? isWriteIndex = true) => Assign(a => a.IsWriteIndex = isWriteIndex);
+		public PutAliasDescriptor IsWriteIndex(bool? isWriteIndex = true) => Assign(isWriteIndex, (a, v) => a.IsWriteIndex = v);
 
 		public PutAliasDescriptor Filter<T>(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector) where T : class =>
-			Assign(a => a.Filter = filterSelector?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(filterSelector, (a, v) => a.Filter = v?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

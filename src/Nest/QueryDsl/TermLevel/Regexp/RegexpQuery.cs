@@ -39,10 +39,10 @@ namespace Nest
 		string IRegexpQuery.Value { get; set; }
 
 		public RegexpQueryDescriptor<T> MaximumDeterminizedStates(int? maxDeterminizedStates) =>
-			Assign(a => a.MaximumDeterminizedStates = maxDeterminizedStates);
+			Assign(maxDeterminizedStates, (a, v) => a.MaximumDeterminizedStates = v);
 
-		public RegexpQueryDescriptor<T> Value(string regex) => Assign(a => a.Value = regex);
+		public RegexpQueryDescriptor<T> Value(string regex) => Assign(regex, (a, v) => a.Value = v);
 
-		public RegexpQueryDescriptor<T> Flags(string flags) => Assign(a => a.Flags = flags);
+		public RegexpQueryDescriptor<T> Flags(string flags) => Assign(flags, (a, v) => a.Flags = v);
 	}
 }

@@ -111,47 +111,47 @@ namespace Nest
 		/// <summary>
 		/// Sorts by ascending sort order
 		/// </summary>
-		public virtual TDescriptor Ascending() => Assign(a => a.Order = SortOrder.Ascending);
+		public virtual TDescriptor Ascending() => Assign(SortOrder.Ascending, (a, v) => a.Order = v);
 
 		/// <summary>
 		/// Sorts by descending sort order
 		/// </summary>
-		public virtual TDescriptor Descending() => Assign(a => a.Order = SortOrder.Descending);
+		public virtual TDescriptor Descending() => Assign(SortOrder.Descending, (a, v) => a.Order = v);
 
 		/// <inheritdoc cref="ISort.Order" />
-		public virtual TDescriptor Order(SortOrder? order) => Assign(a => a.Order = order);
+		public virtual TDescriptor Order(SortOrder? order) => Assign(order, (a, v) => a.Order = v);
 
 		/// <inheritdoc cref="ISort.Mode" />
-		public virtual TDescriptor Mode(SortMode? mode) => Assign(a => a.Mode = mode);
+		public virtual TDescriptor Mode(SortMode? mode) => Assign(mode, (a, v) => a.Mode = v);
 
 		/// <inheritdoc cref="ISort.NestedFilter" />
 		[Obsolete("Deprecated in 6.1.0. Use Nested. Will be removed in 7.x")]
 		public virtual TDescriptor NestedFilter(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector) =>
-			Assign(a => a.NestedFilter = filterSelector?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(filterSelector, (a, v) => a.NestedFilter = v?.Invoke(new QueryContainerDescriptor<T>()));
 
 		/// <inheritdoc cref="ISort.NestedPath" />
 		[Obsolete("Deprecated in 6.1.0. Use Nested. Will be removed in 7.x")]
-		public virtual TDescriptor NestedPath(Field path) => Assign(a => a.NestedPath = path);
+		public virtual TDescriptor NestedPath(Field path) => Assign(path, (a, v) => a.NestedPath = v);
 
 		/// <inheritdoc cref="ISort.NestedPath" />
 		[Obsolete("Deprecated in 6.1.0. Use Nested. Will be removed in 7.x")]
-		public virtual TDescriptor NestedPath(Expression<Func<T, object>> objectPath) => Assign(a => a.NestedPath = objectPath);
+		public virtual TDescriptor NestedPath(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.NestedPath = v);
 
 		/// <summary>
 		/// Specifies that documents which are missing the sort field should be ordered last
 		/// </summary>
-		public virtual TDescriptor MissingLast() => Assign(a => a.Missing = "_last");
+		public virtual TDescriptor MissingLast() => Assign("_last", (a, v) => a.Missing = v);
 
 		/// <summary>
 		/// Specifies that documents which are missing the sort field should be ordered first
 		/// </summary>
-		public virtual TDescriptor MissingFirst() => Assign(a => a.Missing = "_first");
+		public virtual TDescriptor MissingFirst() => Assign("_first", (a, v) => a.Missing = v);
 
 		/// <inheritdoc cref="ISort.Missing" />
-		public virtual TDescriptor Missing(object value) => Assign(a => a.Missing = value);
+		public virtual TDescriptor Missing(object value) => Assign(value, (a, v) => a.Missing = v);
 
 		/// <inheritdoc cref="ISort.Nested" />
 		public virtual TDescriptor Nested(Func<NestedSortDescriptor<T>, INestedSort> selector) =>
-			Assign(a => a.Nested = selector?.Invoke(new NestedSortDescriptor<T>()));
+			Assign(selector, (a, v) => a.Nested = v?.Invoke(new NestedSortDescriptor<T>()));
 	}
 }

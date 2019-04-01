@@ -129,35 +129,35 @@ namespace Nest
 		public RestoreDescriptor Index<T>() where T : class => Indices(typeof(T));
 
 		/// <inheritdoc cref="IRestoreRequest.Indices" />
-		public RestoreDescriptor Indices(Indices indices) => Assign(a => a.Indices = indices);
+		public RestoreDescriptor Indices(Indices indices) => Assign(indices, (a, v) => a.Indices = v);
 
 		/// <inheritdoc cref="IRestoreRequest.IgnoreUnavailable" />
-		public RestoreDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Assign(a => a.IgnoreUnavailable = ignoreUnavailable);
+		public RestoreDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Assign(ignoreUnavailable, (a, v) => a.IgnoreUnavailable = v);
 
 		/// <inheritdoc cref="IRestoreRequest.IncludeGlobalState" />
-		public RestoreDescriptor IncludeGlobalState(bool? includeGlobalState = true) => Assign(a => a.IncludeGlobalState = includeGlobalState);
+		public RestoreDescriptor IncludeGlobalState(bool? includeGlobalState = true) => Assign(includeGlobalState, (a, v) => a.IncludeGlobalState = v);
 
 		/// <inheritdoc cref="IRestoreRequest.RenamePattern" />
-		public RestoreDescriptor RenamePattern(string renamePattern) => Assign(a => a.RenamePattern = renamePattern);
+		public RestoreDescriptor RenamePattern(string renamePattern) => Assign(renamePattern, (a, v) => a.RenamePattern = v);
 
 		/// <inheritdoc cref="IRestoreRequest.RenameReplacement" />
-		public RestoreDescriptor RenameReplacement(string renameReplacement) => Assign(a => a.RenameReplacement = renameReplacement);
+		public RestoreDescriptor RenameReplacement(string renameReplacement) => Assign(renameReplacement, (a, v) => a.RenameReplacement = v);
 
 		/// <inheritdoc cref="IRestoreRequest.IndexSettings" />
 		public RestoreDescriptor IndexSettings(Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> settingsSelector) =>
-			Assign(a => a.IndexSettings = settingsSelector?.Invoke(new UpdateIndexSettingsDescriptor()));
+			Assign(settingsSelector, (a, v) => a.IndexSettings = v?.Invoke(new UpdateIndexSettingsDescriptor()));
 
 		/// <inheritdoc cref="IRestoreRequest.IgnoreIndexSettings" />
-		public RestoreDescriptor IgnoreIndexSettings(List<string> ignoreIndexSettings) => Assign(a => a.IgnoreIndexSettings = ignoreIndexSettings);
+		public RestoreDescriptor IgnoreIndexSettings(List<string> ignoreIndexSettings) => Assign(ignoreIndexSettings, (a, v) => a.IgnoreIndexSettings = v);
 
 		/// <inheritdoc cref="IRestoreRequest.IgnoreIndexSettings" />
 		public RestoreDescriptor IgnoreIndexSettings(params string[] ignoreIndexSettings) =>
-			Assign(a => a.IgnoreIndexSettings = ignoreIndexSettings.ToListOrNullIfEmpty());
+			Assign(ignoreIndexSettings.ToListOrNullIfEmpty(), (a, v) => a.IgnoreIndexSettings = v);
 
 		/// <inheritdoc cref="IRestoreRequest.IncludeAliases" />
-		public RestoreDescriptor IncludeAliases(bool? includeAliases = true) => Assign(a => a.IncludeAliases = includeAliases);
+		public RestoreDescriptor IncludeAliases(bool? includeAliases = true) => Assign(includeAliases, (a, v) => a.IncludeAliases = v);
 
 		/// <inheritdoc cref="IRestoreRequest.Partial" />
-		public RestoreDescriptor Partial(bool? partial = true) => Assign(a => a.Partial = partial);
+		public RestoreDescriptor Partial(bool? partial = true) => Assign(partial, (a, v) => a.Partial = v);
 	}
 }

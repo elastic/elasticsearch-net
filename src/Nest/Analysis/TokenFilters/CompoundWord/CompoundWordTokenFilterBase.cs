@@ -96,27 +96,27 @@ namespace Nest
 		string ICompoundWordTokenFilter.WordListPath { get; set; }
 
 		/// <inheritdoc />
-		public TCompound WordList(IEnumerable<string> wordList) => Assign(a => a.WordList = wordList);
+		public TCompound WordList(IEnumerable<string> wordList) => Assign(wordList, (a, v) => a.WordList = v);
 
 		/// <inheritdoc />
-		public TCompound WordList(params string[] wordList) => Assign(a => a.WordList = wordList);
+		public TCompound WordList(params string[] wordList) => Assign(wordList, (a, v) => a.WordList = v);
 
 		/// <inheritdoc />
-		public TCompound WordListPath(string path) => Assign(a => a.WordListPath = path);
+		public TCompound WordListPath(string path) => Assign(path, (a, v) => a.WordListPath = v);
 
 		/// <inheritdoc />
-		public TCompound HyphenationPatternsPath(string path) => Assign(a => a.HyphenationPatternsPath = path);
+		public TCompound HyphenationPatternsPath(string path) => Assign(path, (a, v) => a.HyphenationPatternsPath = v);
 
 		/// <inheritdoc />
-		public TCompound MinWordSize(int? minWordSize) => Assign(a => a.MinWordSize = minWordSize);
+		public TCompound MinWordSize(int? minWordSize) => Assign(minWordSize, (a, v) => a.MinWordSize = v);
 
 		/// <inheritdoc />
-		public TCompound MinSubwordSize(int? minSubwordSize) => Assign(a => a.MinSubwordSize = minSubwordSize);
+		public TCompound MinSubwordSize(int? minSubwordSize) => Assign(minSubwordSize, (a, v) => a.MinSubwordSize = v);
 
 		/// <inheritdoc />
-		public TCompound MaxSubwordSize(int? maxSubwordSize) => Assign(a => a.MaxSubwordSize = maxSubwordSize);
+		public TCompound MaxSubwordSize(int? maxSubwordSize) => Assign(maxSubwordSize, (a, v) => a.MaxSubwordSize = v);
 
 		/// <inheritdoc />
-		public TCompound OnlyLongestMatch(bool? onlyLongest = true) => Assign(a => a.OnlyLongestMatch = onlyLongest);
+		public TCompound OnlyLongestMatch(bool? onlyLongest = true) => Assign(onlyLongest, (a, v) => a.OnlyLongestMatch = v);
 	}
 }

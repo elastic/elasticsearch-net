@@ -62,10 +62,10 @@ namespace Nest
 		/// <summary>
 		/// The object to infer the id off, (if id is not passed using Id())
 		/// </summary>
-		public BulkDeleteDescriptor<T> Document(T @object) => Assign(a => a.Document = @object);
+		public BulkDeleteDescriptor<T> Document(T @object) => Assign(@object, (a, v) => a.Document = v);
 
-		public BulkDeleteDescriptor<T> IfSeqNo(long? seqNo) => Assign(a => a.IfSeqNo = seqNo);
+		public BulkDeleteDescriptor<T> IfSeqNo(long? seqNo) => Assign(seqNo, (a, v) => a.IfSeqNo = v);
 
-		public BulkDeleteDescriptor<T> IfPrimaryTerm(long? primaryTerm) => Assign(a => a.IfSeqNo = primaryTerm);
+		public BulkDeleteDescriptor<T> IfPrimaryTerm(long? primaryTerm) => Assign(primaryTerm, (a, v) => a.IfPrimaryTerm = v);
 	}
 }

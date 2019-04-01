@@ -46,18 +46,18 @@ namespace Nest
 		string ICircuitBreakerSettings.TotalLimit { get; set; }
 
 		/// <inheritdoc />
-		public CircuitBreakerSettingsDescriptor TotalLimit(string limit) => Assign(a => a.TotalLimit = limit);
+		public CircuitBreakerSettingsDescriptor TotalLimit(string limit) => Assign(limit, (a, v) => a.TotalLimit = v);
 
 		/// <inheritdoc />
-		public CircuitBreakerSettingsDescriptor FielddataLimit(string limit) => Assign(a => a.FielddataLimit = limit);
+		public CircuitBreakerSettingsDescriptor FielddataLimit(string limit) => Assign(limit, (a, v) => a.FielddataLimit = v);
 
 		/// <inheritdoc />
-		public CircuitBreakerSettingsDescriptor RequestLimit(string limit) => Assign(a => a.RequestLimit = limit);
+		public CircuitBreakerSettingsDescriptor RequestLimit(string limit) => Assign(limit, (a, v) => a.RequestLimit = v);
 
 		/// <inheritdoc />
-		public CircuitBreakerSettingsDescriptor FielddataOverhead(float? overhead) => Assign(a => a.FielddataOverhead = overhead);
+		public CircuitBreakerSettingsDescriptor FielddataOverhead(float? overhead) => Assign(overhead, (a, v) => a.FielddataOverhead = v);
 
 		/// <inheritdoc />
-		public CircuitBreakerSettingsDescriptor RequestOverhead(float? overhead) => Assign(a => a.RequestOverhead = overhead);
+		public CircuitBreakerSettingsDescriptor RequestOverhead(float? overhead) => Assign(overhead, (a, v) => a.RequestOverhead = v);
 	}
 }

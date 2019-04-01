@@ -21,11 +21,17 @@ namespace Nest
 	{
 		public EmailAttachmentsDescriptor() : base(new EmailAttachments()) { }
 
-		public EmailAttachmentsDescriptor HttpAttachment(string name, Func<HttpAttachmentDescriptor, IHttpAttachment> selector) =>
-			Assign(a => a.Add(name, selector?.Invoke(new HttpAttachmentDescriptor())));
+		public EmailAttachmentsDescriptor HttpAttachment(string name, Func<HttpAttachmentDescriptor, IHttpAttachment> selector)
+		{
+			PromisedValue.Add(name, selector?.Invoke(new HttpAttachmentDescriptor()));
+			return this;
+		}
 
-		public EmailAttachmentsDescriptor DataAttachment(string name, Func<DataAttachmentDescriptor, IDataAttachment> selector) =>
-			Assign(a => a.Add(name, selector?.Invoke(new DataAttachmentDescriptor())));
+		public EmailAttachmentsDescriptor DataAttachment(string name, Func<DataAttachmentDescriptor, IDataAttachment> selector)
+		{
+			PromisedValue.Add(name, selector?.Invoke(new DataAttachmentDescriptor()));
+			return this;
+		}
 	}
 
 	public interface IEmailAttachment { }

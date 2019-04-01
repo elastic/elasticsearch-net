@@ -34,10 +34,10 @@ namespace Nest
 		IHttpInputRequest IHttpAttachment.Request { get; set; }
 
 		public HttpAttachmentDescriptor Request(Func<HttpInputRequestDescriptor, IHttpInputRequest> selector) =>
-			Assign(a => a.Request = selector.InvokeOrDefault(new HttpInputRequestDescriptor()));
+			Assign(selector.InvokeOrDefault(new HttpInputRequestDescriptor()), (a, v) => a.Request = v);
 
-		public HttpAttachmentDescriptor Inline(bool? inline = true) => Assign(a => a.Inline = inline);
+		public HttpAttachmentDescriptor Inline(bool? inline = true) => Assign(inline, (a, v) => a.Inline = v);
 
-		public HttpAttachmentDescriptor ContentType(string contentType) => Assign(a => a.ContentType = contentType);
+		public HttpAttachmentDescriptor ContentType(string contentType) => Assign(contentType, (a, v) => a.ContentType = v);
 	}
 }

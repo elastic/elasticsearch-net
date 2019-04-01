@@ -34,13 +34,13 @@ namespace Nest
 		Routing IAlias.Routing { get; set; }
 		Routing IAlias.SearchRouting { get; set; }
 
-		public AliasDescriptor Routing(Routing routing) => Assign(a => a.Routing = routing);
+		public AliasDescriptor Routing(Routing routing) => Assign(routing, (a, v) => a.Routing = v);
 
-		public AliasDescriptor IndexRouting(Routing indexRouting) => Assign(a => a.IndexRouting = indexRouting);
+		public AliasDescriptor IndexRouting(Routing indexRouting) => Assign(indexRouting, (a, v) => a.IndexRouting = v);
 
-		public AliasDescriptor SearchRouting(Routing searchRouting) => Assign(a => a.SearchRouting = searchRouting);
+		public AliasDescriptor SearchRouting(Routing searchRouting) => Assign(searchRouting, (a, v) => a.SearchRouting = v);
 
 		public AliasDescriptor Filter<T>(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector) where T : class =>
-			Assign(a => a.Filter = filterSelector?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(filterSelector, (a, v) => a.Filter = v?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

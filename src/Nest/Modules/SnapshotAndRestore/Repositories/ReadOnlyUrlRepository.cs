@@ -44,14 +44,14 @@ namespace Nest
 		/// Location of the snapshots. Mandatory.
 		/// </summary>
 		/// <param name="location"></param>
-		public ReadOnlyUrlRepositorySettingsDescriptor Location(string location) => Assign(a => a.Location = location);
+		public ReadOnlyUrlRepositorySettingsDescriptor Location(string location) => Assign(location, (a, v) => a.Location = v);
 
 		/// <summary>
 		/// Throttles the number of streams (per node) preforming snapshot operation. Defaults to 5
 		/// </summary>
 		/// <param name="concurrentStreams"></param>
 		public ReadOnlyUrlRepositorySettingsDescriptor ConcurrentStreams(int? concurrentStreams) =>
-			Assign(a => a.ConcurrentStreams = concurrentStreams);
+			Assign(concurrentStreams, (a, v) => a.ConcurrentStreams = v);
 	}
 
 	public class ReadOnlyUrlRepositoryDescriptor
@@ -64,6 +64,6 @@ namespace Nest
 		public ReadOnlyUrlRepositoryDescriptor Settings(string location,
 			Func<ReadOnlyUrlRepositorySettingsDescriptor, IReadOnlyUrlRepositorySettings> settingsSelector = null
 		) =>
-			Assign(a => a.Settings = settingsSelector.InvokeOrDefault(new ReadOnlyUrlRepositorySettingsDescriptor().Location(location)));
+			Assign(settingsSelector.InvokeOrDefault(new ReadOnlyUrlRepositorySettingsDescriptor().Location(location)), (a, v) => a.Settings = v);
 	}
 }

@@ -60,9 +60,9 @@ namespace Nest
 		string INoriTokenizer.UserDictionary { get; set; }
 
 		/// <inheritdoc cref="INoriTokenizer.DecompoundMode" />
-		public NoriTokenizerDescriptor DecompoundMode(NoriDecompoundMode? mode) => Assign(a => a.DecompoundMode = mode);
+		public NoriTokenizerDescriptor DecompoundMode(NoriDecompoundMode? mode) => Assign(mode, (a, v) => a.DecompoundMode = v);
 
 		/// <inheritdoc cref="INoriTokenizer.UserDictionary" />
-		public NoriTokenizerDescriptor UserDictionary(string path) => Assign(a => a.UserDictionary = path);
+		public NoriTokenizerDescriptor UserDictionary(string path) => Assign(path, (a, v) => a.UserDictionary = v);
 	}
 }

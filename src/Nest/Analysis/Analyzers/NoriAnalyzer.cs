@@ -50,15 +50,15 @@ namespace Nest
 		string INoriAnalyzer.UserDictionary { get; set; }
 
 		/// <inheritdoc cref="INoriTokenizer.DecompoundMode" />
-		public NoriAnalyzerDescriptor DecompoundMode(NoriDecompoundMode? mode) => Assign(a => a.DecompoundMode = mode);
+		public NoriAnalyzerDescriptor DecompoundMode(NoriDecompoundMode? mode) => Assign(mode, (a, v) => a.DecompoundMode = v);
 
 		/// <inheritdoc cref="INoriTokenizer.UserDictionary" />
-		public NoriAnalyzerDescriptor UserDictionary(string path) => Assign(a => a.UserDictionary = path);
+		public NoriAnalyzerDescriptor UserDictionary(string path) => Assign(path, (a, v) => a.UserDictionary = v);
 
 		///<inheritdoc cref="INoriPartOfSpeechTokenFilter.StopTags" />
-		public NoriAnalyzerDescriptor StopTags(IEnumerable<string> stopTags) => Assign(a => a.StopTags = stopTags);
+		public NoriAnalyzerDescriptor StopTags(IEnumerable<string> stopTags) => Assign(stopTags, (a, v) => a.StopTags = v);
 
 		///<inheritdoc cref="INoriPartOfSpeechTokenFilter.StopTags" />
-		public NoriAnalyzerDescriptor StopTags(params string[] stopTags) => Assign(a => a.StopTags = stopTags);
+		public NoriAnalyzerDescriptor StopTags(params string[] stopTags) => Assign(stopTags, (a, v) => a.StopTags = v);
 	}
 }

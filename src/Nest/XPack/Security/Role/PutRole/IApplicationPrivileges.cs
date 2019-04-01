@@ -50,7 +50,7 @@ namespace Nest
 		/// Adds an application privilege
 		/// </summary>
 		public ApplicationPrivilegesListDescriptor Add(Func<ApplicationPrivilegesDescriptor, IApplicationPrivileges> selector) =>
-			Assign(a => a.AddIfNotNull(selector?.Invoke(new ApplicationPrivilegesDescriptor())));
+			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new ApplicationPrivilegesDescriptor())));
 	}
 
 	/// <inheritdoc cref="IApplicationPrivileges" />
@@ -67,18 +67,18 @@ namespace Nest
 		IEnumerable<string> IApplicationPrivileges.Resources { get; set; }
 
 		/// <inheritdoc cref="IApplicationPrivileges.Application" />
-		public ApplicationPrivilegesDescriptor Application(string application) => Assign(a => a.Application = application);
+		public ApplicationPrivilegesDescriptor Application(string application) => Assign(application, (a, v) => a.Application = v);
 
 		/// <inheritdoc cref="IApplicationPrivileges.Privileges" />
-		public ApplicationPrivilegesDescriptor Privileges(params string[] privileges) => Assign(a => a.Privileges = privileges);
+		public ApplicationPrivilegesDescriptor Privileges(params string[] privileges) => Assign(privileges, (a, v) => a.Privileges = v);
 
 		/// <inheritdoc cref="IApplicationPrivileges.Privileges" />
-		public ApplicationPrivilegesDescriptor Privileges(IEnumerable<string> privileges) => Assign(a => a.Privileges = privileges);
+		public ApplicationPrivilegesDescriptor Privileges(IEnumerable<string> privileges) => Assign(privileges, (a, v) => a.Privileges = v);
 
 		/// <inheritdoc cref="IApplicationPrivileges.Resources" />
-		public ApplicationPrivilegesDescriptor Resources(params string[] resources) => Assign(a => a.Resources = resources);
+		public ApplicationPrivilegesDescriptor Resources(params string[] resources) => Assign(resources, (a, v) => a.Resources = v);
 
 		/// <inheritdoc cref="IApplicationPrivileges.Resources" />
-		public ApplicationPrivilegesDescriptor Resources(IEnumerable<string> resources) => Assign(a => a.Resources = resources);
+		public ApplicationPrivilegesDescriptor Resources(IEnumerable<string> resources) => Assign(resources, (a, v) => a.Resources = v);
 	}
 }

@@ -49,15 +49,15 @@ namespace Nest
 
 		int? IGeoHashGridAggregation.Size { get; set; }
 
-		public GeoHashGridAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public GeoHashGridAggregationDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public GeoHashGridAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public GeoHashGridAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
 
-		public GeoHashGridAggregationDescriptor<T> Size(int? size) => Assign(a => a.Size = size);
+		public GeoHashGridAggregationDescriptor<T> Size(int? size) => Assign(size, (a, v) => a.Size = v);
 
-		public GeoHashGridAggregationDescriptor<T> ShardSize(int? shardSize) => Assign(a => a.ShardSize = shardSize);
+		public GeoHashGridAggregationDescriptor<T> ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSize = v);
 
 		public GeoHashGridAggregationDescriptor<T> GeoHashPrecision(GeoHashPrecision? precision) =>
-			Assign(a => a.Precision = precision);
+			Assign(precision, (a, v) => a.Precision = v);
 	}
 }

@@ -93,7 +93,7 @@ namespace Nest
 		public SlackAttachmentsDescriptor() : base(new List<ISlackAttachment>()) { }
 
 		public SlackAttachmentsDescriptor Attachment(Func<SlackAttachmentDescriptor, ISlackAttachment> selector) =>
-			Assign(a => a.AddIfNotNull(selector?.Invoke(new SlackAttachmentDescriptor())));
+			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new SlackAttachmentDescriptor())));
 	}
 
 	public class SlackAttachmentDescriptor : DescriptorBase<SlackAttachmentDescriptor, ISlackAttachment>, ISlackAttachment
@@ -114,33 +114,33 @@ namespace Nest
 		string ISlackAttachment.TitleLink { get; set; }
 		DateTimeOffset? ISlackAttachment.Ts { get; set; }
 
-		public SlackAttachmentDescriptor Fallback(string fallback) => Assign(a => a.Fallback = fallback);
+		public SlackAttachmentDescriptor Fallback(string fallback) => Assign(fallback, (a, v) => a.Fallback = v);
 
-		public SlackAttachmentDescriptor Color(string color) => Assign(a => a.Color = color);
+		public SlackAttachmentDescriptor Color(string color) => Assign(color, (a, v) => a.Color = v);
 
-		public SlackAttachmentDescriptor Pretext(string pretext) => Assign(a => a.Pretext = pretext);
+		public SlackAttachmentDescriptor Pretext(string pretext) => Assign(pretext, (a, v) => a.Pretext = v);
 
-		public SlackAttachmentDescriptor AuthorName(string authorName) => Assign(a => a.AuthorName = authorName);
+		public SlackAttachmentDescriptor AuthorName(string authorName) => Assign(authorName, (a, v) => a.AuthorName = v);
 
-		public SlackAttachmentDescriptor AuthorIcon(string authorIcon) => Assign(a => a.AuthorIcon = authorIcon);
+		public SlackAttachmentDescriptor AuthorIcon(string authorIcon) => Assign(authorIcon, (a, v) => a.AuthorIcon = v);
 
-		public SlackAttachmentDescriptor Title(string title) => Assign(a => a.Title = title);
+		public SlackAttachmentDescriptor Title(string title) => Assign(title, (a, v) => a.Title = v);
 
-		public SlackAttachmentDescriptor TitleLink(string titleLink) => Assign(a => a.TitleLink = titleLink);
+		public SlackAttachmentDescriptor TitleLink(string titleLink) => Assign(titleLink, (a, v) => a.TitleLink = v);
 
-		public SlackAttachmentDescriptor Text(string text) => Assign(a => a.Text = text);
+		public SlackAttachmentDescriptor Text(string text) => Assign(text, (a, v) => a.Text = v);
 
 		public SlackAttachmentDescriptor Fields(Func<SlackAttachmentFieldsDescriptor, IPromise<IList<ISlackAttachmentField>>> selector) =>
-			Assign(a => a.Fields = selector?.Invoke(new SlackAttachmentFieldsDescriptor())?.Value);
+			Assign(selector, (a, v) => a.Fields = v?.Invoke(new SlackAttachmentFieldsDescriptor())?.Value);
 
-		public SlackAttachmentDescriptor ImageUrl(string url) => Assign(a => a.ImageUrl = url);
+		public SlackAttachmentDescriptor ImageUrl(string url) => Assign(url, (a, v) => a.ImageUrl = v);
 
-		public SlackAttachmentDescriptor ThumbUrl(string url) => Assign(a => a.ThumbUrl = url);
+		public SlackAttachmentDescriptor ThumbUrl(string url) => Assign(url, (a, v) => a.ThumbUrl = v);
 
-		public SlackAttachmentDescriptor Footer(string footer) => Assign(a => a.Footer = footer);
+		public SlackAttachmentDescriptor Footer(string footer) => Assign(footer, (a, v) => a.Footer = v);
 
-		public SlackAttachmentDescriptor FooterIcon(string footerIcon) => Assign(a => a.FooterIcon = footerIcon);
+		public SlackAttachmentDescriptor FooterIcon(string footerIcon) => Assign(footerIcon, (a, v) => a.FooterIcon = v);
 
-		public SlackAttachmentDescriptor Ts(DateTimeOffset? ts) => Assign(a => a.Ts = ts);
+		public SlackAttachmentDescriptor Ts(DateTimeOffset? ts) => Assign(ts, (a, v) => a.Ts = v);
 	}
 }

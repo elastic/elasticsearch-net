@@ -44,18 +44,18 @@ namespace Nest
 		ITokenizers IAnalysis.Tokenizers { get; set; }
 
 		public AnalysisDescriptor Analyzers(Func<AnalyzersDescriptor, IPromise<IAnalyzers>> selector) =>
-			Assign(a => a.Analyzers = selector?.Invoke(new AnalyzersDescriptor())?.Value);
+			Assign(selector, (a, v) => a.Analyzers = v?.Invoke(new AnalyzersDescriptor())?.Value);
 
 		public AnalysisDescriptor CharFilters(Func<CharFiltersDescriptor, IPromise<ICharFilters>> selector) =>
-			Assign(a => a.CharFilters = selector?.Invoke(new CharFiltersDescriptor())?.Value);
+			Assign(selector, (a, v) => a.CharFilters = v?.Invoke(new CharFiltersDescriptor())?.Value);
 
 		public AnalysisDescriptor TokenFilters(Func<TokenFiltersDescriptor, IPromise<ITokenFilters>> selector) =>
-			Assign(a => a.TokenFilters = selector?.Invoke(new TokenFiltersDescriptor())?.Value);
+			Assign(selector, (a, v) => a.TokenFilters = v?.Invoke(new TokenFiltersDescriptor())?.Value);
 
 		public AnalysisDescriptor Tokenizers(Func<TokenizersDescriptor, IPromise<ITokenizers>> selector) =>
-			Assign(a => a.Tokenizers = selector?.Invoke(new TokenizersDescriptor())?.Value);
+			Assign(selector, (a, v) => a.Tokenizers = v?.Invoke(new TokenizersDescriptor())?.Value);
 
 		public AnalysisDescriptor Normalizers(Func<NormalizersDescriptor, IPromise<INormalizers>> selector) =>
-			Assign(a => a.Normalizers = selector?.Invoke(new NormalizersDescriptor())?.Value);
+			Assign(selector, (a, v) => a.Normalizers = v?.Invoke(new NormalizersDescriptor())?.Value);
 	}
 }

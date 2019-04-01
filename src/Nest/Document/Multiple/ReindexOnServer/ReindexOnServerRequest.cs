@@ -77,23 +77,23 @@ namespace Nest
 
 		/// <inheritdoc cref="IReindexOnServerRequest.Source" />
 		public ReindexOnServerDescriptor Source(Func<ReindexSourceDescriptor, IReindexSource> selector = null) =>
-			Assign(a => a.Source = selector.InvokeOrDefault(new ReindexSourceDescriptor()));
+			Assign(selector.InvokeOrDefault(new ReindexSourceDescriptor()), (a, v) => a.Source = v);
 
 		/// <inheritdoc cref="IReindexOnServerRequest.Destination" />
 		public ReindexOnServerDescriptor Destination(Func<ReindexDestinationDescriptor, IReindexDestination> selector) =>
-			Assign(a => a.Destination = selector?.Invoke(new ReindexDestinationDescriptor()));
+			Assign(selector, (a, v) => a.Destination = v?.Invoke(new ReindexDestinationDescriptor()));
 
 		/// <inheritdoc cref="IReindexOnServerRequest.Script" />
-		public ReindexOnServerDescriptor Script(string script) => Assign(a => a.Script = (InlineScript)script);
+		public ReindexOnServerDescriptor Script(string script) => Assign((InlineScript)script, (a, v) => a.Script = v);
 
 		/// <inheritdoc cref="IReindexOnServerRequest.Script" />
 		public ReindexOnServerDescriptor Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
-			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
+			Assign(scriptSelector, (a, v) => a.Script = v?.Invoke(new ScriptDescriptor()));
 
 		/// <inheritdoc cref="IReindexOnServerRequest.Size" />
-		public ReindexOnServerDescriptor Size(long? size) => Assign(a => a.Size = size);
+		public ReindexOnServerDescriptor Size(long? size) => Assign(size, (a, v) => a.Size = v);
 
 		/// <inheritdoc cref="IReindexOnServerRequest.Conflicts" />
-		public ReindexOnServerDescriptor Conflicts(Conflicts? conflicts) => Assign(a => a.Conflicts = conflicts);
+		public ReindexOnServerDescriptor Conflicts(Conflicts? conflicts) => Assign(conflicts, (a, v) => a.Conflicts = v);
 	}
 }

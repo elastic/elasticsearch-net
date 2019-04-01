@@ -25,10 +25,10 @@ namespace Nest
 
 		/// <inheritdoc />
 		public MergeSettingsDescriptor Policy(Func<MergePolicySettingsDescriptor, IMergePolicySettings> selector) =>
-			Assign(a => a.Policy = selector?.Invoke(new MergePolicySettingsDescriptor()));
+			Assign(selector, (a, v) => a.Policy = v?.Invoke(new MergePolicySettingsDescriptor()));
 
 		/// <inheritdoc />
 		public MergeSettingsDescriptor Scheduler(Func<MergeSchedulerSettingsDescriptor, IMergeSchedulerSettings> selector) =>
-			Assign(a => a.Scheduler = selector?.Invoke(new MergeSchedulerSettingsDescriptor()));
+			Assign(selector, (a, v) => a.Scheduler = v?.Invoke(new MergeSchedulerSettingsDescriptor()));
 	}
 }

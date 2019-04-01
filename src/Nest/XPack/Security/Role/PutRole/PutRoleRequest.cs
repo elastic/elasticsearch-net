@@ -97,43 +97,43 @@ namespace Nest
 
 		/// <inheritdoc cref="IPutRoleRequest.Applications" />
 		public PutRoleDescriptor Applications(IEnumerable<IApplicationPrivileges> privileges) =>
-			Assign(a => a.Applications = privileges.ToListOrNullIfEmpty());
+			Assign(privileges.ToListOrNullIfEmpty(), (a, v) => a.Applications = v);
 
 		/// <inheritdoc cref="IPutRoleRequest.Applications" />
 		public PutRoleDescriptor Applications(Func<ApplicationPrivilegesListDescriptor, IPromise<IList<IApplicationPrivileges>>> selector) =>
-			Assign(a => a.Applications = selector?.Invoke(new ApplicationPrivilegesListDescriptor())?.Value);
+			Assign(selector, (a, v) => a.Applications = v?.Invoke(new ApplicationPrivilegesListDescriptor())?.Value);
 
 		/// <inheritdoc cref="IPutRoleRequest.Cluster" />
-		public PutRoleDescriptor Cluster(IEnumerable<string> clusters) => Assign(a => a.Cluster = clusters);
+		public PutRoleDescriptor Cluster(IEnumerable<string> clusters) => Assign(clusters, (a, v) => a.Cluster = v);
 
 		/// <inheritdoc cref="IPutRoleRequest.Cluster" />
-		public PutRoleDescriptor Cluster(params string[] clusters) => Assign(a => a.Cluster = clusters);
+		public PutRoleDescriptor Cluster(params string[] clusters) => Assign(clusters, (a, v) => a.Cluster = v);
 
 		/// <inheritdoc cref="IPutRoleRequest.Global" />
-		public PutRoleDescriptor Global(IDictionary<string, object> global) => Assign(a => a.Global = global);
+		public PutRoleDescriptor Global(IDictionary<string, object> global) => Assign(global, (a, v) => a.Global = v);
 
 		/// <inheritdoc cref="IPutRoleRequest.Global" />
 		public PutRoleDescriptor Global(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) =>
-			Assign(a => a.Global = selector?.Invoke(new FluentDictionary<string, object>()));
+			Assign(selector, (a, v) => a.Global = v?.Invoke(new FluentDictionary<string, object>()));
 
 		/// <inheritdoc cref="IPutRoleRequest.RunAs" />
-		public PutRoleDescriptor RunAs(IEnumerable<string> users) => Assign(a => a.RunAs = users);
+		public PutRoleDescriptor RunAs(IEnumerable<string> users) => Assign(users, (a, v) => a.RunAs = v);
 
 		/// <inheritdoc cref="IPutRoleRequest.RunAs" />
-		public PutRoleDescriptor RunAs(params string[] users) => Assign(a => a.RunAs = users);
+		public PutRoleDescriptor RunAs(params string[] users) => Assign(users, (a, v) => a.RunAs = v);
 
 		/// <inheritdoc cref="IPutRoleRequest.Indices" />
-		public PutRoleDescriptor Indices(IEnumerable<IIndicesPrivileges> privileges) => Assign(a => a.Indices = privileges.ToListOrNullIfEmpty());
+		public PutRoleDescriptor Indices(IEnumerable<IIndicesPrivileges> privileges) => Assign(privileges.ToListOrNullIfEmpty(), (a, v) => a.Indices = v);
 
 		/// <inheritdoc cref="IPutRoleRequest.Indices" />
 		public PutRoleDescriptor Indices(Func<IndicesPrivilegesDescriptor, IPromise<IList<IIndicesPrivileges>>> selector) =>
-			Assign(a => a.Indices = selector?.Invoke(new IndicesPrivilegesDescriptor())?.Value);
+			Assign(selector, (a, v) => a.Indices = v?.Invoke(new IndicesPrivilegesDescriptor())?.Value);
 
 		/// <inheritdoc cref="IPutRoleRequest.Metadata" />
-		public PutRoleDescriptor Metadata(IDictionary<string, object> metadata) => Assign(a => a.Metadata = metadata);
+		public PutRoleDescriptor Metadata(IDictionary<string, object> metadata) => Assign(metadata, (a, v) => a.Metadata = v);
 
 		/// <inheritdoc cref="IPutRoleRequest.Metadata" />
 		public PutRoleDescriptor Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) =>
-			Assign(a => a.Metadata = selector?.Invoke(new FluentDictionary<string, object>()));
+			Assign(selector, (a, v) => a.Metadata = v?.Invoke(new FluentDictionary<string, object>()));
 	}
 }

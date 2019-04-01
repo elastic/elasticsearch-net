@@ -67,20 +67,20 @@ namespace Nest
 		bool? IProcessor.IgnoreFailure { get; set; }
 
 		/// <inheritdoc cref="IProcessor.OnFailure"/>
-		public TProcessorDescriptor OnFailure(IEnumerable<IProcessor> processors) => Assign(a => a.OnFailure = processors.ToListOrNullIfEmpty());
+		public TProcessorDescriptor OnFailure(IEnumerable<IProcessor> processors) => Assign(processors.ToListOrNullIfEmpty(), (a, v) => a.OnFailure = v);
 
 		/// <inheritdoc cref="IProcessor.OnFailure"/>
 		public TProcessorDescriptor OnFailure(Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> selector) =>
-			Assign(a => a.OnFailure = selector?.Invoke(new ProcessorsDescriptor())?.Value);
+			Assign(selector, (a, v) => a.OnFailure = v?.Invoke(new ProcessorsDescriptor())?.Value);
 
 		/// <inheritdoc cref="IProcessor.If"/>
-		public TProcessorDescriptor If(string painlessPredicate) => Assign(a => a.If = painlessPredicate);
+		public TProcessorDescriptor If(string painlessPredicate) => Assign(painlessPredicate, (a, v) => a.If = v);
 
 		/// <inheritdoc cref="IProcessor.Tag"/>
-		public TProcessorDescriptor Tag(string tag) => Assign(a => a.Tag = tag);
+		public TProcessorDescriptor Tag(string tag) => Assign(tag, (a, v) => a.Tag = v);
 
 		/// <inheritdoc cref="IProcessor.IgnoreFailure"/>
-		public TProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true) => Assign(a => a.IgnoreFailure = ignoreFailure);
+		public TProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailure = v);
 
 	}
 

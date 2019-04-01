@@ -84,20 +84,20 @@ namespace ApiGenerator.Domain
 				else
 					paramName = paramName.ToLowerInvariant();
 
-				var routeValue = paramName;
+				var routeValue = "v";
 				var routeSetter = p.Required ? "Required" : "Optional";
 
-				if (paramName == "metric" || paramName == "watcherStatsMetric") routeValue = "(Metrics)" + paramName;
-				else if (paramName == "indexMetric") routeValue = "(IndexMetrics)indexMetric";
+				if (paramName == "metric" || paramName == "watcherStatsMetric") routeValue = "(Metrics)v";
+				else if (paramName == "indexMetric") routeValue = "(IndexMetrics)v";
 
 				var code =
-					$"public {returnType} {p.InterfaceName}({p.ClrTypeName} {paramName}) => Assign(a=>a.RouteValues.{routeSetter}(\"{p.Name}\", {routeValue}));";
+					$"public {returnType} {p.InterfaceName}({p.ClrTypeName} {paramName}) => Assign({paramName}, (a,v)=>a.RouteValues.{routeSetter}(\"{p.Name}\", {routeValue}));";
 				var xmlDoc = $"///<summary>{p.Description}</summary>";
 				setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
 				if (paramName == "index")
 				{
 					code = $"public {returnType} {p.InterfaceName}<TOther>() where TOther : class ";
-					code += $"=> Assign(a=>a.RouteValues.{routeSetter}(\"{p.Name}\", ({p.ClrTypeName})typeof(TOther)));";
+					code += $"=> Assign(typeof(TOther), (a,v)=>a.RouteValues.{routeSetter}(\"{p.Name}\", ({p.ClrTypeName})v));";
 					xmlDoc = $"///<summary>a shortcut into calling {p.InterfaceName}(typeof(TOther))</summary>";
 					setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
 				}
@@ -110,7 +110,7 @@ namespace ApiGenerator.Domain
 				if (paramName == "fields" && p.Type == "list")
 				{
 					code = $"public {returnType} Fields<T>(params Expression<Func<T, object>>[] fields) ";
-					code += $"=> Assign(a => a.RouteValues.{routeSetter}(\"fields\", (Fields)fields));";
+					code += $"=> Assign(fields, (a,v)=>a.RouteValues.{routeSetter}(\"fields\", (Fields)v));";
 					xmlDoc = $"///<summary>{p.Description}</summary>";
 					setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
 				}

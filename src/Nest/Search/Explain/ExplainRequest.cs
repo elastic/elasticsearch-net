@@ -38,7 +38,7 @@ namespace Nest
 		QueryContainer IExplainRequest<TDocument>.Query { get; set; }
 
 		public ExplainDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> querySelector) =>
-			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<TDocument>()));
+			Assign(querySelector, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<TDocument>()));
 
 		//TODO write a code standards tests for Field/Fields descriptors (if not already exists)
 		/// <summary>
@@ -46,8 +46,8 @@ namespace Nest
 		/// represented by a search hit. Defaults to load the internal _source field.
 		/// </summary>
 		public ExplainDescriptor<TDocument> StoredFields(Func<FieldsDescriptor<TDocument>, IPromise<Fields>> fields) =>
-			Assign(a => a.StoredFields = fields?.Invoke(new FieldsDescriptor<TDocument>())?.Value);
+			Assign(fields, (a, v) => a.StoredFields = v?.Invoke(new FieldsDescriptor<TDocument>())?.Value);
 
-		public ExplainDescriptor<TDocument> StoredFields(Fields fields) => Assign(a => a.StoredFields = fields);
+		public ExplainDescriptor<TDocument> StoredFields(Fields fields) => Assign(fields, (a, v) => a.StoredFields = v);
 	}
 }

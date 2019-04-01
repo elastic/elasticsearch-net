@@ -36,6 +36,6 @@ namespace Nest
 
 		/// <inheritdoc cref="IScriptedSimilarity.Script" />
 		public ScriptedSimilarityDescriptor Script(Func<ScriptDescriptor, IScript> selector) =>
-			Assign(a => a.Script = selector?.Invoke(new ScriptDescriptor()));
+			Assign(selector, (a, v) => a.Script = v?.Invoke(new ScriptDescriptor()));
 	}
 }

@@ -21,6 +21,6 @@ namespace Nest
 		License IPostLicenseRequest.License { get; set; }
 
 		public PostLicenseDescriptor License(License license) =>
-			Assign(a => a.License = license);
+			Assign(license, (a, v) => a.License = v);
 	}
 }

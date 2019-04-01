@@ -25,8 +25,8 @@ namespace Nest
 		string IEmailBody.Html { get; set; }
 		string IEmailBody.Text { get; set; }
 
-		public EmailBodyDescriptor Text(string text) => Assign(a => a.Text = text);
+		public EmailBodyDescriptor Text(string text) => Assign(text, (a, v) => a.Text = v);
 
-		public EmailBodyDescriptor Html(string html) => Assign(a => a.Html = html);
+		public EmailBodyDescriptor Html(string html) => Assign(html, (a, v) => a.Html = v);
 	}
 }

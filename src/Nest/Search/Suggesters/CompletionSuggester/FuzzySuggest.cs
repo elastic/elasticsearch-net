@@ -41,14 +41,14 @@ namespace Nest
 		bool? IFuzzySuggester.Transpositions { get; set; }
 		bool? IFuzzySuggester.UnicodeAware { get; set; }
 
-		public FuzzySuggestDescriptor<T> Fuzziness(Fuzziness fuzziness) => Assign(a => a.Fuzziness = fuzziness);
+		public FuzzySuggestDescriptor<T> Fuzziness(Fuzziness fuzziness) => Assign(fuzziness, (a, v) => a.Fuzziness = v);
 
-		public FuzzySuggestDescriptor<T> UnicodeAware(bool? aware = true) => Assign(a => a.UnicodeAware = aware);
+		public FuzzySuggestDescriptor<T> UnicodeAware(bool? aware = true) => Assign(aware, (a, v) => a.UnicodeAware = v);
 
-		public FuzzySuggestDescriptor<T> Transpositions(bool? transpositions = true) => Assign(a => a.Transpositions = transpositions);
+		public FuzzySuggestDescriptor<T> Transpositions(bool? transpositions = true) => Assign(transpositions, (a, v) => a.Transpositions = v);
 
-		public FuzzySuggestDescriptor<T> MinLength(int? length) => Assign(a => a.MinLength = length);
+		public FuzzySuggestDescriptor<T> MinLength(int? length) => Assign(length, (a, v) => a.MinLength = v);
 
-		public FuzzySuggestDescriptor<T> PrefixLength(int? length) => Assign(a => a.PrefixLength = length);
+		public FuzzySuggestDescriptor<T> PrefixLength(int? length) => Assign(length, (a, v) => a.PrefixLength = v);
 	}
 }

@@ -46,8 +46,8 @@ namespace Nest
 		string IInlineScript.Source { get; set; }
 
 		[Obsolete("Use Source(). Inline() is deprecated and scheduled to be removed in Elasticsearch 7.0")]
-		public InlineScriptDescriptor Inline(string script) => Assign(a => a.Source = script);
+		public InlineScriptDescriptor Inline(string script) => Assign(script, (a, v) => a.Source = v);
 
-		public InlineScriptDescriptor Source(string script) => Assign(a => a.Source = script);
+		public InlineScriptDescriptor Source(string script) => Assign(script, (a, v) => a.Source = v);
 	}
 }

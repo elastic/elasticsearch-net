@@ -90,22 +90,22 @@ namespace Nest
 		string IShingleTokenFilter.TokenSeparator { get; set; }
 
 		/// <inheritdoc />
-		public ShingleTokenFilterDescriptor OutputUnigrams(bool? output = true) => Assign(a => a.OutputUnigrams = output);
+		public ShingleTokenFilterDescriptor OutputUnigrams(bool? output = true) => Assign(output, (a, v) => a.OutputUnigrams = v);
 
 		/// <inheritdoc />
 		public ShingleTokenFilterDescriptor OutputUnigramsIfNoShingles(bool? outputIfNo = true) =>
-			Assign(a => a.OutputUnigramsIfNoShingles = outputIfNo);
+			Assign(outputIfNo, (a, v) => a.OutputUnigramsIfNoShingles = v);
 
 		/// <inheritdoc />
-		public ShingleTokenFilterDescriptor MinShingleSize(int? minShingleSize) => Assign(a => a.MinShingleSize = minShingleSize);
+		public ShingleTokenFilterDescriptor MinShingleSize(int? minShingleSize) => Assign(minShingleSize, (a, v) => a.MinShingleSize = v);
 
 		/// <inheritdoc />
-		public ShingleTokenFilterDescriptor MaxShingleSize(int? maxShingleSize) => Assign(a => a.MaxShingleSize = maxShingleSize);
+		public ShingleTokenFilterDescriptor MaxShingleSize(int? maxShingleSize) => Assign(maxShingleSize, (a, v) => a.MaxShingleSize = v);
 
 		/// <inheritdoc />
-		public ShingleTokenFilterDescriptor TokenSeparator(string separator) => Assign(a => a.TokenSeparator = separator);
+		public ShingleTokenFilterDescriptor TokenSeparator(string separator) => Assign(separator, (a, v) => a.TokenSeparator = v);
 
 		/// <inheritdoc />
-		public ShingleTokenFilterDescriptor FillerToken(string filler) => Assign(a => a.FillerToken = filler);
+		public ShingleTokenFilterDescriptor FillerToken(string filler) => Assign(filler, (a, v) => a.FillerToken = v);
 	}
 }

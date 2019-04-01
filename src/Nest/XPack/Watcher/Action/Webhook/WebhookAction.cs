@@ -63,53 +63,53 @@ namespace Nest
 
 		/// <inheritdoc />
 		public WebhookActionDescriptor Authentication(Func<HttpInputAuthenticationDescriptor, IHttpInputAuthentication> selector) =>
-			Assign(a => a.Authentication = selector?.Invoke(new HttpInputAuthenticationDescriptor()));
+			Assign(selector, (a, v) => a.Authentication = v?.Invoke(new HttpInputAuthenticationDescriptor()));
 
 		/// <inheritdoc />
-		public WebhookActionDescriptor Body(string body) => Assign(a => a.Body = body);
+		public WebhookActionDescriptor Body(string body) => Assign(body, (a, v) => a.Body = v);
 
 		/// <inheritdoc />
-		public WebhookActionDescriptor ConnectionTimeout(Time connectionTimeout) => Assign(a => a.ConnectionTimeout = connectionTimeout);
+		public WebhookActionDescriptor ConnectionTimeout(Time connectionTimeout) => Assign(connectionTimeout, (a, v) => a.ConnectionTimeout = v);
 
 		/// <inheritdoc />
 		public WebhookActionDescriptor Headers(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> headersSelector) =>
-			Assign(a => a.Headers = headersSelector(new FluentDictionary<string, string>()));
+			Assign(headersSelector(new FluentDictionary<string, string>()), (a, v) => a.Headers = v);
 
 		/// <inheritdoc />
 		public WebhookActionDescriptor Headers(Dictionary<string, string> headersDictionary) =>
-			Assign(a => a.Headers = headersDictionary);
+			Assign(headersDictionary, (a, v) => a.Headers = v);
 
 		/// <inheritdoc />
-		public WebhookActionDescriptor Host(string host) => Assign(a => a.Host = host);
+		public WebhookActionDescriptor Host(string host) => Assign(host, (a, v) => a.Host = v);
 
 		/// <inheritdoc />
-		public WebhookActionDescriptor Method(HttpInputMethod? method) => Assign(a => a.Method = method);
+		public WebhookActionDescriptor Method(HttpInputMethod? method) => Assign(method, (a, v) => a.Method = v);
 
 		/// <inheritdoc />
-		public WebhookActionDescriptor Path(string path) => Assign(a => a.Path = path);
+		public WebhookActionDescriptor Path(string path) => Assign(path, (a, v) => a.Path = v);
 
 		/// <inheritdoc />
 		public WebhookActionDescriptor Params(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> paramsSelector) =>
-			Assign(a => a.Params = paramsSelector?.Invoke(new FluentDictionary<string, string>()));
+			Assign(paramsSelector, (a, v) => a.Params = v?.Invoke(new FluentDictionary<string, string>()));
 
 		/// <inheritdoc />
 		public WebhookActionDescriptor Params(Dictionary<string, string> paramsDictionary) =>
-			Assign(a => a.Params = paramsDictionary);
+			Assign(paramsDictionary, (a, v) => a.Params = v);
 
 		/// <inheritdoc />
-		public WebhookActionDescriptor Port(int? port) => Assign(a => a.Port = port);
+		public WebhookActionDescriptor Port(int? port) => Assign(port, (a, v) => a.Port = v);
 
 		/// <inheritdoc />
 		public WebhookActionDescriptor Proxy(Func<HttpInputProxyDescriptor, IHttpInputProxy> proxySelector) =>
-			Assign(a => a.Proxy = proxySelector.Invoke(new HttpInputProxyDescriptor()));
+			Assign(proxySelector.Invoke(new HttpInputProxyDescriptor()), (a, v) => a.Proxy = v);
 
 		/// <inheritdoc />
-		public WebhookActionDescriptor ReadTimeout(Time readTimeout) => Assign(a => a.ReadTimeout = readTimeout);
+		public WebhookActionDescriptor ReadTimeout(Time readTimeout) => Assign(readTimeout, (a, v) => a.ReadTimeout = v);
 
 		/// <inheritdoc />
-		public WebhookActionDescriptor Scheme(ConnectionScheme? scheme) => Assign(a => a.Scheme = scheme);
+		public WebhookActionDescriptor Scheme(ConnectionScheme? scheme) => Assign(scheme, (a, v) => a.Scheme = v);
 
 		/// <inheritdoc />
-		public WebhookActionDescriptor Url(string url) => Assign(a => a.Url = url);
+		public WebhookActionDescriptor Url(string url) => Assign(url, (a, v) => a.Url = v);
 	}
 }

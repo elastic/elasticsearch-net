@@ -30,7 +30,7 @@ namespace Nest
 		public RescoringDescriptor<T> Rescore(Func<RescoreDescriptor<T>, IRescore> selector) =>
 			AddRescore(selector?.Invoke(new RescoreDescriptor<T>()));
 
-		private RescoringDescriptor<T> AddRescore(IRescore rescore) => rescore == null ? this : Assign(a => a.Add(rescore));
+		private RescoringDescriptor<T> AddRescore(IRescore rescore) => rescore == null ? this : Assign(rescore, (a, v) => a.Add(v));
 	}
 
 	public class RescoreDescriptor<T> : DescriptorBase<RescoreDescriptor<T>, IRescore>, IRescore
@@ -40,8 +40,8 @@ namespace Nest
 		int? IRescore.WindowSize { get; set; }
 
 		public virtual RescoreDescriptor<T> RescoreQuery(Func<RescoreQueryDescriptor<T>, IRescoreQuery> rescoreQuerySelector) =>
-			Assign(a => a.Query = rescoreQuerySelector?.Invoke(new RescoreQueryDescriptor<T>()));
+			Assign(rescoreQuerySelector, (a, v) => a.Query = v?.Invoke(new RescoreQueryDescriptor<T>()));
 
-		public virtual RescoreDescriptor<T> WindowSize(int? windowSize) => Assign(a => a.WindowSize = windowSize);
+		public virtual RescoreDescriptor<T> WindowSize(int? windowSize) => Assign(windowSize, (a, v) => a.WindowSize = v);
 	}
 }

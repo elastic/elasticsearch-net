@@ -33,9 +33,9 @@ namespace Nest
 		string ISlackAction.Account { get; set; }
 		ISlackMessage ISlackAction.Message { get; set; }
 
-		public SlackActionDescriptor Account(string account) => Assign(a => a.Account = account);
+		public SlackActionDescriptor Account(string account) => Assign(account, (a, v) => a.Account = v);
 
 		public SlackActionDescriptor Message(Func<SlackMessageDescriptor, ISlackMessage> selector) =>
-			Assign(a => a.Message = selector.InvokeOrDefault(new SlackMessageDescriptor()));
+			Assign(selector.InvokeOrDefault(new SlackMessageDescriptor()), (a, v) => a.Message = v);
 	}
 }

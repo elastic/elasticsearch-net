@@ -42,13 +42,13 @@ namespace Nest
 
 		/// <inheritdoc cref="IExecutePainlessScriptRequest.Script" />
 		public ExecutePainlessScriptDescriptor Script(Func<InlineScriptDescriptor, IInlineScript> selector) =>
-			Assign(a => a.Script = selector?.Invoke(new InlineScriptDescriptor()));
+			Assign(selector, (a, v) => a.Script = v?.Invoke(new InlineScriptDescriptor()));
 
 		/// <inheritdoc cref="IExecutePainlessScriptRequest.ContextSetup" />
 		public ExecutePainlessScriptDescriptor ContextSetup(Func<PainlessContextSetupDescriptor, IPainlessContextSetup> selector) =>
-			Assign(a => a.ContextSetup = selector?.Invoke(new PainlessContextSetupDescriptor()));
+			Assign(selector, (a, v) => a.ContextSetup = v?.Invoke(new PainlessContextSetupDescriptor()));
 
 		/// <inheritdoc cref="IExecutePainlessScriptRequest.Context" />
-		public ExecutePainlessScriptDescriptor Context(string context) => Assign(a => a.Context = context);
+		public ExecutePainlessScriptDescriptor Context(string context) => Assign(context, (a, v) => a.Context = v);
 	}
 }

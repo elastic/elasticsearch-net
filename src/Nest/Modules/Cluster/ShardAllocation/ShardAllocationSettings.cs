@@ -51,16 +51,16 @@ namespace Nest
 		bool? IShardAllocationSettings.SameShardHost { get; set; }
 
 		/// <inheritdoc />
-		public ShardAllocationSettingsDescriptor AllocationEnable(AllocationEnable? enable) => Assign(a => a.AllocationEnable = enable);
+		public ShardAllocationSettingsDescriptor AllocationEnable(AllocationEnable? enable) => Assign(enable, (a, v) => a.AllocationEnable = v);
 
 		/// <inheritdoc />
-		public ShardAllocationSettingsDescriptor NodeConcurrentRecoveries(int? concurrent) => Assign(a => a.NodeConcurrentRecoveries = concurrent);
+		public ShardAllocationSettingsDescriptor NodeConcurrentRecoveries(int? concurrent) => Assign(concurrent, (a, v) => a.NodeConcurrentRecoveries = v);
 
 		/// <inheritdoc />
 		public ShardAllocationSettingsDescriptor NodeInitialPrimariesRecoveries(int? initial) =>
-			Assign(a => a.NodeInitialPrimariesRecoveries = initial);
+			Assign(initial, (a, v) => a.NodeInitialPrimariesRecoveries = v);
 
 		/// <inheritdoc />
-		public ShardAllocationSettingsDescriptor SameShardHost(bool? same = true) => Assign(a => a.SameShardHost = same);
+		public ShardAllocationSettingsDescriptor SameShardHost(bool? same = true) => Assign(same, (a, v) => a.SameShardHost = v);
 	}
 }

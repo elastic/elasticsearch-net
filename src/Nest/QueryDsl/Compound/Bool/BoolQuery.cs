@@ -167,25 +167,25 @@ namespace Nest
 		/// <param name="minimumShouldMatches"></param>
 		/// <returns></returns>
 		public BoolQueryDescriptor<T> MinimumShouldMatch(MinimumShouldMatch minimumShouldMatches) =>
-			Assign(a => a.MinimumShouldMatch = minimumShouldMatches);
+			Assign(minimumShouldMatches, (a, v) => a.MinimumShouldMatch = v);
 
 		/// <summary>
 		/// The clause(s) that must appear in matching documents
 		/// </summary>
 		public BoolQueryDescriptor<T> Must(params Func<QueryContainerDescriptor<T>, QueryContainer>[] queries) =>
-			Assign(a => a.Must = queries.Select(q => q?.Invoke(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty());
+			Assign(queries.Select(q => q?.Invoke(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty(), (a, v) => a.Must = v);
 
 		/// <summary>
 		/// The clause(s) that must appear in matching documents
 		/// </summary>
 		public BoolQueryDescriptor<T> Must(IEnumerable<Func<QueryContainerDescriptor<T>, QueryContainer>> queries) =>
-			Assign(a => a.Must = queries.Select(q => q?.Invoke(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty());
+			Assign(queries.Select(q => q?.Invoke(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty(), (a, v) => a.Must = v);
 
 		/// <summary>
 		/// The clause(s) that must appear in matching documents
 		/// </summary>
 		public BoolQueryDescriptor<T> Must(params QueryContainer[] queries) =>
-			Assign(a => a.Must = queries.ToListOrNullIfEmpty());
+			Assign(queries.ToListOrNullIfEmpty(), (a, v) => a.Must = v);
 
 		/// <summary>
 		/// The clause (query) must not appear in the matching documents. Note that it is not possible to search on documents that only consists of a
@@ -194,7 +194,7 @@ namespace Nest
 		/// <param name="queries"></param>
 		/// <returns></returns>
 		public BoolQueryDescriptor<T> MustNot(params Func<QueryContainerDescriptor<T>, QueryContainer>[] queries) =>
-			Assign(a => a.MustNot = queries.Select(q => q?.Invoke(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty());
+			Assign(queries.Select(q => q?.Invoke(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty(), (a, v) => a.MustNot = v);
 
 		/// <summary>
 		/// The clause (query) must not appear in the matching documents. Note that it is not possible to search on documents that only consists of a
@@ -203,7 +203,7 @@ namespace Nest
 		/// <param name="queries"></param>
 		/// <returns></returns>
 		public BoolQueryDescriptor<T> MustNot(IEnumerable<Func<QueryContainerDescriptor<T>, QueryContainer>> queries) =>
-			Assign(a => a.MustNot = queries.Select(q => q?.Invoke(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty());
+			Assign(queries.Select(q => q?.Invoke(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty(), (a, v) => a.MustNot = v);
 
 		/// <summary>
 		/// The clause (query) must not appear in the matching documents. Note that it is not possible to search on documents that only consists of a
@@ -212,7 +212,7 @@ namespace Nest
 		/// <param name="queries"></param>
 		/// <returns></returns>
 		public BoolQueryDescriptor<T> MustNot(params QueryContainer[] queries) =>
-			Assign(a => a.MustNot = queries.ToListOrNullIfEmpty());
+			Assign(queries.ToListOrNullIfEmpty(), (a, v) => a.MustNot = v);
 
 		/// <summary>
 		/// The clause (query) should appear in the matching document. A boolean query with no must clauses, one or more should clauses must match a
@@ -222,7 +222,7 @@ namespace Nest
 		/// <param name="queries"></param>
 		/// <returns></returns>
 		public BoolQueryDescriptor<T> Should(params Func<QueryContainerDescriptor<T>, QueryContainer>[] queries) =>
-			Assign(a => a.Should = queries.Select(q => q?.Invoke(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty());
+			Assign(queries.Select(q => q?.Invoke(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty(), (a, v) => a.Should = v);
 
 		/// <summary>
 		/// The clause (query) should appear in the matching document. A boolean query with no must clauses, one or more should clauses must match a
@@ -232,7 +232,7 @@ namespace Nest
 		/// <param name="queries"></param>
 		/// <returns></returns>
 		public BoolQueryDescriptor<T> Should(IEnumerable<Func<QueryContainerDescriptor<T>, QueryContainer>> queries) =>
-			Assign(a => a.Should = queries.Select(q => q?.Invoke(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty());
+			Assign(queries.Select(q => q?.Invoke(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty(), (a, v) => a.Should = v);
 
 		/// <summary>
 		/// The clause (query) should appear in the matching document. A boolean query with no must clauses, one or more should clauses must match a
@@ -242,7 +242,7 @@ namespace Nest
 		/// <param name="queries"></param>
 		/// <returns></returns>
 		public BoolQueryDescriptor<T> Should(params QueryContainer[] queries) =>
-			Assign(a => a.Should = queries.ToListOrNullIfEmpty());
+			Assign(queries.ToListOrNullIfEmpty(), (a, v) => a.Should = v);
 
 		/// <summary>
 		/// The clause (query) which is to be used as a filter (in filter context).
@@ -250,7 +250,7 @@ namespace Nest
 		/// <param name="queries"></param>
 		/// <returns></returns>
 		public BoolQueryDescriptor<T> Filter(params Func<QueryContainerDescriptor<T>, QueryContainer>[] queries) =>
-			Assign(a => a.Filter = queries.Select(q => q?.Invoke(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty());
+			Assign(queries.Select(q => q?.Invoke(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty(), (a, v) => a.Filter = v);
 
 		/// <summary>
 		/// The clause (query) which is to be used as a filter (in filter context).
@@ -258,7 +258,7 @@ namespace Nest
 		/// <param name="queries"></param>
 		/// <returns></returns>
 		public BoolQueryDescriptor<T> Filter(IEnumerable<Func<QueryContainerDescriptor<T>, QueryContainer>> queries) =>
-			Assign(a => a.Filter = queries.Select(q => q?.Invoke(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty());
+			Assign(queries.Select(q => q?.Invoke(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty(), (a, v) => a.Filter = v);
 
 		/// <summary>
 		/// The clause (query) which is to be used as a filter (in filter context).
@@ -266,7 +266,7 @@ namespace Nest
 		/// <param name="queries"></param>
 		/// <returns></returns>
 		public BoolQueryDescriptor<T> Filter(params QueryContainer[] queries) =>
-			Assign(a => a.Filter = queries.ToListOrNullIfEmpty());
+			Assign(queries.ToListOrNullIfEmpty(), (a, v) => a.Filter = v);
 
 		public bool ShouldSerializeShould() => (Self.Should?.Any(qq => qq != null && qq.IsWritable)).GetValueOrDefault(false);
 		public bool ShouldSerializeMust() => (Self.Must?.Any(qq => qq != null && qq.IsWritable)).GetValueOrDefault(false);

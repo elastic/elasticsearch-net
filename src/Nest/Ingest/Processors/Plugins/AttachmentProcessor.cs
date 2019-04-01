@@ -89,34 +89,34 @@ namespace Nest
 		Field IAttachmentProcessor.TargetField { get; set; }
 
 		/// <inheritdoc cref="IAttachmentProcessor.Field" />
-		public AttachmentProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public AttachmentProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IAttachmentProcessor.Field" />
-		public AttachmentProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
+		public AttachmentProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IAttachmentProcessor.TargetField" />
-		public AttachmentProcessorDescriptor<T> TargetField(Field field) => Assign(a => a.TargetField = field);
+		public AttachmentProcessorDescriptor<T> TargetField(Field field) => Assign(field, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc cref="IAttachmentProcessor.TargetField" />
-		public AttachmentProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) => Assign(a => a.TargetField = objectPath);
+		public AttachmentProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc cref="IAttachmentProcessor.IndexedCharacters" />
-		public AttachmentProcessorDescriptor<T> IndexedCharacters(long? indexedCharacters) => Assign(a => a.IndexedCharacters = indexedCharacters);
+		public AttachmentProcessorDescriptor<T> IndexedCharacters(long? indexedCharacters) => Assign(indexedCharacters, (a, v) => a.IndexedCharacters = v);
 
 		/// <inheritdoc cref="IAttachmentProcessor.IndexedCharactersField" />
-		public AttachmentProcessorDescriptor<T> IndexedCharactersField(Field field) => Assign(a => a.IndexedCharactersField = field);
+		public AttachmentProcessorDescriptor<T> IndexedCharactersField(Field field) => Assign(field, (a, v) => a.IndexedCharactersField = v);
 
 		/// <inheritdoc cref="IAttachmentProcessor.IndexedCharactersField" />
 		public AttachmentProcessorDescriptor<T> IndexedCharactersField(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.IndexedCharactersField = objectPath);
+			Assign(objectPath, (a, v) => a.IndexedCharactersField = v);
 
 		/// <inheritdoc cref="IAttachmentProcessor.IgnoreMissing" />
-		public AttachmentProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);
+		public AttachmentProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissing = v);
 
 		/// <inheritdoc cref="IAttachmentProcessor.Properties" />
-		public AttachmentProcessorDescriptor<T> Properties(IEnumerable<string> properties) => Assign(a => a.Properties = properties);
+		public AttachmentProcessorDescriptor<T> Properties(IEnumerable<string> properties) => Assign(properties, (a, v) => a.Properties = v);
 
 		/// <inheritdoc cref="IAttachmentProcessor.Properties" />
-		public AttachmentProcessorDescriptor<T> Properties(params string[] properties) => Assign(a => a.Properties = properties);
+		public AttachmentProcessorDescriptor<T> Properties(params string[] properties) => Assign(properties, (a, v) => a.Properties = v);
 	}
 }

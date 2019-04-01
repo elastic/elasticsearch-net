@@ -77,27 +77,27 @@ namespace Nest
 		/// Whether or not new properties should be added dynamically to an existing object.
 		/// Default is <c>true</c>
 		/// </summary>
-		public TDescriptor Dynamic(Union<bool, DynamicMapping> dynamic) => Assign(a => a.Dynamic = dynamic);
+		public TDescriptor Dynamic(Union<bool, DynamicMapping> dynamic) => Assign(dynamic, (a, v) => a.Dynamic = v);
 
 		/// <summary>
 		/// Whether or not new properties should be added dynamically to an existing object.
 		/// Default is <c>true</c>
 		/// </summary>
-		public TDescriptor Dynamic(bool dynamic = true) => Assign(a => a.Dynamic = dynamic);
+		public TDescriptor Dynamic(bool dynamic = true) => Assign(dynamic, (a, v) => a.Dynamic = v);
 
 		/// <summary>
 		/// Whether the JSON value given for this field should be parsed and indexed. Default is <c>true</c>
 		/// </summary>
-		public TDescriptor Enabled(bool? enabled = true) => Assign(a => a.Enabled = enabled);
+		public TDescriptor Enabled(bool? enabled = true) => Assign(enabled, (a, v) => a.Enabled = v);
 
 		/// <summary>
 		/// The fields within the object
 		/// </summary>
 		public TDescriptor Properties(Func<PropertiesDescriptor<TChild>, IPromise<IProperties>> selector) =>
-			Assign(a => a.Properties = selector?.Invoke(new PropertiesDescriptor<TChild>(a.Properties))?.Value);
+			Assign(selector, (a, v) => a.Properties = v?.Invoke(new PropertiesDescriptor<TChild>(a.Properties))?.Value);
 
 		public TDescriptor AutoMap(IPropertyVisitor visitor = null, int maxRecursion = 0) =>
-			Assign(a => a.Properties = a.Properties.AutoMap<TChild>(visitor, maxRecursion));
+			Assign(Self.Properties.AutoMap<TChild>(visitor, maxRecursion), (a, v) => a.Properties = v);
 
 		public TDescriptor AutoMap(int maxRecursion) => AutoMap(null, maxRecursion);
 	}

@@ -30,6 +30,6 @@ namespace Nest
 		bool? IGeoBoundsAggregation.WrapLongitude { get; set; }
 
 		public GeoBoundsAggregationDescriptor<T> WrapLongitude(bool? wrapLongitude = true) =>
-			Assign(a => a.WrapLongitude = wrapLongitude);
+			Assign(wrapLongitude, (a, v) => a.WrapLongitude = v);
 	}
 }

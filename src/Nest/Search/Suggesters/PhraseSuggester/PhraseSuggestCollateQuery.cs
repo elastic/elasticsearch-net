@@ -41,9 +41,9 @@ namespace Nest
 		string IPhraseSuggestCollateQuery.Source { get; set; }
 
 		/// <inheritdoc />
-		public PhraseSuggestCollateQueryDescriptor Source(string source) => Assign(a => a.Source = source);
+		public PhraseSuggestCollateQueryDescriptor Source(string source) => Assign(source, (a, v) => a.Source = v);
 
 		/// <inheritdoc />
-		public PhraseSuggestCollateQueryDescriptor Id(Id id) => Assign(a => a.Id = id);
+		public PhraseSuggestCollateQueryDescriptor Id(Id id) => Assign(id, (a, v) => a.Id = v);
 	}
 }

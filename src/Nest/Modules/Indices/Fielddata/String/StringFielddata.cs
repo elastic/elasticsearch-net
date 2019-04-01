@@ -21,6 +21,6 @@ namespace Nest
 	{
 		StringFielddataFormat? IStringFielddata.Format { get; set; }
 
-		public StringFielddataDescriptor Format(StringFielddataFormat? format) => Assign(a => a.Format = format);
+		public StringFielddataDescriptor Format(StringFielddataFormat? format) => Assign(format, (a, v) => a.Format = v);
 	}
 }

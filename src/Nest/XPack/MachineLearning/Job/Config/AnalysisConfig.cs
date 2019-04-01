@@ -112,45 +112,45 @@ namespace Nest
 		Field IAnalysisConfig.SummaryCountFieldName { get; set; }
 
 		/// <inheritdoc />
-		public AnalysisConfigDescriptor<T> BucketSpan(Time bucketSpan) => Assign(a => a.BucketSpan = bucketSpan);
+		public AnalysisConfigDescriptor<T> BucketSpan(Time bucketSpan) => Assign(bucketSpan, (a, v) => a.BucketSpan = v);
 
 		/// <inheritdoc />
-		public AnalysisConfigDescriptor<T> CategorizationFieldName(Field field) => Assign(a => a.CategorizationFieldName = field);
+		public AnalysisConfigDescriptor<T> CategorizationFieldName(Field field) => Assign(field, (a, v) => a.CategorizationFieldName = v);
 
 		/// <inheritdoc />
 		public AnalysisConfigDescriptor<T> CategorizationFieldName(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.CategorizationFieldName = objectPath);
+			Assign(objectPath, (a, v) => a.CategorizationFieldName = v);
 
 		/// <inheritdoc />
-		public AnalysisConfigDescriptor<T> CategorizationFilters(IEnumerable<string> filters) => Assign(a => a.CategorizationFilters = filters);
+		public AnalysisConfigDescriptor<T> CategorizationFilters(IEnumerable<string> filters) => Assign(filters, (a, v) => a.CategorizationFilters = v);
 
 		/// <inheritdoc />
-		public AnalysisConfigDescriptor<T> CategorizationFilters(params string[] filters) => Assign(a => a.CategorizationFilters = filters);
+		public AnalysisConfigDescriptor<T> CategorizationFilters(params string[] filters) => Assign(filters, (a, v) => a.CategorizationFilters = v);
 
 		/// <inheritdoc />
 		public AnalysisConfigDescriptor<T> Detectors(Func<DetectorsDescriptor<T>, IPromise<IEnumerable<IDetector>>> selector) =>
-			Assign(a => a.Detectors = selector.InvokeOrDefault(new DetectorsDescriptor<T>()).Value);
+			Assign(selector.InvokeOrDefault(new DetectorsDescriptor<T>()).Value, (a, v) => a.Detectors = v);
 
 		/// <inheritdoc />
 		public AnalysisConfigDescriptor<T> Influencers(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(a => a.Influencers = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+			Assign(fields, (a, v) => a.Influencers = v?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		/// <inheritdoc />
-		public AnalysisConfigDescriptor<T> Influencers(Fields fields) => Assign(a => a.Influencers = fields);
+		public AnalysisConfigDescriptor<T> Influencers(Fields fields) => Assign(fields, (a, v) => a.Influencers = v);
 
 		/// <inheritdoc />
-		public AnalysisConfigDescriptor<T> Latency(Time latency) => Assign(a => a.Latency = latency);
+		public AnalysisConfigDescriptor<T> Latency(Time latency) => Assign(latency, (a, v) => a.Latency = v);
 
 		/// <inheritdoc />
 		public AnalysisConfigDescriptor<T> MultivariateByFields(bool? multivariateByFields = true) =>
-			Assign(a => a.MultivariateByFields = multivariateByFields);
+			Assign(multivariateByFields, (a, v) => a.MultivariateByFields = v);
 
 		/// <inheritdoc />
 		public AnalysisConfigDescriptor<T> SummaryCountFieldName(Field summaryCountFieldName) =>
-			Assign(a => a.SummaryCountFieldName = summaryCountFieldName);
+			Assign(summaryCountFieldName, (a, v) => a.SummaryCountFieldName = v);
 
 		/// <inheritdoc />
 		public AnalysisConfigDescriptor<T> SummaryCountFieldName(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.SummaryCountFieldName = objectPath);
+			Assign(objectPath, (a, v) => a.SummaryCountFieldName = v);
 	}
 }

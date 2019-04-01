@@ -95,36 +95,36 @@ namespace Nest
 		string ITextProperty.SearchQuoteAnalyzer { get; set; }
 		TermVectorOption? ITextProperty.TermVector { get; set; }
 
-		public TextPropertyDescriptor<T> Boost(double? boost) => Assign(a => a.Boost = boost);
+		public TextPropertyDescriptor<T> Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
 
 		public TextPropertyDescriptor<T> EagerGlobalOrdinals(bool? eagerGlobalOrdinals = true) =>
-			Assign(a => a.EagerGlobalOrdinals = eagerGlobalOrdinals);
+			Assign(eagerGlobalOrdinals, (a, v) => a.EagerGlobalOrdinals = v);
 
-		public TextPropertyDescriptor<T> Fielddata(bool? fielddata = true) => Assign(a => a.Fielddata = fielddata);
+		public TextPropertyDescriptor<T> Fielddata(bool? fielddata = true) => Assign(fielddata, (a, v) => a.Fielddata = v);
 
 		public TextPropertyDescriptor<T> FielddataFrequencyFilter(Func<FielddataFrequencyFilterDescriptor, IFielddataFrequencyFilter> selector) =>
-			Assign(a => a.FielddataFrequencyFilter = selector?.Invoke(new FielddataFrequencyFilterDescriptor()));
+			Assign(selector, (a, v) => a.FielddataFrequencyFilter = v?.Invoke(new FielddataFrequencyFilterDescriptor()));
 
 		public TextPropertyDescriptor<T> IndexPrefixes(Func<TextIndexPrefixesDescriptor, ITextIndexPrefixes> selector) =>
-			Assign(a => a.IndexPrefixes = selector?.Invoke(new TextIndexPrefixesDescriptor()));
+			Assign(selector, (a, v) => a.IndexPrefixes = v?.Invoke(new TextIndexPrefixesDescriptor()));
 
-		public TextPropertyDescriptor<T> Index(bool? index = true) => Assign(a => a.Index = index);
+		public TextPropertyDescriptor<T> Index(bool? index = true) => Assign(index, (a, v) => a.Index = v);
 
-		public TextPropertyDescriptor<T> IndexPhrases(bool? indexPhrases = true) => Assign(a => a.IndexPhrases = indexPhrases);
+		public TextPropertyDescriptor<T> IndexPhrases(bool? indexPhrases = true) => Assign(indexPhrases, (a, v) => a.IndexPhrases = v);
 
-		public TextPropertyDescriptor<T> IndexOptions(IndexOptions? indexOptions) => Assign(a => a.IndexOptions = indexOptions);
+		public TextPropertyDescriptor<T> IndexOptions(IndexOptions? indexOptions) => Assign(indexOptions, (a, v) => a.IndexOptions = v);
 
-		public TextPropertyDescriptor<T> Norms(bool? enabled = true) => Assign(a => a.Norms = enabled);
+		public TextPropertyDescriptor<T> Norms(bool? enabled = true) => Assign(enabled, (a, v) => a.Norms = v);
 
 		public TextPropertyDescriptor<T> PositionIncrementGap(int? positionIncrementGap) =>
-			Assign(a => a.PositionIncrementGap = positionIncrementGap);
+			Assign(positionIncrementGap, (a, v) => a.PositionIncrementGap = v);
 
-		public TextPropertyDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
+		public TextPropertyDescriptor<T> Analyzer(string analyzer) => Assign(analyzer, (a, v) => a.Analyzer = v);
 
-		public TextPropertyDescriptor<T> SearchAnalyzer(string searchAnalyzer) => Assign(a => a.SearchAnalyzer = searchAnalyzer);
+		public TextPropertyDescriptor<T> SearchAnalyzer(string searchAnalyzer) => Assign(searchAnalyzer, (a, v) => a.SearchAnalyzer = v);
 
-		public TextPropertyDescriptor<T> SearchQuoteAnalyzer(string searchQuoteAnalyzer) => Assign(a => a.SearchQuoteAnalyzer = searchQuoteAnalyzer);
+		public TextPropertyDescriptor<T> SearchQuoteAnalyzer(string searchQuoteAnalyzer) => Assign(searchQuoteAnalyzer, (a, v) => a.SearchQuoteAnalyzer = v);
 
-		public TextPropertyDescriptor<T> TermVector(TermVectorOption? termVector) => Assign(a => a.TermVector = termVector);
+		public TextPropertyDescriptor<T> TermVector(TermVectorOption? termVector) => Assign(termVector, (a, v) => a.TermVector = v);
 	}
 }

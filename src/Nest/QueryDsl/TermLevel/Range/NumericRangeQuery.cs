@@ -55,14 +55,14 @@ namespace Nest
 
 		RangeRelation? INumericRangeQuery.Relation { get; set; }
 
-		public NumericRangeQueryDescriptor<T> GreaterThan(double? from) => Assign(a => a.GreaterThan = from);
+		public NumericRangeQueryDescriptor<T> GreaterThan(double? from) => Assign(from, (a, v) => a.GreaterThan = v);
 
-		public NumericRangeQueryDescriptor<T> GreaterThanOrEquals(double? from) => Assign(a => a.GreaterThanOrEqualTo = from);
+		public NumericRangeQueryDescriptor<T> GreaterThanOrEquals(double? from) => Assign(from, (a, v) => a.GreaterThanOrEqualTo = v);
 
-		public NumericRangeQueryDescriptor<T> LessThan(double? to) => Assign(a => a.LessThan = to);
+		public NumericRangeQueryDescriptor<T> LessThan(double? to) => Assign(to, (a, v) => a.LessThan = v);
 
-		public NumericRangeQueryDescriptor<T> LessThanOrEquals(double? to) => Assign(a => a.LessThanOrEqualTo = to);
+		public NumericRangeQueryDescriptor<T> LessThanOrEquals(double? to) => Assign(to, (a, v) => a.LessThanOrEqualTo = v);
 
-		public NumericRangeQueryDescriptor<T> Relation(RangeRelation? relation) => Assign(a => a.Relation = relation);
+		public NumericRangeQueryDescriptor<T> Relation(RangeRelation? relation) => Assign(relation, (a, v) => a.Relation = v);
 	}
 }

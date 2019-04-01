@@ -27,9 +27,9 @@ namespace Nest
 		bool? IChiSquareHeuristic.IncludeNegatives { get; set; }
 
 		public ChiSquareHeuristicDescriptor BackgroundIsSuperSet(bool? backgroundIsSuperSet = true) =>
-			Assign(a => a.BackgroundIsSuperSet = backgroundIsSuperSet);
+			Assign(backgroundIsSuperSet, (a, v) => a.BackgroundIsSuperSet = v);
 
 		public ChiSquareHeuristicDescriptor IncludeNegatives(bool? includeNegatives = true) =>
-			Assign(a => a.IncludeNegatives = includeNegatives);
+			Assign(includeNegatives, (a, v) => a.IncludeNegatives = v);
 	}
 }

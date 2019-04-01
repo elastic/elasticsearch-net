@@ -40,10 +40,10 @@ namespace Nest
 
 		/// <inheritdoc />
 		public KuromojiIterationMarkCharFilterDescriptor NormalizeKanji(bool? normalize = true) =>
-			Assign(a => a.NormalizeKanji = normalize);
+			Assign(normalize, (a, v) => a.NormalizeKanji = v);
 
 		/// <inheritdoc />
 		public KuromojiIterationMarkCharFilterDescriptor NormalizeKana(bool? normalize = true) =>
-			Assign(a => a.NormalizeKana = normalize);
+			Assign(normalize, (a, v) => a.NormalizeKana = v);
 	}
 }

@@ -71,17 +71,17 @@ namespace Nest
 		/// <summary>
 		/// The object to index, if id is not manually set it will be inferred from the object
 		/// </summary>
-		public BulkIndexDescriptor<T> Document(T @object) => Assign(a => a.Document = @object);
+		public BulkIndexDescriptor<T> Document(T @object) => Assign(@object, (a, v) => a.Document = v);
 
 		/// <summary>
 		/// The pipeline id to preprocess documents with
 		/// </summary>
-		public BulkIndexDescriptor<T> Pipeline(string pipeline) => Assign(a => a.Pipeline = pipeline);
+		public BulkIndexDescriptor<T> Pipeline(string pipeline) => Assign(pipeline, (a, v) => a.Pipeline = v);
 
-		public BulkIndexDescriptor<T> Percolate(string percolate) => Assign(a => a.Percolate = percolate);
+		public BulkIndexDescriptor<T> Percolate(string percolate) => Assign(percolate, (a, v) => a.Percolate = v);
 
-		public BulkIndexDescriptor<T> IfSeqNo(long? seqNo) => Assign(a => a.IfSeqNo = seqNo);
+		public BulkIndexDescriptor<T> IfSeqNo(long? seqNo) => Assign(seqNo, (a, v) => a.IfSeqNo = v);
 
-		public BulkIndexDescriptor<T> IfPrimaryTerm(long? primaryTerm) => Assign(a => a.IfSeqNo = primaryTerm);
+		public BulkIndexDescriptor<T> IfPrimaryTerm(long? primaryTerm) => Assign(primaryTerm, (a, v) => a.IfSeqNo = v);
 	}
 }

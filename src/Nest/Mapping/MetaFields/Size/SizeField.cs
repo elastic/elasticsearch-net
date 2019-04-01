@@ -19,6 +19,6 @@ namespace Nest
 	{
 		bool? ISizeField.Enabled { get; set; }
 
-		public SizeFieldDescriptor Enabled(bool? enabled = true) => Assign(a => a.Enabled = enabled);
+		public SizeFieldDescriptor Enabled(bool? enabled = true) => Assign(enabled, (a, v) => a.Enabled = v);
 	}
 }

@@ -42,6 +42,6 @@ namespace Nest
 		public YearlyScheduleDescriptor() : base(new YearlySchedule()) { }
 
 		public YearlyScheduleDescriptor Add(Func<TimeOfYearDescriptor, ITimeOfYear> selector) =>
-			Assign(a => a.Add(selector.InvokeOrDefault(new TimeOfYearDescriptor())));
+			Assign(selector, (a, v) => a.Add(v.InvokeOrDefault(new TimeOfYearDescriptor())));
 	}
 }

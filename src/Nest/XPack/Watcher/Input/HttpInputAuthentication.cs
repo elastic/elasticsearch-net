@@ -33,7 +33,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public HttpInputAuthenticationDescriptor Basic(Func<HttpInputBasicAuthenticationDescriptor, IHttpInputBasicAuthentication> selector) =>
-			Assign(a => a.Basic = selector.Invoke(new HttpInputBasicAuthenticationDescriptor()));
+			Assign(selector.Invoke(new HttpInputBasicAuthenticationDescriptor()), (a, v) => a.Basic = v);
 	}
 
 	/// <summary>
@@ -76,10 +76,10 @@ namespace Nest
 
 		/// <inheritdoc />
 		public HttpInputBasicAuthenticationDescriptor Username(string username) =>
-			Assign(a => a.Username = username);
+			Assign(username, (a, v) => a.Username = v);
 
 		/// <inheritdoc />
 		public HttpInputBasicAuthenticationDescriptor Password(string password) =>
-			Assign(a => a.Password = password);
+			Assign(password, (a, v) => a.Password = v);
 	}
 }

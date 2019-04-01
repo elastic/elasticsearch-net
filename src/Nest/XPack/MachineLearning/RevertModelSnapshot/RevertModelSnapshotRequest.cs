@@ -31,6 +31,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public RevertModelSnapshotDescriptor DeleteInterveningResults(bool? deleteInterveningResults = true) =>
-			Assign(a => a.DeleteInterveningResults = deleteInterveningResults);
+			Assign(deleteInterveningResults, (a, v) => a.DeleteInterveningResults = v);
 	}
 }

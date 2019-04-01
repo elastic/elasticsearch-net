@@ -105,9 +105,7 @@ namespace Nest
 
 		public IGeoShapeQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var token = reader.GetCurrentJsonToken();
-
-			if (token == JsonToken.Null)
+			if (reader.ReadIsNull())
 				return null;
 
 			var count = 0;

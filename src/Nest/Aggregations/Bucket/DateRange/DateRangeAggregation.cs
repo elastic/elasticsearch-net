@@ -51,21 +51,21 @@ namespace Nest
 
 		string IDateRangeAggregation.TimeZone { get; set; }
 
-		public DateRangeAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public DateRangeAggregationDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public DateRangeAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public DateRangeAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
 
-		public DateRangeAggregationDescriptor<T> Format(string format) => Assign(a => a.Format = format);
+		public DateRangeAggregationDescriptor<T> Format(string format) => Assign(format, (a, v) => a.Format = v);
 
 		public DateRangeAggregationDescriptor<T> Ranges(params IDateRangeExpression[] ranges) =>
-			Assign(a => a.Ranges = ranges.ToListOrNullIfEmpty());
+			Assign(ranges.ToListOrNullIfEmpty(), (a, v) => a.Ranges = v);
 
-		public DateRangeAggregationDescriptor<T> TimeZone(string timeZone) => Assign(a => a.TimeZone = timeZone);
+		public DateRangeAggregationDescriptor<T> TimeZone(string timeZone) => Assign(timeZone, (a, v) => a.TimeZone = v);
 
 		public DateRangeAggregationDescriptor<T> Ranges(params Func<DateRangeExpressionDescriptor, IDateRangeExpression>[] ranges) =>
-			Assign(a => a.Ranges = ranges?.Select(r => r(new DateRangeExpressionDescriptor())).ToListOrNullIfEmpty());
+			Assign(ranges?.Select(r => r(new DateRangeExpressionDescriptor())).ToListOrNullIfEmpty(), (a, v) => a.Ranges = v);
 
 		public DateRangeAggregationDescriptor<T> Ranges(IEnumerable<Func<DateRangeExpressionDescriptor, IDateRangeExpression>> ranges) =>
-			Assign(a => a.Ranges = ranges?.Select(r => r(new DateRangeExpressionDescriptor())).ToListOrNullIfEmpty());
+			Assign(ranges?.Select(r => r(new DateRangeExpressionDescriptor())).ToListOrNullIfEmpty(), (a, v) => a.Ranges = v);
 	}
 }

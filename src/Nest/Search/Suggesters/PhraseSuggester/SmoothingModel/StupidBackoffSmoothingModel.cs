@@ -23,6 +23,6 @@ namespace Nest
 	{
 		double? IStupidBackoffSmoothingModel.Discount { get; set; }
 
-		public StupidBackoffSmoothingModelDescriptor Discount(double? discount) => Assign(a => a.Discount = discount);
+		public StupidBackoffSmoothingModelDescriptor Discount(double? discount) => Assign(discount, (a, v) => a.Discount = v);
 	}
 }

@@ -36,10 +36,10 @@ namespace Nest
 
 		/// <inheritdoc />
 		public PatternReplaceCharFilterDescriptor Pattern(string pattern) =>
-			Assign(a => a.Pattern = pattern);
+			Assign(pattern, (a, v) => a.Pattern = v);
 
 		/// <inheritdoc />
 		public PatternReplaceCharFilterDescriptor Replacement(string replacement) =>
-			Assign(a => a.Replacement = replacement);
+			Assign(replacement, (a, v) => a.Replacement = v);
 	}
 }
