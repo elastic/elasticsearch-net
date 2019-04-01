@@ -19,10 +19,10 @@ module ShadowDependencies =
         let fullOutput (p: DotNetProject) = dllFullPath (p.Versioned (outputName p) majorVersion)
         let dlls =
             projects
-            |> Seq.map (fun p -> sprintf @"-i ""%s"" -o ""%s"" "  (dllFullPath p.Name) (fullOutput p))
+            |> Seq.map (fun p -> sprintf @"-i ""../../%s"" -o ""../../%s"" "  (dllFullPath p.Name) (fullOutput p))
             |> Seq.fold (+) " "
             
-        Tooling.DotNet.Exec [assemblyRewriter; dlls] |> ignore
+        Tooling.DotNet.ExecIn Paths.TargetsFolder [assemblyRewriter; dlls] |> ignore
         
         let mergedOutFile = fullOutput project
         let ilMergeArgs = [

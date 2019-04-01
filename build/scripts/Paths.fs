@@ -9,8 +9,9 @@ module Paths =
     let Repository = sprintf "https://github.com/%s/%s" OwnerName RepositoryName
 
     let BuildFolder = "build"
+    let TargetsFolder = "build/scripts"
     let BuildOutput = sprintf "%s/output" BuildFolder
-
+    
     let ProjectOutputFolder (project:DotNetProject) (framework:DotNetFramework) = 
         sprintf "%s/%s/%s" BuildOutput project.Name framework.Identifier.Nuget
   

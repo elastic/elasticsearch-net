@@ -60,7 +60,7 @@ module Tooling =
         targetLocation 
 
     let Nuget = BuildTooling(None, nugetFile)
-    let ILRepack = BuildTooling(None, "packages/build/ILRepack/tools/ILRepack.exe")
+    let ILRepack = BuildTooling(None, "build/scripts/bin/Release/netcoreapp2.2/ILRepack.exe")
     let DotNet = BuildTooling(Some <| TimeSpan.FromMinutes(5.), "dotnet")
 
     type DotTraceTool = {
