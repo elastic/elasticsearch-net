@@ -171,7 +171,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				new Person
 				{
 					Id = 3,
-					FirstName = "Russell",
+					FirstName = "Russ",
 					LastName = "Cam"
 				}
 				// snip
