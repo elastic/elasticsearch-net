@@ -1,27 +1,64 @@
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
+	/// <summary>
+	/// A machine learning detector
+	/// </summary>
 	[ContractJsonConverter(typeof(DetectorConverter))]
 	public interface IDetector
 	{
+		/// <summary>
+		/// A description of the detector. For example, "Low event rate".
+		/// </summary>
 		[JsonProperty("detector_description")]
 		string DetectorDescription { get; set; }
 
+		/// <summary>
+		/// A unique identifier for the detector. This identifier is based on the order of the
+		/// detectors in the analysis config, starting at zero. You can use this
+		/// identifier when you want to update a specific detector.
+		/// </summary>
 		[JsonProperty("detector_index")]
 		int? DetectorIndex { get; set; }
 
+		/// <summary>
+		/// If set, frequent entities are excluded from influencing the anomaly results.
+		/// Entities can be considered frequent over time or frequent in a population.
+		/// If you are working with both over and by fields, then you can set exclude_frequent
+		/// to all for both fields, or to by or over for those specific fields.
+		/// </summary>
 		[JsonProperty("exclude_frequent")]
 		ExcludeFrequent? ExcludeFrequent { get; set; }
 
+		/// <summary>
+		/// The analysis function used
+		/// </summary>
 		[JsonProperty("function")]
 		string Function { get; }
 
+		/// <summary>
+		/// Defines whether a new series is used as the null series when there
+		/// is no value for the by or partition fields. The default value is <c>false</c>.
+		/// </summary>
 		[JsonProperty("use_null")]
 		bool? UseNull { get; set; }
+
+		/// <summary>
+		/// Custom rules enable you to change the behaviour of anomaly detectors based on domain-specific knowledge.
+		/// Custom rules describe when a detector should take a certain action instead of following its default behaviour.
+		/// To specify the "when", a rule uses a scope and conditions. You can think of scope as the categorical
+		/// specification of a rule, while conditions are the numerical part. A rule can have a scope,
+		/// one or more conditions, or a combination of scope and conditions.
+		/// </summary>
+		[JsonProperty("custom_rules")]
+		IEnumerable<IDetectionRule> CustomRules { get; set; }
 	}
 
 	internal class DetectorConverter : JsonConverter
@@ -119,41 +156,78 @@ namespace Nest
 		public override bool CanConvert(Type objectType) => true;
 	}
 
+	/// <summary>
+	/// A machine learning detector with a field name
+	/// </summary>
 	public interface IFieldNameDetector : IDetector
 	{
+		/// <summary>
+		/// The field that the detector uses in the function. If you use an event
+		/// rate function such as count or rare, do not specify this field.
+		/// </summary>
 		[JsonProperty("field_name")]
 		Field FieldName { get; set; }
 	}
 
+	/// <summary>
+	/// A machine learning detector with a by field
+	/// </summary>
 	public interface IByFieldNameDetector : IDetector
 	{
+		/// <summary>
+		/// The field used to split the data. In particular, this property is used for analyzing the splits with
+		/// respect to their own history. It is used for finding unusual values in the context of the split.
+		/// </summary>
 		[JsonProperty("by_field_name")]
 		Field ByFieldName { get; set; }
 	}
 
+	/// <summary>
+	/// A machine learning detector with an over field
+	/// </summary>
 	public interface IOverFieldNameDetector : IDetector
 	{
+		/// <summary>
+		/// The field used to split the data. In particular, this property is used for analyzing the splits
+		/// with respect to the history of all splits. It is used for finding unusual values in the population of all splits.
+		/// </summary>
 		[JsonProperty("over_field_name")]
 		Field OverFieldName { get; set; }
 	}
 
+	/// <summary>
+	/// A machine learning detector with a partition field
+	/// </summary>
 	public interface IPartitionFieldNameDetector : IDetector
 	{
+		/// <summary>
+		/// The field used to segment the analysis. When you use this property, you have completely
+		/// independent baselines for each value of this field.
+		/// </summary>
 		[JsonProperty("partition_field_name")]
 		Field PartitionFieldName { get; set; }
 	}
 
+	/// <inheritdoc />
 	public abstract class DetectorBase : IDetector
 	{
 		protected DetectorBase(string function) => Function = function;
 
+		/// <inheritdoc />
 		public string DetectorDescription { get; set; }
+		/// <inheritdoc />
 		public int? DetectorIndex { get; set; }
+		/// <inheritdoc />
 		public ExcludeFrequent? ExcludeFrequent { get; set; }
+		/// <inheritdoc />
 		public string Function { get; }
+		/// <inheritdoc />
 		public bool? UseNull { get; set; }
+		/// <inheritdoc />
+		public IEnumerable<IDetectionRule> CustomRules { get; set; }
 	}
 
+	/// <inheritdoc cref="IDetector" />
 	public abstract class DetectorDescriptorBase<TDetectorDescriptor, TDetectorInterface>
 		: DescriptorBase<TDetectorDescriptor, TDetectorInterface>, IDetector
 		where TDetectorDescriptor : DetectorDescriptorBase<TDetectorDescriptor, TDetectorInterface>, TDetectorInterface
@@ -168,14 +242,23 @@ namespace Nest
 		ExcludeFrequent? IDetector.ExcludeFrequent { get; set; }
 		string IDetector.Function => _function;
 		bool? IDetector.UseNull { get; set; }
+		IEnumerable<IDetectionRule> IDetector.CustomRules { get; set; }
 
+		/// <inheritdoc cref="IDetector.DetectorDescription" />
 		public TDetectorDescriptor DetectorDescription(string description) => Assign(description, (a, v) => a.DetectorDescription = v);
 
+		/// <inheritdoc cref="IDetector.ExcludeFrequent" />
 		public TDetectorDescriptor ExcludeFrequent(ExcludeFrequent? excludeFrequent) => Assign(excludeFrequent, (a, v) => a.ExcludeFrequent = v);
 
+		/// <inheritdoc cref="IDetector.UseNull" />
 		public TDetectorDescriptor UseNull(bool? useNull = true) => Assign(useNull, (a, v) => a.UseNull = v);
 
+		/// <inheritdoc cref="IDetector.DetectorIndex" />
 		public TDetectorDescriptor DetectorIndex(int? detectorIndex) => Assign(detectorIndex, (a, v) => a.DetectorIndex = v);
+
+		/// <inheritdoc cref="IDetector.CustomRules" />
+		public TDetectorDescriptor CustomRules(Func<DetectionRulesDescriptor, IPromise<List<IDetectionRule>>> selector) =>
+			Assign(a => a.CustomRules = selector.Invoke(new DetectionRulesDescriptor()).Value);
 	}
 
 	public class DetectorsDescriptor<T> : DescriptorPromiseBase<DetectorsDescriptor<T>, IList<IDetector>> where T : class
