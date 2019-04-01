@@ -222,6 +222,29 @@ namespace Tests.Analysis.Tokenizers
 			public override string Name => "nori";
 		}
 
+		[SkipVersion("<6.6.0", "inline user dictionary rules introduced in 6.6.0")]
+		public class NoriWithUserDictionaryTests : TokenizerAssertionBase<NoriWithUserDictionaryTests>
+		{
+			public override FuncTokenizer Fluent => (n, t) => t.Nori(n, e => e
+				.DecompoundMode(NoriDecompoundMode.Mixed)
+				.UserDictionaryRules("c++", "C샤프", "세종", "세종시 세종 시")
+			);
+
+			public override ITokenizer Initializer => new NoriTokenizer
+			{
+				DecompoundMode = NoriDecompoundMode.Mixed,
+				UserDictionaryRules = new [] { "c++", "C샤프", "세종", "세종시 세종 시" }
+			};
+
+			public override object Json => new
+			{
+				type = "nori_tokenizer",
+				decompound_mode = "mixed",
+				user_dictionary_rules = new [] { "c++", "C샤프", "세종", "세종시 세종 시" }
+			};
+			public override string Name => "nori_userdictionary";
+		}
+
 		[SkipVersion("<6.4.0", "char_group introduced in 6.4.0")]
 		public class CharGroupTests : TokenizerAssertionBase<CharGroupTests>
 		{
