@@ -109,22 +109,17 @@ namespace Tests.XPack.MachineLearning.GetCalendars
 		protected override string UrlPath => $"_xpack/ml/calendars";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.GetCalendars(),
+			(client, f) => client.GetCalendars(f),
 			(client, f) => client.GetCalendarsAsync(f),
 			(client, r) => client.GetCalendars(r),
 			(client, r) => client.GetCalendarsAsync(r)
 		);
 
-		protected override GetCalendarsDescriptor NewDescriptor() => new GetCalendarsDescriptor().Page(p => p.Size(10).From(10));
-
 		protected override void ExpectResponse(IGetCalendarsResponse response)
 		{
 			response.ShouldBeValid();
-
 			response.Count.Should().BeGreaterOrEqualTo(1);
-
 			response.Calendars.Should().NotBeEmpty();
-
 			response.Calendars.Count.Should().BeGreaterOrEqualTo(1);
 		}
 	}

@@ -21,10 +21,6 @@ namespace ApiGenerator
 		private static string[] IgnoredApis { get; } =
 		{
 			// these API's are not ready for primetime yet
-			"xpack.ml.delete_filter.json",
-			"xpack.ml.get_filters.json",
-			"xpack.ml.put_filter.json",
-			"xpack.ml.update_filter.json",
 			"rank_eval.json",
 
 			// these API's are new and need to be mapped
