@@ -139,7 +139,7 @@ module Versioning =
                 let a = AssemblyName.GetAssemblyName(f).Version
                 printfn "Assembly: %A File: %s Product: %s => %s" a fv.FileVersion fv.ProductVersion f
                 if (a.Minor > 0 || a.Revision > 0 || a.Build > 0) then failwith (sprintf "%s assembly version is not sticky to its major component" f)
-                if (parse (fv.ProductVersion) <> version.AssemblyFile) then
+                if (parse (fv.ProductVersion) <> version.Full) then
                     failwith (sprintf "Expected product info %s to match new version %O " fv.ProductVersion fileVersion)
 
                 validateDllStrongName f f

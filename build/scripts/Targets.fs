@@ -39,7 +39,7 @@ module Main =
 
         conditional parsed.SkipDocs "documentation" <| fun _ -> Documentation.Generate parsed
 
-        conditional (not parsed.SkipTests && parsed.Target <> "canary") "test" <| fun _ -> Tests.RunUnitTests parsed
+        conditional (not parsed.SkipTests) "test" <| fun _ -> Tests.RunUnitTests parsed
         
         target "version" <| fun _ -> printfn "Artifacts Version: %O" artifactsVersion
 
@@ -49,7 +49,7 @@ module Main =
 
         target "test-nuget-package" <| fun _ -> 
             //run release unit tests puts packages in the system cache prevent this from happening locally
-            if not Commandline.runningOnCi then Tests.RunUnitTests parsed
+            if not Commandline.runningOnCi then ignore ()
             else Tests.RunReleaseUnitTests artifactsVersion
             
         target "nuget-pack" <| fun _ -> Release.NugetPack artifactsVersion

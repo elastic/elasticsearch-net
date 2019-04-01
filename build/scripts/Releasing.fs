@@ -64,8 +64,11 @@ module Release =
              "-properties"; properties; 
         ] |> ignore
         printfn "%s" Paths.BuildOutput
-        let nugetOutFile = Paths.Output(sprintf "%s.%O.nupkg" n version.Full)
-        File.Move(Paths.NugetOutput, nugetOutFile)
+        let file = sprintf "%s.%O.nupkg" n version.Full
+        let nugetOutFile = Paths.Output(file)
+        let outputFile = Path.Combine(Paths.NugetOutput, file)
+        
+        File.Move(nugetOutFile, outputFile)
 
     let private nugetPackMain (p:DotNetProject) nugetId nuspec properties version = 
         pack nuspec nugetId properties version
