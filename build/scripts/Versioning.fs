@@ -19,18 +19,17 @@ module Versioning =
     let parse (v:string) = SemVer.parse(v)
 
     //Versions in form of e.g 6.1.0 is inferred as datetime so we bake the json shape into the provider like this
-    type private SdkVersion = { Version:string;  }
-    type private GlobalJson = { Sdk: SdkVersion; Version:string; }
+    type SdkVersion = { Version:string;  }
+    type GlobalJson = { Sdk: SdkVersion; Version:string; }
         
     let private globalJson () =
-        let jsonString = File.ReadAllText "../../global.json"
+        let jsonString = File.ReadAllText "global.json"
         JsonConvert.DeserializeObject<GlobalJson>(jsonString)
         
     let writeVersionIntoGlobalJson version =
         let globalJson = globalJson ()
         let newGlobalJson = { globalJson with Version = version.ToString(); }
-        use tw = new StreamWriter("global.json")
-        File.WriteAllText("../../global.json", JsonConvert.SerializeObject(newGlobalJson))
+        File.WriteAllText("global.json", JsonConvert.SerializeObject(newGlobalJson))
         printfn "Written (%s) to global.json as the current version will use this version from now on as current in the build" (version.ToString()) 
 
     let GlobalJsonVersion = parse <| globalJson().Version
