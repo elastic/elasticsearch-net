@@ -1,10 +1,7 @@
 ﻿namespace Scripts
 
-open System 
-open FSharp.Data
 open Projects
 open Versioning
-open Tooling
 
 module ShadowDependencies =
 

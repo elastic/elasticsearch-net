@@ -15,9 +15,6 @@ open Commandline
 
 module Build =
 
-    type private GlobalJson = JsonProvider<"../../global.json", InferTypesFromValues=false>
-    let private pinnedSdkVersion = GlobalJson.GetSample().Sdk.Version
-
     let Restore() = DotNet.Exec ["restore"; Solution; ] |> ignore
         
     let Compile args (ArtifactsVersion(version)) = 
