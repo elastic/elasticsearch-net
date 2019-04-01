@@ -1,4 +1,5 @@
 ﻿using System;
+using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
@@ -18,6 +19,7 @@ namespace Tests.Aggregations.Metric.MedianAbsoluteDeviation
 	 * It is calculated as the median of each data point's deviation from the median of the
 	 * entire sample. That is, for a random variable `X`, the median absolute deviation is `median(|median(X) - Xi|)`.
 	 */
+	[SkipVersion("<6.6.0", "Introduced in Elasticsearch 6.6.0")]
 	public class MedianAbsoluteDeviationAggregationUsageTests : AggregationUsageTestBase
 	{
 		public MedianAbsoluteDeviationAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
