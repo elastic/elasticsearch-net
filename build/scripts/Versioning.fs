@@ -73,7 +73,7 @@ module Versioning =
                 // fail if current is greater or equal to the new version
                 if (currentVersion >= newVersion) then
                     failwithf "Can not release %O its lower then current %O" newVersion.Full currentVersion.Full
-                writeVersionIntoGlobalJson newVersion
+                writeVersionIntoGlobalJson newVersion.Full
         | _ -> ignore()
     
     let ArtifactsVersion buildVersions =
