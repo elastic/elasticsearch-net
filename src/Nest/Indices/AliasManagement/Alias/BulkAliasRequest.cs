@@ -22,7 +22,7 @@ namespace Nest
 		IList<IAliasAction> IBulkAliasRequest.Actions { get; set; } = new List<IAliasAction>();
 
 		public BulkAliasDescriptor Add(IAliasAction action) =>
-			Fluent.Assign<BulkAliasDescriptor, IBulkAliasRequest>(this, a => a.Actions.AddIfNotNull(action));
+			Fluent.Assign<BulkAliasDescriptor, IBulkAliasRequest, IAliasAction>(this, action, (a, v) => a.Actions.AddIfNotNull(v));
 
 		public BulkAliasDescriptor Add(Func<AliasAddDescriptor, IAliasAddAction> addSelector) => Add(addSelector?.Invoke(new AliasAddDescriptor()));
 

@@ -72,11 +72,11 @@ namespace Nest
 
 	public class ScrollAllDescriptor<T> : DescriptorBase<ScrollAllDescriptor<T>, IScrollAllRequest>, IScrollAllRequest where T : class
 	{
-		public ScrollAllDescriptor(Time scrollTime, int numberOfSlices) => Assign(a =>
+		public ScrollAllDescriptor(Time scrollTime, int numberOfSlices)
 		{
-			a.ScrollTime = scrollTime;
-			a.Slices = numberOfSlices;
-		});
+			Self.ScrollTime = scrollTime;
+			Self.Slices = numberOfSlices;
+		}
 
 		ProducerConsumerBackPressure IScrollAllRequest.BackPressure { get; set; }
 		int? IScrollAllRequest.MaxDegreeOfParallelism { get; set; }
@@ -87,18 +87,18 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ScrollAllDescriptor<T> MaxDegreeOfParallelism(int? maxDegreeOfParallelism) =>
-			Assign(a => a.MaxDegreeOfParallelism = maxDegreeOfParallelism);
+			Assign(maxDegreeOfParallelism, (a, v) => a.MaxDegreeOfParallelism = v);
 
 		/// <inheritdoc />
-		public ScrollAllDescriptor<T> RoutingField(Field field) => Assign(a => a.RoutingField = field);
+		public ScrollAllDescriptor<T> RoutingField(Field field) => Assign(field, (a, v) => a.RoutingField = v);
 
 		/// <inheritdoc />
 		public ScrollAllDescriptor<T> RoutingField(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.RoutingField = objectPath);
+			Assign(objectPath, (a, v) => a.RoutingField = v);
 
 		/// <inheritdoc />
 		public ScrollAllDescriptor<T> Search(Func<SearchDescriptor<T>, ISearchRequest> selector) =>
-			Assign(a => a.Search = selector?.Invoke(new SearchDescriptor<T>()));
+			Assign(selector, (a, v) => a.Search = v?.Invoke(new SearchDescriptor<T>()));
 
 		/// <summary>
 		/// Simple back pressure implementation that makes sure the minimum max concurrency between producer and consumer
@@ -108,6 +108,6 @@ namespace Nest
 		/// <param name="maxConcurrency">The minimum maximum concurrency which would be the bottleneck of the producer consumer pipeline</param>
 		/// <param name="backPressureFactor">The maximum amplification back pressure of the greedier part of the producer consumer pipeline</param>
 		public ScrollAllDescriptor<T> BackPressure(int maxConcurrency, int? backPressureFactor = null) =>
-			Assign(a => a.BackPressure = new ProducerConsumerBackPressure(backPressureFactor, maxConcurrency));
+			Assign(new ProducerConsumerBackPressure(backPressureFactor, maxConcurrency), (a, v) => a.BackPressure = v);
 	}
 }

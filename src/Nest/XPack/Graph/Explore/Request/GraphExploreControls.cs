@@ -37,16 +37,16 @@ namespace Nest
 		Time IGraphExploreControls.Timeout { get; set; }
 		bool? IGraphExploreControls.UseSignificance { get; set; }
 
-		public GraphExploreControlsDescriptor<T> UseSignificance(bool? useSignificance = true) => Assign(a => a.UseSignificance = useSignificance);
+		public GraphExploreControlsDescriptor<T> UseSignificance(bool? useSignificance = true) => Assign(useSignificance, (a, v) => a.UseSignificance = v);
 
-		public GraphExploreControlsDescriptor<T> SampleSize(int? sampleSize) => Assign(a => a.SampleSize = sampleSize);
+		public GraphExploreControlsDescriptor<T> SampleSize(int? sampleSize) => Assign(sampleSize, (a, v) => a.SampleSize = v);
 
-		public GraphExploreControlsDescriptor<T> Timeout(Time time) => Assign(a => a.Timeout = time);
+		public GraphExploreControlsDescriptor<T> Timeout(Time time) => Assign(time, (a, v) => a.Timeout = v);
 
 		public GraphExploreControlsDescriptor<T> SamleDiversity(Field field, int? maxDocumentsPerValue) =>
-			Assign(a => a.SampleDiversity = new SampleDiversity { Field = field, MaxDocumentsPerValue = maxDocumentsPerValue });
+			Assign(new SampleDiversity { Field = field, MaxDocumentsPerValue = maxDocumentsPerValue }, (a, v) => a.SampleDiversity = v);
 
 		public GraphExploreControlsDescriptor<T> SamleDiversity(Expression<Func<T, object>> field, int? maxDocumentsPerValue) =>
-			Assign(a => a.SampleDiversity = new SampleDiversity { Field = field, MaxDocumentsPerValue = maxDocumentsPerValue });
+			Assign(new SampleDiversity { Field = field, MaxDocumentsPerValue = maxDocumentsPerValue }, (a, v) => a.SampleDiversity = v);
 	}
 }

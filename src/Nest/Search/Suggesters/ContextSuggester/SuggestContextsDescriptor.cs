@@ -15,6 +15,6 @@ namespace Nest
 		public SuggestContextsDescriptor<T> GeoLocation(Func<GeoSuggestContextDescriptor<T>, IGeoSuggestContext> geoLocationDescriptor) =>
 			AddContext(geoLocationDescriptor?.Invoke(new GeoSuggestContextDescriptor<T>()));
 
-		private SuggestContextsDescriptor<T> AddContext(ISuggestContext context) => context == null ? this : Assign(a => a.Add(context));
+		private SuggestContextsDescriptor<T> AddContext(ISuggestContext context) => context == null ? this : Assign(context, (a, v) => a.Add(v));
 	}
 }

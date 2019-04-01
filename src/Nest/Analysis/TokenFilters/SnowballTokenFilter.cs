@@ -30,6 +30,6 @@ namespace Nest
 		SnowballLanguage? ISnowballTokenFilter.Language { get; set; }
 
 		/// <inheritdoc />
-		public SnowballTokenFilterDescriptor Language(SnowballLanguage? language) => Assign(a => a.Language = language);
+		public SnowballTokenFilterDescriptor Language(SnowballLanguage? language) => Assign(language, (a, v) => a.Language = v);
 	}
 }

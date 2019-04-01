@@ -95,33 +95,33 @@ namespace Nest
 		void ISpanQuery.Accept(IQueryVisitor visitor) => new QueryWalker().Walk(this, visitor);
 
 		public SpanQueryDescriptor<T> SpanTerm(Func<SpanTermQueryDescriptor<T>, ISpanTermQuery> selector) =>
-			Assign(a => a.SpanTerm = selector?.Invoke(new SpanTermQueryDescriptor<T>()));
+			Assign(selector, (a, v) => a.SpanTerm = v?.Invoke(new SpanTermQueryDescriptor<T>()));
 
 		public SpanQueryDescriptor<T> SpanFirst(Func<SpanFirstQueryDescriptor<T>, ISpanFirstQuery> selector) =>
-			Assign(a => a.SpanFirst = selector?.Invoke(new SpanFirstQueryDescriptor<T>()));
+			Assign(selector, (a, v) => a.SpanFirst = v?.Invoke(new SpanFirstQueryDescriptor<T>()));
 
 		public SpanQueryDescriptor<T> SpanNear(Func<SpanNearQueryDescriptor<T>, ISpanNearQuery> selector) =>
-			Assign(a => a.SpanNear = selector?.Invoke(new SpanNearQueryDescriptor<T>()));
+			Assign(selector, (a, v) => a.SpanNear = v?.Invoke(new SpanNearQueryDescriptor<T>()));
 
 		public SpanQueryDescriptor<T> SpanGap(Func<SpanGapQueryDescriptor<T>, ISpanGapQuery> selector) =>
-			Assign(a => a.SpanGap = selector?.Invoke(new SpanGapQueryDescriptor<T>()));
+			Assign(selector, (a, v) => a.SpanGap = v?.Invoke(new SpanGapQueryDescriptor<T>()));
 
 		public SpanQueryDescriptor<T> SpanOr(Func<SpanOrQueryDescriptor<T>, ISpanOrQuery> selector) =>
-			Assign(a => a.SpanOr = selector?.Invoke(new SpanOrQueryDescriptor<T>()));
+			Assign(selector, (a, v) => a.SpanOr = v?.Invoke(new SpanOrQueryDescriptor<T>()));
 
 		public SpanQueryDescriptor<T> SpanNot(Func<SpanNotQueryDescriptor<T>, ISpanNotQuery> selector) =>
-			Assign(a => a.SpanNot = selector?.Invoke(new SpanNotQueryDescriptor<T>()));
+			Assign(selector, (a, v) => a.SpanNot = v?.Invoke(new SpanNotQueryDescriptor<T>()));
 
 		public SpanQueryDescriptor<T> SpanMultiTerm(Func<SpanMultiTermQueryDescriptor<T>, ISpanMultiTermQuery> selector) =>
-			Assign(a => a.SpanMultiTerm = selector?.Invoke(new SpanMultiTermQueryDescriptor<T>()));
+			Assign(selector, (a, v) => a.SpanMultiTerm = v?.Invoke(new SpanMultiTermQueryDescriptor<T>()));
 
 		public SpanQueryDescriptor<T> SpanContaining(Func<SpanContainingQueryDescriptor<T>, ISpanContainingQuery> selector) =>
-			Assign(a => a.SpanContaining = selector?.Invoke(new SpanContainingQueryDescriptor<T>()));
+			Assign(selector, (a, v) => a.SpanContaining = v?.Invoke(new SpanContainingQueryDescriptor<T>()));
 
 		public SpanQueryDescriptor<T> SpanWithin(Func<SpanWithinQueryDescriptor<T>, ISpanWithinQuery> selector) =>
-			Assign(a => a.SpanWithin = selector?.Invoke(new SpanWithinQueryDescriptor<T>()));
+			Assign(selector, (a, v) => a.SpanWithin = v?.Invoke(new SpanWithinQueryDescriptor<T>()));
 
 		public SpanQueryDescriptor<T> SpanFieldMasking(Func<SpanFieldMaskingQueryDescriptor<T>, ISpanFieldMaskingQuery> selector) =>
-			Assign(a => a.SpanFieldMasking = selector?.Invoke(new SpanFieldMaskingQueryDescriptor<T>()));
+			Assign(selector, (a, v) => a.SpanFieldMasking = v?.Invoke(new SpanFieldMaskingQueryDescriptor<T>()));
 	}
 }

@@ -45,11 +45,12 @@ namespace Nest
 		protected override bool Conditionless => GeoShapeLineStringQuery.IsConditionless(this);
 		ILineStringGeoShape IGeoShapeLineStringQuery.Shape { get; set; }
 
-		public GeoShapeLineStringQueryDescriptor<T> Coordinates(IEnumerable<GeoCoordinate> coordinates, bool? ignoreUnmapped = null) => Assign(a =>
-		{
-			a.Shape = a.Shape ?? new LineStringGeoShape();
-			a.Shape.Coordinates = coordinates;
-			a.IgnoreUnmapped = ignoreUnmapped;
-		});
+		public GeoShapeLineStringQueryDescriptor<T> Coordinates(IEnumerable<GeoCoordinate> coordinates, bool? ignoreUnmapped = null) =>
+			Assign(coordinates,(a, v) =>
+			{
+				a.Shape = a.Shape ?? new LineStringGeoShape();
+				a.Shape.Coordinates = v;
+			})
+			.Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmapped = v);
 	}
 }

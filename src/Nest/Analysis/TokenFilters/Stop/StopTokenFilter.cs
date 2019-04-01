@@ -68,21 +68,21 @@ namespace Nest
 		string IStopTokenFilter.StopWordsPath { get; set; }
 
 		/// <inheritdoc />
-		public StopTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true) => Assign(a => a.IgnoreCase = ignoreCase);
+		public StopTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true) => Assign(ignoreCase, (a, v) => a.IgnoreCase = v);
 
 		/// <inheritdoc />
-		public StopTokenFilterDescriptor RemoveTrailing(bool? removeTrailing = true) => Assign(a => a.RemoveTrailing = removeTrailing);
+		public StopTokenFilterDescriptor RemoveTrailing(bool? removeTrailing = true) => Assign(removeTrailing, (a, v) => a.RemoveTrailing = v);
 
 		/// <inheritdoc />
-		public StopTokenFilterDescriptor StopWords(StopWords stopWords) => Assign(a => a.StopWords = stopWords);
+		public StopTokenFilterDescriptor StopWords(StopWords stopWords) => Assign(stopWords, (a, v) => a.StopWords = v);
 
 		/// <inheritdoc />
-		public StopTokenFilterDescriptor StopWords(IEnumerable<string> stopWords) => Assign(a => a.StopWords = stopWords.ToListOrNullIfEmpty());
+		public StopTokenFilterDescriptor StopWords(IEnumerable<string> stopWords) => Assign(stopWords.ToListOrNullIfEmpty(), (a, v) => a.StopWords = v);
 
 		/// <inheritdoc />
-		public StopTokenFilterDescriptor StopWords(params string[] stopWords) => Assign(a => a.StopWords = stopWords);
+		public StopTokenFilterDescriptor StopWords(params string[] stopWords) => Assign(stopWords, (a, v) => a.StopWords = v);
 
 		/// <inheritdoc />
-		public StopTokenFilterDescriptor StopWordsPath(string path) => Assign(a => a.StopWordsPath = path);
+		public StopTokenFilterDescriptor StopWordsPath(string path) => Assign(path, (a, v) => a.StopWordsPath = v);
 	}
 }

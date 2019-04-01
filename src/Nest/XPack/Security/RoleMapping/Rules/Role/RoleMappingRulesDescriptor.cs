@@ -8,12 +8,12 @@ namespace Nest
 	{
 		public RoleMappingRulesDescriptor() : base(new List<RoleMappingRuleBase>()) { }
 
-		private IPromise<List<RoleMappingRuleBase>> Self => this;
-		List<RoleMappingRuleBase> IPromise<List<RoleMappingRuleBase>>.Value { get; } = new List<RoleMappingRuleBase>();
+		// TODO: Remove in 7.x as it's exposed on base
+		List<RoleMappingRuleBase> IPromise<List<RoleMappingRuleBase>>.Value => PromisedValue;
 
 		private RoleMappingRulesDescriptor Add(RoleMappingRuleBase m)
 		{
-			Self.Value.AddIfNotNull(m);
+			PromisedValue.AddIfNotNull(m);
 			return this;
 		}
 

@@ -35,21 +35,21 @@ namespace Nest
 		Time ISlowLogIndexing.ThresholdWarn { get; set; }
 
 		/// <inheritdoc />
-		public SlowLogIndexingDescriptor LogLevel(LogLevel? level) => Assign(a => a.LogLevel = level);
+		public SlowLogIndexingDescriptor LogLevel(LogLevel? level) => Assign(level, (a, v) => a.LogLevel = v);
 
 		/// <inheritdoc />
-		public SlowLogIndexingDescriptor Source(int? source) => Assign(a => a.Source = source);
+		public SlowLogIndexingDescriptor Source(int? source) => Assign(source, (a, v) => a.Source = v);
 
 		/// <inheritdoc />
-		public SlowLogIndexingDescriptor ThresholdDebug(Time time) => Assign(a => a.ThresholdDebug = time);
+		public SlowLogIndexingDescriptor ThresholdDebug(Time time) => Assign(time, (a, v) => a.ThresholdDebug = v);
 
 		/// <inheritdoc />
-		public SlowLogIndexingDescriptor ThresholdInfo(Time time) => Assign(a => a.ThresholdInfo = time);
+		public SlowLogIndexingDescriptor ThresholdInfo(Time time) => Assign(time, (a, v) => a.ThresholdInfo = v);
 
 		/// <inheritdoc />
-		public SlowLogIndexingDescriptor ThresholdTrace(Time time) => Assign(a => a.ThresholdTrace = time);
+		public SlowLogIndexingDescriptor ThresholdTrace(Time time) => Assign(time, (a, v) => a.ThresholdTrace = v);
 
 		/// <inheritdoc />
-		public SlowLogIndexingDescriptor ThresholdWarn(Time time) => Assign(a => a.ThresholdWarn = time);
+		public SlowLogIndexingDescriptor ThresholdWarn(Time time) => Assign(time, (a, v) => a.ThresholdWarn = v);
 	}
 }

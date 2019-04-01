@@ -24,12 +24,12 @@ namespace Nest
 	{
 		public LikeDescriptor() : base(new List<Like>()) { }
 
-		public LikeDescriptor<T> Text(string likeText) => Assign(a => a.Add(likeText));
+		public LikeDescriptor<T> Text(string likeText) => Assign(likeText, (a, v) => a.Add(v));
 
 		public LikeDescriptor<T> Document(Func<LikeDocumentDescriptor<T>, ILikeDocument> selector)
 		{
 			var l = selector?.Invoke(new LikeDocumentDescriptor<T>());
-			return l == null ? this : Assign(a => a.Add(new Like(l)));
+			return l == null ? this : Assign(l, (a, v) => a.Add(new Like(v)));
 		}
 	}
 

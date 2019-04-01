@@ -31,9 +31,9 @@ namespace Nest
 		string IHipChatAction.Account { get; set; }
 		IHipChatMessage IHipChatAction.Message { get; set; }
 
-		public HipChatActionDescriptor Account(string account) => Assign(a => a.Account = account);
+		public HipChatActionDescriptor Account(string account) => Assign(account, (a, v) => a.Account = v);
 
 		public HipChatActionDescriptor Message(Func<HipChatMessageDescriptor, IHipChatMessage> selector) =>
-			Assign(a => a.Message = selector.InvokeOrDefault(new HipChatMessageDescriptor()));
+			Assign(selector.InvokeOrDefault(new HipChatMessageDescriptor()), (a, v) => a.Message = v);
 	}
 }

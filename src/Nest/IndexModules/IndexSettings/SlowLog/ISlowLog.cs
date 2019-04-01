@@ -24,10 +24,10 @@ namespace Nest
 
 		/// <inheritdoc />
 		public SlowLogDescriptor Search(Func<SlowLogSearchDescriptor, ISlowLogSearch> selector) =>
-			Assign(a => a.Search = selector?.Invoke(new SlowLogSearchDescriptor()));
+			Assign(selector, (a, v) => a.Search = v?.Invoke(new SlowLogSearchDescriptor()));
 
 		/// <inheritdoc />
 		public SlowLogDescriptor Indexing(Func<SlowLogIndexingDescriptor, ISlowLogIndexing> selector) =>
-			Assign(a => a.Indexing = selector?.Invoke(new SlowLogIndexingDescriptor()));
+			Assign(selector, (a, v) => a.Indexing = v?.Invoke(new SlowLogIndexingDescriptor()));
 	}
 }

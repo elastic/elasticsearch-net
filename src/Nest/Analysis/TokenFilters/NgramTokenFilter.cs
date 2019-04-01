@@ -42,9 +42,9 @@ namespace Nest
 		int? INGramTokenFilter.MinGram { get; set; }
 
 		/// <inheritdoc />
-		public NGramTokenFilterDescriptor MinGram(int? minGram) => Assign(a => a.MinGram = minGram);
+		public NGramTokenFilterDescriptor MinGram(int? minGram) => Assign(minGram, (a, v) => a.MinGram = v);
 
 		/// <inheritdoc />
-		public NGramTokenFilterDescriptor MaxGram(int? maxGram) => Assign(a => a.MaxGram = maxGram);
+		public NGramTokenFilterDescriptor MaxGram(int? maxGram) => Assign(maxGram, (a, v) => a.MaxGram = v);
 	}
 }

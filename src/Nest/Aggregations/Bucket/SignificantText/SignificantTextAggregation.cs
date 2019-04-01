@@ -225,83 +225,83 @@ namespace Nest
 		Fields ISignificantTextAggregation.SourceFields { get; set; }
 
 		/// <inheritdoc cref="ISignificantTextAggregation.Field" />
-		public SignificantTextAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public SignificantTextAggregationDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="ISignificantTextAggregation.Field" />
-		public SignificantTextAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public SignificantTextAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="ISignificantTextAggregation.Size" />
-		public SignificantTextAggregationDescriptor<T> Size(int? size) => Assign(a => a.Size = size);
+		public SignificantTextAggregationDescriptor<T> Size(int? size) => Assign(size, (a, v) => a.Size = v);
 
 		/// <inheritdoc cref="ISignificantTextAggregation.ExecutionHint" />
-		public SignificantTextAggregationDescriptor<T> ExecutionHint(TermsAggregationExecutionHint? hint) => Assign(a => a.ExecutionHint = hint);
+		public SignificantTextAggregationDescriptor<T> ExecutionHint(TermsAggregationExecutionHint? hint) => Assign(hint, (a, v) => a.ExecutionHint = v);
 
 		/// <inheritdoc cref="ISignificantTextAggregation.Include" />
 		public SignificantTextAggregationDescriptor<T> Include(string includePattern) =>
-			Assign(a => a.Include = new SignificantTermsIncludeExclude(includePattern));
+			Assign(new SignificantTermsIncludeExclude(includePattern), (a, v) => a.Include = v);
 
 		/// <inheritdoc cref="ISignificantTextAggregation.Include" />
 		public SignificantTextAggregationDescriptor<T> Include(IEnumerable<string> values) =>
-			Assign(a => a.Include = new SignificantTermsIncludeExclude(values));
+			Assign(new SignificantTermsIncludeExclude(values), (a, v) => a.Include = v);
 
 		/// <inheritdoc cref="ISignificantTextAggregation.Exclude" />
 		public SignificantTextAggregationDescriptor<T> Exclude(string excludePattern) =>
-			Assign(a => a.Exclude = new SignificantTermsIncludeExclude(excludePattern));
+			Assign(new SignificantTermsIncludeExclude(excludePattern), (a, v) => a.Exclude = v);
 
 		/// <inheritdoc cref="ISignificantTextAggregation.Exclude" />
 		public SignificantTextAggregationDescriptor<T> Exclude(IEnumerable<string> values) =>
-			Assign(a => a.Exclude = new SignificantTermsIncludeExclude(values));
+			Assign(new SignificantTermsIncludeExclude(values), (a, v) => a.Exclude = v);
 
 		/// <inheritdoc cref="ISignificantTextAggregation.ShardSize" />
-		public SignificantTextAggregationDescriptor<T> ShardSize(int? shardSize) => Assign(a => a.ShardSize = shardSize);
+		public SignificantTextAggregationDescriptor<T> ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSize = v);
 
 		/// <inheritdoc cref="ISignificantTextAggregation.MinimumDocumentCount" />
 		public SignificantTextAggregationDescriptor<T> MinimumDocumentCount(long? minimumDocumentCount) =>
-			Assign(a => a.MinimumDocumentCount = minimumDocumentCount);
+			Assign(minimumDocumentCount, (a, v) => a.MinimumDocumentCount = v);
 
 		/// <inheritdoc cref="ISignificantTextAggregation.ShardMinimumDocumentCount" />
 		public SignificantTextAggregationDescriptor<T> ShardMinimumDocumentCount(long? shardMinimumDocumentCount) =>
-			Assign(a => a.ShardMinimumDocumentCount = shardMinimumDocumentCount);
+			Assign(shardMinimumDocumentCount, (a, v) => a.ShardMinimumDocumentCount = v);
 
 		/// <inheritdoc cref="ISignificantTextAggregation.MutualInformation" />
 		public SignificantTextAggregationDescriptor<T> MutualInformation(
 			Func<MutualInformationHeuristicDescriptor, IMutualInformationHeuristic> mutualInformationSelector = null
 		) =>
-			Assign(a => a.MutualInformation = mutualInformationSelector.InvokeOrDefault(new MutualInformationHeuristicDescriptor()));
+			Assign(mutualInformationSelector.InvokeOrDefault(new MutualInformationHeuristicDescriptor()), (a, v) => a.MutualInformation = v);
 
 		/// <inheritdoc cref="ISignificantTextAggregation.ChiSquare" />
 		public SignificantTextAggregationDescriptor<T> ChiSquare(Func<ChiSquareHeuristicDescriptor, IChiSquareHeuristic> chiSquareSelector) =>
-			Assign(a => a.ChiSquare = chiSquareSelector.InvokeOrDefault(new ChiSquareHeuristicDescriptor()));
+			Assign(chiSquareSelector.InvokeOrDefault(new ChiSquareHeuristicDescriptor()), (a, v) => a.ChiSquare = v);
 
 		/// <inheritdoc cref="ISignificantTextAggregation.GoogleNormalizedDistance" />
 		public SignificantTextAggregationDescriptor<T> GoogleNormalizedDistance(
 			Func<GoogleNormalizedDistanceHeuristicDescriptor, IGoogleNormalizedDistanceHeuristic> gndSelector
 		) =>
-			Assign(a => a.GoogleNormalizedDistance = gndSelector.InvokeOrDefault(new GoogleNormalizedDistanceHeuristicDescriptor()));
+			Assign(gndSelector.InvokeOrDefault(new GoogleNormalizedDistanceHeuristicDescriptor()), (a, v) => a.GoogleNormalizedDistance = v);
 
 		/// <inheritdoc cref="ISignificantTextAggregation.PercentageScore" />
 		public SignificantTextAggregationDescriptor<T> PercentageScore(
 			Func<PercentageScoreHeuristicDescriptor, IPercentageScoreHeuristic> percentageScoreSelector
 		) =>
-			Assign(a => a.PercentageScore = percentageScoreSelector.InvokeOrDefault(new PercentageScoreHeuristicDescriptor()));
+			Assign(percentageScoreSelector.InvokeOrDefault(new PercentageScoreHeuristicDescriptor()), (a, v) => a.PercentageScore = v);
 
 		/// <inheritdoc cref="ISignificantTextAggregation.Script" />
 		public SignificantTextAggregationDescriptor<T> Script(Func<ScriptedHeuristicDescriptor, IScriptedHeuristic> scriptSelector) =>
-			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptedHeuristicDescriptor()));
+			Assign(scriptSelector, (a, v) => a.Script = v?.Invoke(new ScriptedHeuristicDescriptor()));
 
 		/// <inheritdoc cref="ISignificantTextAggregation.BackgroundFilter" />
 		public SignificantTextAggregationDescriptor<T> BackgroundFilter(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
-			Assign(a => a.BackgroundFilter = selector?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(selector, (a, v) => a.BackgroundFilter = v?.Invoke(new QueryContainerDescriptor<T>()));
 
 		/// <inheritdoc cref="ISignificantTextAggregation.FilterDuplicateText" />
 		public SignificantTextAggregationDescriptor<T> FilterDuplicateText(bool? filterDuplicateText = true) =>
-			Assign(a => a.FilterDuplicateText = filterDuplicateText);
+			Assign(filterDuplicateText, (a, v) => a.FilterDuplicateText = v);
 
 		/// <inheritdoc cref="ISignificantTextAggregation.SourceFields" />
 		public SignificantTextAggregationDescriptor<T> SourceFields(Func<FieldsDescriptor<T>, IPromise<Fields>> sourceFields) =>
-			Assign(a => a.SourceFields = sourceFields?.Invoke(new FieldsDescriptor<T>())?.Value);
+			Assign(sourceFields, (a, v) => a.SourceFields = v?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		/// <inheritdoc cref="ISignificantTextAggregation.SourceFields" />
-		public SignificantTextAggregationDescriptor<T> SourceFields(Fields sourceFields) => Assign(a => a.SourceFields = sourceFields);
+		public SignificantTextAggregationDescriptor<T> SourceFields(Fields sourceFields) => Assign(sourceFields, (a, v) => a.SourceFields = v);
 	}
 }

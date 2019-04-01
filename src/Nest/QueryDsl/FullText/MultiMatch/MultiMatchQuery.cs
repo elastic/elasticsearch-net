@@ -238,64 +238,64 @@ namespace Nest
 
 		/// <inheritdoc cref="IMultiMatchQuery.Fields" />
 		public MultiMatchQueryDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+			Assign(fields, (a, v) => a.Fields = v?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		/// <inheritdoc cref="IMultiMatchQuery.Fields" />
-		public MultiMatchQueryDescriptor<T> Fields(Fields fields) => Assign(a => a.Fields = fields);
+		public MultiMatchQueryDescriptor<T> Fields(Fields fields) => Assign(fields, (a, v) => a.Fields = v);
 
 		/// <inheritdoc cref="IMultiMatchQuery.Query" />
-		public MultiMatchQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
+		public MultiMatchQueryDescriptor<T> Query(string query) => Assign(query, (a, v) => a.Query = v);
 
 		/// <inheritdoc cref="IMultiMatchQuery.Analyzer" />
-		public MultiMatchQueryDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
+		public MultiMatchQueryDescriptor<T> Analyzer(string analyzer) => Assign(analyzer, (a, v) => a.Analyzer = v);
 
 		/// <inheritdoc cref="IMultiMatchQuery.Fuzziness" />
-		public MultiMatchQueryDescriptor<T> Fuzziness(Fuzziness fuzziness) => Assign(a => a.Fuzziness = fuzziness);
+		public MultiMatchQueryDescriptor<T> Fuzziness(Fuzziness fuzziness) => Assign(fuzziness, (a, v) => a.Fuzziness = v);
 
 		/// <inheritdoc cref="IMultiMatchQuery.CutoffFrequency" />
 		public MultiMatchQueryDescriptor<T> CutoffFrequency(double? cutoffFrequency)
-			=> Assign(a => a.CutoffFrequency = cutoffFrequency);
+			=> Assign(cutoffFrequency, (a, v) => a.CutoffFrequency = v);
 
 		/// <inheritdoc cref="IMultiMatchQuery.MinimumShouldMatch" />
 		public MultiMatchQueryDescriptor<T> MinimumShouldMatch(MinimumShouldMatch minimumShouldMatch)
-			=> Assign(a => a.MinimumShouldMatch = minimumShouldMatch);
+			=> Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatch = v);
 
 		/// <inheritdoc cref="IMultiMatchQuery.FuzzyRewrite" />
-		public MultiMatchQueryDescriptor<T> FuzzyRewrite(MultiTermQueryRewrite rewrite) => Assign(a => Self.FuzzyRewrite = rewrite);
+		public MultiMatchQueryDescriptor<T> FuzzyRewrite(MultiTermQueryRewrite rewrite) => Assign(rewrite, (a, v) => a.FuzzyRewrite = v);
 
 		/// <inheritdoc cref="IMultiMatchQuery.FuzzyTranspositions" />
 		public MultiMatchQueryDescriptor<T> FuzzyTranspositions(bool? fuzzyTranpositions = true) =>
-			Assign(a => a.FuzzyTranspositions = fuzzyTranpositions);
+			Assign(fuzzyTranpositions, (a, v) => a.FuzzyTranspositions = v);
 
 		/// <inheritdoc cref="IMultiMatchQuery.Lenient" />
-		public MultiMatchQueryDescriptor<T> Lenient(bool? lenient = true) => Assign(a => a.Lenient = lenient);
+		public MultiMatchQueryDescriptor<T> Lenient(bool? lenient = true) => Assign(lenient, (a, v) => a.Lenient = v);
 
 		/// <inheritdoc cref="IMultiMatchQuery.PrefixLength" />
-		public MultiMatchQueryDescriptor<T> PrefixLength(int? prefixLength) => Assign(a => a.PrefixLength = prefixLength);
+		public MultiMatchQueryDescriptor<T> PrefixLength(int? prefixLength) => Assign(prefixLength, (a, v) => a.PrefixLength = v);
 
 		/// <inheritdoc cref="IMultiMatchQuery.MaxExpansions" />
-		public MultiMatchQueryDescriptor<T> MaxExpansions(int? maxExpansions) => Assign(a => a.MaxExpansions = maxExpansions);
+		public MultiMatchQueryDescriptor<T> MaxExpansions(int? maxExpansions) => Assign(maxExpansions, (a, v) => a.MaxExpansions = v);
 
 		/// <inheritdoc cref="IMultiMatchQuery.Slop" />
-		public MultiMatchQueryDescriptor<T> Slop(int? slop) => Assign(a => a.Slop = slop);
+		public MultiMatchQueryDescriptor<T> Slop(int? slop) => Assign(slop, (a, v) => a.Slop = v);
 
 		/// <inheritdoc cref="IMultiMatchQuery.Operator" />
-		public MultiMatchQueryDescriptor<T> Operator(Operator? op) => Assign(a => a.Operator = op);
+		public MultiMatchQueryDescriptor<T> Operator(Operator? op) => Assign(op, (a, v) => a.Operator = v);
 
 		/// <inheritdoc cref="IMultiMatchQuery.TieBreaker" />
-		public MultiMatchQueryDescriptor<T> TieBreaker(double? tieBreaker) => Assign(a => a.TieBreaker = tieBreaker);
+		public MultiMatchQueryDescriptor<T> TieBreaker(double? tieBreaker) => Assign(tieBreaker, (a, v) => a.TieBreaker = v);
 
 		/// <inheritdoc cref="IMultiMatchQuery.Type" />
-		public MultiMatchQueryDescriptor<T> Type(TextQueryType? type) => Assign(a => a.Type = type);
+		public MultiMatchQueryDescriptor<T> Type(TextQueryType? type) => Assign(type, (a, v) => a.Type = v);
 
 		/// <inheritdoc cref="IMultiMatchQuery.UseDisMax" />
-		public MultiMatchQueryDescriptor<T> UseDisMax(bool? useDisMax = true) => Assign(a => a.UseDisMax = useDisMax);
+		public MultiMatchQueryDescriptor<T> UseDisMax(bool? useDisMax = true) => Assign(useDisMax, (a, v) => a.UseDisMax = v);
 
 		/// <inheritdoc cref="IMultiMatchQuery.ZeroTermsQuery" />
-		public MultiMatchQueryDescriptor<T> ZeroTermsQuery(ZeroTermsQuery? zeroTermsQuery) => Assign(a => a.ZeroTermsQuery = zeroTermsQuery);
+		public MultiMatchQueryDescriptor<T> ZeroTermsQuery(ZeroTermsQuery? zeroTermsQuery) => Assign(zeroTermsQuery, (a, v) => a.ZeroTermsQuery = v);
 
 		/// <inheritdoc cref="IMultiMatchQuery.AutoGenerateSynonymsPhraseQuery" />
 		public MultiMatchQueryDescriptor<T> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) =>
-			Assign(a => a.AutoGenerateSynonymsPhraseQuery = autoGenerateSynonymsPhraseQuery);
+			Assign(autoGenerateSynonymsPhraseQuery, (a, v) => a.AutoGenerateSynonymsPhraseQuery = v);
 	}
 }

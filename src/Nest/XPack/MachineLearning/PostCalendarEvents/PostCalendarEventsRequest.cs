@@ -69,14 +69,14 @@ namespace Nest
 		IEnumerable<ScheduledEvent> IPostCalendarEventsRequest.Events { get; set; }
 
 		/// <inheritdoc cref="IPostCalendarEventsRequest.Events"/>
-		public PostCalendarEventsDescriptor Events(IEnumerable<ScheduledEvent> events) => Assign(a => a.Events = events);
+		public PostCalendarEventsDescriptor Events(IEnumerable<ScheduledEvent> events) => Assign(events, (a, v) => a.Events = v);
 
 		/// <inheritdoc cref="IPostCalendarEventsRequest.Events"/>
-		public PostCalendarEventsDescriptor Events(params ScheduledEvent[] events) => Assign(a =>
+		public PostCalendarEventsDescriptor Events(params ScheduledEvent[] events) => Assign(events, (a, v) =>
 		{
-			if (events != null && events.Length == 1 && events[0] is IEnumerable)
-				a.Events = ((IEnumerable)events[0]).Cast<ScheduledEvent>();
-			else a.Events = events;
+			if (v != null && v.Length == 1 && v[0] is IEnumerable)
+				a.Events = ((IEnumerable)v[0]).Cast<ScheduledEvent>();
+			else a.Events = v;
 		});
 	}
 }

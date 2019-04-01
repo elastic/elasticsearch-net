@@ -58,16 +58,16 @@ namespace Nest
 		int? IHoltWintersModel.Period { get; set; }
 		HoltWintersType? IHoltWintersModel.Type { get; set; }
 
-		public HoltWintersModelDescriptor Alpha(float? alpha) => Assign(a => a.Alpha = alpha);
+		public HoltWintersModelDescriptor Alpha(float? alpha) => Assign(alpha, (a, v) => a.Alpha = v);
 
-		public HoltWintersModelDescriptor Beta(float? beta) => Assign(a => a.Beta = beta);
+		public HoltWintersModelDescriptor Beta(float? beta) => Assign(beta, (a, v) => a.Beta = v);
 
-		public HoltWintersModelDescriptor Gamma(float? gamma) => Assign(a => a.Gamma = gamma);
+		public HoltWintersModelDescriptor Gamma(float? gamma) => Assign(gamma, (a, v) => a.Gamma = v);
 
-		public HoltWintersModelDescriptor Pad(bool? pad = true) => Assign(a => a.Pad = pad);
+		public HoltWintersModelDescriptor Pad(bool? pad = true) => Assign(pad, (a, v) => a.Pad = v);
 
-		public HoltWintersModelDescriptor Period(int? period) => Assign(a => a.Period = period);
+		public HoltWintersModelDescriptor Period(int? period) => Assign(period, (a, v) => a.Period = v);
 
-		public HoltWintersModelDescriptor Type(HoltWintersType? type) => Assign(a => a.Type = type);
+		public HoltWintersModelDescriptor Type(HoltWintersType? type) => Assign(type, (a, v) => a.Type = v);
 	}
 }

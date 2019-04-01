@@ -71,19 +71,19 @@ namespace Nest
 		StopWords IFingerprintAnalyzer.StopWords { get; set; }
 		string IFingerprintAnalyzer.StopWordsPath { get; set; }
 
-		public FingerprintAnalyzerDescriptor Separator(string separator) => Assign(a => a.Separator = separator);
+		public FingerprintAnalyzerDescriptor Separator(string separator) => Assign(separator, (a, v) => a.Separator = v);
 
-		public FingerprintAnalyzerDescriptor MaxOutputSize(int? maxOutputSize) => Assign(a => a.MaxOutputSize = maxOutputSize);
+		public FingerprintAnalyzerDescriptor MaxOutputSize(int? maxOutputSize) => Assign(maxOutputSize, (a, v) => a.MaxOutputSize = v);
 
-		public FingerprintAnalyzerDescriptor PreserveOriginal(bool? preserveOriginal = true) => Assign(a => a.PreserveOriginal = preserveOriginal);
+		public FingerprintAnalyzerDescriptor PreserveOriginal(bool? preserveOriginal = true) => Assign(preserveOriginal, (a, v) => a.PreserveOriginal = v);
 
-		public FingerprintAnalyzerDescriptor StopWords(params string[] stopWords) => Assign(a => a.StopWords = stopWords);
+		public FingerprintAnalyzerDescriptor StopWords(params string[] stopWords) => Assign(stopWords, (a, v) => a.StopWords = v);
 
 		public FingerprintAnalyzerDescriptor StopWords(IEnumerable<string> stopWords) =>
-			Assign(a => a.StopWords = stopWords.ToListOrNullIfEmpty());
+			Assign(stopWords.ToListOrNullIfEmpty(), (a, v) => a.StopWords = v);
 
-		public FingerprintAnalyzerDescriptor StopWords(StopWords stopWords) => Assign(a => a.StopWords = stopWords);
+		public FingerprintAnalyzerDescriptor StopWords(StopWords stopWords) => Assign(stopWords, (a, v) => a.StopWords = v);
 
-		public FingerprintAnalyzerDescriptor StopWordsPath(string stopWordsPath) => Assign(a => a.StopWordsPath = stopWordsPath);
+		public FingerprintAnalyzerDescriptor StopWordsPath(string stopWordsPath) => Assign(stopWordsPath, (a, v) => a.StopWordsPath = v);
 	}
 }

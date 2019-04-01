@@ -16,9 +16,9 @@ namespace Nest
 		public TermsOrderDescriptor<T> KeyDescending() => Assign(a => a.Add(TermsOrder.KeyDescending));
 
 		public TermsOrderDescriptor<T> Ascending(string key) =>
-			string.IsNullOrWhiteSpace(key) ? this : Assign(a => a.Add(new TermsOrder { Key = key, Order = SortOrder.Ascending }));
+			string.IsNullOrWhiteSpace(key) ? this : Assign(key,(a, v) => a.Add(new TermsOrder { Key = v, Order = SortOrder.Ascending }));
 
 		public TermsOrderDescriptor<T> Descending(string key) =>
-			string.IsNullOrWhiteSpace(key) ? this : Assign(a => a.Add(new TermsOrder { Key = key, Order = SortOrder.Descending }));
+			string.IsNullOrWhiteSpace(key) ? this : Assign(key,(a, v) => a.Add(new TermsOrder { Key = v, Order = SortOrder.Descending }));
 	}
 }

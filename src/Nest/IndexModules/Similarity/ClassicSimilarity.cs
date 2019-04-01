@@ -32,6 +32,6 @@ namespace Nest
 		string ISimilarity.Type => "classic";
 
 		/// <inheritdoc />
-		public ClassicSimilarityDescriptor DiscountOverlaps(bool? discount = true) => Assign(a => a.DiscountOverlaps = discount);
+		public ClassicSimilarityDescriptor DiscountOverlaps(bool? discount = true) => Assign(discount, (a, v) => a.DiscountOverlaps = v);
 	}
 }

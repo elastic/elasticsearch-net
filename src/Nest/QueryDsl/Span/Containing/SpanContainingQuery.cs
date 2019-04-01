@@ -43,9 +43,9 @@ namespace Nest
 		ISpanQuery ISpanContainingQuery.Little { get; set; }
 
 		public SpanContainingQueryDescriptor<T> Little(Func<SpanQueryDescriptor<T>, ISpanQuery> selector) =>
-			Assign(a => a.Little = selector(new SpanQueryDescriptor<T>()));
+			Assign(selector(new SpanQueryDescriptor<T>()), (a, v) => a.Little = v);
 
 		public SpanContainingQueryDescriptor<T> Big(Func<SpanQueryDescriptor<T>, ISpanQuery> selector) =>
-			Assign(a => a.Big = selector(new SpanQueryDescriptor<T>()));
+			Assign(selector(new SpanQueryDescriptor<T>()), (a, v) => a.Big = v);
 	}
 }

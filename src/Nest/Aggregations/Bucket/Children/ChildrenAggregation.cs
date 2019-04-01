@@ -30,9 +30,9 @@ namespace Nest
 		RelationName IChildrenAggregation.Type { get; set; } = typeof(T);
 
 		public ChildrenAggregationDescriptor<T> Type(RelationName type) =>
-			Assign(a => a.Type = type);
+			Assign(type, (a, v) => a.Type = v);
 
 		public ChildrenAggregationDescriptor<T> Type<TChildType>() where TChildType : class =>
-			Assign(a => a.Type = typeof(TChildType));
+			Assign(typeof(TChildType), (a, v) => a.Type = v);
 	}
 }

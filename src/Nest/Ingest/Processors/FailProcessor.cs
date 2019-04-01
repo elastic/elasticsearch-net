@@ -23,6 +23,6 @@ namespace Nest
 
 		string IFailProcessor.Message { get; set; }
 
-		public FailProcessorDescriptor Message(string message) => Assign(a => a.Message = message);
+		public FailProcessorDescriptor Message(string message) => Assign(message, (a, v) => a.Message = v);
 	}
 }

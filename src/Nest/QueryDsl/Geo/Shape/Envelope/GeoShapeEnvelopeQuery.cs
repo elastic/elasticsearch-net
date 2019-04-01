@@ -45,11 +45,12 @@ namespace Nest
 		protected override bool Conditionless => GeoShapeEnvelopeQuery.IsConditionless(this);
 		IEnvelopeGeoShape IGeoShapeEnvelopeQuery.Shape { get; set; }
 
-		public GeoShapeEnvelopeQueryDescriptor<T> Coordinates(IEnumerable<GeoCoordinate> coordinates, bool? ignoreUnmapped = null) => Assign(a =>
-		{
-			a.Shape = a.Shape ?? new EnvelopeGeoShape();
-			a.Shape.Coordinates = coordinates;
-			a.IgnoreUnmapped = ignoreUnmapped;
-		});
+		public GeoShapeEnvelopeQueryDescriptor<T> Coordinates(IEnumerable<GeoCoordinate> coordinates, bool? ignoreUnmapped = null) =>
+			Assign(coordinates,(a, v) =>
+			{
+				a.Shape = a.Shape ?? new EnvelopeGeoShape();
+				a.Shape.Coordinates = v;
+			})
+			.Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmapped = v);
 	}
 }

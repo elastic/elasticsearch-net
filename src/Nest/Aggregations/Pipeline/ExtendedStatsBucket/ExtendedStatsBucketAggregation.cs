@@ -29,6 +29,6 @@ namespace Nest
 	{
 		double? IExtendedStatsBucketAggregation.Sigma { get; set; }
 
-		public ExtendedStatsBucketAggregationDescriptor Sigma(double? sigma) => Assign(a => a.Sigma = sigma);
+		public ExtendedStatsBucketAggregationDescriptor Sigma(double? sigma) => Assign(sigma, (a, v) => a.Sigma = v);
 	}
 }

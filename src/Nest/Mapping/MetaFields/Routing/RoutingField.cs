@@ -19,6 +19,6 @@ namespace Nest
 	{
 		bool? IRoutingField.Required { get; set; }
 
-		public RoutingFieldDescriptor<T> Required(bool? required = true) => Assign(a => a.Required = required);
+		public RoutingFieldDescriptor<T> Required(bool? required = true) => Assign(required, (a, v) => a.Required = v);
 	}
 }

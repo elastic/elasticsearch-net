@@ -29,7 +29,7 @@ namespace Nest
 		IAppPrivileges IPutPrivilegesRequest.Applications { get; set; }
 
 		public PutPrivilegesDescriptor Applications(Func<AppPrivilegesDescriptor, IPromise<IAppPrivileges>> selector) =>
-			Assign(a => a.Applications = selector?.Invoke(new AppPrivilegesDescriptor())?.Value);
+			Assign(selector, (a, v) => a.Applications = v?.Invoke(new AppPrivilegesDescriptor())?.Value);
 	}
 
 	internal class PutPrivilegesConverter : VerbatimDictionaryKeysJsonConverter<string, IPrivileges>

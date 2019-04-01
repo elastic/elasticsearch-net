@@ -153,36 +153,36 @@ namespace Nest
 		string IGenericProperty.SearchAnalyzer { get; set; }
 		TermVectorOption? IGenericProperty.TermVector { get; set; }
 
-		public GenericPropertyDescriptor<T> Type(string type) => Assign(a => TypeOverride = type);
+		public GenericPropertyDescriptor<T> Type(string type) => Assign(type, (a, v) => TypeOverride = v);
 
 		[Obsolete("Please use the overload that accepts bool?. Will be fixed in NEST 7.x")]
-		public GenericPropertyDescriptor<T> Index(FieldIndexOption? index = FieldIndexOption.NotAnalyzed) => Assign(a => a.Index = index);
+		public GenericPropertyDescriptor<T> Index(FieldIndexOption? index = FieldIndexOption.NotAnalyzed) => Assign(index, (a, v) => a.Index = v);
 
-		public GenericPropertyDescriptor<T> Index(bool? index = true) => Assign(a => a.Indexed = index);
+		public GenericPropertyDescriptor<T> Index(bool? index = true) => Assign(index, (a, v) => a.Indexed = v);
 
-		public GenericPropertyDescriptor<T> Boost(double? boost) => Assign(a => a.Boost = boost);
+		public GenericPropertyDescriptor<T> Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
 
-		public GenericPropertyDescriptor<T> NullValue(string nullValue) => Assign(a => a.NullValue = nullValue);
+		public GenericPropertyDescriptor<T> NullValue(string nullValue) => Assign(nullValue, (a, v) => a.NullValue = v);
 
 		[Obsolete("Deprecated. Will be removed in NEST 7.x")]
 		public GenericPropertyDescriptor<T> NotAnalyzed() => Index(FieldIndexOption.NotAnalyzed);
 
-		public GenericPropertyDescriptor<T> TermVector(TermVectorOption? termVector) => Assign(a => a.TermVector = termVector);
+		public GenericPropertyDescriptor<T> TermVector(TermVectorOption? termVector) => Assign(termVector, (a, v) => a.TermVector = v);
 
-		public GenericPropertyDescriptor<T> IndexOptions(IndexOptions? indexOptions) => Assign(a => a.IndexOptions = indexOptions);
+		public GenericPropertyDescriptor<T> IndexOptions(IndexOptions? indexOptions) => Assign(indexOptions, (a, v) => a.IndexOptions = v);
 
-		public GenericPropertyDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
+		public GenericPropertyDescriptor<T> Analyzer(string analyzer) => Assign(analyzer, (a, v) => a.Analyzer = v);
 
-		public GenericPropertyDescriptor<T> SearchAnalyzer(string searchAnalyzer) => Assign(a => a.SearchAnalyzer = searchAnalyzer);
+		public GenericPropertyDescriptor<T> SearchAnalyzer(string searchAnalyzer) => Assign(searchAnalyzer, (a, v) => a.SearchAnalyzer = v);
 
-		public GenericPropertyDescriptor<T> Norms(bool? enabled = true) => Assign(a => a.Norms = enabled);
+		public GenericPropertyDescriptor<T> Norms(bool? enabled = true) => Assign(enabled, (a, v) => a.Norms = v);
 
-		public GenericPropertyDescriptor<T> IgnoreAbove(int? ignoreAbove) => Assign(a => a.IgnoreAbove = ignoreAbove);
+		public GenericPropertyDescriptor<T> IgnoreAbove(int? ignoreAbove) => Assign(ignoreAbove, (a, v) => a.IgnoreAbove = v);
 
 		public GenericPropertyDescriptor<T> PositionIncrementGap(int? positionIncrementGap) =>
-			Assign(a => a.PositionIncrementGap = positionIncrementGap);
+			Assign(positionIncrementGap, (a, v) => a.PositionIncrementGap = v);
 
 		public GenericPropertyDescriptor<T> Fielddata(Func<StringFielddataDescriptor, IStringFielddata> selector) =>
-			Assign(a => a.Fielddata = selector?.Invoke(new StringFielddataDescriptor()));
+			Assign(selector, (a, v) => a.Fielddata = v?.Invoke(new StringFielddataDescriptor()));
 	}
 }

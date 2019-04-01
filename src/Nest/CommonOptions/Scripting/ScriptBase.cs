@@ -68,7 +68,7 @@ namespace Nest
 		/// </example>
 		/// <param name="paramsDictionary">param</param>
 		/// <returns>this</returns>
-		public TDescriptor Params(Dictionary<string, object> scriptParams) => Assign(a => a.Params = scriptParams);
+		public TDescriptor Params(Dictionary<string, object> scriptParams) => Assign(scriptParams, (a, v) => a.Params = v);
 
 		/// <summary>
 		///  Scripts are compiled and cached for faster execution.
@@ -82,21 +82,21 @@ namespace Nest
 		/// <param name="paramsDictionary">param</param>
 		/// <returns>this</returns>
 		public TDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramsDictionary) =>
-			Assign(a => a.Params = paramsDictionary?.Invoke(new FluentDictionary<string, object>()));
+			Assign(paramsDictionary, (a, v) => a.Params = v?.Invoke(new FluentDictionary<string, object>()));
 
 		/// <summary>
 		/// Language of script.
 		/// </summary>
 		/// <param name="lang">language</param>
 		/// <returns>this</returns>
-		public TDescriptor Lang(string lang) => Assign(a => a.Lang = lang);
+		public TDescriptor Lang(string lang) => Assign(lang, (a, v) => a.Lang = v);
 
 		/// <summary>
 		/// Language of script.
 		/// </summary>
 		/// <param name="lang">language</param>
 		/// <returns>this</returns>
-		public TDescriptor Lang(ScriptLang lang) => Assign(a => a.Lang = lang.GetStringValue());
+		public TDescriptor Lang(ScriptLang lang) => Assign(lang.GetStringValue(), (a, v) => a.Lang = v);
 	}
 
 	public class ScriptDescriptor : DescriptorBase<ScriptDescriptor, IDescriptor>

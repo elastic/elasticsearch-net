@@ -90,37 +90,37 @@ namespace Nest
 
 		bool? ITopHitsAggregation.Version { get; set; }
 
-		public TopHitsAggregationDescriptor<T> From(int? from) => Assign(a => a.From = from);
+		public TopHitsAggregationDescriptor<T> From(int? from) => Assign(from, (a, v) => a.From = v);
 
-		public TopHitsAggregationDescriptor<T> Size(int? size) => Assign(a => a.Size = size);
+		public TopHitsAggregationDescriptor<T> Size(int? size) => Assign(size, (a, v) => a.Size = v);
 
 		public TopHitsAggregationDescriptor<T> Sort(Func<SortDescriptor<T>, IPromise<IList<ISort>>> sortSelector) =>
-			Assign(a => a.Sort = sortSelector?.Invoke(new SortDescriptor<T>())?.Value);
+			Assign(sortSelector, (a, v) => a.Sort = v?.Invoke(new SortDescriptor<T>())?.Value);
 
 		public TopHitsAggregationDescriptor<T> Source(bool? enabled = true) =>
-			Assign(a => a.Source = enabled);
+			Assign(enabled, (a, v) => a.Source = v);
 
 		public TopHitsAggregationDescriptor<T> Source(Func<SourceFilterDescriptor<T>, ISourceFilter> selector) =>
-			Assign(a => a.Source = new Union<bool, ISourceFilter>(selector?.Invoke(new SourceFilterDescriptor<T>())));
+			Assign(selector, (a, v) => a.Source = new Union<bool, ISourceFilter>(v?.Invoke(new SourceFilterDescriptor<T>())));
 
 		public TopHitsAggregationDescriptor<T> Highlight(Func<HighlightDescriptor<T>, IHighlight> highlightSelector) =>
-			Assign(a => a.Highlight = highlightSelector?.Invoke(new HighlightDescriptor<T>()));
+			Assign(highlightSelector, (a, v) => a.Highlight = v?.Invoke(new HighlightDescriptor<T>()));
 
-		public TopHitsAggregationDescriptor<T> Explain(bool? explain = true) => Assign(a => a.Explain = explain);
+		public TopHitsAggregationDescriptor<T> Explain(bool? explain = true) => Assign(explain, (a, v) => a.Explain = v);
 
 		public TopHitsAggregationDescriptor<T> ScriptFields(Func<ScriptFieldsDescriptor, IPromise<IScriptFields>> scriptFieldsSelector) =>
-			Assign(a => a.ScriptFields = scriptFieldsSelector?.Invoke(new ScriptFieldsDescriptor())?.Value);
+			Assign(scriptFieldsSelector, (a, v) => a.ScriptFields = v?.Invoke(new ScriptFieldsDescriptor())?.Value);
 
 		public TopHitsAggregationDescriptor<T> StoredFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(a => a.StoredFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+			Assign(fields, (a, v) => a.StoredFields = v?.Invoke(new FieldsDescriptor<T>())?.Value);
 
-		public TopHitsAggregationDescriptor<T> Version(bool? version = true) => Assign(a => a.Version = version);
+		public TopHitsAggregationDescriptor<T> Version(bool? version = true) => Assign(version, (a, v) => a.Version = v);
 
-		public TopHitsAggregationDescriptor<T> TrackScores(bool? trackScores = true) => Assign(a => a.TrackScores = trackScores);
+		public TopHitsAggregationDescriptor<T> TrackScores(bool? trackScores = true) => Assign(trackScores, (a, v) => a.TrackScores = v);
 
 		public TopHitsAggregationDescriptor<T> DocValueFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(a => a.DocValueFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+			Assign(fields, (a, v) => a.DocValueFields = v?.Invoke(new FieldsDescriptor<T>())?.Value);
 
-		public TopHitsAggregationDescriptor<T> DocValueFields(Fields fields) => Assign(a => a.DocValueFields = fields);
+		public TopHitsAggregationDescriptor<T> DocValueFields(Fields fields) => Assign(fields, (a, v) => a.DocValueFields = v);
 	}
 }

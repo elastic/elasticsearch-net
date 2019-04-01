@@ -56,33 +56,33 @@ namespace Nest
 		IEnumerable<TypeName> ISearchInputRequest.Types { get; set; }
 
 		public SearchInputRequestDescriptor Indices(IEnumerable<IndexName> indices) =>
-			Assign(a => a.Indices = indices);
+			Assign(indices, (a, v) => a.Indices = v);
 
 		public SearchInputRequestDescriptor Indices(params IndexName[] indices) =>
-			Assign(a => a.Indices = indices);
+			Assign(indices, (a, v) => a.Indices = v);
 
 		public SearchInputRequestDescriptor Indices<T>() =>
-			Assign(a => a.Indices = new[] { (IndexName)typeof(T) });
+			Assign(new[] { (IndexName)typeof(T) }, (a, v) => a.Indices = v);
 
 		public SearchInputRequestDescriptor Types(IEnumerable<TypeName> types) =>
-			Assign(a => a.Types = types);
+			Assign(types, (a, v) => a.Types = v);
 
 		public SearchInputRequestDescriptor Types(params TypeName[] types) =>
-			Assign(a => a.Types = types);
+			Assign(types, (a, v) => a.Types = v);
 
 		public SearchInputRequestDescriptor Types<T>() =>
-			Assign(a => a.Types = new[] { (TypeName)typeof(T) });
+			Assign(new[] { (TypeName)typeof(T) }, (a, v) => a.Types = v);
 
 		public SearchInputRequestDescriptor SearchType(SearchType? searchType) =>
-			Assign(a => a.SearchType = searchType);
+			Assign(searchType, (a, v) => a.SearchType = v);
 
 		public SearchInputRequestDescriptor IndicesOptions(Func<IndicesOptionsDescriptor, IIndicesOptions> selector) =>
-			Assign(a => a.IndicesOptions = selector(new IndicesOptionsDescriptor()));
+			Assign(selector(new IndicesOptionsDescriptor()), (a, v) => a.IndicesOptions = v);
 
 		public SearchInputRequestDescriptor Body<T>(Func<SearchDescriptor<T>, ISearchRequest> selector) where T : class =>
-			Assign(a => a.Body = selector?.InvokeOrDefault(new SearchDescriptor<T>()));
+			Assign(selector, (a, v) => a.Body = v?.InvokeOrDefault(new SearchDescriptor<T>()));
 
 		public SearchInputRequestDescriptor Template<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector) where T : class =>
-			Assign(a => a.Template = selector?.InvokeOrDefault(new SearchTemplateDescriptor<T>()));
+			Assign(selector, (a, v) => a.Template = v?.InvokeOrDefault(new SearchTemplateDescriptor<T>()));
 	}
 }

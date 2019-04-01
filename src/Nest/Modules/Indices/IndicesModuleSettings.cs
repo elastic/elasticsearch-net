@@ -51,12 +51,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IndicesModuleSettingsDescriptor CircuitBreaker(Func<CircuitBreakerSettingsDescriptor, ICircuitBreakerSettings> selector) =>
-			Assign(a => a.CircuitBreakerSettings = selector?.Invoke(new CircuitBreakerSettingsDescriptor()));
+			Assign(selector, (a, v) => a.CircuitBreakerSettings = v?.Invoke(new CircuitBreakerSettingsDescriptor()));
 
 		//fielddatasettings are static
 
 		/// <inheritdoc />
 		public IndicesModuleSettingsDescriptor IndicesRecovery(Func<IndicesRecoverySettingsDescriptor, IIndicesRecoverySettings> selector) =>
-			Assign(a => a.RecoverySettings = selector?.Invoke(new IndicesRecoverySettingsDescriptor()));
+			Assign(selector, (a, v) => a.RecoverySettings = v?.Invoke(new IndicesRecoverySettingsDescriptor()));
 	}
 }

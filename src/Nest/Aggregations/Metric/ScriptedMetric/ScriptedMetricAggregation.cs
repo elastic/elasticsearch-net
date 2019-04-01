@@ -50,28 +50,28 @@ namespace Nest
 		IDictionary<string, object> IScriptedMetricAggregation.Params { get; set; }
 		IScript IScriptedMetricAggregation.ReduceScript { get; set; }
 
-		public ScriptedMetricAggregationDescriptor<T> InitScript(string script) => Assign(a => a.InitScript = (InlineScript)script);
+		public ScriptedMetricAggregationDescriptor<T> InitScript(string script) => Assign((InlineScript)script, (a, v) => a.InitScript = v);
 
 		public ScriptedMetricAggregationDescriptor<T> InitScript(Func<ScriptDescriptor, IScript> scriptSelector) =>
-			Assign(a => a.InitScript = scriptSelector?.Invoke(new ScriptDescriptor()));
+			Assign(scriptSelector, (a, v) => a.InitScript = v?.Invoke(new ScriptDescriptor()));
 
-		public ScriptedMetricAggregationDescriptor<T> MapScript(string script) => Assign(a => a.MapScript = (InlineScript)script);
+		public ScriptedMetricAggregationDescriptor<T> MapScript(string script) => Assign((InlineScript)script, (a, v) => a.MapScript = v);
 
 		public ScriptedMetricAggregationDescriptor<T> MapScript(Func<ScriptDescriptor, IScript> scriptSelector) =>
-			Assign(a => a.MapScript = scriptSelector?.Invoke(new ScriptDescriptor()));
+			Assign(scriptSelector, (a, v) => a.MapScript = v?.Invoke(new ScriptDescriptor()));
 
-		public ScriptedMetricAggregationDescriptor<T> CombineScript(string script) => Assign(a => a.CombineScript = (InlineScript)script);
+		public ScriptedMetricAggregationDescriptor<T> CombineScript(string script) => Assign((InlineScript)script, (a, v) => a.CombineScript = v);
 
 		public ScriptedMetricAggregationDescriptor<T> CombineScript(Func<ScriptDescriptor, IScript> scriptSelector) =>
-			Assign(a => a.CombineScript = scriptSelector?.Invoke(new ScriptDescriptor()));
+			Assign(scriptSelector, (a, v) => a.CombineScript = v?.Invoke(new ScriptDescriptor()));
 
-		public ScriptedMetricAggregationDescriptor<T> ReduceScript(string script) => Assign(a => a.ReduceScript = (InlineScript)script);
+		public ScriptedMetricAggregationDescriptor<T> ReduceScript(string script) => Assign((InlineScript)script, (a, v) => a.ReduceScript = v);
 
 		public ScriptedMetricAggregationDescriptor<T> ReduceScript(Func<ScriptDescriptor, IScript> scriptSelector) =>
-			Assign(a => a.ReduceScript = scriptSelector?.Invoke(new ScriptDescriptor()));
+			Assign(scriptSelector, (a, v) => a.ReduceScript = v?.Invoke(new ScriptDescriptor()));
 
 		public ScriptedMetricAggregationDescriptor<T>
 			Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector) =>
-			Assign(a => a.Params = paramSelector?.Invoke(new FluentDictionary<string, object>()));
+			Assign(paramSelector, (a, v) => a.Params = v?.Invoke(new FluentDictionary<string, object>()));
 	}
 }

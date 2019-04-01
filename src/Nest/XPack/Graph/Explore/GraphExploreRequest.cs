@@ -44,15 +44,15 @@ namespace Nest
 		IEnumerable<IGraphVertexDefinition> IHop.Vertices { get; set; }
 
 		public GraphExploreDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
-			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(querySelector, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<T>()));
 
 		public GraphExploreDescriptor<T> Vertices(Func<GraphVerticesDescriptor<T>, IPromise<IList<IGraphVertexDefinition>>> selector) =>
-			Assign(a => a.Vertices = selector?.Invoke(new GraphVerticesDescriptor<T>())?.Value);
+			Assign(selector, (a, v) => a.Vertices = v?.Invoke(new GraphVerticesDescriptor<T>())?.Value);
 
 		public GraphExploreDescriptor<T> Connections(Func<HopDescriptor<T>, IHop> selector) =>
-			Assign(a => a.Connections = selector?.Invoke(new HopDescriptor<T>()));
+			Assign(selector, (a, v) => a.Connections = v?.Invoke(new HopDescriptor<T>()));
 
 		public GraphExploreDescriptor<T> Controls(Func<GraphExploreControlsDescriptor<T>, IGraphExploreControls> selector) =>
-			Assign(a => a.Controls = selector?.Invoke(new GraphExploreControlsDescriptor<T>()));
+			Assign(selector, (a, v) => a.Controls = v?.Invoke(new GraphExploreControlsDescriptor<T>()));
 	}
 }

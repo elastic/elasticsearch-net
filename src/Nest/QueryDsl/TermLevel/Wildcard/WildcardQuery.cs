@@ -34,6 +34,6 @@ namespace Nest
 	{
 		MultiTermQueryRewrite IWildcardQuery.Rewrite { get; set; }
 
-		public WildcardQueryDescriptor<T> Rewrite(MultiTermQueryRewrite rewrite) => Assign(a => a.Rewrite = rewrite);
+		public WildcardQueryDescriptor<T> Rewrite(MultiTermQueryRewrite rewrite) => Assign(rewrite, (a, v) => a.Rewrite = v);
 	}
 }

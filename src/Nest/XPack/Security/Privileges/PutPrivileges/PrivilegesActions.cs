@@ -36,16 +36,16 @@ namespace Nest
 		IDictionary<string, object> IPrivilegesActions.Metadata { get; set; }
 
 		/// <inheritdoc cref="IPrivilegesActions.Actions"/>
-		public PrivilegesActionsDescriptor Actions(params string[] actions) => Assign(a => a.Actions = actions);
+		public PrivilegesActionsDescriptor Actions(params string[] actions) => Assign(actions, (a, v) => a.Actions = v);
 
 		/// <inheritdoc cref="IPrivilegesActions.Actions"/>
-		public PrivilegesActionsDescriptor Actions(IEnumerable<string> actions) => Assign(a => a.Actions = actions);
+		public PrivilegesActionsDescriptor Actions(IEnumerable<string> actions) => Assign(actions, (a, v) => a.Actions = v);
 
 		/// <inheritdoc cref="IPrivilegesActions.Metadata"/>
-		public PrivilegesActionsDescriptor Metadata(IDictionary<string, object> meta) => Assign(a => a.Metadata = meta);
+		public PrivilegesActionsDescriptor Metadata(IDictionary<string, object> meta) => Assign(meta, (a, v) => a.Metadata = v);
 
 		/// <inheritdoc cref="IPrivilegesActions.Metadata"/>
 		public PrivilegesActionsDescriptor Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> meta) =>
-			Assign(a => a.Metadata = meta?.Invoke(new FluentDictionary<string, object>()));
+			Assign(meta, (a, v) => a.Metadata = v?.Invoke(new FluentDictionary<string, object>()));
 	}
 }
