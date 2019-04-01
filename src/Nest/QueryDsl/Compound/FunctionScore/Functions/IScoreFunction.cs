@@ -5,7 +5,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[InterfaceDataContract]
-	[JsonFormatter(typeof(ScoreFunctionJsonConverter))]
+	[JsonFormatter(typeof(ScoreFunctionJsonFormatter))]
 	public interface IScoreFunction
 	{
 		[DataMember(Name ="filter")]

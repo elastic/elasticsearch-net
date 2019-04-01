@@ -5,7 +5,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	internal class ScoreFunctionJsonConverter : IJsonFormatter<IScoreFunction>
+	internal class ScoreFunctionJsonFormatter : IJsonFormatter<IScoreFunction>
 	{
 		private static readonly AutomataDictionary AutomataDictionary = new AutomataDictionary
 		{
@@ -70,9 +70,8 @@ namespace Nest
 							function = fieldValueFormatter.Deserialize(ref reader, formatterResolver);
 							break;
 						case 5:
-							var scriptFormatter = formatterResolver.GetFormatter<IScriptQuery>();
-							var script = scriptFormatter.Deserialize(ref reader, formatterResolver);
-							function = new ScriptScoreFunction { Script = script };
+							var scriptFormatter = formatterResolver.GetFormatter<ScriptScoreFunction>();
+							function = scriptFormatter.Deserialize(ref reader, formatterResolver);
 							break;
 					}
 				}
@@ -156,8 +155,8 @@ namespace Nest
 		private static void WriteScriptScore(ref JsonWriter writer, IScriptScoreFunction value, IJsonFormatterResolver formatterResolver)
 		{
 			writer.WritePropertyName("script_score");
-			var scriptQuery = formatterResolver.GetFormatter<IScriptQuery>();
-			scriptQuery.Serialize(ref writer, value.Script, formatterResolver);
+			var scriptFormatter = formatterResolver.GetFormatter<IScriptScoreFunction>();
+			scriptFormatter.Serialize(ref writer, value, formatterResolver);
 		}
 
 		private static void WriteRandomScore(ref JsonWriter writer, IRandomScoreFunction value, IJsonFormatterResolver formatterResolver)
