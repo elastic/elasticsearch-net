@@ -207,7 +207,7 @@ namespace Elasticsearch.Net
 				if (clientException != null && a.OriginalException == null)
 					a.OriginalException = clientException;
 				//On .NET Core the IConnection implementation throws exceptions on bad responses
-				//This causes it to behave differently to .NET FULL. We already wrapped the WebExeption
+				//This causes it to behave differently to .NET FULL. We already wrapped the WebException
 				//under ElasticsearchServerException and it exposes way more information as part of it's
 				//exception message e.g the the root cause of the server error body.
 #if !DOTNETCORE
