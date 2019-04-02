@@ -1710,6 +1710,8 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>Whether a type should be expected in the body of the mappings.</summary>
+		public CreateIndexDescriptor IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
 		///<summary>Set the number of active shards to wait for before the operation returns.</summary>
 		public CreateIndexDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		///<summary>Explicit operation timeout</summary>
@@ -2023,6 +2025,8 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>Whether to add the type name to the response (default: true)</summary>
+		public GetIndexDescriptor IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetIndexDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Ignore unavailable indexes (default: false)</summary>
@@ -2101,6 +2105,8 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>Whether a type should be returned in the body of the mappings.</summary>
+		public GetFieldMappingDescriptor<T> IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
 		///<summary>Whether the default mapping values should be returned as well</summary>
 		public GetFieldMappingDescriptor<T> IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -2141,6 +2147,8 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>Whether to add the type name to the response.</summary>
+		public GetMappingDescriptor<T> IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public GetMappingDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
@@ -2203,6 +2211,8 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>Whether a type should be returned in the body of the mappings.</summary>
+		public GetIndexTemplateDescriptor IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
 		///<summary>Return settings in flat format (default: false)</summary>
 		public GetIndexTemplateDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -2300,8 +2310,7 @@ namespace Nest
 	public partial class PutMappingDescriptor<T>  : RequestDescriptorBase<PutMappingDescriptor<T>,PutMappingRequestParameters, IPutMappingRequest>, IPutMappingRequest
 	{ 
 		/// <summary>/{index}/{type}/_mapping</summary>
-		///<param name="type"> this parameter is required</param>
-		public PutMappingDescriptor(TypeName type) : base(r=>r.Required("type", type)){}
+		public PutMappingDescriptor() : base(){}
 		// values part of the url path
 		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		TypeName IPutMappingRequest.Type => Self.RouteValues.Get<TypeName>("type");
@@ -2316,13 +2325,15 @@ namespace Nest
 		public PutMappingDescriptor<T> AllIndices() => this.Index(Indices.All);
 
 		///<summary>The name of the document type</summary>
-		public PutMappingDescriptor<T> Type(TypeName type) => Assign(type, (a,v)=>a.RouteValues.Required("type", v));
+		public PutMappingDescriptor<T> Type(TypeName type) => Assign(type, (a,v)=>a.RouteValues.Optional("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public PutMappingDescriptor<T> Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("type", (TypeName)v));
+		public PutMappingDescriptor<T> Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("type", (TypeName)v));
 
 		// Request parameters
 
+		///<summary>Whether a type should be expected in the body of the mappings.</summary>
+		public PutMappingDescriptor<T> IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
 		///<summary>Explicit operation timeout</summary>
 		public PutMappingDescriptor<T> Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
@@ -2382,6 +2393,8 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>Whether a type should be returned in the body of the mappings.</summary>
+		public PutIndexTemplateDescriptor IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public PutIndexTemplateDescriptor Create(bool? create = true) => Qs("create", create);
 		///<summary>Explicit operation timeout</summary>
@@ -2456,6 +2469,8 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>Whether a type should be included in the body of the mappings.</summary>
+		public RolloverIndexDescriptor IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
 		///<summary>Explicit operation timeout</summary>
 		public RolloverIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>If set to true the rollover action will only be validated but not actually performed even if a condition matches. The default is false</summary>
@@ -3296,6 +3311,8 @@ namespace Nest
 		public SearchDescriptor<T> AllowPartialSearchResults(bool? allowPartialSearchResults = true) => Qs("allow_partial_search_results", allowPartialSearchResults);
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public SearchDescriptor<T> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
+		///<summary>Specify whether to return sequence number and primary term of the last modification of each hit</summary>
+		public SearchDescriptor<T> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true) => Qs("seq_no_primary_term", seqNoPrimaryTerm);
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public SearchDescriptor<T> RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
 		///<summary>The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.</summary>
@@ -3757,6 +3774,10 @@ namespace Nest
 		public UpdateDescriptor<TDocument, TPartialDocument> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Explicit operation timeout</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Timeout(Time timeout) => Qs("timeout", timeout);
+		///<summary>only perform the update operation if the last operation that has changed the document has the specified sequence number</summary>
+		public UpdateDescriptor<TDocument, TPartialDocument> IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
+		///<summary>only perform the update operation if the last operation that has changed the document has the specified primary term</summary>
+		public UpdateDescriptor<TDocument, TPartialDocument> IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
 		///<summary>Explicit version number for concurrency control</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
@@ -3916,6 +3937,8 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>Sets the number of shard copies that must be active before returning. Defaults to 0. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
+		public CreateFollowIndexDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	}
 	///<summary>descriptor for CcrFollowStats <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</pre></summary>
 	public partial class FollowIndexStatsDescriptor  : RequestDescriptorBase<FollowIndexStatsDescriptor,FollowIndexStatsRequestParameters, IFollowIndexStatsRequest>, IFollowIndexStatsRequest
@@ -5051,12 +5074,10 @@ namespace Nest
 	public partial class DisableUserDescriptor  : RequestDescriptorBase<DisableUserDescriptor,DisableUserRequestParameters, IDisableUserRequest>, IDisableUserRequest
 	{ 
 		/// <summary>/_xpack/security/user/{username}/_disable</summary>
-		public DisableUserDescriptor() : base(){}
+		///<param name="username"> this parameter is required</param>
+		public DisableUserDescriptor(Name username) : base(r=>r.Required("username", username)){}
 		// values part of the url path
 		Name IDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
-
-		///<summary>The username of the user to disable</summary>
-		public DisableUserDescriptor Username(Name username) => Assign(username, (a,v)=>a.RouteValues.Optional("username", v));
 
 		// Request parameters
 
@@ -5067,12 +5088,10 @@ namespace Nest
 	public partial class EnableUserDescriptor  : RequestDescriptorBase<EnableUserDescriptor,EnableUserRequestParameters, IEnableUserRequest>, IEnableUserRequest
 	{ 
 		/// <summary>/_xpack/security/user/{username}/_enable</summary>
-		public EnableUserDescriptor() : base(){}
+		///<param name="username"> this parameter is required</param>
+		public EnableUserDescriptor(Name username) : base(r=>r.Required("username", username)){}
 		// values part of the url path
 		Name IEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
-
-		///<summary>The username of the user to enable</summary>
-		public EnableUserDescriptor Username(Name username) => Assign(username, (a,v)=>a.RouteValues.Optional("username", v));
 
 		// Request parameters
 
@@ -5082,7 +5101,7 @@ namespace Nest
 	///<summary>descriptor for XpackSecurityGetPrivileges <pre>TODO</pre></summary>
 	public partial class GetPrivilegesDescriptor  : RequestDescriptorBase<GetPrivilegesDescriptor,GetPrivilegesRequestParameters, IGetPrivilegesRequest>, IGetPrivilegesRequest
 	{ 
-		/// <summary>/_xpack/security/privilege/{application}/{name}</summary>
+		/// <summary>/_xpack/security/privilege</summary>
 		public GetPrivilegesDescriptor() : base(){}
 		// values part of the url path
 		Name IGetPrivilegesRequest.Application => Self.RouteValues.Get<Name>("application");
@@ -5370,6 +5389,10 @@ namespace Nest
 		public PutWatchDescriptor Active(bool? active = true) => Qs("active", active);
 		///<summary>Explicit version number for concurrency control</summary>
 		public PutWatchDescriptor Version(long? version) => Qs("version", version);
+		///<summary>only update the watch if the last operation that has changed the watch has the specified sequence number</summary>
+		public PutWatchDescriptor IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
+		///<summary>only update the watch if the last operation that has changed the watch has the specified primary term</summary>
+		public PutWatchDescriptor IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
 	}
 	///<summary>descriptor for XpackWatcherRestart <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-restart.html</pre></summary>
 	public partial class RestartWatcherDescriptor  : RequestDescriptorBase<RestartWatcherDescriptor,RestartWatcherRequestParameters, IRestartWatcherRequest>, IRestartWatcherRequest
