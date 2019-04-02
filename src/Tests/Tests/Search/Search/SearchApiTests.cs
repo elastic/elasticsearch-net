@@ -532,10 +532,10 @@ namespace Tests.Search.Search
 
 		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>(Nest.Indices.Index<Project>().And("cluster_two:project"))
 		{
-			Query = new QueryContainer(new MatchAllQuery())
+			Query = new MatchAllQuery()
 		};
 
-		protected override string UrlPath => $"/project%2Ccluster_two%3Aproject/doc/_search";
+		protected override string UrlPath => $"/project%2Ccluster_two%3Aproject/_search";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(c, f) => c.Search(f),
