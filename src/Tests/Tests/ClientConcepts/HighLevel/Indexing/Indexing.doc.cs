@@ -73,6 +73,9 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		* Multiple documents can be indexed using the `IndexMany` and `IndexManyAsync` methods, again either synchronously or asynchronously, respectively.
 		* These methods are specific to the NEST client and wrap calls to the `_bulk` endpoint, providing a convenient shortcut to indexing
 		* multiple documents.
+		*
+		* Please note, these methods index all documents in a single HTTP request, so for very large document collections it is not a recommended approach
+		* - consider using the `BulkAllObservable` helper instead.
 		*/
 		public async Task IndexManyDocuments()
 		{

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.x
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.5
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/ClientConcepts/HighLevel/Indexing/Indexing.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/feature/improve-docs/src/Tests/Tests/ClientConcepts/HighLevel/Indexing/Indexing.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -39,9 +39,9 @@ if (!indexResponse.IsValid)
 
 var indexResponseAsync = await client.IndexDocumentAsync(person); <2>
 ----
-<1> synchronous method that returns an `IIndexResponse`
+<1> synchronous method that returns an IIndexResponse
 
-<2> asynchronous method that returns a `Task<IIndexResponse>` that can be awaited
+<2> asynchronous method that returns a Task<IIndexResponse> that can be awaited
 
 ==== Single documents with parameters
 
@@ -57,7 +57,7 @@ var person = new Person
     LastName = "Laarman"
 };
 
-var indexResponse = client.Index(person, i => i.Index("people")); <1>
+client.Index(person, i => i.Index("people")); <1>
 
 client.Index(new IndexRequest<Person>(person, "people")); <2>
 ----
@@ -70,6 +70,10 @@ client.Index(new IndexRequest<Person>(person, "people")); <2>
 Multiple documents can be indexed using the `IndexMany` and `IndexManyAsync` methods, again either synchronously or asynchronously, respectively.
 These methods are specific to the NEST client and wrap calls to the `_bulk` endpoint, providing a convenient shortcut to indexing
 multiple documents.
+
+Please note, these methods index all documents in a single HTTP request, so for very large document collections it is not a recommended approach
+
+* consider using the `BulkAllObservable` helper instead.
 
 [source,csharp]
 ----
@@ -155,29 +159,6 @@ The helper will also lazily enumerate an `IEnumerable<T>` collection, allowing y
 
 [source,csharp]
 ----
-var people = new []
-{
-    new Person
-    {
-        Id = 1,
-        FirstName = "Martijn",
-        LastName = "Laarman"
-    },
-    new Person
-    {
-        Id = 2,
-        FirstName = "Stuart",
-        LastName = "Cam"
-    },
-    new Person
-    {
-        Id = 3,
-        FirstName = "Russell",
-        LastName = "Cam"
-    }
-    // snip
-};
-
 var bulkAllObservable = client.BulkAll(people, b => b
     .Index("people")
     .BackOffTime("30s") <1>
