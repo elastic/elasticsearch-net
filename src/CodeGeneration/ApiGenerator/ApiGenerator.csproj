@@ -18,8 +18,4 @@
     <PackageReference Include="RazorLight.Unofficial" Version="2.0.0-beta1.1" />
     <!--<PackageReference Include="RazorLight" Version="2.0.0-beta1" />-->
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="RestSpecification\XPack\Ilm" />
-    <Folder Include="RestSpecification\XPack\Indices" />
-  </ItemGroup>
 </Project>
