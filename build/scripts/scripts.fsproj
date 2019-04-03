@@ -1,26 +1,90 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <!-- Type Providers are restored using net461, fine for netcoreapp2.2 so we kill the warning -->
+    <NoWarn>$(NoWarn);NU1701</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="Projects.fsx" />
-    <None Include="Paths.fsx" />
-    <None Include="Tooling.fsx" />
-    <None Include="Releasing.fsx" />
-    <None Include="Versioning.fsx" />
-    <None Include="Benchmarking.fsx" />
-    <None Include="XmlDocPatcher.fsx" />
-    <None Include="Building.fsx" />
-    <None Include="Testing.fsx" />
-    <None Include="Documentation.fsx" />
-    <None Include="Commandline.fsx" />
-    <None Include="Targets.fsx" />
+    <Compile Include="Commandline.fs" />
+    <Compile Include="Projects.fs" />
+    <Compile Include="Paths.fs" />
+    <Compile Include="Tooling.fs" />
+    <Compile Include="Versioning.fs" />
+    <Compile Include="Releasing.fs" />
+    <Compile Include="ReleaseNotes.fs" />
+    <Compile Include="Benchmarking.fs" />
+    <Compile Include="XmlDocPatcher.fs" />
+    <Compile Include="Building.fs" />
+    <Compile Include="ShadowDependencies.fs" />
+    <Compile Include="Cluster.fs" />
+    <Compile Include="Differ.fs" />
+    <Compile Include="Testing.fs" />
+    <Compile Include="Documentation.fs" />
+    <Compile Include="Targets.fs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\paket.bat"><Link>paket.bat</Link></Content>
-    <Content Include="..\..\paket.dependencies"><Link>paket.bat</Link></Content>
-    <Content Include="..\..\build.sh"><Link>paket.bat</Link></Content>
-    <Content Include="..\..\build.bat"><Link>paket.bat</Link></Content>
+    <Content Include="..\..\build.sh"><Link>build.sh</Link></Content>
+    <Content Include="..\..\build.bat"><Link>build.bat</Link></Content>
   </ItemGroup>
+  <!-- Type providers currently can't run inside the .NET Core 2.0 hosted compiler, see https://github.com/Microsoft/visualfsharp/pull/3658#issuecomment-334773415 -->
+  <PropertyGroup>
+    <IsWindows Condition="'$(OS)' == 'Windows_NT'">true</IsWindows>
+    <IsOSX Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::OSX)))' == 'true'">true</IsOSX>
+    <IsLinux Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))' == 'true'">true</IsLinux>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(IsWindows)' == 'true' AND Exists('C:\Program Files (x86)\Microsoft SDKs\F#\4.1\Framework\v4.0\fsc.exe')">
+    <FscToolPath>C:\Program Files (x86)\Microsoft SDKs\F#\4.1\Framework\v4.0</FscToolPath>
+    <FscToolExe>fsc.exe</FscToolExe>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(IsWindows)' == 'true' AND Exists('C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\Common7\IDE\CommonExtensions\Microsoft\FSharp\fsc.exe')">
+    <FscToolPath>C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\Common7\IDE\CommonExtensions\Microsoft\FSharp</FscToolPath>
+    <FscToolExe>fsc.exe</FscToolExe>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(IsWindows)' == 'true' AND Exists('C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\CommonExtensions\Microsoft\FSharp\fsc.exe')">
+    <FscToolPath>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\CommonExtensions\Microsoft\FSharp</FscToolPath>
+    <FscToolExe>fsc.exe</FscToolExe>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(IsWindows)' == 'true' AND Exists('C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\CommonExtensions\Microsoft\FSharp\fsc.exe')">
+    <FscToolPath>C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\CommonExtensions\Microsoft\FSharp</FscToolPath>
+    <FscToolExe>fsc.exe</FscToolExe>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(IsWindows)' == 'true' AND Exists('C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\CommonExtensions\Microsoft\FSharp\fsc.exe')">
+    <FscToolPath>C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\CommonExtensions\Microsoft\FSharp</FscToolPath>
+    <FscToolExe>fsc.exe</FscToolExe>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(IsWindows)' == 'true' AND Exists('C:\Program Files (x86)\Microsoft SDKs\F#\10.1\Framework\v4.0\fsc.exe')">
+    <FscToolPath>C:\Program Files (x86)\Microsoft SDKs\F#\10.1\Framework\v4.0</FscToolPath>
+    <FscToolExe>fsc.exe</FscToolExe>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(IsOSX)' == 'true'  AND Exists('/Library/Frameworks/Mono.framework/Versions/Current/Commands/fsharpc')">
+    <FscToolPath>/Library/Frameworks/Mono.framework/Versions/Current/Commands</FscToolPath>
+    <FscToolExe>fsharpc</FscToolExe>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(IsLinux)' == 'true' AND Exists('/usr/bin/fsharpc')">
+    <FscToolPath>/usr/bin</FscToolPath>
+    <FscToolExe>fsharpc</FscToolExe>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Bullseye" Version="2.3.0" />
+    <PackageReference Include="Fake.Core.Environment" Version="5.12.6" />
+    <PackageReference Include="Fake.Core.SemVer" Version="5.12.6" />
+    <PackageReference Include="Fake.IO.FileSystem" Version="5.12.6" />
+    <PackageReference Include="Fake.IO.Zip" Version="5.12.6" />
+    <PackageReference Include="ILRepack" Version="2.1.0-beta1" />
+    <PackageReference Include="FSharp.Core" Version="4.6.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="NuGet.CommandLine" Version="4.9.4" />
+    <PackageReference Include="Octokit" Version="0.32.0" />
+    <PackageReference Include="Proc" Version="0.4.3" />
+
+    <DotNetCliToolReference Include="dotnet-assembly-rewriter" Version="1.0.0-alpha20190401T093210" />
+    <DotNetCliToolReference Include="dotnet-assembly-differ" Version="1.0.0-alpha20190403T095656" />
+    
+  </ItemGroup>
+  <Target Name="CopyToolPackages" AfterTargets="Build">
+    <Copy SourceFiles="$(PkgILRepack)\tools\ILRepack.exe" DestinationFolder="$(OutDir)" />
+    <Copy SourceFiles="$(PkgNuGet_CommandLine)\tools\NuGet.exe" DestinationFolder="$(OutDir)" />
+  </Target>
 
 </Project>

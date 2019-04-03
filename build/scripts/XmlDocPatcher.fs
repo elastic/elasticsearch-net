@@ -1,21 +1,14 @@
-﻿#I @"../../packages/build/FAKE/tools"
-#r @"FakeLib.dll"
-#r "System.Xml.Linq.dll"
-#nowarn "0044" //TODO sort out FAKE 5
+﻿namespace Scripts
 
-#load @"Paths.fsx"
-
-namespace  XmlDocPatcher
-
+open System
 open System.Linq
 open System.Text.RegularExpressions
 open System.Xml
 open System.Xml.Linq
 open System.Xml.XPath
+open System.IO
 
-open Paths
 open Projects
-open Fake
 
 
 module InheritDoc =
@@ -47,13 +40,13 @@ module InheritDoc =
             while reader.ReadToFollowing("member") do
                 let name = apiName(reader.GetAttribute("name"))
                 let innerXml = reader.ReadInnerXml().Trim();
-                if (isNotNullOrEmpty innerXml && not (innerXml.Contains("<inheritdoc"))) then
+                if (not (String.IsNullOrEmpty innerXml) && not (innerXml.Contains("<inheritdoc"))) then
                     let xdoc = XDocument.Parse("<x>" + innerXml + "</x>")
                     yield (name, xdoc)
         } |> Map.ofSeq
 
     let private patchInheritDoc file = 
-        traceFAKE "Rewriting xmldoc:  %s" file
+        printfn "Rewriting xmldoc:  %s" file
 
         let mapOfDocumentedApis = documentedApis file
 
@@ -90,7 +83,7 @@ module InheritDoc =
         AllPublishableProjectsWithSupportedFrameworks
         |> Seq.map (fun p -> 
             let folder = Paths.ProjectOutputFolder p.project p.framework
-            folder @@ p.project.Name + ".xml"
+            Path.Combine(folder, p.project.Name) + ".xml"
         )
-        |> Seq.filter fileExists
+        |> Seq.filter File.Exists
         |> Seq.iter patchInheritDoc
