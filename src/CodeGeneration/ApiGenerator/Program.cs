@@ -53,7 +53,6 @@ namespace ApiGenerator
 				"Rollup",
 				"Security",
 				"Sql",
-				"Sql",
 				"Ssl",
 				"Watcher");
 		}
