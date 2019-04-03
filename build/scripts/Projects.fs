@@ -1,4 +1,6 @@
-﻿[<AutoOpen>]
+﻿namespace Scripts
+
+[<AutoOpen>]
 module Projects = 
     type DotNetFrameworkIdentifier = { MSBuild: string; Nuget: string; DefineConstants: string; }
 
@@ -58,7 +60,11 @@ module Projects =
             | PrivateProject DocGenerator -> "DocGenerator"
             | DepencyProject JsonNet -> "Newtonsoft.Json"
  
-        member this.NugetId = match this with | Project Nest -> "NEST" | _ -> this.Name
+        member this.NugetId =
+            match this with
+            | Project Nest -> "NEST"
+            | Project NestJsonNetSerializer -> "NEST.JsonNetSerializer"
+            | _ -> this.Name
         
         member this.NeedsMerge = true
                 
@@ -69,8 +75,8 @@ module Projects =
             
         member this.InternalName =
             match this with
-            | Project p -> this.Name 
-            | PrivateProject p -> sprintf "Elastic.Internal.%s" this.Name
+            | Project _ -> this.Name 
+            | PrivateProject _ -> sprintf "Elastic.Internal.%s" this.Name
             | DepencyProject JsonNet -> "Elastic.Internal.JsonNet"
                 
         static member TryFindName (name: string) =
