@@ -506,9 +506,9 @@ namespace Tests.Search.Search
 
 	[SkipVersion("<6.1.0", "_clusters on response only available in 6.1.0+")]
 	public class CrossClusterSearchApiTests
-		: ApiIntegrationTestBase<CrossClusterSearchCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+		: ApiIntegrationTestBase<CrossCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
-		public CrossClusterSearchApiTests(CrossClusterSearchCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public CrossClusterSearchApiTests(CrossCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 

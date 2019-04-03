@@ -2,7 +2,7 @@ using Tests.Core.ManagedElasticsearch.NodeSeeders;
 
 namespace Tests.Core.ManagedElasticsearch.Clusters
 {
-	public class CrossClusterSearchCluster : ClientTestClusterBase
+	public class CrossCluster : ClientTestClusterBase
 	{
 		protected override void SeedCluster()
 		{
