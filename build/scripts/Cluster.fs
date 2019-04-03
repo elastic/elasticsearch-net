@@ -15,15 +15,6 @@ module Cluster =
         let testsProjectDirectory = Path.Combine(Path.GetFullPath(Paths.Output("Tests.ClusterLauncher")), "netcoreapp2.1")
         let tempDir = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
         
-        let sourceDir = Paths.Source("Tests/Tests.Configuration");
-        let defaultYaml = Path.Combine(sourceDir, "tests.default.yaml");
-        let userYaml = Path.Combine(sourceDir, "tests.yaml");
-        let e f = File.Exists f;
-        match ((e userYaml), (e defaultYaml)) with
-        | (true, _) -> Environment.setEnvironVar "NEST_YAML_FILE" (Path.GetFullPath(userYaml))
-        | (_, true) -> Environment.setEnvironVar "NEST_YAML_FILE" (Path.GetFullPath(defaultYaml))
-        | _ -> failwithf "Expected to find a tests.default.yaml or tests.yaml in %s" sourceDir
-        
         printfn "%s" testsProjectDirectory
         
         Shell.copyDir tempDir testsProjectDirectory (fun s -> true)

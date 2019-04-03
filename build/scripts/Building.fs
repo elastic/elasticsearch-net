@@ -1,9 +1,6 @@
 ﻿namespace Scripts
 
-open System 
 open System.IO
-
-open FSharp.Data
 
 open Paths
 open Projects

@@ -24,7 +24,6 @@ module Tests =
         env "NEST_INTEGRATION_CLUSTER" clusterFilter
         env "NEST_TEST_FILTER" testFilter
         env "NEST_TEST_SEED" (Some <| args.Seed)
-        env "NEST_COMMAND_LINE_BUILD" <| Some "1"
 
         for random in args.RandomArguments do 
             let tokens = random.Split [|':'|]

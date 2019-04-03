@@ -1,35 +1,10 @@
-﻿using System;
+using System;
 
 namespace Tests.Configuration
 {
-	public interface ITestConfiguration
-	{
-		string ClusterFilter { get; }
-		string ElasticsearchVersion { get; }
-		bool ForceReseed { get; }
-		bool TestOnlyOne { get; }
-		TestMode Mode { get; }
-
-		RandomConfiguration Random { get; }
-
-		bool RunIntegrationTests { get; }
-		bool RunUnitTests { get; }
-
-		int Seed { get; }
-		bool ShowElasticsearchOutputAfterStarted { get; }
-		bool TestAgainstAlreadyRunningElasticsearch { get; }
-		string TestFilter { get; }
-	}
-
-	public class RandomConfiguration
-	{
-		public bool SourceSerializer { get; set; }
-		public bool TypedKeys { get; set; }
-	}
-
 	public static class TestConfigurationExtensions
 	{
-		public static void DumpConfiguration(this ITestConfiguration config)
+		public static void DumpConfiguration(this TestConfigurationBase config)
 		{
 			Console.WriteLine(new string('-', 20));
 			Console.WriteLine("Starting tests using config:");

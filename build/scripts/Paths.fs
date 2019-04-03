@@ -28,7 +28,6 @@ module Paths =
     let Output(folder) = sprintf "%s/%s" BuildOutput folder
     let Source(folder) = sprintf "%s/%s" SourceFolder folder
     let TestsSource(folder) = sprintf "%s/Tests/%s" SourceFolder folder
-    let Build(folder) = sprintf "%s/%s" BuildFolder folder
     
     let ProjFile(project:DotNetProject) =
         match project with 

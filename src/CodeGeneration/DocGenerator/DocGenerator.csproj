@@ -4,7 +4,6 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <VersionPrefix>7.0.0</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
     <NoWarn>NU1701,NU1605</NoWarn>
   </PropertyGroup>

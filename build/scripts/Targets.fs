@@ -1,11 +1,14 @@
 namespace Scripts
 
 open System
+open System.IO
 
+open Paths
 open Build
 open Commandline
 open Bullseye
 open ProcNet
+open Fake.Core
 
 module Main =
 
@@ -13,9 +16,25 @@ module Main =
     let private skip name = printfn "SKIPPED target '%s' evaluated not to run" name |> ignore
     let private conditional optional name action = target name (if optional then action else (fun _ -> skip name)) 
     let private command name dependencies action = Targets.Target(name, dependencies, new Action(action))
+    
+    /// <summary>Sets command line environments indicating we are building from the command line</summary>
+    let setCommandLineEnvVars () =
+        Environment.setEnvironVar"NEST_COMMAND_LINE_BUILD" "1"
+        
+        let sourceDir = Paths.Source("Tests/Tests.Configuration");
+        let defaultYaml = Path.Combine(sourceDir, "tests.default.yaml");
+        let userYaml = Path.Combine(sourceDir, "tests.yaml");
+        let e f = File.Exists f;
+        match ((e userYaml), (e defaultYaml)) with
+        | (true, _) -> Environment.setEnvironVar "NEST_YAML_FILE" (Path.GetFullPath(userYaml))
+        | (_, true) -> Environment.setEnvironVar "NEST_YAML_FILE" (Path.GetFullPath(defaultYaml))
+        | _ -> failwithf "Expected to find a tests.default.yaml or tests.yaml in %s" sourceDir
+        
           
     let [<EntryPoint>] main args = 
-
+        
+        setCommandLineEnvVars ()
+        
         let parsed = Commandline.parse (args |> Array.toList)
         
         let buildVersions = Versioning.BuildVersioning parsed
