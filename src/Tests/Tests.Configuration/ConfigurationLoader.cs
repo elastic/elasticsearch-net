@@ -25,6 +25,7 @@ namespace Tests.Configuration
 					return new EnvironmentConfiguration(tempYamlConfiguration);
 				}
 				return new EnvironmentConfiguration();
+			}
 
 			var directory = new DirectoryInfo(Directory.GetCurrentDirectory());
 			var testsConfigurationFolder = FindTestsConfigurationFolder(directory);

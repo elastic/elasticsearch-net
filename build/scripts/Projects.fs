@@ -63,7 +63,6 @@ module Projects =
         member this.NugetId =
             match this with
             | Project Nest -> "NEST"
-            | Project NestJsonNetSerializer -> "NEST.JsonNetSerializer"
             | _ -> this.Name
         
         member this.NeedsMerge = true

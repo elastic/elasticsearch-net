@@ -116,7 +116,7 @@ module Release =
         | Project ElasticsearchNet ->
             rewriteDllFile p.Name
             ignore()
-        | _ -> traceError (sprintf "%s still needs special canary handling" p.Name)
+        | _ -> failwithf "%s still needs special canary handling" p.Name
         doc.Save(nuspecVersioned) 
 
         pack nuspecVersioned newId properties version 
