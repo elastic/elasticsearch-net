@@ -14,18 +14,16 @@ namespace Tests.Configuration
 
 		private static ITestConfiguration LoadConfiguration()
 		{
-			// The build script sets a FAKEBUILD env variable, so if it exists then
+			// The build script sets a NEST_COMMAND_LINE_BUILD env variable, so if it exists then
 			// we must be running tests from the build script
-			if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("FAKEBUILD")))
+			if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("NEST_COMMAND_LINE_BUILD")))
 			{
 				var yamlFile = Environment.GetEnvironmentVariable("NEST_YAML_FILE");
 				if (!string.IsNullOrWhiteSpace(yamlFile) && File.Exists(yamlFile))
 				{
 					//load the test seed from the explicitly passed yaml file when running from FAKE
 					var tempYamlConfiguration = new YamlConfiguration(yamlFile);
-					Environment.SetEnvironmentVariable("NEST_TEST_SEED", tempYamlConfiguration.Seed.ToString(CultureInfo.InvariantCulture),
-						EnvironmentVariableTarget.Process);
-					Console.WriteLine("--->" + tempYamlConfiguration.Seed);
+					return new EnvironmentConfiguration(tempYamlConfiguration);
 				}
 				return new EnvironmentConfiguration();
 			}
