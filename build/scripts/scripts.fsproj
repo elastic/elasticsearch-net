@@ -79,7 +79,7 @@
     <PackageReference Include="Proc" Version="0.4.3" />
 
     <DotNetCliToolReference Include="dotnet-assembly-rewriter" Version="1.0.0-alpha20190401T093210" />
-    <DotNetCliToolReference Include="dotnet-assembly-differ" Version="1.0.0-alpha20190401T104011" />
+    <DotNetCliToolReference Include="dotnet-assembly-differ" Version="1.0.0-alpha20190403T095656" />
     
   </ItemGroup>
   <Target Name="CopyToolPackages" AfterTargets="Build">

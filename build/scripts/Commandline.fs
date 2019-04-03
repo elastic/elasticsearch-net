@@ -191,7 +191,7 @@ Execution hints can be provided anywhere on the command line
         | [] | ["build"] | ["test"] | ["clean"] | ["benchmark"] | ["profile"] -> parsed
         | ["touch"; ] -> parsed
         | ["temp"; ] -> parsed
-        | "diff" :: tail -> parsed
+        | "diff" :: tail -> { parsed with RemainingArguments = tail }
         | ["canary"; ] -> parsed
         
         | ["release"; version] -> { parsed with CommandArguments = SetVersion { Version = version }  }
