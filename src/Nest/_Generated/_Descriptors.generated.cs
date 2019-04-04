@@ -2311,6 +2311,7 @@ namespace Nest
 	{ 
 		/// <summary>/{index}/{type}/_mapping. Will infer the index and type from the generic type</summary>
 		public PutMappingDescriptor() : this(typeof(T), typeof(T)){}
+
 		// values part of the url path
 		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		TypeName IPutMappingRequest.Type => Self.RouteValues.Get<TypeName>("type");
@@ -2325,11 +2326,10 @@ namespace Nest
 		public PutMappingDescriptor<T> AllIndices() => this.Index(Indices.All);
 
 		///<summary>The name of the document type</summary>
-		public PutMappingDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
+		public PutMappingDescriptor<T> Type(TypeName type) => Assign(type, (a,v)=>a.RouteValues.Optional("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public PutMappingDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
-
 		// Request parameters
 
 		///<summary>Whether a type should be expected in the body of the mappings.</summary>
@@ -3937,6 +3937,8 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>Sets the number of shard copies that must be active before returning. Defaults to 0. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
+		public CreateFollowIndexDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	}
 	///<summary>descriptor for CcrFollowStats <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</pre></summary>
 	public partial class FollowIndexStatsDescriptor  : RequestDescriptorBase<FollowIndexStatsDescriptor,FollowIndexStatsRequestParameters, IFollowIndexStatsRequest>, IFollowIndexStatsRequest
@@ -5072,12 +5074,10 @@ namespace Nest
 	public partial class DisableUserDescriptor  : RequestDescriptorBase<DisableUserDescriptor,DisableUserRequestParameters, IDisableUserRequest>, IDisableUserRequest
 	{ 
 		/// <summary>/_xpack/security/user/{username}/_disable</summary>
-		public DisableUserDescriptor() : base(){}
+		///<param name="username"> this parameter is required</param>
+		public DisableUserDescriptor(Name username) : base(r=>r.Required("username", username)){}
 		// values part of the url path
 		Name IDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
-
-		///<summary>The username of the user to disable</summary>
-		public DisableUserDescriptor Username(Name username) => Assign(username, (a,v)=>a.RouteValues.Optional("username", v));
 
 		// Request parameters
 
@@ -5088,12 +5088,10 @@ namespace Nest
 	public partial class EnableUserDescriptor  : RequestDescriptorBase<EnableUserDescriptor,EnableUserRequestParameters, IEnableUserRequest>, IEnableUserRequest
 	{ 
 		/// <summary>/_xpack/security/user/{username}/_enable</summary>
-		public EnableUserDescriptor() : base(){}
+		///<param name="username"> this parameter is required</param>
+		public EnableUserDescriptor(Name username) : base(r=>r.Required("username", username)){}
 		// values part of the url path
 		Name IEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
-
-		///<summary>The username of the user to enable</summary>
-		public EnableUserDescriptor Username(Name username) => Assign(username, (a,v)=>a.RouteValues.Optional("username", v));
 
 		// Request parameters
 
@@ -5103,7 +5101,7 @@ namespace Nest
 	///<summary>descriptor for XpackSecurityGetPrivileges <pre>TODO</pre></summary>
 	public partial class GetPrivilegesDescriptor  : RequestDescriptorBase<GetPrivilegesDescriptor,GetPrivilegesRequestParameters, IGetPrivilegesRequest>, IGetPrivilegesRequest
 	{ 
-		/// <summary>/_xpack/security/privilege/{application}/{name}</summary>
+		/// <summary>/_xpack/security/privilege</summary>
 		public GetPrivilegesDescriptor() : base(){}
 		// values part of the url path
 		Name IGetPrivilegesRequest.Application => Self.RouteValues.Get<Name>("application");
@@ -5391,6 +5389,10 @@ namespace Nest
 		public PutWatchDescriptor Active(bool? active = true) => Qs("active", active);
 		///<summary>Explicit version number for concurrency control</summary>
 		public PutWatchDescriptor Version(long? version) => Qs("version", version);
+		///<summary>only update the watch if the last operation that has changed the watch has the specified sequence number</summary>
+		public PutWatchDescriptor IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
+		///<summary>only update the watch if the last operation that has changed the watch has the specified primary term</summary>
+		public PutWatchDescriptor IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
 	}
 	///<summary>descriptor for XpackWatcherRestart <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-restart.html</pre></summary>
 	public partial class RestartWatcherDescriptor  : RequestDescriptorBase<RestartWatcherDescriptor,RestartWatcherRequestParameters, IRestartWatcherRequest>, IRestartWatcherRequest

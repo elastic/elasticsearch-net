@@ -1403,6 +1403,11 @@ namespace Nest
 		IndexName ICreateFollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
 		// Request parameters
+		///<summary>
+		/// Sets the number of shard copies that must be active before returning. Defaults to 0. Set to `all` for all shard copies, otherwise set to
+		/// any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
+		///</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICreateIndexRequest : IRequest<CreateIndexRequestParameters>
@@ -2388,8 +2393,8 @@ namespace Nest
 	{
 		protected IDisableUserRequest Self => this;
 		///<summary>/_xpack/security/user/{username}/_disable</summary>
-		///<param name="username">Optional, accepts null</param>
-		public DisableUserRequest(Name username) : base(r=>r.Optional("username", username)){}
+		///<param name="username">this parameter is required</param>
+		public DisableUserRequest(Name username) : base(r=>r.Required("username", username)){}
 		// values part of the url path
 		Name IDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
 
@@ -2515,8 +2520,8 @@ namespace Nest
 	{
 		protected IEnableUserRequest Self => this;
 		///<summary>/_xpack/security/user/{username}/_enable</summary>
-		///<param name="username">Optional, accepts null</param>
-		public EnableUserRequest(Name username) : base(r=>r.Optional("username", username)){}
+		///<param name="username">this parameter is required</param>
+		public EnableUserRequest(Name username) : base(r=>r.Required("username", username)){}
 		// values part of the url path
 		Name IEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
 
@@ -3363,6 +3368,11 @@ namespace Nest
 	public partial class GetPrivilegesRequest : PlainRequestBase<GetPrivilegesRequestParameters>, IGetPrivilegesRequest
 	{
 		protected IGetPrivilegesRequest Self => this;
+		///<summary>/_xpack/security/privilege</summary>
+		public GetPrivilegesRequest() : base(){}
+		///<summary>/_xpack/security/privilege/{application}</summary>
+		///<param name="application">Optional, accepts null</param>
+		public GetPrivilegesRequest(Name application) : base(r=>r.Optional("application", application)){}
 		///<summary>/_xpack/security/privilege/{application}/{name}</summary>
 		///<param name="application">Optional, accepts null</param>
 		///<param name="name">Optional, accepts null</param>
@@ -4984,6 +4994,10 @@ namespace Nest
 		public bool? Active { get => Q<bool?>("active"); set => Q("active", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
+		///<summary>only update the watch if the last operation that has changed the watch has the specified sequence number</summary>
+		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+		///<summary>only update the watch if the last operation that has changed the watch has the specified primary term</summary>
+		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IQuerySqlRequest : IRequest<QuerySqlRequestParameters>

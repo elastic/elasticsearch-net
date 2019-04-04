@@ -3380,23 +3380,23 @@ namespace Nest
 			throw InvalidDispatch("XpackLicensePostStartTrial", p, new [] { POST }, "/_xpack/license/start_trial");
 		}
 		
-		internal TResponse XpackMlCloseJobDispatch<TResponse>(IRequest<CloseJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse XpackMlCloseJobDispatch<TResponse>(IRequest<CloseJobRequestParameters> p,SerializableData<ICloseJobRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlCloseJob<TResponse>(p.RouteValues.JobId,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlCloseJob<TResponse>(p.RouteValues.JobId,body,p.RequestParameters);
 					break;
 			}
 			throw InvalidDispatch("XpackMlCloseJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_close");
 		}
 		
-		internal Task<TResponse> XpackMlCloseJobDispatchAsync<TResponse>(IRequest<CloseJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> XpackMlCloseJobDispatchAsync<TResponse>(IRequest<CloseJobRequestParameters> p,SerializableData<ICloseJobRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlCloseJobAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlCloseJobAsync<TResponse>(p.RouteValues.JobId,body,p.RequestParameters,ct);
 					break;
 			}
 			throw InvalidDispatch("XpackMlCloseJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_close");
@@ -4827,10 +4827,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case PUT:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.XpackSecurityDisableUser<TResponse>(p.RouteValues.Username,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.XpackSecurityDisableUser<TResponse>(p.RouteValues.Username,p.RequestParameters);
 					break;
 				case POST:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.XpackSecurityDisableUserPost<TResponse>(p.RouteValues.Username,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.XpackSecurityDisableUserPost<TResponse>(p.RouteValues.Username,p.RequestParameters);
 					break;
 			}
 			throw InvalidDispatch("XpackSecurityDisableUser", p, new [] { PUT, POST }, "/_xpack/security/user/{username}/_disable");
@@ -4841,10 +4841,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case PUT:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.XpackSecurityDisableUserAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.XpackSecurityDisableUserAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
 					break;
 				case POST:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.XpackSecurityDisableUserPostAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.XpackSecurityDisableUserPostAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
 					break;
 			}
 			throw InvalidDispatch("XpackSecurityDisableUser", p, new [] { PUT, POST }, "/_xpack/security/user/{username}/_disable");
@@ -4855,10 +4855,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case PUT:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.XpackSecurityEnableUser<TResponse>(p.RouteValues.Username,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.XpackSecurityEnableUser<TResponse>(p.RouteValues.Username,p.RequestParameters);
 					break;
 				case POST:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.XpackSecurityEnableUserPost<TResponse>(p.RouteValues.Username,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.XpackSecurityEnableUserPost<TResponse>(p.RouteValues.Username,p.RequestParameters);
 					break;
 			}
 			throw InvalidDispatch("XpackSecurityEnableUser", p, new [] { PUT, POST }, "/_xpack/security/user/{username}/_enable");
@@ -4869,10 +4869,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case PUT:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.XpackSecurityEnableUserAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.XpackSecurityEnableUserAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
 					break;
 				case POST:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.XpackSecurityEnableUserPostAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.XpackSecurityEnableUserPostAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
 					break;
 			}
 			throw InvalidDispatch("XpackSecurityEnableUser", p, new [] { PUT, POST }, "/_xpack/security/user/{username}/_enable");
@@ -4884,9 +4884,10 @@ namespace Nest
 			{
 				case GET:
 					if (AllSet(p.RouteValues.Application, p.RouteValues.Name)) return _lowLevel.XpackSecurityGetPrivileges<TResponse>(p.RouteValues.Application,p.RouteValues.Name,p.RequestParameters);
-					break;
+					if (AllSet(p.RouteValues.Application)) return _lowLevel.XpackSecurityGetPrivileges<TResponse>(p.RouteValues.Application,p.RequestParameters);
+						return _lowLevel.XpackSecurityGetPrivileges<TResponse>(p.RequestParameters);
 			}
-			throw InvalidDispatch("XpackSecurityGetPrivileges", p, new [] { GET }, "/_xpack/security/privilege/{application}/{name}");
+			throw InvalidDispatch("XpackSecurityGetPrivileges", p, new [] { GET }, "/_xpack/security/privilege", "/_xpack/security/privilege/{application}", "/_xpack/security/privilege/{application}/{name}");
 		}
 		
 		internal Task<TResponse> XpackSecurityGetPrivilegesDispatchAsync<TResponse>(IRequest<GetPrivilegesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -4895,9 +4896,10 @@ namespace Nest
 			{
 				case GET:
 					if (AllSet(p.RouteValues.Application, p.RouteValues.Name)) return _lowLevel.XpackSecurityGetPrivilegesAsync<TResponse>(p.RouteValues.Application,p.RouteValues.Name,p.RequestParameters,ct);
-					break;
+					if (AllSet(p.RouteValues.Application)) return _lowLevel.XpackSecurityGetPrivilegesAsync<TResponse>(p.RouteValues.Application,p.RequestParameters,ct);
+						return _lowLevel.XpackSecurityGetPrivilegesAsync<TResponse>(p.RequestParameters,ct);
 			}
-			throw InvalidDispatch("XpackSecurityGetPrivileges", p, new [] { GET }, "/_xpack/security/privilege/{application}/{name}");
+			throw InvalidDispatch("XpackSecurityGetPrivileges", p, new [] { GET }, "/_xpack/security/privilege", "/_xpack/security/privilege/{application}", "/_xpack/security/privilege/{application}/{name}");
 		}
 		
 		internal TResponse XpackSecurityGetRoleDispatch<TResponse>(IRequest<GetRoleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()

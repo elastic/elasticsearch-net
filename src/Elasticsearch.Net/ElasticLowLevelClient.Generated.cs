@@ -3200,14 +3200,16 @@ namespace Elasticsearch.Net
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(POST, Url($"_xpack/license/start_trial"), ctx, null, _params(requestParameters));
 		///<summary>POST on /_xpack/ml/anomaly_detectors/{job_id}/_close <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</para></summary>
 		///<param name="job_id">The name of the job to close</param>
+		///<param name="body">The URL params optionally sent in the body</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public TResponse XpackMlCloseJob<TResponse>(string job_id, CloseJobRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/_close"), null, _params(requestParameters));
+		public TResponse XpackMlCloseJob<TResponse>(string job_id, PostData body, CloseJobRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/_close"), body, _params(requestParameters));
 		///<summary>POST on /_xpack/ml/anomaly_detectors/{job_id}/_close <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</para></summary>
 		///<param name="job_id">The name of the job to close</param>
+		///<param name="body">The URL params optionally sent in the body</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> XpackMlCloseJobAsync<TResponse>(string job_id, CloseJobRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
-			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/_close"), ctx, null, _params(requestParameters));
+		public Task<TResponse> XpackMlCloseJobAsync<TResponse>(string job_id, PostData body, CloseJobRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/_close"), ctx, body, _params(requestParameters));
 		///<summary>DELETE on /_xpack/ml/calendars/{calendar_id} <para></para></summary>
 		///<param name="calendar_id">The ID of the calendar to delete</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -4204,6 +4206,24 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> XpackSecurityEnableUserPostAsync<TResponse>(string username, EnableUserRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(POST, Url($"_xpack/security/user/{username.NotNull("username")}/_enable"), ctx, null, _params(requestParameters));
+		///<summary>GET on /_xpack/security/privilege <para>TODO</para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public TResponse XpackSecurityGetPrivileges<TResponse>(GetPrivilegesRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(GET, Url($"_xpack/security/privilege"), null, _params(requestParameters));
+		///<summary>GET on /_xpack/security/privilege <para>TODO</para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> XpackSecurityGetPrivilegesAsync<TResponse>(GetPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(GET, Url($"_xpack/security/privilege"), ctx, null, _params(requestParameters));
+		///<summary>GET on /_xpack/security/privilege/{application} <para>TODO</para></summary>
+		///<param name="application">Application name</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public TResponse XpackSecurityGetPrivileges<TResponse>(string application, GetPrivilegesRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(GET, Url($"_xpack/security/privilege/{application.NotNull("application")}"), null, _params(requestParameters));
+		///<summary>GET on /_xpack/security/privilege/{application} <para>TODO</para></summary>
+		///<param name="application">Application name</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> XpackSecurityGetPrivilegesAsync<TResponse>(string application, GetPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(GET, Url($"_xpack/security/privilege/{application.NotNull("application")}"), ctx, null, _params(requestParameters));
 		///<summary>GET on /_xpack/security/privilege/{application}/{name} <para>TODO</para></summary>
 		///<param name="application">Application name</param>
 		///<param name="name">Privilege name</param>
