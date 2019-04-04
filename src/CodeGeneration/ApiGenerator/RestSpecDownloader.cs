@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security;
 using CsQuery;
 using ShellProgressBar;
 
@@ -10,11 +11,35 @@ namespace ApiGenerator
 {
 	public class RestSpecDownloader
 	{
+		private const string Core = "Core";
+		private const string XpackTemp = "_Xpack";
+
 		private static readonly ProgressBarOptions MainProgressBarOptions = new ProgressBarOptions { BackgroundColor = ConsoleColor.DarkGray };
 
 		private static readonly Dictionary<string, string> OnlineSpecifications = new Dictionary<string, string>
 		{
-			{ "Core", "https://github.com/elastic/elasticsearch/tree/{version}/rest-api-spec/src/main/resources/rest-api-spec/api" },
+			{ Core, "https://github.com/elastic/elasticsearch/tree/{version}/rest-api-spec/src/main/resources/rest-api-spec/api" },
+			{ XpackTemp, "https://github.com/elastic/elasticsearch/tree/{version}/x-pack/plugin/src/test/resources/rest-api-spec/api"}
+		};
+
+		private static readonly Dictionary<string, string> XpackFolderMapping = new Dictionary<string, string>
+		{
+			{ "ccr.", "Ccr" },
+			{ "ilm.", "Ilm" },
+			{ "indices.", "Indices" },
+			{ "security.", "Security" },
+			{ "xpack.graph.", "Graph" },
+			{ "xpack.info", "Info" },
+			{ "xpack.usage", "Info" },
+			{ "xpack.license.", "License" },
+			{ "xpack.migration.", "Migration" },
+			{ "xpack.ml.", "MachineLearning" },
+			{ "xpack.monitoring.", "Monitoring" },
+			{ "xpack.rollup.", "Rollup" },
+			{ "xpack.security.", "Security" },
+			{ "xpack.sql.", "Sql" },
+			{ "xpack.ssl.", "Ssl" },
+			{ "xpack.watcher.", "Watcher" }
 		};
 
 		private static readonly ProgressBarOptions SubProgressBarOptions = new ProgressBarOptions
@@ -32,7 +57,6 @@ namespace ApiGenerator
 					let url = kv.Value.Replace("{version}", branch)
 					select new Specification { FolderOnDisk = kv.Key, Branch = branch, GithubListingUrl = url }).ToList();
 
-
 			using (var pbar = new ProgressBar(specifications.Count, "Downloading specifications", MainProgressBarOptions))
 			{
 				foreach (var spec in specifications)
@@ -42,6 +66,40 @@ namespace ApiGenerator
 					pbar.Tick($"Downloaded rest-api-spec to {spec.FolderOnDisk} for branch {branch}");
 				}
 			}
+
+			// Move Xpack endpoints into their own folders
+			var xpackTempPath = Path.Combine(CodeConfiguration.RestSpecificationFolder, XpackTemp);
+			var xpackFiles = Directory.GetFiles(xpackTempPath, "*.json").ToList();
+			using (var pbar = new ProgressBar(xpackFiles.Count, "Copying x-pack specifications", MainProgressBarOptions))
+			{
+				foreach (var file in xpackFiles)
+				{
+					var found = false;
+					var info = new FileInfo(file);
+					foreach (var mapping in XpackFolderMapping)
+					{
+						if (info.Name.StartsWith(mapping.Key))
+						{
+							var target = Path.Combine(CodeConfiguration.RestSpecificationFolder,
+													  "XPack",
+													  mapping.Value,
+													  Path.GetFileName(info.FullName));
+							if (File.Exists(target))
+							{
+								File.Delete(target);
+							}
+							File.Move(info.FullName, target);
+							found = true;
+						}
+					}
+					if (!found)
+					{
+						throw new Exception($"XPack file unmapped: {info.Name}");
+					}
+					pbar.Tick($"Moved {info.Name}");
+				}
+			}
+			Directory.Delete(xpackTempPath, true);
 
 			File.WriteAllText(CodeConfiguration.LastDownloadedVersionFile, branch);
 		}

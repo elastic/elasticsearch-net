@@ -2275,6 +2275,11 @@ namespace Elasticsearch.Net
 	public partial class CreateFollowIndexRequestParameters : RequestParameters<CreateFollowIndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>
+		/// Sets the number of shard copies that must be active before returning. Defaults to 0. Set to `all` for all shard copies, otherwise set to
+		/// any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
+		///</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 	///<summary>Request options for CcrFollowStats<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-get-follow-stats.html</pre></summary>
 	public partial class FollowIndexStatsRequestParameters : RequestParameters<FollowIndexStatsRequestParameters> 
@@ -2952,6 +2957,10 @@ namespace Elasticsearch.Net
 		public bool? Active { get => Q<bool?>("active"); set => Q("active", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
+		///<summary>only update the watch if the last operation that has changed the watch has the specified sequence number</summary>
+		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+		///<summary>only update the watch if the last operation that has changed the watch has the specified primary term</summary>
+		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 	}
 	///<summary>Request options for XpackWatcherRestart<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-restart.html</pre></summary>
 	public partial class RestartWatcherRequestParameters : RequestParameters<RestartWatcherRequestParameters> 
