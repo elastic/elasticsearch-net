@@ -116,6 +116,7 @@ namespace Nest
 			var response = await _client.BulkAsync(s =>
 				{
 					s.Index(request.Index);
+					s.Timeout(request.Timeout);
 					if (request.BufferToBulk != null) request.BufferToBulk(s, buffer);
 					else s.IndexMany(buffer);
 					if (!string.IsNullOrEmpty(request.Pipeline)) s.Pipeline(request.Pipeline);
