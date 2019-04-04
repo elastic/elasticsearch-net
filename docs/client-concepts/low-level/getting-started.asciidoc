@@ -55,7 +55,7 @@ There are many other <<configuration-options,configuration options>> on `Connect
 
 `ConnectionConfiguration` is not restricted to being passed a single address for Elasticsearch. There are several different
 types of <<connection-pooling,Connection pool>> available, each with different characteristics that can be used to
-configure the client. The following example uses a <<sniffing-connection-pool,SniffingConnectionPool>> seeded with the addresses
+configure the client. The following example uses a <<static-connection-pool,StaticConnectionPool>> seeded with the addresses
 of three Elasticsearch nodes in the cluster, and the client will use this type of pool to maintain a list of available nodes within the
 cluster to which it can send requests in a round-robin fashion.
 
@@ -68,7 +68,7 @@ var uris = new[]
     new Uri("http://localhost:9202"),
 };
 
-var connectionPool = new SniffingConnectionPool(uris);
+var connectionPool = new StaticConnectionPool(uris);
 var settings = new ConnectionConfiguration(connectionPool);
 
 var lowlevelClient = new ElasticLowLevelClient(settings);
