@@ -2311,7 +2311,6 @@ namespace Nest
 	{ 
 		/// <summary>/{index}/{type}/_mapping. Will infer the index and type from the generic type</summary>
 		public PutMappingDescriptor() : this(typeof(T), typeof(T)){}
-
 		// values part of the url path
 		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		TypeName IPutMappingRequest.Type => Self.RouteValues.Get<TypeName>("type");
@@ -2329,7 +2328,8 @@ namespace Nest
 		public PutMappingDescriptor<T> Type(TypeName type) => Assign(type, (a,v)=>a.RouteValues.Optional("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public PutMappingDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
+		public PutMappingDescriptor<T> Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("type", (TypeName)v));
+
 		// Request parameters
 
 		///<summary>Whether a type should be expected in the body of the mappings.</summary>
