@@ -18,7 +18,7 @@ namespace Nest
 		public TDescriptor Human(bool? human = true) => Qs("human", human);
 		///<summary>Include the stack trace of returned errors.</summary>
 		public TDescriptor ErrorTrace(bool? errorTrace = true) => Qs("error_trace", errorTrace);
-		///<summary>A comma-separated list of filters used to reduce the response.<para>Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request. In such situations, use the low level client to issue the request and handle response deserialization</para></summary>
+		///<summary>A comma-separated list of filters used to reduce the respone.<para>Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request. In such situations, use the low level client to issue the request and handle response deserialization</para></summary>
 		public TDescriptor FilterPath(string[] filterPath) => Qs("filter_path", filterPath);
 	}
 
@@ -2309,8 +2309,9 @@ namespace Nest
 	///<summary>descriptor for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
 	public partial class PutMappingDescriptor<T>  : RequestDescriptorBase<PutMappingDescriptor<T>,PutMappingRequestParameters, IPutMappingRequest>, IPutMappingRequest
 	{ 
-		/// <summary>/{index}/{type}/_mapping</summary>
-		public PutMappingDescriptor() : base(){}
+		/// <summary>/{index}/{type}/_mapping. Will infer the index and type from the generic type</summary>
+		public PutMappingDescriptor() : this(typeof(T), typeof(T)){}
+
 		// values part of the url path
 		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		TypeName IPutMappingRequest.Type => Self.RouteValues.Get<TypeName>("type");
@@ -2328,8 +2329,7 @@ namespace Nest
 		public PutMappingDescriptor<T> Type(TypeName type) => Assign(type, (a,v)=>a.RouteValues.Optional("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public PutMappingDescriptor<T> Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("type", (TypeName)v));
-
+		public PutMappingDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 		// Request parameters
 
 		///<summary>Whether a type should be expected in the body of the mappings.</summary>
