@@ -21,13 +21,23 @@ namespace Tests.QueryDsl.Specialized.Script
 		{
 			q =>
 			{
-				q.Source = "";
-				q.Id = null;
+				q.Script = null;
 			},
 			q =>
 			{
-				q.Source = null;
-				q.Id = null;
+				q.Script = new InlineScript(null);
+			},
+			q =>
+			{
+				q.Script = new InlineScript("");
+			},
+			q =>
+			{
+				q.Script = new IndexedScript(null);
+			},
+			q =>
+			{
+				q.Script = new IndexedScript("");
 			}
 		};
 
@@ -35,11 +45,13 @@ namespace Tests.QueryDsl.Specialized.Script
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Source = _templateString,
-			Params = new Dictionary<string, object>
+			Script = new InlineScript(_templateString)
 			{
-				{ "param1", 50 }
-			}
+				Params = new Dictionary<string, object>
+				{
+					{ "param1", 50 }
+				}
+			},
 		};
 
 		protected override object QueryJson => new
@@ -60,8 +72,10 @@ namespace Tests.QueryDsl.Specialized.Script
 			.Script(sn => sn
 				.Name("named_query")
 				.Boost(1.1)
-				.Source(_templateString)
-				.Params(p => p.Add("param1", 50))
+				.Script(s => s
+					.Source(_templateString)
+					.Params(p => p.Add("param1", 50))
+				)
 			);
 	}
 }

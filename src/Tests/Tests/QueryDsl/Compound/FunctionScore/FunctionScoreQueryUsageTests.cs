@@ -52,7 +52,7 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 				new RandomScoreFunction { Seed = 1337, Field = "_seq_no" },
 				new RandomScoreFunction { Seed = "randomstring", Field = "_seq_no" },
 				new WeightFunction { Weight = 1.0 },
-				new ScriptScoreFunction { Script = new ScriptQuery { Id = "x" } }
+				new ScriptScoreFunction { Script = new IndexedScript("x") }
 			}
 		};
 
@@ -158,7 +158,7 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 					.RandomScore(r => r.Seed(1337).Field("_seq_no"))
 					.RandomScore(r => r.Seed("randomstring").Field("_seq_no"))
 					.Weight(1.0)
-					.ScriptScore(ss => ss.Script(s => s.Id("x")))
+					.ScriptScore(s => s.Script(ss => ss.Id("x")))
 				)
 			);
 	}
