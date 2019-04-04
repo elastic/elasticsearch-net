@@ -76,7 +76,7 @@ namespace Tests.Analysis.Analyzers
 
 			public override IAnalyzer Initializer => new LanguageAnalyzer { Language = Language.Dutch };
 
-			public override object Json => new { type = "Dutch" };
+			public override object Json => new { type = "dutch" };
 			public override string Name => "myLanguage";
 		}
 
