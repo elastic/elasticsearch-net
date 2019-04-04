@@ -21,10 +21,8 @@ namespace Tests.Reproduce
 
 			//create index with automapping
 			client.CreateIndex(indexName, create => create
-				.Mappings(mappings => mappings
-					.Map<Root>(map => map
-						.AutoMap()
-					)
+				.Map<Root>(map => map
+					.AutoMap()
 				)
 			);
 

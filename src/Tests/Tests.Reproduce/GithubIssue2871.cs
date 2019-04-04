@@ -24,18 +24,14 @@ namespace Tests.Reproduce
 			var client = _cluster.Client;
 
 			client.CreateIndex(index1, c => c
-				.Mappings(m => m
-					.Map<Project>(mm => mm
-						.AutoMap()
-					)
+				.Map<Project>(mm => mm
+					.AutoMap()
 				)
 			);
 
 			client.CreateIndex(index2, c => c
-				.Mappings(m => m
-					.Map<Project>(mm => mm
-						.AutoMap()
-					)
+				.Map<Project>(mm => mm
+					.AutoMap()
 				)
 			);
 

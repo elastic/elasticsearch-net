@@ -179,15 +179,13 @@ namespace Tests.Document.Single.Index
 			});
 
 			var createIndexResponse = _client.CreateIndex(Index, c => c
-				.Mappings(m => m
-					.Map<IngestedAttachment>(mm => mm
-						.Properties(p => p
-							.Text(s => s
-								.Name(f => f.Content)
-							)
-							.Object<Attachment>(o => o
-								.Name(f => f.Attachment)
-							)
+				.Map<IngestedAttachment>(mm => mm
+					.Properties(p => p
+						.Text(s => s
+							.Name(f => f.Content)
+						)
+						.Object<Attachment>(o => o
+							.Name(f => f.Attachment)
 						)
 					)
 				)
