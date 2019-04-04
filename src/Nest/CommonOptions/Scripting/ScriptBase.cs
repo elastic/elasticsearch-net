@@ -60,17 +60,17 @@ namespace Nest
 		Dictionary<string, object> IScript.Params { get; set; }
 
 		/// <inheritdoc cref="IScript.Params" />
-		public TDescriptor Params(Dictionary<string, object> scriptParams) => Assign(a => a.Params = scriptParams);
+		public TDescriptor Params(Dictionary<string, object> scriptParams) => Assign(scriptParams, (a, v) => a.Params = v);
 
 		/// <inheritdoc cref="IScript.Params" />
 		public TDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramsDictionary) =>
-			Assign(a => a.Params = paramsDictionary?.Invoke(new FluentDictionary<string, object>()));
+			Assign(paramsDictionary, (a, v) => a.Params = v?.Invoke(new FluentDictionary<string, object>()));
 
 		/// <inheritdoc cref="IScript.Lang" />
-		public TDescriptor Lang(string lang) => Assign(a => a.Lang = lang);
+		public TDescriptor Lang(string lang) => Assign(lang, (a, v) => a.Lang = v);
 
 		/// <inheritdoc cref="IScript.Lang" />
-		public TDescriptor Lang(ScriptLang lang) => Assign(a => a.Lang = lang.GetStringValue());
+		public TDescriptor Lang(ScriptLang lang) => Assign(lang.GetStringValue(), (a, v) => a.Lang = v);
 	}
 
 	/// <inheritdoc cref="IScript"/>

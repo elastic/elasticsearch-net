@@ -97,18 +97,18 @@ namespace Nest
 		IGeoShape IGeoShapeQuery.Shape { get; set; }
 
 		/// <inheritdoc cref="IGeoShapeQuery.Relation" />
-		public GeoShapeQueryDescriptor<T> Relation(GeoShapeRelation? relation) => Assign(a => a.Relation = relation);
+		public GeoShapeQueryDescriptor<T> Relation(GeoShapeRelation? relation) => Assign(relation, (a, v) => a.Relation = v);
 
 		/// <inheritdoc cref="IGeoShapeQuery.IgnoreUnmapped" />
-		public GeoShapeQueryDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(a => a.IgnoreUnmapped = ignoreUnmapped);
+		public GeoShapeQueryDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmapped = v);
 
 		/// <inheritdoc cref="IGeoShapeQuery.Shape" />
 		public GeoShapeQueryDescriptor<T> Shape(Func<GeoShapeDescriptor, IGeoShape> selector) =>
-			Assign(a => a.Shape = selector?.Invoke(new GeoShapeDescriptor()));
+			Assign(selector, (a, v) => a.Shape = v?.Invoke(new GeoShapeDescriptor()));
 
 		/// <inheritdoc cref="IGeoShapeQuery.IndexedShape" />
 		public GeoShapeQueryDescriptor<T> IndexedShape(Func<FieldLookupDescriptor<T>, IFieldLookup> selector) =>
-			Assign(a => a.IndexedShape = selector?.Invoke(new FieldLookupDescriptor<T>()));
+			Assign(selector, (a, v) => a.IndexedShape = v?.Invoke(new FieldLookupDescriptor<T>()));
 	}
 
 	/// <summary>

@@ -43,12 +43,12 @@ namespace Nest
 
 		public SnapshotDescriptor Index<T>() where T : class => Indices(typeof(T));
 
-		public SnapshotDescriptor Indices(Indices indices) => Assign(a => a.Indices = indices);
+		public SnapshotDescriptor Indices(Indices indices) => Assign(indices, (a, v) => a.Indices = v);
 
-		public SnapshotDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Assign(a => a.IgnoreUnavailable = ignoreUnavailable);
+		public SnapshotDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Assign(ignoreUnavailable, (a, v) => a.IgnoreUnavailable = v);
 
-		public SnapshotDescriptor IncludeGlobalState(bool? includeGlobalState = true) => Assign(a => a.IncludeGlobalState = includeGlobalState);
+		public SnapshotDescriptor IncludeGlobalState(bool? includeGlobalState = true) => Assign(includeGlobalState, (a, v) => a.IncludeGlobalState = v);
 
-		public SnapshotDescriptor Partial(bool? partial = true) => Assign(a => a.Partial = partial);
+		public SnapshotDescriptor Partial(bool? partial = true) => Assign(partial, (a, v) => a.Partial = v);
 	}
 }

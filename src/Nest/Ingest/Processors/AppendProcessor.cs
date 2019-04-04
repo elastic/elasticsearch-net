@@ -32,18 +32,18 @@ namespace Nest
 		Field IAppendProcessor.Field { get; set; }
 		IEnumerable<object> IAppendProcessor.Value { get; set; }
 
-		public AppendProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public AppendProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		public AppendProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
-		public AppendProcessorDescriptor<T> Value<TValue>(IEnumerable<TValue> values) => Assign(a => a.Value = values?.Cast<object>());
+		public AppendProcessorDescriptor<T> Value<TValue>(IEnumerable<TValue> values) => Assign(values, (a, v) => a.Value = v?.Cast<object>());
 
-		public AppendProcessorDescriptor<T> Value<TValue>(params TValue[] values) => Assign(a =>
+		public AppendProcessorDescriptor<T> Value<TValue>(params TValue[] values) => Assign(values, (a, v) =>
 		{
-			if (values?.Length == 1 && typeof(IEnumerable).IsAssignableFrom(typeof(TValue)) && typeof(TValue) != typeof(string))
-				a.Value = (values.First() as IEnumerable)?.Cast<object>();
-			else a.Value = values?.Cast<object>();
+			if (v?.Length == 1 && typeof(IEnumerable).IsAssignableFrom(typeof(TValue)) && typeof(TValue) != typeof(string))
+				a.Value = (v.First() as IEnumerable)?.Cast<object>();
+			else a.Value = v?.Cast<object>();
 		});
 	}
 }

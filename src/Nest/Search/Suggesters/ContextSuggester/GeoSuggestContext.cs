@@ -32,8 +32,8 @@ namespace Nest
 		bool? IGeoSuggestContext.Neighbors { get; set; }
 		IEnumerable<string> IGeoSuggestContext.Precision { get; set; }
 
-		public GeoSuggestContextDescriptor<T> Precision(params string[] precisions) => Assign(a => a.Precision = precisions);
+		public GeoSuggestContextDescriptor<T> Precision(params string[] precisions) => Assign(precisions, (a, v) => a.Precision = v);
 
-		public GeoSuggestContextDescriptor<T> Neighbors(bool? neighbors = true) => Assign(a => a.Neighbors = neighbors);
+		public GeoSuggestContextDescriptor<T> Neighbors(bool? neighbors = true) => Assign(neighbors, (a, v) => a.Neighbors = v);
 	}
 }

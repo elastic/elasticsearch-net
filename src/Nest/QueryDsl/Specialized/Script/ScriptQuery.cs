@@ -57,6 +57,6 @@ namespace Nest
 
 		/// <inheritdoc cref="IScriptQuery.Script"/>
 		public ScriptQueryDescriptor<T> Script(Func<ScriptDescriptor, IScript> selector) =>
-			Assign(a => a.Script = selector?.Invoke(new ScriptDescriptor()));
+			Assign(selector, (a, v) => a.Script = v?.Invoke(new ScriptDescriptor()));
 	}
 }

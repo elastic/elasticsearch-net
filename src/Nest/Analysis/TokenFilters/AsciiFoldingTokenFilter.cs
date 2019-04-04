@@ -31,6 +31,6 @@ namespace Nest
 		bool? IAsciiFoldingTokenFilter.PreserveOriginal { get; set; }
 
 		/// <inheritdoc />
-		public AsciiFoldingTokenFilterDescriptor PreserveOriginal(bool? preserve = true) => Assign(a => a.PreserveOriginal = preserve);
+		public AsciiFoldingTokenFilterDescriptor PreserveOriginal(bool? preserve = true) => Assign(preserve, (a, v) => a.PreserveOriginal = v);
 	}
 }

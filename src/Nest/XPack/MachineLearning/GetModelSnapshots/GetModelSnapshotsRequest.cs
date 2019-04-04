@@ -72,19 +72,19 @@ namespace Nest
 		DateTimeOffset? IGetModelSnapshotsRequest.Start { get; set; }
 
 		/// <inheritdoc />
-		public GetModelSnapshotsDescriptor Descending(bool? desc = true) => Assign(a => a.Descending = desc);
+		public GetModelSnapshotsDescriptor Descending(bool? desc = true) => Assign(desc, (a, v) => a.Descending = v);
 
 		/// <inheritdoc />
-		public GetModelSnapshotsDescriptor End(DateTimeOffset? end) => Assign(a => a.End = end);
+		public GetModelSnapshotsDescriptor End(DateTimeOffset? end) => Assign(end, (a, v) => a.End = v);
 
 		/// <inheritdoc />
 		public GetModelSnapshotsDescriptor Page(Func<PageDescriptor, IPage> selector) =>
-			Assign(a => a.Page = selector?.Invoke(new PageDescriptor()));
+			Assign(selector, (a, v) => a.Page = v?.Invoke(new PageDescriptor()));
 
 		/// <inheritdoc />
-		public GetModelSnapshotsDescriptor Sort(Field field) => Assign(a => a.Sort = field);
+		public GetModelSnapshotsDescriptor Sort(Field field) => Assign(field, (a, v) => a.Sort = v);
 
 		/// <inheritdoc />
-		public GetModelSnapshotsDescriptor Start(DateTimeOffset? start) => Assign(a => a.Start = start);
+		public GetModelSnapshotsDescriptor Start(DateTimeOffset? start) => Assign(start, (a, v) => a.Start = v);
 	}
 }

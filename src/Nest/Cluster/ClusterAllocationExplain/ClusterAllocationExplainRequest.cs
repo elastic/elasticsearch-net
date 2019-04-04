@@ -51,21 +51,21 @@ namespace Nest
 		/// <summary>
 		/// The name of the index to provide an explanation for
 		/// </summary>
-		public ClusterAllocationExplainDescriptor Index(IndexName index) => Assign(a => a.Index = index);
+		public ClusterAllocationExplainDescriptor Index(IndexName index) => Assign(index, (a, v) => a.Index = v);
 
 		/// <summary>
 		/// The name of the index to provide an explanation for
 		/// </summary>
-		public ClusterAllocationExplainDescriptor Index<TDocument>() => Assign(a => a.Index = typeof(TDocument));
+		public ClusterAllocationExplainDescriptor Index<TDocument>() => Assign(typeof(TDocument), (a, v) => a.Index = v);
 
 		/// <summary>
 		/// Whether to explain a primary or replica shard
 		/// </summary>
-		public ClusterAllocationExplainDescriptor Primary(bool? primary = true) => Assign(a => a.Primary = primary);
+		public ClusterAllocationExplainDescriptor Primary(bool? primary = true) => Assign(primary, (a, v) => a.Primary = v);
 
 		/// <summary>
 		/// The shard id to provide an explanation for
 		/// </summary>
-		public ClusterAllocationExplainDescriptor Shard(int? shard) => Assign(a => a.Shard = shard);
+		public ClusterAllocationExplainDescriptor Shard(int? shard) => Assign(shard, (a, v) => a.Shard = v);
 	}
 }

@@ -52,12 +52,12 @@ namespace Nest
 		bool? IRangeProperty.Index { get; set; }
 
 		/// <inheritdoc cref="IRangeProperty.Coerce" />
-		public TDescriptor Coerce(bool? coerce = true) => Assign(a => a.Coerce = coerce);
+		public TDescriptor Coerce(bool? coerce = true) => Assign(coerce, (a, v) => a.Coerce = v);
 
 		/// <inheritdoc cref="IRangeProperty.Boost" />
-		public TDescriptor Boost(double? boost) => Assign(a => a.Boost = boost);
+		public TDescriptor Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
 
 		/// <inheritdoc cref="IRangeProperty.Index" />
-		public TDescriptor Index(bool? index = true) => Assign(a => a.Index = index);
+		public TDescriptor Index(bool? index = true) => Assign(index, (a, v) => a.Index = v);
 	}
 }

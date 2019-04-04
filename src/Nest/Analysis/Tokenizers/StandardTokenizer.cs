@@ -35,6 +35,6 @@ namespace Nest
 		int? IStandardTokenizer.MaxTokenLength { get; set; }
 
 		/// <inheritdoc />
-		public StandardTokenizerDescriptor MaxTokenLength(int? maxLength) => Assign(a => a.MaxTokenLength = maxLength);
+		public StandardTokenizerDescriptor MaxTokenLength(int? maxLength) => Assign(maxLength, (a, v) => a.MaxTokenLength = v);
 	}
 }

@@ -103,33 +103,33 @@ namespace Nest
 		Time IResumeFollowIndexRequest.ReadPollTimeout { get; set; }
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxReadRequestOperationCount"/>
-		public ResumeFollowIndexDescriptor MaxReadRequestOperationCount(long? max) => Assign(a => a.MaxReadRequestOperationCount = max);
+		public ResumeFollowIndexDescriptor MaxReadRequestOperationCount(long? max) => Assign(max, (a, v) => a.MaxReadRequestOperationCount = v);
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxOutstandingReadRequests"/>
-		public ResumeFollowIndexDescriptor MaxOutstandingReadRequests(long? max) => Assign(a => a.MaxOutstandingReadRequests = max);
+		public ResumeFollowIndexDescriptor MaxOutstandingReadRequests(long? max) => Assign(max, (a, v) => a.MaxOutstandingReadRequests = v);
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxRequestSize"/>
-		public ResumeFollowIndexDescriptor MaxRequestSize(string maxRequestSize) => Assign(a => a.MaxRequestSize = maxRequestSize);
+		public ResumeFollowIndexDescriptor MaxRequestSize(string maxRequestSize) => Assign(maxRequestSize, (a, v) => a.MaxRequestSize = v);
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxWriteRequestOperationCount"/>
-		public ResumeFollowIndexDescriptor MaxWriteRequestOperationCount(long? max) => Assign(a => a.MaxWriteRequestOperationCount = max);
+		public ResumeFollowIndexDescriptor MaxWriteRequestOperationCount(long? max) => Assign(max, (a, v) => a.MaxWriteRequestOperationCount = v);
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxWriteRequestSize"/>
-		public ResumeFollowIndexDescriptor MaxWriteRequestSize(string size) => Assign(a => a.MaxWriteRequestSize = size);
+		public ResumeFollowIndexDescriptor MaxWriteRequestSize(string size) => Assign(size, (a, v) => a.MaxWriteRequestSize = v);
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxOutstandingWriteRequests"/>
-		public ResumeFollowIndexDescriptor MaxOutstandingWriteRequests(long? max) => Assign(a => a.MaxOutstandingWriteRequests = max);
+		public ResumeFollowIndexDescriptor MaxOutstandingWriteRequests(long? max) => Assign(max, (a, v) => a.MaxOutstandingWriteRequests = v);
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxWriteBufferCount"/>
-		public ResumeFollowIndexDescriptor MaxWriteBufferCount(long? max) => Assign(a => a.MaxWriteBufferCount = max);
+		public ResumeFollowIndexDescriptor MaxWriteBufferCount(long? max) => Assign(max, (a, v) => a.MaxWriteBufferCount = v);
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxWriteBufferSize"/>
-		public ResumeFollowIndexDescriptor MaxWriteBufferSize(string max) => Assign(a => a.MaxWriteBufferSize = max);
+		public ResumeFollowIndexDescriptor MaxWriteBufferSize(string max) => Assign(max, (a, v) => a.MaxWriteBufferSize = v);
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxRetryDelay"/>
-		public ResumeFollowIndexDescriptor MaxRetryDelay(Time maxRetryDelay) => Assign(a => a.MaxRetryDelay = maxRetryDelay);
+		public ResumeFollowIndexDescriptor MaxRetryDelay(Time maxRetryDelay) => Assign(maxRetryDelay, (a, v) => a.MaxRetryDelay = v);
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.ReadPollTimeout"/>
-		public ResumeFollowIndexDescriptor ReadPollTimeout(Time readPollTimeout) => Assign(a => a.ReadPollTimeout = readPollTimeout);
+		public ResumeFollowIndexDescriptor ReadPollTimeout(Time readPollTimeout) => Assign(readPollTimeout, (a, v) => a.ReadPollTimeout = v);
 	}
 }

@@ -32,11 +32,11 @@ namespace Nest
 		Field IJoinProcessor.Field { get; set; }
 		string IJoinProcessor.Separator { get; set; }
 
-		public JoinProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public JoinProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		public JoinProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
-		public JoinProcessorDescriptor<T> Separator(string separator) => Assign(a => a.Separator = separator);
+		public JoinProcessorDescriptor<T> Separator(string separator) => Assign(separator, (a, v) => a.Separator = v);
 	}
 }

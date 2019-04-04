@@ -65,18 +65,18 @@ namespace Nest
 		Time IDiskBasedShardAllocationSettings.UpdateInterval { get; set; }
 
 		/// <inheritdoc />
-		public DiskBasedShardAllocationSettingsDescriptor ThresholdEnabled(bool? enable = true) => Assign(a => a.ThresholdEnabled = enable);
+		public DiskBasedShardAllocationSettingsDescriptor ThresholdEnabled(bool? enable = true) => Assign(enable, (a, v) => a.ThresholdEnabled = v);
 
 		/// <inheritdoc />
-		public DiskBasedShardAllocationSettingsDescriptor LowWatermark(string low) => Assign(a => a.LowWatermark = low);
+		public DiskBasedShardAllocationSettingsDescriptor LowWatermark(string low) => Assign(low, (a, v) => a.LowWatermark = v);
 
 		/// <inheritdoc />
-		public DiskBasedShardAllocationSettingsDescriptor HighWatermark(string high) => Assign(a => a.HighWatermark = high);
+		public DiskBasedShardAllocationSettingsDescriptor HighWatermark(string high) => Assign(high, (a, v) => a.HighWatermark = v);
 
 		/// <inheritdoc />
-		public DiskBasedShardAllocationSettingsDescriptor UpdateInterval(Time time) => Assign(a => a.UpdateInterval = time);
+		public DiskBasedShardAllocationSettingsDescriptor UpdateInterval(Time time) => Assign(time, (a, v) => a.UpdateInterval = v);
 
 		/// <inheritdoc />
-		public DiskBasedShardAllocationSettingsDescriptor IncludeRelocations(bool? include = true) => Assign(a => a.IncludeRelocations = include);
+		public DiskBasedShardAllocationSettingsDescriptor IncludeRelocations(bool? include = true) => Assign(include, (a, v) => a.IncludeRelocations = v);
 	}
 }

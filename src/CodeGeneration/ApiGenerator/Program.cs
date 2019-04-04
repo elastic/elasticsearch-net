@@ -23,7 +23,7 @@ namespace ApiGenerator
 
 			if (redownloadCoreSpecification)
 			{
-				Console.Write("Branch to download specification from (default master): ");
+				Console.Write($"Branch to download specification from (default {downloadBranch}): ");
 				var readBranch = Console.ReadLine()?.Trim();
 				if (!string.IsNullOrEmpty(readBranch)) downloadBranch = readBranch;
 			}

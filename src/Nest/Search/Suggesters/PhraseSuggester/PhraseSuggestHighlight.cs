@@ -24,8 +24,8 @@ namespace Nest
 		string IPhraseSuggestHighlight.PostTag { get; set; }
 		string IPhraseSuggestHighlight.PreTag { get; set; }
 
-		public PhraseSuggestHighlightDescriptor PreTag(string preTag) => Assign(a => a.PreTag = preTag);
+		public PhraseSuggestHighlightDescriptor PreTag(string preTag) => Assign(preTag, (a, v) => a.PreTag = v);
 
-		public PhraseSuggestHighlightDescriptor PostTag(string postTag) => Assign(a => a.PostTag = postTag);
+		public PhraseSuggestHighlightDescriptor PostTag(string postTag) => Assign(postTag, (a, v) => a.PostTag = v);
 	}
 }

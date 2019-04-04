@@ -33,9 +33,9 @@ namespace Nest
 		IEnumerable<double> IPercentilesBucketAggregation.Percents { get; set; }
 
 		public PercentilesBucketAggregationDescriptor Percents(IEnumerable<double> percentages) =>
-			Assign(a => a.Percents = percentages?.ToList());
+			Assign(percentages?.ToList(), (a, v) => a.Percents = v);
 
 		public PercentilesBucketAggregationDescriptor Percents(params double[] percentages) =>
-			Assign(a => a.Percents = percentages?.ToList());
+			Assign(percentages?.ToList(), (a, v) => a.Percents = v);
 	}
 }

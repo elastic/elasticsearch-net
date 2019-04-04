@@ -64,23 +64,23 @@ namespace Nest
 		string IDissectProcessor.AppendSeparator { get; set; }
 
 		/// <inheritdoc cref="IDissectProcessor.Field">
-		public DissectProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public DissectProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IDissectProcessor.Field">
 		public DissectProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IDissectProcessor.Pattern">
 		public DissectProcessorDescriptor<T> Pattern(string pattern) =>
-			Assign(a => a.Pattern = pattern);
+			Assign(pattern, (a, v) => a.Pattern = v);
 
 		/// <inheritdoc cref="IDissectProcessor.IgnoreMissing">
 		public DissectProcessorDescriptor<T> IgnoreMissing(bool? traceMatch = true) =>
-			Assign(a => a.IgnoreMissing = traceMatch);
+			Assign(traceMatch, (a, v) => a.IgnoreMissing = v);
 
 		/// <inheritdoc cref="IDissectProcessor.AppendSeparator">
 		public DissectProcessorDescriptor<T> AppendSeparator(string appendSeparator) =>
-			Assign(a => a.AppendSeparator = appendSeparator);
+			Assign(appendSeparator, (a, v) => a.AppendSeparator = v);
 
 	}
 }

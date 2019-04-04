@@ -88,22 +88,22 @@ namespace Nest
 		DateTime? IDateProperty.NullValue { get; set; }
 
 		/// <inheritdoc />
-		public DatePropertyDescriptor<T> Index(bool? index = true) => Assign(a => a.Index = index);
+		public DatePropertyDescriptor<T> Index(bool? index = true) => Assign(index, (a, v) => a.Index = v);
 
 		/// <inheritdoc />
-		public DatePropertyDescriptor<T> Boost(double? boost) => Assign(a => a.Boost = boost);
+		public DatePropertyDescriptor<T> Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
 
 		/// <inheritdoc />
-		public DatePropertyDescriptor<T> NullValue(DateTime? nullValue) => Assign(a => a.NullValue = nullValue);
+		public DatePropertyDescriptor<T> NullValue(DateTime? nullValue) => Assign(nullValue, (a, v) => a.NullValue = v);
 
 		/// <inheritdoc />
-		public DatePropertyDescriptor<T> IgnoreMalformed(bool? ignoreMalformed = true) => Assign(a => a.IgnoreMalformed = ignoreMalformed);
+		public DatePropertyDescriptor<T> IgnoreMalformed(bool? ignoreMalformed = true) => Assign(ignoreMalformed, (a, v) => a.IgnoreMalformed = v);
 
 		/// <inheritdoc />
-		public DatePropertyDescriptor<T> Format(string format) => Assign(a => a.Format = format);
+		public DatePropertyDescriptor<T> Format(string format) => Assign(format, (a, v) => a.Format = v);
 
 		/// <inheritdoc />
 		public DatePropertyDescriptor<T> Fielddata(Func<NumericFielddataDescriptor, INumericFielddata> selector) =>
-			Assign(a => a.Fielddata = selector(new NumericFielddataDescriptor()));
+			Assign(selector(new NumericFielddataDescriptor()), (a, v) => a.Fielddata = v);
 	}
 }

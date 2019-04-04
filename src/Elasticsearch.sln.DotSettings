@@ -479,4 +479,5 @@
 	<s:String x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=B68C83B0AE11204AAA509A6033251E74/Name/@EntryValue">Hack</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=B68C83B0AE11204AAA509A6033251E74/Pattern/@EntryValue">(?&lt;=\W|^)(?&lt;TAG&gt;HACK)(\W|$)(.*)</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=B68C83B0AE11204AAA509A6033251E74/TodoIconStyle/@EntryValue">Warning</s:String>
-	<s:Boolean x:Key="/Default/UserDictionary/Words/=/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=Rethrottle/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

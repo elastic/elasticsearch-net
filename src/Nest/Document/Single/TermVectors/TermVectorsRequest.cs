@@ -69,7 +69,7 @@ namespace Nest
 		/// <summary>
 		/// An optional document to get term vectors for instead of using an already indexed document
 		/// </summary>
-		public TermVectorsDescriptor<TDocument> Document(TDocument document) => Assign(a => a.Document = document);
+		public TermVectorsDescriptor<TDocument> Document(TDocument document) => Assign(document, (a, v) => a.Document = v);
 
 		/// <summary>
 		/// Provide a different analyzer than the one at the field.
@@ -78,13 +78,13 @@ namespace Nest
 		public TermVectorsDescriptor<TDocument> PerFieldAnalyzer(
 			Func<PerFieldAnalyzerDescriptor<TDocument>, IPromise<IPerFieldAnalyzer>> analyzerSelector
 		) =>
-			Assign(a => a.PerFieldAnalyzer = analyzerSelector?.Invoke(new PerFieldAnalyzerDescriptor<TDocument>())?.Value);
+			Assign(analyzerSelector, (a, v) => a.PerFieldAnalyzer = v?.Invoke(new PerFieldAnalyzerDescriptor<TDocument>())?.Value);
 
 		/// <summary>
 		/// Filter the terms returned based on their TF-IDF scores.
 		/// This can be useful in order find out a good characteristic vector of a document.
 		/// </summary>
 		public TermVectorsDescriptor<TDocument> Filter(Func<TermVectorFilterDescriptor, ITermVectorFilter> filterSelector) =>
-			Assign(a => a.Filter = filterSelector?.Invoke(new TermVectorFilterDescriptor()));
+			Assign(filterSelector, (a, v) => a.Filter = v?.Invoke(new TermVectorFilterDescriptor()));
 	}
 }

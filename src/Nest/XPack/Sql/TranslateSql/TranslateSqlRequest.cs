@@ -34,19 +34,19 @@ namespace Nest
 
 		/// <inheritdoc cref="ISqlRequest.Query" />
 		/// >
-		public TranslateSqlDescriptor Query(string query) => Assign(a => a.Query = query);
+		public TranslateSqlDescriptor Query(string query) => Assign(query, (a, v) => a.Query = v);
 
 		/// <inheritdoc cref="ISqlRequest.TimeZone" />
 		/// >
-		public TranslateSqlDescriptor TimeZone(string timeZone) => Assign(a => a.TimeZone = timeZone);
+		public TranslateSqlDescriptor TimeZone(string timeZone) => Assign(timeZone, (a, v) => a.TimeZone = v);
 
 		/// <inheritdoc cref="ISqlRequest.FetchSize" />
 		/// >
-		public TranslateSqlDescriptor FetchSize(int? fetchSize) => Assign(a => a.FetchSize = fetchSize);
+		public TranslateSqlDescriptor FetchSize(int? fetchSize) => Assign(fetchSize, (a, v) => a.FetchSize = v);
 
 		/// <inheritdoc cref="ISqlRequest.Filter" />
 		/// >
 		public TranslateSqlDescriptor Filter<T>(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
-			where T : class => Assign(a => a.Filter = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
+			where T : class => Assign(querySelector, (a, v) => a.Filter = v?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

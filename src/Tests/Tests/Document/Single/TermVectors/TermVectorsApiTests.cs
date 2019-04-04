@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -110,6 +111,7 @@ namespace Tests.Document.Single.TermVectors
 			termvector.FieldStatistics.SumOfDocumentFrequencies.Should().BeGreaterThan(0);
 			termvector.FieldStatistics.SumOfTotalTermFrequencies.Should().BeGreaterThan(0);
 			termvector.Terms.Should().NotBeNull();
+			termvector.Terms.First().Value.Score.Should().BeGreaterThan(0);
 		}
 	}
 }

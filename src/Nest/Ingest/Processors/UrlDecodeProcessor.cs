@@ -63,30 +63,30 @@ namespace Nest
 		/// <summary>
 		/// The field to decode
 		/// </summary>
-		public UrlDecodeProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public UrlDecodeProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <summary>
 		/// The field to decode
 		/// </summary>
 		public UrlDecodeProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <summary>
 		/// The field to assign the converted value to, by default <see cref="IUrlDecodeProcessor.Field" /> is updated in-place
 		/// </summary>
-		public UrlDecodeProcessorDescriptor<T> TargetField(Field field) => Assign(a => a.TargetField = field);
+		public UrlDecodeProcessorDescriptor<T> TargetField(Field field) => Assign(field, (a, v) => a.TargetField = v);
 
 		/// <summary>
 		/// The field to assign the converted value to, by default <see cref="IUrlDecodeProcessor.Field" /> is updated in-place
 		/// </summary>
 		public UrlDecodeProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.TargetField = objectPath);
+			Assign(objectPath, (a, v) => a.TargetField = v);
 
 		/// <summary>
 		/// If <c>true</c> and <see cref="IUrlDecodeProcessor.Field" /> does not exist or is null,
 		/// the processor quietly exits without modifying the document. Default is <c>false</c>
 		/// </summary>
 		public UrlDecodeProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) =>
-			Assign(a => a.IgnoreMissing = ignoreMissing);
+			Assign(ignoreMissing, (a, v) => a.IgnoreMissing = v);
 	}
 }

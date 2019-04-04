@@ -1827,6 +1827,110 @@ namespace Nest
 	}
 	 
 	[InterfaceDataContract]
+	public partial interface IDeleteByQueryRethrottleRequest : IRequest<DeleteByQueryRethrottleRequestParameters>
+	{
+		[IgnoreDataMember]
+			TaskId TaskId { get; }
+	}
+
+	///<summary>Request parameters for DeleteByQueryRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html</pre></summary>
+	public partial class DeleteByQueryRethrottleRequest : PlainRequestBase<DeleteByQueryRethrottleRequestParameters>, IDeleteByQueryRethrottleRequest
+	{
+		protected IDeleteByQueryRethrottleRequest Self => this;
+		///<summary>/_delete_by_query/{task_id}/_rethrottle</summary>
+		///<param name="task_id">this parameter is required</param>
+		public DeleteByQueryRethrottleRequest(TaskId task_id) : base(r => r.Required("task_id", task_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal DeleteByQueryRethrottleRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		TaskId IDeleteByQueryRethrottleRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
+
+		// Request parameters
+		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
+		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+	}
+	[InterfaceDataContract]
+	public partial interface IDeleteCalendarEventRequest : IRequest<DeleteCalendarEventRequestParameters>
+	{
+		[IgnoreDataMember]
+			Id CalendarId { get; }
+		[IgnoreDataMember]
+			Id EventId { get; }
+	}
+
+	///<summary>Request parameters for MlDeleteCalendarEvent <pre>TODO</pre></summary>
+	public partial class DeleteCalendarEventRequest : PlainRequestBase<DeleteCalendarEventRequestParameters>, IDeleteCalendarEventRequest
+	{
+		protected IDeleteCalendarEventRequest Self => this;
+		///<summary>/_ml/calendars/{calendar_id}/events/{event_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		///<param name="event_id">this parameter is required</param>
+		public DeleteCalendarEventRequest(Id calendar_id, Id event_id) : base(r => r.Required("calendar_id", calendar_id).Required("event_id", event_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal DeleteCalendarEventRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IDeleteCalendarEventRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+		[IgnoreDataMember]
+		Id IDeleteCalendarEventRequest.EventId => Self.RouteValues.Get<Id>("event_id");
+
+		// Request parameters
+	}
+	[InterfaceDataContract]
+	public partial interface IDeleteCalendarJobRequest : IRequest<DeleteCalendarJobRequestParameters>
+	{
+		[IgnoreDataMember]
+			Id CalendarId { get; }
+		[IgnoreDataMember]
+			Id JobId { get; }
+	}
+
+	///<summary>Request parameters for MlDeleteCalendarJob <pre>TODO</pre></summary>
+	public partial class DeleteCalendarJobRequest : PlainRequestBase<DeleteCalendarJobRequestParameters>, IDeleteCalendarJobRequest
+	{
+		protected IDeleteCalendarJobRequest Self => this;
+		///<summary>/_ml/calendars/{calendar_id}/jobs/{job_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		///<param name="job_id">this parameter is required</param>
+		public DeleteCalendarJobRequest(Id calendar_id, Id job_id) : base(r => r.Required("calendar_id", calendar_id).Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal DeleteCalendarJobRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IDeleteCalendarJobRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+		[IgnoreDataMember]
+		Id IDeleteCalendarJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+	}
+	[InterfaceDataContract]
+	public partial interface IDeleteCalendarRequest : IRequest<DeleteCalendarRequestParameters>
+	{
+		[IgnoreDataMember]
+			Id CalendarId { get; }
+	}
+
+	///<summary>Request parameters for MlDeleteCalendar <pre>TODO</pre></summary>
+	public partial class DeleteCalendarRequest : PlainRequestBase<DeleteCalendarRequestParameters>, IDeleteCalendarRequest
+	{
+		protected IDeleteCalendarRequest Self => this;
+		///<summary>/_ml/calendars/{calendar_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		public DeleteCalendarRequest(Id calendar_id) : base(r => r.Required("calendar_id", calendar_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal DeleteCalendarRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IDeleteCalendarRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+	}
+	[InterfaceDataContract]
 	public partial interface IDeleteDatafeedRequest : IRequest<DeleteDatafeedRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -1863,6 +1967,38 @@ namespace Nest
 		// values part of the url path
 
 		// Request parameters
+	}
+	[InterfaceDataContract]
+	public partial interface IDeleteForecastRequest : IRequest<DeleteForecastRequestParameters>
+	{
+		[IgnoreDataMember]
+			Id JobId { get; }
+		[IgnoreDataMember]
+			ForecastIds ForecastId { get; }
+	}
+
+	///<summary>Request parameters for MlDeleteForecast <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</pre></summary>
+	public partial class DeleteForecastRequest : PlainRequestBase<DeleteForecastRequestParameters>, IDeleteForecastRequest
+	{
+		protected IDeleteForecastRequest Self => this;
+		///<summary>/_ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}</summary>
+		///<param name="job_id">this parameter is required</param>
+		///<param name="forecast_id">this parameter is required</param>
+		public DeleteForecastRequest(Id job_id, ForecastIds forecast_id) : base(r => r.Required("job_id", job_id).Required("forecast_id", forecast_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal DeleteForecastRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IDeleteForecastRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		[IgnoreDataMember]
+		ForecastIds IDeleteForecastRequest.ForecastId => Self.RouteValues.Get<ForecastIds>("forecast_id");
+
+		// Request parameters
+		///<summary>Whether to ignore if `_all` matches no forecasts</summary>
+		public bool? AllowNoForecasts { get => Q<bool?>("allow_no_forecasts"); set => Q("allow_no_forecasts", value); }
+		///<summary>Controls the time to wait until the forecast(s) are deleted. Default to 30 seconds</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IDeleteIndexRequest : IRequest<DeleteIndexRequestParameters>
@@ -2018,6 +2154,39 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+	}
+	[InterfaceDataContract]
+	public partial interface IDeletePrivilegesRequest : IRequest<DeletePrivilegesRequestParameters>
+	{
+		[IgnoreDataMember]
+			Name Application { get; }
+		[IgnoreDataMember]
+			Name Name { get; }
+	}
+
+	///<summary>Request parameters for SecurityDeletePrivileges <pre>TODO</pre></summary>
+	public partial class DeletePrivilegesRequest : PlainRequestBase<DeletePrivilegesRequestParameters>, IDeletePrivilegesRequest
+	{
+		protected IDeletePrivilegesRequest Self => this;
+		///<summary>/_security/privilege/{application}/{name}</summary>
+		///<param name="application">this parameter is required</param>
+		///<param name="name">this parameter is required</param>
+		public DeletePrivilegesRequest(Name application, Name name) : base(r => r.Required("application", application).Required("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal DeletePrivilegesRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Name IDeletePrivilegesRequest.Application => Self.RouteValues.Get<Name>("application");
+		[IgnoreDataMember]
+		Name IDeletePrivilegesRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IDeleteRepositoryRequest : IRequest<DeleteRepositoryRequestParameters>
@@ -2909,6 +3078,57 @@ namespace Nest
 		// Request parameters
 	}
 	[InterfaceDataContract]
+	public partial interface IGetCalendarEventsRequest : IRequest<GetCalendarEventsRequestParameters>
+	{
+		[IgnoreDataMember]
+			Id CalendarId { get; }
+	}
+
+	///<summary>Request parameters for MlGetCalendarEvents <pre>TODO</pre></summary>
+	public partial class GetCalendarEventsRequest : PlainRequestBase<GetCalendarEventsRequestParameters>, IGetCalendarEventsRequest
+	{
+		protected IGetCalendarEventsRequest Self => this;
+		///<summary>/_ml/calendars/{calendar_id}/events</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		public GetCalendarEventsRequest(Id calendar_id) : base(r => r.Required("calendar_id", calendar_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal GetCalendarEventsRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IGetCalendarEventsRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+		///<summary>Get events for the job. When this option is used calendar_id must be '_all'</summary>
+		public string JobId { get => Q<string>("job_id"); set => Q("job_id", value); }
+		///<summary>Get events after this time</summary>
+		public string Start { get => Q<string>("start"); set => Q("start", value); }
+		///<summary>Get events before this time</summary>
+		public DateTimeOffset? End { get => Q<DateTimeOffset?>("end"); set => Q("end", value); }
+	}
+	[InterfaceDataContract]
+	public partial interface IGetCalendarsRequest : IRequest<GetCalendarsRequestParameters>
+	{
+		[IgnoreDataMember]
+			Id CalendarId { get; }
+	}
+
+	///<summary>Request parameters for MlGetCalendars <pre>TODO</pre></summary>
+	public partial class GetCalendarsRequest : PlainRequestBase<GetCalendarsRequestParameters>, IGetCalendarsRequest
+	{
+		protected IGetCalendarsRequest Self => this;
+		///<summary>/_ml/calendars</summary>
+		public GetCalendarsRequest() : base(){}
+		///<summary>/_ml/calendars/{calendar_id}</summary>
+		///<param name="calendar_id">Optional, accepts null</param>
+		public GetCalendarsRequest(Id calendar_id) : base(r => r.Optional("calendar_id", calendar_id)){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IGetCalendarsRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+	}
+	[InterfaceDataContract]
 	public partial interface IGetCategoriesRequest : IRequest<GetCategoriesRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -3367,6 +3587,34 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	[InterfaceDataContract]
+	public partial interface IGetPrivilegesRequest : IRequest<GetPrivilegesRequestParameters>
+	{
+		[IgnoreDataMember]
+			Name Application { get; }
+		[IgnoreDataMember]
+			Name Name { get; }
+	}
+
+	///<summary>Request parameters for SecurityGetPrivileges <pre>TODO</pre></summary>
+	public partial class GetPrivilegesRequest : PlainRequestBase<GetPrivilegesRequestParameters>, IGetPrivilegesRequest
+	{
+		protected IGetPrivilegesRequest Self => this;
+		///<summary>/_security/privilege/{application}/{name}</summary>
+		///<param name="application">Optional, accepts null</param>
+		///<param name="name">Optional, accepts null</param>
+		public GetPrivilegesRequest(Name application, Name name) : base(r => r.Optional("application", application).Optional("name", name)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal GetPrivilegesRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Name IGetPrivilegesRequest.Application => Self.RouteValues.Get<Name>("application");
+		[IgnoreDataMember]
+		Name IGetPrivilegesRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+	}
+	[InterfaceDataContract]
 	public partial interface IGetRepositoryRequest : IRequest<GetRepositoryRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -3696,6 +3944,19 @@ namespace Nest
 		// Request parameters
 	}
 	[InterfaceDataContract]
+	public partial interface IGetUserPrivilegesRequest : IRequest<GetUserPrivilegesRequestParameters>
+	{
+	}
+
+	///<summary>Request parameters for SecurityGetUserPrivileges <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</pre></summary>
+	public partial class GetUserPrivilegesRequest : PlainRequestBase<GetUserPrivilegesRequestParameters>, IGetUserPrivilegesRequest
+	{
+		protected IGetUserPrivilegesRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+	}
+	[InterfaceDataContract]
 	public partial interface IGetUserRequest : IRequest<GetUserRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -3796,6 +4057,28 @@ namespace Nest
 	{
 		protected IGrokProcessorPatternsRequest Self => this;
 		// values part of the url path
+
+		// Request parameters
+	}
+	[InterfaceDataContract]
+	public partial interface IHasPrivilegesRequest : IRequest<HasPrivilegesRequestParameters>
+	{
+		[IgnoreDataMember]
+			Name User { get; }
+	}
+
+	///<summary>Request parameters for SecurityHasPrivileges <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</pre></summary>
+	public partial class HasPrivilegesRequest : PlainRequestBase<HasPrivilegesRequestParameters>, IHasPrivilegesRequest
+	{
+		protected IHasPrivilegesRequest Self => this;
+		///<summary>/_security/user/_has_privileges</summary>
+		public HasPrivilegesRequest() : base(){}
+		///<summary>/_security/user/{user}/_has_privileges</summary>
+		///<param name="user">Optional, accepts null</param>
+		public HasPrivilegesRequest(Name user) : base(r => r.Optional("user", user)){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Name IHasPrivilegesRequest.User => Self.RouteValues.Get<Name>("user");
 
 		// Request parameters
 	}
@@ -4075,6 +4358,19 @@ namespace Nest
 		public GroupBy? GroupBy { get => Q<GroupBy?>("group_by"); set => Q("group_by", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+	}
+	[InterfaceDataContract]
+	public partial interface IMachineLearningInfoRequest : IRequest<MachineLearningInfoRequestParameters>
+	{
+	}
+
+	///<summary>Request parameters for MlInfo <pre>TODO</pre></summary>
+	public partial class MachineLearningInfoRequest : PlainRequestBase<MachineLearningInfoRequestParameters>, IMachineLearningInfoRequest
+	{
+		protected IMachineLearningInfoRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
 	}
 	[InterfaceDataContract]
 	public partial interface IMigrationAssistanceRequest : IRequest<MigrationAssistanceRequestParameters>
@@ -4580,6 +4876,29 @@ namespace Nest
 		// Request parameters
 	}
 	[InterfaceDataContract]
+	public partial interface IPostCalendarEventsRequest : IRequest<PostCalendarEventsRequestParameters>
+	{
+		[IgnoreDataMember]
+			Id CalendarId { get; }
+	}
+
+	///<summary>Request parameters for MlPostCalendarEvents <pre>TODO</pre></summary>
+	public partial class PostCalendarEventsRequest : PlainRequestBase<PostCalendarEventsRequestParameters>, IPostCalendarEventsRequest
+	{
+		protected IPostCalendarEventsRequest Self => this;
+		///<summary>/_ml/calendars/{calendar_id}/events</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		public PostCalendarEventsRequest(Id calendar_id) : base(r => r.Required("calendar_id", calendar_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal PostCalendarEventsRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IPostCalendarEventsRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+	}
+	[InterfaceDataContract]
 	public partial interface IPostJobDataRequest : IRequest<PostJobDataRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -4675,6 +4994,57 @@ namespace Nest
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+	}
+	[InterfaceDataContract]
+	public partial interface IPutCalendarJobRequest : IRequest<PutCalendarJobRequestParameters>
+	{
+		[IgnoreDataMember]
+			Id CalendarId { get; }
+		[IgnoreDataMember]
+			Id JobId { get; }
+	}
+
+	///<summary>Request parameters for MlPutCalendarJob <pre>TODO</pre></summary>
+	public partial class PutCalendarJobRequest : PlainRequestBase<PutCalendarJobRequestParameters>, IPutCalendarJobRequest
+	{
+		protected IPutCalendarJobRequest Self => this;
+		///<summary>/_ml/calendars/{calendar_id}/jobs/{job_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		///<param name="job_id">this parameter is required</param>
+		public PutCalendarJobRequest(Id calendar_id, Id job_id) : base(r => r.Required("calendar_id", calendar_id).Required("job_id", job_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal PutCalendarJobRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IPutCalendarJobRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+		[IgnoreDataMember]
+		Id IPutCalendarJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+	}
+	[InterfaceDataContract]
+	public partial interface IPutCalendarRequest : IRequest<PutCalendarRequestParameters>
+	{
+		[IgnoreDataMember]
+			Id CalendarId { get; }
+	}
+
+	///<summary>Request parameters for MlPutCalendar <pre>TODO</pre></summary>
+	public partial class PutCalendarRequest : PlainRequestBase<PutCalendarRequestParameters>, IPutCalendarRequest
+	{
+		protected IPutCalendarRequest Self => this;
+		///<summary>/_ml/calendars/{calendar_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		public PutCalendarRequest(Id calendar_id) : base(r => r.Required("calendar_id", calendar_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal PutCalendarRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IPutCalendarRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
 	}
 	[InterfaceDataContract]
 	public partial interface IPutDatafeedRequest : IRequest<PutDatafeedRequestParameters>
@@ -4831,6 +5201,24 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+	}
+	[InterfaceDataContract]
+	public partial interface IPutPrivilegesRequest : IRequest<PutPrivilegesRequestParameters>
+	{
+	}
+
+	///<summary>Request parameters for SecurityPutPrivileges <pre>TODO</pre></summary>
+	public partial class PutPrivilegesRequest : PlainRequestBase<PutPrivilegesRequestParameters>, IPutPrivilegesRequest
+	{
+		protected IPutPrivilegesRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IPutRoleMappingRequest : IRequest<PutRoleMappingRequestParameters>
@@ -6392,6 +6780,31 @@ namespace Nest
 		public UpdateByQueryRequest() : base(typeof(T)){}
 	}
 	 
+	[InterfaceDataContract]
+	public partial interface IUpdateByQueryRethrottleRequest : IRequest<UpdateByQueryRethrottleRequestParameters>
+	{
+		[IgnoreDataMember]
+			TaskId TaskId { get; }
+	}
+
+	///<summary>Request parameters for UpdateByQueryRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html</pre></summary>
+	public partial class UpdateByQueryRethrottleRequest : PlainRequestBase<UpdateByQueryRethrottleRequestParameters>, IUpdateByQueryRethrottleRequest
+	{
+		protected IUpdateByQueryRethrottleRequest Self => this;
+		///<summary>/_update_by_query/{task_id}/_rethrottle</summary>
+		///<param name="task_id">this parameter is required</param>
+		public UpdateByQueryRethrottleRequest(TaskId task_id) : base(r => r.Required("task_id", task_id)){}
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		internal UpdateByQueryRethrottleRequest() : base(){}
+		// values part of the url path
+		[IgnoreDataMember]
+		TaskId IUpdateByQueryRethrottleRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
+
+		// Request parameters
+		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
+		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+	}
 	[InterfaceDataContract]
 	public partial interface IUpdateDatafeedRequest : IRequest<UpdateDatafeedRequestParameters>
 	{

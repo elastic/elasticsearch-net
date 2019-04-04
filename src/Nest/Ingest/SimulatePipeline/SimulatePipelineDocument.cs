@@ -45,15 +45,15 @@ namespace Nest
 		IndexName ISimulatePipelineDocument.Index { get; set; }
 		object ISimulatePipelineDocument.Source { get; set; }
 
-		public SimulatePipelineDocumentDescriptor Id(Id id) => Assign(a => a.Id = id);
+		public SimulatePipelineDocumentDescriptor Id(Id id) => Assign(id, (a, v) => a.Id = v);
 
-		public SimulatePipelineDocumentDescriptor Index(IndexName index) => Assign(a => a.Index = index);
+		public SimulatePipelineDocumentDescriptor Index(IndexName index) => Assign(index, (a, v) => a.Index = v);
 
-		public SimulatePipelineDocumentDescriptor Source<T>(T source) where T : class => Assign(a =>
+		public SimulatePipelineDocumentDescriptor Source<T>(T source) where T : class => Assign(source, (a, v) =>
 		{
-			a.Source = source;
-			a.Index = a.Index ?? source.GetType();
-			a.Id = a.Id ?? Nest.Id.From(source);
+			a.Source = v;
+			a.Index = a.Index ?? v.GetType();
+			a.Id = a.Id ?? Nest.Id.From(v);
 		});
 	}
 
@@ -63,6 +63,6 @@ namespace Nest
 		public SimulatePipelineDocumentsDescriptor() : base(new List<ISimulatePipelineDocument>()) { }
 
 		public SimulatePipelineDocumentsDescriptor Document(Func<SimulatePipelineDocumentDescriptor, ISimulatePipelineDocument> selector) =>
-			Assign(a => a.AddIfNotNull(selector?.Invoke(new SimulatePipelineDocumentDescriptor())));
+			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new SimulatePipelineDocumentDescriptor())));
 	}
 }

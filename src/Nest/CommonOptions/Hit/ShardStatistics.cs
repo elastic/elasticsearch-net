@@ -18,4 +18,16 @@ namespace Nest
 		[DataMember(Name = "total")]
 		public int Total { get; internal set; }
 	}
+
+	public class ClusterStatistics
+	{
+		[DataMember(Name = "skipped")]
+		public int Skipped { get; internal set; }
+
+		[DataMember(Name = "successful")]
+		public int Successful { get; internal set; }
+
+		[DataMember(Name = "total")]
+		public int Total { get; internal set; }
+	}
 }

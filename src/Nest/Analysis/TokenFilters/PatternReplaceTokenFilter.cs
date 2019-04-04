@@ -43,9 +43,9 @@ namespace Nest
 		string IPatternReplaceTokenFilter.Replacement { get; set; }
 
 		/// <inheritdoc />
-		public PatternReplaceTokenFilterDescriptor Pattern(string pattern) => Assign(a => a.Pattern = pattern);
+		public PatternReplaceTokenFilterDescriptor Pattern(string pattern) => Assign(pattern, (a, v) => a.Pattern = v);
 
 		/// <inheritdoc />
-		public PatternReplaceTokenFilterDescriptor Replacement(string replacement) => Assign(a => a.Replacement = replacement);
+		public PatternReplaceTokenFilterDescriptor Replacement(string replacement) => Assign(replacement, (a, v) => a.Replacement = v);
 	}
 }

@@ -205,7 +205,7 @@ namespace Elasticsearch.Net
 
 		private static bool DefaultNodePredicate(Node node) => true;
 
-		private T Assign(Action<ConnectionConfiguration<T>> assigner) => Fluent.Assign((T)this, assigner);
+		private T Assign<TValue>(TValue value, Action<ConnectionConfiguration<T>, TValue> assigner) => Fluent.Assign((T)this, value, assigner);
 
 		/// <summary>
 		/// The default serializer used to serialize documents to and from JSON
@@ -222,16 +222,13 @@ namespace Elasticsearch.Net
 		/// received.
 		/// </param>
 		public T EnableTcpKeepAlive(TimeSpan keepAliveTime, TimeSpan keepAliveInterval) =>
-			Assign(a =>
-			{
-				_keepAliveTime = keepAliveTime;
-				_keepAliveInterval = keepAliveInterval;
-			});
+			Assign(keepAliveTime, (a, v) => a._keepAliveTime = v)
+			.Assign(keepAliveInterval, (a, v) => a._keepAliveInterval = v);
 
 		/// <summary>
 		/// The maximum number of retries for a given request,
 		/// </summary>
-		public T MaximumRetries(int maxRetries) => Assign(a => a._maxRetries = maxRetries);
+		public T MaximumRetries(int maxRetries) => Assign(maxRetries, (a, v) => a._maxRetries = v);
 
 		/// <summary>
 		/// Limits the number of concurrent connections that can be opened to an endpoint. Defaults to <c>80</c>.
@@ -245,17 +242,18 @@ namespace Elasticsearch.Net
 		/// </para>
 		/// </summary>
 		/// <param name="connectionLimit">The connection limit, a value lower then 0 will cause the connection limit not to be set at all</param>
-		public T ConnectionLimit(int connectionLimit) => Assign(a => a._connectionLimit = connectionLimit);
+		public T ConnectionLimit(int connectionLimit) => Assign(connectionLimit, (a, v) => a._connectionLimit = v);
 
 		/// <summary>
 		/// Enables resniffing of the cluster when a call fails, if the connection pool supports reseeding. Defaults to <c>true</c>
 		/// </summary>
-		public T SniffOnConnectionFault(bool sniffsOnConnectionFault = true) => Assign(a => a._sniffOnConnectionFault = sniffsOnConnectionFault);
+		public T SniffOnConnectionFault(bool sniffsOnConnectionFault = true) =>
+			Assign(sniffsOnConnectionFault, (a, v) => a._sniffOnConnectionFault = v);
 
 		/// <summary>
 		/// Enables sniffing on first usage of a connection pool if that pool supports reseeding. Defaults to <c>true</c>
 		/// </summary>
-		public T SniffOnStartup(bool sniffsOnStartup = true) => Assign(a => a._sniffOnStartup = sniffsOnStartup);
+		public T SniffOnStartup(bool sniffsOnStartup = true) => Assign(sniffsOnStartup, (a, v) => a._sniffOnStartup = v);
 
 		/// <summary>
 		/// Set the duration after which a cluster state is considered stale and a sniff should be performed again.
@@ -264,73 +262,73 @@ namespace Elasticsearch.Net
 		/// Set to null to disable completely. Sniffing will only ever happen on ConnectionPools that return true for SupportsReseeding
 		/// </summary>
 		/// <param name="sniffLifeSpan">The duration a clusterstate is considered fresh, set to null to disable periodic sniffing</param>
-		public T SniffLifeSpan(TimeSpan? sniffLifeSpan) => Assign(a => a._sniffLifeSpan = sniffLifeSpan);
+		public T SniffLifeSpan(TimeSpan? sniffLifeSpan) => Assign(sniffLifeSpan, (a, v) => a._sniffLifeSpan = v);
 
 		/// <summary>
 		/// Enables gzip compressed requests and responses.
 		/// <para>IMPORTANT: You need to configure http compression on Elasticsearch to be able to use this</para>
 		/// <para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html</para>
 		/// </summary>
-		public T EnableHttpCompression(bool enabled = true) => Assign(a => a._enableHttpCompression = enabled);
+		public T EnableHttpCompression(bool enabled = true) => Assign(enabled, (a, v) => a._enableHttpCompression = v);
 
 		/// <summary>
 		/// Disables the automatic detection of a proxy
 		/// </summary>
-		public T DisableAutomaticProxyDetection(bool disable = true) => Assign(a => a._disableAutomaticProxyDetection = disable);
+		public T DisableAutomaticProxyDetection(bool disable = true) => Assign(disable, (a, v) => a._disableAutomaticProxyDetection = v);
 
 		/// <summary>
 		/// Instead of following a c/go like error checking on response.IsValid do throw an exception (except when <see cref="IApiCallDetails.SuccessOrKnownError"/> is false)
 		/// on the client when a call resulted in an exception on either the client or the Elasticsearch server.
 		/// <para>Reasons for such exceptions could be search parser errors, index missing exceptions, etc...</para>
 		/// </summary>
-		public T ThrowExceptions(bool alwaysThrow = true) => Assign(a => a._throwExceptions = alwaysThrow);
+		public T ThrowExceptions(bool alwaysThrow = true) => Assign(alwaysThrow, (a, v) => a._throwExceptions = v);
 
 		/// <summary>
 		/// When a node is used for the very first time or when it's used for the first time after it has been marked dead
 		/// a ping with a very low timeout is send to the node to make sure that when it's still dead it reports it as fast as possible.
 		/// You can disable these pings globally here if you rather have it fail on the possible slower original request
 		/// </summary>
-		public T DisablePing(bool disable = true) => Assign(a => a._disablePings = disable);
+		public T DisablePing(bool disable = true) => Assign(disable, (a, v) => a._disablePings = v);
 
 		/// <summary>
 		/// A collection of query string parameters that will be sent with every request. Useful in situations where you always need to pass a
 		/// parameter e.g. an API key.
 		/// </summary>
-		public T GlobalQueryStringParameters(NameValueCollection queryStringParameters) => Assign(a => a._queryString.Add(queryStringParameters));
+		public T GlobalQueryStringParameters(NameValueCollection queryStringParameters) => Assign(queryStringParameters, (a, v) => a._queryString.Add(v));
 
 		/// <summary>
 		/// A collection of headers that will be sent with every request. Useful in situations where you always need to pass a header e.g. a custom
 		/// auth header
 		/// </summary>
-		public T GlobalHeaders(NameValueCollection headers) => Assign(a => a._headers.Add(headers));
+		public T GlobalHeaders(NameValueCollection headers) => Assign(headers, (a, v) => a._headers.Add(v));
 
 		/// <summary>
 		/// Sets the default timeout in milliseconds for each request to Elasticsearch. Defaults to <c>60</c> seconds.
 		/// <para>NOTE: You can set this to a high value here, and specify a timeout on Elasticsearch's side.</para>
 		/// </summary>
 		/// <param name="timeout">time out in milliseconds</param>
-		public T RequestTimeout(TimeSpan timeout) => Assign(a => a._requestTimeout = timeout);
+		public T RequestTimeout(TimeSpan timeout) => Assign(timeout, (a, v) => a._requestTimeout = v);
 
 		/// <summary>
 		/// Sets the default ping timeout in milliseconds for ping requests, which are used
 		/// to determine whether a node is alive. Pings should fail as fast as possible.
 		/// </summary>
 		/// <param name="timeout">The ping timeout in milliseconds defaults to <c>1000</c>, or <c>2000</c> if using SSL.</param>
-		public T PingTimeout(TimeSpan timeout) => Assign(a => a._pingTimeout = timeout);
+		public T PingTimeout(TimeSpan timeout) => Assign(timeout, (a, v) => a._pingTimeout = v);
 
 		/// <summary>
 		/// Sets the default dead timeout factor when a node has been marked dead.
 		/// </summary>
 		/// <remarks>Some connection pools may use a flat timeout whilst others take this factor and increase it exponentially</remarks>
 		/// <param name="timeout"></param>
-		public T DeadTimeout(TimeSpan timeout) => Assign(a => a._deadTimeout = timeout);
+		public T DeadTimeout(TimeSpan timeout) => Assign(timeout, (a, v) => a._deadTimeout = v);
 
 		/// <summary>
 		/// Sets the maximum time a node can be marked dead.
 		/// Different implementations of <see cref="IConnectionPool" /> may choose a different default.
 		/// </summary>
 		/// <param name="timeout">The timeout in milliseconds</param>
-		public T MaxDeadTimeout(TimeSpan timeout) => Assign(a => a._maxDeadTimeout = timeout);
+		public T MaxDeadTimeout(TimeSpan timeout) => Assign(timeout, (a, v) => a._maxDeadTimeout = v);
 
 		/// <summary>
 		/// Limits the total runtime, including retries, separately from <see cref="RequestTimeout" />
@@ -338,7 +336,7 @@ namespace Elasticsearch.Net
 		/// When not specified, defaults to <see cref="RequestTimeout" />, which itself defaults to <c>60</c> seconds
 		/// </para>
 		/// </summary>
-		public T MaxRetryTimeout(TimeSpan maxRetryTimeout) => Assign(a => a._maxRetryTimeout = maxRetryTimeout);
+		public T MaxRetryTimeout(TimeSpan maxRetryTimeout) => Assign(maxRetryTimeout, (a, v) => a._maxRetryTimeout = v);
 
 		/// <summary>
 		/// If your connection has to go through proxy, use this method to specify the proxy url
@@ -357,13 +355,13 @@ namespace Elasticsearch.Net
 		/// causing Elasticsearch to return formatted JSON.
 		/// Also forces the client to send out formatted JSON. Defaults to <c>false</c>
 		/// </summary>
-		public T PrettyJson(bool b = true) => Assign(a =>
+		public T PrettyJson(bool b = true) => Assign(b, (a, v) =>
 		{
-			_prettyJson = b;
+			a._prettyJson = v;
 			const string key = "pretty";
-			if (!b && _queryString[key] != null) _queryString.Remove(key);
-			else if (b && _queryString[key] == null)
-				GlobalQueryStringParameters(new NameValueCollection { { key, "true" } });
+			if (!v && a._queryString[key] != null) a._queryString.Remove(key);
+			else if (v && a._queryString[key] == null)
+				a.GlobalQueryStringParameters(new NameValueCollection { { key, "true" } });
 		});
 
 		/// <summary>
@@ -371,12 +369,12 @@ namespace Elasticsearch.Net
 		/// causing Elasticsearch to return stack traces as part of serialized exceptions
 		/// Defaults to <c>false</c>
 		/// </summary>
-		public T IncludeServerStackTraceOnError(bool b = true) => Assign(a =>
+		public T IncludeServerStackTraceOnError(bool b = true) => Assign(b, (a, v) =>
 		{
 			const string key = "error_trace";
-			if (!b && _queryString[key] != null) _queryString.Remove(key);
-			else if (b && _queryString[key] == null)
-				GlobalQueryStringParameters(new NameValueCollection { { key, "true" } });
+			if (!v && a._queryString[key] != null) a._queryString.Remove(key);
+			else if (v && a._queryString[key] == null)
+				a.GlobalQueryStringParameters(new NameValueCollection { { key, "true" } });
 		});
 
 		/// <summary>
@@ -386,7 +384,7 @@ namespace Elasticsearch.Net
 		/// this may cause the response to be buffered in memory first, potentially affecting performance.
 		/// </para>
 		/// </summary>
-		public T DisableDirectStreaming(bool b = true) => Assign(a => a._disableDirectStreaming = b);
+		public T DisableDirectStreaming(bool b = true) => Assign(b, (a, v) => a._disableDirectStreaming = v);
 
 		/// <summary>
 		/// Registers an <see cref="Action{IApiCallDetails}" /> that is called when a response is received from Elasticsearch.
@@ -394,30 +392,26 @@ namespace Elasticsearch.Net
 		/// Multiple callbacks can be registered by calling this multiple times
 		/// </summary>
 		public T OnRequestCompleted(Action<IApiCallDetails> handler) =>
-			Assign(a => a._completedRequestHandler += handler ?? DefaultCompletedRequestHandler);
+			Assign(handler, (a, v) => a._completedRequestHandler += v ?? DefaultCompletedRequestHandler);
 
 		/// <summary>
 		/// Registers an <see cref="Action{RequestData}" /> that is called when <see cref="RequestData" /> is created.
 		/// Multiple callbacks can be registered by calling this multiple times
 		/// </summary>
 		public T OnRequestDataCreated(Action<RequestData> handler) =>
-			Assign(a => a._onRequestDataCreated += handler ?? DefaultRequestDataCreated);
+			Assign(handler, (a, v) => a._onRequestDataCreated += v ?? DefaultRequestDataCreated);
 
 		/// <summary>
 		/// Basic Authentication credentials to send with all requests to Elasticsearch
 		/// </summary>
 		public T BasicAuthentication(string userName, string password) =>
-			Assign(a => a._basicAuthCredentials = new BasicAuthenticationCredentials
-			{
-				Username = userName,
-				Password = password
-			});
+			Assign(new BasicAuthenticationCredentials { Username = userName, Password = password }, (a, v) => a._basicAuthCredentials = v);
 
 		/// <summary>
 		/// Allows for requests to be pipelined. http://en.wikipedia.org/wiki/HTTP_pipelining
 		/// <para>NOTE: HTTP pipelining must also be enabled in Elasticsearch for this to work properly.</para>
 		/// </summary>
-		public T EnableHttpPipelining(bool enabled = true) => Assign(a => a._enableHttpPipelining = enabled);
+		public T EnableHttpPipelining(bool enabled = true) => Assign(enabled, (a, v) => a._enableHttpPipelining = v);
 
 		/// <summary>
 		/// Register a predicate to select which nodes that you want to execute API calls on. Note that sniffing requests omit this predicate and
@@ -469,35 +463,35 @@ namespace Elasticsearch.Net
 		/// for that host.
 		/// </summary>
 		public T ServerCertificateValidationCallback(Func<object, X509Certificate, X509Chain, SslPolicyErrors, bool> callback) =>
-			Assign(a => a._serverCertificateValidationCallback = callback);
+			Assign(callback, (a, v) => a._serverCertificateValidationCallback = v);
 
 		/// <summary>
 		/// Use the following certificates to authenticate all HTTP requests. You can also set them on individual
 		/// request using <see cref="RequestConfiguration.ClientCertificates" />
 		/// </summary>
 		public T ClientCertificates(X509CertificateCollection certificates) =>
-			Assign(a => a._clientCertificates = certificates);
+			Assign(certificates, (a, v) => a._clientCertificates = v);
 
 		/// <summary>
 		/// Use the following certificate to authenticate all HTTP requests. You can also set them on individual
 		/// request using <see cref="RequestConfiguration.ClientCertificates" />
 		/// </summary>
 		public T ClientCertificate(X509Certificate certificate) =>
-			Assign(a => a._clientCertificates = new X509Certificate2Collection { certificate });
+			Assign(new X509Certificate2Collection { certificate }, (a, v) => a._clientCertificates = v);
 
 		/// <summary>
 		/// Use the following certificate to authenticate all HTTP requests. You can also set them on individual
 		/// request using <see cref="RequestConfiguration.ClientCertificates" />
 		/// </summary>
 		public T ClientCertificate(string certificatePath) =>
-			Assign(a => a._clientCertificates = new X509Certificate2Collection { new X509Certificate(certificatePath) });
+			Assign(new X509Certificate2Collection { new X509Certificate(certificatePath) }, (a, v) => a._clientCertificates = v);
 
 		/// <summary>
 		/// Configure the client to skip deserialization of certain status codes e.g: you run elasticsearch behind a proxy that returns a HTML for 401,
 		/// 500
 		/// </summary>
 		public T SkipDeserializationForStatusCodes(params int[] statusCodes) =>
-			Assign(a => a._skipDeserializationForStatusCodes = new ReadOnlyCollection<int>(statusCodes));
+			Assign(new ReadOnlyCollection<int>(statusCodes), (a, v) => a._skipDeserializationForStatusCodes = v);
 
 		protected virtual void DisposeManagedResources()
 		{

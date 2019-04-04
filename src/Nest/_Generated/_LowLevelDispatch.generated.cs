@@ -778,6 +778,28 @@ namespace Nest
 			throw InvalidDispatch("DeleteByQuery", p, new [] { POST }, "/{index}/_delete_by_query");
 		}
 		
+		internal TResponse DeleteByQueryRethrottleDispatch<TResponse>(IRequest<DeleteByQueryRethrottleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.TaskId)) return _lowLevel.DeleteByQueryRethrottle<TResponse>(p.RouteValues.TaskId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("DeleteByQueryRethrottle", p, new [] { POST }, "/_delete_by_query/{task_id}/_rethrottle");
+		}
+		
+		internal Task<TResponse> DeleteByQueryRethrottleDispatchAsync<TResponse>(IRequest<DeleteByQueryRethrottleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.TaskId)) return _lowLevel.DeleteByQueryRethrottleAsync<TResponse>(p.RouteValues.TaskId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("DeleteByQueryRethrottle", p, new [] { POST }, "/_delete_by_query/{task_id}/_rethrottle");
+		}
+		
 		internal TResponse DeleteScriptDispatch<TResponse>(IRequest<DeleteScriptRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -2866,6 +2888,28 @@ namespace Nest
 			throw InvalidDispatch("UpdateByQuery", p, new [] { POST }, "/{index}/_update_by_query");
 		}
 		
+		internal TResponse UpdateByQueryRethrottleDispatch<TResponse>(IRequest<UpdateByQueryRethrottleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.TaskId)) return _lowLevel.UpdateByQueryRethrottle<TResponse>(p.RouteValues.TaskId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("UpdateByQueryRethrottle", p, new [] { POST }, "/_update_by_query/{task_id}/_rethrottle");
+		}
+		
+		internal Task<TResponse> UpdateByQueryRethrottleDispatchAsync<TResponse>(IRequest<UpdateByQueryRethrottleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.TaskId)) return _lowLevel.UpdateByQueryRethrottleAsync<TResponse>(p.RouteValues.TaskId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("UpdateByQueryRethrottle", p, new [] { POST }, "/_update_by_query/{task_id}/_rethrottle");
+		}
+		
 		internal TResponse CcrDeleteAutoFollowPatternDispatch<TResponse>(IRequest<DeleteAutoFollowPatternRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -3318,6 +3362,72 @@ namespace Nest
 			throw InvalidDispatch("MlCloseJob", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_close");
 		}
 		
+		internal TResponse MlDeleteCalendarDispatch<TResponse>(IRequest<DeleteCalendarRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.MlDeleteCalendar<TResponse>(p.RouteValues.CalendarId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlDeleteCalendar", p, new [] { DELETE }, "/_ml/calendars/{calendar_id}");
+		}
+		
+		internal Task<TResponse> MlDeleteCalendarDispatchAsync<TResponse>(IRequest<DeleteCalendarRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.MlDeleteCalendarAsync<TResponse>(p.RouteValues.CalendarId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlDeleteCalendar", p, new [] { DELETE }, "/_ml/calendars/{calendar_id}");
+		}
+		
+		internal TResponse MlDeleteCalendarEventDispatch<TResponse>(IRequest<DeleteCalendarEventRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.EventId)) return _lowLevel.MlDeleteCalendarEvent<TResponse>(p.RouteValues.CalendarId,p.RouteValues.EventId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlDeleteCalendarEvent", p, new [] { DELETE }, "/_ml/calendars/{calendar_id}/events/{event_id}");
+		}
+		
+		internal Task<TResponse> MlDeleteCalendarEventDispatchAsync<TResponse>(IRequest<DeleteCalendarEventRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.EventId)) return _lowLevel.MlDeleteCalendarEventAsync<TResponse>(p.RouteValues.CalendarId,p.RouteValues.EventId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlDeleteCalendarEvent", p, new [] { DELETE }, "/_ml/calendars/{calendar_id}/events/{event_id}");
+		}
+		
+		internal TResponse MlDeleteCalendarJobDispatch<TResponse>(IRequest<DeleteCalendarJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.JobId)) return _lowLevel.MlDeleteCalendarJob<TResponse>(p.RouteValues.CalendarId,p.RouteValues.JobId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlDeleteCalendarJob", p, new [] { DELETE }, "/_ml/calendars/{calendar_id}/jobs/{job_id}");
+		}
+		
+		internal Task<TResponse> MlDeleteCalendarJobDispatchAsync<TResponse>(IRequest<DeleteCalendarJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.JobId)) return _lowLevel.MlDeleteCalendarJobAsync<TResponse>(p.RouteValues.CalendarId,p.RouteValues.JobId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlDeleteCalendarJob", p, new [] { DELETE }, "/_ml/calendars/{calendar_id}/jobs/{job_id}");
+		}
+		
 		internal TResponse MlDeleteDatafeedDispatch<TResponse>(IRequest<DeleteDatafeedRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -3358,6 +3468,28 @@ namespace Nest
 						return _lowLevel.MlDeleteExpiredDataAsync<TResponse>(p.RequestParameters,ct);
 			}
 			throw InvalidDispatch("MlDeleteExpiredData", p, new [] { DELETE }, "/_ml/_delete_expired_data");
+		}
+		
+		internal TResponse MlDeleteForecastDispatch<TResponse>(IRequest<DeleteForecastRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.JobId, p.RouteValues.ForecastId)) return _lowLevel.MlDeleteForecast<TResponse>(p.RouteValues.JobId,p.RouteValues.ForecastId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlDeleteForecast", p, new [] { DELETE }, "/_ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}");
+		}
+		
+		internal Task<TResponse> MlDeleteForecastDispatchAsync<TResponse>(IRequest<DeleteForecastRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.JobId, p.RouteValues.ForecastId)) return _lowLevel.MlDeleteForecastAsync<TResponse>(p.RouteValues.JobId,p.RouteValues.ForecastId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlDeleteForecast", p, new [] { DELETE }, "/_ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}");
 		}
 		
 		internal TResponse MlDeleteJobDispatch<TResponse>(IRequest<DeleteJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
@@ -3478,6 +3610,56 @@ namespace Nest
 					break;
 			}
 			throw InvalidDispatch("MlGetBuckets", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/results/buckets/{timestamp}", "/_ml/anomaly_detectors/{job_id}/results/buckets");
+		}
+		
+		internal TResponse MlGetCalendarsDispatch<TResponse>(IRequest<GetCalendarsRequestParameters> p,SerializableData<IGetCalendarsRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.CalendarId)) return _lowLevel.MlGetCalendars<TResponse>(p.RouteValues.CalendarId,p.RequestParameters);
+						return _lowLevel.MlGetCalendars<TResponse>(p.RequestParameters);
+				case POST:
+					if (AllSet(p.RouteValues.CalendarId)) return _lowLevel.MlGetCalendars<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters);
+						return _lowLevel.MlGetCalendars<TResponse>(body,p.RequestParameters);
+			}
+			throw InvalidDispatch("MlGetCalendars", p, new [] { GET, POST }, "/_ml/calendars", "/_ml/calendars/{calendar_id}");
+		}
+		
+		internal Task<TResponse> MlGetCalendarsDispatchAsync<TResponse>(IRequest<GetCalendarsRequestParameters> p,SerializableData<IGetCalendarsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.CalendarId)) return _lowLevel.MlGetCalendarsAsync<TResponse>(p.RouteValues.CalendarId,p.RequestParameters,ct);
+						return _lowLevel.MlGetCalendarsAsync<TResponse>(p.RequestParameters,ct);
+				case POST:
+					if (AllSet(p.RouteValues.CalendarId)) return _lowLevel.MlGetCalendarsAsync<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters,ct);
+						return _lowLevel.MlGetCalendarsAsync<TResponse>(body,p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("MlGetCalendars", p, new [] { GET, POST }, "/_ml/calendars", "/_ml/calendars/{calendar_id}");
+		}
+		
+		internal TResponse MlGetCalendarEventsDispatch<TResponse>(IRequest<GetCalendarEventsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.MlGetCalendarEvents<TResponse>(p.RouteValues.CalendarId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlGetCalendarEvents", p, new [] { GET }, "/_ml/calendars/{calendar_id}/events");
+		}
+		
+		internal Task<TResponse> MlGetCalendarEventsDispatchAsync<TResponse>(IRequest<GetCalendarEventsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.MlGetCalendarEventsAsync<TResponse>(p.RouteValues.CalendarId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlGetCalendarEvents", p, new [] { GET }, "/_ml/calendars/{calendar_id}/events");
 		}
 		
 		internal TResponse MlGetCategoriesDispatch<TResponse>(IRequest<GetCategoriesRequestParameters> p,SerializableData<IGetCategoriesRequest> body) where TResponse : class, IElasticsearchResponse, new()
@@ -3716,6 +3898,26 @@ namespace Nest
 			throw InvalidDispatch("MlGetRecords", p, new [] { GET, POST }, "/_ml/anomaly_detectors/{job_id}/results/records");
 		}
 		
+		internal TResponse MlInfoDispatch<TResponse>(IRequest<MachineLearningInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.MlInfo<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("MlInfo", p, new [] { GET }, "/_ml/info");
+		}
+		
+		internal Task<TResponse> MlInfoDispatchAsync<TResponse>(IRequest<MachineLearningInfoRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.MlInfoAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("MlInfo", p, new [] { GET }, "/_ml/info");
+		}
+		
 		internal TResponse MlOpenJobDispatch<TResponse>(IRequest<OpenJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -3736,6 +3938,28 @@ namespace Nest
 					break;
 			}
 			throw InvalidDispatch("MlOpenJob", p, new [] { POST }, "/_ml/anomaly_detectors/{job_id}/_open");
+		}
+		
+		internal TResponse MlPostCalendarEventsDispatch<TResponse>(IRequest<PostCalendarEventsRequestParameters> p,SerializableData<IPostCalendarEventsRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.MlPostCalendarEvents<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlPostCalendarEvents", p, new [] { POST }, "/_ml/calendars/{calendar_id}/events");
+		}
+		
+		internal Task<TResponse> MlPostCalendarEventsDispatchAsync<TResponse>(IRequest<PostCalendarEventsRequestParameters> p,SerializableData<IPostCalendarEventsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.MlPostCalendarEventsAsync<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlPostCalendarEvents", p, new [] { POST }, "/_ml/calendars/{calendar_id}/events");
 		}
 		
 		internal TResponse MlPostDataDispatch<TResponse>(IRequest<PostJobDataRequestParameters> p,SerializableData<IPostJobDataRequest> body) where TResponse : class, IElasticsearchResponse, new()
@@ -3780,6 +4004,50 @@ namespace Nest
 					break;
 			}
 			throw InvalidDispatch("MlPreviewDatafeed", p, new [] { GET }, "/_ml/datafeeds/{datafeed_id}/_preview");
+		}
+		
+		internal TResponse MlPutCalendarDispatch<TResponse>(IRequest<PutCalendarRequestParameters> p,SerializableData<IPutCalendarRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.MlPutCalendar<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlPutCalendar", p, new [] { PUT }, "/_ml/calendars/{calendar_id}");
+		}
+		
+		internal Task<TResponse> MlPutCalendarDispatchAsync<TResponse>(IRequest<PutCalendarRequestParameters> p,SerializableData<IPutCalendarRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.MlPutCalendarAsync<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlPutCalendar", p, new [] { PUT }, "/_ml/calendars/{calendar_id}");
+		}
+		
+		internal TResponse MlPutCalendarJobDispatch<TResponse>(IRequest<PutCalendarJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.JobId)) return _lowLevel.MlPutCalendarJob<TResponse>(p.RouteValues.CalendarId,p.RouteValues.JobId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("MlPutCalendarJob", p, new [] { PUT }, "/_ml/calendars/{calendar_id}/jobs/{job_id}");
+		}
+		
+		internal Task<TResponse> MlPutCalendarJobDispatchAsync<TResponse>(IRequest<PutCalendarJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.JobId)) return _lowLevel.MlPutCalendarJobAsync<TResponse>(p.RouteValues.CalendarId,p.RouteValues.JobId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("MlPutCalendarJob", p, new [] { PUT }, "/_ml/calendars/{calendar_id}/jobs/{job_id}");
 		}
 		
 		internal TResponse MlPutDatafeedDispatch<TResponse>(IRequest<PutDatafeedRequestParameters> p,SerializableData<IPutDatafeedRequest> body) where TResponse : class, IElasticsearchResponse, new()
@@ -4272,6 +4540,28 @@ namespace Nest
 			throw InvalidDispatch("SecurityClearCachedRoles", p, new [] { POST }, "/_security/role/{name}/_clear_cache");
 		}
 		
+		internal TResponse SecurityDeletePrivilegesDispatch<TResponse>(IRequest<DeletePrivilegesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Application, p.RouteValues.Name)) return _lowLevel.SecurityDeletePrivileges<TResponse>(p.RouteValues.Application,p.RouteValues.Name,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("SecurityDeletePrivileges", p, new [] { DELETE }, "/_security/privilege/{application}/{name}");
+		}
+		
+		internal Task<TResponse> SecurityDeletePrivilegesDispatchAsync<TResponse>(IRequest<DeletePrivilegesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Application, p.RouteValues.Name)) return _lowLevel.SecurityDeletePrivilegesAsync<TResponse>(p.RouteValues.Application,p.RouteValues.Name,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("SecurityDeletePrivileges", p, new [] { DELETE }, "/_security/privilege/{application}/{name}");
+		}
+		
 		internal TResponse SecurityDeleteRoleDispatch<TResponse>(IRequest<DeleteRoleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -4394,6 +4684,28 @@ namespace Nest
 			throw InvalidDispatch("SecurityEnableUser", p, new [] { PUT, POST }, "/_security/user/{username}/_enable");
 		}
 		
+		internal TResponse SecurityGetPrivilegesDispatch<TResponse>(IRequest<GetPrivilegesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Application, p.RouteValues.Name)) return _lowLevel.SecurityGetPrivileges<TResponse>(p.RouteValues.Application,p.RouteValues.Name,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("SecurityGetPrivileges", p, new [] { GET }, "/_security/privilege/{application}/{name}");
+		}
+		
+		internal Task<TResponse> SecurityGetPrivilegesDispatchAsync<TResponse>(IRequest<GetPrivilegesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Application, p.RouteValues.Name)) return _lowLevel.SecurityGetPrivilegesAsync<TResponse>(p.RouteValues.Application,p.RouteValues.Name,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("SecurityGetPrivileges", p, new [] { GET }, "/_security/privilege/{application}/{name}");
+		}
+		
 		internal TResponse SecurityGetRoleDispatch<TResponse>(IRequest<GetRoleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -4480,6 +4792,54 @@ namespace Nest
 			throw InvalidDispatch("SecurityGetUser", p, new [] { GET }, "/_security/user/{username}", "/_security/user");
 		}
 		
+		internal TResponse SecurityGetUserPrivilegesDispatch<TResponse>(IRequest<GetUserPrivilegesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.SecurityGetUserPrivileges<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("SecurityGetUserPrivileges", p, new [] { GET }, "/_security/user/_privileges");
+		}
+		
+		internal Task<TResponse> SecurityGetUserPrivilegesDispatchAsync<TResponse>(IRequest<GetUserPrivilegesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.SecurityGetUserPrivilegesAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("SecurityGetUserPrivileges", p, new [] { GET }, "/_security/user/_privileges");
+		}
+		
+		internal TResponse SecurityHasPrivilegesDispatch<TResponse>(IRequest<HasPrivilegesRequestParameters> p,SerializableData<IHasPrivilegesRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.User)) return _lowLevel.SecurityHasPrivilegesGet<TResponse>(p.RouteValues.User,p.RequestParameters);
+						return _lowLevel.SecurityHasPrivilegesGet<TResponse>(p.RequestParameters);
+				case POST:
+					if (AllSet(p.RouteValues.User)) return _lowLevel.SecurityHasPrivileges<TResponse>(p.RouteValues.User,body,p.RequestParameters);
+						return _lowLevel.SecurityHasPrivileges<TResponse>(body,p.RequestParameters);
+			}
+			throw InvalidDispatch("SecurityHasPrivileges", p, new [] { GET, POST }, "/_security/user/_has_privileges", "/_security/user/{user}/_has_privileges");
+		}
+		
+		internal Task<TResponse> SecurityHasPrivilegesDispatchAsync<TResponse>(IRequest<HasPrivilegesRequestParameters> p,SerializableData<IHasPrivilegesRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.User)) return _lowLevel.SecurityHasPrivilegesGetAsync<TResponse>(p.RouteValues.User,p.RequestParameters,ct);
+						return _lowLevel.SecurityHasPrivilegesGetAsync<TResponse>(p.RequestParameters,ct);
+				case POST:
+					if (AllSet(p.RouteValues.User)) return _lowLevel.SecurityHasPrivilegesAsync<TResponse>(p.RouteValues.User,body,p.RequestParameters,ct);
+						return _lowLevel.SecurityHasPrivilegesAsync<TResponse>(body,p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("SecurityHasPrivileges", p, new [] { GET, POST }, "/_security/user/_has_privileges", "/_security/user/{user}/_has_privileges");
+		}
+		
 		internal TResponse SecurityInvalidateTokenDispatch<TResponse>(IRequest<InvalidateUserAccessTokenRequestParameters> p,SerializableData<IInvalidateUserAccessTokenRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -4498,6 +4858,30 @@ namespace Nest
 						return _lowLevel.SecurityInvalidateTokenAsync<TResponse>(body,p.RequestParameters,ct);
 			}
 			throw InvalidDispatch("SecurityInvalidateToken", p, new [] { DELETE }, "/_security/oauth2/token");
+		}
+		
+		internal TResponse SecurityPutPrivilegesDispatch<TResponse>(IRequest<PutPrivilegesRequestParameters> p,SerializableData<IPutPrivilegesRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+						return _lowLevel.SecurityPutPrivileges<TResponse>(body,p.RequestParameters);
+				case POST:
+						return _lowLevel.SecurityPutPrivilegesPost<TResponse>(body,p.RequestParameters);
+			}
+			throw InvalidDispatch("SecurityPutPrivileges", p, new [] { PUT, POST }, "/_security/privilege/");
+		}
+		
+		internal Task<TResponse> SecurityPutPrivilegesDispatchAsync<TResponse>(IRequest<PutPrivilegesRequestParameters> p,SerializableData<IPutPrivilegesRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+						return _lowLevel.SecurityPutPrivilegesAsync<TResponse>(body,p.RequestParameters,ct);
+				case POST:
+						return _lowLevel.SecurityPutPrivilegesPostAsync<TResponse>(body,p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("SecurityPutPrivileges", p, new [] { PUT, POST }, "/_security/privilege/");
 		}
 		
 		internal TResponse SecurityPutRoleDispatch<TResponse>(IRequest<PutRoleRequestParameters> p,SerializableData<IPutRoleRequest> body) where TResponse : class, IElasticsearchResponse, new()

@@ -21,28 +21,27 @@ namespace Nest
 		IEnumerable<object> Data { get; set; }
 	}
 
-	/// <inheritdoc />
+	/// <inheritdoc cref="IPostJobDataRequest" />
 	public partial class PostJobDataRequest
 	{
 		/// <inheritdoc />
 		public IEnumerable<object> Data { get; set; }
 	}
 
-	/// <inheritdoc />
+	/// <inheritdoc cref="IPostJobDataRequest" />
 	public partial class PostJobDataDescriptor
 	{
-		/// <inheritdoc />
 		IEnumerable<object> IPostJobDataRequest.Data { get; set; }
 
-		/// <inheritdoc />
-		public PostJobDataDescriptor Data(IEnumerable<object> data) => Assign(a => a.Data = data);
+		/// <inheritdoc cref="IPostJobDataRequest.Data" />
+		public PostJobDataDescriptor Data(IEnumerable<object> data) => Assign(data, (a, v) => a.Data = v);
 
-		/// <inheritdoc />
-		public PostJobDataDescriptor Data(params object[] data) => Assign(a =>
+		/// <inheritdoc cref="IPostJobDataRequest.Data" />
+		public PostJobDataDescriptor Data(params object[] data) => Assign(data, (a, v) =>
 		{
-			if (data != null && data.Length == 1 && data[0] is IEnumerable enumerable)
+			if (v != null && v.Length == 1 && v[0] is IEnumerable enumerable)
 				a.Data = enumerable.Cast<object>();
-			else a.Data = data;
+			else a.Data = v;
 		});
 	}
 

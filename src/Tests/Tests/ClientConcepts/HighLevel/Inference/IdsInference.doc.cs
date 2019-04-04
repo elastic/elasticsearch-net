@@ -21,7 +21,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		 * - `String`
 		 * - `Guid`
 		 *
-		 * Methods that take an `Id` can be passed any of these types and it will be implicitly converted to an instance of `Id`
+		 * Methods that take an `Id` can be passed any of these types and they will be implicitly converted to an instance of `Id`
 		*/
 		[U] public void CanImplicitlyConvertToId()
 		{
@@ -37,9 +37,10 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		}
 
 		/**
-		* ==== Inferring from a type
+		* ==== Inferring Id from a type
 		*
-		* Sometimes a method takes an object and we need an Id from that object to build up a path.
+		* Sometimes a method takes an object instance and the client requires an `Id` from that
+		* instance to build up a path.
 		* There is no implicit conversion from any object to `Id`, but we can call `Id.From`.
 		*
 		* Imagine your codebase has the following type that we want to index into Elasticsearch
@@ -99,7 +100,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		/**
 		* ==== Using the ElasticsearchType attribute
 		*
-		* Another way is to mark the type with an `ElasticsearchType` attribute, setting `IdProperty`
+		* Another way to control Id inference is to mark the type with an `ElasticsearchType` attribute, setting `IdProperty`
 		* to the name of the property that should be used for the document id
 		*/
 		[ElasticsearchType(IdProperty = nameof(Name))]
@@ -125,8 +126,10 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			/**
 			* ==== Using Mapping inference on ConnectionSettings
 			*
-			* This attribute *is* cached statically/globally, however an inference rule on the `ConnectionSettings` for the type will
-			* still win over the attribute. Here we demonstrate this by creating a different `ConnectionSettings` instance
+			* This attribute *is* cached statically/globally, however an inference rule on `ConnectionSettings` for the type will
+			* still win over the attribute.
+			 *
+			 * Here we demonstrate this by creating a different `ConnectionSettings` instance
 			* that will infer the document id from the property `OtherName`:
 			*/
 			WithConnectionSettings(x => x
@@ -134,6 +137,44 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 					.IdProperty(p => p.OtherName)
 				)
 			).Expect("y").WhenInferringIdOn(dto);
+		}
+
+		/** ==== Disabling Id inference
+		 */
+		[U] public void DisablingIdInference()
+		{
+			// hide
+			var dto = new MyOtherDTO
+			{
+				Id = new Guid("D70BD3CF-4E38-46F3-91CA-FCBEF29B148E"),
+				Name = "x",
+				OtherName = "y"
+			};
+
+			/**
+			 * You can configure the client to disable Id inference on a CLR type basis
+			*/
+			WithConnectionSettings(x => x
+				.DefaultMappingFor<MyOtherDTO>(m => m
+					.DisableIdInference()
+				)
+			).Expect(null).WhenInferringIdOn(dto);
+
+			/**
+			 * or globally for all types
+			*/
+			WithConnectionSettings(x => x.DefaultDisableIdInference())
+				.Expect(null).WhenInferringIdOn(dto);
+
+			/**
+			 * Once disabled globally, Id inference cannot be enabled per type
+			*/
+			WithConnectionSettings(x => x
+				.DefaultDisableIdInference()
+				.DefaultMappingFor<MyOtherDTO>(m => m
+					.DisableIdInference(disable: false)
+				)
+			).Expect(null).WhenInferringIdOn(dto);
 		}
 	}
 }

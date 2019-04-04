@@ -29,6 +29,6 @@ namespace Nest
 
 		string IInlineScript.Source { get; set; }
 
-		public InlineScriptDescriptor Source(string script) => Assign(a => a.Source = script);
+		public InlineScriptDescriptor Source(string script) => Assign(script, (a, v) => a.Source = v);
 	}
 }

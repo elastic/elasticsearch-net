@@ -97,33 +97,33 @@ namespace Nest
 		/// <summary>
 		/// The scripting language. Defaults to painless
 		/// </summary>
-		public ScriptProcessorDescriptor Lang(string lang) => Assign(a => a.Lang = lang);
+		public ScriptProcessorDescriptor Lang(string lang) => Assign(lang, (a, v) => a.Lang = v);
 
 		/// <summary>
 		/// The stored script id to refer to
 		/// </summary>
-		public ScriptProcessorDescriptor Id(string id) => Assign(a => a.Id = id);
+		public ScriptProcessorDescriptor Id(string id) => Assign(id, (a, v) => a.Id = v);
 
 		/// <summary>
 		/// An inline script to be executed
 		/// </summary>
 		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
-		public ScriptProcessorDescriptor Inline(string inline) => Assign(a => a.Inline = inline);
+		public ScriptProcessorDescriptor Inline(string inline) => Assign(inline, (a, v) => a.Inline = v);
 
 		/// <summary>
 		/// An inline script to be executed
 		/// </summary>
-		public ScriptProcessorDescriptor Source(string source) => Assign(a => a.Source = source);
+		public ScriptProcessorDescriptor Source(string source) => Assign(source, (a, v) => a.Source = v);
 
 		/// <summary>
 		/// Parameters for the script
 		/// </summary>
-		public ScriptProcessorDescriptor Params(Dictionary<string, object> scriptParams) => Assign(a => a.Params = scriptParams);
+		public ScriptProcessorDescriptor Params(Dictionary<string, object> scriptParams) => Assign(scriptParams, (a, v) => a.Params = v);
 
 		/// <summary>
 		/// Parameters for the script
 		/// </summary>
 		public ScriptProcessorDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramsSelector) =>
-			Assign(a => a.Params = paramsSelector?.Invoke(new FluentDictionary<string, object>()));
+			Assign(paramsSelector, (a, v) => a.Params = v?.Invoke(new FluentDictionary<string, object>()));
 	}
 }

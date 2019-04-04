@@ -38,13 +38,13 @@ namespace Nest
 		string ITranslogFlushSettings.ThresholdSize { get; set; }
 
 		/// <inheritdoc />
-		public TranslogFlushSettingsDescriptor ThresholdSize(string size) => Assign(a => a.ThresholdSize = size);
+		public TranslogFlushSettingsDescriptor ThresholdSize(string size) => Assign(size, (a, v) => a.ThresholdSize = v);
 
 		/// <inheritdoc />
 		public TranslogFlushSettingsDescriptor ThresholdPeriod(Time time) =>
-			Assign(a => a.ThresholdPeriod = time);
+			Assign(time, (a, v) => a.ThresholdPeriod = v);
 
 		/// <inheritdoc />
-		public TranslogFlushSettingsDescriptor Interval(Time time) => Assign(a => a.Interval = time);
+		public TranslogFlushSettingsDescriptor Interval(Time time) => Assign(time, (a, v) => a.Interval = v);
 	}
 }

@@ -70,21 +70,21 @@ namespace Nest
 		bool? IHasParentQuery.Score { get; set; }
 
 		public HasParentQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
-			Assign(a => a.Query = selector?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(selector, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<T>()));
 
-		public HasParentQueryDescriptor<T> ParentType(string type) => Assign(a => a.ParentType = type);
+		public HasParentQueryDescriptor<T> ParentType(string type) => Assign(type, (a, v) => a.ParentType = v);
 
 		/// <summary>
 		/// Determines whether the score of the matching parent document is aggregated into the child documents belonging to the matching parent
 		/// document.
 		/// The default is false which ignores the score from the parent document.
 		/// </summary>
-		public HasParentQueryDescriptor<T> Score(bool? score = true) => Assign(a => a.Score = score);
+		public HasParentQueryDescriptor<T> Score(bool? score = true) => Assign(score, (a, v) => a.Score = v);
 
 		public HasParentQueryDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> selector = null) =>
-			Assign(a => a.InnerHits = selector.InvokeOrDefault(new InnerHitsDescriptor<T>()));
+			Assign(selector.InvokeOrDefault(new InnerHitsDescriptor<T>()), (a, v) => a.InnerHits = v);
 
 		public HasParentQueryDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) =>
-			Assign(a => a.IgnoreUnmapped = ignoreUnmapped);
+			Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmapped = v);
 	}
 }

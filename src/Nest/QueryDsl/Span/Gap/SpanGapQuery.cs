@@ -36,11 +36,11 @@ namespace Nest
 
 		int? ISpanGapQuery.Width { get; set; }
 
-		public SpanGapQueryDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public SpanGapQueryDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public SpanGapQueryDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
+		public SpanGapQueryDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
 
-		public SpanGapQueryDescriptor<T> Width(int? width) => Assign(a => a.Width = width);
+		public SpanGapQueryDescriptor<T> Width(int? width) => Assign(width, (a, v) => a.Width = v);
 	}
 
 	internal class SpanGapQueryFormatter : IJsonFormatter<ISpanGapQuery>

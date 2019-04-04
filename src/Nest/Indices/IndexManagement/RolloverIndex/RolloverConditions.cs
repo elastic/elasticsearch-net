@@ -55,12 +55,12 @@ namespace Nest
 		string IRolloverConditions.MaxSize { get; set; }
 
 		/// <inheritdoc cref="IRolloverConditions.MaxAge" />
-		public RolloverConditionsDescriptor MaxAge(Time maxAge) => Assign(a => a.MaxAge = maxAge);
+		public RolloverConditionsDescriptor MaxAge(Time maxAge) => Assign(maxAge, (a, v) => a.MaxAge = v);
 
 		/// <inheritdoc cref="IRolloverConditions.MaxDocs" />
-		public RolloverConditionsDescriptor MaxDocs(long? maxDocs) => Assign(a => a.MaxDocs = maxDocs);
+		public RolloverConditionsDescriptor MaxDocs(long? maxDocs) => Assign(maxDocs, (a, v) => a.MaxDocs = v);
 
 		/// <inheritdoc cref="IRolloverConditions.MaxSize" />
-		public RolloverConditionsDescriptor MaxSize(string maxSize) => Assign(a => a.MaxSize = maxSize);
+		public RolloverConditionsDescriptor MaxSize(string maxSize) => Assign(maxSize, (a, v) => a.MaxSize = v);
 	}
 }

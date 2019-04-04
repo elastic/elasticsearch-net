@@ -66,12 +66,12 @@ namespace Nest
 		bool? IFuzzyQuery.Transpositions { get; set; }
 		TValue IFuzzyQuery<TValue, TFuzziness>.Value { get; set; }
 
-		public TDescriptor MaxExpansions(int? maxExpansions) => Assign(a => a.MaxExpansions = maxExpansions);
+		public TDescriptor MaxExpansions(int? maxExpansions) => Assign(maxExpansions, (a, v) => a.MaxExpansions = v);
 
-		public TDescriptor PrefixLength(int? prefixLength) => Assign(a => a.PrefixLength = prefixLength);
+		public TDescriptor PrefixLength(int? prefixLength) => Assign(prefixLength, (a, v) => a.PrefixLength = v);
 
-		public TDescriptor Transpositions(bool? enable = true) => Assign(a => a.Transpositions = enable);
+		public TDescriptor Transpositions(bool? enable = true) => Assign(enable, (a, v) => a.Transpositions = v);
 
-		public TDescriptor Rewrite(MultiTermQueryRewrite rewrite) => Assign(a => Self.Rewrite = rewrite);
+		public TDescriptor Rewrite(MultiTermQueryRewrite rewrite) => Assign(rewrite, (a, v) => a.Rewrite = v);
 	}
 }

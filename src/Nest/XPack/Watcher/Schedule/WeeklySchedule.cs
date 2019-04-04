@@ -41,7 +41,7 @@ namespace Nest
 		public WeeklyScheduleDescriptor() : base(new WeeklySchedule()) { }
 
 		public WeeklyScheduleDescriptor Add(Func<TimeOfWeekDescriptor, ITimeOfWeek> selector) =>
-			Assign(a => a.Add(selector.InvokeOrDefault(new TimeOfWeekDescriptor())));
+			Assign(selector, (a, v) => a.Add(v.InvokeOrDefault(new TimeOfWeekDescriptor())));
 	}
 
 	internal class ScheduleFormatter<TSchedule, TReadAsSchedule, TTime> : IJsonFormatter<TSchedule>

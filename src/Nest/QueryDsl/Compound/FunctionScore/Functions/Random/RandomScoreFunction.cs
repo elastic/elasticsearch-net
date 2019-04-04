@@ -29,13 +29,13 @@ namespace Nest
 		Field IRandomScoreFunction.Field { get; set; }
 		Union<long, string> IRandomScoreFunction.Seed { get; set; }
 
-		public RandomScoreFunctionDescriptor<T> Seed(long? seed) => Assign(a => a.Seed = seed);
+		public RandomScoreFunctionDescriptor<T> Seed(long? seed) => Assign(seed, (a, v) => a.Seed = v);
 
-		public RandomScoreFunctionDescriptor<T> Seed(string seed) => Assign(a => a.Seed = seed);
+		public RandomScoreFunctionDescriptor<T> Seed(string seed) => Assign(seed, (a, v) => a.Seed = v);
 
-		public RandomScoreFunctionDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public RandomScoreFunctionDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		public RandomScoreFunctionDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 	}
 }

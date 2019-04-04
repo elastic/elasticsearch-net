@@ -41,17 +41,17 @@ namespace Nest
 		GeoLocation IGeoDistanceQuery.Location { get; set; }
 		GeoValidationMethod? IGeoDistanceQuery.ValidationMethod { get; set; }
 
-		public GeoDistanceQueryDescriptor<T> Location(GeoLocation location) => Assign(a => a.Location = location);
+		public GeoDistanceQueryDescriptor<T> Location(GeoLocation location) => Assign(location, (a, v) => a.Location = v);
 
-		public GeoDistanceQueryDescriptor<T> Location(double lat, double lon) => Assign(a => a.Location = new GeoLocation(lat, lon));
+		public GeoDistanceQueryDescriptor<T> Location(double lat, double lon) => Assign(new GeoLocation(lat, lon), (a, v) => a.Location = v);
 
-		public GeoDistanceQueryDescriptor<T> Distance(Distance distance) => Assign(a => a.Distance = distance);
+		public GeoDistanceQueryDescriptor<T> Distance(Distance distance) => Assign(distance, (a, v) => a.Distance = v);
 
-		public GeoDistanceQueryDescriptor<T> Distance(double distance, DistanceUnit unit) => Assign(a => a.Distance = new Distance(distance, unit));
+		public GeoDistanceQueryDescriptor<T> Distance(double distance, DistanceUnit unit) => Assign(new Distance(distance, unit), (a, v) => a.Distance = v);
 
-		public GeoDistanceQueryDescriptor<T> DistanceType(GeoDistanceType? type) => Assign(a => a.DistanceType = type);
+		public GeoDistanceQueryDescriptor<T> DistanceType(GeoDistanceType? type) => Assign(type, (a, v) => a.DistanceType = v);
 
-		public GeoDistanceQueryDescriptor<T> ValidationMethod(GeoValidationMethod? validation) => Assign(a => a.ValidationMethod = validation);
+		public GeoDistanceQueryDescriptor<T> ValidationMethod(GeoValidationMethod? validation) => Assign(validation, (a, v) => a.ValidationMethod = v);
 	}
 
 	internal class GeoDistanceQueryFormatter : IJsonFormatter<IGeoDistanceQuery>

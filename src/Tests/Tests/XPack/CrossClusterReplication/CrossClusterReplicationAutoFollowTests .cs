@@ -17,16 +17,14 @@ namespace Tests.XPack.CrossClusterReplication
 {
 	[SkipVersion("<6.5.0", "")]
 	[BlockedByIssue("CCR change in structure, will be fixed on 6.x and forward ported")]
-	public class CrossClusterReplicationAutoFollowTests : CoordinatedIntegrationTestBase<WritableCluster>
+	public class CrossClusterReplicationAutoFollowTests : CoordinatedIntegrationTestBase<XPackCluster>
 	{
 		private const string CreateAutoFollowStep = nameof(CreateAutoFollowStep);
 		private const string GetAutoFollowStep = nameof(GetAutoFollowStep);
 		private const string DeleteAutoFollowStep = nameof(DeleteAutoFollowStep);
 		private const string GlobalStatsStep = nameof(GlobalStatsStep);
 
-		private static readonly Project[] Data = Project.Generator.GenerateLazy(1000).ToArray();
-
-		public CrossClusterReplicationAutoFollowTests(WritableCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage, Prefix)
+		public CrossClusterReplicationAutoFollowTests(XPackCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage, Prefix)
 		{
 			{
 				CreateAutoFollowStep, u =>
@@ -88,8 +86,6 @@ namespace Tests.XPack.CrossClusterReplication
 		protected static string LeaderPrefix { get; } = $"leader-{Prefix}";
 		protected static string FollowerPrefix { get; } = "follower-";
 
-		private static string LeaderIndex(string v) => $"{LeaderPrefix}{v}";
-		private static string FollowIndex(string v) => $"{FollowerPrefix}{LeaderPrefix}{v}";
 		private static string AutoPattern(string v) => $"auto-pattern-{v}";
 
 		[I] public async Task CreateIsAcked() => await Assert<CreateAutoFollowPatternResponse>(CreateAutoFollowStep, r => r.Acknowledged.Should().BeTrue());

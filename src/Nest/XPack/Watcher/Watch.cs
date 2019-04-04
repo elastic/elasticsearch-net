@@ -69,34 +69,34 @@ namespace Nest
 
 		/// <inheritdoc cref="IWatch.Actions" />
 		public WatchDescriptor Actions(Func<ActionsDescriptor, IPromise<Actions>> actions) =>
-			Assign(a => a.Actions = actions?.Invoke(new ActionsDescriptor())?.Value);
+			Assign(actions, (a, v) => a.Actions = v?.Invoke(new ActionsDescriptor())?.Value);
 
 		/// <inheritdoc cref="IWatch.Condition" />
 		public WatchDescriptor Condition(Func<ConditionDescriptor, ConditionContainer> selector) =>
-			Assign(a => a.Condition = selector.InvokeOrDefault(new ConditionDescriptor()));
+			Assign(selector, (a, v) => a.Condition = v.InvokeOrDefault(new ConditionDescriptor()));
 
 		/// <inheritdoc cref="IWatch.Input" />
 		public WatchDescriptor Input(Func<InputDescriptor, InputContainer> selector) =>
-			Assign(a => a.Input = selector.InvokeOrDefault(new InputDescriptor()));
+			Assign(selector, (a, v) => a.Input = v.InvokeOrDefault(new InputDescriptor()));
 
 		/// <inheritdoc cref="IWatch.Metadata" />
 		public WatchDescriptor Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramsDictionary) =>
-			Assign(a => a.Metadata = paramsDictionary(new FluentDictionary<string, object>()));
+			Assign(paramsDictionary, (a, v) => a.Metadata = v(new FluentDictionary<string, object>()));
 
 		/// <inheritdoc cref="IWatch.Metadata" />
 		public WatchDescriptor Metadata(Dictionary<string, object> paramsDictionary) =>
-			Assign(a => a.Metadata = paramsDictionary);
+			Assign(paramsDictionary, (a, v) => a.Metadata = v);
 
 		/// <inheritdoc cref="IWatch.ThrottlePeriod" />
-		public WatchDescriptor ThrottlePeriod(string throttlePeriod) => Assign(a => a.ThrottlePeriod = throttlePeriod);
+		public WatchDescriptor ThrottlePeriod(string throttlePeriod) => Assign(throttlePeriod, (a, v) => a.ThrottlePeriod = v);
 
 		/// <inheritdoc cref="IWatch.Transform" />
 		public WatchDescriptor Transform(Func<TransformDescriptor, TransformContainer> selector) =>
-			Assign(a => a.Transform = selector.InvokeOrDefault(new TransformDescriptor()));
+			Assign(selector, (a, v) => a.Transform = v.InvokeOrDefault(new TransformDescriptor()));
 
 		/// <inheritdoc cref="IWatch.Trigger" />
 		public WatchDescriptor Trigger(Func<TriggerDescriptor, TriggerContainer> selector) =>
-			Assign(a => a.Trigger = selector.InvokeOrDefault(new TriggerDescriptor()));
+			Assign(selector, (a, v) => a.Trigger = v.InvokeOrDefault(new TriggerDescriptor()));
 
 	}
 }

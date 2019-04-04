@@ -94,11 +94,11 @@ namespace Tests.Analysis.TokenFilters
 
 		public class ElisionTests : TokenFilterAssertionBase<ElisionTests>
 		{
-			public override FuncTokenFilters Fluent => (n, tf) => tf.Elision(n, t => t.Articles("a", "b", "c"));
+			public override FuncTokenFilters Fluent => (n, tf) => tf.Elision(n, t => t.Articles("a", "b", "c").ArticlesCase());
 
-			public override ITokenFilter Initializer => new ElisionTokenFilter { Articles = new[] { "a", "b", "c" } };
+			public override ITokenFilter Initializer => new ElisionTokenFilter { Articles = new[] { "a", "b", "c" }, ArticlesCase = true };
 
-			public override object Json => new { type = "elision", articles = new[] { "a", "b", "c" } };
+			public override object Json => new { type = "elision", articles = new[] { "a", "b", "c" }, articles_case = true };
 			public override string Name => "el";
 		}
 
@@ -342,10 +342,30 @@ namespace Tests.Analysis.TokenFilters
 			{
 				type = "keyword_marker",
 				keywords = new[] { "a", "b" },
-				ignore_case = true
+				ignore_case = true,
 			};
 
 			public override string Name => "marker";
+		}
+		
+		public class MarkerWithPatternsTests : TokenFilterAssertionBase<MarkerWithPatternsTests>
+		{
+			public override FuncTokenFilters Fluent => (n, tf) => tf
+				.KeywordMarker("marker_patterns", t => t
+					.IgnoreCase()
+					.KeywordsPattern(".*")
+				);
+
+			public override ITokenFilter Initializer => new KeywordMarkerTokenFilter { IgnoreCase = true, KeywordsPattern = ".*" };
+
+			public override object Json => new
+			{
+				type = "keyword_marker",
+				ignore_case = true,
+				keywords_pattern = ".*"
+			};
+
+			public override string Name => "marker_patterns";
 		}
 
 		public class KuromojiReadingFormTests : TokenFilterAssertionBase<KuromojiReadingFormTests>

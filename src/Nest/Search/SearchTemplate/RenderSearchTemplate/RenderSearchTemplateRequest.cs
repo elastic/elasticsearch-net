@@ -51,15 +51,15 @@ namespace Nest
 		string IRenderSearchTemplateRequest.Source { get; set; }
 
 		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
-		public RenderSearchTemplateDescriptor Inline(string inline) => Assign(a => a.Inline = inline);
+		public RenderSearchTemplateDescriptor Inline(string inline) => Assign(inline, (a, v) => a.Inline = v);
 
-		public RenderSearchTemplateDescriptor Source(string source) => Assign(a => a.Source = source);
+		public RenderSearchTemplateDescriptor Source(string source) => Assign(source, (a, v) => a.Source = v);
 
-		public RenderSearchTemplateDescriptor File(string file) => Assign(a => a.File = file);
+		public RenderSearchTemplateDescriptor File(string file) => Assign(file, (a, v) => a.File = v);
 
-		public RenderSearchTemplateDescriptor Params(Dictionary<string, object> scriptParams) => Assign(a => a.Params = scriptParams);
+		public RenderSearchTemplateDescriptor Params(Dictionary<string, object> scriptParams) => Assign(scriptParams, (a, v) => a.Params = v);
 
 		public RenderSearchTemplateDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramsSelector) =>
-			Assign(a => a.Params = paramsSelector?.Invoke(new FluentDictionary<string, object>()));
+			Assign(paramsSelector, (a, v) => a.Params = v?.Invoke(new FluentDictionary<string, object>()));
 	}
 }

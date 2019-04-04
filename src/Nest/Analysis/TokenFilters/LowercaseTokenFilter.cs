@@ -33,6 +33,6 @@ namespace Nest
 		string ILowercaseTokenFilter.Language { get; set; }
 
 		/// <inheritdoc />
-		public LowercaseTokenFilterDescriptor Language(string language) => Assign(a => a.Language = language);
+		public LowercaseTokenFilterDescriptor Language(string language) => Assign(language, (a, v) => a.Language = v);
 	}
 }

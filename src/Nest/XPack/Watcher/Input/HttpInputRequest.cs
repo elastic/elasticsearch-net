@@ -161,53 +161,53 @@ namespace Nest
 
 		/// <inheritdoc />
 		public HttpInputRequestDescriptor Authentication(Func<HttpInputAuthenticationDescriptor, IHttpInputAuthentication> authSelector) =>
-			Assign(a => a.Authentication = authSelector(new HttpInputAuthenticationDescriptor()));
+			Assign(authSelector(new HttpInputAuthenticationDescriptor()), (a, v) => a.Authentication = v);
 
 		/// <inheritdoc />
-		public HttpInputRequestDescriptor Body(string body) => Assign(a => a.Body = body);
+		public HttpInputRequestDescriptor Body(string body) => Assign(body, (a, v) => a.Body = v);
 
 		/// <inheritdoc />
-		public HttpInputRequestDescriptor ConnectionTimeout(Time connectionTimeout) => Assign(a => a.ConnectionTimeout = connectionTimeout);
+		public HttpInputRequestDescriptor ConnectionTimeout(Time connectionTimeout) => Assign(connectionTimeout, (a, v) => a.ConnectionTimeout = v);
 
 		/// <inheritdoc />
 		public HttpInputRequestDescriptor Headers(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> headersSelector) =>
-			Assign(a => a.Headers = headersSelector(new FluentDictionary<string, string>()));
+			Assign(headersSelector(new FluentDictionary<string, string>()), (a, v) => a.Headers = v);
 
 		/// <inheritdoc />
 		public HttpInputRequestDescriptor Headers(Dictionary<string, string> headersDictionary) =>
-			Assign(a => a.Headers = headersDictionary);
+			Assign(headersDictionary, (a, v) => a.Headers = v);
 
 		/// <inheritdoc />
-		public HttpInputRequestDescriptor Host(string host) => Assign(a => a.Host = host);
+		public HttpInputRequestDescriptor Host(string host) => Assign(host, (a, v) => a.Host = v);
 
 		/// <inheritdoc />
-		public HttpInputRequestDescriptor Method(HttpInputMethod? method) => Assign(a => a.Method = method);
+		public HttpInputRequestDescriptor Method(HttpInputMethod? method) => Assign(method, (a, v) => a.Method = v);
 
 		/// <inheritdoc />
-		public HttpInputRequestDescriptor Path(string path) => Assign(a => a.Path = path);
+		public HttpInputRequestDescriptor Path(string path) => Assign(path, (a, v) => a.Path = v);
 
 		/// <inheritdoc />
 		public HttpInputRequestDescriptor Params(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> paramsSelector) =>
-			Assign(a => a.Params = paramsSelector.Invoke(new FluentDictionary<string, string>()));
+			Assign(paramsSelector.Invoke(new FluentDictionary<string, string>()), (a, v) => a.Params = v);
 
 		/// <inheritdoc />
 		public HttpInputRequestDescriptor Params(Dictionary<string, string> paramsDictionary) =>
-			Assign(a => a.Params = paramsDictionary);
+			Assign(paramsDictionary, (a, v) => a.Params = v);
 
 		/// <inheritdoc />
-		public HttpInputRequestDescriptor Port(int? port) => Assign(a => a.Port = port);
+		public HttpInputRequestDescriptor Port(int? port) => Assign(port, (a, v) => a.Port = v);
 
 		/// <inheritdoc />
 		public HttpInputRequestDescriptor Proxy(Func<HttpInputProxyDescriptor, IHttpInputProxy> proxySelector) =>
-			Assign(a => a.Proxy = proxySelector.Invoke(new HttpInputProxyDescriptor()));
+			Assign(proxySelector.Invoke(new HttpInputProxyDescriptor()), (a, v) => a.Proxy = v);
 
 		/// <inheritdoc />
-		public HttpInputRequestDescriptor ReadTimeout(Time readTimeout) => Assign(a => a.ReadTimeout = readTimeout);
+		public HttpInputRequestDescriptor ReadTimeout(Time readTimeout) => Assign(readTimeout, (a, v) => a.ReadTimeout = v);
 
 		/// <inheritdoc />
-		public HttpInputRequestDescriptor Scheme(ConnectionScheme? scheme) => Assign(a => a.Scheme = scheme);
+		public HttpInputRequestDescriptor Scheme(ConnectionScheme? scheme) => Assign(scheme, (a, v) => a.Scheme = v);
 
 		/// <inheritdoc />
-		public HttpInputRequestDescriptor Url(string url) => Assign(a => a.Url = url);
+		public HttpInputRequestDescriptor Url(string url) => Assign(url, (a, v) => a.Url = v);
 	}
 }

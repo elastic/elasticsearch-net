@@ -40,14 +40,14 @@ namespace Nest
 
 		/// <inheritdoc />
 		public TranslogSettingsDescriptor Flush(Func<TranslogFlushSettingsDescriptor, ITranslogFlushSettings> selector) =>
-			Assign(a => a.Flush = selector?.Invoke(new TranslogFlushSettingsDescriptor()));
+			Assign(selector, (a, v) => a.Flush = v?.Invoke(new TranslogFlushSettingsDescriptor()));
 
 		/// <inheritdoc />
 		public TranslogSettingsDescriptor Durability(TranslogDurability? durability) =>
-			Assign(a => a.Durability = durability);
+			Assign(durability, (a, v) => a.Durability = v);
 
 		/// <inheritdoc />
 		public TranslogSettingsDescriptor SyncInterval(Time time) =>
-			Assign(a => a.SyncInterval = time);
+			Assign(time, (a, v) => a.SyncInterval = v);
 	}
 }

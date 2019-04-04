@@ -5,6 +5,10 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
+	/// <summary>
+	/// A response to a search request
+	/// </summary>
+	/// <typeparam name="T">The document type</typeparam>
 	public interface ISearchResponse<T> : IResponse where T : class
 	{
 		/// <summary>
@@ -12,8 +16,17 @@ namespace Nest
 		/// </summary>
 		AggregateDictionary Aggregations { get; }
 
+		/// <inheritdoc cref="Aggregations"/>
 		[Obsolete("Aggs has been renamed to Aggregations and will be removed in NEST 7.x")]
 		AggregateDictionary Aggs { get; }
+
+		/// <summary>
+		/// Gets the statistics about the clusters on which the search query was executed.
+		/// </summary>
+		/// <remarks>
+		/// Valid for cross cluster searches and Elasticsearch 6.1.0+
+		/// </remarks>
+		ClusterStatistics Clusters { get; }
 
 		/// <summary>
 		/// Gets the documents inside the hits, by deserializing <see cref="IHitMetadata{T}.Source" /> into <typeparamref name="T" />
@@ -70,7 +83,7 @@ namespace Nest
 		string ScrollId { get; }
 
 		/// <summary>
-		/// Gets the meta data about the shards on which the search query was executed.
+		/// Gets the statistics about the shards on which the search query was executed.
 		/// </summary>
 		ShardStatistics Shards { get; }
 
@@ -107,12 +120,17 @@ namespace Nest
 		private IReadOnlyCollection<FieldValues> _fields;
 
 		private IReadOnlyCollection<IHit<T>> _hits;
-
+		/// <inheritdoc />
 		[DataMember(Name ="aggregations")]
 		public AggregateDictionary Aggregations { get; internal set; } = AggregateDictionary.Default;
 
+		/// <inheritdoc />
 		[IgnoreDataMember]
 		public AggregateDictionary Aggs => Aggregations;
+
+		/// <inheritdoc />
+		[DataMember(Name = "_clusters")]
+		public ClusterStatistics Clusters { get; internal set; }
 
 		/// <inheritdoc />
 		[IgnoreDataMember]
@@ -128,43 +146,52 @@ namespace Nest
 				.Select(h => h.Fields)
 				.ToList());
 
+		/// <inheritdoc />
 		[IgnoreDataMember]
 		public IReadOnlyCollection<IHit<T>> Hits =>
 			_hits ?? (_hits = HitsMetadata?.Hits ?? EmptyReadOnly<IHit<T>>.Collection);
 
+		/// <inheritdoc />
 		[DataMember(Name ="hits")]
 		public HitsMetadata<T> HitsMetadata { get; internal set; }
 
+		/// <inheritdoc />
 		[IgnoreDataMember]
 		public double MaxScore => HitsMetadata?.MaxScore ?? 0;
 
+		/// <inheritdoc />
 		[DataMember(Name ="num_reduce_phases")]
 		public long NumberOfReducePhases { get; internal set; }
 
+		/// <inheritdoc />
 		[DataMember(Name ="profile")]
 		public Profile Profile { get; internal set; }
 
-		/// <summary>
-		/// Only set when search type = scan and scroll specified
-		/// </summary>
+		/// <inheritdoc />
 		[DataMember(Name = "_scroll_id")]
 		public string ScrollId { get; internal set; }
 
+		/// <inheritdoc />
 		[DataMember(Name ="_shards")]
 		public ShardStatistics Shards { get; internal set; }
 
+		/// <inheritdoc />
 		[DataMember(Name ="suggest")]
 		public SuggestDictionary<T> Suggest { get; internal set; } = SuggestDictionary<T>.Default;
 
+		/// <inheritdoc />
 		[DataMember(Name ="terminated_early")]
 		public bool TerminatedEarly { get; internal set; }
 
+		/// <inheritdoc />
 		[DataMember(Name ="timed_out")]
 		public bool TimedOut { get; internal set; }
 
+		/// <inheritdoc />
 		[DataMember(Name ="took")]
 		public long Took { get; internal set; }
 
+		/// <inheritdoc />
 		[IgnoreDataMember]
 		public long Total => HitsMetadata?.Total.Value ?? 0;
 	}

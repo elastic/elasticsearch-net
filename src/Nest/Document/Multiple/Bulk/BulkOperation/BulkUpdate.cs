@@ -203,12 +203,12 @@ namespace Nest
 		/// <summary>
 		/// A document to upsert when the specified document to be updated is not found
 		/// </summary>
-		public BulkUpdateDescriptor<TDocument, TPartialDocument> Upsert(TDocument @object) => Assign(a => a.Upsert = @object);
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> Upsert(TDocument @object) => Assign(@object, (a, v) => a.Upsert = v);
 
 		/// <summary>
 		/// The partial update document to be merged on to the existing object.
 		/// </summary>
-		public BulkUpdateDescriptor<TDocument, TPartialDocument> Doc(TPartialDocument @object) => Assign(a => a.Doc = @object);
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> Doc(TPartialDocument @object) => Assign(@object, (a, v) => a.Doc = v);
 
 		/// <summary>
 		/// Instead of sending a partial doc with <see cref="Doc(TPartialDocument)" /> plus an upsert doc
@@ -216,25 +216,25 @@ namespace Nest
 		/// use the contents of doc as the upsert value.
 		/// </summary>
 		public BulkUpdateDescriptor<TDocument, TPartialDocument> DocAsUpsert(bool? partialDocumentAsUpsert = true) =>
-			Assign(a => a.DocAsUpsert = partialDocumentAsUpsert);
+			Assign(partialDocumentAsUpsert, (a, v) => a.DocAsUpsert = v);
 
 		/// <summary>
 		/// If you would like your script to run regardless of whether the document exists or not — i.e. the script handles
 		/// initializing the document instead of the upsert element — then set scripted_upsert to true
 		/// </summary>
 		public BulkUpdateDescriptor<TDocument, TPartialDocument> ScriptedUpsert(bool? scriptedUpsert = true) =>
-			Assign(a => a.ScriptedUpsert = scriptedUpsert);
+			Assign(scriptedUpsert, (a, v) => a.ScriptedUpsert = v);
 
 		/// <summary>
 		/// A script to specify the update.
 		/// </summary>
 		public BulkUpdateDescriptor<TDocument, TPartialDocument> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
-			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
+			Assign(scriptSelector, (a, v) => a.Script = v?.Invoke(new ScriptDescriptor()));
 
 		/// <summary>
 		/// How many times an update should be retried in the case of a version conflict.
 		/// </summary>
 		public BulkUpdateDescriptor<TDocument, TPartialDocument> RetriesOnConflict(int? retriesOnConflict) =>
-			Assign(a => a.RetriesOnConflict = retriesOnConflict);
+			Assign(retriesOnConflict, (a, v) => a.RetriesOnConflict = v);
 	}
 }

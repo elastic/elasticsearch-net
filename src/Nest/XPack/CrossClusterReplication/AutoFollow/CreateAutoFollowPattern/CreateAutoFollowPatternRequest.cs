@@ -60,56 +60,56 @@ namespace Nest
 		Time IAutoFollowPattern.MaxPollTimeout { get; set; }
 
 		/// <inheritdoc cref="IAutoFollowPattern.RemoteCluster"/>
-		public CreateAutoFollowPatternDescriptor RemoteCluster(string remoteCluster) => Assign(a => a.RemoteCluster = remoteCluster);
+		public CreateAutoFollowPatternDescriptor RemoteCluster(string remoteCluster) => Assign(remoteCluster, (a, v) => a.RemoteCluster = v);
 
 		/// <inheritdoc cref="IAutoFollowPattern.LeaderIndexPatterns"/>
 		public CreateAutoFollowPatternDescriptor LeaderIndexPatterns(IEnumerable<string> leaderIndexPatterns) =>
-			Assign(a => a.LeaderIndexPatterns = leaderIndexPatterns);
+			Assign(leaderIndexPatterns, (a, v) => a.LeaderIndexPatterns = v);
 
 		/// <inheritdoc cref="IAutoFollowPattern.LeaderIndexPatterns"/>
 		public CreateAutoFollowPatternDescriptor LeaderIndexPatterns(params string[] leaderIndexPatterns) =>
-			Assign(a => a.LeaderIndexPatterns = leaderIndexPatterns);
+			Assign(leaderIndexPatterns, (a, v) => a.LeaderIndexPatterns = v);
 
 		/// <inheritdoc cref="IAutoFollowPattern.FollowIndexPattern"/>
 		public CreateAutoFollowPatternDescriptor FollowIndexPattern(string followIndexPattern) =>
-			Assign(a => a.FollowIndexPattern = followIndexPattern);
+			Assign(followIndexPattern, (a, v) => a.FollowIndexPattern = v);
 
 		/// <inheritdoc cref="IAutoFollowPattern.MaxReadRequestOperationCount"/>
 		public CreateAutoFollowPatternDescriptor MaxReadRequestOperationCount(int? maxReadRequestOperationCount) =>
-			Assign(a => a.MaxReadRequestOperationCount = maxReadRequestOperationCount);
+			Assign(maxReadRequestOperationCount, (a, v) => a.MaxReadRequestOperationCount = v);
 
 		/// <inheritdoc cref="IAutoFollowPattern.MaxOutstandingReadRequests"/>
 		public CreateAutoFollowPatternDescriptor MaxOutstandingReadRequests(long? maxOutstandingReadRequests) =>
-			Assign(a => a.MaxOutstandingReadRequests = maxOutstandingReadRequests);
+			Assign(maxOutstandingReadRequests, (a, v) => a.MaxOutstandingReadRequests = v);
 
 		/// <inheritdoc cref="IAutoFollowPattern.MaxReadRequestSize"/>
 		public CreateAutoFollowPatternDescriptor MaxReadRequestSize(string maxReadRequestSize) =>
-			Assign(a => a.MaxReadRequestSize = maxReadRequestSize);
+			Assign(maxReadRequestSize, (a, v) => a.MaxReadRequestSize = v);
 
 		/// <inheritdoc cref="IAutoFollowPattern.MaxWriteRequestOperationCount"/>
 		public CreateAutoFollowPatternDescriptor MaxWriteRequestOperationCount(int? maxWriteRequestOperationCount) =>
-			Assign(a => a.MaxWriteRequestOperationCount = maxWriteRequestOperationCount);
+			Assign(maxWriteRequestOperationCount, (a, v) => a.MaxWriteRequestOperationCount = v);
 
 		/// <inheritdoc cref="IAutoFollowPattern.MaxWriteRequestSize"/>
 		public CreateAutoFollowPatternDescriptor MaxWriteRequestSize(string maxWriteRequestSize) =>
-			Assign(a => a.MaxWriteRequestSize = maxWriteRequestSize);
+			Assign(maxWriteRequestSize, (a, v) => a.MaxWriteRequestSize = v);
 
 		/// <inheritdoc cref="IAutoFollowPattern.MaxOutstandingWriteRequests"/>
 		public CreateAutoFollowPatternDescriptor MaxOutstandingWriteRequests(int? maxOutstandingWriteRequests) =>
-			Assign(a => a.MaxOutstandingWriteRequests = maxOutstandingWriteRequests);
+			Assign(maxOutstandingWriteRequests, (a, v) => a.MaxOutstandingWriteRequests = v);
 
 		/// <inheritdoc cref="IAutoFollowPattern.MaxWriteBufferCount"/>
 		public CreateAutoFollowPatternDescriptor MaxWriteBufferCount(int? maxWriteBufferCount) =>
-			Assign(a => a.MaxWriteBufferCount = maxWriteBufferCount);
+			Assign(maxWriteBufferCount, (a, v) => a.MaxWriteBufferCount = v);
 
 		/// <inheritdoc cref="IAutoFollowPattern.MaxWriteBufferSize"/>
 		public CreateAutoFollowPatternDescriptor MaxWriteBufferSize(string maxWriteBufferSize) =>
-			Assign(a => a.MaxWriteBufferSize = maxWriteBufferSize);
+			Assign(maxWriteBufferSize, (a, v) => a.MaxWriteBufferSize = v);
 
 		/// <inheritdoc cref="IAutoFollowPattern.MaxRetryDelay"/>
-		public CreateAutoFollowPatternDescriptor MaxRetryDelay(Time maxRetryDelay) => Assign(a => a.MaxRetryDelay = maxRetryDelay);
+		public CreateAutoFollowPatternDescriptor MaxRetryDelay(Time maxRetryDelay) => Assign(maxRetryDelay, (a, v) => a.MaxRetryDelay = v);
 
 		/// <inheritdoc cref="IAutoFollowPattern.MaxPollTimeout"/>
-		public CreateAutoFollowPatternDescriptor MaxPollTimeout(Time maxPollTimeout) => Assign(a => a.MaxPollTimeout = maxPollTimeout);
+		public CreateAutoFollowPatternDescriptor MaxPollTimeout(Time maxPollTimeout) => Assign(maxPollTimeout, (a, v) => a.MaxPollTimeout = v);
 	}
 }

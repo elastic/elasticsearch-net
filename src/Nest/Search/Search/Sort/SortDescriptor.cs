@@ -11,20 +11,20 @@ namespace Nest
 		public SortDescriptor() : base(new List<ISort>()) { }
 
 		public SortDescriptor<T> Ascending(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Add(new SortField { Field = objectPath, Order = SortOrder.Ascending }));
+			Assign(objectPath, (a, v) => a.Add(new SortField { Field = v, Order = SortOrder.Ascending }));
 
 		public SortDescriptor<T> Descending(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Add(new SortField { Field = objectPath, Order = SortOrder.Descending }));
+			Assign(objectPath, (a, v) => a.Add(new SortField { Field = v, Order = SortOrder.Descending }));
 
-		public SortDescriptor<T> Ascending(Field field) => Assign(a => a.Add(new SortField { Field = field, Order = SortOrder.Ascending }));
+		public SortDescriptor<T> Ascending(Field field) => Assign(field, (a, v) => a.Add(new SortField { Field = v, Order = SortOrder.Ascending }));
 
-		public SortDescriptor<T> Descending(Field field) => Assign(a => a.Add(new SortField { Field = field, Order = SortOrder.Descending }));
+		public SortDescriptor<T> Descending(Field field) => Assign(field, (a, v) => a.Add(new SortField { Field = v, Order = SortOrder.Descending }));
 
 		public SortDescriptor<T> Ascending(SortSpecialField field) =>
-			Assign(a => a.Add(new SortField { Field = field.GetStringValue(), Order = SortOrder.Ascending }));
+			Assign(field.GetStringValue(), (a, v) => a.Add(new SortField { Field = v, Order = SortOrder.Ascending }));
 
 		public SortDescriptor<T> Descending(SortSpecialField field) =>
-			Assign(a => a.Add(new SortField { Field = field.GetStringValue(), Order = SortOrder.Descending }));
+			Assign(field.GetStringValue(), (a, v) => a.Add(new SortField { Field = v, Order = SortOrder.Descending }));
 
 		public SortDescriptor<T> Field(Func<SortFieldDescriptor<T>, IFieldSort> sortSelector) =>
 			AddSort(sortSelector?.Invoke(new SortFieldDescriptor<T>()));
@@ -40,6 +40,6 @@ namespace Nest
 		public SortDescriptor<T> Script(Func<SortScriptDescriptor<T>, IScriptSort> sortSelector) =>
 			AddSort(sortSelector?.Invoke(new SortScriptDescriptor<T>()));
 
-		private SortDescriptor<T> AddSort(ISort sort) => sort == null ? this : Assign(a => a.Add(sort));
+		private SortDescriptor<T> AddSort(ISort sort) => sort == null ? this : Assign(sort, (a, v) => a.Add(v));
 	}
 }

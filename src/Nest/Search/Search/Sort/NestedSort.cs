@@ -33,14 +33,14 @@ namespace Nest
 		INestedSort INestedSort.Nested { get; set; }
 		Field INestedSort.Path { get; set; }
 
-		public NestedSortDescriptor<T> Path(Field path) => Assign(a => a.Path = path);
+		public NestedSortDescriptor<T> Path(Field path) => Assign(path, (a, v) => a.Path = v);
 
-		public NestedSortDescriptor<T> Path(Expression<Func<T, object>> objectPath) => Assign(a => a.Path = objectPath);
+		public NestedSortDescriptor<T> Path(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Path = v);
 
 		public NestedSortDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector) =>
-			Assign(a => a.Filter = filterSelector?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(filterSelector, (a, v) => a.Filter = v?.Invoke(new QueryContainerDescriptor<T>()));
 
 		public NestedSortDescriptor<T> Nested(Func<NestedSortDescriptor<T>, INestedSort> filterSelector) =>
-			Assign(a => a.Nested = filterSelector?.Invoke(new NestedSortDescriptor<T>()));
+			Assign(filterSelector, (a, v) => a.Nested = v?.Invoke(new NestedSortDescriptor<T>()));
 	}
 }

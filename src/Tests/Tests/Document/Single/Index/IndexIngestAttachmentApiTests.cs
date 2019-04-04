@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -29,16 +30,22 @@ namespace Tests.Document.Single.Index
 		public static string TestPdfDocument { get; }
 	}
 
+	public class IngestedAttachment
+	{
+		public Attachment Attachment { get; set; }
+		public string Content { get; set; }
+		public int Id { get; set; }
+	}
+
 	public class IndexIngestAttachmentApiTests
 		: ApiIntegrationTestBase<IntrusiveOperationCluster, IIndexResponse,
-			IIndexRequest<IndexIngestAttachmentApiTests.IngestedAttachment>,
-			IndexDescriptor<IndexIngestAttachmentApiTests.IngestedAttachment>,
-			IndexRequest<IndexIngestAttachmentApiTests.IngestedAttachment>>
+			IIndexRequest<IngestedAttachment>,
+			IndexDescriptor<IngestedAttachment>,
+			IndexRequest<IngestedAttachment>>
 	{
 		public IndexIngestAttachmentApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
-
 		protected override object ExpectJson => new { id = 1, content = Content };
 		protected override int ExpectStatusCode => 201;
 
@@ -70,7 +77,7 @@ namespace Tests.Document.Single.Index
 			Content = Content
 		};
 
-		private static string PipelineId { get; } = "pipeline-" + Guid.NewGuid().ToString("N").Substring(0, 8);
+		private static string PipelineId { get; } = "pipeline-" + RandomString();
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -137,12 +144,94 @@ namespace Tests.Document.Single.Index
 			attachment.ContentLength.Should().Be(96);
 			attachment.Content.Should().Contain("mapper-attachment support");
 		}
+	}
 
-		public class IngestedAttachment
+	public class ReindexAttachmentApiTests : IClusterFixture<IntrusiveOperationCluster>
+	{
+		private readonly IElasticClient _client;
+
+		private static string RandomString { get; } = Guid.NewGuid().ToString("N").Substring(0, 8);
+		private static string Index { get; } = "project" + RandomString;
+		private static string PipelineId { get; } = "pipeline-" + RandomString;
+		private static string Content => TestDocument.TestPdfDocument;
+
+		private IngestedAttachment Document => new IngestedAttachment
 		{
-			public Attachment Attachment { get; set; }
-			public string Content { get; set; }
-			public int Id { get; set; }
+			Id = 1,
+			Content = Content
+		};
+
+		public ReindexAttachmentApiTests(IntrusiveOperationCluster cluster)
+		{
+			_client = cluster.Client;
+
+			_client.PutPipeline(new PutPipelineRequest(PipelineId)
+			{
+				Description = "Attachment pipeline test",
+				Processors = new List<IProcessor>
+				{
+					new AttachmentProcessor
+					{
+						Field = "content",
+						TargetField = "attachment"
+					}
+				}
+			});
+
+			var createIndexResponse = _client.CreateIndex(Index, c => c
+				.Map<IngestedAttachment>(mm => mm
+					.Properties(p => p
+						.Text(s => s
+							.Name(f => f.Content)
+						)
+						.Object<Attachment>(o => o
+							.Name(f => f.Attachment)
+						)
+					)
+				)
+			);
+
+			createIndexResponse.ShouldBeValid();
+			var indexResponse = _client.Index<IngestedAttachment>(Document, i => i
+				.Index(Index)
+				.Refresh(Refresh.True)
+				.Pipeline(PipelineId)
+			);
+
+			indexResponse.ShouldBeValid();
+		}
+
+		[I]
+		public void ReindexIntoAnotherIndexCorrectlySerializesAttachment()
+		{
+			var getResponse = _client.Get<IngestedAttachment>(1, g => g
+				.Index(Index)
+			);
+
+			getResponse.ShouldBeValid();
+			var ingestedAttachment = getResponse.Source;
+			ingestedAttachment.Should().NotBeNull();
+
+			var indexResponse = _client.Index<IngestedAttachment>(ingestedAttachment, i => i
+				.Index(Index + "2")
+				.Refresh(Refresh.True)
+			);
+
+			indexResponse.ShouldBeValid();
+
+			getResponse = _client.Get<IngestedAttachment>(1, g => g
+				.Index(Index + "2")
+			);
+
+			getResponse.ShouldBeValid();
+			ingestedAttachment.Should().NotBeNull();
+			ingestedAttachment.Attachment.Title.Should().Be("Attachment Test Document");
+			ingestedAttachment.Attachment.Keywords.Should().Be("nest,test,document");
+			ingestedAttachment.Attachment.Date.Should().Be(new DateTime(2016, 12, 08, 3, 5, 13, DateTimeKind.Utc));
+			ingestedAttachment.Attachment.ContentType.Should().Be("application/pdf");
+			ingestedAttachment.Attachment.Author.Should().Be("Russ Cam");
+			ingestedAttachment.Attachment.Language.Should().Be("fr");
+			ingestedAttachment.Attachment.ContentLength.Should().Be(96);
 		}
 	}
 }

@@ -51,10 +51,10 @@ namespace Nest
 
 		/// <inheritdoc cref="IHistogramCompositeAggregationSource.Interval" />
 		public HistogramCompositeAggregationSourceDescriptor<T> Interval(double? interval) =>
-			Assign(a => a.Interval = interval);
+			Assign(interval, (a, v) => a.Interval = v);
 
 		/// <inheritdoc cref="IHistogramCompositeAggregationSource.Script" />
 		public HistogramCompositeAggregationSourceDescriptor<T> Script(Func<ScriptDescriptor, IScript> selector) =>
-			Assign(a => a.Script = selector?.Invoke(new ScriptDescriptor()));
+			Assign(selector, (a, v) => a.Script = v?.Invoke(new ScriptDescriptor()));
 	}
 }

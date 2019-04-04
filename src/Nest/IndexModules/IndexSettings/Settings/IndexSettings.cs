@@ -85,30 +85,30 @@ namespace Nest
 
 		/// <inheritdoc cref="IIndexSettings.NumberOfShards" />
 		public IndexSettingsDescriptor NumberOfShards(int? numberOfShards) =>
-			Assign(a => a.NumberOfShards = numberOfShards);
+			Assign(numberOfShards, (a, v) => a.NumberOfShards = v);
 
 		/// <inheritdoc cref="IIndexSettings.NumberOfRoutingShards" />
 		public IndexSettingsDescriptor NumberOfRoutingShards(int? numberOfRoutingShards) =>
-			Assign(a => a.NumberOfRoutingShards = numberOfRoutingShards);
+			Assign(numberOfRoutingShards, (a, v) => a.NumberOfRoutingShards = v);
 
 		/// <inheritdoc cref="IIndexSettings.RoutingPartitionSize" />
 		public IndexSettingsDescriptor RoutingPartitionSize(int? routingPartitionSize) =>
-			Assign(a => a.RoutingPartitionSize = routingPartitionSize);
+			Assign(routingPartitionSize, (a, v) => a.RoutingPartitionSize = v);
 
 		/// <inheritdoc cref="IIndexSettings.FileSystemStorageImplementation" />
 		public IndexSettingsDescriptor FileSystemStorageImplementation(FileSystemStorageImplementation? fs) =>
-			Assign(a => a.FileSystemStorageImplementation = fs);
+			Assign(fs, (a, v) => a.FileSystemStorageImplementation = v);
 
 		/// <inheritdoc cref="IIndexSettings.Queries" />
 		public IndexSettingsDescriptor Queries(Func<QueriesSettingsDescriptor, IQueriesSettings> selector) =>
-			Assign(a => a.Queries = selector?.Invoke(new QueriesSettingsDescriptor()));
+			Assign(selector, (a, v) => a.Queries = v?.Invoke(new QueriesSettingsDescriptor()));
 
 		/// <inheritdoc cref="IIndexSettings.Sorting" />
 		public IndexSettingsDescriptor Sorting<T>(Func<SortingSettingsDescriptor<T>, ISortingSettings> selector) where T : class =>
-			Assign(a => a.Sorting = selector?.Invoke(new SortingSettingsDescriptor<T>()));
+			Assign(selector, (a, v) => a.Sorting = v?.Invoke(new SortingSettingsDescriptor<T>()));
 
 		/// <inheritdoc cref="IIndexSettings.SoftDeletes" />
 		public IndexSettingsDescriptor SoftDeletes(Func<SoftDeleteSettingsDescriptor, ISoftDeleteSettings> selector) =>
-			Assign(a => a.SoftDeletes = selector?.Invoke(new SoftDeleteSettingsDescriptor()));
+			Assign(selector, (a, v) => a.SoftDeletes = v?.Invoke(new SoftDeleteSettingsDescriptor()));
 	}
 }

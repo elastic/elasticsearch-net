@@ -34,12 +34,12 @@ namespace Nest
 
 		IProcessor IForeachProcessor.Processor { get; set; }
 
-		public ForeachProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public ForeachProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		public ForeachProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
 		public ForeachProcessorDescriptor<T> Processor(Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> selector) =>
-			Assign(a => a.Processor = selector?.Invoke(new ProcessorsDescriptor())?.Value?.FirstOrDefault());
+			Assign(selector, (a, v) => a.Processor = v?.Invoke(new ProcessorsDescriptor())?.Value?.FirstOrDefault());
 	}
 }

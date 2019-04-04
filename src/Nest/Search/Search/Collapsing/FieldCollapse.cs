@@ -61,16 +61,16 @@ namespace Nest
 
 		/// <inheritdoc cref="IFieldCollapse.MaxConcurrentGroupSearches" />
 		public FieldCollapseDescriptor<T> MaxConcurrentGroupSearches(int? maxConcurrentGroupSearches) =>
-			Assign(a => a.MaxConcurrentGroupSearches = maxConcurrentGroupSearches);
+			Assign(maxConcurrentGroupSearches, (a, v) => a.MaxConcurrentGroupSearches = v);
 
 		/// <inheritdoc cref="IFieldCollapse.Field" />
-		public FieldCollapseDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public FieldCollapseDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IFieldCollapse.Field" />
-		public FieldCollapseDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
+		public FieldCollapseDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IFieldCollapse.InnerHits" />
 		public FieldCollapseDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> selector = null) =>
-			Assign(a => a.InnerHits = selector.InvokeOrDefault(new InnerHitsDescriptor<T>()));
+			Assign(selector.InvokeOrDefault(new InnerHitsDescriptor<T>()), (a, v) => a.InnerHits = v);
 	}
 }

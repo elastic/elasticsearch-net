@@ -82,19 +82,19 @@ namespace Nest
 		int? IPathHierarchyTokenizer.Skip { get; set; }
 
 		/// <inheritdoc />
-		public PathHierarchyTokenizerDescriptor BufferSize(int? bufferSize) => Assign(a => a.BufferSize = bufferSize);
+		public PathHierarchyTokenizerDescriptor BufferSize(int? bufferSize) => Assign(bufferSize, (a, v) => a.BufferSize = v);
 
 		/// <inheritdoc />
-		public PathHierarchyTokenizerDescriptor Skip(int? skip) => Assign(a => a.Skip = skip);
+		public PathHierarchyTokenizerDescriptor Skip(int? skip) => Assign(skip, (a, v) => a.Skip = v);
 
 		/// <inheritdoc />
-		public PathHierarchyTokenizerDescriptor Reverse(bool? reverse = true) => Assign(a => a.Reverse = reverse);
+		public PathHierarchyTokenizerDescriptor Reverse(bool? reverse = true) => Assign(reverse, (a, v) => a.Reverse = v);
 
 		/// <inheritdoc />
-		public PathHierarchyTokenizerDescriptor Delimiter(char? delimiter) => Assign(a => a.Delimiter = delimiter);
+		public PathHierarchyTokenizerDescriptor Delimiter(char? delimiter) => Assign(delimiter, (a, v) => a.Delimiter = v);
 
 		/// <inheritdoc />
 		public PathHierarchyTokenizerDescriptor Replacement(char? replacement) =>
-			Assign(a => a.Replacement = replacement);
+			Assign(replacement, (a, v) => a.Replacement = v);
 	}
 }

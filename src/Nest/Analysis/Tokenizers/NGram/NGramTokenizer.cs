@@ -57,16 +57,16 @@ namespace Nest
 		IEnumerable<TokenChar> INGramTokenizer.TokenChars { get; set; }
 
 		/// <inheritdoc />
-		public NGramTokenizerDescriptor MinGram(int? minGram) => Assign(a => a.MinGram = minGram);
+		public NGramTokenizerDescriptor MinGram(int? minGram) => Assign(minGram, (a, v) => a.MinGram = v);
 
 		/// <inheritdoc />
-		public NGramTokenizerDescriptor MaxGram(int? minGram) => Assign(a => a.MaxGram = minGram);
+		public NGramTokenizerDescriptor MaxGram(int? minGram) => Assign(minGram, (a, v) => a.MaxGram = v);
 
 		/// <inheritdoc />
 		public NGramTokenizerDescriptor TokenChars(IEnumerable<TokenChar> tokenChars) =>
-			Assign(a => a.TokenChars = tokenChars);
+			Assign(tokenChars, (a, v) => a.TokenChars = v);
 
 		/// <inheritdoc />
-		public NGramTokenizerDescriptor TokenChars(params TokenChar[] tokenChars) => Assign(a => a.TokenChars = tokenChars);
+		public NGramTokenizerDescriptor TokenChars(params TokenChar[] tokenChars) => Assign(tokenChars, (a, v) => a.TokenChars = v);
 	}
 }

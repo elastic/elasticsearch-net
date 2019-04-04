@@ -1,7 +1,7 @@
 namespace Nest
 {
 	/// <summary>
-	/// const string collection of Elasticsearch index settings that can be updated on the fly
+	/// Collection of Elasticsearch index settings that can be dynamically updated
 	/// </summary>
 	public static class UpdatableIndexSettings
 	{
@@ -39,7 +39,7 @@ namespace Nest
 		public const string DefaultPipeline = "index.default_pipeline";
 
 		public const string RequestsCacheEnable = "index.requests.cache.enable";
-		public const string RoutingAllocationDisableAllication = "index.routing.allocation.disable_allocation";
+		public const string RoutingAllocationDisableAllocation = "index.routing.allocation.disable_allocation";
 		public const string RoutingAllocationDisableNewAllocation = "index.routing.allocation.disable_new_allocation";
 		public const string RoutingAllocationDisableReplicaAllocation = "index.routing.allocation.disable_replica_allocation";
 		public const string RoutingAllocationEnable = "index.routing.allocation.enable";

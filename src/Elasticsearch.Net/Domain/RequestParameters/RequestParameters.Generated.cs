@@ -735,6 +735,13 @@ namespace Elasticsearch.Net
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
 	}
+	///<summary>Request options for DeleteByQueryRethrottle<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html</pre></summary>
+	public class DeleteByQueryRethrottleRequestParameters : RequestParameters<DeleteByQueryRethrottleRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
+		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+	}
 	///<summary>Request options for DeleteScript<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public class DeleteScriptRequestParameters : RequestParameters<DeleteScriptRequestParameters> 
 	{
@@ -2213,6 +2220,13 @@ namespace Elasticsearch.Net
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
 	}
+	///<summary>Request options for UpdateByQueryRethrottle<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html</pre></summary>
+	public class UpdateByQueryRethrottleRequestParameters : RequestParameters<UpdateByQueryRethrottleRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
+		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+	}
 	///<summary>Request options for CcrDeleteAutoFollowPattern<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</pre></summary>
 	public class DeleteAutoFollowPatternRequestParameters : RequestParameters<DeleteAutoFollowPatternRequestParameters> 
 	{
@@ -2354,6 +2368,21 @@ namespace Elasticsearch.Net
 		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
+	///<summary>Request options for MlDeleteCalendar<pre>TODO</pre></summary>
+	public class DeleteCalendarRequestParameters : RequestParameters<DeleteCalendarRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
+	///<summary>Request options for MlDeleteCalendarEvent<pre>TODO</pre></summary>
+	public class DeleteCalendarEventRequestParameters : RequestParameters<DeleteCalendarEventRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
+	///<summary>Request options for MlDeleteCalendarJob<pre>TODO</pre></summary>
+	public class DeleteCalendarJobRequestParameters : RequestParameters<DeleteCalendarJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
 	///<summary>Request options for MlDeleteDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
 	public class DeleteDatafeedRequestParameters : RequestParameters<DeleteDatafeedRequestParameters> 
 	{
@@ -2365,6 +2394,15 @@ namespace Elasticsearch.Net
 	public class DeleteExpiredDataRequestParameters : RequestParameters<DeleteExpiredDataRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
+	///<summary>Request options for MlDeleteForecast<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</pre></summary>
+	public class DeleteForecastRequestParameters : RequestParameters<DeleteForecastRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		///<summary>Whether to ignore if `_all` matches no forecasts</summary>
+		public bool? AllowNoForecasts { get => Q<bool?>("allow_no_forecasts"); set => Q("allow_no_forecasts", value); }
+		///<summary>Controls the time to wait until the forecast(s) are deleted. Default to 30 seconds</summary>
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
 	///<summary>Request options for MlDeleteJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</pre></summary>
 	public class DeleteJobRequestParameters : RequestParameters<DeleteJobRequestParameters> 
@@ -2396,6 +2434,22 @@ namespace Elasticsearch.Net
 	public class GetBucketsRequestParameters : RequestParameters<GetBucketsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for MlGetCalendars<pre>TODO</pre></summary>
+	public class GetCalendarsRequestParameters : RequestParameters<GetCalendarsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for MlGetCalendarEvents<pre>TODO</pre></summary>
+	public class GetCalendarEventsRequestParameters : RequestParameters<GetCalendarEventsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Get events for the job. When this option is used calendar_id must be '_all'</summary>
+		public string JobId { get => Q<string>("job_id"); set => Q("job_id", value); }
+		///<summary>Get events after this time</summary>
+		public string Start { get => Q<string>("start"); set => Q("start", value); }
+		///<summary>Get events before this time</summary>
+		public DateTimeOffset? End { get => Q<DateTimeOffset?>("end"); set => Q("end", value); }
 	}
 	///<summary>Request options for MlGetCategories<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
 	public class GetCategoriesRequestParameters : RequestParameters<GetCategoriesRequestParameters> 
@@ -2450,8 +2504,18 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
+	///<summary>Request options for MlInfo<pre>TODO</pre></summary>
+	public class MachineLearningInfoRequestParameters : RequestParameters<MachineLearningInfoRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
 	///<summary>Request options for MlOpenJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</pre></summary>
 	public class OpenJobRequestParameters : RequestParameters<OpenJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for MlPostCalendarEvents<pre>TODO</pre></summary>
+	public class PostCalendarEventsRequestParameters : RequestParameters<PostCalendarEventsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
@@ -2468,6 +2532,16 @@ namespace Elasticsearch.Net
 	public class PreviewDatafeedRequestParameters : RequestParameters<PreviewDatafeedRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	///<summary>Request options for MlPutCalendar<pre>TODO</pre></summary>
+	public class PutCalendarRequestParameters : RequestParameters<PutCalendarRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+	}
+	///<summary>Request options for MlPutCalendarJob<pre>TODO</pre></summary>
+	public class PutCalendarJobRequestParameters : RequestParameters<PutCalendarJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 	}
 	///<summary>Request options for MlPutDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</pre></summary>
 	public class PutDatafeedRequestParameters : RequestParameters<PutDatafeedRequestParameters> 
@@ -2596,6 +2670,16 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
+	///<summary>Request options for SecurityDeletePrivileges<pre>TODO</pre></summary>
+	public class DeletePrivilegesRequestParameters : RequestParameters<DeletePrivilegesRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+	}
 	///<summary>Request options for SecurityDeleteRole<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html</pre></summary>
 	public class DeleteRoleRequestParameters : RequestParameters<DeleteRoleRequestParameters> 
 	{
@@ -2646,6 +2730,11 @@ namespace Elasticsearch.Net
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
+	///<summary>Request options for SecurityGetPrivileges<pre>TODO</pre></summary>
+	public class GetPrivilegesRequestParameters : RequestParameters<GetPrivilegesRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
 	///<summary>Request options for SecurityGetRole<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</pre></summary>
 	public class GetRoleRequestParameters : RequestParameters<GetRoleRequestParameters> 
 	{
@@ -2666,10 +2755,30 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
+	///<summary>Request options for SecurityGetUserPrivileges<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</pre></summary>
+	public class GetUserPrivilegesRequestParameters : RequestParameters<GetUserPrivilegesRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	///<summary>Request options for SecurityHasPrivileges<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</pre></summary>
+	public class HasPrivilegesRequestParameters : RequestParameters<HasPrivilegesRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
 	///<summary>Request options for SecurityInvalidateToken<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</pre></summary>
 	public class InvalidateUserAccessTokenRequestParameters : RequestParameters<InvalidateUserAccessTokenRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
+	///<summary>Request options for SecurityPutPrivileges<pre>TODO</pre></summary>
+	public class PutPrivilegesRequestParameters : RequestParameters<PutPrivilegesRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
 	///<summary>Request options for SecurityPutRole<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</pre></summary>
 	public class PutRoleRequestParameters : RequestParameters<PutRoleRequestParameters> 

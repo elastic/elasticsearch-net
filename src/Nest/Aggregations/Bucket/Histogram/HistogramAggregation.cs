@@ -71,33 +71,33 @@ namespace Nest
 
 		IScript IHistogramAggregation.Script { get; set; }
 
-		public HistogramAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public HistogramAggregationDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public HistogramAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public HistogramAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
 
-		public HistogramAggregationDescriptor<T> Script(string script) => Assign(a => a.Script = (InlineScript)script);
+		public HistogramAggregationDescriptor<T> Script(string script) => Assign((InlineScript)script, (a, v) => a.Script = v);
 
 		public HistogramAggregationDescriptor<T> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
-			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
+			Assign(scriptSelector, (a, v) => a.Script = v?.Invoke(new ScriptDescriptor()));
 
-		public HistogramAggregationDescriptor<T> Interval(double? interval) => Assign(a => a.Interval = interval);
+		public HistogramAggregationDescriptor<T> Interval(double? interval) => Assign(interval, (a, v) => a.Interval = v);
 
 		public HistogramAggregationDescriptor<T> MinimumDocumentCount(int? minimumDocumentCount) =>
-			Assign(a => a.MinimumDocumentCount = minimumDocumentCount);
+			Assign(minimumDocumentCount, (a, v) => a.MinimumDocumentCount = v);
 
-		public HistogramAggregationDescriptor<T> Order(HistogramOrder order) => Assign(a => a.Order = order);
+		public HistogramAggregationDescriptor<T> Order(HistogramOrder order) => Assign(order, (a, v) => a.Order = v);
 
 		public HistogramAggregationDescriptor<T> OrderAscending(string key) =>
-			Assign(a => a.Order = new HistogramOrder { Key = key, Order = SortOrder.Descending });
+			Assign(new HistogramOrder { Key = key, Order = SortOrder.Descending }, (a, v) => a.Order = v);
 
 		public HistogramAggregationDescriptor<T> OrderDescending(string key) =>
-			Assign(a => a.Order = new HistogramOrder { Key = key, Order = SortOrder.Descending });
+			Assign(new HistogramOrder { Key = key, Order = SortOrder.Descending }, (a, v) => a.Order = v);
 
 		public HistogramAggregationDescriptor<T> ExtendedBounds(double min, double max) =>
-			Assign(a => a.ExtendedBounds = new ExtendedBounds<double> { Minimum = min, Maximum = max });
+			Assign(new ExtendedBounds<double> { Minimum = min, Maximum = max }, (a, v) => a.ExtendedBounds = v);
 
-		public HistogramAggregationDescriptor<T> Offset(double? offset) => Assign(a => a.Offset = offset);
+		public HistogramAggregationDescriptor<T> Offset(double? offset) => Assign(offset, (a, v) => a.Offset = v);
 
-		public HistogramAggregationDescriptor<T> Missing(double? missing) => Assign(a => a.Missing = missing);
+		public HistogramAggregationDescriptor<T> Missing(double? missing) => Assign(missing, (a, v) => a.Missing = v);
 	}
 }

@@ -33,10 +33,10 @@ namespace Nest
 		string IIpRangeAggregationRange.Mask { get; set; }
 		string IIpRangeAggregationRange.To { get; set; }
 
-		public IpRangeAggregationRangeDescriptor From(string from) => Assign(a => a.From = from);
+		public IpRangeAggregationRangeDescriptor From(string from) => Assign(from, (a, v) => a.From = v);
 
-		public IpRangeAggregationRangeDescriptor To(string to) => Assign(a => a.To = to);
+		public IpRangeAggregationRangeDescriptor To(string to) => Assign(to, (a, v) => a.To = v);
 
-		public IpRangeAggregationRangeDescriptor Mask(string mask) => Assign(a => a.Mask = mask);
+		public IpRangeAggregationRangeDescriptor Mask(string mask) => Assign(mask, (a, v) => a.Mask = v);
 	}
 }

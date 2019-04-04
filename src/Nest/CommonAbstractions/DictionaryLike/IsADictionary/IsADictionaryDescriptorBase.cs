@@ -7,6 +7,10 @@ namespace Nest
 	{
 		protected IsADictionaryDescriptorBase(TInterface instance) : base(instance) { }
 
-		protected TDescriptor Assign(TKey key, TValue value) => Assign(a => a.Add(key, value));
+		protected TDescriptor Assign(TKey key, TValue value)
+		{
+			PromisedValue.Add(key, value);
+			return Self;
+		}
 	}
 }

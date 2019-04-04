@@ -12,6 +12,6 @@
 		bool? IDocValuesProperty.DocValues { get; set; }
 
 		/// <inheritdoc cref="IDocValuesProperty.DocValues" />
-		public TDescriptor DocValues(bool? docValues = true) => Assign(a => a.DocValues = docValues);
+		public TDescriptor DocValues(bool? docValues = true) => Assign(docValues, (a, v) => a.DocValues = v);
 	}
 }

@@ -33,9 +33,9 @@ namespace Nest
 
 		string IScriptSort.Type { get; set; }
 
-		public virtual SortScriptDescriptor<T> Type(string type) => Assign(a => a.Type = type);
+		public virtual SortScriptDescriptor<T> Type(string type) => Assign(type, (a, v) => a.Type = v);
 
 		public SortScriptDescriptor<T> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
-			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
+			Assign(scriptSelector, (a, v) => a.Script = v?.Invoke(new ScriptDescriptor()));
 	}
 }

@@ -18,12 +18,12 @@
 		bool IQuery.IsWritable => Self.IsVerbatim || !Self.Conditionless;
 		string IQuery.Name { get; set; }
 
-		public TDescriptor Name(string name) => Assign(a => a.Name = name);
+		public TDescriptor Name(string name) => Assign(name, (a, v) => a.Name = v);
 
-		public TDescriptor Boost(double? boost) => Assign(a => a.Boost = boost);
+		public TDescriptor Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
 
-		public TDescriptor Verbatim(bool verbatim = true) => Assign(a => a.IsVerbatim = verbatim);
+		public TDescriptor Verbatim(bool verbatim = true) => Assign(verbatim, (a, v) => a.IsVerbatim = v);
 
-		public TDescriptor Strict(bool strict = true) => Assign(a => a.IsStrict = strict);
+		public TDescriptor Strict(bool strict = true) => Assign(strict, (a, v) => a.IsStrict = v);
 	}
 }

@@ -59,15 +59,15 @@ namespace Nest
 		int? ISpanNotQuery.Pre { get; set; }
 
 		public SpanNotQueryDescriptor<T> Include(Func<SpanQueryDescriptor<T>, ISpanQuery> selector) =>
-			Assign(a => a.Include = selector(new SpanQueryDescriptor<T>()));
+			Assign(selector(new SpanQueryDescriptor<T>()), (a, v) => a.Include = v);
 
 		public SpanNotQueryDescriptor<T> Exclude(Func<SpanQueryDescriptor<T>, ISpanQuery> selector) =>
-			Assign(a => a.Exclude = selector(new SpanQueryDescriptor<T>()));
+			Assign(selector(new SpanQueryDescriptor<T>()), (a, v) => a.Exclude = v);
 
-		public SpanNotQueryDescriptor<T> Pre(int? pre) => Assign(a => a.Pre = pre);
+		public SpanNotQueryDescriptor<T> Pre(int? pre) => Assign(pre, (a, v) => a.Pre = v);
 
-		public SpanNotQueryDescriptor<T> Post(int? post) => Assign(a => a.Post = post);
+		public SpanNotQueryDescriptor<T> Post(int? post) => Assign(post, (a, v) => a.Post = v);
 
-		public SpanNotQueryDescriptor<T> Dist(int? dist) => Assign(a => a.Dist = dist);
+		public SpanNotQueryDescriptor<T> Dist(int? dist) => Assign(dist, (a, v) => a.Dist = v);
 	}
 }

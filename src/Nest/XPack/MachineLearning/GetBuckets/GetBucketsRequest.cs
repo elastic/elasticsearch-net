@@ -100,27 +100,27 @@ namespace Nest
 		DateTimeOffset? IGetBucketsRequest.Start { get; set; }
 
 		/// <inheritdoc />
-		public GetBucketsDescriptor AnomalyScore(double? anomalyScore) => Assign(a => a.AnomalyScore = anomalyScore);
+		public GetBucketsDescriptor AnomalyScore(double? anomalyScore) => Assign(anomalyScore, (a, v) => a.AnomalyScore = v);
 
 		/// <inheritdoc />
-		public GetBucketsDescriptor Descending(bool? descending = true) => Assign(a => a.Descending = descending);
+		public GetBucketsDescriptor Descending(bool? descending = true) => Assign(descending, (a, v) => a.Descending = v);
 
 		/// <inheritdoc />
-		public GetBucketsDescriptor End(DateTimeOffset? end) => Assign(a => a.End = end);
+		public GetBucketsDescriptor End(DateTimeOffset? end) => Assign(end, (a, v) => a.End = v);
 
 		/// <inheritdoc />
-		public GetBucketsDescriptor ExcludeInterim(bool? excludeInterim = true) => Assign(a => a.ExcludeInterim = excludeInterim);
+		public GetBucketsDescriptor ExcludeInterim(bool? excludeInterim = true) => Assign(excludeInterim, (a, v) => a.ExcludeInterim = v);
 
 		/// <inheritdoc />
-		public GetBucketsDescriptor Expand(bool? expand = true) => Assign(a => a.Expand = expand);
+		public GetBucketsDescriptor Expand(bool? expand = true) => Assign(expand, (a, v) => a.Expand = v);
 
 		/// <inheritdoc />
-		public GetBucketsDescriptor Page(Func<PageDescriptor, IPage> selector) => Assign(a => a.Page = selector?.Invoke(new PageDescriptor()));
+		public GetBucketsDescriptor Page(Func<PageDescriptor, IPage> selector) => Assign(selector, (a, v) => a.Page = v?.Invoke(new PageDescriptor()));
 
 		/// <inheritdoc />
-		public GetBucketsDescriptor Sort(Field field) => Assign(a => a.Sort = field);
+		public GetBucketsDescriptor Sort(Field field) => Assign(field, (a, v) => a.Sort = v);
 
 		/// <inheritdoc />
-		public GetBucketsDescriptor Start(DateTimeOffset? start) => Assign(a => a.Start = start);
+		public GetBucketsDescriptor Start(DateTimeOffset? start) => Assign(start, (a, v) => a.Start = v);
 	}
 }

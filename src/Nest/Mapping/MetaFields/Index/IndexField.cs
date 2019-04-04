@@ -19,6 +19,6 @@ namespace Nest
 	{
 		bool? IIndexField.Enabled { get; set; }
 
-		public IndexFieldDescriptor Enabled(bool? enabled = true) => Assign(a => a.Enabled = enabled);
+		public IndexFieldDescriptor Enabled(bool? enabled = true) => Assign(enabled, (a, v) => a.Enabled = v);
 	}
 }

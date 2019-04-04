@@ -33,8 +33,8 @@ namespace Nest
 	{
 		IScript IScriptScoreFunction.Script { get; set; }
 
-		/// <inheritdoc cref="IScriptScoreFunction.Script"/>
-		public ScriptScoreFunctionDescriptor<T> Script(Func<ScriptDescriptor, IScript> selector) =>
-			Assign(a => a.Script = selector?.Invoke(new ScriptDescriptor()));
+    /// <inheritdoc cref="IScriptScoreFunction.Script"/>
+		public ScriptScoreFunctionDescriptor<T> Script(Func<ScriptQueryDescriptor<T>, IScriptQuery> selector) =>
+			Assign(selector, (a, v) => a.Script = v?.Invoke(new ScriptQueryDescriptor<T>()));
 	}
 }

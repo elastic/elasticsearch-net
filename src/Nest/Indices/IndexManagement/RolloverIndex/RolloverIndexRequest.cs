@@ -29,22 +29,22 @@ namespace Nest
 		IIndexSettings IIndexState.Settings { get; set; }
 
 		public RolloverIndexDescriptor Conditions(Func<RolloverConditionsDescriptor, IRolloverConditions> selector) =>
-			Assign(a => a.Conditions = selector?.Invoke(new RolloverConditionsDescriptor()));
+			Assign(selector, (a, v) => a.Conditions = v?.Invoke(new RolloverConditionsDescriptor()));
 
 		public RolloverIndexDescriptor Settings(Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> selector) =>
-			Assign(a => a.Settings = selector?.Invoke(new IndexSettingsDescriptor())?.Value);
+			Assign(selector, (a, v) => a.Settings = v?.Invoke(new IndexSettingsDescriptor())?.Value);
 
 		public RolloverIndexDescriptor Map<T>(Func<TypeMappingDescriptor<T>, ITypeMapping> selector) where T : class =>
-			Assign(a => a.Mappings = selector?.Invoke(new TypeMappingDescriptor<T>()));
+			Assign(selector, (a, v) => a.Mappings = v?.Invoke(new TypeMappingDescriptor<T>()));
 
 		public RolloverIndexDescriptor Map(Func<TypeMappingDescriptor<object>, ITypeMapping> selector) =>
-			Assign(a => a.Mappings = selector?.Invoke(new TypeMappingDescriptor<object>()));
+			Assign(selector, (a, v) => a.Mappings = v?.Invoke(new TypeMappingDescriptor<object>()));
 
 		[Obsolete("Mappings is no longer a dictionary in 7.x, please use the simplified Map() method on this descriptor instead")]
 		public RolloverIndexDescriptor Mappings(Func<MappingsDescriptor, ITypeMapping> selector) =>
-			Assign(a => a.Mappings = selector?.Invoke(new MappingsDescriptor()));
+			Assign(selector, (a, v) => a.Mappings = v?.Invoke(new MappingsDescriptor()));
 
 		public RolloverIndexDescriptor Aliases(Func<AliasesDescriptor, IPromise<IAliases>> selector) =>
-			Assign(a => a.Aliases = selector?.Invoke(new AliasesDescriptor())?.Value);
+			Assign(selector, (a, v) => a.Aliases = v?.Invoke(new AliasesDescriptor())?.Value);
 	}
 }

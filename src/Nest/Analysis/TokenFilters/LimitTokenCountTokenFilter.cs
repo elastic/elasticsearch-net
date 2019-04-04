@@ -46,9 +46,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public LimitTokenCountTokenFilterDescriptor ConsumeAllToken(bool? consumeAllTokens = true) =>
-			Assign(a => a.ConsumeAllTokens = consumeAllTokens);
+			Assign(consumeAllTokens, (a, v) => a.ConsumeAllTokens = v);
 
 		/// <inheritdoc />
-		public LimitTokenCountTokenFilterDescriptor MaxTokenCount(int? maxTokenCount) => Assign(a => a.MaxTokenCount = maxTokenCount);
+		public LimitTokenCountTokenFilterDescriptor MaxTokenCount(int? maxTokenCount) => Assign(maxTokenCount, (a, v) => a.MaxTokenCount = v);
 	}
 }
