@@ -4,8 +4,10 @@ namespace Nest
 {
 	/// <summary>
 	/// Normalizes as defined here: http://userguide.icu-project.org/transforms/normalization
-	/// Part of the `analysis-icu` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-icu.html
 	/// </summary>
+	/// <remarks>
+	/// Requires analysis-icu plugin to be installed
+	/// </remarks>
 	public interface IIcuNormalizationCharFilter : ICharFilter
 	{
 		/// <summary>
