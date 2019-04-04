@@ -3835,6 +3835,18 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IIlmStartRequest : IRequest<IlmStartRequestParameters>
+	{
+	}
+	///<summary>Request parameters for IlmStart <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html</pre></summary>
+	public partial class IlmStartRequest : PlainRequestBase<IlmStartRequestParameters>, IIlmStartRequest
+	{
+		protected IIlmStartRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IIndexExistsRequest : IRequest<IndexExistsRequestParameters>
 	{
 		Indices Index { get; }

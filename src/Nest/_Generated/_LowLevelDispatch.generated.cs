@@ -3200,6 +3200,26 @@ namespace Nest
 			throw InvalidDispatch("XpackGraphExplore", p, new [] { GET, POST }, "/{index}/_xpack/graph/_explore", "/{index}/{type}/_xpack/graph/_explore");
 		}
 		
+		internal TResponse IlmStartDispatch<TResponse>(IRequest<IlmStartRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.IlmStart<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("IlmStart", p, new [] { POST }, "/_ilm/start");
+		}
+		
+		internal Task<TResponse> IlmStartDispatchAsync<TResponse>(IRequest<IlmStartRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.IlmStartAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("IlmStart", p, new [] { POST }, "/_ilm/start");
+		}
+		
 		internal TResponse XpackInfoDispatch<TResponse>(IRequest<XPackInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
