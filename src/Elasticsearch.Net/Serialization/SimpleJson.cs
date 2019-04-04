@@ -526,6 +526,44 @@ namespace Elasticsearch.Net
 				return obj;
 			throw new SerializationException("Invalid JSON string");
 		}
+		/// <summary>
+		/// Parses the char array json into a value
+		/// </summary>
+		/// <param name="json">A JSON char array.</param>
+		/// <returns>An IList&lt;object>, a IDictionary&lt;string,object>, a double, a string, null, true, or false</returns>
+		public static object DeserializeObject(char[] json)
+		{
+			object obj;
+			if (TryDeserializeObject(json, out obj))
+				return obj;
+			throw new SerializationException("Invalid JSON string");
+		}
+		/// <summary>
+		/// Try parsing the json string into a value.
+		/// </summary>
+		/// <param name="json">
+		/// A JSON string.
+		/// </param>
+		/// <param name="obj">
+		/// The object.
+		/// </param>
+		/// <returns>
+		/// Returns true if successfull otherwise false.
+		/// </returns>
+		[SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate", Justification="Need to support .NET 2")]
+		public static bool TryDeserializeObject(char[] json, out object obj)
+		{
+			bool success = true;
+			if (json != null)
+			{
+				int index = 0;
+				obj = ParseValue(json, ref index, ref success);
+			}
+			else
+				obj = null;
+
+			return success;
+		}
 
 		/// <summary>
 		/// Try parsing the json string into a value.
@@ -542,26 +580,22 @@ namespace Elasticsearch.Net
 		[SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate", Justification="Need to support .NET 2")]
 		public static bool TryDeserializeObject(string json, out object obj)
 		{
-			bool success = true;
-			if (json != null)
-			{
-				char[] charArray = json.ToCharArray();
-				int index = 0;
-				obj = ParseValue(charArray, ref index, ref success);
-			}
-			else
-				obj = null;
-
-			return success;
+			return TryDeserializeObject(json.ToCharArray(), out obj);
 		}
 
 		public static object DeserializeObject(string json, Type type, IJsonSerializerStrategy jsonSerializerStrategy)
 		{
-			object jsonObject = DeserializeObject(json);
-			return type == null || jsonObject != null && ReflectionUtils.IsAssignableFrom(jsonObject.GetType(), type)
+			return GetJsonObject(DeserializeObject(json), type, jsonSerializerStrategy);
+		}
+		public static object DeserializeObject(char[] json, Type type, IJsonSerializerStrategy jsonSerializerStrategy)
+		{
+			return GetJsonObject(DeserializeObject(json), type, jsonSerializerStrategy);
+		}
+
+		private static object GetJsonObject(object jsonObject, Type type, IJsonSerializerStrategy jsonSerializerStrategy) =>
+			type == null || jsonObject != null && ReflectionUtils.IsAssignableFrom(jsonObject.GetType(), type)
 				? jsonObject
 				: (jsonSerializerStrategy ?? CurrentJsonSerializerStrategy).DeserializeObject(jsonObject, type);
-		}
 
 		public static object DeserializeObject(string json, Type type)
 		{

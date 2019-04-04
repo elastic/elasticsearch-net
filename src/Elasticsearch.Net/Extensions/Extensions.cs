@@ -15,6 +15,7 @@ namespace Elasticsearch.Net
 		internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes, 0, bytes.Length);
 #endif
 		internal static string Utf8String(this MemoryStream ms) => ms == null ? null : Encoding.UTF8.GetString(ms.GetBuffer(), 0, (int)ms.Length);
+		internal static char[] Utf8CharArray(this MemoryStream ms) => ms == null ? null : Encoding.UTF8.GetChars(ms.GetBuffer(), 0, (int)ms.Length);
 
 		internal static byte[] Utf8Bytes(this string s) => s.IsNullOrEmpty() ? null : Encoding.UTF8.GetBytes(s);
 
