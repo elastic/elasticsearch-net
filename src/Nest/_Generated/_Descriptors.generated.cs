@@ -4089,6 +4089,14 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public GraphExploreDescriptor<T> Timeout(Time timeout) => Qs("timeout", timeout);
 	}
+	///<summary>descriptor for IlmGetStatus <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html</pre></summary>
+	public partial class IlmGetStatusDescriptor  : RequestDescriptorBase<IlmGetStatusDescriptor,IlmGetStatusRequestParameters, IIlmGetStatusRequest>, IIlmGetStatusRequest
+	{ 
+		// values part of the url path
+
+		// Request parameters
+
+	}
 	///<summary>descriptor for IlmStart <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html</pre></summary>
 	public partial class IlmStartDescriptor  : RequestDescriptorBase<IlmStartDescriptor,IlmStartRequestParameters, IIlmStartRequest>, IIlmStartRequest
 	{ 

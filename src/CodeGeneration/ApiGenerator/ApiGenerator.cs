@@ -25,7 +25,6 @@ namespace ApiGenerator
 			"ilm.delete_lifecycle.json",
 			"ilm.explain_lifecycle.json",
 			"ilm.get_lifecycle.json",
-			"ilm.get_status.json",
 			"ilm.move_to_step.json",
 			"ilm.put_lifecycle.json",
 			"ilm.remove_policy.json",

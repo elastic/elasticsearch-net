@@ -3835,6 +3835,18 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IIlmGetStatusRequest : IRequest<IlmGetStatusRequestParameters>
+	{
+	}
+	///<summary>Request parameters for IlmGetStatus <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html</pre></summary>
+	public partial class IlmGetStatusRequest : PlainRequestBase<IlmGetStatusRequestParameters>, IIlmGetStatusRequest
+	{
+		protected IIlmGetStatusRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IIlmStartRequest : IRequest<IlmStartRequestParameters>
 	{
 	}
