@@ -4,8 +4,10 @@ namespace Nest
 {
 	/// <summary>
 	/// Case folding of Unicode characters based on UTR#30, like the ASCII-folding token filter on steroids.
-	/// Part of the `analysis-icu` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-icu.html
 	/// </summary>
+	/// <remarks>
+	/// Requires analysis-icu plugin to be installed
+	/// </remarks>
 	public interface IIcuFoldingTokenFilter : ITokenFilter
 	{
 		/// <summary>
