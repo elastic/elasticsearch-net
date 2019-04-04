@@ -23,6 +23,6 @@ namespace Nest
 	{
 		IEnumerable<string> IClearScrollRequest.ScrollIds { get; set; }
 
-		public ClearScrollDescriptor ScrollId(params string[] scrollIds) => Assign(a => a.ScrollIds = scrollIds);
+		public ClearScrollDescriptor ScrollId(params string[] scrollIds) => Assign(scrollIds, (a, v) => a.ScrollIds = v);
 	}
 }

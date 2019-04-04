@@ -57,19 +57,19 @@ namespace Nest
 		string ICompletionProperty.SearchAnalyzer { get; set; }
 
 		public CompletionPropertyDescriptor<T> SearchAnalyzer(string searchAnalyzer) =>
-			Assign(a => a.SearchAnalyzer = searchAnalyzer);
+			Assign(searchAnalyzer, (a, v) => a.SearchAnalyzer = v);
 
-		public CompletionPropertyDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
+		public CompletionPropertyDescriptor<T> Analyzer(string analyzer) => Assign(analyzer, (a, v) => a.Analyzer = v);
 
 		public CompletionPropertyDescriptor<T> PreserveSeparators(bool? preserveSeparators = true) =>
-			Assign(a => a.PreserveSeparators = preserveSeparators);
+			Assign(preserveSeparators, (a, v) => a.PreserveSeparators = v);
 
 		public CompletionPropertyDescriptor<T> PreservePositionIncrements(bool? preservePositionIncrements = true) =>
-			Assign(a => a.PreservePositionIncrements = preservePositionIncrements);
+			Assign(preservePositionIncrements, (a, v) => a.PreservePositionIncrements = v);
 
-		public CompletionPropertyDescriptor<T> MaxInputLength(int? maxInputLength) => Assign(a => a.MaxInputLength = maxInputLength);
+		public CompletionPropertyDescriptor<T> MaxInputLength(int? maxInputLength) => Assign(maxInputLength, (a, v) => a.MaxInputLength = v);
 
 		public CompletionPropertyDescriptor<T> Contexts(Func<SuggestContextsDescriptor<T>, IPromise<IList<ISuggestContext>>> contexts) =>
-			Assign(a => a.Contexts = contexts?.Invoke(new SuggestContextsDescriptor<T>()).Value);
+			Assign(contexts, (a, v) => a.Contexts = v?.Invoke(new SuggestContextsDescriptor<T>()).Value);
 	}
 }

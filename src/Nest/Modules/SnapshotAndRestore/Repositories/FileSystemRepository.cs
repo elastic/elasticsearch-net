@@ -68,20 +68,20 @@ namespace Nest
 		/// Location of the snapshots. Mandatory.
 		/// </summary>
 		/// <param name="location"></param>
-		public FileSystemRepositorySettingsDescriptor Location(string location) => Assign(a => a.Location = location);
+		public FileSystemRepositorySettingsDescriptor Location(string location) => Assign(location, (a, v) => a.Location = v);
 
 		/// <summary>
 		/// Turns on compression of the snapshot files. Defaults to true.
 		/// </summary>
 		/// <param name="compress"></param>
-		public FileSystemRepositorySettingsDescriptor Compress(bool? compress = true) => Assign(a => a.Compress = compress);
+		public FileSystemRepositorySettingsDescriptor Compress(bool? compress = true) => Assign(compress, (a, v) => a.Compress = v);
 
 		/// <summary>
 		/// Throttles the number of streams (per node) preforming snapshot operation. Defaults to 5
 		/// </summary>
 		/// <param name="concurrentStreams"></param>
 		public FileSystemRepositorySettingsDescriptor ConcurrentStreams(int? concurrentStreams) =>
-			Assign(a => a.ConcurrentStreams = concurrentStreams);
+			Assign(concurrentStreams, (a, v) => a.ConcurrentStreams = v);
 
 		/// <summary>
 		/// Big files can be broken down into chunks during snapshotting if needed.
@@ -89,21 +89,21 @@ namespace Nest
 		/// Defaults to null (unlimited chunk size).
 		/// </summary>
 		/// <param name="chunkSize"></param>
-		public FileSystemRepositorySettingsDescriptor ChunkSize(string chunkSize) => Assign(a => a.ChunkSize = chunkSize);
+		public FileSystemRepositorySettingsDescriptor ChunkSize(string chunkSize) => Assign(chunkSize, (a, v) => a.ChunkSize = v);
 
 		/// <summary>
 		/// Throttles per node restore rate. Defaults to 20mb per second.
 		/// </summary>
 		/// <param name="maximumBytesPerSecond"></param>
 		public FileSystemRepositorySettingsDescriptor RestoreBytesPerSecondMaximum(string maximumBytesPerSecond) =>
-			Assign(a => a.RestoreBytesPerSecondMaximum = maximumBytesPerSecond);
+			Assign(maximumBytesPerSecond, (a, v) => a.RestoreBytesPerSecondMaximum = v);
 
 		/// <summary>
 		/// Throttles per node snapshot rate. Defaults to 20mb per second.
 		/// </summary>
 		/// <param name="maximumBytesPerSecond"></param>
 		public FileSystemRepositorySettingsDescriptor SnapshotBytesPerSecondMaximum(string maximumBytesPerSecond) =>
-			Assign(a => a.SnapshotBytesPerSecondMaximum = maximumBytesPerSecond);
+			Assign(maximumBytesPerSecond, (a, v) => a.SnapshotBytesPerSecondMaximum = v);
 	}
 
 	public class FileSystemRepositoryDescriptor
@@ -116,6 +116,6 @@ namespace Nest
 		public FileSystemRepositoryDescriptor Settings(string location,
 			Func<FileSystemRepositorySettingsDescriptor, IFileSystemRepositorySettings> settingsSelector = null
 		) =>
-			Assign(a => a.Settings = settingsSelector.InvokeOrDefault(new FileSystemRepositorySettingsDescriptor().Location(location)));
+			Assign(settingsSelector.InvokeOrDefault(new FileSystemRepositorySettingsDescriptor().Location(location)), (a, v) => a.Settings = v);
 	}
 }

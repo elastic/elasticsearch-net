@@ -32,11 +32,11 @@ namespace Nest
 		Field ISplitProcessor.Field { get; set; }
 		string ISplitProcessor.Separator { get; set; }
 
-		public SplitProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public SplitProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		public SplitProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
-		public SplitProcessorDescriptor<T> Separator(string separator) => Assign(a => a.Separator = separator);
+		public SplitProcessorDescriptor<T> Separator(string separator) => Assign(separator, (a, v) => a.Separator = v);
 	}
 }

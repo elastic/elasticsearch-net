@@ -40,19 +40,19 @@ namespace Nest
 		string IPutUserRequest.Password { get; set; }
 		IEnumerable<string> IPutUserRequest.Roles { get; set; }
 
-		public PutUserDescriptor Password(string password) => Assign(a => a.Password = password);
+		public PutUserDescriptor Password(string password) => Assign(password, (a, v) => a.Password = v);
 
-		public PutUserDescriptor Roles(IEnumerable<string> roles) => Assign(a => a.Roles = roles);
+		public PutUserDescriptor Roles(IEnumerable<string> roles) => Assign(roles, (a, v) => a.Roles = v);
 
-		public PutUserDescriptor Roles(params string[] roles) => Assign(a => a.Roles = roles);
+		public PutUserDescriptor Roles(params string[] roles) => Assign(roles, (a, v) => a.Roles = v);
 
-		public PutUserDescriptor FullName(string fullName) => Assign(a => a.FullName = fullName);
+		public PutUserDescriptor FullName(string fullName) => Assign(fullName, (a, v) => a.FullName = v);
 
-		public PutUserDescriptor Email(string email) => Assign(a => a.Email = email);
+		public PutUserDescriptor Email(string email) => Assign(email, (a, v) => a.Email = v);
 
-		public PutUserDescriptor Metadata(IDictionary<string, object> metadata) => Assign(a => a.Metadata = metadata);
+		public PutUserDescriptor Metadata(IDictionary<string, object> metadata) => Assign(metadata, (a, v) => a.Metadata = v);
 
 		public PutUserDescriptor Metadata(Func<FluentDictionary<string, object>, IDictionary<string, object>> selector) =>
-			Assign(a => a.Metadata = selector?.Invoke(new FluentDictionary<string, object>()));
+			Assign(selector, (a, v) => a.Metadata = v?.Invoke(new FluentDictionary<string, object>()));
 	}
 }

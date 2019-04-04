@@ -32,6 +32,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public DFISimilarityDescriptor IndependenceMeasure(DFIIndependenceMeasure? independenceMeasure) =>
-			Assign(a => a.IndependenceMeasure = independenceMeasure);
+			Assign(independenceMeasure, (a, v) => a.IndependenceMeasure = v);
 	}
 }

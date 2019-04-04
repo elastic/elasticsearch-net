@@ -89,28 +89,28 @@ namespace Nest
 		SuggestMode? ITermSuggester.SuggestMode { get; set; }
 		string ITermSuggester.Text { get; set; }
 
-		public TermSuggesterDescriptor<T> Text(string text) => Assign(a => a.Text = text);
+		public TermSuggesterDescriptor<T> Text(string text) => Assign(text, (a, v) => a.Text = v);
 
-		public TermSuggesterDescriptor<T> ShardSize(int? shardSize) => Assign(a => a.ShardSize = shardSize);
+		public TermSuggesterDescriptor<T> ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSize = v);
 
-		public TermSuggesterDescriptor<T> SuggestMode(SuggestMode? mode) => Assign(a => a.SuggestMode = mode);
+		public TermSuggesterDescriptor<T> SuggestMode(SuggestMode? mode) => Assign(mode, (a, v) => a.SuggestMode = v);
 
-		public TermSuggesterDescriptor<T> MinWordLength(int? length) => Assign(a => a.MinWordLength = length);
+		public TermSuggesterDescriptor<T> MinWordLength(int? length) => Assign(length, (a, v) => a.MinWordLength = v);
 
-		public TermSuggesterDescriptor<T> PrefixLength(int? length) => Assign(a => a.PrefixLength = length);
+		public TermSuggesterDescriptor<T> PrefixLength(int? length) => Assign(length, (a, v) => a.PrefixLength = v);
 
-		public TermSuggesterDescriptor<T> MaxEdits(int? maxEdits) => Assign(a => a.MaxEdits = maxEdits);
+		public TermSuggesterDescriptor<T> MaxEdits(int? maxEdits) => Assign(maxEdits, (a, v) => a.MaxEdits = v);
 
-		public TermSuggesterDescriptor<T> MaxInspections(int? maxInspections) => Assign(a => a.MaxInspections = maxInspections);
+		public TermSuggesterDescriptor<T> MaxInspections(int? maxInspections) => Assign(maxInspections, (a, v) => a.MaxInspections = v);
 
-		public TermSuggesterDescriptor<T> MinDocFrequency(decimal? frequency) => Assign(a => a.MinDocFrequency = frequency);
+		public TermSuggesterDescriptor<T> MinDocFrequency(decimal? frequency) => Assign(frequency, (a, v) => a.MinDocFrequency = v);
 
-		public TermSuggesterDescriptor<T> MaxTermFrequency(decimal? frequency) => Assign(a => a.MaxTermFrequency = frequency);
+		public TermSuggesterDescriptor<T> MaxTermFrequency(decimal? frequency) => Assign(frequency, (a, v) => a.MaxTermFrequency = v);
 
-		public TermSuggesterDescriptor<T> Sort(SuggestSort? sort) => Assign(a => a.Sort = sort);
+		public TermSuggesterDescriptor<T> Sort(SuggestSort? sort) => Assign(sort, (a, v) => a.Sort = v);
 
-		public TermSuggesterDescriptor<T> LowercaseTerms(bool? lowercaseTerms = true) => Assign(a => a.LowercaseTerms = lowercaseTerms);
+		public TermSuggesterDescriptor<T> LowercaseTerms(bool? lowercaseTerms = true) => Assign(lowercaseTerms, (a, v) => a.LowercaseTerms = v);
 
-		public TermSuggesterDescriptor<T> StringDistance(StringDistance? distance) => Assign(a => a.StringDistance = distance);
+		public TermSuggesterDescriptor<T> StringDistance(StringDistance? distance) => Assign(distance, (a, v) => a.StringDistance = v);
 	}
 }

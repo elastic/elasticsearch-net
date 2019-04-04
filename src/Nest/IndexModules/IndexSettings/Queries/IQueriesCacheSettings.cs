@@ -19,6 +19,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public QueriesCacheSettingsDescriptor Enabled(bool? enabled = true) =>
-			Assign(a => a.Enabled = enabled);
+			Assign(enabled, (a, v) => a.Enabled = v);
 	}
 }

@@ -46,11 +46,11 @@ namespace Nest
 		IPolygonGeoShape IGeoShapePolygonQuery.Shape { get; set; }
 
 		public GeoShapePolygonQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<GeoCoordinate>> coordinates, bool? ignoreUnmapped = null) =>
-			Assign(a =>
+			Assign(coordinates, (a, v) =>
 			{
 				a.Shape = a.Shape ?? new PolygonGeoShape();
-				a.Shape.Coordinates = coordinates;
-				a.IgnoreUnmapped = ignoreUnmapped;
-			});
+				a.Shape.Coordinates = v;
+			})
+			.Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmapped = v);
 	}
 }

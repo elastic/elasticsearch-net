@@ -70,24 +70,24 @@ namespace Nest
 		string IKeywordProperty.NullValue { get; set; }
 		bool? IKeywordProperty.SplitQueriesOnWhitespace { get; set; }
 
-		public KeywordPropertyDescriptor<T> Boost(double? boost) => Assign(a => a.Boost = boost);
+		public KeywordPropertyDescriptor<T> Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
 
 		public KeywordPropertyDescriptor<T> EagerGlobalOrdinals(bool? eagerGlobalOrdinals = true) =>
-			Assign(a => a.EagerGlobalOrdinals = eagerGlobalOrdinals);
+			Assign(eagerGlobalOrdinals, (a, v) => a.EagerGlobalOrdinals = v);
 
-		public KeywordPropertyDescriptor<T> IgnoreAbove(int? ignoreAbove) => Assign(a => a.IgnoreAbove = ignoreAbove);
+		public KeywordPropertyDescriptor<T> IgnoreAbove(int? ignoreAbove) => Assign(ignoreAbove, (a, v) => a.IgnoreAbove = v);
 
-		public KeywordPropertyDescriptor<T> Index(bool? index = true) => Assign(a => a.Index = index);
+		public KeywordPropertyDescriptor<T> Index(bool? index = true) => Assign(index, (a, v) => a.Index = v);
 
-		public KeywordPropertyDescriptor<T> IndexOptions(IndexOptions? indexOptions) => Assign(a => a.IndexOptions = indexOptions);
+		public KeywordPropertyDescriptor<T> IndexOptions(IndexOptions? indexOptions) => Assign(indexOptions, (a, v) => a.IndexOptions = v);
 
-		public KeywordPropertyDescriptor<T> Norms(bool? enabled = true) => Assign(a => a.Norms = enabled);
+		public KeywordPropertyDescriptor<T> Norms(bool? enabled = true) => Assign(enabled, (a, v) => a.Norms = v);
 
 		/// <inheritdoc cref="IKeywordProperty.SplitQueriesOnWhitespace" />
-		public KeywordPropertyDescriptor<T> SplitQueriesOnWhitespace(bool? split = true) => Assign(a => a.SplitQueriesOnWhitespace = split);
+		public KeywordPropertyDescriptor<T> SplitQueriesOnWhitespace(bool? split = true) => Assign(split, (a, v) => a.SplitQueriesOnWhitespace = v);
 
-		public KeywordPropertyDescriptor<T> NullValue(string nullValue) => Assign(a => a.NullValue = nullValue);
+		public KeywordPropertyDescriptor<T> NullValue(string nullValue) => Assign(nullValue, (a, v) => a.NullValue = v);
 
-		public KeywordPropertyDescriptor<T> Normalizer(string normalizer) => Assign(a => a.Normalizer = normalizer);
+		public KeywordPropertyDescriptor<T> Normalizer(string normalizer) => Assign(normalizer, (a, v) => a.Normalizer = v);
 	}
 }

@@ -52,12 +52,12 @@ namespace Nest
 		string IPatternTokenizer.Pattern { get; set; }
 
 		/// <inheritdoc />
-		public PatternTokenizerDescriptor Group(int? group) => Assign(a => a.Group = group);
+		public PatternTokenizerDescriptor Group(int? group) => Assign(group, (a, v) => a.Group = v);
 
 		/// <inheritdoc />
-		public PatternTokenizerDescriptor Pattern(string pattern) => Assign(a => a.Pattern = pattern);
+		public PatternTokenizerDescriptor Pattern(string pattern) => Assign(pattern, (a, v) => a.Pattern = v);
 
 		/// <inheritdoc />
-		public PatternTokenizerDescriptor Flags(string flags) => Assign(a => a.Flags = flags);
+		public PatternTokenizerDescriptor Flags(string flags) => Assign(flags, (a, v) => a.Flags = v);
 	}
 }

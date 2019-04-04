@@ -30,8 +30,8 @@ namespace Nest
 	{
 		Field IMissingAggregation.Field { get; set; }
 
-		public MissingAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public MissingAggregationDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public MissingAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public MissingAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
 	}
 }

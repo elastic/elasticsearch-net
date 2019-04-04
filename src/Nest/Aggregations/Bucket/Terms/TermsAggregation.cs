@@ -95,49 +95,49 @@ namespace Nest
 
 		int? ITermsAggregation.Size { get; set; }
 
-		public TermsAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public TermsAggregationDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public TermsAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public TermsAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
 
-		public TermsAggregationDescriptor<T> Script(string script) => Assign(a => a.Script = (InlineScript)script);
+		public TermsAggregationDescriptor<T> Script(string script) => Assign((InlineScript)script, (a, v) => a.Script = v);
 
 		public TermsAggregationDescriptor<T> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
-			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
+			Assign(scriptSelector, (a, v) => a.Script = v?.Invoke(new ScriptDescriptor()));
 
-		public TermsAggregationDescriptor<T> Size(int? size) => Assign(a => a.Size = size);
+		public TermsAggregationDescriptor<T> Size(int? size) => Assign(size, (a, v) => a.Size = v);
 
-		public TermsAggregationDescriptor<T> ShardSize(int? shardSize) => Assign(a => a.ShardSize = shardSize);
+		public TermsAggregationDescriptor<T> ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSize = v);
 
 		public TermsAggregationDescriptor<T> MinimumDocumentCount(int? minimumDocumentCount) =>
-			Assign(a => a.MinimumDocumentCount = minimumDocumentCount);
+			Assign(minimumDocumentCount, (a, v) => a.MinimumDocumentCount = v);
 
 		public TermsAggregationDescriptor<T> ExecutionHint(TermsAggregationExecutionHint? executionHint) =>
-			Assign(a => a.ExecutionHint = executionHint);
+			Assign(executionHint, (a, v) => a.ExecutionHint = v);
 
 		public TermsAggregationDescriptor<T> Order(Func<TermsOrderDescriptor<T>, IPromise<IList<TermsOrder>>> selector) =>
-			Assign(a => a.Order = selector?.Invoke(new TermsOrderDescriptor<T>())?.Value);
+			Assign(selector, (a, v) => a.Order = v?.Invoke(new TermsOrderDescriptor<T>())?.Value);
 
 		public TermsAggregationDescriptor<T> Include(long partition, long numberOfPartitions) =>
-			Assign(a => a.Include = new TermsInclude(partition, numberOfPartitions));
+			Assign(new TermsInclude(partition, numberOfPartitions), (a, v) => a.Include = v);
 
 		public TermsAggregationDescriptor<T> Include(string includePattern) =>
-			Assign(a => a.Include = new TermsInclude(includePattern));
+			Assign(new TermsInclude(includePattern), (a, v) => a.Include = v);
 
 		public TermsAggregationDescriptor<T> Include(IEnumerable<string> values) =>
-			Assign(a => a.Include = new TermsInclude(values));
+			Assign(new TermsInclude(values), (a, v) => a.Include = v);
 
 		public TermsAggregationDescriptor<T> Exclude(string excludePattern) =>
-			Assign(a => a.Exclude = new TermsExclude(excludePattern));
+			Assign(new TermsExclude(excludePattern), (a, v) => a.Exclude = v);
 
 		public TermsAggregationDescriptor<T> Exclude(IEnumerable<string> values) =>
-			Assign(a => a.Exclude = new TermsExclude(values));
+			Assign(new TermsExclude(values), (a, v) => a.Exclude = v);
 
 		public TermsAggregationDescriptor<T> CollectMode(TermsAggregationCollectMode? collectMode) =>
-			Assign(a => a.CollectMode = collectMode);
+			Assign(collectMode, (a, v) => a.CollectMode = v);
 
-		public TermsAggregationDescriptor<T> Missing(object missing) => Assign(a => a.Missing = missing);
+		public TermsAggregationDescriptor<T> Missing(object missing) => Assign(missing, (a, v) => a.Missing = v);
 
 		public TermsAggregationDescriptor<T> ShowTermDocCountError(bool? showTermDocCountError = true) =>
-			Assign(a => a.ShowTermDocCountError = showTermDocCountError);
+			Assign(showTermDocCountError, (a, v) => a.ShowTermDocCountError = v);
 	}
 }

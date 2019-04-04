@@ -203,67 +203,67 @@ namespace Nest
 		}
 
 		/// <inheritdoc cref="IDynamicIndexSettings.NumberOfReplicas" />
-		public TDescriptor NumberOfReplicas(int? numberOfReplicas) => Assign(a => a.NumberOfReplicas = numberOfReplicas);
+		public TDescriptor NumberOfReplicas(int? numberOfReplicas) => Assign(numberOfReplicas, (a, v) => a.NumberOfReplicas = v);
 
 		/// <inheritdoc cref="IDynamicIndexSettings.AutoExpandReplicas" />
-		public TDescriptor AutoExpandReplicas(AutoExpandReplicas autoExpandReplicas) => Assign(a => a.AutoExpandReplicas = autoExpandReplicas);
+		public TDescriptor AutoExpandReplicas(AutoExpandReplicas autoExpandReplicas) => Assign(autoExpandReplicas, (a, v) => a.AutoExpandReplicas = v);
 
 		/// <inheritdoc cref="IDynamicIndexSettings.DefaultPipeline" />
-		public TDescriptor DefaultPipeline(string defaultPipeline) => Assign(a => a.DefaultPipeline = defaultPipeline);
+		public TDescriptor DefaultPipeline(string defaultPipeline) => Assign(defaultPipeline, (a, v) => a.DefaultPipeline = v);
 
 		/// <inheritdoc cref="IDynamicIndexSettings.BlocksMetadata" />
-		public TDescriptor BlocksMetadata(bool? blocksMetadata = true) => Assign(a => a.BlocksMetadata = blocksMetadata);
+		public TDescriptor BlocksMetadata(bool? blocksMetadata = true) => Assign(blocksMetadata, (a, v) => a.BlocksMetadata = v);
 
 		/// <inheritdoc cref="IDynamicIndexSettings.BlocksRead" />
-		public TDescriptor BlocksRead(bool? blocksRead = true) => Assign(a => a.BlocksRead = blocksRead);
+		public TDescriptor BlocksRead(bool? blocksRead = true) => Assign(blocksRead, (a, v) => a.BlocksRead = v);
 
 		/// <inheritdoc cref="IDynamicIndexSettings.BlocksReadOnly" />
-		public TDescriptor BlocksReadOnly(bool? blocksReadOnly = true) => Assign(a => a.BlocksReadOnly = blocksReadOnly);
+		public TDescriptor BlocksReadOnly(bool? blocksReadOnly = true) => Assign(blocksReadOnly, (a, v) => a.BlocksReadOnly = v);
 
 		/// <inheritdoc cref="IDynamicIndexSettings.BlocksWrite" />
-		public TDescriptor BlocksWrite(bool? blocksWrite = true) => Assign(a => a.BlocksWrite = blocksWrite);
+		public TDescriptor BlocksWrite(bool? blocksWrite = true) => Assign(blocksWrite, (a, v) => a.BlocksWrite = v);
 
 		/// <inheritdoc cref="IDynamicIndexSettings.Priority" />
-		public TDescriptor Priority(int? priority) => Assign(a => a.Priority = priority);
+		public TDescriptor Priority(int? priority) => Assign(priority, (a, v) => a.Priority = v);
 
 		/// <inheritdoc cref="IDynamicIndexSettings.Merge" />
 		public TDescriptor Merge(Func<MergeSettingsDescriptor, IMergeSettings> merge) =>
-			Assign(a => a.Merge = merge?.Invoke(new MergeSettingsDescriptor()));
+			Assign(merge, (a, v) => a.Merge = v?.Invoke(new MergeSettingsDescriptor()));
 
 		/// <inheritdoc cref="IDynamicIndexSettings.RecoveryInitialShards" />
 		public TDescriptor RecoveryInitialShards(Union<int, RecoveryInitialShards> initialShards) =>
-			Assign(a => a.RecoveryInitialShards = initialShards);
+			Assign(initialShards, (a, v) => a.RecoveryInitialShards = v);
 
 		/// <inheritdoc cref="IDynamicIndexSettings.RequestsCacheEnabled" />
 		public TDescriptor RequestsCacheEnabled(bool? enable = true) =>
-			Assign(a => a.RequestsCacheEnabled = enable);
+			Assign(enable, (a, v) => a.RequestsCacheEnabled = v);
 
 		/// <inheritdoc cref="IDynamicIndexSettings.RefreshInterval" />
-		public TDescriptor RefreshInterval(Time time) => Assign(a => a.RefreshInterval = time);
+		public TDescriptor RefreshInterval(Time time) => Assign(time, (a, v) => a.RefreshInterval = v);
 
 		// TODO: align name for 7.x
 		/// <inheritdoc cref="IDynamicIndexSettings.RoutingAllocationTotalShardsPerNode" />
 		public TDescriptor TotalShardsPerNode(int? totalShardsPerNode) =>
-			Assign(a => a.RoutingAllocationTotalShardsPerNode = totalShardsPerNode);
+			Assign(totalShardsPerNode, (a, v) => a.RoutingAllocationTotalShardsPerNode = v);
 
 		/// <inheritdoc cref="IDynamicIndexSettings.SlowLog" />
 		public TDescriptor SlowLog(Func<SlowLogDescriptor, ISlowLog> slowLogSelector) =>
-			Assign(a => a.SlowLog = slowLogSelector?.Invoke(new SlowLogDescriptor()));
+			Assign(slowLogSelector, (a, v) => a.SlowLog = v?.Invoke(new SlowLogDescriptor()));
 
 		/// <inheritdoc cref="IDynamicIndexSettings.Translog" />
 		public TDescriptor Translog(Func<TranslogSettingsDescriptor, ITranslogSettings> translogSelector) =>
-			Assign(a => a.Translog = translogSelector?.Invoke(new TranslogSettingsDescriptor()));
+			Assign(translogSelector, (a, v) => a.Translog = v?.Invoke(new TranslogSettingsDescriptor()));
 
 		/// <inheritdoc cref="IDynamicIndexSettings.UnassignedNodeLeftDelayedTimeout" />
 		public TDescriptor UnassignedNodeLeftDelayedTimeout(Time time) =>
-			Assign(a => a.UnassignedNodeLeftDelayedTimeout = time);
+			Assign(time, (a, v) => a.UnassignedNodeLeftDelayedTimeout = v);
 
 		/// <inheritdoc cref="IDynamicIndexSettings.Analysis" />
 		public TDescriptor Analysis(Func<AnalysisDescriptor, IAnalysis> selector) =>
-			Assign(a => a.Analysis = selector?.Invoke(new AnalysisDescriptor()));
+			Assign(selector, (a, v) => a.Analysis = v?.Invoke(new AnalysisDescriptor()));
 
 		/// <inheritdoc cref="IDynamicIndexSettings.Similarity" />
 		public TDescriptor Similarity(Func<SimilaritiesDescriptor, IPromise<ISimilarities>> selector) =>
-			Assign(a => a.Similarity = selector?.Invoke(new SimilaritiesDescriptor())?.Value);
+			Assign(selector, (a, v) => a.Similarity = v?.Invoke(new SimilaritiesDescriptor())?.Value);
 	}
 }

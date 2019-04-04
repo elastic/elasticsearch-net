@@ -90,42 +90,42 @@ namespace Nest
 		Union<bool, ISourceFilter> IInnerHits.Source { get; set; }
 		bool? IInnerHits.Version { get; set; }
 
-		public InnerHitsDescriptor<T> From(int? from) => Assign(a => a.From = from);
+		public InnerHitsDescriptor<T> From(int? from) => Assign(from, (a, v) => a.From = v);
 
-		public InnerHitsDescriptor<T> Size(int? size) => Assign(a => a.Size = size);
+		public InnerHitsDescriptor<T> Size(int? size) => Assign(size, (a, v) => a.Size = v);
 
-		public InnerHitsDescriptor<T> Name(string name) => Assign(a => a.Name = name);
+		public InnerHitsDescriptor<T> Name(string name) => Assign(name, (a, v) => a.Name = v);
 
-		public InnerHitsDescriptor<T> Explain(bool? explain = true) => Assign(a => a.Explain = explain);
+		public InnerHitsDescriptor<T> Explain(bool? explain = true) => Assign(explain, (a, v) => a.Explain = v);
 
-		public InnerHitsDescriptor<T> Version(bool? version = true) => Assign(a => a.Version = version);
+		public InnerHitsDescriptor<T> Version(bool? version = true) => Assign(version, (a, v) => a.Version = v);
 
 		public InnerHitsDescriptor<T> Sort(Func<SortDescriptor<T>, IPromise<IList<ISort>>> selector) =>
-			Assign(a => a.Sort = selector?.Invoke(new SortDescriptor<T>())?.Value);
+			Assign(selector, (a, v) => a.Sort = v?.Invoke(new SortDescriptor<T>())?.Value);
 
 		/// <summary>
 		/// Allow to highlight search results on one or more fields. The implementation uses the either lucene fast-vector-highlighter or highlighter.
 		/// </summary>
 		public InnerHitsDescriptor<T> Highlight(Func<HighlightDescriptor<T>, IHighlight> selector) =>
-			Assign(a => a.Highlight = selector?.Invoke(new HighlightDescriptor<T>()));
+			Assign(selector, (a, v) => a.Highlight = v?.Invoke(new HighlightDescriptor<T>()));
 
-		public InnerHitsDescriptor<T> Source(bool enabled = true) => Assign(a => a.Source = enabled);
+		public InnerHitsDescriptor<T> Source(bool enabled = true) => Assign(enabled, (a, v) => a.Source = v);
 
 		public InnerHitsDescriptor<T> Source(Func<SourceFilterDescriptor<T>, ISourceFilter> selector) =>
-			Assign(a => a.Source = new Union<bool, ISourceFilter>(selector?.Invoke(new SourceFilterDescriptor<T>())));
+			Assign(selector, (a, v) => a.Source = new Union<bool, ISourceFilter>(v?.Invoke(new SourceFilterDescriptor<T>())));
 
 		public InnerHitsDescriptor<T> ScriptFields(Func<ScriptFieldsDescriptor, IPromise<IScriptFields>> selector) =>
-			Assign(a => a.ScriptFields = selector?.Invoke(new ScriptFieldsDescriptor())?.Value);
+			Assign(selector, (a, v) => a.ScriptFields = v?.Invoke(new ScriptFieldsDescriptor())?.Value);
 
 		public InnerHitsDescriptor<T> DocValueFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(a => a.DocValueFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+			Assign(fields, (a, v) => a.DocValueFields = v?.Invoke(new FieldsDescriptor<T>())?.Value);
 
-		public InnerHitsDescriptor<T> DocValueFields(Fields fields) => Assign(a => a.DocValueFields = fields);
+		public InnerHitsDescriptor<T> DocValueFields(Fields fields) => Assign(fields, (a, v) => a.DocValueFields = v);
 
-		public InnerHitsDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(a => a.IgnoreUnmapped = ignoreUnmapped);
+		public InnerHitsDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmapped = v);
 
 		/// <inheritdoc cref="IInnerHits.Collapse" />
 		public InnerHitsDescriptor<T> Collapse(Func<FieldCollapseDescriptor<T>, IFieldCollapse> collapseSelector) =>
-			Assign(a => a.Collapse = collapseSelector?.Invoke(new FieldCollapseDescriptor<T>()));
+			Assign(collapseSelector, (a, v) => a.Collapse = v?.Invoke(new FieldCollapseDescriptor<T>()));
 	}
 }

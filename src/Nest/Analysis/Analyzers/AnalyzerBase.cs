@@ -32,6 +32,6 @@ namespace Nest
 		string IAnalyzer.Type => Type;
 		string IAnalyzer.Version { get; set; }
 
-		public TAnalyzer Version(string version) => Assign(a => a.Version = version);
+		public TAnalyzer Version(string version) => Assign(version, (a, v) => a.Version = v);
 	}
 }

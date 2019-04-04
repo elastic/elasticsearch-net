@@ -33,12 +33,12 @@ namespace Nest
 		RebalanceEnable? IShardRebalancingSettings.RebalanceEnable { get; set; }
 
 		/// <inheritdoc />
-		public ShardRebalancingSettingsDescriptor RebalanceEnable(RebalanceEnable? enable) => Assign(a => a.RebalanceEnable = enable);
+		public ShardRebalancingSettingsDescriptor RebalanceEnable(RebalanceEnable? enable) => Assign(enable, (a, v) => a.RebalanceEnable = v);
 
 		/// <inheritdoc />
-		public ShardRebalancingSettingsDescriptor AllowRebalance(AllowRebalance? enable) => Assign(a => a.AllowRebalance = enable);
+		public ShardRebalancingSettingsDescriptor AllowRebalance(AllowRebalance? enable) => Assign(enable, (a, v) => a.AllowRebalance = v);
 
 		/// <inheritdoc />
-		public ShardRebalancingSettingsDescriptor ConcurrentRebalance(int? concurrent) => Assign(a => a.ConcurrentRebalance = concurrent);
+		public ShardRebalancingSettingsDescriptor ConcurrentRebalance(int? concurrent) => Assign(concurrent, (a, v) => a.ConcurrentRebalance = v);
 	}
 }

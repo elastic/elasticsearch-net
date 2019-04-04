@@ -32,16 +32,16 @@ namespace Nest
 		TypeName IBulkRequest.Type => Self.RouteValues.Get<TypeName>("type");
 
 		///<summary>Default index for items which don't provide one</summary>
-		public BulkDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public BulkDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public BulkDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
+		public BulkDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (IndexName)v));
 
 		///<summary>Default document type for items which don't provide one</summary>
-		public BulkDescriptor Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
+		public BulkDescriptor Type(TypeName type) => Assign(type, (a,v)=>a.RouteValues.Optional("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public BulkDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
+		public BulkDescriptor Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("type", (TypeName)v));
 
 		// Request parameters
 
@@ -88,7 +88,7 @@ namespace Nest
 		Names ICatAliasesRequest.Name => Self.RouteValues.Get<Names>("name");
 
 		///<summary>A comma-separated list of alias names to return</summary>
-		public CatAliasesDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
+		public CatAliasesDescriptor Name(Names name) => Assign(name, (a,v)=>a.RouteValues.Optional("name", v));
 
 		// Request parameters
 
@@ -116,7 +116,7 @@ namespace Nest
 		NodeIds ICatAllocationRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 
 		///<summary>A comma-separated list of node IDs or names to limit the returned information</summary>
-		public CatAllocationDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
+		public CatAllocationDescriptor NodeId(NodeIds nodeId) => Assign(nodeId, (a,v)=>a.RouteValues.Optional("node_id", v));
 
 		// Request parameters
 
@@ -146,10 +146,10 @@ namespace Nest
 		Indices ICatCountRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary>A comma-separated list of index names to limit the returned information</summary>
-		public CatCountDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public CatCountDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public CatCountDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public CatCountDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public CatCountDescriptor AllIndices() => this.Index(Indices.All);
@@ -180,10 +180,10 @@ namespace Nest
 		Fields ICatFielddataRequest.Fields => Self.RouteValues.Get<Fields>("fields");
 
 		///<summary>A comma-separated list of fields to return the fielddata size</summary>
-		public CatFielddataDescriptor Fields(Fields fields) => Assign(a=>a.RouteValues.Optional("fields", fields));
+		public CatFielddataDescriptor Fields(Fields fields) => Assign(fields, (a,v)=>a.RouteValues.Optional("fields", v));
 
 		///<summary>A comma-separated list of fields to return the fielddata size</summary>
-		public CatFielddataDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) => Assign(a => a.RouteValues.Optional("fields", (Fields)fields));
+		public CatFielddataDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) => Assign(fields, (a,v)=>a.RouteValues.Optional("fields", (Fields)v));
 
 		// Request parameters
 
@@ -249,10 +249,10 @@ namespace Nest
 		Indices ICatIndicesRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary>A comma-separated list of index names to limit the returned information</summary>
-		public CatIndicesDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public CatIndicesDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public CatIndicesDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public CatIndicesDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public CatIndicesDescriptor AllIndices() => this.Index(Indices.All);
@@ -401,10 +401,10 @@ namespace Nest
 		Indices ICatRecoveryRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary>A comma-separated list of index names to limit the returned information</summary>
-		public CatRecoveryDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public CatRecoveryDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public CatRecoveryDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public CatRecoveryDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public CatRecoveryDescriptor AllIndices() => this.Index(Indices.All);
@@ -457,10 +457,10 @@ namespace Nest
 		Indices ICatSegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary>A comma-separated list of index names to limit the returned information</summary>
-		public CatSegmentsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public CatSegmentsDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public CatSegmentsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public CatSegmentsDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public CatSegmentsDescriptor AllIndices() => this.Index(Indices.All);
@@ -489,10 +489,10 @@ namespace Nest
 		Indices ICatShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary>A comma-separated list of index names to limit the returned information</summary>
-		public CatShardsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public CatShardsDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public CatShardsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public CatShardsDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public CatShardsDescriptor AllIndices() => this.Index(Indices.All);
@@ -525,7 +525,7 @@ namespace Nest
 		Names ICatSnapshotsRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
 
 		///<summary>Name of repository from which to fetch the snapshot information</summary>
-		public CatSnapshotsDescriptor RepositoryName(Names repository) => Assign(a=>a.RouteValues.Optional("repository", repository));
+		public CatSnapshotsDescriptor RepositoryName(Names repository) => Assign(repository, (a,v)=>a.RouteValues.Optional("repository", v));
 
 		// Request parameters
 
@@ -582,7 +582,7 @@ namespace Nest
 		Name ICatTemplatesRequest.Name => Self.RouteValues.Get<Name>("name");
 
 		///<summary>A pattern that returned template names must match</summary>
-		public CatTemplatesDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
+		public CatTemplatesDescriptor Name(Name name) => Assign(name, (a,v)=>a.RouteValues.Optional("name", v));
 
 		// Request parameters
 
@@ -610,7 +610,7 @@ namespace Nest
 		Names ICatThreadPoolRequest.ThreadPoolPatterns => Self.RouteValues.Get<Names>("thread_pool_patterns");
 
 		///<summary>A comma-separated list of regular-expressions to filter the thread pools in the output</summary>
-		public CatThreadPoolDescriptor ThreadPoolPatterns(Names threadPoolPatterns) => Assign(a=>a.RouteValues.Optional("thread_pool_patterns", threadPoolPatterns));
+		public CatThreadPoolDescriptor ThreadPoolPatterns(Names threadPoolPatterns) => Assign(threadPoolPatterns, (a,v)=>a.RouteValues.Optional("thread_pool_patterns", v));
 
 		// Request parameters
 
@@ -678,10 +678,10 @@ namespace Nest
 		Indices IClusterHealthRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary>Limit the information returned to a specific index</summary>
-		public ClusterHealthDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public ClusterHealthDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public ClusterHealthDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public ClusterHealthDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public ClusterHealthDescriptor AllIndices() => this.Index(Indices.All);
@@ -773,16 +773,16 @@ namespace Nest
 		Metrics IClusterStateRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 
 		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public ClusterStateDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public ClusterStateDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public ClusterStateDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public ClusterStateDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public ClusterStateDescriptor AllIndices() => this.Index(Indices.All);
 
 		///<summary>Limit the information returned to the specified metrics</summary>
-		public ClusterStateDescriptor Metric(ClusterStateMetric metric) => Assign(a=>a.RouteValues.Optional("metric", (Metrics)metric));
+		public ClusterStateDescriptor Metric(ClusterStateMetric metric) => Assign(metric, (a,v)=>a.RouteValues.Optional("metric", (Metrics)v));
 
 		// Request parameters
 
@@ -812,7 +812,7 @@ namespace Nest
 		NodeIds IClusterStatsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
-		public ClusterStatsDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
+		public ClusterStatsDescriptor NodeId(NodeIds nodeId) => Assign(nodeId, (a,v)=>a.RouteValues.Optional("node_id", v));
 
 		// Request parameters
 
@@ -831,19 +831,19 @@ namespace Nest
 		Types ICountRequest.Type => Self.RouteValues.Get<Types>("type");
 
 		///<summary>A comma-separated list of indices to restrict the results</summary>
-		public CountDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public CountDescriptor<T> Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public CountDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public CountDescriptor<T> Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public CountDescriptor<T> AllIndices() => this.Index(Indices.All);
 
 		///<summary>A comma-separated list of types to restrict the results</summary>
-		public CountDescriptor<T> Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
+		public CountDescriptor<T> Type(Types type) => Assign(type, (a,v)=>a.RouteValues.Optional("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public CountDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
+		public CountDescriptor<T> Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("type", (Types)v));
 
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public CountDescriptor<T> AllTypes() => this.Type(Types.All);
@@ -905,16 +905,16 @@ namespace Nest
 		TypeName ICreateRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
 
 		///<summary>The name of the index</summary>
-		public CreateDescriptor<TDocument> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+		public CreateDescriptor<TDocument> Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public CreateDescriptor<TDocument> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+		public CreateDescriptor<TDocument> Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
 
 		///<summary>The type of the document</summary>
-		public CreateDescriptor<TDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+		public CreateDescriptor<TDocument> Type(TypeName type) => Assign(type, (a,v)=>a.RouteValues.Required("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public CreateDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+		public CreateDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("type", (TypeName)v));
 
 		// Request parameters
 
@@ -962,16 +962,16 @@ namespace Nest
 		TypeName IDeleteRequest.Type => Self.RouteValues.Get<TypeName>("type");
 
 		///<summary>The name of the index</summary>
-		public DeleteDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+		public DeleteDescriptor<T> Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public DeleteDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+		public DeleteDescriptor<T> Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
 
 		///<summary>The type of the document</summary>
-		public DeleteDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+		public DeleteDescriptor<T> Type(TypeName type) => Assign(type, (a,v)=>a.RouteValues.Required("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public DeleteDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+		public DeleteDescriptor<T> Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("type", (TypeName)v));
 
 		// Request parameters
 
@@ -1012,19 +1012,19 @@ namespace Nest
 		Types IDeleteByQueryRequest.Type => Self.RouteValues.Get<Types>("type");
 
 		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public DeleteByQueryDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
+		public DeleteByQueryDescriptor<T> Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public DeleteByQueryDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
+		public DeleteByQueryDescriptor<T> Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public DeleteByQueryDescriptor<T> AllIndices() => this.Index(Indices.All);
 
 		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>
-		public DeleteByQueryDescriptor<T> Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
+		public DeleteByQueryDescriptor<T> Type(Types type) => Assign(type, (a,v)=>a.RouteValues.Optional("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public DeleteByQueryDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
+		public DeleteByQueryDescriptor<T> Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("type", (Types)v));
 
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public DeleteByQueryDescriptor<T> AllTypes() => this.Type(Types.All);
@@ -1158,16 +1158,16 @@ namespace Nest
 		TypeName IDocumentExistsRequest.Type => Self.RouteValues.Get<TypeName>("type");
 
 		///<summary>The name of the index</summary>
-		public DocumentExistsDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+		public DocumentExistsDescriptor<T> Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public DocumentExistsDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+		public DocumentExistsDescriptor<T> Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
 
 		///<summary>The type of the document (use `_all` to fetch the first document matching the ID across all types)</summary>
-		public DocumentExistsDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+		public DocumentExistsDescriptor<T> Type(TypeName type) => Assign(type, (a,v)=>a.RouteValues.Required("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public DocumentExistsDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+		public DocumentExistsDescriptor<T> Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("type", (TypeName)v));
 
 		// Request parameters
 
@@ -1230,16 +1230,16 @@ namespace Nest
 		TypeName ISourceExistsRequest.Type => Self.RouteValues.Get<TypeName>("type");
 
 		///<summary>The name of the index</summary>
-		public SourceExistsDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+		public SourceExistsDescriptor<T> Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public SourceExistsDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+		public SourceExistsDescriptor<T> Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
 
 		///<summary>The type of the document; use `_all` to fetch the first document matching the ID across all types</summary>
-		public SourceExistsDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+		public SourceExistsDescriptor<T> Type(TypeName type) => Assign(type, (a,v)=>a.RouteValues.Required("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public SourceExistsDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+		public SourceExistsDescriptor<T> Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("type", (TypeName)v));
 
 		// Request parameters
 
@@ -1297,16 +1297,16 @@ namespace Nest
 		TypeName IExplainRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
 
 		///<summary>The name of the index</summary>
-		public ExplainDescriptor<TDocument> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+		public ExplainDescriptor<TDocument> Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public ExplainDescriptor<TDocument> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+		public ExplainDescriptor<TDocument> Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
 
 		///<summary>The type of the document</summary>
-		public ExplainDescriptor<TDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+		public ExplainDescriptor<TDocument> Type(TypeName type) => Assign(type, (a,v)=>a.RouteValues.Required("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public ExplainDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+		public ExplainDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("type", (TypeName)v));
 
 		// Request parameters
 
@@ -1357,10 +1357,10 @@ namespace Nest
 		Indices IFieldCapabilitiesRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public FieldCapabilitiesDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public FieldCapabilitiesDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public FieldCapabilitiesDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public FieldCapabilitiesDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public FieldCapabilitiesDescriptor AllIndices() => this.Index(Indices.All);
@@ -1399,16 +1399,16 @@ namespace Nest
 		TypeName IGetRequest.Type => Self.RouteValues.Get<TypeName>("type");
 
 		///<summary>The name of the index</summary>
-		public GetDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+		public GetDescriptor<T> Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public GetDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+		public GetDescriptor<T> Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
 
 		///<summary>The type of the document (use `_all` to fetch the first document matching the ID across all types)</summary>
-		public GetDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+		public GetDescriptor<T> Type(TypeName type) => Assign(type, (a,v)=>a.RouteValues.Required("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public GetDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+		public GetDescriptor<T> Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("type", (TypeName)v));
 
 		// Request parameters
 
@@ -1485,16 +1485,16 @@ namespace Nest
 		TypeName ISourceRequest.Type => Self.RouteValues.Get<TypeName>("type");
 
 		///<summary>The name of the index</summary>
-		public SourceDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+		public SourceDescriptor<T> Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public SourceDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+		public SourceDescriptor<T> Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
 
 		///<summary>The type of the document; use `_all` to fetch the first document matching the ID across all types</summary>
-		public SourceDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+		public SourceDescriptor<T> Type(TypeName type) => Assign(type, (a,v)=>a.RouteValues.Required("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public SourceDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+		public SourceDescriptor<T> Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("type", (TypeName)v));
 
 		// Request parameters
 
@@ -1551,19 +1551,19 @@ namespace Nest
 		TypeName IIndexRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
 
 		///<summary>Document ID</summary>
-		public IndexDescriptor<TDocument> Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
+		public IndexDescriptor<TDocument> Id(Id id) => Assign(id, (a,v)=>a.RouteValues.Optional("id", v));
 
 		///<summary>The name of the index</summary>
-		public IndexDescriptor<TDocument> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+		public IndexDescriptor<TDocument> Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public IndexDescriptor<TDocument> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+		public IndexDescriptor<TDocument> Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
 
 		///<summary>The type of the document</summary>
-		public IndexDescriptor<TDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+		public IndexDescriptor<TDocument> Type(TypeName type) => Assign(type, (a,v)=>a.RouteValues.Required("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public IndexDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+		public IndexDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("type", (TypeName)v));
 
 		// Request parameters
 
@@ -1606,10 +1606,10 @@ namespace Nest
 		IndexName IAnalyzeRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
 		///<summary>The name of the index to scope the operation</summary>
-		public AnalyzeDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public AnalyzeDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public AnalyzeDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
+		public AnalyzeDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (IndexName)v));
 
 		// Request parameters
 
@@ -1629,10 +1629,10 @@ namespace Nest
 		Indices IClearCacheRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary>A comma-separated list of index name to limit the operation</summary>
-		public ClearCacheDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public ClearCacheDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public ClearCacheDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public ClearCacheDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public ClearCacheDescriptor AllIndices() => this.Index(Indices.All);
@@ -1672,10 +1672,10 @@ namespace Nest
 		Indices ICloseIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary>A comma separated list of indices to close</summary>
-		public CloseIndexDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
+		public CloseIndexDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public CloseIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
+		public CloseIndexDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public CloseIndexDescriptor AllIndices() => this.Index(Indices.All);
@@ -1703,10 +1703,10 @@ namespace Nest
 		IndexName ICreateIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
 		///<summary>The name of the index</summary>
-		public CreateIndexDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+		public CreateIndexDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public CreateIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+		public CreateIndexDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
 
 		// Request parameters
 
@@ -1732,10 +1732,10 @@ namespace Nest
 		Indices IDeleteIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary>A comma-separated list of indices to delete; use `_all` or `*` string to delete all indices</summary>
-		public DeleteIndexDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
+		public DeleteIndexDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public DeleteIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
+		public DeleteIndexDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public DeleteIndexDescriptor AllIndices() => this.Index(Indices.All);
@@ -1765,10 +1765,10 @@ namespace Nest
 		Names IDeleteAliasRequest.Name => Self.RouteValues.Get<Names>("name");
 
 		///<summary>A comma-separated list of index names (supports wildcards); use `_all` for all indices</summary>
-		public DeleteAliasDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
+		public DeleteAliasDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public DeleteAliasDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
+		public DeleteAliasDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public DeleteAliasDescriptor AllIndices() => this.Index(Indices.All);
@@ -1806,10 +1806,10 @@ namespace Nest
 		Indices IIndexExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary>A comma-separated list of index names</summary>
-		public IndexExistsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
+		public IndexExistsDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public IndexExistsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
+		public IndexExistsDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public IndexExistsDescriptor AllIndices() => this.Index(Indices.All);
@@ -1840,10 +1840,10 @@ namespace Nest
 		Names IAliasExistsRequest.Name => Self.RouteValues.Get<Names>("name");
 
 		///<summary>A comma-separated list of index names to filter aliases</summary>
-		public AliasExistsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public AliasExistsDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public AliasExistsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public AliasExistsDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public AliasExistsDescriptor AllIndices() => this.Index(Indices.All);
@@ -1889,19 +1889,19 @@ namespace Nest
 		Types ITypeExistsRequest.Type => Self.RouteValues.Get<Types>("type");
 
 		///<summary>A comma-separated list of index names; use `_all` to check the types across all indices</summary>
-		public TypeExistsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
+		public TypeExistsDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public TypeExistsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
+		public TypeExistsDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public TypeExistsDescriptor AllIndices() => this.Index(Indices.All);
 
 		///<summary>A comma-separated list of document types to check</summary>
-		public TypeExistsDescriptor Type(Types type) => Assign(a=>a.RouteValues.Required("type", type));
+		public TypeExistsDescriptor Type(Types type) => Assign(type, (a,v)=>a.RouteValues.Required("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public TypeExistsDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (Types)typeof(TOther)));
+		public TypeExistsDescriptor Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("type", (Types)v));
 
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public TypeExistsDescriptor AllTypes() => this.Type(Types.All);
@@ -1926,10 +1926,10 @@ namespace Nest
 		Indices IFlushRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</summary>
-		public FlushDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public FlushDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public FlushDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public FlushDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public FlushDescriptor AllIndices() => this.Index(Indices.All);
@@ -1956,10 +1956,10 @@ namespace Nest
 		Indices ISyncedFlushRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</summary>
-		public SyncedFlushDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public SyncedFlushDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public SyncedFlushDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public SyncedFlushDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public SyncedFlushDescriptor AllIndices() => this.Index(Indices.All);
@@ -1982,10 +1982,10 @@ namespace Nest
 		Indices IForceMergeRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public ForceMergeDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public ForceMergeDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public ForceMergeDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public ForceMergeDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public ForceMergeDescriptor AllIndices() => this.Index(Indices.All);
@@ -2015,10 +2015,10 @@ namespace Nest
 		Indices IGetIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary>A comma-separated list of index names</summary>
-		public GetIndexDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
+		public GetIndexDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public GetIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
+		public GetIndexDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public GetIndexDescriptor AllIndices() => this.Index(Indices.All);
@@ -2052,16 +2052,16 @@ namespace Nest
 		Names IGetAliasRequest.Name => Self.RouteValues.Get<Names>("name");
 
 		///<summary>A comma-separated list of index names to filter aliases</summary>
-		public GetAliasDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public GetAliasDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public GetAliasDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public GetAliasDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public GetAliasDescriptor AllIndices() => this.Index(Indices.All);
 
 		///<summary>A comma-separated list of alias names to return</summary>
-		public GetAliasDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
+		public GetAliasDescriptor Name(Names name) => Assign(name, (a,v)=>a.RouteValues.Optional("name", v));
 
 		// Request parameters
 
@@ -2086,19 +2086,19 @@ namespace Nest
 		Fields IGetFieldMappingRequest.Fields => Self.RouteValues.Get<Fields>("fields");
 
 		///<summary>A comma-separated list of index names</summary>
-		public GetFieldMappingDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public GetFieldMappingDescriptor<T> Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public GetFieldMappingDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public GetFieldMappingDescriptor<T> Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public GetFieldMappingDescriptor<T> AllIndices() => this.Index(Indices.All);
 
 		///<summary>A comma-separated list of document types</summary>
-		public GetFieldMappingDescriptor<T> Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
+		public GetFieldMappingDescriptor<T> Type(Types type) => Assign(type, (a,v)=>a.RouteValues.Optional("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public GetFieldMappingDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
+		public GetFieldMappingDescriptor<T> Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("type", (Types)v));
 
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public GetFieldMappingDescriptor<T> AllTypes() => this.Type(Types.All);
@@ -2128,19 +2128,19 @@ namespace Nest
 		Types IGetMappingRequest.Type => Self.RouteValues.Get<Types>("type");
 
 		///<summary>A comma-separated list of index names</summary>
-		public GetMappingDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public GetMappingDescriptor<T> Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public GetMappingDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public GetMappingDescriptor<T> Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public GetMappingDescriptor<T> AllIndices() => this.Index(Indices.All);
 
 		///<summary>A comma-separated list of document types</summary>
-		public GetMappingDescriptor<T> Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
+		public GetMappingDescriptor<T> Type(Types type) => Assign(type, (a,v)=>a.RouteValues.Optional("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public GetMappingDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
+		public GetMappingDescriptor<T> Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("type", (Types)v));
 
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public GetMappingDescriptor<T> AllTypes() => this.Type(Types.All);
@@ -2170,16 +2170,16 @@ namespace Nest
 		Names IGetIndexSettingsRequest.Name => Self.RouteValues.Get<Names>("name");
 
 		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public GetIndexSettingsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public GetIndexSettingsDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public GetIndexSettingsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public GetIndexSettingsDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public GetIndexSettingsDescriptor AllIndices() => this.Index(Indices.All);
 
 		///<summary>The name of the settings that should be included</summary>
-		public GetIndexSettingsDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
+		public GetIndexSettingsDescriptor Name(Names name) => Assign(name, (a,v)=>a.RouteValues.Optional("name", v));
 
 		// Request parameters
 
@@ -2207,7 +2207,7 @@ namespace Nest
 		Names IGetIndexTemplateRequest.Name => Self.RouteValues.Get<Names>("name");
 
 		///<summary>The comma separated names of the index templates</summary>
-		public GetIndexTemplateDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
+		public GetIndexTemplateDescriptor Name(Names name) => Assign(name, (a,v)=>a.RouteValues.Optional("name", v));
 
 		// Request parameters
 
@@ -2229,10 +2229,10 @@ namespace Nest
 		Indices IUpgradeStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public UpgradeStatusDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public UpgradeStatusDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public UpgradeStatusDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public UpgradeStatusDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public UpgradeStatusDescriptor AllIndices() => this.Index(Indices.All);
@@ -2256,10 +2256,10 @@ namespace Nest
 		Indices IOpenIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary>A comma separated list of indices to open</summary>
-		public OpenIndexDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
+		public OpenIndexDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public OpenIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
+		public OpenIndexDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public OpenIndexDescriptor AllIndices() => this.Index(Indices.All);
@@ -2291,10 +2291,10 @@ namespace Nest
 		Name IPutAliasRequest.Name => Self.RouteValues.Get<Name>("name");
 
 		///<summary>A comma-separated list of index names the alias should point to (supports wildcards); use `_all` to perform the operation on all indices.</summary>
-		public PutAliasDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
+		public PutAliasDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public PutAliasDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
+		public PutAliasDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public PutAliasDescriptor AllIndices() => this.Index(Indices.All);
@@ -2316,10 +2316,10 @@ namespace Nest
 		TypeName IPutMappingRequest.Type => Self.RouteValues.Get<TypeName>("type");
 
 		///<summary>A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</summary>
-		public PutMappingDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public PutMappingDescriptor<T> Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public PutMappingDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public PutMappingDescriptor<T> Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public PutMappingDescriptor<T> AllIndices() => this.Index(Indices.All);
@@ -2357,10 +2357,10 @@ namespace Nest
 		Indices IUpdateIndexSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public UpdateIndexSettingsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public UpdateIndexSettingsDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public UpdateIndexSettingsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public UpdateIndexSettingsDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public UpdateIndexSettingsDescriptor AllIndices() => this.Index(Indices.All);
@@ -2413,10 +2413,10 @@ namespace Nest
 		Indices IRecoveryStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public RecoveryStatusDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public RecoveryStatusDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public RecoveryStatusDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public RecoveryStatusDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public RecoveryStatusDescriptor AllIndices() => this.Index(Indices.All);
@@ -2437,10 +2437,10 @@ namespace Nest
 		Indices IRefreshRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public RefreshDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public RefreshDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public RefreshDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public RefreshDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public RefreshDescriptor AllIndices() => this.Index(Indices.All);
@@ -2465,7 +2465,7 @@ namespace Nest
 		IndexName IRolloverIndexRequest.NewIndex => Self.RouteValues.Get<IndexName>("new_index");
 
 		///<summary>The name of the rollover index</summary>
-		public RolloverIndexDescriptor NewIndex(IndexName newIndex) => Assign(a=>a.RouteValues.Optional("new_index", newIndex));
+		public RolloverIndexDescriptor NewIndex(IndexName newIndex) => Assign(newIndex, (a,v)=>a.RouteValues.Optional("new_index", v));
 
 		// Request parameters
 
@@ -2489,10 +2489,10 @@ namespace Nest
 		Indices ISegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public SegmentsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public SegmentsDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public SegmentsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public SegmentsDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public SegmentsDescriptor AllIndices() => this.Index(Indices.All);
@@ -2517,10 +2517,10 @@ namespace Nest
 		Indices IIndicesShardStoresRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public IndicesShardStoresDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public IndicesShardStoresDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public IndicesShardStoresDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public IndicesShardStoresDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public IndicesShardStoresDescriptor AllIndices() => this.Index(Indices.All);
@@ -2548,10 +2548,10 @@ namespace Nest
 		IndexName IShrinkIndexRequest.Target => Self.RouteValues.Get<IndexName>("target");
 
 		///<summary>The name of the source index to shrink</summary>
-		public ShrinkIndexDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+		public ShrinkIndexDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public ShrinkIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+		public ShrinkIndexDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
 
 		// Request parameters
 
@@ -2577,10 +2577,10 @@ namespace Nest
 		IndexName ISplitIndexRequest.Target => Self.RouteValues.Get<IndexName>("target");
 
 		///<summary>The name of the source index to split</summary>
-		public SplitIndexDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+		public SplitIndexDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public SplitIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+		public SplitIndexDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
 
 		// Request parameters
 
@@ -2604,16 +2604,16 @@ namespace Nest
 		Metrics IIndicesStatsRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 
 		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public IndicesStatsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public IndicesStatsDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public IndicesStatsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public IndicesStatsDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public IndicesStatsDescriptor AllIndices() => this.Index(Indices.All);
 
 		///<summary>Limit the information returned the specific metrics.</summary>
-		public IndicesStatsDescriptor Metric(IndicesStatsMetric metric) => Assign(a=>a.RouteValues.Optional("metric", (Metrics)metric));
+		public IndicesStatsDescriptor Metric(IndicesStatsMetric metric) => Assign(metric, (a,v)=>a.RouteValues.Optional("metric", (Metrics)v));
 
 		// Request parameters
 
@@ -2660,10 +2660,10 @@ namespace Nest
 		Indices IUpgradeRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public UpgradeDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public UpgradeDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public UpgradeDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public UpgradeDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public UpgradeDescriptor AllIndices() => this.Index(Indices.All);
@@ -2691,19 +2691,19 @@ namespace Nest
 		Types IValidateQueryRequest.Type => Self.RouteValues.Get<Types>("type");
 
 		///<summary>A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public ValidateQueryDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public ValidateQueryDescriptor<T> Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public ValidateQueryDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public ValidateQueryDescriptor<T> Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public ValidateQueryDescriptor<T> AllIndices() => this.Index(Indices.All);
 
 		///<summary>A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</summary>
-		public ValidateQueryDescriptor<T> Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
+		public ValidateQueryDescriptor<T> Type(Types type) => Assign(type, (a,v)=>a.RouteValues.Optional("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public ValidateQueryDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
+		public ValidateQueryDescriptor<T> Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("type", (Types)v));
 
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public ValidateQueryDescriptor<T> AllTypes() => this.Type(Types.All);
@@ -2768,7 +2768,7 @@ namespace Nest
 		Id IGetPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
 
 		///<summary>Comma separated list of pipeline ids. Wildcards supported</summary>
-		public GetPipelineDescriptor Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
+		public GetPipelineDescriptor Id(Id id) => Assign(id, (a,v)=>a.RouteValues.Optional("id", v));
 
 		// Request parameters
 
@@ -2808,7 +2808,7 @@ namespace Nest
 		Id ISimulatePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
 
 		///<summary>Pipeline ID</summary>
-		public SimulatePipelineDescriptor Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
+		public SimulatePipelineDescriptor Id(Id id) => Assign(id, (a,v)=>a.RouteValues.Optional("id", v));
 
 		// Request parameters
 
@@ -2825,16 +2825,16 @@ namespace Nest
 		TypeName IMultiGetRequest.Type => Self.RouteValues.Get<TypeName>("type");
 
 		///<summary>The name of the index</summary>
-		public MultiGetDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public MultiGetDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public MultiGetDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
+		public MultiGetDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (IndexName)v));
 
 		///<summary>The type of the document</summary>
-		public MultiGetDescriptor Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
+		public MultiGetDescriptor Type(TypeName type) => Assign(type, (a,v)=>a.RouteValues.Optional("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public MultiGetDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
+		public MultiGetDescriptor Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("type", (TypeName)v));
 
 		// Request parameters
 
@@ -2875,19 +2875,19 @@ namespace Nest
 		Types IMultiSearchRequest.Type => Self.RouteValues.Get<Types>("type");
 
 		///<summary>A comma-separated list of index names to use as default</summary>
-		public MultiSearchDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public MultiSearchDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public MultiSearchDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public MultiSearchDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public MultiSearchDescriptor AllIndices() => this.Index(Indices.All);
 
 		///<summary>A comma-separated list of document types to use as default</summary>
-		public MultiSearchDescriptor Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
+		public MultiSearchDescriptor Type(Types type) => Assign(type, (a,v)=>a.RouteValues.Optional("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public MultiSearchDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
+		public MultiSearchDescriptor Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("type", (Types)v));
 
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public MultiSearchDescriptor AllTypes() => this.Type(Types.All);
@@ -2917,19 +2917,19 @@ namespace Nest
 		Types IMultiSearchTemplateRequest.Type => Self.RouteValues.Get<Types>("type");
 
 		///<summary>A comma-separated list of index names to use as default</summary>
-		public MultiSearchTemplateDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public MultiSearchTemplateDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public MultiSearchTemplateDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public MultiSearchTemplateDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public MultiSearchTemplateDescriptor AllIndices() => this.Index(Indices.All);
 
 		///<summary>A comma-separated list of document types to use as default</summary>
-		public MultiSearchTemplateDescriptor Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
+		public MultiSearchTemplateDescriptor Type(Types type) => Assign(type, (a,v)=>a.RouteValues.Optional("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public MultiSearchTemplateDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
+		public MultiSearchTemplateDescriptor Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("type", (Types)v));
 
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public MultiSearchTemplateDescriptor AllTypes() => this.Type(Types.All);
@@ -2955,16 +2955,16 @@ namespace Nest
 		TypeName IMultiTermVectorsRequest.Type => Self.RouteValues.Get<TypeName>("type");
 
 		///<summary>The index in which the document resides.</summary>
-		public MultiTermVectorsDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public MultiTermVectorsDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public MultiTermVectorsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
+		public MultiTermVectorsDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (IndexName)v));
 
 		///<summary>The type of the document.</summary>
-		public MultiTermVectorsDescriptor Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
+		public MultiTermVectorsDescriptor Type(TypeName type) => Assign(type, (a,v)=>a.RouteValues.Optional("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public MultiTermVectorsDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
+		public MultiTermVectorsDescriptor Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("type", (TypeName)v));
 
 		// Request parameters
 
@@ -3012,7 +3012,7 @@ namespace Nest
 		NodeIds INodesHotThreadsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
-		public NodesHotThreadsDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
+		public NodesHotThreadsDescriptor NodeId(NodeIds nodeId) => Assign(nodeId, (a,v)=>a.RouteValues.Optional("node_id", v));
 
 		// Request parameters
 
@@ -3039,10 +3039,10 @@ namespace Nest
 		Metrics INodesInfoRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
-		public NodesInfoDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
+		public NodesInfoDescriptor NodeId(NodeIds nodeId) => Assign(nodeId, (a,v)=>a.RouteValues.Optional("node_id", v));
 
 		///<summary>A comma-separated list of metrics you wish returned. Leave empty to return all.</summary>
-		public NodesInfoDescriptor Metric(NodesInfoMetric metric) => Assign(a=>a.RouteValues.Optional("metric", (Metrics)metric));
+		public NodesInfoDescriptor Metric(NodesInfoMetric metric) => Assign(metric, (a,v)=>a.RouteValues.Optional("metric", (Metrics)v));
 
 		// Request parameters
 
@@ -3060,7 +3060,7 @@ namespace Nest
 		NodeIds IReloadSecureSettingsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 
 		///<summary>A comma-separated list of node IDs to span the reload/reinit call. Should stay empty because reloading usually involves all cluster nodes.</summary>
-		public ReloadSecureSettingsDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
+		public ReloadSecureSettingsDescriptor NodeId(NodeIds nodeId) => Assign(nodeId, (a,v)=>a.RouteValues.Optional("node_id", v));
 
 		// Request parameters
 
@@ -3078,13 +3078,13 @@ namespace Nest
 		NodeIds INodesStatsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 
 		///<summary>Limit the information returned to the specified metrics</summary>
-		public NodesStatsDescriptor Metric(NodesStatsMetric metric) => Assign(a=>a.RouteValues.Optional("metric", (Metrics)metric));
+		public NodesStatsDescriptor Metric(NodesStatsMetric metric) => Assign(metric, (a,v)=>a.RouteValues.Optional("metric", (Metrics)v));
 
 		///<summary>Limit the information returned for `indices` metric to the specific index metrics. Isn't used if `indices` (or `all`) metric isn't specified.</summary>
-		public NodesStatsDescriptor IndexMetric(NodesStatsIndexMetric indexMetric) => Assign(a=>a.RouteValues.Optional("index_metric", (IndexMetrics)indexMetric));
+		public NodesStatsDescriptor IndexMetric(NodesStatsIndexMetric indexMetric) => Assign(indexMetric, (a,v)=>a.RouteValues.Optional("index_metric", (IndexMetrics)v));
 
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
-		public NodesStatsDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
+		public NodesStatsDescriptor NodeId(NodeIds nodeId) => Assign(nodeId, (a,v)=>a.RouteValues.Optional("node_id", v));
 
 		// Request parameters
 
@@ -3124,10 +3124,10 @@ namespace Nest
 		NodeIds INodesUsageRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 
 		///<summary>Limit the information returned to the specified metrics</summary>
-		public NodesUsageDescriptor Metric(NodesUsageMetric metric) => Assign(a=>a.RouteValues.Optional("metric", (Metrics)metric));
+		public NodesUsageDescriptor Metric(NodesUsageMetric metric) => Assign(metric, (a,v)=>a.RouteValues.Optional("metric", (Metrics)v));
 
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
-		public NodesUsageDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
+		public NodesUsageDescriptor NodeId(NodeIds nodeId) => Assign(nodeId, (a,v)=>a.RouteValues.Optional("node_id", v));
 
 		// Request parameters
 
@@ -3153,7 +3153,7 @@ namespace Nest
 		Name IPutScriptRequest.Context => Self.RouteValues.Get<Name>("context");
 
 		///<summary>Script context</summary>
-		public PutScriptDescriptor Context(Name context) => Assign(a=>a.RouteValues.Optional("context", context));
+		public PutScriptDescriptor Context(Name context) => Assign(context, (a,v)=>a.RouteValues.Optional("context", v));
 
 		// Request parameters
 
@@ -3207,7 +3207,7 @@ namespace Nest
 		Id IRenderSearchTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
 
 		///<summary>The id of the stored search template</summary>
-		public RenderSearchTemplateDescriptor Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
+		public RenderSearchTemplateDescriptor Id(Id id) => Assign(id, (a,v)=>a.RouteValues.Optional("id", v));
 
 		// Request parameters
 
@@ -3242,19 +3242,19 @@ namespace Nest
 		Types ISearchRequest.Type => Self.RouteValues.Get<Types>("type");
 
 		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public SearchDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public SearchDescriptor<T> Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public SearchDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public SearchDescriptor<T> Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public SearchDescriptor<T> AllIndices() => this.Index(Indices.All);
 
 		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>
-		public SearchDescriptor<T> Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
+		public SearchDescriptor<T> Type(Types type) => Assign(type, (a,v)=>a.RouteValues.Optional("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public SearchDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
+		public SearchDescriptor<T> Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("type", (Types)v));
 
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public SearchDescriptor<T> AllTypes() => this.Type(Types.All);
@@ -3333,10 +3333,10 @@ namespace Nest
 		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public SearchShardsDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public SearchShardsDescriptor<T> Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public SearchShardsDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public SearchShardsDescriptor<T> Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public SearchShardsDescriptor<T> AllIndices() => this.Index(Indices.All);
@@ -3372,19 +3372,19 @@ namespace Nest
 		Types ISearchTemplateRequest.Type => Self.RouteValues.Get<Types>("type");
 
 		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public SearchTemplateDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public SearchTemplateDescriptor<T> Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public SearchTemplateDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public SearchTemplateDescriptor<T> Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public SearchTemplateDescriptor<T> AllIndices() => this.Index(Indices.All);
 
 		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>
-		public SearchTemplateDescriptor<T> Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
+		public SearchTemplateDescriptor<T> Type(Types type) => Assign(type, (a,v)=>a.RouteValues.Optional("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public SearchTemplateDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
+		public SearchTemplateDescriptor<T> Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("type", (Types)v));
 
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public SearchTemplateDescriptor<T> AllTypes() => this.Type(Types.All);
@@ -3519,7 +3519,7 @@ namespace Nest
 		Names IGetRepositoryRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
 
 		///<summary>A comma-separated list of repository names</summary>
-		public GetRepositoryDescriptor RepositoryName(Names repository) => Assign(a=>a.RouteValues.Optional("repository", repository));
+		public GetRepositoryDescriptor RepositoryName(Names repository) => Assign(repository, (a,v)=>a.RouteValues.Optional("repository", v));
 
 		// Request parameters
 
@@ -3556,10 +3556,10 @@ namespace Nest
 		Names ISnapshotStatusRequest.Snapshot => Self.RouteValues.Get<Names>("snapshot");
 
 		///<summary>A repository name</summary>
-		public SnapshotStatusDescriptor RepositoryName(Name repository) => Assign(a=>a.RouteValues.Optional("repository", repository));
+		public SnapshotStatusDescriptor RepositoryName(Name repository) => Assign(repository, (a,v)=>a.RouteValues.Optional("repository", v));
 
 		///<summary>A comma-separated list of snapshot names</summary>
-		public SnapshotStatusDescriptor Snapshot(Names snapshot) => Assign(a=>a.RouteValues.Optional("snapshot", snapshot));
+		public SnapshotStatusDescriptor Snapshot(Names snapshot) => Assign(snapshot, (a,v)=>a.RouteValues.Optional("snapshot", v));
 
 		// Request parameters
 
@@ -3593,7 +3593,7 @@ namespace Nest
 		TaskId ICancelTasksRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
 
 		///<summary>Cancel the task with specified task id (node_id:task_number)</summary>
-		public CancelTasksDescriptor TaskId(TaskId taskId) => Assign(a=>a.RouteValues.Optional("task_id", taskId));
+		public CancelTasksDescriptor TaskId(TaskId taskId) => Assign(taskId, (a,v)=>a.RouteValues.Optional("task_id", v));
 
 		// Request parameters
 
@@ -3667,19 +3667,19 @@ namespace Nest
 		Id ITermVectorsRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
 
 		///<summary>The index in which the document resides.</summary>
-		public TermVectorsDescriptor<TDocument> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+		public TermVectorsDescriptor<TDocument> Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public TermVectorsDescriptor<TDocument> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+		public TermVectorsDescriptor<TDocument> Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
 
 		///<summary>The type of the document.</summary>
-		public TermVectorsDescriptor<TDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+		public TermVectorsDescriptor<TDocument> Type(TypeName type) => Assign(type, (a,v)=>a.RouteValues.Required("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public TermVectorsDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+		public TermVectorsDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("type", (TypeName)v));
 
 		///<summary>The id of the document, when not specified a doc param should be supplied.</summary>
-		public TermVectorsDescriptor<TDocument> Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
+		public TermVectorsDescriptor<TDocument> Id(Id id) => Assign(id, (a,v)=>a.RouteValues.Optional("id", v));
 
 		// Request parameters
 
@@ -3738,16 +3738,16 @@ namespace Nest
 		TypeName IUpdateRequest<TDocument, TPartialDocument>.Type => Self.RouteValues.Get<TypeName>("type");
 
 		///<summary>The name of the index</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+		public UpdateDescriptor<TDocument, TPartialDocument> Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+		public UpdateDescriptor<TDocument, TPartialDocument> Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
 
 		///<summary>The type of the document</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+		public UpdateDescriptor<TDocument, TPartialDocument> Type(TypeName type) => Assign(type, (a,v)=>a.RouteValues.Required("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+		public UpdateDescriptor<TDocument, TPartialDocument> Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("type", (TypeName)v));
 
 		// Request parameters
 
@@ -3794,19 +3794,19 @@ namespace Nest
 		Types IUpdateByQueryRequest.Type => Self.RouteValues.Get<Types>("type");
 
 		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public UpdateByQueryDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
+		public UpdateByQueryDescriptor<T> Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public UpdateByQueryDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
+		public UpdateByQueryDescriptor<T> Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public UpdateByQueryDescriptor<T> AllIndices() => this.Index(Indices.All);
 
 		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>
-		public UpdateByQueryDescriptor<T> Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
+		public UpdateByQueryDescriptor<T> Type(Types type) => Assign(type, (a,v)=>a.RouteValues.Optional("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public UpdateByQueryDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
+		public UpdateByQueryDescriptor<T> Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("type", (Types)v));
 
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public UpdateByQueryDescriptor<T> AllTypes() => this.Type(Types.All);
@@ -3930,10 +3930,10 @@ namespace Nest
 		IndexName ICreateFollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
 		///<summary>The name of the follower index</summary>
-		public CreateFollowIndexDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+		public CreateFollowIndexDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public CreateFollowIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+		public CreateFollowIndexDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
 
 		// Request parameters
 
@@ -3947,10 +3947,10 @@ namespace Nest
 		Indices IFollowIndexStatsRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary>A comma-separated list of index patterns; use `_all` to perform the operation on all indices</summary>
-		public FollowIndexStatsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public FollowIndexStatsDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public FollowIndexStatsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public FollowIndexStatsDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public FollowIndexStatsDescriptor AllIndices() => this.Index(Indices.All);
@@ -3967,7 +3967,7 @@ namespace Nest
 		Name IGetAutoFollowPatternRequest.Name => Self.RouteValues.Get<Name>("name");
 
 		///<summary>The name of the auto follow pattern.</summary>
-		public GetAutoFollowPatternDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
+		public GetAutoFollowPatternDescriptor Name(Name name) => Assign(name, (a,v)=>a.RouteValues.Optional("name", v));
 
 		// Request parameters
 
@@ -3982,10 +3982,10 @@ namespace Nest
 		IndexName IPauseFollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
 		///<summary>The name of the follower index that should pause following its leader index.</summary>
-		public PauseFollowIndexDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+		public PauseFollowIndexDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public PauseFollowIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+		public PauseFollowIndexDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
 
 		// Request parameters
 
@@ -4012,10 +4012,10 @@ namespace Nest
 		IndexName IResumeFollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
 		///<summary>The name of the follow index to resume following.</summary>
-		public ResumeFollowIndexDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+		public ResumeFollowIndexDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public ResumeFollowIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+		public ResumeFollowIndexDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
 
 		// Request parameters
 
@@ -4038,10 +4038,10 @@ namespace Nest
 		IndexName IUnfollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
 		///<summary>The name of the follower index that should be turned into a regular index.</summary>
-		public UnfollowIndexDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+		public UnfollowIndexDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public UnfollowIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+		public UnfollowIndexDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
 
 		// Request parameters
 
@@ -4057,19 +4057,19 @@ namespace Nest
 		Types IGraphExploreRequest.Type => Self.RouteValues.Get<Types>("type");
 
 		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public GraphExploreDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
+		public GraphExploreDescriptor<T> Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public GraphExploreDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
+		public GraphExploreDescriptor<T> Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public GraphExploreDescriptor<T> AllIndices() => this.Index(Indices.All);
 
 		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>
-		public GraphExploreDescriptor<T> Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
+		public GraphExploreDescriptor<T> Type(Types type) => Assign(type, (a,v)=>a.RouteValues.Optional("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public GraphExploreDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
+		public GraphExploreDescriptor<T> Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("type", (Types)v));
 
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public GraphExploreDescriptor<T> AllTypes() => this.Type(Types.All);
@@ -4253,6 +4253,18 @@ namespace Nest
 		// Request parameters
 
 	}
+	///<summary>descriptor for XpackMlDeleteFilter <pre></pre></summary>
+	public partial class DeleteFilterDescriptor  : RequestDescriptorBase<DeleteFilterDescriptor,DeleteFilterRequestParameters, IDeleteFilterRequest>, IDeleteFilterRequest
+	{ 
+		/// <summary>/_xpack/ml/filters/{filter_id}</summary>
+		///<param name="filter_id"> this parameter is required</param>
+		public DeleteFilterDescriptor(Id filter_id) : base(r=>r.Required("filter_id", filter_id)){}
+		// values part of the url path
+		Id IDeleteFilterRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
+
+		// Request parameters
+
+	}
 	///<summary>descriptor for XpackMlDeleteForecast <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</pre></summary>
 	public partial class DeleteForecastDescriptor  : RequestDescriptorBase<DeleteForecastDescriptor,DeleteForecastRequestParameters, IDeleteForecastRequest>, IDeleteForecastRequest
 	{ 
@@ -4348,7 +4360,7 @@ namespace Nest
 		Id IGetCalendarsRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
 
 		///<summary>The ID of the calendar to fetch</summary>
-		public GetCalendarsDescriptor CalendarId(Id calendarId) => Assign(a=>a.RouteValues.Optional("calendar_id", calendarId));
+		public GetCalendarsDescriptor CalendarId(Id calendarId) => Assign(calendarId, (a,v)=>a.RouteValues.Optional("calendar_id", v));
 
 		// Request parameters
 
@@ -4382,7 +4394,7 @@ namespace Nest
 		CategoryId IGetCategoriesRequest.CategoryId => Self.RouteValues.Get<CategoryId>("category_id");
 
 		///<summary>The identifier of the category definition of interest</summary>
-		public GetCategoriesDescriptor CategoryId(CategoryId categoryId) => Assign(a=>a.RouteValues.Optional("category_id", categoryId));
+		public GetCategoriesDescriptor CategoryId(CategoryId categoryId) => Assign(categoryId, (a,v)=>a.RouteValues.Optional("category_id", v));
 
 		// Request parameters
 
@@ -4396,7 +4408,7 @@ namespace Nest
 		Id IGetDatafeedsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 
 		///<summary>The ID of the datafeeds to fetch</summary>
-		public GetDatafeedsDescriptor DatafeedId(Id datafeedId) => Assign(a=>a.RouteValues.Optional("datafeed_id", datafeedId));
+		public GetDatafeedsDescriptor DatafeedId(Id datafeedId) => Assign(datafeedId, (a,v)=>a.RouteValues.Optional("datafeed_id", v));
 
 		// Request parameters
 
@@ -4412,12 +4424,30 @@ namespace Nest
 		Id IGetDatafeedStatsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 
 		///<summary>The ID of the datafeeds stats to fetch</summary>
-		public GetDatafeedStatsDescriptor DatafeedId(Id datafeedId) => Assign(a=>a.RouteValues.Optional("datafeed_id", datafeedId));
+		public GetDatafeedStatsDescriptor DatafeedId(Id datafeedId) => Assign(datafeedId, (a,v)=>a.RouteValues.Optional("datafeed_id", v));
 
 		// Request parameters
 
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
 		public GetDatafeedStatsDescriptor AllowNoDatafeeds(bool? allowNoDatafeeds = true) => Qs("allow_no_datafeeds", allowNoDatafeeds);
+	}
+	///<summary>descriptor for XpackMlGetFilters <pre></pre></summary>
+	public partial class GetFiltersDescriptor  : RequestDescriptorBase<GetFiltersDescriptor,GetFiltersRequestParameters, IGetFiltersRequest>, IGetFiltersRequest
+	{ 
+		/// <summary>/_xpack/ml/filters</summary>
+		public GetFiltersDescriptor() : base(){}
+		// values part of the url path
+		Id IGetFiltersRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
+
+		///<summary>The ID of the filter to fetch</summary>
+		public GetFiltersDescriptor FilterId(Id filterId) => Assign(filterId, (a,v)=>a.RouteValues.Optional("filter_id", v));
+
+		// Request parameters
+
+		///<summary>skips a number of filters</summary>
+		public GetFiltersDescriptor From(int? from) => Qs("from", from);
+		///<summary>specifies a max number of filters to get</summary>
+		public GetFiltersDescriptor Size(int? size) => Qs("size", size);
 	}
 	///<summary>descriptor for XpackMlGetInfluencers <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
 	public partial class GetInfluencersDescriptor  : RequestDescriptorBase<GetInfluencersDescriptor,GetInfluencersRequestParameters, IGetInfluencersRequest>, IGetInfluencersRequest
@@ -4440,7 +4470,7 @@ namespace Nest
 		Id IGetJobsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
 		///<summary>The ID of the jobs to fetch</summary>
-		public GetJobsDescriptor JobId(Id jobId) => Assign(a=>a.RouteValues.Optional("job_id", jobId));
+		public GetJobsDescriptor JobId(Id jobId) => Assign(jobId, (a,v)=>a.RouteValues.Optional("job_id", v));
 
 		// Request parameters
 
@@ -4456,7 +4486,7 @@ namespace Nest
 		Id IGetJobStatsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
 		///<summary>The ID of the jobs stats to fetch</summary>
-		public GetJobStatsDescriptor JobId(Id jobId) => Assign(a=>a.RouteValues.Optional("job_id", jobId));
+		public GetJobStatsDescriptor JobId(Id jobId) => Assign(jobId, (a,v)=>a.RouteValues.Optional("job_id", v));
 
 		// Request parameters
 
@@ -4474,7 +4504,7 @@ namespace Nest
 		Id IGetModelSnapshotsRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
 
 		///<summary>The ID of the snapshot to fetch</summary>
-		public GetModelSnapshotsDescriptor SnapshotId(Id snapshotId) => Assign(a=>a.RouteValues.Optional("snapshot_id", snapshotId));
+		public GetModelSnapshotsDescriptor SnapshotId(Id snapshotId) => Assign(snapshotId, (a,v)=>a.RouteValues.Optional("snapshot_id", v));
 
 		// Request parameters
 
@@ -4602,6 +4632,18 @@ namespace Nest
 		// Request parameters
 
 	}
+	///<summary>descriptor for XpackMlPutFilter <pre></pre></summary>
+	public partial class PutFilterDescriptor  : RequestDescriptorBase<PutFilterDescriptor,PutFilterRequestParameters, IPutFilterRequest>, IPutFilterRequest
+	{ 
+		/// <summary>/_xpack/ml/filters/{filter_id}</summary>
+		///<param name="filter_id"> this parameter is required</param>
+		public PutFilterDescriptor(Id filter_id) : base(r=>r.Required("filter_id", filter_id)){}
+		// values part of the url path
+		Id IPutFilterRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
+
+		// Request parameters
+
+	}
 	///<summary>descriptor for XpackMlPutJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
 	public partial class PutJobDescriptor<T>  : RequestDescriptorBase<PutJobDescriptor<T>,PutJobRequestParameters, IPutJobRequest>, IPutJobRequest
 	{ 
@@ -4667,6 +4709,18 @@ namespace Nest
 		// Request parameters
 
 	}
+	///<summary>descriptor for XpackMlUpdateFilter <pre></pre></summary>
+	public partial class UpdateFilterDescriptor  : RequestDescriptorBase<UpdateFilterDescriptor,UpdateFilterRequestParameters, IUpdateFilterRequest>, IUpdateFilterRequest
+	{ 
+		/// <summary>/_xpack/ml/filters/{filter_id}/_update</summary>
+		///<param name="filter_id"> this parameter is required</param>
+		public UpdateFilterDescriptor(Id filter_id) : base(r=>r.Required("filter_id", filter_id)){}
+		// values part of the url path
+		Id IUpdateFilterRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
+
+		// Request parameters
+
+	}
 	///<summary>descriptor for XpackMlUpdateJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</pre></summary>
 	public partial class UpdateJobDescriptor<T>  : RequestDescriptorBase<UpdateJobDescriptor<T>,UpdateJobRequestParameters, IUpdateJobRequest>, IUpdateJobRequest
 	{ 
@@ -4718,10 +4772,10 @@ namespace Nest
 		IndexName IDeprecationInfoRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
 		///<summary>Index pattern</summary>
-		public DeprecationInfoDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public DeprecationInfoDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public DeprecationInfoDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
+		public DeprecationInfoDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (IndexName)v));
 
 		// Request parameters
 
@@ -4735,10 +4789,10 @@ namespace Nest
 		Indices IMigrationAssistanceRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public MigrationAssistanceDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public MigrationAssistanceDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public MigrationAssistanceDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public MigrationAssistanceDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public MigrationAssistanceDescriptor AllIndices() => this.Index(Indices.All);
@@ -4762,10 +4816,10 @@ namespace Nest
 		IndexName IMigrationUpgradeRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
 		///<summary>The name of the index</summary>
-		public MigrationUpgradeDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+		public MigrationUpgradeDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public MigrationUpgradeDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+		public MigrationUpgradeDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
 
 		// Request parameters
 
@@ -4793,7 +4847,7 @@ namespace Nest
 		Id IGetRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
 
 		///<summary>The ID of the job(s) to fetch. Accepts glob patterns, or left blank for all jobs</summary>
-		public GetRollupJobDescriptor Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
+		public GetRollupJobDescriptor Id(Id id) => Assign(id, (a,v)=>a.RouteValues.Optional("id", v));
 
 		// Request parameters
 
@@ -4807,10 +4861,10 @@ namespace Nest
 		Indices IGetRollupCapabilitiesRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		///<summary> Index, indices or index-pattern to return rollup capabilities for. _all may be used to fetch rollup capabilities from all job</summary>
-		public GetRollupCapabilitiesDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public GetRollupCapabilitiesDescriptor Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public GetRollupCapabilitiesDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public GetRollupCapabilitiesDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public GetRollupCapabilitiesDescriptor AllIndices() => this.Index(Indices.All);
@@ -4828,10 +4882,10 @@ namespace Nest
 		IndexName IGetRollupIndexCapabilitiesRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
 		///<summary>The rollup index or index pattern to obtain rollup capabilities from.</summary>
-		public GetRollupIndexCapabilitiesDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+		public GetRollupIndexCapabilitiesDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public GetRollupIndexCapabilitiesDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+		public GetRollupIndexCapabilitiesDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
 
 		// Request parameters
 
@@ -4859,19 +4913,19 @@ namespace Nest
 		TypeName IRollupSearchRequest.Type => Self.RouteValues.Get<TypeName>("type");
 
 		///<summary>The index or index-pattern (containing rollup or regular data) that should be searched</summary>
-		public RollupSearchDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
+		public RollupSearchDescriptor<T> Index(Indices index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public RollupSearchDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
+		public RollupSearchDescriptor<T> Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (Indices)v));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public RollupSearchDescriptor<T> AllIndices() => this.Index(Indices.All);
 
 		///<summary>The doc type inside the index</summary>
-		public RollupSearchDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
+		public RollupSearchDescriptor<T> Type(TypeName type) => Assign(type, (a,v)=>a.RouteValues.Optional("type", v));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public RollupSearchDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
+		public RollupSearchDescriptor<T> Type<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("type", (TypeName)v));
 
 		// Request parameters
 
@@ -4923,7 +4977,7 @@ namespace Nest
 		Name IChangePasswordRequest.Username => Self.RouteValues.Get<Name>("username");
 
 		///<summary>The username of the user to change the password for</summary>
-		public ChangePasswordDescriptor Username(Name username) => Assign(a=>a.RouteValues.Optional("username", username));
+		public ChangePasswordDescriptor Username(Name username) => Assign(username, (a,v)=>a.RouteValues.Optional("username", v));
 
 		// Request parameters
 
@@ -5023,7 +5077,7 @@ namespace Nest
 		Name IDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
 
 		///<summary>The username of the user to disable</summary>
-		public DisableUserDescriptor Username(Name username) => Assign(a=>a.RouteValues.Optional("username", username));
+		public DisableUserDescriptor Username(Name username) => Assign(username, (a,v)=>a.RouteValues.Optional("username", v));
 
 		// Request parameters
 
@@ -5039,7 +5093,7 @@ namespace Nest
 		Name IEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
 
 		///<summary>The username of the user to enable</summary>
-		public EnableUserDescriptor Username(Name username) => Assign(a=>a.RouteValues.Optional("username", username));
+		public EnableUserDescriptor Username(Name username) => Assign(username, (a,v)=>a.RouteValues.Optional("username", v));
 
 		// Request parameters
 
@@ -5056,10 +5110,10 @@ namespace Nest
 		Name IGetPrivilegesRequest.Name => Self.RouteValues.Get<Name>("name");
 
 		///<summary>Application name</summary>
-		public GetPrivilegesDescriptor Application(Name application) => Assign(a=>a.RouteValues.Optional("application", application));
+		public GetPrivilegesDescriptor Application(Name application) => Assign(application, (a,v)=>a.RouteValues.Optional("application", v));
 
 		///<summary>Privilege name</summary>
-		public GetPrivilegesDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
+		public GetPrivilegesDescriptor Name(Name name) => Assign(name, (a,v)=>a.RouteValues.Optional("name", v));
 
 		// Request parameters
 
@@ -5073,7 +5127,7 @@ namespace Nest
 		Name IGetRoleRequest.Name => Self.RouteValues.Get<Name>("name");
 
 		///<summary>Role name</summary>
-		public GetRoleDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
+		public GetRoleDescriptor Name(Name name) => Assign(name, (a,v)=>a.RouteValues.Optional("name", v));
 
 		// Request parameters
 
@@ -5087,7 +5141,7 @@ namespace Nest
 		Name IGetRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
 
 		///<summary>Role-Mapping name</summary>
-		public GetRoleMappingDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
+		public GetRoleMappingDescriptor Name(Name name) => Assign(name, (a,v)=>a.RouteValues.Optional("name", v));
 
 		// Request parameters
 
@@ -5109,7 +5163,7 @@ namespace Nest
 		Names IGetUserRequest.Username => Self.RouteValues.Get<Names>("username");
 
 		///<summary>A comma-separated list of usernames</summary>
-		public GetUserDescriptor Username(Names username) => Assign(a=>a.RouteValues.Optional("username", username));
+		public GetUserDescriptor Username(Names username) => Assign(username, (a,v)=>a.RouteValues.Optional("username", v));
 
 		// Request parameters
 
@@ -5131,7 +5185,7 @@ namespace Nest
 		Name IHasPrivilegesRequest.User => Self.RouteValues.Get<Name>("user");
 
 		///<summary>Username</summary>
-		public HasPrivilegesDescriptor User(Name user) => Assign(a=>a.RouteValues.Optional("user", user));
+		public HasPrivilegesDescriptor User(Name user) => Assign(user, (a,v)=>a.RouteValues.Optional("user", v));
 
 		// Request parameters
 
@@ -5243,7 +5297,7 @@ namespace Nest
 		ActionIds IAcknowledgeWatchRequest.ActionId => Self.RouteValues.Get<ActionIds>("action_id");
 
 		///<summary>A comma-separated list of the action ids to be acked</summary>
-		public AcknowledgeWatchDescriptor ActionId(ActionIds actionId) => Assign(a=>a.RouteValues.Optional("action_id", actionId));
+		public AcknowledgeWatchDescriptor ActionId(ActionIds actionId) => Assign(actionId, (a,v)=>a.RouteValues.Optional("action_id", v));
 
 		// Request parameters
 
@@ -5301,7 +5355,7 @@ namespace Nest
 		Id IExecuteWatchRequest.Id => Self.RouteValues.Get<Id>("id");
 
 		///<summary>Watch ID</summary>
-		public ExecuteWatchDescriptor Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
+		public ExecuteWatchDescriptor Id(Id id) => Assign(id, (a,v)=>a.RouteValues.Optional("id", v));
 
 		// Request parameters
 
@@ -5363,7 +5417,7 @@ namespace Nest
 		Metrics IWatcherStatsRequest.WatcherStatsMetric => Self.RouteValues.Get<Metrics>("watcher_stats_metric");
 
 		///<summary>Controls what additional stat metrics should be include in the response</summary>
-		public WatcherStatsDescriptor WatcherStatsMetric(WatcherStatsMetric watcherStatsMetric) => Assign(a=>a.RouteValues.Optional("watcher_stats_metric", (Metrics)watcherStatsMetric));
+		public WatcherStatsDescriptor WatcherStatsMetric(WatcherStatsMetric watcherStatsMetric) => Assign(watcherStatsMetric, (a,v)=>a.RouteValues.Optional("watcher_stats_metric", (Metrics)v));
 
 		// Request parameters
 

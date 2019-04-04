@@ -47,22 +47,22 @@ namespace Nest
 		PagerDutyEventType? IPagerDutyEvent.EventType { get; set; }
 		string IPagerDutyEvent.IncidentKey { get; set; }
 
-		public PagerDutyActionDescriptor Account(string account) => Assign(a => a.Account = account);
+		public PagerDutyActionDescriptor Account(string account) => Assign(account, (a, v) => a.Account = v);
 
-		public PagerDutyActionDescriptor Description(string description) => Assign(a => a.Description = description);
+		public PagerDutyActionDescriptor Description(string description) => Assign(description, (a, v) => a.Description = v);
 
-		public PagerDutyActionDescriptor EventType(PagerDutyEventType? eventType) => Assign(a => a.EventType = eventType);
+		public PagerDutyActionDescriptor EventType(PagerDutyEventType? eventType) => Assign(eventType, (a, v) => a.EventType = v);
 
-		public PagerDutyActionDescriptor IncidentKey(string incidentKey) => Assign(a => a.IncidentKey = incidentKey);
+		public PagerDutyActionDescriptor IncidentKey(string incidentKey) => Assign(incidentKey, (a, v) => a.IncidentKey = v);
 
-		public PagerDutyActionDescriptor Client(string client) => Assign(a => a.Client = client);
+		public PagerDutyActionDescriptor Client(string client) => Assign(client, (a, v) => a.Client = v);
 
-		public PagerDutyActionDescriptor ClientUrl(string url) => Assign(a => a.ClientUrl = url);
+		public PagerDutyActionDescriptor ClientUrl(string url) => Assign(url, (a, v) => a.ClientUrl = v);
 
-		public PagerDutyActionDescriptor AttachPayload(bool? attach = true) => Assign(a => a.AttachPayload = attach);
+		public PagerDutyActionDescriptor AttachPayload(bool? attach = true) => Assign(attach, (a, v) => a.AttachPayload = v);
 
 		public PagerDutyActionDescriptor Context(Func<PagerDutyContextsDescriptor, IPromise<IList<IPagerDutyContext>>> selector) =>
-			Assign(a => a.Context = selector?.Invoke(new PagerDutyContextsDescriptor())?.Value);
+			Assign(selector, (a, v) => a.Context = v?.Invoke(new PagerDutyContextsDescriptor())?.Value);
 	}
 
 	public class PagerDutyContextsDescriptor
@@ -71,7 +71,7 @@ namespace Nest
 		public PagerDutyContextsDescriptor() : base(new List<IPagerDutyContext>()) { }
 
 		public PagerDutyContextsDescriptor Context(PagerDutyContextType type, Func<PagerDutyContextDescriptor, IPagerDutyContext> selector) =>
-			Assign(a => a.AddIfNotNull(selector?.Invoke(new PagerDutyContextDescriptor(type))));
+			Assign(selector?.Invoke(new PagerDutyContextDescriptor(type)), (a, v) => a.AddIfNotNull(v));
 	}
 
 	[JsonConverter(typeof(StringEnumConverter))]

@@ -34,21 +34,21 @@ namespace Nest
 
 		int? ITemplateMapping.Version { get; set; }
 
-		public PutIndexTemplateDescriptor Order(int? order) => Assign(a => a.Order = order);
+		public PutIndexTemplateDescriptor Order(int? order) => Assign(order, (a, v) => a.Order = v);
 
-		public PutIndexTemplateDescriptor Version(int? version) => Assign(a => a.Version = version);
+		public PutIndexTemplateDescriptor Version(int? version) => Assign(version, (a, v) => a.Version = v);
 
-		public PutIndexTemplateDescriptor IndexPatterns(params string[] patterns) => Assign(a => a.IndexPatterns = patterns);
+		public PutIndexTemplateDescriptor IndexPatterns(params string[] patterns) => Assign(patterns, (a, v) => a.IndexPatterns = v);
 
-		public PutIndexTemplateDescriptor IndexPatterns(IEnumerable<string> patterns) => Assign(a => a.IndexPatterns = patterns?.ToArray());
+		public PutIndexTemplateDescriptor IndexPatterns(IEnumerable<string> patterns) => Assign(patterns?.ToArray(), (a, v) => a.IndexPatterns = v);
 
 		public PutIndexTemplateDescriptor Settings(Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> settingsSelector) =>
-			Assign(a => a.Settings = settingsSelector?.Invoke(new IndexSettingsDescriptor())?.Value);
+			Assign(settingsSelector, (a, v) => a.Settings = v?.Invoke(new IndexSettingsDescriptor())?.Value);
 
 		public PutIndexTemplateDescriptor Mappings(Func<MappingsDescriptor, IPromise<IMappings>> mappingSelector) =>
-			Assign(a => a.Mappings = mappingSelector?.Invoke(new MappingsDescriptor())?.Value);
+			Assign(mappingSelector, (a, v) => a.Mappings = v?.Invoke(new MappingsDescriptor())?.Value);
 
 		public PutIndexTemplateDescriptor Aliases(Func<AliasesDescriptor, IPromise<IAliases>> aliasDescriptor) =>
-			Assign(a => a.Aliases = aliasDescriptor?.Invoke(new AliasesDescriptor())?.Value);
+			Assign(aliasDescriptor, (a, v) => a.Aliases = v?.Invoke(new AliasesDescriptor())?.Value);
 	}
 }

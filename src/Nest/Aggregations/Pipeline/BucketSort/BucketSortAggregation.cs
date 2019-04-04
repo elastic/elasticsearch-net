@@ -80,27 +80,27 @@ namespace Nest
 		/// The list of fields to sort on
 		/// </summary>
 		public BucketSortAggregationDescriptor<T> Sort(Func<SortDescriptor<T>, IPromise<IList<ISort>>> selector) =>
-			Assign(a => a.Sort = selector?.Invoke(new SortDescriptor<T>())?.Value);
+			Assign(selector, (a, v) => a.Sort = v?.Invoke(new SortDescriptor<T>())?.Value);
 
 		/// <summary>
 		/// Buckets in positions prior to the set value will be truncated
 		/// </summary>
-		public BucketSortAggregationDescriptor<T> From(int? from) => Assign(a => a.From = from);
+		public BucketSortAggregationDescriptor<T> From(int? from) => Assign(from, (a, v) => a.From = v);
 
 		/// <summary>
 		/// 	The number of buckets to return. Defaults to all buckets of the parent aggregation
 		/// </summary>
-		public BucketSortAggregationDescriptor<T> Size(int? size) => Assign(a => a.Size = size);
+		public BucketSortAggregationDescriptor<T> Size(int? size) => Assign(size, (a, v) => a.Size = v);
 
 		/// <summary>
 		/// The policy to apply when gaps are found in the data
 		/// </summary>
-		public BucketSortAggregationDescriptor<T> GapPolicy(GapPolicy? gapPolicy) => Assign(a => a.GapPolicy = gapPolicy);
+		public BucketSortAggregationDescriptor<T> GapPolicy(GapPolicy? gapPolicy) => Assign(gapPolicy, (a, v) => a.GapPolicy = v);
 
 		/// <summary>
 		/// The metadata for the aggregation
 		/// </summary>
 		public BucketSortAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) =>
-			Assign(a => a.Meta = selector?.Invoke(new FluentDictionary<string, object>()));
+			Assign(selector, (a, v) => a.Meta = v?.Invoke(new FluentDictionary<string, object>()));
 	}
 }

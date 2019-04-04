@@ -42,12 +42,12 @@ namespace Nest
 		bool? IRemoveProcessor.IgnoreMissing { get; set; }
 
 		/// <inheritdoc cref="IRemoveProcessor.Field" />
-		public RemoveProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public RemoveProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IRemoveProcessor.Field" />
-		public RemoveProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
+		public RemoveProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IRemoveProcessor.IgnoreMissing" />
-		public RemoveProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);
+		public RemoveProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissing = v);
 	}
 }

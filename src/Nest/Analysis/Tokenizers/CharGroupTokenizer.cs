@@ -39,10 +39,10 @@ namespace Nest
 
 		/// <inheritdoc cref="ICharGroupTokenizer.TokenizeOnCharacters" />
 		public CharGroupTokenizerDescriptor TokenizeOnCharacters(params string[] characters) =>
-			Assign(a => a.TokenizeOnCharacters = characters);
+			Assign(characters, (a, v) => a.TokenizeOnCharacters = v);
 
 		/// <inheritdoc cref="ICharGroupTokenizer.TokenizeOnCharacters" />
 		public CharGroupTokenizerDescriptor TokenizeOnCharacters(IEnumerable<string> characters) =>
-			Assign(a => a.TokenizeOnCharacters = characters);
+			Assign(characters, (a, v) => a.TokenizeOnCharacters = v);
 	}
 }

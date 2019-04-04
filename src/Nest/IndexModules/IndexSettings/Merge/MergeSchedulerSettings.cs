@@ -37,10 +37,10 @@ namespace Nest
 
 		/// <inheritdoc />
 		public MergeSchedulerSettingsDescriptor AutoThrottle(bool? throttle = true) =>
-			Assign(a => a.AutoThrottle = throttle);
+			Assign(throttle, (a, v) => a.AutoThrottle = v);
 
 		/// <inheritdoc />
 		public MergeSchedulerSettingsDescriptor MaxThreadCount(int? maxThreadCount) =>
-			Assign(a => a.MaxThreadCount = maxThreadCount);
+			Assign(maxThreadCount, (a, v) => a.MaxThreadCount = v);
 	}
 }

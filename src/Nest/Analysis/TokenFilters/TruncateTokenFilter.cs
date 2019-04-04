@@ -33,6 +33,6 @@ namespace Nest
 		int? ITruncateTokenFilter.Length { get; set; }
 
 		/// <inheritdoc />
-		public TruncateTokenFilterDescriptor Length(int? length) => Assign(a => a.Length = length);
+		public TruncateTokenFilterDescriptor Length(int? length) => Assign(length, (a, v) => a.Length = v);
 	}
 }

@@ -26,9 +26,9 @@ namespace Nest
 		bool? IMutualInformationHeuristic.IncludeNegatives { get; set; }
 
 		public MutualInformationHeuristicDescriptor IncludeNegatives(bool? includeNegatives = true) =>
-			Assign(a => a.IncludeNegatives = includeNegatives);
+			Assign(includeNegatives, (a, v) => a.IncludeNegatives = v);
 
 		public MutualInformationHeuristicDescriptor BackgroundIsSuperSet(bool? backgroundIsSuperSet = true) =>
-			Assign(a => a.BackgroundIsSuperSet = backgroundIsSuperSet);
+			Assign(backgroundIsSuperSet, (a, v) => a.BackgroundIsSuperSet = v);
 	}
 }

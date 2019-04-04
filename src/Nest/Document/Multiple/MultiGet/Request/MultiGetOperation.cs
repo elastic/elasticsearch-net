@@ -85,43 +85,43 @@ namespace Nest
 		/// <summary>
 		/// Manually set the index, default to the default index or the index set for the type on the connectionsettings.
 		/// </summary>
-		public MultiGetOperationDescriptor<T> Index(IndexName index) => Assign(a => a.Index = index);
+		public MultiGetOperationDescriptor<T> Index(IndexName index) => Assign(index, (a, v) => a.Index = v);
 
 		/// <summary>
 		/// Manualy set the type to get the object from, default to whatever
 		/// T will be inferred to if not passed.
 		/// </summary>
-		public MultiGetOperationDescriptor<T> Type(TypeName type) => Assign(a => a.Type = type);
+		public MultiGetOperationDescriptor<T> Type(TypeName type) => Assign(type, (a, v) => a.Type = v);
 
-		public MultiGetOperationDescriptor<T> Id(Id id) => Assign(a => a.Id = id);
+		public MultiGetOperationDescriptor<T> Id(Id id) => Assign(id, (a, v) => a.Id = v);
 
 		/// <summary>
 		/// Control how the document's source is loaded
 		/// </summary>
-		public MultiGetOperationDescriptor<T> Source(bool? sourceEnabled = true) => Assign(a => a.Source = sourceEnabled);
+		public MultiGetOperationDescriptor<T> Source(bool? sourceEnabled = true) => Assign(sourceEnabled, (a, v) => a.Source = v);
 
 		/// <summary>
 		/// Control how the document's source is loaded
 		/// </summary>
 		public MultiGetOperationDescriptor<T> Source(Func<SourceFilterDescriptor<T>, ISourceFilter> source) =>
-			Assign(a => a.Source = new Union<bool, ISourceFilter>(source(new SourceFilterDescriptor<T>())));
+			Assign(new Union<bool, ISourceFilter>(source(new SourceFilterDescriptor<T>())), (a, v) => a.Source = v);
 
 		/// <summary>
 		/// Set the routing for the get operation
 		/// </summary>
-		public MultiGetOperationDescriptor<T> Routing(string routing) => Assign(a => a.Routing = routing);
+		public MultiGetOperationDescriptor<T> Routing(string routing) => Assign(routing, (a, v) => a.Routing = v);
 
 		/// <summary>
 		/// Allows to selectively load specific fields for each document
 		/// represented by a search hit. Defaults to load the internal _source field.
 		/// </summary>
 		public MultiGetOperationDescriptor<T> StoredFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(a => a.StoredFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+			Assign(fields, (a, v) => a.StoredFields = v?.Invoke(new FieldsDescriptor<T>())?.Value);
 
-		public MultiGetOperationDescriptor<T> StoredFields(Fields fields) => Assign(a => a.StoredFields = fields);
+		public MultiGetOperationDescriptor<T> StoredFields(Fields fields) => Assign(fields, (a, v) => a.StoredFields = v);
 
-		public MultiGetOperationDescriptor<T> Version(long? version) => Assign(a => a.Version = version);
+		public MultiGetOperationDescriptor<T> Version(long? version) => Assign(version, (a, v) => a.Version = v);
 
-		public MultiGetOperationDescriptor<T> VersionType(VersionType? versionType) => Assign(a => a.VersionType = versionType);
+		public MultiGetOperationDescriptor<T> VersionType(VersionType? versionType) => Assign(versionType, (a, v) => a.VersionType = v);
 	}
 }

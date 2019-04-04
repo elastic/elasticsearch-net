@@ -31,12 +31,12 @@ namespace Nest
 		IEnumerable<double> IPercentileRanksAggregation.Values { get; set; }
 
 		public PercentileRanksAggregationDescriptor<T> Values(IEnumerable<double> values) =>
-			Assign(a => a.Values = values?.ToList());
+			Assign(values, (a, v) => a.Values = v);
 
 		public PercentileRanksAggregationDescriptor<T> Values(params double[] values) =>
-			Assign(a => a.Values = values?.ToList());
+			Assign(values, (a, v) => a.Values = v);
 
 		public PercentileRanksAggregationDescriptor<T> Method(Func<PercentilesMethodDescriptor, IPercentilesMethod> methodSelctor) =>
-			Assign(a => a.Method = methodSelctor?.Invoke(new PercentilesMethodDescriptor()));
+			Assign(methodSelctor, (a, v) => a.Method = v?.Invoke(new PercentilesMethodDescriptor()));
 	}
 }

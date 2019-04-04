@@ -17,6 +17,6 @@ namespace Nest
 		long? ISoftDeleteRetentionSettings.Operations { get; set; }
 
 		/// <inheritdoc see cref="ISoftDeleteRetentionSettings.Operations"/>
-		public SoftDeleteRetentionSettingsDescriptor Operations(long? operations) => Assign(a => a.Operations = operations);
+		public SoftDeleteRetentionSettingsDescriptor Operations(long? operations) => Assign(operations, (a, v) => a.Operations = v);
 	}
 }

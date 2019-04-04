@@ -38,8 +38,8 @@ namespace Nest
 		string IScrollRequest.ScrollId { get; set; }
 
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public ScrollDescriptor<T> Scroll(Time scroll) => Assign(a => a.Scroll = scroll);
+		public ScrollDescriptor<T> Scroll(Time scroll) => Assign(scroll, (a, v) => a.Scroll = v);
 
-		public ScrollDescriptor<T> ScrollId(string scrollId) => Assign(a => a.ScrollId = scrollId);
+		public ScrollDescriptor<T> ScrollId(string scrollId) => Assign(scrollId, (a, v) => a.ScrollId = v);
 	}
 }

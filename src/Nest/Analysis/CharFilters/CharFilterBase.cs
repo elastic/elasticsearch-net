@@ -30,6 +30,6 @@ namespace Nest
 		string ICharFilter.Type => Type;
 		string ICharFilter.Version { get; set; }
 
-		public TCharFilter Version(string version) => Assign(a => a.Version = version);
+		public TCharFilter Version(string version) => Assign(version, (a, v) => a.Version = v);
 	}
 }
