@@ -3220,6 +3220,26 @@ namespace Nest
 			throw InvalidDispatch("IlmStart", p, new [] { POST }, "/_ilm/start");
 		}
 		
+		internal TResponse IlmStopDispatch<TResponse>(IRequest<IlmStopRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.IlmStop<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("IlmStop", p, new [] { POST }, "/_ilm/stop");
+		}
+		
+		internal Task<TResponse> IlmStopDispatchAsync<TResponse>(IRequest<IlmStopRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.IlmStopAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("IlmStop", p, new [] { POST }, "/_ilm/stop");
+		}
+		
 		internal TResponse XpackInfoDispatch<TResponse>(IRequest<XPackInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)

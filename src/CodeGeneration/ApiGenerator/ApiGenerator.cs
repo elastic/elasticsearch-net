@@ -30,7 +30,6 @@ namespace ApiGenerator
 			"ilm.put_lifecycle.json",
 			"ilm.remove_policy.json",
 			"ilm.retry.json",
-			"ilm.stop.json",
 			"indices.freeze.json",
 			"indices.unfreeze.json",
 			"xpack.ml.set_upgrade_mode.json",

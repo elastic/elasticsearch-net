@@ -4097,6 +4097,14 @@ namespace Nest
 		// Request parameters
 
 	}
+	///<summary>descriptor for IlmStop <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html</pre></summary>
+	public partial class IlmStopDescriptor  : RequestDescriptorBase<IlmStopDescriptor,IlmStopRequestParameters, IIlmStopRequest>, IIlmStopRequest
+	{ 
+		// values part of the url path
+
+		// Request parameters
+
+	}
 	///<summary>descriptor for XpackInfo <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</pre></summary>
 	public partial class XPackInfoDescriptor  : RequestDescriptorBase<XPackInfoDescriptor,XPackInfoRequestParameters, IXPackInfoRequest>, IXPackInfoRequest
 	{ 

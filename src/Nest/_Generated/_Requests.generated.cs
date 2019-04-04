@@ -3847,6 +3847,18 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IIlmStopRequest : IRequest<IlmStopRequestParameters>
+	{
+	}
+	///<summary>Request parameters for IlmStop <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html</pre></summary>
+	public partial class IlmStopRequest : PlainRequestBase<IlmStopRequestParameters>, IIlmStopRequest
+	{
+		protected IIlmStopRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IIndexExistsRequest : IRequest<IndexExistsRequestParameters>
 	{
 		Indices Index { get; }
