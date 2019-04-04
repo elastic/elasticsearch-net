@@ -11,6 +11,7 @@ namespace Tests.Framework.EndpointTests.TestState
 	public class CoordinatedUsage : KeyedCollection<string, LazyResponses>
 	{
 		public static readonly IResponse VoidResponse = new PingResponse();
+
 		private readonly INestTestCluster _cluster;
 		private readonly EndpointUsage _usage;
 
@@ -19,6 +20,13 @@ namespace Tests.Framework.EndpointTests.TestState
 			_cluster = cluster;
 			_usage = usage;
 			Prefix = prefix;
+			_values = new Dictionary<ClientMethod, string>
+			{
+				{ ClientMethod.Fluent, Sanitize(RandomFluent) },
+				{ ClientMethod.Initializer, Sanitize(RandomInitializer) },
+				{ ClientMethod.FluentAsync, Sanitize(RandomFluentAsync) },
+				{ ClientMethod.InitializerAsync, Sanitize(RandomInitializerAsync) }
+			};
 		}
 
 		protected IElasticClient Client => _cluster.Client;
@@ -27,6 +35,9 @@ namespace Tests.Framework.EndpointTests.TestState
 		private static string RandomFluentAsync { get; } = $"fa-{RandomString()}";
 		private static string RandomInitializer { get; } = $"o-{RandomString()}";
 		private static string RandomInitializerAsync { get; } = $"oa-{RandomString()}";
+
+		public readonly Dictionary<ClientMethod, string> _values;
+		public IReadOnlyDictionary<ClientMethod, string> MethodIsolatedValues => _values;
 
 		protected override string GetKeyForItem(LazyResponses item) => item.Name;
 
@@ -54,7 +65,7 @@ namespace Tests.Framework.EndpointTests.TestState
 			var client = Client;
 			return k => _usage.CallOnce(
 				() => new LazyResponses(k,
-					async () => await CallAllClientMethodsOverloads(initializerBody, fluentBody, fluent, fluentAsync, request, requestAsync, client))
+					async () => await CallAllClientMethodsOverloads(k, initializerBody, fluentBody, fluent, fluentAsync, request, requestAsync, client))
 				, k);
 		}
 
@@ -66,21 +77,14 @@ namespace Tests.Framework.EndpointTests.TestState
 				return VoidResponse;
 			});
 
-		public Func<string, LazyResponses> Call(Func<string, IElasticClient, Task<IResponse>> call)
+		public Func<string, LazyResponses> Call<TResponse>(Func<string, IElasticClient, Task<TResponse>> call) where TResponse : IResponse
 		{
 			var client = Client;
 			return k => _usage.CallOnce(
 				() => new LazyResponses(k, async () =>
 				{
 					var dict = new Dictionary<ClientMethod, IResponse>();
-					var values = new[]
-					{
-						(ClientMethod.Fluent, Sanitize(RandomFluent)),
-						(ClientMethod.Initializer, Sanitize(RandomInitializer)),
-						(ClientMethod.FluentAsync, Sanitize(RandomFluentAsync)),
-						(ClientMethod.InitializerAsync, Sanitize(RandomInitializerAsync))
-					};
-					foreach (var (m, v) in values)
+					foreach (var (m, v) in _values)
 					{
 						var response = await call(v, client);
 						dict.Add(m, response);
@@ -94,6 +98,7 @@ namespace Tests.Framework.EndpointTests.TestState
 		private string Sanitize(string value) => string.IsNullOrEmpty(Prefix) ? value : $"{Prefix}-{value}";
 
 		private async Task<Dictionary<ClientMethod, IResponse>> CallAllClientMethodsOverloads<TDescriptor, TInitializer, TInterface, TResponse>(
+			string name,
 			Func<string, TInitializer> initializerBody,
 			Func<string, TDescriptor, TInterface> fluentBody,
 			Func<string, IElasticClient, Func<TDescriptor, TInterface>, TResponse> fluent,
@@ -109,16 +114,16 @@ namespace Tests.Framework.EndpointTests.TestState
 		{
 			var dict = new Dictionary<ClientMethod, IResponse>();
 
-			var sf = Sanitize(RandomFluent);
+			var sf = _values[ClientMethod.Fluent];
 			dict.Add(ClientMethod.Fluent, fluent(sf, client, f => fluentBody(sf, f)));
 
-			var sfa = Sanitize(RandomFluentAsync);
+			var sfa = _values[ClientMethod.FluentAsync];
 			dict.Add(ClientMethod.FluentAsync, await fluentAsync(sfa, client, f => fluentBody(sfa, f)));
 
-			var si = Sanitize(RandomInitializer);
+			var si = _values[ClientMethod.Initializer];
 			dict.Add(ClientMethod.Initializer, request(si, client, initializerBody(si)));
 
-			var sia = Sanitize(RandomInitializerAsync);
+			var sia = _values[ClientMethod.InitializerAsync];
 			dict.Add(ClientMethod.InitializerAsync, await requestAsync(sia, client, initializerBody(sia)));
 			return dict;
 		}

@@ -788,6 +788,28 @@ namespace Nest
 			throw InvalidDispatch("DeleteByQuery", p, new [] { POST }, "/{index}/_delete_by_query", "/{index}/{type}/_delete_by_query");
 		}
 		
+		internal TResponse DeleteByQueryRethrottleDispatch<TResponse>(IRequest<DeleteByQueryRethrottleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.TaskId)) return _lowLevel.DeleteByQueryRethrottle<TResponse>(p.RouteValues.TaskId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("DeleteByQueryRethrottle", p, new [] { POST }, "/_delete_by_query/{task_id}/_rethrottle");
+		}
+		
+		internal Task<TResponse> DeleteByQueryRethrottleDispatchAsync<TResponse>(IRequest<DeleteByQueryRethrottleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.TaskId)) return _lowLevel.DeleteByQueryRethrottleAsync<TResponse>(p.RouteValues.TaskId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("DeleteByQueryRethrottle", p, new [] { POST }, "/_delete_by_query/{task_id}/_rethrottle");
+		}
+		
 		internal TResponse DeleteScriptDispatch<TResponse>(IRequest<DeleteScriptRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -1570,14 +1592,16 @@ namespace Nest
 			{
 				case PUT:
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.IndicesPutMapping<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingForAll<TResponse>(p.RouteValues.Type,body,p.RequestParameters);
+					if (AllSet(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingForAll<TResponse>(p.RouteValues.Type,body,p.RequestParameters);
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesPutMapping<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
 					break;
 				case POST:
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.IndicesPutMappingPost<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingPostForAll<TResponse>(p.RouteValues.Type,body,p.RequestParameters);
+					if (AllSet(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingPostForAll<TResponse>(p.RouteValues.Type,body,p.RequestParameters);
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesPutMappingPost<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("IndicesPutMapping", p, new [] { PUT, POST }, "/{index}/{type}/_mapping", "/{index}/_mapping/{type}", "/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}", "/_mappings/{type}");
+			throw InvalidDispatch("IndicesPutMapping", p, new [] { PUT, POST }, "/{index}/{type}/_mapping", "/{index}/_mapping/{type}", "/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}", "/_mappings/{type}", "/{index}/_mappings", "/{index}/_mapping");
 		}
 		
 		internal Task<TResponse> IndicesPutMappingDispatchAsync<TResponse>(IRequest<PutMappingRequestParameters> p,SerializableData<IPutMappingRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -1586,14 +1610,16 @@ namespace Nest
 			{
 				case PUT:
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.IndicesPutMappingAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
-					if (AllSetNoFallback(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingForAllAsync<TResponse>(p.RouteValues.Type,body,p.RequestParameters,ct);
+					if (AllSet(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingForAllAsync<TResponse>(p.RouteValues.Type,body,p.RequestParameters,ct);
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesPutMappingAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
 					break;
 				case POST:
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.IndicesPutMappingPostAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
-					if (AllSetNoFallback(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingPostForAllAsync<TResponse>(p.RouteValues.Type,body,p.RequestParameters,ct);
+					if (AllSet(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingPostForAllAsync<TResponse>(p.RouteValues.Type,body,p.RequestParameters,ct);
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesPutMappingPostAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("IndicesPutMapping", p, new [] { PUT, POST }, "/{index}/{type}/_mapping", "/{index}/_mapping/{type}", "/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}", "/_mappings/{type}");
+			throw InvalidDispatch("IndicesPutMapping", p, new [] { PUT, POST }, "/{index}/{type}/_mapping", "/{index}/_mapping/{type}", "/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}", "/_mappings/{type}", "/{index}/_mappings", "/{index}/_mapping");
 		}
 		
 		internal TResponse IndicesPutSettingsDispatch<TResponse>(IRequest<UpdateIndexSettingsRequestParameters> p,SerializableData<IUpdateIndexSettingsRequest> body) where TResponse : class, IElasticsearchResponse, new()
@@ -2924,6 +2950,28 @@ namespace Nest
 			throw InvalidDispatch("UpdateByQuery", p, new [] { POST }, "/{index}/_update_by_query", "/{index}/{type}/_update_by_query");
 		}
 		
+		internal TResponse UpdateByQueryRethrottleDispatch<TResponse>(IRequest<UpdateByQueryRethrottleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.TaskId)) return _lowLevel.UpdateByQueryRethrottle<TResponse>(p.RouteValues.TaskId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("UpdateByQueryRethrottle", p, new [] { POST }, "/_update_by_query/{task_id}/_rethrottle");
+		}
+		
+		internal Task<TResponse> UpdateByQueryRethrottleDispatchAsync<TResponse>(IRequest<UpdateByQueryRethrottleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.TaskId)) return _lowLevel.UpdateByQueryRethrottleAsync<TResponse>(p.RouteValues.TaskId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("UpdateByQueryRethrottle", p, new [] { POST }, "/_update_by_query/{task_id}/_rethrottle");
+		}
+		
 		internal TResponse CcrDeleteAutoFollowPatternDispatch<TResponse>(IRequest<DeleteAutoFollowPatternRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -3332,26 +3380,92 @@ namespace Nest
 			throw InvalidDispatch("XpackLicensePostStartTrial", p, new [] { POST }, "/_xpack/license/start_trial");
 		}
 		
-		internal TResponse XpackMlCloseJobDispatch<TResponse>(IRequest<CloseJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse XpackMlCloseJobDispatch<TResponse>(IRequest<CloseJobRequestParameters> p,SerializableData<ICloseJobRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlCloseJob<TResponse>(p.RouteValues.JobId,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlCloseJob<TResponse>(p.RouteValues.JobId,body,p.RequestParameters);
 					break;
 			}
 			throw InvalidDispatch("XpackMlCloseJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_close");
 		}
 		
-		internal Task<TResponse> XpackMlCloseJobDispatchAsync<TResponse>(IRequest<CloseJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> XpackMlCloseJobDispatchAsync<TResponse>(IRequest<CloseJobRequestParameters> p,SerializableData<ICloseJobRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlCloseJobAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlCloseJobAsync<TResponse>(p.RouteValues.JobId,body,p.RequestParameters,ct);
 					break;
 			}
 			throw InvalidDispatch("XpackMlCloseJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_close");
+		}
+		
+		internal TResponse XpackMlDeleteCalendarDispatch<TResponse>(IRequest<DeleteCalendarRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.XpackMlDeleteCalendar<TResponse>(p.RouteValues.CalendarId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlDeleteCalendar", p, new [] { DELETE }, "/_xpack/ml/calendars/{calendar_id}");
+		}
+		
+		internal Task<TResponse> XpackMlDeleteCalendarDispatchAsync<TResponse>(IRequest<DeleteCalendarRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.XpackMlDeleteCalendarAsync<TResponse>(p.RouteValues.CalendarId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlDeleteCalendar", p, new [] { DELETE }, "/_xpack/ml/calendars/{calendar_id}");
+		}
+		
+		internal TResponse XpackMlDeleteCalendarEventDispatch<TResponse>(IRequest<DeleteCalendarEventRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.EventId)) return _lowLevel.XpackMlDeleteCalendarEvent<TResponse>(p.RouteValues.CalendarId,p.RouteValues.EventId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlDeleteCalendarEvent", p, new [] { DELETE }, "/_xpack/ml/calendars/{calendar_id}/events/{event_id}");
+		}
+		
+		internal Task<TResponse> XpackMlDeleteCalendarEventDispatchAsync<TResponse>(IRequest<DeleteCalendarEventRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.EventId)) return _lowLevel.XpackMlDeleteCalendarEventAsync<TResponse>(p.RouteValues.CalendarId,p.RouteValues.EventId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlDeleteCalendarEvent", p, new [] { DELETE }, "/_xpack/ml/calendars/{calendar_id}/events/{event_id}");
+		}
+		
+		internal TResponse XpackMlDeleteCalendarJobDispatch<TResponse>(IRequest<DeleteCalendarJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.JobId)) return _lowLevel.XpackMlDeleteCalendarJob<TResponse>(p.RouteValues.CalendarId,p.RouteValues.JobId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlDeleteCalendarJob", p, new [] { DELETE }, "/_xpack/ml/calendars/{calendar_id}/jobs/{job_id}");
+		}
+		
+		internal Task<TResponse> XpackMlDeleteCalendarJobDispatchAsync<TResponse>(IRequest<DeleteCalendarJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.JobId)) return _lowLevel.XpackMlDeleteCalendarJobAsync<TResponse>(p.RouteValues.CalendarId,p.RouteValues.JobId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlDeleteCalendarJob", p, new [] { DELETE }, "/_xpack/ml/calendars/{calendar_id}/jobs/{job_id}");
 		}
 		
 		internal TResponse XpackMlDeleteDatafeedDispatch<TResponse>(IRequest<DeleteDatafeedRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
@@ -3394,6 +3508,50 @@ namespace Nest
 						return _lowLevel.XpackMlDeleteExpiredDataAsync<TResponse>(p.RequestParameters,ct);
 			}
 			throw InvalidDispatch("XpackMlDeleteExpiredData", p, new [] { DELETE }, "/_xpack/ml/_delete_expired_data");
+		}
+		
+		internal TResponse XpackMlDeleteFilterDispatch<TResponse>(IRequest<DeleteFilterRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.FilterId)) return _lowLevel.XpackMlDeleteFilter<TResponse>(p.RouteValues.FilterId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlDeleteFilter", p, new [] { DELETE }, "/_xpack/ml/filters/{filter_id}");
+		}
+		
+		internal Task<TResponse> XpackMlDeleteFilterDispatchAsync<TResponse>(IRequest<DeleteFilterRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.FilterId)) return _lowLevel.XpackMlDeleteFilterAsync<TResponse>(p.RouteValues.FilterId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlDeleteFilter", p, new [] { DELETE }, "/_xpack/ml/filters/{filter_id}");
+		}
+		
+		internal TResponse XpackMlDeleteForecastDispatch<TResponse>(IRequest<DeleteForecastRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.JobId, p.RouteValues.ForecastId)) return _lowLevel.XpackMlDeleteForecast<TResponse>(p.RouteValues.JobId,p.RouteValues.ForecastId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlDeleteForecast", p, new [] { DELETE }, "/_xpack/ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}");
+		}
+		
+		internal Task<TResponse> XpackMlDeleteForecastDispatchAsync<TResponse>(IRequest<DeleteForecastRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.JobId, p.RouteValues.ForecastId)) return _lowLevel.XpackMlDeleteForecastAsync<TResponse>(p.RouteValues.JobId,p.RouteValues.ForecastId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlDeleteForecast", p, new [] { DELETE }, "/_xpack/ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}");
 		}
 		
 		internal TResponse XpackMlDeleteJobDispatch<TResponse>(IRequest<DeleteJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
@@ -3512,6 +3670,56 @@ namespace Nest
 			throw InvalidDispatch("XpackMlGetBuckets", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/results/buckets");
 		}
 		
+		internal TResponse XpackMlGetCalendarsDispatch<TResponse>(IRequest<GetCalendarsRequestParameters> p,SerializableData<IGetCalendarsRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.CalendarId)) return _lowLevel.XpackMlGetCalendars<TResponse>(p.RouteValues.CalendarId,p.RequestParameters);
+						return _lowLevel.XpackMlGetCalendars<TResponse>(p.RequestParameters);
+				case POST:
+					if (AllSet(p.RouteValues.CalendarId)) return _lowLevel.XpackMlGetCalendars<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters);
+						return _lowLevel.XpackMlGetCalendars<TResponse>(body,p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackMlGetCalendars", p, new [] { GET, POST }, "/_xpack/ml/calendars", "/_xpack/ml/calendars/{calendar_id}");
+		}
+		
+		internal Task<TResponse> XpackMlGetCalendarsDispatchAsync<TResponse>(IRequest<GetCalendarsRequestParameters> p,SerializableData<IGetCalendarsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.CalendarId)) return _lowLevel.XpackMlGetCalendarsAsync<TResponse>(p.RouteValues.CalendarId,p.RequestParameters,ct);
+						return _lowLevel.XpackMlGetCalendarsAsync<TResponse>(p.RequestParameters,ct);
+				case POST:
+					if (AllSet(p.RouteValues.CalendarId)) return _lowLevel.XpackMlGetCalendarsAsync<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters,ct);
+						return _lowLevel.XpackMlGetCalendarsAsync<TResponse>(body,p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackMlGetCalendars", p, new [] { GET, POST }, "/_xpack/ml/calendars", "/_xpack/ml/calendars/{calendar_id}");
+		}
+		
+		internal TResponse XpackMlGetCalendarEventsDispatch<TResponse>(IRequest<GetCalendarEventsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.XpackMlGetCalendarEvents<TResponse>(p.RouteValues.CalendarId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlGetCalendarEvents", p, new [] { GET }, "/_xpack/ml/calendars/{calendar_id}/events");
+		}
+		
+		internal Task<TResponse> XpackMlGetCalendarEventsDispatchAsync<TResponse>(IRequest<GetCalendarEventsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.XpackMlGetCalendarEventsAsync<TResponse>(p.RouteValues.CalendarId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlGetCalendarEvents", p, new [] { GET }, "/_xpack/ml/calendars/{calendar_id}/events");
+		}
+		
 		internal TResponse XpackMlGetCategoriesDispatch<TResponse>(IRequest<GetCategoriesRequestParameters> p,SerializableData<IGetCategoriesRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -3586,6 +3794,28 @@ namespace Nest
 						return _lowLevel.XpackMlGetDatafeedStatsAsync<TResponse>(p.RequestParameters,ct);
 			}
 			throw InvalidDispatch("XpackMlGetDatafeedStats", p, new [] { GET }, "/_xpack/ml/datafeeds/{datafeed_id}/_stats", "/_xpack/ml/datafeeds/_stats");
+		}
+		
+		internal TResponse XpackMlGetFiltersDispatch<TResponse>(IRequest<GetFiltersRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.FilterId)) return _lowLevel.XpackMlGetFilters<TResponse>(p.RouteValues.FilterId,p.RequestParameters);
+						return _lowLevel.XpackMlGetFilters<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackMlGetFilters", p, new [] { GET }, "/_xpack/ml/filters", "/_xpack/ml/filters/{filter_id}");
+		}
+		
+		internal Task<TResponse> XpackMlGetFiltersDispatchAsync<TResponse>(IRequest<GetFiltersRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.FilterId)) return _lowLevel.XpackMlGetFiltersAsync<TResponse>(p.RouteValues.FilterId,p.RequestParameters,ct);
+						return _lowLevel.XpackMlGetFiltersAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackMlGetFilters", p, new [] { GET }, "/_xpack/ml/filters", "/_xpack/ml/filters/{filter_id}");
 		}
 		
 		internal TResponse XpackMlGetInfluencersDispatch<TResponse>(IRequest<GetInfluencersRequestParameters> p,SerializableData<IGetInfluencersRequest> body) where TResponse : class, IElasticsearchResponse, new()
@@ -3748,6 +3978,26 @@ namespace Nest
 			throw InvalidDispatch("XpackMlGetRecords", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/results/records");
 		}
 		
+		internal TResponse XpackMlInfoDispatch<TResponse>(IRequest<MachineLearningInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.XpackMlInfo<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackMlInfo", p, new [] { GET }, "/_xpack/ml/info");
+		}
+		
+		internal Task<TResponse> XpackMlInfoDispatchAsync<TResponse>(IRequest<MachineLearningInfoRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.XpackMlInfoAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackMlInfo", p, new [] { GET }, "/_xpack/ml/info");
+		}
+		
 		internal TResponse XpackMlOpenJobDispatch<TResponse>(IRequest<OpenJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -3768,6 +4018,28 @@ namespace Nest
 					break;
 			}
 			throw InvalidDispatch("XpackMlOpenJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_open");
+		}
+		
+		internal TResponse XpackMlPostCalendarEventsDispatch<TResponse>(IRequest<PostCalendarEventsRequestParameters> p,SerializableData<IPostCalendarEventsRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.XpackMlPostCalendarEvents<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlPostCalendarEvents", p, new [] { POST }, "/_xpack/ml/calendars/{calendar_id}/events");
+		}
+		
+		internal Task<TResponse> XpackMlPostCalendarEventsDispatchAsync<TResponse>(IRequest<PostCalendarEventsRequestParameters> p,SerializableData<IPostCalendarEventsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.XpackMlPostCalendarEventsAsync<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlPostCalendarEvents", p, new [] { POST }, "/_xpack/ml/calendars/{calendar_id}/events");
 		}
 		
 		internal TResponse XpackMlPostDataDispatch<TResponse>(IRequest<PostJobDataRequestParameters> p,SerializableData<IPostJobDataRequest> body) where TResponse : class, IElasticsearchResponse, new()
@@ -3814,6 +4086,50 @@ namespace Nest
 			throw InvalidDispatch("XpackMlPreviewDatafeed", p, new [] { GET }, "/_xpack/ml/datafeeds/{datafeed_id}/_preview");
 		}
 		
+		internal TResponse XpackMlPutCalendarDispatch<TResponse>(IRequest<PutCalendarRequestParameters> p,SerializableData<IPutCalendarRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.XpackMlPutCalendar<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlPutCalendar", p, new [] { PUT }, "/_xpack/ml/calendars/{calendar_id}");
+		}
+		
+		internal Task<TResponse> XpackMlPutCalendarDispatchAsync<TResponse>(IRequest<PutCalendarRequestParameters> p,SerializableData<IPutCalendarRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.CalendarId)) return _lowLevel.XpackMlPutCalendarAsync<TResponse>(p.RouteValues.CalendarId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlPutCalendar", p, new [] { PUT }, "/_xpack/ml/calendars/{calendar_id}");
+		}
+		
+		internal TResponse XpackMlPutCalendarJobDispatch<TResponse>(IRequest<PutCalendarJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.JobId)) return _lowLevel.XpackMlPutCalendarJob<TResponse>(p.RouteValues.CalendarId,p.RouteValues.JobId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlPutCalendarJob", p, new [] { PUT }, "/_xpack/ml/calendars/{calendar_id}/jobs/{job_id}");
+		}
+		
+		internal Task<TResponse> XpackMlPutCalendarJobDispatchAsync<TResponse>(IRequest<PutCalendarJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.CalendarId, p.RouteValues.JobId)) return _lowLevel.XpackMlPutCalendarJobAsync<TResponse>(p.RouteValues.CalendarId,p.RouteValues.JobId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlPutCalendarJob", p, new [] { PUT }, "/_xpack/ml/calendars/{calendar_id}/jobs/{job_id}");
+		}
+		
 		internal TResponse XpackMlPutDatafeedDispatch<TResponse>(IRequest<PutDatafeedRequestParameters> p,SerializableData<IPutDatafeedRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -3834,6 +4150,28 @@ namespace Nest
 					break;
 			}
 			throw InvalidDispatch("XpackMlPutDatafeed", p, new [] { PUT }, "/_xpack/ml/datafeeds/{datafeed_id}");
+		}
+		
+		internal TResponse XpackMlPutFilterDispatch<TResponse>(IRequest<PutFilterRequestParameters> p,SerializableData<IPutFilterRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.FilterId)) return _lowLevel.XpackMlPutFilter<TResponse>(p.RouteValues.FilterId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlPutFilter", p, new [] { PUT }, "/_xpack/ml/filters/{filter_id}");
+		}
+		
+		internal Task<TResponse> XpackMlPutFilterDispatchAsync<TResponse>(IRequest<PutFilterRequestParameters> p,SerializableData<IPutFilterRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.FilterId)) return _lowLevel.XpackMlPutFilterAsync<TResponse>(p.RouteValues.FilterId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlPutFilter", p, new [] { PUT }, "/_xpack/ml/filters/{filter_id}");
 		}
 		
 		internal TResponse XpackMlPutJobDispatch<TResponse>(IRequest<PutJobRequestParameters> p,SerializableData<IPutJobRequest> body) where TResponse : class, IElasticsearchResponse, new()
@@ -3944,6 +4282,28 @@ namespace Nest
 					break;
 			}
 			throw InvalidDispatch("XpackMlUpdateDatafeed", p, new [] { POST }, "/_xpack/ml/datafeeds/{datafeed_id}/_update");
+		}
+		
+		internal TResponse XpackMlUpdateFilterDispatch<TResponse>(IRequest<UpdateFilterRequestParameters> p,SerializableData<IUpdateFilterRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.FilterId)) return _lowLevel.XpackMlUpdateFilter<TResponse>(p.RouteValues.FilterId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlUpdateFilter", p, new [] { POST }, "/_xpack/ml/filters/{filter_id}/_update");
+		}
+		
+		internal Task<TResponse> XpackMlUpdateFilterDispatchAsync<TResponse>(IRequest<UpdateFilterRequestParameters> p,SerializableData<IUpdateFilterRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.FilterId)) return _lowLevel.XpackMlUpdateFilterAsync<TResponse>(p.RouteValues.FilterId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlUpdateFilter", p, new [] { POST }, "/_xpack/ml/filters/{filter_id}/_update");
 		}
 		
 		internal TResponse XpackMlUpdateJobDispatch<TResponse>(IRequest<UpdateJobRequestParameters> p,SerializableData<IUpdateJobRequest> body) where TResponse : class, IElasticsearchResponse, new()
@@ -4374,6 +4734,28 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityClearCachedRoles", p, new [] { POST }, "/_xpack/security/role/{name}/_clear_cache");
 		}
 		
+		internal TResponse XpackSecurityDeletePrivilegesDispatch<TResponse>(IRequest<DeletePrivilegesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Application, p.RouteValues.Name)) return _lowLevel.XpackSecurityDeletePrivileges<TResponse>(p.RouteValues.Application,p.RouteValues.Name,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackSecurityDeletePrivileges", p, new [] { DELETE }, "/_xpack/security/privilege/{application}/{name}");
+		}
+		
+		internal Task<TResponse> XpackSecurityDeletePrivilegesDispatchAsync<TResponse>(IRequest<DeletePrivilegesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Application, p.RouteValues.Name)) return _lowLevel.XpackSecurityDeletePrivilegesAsync<TResponse>(p.RouteValues.Application,p.RouteValues.Name,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackSecurityDeletePrivileges", p, new [] { DELETE }, "/_xpack/security/privilege/{application}/{name}");
+		}
+		
 		internal TResponse XpackSecurityDeleteRoleDispatch<TResponse>(IRequest<DeleteRoleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -4445,10 +4827,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case PUT:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.XpackSecurityDisableUser<TResponse>(p.RouteValues.Username,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.XpackSecurityDisableUser<TResponse>(p.RouteValues.Username,p.RequestParameters);
 					break;
 				case POST:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.XpackSecurityDisableUserPost<TResponse>(p.RouteValues.Username,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.XpackSecurityDisableUserPost<TResponse>(p.RouteValues.Username,p.RequestParameters);
 					break;
 			}
 			throw InvalidDispatch("XpackSecurityDisableUser", p, new [] { PUT, POST }, "/_xpack/security/user/{username}/_disable");
@@ -4459,10 +4841,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case PUT:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.XpackSecurityDisableUserAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.XpackSecurityDisableUserAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
 					break;
 				case POST:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.XpackSecurityDisableUserPostAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.XpackSecurityDisableUserPostAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
 					break;
 			}
 			throw InvalidDispatch("XpackSecurityDisableUser", p, new [] { PUT, POST }, "/_xpack/security/user/{username}/_disable");
@@ -4473,10 +4855,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case PUT:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.XpackSecurityEnableUser<TResponse>(p.RouteValues.Username,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.XpackSecurityEnableUser<TResponse>(p.RouteValues.Username,p.RequestParameters);
 					break;
 				case POST:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.XpackSecurityEnableUserPost<TResponse>(p.RouteValues.Username,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.XpackSecurityEnableUserPost<TResponse>(p.RouteValues.Username,p.RequestParameters);
 					break;
 			}
 			throw InvalidDispatch("XpackSecurityEnableUser", p, new [] { PUT, POST }, "/_xpack/security/user/{username}/_enable");
@@ -4487,13 +4869,37 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case PUT:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.XpackSecurityEnableUserAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.XpackSecurityEnableUserAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
 					break;
 				case POST:
-					if (AllSet(p.RouteValues.Username)) return _lowLevel.XpackSecurityEnableUserPostAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.XpackSecurityEnableUserPostAsync<TResponse>(p.RouteValues.Username,p.RequestParameters,ct);
 					break;
 			}
 			throw InvalidDispatch("XpackSecurityEnableUser", p, new [] { PUT, POST }, "/_xpack/security/user/{username}/_enable");
+		}
+		
+		internal TResponse XpackSecurityGetPrivilegesDispatch<TResponse>(IRequest<GetPrivilegesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Application, p.RouteValues.Name)) return _lowLevel.XpackSecurityGetPrivileges<TResponse>(p.RouteValues.Application,p.RouteValues.Name,p.RequestParameters);
+					if (AllSet(p.RouteValues.Application)) return _lowLevel.XpackSecurityGetPrivileges<TResponse>(p.RouteValues.Application,p.RequestParameters);
+						return _lowLevel.XpackSecurityGetPrivileges<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackSecurityGetPrivileges", p, new [] { GET }, "/_xpack/security/privilege", "/_xpack/security/privilege/{application}", "/_xpack/security/privilege/{application}/{name}");
+		}
+		
+		internal Task<TResponse> XpackSecurityGetPrivilegesDispatchAsync<TResponse>(IRequest<GetPrivilegesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Application, p.RouteValues.Name)) return _lowLevel.XpackSecurityGetPrivilegesAsync<TResponse>(p.RouteValues.Application,p.RouteValues.Name,p.RequestParameters,ct);
+					if (AllSet(p.RouteValues.Application)) return _lowLevel.XpackSecurityGetPrivilegesAsync<TResponse>(p.RouteValues.Application,p.RequestParameters,ct);
+						return _lowLevel.XpackSecurityGetPrivilegesAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackSecurityGetPrivileges", p, new [] { GET }, "/_xpack/security/privilege", "/_xpack/security/privilege/{application}", "/_xpack/security/privilege/{application}/{name}");
 		}
 		
 		internal TResponse XpackSecurityGetRoleDispatch<TResponse>(IRequest<GetRoleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
@@ -4582,6 +4988,54 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityGetUser", p, new [] { GET }, "/_xpack/security/user/{username}", "/_xpack/security/user");
 		}
 		
+		internal TResponse XpackSecurityGetUserPrivilegesDispatch<TResponse>(IRequest<GetUserPrivilegesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.XpackSecurityGetUserPrivileges<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackSecurityGetUserPrivileges", p, new [] { GET }, "/_xpack/security/user/_privileges");
+		}
+		
+		internal Task<TResponse> XpackSecurityGetUserPrivilegesDispatchAsync<TResponse>(IRequest<GetUserPrivilegesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.XpackSecurityGetUserPrivilegesAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackSecurityGetUserPrivileges", p, new [] { GET }, "/_xpack/security/user/_privileges");
+		}
+		
+		internal TResponse XpackSecurityHasPrivilegesDispatch<TResponse>(IRequest<HasPrivilegesRequestParameters> p,SerializableData<IHasPrivilegesRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.User)) return _lowLevel.XpackSecurityHasPrivilegesGet<TResponse>(p.RouteValues.User,p.RequestParameters);
+						return _lowLevel.XpackSecurityHasPrivilegesGet<TResponse>(p.RequestParameters);
+				case POST:
+					if (AllSet(p.RouteValues.User)) return _lowLevel.XpackSecurityHasPrivileges<TResponse>(p.RouteValues.User,body,p.RequestParameters);
+						return _lowLevel.XpackSecurityHasPrivileges<TResponse>(body,p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackSecurityHasPrivileges", p, new [] { GET, POST }, "/_xpack/security/user/_has_privileges", "/_xpack/security/user/{user}/_has_privileges");
+		}
+		
+		internal Task<TResponse> XpackSecurityHasPrivilegesDispatchAsync<TResponse>(IRequest<HasPrivilegesRequestParameters> p,SerializableData<IHasPrivilegesRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.User)) return _lowLevel.XpackSecurityHasPrivilegesGetAsync<TResponse>(p.RouteValues.User,p.RequestParameters,ct);
+						return _lowLevel.XpackSecurityHasPrivilegesGetAsync<TResponse>(p.RequestParameters,ct);
+				case POST:
+					if (AllSet(p.RouteValues.User)) return _lowLevel.XpackSecurityHasPrivilegesAsync<TResponse>(p.RouteValues.User,body,p.RequestParameters,ct);
+						return _lowLevel.XpackSecurityHasPrivilegesAsync<TResponse>(body,p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackSecurityHasPrivileges", p, new [] { GET, POST }, "/_xpack/security/user/_has_privileges", "/_xpack/security/user/{user}/_has_privileges");
+		}
+		
 		internal TResponse XpackSecurityInvalidateTokenDispatch<TResponse>(IRequest<InvalidateUserAccessTokenRequestParameters> p,SerializableData<IInvalidateUserAccessTokenRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -4600,6 +5054,30 @@ namespace Nest
 						return _lowLevel.XpackSecurityInvalidateTokenAsync<TResponse>(body,p.RequestParameters,ct);
 			}
 			throw InvalidDispatch("XpackSecurityInvalidateToken", p, new [] { DELETE }, "/_xpack/security/oauth2/token");
+		}
+		
+		internal TResponse XpackSecurityPutPrivilegesDispatch<TResponse>(IRequest<PutPrivilegesRequestParameters> p,SerializableData<IPutPrivilegesRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+						return _lowLevel.XpackSecurityPutPrivileges<TResponse>(body,p.RequestParameters);
+				case POST:
+						return _lowLevel.XpackSecurityPutPrivilegesPost<TResponse>(body,p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackSecurityPutPrivileges", p, new [] { PUT, POST }, "/_xpack/security/privilege/");
+		}
+		
+		internal Task<TResponse> XpackSecurityPutPrivilegesDispatchAsync<TResponse>(IRequest<PutPrivilegesRequestParameters> p,SerializableData<IPutPrivilegesRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+						return _lowLevel.XpackSecurityPutPrivilegesAsync<TResponse>(body,p.RequestParameters,ct);
+				case POST:
+						return _lowLevel.XpackSecurityPutPrivilegesPostAsync<TResponse>(body,p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackSecurityPutPrivileges", p, new [] { PUT, POST }, "/_xpack/security/privilege/");
 		}
 		
 		internal TResponse XpackSecurityPutRoleDispatch<TResponse>(IRequest<PutRoleRequestParameters> p,SerializableData<IPutRoleRequest> body) where TResponse : class, IElasticsearchResponse, new()

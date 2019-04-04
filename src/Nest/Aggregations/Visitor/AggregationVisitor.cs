@@ -66,6 +66,8 @@
 
 		void Visit(INestedAggregation aggregation);
 
+		void Visit(IParentAggregation aggregation);
+
 		void Visit(IReverseNestedAggregation aggregation);
 
 		void Visit(IRangeAggregation aggregation);
@@ -117,6 +119,8 @@
 		void Visit(IGeoCentroidAggregation aggregation);
 
 		void Visit(ICompositeAggregation aggregation);
+
+		void Visit(IMedianAbsoluteDeviationAggregation aggregation);
 	}
 
 	public class AggregationVisitor : IAggregationVisitor
@@ -149,6 +153,7 @@
 
 		public virtual void Visit(ITermsAggregation aggregation) { }
 
+		// TODO: make virtual
 		public void Visit(ISignificantTextAggregation aggregation) { }
 
 		public virtual void Visit(IPercentileRanksAggregation aggregation) { }
@@ -195,6 +200,8 @@
 
 		public virtual void Visit(INestedAggregation aggregation) { }
 
+		public virtual void Visit(IParentAggregation aggregation) { }
+
 		public virtual void Visit(ICardinalityAggregation aggregation) { }
 
 		public virtual void Visit(IGlobalAggregation aggregation) { }
@@ -218,6 +225,8 @@
 		public virtual void Visit(IGeoCentroidAggregation aggregation) { }
 
 		public virtual void Visit(ICompositeAggregation aggregation) { }
+
+		public virtual void Visit(IMedianAbsoluteDeviationAggregation aggregation) { }
 
 		public virtual void Visit(IAggregation aggregation) { }
 

@@ -5,8 +5,10 @@ namespace Nest
 	/// <summary>
 	/// Transforms are used to process Unicode text in many different ways, such as case mapping,
 	/// normalization, transliteration and bidirectional text handling.
-	/// Part of the `analysis-icu` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-icu.html
 	/// </summary>
+	/// <remarks>
+	/// Requires analysis-icu plugin to be installed
+	/// </remarks>
 	public interface IIcuTransformTokenFilter : ITokenFilter
 	{
 		/// <summary>
@@ -40,9 +42,9 @@ namespace Nest
 		string IIcuTransformTokenFilter.Id { get; set; }
 
 		/// <inheritdoc />
-		public IcuTransformTokenFilterDescriptor Direction(IcuTransformDirection? direction) => Assign(a => a.Direction = direction);
+		public IcuTransformTokenFilterDescriptor Direction(IcuTransformDirection? direction) => Assign(direction, (a, v) => a.Direction = v);
 
 		/// <inheritdoc />
-		public IcuTransformTokenFilterDescriptor Id(string id) => Assign(a => a.Id = id);
+		public IcuTransformTokenFilterDescriptor Id(string id) => Assign(id, (a, v) => a.Id = v);
 	}
 }

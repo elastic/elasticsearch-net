@@ -36,6 +36,12 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("time_zone")]
 		string TimeZone { get; set; }
+
+		/// <summary>
+		/// Date format. Supports expressive date format pattern.
+		/// </summary>
+		[JsonProperty("format")]
+		string Format { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -52,6 +58,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public string TimeZone { get; set; }
+
+		/// <inheritdoc />
+		public string Format { get; set; }
 	}
 
 	/// <inheritdoc cref="IDateHistogramRollupGrouping" />
@@ -64,19 +73,24 @@ namespace Nest
 		Time IDateHistogramRollupGrouping.Interval { get; set; }
 		string IDateHistogramRollupGrouping.TimeZone { get; set; }
 
-		/// <inheritdoc cref="IDateHistogramRollupGrouping.Field" />
-		public DateHistogramRollupGroupingDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		string IDateHistogramRollupGrouping.Format { get; set; }
 
 		/// <inheritdoc cref="IDateHistogramRollupGrouping.Field" />
-		public DateHistogramRollupGroupingDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public DateHistogramRollupGroupingDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
+
+		/// <inheritdoc cref="IDateHistogramRollupGrouping.Field" />
+		public DateHistogramRollupGroupingDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IDateHistogramRollupGrouping.Interval" />
-		public DateHistogramRollupGroupingDescriptor<T> Interval(Time interval) => Assign(a => a.Interval = interval);
+		public DateHistogramRollupGroupingDescriptor<T> Interval(Time interval) => Assign(interval, (a, v) => a.Interval = v);
 
 		/// <inheritdoc cref="IDateHistogramRollupGrouping.Delay" />
-		public DateHistogramRollupGroupingDescriptor<T> Delay(Time delay) => Assign(a => a.Delay = delay);
+		public DateHistogramRollupGroupingDescriptor<T> Delay(Time delay) => Assign(delay, (a, v) => a.Delay = v);
 
 		/// <inheritdoc cref="IDateHistogramRollupGrouping.TimeZone" />
-		public DateHistogramRollupGroupingDescriptor<T> TimeZone(string timeZone) => Assign(a => a.TimeZone = timeZone);
+		public DateHistogramRollupGroupingDescriptor<T> TimeZone(string timeZone) => Assign(timeZone, (a, v) => a.TimeZone = v);
+
+		/// <inheritdoc cref="IDateHistogramRollupGrouping.Format" />
+		public DateHistogramRollupGroupingDescriptor<T> Format(string format) => Assign(format, (a, v) => a.Format = v);
 	}
 }

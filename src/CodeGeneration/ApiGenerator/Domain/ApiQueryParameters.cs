@@ -6,7 +6,10 @@ namespace ApiGenerator.Domain
 {
 	public class ApiQueryParameters
 	{
-		private static readonly string[] FieldsParams = { "fields", "_source_include", "_source_exclude" };
+		private static readonly string[] FieldsParams =
+		{
+			"fields", "_source_include", "_source_exclude", "_source_includes", "_source_excludes",
+		};
 
 		public string ClsArgumentName => ClsName.ToCamelCase();
 
@@ -101,7 +104,7 @@ namespace ApiGenerator.Domain
 				{
 					case "boolean": return "bool?";
 					case "list": return "string[]";
-					case "integer": return "int?";
+					case "int": return "int?";
 					case "date": return "DateTimeOffset?";
 					case "enum": return $"{ClsName}?";
 					case "number":

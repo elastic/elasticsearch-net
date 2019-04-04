@@ -39,9 +39,9 @@ namespace Nest
 		GeoShapeRelation? IGeoShapeQuery.Relation { get; set; }
 
 		/// <inheritdoc cref="IGeoShapeQuery.Relation" />
-		public TDescriptor Relation(GeoShapeRelation? relation) => Assign(a => a.Relation = relation);
+		public TDescriptor Relation(GeoShapeRelation? relation) => Assign(relation, (a, v) => a.Relation = v);
 
 		/// <inheritdoc cref="IGeoShapeQuery.IgnoreUnmapped" />
-		public TDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(a => a.IgnoreUnmapped = ignoreUnmapped);
+		public TDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmapped = v);
 	}
 }

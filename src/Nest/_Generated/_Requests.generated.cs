@@ -21,7 +21,7 @@ namespace Nest
 		///<summary>Include the stack trace of returned errors.</summary>
 		public bool? ErrorTrace { get => Q<bool?>("error_trace"); set => Q("error_trace", value); }
 		///<summary>
-		/// A comma-separated list of filters used to reduce the response.
+		/// A comma-separated list of filters used to reduce the respone.
 		/// <para>Use of response filtering can result in a response from Elasticsearch
 		/// that cannot be correctly deserialized to the respective response type for the request.
 		/// In such situations, use the low level client to issue the request and handle response deserialization</para>
@@ -211,9 +211,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
 	}
@@ -1214,6 +1214,10 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+		///<summary>Wait for the metadata version to be equal or greater than the specified metadata version</summary>
+		public long? WaitForMetadataVersion { get => Q<long?>("wait_for_metadata_version"); set => Q("wait_for_metadata_version", value); }
+		///<summary>The maximum time to wait for wait_for_metadata_version before timing out</summary>
+		public Time WaitForTimeout { get => Q<Time>("wait_for_timeout"); set => Q("wait_for_timeout", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
@@ -1273,6 +1277,8 @@ namespace Nest
 		// Request parameters
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -1327,6 +1333,8 @@ namespace Nest
 		// Request parameters
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -1395,6 +1403,11 @@ namespace Nest
 		IndexName ICreateFollowIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
 		// Request parameters
+		///<summary>
+		/// Sets the number of shard copies that must be active before returning. Defaults to 0. Set to `all` for all shard copies, otherwise set to
+		/// any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
+		///</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICreateIndexRequest : IRequest<CreateIndexRequestParameters>
@@ -1412,6 +1425,8 @@ namespace Nest
 		IndexName ICreateIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
 		// Request parameters
+		///<summary>Whether a type should be expected in the body of the mappings.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Set the number of active shards to wait for before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 		///<summary>Explicit operation timeout</summary>
@@ -1653,9 +1668,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
@@ -1747,9 +1762,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
@@ -1776,6 +1791,82 @@ namespace Nest
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeleteByQueryRethrottleRequest : IRequest<DeleteByQueryRethrottleRequestParameters>
+	{
+		TaskId TaskId { get; }
+	}
+	///<summary>Request parameters for DeleteByQueryRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html</pre></summary>
+	public partial class DeleteByQueryRethrottleRequest : PlainRequestBase<DeleteByQueryRethrottleRequestParameters>, IDeleteByQueryRethrottleRequest
+	{
+		protected IDeleteByQueryRethrottleRequest Self => this;
+		///<summary>/_delete_by_query/{task_id}/_rethrottle</summary>
+		///<param name="task_id">this parameter is required</param>
+		public DeleteByQueryRethrottleRequest(TaskId task_id) : base(r=>r.Required("task_id", task_id)){}
+		// values part of the url path
+		TaskId IDeleteByQueryRethrottleRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
+
+		// Request parameters
+		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
+		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeleteCalendarEventRequest : IRequest<DeleteCalendarEventRequestParameters>
+	{
+		Id CalendarId { get; }
+		Id EventId { get; }
+	}
+	///<summary>Request parameters for XpackMlDeleteCalendarEvent <pre></pre></summary>
+	public partial class DeleteCalendarEventRequest : PlainRequestBase<DeleteCalendarEventRequestParameters>, IDeleteCalendarEventRequest
+	{
+		protected IDeleteCalendarEventRequest Self => this;
+		///<summary>/_xpack/ml/calendars/{calendar_id}/events/{event_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		///<param name="event_id">this parameter is required</param>
+		public DeleteCalendarEventRequest(Id calendar_id, Id event_id) : base(r=>r.Required("calendar_id", calendar_id).Required("event_id", event_id)){}
+		// values part of the url path
+		Id IDeleteCalendarEventRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+		Id IDeleteCalendarEventRequest.EventId => Self.RouteValues.Get<Id>("event_id");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeleteCalendarJobRequest : IRequest<DeleteCalendarJobRequestParameters>
+	{
+		Id CalendarId { get; }
+		Id JobId { get; }
+	}
+	///<summary>Request parameters for XpackMlDeleteCalendarJob <pre></pre></summary>
+	public partial class DeleteCalendarJobRequest : PlainRequestBase<DeleteCalendarJobRequestParameters>, IDeleteCalendarJobRequest
+	{
+		protected IDeleteCalendarJobRequest Self => this;
+		///<summary>/_xpack/ml/calendars/{calendar_id}/jobs/{job_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		///<param name="job_id">this parameter is required</param>
+		public DeleteCalendarJobRequest(Id calendar_id, Id job_id) : base(r=>r.Required("calendar_id", calendar_id).Required("job_id", job_id)){}
+		// values part of the url path
+		Id IDeleteCalendarJobRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+		Id IDeleteCalendarJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeleteCalendarRequest : IRequest<DeleteCalendarRequestParameters>
+	{
+		Id CalendarId { get; }
+	}
+	///<summary>Request parameters for XpackMlDeleteCalendar <pre></pre></summary>
+	public partial class DeleteCalendarRequest : PlainRequestBase<DeleteCalendarRequestParameters>, IDeleteCalendarRequest
+	{
+		protected IDeleteCalendarRequest Self => this;
+		///<summary>/_xpack/ml/calendars/{calendar_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		public DeleteCalendarRequest(Id calendar_id) : base(r=>r.Required("calendar_id", calendar_id)){}
+		// values part of the url path
+		Id IDeleteCalendarRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteDatafeedRequest : IRequest<DeleteDatafeedRequestParameters>
@@ -1807,6 +1898,47 @@ namespace Nest
 		// values part of the url path
 
 		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeleteFilterRequest : IRequest<DeleteFilterRequestParameters>
+	{
+		Id FilterId { get; }
+	}
+	///<summary>Request parameters for XpackMlDeleteFilter <pre></pre></summary>
+	public partial class DeleteFilterRequest : PlainRequestBase<DeleteFilterRequestParameters>, IDeleteFilterRequest
+	{
+		protected IDeleteFilterRequest Self => this;
+		///<summary>/_xpack/ml/filters/{filter_id}</summary>
+		///<param name="filter_id">this parameter is required</param>
+		public DeleteFilterRequest(Id filter_id) : base(r=>r.Required("filter_id", filter_id)){}
+		// values part of the url path
+		Id IDeleteFilterRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeleteForecastRequest : IRequest<DeleteForecastRequestParameters>
+	{
+		Id JobId { get; }
+		ForecastIds ForecastId { get; }
+	}
+	///<summary>Request parameters for XpackMlDeleteForecast <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</pre></summary>
+	public partial class DeleteForecastRequest : PlainRequestBase<DeleteForecastRequestParameters>, IDeleteForecastRequest
+	{
+		protected IDeleteForecastRequest Self => this;
+		///<summary>/_xpack/ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}</summary>
+		///<param name="job_id">this parameter is required</param>
+		///<param name="forecast_id">this parameter is required</param>
+		public DeleteForecastRequest(Id job_id, ForecastIds forecast_id) : base(r=>r.Required("job_id", job_id).Required("forecast_id", forecast_id)){}
+		// values part of the url path
+		Id IDeleteForecastRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		ForecastIds IDeleteForecastRequest.ForecastId => Self.RouteValues.Get<ForecastIds>("forecast_id");
+
+		// Request parameters
+		///<summary>Whether to ignore if `_all` matches no forecasts</summary>
+		public bool? AllowNoForecasts { get => Q<bool?>("allow_no_forecasts"); set => Q("allow_no_forecasts", value); }
+		///<summary>Controls the time to wait until the forecast(s) are deleted. Default to 30 seconds</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteIndexRequest : IRequest<DeleteIndexRequestParameters>
@@ -1931,6 +2063,31 @@ namespace Nest
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeletePrivilegesRequest : IRequest<DeletePrivilegesRequestParameters>
+	{
+		Name Application { get; }
+		Name Name { get; }
+	}
+	///<summary>Request parameters for XpackSecurityDeletePrivileges <pre>TODO</pre></summary>
+	public partial class DeletePrivilegesRequest : PlainRequestBase<DeletePrivilegesRequestParameters>, IDeletePrivilegesRequest
+	{
+		protected IDeletePrivilegesRequest Self => this;
+		///<summary>/_xpack/security/privilege/{application}/{name}</summary>
+		///<param name="application">this parameter is required</param>
+		///<param name="name">this parameter is required</param>
+		public DeletePrivilegesRequest(Name application, Name name) : base(r=>r.Required("application", application).Required("name", name)){}
+		// values part of the url path
+		Name IDeletePrivilegesRequest.Application => Self.RouteValues.Get<Name>("application");
+		Name IDeletePrivilegesRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteRepositoryRequest : IRequest<DeleteRepositoryRequestParameters>
 	{
 		Names RepositoryName { get; }
@@ -2004,6 +2161,10 @@ namespace Nest
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+		///<summary>only perform the delete operation if the last operation that has changed the document has the specified sequence number</summary>
+		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+		///<summary>only perform the delete operation if the last operation that has changed the document has the specified primary term</summary>
+		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -2049,6 +2210,10 @@ namespace Nest
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+		///<summary>only perform the delete operation if the last operation that has changed the document has the specified sequence number</summary>
+		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+		///<summary>only perform the delete operation if the last operation that has changed the document has the specified primary term</summary>
+		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -2228,8 +2393,8 @@ namespace Nest
 	{
 		protected IDisableUserRequest Self => this;
 		///<summary>/_xpack/security/user/{username}/_disable</summary>
-		///<param name="username">Optional, accepts null</param>
-		public DisableUserRequest(Name username) : base(r=>r.Optional("username", username)){}
+		///<param name="username">this parameter is required</param>
+		public DisableUserRequest(Name username) : base(r=>r.Required("username", username)){}
 		// values part of the url path
 		Name IDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
 
@@ -2291,9 +2456,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -2337,9 +2502,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -2355,8 +2520,8 @@ namespace Nest
 	{
 		protected IEnableUserRequest Self => this;
 		///<summary>/_xpack/security/user/{username}/_enable</summary>
-		///<param name="username">Optional, accepts null</param>
-		public EnableUserRequest(Name username) : base(r=>r.Optional("username", username)){}
+		///<param name="username">this parameter is required</param>
+		public EnableUserRequest(Name username) : base(r=>r.Required("username", username)){}
 		// values part of the url path
 		Name IEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
 
@@ -2457,9 +2622,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IFieldCapabilitiesRequest : IRequest<FieldCapabilitiesRequestParameters>
@@ -2673,18 +2838,6 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetBasicLicenseStatusRequest : IRequest<GetBasicLicenseStatusRequestParameters>
-	{
-	}
-	///<summary>Request parameters for XpackLicenseGetBasicStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
-	public partial class GetBasicLicenseStatusRequest : PlainRequestBase<GetBasicLicenseStatusRequestParameters>, IGetBasicLicenseStatusRequest
-	{
-		protected IGetBasicLicenseStatusRequest Self => this;
-		// values part of the url path
-
-		// Request parameters
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetAutoFollowPatternRequest : IRequest<GetAutoFollowPatternRequestParameters>
 	{
 		Name Name { get; }
@@ -2704,6 +2857,18 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetBasicLicenseStatusRequest : IRequest<GetBasicLicenseStatusRequestParameters>
+	{
+	}
+	///<summary>Request parameters for XpackLicenseGetBasicStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	public partial class GetBasicLicenseStatusRequest : PlainRequestBase<GetBasicLicenseStatusRequestParameters>, IGetBasicLicenseStatusRequest
+	{
+		protected IGetBasicLicenseStatusRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetBucketsRequest : IRequest<GetBucketsRequestParameters>
 	{
 		Id JobId { get; }
@@ -2717,6 +2882,48 @@ namespace Nest
 		public GetBucketsRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 		// values part of the url path
 		Id IGetBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetCalendarEventsRequest : IRequest<GetCalendarEventsRequestParameters>
+	{
+		Id CalendarId { get; }
+	}
+	///<summary>Request parameters for XpackMlGetCalendarEvents <pre></pre></summary>
+	public partial class GetCalendarEventsRequest : PlainRequestBase<GetCalendarEventsRequestParameters>, IGetCalendarEventsRequest
+	{
+		protected IGetCalendarEventsRequest Self => this;
+		///<summary>/_xpack/ml/calendars/{calendar_id}/events</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		public GetCalendarEventsRequest(Id calendar_id) : base(r=>r.Required("calendar_id", calendar_id)){}
+		// values part of the url path
+		Id IGetCalendarEventsRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+		///<summary>Get events for the job. When this option is used calendar_id must be '_all'</summary>
+		public string JobId { get => Q<string>("job_id"); set => Q("job_id", value); }
+		///<summary>Get events after this time</summary>
+		public string Start { get => Q<string>("start"); set => Q("start", value); }
+		///<summary>Get events before this time</summary>
+		public DateTimeOffset? End { get => Q<DateTimeOffset?>("end"); set => Q("end", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetCalendarsRequest : IRequest<GetCalendarsRequestParameters>
+	{
+		Id CalendarId { get; }
+	}
+	///<summary>Request parameters for XpackMlGetCalendars <pre></pre></summary>
+	public partial class GetCalendarsRequest : PlainRequestBase<GetCalendarsRequestParameters>, IGetCalendarsRequest
+	{
+		protected IGetCalendarsRequest Self => this;
+		///<summary>/_xpack/ml/calendars</summary>
+		public GetCalendarsRequest() : base(){}
+		///<summary>/_xpack/ml/calendars/{calendar_id}</summary>
+		///<param name="calendar_id">Optional, accepts null</param>
+		public GetCalendarsRequest(Id calendar_id) : base(r=>r.Optional("calendar_id", calendar_id)){}
+		// values part of the url path
+		Id IGetCalendarsRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
 
 		// Request parameters
 	}
@@ -2830,6 +3037,8 @@ namespace Nest
 		Fields IGetFieldMappingRequest.Fields => Self.RouteValues.Get<Fields>("fields");
 
 		// Request parameters
+		///<summary>Whether a type should be returned in the body of the mappings.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Whether the default mapping values should be returned as well</summary>
 		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -2843,6 +3052,29 @@ namespace Nest
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetFiltersRequest : IRequest<GetFiltersRequestParameters>
+	{
+		Id FilterId { get; }
+	}
+	///<summary>Request parameters for XpackMlGetFilters <pre></pre></summary>
+	public partial class GetFiltersRequest : PlainRequestBase<GetFiltersRequestParameters>, IGetFiltersRequest
+	{
+		protected IGetFiltersRequest Self => this;
+		///<summary>/_xpack/ml/filters</summary>
+		public GetFiltersRequest() : base(){}
+		///<summary>/_xpack/ml/filters/{filter_id}</summary>
+		///<param name="filter_id">Optional, accepts null</param>
+		public GetFiltersRequest(Id filter_id) : base(r=>r.Optional("filter_id", filter_id)){}
+		// values part of the url path
+		Id IGetFiltersRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
+
+		// Request parameters
+		///<summary>skips a number of filters</summary>
+		public int? From { get => Q<int?>("from"); set => Q("from", value); }
+		///<summary>specifies a max number of filters to get</summary>
+		public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetIndexRequest : IRequest<GetIndexRequestParameters>
@@ -2860,6 +3092,8 @@ namespace Nest
 		Indices IGetIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 
 		// Request parameters
+		///<summary>Whether to add the type name to the response (default: true)</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Ignore unavailable indexes (default: false)</summary>
@@ -2938,6 +3172,8 @@ namespace Nest
 		Names IGetIndexTemplateRequest.Name => Self.RouteValues.Get<Names>("name");
 
 		// Request parameters
+		///<summary>Whether a type should be returned in the body of the mappings.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -3045,6 +3281,8 @@ namespace Nest
 		Types IGetMappingRequest.Type => Self.RouteValues.Get<Types>("type");
 
 		// Request parameters
+		///<summary>Whether to add the type name to the response.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
@@ -3119,6 +3357,31 @@ namespace Nest
 		// Request parameters
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetPrivilegesRequest : IRequest<GetPrivilegesRequestParameters>
+	{
+		Name Application { get; }
+		Name Name { get; }
+	}
+	///<summary>Request parameters for XpackSecurityGetPrivileges <pre>TODO</pre></summary>
+	public partial class GetPrivilegesRequest : PlainRequestBase<GetPrivilegesRequestParameters>, IGetPrivilegesRequest
+	{
+		protected IGetPrivilegesRequest Self => this;
+		///<summary>/_xpack/security/privilege</summary>
+		public GetPrivilegesRequest() : base(){}
+		///<summary>/_xpack/security/privilege/{application}</summary>
+		///<param name="application">Optional, accepts null</param>
+		public GetPrivilegesRequest(Name application) : base(r=>r.Optional("application", application)){}
+		///<summary>/_xpack/security/privilege/{application}/{name}</summary>
+		///<param name="application">Optional, accepts null</param>
+		///<param name="name">Optional, accepts null</param>
+		public GetPrivilegesRequest(Name application, Name name) : base(r=>r.Optional("application", application).Optional("name", name)){}
+		// values part of the url path
+		Name IGetPrivilegesRequest.Application => Self.RouteValues.Get<Name>("application");
+		Name IGetPrivilegesRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetRepositoryRequest : IRequest<GetRepositoryRequestParameters>
@@ -3432,6 +3695,18 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetUserPrivilegesRequest : IRequest<GetUserPrivilegesRequestParameters>
+	{
+	}
+	///<summary>Request parameters for XpackSecurityGetUserPrivileges <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</pre></summary>
+	public partial class GetUserPrivilegesRequest : PlainRequestBase<GetUserPrivilegesRequestParameters>, IGetUserPrivilegesRequest
+	{
+		protected IGetUserPrivilegesRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetUserRequest : IRequest<GetUserRequestParameters>
 	{
 		Names Username { get; }
@@ -3541,6 +3816,25 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IHasPrivilegesRequest : IRequest<HasPrivilegesRequestParameters>
+	{
+		Name User { get; }
+	}
+	///<summary>Request parameters for XpackSecurityHasPrivileges <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</pre></summary>
+	public partial class HasPrivilegesRequest : PlainRequestBase<HasPrivilegesRequestParameters>, IHasPrivilegesRequest
+	{
+		protected IHasPrivilegesRequest Self => this;
+		///<summary>/_xpack/security/user/_has_privileges</summary>
+		public HasPrivilegesRequest() : base(){}
+		///<summary>/_xpack/security/user/{user}/_has_privileges</summary>
+		///<param name="user">Optional, accepts null</param>
+		public HasPrivilegesRequest(Name user) : base(r=>r.Optional("user", user)){}
+		// values part of the url path
+		Name IHasPrivilegesRequest.User => Self.RouteValues.Get<Name>("user");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IIndexExistsRequest : IRequest<IndexExistsRequestParameters>
 	{
 		Indices Index { get; }
@@ -3633,6 +3927,10 @@ namespace Nest
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
+		///<summary>only perform the index operation if the last operation that has changed the document has the specified sequence number</summary>
+		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+		///<summary>only perform the index operation if the last operation that has changed the document has the specified primary term</summary>
+		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
 	}
@@ -3774,6 +4072,18 @@ namespace Nest
 		public string ParentNode { get => Q<string>("parent_node"); set => Q("parent_node", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMachineLearningInfoRequest : IRequest<MachineLearningInfoRequestParameters>
+	{
+	}
+	///<summary>Request parameters for XpackMlInfo <pre></pre></summary>
+	public partial class MachineLearningInfoRequest : PlainRequestBase<MachineLearningInfoRequestParameters>, IMachineLearningInfoRequest
+	{
+		protected IMachineLearningInfoRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMigrationAssistanceRequest : IRequest<MigrationAssistanceRequestParameters>
 	{
 		Indices Index { get; }
@@ -3862,9 +4172,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMultiSearchRequest : IRequest<MultiSearchRequestParameters>
@@ -3908,6 +4218,11 @@ namespace Nest
 		/// on the cluster in order to limit the number of concurrent shard requests
 		///</summary>
 		public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+		///<summary>
+		/// This parameter is ignored in this version. It is used in the next major version to control whether the rest response should render the
+		/// total.hits as an object or a number
+		///</summary>
+		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMultiSearchTemplateRequest : IRequest<MultiSearchTemplateRequestParameters>
@@ -3939,6 +4254,11 @@ namespace Nest
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
 		public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
+		///<summary>
+		/// This parameter is ignored in this version. It is used in the next major version to control whether the rest response should render the
+		/// total.hits as an object or a number
+		///</summary>
+		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMultiTermVectorsRequest : IRequest<MultiTermVectorsRequestParameters>
@@ -4233,6 +4553,23 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IPostCalendarEventsRequest : IRequest<PostCalendarEventsRequestParameters>
+	{
+		Id CalendarId { get; }
+	}
+	///<summary>Request parameters for XpackMlPostCalendarEvents <pre></pre></summary>
+	public partial class PostCalendarEventsRequest : PlainRequestBase<PostCalendarEventsRequestParameters>, IPostCalendarEventsRequest
+	{
+		protected IPostCalendarEventsRequest Self => this;
+		///<summary>/_xpack/ml/calendars/{calendar_id}/events</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		public PostCalendarEventsRequest(Id calendar_id) : base(r=>r.Required("calendar_id", calendar_id)){}
+		// values part of the url path
+		Id IPostCalendarEventsRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPostJobDataRequest : IRequest<PostJobDataRequestParameters>
 	{
 		Id JobId { get; }
@@ -4309,6 +4646,43 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IPutCalendarJobRequest : IRequest<PutCalendarJobRequestParameters>
+	{
+		Id CalendarId { get; }
+		Id JobId { get; }
+	}
+	///<summary>Request parameters for XpackMlPutCalendarJob <pre></pre></summary>
+	public partial class PutCalendarJobRequest : PlainRequestBase<PutCalendarJobRequestParameters>, IPutCalendarJobRequest
+	{
+		protected IPutCalendarJobRequest Self => this;
+		///<summary>/_xpack/ml/calendars/{calendar_id}/jobs/{job_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		///<param name="job_id">this parameter is required</param>
+		public PutCalendarJobRequest(Id calendar_id, Id job_id) : base(r=>r.Required("calendar_id", calendar_id).Required("job_id", job_id)){}
+		// values part of the url path
+		Id IPutCalendarJobRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+		Id IPutCalendarJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IPutCalendarRequest : IRequest<PutCalendarRequestParameters>
+	{
+		Id CalendarId { get; }
+	}
+	///<summary>Request parameters for XpackMlPutCalendar <pre></pre></summary>
+	public partial class PutCalendarRequest : PlainRequestBase<PutCalendarRequestParameters>, IPutCalendarRequest
+	{
+		protected IPutCalendarRequest Self => this;
+		///<summary>/_xpack/ml/calendars/{calendar_id}</summary>
+		///<param name="calendar_id">this parameter is required</param>
+		public PutCalendarRequest(Id calendar_id) : base(r=>r.Required("calendar_id", calendar_id)){}
+		// values part of the url path
+		Id IPutCalendarRequest.CalendarId => Self.RouteValues.Get<Id>("calendar_id");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutDatafeedRequest : IRequest<PutDatafeedRequestParameters>
 	{
 		Id DatafeedId { get; }
@@ -4322,6 +4696,23 @@ namespace Nest
 		public PutDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
 		// values part of the url path
 		Id IPutDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IPutFilterRequest : IRequest<PutFilterRequestParameters>
+	{
+		Id FilterId { get; }
+	}
+	///<summary>Request parameters for XpackMlPutFilter <pre></pre></summary>
+	public partial class PutFilterRequest : PlainRequestBase<PutFilterRequestParameters>, IPutFilterRequest
+	{
+		protected IPutFilterRequest Self => this;
+		///<summary>/_xpack/ml/filters/{filter_id}</summary>
+		///<param name="filter_id">this parameter is required</param>
+		public PutFilterRequest(Id filter_id) : base(r=>r.Required("filter_id", filter_id)){}
+		// values part of the url path
+		Id IPutFilterRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
 
 		// Request parameters
 	}
@@ -4341,6 +4732,8 @@ namespace Nest
 		Name IPutIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
 
 		// Request parameters
+		///<summary>Whether a type should be returned in the body of the mappings.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 		///<summary>Explicit operation timeout</summary>
@@ -4379,16 +4772,21 @@ namespace Nest
 		protected IPutMappingRequest Self => this;
 		///<summary>/{index}/{type}/_mapping</summary>
 		///<param name="index">Optional, accepts null</param>
-		///<param name="type">this parameter is required</param>
-		public PutMappingRequest(Indices index, TypeName type) : base(r=>r.Optional("index", index).Required("type", type)){}
+		///<param name="type">Optional, accepts null</param>
+		public PutMappingRequest(Indices index, TypeName type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 		///<summary>/_mapping/{type}</summary>
-		///<param name="type">this parameter is required</param>
-		public PutMappingRequest(TypeName type) : base(r=>r.Required("type", type)){}
+		///<param name="type">Optional, accepts null</param>
+		public PutMappingRequest(TypeName type) : base(r=>r.Optional("type", type)){}
+		///<summary>/{index}/_mappings</summary>
+		///<param name="index">Optional, accepts null</param>
+		public PutMappingRequest(Indices index) : base(r=>r.Optional("index", index)){}
 		// values part of the url path
 		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		TypeName IPutMappingRequest.Type => Self.RouteValues.Get<TypeName>("type");
 
 		// Request parameters
+		///<summary>Whether a type should be expected in the body of the mappings.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
@@ -4411,16 +4809,21 @@ namespace Nest
 		protected IPutMappingRequest Self => this;
 		///<summary>/{index}/{type}/_mapping</summary>
 		///<param name="index">Optional, accepts null</param>
-		///<param name="type">this parameter is required</param>
-		public PutMappingRequest(Indices index, TypeName type) : base(r=>r.Optional("index", index).Required("type", type)){}
+		///<param name="type">Optional, accepts null</param>
+		public PutMappingRequest(Indices index, TypeName type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 		///<summary>/_mapping/{type}</summary>
-		///<param name="type">this parameter is required</param>
-		public PutMappingRequest(TypeName type) : base(r=>r.Required("type", type)){}
+		///<param name="type">Optional, accepts null</param>
+		public PutMappingRequest(TypeName type) : base(r=>r.Optional("type", type)){}
+		///<summary>/{index}/_mappings</summary>
+		///<param name="index">Optional, accepts null</param>
+		public PutMappingRequest(Indices index) : base(r=>r.Optional("index", index)){}
 		// values part of the url path
 		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		TypeName IPutMappingRequest.Type => Self.RouteValues.Get<TypeName>("type");
 
 		// Request parameters
+		///<summary>Whether a type should be expected in the body of the mappings.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
@@ -4458,6 +4861,23 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IPutPrivilegesRequest : IRequest<PutPrivilegesRequestParameters>
+	{
+	}
+	///<summary>Request parameters for XpackSecurityPutPrivileges <pre>TODO</pre></summary>
+	public partial class PutPrivilegesRequest : PlainRequestBase<PutPrivilegesRequestParameters>, IPutPrivilegesRequest
+	{
+		protected IPutPrivilegesRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutRoleMappingRequest : IRequest<PutRoleMappingRequestParameters>
@@ -4574,6 +4994,10 @@ namespace Nest
 		public bool? Active { get => Q<bool?>("active"); set => Q("active", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
+		///<summary>only update the watch if the last operation that has changed the watch has the specified sequence number</summary>
+		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+		///<summary>only update the watch if the last operation that has changed the watch has the specified primary term</summary>
+		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IQuerySqlRequest : IRequest<QuerySqlRequestParameters>
@@ -4694,7 +5118,7 @@ namespace Nest
 	{
 		NodeIds NodeId { get; }
 	}
-	///<summary>Request parameters for NodesReloadSecureSettingsForAll <pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.5/secure-settings.html#reloadable-secure-settings</pre></summary>
+	///<summary>Request parameters for NodesReloadSecureSettingsForAll <pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.x/secure-settings.html#reloadable-secure-settings</pre></summary>
 	public partial class ReloadSecureSettingsRequest : PlainRequestBase<ReloadSecureSettingsRequestParameters>, IReloadSecureSettingsRequest
 	{
 		protected IReloadSecureSettingsRequest Self => this;
@@ -4836,6 +5260,8 @@ namespace Nest
 		IndexName IRolloverIndexRequest.NewIndex => Self.RouteValues.Get<IndexName>("new_index");
 
 		// Request parameters
+		///<summary>Whether a type should be included in the body of the mappings.</summary>
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>If set to true the rollover action will only be validated but not actually performed even if a condition matches. The default is false</summary>
@@ -4867,6 +5293,8 @@ namespace Nest
 		TypeName IRollupSearchRequest.Type => Self.RouteValues.Get<TypeName>("type");
 
 		// Request parameters
+		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
+		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRootNodeInfoRequest : IRequest<RootNodeInfoRequestParameters>
@@ -4891,6 +5319,11 @@ namespace Nest
 		// values part of the url path
 
 		// Request parameters
+		///<summary>
+		/// This parameter is ignored in this version. It is used in the next major version to control whether the rest response should render the
+		/// total.hits as an object or a number
+		///</summary>
+		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISearchRequest : IRequest<SearchRequestParameters>
@@ -4926,6 +5359,8 @@ namespace Nest
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -4966,6 +5401,8 @@ namespace Nest
 		public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
+		///<summary>Specify whether to return sequence number and primary term of the last modification of each hit</summary>
+		public bool? SeqNoPrimaryTerm { get => Q<bool?>("seq_no_primary_term"); set => Q("seq_no_primary_term", value); }
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 		///<summary>
@@ -4985,6 +5422,11 @@ namespace Nest
 		/// disjoint.
 		///</summary>
 		public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
+		///<summary>
+		/// This parameter is ignored in this version. It is used in the next major version to control whether the rest response should render the
+		/// total.hits as an object or a number
+		///</summary>
+		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 	}	///<summary>Request parameters for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
 	public partial class SearchRequest : PlainRequestBase<SearchRequestParameters>, ISearchRequest
 	{
@@ -5013,6 +5455,8 @@ namespace Nest
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -5053,6 +5497,8 @@ namespace Nest
 		public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
+		///<summary>Specify whether to return sequence number and primary term of the last modification of each hit</summary>
+		public bool? SeqNoPrimaryTerm { get => Q<bool?>("seq_no_primary_term"); set => Q("seq_no_primary_term", value); }
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 		///<summary>
@@ -5072,6 +5518,11 @@ namespace Nest
 		/// disjoint.
 		///</summary>
 		public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
+		///<summary>
+		/// This parameter is ignored in this version. It is used in the next major version to control whether the rest response should render the
+		/// total.hits as an object or a number
+		///</summary>
+		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISearchShardsRequest : IRequest<SearchShardsRequestParameters>
@@ -5175,6 +5626,8 @@ namespace Nest
 		// Request parameters
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
+		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -5203,6 +5656,11 @@ namespace Nest
 		public bool? Profile { get => Q<bool?>("profile"); set => Q("profile", value); }
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
+		///<summary>
+		/// This parameter is ignored in this version. It is used in the next major version to control whether the rest response should render the
+		/// total.hits as an object or a number
+		///</summary>
+		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISegmentsRequest : IRequest<SegmentsRequestParameters>
@@ -5386,9 +5844,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -5430,9 +5888,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -5487,9 +5945,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -5531,9 +5989,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -5679,6 +6137,10 @@ namespace Nest
 		Id IStopRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
 
 		// Request parameters
+		///<summary>True if the API should block until the job has fully stopped, false if should be executed async. Defaults to false.</summary>
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+		///<summary>Block for (at maximum) the specified duration while waiting for the job to stop. Defaults to 30s.</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStopWatcherRequest : IRequest<StopWatcherRequestParameters>
@@ -5919,9 +6381,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
@@ -6017,9 +6479,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
@@ -6050,6 +6512,25 @@ namespace Nest
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IUpdateByQueryRethrottleRequest : IRequest<UpdateByQueryRethrottleRequestParameters>
+	{
+		TaskId TaskId { get; }
+	}
+	///<summary>Request parameters for UpdateByQueryRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html</pre></summary>
+	public partial class UpdateByQueryRethrottleRequest : PlainRequestBase<UpdateByQueryRethrottleRequestParameters>, IUpdateByQueryRethrottleRequest
+	{
+		protected IUpdateByQueryRethrottleRequest Self => this;
+		///<summary>/_update_by_query/{task_id}/_rethrottle</summary>
+		///<param name="task_id">this parameter is required</param>
+		public UpdateByQueryRethrottleRequest(TaskId task_id) : base(r=>r.Required("task_id", task_id)){}
+		// values part of the url path
+		TaskId IUpdateByQueryRethrottleRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
+
+		// Request parameters
+		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
+		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IUpdateDatafeedRequest : IRequest<UpdateDatafeedRequestParameters>
 	{
 		Id DatafeedId { get; }
@@ -6063,6 +6544,23 @@ namespace Nest
 		public UpdateDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
 		// values part of the url path
 		Id IUpdateDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IUpdateFilterRequest : IRequest<UpdateFilterRequestParameters>
+	{
+		Id FilterId { get; }
+	}
+	///<summary>Request parameters for XpackMlUpdateFilter <pre></pre></summary>
+	public partial class UpdateFilterRequest : PlainRequestBase<UpdateFilterRequestParameters>, IUpdateFilterRequest
+	{
+		protected IUpdateFilterRequest Self => this;
+		///<summary>/_xpack/ml/filters/{filter_id}/_update</summary>
+		///<param name="filter_id">this parameter is required</param>
+		public UpdateFilterRequest(Id filter_id) : base(r=>r.Required("filter_id", filter_id)){}
+		// values part of the url path
+		Id IUpdateFilterRequest.FilterId => Self.RouteValues.Get<Id>("filter_id");
 
 		// Request parameters
 	}
@@ -6198,6 +6696,10 @@ namespace Nest
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+		///<summary>only perform the update operation if the last operation that has changed the document has the specified sequence number</summary>
+		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+		///<summary>only perform the update operation if the last operation that has changed the document has the specified primary term</summary>
+		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>

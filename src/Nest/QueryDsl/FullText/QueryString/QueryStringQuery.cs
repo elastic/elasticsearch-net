@@ -302,92 +302,92 @@ namespace Nest
 		TextQueryType? IQueryStringQuery.Type { get; set; }
 
 		/// <inheritdoc cref="IQueryStringQuery.DefaultField" />
-		public QueryStringQueryDescriptor<T> DefaultField(Field field) => Assign(a => a.DefaultField = field);
+		public QueryStringQueryDescriptor<T> DefaultField(Field field) => Assign(field, (a, v) => a.DefaultField = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.DefaultField" />
-		public QueryStringQueryDescriptor<T> DefaultField(Expression<Func<T, object>> field) => Assign(a => a.DefaultField = field);
+		public QueryStringQueryDescriptor<T> DefaultField(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.DefaultField = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.Fields" />
 		public QueryStringQueryDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+			Assign(fields, (a, v) => a.Fields = v?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		/// <inheritdoc cref="IQueryStringQuery.Fields" />
-		public QueryStringQueryDescriptor<T> Fields(Fields fields) => Assign(a => a.Fields = fields);
+		public QueryStringQueryDescriptor<T> Fields(Fields fields) => Assign(fields, (a, v) => a.Fields = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.Type" />
-		public QueryStringQueryDescriptor<T> Type(TextQueryType? type) => Assign(a => a.Type = type);
+		public QueryStringQueryDescriptor<T> Type(TextQueryType? type) => Assign(type, (a, v) => a.Type = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.Query" />
-		public QueryStringQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
+		public QueryStringQueryDescriptor<T> Query(string query) => Assign(query, (a, v) => a.Query = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.DefaultOperator" />
-		public QueryStringQueryDescriptor<T> DefaultOperator(Operator? op) => Assign(a => a.DefaultOperator = op);
+		public QueryStringQueryDescriptor<T> DefaultOperator(Operator? op) => Assign(op, (a, v) => a.DefaultOperator = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.Analyzer" />
-		public QueryStringQueryDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
+		public QueryStringQueryDescriptor<T> Analyzer(string analyzer) => Assign(analyzer, (a, v) => a.Analyzer = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.QuoteAnalyzer" />
-		public QueryStringQueryDescriptor<T> QuoteAnalyzer(string analyzer) => Assign(a => a.QuoteAnalyzer = analyzer);
+		public QueryStringQueryDescriptor<T> QuoteAnalyzer(string analyzer) => Assign(analyzer, (a, v) => a.QuoteAnalyzer = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.AllowLeadingWildcard" />
 		public QueryStringQueryDescriptor<T> AllowLeadingWildcard(bool? allowLeadingWildcard = true) =>
-			Assign(a => a.AllowLeadingWildcard = allowLeadingWildcard);
+			Assign(allowLeadingWildcard, (a, v) => a.AllowLeadingWildcard = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.Fuzziness" />
-		public QueryStringQueryDescriptor<T> Fuzziness(Fuzziness fuzziness) => Assign(a => a.Fuzziness = fuzziness);
+		public QueryStringQueryDescriptor<T> Fuzziness(Fuzziness fuzziness) => Assign(fuzziness, (a, v) => a.Fuzziness = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.FuzzyPrefixLength" />
-		public QueryStringQueryDescriptor<T> FuzzyPrefixLength(int? fuzzyPrefixLength) => Assign(a => a.FuzzyPrefixLength = fuzzyPrefixLength);
+		public QueryStringQueryDescriptor<T> FuzzyPrefixLength(int? fuzzyPrefixLength) => Assign(fuzzyPrefixLength, (a, v) => a.FuzzyPrefixLength = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.FuzzyMaxExpansions" />
-		public QueryStringQueryDescriptor<T> FuzzyMaxExpansions(int? fuzzyMaxExpansions) => Assign(a => a.FuzzyMaxExpansions = fuzzyMaxExpansions);
+		public QueryStringQueryDescriptor<T> FuzzyMaxExpansions(int? fuzzyMaxExpansions) => Assign(fuzzyMaxExpansions, (a, v) => a.FuzzyMaxExpansions = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.FuzzyTranspositions" />
 		public QueryStringQueryDescriptor<T> FuzzyTranspositions(bool? fuzzyTranspositions = true) =>
-			Assign(a => a.FuzzyTranspositions = fuzzyTranspositions);
+			Assign(fuzzyTranspositions, (a, v) => a.FuzzyTranspositions = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.PhraseSlop" />
-		public QueryStringQueryDescriptor<T> PhraseSlop(double? phraseSlop) => Assign(a => a.PhraseSlop = phraseSlop);
+		public QueryStringQueryDescriptor<T> PhraseSlop(double? phraseSlop) => Assign(phraseSlop, (a, v) => a.PhraseSlop = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.MinimumShouldMatch" />
 		public QueryStringQueryDescriptor<T> MinimumShouldMatch(MinimumShouldMatch minimumShouldMatch) =>
-			Assign(a => a.MinimumShouldMatch = minimumShouldMatch);
+			Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatch = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.Lenient" />
-		public QueryStringQueryDescriptor<T> Lenient(bool? lenient = true) => Assign(a => a.Lenient = lenient);
+		public QueryStringQueryDescriptor<T> Lenient(bool? lenient = true) => Assign(lenient, (a, v) => a.Lenient = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.AnalyzeWildcard" />
-		public QueryStringQueryDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Assign(a => a.AnalyzeWildcard = analyzeWildcard);
+		public QueryStringQueryDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Assign(analyzeWildcard, (a, v) => a.AnalyzeWildcard = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.TieBreaker" />
-		public QueryStringQueryDescriptor<T> TieBreaker(double? tieBreaker) => Assign(a => a.TieBreaker = tieBreaker);
+		public QueryStringQueryDescriptor<T> TieBreaker(double? tieBreaker) => Assign(tieBreaker, (a, v) => a.TieBreaker = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.MaximumDeterminizedStates" />
 		public QueryStringQueryDescriptor<T> MaximumDeterminizedStates(int? maxDeterminizedStates) =>
-			Assign(a => a.MaximumDeterminizedStates = maxDeterminizedStates);
+			Assign(maxDeterminizedStates, (a, v) => a.MaximumDeterminizedStates = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.FuzzyRewrite" />
-		public QueryStringQueryDescriptor<T> FuzzyRewrite(MultiTermQueryRewrite rewrite) => Assign(a => Self.FuzzyRewrite = rewrite);
+		public QueryStringQueryDescriptor<T> FuzzyRewrite(MultiTermQueryRewrite rewrite) => Assign(rewrite, (a, v) => a.FuzzyRewrite = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.Rewrite" />
-		public QueryStringQueryDescriptor<T> Rewrite(MultiTermQueryRewrite rewrite) => Assign(a => Self.Rewrite = rewrite);
+		public QueryStringQueryDescriptor<T> Rewrite(MultiTermQueryRewrite rewrite) => Assign(rewrite, (a, v) => a.Rewrite = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.QuoteFieldSuffix" />
 		public QueryStringQueryDescriptor<T> QuoteFieldSuffix(string quoteFieldSuffix) =>
-			Assign(a => a.QuoteFieldSuffix = quoteFieldSuffix);
+			Assign(quoteFieldSuffix, (a, v) => a.QuoteFieldSuffix = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.Escape" />
-		public QueryStringQueryDescriptor<T> Escape(bool? escape = true) => Assign(a => a.Escape = escape);
+		public QueryStringQueryDescriptor<T> Escape(bool? escape = true) => Assign(escape, (a, v) => a.Escape = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.EnablePositionIncrements" />
 		public QueryStringQueryDescriptor<T> EnablePositionIncrements(bool? enablePositionIncrements = true) =>
-			Assign(a => a.EnablePositionIncrements = enablePositionIncrements);
+			Assign(enablePositionIncrements, (a, v) => a.EnablePositionIncrements = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.Timezone" />
-		public QueryStringQueryDescriptor<T> Timezone(string timezone) => Assign(a => a.Timezone = timezone);
+		public QueryStringQueryDescriptor<T> Timezone(string timezone) => Assign(timezone, (a, v) => a.Timezone = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.AutoGenerateSynonymsPhraseQuery" />
 		public QueryStringQueryDescriptor<T> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) =>
-			Assign(a => a.AutoGenerateSynonymsPhraseQuery = autoGenerateSynonymsPhraseQuery);
+			Assign(autoGenerateSynonymsPhraseQuery, (a, v) => a.AutoGenerateSynonymsPhraseQuery = v);
 	}
 }

@@ -30,9 +30,9 @@ namespace Nest
 		IIndexSettings IShrinkIndexRequest.Settings { get; set; }
 
 		public ShrinkIndexDescriptor Settings(Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> selector) =>
-			Assign(a => a.Settings = selector?.Invoke(new IndexSettingsDescriptor())?.Value);
+			Assign(selector, (a, v) => a.Settings = v?.Invoke(new IndexSettingsDescriptor())?.Value);
 
 		public ShrinkIndexDescriptor Aliases(Func<AliasesDescriptor, IPromise<IAliases>> selector) =>
-			Assign(a => a.Aliases = selector?.Invoke(new AliasesDescriptor())?.Value);
+			Assign(selector, (a, v) => a.Aliases = v?.Invoke(new AliasesDescriptor())?.Value);
 	}
 }

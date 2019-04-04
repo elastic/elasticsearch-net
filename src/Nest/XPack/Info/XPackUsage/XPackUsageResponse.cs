@@ -164,6 +164,10 @@ namespace Nest
 
 	public class MachineLearningUsage : XPackUsage
 	{
+	    /// <remarks>Valid only for Elasticsearch 6.5.0+</remarks>
+		[JsonProperty("node_count")]
+		public int NodeCount { get; internal set; }
+
 		[JsonProperty("datafeeds")]
 		public IReadOnlyDictionary<string, DataFeed> Datafeeds { get; set; } = EmptyReadOnly<string, DataFeed>.Dictionary;
 
@@ -186,6 +190,9 @@ namespace Nest
 
 			[JsonProperty("model_size")]
 			public JobStatistics ModelSize { get; internal set; }
+
+			[JsonProperty("forecasts")]
+			public ForecastStatistics Forecasts { get; internal set; }
 		}
 
 		public class JobStatistics
@@ -201,6 +208,46 @@ namespace Nest
 
 			[JsonProperty("total")]
 			public double Total { get; internal set; }
+		}
+
+		public class ForecastStatistics
+		{
+			/// <summary>
+			/// The number of forecasts currently available for this model.
+			/// </summary>
+			[JsonProperty("total")]
+			public long Total { get; internal set; }
+
+			/// <summary>
+			/// The number of jobs that have at least one forecast.
+			/// </summary>
+			[JsonProperty("forecasted_jobs")]
+			public long Jobs { get; internal set; }
+
+			/// <summary>
+			/// Statistics about the memory usage: minimum, maximum, average and total.
+			/// </summary>
+			[JsonProperty("memory_bytes")]
+			public JobStatistics MemoryBytes { get; internal set; }
+
+			/// <summary>
+			/// Statistics about the forecast runtime in milliseconds: minimum, maximum, average and total.
+			/// </summary>
+			[JsonProperty("processing_time_ms")]
+			public JobStatistics ProcessingTimeMilliseconds { get; internal set; }
+
+			/// <summary>
+			/// Statistics about the number of forecast records: minimum, maximum, average and total.
+			/// </summary>
+			[JsonProperty("records")]
+			public JobStatistics Records { get; internal set; }
+
+			/// <summary>
+			/// Counts per forecast status.
+			/// </summary>
+			[JsonProperty("status")]
+			public IReadOnlyDictionary<string, long> Status { get; internal set; }
+				= EmptyReadOnly<string, long>.Dictionary;
 		}
 	}
 }

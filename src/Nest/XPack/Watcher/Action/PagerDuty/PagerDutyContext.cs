@@ -39,9 +39,9 @@ namespace Nest
 		string IPagerDutyContext.Src { get; set; }
 		PagerDutyContextType IPagerDutyContext.Type { get; set; }
 
-		public PagerDutyContextDescriptor Href(string href) => Assign(a => a.Href = href);
+		public PagerDutyContextDescriptor Href(string href) => Assign(href, (a, v) => a.Href = v);
 
-		public PagerDutyContextDescriptor Src(string src) => Assign(a => a.Src = src);
+		public PagerDutyContextDescriptor Src(string src) => Assign(src, (a, v) => a.Src = v);
 	}
 
 	[JsonConverter(typeof(StringEnumConverter))]

@@ -27,6 +27,6 @@ namespace Nest
 		string ITokenizer.Type => Type;
 		string ITokenizer.Version { get; set; }
 
-		public TTokenizer Version(string version) => Assign(a => a.Version = version);
+		public TTokenizer Version(string version) => Assign(version, (a, v) => a.Version = v);
 	}
 }

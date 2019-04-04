@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
@@ -37,6 +38,86 @@ namespace Tests.XPack.MachineLearning
 
 		[I] public override Task ReturnsExpectedResponse() => base.ReturnsExpectedResponse();
 
+		protected IPutFilterResponse PutFilter(IElasticClient client, string filterId)
+		{
+			var putFilterResponse = client.PutFilter(filterId, f => f
+				.Description("A list of safe domains")
+				.Items("*.google.com", "wikipedia.org")
+			);
+
+			if (!putFilterResponse.IsValid)
+				throw new Exception($"Problem putting filter {filterId} for integration test: {putFilterResponse.DebugInformation}");
+
+			return putFilterResponse;
+		}
+
+		protected IPutCalendarResponse PutCalendar(IElasticClient client, string calendarId)
+		{
+			var putCalendarResponse = client.PutCalendar(calendarId, f => f
+				.Description("Planned outages")
+			);
+
+			if (!putCalendarResponse.IsValid)
+				throw new Exception($"Problem putting calendar {calendarId} for integration test: {putCalendarResponse.DebugInformation}");
+
+			return putCalendarResponse;
+		}
+		protected IPostCalendarEventsResponse PostCalendarEvent(IElasticClient client, string calendarId)
+		{
+			var startDate = DateTime.Now.Year;
+
+			var postCalendarEventsResponse = client.PostCalendarEvents(calendarId, f => f
+				.Events(new ScheduledEvent
+					{
+						StartTime = new DateTimeOffset(startDate, 1, 1, 0, 0, 0, TimeSpan.Zero),
+						EndTime = new DateTimeOffset(startDate + 1, 1, 1, 0, 0, 0, TimeSpan.Zero),
+						Description = $"Event",
+						CalendarId = calendarId
+					})
+			);
+
+			if (!postCalendarEventsResponse.IsValid)
+				throw new Exception($"Problem posting calendar event for calendar {calendarId} for integration test: {postCalendarEventsResponse.DebugInformation}");
+
+			return postCalendarEventsResponse;
+		}
+
+		private IEnumerable<ScheduledEvent> GetScheduledEvents(string calendarId)
+		{
+			var startDate = DateTime.Now.Year;
+
+			for (var i = 0; i < 10; i++)
+			{
+				yield return new ScheduledEvent
+				{
+					StartTime = new DateTimeOffset(startDate + i, 1, 1, 0, 0, 0, TimeSpan.Zero),
+					EndTime = new DateTimeOffset(startDate + 1 + i, 1, 1, 0, 0, 0, TimeSpan.Zero),
+					Description = $"Event {i}",
+					CalendarId = calendarId
+				};
+			}
+		}
+
+		protected IPostCalendarEventsResponse PostCalendarEvents(IElasticClient client, string calendarId)
+		{
+			var postCalendarEventsResponse = client.PostCalendarEvents(calendarId, f => f.Events(GetScheduledEvents(calendarId)));
+
+			if (!postCalendarEventsResponse.IsValid)
+				throw new Exception($"Problem posting calendar events {calendarId} for integration test: {postCalendarEventsResponse.DebugInformation}");
+
+			return postCalendarEventsResponse;
+		}
+
+		protected IPutCalendarJobResponse PutCalendarJob(IElasticClient client, string calendarId, string jobId)
+		{
+			var putCalendarJobResponse = client.PutCalendarJob(calendarId, jobId, f => f);
+
+			if (!putCalendarJobResponse.IsValid)
+				throw new Exception($"Problem putting calendar job {calendarId} / {jobId} for integration test: {putCalendarJobResponse.DebugInformation}");
+
+			return putCalendarJobResponse;
+		}
+
 		protected IPutJobResponse PutJob(IElasticClient client, string jobId)
 		{
 			var putJobResponse = client.PutJob<Metric>(jobId, f => f
@@ -62,6 +143,30 @@ namespace Tests.XPack.MachineLearning
 				throw new Exception($"Problem opening job {jobId} for integration test: {openJobResponse.DebugInformation}");
 
 			return openJobResponse;
+		}
+
+		protected IPostJobDataResponse PostJobData(IElasticClient client, string jobId, int bucketSize, int bucketSpanSeconds)
+		{
+			var timestamp = 1483228800000L; // 2017-01-01T00:00:00Z
+			var data = new List<object>(bucketSize);
+			for (var i = 0; i < bucketSize; i++)
+			{
+				data.Add(new { time = timestamp });
+				if (i % 1000 == 0)
+					data.AddRange(new[]
+					{
+						new { time = timestamp },
+						new { time = timestamp },
+						new { time = timestamp }
+					});
+				timestamp += bucketSpanSeconds * 1000;
+			}
+
+			var postJobDataResponse = client.PostJobData(jobId, d => d.Data(data));
+			if (!postJobDataResponse.IsValid)
+				throw new Exception($"Problem posting data for integration test: {postJobDataResponse.DebugInformation}");
+
+			return postJobDataResponse;
 		}
 
 		protected IFlushJobResponse FlushJob(IElasticClient client, string jobId, bool calculateInterim)
@@ -200,5 +305,43 @@ namespace Tests.XPack.MachineLearning
 			result_type = "influencer",
 			bucket_span = 1
 		}, i => i.Type("doc").Index(".ml-anomalies-" + jobId).Refresh(Refresh.WaitFor));
+
+		protected void IndexForecast(IElasticClient client, string jobId, string forecastId)
+		{
+			client.Index<object>(new
+				{
+					job_id =  jobId,
+					forecast_id =  forecastId,
+					result_type =  "model_forecast",
+					bucket_span =  1800,
+					detector_index =  0,
+					timestamp =  1486591300000,
+					model_feature =  "'arithmetic mean value by person'",
+					forecast_lower =  5440.502250736747,
+					forecast_upper =  6294.296972680027,
+					forecast_prediction =  5867.399611708387
+				}
+				, i => i.Id($"{jobId}_model_forecast_{forecastId}_1486591300000_1800_0_961_0").Type("doc").Index(".ml-anomalies-shared").Refresh(Refresh.WaitFor));
+
+			client.Index<object>(new
+				{
+					job_id =  jobId,
+					result_type =  "model_forecast_request_stats",
+					forecast_id =  forecastId,
+					processed_record_count =  48,
+					forecast_messages =  new object[0],
+					timestamp =  1486575000000,
+					forecast_start_timestamp =  1486575000000,
+					forecast_end_timestamp =  1486661400000,
+					forecast_create_timestamp =  1535721789000,
+					forecast_expiry_timestamp =  1536931389000,
+					forecast_progress =  1,
+					processing_time_ms =  3,
+					forecast_memory_bytes =  7034,
+					forecast_status =  "finished"
+				}
+				, i => i.Id($"{jobId}_model_forecast_request_stats_{forecastId}").Type("doc").Index(".ml-anomalies-shared").Refresh(Refresh.WaitFor));
+
+		}
 	}
 }

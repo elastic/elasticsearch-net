@@ -30,11 +30,11 @@ namespace Nest
 		Field ISetProcessor.Field { get; set; }
 		object ISetProcessor.Value { get; set; }
 
-		public SetProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public SetProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		public SetProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
-		public SetProcessorDescriptor<T> Value<TValue>(TValue value) => Assign(a => a.Value = value);
+		public SetProcessorDescriptor<T> Value<TValue>(TValue value) => Assign(value, (a, v) => a.Value = v);
 	}
 }

@@ -32,6 +32,6 @@ namespace Nest
 		string INormalizer.Type => Type;
 		string INormalizer.Version { get; set; }
 
-		public TNormalizer Version(string version) => Assign(a => a.Version = version);
+		public TNormalizer Version(string version) => Assign(version, (a, v) => a.Version = v);
 	}
 }

@@ -124,46 +124,46 @@ namespace Nest
 
 		/// <inheritdoc />
 		public UpdateDatafeedDescriptor<T> Aggregations(Func<AggregationContainerDescriptor<T>, IAggregationContainer> aggregationsSelector) =>
-			Assign(a => a.Aggregations = aggregationsSelector(new AggregationContainerDescriptor<T>())?.Aggregations);
+			Assign(aggregationsSelector(new AggregationContainerDescriptor<T>())?.Aggregations, (a, v) => a.Aggregations = v);
 
 		/// <inheritdoc />
 		public UpdateDatafeedDescriptor<T> ChunkingConfig(Func<ChunkingConfigDescriptor, IChunkingConfig> selector) =>
-			Assign(a => a.ChunkingConfig = selector.InvokeOrDefault(new ChunkingConfigDescriptor()));
+			Assign(selector.InvokeOrDefault(new ChunkingConfigDescriptor()), (a, v) => a.ChunkingConfig = v);
 
 		/// <inheritdoc />
-		public UpdateDatafeedDescriptor<T> Frequency(Time frequency) => Assign(a => a.Frequency = frequency);
+		public UpdateDatafeedDescriptor<T> Frequency(Time frequency) => Assign(frequency, (a, v) => a.Frequency = v);
 
 		/// <inheritdoc />
-		public UpdateDatafeedDescriptor<T> Indices(Indices indices) => Assign(a => a.Indices = indices);
+		public UpdateDatafeedDescriptor<T> Indices(Indices indices) => Assign(indices, (a, v) => a.Indices = v);
 
 		///<summary>a shortcut into calling Indices(typeof(TOther))</summary>
-		public UpdateDatafeedDescriptor<T> Indices<TOther>() => Assign(a => a.Indices = typeof(TOther));
+		public UpdateDatafeedDescriptor<T> Indices<TOther>() => Assign(typeof(TOther), (a, v) => a.Indices = v);
 
 		///<summary>A shortcut into calling Indices(Indices.All)</summary>
 		public UpdateDatafeedDescriptor<T> AllIndices() => Indices(Nest.Indices.All);
 
 		/// <inheritdoc />
-		public UpdateDatafeedDescriptor<T> JobId(Id jobId) => Assign(a => a.JobId = jobId);
+		public UpdateDatafeedDescriptor<T> JobId(Id jobId) => Assign(jobId, (a, v) => a.JobId = v);
 
 		/// <inheritdoc />
 		public UpdateDatafeedDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query) =>
-			Assign(a => a.Query = query?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(query, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<T>()));
 
 		/// <inheritdoc />
-		public UpdateDatafeedDescriptor<T> QueryDelay(Time queryDelay) => Assign(a => a.QueryDelay = queryDelay);
+		public UpdateDatafeedDescriptor<T> QueryDelay(Time queryDelay) => Assign(queryDelay, (a, v) => a.QueryDelay = v);
 
 		/// <inheritdoc />
 		public UpdateDatafeedDescriptor<T> ScriptFields(Func<ScriptFieldsDescriptor, IPromise<IScriptFields>> selector) =>
-			Assign(a => a.ScriptFields = selector?.Invoke(new ScriptFieldsDescriptor())?.Value);
+			Assign(selector, (a, v) => a.ScriptFields = v?.Invoke(new ScriptFieldsDescriptor())?.Value);
 
 		/// <inheritdoc />
-		public UpdateDatafeedDescriptor<T> ScrollSize(int? scrollSize) => Assign(a => a.ScrollSize = scrollSize);
+		public UpdateDatafeedDescriptor<T> ScrollSize(int? scrollSize) => Assign(scrollSize, (a, v) => a.ScrollSize = v);
 
 		/// <inheritdoc />
-		public UpdateDatafeedDescriptor<T> Types(Types types) => Assign(a => a.Types = types);
+		public UpdateDatafeedDescriptor<T> Types(Types types) => Assign(types, (a, v) => a.Types = v);
 
 		///<summary>a shortcut into calling Types(typeof(TOther))</summary>
-		public UpdateDatafeedDescriptor<T> Types<TOther>() => Assign(a => a.Types = typeof(TOther));
+		public UpdateDatafeedDescriptor<T> Types<TOther>() => Assign(typeof(TOther), (a, v) => a.Types = v);
 
 		///<summary>a shortcut into calling Types(Types.All)</summary>
 		public UpdateDatafeedDescriptor<T> AllTypes() => Types(Nest.Types.All);

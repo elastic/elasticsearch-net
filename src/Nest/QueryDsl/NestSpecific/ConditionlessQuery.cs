@@ -19,9 +19,9 @@ namespace Nest
 		QueryContainer IConditionlessQuery.Query { get; set; }
 
 		public ConditionlessQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
-			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(querySelector, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<T>()));
 
 		public ConditionlessQueryDescriptor<T> Fallback(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
-			Assign(a => a.Fallback = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(querySelector, (a, v) => a.Fallback = v?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

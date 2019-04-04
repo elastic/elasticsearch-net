@@ -99,33 +99,33 @@ namespace Nest
 
 		/// <inheritdoc cref="IPutWatchRequest.Actions" />
 		public PutWatchDescriptor Actions(Func<ActionsDescriptor, IPromise<Actions>> actions) =>
-			Assign(a => a.Actions = actions?.Invoke(new ActionsDescriptor())?.Value);
+			Assign(actions, (a, v) => a.Actions = v?.Invoke(new ActionsDescriptor())?.Value);
 
 		/// <inheritdoc cref="IPutWatchRequest.Condition" />
 		public PutWatchDescriptor Condition(Func<ConditionDescriptor, ConditionContainer> selector) =>
-			Assign(a => a.Condition = selector.InvokeOrDefault(new ConditionDescriptor()));
+			Assign(selector.InvokeOrDefault(new ConditionDescriptor()), (a, v) => a.Condition = v);
 
 		/// <inheritdoc cref="IPutWatchRequest.Input" />
 		public PutWatchDescriptor Input(Func<InputDescriptor, InputContainer> selector) =>
-			Assign(a => a.Input = selector.InvokeOrDefault(new InputDescriptor()));
+			Assign(selector.InvokeOrDefault(new InputDescriptor()), (a, v) => a.Input = v);
 
 		/// <inheritdoc cref="IPutWatchRequest.Metadata" />
 		public PutWatchDescriptor Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramsDictionary) =>
-			Assign(a => a.Metadata = paramsDictionary(new FluentDictionary<string, object>()));
+			Assign(paramsDictionary, (a, v) => a.Metadata = v?.Invoke(new FluentDictionary<string, object>()));
 
 		/// <inheritdoc cref="IPutWatchRequest.Metadata" />
 		public PutWatchDescriptor Metadata(Dictionary<string, object> paramsDictionary) =>
-			Assign(a => a.Metadata = paramsDictionary);
+			Assign(paramsDictionary, (a, v) => a.Metadata = v);
 
 		/// <inheritdoc cref="IPutWatchRequest.ThrottlePeriod" />
-		public PutWatchDescriptor ThrottlePeriod(string throttlePeriod) => Assign(a => a.ThrottlePeriod = throttlePeriod);
+		public PutWatchDescriptor ThrottlePeriod(string throttlePeriod) => Assign(throttlePeriod, (a, v) => a.ThrottlePeriod = v);
 
 		/// <inheritdoc cref="IPutWatchRequest.Transform" />
 		public PutWatchDescriptor Transform(Func<TransformDescriptor, TransformContainer> selector) =>
-			Assign(a => a.Transform = selector.InvokeOrDefault(new TransformDescriptor()));
+			Assign(selector.InvokeOrDefault(new TransformDescriptor()), (a, v) => a.Transform = v);
 
 		/// <inheritdoc cref="IPutWatchRequest.Trigger" />
 		public PutWatchDescriptor Trigger(Func<TriggerDescriptor, TriggerContainer> selector) =>
-			Assign(a => a.Trigger = selector.InvokeOrDefault(new TriggerDescriptor()));
+			Assign(selector.InvokeOrDefault(new TriggerDescriptor()), (a, v) => a.Trigger = v);
 	}
 }

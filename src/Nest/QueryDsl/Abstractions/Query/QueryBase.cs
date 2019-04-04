@@ -10,6 +10,9 @@ namespace Nest
 		/// For example, a query with a boost of 2 is twice as important as a query with a boost of 1,
 		/// although the actual boost value that is applied undergoes normalization and internal optimization.
 		/// </summary>
+		/// <remarks>
+		/// Setting a boost for an <see cref="ISpanOrQuery"/> query will throw a parsing exception on the server.
+		/// </remarks>
 		[JsonProperty("boost")]
 		double? Boost { get; set; }
 

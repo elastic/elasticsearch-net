@@ -26,6 +26,14 @@ namespace Nest
 		[JsonProperty("missing_bucket")]
 		bool? MissingBucket { get; set; }
 
+
+		/// <summary>
+		/// Allows an explicit value to be set when one is missing for the field.
+		/// </summary>
+		[Obsolete("Will be removed in Elasticsearch 7.x. Use MissingBucket")]
+		[JsonProperty("missing")]
+		object Missing { get; set; }
+
 		/// <summary>
 		/// The name of the source
 		/// </summary>
@@ -61,6 +69,10 @@ namespace Nest
 		public bool? MissingBucket { get; set; }
 
 		/// <inheritdoc />
+		[Obsolete("Will be removed in Elasticsearch 7.x. Use MissingBucket")]
+		public object Missing { get; set; }
+
+		/// <inheritdoc />
 		public SortOrder? Order { get; set; }
 
 		/// <inheritdoc cref="ICompositeAggregationSource.SourceType" />
@@ -83,19 +95,19 @@ namespace Nest
 		public CompositeAggregationSourcesDescriptor<T> Terms(string name,
 			Func<TermsCompositeAggregationSourceDescriptor<T>, ITermsCompositeAggregationSource> selector
 		) =>
-			Assign(a => a.Add(selector?.Invoke(new TermsCompositeAggregationSourceDescriptor<T>(name))));
+			Assign(selector?.Invoke(new TermsCompositeAggregationSourceDescriptor<T>(name)), (a, v) => a.Add(v));
 
 		/// <inheritdoc cref="IHistogramCompositeAggregationSource" />
 		public CompositeAggregationSourcesDescriptor<T> Histogram(string name,
 			Func<HistogramCompositeAggregationSourceDescriptor<T>, IHistogramCompositeAggregationSource> selector
 		) =>
-			Assign(a => a.Add(selector?.Invoke(new HistogramCompositeAggregationSourceDescriptor<T>(name))));
+			Assign(selector?.Invoke(new HistogramCompositeAggregationSourceDescriptor<T>(name)), (a, v) => a.Add(v));
 
 		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource" />
 		public CompositeAggregationSourcesDescriptor<T> DateHistogram(string name,
 			Func<DateHistogramCompositeAggregationSourceDescriptor<T>, IDateHistogramCompositeAggregationSource> selector
 		) =>
-			Assign(a => a.Add(selector?.Invoke(new DateHistogramCompositeAggregationSourceDescriptor<T>(name))));
+			Assign(selector?.Invoke(new DateHistogramCompositeAggregationSourceDescriptor<T>(name)), (a, v) => a.Add(v));
 	}
 
 	/// <inheritdoc cref="ICompositeAggregationSource" />
@@ -114,22 +126,27 @@ namespace Nest
 
 		Field ICompositeAggregationSource.Field { get; set; }
 		bool? ICompositeAggregationSource.MissingBucket { get; set; }
-
+		[Obsolete("Will be removed in Elasticsearch 7.x. Use MissingBucket")]
+		object ICompositeAggregationSource.Missing { get; set; }
 		string ICompositeAggregationSource.Name { get; set; }
 		SortOrder? ICompositeAggregationSource.Order { get; set; }
 		string ICompositeAggregationSource.SourceType => _sourceType;
 
 		/// <inheritdoc cref="ICompositeAggregationSource.Field" />
-		public TDescriptor Field(Field field) => Assign(a => a.Field = field);
+		public TDescriptor Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="ICompositeAggregationSource.Field" />
-		public TDescriptor Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
+		public TDescriptor Field(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="ICompositeAggregationSource.Order" />
-		public TDescriptor Order(SortOrder? order) => Assign(a => a.Order = order);
+		public TDescriptor Order(SortOrder? order) => Assign(order, (a, v) => a.Order = v);
 
 		/// <inheritdoc cref="ICompositeAggregationSource.MissingBucket" />
-		public TDescriptor MissingBucket(bool? includeMissing = true) => Assign(a => a.MissingBucket = includeMissing);
+		public TDescriptor MissingBucket(bool? includeMissing = true) => Assign(includeMissing, (a, v) => a.MissingBucket = v);
+
+		/// <inheritdoc cref="ICompositeAggregationSource.Missing" />
+		[Obsolete("Will be removed in Elasticsearch 7.x. Use MissingBucket")]
+		public TDescriptor Missing(object missingObject) => Assign(missingObject, (a, v) => a.Missing = v);
 	}
 
 	internal class CompositeAggregationSourceConverter : ReserializeJsonConverter<CompositeAggregationSourceBase, ICompositeAggregationSource>

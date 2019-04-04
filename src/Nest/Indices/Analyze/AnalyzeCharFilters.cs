@@ -39,13 +39,10 @@ namespace Nest
 		/// <summary>
 		/// A reference to a token filter that is part of the mapping
 		/// </summary>
-		public AnalyzeCharFiltersDescriptor Name(string tokenFilter) => Assign(a => a.AddIfNotNull(tokenFilter));
+		public AnalyzeCharFiltersDescriptor Name(string tokenFilter) => Assign(tokenFilter, (a, v) => a.AddIfNotNull(v));
 
 		private AnalyzeCharFiltersDescriptor AssignIfNotNull(ICharFilter filter) =>
-			Assign(a =>
-			{
-				if (filter != null) a.Add(filter);
-			});
+			Assign(filter, (a, v) => { if (v != null) a.Add(v); });
 
 		/// <summary>
 		/// The pattern_replace char filter allows the use of a regex to manipulate the characters in a string before analysis.

@@ -33,10 +33,10 @@ namespace Nest
 
 		DateMath IDateRangeExpression.To { get; set; }
 
-		public DateRangeExpressionDescriptor From(DateMath from) => Assign(a => a.From = from);
+		public DateRangeExpressionDescriptor From(DateMath from) => Assign(from, (a, v) => a.From = v);
 
-		public DateRangeExpressionDescriptor To(DateMath to) => Assign(a => a.To = to);
+		public DateRangeExpressionDescriptor To(DateMath to) => Assign(to, (a, v) => a.To = v);
 
-		public DateRangeExpressionDescriptor Key(string key) => Assign(a => a.Key = key);
+		public DateRangeExpressionDescriptor Key(string key) => Assign(key, (a, v) => a.Key = v);
 	}
 }

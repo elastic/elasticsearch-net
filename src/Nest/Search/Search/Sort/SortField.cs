@@ -32,12 +32,20 @@ namespace Nest
 		bool? IFieldSort.IgnoreUnmappedFields { get; set; }
 		FieldType? IFieldSort.UnmappedType { get; set; }
 
-		public virtual SortFieldDescriptor<T> Field(Field field) => Assign(a => _field = field);
+		public virtual SortFieldDescriptor<T> Field(Field field)
+		{
+			_field = field;
+			return this;
+		}
 
-		public virtual SortFieldDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => _field = objectPath);
+		public virtual SortFieldDescriptor<T> Field(Expression<Func<T, object>> objectPath)
+		{
+			_field = objectPath;
+			return this;
+		}
 
-		public virtual SortFieldDescriptor<T> UnmappedType(FieldType? type) => Assign(a => a.UnmappedType = type);
+		public virtual SortFieldDescriptor<T> UnmappedType(FieldType? type) => Assign(type, (a, v) => a.UnmappedType = v);
 
-		public virtual SortFieldDescriptor<T> IgnoreUnmappedFields(bool? ignore = true) => Assign(a => a.IgnoreUnmappedFields = ignore);
+		public virtual SortFieldDescriptor<T> IgnoreUnmappedFields(bool? ignore = true) => Assign(ignore, (a, v) => a.IgnoreUnmappedFields = v);
 	}
 }

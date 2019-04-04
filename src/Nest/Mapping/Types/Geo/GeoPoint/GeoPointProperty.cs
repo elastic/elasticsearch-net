@@ -61,12 +61,12 @@ namespace Nest
 		GeoLocation IGeoPointProperty.NullValue { get; set; }
 
 		/// <inheritdoc cref="IGeoPointProperty.IgnoreMalformed" />
-		public GeoPointPropertyDescriptor<T> IgnoreMalformed(bool? ignoreMalformed = true) => Assign(a => a.IgnoreMalformed = ignoreMalformed);
+		public GeoPointPropertyDescriptor<T> IgnoreMalformed(bool? ignoreMalformed = true) => Assign(ignoreMalformed, (a, v) => a.IgnoreMalformed = v);
 
 		/// <inheritdoc cref="IGeoPointProperty.IgnoreZValue" />
-		public GeoPointPropertyDescriptor<T> IgnoreZValue(bool? ignoreZValue = true) => Assign(a => a.IgnoreZValue = ignoreZValue);
+		public GeoPointPropertyDescriptor<T> IgnoreZValue(bool? ignoreZValue = true) => Assign(ignoreZValue, (a, v) => a.IgnoreZValue = v);
 
 		/// <inheritdoc cref="IGeoPointProperty.NullValue" />
-		public GeoPointPropertyDescriptor<T> NullValue(GeoLocation defaultValue) => Assign(a => a.NullValue = defaultValue);
+		public GeoPointPropertyDescriptor<T> NullValue(GeoLocation defaultValue) => Assign(defaultValue, (a, v) => a.NullValue = v);
 	}
 }

@@ -37,14 +37,14 @@ namespace Nest
 
 		/// <inheritdoc />
 		public MappingCharFilterDescriptor Mappings(params string[] mappings) =>
-			Assign(a => a.Mappings = mappings);
+			Assign(mappings, (a, v) => a.Mappings = v);
 
 		/// <inheritdoc />
 		public MappingCharFilterDescriptor Mappings(IEnumerable<string> mappings) =>
-			Assign(a => a.Mappings = mappings);
+			Assign(mappings, (a, v) => a.Mappings = v);
 
 		/// <inheritdoc />
 		public MappingCharFilterDescriptor MappingsPath(string path) =>
-			Assign(a => a.MappingsPath = path);
+			Assign(path, (a, v) => a.MappingsPath = v);
 	}
 }

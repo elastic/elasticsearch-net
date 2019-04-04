@@ -51,12 +51,12 @@ namespace Nest
 		IEnumerable<string> IKeepTypesTokenFilter.Types { get; set; }
 
 		/// <inheritdoc cref="IKeepTypesTokenFilter.Types" />
-		public KeepTypesTokenFilterDescriptor Types(IEnumerable<string> types) => Assign(a => a.Types = types);
+		public KeepTypesTokenFilterDescriptor Types(IEnumerable<string> types) => Assign(types, (a, v) => a.Types = v);
 
 		/// <inheritdoc cref="IKeepTypesTokenFilter.Types" />
-		public KeepTypesTokenFilterDescriptor Types(params string[] types) => Assign(a => a.Types = types);
+		public KeepTypesTokenFilterDescriptor Types(params string[] types) => Assign(types, (a, v) => a.Types = v);
 
 		/// <inheritdoc cref="IKeepTypesTokenFilter.Mode" />
-		public KeepTypesTokenFilterDescriptor Mode(KeepTypesMode? mode) => Assign(a => a.Mode = mode);
+		public KeepTypesTokenFilterDescriptor Mode(KeepTypesMode? mode) => Assign(mode, (a, v) => a.Mode = v);
 	}
 }

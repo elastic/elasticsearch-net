@@ -30,8 +30,8 @@ namespace Nest
 
 		Field IExistsQuery.Field { get; set; }
 
-		public ExistsQueryDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public ExistsQueryDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public ExistsQueryDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
+		public ExistsQueryDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
 	}
 }

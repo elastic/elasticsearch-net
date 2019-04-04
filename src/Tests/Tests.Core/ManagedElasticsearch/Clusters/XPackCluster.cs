@@ -26,6 +26,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 			}
 			TrialMode = XPackTrialMode.Trial;
 			AdditionalBeforeNodeStartedTasks.Add(new EnsureWatcherActionConfigurationInElasticsearchYaml());
+			AdditionalBeforeNodeStartedTasks.Add(new EnsureNativeSecurityRealmEnabledInElasticsearchYaml());
 			ShowElasticsearchOutputAfterStarted = true; //this.TestConfiguration.ShowElasticsearchOutputAfterStarted;
 		}
 	}

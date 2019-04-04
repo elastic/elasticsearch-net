@@ -25,8 +25,8 @@ namespace Nest
 		int? ITextIndexPrefixes.MaxCharacters { get; set; }
 		int? ITextIndexPrefixes.MinCharacters { get; set; }
 
-		public TextIndexPrefixesDescriptor MinCharacters(int? min) => Assign(a => a.MinCharacters = min);
+		public TextIndexPrefixesDescriptor MinCharacters(int? min) => Assign(min, (a, v) => a.MinCharacters = v);
 
-		public TextIndexPrefixesDescriptor MaxCharacters(int? max) => Assign(a => a.MaxCharacters = max);
+		public TextIndexPrefixesDescriptor MaxCharacters(int? max) => Assign(max, (a, v) => a.MaxCharacters = v);
 	}
 }

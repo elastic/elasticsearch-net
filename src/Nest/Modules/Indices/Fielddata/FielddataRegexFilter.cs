@@ -20,6 +20,6 @@ namespace Nest
 	{
 		string IFielddataRegexFilter.Pattern { get; set; }
 
-		public FielddataRegexFilterDescriptor Pattern(string pattern) => Assign(a => a.Pattern = pattern);
+		public FielddataRegexFilterDescriptor Pattern(string pattern) => Assign(pattern, (a, v) => a.Pattern = v);
 	}
 }

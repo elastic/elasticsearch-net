@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.5
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.6
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -198,7 +198,8 @@ var methods = from d in YieldAllDescriptors()
     where !(m.Name == nameof(ScoreFunctionsDescriptor<object>.Weight) && dt == typeof(ScoreFunctionsDescriptor<>))
     where !(m.Name == nameof(SortDescriptor<object>.Ascending) && dt == typeof(SortDescriptor<>))
     where !(m.Name == nameof(SortDescriptor<object>.Descending) && dt == typeof(SortDescriptor<>))
-
+    where !(m.Name == nameof(ClrTypeMappingDescriptor<object>.DisableIdInference) && dt == typeof(ClrTypeMappingDescriptor<>))
+    where !(m.Name == nameof(ClrTypeMappingDescriptor.DisableIdInference) && dt == typeof(ClrTypeMappingDescriptor))
 
     select new {m, d, p};
 

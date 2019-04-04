@@ -26,9 +26,9 @@ namespace Nest
 
 	public class TriggerDescriptor : TriggerContainer
 	{
-		private TriggerDescriptor Assign(Action<ITriggerContainer> assigner) => Fluent.Assign(this, assigner);
+		private TriggerDescriptor Assign<TValue>(TValue value, Action<ITriggerContainer, TValue> assigner) => Fluent.Assign(this, value, assigner);
 
 		public TriggerDescriptor Schedule(Func<ScheduleDescriptor, IScheduleContainer> selector) =>
-			Assign(a => a.Schedule = selector?.InvokeOrDefault(new ScheduleDescriptor()));
+			Assign(selector, (a, v) => a.Schedule = v?.InvokeOrDefault(new ScheduleDescriptor()));
 	}
 }

@@ -9,12 +9,20 @@ build_script:
 
 nuget:
     disable_publish_on_pr: true
-  
+
 for:
-    
-- branches:
-      only:
-          - /^(master|\d+\.x)$/
-  artifacts:
-      - path: .\build\output\_packages\*.nupkg
-        name: NuGet
+
+    - branches:
+          only:
+              - /^(master|\d+\.x)$/
+      artifacts:
+          - path: .\build\output\_packages\*.nupkg
+            name: NuGet
+
+    -
+        matrix:
+            only:
+                - image: Ubuntu
+
+        build_script:
+            - ./build.sh test-one skipdocs

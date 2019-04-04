@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.5
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.6
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -28,7 +28,7 @@ This is a special type that you can implicitly convert to from the following typ
 
 * `Guid`
 
-Methods that take an `Id` can be passed any of these types and it will be implicitly converted to an instance of `Id`
+Methods that take an `Id` can be passed any of these types and they will be implicitly converted to an instance of `Id`
 
 [source,csharp]
 ----
@@ -43,9 +43,10 @@ Expect("hello-world").WhenSerializing(idFromString);
 Expect("d70bd3cf-4e38-46f3-91ca-fcbef29b148e").WhenSerializing(idFromGuid);
 ----
 
-==== Inferring from a type
+==== Inferring Id from a type
 
-Sometimes a method takes an object and we need an Id from that object to build up a path.
+Sometimes a method takes an object instance and the client requires an `Id` from that
+instance to build up a path.
 There is no implicit conversion from any object to `Id`, but we can call `Id.From`.
 
 Imagine your codebase has the following type that we want to index into Elasticsearch
@@ -114,7 +115,7 @@ WithConnectionSettings(x => x
 
 ==== Using the ElasticsearchType attribute
 
-Another way is to mark the type with an `ElasticsearchType` attribute, setting `IdProperty`
+Another way to control Id inference is to mark the type with an `ElasticsearchType` attribute, setting `IdProperty`
 to the name of the property that should be used for the document id
 
 [source,csharp]
@@ -144,8 +145,10 @@ Expect("x").WhenInferringIdOn(dto);
 
 ==== Using Mapping inference on ConnectionSettings
 
-This attribute *is* cached statically/globally, however an inference rule on the `ConnectionSettings` for the type will
-still win over the attribute. Here we demonstrate this by creating a different `ConnectionSettings` instance
+This attribute *is* cached statically/globally, however an inference rule on `ConnectionSettings` for the type will
+still win over the attribute.
+
+Here we demonstrate this by creating a different `ConnectionSettings` instance
 that will infer the document id from the property `OtherName`:
 
 [source,csharp]
@@ -155,5 +158,38 @@ WithConnectionSettings(x => x
         .IdProperty(p => p.OtherName)
     )
 ).Expect("y").WhenInferringIdOn(dto);
+----
+
+==== Disabling Id inference
+
+You can configure the client to disable Id inference on a CLR type basis
+
+[source,csharp]
+----
+WithConnectionSettings(x => x
+    .DefaultMappingFor<MyOtherDTO>(m => m
+        .DisableIdInference()
+    )
+).Expect(null).WhenInferringIdOn(dto);
+----
+
+or globally for all types
+
+[source,csharp]
+----
+WithConnectionSettings(x => x.DefaultDisableIdInference())
+    .Expect(null).WhenInferringIdOn(dto);
+----
+
+Once disabled globally, Id inference cannot be enabled per type
+
+[source,csharp]
+----
+WithConnectionSettings(x => x
+    .DefaultDisableIdInference()
+    .DefaultMappingFor<MyOtherDTO>(m => m
+        .DisableIdInference(disable: false)
+    )
+).Expect(null).WhenInferringIdOn(dto);
 ----
 

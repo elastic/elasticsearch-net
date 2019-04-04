@@ -7,6 +7,9 @@ namespace Nest
 	/// <summary>
 	/// Forward (default) for LTR and reverse for RTL
 	/// </summary>
+	/// <remarks>
+	/// Requires analysis-icu plugin to be installed
+	/// </remarks>
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum IcuTransformDirection
 	{

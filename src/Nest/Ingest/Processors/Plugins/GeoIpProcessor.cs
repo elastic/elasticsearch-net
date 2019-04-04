@@ -82,23 +82,23 @@ namespace Nest
 		IEnumerable<string> IGeoIpProcessor.Properties { get; set; }
 		Field IGeoIpProcessor.TargetField { get; set; }
 
-		public GeoIpProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public GeoIpProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		public GeoIpProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc />
-		public GeoIpProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);
+		public GeoIpProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissing = v);
 
-		public GeoIpProcessorDescriptor<T> TargetField(Field field) => Assign(a => a.TargetField = field);
+		public GeoIpProcessorDescriptor<T> TargetField(Field field) => Assign(field, (a, v) => a.TargetField = v);
 
 		public GeoIpProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.TargetField = objectPath);
+			Assign(objectPath, (a, v) => a.TargetField = v);
 
-		public GeoIpProcessorDescriptor<T> DatabaseFile(string file) => Assign(a => a.DatabaseFile = file);
+		public GeoIpProcessorDescriptor<T> DatabaseFile(string file) => Assign(file, (a, v) => a.DatabaseFile = v);
 
-		public GeoIpProcessorDescriptor<T> Properties(IEnumerable<string> properties) => Assign(a => a.Properties = properties);
+		public GeoIpProcessorDescriptor<T> Properties(IEnumerable<string> properties) => Assign(properties, (a, v) => a.Properties = v);
 
-		public GeoIpProcessorDescriptor<T> Properties(params string[] properties) => Assign(a => a.Properties = properties);
+		public GeoIpProcessorDescriptor<T> Properties(params string[] properties) => Assign(properties, (a, v) => a.Properties = v);
 	}
 }

@@ -69,7 +69,7 @@ namespace Tests.Analysis.Analyzers
 			public override string Name => "mySimple";
 		}
 
-		public class LanguageTests : AnalyzerAssertionBase<SimpleTests>
+		public class LanguageTests : AnalyzerAssertionBase<LanguageTests>
 		{
 			public override FuncTokenizer Fluent => (n, an) => an
 				.Language("myLanguage", a => a.Language(Language.Dutch));
@@ -215,6 +215,30 @@ namespace Tests.Analysis.Analyzers
 			};
 
 			public override string Name => "nori";
+		}
+
+		[SkipVersion("<6.6.0", "introduced in 6.6.0")]
+		public class IcuTests : AnalyzerAssertionBase<IcuTests>
+		{
+			public override FuncTokenizer Fluent => (n, t) => t.Icu(n, e => e
+				.Method(IcuNormalizationType.Canonical)
+				.Mode(IcuNormalizationMode.Decompose)
+			);
+
+			public override IAnalyzer Initializer => new IcuAnalyzer
+			{
+				Method = IcuNormalizationType.Canonical,
+				Mode = IcuNormalizationMode.Decompose
+			};
+
+			public override object Json => new
+			{
+				type = "icu_analyzer",
+				method = "nfc",
+				mode = "decompose"
+			};
+
+			public override string Name => "icu_analyzer";
 		}
 	}
 }

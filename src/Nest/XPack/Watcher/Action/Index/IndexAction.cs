@@ -45,18 +45,18 @@ namespace Nest
 		IndexName IIndexAction.Index { get; set; }
 		Time IIndexAction.Timeout { get; set; }
 
-		public IndexActionDescriptor Index(IndexName index) => Assign(a => a.Index = index);
+		public IndexActionDescriptor Index(IndexName index) => Assign(index, (a, v) => a.Index = v);
 
-		public IndexActionDescriptor Index<T>() => Assign(a => a.Index = typeof(T));
+		public IndexActionDescriptor Index<T>() => Assign(typeof(T), (a, v) => a.Index = v);
 
-		public IndexActionDescriptor DocType(TypeName type) => Assign(a => a.DocType = type);
+		public IndexActionDescriptor DocType(TypeName type) => Assign(type, (a, v) => a.DocType = v);
 
-		public IndexActionDescriptor DocType<T>() => Assign(a => a.DocType = typeof(T));
+		public IndexActionDescriptor DocType<T>() => Assign(typeof(T), (a, v) => a.DocType = v);
 
-		public IndexActionDescriptor ExecutionTimeField(Field field) => Assign(a => a.ExecutionTimeField = field);
+		public IndexActionDescriptor ExecutionTimeField(Field field) => Assign(field, (a, v) => a.ExecutionTimeField = v);
 
-		public IndexActionDescriptor ExecutionTimeField<T>(Expression<Func<T, object>> objectPath) => Assign(a => a.ExecutionTimeField = objectPath);
+		public IndexActionDescriptor ExecutionTimeField<T>(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.ExecutionTimeField = v);
 
-		public IndexActionDescriptor Timeout(Time timeout) => Assign(a => a.Timeout = timeout);
+		public IndexActionDescriptor Timeout(Time timeout) => Assign(timeout, (a, v) => a.Timeout = v);
 	}
 }

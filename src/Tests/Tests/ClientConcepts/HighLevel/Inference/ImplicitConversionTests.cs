@@ -12,6 +12,16 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 	{
 		private static T Implicit<T>(T i) => i;
 
+		[U] public void ForecastIds()
+		{
+			Implicit<ForecastIds>(null).Should().BeNull();
+			Implicit<ForecastIds>("").Should().BeNull();
+			Implicit<ForecastIds>("   ").Should().BeNull();
+			Implicit<ForecastIds>(",, ,,").Should().BeNull();
+			Implicit<ForecastIds>(new string[] { }).Should().BeNull();
+			Implicit<ForecastIds>(new string[] { null, null }).Should().BeNull();
+		}
+
 		[U] public void ActionIds()
 		{
 			Implicit<ActionIds>(null).Should().BeNull();

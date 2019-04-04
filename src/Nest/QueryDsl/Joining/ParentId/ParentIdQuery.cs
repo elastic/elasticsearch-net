@@ -54,12 +54,12 @@ namespace Nest
 
 		RelationName IParentIdQuery.Type { get; set; }
 
-		public ParentIdQueryDescriptor<T> Id(Id id) => Assign(a => a.Id = id);
+		public ParentIdQueryDescriptor<T> Id(Id id) => Assign(id, (a, v) => a.Id = v);
 
-		public ParentIdQueryDescriptor<T> Type(RelationName type) => Assign(a => a.Type = type);
+		public ParentIdQueryDescriptor<T> Type(RelationName type) => Assign(type, (a, v) => a.Type = v);
 
-		public ParentIdQueryDescriptor<T> Type<TChild>() => Assign(a => a.Type = typeof(TChild));
+		public ParentIdQueryDescriptor<T> Type<TChild>() => Assign(typeof(TChild), (a, v) => a.Type = v);
 
-		public ParentIdQueryDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(a => a.IgnoreUnmapped = ignoreUnmapped);
+		public ParentIdQueryDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmapped = v);
 	}
 }

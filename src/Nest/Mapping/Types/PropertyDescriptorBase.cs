@@ -33,13 +33,13 @@ namespace Nest
 		}
 
 		/// <inheritdoc cref="IProperty.Name" />
-		public TDescriptor Name(PropertyName name) => Assign(a => a.Name = name);
+		public TDescriptor Name(PropertyName name) => Assign(name, (a, v) => a.Name = v);
 
 		/// <inheritdoc cref="IProperty.Name" />
-		public TDescriptor Name(Expression<Func<T, object>> objectPath) => Assign(a => a.Name = objectPath);
+		public TDescriptor Name(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Name = v);
 
 		/// <inheritdoc cref="IProperty.LocalMetadata" />
 		public TDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) =>
-			Assign(a => a.LocalMetadata = selector?.Invoke(new FluentDictionary<string, object>()));
+			Assign(selector, (a, v) => a.LocalMetadata = v?.Invoke(new FluentDictionary<string, object>()));
 	}
 }

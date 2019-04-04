@@ -43,11 +43,14 @@ namespace ApiGenerator.Domain
 					case "type": return Type == "string" ? "TypeName" : "Types";
 					case "watch_id":
 					case "job_id":
+					case "calendar_id":
+					case "event_id":
 					case "datafeed_id":
 					case "snapshot_id":
 					case "filter_id":
 					case "id": return Type == "string" ? "Id" : "Ids";
 					case "category_id": return "CategoryId";
+					case "forecast_id": return "ForecastIds";
 					case "nodes":
 					case "node_id": return Type == "string" ? "NodeId" : "NodeIds";
 					case "scroll_id": return Type == "string" ? "ScrollId" : "ScrollIds";
@@ -59,6 +62,7 @@ namespace ApiGenerator.Domain
 						return "Metrics";
 					case "feature": return "Features";
 					case "action_id": return "ActionIds";
+					case "application":
 					case "repository":
 					case "snapshot":
 					case "lang":
@@ -69,6 +73,7 @@ namespace ApiGenerator.Domain
 					case "alias":
 					case "context":
 					case "name":
+					case "user":
 					case "thread_pool_patterns":
 						return Type == "string" ? "Name" : "Names";
 					case "parent_task_id":

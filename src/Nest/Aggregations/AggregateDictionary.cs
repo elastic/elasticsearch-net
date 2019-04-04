@@ -113,6 +113,8 @@ namespace Nest
 
 		public SingleBucketAggregate Children(string key) => TryGet<SingleBucketAggregate>(key);
 
+		public SingleBucketAggregate Parent(string key) => TryGet<SingleBucketAggregate>(key);
+
 		public SingleBucketAggregate Sampler(string key) => TryGet<SingleBucketAggregate>(key);
 
 		public GeoCentroidAggregate GeoCentroid(string key) => TryGet<GeoCentroidAggregate>(key);
@@ -205,6 +207,8 @@ namespace Nest
 		}
 
 		public MatrixStatsAggregate MatrixStats(string key) => TryGet<MatrixStatsAggregate>(key);
+
+		public ValueAggregate MedianAbsoluteDeviation(string key) => TryGet<ValueAggregate>(key);
 
 		private TAggregate TryGet<TAggregate>(string key)
 			where TAggregate : class, IAggregate

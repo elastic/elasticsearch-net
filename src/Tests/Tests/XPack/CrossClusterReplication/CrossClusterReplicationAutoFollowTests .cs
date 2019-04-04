@@ -14,15 +14,13 @@ using Tests.Framework.Integration;
 
 namespace Tests.XPack.CrossClusterReplication
 {
-	[SkipVersion("<6.5.0", "")]
+	[SkipVersion("<6.5.0", "Only available in Elasticsearch 6.5.0+")]
 	public class CrossClusterReplicationAutoFollowTests : CoordinatedIntegrationTestBase<WritableCluster>
 	{
 		private const string CreateAutoFollowStep = nameof(CreateAutoFollowStep);
 		private const string GetAutoFollowStep = nameof(GetAutoFollowStep);
 		private const string DeleteAutoFollowStep = nameof(DeleteAutoFollowStep);
 		private const string GlobalStatsStep = nameof(GlobalStatsStep);
-
-		private static readonly Project[] Data = Project.Generator.GenerateLazy(1000).ToArray();
 
 		public CrossClusterReplicationAutoFollowTests(WritableCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage, Prefix)
 		{
@@ -85,9 +83,6 @@ namespace Tests.XPack.CrossClusterReplication
 		protected static string Prefix { get; } = $"autof-{Guid.NewGuid().ToString("N").Substring(0, 4)}";
 		protected static string LeaderPrefix { get; } = $"leader-{Prefix}";
 		protected static string FollowerPrefix { get; } = "follower-";
-
-		private static string LeaderIndex(string v) => $"{LeaderPrefix}{v}";
-		private static string FollowIndex(string v) => $"{FollowerPrefix}{LeaderPrefix}{v}";
 		private static string AutoPattern(string v) => $"auto-pattern-{v}";
 
 		[I] public async Task CreateIsAcked() => await Assert<CreateAutoFollowPatternResponse>(CreateAutoFollowStep, r => r.Acknowledged.Should().BeTrue());

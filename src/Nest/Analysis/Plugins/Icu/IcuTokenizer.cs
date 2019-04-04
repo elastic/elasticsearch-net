@@ -7,8 +7,10 @@ namespace Nest
 	/// like the standard tokenizer, but adds better support for some Asian languages by using a dictionary-based approach
 	/// to identify words in Thai, Lao, Chinese, Japanese, and Korean, and using custom rules to break Myanmar and Khmer
 	/// text into syllables.
-	/// Part of the `analysis-icu` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-icu.html
 	/// </summary>
+	/// <remarks>
+	/// Requires analysis-icu plugin to be installed
+	/// </remarks>
 	public interface IIcuTokenizer : ITokenizer
 	{
 		/// <summary>
@@ -37,6 +39,6 @@ namespace Nest
 		string IIcuTokenizer.RuleFiles { get; set; }
 
 		/// <inheritdoc />
-		public IcuTokenizerDescriptor RuleFiles(string ruleFiles) => Assign(a => a.RuleFiles = ruleFiles);
+		public IcuTokenizerDescriptor RuleFiles(string ruleFiles) => Assign(ruleFiles, (a, v) => a.RuleFiles = v);
 	}
 }

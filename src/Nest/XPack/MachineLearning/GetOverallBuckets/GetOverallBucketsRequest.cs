@@ -99,27 +99,27 @@ namespace Nest
 
 		/// <inheritdoc cref="IGetOverallBucketsRequest.AllowNoJobs" />
 		public GetOverallBucketsDescriptor AllowNoJobs(bool? allowNoJobs = true) =>
-			Assign(a => a.AllowNoJobs = allowNoJobs);
+			Assign(allowNoJobs, (a, v) => a.AllowNoJobs = v);
 
 		/// <inheritdoc cref="IGetOverallBucketsRequest.BucketSpan" />
 		public GetOverallBucketsDescriptor BucketSpan(Time bucketSpan) =>
-			Assign(a => a.BucketSpan = bucketSpan);
+			Assign(bucketSpan, (a, v) => a.BucketSpan = v);
 
 		/// <inheritdoc cref="IGetOverallBucketsRequest.End" />
-		public GetOverallBucketsDescriptor End(DateTimeOffset? end) => Assign(a => a.End = end);
+		public GetOverallBucketsDescriptor End(DateTimeOffset? end) => Assign(end, (a, v) => a.End = v);
 
 		/// <inheritdoc cref="IGetOverallBucketsRequest.ExcludeInterim" />
 		public GetOverallBucketsDescriptor ExcludeInterim(bool? excludeInterim = true) =>
-			Assign(a => a.ExcludeInterim = excludeInterim);
+			Assign(excludeInterim, (a, v) => a.ExcludeInterim = v);
 
 		/// <inheritdoc cref="IGetOverallBucketsRequest.OverallScore" />
 		public GetOverallBucketsDescriptor OverallScore(double? overallScore) =>
-			Assign(a => a.OverallScore = overallScore);
+			Assign(overallScore, (a, v) => a.OverallScore = v);
 
 		/// <inheritdoc cref="IGetOverallBucketsRequest.Start" />
-		public GetOverallBucketsDescriptor Start(DateTimeOffset? start) => Assign(a => a.Start = start);
+		public GetOverallBucketsDescriptor Start(DateTimeOffset? start) => Assign(start, (a, v) => a.Start = v);
 
 		/// <inheritdoc cref="IGetOverallBucketsRequest.TopN" />
-		public GetOverallBucketsDescriptor TopN(int? topN) => Assign(a => a.TopN = topN);
+		public GetOverallBucketsDescriptor TopN(int? topN) => Assign(topN, (a, v) => a.TopN = v);
 	}
 }

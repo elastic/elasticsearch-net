@@ -81,9 +81,11 @@ namespace Tests.Aggregations.Pipeline.SerialDifferencing
 
 			var differenceCount = 0;
 
+			bool atleastOneSecondDifference = false;
 			foreach (var item in projectsPerMonth.Buckets)
 			{
 				differenceCount++;
+				if (item.DocCount == 0) continue;
 				var commits = item.Sum("commits");
 				commits.Should().NotBeNull();
 				commits.Value.Should().NotBe(null);
@@ -94,12 +96,14 @@ namespace Tests.Aggregations.Pipeline.SerialDifferencing
 				// only expect values from the 3rd bucket onwards
 				if (differenceCount <= 2)
 					secondDifference.Should().BeNull();
-				else
+				else if(secondDifference != null)
 				{
+					atleastOneSecondDifference = true;
 					secondDifference.Should().NotBeNull();
 					secondDifference.Value.Should().NotBe(null);
 				}
 			}
+			atleastOneSecondDifference.Should().BeTrue("second_difference should be returned on one bucket atleast!");
 		}
 	}
 }

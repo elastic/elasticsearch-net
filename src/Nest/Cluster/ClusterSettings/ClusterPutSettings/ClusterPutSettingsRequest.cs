@@ -28,9 +28,9 @@ namespace Nest
 		IDictionary<string, object> IClusterPutSettingsRequest.Transient { get; set; }
 
 		public ClusterPutSettingsDescriptor Persistent(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) =>
-			Assign(a => a.Persistent = selector?.Invoke(new FluentDictionary<string, object>()));
+			Assign(selector, (a, v) => a.Persistent = v?.Invoke(new FluentDictionary<string, object>()));
 
 		public ClusterPutSettingsDescriptor Transient(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) =>
-			Assign(a => a.Transient = selector?.Invoke(new FluentDictionary<string, object>()));
+			Assign(selector, (a, v) => a.Transient = v?.Invoke(new FluentDictionary<string, object>()));
 	}
 }

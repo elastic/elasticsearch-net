@@ -43,12 +43,12 @@ namespace Nest
 		Field ISortProcessor.Field { get; set; }
 		SortOrder? ISortProcessor.Order { get; set; }
 
-		public SortProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public SortProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		public SortProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
 		public SortProcessorDescriptor<T> Order(SortOrder? order = SortOrder.Ascending) =>
-			Assign(a => a.Order = order);
+			Assign(order, (a, v) => a.Order = v);
 	}
 }

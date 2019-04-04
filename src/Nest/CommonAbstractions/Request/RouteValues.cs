@@ -10,6 +10,7 @@ namespace Nest
 		public string ActionId => GetResolved("action_id");
 		public string Alias => GetResolved("alias");
 		public string CategoryId => GetResolved("category_id");
+		public string ForecastId => GetResolved("forecast_id");
 		public string Context => GetResolved("context");
 		public string DatafeedId => GetResolved("datafeed_id");
 		public string Feature => GetResolved("feature");
@@ -17,6 +18,8 @@ namespace Nest
 		public string Fields => GetResolved("fields");
 		public string FilterId => GetResolved("filter_id");
 		public string Id => GetResolved("id");
+		public string CalendarId => GetResolved("calendar_id");
+		public string EventId => GetResolved("event_id");
 
 		public string Index => GetResolved("index");
 		public string IndexMetric => GetResolved("index_metric");
@@ -36,6 +39,8 @@ namespace Nest
 		public string ThreadPoolPatterns => GetResolved("thread_pool_patterns");
 		public string Timestamp => GetResolved("timestamp");
 		public string Type => GetResolved("type");
+		public string Application => GetResolved("application");
+		public string User => GetResolved("user");
 		public string Username => GetResolved("username");
 		public WatcherStatsMetric? WatcherStatsMetric => GetResolved("watcher_stats_metric").ToEnum<WatcherStatsMetric>();
 		public string WatchId => GetResolved("watch_id");

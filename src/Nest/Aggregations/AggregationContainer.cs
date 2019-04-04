@@ -177,6 +177,10 @@ namespace Nest
 		[JsonProperty("nested")]
 		INestedAggregation Nested { get; set; }
 
+		/// <inheritdoc cref="IParentAggregation"/>
+		[JsonProperty("parent")]
+		IParentAggregation Parent { get; set; }
+
 		[JsonProperty("percentile_ranks")]
 		IPercentileRanksAggregation PercentileRanks { get; set; }
 
@@ -230,6 +234,9 @@ namespace Nest
 
 		[JsonProperty("weighted_avg")]
 		IWeightedAverageAggregation WeightedAverage { get; set; }
+
+		[JsonProperty("median_absolute_deviation")]
+		IMedianAbsoluteDeviationAggregation MedianAbsoluteDeviation { get; set; }
 
 		void Accept(IAggregationVisitor visitor);
 	}
@@ -304,6 +311,9 @@ namespace Nest
 
 		public INestedAggregation Nested { get; set; }
 
+		/// <inheritdoc cref="IParentAggregation"/>
+		public IParentAggregation Parent { get; set; }
+
 		public IPercentileRanksAggregation PercentileRanks { get; set; }
 
 		public IPercentilesAggregation Percentiles { get; set; }
@@ -336,6 +346,8 @@ namespace Nest
 		public IValueCountAggregation ValueCount { get; set; }
 
 		public IWeightedAverageAggregation WeightedAverage { get; set; }
+
+		public IMedianAbsoluteDeviationAggregation MedianAbsoluteDeviation { get; set; }
 
 		public void Accept(IAggregationVisitor visitor)
 		{
@@ -440,6 +452,8 @@ namespace Nest
 
 		INestedAggregation IAggregationContainer.Nested { get; set; }
 
+		IParentAggregation IAggregationContainer.Parent { get; set; }
+
 		IPercentileRanksAggregation IAggregationContainer.PercentileRanks { get; set; }
 
 		IPercentilesAggregation IAggregationContainer.Percentiles { get; set; }
@@ -475,6 +489,8 @@ namespace Nest
 		IValueCountAggregation IAggregationContainer.ValueCount { get; set; }
 
 		IWeightedAverageAggregation IAggregationContainer.WeightedAverage { get; set; }
+
+		IMedianAbsoluteDeviationAggregation IAggregationContainer.MedianAbsoluteDeviation { get; set; }
 
 		public void Accept(IAggregationVisitor visitor)
 		{
@@ -581,6 +597,12 @@ namespace Nest
 			Func<NestedAggregationDescriptor<T>, INestedAggregation> selector
 		) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Nested = d);
+
+		/// <inheritdoc cref="IParentAggregation"/>
+		public AggregationContainerDescriptor<T> Parent<TParent>(string name,
+			Func<ParentAggregationDescriptor<T, TParent>, IParentAggregation> selector
+		) where TParent : class =>
+			_SetInnerAggregation(name, selector, (a, d) => a.Parent = d);
 
 		public AggregationContainerDescriptor<T> ReverseNested(string name,
 			Func<ReverseNestedAggregationDescriptor<T>, IReverseNestedAggregation> selector
@@ -741,6 +763,11 @@ namespace Nest
 			Func<WeightedAverageAggregationDescriptor<T>, IWeightedAverageAggregation> selector
 		) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.WeightedAverage = d);
+
+		public AggregationContainerDescriptor<T> MedianAbsoluteDeviation(string name,
+			Func<MedianAbsoluteDeviationAggregationDescriptor<T>, IMedianAbsoluteDeviationAggregation> selector
+		) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.MedianAbsoluteDeviation = d);
 
 		/// <summary>
 		/// Fluent methods do not assign to properties on `this` directly but on IAggregationContainers inside `this.Aggregations[string, IContainer]

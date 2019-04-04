@@ -22,7 +22,7 @@ namespace ApiGenerator
 
 			if (redownloadCoreSpecification)
 			{
-				Console.Write("Branch to download specification from (default master): ");
+				Console.Write($"Branch to download specification from (default {downloadBranch}): ");
 				var readBranch = Console.ReadLine()?.Trim();
 				if (!string.IsNullOrEmpty(readBranch)) downloadBranch = readBranch;
 			}
@@ -39,8 +39,22 @@ namespace ApiGenerator
 			if (redownloadCoreSpecification)
 				RestSpecDownloader.Download(downloadBranch);
 
-			ApiGenerator.Generate(downloadBranch, "Core", "Graph", "License", "Security", "Watcher", "Info", "MachineLearning", "Migration", "Sql",
-				"Rollup", "Ccr", "Ssl");
+			ApiGenerator.Generate(downloadBranch,
+				"Ccr",
+				"Core",
+				"Graph",
+				"Ilm",
+				"Indices",
+				"Info",
+				"License",
+				"MachineLearning",
+				"Migration",
+				"Monitoring",
+				"Rollup",
+				"Security",
+				"Sql",
+				"Ssl",
+				"Watcher");
 		}
 	}
 }

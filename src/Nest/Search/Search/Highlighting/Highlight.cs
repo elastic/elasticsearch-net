@@ -221,17 +221,17 @@ namespace Nest
 
 		// <inheritdoc/>
 		public HighlightDescriptor<T> Fields(params Func<HighlightFieldDescriptor<T>, IHighlightField>[] fieldHighlighters) =>
-			Assign(a => a.Fields = fieldHighlighters?
+			Assign(fieldHighlighters, (a, v) => a.Fields = v?
 				.Select(f =>
 					f(new HighlightFieldDescriptor<T>())
 						.ThrowWhen(p => p.Field == null, "Could not infer key for highlight field descriptor")
 				)
-				.ToDictionary(k => k.Field, v => v)
+				.ToDictionary(k => k.Field)
 				.NullIfNoKeys()
 			);
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> TagsSchema(HighlighterTagsSchema? schema) => Assign(a => a.TagsSchema = schema);
+		public HighlightDescriptor<T> TagsSchema(HighlighterTagsSchema? schema) => Assign(schema, (a, v) => a.TagsSchema = v);
 
 		// <inheritdoc/>
 		public HighlightDescriptor<T> PreTags(string preTags) => PreTags(new[] { preTags });
@@ -240,48 +240,48 @@ namespace Nest
 		public HighlightDescriptor<T> PostTags(string postTags) => PostTags(new[] { postTags });
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> PreTags(IEnumerable<string> preTags) => Assign(a => a.PreTags = preTags.ToListOrNullIfEmpty());
+		public HighlightDescriptor<T> PreTags(IEnumerable<string> preTags) => Assign(preTags.ToListOrNullIfEmpty(), (a, v) => a.PreTags = v);
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> PostTags(IEnumerable<string> postTags) => Assign(a => a.PostTags = postTags.ToListOrNullIfEmpty());
+		public HighlightDescriptor<T> PostTags(IEnumerable<string> postTags) => Assign(postTags.ToListOrNullIfEmpty(), (a, v) => a.PostTags = v);
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> FragmentSize(int? fragmentSize) => Assign(a => a.FragmentSize = fragmentSize);
+		public HighlightDescriptor<T> FragmentSize(int? fragmentSize) => Assign(fragmentSize, (a, v) => a.FragmentSize = v);
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> NumberOfFragments(int? numberOfFragments) => Assign(a => a.NumberOfFragments = numberOfFragments);
+		public HighlightDescriptor<T> NumberOfFragments(int? numberOfFragments) => Assign(numberOfFragments, (a, v) => a.NumberOfFragments = v);
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> FragmentOffset(int? fragmentOffset) => Assign(a => a.FragmentOffset = fragmentOffset);
+		public HighlightDescriptor<T> FragmentOffset(int? fragmentOffset) => Assign(fragmentOffset, (a, v) => a.FragmentOffset = v);
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> Encoder(HighlighterEncoder? encoder) => Assign(a => a.Encoder = encoder);
+		public HighlightDescriptor<T> Encoder(HighlighterEncoder? encoder) => Assign(encoder, (a, v) => a.Encoder = v);
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> Order(HighlighterOrder? order) => Assign(a => a.Order = order);
+		public HighlightDescriptor<T> Order(HighlighterOrder? order) => Assign(order, (a, v) => a.Order = v);
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> RequireFieldMatch(bool? requireFieldMatch = true) => Assign(a => a.RequireFieldMatch = requireFieldMatch);
+		public HighlightDescriptor<T> RequireFieldMatch(bool? requireFieldMatch = true) => Assign(requireFieldMatch, (a, v) => a.RequireFieldMatch = v);
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> BoundaryCharacters(string boundaryCharacters) => Assign(a => a.BoundaryChars = boundaryCharacters);
+		public HighlightDescriptor<T> BoundaryCharacters(string boundaryCharacters) => Assign(boundaryCharacters, (a, v) => a.BoundaryChars = v);
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> BoundaryMaxScan(int? boundaryMaxScan) => Assign(a => a.BoundaryMaxScan = boundaryMaxScan);
+		public HighlightDescriptor<T> BoundaryMaxScan(int? boundaryMaxScan) => Assign(boundaryMaxScan, (a, v) => a.BoundaryMaxScan = v);
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> MaxFragmentLength(int? maxFragmentLength) => Assign(a => a.MaxFragmentLength = maxFragmentLength);
+		public HighlightDescriptor<T> MaxFragmentLength(int? maxFragmentLength) => Assign(maxFragmentLength, (a, v) => a.MaxFragmentLength = v);
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> NoMatchSize(int? noMatchSize) => Assign(a => a.NoMatchSize = noMatchSize);
+		public HighlightDescriptor<T> NoMatchSize(int? noMatchSize) => Assign(noMatchSize, (a, v) => a.NoMatchSize = v);
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> BoundaryScanner(BoundaryScanner? boundaryScanner) => Assign(a => a.BoundaryScanner = boundaryScanner);
+		public HighlightDescriptor<T> BoundaryScanner(BoundaryScanner? boundaryScanner) => Assign(boundaryScanner, (a, v) => a.BoundaryScanner = v);
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> BoundaryScannerLocale(string locale) => Assign(a => a.BoundaryScannerLocale = locale);
+		public HighlightDescriptor<T> BoundaryScannerLocale(string locale) => Assign(locale, (a, v) => a.BoundaryScannerLocale = v);
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> Fragmenter(HighlighterFragmenter? fragmenter) => Assign(a => a.Fragmenter = fragmenter);
+		public HighlightDescriptor<T> Fragmenter(HighlighterFragmenter? fragmenter) => Assign(fragmenter, (a, v) => a.Fragmenter = v);
 	}
 }

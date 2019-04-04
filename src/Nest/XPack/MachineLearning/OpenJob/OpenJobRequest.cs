@@ -28,6 +28,6 @@ namespace Nest
 		Time IOpenJobRequest.Timeout { get; set; }
 
 		/// <inheritdoc />
-		public OpenJobDescriptor Timeout(Time timeout) => Assign(a => a.Timeout = timeout);
+		public OpenJobDescriptor Timeout(Time timeout) => Assign(timeout, (a, v) => a.Timeout = v);
 	}
 }

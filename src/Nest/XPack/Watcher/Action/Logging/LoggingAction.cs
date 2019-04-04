@@ -35,10 +35,10 @@ namespace Nest
 		LogLevel? ILoggingAction.Level { get; set; }
 		string ILoggingAction.Text { get; set; }
 
-		public LoggingActionDescriptor Level(LogLevel? level) => Assign(a => a.Level = level);
+		public LoggingActionDescriptor Level(LogLevel? level) => Assign(level, (a, v) => a.Level = v);
 
-		public LoggingActionDescriptor Text(string text) => Assign(a => a.Text = text);
+		public LoggingActionDescriptor Text(string text) => Assign(text, (a, v) => a.Text = v);
 
-		public LoggingActionDescriptor Category(string category) => Assign(a => a.Category = category);
+		public LoggingActionDescriptor Category(string category) => Assign(category, (a, v) => a.Category = v);
 	}
 }

@@ -30,7 +30,7 @@ namespace Nest
 		QueryContainer IValidateQueryRequest.Query { get; set; }
 
 		public ValidateQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
-			=> Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
+			=> Assign(querySelector, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<T>()));
 
 		[Obsolete("Removed in Elasticsearch 6.2. Will be removed in NEST 7.x. Calling this is a no-op.")]
 		public ValidateQueryDescriptor<T> OperationThreading(string operationThreading) => this;

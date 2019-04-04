@@ -93,27 +93,27 @@ namespace Nest
 		DateTimeOffset? IGetAnomalyRecordsRequest.Start { get; set; }
 
 		/// <inheritdoc />
-		public GetAnomalyRecordsDescriptor Descending(bool? descending = true) => Assign(a => a.Descending = descending);
+		public GetAnomalyRecordsDescriptor Descending(bool? descending = true) => Assign(descending, (a, v) => a.Descending = v);
 
 		/// <inheritdoc />
-		public GetAnomalyRecordsDescriptor End(DateTimeOffset? end) => Assign(a => a.End = end);
+		public GetAnomalyRecordsDescriptor End(DateTimeOffset? end) => Assign(end, (a, v) => a.End = v);
 
 		/// <inheritdoc />
 		public GetAnomalyRecordsDescriptor Page(Func<PageDescriptor, IPage> selector) =>
-			Assign(a => a.Page = selector?.Invoke(new PageDescriptor()));
+			Assign(selector, (a, v) => a.Page = v?.Invoke(new PageDescriptor()));
 
 		/// <inheritdoc />
-		public GetAnomalyRecordsDescriptor Sort(Field field) => Assign(a => a.Sort = field);
+		public GetAnomalyRecordsDescriptor Sort(Field field) => Assign(field, (a, v) => a.Sort = v);
 
 		/// <inheritdoc />
-		public GetAnomalyRecordsDescriptor Start(DateTimeOffset? end) => Assign(a => a.Start = end);
+		public GetAnomalyRecordsDescriptor Start(DateTimeOffset? end) => Assign(end, (a, v) => a.Start = v);
 
 		/// <inheritdoc />
 		public GetAnomalyRecordsDescriptor ExcludeInterim(bool? excludeInterim = true) =>
-			Assign(a => a.ExcludeInterim = excludeInterim);
+			Assign(excludeInterim, (a, v) => a.ExcludeInterim = v);
 
 		/// <inheritdoc />
 		public GetAnomalyRecordsDescriptor RecordScore(double? recordScore) =>
-			Assign(a => a.RecordScore = recordScore);
+			Assign(recordScore, (a, v) => a.RecordScore = v);
 	}
 }

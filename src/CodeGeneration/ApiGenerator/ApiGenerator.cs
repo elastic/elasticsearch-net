@@ -20,36 +20,31 @@ namespace ApiGenerator
 
 		private static string[] IgnoredApis { get; } =
 		{
+			"ccr.follow_info.json",
+			"ccr.forget_follower.json",
+			"ilm.delete_lifecycle.json",
+			"ilm.explain_lifecycle.json",
+			"ilm.get_lifecycle.json",
+			"ilm.get_status.json",
+			"ilm.move_to_step.json",
+			"ilm.put_lifecycle.json",
+			"ilm.remove_policy.json",
+			"ilm.retry.json",
+			"ilm.start.json",
+			"ilm.stop.json",
+			"indices.freeze.json",
+			"indices.unfreeze.json",
+			"xpack.ml.set_upgrade_mode.json",
+			"security.create_api_key.json",
+			"security.get_api_key.json",
+			"security.invalidate_api_key.json",
+			"xpack.monitoring.bulk.json",
+
 			// these API's are not ready for primetime yet
-			"xpack.ml.delete_filter.json",
-			"xpack.ml.get_filters.json",
-			"xpack.ml.put_filter.json",
 			"rank_eval.json",
 
 			// these API's are new and need to be mapped
-			"xpack.ml.delete_calendar.json",
-			"xpack.ml.delete_calendar_event.json",
-			"xpack.ml.delete_calendar_job.json",
-			"xpack.ml.get_calendar_events.json",
-			"xpack.ml.get_calendars.json",
-			"xpack.ml.info.json",
-			"xpack.ml.post_calendar_events.json",
-			"xpack.ml.put_calendar.json",
-			"xpack.ml.put_calendar_job.json",
-			"xpack.ml.get_calendar_job.json",
-			"xpack.ml.delete_forecast.json",
-			"xpack.ml.find_file_structure.json",
-			"delete_by_query_rethrottle.json",
-			"update_by_query_rethrottle.json",
-
-			"xpack.ml.update_filter.json",
-			"xpack.security.delete_privileges.json",
-			"xpack.security.get_privileges.json",
-			"xpack.security.get_user_privileges.json",
-			"xpack.security.get_index_privileges.json",
-			"xpack.security.has_privileges.json",
-			"xpack.security.put_privilege.json",
-			"xpack.security.put_privileges.json",
+			"xpack.ml.find_file_structure.json"
 		};
 
 		public static void Generate(string downloadBranch, params string[] folders)
