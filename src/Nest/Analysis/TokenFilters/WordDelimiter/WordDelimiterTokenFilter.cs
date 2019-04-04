@@ -155,50 +155,50 @@ namespace Nest
 
 		/// <inheritdoc />
 		public WordDelimiterTokenFilterDescriptor GenerateWordParts(bool? generateWordParts = true) =>
-			Assign(a => a.GenerateWordParts = generateWordParts);
+			Assign(generateWordParts, (a, v) => a.GenerateWordParts = v);
 
 		/// <inheritdoc />
 		public WordDelimiterTokenFilterDescriptor GenerateNumberParts(bool? generateNumberParts = true) =>
-			Assign(a => a.GenerateNumberParts = generateNumberParts);
+			Assign(generateNumberParts, (a, v) => a.GenerateNumberParts = v);
 
 		/// <inheritdoc />
-		public WordDelimiterTokenFilterDescriptor CatenateWords(bool? catenateWords = true) => Assign(a => a.CatenateWords = catenateWords);
+		public WordDelimiterTokenFilterDescriptor CatenateWords(bool? catenateWords = true) => Assign(catenateWords, (a, v) => a.CatenateWords = v);
 
 		/// <inheritdoc />
-		public WordDelimiterTokenFilterDescriptor CatenateNumbers(bool? catenateNumbers = true) => Assign(a => a.CatenateNumbers = catenateNumbers);
+		public WordDelimiterTokenFilterDescriptor CatenateNumbers(bool? catenateNumbers = true) => Assign(catenateNumbers, (a, v) => a.CatenateNumbers = v);
 
 		/// <inheritdoc />
-		public WordDelimiterTokenFilterDescriptor CatenateAll(bool? catenateAll = true) => Assign(a => a.CatenateAll = catenateAll);
+		public WordDelimiterTokenFilterDescriptor CatenateAll(bool? catenateAll = true) => Assign(catenateAll, (a, v) => a.CatenateAll = v);
 
 		/// <inheritdoc />
-		public WordDelimiterTokenFilterDescriptor SplitOnCaseChange(bool? split = true) => Assign(a => a.SplitOnCaseChange = split);
+		public WordDelimiterTokenFilterDescriptor SplitOnCaseChange(bool? split = true) => Assign(split, (a, v) => a.SplitOnCaseChange = v);
 
 		/// <inheritdoc />
-		public WordDelimiterTokenFilterDescriptor SplitOnNumerics(bool? split = true) => Assign(a => a.SplitOnNumerics = split);
+		public WordDelimiterTokenFilterDescriptor SplitOnNumerics(bool? split = true) => Assign(split, (a, v) => a.SplitOnNumerics = v);
 
 		/// <inheritdoc />
-		public WordDelimiterTokenFilterDescriptor PreserveOriginal(bool? preserve = true) => Assign(a => a.PreserveOriginal = preserve);
+		public WordDelimiterTokenFilterDescriptor PreserveOriginal(bool? preserve = true) => Assign(preserve, (a, v) => a.PreserveOriginal = v);
 
 		/// <inheritdoc />
-		public WordDelimiterTokenFilterDescriptor StemEnglishPossessive(bool? stem = true) => Assign(a => a.StemEnglishPossessive = stem);
+		public WordDelimiterTokenFilterDescriptor StemEnglishPossessive(bool? stem = true) => Assign(stem, (a, v) => a.StemEnglishPossessive = v);
 
 		/// <inheritdoc />
 		public WordDelimiterTokenFilterDescriptor ProtectedWords(IEnumerable<string> protectedWords) =>
-			Assign(a => a.ProtectedWords = protectedWords);
+			Assign(protectedWords, (a, v) => a.ProtectedWords = v);
 
 		/// <inheritdoc />
-		public WordDelimiterTokenFilterDescriptor ProtectedWords(params string[] protectedWords) => Assign(a => a.ProtectedWords = protectedWords);
+		public WordDelimiterTokenFilterDescriptor ProtectedWords(params string[] protectedWords) => Assign(protectedWords, (a, v) => a.ProtectedWords = v);
 
 		/// <inheritdoc />
-		public WordDelimiterTokenFilterDescriptor ProtectedWordsPath(string path) => Assign(a => a.ProtectedWordsPath = path);
+		public WordDelimiterTokenFilterDescriptor ProtectedWordsPath(string path) => Assign(path, (a, v) => a.ProtectedWordsPath = v);
 
 		/// <inheritdoc />
-		public WordDelimiterTokenFilterDescriptor TypeTable(IEnumerable<string> typeTable) => Assign(a => a.TypeTable = typeTable);
+		public WordDelimiterTokenFilterDescriptor TypeTable(IEnumerable<string> typeTable) => Assign(typeTable, (a, v) => a.TypeTable = v);
 
 		/// <inheritdoc />
-		public WordDelimiterTokenFilterDescriptor TypeTable(params string[] typeTable) => Assign(a => a.TypeTable = typeTable);
+		public WordDelimiterTokenFilterDescriptor TypeTable(params string[] typeTable) => Assign(typeTable, (a, v) => a.TypeTable = v);
 
 		/// <inheritdoc />
-		public WordDelimiterTokenFilterDescriptor TypeTablePath(string path) => Assign(a => a.TypeTablePath = path);
+		public WordDelimiterTokenFilterDescriptor TypeTablePath(string path) => Assign(path, (a, v) => a.TypeTablePath = v);
 	}
 }

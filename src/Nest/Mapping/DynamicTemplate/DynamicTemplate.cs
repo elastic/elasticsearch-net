@@ -105,26 +105,26 @@ namespace Nest
 		string IDynamicTemplate.Unmatch { get; set; }
 
 		/// <inheritdoc cref="IDynamicTemplate.Match" />
-		public DynamicTemplateDescriptor<T> Match(string match) => Assign(a => a.Match = match);
+		public DynamicTemplateDescriptor<T> Match(string match) => Assign(match, (a, v) => a.Match = v);
 
 		/// <inheritdoc cref="IDynamicTemplate.MatchPattern" />
-		public DynamicTemplateDescriptor<T> MatchPattern(MatchType? matchPattern) => Assign(a => a.MatchPattern = matchPattern);
+		public DynamicTemplateDescriptor<T> MatchPattern(MatchType? matchPattern) => Assign(matchPattern, (a, v) => a.MatchPattern = v);
 
 		/// <inheritdoc cref="IDynamicTemplate.Unmatch" />
-		public DynamicTemplateDescriptor<T> Unmatch(string unMatch) => Assign(a => a.Unmatch = unMatch);
+		public DynamicTemplateDescriptor<T> Unmatch(string unMatch) => Assign(unMatch, (a, v) => a.Unmatch = v);
 
 		/// <inheritdoc cref="IDynamicTemplate.MatchMappingType" />
-		public DynamicTemplateDescriptor<T> MatchMappingType(string matchMappingType) => Assign(a => a.MatchMappingType = matchMappingType);
+		public DynamicTemplateDescriptor<T> MatchMappingType(string matchMappingType) => Assign(matchMappingType, (a, v) => a.MatchMappingType = v);
 
 		/// <inheritdoc cref="IDynamicTemplate.PathMatch" />
-		public DynamicTemplateDescriptor<T> PathMatch(string pathMatch) => Assign(a => a.PathMatch = pathMatch);
+		public DynamicTemplateDescriptor<T> PathMatch(string pathMatch) => Assign(pathMatch, (a, v) => a.PathMatch = v);
 
 		/// <inheritdoc cref="IDynamicTemplate.PathUnmatch" />
-		public DynamicTemplateDescriptor<T> PathUnmatch(string pathUnmatch) => Assign(a => a.PathUnmatch = pathUnmatch);
+		public DynamicTemplateDescriptor<T> PathUnmatch(string pathUnmatch) => Assign(pathUnmatch, (a, v) => a.PathUnmatch = v);
 
 		/// <inheritdoc cref="IDynamicTemplate.Mapping" />
 		public DynamicTemplateDescriptor<T> Mapping(Func<SingleMappingSelector<T>, IProperty> mappingSelector) =>
-			Assign(a => a.Mapping = mappingSelector?.Invoke(new SingleMappingSelector<T>()));
+			Assign(mappingSelector, (a, v) => a.Mapping = v?.Invoke(new SingleMappingSelector<T>()));
 	}
 
 	/// <summary>

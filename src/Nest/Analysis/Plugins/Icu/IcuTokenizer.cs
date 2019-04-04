@@ -39,6 +39,6 @@ namespace Nest
 		string IIcuTokenizer.RuleFiles { get; set; }
 
 		/// <inheritdoc />
-		public IcuTokenizerDescriptor RuleFiles(string ruleFiles) => Assign(a => a.RuleFiles = ruleFiles);
+		public IcuTokenizerDescriptor RuleFiles(string ruleFiles) => Assign(ruleFiles, (a, v) => a.RuleFiles = v);
 	}
 }

@@ -39,9 +39,9 @@ namespace Nest
 		Time IForecastJobRequest.ExpiresIn { get; set; }
 
 		/// <inheritdoc cref="IForecastJobRequest.Duration" />
-		public ForecastJobDescriptor Duration(Time duration) => Assign(a => a.Duration = duration);
+		public ForecastJobDescriptor Duration(Time duration) => Assign(duration, (a, v) => a.Duration = v);
 
 		/// <inheritdoc cref="IForecastJobRequest.ExpiresIn" />
-		public ForecastJobDescriptor ExpiresIn(Time expiresIn) => Assign(a => a.ExpiresIn = expiresIn);
+		public ForecastJobDescriptor ExpiresIn(Time expiresIn) => Assign(expiresIn, (a, v) => a.ExpiresIn = v);
 	}
 }

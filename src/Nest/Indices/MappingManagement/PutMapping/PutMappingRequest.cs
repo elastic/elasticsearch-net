@@ -101,8 +101,6 @@ namespace Nest
 	[DescriptorFor("IndicesPutMapping")]
 	public partial class PutMappingDescriptor<T> where T : class
 	{
-		public PutMappingDescriptor() : this(typeof(T), typeof(T)) { }
-
 		public PutMappingDescriptor(IndexName index, TypeName type) : base(r => r.Required("index", index).Required("type", type)) { }
 
 		IAllField ITypeMapping.AllField { get; set; }
@@ -119,80 +117,92 @@ namespace Nest
 		ISizeField ITypeMapping.SizeField { get; set; }
 		ISourceField ITypeMapping.SourceField { get; set; }
 
-		protected PutMappingDescriptor<T> Assign(Action<ITypeMapping> assigner) => Fluent.Assign(this, assigner);
+		[Obsolete("Use the overload that accepts TValue")]
+		protected PutMappingDescriptor<T> Assign(Action<ITypeMapping> assigner)
+		{
+			assigner(this);
+			return this;
+		}
+
+		protected PutMappingDescriptor<T> Assign<TValue>(TValue value, Action<ITypeMapping, TValue> assigner) =>
+			Fluent.Assign(this, value, assigner);
 
 		/// <summary>
 		/// Convenience method to map as much as it can based on ElasticType attributes set on the type.
-		/// <pre>This method also automatically sets up mappings for primitive values types (e.g. int, long, double, DateTime...)</pre>
-		/// <pre>Class types default to object and Enums to int</pre>
-		/// <pre>Later calls can override whatever is set by this call.</pre>
+		/// <para>This method also automatically sets up mappings for primitive values types (e.g. int, long, double, DateTime...)</para>
+		/// <para>Class types default to object and Enums to int</para>
+		/// <para>Later calls can override whatever is set by this call.</para>
 		/// </summary>
-		public PutMappingDescriptor<T> AutoMap(IPropertyVisitor visitor = null, int maxRecursion = 0) =>
-			Assign(a => a.Properties = a.Properties.AutoMap<T>(visitor, maxRecursion));
+		public PutMappingDescriptor<T> AutoMap(IPropertyVisitor visitor = null, int maxRecursion = 0)
+		{
+			Self.Properties = Self.Properties.AutoMap<T>(visitor, maxRecursion);
+			return this;
+		}
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="AutoMap(Nest.IPropertyVisitor,int)" />
 		public PutMappingDescriptor<T> AutoMap(int maxRecursion) => AutoMap(null, maxRecursion);
 
-		/// <inheritdoc />
-		public PutMappingDescriptor<T> Dynamic(Union<bool, DynamicMapping> dynamic) => Assign(a => a.Dynamic = dynamic);
+		/// <inheritdoc cref="ITypeMapping.Dynamic" />
+		public PutMappingDescriptor<T> Dynamic(Union<bool, DynamicMapping> dynamic) => Assign(dynamic, (a, v) => a.Dynamic = v);
 
-		/// <inheritdoc />
-		public PutMappingDescriptor<T> Dynamic(bool? dynamic = true) => Assign(a => a.Dynamic = dynamic);
+		/// <inheritdoc cref="ITypeMapping.Dynamic" />
+		public PutMappingDescriptor<T> Dynamic(bool? dynamic = true) => Assign(dynamic, (a, v) => a.Dynamic = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ITypeMapping.AllField" />
 		public PutMappingDescriptor<T> AllField(Func<AllFieldDescriptor, IAllField> allFieldSelector) =>
-			Assign(a => a.AllField = allFieldSelector?.Invoke(new AllFieldDescriptor()));
+			Assign(allFieldSelector, (a, v) => a.AllField = v?.Invoke(new AllFieldDescriptor()));
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ITypeMapping.IndexField" />
 		public PutMappingDescriptor<T> IndexField(Func<IndexFieldDescriptor, IIndexField> indexFieldSelector) =>
-			Assign(a => a.IndexField = indexFieldSelector?.Invoke(new IndexFieldDescriptor()));
+			Assign(indexFieldSelector, (a, v) => a.IndexField = v?.Invoke(new IndexFieldDescriptor()));
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ITypeMapping.SizeField" />
 		public PutMappingDescriptor<T> SizeField(Func<SizeFieldDescriptor, ISizeField> sizeFieldSelector) =>
-			Assign(a => a.SizeField = sizeFieldSelector?.Invoke(new SizeFieldDescriptor()));
+			Assign(sizeFieldSelector, (a, v) => a.SizeField = v?.Invoke(new SizeFieldDescriptor()));
 
-		/// <inheritdoc />
-		public PutMappingDescriptor<T> DisableSizeField(bool? disabled = true) => Assign(a => a.SizeField = new SizeField { Enabled = !disabled });
+		/// <inheritdoc cref="ITypeMapping.SizeField" />
+		public PutMappingDescriptor<T> DisableSizeField(bool? disabled = true) =>
+			Assign(disabled, (a, v) => a.SizeField = new SizeField { Enabled = !v });
 
-		/// <inheritdoc />
-		public PutMappingDescriptor<T> DisableIndexField(bool? disabled = true) => Assign(a => a.IndexField = new IndexField { Enabled = !disabled });
+		/// <inheritdoc cref="ITypeMapping.IndexField" />
+		public PutMappingDescriptor<T> DisableIndexField(bool? disabled = true) =>
+			Assign(disabled, (a, v) => a.IndexField = new IndexField { Enabled = !v });
 
-		/// <inheritdoc />
-		public PutMappingDescriptor<T> DynamicDateFormats(IEnumerable<string> dateFormats) => Assign(a => a.DynamicDateFormats = dateFormats);
+		/// <inheritdoc cref="ITypeMapping.DynamicDateFormats" />
+		public PutMappingDescriptor<T> DynamicDateFormats(IEnumerable<string> dateFormats) =>
+			Assign(dateFormats, (a, v) => a.DynamicDateFormats = v);
 
-		/// <inheritdoc />
-		public PutMappingDescriptor<T> DateDetection(bool? detect = true) => Assign(a => a.DateDetection = detect);
+		/// <inheritdoc cref="ITypeMapping.DateDetection" />
+		public PutMappingDescriptor<T> DateDetection(bool? detect = true) => Assign(detect, (a, v) => a.DateDetection = v);
 
-		/// <inheritdoc />
-		public PutMappingDescriptor<T> NumericDetection(bool? detect = true) => Assign(a => a.NumericDetection = detect);
+		/// <inheritdoc cref="ITypeMapping.NumericDetection" />
+		public PutMappingDescriptor<T> NumericDetection(bool? detect = true) => Assign(detect, (a, v) => a.NumericDetection = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ITypeMapping.SourceField" />
 		public PutMappingDescriptor<T> SourceField(Func<SourceFieldDescriptor, ISourceField> sourceFieldSelector) =>
-			Assign(a => a.SourceField = sourceFieldSelector?.Invoke(new SourceFieldDescriptor()));
+			Assign(sourceFieldSelector, (a, v) => a.SourceField = v?.Invoke(new SourceFieldDescriptor()));
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ITypeMapping.RoutingField" />
 		public PutMappingDescriptor<T> RoutingField(Func<RoutingFieldDescriptor<T>, IRoutingField> routingFieldSelector) =>
-			Assign(a => a.RoutingField = routingFieldSelector?.Invoke(new RoutingFieldDescriptor<T>()));
+			Assign(routingFieldSelector, (a, v) => a.RoutingField = v?.Invoke(new RoutingFieldDescriptor<T>()));
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ITypeMapping.FieldNamesField" />
 		public PutMappingDescriptor<T> FieldNamesField(Func<FieldNamesFieldDescriptor<T>, IFieldNamesField> fieldNamesFieldSelector) =>
-			Assign(a => a.FieldNamesField = fieldNamesFieldSelector.Invoke(new FieldNamesFieldDescriptor<T>()));
+			Assign(fieldNamesFieldSelector, (a, v) => a.FieldNamesField = v.Invoke(new FieldNamesFieldDescriptor<T>()));
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ITypeMapping.Meta" />
 		public PutMappingDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> metaSelector) =>
-			Assign(a => a.Meta = metaSelector(new FluentDictionary<string, object>()));
+			Assign(metaSelector, (a, v) => a.Meta = v(new FluentDictionary<string, object>()));
 
-		/// <inheritdoc />
-		public PutMappingDescriptor<T> Meta(Dictionary<string, object> metaDictionary) => Assign(a => a.Meta = metaDictionary);
+		/// <inheritdoc cref="ITypeMapping.Meta" />
+		public PutMappingDescriptor<T> Meta(Dictionary<string, object> metaDictionary) => Assign(metaDictionary, (a, v) => a.Meta = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ITypeMapping.Properties" />
 		public PutMappingDescriptor<T> Properties(Func<PropertiesDescriptor<T>, IPromise<IProperties>> propertiesSelector) =>
-			Assign(a => a.Properties = propertiesSelector?.Invoke(new PropertiesDescriptor<T>(a.Properties))?.Value);
+			Assign(propertiesSelector, (a, v) => a.Properties = v?.Invoke(new PropertiesDescriptor<T>(a.Properties))?.Value);
 
-		/// <inheritdoc />
-		public PutMappingDescriptor<T> DynamicTemplates(
-			Func<DynamicTemplateContainerDescriptor<T>, IPromise<IDynamicTemplateContainer>> dynamicTemplatesSelector
-		) =>
-			Assign(a => a.DynamicTemplates = dynamicTemplatesSelector?.Invoke(new DynamicTemplateContainerDescriptor<T>())?.Value);
+		/// <inheritdoc cref="ITypeMapping.DynamicTemplates" />
+		public PutMappingDescriptor<T> DynamicTemplates(Func<DynamicTemplateContainerDescriptor<T>, IPromise<IDynamicTemplateContainer>> dynamicTemplatesSelector) =>
+			Assign(dynamicTemplatesSelector, (a, v) => a.DynamicTemplates = v?.Invoke(new DynamicTemplateContainerDescriptor<T>())?.Value);
 	}
 }

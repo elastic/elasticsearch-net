@@ -173,51 +173,51 @@ namespace Nest
 
 		/// <inheritdoc cref="ISimpleQueryStringQuery.Fields" />
 		public SimpleQueryStringQueryDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+			Assign(fields, (a, v) => a.Fields = v?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		/// <inheritdoc cref="ISimpleQueryStringQuery.Fields" />
-		public SimpleQueryStringQueryDescriptor<T> Fields(Fields fields) => Assign(a => a.Fields = fields);
+		public SimpleQueryStringQueryDescriptor<T> Fields(Fields fields) => Assign(fields, (a, v) => a.Fields = v);
 
 		/// <inheritdoc cref="ISimpleQueryStringQuery.Query" />
-		public SimpleQueryStringQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
+		public SimpleQueryStringQueryDescriptor<T> Query(string query) => Assign(query, (a, v) => a.Query = v);
 
 		/// <inheritdoc cref="ISimpleQueryStringQuery.Analyzer" />
-		public SimpleQueryStringQueryDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
+		public SimpleQueryStringQueryDescriptor<T> Analyzer(string analyzer) => Assign(analyzer, (a, v) => a.Analyzer = v);
 
 		/// <inheritdoc cref="ISimpleQueryStringQuery.DefaultOperator" />
-		public SimpleQueryStringQueryDescriptor<T> DefaultOperator(Operator? op) => Assign(a => a.DefaultOperator = op);
+		public SimpleQueryStringQueryDescriptor<T> DefaultOperator(Operator? op) => Assign(op, (a, v) => a.DefaultOperator = v);
 
 		/// <inheritdoc cref="ISimpleQueryStringQuery.Flags" />
-		public SimpleQueryStringQueryDescriptor<T> Flags(SimpleQueryStringFlags? flags) => Assign(a => a.Flags = flags);
+		public SimpleQueryStringQueryDescriptor<T> Flags(SimpleQueryStringFlags? flags) => Assign(flags, (a, v) => a.Flags = v);
 
 		/// <inheritdoc cref="ISimpleQueryStringQuery.AnalyzeWildcard" />
 		public SimpleQueryStringQueryDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) =>
-			Assign(a => a.AnalyzeWildcard = analyzeWildcard);
+			Assign(analyzeWildcard, (a, v) => a.AnalyzeWildcard = v);
 
 		/// <inheritdoc cref="ISimpleQueryStringQuery.Lenient" />
-		public SimpleQueryStringQueryDescriptor<T> Lenient(bool? lenient = true) => Assign(a => a.Lenient = lenient);
+		public SimpleQueryStringQueryDescriptor<T> Lenient(bool? lenient = true) => Assign(lenient, (a, v) => a.Lenient = v);
 
 		/// <inheritdoc cref="ISimpleQueryStringQuery.MinimumShouldMatch" />
 		public SimpleQueryStringQueryDescriptor<T> MinimumShouldMatch(MinimumShouldMatch minimumShouldMatch) =>
-			Assign(a => a.MinimumShouldMatch = minimumShouldMatch);
+			Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatch = v);
 
 		/// <inheritdoc cref="ISimpleQueryStringQuery.QuoteFieldSuffix" />
 		public SimpleQueryStringQueryDescriptor<T> QuoteFieldSuffix(string quoteFieldSuffix) =>
-			Assign(a => a.QuoteFieldSuffix = quoteFieldSuffix);
+			Assign(quoteFieldSuffix, (a, v) => a.QuoteFieldSuffix = v);
 
 		/// <inheritdoc cref="ISimpleQueryStringQuery.FuzzyPrefixLength" />
-		public SimpleQueryStringQueryDescriptor<T> FuzzyPrefixLength(int? fuzzyPrefixLength) => Assign(a => a.FuzzyPrefixLength = fuzzyPrefixLength);
+		public SimpleQueryStringQueryDescriptor<T> FuzzyPrefixLength(int? fuzzyPrefixLength) => Assign(fuzzyPrefixLength, (a, v) => a.FuzzyPrefixLength = v);
 
 		/// <inheritdoc cref="ISimpleQueryStringQuery.FuzzyMaxExpansions" />
 		public SimpleQueryStringQueryDescriptor<T> FuzzyMaxExpansions(int? fuzzyMaxExpansions) =>
-			Assign(a => a.FuzzyMaxExpansions = fuzzyMaxExpansions);
+			Assign(fuzzyMaxExpansions, (a, v) => a.FuzzyMaxExpansions = v);
 
 		/// <inheritdoc cref="ISimpleQueryStringQuery.FuzzyTranspositions" />
 		public SimpleQueryStringQueryDescriptor<T> FuzzyTranspositions(bool? fuzzyTranspositions = true) =>
-			Assign(a => a.FuzzyTranspositions = fuzzyTranspositions);
+			Assign(fuzzyTranspositions, (a, v) => a.FuzzyTranspositions = v);
 
 		/// <inheritdoc cref="ISimpleQueryStringQuery.AutoGenerateSynonymsPhraseQuery" />
 		public SimpleQueryStringQueryDescriptor<T> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) =>
-			Assign(a => a.AutoGenerateSynonymsPhraseQuery = autoGenerateSynonymsPhraseQuery);
+			Assign(autoGenerateSynonymsPhraseQuery, (a, v) => a.AutoGenerateSynonymsPhraseQuery = v);
 	}
 }

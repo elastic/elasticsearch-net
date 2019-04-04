@@ -160,6 +160,7 @@ namespace Nest
 			AcceptAggregation(aggregation.ValueCount, visitor, (v, d) => v.Visit(d));
 			AcceptAggregation(aggregation.GeoCentroid, visitor, (v, d) => v.Visit(d));
 			AcceptAggregation(aggregation.Composite, visitor, (v, d) => v.Visit(d));
+			AcceptAggregation(aggregation.MedianAbsoluteDeviation, visitor, (v, d) => v.Visit(d));
 		}
 	}
 }

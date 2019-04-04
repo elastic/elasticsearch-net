@@ -51,18 +51,18 @@ namespace Nest
 		NestedScoreMode? INestedQuery.ScoreMode { get; set; }
 
 		public NestedQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
-			Assign(a => a.Query = selector?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(selector, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<T>()));
 
-		public NestedQueryDescriptor<T> ScoreMode(NestedScoreMode? scoreMode) => Assign(a => a.ScoreMode = scoreMode);
+		public NestedQueryDescriptor<T> ScoreMode(NestedScoreMode? scoreMode) => Assign(scoreMode, (a, v) => a.ScoreMode = v);
 
-		public NestedQueryDescriptor<T> Path(Field path) => Assign(a => a.Path = path);
+		public NestedQueryDescriptor<T> Path(Field path) => Assign(path, (a, v) => a.Path = v);
 
-		public NestedQueryDescriptor<T> Path(Expression<Func<T, object>> objectPath) => Assign(a => a.Path = objectPath);
+		public NestedQueryDescriptor<T> Path(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Path = v);
 
 		public NestedQueryDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> selector = null) =>
-			Assign(a => a.InnerHits = selector.InvokeOrDefault(new InnerHitsDescriptor<T>()));
+			Assign(selector.InvokeOrDefault(new InnerHitsDescriptor<T>()), (a, v) => a.InnerHits = v);
 
 		public NestedQueryDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) =>
-			Assign(a => a.IgnoreUnmapped = ignoreUnmapped);
+			Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmapped = v);
 	}
 }

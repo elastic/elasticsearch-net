@@ -42,9 +42,9 @@ namespace Nest
 		string IIcuTransformTokenFilter.Id { get; set; }
 
 		/// <inheritdoc />
-		public IcuTransformTokenFilterDescriptor Direction(IcuTransformDirection? direction) => Assign(a => a.Direction = direction);
+		public IcuTransformTokenFilterDescriptor Direction(IcuTransformDirection? direction) => Assign(direction, (a, v) => a.Direction = v);
 
 		/// <inheritdoc />
-		public IcuTransformTokenFilterDescriptor Id(string id) => Assign(a => a.Id = id);
+		public IcuTransformTokenFilterDescriptor Id(string id) => Assign(id, (a, v) => a.Id = v);
 	}
 }

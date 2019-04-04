@@ -60,23 +60,23 @@ namespace Nest
 		IEnumerable<string> IHipChatMessage.Room { get; set; }
 		IEnumerable<string> IHipChatMessage.User { get; set; }
 
-		public HipChatMessageDescriptor Body(string body) => Assign(a => a.Body = body);
+		public HipChatMessageDescriptor Body(string body) => Assign(body, (a, v) => a.Body = v);
 
-		public HipChatMessageDescriptor Format(HipChatMessageFormat? format) => Assign(a => a.Format = format);
+		public HipChatMessageDescriptor Format(HipChatMessageFormat? format) => Assign(format, (a, v) => a.Format = v);
 
-		public HipChatMessageDescriptor Color(HipChatMessageColor? color) => Assign(a => a.Color = color);
+		public HipChatMessageDescriptor Color(HipChatMessageColor? color) => Assign(color, (a, v) => a.Color = v);
 
-		public HipChatMessageDescriptor Notify(bool? notify = true) => Assign(a => a.Notify = notify);
+		public HipChatMessageDescriptor Notify(bool? notify = true) => Assign(notify, (a, v) => a.Notify = v);
 
-		public HipChatMessageDescriptor From(string from) => Assign(a => a.From = from);
+		public HipChatMessageDescriptor From(string from) => Assign(from, (a, v) => a.From = v);
 
-		public HipChatMessageDescriptor Room(IEnumerable<string> room) => Assign(a => a.Room = room);
+		public HipChatMessageDescriptor Room(IEnumerable<string> room) => Assign(room, (a, v) => a.Room = v);
 
-		public HipChatMessageDescriptor Room(params string[] room) => Assign(a => a.Room = room);
+		public HipChatMessageDescriptor Room(params string[] room) => Assign(room, (a, v) => a.Room = v);
 
-		public HipChatMessageDescriptor User(IEnumerable<string> user) => Assign(a => a.User = user);
+		public HipChatMessageDescriptor User(IEnumerable<string> user) => Assign(user, (a, v) => a.User = v);
 
-		public HipChatMessageDescriptor User(params string[] user) => Assign(a => a.User = user);
+		public HipChatMessageDescriptor User(params string[] user) => Assign(user, (a, v) => a.User = v);
 	}
 
 	[JsonConverter(typeof(StringEnumConverter))]

@@ -41,30 +41,48 @@ namespace Nest
 		}
 
 		public MultiGetDescriptor Get<T>(Func<MultiGetOperationDescriptor<T>, IMultiGetOperation> getSelector)
-			where T : class =>
-			Assign(a => _operations.AddIfNotNull(getSelector?.Invoke(new MultiGetOperationDescriptor<T>())));
+			where T : class
+		{
+			_operations.AddIfNotNull(getSelector?.Invoke(new MultiGetOperationDescriptor<T>()));
+			return this;
+		}
 
 		public MultiGetDescriptor GetMany<T>(IEnumerable<long> ids,
 			Func<MultiGetOperationDescriptor<T>, long, IMultiGetOperation> getSelector = null
 		)
-			where T : class =>
-			Assign(a => _operations.AddRange(ids.Select(id => getSelector.InvokeOrDefault(new MultiGetOperationDescriptor<T>().Id(id), id))));
+			where T : class
+		{
+			foreach (var id in ids)
+				_operations.Add(getSelector.InvokeOrDefault(new MultiGetOperationDescriptor<T>().Id(id), id));
+
+			return this;
+		}
 
 		public MultiGetDescriptor GetMany<T>(IEnumerable<string> ids,
 			Func<MultiGetOperationDescriptor<T>, string, IMultiGetOperation> getSelector = null
 		)
-			where T : class =>
-			Assign(a => _operations.AddRange(ids.Select(id => getSelector.InvokeOrDefault(new MultiGetOperationDescriptor<T>().Id(id), id))));
+			where T : class
+		{
+			foreach (var id in ids)
+				_operations.Add(getSelector.InvokeOrDefault(new MultiGetOperationDescriptor<T>().Id(id), id));
+
+			return this;
+		}
 
 		public MultiGetDescriptor GetMany<T>(IEnumerable<Id> ids, Func<MultiGetOperationDescriptor<T>, Id, IMultiGetOperation> getSelector = null)
-			where T : class =>
-			Assign(a => _operations.AddRange(ids.Select(id => getSelector.InvokeOrDefault(new MultiGetOperationDescriptor<T>().Id(id), id))));
+			where T : class
+		{
+			foreach (var id in ids)
+				_operations.Add(getSelector.InvokeOrDefault(new MultiGetOperationDescriptor<T>().Id(id), id));
+
+			return this;
+		}
 
 		/// <summary> Default stored fields to load for each document. </summary>
 		public MultiGetDescriptor StoredFields<T>(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) where T : class =>
-			Assign(a => a.StoredFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+			Assign(fields, (a, v) => a.StoredFields = v?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		/// <summary> Default stored fields to load for each document. </summary>
-		public MultiGetDescriptor StoredFields(Fields fields) => Assign(a => a.StoredFields = fields);
+		public MultiGetDescriptor StoredFields(Fields fields) => Assign(fields, (a, v) => a.StoredFields = v);
 	}
 }

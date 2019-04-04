@@ -46,13 +46,12 @@ namespace Nest
 		IMultiPolygonGeoShape IGeoShapeMultiPolygonQuery.Shape { get; set; }
 
 		public GeoShapeMultiPolygonQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<IEnumerable<GeoCoordinate>>> coordinates,
-			bool? ignoreUnmapped = null
-		) =>
-			Assign(a =>
+			bool? ignoreUnmapped = null) =>
+			Assign(coordinates, (a, v) =>
 			{
 				a.Shape = a.Shape ?? new MultiPolygonGeoShape();
-				a.Shape.Coordinates = coordinates;
-				a.IgnoreUnmapped = ignoreUnmapped;
-			});
+				a.Shape.Coordinates = v;
+			})
+			.Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmapped = v);
 	}
 }

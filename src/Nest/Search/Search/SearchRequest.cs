@@ -200,18 +200,18 @@ namespace Nest
 		protected sealed override void Initialize() => TypedKeys();
 
 		public SearchDescriptor<T> Aggregations(Func<AggregationContainerDescriptor<T>, IAggregationContainer> aggregationsSelector) =>
-			Assign(a => a.Aggregations = aggregationsSelector(new AggregationContainerDescriptor<T>())?.Aggregations);
+			Assign(aggregationsSelector(new AggregationContainerDescriptor<T>())?.Aggregations, (a, v) => a.Aggregations = v);
 
 		public SearchDescriptor<T> Aggregations(AggregationDictionary aggregations) =>
-			Assign(a => a.Aggregations = aggregations);
+			Assign(aggregations, (a, v) => a.Aggregations = v);
 
-		public SearchDescriptor<T> Source(bool enabled = true) => Assign(a => a.Source = enabled);
+		public SearchDescriptor<T> Source(bool enabled = true) => Assign(enabled, (a, v) => a.Source = v);
 
 		public SearchDescriptor<T> Source(Func<SourceFilterDescriptor<T>, ISourceFilter> selector) =>
-			Assign(a => a.Source = new Union<bool, ISourceFilter>(selector?.Invoke(new SourceFilterDescriptor<T>())));
+			Assign(selector, (a, v) => a.Source = new Union<bool, ISourceFilter>(v?.Invoke(new SourceFilterDescriptor<T>())));
 
 		/// <summary> The number of hits to return. Defaults to 10. </summary>
-		public SearchDescriptor<T> Size(int? size) => Assign(a => a.Size = size);
+		public SearchDescriptor<T> Size(int? size) => Assign(size, (a, v) => a.Size = v);
 
 		/// <summary>
 		/// The number of hits to return. Alias for <see cref="Size" />. Defaults to 10.
@@ -221,7 +221,7 @@ namespace Nest
 		/// <summary>
 		/// The starting from index of the hits to return. Defaults to 0.
 		/// </summary>
-		public SearchDescriptor<T> From(int? from) => Assign(a => a.From = from);
+		public SearchDescriptor<T> From(int? from) => Assign(from, (a, v) => a.From = v);
 
 		/// <summary>
 		/// The starting from index of the hits to return. Alias for <see cref="From" />. Defaults to 0.
@@ -233,41 +233,41 @@ namespace Nest
 		/// specified time value and bail with the hits accumulated up
 		/// to that point when expired. Defaults to no timeout.
 		/// </summary>
-		public SearchDescriptor<T> Timeout(string timeout) => Assign(a => a.Timeout = timeout);
+		public SearchDescriptor<T> Timeout(string timeout) => Assign(timeout, (a, v) => a.Timeout = v);
 
 		/// <summary>
 		/// Enables explanation for each hit on how its score was computed.
 		/// (Use .DocumentsWithMetadata on the return results)
 		/// </summary>
-		public SearchDescriptor<T> Explain(bool? explain = true) => Assign(a => a.Explain = explain);
+		public SearchDescriptor<T> Explain(bool? explain = true) => Assign(explain, (a, v) => a.Explain = v);
 
 		/// <summary>
 		/// Returns a version for each search hit. (Use .DocumentsWithMetadata on the return results)
 		/// </summary>
-		public SearchDescriptor<T> Version(bool? version = true) => Assign(a => a.Version = version);
+		public SearchDescriptor<T> Version(bool? version = true) => Assign(version, (a, v) => a.Version = v);
 
 		/// <summary>
 		/// Make sure we keep calculating score even if we are sorting on a field.
 		/// </summary>
-		public SearchDescriptor<T> TrackScores(bool? trackscores = true) => Assign(a => a.TrackScores = trackscores);
+		public SearchDescriptor<T> TrackScores(bool? trackscores = true) => Assign(trackscores, (a, v) => a.TrackScores = v);
 
 		/// <summary>
 		/// The Profile API provides detailed timing information about the execution of individual components in a query.
 		/// It gives the user insight into how queries are executed at a low level so that the user can understand
 		/// why certain queries are slow, and take steps to improve their slow queries.
 		/// </summary>
-		public SearchDescriptor<T> Profile(bool? profile = true) => Assign(a => a.Profile = profile);
+		public SearchDescriptor<T> Profile(bool? profile = true) => Assign(profile, (a, v) => a.Profile = v);
 
 		/// <summary>
 		/// Allows to filter out documents based on a minimum score:
 		/// </summary>
-		public SearchDescriptor<T> MinScore(double? minScore) => Assign(a => a.MinScore = minScore);
+		public SearchDescriptor<T> MinScore(double? minScore) => Assign(minScore, (a, v) => a.MinScore = v);
 
 		/// <summary>
 		/// The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.
 		/// If set, the response will have a boolean field terminated_early to indicate whether the query execution has actually terminated_early.
 		/// </summary>
-		public SearchDescriptor<T> TerminateAfter(long? terminateAfter) => Assign(a => a.TerminateAfter = terminateAfter);
+		public SearchDescriptor<T> TerminateAfter(long? terminateAfter) => Assign(terminateAfter, (a, v) => a.TerminateAfter = v);
 
 		/// <summary>
 		/// <para>
@@ -331,58 +331,58 @@ namespace Nest
 		/// matter more than hits coming from another index (think social graph where each user has an index).
 		/// </summary>
 		public SearchDescriptor<T> IndicesBoost(Func<FluentDictionary<IndexName, double>, FluentDictionary<IndexName, double>> boost) =>
-			Assign(a => a.IndicesBoost = boost?.Invoke(new FluentDictionary<IndexName, double>()));
+			Assign(boost, (a, v) => a.IndicesBoost = v?.Invoke(new FluentDictionary<IndexName, double>()));
 
 		/// <summary>
 		/// Allows to selectively load specific fields for each document
 		/// represented by a search hit. Defaults to load the internal _source field.
 		/// </summary>
 		public SearchDescriptor<T> StoredFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(a => a.StoredFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+			Assign(fields, (a, v) => a.StoredFields = v?.Invoke(new FieldsDescriptor<T>())?.Value);
 
-		public SearchDescriptor<T> StoredFields(Fields fields) => Assign(a => a.StoredFields = fields);
+		public SearchDescriptor<T> StoredFields(Fields fields) => Assign(fields, (a, v) => a.StoredFields = v);
 
 		public SearchDescriptor<T> ScriptFields(Func<ScriptFieldsDescriptor, IPromise<IScriptFields>> selector) =>
-			Assign(a => a.ScriptFields = selector?.Invoke(new ScriptFieldsDescriptor())?.Value);
+			Assign(selector, (a, v) => a.ScriptFields = v?.Invoke(new ScriptFieldsDescriptor())?.Value);
 
 		public SearchDescriptor<T> DocValueFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(a => a.DocValueFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+			Assign(fields, (a, v) => a.DocValueFields = v?.Invoke(new FieldsDescriptor<T>())?.Value);
 
-		public SearchDescriptor<T> DocValueFields(Fields fields) => Assign(a => a.DocValueFields = fields);
+		public SearchDescriptor<T> DocValueFields(Fields fields) => Assign(fields, (a, v) => a.DocValueFields = v);
 
 		/// <summary>
 		/// A comma-separated list of fields to return as the field data representation of a field for each hit
 		/// </summary>
 		public SearchDescriptor<T> Sort(Func<SortDescriptor<T>, IPromise<IList<ISort>>> selector) =>
-			Assign(a => a.Sort = selector?.Invoke(new SortDescriptor<T>())?.Value);
+			Assign(selector, (a, v) => a.Sort = v?.Invoke(new SortDescriptor<T>())?.Value);
 
 		/// <summary>
 		///  Sort values that can be used to start returning results "after" any document in the result list.
 		/// </summary>
-		public SearchDescriptor<T> SearchAfter(IList<object> searchAfter) => Assign(a => a.SearchAfter = searchAfter);
+		public SearchDescriptor<T> SearchAfter(IList<object> searchAfter) => Assign(searchAfter, (a, v) => a.SearchAfter = v);
 
 		/// <summary>
 		///  Sort values that can be used to start returning results "after" any document in the result list.
 		/// </summary>
-		public SearchDescriptor<T> SearchAfter(params object[] searchAfter) => Assign(a => a.SearchAfter = searchAfter);
+		public SearchDescriptor<T> SearchAfter(params object[] searchAfter) => Assign(searchAfter, (a, v) => a.SearchAfter = v);
 
 		/// <summary>
 		///  The suggest feature suggests similar looking terms based on a provided text by using a suggester
 		/// </summary>
 		public SearchDescriptor<T> Suggest(Func<SuggestContainerDescriptor<T>, IPromise<ISuggestContainer>> selector) =>
-			Assign(a => a.Suggest = selector?.Invoke(new SuggestContainerDescriptor<T>())?.Value);
+			Assign(selector, (a, v) => a.Suggest = v?.Invoke(new SuggestContainerDescriptor<T>())?.Value);
 
 		/// <summary>
 		/// Describe the query to perform using a query descriptor lambda
 		/// </summary>
 		public SearchDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query) =>
-			Assign(a => a.Query = query?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(query, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<T>()));
 
 		/// <summary>
 		/// For scroll queries that return a lot of documents it is possible to split the scroll in multiple slices which can be consumed independently
 		/// </summary>
 		public SearchDescriptor<T> Slice(Func<SlicedScrollDescriptor<T>, ISlicedScroll> selector) =>
-			Assign(a => a.Slice = selector?.Invoke(new SlicedScrollDescriptor<T>()));
+			Assign(selector, (a, v) => a.Slice = v?.Invoke(new SlicedScrollDescriptor<T>()));
 
 		/// <summary>
 		/// Shortcut to default to a match all query
@@ -393,13 +393,13 @@ namespace Nest
 		/// Filter search using a filter descriptor lambda
 		/// </summary>
 		public SearchDescriptor<T> PostFilter(Func<QueryContainerDescriptor<T>, QueryContainer> filter) =>
-			Assign(a => a.PostFilter = filter?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(filter, (a, v) => a.PostFilter = v?.Invoke(new QueryContainerDescriptor<T>()));
 
 		/// <summary>
 		/// Allow to highlight search results on one or more fields. The implementation uses the either lucene fast-vector-highlighter or highlighter.
 		/// </summary>
 		public SearchDescriptor<T> Highlight(Func<HighlightDescriptor<T>, IHighlight> highlightSelector) =>
-			Assign(a => a.Highlight = highlightSelector?.Invoke(new HighlightDescriptor<T>()));
+			Assign(highlightSelector, (a, v) => a.Highlight = v?.Invoke(new HighlightDescriptor<T>()));
 
 		/// <summary>
 		/// Allows to collapse search results based on field values.
@@ -411,12 +411,12 @@ namespace Nest
 		/// </para>
 		/// </summary>
 		public SearchDescriptor<T> Collapse(Func<FieldCollapseDescriptor<T>, IFieldCollapse> collapseSelector) =>
-			Assign(a => a.Collapse = collapseSelector?.Invoke(new FieldCollapseDescriptor<T>()));
+			Assign(collapseSelector, (a, v) => a.Collapse = v?.Invoke(new FieldCollapseDescriptor<T>()));
 
 		/// <summary>
 		/// Allows you to specify one or more queries to use for rescoring
 		/// </summary>
 		public SearchDescriptor<T> Rescore(Func<RescoringDescriptor<T>, IPromise<IList<IRescore>>> rescoreSelector) =>
-			Assign(a => a.Rescore = rescoreSelector?.Invoke(new RescoringDescriptor<T>()).Value);
+			Assign(rescoreSelector, (a, v) => a.Rescore = v?.Invoke(new RescoringDescriptor<T>()).Value);
 	}
 }

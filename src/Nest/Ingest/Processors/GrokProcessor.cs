@@ -45,21 +45,21 @@ namespace Nest
 		IEnumerable<string> IGrokProcessor.Patterns { get; set; }
 		bool? IGrokProcessor.TraceMatch { get; set; }
 
-		public GrokProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public GrokProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		public GrokProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
-		public GrokProcessorDescriptor<T> Patterns(IEnumerable<string> patterns) => Assign(a => a.Patterns = patterns);
+		public GrokProcessorDescriptor<T> Patterns(IEnumerable<string> patterns) => Assign(patterns, (a, v) => a.Patterns = v);
 
-		public GrokProcessorDescriptor<T> Patterns(params string[] patterns) => Assign(a => a.Patterns = patterns);
+		public GrokProcessorDescriptor<T> Patterns(params string[] patterns) => Assign(patterns, (a, v) => a.Patterns = v);
 
 		public GrokProcessorDescriptor<T> PatternDefinitions(
 			Func<FluentDictionary<string, string>, FluentDictionary<string, string>> patternDefinitions
 		) =>
-			Assign(a => a.PatternDefinitions = patternDefinitions?.Invoke(new FluentDictionary<string, string>()));
+			Assign(patternDefinitions, (a, v) => a.PatternDefinitions = v?.Invoke(new FluentDictionary<string, string>()));
 
 		public GrokProcessorDescriptor<T> TraceMatch(bool? traceMatch = true) =>
-			Assign(a => a.TraceMatch = traceMatch);
+			Assign(traceMatch, (a, v) => a.TraceMatch = v);
 	}
 }

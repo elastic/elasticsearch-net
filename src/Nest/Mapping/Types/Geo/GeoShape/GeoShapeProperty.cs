@@ -152,34 +152,34 @@ namespace Nest
 		int? IGeoShapeProperty.TreeLevels { get; set; }
 
 		/// <inheritdoc cref="IGeoShapeProperty.Tree" />
-		public GeoShapePropertyDescriptor<T> Tree(GeoTree? tree) => Assign(a => a.Tree = tree);
+		public GeoShapePropertyDescriptor<T> Tree(GeoTree? tree) => Assign(tree, (a, v) => a.Tree = v);
 
 		/// <inheritdoc cref="IGeoShapeProperty.TreeLevels" />
-		public GeoShapePropertyDescriptor<T> TreeLevels(int? treeLevels) => Assign(a => a.TreeLevels = treeLevels);
+		public GeoShapePropertyDescriptor<T> TreeLevels(int? treeLevels) => Assign(treeLevels, (a, v) => a.TreeLevels = v);
 
 		/// <inheritdoc cref="IGeoShapeProperty.Strategy" />
-		public GeoShapePropertyDescriptor<T> Strategy(GeoStrategy? strategy) => Assign(a => a.Strategy = strategy);
+		public GeoShapePropertyDescriptor<T> Strategy(GeoStrategy? strategy) => Assign(strategy, (a, v) => a.Strategy = v);
 
 		/// <inheritdoc cref="IGeoShapeProperty.Precision" />
 		public GeoShapePropertyDescriptor<T> Precision(double precision, DistanceUnit unit) =>
-			Assign(a => a.Precision = new Distance(precision, unit));
+			Assign(new Distance(precision, unit), (a, v) => a.Precision = v);
 
 		/// <inheritdoc cref="IGeoShapeProperty.Orientation" />
-		public GeoShapePropertyDescriptor<T> Orientation(GeoOrientation? orientation) => Assign(a => a.Orientation = orientation);
+		public GeoShapePropertyDescriptor<T> Orientation(GeoOrientation? orientation) => Assign(orientation, (a, v) => a.Orientation = v);
 
 		/// <inheritdoc cref="IGeoShapeProperty.DistanceErrorPercentage" />
 		public GeoShapePropertyDescriptor<T> DistanceErrorPercentage(double? distanceErrorPercentage) =>
-			Assign(a => a.DistanceErrorPercentage = distanceErrorPercentage);
+			Assign(distanceErrorPercentage, (a, v) => a.DistanceErrorPercentage = v);
 
 		/// <inheritdoc cref="IGeoShapeProperty.PointsOnly" />
-		public GeoShapePropertyDescriptor<T> PointsOnly(bool? pointsOnly = true) => Assign(a => a.PointsOnly = pointsOnly);
+		public GeoShapePropertyDescriptor<T> PointsOnly(bool? pointsOnly = true) => Assign(pointsOnly, (a, v) => a.PointsOnly = v);
 
 		/// <inheritdoc cref="IGeoShapeProperty.IgnoreMalformed" />
 		public GeoShapePropertyDescriptor<T> IgnoreMalformed(bool? ignoreMalformed = true) =>
-			Assign(a => a.IgnoreMalformed = ignoreMalformed);
+			Assign(ignoreMalformed, (a, v) => a.IgnoreMalformed = v);
 
 		/// <inheritdoc cref="IGeoShapeProperty.IgnoreZValue" />
 		public GeoShapePropertyDescriptor<T> IgnoreZValue(bool? ignoreZValue = true) =>
-			Assign(a => a.IgnoreZValue = ignoreZValue);
+			Assign(ignoreZValue, (a, v) => a.IgnoreZValue = v);
 	}
 }

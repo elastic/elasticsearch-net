@@ -32,6 +32,6 @@ namespace Nest
 		int? IKeywordTokenizer.BufferSize { get; set; }
 
 		/// <inheritdoc />
-		public KeywordTokenizerDescriptor BufferSize(int? size) => Assign(a => a.BufferSize = size);
+		public KeywordTokenizerDescriptor BufferSize(int? size) => Assign(size, (a, v) => a.BufferSize = v);
 	}
 }

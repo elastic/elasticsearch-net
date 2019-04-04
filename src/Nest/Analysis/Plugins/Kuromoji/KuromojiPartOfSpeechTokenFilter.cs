@@ -35,9 +35,9 @@ namespace Nest
 		IEnumerable<string> IKuromojiPartOfSpeechTokenFilter.StopTags { get; set; }
 
 		/// <inheritdoc />
-		public KuromojiPartOfSpeechTokenFilterDescriptor StopTags(IEnumerable<string> stopTags) => Assign(a => a.StopTags = stopTags);
+		public KuromojiPartOfSpeechTokenFilterDescriptor StopTags(IEnumerable<string> stopTags) => Assign(stopTags, (a, v) => a.StopTags = v);
 
 		/// <inheritdoc />
-		public KuromojiPartOfSpeechTokenFilterDescriptor StopTags(params string[] stopTags) => Assign(a => a.StopTags = stopTags);
+		public KuromojiPartOfSpeechTokenFilterDescriptor StopTags(params string[] stopTags) => Assign(stopTags, (a, v) => a.StopTags = v);
 	}
 }

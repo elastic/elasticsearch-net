@@ -172,64 +172,64 @@ namespace Nest
 		long? IPercolateQuery.Version { get; set; }
 
 		/// <inheritdoc cref="IPercolateQuery.Field" />
-		public PercolateQueryDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public PercolateQueryDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IPercolateQuery.Field" />
-		public PercolateQueryDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
+		public PercolateQueryDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IPercolateQuery.DocumentType" />
 		[Obsolete("Deprecated in 6.x, types are gone from indices created as of Elasticsearch 6.x")]
-		public PercolateQueryDescriptor<T> DocumentType(TypeName type) => Assign(a => a.DocumentType = type);
+		public PercolateQueryDescriptor<T> DocumentType(TypeName type) => Assign(type, (a, v) => a.DocumentType = v);
 
 		/// <inheritdoc cref="IPercolateQuery.DocumentType" />
 		[Obsolete("Deprecated in 6.x, types are gone from indices created as of Elasticsearch 6.x")]
-		public PercolateQueryDescriptor<T> DocumentType<TDocument>() => Assign(a => a.DocumentType = typeof(TDocument));
+		public PercolateQueryDescriptor<T> DocumentType<TDocument>() => Assign(typeof(TDocument), (a, v) => a.DocumentType = v);
 
 		/// <inheritdoc cref="IPercolateQuery.Document" />
-		public PercolateQueryDescriptor<T> Document<TDocument>(TDocument document) => Assign(a => a.Document = document);
+		public PercolateQueryDescriptor<T> Document<TDocument>(TDocument document) => Assign(document, (a, v) => a.Document = v);
 
 		/// <inheritdoc cref="IPercolateQuery.Documents" />
 		public PercolateQueryDescriptor<T> Documents<TDocument>(params TDocument[] documents) =>
-			Assign(a => a.Documents = documents.Cast<object>());
+			Assign(documents.Cast<object>(), (a, v) => a.Documents = v);
 
 		/// <inheritdoc cref="IPercolateQuery.Documents" />
 		public PercolateQueryDescriptor<T> Documents<TDocument>(IEnumerable<TDocument> documents) =>
-			Assign(a => a.Documents = documents.Cast<object>());
+			Assign(documents.Cast<object>(), (a, v) => a.Documents = v);
 
 		/// <inheritdoc cref="IPercolateQuery.Id" />
-		public PercolateQueryDescriptor<T> Id(string id) => Assign(a => a.Id = id);
+		public PercolateQueryDescriptor<T> Id(string id) => Assign(id, (a, v) => a.Id = v);
 
 		/// <summary>
 		/// The index the document resides in for percolation.
 		/// Can be specified to percolate an existing document instead of providing <see cref="Document{TDocument}" />
 		/// </summary>
-		public PercolateQueryDescriptor<T> Index(IndexName index) => Assign(a => a.Index = index);
+		public PercolateQueryDescriptor<T> Index(IndexName index) => Assign(index, (a, v) => a.Index = v);
 
 		/// <summary>
 		/// The index the document resides in for percolation.
 		/// Can be specified to percolate an existing document instead of providing <see cref="Document{TDocument}" />
 		/// </summary>
-		public PercolateQueryDescriptor<T> Index<TDocument>() => Assign(a => a.Index = typeof(TDocument));
+		public PercolateQueryDescriptor<T> Index<TDocument>() => Assign(typeof(TDocument), (a, v) => a.Index = v);
 
 		/// <summary>
 		/// The type of the document to fetch for percolation.
 		/// Can be specified to percolate an existing document instead of providing <see cref="Document{TDocument}" />
 		/// </summary>
-		public PercolateQueryDescriptor<T> Type(TypeName type) => Assign(a => a.Type = type);
+		public PercolateQueryDescriptor<T> Type(TypeName type) => Assign(type, (a, v) => a.Type = v);
 
 		/// <summary>
 		/// The type of the document to fetch for percolation.
 		/// Can be specified to percolate an existing document instead of providing <see cref="Document{TDocument}" />
 		/// </summary>
-		public PercolateQueryDescriptor<T> Type<TDocument>() => Assign(a => a.Type = typeof(TDocument));
+		public PercolateQueryDescriptor<T> Type<TDocument>() => Assign(typeof(TDocument), (a, v) => a.Type = v);
 
 		/// <inheritdoc cref="IPercolateQuery.Routing" />
-		public PercolateQueryDescriptor<T> Routing(Routing routing) => Assign(a => a.Routing = routing);
+		public PercolateQueryDescriptor<T> Routing(Routing routing) => Assign(routing, (a, v) => a.Routing = v);
 
 		/// <inheritdoc cref="IPercolateQuery.Preference" />
-		public PercolateQueryDescriptor<T> Preference(string preference) => Assign(a => a.Preference = preference);
+		public PercolateQueryDescriptor<T> Preference(string preference) => Assign(preference, (a, v) => a.Preference = v);
 
 		/// <inheritdoc cref="IPercolateQuery.Version" />
-		public PercolateQueryDescriptor<T> Version(long? version) => Assign(a => a.Version = version);
+		public PercolateQueryDescriptor<T> Version(long? version) => Assign(version, (a, v) => a.Version = v);
 	}
 }

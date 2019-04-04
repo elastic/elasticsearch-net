@@ -43,16 +43,16 @@ namespace Nest
 
 		IScript IRangeAggregation.Script { get; set; }
 
-		public RangeAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public RangeAggregationDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public RangeAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public RangeAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
 
-		public RangeAggregationDescriptor<T> Script(string script) => Assign(a => a.Script = (InlineScript)script);
+		public RangeAggregationDescriptor<T> Script(string script) => Assign((InlineScript)script, (a, v) => a.Script = v);
 
 		public RangeAggregationDescriptor<T> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
-			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
+			Assign(scriptSelector, (a, v) => a.Script = v?.Invoke(new ScriptDescriptor()));
 
 		public RangeAggregationDescriptor<T> Ranges(params Func<AggregationRangeDescriptor, IAggregationRange>[] ranges) =>
-			Assign(a => a.Ranges = ranges.Select(r => r(new AggregationRangeDescriptor())));
+			Assign(ranges.Select(r => r(new AggregationRangeDescriptor())), (a, v) => a.Ranges = v);
 	}
 }

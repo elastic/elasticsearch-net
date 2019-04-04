@@ -26,9 +26,9 @@ namespace Nest
 
 		/// <inheritdoc see cref="ISoftDeleteSettings.Retention"/>
 		public SoftDeleteSettingsDescriptor Retention(Func<SoftDeleteRetentionSettingsDescriptor, ISoftDeleteRetentionSettings> selector) =>
-			Assign(a => a.Retention = selector.Invoke(new SoftDeleteRetentionSettingsDescriptor()));
+			Assign(selector.Invoke(new SoftDeleteRetentionSettingsDescriptor()), (a, v) => a.Retention = v);
 
 		/// <inheritdoc see cref="ISoftDeleteSettings.Enabled"/>
-		public SoftDeleteSettingsDescriptor Enabled(bool? enabled = true) => Assign(a => a.Enabled = enabled);
+		public SoftDeleteSettingsDescriptor Enabled(bool? enabled = true) => Assign(enabled, (a, v) => a.Enabled = v);
 	}
 }

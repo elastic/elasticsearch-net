@@ -35,6 +35,6 @@ namespace Nest
 		string IMatchAllQuery.NormField { get; set; }
 
 		/// <inheritdoc />
-		public MatchAllQueryDescriptor NormField(string normField) => Assign(a => a.NormField = normField);
+		public MatchAllQueryDescriptor NormField(string normField) => Assign(normField, (a, v) => a.NormField = v);
 	}
 }

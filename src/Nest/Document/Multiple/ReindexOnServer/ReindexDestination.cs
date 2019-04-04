@@ -75,18 +75,18 @@ namespace Nest
 		VersionType? IReindexDestination.VersionType { get; set; }
 
 		/// <inheritdoc cref="IReindexDestination.Routing" />
-		public ReindexDestinationDescriptor Routing(ReindexRouting routing) => Assign(a => a.Routing = routing);
+		public ReindexDestinationDescriptor Routing(ReindexRouting routing) => Assign(routing, (a, v) => a.Routing = v);
 
 		/// <inheritdoc cref="IReindexDestination.OpType" />
-		public ReindexDestinationDescriptor OpType(OpType? opType) => Assign(a => a.OpType = opType);
+		public ReindexDestinationDescriptor OpType(OpType? opType) => Assign(opType, (a, v) => a.OpType = v);
 
 		/// <inheritdoc cref="IReindexDestination.VersionType" />
-		public ReindexDestinationDescriptor VersionType(VersionType? versionType) => Assign(a => a.VersionType = versionType);
+		public ReindexDestinationDescriptor VersionType(VersionType? versionType) => Assign(versionType, (a, v) => a.VersionType = v);
 
 		/// <inheritdoc cref="IReindexDestination.Index" />
-		public ReindexDestinationDescriptor Index(IndexName index) => Assign(a => a.Index = index);
+		public ReindexDestinationDescriptor Index(IndexName index) => Assign(index, (a, v) => a.Index = v);
 
 		/// <inheritdoc cref="IReindexDestination.Type" />
-		public ReindexDestinationDescriptor Type(TypeName type) => Assign(a => a.Type = type);
+		public ReindexDestinationDescriptor Type(TypeName type) => Assign(type, (a, v) => a.Type = v);
 	}
 }

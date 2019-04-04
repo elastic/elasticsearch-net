@@ -58,21 +58,21 @@ namespace Nest
 		/// Container name. Defaults to elasticsearch-snapshots
 		/// </summary>
 		/// <param name="container"></param>
-		public AzureRepositorySettingsDescriptor Container(string container) => Assign(a => a.Container = container);
+		public AzureRepositorySettingsDescriptor Container(string container) => Assign(container, (a, v) => a.Container = v);
 
 		/// <summary>
 		/// Specifies the path within container to repository data. Defaults to empty (root directory).
 		/// </summary>
 		/// <param name="basePath"></param>
 		/// <returns></returns>
-		public AzureRepositorySettingsDescriptor BasePath(string basePath) => Assign(a => a.BasePath = basePath);
+		public AzureRepositorySettingsDescriptor BasePath(string basePath) => Assign(basePath, (a, v) => a.BasePath = v);
 
 		/// <summary>
 		/// When set to true metadata files are stored in compressed format. This setting doesn't
 		/// affect index files that are already compressed by default. Defaults to false.
 		/// </summary>
 		/// <param name="compress"></param>
-		public AzureRepositorySettingsDescriptor Compress(bool? compress = true) => Assign(a => a.Compress = compress);
+		public AzureRepositorySettingsDescriptor Compress(bool? compress = true) => Assign(compress, (a, v) => a.Compress = v);
 
 		/// <summary>
 		///  Big files can be broken down into chunks during snapshotting if needed.
@@ -80,7 +80,7 @@ namespace Nest
 		///  i.e. 1g, 10m, 5k. Defaults to 64m (64m max)
 		/// </summary>
 		/// <param name="chunkSize"></param>
-		public AzureRepositorySettingsDescriptor ChunkSize(string chunkSize) => Assign(a => a.ChunkSize = chunkSize);
+		public AzureRepositorySettingsDescriptor ChunkSize(string chunkSize) => Assign(chunkSize, (a, v) => a.ChunkSize = v);
 	}
 
 	public class AzureRepositoryDescriptor
@@ -91,6 +91,6 @@ namespace Nest
 		object IRepositoryWithSettings.DelegateSettings => Self.Settings;
 
 		public AzureRepositoryDescriptor Settings(Func<AzureRepositorySettingsDescriptor, IAzureRepositorySettings> settingsSelector) =>
-			Assign(a => a.Settings = settingsSelector?.Invoke(new AzureRepositorySettingsDescriptor()));
+			Assign(settingsSelector, (a, v) => a.Settings = v?.Invoke(new AzureRepositorySettingsDescriptor()));
 	}
 }

@@ -50,8 +50,8 @@ namespace Nest
 
 		string IFingerprintTokenFilter.Separator { get; set; }
 
-		public FingerprintTokenFilterDescriptor Separator(string separator) => Assign(a => a.Separator = separator);
+		public FingerprintTokenFilterDescriptor Separator(string separator) => Assign(separator, (a, v) => a.Separator = v);
 
-		public FingerprintTokenFilterDescriptor MaxOutputSize(int? maxOutputSize) => Assign(a => a.MaxOutputSize = maxOutputSize);
+		public FingerprintTokenFilterDescriptor MaxOutputSize(int? maxOutputSize) => Assign(maxOutputSize, (a, v) => a.MaxOutputSize = v);
 	}
 }

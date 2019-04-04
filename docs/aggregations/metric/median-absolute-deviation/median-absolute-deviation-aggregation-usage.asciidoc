@@ -1,0 +1,76 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.7
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/Aggregations/Metric/MedianAbsoluteDeviation/MedianAbsoluteDeviationAggregationUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[median-absolute-deviation-aggregation-usage]]
+=== Median Absolute Deviation Aggregation Usage
+
+A single-value aggregation that approximates the median absolute deviation of its search results.
+
+Median absolute deviation is a measure of variability. It is a robust statistic, meaning that it is
+useful for describing data that may have outliers, or may not be normally distributed.
+For such data it can be more descriptive than standard deviation.
+
+It is calculated as the median of each data point's deviation from the median of the
+entire sample. That is, for a random variable `X`, the median absolute deviation is `median(|median(X) - Xi|)`.
+
+Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-metrics-median-absolute-deviation-aggregation.html[Median Absolute Deviation Aggregation]
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+a => a
+.Average("average_commits", avg => avg
+    .Field(p => p.NumberOfCommits)
+)
+.MedianAbsoluteDeviation("commit_variability", m => m
+    .Field(f => f.NumberOfCommits)
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new AverageAggregation("average_commits", Infer.Field<Project>(p => p.NumberOfCommits)) &&
+new MedianAbsoluteDeviationAggregation("commit_variability", Infer.Field<Project>(p => p.NumberOfCommits))
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "average_commits": {
+    "avg": {
+      "field": "numberOfCommits"
+    }
+  },
+  "commit_variability": {
+    "median_absolute_deviation": {
+      "field": "numberOfCommits"
+    }
+  }
+}
+----
+
+==== Handling Responses
+
+[source,csharp]
+----
+response.ShouldBeValid();
+var medianAbsoluteDeviation = response.Aggregations.MedianAbsoluteDeviation("commit_variability");
+medianAbsoluteDeviation.Should().NotBeNull();
+medianAbsoluteDeviation.Value.Should().BeGreaterThan(0);
+----
+

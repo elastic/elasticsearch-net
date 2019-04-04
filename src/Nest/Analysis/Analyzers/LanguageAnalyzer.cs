@@ -72,12 +72,16 @@ namespace Nest
 		StopWords ILanguageAnalyzer.StopWords { get; set; }
 		string ILanguageAnalyzer.StopwordsPath { get; set; }
 
-		public LanguageAnalyzerDescriptor Language(Language? language) => Assign(a => _type = language?.GetStringValue().ToLowerInvariant());
+		public LanguageAnalyzerDescriptor Language(Language? language)
+		{
+			_type = language?.GetStringValue().ToLowerInvariant();
+			return this;
+		}
 
-		public LanguageAnalyzerDescriptor StopWords(StopWords stopWords) => Assign(a => a.StopWords = stopWords);
+		public LanguageAnalyzerDescriptor StopWords(StopWords stopWords) => Assign(stopWords, (a, v) => a.StopWords = v);
 
-		public LanguageAnalyzerDescriptor StopWords(params string[] stopWords) => Assign(a => a.StopWords = stopWords);
+		public LanguageAnalyzerDescriptor StopWords(params string[] stopWords) => Assign(stopWords, (a, v) => a.StopWords = v);
 
-		public LanguageAnalyzerDescriptor StopWords(IEnumerable<string> stopWords) => Assign(a => a.StopWords = stopWords.ToListOrNullIfEmpty());
+		public LanguageAnalyzerDescriptor StopWords(IEnumerable<string> stopWords) => Assign(stopWords.ToListOrNullIfEmpty(), (a, v) => a.StopWords = v);
 	}
 }

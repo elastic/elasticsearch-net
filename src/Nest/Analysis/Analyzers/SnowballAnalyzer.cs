@@ -38,12 +38,12 @@ namespace Nest
 
 		StopWords ISnowballAnalyzer.StopWords { get; set; }
 
-		public SnowballAnalyzerDescriptor StopWords(StopWords stopWords) => Assign(a => a.StopWords = stopWords);
+		public SnowballAnalyzerDescriptor StopWords(StopWords stopWords) => Assign(stopWords, (a, v) => a.StopWords = v);
 
-		public SnowballAnalyzerDescriptor StopWords(IEnumerable<string> stopWords) => Assign(a => a.StopWords = stopWords.ToListOrNullIfEmpty());
+		public SnowballAnalyzerDescriptor StopWords(IEnumerable<string> stopWords) => Assign(stopWords.ToListOrNullIfEmpty(), (a, v) => a.StopWords = v);
 
-		public SnowballAnalyzerDescriptor StopWords(params string[] stopWords) => Assign(a => a.StopWords = stopWords.ToListOrNullIfEmpty());
+		public SnowballAnalyzerDescriptor StopWords(params string[] stopWords) => Assign(stopWords.ToListOrNullIfEmpty(), (a, v) => a.StopWords = v);
 
-		public SnowballAnalyzerDescriptor Language(SnowballLanguage? language) => Assign(a => a.Language = language);
+		public SnowballAnalyzerDescriptor Language(SnowballLanguage? language) => Assign(language, (a, v) => a.Language = v);
 	}
 }

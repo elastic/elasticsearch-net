@@ -43,25 +43,28 @@ namespace Nest
 		protected override bool Conditionless => GeoShapeCircleQuery.IsConditionless(this);
 		ICircleGeoShape IGeoShapeCircleQuery.Shape { get; set; }
 
-		public GeoShapeCircleQueryDescriptor<T> Coordinates(GeoCoordinate coordinates, bool? ignoreUnmapped = null) => Assign(a =>
-		{
-			a.Shape = a.Shape ?? new CircleGeoShape();
-			a.Shape.Coordinates = coordinates;
-			a.IgnoreUnmapped = ignoreUnmapped;
-		});
+		public GeoShapeCircleQueryDescriptor<T> Coordinates(GeoCoordinate coordinates, bool? ignoreUnmapped = null) =>
+			Assign(coordinates, (a, v) =>
+			{
+				a.Shape = a.Shape ?? new CircleGeoShape();
+				a.Shape.Coordinates = v;
+			})
+			.Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmapped = v);
 
-		public GeoShapeCircleQueryDescriptor<T> Coordinates(double longitude, double latitude, bool? ignoreUnmapped = null) => Assign(a =>
-		{
-			a.Shape = a.Shape ?? new CircleGeoShape();
-			a.Shape.Coordinates = new GeoCoordinate(latitude, longitude);
-			a.IgnoreUnmapped = ignoreUnmapped;
-		});
+		public GeoShapeCircleQueryDescriptor<T> Coordinates(double longitude, double latitude, bool? ignoreUnmapped = null) =>
+			Assign(new GeoCoordinate(latitude, longitude), (a, v) =>
+			{
+				a.Shape = a.Shape ?? new CircleGeoShape();
+				a.Shape.Coordinates = v;
+			})
+			.Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmapped = v);
 
-		public GeoShapeCircleQueryDescriptor<T> Radius(string radius, bool? ignoreUnmapped = null) => Assign(a =>
-		{
-			a.Shape = a.Shape ?? new CircleGeoShape();
-			a.Shape.Radius = radius;
-			a.IgnoreUnmapped = ignoreUnmapped;
-		});
+		public GeoShapeCircleQueryDescriptor<T> Radius(string radius, bool? ignoreUnmapped = null) =>
+			Assign(radius,(a, v) =>
+			{
+				a.Shape = a.Shape ?? new CircleGeoShape();
+				a.Shape.Radius = v;
+			})
+			.Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmapped = v);
 	}
 }

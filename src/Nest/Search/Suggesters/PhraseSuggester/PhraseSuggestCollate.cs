@@ -57,24 +57,24 @@ namespace Nest
 		/// The collate query to run
 		/// </summary>
 		public PhraseSuggestCollateDescriptor<T> Query(Func<PhraseSuggestCollateQueryDescriptor, IPhraseSuggestCollateQuery> selector) =>
-			Assign(a => a.Query = selector?.Invoke(new PhraseSuggestCollateQueryDescriptor()));
+			Assign(selector, (a, v) => a.Query = v?.Invoke(new PhraseSuggestCollateQueryDescriptor()));
 
 		/// <summary>
 		/// Controls if all phrase suggestions will be returned. When set to <c>true</c>, the suggestions will have
 		/// an additional option collate_match, which will be <c>true</c> if matching documents for the phrase was found,
 		/// <c>false</c> otherwise. The default value for <see cref="Prune" /> is <c>false</c>.
 		/// </summary>
-		public PhraseSuggestCollateDescriptor<T> Prune(bool? prune = true) => Assign(a => a.Prune = prune);
+		public PhraseSuggestCollateDescriptor<T> Prune(bool? prune = true) => Assign(prune, (a, v) => a.Prune = v);
 
 		/// <summary>
 		/// The parameters for the query. the suggestion value will be added to the variables you specify.
 		/// </summary>
-		public PhraseSuggestCollateDescriptor<T> Params(IDictionary<string, object> paramsDictionary) => Assign(a => a.Params = paramsDictionary);
+		public PhraseSuggestCollateDescriptor<T> Params(IDictionary<string, object> paramsDictionary) => Assign(paramsDictionary, (a, v) => a.Params = v);
 
 		/// <summary>
 		/// The parameters for the query. the suggestion value will be added to the variables you specify.
 		/// </summary>
 		public PhraseSuggestCollateDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramsDictionary) =>
-			Assign(a => a.Params = paramsDictionary(new FluentDictionary<string, object>()));
+			Assign(paramsDictionary(new FluentDictionary<string, object>()), (a, v) => a.Params = v);
 	}
 }

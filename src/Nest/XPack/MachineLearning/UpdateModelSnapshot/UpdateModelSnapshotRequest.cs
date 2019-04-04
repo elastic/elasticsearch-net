@@ -39,9 +39,9 @@ namespace Nest
 		bool? IUpdateModelSnapshotRequest.Retain { get; set; }
 
 		/// <inheritdoc />
-		public UpdateModelSnapshotDescriptor Description(string description) => Assign(a => a.Description = description);
+		public UpdateModelSnapshotDescriptor Description(string description) => Assign(description, (a, v) => a.Description = v);
 
 		/// <inheritdoc />
-		public UpdateModelSnapshotDescriptor Retain(bool? retain = true) => Assign(a => a.Retain = retain);
+		public UpdateModelSnapshotDescriptor Retain(bool? retain = true) => Assign(retain, (a, v) => a.Retain = v);
 	}
 }

@@ -45,11 +45,12 @@ namespace Nest
 		protected override bool Conditionless => GeoShapeMultiPointQuery.IsConditionless(this);
 		IMultiPointGeoShape IGeoShapeMultiPointQuery.Shape { get; set; }
 
-		public GeoShapeMultiPointQueryDescriptor<T> Coordinates(IEnumerable<GeoCoordinate> coordinates, bool? ignoreUnmapped = null) => Assign(a =>
-		{
-			a.Shape = a.Shape ?? new MultiPointGeoShape();
-			a.Shape.Coordinates = coordinates;
-			a.IgnoreUnmapped = ignoreUnmapped;
-		});
+		public GeoShapeMultiPointQueryDescriptor<T> Coordinates(IEnumerable<GeoCoordinate> coordinates, bool? ignoreUnmapped = null) =>
+			Assign(coordinates,(a, v) =>
+			{
+				a.Shape = a.Shape ?? new MultiPointGeoShape();
+				a.Shape.Coordinates = v;
+			})
+			.Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmapped = v);
 	}
 }

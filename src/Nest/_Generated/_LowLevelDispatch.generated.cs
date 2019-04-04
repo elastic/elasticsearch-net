@@ -1592,14 +1592,16 @@ namespace Nest
 			{
 				case PUT:
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.IndicesPutMapping<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingForAll<TResponse>(p.RouteValues.Type,body,p.RequestParameters);
+					if (AllSet(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingForAll<TResponse>(p.RouteValues.Type,body,p.RequestParameters);
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesPutMapping<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
 					break;
 				case POST:
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.IndicesPutMappingPost<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingPostForAll<TResponse>(p.RouteValues.Type,body,p.RequestParameters);
+					if (AllSet(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingPostForAll<TResponse>(p.RouteValues.Type,body,p.RequestParameters);
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesPutMappingPost<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("IndicesPutMapping", p, new [] { PUT, POST }, "/{index}/{type}/_mapping", "/{index}/_mapping/{type}", "/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}", "/_mappings/{type}");
+			throw InvalidDispatch("IndicesPutMapping", p, new [] { PUT, POST }, "/{index}/{type}/_mapping", "/{index}/_mapping/{type}", "/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}", "/_mappings/{type}", "/{index}/_mappings", "/{index}/_mapping");
 		}
 		
 		internal Task<TResponse> IndicesPutMappingDispatchAsync<TResponse>(IRequest<PutMappingRequestParameters> p,SerializableData<IPutMappingRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -1608,14 +1610,16 @@ namespace Nest
 			{
 				case PUT:
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.IndicesPutMappingAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
-					if (AllSetNoFallback(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingForAllAsync<TResponse>(p.RouteValues.Type,body,p.RequestParameters,ct);
+					if (AllSet(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingForAllAsync<TResponse>(p.RouteValues.Type,body,p.RequestParameters,ct);
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesPutMappingAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
 					break;
 				case POST:
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.IndicesPutMappingPostAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
-					if (AllSetNoFallback(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingPostForAllAsync<TResponse>(p.RouteValues.Type,body,p.RequestParameters,ct);
+					if (AllSet(p.RouteValues.Type)) return _lowLevel.IndicesPutMappingPostForAllAsync<TResponse>(p.RouteValues.Type,body,p.RequestParameters,ct);
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesPutMappingPostAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("IndicesPutMapping", p, new [] { PUT, POST }, "/{index}/{type}/_mapping", "/{index}/_mapping/{type}", "/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}", "/_mappings/{type}");
+			throw InvalidDispatch("IndicesPutMapping", p, new [] { PUT, POST }, "/{index}/{type}/_mapping", "/{index}/_mapping/{type}", "/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}", "/_mappings/{type}", "/{index}/_mappings", "/{index}/_mapping");
 		}
 		
 		internal TResponse IndicesPutSettingsDispatch<TResponse>(IRequest<UpdateIndexSettingsRequestParameters> p,SerializableData<IUpdateIndexSettingsRequest> body) where TResponse : class, IElasticsearchResponse, new()
@@ -3506,6 +3510,28 @@ namespace Nest
 			throw InvalidDispatch("XpackMlDeleteExpiredData", p, new [] { DELETE }, "/_xpack/ml/_delete_expired_data");
 		}
 		
+		internal TResponse XpackMlDeleteFilterDispatch<TResponse>(IRequest<DeleteFilterRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.FilterId)) return _lowLevel.XpackMlDeleteFilter<TResponse>(p.RouteValues.FilterId,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlDeleteFilter", p, new [] { DELETE }, "/_xpack/ml/filters/{filter_id}");
+		}
+		
+		internal Task<TResponse> XpackMlDeleteFilterDispatchAsync<TResponse>(IRequest<DeleteFilterRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.FilterId)) return _lowLevel.XpackMlDeleteFilterAsync<TResponse>(p.RouteValues.FilterId,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlDeleteFilter", p, new [] { DELETE }, "/_xpack/ml/filters/{filter_id}");
+		}
+		
 		internal TResponse XpackMlDeleteForecastDispatch<TResponse>(IRequest<DeleteForecastRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -3768,6 +3794,28 @@ namespace Nest
 						return _lowLevel.XpackMlGetDatafeedStatsAsync<TResponse>(p.RequestParameters,ct);
 			}
 			throw InvalidDispatch("XpackMlGetDatafeedStats", p, new [] { GET }, "/_xpack/ml/datafeeds/{datafeed_id}/_stats", "/_xpack/ml/datafeeds/_stats");
+		}
+		
+		internal TResponse XpackMlGetFiltersDispatch<TResponse>(IRequest<GetFiltersRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.FilterId)) return _lowLevel.XpackMlGetFilters<TResponse>(p.RouteValues.FilterId,p.RequestParameters);
+						return _lowLevel.XpackMlGetFilters<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackMlGetFilters", p, new [] { GET }, "/_xpack/ml/filters", "/_xpack/ml/filters/{filter_id}");
+		}
+		
+		internal Task<TResponse> XpackMlGetFiltersDispatchAsync<TResponse>(IRequest<GetFiltersRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.FilterId)) return _lowLevel.XpackMlGetFiltersAsync<TResponse>(p.RouteValues.FilterId,p.RequestParameters,ct);
+						return _lowLevel.XpackMlGetFiltersAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackMlGetFilters", p, new [] { GET }, "/_xpack/ml/filters", "/_xpack/ml/filters/{filter_id}");
 		}
 		
 		internal TResponse XpackMlGetInfluencersDispatch<TResponse>(IRequest<GetInfluencersRequestParameters> p,SerializableData<IGetInfluencersRequest> body) where TResponse : class, IElasticsearchResponse, new()
@@ -4104,6 +4152,28 @@ namespace Nest
 			throw InvalidDispatch("XpackMlPutDatafeed", p, new [] { PUT }, "/_xpack/ml/datafeeds/{datafeed_id}");
 		}
 		
+		internal TResponse XpackMlPutFilterDispatch<TResponse>(IRequest<PutFilterRequestParameters> p,SerializableData<IPutFilterRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.FilterId)) return _lowLevel.XpackMlPutFilter<TResponse>(p.RouteValues.FilterId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlPutFilter", p, new [] { PUT }, "/_xpack/ml/filters/{filter_id}");
+		}
+		
+		internal Task<TResponse> XpackMlPutFilterDispatchAsync<TResponse>(IRequest<PutFilterRequestParameters> p,SerializableData<IPutFilterRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.FilterId)) return _lowLevel.XpackMlPutFilterAsync<TResponse>(p.RouteValues.FilterId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlPutFilter", p, new [] { PUT }, "/_xpack/ml/filters/{filter_id}");
+		}
+		
 		internal TResponse XpackMlPutJobDispatch<TResponse>(IRequest<PutJobRequestParameters> p,SerializableData<IPutJobRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -4212,6 +4282,28 @@ namespace Nest
 					break;
 			}
 			throw InvalidDispatch("XpackMlUpdateDatafeed", p, new [] { POST }, "/_xpack/ml/datafeeds/{datafeed_id}/_update");
+		}
+		
+		internal TResponse XpackMlUpdateFilterDispatch<TResponse>(IRequest<UpdateFilterRequestParameters> p,SerializableData<IUpdateFilterRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.FilterId)) return _lowLevel.XpackMlUpdateFilter<TResponse>(p.RouteValues.FilterId,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackMlUpdateFilter", p, new [] { POST }, "/_xpack/ml/filters/{filter_id}/_update");
+		}
+		
+		internal Task<TResponse> XpackMlUpdateFilterDispatchAsync<TResponse>(IRequest<UpdateFilterRequestParameters> p,SerializableData<IUpdateFilterRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.FilterId)) return _lowLevel.XpackMlUpdateFilterAsync<TResponse>(p.RouteValues.FilterId,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackMlUpdateFilter", p, new [] { POST }, "/_xpack/ml/filters/{filter_id}/_update");
 		}
 		
 		internal TResponse XpackMlUpdateJobDispatch<TResponse>(IRequest<UpdateJobRequestParameters> p,SerializableData<IUpdateJobRequest> body) where TResponse : class, IElasticsearchResponse, new()

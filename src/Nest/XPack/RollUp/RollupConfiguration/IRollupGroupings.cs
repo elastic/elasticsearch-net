@@ -48,14 +48,14 @@ namespace Nest
 		public RollupGroupingsDescriptor<T> DateHistogram(
 			Func<DateHistogramRollupGroupingDescriptor<T>, IDateHistogramRollupGrouping> selector
 		) =>
-			Assign(a => a.DateHistogram = selector?.Invoke(new DateHistogramRollupGroupingDescriptor<T>()));
+			Assign(selector, (a, v) => a.DateHistogram = v?.Invoke(new DateHistogramRollupGroupingDescriptor<T>()));
 
 		/// <inheritdoc cref="IHistogramRollupGrouping" />
 		public RollupGroupingsDescriptor<T> Histogram(Func<HistogramRollupGroupingDescriptor<T>, IHistogramRollupGrouping> selector) =>
-			Assign(a => a.Histogram = selector?.Invoke(new HistogramRollupGroupingDescriptor<T>()));
+			Assign(selector, (a, v) => a.Histogram = v?.Invoke(new HistogramRollupGroupingDescriptor<T>()));
 
 		/// <inheritdoc cref="ITermsRollupGrouping" />
 		public RollupGroupingsDescriptor<T> Terms(Func<TermsRollupGroupingDescriptor<T>, ITermsRollupGrouping> selector) =>
-			Assign(a => a.Terms = selector?.Invoke(new TermsRollupGroupingDescriptor<T>()));
+			Assign(selector, (a, v) => a.Terms = v?.Invoke(new TermsRollupGroupingDescriptor<T>()));
 	}
 }

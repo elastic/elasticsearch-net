@@ -27,16 +27,16 @@ namespace Nest
 
 		IGeometryCollection IGeoShapeGeometryCollectionQuery.Shape { get; set; }
 
-		public GeoShapeGeometryCollectionQueryDescriptor<T> Geometries(IEnumerable<IGeoShape> geometries) => Assign(a =>
+		public GeoShapeGeometryCollectionQueryDescriptor<T> Geometries(IEnumerable<IGeoShape> geometries) => Assign(geometries, (a, v) =>
 		{
 			a.Shape = a.Shape ?? new GeometryCollection();
-			a.Shape.Geometries = geometries;
+			a.Shape.Geometries = v;
 		});
 
-		public GeoShapeGeometryCollectionQueryDescriptor<T> Geometries(params IGeoShape[] geometries) => Assign(a =>
+		public GeoShapeGeometryCollectionQueryDescriptor<T> Geometries(params IGeoShape[] geometries) => Assign(geometries,(a, v) =>
 		{
 			a.Shape = a.Shape ?? new GeometryCollection();
-			a.Shape.Geometries = geometries;
+			a.Shape.Geometries = v;
 		});
 	}
 }

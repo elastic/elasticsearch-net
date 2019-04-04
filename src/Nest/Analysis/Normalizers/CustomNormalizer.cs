@@ -50,15 +50,15 @@ namespace Nest
 		IEnumerable<string> ICustomNormalizer.Filter { get; set; }
 
 		/// <inheritdoc />
-		public CustomNormalizerDescriptor Filters(params string[] filters) => Assign(a => a.Filter = filters);
+		public CustomNormalizerDescriptor Filters(params string[] filters) => Assign(filters, (a, v) => a.Filter = v);
 
 		/// <inheritdoc />
-		public CustomNormalizerDescriptor Filters(IEnumerable<string> filters) => Assign(a => a.Filter = filters);
+		public CustomNormalizerDescriptor Filters(IEnumerable<string> filters) => Assign(filters, (a, v) => a.Filter = v);
 
 		/// <inheritdoc />
-		public CustomNormalizerDescriptor CharFilters(params string[] charFilters) => Assign(a => a.CharFilter = charFilters);
+		public CustomNormalizerDescriptor CharFilters(params string[] charFilters) => Assign(charFilters, (a, v) => a.CharFilter = v);
 
 		/// <inheritdoc />
-		public CustomNormalizerDescriptor CharFilters(IEnumerable<string> charFilters) => Assign(a => a.CharFilter = charFilters);
+		public CustomNormalizerDescriptor CharFilters(IEnumerable<string> charFilters) => Assign(charFilters, (a, v) => a.CharFilter = v);
 	}
 }

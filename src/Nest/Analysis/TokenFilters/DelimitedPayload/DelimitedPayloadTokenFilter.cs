@@ -42,9 +42,9 @@ namespace Nest
 		DelimitedPayloadEncoding? IDelimitedPayloadTokenFilter.Encoding { get; set; }
 
 		/// <inheritdoc />
-		public DelimitedPayloadTokenFilterDescriptor Delimiter(char? delimiter) => Assign(a => a.Delimiter = delimiter);
+		public DelimitedPayloadTokenFilterDescriptor Delimiter(char? delimiter) => Assign(delimiter, (a, v) => a.Delimiter = v);
 
 		/// <inheritdoc />
-		public DelimitedPayloadTokenFilterDescriptor Encoding(DelimitedPayloadEncoding? encoding) => Assign(a => a.Encoding = encoding);
+		public DelimitedPayloadTokenFilterDescriptor Encoding(DelimitedPayloadEncoding? encoding) => Assign(encoding, (a, v) => a.Encoding = v);
 	}
 }

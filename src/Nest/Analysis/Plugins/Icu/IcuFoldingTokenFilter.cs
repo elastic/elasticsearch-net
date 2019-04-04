@@ -36,6 +36,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IcuFoldingTokenFilterDescriptor UnicodeSetFilter(string filter) =>
-			Assign(a => a.UnicodeSetFilter = filter);
+			Assign(filter, (a, v) => a.UnicodeSetFilter = v);
 	}
 }

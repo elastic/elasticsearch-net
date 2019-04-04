@@ -37,10 +37,10 @@ namespace Nest
 		bool? IIpProperty.Index { get; set; }
 		string IIpProperty.NullValue { get; set; }
 
-		public IpPropertyDescriptor<T> Index(bool? index = true) => Assign(a => a.Index = index);
+		public IpPropertyDescriptor<T> Index(bool? index = true) => Assign(index, (a, v) => a.Index = v);
 
-		public IpPropertyDescriptor<T> Boost(double? boost) => Assign(a => a.Boost = boost);
+		public IpPropertyDescriptor<T> Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
 
-		public IpPropertyDescriptor<T> NullValue(string nullValue) => Assign(a => a.NullValue = nullValue);
+		public IpPropertyDescriptor<T> NullValue(string nullValue) => Assign(nullValue, (a, v) => a.NullValue = v);
 	}
 }

@@ -45,10 +45,10 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IcuNormalizationCharFilterDescriptor Name(IcuNormalizationType? name = null) =>
-			Assign(a => a.Name = name);
+			Assign(name, (a, v) => a.Name = v);
 
 		/// <inheritdoc />
 		public IcuNormalizationCharFilterDescriptor Mode(IcuNormalizationMode? mode = null) =>
-			Assign(a => a.Mode = mode);
+			Assign(mode, (a, v) => a.Mode = v);
 	}
 }

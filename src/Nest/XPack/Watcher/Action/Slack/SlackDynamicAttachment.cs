@@ -25,9 +25,9 @@ namespace Nest
 		ISlackAttachment ISlackDynamicAttachment.AttachmentTemplate { get; set; }
 		string ISlackDynamicAttachment.ListPath { get; set; }
 
-		public SlackDynamicAttachmentDescriptor ListPath(string listPath) => Assign(a => a.ListPath = listPath);
+		public SlackDynamicAttachmentDescriptor ListPath(string listPath) => Assign(listPath, (a, v) => a.ListPath = v);
 
 		public SlackDynamicAttachmentDescriptor AttachmentTemplate(Func<SlackAttachmentDescriptor, ISlackAttachment> selector) =>
-			Assign(a => a.AttachmentTemplate = selector?.Invoke(new SlackAttachmentDescriptor()));
+			Assign(selector, (a, v) => a.AttachmentTemplate = v?.Invoke(new SlackAttachmentDescriptor()));
 	}
 }

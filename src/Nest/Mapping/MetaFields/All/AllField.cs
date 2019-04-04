@@ -65,22 +65,22 @@ namespace Nest
 		bool? IAllField.StoreTermVectorPositions { get; set; }
 		bool? IAllField.StoreTermVectors { get; set; }
 
-		public AllFieldDescriptor Enabled(bool? enabled = true) => Assign(a => a.Enabled = enabled);
+		public AllFieldDescriptor Enabled(bool? enabled = true) => Assign(enabled, (a, v) => a.Enabled = v);
 
-		public AllFieldDescriptor Store(bool? store = true) => Assign(a => a.Store = store);
+		public AllFieldDescriptor Store(bool? store = true) => Assign(store, (a, v) => a.Store = v);
 
-		public AllFieldDescriptor StoreTermVectors(bool? store = true) => Assign(a => a.StoreTermVectors = store);
+		public AllFieldDescriptor StoreTermVectors(bool? store = true) => Assign(store, (a, v) => a.StoreTermVectors = v);
 
-		public AllFieldDescriptor StoreTermVectorOffsets(bool? store = true) => Assign(a => a.StoreTermVectorOffsets = store);
+		public AllFieldDescriptor StoreTermVectorOffsets(bool? store = true) => Assign(store, (a, v) => a.StoreTermVectorOffsets = v);
 
-		public AllFieldDescriptor StoreTermVectorPositions(bool? store = true) => Assign(a => a.StoreTermVectorPositions = store);
+		public AllFieldDescriptor StoreTermVectorPositions(bool? store = true) => Assign(store, (a, v) => a.StoreTermVectorPositions = v);
 
-		public AllFieldDescriptor StoreTermVectorPayloads(bool? store = true) => Assign(a => a.StoreTermVectorPayloads = store);
+		public AllFieldDescriptor StoreTermVectorPayloads(bool? store = true) => Assign(store, (a, v) => a.StoreTermVectorPayloads = v);
 
-		public AllFieldDescriptor Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
+		public AllFieldDescriptor Analyzer(string analyzer) => Assign(analyzer, (a, v) => a.Analyzer = v);
 
-		public AllFieldDescriptor SearchAnalyzer(string searchAnalyzer) => Assign(a => a.SearchAnalyzer = searchAnalyzer);
+		public AllFieldDescriptor SearchAnalyzer(string searchAnalyzer) => Assign(searchAnalyzer, (a, v) => a.SearchAnalyzer = v);
 
-		public AllFieldDescriptor Similarity(string similarity) => Assign(a => a.Similarity = similarity);
+		public AllFieldDescriptor Similarity(string similarity) => Assign(similarity, (a, v) => a.Similarity = v);
 	}
 }

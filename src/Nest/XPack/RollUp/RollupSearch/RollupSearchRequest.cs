@@ -38,18 +38,18 @@ namespace Nest
 		int? IRollupSearchRequest.Size { get; set; }
 
 		/// <inheritdoc cref="IRollupSearchRequest.Size" />
-		public RollupSearchDescriptor<T> Size(int? size) => Assign(a => a.Size = size);
+		public RollupSearchDescriptor<T> Size(int? size) => Assign(size, (a, v) => a.Size = v);
 
 		/// <inheritdoc cref="IRollupSearchRequest.Aggregations" />
 		public RollupSearchDescriptor<T> Aggregations(Func<AggregationContainerDescriptor<T>, IAggregationContainer> aggregationsSelector) =>
-			Assign(a => a.Aggregations = aggregationsSelector(new AggregationContainerDescriptor<T>())?.Aggregations);
+			Assign(aggregationsSelector(new AggregationContainerDescriptor<T>())?.Aggregations, (a, v) => a.Aggregations = v);
 
 		/// <inheritdoc cref="IRollupSearchRequest.Aggregations" />
 		public RollupSearchDescriptor<T> Aggregations(AggregationDictionary aggregations) =>
-			Assign(a => a.Aggregations = aggregations);
+			Assign(aggregations, (a, v) => a.Aggregations = v);
 
 		/// <inheritdoc cref="IRollupSearchRequest.Query" />
 		public RollupSearchDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query) =>
-			Assign(a => a.Query = query?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(query, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

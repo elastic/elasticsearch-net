@@ -136,37 +136,37 @@ namespace Nest
 		string IIcuCollationTokenFilter.Variant { get; set; }
 
 		/// <inheritdoc cref="IIcuCollationTokenFilter.Language" />
-		public IcuCollationTokenFilterDescriptor Language(string language) => Assign(a => a.Language = language);
+		public IcuCollationTokenFilterDescriptor Language(string language) => Assign(language, (a, v) => a.Language = v);
 
 		/// <inheritdoc cref="IIcuCollationTokenFilter.Country" />
-		public IcuCollationTokenFilterDescriptor Country(string country) => Assign(a => a.Country = country);
+		public IcuCollationTokenFilterDescriptor Country(string country) => Assign(country, (a, v) => a.Country = v);
 
 		/// <inheritdoc cref="IIcuCollationTokenFilter.Variant" />
-		public IcuCollationTokenFilterDescriptor Variant(string variant) => Assign(a => a.Variant = variant);
+		public IcuCollationTokenFilterDescriptor Variant(string variant) => Assign(variant, (a, v) => a.Variant = v);
 
 		/// <inheritdoc cref="IIcuCollationTokenFilter.Strength" />
-		public IcuCollationTokenFilterDescriptor Strength(IcuCollationStrength? strength) => Assign(a => a.Strength = strength);
+		public IcuCollationTokenFilterDescriptor Strength(IcuCollationStrength? strength) => Assign(strength, (a, v) => a.Strength = v);
 
 		/// <inheritdoc cref="IIcuCollationTokenFilter.Decomposition" />
 		public IcuCollationTokenFilterDescriptor Decomposition(IcuCollationDecomposition? decomposition) =>
-			Assign(a => a.Decomposition = decomposition);
+			Assign(decomposition, (a, v) => a.Decomposition = v);
 
 		/// <inheritdoc cref="IIcuCollationTokenFilter.Alternate" />
-		public IcuCollationTokenFilterDescriptor Alternate(IcuCollationAlternate? alternate) => Assign(a => a.Alternate = alternate);
+		public IcuCollationTokenFilterDescriptor Alternate(IcuCollationAlternate? alternate) => Assign(alternate, (a, v) => a.Alternate = v);
 
 		/// <inheritdoc cref="IIcuCollationTokenFilter.CaseFirst" />
-		public IcuCollationTokenFilterDescriptor CaseFirst(IcuCollationCaseFirst? caseFirst) => Assign(a => a.CaseFirst = caseFirst);
+		public IcuCollationTokenFilterDescriptor CaseFirst(IcuCollationCaseFirst? caseFirst) => Assign(caseFirst, (a, v) => a.CaseFirst = v);
 
 		/// <inheritdoc cref="IIcuCollationTokenFilter.CaseLevel" />
-		public IcuCollationTokenFilterDescriptor CaseLevel(bool? caseLevel = true) => Assign(a => a.CaseLevel = caseLevel);
+		public IcuCollationTokenFilterDescriptor CaseLevel(bool? caseLevel = true) => Assign(caseLevel, (a, v) => a.CaseLevel = v);
 
 		/// <inheritdoc cref="IIcuCollationTokenFilter.Numeric" />
-		public IcuCollationTokenFilterDescriptor Numeric(bool? numeric = true) => Assign(a => a.Numeric = numeric);
+		public IcuCollationTokenFilterDescriptor Numeric(bool? numeric = true) => Assign(numeric, (a, v) => a.Numeric = v);
 
 		/// <inheritdoc cref="IIcuCollationTokenFilter.HiraganaQuaternaryMode" />
-		public IcuCollationTokenFilterDescriptor HiraganaQuaternaryMode(bool? mode = true) => Assign(a => a.HiraganaQuaternaryMode = mode);
+		public IcuCollationTokenFilterDescriptor HiraganaQuaternaryMode(bool? mode = true) => Assign(mode, (a, v) => a.HiraganaQuaternaryMode = v);
 
 		/// <inheritdoc cref="IIcuCollationTokenFilter.VariableTop" />
-		public IcuCollationTokenFilterDescriptor VariableTop(string variableTop) => Assign(a => a.VariableTop = variableTop);
+		public IcuCollationTokenFilterDescriptor VariableTop(string variableTop) => Assign(variableTop, (a, v) => a.VariableTop = v);
 	}
 }

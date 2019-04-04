@@ -30,23 +30,23 @@ namespace Nest
 
 		ILaplaceSmoothingModel ISmoothingModelContainer.Laplace { get; set; }
 		ILinearInterpolationSmoothingModel ISmoothingModelContainer.LinearInterpolation { get; set; }
-
 		IStupidBackoffSmoothingModel ISmoothingModelContainer.StupidBackoff { get; set; }
 	}
 
 	public class SmoothingModelContainerDescriptor : SmoothingModelContainer
 	{
-		private SmoothingModelContainerDescriptor Assign(Action<ISmoothingModelContainer> assigner) => Fluent.Assign(this, assigner);
+		private SmoothingModelContainerDescriptor Assign<TValue>(TValue value, Action<ISmoothingModelContainer, TValue> assigner) =>
+			Fluent.Assign(this, value, assigner);
 
 		public SmoothingModelContainerDescriptor StupidBackoff(Func<StupidBackoffSmoothingModelDescriptor, IStupidBackoffSmoothingModel> selector) =>
-			Assign(a => a.StupidBackoff = selector?.InvokeOrDefault(new StupidBackoffSmoothingModelDescriptor()));
+			Assign(selector,(a, v) => a.StupidBackoff = v?.InvokeOrDefault(new StupidBackoffSmoothingModelDescriptor()));
 
 		public SmoothingModelContainerDescriptor LinearInterpolation(
 			Func<LinearInterpolationSmoothingModelDescriptor, ILinearInterpolationSmoothingModel> selector
 		) =>
-			Assign(a => a.LinearInterpolation = selector?.InvokeOrDefault(new LinearInterpolationSmoothingModelDescriptor()));
+			Assign(selector, (a, v) => a.LinearInterpolation = v?.InvokeOrDefault(new LinearInterpolationSmoothingModelDescriptor()));
 
 		public SmoothingModelContainerDescriptor Laplace(Func<LaplaceSmoothingModelDescriptor, ILaplaceSmoothingModel> selector) =>
-			Assign(a => a.Laplace = selector?.InvokeOrDefault(new LaplaceSmoothingModelDescriptor()));
+			Assign(selector, (a, v) => a.Laplace = v?.InvokeOrDefault(new LaplaceSmoothingModelDescriptor()));
 	}
 }

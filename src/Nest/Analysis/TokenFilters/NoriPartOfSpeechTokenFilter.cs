@@ -29,9 +29,9 @@ namespace Nest
 		IEnumerable<string> INoriPartOfSpeechTokenFilter.StopTags { get; set; }
 
 		///<inheritdoc cref="INoriPartOfSpeechTokenFilter.StopTags" />
-		public NoriPartOfSpeechTokenFilterDescriptor StopTags(IEnumerable<string> stopTags) => Assign(a => a.StopTags = stopTags);
+		public NoriPartOfSpeechTokenFilterDescriptor StopTags(IEnumerable<string> stopTags) => Assign(stopTags, (a, v) => a.StopTags = v);
 
 		///<inheritdoc cref="INoriPartOfSpeechTokenFilter.StopTags" />
-		public NoriPartOfSpeechTokenFilterDescriptor StopTags(params string[] stopTags) => Assign(a => a.StopTags = stopTags);
+		public NoriPartOfSpeechTokenFilterDescriptor StopTags(params string[] stopTags) => Assign(stopTags, (a, v) => a.StopTags = v);
 	}
 }

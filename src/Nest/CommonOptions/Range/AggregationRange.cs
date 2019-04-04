@@ -36,10 +36,10 @@ namespace Nest
 		string IAggregationRange.Key { get; set; }
 		double? IAggregationRange.To { get; set; }
 
-		public AggregationRangeDescriptor Key(string key) => Assign(a => a.Key = key);
+		public AggregationRangeDescriptor Key(string key) => Assign(key, (a, v) => a.Key = v);
 
-		public AggregationRangeDescriptor From(double? from) => Assign(a => a.From = from);
+		public AggregationRangeDescriptor From(double? from) => Assign(from, (a, v) => a.From = v);
 
-		public AggregationRangeDescriptor To(double? to) => Assign(a => a.To = to);
+		public AggregationRangeDescriptor To(double? to) => Assign(to, (a, v) => a.To = v);
 	}
 }

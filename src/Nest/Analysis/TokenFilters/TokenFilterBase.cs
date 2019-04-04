@@ -32,6 +32,6 @@ namespace Nest
 		string ITokenFilter.Type => Type;
 		string ITokenFilter.Version { get; set; }
 
-		public TTokenFilter Version(string version) => Assign(a => a.Version = version);
+		public TTokenFilter Version(string version) => Assign(version, (a, v) => a.Version = v);
 	}
 }

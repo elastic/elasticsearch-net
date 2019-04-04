@@ -43,12 +43,12 @@ namespace Nest
 		bool? IElisionTokenFilter.ArticlesCase { get; set; }
 
 		/// <inheritdoc cref="IElisionTokenFilter.Articles"/>
-		public ElisionTokenFilterDescriptor Articles(IEnumerable<string> articles) => Assign(a => a.Articles = articles);
+		public ElisionTokenFilterDescriptor Articles(IEnumerable<string> articles) => Assign(articles, (a, v) => a.Articles = v);
 
 		/// <inheritdoc cref="IElisionTokenFilter.Articles"/>
-		public ElisionTokenFilterDescriptor Articles(params string[] articles) => Assign(a => a.Articles = articles);
+		public ElisionTokenFilterDescriptor Articles(params string[] articles) => Assign(articles, (a, v) => a.Articles = v);
 
 		/// <inheritdoc cref="IElisionTokenFilter.ArticlesCase"/>
-		public ElisionTokenFilterDescriptor ArticlesCase(bool? articlesCase = true) => Assign(a => a.ArticlesCase = articlesCase);
+		public ElisionTokenFilterDescriptor ArticlesCase(bool? articlesCase = true) => Assign(articlesCase, (a, v) => a.ArticlesCase = v);
 	}
 }

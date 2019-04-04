@@ -45,35 +45,35 @@ namespace Nest
 		IEnumerable<string> IPutRoleMappingRequest.RunAs { get; set; }
 
 		/// <inheritdoc />
-		public PutRoleMappingDescriptor Roles(RoleMappingRuleBase rules) => Assign(a => a.Rules = rules);
+		public PutRoleMappingDescriptor Roles(RoleMappingRuleBase rules) => Assign(rules, (a, v) => a.Rules = v);
 
 		/// <inheritdoc />
-		public PutRoleMappingDescriptor Roles(IEnumerable<string> roles) => Assign(a => a.Roles = roles);
+		public PutRoleMappingDescriptor Roles(IEnumerable<string> roles) => Assign(roles, (a, v) => a.Roles = v);
 
 		/// <inheritdoc />
-		public PutRoleMappingDescriptor Roles(params string[] roles) => Assign(a => a.Roles = roles);
+		public PutRoleMappingDescriptor Roles(params string[] roles) => Assign(roles, (a, v) => a.Roles = v);
 
 		/// <inheritdoc />
 		public PutRoleMappingDescriptor Rules(Func<RoleMappingRuleDescriptor, RoleMappingRuleBase> selector) =>
-			Assign(a => a.Rules = selector?.Invoke(new RoleMappingRuleDescriptor()));
+			Assign(selector, (a, v) => a.Rules = v?.Invoke(new RoleMappingRuleDescriptor()));
 
 		/// <inheritdoc />
-		public PutRoleMappingDescriptor Rules(RoleMappingRuleBase rules) => Assign(a => a.Rules = rules);
+		public PutRoleMappingDescriptor Rules(RoleMappingRuleBase rules) => Assign(rules, (a, v) => a.Rules = v);
 
 		/// <inheritdoc />
-		public PutRoleMappingDescriptor RunAs(IEnumerable<string> users) => Assign(a => a.RunAs = users);
+		public PutRoleMappingDescriptor RunAs(IEnumerable<string> users) => Assign(users, (a, v) => a.RunAs = v);
 
 		/// <inheritdoc />
-		public PutRoleMappingDescriptor RunAs(params string[] users) => Assign(a => a.RunAs = users);
+		public PutRoleMappingDescriptor RunAs(params string[] users) => Assign(users, (a, v) => a.RunAs = v);
 
 		/// <inheritdoc />
-		public PutRoleMappingDescriptor Enabled(bool? enabled = true) => Assign(a => a.Enabled = enabled);
+		public PutRoleMappingDescriptor Enabled(bool? enabled = true) => Assign(enabled, (a, v) => a.Enabled = v);
 
 		/// <inheritdoc />
-		public PutRoleMappingDescriptor Metadata(IDictionary<string, object> metadata) => Assign(a => a.Metadata = metadata);
+		public PutRoleMappingDescriptor Metadata(IDictionary<string, object> metadata) => Assign(metadata, (a, v) => a.Metadata = v);
 
 		/// <inheritdoc />
 		public PutRoleMappingDescriptor Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) =>
-			Assign(a => a.Metadata = selector?.Invoke(new FluentDictionary<string, object>()));
+			Assign(selector, (a, v) => a.Metadata = v?.Invoke(new FluentDictionary<string, object>()));
 	}
 }
