@@ -115,6 +115,7 @@ namespace Nest
 			var request = _partitionedBulkRequest;
 			var response = await _client.BulkAsync(s =>
 				{
+					s.Timeout(request.Timeout);
 					s.Index(request.Index).Type(request.Type);
 					if (request.BufferToBulk != null) request.BufferToBulk(s, buffer);
 					else s.IndexMany(buffer);
