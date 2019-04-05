@@ -5,11 +5,11 @@ namespace Nest
 	public interface IIlmGetStatusResponse : IResponse
 	{
 		[JsonProperty("operation_mode")]
-		string OperationMode { get; }
+		OperationMode OperationMode { get; }
 	}
 
 	public class IlmGetStatusResponse : ResponseBase, IIlmGetStatusResponse
 	{
-		public string OperationMode { get; internal set; }
+		public OperationMode OperationMode { get; internal set; }
 	}
 }
