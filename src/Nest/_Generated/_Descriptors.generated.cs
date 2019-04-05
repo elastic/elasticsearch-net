@@ -4096,6 +4096,10 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public IlmGetStatusDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		///<summary>Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public IlmGetStatusDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 	///<summary>descriptor for IlmStart <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html</pre></summary>
 	public partial class IlmStartDescriptor  : RequestDescriptorBase<IlmStartDescriptor,IlmStartRequestParameters, IIlmStartRequest>, IIlmStartRequest
