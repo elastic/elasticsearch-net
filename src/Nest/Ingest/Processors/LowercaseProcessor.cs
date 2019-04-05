@@ -55,11 +55,11 @@ namespace Nest
 		Field ILowercaseProcessor.TargetField { get; set; }
 
 		/// <inheritdoc cref="ILowercaseProcessor.Field" />
-		public LowercaseProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public LowercaseProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="ILowercaseProcessor.Field" />
 		public LowercaseProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="ILowercaseProcessor.TargetField" />
 		public LowercaseProcessorDescriptor<T> TargetField(Field field) => Assign(a => a.TargetField = field);

@@ -1,0 +1,55 @@
+jobs:
+- job: LinuxUnitTests
+  pool:
+    vmImage: 'ubuntu-16.04'
+  steps:
+  - script: ./build.sh test-one skipdocs
+    displayName: 'build and unit test'
+  - task: PublishTestResults@2
+    inputs:
+        testRunner: VSTest
+        testResultsFiles: 'src/Tests/Tests/**/*.trx'
+        testRunTitle: Linux Unit Tests
+
+- job: WindowsCanaryTests
+  pool:
+    vmImage: 'vs2017-win2016'
+  steps:
+  - script: build.bat canary skipdocs
+    displayName: 'build and unit test'
+  - task: PublishTestResults@2
+    inputs:
+      testRunner: VSTest
+      testResultsFiles: 'src/Tests/Tests/**/*.trx'
+      testRunTitle: Windows Unit Tests
+
+- job: WindowsIntegrationTests
+  dependsOn: WindowsCanaryTests
+  pool:
+      vmImage: 'vs2017-win2016'
+  strategy:
+    maxParallel: 5
+    matrix:
+      es662:
+        esVersion: '6.6.2'
+      es654:
+        esVersion: '6.5.4'
+      es642:
+        esVersion: '6.4.2'
+      es632:
+        esVersion: '6.3.2'
+      es624:
+        esVersion: '6.2.4'
+      es614:
+        esVersion: '6.1.4'
+      es601:
+        esVersion: '6.0.1'
+  steps:
+      - script: 'build.bat integrate $(esVersion) "readonly,writable,bool,xpack" skipdocs'
+        displayName: '$(esVersion) integration tests'
+      - task: PublishTestResults@2
+        condition: succeededOrFailed()
+        inputs:
+            testRunner: VSTest
+            testResultsFiles: 'src/Tests/Tests/**/*.trx'
+            testRunTitle: '$(esVersion)  Integration Tests'

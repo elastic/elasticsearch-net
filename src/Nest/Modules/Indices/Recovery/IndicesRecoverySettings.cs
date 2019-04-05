@@ -60,24 +60,24 @@ namespace Nest
 		string IIndicesRecoverySettings.TranslogSize { get; set; }
 
 		/// <inheritdoc />
-		public IndicesRecoverySettingsDescriptor ConcurrentStreams(int? streams) => Assign(a => a.ConcurrentStreams = streams);
+		public IndicesRecoverySettingsDescriptor ConcurrentStreams(int? streams) => Assign(streams, (a, v) => a.ConcurrentStreams = v);
 
 		/// <inheritdoc />
-		public IndicesRecoverySettingsDescriptor ConcurrentSmallFileStreams(int? streams) => Assign(a => a.ConcurrentSmallFileStreams = streams);
+		public IndicesRecoverySettingsDescriptor ConcurrentSmallFileStreams(int? streams) => Assign(streams, (a, v) => a.ConcurrentSmallFileStreams = v);
 
 		/// <inheritdoc />
-		public IndicesRecoverySettingsDescriptor FileChunkSize(string size) => Assign(a => a.FileChunkSize = size);
+		public IndicesRecoverySettingsDescriptor FileChunkSize(string size) => Assign(size, (a, v) => a.FileChunkSize = v);
 
 		/// <inheritdoc />
-		public IndicesRecoverySettingsDescriptor TranslogOperations(int? ops) => Assign(a => a.TranslogOperations = ops);
+		public IndicesRecoverySettingsDescriptor TranslogOperations(int? ops) => Assign(ops, (a, v) => a.TranslogOperations = v);
 
 		/// <inheritdoc />
-		public IndicesRecoverySettingsDescriptor TranslogSize(string size) => Assign(a => a.TranslogSize = size);
+		public IndicesRecoverySettingsDescriptor TranslogSize(string size) => Assign(size, (a, v) => a.TranslogSize = v);
 
 		/// <inheritdoc />
-		public IndicesRecoverySettingsDescriptor Compress(bool? compress = true) => Assign(a => a.Compress = compress);
+		public IndicesRecoverySettingsDescriptor Compress(bool? compress = true) => Assign(compress, (a, v) => a.Compress = v);
 
 		/// <inheritdoc />
-		public IndicesRecoverySettingsDescriptor MaxBytesPerSecond(string max) => Assign(a => a.MaxBytesPerSecond = max);
+		public IndicesRecoverySettingsDescriptor MaxBytesPerSecond(string max) => Assign(max, (a, v) => a.MaxBytesPerSecond = v);
 	}
 }

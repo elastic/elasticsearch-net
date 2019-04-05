@@ -86,34 +86,34 @@ namespace Nest
 		IPutWatchRequest IExecuteWatchRequest.Watch { get; set; }
 
 		public ExecuteWatchDescriptor TriggerData(Func<ScheduleTriggerEventDescriptor, IScheduleTriggerEvent> selector) =>
-			Assign(a => a.TriggerData = selector?.InvokeOrDefault(new ScheduleTriggerEventDescriptor()));
+			Assign(selector, (a, v) => a.TriggerData = v?.InvokeOrDefault(new ScheduleTriggerEventDescriptor()));
 
 		public ExecuteWatchDescriptor IgnoreCondition(bool? ignore = true) =>
-			Assign(a => a.IgnoreCondition = ignore);
+			Assign(ignore, (a, v) => a.IgnoreCondition = v);
 
 		public ExecuteWatchDescriptor RecordExecution(bool? record = true) =>
-			Assign(a => a.RecordExecution = record);
+			Assign(record, (a, v) => a.RecordExecution = v);
 
 		public ExecuteWatchDescriptor ActionModes(
 			Func<FluentDictionary<string, ActionExecutionMode>, FluentDictionary<string, ActionExecutionMode>> actionModesDictionary
 		) =>
-			Assign(a => a.ActionModes = actionModesDictionary(new FluentDictionary<string, ActionExecutionMode>()));
+			Assign(actionModesDictionary(new FluentDictionary<string, ActionExecutionMode>()), (a, v) => a.ActionModes = v);
 
 		public ExecuteWatchDescriptor ActionModes(Dictionary<string, ActionExecutionMode> actionModesDictionary) =>
-			Assign(a => a.ActionModes = actionModesDictionary);
+			Assign(actionModesDictionary, (a, v) => a.ActionModes = v);
 
 		public ExecuteWatchDescriptor AlternativeInput(
 			Func<FluentDictionary<string, object>, FluentDictionary<string, object>> alternativeInputDictionary
 		) =>
-			Assign(a => a.AlternativeInput = alternativeInputDictionary(new FluentDictionary<string, object>()));
+			Assign(alternativeInputDictionary(new FluentDictionary<string, object>()), (a, v) => a.AlternativeInput = v);
 
 		public ExecuteWatchDescriptor AlternativeInput(Dictionary<string, object> alternativeInputDictionary) =>
-			Assign(a => a.AlternativeInput = alternativeInputDictionary);
+			Assign(alternativeInputDictionary, (a, v) => a.AlternativeInput = v);
 
 		public ExecuteWatchDescriptor SimulatedActions(SimulatedActions simulatedActions) =>
-			Assign(a => a.SimulatedActions = simulatedActions);
+			Assign(simulatedActions, (a, v) => a.SimulatedActions = v);
 
 		public ExecuteWatchDescriptor Watch(Func<PutWatchDescriptor, IPutWatchRequest> watch) =>
-			Assign(a => a.Watch = watch?.InvokeOrDefault(new PutWatchDescriptor()));
+			Assign(watch, (a, v) => a.Watch = v?.InvokeOrDefault(new PutWatchDescriptor()));
 	}
 }

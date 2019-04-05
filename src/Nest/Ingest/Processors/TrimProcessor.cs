@@ -58,11 +58,11 @@ namespace Nest
 		Field ITrimProcessor.TargetField { get; set; }
 
 		/// <inheritdoc cref="ITrimProcessor.Field" />
-		public TrimProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public TrimProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="ITrimProcessor.Field" />
 		public TrimProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="ITrimProcessor.TargetField" />
 		public TrimProcessorDescriptor<T> TargetField(Field field) => Assign(a => a.TargetField = field);

@@ -45,11 +45,11 @@ namespace Nest
 		IEnumerable<string> ISetSecurityUserProcessor.Properties { get; set; }
 
 		/// <inheritdoc cref="ISetSecurityUserProcessor.Field"/>
-		public SetSecurityUserProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public SetSecurityUserProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="ISetSecurityUserProcessor.Field"/>
 		public SetSecurityUserProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="ISetSecurityUserProcessor.Properties"/>
 		public SetSecurityUserProcessorDescriptor<T> Properties(IEnumerable<string> properties) =>

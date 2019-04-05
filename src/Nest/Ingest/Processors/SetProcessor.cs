@@ -56,14 +56,14 @@ namespace Nest
 		bool? ISetProcessor.Override { get; set; }
 
 		/// <inheritdoc cref="ISetProcessor.Field"/>
-		public SetProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public SetProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="ISetProcessor.Field"/>
 		public SetProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="ISetProcessor.Value"/>
-		public SetProcessorDescriptor<T> Value<TValue>(TValue value) => Assign(a => a.Value = value);
+		public SetProcessorDescriptor<T> Value<TValue>(TValue value) => Assign(value, (a, v) => a.Value = v);
 
 		/// <inheritdoc cref="ISetProcessor.Override"/>
 		public SetProcessorDescriptor<T> Override(bool? @override = true) => Assign(a => a.Override = @override);

@@ -35,9 +35,9 @@ namespace Nest
 
 		/// <inheritdoc cref="ITermsRollupGrouping.Fields" />
 		public TermsRollupGroupingDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+			Assign(fields, (a, v) => a.Fields = v?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		/// <inheritdoc cref="ITermsRollupGrouping.Fields" />
-		public TermsRollupGroupingDescriptor<T> Fields(Fields fields) => Assign(a => a.Fields = fields);
+		public TermsRollupGroupingDescriptor<T> Fields(Fields fields) => Assign(fields, (a, v) => a.Fields = v);
 	}
 }

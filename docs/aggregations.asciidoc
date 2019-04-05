@@ -46,6 +46,8 @@ The values are typically extracted from the fields of the document (using the fi
 
 * <<max-aggregation-usage,Max Aggregation Usage>>
 
+* <<median-absolute-deviation-aggregation-usage,Median Absolute Deviation Aggregation Usage>>
+
 * <<min-aggregation-usage,Min Aggregation Usage>>
 
 * <<percentile-ranks-aggregation-usage,Percentile Ranks Aggregation Usage>>
@@ -79,6 +81,8 @@ include::aggregations/metric/geo-bounds/geo-bounds-aggregation-usage.asciidoc[]
 include::aggregations/metric/geo-centroid/geo-centroid-aggregation-usage.asciidoc[]
 
 include::aggregations/metric/max/max-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/median-absolute-deviation/median-absolute-deviation-aggregation-usage.asciidoc[]
 
 include::aggregations/metric/min/min-aggregation-usage.asciidoc[]
 

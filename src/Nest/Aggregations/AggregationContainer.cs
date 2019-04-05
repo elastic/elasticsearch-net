@@ -235,6 +235,9 @@ namespace Nest
 		[JsonProperty("weighted_avg")]
 		IWeightedAverageAggregation WeightedAverage { get; set; }
 
+		[JsonProperty("median_absolute_deviation")]
+		IMedianAbsoluteDeviationAggregation MedianAbsoluteDeviation { get; set; }
+
 		void Accept(IAggregationVisitor visitor);
 	}
 
@@ -343,6 +346,8 @@ namespace Nest
 		public IValueCountAggregation ValueCount { get; set; }
 
 		public IWeightedAverageAggregation WeightedAverage { get; set; }
+
+		public IMedianAbsoluteDeviationAggregation MedianAbsoluteDeviation { get; set; }
 
 		public void Accept(IAggregationVisitor visitor)
 		{
@@ -484,6 +489,8 @@ namespace Nest
 		IValueCountAggregation IAggregationContainer.ValueCount { get; set; }
 
 		IWeightedAverageAggregation IAggregationContainer.WeightedAverage { get; set; }
+
+		IMedianAbsoluteDeviationAggregation IAggregationContainer.MedianAbsoluteDeviation { get; set; }
 
 		public void Accept(IAggregationVisitor visitor)
 		{
@@ -756,6 +763,11 @@ namespace Nest
 			Func<WeightedAverageAggregationDescriptor<T>, IWeightedAverageAggregation> selector
 		) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.WeightedAverage = d);
+
+		public AggregationContainerDescriptor<T> MedianAbsoluteDeviation(string name,
+			Func<MedianAbsoluteDeviationAggregationDescriptor<T>, IMedianAbsoluteDeviationAggregation> selector
+		) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.MedianAbsoluteDeviation = d);
 
 		/// <summary>
 		/// Fluent methods do not assign to properties on `this` directly but on IAggregationContainers inside `this.Aggregations[string, IContainer]

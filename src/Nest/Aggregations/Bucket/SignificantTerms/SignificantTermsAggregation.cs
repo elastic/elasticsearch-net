@@ -193,72 +193,72 @@ namespace Nest
 		int? ISignificantTermsAggregation.Size { get; set; }
 
 		/// <inheritdoc />
-		public SignificantTermsAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public SignificantTermsAggregationDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc />
-		public SignificantTermsAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public SignificantTermsAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc />
-		public SignificantTermsAggregationDescriptor<T> Size(int? size) => Assign(a => a.Size = size);
+		public SignificantTermsAggregationDescriptor<T> Size(int? size) => Assign(size, (a, v) => a.Size = v);
 
 		/// <inheritdoc />
-		public SignificantTermsAggregationDescriptor<T> ExecutionHint(TermsAggregationExecutionHint? hint) => Assign(a => a.ExecutionHint = hint);
+		public SignificantTermsAggregationDescriptor<T> ExecutionHint(TermsAggregationExecutionHint? hint) => Assign(hint, (a, v) => a.ExecutionHint = v);
 
 		/// <inheritdoc />
 		public SignificantTermsAggregationDescriptor<T> Include(string includePattern) =>
-			Assign(a => a.Include = new SignificantTermsIncludeExclude(includePattern));
+			Assign(new SignificantTermsIncludeExclude(includePattern), (a, v) => a.Include = v);
 
 		/// <inheritdoc />
 		public SignificantTermsAggregationDescriptor<T> Include(IEnumerable<string> values) =>
-			Assign(a => a.Include = new SignificantTermsIncludeExclude(values));
+			Assign(new SignificantTermsIncludeExclude(values), (a, v) => a.Include = v);
 
 		/// <inheritdoc />
 		public SignificantTermsAggregationDescriptor<T> Exclude(string excludePattern) =>
-			Assign(a => a.Exclude = new SignificantTermsIncludeExclude(excludePattern));
+			Assign(new SignificantTermsIncludeExclude(excludePattern), (a, v) => a.Exclude = v);
 
 		/// <inheritdoc />
 		public SignificantTermsAggregationDescriptor<T> Exclude(IEnumerable<string> values) =>
-			Assign(a => a.Exclude = new SignificantTermsIncludeExclude(values));
+			Assign(new SignificantTermsIncludeExclude(values), (a, v) => a.Exclude = v);
 
 		/// <inheritdoc />
-		public SignificantTermsAggregationDescriptor<T> ShardSize(int? shardSize) => Assign(a => a.ShardSize = shardSize);
+		public SignificantTermsAggregationDescriptor<T> ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSize = v);
 
 		/// <inheritdoc />
 		public SignificantTermsAggregationDescriptor<T> MinimumDocumentCount(long? minimumDocumentCount) =>
-			Assign(a => a.MinimumDocumentCount = minimumDocumentCount);
+			Assign(minimumDocumentCount, (a, v) => a.MinimumDocumentCount = v);
 
 		/// <inheritdoc />
 		public SignificantTermsAggregationDescriptor<T> ShardMinimumDocumentCount(long? shardMinimumDocumentCount) =>
-			Assign(a => a.ShardMinimumDocumentCount = shardMinimumDocumentCount);
+			Assign(shardMinimumDocumentCount, (a, v) => a.ShardMinimumDocumentCount = v);
 
 		/// <inheritdoc />
 		public SignificantTermsAggregationDescriptor<T> MutualInformation(
 			Func<MutualInformationHeuristicDescriptor, IMutualInformationHeuristic> mutualInformationSelector = null
 		) =>
-			Assign(a => a.MutualInformation = mutualInformationSelector.InvokeOrDefault(new MutualInformationHeuristicDescriptor()));
+			Assign(mutualInformationSelector.InvokeOrDefault(new MutualInformationHeuristicDescriptor()), (a, v) => a.MutualInformation = v);
 
 		/// <inheritdoc />
 		public SignificantTermsAggregationDescriptor<T> ChiSquare(Func<ChiSquareHeuristicDescriptor, IChiSquareHeuristic> chiSquareSelector) =>
-			Assign(a => a.ChiSquare = chiSquareSelector.InvokeOrDefault(new ChiSquareHeuristicDescriptor()));
+			Assign(chiSquareSelector.InvokeOrDefault(new ChiSquareHeuristicDescriptor()), (a, v) => a.ChiSquare = v);
 
 		/// <inheritdoc />
 		public SignificantTermsAggregationDescriptor<T> GoogleNormalizedDistance(
 			Func<GoogleNormalizedDistanceHeuristicDescriptor, IGoogleNormalizedDistanceHeuristic> gndSelector
 		) =>
-			Assign(a => a.GoogleNormalizedDistance = gndSelector.InvokeOrDefault(new GoogleNormalizedDistanceHeuristicDescriptor()));
+			Assign(gndSelector.InvokeOrDefault(new GoogleNormalizedDistanceHeuristicDescriptor()), (a, v) => a.GoogleNormalizedDistance = v);
 
 		/// <inheritdoc />
 		public SignificantTermsAggregationDescriptor<T> PercentageScore(
 			Func<PercentageScoreHeuristicDescriptor, IPercentageScoreHeuristic> percentageScoreSelector
 		) =>
-			Assign(a => a.PercentageScore = percentageScoreSelector.InvokeOrDefault(new PercentageScoreHeuristicDescriptor()));
+			Assign(percentageScoreSelector.InvokeOrDefault(new PercentageScoreHeuristicDescriptor()), (a, v) => a.PercentageScore = v);
 
 		/// <inheritdoc />
 		public SignificantTermsAggregationDescriptor<T> Script(Func<ScriptedHeuristicDescriptor, IScriptedHeuristic> scriptSelector) =>
-			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptedHeuristicDescriptor()));
+			Assign(scriptSelector, (a, v) => a.Script = v?.Invoke(new ScriptedHeuristicDescriptor()));
 
 		/// <inheritdoc />
 		public SignificantTermsAggregationDescriptor<T> BackgroundFilter(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
-			Assign(a => a.BackgroundFilter = selector?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(selector, (a, v) => a.BackgroundFilter = v?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

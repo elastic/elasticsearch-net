@@ -34,6 +34,6 @@ namespace Nest
 		string IFailProcessor.Message { get; set; }
 
 		/// <inheritdoc cref="IFailProcessor.Message" />
-		public FailProcessorDescriptor Message(string message) => Assign(a => a.Message = message);
+		public FailProcessorDescriptor Message(string message) => Assign(message, (a, v) => a.Message = v);
 	}
 }

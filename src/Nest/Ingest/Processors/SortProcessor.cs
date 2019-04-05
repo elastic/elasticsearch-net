@@ -59,11 +59,11 @@ namespace Nest
 		Field ISortProcessor.TargetField { get; set; }
 
 		/// <inheritdoc cref="ISortProcessor.Field" />
-		public SortProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public SortProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="ISortProcessor.Field" />
 		public SortProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="ISortProcessor.TargetField" />
 		public SortProcessorDescriptor<T> TargetField(Field field) => Assign(a => a.TargetField = field);
@@ -74,6 +74,6 @@ namespace Nest
 
 		/// <inheritdoc cref="ISortProcessor.Order" />
 		public SortProcessorDescriptor<T> Order(SortOrder? order = SortOrder.Ascending) =>
-			Assign(a => a.Order = order);
+			Assign(order, (a, v) => a.Order = v);
 	}
 }

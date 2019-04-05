@@ -7,6 +7,9 @@ namespace Nest
 	/// <summary>
 	/// Normalization forms https://en.wikipedia.org/wiki/Unicode_equivalence#Normal_forms
 	/// </summary>
+	/// <remarks>
+	/// Requires analysis-icu plugin to be installed
+	/// </remarks>
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum IcuNormalizationType
 	{

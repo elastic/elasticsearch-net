@@ -35,8 +35,8 @@ namespace Nest
 		double? IScoreFunction.Weight { get; set; }
 
 		public TDescriptor Filter(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector) =>
-			Assign(a => a.Filter = filterSelector?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(filterSelector, (a, v) => a.Filter = v?.Invoke(new QueryContainerDescriptor<T>()));
 
-		public TDescriptor Weight(double? weight) => Assign(a => a.Weight = weight);
+		public TDescriptor Weight(double? weight) => Assign(weight, (a, v) => a.Weight = v);
 	}
 }

@@ -58,21 +58,21 @@ namespace Nest
 		Field IUrlDecodeProcessor.TargetField { get; set; }
 
 		/// <inheritdoc cref="IUrlDecodeProcessor.Field" />
-		public UrlDecodeProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public UrlDecodeProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IUrlDecodeProcessor.Field" />
 		public UrlDecodeProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IUrlDecodeProcessor.TargetField" />
-		public UrlDecodeProcessorDescriptor<T> TargetField(Field field) => Assign(a => a.TargetField = field);
+		public UrlDecodeProcessorDescriptor<T> TargetField(Field field) => Assign(field, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc cref="IUrlDecodeProcessor.TargetField" />
 		public UrlDecodeProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.TargetField = objectPath);
+			Assign(objectPath, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc cref="IUrlDecodeProcessor.IgnoreMissing" />
 		public UrlDecodeProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) =>
-			Assign(a => a.IgnoreMissing = ignoreMissing);
+			Assign(ignoreMissing, (a, v) => a.IgnoreMissing = v);
 	}
 }

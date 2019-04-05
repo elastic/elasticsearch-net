@@ -45,12 +45,12 @@ namespace Nest
 		bool? ITokenCountProperty.Index { get; set; }
 		double? ITokenCountProperty.NullValue { get; set; }
 
-		public TokenCountPropertyDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
+		public TokenCountPropertyDescriptor<T> Analyzer(string analyzer) => Assign(analyzer, (a, v) => a.Analyzer = v);
 
-		public TokenCountPropertyDescriptor<T> Boost(double? boost) => Assign(a => a.Boost = boost);
+		public TokenCountPropertyDescriptor<T> Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
 
-		public TokenCountPropertyDescriptor<T> Index(bool? index = true) => Assign(a => a.Index = index);
+		public TokenCountPropertyDescriptor<T> Index(bool? index = true) => Assign(index, (a, v) => a.Index = v);
 
-		public TokenCountPropertyDescriptor<T> NullValue(double? nullValue) => Assign(a => a.NullValue = nullValue);
+		public TokenCountPropertyDescriptor<T> NullValue(double? nullValue) => Assign(nullValue, (a, v) => a.NullValue = v);
 	}
 }

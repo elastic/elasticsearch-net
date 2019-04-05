@@ -113,6 +113,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 			var bucketCount = 0;
 			foreach (var item in projectsPerMonth.Buckets)
 			{
+				if (item.DocCount == 0) continue;
 				bucketCount++;
 
 				var commits = item.Sum("commits");

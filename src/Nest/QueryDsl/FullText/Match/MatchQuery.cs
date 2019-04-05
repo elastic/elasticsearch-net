@@ -173,45 +173,45 @@ namespace Nest
 		ZeroTermsQuery? IMatchQuery.ZeroTermsQuery { get; set; }
 
 		/// <inheritdoc cref="IMatchQuery.Query" />
-		public MatchQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
+		public MatchQueryDescriptor<T> Query(string query) => Assign(query, (a, v) => a.Query = v);
 
 		/// <inheritdoc cref="IMatchQuery.Lenient" />
-		public MatchQueryDescriptor<T> Lenient(bool? lenient = true) => Assign(a => a.Lenient = lenient);
+		public MatchQueryDescriptor<T> Lenient(bool? lenient = true) => Assign(lenient, (a, v) => a.Lenient = v);
 
 		/// <inheritdoc cref="IMatchQuery.Analyzer" />
-		public MatchQueryDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
+		public MatchQueryDescriptor<T> Analyzer(string analyzer) => Assign(analyzer, (a, v) => a.Analyzer = v);
 
 		/// <inheritdoc cref="IMatchQuery.Fuzziness" />
-		public MatchQueryDescriptor<T> Fuzziness(Fuzziness fuzziness) => Assign(a => a.Fuzziness = fuzziness);
+		public MatchQueryDescriptor<T> Fuzziness(Fuzziness fuzziness) => Assign(fuzziness, (a, v) => a.Fuzziness = v);
 
 		/// <inheritdoc cref="IMatchQuery.FuzzyTranspositions" />
 		public MatchQueryDescriptor<T> FuzzyTranspositions(bool? fuzzyTranspositions = true) =>
-			Assign(a => a.FuzzyTranspositions = fuzzyTranspositions);
+			Assign(fuzzyTranspositions, (a, v) => a.FuzzyTranspositions = v);
 
 		/// <inheritdoc cref="IMatchQuery.CutoffFrequency" />
-		public MatchQueryDescriptor<T> CutoffFrequency(double? cutoffFrequency) => Assign(a => a.CutoffFrequency = cutoffFrequency);
+		public MatchQueryDescriptor<T> CutoffFrequency(double? cutoffFrequency) => Assign(cutoffFrequency, (a, v) => a.CutoffFrequency = v);
 
 		/// <inheritdoc cref="IMatchQuery.FuzzyRewrite" />
-		public MatchQueryDescriptor<T> FuzzyRewrite(MultiTermQueryRewrite rewrite) => Assign(a => Self.FuzzyRewrite = rewrite);
+		public MatchQueryDescriptor<T> FuzzyRewrite(MultiTermQueryRewrite rewrite) => Assign(rewrite, (a, v) => a.FuzzyRewrite = v);
 
 		/// <inheritdoc cref="IMatchQuery.MinimumShouldMatch" />
 		public MatchQueryDescriptor<T> MinimumShouldMatch(MinimumShouldMatch minimumShouldMatch) =>
-			Assign(a => a.MinimumShouldMatch = minimumShouldMatch);
+			Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatch = v);
 
 		/// <inheritdoc cref="IMatchQuery.Operator" />
-		public MatchQueryDescriptor<T> Operator(Operator? op) => Assign(a => a.Operator = op);
+		public MatchQueryDescriptor<T> Operator(Operator? op) => Assign(op, (a, v) => a.Operator = v);
 
 		/// <inheritdoc cref="IMatchQuery.ZeroTermsQuery" />
-		public MatchQueryDescriptor<T> ZeroTermsQuery(ZeroTermsQuery? zeroTermsQuery) => Assign(a => a.ZeroTermsQuery = zeroTermsQuery);
+		public MatchQueryDescriptor<T> ZeroTermsQuery(ZeroTermsQuery? zeroTermsQuery) => Assign(zeroTermsQuery, (a, v) => a.ZeroTermsQuery = v);
 
 		/// <inheritdoc cref="IMatchQuery.PrefixLength" />
-		public MatchQueryDescriptor<T> PrefixLength(int? prefixLength) => Assign(a => a.PrefixLength = prefixLength);
+		public MatchQueryDescriptor<T> PrefixLength(int? prefixLength) => Assign(prefixLength, (a, v) => a.PrefixLength = v);
 
 		/// <inheritdoc cref="IMatchQuery.MaxExpansions" />
-		public MatchQueryDescriptor<T> MaxExpansions(int? maxExpansions) => Assign(a => a.MaxExpansions = maxExpansions);
+		public MatchQueryDescriptor<T> MaxExpansions(int? maxExpansions) => Assign(maxExpansions, (a, v) => a.MaxExpansions = v);
 
 		/// <inheritdoc cref="IMatchQuery.AutoGenerateSynonymsPhraseQuery" />
 		public MatchQueryDescriptor<T> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) =>
-			Assign(a => a.AutoGenerateSynonymsPhraseQuery = autoGenerateSynonymsPhraseQuery);
+			Assign(autoGenerateSynonymsPhraseQuery, (a, v) => a.AutoGenerateSynonymsPhraseQuery = v);
 	}
 }

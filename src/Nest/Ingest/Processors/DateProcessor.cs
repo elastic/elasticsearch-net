@@ -76,29 +76,29 @@ namespace Nest
 		string IDateProcessor.Timezone { get; set; }
 
 		/// <inheritdoc cref="IDateProcessor.Field" />
-		public DateProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public DateProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IDateProcessor.Field" />
 		public DateProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IDateProcessor.TargetField" />
-		public DateProcessorDescriptor<T> TargetField(Field field) => Assign(a => a.TargetField = field);
+		public DateProcessorDescriptor<T> TargetField(Field field) => Assign(field, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc cref="IDateProcessor.TargetField" />
 		public DateProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.TargetField = objectPath);
+			Assign(objectPath, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc cref="IDateProcessor.Formats" />
-		public DateProcessorDescriptor<T> Formats(IEnumerable<string> matchFormats) => Assign(a => a.Formats = matchFormats);
+		public DateProcessorDescriptor<T> Formats(IEnumerable<string> matchFormats) => Assign(matchFormats, (a, v) => a.Formats = v);
 
 		/// <inheritdoc cref="IDateProcessor.Formats" />
-		public DateProcessorDescriptor<T> Formats(params string[] matchFormats) => Assign(a => a.Formats = matchFormats);
+		public DateProcessorDescriptor<T> Formats(params string[] matchFormats) => Assign(matchFormats, (a, v) => a.Formats = v);
 
 		/// <inheritdoc cref="IDateProcessor.Timezone" />
-		public DateProcessorDescriptor<T> Timezone(string timezone) => Assign(a => a.Timezone = timezone);
+		public DateProcessorDescriptor<T> Timezone(string timezone) => Assign(timezone, (a, v) => a.Timezone = v);
 
 		/// <inheritdoc cref="IDateProcessor.Locale" />
-		public DateProcessorDescriptor<T> Locale(string locale) => Assign(a => a.Locale = locale);
+		public DateProcessorDescriptor<T> Locale(string locale) => Assign(locale, (a, v) => a.Locale = v);
 	}
 }

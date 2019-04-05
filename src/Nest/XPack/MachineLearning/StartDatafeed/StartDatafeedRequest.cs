@@ -48,12 +48,12 @@ namespace Nest
 		Time IStartDatafeedRequest.Timeout { get; set; }
 
 		/// <inheritdoc />
-		public StartDatafeedDescriptor Timeout(Time timeout) => Assign(a => a.Timeout = timeout);
+		public StartDatafeedDescriptor Timeout(Time timeout) => Assign(timeout, (a, v) => a.Timeout = v);
 
 		/// <inheritdoc />
-		public StartDatafeedDescriptor Start(DateTimeOffset? start) => Assign(a => a.Start = start);
+		public StartDatafeedDescriptor Start(DateTimeOffset? start) => Assign(start, (a, v) => a.Start = v);
 
 		/// <inheritdoc />
-		public StartDatafeedDescriptor End(DateTimeOffset? end) => Assign(a => a.End = end);
+		public StartDatafeedDescriptor End(DateTimeOffset? end) => Assign(end, (a, v) => a.End = v);
 	}
 }

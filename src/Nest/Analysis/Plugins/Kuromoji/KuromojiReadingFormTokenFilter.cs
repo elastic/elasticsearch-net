@@ -33,6 +33,6 @@ namespace Nest
 		bool? IKuromojiReadingFormTokenFilter.UseRomaji { get; set; }
 
 		/// <inheritdoc />
-		public KuromojiReadingFormTokenFilterDescriptor UseRomaji(bool? useRomaji = true) => Assign(a => a.UseRomaji = useRomaji);
+		public KuromojiReadingFormTokenFilterDescriptor UseRomaji(bool? useRomaji = true) => Assign(useRomaji, (a, v) => a.UseRomaji = v);
 	}
 }

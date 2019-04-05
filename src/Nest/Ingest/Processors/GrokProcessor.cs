@@ -75,27 +75,27 @@ namespace Nest
 		bool? IGrokProcessor.IgnoreMissing { get; set; }
 
 		/// <inheritdoc cref="IGrokProcessor.Field" />
-		public GrokProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public GrokProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IGrokProcessor.Field" />
 		public GrokProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IGrokProcessor.Patterns" />
-		public GrokProcessorDescriptor<T> Patterns(IEnumerable<string> patterns) => Assign(a => a.Patterns = patterns);
+		public GrokProcessorDescriptor<T> Patterns(IEnumerable<string> patterns) => Assign(patterns, (a, v) => a.Patterns = v);
 
 		/// <inheritdoc cref="IGrokProcessor.Patterns" />
-		public GrokProcessorDescriptor<T> Patterns(params string[] patterns) => Assign(a => a.Patterns = patterns);
+		public GrokProcessorDescriptor<T> Patterns(params string[] patterns) => Assign(patterns, (a, v) => a.Patterns = v);
 
 		/// <inheritdoc cref="IGrokProcessor.PatternDefinitions" />
 		public GrokProcessorDescriptor<T> PatternDefinitions(
 			Func<FluentDictionary<string, string>, FluentDictionary<string, string>> patternDefinitions
 		) =>
-			Assign(a => a.PatternDefinitions = patternDefinitions?.Invoke(new FluentDictionary<string, string>()));
+			Assign(patternDefinitions, (a, v) => a.PatternDefinitions = v?.Invoke(new FluentDictionary<string, string>()));
 
 		/// <inheritdoc cref="IGrokProcessor.TraceMatch" />
 		public GrokProcessorDescriptor<T> TraceMatch(bool? traceMatch = true) =>
-			Assign(a => a.TraceMatch = traceMatch);
+			Assign(traceMatch, (a, v) => a.TraceMatch = v);
 
 		/// <inheritdoc cref="IGrokProcessor.IgnoreMissing" />
 		public GrokProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);

@@ -97,6 +97,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 			// average not calculated for the first bucket
 			foreach (var item in projectsPerMonth.Buckets.Skip(1))
 			{
+				if (item.DocCount == 0) continue;
 				var movingAvg = item.MovingAverage("commits_moving_avg");
 				movingAvg.Should().NotBeNull();
 				movingAvg.Value.Should().BeGreaterThan(0);

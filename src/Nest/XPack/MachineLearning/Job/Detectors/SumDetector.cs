@@ -114,21 +114,21 @@ namespace Nest
 		Field IOverFieldNameDetector.OverFieldName { get; set; }
 		Field IPartitionFieldNameDetector.PartitionFieldName { get; set; }
 
-		public SumDetectorDescriptor<T> FieldName(Field fieldName) => Assign(a => a.FieldName = fieldName);
+		public SumDetectorDescriptor<T> FieldName(Field fieldName) => Assign(fieldName, (a, v) => a.FieldName = v);
 
-		public SumDetectorDescriptor<T> FieldName(Expression<Func<T, object>> objectPath) => Assign(a => a.FieldName = objectPath);
+		public SumDetectorDescriptor<T> FieldName(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.FieldName = v);
 
-		public SumDetectorDescriptor<T> ByFieldName(Field byFieldName) => Assign(a => a.ByFieldName = byFieldName);
+		public SumDetectorDescriptor<T> ByFieldName(Field byFieldName) => Assign(byFieldName, (a, v) => a.ByFieldName = v);
 
-		public SumDetectorDescriptor<T> ByFieldName(Expression<Func<T, object>> objectPath) => Assign(a => a.ByFieldName = objectPath);
+		public SumDetectorDescriptor<T> ByFieldName(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.ByFieldName = v);
 
-		public SumDetectorDescriptor<T> OverFieldName(Field overFieldName) => Assign(a => a.OverFieldName = overFieldName);
+		public SumDetectorDescriptor<T> OverFieldName(Field overFieldName) => Assign(overFieldName, (a, v) => a.OverFieldName = v);
 
-		public SumDetectorDescriptor<T> OverFieldName(Expression<Func<T, object>> objectPath) => Assign(a => a.OverFieldName = objectPath);
+		public SumDetectorDescriptor<T> OverFieldName(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.OverFieldName = v);
 
-		public SumDetectorDescriptor<T> PartitionFieldName(Field partitionFieldName) => Assign(a => a.PartitionFieldName = partitionFieldName);
+		public SumDetectorDescriptor<T> PartitionFieldName(Field partitionFieldName) => Assign(partitionFieldName, (a, v) => a.PartitionFieldName = v);
 
-		public SumDetectorDescriptor<T> PartitionFieldName(Expression<Func<T, object>> objectPath) => Assign(a => a.PartitionFieldName = objectPath);
+		public SumDetectorDescriptor<T> PartitionFieldName(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.PartitionFieldName = v);
 	}
 
 	public class NonNullSumDetectorDescriptor<T> : DetectorDescriptorBase<NonNullSumDetectorDescriptor<T>, INonNullSumDetector>, INonNullSumDetector
@@ -140,17 +140,17 @@ namespace Nest
 		Field IFieldNameDetector.FieldName { get; set; }
 		Field IPartitionFieldNameDetector.PartitionFieldName { get; set; }
 
-		public NonNullSumDetectorDescriptor<T> FieldName(Field fieldName) => Assign(a => a.FieldName = fieldName);
+		public NonNullSumDetectorDescriptor<T> FieldName(Field fieldName) => Assign(fieldName, (a, v) => a.FieldName = v);
 
-		public NonNullSumDetectorDescriptor<T> FieldName(Expression<Func<T, object>> objectPath) => Assign(a => a.FieldName = objectPath);
+		public NonNullSumDetectorDescriptor<T> FieldName(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.FieldName = v);
 
-		public NonNullSumDetectorDescriptor<T> ByFieldName(Field byFieldName) => Assign(a => a.ByFieldName = byFieldName);
+		public NonNullSumDetectorDescriptor<T> ByFieldName(Field byFieldName) => Assign(byFieldName, (a, v) => a.ByFieldName = v);
 
-		public NonNullSumDetectorDescriptor<T> ByFieldName(Expression<Func<T, object>> objectPath) => Assign(a => a.ByFieldName = objectPath);
+		public NonNullSumDetectorDescriptor<T> ByFieldName(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.ByFieldName = v);
 
-		public NonNullSumDetectorDescriptor<T> PartitionFieldName(Field partitionFieldName) => Assign(a => a.PartitionFieldName = partitionFieldName);
+		public NonNullSumDetectorDescriptor<T> PartitionFieldName(Field partitionFieldName) => Assign(partitionFieldName, (a, v) => a.PartitionFieldName = v);
 
 		public NonNullSumDetectorDescriptor<T> PartitionFieldName(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.PartitionFieldName = objectPath);
+			Assign(objectPath, (a, v) => a.PartitionFieldName = v);
 	}
 }

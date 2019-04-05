@@ -38,10 +38,10 @@ namespace Nest
 		string IMatchPhraseQuery.Query { get; set; }
 		int? IMatchPhraseQuery.Slop { get; set; }
 
-		public MatchPhraseQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
+		public MatchPhraseQueryDescriptor<T> Query(string query) => Assign(query, (a, v) => a.Query = v);
 
-		public MatchPhraseQueryDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
+		public MatchPhraseQueryDescriptor<T> Analyzer(string analyzer) => Assign(analyzer, (a, v) => a.Analyzer = v);
 
-		public MatchPhraseQueryDescriptor<T> Slop(int? slop) => Assign(a => a.Slop = slop);
+		public MatchPhraseQueryDescriptor<T> Slop(int? slop) => Assign(slop, (a, v) => a.Slop = v);
 	}
 }

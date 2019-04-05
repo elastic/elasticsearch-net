@@ -32,10 +32,10 @@ namespace Nest
 		double? ILinearInterpolationSmoothingModel.TrigramLambda { get; set; }
 		double? ILinearInterpolationSmoothingModel.UnigramLambda { get; set; }
 
-		public LinearInterpolationSmoothingModelDescriptor TrigramLambda(double? lambda) => Assign(a => a.TrigramLambda = lambda);
+		public LinearInterpolationSmoothingModelDescriptor TrigramLambda(double? lambda) => Assign(lambda, (a, v) => a.TrigramLambda = v);
 
-		public LinearInterpolationSmoothingModelDescriptor UnigramLambda(double? lambda) => Assign(a => a.UnigramLambda = lambda);
+		public LinearInterpolationSmoothingModelDescriptor UnigramLambda(double? lambda) => Assign(lambda, (a, v) => a.UnigramLambda = v);
 
-		public LinearInterpolationSmoothingModelDescriptor BigramLambda(double? lambda) => Assign(a => a.BigramLambda = lambda);
+		public LinearInterpolationSmoothingModelDescriptor BigramLambda(double? lambda) => Assign(lambda, (a, v) => a.BigramLambda = v);
 	}
 }

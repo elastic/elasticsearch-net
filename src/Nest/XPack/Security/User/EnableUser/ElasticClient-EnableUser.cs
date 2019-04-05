@@ -26,7 +26,7 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public IEnableUserResponse EnableUser(Name username, Func<EnableUserDescriptor, IEnableUserRequest> selector = null) =>
-			EnableUser(selector.InvokeOrDefault(new EnableUserDescriptor().Username(username)));
+			EnableUser(selector.InvokeOrDefault(new EnableUserDescriptor(username)));
 
 		/// <inheritdoc />
 		public IEnableUserResponse EnableUser(IEnableUserRequest request) =>
@@ -39,7 +39,7 @@ namespace Nest
 		public Task<IEnableUserResponse> EnableUserAsync(Name username, Func<EnableUserDescriptor, IEnableUserRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
 		) =>
-			EnableUserAsync(selector.InvokeOrDefault(new EnableUserDescriptor().Username(username)), cancellationToken);
+			EnableUserAsync(selector.InvokeOrDefault(new EnableUserDescriptor(username)), cancellationToken);
 
 		/// <inheritdoc />
 		public Task<IEnableUserResponse> EnableUserAsync(IEnableUserRequest request, CancellationToken cancellationToken = default(CancellationToken)

@@ -45,6 +45,6 @@ namespace Nest
 		/// <summary>
 		/// The object to infer the id off, (if id is not passed using Id())
 		/// </summary>
-		public BulkDeleteDescriptor<T> Document(T @object) => Assign(a => a.Document = @object);
+		public BulkDeleteDescriptor<T> Document(T @object) => Assign(@object, (a, v) => a.Document = v);
 	}
 }

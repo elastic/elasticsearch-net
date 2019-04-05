@@ -56,11 +56,11 @@ namespace Nest
 		Field IUppercaseProcessor.TargetField { get; set; }
 
 		/// <inheritdoc cref="IUppercaseProcessor.Field" />
-		public UppercaseProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public UppercaseProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IUppercaseProcessor.Field" />
 		public UppercaseProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IUppercaseProcessor.TargetField" />
 		public UppercaseProcessorDescriptor<T> TargetField(Field field) => Assign(a => a.TargetField = field);

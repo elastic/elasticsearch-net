@@ -21,9 +21,9 @@ namespace Nest
 	{
 		IScript IScriptedHeuristic.Script { get; set; }
 
-		public ScriptedHeuristicDescriptor Script(string script) => Assign(a => a.Script = (InlineScript)script);
+		public ScriptedHeuristicDescriptor Script(string script) => Assign(script, (a, v) => a.Script = (InlineScript)v);
 
 		public ScriptedHeuristicDescriptor Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
-			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
+			Assign(scriptSelector, (a, v) => a.Script = v?.Invoke(new ScriptDescriptor()));
 	}
 }

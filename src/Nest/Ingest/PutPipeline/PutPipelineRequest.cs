@@ -20,20 +20,20 @@ namespace Nest
 		IEnumerable<IProcessor> IPipeline.Processors { get; set; }
 
 		/// <inheritdoc />
-		public PutPipelineDescriptor Description(string description) => Assign(a => a.Description = description);
+		public PutPipelineDescriptor Description(string description) => Assign(description, (a, v) => a.Description = v);
 
 		/// <inheritdoc />
-		public PutPipelineDescriptor Processors(IEnumerable<IProcessor> processors) => Assign(a => a.Processors = processors.ToListOrNullIfEmpty());
+		public PutPipelineDescriptor Processors(IEnumerable<IProcessor> processors) => Assign(processors.ToListOrNullIfEmpty(), (a, v) => a.Processors = v);
 
 		/// <inheritdoc />
 		public PutPipelineDescriptor Processors(Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> selector) =>
-			Assign(a => a.Processors = selector?.Invoke(new ProcessorsDescriptor())?.Value);
+			Assign(selector, (a, v) => a.Processors = v?.Invoke(new ProcessorsDescriptor())?.Value);
 
 		/// <inheritdoc />
-		public PutPipelineDescriptor OnFailure(IEnumerable<IProcessor> processors) => Assign(a => a.OnFailure = processors.ToListOrNullIfEmpty());
+		public PutPipelineDescriptor OnFailure(IEnumerable<IProcessor> processors) => Assign(processors.ToListOrNullIfEmpty(), (a, v) => a.OnFailure = v);
 
 		/// <inheritdoc />
 		public PutPipelineDescriptor OnFailure(Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> selector) =>
-			Assign(a => a.OnFailure = selector?.Invoke(new ProcessorsDescriptor())?.Value);
+			Assign(selector, (a, v) => a.OnFailure = v?.Invoke(new ProcessorsDescriptor())?.Value);
 	}
 }

@@ -63,15 +63,15 @@ namespace Nest
 		bool? IForeachProcessor.IgnoreMissing { get; set; }
 
 		/// <inheritdoc cref="IForeachProcessor.Field"/>
-		public ForeachProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public ForeachProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IForeachProcessor.Field"/>
 		public ForeachProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IForeachProcessor.Processor"/>
 		public ForeachProcessorDescriptor<T> Processor(Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> selector) =>
-			Assign(a => a.Processor = selector?.Invoke(new ProcessorsDescriptor())?.Value?.FirstOrDefault());
+			Assign(selector, (a, v) => a.Processor = v?.Invoke(new ProcessorsDescriptor())?.Value?.FirstOrDefault());
 
 		/// <inheritdoc cref="IForeachProcessor.IgnoreMissing" />
 		public ForeachProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);

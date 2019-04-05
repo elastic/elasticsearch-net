@@ -68,11 +68,11 @@ namespace Nest
 		Field ISplitProcessor.TargetField { get; set; }
 
 		/// <inheritdoc cref="SplitProcessor.Field" />
-		public SplitProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public SplitProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="SplitProcessor.Field" />
 		public SplitProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="SplitProcessor.TargetField" />
 		public SplitProcessorDescriptor<T> TargetField(Field field) => Assign(a => a.TargetField = field);
@@ -82,7 +82,7 @@ namespace Nest
 			Assign(a => a.TargetField = objectPath);
 
 		/// <inheritdoc cref="SplitProcessor.Separator" />
-		public SplitProcessorDescriptor<T> Separator(string separator) => Assign(a => a.Separator = separator);
+		public SplitProcessorDescriptor<T> Separator(string separator) => Assign(separator, (a, v) => a.Separator = v);
 
 		/// <inheritdoc cref="SplitProcessor.IgnoreMissing" />
 		public SplitProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);

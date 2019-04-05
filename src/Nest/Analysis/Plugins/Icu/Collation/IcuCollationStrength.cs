@@ -9,6 +9,9 @@ namespace Nest
 	/// difference considered significant during comparison.
 	/// See also: http://icu-project.org/apiref/icu4j/com/ibm/icu/text/Collator.html
 	/// </summary>
+	/// <remarks>
+	/// Requires analysis-icu plugin to be installed
+	/// </remarks>
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum IcuCollationStrength
 	{

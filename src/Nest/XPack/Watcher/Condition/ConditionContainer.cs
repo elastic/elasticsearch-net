@@ -90,24 +90,24 @@ namespace Nest
 	/// <inheritdoc />
 	public class ConditionDescriptor : ConditionContainer
 	{
-		private ConditionDescriptor Assign(Action<IConditionContainer> assigner) => Fluent.Assign(this, assigner);
+		private ConditionDescriptor Assign<TValue>(TValue value, Action<IConditionContainer, TValue> assigner) => Fluent.Assign(this, value, assigner);
 
 		/// <inheritdoc />
-		public ConditionDescriptor Always() => Assign(a => a.Always = new AlwaysCondition());
+		public ConditionDescriptor Always() => Assign(new AlwaysCondition(), (a,v) => a.Always = v);
 
 		/// <inheritdoc />
-		public ConditionDescriptor Never() => Assign(a => a.Never = new NeverCondition());
+		public ConditionDescriptor Never() => Assign(new NeverCondition(), (a, v) => a.Never = v);
 
 		/// <inheritdoc />
 		public ConditionDescriptor Compare(Func<CompareConditionDescriptor, ICompareCondition> selector) =>
-			Assign(a => a.Compare = selector?.Invoke(new CompareConditionDescriptor()));
+			Assign(selector, (a, v) => a.Compare = v?.Invoke(new CompareConditionDescriptor()));
 
 		/// <inheritdoc />
 		public ConditionDescriptor ArrayCompare(Func<ArrayCompareConditionDescriptor, IArrayCompareCondition> selector) =>
-			Assign(a => a.ArrayCompare = selector?.Invoke(new ArrayCompareConditionDescriptor()));
+			Assign(selector,(a, v) => a.ArrayCompare = v?.Invoke(new ArrayCompareConditionDescriptor()));
 
 		/// <inheritdoc />
 		public ConditionDescriptor Script(Func<ScriptConditionDescriptor, IScriptCondition> selector) =>
-			Assign(a => a.Script = selector?.Invoke(new ScriptConditionDescriptor()));
+			Assign(selector, (a, v) => a.Script = v?.Invoke(new ScriptConditionDescriptor()));
 	}
 }

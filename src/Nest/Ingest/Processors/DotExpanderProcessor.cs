@@ -53,13 +53,13 @@ namespace Nest
 		string IDotExpanderProcessor.Path { get; set; }
 
 		/// <inheritdoc cref="IDotExpanderProcessor.Field" />
-		public DotExpanderProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public DotExpanderProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IDotExpanderProcessor.Field" />
 		public DotExpanderProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IDotExpanderProcessor.Path" />
-		public DotExpanderProcessorDescriptor<T> Path(string path) => Assign(a => a.Path = path);
+		public DotExpanderProcessorDescriptor<T> Path(string path) => Assign(path, (a, v) => a.Path = v);
 	}
 }

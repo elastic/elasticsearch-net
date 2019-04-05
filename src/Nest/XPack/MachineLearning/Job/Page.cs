@@ -32,9 +32,9 @@ namespace Nest
 		int? IPage.Size { get; set; }
 
 		/// <inheritdoc />
-		public PageDescriptor From(int? from) => Assign(a => a.From = from);
+		public PageDescriptor From(int? from) => Assign(from, (a, v) => a.From = v);
 
 		/// <inheritdoc />
-		public PageDescriptor Size(int? size) => Assign(a => a.Size = size);
+		public PageDescriptor Size(int? size) => Assign(size, (a, v) => a.Size = v);
 	}
 }

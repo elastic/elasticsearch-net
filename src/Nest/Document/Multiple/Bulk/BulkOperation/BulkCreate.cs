@@ -52,11 +52,11 @@ namespace Nest
 		/// <summary>
 		/// The object to update, if id is not manually set it will be inferred from the object
 		/// </summary>
-		public BulkCreateDescriptor<T> Document(T @object) => Assign(a => a.Document = @object);
+		public BulkCreateDescriptor<T> Document(T @object) => Assign(@object, (a, v) => a.Document = v);
 
 		/// <summary>
 		/// The pipeline id to preprocess documents with
 		/// </summary>
-		public BulkCreateDescriptor<T> Pipeline(string pipeline) => Assign(a => a.Pipeline = pipeline);
+		public BulkCreateDescriptor<T> Pipeline(string pipeline) => Assign(pipeline, (a, v) => a.Pipeline = v);
 	}
 }

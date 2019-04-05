@@ -112,36 +112,36 @@ namespace Nest
 		/// <summary>
 		/// Maximum number of terms that must be returned per field. Defaults to 25.
 		/// </summary>
-		public TermVectorFilterDescriptor MaximimumNumberOfTerms(int? maxNumTerms) => Assign(a => a.MaximumNumberOfTerms = maxNumTerms);
+		public TermVectorFilterDescriptor MaximimumNumberOfTerms(int? maxNumTerms) => Assign(maxNumTerms, (a, v) => a.MaximumNumberOfTerms = v);
 
 		/// <summary>
 		/// Ignore words with less than this frequency in the source doc. Defaults to 1.
 		/// </summary>
-		public TermVectorFilterDescriptor MinimumTermFrequency(int? minTermFreq) => Assign(a => a.MinimumTermFrequency = minTermFreq);
+		public TermVectorFilterDescriptor MinimumTermFrequency(int? minTermFreq) => Assign(minTermFreq, (a, v) => a.MinimumTermFrequency = v);
 
 		/// <summary>
 		/// Ignore words with more than this frequency in the source doc. Defaults to unbounded.
 		/// </summary>
-		public TermVectorFilterDescriptor MaximumTermFrequency(int? maxTermFreq) => Assign(a => a.MaximumTermFrequency = maxTermFreq);
+		public TermVectorFilterDescriptor MaximumTermFrequency(int? maxTermFreq) => Assign(maxTermFreq, (a, v) => a.MaximumTermFrequency = v);
 
 		/// <summary>
 		/// Ignore terms which do not occur in at least this many docs. Defaults to 1.
 		/// </summary>
-		public TermVectorFilterDescriptor MinimumDocumentFrequency(int? minDocFreq) => Assign(a => a.MinimumDocumentFrequency = minDocFreq);
+		public TermVectorFilterDescriptor MinimumDocumentFrequency(int? minDocFreq) => Assign(minDocFreq, (a, v) => a.MinimumDocumentFrequency = v);
 
 		/// <summary>
 		/// Ignore words which occur in more than this many docs. Defaults to unbounded.
 		/// </summary>
-		public TermVectorFilterDescriptor MaximumDocumentFrequency(int? maxDocFreq) => Assign(a => a.MaximumDocumentFrequency = maxDocFreq);
+		public TermVectorFilterDescriptor MaximumDocumentFrequency(int? maxDocFreq) => Assign(maxDocFreq, (a, v) => a.MaximumDocumentFrequency = v);
 
 		/// <summary>
 		/// The minimum word length below which words will be ignored. Defaults to 0.
 		/// </summary>
-		public TermVectorFilterDescriptor MinimumWordLength(int? minWordLength) => Assign(a => a.MinimumWordLength = minWordLength);
+		public TermVectorFilterDescriptor MinimumWordLength(int? minWordLength) => Assign(minWordLength, (a, v) => a.MinimumWordLength = v);
 
 		/// <summary>
 		/// The maximum word length above which words will be ignored. Defaults to unbounded.
 		/// </summary>
-		public TermVectorFilterDescriptor MaximumWordLength(int? maxWordLength) => Assign(a => a.MaximumWordLength = maxWordLength);
+		public TermVectorFilterDescriptor MaximumWordLength(int? maxWordLength) => Assign(maxWordLength, (a, v) => a.MaximumWordLength = v);
 	}
 }

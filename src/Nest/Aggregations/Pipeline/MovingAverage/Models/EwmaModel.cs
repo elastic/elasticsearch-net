@@ -21,6 +21,6 @@ namespace Nest
 		float? IEwmaModel.Alpha { get; set; }
 		string IMovingAverageModel.Name { get; } = "ewma";
 
-		public EwmaModelDescriptor Alpha(float? alpha) => Assign(a => a.Alpha = alpha);
+		public EwmaModelDescriptor Alpha(float? alpha) => Assign(alpha, (a, v) => a.Alpha = v);
 	}
 }

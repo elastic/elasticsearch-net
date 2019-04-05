@@ -52,12 +52,12 @@ namespace Nest
 		EdgeNGramSide? IEdgeNGramTokenFilter.Side { get; set; }
 
 		/// <inheritdoc />
-		public EdgeNGramTokenFilterDescriptor MinGram(int? minGram) => Assign(a => a.MinGram = minGram);
+		public EdgeNGramTokenFilterDescriptor MinGram(int? minGram) => Assign(minGram, (a, v) => a.MinGram = v);
 
 		/// <inheritdoc />
-		public EdgeNGramTokenFilterDescriptor MaxGram(int? maxGram) => Assign(a => a.MaxGram = maxGram);
+		public EdgeNGramTokenFilterDescriptor MaxGram(int? maxGram) => Assign(maxGram, (a, v) => a.MaxGram = v);
 
 		/// <inheritdoc />
-		public EdgeNGramTokenFilterDescriptor Side(EdgeNGramSide? side) => Assign(a => a.Side = side);
+		public EdgeNGramTokenFilterDescriptor Side(EdgeNGramSide? side) => Assign(side, (a, v) => a.Side = v);
 	}
 }

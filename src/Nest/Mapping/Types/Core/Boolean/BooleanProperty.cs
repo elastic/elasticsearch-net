@@ -44,13 +44,13 @@ namespace Nest
 		bool? IBooleanProperty.Index { get; set; }
 		bool? IBooleanProperty.NullValue { get; set; }
 
-		public BooleanPropertyDescriptor<T> Boost(double? boost) => Assign(a => a.Boost = boost);
+		public BooleanPropertyDescriptor<T> Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
 
-		public BooleanPropertyDescriptor<T> Index(bool? index = true) => Assign(a => a.Index = index);
+		public BooleanPropertyDescriptor<T> Index(bool? index = true) => Assign(index, (a, v) => a.Index = v);
 
-		public BooleanPropertyDescriptor<T> NullValue(bool? nullValue) => Assign(a => a.NullValue = nullValue);
+		public BooleanPropertyDescriptor<T> NullValue(bool? nullValue) => Assign(nullValue, (a, v) => a.NullValue = v);
 
 		public BooleanPropertyDescriptor<T> Fielddata(Func<NumericFielddataDescriptor, INumericFielddata> selector) =>
-			Assign(a => a.Fielddata = selector(new NumericFielddataDescriptor()));
+			Assign(selector(new NumericFielddataDescriptor()), (a, v) => a.Fielddata = v);
 	}
 }

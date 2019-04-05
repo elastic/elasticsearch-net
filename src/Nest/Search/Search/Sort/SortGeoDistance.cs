@@ -61,21 +61,21 @@ namespace Nest
 		bool? IGeoDistanceSort.IgnoreUnmapped { get; set; }
 		IEnumerable<GeoLocation> IGeoDistanceSort.Points { get; set; }
 
-		public SortGeoDistanceDescriptor<T> Points(params GeoLocation[] geoLocations) => Assign(a => a.Points = geoLocations);
+		public SortGeoDistanceDescriptor<T> Points(params GeoLocation[] geoLocations) => Assign(geoLocations, (a, v) => a.Points = v);
 
-		public SortGeoDistanceDescriptor<T> Points(IEnumerable<GeoLocation> geoLocations) => Assign(a => a.Points = geoLocations);
+		public SortGeoDistanceDescriptor<T> Points(IEnumerable<GeoLocation> geoLocations) => Assign(geoLocations, (a, v) => a.Points = v);
 
 		/// <inheritdoc cref="IGeoDistanceSort.GeoUnit" />
-		public SortGeoDistanceDescriptor<T> Unit(DistanceUnit? unit) => Assign(a => a.GeoUnit = unit);
+		public SortGeoDistanceDescriptor<T> Unit(DistanceUnit? unit) => Assign(unit, (a, v) => a.GeoUnit = v);
 
 		/// <inheritdoc cref="IGeoDistanceSort.DistanceType" />
-		public SortGeoDistanceDescriptor<T> DistanceType(GeoDistanceType? distanceType) => Assign(a => a.DistanceType = distanceType);
+		public SortGeoDistanceDescriptor<T> DistanceType(GeoDistanceType? distanceType) => Assign(distanceType, (a, v) => a.DistanceType = v);
 
-		public SortGeoDistanceDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public SortGeoDistanceDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public SortGeoDistanceDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
+		public SortGeoDistanceDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IGeoDistanceSort.IgnoreUnmapped" />
-		public SortGeoDistanceDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(a => a.IgnoreUnmapped = ignoreUnmapped);
+		public SortGeoDistanceDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmapped = v);
 	}
 }
