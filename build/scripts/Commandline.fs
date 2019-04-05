@@ -174,7 +174,8 @@ Execution hints can be provided anywhere on the command line
                 | ("test", _)
                 | ("cluster", _)
                 | ("integrate", _) 
-                | ("build", _) -> false
+                | ("build", _)
+                | ("diff", _) -> false
                 | _ -> true;
             CommandArguments = Unknown
             DoSourceLink = false
