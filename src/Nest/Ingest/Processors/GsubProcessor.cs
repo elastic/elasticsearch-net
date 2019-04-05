@@ -81,11 +81,11 @@ namespace Nest
 			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IGsubProcessor.TargetField" />
-		public GsubProcessorDescriptor<T> TargetField(Field field) => Assign(a => a.TargetField = field);
+		public GsubProcessorDescriptor<T> TargetField(Field field) => Assign(field, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc cref="IGsubProcessor.TargetField" />
 		public GsubProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.TargetField = objectPath);
+			Assign(objectPath, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc cref="IGsubProcessor.Pattern" />
 		public GsubProcessorDescriptor<T> Pattern(string pattern) => Assign(pattern, (a, v) => a.Pattern = v);
@@ -94,6 +94,6 @@ namespace Nest
 		public GsubProcessorDescriptor<T> Replacement(string replacement) => Assign(replacement, (a, v) => a.Replacement = v);
 
 		/// <inheritdoc cref="IGsubProcessor.IgnoreMissing" />
-		public GsubProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);
+		public GsubProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissing = v);
 	}
 }

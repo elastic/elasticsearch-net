@@ -53,10 +53,10 @@ namespace Nest
 
 		/// <inheritdoc cref="ISetSecurityUserProcessor.Properties"/>
 		public SetSecurityUserProcessorDescriptor<T> Properties(IEnumerable<string> properties) =>
-			Assign(a => a.Properties = properties);
+			Assign(properties, (a, v) => a.Properties = v);
 
 		/// <inheritdoc cref="ISetSecurityUserProcessor.Properties"/>
 		public SetSecurityUserProcessorDescriptor<T> Properties(params string[] properties) =>
-			Assign(a => a.Properties = properties);
+			Assign(properties, (a, v) => a.Properties = v);
 	}
 }

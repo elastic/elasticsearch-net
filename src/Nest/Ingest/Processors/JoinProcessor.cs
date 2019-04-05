@@ -62,11 +62,11 @@ namespace Nest
 			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IJoinProcessor.TargetField"/>
-		public JoinProcessorDescriptor<T> TargetField(Field field) => Assign(a => a.TargetField = field);
+		public JoinProcessorDescriptor<T> TargetField(Field field) => Assign(field, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc cref="IJoinProcessor.TargetField"/>
 		public JoinProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.TargetField = objectPath);
+			Assign(objectPath, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc cref="IJoinProcessor.Separator"/>
 		public JoinProcessorDescriptor<T> Separator(string separator) => Assign(separator, (a, v) => a.Separator = v);

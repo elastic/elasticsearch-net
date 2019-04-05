@@ -135,7 +135,7 @@ namespace Nest
 		public KeyValueProcessorDescriptor<T> ValueSplit(string split) => Assign(split, (a, v) => a.ValueSplit = v);
 
 		/// <inheritdoc cref="IKeyValueProcessor.Prefix" />
-		public KeyValueProcessorDescriptor<T> Prefix(string prefix) => Assign(a => a.Prefix = prefix);
+		public KeyValueProcessorDescriptor<T> Prefix(string prefix) => Assign(prefix, (a, v) => a.Prefix = v);
 
 		/// <inheritdoc cref="IKeyValueProcessor.IgnoreMissing" />
 		public KeyValueProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissing = v);
@@ -147,10 +147,10 @@ namespace Nest
 		public KeyValueProcessorDescriptor<T> IncludeKeys(params string[] includeKeys) => Assign(includeKeys, (a, v) => a.IncludeKeys = v);
 
 		/// <inheritdoc cref="IKeyValueProcessor.ExcludeKeys" />
-		public KeyValueProcessorDescriptor<T> ExcludeKeys(IEnumerable<string> excludeKeys) => Assign(a => a.ExcludeKeys = excludeKeys);
+		public KeyValueProcessorDescriptor<T> ExcludeKeys(IEnumerable<string> excludeKeys) => Assign(excludeKeys, (a, v) => a.ExcludeKeys = v);
 
 		/// <inheritdoc cref="IKeyValueProcessor.ExcludeKeys" />
-		public KeyValueProcessorDescriptor<T> ExcludeKeys(params string[] excludeKeys) => Assign(a => a.ExcludeKeys = excludeKeys);
+		public KeyValueProcessorDescriptor<T> ExcludeKeys(params string[] excludeKeys) => Assign(excludeKeys, (a, v) => a.ExcludeKeys = v);
 
 		/// <inheritdoc cref="IKeyValueProcessor.TrimKey" />
 		public KeyValueProcessorDescriptor<T> TrimKey(string trimKeys) => Assign(trimKeys, (a, v) => a.TrimKey = v);

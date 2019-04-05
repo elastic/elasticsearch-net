@@ -66,11 +66,11 @@ namespace Nest
 			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="ISortProcessor.TargetField" />
-		public SortProcessorDescriptor<T> TargetField(Field field) => Assign(a => a.TargetField = field);
+		public SortProcessorDescriptor<T> TargetField(Field field) => Assign(field, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc cref="ISortProcessor.TargetField" />
 		public SortProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.TargetField = objectPath);
+			Assign(objectPath, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc cref="ISortProcessor.Order" />
 		public SortProcessorDescriptor<T> Order(SortOrder? order = SortOrder.Ascending) =>

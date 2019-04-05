@@ -71,6 +71,6 @@ namespace Nest
 			Assign(objectPath, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc cref="IRenameProcessor.IgnoreMissing" />
-		public RenameProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);
+		public RenameProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissing = v);
 	}
 }

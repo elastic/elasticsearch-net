@@ -65,13 +65,13 @@ namespace Nest
 			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="ITrimProcessor.TargetField" />
-		public TrimProcessorDescriptor<T> TargetField(Field field) => Assign(a => a.TargetField = field);
+		public TrimProcessorDescriptor<T> TargetField(Field field) => Assign(field, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc cref="ITrimProcessor.TargetField" />
 		public TrimProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.TargetField = objectPath);
+			Assign(objectPath, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc cref="ITrimProcessor.IgnoreMissing" />
-		public TrimProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);
+		public TrimProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissing = v);
 	}
 }

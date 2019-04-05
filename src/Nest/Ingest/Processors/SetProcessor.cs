@@ -66,6 +66,6 @@ namespace Nest
 		public SetProcessorDescriptor<T> Value<TValue>(TValue value) => Assign(value, (a, v) => a.Value = v);
 
 		/// <inheritdoc cref="ISetProcessor.Override"/>
-		public SetProcessorDescriptor<T> Override(bool? @override = true) => Assign(a => a.Override = @override);
+		public SetProcessorDescriptor<T> Override(bool? @override = true) => Assign(@override, (a, v) => a.Override = v);
 	}
 }

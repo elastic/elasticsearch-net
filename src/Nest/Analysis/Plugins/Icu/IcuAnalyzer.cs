@@ -46,9 +46,9 @@ namespace Nest
 		IcuNormalizationMode? IIcuAnalyzer.Mode { get; set; }
 
 		/// <inheritdoc cref="IIcuAnalyzer.Method"/>
-		public IcuAnalyzerDescriptor Method(IcuNormalizationType? method) => Assign(a => a.Method = method);
+		public IcuAnalyzerDescriptor Method(IcuNormalizationType? method) => Assign(method, (a, v) => a.Method = v);
 
 		/// <inheritdoc cref="IIcuAnalyzer.Mode"/>
-		public IcuAnalyzerDescriptor Mode(IcuNormalizationMode? mode) => Assign(a => a.Mode = mode);
+		public IcuAnalyzerDescriptor Mode(IcuNormalizationMode? mode) => Assign(mode, (a, v) => a.Mode = v);
 	}
 }

@@ -62,14 +62,14 @@ namespace Nest
 			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="ILowercaseProcessor.TargetField" />
-		public LowercaseProcessorDescriptor<T> TargetField(Field field) => Assign(a => a.TargetField = field);
+		public LowercaseProcessorDescriptor<T> TargetField(Field field) => Assign(field, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc cref="ILowercaseProcessor.TargetField" />
 		public LowercaseProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.TargetField = objectPath);
+			Assign(objectPath, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc cref="ILowercaseProcessor.IgnoreMissing" />
 		public LowercaseProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) =>
-			Assign(a => a.IgnoreMissing = ignoreMissing);
+			Assign(ignoreMissing, (a, v) => a.IgnoreMissing = v);
 	}
 }

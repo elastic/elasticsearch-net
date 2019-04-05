@@ -98,6 +98,6 @@ namespace Nest
 			Assign(traceMatch, (a, v) => a.TraceMatch = v);
 
 		/// <inheritdoc cref="IGrokProcessor.IgnoreMissing" />
-		public GrokProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);
+		public GrokProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissing = v);
 	}
 }

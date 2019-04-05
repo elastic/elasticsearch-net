@@ -82,7 +82,7 @@ namespace Nest
 		public ConvertProcessorDescriptor<T> Type(ConvertProcessorType? type) => Assign(type, (a, v) => a.Type = v);
 
 		/// <inheritdoc cref="IConvertProcessor.IgnoreMissing" />
-		public ConvertProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);
+		public ConvertProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissing = v);
 	}
 
 	[JsonConverter(typeof(StringEnumConverter))]
