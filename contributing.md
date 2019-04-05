@@ -26,9 +26,11 @@ In those cases we tend to pull your bits locally and write tests ourselves, but 
 
 ## Branches
 
-- `1.x` for latest 1.x compatible client
-- `2.x` for 2.x compatible client
-- `master` for the latest client (currently _5.x alpha_)
+- `master` for the latest client (currently _7.x alpha_)
+- `6.x` for 6.x compatible client
+- `5.x` for 5.x compatible client
+- `2.x` for 2.x compatible client (no longer maintained)
+- `1.x` for 1.x compatible client (no longer maintained)
 
 ## Git
 
@@ -36,9 +38,10 @@ We do not require rebased/squashed commits although we do very much appreciate i
 
 Please submit your [Pull Requests](https://help.github.com/articles/creating-a-pull-request/) to 
 
-- [`master`](https://github.com/elastic/elasticsearch-net/tree/master) branch for 5.x
-- [`2.x`](https://github.com/elastic/elasticsearch-net/tree/2.x) branch for 2.x
-- [`1.x`](https://github.com/elastic/elasticsearch-net/tree/1.x) branch for 1.x
+- [`master`](https://github.com/elastic/elasticsearch-net/tree/master) branch for master
+- [`7.x`](https://github.com/elastic/elasticsearch-net/tree/7.x) branch for 7.x
+- [`6.x`](https://github.com/elastic/elasticsearch-net/tree/6.x) branch for 6.x
+- [`5.x`](https://github.com/elastic/elasticsearch-net/tree/5.x) branch for 5.x
 
 # Building the solution
 
@@ -98,7 +101,7 @@ This compiles the solution and skips running tests
 ### Quick Compile and run integration tests
 
 ```bash
-build.bat Integrate [Elasticsearch Version Number e.g. 2.2.0]
+build.bat integrate [Elasticsearch Version Number e.g. 5.0.0]
 ```
 will quick compile the solution and run integration tests against the target Elasticsearch version. The first time this is run for a version of Elasticsearch, it will download Elasticsearch and unzip Elasticsearch, install the plugins necessary to run the integration tests, and start the node. Because of this, the first run may take some time to start.
 
