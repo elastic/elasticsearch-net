@@ -79,7 +79,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 			{
 				Index = CallIsolatedValue,
 				Query = new MatchAllQuery(),
-				Sort = new List<ISort> { new SortField { Field = "id", Order = SortOrder.Ascending } },
+				Sort = new List<ISort> { new FieldSort { Field = "id", Order = SortOrder.Ascending } },
 				Size = 100,
 				Slice = new SlicedScroll { Field = "id", Id = 0, Max = 2 }
 			},

@@ -17,16 +17,16 @@ namespace Nest
 		FieldType? UnmappedType { get; set; }
 	}
 
-	public class SortField : SortBase, IFieldSort
+	public class FieldSort : SortBase, IFieldSort
 	{
-		public static readonly IList<ISort> ByDocumentOrder = new ReadOnlyCollection<ISort>(new List<ISort> { new SortField { Field = "_doc" } });
+		public static readonly IList<ISort> ByDocumentOrder = new ReadOnlyCollection<ISort>(new List<ISort> { new FieldSort { Field = "_doc" } });
 		public Field Field { get; set; }
 		public bool? IgnoreUnmappedFields { get; set; }
 		public FieldType? UnmappedType { get; set; }
 		protected override Field SortKey => Field;
 	}
 
-	public class SortFieldDescriptor<T> : SortDescriptorBase<SortFieldDescriptor<T>, IFieldSort, T>, IFieldSort where T : class
+	public class FieldSortDescriptor<T> : SortDescriptorBase<FieldSortDescriptor<T>, IFieldSort, T>, IFieldSort where T : class
 	{
 		private Field _field;
 		protected override Field SortKey => _field;
@@ -34,20 +34,20 @@ namespace Nest
 		bool? IFieldSort.IgnoreUnmappedFields { get; set; }
 		FieldType? IFieldSort.UnmappedType { get; set; }
 
-		public virtual SortFieldDescriptor<T> Field(Field field)
+		public virtual FieldSortDescriptor<T> Field(Field field)
 		{
 			_field = field;
 			return this;
 		}
 
-		public virtual SortFieldDescriptor<T> Field(Expression<Func<T, object>> objectPath)
+		public virtual FieldSortDescriptor<T> Field(Expression<Func<T, object>> objectPath)
 		{
 			_field = objectPath;
 			return this;
 		}
 
-		public virtual SortFieldDescriptor<T> UnmappedType(FieldType? type) => Assign(type, (a, v) => a.UnmappedType = v);
+		public virtual FieldSortDescriptor<T> UnmappedType(FieldType? type) => Assign(type, (a, v) => a.UnmappedType = v);
 
-		public virtual SortFieldDescriptor<T> IgnoreUnmappedFields(bool? ignore = true) => Assign(ignore, (a, v) => a.IgnoreUnmappedFields = v);
+		public virtual FieldSortDescriptor<T> IgnoreUnmappedFields(bool? ignore = true) => Assign(ignore, (a, v) => a.IgnoreUnmappedFields = v);
 	}
 }

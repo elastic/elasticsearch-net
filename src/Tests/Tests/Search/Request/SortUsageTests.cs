@@ -138,11 +138,11 @@ namespace Tests.Search.Request
 			{
 				Sort = new List<ISort>
 				{
-					new SortField { Field = "startedOn", Order = SortOrder.Ascending },
-					new SortField { Field = "name", Order = SortOrder.Descending },
-					new SortField { Field = "_score", Order = SortOrder.Descending },
-					new SortField { Field = "_doc", Order = SortOrder.Ascending },
-					new SortField
+					new FieldSort { Field = "startedOn", Order = SortOrder.Ascending },
+					new FieldSort { Field = "name", Order = SortOrder.Descending },
+					new FieldSort { Field = "_score", Order = SortOrder.Descending },
+					new FieldSort { Field = "_doc", Order = SortOrder.Ascending },
+					new FieldSort
 					{
 						Field = Field<Project>(p => p.Tags.First().Added),
 						Order = SortOrder.Descending,
@@ -154,7 +154,7 @@ namespace Tests.Search.Request
 						NestedFilter = new MatchAllQuery(),
 #pragma warning restore 618
 					},
-					new SortField
+					new FieldSort
 					{
 						Field = Field<Project>(p => p.NumberOfCommits),
 						Order = SortOrder.Descending,
@@ -165,7 +165,7 @@ namespace Tests.Search.Request
 						Field = "location",
 						Order = SortOrder.Ascending,
 						DistanceType = GeoDistanceType.Arc,
-						GeoUnit = DistanceUnit.Centimeters,
+						Unit = DistanceUnit.Centimeters,
 						Mode = SortMode.Min,
 						Points = new[] { new GeoLocation(70, -70), new GeoLocation(-12, 12) }
 					},
@@ -247,7 +247,7 @@ namespace Tests.Search.Request
 			{
 				Sort = new List<ISort>
 				{
-					new SortField
+					new FieldSort
 					{
 						Field = Field<Project>(p => p.Tags.First().Added),
 						Order = SortOrder.Descending,
@@ -318,7 +318,7 @@ namespace Tests.Search.Request
 						IgnoreUnmapped = true,
 						Order = SortOrder.Ascending,
 						DistanceType = GeoDistanceType.Arc,
-						GeoUnit = DistanceUnit.Centimeters,
+						Unit = DistanceUnit.Centimeters,
 						Mode = SortMode.Min,
 						Points = new[] { new GeoLocation(70, -70), new GeoLocation(-12, 12) }
 					},
