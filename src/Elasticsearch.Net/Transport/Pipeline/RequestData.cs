@@ -138,15 +138,22 @@ namespace Elasticsearch.Net
 	{
 		internal static string ToQueryString(this NameValueCollection nv)
 		{
-			if (nv == null) return string.Empty;
-			if (nv.AllKeys.Length == 0) return string.Empty;
+			if (nv == null || nv.AllKeys.Length == 0) return string.Empty;
 
-			string E(string v)
+			// initialize with capacity for number of key/values with length 5 each
+			var builder = new StringBuilder("?", nv.AllKeys.Length * 2 * 5);
+			for (int i = 0; i < nv.AllKeys.Length; i++)
 			{
-				return Uri.EscapeDataString(v);
+				if (i != 0)
+					builder.Append("&");
+
+				var key = nv.AllKeys[i];
+				builder.Append(Uri.EscapeDataString(key));
+				builder.Append("=");
+				builder.Append(Uri.EscapeDataString(nv[key]));
 			}
 
-			return "?" + string.Join("&", nv.AllKeys.Select(key => $"{E(key)}={E(nv[key])}"));
+			return builder.ToString();
 		}
 
 		internal static void UpdateFromDictionary(this NameValueCollection queryString, Dictionary<string, object> queryStringUpdates,
