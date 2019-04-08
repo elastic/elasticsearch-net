@@ -72,7 +72,7 @@ line_of_json_with_no_enters \n
 json_payload_with_enters
 line_of_json_with_no_enters \n
 json_payload_with_enters
-.....
+....
 
 Examples of such endpoints are the http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html#docs-bulk[bulk api]. 
 In `Elasticsearch.Net` you can call these with
