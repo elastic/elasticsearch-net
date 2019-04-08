@@ -35,10 +35,13 @@ namespace Tests.Search.Request
 								missing = "_last",
 								order = "desc",
 								mode = "avg",
-								nested_path = "tags",
-								nested_filter = new
+								nested = new
 								{
-									match_all = new { }
+									path = "tags",
+									filter = new
+									{
+										match_all = new { }
+									}
 								},
 								unmapped_type = "date"
 							}
@@ -106,8 +109,10 @@ namespace Tests.Search.Request
 					.MissingLast()
 					.UnmappedType(FieldType.Date)
 					.Mode(SortMode.Average)
-					.NestedPath(p => p.Tags)
-					.NestedFilter(q => q.MatchAll())
+					.Nested(n => n
+						.Path(p => p.Tags)
+						.Filter(q => q.MatchAll())
+					)
 				)
 				.Field(f => f
 					.Field(p => p.NumberOfCommits)
@@ -149,10 +154,11 @@ namespace Tests.Search.Request
 						Missing = "_last",
 						UnmappedType = FieldType.Date,
 						Mode = SortMode.Average,
-#pragma warning disable 618
-						NestedPath = Field<Project>(p => p.Tags),
-						NestedFilter = new MatchAllQuery(),
-#pragma warning restore 618
+						Nested = new NestedSort
+						{
+							Path = Field<Project>(p => p.Tags),
+							Filter = new MatchAllQuery()
+						}
 					},
 					new FieldSort
 					{
