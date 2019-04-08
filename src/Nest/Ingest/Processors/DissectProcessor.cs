@@ -22,8 +22,8 @@ namespace Nest
 		[JsonProperty("pattern")]
 		string Pattern { get; set; }
 
-		/// <summary
-		/// If true and field does not exist or is null, the processor quietly exits without modifying the document>
+		/// <summary>
+		/// If <c>true</c> and field does not exist or is null, the processor quietly exits without modifying the document
 		/// </summary>
 		[JsonProperty("ignore_missing")]
 		bool? IgnoreMissing { get; set; }

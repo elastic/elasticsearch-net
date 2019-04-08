@@ -31,7 +31,7 @@ namespace Nest
 		Field TargetField { get; set; }
 	}
 
-	/// <inheritdoc />
+	/// <inheritdoc cref="IJsonProcessor" />
 	public class JsonProcessor : ProcessorBase, IJsonProcessor
 	{
 		/// <inheritdoc />
@@ -46,32 +46,31 @@ namespace Nest
 		protected override string Name => "json";
 	}
 
-	/// <inheritdoc />
+	/// <inheritdoc cref="IJsonProcessor" />
 	public class JsonProcessorDescriptor<T>
 		: ProcessorDescriptorBase<JsonProcessorDescriptor<T>, IJsonProcessor>, IJsonProcessor
 		where T : class
 	{
 		protected override string Name => "json";
 		bool? IJsonProcessor.AddToRoot { get; set; }
-
 		Field IJsonProcessor.Field { get; set; }
 		Field IJsonProcessor.TargetField { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IJsonProcessor.Field" />
 		public JsonProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IJsonProcessor.Field" />
 		public JsonProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
 			Assign(objectPath, (a, v) => a.Field = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IJsonProcessor.TargetField" />
 		public JsonProcessorDescriptor<T> TargetField(Field field) => Assign(field, (a, v) => a.TargetField = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IJsonProcessor.TargetField" />
 		public JsonProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) =>
 			Assign(objectPath, (a, v) => a.TargetField = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IJsonProcessor.AddToRoot" />
 		public JsonProcessorDescriptor<T> AddToRoot(bool? addToRoot = true) => Assign(addToRoot, (a, v) => a.AddToRoot = v);
 	}
 }
