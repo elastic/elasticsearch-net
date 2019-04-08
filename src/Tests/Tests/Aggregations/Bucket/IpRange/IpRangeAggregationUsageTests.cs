@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using Nest;
 using Tests.Configuration;
@@ -57,12 +58,12 @@ namespace Tests.Aggregations.Bucket.IpRange
 			var ipRanges = response.Aggregations.IpRange("ip_ranges");
 			ipRanges.Should().NotBeNull();
 			ipRanges.Buckets.Should().NotBeNull();
-			ipRanges.Buckets.Count.Should().BeGreaterThan(0);
+			ipRanges.Buckets.Count.Should().Be(2);
+			ipRanges.Buckets.First().To.Should().Be("127.0.0.1");
+			ipRanges.Buckets.Last().From.Should().Be("127.0.0.1");
 			foreach (var range in ipRanges.Buckets)
 			{
-				if (TestConfiguration.Instance.InRange("6.4.0"))
-					range.Key.Should().NotBeNullOrEmpty();
-
+				range.Key.Should().NotBeNullOrEmpty();
 				range.DocCount.Should().BeGreaterThan(0);
 			}
 		}
