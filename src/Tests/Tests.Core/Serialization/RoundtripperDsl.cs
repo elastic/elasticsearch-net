@@ -139,7 +139,10 @@ namespace Tests.Core.Serialization
 
 		public JsonRoundTripper AsPropertiesOf<T>(T document) where T : class
 		{
-			var jo = JObject.Parse(Tester.Client.RequestResponseSerializer.SerializeToString(document));
+			var client = Tester.Client;
+			var settings = client.ConnectionSettings;
+
+			var jo = JObject.Parse(client.RequestResponseSerializer.SerializeToString(document, settings.MemoryStreamFactory));
 			var serializedProperties = jo.Properties().Select(p => p.Name);
 			if (!(_expectedJson is IEnumerable<string> sut))
 				throw new ArgumentException("Can not call AsPropertiesOf if sut is not IEnumerable<string>");

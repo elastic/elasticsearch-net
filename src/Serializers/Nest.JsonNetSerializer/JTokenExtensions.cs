@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -12,33 +13,15 @@ namespace Nest.JsonNetSerializer
 		/// <summary>
 		/// Writes a <see cref="JToken" /> to a <see cref="MemoryStream" /> using <see cref="ConnectionSettingsAwareSerializerBase.ExpectedEncoding" />
 		/// </summary>
-		public static MemoryStream ToStream(this JToken token)
+		public static MemoryStream ToStream(this JToken token, IMemoryStreamFactory memoryStreamFactory)
 		{
-			var ms = new MemoryStream();
+			var ms = memoryStreamFactory.Create();
 			using (var streamWriter = new StreamWriter(ms, ConnectionSettingsAwareSerializerBase.ExpectedEncoding,
 				ConnectionSettingsAwareSerializerBase.DefaultBufferSize, true))
 			using (var writer = new JsonTextWriter(streamWriter))
 			{
 				token.WriteTo(writer);
 				writer.Flush();
-				ms.Position = 0;
-				return ms;
-			}
-		}
-
-		/// <summary>
-		/// Writes a <see cref="JToken" /> asynchronously to a <see cref="MemoryStream" /> using
-		/// <see cref="ConnectionSettingsAwareSerializerBase.ExpectedEncoding" />
-		/// </summary>
-		public static async Task<MemoryStream> ToStreamAsync(this JToken token, CancellationToken cancellationToken = default(CancellationToken))
-		{
-			var ms = new MemoryStream();
-			using (var streamWriter = new StreamWriter(ms, ConnectionSettingsAwareSerializerBase.ExpectedEncoding,
-				ConnectionSettingsAwareSerializerBase.DefaultBufferSize, true))
-			using (var writer = new JsonTextWriter(streamWriter))
-			{
-				await token.WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				await writer.FlushAsync(cancellationToken).ConfigureAwait(false);
 				ms.Position = 0;
 				return ms;
 			}

@@ -9,6 +9,8 @@ namespace Elasticsearch.Net
 	{
 		private readonly RecyclableMemoryStreamManager _manager;
 
+		public static RecyclableMemoryStreamFactory DefaultInstance { get; } = new RecyclableMemoryStreamFactory();
+
 		public RecyclableMemoryStreamFactory() =>
 			_manager = new RecyclableMemoryStreamManager { AggressiveBufferReturn = true };
 
