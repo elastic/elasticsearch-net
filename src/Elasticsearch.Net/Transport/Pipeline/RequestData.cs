@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
 namespace Elasticsearch.Net
 {
@@ -42,10 +43,17 @@ namespace Elasticsearch.Net
 			HttpCompression = global.EnableHttpCompression;
 			RequestMimeType = local?.ContentType ?? MimeType;
 			Accept = local?.Accept ?? MimeType;
-			Headers = global.Headers != null ? new NameValueCollection(global.Headers) : new NameValueCollection();
+
+			if (global.Headers != null)
+				Headers = new NameValueCollection(global.Headers);
 
 			if (!string.IsNullOrEmpty(local?.OpaqueId))
+			{
+				if (Headers == null)
+					Headers = new NameValueCollection();
+
 				Headers.Add(OpaqueIdHeader, local.OpaqueId);
+			}
 
 			RunAs = local?.RunAs;
 			SkipDeserializationForStatusCodes = global?.SkipDeserializationForStatusCodes;
@@ -54,7 +62,7 @@ namespace Elasticsearch.Net
 			RequestTimeout = local?.RequestTimeout ?? global.RequestTimeout;
 			PingTimeout =
 				local?.PingTimeout
-				?? global?.PingTimeout
+				?? global.PingTimeout
 				?? (global.ConnectionPool.UsingSsl ? ConnectionConfiguration.DefaultPingTimeoutOnSSL : ConnectionConfiguration.DefaultPingTimeout);
 
 			KeepAliveInterval = (int)(global.KeepAliveInterval?.TotalMilliseconds ?? 2000);
@@ -86,7 +94,7 @@ namespace Elasticsearch.Net
 		public bool MadeItToResponse { get; set; }
 		public IMemoryStreamFactory MemoryStreamFactory { get; }
 
-		public HttpMethod Method { get; private set; }
+		public HttpMethod Method { get; }
 
 		public Node Node { get; set; }
 		public AuditEvent OnFailureAuditEvent => MadeItToResponse ? AuditEvent.BadResponse : AuditEvent.BadRequest;
@@ -111,11 +119,12 @@ namespace Elasticsearch.Net
 		{
 			path = path ?? string.Empty;
 			if (path.Contains("?"))
-				throw new ArgumentException($"{nameof(path)} can not contain querystring parmeters and needs to be already escaped");
+				throw new ArgumentException($"{nameof(path)} can not contain querystring parameters and needs to be already escaped");
 
 			var g = global.QueryStringParameters;
 			var l = request?.QueryString;
-			if (g?.Count == 0 && l?.Count == 0) return path;
+
+			if ((g == null || g.Count == 0) && (l == null || l.Count == 0)) return path;
 
 			//create a copy of the global query string collection if needed.
 			var nv = g == null ? new NameValueCollection() : new NameValueCollection(g);

@@ -212,7 +212,12 @@ namespace Elasticsearch.Net
 			var method = ConvertHttpMethod(requestData.Method);
 			var requestMessage = new HttpRequestMessage(method, requestData.Uri);
 
-			foreach (string key in requestData.Headers) requestMessage.Headers.TryAddWithoutValidation(key, requestData.Headers.GetValues(key));
+			if (requestData.Headers != null)
+			{
+				foreach (string key in requestData.Headers)
+					requestMessage.Headers.TryAddWithoutValidation(key, requestData.Headers.GetValues(key));
+			}
+
 			requestMessage.Headers.Connection.Clear();
 			requestMessage.Headers.ConnectionClose = false;
 			requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(requestData.Accept));
