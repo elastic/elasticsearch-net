@@ -41,6 +41,7 @@ module Tooling =
     type BuildTooling(timeout, path) =
         let timeout = match timeout with | Some t -> t | None -> defaultTimeout
         member this.Path = path
+        member this.ReadInWithTimeout workingDirectory arguments timeout = readInWithTimeout timeout (Some workingDirectory) this.Path arguments
         member this.ExecInWithTimeout workingDirectory arguments timeout = execInWithTimeout timeout (Some workingDirectory) this.Path arguments
         member this.ExecWithTimeout arguments timeout = execInWithTimeout timeout None this.Path arguments
         member this.ExecIn workingDirectory arguments = this.ExecInWithTimeout workingDirectory arguments timeout

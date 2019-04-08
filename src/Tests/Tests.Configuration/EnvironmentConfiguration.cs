@@ -8,7 +8,6 @@ namespace Tests.Configuration
 		{
 			ClusterFilter = Environment.GetEnvironmentVariable("NEST_INTEGRATION_CLUSTER");
 			TestFilter = Environment.GetEnvironmentVariable("NEST_TEST_FILTER");
-			ShowElasticsearchOutputAfterStarted = Environment.GetEnvironmentVariable("NEST_INTEGRATION_SHOW_OUTPUT_AFTER_START") == "1";
 
 			var version = Environment.GetEnvironmentVariable("NEST_INTEGRATION_VERSION");
 			if (!string.IsNullOrEmpty(version)) Mode = TestMode.Integration;

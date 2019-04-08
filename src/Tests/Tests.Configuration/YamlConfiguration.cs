@@ -25,7 +25,6 @@ namespace Tests.Configuration
 			ForceReseed = BoolConfig("force_reseed", false);
 			TestOnlyOne = BoolConfig("test_only_one", false);
 			TestAgainstAlreadyRunningElasticsearch = BoolConfig("test_against_already_running_elasticsearch", true);
-			ShowElasticsearchOutputAfterStarted = BoolConfig("elasticsearch_out_after_started", false);
 			ClusterFilter = _config.ContainsKey("cluster_filter") ? _config["cluster_filter"] : null;
 			TestFilter = _config.ContainsKey("test_filter") ? _config["test_filter"] : null;
 
