@@ -20,8 +20,8 @@ using Tests.Framework.Integration;
 namespace Tests.XPack.CrossClusterReplication
 {
 	[SkipVersion("<6.5.0", "")]
-	[BlockedByIssue("CCR change i n structure, will be fixed on 6.x and forward ported")]
-	public class CrossClusterReplicationFollowTests : CoordinatedIntegrationTestBase<WritableCluster>
+	[BlockedByIssue("CCR change in structure, will be fixed on 6.x and forward ported")]
+	public class CrossClusterReplicationFollowTests : CoordinatedIntegrationTestBase<XPackCluster>
 	{
 		private const string CloseIndexStep = nameof(CloseIndexStep);
 		private const string CountAfterStep = nameof(CountAfterStep);
@@ -41,7 +41,7 @@ namespace Tests.XPack.CrossClusterReplication
 
 		private static readonly Project[] Data = Project.Generator.GenerateLazy(1000).ToArray();
 
-		public CrossClusterReplicationFollowTests(WritableCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage, Prefix)
+		public CrossClusterReplicationFollowTests(XPackCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage, Prefix)
 		{
 			{
 				CreateIndexStep, u => u.Calls<CreateIndexDescriptor, CreateIndexRequest, ICreateIndexRequest, ICreateIndexResponse>(

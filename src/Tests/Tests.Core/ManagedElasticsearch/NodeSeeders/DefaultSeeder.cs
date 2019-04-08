@@ -91,7 +91,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			};
 
 			if (TestConfiguration.Instance.InRange(">=6.5.0"))
-				clusterConfiguration += new RemoteClusterConfiguration()
+				clusterConfiguration += new RemoteClusterConfiguration
 				{
 					{ RemoteClusterName, "127.0.0.1:9300" }
 				};

@@ -6,17 +6,21 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
+using Tests.Core.Xunit;
 using Tests.Framework;
 using Tests.Framework.Integration;
 
 namespace Tests.XPack.CrossClusterReplication.AutoFollow.GetAutoFollowPattern
 {
 	[SkipVersion("<6.5.0", "Only available in Elasticsearch 6.5.0+")]
+	[BlockedByIssue("CCR fails license check ElasticsearchException[could not determine the license type "
+		+ "for cluster [remote-cluster]]; nested: ConnectTransportException[[][127.0.0.1:9300] general node "
+		+ "connection failure]; nested: TransportException[handshake failed because connection reset];")]
 	public class GetAutoFollowPatternApiTests
-		: ApiIntegrationTestBase<WritableCluster, IGetAutoFollowPatternResponse, IGetAutoFollowPatternRequest, GetAutoFollowPatternDescriptor,
+		: ApiIntegrationTestBase<XPackCluster, IGetAutoFollowPatternResponse, IGetAutoFollowPatternRequest, GetAutoFollowPatternDescriptor,
 			GetAutoFollowPatternRequest>
 	{
-		public GetAutoFollowPatternApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GetAutoFollowPatternApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
