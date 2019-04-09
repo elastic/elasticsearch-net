@@ -127,9 +127,9 @@ namespace Tests.ClientConcepts.Connection
 				return base.RequestAsync<TResponse>(requestData, cancellationToken);
 			}
 
-			protected override HttpClientHandler CreateHttpClientHandler(RequestData requestData)
+			protected override HttpMessageHandler CreateHttpClientHandler(RequestData requestData)
 			{
-				LastUsedHttpClientHandler = base.CreateHttpClientHandler(requestData);
+				LastUsedHttpClientHandler = (HttpClientHandler)base.CreateHttpClientHandler(requestData);
 				return LastUsedHttpClientHandler;
 			}
 		}

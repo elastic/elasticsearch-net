@@ -90,7 +90,7 @@ namespace Elasticsearch.Net
 
 			using (responseStream)
 			{
-				if (SetSpecialTypes<TResponse>(bytes, out var r))
+				if (SetSpecialTypes<TResponse>(requestData, bytes, out var r))
 					return r;
 
 				if (details.HttpStatusCode.HasValue && requestData.SkipDeserializationForStatusCodes.Contains(details.HttpStatusCode.Value))
@@ -121,7 +121,7 @@ namespace Elasticsearch.Net
 
 			using (responseStream)
 			{
-				if (SetSpecialTypes<TResponse>(bytes, out var r)) return r;
+				if (SetSpecialTypes<TResponse>(requestData, bytes, out var r)) return r;
 
 				if (details.HttpStatusCode.HasValue && requestData.SkipDeserializationForStatusCodes.Contains(details.HttpStatusCode.Value))
 					return null;
@@ -136,7 +136,7 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		private static bool SetSpecialTypes<TResponse>(byte[] bytes, out TResponse cs)
+		private static bool SetSpecialTypes<TResponse>(RequestData requestData, byte[] bytes, out TResponse cs)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			cs = null;
@@ -151,7 +151,7 @@ namespace Elasticsearch.Net
 				cs = new VoidResponse() as TResponse;
 			else if (responseType == typeof(DynamicResponse))
 			{
-				using (var ms = new MemoryStream(bytes))
+				using (var ms = requestData.MemoryStreamFactory.Create(bytes))
 				{
 					var body = LowLevelRequestResponseSerializer.Instance.Deserialize<DynamicBody>(ms);
 					cs = new DynamicResponse(body) as TResponse;
