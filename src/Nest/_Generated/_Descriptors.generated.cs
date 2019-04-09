@@ -4089,16 +4089,34 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public GraphExploreDescriptor<T> Timeout(Time timeout) => Qs("timeout", timeout);
 	}
+	///<summary>descriptor for IlmDeleteLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html</pre></summary>
+	public partial class IlmDeleteLifecycleDescriptor  : RequestDescriptorBase<IlmDeleteLifecycleDescriptor,IlmDeleteLifecycleRequestParameters, IIlmDeleteLifecycleRequest>, IIlmDeleteLifecycleRequest
+	{ 
+		/// <summary>/_ilm/policy/{policy}</summary>
+		public IlmDeleteLifecycleDescriptor() : base(){}
+		// values part of the url path
+		Policy IIlmDeleteLifecycleRequest.Policy => Self.RouteValues.Get<Policy>("policy");
+
+		///<summary>The name of the index lifecycle policy</summary>
+		public IlmDeleteLifecycleDescriptor Policy(Policy policy) => Assign(policy, (a,v)=>a.RouteValues.Optional("policy", v));
+
+		// Request parameters
+
+		///<summary>Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public IlmDeleteLifecycleDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		///<summary>Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public IlmDeleteLifecycleDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+	}
 	///<summary>descriptor for IlmGetLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</pre></summary>
 	public partial class IlmGetLifecycleDescriptor  : RequestDescriptorBase<IlmGetLifecycleDescriptor,IlmGetLifecycleRequestParameters, IIlmGetLifecycleRequest>, IIlmGetLifecycleRequest
 	{ 
 		/// <summary>/_ilm/policy/{policy}</summary>
 		public IlmGetLifecycleDescriptor() : base(){}
 		// values part of the url path
-		string_ IIlmGetLifecycleRequest.Policy => Self.RouteValues.Get<string_>("policy");
+		Policy IIlmGetLifecycleRequest.Policy => Self.RouteValues.Get<Policy>("policy");
 
 		///<summary>The name of the index lifecycle policy</summary>
-		public IlmGetLifecycleDescriptor Policy(string_ policy) => Assign(policy, (a,v)=>a.RouteValues.Optional("policy", v));
+		public IlmGetLifecycleDescriptor Policy(Policy policy) => Assign(policy, (a,v)=>a.RouteValues.Optional("policy", v));
 
 		// Request parameters
 

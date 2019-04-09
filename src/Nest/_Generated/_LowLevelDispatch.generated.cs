@@ -3200,6 +3200,28 @@ namespace Nest
 			throw InvalidDispatch("XpackGraphExplore", p, new [] { GET, POST }, "/{index}/_xpack/graph/_explore", "/{index}/{type}/_xpack/graph/_explore");
 		}
 		
+		internal TResponse IlmDeleteLifecycleDispatch<TResponse>(IRequest<IlmDeleteLifecycleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSet(p.RouteValues.Policy)) return _lowLevel.IlmDeleteLifecycle<TResponse>(p.RouteValues.Policy,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("IlmDeleteLifecycle", p, new [] { DELETE }, "/_ilm/policy/{policy}");
+		}
+		
+		internal Task<TResponse> IlmDeleteLifecycleDispatchAsync<TResponse>(IRequest<IlmDeleteLifecycleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSet(p.RouteValues.Policy)) return _lowLevel.IlmDeleteLifecycleAsync<TResponse>(p.RouteValues.Policy,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("IlmDeleteLifecycle", p, new [] { DELETE }, "/_ilm/policy/{policy}");
+		}
+		
 		internal TResponse IlmGetLifecycleDispatch<TResponse>(IRequest<IlmGetLifecycleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)

@@ -22,7 +22,6 @@ namespace ApiGenerator
 		{
 			"ccr.follow_info.json",
 			"ccr.forget_follower.json",
-			"ilm.delete_lifecycle.json",
 			"ilm.explain_lifecycle.json",
 			"ilm.move_to_step.json",
 			"ilm.put_lifecycle.json",

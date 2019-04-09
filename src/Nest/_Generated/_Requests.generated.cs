@@ -3835,9 +3835,36 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IIlmDeleteLifecycleRequest : IRequest<IlmDeleteLifecycleRequestParameters>
+	{
+		Policy Policy { get; }
+	}
+	///<summary>Request parameters for IlmDeleteLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html</pre></summary>
+	public partial class IlmDeleteLifecycleRequest : PlainRequestBase<IlmDeleteLifecycleRequestParameters>, IIlmDeleteLifecycleRequest
+	{
+		protected IIlmDeleteLifecycleRequest Self => this;
+		///<summary>/_ilm/policy/{policy}</summary>
+		///<param name="policy">Optional, accepts null</param>
+		public IlmDeleteLifecycleRequest(Policy policy) : base(r=>r.Optional("policy", policy)){}
+		// values part of the url path
+		Policy IIlmDeleteLifecycleRequest.Policy => Self.RouteValues.Get<Policy>("policy");
+
+		// Request parameters
+		///<summary>
+		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
+		/// request fails and returns an error. Defaults to 30s.
+		///</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>
+		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
+		/// an error. Defaults to 30s.
+		///</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IIlmGetLifecycleRequest : IRequest<IlmGetLifecycleRequestParameters>
 	{
-		string_ Policy { get; }
+		Policy Policy { get; }
 	}
 	///<summary>Request parameters for IlmGetLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</pre></summary>
 	public partial class IlmGetLifecycleRequest : PlainRequestBase<IlmGetLifecycleRequestParameters>, IIlmGetLifecycleRequest
@@ -3845,11 +3872,11 @@ namespace Nest
 		protected IIlmGetLifecycleRequest Self => this;
 		///<summary>/_ilm/policy/{policy}</summary>
 		///<param name="policy">Optional, accepts null</param>
-		public IlmGetLifecycleRequest(string_ policy) : base(r=>r.Optional("policy", policy)){}
+		public IlmGetLifecycleRequest(Policy policy) : base(r=>r.Optional("policy", policy)){}
 		///<summary>/_ilm/policy</summary>
 		public IlmGetLifecycleRequest() : base(){}
 		// values part of the url path
-		string_ IIlmGetLifecycleRequest.Policy => Self.RouteValues.Get<string_>("policy");
+		Policy IIlmGetLifecycleRequest.Policy => Self.RouteValues.Get<Policy>("policy");
 
 		// Request parameters
 		///<summary>
