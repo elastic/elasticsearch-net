@@ -35,10 +35,13 @@ namespace Tests.Search.Request
 								missing = "_last",
 								order = "desc",
 								mode = "avg",
-								nested_path = "tags",
-								nested_filter = new
+								nested = new
 								{
-									match_all = new { }
+									path = "tags",
+									filter = new
+									{
+										match_all = new { }
+									}
 								},
 								unmapped_type = "date"
 							}
@@ -106,8 +109,10 @@ namespace Tests.Search.Request
 					.MissingLast()
 					.UnmappedType(FieldType.Date)
 					.Mode(SortMode.Average)
-					.NestedPath(p => p.Tags)
-					.NestedFilter(q => q.MatchAll())
+					.Nested(n => n
+						.Path(p => p.Tags)
+						.Filter(q => q.MatchAll())
+					)
 				)
 				.Field(f => f
 					.Field(p => p.NumberOfCommits)
@@ -138,23 +143,24 @@ namespace Tests.Search.Request
 			{
 				Sort = new List<ISort>
 				{
-					new SortField { Field = "startedOn", Order = SortOrder.Ascending },
-					new SortField { Field = "name", Order = SortOrder.Descending },
-					new SortField { Field = "_score", Order = SortOrder.Descending },
-					new SortField { Field = "_doc", Order = SortOrder.Ascending },
-					new SortField
+					new FieldSort { Field = "startedOn", Order = SortOrder.Ascending },
+					new FieldSort { Field = "name", Order = SortOrder.Descending },
+					new FieldSort { Field = "_score", Order = SortOrder.Descending },
+					new FieldSort { Field = "_doc", Order = SortOrder.Ascending },
+					new FieldSort
 					{
 						Field = Field<Project>(p => p.Tags.First().Added),
 						Order = SortOrder.Descending,
 						Missing = "_last",
 						UnmappedType = FieldType.Date,
 						Mode = SortMode.Average,
-#pragma warning disable 618
-						NestedPath = Field<Project>(p => p.Tags),
-						NestedFilter = new MatchAllQuery(),
-#pragma warning restore 618
+						Nested = new NestedSort
+						{
+							Path = Field<Project>(p => p.Tags),
+							Filter = new MatchAllQuery()
+						}
 					},
-					new SortField
+					new FieldSort
 					{
 						Field = Field<Project>(p => p.NumberOfCommits),
 						Order = SortOrder.Descending,
@@ -165,7 +171,7 @@ namespace Tests.Search.Request
 						Field = "location",
 						Order = SortOrder.Ascending,
 						DistanceType = GeoDistanceType.Arc,
-						GeoUnit = DistanceUnit.Centimeters,
+						Unit = DistanceUnit.Centimeters,
 						Mode = SortMode.Min,
 						Points = new[] { new GeoLocation(70, -70), new GeoLocation(-12, 12) }
 					},
@@ -247,7 +253,7 @@ namespace Tests.Search.Request
 			{
 				Sort = new List<ISort>
 				{
-					new SortField
+					new FieldSort
 					{
 						Field = Field<Project>(p => p.Tags.First().Added),
 						Order = SortOrder.Descending,
@@ -318,7 +324,7 @@ namespace Tests.Search.Request
 						IgnoreUnmapped = true,
 						Order = SortOrder.Ascending,
 						DistanceType = GeoDistanceType.Arc,
-						GeoUnit = DistanceUnit.Centimeters,
+						Unit = DistanceUnit.Centimeters,
 						Mode = SortMode.Min,
 						Points = new[] { new GeoLocation(70, -70), new GeoLocation(-12, 12) }
 					},

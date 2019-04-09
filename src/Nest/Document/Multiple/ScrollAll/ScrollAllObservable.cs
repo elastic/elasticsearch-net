@@ -30,7 +30,7 @@ namespace Nest
 			_scrollAllRequest = scrollAllRequest;
 			_searchRequest = scrollAllRequest?.Search ?? new SearchRequest<T>();
 			if (_searchRequest.Sort == null)
-				_searchRequest.Sort = SortField.ByDocumentOrder;
+				_searchRequest.Sort = FieldSort.ByDocumentOrder;
 			_searchRequest.RequestParameters.Scroll = _scrollAllRequest.ScrollTime.ToTimeSpan();
 			_client = client;
 			_compositeCancelTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
