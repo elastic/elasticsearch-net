@@ -41,7 +41,7 @@ Some endpoints need a request body which can be passed in a couple of ways
 var myJson = @"{ ""hello"" : ""world"" }";
 
 client.Index("myindex","mytype","1", myJson);
------
+----
 
 This will call `POST` on `/myindex/mytype/1` with the provided string `myJson` passed verbatim as the request body
 
@@ -50,10 +50,8 @@ This will call `POST` on `/myindex/mytype/1` with the provided string `myJson` p
 
 [source,csharp]
 ----
-
-    var myJson = new { hello = "world" };
-    client.Index("myindex","mytype","1", myJson);
-
+var myJson = new { hello = "world" };
+client.Index("myindex","mytype","1", myJson);
 ----
 
 This will call `POST` on `/myindex/mytype/1` where `myJson` will be serialized by the registered `ISerializer`
@@ -79,7 +77,6 @@ In `Elasticsearch.Net` you can call these with
 
 [source,csharp]
 ----
-
 var bulk = new object[]
 {
     new { index = new { _index = "test", _type="type", _id = "1"  }},
@@ -87,10 +84,7 @@ var bulk = new object[]
 };
 
 client.Bulk(bulk);
-
 ----
 
 `Elasticsearch.Net` will know not to serialize the passed object as `[]` but instead serialize each item seperately and join them up with `\n`. 
 No request in Elasticsearch expects an array as the root object for the request.
-
-
