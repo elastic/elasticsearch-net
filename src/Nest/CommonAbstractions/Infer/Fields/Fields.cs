@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(FieldsJsonConverter))]
+	[ContractJsonConverter(typeof(FieldsJsonConverter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Fields : IUrlParameter, IEnumerable<Field>, IEquatable<Fields>
 	{

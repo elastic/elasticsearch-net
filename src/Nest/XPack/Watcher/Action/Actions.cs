@@ -7,7 +7,7 @@ namespace Nest
 {
 	public interface IActions : IIsADictionary<string, IAction> { }
 
-	[JsonConverter(typeof(ActionsJsonConverter))]
+	[ContractJsonConverter(typeof(ActionsJsonConverter))]
 	public class Actions : IsADictionaryBase<string, IAction>, IActions
 	{
 		public Actions() { }

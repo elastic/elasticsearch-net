@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(CompareConditionConverter))]
+	[ContractJsonConverter(typeof(CompareConditionConverter))]
 	public interface ICompareCondition : ICondition
 	{
 		string Comparison { get; }

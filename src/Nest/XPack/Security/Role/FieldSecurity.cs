@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<FieldSecurity>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<FieldSecurity>))]
 	public interface IFieldSecurity
 	{
 		[JsonProperty("except")]

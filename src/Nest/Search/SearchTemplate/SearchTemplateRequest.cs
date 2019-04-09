@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchTemplateRequest>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<SearchTemplateRequest>))]
 	public partial interface ISearchTemplateRequest : ICovariantSearchRequest
 	{
 		[JsonProperty("id")]

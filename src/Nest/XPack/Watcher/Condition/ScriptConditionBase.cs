@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(ScriptConditionJsonConverter))]
+	[ContractJsonConverter(typeof(ScriptConditionJsonConverter))]
 	public interface IScriptCondition : ICondition
 	{
 		[JsonProperty("lang")]

@@ -5,7 +5,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<IndicesOptions>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<IndicesOptions>))]
 	public interface IIndicesOptions
 	{
 		[JsonProperty("allow_no_indices")]

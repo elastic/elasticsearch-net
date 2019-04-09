@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(RoleMappingRuleBaseJsonConverter))]
+	[ContractJsonConverter(typeof(RoleMappingRuleBaseJsonConverter))]
 	public abstract class RoleMappingRuleBase
 	{
 		[JsonProperty("all")]

@@ -7,7 +7,7 @@ namespace Nest
 	/// Conditions for a watch
 	/// </summary>
 	[JsonObject]
-	[JsonConverter(typeof(ReserializeJsonConverter<ConditionContainer, IConditionContainer>))]
+	[ContractJsonConverter(typeof(ReserializeJsonConverter<ConditionContainer, IConditionContainer>))]
 	public interface IConditionContainer
 	{
 		/// <summary>

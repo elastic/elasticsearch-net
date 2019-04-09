@@ -7,7 +7,6 @@ namespace Nest
 	public class Watch
 	{
 		[JsonProperty("actions")]
-		[JsonConverter(typeof(ActionsJsonConverter))]
 		public Actions Actions { get; internal set; }
 
 		[JsonProperty("condition")]

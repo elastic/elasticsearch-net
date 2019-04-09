@@ -3,7 +3,7 @@
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<NeverCondition>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<NeverCondition>))]
 	public interface INeverCondition : ICondition { }
 
 	public class NeverCondition : ConditionBase, INeverCondition

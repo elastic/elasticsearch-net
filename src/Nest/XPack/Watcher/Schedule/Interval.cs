@@ -27,7 +27,7 @@ namespace Nest
 		Week,
 	}
 
-	[JsonConverter(typeof(IntervalJsonConverter))]
+	[ContractJsonConverter(typeof(IntervalJsonConverter))]
 	public class Interval : ScheduleBase, IComparable<Interval>, IEquatable<Interval>
 	{
 		private const long DaySeconds = 86400;

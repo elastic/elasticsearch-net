@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReserializeJsonConverter<TriggerContainer, ITriggerContainer>))]
+	[ContractJsonConverter(typeof(ReserializeJsonConverter<TriggerContainer, ITriggerContainer>))]
 	public interface ITriggerContainer
 	{
 		[JsonProperty("schedule")]

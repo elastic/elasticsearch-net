@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<TimeOfMonth>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<TimeOfMonth>))]
 	public interface ITimeOfMonth
 	{
 		[JsonProperty("at")]

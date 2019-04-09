@@ -7,11 +7,10 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchInputRequest>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<SearchInputRequest>))]
 	public interface ISearchInputRequest
 	{
 		[JsonProperty("body")]
-		[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchRequest>))]
 		ISearchRequest Body { get; set; }
 
 		[JsonProperty("indices")]
@@ -25,7 +24,6 @@ namespace Nest
 		SearchType? SearchType { get; set; }
 
 		[JsonProperty("template")]
-		[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchTemplateRequest>))]
 		ISearchTemplateRequest Template { get; set; }
 
 		[JsonProperty("types")]

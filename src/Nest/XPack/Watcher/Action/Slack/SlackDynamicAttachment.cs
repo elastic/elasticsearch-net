@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SlackDynamicAttachment>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<SlackDynamicAttachment>))]
 	public interface ISlackDynamicAttachment
 	{
 		[JsonProperty("attachment_template")]

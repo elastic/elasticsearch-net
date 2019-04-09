@@ -8,7 +8,7 @@ namespace Nest
 	///  input to load data from multiple sources into the watch execution context when the watch is triggered.
 	/// </summary>
 	[JsonObject]
-	[JsonConverter(typeof(ChainInputJsonConverter))]
+	[ContractJsonConverter(typeof(ChainInputJsonConverter))]
 	public interface IChainInput : IInput
 	{
 		/// <summary>

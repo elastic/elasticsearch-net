@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<TimeOfDay>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<TimeOfDay>))]
 	public interface ITimeOfDay
 	{
 		[JsonProperty("hour")]

@@ -3,7 +3,7 @@
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(FieldNameQueryJsonConverter<RegexpQuery>))]
+	[ContractJsonConverter(typeof(FieldNameQueryJsonConverter<RegexpQuery>))]
 	public interface IRegexpQuery : IFieldNameQuery
 	{
 		[JsonProperty("flags")]

@@ -5,7 +5,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<DataAttachment>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<DataAttachment>))]
 	public interface IDataAttachment : IEmailAttachment
 	{
 		[JsonProperty("format")]
