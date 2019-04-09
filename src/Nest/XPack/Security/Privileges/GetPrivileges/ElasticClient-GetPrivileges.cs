@@ -17,11 +17,11 @@ namespace Nest
 
 		/// <inheritdoc cref="GetPrivileges(System.Func{Nest.GetPrivilegesDescriptor,Nest.IGetPrivilegesRequest})" />
 		Task<IGetPrivilegesResponse> GetPrivilegesAsync(Func<GetPrivilegesDescriptor, IGetPrivilegesRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="GetPrivileges(System.Func{Nest.GetPrivilegesDescriptor,Nest.IGetPrivilegesRequest})" />
-		Task<IGetPrivilegesResponse> GetPrivilegesAsync(IGetPrivilegesRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IGetPrivilegesResponse> GetPrivilegesAsync(IGetPrivilegesRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -32,23 +32,16 @@ namespace Nest
 
 		/// <inheritdoc cref="GetPrivileges(System.Func{Nest.GetPrivilegesDescriptor,Nest.IGetPrivilegesRequest})" />
 		public IGetPrivilegesResponse GetPrivileges(IGetPrivilegesRequest request) =>
-			Dispatcher.Dispatch<IGetPrivilegesRequest, GetPrivilegesRequestParameters, GetPrivilegesResponse>(
-				request,
-				(p, d) => LowLevelDispatch.SecurityGetPrivilegesDispatch<GetPrivilegesResponse>(p)
-			);
+			Dispatch2<IGetPrivilegesRequest, GetPrivilegesResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="GetPrivileges(System.Func{Nest.GetPrivilegesDescriptor,Nest.IGetPrivilegesRequest})" />
-		public Task<IGetPrivilegesResponse> GetPrivilegesAsync(Func<GetPrivilegesDescriptor, IGetPrivilegesRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			GetPrivilegesAsync(selector.InvokeOrDefault(new GetPrivilegesDescriptor()), cancellationToken);
+		public Task<IGetPrivilegesResponse> GetPrivilegesAsync(
+			Func<GetPrivilegesDescriptor, IGetPrivilegesRequest> selector = null,
+			CancellationToken ct = default
+		) => GetPrivilegesAsync(selector.InvokeOrDefault(new GetPrivilegesDescriptor()), ct);
 
 		/// <inheritdoc cref="GetPrivileges(System.Func{Nest.GetPrivilegesDescriptor,Nest.IGetPrivilegesRequest})" />
-		public Task<IGetPrivilegesResponse> GetPrivilegesAsync(IGetPrivilegesRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IGetPrivilegesRequest, GetPrivilegesRequestParameters, GetPrivilegesResponse, IGetPrivilegesResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.SecurityGetPrivilegesDispatchAsync<GetPrivilegesResponse>(p, c)
-			);
+		public Task<IGetPrivilegesResponse> GetPrivilegesAsync(IGetPrivilegesRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IGetPrivilegesRequest, IGetPrivilegesResponse, GetPrivilegesResponse>(request, request.RequestParameters, ct);
 	}
 }

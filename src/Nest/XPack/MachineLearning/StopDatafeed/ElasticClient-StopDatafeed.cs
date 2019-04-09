@@ -19,11 +19,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IStopDatafeedResponse> StopDatafeedAsync(Id datafeedId, Func<StopDatafeedDescriptor, IStopDatafeedRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IStopDatafeedResponse> StopDatafeedAsync(IStopDatafeedRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IStopDatafeedResponse> StopDatafeedAsync(IStopDatafeedRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -34,25 +34,18 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IStopDatafeedResponse StopDatafeed(IStopDatafeedRequest request) =>
-			Dispatcher.Dispatch<IStopDatafeedRequest, StopDatafeedRequestParameters, StopDatafeedResponse>(
-				request,
-				(p, d) => LowLevelDispatch.MlStopDatafeedDispatch<StopDatafeedResponse>(p)
-			);
+			Dispatch2<IStopDatafeedRequest, StopDatafeedResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IStopDatafeedResponse> StopDatafeedAsync(Id datafeedId, Func<StopDatafeedDescriptor, IStopDatafeedRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			StopDatafeedAsync(selector.InvokeOrDefault(new StopDatafeedDescriptor(datafeedId)), cancellationToken);
+		public Task<IStopDatafeedResponse> StopDatafeedAsync(
+			Id datafeedId,
+			Func<StopDatafeedDescriptor, IStopDatafeedRequest> selector = null,
+			CancellationToken ct = default
+		) => StopDatafeedAsync(selector.InvokeOrDefault(new StopDatafeedDescriptor(datafeedId)), ct);
 
 		/// <inheritdoc />
-		public Task<IStopDatafeedResponse> StopDatafeedAsync(IStopDatafeedRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IStopDatafeedRequest, StopDatafeedRequestParameters, StopDatafeedResponse, IStopDatafeedResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.MlStopDatafeedDispatchAsync<StopDatafeedResponse>(p, c)
-			);
+		public Task<IStopDatafeedResponse> StopDatafeedAsync(IStopDatafeedRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IStopDatafeedRequest, IStopDatafeedResponse, StopDatafeedResponse>
+				(request, request.RequestParameters, ct);
 	}
 }

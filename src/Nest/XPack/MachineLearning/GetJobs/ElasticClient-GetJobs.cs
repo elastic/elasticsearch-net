@@ -17,11 +17,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IGetJobsResponse> GetJobsAsync(Func<GetJobsDescriptor, IGetJobsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IGetJobsResponse> GetJobsAsync(IGetJobsRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IGetJobsResponse> GetJobsAsync(IGetJobsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -32,23 +32,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetJobsResponse GetJobs(IGetJobsRequest request) =>
-			Dispatcher.Dispatch<IGetJobsRequest, GetJobsRequestParameters, GetJobsResponse>(
-				request,
-				(p, d) => LowLevelDispatch.MlGetJobsDispatch<GetJobsResponse>(p)
-			);
+			Dispatch2<IGetJobsRequest, GetJobsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetJobsResponse> GetJobsAsync(Func<GetJobsDescriptor, IGetJobsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			GetJobsAsync(selector.InvokeOrDefault(new GetJobsDescriptor()), cancellationToken);
+		public Task<IGetJobsResponse> GetJobsAsync(
+			Func<GetJobsDescriptor, IGetJobsRequest> selector = null,
+			CancellationToken ct = default
+		) => GetJobsAsync(selector.InvokeOrDefault(new GetJobsDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IGetJobsResponse> GetJobsAsync(IGetJobsRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IGetJobsRequest, GetJobsRequestParameters, GetJobsResponse, IGetJobsResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.MlGetJobsDispatchAsync<GetJobsResponse>(p, c)
-			);
+		public Task<IGetJobsResponse> GetJobsAsync(IGetJobsRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IGetJobsRequest, IGetJobsResponse, GetJobsResponse>(request, request.RequestParameters, ct);
 	}
 }

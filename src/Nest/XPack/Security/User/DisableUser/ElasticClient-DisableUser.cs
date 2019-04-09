@@ -15,11 +15,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IDisableUserResponse> DisableUserAsync(Name username, Func<DisableUserDescriptor, IDisableUserRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IDisableUserResponse> DisableUserAsync(IDisableUserRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IDisableUserResponse> DisableUserAsync(IDisableUserRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -30,25 +30,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDisableUserResponse DisableUser(IDisableUserRequest request) =>
-			Dispatcher.Dispatch<IDisableUserRequest, DisableUserRequestParameters, DisableUserResponse>(
-				request,
-				(p, d) => LowLevelDispatch.SecurityDisableUserDispatch<DisableUserResponse>(p)
-			);
+			Dispatch2<IDisableUserRequest, DisableUserResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IDisableUserResponse> DisableUserAsync(Name username, Func<DisableUserDescriptor, IDisableUserRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			DisableUserAsync(selector.InvokeOrDefault(new DisableUserDescriptor(username)), cancellationToken);
+		public Task<IDisableUserResponse> DisableUserAsync(
+			Name username,
+			Func<DisableUserDescriptor, IDisableUserRequest> selector = null,
+			CancellationToken ct = default
+		) => DisableUserAsync(selector.InvokeOrDefault(new DisableUserDescriptor(username)), ct);
 
 		/// <inheritdoc />
-		public Task<IDisableUserResponse> DisableUserAsync(IDisableUserRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IDisableUserRequest, DisableUserRequestParameters, DisableUserResponse, IDisableUserResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.SecurityDisableUserDispatchAsync<DisableUserResponse>(p, c)
-			);
+		public Task<IDisableUserResponse> DisableUserAsync(IDisableUserRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IDisableUserRequest, IDisableUserResponse, DisableUserResponse>(request, request.RequestParameters, ct);
 	}
 }

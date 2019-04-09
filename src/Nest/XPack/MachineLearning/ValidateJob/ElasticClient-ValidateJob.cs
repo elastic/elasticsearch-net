@@ -17,40 +17,34 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IValidateJobResponse> ValidateJobAsync<T>(Func<ValidateJobDescriptor<T>, IValidateJobRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) where T : class;
 
 		/// <inheritdoc />
-		Task<IValidateJobResponse> ValidateJobAsync(IValidateJobRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IValidateJobResponse> ValidateJobAsync(IValidateJobRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IValidateJobResponse ValidateJob<T>(Func<ValidateJobDescriptor<T>, IValidateJobRequest> selector) where T : class =>
+		public IValidateJobResponse ValidateJob<T>(Func<ValidateJobDescriptor<T>, IValidateJobRequest> selector)
+			where T : class =>
 			ValidateJob(selector.InvokeOrDefault(new ValidateJobDescriptor<T>()));
 
 		/// <inheritdoc />
 		public IValidateJobResponse ValidateJob(IValidateJobRequest request) =>
-			Dispatcher.Dispatch<IValidateJobRequest, ValidateJobRequestParameters, ValidateJobResponse>(
-				request,
-				LowLevelDispatch.MlValidateDispatch<ValidateJobResponse>
-			);
+			Dispatch2<IValidateJobRequest, ValidateJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IValidateJobResponse> ValidateJobAsync<T>(Func<ValidateJobDescriptor<T>, IValidateJobRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) where T : class =>
-			ValidateJobAsync(selector.InvokeOrDefault(new ValidateJobDescriptor<T>()), cancellationToken);
+			CancellationToken ct = default
+		)
+			where T : class =>
+			ValidateJobAsync(selector.InvokeOrDefault(new ValidateJobDescriptor<T>()), ct);
 
 		/// <inheritdoc />
-		public Task<IValidateJobResponse> ValidateJobAsync(IValidateJobRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IValidateJobRequest, ValidateJobRequestParameters, ValidateJobResponse, IValidateJobResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.MlValidateDispatchAsync<ValidateJobResponse>
-			);
+		public Task<IValidateJobResponse> ValidateJobAsync(IValidateJobRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IValidateJobRequest, IValidateJobResponse, ValidateJobResponse>
+				(request, request.RequestParameters, ct);
 	}
 }

@@ -20,12 +20,12 @@ namespace Nest
 		/// <inheritdoc />
 		Task<IUpdateModelSnapshotResponse> UpdateModelSnapshotAsync(Id jobId, Id snapshotId,
 			Func<UpdateModelSnapshotDescriptor, IUpdateModelSnapshotRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<IUpdateModelSnapshotResponse> UpdateModelSnapshotAsync(IUpdateModelSnapshotRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -39,28 +39,19 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IUpdateModelSnapshotResponse UpdateModelSnapshot(IUpdateModelSnapshotRequest request) =>
-			Dispatcher.Dispatch<IUpdateModelSnapshotRequest, UpdateModelSnapshotRequestParameters, UpdateModelSnapshotResponse>(
-				request,
-				LowLevelDispatch.MlUpdateModelSnapshotDispatch<UpdateModelSnapshotResponse>
-			);
+			Dispatch2<IUpdateModelSnapshotRequest, UpdateModelSnapshotResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IUpdateModelSnapshotResponse> UpdateModelSnapshotAsync(Id jobId, Id snapshotId,
+		public Task<IUpdateModelSnapshotResponse> UpdateModelSnapshotAsync(
+			Id jobId,
+			Id snapshotId,
 			Func<UpdateModelSnapshotDescriptor, IUpdateModelSnapshotRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			UpdateModelSnapshotAsync(selector.InvokeOrDefault(new UpdateModelSnapshotDescriptor(jobId, snapshotId)), cancellationToken);
+			CancellationToken ct = default
+		) => UpdateModelSnapshotAsync(selector.InvokeOrDefault(new UpdateModelSnapshotDescriptor(jobId, snapshotId)), ct);
 
 		/// <inheritdoc />
-		public Task<IUpdateModelSnapshotResponse> UpdateModelSnapshotAsync(IUpdateModelSnapshotRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<IUpdateModelSnapshotRequest, UpdateModelSnapshotRequestParameters, UpdateModelSnapshotResponse,
-					IUpdateModelSnapshotResponse>(
-					request,
-					cancellationToken,
-					LowLevelDispatch.MlUpdateModelSnapshotDispatchAsync<UpdateModelSnapshotResponse>
-				);
+		public Task<IUpdateModelSnapshotResponse> UpdateModelSnapshotAsync(IUpdateModelSnapshotRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IUpdateModelSnapshotRequest, IUpdateModelSnapshotResponse, UpdateModelSnapshotResponse>
+				(request, request.RequestParameters, ct);
 	}
 }

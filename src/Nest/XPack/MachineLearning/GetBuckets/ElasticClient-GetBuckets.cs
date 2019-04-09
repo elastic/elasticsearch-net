@@ -17,11 +17,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IGetBucketsResponse> GetBucketsAsync(Id jobId, Func<GetBucketsDescriptor, IGetBucketsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
-		Task<IGetBucketsResponse> GetBucketsAsync(IGetBucketsRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IGetBucketsResponse> GetBucketsAsync(IGetBucketsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -32,24 +32,18 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetBucketsResponse GetBuckets(IGetBucketsRequest request) =>
-			Dispatcher.Dispatch<IGetBucketsRequest, GetBucketsRequestParameters, GetBucketsResponse>(
-				request,
-				LowLevelDispatch.MlGetBucketsDispatch<GetBucketsResponse>
-			);
+			Dispatch2<IGetBucketsRequest, GetBucketsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetBucketsResponse> GetBucketsAsync(Id jobId, Func<GetBucketsDescriptor, IGetBucketsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+		public Task<IGetBucketsResponse> GetBucketsAsync(
+			Id jobId,
+			Func<GetBucketsDescriptor, IGetBucketsRequest> selector = null,
+			CancellationToken cancellationToken = default
 		) =>
 			GetBucketsAsync(selector.InvokeOrDefault(new GetBucketsDescriptor(jobId)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IGetBucketsResponse> GetBucketsAsync(IGetBucketsRequest request, CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IGetBucketsRequest, GetBucketsRequestParameters, GetBucketsResponse, IGetBucketsResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.MlGetBucketsDispatchAsync<GetBucketsResponse>
-			);
+		public Task<IGetBucketsResponse> GetBucketsAsync(IGetBucketsRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IGetBucketsRequest, IGetBucketsResponse, GetBucketsResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -24,11 +24,11 @@ namespace Nest
 		Task<ISegmentsResponse> SegmentsAsync(
 			Indices indices,
 			Func<SegmentsDescriptor, ISegmentsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
-		Task<ISegmentsResponse> SegmentsAsync(ISegmentsRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<ISegmentsResponse> SegmentsAsync(ISegmentsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -39,24 +39,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ISegmentsResponse Segments(ISegmentsRequest request) =>
-			Dispatcher.Dispatch<ISegmentsRequest, SegmentsRequestParameters, SegmentsResponse>(
-				request,
-				(p, d) => LowLevelDispatch.IndicesSegmentsDispatch<SegmentsResponse>(p)
-			);
+			Dispatch2<ISegmentsRequest, SegmentsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<ISegmentsResponse> SegmentsAsync(
 			Indices indices,
 			Func<SegmentsDescriptor, ISegmentsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		) => SegmentsAsync(selector.InvokeOrDefault(new SegmentsDescriptor().Index(indices)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<ISegmentsResponse> SegmentsAsync(ISegmentsRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<ISegmentsRequest, SegmentsRequestParameters, SegmentsResponse, ISegmentsResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.IndicesSegmentsDispatchAsync<SegmentsResponse>(p, c)
-			);
+		public Task<ISegmentsResponse> SegmentsAsync(ISegmentsRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<ISegmentsRequest, ISegmentsResponse, SegmentsResponse>(request, request.RequestParameters, ct);
 	}
 }

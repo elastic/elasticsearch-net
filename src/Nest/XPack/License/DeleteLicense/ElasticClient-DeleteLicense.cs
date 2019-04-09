@@ -15,12 +15,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IDeleteLicenseResponse> DeleteLicenseAsync(Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<IDeleteLicenseResponse> DeleteLicenseAsync(IDeleteLicenseRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -32,25 +32,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeleteLicenseResponse DeleteLicense(IDeleteLicenseRequest request) =>
-			Dispatcher.Dispatch<IDeleteLicenseRequest, DeleteLicenseRequestParameters, DeleteLicenseResponse>(
-				request,
-				(p, d) => LowLevelDispatch.LicenseDeleteDispatch<DeleteLicenseResponse>(p)
-			);
+			Dispatch2<IDeleteLicenseRequest, DeleteLicenseResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IDeleteLicenseResponse> DeleteLicenseAsync(Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			DeleteLicenseAsync(selector.InvokeOrDefault(new DeleteLicenseDescriptor()), cancellationToken);
+		public Task<IDeleteLicenseResponse> DeleteLicenseAsync(
+			Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector = null,
+			CancellationToken ct = default
+		) => DeleteLicenseAsync(selector.InvokeOrDefault(new DeleteLicenseDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IDeleteLicenseResponse> DeleteLicenseAsync(IDeleteLicenseRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IDeleteLicenseRequest, DeleteLicenseRequestParameters, DeleteLicenseResponse, IDeleteLicenseResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.LicenseDeleteDispatchAsync<DeleteLicenseResponse>(p, c)
-			);
+		public Task<IDeleteLicenseResponse> DeleteLicenseAsync(IDeleteLicenseRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IDeleteLicenseRequest, IDeleteLicenseResponse, DeleteLicenseResponse>(request, request.RequestParameters, ct);
 	}
 }

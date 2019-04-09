@@ -17,12 +17,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IGetDatafeedStatsResponse> GetDatafeedStatsAsync(Func<GetDatafeedStatsDescriptor, IGetDatafeedStatsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<IGetDatafeedStatsResponse> GetDatafeedStatsAsync(IGetDatafeedStatsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -34,26 +34,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetDatafeedStatsResponse GetDatafeedStats(IGetDatafeedStatsRequest request) =>
-			Dispatcher.Dispatch<IGetDatafeedStatsRequest, GetDatafeedStatsRequestParameters, GetDatafeedStatsResponse>(
-				request,
-				(p, d) => LowLevelDispatch.MlGetDatafeedStatsDispatch<GetDatafeedStatsResponse>(p)
-			);
+			Dispatch2<IGetDatafeedStatsRequest, GetDatafeedStatsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetDatafeedStatsResponse> GetDatafeedStatsAsync(Func<GetDatafeedStatsDescriptor, IGetDatafeedStatsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			GetDatafeedStatsAsync(selector.InvokeOrDefault(new GetDatafeedStatsDescriptor()), cancellationToken);
+		public Task<IGetDatafeedStatsResponse> GetDatafeedStatsAsync(
+			Func<GetDatafeedStatsDescriptor, IGetDatafeedStatsRequest> selector = null,
+			CancellationToken ct = default
+		) => GetDatafeedStatsAsync(selector.InvokeOrDefault(new GetDatafeedStatsDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IGetDatafeedStatsResponse> GetDatafeedStatsAsync(IGetDatafeedStatsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<IGetDatafeedStatsRequest, GetDatafeedStatsRequestParameters, GetDatafeedStatsResponse, IGetDatafeedStatsResponse>(
-					request,
-					cancellationToken,
-					(p, d, c) => LowLevelDispatch.MlGetDatafeedStatsDispatchAsync<GetDatafeedStatsResponse>(p, c)
-				);
+		public Task<IGetDatafeedStatsResponse> GetDatafeedStatsAsync(IGetDatafeedStatsRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IGetDatafeedStatsRequest, IGetDatafeedStatsResponse, GetDatafeedStatsResponse>(request, request.RequestParameters, ct);
 	}
 }

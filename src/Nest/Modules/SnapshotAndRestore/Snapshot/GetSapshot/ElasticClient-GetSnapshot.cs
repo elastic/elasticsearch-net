@@ -22,11 +22,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IGetSnapshotResponse> GetSnapshotAsync(Name repository, Names snapshots,
-			Func<GetSnapshotDescriptor, IGetSnapshotRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)
+			Func<GetSnapshotDescriptor, IGetSnapshotRequest> selector = null, CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IGetSnapshotResponse> GetSnapshotAsync(IGetSnapshotRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IGetSnapshotResponse> GetSnapshotAsync(IGetSnapshotRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -37,25 +37,19 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetSnapshotResponse GetSnapshot(IGetSnapshotRequest request) =>
-			Dispatcher.Dispatch<IGetSnapshotRequest, GetSnapshotRequestParameters, GetSnapshotResponse>(
-				request,
-				(p, d) => LowLevelDispatch.SnapshotGetDispatch<GetSnapshotResponse>(p)
-			);
+			Dispatch2<IGetSnapshotRequest, GetSnapshotResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetSnapshotResponse> GetSnapshotAsync(Name repository, Names snapshots,
-			Func<GetSnapshotDescriptor, IGetSnapshotRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)
+		public Task<IGetSnapshotResponse> GetSnapshotAsync(
+			Name repository,
+			Names snapshots,
+			Func<GetSnapshotDescriptor, IGetSnapshotRequest> selector = null,
+			CancellationToken ct = default
 		) =>
-			GetSnapshotAsync(selector.InvokeOrDefault(new GetSnapshotDescriptor(repository, snapshots)), cancellationToken);
+			GetSnapshotAsync(selector.InvokeOrDefault(new GetSnapshotDescriptor(repository, snapshots)), ct);
 
 		/// <inheritdoc />
-		public Task<IGetSnapshotResponse> GetSnapshotAsync(IGetSnapshotRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IGetSnapshotRequest, GetSnapshotRequestParameters, GetSnapshotResponse, IGetSnapshotResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.SnapshotGetDispatchAsync<GetSnapshotResponse>(p, c)
-			);
+		public Task<IGetSnapshotResponse> GetSnapshotAsync(IGetSnapshotRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IGetSnapshotRequest, IGetSnapshotResponse, GetSnapshotResponse>(request, request.RequestParameters, ct);
 	}
 }

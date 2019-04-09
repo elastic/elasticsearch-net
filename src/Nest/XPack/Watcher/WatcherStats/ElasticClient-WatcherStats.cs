@@ -17,11 +17,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IWatcherStatsResponse> WatcherStatsAsync(Func<WatcherStatsDescriptor, IWatcherStatsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IWatcherStatsResponse> WatcherStatsAsync(IWatcherStatsRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IWatcherStatsResponse> WatcherStatsAsync(IWatcherStatsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -32,25 +32,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IWatcherStatsResponse WatcherStats(IWatcherStatsRequest request) =>
-			Dispatcher.Dispatch<IWatcherStatsRequest, WatcherStatsRequestParameters, WatcherStatsResponse>(
-				request,
-				(p, d) => LowLevelDispatch.WatcherStatsDispatch<WatcherStatsResponse>(p)
-			);
+			Dispatch2<IWatcherStatsRequest, WatcherStatsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IWatcherStatsResponse> WatcherStatsAsync(Func<WatcherStatsDescriptor, IWatcherStatsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			WatcherStatsAsync(selector.InvokeOrDefault(new WatcherStatsDescriptor()), cancellationToken);
+		public Task<IWatcherStatsResponse> WatcherStatsAsync(
+			Func<WatcherStatsDescriptor, IWatcherStatsRequest> selector = null,
+			CancellationToken ct = default
+		) => WatcherStatsAsync(selector.InvokeOrDefault(new WatcherStatsDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IWatcherStatsResponse> WatcherStatsAsync(IWatcherStatsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IWatcherStatsRequest, WatcherStatsRequestParameters, WatcherStatsResponse, IWatcherStatsResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.WatcherStatsDispatchAsync<WatcherStatsResponse>(p, c)
-			);
+		public Task<IWatcherStatsResponse> WatcherStatsAsync(IWatcherStatsRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IWatcherStatsRequest, IWatcherStatsResponse, WatcherStatsResponse>
+				(request, request.RequestParameters, ct);
 	}
 }

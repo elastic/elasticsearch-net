@@ -24,13 +24,13 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IExplainResponse<TDocument>> ExplainAsync<TDocument>(DocumentPath<TDocument> document,
-			Func<ExplainDescriptor<TDocument>, IExplainRequest<TDocument>> selector, CancellationToken cancellationToken = default(CancellationToken)
+			Func<ExplainDescriptor<TDocument>, IExplainRequest<TDocument>> selector, CancellationToken ct = default
 		)
 			where TDocument : class;
 
 		/// <inheritdoc />
 		Task<IExplainResponse<TDocument>> ExplainAsync<TDocument>(IExplainRequest<TDocument> request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		)
 			where TDocument : class;
 	}
@@ -42,36 +42,29 @@ namespace Nest
 			Func<ExplainDescriptor<TDocument>, IExplainRequest<TDocument>> selector
 		)
 			where TDocument : class =>
-			Explain<TDocument>(selector?.Invoke(new ExplainDescriptor<TDocument>(
+			Explain(selector?.Invoke(new ExplainDescriptor<TDocument>(
 				document.Document, document.Self.Index, document.Self.Id
 			)));
 
 		/// <inheritdoc />
 		public IExplainResponse<TDocument> Explain<TDocument>(IExplainRequest<TDocument> request)
 			where TDocument : class =>
-			Dispatcher.Dispatch<IExplainRequest<TDocument>, ExplainRequestParameters, ExplainResponse<TDocument>>(
-				request,
-				LowLevelDispatch.ExplainDispatch<ExplainResponse<TDocument>, TDocument>
-			);
+			Dispatch2<IExplainRequest<TDocument>, ExplainResponse<TDocument>>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IExplainResponse<TDocument>> ExplainAsync<TDocument>(DocumentPath<TDocument> document,
-			Func<ExplainDescriptor<TDocument>, IExplainRequest<TDocument>> selector, CancellationToken cancellationToken = default(CancellationToken)
+		public Task<IExplainResponse<TDocument>> ExplainAsync<TDocument>(
+			DocumentPath<TDocument> document,
+			Func<ExplainDescriptor<TDocument>, IExplainRequest<TDocument>> selector,
+			CancellationToken ct = default
 		)
 			where TDocument : class =>
-			ExplainAsync<TDocument>(selector?.Invoke(new ExplainDescriptor<TDocument>(
+			ExplainAsync(selector?.Invoke(new ExplainDescriptor<TDocument>(
 				document.Document, document.Self.Index, document.Self.Id
-			)), cancellationToken);
+			)), ct);
 
 		/// <inheritdoc />
-		public Task<IExplainResponse<TDocument>> ExplainAsync<TDocument>(IExplainRequest<TDocument> request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		)
+		public Task<IExplainResponse<TDocument>> ExplainAsync<TDocument>(IExplainRequest<TDocument> request, CancellationToken ct = default)
 			where TDocument : class =>
-			Dispatcher.DispatchAsync<IExplainRequest<TDocument>, ExplainRequestParameters, ExplainResponse<TDocument>, IExplainResponse<TDocument>>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.ExplainDispatchAsync<ExplainResponse<TDocument>, TDocument>
-			);
+			Dispatch2Async<IExplainRequest<TDocument>, IExplainResponse<TDocument>, ExplainResponse<TDocument>>(request, request.RequestParameters, ct);
 	}
 }

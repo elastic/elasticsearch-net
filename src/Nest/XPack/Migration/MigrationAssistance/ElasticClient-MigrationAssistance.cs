@@ -24,7 +24,7 @@ namespace Nest
 		/// require some changes before the cluster can be upgraded to the next major version.
 		/// </summary>
 		Task<IMigrationAssistanceResponse> MigrationAssistanceAsync(Func<MigrationAssistanceDescriptor, IMigrationAssistanceRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <summary>
@@ -32,7 +32,7 @@ namespace Nest
 		/// require some changes before the cluster can be upgraded to the next major version.
 		/// </summary>
 		Task<IMigrationAssistanceResponse> MigrationAssistanceAsync(IMigrationAssistanceRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -44,28 +44,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IMigrationAssistanceResponse MigrationAssistance(IMigrationAssistanceRequest request) =>
-			Dispatcher.Dispatch<IMigrationAssistanceRequest, MigrationAssistanceRequestParameters, MigrationAssistanceResponse>(
-				request,
-				(p, d) => LowLevelDispatch.MigrationGetAssistanceDispatch<MigrationAssistanceResponse>(p)
-			);
+			Dispatch2<IMigrationAssistanceRequest, MigrationAssistanceResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IMigrationAssistanceResponse> MigrationAssistanceAsync(
 			Func<MigrationAssistanceDescriptor, IMigrationAssistanceRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			MigrationAssistanceAsync(selector.InvokeOrDefault(new MigrationAssistanceDescriptor()), cancellationToken);
+			CancellationToken ct = default
+		) => MigrationAssistanceAsync(selector.InvokeOrDefault(new MigrationAssistanceDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IMigrationAssistanceResponse> MigrationAssistanceAsync(IMigrationAssistanceRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<IMigrationAssistanceRequest, MigrationAssistanceRequestParameters, MigrationAssistanceResponse,
-					IMigrationAssistanceResponse>(
-					request,
-					cancellationToken,
-					(p, d, c) => LowLevelDispatch.MigrationGetAssistanceDispatchAsync<MigrationAssistanceResponse>(p, c)
-				);
+		public Task<IMigrationAssistanceResponse> MigrationAssistanceAsync(IMigrationAssistanceRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IMigrationAssistanceRequest, IMigrationAssistanceResponse, MigrationAssistanceResponse>
+				(request, request.RequestParameters, ct);
 	}
 }

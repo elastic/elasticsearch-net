@@ -22,13 +22,13 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IValidateQueryResponse> ValidateQueryAsync<T>(Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		)
 			where T : class;
 
 		/// <inheritdoc />
 		Task<IValidateQueryResponse> ValidateQueryAsync(IValidateQueryRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -41,26 +41,18 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IValidateQueryResponse ValidateQuery(IValidateQueryRequest request) =>
-			Dispatcher.Dispatch<IValidateQueryRequest, ValidateQueryRequestParameters, ValidateQueryResponse>(
-				request,
-				LowLevelDispatch.IndicesValidateQueryDispatch<ValidateQueryResponse>
-			);
+			Dispatch2<IValidateQueryRequest, ValidateQueryResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IValidateQueryResponse> ValidateQueryAsync<T>(Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+		public Task<IValidateQueryResponse> ValidateQueryAsync<T>(
+			Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> selector,
+			CancellationToken ct = default
 		)
 			where T : class =>
-			ValidateQueryAsync(selector?.Invoke(new ValidateQueryDescriptor<T>()), cancellationToken);
+			ValidateQueryAsync(selector?.Invoke(new ValidateQueryDescriptor<T>()), ct);
 
 		/// <inheritdoc />
-		public Task<IValidateQueryResponse> ValidateQueryAsync(IValidateQueryRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IValidateQueryRequest, ValidateQueryRequestParameters, ValidateQueryResponse, IValidateQueryResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.IndicesValidateQueryDispatchAsync<ValidateQueryResponse>
-			);
+		public Task<IValidateQueryResponse> ValidateQueryAsync(IValidateQueryRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IValidateQueryRequest, IValidateQueryResponse, ValidateQueryResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -15,12 +15,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IRenderSearchTemplateResponse> RenderSearchTemplateAsync(Func<RenderSearchTemplateDescriptor, IRenderSearchTemplateRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<IRenderSearchTemplateResponse> RenderSearchTemplateAsync(IRenderSearchTemplateRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -30,26 +30,15 @@ namespace Nest
 			RenderSearchTemplate(selector.InvokeOrDefault(new RenderSearchTemplateDescriptor()));
 
 		public IRenderSearchTemplateResponse RenderSearchTemplate(IRenderSearchTemplateRequest request) =>
-			Dispatcher.Dispatch<IRenderSearchTemplateRequest, RenderSearchTemplateRequestParameters, RenderSearchTemplateResponse>(
-				request,
-				(p, d) => LowLevelDispatch.RenderSearchTemplateDispatch<RenderSearchTemplateResponse>(p, d)
-			);
+			Dispatch2<IRenderSearchTemplateRequest, RenderSearchTemplateResponse>(request, request.RequestParameters);
 
 		public Task<IRenderSearchTemplateResponse> RenderSearchTemplateAsync(
 			Func<RenderSearchTemplateDescriptor, IRenderSearchTemplateRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) =>
-			RenderSearchTemplateAsync(selector.InvokeOrDefault(new RenderSearchTemplateDescriptor()), cancellationToken);
+			RenderSearchTemplateAsync(selector.InvokeOrDefault(new RenderSearchTemplateDescriptor()), ct);
 
-		public Task<IRenderSearchTemplateResponse> RenderSearchTemplateAsync(IRenderSearchTemplateRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<IRenderSearchTemplateRequest, RenderSearchTemplateRequestParameters, RenderSearchTemplateResponse,
-					IRenderSearchTemplateResponse>(
-					request,
-					cancellationToken,
-					(p, d, c) => LowLevelDispatch.RenderSearchTemplateDispatchAsync<RenderSearchTemplateResponse>(p, d, c)
-				);
+		public Task<IRenderSearchTemplateResponse> RenderSearchTemplateAsync(IRenderSearchTemplateRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IRenderSearchTemplateRequest, IRenderSearchTemplateResponse, RenderSearchTemplateResponse>(request, request.RequestParameters, ct);
 	}
 }

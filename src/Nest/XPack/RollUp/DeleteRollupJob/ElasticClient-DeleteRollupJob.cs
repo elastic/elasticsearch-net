@@ -18,11 +18,11 @@ namespace Nest
 
 		/// <inheritdoc cref="DeleteRollupJob(Nest.Id,System.Func{Nest.DeleteRollupJobDescriptor,Nest.IDeleteRollupJobRequest})" />
 		Task<IDeleteRollupJobResponse> DeleteRollupJobAsync(Id id,
-			Func<DeleteRollupJobDescriptor, IDeleteRollupJobRequest> selector = null, CancellationToken cancellationToken = default
+			Func<DeleteRollupJobDescriptor, IDeleteRollupJobRequest> selector = null, CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="DeleteRollupJob(Nest.Id,System.Func{Nest.DeleteRollupJobDescriptor,Nest.IDeleteRollupJobRequest})" />
-		Task<IDeleteRollupJobResponse> DeleteRollupJobAsync(IDeleteRollupJobRequest request, CancellationToken cancellationToken = default);
+		Task<IDeleteRollupJobResponse> DeleteRollupJobAsync(IDeleteRollupJobRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -33,23 +33,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeleteRollupJobResponse DeleteRollupJob(IDeleteRollupJobRequest request) =>
-			Dispatcher.Dispatch<IDeleteRollupJobRequest, DeleteRollupJobRequestParameters, DeleteRollupJobResponse>(
-				request,
-				(p, d) => LowLevelDispatch.RollupDeleteJobDispatch<DeleteRollupJobResponse>(p)
-			);
+			Dispatch2<IDeleteRollupJobRequest, DeleteRollupJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IDeleteRollupJobResponse> DeleteRollupJobAsync(
-			Id id, Func<DeleteRollupJobDescriptor, IDeleteRollupJobRequest> selector = null, CancellationToken cancellationToken = default
-		) =>
-			DeleteRollupJobAsync(selector.InvokeOrDefault(new DeleteRollupJobDescriptor(id)), cancellationToken);
+			Id id,
+			Func<DeleteRollupJobDescriptor, IDeleteRollupJobRequest> selector = null,
+			CancellationToken ct = default
+		) => DeleteRollupJobAsync(selector.InvokeOrDefault(new DeleteRollupJobDescriptor(id)), ct);
 
 		/// <inheritdoc />
-		public Task<IDeleteRollupJobResponse> DeleteRollupJobAsync(IDeleteRollupJobRequest request, CancellationToken cancellationToken = default) =>
-			Dispatcher.DispatchAsync<IDeleteRollupJobRequest, DeleteRollupJobRequestParameters, DeleteRollupJobResponse, IDeleteRollupJobResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.RollupDeleteJobDispatchAsync<DeleteRollupJobResponse>(p, c)
-			);
+		public Task<IDeleteRollupJobResponse> DeleteRollupJobAsync(IDeleteRollupJobRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IDeleteRollupJobRequest, IDeleteRollupJobResponse, DeleteRollupJobResponse>(request, request.RequestParameters, ct);
 	}
 }

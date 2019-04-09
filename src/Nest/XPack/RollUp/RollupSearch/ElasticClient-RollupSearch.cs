@@ -26,19 +26,19 @@ namespace Nest
 
 		/// <inheritdoc cref="RollupSearch{THit}(Nest.Indices,System.Func{Nest.RollupSearchDescriptor{THit},Nest.IRollupSearchRequest})" />
 		Task<IRollupSearchResponse<THit>> RollupSearchAsync<THit>(Indices indices,
-			Func<RollupSearchDescriptor<THit>, IRollupSearchRequest> selector = null, CancellationToken cancellationToken = default
+			Func<RollupSearchDescriptor<THit>, IRollupSearchRequest> selector = null, CancellationToken ct = default
 		)
 			where THit : class;
 
 		/// <inheritdoc cref="RollupSearch{THit}(Nest.Indices,System.Func{Nest.RollupSearchDescriptor{THit},Nest.IRollupSearchRequest})" />
 		Task<IRollupSearchResponse<THit>> RollupSearchAsync<T, THit>(Indices indices,
-			Func<RollupSearchDescriptor<T>, IRollupSearchRequest> selector = null, CancellationToken cancellationToken = default
+			Func<RollupSearchDescriptor<T>, IRollupSearchRequest> selector = null, CancellationToken ct = default
 		)
 			where THit : class
 			where T : class;
 
 		/// <inheritdoc cref="RollupSearch{THit}(Nest.Indices,System.Func{Nest.RollupSearchDescriptor{THit},Nest.IRollupSearchRequest})" />
-		Task<IRollupSearchResponse<THit>> RollupSearchAsync<THit>(IRollupSearchRequest request, CancellationToken cancellationToken = default)
+		Task<IRollupSearchResponse<THit>> RollupSearchAsync<THit>(IRollupSearchRequest request, CancellationToken ct = default)
 			where THit : class;
 	}
 
@@ -50,40 +50,41 @@ namespace Nest
 			RollupSearch<THit>(selector.InvokeOrDefault(new RollupSearchDescriptor<THit>(indices)));
 
 		/// <inheritdoc />
-		public IRollupSearchResponse<THit> RollupSearch<T, THit>(Indices indices, Func<RollupSearchDescriptor<T>, IRollupSearchRequest> selector = null
+		public IRollupSearchResponse<THit> RollupSearch<T, THit>(
+			Indices indices,
+			Func<RollupSearchDescriptor<T>, IRollupSearchRequest> selector = null
 		)
 			where T : class
 			where THit : class =>
 			RollupSearch<THit>(selector.InvokeOrDefault(new RollupSearchDescriptor<T>(indices)));
 
 		/// <inheritdoc />
-		public IRollupSearchResponse<THit> RollupSearch<THit>(IRollupSearchRequest request) where THit : class =>
-			Dispatcher.Dispatch<IRollupSearchRequest, RollupSearchRequestParameters, RollupSearchResponse<THit>>(
-				request,
-				(p, d) => LowLevelDispatch.RollupRollupSearchDispatch<RollupSearchResponse<THit>>(p, d)
-			);
+		public IRollupSearchResponse<THit> RollupSearch<THit>(IRollupSearchRequest request)
+			where THit : class =>
+			Dispatch2<IRollupSearchRequest, RollupSearchResponse<THit>>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IRollupSearchResponse<THit>> RollupSearchAsync<THit>(
-			Indices indices, Func<RollupSearchDescriptor<THit>, IRollupSearchRequest> selector = null, CancellationToken cancellationToken = default
-		) where THit : class =>
-			RollupSearchAsync<THit>(selector.InvokeOrDefault(new RollupSearchDescriptor<THit>(indices)), cancellationToken);
+			Indices indices,
+			Func<RollupSearchDescriptor<THit>, IRollupSearchRequest> selector = null,
+			CancellationToken ct = default
+		)
+			where THit : class =>
+			RollupSearchAsync<THit>(selector.InvokeOrDefault(new RollupSearchDescriptor<THit>(indices)), ct);
 
 		/// <inheritdoc />
 		public Task<IRollupSearchResponse<THit>> RollupSearchAsync<T, THit>(
-			Indices indices, Func<RollupSearchDescriptor<T>, IRollupSearchRequest> selector = null, CancellationToken cancellationToken = default
+			Indices indices, Func<RollupSearchDescriptor<T>, IRollupSearchRequest> selector = null,
+			CancellationToken ct = default
 		)
 			where T : class
 			where THit : class =>
-			RollupSearchAsync<THit>(selector.InvokeOrDefault(new RollupSearchDescriptor<T>(indices)), cancellationToken);
+			RollupSearchAsync<THit>(selector.InvokeOrDefault(new RollupSearchDescriptor<T>(indices)), ct);
 
 		/// <inheritdoc />
-		public Task<IRollupSearchResponse<THit>> RollupSearchAsync<THit>(IRollupSearchRequest request, CancellationToken cancellationToken = default)
+		public Task<IRollupSearchResponse<THit>> RollupSearchAsync<THit>(IRollupSearchRequest request, CancellationToken ct = default)
 			where THit : class =>
-			Dispatcher.DispatchAsync<IRollupSearchRequest, RollupSearchRequestParameters, RollupSearchResponse<THit>, IRollupSearchResponse<THit>>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.RollupRollupSearchDispatchAsync<RollupSearchResponse<THit>>(p, d, c)
-			);
+			Dispatch2Async<IRollupSearchRequest, IRollupSearchResponse<THit>, RollupSearchResponse<THit>>
+				(request, request.RequestParameters, ct);
 	}
 }

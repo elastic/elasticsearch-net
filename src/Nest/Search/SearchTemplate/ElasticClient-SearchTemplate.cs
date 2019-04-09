@@ -33,26 +33,26 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<ISearchResponse<T>> SearchTemplateAsync<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		)
 			where T : class;
 
 		/// <inheritdoc />
 		Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		)
 			where T : class
 			where TResult : class;
 
 		/// <inheritdoc />
 		Task<ISearchResponse<T>> SearchTemplateAsync<T>(ISearchTemplateRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		)
 			where T : class;
 
 		/// <inheritdoc />
 		Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(ISearchTemplateRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		)
 			where T : class
 			where TResult : class;
@@ -68,43 +68,37 @@ namespace Nest
 			where TResult : class =>
 			SearchTemplate<T, TResult>(selector?.Invoke(new SearchTemplateDescriptor<T>()));
 
-		public ISearchResponse<T> SearchTemplate<T>(ISearchTemplateRequest request) where T : class =>
+		public ISearchResponse<T> SearchTemplate<T>(ISearchTemplateRequest request)
+			where T : class =>
 			SearchTemplate<T, T>(request);
 
 		public ISearchResponse<TResult> SearchTemplate<T, TResult>(ISearchTemplateRequest request)
 			where T : class
 			where TResult : class =>
-			Dispatcher.Dispatch<ISearchTemplateRequest, SearchTemplateRequestParameters, SearchResponse<TResult>>(
-				request,
-				LowLevelDispatch.SearchTemplateDispatch<SearchResponse<TResult>>
-			);
+			Dispatch2<ISearchTemplateRequest, SearchResponse<TResult>>(request, request.RequestParameters);
 
-		public Task<ISearchResponse<T>> SearchTemplateAsync<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) where T : class =>
-			SearchTemplateAsync<T, T>(selector, cancellationToken);
+		public Task<ISearchResponse<T>> SearchTemplateAsync<T>(
+			Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector,
+			CancellationToken ct = default
+		)
+			where T : class =>
+			SearchTemplateAsync<T, T>(selector, ct);
 
-		public Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+		public Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(
+			Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector,
+			CancellationToken ct = default
 		)
 			where T : class
 			where TResult : class =>
-			SearchTemplateAsync<T, TResult>(selector?.Invoke(new SearchTemplateDescriptor<T>()), cancellationToken);
+			SearchTemplateAsync<T, TResult>(selector?.Invoke(new SearchTemplateDescriptor<T>()), ct);
 
-		public Task<ISearchResponse<T>> SearchTemplateAsync<T>(ISearchTemplateRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) where T : class =>
-			SearchTemplateAsync<T, T>(request, cancellationToken);
+		public Task<ISearchResponse<T>> SearchTemplateAsync<T>(ISearchTemplateRequest request, CancellationToken ct = default)
+			where T : class =>
+			SearchTemplateAsync<T, T>(request, ct);
 
-		public Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(ISearchTemplateRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		)
+		public Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(ISearchTemplateRequest request, CancellationToken ct = default)
 			where T : class
 			where TResult : class =>
-			Dispatcher.DispatchAsync<ISearchTemplateRequest, SearchTemplateRequestParameters, SearchResponse<TResult>, ISearchResponse<TResult>>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.SearchTemplateDispatchAsync<SearchResponse<TResult>>
-			);
+			Dispatch2Async<ISearchTemplateRequest, ISearchResponse<TResult>, SearchResponse<TResult>>(request, request.RequestParameters, ct);
 	}
 }

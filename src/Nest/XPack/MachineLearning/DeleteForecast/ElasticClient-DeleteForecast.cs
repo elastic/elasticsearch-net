@@ -17,12 +17,12 @@ namespace Nest
 
 		/// <inheritdoc cref="DeleteForecast(Nest.Id,Nest.ForecastIds,System.Func{Nest.DeleteForecastDescriptor,Nest.IDeleteForecastRequest})" />
 		Task<IDeleteForecastResponse> DeleteForecastAsync(Id jobId, ForecastIds forecastId, Func<DeleteForecastDescriptor, IDeleteForecastRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="DeleteForecast(Nest.Id,Nest.ForecastIds,System.Func{Nest.DeleteForecastDescriptor,Nest.IDeleteForecastRequest})" />
 		Task<IDeleteForecastResponse> DeleteForecastAsync(IDeleteForecastRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -34,23 +34,18 @@ namespace Nest
 
 		/// <inheritdoc cref="DeleteForecast(Nest.Id,Nest.ForecastIds,System.Func{Nest.DeleteForecastDescriptor,Nest.IDeleteForecastRequest})" />
 		public IDeleteForecastResponse DeleteForecast(IDeleteForecastRequest request) =>
-			Dispatcher.Dispatch<IDeleteForecastRequest, DeleteForecastRequestParameters, DeleteForecastResponse>(
-				request,
-				(p, d) => LowLevelDispatch.MlDeleteForecastDispatch<DeleteForecastResponse>(p)
-			);
+			Dispatch2<IDeleteForecastRequest, DeleteForecastResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="DeleteForecast(Nest.Id,Nest.ForecastIds,System.Func{Nest.DeleteForecastDescriptor,Nest.IDeleteForecastRequest})" />
-		public Task<IDeleteForecastResponse> DeleteForecastAsync(Id jobId, ForecastIds forecastId,
-			Func<DeleteForecastDescriptor, IDeleteForecastRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
-			DeleteForecastAsync(selector.InvokeOrDefault(new DeleteForecastDescriptor(jobId, forecastId)), cancellationToken);
+		public Task<IDeleteForecastResponse> DeleteForecastAsync(
+			Id jobId,
+			ForecastIds forecastId,
+			Func<DeleteForecastDescriptor, IDeleteForecastRequest> selector = null,
+			CancellationToken ct = default
+		) => DeleteForecastAsync(selector.InvokeOrDefault(new DeleteForecastDescriptor(jobId, forecastId)), ct);
 
 		/// <inheritdoc cref="DeleteForecast(Nest.Id,Nest.ForecastIds,System.Func{Nest.DeleteForecastDescriptor,Nest.IDeleteForecastRequest})" />
-		public Task<IDeleteForecastResponse> DeleteForecastAsync(IDeleteForecastRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IDeleteForecastRequest, DeleteForecastRequestParameters, DeleteForecastResponse, IDeleteForecastResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.MlDeleteForecastDispatchAsync<DeleteForecastResponse>(p, c)
-			);
+		public Task<IDeleteForecastResponse> DeleteForecastAsync(IDeleteForecastRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IDeleteForecastRequest, IDeleteForecastResponse, DeleteForecastResponse>(request, request.RequestParameters, ct);
 	}
 }

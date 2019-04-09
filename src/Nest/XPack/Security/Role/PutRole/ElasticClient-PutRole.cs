@@ -15,11 +15,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IPutRoleResponse> PutRoleAsync(Name role, Func<PutRoleDescriptor, IPutRoleRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
-		Task<IPutRoleResponse> PutRoleAsync(IPutRoleRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IPutRoleResponse> PutRoleAsync(IPutRoleRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -30,23 +30,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IPutRoleResponse PutRole(IPutRoleRequest request) =>
-			Dispatcher.Dispatch<IPutRoleRequest, PutRoleRequestParameters, PutRoleResponse>(
-				request,
-				LowLevelDispatch.SecurityPutRoleDispatch<PutRoleResponse>
-			);
+			Dispatch2<IPutRoleRequest, PutRoleResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IPutRoleResponse> PutRoleAsync(Name role, Func<PutRoleDescriptor, IPutRoleRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			PutRoleAsync(selector.InvokeOrDefault(new PutRoleDescriptor(role)), cancellationToken);
+		public Task<IPutRoleResponse> PutRoleAsync(
+			Name role,
+			Func<PutRoleDescriptor, IPutRoleRequest> selector = null,
+			CancellationToken cancellationToken = default
+		) => PutRoleAsync(selector.InvokeOrDefault(new PutRoleDescriptor(role)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IPutRoleResponse> PutRoleAsync(IPutRoleRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IPutRoleRequest, PutRoleRequestParameters, PutRoleResponse, IPutRoleResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.SecurityPutRoleDispatchAsync<PutRoleResponse>
-			);
+		public Task<IPutRoleResponse> PutRoleAsync(IPutRoleRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IPutRoleRequest, IPutRoleResponse, PutRoleResponse>(request, request.RequestParameters, ct);
 	}
 }

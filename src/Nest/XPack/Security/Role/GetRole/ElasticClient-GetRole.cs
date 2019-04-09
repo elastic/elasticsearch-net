@@ -15,11 +15,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IGetRoleResponse> GetRoleAsync(Func<GetRoleDescriptor, IGetRoleRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IGetRoleResponse> GetRoleAsync(IGetRoleRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IGetRoleResponse> GetRoleAsync(IGetRoleRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -30,23 +30,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetRoleResponse GetRole(IGetRoleRequest request) =>
-			Dispatcher.Dispatch<IGetRoleRequest, GetRoleRequestParameters, GetRoleResponse>(
-				request,
-				(p, d) => LowLevelDispatch.SecurityGetRoleDispatch<GetRoleResponse>(p)
-			);
+			Dispatch2<IGetRoleRequest, GetRoleResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetRoleResponse> GetRoleAsync(Func<GetRoleDescriptor, IGetRoleRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			GetRoleAsync(selector.InvokeOrDefault(new GetRoleDescriptor()), cancellationToken);
+		public Task<IGetRoleResponse> GetRoleAsync(
+			Func<GetRoleDescriptor, IGetRoleRequest> selector = null,
+			CancellationToken ct = default
+		) => GetRoleAsync(selector.InvokeOrDefault(new GetRoleDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IGetRoleResponse> GetRoleAsync(IGetRoleRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IGetRoleRequest, GetRoleRequestParameters, GetRoleResponse, IGetRoleResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.SecurityGetRoleDispatchAsync<GetRoleResponse>(p, c)
-			);
+		public Task<IGetRoleResponse> GetRoleAsync(IGetRoleRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IGetRoleRequest, IGetRoleResponse, GetRoleResponse>(request, request.RequestParameters, ct);
 	}
 }

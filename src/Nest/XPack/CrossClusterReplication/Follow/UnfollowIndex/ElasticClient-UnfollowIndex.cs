@@ -19,11 +19,11 @@ namespace Nest
 
 		/// <inheritdoc cref="UnfollowIndex(IndexName, System.Func{Nest.UnfollowIndexDescriptor,Nest.IUnfollowIndexRequest})" />
 		Task<IUnfollowIndexResponse> UnfollowIndexAsync(IndexName index, Func<UnfollowIndexDescriptor, IUnfollowIndexRequest> selector = null,
-			CancellationToken cancellationToken = default
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="UnfollowIndex(IndexName, System.Func{Nest.UnfollowIndexDescriptor,Nest.IUnfollowIndexRequest})" />
-		Task<IUnfollowIndexResponse> UnfollowIndexAsync(IUnfollowIndexRequest request, CancellationToken cancellationToken = default);
+		Task<IUnfollowIndexResponse> UnfollowIndexAsync(IUnfollowIndexRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -34,23 +34,17 @@ namespace Nest
 
 		/// <inheritdoc cref="UnfollowIndex(IndexName, System.Func{Nest.UnfollowIndexDescriptor,Nest.IUnfollowIndexRequest})" />
 		public IUnfollowIndexResponse UnfollowIndex(IUnfollowIndexRequest request) =>
-			Dispatcher.Dispatch<IUnfollowIndexRequest, UnfollowIndexRequestParameters, UnfollowIndexResponse>(
-				request,
-				(p, d) => LowLevelDispatch.CcrUnfollowDispatch<UnfollowIndexResponse>(p)
-			);
+			Dispatch2<IUnfollowIndexRequest, UnfollowIndexResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="UnfollowIndex(IndexName, System.Func{Nest.UnfollowIndexDescriptor,Nest.IUnfollowIndexRequest})" />
-		public Task<IUnfollowIndexResponse> UnfollowIndexAsync(IndexName index, Func<UnfollowIndexDescriptor, IUnfollowIndexRequest> selector = null,
-			CancellationToken cancellationToken = default
-		) =>
-			UnfollowIndexAsync(selector.InvokeOrDefault(new UnfollowIndexDescriptor(index)), cancellationToken);
+		public Task<IUnfollowIndexResponse> UnfollowIndexAsync(
+			IndexName index,
+			Func<UnfollowIndexDescriptor, IUnfollowIndexRequest> selector = null,
+			CancellationToken ct = default
+		) => UnfollowIndexAsync(selector.InvokeOrDefault(new UnfollowIndexDescriptor(index)), ct);
 
 		/// <inheritdoc cref="UnfollowIndex(IndexName, System.Func{Nest.UnfollowIndexDescriptor,Nest.IUnfollowIndexRequest})" />
-		public Task<IUnfollowIndexResponse> UnfollowIndexAsync(IUnfollowIndexRequest request, CancellationToken cancellationToken = default) =>
-			Dispatcher.DispatchAsync<IUnfollowIndexRequest, UnfollowIndexRequestParameters, UnfollowIndexResponse, IUnfollowIndexResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.CcrUnfollowDispatchAsync<UnfollowIndexResponse>(p, c)
-			);
+		public Task<IUnfollowIndexResponse> UnfollowIndexAsync(IUnfollowIndexRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IUnfollowIndexRequest, IUnfollowIndexResponse, UnfollowIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

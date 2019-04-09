@@ -15,11 +15,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IXPackInfoResponse> XPackInfoAsync(Func<XPackInfoDescriptor, IXPackInfoRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IXPackInfoResponse> XPackInfoAsync(IXPackInfoRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IXPackInfoResponse> XPackInfoAsync(IXPackInfoRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -30,23 +30,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IXPackInfoResponse XPackInfo(IXPackInfoRequest request) =>
-			Dispatcher.Dispatch<IXPackInfoRequest, XPackInfoRequestParameters, XPackInfoResponse>(
-				request,
-				(p, d) => LowLevelDispatch.XpackInfoDispatch<XPackInfoResponse>(p)
-			);
+			Dispatch2<IXPackInfoRequest, XPackInfoResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IXPackInfoResponse> XPackInfoAsync(Func<XPackInfoDescriptor, IXPackInfoRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			XPackInfoAsync(selector.InvokeOrDefault(new XPackInfoDescriptor()), cancellationToken);
+		public Task<IXPackInfoResponse> XPackInfoAsync(
+			Func<XPackInfoDescriptor, IXPackInfoRequest> selector = null,
+			CancellationToken ct = default
+		) => XPackInfoAsync(selector.InvokeOrDefault(new XPackInfoDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IXPackInfoResponse> XPackInfoAsync(IXPackInfoRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IXPackInfoRequest, XPackInfoRequestParameters, XPackInfoResponse, IXPackInfoResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackInfoDispatchAsync<XPackInfoResponse>(p, c)
-			);
+		public Task<IXPackInfoResponse> XPackInfoAsync(IXPackInfoRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IXPackInfoRequest, IXPackInfoResponse, XPackInfoResponse>(request, request.RequestParameters, ct);
 	}
 }

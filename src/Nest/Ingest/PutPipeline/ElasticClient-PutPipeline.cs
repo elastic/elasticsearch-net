@@ -15,11 +15,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IPutPipelineResponse> PutPipelineAsync(Id id, Func<PutPipelineDescriptor, IPutPipelineRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
-		Task<IPutPipelineResponse> PutPipelineAsync(IPutPipelineRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IPutPipelineResponse> PutPipelineAsync(IPutPipelineRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -28,23 +28,15 @@ namespace Nest
 			PutPipeline(selector?.Invoke(new PutPipelineDescriptor(id)));
 
 		public IPutPipelineResponse PutPipeline(IPutPipelineRequest request) =>
-			Dispatcher.Dispatch<IPutPipelineRequest, PutPipelineRequestParameters, PutPipelineResponse>(
-				request,
-				LowLevelDispatch.IngestPutPipelineDispatch<PutPipelineResponse>
-			);
+			Dispatch2<IPutPipelineRequest, PutPipelineResponse>(request, request.RequestParameters);
 
-		public Task<IPutPipelineResponse> PutPipelineAsync(Id id, Func<PutPipelineDescriptor, IPutPipelineRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			PutPipelineAsync(selector?.Invoke(new PutPipelineDescriptor(id)), cancellationToken);
+		public Task<IPutPipelineResponse> PutPipelineAsync(
+			Id id,
+			Func<PutPipelineDescriptor, IPutPipelineRequest> selector,
+			CancellationToken cancellationToken = default
+		) => PutPipelineAsync(selector?.Invoke(new PutPipelineDescriptor(id)), cancellationToken);
 
-		public Task<IPutPipelineResponse> PutPipelineAsync(IPutPipelineRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IPutPipelineRequest, PutPipelineRequestParameters, PutPipelineResponse, IPutPipelineResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.IngestPutPipelineDispatchAsync<PutPipelineResponse>
-			);
+		public Task<IPutPipelineResponse> PutPipelineAsync(IPutPipelineRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IPutPipelineRequest, IPutPipelineResponse, PutPipelineResponse>(request, request.RequestParameters, ct);
 	}
 }

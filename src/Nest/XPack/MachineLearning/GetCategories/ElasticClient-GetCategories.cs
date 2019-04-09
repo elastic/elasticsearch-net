@@ -17,12 +17,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IGetCategoriesResponse> GetCategoriesAsync(Id jobId, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<IGetCategoriesResponse> GetCategoriesAsync(IGetCategoriesRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -34,25 +34,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetCategoriesResponse GetCategories(IGetCategoriesRequest request) =>
-			Dispatcher.Dispatch<IGetCategoriesRequest, GetCategoriesRequestParameters, GetCategoriesResponse>(
-				request,
-				LowLevelDispatch.MlGetCategoriesDispatch<GetCategoriesResponse>
-			);
+			Dispatch2<IGetCategoriesRequest, GetCategoriesResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetCategoriesResponse> GetCategoriesAsync(Id jobId, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			GetCategoriesAsync(selector.InvokeOrDefault(new GetCategoriesDescriptor(jobId)), cancellationToken);
+		public Task<IGetCategoriesResponse> GetCategoriesAsync(
+			Id jobId,
+			Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null,
+			CancellationToken ct = default
+		) => GetCategoriesAsync(selector.InvokeOrDefault(new GetCategoriesDescriptor(jobId)), ct);
 
 		/// <inheritdoc />
-		public Task<IGetCategoriesResponse> GetCategoriesAsync(IGetCategoriesRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IGetCategoriesRequest, GetCategoriesRequestParameters, GetCategoriesResponse, IGetCategoriesResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.MlGetCategoriesDispatchAsync<GetCategoriesResponse>
-			);
+		public Task<IGetCategoriesResponse> GetCategoriesAsync(IGetCategoriesRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IGetCategoriesRequest, IGetCategoriesResponse, GetCategoriesResponse>(request, request.RequestParameters, ct);
 	}
 }

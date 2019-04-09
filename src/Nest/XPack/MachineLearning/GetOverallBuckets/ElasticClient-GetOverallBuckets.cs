@@ -22,14 +22,14 @@ namespace Nest
 		/// </summary>
 		Task<IGetOverallBucketsResponse> GetOverallBucketsAsync(Id jobId,
 			Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		);
 
 		/// <summary>
 		/// Retrieves machine learning job results for one or more buckets.
 		/// </summary>
 		Task<IGetOverallBucketsResponse> GetOverallBucketsAsync(IGetOverallBucketsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -41,27 +41,18 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetOverallBucketsResponse GetOverallBuckets(IGetOverallBucketsRequest request) =>
-			Dispatcher.Dispatch<IGetOverallBucketsRequest, GetOverallBucketsRequestParameters, GetOverallBucketsResponse>(
-				request,
-				LowLevelDispatch.MlGetOverallBucketsDispatch<GetOverallBucketsResponse>
-			);
+			Dispatch2<IGetOverallBucketsRequest, GetOverallBucketsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetOverallBucketsResponse> GetOverallBucketsAsync(Id jobId,
+		public Task<IGetOverallBucketsResponse> GetOverallBucketsAsync(
+			Id jobId,
 			Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			GetOverallBucketsAsync(selector.InvokeOrDefault(new GetOverallBucketsDescriptor(jobId)), cancellationToken);
+			CancellationToken cancellationToken = default
+		) => GetOverallBucketsAsync(selector.InvokeOrDefault(new GetOverallBucketsDescriptor(jobId)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IGetOverallBucketsResponse> GetOverallBucketsAsync(IGetOverallBucketsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<IGetOverallBucketsRequest, GetOverallBucketsRequestParameters, GetOverallBucketsResponse, IGetOverallBucketsResponse>(
-					request,
-					cancellationToken,
-					LowLevelDispatch.MlGetOverallBucketsDispatchAsync<GetOverallBucketsResponse>
-				);
+		public Task<IGetOverallBucketsResponse> GetOverallBucketsAsync(IGetOverallBucketsRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IGetOverallBucketsRequest, IGetOverallBucketsResponse, GetOverallBucketsResponse>
+				(request, request.RequestParameters, ct);
 	}
 }

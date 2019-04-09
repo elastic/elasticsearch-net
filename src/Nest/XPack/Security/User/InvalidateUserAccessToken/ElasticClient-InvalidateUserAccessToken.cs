@@ -18,47 +18,40 @@ namespace Nest
 		/// <inheritdoc />
 		Task<IInvalidateUserAccessTokenResponse> InvalidateUserAccessTokenAsync(string token,
 			Func<InvalidateUserAccessTokenDescriptor, IInvalidateUserAccessTokenRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<IInvalidateUserAccessTokenResponse> InvalidateUserAccessTokenAsync(IInvalidateUserAccessTokenRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IInvalidateUserAccessTokenResponse InvalidateUserAccessToken(string token,
+		public IInvalidateUserAccessTokenResponse InvalidateUserAccessToken(
+			string token,
 			Func<InvalidateUserAccessTokenDescriptor, IInvalidateUserAccessTokenRequest> selector = null
-		) =>
-			InvalidateUserAccessToken(selector.InvokeOrDefault(new InvalidateUserAccessTokenDescriptor(token)));
+		) => InvalidateUserAccessToken(selector.InvokeOrDefault(new InvalidateUserAccessTokenDescriptor(token)));
 
 		/// <inheritdoc />
 		public IInvalidateUserAccessTokenResponse InvalidateUserAccessToken(IInvalidateUserAccessTokenRequest request) =>
-			Dispatcher.Dispatch<IInvalidateUserAccessTokenRequest, InvalidateUserAccessTokenRequestParameters, InvalidateUserAccessTokenResponse>(
-				request,
-				(p, d) => LowLevelDispatch.SecurityInvalidateTokenDispatch<InvalidateUserAccessTokenResponse>(p, d)
-			);
+			Dispatch2<IInvalidateUserAccessTokenRequest, InvalidateUserAccessTokenResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IInvalidateUserAccessTokenResponse> InvalidateUserAccessTokenAsync(string token,
+		public Task<IInvalidateUserAccessTokenResponse> InvalidateUserAccessTokenAsync(
+			string token,
 			Func<InvalidateUserAccessTokenDescriptor, IInvalidateUserAccessTokenRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			InvalidateUserAccessTokenAsync(selector.InvokeOrDefault(new InvalidateUserAccessTokenDescriptor(token)), cancellationToken);
+			CancellationToken ct = default
+		) => InvalidateUserAccessTokenAsync(selector.InvokeOrDefault(new InvalidateUserAccessTokenDescriptor(token)), ct);
 
 		/// <inheritdoc />
-		public Task<IInvalidateUserAccessTokenResponse> InvalidateUserAccessTokenAsync(IInvalidateUserAccessTokenRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+		public Task<IInvalidateUserAccessTokenResponse> InvalidateUserAccessTokenAsync(
+			IInvalidateUserAccessTokenRequest request,
+			CancellationToken ct = default
 		) =>
-			Dispatcher
-				.DispatchAsync<IInvalidateUserAccessTokenRequest, InvalidateUserAccessTokenRequestParameters, InvalidateUserAccessTokenResponse,
-					IInvalidateUserAccessTokenResponse>(
-					request,
-					cancellationToken,
-					(p, d, c) => LowLevelDispatch.SecurityInvalidateTokenDispatchAsync<InvalidateUserAccessTokenResponse>(p, d, c)
-				);
+			Dispatch2Async<IInvalidateUserAccessTokenRequest, IInvalidateUserAccessTokenResponse, InvalidateUserAccessTokenResponse>
+				(request, request.RequestParameters, ct);
 	}
 }

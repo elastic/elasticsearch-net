@@ -17,12 +17,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IGetInfluencersResponse> GetInfluencersAsync(Id jobId, Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<IGetInfluencersResponse> GetInfluencersAsync(IGetInfluencersRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -34,25 +34,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetInfluencersResponse GetInfluencers(IGetInfluencersRequest request) =>
-			Dispatcher.Dispatch<IGetInfluencersRequest, GetInfluencersRequestParameters, GetInfluencersResponse>(
-				request,
-				LowLevelDispatch.MlGetInfluencersDispatch<GetInfluencersResponse>
-			);
+			Dispatch2<IGetInfluencersRequest, GetInfluencersResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetInfluencersResponse> GetInfluencersAsync(Id jobId, Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			GetInfluencersAsync(selector.InvokeOrDefault(new GetInfluencersDescriptor(jobId)), cancellationToken);
+		public Task<IGetInfluencersResponse> GetInfluencersAsync(
+			Id jobId,
+			Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector = null,
+			CancellationToken ct = default
+		) => GetInfluencersAsync(selector.InvokeOrDefault(new GetInfluencersDescriptor(jobId)), ct);
 
 		/// <inheritdoc />
-		public Task<IGetInfluencersResponse> GetInfluencersAsync(IGetInfluencersRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IGetInfluencersRequest, GetInfluencersRequestParameters, GetInfluencersResponse, IGetInfluencersResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.MlGetInfluencersDispatchAsync<GetInfluencersResponse>
-			);
+		public Task<IGetInfluencersResponse> GetInfluencersAsync(IGetInfluencersRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IGetInfluencersRequest, IGetInfluencersResponse, GetInfluencersResponse>(request, request.RequestParameters, ct);
 	}
 }

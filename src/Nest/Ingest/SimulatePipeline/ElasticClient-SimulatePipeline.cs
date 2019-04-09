@@ -15,12 +15,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<ISimulatePipelineResponse> SimulatePipelineAsync(Func<SimulatePipelineDescriptor, ISimulatePipelineRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<ISimulatePipelineResponse> SimulatePipelineAsync(ISimulatePipelineRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -30,24 +30,14 @@ namespace Nest
 			SimulatePipeline(selector?.Invoke(new SimulatePipelineDescriptor()));
 
 		public ISimulatePipelineResponse SimulatePipeline(ISimulatePipelineRequest request) =>
-			Dispatcher.Dispatch<ISimulatePipelineRequest, SimulatePipelineRequestParameters, SimulatePipelineResponse>(
-				request,
-				LowLevelDispatch.IngestSimulateDispatch<SimulatePipelineResponse>
-			);
+			Dispatch2<ISimulatePipelineRequest, SimulatePipelineResponse>(request, request.RequestParameters);
 
-		public Task<ISimulatePipelineResponse> SimulatePipelineAsync(Func<SimulatePipelineDescriptor, ISimulatePipelineRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			SimulatePipelineAsync(selector?.Invoke(new SimulatePipelineDescriptor()), cancellationToken);
+		public Task<ISimulatePipelineResponse> SimulatePipelineAsync(
+			Func<SimulatePipelineDescriptor, ISimulatePipelineRequest> selector,
+			CancellationToken ct = default
+		) => SimulatePipelineAsync(selector?.Invoke(new SimulatePipelineDescriptor()), ct);
 
-		public Task<ISimulatePipelineResponse> SimulatePipelineAsync(ISimulatePipelineRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<ISimulatePipelineRequest, SimulatePipelineRequestParameters, SimulatePipelineResponse, ISimulatePipelineResponse>(
-					request,
-					cancellationToken,
-					LowLevelDispatch.IngestSimulateDispatchAsync<SimulatePipelineResponse>
-				);
+		public Task<ISimulatePipelineResponse> SimulatePipelineAsync(ISimulatePipelineRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<ISimulatePipelineRequest, ISimulatePipelineResponse, SimulatePipelineResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -20,12 +20,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IAcknowledgeWatchResponse> AcknowledgeWatchAsync(Id id, Func<AcknowledgeWatchDescriptor, IAcknowledgeWatchRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
 		Task<IAcknowledgeWatchResponse> AcknowledgeWatchAsync(IAcknowledgeWatchRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -37,27 +37,19 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IAcknowledgeWatchResponse AcknowledgeWatch(IAcknowledgeWatchRequest request) =>
-			Dispatcher.Dispatch<IAcknowledgeWatchRequest, AcknowledgeWatchRequestParameters, AcknowledgeWatchResponse>(
-				request,
-				(p, d) => LowLevelDispatch.WatcherAckWatchDispatch<AcknowledgeWatchResponse>(p)
-			);
+			Dispatch2<IAcknowledgeWatchRequest, AcknowledgeWatchResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IAcknowledgeWatchResponse> AcknowledgeWatchAsync(Id id,
+		public Task<IAcknowledgeWatchResponse> AcknowledgeWatchAsync(
+			Id id,
 			Func<AcknowledgeWatchDescriptor, IAcknowledgeWatchRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		) =>
 			AcknowledgeWatchAsync(selector.InvokeOrDefault(new AcknowledgeWatchDescriptor(id)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IAcknowledgeWatchResponse> AcknowledgeWatchAsync(IAcknowledgeWatchRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<IAcknowledgeWatchRequest, AcknowledgeWatchRequestParameters, AcknowledgeWatchResponse, IAcknowledgeWatchResponse>(
-					request,
-					cancellationToken,
-					(p, d, c) => LowLevelDispatch.WatcherAckWatchDispatchAsync<AcknowledgeWatchResponse>(p, c)
-				);
+		public Task<IAcknowledgeWatchResponse> AcknowledgeWatchAsync(IAcknowledgeWatchRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IAcknowledgeWatchRequest, IAcknowledgeWatchResponse, AcknowledgeWatchResponse>
+				(request, request.RequestParameters, ct);
 	}
 }

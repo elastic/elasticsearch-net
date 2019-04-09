@@ -23,11 +23,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<ISnapshotResponse> SnapshotAsync(Name repository, Name snapshotName, Func<SnapshotDescriptor, ISnapshotRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<ISnapshotResponse> SnapshotAsync(ISnapshotRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<ISnapshotResponse> SnapshotAsync(ISnapshotRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -38,23 +38,19 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ISnapshotResponse Snapshot(ISnapshotRequest request) =>
-			Dispatcher.Dispatch<ISnapshotRequest, SnapshotRequestParameters, SnapshotResponse>(
-				request,
-				LowLevelDispatch.SnapshotCreateDispatch<SnapshotResponse>
-			);
+			Dispatch2<ISnapshotRequest, SnapshotResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<ISnapshotResponse> SnapshotAsync(Name repository, Name snapshotName, Func<SnapshotDescriptor, ISnapshotRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+		public Task<ISnapshotResponse> SnapshotAsync(
+			Name repository,
+			Name snapshotName,
+			Func<SnapshotDescriptor, ISnapshotRequest> selector = null,
+			CancellationToken ct = default
 		) =>
-			SnapshotAsync(selector.InvokeOrDefault(new SnapshotDescriptor(repository, snapshotName)), cancellationToken);
+			SnapshotAsync(selector.InvokeOrDefault(new SnapshotDescriptor(repository, snapshotName)), ct);
 
 		/// <inheritdoc />
-		public Task<ISnapshotResponse> SnapshotAsync(ISnapshotRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<ISnapshotRequest, SnapshotRequestParameters, SnapshotResponse, ISnapshotResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.SnapshotCreateDispatchAsync<SnapshotResponse>
-			);
+		public Task<ISnapshotResponse> SnapshotAsync(ISnapshotRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<ISnapshotRequest, ISnapshotResponse, SnapshotResponse>(request, request.RequestParameters, ct);
 	}
 }

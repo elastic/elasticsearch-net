@@ -15,11 +15,11 @@ namespace Nest
 
 		/// <inheritdoc cref="QuerySql(System.Func{Nest.QuerySqlDescriptor,Nest.IQuerySqlRequest})" />
 		Task<IQuerySqlResponse> QuerySqlAsync(Func<QuerySqlDescriptor, IQuerySqlRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="QuerySql(System.Func{Nest.QuerySqlDescriptor,Nest.IQuerySqlRequest})" />
-		Task<IQuerySqlResponse> QuerySqlAsync(IQuerySqlRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IQuerySqlResponse> QuerySqlAsync(IQuerySqlRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -30,23 +30,17 @@ namespace Nest
 
 		/// <inheritdoc cref="QuerySql(System.Func{Nest.QuerySqlDescriptor,Nest.IQuerySqlRequest})" />
 		public IQuerySqlResponse QuerySql(IQuerySqlRequest request) =>
-			Dispatcher.Dispatch<IQuerySqlRequest, QuerySqlRequestParameters, QuerySqlResponse>(
-				request,
-				(p, d) => LowLevelDispatch.SqlQueryDispatch<QuerySqlResponse>(p, d)
-			);
+			Dispatch2<IQuerySqlRequest, QuerySqlResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="QuerySql(System.Func{Nest.QuerySqlDescriptor,Nest.IQuerySqlRequest})" />
-		public Task<IQuerySqlResponse> QuerySqlAsync(Func<QuerySqlDescriptor, IQuerySqlRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			QuerySqlAsync(selector.InvokeOrDefault(new QuerySqlDescriptor()), cancellationToken);
+		public Task<IQuerySqlResponse> QuerySqlAsync(
+			Func<QuerySqlDescriptor, IQuerySqlRequest> selector = null,
+			CancellationToken ct = default
+		) => QuerySqlAsync(selector.InvokeOrDefault(new QuerySqlDescriptor()), ct);
 
 		/// <inheritdoc cref="QuerySql(System.Func{Nest.QuerySqlDescriptor,Nest.IQuerySqlRequest})" />
-		public Task<IQuerySqlResponse> QuerySqlAsync(IQuerySqlRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IQuerySqlRequest, QuerySqlRequestParameters, QuerySqlResponse, IQuerySqlResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.SqlQueryDispatchAsync<QuerySqlResponse>(p, d, c)
-			);
+		public Task<IQuerySqlResponse> QuerySqlAsync(IQuerySqlRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IQuerySqlRequest, IQuerySqlResponse, QuerySqlResponse>
+				(request, request.RequestParameters, ct);
 	}
 }

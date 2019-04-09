@@ -24,12 +24,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IMultiSearchResponse> MultiSearchTemplateAsync(Func<MultiSearchTemplateDescriptor, IMultiSearchTemplateRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<IMultiSearchResponse> MultiSearchTemplateAsync(IMultiSearchTemplateRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -40,43 +40,32 @@ namespace Nest
 			MultiSearchTemplate(selector?.Invoke(new MultiSearchTemplateDescriptor()));
 
 		/// <inheritdoc />
-		public IMultiSearchResponse MultiSearchTemplate(IMultiSearchTemplateRequest request) =>
-			Dispatcher.Dispatch<IMultiSearchTemplateRequest, MultiSearchTemplateRequestParameters, MultiSearchResponse>(
-				request,
-				(p, d) =>
-				{
-					var formatter = CreateMultiSearchTemplateResponseFormatter(p);
-					var serializer = ConnectionSettings.CreateStateful(formatter);
-					var creator = new MultiSearchTemplateCreator((r, s) => serializer.Deserialize<MultiSearchResponse>(s));
-					request.RequestParameters.DeserializationOverride = creator;
-					return LowLevelDispatch.MsearchTemplateDispatch<MultiSearchResponse>(p, new SerializableData<IMultiSearchTemplateRequest>(p));
-				}
-			);
+		public IMultiSearchResponse MultiSearchTemplate(IMultiSearchTemplateRequest request)
+		{
+			CreateMultiSearchTemplateDeserializer(request);
+			return Dispatch2<IMultiSearchTemplateRequest, MultiSearchResponse>(request, request.RequestParameters);
+		}
 
 		/// <inheritdoc />
-		public Task<IMultiSearchResponse> MultiSearchTemplateAsync(Func<MultiSearchTemplateDescriptor, IMultiSearchTemplateRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			MultiSearchTemplateAsync(selector?.Invoke(new MultiSearchTemplateDescriptor()), cancellationToken);
-
+		public Task<IMultiSearchResponse> MultiSearchTemplateAsync(
+			Func<MultiSearchTemplateDescriptor, IMultiSearchTemplateRequest> selector,
+			CancellationToken ct = default
+		) => MultiSearchTemplateAsync(selector?.Invoke(new MultiSearchTemplateDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IMultiSearchResponse> MultiSearchTemplateAsync(IMultiSearchTemplateRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) => Dispatcher.DispatchAsync<IMultiSearchTemplateRequest, MultiSearchTemplateRequestParameters, MultiSearchResponse, IMultiSearchResponse>(
-			request,
-			cancellationToken,
-			(p, d, c) =>
-			{
-				var formatter = CreateMultiSearchTemplateResponseFormatter(p);
-				var serializer = ConnectionSettings.CreateStateful(formatter);
-				var creator = new MultiSearchTemplateCreator((r, s) => serializer.Deserialize<MultiSearchResponse>(s));
-				request.RequestParameters.DeserializationOverride = creator;
-				return LowLevelDispatch.MsearchTemplateDispatchAsync<MultiSearchResponse>(p, new SerializableData<IMultiSearchTemplateRequest>(p), c);
-			}
-		);
+		public Task<IMultiSearchResponse> MultiSearchTemplateAsync(IMultiSearchTemplateRequest request, CancellationToken ct = default)
+		{
+			CreateMultiSearchTemplateDeserializer(request);
+			return Dispatch2Async<IMultiSearchTemplateRequest, IMultiSearchResponse, MultiSearchResponse>(request, request.RequestParameters, ct);
+		}
 
-		private MultiSearchResponseFormatter CreateMultiSearchTemplateResponseFormatter(IMultiSearchTemplateRequest request) =>
-			new MultiSearchResponseFormatter(request);
+		private void CreateMultiSearchTemplateDeserializer(IMultiSearchTemplateRequest request)
+		{
+			var formatter = new MultiSearchResponseFormatter(request);
+			var serializer = ConnectionSettings.CreateStateful(formatter);
+			var creator = new MultiSearchTemplateCreator((r, s) => serializer.Deserialize<MultiSearchResponse>(s));
+			request.RequestParameters.DeserializationOverride = creator;
+		}
+
 	}
 }

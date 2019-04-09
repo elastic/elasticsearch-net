@@ -36,7 +36,7 @@ namespace Nest
 		/// has not already activated a trial license for the current major X-Pack version.
 		/// </remarks>
 		Task<IStartTrialLicenseResponse> StartTrialLicenseAsync(Func<StartTrialLicenseDescriptor, IStartTrialLicenseRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <summary>
@@ -48,7 +48,7 @@ namespace Nest
 		/// has not already activated a trial license for the current major X-Pack version.
 		/// </remarks>
 		Task<IStartTrialLicenseResponse> StartTrialLicenseAsync(IStartTrialLicenseRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -60,26 +60,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IStartTrialLicenseResponse StartTrialLicense(IStartTrialLicenseRequest request) =>
-			Dispatcher.Dispatch<IStartTrialLicenseRequest, StartTrialLicenseRequestParameters, StartTrialLicenseResponse>(
-				request,
-				(p, d) => LowLevelDispatch.LicensePostStartTrialDispatch<StartTrialLicenseResponse>(p)
-			);
+			Dispatch2<IStartTrialLicenseRequest, StartTrialLicenseResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IStartTrialLicenseResponse> StartTrialLicenseAsync(Func<StartTrialLicenseDescriptor, IStartTrialLicenseRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+		public Task<IStartTrialLicenseResponse> StartTrialLicenseAsync(
+			Func<StartTrialLicenseDescriptor, IStartTrialLicenseRequest> selector = null,
+			CancellationToken ct = default
 		) =>
-			StartTrialLicenseAsync(selector.InvokeOrDefault(new StartTrialLicenseDescriptor()), cancellationToken);
+			StartTrialLicenseAsync(selector.InvokeOrDefault(new StartTrialLicenseDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IStartTrialLicenseResponse> StartTrialLicenseAsync(IStartTrialLicenseRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<IStartTrialLicenseRequest, StartTrialLicenseRequestParameters, StartTrialLicenseResponse, IStartTrialLicenseResponse>(
-					request,
-					cancellationToken,
-					(p, d, c) => LowLevelDispatch.LicensePostStartTrialDispatchAsync<StartTrialLicenseResponse>(p, c)
-				);
+		public Task<IStartTrialLicenseResponse> StartTrialLicenseAsync(IStartTrialLicenseRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IStartTrialLicenseRequest, IStartTrialLicenseResponse, StartTrialLicenseResponse>(request, request.RequestParameters, ct);
 	}
 }

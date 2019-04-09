@@ -23,11 +23,11 @@ namespace Nest
 		Task<IIndicesStatsResponse> IndicesStatsAsync(
 			Indices indices,
 			Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
-		Task<IIndicesStatsResponse> IndicesStatsAsync(IIndicesStatsRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IIndicesStatsResponse> IndicesStatsAsync(IIndicesStatsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -38,26 +38,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IIndicesStatsResponse IndicesStats(IIndicesStatsRequest request) =>
-			Dispatcher.Dispatch<IIndicesStatsRequest, IndicesStatsRequestParameters, IndicesStatsResponse>(
-				request,
-				(p, d) => LowLevelDispatch.IndicesStatsDispatch<IndicesStatsResponse>(p)
-			);
+			Dispatch2<IIndicesStatsRequest, IndicesStatsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IIndicesStatsResponse> IndicesStatsAsync(
 			Indices indices,
 			Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		) => IndicesStatsAsync(selector.InvokeOrDefault(new IndicesStatsDescriptor().Index(indices)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IIndicesStatsResponse> IndicesStatsAsync(IIndicesStatsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IIndicesStatsRequest, IndicesStatsRequestParameters, IndicesStatsResponse, IIndicesStatsResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.IndicesStatsDispatchAsync<IndicesStatsResponse>(p, c)
-			);
+		public Task<IIndicesStatsResponse> IndicesStatsAsync(IIndicesStatsRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IIndicesStatsRequest, IIndicesStatsResponse, IndicesStatsResponse>(request, request.RequestParameters, ct);
 	}
 }

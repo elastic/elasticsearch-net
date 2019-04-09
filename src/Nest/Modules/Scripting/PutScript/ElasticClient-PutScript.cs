@@ -15,11 +15,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IPutScriptResponse> PutScriptAsync(Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IPutScriptResponse> PutScriptAsync(IPutScriptRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IPutScriptResponse> PutScriptAsync(IPutScriptRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -28,21 +28,15 @@ namespace Nest
 			PutScript(selector?.Invoke(new PutScriptDescriptor(id)));
 
 		public IPutScriptResponse PutScript(IPutScriptRequest request) =>
-			Dispatcher.Dispatch<IPutScriptRequest, PutScriptRequestParameters, PutScriptResponse>(
-				request,
-				LowLevelDispatch.PutScriptDispatch<PutScriptResponse>
-			);
+			Dispatch2<IPutScriptRequest, PutScriptResponse>(request, request.RequestParameters);
 
-		public Task<IPutScriptResponse> PutScriptAsync(Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			PutScriptAsync(selector?.Invoke(new PutScriptDescriptor(id)), cancellationToken);
+		public Task<IPutScriptResponse> PutScriptAsync(
+			Id id,
+			Func<PutScriptDescriptor, IPutScriptRequest> selector,
+			CancellationToken ct = default
+		) => PutScriptAsync(selector?.Invoke(new PutScriptDescriptor(id)), ct);
 
-		public Task<IPutScriptResponse> PutScriptAsync(IPutScriptRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IPutScriptRequest, PutScriptRequestParameters, PutScriptResponse, IPutScriptResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.PutScriptDispatchAsync<PutScriptResponse>
-			);
+		public Task<IPutScriptResponse> PutScriptAsync(IPutScriptRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IPutScriptRequest, IPutScriptResponse, PutScriptResponse>(request, request.RequestParameters, ct);
 	}
 }

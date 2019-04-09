@@ -14,35 +14,29 @@ namespace Nest
 		IUpgradeResponse Upgrade(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> selector = null);
 
 		/// <inheritdoc />
-		Task<IUpgradeResponse> UpgradeAsync(IUpgradeRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IUpgradeResponse> UpgradeAsync(IUpgradeRequest request, CancellationToken ct = default);
 
 		/// <inheritdoc />
 		Task<IUpgradeResponse> UpgradeAsync(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
 	public partial class ElasticClient
 	{
 		public IUpgradeResponse Upgrade(IUpgradeRequest request) =>
-			Dispatcher.Dispatch<IUpgradeRequest, UpgradeRequestParameters, UpgradeResponse>(
-				request,
-				(p, d) => LowLevelDispatch.IndicesUpgradeDispatch<UpgradeResponse>(p)
-			);
+			Dispatch2<IUpgradeRequest, UpgradeResponse>(request, request.RequestParameters);
 
 		public IUpgradeResponse Upgrade(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> selector = null) =>
 			Upgrade(selector.InvokeOrDefault(new UpgradeDescriptor().Index(indices)));
 
-		public Task<IUpgradeResponse> UpgradeAsync(IUpgradeRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IUpgradeRequest, UpgradeRequestParameters, UpgradeResponse, IUpgradeResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.IndicesUpgradeDispatchAsync<UpgradeResponse>(p, c)
-			);
+		public Task<IUpgradeResponse> UpgradeAsync(IUpgradeRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IUpgradeRequest, IUpgradeResponse, UpgradeResponse>(request, request.RequestParameters, ct);
 
-		public Task<IUpgradeResponse> UpgradeAsync(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			UpgradeAsync(selector.InvokeOrDefault(new UpgradeDescriptor().Index(indices)), cancellationToken);
+		public Task<IUpgradeResponse> UpgradeAsync(
+			Indices indices,
+			Func<UpgradeDescriptor, IUpgradeRequest> selector = null,
+			CancellationToken ct = default
+		) => UpgradeAsync(selector.InvokeOrDefault(new UpgradeDescriptor().Index(indices)), ct);
 	}
 }

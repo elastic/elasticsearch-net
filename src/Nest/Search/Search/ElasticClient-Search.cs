@@ -76,7 +76,7 @@ namespace Nest
 		public ISearchResponse<TResult> Search<T, TResult>(ISearchRequest request)
 			where T : class
 			where TResult : class =>
-			Dispatch2<ISearchRequest, SearchResponse<TResult>>(request, request, request.RequestParameters);
+			Dispatch2<ISearchRequest, SearchResponse<TResult>>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, ISearchRequest> selector = null,
@@ -104,6 +104,6 @@ namespace Nest
 		)
 			where T : class
 			where TResult : class =>
-			Dispatch2Async<ISearchRequest, ISearchResponse<TResult>, SearchResponse<TResult>>(request, request, request.RequestParameters, cancellationToken);
+			Dispatch2Async<ISearchRequest, ISearchResponse<TResult>, SearchResponse<TResult>>(request, request.RequestParameters, cancellationToken);
 	}
 }

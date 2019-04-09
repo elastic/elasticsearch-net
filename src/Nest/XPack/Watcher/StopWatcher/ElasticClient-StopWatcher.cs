@@ -17,11 +17,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IStopWatcherResponse> StopWatcherAsync(Func<StopWatcherDescriptor, IStopWatcherRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IStopWatcherResponse> StopWatcherAsync(IStopWatcherRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IStopWatcherResponse> StopWatcherAsync(IStopWatcherRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -32,25 +32,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IStopWatcherResponse StopWatcher(IStopWatcherRequest request) =>
-			Dispatcher.Dispatch<IStopWatcherRequest, StopWatcherRequestParameters, StopWatcherResponse>(
-				request,
-				(p, d) => LowLevelDispatch.WatcherStopDispatch<StopWatcherResponse>(p)
-			);
+			Dispatch2<IStopWatcherRequest, StopWatcherResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IStopWatcherResponse> StopWatcherAsync(Func<StopWatcherDescriptor, IStopWatcherRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			StopWatcherAsync(selector.InvokeOrDefault(new StopWatcherDescriptor()), cancellationToken);
+		public Task<IStopWatcherResponse> StopWatcherAsync(
+			Func<StopWatcherDescriptor, IStopWatcherRequest> selector = null,
+			CancellationToken ct = default
+		) => StopWatcherAsync(selector.InvokeOrDefault(new StopWatcherDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IStopWatcherResponse> StopWatcherAsync(IStopWatcherRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IStopWatcherRequest, StopWatcherRequestParameters, StopWatcherResponse, IStopWatcherResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.WatcherStopDispatchAsync<StopWatcherResponse>(p, c)
-			);
+		public Task<IStopWatcherResponse> StopWatcherAsync(IStopWatcherRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IStopWatcherRequest, IStopWatcherResponse, StopWatcherResponse>
+				(request, request.RequestParameters, ct);
 	}
 }

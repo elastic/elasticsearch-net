@@ -17,38 +17,36 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IUpdateJobResponse> UpdateJobAsync<T>(Id jobId, Func<UpdateJobDescriptor<T>, IUpdateJobRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) where T : class;
 
 		/// <inheritdoc />
-		Task<IUpdateJobResponse> UpdateJobAsync(IUpdateJobRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IUpdateJobResponse> UpdateJobAsync(IUpdateJobRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IUpdateJobResponse UpdateJob<T>(Id jobId, Func<UpdateJobDescriptor<T>, IUpdateJobRequest> selector = null) where T : class =>
+		public IUpdateJobResponse UpdateJob<T>(Id jobId, Func<UpdateJobDescriptor<T>, IUpdateJobRequest> selector = null)
+			where T : class =>
 			UpdateJob(selector.InvokeOrDefault(new UpdateJobDescriptor<T>(jobId)));
 
 		/// <inheritdoc />
 		public IUpdateJobResponse UpdateJob(IUpdateJobRequest request) =>
-			Dispatcher.Dispatch<IUpdateJobRequest, UpdateJobRequestParameters, UpdateJobResponse>(
-				request,
-				LowLevelDispatch.MlUpdateJobDispatch<UpdateJobResponse>
-			);
+			Dispatch2<IUpdateJobRequest, UpdateJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IUpdateJobResponse> UpdateJobAsync<T>(Id jobId, Func<UpdateJobDescriptor<T>, IUpdateJobRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) where T : class =>
-			UpdateJobAsync(selector.InvokeOrDefault(new UpdateJobDescriptor<T>(jobId)), cancellationToken);
+		public Task<IUpdateJobResponse> UpdateJobAsync<T>(
+			Id jobId,
+			Func<UpdateJobDescriptor<T>, IUpdateJobRequest> selector = null,
+			CancellationToken ct = default
+		)
+			where T : class =>
+			UpdateJobAsync(selector.InvokeOrDefault(new UpdateJobDescriptor<T>(jobId)), ct);
 
 		/// <inheritdoc />
-		public Task<IUpdateJobResponse> UpdateJobAsync(IUpdateJobRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IUpdateJobRequest, UpdateJobRequestParameters, UpdateJobResponse, IUpdateJobResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.MlUpdateJobDispatchAsync<UpdateJobResponse>
-			);
+		public Task<IUpdateJobResponse> UpdateJobAsync(IUpdateJobRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IUpdateJobRequest, IUpdateJobResponse, UpdateJobResponse>
+				(request, request.RequestParameters, ct);
 	}
 }

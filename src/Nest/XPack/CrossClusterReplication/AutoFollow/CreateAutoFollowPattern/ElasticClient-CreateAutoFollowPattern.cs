@@ -19,11 +19,11 @@ namespace Nest
 
 		/// <inheritdoc cref="CreateAutoFollowPattern(Name, System.Func{Nest.CreateAutoFollowPatternDescriptor,Nest.ICreateAutoFollowPatternRequest})" />
 		Task<ICreateAutoFollowPatternResponse> CreateAutoFollowPatternAsync(Name name, Func<CreateAutoFollowPatternDescriptor, ICreateAutoFollowPatternRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="CreateAutoFollowPattern(Name, System.Func{Nest.CreateAutoFollowPatternDescriptor,Nest.ICreateAutoFollowPatternRequest})" />
-		Task<ICreateAutoFollowPatternResponse> CreateAutoFollowPatternAsync(ICreateAutoFollowPatternRequest request, CancellationToken cancellationToken = default);
+		Task<ICreateAutoFollowPatternResponse> CreateAutoFollowPatternAsync(ICreateAutoFollowPatternRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -34,23 +34,18 @@ namespace Nest
 
 		/// <inheritdoc cref="CreateAutoFollowPattern(Name, System.Func{Nest.CreateAutoFollowPatternDescriptor,Nest.ICreateAutoFollowPatternRequest})" />
 		public ICreateAutoFollowPatternResponse CreateAutoFollowPattern(ICreateAutoFollowPatternRequest request) =>
-			Dispatcher.Dispatch<ICreateAutoFollowPatternRequest, CreateAutoFollowPatternRequestParameters, CreateAutoFollowPatternResponse>(
-				request,
-				(p, d) => LowLevelDispatch.CcrPutAutoFollowPatternDispatch<CreateAutoFollowPatternResponse>(p, d)
-			);
+			Dispatch2<ICreateAutoFollowPatternRequest, CreateAutoFollowPatternResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="CreateAutoFollowPattern(Name, System.Func{Nest.CreateAutoFollowPatternDescriptor,Nest.ICreateAutoFollowPatternRequest})" />
-		public Task<ICreateAutoFollowPatternResponse> CreateAutoFollowPatternAsync(Name name, Func<CreateAutoFollowPatternDescriptor, ICreateAutoFollowPatternRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+		public Task<ICreateAutoFollowPatternResponse> CreateAutoFollowPatternAsync(
+			Name name,
+			Func<CreateAutoFollowPatternDescriptor, ICreateAutoFollowPatternRequest> selector,
+			CancellationToken ct = default
 		) =>
-			CreateAutoFollowPatternAsync(selector.InvokeOrDefault(new CreateAutoFollowPatternDescriptor(name)), cancellationToken);
+			CreateAutoFollowPatternAsync(selector.InvokeOrDefault(new CreateAutoFollowPatternDescriptor(name)), ct);
 
 		/// <inheritdoc cref="CreateAutoFollowPattern(Name, System.Func{Nest.CreateAutoFollowPatternDescriptor,Nest.ICreateAutoFollowPatternRequest})" />
-		public Task<ICreateAutoFollowPatternResponse> CreateAutoFollowPatternAsync(ICreateAutoFollowPatternRequest request, CancellationToken cancellationToken = default) =>
-			Dispatcher.DispatchAsync<ICreateAutoFollowPatternRequest, CreateAutoFollowPatternRequestParameters, CreateAutoFollowPatternResponse, ICreateAutoFollowPatternResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.CcrPutAutoFollowPatternDispatchAsync<CreateAutoFollowPatternResponse>(p, d, c)
-			);
+		public Task<ICreateAutoFollowPatternResponse> CreateAutoFollowPatternAsync(ICreateAutoFollowPatternRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<ICreateAutoFollowPatternRequest, ICreateAutoFollowPatternResponse, CreateAutoFollowPatternResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -22,11 +22,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<ISyncedFlushResponse> SyncedFlushAsync(Indices indices, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
-		Task<ISyncedFlushResponse> SyncedFlushAsync(ISyncedFlushRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<ISyncedFlushResponse> SyncedFlushAsync(ISyncedFlushRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -37,25 +37,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ISyncedFlushResponse SyncedFlush(ISyncedFlushRequest request) =>
-			Dispatcher.Dispatch<ISyncedFlushRequest, SyncedFlushRequestParameters, SyncedFlushResponse>(
-				request,
-				(p, d) => LowLevelDispatch.IndicesFlushSyncedDispatch<SyncedFlushResponse>(p)
-			);
+			Dispatch2<ISyncedFlushRequest, SyncedFlushResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<ISyncedFlushResponse> SyncedFlushAsync(Indices indices, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			SyncedFlushAsync(selector.InvokeOrDefault(new SyncedFlushDescriptor().Index(indices)), cancellationToken);
+		public Task<ISyncedFlushResponse> SyncedFlushAsync(
+			Indices indices,
+			Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null,
+			CancellationToken cancellationToken = default
+		) => SyncedFlushAsync(selector.InvokeOrDefault(new SyncedFlushDescriptor().Index(indices)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<ISyncedFlushResponse> SyncedFlushAsync(ISyncedFlushRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<ISyncedFlushRequest, SyncedFlushRequestParameters, SyncedFlushResponse, ISyncedFlushResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.IndicesFlushSyncedDispatchAsync<SyncedFlushResponse>(p, c)
-			);
+		public Task<ISyncedFlushResponse> SyncedFlushAsync(ISyncedFlushRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<ISyncedFlushRequest, ISyncedFlushResponse, SyncedFlushResponse>(request, request.RequestParameters, ct);
 	}
 }

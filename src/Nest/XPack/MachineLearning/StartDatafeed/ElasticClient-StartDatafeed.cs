@@ -19,12 +19,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IStartDatafeedResponse> StartDatafeedAsync(Id datafeedId, Func<StartDatafeedDescriptor, IStartDatafeedRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
 		Task<IStartDatafeedResponse> StartDatafeedAsync(IStartDatafeedRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -36,25 +36,19 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IStartDatafeedResponse StartDatafeed(IStartDatafeedRequest request) =>
-			Dispatcher.Dispatch<IStartDatafeedRequest, StartDatafeedRequestParameters, StartDatafeedResponse>(
-				request,
-				LowLevelDispatch.MlStartDatafeedDispatch<StartDatafeedResponse>
-			);
+			Dispatch2<IStartDatafeedRequest, StartDatafeedResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IStartDatafeedResponse> StartDatafeedAsync(Id datafeedId, Func<StartDatafeedDescriptor, IStartDatafeedRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+		public Task<IStartDatafeedResponse> StartDatafeedAsync(
+			Id datafeedId,
+			Func<StartDatafeedDescriptor, IStartDatafeedRequest> selector = null,
+			CancellationToken cancellationToken = default
 		) =>
 			StartDatafeedAsync(selector.InvokeOrDefault(new StartDatafeedDescriptor(datafeedId)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IStartDatafeedResponse> StartDatafeedAsync(IStartDatafeedRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IStartDatafeedRequest, StartDatafeedRequestParameters, StartDatafeedResponse, IStartDatafeedResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.MlStartDatafeedDispatchAsync<StartDatafeedResponse>
-			);
+		public Task<IStartDatafeedResponse> StartDatafeedAsync(IStartDatafeedRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IStartDatafeedRequest, IStartDatafeedResponse, StartDatafeedResponse>
+				(request, request.RequestParameters, ct);
 	}
 }

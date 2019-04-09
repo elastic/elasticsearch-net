@@ -21,11 +21,11 @@ namespace Nest
 
 		/// <inheritdoc cref="GetRollupJob(System.Func{Nest.GetRollupJobDescriptor,Nest.IGetRollupJobRequest})" />
 		Task<IGetRollupJobResponse> GetRollupJobAsync(
-			Func<GetRollupJobDescriptor, IGetRollupJobRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)
+			Func<GetRollupJobDescriptor, IGetRollupJobRequest> selector = null, CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="GetRollupJob(System.Func{Nest.GetRollupJobDescriptor,Nest.IGetRollupJobRequest})" />
-		Task<IGetRollupJobResponse> GetRollupJobAsync(IGetRollupJobRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IGetRollupJobResponse> GetRollupJobAsync(IGetRollupJobRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -36,25 +36,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetRollupJobResponse GetRollupJob(IGetRollupJobRequest request) =>
-			Dispatcher.Dispatch<IGetRollupJobRequest, GetRollupJobRequestParameters, GetRollupJobResponse>(
-				request,
-				(p, d) => LowLevelDispatch.RollupGetJobsDispatch<GetRollupJobResponse>(p)
-			);
+			Dispatch2<IGetRollupJobRequest, GetRollupJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGetRollupJobResponse> GetRollupJobAsync(
-			Func<GetRollupJobDescriptor, IGetRollupJobRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			GetRollupJobAsync(selector.InvokeOrDefault(new GetRollupJobDescriptor()), cancellationToken);
+			Func<GetRollupJobDescriptor, IGetRollupJobRequest> selector = null,
+			CancellationToken ct = default
+		) => GetRollupJobAsync(selector.InvokeOrDefault(new GetRollupJobDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IGetRollupJobResponse> GetRollupJobAsync(IGetRollupJobRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IGetRollupJobRequest, GetRollupJobRequestParameters, GetRollupJobResponse, IGetRollupJobResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.RollupGetJobsDispatchAsync<GetRollupJobResponse>(p, c)
-			);
+		public Task<IGetRollupJobResponse> GetRollupJobAsync(IGetRollupJobRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IGetRollupJobRequest, IGetRollupJobResponse, GetRollupJobResponse>
+				(request, request.RequestParameters, ct);
 	}
 }

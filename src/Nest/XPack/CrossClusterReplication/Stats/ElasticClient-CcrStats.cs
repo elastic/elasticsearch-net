@@ -19,11 +19,11 @@ namespace Nest
 
 		/// <inheritdoc cref="CcrStats(System.Func{Nest.CcrStatsDescriptor,Nest.ICcrStatsRequest})" />
 		Task<ICcrStatsResponse> CcrStatsAsync(Func<CcrStatsDescriptor, ICcrStatsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="CcrStats(System.Func{Nest.CcrStatsDescriptor,Nest.ICcrStatsRequest})" />
-		Task<ICcrStatsResponse> CcrStatsAsync(ICcrStatsRequest request, CancellationToken cancellationToken = default);
+		Task<ICcrStatsResponse> CcrStatsAsync(ICcrStatsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -34,23 +34,16 @@ namespace Nest
 
 		/// <inheritdoc cref="CcrStats(System.Func{Nest.CcrStatsDescriptor,Nest.ICcrStatsRequest})" />
 		public ICcrStatsResponse CcrStats(ICcrStatsRequest request) =>
-			Dispatcher.Dispatch<ICcrStatsRequest, CcrStatsRequestParameters, CcrStatsResponse>(
-				request,
-				(p, d) => LowLevelDispatch.CcrStatsDispatch<CcrStatsResponse>(p)
-			);
+			Dispatch2<ICcrStatsRequest, CcrStatsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="CcrStats(System.Func{Nest.CcrStatsDescriptor,Nest.ICcrStatsRequest})" />
-		public Task<ICcrStatsResponse> CcrStatsAsync(Func<CcrStatsDescriptor, ICcrStatsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			CcrStatsAsync(selector.InvokeOrDefault(new CcrStatsDescriptor()), cancellationToken);
+		public Task<ICcrStatsResponse> CcrStatsAsync(
+			Func<CcrStatsDescriptor, ICcrStatsRequest> selector = null,
+			CancellationToken ct = default
+		) => CcrStatsAsync(selector.InvokeOrDefault(new CcrStatsDescriptor()), ct);
 
 		/// <inheritdoc cref="CcrStats(System.Func{Nest.CcrStatsDescriptor,Nest.ICcrStatsRequest})" />
-		public Task<ICcrStatsResponse> CcrStatsAsync(ICcrStatsRequest request, CancellationToken cancellationToken = default) =>
-			Dispatcher.DispatchAsync<ICcrStatsRequest, CcrStatsRequestParameters, CcrStatsResponse, ICcrStatsResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.CcrStatsDispatchAsync<CcrStatsResponse>(p, c)
-			);
+		public Task<ICcrStatsResponse> CcrStatsAsync(ICcrStatsRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<ICcrStatsRequest, ICcrStatsResponse, CcrStatsResponse>(request, request.RequestParameters, ct);
 	}
 }

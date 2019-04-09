@@ -19,11 +19,11 @@ namespace Nest
 
 		/// <inheritdoc cref="PauseFollowIndex(IndexName, System.Func{Nest.PauseFollowIndexDescriptor,Nest.IPauseFollowIndexRequest})" />
 		Task<IPauseFollowIndexResponse> PauseFollowIndexAsync(IndexName index, Func<PauseFollowIndexDescriptor, IPauseFollowIndexRequest> selector = null,
-			CancellationToken cancellationToken = default
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="PauseFollowIndex(IndexName, System.Func{Nest.PauseFollowIndexDescriptor,Nest.IPauseFollowIndexRequest})" />
-		Task<IPauseFollowIndexResponse> PauseFollowIndexAsync(IPauseFollowIndexRequest request, CancellationToken cancellationToken = default);
+		Task<IPauseFollowIndexResponse> PauseFollowIndexAsync(IPauseFollowIndexRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -34,25 +34,17 @@ namespace Nest
 
 		/// <inheritdoc cref="PauseFollowIndex(IndexName, System.Func{Nest.PauseFollowIndexDescriptor,Nest.IPauseFollowIndexRequest})" />
 		public IPauseFollowIndexResponse PauseFollowIndex(IPauseFollowIndexRequest request) =>
-			Dispatcher.Dispatch<IPauseFollowIndexRequest, PauseFollowIndexRequestParameters, PauseFollowIndexResponse>(
-				request,
-				(p, d) => LowLevelDispatch.CcrPauseFollowDispatch<PauseFollowIndexResponse>(p)
-			);
+			Dispatch2<IPauseFollowIndexRequest, PauseFollowIndexResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="PauseFollowIndex(IndexName, System.Func{Nest.PauseFollowIndexDescriptor,Nest.IPauseFollowIndexRequest})" />
 		public Task<IPauseFollowIndexResponse> PauseFollowIndexAsync(
 			IndexName index,
 			Func<PauseFollowIndexDescriptor, IPauseFollowIndexRequest> selector = null,
-			CancellationToken cancellationToken = default
-		) =>
-			PauseFollowIndexAsync(selector.InvokeOrDefault(new PauseFollowIndexDescriptor(index)), cancellationToken);
+			CancellationToken ct = default
+		) => PauseFollowIndexAsync(selector.InvokeOrDefault(new PauseFollowIndexDescriptor(index)), ct);
 
 		/// <inheritdoc cref="PauseFollowIndex(IndexName, System.Func{Nest.PauseFollowIndexDescriptor,Nest.IPauseFollowIndexRequest})" />
-		public Task<IPauseFollowIndexResponse> PauseFollowIndexAsync(IPauseFollowIndexRequest request, CancellationToken cancellationToken = default) =>
-			Dispatcher.DispatchAsync<IPauseFollowIndexRequest, PauseFollowIndexRequestParameters, PauseFollowIndexResponse, IPauseFollowIndexResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.CcrPauseFollowDispatchAsync<PauseFollowIndexResponse>(p, c)
-			);
+		public Task<IPauseFollowIndexResponse> PauseFollowIndexAsync(IPauseFollowIndexRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IPauseFollowIndexRequest, IPauseFollowIndexResponse, PauseFollowIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

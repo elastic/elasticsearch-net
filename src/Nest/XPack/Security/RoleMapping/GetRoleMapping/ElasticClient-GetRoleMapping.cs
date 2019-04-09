@@ -15,12 +15,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IGetRoleMappingResponse> GetRoleMappingAsync(Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<IGetRoleMappingResponse> GetRoleMappingAsync(IGetRoleMappingRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -32,25 +32,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetRoleMappingResponse GetRoleMapping(IGetRoleMappingRequest request) =>
-			Dispatcher.Dispatch<IGetRoleMappingRequest, GetRoleMappingRequestParameters, GetRoleMappingResponse>(
-				request,
-				(p, d) => LowLevelDispatch.SecurityGetRoleMappingDispatch<GetRoleMappingResponse>(p)
-			);
+			Dispatch2<IGetRoleMappingRequest, GetRoleMappingResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetRoleMappingResponse> GetRoleMappingAsync(Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			GetRoleMappingAsync(selector.InvokeOrDefault(new GetRoleMappingDescriptor()), cancellationToken);
+		public Task<IGetRoleMappingResponse> GetRoleMappingAsync(
+			Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null,
+			CancellationToken ct = default
+		) => GetRoleMappingAsync(selector.InvokeOrDefault(new GetRoleMappingDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IGetRoleMappingResponse> GetRoleMappingAsync(IGetRoleMappingRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IGetRoleMappingRequest, GetRoleMappingRequestParameters, GetRoleMappingResponse, IGetRoleMappingResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.SecurityGetRoleMappingDispatchAsync<GetRoleMappingResponse>(p, c)
-			);
+		public Task<IGetRoleMappingResponse> GetRoleMappingAsync(IGetRoleMappingRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IGetRoleMappingRequest, IGetRoleMappingResponse, GetRoleMappingResponse>(request, request.RequestParameters, ct);
 	}
 }

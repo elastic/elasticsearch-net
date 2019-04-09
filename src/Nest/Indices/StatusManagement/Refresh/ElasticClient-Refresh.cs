@@ -21,11 +21,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IRefreshResponse> RefreshAsync(Indices indices, Func<RefreshDescriptor, IRefreshRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IRefreshResponse> RefreshAsync(IRefreshRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IRefreshResponse> RefreshAsync(IRefreshRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -36,23 +36,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IRefreshResponse Refresh(IRefreshRequest request) =>
-			Dispatcher.Dispatch<IRefreshRequest, RefreshRequestParameters, RefreshResponse>(
-				request,
-				(p, d) => LowLevelDispatch.IndicesRefreshDispatch<RefreshResponse>(p)
-			);
+			Dispatch2<IRefreshRequest, RefreshResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IRefreshResponse> RefreshAsync(Indices indices, Func<RefreshDescriptor, IRefreshRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			RefreshAsync(selector.InvokeOrDefault(new RefreshDescriptor().Index(indices)), cancellationToken);
+		public Task<IRefreshResponse> RefreshAsync(
+			Indices indices,
+			Func<RefreshDescriptor, IRefreshRequest> selector = null,
+			CancellationToken ct = default
+		) => RefreshAsync(selector.InvokeOrDefault(new RefreshDescriptor().Index(indices)), ct);
 
 		/// <inheritdoc />
-		public Task<IRefreshResponse> RefreshAsync(IRefreshRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IRefreshRequest, RefreshRequestParameters, RefreshResponse, IRefreshResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.IndicesRefreshDispatchAsync<RefreshResponse>(p, c)
-			);
+		public Task<IRefreshResponse> RefreshAsync(IRefreshRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IRefreshRequest, IRefreshResponse, RefreshResponse>(request, request.RequestParameters, ct);
 	}
 }

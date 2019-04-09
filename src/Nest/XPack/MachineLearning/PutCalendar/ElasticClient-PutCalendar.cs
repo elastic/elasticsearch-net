@@ -17,11 +17,11 @@ namespace Nest
 
 		/// <inheritdoc cref="PutCalendar(Nest.Id,System.Func{Nest.PutCalendarDescriptor,Nest.IPutCalendarRequest})" />
 		Task<IPutCalendarResponse> PutCalendarAsync(Id calendarId, Func<PutCalendarDescriptor, IPutCalendarRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="PutCalendar(Nest.Id,System.Func{Nest.PutCalendarDescriptor,Nest.IPutCalendarRequest})" />
-		Task<IPutCalendarResponse> PutCalendarAsync(IPutCalendarRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IPutCalendarResponse> PutCalendarAsync(IPutCalendarRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -32,25 +32,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IPutCalendarResponse PutCalendar(IPutCalendarRequest request) =>
-			Dispatcher.Dispatch<IPutCalendarRequest, PutCalendarRequestParameters, PutCalendarResponse>(
-				request,
-				LowLevelDispatch.MlPutCalendarDispatch<PutCalendarResponse>
-			);
+			Dispatch2<IPutCalendarRequest, PutCalendarResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IPutCalendarResponse> PutCalendarAsync(Id calendarId, Func<PutCalendarDescriptor, IPutCalendarRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			PutCalendarAsync(selector.InvokeOrDefault(new PutCalendarDescriptor(calendarId)), cancellationToken);
+		public Task<IPutCalendarResponse> PutCalendarAsync(
+			Id calendarId,
+			Func<PutCalendarDescriptor, IPutCalendarRequest> selector = null,
+			CancellationToken ct = default
+		) => PutCalendarAsync(selector.InvokeOrDefault(new PutCalendarDescriptor(calendarId)), ct);
 
 		/// <inheritdoc />
-		public Task<IPutCalendarResponse> PutCalendarAsync(IPutCalendarRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IPutCalendarRequest, PutCalendarRequestParameters, PutCalendarResponse, IPutCalendarResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.MlPutCalendarDispatchAsync<PutCalendarResponse>
-			);
+		public Task<IPutCalendarResponse> PutCalendarAsync(IPutCalendarRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IPutCalendarRequest, IPutCalendarResponse, PutCalendarResponse>(request, request.RequestParameters, ct);
 	}
 }

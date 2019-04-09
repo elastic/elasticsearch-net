@@ -18,11 +18,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IExecuteWatchResponse> ExecuteWatchAsync(Func<ExecuteWatchDescriptor, IExecuteWatchRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IExecuteWatchResponse> ExecuteWatchAsync(IExecuteWatchRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IExecuteWatchResponse> ExecuteWatchAsync(IExecuteWatchRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -33,25 +33,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IExecuteWatchResponse ExecuteWatch(IExecuteWatchRequest request) =>
-			Dispatcher.Dispatch<IExecuteWatchRequest, ExecuteWatchRequestParameters, ExecuteWatchResponse>(
-				request,
-				LowLevelDispatch.WatcherExecuteWatchDispatch<ExecuteWatchResponse>
-			);
+			Dispatch2<IExecuteWatchRequest, ExecuteWatchResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IExecuteWatchResponse> ExecuteWatchAsync(Func<ExecuteWatchDescriptor, IExecuteWatchRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			ExecuteWatchAsync(selector?.InvokeOrDefault(new ExecuteWatchDescriptor()), cancellationToken);
+		public Task<IExecuteWatchResponse> ExecuteWatchAsync(
+			Func<ExecuteWatchDescriptor, IExecuteWatchRequest> selector,
+			CancellationToken ct = default
+		) => ExecuteWatchAsync(selector?.InvokeOrDefault(new ExecuteWatchDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IExecuteWatchResponse> ExecuteWatchAsync(IExecuteWatchRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IExecuteWatchRequest, ExecuteWatchRequestParameters, ExecuteWatchResponse, IExecuteWatchResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.WatcherExecuteWatchDispatchAsync<ExecuteWatchResponse>
-			);
+		public Task<IExecuteWatchResponse> ExecuteWatchAsync(IExecuteWatchRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IExecuteWatchRequest, IExecuteWatchResponse, ExecuteWatchResponse>
+				(request, request.RequestParameters, ct);
 	}
 }

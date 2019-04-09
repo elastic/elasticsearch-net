@@ -17,11 +17,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IGetDatafeedsResponse> GetDatafeedsAsync(Func<GetDatafeedsDescriptor, IGetDatafeedsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IGetDatafeedsResponse> GetDatafeedsAsync(IGetDatafeedsRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IGetDatafeedsResponse> GetDatafeedsAsync(IGetDatafeedsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -32,25 +32,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetDatafeedsResponse GetDatafeeds(IGetDatafeedsRequest request) =>
-			Dispatcher.Dispatch<IGetDatafeedsRequest, GetDatafeedsRequestParameters, GetDatafeedsResponse>(
-				request,
-				(p, d) => LowLevelDispatch.MlGetDatafeedsDispatch<GetDatafeedsResponse>(p)
-			);
+			Dispatch2<IGetDatafeedsRequest, GetDatafeedsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetDatafeedsResponse> GetDatafeedsAsync(Func<GetDatafeedsDescriptor, IGetDatafeedsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			GetDatafeedsAsync(selector.InvokeOrDefault(new GetDatafeedsDescriptor()), cancellationToken);
+		public Task<IGetDatafeedsResponse> GetDatafeedsAsync(
+			Func<GetDatafeedsDescriptor, IGetDatafeedsRequest> selector = null,
+			CancellationToken ct = default
+		) => GetDatafeedsAsync(selector.InvokeOrDefault(new GetDatafeedsDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IGetDatafeedsResponse> GetDatafeedsAsync(IGetDatafeedsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IGetDatafeedsRequest, GetDatafeedsRequestParameters, GetDatafeedsResponse, IGetDatafeedsResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.MlGetDatafeedsDispatchAsync<GetDatafeedsResponse>(p, c)
-			);
+		public Task<IGetDatafeedsResponse> GetDatafeedsAsync(IGetDatafeedsRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IGetDatafeedsRequest, IGetDatafeedsResponse, GetDatafeedsResponse>(request, request.RequestParameters, ct);
 	}
 }

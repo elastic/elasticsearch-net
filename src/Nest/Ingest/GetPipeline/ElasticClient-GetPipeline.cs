@@ -15,11 +15,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IGetPipelineResponse> GetPipelineAsync(Func<GetPipelineDescriptor, IGetPipelineRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IGetPipelineResponse> GetPipelineAsync(IGetPipelineRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IGetPipelineResponse> GetPipelineAsync(IGetPipelineRequest request, CancellationToken ct = default);
 	}
 
 
@@ -31,25 +31,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetPipelineResponse GetPipeline(IGetPipelineRequest request) =>
-			Dispatcher.Dispatch<IGetPipelineRequest, GetPipelineRequestParameters, GetPipelineResponse>(
-				request,
-				(p, d) => LowLevelDispatch.IngestGetPipelineDispatch<GetPipelineResponse>(p)
-			);
+			Dispatch2<IGetPipelineRequest, GetPipelineResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetPipelineResponse> GetPipelineAsync(Func<GetPipelineDescriptor, IGetPipelineRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+		public Task<IGetPipelineResponse> GetPipelineAsync(
+			Func<GetPipelineDescriptor, IGetPipelineRequest> selector = null,
+			CancellationToken ct = default
 		) =>
-			GetPipelineAsync(selector.InvokeOrDefault(new GetPipelineDescriptor()), cancellationToken);
+			GetPipelineAsync(selector.InvokeOrDefault(new GetPipelineDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IGetPipelineResponse> GetPipelineAsync(IGetPipelineRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IGetPipelineRequest, GetPipelineRequestParameters, GetPipelineResponse, IGetPipelineResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.IngestGetPipelineDispatchAsync<GetPipelineResponse>(p, c)
-			);
+		public Task<IGetPipelineResponse> GetPipelineAsync(IGetPipelineRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IGetPipelineRequest, IGetPipelineResponse, GetPipelineResponse>(request, request.RequestParameters, ct);
 	}
 }

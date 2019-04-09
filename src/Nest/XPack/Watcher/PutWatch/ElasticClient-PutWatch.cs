@@ -19,11 +19,11 @@ namespace Nest
 
 		/// <inheritdoc cref="PutWatch(Nest.Id,System.Func{Nest.PutWatchDescriptor,Nest.IPutWatchRequest})" />
 		Task<IPutWatchResponse> PutWatchAsync(Id watchId, Func<PutWatchDescriptor, IPutWatchRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="PutWatch(Nest.Id,System.Func{Nest.PutWatchDescriptor,Nest.IPutWatchRequest})" />
-		Task<IPutWatchResponse> PutWatchAsync(IPutWatchRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IPutWatchResponse> PutWatchAsync(IPutWatchRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -34,23 +34,18 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IPutWatchResponse PutWatch(IPutWatchRequest request) =>
-			Dispatcher.Dispatch<IPutWatchRequest, PutWatchRequestParameters, PutWatchResponse>(
-				request,
-				LowLevelDispatch.WatcherPutWatchDispatch<PutWatchResponse>
-			);
+			Dispatch2<IPutWatchRequest, PutWatchResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IPutWatchResponse> PutWatchAsync(Id watchId, Func<PutWatchDescriptor, IPutWatchRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			PutWatchAsync(selector.InvokeOrDefault(new PutWatchDescriptor(watchId)), cancellationToken);
+		public Task<IPutWatchResponse> PutWatchAsync(
+			Id watchId,
+			Func<PutWatchDescriptor, IPutWatchRequest> selector = null,
+			CancellationToken ct = default
+		) => PutWatchAsync(selector.InvokeOrDefault(new PutWatchDescriptor(watchId)), ct);
 
 		/// <inheritdoc />
-		public Task<IPutWatchResponse> PutWatchAsync(IPutWatchRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IPutWatchRequest, PutWatchRequestParameters, PutWatchResponse, IPutWatchResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.WatcherPutWatchDispatchAsync<PutWatchResponse>
-			);
+		public Task<IPutWatchResponse> PutWatchAsync(IPutWatchRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IPutWatchRequest, IPutWatchResponse, PutWatchResponse>
+				(request, request.RequestParameters, ct);
 	}
 }

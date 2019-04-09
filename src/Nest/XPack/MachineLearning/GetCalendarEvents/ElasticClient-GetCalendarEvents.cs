@@ -17,11 +17,11 @@ namespace Nest
 
 		/// <inheritdoc cref="GetCalendarEvents(Nest.Id,System.Func{Nest.GetCalendarEventsDescriptor,Nest.IGetCalendarEventsRequest})" />
 		Task<IGetCalendarEventsResponse> GetCalendarEventsAsync(Id calendarId, Func<GetCalendarEventsDescriptor, IGetCalendarEventsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="GetCalendarEvents(Nest.Id,System.Func{Nest.GetCalendarEventsDescriptor,Nest.IGetCalendarEventsRequest})" />
-		Task<IGetCalendarEventsResponse> GetCalendarEventsAsync(IGetCalendarEventsRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IGetCalendarEventsResponse> GetCalendarEventsAsync(IGetCalendarEventsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -32,22 +32,17 @@ namespace Nest
 
 		/// <inheritdoc cref="IElasticClient.GetCalendarEvents(Nest.Id,System.Func{Nest.GetCalendarEventsDescriptor,Nest.IGetCalendarEventsRequest})" />
 		public IGetCalendarEventsResponse GetCalendarEvents(IGetCalendarEventsRequest request) =>
-			Dispatcher.Dispatch<IGetCalendarEventsRequest, GetCalendarEventsRequestParameters, GetCalendarEventsResponse>(
-				request,
-				(p, d) => LowLevelDispatch.MlGetCalendarEventsDispatch<GetCalendarEventsResponse>(p)
-			);
+			Dispatch2<IGetCalendarEventsRequest, GetCalendarEventsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="IElasticClient.GetCalendarEvents(Nest.Id,System.Func{Nest.GetCalendarEventsDescriptor,Nest.IGetCalendarEventsRequest})" />
-		public Task<IGetCalendarEventsResponse> GetCalendarEventsAsync(Id calendarId, Func<GetCalendarEventsDescriptor, IGetCalendarEventsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) => GetCalendarEventsAsync(selector.InvokeOrDefault(new GetCalendarEventsDescriptor(calendarId)), cancellationToken);
+		public Task<IGetCalendarEventsResponse> GetCalendarEventsAsync(
+			Id calendarId,
+			Func<GetCalendarEventsDescriptor, IGetCalendarEventsRequest> selector = null,
+			CancellationToken ct = default
+		) => GetCalendarEventsAsync(selector.InvokeOrDefault(new GetCalendarEventsDescriptor(calendarId)), ct);
 
 		/// <inheritdoc cref="IElasticClient.GetCalendarEvents(Nest.Id,System.Func{Nest.GetCalendarEventsDescriptor,Nest.IGetCalendarEventsRequest})" />
-		public Task<IGetCalendarEventsResponse> GetCalendarEventsAsync(IGetCalendarEventsRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IGetCalendarEventsRequest, GetCalendarEventsRequestParameters, GetCalendarEventsResponse, IGetCalendarEventsResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.MlGetCalendarEventsDispatchAsync<GetCalendarEventsResponse>(p, c)
-			);
+		public Task<IGetCalendarEventsResponse> GetCalendarEventsAsync(IGetCalendarEventsRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IGetCalendarEventsRequest, IGetCalendarEventsResponse, GetCalendarEventsResponse>(request, request.RequestParameters, ct);
 	}
 }

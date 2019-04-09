@@ -22,43 +22,32 @@ namespace Nest
 		Task<IClearCacheResponse> ClearCacheAsync(
 			Indices indices,
 			Func<ClearCacheDescriptor, IClearCacheRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IClearCacheResponse> ClearCacheAsync(IClearCacheRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IClearCacheResponse> ClearCacheAsync(IClearCacheRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
 		public IClearCacheResponse ClearCache(Indices indices, Func<ClearCacheDescriptor, IClearCacheRequest> selector = null) =>
-			Dispatcher.Dispatch<IClearCacheRequest, ClearCacheRequestParameters, ClearCacheResponse>(
-				selector.InvokeOrDefault(new ClearCacheDescriptor().Index(indices)),
-				(p, d) => LowLevelDispatch.IndicesClearCacheDispatch<ClearCacheResponse>(p)
-			);
+			ClearCache(selector.InvokeOrDefault(new ClearCacheDescriptor().Index(indices)));
 
 		/// <inheritdoc />
 		public IClearCacheResponse ClearCache(IClearCacheRequest request) =>
-			Dispatcher.Dispatch<IClearCacheRequest, ClearCacheRequestParameters, ClearCacheResponse>(
-				request,
-				(p, d) => LowLevelDispatch.IndicesClearCacheDispatch<ClearCacheResponse>(p)
-			);
+			Dispatch2<IClearCacheRequest, ClearCacheResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IClearCacheResponse> ClearCacheAsync(
 			Indices indices,
 			Func<ClearCacheDescriptor, IClearCacheRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) => ClearCacheAsync(selector.InvokeOrDefault(new ClearCacheDescriptor().Index(indices)), cancellationToken);
+			CancellationToken ct = default
+		) => ClearCacheAsync(selector.InvokeOrDefault(new ClearCacheDescriptor().Index(indices)), ct);
 
 		/// <inheritdoc />
-		public Task<IClearCacheResponse> ClearCacheAsync(IClearCacheRequest request, CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IClearCacheRequest, ClearCacheRequestParameters, ClearCacheResponse, IClearCacheResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.IndicesClearCacheDispatchAsync<ClearCacheResponse>(p, c)
-			);
+		public Task<IClearCacheResponse> ClearCacheAsync(IClearCacheRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IClearCacheRequest, IClearCacheResponse, ClearCacheResponse>(request, request.RequestParameters, ct);
 	}
 }

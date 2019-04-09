@@ -15,12 +15,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IGetRepositoryResponse> GetRepositoryAsync(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<IGetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -32,25 +32,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetRepositoryResponse GetRepository(IGetRepositoryRequest request) =>
-			Dispatcher.Dispatch<IGetRepositoryRequest, GetRepositoryRequestParameters, GetRepositoryResponse>(
-				request,
-				(p, d) => LowLevelDispatch.SnapshotGetRepositoryDispatch<GetRepositoryResponse>(p)
-			);
+			Dispatch2<IGetRepositoryRequest, GetRepositoryResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetRepositoryResponse> GetRepositoryAsync(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			GetRepositoryAsync(selector.InvokeOrDefault(new GetRepositoryDescriptor()), cancellationToken);
+		public Task<IGetRepositoryResponse> GetRepositoryAsync(
+			Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector = null,
+			CancellationToken ct = default
+		) => GetRepositoryAsync(selector.InvokeOrDefault(new GetRepositoryDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IGetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IGetRepositoryRequest, GetRepositoryRequestParameters, GetRepositoryResponse, IGetRepositoryResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.SnapshotGetRepositoryDispatchAsync<GetRepositoryResponse>(p, c)
-			);
+		public Task<IGetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IGetRepositoryRequest, IGetRepositoryResponse, GetRepositoryResponse>(request, request.RequestParameters, ct);
 	}
 }

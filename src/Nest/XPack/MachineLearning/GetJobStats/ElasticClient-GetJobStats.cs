@@ -17,11 +17,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IGetJobStatsResponse> GetJobStatsAsync(Func<GetJobStatsDescriptor, IGetJobStatsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IGetJobStatsResponse> GetJobStatsAsync(IGetJobStatsRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IGetJobStatsResponse> GetJobStatsAsync(IGetJobStatsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -32,25 +32,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetJobStatsResponse GetJobStats(IGetJobStatsRequest request) =>
-			Dispatcher.Dispatch<IGetJobStatsRequest, GetJobStatsRequestParameters, GetJobStatsResponse>(
-				request,
-				(p, d) => LowLevelDispatch.MlGetJobStatsDispatch<GetJobStatsResponse>(p)
-			);
+			Dispatch2<IGetJobStatsRequest, GetJobStatsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetJobStatsResponse> GetJobStatsAsync(Func<GetJobStatsDescriptor, IGetJobStatsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			GetJobStatsAsync(selector.InvokeOrDefault(new GetJobStatsDescriptor()), cancellationToken);
+		public Task<IGetJobStatsResponse> GetJobStatsAsync(
+			Func<GetJobStatsDescriptor, IGetJobStatsRequest> selector = null,
+			CancellationToken ct = default
+		) => GetJobStatsAsync(selector.InvokeOrDefault(new GetJobStatsDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IGetJobStatsResponse> GetJobStatsAsync(IGetJobStatsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IGetJobStatsRequest, GetJobStatsRequestParameters, GetJobStatsResponse, IGetJobStatsResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.MlGetJobStatsDispatchAsync<GetJobStatsResponse>(p, c)
-			);
+		public Task<IGetJobStatsResponse> GetJobStatsAsync(IGetJobStatsRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IGetJobStatsRequest, IGetJobStatsResponse, GetJobStatsResponse>(request, request.RequestParameters, ct);
 	}
 }
