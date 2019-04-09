@@ -4089,6 +4089,24 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public GraphExploreDescriptor<T> Timeout(Time timeout) => Qs("timeout", timeout);
 	}
+	///<summary>descriptor for IlmGetLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</pre></summary>
+	public partial class IlmGetLifecycleDescriptor  : RequestDescriptorBase<IlmGetLifecycleDescriptor,IlmGetLifecycleRequestParameters, IIlmGetLifecycleRequest>, IIlmGetLifecycleRequest
+	{ 
+		/// <summary>/_ilm/policy/{policy}</summary>
+		public IlmGetLifecycleDescriptor() : base(){}
+		// values part of the url path
+		string_ IIlmGetLifecycleRequest.Policy => Self.RouteValues.Get<string_>("policy");
+
+		///<summary>The name of the index lifecycle policy</summary>
+		public IlmGetLifecycleDescriptor Policy(string_ policy) => Assign(policy, (a,v)=>a.RouteValues.Optional("policy", v));
+
+		// Request parameters
+
+		///<summary>Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public IlmGetLifecycleDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		///<summary>Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public IlmGetLifecycleDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+	}
 	///<summary>descriptor for IlmGetStatus <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html</pre></summary>
 	public partial class IlmGetStatusDescriptor  : RequestDescriptorBase<IlmGetStatusDescriptor,IlmGetStatusRequestParameters, IIlmGetStatusRequest>, IIlmGetStatusRequest
 	{ 
