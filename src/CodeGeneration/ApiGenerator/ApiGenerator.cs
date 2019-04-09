@@ -26,7 +26,6 @@ namespace ApiGenerator
 			"ilm.move_to_step.json",
 			"ilm.put_lifecycle.json",
 			"ilm.remove_policy.json",
-			"ilm.retry.json",
 			"indices.freeze.json",
 			"indices.unfreeze.json",
 			"xpack.ml.set_upgrade_mode.json",

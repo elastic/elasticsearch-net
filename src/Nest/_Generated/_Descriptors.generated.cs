@@ -4137,6 +4137,27 @@ namespace Nest
 		///<summary>Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
 		public IlmGetStatusDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
+	///<summary>descriptor for IlmRetry <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html</pre></summary>
+	public partial class IlmRetryDescriptor  : RequestDescriptorBase<IlmRetryDescriptor,IlmRetryRequestParameters, IIlmRetryRequest>, IIlmRetryRequest
+	{ 
+		/// <summary>/{index}/_ilm/retry</summary>
+		public IlmRetryDescriptor() : base(){}
+		// values part of the url path
+		IndexName IIlmRetryRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		///<summary>The name of the indices (comma-separated) whose failed lifecycle step is to be retry</summary>
+		public IlmRetryDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public IlmRetryDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (IndexName)v));
+
+		// Request parameters
+
+		///<summary>Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public IlmRetryDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		///<summary>Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public IlmRetryDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+	}
 	///<summary>descriptor for IlmStart <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html</pre></summary>
 	public partial class IlmStartDescriptor  : RequestDescriptorBase<IlmStartDescriptor,IlmStartRequestParameters, IIlmStartRequest>, IIlmStartRequest
 	{ 

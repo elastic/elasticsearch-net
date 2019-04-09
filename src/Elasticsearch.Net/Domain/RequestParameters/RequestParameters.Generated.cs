@@ -2370,6 +2370,21 @@ namespace Elasticsearch.Net
 		///</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
+	///<summary>Request options for IlmRetry<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html</pre></summary>
+	public partial class IlmRetryRequestParameters : RequestParameters<IlmRetryRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>
+		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
+		/// request fails and returns an error. Defaults to 30s.
+		///</summary>
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>
+		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
+		/// an error. Defaults to 30s.
+		///</summary>
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
+	}
 	///<summary>Request options for IlmStart<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html</pre></summary>
 	public partial class IlmStartRequestParameters : RequestParameters<IlmStartRequestParameters> 
 	{

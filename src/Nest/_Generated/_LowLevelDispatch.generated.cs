@@ -3264,6 +3264,28 @@ namespace Nest
 			throw InvalidDispatch("IlmGetStatus", p, new [] { GET }, "/_ilm/status");
 		}
 		
+		internal TResponse IlmRetryDispatch<TResponse>(IRequest<IlmRetryRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.IlmRetry<TResponse>(p.RouteValues.Index,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("IlmRetry", p, new [] { POST }, "/{index}/_ilm/retry");
+		}
+		
+		internal Task<TResponse> IlmRetryDispatchAsync<TResponse>(IRequest<IlmRetryRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.IlmRetryAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("IlmRetry", p, new [] { POST }, "/{index}/_ilm/retry");
+		}
+		
 		internal TResponse IlmStartDispatch<TResponse>(IRequest<IlmStartRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
