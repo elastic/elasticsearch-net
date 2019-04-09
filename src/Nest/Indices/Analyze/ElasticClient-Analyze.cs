@@ -20,11 +20,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IAnalyzeResponse> AnalyzeAsync(Func<AnalyzeDescriptor, IAnalyzeRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -35,23 +35,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IAnalyzeResponse Analyze(IAnalyzeRequest request) =>
-			Dispatcher.Dispatch<IAnalyzeRequest, AnalyzeRequestParameters, AnalyzeResponse>(
-				request,
-				LowLevelDispatch.IndicesAnalyzeDispatch<AnalyzeResponse>
-			);
+			Dispatch2<IAnalyzeRequest, AnalyzeResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IAnalyzeResponse> AnalyzeAsync(Func<AnalyzeDescriptor, IAnalyzeRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			AnalyzeAsync(selector?.Invoke(new AnalyzeDescriptor()), cancellationToken);
+		public Task<IAnalyzeResponse> AnalyzeAsync(
+			Func<AnalyzeDescriptor, IAnalyzeRequest> selector,
+			CancellationToken ct = default
+		) => AnalyzeAsync(selector?.Invoke(new AnalyzeDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IAnalyzeRequest, AnalyzeRequestParameters, AnalyzeResponse, IAnalyzeResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.IndicesAnalyzeDispatchAsync<AnalyzeResponse>
-			);
+		public Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IAnalyzeRequest, IAnalyzeResponse, AnalyzeResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -16,11 +16,11 @@ namespace Nest
 		/// <inheritdoc />
 		Task<ICatResponse<CatTasksRecord>> CatTasksAsync(
 			Func<CatTasksDescriptor, ICatTasksRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default(CancellationToken)
 		);
 
 		/// <inheritdoc />
-		Task<ICatResponse<CatTasksRecord>> CatTasksAsync(ICatTasksRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<ICatResponse<CatTasksRecord>> CatTasksAsync(ICatTasksRequest request, CancellationToken ct = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -31,24 +31,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICatResponse<CatTasksRecord> CatTasks(ICatTasksRequest request) =>
-			DoCat<ICatTasksRequest, CatTasksRequestParameters, CatTasksRecord>(
-				request,
-				LowLevelDispatch.CatTasksDispatch<CatResponse<CatTasksRecord>>);
+			DoCat<ICatTasksRequest, CatTasksRequestParameters, CatTasksRecord>(request);
 
 		/// <inheritdoc />
 		public Task<ICatResponse<CatTasksRecord>> CatTasksAsync(
 			Func<CatTasksDescriptor, ICatTasksRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) => CatTasksAsync(selector.InvokeOrDefault(new CatTasksDescriptor()));
 
 		/// <inheritdoc />
-		public Task<ICatResponse<CatTasksRecord>> CatTasksAsync(ICatTasksRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			DoCatAsync<ICatTasksRequest, CatTasksRequestParameters, CatTasksRecord>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.CatTasksDispatchAsync<CatResponse<CatTasksRecord>>
-			);
+		public Task<ICatResponse<CatTasksRecord>> CatTasksAsync(ICatTasksRequest request, CancellationToken ct = default) =>
+			DoCatAsync<ICatTasksRequest, CatTasksRequestParameters, CatTasksRecord>(request, ct);
 	}
 }

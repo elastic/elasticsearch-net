@@ -18,11 +18,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IListTasksResponse> ListTasksAsync(Func<ListTasksDescriptor, IListTasksRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IListTasksResponse> ListTasksAsync(IListTasksRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IListTasksResponse> ListTasksAsync(IListTasksRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -33,23 +33,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IListTasksResponse ListTasks(IListTasksRequest request) =>
-			Dispatcher.Dispatch<IListTasksRequest, ListTasksRequestParameters, ListTasksResponse>(
-				request,
-				(p, d) => LowLevelDispatch.TasksListDispatch<ListTasksResponse>(p)
-			);
+			Dispatch2<IListTasksRequest, ListTasksResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IListTasksResponse> ListTasksAsync(Func<ListTasksDescriptor, IListTasksRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) =>
-			ListTasksAsync(selector.InvokeOrDefault(new ListTasksDescriptor()), cancellationToken);
+			ListTasksAsync(selector.InvokeOrDefault(new ListTasksDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IListTasksResponse> ListTasksAsync(IListTasksRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IListTasksRequest, ListTasksRequestParameters, ListTasksResponse, IListTasksResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.TasksListDispatchAsync<ListTasksResponse>(p, c)
-			);
+		public Task<IListTasksResponse> ListTasksAsync(IListTasksRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IListTasksRequest, IListTasksResponse, ListTasksResponse>(request, request.RequestParameters, ct);
 	}
 }

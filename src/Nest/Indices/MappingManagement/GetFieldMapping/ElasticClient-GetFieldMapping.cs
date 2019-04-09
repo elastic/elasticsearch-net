@@ -17,13 +17,13 @@ namespace Nest
 		/// <inheritdoc />
 		Task<IGetFieldMappingResponse> GetFieldMappingAsync<T>(Fields fields,
 			Func<GetFieldMappingDescriptor<T>, IGetFieldMappingRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		)
 			where T : class;
 
 		/// <inheritdoc />
 		Task<IGetFieldMappingResponse> GetFieldMappingAsync(IGetFieldMappingRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -36,27 +36,19 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetFieldMappingResponse GetFieldMapping(IGetFieldMappingRequest request) =>
-			Dispatcher.Dispatch<IGetFieldMappingRequest, GetFieldMappingRequestParameters, GetFieldMappingResponse>(
-				request,
-				(p, d) => LowLevelDispatch.IndicesGetFieldMappingDispatch<GetFieldMappingResponse>(p)
-			);
+			Dispatch2<IGetFieldMappingRequest, GetFieldMappingResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetFieldMappingResponse> GetFieldMappingAsync<T>(Fields fields,
+		public Task<IGetFieldMappingResponse> GetFieldMappingAsync<T>(
+			Fields fields,
 			Func<GetFieldMappingDescriptor<T>, IGetFieldMappingRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		)
 			where T : class =>
-			GetFieldMappingAsync(selector.InvokeOrDefault(new GetFieldMappingDescriptor<T>(fields)), cancellationToken);
+			GetFieldMappingAsync(selector.InvokeOrDefault(new GetFieldMappingDescriptor<T>(fields)), ct);
 
 		/// <inheritdoc />
-		public Task<IGetFieldMappingResponse> GetFieldMappingAsync(IGetFieldMappingRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IGetFieldMappingRequest, GetFieldMappingRequestParameters, GetFieldMappingResponse, IGetFieldMappingResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.IndicesGetFieldMappingDispatchAsync<GetFieldMappingResponse>(p, c)
-			);
+		public Task<IGetFieldMappingResponse> GetFieldMappingAsync(IGetFieldMappingRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IGetFieldMappingRequest, IGetFieldMappingResponse, GetFieldMappingResponse>(request, request.RequestParameters, ct);
 	}
 }

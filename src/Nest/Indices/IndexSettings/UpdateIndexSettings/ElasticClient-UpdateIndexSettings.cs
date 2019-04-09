@@ -22,12 +22,12 @@ namespace Nest
 		Task<IUpdateIndexSettingsResponse> UpdateIndexSettingsAsync(
 			Indices indices,
 			Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<IUpdateIndexSettingsResponse> UpdateIndexSettingsAsync(IUpdateIndexSettingsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -41,28 +41,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IUpdateIndexSettingsResponse UpdateIndexSettings(IUpdateIndexSettingsRequest request) =>
-			Dispatcher.Dispatch<IUpdateIndexSettingsRequest, UpdateIndexSettingsRequestParameters, UpdateIndexSettingsResponse>(
-				request,
-				LowLevelDispatch.IndicesPutSettingsDispatch<UpdateIndexSettingsResponse>
-			);
+			Dispatch2<IUpdateIndexSettingsRequest, UpdateIndexSettingsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IUpdateIndexSettingsResponse> UpdateIndexSettingsAsync(
 			Indices indices,
 			Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) => UpdateIndexSettingsAsync(selector.InvokeOrDefault(new UpdateIndexSettingsDescriptor().Index(indices)), cancellationToken);
+			CancellationToken ct = default
+		) => UpdateIndexSettingsAsync(selector.InvokeOrDefault(new UpdateIndexSettingsDescriptor().Index(indices)), ct);
 
 		/// <inheritdoc />
-		public Task<IUpdateIndexSettingsResponse> UpdateIndexSettingsAsync(IUpdateIndexSettingsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<IUpdateIndexSettingsRequest, UpdateIndexSettingsRequestParameters, UpdateIndexSettingsResponse,
-					IUpdateIndexSettingsResponse>(
-					request,
-					cancellationToken,
-					LowLevelDispatch.IndicesPutSettingsDispatchAsync<UpdateIndexSettingsResponse>
-				);
+		public Task<IUpdateIndexSettingsResponse> UpdateIndexSettingsAsync(IUpdateIndexSettingsRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IUpdateIndexSettingsRequest, IUpdateIndexSettingsResponse, UpdateIndexSettingsResponse>(request, request.RequestParameters, ct);
 	}
 }

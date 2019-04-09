@@ -16,7 +16,7 @@ namespace Nest
 		IDeleteAliasResponse DeleteAlias(IDeleteAliasRequest request);
 
 		/// <inheritdoc />
-		Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest request, CancellationToken ct = default);
 
 		/// <inheritdoc />
 		IDeleteAliasResponse DeleteAlias(Indices indices, Names names, Func<DeleteAliasDescriptor, IDeleteAliasRequest> selector = null);
@@ -26,7 +26,7 @@ namespace Nest
 			Indices indices,
 			Names names,
 			Func<DeleteAliasDescriptor, IDeleteAliasRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		);
 	}
 
@@ -35,31 +35,22 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public IDeleteAliasResponse DeleteAlias(IDeleteAliasRequest request) =>
-			Dispatcher.Dispatch<IDeleteAliasRequest, DeleteAliasRequestParameters, DeleteAliasResponse>(
-				request,
-				(p, d) => LowLevelDispatch.IndicesDeleteAliasDispatch<DeleteAliasResponse>(p)
-			);
+			Dispatch2<IDeleteAliasRequest, DeleteAliasResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public IDeleteAliasResponse DeleteAlias(Indices indices, Names names, Func<DeleteAliasDescriptor, IDeleteAliasRequest> selector = null) =>
 			DeleteAlias(selector.InvokeOrDefault(new DeleteAliasDescriptor(indices, names)));
 
 		/// <inheritdoc />
-		public Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IDeleteAliasRequest, DeleteAliasRequestParameters, DeleteAliasResponse, IDeleteAliasResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.IndicesDeleteAliasDispatchAsync<DeleteAliasResponse>(p, c)
-			);
+		public Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IDeleteAliasRequest, IDeleteAliasResponse, DeleteAliasResponse>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
 		public Task<IDeleteAliasResponse> DeleteAliasAsync(
 			Indices indices,
 			Names names,
 			Func<DeleteAliasDescriptor, IDeleteAliasRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		) => DeleteAliasAsync(selector.InvokeOrDefault(new DeleteAliasDescriptor(indices, names)), cancellationToken);
 	}
 }

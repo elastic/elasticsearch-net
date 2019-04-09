@@ -23,11 +23,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IExistsResponse> IndexExistsAsync(Indices indices, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest request, CancellationToken ct = default);
 	}
 
 
@@ -39,24 +39,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IExistsResponse IndexExists(IIndexExistsRequest request) =>
-			Dispatcher.Dispatch<IIndexExistsRequest, IndexExistsRequestParameters, ExistsResponse>(
-				request,
-				(p, d) => LowLevelDispatch.IndicesExistsDispatch<ExistsResponse>(p)
-			);
+			Dispatch2<IIndexExistsRequest, ExistsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IExistsResponse> IndexExistsAsync(Indices indices, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			IndexExistsAsync(selector.InvokeOrDefault(new IndexExistsDescriptor(indices)), cancellationToken);
+		public Task<IExistsResponse> IndexExistsAsync(
+			Indices indices,
+			Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null,
+			CancellationToken ct = default
+		) => IndexExistsAsync(selector.InvokeOrDefault(new IndexExistsDescriptor(indices)), ct);
 
 		/// <inheritdoc />
-		public Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest request, CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IIndexExistsRequest, IndexExistsRequestParameters, ExistsResponse, IExistsResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.IndicesExistsDispatchAsync<ExistsResponse>(p, c)
-			);
+		public Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IIndexExistsRequest, IExistsResponse, ExistsResponse>(request, request.RequestParameters, ct);
 	}
 }

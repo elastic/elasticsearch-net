@@ -20,11 +20,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IClusterStateResponse> ClusterStateAsync(Func<ClusterStateDescriptor, IClusterStateRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IClusterStateResponse> ClusterStateAsync(IClusterStateRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IClusterStateResponse> ClusterStateAsync(IClusterStateRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -35,25 +35,18 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IClusterStateResponse ClusterState(IClusterStateRequest request) =>
-			Dispatcher.Dispatch<IClusterStateRequest, ClusterStateRequestParameters, ClusterStateResponse>(
-				request,
-				(p, d) => LowLevelDispatch.ClusterStateDispatch<ClusterStateResponse>(p)
-			);
+			Dispatch2<IClusterStateRequest, ClusterStateResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IClusterStateResponse> ClusterStateAsync(Func<ClusterStateDescriptor, IClusterStateRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) =>
-			ClusterStateAsync(selector.InvokeOrDefault(new ClusterStateDescriptor()), cancellationToken);
+			ClusterStateAsync(selector.InvokeOrDefault(new ClusterStateDescriptor()), ct);
 
 		/// <inheritdoc />
 		public Task<IClusterStateResponse> ClusterStateAsync(IClusterStateRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) =>
-			Dispatcher.DispatchAsync<IClusterStateRequest, ClusterStateRequestParameters, ClusterStateResponse, IClusterStateResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.ClusterStateDispatchAsync<ClusterStateResponse>(p, c)
-			);
+			Dispatch2Async<IClusterStateRequest, IClusterStateResponse, ClusterStateResponse>(request, request.RequestParameters, ct);
 	}
 }

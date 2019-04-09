@@ -15,7 +15,7 @@ namespace Nest
 		IPutAliasResponse PutAlias(IPutAliasRequest request);
 
 		/// <inheritdoc />
-		Task<IPutAliasResponse> PutAliasAsync(IPutAliasRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IPutAliasResponse> PutAliasAsync(IPutAliasRequest request, CancellationToken ct = default);
 
 		/// <inheritdoc />
 		IPutAliasResponse PutAlias(Indices indices, Name alias, Func<PutAliasDescriptor, IPutAliasRequest> selector = null);
@@ -25,7 +25,7 @@ namespace Nest
 			Indices indices,
 			Name alias,
 			Func<PutAliasDescriptor, IPutAliasRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -33,29 +33,22 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public IPutAliasResponse PutAlias(IPutAliasRequest request) =>
-			Dispatcher.Dispatch<IPutAliasRequest, PutAliasRequestParameters, PutAliasResponse>(
-				request,
-				LowLevelDispatch.IndicesPutAliasDispatch<PutAliasResponse>
-			);
+			Dispatch2<IPutAliasRequest, PutAliasResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public IPutAliasResponse PutAlias(Indices indices, Name alias, Func<PutAliasDescriptor, IPutAliasRequest> selector = null) =>
 			PutAlias(selector.InvokeOrDefault(new PutAliasDescriptor(indices, alias)));
 
 		/// <inheritdoc />
-		public Task<IPutAliasResponse> PutAliasAsync(IPutAliasRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IPutAliasRequest, PutAliasRequestParameters, PutAliasResponse, IPutAliasResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.IndicesPutAliasDispatchAsync<PutAliasResponse>
-			);
+		public Task<IPutAliasResponse> PutAliasAsync(IPutAliasRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IPutAliasRequest, IPutAliasResponse, PutAliasResponse>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
 		public Task<IPutAliasResponse> PutAliasAsync(
 			Indices indices,
 			Name alias,
 			Func<PutAliasDescriptor, IPutAliasRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) => PutAliasAsync(selector.InvokeOrDefault(new PutAliasDescriptor(indices, alias)), cancellationToken);
+			CancellationToken ct = default
+		) => PutAliasAsync(selector.InvokeOrDefault(new PutAliasDescriptor(indices, alias)), ct);
 	}
 }

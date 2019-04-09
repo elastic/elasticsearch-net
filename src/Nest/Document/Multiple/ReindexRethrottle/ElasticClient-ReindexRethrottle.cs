@@ -21,14 +21,14 @@ namespace Nest
 		/// Rethrottle an existing reindex or update by query task
 		/// </summary>
 		Task<IReindexRethrottleResponse> RethrottleAsync(TaskId id, Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <summary>
 		/// Rethrottle an existing reindex or update by query task
 		/// </summary>
 		Task<IReindexRethrottleResponse> RethrottleAsync(IReindexRethrottleRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -44,31 +44,21 @@ namespace Nest
 		/// Rethrottle an existing reindex or update by query task
 		/// </summary>
 		public IReindexRethrottleResponse Rethrottle(IReindexRethrottleRequest request) =>
-			Dispatcher.Dispatch<IReindexRethrottleRequest, ReindexRethrottleRequestParameters, ReindexRethrottleResponse>(
-				request,
-				(p, d) => LowLevelDispatch.ReindexRethrottleDispatch<ReindexRethrottleResponse>(p)
-			);
+			Dispatch2<IReindexRethrottleRequest, ReindexRethrottleResponse>(request, request.RequestParameters);
 
 		/// <summary>
 		/// Rethrottle an existing reindex or update by query task
 		/// </summary>
 		public Task<IReindexRethrottleResponse> RethrottleAsync(TaskId id,
 			Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) =>
-			RethrottleAsync(selector.InvokeOrDefault(new ReindexRethrottleDescriptor(id)), cancellationToken);
+			RethrottleAsync(selector.InvokeOrDefault(new ReindexRethrottleDescriptor(id)), ct);
 
 		/// <summary>
 		/// Rethrottle an existing reindex or update by query task
 		/// </summary>
-		public Task<IReindexRethrottleResponse> RethrottleAsync(IReindexRethrottleRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<IReindexRethrottleRequest, ReindexRethrottleRequestParameters, ReindexRethrottleResponse, IReindexRethrottleResponse>(
-					request,
-					cancellationToken,
-					(p, d, c) => LowLevelDispatch.ReindexRethrottleDispatchAsync<ReindexRethrottleResponse>(p, c)
-				);
+		public Task<IReindexRethrottleResponse> RethrottleAsync(IReindexRethrottleRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IReindexRethrottleRequest, IReindexRethrottleResponse, ReindexRethrottleResponse>(request, request.RequestParameters, ct);
 	}
 }

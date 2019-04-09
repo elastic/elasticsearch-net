@@ -25,11 +25,11 @@ namespace Nest
 		Task<IOpenIndexResponse> OpenIndexAsync(
 			Indices indices,
 			Func<OpenIndexDescriptor, IOpenIndexRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IOpenIndexResponse> OpenIndexAsync(IOpenIndexRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IOpenIndexResponse> OpenIndexAsync(IOpenIndexRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -40,24 +40,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IOpenIndexResponse OpenIndex(IOpenIndexRequest request) =>
-			Dispatcher.Dispatch<IOpenIndexRequest, OpenIndexRequestParameters, OpenIndexResponse>(
-				request,
-				(p, d) => LowLevelDispatch.IndicesOpenDispatch<OpenIndexResponse>(p)
-			);
+			Dispatch2<IOpenIndexRequest, OpenIndexResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IOpenIndexResponse> OpenIndexAsync(
 			Indices indices,
 			Func<OpenIndexDescriptor, IOpenIndexRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) => OpenIndexAsync(selector.InvokeOrDefault(new OpenIndexDescriptor(indices)), cancellationToken);
+			CancellationToken ct = default
+		) => OpenIndexAsync(selector.InvokeOrDefault(new OpenIndexDescriptor(indices)), ct);
 
 		/// <inheritdoc />
-		public Task<IOpenIndexResponse> OpenIndexAsync(IOpenIndexRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IOpenIndexRequest, OpenIndexRequestParameters, OpenIndexResponse, IOpenIndexResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.IndicesOpenDispatchAsync<OpenIndexResponse>(p, c)
-			);
+		public Task<IOpenIndexResponse> OpenIndexAsync(IOpenIndexRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IOpenIndexRequest, IOpenIndexResponse, OpenIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

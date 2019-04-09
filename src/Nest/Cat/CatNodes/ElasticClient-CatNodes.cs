@@ -15,11 +15,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<ICatResponse<CatNodesRecord>> CatNodesAsync(Func<CatNodesDescriptor, ICatNodesRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default(CancellationToken)
 		);
 
 		/// <inheritdoc />
-		Task<ICatResponse<CatNodesRecord>> CatNodesAsync(ICatNodesRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<ICatResponse<CatNodesRecord>> CatNodesAsync(ICatNodesRequest request, CancellationToken ct = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -30,20 +30,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICatResponse<CatNodesRecord> CatNodes(ICatNodesRequest request) =>
-			DoCat<ICatNodesRequest, CatNodesRequestParameters, CatNodesRecord>(request,
-				LowLevelDispatch.CatNodesDispatch<CatResponse<CatNodesRecord>>);
+			DoCat<ICatNodesRequest, CatNodesRequestParameters, CatNodesRecord>(request);
 
 		/// <inheritdoc />
 		public Task<ICatResponse<CatNodesRecord>> CatNodesAsync(Func<CatNodesDescriptor, ICatNodesRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) =>
-			CatNodesAsync(selector.InvokeOrDefault(new CatNodesDescriptor()), cancellationToken);
+			CatNodesAsync(selector.InvokeOrDefault(new CatNodesDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<ICatResponse<CatNodesRecord>> CatNodesAsync(ICatNodesRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			DoCatAsync<ICatNodesRequest, CatNodesRequestParameters, CatNodesRecord>(request, cancellationToken,
-				LowLevelDispatch.CatNodesDispatchAsync<CatResponse<CatNodesRecord>>);
+		public Task<ICatResponse<CatNodesRecord>> CatNodesAsync(ICatNodesRequest request, CancellationToken ct = default) =>
+			DoCatAsync<ICatNodesRequest, CatNodesRequestParameters, CatNodesRecord>(request, ct);
 	}
 }

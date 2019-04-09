@@ -23,11 +23,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<INodesStatsResponse> NodesStatsAsync(Func<NodesStatsDescriptor, INodesStatsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<INodesStatsResponse> NodesStatsAsync(INodesStatsRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<INodesStatsResponse> NodesStatsAsync(INodesStatsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -38,24 +38,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public INodesStatsResponse NodesStats(INodesStatsRequest request) =>
-			Dispatcher.Dispatch<INodesStatsRequest, NodesStatsRequestParameters, NodesStatsResponse>(
-				request,
-				(p, d) => LowLevelDispatch.NodesStatsDispatch<NodesStatsResponse>(p)
-			);
+			Dispatch2<INodesStatsRequest, NodesStatsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<INodesStatsResponse> NodesStatsAsync(Func<NodesStatsDescriptor, INodesStatsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			NodesStatsAsync(selector.InvokeOrDefault(new NodesStatsDescriptor()), cancellationToken);
+		public Task<INodesStatsResponse> NodesStatsAsync(
+			Func<NodesStatsDescriptor, INodesStatsRequest> selector = null,
+			CancellationToken ct = default
+		) => NodesStatsAsync(selector.InvokeOrDefault(new NodesStatsDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<INodesStatsResponse> NodesStatsAsync(INodesStatsRequest request, CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<INodesStatsRequest, NodesStatsRequestParameters, NodesStatsResponse, INodesStatsResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.NodesStatsDispatchAsync<NodesStatsResponse>(p, c)
-			);
+		public Task<INodesStatsResponse> NodesStatsAsync(INodesStatsRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<INodesStatsRequest, INodesStatsResponse, NodesStatsResponse>(request, request.RequestParameters, ct);
 	}
 }

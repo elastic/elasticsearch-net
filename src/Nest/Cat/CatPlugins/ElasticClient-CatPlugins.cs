@@ -15,12 +15,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(Func<CatPluginsDescriptor, ICatPluginsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default(CancellationToken)
 		);
 
 		/// <inheritdoc />
 		Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(ICatPluginsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default(CancellationToken)
 		);
 	}
 
@@ -32,18 +32,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICatResponse<CatPluginsRecord> CatPlugins(ICatPluginsRequest request) =>
-			DoCat<ICatPluginsRequest, CatPluginsRequestParameters, CatPluginsRecord>(request,
-				LowLevelDispatch.CatPluginsDispatch<CatResponse<CatPluginsRecord>>);
+			DoCat<ICatPluginsRequest, CatPluginsRequestParameters, CatPluginsRecord>(request);
 
 		/// <inheritdoc />
 		public Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(
-			Func<CatPluginsDescriptor, ICatPluginsRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)
-		) => CatPluginsAsync(selector.InvokeOrDefault(new CatPluginsDescriptor()), cancellationToken);
+			Func<CatPluginsDescriptor, ICatPluginsRequest> selector = null,
+			CancellationToken ct = default
+		) => CatPluginsAsync(selector.InvokeOrDefault(new CatPluginsDescriptor()), ct);
 
 		public Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(ICatPluginsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) =>
-			DoCatAsync<ICatPluginsRequest, CatPluginsRequestParameters, CatPluginsRecord>(request, cancellationToken,
-				LowLevelDispatch.CatPluginsDispatchAsync<CatResponse<CatPluginsRecord>>);
+			DoCatAsync<ICatPluginsRequest, CatPluginsRequestParameters, CatPluginsRecord>(request, ct);
 	}
 }

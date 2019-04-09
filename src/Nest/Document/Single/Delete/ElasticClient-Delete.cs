@@ -22,11 +22,11 @@ namespace Nest
 		/// <inheritdoc />
 		Task<IDeleteResponse> DeleteAsync<TDocument>(
 			DocumentPath<TDocument> document, Func<DeleteDescriptor<TDocument>, IDeleteRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) where TDocument : class;
 
 		/// <inheritdoc />
-		Task<IDeleteResponse> DeleteAsync(IDeleteRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IDeleteResponse> DeleteAsync(IDeleteRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -37,24 +37,19 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeleteResponse Delete(IDeleteRequest request) =>
-			Dispatcher.Dispatch<IDeleteRequest, DeleteRequestParameters, DeleteResponse>(
-				request,
-				(p, d) => LowLevelDispatch.DeleteDispatch<DeleteResponse>(p)
-			);
+			Dispatch2<IDeleteRequest, DeleteResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IDeleteResponse> DeleteAsync<TDocument>(
-			DocumentPath<TDocument> document, Func<DeleteDescriptor<TDocument>, IDeleteRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) where TDocument : class => DeleteAsync(selector.InvokeOrDefault(new DeleteDescriptor<TDocument>(document.Self.Index, document.Self.Id)),
-			cancellationToken);
+			DocumentPath<TDocument> document,
+			Func<DeleteDescriptor<TDocument>, IDeleteRequest> selector = null,
+			CancellationToken ct = default
+		)
+			where TDocument : class =>
+			DeleteAsync(selector.InvokeOrDefault(new DeleteDescriptor<TDocument>(document.Self.Index, document.Self.Id)), ct);
 
 		/// <inheritdoc />
-		public Task<IDeleteResponse> DeleteAsync(IDeleteRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IDeleteRequest, DeleteRequestParameters, DeleteResponse, IDeleteResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.DeleteDispatchAsync<DeleteResponse>(p, c)
-			);
+		public Task<IDeleteResponse> DeleteAsync(IDeleteRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IDeleteRequest, IDeleteResponse, DeleteResponse>(request, request.RequestParameters, ct);
 	}
 }

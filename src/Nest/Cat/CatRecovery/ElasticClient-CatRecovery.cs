@@ -16,12 +16,12 @@ namespace Nest
 		/// <inheritdoc />
 		Task<ICatResponse<CatRecoveryRecord>> CatRecoveryAsync(
 			Func<CatRecoveryDescriptor, ICatRecoveryRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<ICatResponse<CatRecoveryRecord>> CatRecoveryAsync(ICatRecoveryRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -34,20 +34,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICatResponse<CatRecoveryRecord> CatRecovery(ICatRecoveryRequest request) =>
-			DoCat<ICatRecoveryRequest, CatRecoveryRequestParameters, CatRecoveryRecord>(request,
-				LowLevelDispatch.CatRecoveryDispatch<CatResponse<CatRecoveryRecord>>);
+			DoCat<ICatRecoveryRequest, CatRecoveryRequestParameters, CatRecoveryRecord>(request);
 
 		/// <inheritdoc />
 		public Task<ICatResponse<CatRecoveryRecord>> CatRecoveryAsync(
 			Func<CatRecoveryDescriptor, ICatRecoveryRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) => CatRecoveryAsync(selector.InvokeOrDefault(new CatRecoveryDescriptor()), cancellationToken);
+			CancellationToken ct = default
+		) => CatRecoveryAsync(selector.InvokeOrDefault(new CatRecoveryDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<ICatResponse<CatRecoveryRecord>> CatRecoveryAsync(ICatRecoveryRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			DoCatAsync<ICatRecoveryRequest, CatRecoveryRequestParameters, CatRecoveryRecord>(request, cancellationToken,
-				LowLevelDispatch.CatRecoveryDispatchAsync<CatResponse<CatRecoveryRecord>>);
+		public Task<ICatResponse<CatRecoveryRecord>> CatRecoveryAsync(ICatRecoveryRequest request, CancellationToken ct = default) =>
+			DoCatAsync<ICatRecoveryRequest, CatRecoveryRequestParameters, CatRecoveryRecord>(request, ct);
 	}
 }

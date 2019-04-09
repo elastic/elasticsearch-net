@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -17,53 +16,47 @@ namespace Nest
 			Func<ClusterAllocationExplainDescriptor, IClusterAllocationExplainRequest> selector = null
 		);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ClusterAllocationExplain(System.Func{Nest.ClusterAllocationExplainDescriptor,Nest.IClusterAllocationExplainRequest})"/>
 		IClusterAllocationExplainResponse ClusterAllocationExplain(IClusterAllocationExplainRequest request);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ClusterAllocationExplain(System.Func{Nest.ClusterAllocationExplainDescriptor,Nest.IClusterAllocationExplainRequest})"/>
 		Task<IClusterAllocationExplainResponse> ClusterAllocationExplainAsync(
 			Func<ClusterAllocationExplainDescriptor, IClusterAllocationExplainRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
-		/// <inheritdoc />
-		Task<IClusterAllocationExplainResponse> ClusterAllocationExplainAsync(IClusterAllocationExplainRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+		/// <inheritdoc cref="ClusterAllocationExplain(System.Func{Nest.ClusterAllocationExplainDescriptor,Nest.IClusterAllocationExplainRequest})"/>
+		Task<IClusterAllocationExplainResponse> ClusterAllocationExplainAsync(
+			IClusterAllocationExplainRequest request,
+			CancellationToken ct = default
 		);
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc cref="ClusterAllocationExplain(System.Func{Nest.ClusterAllocationExplainDescriptor,Nest.IClusterAllocationExplainRequest})"/>
 		public IClusterAllocationExplainResponse ClusterAllocationExplain(
 			Func<ClusterAllocationExplainDescriptor, IClusterAllocationExplainRequest> selector = null
 		) =>
 			ClusterAllocationExplain(selector.InvokeOrDefault(new ClusterAllocationExplainDescriptor()));
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ClusterAllocationExplain(System.Func{Nest.ClusterAllocationExplainDescriptor,Nest.IClusterAllocationExplainRequest})"/>
 		public IClusterAllocationExplainResponse ClusterAllocationExplain(IClusterAllocationExplainRequest request) =>
-			Dispatcher.Dispatch<IClusterAllocationExplainRequest, ClusterAllocationExplainRequestParameters, ClusterAllocationExplainResponse>(
-				request,
-				(p, d) => LowLevelDispatch.ClusterAllocationExplainDispatch<ClusterAllocationExplainResponse>(p, d)
-			);
+			Dispatch2<IClusterAllocationExplainRequest, ClusterAllocationExplainResponse>(request, request.RequestParameters);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ClusterAllocationExplain(System.Func{Nest.ClusterAllocationExplainDescriptor,Nest.IClusterAllocationExplainRequest})"/>
 		public Task<IClusterAllocationExplainResponse> ClusterAllocationExplainAsync(
 			Func<ClusterAllocationExplainDescriptor, IClusterAllocationExplainRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) =>
-			ClusterAllocationExplainAsync(selector.InvokeOrDefault(new ClusterAllocationExplainDescriptor()), cancellationToken);
+			ClusterAllocationExplainAsync(selector.InvokeOrDefault(new ClusterAllocationExplainDescriptor()), ct);
 
-		/// <inheritdoc />
-		public Task<IClusterAllocationExplainResponse> ClusterAllocationExplainAsync(IClusterAllocationExplainRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+		/// <inheritdoc cref="ClusterAllocationExplain(System.Func{Nest.ClusterAllocationExplainDescriptor,Nest.IClusterAllocationExplainRequest})"/>
+		public Task<IClusterAllocationExplainResponse> ClusterAllocationExplainAsync(
+			IClusterAllocationExplainRequest request,
+			CancellationToken ct = default
 		) =>
-			Dispatcher
-				.DispatchAsync<IClusterAllocationExplainRequest, ClusterAllocationExplainRequestParameters, ClusterAllocationExplainResponse,
-					IClusterAllocationExplainResponse>(
-					request,
-					cancellationToken,
-					(p, d, c) => LowLevelDispatch.ClusterAllocationExplainDispatchAsync<ClusterAllocationExplainResponse>(p, d, c)
-				);
+			Dispatch2Async<IClusterAllocationExplainRequest, IClusterAllocationExplainResponse, ClusterAllocationExplainResponse>
+				(request, request.RequestParameters, ct);
 	}
 }

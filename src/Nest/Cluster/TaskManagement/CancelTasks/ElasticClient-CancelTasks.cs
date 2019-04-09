@@ -18,11 +18,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<ICancelTasksResponse> CancelTasksAsync(Func<CancelTasksDescriptor, ICancelTasksRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<ICancelTasksResponse> CancelTasksAsync(ICancelTasksRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<ICancelTasksResponse> CancelTasksAsync(ICancelTasksRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -33,25 +33,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICancelTasksResponse CancelTasks(ICancelTasksRequest request) =>
-			Dispatcher.Dispatch<ICancelTasksRequest, CancelTasksRequestParameters, CancelTasksResponse>(
-				request,
-				(p, d) => LowLevelDispatch.TasksCancelDispatch<CancelTasksResponse>(p)
-			);
+			Dispatch2<ICancelTasksRequest, CancelTasksResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<ICancelTasksResponse> CancelTasksAsync(Func<CancelTasksDescriptor, ICancelTasksRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) =>
-			CancelTasksAsync(selector.InvokeOrDefault(new CancelTasksDescriptor()), cancellationToken);
+			CancelTasksAsync(selector.InvokeOrDefault(new CancelTasksDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<ICancelTasksResponse> CancelTasksAsync(ICancelTasksRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<ICancelTasksRequest, CancelTasksRequestParameters, CancelTasksResponse, ICancelTasksResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.TasksCancelDispatchAsync<CancelTasksResponse>(p, c)
-			);
+		public Task<ICancelTasksResponse> CancelTasksAsync(ICancelTasksRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<ICancelTasksRequest, ICancelTasksResponse, CancelTasksResponse>(request, request.RequestParameters, ct);
 	}
 }

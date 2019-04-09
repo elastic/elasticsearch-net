@@ -19,11 +19,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IExistsResponse> TypeExistsAsync(Indices indices, string type, Func<TypeExistsDescriptor, ITypeExistsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IExistsResponse> TypeExistsAsync(ITypeExistsRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IExistsResponse> TypeExistsAsync(ITypeExistsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -34,23 +34,18 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IExistsResponse TypeExists(ITypeExistsRequest request) =>
-			Dispatcher.Dispatch<ITypeExistsRequest, TypeExistsRequestParameters, ExistsResponse>(
-				request,
-				(p, d) => LowLevelDispatch.IndicesExistsTypeDispatch<ExistsResponse>(p)
-			);
+			Dispatch2<ITypeExistsRequest, ExistsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IExistsResponse> TypeExistsAsync(Indices indices, string type, Func<TypeExistsDescriptor, ITypeExistsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			TypeExistsAsync(selector.InvokeOrDefault(new TypeExistsDescriptor(indices, type)), cancellationToken);
+		public Task<IExistsResponse> TypeExistsAsync(
+			Indices indices,
+			string type,
+			Func<TypeExistsDescriptor, ITypeExistsRequest> selector = null,
+			CancellationToken ct = default
+		) => TypeExistsAsync(selector.InvokeOrDefault(new TypeExistsDescriptor(indices, type)), ct);
 
 		/// <inheritdoc />
-		public Task<IExistsResponse> TypeExistsAsync(ITypeExistsRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<ITypeExistsRequest, TypeExistsRequestParameters, ExistsResponse, IExistsResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.IndicesExistsTypeDispatchAsync<ExistsResponse>(p, c)
-			);
+		public Task<IExistsResponse> TypeExistsAsync(ITypeExistsRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<ITypeExistsRequest, IExistsResponse, ExistsResponse>(request, request.RequestParameters, ct);
 	}
 }

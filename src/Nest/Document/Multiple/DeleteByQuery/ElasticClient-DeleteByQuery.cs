@@ -25,43 +25,42 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IDeleteByQueryResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		)
 			where T : class;
 
 		/// <inheritdoc />
 		Task<IDeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
 	public partial class ElasticClient
 	{
+		private static readonly int[] DeleteByQueryAllowedStatusCodes = { -1 };
+
 		/// <inheritdoc />
 		public IDeleteByQueryResponse DeleteByQuery<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector) where T : class =>
 			DeleteByQuery(selector?.Invoke(new DeleteByQueryDescriptor<T>(typeof(T))));
 
 		/// <inheritdoc />
-		public IDeleteByQueryResponse DeleteByQuery(IDeleteByQueryRequest request) =>
-			Dispatcher.Dispatch<IDeleteByQueryRequest, DeleteByQueryRequestParameters, DeleteByQueryResponse>(
-				ForceConfiguration<IDeleteByQueryRequest, DeleteByQueryRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
-				(p, d) => LowLevelDispatch.DeleteByQueryDispatch<DeleteByQueryResponse>(p, d)
-			);
+		public IDeleteByQueryResponse DeleteByQuery(IDeleteByQueryRequest request)
+		{
+			ForceConfiguration(request, c => c.AllowedStatusCodes = DeleteByQueryAllowedStatusCodes);
+			return Dispatch2<IDeleteByQueryRequest, DeleteByQueryResponse>(request, request.RequestParameters);
+		}
 
 		/// <inheritdoc />
 		public Task<IDeleteByQueryResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) where T : class =>
-			DeleteByQueryAsync(selector?.Invoke(new DeleteByQueryDescriptor<T>(typeof(T))), cancellationToken);
+			DeleteByQueryAsync(selector?.Invoke(new DeleteByQueryDescriptor<T>(typeof(T))), ct);
 
 		/// <inheritdoc />
-		public Task<IDeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IDeleteByQueryRequest, DeleteByQueryRequestParameters, DeleteByQueryResponse, IDeleteByQueryResponse>(
-				ForceConfiguration<IDeleteByQueryRequest, DeleteByQueryRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.DeleteByQueryDispatchAsync<DeleteByQueryResponse>(p, d, c)
-			);
+		public Task<IDeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request, CancellationToken ct = default)
+		{
+			ForceConfiguration(request, c => c.AllowedStatusCodes = DeleteByQueryAllowedStatusCodes);
+			return Dispatch2Async<IDeleteByQueryRequest, IDeleteByQueryResponse, DeleteByQueryResponse>(request, request.RequestParameters, ct);
+		}
 	}
 }

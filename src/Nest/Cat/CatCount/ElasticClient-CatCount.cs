@@ -15,11 +15,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<ICatResponse<CatCountRecord>> CatCountAsync(Func<CatCountDescriptor, ICatCountRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<ICatResponse<CatCountRecord>> CatCountAsync(ICatCountRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<ICatResponse<CatCountRecord>> CatCountAsync(ICatCountRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -30,20 +30,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICatResponse<CatCountRecord> CatCount(ICatCountRequest request) =>
-			DoCat<ICatCountRequest, CatCountRequestParameters, CatCountRecord>(request,
-				LowLevelDispatch.CatCountDispatch<CatResponse<CatCountRecord>>);
+			DoCat<ICatCountRequest, CatCountRequestParameters, CatCountRecord>(request);
 
 		/// <inheritdoc />
-		public Task<ICatResponse<CatCountRecord>> CatCountAsync(Func<CatCountDescriptor, ICatCountRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+		public Task<ICatResponse<CatCountRecord>> CatCountAsync(
+			Func<CatCountDescriptor, ICatCountRequest> selector = null,
+			CancellationToken ct = default
 		) =>
-			CatCountAsync(selector.InvokeOrDefault(new CatCountDescriptor()), cancellationToken);
+			CatCountAsync(selector.InvokeOrDefault(new CatCountDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<ICatResponse<CatCountRecord>> CatCountAsync(ICatCountRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			DoCatAsync<ICatCountRequest, CatCountRequestParameters, CatCountRecord>(request, cancellationToken,
-				LowLevelDispatch.CatCountDispatchAsync<CatResponse<CatCountRecord>>);
+		public Task<ICatResponse<CatCountRecord>> CatCountAsync(ICatCountRequest request, CancellationToken ct = default) =>
+			DoCatAsync<ICatCountRequest, CatCountRequestParameters, CatCountRecord>(request, ct);
 	}
 }

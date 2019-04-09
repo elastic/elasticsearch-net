@@ -20,34 +20,28 @@ namespace Nest
 		IBulkResponse Bulk(Func<BulkDescriptor, IBulkRequest> selector);
 
 		/// <inheritdoc />
-		Task<IBulkResponse> BulkAsync(IBulkRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IBulkResponse> BulkAsync(IBulkRequest request, CancellationToken ct = default);
 
 		/// <inheritdoc />
-		Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
 		public IBulkResponse Bulk(IBulkRequest request) =>
-			Dispatcher.Dispatch<IBulkRequest, BulkRequestParameters, BulkResponse>(
-				request, LowLevelDispatch.BulkDispatch<BulkResponse>
-			);
+			Dispatch2<IBulkRequest, BulkResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public IBulkResponse Bulk(Func<BulkDescriptor, IBulkRequest> selector) =>
 			Bulk(selector.InvokeOrDefault(new BulkDescriptor()));
 
 		/// <inheritdoc />
-		public Task<IBulkResponse> BulkAsync(IBulkRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IBulkRequest, BulkRequestParameters, BulkResponse, IBulkResponse>(
-				request, cancellationToken, LowLevelDispatch.BulkDispatchAsync<BulkResponse>
-			);
+		public Task<IBulkResponse> BulkAsync(IBulkRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IBulkRequest, IBulkResponse, BulkResponse>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
-		public Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			BulkAsync(selector.InvokeOrDefault(new BulkDescriptor()), cancellationToken);
+		public Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector, CancellationToken ct = default) =>
+			BulkAsync(selector.InvokeOrDefault(new BulkDescriptor()), ct);
 	}
 }

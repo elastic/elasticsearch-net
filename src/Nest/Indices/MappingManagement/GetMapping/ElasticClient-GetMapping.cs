@@ -20,12 +20,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IGetMappingResponse> GetMappingAsync<T>(Func<GetMappingDescriptor<T>, IGetMappingRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		)
 			where T : class;
 
 		/// <inheritdoc />
-		Task<IGetMappingResponse> GetMappingAsync(IGetMappingRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IGetMappingResponse> GetMappingAsync(IGetMappingRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -37,25 +37,18 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetMappingResponse GetMapping(IGetMappingRequest request) =>
-			Dispatcher.Dispatch<IGetMappingRequest, GetMappingRequestParameters, GetMappingResponse>(
-				request,
-				(p, d) => LowLevelDispatch.IndicesGetMappingDispatch<GetMappingResponse>(p)
-			);
+			Dispatch2<IGetMappingRequest, GetMappingResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetMappingResponse> GetMappingAsync<T>(Func<GetMappingDescriptor<T>, IGetMappingRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+		public Task<IGetMappingResponse> GetMappingAsync<T>(
+			Func<GetMappingDescriptor<T>, IGetMappingRequest> selector = null,
+			CancellationToken ct = default
 		)
 			where T : class =>
-			GetMappingAsync(selector.InvokeOrDefault(new GetMappingDescriptor<T>()), cancellationToken);
+			GetMappingAsync(selector.InvokeOrDefault(new GetMappingDescriptor<T>()), ct);
 
 		/// <inheritdoc />
-		public Task<IGetMappingResponse> GetMappingAsync(IGetMappingRequest request, CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IGetMappingRequest, GetMappingRequestParameters, GetMappingResponse, IGetMappingResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.IndicesGetMappingDispatchAsync<GetMappingResponse>(p, c)
-			);
+		public Task<IGetMappingResponse> GetMappingAsync(IGetMappingRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IGetMappingRequest, IGetMappingResponse, GetMappingResponse>(request, request.RequestParameters, ct);
 	}
 }

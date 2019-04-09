@@ -16,7 +16,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IClusterRerouteResponse> ClusterRerouteAsync(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
@@ -24,7 +24,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IClusterRerouteResponse> ClusterRerouteAsync(IClusterRerouteRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -36,25 +36,18 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IClusterRerouteResponse ClusterReroute(IClusterRerouteRequest request) =>
-			Dispatcher.Dispatch<IClusterRerouteRequest, ClusterRerouteRequestParameters, ClusterRerouteResponse>(
-				request,
-				LowLevelDispatch.ClusterRerouteDispatch<ClusterRerouteResponse>
-			);
+			Dispatch2<IClusterRerouteRequest, ClusterRerouteResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IClusterRerouteResponse> ClusterRerouteAsync(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) =>
-			ClusterRerouteAsync(selector?.Invoke(new ClusterRerouteDescriptor()), cancellationToken);
+			ClusterRerouteAsync(selector?.Invoke(new ClusterRerouteDescriptor()), ct);
 
 		/// <inheritdoc />
 		public Task<IClusterRerouteResponse> ClusterRerouteAsync(IClusterRerouteRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) =>
-			Dispatcher.DispatchAsync<IClusterRerouteRequest, ClusterRerouteRequestParameters, ClusterRerouteResponse, IClusterRerouteResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.ClusterRerouteDispatchAsync<ClusterRerouteResponse>
-			);
+			Dispatch2Async<IClusterRerouteRequest, IClusterRerouteResponse, ClusterRerouteResponse>(request, request.RequestParameters, ct);
 	}
 }

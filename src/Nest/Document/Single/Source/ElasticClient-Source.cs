@@ -26,50 +26,42 @@ namespace Nest
 		Task<TDocument> SourceAsync<TDocument>(
 			DocumentPath<TDocument> document,
 			Func<SourceDescriptor<TDocument>, ISourceRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) where TDocument : class;
 
 		/// <inheritdoc />
-		Task<TDocument> SourceAsync<TDocument>(ISourceRequest request, CancellationToken cancellationToken = default(CancellationToken)) where TDocument : class;
+		Task<TDocument> SourceAsync<TDocument>(ISourceRequest request, CancellationToken ct = default) where TDocument : class;
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public TDocument Source<TDocument>(DocumentPath<TDocument> document, Func<SourceDescriptor<TDocument>, ISourceRequest> selector = null) where TDocument : class =>
+		public TDocument Source<TDocument>(DocumentPath<TDocument> document, Func<SourceDescriptor<TDocument>, ISourceRequest> selector = null)
+			where TDocument : class =>
 			Source<TDocument>(selector.InvokeOrDefault(new SourceDescriptor<TDocument>(document.Self.Index, document.Self.Id)));
 
 		/// <inheritdoc />
 		public TDocument Source<TDocument>(ISourceRequest request) where TDocument : class
 		{
-			request.RouteValues.Resolve(ConnectionSettings);
-			return Dispatcher.Dispatch<ISourceRequest, SourceRequestParameters, SourceResponse<TDocument>>(
-					request,
-					ToSourceResponse<TDocument>,
-					(p, d) => LowLevelDispatch.GetSourceDispatch<SourceResponse<TDocument>>(p)
-				)
-				.Body;
+			request.RequestParameters.DeserializationOverride = ToSourceResponse<TDocument>;
+			return Dispatch2<ISourceRequest, SourceResponse<TDocument>>(request, request.RequestParameters).Body;
 		}
 
 		/// <inheritdoc />
 		public Task<TDocument> SourceAsync<TDocument>(
 			DocumentPath<TDocument> document,
 			Func<SourceDescriptor<TDocument>, ISourceRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) where TDocument : class =>
-			SourceAsync<TDocument>(selector.InvokeOrDefault(new SourceDescriptor<TDocument>(document.Self.Index, document.Self.Id)),
-				cancellationToken);
+			CancellationToken ct = default
+		)
+			where TDocument : class =>
+			SourceAsync<TDocument>(selector.InvokeOrDefault(new SourceDescriptor<TDocument>(document.Self.Index, document.Self.Id)), ct);
 
 		/// <inheritdoc />
-		public async Task<TDocument> SourceAsync<TDocument>(ISourceRequest request, CancellationToken cancellationToken = default) where TDocument : class
+		public async Task<TDocument> SourceAsync<TDocument>(ISourceRequest request, CancellationToken ct = default) where TDocument : class
 		{
 			request.RouteValues.Resolve(ConnectionSettings);
-			var result = await Dispatcher.DispatchAsync<ISourceRequest, SourceRequestParameters, SourceResponse<TDocument>, ISourceResponse<TDocument>>(
-					request,
-					cancellationToken,
-					ToSourceResponse<TDocument>,
-					(p, d, c) => LowLevelDispatch.GetSourceDispatchAsync<SourceResponse<TDocument>>(p, c)
-				)
+			request.RequestParameters.DeserializationOverride = ToSourceResponse<TDocument>;
+			var result = await Dispatch2Async<ISourceRequest, ISourceResponse<TDocument>, SourceResponse<TDocument>>(request, request.RequestParameters, ct)
 				.ConfigureAwait(false);
 			return result.Body;
 		}

@@ -14,11 +14,11 @@ namespace Nest
 		Task<IRolloverIndexResponse> RolloverIndexAsync(
 			Name alias,
 			Func<RolloverIndexDescriptor, IRolloverIndexRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		);
 
 		Task<IRolloverIndexResponse> RolloverIndexAsync(IRolloverIndexRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -28,24 +28,15 @@ namespace Nest
 			RolloverIndex(selector.InvokeOrDefault(new RolloverIndexDescriptor(alias)));
 
 		public IRolloverIndexResponse RolloverIndex(IRolloverIndexRequest request) =>
-			Dispatcher.Dispatch<IRolloverIndexRequest, RolloverIndexRequestParameters, RolloverIndexResponse>(
-				request,
-				LowLevelDispatch.IndicesRolloverDispatch<RolloverIndexResponse>
-			);
+			Dispatch2<IRolloverIndexRequest, RolloverIndexResponse>(request, request.RequestParameters);
 
 		public Task<IRolloverIndexResponse> RolloverIndexAsync(
 			Name alias,
 			Func<RolloverIndexDescriptor, IRolloverIndexRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		) => RolloverIndexAsync(selector.InvokeOrDefault(new RolloverIndexDescriptor(alias)));
 
-		public Task<IRolloverIndexResponse> RolloverIndexAsync(IRolloverIndexRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IRolloverIndexRequest, RolloverIndexRequestParameters, RolloverIndexResponse, IRolloverIndexResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.IndicesRolloverDispatchAsync<RolloverIndexResponse>
-			);
+		public Task<IRolloverIndexResponse> RolloverIndexAsync(IRolloverIndexRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IRolloverIndexRequest, IRolloverIndexResponse, RolloverIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

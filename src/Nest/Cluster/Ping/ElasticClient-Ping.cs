@@ -17,14 +17,14 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IPingResponse> PingAsync(Func<PingDescriptor, IPingRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		IPingResponse Ping(IPingRequest request);
 
 		/// <inheritdoc />
-		Task<IPingResponse> PingAsync(IPingRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IPingResponse> PingAsync(IPingRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -35,24 +35,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IPingResponse Ping(IPingRequest request) =>
-			Dispatcher.Dispatch<IPingRequest, PingRequestParameters, PingResponse>(
-				SetPingTimeout(request),
-				(p, d) => LowLevelDispatch.PingDispatch<PingResponse>(p)
-			);
+			Dispatch2<IPingRequest, PingResponse>(SetPingTimeout(request), request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IPingResponse> PingAsync(Func<PingDescriptor, IPingRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) =>
-			PingAsync(selector.InvokeOrDefault(new PingDescriptor()), cancellationToken);
+			PingAsync(selector.InvokeOrDefault(new PingDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IPingResponse> PingAsync(IPingRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IPingRequest, PingRequestParameters, PingResponse, IPingResponse>(
-				SetPingTimeout(request),
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.PingDispatchAsync<PingResponse>(p, c)
-			);
+		public Task<IPingResponse> PingAsync(IPingRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IPingRequest, IPingResponse, PingResponse>(SetPingTimeout(request), request.RequestParameters, ct);
 
 		private IPingRequest SetPingTimeout(IPingRequest pingRequest)
 		{

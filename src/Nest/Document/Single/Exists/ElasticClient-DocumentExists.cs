@@ -26,12 +26,12 @@ namespace Nest
 		/// <inheritdoc />
 		Task<IExistsResponse> DocumentExistsAsync<TDocument>(DocumentPath<TDocument> document,
 			Func<DocumentExistsDescriptor<TDocument>, IDocumentExistsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		)
 			where TDocument : class;
 
 		/// <inheritdoc />
-		Task<IExistsResponse> DocumentExistsAsync(IDocumentExistsRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IExistsResponse> DocumentExistsAsync(IDocumentExistsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -43,27 +43,19 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IExistsResponse DocumentExists(IDocumentExistsRequest request) =>
-			Dispatcher.Dispatch<IDocumentExistsRequest, DocumentExistsRequestParameters, ExistsResponse>(
-				request,
-				(p, d) => LowLevelDispatch.ExistsDispatch<ExistsResponse>(p)
-			);
+			Dispatch2<IDocumentExistsRequest, ExistsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IExistsResponse> DocumentExistsAsync<TDocument>(DocumentPath<TDocument> document,
+		public Task<IExistsResponse> DocumentExistsAsync<TDocument>(
+			DocumentPath<TDocument> document,
 			Func<DocumentExistsDescriptor<TDocument>, IDocumentExistsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) where TDocument : class =>
-			DocumentExistsAsync(selector.InvokeOrDefault(new DocumentExistsDescriptor<TDocument>(document.Self.Index, document.Self.Id)),
-				cancellationToken);
+			CancellationToken ct = default
+		)
+			where TDocument : class =>
+			DocumentExistsAsync(selector.InvokeOrDefault(new DocumentExistsDescriptor<TDocument>(document.Self.Index, document.Self.Id)), ct);
 
 		/// <inheritdoc />
-		public Task<IExistsResponse> DocumentExistsAsync(IDocumentExistsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IDocumentExistsRequest, DocumentExistsRequestParameters, ExistsResponse, IExistsResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.ExistsDispatchAsync<ExistsResponse>(p, c)
-			);
+		public Task<IExistsResponse> DocumentExistsAsync(IDocumentExistsRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IDocumentExistsRequest, IExistsResponse, ExistsResponse>(request, request.RequestParameters, ct);
 	}
 }

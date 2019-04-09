@@ -22,12 +22,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IPutMappingResponse> MapAsync<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		)
 			where T : class;
 
 		/// <inheritdoc />
-		Task<IPutMappingResponse> MapAsync(IPutMappingRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IPutMappingResponse> MapAsync(IPutMappingRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -39,24 +39,18 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IPutMappingResponse Map(IPutMappingRequest request) =>
-			Dispatcher.Dispatch<IPutMappingRequest, PutMappingRequestParameters, PutMappingResponse>(
-				request,
-				LowLevelDispatch.IndicesPutMappingDispatch<PutMappingResponse>
-			);
+			Dispatch2<IPutMappingRequest, PutMappingResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IPutMappingResponse> MapAsync<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+		public Task<IPutMappingResponse> MapAsync<T>(
+			Func<PutMappingDescriptor<T>, IPutMappingRequest> selector,
+			CancellationToken ct = default
 		)
 			where T : class =>
-			MapAsync(selector?.Invoke(new PutMappingDescriptor<T>()), cancellationToken);
+			MapAsync(selector?.Invoke(new PutMappingDescriptor<T>()), ct);
 
 		/// <inheritdoc />
-		public Task<IPutMappingResponse> MapAsync(IPutMappingRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IPutMappingRequest, PutMappingRequestParameters, PutMappingResponse, IPutMappingResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.IndicesPutMappingDispatchAsync<PutMappingResponse>
-			);
+		public Task<IPutMappingResponse> MapAsync(IPutMappingRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IPutMappingRequest, IPutMappingResponse, PutMappingResponse>(request, request.RequestParameters, ct);
 	}
 }

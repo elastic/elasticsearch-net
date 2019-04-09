@@ -20,11 +20,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IRemoteInfoResponse> RemoteInfoAsync(Func<RemoteInfoDescriptor, IRemoteInfoRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IRemoteInfoResponse> RemoteInfoAsync(IRemoteInfoRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IRemoteInfoResponse> RemoteInfoAsync(IRemoteInfoRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -35,24 +35,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IRemoteInfoResponse RemoteInfo(IRemoteInfoRequest request) =>
-			Dispatcher.Dispatch<IRemoteInfoRequest, RemoteInfoRequestParameters, RemoteInfoResponse>(
-				request,
-				(p, d) => LowLevelDispatch.ClusterRemoteInfoDispatch<RemoteInfoResponse>(p)
-			);
+			Dispatch2<IRemoteInfoRequest, RemoteInfoResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IRemoteInfoResponse> RemoteInfoAsync(Func<RemoteInfoDescriptor, IRemoteInfoRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) =>
-			RemoteInfoAsync(selector.InvokeOrDefault(new RemoteInfoDescriptor()), cancellationToken);
+			RemoteInfoAsync(selector.InvokeOrDefault(new RemoteInfoDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IRemoteInfoResponse> RemoteInfoAsync(IRemoteInfoRequest request, CancellationToken cancellationToken = default(CancellationToken)
+		public Task<IRemoteInfoResponse> RemoteInfoAsync(IRemoteInfoRequest request, CancellationToken ct = default
 		) =>
-			Dispatcher.DispatchAsync<IRemoteInfoRequest, RemoteInfoRequestParameters, RemoteInfoResponse, IRemoteInfoResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.ClusterRemoteInfoDispatchAsync<RemoteInfoResponse>(p, c)
-			);
+			Dispatch2Async<IRemoteInfoRequest, IRemoteInfoResponse, RemoteInfoResponse>(request, request.RequestParameters, ct);
 	}
 }

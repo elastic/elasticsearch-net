@@ -9,7 +9,7 @@ namespace Nest
 	/// <summary>
 	/// ElasticClient is NEST's strongly typed client which exposes fully mapped Elasticsearch endpoints
 	/// </summary>
-	public partial class ElasticClient : IElasticClient, IHighLevelToLowLevelDispatcher
+	public partial class ElasticClient : IElasticClient
 	{
 		public ElasticClient() : this(new ConnectionSettings(new Uri("http://localhost:9200"))) { }
 
@@ -37,47 +37,43 @@ namespace Nest
 		public IElasticsearchSerializer RequestResponseSerializer => Transport.Settings.RequestResponseSerializer;
 
 		public IElasticsearchSerializer SourceSerializer => Transport.Settings.SourceSerializer;
-		private IHighLevelToLowLevelDispatcher Dispatcher => this;
 
 		private LowLevelDispatch LowLevelDispatch { get; }
 
 		private ITransport<IConnectionSettingsValues> Transport { get; }
 
-		TResponse IHighLevelToLowLevelDispatcher.Dispatch<TRequest, TQueryString, TResponse>(
-			TRequest request,
-			Func<TRequest, SerializableData<TRequest>, TResponse> dispatch
-		) => Dispatcher.Dispatch<TRequest, TQueryString, TResponse>(request, null, dispatch);
-
-		TResponse IHighLevelToLowLevelDispatcher.Dispatch<TRequest, TQueryString, TResponse>(
-			TRequest request,
-			Func<IApiCallDetails, Stream, TResponse> responseGenerator,
-			Func<TRequest, SerializableData<TRequest>, TResponse> dispatch
+		internal Task<TResponseInterface> Dispatch2Async<TRequest, TResponseInterface, TResponse>(
+			TRequest p,
+			IRequestParameters parameters,
+			CancellationToken ct
 		)
+			where TRequest : class, IRequest
+			where TResponseInterface : IElasticsearchResponse
+			where TResponse : class, TResponseInterface, IElasticsearchResponse, new()
 		{
-			request.RouteValues.Resolve(ConnectionSettings);
-			request.RequestParameters.DeserializationOverride = responseGenerator;
+			p.RouteValues.Resolve(ConnectionSettings);
+			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD) ? null : new SerializableData<TRequest>(p);
 
-			var response = dispatch(request, request);
-			return response;
+			return LowLevel.DoRequestAsync<TResponse>(p.HttpMethod, p.RouteValues.ToString(), ct, b, parameters)
+				.ToBaseTask<TResponse, TResponseInterface>();
 		}
 
-		Task<TResponseInterface> IHighLevelToLowLevelDispatcher.DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(
-			TRequest descriptor,
-			CancellationToken cancellationToken,
-			Func<TRequest, SerializableData<TRequest>, CancellationToken, Task<TResponse>> dispatch
-		) => Dispatcher.DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(descriptor, cancellationToken, null, dispatch);
+		internal TResponse Dispatch2<TRequest, TResponse>(TRequest p, IRequestParameters parameters)
+			where TRequest : class, IRequest
+			where TResponse : class, IElasticsearchResponse, new()
 
-		async Task<TResponseInterface> IHighLevelToLowLevelDispatcher.DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(
-			TRequest request,
-			CancellationToken cancellationToken,
-			Func<IApiCallDetails, Stream, TResponse> responseGenerator,
-			Func<TRequest, SerializableData<TRequest>, CancellationToken, Task<TResponse>> dispatch
-		)
 		{
-			request.RouteValues.Resolve(ConnectionSettings);
-			request.RequestParameters.DeserializationOverride = responseGenerator;
-			var response = await dispatch(request, request, cancellationToken).ConfigureAwait(false);
-			return response;
+			p.RouteValues.Resolve(ConnectionSettings);
+			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD) ? null : new SerializableData<TRequest>(p);
+			return LowLevel.DoRequest<TResponse>(p.HttpMethod, p.RouteValues.ToString(), b, parameters);
+		}
+
+		private static void ForceConfiguration<TParams>(IRequest<TParams> request, Action<IRequestConfiguration> setter)
+			where TParams : IRequestParameters, new()
+		{
+			var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
+			setter(configuration);
+			request.RequestParameters.RequestConfiguration = configuration;
 		}
 
 		private static TRequest ForceConfiguration<TRequest, TParams>(TRequest request, Action<IRequestConfiguration> setter)

@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
 using Elasticsearch.Net;
 
 namespace Nest
@@ -61,5 +63,6 @@ namespace Nest
 		}
 
 		private static string PrettyParam(string key, string value) => $"{{{key}={(value.IsNullOrEmpty() ? "<NULL>" : value)}}}";
+
 	}
 }

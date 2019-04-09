@@ -15,12 +15,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IRecoveryStatusResponse> RecoveryStatusAsync(Indices indices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -32,25 +32,18 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IRecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest request) =>
-			Dispatcher.Dispatch<IRecoveryStatusRequest, RecoveryStatusRequestParameters, RecoveryStatusResponse>(
-				request,
-				(p, d) => LowLevelDispatch.IndicesRecoveryDispatch<RecoveryStatusResponse>(p)
-			);
+			Dispatch2<IRecoveryStatusRequest, RecoveryStatusResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IRecoveryStatusResponse> RecoveryStatusAsync(Indices indices,
-			Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)
+		public Task<IRecoveryStatusResponse> RecoveryStatusAsync(
+			Indices indices,
+			Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null,
+			CancellationToken ct = default
 		) =>
-			RecoveryStatusAsync(selector.InvokeOrDefault(new RecoveryStatusDescriptor().Index(indices)), cancellationToken);
+			RecoveryStatusAsync(selector.InvokeOrDefault(new RecoveryStatusDescriptor().Index(indices)), ct);
 
 		/// <inheritdoc />
-		public Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IRecoveryStatusRequest, RecoveryStatusRequestParameters, RecoveryStatusResponse, IRecoveryStatusResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.IndicesRecoveryDispatchAsync<RecoveryStatusResponse>(p, c)
-			);
+		public Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IRecoveryStatusRequest, IRecoveryStatusResponse, RecoveryStatusResponse>(request, request.RequestParameters, ct);
 	}
 }

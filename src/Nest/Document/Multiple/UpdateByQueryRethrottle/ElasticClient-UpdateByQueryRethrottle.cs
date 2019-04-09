@@ -21,12 +21,12 @@ namespace Nest
  		/// <inheritdoc cref="UpdateByQueryRethrottle(Nest.TaskId,System.Func{Nest.UpdateByQueryRethrottleDescriptor,Nest.IUpdateByQueryRethrottleRequest})" />
 		Task<IListTasksResponse> UpdateByQueryRethrottleAsync(TaskId taskId,
 			Func<UpdateByQueryRethrottleDescriptor, IUpdateByQueryRethrottleRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
  		/// <inheritdoc cref="UpdateByQueryRethrottle(Nest.TaskId,System.Func{Nest.UpdateByQueryRethrottleDescriptor,Nest.IUpdateByQueryRethrottleRequest})" />
 		Task<IListTasksResponse> UpdateByQueryRethrottleAsync(IUpdateByQueryRethrottleRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -38,25 +38,17 @@ namespace Nest
 
  		/// <inheritdoc />
 		public IListTasksResponse UpdateByQueryRethrottle(IUpdateByQueryRethrottleRequest request) =>
-			Dispatcher.Dispatch<IUpdateByQueryRethrottleRequest, UpdateByQueryRethrottleRequestParameters, ListTasksResponse>(
-				request,
-				(p, d) => LowLevelDispatch.UpdateByQueryRethrottleDispatch<ListTasksResponse>(p)
-			);
+			Dispatch2<IUpdateByQueryRethrottleRequest, ListTasksResponse>(request, request.RequestParameters);
 
  		/// <inheritdoc />
-		public Task<IListTasksResponse> UpdateByQueryRethrottleAsync(TaskId taskId, Func<UpdateByQueryRethrottleDescriptor, IUpdateByQueryRethrottleRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			UpdateByQueryRethrottleAsync(selector.InvokeOrDefault(new UpdateByQueryRethrottleDescriptor(taskId)), cancellationToken);
+		public Task<IListTasksResponse> UpdateByQueryRethrottleAsync(
+			TaskId taskId,
+			Func<UpdateByQueryRethrottleDescriptor, IUpdateByQueryRethrottleRequest> selector = null,
+			CancellationToken ct = default
+		) => UpdateByQueryRethrottleAsync(selector.InvokeOrDefault(new UpdateByQueryRethrottleDescriptor(taskId)), ct);
 
  		/// <inheritdoc />
-		public Task<IListTasksResponse> UpdateByQueryRethrottleAsync(IUpdateByQueryRethrottleRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IUpdateByQueryRethrottleRequest, UpdateByQueryRethrottleRequestParameters, ListTasksResponse, IListTasksResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.UpdateByQueryRethrottleDispatchAsync<ListTasksResponse>(p, c)
-			);
+		public Task<IListTasksResponse> UpdateByQueryRethrottleAsync(IUpdateByQueryRethrottleRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IUpdateByQueryRethrottleRequest, IListTasksResponse, ListTasksResponse>(request, request.RequestParameters, ct);
 	}
 }

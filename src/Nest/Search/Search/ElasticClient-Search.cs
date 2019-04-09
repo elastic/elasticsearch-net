@@ -76,21 +76,18 @@ namespace Nest
 		public ISearchResponse<TResult> Search<T, TResult>(ISearchRequest request)
 			where T : class
 			where TResult : class =>
-			Dispatcher.Dispatch<ISearchRequest, SearchRequestParameters, SearchResponse<TResult>>(
-				request,
-				(p, d) => LowLevelDispatch.SearchDispatch<SearchResponse<TResult>>(p, d)
-			);
+			Dispatch2<ISearchRequest, SearchResponse<TResult>>(request, request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, ISearchRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		)
 			where T : class =>
 			SearchAsync<T, T>(selector, cancellationToken);
 
 		/// <inheritdoc />
 		public Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		)
 			where T : class
 			where TResult : class =>
@@ -103,14 +100,10 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(ISearchRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		)
 			where T : class
 			where TResult : class =>
-			Dispatcher.DispatchAsync<ISearchRequest, SearchRequestParameters, SearchResponse<TResult>, ISearchResponse<TResult>>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.SearchDispatchAsync<SearchResponse<TResult>>(p, d, c)
-			);
+			Dispatch2Async<ISearchRequest, ISearchResponse<TResult>, SearchResponse<TResult>>(request, request, request.RequestParameters, cancellationToken);
 	}
 }

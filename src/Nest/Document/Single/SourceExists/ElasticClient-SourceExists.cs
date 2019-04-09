@@ -25,12 +25,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IExistsResponse> SourceExistsAsync<TDocument>(DocumentPath<TDocument> document, Func<SourceExistsDescriptor<TDocument>, ISourceExistsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		)
 			where TDocument : class;
 
 		/// <inheritdoc />
-		Task<IExistsResponse> SourceExistsAsync(ISourceExistsRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IExistsResponse> SourceExistsAsync(ISourceExistsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -42,25 +42,19 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IExistsResponse SourceExists(ISourceExistsRequest request) =>
-			Dispatcher.Dispatch<ISourceExistsRequest, SourceExistsRequestParameters, ExistsResponse>(
-				request,
-				(p, d) => LowLevelDispatch.ExistsSourceDispatch<ExistsResponse>(p)
-			);
+			Dispatch2<ISourceExistsRequest, ExistsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IExistsResponse> SourceExistsAsync<TDocument>(DocumentPath<TDocument> document,
-			Func<SourceExistsDescriptor<TDocument>, ISourceExistsRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)
-		) where TDocument : class =>
-			SourceExistsAsync(selector.InvokeOrDefault(new SourceExistsDescriptor<TDocument>(document.Self.Index, document.Self.Id)),
-				cancellationToken);
+		public Task<IExistsResponse> SourceExistsAsync<TDocument>(
+			DocumentPath<TDocument> document,
+			Func<SourceExistsDescriptor<TDocument>, ISourceExistsRequest> selector = null,
+			CancellationToken ct = default
+		)
+			where TDocument : class =>
+			SourceExistsAsync(selector.InvokeOrDefault(new SourceExistsDescriptor<TDocument>(document.Self.Index, document.Self.Id)), ct);
 
 		/// <inheritdoc />
-		public Task<IExistsResponse> SourceExistsAsync(ISourceExistsRequest request, CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<ISourceExistsRequest, SourceExistsRequestParameters, ExistsResponse, IExistsResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.ExistsSourceDispatchAsync<ExistsResponse>(p, c)
-			);
+		public Task<IExistsResponse> SourceExistsAsync(ISourceExistsRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<ISourceExistsRequest, IExistsResponse, ExistsResponse>(request, request.RequestParameters, ct);
 	}
 }

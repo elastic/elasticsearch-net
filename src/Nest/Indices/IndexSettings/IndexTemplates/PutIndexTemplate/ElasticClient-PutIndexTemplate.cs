@@ -28,12 +28,12 @@ namespace Nest
 			Name name,
 			Func<PutIndexTemplateDescriptor,
 				IPutIndexTemplateRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -45,27 +45,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IPutIndexTemplateResponse PutIndexTemplate(IPutIndexTemplateRequest request) =>
-			Dispatcher.Dispatch<IPutIndexTemplateRequest, PutIndexTemplateRequestParameters, PutIndexTemplateResponse>(
-				request,
-				LowLevelDispatch.IndicesPutTemplateDispatch<PutIndexTemplateResponse>
-			);
+			Dispatch2<IPutIndexTemplateRequest, PutIndexTemplateResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(
 			Name name,
 			Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) => PutIndexTemplateAsync(selector.InvokeOrDefault(new PutIndexTemplateDescriptor(name)), cancellationToken);
+			CancellationToken ct = default
+		) => PutIndexTemplateAsync(selector.InvokeOrDefault(new PutIndexTemplateDescriptor(name)), ct);
 
 		/// <inheritdoc />
-		public Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<IPutIndexTemplateRequest, PutIndexTemplateRequestParameters, PutIndexTemplateResponse, IPutIndexTemplateResponse>(
-					request,
-					cancellationToken,
-					LowLevelDispatch.IndicesPutTemplateDispatchAsync<PutIndexTemplateResponse>
-				);
+		public Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IPutIndexTemplateRequest, IPutIndexTemplateResponse, PutIndexTemplateResponse>(request, request.RequestParameters, ct);
 	}
 }

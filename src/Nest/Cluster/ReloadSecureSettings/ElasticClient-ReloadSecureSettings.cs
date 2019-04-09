@@ -26,12 +26,12 @@ namespace Nest
 		/// <inheritdoc cref="ReloadSecureSettings(System.Func{Nest.ReloadSecureSettingsDescriptor,Nest.IReloadSecureSettingsRequest})"/>
 		Task<IReloadSecureSettingsResponse> ReloadSecureSettingsAsync(
 			Func<ReloadSecureSettingsDescriptor, IReloadSecureSettingsRequest> selector = null,
-			CancellationToken cancellationToken = default
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="ReloadSecureSettings(System.Func{Nest.ReloadSecureSettingsDescriptor,Nest.IReloadSecureSettingsRequest})"/>
 		Task<IReloadSecureSettingsResponse> ReloadSecureSettingsAsync(IReloadSecureSettingsRequest request,
-			CancellationToken cancellationToken = default
+			CancellationToken ct = default
 		);
 	}
 
@@ -45,28 +45,17 @@ namespace Nest
 
 		/// <inheritdoc cref="ReloadSecureSettings(System.Func{Nest.ReloadSecureSettingsDescriptor,Nest.IReloadSecureSettingsRequest})"/>
 		public IReloadSecureSettingsResponse ReloadSecureSettings(IReloadSecureSettingsRequest request) =>
-			Dispatcher.Dispatch<IReloadSecureSettingsRequest, ReloadSecureSettingsRequestParameters, ReloadSecureSettingsResponse>(
-				request,
-				(p, d) => LowLevelDispatch.NodesReloadSecureSettingsDispatch<ReloadSecureSettingsResponse>(p)
-			);
+			Dispatch2<IReloadSecureSettingsRequest, ReloadSecureSettingsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="ReloadSecureSettings(System.Func{Nest.ReloadSecureSettingsDescriptor,Nest.IReloadSecureSettingsRequest})"/>
 		public Task<IReloadSecureSettingsResponse> ReloadSecureSettingsAsync(
 			Func<ReloadSecureSettingsDescriptor, IReloadSecureSettingsRequest> selector = null,
-			CancellationToken cancellationToken = default
+			CancellationToken ct = default
 		) =>
-			ReloadSecureSettingsAsync(selector.InvokeOrDefault(new ReloadSecureSettingsDescriptor()), cancellationToken);
+			ReloadSecureSettingsAsync(selector.InvokeOrDefault(new ReloadSecureSettingsDescriptor()), ct);
 
 		/// <inheritdoc cref="ReloadSecureSettings(System.Func{Nest.ReloadSecureSettingsDescriptor,Nest.IReloadSecureSettingsRequest})"/>
-		public Task<IReloadSecureSettingsResponse> ReloadSecureSettingsAsync(IReloadSecureSettingsRequest request,
-			CancellationToken cancellationToken = default
-		) =>
-			Dispatcher
-				.DispatchAsync<IReloadSecureSettingsRequest, ReloadSecureSettingsRequestParameters, ReloadSecureSettingsResponse,
-					IReloadSecureSettingsResponse>(
-					request,
-					cancellationToken,
-					(p, d, c) => LowLevelDispatch.NodesReloadSecureSettingsDispatchAsync<ReloadSecureSettingsResponse>(p, c)
-				);
+		public Task<IReloadSecureSettingsResponse> ReloadSecureSettingsAsync(IReloadSecureSettingsRequest request, CancellationToken ct = default) =>
+			Dispatch2Async<IReloadSecureSettingsRequest, IReloadSecureSettingsResponse, ReloadSecureSettingsResponse>(request, request.RequestParameters, ct);
 	}
 }
