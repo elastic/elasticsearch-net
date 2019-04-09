@@ -22,7 +22,7 @@ namespace Nest
 		Field TargetField { get; set; }
 
 		[DataMember(Name ="timezone")]
-		string Timezone { get; set; }
+		string TimeZone { get; set; }
 	}
 
 	public class DateProcessor : ProcessorBase, IDateProcessor
@@ -35,7 +35,7 @@ namespace Nest
 
 		public Field TargetField { get; set; }
 
-		public string Timezone { get; set; }
+		public string TimeZone { get; set; }
 		protected override string Name => "date";
 	}
 
@@ -49,7 +49,7 @@ namespace Nest
 		IEnumerable<string> IDateProcessor.Formats { get; set; }
 		string IDateProcessor.Locale { get; set; }
 		Field IDateProcessor.TargetField { get; set; }
-		string IDateProcessor.Timezone { get; set; }
+		string IDateProcessor.TimeZone { get; set; }
 
 		public DateProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
@@ -65,7 +65,7 @@ namespace Nest
 
 		public DateProcessorDescriptor<T> Formats(params string[] matchFormats) => Assign(matchFormats, (a, v) => a.Formats = v);
 
-		public DateProcessorDescriptor<T> Timezone(string timezone) => Assign(timezone, (a, v) => a.Timezone = v);
+		public DateProcessorDescriptor<T> TimeZone(string timezone) => Assign(timezone, (a, v) => a.TimeZone = v);
 
 		public DateProcessorDescriptor<T> Locale(string locale) => Assign(locale, (a, v) => a.Locale = v);
 	}

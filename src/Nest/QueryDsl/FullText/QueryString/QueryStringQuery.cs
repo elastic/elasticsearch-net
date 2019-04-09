@@ -173,7 +173,7 @@ namespace Nest
 		/// Time Zone to be applied to any range query related to dates.
 		/// </summary>
 		[DataMember(Name = "time_zone")]
-		string Timezone { get; set; }
+		string TimeZone { get; set; }
 
 		/// <summary>
 		/// How the fields should be combined to build the text query.
@@ -257,7 +257,7 @@ namespace Nest
 		public double? TieBreaker { get; set; }
 
 		/// <inheritdoc />
-		public string Timezone { get; set; }
+		public string TimeZone { get; set; }
 
 		/// <inheritdoc />
 		public TextQueryType? Type { get; set; }
@@ -299,7 +299,7 @@ namespace Nest
 		string IQueryStringQuery.QuoteFieldSuffix { get; set; }
 		MultiTermQueryRewrite IQueryStringQuery.Rewrite { get; set; }
 		double? IQueryStringQuery.TieBreaker { get; set; }
-		string IQueryStringQuery.Timezone { get; set; }
+		string IQueryStringQuery.TimeZone { get; set; }
 
 		TextQueryType? IQueryStringQuery.Type { get; set; }
 
@@ -385,8 +385,8 @@ namespace Nest
 		public QueryStringQueryDescriptor<T> EnablePositionIncrements(bool? enablePositionIncrements = true) =>
 			Assign(enablePositionIncrements, (a, v) => a.EnablePositionIncrements = v);
 
-		/// <inheritdoc cref="IQueryStringQuery.Timezone" />
-		public QueryStringQueryDescriptor<T> Timezone(string timezone) => Assign(timezone, (a, v) => a.Timezone = v);
+		/// <inheritdoc cref="IQueryStringQuery.TimeZone" />
+		public QueryStringQueryDescriptor<T> TimeZone(string timezone) => Assign(timezone, (a, v) => a.TimeZone = v);
 
 		/// <inheritdoc cref="IQueryStringQuery.AutoGenerateSynonymsPhraseQuery" />
 		public QueryStringQueryDescriptor<T> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) =>
