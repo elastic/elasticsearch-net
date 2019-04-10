@@ -27,7 +27,6 @@ namespace Nest
 
 			Transport = transport;
 			LowLevel = new ElasticLowLevelClient(Transport);
-			LowLevelDispatch = new LowLevelDispatch(LowLevel);
 		}
 
 		public IConnectionSettingsValues ConnectionSettings => Transport.Settings;
@@ -37,8 +36,6 @@ namespace Nest
 		public IElasticsearchSerializer RequestResponseSerializer => Transport.Settings.RequestResponseSerializer;
 
 		public IElasticsearchSerializer SourceSerializer => Transport.Settings.SourceSerializer;
-
-		private LowLevelDispatch LowLevelDispatch { get; }
 
 		private ITransport<IConnectionSettingsValues> Transport { get; }
 

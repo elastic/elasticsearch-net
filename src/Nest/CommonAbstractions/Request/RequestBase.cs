@@ -56,6 +56,7 @@ namespace Nest
 
 		IRequestParameters IRequest.RequestParametersInternal => RequestState.RequestParameters;
 
+		// TODO remove this is only used to make sure requests set typed_keys automatically, find better approach for this
 		protected virtual void Initialize() { }
 
 		protected TOut Q<TOut>(string name) => RequestState.RequestParameters.GetQueryStringValue<TOut>(name);
@@ -93,12 +94,7 @@ namespace Nest
 
 		protected RequestDescriptorBase(Func<RouteValues, RouteValues> pathSelector) : base(pathSelector) => _descriptor = (TDescriptor)this;
 
-		protected IRequestConfiguration RequestConfig => ((IRequestParameters)RequestState.RequestParameters).RequestConfiguration;
-
 		protected TInterface Self => _descriptor;
-
-		[Obsolete("Use the overload that accepts TValue")]
-		protected TDescriptor Assign(Action<TInterface> assign) => Fluent.Assign(_descriptor, assign);
 
 		protected TDescriptor Assign<TValue>(TValue value, Action<TInterface, TValue> assign) => Fluent.Assign(_descriptor, value, assign);
 

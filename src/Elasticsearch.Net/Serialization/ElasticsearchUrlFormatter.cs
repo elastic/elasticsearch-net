@@ -26,12 +26,6 @@ namespace Elasticsearch.Net
 
 		public object GetFormat(Type formatType) => formatType == typeof(ICustomFormatter) ? this : null;
 
-		public string CreateEscapedString(object value)
-		{
-			var r = CreateString(value, _settings);
-			return r.IsNullOrEmpty() ? string.Empty : Uri.EscapeDataString(r);
-		}
-
 		public string CreateString(object value) => CreateString(value, _settings);
 
 		public static string CreateString(object value, IConnectionConfigurationValues settings)
