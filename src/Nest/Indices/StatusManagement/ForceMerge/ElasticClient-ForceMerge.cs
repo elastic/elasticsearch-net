@@ -29,7 +29,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IForceMergeResponse ForceMerge(IForceMergeRequest request) =>
-			Dispatch2<IForceMergeRequest, ForceMergeResponse>(request, request.RequestParameters);
+			DoRequest<IForceMergeRequest, ForceMergeResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IForceMergeResponse> ForceMergeAsync(
@@ -40,6 +40,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IForceMergeResponse> ForceMergeAsync(IForceMergeRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IForceMergeRequest, IForceMergeResponse, ForceMergeResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IForceMergeRequest, IForceMergeResponse, ForceMergeResponse>(request, request.RequestParameters, ct);
 	}
 }

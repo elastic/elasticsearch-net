@@ -42,7 +42,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IExistsResponse SourceExists(ISourceExistsRequest request) =>
-			Dispatch2<ISourceExistsRequest, ExistsResponse>(request, request.RequestParameters);
+			DoRequest<ISourceExistsRequest, ExistsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IExistsResponse> SourceExistsAsync<TDocument>(
@@ -55,6 +55,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IExistsResponse> SourceExistsAsync(ISourceExistsRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<ISourceExistsRequest, IExistsResponse, ExistsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ISourceExistsRequest, IExistsResponse, ExistsResponse>(request, request.RequestParameters, ct);
 	}
 }

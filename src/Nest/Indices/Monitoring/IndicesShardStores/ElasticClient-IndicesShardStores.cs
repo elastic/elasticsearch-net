@@ -39,7 +39,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IIndicesShardStoresResponse IndicesShardStores(IIndicesShardStoresRequest request) =>
-			Dispatch2<IIndicesShardStoresRequest, IndicesShardStoresResponse>(request, request.RequestParameters);
+			DoRequest<IIndicesShardStoresRequest, IndicesShardStoresResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IIndicesShardStoresResponse> IndicesShardStoresAsync(
@@ -49,6 +49,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IIndicesShardStoresResponse> IndicesShardStoresAsync(IIndicesShardStoresRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IIndicesShardStoresRequest, IIndicesShardStoresResponse, IndicesShardStoresResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IIndicesShardStoresRequest, IIndicesShardStoresResponse, IndicesShardStoresResponse>(request, request.RequestParameters, ct);
 	}
 }

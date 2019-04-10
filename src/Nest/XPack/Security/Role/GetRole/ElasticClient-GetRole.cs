@@ -30,7 +30,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetRoleResponse GetRole(IGetRoleRequest request) =>
-			Dispatch2<IGetRoleRequest, GetRoleResponse>(request, request.RequestParameters);
+			DoRequest<IGetRoleRequest, GetRoleResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGetRoleResponse> GetRoleAsync(
@@ -40,6 +40,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IGetRoleResponse> GetRoleAsync(IGetRoleRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IGetRoleRequest, IGetRoleResponse, GetRoleResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetRoleRequest, IGetRoleResponse, GetRoleResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -40,7 +40,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IOpenIndexResponse OpenIndex(IOpenIndexRequest request) =>
-			Dispatch2<IOpenIndexRequest, OpenIndexResponse>(request, request.RequestParameters);
+			DoRequest<IOpenIndexRequest, OpenIndexResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IOpenIndexResponse> OpenIndexAsync(
@@ -51,6 +51,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IOpenIndexResponse> OpenIndexAsync(IOpenIndexRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IOpenIndexRequest, IOpenIndexResponse, OpenIndexResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IOpenIndexRequest, IOpenIndexResponse, OpenIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

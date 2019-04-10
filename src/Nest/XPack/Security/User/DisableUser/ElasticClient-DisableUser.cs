@@ -30,7 +30,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDisableUserResponse DisableUser(IDisableUserRequest request) =>
-			Dispatch2<IDisableUserRequest, DisableUserResponse>(request, request.RequestParameters);
+			DoRequest<IDisableUserRequest, DisableUserResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IDisableUserResponse> DisableUserAsync(
@@ -41,6 +41,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IDisableUserResponse> DisableUserAsync(IDisableUserRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IDisableUserRequest, IDisableUserResponse, DisableUserResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDisableUserRequest, IDisableUserResponse, DisableUserResponse>(request, request.RequestParameters, ct);
 	}
 }

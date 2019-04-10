@@ -31,7 +31,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetScriptResponse GetScript(IGetScriptRequest request) =>
-			Dispatch2<IGetScriptRequest, GetScriptResponse>(request, request.RequestParameters);
+			DoRequest<IGetScriptRequest, GetScriptResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGetScriptResponse> GetScriptAsync(
@@ -42,6 +42,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IGetScriptResponse> GetScriptAsync(IGetScriptRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IGetScriptRequest, IGetScriptResponse, GetScriptResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetScriptRequest, IGetScriptResponse, GetScriptResponse>(request, request.RequestParameters, ct);
 	}
 }

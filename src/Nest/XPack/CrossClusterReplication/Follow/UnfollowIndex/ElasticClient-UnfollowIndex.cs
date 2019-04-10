@@ -34,7 +34,7 @@ namespace Nest
 
 		/// <inheritdoc cref="UnfollowIndex(IndexName, System.Func{Nest.UnfollowIndexDescriptor,Nest.IUnfollowIndexRequest})" />
 		public IUnfollowIndexResponse UnfollowIndex(IUnfollowIndexRequest request) =>
-			Dispatch2<IUnfollowIndexRequest, UnfollowIndexResponse>(request, request.RequestParameters);
+			DoRequest<IUnfollowIndexRequest, UnfollowIndexResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="UnfollowIndex(IndexName, System.Func{Nest.UnfollowIndexDescriptor,Nest.IUnfollowIndexRequest})" />
 		public Task<IUnfollowIndexResponse> UnfollowIndexAsync(
@@ -45,6 +45,6 @@ namespace Nest
 
 		/// <inheritdoc cref="UnfollowIndex(IndexName, System.Func{Nest.UnfollowIndexDescriptor,Nest.IUnfollowIndexRequest})" />
 		public Task<IUnfollowIndexResponse> UnfollowIndexAsync(IUnfollowIndexRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IUnfollowIndexRequest, IUnfollowIndexResponse, UnfollowIndexResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IUnfollowIndexRequest, IUnfollowIndexResponse, UnfollowIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

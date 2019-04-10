@@ -45,7 +45,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeleteSnapshotResponse DeleteSnapshot(IDeleteSnapshotRequest request) =>
-			Dispatch2<IDeleteSnapshotRequest, DeleteSnapshotResponse>(request, request.RequestParameters);
+			DoRequest<IDeleteSnapshotRequest, DeleteSnapshotResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IDeleteSnapshotResponse> DeleteSnapshotAsync(
@@ -57,6 +57,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IDeleteSnapshotResponse> DeleteSnapshotAsync(IDeleteSnapshotRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IDeleteSnapshotRequest, IDeleteSnapshotResponse, DeleteSnapshotResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteSnapshotRequest, IDeleteSnapshotResponse, DeleteSnapshotResponse>(request, request.RequestParameters, ct);
 	}
 }

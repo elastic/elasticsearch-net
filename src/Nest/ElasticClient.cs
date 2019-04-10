@@ -42,15 +42,30 @@ namespace Nest
 
 		private ITransport<IConnectionSettingsValues> Transport { get; }
 
-		internal Task<TResponseInterface> Dispatch2Async<TRequest, TResponseInterface, TResponse>(
+		internal TResponse DoRequest<TRequest, TResponse>(TRequest p, IRequestParameters parameters, Action<IRequestConfiguration> forceConfiguration = null)
+			where TRequest : class, IRequest
+			where TResponse : class, IElasticsearchResponse, new()
+		{
+			if (forceConfiguration != null) ForceConfiguration(p, forceConfiguration);
+
+			p.RouteValues.Resolve(ConnectionSettings);
+			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD) ? null : new SerializableData<TRequest>(p);
+
+			return LowLevel.DoRequest<TResponse>(p.HttpMethod, p.RouteValues.ToString(), b, parameters);
+		}
+
+		internal Task<TResponseInterface> DoRequestAsync<TRequest, TResponseInterface, TResponse>(
 			TRequest p,
 			IRequestParameters parameters,
-			CancellationToken ct
+			CancellationToken ct,
+			Action<IRequestConfiguration> forceConfiguration = null
 		)
 			where TRequest : class, IRequest
 			where TResponseInterface : IElasticsearchResponse
 			where TResponse : class, TResponseInterface, IElasticsearchResponse, new()
 		{
+			if (forceConfiguration != null) ForceConfiguration(p, forceConfiguration);
+
 			p.RouteValues.Resolve(ConnectionSettings);
 			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD) ? null : new SerializableData<TRequest>(p);
 
@@ -58,32 +73,22 @@ namespace Nest
 				.ToBaseTask<TResponse, TResponseInterface>();
 		}
 
-		internal TResponse Dispatch2<TRequest, TResponse>(TRequest p, IRequestParameters parameters)
-			where TRequest : class, IRequest
-			where TResponse : class, IElasticsearchResponse, new()
-
+		private static void ForceConfiguration(IRequest request, Action<IRequestConfiguration> forceConfiguration)
 		{
-			p.RouteValues.Resolve(ConnectionSettings);
-			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD) ? null : new SerializableData<TRequest>(p);
-			return LowLevel.DoRequest<TResponse>(p.HttpMethod, p.RouteValues.ToString(), b, parameters);
+			if (forceConfiguration == null) return;
+			var configuration = request.RequestParametersInternal.RequestConfiguration ?? new RequestConfiguration();
+			forceConfiguration(request.RequestParametersInternal.RequestConfiguration);
+			request.RequestParametersInternal.RequestConfiguration = configuration;
 		}
 
-		private static void ForceConfiguration<TParams>(IRequest<TParams> request, Action<IRequestConfiguration> setter)
-			where TParams : IRequestParameters, new()
-		{
-			var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
-			setter(configuration);
-			request.RequestParameters.RequestConfiguration = configuration;
-		}
+		private static readonly int[] AllStatusCodes = { -1 };
+		private static void AcceptAllStatusCodesHandler(IRequestConfiguration requestConfiguration) =>
+			requestConfiguration.AllowedStatusCodes = AllStatusCodes;
 
-		private static TRequest ForceConfiguration<TRequest, TParams>(TRequest request, Action<IRequestConfiguration> setter)
-			where TRequest : IRequest<TParams>
-			where TParams : IRequestParameters, new()
+		private static void ForceJson(IRequestConfiguration requestConfiguration)
 		{
-			var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
-			setter(configuration);
-			request.RequestParameters.RequestConfiguration = configuration;
-			return request;
+			requestConfiguration.Accept = RequestData.MimeType;
+			requestConfiguration.ContentType = RequestData.MimeType;
 		}
 	}
 }

@@ -42,7 +42,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeleteRepositoryResponse DeleteRepository(IDeleteRepositoryRequest request) =>
-			Dispatch2<IDeleteRepositoryRequest, DeleteRepositoryResponse>(request, request.RequestParameters);
+			DoRequest<IDeleteRepositoryRequest, DeleteRepositoryResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IDeleteRepositoryResponse> DeleteRepositoryAsync(
@@ -53,6 +53,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IDeleteRepositoryResponse> DeleteRepositoryAsync(IDeleteRepositoryRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IDeleteRepositoryRequest, IDeleteRepositoryResponse, DeleteRepositoryResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteRepositoryRequest, IDeleteRepositoryResponse, DeleteRepositoryResponse>(request, request.RequestParameters, ct);
 	}
 }

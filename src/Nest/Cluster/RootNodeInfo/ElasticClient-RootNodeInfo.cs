@@ -33,7 +33,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IRootNodeInfoResponse RootNodeInfo(IRootNodeInfoRequest request) =>
-			Dispatch2<IRootNodeInfoRequest, RootNodeInfoResponse>(request, request.RequestParameters);
+			DoRequest<IRootNodeInfoRequest, RootNodeInfoResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IRootNodeInfoResponse> RootNodeInfoAsync(
@@ -43,6 +43,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IRootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IRootNodeInfoRequest, IRootNodeInfoResponse, RootNodeInfoResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IRootNodeInfoRequest, IRootNodeInfoResponse, RootNodeInfoResponse>(request, request.RequestParameters, ct);
 	}
 }

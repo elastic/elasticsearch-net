@@ -32,7 +32,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetRepositoryResponse GetRepository(IGetRepositoryRequest request) =>
-			Dispatch2<IGetRepositoryRequest, GetRepositoryResponse>(request, request.RequestParameters);
+			DoRequest<IGetRepositoryRequest, GetRepositoryResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGetRepositoryResponse> GetRepositoryAsync(
@@ -42,6 +42,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IGetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IGetRepositoryRequest, IGetRepositoryResponse, GetRepositoryResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetRepositoryRequest, IGetRepositoryResponse, GetRepositoryResponse>(request, request.RequestParameters, ct);
 	}
 }

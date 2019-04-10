@@ -37,7 +37,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IClusterStatsResponse ClusterStats(IClusterStatsRequest request) =>
-			Dispatch2<IClusterStatsRequest, ClusterStatsResponse>(request, request.RequestParameters);
+			DoRequest<IClusterStatsRequest, ClusterStatsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IClusterStatsResponse> ClusterStatsAsync(Func<ClusterStatsDescriptor, IClusterStatsRequest> selector = null,
@@ -49,6 +49,6 @@ namespace Nest
 		public Task<IClusterStatsResponse> ClusterStatsAsync(IClusterStatsRequest request,
 			CancellationToken ct = default
 		) =>
-			Dispatch2Async<IClusterStatsRequest, IClusterStatsResponse, ClusterStatsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IClusterStatsRequest, IClusterStatsResponse, ClusterStatsResponse>(request, request.RequestParameters, ct);
 	}
 }

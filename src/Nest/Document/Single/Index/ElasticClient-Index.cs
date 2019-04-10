@@ -54,7 +54,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IIndexResponse Index<TDocument>(IIndexRequest<TDocument> request) where TDocument : class =>
-			Dispatch2<IIndexRequest<TDocument>, IndexResponse>(request, request.RequestParameters);
+			DoRequest<IIndexRequest<TDocument>, IndexResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IIndexResponse> IndexAsync<TDocument>(
@@ -68,7 +68,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IIndexResponse> IndexAsync<TDocument>(IIndexRequest<TDocument> request, CancellationToken ct = default)
 			where TDocument : class =>
-			Dispatch2Async<IIndexRequest<TDocument>, IIndexResponse, IndexResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IIndexRequest<TDocument>, IIndexResponse, IndexResponse>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
 		public IIndexResponse IndexDocument<TDocument>(TDocument document) where TDocument : class => Index(document, s => s);

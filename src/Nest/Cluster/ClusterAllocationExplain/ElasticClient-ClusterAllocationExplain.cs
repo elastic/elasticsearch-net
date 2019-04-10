@@ -42,7 +42,7 @@ namespace Nest
 
 		/// <inheritdoc cref="ClusterAllocationExplain(System.Func{Nest.ClusterAllocationExplainDescriptor,Nest.IClusterAllocationExplainRequest})"/>
 		public IClusterAllocationExplainResponse ClusterAllocationExplain(IClusterAllocationExplainRequest request) =>
-			Dispatch2<IClusterAllocationExplainRequest, ClusterAllocationExplainResponse>(request, request.RequestParameters);
+			DoRequest<IClusterAllocationExplainRequest, ClusterAllocationExplainResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="ClusterAllocationExplain(System.Func{Nest.ClusterAllocationExplainDescriptor,Nest.IClusterAllocationExplainRequest})"/>
 		public Task<IClusterAllocationExplainResponse> ClusterAllocationExplainAsync(
@@ -56,7 +56,7 @@ namespace Nest
 			IClusterAllocationExplainRequest request,
 			CancellationToken ct = default
 		) =>
-			Dispatch2Async<IClusterAllocationExplainRequest, IClusterAllocationExplainResponse, ClusterAllocationExplainResponse>
+			DoRequestAsync<IClusterAllocationExplainRequest, IClusterAllocationExplainResponse, ClusterAllocationExplainResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

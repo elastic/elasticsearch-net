@@ -30,7 +30,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IXPackInfoResponse XPackInfo(IXPackInfoRequest request) =>
-			Dispatch2<IXPackInfoRequest, XPackInfoResponse>(request, request.RequestParameters);
+			DoRequest<IXPackInfoRequest, XPackInfoResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IXPackInfoResponse> XPackInfoAsync(
@@ -40,6 +40,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IXPackInfoResponse> XPackInfoAsync(IXPackInfoRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IXPackInfoRequest, IXPackInfoResponse, XPackInfoResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IXPackInfoRequest, IXPackInfoResponse, XPackInfoResponse>(request, request.RequestParameters, ct);
 	}
 }

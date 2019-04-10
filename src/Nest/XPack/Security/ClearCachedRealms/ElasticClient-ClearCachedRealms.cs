@@ -34,7 +34,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IClearCachedRealmsResponse ClearCachedRealms(IClearCachedRealmsRequest request) =>
-			Dispatch2<IClearCachedRealmsRequest, ClearCachedRealmsResponse>(request, request.RequestParameters);
+			DoRequest<IClearCachedRealmsRequest, ClearCachedRealmsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IClearCachedRealmsResponse> ClearCachedRealmsAsync(
@@ -46,6 +46,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IClearCachedRealmsResponse> ClearCachedRealmsAsync(IClearCachedRealmsRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IClearCachedRealmsRequest, IClearCachedRealmsResponse, ClearCachedRealmsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IClearCachedRealmsRequest, IClearCachedRealmsResponse, ClearCachedRealmsResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -32,7 +32,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IStopWatcherResponse StopWatcher(IStopWatcherRequest request) =>
-			Dispatch2<IStopWatcherRequest, StopWatcherResponse>(request, request.RequestParameters);
+			DoRequest<IStopWatcherRequest, StopWatcherResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IStopWatcherResponse> StopWatcherAsync(
@@ -42,7 +42,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IStopWatcherResponse> StopWatcherAsync(IStopWatcherRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IStopWatcherRequest, IStopWatcherResponse, StopWatcherResponse>
+			DoRequestAsync<IStopWatcherRequest, IStopWatcherResponse, StopWatcherResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

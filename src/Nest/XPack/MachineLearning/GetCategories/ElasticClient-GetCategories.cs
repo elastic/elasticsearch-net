@@ -34,7 +34,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetCategoriesResponse GetCategories(IGetCategoriesRequest request) =>
-			Dispatch2<IGetCategoriesRequest, GetCategoriesResponse>(request, request.RequestParameters);
+			DoRequest<IGetCategoriesRequest, GetCategoriesResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGetCategoriesResponse> GetCategoriesAsync(
@@ -45,6 +45,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IGetCategoriesResponse> GetCategoriesAsync(IGetCategoriesRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IGetCategoriesRequest, IGetCategoriesResponse, GetCategoriesResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetCategoriesRequest, IGetCategoriesResponse, GetCategoriesResponse>(request, request.RequestParameters, ct);
 	}
 }

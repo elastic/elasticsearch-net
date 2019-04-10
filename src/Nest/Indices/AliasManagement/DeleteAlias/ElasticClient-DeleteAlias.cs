@@ -35,7 +35,7 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public IDeleteAliasResponse DeleteAlias(IDeleteAliasRequest request) =>
-			Dispatch2<IDeleteAliasRequest, DeleteAliasResponse>(request, request.RequestParameters);
+			DoRequest<IDeleteAliasRequest, DeleteAliasResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public IDeleteAliasResponse DeleteAlias(Indices indices, Names names, Func<DeleteAliasDescriptor, IDeleteAliasRequest> selector = null) =>
@@ -43,7 +43,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IDeleteAliasRequest, IDeleteAliasResponse, DeleteAliasResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteAliasRequest, IDeleteAliasResponse, DeleteAliasResponse>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
 		public Task<IDeleteAliasResponse> DeleteAliasAsync(

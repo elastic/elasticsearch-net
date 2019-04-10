@@ -33,7 +33,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IListTasksResponse ListTasks(IListTasksRequest request) =>
-			Dispatch2<IListTasksRequest, ListTasksResponse>(request, request.RequestParameters);
+			DoRequest<IListTasksRequest, ListTasksResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IListTasksResponse> ListTasksAsync(Func<ListTasksDescriptor, IListTasksRequest> selector = null,
@@ -43,6 +43,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IListTasksResponse> ListTasksAsync(IListTasksRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IListTasksRequest, IListTasksResponse, ListTasksResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IListTasksRequest, IListTasksResponse, ListTasksResponse>(request, request.RequestParameters, ct);
 	}
 }

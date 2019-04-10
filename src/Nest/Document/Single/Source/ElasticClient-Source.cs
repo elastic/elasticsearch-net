@@ -44,7 +44,7 @@ namespace Nest
 		public TDocument Source<TDocument>(ISourceRequest request) where TDocument : class
 		{
 			request.RequestParameters.DeserializationOverride = ToSourceResponse<TDocument>;
-			return Dispatch2<ISourceRequest, SourceResponse<TDocument>>(request, request.RequestParameters).Body;
+			return DoRequest<ISourceRequest, SourceResponse<TDocument>>(request, request.RequestParameters).Body;
 		}
 
 		/// <inheritdoc />
@@ -61,7 +61,7 @@ namespace Nest
 		{
 			request.RouteValues.Resolve(ConnectionSettings);
 			request.RequestParameters.DeserializationOverride = ToSourceResponse<TDocument>;
-			var result = await Dispatch2Async<ISourceRequest, ISourceResponse<TDocument>, SourceResponse<TDocument>>(request, request.RequestParameters, ct)
+			var result = await DoRequestAsync<ISourceRequest, ISourceResponse<TDocument>, SourceResponse<TDocument>>(request, request.RequestParameters, ct)
 				.ConfigureAwait(false);
 			return result.Body;
 		}

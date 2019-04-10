@@ -30,7 +30,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IXPackUsageResponse XPackUsage(IXPackUsageRequest request) =>
-			Dispatch2<IXPackUsageRequest, XPackUsageResponse>(request, request.RequestParameters);
+			DoRequest<IXPackUsageRequest, XPackUsageResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IXPackUsageResponse> XPackUsageAsync(
@@ -40,6 +40,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IXPackUsageResponse> XPackUsageAsync(IXPackUsageRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IXPackUsageRequest, IXPackUsageResponse, XPackUsageResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IXPackUsageRequest, IXPackUsageResponse, XPackUsageResponse>(request, request.RequestParameters, ct);
 	}
 }

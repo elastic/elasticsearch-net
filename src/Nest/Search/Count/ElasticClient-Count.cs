@@ -46,7 +46,7 @@ namespace Nest
 		/// <inheritdoc />
 		public ICountResponse Count<T>(ICountRequest request)
 			where T : class =>
-			Dispatch2<ICountRequest, CountResponse>(request, request.RequestParameters);
+			DoRequest<ICountRequest, CountResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<ICountResponse> CountAsync<T>(
@@ -59,6 +59,6 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<ICountResponse> CountAsync<T>(ICountRequest request, CancellationToken ct = default)
 			where T : class =>
-			Dispatch2Async<ICountRequest, ICountResponse, CountResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ICountRequest, ICountResponse, CountResponse>(request, request.RequestParameters, ct);
 	}
 }

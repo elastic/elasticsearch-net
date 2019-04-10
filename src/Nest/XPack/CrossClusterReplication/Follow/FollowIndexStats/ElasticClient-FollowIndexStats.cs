@@ -32,7 +32,7 @@ namespace Nest
 
 		/// <inheritdoc cref="FollowIndexStats(Indices, System.Func{Nest.FollowIndexStatsDescriptor,Nest.IFollowIndexStatsRequest})" />
 		public IFollowIndexStatsResponse FollowIndexStats(IFollowIndexStatsRequest request) =>
-			Dispatch2<IFollowIndexStatsRequest, FollowIndexStatsResponse>(request, request.RequestParameters);
+			DoRequest<IFollowIndexStatsRequest, FollowIndexStatsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="FollowIndexStats(Indices, System.Func{Nest.FollowIndexStatsDescriptor,Nest.IFollowIndexStatsRequest})" />
 		public Task<IFollowIndexStatsResponse> FollowIndexStatsAsync(
@@ -43,6 +43,6 @@ namespace Nest
 
 		/// <inheritdoc cref="FollowIndexStats(Indices, System.Func{Nest.FollowIndexStatsDescriptor,Nest.IFollowIndexStatsRequest})" />
 		public Task<IFollowIndexStatsResponse> FollowIndexStatsAsync(IFollowIndexStatsRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IFollowIndexStatsRequest, IFollowIndexStatsResponse, FollowIndexStatsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IFollowIndexStatsRequest, IFollowIndexStatsResponse, FollowIndexStatsResponse>(request, request.RequestParameters, ct);
 	}
 }

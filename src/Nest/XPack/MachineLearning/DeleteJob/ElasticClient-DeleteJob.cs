@@ -37,7 +37,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeleteJobResponse DeleteJob(IDeleteJobRequest request) =>
-			Dispatch2<IDeleteJobRequest, DeleteJobResponse>(request, request.RequestParameters);
+			DoRequest<IDeleteJobRequest, DeleteJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IDeleteJobResponse> DeleteJobAsync(
@@ -48,6 +48,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IDeleteJobResponse> DeleteJobAsync(IDeleteJobRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IDeleteJobRequest, IDeleteJobResponse, DeleteJobResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteJobRequest, IDeleteJobResponse, DeleteJobResponse>(request, request.RequestParameters, ct);
 	}
 }

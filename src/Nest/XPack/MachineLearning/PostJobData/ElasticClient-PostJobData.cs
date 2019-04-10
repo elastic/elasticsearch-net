@@ -32,7 +32,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IPostJobDataResponse PostJobData(IPostJobDataRequest request) =>
-			Dispatch2<IPostJobDataRequest, PostJobDataResponse>(request, request.RequestParameters);
+			DoRequest<IPostJobDataRequest, PostJobDataResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IPostJobDataResponse> PostJobDataAsync(
@@ -43,7 +43,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IPostJobDataResponse> PostJobDataAsync(IPostJobDataRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IPostJobDataRequest, IPostJobDataResponse, PostJobDataResponse>
+			DoRequestAsync<IPostJobDataRequest, IPostJobDataResponse, PostJobDataResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

@@ -30,7 +30,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeleteUserResponse DeleteUser(IDeleteUserRequest request) =>
-			Dispatch2<IDeleteUserRequest, DeleteUserResponse>(request, request.RequestParameters);
+			DoRequest<IDeleteUserRequest, DeleteUserResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IDeleteUserResponse> DeleteUserAsync(
@@ -41,6 +41,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IDeleteUserResponse> DeleteUserAsync(IDeleteUserRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IDeleteUserRequest, IDeleteUserResponse, DeleteUserResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteUserRequest, IDeleteUserResponse, DeleteUserResponse>(request, request.RequestParameters, ct);
 	}
 }

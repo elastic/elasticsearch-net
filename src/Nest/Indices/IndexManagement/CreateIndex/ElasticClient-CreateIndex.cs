@@ -38,7 +38,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICreateIndexResponse CreateIndex(ICreateIndexRequest request) =>
-			Dispatch2<ICreateIndexRequest, CreateIndexResponse>(request, request.RequestParameters);
+			DoRequest<ICreateIndexRequest, CreateIndexResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<ICreateIndexResponse> CreateIndexAsync(
@@ -49,6 +49,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ICreateIndexResponse> CreateIndexAsync(ICreateIndexRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<ICreateIndexRequest, ICreateIndexResponse, CreateIndexResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ICreateIndexRequest, ICreateIndexResponse, CreateIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -38,7 +38,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IForecastJobResponse ForecastJob(IForecastJobRequest request) =>
-			Dispatch2<IForecastJobRequest, ForecastJobResponse>(request, request.RequestParameters);
+			DoRequest<IForecastJobRequest, ForecastJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IForecastJobResponse> ForecastJobAsync(
@@ -49,6 +49,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IForecastJobResponse> ForecastJobAsync(IForecastJobRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IForecastJobRequest, IForecastJobResponse, ForecastJobResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IForecastJobRequest, IForecastJobResponse, ForecastJobResponse>(request, request.RequestParameters, ct);
 	}
 }

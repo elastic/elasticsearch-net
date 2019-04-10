@@ -60,7 +60,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IStartTrialLicenseResponse StartTrialLicense(IStartTrialLicenseRequest request) =>
-			Dispatch2<IStartTrialLicenseRequest, StartTrialLicenseResponse>(request, request.RequestParameters);
+			DoRequest<IStartTrialLicenseRequest, StartTrialLicenseResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IStartTrialLicenseResponse> StartTrialLicenseAsync(
@@ -71,6 +71,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IStartTrialLicenseResponse> StartTrialLicenseAsync(IStartTrialLicenseRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IStartTrialLicenseRequest, IStartTrialLicenseResponse, StartTrialLicenseResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IStartTrialLicenseRequest, IStartTrialLicenseResponse, StartTrialLicenseResponse>(request, request.RequestParameters, ct);
 	}
 }

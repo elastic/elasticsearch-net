@@ -28,7 +28,7 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public IUpgradeStatusResponse UpgradeStatus(IUpgradeStatusRequest request) =>
-			Dispatch2<IUpgradeStatusRequest, UpgradeStatusResponse>(request, request.RequestParameters);
+			DoRequest<IUpgradeStatusRequest, UpgradeStatusResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public IUpgradeStatusResponse UpgradeStatus(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null) =>
@@ -36,7 +36,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IUpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IUpgradeStatusRequest, IUpgradeStatusResponse, UpgradeStatusResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IUpgradeStatusRequest, IUpgradeStatusResponse, UpgradeStatusResponse>(request, request.RequestParameters, ct);
 
 		public Task<IUpgradeStatusResponse> UpgradeStatusAsync(
 			Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null,

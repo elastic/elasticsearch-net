@@ -38,7 +38,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICreateRepositoryResponse CreateRepository(ICreateRepositoryRequest request) =>
-			Dispatch2<ICreateRepositoryRequest, CreateRepositoryResponse>(request, request.RequestParameters);
+			DoRequest<ICreateRepositoryRequest, CreateRepositoryResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<ICreateRepositoryResponse> CreateRepositoryAsync(
@@ -49,6 +49,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ICreateRepositoryResponse> CreateRepositoryAsync(ICreateRepositoryRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<ICreateRepositoryRequest, ICreateRepositoryResponse, CreateRepositoryResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ICreateRepositoryRequest, ICreateRepositoryResponse, CreateRepositoryResponse>(request, request.RequestParameters, ct);
 	}
 }

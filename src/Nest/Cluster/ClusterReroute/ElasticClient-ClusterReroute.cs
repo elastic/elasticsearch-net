@@ -36,7 +36,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IClusterRerouteResponse ClusterReroute(IClusterRerouteRequest request) =>
-			Dispatch2<IClusterRerouteRequest, ClusterRerouteResponse>(request, request.RequestParameters);
+			DoRequest<IClusterRerouteRequest, ClusterRerouteResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IClusterRerouteResponse> ClusterRerouteAsync(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> selector,
@@ -48,6 +48,6 @@ namespace Nest
 		public Task<IClusterRerouteResponse> ClusterRerouteAsync(IClusterRerouteRequest request,
 			CancellationToken ct = default
 		) =>
-			Dispatch2Async<IClusterRerouteRequest, IClusterRerouteResponse, ClusterRerouteResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IClusterRerouteRequest, IClusterRerouteResponse, ClusterRerouteResponse>(request, request.RequestParameters, ct);
 	}
 }

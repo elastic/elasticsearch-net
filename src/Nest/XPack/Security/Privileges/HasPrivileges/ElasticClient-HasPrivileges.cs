@@ -32,7 +32,7 @@ namespace Nest
 
 		/// <inheritdoc cref="HasPrivileges(System.Func{Nest.HasPrivilegesDescriptor,Nest.IHasPrivilegesRequest})" />
 		public IHasPrivilegesResponse HasPrivileges(IHasPrivilegesRequest request) =>
-			Dispatch2<IHasPrivilegesRequest, HasPrivilegesResponse>(request, request.RequestParameters);
+			DoRequest<IHasPrivilegesRequest, HasPrivilegesResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="HasPrivileges(System.Func{Nest.HasPrivilegesDescriptor,Nest.IHasPrivilegesRequest})" />
 		public Task<IHasPrivilegesResponse> HasPrivilegesAsync(
@@ -42,7 +42,7 @@ namespace Nest
 
 		/// <inheritdoc cref="HasPrivileges(System.Func{Nest.HasPrivilegesDescriptor,Nest.IHasPrivilegesRequest})" />
 		public Task<IHasPrivilegesResponse> HasPrivilegesAsync(IHasPrivilegesRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IHasPrivilegesRequest, IHasPrivilegesResponse, HasPrivilegesResponse>
+			DoRequestAsync<IHasPrivilegesRequest, IHasPrivilegesResponse, HasPrivilegesResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

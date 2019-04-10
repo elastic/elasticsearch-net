@@ -32,7 +32,7 @@ namespace Nest
 
 		/// <inheritdoc cref="DeletePrivileges(Nest.Name,Nest.Name,System.Func{Nest.DeletePrivilegesDescriptor,Nest.IDeletePrivilegesRequest})" />
 		public IDeletePrivilegesResponse DeletePrivileges(IDeletePrivilegesRequest request) =>
-			Dispatch2<IDeletePrivilegesRequest, DeletePrivilegesResponse>(request, request.RequestParameters);
+			DoRequest<IDeletePrivilegesRequest, DeletePrivilegesResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="DeletePrivileges(Nest.Name,Nest.Name,System.Func{Nest.DeletePrivilegesDescriptor,Nest.IDeletePrivilegesRequest})" />
 		public Task<IDeletePrivilegesResponse> DeletePrivilegesAsync(
@@ -44,6 +44,6 @@ namespace Nest
 
 		/// <inheritdoc cref="DeletePrivileges(Nest.Name,Nest.Name,System.Func{Nest.DeletePrivilegesDescriptor,Nest.IDeletePrivilegesRequest})" />
 		public Task<IDeletePrivilegesResponse> DeletePrivilegesAsync(IDeletePrivilegesRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IDeletePrivilegesRequest, IDeletePrivilegesResponse, DeletePrivilegesResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeletePrivilegesRequest, IDeletePrivilegesResponse, DeletePrivilegesResponse>(request, request.RequestParameters, ct);
 	}
 }

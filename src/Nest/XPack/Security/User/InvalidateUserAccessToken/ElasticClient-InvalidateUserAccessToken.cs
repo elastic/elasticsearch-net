@@ -37,7 +37,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IInvalidateUserAccessTokenResponse InvalidateUserAccessToken(IInvalidateUserAccessTokenRequest request) =>
-			Dispatch2<IInvalidateUserAccessTokenRequest, InvalidateUserAccessTokenResponse>(request, request.RequestParameters);
+			DoRequest<IInvalidateUserAccessTokenRequest, InvalidateUserAccessTokenResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IInvalidateUserAccessTokenResponse> InvalidateUserAccessTokenAsync(
@@ -51,7 +51,7 @@ namespace Nest
 			IInvalidateUserAccessTokenRequest request,
 			CancellationToken ct = default
 		) =>
-			Dispatch2Async<IInvalidateUserAccessTokenRequest, IInvalidateUserAccessTokenResponse, InvalidateUserAccessTokenResponse>
+			DoRequestAsync<IInvalidateUserAccessTokenRequest, IInvalidateUserAccessTokenResponse, InvalidateUserAccessTokenResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

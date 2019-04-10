@@ -35,7 +35,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IAnalyzeResponse Analyze(IAnalyzeRequest request) =>
-			Dispatch2<IAnalyzeRequest, AnalyzeResponse>(request, request.RequestParameters);
+			DoRequest<IAnalyzeRequest, AnalyzeResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IAnalyzeResponse> AnalyzeAsync(
@@ -45,6 +45,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IAnalyzeRequest, IAnalyzeResponse, AnalyzeResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IAnalyzeRequest, IAnalyzeResponse, AnalyzeResponse>(request, request.RequestParameters, ct);
 	}
 }

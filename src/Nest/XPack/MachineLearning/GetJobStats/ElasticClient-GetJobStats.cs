@@ -32,7 +32,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetJobStatsResponse GetJobStats(IGetJobStatsRequest request) =>
-			Dispatch2<IGetJobStatsRequest, GetJobStatsResponse>(request, request.RequestParameters);
+			DoRequest<IGetJobStatsRequest, GetJobStatsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGetJobStatsResponse> GetJobStatsAsync(
@@ -42,6 +42,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IGetJobStatsResponse> GetJobStatsAsync(IGetJobStatsRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IGetJobStatsRequest, IGetJobStatsResponse, GetJobStatsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetJobStatsRequest, IGetJobStatsResponse, GetJobStatsResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -34,7 +34,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeleteRoleMappingResponse DeleteRoleMapping(IDeleteRoleMappingRequest request) =>
-			Dispatch2<IDeleteRoleMappingRequest, DeleteRoleMappingResponse>(request, request.RequestParameters);
+			DoRequest<IDeleteRoleMappingRequest, DeleteRoleMappingResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IDeleteRoleMappingResponse> DeleteRoleMappingAsync(
@@ -45,6 +45,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IDeleteRoleMappingResponse> DeleteRoleMappingAsync(IDeleteRoleMappingRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IDeleteRoleMappingRequest, IDeleteRoleMappingResponse, DeleteRoleMappingResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteRoleMappingRequest, IDeleteRoleMappingResponse, DeleteRoleMappingResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -35,18 +35,13 @@ namespace Nest
 
 	public partial class ElasticClient
 	{
-		private static readonly int[] AllStatusCodes = { -1 };
-
 		/// <inheritdoc />
 		public IUpdateByQueryResponse UpdateByQuery<T>(Func<UpdateByQueryDescriptor<T>, IUpdateByQueryRequest> selector) where T : class =>
 			UpdateByQuery(selector?.Invoke(new UpdateByQueryDescriptor<T>(typeof(T))));
 
 		/// <inheritdoc />
-		public IUpdateByQueryResponse UpdateByQuery(IUpdateByQueryRequest request)
-		{
-			ForceConfiguration(request, c => c.AllowedStatusCodes = AllStatusCodes);
-			return Dispatch2<IUpdateByQueryRequest, UpdateByQueryResponse>(request, request.RequestParameters);
-		}
+		public IUpdateByQueryResponse UpdateByQuery(IUpdateByQueryRequest request) =>
+			DoRequest<IUpdateByQueryRequest, UpdateByQueryResponse>(request, request.RequestParameters, r => AcceptAllStatusCodesHandler(r));
 
 		/// <inheritdoc />
 		public Task<IUpdateByQueryResponse> UpdateByQueryAsync<T>(
@@ -57,10 +52,8 @@ namespace Nest
 			UpdateByQueryAsync(selector?.Invoke(new UpdateByQueryDescriptor<T>(typeof(T))), ct);
 
 		/// <inheritdoc />
-		public Task<IUpdateByQueryResponse> UpdateByQueryAsync(IUpdateByQueryRequest request, CancellationToken ct = default)
-		{
-			ForceConfiguration(request, c => c.AllowedStatusCodes = AllStatusCodes);
-			return Dispatch2Async<IUpdateByQueryRequest, IUpdateByQueryResponse, UpdateByQueryResponse>(request, request.RequestParameters, ct);
-		}
+		public Task<IUpdateByQueryResponse> UpdateByQueryAsync(IUpdateByQueryRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IUpdateByQueryRequest, IUpdateByQueryResponse, UpdateByQueryResponse>
+				(request, request.RequestParameters, ct, r => AcceptAllStatusCodesHandler(r));
 	}
 }

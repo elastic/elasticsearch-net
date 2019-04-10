@@ -32,7 +32,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IPostCalendarEventsResponse PostCalendarEvents(IPostCalendarEventsRequest request) =>
-			Dispatch2<IPostCalendarEventsRequest, PostCalendarEventsResponse>(request, request.RequestParameters);
+			DoRequest<IPostCalendarEventsRequest, PostCalendarEventsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IPostCalendarEventsResponse> PostCalendarEventsAsync(
@@ -43,7 +43,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IPostCalendarEventsResponse> PostCalendarEventsAsync(IPostCalendarEventsRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IPostCalendarEventsRequest, IPostCalendarEventsResponse, PostCalendarEventsResponse>
+			DoRequestAsync<IPostCalendarEventsRequest, IPostCalendarEventsResponse, PostCalendarEventsResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

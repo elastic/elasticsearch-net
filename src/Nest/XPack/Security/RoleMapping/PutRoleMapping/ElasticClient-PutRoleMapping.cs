@@ -32,7 +32,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IPutRoleMappingResponse PutRoleMapping(IPutRoleMappingRequest request) =>
-			Dispatch2<IPutRoleMappingRequest, PutRoleMappingResponse>(request, request.RequestParameters);
+			DoRequest<IPutRoleMappingRequest, PutRoleMappingResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IPutRoleMappingResponse> PutRoleMappingAsync(
@@ -43,6 +43,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IPutRoleMappingResponse> PutRoleMappingAsync(IPutRoleMappingRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IPutRoleMappingRequest, IPutRoleMappingResponse, PutRoleMappingResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IPutRoleMappingRequest, IPutRoleMappingResponse, PutRoleMappingResponse>(request, request.RequestParameters, ct);
 	}
 }

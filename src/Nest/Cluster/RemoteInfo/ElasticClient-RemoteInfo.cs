@@ -35,7 +35,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IRemoteInfoResponse RemoteInfo(IRemoteInfoRequest request) =>
-			Dispatch2<IRemoteInfoRequest, RemoteInfoResponse>(request, request.RequestParameters);
+			DoRequest<IRemoteInfoRequest, RemoteInfoResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IRemoteInfoResponse> RemoteInfoAsync(Func<RemoteInfoDescriptor, IRemoteInfoRequest> selector = null,
@@ -46,6 +46,6 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IRemoteInfoResponse> RemoteInfoAsync(IRemoteInfoRequest request, CancellationToken ct = default
 		) =>
-			Dispatch2Async<IRemoteInfoRequest, IRemoteInfoResponse, RemoteInfoResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IRemoteInfoRequest, IRemoteInfoResponse, RemoteInfoResponse>(request, request.RequestParameters, ct);
 	}
 }

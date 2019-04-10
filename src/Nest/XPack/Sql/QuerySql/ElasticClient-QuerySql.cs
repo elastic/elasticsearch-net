@@ -30,7 +30,7 @@ namespace Nest
 
 		/// <inheritdoc cref="QuerySql(System.Func{Nest.QuerySqlDescriptor,Nest.IQuerySqlRequest})" />
 		public IQuerySqlResponse QuerySql(IQuerySqlRequest request) =>
-			Dispatch2<IQuerySqlRequest, QuerySqlResponse>(request, request.RequestParameters);
+			DoRequest<IQuerySqlRequest, QuerySqlResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="QuerySql(System.Func{Nest.QuerySqlDescriptor,Nest.IQuerySqlRequest})" />
 		public Task<IQuerySqlResponse> QuerySqlAsync(
@@ -40,7 +40,7 @@ namespace Nest
 
 		/// <inheritdoc cref="QuerySql(System.Func{Nest.QuerySqlDescriptor,Nest.IQuerySqlRequest})" />
 		public Task<IQuerySqlResponse> QuerySqlAsync(IQuerySqlRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IQuerySqlRequest, IQuerySqlResponse, QuerySqlResponse>
+			DoRequestAsync<IQuerySqlRequest, IQuerySqlResponse, QuerySqlResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

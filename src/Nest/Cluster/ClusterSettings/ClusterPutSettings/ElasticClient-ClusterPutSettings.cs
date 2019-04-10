@@ -37,7 +37,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IClusterPutSettingsResponse ClusterPutSettings(IClusterPutSettingsRequest request) =>
-			Dispatch2<IClusterPutSettingsRequest, ClusterPutSettingsResponse>(request, request.RequestParameters);
+			DoRequest<IClusterPutSettingsRequest, ClusterPutSettingsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IClusterPutSettingsResponse> ClusterPutSettingsAsync(Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> selector,
@@ -49,6 +49,6 @@ namespace Nest
 		public Task<IClusterPutSettingsResponse> ClusterPutSettingsAsync(IClusterPutSettingsRequest request,
 			CancellationToken ct = default
 		) =>
-			Dispatch2Async<IClusterPutSettingsRequest, IClusterPutSettingsResponse, ClusterPutSettingsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IClusterPutSettingsRequest, IClusterPutSettingsResponse, ClusterPutSettingsResponse>(request, request.RequestParameters, ct);
 	}
 }

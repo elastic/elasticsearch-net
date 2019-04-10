@@ -44,7 +44,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IMigrationAssistanceResponse MigrationAssistance(IMigrationAssistanceRequest request) =>
-			Dispatch2<IMigrationAssistanceRequest, MigrationAssistanceResponse>(request, request.RequestParameters);
+			DoRequest<IMigrationAssistanceRequest, MigrationAssistanceResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IMigrationAssistanceResponse> MigrationAssistanceAsync(
@@ -54,7 +54,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IMigrationAssistanceResponse> MigrationAssistanceAsync(IMigrationAssistanceRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IMigrationAssistanceRequest, IMigrationAssistanceResponse, MigrationAssistanceResponse>
+			DoRequestAsync<IMigrationAssistanceRequest, IMigrationAssistanceResponse, MigrationAssistanceResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

@@ -44,7 +44,7 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public ISearchResponse<T> Scroll<T>(IScrollRequest request) where T : class =>
-			Dispatch2<IScrollRequest, SearchResponse<T>>(request, request.RequestParameters);
+			DoRequest<IScrollRequest, SearchResponse<T>>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public ISearchResponse<T> Scroll<T>(Time scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null)
@@ -54,7 +54,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<ISearchResponse<T>> ScrollAsync<T>(IScrollRequest request, CancellationToken ct = default)
 			where T : class =>
-			Dispatch2Async<IScrollRequest, ISearchResponse<T>, SearchResponse<T>>(request, request.RequestParameters, ct);
+			DoRequestAsync<IScrollRequest, ISearchResponse<T>, SearchResponse<T>>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
 		public Task<ISearchResponse<T>> ScrollAsync<T>(

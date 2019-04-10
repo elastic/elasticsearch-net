@@ -35,7 +35,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IValidateDetectorResponse ValidateDetector(IValidateDetectorRequest request) =>
-			Dispatch2<IValidateDetectorRequest, ValidateDetectorResponse>(request, request.RequestParameters);
+			DoRequest<IValidateDetectorRequest, ValidateDetectorResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IValidateDetectorResponse> ValidateDetectorAsync<T>(
@@ -47,7 +47,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IValidateDetectorResponse> ValidateDetectorAsync(IValidateDetectorRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IValidateDetectorRequest, IValidateDetectorResponse, ValidateDetectorResponse>
+			DoRequestAsync<IValidateDetectorRequest, IValidateDetectorResponse, ValidateDetectorResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

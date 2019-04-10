@@ -13,10 +13,14 @@ namespace Nest
 
 		[IgnoreDataMember]
 		RouteValues RouteValues { get; }
+
+		// TODO refactor RequestParameters
+		[IgnoreDataMember]
+		IRequestParameters RequestParametersInternal { get; }
 	}
 
 	public interface IRequest<TParameters> : IRequest
-		where TParameters : IRequestParameters, new()
+		where TParameters : class, IRequestParameters, new()
 	{
 		/// <summary>
 		/// Used to describe request parameters that are not part of the body. e.g. query string, connection configuration
@@ -26,7 +30,7 @@ namespace Nest
 		TParameters RequestParameters { get; set; }
 	}
 
-	public abstract class RequestBase<TParameters> : IRequest<TParameters> where TParameters : IRequestParameters, new()
+	public abstract class RequestBase<TParameters> : IRequest<TParameters> where TParameters : class, IRequestParameters, new()
 	{
 		protected RequestBase() => Initialize();
 
@@ -50,6 +54,8 @@ namespace Nest
 		[IgnoreDataMember]
 		RouteValues IRequest.RouteValues { get; } = new RouteValues();
 
+		IRequestParameters IRequest.RequestParametersInternal => RequestState.RequestParameters;
+
 		protected virtual void Initialize() { }
 
 		protected TOut Q<TOut>(string name) => RequestState.RequestParameters.GetQueryStringValue<TOut>(name);
@@ -58,7 +64,7 @@ namespace Nest
 	}
 
 	public abstract partial class PlainRequestBase<TParameters> : RequestBase<TParameters>
-		where TParameters : IRequestParameters, new()
+		where TParameters : class, IRequestParameters, new()
 	{
 		protected PlainRequestBase() { }
 

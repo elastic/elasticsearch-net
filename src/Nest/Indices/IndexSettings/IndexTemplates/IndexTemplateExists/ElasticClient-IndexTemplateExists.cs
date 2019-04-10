@@ -36,7 +36,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IExistsResponse IndexTemplateExists(IIndexTemplateExistsRequest request) =>
-			Dispatch2<IIndexTemplateExistsRequest, ExistsResponse>(request, request.RequestParameters);
+			DoRequest<IIndexTemplateExistsRequest, ExistsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IExistsResponse> IndexTemplateExistsAsync(Name template,
@@ -47,6 +47,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IExistsResponse> IndexTemplateExistsAsync(IIndexTemplateExistsRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IIndexTemplateExistsRequest, IExistsResponse, ExistsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IIndexTemplateExistsRequest, IExistsResponse, ExistsResponse>(request, request.RequestParameters, ct);
 	}
 }

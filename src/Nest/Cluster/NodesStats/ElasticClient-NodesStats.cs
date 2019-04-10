@@ -38,7 +38,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public INodesStatsResponse NodesStats(INodesStatsRequest request) =>
-			Dispatch2<INodesStatsRequest, NodesStatsResponse>(request, request.RequestParameters);
+			DoRequest<INodesStatsRequest, NodesStatsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<INodesStatsResponse> NodesStatsAsync(
@@ -48,6 +48,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<INodesStatsResponse> NodesStatsAsync(INodesStatsRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<INodesStatsRequest, INodesStatsResponse, NodesStatsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<INodesStatsRequest, INodesStatsResponse, NodesStatsResponse>(request, request.RequestParameters, ct);
 	}
 }

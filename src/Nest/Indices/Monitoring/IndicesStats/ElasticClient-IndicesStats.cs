@@ -38,7 +38,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IIndicesStatsResponse IndicesStats(IIndicesStatsRequest request) =>
-			Dispatch2<IIndicesStatsRequest, IndicesStatsResponse>(request, request.RequestParameters);
+			DoRequest<IIndicesStatsRequest, IndicesStatsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IIndicesStatsResponse> IndicesStatsAsync(
@@ -49,6 +49,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IIndicesStatsResponse> IndicesStatsAsync(IIndicesStatsRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IIndicesStatsRequest, IIndicesStatsResponse, IndicesStatsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IIndicesStatsRequest, IIndicesStatsResponse, IndicesStatsResponse>(request, request.RequestParameters, ct);
 	}
 }

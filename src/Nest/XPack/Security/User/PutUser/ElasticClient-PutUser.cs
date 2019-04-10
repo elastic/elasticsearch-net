@@ -30,7 +30,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IPutUserResponse PutUser(IPutUserRequest request) =>
-			Dispatch2<IPutUserRequest, PutUserResponse>(request, request.RequestParameters);
+			DoRequest<IPutUserRequest, PutUserResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IPutUserResponse> PutUserAsync(
@@ -41,7 +41,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IPutUserResponse> PutUserAsync(IPutUserRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IPutUserRequest, IPutUserResponse, PutUserResponse>
+			DoRequestAsync<IPutUserRequest, IPutUserResponse, PutUserResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

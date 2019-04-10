@@ -39,7 +39,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetResponse<TDocument> Get<TDocument>(IGetRequest request) where TDocument : class =>
-			Dispatch2<IGetRequest, GetResponse<TDocument>>(request, request.RequestParameters);
+			DoRequest<IGetRequest, GetResponse<TDocument>>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGetResponse<TDocument>> GetAsync<TDocument>(
@@ -53,6 +53,6 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IGetResponse<TDocument>> GetAsync<TDocument>(IGetRequest request, CancellationToken ct = default)
 			where TDocument : class =>
-			Dispatch2Async<IGetRequest, IGetResponse<TDocument>, GetResponse<TDocument>>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetRequest, IGetResponse<TDocument>, GetResponse<TDocument>>(request, request.RequestParameters, ct);
 	}
 }

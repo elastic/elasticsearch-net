@@ -33,7 +33,7 @@ namespace Nest
 		public ITranslateSqlResponse TranslateSql(ITranslateSqlRequest request)
 		{
 			request.RequestParameters.DeserializationOverride = ToTranslateSqlResponse;
-			return Dispatch2<ITranslateSqlRequest, TranslateSqlResponse>(request, request.RequestParameters);
+			return DoRequest<ITranslateSqlRequest, TranslateSqlResponse>(request, request.RequestParameters);
 		}
 
 		/// <inheritdoc cref="TranslateSql(System.Func{Nest.TranslateSqlDescriptor,Nest.ITranslateSqlRequest})" />
@@ -46,7 +46,7 @@ namespace Nest
 		public Task<ITranslateSqlResponse> TranslateSqlAsync(ITranslateSqlRequest request, CancellationToken ct = default)
 		{
 			request.RequestParameters.DeserializationOverride = ToTranslateSqlResponse;
-			return Dispatch2Async<ITranslateSqlRequest, ITranslateSqlResponse, TranslateSqlResponse>
+			return DoRequestAsync<ITranslateSqlRequest, ITranslateSqlResponse, TranslateSqlResponse>
 				(request, request.RequestParameters, ct);
 		}
 

@@ -39,7 +39,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetUserAccessTokenResponse GetUserAccessToken(IGetUserAccessTokenRequest request) =>
-			Dispatch2<IGetUserAccessTokenRequest, GetUserAccessTokenResponse>(request, request.RequestParameters);
+			DoRequest<IGetUserAccessTokenRequest, GetUserAccessTokenResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGetUserAccessTokenResponse> GetUserAccessTokenAsync(
@@ -51,6 +51,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IGetUserAccessTokenResponse> GetUserAccessTokenAsync(IGetUserAccessTokenRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IGetUserAccessTokenRequest, IGetUserAccessTokenResponse, GetUserAccessTokenResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetUserAccessTokenRequest, IGetUserAccessTokenResponse, GetUserAccessTokenResponse>(request, request.RequestParameters, ct);
 	}
 }

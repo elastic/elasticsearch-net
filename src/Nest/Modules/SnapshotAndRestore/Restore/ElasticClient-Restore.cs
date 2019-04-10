@@ -33,7 +33,7 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public IRestoreResponse Restore(IRestoreRequest request) =>
-			Dispatch2<IRestoreRequest, RestoreResponse>(request, request.RequestParameters);
+			DoRequest<IRestoreRequest, RestoreResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public IRestoreResponse Restore(Name repository, Name snapshotName, Func<RestoreDescriptor, IRestoreRequest> selector = null) =>
@@ -41,7 +41,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IRestoreResponse> RestoreAsync(IRestoreRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IRestoreRequest, IRestoreResponse, RestoreResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IRestoreRequest, IRestoreResponse, RestoreResponse>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
 		public Task<IRestoreResponse> RestoreAsync(

@@ -33,7 +33,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICancelTasksResponse CancelTasks(ICancelTasksRequest request) =>
-			Dispatch2<ICancelTasksRequest, CancelTasksResponse>(request, request.RequestParameters);
+			DoRequest<ICancelTasksRequest, CancelTasksResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<ICancelTasksResponse> CancelTasksAsync(Func<CancelTasksDescriptor, ICancelTasksRequest> selector = null,
@@ -43,6 +43,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ICancelTasksResponse> CancelTasksAsync(ICancelTasksRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<ICancelTasksRequest, ICancelTasksResponse, CancelTasksResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ICancelTasksRequest, ICancelTasksResponse, CancelTasksResponse>(request, request.RequestParameters, ct);
 	}
 }

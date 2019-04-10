@@ -40,7 +40,7 @@ namespace Nest
 		public IMultiGetResponse MultiGet(IMultiGetRequest request)
 		{
 			request.RequestParameters.DeserializationOverride = CreateMultiGetDeserializer(request);
-			return Dispatch2<IMultiGetRequest, MultiGetResponse>(request, request.RequestParameters);
+			return DoRequest<IMultiGetRequest, MultiGetResponse>(request, request.RequestParameters);
 		}
 
 		/// <inheritdoc />
@@ -53,7 +53,7 @@ namespace Nest
 		public Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest request, CancellationToken ct = default)
 		{
 			request.RequestParameters.DeserializationOverride = CreateMultiGetDeserializer(request);
-			return Dispatch2Async<IMultiGetRequest, IMultiGetResponse, MultiGetResponse>(request, request.RequestParameters, ct);
+			return DoRequestAsync<IMultiGetRequest, IMultiGetResponse, MultiGetResponse>(request, request.RequestParameters, ct);
 		}
 
 		private Func<IApiCallDetails, Stream, object> CreateMultiGetDeserializer(IMultiGetRequest request)

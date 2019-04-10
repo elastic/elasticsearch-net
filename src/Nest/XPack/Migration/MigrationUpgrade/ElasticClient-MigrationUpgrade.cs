@@ -45,7 +45,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IMigrationUpgradeResponse MigrationUpgrade(IMigrationUpgradeRequest request) =>
-			Dispatch2<IMigrationUpgradeRequest, MigrationUpgradeResponse>(request, request.RequestParameters);
+			DoRequest<IMigrationUpgradeRequest, MigrationUpgradeResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IMigrationUpgradeResponse> MigrationUpgradeAsync(
@@ -56,7 +56,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IMigrationUpgradeResponse> MigrationUpgradeAsync(IMigrationUpgradeRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IMigrationUpgradeRequest, IMigrationUpgradeResponse, MigrationUpgradeResponse>
+			DoRequestAsync<IMigrationUpgradeRequest, IMigrationUpgradeResponse, MigrationUpgradeResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

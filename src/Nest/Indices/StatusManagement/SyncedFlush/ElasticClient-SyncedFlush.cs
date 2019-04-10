@@ -37,7 +37,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ISyncedFlushResponse SyncedFlush(ISyncedFlushRequest request) =>
-			Dispatch2<ISyncedFlushRequest, SyncedFlushResponse>(request, request.RequestParameters);
+			DoRequest<ISyncedFlushRequest, SyncedFlushResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<ISyncedFlushResponse> SyncedFlushAsync(
@@ -48,6 +48,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ISyncedFlushResponse> SyncedFlushAsync(ISyncedFlushRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<ISyncedFlushRequest, ISyncedFlushResponse, SyncedFlushResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ISyncedFlushRequest, ISyncedFlushResponse, SyncedFlushResponse>(request, request.RequestParameters, ct);
 	}
 }

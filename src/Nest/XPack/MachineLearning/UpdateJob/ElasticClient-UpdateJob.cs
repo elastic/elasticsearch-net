@@ -33,7 +33,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IUpdateJobResponse UpdateJob(IUpdateJobRequest request) =>
-			Dispatch2<IUpdateJobRequest, UpdateJobResponse>(request, request.RequestParameters);
+			DoRequest<IUpdateJobRequest, UpdateJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IUpdateJobResponse> UpdateJobAsync<T>(
@@ -46,7 +46,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IUpdateJobResponse> UpdateJobAsync(IUpdateJobRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IUpdateJobRequest, IUpdateJobResponse, UpdateJobResponse>
+			DoRequestAsync<IUpdateJobRequest, IUpdateJobResponse, UpdateJobResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

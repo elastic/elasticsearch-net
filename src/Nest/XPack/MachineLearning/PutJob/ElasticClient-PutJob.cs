@@ -33,7 +33,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IPutJobResponse PutJob(IPutJobRequest request) =>
-			Dispatch2<IPutJobRequest, PutJobResponse>(request, request.RequestParameters);
+			DoRequest<IPutJobRequest, PutJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IPutJobResponse> PutJobAsync<T>(
@@ -46,6 +46,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IPutJobResponse> PutJobAsync(IPutJobRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IPutJobRequest, IPutJobResponse, PutJobResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IPutJobRequest, IPutJobResponse, PutJobResponse>(request, request.RequestParameters, ct);
 	}
 }

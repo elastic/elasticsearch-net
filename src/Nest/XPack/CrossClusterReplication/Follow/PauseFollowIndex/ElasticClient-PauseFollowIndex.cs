@@ -34,7 +34,7 @@ namespace Nest
 
 		/// <inheritdoc cref="PauseFollowIndex(IndexName, System.Func{Nest.PauseFollowIndexDescriptor,Nest.IPauseFollowIndexRequest})" />
 		public IPauseFollowIndexResponse PauseFollowIndex(IPauseFollowIndexRequest request) =>
-			Dispatch2<IPauseFollowIndexRequest, PauseFollowIndexResponse>(request, request.RequestParameters);
+			DoRequest<IPauseFollowIndexRequest, PauseFollowIndexResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="PauseFollowIndex(IndexName, System.Func{Nest.PauseFollowIndexDescriptor,Nest.IPauseFollowIndexRequest})" />
 		public Task<IPauseFollowIndexResponse> PauseFollowIndexAsync(
@@ -45,6 +45,6 @@ namespace Nest
 
 		/// <inheritdoc cref="PauseFollowIndex(IndexName, System.Func{Nest.PauseFollowIndexDescriptor,Nest.IPauseFollowIndexRequest})" />
 		public Task<IPauseFollowIndexResponse> PauseFollowIndexAsync(IPauseFollowIndexRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IPauseFollowIndexRequest, IPauseFollowIndexResponse, PauseFollowIndexResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IPauseFollowIndexRequest, IPauseFollowIndexResponse, PauseFollowIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

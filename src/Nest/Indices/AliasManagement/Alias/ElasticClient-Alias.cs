@@ -43,7 +43,7 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public IBulkAliasResponse Alias(IBulkAliasRequest request) =>
-			Dispatch2<IBulkAliasRequest, BulkAliasResponse>(request, request.RequestParameters);
+			DoRequest<IBulkAliasRequest, BulkAliasResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public IBulkAliasResponse Alias(Func<BulkAliasDescriptor, IBulkAliasRequest> selector) =>
@@ -51,7 +51,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IBulkAliasResponse> AliasAsync(IBulkAliasRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IBulkAliasRequest, IBulkAliasResponse, BulkAliasResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IBulkAliasRequest, IBulkAliasResponse, BulkAliasResponse>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
 		public Task<IBulkAliasResponse> AliasAsync(Func<BulkAliasDescriptor, IBulkAliasRequest> selector, CancellationToken ct = default) =>

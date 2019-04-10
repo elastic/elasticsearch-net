@@ -26,7 +26,7 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public IDeleteScriptResponse DeleteScript(IDeleteScriptRequest request) =>
-			Dispatch2<IDeleteScriptRequest, DeleteScriptResponse>(request, request.RequestParameters);
+			DoRequest<IDeleteScriptRequest, DeleteScriptResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public IDeleteScriptResponse DeleteScript(Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null) =>
@@ -41,6 +41,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IDeleteScriptResponse> DeleteScriptAsync(IDeleteScriptRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IDeleteScriptRequest, IDeleteScriptResponse, DeleteScriptResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteScriptRequest, IDeleteScriptResponse, DeleteScriptResponse>(request, request.RequestParameters, ct);
 	}
 }

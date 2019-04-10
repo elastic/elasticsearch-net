@@ -35,7 +35,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetAnomalyRecordsResponse GetAnomalyRecords(IGetAnomalyRecordsRequest request) =>
-			Dispatch2<IGetAnomalyRecordsRequest, GetAnomalyRecordsResponse>(request, request.RequestParameters);
+			DoRequest<IGetAnomalyRecordsRequest, GetAnomalyRecordsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGetAnomalyRecordsResponse> GetAnomalyRecordsAsync(
@@ -46,6 +46,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IGetAnomalyRecordsResponse> GetAnomalyRecordsAsync(IGetAnomalyRecordsRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IGetAnomalyRecordsRequest, IGetAnomalyRecordsResponse, GetAnomalyRecordsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetAnomalyRecordsRequest, IGetAnomalyRecordsResponse, GetAnomalyRecordsResponse>(request, request.RequestParameters, ct);
 	}
 }

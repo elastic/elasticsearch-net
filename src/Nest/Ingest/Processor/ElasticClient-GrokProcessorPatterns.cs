@@ -38,7 +38,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGrokProcessorPatternsResponse GrokProcessorPatterns(IGrokProcessorPatternsRequest request) =>
-			Dispatch2<IGrokProcessorPatternsRequest, GrokProcessorPatternsResponse>(request, request.RequestParameters);
+			DoRequest<IGrokProcessorPatternsRequest, GrokProcessorPatternsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGrokProcessorPatternsResponse> GrokProcessorPatternsAsync(
@@ -48,6 +48,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IGrokProcessorPatternsResponse> GrokProcessorPatternsAsync(IGrokProcessorPatternsRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IGrokProcessorPatternsRequest, IGrokProcessorPatternsResponse, GrokProcessorPatternsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGrokProcessorPatternsRequest, IGrokProcessorPatternsResponse, GrokProcessorPatternsResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -32,7 +32,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IStartWatcherResponse StartWatcher(IStartWatcherRequest request) =>
-			Dispatch2<IStartWatcherRequest, StartWatcherResponse>(request, request.RequestParameters);
+			DoRequest<IStartWatcherRequest, StartWatcherResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IStartWatcherResponse> StartWatcherAsync(
@@ -42,7 +42,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IStartWatcherResponse> StartWatcherAsync(IStartWatcherRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IStartWatcherRequest, IStartWatcherResponse, StartWatcherResponse>
+			DoRequestAsync<IStartWatcherRequest, IStartWatcherResponse, StartWatcherResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

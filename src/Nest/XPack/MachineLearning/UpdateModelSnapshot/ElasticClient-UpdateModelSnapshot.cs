@@ -39,7 +39,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IUpdateModelSnapshotResponse UpdateModelSnapshot(IUpdateModelSnapshotRequest request) =>
-			Dispatch2<IUpdateModelSnapshotRequest, UpdateModelSnapshotResponse>(request, request.RequestParameters);
+			DoRequest<IUpdateModelSnapshotRequest, UpdateModelSnapshotResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IUpdateModelSnapshotResponse> UpdateModelSnapshotAsync(
@@ -51,7 +51,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IUpdateModelSnapshotResponse> UpdateModelSnapshotAsync(IUpdateModelSnapshotRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IUpdateModelSnapshotRequest, IUpdateModelSnapshotResponse, UpdateModelSnapshotResponse>
+			DoRequestAsync<IUpdateModelSnapshotRequest, IUpdateModelSnapshotResponse, UpdateModelSnapshotResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

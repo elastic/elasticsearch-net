@@ -35,7 +35,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IClearScrollResponse ClearScroll(IClearScrollRequest request) =>
-			Dispatch2<IClearScrollRequest, ClearScrollResponse>(request, request.RequestParameters);
+			DoRequest<IClearScrollRequest, ClearScrollResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IClearScrollResponse> ClearScrollAsync(
@@ -45,6 +45,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IClearScrollResponse> ClearScrollAsync(IClearScrollRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IClearScrollRequest, IClearScrollResponse, ClearScrollResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IClearScrollRequest, IClearScrollResponse, ClearScrollResponse>(request, request.RequestParameters, ct);
 	}
 }

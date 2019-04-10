@@ -38,7 +38,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public INodesUsageResponse NodesUsage(INodesUsageRequest request) =>
-			Dispatch2<INodesUsageRequest, NodesUsageResponse>(request, request.RequestParameters);
+			DoRequest<INodesUsageRequest, NodesUsageResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<INodesUsageResponse> NodesUsageAsync(
@@ -49,6 +49,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<INodesUsageResponse> NodesUsageAsync(INodesUsageRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<INodesUsageRequest, INodesUsageResponse, NodesUsageResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<INodesUsageRequest, INodesUsageResponse, NodesUsageResponse>(request, request.RequestParameters, ct);
 	}
 }

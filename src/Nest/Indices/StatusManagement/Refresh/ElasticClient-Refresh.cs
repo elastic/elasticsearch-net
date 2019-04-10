@@ -36,7 +36,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IRefreshResponse Refresh(IRefreshRequest request) =>
-			Dispatch2<IRefreshRequest, RefreshResponse>(request, request.RequestParameters);
+			DoRequest<IRefreshRequest, RefreshResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IRefreshResponse> RefreshAsync(
@@ -47,6 +47,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IRefreshResponse> RefreshAsync(IRefreshRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IRefreshRequest, IRefreshResponse, RefreshResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IRefreshRequest, IRefreshResponse, RefreshResponse>(request, request.RequestParameters, ct);
 	}
 }

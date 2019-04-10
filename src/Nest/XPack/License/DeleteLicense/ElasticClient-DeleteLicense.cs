@@ -32,7 +32,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeleteLicenseResponse DeleteLicense(IDeleteLicenseRequest request) =>
-			Dispatch2<IDeleteLicenseRequest, DeleteLicenseResponse>(request, request.RequestParameters);
+			DoRequest<IDeleteLicenseRequest, DeleteLicenseResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IDeleteLicenseResponse> DeleteLicenseAsync(
@@ -42,6 +42,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IDeleteLicenseResponse> DeleteLicenseAsync(IDeleteLicenseRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IDeleteLicenseRequest, IDeleteLicenseResponse, DeleteLicenseResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteLicenseRequest, IDeleteLicenseResponse, DeleteLicenseResponse>(request, request.RequestParameters, ct);
 	}
 }

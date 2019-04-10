@@ -33,7 +33,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeleteCalendarResponse DeleteCalendar(IDeleteCalendarRequest request) =>
-			Dispatch2<IDeleteCalendarRequest, DeleteCalendarResponse>(request, request.RequestParameters);
+			DoRequest<IDeleteCalendarRequest, DeleteCalendarResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IDeleteCalendarResponse> DeleteCalendarAsync(Id calendarId, Func<DeleteCalendarDescriptor, IDeleteCalendarRequest> selector = null,
@@ -43,6 +43,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IDeleteCalendarResponse> DeleteCalendarAsync(IDeleteCalendarRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IDeleteCalendarRequest, IDeleteCalendarResponse, DeleteCalendarResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteCalendarRequest, IDeleteCalendarResponse, DeleteCalendarResponse>(request, request.RequestParameters, ct);
 	}
 }

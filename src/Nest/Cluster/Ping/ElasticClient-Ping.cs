@@ -35,24 +35,20 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IPingResponse Ping(IPingRequest request) =>
-			Dispatch2<IPingRequest, PingResponse>(SetPingTimeout(request), request.RequestParameters);
+			DoRequest<IPingRequest, PingResponse>(request, request.RequestParameters, r => SetPingTimeout(r));
 
 		/// <inheritdoc />
-		public Task<IPingResponse> PingAsync(Func<PingDescriptor, IPingRequest> selector = null,
-			CancellationToken ct = default
-		) =>
+		public Task<IPingResponse> PingAsync(Func<PingDescriptor, IPingRequest> selector = null, CancellationToken ct = default) =>
 			PingAsync(selector.InvokeOrDefault(new PingDescriptor()), ct);
 
 		/// <inheritdoc />
 		public Task<IPingResponse> PingAsync(IPingRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IPingRequest, IPingResponse, PingResponse>(SetPingTimeout(request), request.RequestParameters, ct);
+			DoRequestAsync<IPingRequest, IPingResponse, PingResponse>(request, request.RequestParameters, ct, r => SetPingTimeout(r));
 
-		private IPingRequest SetPingTimeout(IPingRequest pingRequest)
+		private void SetPingTimeout(IRequestConfiguration requestConfiguration)
 		{
-			if (!ConnectionSettings.PingTimeout.HasValue) return pingRequest;
-
-			var timeout = ConnectionSettings.PingTimeout.Value;
-			return ForceConfiguration<IPingRequest, PingRequestParameters>(pingRequest, r => r.RequestTimeout = timeout);
+			if (!ConnectionSettings.PingTimeout.HasValue) return;
+			requestConfiguration.RequestTimeout = ConnectionSettings.PingTimeout.Value;
 		}
 	}
 }

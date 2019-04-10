@@ -31,7 +31,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetPipelineResponse GetPipeline(IGetPipelineRequest request) =>
-			Dispatch2<IGetPipelineRequest, GetPipelineResponse>(request, request.RequestParameters);
+			DoRequest<IGetPipelineRequest, GetPipelineResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGetPipelineResponse> GetPipelineAsync(
@@ -42,6 +42,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IGetPipelineResponse> GetPipelineAsync(IGetPipelineRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IGetPipelineRequest, IGetPipelineResponse, GetPipelineResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetPipelineRequest, IGetPipelineResponse, GetPipelineResponse>(request, request.RequestParameters, ct);
 	}
 }

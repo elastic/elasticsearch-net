@@ -39,7 +39,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ISegmentsResponse Segments(ISegmentsRequest request) =>
-			Dispatch2<ISegmentsRequest, SegmentsResponse>(request, request.RequestParameters);
+			DoRequest<ISegmentsRequest, SegmentsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<ISegmentsResponse> SegmentsAsync(
@@ -50,6 +50,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ISegmentsResponse> SegmentsAsync(ISegmentsRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<ISegmentsRequest, ISegmentsResponse, SegmentsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ISegmentsRequest, ISegmentsResponse, SegmentsResponse>(request, request.RequestParameters, ct);
 	}
 }

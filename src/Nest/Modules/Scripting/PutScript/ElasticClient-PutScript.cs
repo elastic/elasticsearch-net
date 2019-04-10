@@ -28,7 +28,7 @@ namespace Nest
 			PutScript(selector?.Invoke(new PutScriptDescriptor(id)));
 
 		public IPutScriptResponse PutScript(IPutScriptRequest request) =>
-			Dispatch2<IPutScriptRequest, PutScriptResponse>(request, request.RequestParameters);
+			DoRequest<IPutScriptRequest, PutScriptResponse>(request, request.RequestParameters);
 
 		public Task<IPutScriptResponse> PutScriptAsync(
 			Id id,
@@ -37,6 +37,6 @@ namespace Nest
 		) => PutScriptAsync(selector?.Invoke(new PutScriptDescriptor(id)), ct);
 
 		public Task<IPutScriptResponse> PutScriptAsync(IPutScriptRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IPutScriptRequest, IPutScriptResponse, PutScriptResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IPutScriptRequest, IPutScriptResponse, PutScriptResponse>(request, request.RequestParameters, ct);
 	}
 }

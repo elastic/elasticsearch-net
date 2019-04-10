@@ -39,7 +39,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IExistsResponse IndexExists(IIndexExistsRequest request) =>
-			Dispatch2<IIndexExistsRequest, ExistsResponse>(request, request.RequestParameters);
+			DoRequest<IIndexExistsRequest, ExistsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IExistsResponse> IndexExistsAsync(
@@ -50,6 +50,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IIndexExistsRequest, IExistsResponse, ExistsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IIndexExistsRequest, IExistsResponse, ExistsResponse>(request, request.RequestParameters, ct);
 	}
 }

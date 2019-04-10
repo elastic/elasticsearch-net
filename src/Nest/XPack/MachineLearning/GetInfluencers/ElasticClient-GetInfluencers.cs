@@ -34,7 +34,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetInfluencersResponse GetInfluencers(IGetInfluencersRequest request) =>
-			Dispatch2<IGetInfluencersRequest, GetInfluencersResponse>(request, request.RequestParameters);
+			DoRequest<IGetInfluencersRequest, GetInfluencersResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGetInfluencersResponse> GetInfluencersAsync(
@@ -45,6 +45,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IGetInfluencersResponse> GetInfluencersAsync(IGetInfluencersRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IGetInfluencersRequest, IGetInfluencersResponse, GetInfluencersResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetInfluencersRequest, IGetInfluencersResponse, GetInfluencersResponse>(request, request.RequestParameters, ct);
 	}
 }

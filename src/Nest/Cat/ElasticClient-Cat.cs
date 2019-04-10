@@ -27,13 +27,8 @@ namespace Nest
 			where TParams : RequestParameters<TParams>, new()
 			where TRequest : class, IRequest<TParams>
 		{
-			ForceConfiguration(request, c =>
-			{
-				c.Accept = RequestData.MimeType;
-				c.ContentType = RequestData.MimeType;
-			});
 			request.RequestParameters.DeserializationOverride = DeserializeCatResponse<TCatRecord>;
-			return Dispatch2<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters);
+			return DoRequest<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, r => ForceJson(r));
 		}
 
 		private Task<ICatResponse<TCatRecord>> DoCatAsync<TRequest, TParams, TCatRecord>(TRequest request, CancellationToken ct)
@@ -41,13 +36,8 @@ namespace Nest
 			where TParams : RequestParameters<TParams>, new()
 			where TRequest : class, IRequest<TParams>
 		{
-			ForceConfiguration(request, c =>
-			{
-				c.Accept = RequestData.MimeType;
-				c.ContentType = RequestData.MimeType;
-			});
 			request.RequestParameters.DeserializationOverride = DeserializeCatHelpResponse;
-			return Dispatch2Async<TRequest, ICatResponse<TCatRecord>, CatResponse<TCatRecord>>(request, request.RequestParameters, ct);
+			return DoRequestAsync<TRequest, ICatResponse<TCatRecord>, CatResponse<TCatRecord>>(request, request.RequestParameters, ct, r => ForceJson(r));
 		}
 	}
 }

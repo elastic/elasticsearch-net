@@ -33,7 +33,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICloseJobResponse CloseJob(ICloseJobRequest request) =>
-			Dispatch2<ICloseJobRequest, CloseJobResponse>(request, request.RequestParameters);
+			DoRequest<ICloseJobRequest, CloseJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<ICloseJobResponse> CloseJobAsync(
@@ -44,6 +44,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ICloseJobResponse> CloseJobAsync(ICloseJobRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<ICloseJobRequest, ICloseJobResponse, CloseJobResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ICloseJobRequest, ICloseJobResponse, CloseJobResponse>(request, request.RequestParameters, ct);
 	}
 }

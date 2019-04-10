@@ -32,7 +32,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IChangePasswordResponse ChangePassword(IChangePasswordRequest request) =>
-			Dispatch2<IChangePasswordRequest, ChangePasswordResponse>(request, request.RequestParameters);
+			DoRequest<IChangePasswordRequest, ChangePasswordResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IChangePasswordResponse> ChangePasswordAsync(
@@ -42,6 +42,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IChangePasswordResponse> ChangePasswordAsync(IChangePasswordRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IChangePasswordRequest, IChangePasswordResponse, ChangePasswordResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IChangePasswordRequest, IChangePasswordResponse, ChangePasswordResponse>(request, request.RequestParameters, ct);
 	}
 }

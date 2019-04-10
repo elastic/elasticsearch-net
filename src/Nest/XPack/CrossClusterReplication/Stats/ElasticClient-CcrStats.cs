@@ -34,7 +34,7 @@ namespace Nest
 
 		/// <inheritdoc cref="CcrStats(System.Func{Nest.CcrStatsDescriptor,Nest.ICcrStatsRequest})" />
 		public ICcrStatsResponse CcrStats(ICcrStatsRequest request) =>
-			Dispatch2<ICcrStatsRequest, CcrStatsResponse>(request, request.RequestParameters);
+			DoRequest<ICcrStatsRequest, CcrStatsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="CcrStats(System.Func{Nest.CcrStatsDescriptor,Nest.ICcrStatsRequest})" />
 		public Task<ICcrStatsResponse> CcrStatsAsync(
@@ -44,6 +44,6 @@ namespace Nest
 
 		/// <inheritdoc cref="CcrStats(System.Func{Nest.CcrStatsDescriptor,Nest.ICcrStatsRequest})" />
 		public Task<ICcrStatsResponse> CcrStatsAsync(ICcrStatsRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<ICcrStatsRequest, ICcrStatsResponse, CcrStatsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ICcrStatsRequest, ICcrStatsResponse, CcrStatsResponse>(request, request.RequestParameters, ct);
 	}
 }

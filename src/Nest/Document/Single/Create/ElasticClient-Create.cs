@@ -54,7 +54,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICreateResponse Create<TDocument>(ICreateRequest<TDocument> request) where TDocument : class =>
-			Dispatch2<ICreateRequest<TDocument>, CreateResponse>(request, request.RequestParameters);
+			DoRequest<ICreateRequest<TDocument>, CreateResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<ICreateResponse> CreateAsync<TDocument>(
@@ -67,7 +67,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<ICreateResponse> CreateAsync<TDocument>(ICreateRequest<TDocument> request, CancellationToken ct = default)
 			where TDocument : class =>
-			Dispatch2Async<ICreateRequest<TDocument>, ICreateResponse, CreateResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ICreateRequest<TDocument>, ICreateResponse, CreateResponse>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
 		public ICreateResponse CreateDocument<TDocument>(TDocument document) where TDocument : class => Create(document, s => s);

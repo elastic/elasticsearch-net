@@ -33,7 +33,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeleteCalendarJobResponse DeleteCalendarJob(IDeleteCalendarJobRequest request) =>
-			Dispatch2<IDeleteCalendarJobRequest, DeleteCalendarJobResponse>(request, request.RequestParameters);
+			DoRequest<IDeleteCalendarJobRequest, DeleteCalendarJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IDeleteCalendarJobResponse> DeleteCalendarJobAsync(
@@ -45,6 +45,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IDeleteCalendarJobResponse> DeleteCalendarJobAsync(IDeleteCalendarJobRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IDeleteCalendarJobRequest, IDeleteCalendarJobResponse, DeleteCalendarJobResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteCalendarJobRequest, IDeleteCalendarJobResponse, DeleteCalendarJobResponse>(request, request.RequestParameters, ct);
 	}
 }

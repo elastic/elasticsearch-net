@@ -39,7 +39,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IPutMappingResponse Map(IPutMappingRequest request) =>
-			Dispatch2<IPutMappingRequest, PutMappingResponse>(request, request.RequestParameters);
+			DoRequest<IPutMappingRequest, PutMappingResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IPutMappingResponse> MapAsync<T>(
@@ -51,6 +51,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IPutMappingResponse> MapAsync(IPutMappingRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IPutMappingRequest, IPutMappingResponse, PutMappingResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IPutMappingRequest, IPutMappingResponse, PutMappingResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -34,7 +34,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IOpenJobResponse OpenJob(IOpenJobRequest request) =>
-			Dispatch2<IOpenJobRequest, OpenJobResponse>(request, request.RequestParameters);
+			DoRequest<IOpenJobRequest, OpenJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IOpenJobResponse> OpenJobAsync(
@@ -45,6 +45,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IOpenJobResponse> OpenJobAsync(IOpenJobRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IOpenJobRequest, IOpenJobResponse, OpenJobResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IOpenJobRequest, IOpenJobResponse, OpenJobResponse>(request, request.RequestParameters, ct);
 	}
 }

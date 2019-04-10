@@ -37,11 +37,8 @@ namespace Nest
 			GetAlias(selector.InvokeOrDefault(new GetAliasDescriptor()));
 
 		/// <inheritdoc />
-		public IGetAliasResponse GetAlias(IGetAliasRequest request)
-		{
-			ForceConfiguration(request, c => c.AllowedStatusCodes = AllStatusCodes);
-			return Dispatch2<IGetAliasRequest, GetAliasResponse>(request, request.RequestParameters);
-		}
+		public IGetAliasResponse GetAlias(IGetAliasRequest request) =>
+			DoRequest<IGetAliasRequest, GetAliasResponse>(request, request.RequestParameters, r => AcceptAllStatusCodesHandler(r));
 
 		/// <inheritdoc />
 		public Task<IGetAliasResponse> GetAliasAsync(
@@ -50,10 +47,8 @@ namespace Nest
 		) => GetAliasAsync(selector.InvokeOrDefault(new GetAliasDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IGetAliasResponse> GetAliasAsync(IGetAliasRequest request, CancellationToken ct = default)
-		{
-			ForceConfiguration(request, c => c.AllowedStatusCodes = AllStatusCodes);
-			return Dispatch2Async<IGetAliasRequest, IGetAliasResponse, GetAliasResponse>(request, request.RequestParameters, ct);
-		}
+		public Task<IGetAliasResponse> GetAliasAsync(IGetAliasRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetAliasRequest, IGetAliasResponse, GetAliasResponse>
+				(request, request.RequestParameters, ct, r => AcceptAllStatusCodesHandler(r));
 	}
 }

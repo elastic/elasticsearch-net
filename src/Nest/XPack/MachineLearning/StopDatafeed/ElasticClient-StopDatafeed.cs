@@ -34,7 +34,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IStopDatafeedResponse StopDatafeed(IStopDatafeedRequest request) =>
-			Dispatch2<IStopDatafeedRequest, StopDatafeedResponse>(request, request.RequestParameters);
+			DoRequest<IStopDatafeedRequest, StopDatafeedResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IStopDatafeedResponse> StopDatafeedAsync(
@@ -45,7 +45,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IStopDatafeedResponse> StopDatafeedAsync(IStopDatafeedRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IStopDatafeedRequest, IStopDatafeedResponse, StopDatafeedResponse>
+			DoRequestAsync<IStopDatafeedRequest, IStopDatafeedResponse, StopDatafeedResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

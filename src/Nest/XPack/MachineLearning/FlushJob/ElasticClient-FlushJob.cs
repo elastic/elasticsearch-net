@@ -32,7 +32,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IFlushJobResponse FlushJob(IFlushJobRequest request) =>
-			Dispatch2<IFlushJobRequest, FlushJobResponse>(request, request.RequestParameters);
+			DoRequest<IFlushJobRequest, FlushJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IFlushJobResponse> FlushJobAsync(
@@ -43,6 +43,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IFlushJobResponse> FlushJobAsync(IFlushJobRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IFlushJobRequest, IFlushJobResponse, FlushJobResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IFlushJobRequest, IFlushJobResponse, FlushJobResponse>(request, request.RequestParameters, ct);
 	}
 }

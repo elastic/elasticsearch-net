@@ -36,7 +36,7 @@ namespace Nest
 
 		/// <inheritdoc cref="ClusterGetSettings(System.Func{Nest.ClusterGetSettingsDescriptor,Nest.IClusterGetSettingsRequest})"/>
 		public IClusterGetSettingsResponse ClusterGetSettings(IClusterGetSettingsRequest request) =>
-			Dispatch2<IClusterGetSettingsRequest, ClusterGetSettingsResponse>(request, request.RequestParameters);
+			DoRequest<IClusterGetSettingsRequest, ClusterGetSettingsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="ClusterGetSettings(System.Func{Nest.ClusterGetSettingsDescriptor,Nest.IClusterGetSettingsRequest})"/>
 		public Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(
@@ -49,6 +49,6 @@ namespace Nest
 		public Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(IClusterGetSettingsRequest request,
 			CancellationToken ct = default
 		) =>
-			Dispatch2Async<IClusterGetSettingsRequest, IClusterGetSettingsResponse, ClusterGetSettingsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IClusterGetSettingsRequest, IClusterGetSettingsResponse, ClusterGetSettingsResponse>(request, request.RequestParameters, ct);
 	}
 }

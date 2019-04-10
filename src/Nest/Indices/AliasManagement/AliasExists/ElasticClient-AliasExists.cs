@@ -41,7 +41,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IExistsResponse AliasExists(IAliasExistsRequest request) =>
-			Dispatch2<IAliasExistsRequest, ExistsResponse>(request, request.RequestParameters);
+			DoRequest<IAliasExistsRequest, ExistsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IExistsResponse> AliasExistsAsync(
@@ -52,6 +52,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IExistsResponse> AliasExistsAsync(IAliasExistsRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IAliasExistsRequest, IExistsResponse, ExistsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IAliasExistsRequest, IExistsResponse, ExistsResponse>(request, request.RequestParameters, ct);
 	}
 }

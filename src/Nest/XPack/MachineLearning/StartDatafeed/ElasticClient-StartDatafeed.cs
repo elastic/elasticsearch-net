@@ -36,7 +36,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IStartDatafeedResponse StartDatafeed(IStartDatafeedRequest request) =>
-			Dispatch2<IStartDatafeedRequest, StartDatafeedResponse>(request, request.RequestParameters);
+			DoRequest<IStartDatafeedRequest, StartDatafeedResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IStartDatafeedResponse> StartDatafeedAsync(
@@ -48,7 +48,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IStartDatafeedResponse> StartDatafeedAsync(IStartDatafeedRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IStartDatafeedRequest, IStartDatafeedResponse, StartDatafeedResponse>
+			DoRequestAsync<IStartDatafeedRequest, IStartDatafeedResponse, StartDatafeedResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

@@ -34,7 +34,7 @@ namespace Nest
 
 		/// <inheritdoc cref="CreateAutoFollowPattern(Name, System.Func{Nest.CreateAutoFollowPatternDescriptor,Nest.ICreateAutoFollowPatternRequest})" />
 		public ICreateAutoFollowPatternResponse CreateAutoFollowPattern(ICreateAutoFollowPatternRequest request) =>
-			Dispatch2<ICreateAutoFollowPatternRequest, CreateAutoFollowPatternResponse>(request, request.RequestParameters);
+			DoRequest<ICreateAutoFollowPatternRequest, CreateAutoFollowPatternResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="CreateAutoFollowPattern(Name, System.Func{Nest.CreateAutoFollowPatternDescriptor,Nest.ICreateAutoFollowPatternRequest})" />
 		public Task<ICreateAutoFollowPatternResponse> CreateAutoFollowPatternAsync(
@@ -46,6 +46,6 @@ namespace Nest
 
 		/// <inheritdoc cref="CreateAutoFollowPattern(Name, System.Func{Nest.CreateAutoFollowPatternDescriptor,Nest.ICreateAutoFollowPatternRequest})" />
 		public Task<ICreateAutoFollowPatternResponse> CreateAutoFollowPatternAsync(ICreateAutoFollowPatternRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<ICreateAutoFollowPatternRequest, ICreateAutoFollowPatternResponse, CreateAutoFollowPatternResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ICreateAutoFollowPatternRequest, ICreateAutoFollowPatternResponse, CreateAutoFollowPatternResponse>(request, request.RequestParameters, ct);
 	}
 }

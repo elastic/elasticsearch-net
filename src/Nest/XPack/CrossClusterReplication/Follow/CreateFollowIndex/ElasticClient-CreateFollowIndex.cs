@@ -34,7 +34,7 @@ namespace Nest
 
 		/// <inheritdoc cref="CreateFollowIndex(IndexName, System.Func{Nest.CreateFollowIndexDescriptor,Nest.ICreateFollowIndexRequest})" />
 		public ICreateFollowIndexResponse CreateFollowIndex(ICreateFollowIndexRequest request) =>
-			Dispatch2<ICreateFollowIndexRequest, CreateFollowIndexResponse>(request, request.RequestParameters);
+			DoRequest<ICreateFollowIndexRequest, CreateFollowIndexResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="CreateFollowIndex(IndexName, System.Func{Nest.CreateFollowIndexDescriptor,Nest.ICreateFollowIndexRequest})" />
 		public Task<ICreateFollowIndexResponse> CreateFollowIndexAsync(
@@ -46,6 +46,6 @@ namespace Nest
 
 		/// <inheritdoc cref="CreateFollowIndex(IndexName, System.Func{Nest.CreateFollowIndexDescriptor,Nest.ICreateFollowIndexRequest})" />
 		public Task<ICreateFollowIndexResponse> CreateFollowIndexAsync(ICreateFollowIndexRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<ICreateFollowIndexRequest, ICreateFollowIndexResponse, CreateFollowIndexResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ICreateFollowIndexRequest, ICreateFollowIndexResponse, CreateFollowIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

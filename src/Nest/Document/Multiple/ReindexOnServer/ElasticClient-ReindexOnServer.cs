@@ -38,18 +38,14 @@ namespace Nest
 
 	public partial class ElasticClient
 	{
-		private static readonly int[] ReindexOnServerAllowedStatusCodes = { -1 };
 
 		/// <inheritdoc />
 		public IReindexOnServerResponse ReindexOnServer(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector) =>
 			ReindexOnServer(selector.InvokeOrDefault(new ReindexOnServerDescriptor()));
 
 		/// <inheritdoc />
-		public IReindexOnServerResponse ReindexOnServer(IReindexOnServerRequest request)
-		{
-			ForceConfiguration(request, c => c.AllowedStatusCodes = ReindexOnServerAllowedStatusCodes);
-			return Dispatch2<IReindexOnServerRequest, ReindexOnServerResponse>(request, request.RequestParameters);
-		}
+		public IReindexOnServerResponse ReindexOnServer(IReindexOnServerRequest request) =>
+			DoRequest<IReindexOnServerRequest, ReindexOnServerResponse>(request, request.RequestParameters, r => AcceptAllStatusCodesHandler(r));
 
 		/// <inheritdoc />
 		public Task<IReindexOnServerResponse> ReindexOnServerAsync(
@@ -58,10 +54,8 @@ namespace Nest
 		) => ReindexOnServerAsync(selector.InvokeOrDefault(new ReindexOnServerDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IReindexOnServerResponse> ReindexOnServerAsync(IReindexOnServerRequest request, CancellationToken ct = default)
-		{
-			ForceConfiguration(request, c => c.AllowedStatusCodes = ReindexOnServerAllowedStatusCodes);
-			return Dispatch2Async<IReindexOnServerRequest, IReindexOnServerResponse, ReindexOnServerResponse>(request, request.RequestParameters, ct);
-		}
+		public Task<IReindexOnServerResponse> ReindexOnServerAsync(IReindexOnServerRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IReindexOnServerRequest, IReindexOnServerResponse, ReindexOnServerResponse>
+				(request, request.RequestParameters, ct, r => AcceptAllStatusCodesHandler(r));
 	}
 }

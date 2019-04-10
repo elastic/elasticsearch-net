@@ -34,7 +34,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeleteExpiredDataResponse DeleteExpiredData(IDeleteExpiredDataRequest request) =>
-			Dispatch2<IDeleteExpiredDataRequest, DeleteExpiredDataResponse>(request, request.RequestParameters);
+			DoRequest<IDeleteExpiredDataRequest, DeleteExpiredDataResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IDeleteExpiredDataResponse> DeleteExpiredDataAsync(
@@ -44,6 +44,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IDeleteExpiredDataResponse> DeleteExpiredDataAsync(IDeleteExpiredDataRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IDeleteExpiredDataRequest, IDeleteExpiredDataResponse, DeleteExpiredDataResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteExpiredDataRequest, IDeleteExpiredDataResponse, DeleteExpiredDataResponse>(request, request.RequestParameters, ct);
 	}
 }

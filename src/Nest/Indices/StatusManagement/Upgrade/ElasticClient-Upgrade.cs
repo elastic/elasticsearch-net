@@ -25,13 +25,13 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		public IUpgradeResponse Upgrade(IUpgradeRequest request) =>
-			Dispatch2<IUpgradeRequest, UpgradeResponse>(request, request.RequestParameters);
+			DoRequest<IUpgradeRequest, UpgradeResponse>(request, request.RequestParameters);
 
 		public IUpgradeResponse Upgrade(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> selector = null) =>
 			Upgrade(selector.InvokeOrDefault(new UpgradeDescriptor().Index(indices)));
 
 		public Task<IUpgradeResponse> UpgradeAsync(IUpgradeRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IUpgradeRequest, IUpgradeResponse, UpgradeResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IUpgradeRequest, IUpgradeResponse, UpgradeResponse>(request, request.RequestParameters, ct);
 
 		public Task<IUpgradeResponse> UpgradeAsync(
 			Indices indices,

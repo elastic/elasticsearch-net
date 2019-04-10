@@ -34,7 +34,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IMachineLearningInfoResponse MachineLearningInfo(IMachineLearningInfoRequest request) =>
-			Dispatch2<IMachineLearningInfoRequest, MachineLearningInfoResponse>(request, request.RequestParameters);
+			DoRequest<IMachineLearningInfoRequest, MachineLearningInfoResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IMachineLearningInfoResponse> MachineLearningInfoAsync(Func<MachineLearningInfoDescriptor, IMachineLearningInfoRequest> selector = null,
@@ -43,6 +43,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IMachineLearningInfoResponse> MachineLearningInfoAsync(IMachineLearningInfoRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IMachineLearningInfoRequest, IMachineLearningInfoResponse, MachineLearningInfoResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IMachineLearningInfoRequest, IMachineLearningInfoResponse, MachineLearningInfoResponse>(request, request.RequestParameters, ct);
 	}
 }

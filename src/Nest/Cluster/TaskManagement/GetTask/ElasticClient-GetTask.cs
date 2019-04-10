@@ -24,7 +24,7 @@ namespace Nest
 			GetTask(selector.InvokeOrDefault(new GetTaskDescriptor(id)));
 
 		public IGetTaskResponse GetTask(IGetTaskRequest request) =>
-			Dispatch2<IGetTaskRequest, GetTaskResponse>(request, request.RequestParameters);
+			DoRequest<IGetTaskRequest, GetTaskResponse>(request, request.RequestParameters);
 
 		public Task<IGetTaskResponse> GetTaskAsync(
 			TaskId id,
@@ -33,6 +33,6 @@ namespace Nest
 		) => GetTaskAsync(selector.InvokeOrDefault(new GetTaskDescriptor(id)), ct);
 
 		public Task<IGetTaskResponse> GetTaskAsync(IGetTaskRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IGetTaskRequest, IGetTaskResponse, GetTaskResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetTaskRequest, IGetTaskResponse, GetTaskResponse>(request, request.RequestParameters, ct);
 	}
 }

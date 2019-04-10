@@ -37,7 +37,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IClearCacheResponse ClearCache(IClearCacheRequest request) =>
-			Dispatch2<IClearCacheRequest, ClearCacheResponse>(request, request.RequestParameters);
+			DoRequest<IClearCacheRequest, ClearCacheResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IClearCacheResponse> ClearCacheAsync(
@@ -48,6 +48,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IClearCacheResponse> ClearCacheAsync(IClearCacheRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IClearCacheRequest, IClearCacheResponse, ClearCacheResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IClearCacheRequest, IClearCacheResponse, ClearCacheResponse>(request, request.RequestParameters, ct);
 	}
 }

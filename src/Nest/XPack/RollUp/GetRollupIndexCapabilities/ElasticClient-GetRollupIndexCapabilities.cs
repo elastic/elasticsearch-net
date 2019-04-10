@@ -41,7 +41,7 @@ namespace Nest
 
 		/// <inheritdoc cref="GetRollupIndexCapabilities(IndexName, System.Func{Nest.GetRollupIndexCapabilitiesDescriptor,Nest.IGetRollupIndexCapabilitiesRequest})" />
 		public IGetRollupIndexCapabilitiesResponse GetRollupIndexCapabilities(IGetRollupIndexCapabilitiesRequest request) =>
-			Dispatch2<IGetRollupIndexCapabilitiesRequest, GetRollupIndexCapabilitiesResponse>(request, request.RequestParameters);
+			DoRequest<IGetRollupIndexCapabilitiesRequest, GetRollupIndexCapabilitiesResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="GetRollupIndexCapabilities(IndexName, System.Func{Nest.GetRollupIndexCapabilitiesDescriptor,Nest.IGetRollupIndexCapabilitiesRequest})" />
 		public Task<IGetRollupIndexCapabilitiesResponse> GetRollupIndexCapabilitiesAsync(
@@ -56,7 +56,7 @@ namespace Nest
 			IGetRollupIndexCapabilitiesRequest request,
 			CancellationToken ct = default
 		) =>
-			Dispatch2Async<IGetRollupIndexCapabilitiesRequest, IGetRollupIndexCapabilitiesResponse, GetRollupIndexCapabilitiesResponse>
+			DoRequestAsync<IGetRollupIndexCapabilitiesRequest, IGetRollupIndexCapabilitiesResponse, GetRollupIndexCapabilitiesResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

@@ -28,7 +28,7 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public IDeletePipelineResponse DeletePipeline(IDeletePipelineRequest request) =>
-			Dispatch2<IDeletePipelineRequest, DeletePipelineResponse>(request, request.RequestParameters);
+			DoRequest<IDeletePipelineRequest, DeletePipelineResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public IDeletePipelineResponse DeletePipeline(Id id, Func<DeletePipelineDescriptor, IDeletePipelineRequest> selector = null) =>
@@ -43,6 +43,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IDeletePipelineResponse> DeletePipelineAsync(IDeletePipelineRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IDeletePipelineRequest, IDeletePipelineResponse, DeletePipelineResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeletePipelineRequest, IDeletePipelineResponse, DeletePipelineResponse>(request, request.RequestParameters, ct);
 	}
 }

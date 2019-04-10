@@ -37,18 +37,13 @@ namespace Nest
 
 	public partial class ElasticClient
 	{
-		private static readonly int[] DeleteByQueryAllowedStatusCodes = { -1 };
-
 		/// <inheritdoc />
 		public IDeleteByQueryResponse DeleteByQuery<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector) where T : class =>
 			DeleteByQuery(selector?.Invoke(new DeleteByQueryDescriptor<T>(typeof(T))));
 
 		/// <inheritdoc />
-		public IDeleteByQueryResponse DeleteByQuery(IDeleteByQueryRequest request)
-		{
-			ForceConfiguration(request, c => c.AllowedStatusCodes = DeleteByQueryAllowedStatusCodes);
-			return Dispatch2<IDeleteByQueryRequest, DeleteByQueryResponse>(request, request.RequestParameters);
-		}
+		public IDeleteByQueryResponse DeleteByQuery(IDeleteByQueryRequest request) =>
+			DoRequest<IDeleteByQueryRequest, DeleteByQueryResponse>(request, request.RequestParameters, r => AcceptAllStatusCodesHandler(r));
 
 		/// <inheritdoc />
 		public Task<IDeleteByQueryResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector,
@@ -57,10 +52,8 @@ namespace Nest
 			DeleteByQueryAsync(selector?.Invoke(new DeleteByQueryDescriptor<T>(typeof(T))), ct);
 
 		/// <inheritdoc />
-		public Task<IDeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request, CancellationToken ct = default)
-		{
-			ForceConfiguration(request, c => c.AllowedStatusCodes = DeleteByQueryAllowedStatusCodes);
-			return Dispatch2Async<IDeleteByQueryRequest, IDeleteByQueryResponse, DeleteByQueryResponse>(request, request.RequestParameters, ct);
-		}
+		public Task<IDeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeleteByQueryRequest, IDeleteByQueryResponse, DeleteByQueryResponse>
+				(request, request.RequestParameters, ct, r => AcceptAllStatusCodesHandler(r));
 	}
 }

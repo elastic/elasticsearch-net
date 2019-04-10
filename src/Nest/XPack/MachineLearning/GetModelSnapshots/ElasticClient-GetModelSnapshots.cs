@@ -35,7 +35,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetModelSnapshotsResponse GetModelSnapshots(IGetModelSnapshotsRequest request) =>
-			Dispatch2<IGetModelSnapshotsRequest, GetModelSnapshotsResponse>(request, request.RequestParameters);
+			DoRequest<IGetModelSnapshotsRequest, GetModelSnapshotsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGetModelSnapshotsResponse> GetModelSnapshotsAsync(Id jobId,
@@ -45,7 +45,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IGetModelSnapshotsResponse> GetModelSnapshotsAsync(IGetModelSnapshotsRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IGetModelSnapshotsRequest, IGetModelSnapshotsResponse, GetModelSnapshotsResponse>
+			DoRequestAsync<IGetModelSnapshotsRequest, IGetModelSnapshotsResponse, GetModelSnapshotsResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

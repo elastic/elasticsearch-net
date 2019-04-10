@@ -34,7 +34,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICreateRollupJobResponse CreateRollupJob(ICreateRollupJobRequest request) =>
-			Dispatch2<ICreateRollupJobRequest, CreateRollupJobResponse>(request, request.RequestParameters);
+			DoRequest<ICreateRollupJobRequest, CreateRollupJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<ICreateRollupJobResponse> CreateRollupJobAsync<T>(
@@ -47,6 +47,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ICreateRollupJobResponse> CreateRollupJobAsync(ICreateRollupJobRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<ICreateRollupJobRequest, ICreateRollupJobResponse, CreateRollupJobResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ICreateRollupJobRequest, ICreateRollupJobResponse, CreateRollupJobResponse>(request, request.RequestParameters, ct);
 	}
 }

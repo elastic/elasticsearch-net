@@ -40,7 +40,7 @@ namespace Nest
 		public IPreviewDatafeedResponse<T> PreviewDatafeed<T>(IPreviewDatafeedRequest request)
 		{
 			request.RequestParameters.DeserializationOverride = PreviewDatafeedResponse<T>;
-			return Dispatch2<IPreviewDatafeedRequest, PreviewDatafeedResponse<T>>(request, request.RequestParameters);
+			return DoRequest<IPreviewDatafeedRequest, PreviewDatafeedResponse<T>>(request, request.RequestParameters);
 		}
 
 		/// <inheritdoc />
@@ -53,7 +53,7 @@ namespace Nest
 		public Task<IPreviewDatafeedResponse<T>> PreviewDatafeedAsync<T>(IPreviewDatafeedRequest request, CancellationToken ct = default)
 		{
 			request.RequestParameters.DeserializationOverride = PreviewDatafeedResponse<T>;
-			return Dispatch2Async<IPreviewDatafeedRequest, IPreviewDatafeedResponse<T>, PreviewDatafeedResponse<T>>(request, request.RequestParameters, ct);
+			return DoRequestAsync<IPreviewDatafeedRequest, IPreviewDatafeedResponse<T>, PreviewDatafeedResponse<T>>(request, request.RequestParameters, ct);
 		}
 
 		private PreviewDatafeedResponse<T> PreviewDatafeedResponse<T>(IApiCallDetails response, Stream stream) => response.Success

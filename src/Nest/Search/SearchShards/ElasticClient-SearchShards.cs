@@ -32,7 +32,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ISearchShardsResponse SearchShards(ISearchShardsRequest request) =>
-			Dispatch2<ISearchShardsRequest, SearchShardsResponse>(request, request.RequestParameters);
+			DoRequest<ISearchShardsRequest, SearchShardsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<ISearchShardsResponse> SearchShardsAsync<T>(
@@ -44,6 +44,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ISearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<ISearchShardsRequest, ISearchShardsResponse, SearchShardsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ISearchShardsRequest, ISearchShardsResponse, SearchShardsResponse>(request, request.RequestParameters, ct);
 	}
 }

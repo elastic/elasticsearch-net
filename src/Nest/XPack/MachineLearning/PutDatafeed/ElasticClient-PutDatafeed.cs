@@ -34,7 +34,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IPutDatafeedResponse PutDatafeed(IPutDatafeedRequest request) =>
-			Dispatch2<IPutDatafeedRequest, PutDatafeedResponse>(request, request.RequestParameters);
+			DoRequest<IPutDatafeedRequest, PutDatafeedResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IPutDatafeedResponse> PutDatafeedAsync<T>(
@@ -47,6 +47,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IPutDatafeedResponse> PutDatafeedAsync(IPutDatafeedRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IPutDatafeedRequest, IPutDatafeedResponse, PutDatafeedResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IPutDatafeedRequest, IPutDatafeedResponse, PutDatafeedResponse>(request, request.RequestParameters, ct);
 	}
 }

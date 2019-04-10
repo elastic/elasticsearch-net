@@ -34,7 +34,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetCalendarsResponse GetCalendars(IGetCalendarsRequest request) =>
-			Dispatch2<IGetCalendarsRequest, GetCalendarsResponse>(request, request.RequestParameters);
+			DoRequest<IGetCalendarsRequest, GetCalendarsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGetCalendarsResponse> GetCalendarsAsync(
@@ -44,6 +44,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IGetCalendarsResponse> GetCalendarsAsync(IGetCalendarsRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IGetCalendarsRequest, IGetCalendarsResponse, GetCalendarsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetCalendarsRequest, IGetCalendarsResponse, GetCalendarsResponse>(request, request.RequestParameters, ct);
 	}
 }

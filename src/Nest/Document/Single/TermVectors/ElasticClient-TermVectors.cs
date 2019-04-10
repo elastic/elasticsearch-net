@@ -42,7 +42,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ITermVectorsResponse TermVectors<T>(ITermVectorsRequest<T> request) where T : class =>
-			Dispatch2<ITermVectorsRequest<T>, TermVectorsResponse>(request, request.RequestParameters);
+			DoRequest<ITermVectorsRequest<T>, TermVectorsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<ITermVectorsResponse> TermVectorsAsync<T>(
@@ -55,6 +55,6 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<ITermVectorsResponse> TermVectorsAsync<T>(ITermVectorsRequest<T> request, CancellationToken ct = default)
 			where T : class =>
-			Dispatch2Async<ITermVectorsRequest<T>, ITermVectorsResponse, TermVectorsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ITermVectorsRequest<T>, ITermVectorsResponse, TermVectorsResponse>(request, request.RequestParameters, ct);
 	}
 }

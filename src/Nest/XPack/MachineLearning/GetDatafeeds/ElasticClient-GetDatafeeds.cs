@@ -32,7 +32,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetDatafeedsResponse GetDatafeeds(IGetDatafeedsRequest request) =>
-			Dispatch2<IGetDatafeedsRequest, GetDatafeedsResponse>(request, request.RequestParameters);
+			DoRequest<IGetDatafeedsRequest, GetDatafeedsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGetDatafeedsResponse> GetDatafeedsAsync(
@@ -42,6 +42,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IGetDatafeedsResponse> GetDatafeedsAsync(IGetDatafeedsRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IGetDatafeedsRequest, IGetDatafeedsResponse, GetDatafeedsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetDatafeedsRequest, IGetDatafeedsResponse, GetDatafeedsResponse>(request, request.RequestParameters, ct);
 	}
 }

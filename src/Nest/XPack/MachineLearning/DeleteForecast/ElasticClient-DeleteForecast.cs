@@ -34,7 +34,7 @@ namespace Nest
 
 		/// <inheritdoc cref="DeleteForecast(Nest.Id,Nest.ForecastIds,System.Func{Nest.DeleteForecastDescriptor,Nest.IDeleteForecastRequest})" />
 		public IDeleteForecastResponse DeleteForecast(IDeleteForecastRequest request) =>
-			Dispatch2<IDeleteForecastRequest, DeleteForecastResponse>(request, request.RequestParameters);
+			DoRequest<IDeleteForecastRequest, DeleteForecastResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="DeleteForecast(Nest.Id,Nest.ForecastIds,System.Func{Nest.DeleteForecastDescriptor,Nest.IDeleteForecastRequest})" />
 		public Task<IDeleteForecastResponse> DeleteForecastAsync(
@@ -46,6 +46,6 @@ namespace Nest
 
 		/// <inheritdoc cref="DeleteForecast(Nest.Id,Nest.ForecastIds,System.Func{Nest.DeleteForecastDescriptor,Nest.IDeleteForecastRequest})" />
 		public Task<IDeleteForecastResponse> DeleteForecastAsync(IDeleteForecastRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IDeleteForecastRequest, IDeleteForecastResponse, DeleteForecastResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteForecastRequest, IDeleteForecastResponse, DeleteForecastResponse>(request, request.RequestParameters, ct);
 	}
 }

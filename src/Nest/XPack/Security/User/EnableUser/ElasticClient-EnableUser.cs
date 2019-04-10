@@ -30,7 +30,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IEnableUserResponse EnableUser(IEnableUserRequest request) =>
-			Dispatch2<IEnableUserRequest, EnableUserResponse>(request, request.RequestParameters);
+			DoRequest<IEnableUserRequest, EnableUserResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IEnableUserResponse> EnableUserAsync(
@@ -41,6 +41,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IEnableUserResponse> EnableUserAsync(IEnableUserRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IEnableUserRequest, IEnableUserResponse, EnableUserResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IEnableUserRequest, IEnableUserResponse, EnableUserResponse>(request, request.RequestParameters, ct);
 	}
 }

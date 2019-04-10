@@ -30,7 +30,7 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public IBulkResponse Bulk(IBulkRequest request) =>
-			Dispatch2<IBulkRequest, BulkResponse>(request, request.RequestParameters);
+			DoRequest<IBulkRequest, BulkResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public IBulkResponse Bulk(Func<BulkDescriptor, IBulkRequest> selector) =>
@@ -38,7 +38,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IBulkResponse> BulkAsync(IBulkRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IBulkRequest, IBulkResponse, BulkResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IBulkRequest, IBulkResponse, BulkResponse>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
 		public Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector, CancellationToken ct = default) =>

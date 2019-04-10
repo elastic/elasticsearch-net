@@ -32,7 +32,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetBucketsResponse GetBuckets(IGetBucketsRequest request) =>
-			Dispatch2<IGetBucketsRequest, GetBucketsResponse>(request, request.RequestParameters);
+			DoRequest<IGetBucketsRequest, GetBucketsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGetBucketsResponse> GetBucketsAsync(
@@ -44,6 +44,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IGetBucketsResponse> GetBucketsAsync(IGetBucketsRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IGetBucketsRequest, IGetBucketsResponse, GetBucketsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetBucketsRequest, IGetBucketsResponse, GetBucketsResponse>(request, request.RequestParameters, ct);
 	}
 }

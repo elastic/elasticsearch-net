@@ -32,7 +32,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetRoleMappingResponse GetRoleMapping(IGetRoleMappingRequest request) =>
-			Dispatch2<IGetRoleMappingRequest, GetRoleMappingResponse>(request, request.RequestParameters);
+			DoRequest<IGetRoleMappingRequest, GetRoleMappingResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGetRoleMappingResponse> GetRoleMappingAsync(
@@ -42,6 +42,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IGetRoleMappingResponse> GetRoleMappingAsync(IGetRoleMappingRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IGetRoleMappingRequest, IGetRoleMappingResponse, GetRoleMappingResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetRoleMappingRequest, IGetRoleMappingResponse, GetRoleMappingResponse>(request, request.RequestParameters, ct);
 	}
 }

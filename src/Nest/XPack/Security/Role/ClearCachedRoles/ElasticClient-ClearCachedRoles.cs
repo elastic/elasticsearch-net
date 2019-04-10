@@ -32,7 +32,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IClearCachedRolesResponse ClearCachedRoles(IClearCachedRolesRequest request) =>
-			Dispatch2<IClearCachedRolesRequest, ClearCachedRolesResponse>(request, request.RequestParameters);
+			DoRequest<IClearCachedRolesRequest, ClearCachedRolesResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IClearCachedRolesResponse> ClearCachedRolesAsync(
@@ -43,6 +43,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IClearCachedRolesResponse> ClearCachedRolesAsync(IClearCachedRolesRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IClearCachedRolesRequest, IClearCachedRolesResponse, ClearCachedRolesResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IClearCachedRolesRequest, IClearCachedRolesResponse, ClearCachedRolesResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -41,7 +41,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetOverallBucketsResponse GetOverallBuckets(IGetOverallBucketsRequest request) =>
-			Dispatch2<IGetOverallBucketsRequest, GetOverallBucketsResponse>(request, request.RequestParameters);
+			DoRequest<IGetOverallBucketsRequest, GetOverallBucketsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGetOverallBucketsResponse> GetOverallBucketsAsync(
@@ -52,7 +52,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IGetOverallBucketsResponse> GetOverallBucketsAsync(IGetOverallBucketsRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IGetOverallBucketsRequest, IGetOverallBucketsResponse, GetOverallBucketsResponse>
+			DoRequestAsync<IGetOverallBucketsRequest, IGetOverallBucketsResponse, GetOverallBucketsResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

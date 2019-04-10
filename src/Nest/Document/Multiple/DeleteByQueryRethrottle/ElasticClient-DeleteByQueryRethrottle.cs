@@ -40,7 +40,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IListTasksResponse DeleteByQueryRethrottle(IDeleteByQueryRethrottleRequest request) =>
-			Dispatch2<IDeleteByQueryRethrottleRequest, ListTasksResponse>(request, request.RequestParameters);
+			DoRequest<IDeleteByQueryRethrottleRequest, ListTasksResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IListTasksResponse> DeleteByQueryRethrottleAsync(
@@ -51,6 +51,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IListTasksResponse> DeleteByQueryRethrottleAsync(IDeleteByQueryRethrottleRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IDeleteByQueryRethrottleRequest, IListTasksResponse, ListTasksResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteByQueryRethrottleRequest, IListTasksResponse, ListTasksResponse>(request, request.RequestParameters, ct);
 	}
 }

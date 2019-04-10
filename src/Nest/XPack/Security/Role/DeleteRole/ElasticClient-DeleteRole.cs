@@ -30,7 +30,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeleteRoleResponse DeleteRole(IDeleteRoleRequest request) =>
-			Dispatch2<IDeleteRoleRequest, DeleteRoleResponse>(request, request.RequestParameters);
+			DoRequest<IDeleteRoleRequest, DeleteRoleResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IDeleteRoleResponse> DeleteRoleAsync(
@@ -41,6 +41,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IDeleteRoleResponse> DeleteRoleAsync(IDeleteRoleRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IDeleteRoleRequest, IDeleteRoleResponse, DeleteRoleResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteRoleRequest, IDeleteRoleResponse, DeleteRoleResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -97,7 +97,7 @@ namespace Nest
 		public IUpdateResponse<TDocument> Update<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request)
 			where TDocument : class
 			where TPartialDocument : class =>
-			Dispatch2<IUpdateRequest<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(request, request.RequestParameters);
+			DoRequest<IUpdateRequest<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument>(
@@ -135,6 +135,6 @@ namespace Nest
 		)
 			where TDocument : class
 			where TPartialDocument : class =>
-			Dispatch2Async<IUpdateRequest<TDocument, TPartialDocument>, IUpdateResponse<TDocument>, UpdateResponse<TDocument>>(request, request.RequestParameters, ct);
+			DoRequestAsync<IUpdateRequest<TDocument, TPartialDocument>, IUpdateResponse<TDocument>, UpdateResponse<TDocument>>(request, request.RequestParameters, ct);
 	}
 }

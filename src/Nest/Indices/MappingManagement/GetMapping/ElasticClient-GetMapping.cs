@@ -37,7 +37,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetMappingResponse GetMapping(IGetMappingRequest request) =>
-			Dispatch2<IGetMappingRequest, GetMappingResponse>(request, request.RequestParameters);
+			DoRequest<IGetMappingRequest, GetMappingResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGetMappingResponse> GetMappingAsync<T>(
@@ -49,6 +49,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IGetMappingResponse> GetMappingAsync(IGetMappingRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IGetMappingRequest, IGetMappingResponse, GetMappingResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetMappingRequest, IGetMappingResponse, GetMappingResponse>(request, request.RequestParameters, ct);
 	}
 }

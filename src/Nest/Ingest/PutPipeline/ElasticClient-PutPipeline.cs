@@ -28,7 +28,7 @@ namespace Nest
 			PutPipeline(selector?.Invoke(new PutPipelineDescriptor(id)));
 
 		public IPutPipelineResponse PutPipeline(IPutPipelineRequest request) =>
-			Dispatch2<IPutPipelineRequest, PutPipelineResponse>(request, request.RequestParameters);
+			DoRequest<IPutPipelineRequest, PutPipelineResponse>(request, request.RequestParameters);
 
 		public Task<IPutPipelineResponse> PutPipelineAsync(
 			Id id,
@@ -37,6 +37,6 @@ namespace Nest
 		) => PutPipelineAsync(selector?.Invoke(new PutPipelineDescriptor(id)), cancellationToken);
 
 		public Task<IPutPipelineResponse> PutPipelineAsync(IPutPipelineRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IPutPipelineRequest, IPutPipelineResponse, PutPipelineResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IPutPipelineRequest, IPutPipelineResponse, PutPipelineResponse>(request, request.RequestParameters, ct);
 	}
 }

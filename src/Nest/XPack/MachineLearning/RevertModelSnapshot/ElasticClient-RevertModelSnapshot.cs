@@ -40,7 +40,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IRevertModelSnapshotResponse RevertModelSnapshot(IRevertModelSnapshotRequest request) =>
-			Dispatch2<IRevertModelSnapshotRequest, RevertModelSnapshotResponse>(request, request.RequestParameters);
+			DoRequest<IRevertModelSnapshotRequest, RevertModelSnapshotResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IRevertModelSnapshotResponse> RevertModelSnapshotAsync(
@@ -52,7 +52,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IRevertModelSnapshotResponse> RevertModelSnapshotAsync(IRevertModelSnapshotRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IRevertModelSnapshotRequest, IRevertModelSnapshotResponse, RevertModelSnapshotResponse>
+			DoRequestAsync<IRevertModelSnapshotRequest, IRevertModelSnapshotResponse, RevertModelSnapshotResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

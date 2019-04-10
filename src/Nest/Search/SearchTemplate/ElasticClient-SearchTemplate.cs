@@ -75,7 +75,7 @@ namespace Nest
 		public ISearchResponse<TResult> SearchTemplate<T, TResult>(ISearchTemplateRequest request)
 			where T : class
 			where TResult : class =>
-			Dispatch2<ISearchTemplateRequest, SearchResponse<TResult>>(request, request.RequestParameters);
+			DoRequest<ISearchTemplateRequest, SearchResponse<TResult>>(request, request.RequestParameters);
 
 		public Task<ISearchResponse<T>> SearchTemplateAsync<T>(
 			Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector,
@@ -99,6 +99,6 @@ namespace Nest
 		public Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(ISearchTemplateRequest request, CancellationToken ct = default)
 			where T : class
 			where TResult : class =>
-			Dispatch2Async<ISearchTemplateRequest, ISearchResponse<TResult>, SearchResponse<TResult>>(request, request.RequestParameters, ct);
+			DoRequestAsync<ISearchTemplateRequest, ISearchResponse<TResult>, SearchResponse<TResult>>(request, request.RequestParameters, ct);
 	}
 }

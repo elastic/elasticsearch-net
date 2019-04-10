@@ -30,7 +30,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetUserResponse GetUser(IGetUserRequest request) =>
-			Dispatch2<IGetUserRequest, GetUserResponse>(request, request.RequestParameters);
+			DoRequest<IGetUserRequest, GetUserResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGetUserResponse> GetUserAsync(
@@ -40,6 +40,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IGetUserResponse> GetUserAsync(IGetUserRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IGetUserRequest, IGetUserResponse, GetUserResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetUserRequest, IGetUserResponse, GetUserResponse>(request, request.RequestParameters, ct);
 	}
 }

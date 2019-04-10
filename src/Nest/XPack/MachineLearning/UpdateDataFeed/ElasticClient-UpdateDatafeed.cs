@@ -36,7 +36,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IUpdateDatafeedResponse UpdateDatafeed(IUpdateDatafeedRequest request) =>
-			Dispatch2<IUpdateDatafeedRequest, UpdateDatafeedResponse>(request, request.RequestParameters);
+			DoRequest<IUpdateDatafeedRequest, UpdateDatafeedResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IUpdateDatafeedResponse> UpdateDatafeedAsync<T>(Id datafeedId,
@@ -48,7 +48,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IUpdateDatafeedResponse> UpdateDatafeedAsync(IUpdateDatafeedRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IUpdateDatafeedRequest, IUpdateDatafeedResponse, UpdateDatafeedResponse>
+			DoRequestAsync<IUpdateDatafeedRequest, IUpdateDatafeedResponse, UpdateDatafeedResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

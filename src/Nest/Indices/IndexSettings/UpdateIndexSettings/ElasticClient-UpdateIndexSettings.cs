@@ -41,7 +41,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IUpdateIndexSettingsResponse UpdateIndexSettings(IUpdateIndexSettingsRequest request) =>
-			Dispatch2<IUpdateIndexSettingsRequest, UpdateIndexSettingsResponse>(request, request.RequestParameters);
+			DoRequest<IUpdateIndexSettingsRequest, UpdateIndexSettingsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IUpdateIndexSettingsResponse> UpdateIndexSettingsAsync(
@@ -52,6 +52,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IUpdateIndexSettingsResponse> UpdateIndexSettingsAsync(IUpdateIndexSettingsRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IUpdateIndexSettingsRequest, IUpdateIndexSettingsResponse, UpdateIndexSettingsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IUpdateIndexSettingsRequest, IUpdateIndexSettingsResponse, UpdateIndexSettingsResponse>(request, request.RequestParameters, ct);
 	}
 }

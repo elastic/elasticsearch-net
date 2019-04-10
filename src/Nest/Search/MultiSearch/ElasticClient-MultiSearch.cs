@@ -41,7 +41,7 @@ namespace Nest
 		public IMultiSearchResponse MultiSearch(IMultiSearchRequest request)
 		{
 			CreateMultiSearchConverter(request);
-			return Dispatch2<IMultiSearchRequest, MultiSearchResponse>(request, request.RequestParameters);
+			return DoRequest<IMultiSearchRequest, MultiSearchResponse>(request, request.RequestParameters);
 		}
 
 		/// <inheritdoc />
@@ -55,7 +55,7 @@ namespace Nest
 		public Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest request, CancellationToken ct = default)
 		{
 			CreateMultiSearchConverter(request);
-			return Dispatch2Async<IMultiSearchRequest, IMultiSearchResponse, MultiSearchResponse>(request, request.RequestParameters, ct);
+			return DoRequestAsync<IMultiSearchRequest, IMultiSearchResponse, MultiSearchResponse>(request, request.RequestParameters, ct);
 		}
 
 		private void CreateMultiSearchConverter(IMultiSearchRequest request)

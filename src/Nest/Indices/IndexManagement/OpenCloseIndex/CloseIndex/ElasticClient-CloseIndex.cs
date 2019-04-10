@@ -40,7 +40,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICloseIndexResponse CloseIndex(ICloseIndexRequest request) =>
-			Dispatch2<ICloseIndexRequest, CloseIndexResponse>(request, request.RequestParameters);
+			DoRequest<ICloseIndexRequest, CloseIndexResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<ICloseIndexResponse> CloseIndexAsync(
@@ -51,6 +51,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ICloseIndexResponse> CloseIndexAsync(ICloseIndexRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<ICloseIndexRequest, ICloseIndexResponse, CloseIndexResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ICloseIndexRequest, ICloseIndexResponse, CloseIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

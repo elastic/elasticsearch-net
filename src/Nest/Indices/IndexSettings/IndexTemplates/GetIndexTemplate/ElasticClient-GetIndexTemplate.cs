@@ -40,7 +40,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetIndexTemplateResponse GetIndexTemplate(IGetIndexTemplateRequest request) =>
-			Dispatch2<IGetIndexTemplateRequest, GetIndexTemplateResponse>(request, request.RequestParameters);
+			DoRequest<IGetIndexTemplateRequest, GetIndexTemplateResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGetIndexTemplateResponse> GetIndexTemplateAsync(
@@ -50,6 +50,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IGetIndexTemplateResponse> GetIndexTemplateAsync(IGetIndexTemplateRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IGetIndexTemplateRequest, IGetIndexTemplateResponse, GetIndexTemplateResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetIndexTemplateRequest, IGetIndexTemplateResponse, GetIndexTemplateResponse>(request, request.RequestParameters, ct);
 	}
 }

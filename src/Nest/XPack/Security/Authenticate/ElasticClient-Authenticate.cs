@@ -30,7 +30,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IAuthenticateResponse Authenticate(IAuthenticateRequest request) =>
-			Dispatch2<IAuthenticateRequest, AuthenticateResponse>(request, request.RequestParameters);
+			DoRequest<IAuthenticateRequest, AuthenticateResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IAuthenticateResponse> AuthenticateAsync(
@@ -40,6 +40,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IAuthenticateResponse> AuthenticateAsync(IAuthenticateRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IAuthenticateRequest, IAuthenticateResponse, AuthenticateResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IAuthenticateRequest, IAuthenticateResponse, AuthenticateResponse>(request, request.RequestParameters, ct);
 	}
 }

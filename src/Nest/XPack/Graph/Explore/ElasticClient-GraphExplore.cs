@@ -32,7 +32,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGraphExploreResponse GraphExplore(IGraphExploreRequest request) =>
-			Dispatch2<IGraphExploreRequest, GraphExploreResponse>(request, request.RequestParameters);
+			DoRequest<IGraphExploreRequest, GraphExploreResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGraphExploreResponse> GraphExploreAsync<T>(
@@ -44,6 +44,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IGraphExploreResponse> GraphExploreAsync(IGraphExploreRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IGraphExploreRequest, IGraphExploreResponse, GraphExploreResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGraphExploreRequest, IGraphExploreResponse, GraphExploreResponse>(request, request.RequestParameters, ct);
 	}
 }

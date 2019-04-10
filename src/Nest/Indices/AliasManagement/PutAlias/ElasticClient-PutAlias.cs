@@ -33,7 +33,7 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public IPutAliasResponse PutAlias(IPutAliasRequest request) =>
-			Dispatch2<IPutAliasRequest, PutAliasResponse>(request, request.RequestParameters);
+			DoRequest<IPutAliasRequest, PutAliasResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public IPutAliasResponse PutAlias(Indices indices, Name alias, Func<PutAliasDescriptor, IPutAliasRequest> selector = null) =>
@@ -41,7 +41,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IPutAliasResponse> PutAliasAsync(IPutAliasRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IPutAliasRequest, IPutAliasResponse, PutAliasResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IPutAliasRequest, IPutAliasResponse, PutAliasResponse>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
 		public Task<IPutAliasResponse> PutAliasAsync(

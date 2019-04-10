@@ -33,7 +33,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IStopRollupJobResponse StopRollupJob(IStopRollupJobRequest request) =>
-			Dispatch2<IStopRollupJobRequest, StopRollupJobResponse>(request, request.RequestParameters);
+			DoRequest<IStopRollupJobRequest, StopRollupJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IStopRollupJobResponse> StopRollupJobAsync(
@@ -44,6 +44,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IStopRollupJobResponse> StopRollupJobAsync(IStopRollupJobRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IStopRollupJobRequest, IStopRollupJobResponse, StopRollupJobResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IStopRollupJobRequest, IStopRollupJobResponse, StopRollupJobResponse>(request, request.RequestParameters, ct);
 	}
 }

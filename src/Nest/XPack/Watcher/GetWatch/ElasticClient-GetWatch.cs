@@ -32,7 +32,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetWatchResponse GetWatch(IGetWatchRequest request) =>
-			Dispatch2<IGetWatchRequest, GetWatchResponse>(request, request.RequestParameters);
+			DoRequest<IGetWatchRequest, GetWatchResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGetWatchResponse> GetWatchAsync(
@@ -43,7 +43,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IGetWatchResponse> GetWatchAsync(IGetWatchRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IGetWatchRequest, IGetWatchResponse, GetWatchResponse>
+			DoRequestAsync<IGetWatchRequest, IGetWatchResponse, GetWatchResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

@@ -44,7 +44,7 @@ namespace Nest
 		/// Rethrottle an existing reindex or update by query task
 		/// </summary>
 		public IReindexRethrottleResponse Rethrottle(IReindexRethrottleRequest request) =>
-			Dispatch2<IReindexRethrottleRequest, ReindexRethrottleResponse>(request, request.RequestParameters);
+			DoRequest<IReindexRethrottleRequest, ReindexRethrottleResponse>(request, request.RequestParameters);
 
 		/// <summary>
 		/// Rethrottle an existing reindex or update by query task
@@ -59,6 +59,6 @@ namespace Nest
 		/// Rethrottle an existing reindex or update by query task
 		/// </summary>
 		public Task<IReindexRethrottleResponse> RethrottleAsync(IReindexRethrottleRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IReindexRethrottleRequest, IReindexRethrottleResponse, ReindexRethrottleResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IReindexRethrottleRequest, IReindexRethrottleResponse, ReindexRethrottleResponse>(request, request.RequestParameters, ct);
 	}
 }

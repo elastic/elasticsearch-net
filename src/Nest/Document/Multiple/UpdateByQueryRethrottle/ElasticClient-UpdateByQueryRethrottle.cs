@@ -38,7 +38,7 @@ namespace Nest
 
  		/// <inheritdoc />
 		public IListTasksResponse UpdateByQueryRethrottle(IUpdateByQueryRethrottleRequest request) =>
-			Dispatch2<IUpdateByQueryRethrottleRequest, ListTasksResponse>(request, request.RequestParameters);
+			DoRequest<IUpdateByQueryRethrottleRequest, ListTasksResponse>(request, request.RequestParameters);
 
  		/// <inheritdoc />
 		public Task<IListTasksResponse> UpdateByQueryRethrottleAsync(
@@ -49,6 +49,6 @@ namespace Nest
 
  		/// <inheritdoc />
 		public Task<IListTasksResponse> UpdateByQueryRethrottleAsync(IUpdateByQueryRethrottleRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IUpdateByQueryRethrottleRequest, IListTasksResponse, ListTasksResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IUpdateByQueryRethrottleRequest, IListTasksResponse, ListTasksResponse>(request, request.RequestParameters, ct);
 	}
 }

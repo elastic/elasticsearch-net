@@ -30,7 +30,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IPutRoleResponse PutRole(IPutRoleRequest request) =>
-			Dispatch2<IPutRoleRequest, PutRoleResponse>(request, request.RequestParameters);
+			DoRequest<IPutRoleRequest, PutRoleResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IPutRoleResponse> PutRoleAsync(
@@ -41,6 +41,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IPutRoleResponse> PutRoleAsync(IPutRoleRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IPutRoleRequest, IPutRoleResponse, PutRoleResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IPutRoleRequest, IPutRoleResponse, PutRoleResponse>(request, request.RequestParameters, ct);
 	}
 }

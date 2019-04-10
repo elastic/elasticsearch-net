@@ -30,7 +30,7 @@ namespace Nest
 			RenderSearchTemplate(selector.InvokeOrDefault(new RenderSearchTemplateDescriptor()));
 
 		public IRenderSearchTemplateResponse RenderSearchTemplate(IRenderSearchTemplateRequest request) =>
-			Dispatch2<IRenderSearchTemplateRequest, RenderSearchTemplateResponse>(request, request.RequestParameters);
+			DoRequest<IRenderSearchTemplateRequest, RenderSearchTemplateResponse>(request, request.RequestParameters);
 
 		public Task<IRenderSearchTemplateResponse> RenderSearchTemplateAsync(
 			Func<RenderSearchTemplateDescriptor, IRenderSearchTemplateRequest> selector,
@@ -39,6 +39,6 @@ namespace Nest
 			RenderSearchTemplateAsync(selector.InvokeOrDefault(new RenderSearchTemplateDescriptor()), ct);
 
 		public Task<IRenderSearchTemplateResponse> RenderSearchTemplateAsync(IRenderSearchTemplateRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IRenderSearchTemplateRequest, IRenderSearchTemplateResponse, RenderSearchTemplateResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IRenderSearchTemplateRequest, IRenderSearchTemplateResponse, RenderSearchTemplateResponse>(request, request.RequestParameters, ct);
 	}
 }

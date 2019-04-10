@@ -45,7 +45,7 @@ namespace Nest
 
 		/// <inheritdoc cref="ReloadSecureSettings(System.Func{Nest.ReloadSecureSettingsDescriptor,Nest.IReloadSecureSettingsRequest})"/>
 		public IReloadSecureSettingsResponse ReloadSecureSettings(IReloadSecureSettingsRequest request) =>
-			Dispatch2<IReloadSecureSettingsRequest, ReloadSecureSettingsResponse>(request, request.RequestParameters);
+			DoRequest<IReloadSecureSettingsRequest, ReloadSecureSettingsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="ReloadSecureSettings(System.Func{Nest.ReloadSecureSettingsDescriptor,Nest.IReloadSecureSettingsRequest})"/>
 		public Task<IReloadSecureSettingsResponse> ReloadSecureSettingsAsync(
@@ -56,6 +56,6 @@ namespace Nest
 
 		/// <inheritdoc cref="ReloadSecureSettings(System.Func{Nest.ReloadSecureSettingsDescriptor,Nest.IReloadSecureSettingsRequest})"/>
 		public Task<IReloadSecureSettingsResponse> ReloadSecureSettingsAsync(IReloadSecureSettingsRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IReloadSecureSettingsRequest, IReloadSecureSettingsResponse, ReloadSecureSettingsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IReloadSecureSettingsRequest, IReloadSecureSettingsResponse, ReloadSecureSettingsResponse>(request, request.RequestParameters, ct);
 	}
 }

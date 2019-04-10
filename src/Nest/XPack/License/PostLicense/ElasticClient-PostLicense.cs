@@ -30,7 +30,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IPostLicenseResponse PostLicense(IPostLicenseRequest request) =>
-			Dispatch2<IPostLicenseRequest, PostLicenseResponse>(request, request.RequestParameters);
+			DoRequest<IPostLicenseRequest, PostLicenseResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IPostLicenseResponse> PostLicenseAsync(
@@ -40,6 +40,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IPostLicenseResponse> PostLicenseAsync(IPostLicenseRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IPostLicenseRequest, IPostLicenseResponse, PostLicenseResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IPostLicenseRequest, IPostLicenseResponse, PostLicenseResponse>(request, request.RequestParameters, ct);
 	}
 }

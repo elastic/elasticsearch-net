@@ -32,7 +32,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IRecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest request) =>
-			Dispatch2<IRecoveryStatusRequest, RecoveryStatusResponse>(request, request.RequestParameters);
+			DoRequest<IRecoveryStatusRequest, RecoveryStatusResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IRecoveryStatusResponse> RecoveryStatusAsync(
@@ -44,6 +44,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IRecoveryStatusRequest, IRecoveryStatusResponse, RecoveryStatusResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IRecoveryStatusRequest, IRecoveryStatusResponse, RecoveryStatusResponse>(request, request.RequestParameters, ct);
 	}
 }

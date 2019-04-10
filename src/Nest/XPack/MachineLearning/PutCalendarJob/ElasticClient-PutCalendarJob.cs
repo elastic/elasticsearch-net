@@ -32,7 +32,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IPutCalendarJobResponse PutCalendarJob(IPutCalendarJobRequest request) =>
-			Dispatch2<IPutCalendarJobRequest, PutCalendarJobResponse>(request, request.RequestParameters);
+			DoRequest<IPutCalendarJobRequest, PutCalendarJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IPutCalendarJobResponse> PutCalendarJobAsync(
@@ -44,6 +44,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IPutCalendarJobResponse> PutCalendarJobAsync(IPutCalendarJobRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IPutCalendarJobRequest, IPutCalendarJobResponse, PutCalendarJobResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IPutCalendarJobRequest, IPutCalendarJobResponse, PutCalendarJobResponse>(request, request.RequestParameters, ct);
 	}
 }

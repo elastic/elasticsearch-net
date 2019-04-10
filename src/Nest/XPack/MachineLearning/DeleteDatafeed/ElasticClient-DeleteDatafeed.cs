@@ -34,7 +34,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeleteDatafeedResponse DeleteDatafeed(IDeleteDatafeedRequest request) =>
-			Dispatch2<IDeleteDatafeedRequest, DeleteDatafeedResponse>(request, request.RequestParameters);
+			DoRequest<IDeleteDatafeedRequest, DeleteDatafeedResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IDeleteDatafeedResponse> DeleteDatafeedAsync(
@@ -45,6 +45,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IDeleteDatafeedResponse> DeleteDatafeedAsync(IDeleteDatafeedRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IDeleteDatafeedRequest, IDeleteDatafeedResponse, DeleteDatafeedResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteDatafeedRequest, IDeleteDatafeedResponse, DeleteDatafeedResponse>(request, request.RequestParameters, ct);
 	}
 }

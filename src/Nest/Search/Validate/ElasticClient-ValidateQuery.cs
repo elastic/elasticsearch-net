@@ -41,7 +41,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IValidateQueryResponse ValidateQuery(IValidateQueryRequest request) =>
-			Dispatch2<IValidateQueryRequest, ValidateQueryResponse>(request, request.RequestParameters);
+			DoRequest<IValidateQueryRequest, ValidateQueryResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IValidateQueryResponse> ValidateQueryAsync<T>(
@@ -53,6 +53,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IValidateQueryResponse> ValidateQueryAsync(IValidateQueryRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IValidateQueryRequest, IValidateQueryResponse, ValidateQueryResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IValidateQueryRequest, IValidateQueryResponse, ValidateQueryResponse>(request, request.RequestParameters, ct);
 	}
 }

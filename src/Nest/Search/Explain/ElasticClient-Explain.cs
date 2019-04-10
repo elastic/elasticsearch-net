@@ -49,7 +49,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IExplainResponse<TDocument> Explain<TDocument>(IExplainRequest<TDocument> request)
 			where TDocument : class =>
-			Dispatch2<IExplainRequest<TDocument>, ExplainResponse<TDocument>>(request, request.RequestParameters);
+			DoRequest<IExplainRequest<TDocument>, ExplainResponse<TDocument>>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IExplainResponse<TDocument>> ExplainAsync<TDocument>(
@@ -65,6 +65,6 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IExplainResponse<TDocument>> ExplainAsync<TDocument>(IExplainRequest<TDocument> request, CancellationToken ct = default)
 			where TDocument : class =>
-			Dispatch2Async<IExplainRequest<TDocument>, IExplainResponse<TDocument>, ExplainResponse<TDocument>>(request, request.RequestParameters, ct);
+			DoRequestAsync<IExplainRequest<TDocument>, IExplainResponse<TDocument>, ExplainResponse<TDocument>>(request, request.RequestParameters, ct);
 	}
 }

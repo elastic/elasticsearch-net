@@ -34,7 +34,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IPutWatchResponse PutWatch(IPutWatchRequest request) =>
-			Dispatch2<IPutWatchRequest, PutWatchResponse>(request, request.RequestParameters);
+			DoRequest<IPutWatchRequest, PutWatchResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IPutWatchResponse> PutWatchAsync(
@@ -45,7 +45,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IPutWatchResponse> PutWatchAsync(IPutWatchRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IPutWatchRequest, IPutWatchResponse, PutWatchResponse>
+			DoRequestAsync<IPutWatchRequest, IPutWatchResponse, PutWatchResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

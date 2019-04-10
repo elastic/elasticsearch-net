@@ -38,7 +38,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ISnapshotResponse Snapshot(ISnapshotRequest request) =>
-			Dispatch2<ISnapshotRequest, SnapshotResponse>(request, request.RequestParameters);
+			DoRequest<ISnapshotRequest, SnapshotResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<ISnapshotResponse> SnapshotAsync(
@@ -51,6 +51,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ISnapshotResponse> SnapshotAsync(ISnapshotRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<ISnapshotRequest, ISnapshotResponse, SnapshotResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ISnapshotRequest, ISnapshotResponse, SnapshotResponse>(request, request.RequestParameters, ct);
 	}
 }

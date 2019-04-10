@@ -37,7 +37,7 @@ namespace Nest
 
 		/// <inheritdoc cref="ClusterPendingTasks(System.Func{Nest.ClusterPendingTasksDescriptor,Nest.IClusterPendingTasksRequest})" />
 		public IClusterPendingTasksResponse ClusterPendingTasks(IClusterPendingTasksRequest request) =>
-			Dispatch2<IClusterPendingTasksRequest, ClusterPendingTasksResponse>(request, request.RequestParameters);
+			DoRequest<IClusterPendingTasksRequest, ClusterPendingTasksResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="ClusterPendingTasks(System.Func{Nest.ClusterPendingTasksDescriptor,Nest.IClusterPendingTasksRequest})" />
 		public Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(
@@ -48,6 +48,6 @@ namespace Nest
 
 		/// <inheritdoc cref="ClusterPendingTasks(System.Func{Nest.ClusterPendingTasksDescriptor,Nest.IClusterPendingTasksRequest})" />
 		public Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(IClusterPendingTasksRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IClusterPendingTasksRequest, IClusterPendingTasksResponse, ClusterPendingTasksResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IClusterPendingTasksRequest, IClusterPendingTasksResponse, ClusterPendingTasksResponse>(request, request.RequestParameters, ct);
 	}
 }

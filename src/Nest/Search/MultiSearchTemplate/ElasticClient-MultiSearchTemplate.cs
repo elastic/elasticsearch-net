@@ -43,7 +43,7 @@ namespace Nest
 		public IMultiSearchResponse MultiSearchTemplate(IMultiSearchTemplateRequest request)
 		{
 			CreateMultiSearchTemplateDeserializer(request);
-			return Dispatch2<IMultiSearchTemplateRequest, MultiSearchResponse>(request, request.RequestParameters);
+			return DoRequest<IMultiSearchTemplateRequest, MultiSearchResponse>(request, request.RequestParameters);
 		}
 
 		/// <inheritdoc />
@@ -56,7 +56,7 @@ namespace Nest
 		public Task<IMultiSearchResponse> MultiSearchTemplateAsync(IMultiSearchTemplateRequest request, CancellationToken ct = default)
 		{
 			CreateMultiSearchTemplateDeserializer(request);
-			return Dispatch2Async<IMultiSearchTemplateRequest, IMultiSearchResponse, MultiSearchResponse>(request, request.RequestParameters, ct);
+			return DoRequestAsync<IMultiSearchTemplateRequest, IMultiSearchResponse, MultiSearchResponse>(request, request.RequestParameters, ct);
 		}
 
 		private void CreateMultiSearchTemplateDeserializer(IMultiSearchTemplateRequest request)

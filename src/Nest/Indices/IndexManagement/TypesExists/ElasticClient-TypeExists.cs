@@ -34,7 +34,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IExistsResponse TypeExists(ITypeExistsRequest request) =>
-			Dispatch2<ITypeExistsRequest, ExistsResponse>(request, request.RequestParameters);
+			DoRequest<ITypeExistsRequest, ExistsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IExistsResponse> TypeExistsAsync(
@@ -46,6 +46,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IExistsResponse> TypeExistsAsync(ITypeExistsRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<ITypeExistsRequest, IExistsResponse, ExistsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ITypeExistsRequest, IExistsResponse, ExistsResponse>(request, request.RequestParameters, ct);
 	}
 }

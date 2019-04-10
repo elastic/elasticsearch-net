@@ -45,7 +45,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IPutIndexTemplateResponse PutIndexTemplate(IPutIndexTemplateRequest request) =>
-			Dispatch2<IPutIndexTemplateRequest, PutIndexTemplateResponse>(request, request.RequestParameters);
+			DoRequest<IPutIndexTemplateRequest, PutIndexTemplateResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(
@@ -56,6 +56,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IPutIndexTemplateRequest, IPutIndexTemplateResponse, PutIndexTemplateResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IPutIndexTemplateRequest, IPutIndexTemplateResponse, PutIndexTemplateResponse>(request, request.RequestParameters, ct);
 	}
 }

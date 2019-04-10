@@ -61,7 +61,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IRollupSearchResponse<THit> RollupSearch<THit>(IRollupSearchRequest request)
 			where THit : class =>
-			Dispatch2<IRollupSearchRequest, RollupSearchResponse<THit>>(request, request.RequestParameters);
+			DoRequest<IRollupSearchRequest, RollupSearchResponse<THit>>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IRollupSearchResponse<THit>> RollupSearchAsync<THit>(
@@ -84,7 +84,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IRollupSearchResponse<THit>> RollupSearchAsync<THit>(IRollupSearchRequest request, CancellationToken ct = default)
 			where THit : class =>
-			Dispatch2Async<IRollupSearchRequest, IRollupSearchResponse<THit>, RollupSearchResponse<THit>>
+			DoRequestAsync<IRollupSearchRequest, IRollupSearchResponse<THit>, RollupSearchResponse<THit>>
 				(request, request.RequestParameters, ct);
 	}
 }

@@ -33,7 +33,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IValidateJobResponse ValidateJob(IValidateJobRequest request) =>
-			Dispatch2<IValidateJobRequest, ValidateJobResponse>(request, request.RequestParameters);
+			DoRequest<IValidateJobRequest, ValidateJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IValidateJobResponse> ValidateJobAsync<T>(Func<ValidateJobDescriptor<T>, IValidateJobRequest> selector,
@@ -44,7 +44,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IValidateJobResponse> ValidateJobAsync(IValidateJobRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IValidateJobRequest, IValidateJobResponse, ValidateJobResponse>
+			DoRequestAsync<IValidateJobRequest, IValidateJobResponse, ValidateJobResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

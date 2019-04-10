@@ -33,7 +33,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeleteRollupJobResponse DeleteRollupJob(IDeleteRollupJobRequest request) =>
-			Dispatch2<IDeleteRollupJobRequest, DeleteRollupJobResponse>(request, request.RequestParameters);
+			DoRequest<IDeleteRollupJobRequest, DeleteRollupJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IDeleteRollupJobResponse> DeleteRollupJobAsync(
@@ -44,6 +44,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IDeleteRollupJobResponse> DeleteRollupJobAsync(IDeleteRollupJobRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IDeleteRollupJobRequest, IDeleteRollupJobResponse, DeleteRollupJobResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteRollupJobRequest, IDeleteRollupJobResponse, DeleteRollupJobResponse>(request, request.RequestParameters, ct);
 	}
 }

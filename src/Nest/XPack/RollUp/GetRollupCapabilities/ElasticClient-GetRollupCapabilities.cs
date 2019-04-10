@@ -45,7 +45,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetRollupCapabilitiesResponse GetRollupCapabilities(IGetRollupCapabilitiesRequest request) =>
-			Dispatch2<IGetRollupCapabilitiesRequest, GetRollupCapabilitiesResponse>(request, request.RequestParameters);
+			DoRequest<IGetRollupCapabilitiesRequest, GetRollupCapabilitiesResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGetRollupCapabilitiesResponse> GetRollupCapabilitiesAsync(
@@ -55,6 +55,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IGetRollupCapabilitiesResponse> GetRollupCapabilitiesAsync(IGetRollupCapabilitiesRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IGetRollupCapabilitiesRequest, IGetRollupCapabilitiesResponse, GetRollupCapabilitiesResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetRollupCapabilitiesRequest, IGetRollupCapabilitiesResponse, GetRollupCapabilitiesResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -55,7 +55,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetTrialLicenseStatusResponse GetTrialLicenseStatus(IGetTrialLicenseStatusRequest request) =>
-			Dispatch2<IGetTrialLicenseStatusRequest, GetTrialLicenseStatusResponse>(request, request.RequestParameters);
+			DoRequest<IGetTrialLicenseStatusRequest, GetTrialLicenseStatusResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGetTrialLicenseStatusResponse> GetTrialLicenseStatusAsync(
@@ -66,6 +66,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IGetTrialLicenseStatusResponse> GetTrialLicenseStatusAsync(IGetTrialLicenseStatusRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IGetTrialLicenseStatusRequest, IGetTrialLicenseStatusResponse, GetTrialLicenseStatusResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetTrialLicenseStatusRequest, IGetTrialLicenseStatusResponse, GetTrialLicenseStatusResponse>(request, request.RequestParameters, ct);
 	}
 }

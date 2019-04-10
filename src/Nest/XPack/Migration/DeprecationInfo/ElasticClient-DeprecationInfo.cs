@@ -44,7 +44,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeprecationInfoResponse DeprecationInfo(IDeprecationInfoRequest request) =>
-			Dispatch2<IDeprecationInfoRequest, DeprecationInfoResponse>(request, request.RequestParameters);
+			DoRequest<IDeprecationInfoRequest, DeprecationInfoResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IDeprecationInfoResponse> DeprecationInfoAsync(
@@ -54,7 +54,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IDeprecationInfoResponse> DeprecationInfoAsync(IDeprecationInfoRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IDeprecationInfoRequest, IDeprecationInfoResponse, DeprecationInfoResponse>
+			DoRequestAsync<IDeprecationInfoRequest, IDeprecationInfoResponse, DeprecationInfoResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

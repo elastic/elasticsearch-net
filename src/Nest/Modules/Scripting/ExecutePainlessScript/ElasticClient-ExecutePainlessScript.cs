@@ -40,7 +40,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IExecutePainlessScriptResponse<TResult> ExecutePainlessScript<TResult>(IExecutePainlessScriptRequest request) =>
-			Dispatch2<IExecutePainlessScriptRequest, ExecutePainlessScriptResponse<TResult>>(request, request.RequestParameters);
+			DoRequest<IExecutePainlessScriptRequest, ExecutePainlessScriptResponse<TResult>>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IExecutePainlessScriptResponse<TResult>> ExecutePainlessScriptAsync<TResult>(
@@ -53,7 +53,7 @@ namespace Nest
 			IExecutePainlessScriptRequest request,
 			CancellationToken ct = default
 		) =>
-			Dispatch2Async<IExecutePainlessScriptRequest, IExecutePainlessScriptResponse<TResult>, ExecutePainlessScriptResponse<TResult>>
+			DoRequestAsync<IExecutePainlessScriptRequest, IExecutePainlessScriptResponse<TResult>, ExecutePainlessScriptResponse<TResult>>
 				(request, request.RequestParameters, ct);
 	}
 }

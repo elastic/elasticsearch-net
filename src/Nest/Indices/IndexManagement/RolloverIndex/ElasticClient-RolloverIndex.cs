@@ -28,7 +28,7 @@ namespace Nest
 			RolloverIndex(selector.InvokeOrDefault(new RolloverIndexDescriptor(alias)));
 
 		public IRolloverIndexResponse RolloverIndex(IRolloverIndexRequest request) =>
-			Dispatch2<IRolloverIndexRequest, RolloverIndexResponse>(request, request.RequestParameters);
+			DoRequest<IRolloverIndexRequest, RolloverIndexResponse>(request, request.RequestParameters);
 
 		public Task<IRolloverIndexResponse> RolloverIndexAsync(
 			Name alias,
@@ -37,6 +37,6 @@ namespace Nest
 		) => RolloverIndexAsync(selector.InvokeOrDefault(new RolloverIndexDescriptor(alias)));
 
 		public Task<IRolloverIndexResponse> RolloverIndexAsync(IRolloverIndexRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IRolloverIndexRequest, IRolloverIndexResponse, RolloverIndexResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IRolloverIndexRequest, IRolloverIndexResponse, RolloverIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

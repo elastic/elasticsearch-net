@@ -34,7 +34,7 @@ namespace Nest
 
 		/// <inheritdoc cref="ResumeFollowIndex(IndexName, System.Func{Nest.ResumeFollowIndexDescriptor,Nest.IResumeFollowIndexRequest})" />
 		public IResumeFollowIndexResponse ResumeFollowIndex(IResumeFollowIndexRequest request) =>
-			Dispatch2<IResumeFollowIndexRequest, ResumeFollowIndexResponse>(request, request.RequestParameters);
+			DoRequest<IResumeFollowIndexRequest, ResumeFollowIndexResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="ResumeFollowIndex(IndexName, System.Func{Nest.ResumeFollowIndexDescriptor,Nest.IResumeFollowIndexRequest})" />
 		public Task<IResumeFollowIndexResponse> ResumeFollowIndexAsync(
@@ -45,6 +45,6 @@ namespace Nest
 
 		/// <inheritdoc cref="ResumeFollowIndex(IndexName, System.Func{Nest.ResumeFollowIndexDescriptor,Nest.IResumeFollowIndexRequest})" />
 		public Task<IResumeFollowIndexResponse> ResumeFollowIndexAsync(IResumeFollowIndexRequest request, CancellationToken ct = default) =>
-			Dispatch2Async<IResumeFollowIndexRequest, IResumeFollowIndexResponse, ResumeFollowIndexResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IResumeFollowIndexRequest, IResumeFollowIndexResponse, ResumeFollowIndexResponse>(request, request.RequestParameters, ct);
 	}
 }
