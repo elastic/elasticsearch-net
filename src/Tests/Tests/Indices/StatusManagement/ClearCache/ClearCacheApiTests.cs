@@ -20,7 +20,7 @@ namespace Tests.Indices.StatusManagement.ClearCache
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected override ClearCacheRequest Initializer => new ClearCacheRequest(AllIndices) { Request = true };
-		protected override string UrlPath => "/_cache/clear?request=true";
+		protected override string UrlPath => "/_all/_cache/clear?request=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.ClearCache(AllIndices, f),

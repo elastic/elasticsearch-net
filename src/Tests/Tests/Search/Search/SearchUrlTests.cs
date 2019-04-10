@@ -47,20 +47,16 @@ namespace Tests.Search.Search
 					.FluentAsync(c => c.SearchAsync<Project>(s => s.Index(hardcoded)))
 				;
 
-			await POST("/_search")
+			await POST("/_all/_search")
 					.Fluent(c => c.Search<Project>(s => s.AllIndices()))
-					.Request(c => c.Search<Project>(new SearchRequest()))
 					.Request(c => c.Search<Project>(new SearchRequest<Project>(Nest.Indices.All)))
 					.FluentAsync(c => c.SearchAsync<Project>(s => s.AllIndices()))
 					.RequestAsync(c => c.SearchAsync<Project>(new SearchRequest<Project>(Nest.Indices.All)))
-					.RequestAsync(c => c.SearchAsync<Project>(new SearchRequest()))
 				;
 
 			await POST("/_search?scroll=1m")
-					.Fluent(c => c.Search<Project>(s => s.AllIndices().Scroll(60000)))
-					.Request(c => c.Search<Project>(new SearchRequest<Project>(Nest.Indices.All) { Scroll = TimeSpan.FromMinutes(1) }))
-					.FluentAsync(c => c.SearchAsync<Project>(s => s.AllIndices().Scroll("1m")))
-					.RequestAsync(c => c.SearchAsync<Project>(new SearchRequest<Project>(Nest.Indices.All) { Scroll = 60000 }))
+					.Request(c => c.Search<Project>(new SearchRequest { Scroll = TimeSpan.FromMinutes(1) }))
+					.RequestAsync(c => c.SearchAsync<Project>(new SearchRequest { Scroll = 60000 }))
 				;
 		}
 	}

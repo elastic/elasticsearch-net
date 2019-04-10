@@ -3,6 +3,7 @@ using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework;
 using static Tests.Framework.UrlTester;
+using static Nest.Indices;
 
 namespace Tests.Indices.StatusManagement.ClearCache
 {
@@ -10,10 +11,14 @@ namespace Tests.Indices.StatusManagement.ClearCache
 	{
 		[U] public async Task Urls()
 		{
+			await POST($"/_all/_cache/clear")
+					.Fluent(c => c.ClearCache(All))
+					.Request(c => c.ClearCache(new ClearCacheRequest(All)))
+					.FluentAsync(c => c.ClearCacheAsync(All))
+					.RequestAsync(c => c.ClearCacheAsync(new ClearCacheRequest(All)))
+				;
 			await POST($"/_cache/clear")
-					.Fluent(c => c.ClearCache(Nest.Indices.All))
 					.Request(c => c.ClearCache(new ClearCacheRequest()))
-					.FluentAsync(c => c.ClearCacheAsync(Nest.Indices.All))
 					.RequestAsync(c => c.ClearCacheAsync(new ClearCacheRequest()))
 				;
 

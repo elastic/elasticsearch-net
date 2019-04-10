@@ -22,7 +22,7 @@ namespace Nest
 		protected void DefaultRouting() => Self.RequestParameters.SetQueryString("routing", new Routing(() => Document));
 
 		internal static HttpMethod GetHttpMethod(IIndexRequest<TDocument> request) =>
-			request.Id?.StringOrLongValue != null || request.RouteValues.Id != null ? HttpMethod.PUT : HttpMethod.POST;
+			request.Id?.StringOrLongValue != null || request.RouteValues.ContainsKey("id") ? HttpMethod.PUT : HttpMethod.POST;
 
 		partial void DocumentFromPath(TDocument document) => Document = document;
 	}

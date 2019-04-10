@@ -6,9 +6,6 @@ namespace Nest
 {
 	public class RouteValues : Dictionary<string, IUrlParameter>
 	{
-		// TODO Remove
-		public string Id => throw new Exception("need to be refactored out");
-
 		private RouteValues Route(string name, IUrlParameter routeValue, bool required = true)
 		{
 			switch (routeValue) {

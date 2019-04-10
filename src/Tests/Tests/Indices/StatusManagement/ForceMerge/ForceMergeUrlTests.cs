@@ -11,10 +11,15 @@ namespace Tests.Indices.StatusManagement.ForceMerge
 	{
 		[U] public async Task Urls()
 		{
-			await POST($"/_forcemerge")
+			await POST($"/_all/_forcemerge")
 					.Fluent(c => c.ForceMerge(All))
-					.Request(c => c.ForceMerge(new ForceMergeRequest()))
+					.Request(c => c.ForceMerge(new ForceMergeRequest(All)))
 					.FluentAsync(c => c.ForceMergeAsync(All))
+					.RequestAsync(c => c.ForceMergeAsync(new ForceMergeRequest(All)))
+				;
+			
+			await POST($"/_forcemerge")
+					.Request(c => c.ForceMerge(new ForceMergeRequest()))
 					.RequestAsync(c => c.ForceMergeAsync(new ForceMergeRequest()))
 				;
 

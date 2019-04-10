@@ -59,7 +59,12 @@ namespace Nest
 					if (t[0] == '@')
 					{
 						if (r.TryGetValue(parts[i], out var v))
-							sb.Append(Uri.EscapeDataString(v.GetString(s)));
+						{
+							var sv = v.GetString(s);
+							if (string.IsNullOrEmpty(sv))
+								throw new Exception($"{parts[i]} of type ({v.GetType().Name}) did not resolve to a value  on url {route}");
+							sb.Append(Uri.EscapeDataString(sv));
+						}
 						else throw new Exception($"No value provided for {parts[i]} on url {route}");
 
 						i++;

@@ -42,13 +42,12 @@ namespace Nest
 		public Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(
 			Func<ClusterGetSettingsDescriptor, IClusterGetSettingsRequest> selector = null,
 			CancellationToken ct = default
-		) =>
-			ClusterGetSettingsAsync(selector.InvokeOrDefault(new ClusterGetSettingsDescriptor()), ct);
+		) => ClusterGetSettingsAsync(selector.InvokeOrDefault(new ClusterGetSettingsDescriptor()), ct);
 
 		/// <inheritdoc cref="ClusterGetSettings(System.Func{Nest.ClusterGetSettingsDescriptor,Nest.IClusterGetSettingsRequest})"/>
-		public Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(IClusterGetSettingsRequest request,
+		public Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(
+			IClusterGetSettingsRequest request,
 			CancellationToken ct = default
-		) =>
-			DoRequestAsync<IClusterGetSettingsRequest, IClusterGetSettingsResponse, ClusterGetSettingsResponse>(request, request.RequestParameters, ct);
+		) => DoRequestAsync<IClusterGetSettingsRequest, IClusterGetSettingsResponse, ClusterGetSettingsResponse>(request, request.RequestParameters, ct);
 	}
 }

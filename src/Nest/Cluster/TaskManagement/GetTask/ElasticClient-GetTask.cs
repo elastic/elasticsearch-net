@@ -11,11 +11,13 @@ namespace Nest
 
 		IGetTaskResponse GetTask(IGetTaskRequest request);
 
-		Task<IGetTaskResponse> GetTaskAsync(TaskId id, Func<GetTaskDescriptor, IGetTaskRequest> selector = null,
+		Task<IGetTaskResponse> GetTaskAsync(
+			TaskId id, 
+			Func<GetTaskDescriptor, IGetTaskRequest> selector = null,
 			CancellationToken ct = default
 		);
 
-		Task<IGetTaskResponse> GetTaskAsync(IGetTaskRequest request, CancellationToken cancellationToken = default);
+		Task<IGetTaskResponse> GetTaskAsync(IGetTaskRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient

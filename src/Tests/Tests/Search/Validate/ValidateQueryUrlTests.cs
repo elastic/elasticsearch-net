@@ -48,12 +48,15 @@ namespace Tests.Search.Validate
 					.FluentAsync(c => c.ValidateQueryAsync<Project>(s => s.Index(hardcoded)))
 				;
 
-			await POST("/_validate/query")
+			await POST("/_all/_validate/query")
 					.Fluent(c => c.ValidateQuery<Project>(s => s.AllIndices()))
-					.Request(c => c.ValidateQuery(new ValidateQueryRequest()))
 					.Request(c => c.ValidateQuery(new ValidateQueryRequest<Project>(Nest.Indices.All)))
 					.FluentAsync(c => c.ValidateQueryAsync<Project>(s => s.AllIndices()))
 					.RequestAsync(c => c.ValidateQueryAsync(new ValidateQueryRequest<Project>(Nest.Indices.All)))
+				;
+			
+			await POST("/_validate/query")
+					.Request(c => c.ValidateQuery(new ValidateQueryRequest()))
 					.RequestAsync(c => c.ValidateQueryAsync(new ValidateQueryRequest()))
 				;
 		}

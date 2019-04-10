@@ -27,7 +27,7 @@ namespace Tests.Indices.Monitoring.IndicesStats
 			Level = Level.Shards
 		};
 
-		protected override string UrlPath => "/_stats?level=shards";
+		protected override string UrlPath => "/_all/_stats?level=shards";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

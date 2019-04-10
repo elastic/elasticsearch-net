@@ -20,12 +20,6 @@ namespace Tests.Document.Single.Get
 					.RequestAsync(c => c.GetAsync<Project>(new GetRequest<Project>(1)))
 				;
 
-			//new GetRequest<Project>(null, null, 1) is still an error
-			await GET("/project/_doc/1")
-					.Fluent(c => c.Get<Project>(1, g => g.Index(null)))
-					.FluentAsync(c => c.GetAsync<Project>(1, g => g.Index(null)))
-				;
-
 			await GET("/testindex/_doc/1")
 					.Fluent(c => c.Get<Project>(1, g => g.Index("testindex")))
 					.Request(c => c.Get<Project>(new GetRequest<Project>("testindex", 1)))

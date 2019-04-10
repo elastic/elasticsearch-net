@@ -15,6 +15,8 @@ namespace Tests.Cluster.ClusterSettings.ClusterGetSettings
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cluster/settings";
 
+		protected override ClusterGetSettingsRequest Initializer { get; } = new ClusterGetSettingsRequest();
+
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.ClusterGetSettings(),
 			(client, f) => client.ClusterGetSettingsAsync(),

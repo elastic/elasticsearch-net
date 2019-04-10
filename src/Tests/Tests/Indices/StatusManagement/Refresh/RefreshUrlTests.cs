@@ -12,10 +12,15 @@ namespace Tests.Indices.StatusManagement.Refresh
 		[U] public async Task Urls()
 		{
 			await POST($"/_refresh")
-					.Fluent(c => c.Refresh(All))
 					.Request(c => c.Refresh(new RefreshRequest()))
-					.FluentAsync(c => c.RefreshAsync(All))
 					.RequestAsync(c => c.RefreshAsync(new RefreshRequest()))
+				;
+			
+			await POST($"/_all/_refresh")
+					.Fluent(c => c.Refresh(All))
+					.Request(c => c.Refresh(new RefreshRequest(All)))
+					.FluentAsync(c => c.RefreshAsync(All))
+					.RequestAsync(c => c.RefreshAsync(new RefreshRequest(All)))
 				;
 
 			var index = "index1,index2";
