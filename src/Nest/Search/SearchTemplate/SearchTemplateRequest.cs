@@ -10,10 +10,6 @@ namespace Nest
 		[DataMember(Name ="id")]
 		string Id { get; set; }
 
-		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
-		[IgnoreDataMember]
-		string Inline { get; set; }
-
 		[DataMember(Name ="params")]
 		IDictionary<string, object> Params { get; set; }
 
@@ -25,17 +21,9 @@ namespace Nest
 	{
 		public string Id { get; set; }
 
-		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
-		public string Inline
-		{
-			get => Source;
-			set => Source = value;
-		}
-
 		public IDictionary<string, object> Params { get; set; }
 
 		public string Source { get; set; }
-		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 		protected Type ClrType { get; set; }
 		Type ICovariantSearchRequest.ClrType => ClrType;
 
@@ -61,20 +49,11 @@ namespace Nest
 
 		string ISearchTemplateRequest.Id { get; set; }
 
-		string ISearchTemplateRequest.Inline
-		{
-			get => Self.Source;
-			set => Self.Source = value;
-		}
-
 		IDictionary<string, object> ISearchTemplateRequest.Params { get; set; }
 
 		string ISearchTemplateRequest.Source { get; set; }
 
 		protected sealed override void Initialize() => TypedKeys();
-
-		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
-		public SearchTemplateDescriptor<T> Inline(string template) => Assign(template, (a, v) => a.Inline = v);
 
 		public SearchTemplateDescriptor<T> Source(string template) => Assign(template, (a, v) => a.Source = v);
 

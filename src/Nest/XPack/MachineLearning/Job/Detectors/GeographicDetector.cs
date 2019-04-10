@@ -39,9 +39,6 @@ namespace Nest
 	public class LatLongDetectorDescriptor<T> : DetectorDescriptorBase<LatLongDetectorDescriptor<T>, IGeographicDetector>, IGeographicDetector
 		where T : class
 	{
-		[Obsolete("Use parameterless constructor")]
-		public LatLongDetectorDescriptor(string function) : base(function) { }
-
 		public LatLongDetectorDescriptor() : base(GeographicFunction.LatLong.GetStringValue()) { }
 
 		Field IByFieldNameDetector.ByFieldName { get; set; }
