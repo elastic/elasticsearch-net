@@ -177,8 +177,7 @@ var searchResponse = lowlevelClient.Search<StringResponse>("people", "person", P
     {
         match = new
         {
-            field = "firstName",
-            query = "Martijn"
+            firstName = "Martijn"
         }
     }
 }));
@@ -201,8 +200,7 @@ var searchResponse = lowlevelClient.Search<BytesResponse>("people", "person", @"
     ""size"": 10,
     ""query"": {
         ""match"": {
-            ""field"": ""firstName"",
-            ""query"": ""Martijn""
+            ""firstName"": ""Martijn""
         }
     }
 }");
