@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace Nest
 {
 	internal static class DotNetCoreTypeExtensions
 	{
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static bool IsGeneric(this Type type)
 		{
 #if DOTNETCORE
@@ -16,6 +18,7 @@ namespace Nest
 #endif
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static Assembly Assembly(this Type type)
 		{
 #if DOTNETCORE
@@ -49,6 +52,7 @@ namespace Nest
 			return true;
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static bool IsValue(this Type type)
 		{
 #if DOTNETCORE
@@ -58,6 +62,7 @@ namespace Nest
 #endif
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static bool IsClass(this Type type)
 		{
 #if DOTNETCORE
@@ -67,6 +72,7 @@ namespace Nest
 #endif
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static TypeCode GetTypeCode(this Type type)
 		{
 #if !DOTNETCORE
@@ -112,9 +118,11 @@ namespace Nest
 		}
 
 #if DOTNETCORE
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static bool IsAssignableFrom(this Type t, Type other) => t.GetTypeInfo().IsAssignableFrom(other.GetTypeInfo());
 #endif
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static bool IsEnumType(this Type type)
 		{
 #if DOTNETCORE
@@ -125,9 +133,11 @@ namespace Nest
 		}
 
 #if DOTNETCORE
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static IEnumerable<Type> GetInterfaces(this Type type) => type.GetTypeInfo().ImplementedInterfaces;
 #endif
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static IEnumerable<TAttribute> GetAttributes<TAttribute>(this Type t)
 			where TAttribute : Attribute
 		{

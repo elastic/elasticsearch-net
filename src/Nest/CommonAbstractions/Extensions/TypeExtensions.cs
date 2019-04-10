@@ -53,6 +53,9 @@ namespace Nest
 			return closedType.CreateInstance(args);
 		}
 
+		internal static T CreateGenericInstance<T>(this Type t, Type[] closeOver, params object[] args) =>
+			(T)CreateGenericInstance(t, closeOver, args);
+
 		internal static T CreateInstance<T>(this Type t, params object[] args) => (T)t.CreateInstance(args);
 
 		internal static object CreateInstance(this Type t, params object[] args)
