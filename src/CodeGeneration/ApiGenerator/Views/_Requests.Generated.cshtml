@@ -76,6 +76,8 @@ namespace Nest
 	public partial class @Raw(method.RequestType) @Raw(string.Format(": PlainRequestBase<{0}>, {1}", method.QueryStringParamName, method.InterfaceType))
 	{
 		protected @(Raw(method.InterfaceType)) Self => this;
+		internal static ApiUrls Urls = new ApiUrls(new [] {@Raw(string.Join(", ", method.Url.ExposedApiPaths.Select(p=>$"\"{p.Path}\"")))});
+		internal override ApiUrls ApiUrls => Urls;
 @foreach (Constructor c in Constructor.RequestConstructors(method, inheritsFromPlainRequestBase: true))
 {
 <text>		@(Raw(CodeGenerator.Constructor(c)))

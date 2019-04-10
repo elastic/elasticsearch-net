@@ -59,7 +59,6 @@ namespace Nest
 		/// <inheritdoc />
 		public async Task<TDocument> SourceAsync<TDocument>(ISourceRequest request, CancellationToken ct = default) where TDocument : class
 		{
-			request.RouteValues.Resolve(ConnectionSettings);
 			request.RequestParameters.DeserializationOverride = ToSourceResponse<TDocument>;
 			var result = await DoRequestAsync<ISourceRequest, ISourceResponse<TDocument>, SourceResponse<TDocument>>(request, request.RequestParameters, ct)
 				.ConfigureAwait(false);

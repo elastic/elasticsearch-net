@@ -37,6 +37,7 @@ namespace Nest
 	///<summary>descriptor for @method.FullName <pre>@method.Documentation</pre></summary>
 	public partial class @Raw(type) @(Raw(string.Format(" : RequestDescriptorBase<{0},{1}, {2}>, {2}", type, method.QueryStringParamName, concreteInterface)))
 	{ 
+		internal override ApiUrls ApiUrls => @(Raw(method.RequestType)).Urls;
 @foreach (Constructor c in Constructor.DescriptorConstructors(method))
 {
 <text>		@(Raw(CodeGenerator.Constructor(c)))

@@ -4,7 +4,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using ApiGenerator.Domain;
-using CsQuery.EquationParser.Implementation;
 using Newtonsoft.Json.Linq;
 using RazorLight;
 using ShellProgressBar;

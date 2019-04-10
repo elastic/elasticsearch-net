@@ -17,6 +17,8 @@ namespace Nest
 		// TODO refactor RequestParameters
 		[IgnoreDataMember]
 		IRequestParameters RequestParametersInternal { get; }
+
+		string GetUrl(IConnectionSettingsValues settings);
 	}
 
 	public interface IRequest<TParameters> : IRequest
@@ -53,6 +55,10 @@ namespace Nest
 
 		[IgnoreDataMember]
 		RouteValues IRequest.RouteValues { get; } = new RouteValues();
+
+		internal abstract ApiUrls ApiUrls { get;  }
+
+		string IRequest.GetUrl(IConnectionSettingsValues settings) => ApiUrls.Resolve(RequestState.RouteValues, settings);
 
 		IRequestParameters IRequest.RequestParametersInternal => RequestState.RequestParameters;
 

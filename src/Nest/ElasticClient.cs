@@ -45,10 +45,10 @@ namespace Nest
 		{
 			if (forceConfiguration != null) ForceConfiguration(p, forceConfiguration);
 
-			p.RouteValues.Resolve(ConnectionSettings);
+			var url = p.GetUrl(ConnectionSettings);
 			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD) ? null : new SerializableData<TRequest>(p);
 
-			return LowLevel.DoRequest<TResponse>(p.HttpMethod, p.RouteValues.ToString(), b, parameters);
+			return LowLevel.DoRequest<TResponse>(p.HttpMethod, url, b, parameters);
 		}
 
 		internal Task<TResponseInterface> DoRequestAsync<TRequest, TResponseInterface, TResponse>(
@@ -63,10 +63,10 @@ namespace Nest
 		{
 			if (forceConfiguration != null) ForceConfiguration(p, forceConfiguration);
 
-			p.RouteValues.Resolve(ConnectionSettings);
+			var url = p.GetUrl(ConnectionSettings);
 			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD) ? null : new SerializableData<TRequest>(p);
 
-			return LowLevel.DoRequestAsync<TResponse>(p.HttpMethod, p.RouteValues.ToString(), ct, b, parameters)
+			return LowLevel.DoRequestAsync<TResponse>(p.HttpMethod, url, ct, b, parameters)
 				.ToBaseTask<TResponse, TResponseInterface>();
 		}
 
@@ -74,7 +74,7 @@ namespace Nest
 		{
 			if (forceConfiguration == null) return;
 			var configuration = request.RequestParametersInternal.RequestConfiguration ?? new RequestConfiguration();
-			forceConfiguration(request.RequestParametersInternal.RequestConfiguration);
+			forceConfiguration(configuration);
 			request.RequestParametersInternal.RequestConfiguration = configuration;
 		}
 
