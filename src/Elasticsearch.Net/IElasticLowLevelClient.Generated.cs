@@ -2572,6 +2572,14 @@ namespace Elasticsearch.Net
 		///<param name="body">The new lifecycle step to move to</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> IlmMoveToStepAsync<TResponse>(string index, PostData body, IlmMoveToStepRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /{index}/_ilm/remove <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html</para></summary>
+		///<param name="index">The name of the index to remove policy on</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse IlmRemovePolicy<TResponse>(string index, IlmRemovePolicyRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /{index}/_ilm/remove <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html</para></summary>
+		///<param name="index">The name of the index to remove policy on</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> IlmRemovePolicyAsync<TResponse>(string index, IlmRemovePolicyRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/_ilm/retry <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html</para></summary>
 		///<param name="index">The name of the indices (comma-separated) whose failed lifecycle step is to be retry</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>

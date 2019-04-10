@@ -3286,6 +3286,28 @@ namespace Nest
 			throw InvalidDispatch("IlmMoveToStep", p, new [] { POST }, "/_ilm/move/{index}");
 		}
 		
+		internal TResponse IlmRemovePolicyDispatch<TResponse>(IRequest<IlmRemovePolicyRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.IlmRemovePolicy<TResponse>(p.RouteValues.Index,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("IlmRemovePolicy", p, new [] { POST }, "/{index}/_ilm/remove");
+		}
+		
+		internal Task<TResponse> IlmRemovePolicyDispatchAsync<TResponse>(IRequest<IlmRemovePolicyRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.IlmRemovePolicyAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("IlmRemovePolicy", p, new [] { POST }, "/{index}/_ilm/remove");
+		}
+		
 		internal TResponse IlmRetryDispatch<TResponse>(IRequest<IlmRetryRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
