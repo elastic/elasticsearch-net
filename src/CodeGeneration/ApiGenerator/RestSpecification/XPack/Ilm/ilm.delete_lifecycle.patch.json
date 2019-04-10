@@ -1,6 +1,11 @@
 {
   "ilm.delete_lifecycle": {
     "url": {
+      "parts": {
+        "policy": {
+          "required": true
+        }
+      },
       "params": {
         "master_timeout": {
           "type" : "time",

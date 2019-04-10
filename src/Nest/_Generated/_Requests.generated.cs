@@ -3844,8 +3844,8 @@ namespace Nest
 	{
 		protected IIlmDeleteLifecycleRequest Self => this;
 		///<summary>/_ilm/policy/{policy}</summary>
-		///<param name="policy">Optional, accepts null</param>
-		public IlmDeleteLifecycleRequest(Policy policy) : base(r=>r.Optional("policy", policy)){}
+		///<param name="policy">this parameter is required</param>
+		public IlmDeleteLifecycleRequest(Policy policy) : base(r=>r.Required("policy", policy)){}
 		// values part of the url path
 		Policy IIlmDeleteLifecycleRequest.Policy => Self.RouteValues.Get<Policy>("policy");
 
@@ -3922,8 +3922,8 @@ namespace Nest
 	{
 		protected IIlmMoveToStepRequest Self => this;
 		///<summary>/_ilm/move/{index}</summary>
-		///<param name="index">Optional, accepts null</param>
-		public IlmMoveToStepRequest(IndexName index) : base(r=>r.Optional("index", index)){}
+		///<param name="index">this parameter is required</param>
+		public IlmMoveToStepRequest(IndexName index) : base(r=>r.Required("index", index)){}
 		// values part of the url path
 		IndexName IIlmMoveToStepRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
@@ -3949,8 +3949,8 @@ namespace Nest
 	{
 		protected IIlmRemovePolicyRequest Self => this;
 		///<summary>/{index}/_ilm/remove</summary>
-		///<param name="index">Optional, accepts null</param>
-		public IlmRemovePolicyRequest(IndexName index) : base(r=>r.Optional("index", index)){}
+		///<param name="index">this parameter is required</param>
+		public IlmRemovePolicyRequest(IndexName index) : base(r=>r.Required("index", index)){}
 		// values part of the url path
 		IndexName IIlmRemovePolicyRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
@@ -3976,8 +3976,8 @@ namespace Nest
 	{
 		protected IIlmRetryRequest Self => this;
 		///<summary>/{index}/_ilm/retry</summary>
-		///<param name="index">Optional, accepts null</param>
-		public IlmRetryRequest(IndexName index) : base(r=>r.Optional("index", index)){}
+		///<param name="index">this parameter is required</param>
+		public IlmRetryRequest(IndexName index) : base(r=>r.Required("index", index)){}
 		// values part of the url path
 		IndexName IIlmRetryRequest.Index => Self.RouteValues.Get<IndexName>("index");
 

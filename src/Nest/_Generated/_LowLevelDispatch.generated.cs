@@ -3205,7 +3205,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case DELETE:
-					if (AllSet(p.RouteValues.Policy)) return _lowLevel.IlmDeleteLifecycle<TResponse>(p.RouteValues.Policy,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Policy)) return _lowLevel.IlmDeleteLifecycle<TResponse>(p.RouteValues.Policy,p.RequestParameters);
 					break;
 			}
 			throw InvalidDispatch("IlmDeleteLifecycle", p, new [] { DELETE }, "/_ilm/policy/{policy}");
@@ -3216,7 +3216,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case DELETE:
-					if (AllSet(p.RouteValues.Policy)) return _lowLevel.IlmDeleteLifecycleAsync<TResponse>(p.RouteValues.Policy,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.Policy)) return _lowLevel.IlmDeleteLifecycleAsync<TResponse>(p.RouteValues.Policy,p.RequestParameters,ct);
 					break;
 			}
 			throw InvalidDispatch("IlmDeleteLifecycle", p, new [] { DELETE }, "/_ilm/policy/{policy}");
@@ -3269,7 +3269,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.IlmMoveToStep<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.IlmMoveToStep<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
 					break;
 			}
 			throw InvalidDispatch("IlmMoveToStep", p, new [] { POST }, "/_ilm/move/{index}");
@@ -3280,7 +3280,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.IlmMoveToStepAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.IlmMoveToStepAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
 					break;
 			}
 			throw InvalidDispatch("IlmMoveToStep", p, new [] { POST }, "/_ilm/move/{index}");
@@ -3291,7 +3291,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.IlmRemovePolicy<TResponse>(p.RouteValues.Index,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.IlmRemovePolicy<TResponse>(p.RouteValues.Index,p.RequestParameters);
 					break;
 			}
 			throw InvalidDispatch("IlmRemovePolicy", p, new [] { POST }, "/{index}/_ilm/remove");
@@ -3302,7 +3302,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.IlmRemovePolicyAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.IlmRemovePolicyAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
 					break;
 			}
 			throw InvalidDispatch("IlmRemovePolicy", p, new [] { POST }, "/{index}/_ilm/remove");
@@ -3313,7 +3313,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.IlmRetry<TResponse>(p.RouteValues.Index,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.IlmRetry<TResponse>(p.RouteValues.Index,p.RequestParameters);
 					break;
 			}
 			throw InvalidDispatch("IlmRetry", p, new [] { POST }, "/{index}/_ilm/retry");
@@ -3324,7 +3324,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.IlmRetryAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.IlmRetryAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
 					break;
 			}
 			throw InvalidDispatch("IlmRetry", p, new [] { POST }, "/{index}/_ilm/retry");

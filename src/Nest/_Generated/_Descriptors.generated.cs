@@ -4093,12 +4093,10 @@ namespace Nest
 	public partial class IlmDeleteLifecycleDescriptor  : RequestDescriptorBase<IlmDeleteLifecycleDescriptor,IlmDeleteLifecycleRequestParameters, IIlmDeleteLifecycleRequest>, IIlmDeleteLifecycleRequest
 	{ 
 		/// <summary>/_ilm/policy/{policy}</summary>
-		public IlmDeleteLifecycleDescriptor() : base(){}
+		///<param name="policy"> this parameter is required</param>
+		public IlmDeleteLifecycleDescriptor(Policy policy) : base(r=>r.Required("policy", policy)){}
 		// values part of the url path
 		Policy IIlmDeleteLifecycleRequest.Policy => Self.RouteValues.Get<Policy>("policy");
-
-		///<summary>The name of the index lifecycle policy</summary>
-		public IlmDeleteLifecycleDescriptor Policy(Policy policy) => Assign(policy, (a,v)=>a.RouteValues.Optional("policy", v));
 
 		// Request parameters
 
@@ -4141,15 +4139,16 @@ namespace Nest
 	public partial class IlmMoveToStepDescriptor  : RequestDescriptorBase<IlmMoveToStepDescriptor,IlmMoveToStepRequestParameters, IIlmMoveToStepRequest>, IIlmMoveToStepRequest
 	{ 
 		/// <summary>/_ilm/move/{index}</summary>
-		public IlmMoveToStepDescriptor() : base(){}
+		///<param name="index"> this parameter is required</param>
+		public IlmMoveToStepDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
 		// values part of the url path
 		IndexName IIlmMoveToStepRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
 		///<summary>The name of the index whose lifecycle step is to change</summary>
-		public IlmMoveToStepDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
+		public IlmMoveToStepDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public IlmMoveToStepDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (IndexName)v));
+		public IlmMoveToStepDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
 
 		// Request parameters
 
@@ -4164,15 +4163,16 @@ namespace Nest
 	public partial class IlmRemovePolicyDescriptor  : RequestDescriptorBase<IlmRemovePolicyDescriptor,IlmRemovePolicyRequestParameters, IIlmRemovePolicyRequest>, IIlmRemovePolicyRequest
 	{ 
 		/// <summary>/{index}/_ilm/remove</summary>
-		public IlmRemovePolicyDescriptor() : base(){}
+		///<param name="index"> this parameter is required</param>
+		public IlmRemovePolicyDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
 		// values part of the url path
 		IndexName IIlmRemovePolicyRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
 		///<summary>The name of the index to remove policy on</summary>
-		public IlmRemovePolicyDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
+		public IlmRemovePolicyDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public IlmRemovePolicyDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (IndexName)v));
+		public IlmRemovePolicyDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
 
 		// Request parameters
 
@@ -4185,15 +4185,16 @@ namespace Nest
 	public partial class IlmRetryDescriptor  : RequestDescriptorBase<IlmRetryDescriptor,IlmRetryRequestParameters, IIlmRetryRequest>, IIlmRetryRequest
 	{ 
 		/// <summary>/{index}/_ilm/retry</summary>
-		public IlmRetryDescriptor() : base(){}
+		///<param name="index"> this parameter is required</param>
+		public IlmRetryDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
 		// values part of the url path
 		IndexName IIlmRetryRequest.Index => Self.RouteValues.Get<IndexName>("index");
 
 		///<summary>The name of the indices (comma-separated) whose failed lifecycle step is to be retry</summary>
-		public IlmRetryDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
+		public IlmRetryDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Required("index", v));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public IlmRetryDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (IndexName)v));
+		public IlmRetryDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Required("index", (IndexName)v));
 
 		// Request parameters
 

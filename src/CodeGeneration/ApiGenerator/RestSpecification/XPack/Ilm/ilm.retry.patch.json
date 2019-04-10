@@ -1,6 +1,11 @@
 {
   "ilm.retry": {
     "url": {
+      "parts": {
+        "index": {
+          "required": true
+        }
+      },
       "params": {
         "master_timeout": {
           "type" : "time",
