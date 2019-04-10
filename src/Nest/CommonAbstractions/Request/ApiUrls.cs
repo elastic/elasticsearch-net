@@ -1,15 +1,26 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using LookupTuple = System.ValueTuple<System.Func<Nest.RouteValues, bool>, System.Func<Nest.RouteValues, Nest.IConnectionSettingsValues, string>>;
 
 namespace Nest
 {
+	/// <summary>
+	/// Each Request type holds a static instance of this class which creates cached builders for each
+	/// of the defined urls in the json spec.
+	/// </summary>
 	internal class ApiUrls
 	{
+		/// <summary>
+		/// If the spec only defines a single non parameterizable route this allows us to shortcircuit and avoid hitting
+		/// the cached string builders.
+		/// </summary>
 		private readonly string _fixedUrl;
-		public Dictionary<int, List<LookupTuple>> Routes { get; }
+		
+		/// <summary>
+		/// Creates a lookup for number of parts <=> list of routes with that number of parts.
+		/// <see cref="UrlLookup.Predicate"/> allows us to quickly find the right url to use in the list.
+		/// </summary>
+		public Dictionary<int, List<UrlLookup>> Routes { get; }
 
 		private readonly string _errorMessageSuffix;
 
@@ -23,11 +34,11 @@ namespace Nest
 				foreach (var route in routes)
 				{
 					var bracketsCount = route.Count(c => c.Equals('{'));
-					if (Routes == null) Routes = new Dictionary<int, List<LookupTuple>>();
+					if (Routes == null) Routes = new Dictionary<int, List<UrlLookup>>();
 					if (Routes.ContainsKey(bracketsCount))
-						Routes[bracketsCount].Add(FromRoute(route));
+						Routes[bracketsCount].Add(UrlLookup.FromRoute(route));
 					else
-						Routes.Add(bracketsCount, new List<LookupTuple>() { FromRoute(route) });
+						Routes.Add(bracketsCount, new List<UrlLookup> { UrlLookup.FromRoute(route) });
 				}
 			}
 
@@ -37,59 +48,24 @@ namespace Nest
 			if (Routes == null) _fixedUrl = routes[0];
 		}
 
-		private static LookupTuple FromRoute(string route)
-		{
-			var tokenized = route.Replace("{", "{@")
-				.Split(new[] { '{', '}' }, StringSplitOptions.RemoveEmptyEntries);
-
-			var parts = tokenized
-				.Where(p => p.StartsWith("@"))
-				.Select(p => p.Remove(0, 1))
-				.ToArray();
-
-			Func<RouteValues, bool> lookup;
-			Func<RouteValues, IConnectionSettingsValues, string> toString;
-			lookup = r => parts.All(p => r.ContainsKey(p));
-			toString = (r ,s) =>
-			{
-				var sb = new StringBuilder();
-				var i = 0;
-				foreach (var t in tokenized)
-				{
-					if (t[0] == '@')
-					{
-						if (r.TryGetValue(parts[i], out var v))
-						{
-							var sv = v.GetString(s);
-							if (string.IsNullOrEmpty(sv))
-								throw new Exception($"{parts[i]} of type ({v.GetType().Name}) did not resolve to a value  on url {route}");
-							sb.Append(Uri.EscapeDataString(sv));
-						}
-						else throw new Exception($"No value provided for {parts[i]} on url {route}");
-
-						i++;
-					}
-					else sb.Append(t);
-				}
-				return sb.ToString();
-			};
-			return (lookup, toString);
-		}
 
 		public string Resolve(RouteValues routeValues, IConnectionSettingsValues settings)
 		{
 			if (_fixedUrl != null) return _fixedUrl;
-			if (!Routes.TryGetValue(routeValues.Count, out var routes))
-				throw new Exception($"No route taking {routeValues.Count} parameters" + _errorMessageSuffix);
+
+			var resolved = routeValues.Resolve(settings);
+			
+			if (!Routes.TryGetValue(resolved.Count, out var routes))
+				throw new Exception($"No route taking {resolved.Count} parameters" + _errorMessageSuffix);
 
 			if (routes.Count == 1)
-				return routes[0].Item2(routeValues, settings);
+				return routes[0].ToUrl(resolved, settings);
 
 			//find the first url that has all provided parameters
 			foreach (var u in routes)
 			{
-				if (u.Item1(routeValues))
-					return u.Item2(routeValues, settings);
+				if (u.Predicate(resolved))
+					return u.ToUrl(resolved, settings);
 			}
 			throw new Exception($"No route taking {routeValues.Count} parameters" + _errorMessageSuffix);
 		}

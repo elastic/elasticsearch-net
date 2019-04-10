@@ -9,6 +9,9 @@ namespace Elasticsearch.Net
 {
 	public interface IConnectionConfigurationValues : IDisposable
 	{
+		/// <summary> A unique id for this connection settings instance </summary>
+		string Id { get; }
+		
 		/// <summary>
 		/// Basic access authorization credentials to specify with all requests.
 		/// </summary>

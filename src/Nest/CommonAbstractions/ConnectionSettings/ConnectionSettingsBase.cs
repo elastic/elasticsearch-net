@@ -73,10 +73,6 @@ namespace Nest
 		private Func<string, string> _defaultFieldNameInferrer;
 		private string _defaultIndex;
 
-		private string _defaultTypeName;
-
-		private Func<Type, string> _defaultTypeNameInferrer;
-
 		private HashSet<Type> _disableIdInference = new HashSet<Type>();
 		private bool _defaultDisableAllInference;
 
@@ -96,12 +92,10 @@ namespace Nest
 			var serializerAsMappingProvider = _sourceSerializer as IPropertyMappingProvider;
 			_propertyMappingProvider = propertyMappingProvider ?? serializerAsMappingProvider ?? new PropertyMappingProvider();
 
-			_defaultTypeNameInferrer = t => !_defaultTypeName.IsNullOrEmpty() ? _defaultTypeName : t.Name.ToLowerInvariant();
 			_defaultFieldNameInferrer = p => p.ToCamelCase();
 			_defaultIndices = new FluentDictionary<Type, string>();
 			_defaultTypeNames = new FluentDictionary<Type, string>();
 			_defaultRelationNames = new FluentDictionary<Type, string>();
-
 			_inferrer = new Inferrer(this);
 		}
 
@@ -109,9 +103,6 @@ namespace Nest
 		string IConnectionSettingsValues.DefaultIndex => _defaultIndex;
 		FluentDictionary<Type, string> IConnectionSettingsValues.DefaultIndices => _defaultIndices;
 		FluentDictionary<Type, string> IConnectionSettingsValues.DefaultRelationNames => _defaultRelationNames;
-		string IConnectionSettingsValues.DefaultTypeName => _defaultTypeName;
-		Func<Type, string> IConnectionSettingsValues.DefaultTypeNameInferrer => _defaultTypeNameInferrer;
-		FluentDictionary<Type, string> IConnectionSettingsValues.DefaultTypeNames => _defaultTypeNames;
 		FluentDictionary<Type, string> IConnectionSettingsValues.IdProperties => _idProperties;
 		Inferrer IConnectionSettingsValues.Inferrer => _inferrer;
 		IPropertyMappingProvider IConnectionSettingsValues.PropertyMappingProvider => _propertyMappingProvider;
@@ -122,40 +113,14 @@ namespace Nest
 		bool IConnectionSettingsValues.DefaultDisableIdInference => _defaultDisableAllInference;
 
 		/// <inheritdoc cref="IConnectionSettingsValues.DefaultIndex"/>
-		public TConnectionSettings DefaultIndex(string defaultIndex)
-		{
-			_defaultIndex = defaultIndex;
-			return (TConnectionSettings)this;
-		}
-
-		/// <inheritdoc cref="IConnectionSettingsValues.DefaultTypeName"/>
-		public TConnectionSettings DefaultTypeName(string defaultTypeName)
-		{
-			_defaultTypeName = defaultTypeName;
-			return (TConnectionSettings)this;
-		}
+		public TConnectionSettings DefaultIndex(string defaultIndex) => Assign(defaultIndex, (a, v) => a._defaultIndex = v);
 
 		/// <inheritdoc cref="IConnectionSettingsValues.DefaultFieldNameInferrer"/>
-		public TConnectionSettings DefaultFieldNameInferrer(Func<string, string> fieldNameInferrer)
-		{
-			_defaultFieldNameInferrer = fieldNameInferrer;
-			return (TConnectionSettings)this;
-		}
+		public TConnectionSettings DefaultFieldNameInferrer(Func<string, string> fieldNameInferrer) => 
+			Assign(fieldNameInferrer, (a, v) => a._defaultFieldNameInferrer = v);
 
 		/// <inheritdoc cref="IConnectionSettingsValues.DisableIdInference"/>
-		public TConnectionSettings DefaultDisableIdInference(bool disable = true)
-		{
-			_defaultDisableAllInference = disable;
-			return (TConnectionSettings)this;
-		}
-
-		/// <inheritdoc cref="IConnectionSettingsValues.DefaultTypeNameInferrer"/>
-		public TConnectionSettings DefaultTypeNameInferrer(Func<Type, string> typeNameInferrer)
-		{
-			typeNameInferrer.ThrowIfNull(nameof(typeNameInferrer));
-			_defaultTypeNameInferrer = typeNameInferrer;
-			return (TConnectionSettings)this;
-		}
+		public TConnectionSettings DefaultDisableIdInference(bool disable = true) => Assign(disable, (a, v) => a._defaultDisableAllInference = v);
 
 		/// <inheritdoc cref="IConnectionSettingsValues.IdProperties"/>
 		private void MapIdPropertyFor<TDocument>(Expression<Func<TDocument, object>> objectPath)
@@ -247,7 +212,7 @@ namespace Nest
 		[Obsolete("Please use " + nameof(DefaultMappingFor))]
 		public TConnectionSettings InferMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>> selector)
 			where TDocument : class =>
-			DefaultMappingFor<TDocument>(selector);
+			DefaultMappingFor(selector);
 
 		/// <inheritdoc cref="InferMappingFor{TDocument}"/>
 		public TConnectionSettings DefaultMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>> selector)
@@ -266,19 +231,19 @@ namespace Nest
 			if (!string.IsNullOrWhiteSpace(inferMapping.IdPropertyName))
 				_idProperties[inferMapping.ClrType] = inferMapping.IdPropertyName;
 
-			if (inferMapping.IdProperty != null)
-				MapIdPropertyFor<TDocument>(inferMapping.IdProperty);
+			if (inferMapping.IdProperty != null) 
+				MapIdPropertyFor(inferMapping.IdProperty);
 
 			if (inferMapping.RoutingProperty != null)
-				MapRoutePropertyFor<TDocument>(inferMapping.RoutingProperty);
+				MapRoutePropertyFor(inferMapping.RoutingProperty);
 
 			if (inferMapping.Properties != null)
-				ApplyPropertyMappings<TDocument>(inferMapping.Properties);
+				ApplyPropertyMappings(inferMapping.Properties);
 
 			if (inferMapping.DisableIdInference) _disableIdInference.Add(inferMapping.ClrType);
 			else _disableIdInference.Remove(inferMapping.ClrType);
 
-			return (TConnectionSettings)this;
+			return UpdateId();
 		}
 
 		/// <summary>
@@ -300,13 +265,13 @@ namespace Nest
 			if (!string.IsNullOrWhiteSpace(inferMapping.IdPropertyName))
 				_idProperties[inferMapping.ClrType] = inferMapping.IdPropertyName;
 
-			return (TConnectionSettings)this;
+			return UpdateId();
 		}
 
 		/// <inheritdoc cref="DefaultMappingFor(Type, Func{ClrTypeMappingDescriptor,IClrTypeMapping})"/>
 		public TConnectionSettings DefaultMappingFor(IEnumerable<IClrTypeMapping> typeMappings)
 		{
-			if (typeMappings == null) return (TConnectionSettings)this;
+			if (typeMappings == null) return UpdateId();
 
 			foreach (var inferMapping in typeMappings)
 			{
@@ -320,7 +285,7 @@ namespace Nest
 					_defaultRelationNames.Add(inferMapping.ClrType, inferMapping.RelationName);
 			}
 
-			return (TConnectionSettings)this;
+			return UpdateId();
 		}
 	}
 }
