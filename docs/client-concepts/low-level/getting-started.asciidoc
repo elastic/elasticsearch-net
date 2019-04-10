@@ -215,10 +215,10 @@ the bytes of the response from Elasticsearch.
 [NOTE]
 --
 Elasticsearch.Net does not provide typed objects to represent responses; if you need this, you should consider
-using <<nest, NEST>>, that does map all requests and responses to types. You can work with
-strong types with Elasticsearch.Net but it will be up to you as the developer to configure Elasticsearch.Net so that
-it understands how to deserialize your types, most likely by providing your own <<custom-serialization, IElasticsearchSerializer>> implementation
-to `ConnectionConfiguration`.
+using <<nest, NEST>>, which does map all requests and responses to types. You can work with
+request and response types with Elasticsearch.Net, but it will be up to you as the developer to configure Elasticsearch.Net so that
+it understands how to deserialize your types, most likely by providing your own <<custom-serialization, IElasticsearchSerializer>>
+implementation to `ConnectionConfiguration`.
 
 --
 
@@ -268,10 +268,11 @@ var settings = new ConnectionConfiguration(new Uri("http://example.com:9200"))
     {
         if (apiCallDetails.HttpStatusCode == 418)
         {
-            throw new TimeForACoffeeException();
+            throw new TimeForACoffeeException(); <1>
         }
     });
 
 var lowlevelClient = new ElasticLowLevelClient(settings);
 ----
+<1> throw exception when the response status code is 418
 

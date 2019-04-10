@@ -176,31 +176,25 @@ Reasons for such exceptions could be search parser errors, index missing excepti
 
 The following is a list of available connection configuration options on `ConnectionSettings`:
 
-`DefaultFieldNameInferrer`::
+`DefaultDisableIdInference`::
 
-Specify how field names are inferred from POCO property names.
-+
-By default, NEST camel cases property names e.g. EmailAddress POCO property => "emailAddress" Elasticsearch document field name
+`DefaultFieldNameInferrer`::
 
 `DefaultIndex`::
 
-The default index to use when no index is specified.
+`DefaultMappingFor`::
 
 `DefaultMappingFor`::
 
-Specify how the mapping is inferred for a given POCO type. Can be used to infer the index, type, and relation names.
+Specify how the mapping is inferred for a given CLR type. The mapping can infer the index, type and relation name for a given CLR type.
 
 `DefaultTypeName`::
 
-Sets a default type name to use within Elasticsearch for all CLR types. If `DefaultTypeNameInferrer` is also set, a configured             default type name will only be used when `DefaultTypeNameInferrer` returns null or empty. If unset, the default type             name for types will be the lowercased CLR type name.
-
 `DefaultTypeNameInferrer`::
-
-Specify how type names are inferred from POCO types. By default, type names are inferred by calling `ToLowerInvariant` on the type's name.
 
 `InferMappingFor`::
 
-Specify how the mapping is inferred for a given POCO type. Can be used to infer the index, type and relation names. The generic version also allows you to set a default id property and control serialization behavior for properties for the POCO. The type of the document.
+Specify how the mapping is inferred for a given CLR type. The mapping can infer the index, type, id and relation name for a given CLR type, as well as control serialization behaviour for CLR properties.
 
 :xml-docs: Nest:ConnectionSettingsBase`1
 

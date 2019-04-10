@@ -187,8 +187,7 @@ namespace Tests.ClientConcepts.LowLevel
 				{
 					match = new
 					{
-						field = "firstName",
-						query = "Martijn"
+						firstName = "Martijn"
 					}
 				}
 			}));
@@ -212,8 +211,7 @@ namespace Tests.ClientConcepts.LowLevel
 				""size"": 10,
 				""query"": {
 					""match"": {
-						""field"": ""firstName"",
-						""query"": ""Martijn""
+						""firstName"": ""Martijn""
 					}
 				}
 			}");
@@ -229,10 +227,10 @@ namespace Tests.ClientConcepts.LowLevel
 		* [NOTE]
 		* --
 		* Elasticsearch.Net does not provide typed objects to represent responses; if you need this, you should consider
-		* using <<nest, NEST, the high level client>>, that does map all requests and responses to types. You can work with
-		* strong types with Elasticsearch.Net but it will be up to you as the developer to configure Elasticsearch.Net so that
-		* it understands how to deserialize your types, most likely by providing your own <<custom-serialization, IElasticsearchSerializer>> implementation
-		* to `ConnectionConfiguration`.
+		* using <<nest, NEST, the high level client>>, which does map all requests and responses to types. You can work with
+		* request and response types with Elasticsearch.Net, but it will be up to you as the developer to configure Elasticsearch.Net so that
+		* it understands how to deserialize your types, most likely by providing your own <<custom-serialization, IElasticsearchSerializer>>
+		* implementation to `ConnectionConfiguration`.
 		* --
 		*
 		* [float]
@@ -278,7 +276,7 @@ namespace Tests.ClientConcepts.LowLevel
 				{
 					if (apiCallDetails.HttpStatusCode == 418)
 					{
-						throw new TimeForACoffeeException();
+						throw new TimeForACoffeeException(); // <1> throw exception when the response status code is 418
 					}
 				});
 
