@@ -3264,6 +3264,28 @@ namespace Nest
 			throw InvalidDispatch("IlmGetStatus", p, new [] { GET }, "/_ilm/status");
 		}
 		
+		internal TResponse IlmMoveToStepDispatch<TResponse>(IRequest<IlmMoveToStepRequestParameters> p,SerializableData<IIlmMoveToStepRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.IlmMoveToStep<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("IlmMoveToStep", p, new [] { POST }, "/_ilm/move/{index}");
+		}
+		
+		internal Task<TResponse> IlmMoveToStepDispatchAsync<TResponse>(IRequest<IlmMoveToStepRequestParameters> p,SerializableData<IIlmMoveToStepRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.IlmMoveToStepAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("IlmMoveToStep", p, new [] { POST }, "/_ilm/move/{index}");
+		}
+		
 		internal TResponse IlmRetryDispatch<TResponse>(IRequest<IlmRetryRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)

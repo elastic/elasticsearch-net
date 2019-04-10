@@ -4137,6 +4137,27 @@ namespace Nest
 		///<summary>Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
 		public IlmGetStatusDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
+	///<summary>descriptor for IlmMoveToStep <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html</pre></summary>
+	public partial class IlmMoveToStepDescriptor  : RequestDescriptorBase<IlmMoveToStepDescriptor,IlmMoveToStepRequestParameters, IIlmMoveToStepRequest>, IIlmMoveToStepRequest
+	{ 
+		/// <summary>/_ilm/move/{index}</summary>
+		public IlmMoveToStepDescriptor() : base(){}
+		// values part of the url path
+		IndexName IIlmMoveToStepRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		///<summary>The name of the index whose lifecycle step is to change</summary>
+		public IlmMoveToStepDescriptor Index(IndexName index) => Assign(index, (a,v)=>a.RouteValues.Optional("index", v));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public IlmMoveToStepDescriptor Index<TOther>() where TOther : class => Assign(typeof(TOther), (a,v)=>a.RouteValues.Optional("index", (IndexName)v));
+
+		// Request parameters
+
+		///<summary>Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public IlmMoveToStepDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		///<summary>Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public IlmMoveToStepDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+	}
 	///<summary>descriptor for IlmRetry <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html</pre></summary>
 	public partial class IlmRetryDescriptor  : RequestDescriptorBase<IlmRetryDescriptor,IlmRetryRequestParameters, IIlmRetryRequest>, IIlmRetryRequest
 	{ 
