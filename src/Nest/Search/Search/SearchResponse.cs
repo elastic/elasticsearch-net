@@ -116,13 +116,10 @@ namespace Nest
 		private IReadOnlyCollection<FieldValues> _fields;
 
 		private IReadOnlyCollection<IHit<T>> _hits;
+
 		/// <inheritdoc />
 		[DataMember(Name ="aggregations")]
 		public AggregateDictionary Aggregations { get; internal set; } = AggregateDictionary.Default;
-
-		/// <inheritdoc />
-		[IgnoreDataMember]
-		public AggregateDictionary Aggs => Aggregations;
 
 		/// <inheritdoc />
 		[DataMember(Name = "_clusters")]
