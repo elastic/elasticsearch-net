@@ -1,0 +1,15 @@
+{
+  "bulk": {
+    "url": {
+      "path": "/_bulk",
+      "paths": [ "/_bulk", "/{index}/_bulk" ],
+      "deprecated_paths": [
+        {
+          "version": "7.0",
+          "path": "/{index}/{type}/_bulk",
+          "description": "Specifying types in urls has been deprecated"
+        }
+      ]
+    }
+  }
+}
