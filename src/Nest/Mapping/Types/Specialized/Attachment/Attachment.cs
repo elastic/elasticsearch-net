@@ -5,6 +5,13 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	/// <summary>
+	/// An indexed attachment
+	/// </summary>
+	/// <remarks>
+	/// Convenience class for working with attachment fields indexed with
+	/// ingest-attachment plugin.
+	/// </remarks>
 	[JsonFormatter(typeof(AttachmentFormatter))]
 	public class Attachment
 	{

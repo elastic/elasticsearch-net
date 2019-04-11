@@ -5,6 +5,11 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	/// <summary>
+	/// The completion suggester provides auto-complete/search-as-you-type functionality.
+	/// This is a navigational feature to guide users to relevant results as they are typing, improving search precision.
+	/// It is not meant for spell correction or did-you-mean functionality like the term or phrase suggesters.
+	/// </summary>
 	[InterfaceDataContract]
 	[ReadAs(typeof(CompletionSuggester))]
 	public interface ICompletionSuggester : ISuggester
@@ -40,6 +45,7 @@ namespace Nest
 		bool? SkipDuplicates { get; set; }
 	}
 
+	/// <inheritdoc cref="ICompletionSuggester" />
 	public class CompletionSuggester : SuggesterBase, ICompletionSuggester
 	{
 		/// <inheritdoc />
@@ -58,6 +64,7 @@ namespace Nest
 		public bool? SkipDuplicates { get; set; }
 	}
 
+	/// <inheritdoc cref="ICompletionSuggester" />
 	public class CompletionSuggesterDescriptor<T>
 		: SuggestDescriptorBase<CompletionSuggesterDescriptor<T>, ICompletionSuggester, T>, ICompletionSuggester
 		where T : class
@@ -68,33 +75,23 @@ namespace Nest
 		string ICompletionSuggester.Regex { get; set; }
 		bool? ICompletionSuggester.SkipDuplicates { get; set; }
 
-		/// <summary>
-		/// Prefix used to search for suggestions
-		/// </summary>
+		/// <inheritdoc cref="ICompletionSuggester.Prefix" />
 		public CompletionSuggesterDescriptor<T> Prefix(string prefix) => Assign(prefix, (a, v) => a.Prefix = v);
 
-		/// <summary>
-		/// Prefix as a regular expression used to search for suggestions
-		/// </summary>
+		/// <inheritdoc cref="ICompletionSuggester.Regex" />
 		public CompletionSuggesterDescriptor<T> Regex(string regex) => Assign(regex, (a, v) => a.Regex = v);
 
-		/// <summary>
-		/// Support fuzziness for the suggestions
-		/// </summary>
+		/// <inheritdoc cref="ICompletionSuggester.Fuzzy" />
 		public CompletionSuggesterDescriptor<T> Fuzzy(Func<FuzzySuggestDescriptor<T>, IFuzzySuggester> selector = null) =>
 			Assign(selector.InvokeOrDefault(new FuzzySuggestDescriptor<T>()), (a, v) => a.Fuzzy = v);
 
-		/// <summary>
-		/// Context mappings used to filter and/or boost suggestions
-		/// </summary>
+		/// <inheritdoc cref="ICompletionSuggester.Contexts" />
 		public CompletionSuggesterDescriptor<T> Contexts(
 			Func<SuggestContextQueriesDescriptor<T>, IPromise<IDictionary<string, IList<ISuggestContextQuery>>>> contexts
 		) =>
 			Assign(contexts, (a, v) => a.Contexts = v?.Invoke(new SuggestContextQueriesDescriptor<T>()).Value);
 
-		/// <summary>
-		/// Whether duplicate suggestions should be filtered out. Defaults to <c>false</c>
-		/// </summary>
+		/// <inheritdoc cref="ICompletionSuggester.SkipDuplicates" />
 		public CompletionSuggesterDescriptor<T> SkipDuplicates(bool? skipDuplicates = true) => Assign(skipDuplicates, (a, v) => a.SkipDuplicates = v);
 	}
 }

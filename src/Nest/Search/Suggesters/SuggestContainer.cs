@@ -34,13 +34,7 @@ namespace Nest
 			return Assign(name, bucket);
 		}
 
-		/// <summary>
-		/// The term suggester suggests terms based on edit distance. The provided suggest text is analyzed before terms are
-		/// suggested.
-		/// The suggested terms are provided per analyzed suggest text token. The term suggester doesn’t take the query into
-		/// account that is part of
-		/// request.
-		/// </summary>
+		/// <inheritdoc cref="ITermSuggester"/>
 		public SuggestContainerDescriptor<T> Term(string name, Func<TermSuggesterDescriptor<T>, ITermSuggester> suggest) =>
 			AssignToBucket(name, suggest?.Invoke(new TermSuggesterDescriptor<T>()), (b, s) =>
 			{
@@ -48,10 +42,7 @@ namespace Nest
 				b.Text = s.Text;
 			});
 
-		/// <summary>
-		/// The phrase suggester adds additional logic on top of the term suggester to select entire corrected phrases
-		/// instead of individual tokens weighted based on ngram-langugage models.
-		/// </summary>
+		/// <inheritdoc cref="IPhraseSuggester"/>
 		public SuggestContainerDescriptor<T> Phrase(string name, Func<PhraseSuggesterDescriptor<T>, IPhraseSuggester> suggest) =>
 			AssignToBucket(name, suggest?.Invoke(new PhraseSuggesterDescriptor<T>()), (b, s) =>
 			{
