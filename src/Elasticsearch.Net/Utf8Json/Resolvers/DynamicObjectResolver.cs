@@ -715,7 +715,7 @@ namespace Elasticsearch.Net
 			{
 				var ignoreSet = new HashSet<string>(new[]
 				{
-					"HelpLink", "TargetSite", "HResult", "Data", "ClassName", "InnerException"
+					"TargetSite", "ClassName", "InnerException"
 				}.Select(x => nameMutator(x)));
 
 				// special case for exception, modify
