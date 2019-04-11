@@ -139,7 +139,7 @@ namespace ApiGenerator
 		private static void PatchOfficialSpec(JObject original, string jsonFile)
 		{
 			var directory = Path.GetDirectoryName(jsonFile);
-			var patchFile = Path.Combine(directory, Path.GetFileNameWithoutExtension(jsonFile)) + ".patch.json";
+			var patchFile = Path.Combine(directory,"..", "_Patches", Path.GetFileNameWithoutExtension(jsonFile)) + ".patch.json";
 			if (!File.Exists(patchFile)) return;
 
 			var patchedJson = JObject.Parse(File.ReadAllText(patchFile));
