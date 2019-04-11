@@ -38,8 +38,8 @@ namespace Tests.QueryDsl.Geo.Distance
 				validation_method = "ignore_malformed",
 				location = new
 				{
-					lat = 34,
-					lon = -34
+					lat = 34.0,
+					lon = -34.0
 				}
 			}
 		};
