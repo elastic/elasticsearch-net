@@ -873,9 +873,9 @@ namespace Elasticsearch.Net
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public string[] SourceExclude { get => Q<string[]>("_source_excludes"); set => Q("_source_excludes", value); }
+		public string[] SourceExclude { get => Q<string[]>("_source_exclude"); set => Q("_source_exclude", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public string[] SourceInclude { get => Q<string[]>("_source_includes"); set => Q("_source_includes", value); }
+		public string[] SourceInclude { get => Q<string[]>("_source_include"); set => Q("_source_include", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -1787,10 +1787,10 @@ namespace Elasticsearch.Net
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+		///<summary>Control how long to keep the search context alive</summary>
+		public TimeSpan Scroll { get => Q<TimeSpan>("scroll"); set => Q("scroll", value); }
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
-		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public TimeSpan Scroll { get => Q<TimeSpan>("scroll"); set => Q("scroll", value); }
 	}
 	///<summary>Request options for ReindexRethrottle<pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>
 	public class ReindexRethrottleRequestParameters : RequestParameters<ReindexRethrottleRequestParameters> 

@@ -4690,9 +4690,10 @@ namespace Nest
 			{
 				case GET:
 					if (AllSet(p.RouteValues.Application, p.RouteValues.Name)) return _lowLevel.SecurityGetPrivileges<TResponse>(p.RouteValues.Application,p.RouteValues.Name,p.RequestParameters);
-					break;
+					if (AllSet(p.RouteValues.Application)) return _lowLevel.SecurityGetPrivileges<TResponse>(p.RouteValues.Application,p.RequestParameters);
+						return _lowLevel.SecurityGetPrivileges<TResponse>(p.RequestParameters);
 			}
-			throw InvalidDispatch("SecurityGetPrivileges", p, new [] { GET }, "/_security/privilege/{application}/{name}");
+			throw InvalidDispatch("SecurityGetPrivileges", p, new [] { GET }, "/_security/privilege", "/_security/privilege/{application}", "/_security/privilege/{application}/{name}");
 		}
 		
 		internal Task<TResponse> SecurityGetPrivilegesDispatchAsync<TResponse>(IRequest<GetPrivilegesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -4701,9 +4702,10 @@ namespace Nest
 			{
 				case GET:
 					if (AllSet(p.RouteValues.Application, p.RouteValues.Name)) return _lowLevel.SecurityGetPrivilegesAsync<TResponse>(p.RouteValues.Application,p.RouteValues.Name,p.RequestParameters,ct);
-					break;
+					if (AllSet(p.RouteValues.Application)) return _lowLevel.SecurityGetPrivilegesAsync<TResponse>(p.RouteValues.Application,p.RequestParameters,ct);
+						return _lowLevel.SecurityGetPrivilegesAsync<TResponse>(p.RequestParameters,ct);
 			}
-			throw InvalidDispatch("SecurityGetPrivileges", p, new [] { GET }, "/_security/privilege/{application}/{name}");
+			throw InvalidDispatch("SecurityGetPrivileges", p, new [] { GET }, "/_security/privilege", "/_security/privilege/{application}", "/_security/privilege/{application}/{name}");
 		}
 		
 		internal TResponse SecurityGetRoleDispatch<TResponse>(IRequest<GetRoleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
