@@ -6,17 +6,14 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	/// <summary>
-	/// An indexed attachment
+	/// An attachment indexed with an ingest pipeline using the ingest-attachment plugin.
+	/// Convenience class for working with attachment fields.
 	/// </summary>
-	/// <remarks>
-	/// Convenience class for working with attachment fields indexed with
-	/// ingest-attachment plugin.
-	/// </remarks>
 	[JsonFormatter(typeof(AttachmentFormatter))]
 	public class Attachment
 	{
 		/// <summary>
-		/// The author.
+		/// The author
 		/// </summary>
 		[DataMember(Name = "author")]
 		public string Author { get; set; }

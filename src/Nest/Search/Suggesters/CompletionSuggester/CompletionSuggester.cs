@@ -24,7 +24,7 @@ namespace Nest
 		/// Support fuzziness for the suggestions
 		/// </summary>
 		[DataMember(Name = "fuzzy")]
-		IFuzzySuggester Fuzzy { get; set; }
+		ISuggestFuzziness Fuzzy { get; set; }
 
 		/// <summary>
 		/// Prefix used to search for suggestions
@@ -52,7 +52,7 @@ namespace Nest
 		public IDictionary<string, IList<ISuggestContextQuery>> Contexts { get; set; }
 
 		/// <inheritdoc />
-		public IFuzzySuggester Fuzzy { get; set; }
+		public ISuggestFuzziness Fuzzy { get; set; }
 
 		/// <inheritdoc />
 		public string Prefix { get; set; }
@@ -70,7 +70,7 @@ namespace Nest
 		where T : class
 	{
 		IDictionary<string, IList<ISuggestContextQuery>> ICompletionSuggester.Contexts { get; set; }
-		IFuzzySuggester ICompletionSuggester.Fuzzy { get; set; }
+		ISuggestFuzziness ICompletionSuggester.Fuzzy { get; set; }
 		string ICompletionSuggester.Prefix { get; set; }
 		string ICompletionSuggester.Regex { get; set; }
 		bool? ICompletionSuggester.SkipDuplicates { get; set; }
@@ -82,8 +82,8 @@ namespace Nest
 		public CompletionSuggesterDescriptor<T> Regex(string regex) => Assign(regex, (a, v) => a.Regex = v);
 
 		/// <inheritdoc cref="ICompletionSuggester.Fuzzy" />
-		public CompletionSuggesterDescriptor<T> Fuzzy(Func<FuzzySuggestDescriptor<T>, IFuzzySuggester> selector = null) =>
-			Assign(selector.InvokeOrDefault(new FuzzySuggestDescriptor<T>()), (a, v) => a.Fuzzy = v);
+		public CompletionSuggesterDescriptor<T> Fuzzy(Func<SuggestFuzzinessDescriptor<T>, ISuggestFuzziness> selector = null) =>
+			Assign(selector.InvokeOrDefault(new SuggestFuzzinessDescriptor<T>()), (a, v) => a.Fuzzy = v);
 
 		/// <inheritdoc cref="ICompletionSuggester.Contexts" />
 		public CompletionSuggesterDescriptor<T> Contexts(

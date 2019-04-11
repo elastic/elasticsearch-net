@@ -4,11 +4,11 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	/// <summary>
-	/// Fuzziness for suggester
+	/// Fuzziness options for a suggester
 	/// </summary>
 	[InterfaceDataContract]
-	[ReadAs(typeof(FuzzySuggester))]
-	public interface IFuzzySuggester
+	[ReadAs(typeof(SuggestFuzziness))]
+	public interface ISuggestFuzziness
 	{
 		/// <summary>
 		/// The fuzziness factor. defaults to AUTO
@@ -43,7 +43,7 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	public class FuzzySuggester : IFuzzySuggester
+	public class SuggestFuzziness : ISuggestFuzziness
 	{
 		/// <inheritdoc />
 		public IFuzziness Fuzziness { get; set; }
@@ -57,25 +57,25 @@ namespace Nest
 		public bool? UnicodeAware { get; set; }
 	}
 
-	/// <inheritdoc cref="IFuzzySuggester" />
-	public class FuzzySuggestDescriptor<T> : DescriptorBase<FuzzySuggestDescriptor<T>, IFuzzySuggester>, IFuzzySuggester
+	/// <inheritdoc cref="ISuggestFuzziness" />
+	public class SuggestFuzzinessDescriptor<T> : DescriptorBase<SuggestFuzzinessDescriptor<T>, ISuggestFuzziness>, ISuggestFuzziness
 		where T : class
 	{
-		IFuzziness IFuzzySuggester.Fuzziness { get; set; }
-		int? IFuzzySuggester.MinLength { get; set; }
-		int? IFuzzySuggester.PrefixLength { get; set; }
-		bool? IFuzzySuggester.Transpositions { get; set; }
-		bool? IFuzzySuggester.UnicodeAware { get; set; }
+		IFuzziness ISuggestFuzziness.Fuzziness { get; set; }
+		int? ISuggestFuzziness.MinLength { get; set; }
+		int? ISuggestFuzziness.PrefixLength { get; set; }
+		bool? ISuggestFuzziness.Transpositions { get; set; }
+		bool? ISuggestFuzziness.UnicodeAware { get; set; }
 
-		/// <inheritdoc cref="IFuzzySuggester.Fuzziness" />
-		public FuzzySuggestDescriptor<T> Fuzziness(Fuzziness fuzziness) => Assign(fuzziness, (a, v) => a.Fuzziness = v);
-		/// <inheritdoc cref="IFuzzySuggester.UnicodeAware" />
-		public FuzzySuggestDescriptor<T> UnicodeAware(bool? aware = true) => Assign(aware, (a, v) => a.UnicodeAware = v);
-		/// <inheritdoc cref="IFuzzySuggester.Transpositions" />
-		public FuzzySuggestDescriptor<T> Transpositions(bool? transpositions = true) => Assign(transpositions, (a, v) => a.Transpositions = v);
-		/// <inheritdoc cref="IFuzzySuggester.MinLength" />
-		public FuzzySuggestDescriptor<T> MinLength(int? length) => Assign(length, (a, v) => a.MinLength = v);
-		/// <inheritdoc cref="IFuzzySuggester.PrefixLength" />
-		public FuzzySuggestDescriptor<T> PrefixLength(int? length) => Assign(length, (a, v) => a.PrefixLength = v);
+		/// <inheritdoc cref="ISuggestFuzziness.Fuzziness" />
+		public SuggestFuzzinessDescriptor<T> Fuzziness(Fuzziness fuzziness) => Assign(fuzziness, (a, v) => a.Fuzziness = v);
+		/// <inheritdoc cref="ISuggestFuzziness.UnicodeAware" />
+		public SuggestFuzzinessDescriptor<T> UnicodeAware(bool? aware = true) => Assign(aware, (a, v) => a.UnicodeAware = v);
+		/// <inheritdoc cref="ISuggestFuzziness.Transpositions" />
+		public SuggestFuzzinessDescriptor<T> Transpositions(bool? transpositions = true) => Assign(transpositions, (a, v) => a.Transpositions = v);
+		/// <inheritdoc cref="ISuggestFuzziness.MinLength" />
+		public SuggestFuzzinessDescriptor<T> MinLength(int? length) => Assign(length, (a, v) => a.MinLength = v);
+		/// <inheritdoc cref="ISuggestFuzziness.PrefixLength" />
+		public SuggestFuzzinessDescriptor<T> PrefixLength(int? length) => Assign(length, (a, v) => a.PrefixLength = v);
 	}
 }
