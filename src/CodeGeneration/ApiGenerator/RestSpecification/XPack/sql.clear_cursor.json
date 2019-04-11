@@ -1,7 +1,6 @@
 {
   "sql.clear_cursor": {
     "documentation": "Clear SQL cursor",
-    "stability" : "beta",
     "methods": [ "POST"],
     "url": {
       "path": "/_sql/close",
