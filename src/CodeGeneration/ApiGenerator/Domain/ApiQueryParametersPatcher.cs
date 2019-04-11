@@ -45,7 +45,8 @@ namespace ApiGenerator.Domain
 
 				if (partialList.Contains(queryStringKey)) kv.Value.RenderPartial = true;
 
-				if (obsoleteLookup.TryGetValue(queryStringKey, out var obsolete)) kv.Value.Obsolete = obsolete;
+				// TODO: Change this back once https://github.com/elastic/elasticsearch/pull/41098 is merged
+				if (obsoleteLookup.TryGetValue(queryStringKey, out var obsolete)) continue;
 
 				//make sure source_enabled takes a boolean only
 				if (preferredName == "source_enabled") kv.Value.Type = "boolean";
