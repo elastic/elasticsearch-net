@@ -51,14 +51,6 @@ namespace Nest
 		public bool? DocAsUpsert { get; set; }
 
 		/// <inheritdoc />
-		[Obsolete("Removed in Elasticsearch 7.x, use source filtering instead")]
-		public Fields Fields
-		{
-			get => Self.RequestParameters.GetQueryStringValue<Fields>("fields");
-			set => Self.RequestParameters.SetQueryString("fields", value);
-		}
-
-		/// <inheritdoc />
 		public IScript Script { get; set; }
 
 		/// <inheritdoc />
@@ -109,20 +101,9 @@ namespace Nest
 		public UpdateDescriptor<TDocument, TPartialDocument> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
 			Assign(scriptSelector, (a, v) => a.Script = v?.Invoke(new ScriptDescriptor()));
 
-		public UpdateDescriptor<TDocument, TPartialDocument> Fields(Fields fields) =>
-			Assign(fields, (a, v) => a.RequestParameters.SetQueryString("fields", v));
-
 		public UpdateDescriptor<TDocument, TPartialDocument> Source(bool? enabled = true) => Assign(enabled, (a, v) => a.Source = v);
 
 		public UpdateDescriptor<TDocument, TPartialDocument> Source(Func<SourceFilterDescriptor<TDocument>, ISourceFilter> selector) =>
 			Assign(selector, (a, v) => a.Source = new Union<bool, ISourceFilter>(v?.Invoke(new SourceFilterDescriptor<TDocument>())));
-
-		[Obsolete("Removed in Elasticsearch 7.x, use source filtering instead")]
-		public UpdateDescriptor<TDocument, TPartialDocument> Fields(params Expression<Func<TPartialDocument, object>>[] typedPathLookups) =>
-			Assign(typedPathLookups,(a, v) => a.RequestParameters.SetQueryString("fields", v));
-
-		[Obsolete("Removed in Elasticsearch 7.x, use source filtering instead")]
-		public UpdateDescriptor<TDocument, TPartialDocument> Fields(params string[] fields) =>
-			Assign(fields,(a, v) => a.RequestParameters.SetQueryString("fields", v));
 	}
 }

@@ -17,9 +17,6 @@ namespace Nest
 
 		string Operation { get; }
 
-		[DataMember(Name = "parent")]
-		Id Parent { get; set; }
-
 		[DataMember(Name = "retry_on_conflict")]
 		int? RetriesOnConflict { get; set; }
 

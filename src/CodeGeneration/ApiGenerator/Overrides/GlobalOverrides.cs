@@ -49,6 +49,8 @@ namespace ApiGenerator.Overrides
 
 		public override IEnumerable<string> SkipQueryStringParams { get; } = new[]
 		{
+			"parent", //can be removed once https://github.com/elastic/elasticsearch/pull/41098 is in
+			"copy_settings", //this still needs a PR?
 			"source", // allows the body to be specified as a request param, we do not want to advertise this with a strongly typed method
 			"ttl",
 			"timestamp",

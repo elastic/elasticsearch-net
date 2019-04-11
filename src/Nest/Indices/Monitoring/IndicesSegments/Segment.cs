@@ -29,10 +29,6 @@ namespace Nest
 		[DataMember(Name ="search")]
 		public bool Search { get; internal set; }
 
-		[DataMember(Name ="size")]
-		[Obsolete("Unused. Will be removed in the next major release")]
-		public string Size { get; internal set; }
-
 		[DataMember(Name ="size_in_bytes")]
 		public double SizeInBytes { get; internal set; }
 
