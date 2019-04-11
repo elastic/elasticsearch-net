@@ -3862,6 +3862,33 @@ namespace Nest
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IIlmExplainLifecycleRequest : IRequest<IlmExplainLifecycleRequestParameters>
+	{
+		IndexName Index { get; }
+	}
+	///<summary>Request parameters for IlmExplainLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-explain-lifecycle.html</pre></summary>
+	public partial class IlmExplainLifecycleRequest : PlainRequestBase<IlmExplainLifecycleRequestParameters>, IIlmExplainLifecycleRequest
+	{
+		protected IIlmExplainLifecycleRequest Self => this;
+		///<summary>/{index}/_ilm/explain</summary>
+		///<param name="index">this parameter is required</param>
+		public IlmExplainLifecycleRequest(IndexName index) : base(r=>r.Required("index", index)){}
+		// values part of the url path
+		IndexName IIlmExplainLifecycleRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		// Request parameters
+		///<summary>
+		/// Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the
+		/// request fails and returns an error. Defaults to 30s.
+		///</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>
+		/// Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns
+		/// an error. Defaults to 30s.
+		///</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IIlmGetLifecycleRequest : IRequest<IlmGetLifecycleRequestParameters>
 	{
 		Policy Policy { get; }

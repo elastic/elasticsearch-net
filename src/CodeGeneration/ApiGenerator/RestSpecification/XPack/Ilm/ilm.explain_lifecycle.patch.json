@@ -1,0 +1,24 @@
+{
+  "ilm.explain_lifecycle": {
+    "url": {
+      "parts": {
+        "index": {
+          "required": true
+        }
+      },
+      "params": {
+        "master_timeout": {
+          "type" : "time",
+          "description" : "Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s."
+        },
+        "timeout": {
+          "type" : "time",
+          "description" : "Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s."
+        },
+        "human": {
+          "default" : false
+        }
+      }
+    }
+  }
+}

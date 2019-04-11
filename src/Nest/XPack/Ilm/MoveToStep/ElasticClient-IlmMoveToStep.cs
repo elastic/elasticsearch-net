@@ -14,17 +14,17 @@ namespace Nest
 		/// The request will fail if the current step does not match the step currently being executed for the index.
 		/// This is to prevent the index from being moved from an unexpected step into the next step.
 		/// </summary>
-		IIlmMoveToStepResponse IlmMoveToStep(Func<IlmMoveToStepDescriptor, IIlmMoveToStepRequest> selector = null);
+		IIlmMoveToStepResponse IlmMoveToStep(IndexName index, Func<IlmMoveToStepDescriptor, IIlmMoveToStepRequest> selector = null);
 
-		/// <inheritdoc cref="IlmMoveToStep(System.Func{Nest.IlmMoveToStepDescriptor,Nest.IIlmMoveToStepRequest})" />
+		/// <inheritdoc cref="IlmMoveToStep(Nest.IndexName,System.Func{Nest.IlmMoveToStepDescriptor,Nest.IIlmMoveToStepRequest})" />
 		IIlmMoveToStepResponse IlmMoveToStep(IIlmMoveToStepRequest request);
 
-		/// <inheritdoc cref="IlmMoveToStep(System.Func{Nest.IlmMoveToStepDescriptor,Nest.IIlmMoveToStepRequest})" />
-		Task<IIlmMoveToStepResponse> IlmMoveToStepAsync(Func<IlmMoveToStepDescriptor, IIlmMoveToStepRequest> selector = null,
+		/// <inheritdoc cref="IlmMoveToStep(Nest.IndexName,System.Func{Nest.IlmMoveToStepDescriptor,Nest.IIlmMoveToStepRequest})" />
+		Task<IIlmMoveToStepResponse> IlmMoveToStepAsync(IndexName index, Func<IlmMoveToStepDescriptor, IIlmMoveToStepRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
 		);
 
-		/// <inheritdoc cref="IlmMoveToStep(System.Func{Nest.IlmMoveToStepDescriptor,Nest.IIlmMoveToStepRequest})" />
+		/// <inheritdoc cref="IlmMoveToStep(Nest.IndexName,System.Func{Nest.IlmMoveToStepDescriptor,Nest.IIlmMoveToStepRequest})" />
 		Task<IIlmMoveToStepResponse> IlmMoveToStepAsync(IIlmMoveToStepRequest request,
 			CancellationToken cancellationToken = default(CancellationToken)
 		);
@@ -32,24 +32,24 @@ namespace Nest
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc cref="IlmMoveToStep(System.Func{Nest.IlmMoveToStepDescriptor,Nest.IIlmMoveToStepRequest})" />
-		public IIlmMoveToStepResponse IlmMoveToStep(Func<IlmMoveToStepDescriptor, IIlmMoveToStepRequest> selector = null) =>
-			IlmMoveToStep(selector.InvokeOrDefault(new IlmMoveToStepDescriptor()));
+		/// <inheritdoc cref="IlmMoveToStep(Nest.IndexName,System.Func{Nest.IlmMoveToStepDescriptor,Nest.IIlmMoveToStepRequest})" />
+		public IIlmMoveToStepResponse IlmMoveToStep(IndexName index, Func<IlmMoveToStepDescriptor, IIlmMoveToStepRequest> selector = null) =>
+			IlmMoveToStep(selector.InvokeOrDefault(new IlmMoveToStepDescriptor(index)));
 
-		/// <inheritdoc cref="IlmMoveToStep(System.Func{Nest.IlmMoveToStepDescriptor,Nest.IIlmMoveToStepRequest})" />
+		/// <inheritdoc cref="IlmMoveToStep(Nest.IndexName,System.Func{Nest.IlmMoveToStepDescriptor,Nest.IIlmMoveToStepRequest})" />
 		public IIlmMoveToStepResponse IlmMoveToStep(IIlmMoveToStepRequest request) =>
 			Dispatcher.Dispatch<IIlmMoveToStepRequest, IlmMoveToStepRequestParameters, IlmMoveToStepResponse>(
 				request,
 				LowLevelDispatch.IlmMoveToStepDispatch<IlmMoveToStepResponse>
 			);
 
-		/// <inheritdoc cref="IlmMoveToStep(System.Func{Nest.IlmMoveToStepDescriptor,Nest.IIlmMoveToStepRequest})" />
-		public Task<IIlmMoveToStepResponse> IlmMoveToStepAsync(Func<IlmMoveToStepDescriptor, IIlmMoveToStepRequest> selector = null,
+		/// <inheritdoc cref="IlmMoveToStep(Nest.IndexName,System.Func{Nest.IlmMoveToStepDescriptor,Nest.IIlmMoveToStepRequest})" />
+		public Task<IIlmMoveToStepResponse> IlmMoveToStepAsync(IndexName index, Func<IlmMoveToStepDescriptor, IIlmMoveToStepRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
 		) =>
-			IlmMoveToStepAsync(selector.InvokeOrDefault(new IlmMoveToStepDescriptor()), cancellationToken);
+			IlmMoveToStepAsync(selector.InvokeOrDefault(new IlmMoveToStepDescriptor(index)), cancellationToken);
 
-		/// <inheritdoc cref="IlmMoveToStep(System.Func{Nest.IlmMoveToStepDescriptor,Nest.IIlmMoveToStepRequest})" />
+		/// <inheritdoc cref="IlmMoveToStep(Nest.IndexName,System.Func{Nest.IlmMoveToStepDescriptor,Nest.IIlmMoveToStepRequest})" />
 		public Task<IIlmMoveToStepResponse> IlmMoveToStepAsync(IIlmMoveToStepRequest request,
 			CancellationToken cancellationToken = default(CancellationToken)
 		) =>

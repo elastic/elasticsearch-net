@@ -3222,6 +3222,28 @@ namespace Nest
 			throw InvalidDispatch("IlmDeleteLifecycle", p, new [] { DELETE }, "/_ilm/policy/{policy}");
 		}
 		
+		internal TResponse IlmExplainLifecycleDispatch<TResponse>(IRequest<IlmExplainLifecycleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.IlmExplainLifecycle<TResponse>(p.RouteValues.Index,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("IlmExplainLifecycle", p, new [] { GET }, "/{index}/_ilm/explain");
+		}
+		
+		internal Task<TResponse> IlmExplainLifecycleDispatchAsync<TResponse>(IRequest<IlmExplainLifecycleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.IlmExplainLifecycleAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("IlmExplainLifecycle", p, new [] { GET }, "/{index}/_ilm/explain");
+		}
+		
 		internal TResponse IlmGetLifecycleDispatch<TResponse>(IRequest<IlmGetLifecycleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
