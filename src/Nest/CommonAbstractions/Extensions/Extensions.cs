@@ -238,7 +238,7 @@ namespace Nest
 			Action<TSource, TResult> resultProcessor,
 			Action<Exception> done,
 			int maxDegreeOfParallelism,
-			SemaphoreSlim additionalRateLimitter = null
+			SemaphoreSlim additionalRateLimiter = null
 		)
 		{
 			var semaphore = new SemaphoreSlim(maxDegreeOfParallelism, maxDegreeOfParallelism);
@@ -250,7 +250,7 @@ namespace Nest
 				var i = 0;
 				foreach (var item in lazyList)
 				{
-					tasks.Add(ProcessAsync(item, taskSelector, resultProcessor, semaphore, additionalRateLimitter, page++));
+					tasks.Add(ProcessAsync(item, taskSelector, resultProcessor, semaphore, additionalRateLimiter, page++));
 					if (tasks.Count < maxDegreeOfParallelism)
 						continue;
 
