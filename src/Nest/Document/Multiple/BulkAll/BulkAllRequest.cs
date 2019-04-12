@@ -57,10 +57,6 @@ namespace Nest
 		///<summary>The pipeline id to preprocess all the incoming documents with</summary>
 		string Pipeline { get; set; }
 
-		///<summary>Refresh the index after performing each operation (Elasticsearch will refresh locally)</summary>
-		[Obsolete("This option is scheduled for deletion in 7.0, refreshing on each _bulk makes little sense for BulkAll")]
-		Refresh? Refresh { get; set; }
-
 		/// <summary>The indices you wish to refresh after the bulk all completes, defaults to <see cref="Index" /> </summary>
 		Indices RefreshIndices { get; set; }
 
@@ -132,9 +128,6 @@ namespace Nest
 		public string Pipeline { get; set; }
 
 		/// <inheritdoc />
-		public Refresh? Refresh { get; set; }
-
-		/// <inheritdoc />
 		public Indices RefreshIndices { get; set; }
 
 		/// <inheritdoc />
@@ -178,7 +171,6 @@ namespace Nest
 		IndexName IBulkAllRequest<T>.Index { get; set; }
 		int? IBulkAllRequest<T>.MaxDegreeOfParallelism { get; set; }
 		string IBulkAllRequest<T>.Pipeline { get; set; }
-		Refresh? IBulkAllRequest<T>.Refresh { get; set; }
 		Indices IBulkAllRequest<T>.RefreshIndices { get; set; }
 		bool IBulkAllRequest<T>.RefreshOnCompleted { get; set; }
 		Func<IBulkResponseItem, T, bool> IBulkAllRequest<T>.RetryDocumentPredicate { get; set; }
@@ -209,11 +201,6 @@ namespace Nest
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.RefreshOnCompleted" />
 		public BulkAllDescriptor<T> RefreshOnCompleted(bool refresh = true) => Assign(refresh, (a, v) => a.RefreshOnCompleted = v);
-
-		/// <inheritdoc cref="IBulkAllRequest{T}.Refresh" />
-#pragma warning disable 618
-		public BulkAllDescriptor<T> Refresh(Refresh? refresh) => Assign(refresh, (a, v) => a.Refresh = v);
-#pragma warning restore 618
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.RefreshIndices" />
 		public BulkAllDescriptor<T> RefreshIndices(Indices indicesToRefresh) => Assign(indicesToRefresh, (a, v) => a.RefreshIndices = v);

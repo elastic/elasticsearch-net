@@ -206,7 +206,7 @@ namespace Tests.Search.Request
 											{ new SuggestContextQuery { Context = Project.First.Suggest.Contexts.Values.SelectMany(v => v).First() } }
 									}
 								},
-								Fuzzy = new FuzzySuggester
+								Fuzzy = new SuggestFuzziness
 								{
 									Fuzziness = Fuzziness.Auto,
 									MinLength = 1,

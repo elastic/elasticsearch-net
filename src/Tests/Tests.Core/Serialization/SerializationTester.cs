@@ -237,7 +237,7 @@ namespace Tests.Core.Serialization
 				ContractResolver = new DefaultContractResolver { NamingStrategy = new DefaultNamingStrategy() },
 				NullValueHandling = preserveNullInExpected ? NullValueHandling.Include : NullValueHandling.Ignore,
 				//copied here because anonymyzing geocoordinates is too tedious
-				Converters = new List<JsonConverter> { new TestGeoCoordinateJsonConverter(), new Utf8JsonDecimalConverter() }
+				Converters = new List<JsonConverter> { new TestGeoCoordinateJsonConverter() }
 			};
 	}
 }

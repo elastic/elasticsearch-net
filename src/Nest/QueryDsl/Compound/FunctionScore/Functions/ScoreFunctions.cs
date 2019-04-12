@@ -58,14 +58,6 @@ namespace Nest
 		public ScoreFunctionsDescriptor<T> RandomScore(Func<RandomScoreFunctionDescriptor<T>, IRandomScoreFunction> selector = null) =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v.InvokeOrDefault(new RandomScoreFunctionDescriptor<T>())));
 
-		[Obsolete("Elasticsearch 7.x will require a field when a seed is provided")]
-		public ScoreFunctionsDescriptor<T> RandomScore(long seed) =>
-			Assign(seed, (a, v) => a.AddIfNotNull(new RandomScoreFunction { Seed = v }));
-
-		[Obsolete("Elasticsearch 7.x will require a field when a seed is provided")]
-		public ScoreFunctionsDescriptor<T> RandomScore(string seed) =>
-			Assign(seed, (a, v) => a.AddIfNotNull(new RandomScoreFunction { Seed = v }));
-
 		public ScoreFunctionsDescriptor<T> Weight(Func<WeightFunctionDescriptor<T>, IWeightFunction> selector) =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new WeightFunctionDescriptor<T>())));
 

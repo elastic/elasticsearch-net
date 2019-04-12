@@ -103,7 +103,7 @@ namespace Tests.Ingest
 					.Field(p => p.StartedOn)
 					.TargetField("timestamp")
 					.Formats("dd/MM/yyyy hh:mm:ss")
-					.Timezone("Europe/Amsterdam")
+					.TimeZone("Europe/Amsterdam")
 				);
 
 			public override IProcessor Initializer => new DateProcessor
@@ -111,7 +111,7 @@ namespace Tests.Ingest
 				Field = "startedOn",
 				TargetField = "timestamp",
 				Formats = new string[] { "dd/MM/yyyy hh:mm:ss" },
-				Timezone = "Europe/Amsterdam"
+				TimeZone = "Europe/Amsterdam"
 			};
 
 			public override object Json => new

@@ -43,8 +43,8 @@ namespace Tests.Search.Request
 			{
 				Sort = new List<ISort>
 				{
-					new SortField { Field = Field<Project>(p => p.NumberOfCommits), Order = SortOrder.Descending },
-					new SortField { Field = Field<Project>(p => p.Name), Order = SortOrder.Descending }
+					new FieldSort { Field = Field<Project>(p => p.NumberOfCommits), Order = SortOrder.Descending },
+					new FieldSort { Field = Field<Project>(p => p.Name), Order = SortOrder.Descending }
 				},
 				SearchAfter = new List<object>
 				{

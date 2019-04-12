@@ -10,10 +10,6 @@ namespace Nest
 		[DataMember(Name = "file")]
 		string File { get; set; }
 
-		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
-		[IgnoreDataMember]
-		string Inline { get; set; }
-
 		[DataMember(Name = "params")]
 		[JsonFormatter(typeof(VerbatimDictionaryKeysBaseFormatter<Dictionary<string, object>, string, object>))]
 		Dictionary<string, object> Params { get; set; }
@@ -26,13 +22,6 @@ namespace Nest
 	{
 		public string File { get; set; }
 
-		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
-		public string Inline
-		{
-			get => Source;
-			set => Source = value;
-		}
-
 		public Dictionary<string, object> Params { get; set; }
 		public string Source { get; set; }
 	}
@@ -41,17 +30,8 @@ namespace Nest
 	{
 		string IRenderSearchTemplateRequest.File { get; set; }
 
-		string IRenderSearchTemplateRequest.Inline
-		{
-			get => Self.Source;
-			set => Self.Source = value;
-		}
-
 		Dictionary<string, object> IRenderSearchTemplateRequest.Params { get; set; }
 		string IRenderSearchTemplateRequest.Source { get; set; }
-
-		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
-		public RenderSearchTemplateDescriptor Inline(string inline) => Assign(inline, (a, v) => a.Inline = v);
 
 		public RenderSearchTemplateDescriptor Source(string source) => Assign(source, (a, v) => a.Source = v);
 

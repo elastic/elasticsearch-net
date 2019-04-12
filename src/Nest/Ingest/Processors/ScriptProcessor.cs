@@ -17,10 +17,6 @@ namespace Nest
 		[DataMember(Name ="id")]
 		string Id { get; set; }
 
-		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
-		[IgnoreDataMember]
-		string Inline { get; set; }
-
 		/// <summary>
 		/// The scripting language. Defaults to painless
 		/// </summary>
@@ -51,14 +47,6 @@ namespace Nest
 		/// </summary>
 		public string Id { get; set; }
 
-		/// <summary> An inline script to be executed </summary>
-		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
-		public string Inline
-		{
-			get => Source;
-			set => Source = value;
-		}
-
 		/// <summary>
 		/// The scripting language. Defaults to painless
 		/// </summary>
@@ -83,13 +71,6 @@ namespace Nest
 	{
 		protected override string Name => "script";
 		string IScriptProcessor.Id { get; set; }
-
-		string IScriptProcessor.Inline
-		{
-			get => Self.Source;
-			set => Self.Source = value;
-		}
-
 		string IScriptProcessor.Lang { get; set; }
 		Dictionary<string, object> IScriptProcessor.Params { get; set; }
 		string IScriptProcessor.Source { get; set; }
@@ -103,12 +84,6 @@ namespace Nest
 		/// The stored script id to refer to
 		/// </summary>
 		public ScriptProcessorDescriptor Id(string id) => Assign(id, (a, v) => a.Id = v);
-
-		/// <summary>
-		/// An inline script to be executed
-		/// </summary>
-		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
-		public ScriptProcessorDescriptor Inline(string inline) => Assign(inline, (a, v) => a.Inline = v);
 
 		/// <summary>
 		/// An inline script to be executed

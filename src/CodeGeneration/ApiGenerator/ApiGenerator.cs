@@ -131,13 +131,27 @@ namespace ApiGenerator
 			var endpoint = officialJsonSpec.ToObject<Dictionary<string, ApiEndpoint>>().First();
 			endpoint.Value.RestSpecName = endpoint.Key;
 			endpoint.Value.CsharpMethodName = CreateMethodName(endpoint.Key);
+
+			PatchUrlParts(jsonFile, endpoint.Value.Url);
 			return endpoint;
+		}
+
+		private static void PatchUrlParts(string jsonFile, ApiUrl url)
+		{
+			if (url.IsPartless) return;
+			foreach (var kv in url.Parts)
+			{
+				var required = url.ExposedApiPaths.All(p => p.Path.Contains($"{{{kv.Key}}}"));
+				if (kv.Value.Required != required)
+					Warnings.Add($"{jsonFile} has part: {kv.Key} listed as {kv.Value.Required} but should be {required}");
+				kv.Value.Required = required;
+			}
 		}
 
 		private static void PatchOfficialSpec(JObject original, string jsonFile)
 		{
 			var directory = Path.GetDirectoryName(jsonFile);
-			var patchFile = Path.Combine(directory, Path.GetFileNameWithoutExtension(jsonFile)) + ".patch.json";
+			var patchFile = Path.Combine(directory,"..", "_Patches", Path.GetFileNameWithoutExtension(jsonFile)) + ".patch.json";
 			if (!File.Exists(patchFile)) return;
 
 			var patchedJson = JObject.Parse(File.ReadAllText(patchFile));

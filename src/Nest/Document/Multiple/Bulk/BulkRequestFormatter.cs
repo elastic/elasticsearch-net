@@ -16,6 +16,7 @@ namespace Nest
 				return;
 
 			var settings = formatterResolver.GetConnectionSettings();
+			var memoryStreamFactory = settings.MemoryStreamFactory;
 			var requestResponseSerializer = settings.RequestResponseSerializer;
 			var sourceSerializer = settings.SourceSerializer;
 			var inferrer = settings.Inferrer;
@@ -44,7 +45,7 @@ namespace Nest
 					? requestResponseSerializer
 					: sourceSerializer;
 
-				var bodyBytes = bodySerializer.SerializeToBytes(body, SerializationFormatting.None);
+				var bodyBytes = bodySerializer.SerializeToBytes(body, memoryStreamFactory, SerializationFormatting.None);
 				writer.WriteRaw(bodyBytes);
 				writer.WriteRaw(Newline);
 			}

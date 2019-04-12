@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Elasticsearch.Net;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -22,19 +21,21 @@ namespace Nest.JsonNetSerializer.Converters
 		};
 
 		private readonly IElasticsearchSerializer _builtInSerializer;
+		private IMemoryStreamFactory _memoryStreamFactory;
 
-		public HandleNestTypesOnSourceJsonConverter(IElasticsearchSerializer builtInSerializer) => _builtInSerializer = builtInSerializer;
+		public HandleNestTypesOnSourceJsonConverter(IElasticsearchSerializer builtInSerializer, IMemoryStreamFactory memoryStreamFactory
+		) => (_builtInSerializer, _memoryStreamFactory) = (builtInSerializer, memoryStreamFactory);
 
 		public override bool CanRead => true;
 		public override bool CanWrite => true;
 
-		public override void WriteJson(Newtonsoft.Json.JsonWriter writer, object value, Newtonsoft.Json.JsonSerializer serializer)
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var formatting = serializer.Formatting == Formatting.Indented
 				? SerializationFormatting.Indented
 				: SerializationFormatting.None;
 
-			using (var ms = new MemoryStream())
+			using (var ms = _memoryStreamFactory.Create())
 			using (var streamReader = new StreamReader(ms, ConnectionSettingsAwareSerializerBase.ExpectedEncoding))
 			using (var reader = new JsonTextReader(streamReader))
 			{
@@ -45,7 +46,7 @@ namespace Nest.JsonNetSerializer.Converters
 			}
 		}
 
-		public override object ReadJson(Newtonsoft.Json.JsonReader reader, Type objectType, object existingValue, Newtonsoft.Json.JsonSerializer serializer)
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var token = reader.ReadTokenWithDateParseHandlingNone();
 			//in place because JsonConverter.Deserialize() only works on full json objects.
@@ -54,7 +55,7 @@ namespace Nest.JsonNetSerializer.Converters
 			if (objectType == typeof(JoinField) && token.Type == JTokenType.String)
 				return JoinField.Root(token.Value<string>());
 
-			using (var ms = token.ToStream())
+			using (var ms = token.ToStream(_memoryStreamFactory))
 				return _builtInSerializer.Deserialize(objectType, ms);
 		}
 

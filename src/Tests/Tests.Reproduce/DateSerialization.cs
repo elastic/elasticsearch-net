@@ -21,7 +21,7 @@ namespace Tests.Reproduce
 			};
 
 			var client = new ElasticClient();
-			var serializedDates = client.SourceSerializer.SerializeToString(dates, SerializationFormatting.None);
+			var serializedDates = client.SourceSerializer.SerializeToString(dates, client.ConnectionSettings.MemoryStreamFactory, SerializationFormatting.None);
 
 			serializedDates.Should()
 				.Contain("2016-01-01T01:01:01Z")

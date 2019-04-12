@@ -138,7 +138,7 @@ namespace Elasticsearch.Net
 		TimeSpan? IConnectionConfigurationValues.MaxDeadTimeout => _maxDeadTimeout;
 		int? IConnectionConfigurationValues.MaxRetries => _maxRetries;
 		TimeSpan? IConnectionConfigurationValues.MaxRetryTimeout => _maxRetryTimeout;
-		IMemoryStreamFactory IConnectionConfigurationValues.MemoryStreamFactory { get; } = new RecyclableMemoryStreamFactory();
+		IMemoryStreamFactory IConnectionConfigurationValues.MemoryStreamFactory { get; } = RecyclableMemoryStreamFactory.Default;
 
 		Func<Node, bool> IConnectionConfigurationValues.NodePredicate => _nodePredicate;
 		Action<IApiCallDetails> IConnectionConfigurationValues.OnRequestCompleted => _completedRequestHandler;

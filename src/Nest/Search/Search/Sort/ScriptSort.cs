@@ -24,7 +24,7 @@ namespace Nest
 		protected override Field SortKey => "_script";
 	}
 
-	public class SortScriptDescriptor<T> : SortDescriptorBase<SortScriptDescriptor<T>, IScriptSort, T>, IScriptSort
+	public class ScriptSortDescriptor<T> : SortDescriptorBase<ScriptSortDescriptor<T>, IScriptSort, T>, IScriptSort
 		where T : class
 	{
 		protected override Field SortKey => "_script";
@@ -33,9 +33,9 @@ namespace Nest
 
 		string IScriptSort.Type { get; set; }
 
-		public virtual SortScriptDescriptor<T> Type(string type) => Assign(type, (a, v) => a.Type = v);
+		public virtual ScriptSortDescriptor<T> Type(string type) => Assign(type, (a, v) => a.Type = v);
 
-		public SortScriptDescriptor<T> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
+		public ScriptSortDescriptor<T> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
 			Assign(scriptSelector, (a, v) => a.Script = v?.Invoke(new ScriptDescriptor()));
 	}
 }

@@ -45,12 +45,6 @@ namespace Nest
 	{
 		public IndexedScriptTransformDescriptor Id(string id) => new IndexedScriptTransformDescriptor(id);
 
-		[Obsolete("Indexed() sets a property named id, this is confusing and thats why we intend to remove this in NEST 7.x please use Id()")]
-		public IndexedScriptTransformDescriptor Indexed(string id) => new IndexedScriptTransformDescriptor(id);
-
-		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
-		public InlineScriptTransformDescriptor Inline(string script) => new InlineScriptTransformDescriptor(script);
-
 		public InlineScriptTransformDescriptor Source(string source) => new InlineScriptTransformDescriptor(source);
 	}
 
@@ -58,11 +52,10 @@ namespace Nest
 	{
 		private static readonly AutomataDictionary AutomataDictionary = new AutomataDictionary
 		{
-			{ "inline", 0 },
-			{ "source", 1 },
-			{ "id", 2 },
-			{ "lang", 3 },
-			{ "params", 4 }
+			{ "source", 0 },
+			{ "id", 1 },
+			{ "lang", 2 },
+			{ "params", 3 }
 		};
 
 		public IScriptTransform Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -82,16 +75,15 @@ namespace Nest
 					switch (value)
 					{
 						case 0:
-						case 1:
 							scriptTransform = new InlineScriptTransform(reader.ReadString());
 							break;
-						case 2:
+						case 1:
 							scriptTransform = new IndexedScriptTransform(reader.ReadString());
 							break;
-						case 3:
+						case 2:
 							language = reader.ReadString();
 							break;
-						case 4:
+						case 3:
 							parameters = formatterResolver.GetFormatter<Dictionary<string, object>>()
 								.Deserialize(ref reader, formatterResolver);
 							break;

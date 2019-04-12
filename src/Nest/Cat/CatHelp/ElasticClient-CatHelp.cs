@@ -51,7 +51,7 @@ namespace Nest
 		private static CatResponse<CatHelpRecord> DeserializeCatHelpResponse(IApiCallDetails response, Stream stream)
 		{
 			using (stream)
-			using (var ms = new MemoryStream())
+			using (var ms = response.ConnectionConfiguration.MemoryStreamFactory.Create())
 			{
 				stream.CopyTo(ms);
 				var body = ms.ToArray().Utf8String();

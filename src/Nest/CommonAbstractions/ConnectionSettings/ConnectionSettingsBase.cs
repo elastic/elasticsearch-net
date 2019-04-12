@@ -209,12 +209,6 @@ namespace Nest
 		/// The mapping can infer the index, type, id and relation name for a given CLR type, as well as control
 		/// serialization behaviour for CLR properties.
 		/// </summary>
-		[Obsolete("Please use " + nameof(DefaultMappingFor))]
-		public TConnectionSettings InferMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>> selector)
-			where TDocument : class =>
-			DefaultMappingFor(selector);
-
-		/// <inheritdoc cref="InferMappingFor{TDocument}"/>
 		public TConnectionSettings DefaultMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>> selector)
 			where TDocument : class
 		{
@@ -231,7 +225,7 @@ namespace Nest
 			if (!string.IsNullOrWhiteSpace(inferMapping.IdPropertyName))
 				_idProperties[inferMapping.ClrType] = inferMapping.IdPropertyName;
 
-			if (inferMapping.IdProperty != null) 
+			if (inferMapping.IdProperty != null)
 				MapIdPropertyFor(inferMapping.IdProperty);
 
 			if (inferMapping.RoutingProperty != null)

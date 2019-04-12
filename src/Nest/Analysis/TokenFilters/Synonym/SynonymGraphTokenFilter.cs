@@ -18,11 +18,6 @@ namespace Nest
 		[DataMember(Name ="format")]
 		SynonymFormat? Format { get; set; }
 
-		[DataMember(Name ="ignore_case")]
-		[Obsolete("Will be removed in Elasticsearch 7.x, if you need to ignore case add a lowercase filter before this synonym filter")]
-		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
-		bool? IgnoreCase { get; set; }
-
 		/// <inheritdoc cref="ISynonymTokenFilter.Lenient" />
 		[DataMember(Name ="lenient")]
 		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
@@ -52,10 +47,6 @@ namespace Nest
 		/// <inheritdoc />
 		public SynonymFormat? Format { get; set; }
 
-		/// <inheritdoc />
-		[Obsolete("Will be removed in Elasticsearch 7.x, if you need to ignore case add a lowercase filter before this synonym filter")]
-		public bool? IgnoreCase { get; set; }
-
 		/// <inheritdoc cref="ISynonymTokenFilter.Lenient" />
 		public bool? Lenient { get; set; }
 
@@ -77,16 +68,11 @@ namespace Nest
 		bool? ISynonymGraphTokenFilter.Expand { get; set; }
 		SynonymFormat? ISynonymGraphTokenFilter.Format { get; set; }
 
-		bool? ISynonymGraphTokenFilter.IgnoreCase { get; set; }
 		bool? ISynonymGraphTokenFilter.Lenient { get; set; }
 
 		IEnumerable<string> ISynonymGraphTokenFilter.Synonyms { get; set; }
 		string ISynonymGraphTokenFilter.SynonymsPath { get; set; }
 		string ISynonymGraphTokenFilter.Tokenizer { get; set; }
-
-		/// <inheritdoc />
-		[Obsolete("Will be removed in Elasticsearch 7.x, if you need to ignore case add a lowercase filter before this synonym filter")]
-		public SynonymGraphTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true) => Assign(ignoreCase, (a, v) => a.IgnoreCase = v);
 
 		/// <inheritdoc />
 		public SynonymGraphTokenFilterDescriptor Expand(bool? expand = true) => Assign(expand, (a, v) => a.Expand = v);

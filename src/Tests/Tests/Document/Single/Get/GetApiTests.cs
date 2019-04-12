@@ -163,9 +163,6 @@ namespace Tests.Document.Single.Get
 			response.Source.Should().NotBeNull();
 			response.Source.Id.Should().Be(CommitActivityId);
 			response.Routing.Should().NotBeNullOrEmpty();
-#pragma warning disable 618
-			response.Parent.Should().BeNullOrEmpty();
-#pragma warning restore 618
 		}
 	}
 

@@ -16,7 +16,7 @@ namespace Elasticsearch.Net
 			if (string.IsNullOrEmpty(Body) || ResponseMimeType != RequestData.MimeType)
 				return false;
 
-			using(var stream = new MemoryStream(Encoding.UTF8.GetBytes(Body)))
+			using(var stream = ConnectionConfiguration.MemoryStreamFactory.Create(Encoding.UTF8.GetBytes(Body)))
 				return ServerError.TryCreate(stream, out serverError);
 		}
 

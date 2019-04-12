@@ -75,13 +75,6 @@ namespace Nest
 		ISizeField ITypeMapping.SizeField { get; set; }
 		ISourceField ITypeMapping.SourceField { get; set; }
 
-		[Obsolete("Use the overload that accepts TValue")]
-		protected PutMappingDescriptor<T> Assign(Action<ITypeMapping> assigner)
-		{
-			assigner(this);
-			return this;
-		}
-
 		protected PutMappingDescriptor<T> Assign<TValue>(TValue value, Action<ITypeMapping, TValue> assigner) =>
 			Fluent.Assign(this, value, assigner);
 
