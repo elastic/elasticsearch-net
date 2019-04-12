@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SlackAttachmentField>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<SlackAttachmentField>))]
 	public interface ISlackAttachmentField
 	{
 		[JsonProperty("short")]

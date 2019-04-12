@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject]
 	public interface IEmailAction : IAction
 	{
 		[JsonProperty("account")]

@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<IndicesPrivileges>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<IndicesPrivileges>))]
 	public interface IIndicesPrivileges
 	{
 		[JsonProperty("field_security")]

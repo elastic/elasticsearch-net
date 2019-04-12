@@ -6,7 +6,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(ArrayCompareConditionConverter))]
+	[ContractJsonConverter(typeof(ArrayCompareConditionConverter))]
 	public interface IArrayCompareCondition
 	{
 		string ArrayPath { get; set; }

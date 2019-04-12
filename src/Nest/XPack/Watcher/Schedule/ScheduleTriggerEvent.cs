@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ScheduleTriggerEvent>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<ScheduleTriggerEvent>))]
 	public interface IScheduleTriggerEvent : ITriggerEvent
 	{
 		[JsonProperty("scheduled_time")]

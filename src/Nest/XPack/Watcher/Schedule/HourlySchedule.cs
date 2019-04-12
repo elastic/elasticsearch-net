@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<HourlySchedule>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<HourlySchedule>))]
 	public interface IHourlySchedule : ISchedule
 	{
 		[JsonProperty("minute")]

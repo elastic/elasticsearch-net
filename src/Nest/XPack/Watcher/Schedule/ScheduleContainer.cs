@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ScheduleContainer>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<ScheduleContainer>))]
 	public interface IScheduleContainer
 	{
 		[JsonProperty("cron")]

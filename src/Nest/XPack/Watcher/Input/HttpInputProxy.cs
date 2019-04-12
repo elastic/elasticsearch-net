@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<HttpInputProxy>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<HttpInputProxy>))]
 	public interface IHttpInputProxy
 	{
 		string Host { get; set; }

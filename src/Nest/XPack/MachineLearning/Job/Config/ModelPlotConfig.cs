@@ -7,7 +7,7 @@ namespace Nest
 	/// Stores model information along with the results.
 	/// It provides a more detailed view into anomaly detection.
 	/// </summary>
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ModelPlotConfig>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<ModelPlotConfig>))]
 	public interface IModelPlotConfig : IModelPlotConfigEnabled
 	{
 		/// <summary>
@@ -52,7 +52,7 @@ namespace Nest
 	/// Stores model information along with the results.
 	/// It provides a more detailed view into anomaly detection.
 	/// </summary>
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ModelPlotConfigEnabled>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<ModelPlotConfigEnabled>))]
 	public interface IModelPlotConfigEnabled
 	{
 		/// <summary>

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReserializeJsonConverter<TransformContainer, ITransformContainer>))]
+	[ContractJsonConverter(typeof(ReserializeJsonConverter<TransformContainer, ITransformContainer>))]
 	public interface ITransformContainer
 	{
 		[JsonProperty("chain")]

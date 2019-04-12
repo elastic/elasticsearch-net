@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(SimpleInputJsonConverter))]
+	[ContractJsonConverter(typeof(SimpleInputJsonConverter))]
 	public interface ISimpleInput : IInput
 	{
 		IDictionary<string, object> Payload { get; }

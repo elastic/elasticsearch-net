@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(SimulatedActionsConverter))]
+	[ContractJsonConverter(typeof(SimulatedActionsConverter))]
 	public class SimulatedActions
 	{
 		private SimulatedActions() { }

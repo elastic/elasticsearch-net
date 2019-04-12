@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(IdJsonConverter))]
+	[ContractJsonConverter(typeof(IdJsonConverter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Id : IEquatable<Id>, IUrlParameter
 	{

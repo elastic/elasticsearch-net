@@ -9,7 +9,7 @@ namespace Nest
 	/// context when a watch is triggered.
 	/// </summary>
 	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchInput>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<SearchInput>))]
 	public interface ISearchInput : IInput
 	{
 		/// <summary>
