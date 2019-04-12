@@ -14,6 +14,7 @@ namespace Nest
 			if (value?.Operations == null) return;
 
 			var settings = formatterResolver.GetConnectionSettings();
+			var memoryStreamFactory = settings.MemoryStreamFactory;
 			var serializer = settings.RequestResponseSerializer;
 
 			foreach (var operation in value.Operations.Values)
@@ -42,10 +43,10 @@ namespace Nest
 					ignore_unavailable = GetString("ignore_unavailable")
 				};
 
-				var headerBytes = serializer.SerializeToBytes(header, SerializationFormatting.None);
+				var headerBytes = serializer.SerializeToBytes(header, memoryStreamFactory, SerializationFormatting.None);
 				writer.WriteRaw(headerBytes);
 				writer.WriteRaw(Newline);
-				var bodyBytes = serializer.SerializeToBytes(operation, SerializationFormatting.None);
+				var bodyBytes = serializer.SerializeToBytes(operation, memoryStreamFactory, SerializationFormatting.None);
 				writer.WriteRaw(bodyBytes);
 				writer.WriteRaw(Newline);
 			}

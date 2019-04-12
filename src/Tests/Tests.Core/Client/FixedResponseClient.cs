@@ -40,7 +40,7 @@ namespace Tests.Core.Client
 				default:
 				{
 					responseBytes = contentType == RequestData.MimeType
-						? serializer.SerializeToBytes(response)
+						? serializer.SerializeToBytes(response, TestClient.Default.ConnectionSettings.MemoryStreamFactory)
 						: Encoding.UTF8.GetBytes(response.ToString());
 					break;
 				}

@@ -33,6 +33,9 @@ namespace Elasticsearch.Net
 		/// <inheritdoc cref="IApiCallDetails.Uri"/>
 		public Uri Uri => ApiCall.Uri;
 
+		/// <inheritdoc cref="IApiCallDetails.ConnectionConfiguration"/>
+		public IConnectionConfigurationValues ConnectionConfiguration => ApiCall.ConnectionConfiguration;
+
 		/// <inheritdoc cref="IApiCallDetails.ResponseBodyInBytes"/>
 		public byte[] ResponseBodyInBytes => ApiCall.ResponseBodyInBytes;
 

@@ -39,7 +39,7 @@ namespace Tests.Search.MultiSearch
 		[I] public void PostEnumerableOfStrings()
 		{
 			var listOfStrings = Search
-				.Select(s => _client.RequestResponseSerializer.SerializeToString(s, SerializationFormatting.None))
+				.Select(s => _client.RequestResponseSerializer.SerializeToString(s, _client.ConnectionSettings.MemoryStreamFactory, SerializationFormatting.None))
 				.ToList();
 
 			var response = _client.LowLevel.Msearch<DynamicResponse>("project", PostData.MultiJson(listOfStrings));
@@ -49,7 +49,7 @@ namespace Tests.Search.MultiSearch
 		[I] public void PostString()
 		{
 			var str = Search
-				.Select(s => _client.RequestResponseSerializer.SerializeToString(s, SerializationFormatting.None))
+				.Select(s => _client.RequestResponseSerializer.SerializeToString(s, _client.ConnectionSettings.MemoryStreamFactory, SerializationFormatting.None))
 				.ToList()
 				.Aggregate(new StringBuilder(), (sb, s) => sb.Append(s + "\n"), sb => sb.ToString());
 
@@ -60,7 +60,7 @@ namespace Tests.Search.MultiSearch
 		[I] public void PostByteArray()
 		{
 			var str = Search
-				.Select(s => _client.RequestResponseSerializer.SerializeToString(s, SerializationFormatting.None))
+				.Select(s => _client.RequestResponseSerializer.SerializeToString(s, _client.ConnectionSettings.MemoryStreamFactory, SerializationFormatting.None))
 				.ToList()
 				.Aggregate(new StringBuilder(), (sb, s) => sb.Append(s + "\n"), sb => sb.ToString());
 

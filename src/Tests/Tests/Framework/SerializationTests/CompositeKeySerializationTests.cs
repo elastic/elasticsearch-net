@@ -21,7 +21,7 @@ namespace Tests.Framework.SerializationTests
 			});
 
 			var serializer = TestClient.Default.RequestResponseSerializer;
-			var json = serializer.SerializeToString(compositeKey, SerializationFormatting.None);
+			var json = serializer.SerializeToString(compositeKey, TestClient.Default.ConnectionSettings.MemoryStreamFactory, SerializationFormatting.None);
 			json.Should().Be("{\"key_1\":\"value_1\",\"key_2\":null}");
 
 			using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
