@@ -26,7 +26,6 @@ namespace Elasticsearch.Net
 			var generic = GetActivatorMethodInfo.MakeGenericMethod(t);
 			var constructors = from c in t.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
 				let p = c.GetParameters()
-				let k = string.Join(",", p.Select(a => a.ParameterType.Name))
 				where p.Length == args.Length
 				select c;
 
