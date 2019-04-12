@@ -3690,6 +3690,24 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> SecurityEnableUserPostAsync<TResponse>(string username, EnableUserRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(POST, Url($"_security/user/{username.NotNull("username")}/_enable"), ctx, null, _params(requestParameters));
+		///<summary>GET on /_security/privilege <para>TODO</para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public TResponse SecurityGetPrivileges<TResponse>(GetPrivilegesRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(GET, Url($"_security/privilege"), null, _params(requestParameters));
+		///<summary>GET on /_security/privilege <para>TODO</para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> SecurityGetPrivilegesAsync<TResponse>(GetPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(GET, Url($"_security/privilege"), ctx, null, _params(requestParameters));
+		///<summary>GET on /_security/privilege/{application} <para>TODO</para></summary>
+		///<param name="application">Application name</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public TResponse SecurityGetPrivileges<TResponse>(string application, GetPrivilegesRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(GET, Url($"_security/privilege/{application.NotNull("application")}"), null, _params(requestParameters));
+		///<summary>GET on /_security/privilege/{application} <para>TODO</para></summary>
+		///<param name="application">Application name</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> SecurityGetPrivilegesAsync<TResponse>(string application, GetPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(GET, Url($"_security/privilege/{application.NotNull("application")}"), ctx, null, _params(requestParameters));
 		///<summary>GET on /_security/privilege/{application}/{name} <para>TODO</para></summary>
 		///<param name="application">Application name</param>
 		///<param name="name">Privilege name</param>

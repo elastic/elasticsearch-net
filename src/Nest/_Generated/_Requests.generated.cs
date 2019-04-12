@@ -3587,13 +3587,15 @@ namespace Nest
 	public partial class GetPrivilegesRequest : PlainRequestBase<GetPrivilegesRequestParameters>, IGetPrivilegesRequest
 	{
 		protected IGetPrivilegesRequest Self => this;
+		///<summary>/_security/privilege</summary>
+		public GetPrivilegesRequest() : base(){}
+		///<summary>/_security/privilege/{application}</summary>
+		///<param name="application">Optional, accepts null</param>
+		public GetPrivilegesRequest(Name application) : base(r => r.Optional("application", application)){}
 		///<summary>/_security/privilege/{application}/{name}</summary>
 		///<param name="application">Optional, accepts null</param>
 		///<param name="name">Optional, accepts null</param>
 		public GetPrivilegesRequest(Name application, Name name) : base(r => r.Optional("application", application).Optional("name", name)){}
-		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-		[SerializationConstructor]
-		internal GetPrivilegesRequest() : base(){}
 		// values part of the url path
 		[IgnoreDataMember]
 		Name IGetPrivilegesRequest.Application => Self.RouteValues.Get<Name>("application");
@@ -3677,9 +3679,9 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get => Q<Fields>("_source_excludes"); set => Q("_source_excludes", value); }
+		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get => Q<Fields>("_source_includes"); set => Q("_source_includes", value); }
+		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -5447,10 +5449,10 @@ namespace Nest
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+		///<summary>Control how long to keep the search context alive</summary>
+		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value); }
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
-		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value); }
 	}
 	[InterfaceDataContract]
 	public partial interface IReindexRethrottleRequest : IRequest<ReindexRethrottleRequestParameters>

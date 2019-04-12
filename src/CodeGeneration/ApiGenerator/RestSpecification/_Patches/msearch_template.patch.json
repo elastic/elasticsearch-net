@@ -1,0 +1,15 @@
+{
+  "msearch_template": {
+    "url": {
+      "path": "/_msearch/template",
+      "paths": ["/_msearch/template", "/{index}/_msearch/template"],
+      "deprecated_paths" : [
+        {
+          "version" : "7.0",
+          "path" : "/{index}/{type}/_msearch/template",
+          "description" : "Specifying types in urls has been deprecated"
+        }
+      ]
+    }
+  }
+}

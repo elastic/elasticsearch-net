@@ -4,14 +4,7 @@
     "methods": ["GET", "POST"],
     "url": {
       "path": "/_search",
-      "paths": ["/_search", "/{index}/_search"],
-      "deprecated_paths" : [
-        {
-          "version" : "7.0",
-          "path" : "/{index}/{type}/_search",
-          "description" : "Specifying types in urls has been deprecated"
-        }
-      ],
+      "paths": ["/_search", "/{index}/_search", "/{index}/{type}/_search"],
       "parts": {
         "index": {
          "type" : "list",

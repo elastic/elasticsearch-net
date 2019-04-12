@@ -1429,14 +1429,14 @@ namespace Nest
 		///<summary>Whether the _source should be included in the response.</summary>
 		public GetDescriptor<TDocument> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetDescriptor<TDocument> SourceExclude(Fields sourceExclude) => Qs("_source_excludes", sourceExclude);
+		public GetDescriptor<TDocument> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetDescriptor<TDocument> SourceExclude(params Expression<Func<TDocument, object>>[] fields)  => Qs("_source_excludes", fields?.Select(e=>(Field)e));
+		public GetDescriptor<TDocument> SourceExclude(params Expression<Func<TDocument, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetDescriptor<TDocument> SourceInclude(Fields sourceInclude) => Qs("_source_includes", sourceInclude);
+		public GetDescriptor<TDocument> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetDescriptor<TDocument> SourceInclude(params Expression<Func<TDocument, object>>[] fields)  => Qs("_source_includes", fields?.Select(e=>(Field)e));
+		public GetDescriptor<TDocument> SourceInclude(params Expression<Func<TDocument, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 
 		///<summary>Explicit version number for concurrency control</summary>
 		public GetDescriptor<TDocument> Version(long? version) => Qs("version", version);
@@ -3280,10 +3280,10 @@ namespace Nest
 		public ReindexOnServerDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
 		public ReindexOnServerDescriptor RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
+		///<summary>Control how long to keep the search context alive</summary>
+		public ReindexOnServerDescriptor Scroll(Time scroll) => Qs("scroll", scroll);
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public ReindexOnServerDescriptor Slices(long? slices) => Qs("slices", slices);
-		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public ReindexOnServerDescriptor Scroll(Time scroll) => Qs("scroll", scroll);
 	}
 	///<summary>descriptor for ReindexRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>
 	public partial class ReindexRethrottleDescriptor  : RequestDescriptorBase<ReindexRethrottleDescriptor,ReindexRethrottleRequestParameters, IReindexRethrottleRequest>, IReindexRethrottleRequest
@@ -5325,13 +5325,15 @@ namespace Nest
 	///<summary>descriptor for SecurityGetPrivileges <pre>TODO</pre></summary>
 	public partial class GetPrivilegesDescriptor  : RequestDescriptorBase<GetPrivilegesDescriptor,GetPrivilegesRequestParameters, IGetPrivilegesRequest>, IGetPrivilegesRequest
 	{ 
+		///<summary>/_security/privilege</summary>
+		public GetPrivilegesDescriptor() : base(){}
+		///<summary>/_security/privilege/{application}</summary>
+		///<param name="application">Optional, accepts null</param>
+		public GetPrivilegesDescriptor(Name application) : base(r => r.Optional("application", application)){}
 		///<summary>/_security/privilege/{application}/{name}</summary>
 		///<param name="application">Optional, accepts null</param>
 		///<param name="name">Optional, accepts null</param>
 		public GetPrivilegesDescriptor(Name application, Name name) : base(r => r.Optional("application", application).Optional("name", name)){}
-		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-		[SerializationConstructor]
-		internal GetPrivilegesDescriptor() : base(){}
 		// values part of the url path
 		Name IGetPrivilegesRequest.Application => Self.RouteValues.Get<Name>("application");
 		Name IGetPrivilegesRequest.Name => Self.RouteValues.Get<Name>("name");
