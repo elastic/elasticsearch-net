@@ -36,7 +36,7 @@ namespace Nest
 			where TParams : RequestParameters<TParams>, new()
 			where TRequest : class, IRequest<TParams>
 		{
-			request.RequestParameters.DeserializationOverride = DeserializeCatHelpResponse;
+			request.RequestParameters.DeserializationOverride = DeserializeCatResponse<TCatRecord>;
 			return DoRequestAsync<TRequest, ICatResponse<TCatRecord>, CatResponse<TCatRecord>>(request, request.RequestParameters, ct, r => ForceJson(r));
 		}
 	}
