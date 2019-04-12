@@ -51,7 +51,7 @@ namespace Nest
 		/// <inheritdoc cref="GetCertificates(System.Func{Nest.GetCertificatesDescriptor,Nest.IGetCertificatesRequest})" />
 		public Task<IGetCertificatesResponse> GetCertificatesAsync(IGetCertificatesRequest request, CancellationToken ct = default)
 		{
-			request.RequestParameters.DeserializationOverride = ToTranslateSqlResponse;
+			request.RequestParameters.DeserializationOverride = ToCertificatesResponse;
 			return DoRequestAsync<IGetCertificatesRequest, IGetCertificatesResponse, GetCertificatesResponse>
 				(request, request.RequestParameters, ct);
 		}
