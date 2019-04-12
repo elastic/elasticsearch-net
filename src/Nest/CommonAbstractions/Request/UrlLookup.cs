@@ -2,51 +2,62 @@ using System;
 using System.Linq;
 using System.Text;
 
-namespace Nest {
+namespace Nest
+{
 	internal class UrlLookup
 	{
-		private UrlLookup(Func<ResolvedRouteValues, bool> lookup, Func<ResolvedRouteValues, IConnectionSettingsValues, string> toString) =>
-			(Predicate, ToUrl) = (lookup, toString);
+		private readonly string[] _parts;
+		private readonly string _route;
+		private readonly string[] _tokenized;
+		private readonly int _length;
 
-		public Func<ResolvedRouteValues, bool> Predicate { get; set; }
-		public Func<ResolvedRouteValues, IConnectionSettingsValues, string> ToUrl { get; set; }
-		
-		public static UrlLookup FromRoute(string route)
+		public UrlLookup(string route)
 		{
-			var tokenized = route.Replace("{", "{@")
+			_route = route;
+			_tokenized = route.Replace("{", "{@")
 				.Split(new[] { '{', '}' }, StringSplitOptions.RemoveEmptyEntries);
 
-			var parts = tokenized
+			_parts = _tokenized
 				.Where(p => p.StartsWith("@"))
 				.Select(p => p.Remove(0, 1))
 				.ToArray();
 
-			Func<ResolvedRouteValues, bool> lookup;
-			Func<ResolvedRouteValues, IConnectionSettingsValues, string> toString;
-			lookup = r => parts.All(p => r.ContainsKey(p));
-			toString = (r ,s) =>
-			{
-				var sb = new StringBuilder();
-				var i = 0;
-				foreach (var t in tokenized)
-				{
-					if (t[0] == '@')
-					{
-						if (r.TryGetValue(parts[i], out var v))
-						{
-							if (string.IsNullOrEmpty(v))
-								throw new Exception($"'{parts[i]}' defined but is empty on url: {route}");
-							sb.Append(Uri.EscapeDataString(v));
-						}
-						else throw new Exception($"No value provided for '{parts[i]}' on url: {route}");
+			_length = _route.Length + (_parts.Length * 4);
+		}
 
-						i++;
+		public bool Matches(ResolvedRouteValues values)
+		{
+			for (var i = 0; i < _parts.Length; i++)
+			{
+				if (!values.ContainsKey(_parts[i]))
+					return false;
+			}
+			return true;
+		}
+
+		public string ToUrl(ResolvedRouteValues values)
+		{
+			var sb = new StringBuilder(_length);
+			int i = 0;
+			for (var index = 0; index < _tokenized.Length; index++)
+			{
+				var t = _tokenized[index];
+				if (t[0] == '@')
+				{
+					if (values.TryGetValue(_parts[i], out var v))
+					{
+						if (string.IsNullOrEmpty(v))
+							throw new Exception($"'{_parts[i]}' defined but is empty on url: {_route}");
+
+						sb.Append(Uri.EscapeDataString(v));
 					}
-					else sb.Append(t);
+					else throw new Exception($"No value provided for '{_parts[i]}' on url: {_route}");
+
+					i++;
 				}
-				return sb.ToString();
-			};
-			return new UrlLookup(lookup, toString);
+				else sb.Append(t);
+			}
+			return sb.ToString();
 		}
 	}
 }
