@@ -14,6 +14,7 @@ namespace Nest
 	internal static class EmptyReadOnly<TElement>
 	{
 		public static readonly IReadOnlyCollection<TElement> Collection = new ReadOnlyCollection<TElement>(new TElement[0]);
+		public static readonly IReadOnlyList<TElement> List = new List<TElement>();
 	}
 
 	internal static class EmptyReadOnly<TKey, TValue>

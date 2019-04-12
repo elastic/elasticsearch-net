@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
 
@@ -9,17 +10,17 @@ namespace Nest
 	public partial interface IBulkRequest
 	{
 		[IgnoreDataMember]
-		IList<IBulkOperation> Operations { get; set; }
+		BulkOperationsCollection<IBulkOperation> Operations { get; set; }
 	}
 
 	public partial class BulkRequest
 	{
-		public IList<IBulkOperation> Operations { get; set; }
+		public BulkOperationsCollection<IBulkOperation> Operations { get; set; }
 	}
 
 	public partial class BulkDescriptor
 	{
-		IList<IBulkOperation> IBulkRequest.Operations { get; set; } = new SynchronizedCollection<IBulkOperation>();
+		BulkOperationsCollection<IBulkOperation> IBulkRequest.Operations { get; set; } = new BulkOperationsCollection<IBulkOperation>();
 
 		public BulkDescriptor AddOperation(IBulkOperation operation) => Assign(operation, (a, v) => a.Operations.AddIfNotNull(v));
 
@@ -35,10 +36,11 @@ namespace Nest
 			Func<BulkCreateDescriptor<T>, T, IBulkCreateOperation<T>> bulkCreateSelector = null
 		) where T : class
 		{
-			foreach (var item in @objects)
-				AddOperation(bulkCreateSelector.InvokeOrDefault(new BulkCreateDescriptor<T>().Document(item), item));
-
-			return this;
+			var operations = @objects
+				.Select(o => bulkCreateSelector.InvokeOrDefault(new BulkCreateDescriptor<T>().Document(o), o))
+				.Where(o => o != null)
+				.ToList();
+			return Assign(operations, (a, v) => a.Operations.AddRange(v));
 		}
 
 		public BulkDescriptor Index<T>(Func<BulkIndexDescriptor<T>, IBulkIndexOperation<T>> bulkIndexSelector) where T : class =>
@@ -52,10 +54,11 @@ namespace Nest
 		public BulkDescriptor IndexMany<T>(IEnumerable<T> @objects, Func<BulkIndexDescriptor<T>, T, IBulkIndexOperation<T>> bulkIndexSelector = null)
 			where T : class
 		{
-			foreach (var item in @objects)
-				AddOperation(bulkIndexSelector.InvokeOrDefault(new BulkIndexDescriptor<T>().Document(item), item));
-
-			return this;
+			var operations = @objects
+				.Select(o => bulkIndexSelector.InvokeOrDefault(new BulkIndexDescriptor<T>().Document(o), o))
+				.Where(o => o != null)
+				.ToList();
+			return Assign(operations, (a, v) => a.Operations.AddRange(v));
 		}
 
 		public BulkDescriptor Delete<T>(T obj, Func<BulkDeleteDescriptor<T>, IBulkDeleteOperation<T>> bulkDeleteSelector = null) where T : class =>
@@ -73,10 +76,11 @@ namespace Nest
 			Func<BulkDeleteDescriptor<T>, T, IBulkDeleteOperation<T>> bulkDeleteSelector = null
 		) where T : class
 		{
-			foreach (var item in @objects)
-				AddOperation(bulkDeleteSelector.InvokeOrDefault(new BulkDeleteDescriptor<T>().Document(item), item));
-
-			return this;
+			var operations = @objects
+				.Select(o => bulkDeleteSelector.InvokeOrDefault(new BulkDeleteDescriptor<T>().Document(o), o))
+				.Where(o => o != null)
+				.ToList();
+			return Assign(operations, (a, v) => a.Operations.AddRange(v));
 		}
 
 		/// <summary>
@@ -88,10 +92,11 @@ namespace Nest
 			Func<BulkDeleteDescriptor<T>, string, IBulkDeleteOperation<T>> bulkDeleteSelector = null
 		) where T : class
 		{
-			foreach (var item in ids)
-				AddOperation(bulkDeleteSelector.InvokeOrDefault(new BulkDeleteDescriptor<T>().Id(item), item));
-
-			return this;
+			var operations = ids
+				.Select(id => bulkDeleteSelector.InvokeOrDefault(new BulkDeleteDescriptor<T>().Id(id), id))
+				.Where(id => id != null)
+				.ToList();
+			return Assign(operations, (a, v) => a.Operations.AddRange(v));
 		}
 
 		/// <summary>
@@ -103,10 +108,11 @@ namespace Nest
 			Func<BulkDeleteDescriptor<T>, long, IBulkDeleteOperation<T>> bulkDeleteSelector = null
 		) where T : class
 		{
-			foreach (var item in ids)
-				AddOperation(bulkDeleteSelector.InvokeOrDefault(new BulkDeleteDescriptor<T>().Id(item), item));
-
-			return this;
+			var operations = ids
+				.Select(id => bulkDeleteSelector.InvokeOrDefault(new BulkDeleteDescriptor<T>().Id(id), id))
+				.Where(id => id != null)
+				.ToList();
+			return Assign(operations, (a, v) => a.Operations.AddRange(v));
 		}
 
 		/// <summary>
@@ -118,10 +124,11 @@ namespace Nest
 			Func<BulkUpdateDescriptor<T, T>, T, IBulkUpdateOperation<T, T>> bulkUpdateSelector
 		) where T : class
 		{
-			foreach (var item in @objects)
-				AddOperation(bulkUpdateSelector.InvokeOrDefault(new BulkUpdateDescriptor<T, T>().IdFrom(item), item));
-
-			return this;
+			var operations = @objects
+				.Select(o => bulkUpdateSelector.InvokeOrDefault(new BulkUpdateDescriptor<T, T>().IdFrom(o), o))
+				.Where(o => o != null)
+				.ToList();
+			return Assign(operations, (a, v) => a.Operations.AddRange(v));
 		}
 
 		/// <summary>
@@ -134,10 +141,11 @@ namespace Nest
 		) where T : class
 		  where TPartialDocument : class
 		{
-			foreach (var item in @objects)
-				AddOperation(bulkUpdateSelector.InvokeOrDefault(new BulkUpdateDescriptor<T, TPartialDocument>().IdFrom(item), item));
-
-			return this;
+			var operations = @objects
+				.Select(o => bulkUpdateSelector.InvokeOrDefault(new BulkUpdateDescriptor<T, TPartialDocument>().IdFrom(o), o))
+				.Where(o => o != null)
+				.ToList();
+			return Assign(operations, (a, v) => a.Operations.AddRange(v));
 		}
 
 		public BulkDescriptor Update<T>(Func<BulkUpdateDescriptor<T, T>, IBulkUpdateOperation<T, T>> bulkUpdateSelector) where T : class =>
