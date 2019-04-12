@@ -31,7 +31,7 @@ namespace Elasticsearch.Net
 			SerializationFormatting formatting = SerializationFormatting.Indented
 		)
 		{
-			memoryStreamFactory = memoryStreamFactory ?? RecyclableMemoryStreamFactory.DefaultInstance;
+			memoryStreamFactory = memoryStreamFactory ?? RecyclableMemoryStreamFactory.Default;
 			using (var ms = memoryStreamFactory.Create())
 			{
 				serializer.Serialize(data, ms, formatting);
