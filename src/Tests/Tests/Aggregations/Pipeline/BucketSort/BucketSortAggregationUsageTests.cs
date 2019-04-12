@@ -80,7 +80,7 @@ namespace Tests.Aggregations.Pipeline.BucketSort
 					{
 						Sort = new List<ISort>
 						{
-							new SortField { Field = "commits", Order = SortOrder.Descending }
+							new FieldSort { Field = "commits", Order = SortOrder.Descending }
 						},
 						From = 0,
 						Size = 3,

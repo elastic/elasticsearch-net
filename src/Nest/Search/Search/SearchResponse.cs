@@ -16,10 +16,6 @@ namespace Nest
 		/// </summary>
 		AggregateDictionary Aggregations { get; }
 
-		/// <inheritdoc cref="Aggregations"/>
-		[Obsolete("Aggs has been renamed to Aggregations and will be removed in NEST 7.x")]
-		AggregateDictionary Aggs { get; }
-
 		/// <summary>
 		/// Gets the statistics about the clusters on which the search query was executed.
 		/// </summary>
@@ -120,13 +116,10 @@ namespace Nest
 		private IReadOnlyCollection<FieldValues> _fields;
 
 		private IReadOnlyCollection<IHit<T>> _hits;
+
 		/// <inheritdoc />
 		[DataMember(Name ="aggregations")]
 		public AggregateDictionary Aggregations { get; internal set; } = AggregateDictionary.Default;
-
-		/// <inheritdoc />
-		[IgnoreDataMember]
-		public AggregateDictionary Aggs => Aggregations;
 
 		/// <inheritdoc />
 		[DataMember(Name = "_clusters")]

@@ -18,9 +18,6 @@ namespace Nest
 		[IgnoreDataMember]
 		protected TInterface Self => _self;
 
-		[Obsolete("Use the overload that accepts TValue")]
-		protected TDescriptor Assign(Action<TInterface> assigner) => Fluent.Assign(_self, assigner);
-
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		protected TDescriptor Assign<TValue>(TValue value, Action<TInterface, TValue> assigner) => Fluent.Assign(_self, value, assigner);
 

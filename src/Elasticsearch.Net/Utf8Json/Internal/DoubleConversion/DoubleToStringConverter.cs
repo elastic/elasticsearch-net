@@ -185,6 +185,7 @@ namespace Elasticsearch.Net
             // PRECISION
         }
 
+        [Flags]
         enum Flags
         {
             NO_FLAGS = 0,
@@ -214,7 +215,7 @@ namespace Elasticsearch.Net
         //const int max_leading_padding_zeroes_in_precision_mode_;
         //const int max_trailing_padding_zeroes_in_precision_mode_;
 
-        static readonly Flags flags_ = Flags.UNIQUE_ZERO | Flags.EMIT_POSITIVE_EXPONENT_SIGN;
+        static readonly Flags flags_ = Flags.UNIQUE_ZERO | Flags.EMIT_POSITIVE_EXPONENT_SIGN | Flags.EMIT_TRAILING_DECIMAL_POINT | Flags.EMIT_TRAILING_ZERO_AFTER_POINT;
         static readonly char exponent_character_ = 'E';
         static readonly int decimal_in_shortest_low_ = -4; // C# ToString("G")
         static readonly int decimal_in_shortest_high_ = 15;// C# ToString("G")

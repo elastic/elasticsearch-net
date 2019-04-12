@@ -18,10 +18,6 @@ namespace Nest
 		[DataMember(Name = "_index")]
 		string Index { get; }
 
-		[DataMember(Name = "_parent")]
-		[Obsolete("No longer returned on indices created in Elasticsearch 6.0")]
-		string Parent { get; }
-
 		[DataMember(Name = "_routing")]
 		string Routing { get; }
 
@@ -43,7 +39,6 @@ namespace Nest
 		public bool Found { get; internal set; }
 		public string Id { get; internal set; }
 		public string Index { get; internal set; }
-		public string Parent { get; internal set; }
 		public string Routing { get; internal set; }
 		public TDocument Source { get; internal set; }
 		public string Type { get; internal set; }

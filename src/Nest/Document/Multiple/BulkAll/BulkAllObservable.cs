@@ -119,9 +119,6 @@ namespace Nest
 					if (request.BufferToBulk != null) request.BufferToBulk(s, buffer);
 					else s.IndexMany(buffer);
 					if (!string.IsNullOrEmpty(request.Pipeline)) s.Pipeline(request.Pipeline);
-#pragma warning disable 618
-					if (request.Refresh.HasValue) s.Refresh(request.Refresh.Value);
-#pragma warning restore 618
 					if (request.Routing != null) s.Routing(request.Routing);
 					if (request.WaitForActiveShards.HasValue) s.WaitForActiveShards(request.WaitForActiveShards.ToString());
 

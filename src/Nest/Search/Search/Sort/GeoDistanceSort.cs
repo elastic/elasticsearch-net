@@ -21,7 +21,7 @@ namespace Nest
 
 		/// <summary> The unit to use when computing sort values. The default is m (meters) </summary>
 		[DataMember(Name ="unit")]
-		DistanceUnit? GeoUnit { get; set; }
+		DistanceUnit? Unit { get; set; }
 
 		/// <summary>
 		/// Indicates if the unmapped field should be treated as a missing value. Setting it to `true` is equivalent to specifying
@@ -41,8 +41,8 @@ namespace Nest
 
 		public Field Field { get; set; }
 
-		/// <inheritdoc cref="IGeoDistanceSort.GeoUnit" />
-		public DistanceUnit? GeoUnit { get; set; }
+		/// <inheritdoc cref="IGeoDistanceSort.Unit" />
+		public DistanceUnit? Unit { get; set; }
 
 		/// <inheritdoc cref="IGeoDistanceSort.IgnoreUnmapped" />
 		public bool? IgnoreUnmapped { get; set; }
@@ -52,32 +52,32 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="IGeoDistanceSort" />
-	public class SortGeoDistanceDescriptor<T> : SortDescriptorBase<SortGeoDistanceDescriptor<T>, IGeoDistanceSort, T>, IGeoDistanceSort
+	public class GeoDistanceSortDescriptor<T> : SortDescriptorBase<GeoDistanceSortDescriptor<T>, IGeoDistanceSort, T>, IGeoDistanceSort
 		where T : class
 	{
 		protected override Field SortKey => "_geo_distance";
 		GeoDistanceType? IGeoDistanceSort.DistanceType { get; set; }
 
 		Field IGeoDistanceSort.Field { get; set; }
-		DistanceUnit? IGeoDistanceSort.GeoUnit { get; set; }
+		DistanceUnit? IGeoDistanceSort.Unit { get; set; }
 		bool? IGeoDistanceSort.IgnoreUnmapped { get; set; }
 		IEnumerable<GeoLocation> IGeoDistanceSort.Points { get; set; }
 
-		public SortGeoDistanceDescriptor<T> Points(params GeoLocation[] geoLocations) => Assign(geoLocations, (a, v) => a.Points = v);
+		public GeoDistanceSortDescriptor<T> Points(params GeoLocation[] geoLocations) => Assign(geoLocations, (a, v) => a.Points = v);
 
-		public SortGeoDistanceDescriptor<T> Points(IEnumerable<GeoLocation> geoLocations) => Assign(geoLocations, (a, v) => a.Points = v);
+		public GeoDistanceSortDescriptor<T> Points(IEnumerable<GeoLocation> geoLocations) => Assign(geoLocations, (a, v) => a.Points = v);
 
-		/// <inheritdoc cref="IGeoDistanceSort.GeoUnit" />
-		public SortGeoDistanceDescriptor<T> Unit(DistanceUnit? unit) => Assign(unit, (a, v) => a.GeoUnit = v);
+		/// <inheritdoc cref="IGeoDistanceSort.Unit" />
+		public GeoDistanceSortDescriptor<T> Unit(DistanceUnit? unit) => Assign(unit, (a, v) => a.Unit = v);
 
 		/// <inheritdoc cref="IGeoDistanceSort.DistanceType" />
-		public SortGeoDistanceDescriptor<T> DistanceType(GeoDistanceType? distanceType) => Assign(distanceType, (a, v) => a.DistanceType = v);
+		public GeoDistanceSortDescriptor<T> DistanceType(GeoDistanceType? distanceType) => Assign(distanceType, (a, v) => a.DistanceType = v);
 
-		public SortGeoDistanceDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
+		public GeoDistanceSortDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public SortGeoDistanceDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
+		public GeoDistanceSortDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IGeoDistanceSort.IgnoreUnmapped" />
-		public SortGeoDistanceDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmapped = v);
+		public GeoDistanceSortDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmapped = v);
 	}
 }

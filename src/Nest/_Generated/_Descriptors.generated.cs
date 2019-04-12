@@ -944,9 +944,6 @@ namespace Nest
 
 		///<summary>Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
 		public CreateDescriptor<TDocument> WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-		///<summary>ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public CreateDescriptor<TDocument> Parent(string parent) => Qs("parent", parent);
 		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public CreateDescriptor<TDocument> Refresh(Refresh? refresh) => Qs("refresh", refresh);
 		///<summary>
@@ -998,9 +995,6 @@ namespace Nest
 
 		///<summary>Sets the number of shard copies that must be active before proceeding with the delete operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
 		public DeleteDescriptor<TDocument> WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-		///<summary>ID of parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public DeleteDescriptor<TDocument> Parent(string parent) => Qs("parent", parent);
 		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public DeleteDescriptor<TDocument> Refresh(Refresh? refresh) => Qs("refresh", refresh);
 		///<summary>
@@ -1192,9 +1186,6 @@ namespace Nest
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public DocumentExistsDescriptor<TDocument> StoredFields(params Expression<Func<TDocument, object>>[] fields)  => Qs("stored_fields", fields?.Select(e=>(Field)e));
 
-		///<summary>The ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public DocumentExistsDescriptor<TDocument> Parent(string parent) => Qs("parent", parent);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public DocumentExistsDescriptor<TDocument> Preference(string preference) => Qs("preference", preference);
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
@@ -1256,9 +1247,6 @@ namespace Nest
 
 		// Request parameters
 
-		///<summary>The ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public SourceExistsDescriptor<TDocument> Parent(string parent) => Qs("parent", parent);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public SourceExistsDescriptor<TDocument> Preference(string preference) => Qs("preference", preference);
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
@@ -1330,9 +1318,6 @@ namespace Nest
 		public ExplainDescriptor<TDocument> Df(string df) => Qs("df", df);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public ExplainDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
-		///<summary>The ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public ExplainDescriptor<TDocument> Parent(string parent) => Qs("parent", parent);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public ExplainDescriptor<TDocument> Preference(string preference) => Qs("preference", preference);
 		///<summary>Query in the Lucene query string syntax</summary>
@@ -1427,9 +1412,6 @@ namespace Nest
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public GetDescriptor<TDocument> StoredFields(params Expression<Func<TDocument, object>>[] fields)  => Qs("stored_fields", fields?.Select(e=>(Field)e));
 
-		///<summary>The ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public GetDescriptor<TDocument> Parent(string parent) => Qs("parent", parent);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public GetDescriptor<TDocument> Preference(string preference) => Qs("preference", preference);
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
@@ -1508,9 +1490,6 @@ namespace Nest
 
 		// Request parameters
 
-		///<summary>The ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public SourceDescriptor<TDocument> Parent(string parent) => Qs("parent", parent);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public SourceDescriptor<TDocument> Preference(string preference) => Qs("preference", preference);
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
@@ -1581,9 +1560,6 @@ namespace Nest
 		public IndexDescriptor<TDocument> WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		///<summary>Explicit operation type</summary>
 		public IndexDescriptor<TDocument> OpType(OpType? opType) => Qs("op_type", opType);
-		///<summary>ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public IndexDescriptor<TDocument> Parent(string parent) => Qs("parent", parent);
 		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public IndexDescriptor<TDocument> Refresh(Refresh? refresh) => Qs("refresh", refresh);
 		///<summary>
@@ -2634,9 +2610,6 @@ namespace Nest
 
 		// Request parameters
 
-		///<summary>whether or not to copy settings from the source index (defaults to false)</summary>
-		[Obsolete("Scheduled to be removed in 7.0, Elasticsearch 6.4 will throw an exception if this is turned off see elastic/elasticsearch#30404")]
-		public ShrinkIndexDescriptor CopySettings(bool? copySettings = true) => Qs("copy_settings", copySettings);
 		///<summary>Explicit operation timeout</summary>
 		public ShrinkIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
@@ -2666,9 +2639,6 @@ namespace Nest
 
 		// Request parameters
 
-		///<summary>whether or not to copy settings from the source index (defaults to false)</summary>
-		[Obsolete("Scheduled to be removed in 7.0, Elasticsearch 6.4 will throw an exception if this is turned off see elastic/elasticsearch#30404")]
-		public SplitIndexDescriptor CopySettings(bool? copySettings = true) => Qs("copy_settings", copySettings);
 		///<summary>Explicit operation timeout</summary>
 		public SplitIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
@@ -3075,9 +3045,6 @@ namespace Nest
 		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
 		///</summary>
 		public MultiTermVectorsDescriptor Routing(Routing routing) => Qs("routing", routing);
-		///<summary>Parent id of documents. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public MultiTermVectorsDescriptor Parent(string parent) => Qs("parent", parent);
 		///<summary>Specifies if requests are real-time as opposed to near-real-time (default: true).</summary>
 		public MultiTermVectorsDescriptor Realtime(bool? realtime = true) => Qs("realtime", realtime);
 		///<summary>Explicit version number for concurrency control</summary>
@@ -3870,9 +3837,6 @@ namespace Nest
 		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
 		///</summary>
 		public TermVectorsDescriptor<TDocument> Routing(Routing routing) => Qs("routing", routing);
-		///<summary>Parent id of documents.</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public TermVectorsDescriptor<TDocument> Parent(string parent) => Qs("parent", parent);
 		///<summary>Specifies if request is real-time as opposed to near-real-time (default: true).</summary>
 		public TermVectorsDescriptor<TDocument> Realtime(bool? realtime = true) => Qs("realtime", realtime);
 		///<summary>Explicit version number for concurrency control</summary>
@@ -3916,9 +3880,6 @@ namespace Nest
 		public UpdateDescriptor<TDocument, TPartialDocument> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>The script language (default: painless)</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Lang(string lang) => Qs("lang", lang);
-		///<summary>ID of the parent document. Is is only used for routing and when for the upsert request</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public UpdateDescriptor<TDocument, TPartialDocument> Parent(string parent) => Qs("parent", parent);
 		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Refresh(Refresh? refresh) => Qs("refresh", refresh);
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>

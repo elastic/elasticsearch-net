@@ -15,10 +15,8 @@ namespace Nest
 
 		string Index { get; }
 
-		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 6.x and up, use Routing instead.")]
-		string Parent { get; }
-
 		string Routing { get; }
+
 		TDocument Source { get; }
 
 		string Type { get; }
@@ -44,9 +42,6 @@ namespace Nest
 
 		[DataMember(Name = "_index")]
 		public string Index { get; internal set; }
-
-		[DataMember(Name = "_parent")]
-		public string Parent { get; internal set; }
 
 		[DataMember(Name = "_routing")]
 		public string Routing { get; internal set; }

@@ -307,14 +307,16 @@ namespace Elasticsearch.Net
 
 		public void Serialize(ref JsonWriter writer, decimal value, IJsonFormatterResolver formatterResolver)
 		{
+			// always include decimal point and at least one decimal place
+			var s = value.ToString("0.0###########################", CultureInfo.InvariantCulture);
 			if (serializeAsString)
 			{
-				writer.WriteString(value.ToString(CultureInfo.InvariantCulture));
+				writer.WriteString(s);
 			}
 			else
 			{
 				// write as number format.
-				writer.WriteRaw(StringEncoding.UTF8.GetBytes(value.ToString(CultureInfo.InvariantCulture)));
+				writer.WriteRaw(StringEncoding.UTF8.GetBytes(s));
 			}
 		}
 

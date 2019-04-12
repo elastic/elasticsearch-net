@@ -31,10 +31,6 @@ namespace Nest
 
 		string IAggregation.Name { get; set; }
 
-		[Obsolete("Use the overload that accepts TValue")]
-		protected TBucketAggregation Assign(Action<TBucketAggregationInterface> assigner) =>
-			Fluent.Assign((TBucketAggregation)this, assigner);
-
 		protected TBucketAggregation Assign<TValue>(TValue value, Action<TBucketAggregationInterface, TValue> assigner) =>
 			Fluent.Assign((TBucketAggregation)this, value, assigner);
 

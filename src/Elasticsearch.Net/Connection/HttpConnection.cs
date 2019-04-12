@@ -74,7 +74,7 @@ namespace Elasticsearch.Net
 			}
 			responseStream = responseStream ?? Stream.Null;
 			var response = ResponseBuilder.ToResponse<TResponse>(requestData, ex, statusCode, warnings, responseStream, mimeType);
-			//var response = builder.ToResponse();
+
 			//explicit dispose of response not needed (as documented on MSDN) on desktop CLR
 			//but we can not guarantee this is true for all HttpMessageHandler implementations
 			if (typeof(TResponse) != typeof(ElasticsearchResponse<Stream>)) responseMessage?.Dispose();
@@ -150,7 +150,7 @@ namespace Elasticsearch.Net
 			return client;
 		}
 
-		protected virtual HttpClientHandler CreateHttpClientHandler(RequestData requestData)
+		protected virtual HttpMessageHandler CreateHttpClientHandler(RequestData requestData)
 		{
 			var handler = new HttpClientHandler
 			{
@@ -212,7 +212,12 @@ namespace Elasticsearch.Net
 			var method = ConvertHttpMethod(requestData.Method);
 			var requestMessage = new HttpRequestMessage(method, requestData.Uri);
 
-			foreach (string key in requestData.Headers) requestMessage.Headers.TryAddWithoutValidation(key, requestData.Headers.GetValues(key));
+			if (requestData.Headers != null)
+			{
+				foreach (string key in requestData.Headers)
+					requestMessage.Headers.TryAddWithoutValidation(key, requestData.Headers.GetValues(key));
+			}
+
 			requestMessage.Headers.Connection.Clear();
 			requestMessage.Headers.ConnectionClose = false;
 			requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(requestData.Accept));

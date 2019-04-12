@@ -646,7 +646,9 @@ namespace Nest
 		public IBucket GetRangeBucket(ref JsonReader reader, IJsonFormatterResolver formatterResolver, string key, string propertyName)
 		{
 			string fromAsString = null;
+			string fromString = null;
 			string toAsString = null;
+			string toString = null;
 			long? docCount = null;
 			double? toDouble = null;
 			double? fromDouble = null;
@@ -657,16 +659,20 @@ namespace Nest
 				switch (propertyName)
 				{
 					case Parser.From:
-						// TODO: handle string "from" e.g. ip_range
-						if (reader.GetCurrentJsonToken() == JsonToken.Number)
+						var currentFromJsonToken = reader.GetCurrentJsonToken();
+						if (currentFromJsonToken == JsonToken.Number)
 							fromDouble = reader.ReadDouble();
+						else if (currentFromJsonToken == JsonToken.String)
+							fromString = reader.ReadString();
 						else
 							reader.ReadNext();
 						break;
 					case Parser.To:
-						// TODO: handle string "to" e.g. ip_range
-						if (reader.GetCurrentJsonToken() == JsonToken.Number)
+						var currentJsonToToken = reader.GetCurrentJsonToken();
+						if (currentJsonToToken == JsonToken.Number)
 							toDouble = reader.ReadDouble();
+						else if (currentJsonToToken == JsonToken.String)
+							toString = reader.ReadString();
 						else
 							reader.ReadNext();
 						break;
@@ -705,15 +711,29 @@ namespace Nest
 			if (isSubAggregateName)
 				subAggregates = GetSubAggregates(ref reader, propertyName, formatterResolver);
 
-			var bucket = new RangeBucket(subAggregates)
+			IBucket bucket;
+			if (fromString != null || toString != null)
 			{
-				Key = key,
-				From = fromDouble,
-				To = toDouble,
-				DocCount = docCount.GetValueOrDefault(),
-				FromAsString = fromAsString,
-				ToAsString = toAsString,
-			};
+				bucket = new IpRangeBucket(subAggregates)
+				{
+					Key = key,
+					DocCount = docCount.GetValueOrDefault(),
+					From = fromString,
+					To = toString,
+				};
+			}
+			else
+			{
+				bucket = new RangeBucket(subAggregates)
+				{
+					Key = key,
+					From = fromDouble,
+					To = toDouble,
+					DocCount = docCount.GetValueOrDefault(),
+					FromAsString = fromAsString,
+					ToAsString = toAsString,
+				};
+			}
 
 			return bucket;
 		}

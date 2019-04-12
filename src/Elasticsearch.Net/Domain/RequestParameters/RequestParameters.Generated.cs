@@ -609,9 +609,6 @@ namespace Elasticsearch.Net
 		/// shard (number of replicas + 1)
 		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		///<summary>ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>
 		/// If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
@@ -638,9 +635,6 @@ namespace Elasticsearch.Net
 		/// shard (number of replicas + 1)
 		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		///<summary>ID of parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>
 		/// If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
@@ -757,9 +751,6 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public string[] StoredFields { get => Q<string[]>("stored_fields"); set => Q("stored_fields", value); }
-		///<summary>The ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
@@ -783,9 +774,6 @@ namespace Elasticsearch.Net
 	public class SourceExistsRequestParameters : RequestParameters<SourceExistsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
-		///<summary>The ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
@@ -821,9 +809,6 @@ namespace Elasticsearch.Net
 		public string[] StoredFields { get => Q<string[]>("stored_fields"); set => Q("stored_fields", value); }
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
-		///<summary>The ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Query in the Lucene query string syntax</summary>
@@ -859,9 +844,6 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public string[] StoredFields { get => Q<string[]>("stored_fields"); set => Q("stored_fields", value); }
-		///<summary>The ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
@@ -892,9 +874,6 @@ namespace Elasticsearch.Net
 	public class SourceRequestParameters : RequestParameters<SourceRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>The ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
@@ -926,9 +905,6 @@ namespace Elasticsearch.Net
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 		///<summary>Explicit operation type</summary>
 		public OpType? OpType { get => Q<OpType?>("op_type"); set => Q("op_type", value); }
-		///<summary>ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>
 		/// If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
@@ -1448,9 +1424,6 @@ namespace Elasticsearch.Net
 	public class ShrinkIndexRequestParameters : RequestParameters<ShrinkIndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		///<summary>whether or not to copy settings from the source index (defaults to false)</summary>
-		[Obsolete("Scheduled to be removed in 7.0, Elasticsearch 6.4 will throw an exception if this is turned off see elastic/elasticsearch#30404")]
-		public bool? CopySettings { get => Q<bool?>("copy_settings"); set => Q("copy_settings", value); }
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
@@ -1462,9 +1435,6 @@ namespace Elasticsearch.Net
 	public class SplitIndexRequestParameters : RequestParameters<SplitIndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		///<summary>whether or not to copy settings from the source index (defaults to false)</summary>
-		[Obsolete("Scheduled to be removed in 7.0, Elasticsearch 6.4 will throw an exception if this is turned off see elastic/elasticsearch#30404")]
-		public bool? CopySettings { get => Q<bool?>("copy_settings"); set => Q("copy_settings", value); }
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
@@ -1682,9 +1652,6 @@ namespace Elasticsearch.Net
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Specific routing value. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
 		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
-		///<summary>Parent id of documents. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>Specifies if requests are real-time as opposed to near-real-time (default: true).</summary>
 		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 		///<summary>Explicit version number for concurrency control</summary>
@@ -2097,9 +2064,6 @@ namespace Elasticsearch.Net
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Specific routing value.</summary>
 		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
-		///<summary>Parent id of documents.</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>Specifies if request is real-time as opposed to near-real-time (default: true).</summary>
 		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 		///<summary>Explicit version number for concurrency control</summary>
@@ -2121,9 +2085,6 @@ namespace Elasticsearch.Net
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>The script language (default: painless)</summary>
 		public string Lang { get => Q<string>("lang"); set => Q("lang", value); }
-		///<summary>ID of the parent document. Is is only used for routing and when for the upsert request</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>
 		/// If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.

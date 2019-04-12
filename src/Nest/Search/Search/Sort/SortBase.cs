@@ -26,25 +26,8 @@ namespace Nest
 		/// <summary>
 		/// Specifies the path and filter to apply when sorting on a nested field
 		/// </summary>
-		/// <remarks>
-		/// Valid in Elasticsearch 6.1.0+
-		/// </remarks>
 		[DataMember(Name ="nested")]
 		INestedSort Nested { get; set; }
-
-		/// <summary>
-		/// Specifies the filter to apply when sorting on a nested field
-		/// </summary>
-		[DataMember(Name ="nested_filter")]
-		[Obsolete("Deprecated in 6.1.0. Use Nested. Will be removed in 7.x")]
-		QueryContainer NestedFilter { get; set; }
-
-		/// <summary>
-		/// Specifies the path to apply when sorting on a nested field
-		/// </summary>
-		[DataMember(Name ="nested_path")]
-		[Obsolete("Deprecated in 6.1.0. Use Nested. Will be removed in 7.x")]
-		Field NestedPath { get; set; }
 
 		/// <summary>
 		/// Controls the order of sorting
@@ -71,14 +54,6 @@ namespace Nest
 		public INestedSort Nested { get; set; }
 
 		/// <inheritdoc />
-		[Obsolete("Deprecated in 6.1.0. Use Nested. Will be removed in 7.x")]
-		public QueryContainer NestedFilter { get; set; }
-
-		/// <inheritdoc />
-		[Obsolete("Deprecated in 6.1.0. Use Nested. Will be removed in 7.x")]
-		public Field NestedPath { get; set; }
-
-		/// <inheritdoc />
 		public SortOrder? Order { get; set; }
 
 		/// <summary>
@@ -103,8 +78,6 @@ namespace Nest
 		object ISort.Missing { get; set; }
 		SortMode? ISort.Mode { get; set; }
 		INestedSort ISort.Nested { get; set; }
-		QueryContainer ISort.NestedFilter { get; set; }
-		Field ISort.NestedPath { get; set; }
 		SortOrder? ISort.Order { get; set; }
 		Field ISort.SortKey => SortKey;
 
@@ -123,19 +96,6 @@ namespace Nest
 
 		/// <inheritdoc cref="ISort.Mode" />
 		public virtual TDescriptor Mode(SortMode? mode) => Assign(mode, (a, v) => a.Mode = v);
-
-		/// <inheritdoc cref="ISort.NestedFilter" />
-		[Obsolete("Deprecated in 6.1.0. Use Nested. Will be removed in 7.x")]
-		public virtual TDescriptor NestedFilter(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector) =>
-			Assign(filterSelector, (a, v) => a.NestedFilter = v?.Invoke(new QueryContainerDescriptor<T>()));
-
-		/// <inheritdoc cref="ISort.NestedPath" />
-		[Obsolete("Deprecated in 6.1.0. Use Nested. Will be removed in 7.x")]
-		public virtual TDescriptor NestedPath(Field path) => Assign(path, (a, v) => a.NestedPath = v);
-
-		/// <inheritdoc cref="ISort.NestedPath" />
-		[Obsolete("Deprecated in 6.1.0. Use Nested. Will be removed in 7.x")]
-		public virtual TDescriptor NestedPath(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.NestedPath = v);
 
 		/// <summary>
 		/// Specifies that documents which are missing the sort field should be ordered last

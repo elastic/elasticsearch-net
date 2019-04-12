@@ -38,7 +38,6 @@ namespace Nest
 		StringDistance? StringDistance { get; set; }
 
 		[DataMember(Name = "suggest_mode")]
-
 		SuggestMode? SuggestMode { get; set; }
 
 		[IgnoreDataMember]
