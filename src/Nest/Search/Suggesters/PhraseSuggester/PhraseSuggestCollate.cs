@@ -47,6 +47,7 @@ namespace Nest
 		public IPhraseSuggestCollateQuery Query { get; set; }
 	}
 
+	/// <inheritdoc cref="IPhraseSuggestCollate" />
 	public class PhraseSuggestCollateDescriptor<T> : DescriptorBase<PhraseSuggestCollateDescriptor<T>, IPhraseSuggestCollate>, IPhraseSuggestCollate
 		where T : class
 	{
@@ -54,27 +55,17 @@ namespace Nest
 		bool? IPhraseSuggestCollate.Prune { get; set; }
 		IPhraseSuggestCollateQuery IPhraseSuggestCollate.Query { get; set; }
 
-		/// <summary>
-		/// The collate query to run
-		/// </summary>
+		/// <inheritdoc cref="IPhraseSuggestCollate.Query" />
 		public PhraseSuggestCollateDescriptor<T> Query(Func<PhraseSuggestCollateQueryDescriptor, IPhraseSuggestCollateQuery> selector) =>
 			Assign(selector, (a, v) => a.Query = v?.Invoke(new PhraseSuggestCollateQueryDescriptor()));
 
-		/// <summary>
-		/// Controls if all phrase suggestions will be returned. When set to <c>true</c>, the suggestions will have
-		/// an additional option collate_match, which will be <c>true</c> if matching documents for the phrase was found,
-		/// <c>false</c> otherwise. The default value for <see cref="Prune" /> is <c>false</c>.
-		/// </summary>
+		/// <inheritdoc cref="IPhraseSuggestCollate.Prune" />
 		public PhraseSuggestCollateDescriptor<T> Prune(bool? prune = true) => Assign(prune, (a, v) => a.Prune = v);
 
-		/// <summary>
-		/// The parameters for the query. the suggestion value will be added to the variables you specify.
-		/// </summary>
+		/// <inheritdoc cref="IPhraseSuggestCollate.Params" />
 		public PhraseSuggestCollateDescriptor<T> Params(IDictionary<string, object> paramsDictionary) => Assign(paramsDictionary, (a, v) => a.Params = v);
 
-		/// <summary>
-		/// The parameters for the query. the suggestion value will be added to the variables you specify.
-		/// </summary>
+		/// <inheritdoc cref="IPhraseSuggestCollate.Params" />
 		public PhraseSuggestCollateDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramsDictionary) =>
 			Assign(paramsDictionary(new FluentDictionary<string, object>()), (a, v) => a.Params = v);
 	}

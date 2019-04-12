@@ -16,13 +16,13 @@ namespace Nest
 		int? MaxEdits { get; set; }
 
 		[DataMember(Name = "max_inspections")]
-		decimal? MaxInspections { get; set; }
+		float? MaxInspections { get; set; }
 
 		[DataMember(Name = "max_term_freq")]
-		decimal? MaxTermFrequency { get; set; }
+		float? MaxTermFrequency { get; set; }
 
 		[DataMember(Name = "min_doc_freq")]
-		decimal? MinDocFrequency { get; set; }
+		float? MinDocFrequency { get; set; }
 
 		[DataMember(Name = "min_word_length")]
 		int? MinWordLength { get; set; }
@@ -48,9 +48,9 @@ namespace Nest
 	{
 		public Field Field { get; set; }
 		public int? MaxEdits { get; set; }
-		public decimal? MaxInspections { get; set; }
-		public decimal? MaxTermFrequency { get; set; }
-		public decimal? MinDocFrequency { get; set; }
+		public float? MaxInspections { get; set; }
+		public float? MaxTermFrequency { get; set; }
+		public float? MinDocFrequency { get; set; }
 		public int? MinWordLength { get; set; }
 		public string PostFilter { get; set; }
 		public string PreFilter { get; set; }
@@ -64,9 +64,9 @@ namespace Nest
 	{
 		Field IDirectGenerator.Field { get; set; }
 		int? IDirectGenerator.MaxEdits { get; set; }
-		decimal? IDirectGenerator.MaxInspections { get; set; }
-		decimal? IDirectGenerator.MaxTermFrequency { get; set; }
-		decimal? IDirectGenerator.MinDocFrequency { get; set; }
+		float? IDirectGenerator.MaxInspections { get; set; }
+		float? IDirectGenerator.MaxTermFrequency { get; set; }
+		float? IDirectGenerator.MinDocFrequency { get; set; }
 		int? IDirectGenerator.MinWordLength { get; set; }
 		string IDirectGenerator.PostFilter { get; set; }
 		string IDirectGenerator.PreFilter { get; set; }
@@ -88,11 +88,11 @@ namespace Nest
 
 		public DirectGeneratorDescriptor<T> MaxEdits(int? maxEdits) => Assign(maxEdits, (a, v) => a.MaxEdits = v);
 
-		public DirectGeneratorDescriptor<T> MaxInspections(decimal? maxInspections) => Assign(maxInspections, (a, v) => a.MaxInspections = v);
+		public DirectGeneratorDescriptor<T> MaxInspections(float? maxInspections) => Assign(maxInspections, (a, v) => a.MaxInspections = v);
 
-		public DirectGeneratorDescriptor<T> MinDocFrequency(decimal? frequency) => Assign(frequency, (a, v) => a.MinDocFrequency = v);
+		public DirectGeneratorDescriptor<T> MinDocFrequency(float? frequency) => Assign(frequency, (a, v) => a.MinDocFrequency = v);
 
-		public DirectGeneratorDescriptor<T> MaxTermFrequency(decimal? frequency) => Assign(frequency, (a, v) => a.MaxTermFrequency = v);
+		public DirectGeneratorDescriptor<T> MaxTermFrequency(float? frequency) => Assign(frequency, (a, v) => a.MaxTermFrequency = v);
 
 		public DirectGeneratorDescriptor<T> PreFilter(string preFilter) => Assign(preFilter, (a, v) => a.PreFilter = v);
 
