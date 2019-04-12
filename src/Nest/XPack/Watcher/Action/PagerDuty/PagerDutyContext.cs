@@ -5,7 +5,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject]
-	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<PagerDutyContext>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<PagerDutyContext>))]
 	public interface IPagerDutyContext
 	{
 		[JsonProperty("href")]
