@@ -15,11 +15,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IEnableUserResponse> EnableUserAsync(Name username, Func<EnableUserDescriptor, IEnableUserRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IEnableUserResponse> EnableUserAsync(IEnableUserRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IEnableUserResponse> EnableUserAsync(IEnableUserRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -30,24 +30,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IEnableUserResponse EnableUser(IEnableUserRequest request) =>
-			Dispatcher.Dispatch<IEnableUserRequest, EnableUserRequestParameters, EnableUserResponse>(
-				request,
-				(p, d) => LowLevelDispatch.SecurityEnableUserDispatch<EnableUserResponse>(p)
-			);
+			DoRequest<IEnableUserRequest, EnableUserResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IEnableUserResponse> EnableUserAsync(Name username, Func<EnableUserDescriptor, IEnableUserRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			EnableUserAsync(selector.InvokeOrDefault(new EnableUserDescriptor(username)), cancellationToken);
+		public Task<IEnableUserResponse> EnableUserAsync(
+			Name username,
+			Func<EnableUserDescriptor, IEnableUserRequest> selector = null,
+			CancellationToken ct = default
+		) => EnableUserAsync(selector.InvokeOrDefault(new EnableUserDescriptor(username)), ct);
 
 		/// <inheritdoc />
-		public Task<IEnableUserResponse> EnableUserAsync(IEnableUserRequest request, CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IEnableUserRequest, EnableUserRequestParameters, EnableUserResponse, IEnableUserResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.SecurityEnableUserDispatchAsync<EnableUserResponse>(p, c)
-			);
+		public Task<IEnableUserResponse> EnableUserAsync(IEnableUserRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IEnableUserRequest, IEnableUserResponse, EnableUserResponse>(request, request.RequestParameters, ct);
 	}
 }

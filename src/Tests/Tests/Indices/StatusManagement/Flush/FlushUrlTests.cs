@@ -11,10 +11,15 @@ namespace Tests.Indices.StatusManagement.Flush
 	{
 		[U] public async Task Urls()
 		{
-			await POST($"/_flush")
+			await POST($"/_all/_flush")
 					.Fluent(c => c.Flush(All))
-					.Request(c => c.Flush(new FlushRequest()))
+					.Request(c => c.Flush(new FlushRequest(All)))
 					.FluentAsync(c => c.FlushAsync(All))
+					.RequestAsync(c => c.FlushAsync(new FlushRequest(All)))
+				;
+			
+			await POST($"/_flush")
+					.Request(c => c.Flush(new FlushRequest()))
 					.RequestAsync(c => c.FlushAsync(new FlushRequest()))
 				;
 

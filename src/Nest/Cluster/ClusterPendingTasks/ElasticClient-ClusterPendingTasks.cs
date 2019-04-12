@@ -14,50 +14,40 @@ namespace Nest
 		/// </summary>
 		IClusterPendingTasksResponse ClusterPendingTasks(Func<ClusterPendingTasksDescriptor, IClusterPendingTasksRequest> selector = null);
 
-		/// <inheritdoc />
-		Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(Func<ClusterPendingTasksDescriptor, IClusterPendingTasksRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+		/// <inheritdoc cref="ClusterPendingTasks(System.Func{Nest.ClusterPendingTasksDescriptor,Nest.IClusterPendingTasksRequest})" />
+		Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(
+			Func<ClusterPendingTasksDescriptor, IClusterPendingTasksRequest> selector = null,
+			CancellationToken ct = default
 		);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ClusterPendingTasks(System.Func{Nest.ClusterPendingTasksDescriptor,Nest.IClusterPendingTasksRequest})" />
 		IClusterPendingTasksResponse ClusterPendingTasks(IClusterPendingTasksRequest request);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ClusterPendingTasks(System.Func{Nest.ClusterPendingTasksDescriptor,Nest.IClusterPendingTasksRequest})" />
 		Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(IClusterPendingTasksRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc cref="ClusterPendingTasks(System.Func{Nest.ClusterPendingTasksDescriptor,Nest.IClusterPendingTasksRequest})" />
 		public IClusterPendingTasksResponse ClusterPendingTasks(Func<ClusterPendingTasksDescriptor, IClusterPendingTasksRequest> selector = null) =>
 			ClusterPendingTasks(selector.InvokeOrDefault(new ClusterPendingTasksDescriptor()));
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ClusterPendingTasks(System.Func{Nest.ClusterPendingTasksDescriptor,Nest.IClusterPendingTasksRequest})" />
 		public IClusterPendingTasksResponse ClusterPendingTasks(IClusterPendingTasksRequest request) =>
-			Dispatcher.Dispatch<IClusterPendingTasksRequest, ClusterPendingTasksRequestParameters, ClusterPendingTasksResponse>(
-				request,
-				(p, d) => LowLevelDispatch.ClusterPendingTasksDispatch<ClusterPendingTasksResponse>(p)
-			);
+			DoRequest<IClusterPendingTasksRequest, ClusterPendingTasksResponse>(request, request.RequestParameters);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ClusterPendingTasks(System.Func{Nest.ClusterPendingTasksDescriptor,Nest.IClusterPendingTasksRequest})" />
 		public Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(
 			Func<ClusterPendingTasksDescriptor, IClusterPendingTasksRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) =>
-			ClusterPendingTasksAsync(selector.InvokeOrDefault(new ClusterPendingTasksDescriptor()), cancellationToken);
+			ClusterPendingTasksAsync(selector.InvokeOrDefault(new ClusterPendingTasksDescriptor()), ct);
 
-		/// <inheritdoc />
-		public Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(IClusterPendingTasksRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<IClusterPendingTasksRequest, ClusterPendingTasksRequestParameters, ClusterPendingTasksResponse,
-					IClusterPendingTasksResponse>(
-					request,
-					cancellationToken,
-					(p, d, c) => LowLevelDispatch.ClusterPendingTasksDispatchAsync<ClusterPendingTasksResponse>(p, c)
-				);
+		/// <inheritdoc cref="ClusterPendingTasks(System.Func{Nest.ClusterPendingTasksDescriptor,Nest.IClusterPendingTasksRequest})" />
+		public Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(IClusterPendingTasksRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IClusterPendingTasksRequest, IClusterPendingTasksResponse, ClusterPendingTasksResponse>(request, request.RequestParameters, ct);
 	}
 }

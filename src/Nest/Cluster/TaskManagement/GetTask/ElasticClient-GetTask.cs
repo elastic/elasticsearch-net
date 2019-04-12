@@ -11,11 +11,13 @@ namespace Nest
 
 		IGetTaskResponse GetTask(IGetTaskRequest request);
 
-		Task<IGetTaskResponse> GetTaskAsync(TaskId id, Func<GetTaskDescriptor, IGetTaskRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+		Task<IGetTaskResponse> GetTaskAsync(
+			TaskId id, 
+			Func<GetTaskDescriptor, IGetTaskRequest> selector = null,
+			CancellationToken ct = default
 		);
 
-		Task<IGetTaskResponse> GetTaskAsync(IGetTaskRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IGetTaskResponse> GetTaskAsync(IGetTaskRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -24,21 +26,15 @@ namespace Nest
 			GetTask(selector.InvokeOrDefault(new GetTaskDescriptor(id)));
 
 		public IGetTaskResponse GetTask(IGetTaskRequest request) =>
-			Dispatcher.Dispatch<IGetTaskRequest, GetTaskRequestParameters, GetTaskResponse>(
-				request,
-				(p, d) => LowLevelDispatch.TasksGetDispatch<GetTaskResponse>(p)
-			);
+			DoRequest<IGetTaskRequest, GetTaskResponse>(request, request.RequestParameters);
 
-		public Task<IGetTaskResponse> GetTaskAsync(TaskId id, Func<GetTaskDescriptor, IGetTaskRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			GetTaskAsync(selector.InvokeOrDefault(new GetTaskDescriptor(id)), cancellationToken);
+		public Task<IGetTaskResponse> GetTaskAsync(
+			TaskId id,
+			Func<GetTaskDescriptor, IGetTaskRequest> selector = null,
+			CancellationToken ct = default
+		) => GetTaskAsync(selector.InvokeOrDefault(new GetTaskDescriptor(id)), ct);
 
-		public Task<IGetTaskResponse> GetTaskAsync(IGetTaskRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IGetTaskRequest, GetTaskRequestParameters, GetTaskResponse, IGetTaskResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.TasksGetDispatchAsync<GetTaskResponse>(p, c)
-			);
+		public Task<IGetTaskResponse> GetTaskAsync(IGetTaskRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetTaskRequest, IGetTaskResponse, GetTaskResponse>(request, request.RequestParameters, ct);
 	}
 }

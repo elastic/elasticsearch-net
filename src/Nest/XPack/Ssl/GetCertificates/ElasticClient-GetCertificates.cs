@@ -20,12 +20,12 @@ namespace Nest
 
 		/// <inheritdoc cref="GetCertificates(System.Func{Nest.GetCertificatesDescriptor,Nest.IGetCertificatesRequest})" />
 		Task<IGetCertificatesResponse> GetCertificatesAsync(Func<GetCertificatesDescriptor, IGetCertificatesRequest> selector = null,
-			CancellationToken cancellationToken = default
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="GetCertificates(System.Func{Nest.GetCertificatesDescriptor,Nest.IGetCertificatesRequest})" />
 		Task<IGetCertificatesResponse> GetCertificatesAsync(IGetCertificatesRequest request,
-			CancellationToken cancellationToken = default
+			CancellationToken ct = default
 		);
 	}
 
@@ -36,31 +36,25 @@ namespace Nest
 			GetCertificates(selector.InvokeOrDefault(new GetCertificatesDescriptor()));
 
 		/// <inheritdoc cref="GetCertificates(System.Func{Nest.GetCertificatesDescriptor,Nest.IGetCertificatesRequest})" />
-		public IGetCertificatesResponse GetCertificates(IGetCertificatesRequest request) =>
-			Dispatcher.Dispatch<IGetCertificatesRequest, GetCertificatesRequestParameters, GetCertificatesResponse>(
-				request,
-				ToCertificatesResponse,
-				(p, d) => LowLevelDispatch.SslCertificatesDispatch<GetCertificatesResponse>(p)
-			);
+		public IGetCertificatesResponse GetCertificates(IGetCertificatesRequest request)
+		{
+			request.RequestParameters.DeserializationOverride = ToCertificatesResponse;
+			return DoRequest<IGetCertificatesRequest, GetCertificatesResponse>(request, request.RequestParameters);
+		}
 
 		/// <inheritdoc cref="GetCertificates(System.Func{Nest.GetCertificatesDescriptor,Nest.IGetCertificatesRequest})" />
-		public Task<IGetCertificatesResponse> GetCertificatesAsync(Func<GetCertificatesDescriptor, IGetCertificatesRequest> selector = null,
-			CancellationToken cancellationToken = default
-		) =>
-			GetCertificatesAsync(selector.InvokeOrDefault(new GetCertificatesDescriptor()), cancellationToken);
+		public Task<IGetCertificatesResponse> GetCertificatesAsync(
+			Func<GetCertificatesDescriptor, IGetCertificatesRequest> selector = null,
+			CancellationToken ct = default
+		) => GetCertificatesAsync(selector.InvokeOrDefault(new GetCertificatesDescriptor()), ct);
 
 		/// <inheritdoc cref="GetCertificates(System.Func{Nest.GetCertificatesDescriptor,Nest.IGetCertificatesRequest})" />
-		public Task<IGetCertificatesResponse> GetCertificatesAsync(IGetCertificatesRequest request,
-			CancellationToken cancellationToken = default
-		) =>
-			Dispatcher
-				.DispatchAsync<IGetCertificatesRequest, GetCertificatesRequestParameters, GetCertificatesResponse,
-					IGetCertificatesResponse>(
-					request,
-					cancellationToken,
-					ToCertificatesResponse,
-					(p, d, c) => LowLevelDispatch.SslCertificatesDispatchAsync<GetCertificatesResponse>(p, c)
-				);
+		public Task<IGetCertificatesResponse> GetCertificatesAsync(IGetCertificatesRequest request, CancellationToken ct = default)
+		{
+			request.RequestParameters.DeserializationOverride = ToCertificatesResponse;
+			return DoRequestAsync<IGetCertificatesRequest, IGetCertificatesResponse, GetCertificatesResponse>
+				(request, request.RequestParameters, ct);
+		}
 
 		private GetCertificatesResponse ToCertificatesResponse(IApiCallDetails apiCallDetails, Stream stream)
 		{

@@ -15,11 +15,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IXPackUsageResponse> XPackUsageAsync(Func<XPackUsageDescriptor, IXPackUsageRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IXPackUsageResponse> XPackUsageAsync(IXPackUsageRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IXPackUsageResponse> XPackUsageAsync(IXPackUsageRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -30,24 +30,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IXPackUsageResponse XPackUsage(IXPackUsageRequest request) =>
-			Dispatcher.Dispatch<IXPackUsageRequest, XPackUsageRequestParameters, XPackUsageResponse>(
-				request,
-				(p, d) => LowLevelDispatch.XpackUsageDispatch<XPackUsageResponse>(p)
-			);
+			DoRequest<IXPackUsageRequest, XPackUsageResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IXPackUsageResponse> XPackUsageAsync(Func<XPackUsageDescriptor, IXPackUsageRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			XPackUsageAsync(selector.InvokeOrDefault(new XPackUsageDescriptor()), cancellationToken);
+		public Task<IXPackUsageResponse> XPackUsageAsync(
+			Func<XPackUsageDescriptor, IXPackUsageRequest> selector = null,
+			CancellationToken ct = default
+		) => XPackUsageAsync(selector.InvokeOrDefault(new XPackUsageDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IXPackUsageResponse> XPackUsageAsync(IXPackUsageRequest request, CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IXPackUsageRequest, XPackUsageRequestParameters, XPackUsageResponse, IXPackUsageResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackUsageDispatchAsync<XPackUsageResponse>(p, c)
-			);
+		public Task<IXPackUsageResponse> XPackUsageAsync(IXPackUsageRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IXPackUsageRequest, IXPackUsageResponse, XPackUsageResponse>(request, request.RequestParameters, ct);
 	}
 }

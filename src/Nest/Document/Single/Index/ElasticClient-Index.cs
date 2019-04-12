@@ -30,18 +30,18 @@ namespace Nest
 		/// <inheritdoc />
 		IIndexResponse Index<TDocument>(IIndexRequest<TDocument> request) where TDocument : class;
 
-		Task<IIndexResponse> IndexDocumentAsync<T>(T document, CancellationToken cancellationToken = default(CancellationToken))
+		Task<IIndexResponse> IndexDocumentAsync<T>(T document, CancellationToken ct = default)
 			where T : class;
 
 		/// <inheritdoc />
 		Task<IIndexResponse> IndexAsync<TDocument>(
 			TDocument document,
 			Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		) where TDocument : class;
 
 		/// <inheritdoc />
-		Task<IIndexResponse> IndexAsync<TDocument>(IIndexRequest<TDocument> request, CancellationToken cancellationToken = default(CancellationToken))
+		Task<IIndexResponse> IndexAsync<TDocument>(IIndexRequest<TDocument> request, CancellationToken ct = default)
 			where TDocument : class;
 	}
 
@@ -54,31 +54,28 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IIndexResponse Index<TDocument>(IIndexRequest<TDocument> request) where TDocument : class =>
-			Dispatcher.Dispatch<IIndexRequest<TDocument>, IndexRequestParameters, IndexResponse>(
-				request,
-				LowLevelDispatch.IndexDispatch<IndexResponse, TDocument>
-			);
+			DoRequest<IIndexRequest<TDocument>, IndexResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IIndexResponse> IndexAsync<TDocument>(TDocument document, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+		public Task<IIndexResponse> IndexAsync<TDocument>(
+			TDocument document,
+			Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector,
+			CancellationToken cancellationToken = default
 		)
 			where TDocument : class =>
 			IndexAsync(selector?.InvokeOrDefault(new IndexDescriptor<TDocument>(document)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IIndexResponse> IndexAsync<TDocument>(IIndexRequest<TDocument> request, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<IIndexResponse> IndexAsync<TDocument>(IIndexRequest<TDocument> request, CancellationToken ct = default)
 			where TDocument : class =>
-			Dispatcher.DispatchAsync<IIndexRequest<TDocument>, IndexRequestParameters, IndexResponse, IIndexResponse>(
-				request, cancellationToken, LowLevelDispatch.IndexDispatchAsync<IndexResponse, TDocument>
-			);
+			DoRequestAsync<IIndexRequest<TDocument>, IIndexResponse, IndexResponse>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
 		public IIndexResponse IndexDocument<TDocument>(TDocument document) where TDocument : class => Index(document, s => s);
 
 		/// <inheritdoc />
-		public Task<IIndexResponse> IndexDocumentAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<IIndexResponse> IndexDocumentAsync<TDocument>(TDocument document, CancellationToken ct = default)
 			where TDocument : class =>
-			IndexAsync(document, s => s, cancellationToken);
+			IndexAsync(document, s => s, ct);
 	}
 }

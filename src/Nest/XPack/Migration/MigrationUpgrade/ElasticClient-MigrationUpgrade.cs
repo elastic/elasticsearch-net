@@ -25,7 +25,7 @@ namespace Nest
 		/// </summary>
 		Task<IMigrationUpgradeResponse> MigrationUpgradeAsync(IndexName index,
 			Func<MigrationUpgradeDescriptor, IMigrationUpgradeRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <summary>
@@ -33,40 +33,30 @@ namespace Nest
 		/// Indices must be upgraded one at a time.
 		/// </summary>
 		Task<IMigrationUpgradeResponse> MigrationUpgradeAsync(IMigrationUpgradeRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IMigrationUpgradeResponse MigrationUpgrade(IndexName index, Func<MigrationUpgradeDescriptor, IMigrationUpgradeRequest> selector = null
-		) =>
+		public IMigrationUpgradeResponse MigrationUpgrade(IndexName index, Func<MigrationUpgradeDescriptor, IMigrationUpgradeRequest> selector = null) =>
 			MigrationUpgrade(selector.InvokeOrDefault(new MigrationUpgradeDescriptor(index)));
 
 		/// <inheritdoc />
 		public IMigrationUpgradeResponse MigrationUpgrade(IMigrationUpgradeRequest request) =>
-			Dispatcher.Dispatch<IMigrationUpgradeRequest, MigrationUpgradeRequestParameters, MigrationUpgradeResponse>(
-				request,
-				(p, d) => LowLevelDispatch.MigrationUpgradeDispatch<MigrationUpgradeResponse>(p)
-			);
+			DoRequest<IMigrationUpgradeRequest, MigrationUpgradeResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IMigrationUpgradeResponse> MigrationUpgradeAsync(IndexName index,
+		public Task<IMigrationUpgradeResponse> MigrationUpgradeAsync(
+			IndexName index,
 			Func<MigrationUpgradeDescriptor, IMigrationUpgradeRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			MigrationUpgradeAsync(selector.InvokeOrDefault(new MigrationUpgradeDescriptor(index)), cancellationToken);
+			CancellationToken ct = default
+		) => MigrationUpgradeAsync(selector.InvokeOrDefault(new MigrationUpgradeDescriptor(index)), ct);
 
 		/// <inheritdoc />
-		public Task<IMigrationUpgradeResponse> MigrationUpgradeAsync(IMigrationUpgradeRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<IMigrationUpgradeRequest, MigrationUpgradeRequestParameters, MigrationUpgradeResponse, IMigrationUpgradeResponse>(
-					request,
-					cancellationToken,
-					(p, d, c) => LowLevelDispatch.MigrationUpgradeDispatchAsync<MigrationUpgradeResponse>(p, c)
-				);
+		public Task<IMigrationUpgradeResponse> MigrationUpgradeAsync(IMigrationUpgradeRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IMigrationUpgradeRequest, IMigrationUpgradeResponse, MigrationUpgradeResponse>
+				(request, request.RequestParameters, ct);
 	}
 }

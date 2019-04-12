@@ -37,21 +37,6 @@ namespace Nest
 		FluentDictionary<Type, string> DefaultRelationNames { get; }
 
 		/// <summary>
-		/// A default type name to use within Elasticsearch for all CLR types. If <see cref="DefaultTypeNameInferrer" /> is also set, a configured
-		/// default type name will only be used when <see cref="DefaultTypeNameInferrer" />returns null or empty. If unset, the default type
-		/// name for types will be the lowercased CLR type name.
-		/// </summary>
-		string DefaultTypeName { get; }
-
-		/// <summary>
-		/// Specify how a type name is inferred from a CLR type.
-		/// By default, a type names is inferred by calling <see cref="string.ToLowerInvariant" /> on the CLR type's name.
-		/// </summary>
-		Func<Type, string> DefaultTypeNameInferrer { get; }
-
-		FluentDictionary<Type, string> DefaultTypeNames { get; }
-
-		/// <summary>
 		/// Specify a property for a CLR type to use to infer the _id of the document when indexed in Elasticsearch.
 		/// </summary>
 		FluentDictionary<Type, string> IdProperties { get; }

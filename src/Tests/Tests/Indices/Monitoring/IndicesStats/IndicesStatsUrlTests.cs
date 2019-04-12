@@ -5,6 +5,7 @@ using Nest;
 using Tests.Domain;
 using Tests.Framework;
 using static Tests.Framework.UrlTester;
+using static Nest.Indices;
 
 namespace Tests.Indices.Monitoring.IndicesStats
 {
@@ -13,12 +14,16 @@ namespace Tests.Indices.Monitoring.IndicesStats
 		[U] public async Task Urls()
 		{
 			await GET($"/_stats")
-					.Fluent(c => c.IndicesStats(Nest.Indices.All))
 					.Request(c => c.IndicesStats(new IndicesStatsRequest()))
-					.FluentAsync(c => c.IndicesStatsAsync(Nest.Indices.All))
 					.RequestAsync(c => c.IndicesStatsAsync(new IndicesStatsRequest()))
 				;
 
+			await GET($"/_all/_stats")
+					.Fluent(c => c.IndicesStats(All))
+					.Request(c => c.IndicesStats(new IndicesStatsRequest(All)))
+					.FluentAsync(c => c.IndicesStatsAsync(All))
+					.RequestAsync(c => c.IndicesStatsAsync(new IndicesStatsRequest(All)))
+				;
 			var index = "index1,index2";
 			await GET($"/index1%2Cindex2/_stats")
 					.Fluent(c => c.IndicesStats(index))

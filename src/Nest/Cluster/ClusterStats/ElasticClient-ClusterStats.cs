@@ -19,14 +19,14 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IClusterStatsResponse> ClusterStatsAsync(Func<ClusterStatsDescriptor, IClusterStatsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		IClusterStatsResponse ClusterStats(IClusterStatsRequest request);
 
 		/// <inheritdoc />
-		Task<IClusterStatsResponse> ClusterStatsAsync(IClusterStatsRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IClusterStatsResponse> ClusterStatsAsync(IClusterStatsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -37,25 +37,18 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IClusterStatsResponse ClusterStats(IClusterStatsRequest request) =>
-			Dispatcher.Dispatch<IClusterStatsRequest, ClusterStatsRequestParameters, ClusterStatsResponse>(
-				request,
-				(p, d) => LowLevelDispatch.ClusterStatsDispatch<ClusterStatsResponse>(p)
-			);
+			DoRequest<IClusterStatsRequest, ClusterStatsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IClusterStatsResponse> ClusterStatsAsync(Func<ClusterStatsDescriptor, IClusterStatsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) =>
-			ClusterStatsAsync(selector.InvokeOrDefault(new ClusterStatsDescriptor()), cancellationToken);
+			ClusterStatsAsync(selector.InvokeOrDefault(new ClusterStatsDescriptor()), ct);
 
 		/// <inheritdoc />
 		public Task<IClusterStatsResponse> ClusterStatsAsync(IClusterStatsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) =>
-			Dispatcher.DispatchAsync<IClusterStatsRequest, ClusterStatsRequestParameters, ClusterStatsResponse, IClusterStatsResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.ClusterStatsDispatchAsync<ClusterStatsResponse>(p, c)
-			);
+			DoRequestAsync<IClusterStatsRequest, IClusterStatsResponse, ClusterStatsResponse>(request, request.RequestParameters, ct);
 	}
 }

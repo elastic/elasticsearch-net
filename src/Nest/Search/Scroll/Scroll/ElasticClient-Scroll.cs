@@ -30,12 +30,12 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
-		Task<ISearchResponse<T>> ScrollAsync<T>(IScrollRequest request, CancellationToken cancellationToken = default(CancellationToken))
+		Task<ISearchResponse<T>> ScrollAsync<T>(IScrollRequest request, CancellationToken ct = default)
 			where T : class;
 
 		/// <inheritdoc />
 		Task<ISearchResponse<T>> ScrollAsync<T>(Time scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		)
 			where T : class;
 	}
@@ -44,10 +44,7 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public ISearchResponse<T> Scroll<T>(IScrollRequest request) where T : class =>
-			Dispatcher.Dispatch<IScrollRequest, ScrollRequestParameters, SearchResponse<T>>(
-				request,
-				(p, d) => LowLevelDispatch.ScrollDispatch<SearchResponse<T>>(p, d)
-			);
+			DoRequest<IScrollRequest, SearchResponse<T>>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public ISearchResponse<T> Scroll<T>(Time scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null)
@@ -55,18 +52,18 @@ namespace Nest
 			Scroll<T>(selector.InvokeOrDefault(new ScrollDescriptor<T>().Scroll(scrollTime).ScrollId(scrollId)));
 
 		/// <inheritdoc />
-		public Task<ISearchResponse<T>> ScrollAsync<T>(IScrollRequest request, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ISearchResponse<T>> ScrollAsync<T>(IScrollRequest request, CancellationToken ct = default)
 			where T : class =>
-			Dispatcher.DispatchAsync<IScrollRequest, ScrollRequestParameters, SearchResponse<T>, ISearchResponse<T>>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.ScrollDispatchAsync<SearchResponse<T>>(p, d, c)
-			);
+			DoRequestAsync<IScrollRequest, ISearchResponse<T>, SearchResponse<T>>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
-		public Task<ISearchResponse<T>> ScrollAsync<T>(Time scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) where T : class =>
-			ScrollAsync<T>(selector.InvokeOrDefault(new ScrollDescriptor<T>().Scroll(scrollTime).ScrollId(scrollId)), cancellationToken);
+		public Task<ISearchResponse<T>> ScrollAsync<T>(
+			Time scrollTime,
+			string scrollId,
+			Func<ScrollDescriptor<T>, IScrollRequest> selector = null,
+			CancellationToken ct = default
+		)
+			where T : class =>
+			ScrollAsync<T>(selector.InvokeOrDefault(new ScrollDescriptor<T>().Scroll(scrollTime).ScrollId(scrollId)), ct);
 	}
 }

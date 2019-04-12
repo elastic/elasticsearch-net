@@ -23,11 +23,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -37,32 +37,30 @@ namespace Nest
 			MultiGet(selector.InvokeOrDefault(new MultiGetDescriptor()));
 
 		/// <inheritdoc />
-		public IMultiGetResponse MultiGet(IMultiGetRequest request) =>
-			Dispatcher.Dispatch<IMultiGetRequest, MultiGetRequestParameters, MultiGetResponse>(
-				request,
-				(r, s) => DeserializeMultiGetResponse(r, s, CreateCovariantMultiGetResponseFormatter(request)),
-				LowLevelDispatch.MgetDispatch<MultiGetResponse>
-			);
+		public IMultiGetResponse MultiGet(IMultiGetRequest request)
+		{
+			request.RequestParameters.DeserializationOverride = CreateMultiGetDeserializer(request);
+			return DoRequest<IMultiGetRequest, MultiGetResponse>(request, request.RequestParameters);
+		}
 
 		/// <inheritdoc />
-		public Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			MultiGetAsync(selector.InvokeOrDefault(new MultiGetDescriptor()), cancellationToken);
+		public Task<IMultiGetResponse> MultiGetAsync(
+			Func<MultiGetDescriptor, IMultiGetRequest> selector = null,
+			CancellationToken ct = default
+		) => MultiGetAsync(selector.InvokeOrDefault(new MultiGetDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IMultiGetRequest, MultiGetRequestParameters, MultiGetResponse, IMultiGetResponse>(
-				request,
-				cancellationToken,
-				(r, s) => DeserializeMultiGetResponse(r, s, CreateCovariantMultiGetResponseFormatter(request)),
-				LowLevelDispatch.MgetDispatchAsync<MultiGetResponse>
-			);
+		public Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest request, CancellationToken ct = default)
+		{
+			request.RequestParameters.DeserializationOverride = CreateMultiGetDeserializer(request);
+			return DoRequestAsync<IMultiGetRequest, IMultiGetResponse, MultiGetResponse>(request, request.RequestParameters, ct);
+		}
 
-		private MultiGetResponse DeserializeMultiGetResponse(IApiCallDetails response, Stream stream, IJsonFormatter<MultiGetResponse> formatter) =>
-			ConnectionSettings.CreateStateful(formatter).Deserialize<MultiGetResponse>(stream);
+		private Func<IApiCallDetails, Stream, object> CreateMultiGetDeserializer(IMultiGetRequest request)
+		{
+			var formatter = new MultiGetResponseFormatter(request);
+			return (r, s) => ConnectionSettings.CreateStateful(formatter).Deserialize<MultiGetResponse>(s);
+		}
 
-		private MultiGetResponseFormatter CreateCovariantMultiGetResponseFormatter(IMultiGetRequest descriptor) =>
-			new MultiGetResponseFormatter(descriptor);
 	}
 }

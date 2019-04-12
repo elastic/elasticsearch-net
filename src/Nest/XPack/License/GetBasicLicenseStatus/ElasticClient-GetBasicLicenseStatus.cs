@@ -15,11 +15,11 @@ namespace Nest
 
 		/// <inheritdoc see cref="GetBasicLicenseStatus(System.Func{Nest.GetBasicLicenseStatusDescriptor,Nest.IGetBasicLicenseStatusRequest})"/>
 		Task<IGetBasicLicenseStatusResponse> GetBasicLicenseStatusAsync(Func<GetBasicLicenseStatusDescriptor, IGetBasicLicenseStatusRequest> selector = null,
-			CancellationToken cancellationToken = default
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc see cref="GetBasicLicenseStatus(System.Func{Nest.GetBasicLicenseStatusDescriptor,Nest.IGetBasicLicenseStatusRequest})"/>
-		Task<IGetBasicLicenseStatusResponse> GetBasicLicenseStatusAsync(IGetBasicLicenseStatusRequest request, CancellationToken cancellationToken = default);
+		Task<IGetBasicLicenseStatusResponse> GetBasicLicenseStatusAsync(IGetBasicLicenseStatusRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -30,24 +30,16 @@ namespace Nest
 
 		/// <inheritdoc see cref="GetBasicLicenseStatus(System.Func{Nest.GetBasicLicenseStatusDescriptor,Nest.IGetBasicLicenseStatusRequest})"/>
 		public IGetBasicLicenseStatusResponse GetBasicLicenseStatus(IGetBasicLicenseStatusRequest request) =>
-			Dispatcher.Dispatch<IGetBasicLicenseStatusRequest, GetBasicLicenseStatusRequestParameters, GetBasicLicenseStatusResponse>(
-				request,
-				(p, d) => LowLevelDispatch.LicenseGetBasicStatusDispatch<GetBasicLicenseStatusResponse>(p)
-			);
+			DoRequest<IGetBasicLicenseStatusRequest, GetBasicLicenseStatusResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc see cref="GetBasicLicenseStatus(System.Func{Nest.GetBasicLicenseStatusDescriptor,Nest.IGetBasicLicenseStatusRequest})"/>
-		public Task<IGetBasicLicenseStatusResponse> GetBasicLicenseStatusAsync(Func<GetBasicLicenseStatusDescriptor, IGetBasicLicenseStatusRequest> selector = null,
-			CancellationToken cancellationToken = default
-		) =>
-			GetBasicLicenseStatusAsync(selector.InvokeOrDefault(new GetBasicLicenseStatusDescriptor()), cancellationToken);
+		public Task<IGetBasicLicenseStatusResponse> GetBasicLicenseStatusAsync(
+			Func<GetBasicLicenseStatusDescriptor, IGetBasicLicenseStatusRequest> selector = null,
+			CancellationToken ct = default
+		) => GetBasicLicenseStatusAsync(selector.InvokeOrDefault(new GetBasicLicenseStatusDescriptor()), ct);
 
 		/// <inheritdoc see cref="GetBasicLicenseStatus(System.Func{Nest.GetBasicLicenseStatusDescriptor,Nest.IGetBasicLicenseStatusRequest})"/>
-		public Task<IGetBasicLicenseStatusResponse> GetBasicLicenseStatusAsync(IGetBasicLicenseStatusRequest request, CancellationToken cancellationToken = default
-		) =>
-			Dispatcher.DispatchAsync<IGetBasicLicenseStatusRequest, GetBasicLicenseStatusRequestParameters, GetBasicLicenseStatusResponse, IGetBasicLicenseStatusResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.LicenseGetBasicStatusDispatchAsync<GetBasicLicenseStatusResponse>(p, c)
-			);
+		public Task<IGetBasicLicenseStatusResponse> GetBasicLicenseStatusAsync(IGetBasicLicenseStatusRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetBasicLicenseStatusRequest, IGetBasicLicenseStatusResponse, GetBasicLicenseStatusResponse>(request, request.RequestParameters, ct);
 	}
 }

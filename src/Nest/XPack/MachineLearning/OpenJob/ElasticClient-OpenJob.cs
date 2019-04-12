@@ -19,11 +19,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IOpenJobResponse> OpenJobAsync(Id jobId, Func<OpenJobDescriptor, IOpenJobRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IOpenJobResponse> OpenJobAsync(IOpenJobRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IOpenJobResponse> OpenJobAsync(IOpenJobRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -34,23 +34,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IOpenJobResponse OpenJob(IOpenJobRequest request) =>
-			Dispatcher.Dispatch<IOpenJobRequest, OpenJobRequestParameters, OpenJobResponse>(
-				request,
-				(p, d) => LowLevelDispatch.MlOpenJobDispatch<OpenJobResponse>(p)
-			);
+			DoRequest<IOpenJobRequest, OpenJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IOpenJobResponse> OpenJobAsync(Id jobId, Func<OpenJobDescriptor, IOpenJobRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			OpenJobAsync(selector.InvokeOrDefault(new OpenJobDescriptor(jobId)), cancellationToken);
+		public Task<IOpenJobResponse> OpenJobAsync(
+			Id jobId,
+			Func<OpenJobDescriptor, IOpenJobRequest> selector = null,
+			CancellationToken ct = default
+		) => OpenJobAsync(selector.InvokeOrDefault(new OpenJobDescriptor(jobId)), ct);
 
 		/// <inheritdoc />
-		public Task<IOpenJobResponse> OpenJobAsync(IOpenJobRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IOpenJobRequest, OpenJobRequestParameters, OpenJobResponse, IOpenJobResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.MlOpenJobDispatchAsync<OpenJobResponse>(p, c)
-			);
+		public Task<IOpenJobResponse> OpenJobAsync(IOpenJobRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IOpenJobRequest, IOpenJobResponse, OpenJobResponse>(request, request.RequestParameters, ct);
 	}
 }

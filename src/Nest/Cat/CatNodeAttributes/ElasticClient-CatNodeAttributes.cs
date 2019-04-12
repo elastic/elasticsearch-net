@@ -16,12 +16,12 @@ namespace Nest
 		/// <inheritdoc />
 		Task<ICatResponse<CatNodeAttributesRecord>> CatNodeAttributesAsync(
 			Func<CatNodeAttributesDescriptor, ICatNodeAttributesRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default(CancellationToken)
 		);
 
 		/// <inheritdoc />
 		Task<ICatResponse<CatNodeAttributesRecord>> CatNodeAttributesAsync(ICatNodeAttributesRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default(CancellationToken)
 		);
 	}
 
@@ -34,20 +34,18 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICatResponse<CatNodeAttributesRecord> CatNodeAttributes(ICatNodeAttributesRequest request) =>
-			DoCat<ICatNodeAttributesRequest, CatNodeAttributesRequestParameters, CatNodeAttributesRecord>(request,
-				LowLevelDispatch.CatNodeattrsDispatch<CatResponse<CatNodeAttributesRecord>>);
+			DoCat<ICatNodeAttributesRequest, CatNodeAttributesRequestParameters, CatNodeAttributesRecord>(request);
 
 		/// <inheritdoc />
 		public Task<ICatResponse<CatNodeAttributesRecord>> CatNodeAttributesAsync(
 			Func<CatNodeAttributesDescriptor, ICatNodeAttributesRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) => CatNodeAttributesAsync(selector.InvokeOrDefault(new CatNodeAttributesDescriptor()), cancellationToken);
+			CancellationToken ct = default
+		) => CatNodeAttributesAsync(selector.InvokeOrDefault(new CatNodeAttributesDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<ICatResponse<CatNodeAttributesRecord>> CatNodeAttributesAsync(ICatNodeAttributesRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			DoCatAsync<ICatNodeAttributesRequest, CatNodeAttributesRequestParameters, CatNodeAttributesRecord>(request, cancellationToken,
-				LowLevelDispatch.CatNodeattrsDispatchAsync<CatResponse<CatNodeAttributesRecord>>);
+		public Task<ICatResponse<CatNodeAttributesRecord>>CatNodeAttributesAsync(
+			ICatNodeAttributesRequest request,
+			CancellationToken ct = default
+		) => DoCatAsync<ICatNodeAttributesRequest, CatNodeAttributesRequestParameters, CatNodeAttributesRecord>(request, ct);
 	}
 }

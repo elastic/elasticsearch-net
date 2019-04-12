@@ -31,17 +31,17 @@ namespace Nest
 		ICreateResponse Create<TDocument>(ICreateRequest<TDocument> request) where TDocument : class;
 
 		/// <inheritdoc />
-		Task<ICreateResponse> CreateDocumentAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default(CancellationToken))
+		Task<ICreateResponse> CreateDocumentAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
 			where TDocument : class;
 
 		Task<ICreateResponse> CreateAsync<TDocument>(
 			TDocument document, Func<CreateDescriptor<TDocument>, ICreateRequest<TDocument>> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) where TDocument : class;
 
 		/// <inheritdoc />
 		Task<ICreateResponse> CreateAsync<TDocument>(ICreateRequest<TDocument> request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		)
 			where TDocument : class;
 	}
@@ -54,29 +54,20 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICreateResponse Create<TDocument>(ICreateRequest<TDocument> request) where TDocument : class =>
-			Dispatcher.Dispatch<ICreateRequest<TDocument>, CreateRequestParameters, CreateResponse>(
-				request,
-				LowLevelDispatch.CreateDispatch<CreateResponse, TDocument>
-			);
+			DoRequest<ICreateRequest<TDocument>, CreateResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<ICreateResponse> CreateAsync<TDocument>(
 			TDocument document,
 			Func<CreateDescriptor<TDocument>, ICreateRequest<TDocument>> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) where TDocument : class =>
-			CreateAsync(selector?.InvokeOrDefault(new CreateDescriptor<TDocument>(document)), cancellationToken);
+			CreateAsync(selector?.InvokeOrDefault(new CreateDescriptor<TDocument>(document)), ct);
 
 		/// <inheritdoc />
-		public Task<ICreateResponse> CreateAsync<TDocument>(ICreateRequest<TDocument> request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		)
+		public Task<ICreateResponse> CreateAsync<TDocument>(ICreateRequest<TDocument> request, CancellationToken ct = default)
 			where TDocument : class =>
-			Dispatcher.DispatchAsync<ICreateRequest<TDocument>, CreateRequestParameters, CreateResponse, ICreateResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.CreateDispatchAsync<CreateResponse, TDocument>
-			);
+			DoRequestAsync<ICreateRequest<TDocument>, ICreateResponse, CreateResponse>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
 		public ICreateResponse CreateDocument<TDocument>(TDocument document) where TDocument : class => Create(document, s => s);
@@ -84,7 +75,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<ICreateResponse> CreateDocumentAsync<TDocument>(
 			TDocument document,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		) where TDocument : class =>
 			CreateAsync(document, s => s, cancellationToken);
 	}

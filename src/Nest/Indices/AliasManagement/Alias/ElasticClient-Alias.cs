@@ -32,38 +32,29 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IBulkAliasResponse> AliasAsync(Func<BulkAliasDescriptor, IBulkAliasRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IBulkAliasResponse> AliasAsync(IBulkAliasRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IBulkAliasResponse> AliasAsync(IBulkAliasRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
 		public IBulkAliasResponse Alias(IBulkAliasRequest request) =>
-			Dispatcher.Dispatch<IBulkAliasRequest, BulkAliasRequestParameters, BulkAliasResponse>(
-				request,
-				LowLevelDispatch.IndicesUpdateAliasesDispatch<BulkAliasResponse>
-			);
+			DoRequest<IBulkAliasRequest, BulkAliasResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public IBulkAliasResponse Alias(Func<BulkAliasDescriptor, IBulkAliasRequest> selector) =>
 			Alias(selector?.Invoke(new BulkAliasDescriptor()));
 
 		/// <inheritdoc />
-		public Task<IBulkAliasResponse> AliasAsync(IBulkAliasRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IBulkAliasRequest, BulkAliasRequestParameters, BulkAliasResponse, IBulkAliasResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.IndicesUpdateAliasesDispatchAsync<BulkAliasResponse>
-			);
+		public Task<IBulkAliasResponse> AliasAsync(IBulkAliasRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IBulkAliasRequest, IBulkAliasResponse, BulkAliasResponse>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
-		public Task<IBulkAliasResponse> AliasAsync(Func<BulkAliasDescriptor, IBulkAliasRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			AliasAsync(selector?.Invoke(new BulkAliasDescriptor()), cancellationToken);
+		public Task<IBulkAliasResponse> AliasAsync(Func<BulkAliasDescriptor, IBulkAliasRequest> selector, CancellationToken ct = default) =>
+			AliasAsync(selector?.Invoke(new BulkAliasDescriptor()), ct);
 	}
 }

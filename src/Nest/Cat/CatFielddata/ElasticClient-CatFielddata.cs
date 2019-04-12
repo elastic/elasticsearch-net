@@ -16,12 +16,12 @@ namespace Nest
 		/// <inheritdoc />
 		Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(
 			Func<CatFielddataDescriptor, ICatFielddataRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default(CancellationToken)
 		);
 
 		/// <inheritdoc />
 		Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(ICatFielddataRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default(CancellationToken)
 		);
 	}
 
@@ -33,20 +33,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICatResponse<CatFielddataRecord> CatFielddata(ICatFielddataRequest request) =>
-			DoCat<ICatFielddataRequest, CatFielddataRequestParameters, CatFielddataRecord>(request,
-				LowLevelDispatch.CatFielddataDispatch<CatResponse<CatFielddataRecord>>);
+			DoCat<ICatFielddataRequest, CatFielddataRequestParameters, CatFielddataRecord>(request);
 
 		/// <inheritdoc />
 		public Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(
 			Func<CatFielddataDescriptor, ICatFielddataRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) => CatFielddataAsync(selector.InvokeOrDefault(new CatFielddataDescriptor()), cancellationToken);
+			CancellationToken ct = default
+		) => CatFielddataAsync(selector.InvokeOrDefault(new CatFielddataDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(ICatFielddataRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			DoCatAsync<ICatFielddataRequest, CatFielddataRequestParameters, CatFielddataRecord>(request, cancellationToken,
-				LowLevelDispatch.CatFielddataDispatchAsync<CatResponse<CatFielddataRecord>>);
+		public Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(ICatFielddataRequest request, CancellationToken ct = default) =>
+			DoCatAsync<ICatFielddataRequest, CatFielddataRequestParameters, CatFielddataRecord>(request, ct);
 	}
 }

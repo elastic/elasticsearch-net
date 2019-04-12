@@ -35,11 +35,18 @@ namespace Tests.Indices.IndexSettings.GetIndexSettings
 					.FluentAsync(c => c.GetIndexSettingsAsync(m => m.Name(name)))
 					.RequestAsync(c => c.GetIndexSettingsAsync(new GetIndexSettingsRequest(n)))
 				;
-			await GET($"/_settings")
+			await GET($"/_all/_settings")
 					.Fluent(c => c.GetIndexSettings(m => m.Index(AllIndices)))
 					.Request(c => c.GetIndexSettings(new GetIndexSettingsRequest(AllIndices)))
 					.FluentAsync(c => c.GetIndexSettingsAsync(m => m.Index(AllIndices)))
 					.RequestAsync(c => c.GetIndexSettingsAsync(new GetIndexSettingsRequest(AllIndices)))
+				;
+
+			await GET($"/_settings")
+					.Fluent(c => c.GetIndexSettings(m => m))
+					.Request(c => c.GetIndexSettings(new GetIndexSettingsRequest()))
+					.FluentAsync(c => c.GetIndexSettingsAsync(m => m))
+					.RequestAsync(c => c.GetIndexSettingsAsync(new GetIndexSettingsRequest()))
 				;
 		}
 	}

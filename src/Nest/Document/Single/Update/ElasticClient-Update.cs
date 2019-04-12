@@ -43,20 +43,20 @@ namespace Nest
 		Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument>(
 			DocumentPath<TDocument> documentPath,
 			Func<UpdateDescriptor<TDocument, TDocument>, IUpdateRequest<TDocument, TDocument>> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		) where TDocument : class;
 
 		/// <inheritdoc />
 		Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument>(
 			IUpdateRequest<TDocument, TDocument> request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) where TDocument : class;
 
 		/// <inheritdoc />
 		Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(
 			DocumentPath<TDocument> documentPath,
 			Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest<TDocument, TPartialDocument>> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		)
 			where TDocument : class
 			where TPartialDocument : class;
@@ -64,7 +64,7 @@ namespace Nest
 		/// <inheritdoc />
 		Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(
 			IUpdateRequest<TDocument, TPartialDocument> request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		)
 			where TDocument : class
 			where TPartialDocument : class;
@@ -97,29 +97,30 @@ namespace Nest
 		public IUpdateResponse<TDocument> Update<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request)
 			where TDocument : class
 			where TPartialDocument : class =>
-			Dispatcher.Dispatch<IUpdateRequest<TDocument, TPartialDocument>, UpdateRequestParameters, UpdateResponse<TDocument>>(
-				request,
-				LowLevelDispatch.UpdateDispatch<UpdateResponse<TDocument>, TDocument, TPartialDocument>
-			);
+			DoRequest<IUpdateRequest<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument>(
 			DocumentPath<TDocument> documentPath,
 			Func<UpdateDescriptor<TDocument, TDocument>, IUpdateRequest<TDocument, TDocument>> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) where TDocument : class => UpdateAsync<TDocument, TDocument>(documentPath, selector, cancellationToken);
+			CancellationToken cancellationToken = default
+		)
+			where TDocument : class =>
+			UpdateAsync<TDocument, TDocument>(documentPath, selector, cancellationToken);
 
 		/// <inheritdoc />
 		public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument>(
 			IUpdateRequest<TDocument, TDocument> request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) where TDocument : class => UpdateAsync<TDocument, TDocument>(request, cancellationToken);
+			CancellationToken ct = default
+		)
+			where TDocument : class =>
+			UpdateAsync<TDocument, TDocument>(request, ct);
 
 		/// <inheritdoc />
 		public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(
 			DocumentPath<TDocument> documentPath,
 			Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest<TDocument, TPartialDocument>> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		)
 			where TDocument : class
 			where TPartialDocument : class =>
@@ -130,16 +131,10 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(
 			IUpdateRequest<TDocument, TPartialDocument> request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		)
 			where TDocument : class
 			where TPartialDocument : class =>
-			Dispatcher
-				.DispatchAsync<IUpdateRequest<TDocument, TPartialDocument>, UpdateRequestParameters, UpdateResponse<TDocument>,
-					IUpdateResponse<TDocument>>(
-					request,
-					cancellationToken,
-					LowLevelDispatch.UpdateDispatchAsync<UpdateResponse<TDocument>, TDocument, TPartialDocument>
-				);
+			DoRequestAsync<IUpdateRequest<TDocument, TPartialDocument>, IUpdateResponse<TDocument>, UpdateResponse<TDocument>>(request, request.RequestParameters, ct);
 	}
 }

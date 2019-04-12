@@ -9,7 +9,7 @@ namespace Nest
 	/// <summary>
 	/// ElasticClient is NEST's strongly typed client which exposes fully mapped Elasticsearch endpoints
 	/// </summary>
-	public partial class ElasticClient : IElasticClient, IHighLevelToLowLevelDispatcher
+	public partial class ElasticClient : IElasticClient
 	{
 		public ElasticClient() : this(new ConnectionSettings(new Uri("http://localhost:9200"))) { }
 
@@ -27,7 +27,6 @@ namespace Nest
 
 			Transport = transport;
 			LowLevel = new ElasticLowLevelClient(Transport);
-			LowLevelDispatch = new LowLevelDispatch(LowLevel);
 		}
 
 		public IConnectionSettingsValues ConnectionSettings => Transport.Settings;
@@ -37,57 +36,56 @@ namespace Nest
 		public IElasticsearchSerializer RequestResponseSerializer => Transport.Settings.RequestResponseSerializer;
 
 		public IElasticsearchSerializer SourceSerializer => Transport.Settings.SourceSerializer;
-		private IHighLevelToLowLevelDispatcher Dispatcher => this;
-
-		private LowLevelDispatch LowLevelDispatch { get; }
 
 		private ITransport<IConnectionSettingsValues> Transport { get; }
 
-		TResponse IHighLevelToLowLevelDispatcher.Dispatch<TRequest, TQueryString, TResponse>(
-			TRequest request,
-			Func<TRequest, SerializableData<TRequest>, TResponse> dispatch
-		) => Dispatcher.Dispatch<TRequest, TQueryString, TResponse>(request, null, dispatch);
-
-		TResponse IHighLevelToLowLevelDispatcher.Dispatch<TRequest, TQueryString, TResponse>(
-			TRequest request,
-			Func<IApiCallDetails, Stream, TResponse> responseGenerator,
-			Func<TRequest, SerializableData<TRequest>, TResponse> dispatch
-		)
+		internal TResponse DoRequest<TRequest, TResponse>(TRequest p, IRequestParameters parameters, Action<IRequestConfiguration> forceConfiguration = null)
+			where TRequest : class, IRequest
+			where TResponse : class, IElasticsearchResponse, new()
 		{
-			request.RouteValues.Resolve(ConnectionSettings);
-			request.RequestParameters.DeserializationOverride = responseGenerator;
+			if (forceConfiguration != null) ForceConfiguration(p, forceConfiguration);
 
-			var response = dispatch(request, request);
-			return response;
+			var url = p.GetUrl(ConnectionSettings);
+			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD) ? null : new SerializableData<TRequest>(p);
+
+			return LowLevel.DoRequest<TResponse>(p.HttpMethod, url, b, parameters);
 		}
 
-		Task<TResponseInterface> IHighLevelToLowLevelDispatcher.DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(
-			TRequest descriptor,
-			CancellationToken cancellationToken,
-			Func<TRequest, SerializableData<TRequest>, CancellationToken, Task<TResponse>> dispatch
-		) => Dispatcher.DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(descriptor, cancellationToken, null, dispatch);
-
-		async Task<TResponseInterface> IHighLevelToLowLevelDispatcher.DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(
-			TRequest request,
-			CancellationToken cancellationToken,
-			Func<IApiCallDetails, Stream, TResponse> responseGenerator,
-			Func<TRequest, SerializableData<TRequest>, CancellationToken, Task<TResponse>> dispatch
+		internal Task<TResponseInterface> DoRequestAsync<TRequest, TResponseInterface, TResponse>(
+			TRequest p,
+			IRequestParameters parameters,
+			CancellationToken ct,
+			Action<IRequestConfiguration> forceConfiguration = null
 		)
+			where TRequest : class, IRequest
+			where TResponseInterface : IElasticsearchResponse
+			where TResponse : class, TResponseInterface, IElasticsearchResponse, new()
 		{
-			request.RouteValues.Resolve(ConnectionSettings);
-			request.RequestParameters.DeserializationOverride = responseGenerator;
-			var response = await dispatch(request, request, cancellationToken).ConfigureAwait(false);
-			return response;
+			if (forceConfiguration != null) ForceConfiguration(p, forceConfiguration);
+
+			var url = p.GetUrl(ConnectionSettings);
+			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD) ? null : new SerializableData<TRequest>(p);
+
+			return LowLevel.DoRequestAsync<TResponse>(p.HttpMethod, url, ct, b, parameters)
+				.ToBaseTask<TResponse, TResponseInterface>();
 		}
 
-		private static TRequest ForceConfiguration<TRequest, TParams>(TRequest request, Action<IRequestConfiguration> setter)
-			where TRequest : IRequest<TParams>
-			where TParams : IRequestParameters, new()
+		private static void ForceConfiguration(IRequest request, Action<IRequestConfiguration> forceConfiguration)
 		{
-			var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
-			setter(configuration);
-			request.RequestParameters.RequestConfiguration = configuration;
-			return request;
+			if (forceConfiguration == null) return;
+			var configuration = request.RequestParametersInternal.RequestConfiguration ?? new RequestConfiguration();
+			forceConfiguration(configuration);
+			request.RequestParametersInternal.RequestConfiguration = configuration;
+		}
+
+		private static readonly int[] AllStatusCodes = { -1 };
+		private static void AcceptAllStatusCodesHandler(IRequestConfiguration requestConfiguration) =>
+			requestConfiguration.AllowedStatusCodes = AllStatusCodes;
+
+		private static void ForceJson(IRequestConfiguration requestConfiguration)
+		{
+			requestConfiguration.Accept = RequestData.MimeType;
+			requestConfiguration.ContentType = RequestData.MimeType;
 		}
 	}
 }

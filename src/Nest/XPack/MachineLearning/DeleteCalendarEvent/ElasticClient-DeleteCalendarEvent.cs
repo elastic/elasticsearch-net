@@ -17,11 +17,11 @@ namespace Nest
 
 		/// <inheritdoc cref="DeleteCalendarEvent(Nest.Id,Nest.Id,System.Func{Nest.DeleteCalendarEventDescriptor,Nest.IDeleteCalendarEventRequest})" />
 		Task<IDeleteCalendarEventResponse> DeleteCalendarEventAsync(Id calendarId, Id eventId, Func<DeleteCalendarEventDescriptor, IDeleteCalendarEventRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="DeleteCalendarEvent(Nest.Id,Nest.Id,System.Func{Nest.DeleteCalendarEventDescriptor,Nest.IDeleteCalendarEventRequest})" />
-		Task<IDeleteCalendarEventResponse> DeleteCalendarEventAsync(IDeleteCalendarEventRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IDeleteCalendarEventResponse> DeleteCalendarEventAsync(IDeleteCalendarEventRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -32,23 +32,19 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeleteCalendarEventResponse DeleteCalendarEvent(IDeleteCalendarEventRequest request) =>
-			Dispatcher.Dispatch<IDeleteCalendarEventRequest, DeleteCalendarEventRequestParameters, DeleteCalendarEventResponse>(
-				request,
-				(p, d) => LowLevelDispatch.MlDeleteCalendarEventDispatch<DeleteCalendarEventResponse>(p)
-			);
+			DoRequest<IDeleteCalendarEventRequest, DeleteCalendarEventResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IDeleteCalendarEventResponse> DeleteCalendarEventAsync(Id calendarId, Id eventId, Func<DeleteCalendarEventDescriptor, IDeleteCalendarEventRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+		public Task<IDeleteCalendarEventResponse> DeleteCalendarEventAsync(
+			Id calendarId,
+			Id eventId,
+			Func<DeleteCalendarEventDescriptor, IDeleteCalendarEventRequest> selector = null,
+			CancellationToken ct = default
 		) =>
-			DeleteCalendarEventAsync(selector.InvokeOrDefault(new DeleteCalendarEventDescriptor(calendarId, eventId)), cancellationToken);
+			DeleteCalendarEventAsync(selector.InvokeOrDefault(new DeleteCalendarEventDescriptor(calendarId, eventId)), ct);
 
 		/// <inheritdoc />
-		public Task<IDeleteCalendarEventResponse> DeleteCalendarEventAsync(IDeleteCalendarEventRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IDeleteCalendarEventRequest, DeleteCalendarEventRequestParameters, DeleteCalendarEventResponse, IDeleteCalendarEventResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.MlDeleteCalendarEventDispatchAsync<DeleteCalendarEventResponse>(p, c)
-			);
+		public Task<IDeleteCalendarEventResponse> DeleteCalendarEventAsync(IDeleteCalendarEventRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeleteCalendarEventRequest, IDeleteCalendarEventResponse, DeleteCalendarEventResponse>(request, request.RequestParameters, ct);
 	}
 }

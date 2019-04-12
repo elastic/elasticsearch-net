@@ -17,11 +17,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IPostJobDataResponse> PostJobDataAsync(Id jobId, Func<PostJobDataDescriptor, IPostJobDataRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IPostJobDataResponse> PostJobDataAsync(IPostJobDataRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IPostJobDataResponse> PostJobDataAsync(IPostJobDataRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -32,25 +32,18 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IPostJobDataResponse PostJobData(IPostJobDataRequest request) =>
-			Dispatcher.Dispatch<IPostJobDataRequest, PostJobDataRequestParameters, PostJobDataResponse>(
-				request,
-				LowLevelDispatch.MlPostDataDispatch<PostJobDataResponse>
-			);
+			DoRequest<IPostJobDataRequest, PostJobDataResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IPostJobDataResponse> PostJobDataAsync(Id jobId, Func<PostJobDataDescriptor, IPostJobDataRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			PostJobDataAsync(selector.InvokeOrDefault(new PostJobDataDescriptor(jobId)), cancellationToken);
+		public Task<IPostJobDataResponse> PostJobDataAsync(
+			Id jobId,
+			Func<PostJobDataDescriptor, IPostJobDataRequest> selector,
+			CancellationToken ct = default
+		) => PostJobDataAsync(selector.InvokeOrDefault(new PostJobDataDescriptor(jobId)), ct);
 
 		/// <inheritdoc />
-		public Task<IPostJobDataResponse> PostJobDataAsync(IPostJobDataRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IPostJobDataRequest, PostJobDataRequestParameters, PostJobDataResponse, IPostJobDataResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.MlPostDataDispatchAsync<PostJobDataResponse>
-			);
+		public Task<IPostJobDataResponse> PostJobDataAsync(IPostJobDataRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IPostJobDataRequest, IPostJobDataResponse, PostJobDataResponse>
+				(request, request.RequestParameters, ct);
 	}
 }

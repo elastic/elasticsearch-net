@@ -18,11 +18,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IGetIndexResponse> GetIndexAsync(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest request, CancellationToken ct = default);
 	}
 
 
@@ -34,23 +34,18 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetIndexResponse GetIndex(IGetIndexRequest request) =>
-			Dispatcher.Dispatch<IGetIndexRequest, GetIndexRequestParameters, GetIndexResponse>(
-				request,
-				(p, d) => LowLevelDispatch.IndicesGetDispatch<GetIndexResponse>(p)
-			);
+			DoRequest<IGetIndexRequest, GetIndexResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetIndexResponse> GetIndexAsync(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+		public Task<IGetIndexResponse> GetIndexAsync(
+			Indices indices,
+			Func<GetIndexDescriptor, IGetIndexRequest> selector = null,
+			CancellationToken ct = default
 		) =>
-			GetIndexAsync(selector.InvokeOrDefault(new GetIndexDescriptor(indices)), cancellationToken);
+			GetIndexAsync(selector.InvokeOrDefault(new GetIndexDescriptor(indices)), ct);
 
 		/// <inheritdoc />
-		public Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IGetIndexRequest, GetIndexRequestParameters, GetIndexResponse, IGetIndexResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.IndicesGetDispatchAsync<GetIndexResponse>(p, c)
-			);
+		public Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetIndexRequest, IGetIndexResponse, GetIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

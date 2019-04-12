@@ -15,12 +15,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IDeletePipelineResponse> DeletePipelineAsync(Id id, Func<DeletePipelineDescriptor, IDeletePipelineRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
 		Task<IDeletePipelineResponse> DeletePipelineAsync(IDeletePipelineRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -28,29 +28,21 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public IDeletePipelineResponse DeletePipeline(IDeletePipelineRequest request) =>
-			Dispatcher.Dispatch<IDeletePipelineRequest, DeletePipelineRequestParameters, DeletePipelineResponse>(
-				request,
-				(p, d) => LowLevelDispatch.IngestDeletePipelineDispatch<DeletePipelineResponse>(p)
-			);
+			DoRequest<IDeletePipelineRequest, DeletePipelineResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public IDeletePipelineResponse DeletePipeline(Id id, Func<DeletePipelineDescriptor, IDeletePipelineRequest> selector = null) =>
 			DeletePipeline(selector.InvokeOrDefault(new DeletePipelineDescriptor(id)));
 
 		/// <inheritdoc />
-		public Task<IDeletePipelineResponse> DeletePipelineAsync(Id id, Func<DeletePipelineDescriptor, IDeletePipelineRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			DeletePipelineAsync(selector.InvokeOrDefault(new DeletePipelineDescriptor(id)), cancellationToken);
+		public Task<IDeletePipelineResponse> DeletePipelineAsync(
+			Id id,
+			Func<DeletePipelineDescriptor, IDeletePipelineRequest> selector = null,
+			CancellationToken cancellationToken = default
+		) => DeletePipelineAsync(selector.InvokeOrDefault(new DeletePipelineDescriptor(id)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IDeletePipelineResponse> DeletePipelineAsync(IDeletePipelineRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IDeletePipelineRequest, DeletePipelineRequestParameters, DeletePipelineResponse, IDeletePipelineResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.IngestDeletePipelineDispatchAsync<DeletePipelineResponse>(p, c)
-			);
+		public Task<IDeletePipelineResponse> DeletePipelineAsync(IDeletePipelineRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeletePipelineRequest, IDeletePipelineResponse, DeletePipelineResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -15,50 +15,39 @@ namespace Nest
 		/// </summary>
 		IClusterGetSettingsResponse ClusterGetSettings(Func<ClusterGetSettingsDescriptor, IClusterGetSettingsRequest> selector = null);
 
-		/// <inheritdoc />
-		Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(Func<ClusterGetSettingsDescriptor, IClusterGetSettingsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+		/// <inheritdoc cref="ClusterGetSettings(System.Func{Nest.ClusterGetSettingsDescriptor,Nest.IClusterGetSettingsRequest})"/>
+		Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(
+			Func<ClusterGetSettingsDescriptor, IClusterGetSettingsRequest> selector = null,
+			CancellationToken ct = default
 		);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ClusterGetSettings(System.Func{Nest.ClusterGetSettingsDescriptor,Nest.IClusterGetSettingsRequest})"/>
 		IClusterGetSettingsResponse ClusterGetSettings(IClusterGetSettingsRequest request);
 
-		/// <inheritdoc />
-		Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(IClusterGetSettingsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		);
+		/// <inheritdoc cref="ClusterGetSettings(System.Func{Nest.ClusterGetSettingsDescriptor,Nest.IClusterGetSettingsRequest})"/>
+		Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(IClusterGetSettingsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc cref="ClusterGetSettings(System.Func{Nest.ClusterGetSettingsDescriptor,Nest.IClusterGetSettingsRequest})"/>
 		public IClusterGetSettingsResponse ClusterGetSettings(Func<ClusterGetSettingsDescriptor, IClusterGetSettingsRequest> selector = null) =>
 			ClusterGetSettings(selector.InvokeOrDefault(new ClusterGetSettingsDescriptor()));
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ClusterGetSettings(System.Func{Nest.ClusterGetSettingsDescriptor,Nest.IClusterGetSettingsRequest})"/>
 		public IClusterGetSettingsResponse ClusterGetSettings(IClusterGetSettingsRequest request) =>
-			Dispatcher.Dispatch<IClusterGetSettingsRequest, ClusterGetSettingsRequestParameters, ClusterGetSettingsResponse>(
-				request ?? new ClusterGetSettingsRequest(),
-				(p, d) => LowLevelDispatch.ClusterGetSettingsDispatch<ClusterGetSettingsResponse>(p)
-			);
+			DoRequest<IClusterGetSettingsRequest, ClusterGetSettingsResponse>(request, request.RequestParameters);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ClusterGetSettings(System.Func{Nest.ClusterGetSettingsDescriptor,Nest.IClusterGetSettingsRequest})"/>
 		public Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(
 			Func<ClusterGetSettingsDescriptor, IClusterGetSettingsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			ClusterGetSettingsAsync(selector.InvokeOrDefault(new ClusterGetSettingsDescriptor()), cancellationToken);
+			CancellationToken ct = default
+		) => ClusterGetSettingsAsync(selector.InvokeOrDefault(new ClusterGetSettingsDescriptor()), ct);
 
-		/// <inheritdoc />
-		public Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(IClusterGetSettingsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<IClusterGetSettingsRequest, ClusterGetSettingsRequestParameters, ClusterGetSettingsResponse,
-					IClusterGetSettingsResponse>(
-					request ?? new ClusterGetSettingsRequest(),
-					cancellationToken,
-					(p, d, c) => LowLevelDispatch.ClusterGetSettingsDispatchAsync<ClusterGetSettingsResponse>(p, c)
-				);
+		/// <inheritdoc cref="ClusterGetSettings(System.Func{Nest.ClusterGetSettingsDescriptor,Nest.IClusterGetSettingsRequest})"/>
+		public Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(
+			IClusterGetSettingsRequest request,
+			CancellationToken ct = default
+		) => DoRequestAsync<IClusterGetSettingsRequest, IClusterGetSettingsResponse, ClusterGetSettingsResponse>(request, request.RequestParameters, ct);
 	}
 }

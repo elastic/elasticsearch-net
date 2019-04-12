@@ -15,11 +15,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IDeleteRoleResponse> DeleteRoleAsync(Name role, Func<DeleteRoleDescriptor, IDeleteRoleRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IDeleteRoleResponse> DeleteRoleAsync(IDeleteRoleRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IDeleteRoleResponse> DeleteRoleAsync(IDeleteRoleRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -30,24 +30,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeleteRoleResponse DeleteRole(IDeleteRoleRequest request) =>
-			Dispatcher.Dispatch<IDeleteRoleRequest, DeleteRoleRequestParameters, DeleteRoleResponse>(
-				request,
-				(p, d) => LowLevelDispatch.SecurityDeleteRoleDispatch<DeleteRoleResponse>(p)
-			);
+			DoRequest<IDeleteRoleRequest, DeleteRoleResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IDeleteRoleResponse> DeleteRoleAsync(Name role, Func<DeleteRoleDescriptor, IDeleteRoleRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			DeleteRoleAsync(selector.InvokeOrDefault(new DeleteRoleDescriptor(role)), cancellationToken);
+		public Task<IDeleteRoleResponse> DeleteRoleAsync(
+			Name role,
+			Func<DeleteRoleDescriptor, IDeleteRoleRequest> selector = null,
+			CancellationToken ct = default
+		) => DeleteRoleAsync(selector.InvokeOrDefault(new DeleteRoleDescriptor(role)), ct);
 
 		/// <inheritdoc />
-		public Task<IDeleteRoleResponse> DeleteRoleAsync(IDeleteRoleRequest request, CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IDeleteRoleRequest, DeleteRoleRequestParameters, DeleteRoleResponse, IDeleteRoleResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.SecurityDeleteRoleDispatchAsync<DeleteRoleResponse>(p, c)
-			);
+		public Task<IDeleteRoleResponse> DeleteRoleAsync(IDeleteRoleRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeleteRoleRequest, IDeleteRoleResponse, DeleteRoleResponse>(request, request.RequestParameters, ct);
 	}
 }

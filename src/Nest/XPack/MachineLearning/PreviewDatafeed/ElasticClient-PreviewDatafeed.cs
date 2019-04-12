@@ -20,12 +20,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IPreviewDatafeedResponse<T>> PreviewDatafeedAsync<T>(Id datafeedId,
-			Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)
+			Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> selector = null, CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
 		Task<IPreviewDatafeedResponse<T>> PreviewDatafeedAsync<T>(IPreviewDatafeedRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -37,30 +37,24 @@ namespace Nest
 			PreviewDatafeed<T>(selector.InvokeOrDefault(new PreviewDatafeedDescriptor(datafeedId)));
 
 		/// <inheritdoc />
-		public IPreviewDatafeedResponse<T> PreviewDatafeed<T>(IPreviewDatafeedRequest request) =>
-			Dispatcher.Dispatch<IPreviewDatafeedRequest, PreviewDatafeedRequestParameters, PreviewDatafeedResponse<T>>(
-				request,
-				PreviewDatafeedResponse<T>,
-				(p, d) => LowLevelDispatch.MlPreviewDatafeedDispatch<PreviewDatafeedResponse<T>>(p)
-			);
+		public IPreviewDatafeedResponse<T> PreviewDatafeed<T>(IPreviewDatafeedRequest request)
+		{
+			request.RequestParameters.DeserializationOverride = PreviewDatafeedResponse<T>;
+			return DoRequest<IPreviewDatafeedRequest, PreviewDatafeedResponse<T>>(request, request.RequestParameters);
+		}
 
 		/// <inheritdoc />
 		public Task<IPreviewDatafeedResponse<T>> PreviewDatafeedAsync<T>(Id datafeedId,
-			Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)
+			Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> selector = null, CancellationToken cancellationToken = default
 		) =>
 			PreviewDatafeedAsync<T>(selector.InvokeOrDefault(new PreviewDatafeedDescriptor(datafeedId)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IPreviewDatafeedResponse<T>> PreviewDatafeedAsync<T>(IPreviewDatafeedRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<IPreviewDatafeedRequest, PreviewDatafeedRequestParameters, PreviewDatafeedResponse<T>, IPreviewDatafeedResponse<T>>(
-					request,
-					cancellationToken,
-					PreviewDatafeedResponse<T>,
-					(p, d, c) => LowLevelDispatch.MlPreviewDatafeedDispatchAsync<PreviewDatafeedResponse<T>>(p, c)
-				);
+		public Task<IPreviewDatafeedResponse<T>> PreviewDatafeedAsync<T>(IPreviewDatafeedRequest request, CancellationToken ct = default)
+		{
+			request.RequestParameters.DeserializationOverride = PreviewDatafeedResponse<T>;
+			return DoRequestAsync<IPreviewDatafeedRequest, IPreviewDatafeedResponse<T>, PreviewDatafeedResponse<T>>(request, request.RequestParameters, ct);
+		}
 
 		private PreviewDatafeedResponse<T> PreviewDatafeedResponse<T>(IApiCallDetails response, Stream stream) => response.Success
 			? new PreviewDatafeedResponse<T> { Data = ConnectionSettings.RequestResponseSerializer.Deserialize<IReadOnlyCollection<T>>(stream) }

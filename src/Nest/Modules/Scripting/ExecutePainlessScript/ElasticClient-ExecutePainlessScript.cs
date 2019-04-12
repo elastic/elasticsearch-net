@@ -21,12 +21,12 @@ namespace Nest
 		/// <inheritdoc cref="ExecutePainlessScript{TResult}(System.Func{Nest.ExecutePainlessScriptDescriptor,Nest.IExecutePainlessScriptRequest})" />
 		Task<IExecutePainlessScriptResponse<TResult>> ExecutePainlessScriptAsync<TResult>(
 			Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="ExecutePainlessScript{TResult}(System.Func{Nest.ExecutePainlessScriptDescriptor,Nest.IExecutePainlessScriptRequest})" />
 		Task<IExecutePainlessScriptResponse<TResult>> ExecutePainlessScriptAsync<TResult>(IExecutePainlessScriptRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -40,28 +40,20 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IExecutePainlessScriptResponse<TResult> ExecutePainlessScript<TResult>(IExecutePainlessScriptRequest request) =>
-			Dispatcher.Dispatch<IExecutePainlessScriptRequest, ExecutePainlessScriptRequestParameters, ExecutePainlessScriptResponse<TResult>>(
-				request,
-				LowLevelDispatch.ScriptsPainlessExecuteDispatch<ExecutePainlessScriptResponse<TResult>>
-			);
+			DoRequest<IExecutePainlessScriptRequest, ExecutePainlessScriptResponse<TResult>>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IExecutePainlessScriptResponse<TResult>> ExecutePainlessScriptAsync<TResult>(
 			Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			ExecutePainlessScriptAsync<TResult>(selector?.Invoke(new ExecutePainlessScriptDescriptor()), cancellationToken);
+			CancellationToken ct = default
+		) => ExecutePainlessScriptAsync<TResult>(selector?.Invoke(new ExecutePainlessScriptDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IExecutePainlessScriptResponse<TResult>> ExecutePainlessScriptAsync<TResult>(IExecutePainlessScriptRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+		public Task<IExecutePainlessScriptResponse<TResult>> ExecutePainlessScriptAsync<TResult>(
+			IExecutePainlessScriptRequest request,
+			CancellationToken ct = default
 		) =>
-			Dispatcher
-				.DispatchAsync<IExecutePainlessScriptRequest, ExecutePainlessScriptRequestParameters, ExecutePainlessScriptResponse<TResult>,
-					IExecutePainlessScriptResponse<TResult>>(
-					request,
-					cancellationToken,
-					LowLevelDispatch.ScriptsPainlessExecuteDispatchAsync<ExecutePainlessScriptResponse<TResult>>
-				);
+			DoRequestAsync<IExecutePainlessScriptRequest, IExecutePainlessScriptResponse<TResult>, ExecutePainlessScriptResponse<TResult>>
+				(request, request.RequestParameters, ct);
 	}
 }

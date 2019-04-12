@@ -31,7 +31,7 @@ namespace Nest
 		/// </remarks>
 		Task<IGetTrialLicenseStatusResponse> GetTrialLicenseStatusAsync(
 			Func<GetTrialLicenseStatusDescriptor, IGetTrialLicenseStatusRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <summary>
@@ -41,7 +41,7 @@ namespace Nest
 		/// Valid in Elasticsearch 6.2.0+.
 		/// </remarks>
 		Task<IGetTrialLicenseStatusResponse> GetTrialLicenseStatusAsync(IGetTrialLicenseStatusRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -55,28 +55,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetTrialLicenseStatusResponse GetTrialLicenseStatus(IGetTrialLicenseStatusRequest request) =>
-			Dispatcher.Dispatch<IGetTrialLicenseStatusRequest, GetTrialLicenseStatusRequestParameters, GetTrialLicenseStatusResponse>(
-				request,
-				(p, d) => LowLevelDispatch.LicenseGetTrialStatusDispatch<GetTrialLicenseStatusResponse>(p)
-			);
+			DoRequest<IGetTrialLicenseStatusRequest, GetTrialLicenseStatusResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGetTrialLicenseStatusResponse> GetTrialLicenseStatusAsync(
 			Func<GetTrialLicenseStatusDescriptor, IGetTrialLicenseStatusRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) =>
-			GetTrialLicenseStatusAsync(selector.InvokeOrDefault(new GetTrialLicenseStatusDescriptor()), cancellationToken);
+			GetTrialLicenseStatusAsync(selector.InvokeOrDefault(new GetTrialLicenseStatusDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IGetTrialLicenseStatusResponse> GetTrialLicenseStatusAsync(IGetTrialLicenseStatusRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<IGetTrialLicenseStatusRequest, GetTrialLicenseStatusRequestParameters, GetTrialLicenseStatusResponse,
-					IGetTrialLicenseStatusResponse>(
-					request,
-					cancellationToken,
-					(p, d, c) => LowLevelDispatch.LicenseGetTrialStatusDispatchAsync<GetTrialLicenseStatusResponse>(p, c)
-				);
+		public Task<IGetTrialLicenseStatusResponse> GetTrialLicenseStatusAsync(IGetTrialLicenseStatusRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetTrialLicenseStatusRequest, IGetTrialLicenseStatusResponse, GetTrialLicenseStatusResponse>(request, request.RequestParameters, ct);
 	}
 }

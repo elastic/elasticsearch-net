@@ -28,12 +28,14 @@ namespace Tests.Search.SearchShards
 				;
 
 			await POST("/_search_shards")
-					.Fluent(c => c.SearchShards<Project>(s => s.AllIndices()))
 					.Request(c => c.SearchShards(new SearchShardsRequest()))
+					.RequestAsync(c => c.SearchShardsAsync(new SearchShardsRequest()))
+				;
+			await POST("/_all/_search_shards")
+					.Fluent(c => c.SearchShards<Project>(s => s.AllIndices()))
 					.Request(c => c.SearchShards(new SearchShardsRequest<Project>(Nest.Indices.All)))
 					.FluentAsync(c => c.SearchShardsAsync<Project>(s => s.AllIndices()))
 					.RequestAsync(c => c.SearchShardsAsync(new SearchShardsRequest<Project>(Nest.Indices.All)))
-					.RequestAsync(c => c.SearchShardsAsync(new SearchShardsRequest()))
 				;
 		}
 	}

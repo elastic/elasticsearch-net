@@ -15,40 +15,32 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IDeleteScriptResponse> DeleteScriptAsync(Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IDeleteScriptResponse> DeleteScriptAsync(IDeleteScriptRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IDeleteScriptResponse> DeleteScriptAsync(IDeleteScriptRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
 		public IDeleteScriptResponse DeleteScript(IDeleteScriptRequest request) =>
-			Dispatcher.Dispatch<IDeleteScriptRequest, DeleteScriptRequestParameters, DeleteScriptResponse>(
-				request,
-				(p, d) => LowLevelDispatch.DeleteScriptDispatch<DeleteScriptResponse>(p)
-			);
+			DoRequest<IDeleteScriptRequest, DeleteScriptResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public IDeleteScriptResponse DeleteScript(Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null) =>
 			DeleteScript(selector.InvokeOrDefault(new DeleteScriptDescriptor(id)));
 
 		/// <inheritdoc />
-		public Task<IDeleteScriptResponse> DeleteScriptAsync(Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			DeleteScriptAsync(selector.InvokeOrDefault(new DeleteScriptDescriptor(id)), cancellationToken);
+		public Task<IDeleteScriptResponse> DeleteScriptAsync(
+			Id id,
+			Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null,
+			CancellationToken ct = default
+		) => DeleteScriptAsync(selector.InvokeOrDefault(new DeleteScriptDescriptor(id)), ct);
 
 		/// <inheritdoc />
-		public Task<IDeleteScriptResponse> DeleteScriptAsync(IDeleteScriptRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IDeleteScriptRequest, DeleteScriptRequestParameters, DeleteScriptResponse, IDeleteScriptResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.DeleteScriptDispatchAsync<DeleteScriptResponse>(p, c)
-			);
+		public Task<IDeleteScriptResponse> DeleteScriptAsync(IDeleteScriptRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeleteScriptRequest, IDeleteScriptResponse, DeleteScriptResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -22,11 +22,11 @@ namespace Nest
 		Task<IDeleteIndexResponse> DeleteIndexAsync(
 			Indices indices,
 			Func<DeleteIndexDescriptor, IDeleteIndexRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IDeleteIndexResponse> DeleteIndexAsync(IDeleteIndexRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IDeleteIndexResponse> DeleteIndexAsync(IDeleteIndexRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -37,26 +37,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeleteIndexResponse DeleteIndex(IDeleteIndexRequest request) =>
-			Dispatcher.Dispatch<IDeleteIndexRequest, DeleteIndexRequestParameters, DeleteIndexResponse>(
-				request,
-				(p, d) => LowLevelDispatch.IndicesDeleteDispatch<DeleteIndexResponse>(p)
-			);
+			DoRequest<IDeleteIndexRequest, DeleteIndexResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IDeleteIndexResponse> DeleteIndexAsync(
 			Indices indices,
 			Func<DeleteIndexDescriptor, IDeleteIndexRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) => DeleteIndexAsync(selector.InvokeOrDefault(new DeleteIndexDescriptor(indices)), cancellationToken);
+			CancellationToken ct = default
+		) => DeleteIndexAsync(selector.InvokeOrDefault(new DeleteIndexDescriptor(indices)), ct);
 
 		/// <inheritdoc />
-		public Task<IDeleteIndexResponse> DeleteIndexAsync(IDeleteIndexRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IDeleteIndexRequest, DeleteIndexRequestParameters, DeleteIndexResponse, IDeleteIndexResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.IndicesDeleteDispatchAsync<DeleteIndexResponse>(p, c)
-			);
+		public Task<IDeleteIndexResponse> DeleteIndexAsync(IDeleteIndexRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeleteIndexRequest, IDeleteIndexResponse, DeleteIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

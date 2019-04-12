@@ -21,12 +21,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<ICreateRepositoryResponse> CreateRepositoryAsync(Name repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<ICreateRepositoryResponse> CreateRepositoryAsync(ICreateRepositoryRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -38,26 +38,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICreateRepositoryResponse CreateRepository(ICreateRepositoryRequest request) =>
-			Dispatcher.Dispatch<ICreateRepositoryRequest, CreateRepositoryRequestParameters, CreateRepositoryResponse>(
-				request,
-				LowLevelDispatch.SnapshotCreateRepositoryDispatch<CreateRepositoryResponse>
-			);
+			DoRequest<ICreateRepositoryRequest, CreateRepositoryResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<ICreateRepositoryResponse> CreateRepositoryAsync(Name repository,
-			Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector, CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			CreateRepositoryAsync(selector?.Invoke(new CreateRepositoryDescriptor(repository)), cancellationToken);
+		public Task<ICreateRepositoryResponse> CreateRepositoryAsync(
+			Name repository,
+			Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector,
+			CancellationToken ct = default
+		) => CreateRepositoryAsync(selector?.Invoke(new CreateRepositoryDescriptor(repository)), ct);
 
 		/// <inheritdoc />
-		public Task<ICreateRepositoryResponse> CreateRepositoryAsync(ICreateRepositoryRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<ICreateRepositoryRequest, CreateRepositoryRequestParameters, CreateRepositoryResponse, ICreateRepositoryResponse>(
-					request,
-					cancellationToken,
-					LowLevelDispatch.SnapshotCreateRepositoryDispatchAsync<CreateRepositoryResponse>
-				);
+		public Task<ICreateRepositoryResponse> CreateRepositoryAsync(ICreateRepositoryRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<ICreateRepositoryRequest, ICreateRepositoryResponse, CreateRepositoryResponse>(request, request.RequestParameters, ct);
 	}
 }

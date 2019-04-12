@@ -23,40 +23,36 @@ namespace Nest
 		Task<IGetResponse<TDocument>> GetAsync<TDocument>(
 			DocumentPath<TDocument> document,
 			Func<GetDescriptor<TDocument>, IGetRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) where TDocument : class;
 
 		/// <inheritdoc />
-		Task<IGetResponse<TDocument>> GetAsync<TDocument>(IGetRequest request, CancellationToken cancellationToken = default(CancellationToken)) where TDocument : class;
+		Task<IGetResponse<TDocument>> GetAsync<TDocument>(IGetRequest request, CancellationToken ct = default) where TDocument : class;
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IGetResponse<TDocument> Get<TDocument>(DocumentPath<TDocument> document, Func<GetDescriptor<TDocument>, IGetRequest> selector = null) where TDocument : class =>
+		public IGetResponse<TDocument> Get<TDocument>(DocumentPath<TDocument> document, Func<GetDescriptor<TDocument>, IGetRequest> selector = null)
+			where TDocument : class =>
 			Get<TDocument>(selector.InvokeOrDefault(new GetDescriptor<TDocument>(document.Document, document.Self.Index, document.Self.Id)));
 
 		/// <inheritdoc />
 		public IGetResponse<TDocument> Get<TDocument>(IGetRequest request) where TDocument : class =>
-			Dispatcher.Dispatch<IGetRequest, GetRequestParameters, GetResponse<TDocument>>(
-				request,
-				(p, d) => LowLevelDispatch.GetDispatch<GetResponse<TDocument>>(p)
-			);
+			DoRequest<IGetRequest, GetResponse<TDocument>>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGetResponse<TDocument>> GetAsync<TDocument>(
 			DocumentPath<TDocument> document,
 			Func<GetDescriptor<TDocument>, IGetRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) where TDocument : class => GetAsync<TDocument>(selector.InvokeOrDefault(new GetDescriptor<TDocument>(document.Document, document.Self.Index, document.Self.Id)), cancellationToken);
+			CancellationToken ct = default
+		)
+			where TDocument : class =>
+			GetAsync<TDocument>(selector.InvokeOrDefault(new GetDescriptor<TDocument>(document.Document, document.Self.Index, document.Self.Id)), ct);
 
 		/// <inheritdoc />
-		public Task<IGetResponse<TDocument>> GetAsync<TDocument>(IGetRequest request, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<IGetResponse<TDocument>> GetAsync<TDocument>(IGetRequest request, CancellationToken ct = default)
 			where TDocument : class =>
-			Dispatcher.DispatchAsync<IGetRequest, GetRequestParameters, GetResponse<TDocument>, IGetResponse<TDocument>>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.GetDispatchAsync<GetResponse<TDocument>>(p, c)
-			);
+			DoRequestAsync<IGetRequest, IGetResponse<TDocument>, GetResponse<TDocument>>(request, request.RequestParameters, ct);
 	}
 }

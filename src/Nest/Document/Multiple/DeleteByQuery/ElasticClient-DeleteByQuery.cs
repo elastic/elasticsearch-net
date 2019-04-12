@@ -25,13 +25,13 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IDeleteByQueryResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		)
 			where T : class;
 
 		/// <inheritdoc />
 		Task<IDeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -43,25 +43,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeleteByQueryResponse DeleteByQuery(IDeleteByQueryRequest request) =>
-			Dispatcher.Dispatch<IDeleteByQueryRequest, DeleteByQueryRequestParameters, DeleteByQueryResponse>(
-				ForceConfiguration<IDeleteByQueryRequest, DeleteByQueryRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
-				(p, d) => LowLevelDispatch.DeleteByQueryDispatch<DeleteByQueryResponse>(p, d)
-			);
+			DoRequest<IDeleteByQueryRequest, DeleteByQueryResponse>(request, request.RequestParameters, r => AcceptAllStatusCodesHandler(r));
 
 		/// <inheritdoc />
 		public Task<IDeleteByQueryResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) where T : class =>
-			DeleteByQueryAsync(selector?.Invoke(new DeleteByQueryDescriptor<T>(typeof(T))), cancellationToken);
+			DeleteByQueryAsync(selector?.Invoke(new DeleteByQueryDescriptor<T>(typeof(T))), ct);
 
 		/// <inheritdoc />
-		public Task<IDeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IDeleteByQueryRequest, DeleteByQueryRequestParameters, DeleteByQueryResponse, IDeleteByQueryResponse>(
-				ForceConfiguration<IDeleteByQueryRequest, DeleteByQueryRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.DeleteByQueryDispatchAsync<DeleteByQueryResponse>(p, d, c)
-			);
+		public Task<IDeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeleteByQueryRequest, IDeleteByQueryResponse, DeleteByQueryResponse>
+				(request, request.RequestParameters, ct, r => AcceptAllStatusCodesHandler(r));
 	}
 }

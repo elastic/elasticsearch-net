@@ -4,7 +4,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using ApiGenerator.Domain;
-using CsQuery.EquationParser.Implementation;
 using Newtonsoft.Json.Linq;
 using RazorLight;
 using ShellProgressBar;
@@ -31,7 +30,6 @@ namespace ApiGenerator
 				{ GenerateRequests, "Requests" },
 				{ GenerateEnums, "Enums" },
 				{ GenerateRawClient, "Lowlevel client" },
-				{ GenerateRawDispatch, "Dispatch" },
 			};
 
 			using (var pbar = new ProgressBar(actions.Count, "Generating code", new ProgressBarOptions { BackgroundColor = ConsoleColor.DarkGray }))
@@ -192,14 +190,6 @@ namespace ApiGenerator
 			var targetFile = CodeConfiguration.EsNetFolder + @"IElasticLowLevelClient.Generated.cs";
 			var source = DoRazor(nameof(GenerateClientInterface),
 				File.ReadAllText(CodeConfiguration.ViewFolder + @"IElasticLowLevelClient.Generated.cshtml"), model);
-			File.WriteAllText(targetFile, source);
-		}
-
-		private static void GenerateRawDispatch(RestApiSpec model)
-		{
-			var targetFile = CodeConfiguration.NestFolder + @"_Generated/_LowLevelDispatch.Generated.cs";
-			var source = DoRazor(nameof(GenerateRawDispatch), File.ReadAllText(CodeConfiguration.ViewFolder + @"_LowLevelDispatch.Generated.cshtml"),
-				model);
 			File.WriteAllText(targetFile, source);
 		}
 

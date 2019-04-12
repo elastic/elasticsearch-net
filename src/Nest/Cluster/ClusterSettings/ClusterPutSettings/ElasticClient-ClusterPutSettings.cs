@@ -17,7 +17,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IClusterPutSettingsResponse> ClusterPutSettingsAsync(Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
@@ -25,7 +25,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IClusterPutSettingsResponse> ClusterPutSettingsAsync(IClusterPutSettingsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -37,27 +37,18 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IClusterPutSettingsResponse ClusterPutSettings(IClusterPutSettingsRequest request) =>
-			Dispatcher.Dispatch<IClusterPutSettingsRequest, ClusterPutSettingsRequestParameters, ClusterPutSettingsResponse>(
-				request,
-				LowLevelDispatch.ClusterPutSettingsDispatch<ClusterPutSettingsResponse>
-			);
+			DoRequest<IClusterPutSettingsRequest, ClusterPutSettingsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IClusterPutSettingsResponse> ClusterPutSettingsAsync(Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) =>
-			ClusterPutSettingsAsync(selector.InvokeOrDefault(new ClusterPutSettingsDescriptor()), cancellationToken);
+			ClusterPutSettingsAsync(selector.InvokeOrDefault(new ClusterPutSettingsDescriptor()), ct);
 
 		/// <inheritdoc />
 		public Task<IClusterPutSettingsResponse> ClusterPutSettingsAsync(IClusterPutSettingsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) =>
-			Dispatcher
-				.DispatchAsync<IClusterPutSettingsRequest, ClusterPutSettingsRequestParameters, ClusterPutSettingsResponse,
-					IClusterPutSettingsResponse>(
-					request,
-					cancellationToken,
-					LowLevelDispatch.ClusterPutSettingsDispatchAsync<ClusterPutSettingsResponse>
-				);
+			DoRequestAsync<IClusterPutSettingsRequest, IClusterPutSettingsResponse, ClusterPutSettingsResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -15,12 +15,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(Func<CatAliasesDescriptor, ICatAliasesRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default(CancellationToken)
 		);
 
 		/// <inheritdoc />
 		Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(ICatAliasesRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default(CancellationToken)
 		);
 	}
 
@@ -32,20 +32,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICatResponse<CatAliasesRecord> CatAliases(ICatAliasesRequest request) =>
-			DoCat<ICatAliasesRequest, CatAliasesRequestParameters, CatAliasesRecord>(request,
-				LowLevelDispatch.CatAliasesDispatch<CatResponse<CatAliasesRecord>>);
+			DoCat<ICatAliasesRequest, CatAliasesRequestParameters, CatAliasesRecord>(request);
 
 		/// <inheritdoc />
-		public Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(Func<CatAliasesDescriptor, ICatAliasesRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+		public Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(
+			Func<CatAliasesDescriptor, ICatAliasesRequest> selector = null,
+			CancellationToken ct = default
 		) =>
-			CatAliasesAsync(selector.InvokeOrDefault(new CatAliasesDescriptor()), cancellationToken);
+			CatAliasesAsync(selector.InvokeOrDefault(new CatAliasesDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(ICatAliasesRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			DoCatAsync<ICatAliasesRequest, CatAliasesRequestParameters, CatAliasesRecord>(request, cancellationToken,
-				LowLevelDispatch.CatAliasesDispatchAsync<CatResponse<CatAliasesRecord>>);
+		public Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(ICatAliasesRequest request, CancellationToken ct = default) =>
+			DoCatAsync<ICatAliasesRequest, CatAliasesRequestParameters, CatAliasesRecord>(request, ct);
 	}
 }

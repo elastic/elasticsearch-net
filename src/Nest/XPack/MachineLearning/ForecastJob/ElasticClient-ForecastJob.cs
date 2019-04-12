@@ -21,13 +21,13 @@ namespace Nest
 		/// Uses historical behavior to predict the future behavior of a time series.
 		/// </summary>
 		Task<IForecastJobResponse> ForecastJobAsync(Id jobId, Func<ForecastJobDescriptor, IForecastJobRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		);
 
 		/// <summary>
 		/// Uses historical behavior to predict the future behavior of a time series.
 		/// </summary>
-		Task<IForecastJobResponse> ForecastJobAsync(IForecastJobRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IForecastJobResponse> ForecastJobAsync(IForecastJobRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -38,25 +38,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IForecastJobResponse ForecastJob(IForecastJobRequest request) =>
-			Dispatcher.Dispatch<IForecastJobRequest, ForecastJobRequestParameters, ForecastJobResponse>(
-				request,
-				(p, d) => LowLevelDispatch.MlForecastDispatch<ForecastJobResponse>(p)
-			);
+			DoRequest<IForecastJobRequest, ForecastJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IForecastJobResponse> ForecastJobAsync(Id jobId, Func<ForecastJobDescriptor, IForecastJobRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			ForecastJobAsync(selector.InvokeOrDefault(new ForecastJobDescriptor(jobId)), cancellationToken);
+		public Task<IForecastJobResponse> ForecastJobAsync(
+			Id jobId,
+			Func<ForecastJobDescriptor, IForecastJobRequest> selector = null,
+			CancellationToken cancellationToken = default
+		) => ForecastJobAsync(selector.InvokeOrDefault(new ForecastJobDescriptor(jobId)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IForecastJobResponse> ForecastJobAsync(IForecastJobRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IForecastJobRequest, ForecastJobRequestParameters, ForecastJobResponse, IForecastJobResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.MlForecastDispatchAsync<ForecastJobResponse>(p, c)
-			);
+		public Task<IForecastJobResponse> ForecastJobAsync(IForecastJobRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IForecastJobRequest, IForecastJobResponse, ForecastJobResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -17,11 +17,11 @@ namespace Nest
 
 		/// <inheritdoc cref="FollowIndexStats(Indices, System.Func{Nest.FollowIndexStatsDescriptor,Nest.IFollowIndexStatsRequest})" />
 		Task<IFollowIndexStatsResponse> FollowIndexStatsAsync(Indices indices, Func<FollowIndexStatsDescriptor, IFollowIndexStatsRequest> selector = null,
-			CancellationToken cancellationToken = default
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="FollowIndexStats(Indices, System.Func{Nest.FollowIndexStatsDescriptor,Nest.IFollowIndexStatsRequest})" />
-		Task<IFollowIndexStatsResponse> FollowIndexStatsAsync(IFollowIndexStatsRequest request, CancellationToken cancellationToken = default);
+		Task<IFollowIndexStatsResponse> FollowIndexStatsAsync(IFollowIndexStatsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -32,23 +32,17 @@ namespace Nest
 
 		/// <inheritdoc cref="FollowIndexStats(Indices, System.Func{Nest.FollowIndexStatsDescriptor,Nest.IFollowIndexStatsRequest})" />
 		public IFollowIndexStatsResponse FollowIndexStats(IFollowIndexStatsRequest request) =>
-			Dispatcher.Dispatch<IFollowIndexStatsRequest, FollowIndexStatsRequestParameters, FollowIndexStatsResponse>(
-				request,
-				(p, d) => LowLevelDispatch.CcrFollowStatsDispatch<FollowIndexStatsResponse>(p)
-			);
+			DoRequest<IFollowIndexStatsRequest, FollowIndexStatsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="FollowIndexStats(Indices, System.Func{Nest.FollowIndexStatsDescriptor,Nest.IFollowIndexStatsRequest})" />
-		public Task<IFollowIndexStatsResponse> FollowIndexStatsAsync(Indices indices, Func<FollowIndexStatsDescriptor, IFollowIndexStatsRequest> selector = null,
-			CancellationToken cancellationToken = default
-		) =>
-			FollowIndexStatsAsync(selector.InvokeOrDefault(new FollowIndexStatsDescriptor(indices)), cancellationToken);
+		public Task<IFollowIndexStatsResponse> FollowIndexStatsAsync(
+			Indices indices,
+			Func<FollowIndexStatsDescriptor, IFollowIndexStatsRequest> selector = null,
+			CancellationToken ct = default
+		) => FollowIndexStatsAsync(selector.InvokeOrDefault(new FollowIndexStatsDescriptor(indices)), ct);
 
 		/// <inheritdoc cref="FollowIndexStats(Indices, System.Func{Nest.FollowIndexStatsDescriptor,Nest.IFollowIndexStatsRequest})" />
-		public Task<IFollowIndexStatsResponse> FollowIndexStatsAsync(IFollowIndexStatsRequest request, CancellationToken cancellationToken = default) =>
-			Dispatcher.DispatchAsync<IFollowIndexStatsRequest, FollowIndexStatsRequestParameters, FollowIndexStatsResponse, IFollowIndexStatsResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.CcrFollowStatsDispatchAsync<FollowIndexStatsResponse>(p, c)
-			);
+		public Task<IFollowIndexStatsResponse> FollowIndexStatsAsync(IFollowIndexStatsRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IFollowIndexStatsRequest, IFollowIndexStatsResponse, FollowIndexStatsResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -16,45 +16,37 @@ namespace Nest
 		/// <inheritdoc />
 		Task<IFieldCapabilitiesResponse> FieldCapabilitiesAsync(Indices indices,
 			Func<FieldCapabilitiesDescriptor, IFieldCapabilitiesRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<IFieldCapabilitiesResponse> FieldCapabilitiesAsync(IFieldCapabilitiesRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IFieldCapabilitiesResponse FieldCapabilities(Indices indices,
+		public IFieldCapabilitiesResponse FieldCapabilities(
+			Indices indices,
 			Func<FieldCapabilitiesDescriptor, IFieldCapabilitiesRequest> selector = null
-		) =>
-			FieldCapabilities(selector.InvokeOrDefault(new FieldCapabilitiesDescriptor().Index(indices)));
+		) => FieldCapabilities(selector.InvokeOrDefault(new FieldCapabilitiesDescriptor().Index(indices)));
 
 		/// <inheritdoc />
 		public IFieldCapabilitiesResponse FieldCapabilities(IFieldCapabilitiesRequest request) =>
-			Dispatcher.Dispatch<IFieldCapabilitiesRequest, FieldCapabilitiesRequestParameters, FieldCapabilitiesResponse>(
-				request, (p, d) => LowLevelDispatch.FieldCapsDispatch<FieldCapabilitiesResponse>(p)
-			);
+			DoRequest<IFieldCapabilitiesRequest, FieldCapabilitiesResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IFieldCapabilitiesResponse> FieldCapabilitiesAsync(Indices indices,
+		public Task<IFieldCapabilitiesResponse> FieldCapabilitiesAsync(
+			Indices indices,
 			Func<FieldCapabilitiesDescriptor, IFieldCapabilitiesRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			FieldCapabilitiesAsync(selector.InvokeOrDefault(new FieldCapabilitiesDescriptor().Index(indices)), cancellationToken);
+			CancellationToken ct = default
+		) => FieldCapabilitiesAsync(selector.InvokeOrDefault(new FieldCapabilitiesDescriptor().Index(indices)), ct);
 
 		/// <inheritdoc />
-		public Task<IFieldCapabilitiesResponse> FieldCapabilitiesAsync(IFieldCapabilitiesRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		)
-			=> Dispatcher
-				.DispatchAsync<IFieldCapabilitiesRequest, FieldCapabilitiesRequestParameters, FieldCapabilitiesResponse, IFieldCapabilitiesResponse>(
-					request,
-					cancellationToken,
-					(p, d, c) => LowLevelDispatch.FieldCapsDispatchAsync<FieldCapabilitiesResponse>(p, c)
-				);
+		public Task<IFieldCapabilitiesResponse> FieldCapabilitiesAsync(IFieldCapabilitiesRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IFieldCapabilitiesRequest, IFieldCapabilitiesResponse, FieldCapabilitiesResponse>(request, request.RequestParameters, ct);
+
 	}
 }

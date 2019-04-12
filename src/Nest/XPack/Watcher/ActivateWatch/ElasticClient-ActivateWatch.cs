@@ -17,12 +17,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IActivateWatchResponse> ActivateWatchAsync(Id id, Func<ActivateWatchDescriptor, IActivateWatchRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<IActivateWatchResponse> ActivateWatchAsync(IActivateWatchRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -34,25 +34,18 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IActivateWatchResponse ActivateWatch(IActivateWatchRequest request) =>
-			Dispatcher.Dispatch<IActivateWatchRequest, ActivateWatchRequestParameters, ActivateWatchResponse>(
-				request,
-				(p, d) => LowLevelDispatch.WatcherActivateWatchDispatch<ActivateWatchResponse>(p)
-			);
+			DoRequest<IActivateWatchRequest, ActivateWatchResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IActivateWatchResponse> ActivateWatchAsync(Id id, Func<ActivateWatchDescriptor, IActivateWatchRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			ActivateWatchAsync(selector.InvokeOrDefault(new ActivateWatchDescriptor(id)), cancellationToken);
+		public Task<IActivateWatchResponse> ActivateWatchAsync(
+			Id id,
+			Func<ActivateWatchDescriptor, IActivateWatchRequest> selector = null,
+			CancellationToken ct = default
+		) => ActivateWatchAsync(selector.InvokeOrDefault(new ActivateWatchDescriptor(id)), ct);
 
 		/// <inheritdoc />
-		public Task<IActivateWatchResponse> ActivateWatchAsync(IActivateWatchRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IActivateWatchRequest, ActivateWatchRequestParameters, ActivateWatchResponse, IActivateWatchResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.WatcherActivateWatchDispatchAsync<ActivateWatchResponse>(p, c)
-			);
+		public Task<IActivateWatchResponse> ActivateWatchAsync(IActivateWatchRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IActivateWatchRequest, IActivateWatchResponse, ActivateWatchResponse>
+				(request, request.RequestParameters, ct);
 	}
 }

@@ -23,11 +23,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<INodesUsageResponse> NodesUsageAsync(Func<NodesUsageDescriptor, INodesUsageRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<INodesUsageResponse> NodesUsageAsync(INodesUsageRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<INodesUsageResponse> NodesUsageAsync(INodesUsageRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -38,24 +38,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public INodesUsageResponse NodesUsage(INodesUsageRequest request) =>
-			Dispatcher.Dispatch<INodesUsageRequest, NodesUsageRequestParameters, NodesUsageResponse>(
-				request,
-				(p, d) => LowLevelDispatch.NodesUsageDispatch<NodesUsageResponse>(p)
-			);
+			DoRequest<INodesUsageRequest, NodesUsageResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<INodesUsageResponse> NodesUsageAsync(Func<NodesUsageDescriptor, INodesUsageRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+		public Task<INodesUsageResponse> NodesUsageAsync(
+			Func<NodesUsageDescriptor, INodesUsageRequest> selector = null,
+			CancellationToken ct = default
 		) =>
-			NodesUsageAsync(selector.InvokeOrDefault(new NodesUsageDescriptor()), cancellationToken);
+			NodesUsageAsync(selector.InvokeOrDefault(new NodesUsageDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<INodesUsageResponse> NodesUsageAsync(INodesUsageRequest request, CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<INodesUsageRequest, NodesUsageRequestParameters, NodesUsageResponse, INodesUsageResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.NodesUsageDispatchAsync<NodesUsageResponse>(p, c)
-			);
+		public Task<INodesUsageResponse> NodesUsageAsync(INodesUsageRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<INodesUsageRequest, INodesUsageResponse, NodesUsageResponse>(request, request.RequestParameters, ct);
 	}
 }

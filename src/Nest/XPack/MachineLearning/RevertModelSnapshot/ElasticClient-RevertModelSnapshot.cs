@@ -20,47 +20,39 @@ namespace Nest
 		/// <inheritdoc />
 		Task<IRevertModelSnapshotResponse> RevertModelSnapshotAsync(Id jobId, Id snapshotId,
 			Func<RevertModelSnapshotDescriptor, IRevertModelSnapshotRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
 		Task<IRevertModelSnapshotResponse> RevertModelSnapshotAsync(IRevertModelSnapshotRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IRevertModelSnapshotResponse RevertModelSnapshot(Id jobId, Id snapshotId,
+		public IRevertModelSnapshotResponse RevertModelSnapshot(
+			Id jobId,
+			Id snapshotId,
 			Func<RevertModelSnapshotDescriptor, IRevertModelSnapshotRequest> selector = null
-		) =>
-			RevertModelSnapshot(selector.InvokeOrDefault(new RevertModelSnapshotDescriptor(jobId, snapshotId)));
+		) => RevertModelSnapshot(selector.InvokeOrDefault(new RevertModelSnapshotDescriptor(jobId, snapshotId)));
 
 		/// <inheritdoc />
 		public IRevertModelSnapshotResponse RevertModelSnapshot(IRevertModelSnapshotRequest request) =>
-			Dispatcher.Dispatch<IRevertModelSnapshotRequest, RevertModelSnapshotRequestParameters, RevertModelSnapshotResponse>(
-				request,
-				LowLevelDispatch.MlRevertModelSnapshotDispatch<RevertModelSnapshotResponse>
-			);
+			DoRequest<IRevertModelSnapshotRequest, RevertModelSnapshotResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IRevertModelSnapshotResponse> RevertModelSnapshotAsync(Id jobId, Id snapshotId,
+		public Task<IRevertModelSnapshotResponse> RevertModelSnapshotAsync(
+			Id jobId,
+			Id snapshotId,
 			Func<RevertModelSnapshotDescriptor, IRevertModelSnapshotRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			RevertModelSnapshotAsync(selector.InvokeOrDefault(new RevertModelSnapshotDescriptor(jobId, snapshotId)), cancellationToken);
+			CancellationToken cancellationToken = default
+		) => RevertModelSnapshotAsync(selector.InvokeOrDefault(new RevertModelSnapshotDescriptor(jobId, snapshotId)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IRevertModelSnapshotResponse> RevertModelSnapshotAsync(IRevertModelSnapshotRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<IRevertModelSnapshotRequest, RevertModelSnapshotRequestParameters, RevertModelSnapshotResponse,
-					IRevertModelSnapshotResponse>(
-					request,
-					cancellationToken,
-					LowLevelDispatch.MlRevertModelSnapshotDispatchAsync<RevertModelSnapshotResponse>
-				);
+		public Task<IRevertModelSnapshotResponse> RevertModelSnapshotAsync(IRevertModelSnapshotRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IRevertModelSnapshotRequest, IRevertModelSnapshotResponse, RevertModelSnapshotResponse>
+				(request, request.RequestParameters, ct);
 	}
 }

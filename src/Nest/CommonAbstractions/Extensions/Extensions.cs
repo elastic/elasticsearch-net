@@ -213,13 +213,32 @@ namespace Nest
 
 		internal static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> xs) => xs ?? new T[0];
 
+		/// <summary>
+		/// This is only used to cast IResponse to Response, really want to get of response interfaces alltogether
+		/// </summary>
+		public static Task<TBase> ToBaseTask<T, TBase>(this Task<T> task)
+			where T : TBase
+		{
+			var tcs = new TaskCompletionSource<TBase>();
+			task.ContinueWith(t =>
+			{
+				if (t.IsFaulted)
+					tcs.TrySetException(t.Exception.InnerExceptions);
+				else if (t.IsCanceled)
+					tcs.TrySetCanceled();
+				else
+					tcs.TrySetResult(t.Result);
+			}, TaskContinuationOptions.ExecuteSynchronously);
+			return tcs.Task;
+		}
+
 		internal static async Task ForEachAsync<TSource, TResult>(
 			this IEnumerable<TSource> lazyList,
 			Func<TSource, long, Task<TResult>> taskSelector,
 			Action<TSource, TResult> resultProcessor,
 			Action<Exception> done,
 			int maxDegreeOfParallelism,
-			SemaphoreSlim additionalRateLimitter = null
+			SemaphoreSlim additionalRateLimiter = null
 		)
 		{
 			var semaphore = new SemaphoreSlim(maxDegreeOfParallelism, maxDegreeOfParallelism);
@@ -231,7 +250,7 @@ namespace Nest
 				var i = 0;
 				foreach (var item in lazyList)
 				{
-					tasks.Add(ProcessAsync(item, taskSelector, resultProcessor, semaphore, additionalRateLimitter, page++));
+					tasks.Add(ProcessAsync(item, taskSelector, resultProcessor, semaphore, additionalRateLimiter, page++));
 					if (tasks.Count < maxDegreeOfParallelism)
 						continue;
 

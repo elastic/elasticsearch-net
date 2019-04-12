@@ -64,71 +64,42 @@ namespace Elasticsearch.Net
 		where T : ConnectionConfiguration<T>
 	{
 		private readonly IConnection _connection;
-
 		private readonly IConnectionPool _connectionPool;
-
 		private readonly NameValueCollection _headers = new NameValueCollection();
-
 		private readonly NameValueCollection _queryString = new NameValueCollection();
 		private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
-
+		private readonly ElasticsearchUrlFormatter _urlFormatter;
+		
 		private BasicAuthenticationCredentials _basicAuthCredentials;
-
 		private X509CertificateCollection _clientCertificates;
 		private Action<IApiCallDetails> _completedRequestHandler = DefaultCompletedRequestHandler;
-
 		private int _connectionLimit;
-
 		private TimeSpan? _deadTimeout;
-
 		private bool _disableAutomaticProxyDetection = false;
-
 		private bool _disableDirectStreaming = false;
-
 		private bool _disablePings;
-
 		private bool _enableHttpCompression;
-
 		private bool _enableHttpPipelining = true;
-
 		private TimeSpan? _keepAliveInterval;
-
 		private TimeSpan? _keepAliveTime;
-
 		private TimeSpan? _maxDeadTimeout;
-
 		private int? _maxRetries;
-
 		private TimeSpan? _maxRetryTimeout;
-
 		private Func<Node, bool> _nodePredicate = DefaultNodePredicate;
 		private Action<RequestData> _onRequestDataCreated = DefaultRequestDataCreated;
-
 		private TimeSpan? _pingTimeout;
-
 		private bool _prettyJson;
-
 		private string _proxyAddress;
-
 		private string _proxyPassword;
-
 		private string _proxyUsername;
-
 		private TimeSpan _requestTimeout;
-
 		private Func<object, X509Certificate, X509Chain, SslPolicyErrors, bool> _serverCertificateValidationCallback;
-
 		private IReadOnlyCollection<int> _skipDeserializationForStatusCodes = new ReadOnlyCollection<int>(new int[] { });
-
 		private TimeSpan? _sniffLifeSpan;
-
 		private bool _sniffOnConnectionFault;
-
 		private bool _sniffOnStartup;
-
 		private bool _throwExceptions;
-
-		private readonly ElasticsearchUrlFormatter _urlFormatter;
+		private string _uniqueId = Guid.NewGuid().ToString("N");
 
 		protected ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer requestResponseSerializer)
 		{
@@ -147,6 +118,7 @@ namespace Elasticsearch.Net
 			_urlFormatter = new ElasticsearchUrlFormatter(this);
 		}
 
+		string IConnectionConfigurationValues.Id => _uniqueId;
 		protected IElasticsearchSerializer UseThisRequestResponseSerializer { get; set; }
 		BasicAuthenticationCredentials IConnectionConfigurationValues.BasicAuthenticationCredentials => _basicAuthCredentials;
 		SemaphoreSlim IConnectionConfigurationValues.BootstrapLock => _semaphore;
@@ -205,11 +177,11 @@ namespace Elasticsearch.Net
 
 		private static bool DefaultNodePredicate(Node node) => true;
 
-		private T Assign<TValue>(TValue value, Action<ConnectionConfiguration<T>, TValue> assigner) => Fluent.Assign((T)this, value, assigner);
+		protected T UpdateId() => Fluent.Assign<T, T, string>((T)this, Guid.NewGuid().ToString("N"), (a, v) => a._uniqueId = v);
+		
+		protected T Assign<TValue>(TValue value, Action<T, TValue> assigner) => Fluent.Assign((T)this, value, assigner).UpdateId();
 
-		/// <summary>
-		/// The default serializer used to serialize documents to and from JSON
-		/// </summary>
+		/// <summary> The default serializer used to serialize documents to and from JSON </summary>
 		protected virtual IElasticsearchSerializer DefaultSerializer(T settings) => new LowLevelRequestResponseSerializer();
 
 		/// <summary>
@@ -225,9 +197,7 @@ namespace Elasticsearch.Net
 			Assign(keepAliveTime, (a, v) => a._keepAliveTime = v)
 			.Assign(keepAliveInterval, (a, v) => a._keepAliveInterval = v);
 
-		/// <summary>
-		/// The maximum number of retries for a given request,
-		/// </summary>
+		/// <summary> The maximum number of retries for a given request </summary>
 		public T MaximumRetries(int maxRetries) => Assign(maxRetries, (a, v) => a._maxRetries = v);
 
 		/// <summary>
@@ -341,14 +311,10 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// If your connection has to go through proxy, use this method to specify the proxy url
 		/// </summary>
-		public T Proxy(Uri proxyAdress, string username, string password)
-		{
-			proxyAdress.ThrowIfNull(nameof(proxyAdress));
-			_proxyAddress = proxyAdress.ToString();
-			_proxyUsername = username;
-			_proxyPassword = password;
-			return (T)this;
-		}
+		public T Proxy(Uri proxyAdress, string username, string password) =>
+			Assign(proxyAdress.ToString(), (a, v) => a._proxyAddress = v)
+				.Assign(username, (a, v) => a._proxyUsername = v)
+				.Assign(password, (a, v) => a._proxyPassword = v);
 
 		/// <summary>
 		/// Forces all requests to have ?pretty=true querystring parameter appended,
@@ -422,13 +388,7 @@ namespace Elasticsearch.Net
 		/// verbatim.
 		/// </summary>
 		/// <param name="predicate">Return true if you want the node to be used for API calls</param>
-		public T NodePredicate(Func<Node, bool> predicate)
-		{
-			if (predicate == null) return (T)this;
-
-			_nodePredicate = predicate;
-			return (T)this;
-		}
+		public T NodePredicate(Func<Node, bool> predicate) => Assign(predicate ?? DefaultNodePredicate, (a, v) => a._nodePredicate = predicate);
 
 		/// <summary>
 		/// Turns on settings that aid in debugging like DisableDirectStreaming() and PrettyJson()
@@ -440,22 +400,20 @@ namespace Elasticsearch.Net
 		/// ConnectionSettings. If no callback is passed, DebugInformation from the response
 		/// will be written to the debug output by default.
 		/// </param>
-		public T EnableDebugMode(Action<IApiCallDetails> onRequestCompleted = null)
-		{
-			_disableDirectStreaming = true;
-			PrettyJson(true);
-			IncludeServerStackTraceOnError(true);
-
-			var originalCompletedRequestHandler = _completedRequestHandler;
-			var debugCompletedRequestHandler = onRequestCompleted ?? (d => Debug.WriteLine(d.DebugInformation));
-			_completedRequestHandler = d =>
-			{
-				originalCompletedRequestHandler?.Invoke(d);
-				debugCompletedRequestHandler?.Invoke(d);
-			};
-
-			return (T)this;
-		}
+		public T EnableDebugMode(Action<IApiCallDetails> onRequestCompleted = null) =>
+			PrettyJson()
+				.IncludeServerStackTraceOnError()
+				.DisableDirectStreaming()
+				.Assign(onRequestCompleted, (a, v) =>
+				{
+					var originalCompletedRequestHandler = _completedRequestHandler;
+					var debugCompletedRequestHandler = v ?? (d => Debug.WriteLine(d.DebugInformation));
+					_completedRequestHandler = d =>
+					{
+						originalCompletedRequestHandler?.Invoke(d);
+						debugCompletedRequestHandler.Invoke(d);
+					};
+				});
 
 		/// <summary>
 		/// Register a ServerCertificateValidationCallback, this is called per endpoint until it returns true.

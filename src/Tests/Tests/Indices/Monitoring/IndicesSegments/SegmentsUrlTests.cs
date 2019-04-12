@@ -2,6 +2,7 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework;
+using static Nest.Indices;
 
 namespace Tests.Indices.Monitoring.IndicesSegments
 {
@@ -10,10 +11,15 @@ namespace Tests.Indices.Monitoring.IndicesSegments
 		[U] public async Task Urls()
 		{
 			await UrlTester.GET($"/_segments")
-					.Fluent(c => c.Segments(Nest.Indices.All))
 					.Request(c => c.Segments(new SegmentsRequest()))
-					.FluentAsync(c => c.SegmentsAsync(Nest.Indices.All))
 					.RequestAsync(c => c.SegmentsAsync(new SegmentsRequest()))
+				;
+			
+			await UrlTester.GET($"/_all/_segments")
+					.Fluent(c => c.Segments(All))
+					.Request(c => c.Segments(new SegmentsRequest(All)))
+					.FluentAsync(c => c.SegmentsAsync(All))
+					.RequestAsync(c => c.SegmentsAsync(new SegmentsRequest(All)))
 				;
 
 			var index = "index1,index2";

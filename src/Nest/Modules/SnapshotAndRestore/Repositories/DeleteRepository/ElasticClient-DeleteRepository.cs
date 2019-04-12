@@ -23,12 +23,12 @@ namespace Nest
 		/// <inheritdoc />
 		Task<IDeleteRepositoryResponse> DeleteRepositoryAsync(Names repositories,
 			Func<DeleteRepositoryDescriptor, IDeleteRepositoryRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<IDeleteRepositoryResponse> DeleteRepositoryAsync(IDeleteRepositoryRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -42,27 +42,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeleteRepositoryResponse DeleteRepository(IDeleteRepositoryRequest request) =>
-			Dispatcher.Dispatch<IDeleteRepositoryRequest, DeleteRepositoryRequestParameters, DeleteRepositoryResponse>(
-				request,
-				(p, d) => LowLevelDispatch.SnapshotDeleteRepositoryDispatch<DeleteRepositoryResponse>(p)
-			);
+			DoRequest<IDeleteRepositoryRequest, DeleteRepositoryResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IDeleteRepositoryResponse> DeleteRepositoryAsync(Names repositories,
+		public Task<IDeleteRepositoryResponse> DeleteRepositoryAsync(
+			Names repositories,
 			Func<DeleteRepositoryDescriptor, IDeleteRepositoryRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			DeleteRepositoryAsync(selector.InvokeOrDefault(new DeleteRepositoryDescriptor(repositories)), cancellationToken);
+			CancellationToken ct = default
+		) => DeleteRepositoryAsync(selector.InvokeOrDefault(new DeleteRepositoryDescriptor(repositories)), ct);
 
 		/// <inheritdoc />
-		public Task<IDeleteRepositoryResponse> DeleteRepositoryAsync(IDeleteRepositoryRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<IDeleteRepositoryRequest, DeleteRepositoryRequestParameters, DeleteRepositoryResponse, IDeleteRepositoryResponse>(
-					request,
-					cancellationToken,
-					(p, d, c) => LowLevelDispatch.SnapshotDeleteRepositoryDispatchAsync<DeleteRepositoryResponse>(p, c)
-				);
+		public Task<IDeleteRepositoryResponse> DeleteRepositoryAsync(IDeleteRepositoryRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeleteRepositoryRequest, IDeleteRepositoryResponse, DeleteRepositoryResponse>(request, request.RequestParameters, ct);
 	}
 }

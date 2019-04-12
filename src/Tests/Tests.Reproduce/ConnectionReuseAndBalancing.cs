@@ -93,7 +93,7 @@ namespace Tests.Reproduce
 		private async Task IndexMockData(IElasticClient c, int requestsPerIteration)
 		{
 			var tokenSource = new CancellationTokenSource();
-			await c.DeleteIndexAsync(Index<Project>(), cancellationToken: tokenSource.Token);
+			await c.DeleteIndexAsync(Index<Project>(), ct: tokenSource.Token);
 			var observableBulk = c.BulkAll(MockDataGenerator(100000), f => f
 					.MaxDegreeOfParallelism(10)
 					.BackOffTime(TimeSpan.FromSeconds(10))

@@ -15,11 +15,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IGetLicenseResponse> GetLicenseAsync(Func<GetLicenseDescriptor, IGetLicenseRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IGetLicenseResponse> GetLicenseAsync(IGetLicenseRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IGetLicenseResponse> GetLicenseAsync(IGetLicenseRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -30,24 +30,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetLicenseResponse GetLicense(IGetLicenseRequest request) =>
-			Dispatcher.Dispatch<IGetLicenseRequest, GetLicenseRequestParameters, GetLicenseResponse>(
-				request,
-				(p, d) => LowLevelDispatch.LicenseGetDispatch<GetLicenseResponse>(p)
-			);
+			DoRequest<IGetLicenseRequest, GetLicenseResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetLicenseResponse> GetLicenseAsync(Func<GetLicenseDescriptor, IGetLicenseRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			GetLicenseAsync(selector.InvokeOrDefault(new GetLicenseDescriptor()), cancellationToken);
+		public Task<IGetLicenseResponse> GetLicenseAsync(
+			Func<GetLicenseDescriptor, IGetLicenseRequest> selector = null,
+			CancellationToken ct = default
+		) => GetLicenseAsync(selector.InvokeOrDefault(new GetLicenseDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IGetLicenseResponse> GetLicenseAsync(IGetLicenseRequest request, CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IGetLicenseRequest, GetLicenseRequestParameters, GetLicenseResponse, IGetLicenseResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.LicenseGetDispatchAsync<GetLicenseResponse>(p, c)
-			);
+		public Task<IGetLicenseResponse> GetLicenseAsync(IGetLicenseRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetLicenseRequest, IGetLicenseResponse, GetLicenseResponse>(request, request.RequestParameters, ct);
 	}
 }

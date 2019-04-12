@@ -17,11 +17,11 @@ namespace Nest
 
 		/// <inheritdoc cref="HasPrivileges(System.Func{Nest.HasPrivilegesDescriptor,Nest.IHasPrivilegesRequest})" />
 		Task<IHasPrivilegesResponse> HasPrivilegesAsync(Func<HasPrivilegesDescriptor, IHasPrivilegesRequest> selector = null,
-			CancellationToken cancellationToken = default
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="HasPrivileges(System.Func{Nest.HasPrivilegesDescriptor,Nest.IHasPrivilegesRequest})" />
-		Task<IHasPrivilegesResponse> HasPrivilegesAsync(IHasPrivilegesRequest request, CancellationToken cancellationToken = default);
+		Task<IHasPrivilegesResponse> HasPrivilegesAsync(IHasPrivilegesRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -32,23 +32,17 @@ namespace Nest
 
 		/// <inheritdoc cref="HasPrivileges(System.Func{Nest.HasPrivilegesDescriptor,Nest.IHasPrivilegesRequest})" />
 		public IHasPrivilegesResponse HasPrivileges(IHasPrivilegesRequest request) =>
-			Dispatcher.Dispatch<IHasPrivilegesRequest, HasPrivilegesRequestParameters, HasPrivilegesResponse>(
-				request,
-				LowLevelDispatch.SecurityHasPrivilegesDispatch<HasPrivilegesResponse>
-			);
+			DoRequest<IHasPrivilegesRequest, HasPrivilegesResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="HasPrivileges(System.Func{Nest.HasPrivilegesDescriptor,Nest.IHasPrivilegesRequest})" />
-		public Task<IHasPrivilegesResponse> HasPrivilegesAsync(Func<HasPrivilegesDescriptor, IHasPrivilegesRequest> selector = null,
-			CancellationToken cancellationToken = default
-		) =>
-			HasPrivilegesAsync(selector.InvokeOrDefault(new HasPrivilegesDescriptor()), cancellationToken);
+		public Task<IHasPrivilegesResponse> HasPrivilegesAsync(
+			Func<HasPrivilegesDescriptor, IHasPrivilegesRequest> selector = null,
+			CancellationToken ct = default
+		) => HasPrivilegesAsync(selector.InvokeOrDefault(new HasPrivilegesDescriptor()), ct);
 
 		/// <inheritdoc cref="HasPrivileges(System.Func{Nest.HasPrivilegesDescriptor,Nest.IHasPrivilegesRequest})" />
-		public Task<IHasPrivilegesResponse> HasPrivilegesAsync(IHasPrivilegesRequest request, CancellationToken cancellationToken = default) =>
-			Dispatcher.DispatchAsync<IHasPrivilegesRequest, HasPrivilegesRequestParameters, HasPrivilegesResponse, IHasPrivilegesResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.SecurityHasPrivilegesDispatchAsync<HasPrivilegesResponse>
-			);
+		public Task<IHasPrivilegesResponse> HasPrivilegesAsync(IHasPrivilegesRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IHasPrivilegesRequest, IHasPrivilegesResponse, HasPrivilegesResponse>
+				(request, request.RequestParameters, ct);
 	}
 }

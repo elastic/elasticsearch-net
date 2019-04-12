@@ -16,12 +16,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IGraphExploreResponse> GraphExploreAsync<T>(Func<GraphExploreDescriptor<T>, IGraphExploreRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		)
 			where T : class;
 
 		/// <inheritdoc />
-		Task<IGraphExploreResponse> GraphExploreAsync(IGraphExploreRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IGraphExploreResponse> GraphExploreAsync(IGraphExploreRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -32,25 +32,18 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGraphExploreResponse GraphExplore(IGraphExploreRequest request) =>
-			Dispatcher.Dispatch<IGraphExploreRequest, GraphExploreRequestParameters, GraphExploreResponse>(
-				request,
-				LowLevelDispatch.GraphExploreDispatch<GraphExploreResponse>
-			);
+			DoRequest<IGraphExploreRequest, GraphExploreResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGraphExploreResponse> GraphExploreAsync<T>(Func<GraphExploreDescriptor<T>, IGraphExploreRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) where T : class =>
-			GraphExploreAsync(selector?.Invoke(new GraphExploreDescriptor<T>()), cancellationToken);
+		public Task<IGraphExploreResponse> GraphExploreAsync<T>(
+			Func<GraphExploreDescriptor<T>, IGraphExploreRequest> selector,
+			CancellationToken ct = default
+		)
+			where T : class =>
+			GraphExploreAsync(selector?.Invoke(new GraphExploreDescriptor<T>()), ct);
 
 		/// <inheritdoc />
-		public Task<IGraphExploreResponse> GraphExploreAsync(IGraphExploreRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IGraphExploreRequest, GraphExploreRequestParameters, GraphExploreResponse, IGraphExploreResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.GraphExploreDispatchAsync<GraphExploreResponse>
-			);
+		public Task<IGraphExploreResponse> GraphExploreAsync(IGraphExploreRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGraphExploreRequest, IGraphExploreResponse, GraphExploreResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -17,11 +17,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<ICatResponse<CatHelpRecord>> CatHelpAsync(Func<CatHelpDescriptor, ICatHelpRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default(CancellationToken)
 		);
 
 		/// <inheritdoc />
-		Task<ICatResponse<CatHelpRecord>> CatHelpAsync(ICatHelpRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<ICatResponse<CatHelpRecord>> CatHelpAsync(ICatHelpRequest request, CancellationToken ct = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -31,31 +31,24 @@ namespace Nest
 			CatHelp(selector.InvokeOrDefault(new CatHelpDescriptor()));
 
 		/// <inheritdoc />
-		public ICatResponse<CatHelpRecord> CatHelp(ICatHelpRequest request) =>
-			Dispatcher.Dispatch<ICatHelpRequest, CatHelpRequestParameters, CatResponse<CatHelpRecord>>(
-				request,
-				new Func<IApiCallDetails, Stream, CatResponse<CatHelpRecord>>(DeserializeCatHelpResponse),
-				(p, d) => LowLevelDispatch.CatHelpDispatch<CatResponse<CatHelpRecord>>(p)
-			);
+		public ICatResponse<CatHelpRecord> CatHelp(ICatHelpRequest request)
+		{
+			request.RequestParameters.DeserializationOverride = DeserializeCatHelpResponse;
+			return DoRequest<ICatHelpRequest, CatResponse<CatHelpRecord>>(request, request.RequestParameters);
+		}
 
 		/// <inheritdoc />
-		public Task<ICatResponse<CatHelpRecord>> CatHelpAsync(Func<CatHelpDescriptor, ICatHelpRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			CatHelpAsync(selector.InvokeOrDefault(new CatHelpDescriptor()), cancellationToken);
+		public Task<ICatResponse<CatHelpRecord>> CatHelpAsync(Func<CatHelpDescriptor, ICatHelpRequest> selector = null, CancellationToken ct = default) =>
+			CatHelpAsync(selector.InvokeOrDefault(new CatHelpDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<ICatResponse<CatHelpRecord>> CatHelpAsync(ICatHelpRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<ICatHelpRequest, CatHelpRequestParameters, CatResponse<CatHelpRecord>, ICatResponse<CatHelpRecord>>(
-				request,
-				cancellationToken,
-				new Func<IApiCallDetails, Stream, CatResponse<CatHelpRecord>>(DeserializeCatHelpResponse),
-				(p, d, c) => LowLevelDispatch.CatHelpDispatchAsync<CatResponse<CatHelpRecord>>(p, c)
-			);
+		public Task<ICatResponse<CatHelpRecord>> CatHelpAsync(ICatHelpRequest request, CancellationToken ct = default)
+		{
+			request.RequestParameters.DeserializationOverride = DeserializeCatHelpResponse;
+			return DoRequestAsync<ICatHelpRequest, ICatResponse<CatHelpRecord>, CatResponse<CatHelpRecord>>(request, request.RequestParameters, ct);
+		}
 
-		private CatResponse<CatHelpRecord> DeserializeCatHelpResponse(IApiCallDetails response, Stream stream)
+		private static CatResponse<CatHelpRecord> DeserializeCatHelpResponse(IApiCallDetails response, Stream stream)
 		{
 			using (stream)
 			using (var ms = response.ConnectionConfiguration.MemoryStreamFactory.Create())

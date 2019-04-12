@@ -15,11 +15,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IAuthenticateResponse> AuthenticateAsync(Func<AuthenticateDescriptor, IAuthenticateRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IAuthenticateResponse> AuthenticateAsync(IAuthenticateRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IAuthenticateResponse> AuthenticateAsync(IAuthenticateRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -30,25 +30,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IAuthenticateResponse Authenticate(IAuthenticateRequest request) =>
-			Dispatcher.Dispatch<IAuthenticateRequest, AuthenticateRequestParameters, AuthenticateResponse>(
-				request,
-				(p, d) => LowLevelDispatch.SecurityAuthenticateDispatch<AuthenticateResponse>(p)
-			);
+			DoRequest<IAuthenticateRequest, AuthenticateResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IAuthenticateResponse> AuthenticateAsync(Func<AuthenticateDescriptor, IAuthenticateRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			AuthenticateAsync(selector.InvokeOrDefault(new AuthenticateDescriptor()), cancellationToken);
+		public Task<IAuthenticateResponse> AuthenticateAsync(
+			Func<AuthenticateDescriptor, IAuthenticateRequest> selector = null,
+			CancellationToken ct = default
+		) => AuthenticateAsync(selector.InvokeOrDefault(new AuthenticateDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IAuthenticateResponse> AuthenticateAsync(IAuthenticateRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IAuthenticateRequest, AuthenticateRequestParameters, AuthenticateResponse, IAuthenticateResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.SecurityAuthenticateDispatchAsync<AuthenticateResponse>(p, c)
-			);
+		public Task<IAuthenticateResponse> AuthenticateAsync(IAuthenticateRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IAuthenticateRequest, IAuthenticateResponse, AuthenticateResponse>(request, request.RequestParameters, ct);
 	}
 }

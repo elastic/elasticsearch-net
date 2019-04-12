@@ -17,12 +17,12 @@ namespace Nest
 		Task<ICatResponse<CatSnapshotsRecord>> CatSnapshotsAsync(
 			Names repositories,
 			Func<CatSnapshotsDescriptor, ICatSnapshotsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default(CancellationToken)
 		);
 
 		/// <inheritdoc />
 		Task<ICatResponse<CatSnapshotsRecord>> CatSnapshotsAsync(ICatSnapshotsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default(CancellationToken)
 		);
 	}
 
@@ -35,21 +35,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICatResponse<CatSnapshotsRecord> CatSnapshots(ICatSnapshotsRequest request) =>
-			DoCat<ICatSnapshotsRequest, CatSnapshotsRequestParameters, CatSnapshotsRecord>(request,
-				LowLevelDispatch.CatSnapshotsDispatch<CatResponse<CatSnapshotsRecord>>);
+			DoCat<ICatSnapshotsRequest, CatSnapshotsRequestParameters, CatSnapshotsRecord>(request);
 
 		/// <inheritdoc />
 		public Task<ICatResponse<CatSnapshotsRecord>> CatSnapshotsAsync(
 			Names repositories,
 			Func<CatSnapshotsDescriptor, ICatSnapshotsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) => CatSnapshotsAsync(selector.InvokeOrDefault(new CatSnapshotsDescriptor().RepositoryName(repositories)), cancellationToken);
+			CancellationToken ct = default
+		) => CatSnapshotsAsync(selector.InvokeOrDefault(new CatSnapshotsDescriptor().RepositoryName(repositories)), ct);
 
 		/// <inheritdoc />
-		public Task<ICatResponse<CatSnapshotsRecord>> CatSnapshotsAsync(ICatSnapshotsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			DoCatAsync<ICatSnapshotsRequest, CatSnapshotsRequestParameters, CatSnapshotsRecord>(request, cancellationToken,
-				LowLevelDispatch.CatSnapshotsDispatchAsync<CatResponse<CatSnapshotsRecord>>);
+		public Task<ICatResponse<CatSnapshotsRecord>> CatSnapshotsAsync(ICatSnapshotsRequest request, CancellationToken ct = default) =>
+			DoCatAsync<ICatSnapshotsRequest, CatSnapshotsRequestParameters, CatSnapshotsRecord>(request, ct);
 	}
 }

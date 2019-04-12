@@ -24,7 +24,7 @@ namespace Nest
 		/// features that will be removed or changed in the next major version.
 		/// </summary>
 		Task<IDeprecationInfoResponse> DeprecationInfoAsync(Func<DeprecationInfoDescriptor, IDeprecationInfoRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <summary>
@@ -32,7 +32,7 @@ namespace Nest
 		/// features that will be removed or changed in the next major version.
 		/// </summary>
 		Task<IDeprecationInfoResponse> DeprecationInfoAsync(IDeprecationInfoRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -44,25 +44,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeprecationInfoResponse DeprecationInfo(IDeprecationInfoRequest request) =>
-			Dispatcher.Dispatch<IDeprecationInfoRequest, DeprecationInfoRequestParameters, DeprecationInfoResponse>(
-				request,
-				(p, d) => LowLevelDispatch.MigrationDeprecationsDispatch<DeprecationInfoResponse>(p)
-			);
+			DoRequest<IDeprecationInfoRequest, DeprecationInfoResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IDeprecationInfoResponse> DeprecationInfoAsync(Func<DeprecationInfoDescriptor, IDeprecationInfoRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			DeprecationInfoAsync(selector.InvokeOrDefault(new DeprecationInfoDescriptor()), cancellationToken);
+		public Task<IDeprecationInfoResponse> DeprecationInfoAsync(
+			Func<DeprecationInfoDescriptor, IDeprecationInfoRequest> selector = null,
+			CancellationToken ct = default
+		) => DeprecationInfoAsync(selector.InvokeOrDefault(new DeprecationInfoDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IDeprecationInfoResponse> DeprecationInfoAsync(IDeprecationInfoRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IDeprecationInfoRequest, DeprecationInfoRequestParameters, DeprecationInfoResponse, IDeprecationInfoResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.MigrationDeprecationsDispatchAsync<DeprecationInfoResponse>(p, c)
-			);
+		public Task<IDeprecationInfoResponse> DeprecationInfoAsync(IDeprecationInfoRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeprecationInfoRequest, IDeprecationInfoResponse, DeprecationInfoResponse>
+				(request, request.RequestParameters, ct);
 	}
 }
