@@ -31,7 +31,6 @@ namespace Nest
 				aggregation.BucketsPath = new SingleBucketsPath((string)value);
 			else
 				aggregation.BucketsPath = default(SingleBucketsPath);
-
 #else
 			aggregation.BucketsPath = GetOrDefault<SingleBucketsPath>("buckets_path", ps);
 #endif
