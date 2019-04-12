@@ -2580,6 +2580,16 @@ namespace Elasticsearch.Net
 		///<param name="body">The new lifecycle step to move to</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> IlmMoveToStepAsync<TResponse>(string index, PostData body, IlmMoveToStepRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>PUT on /_ilm/policy/{policy} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</para></summary>
+		///<param name="policy">The name of the index lifecycle policy</param>
+		///<param name="body">The lifecycle policy definition to register</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse IlmPutLifecycle<TResponse>(string policy, PostData body, IlmPutLifecycleRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>PUT on /_ilm/policy/{policy} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</para></summary>
+		///<param name="policy">The name of the index lifecycle policy</param>
+		///<param name="body">The lifecycle policy definition to register</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> IlmPutLifecycleAsync<TResponse>(string policy, PostData body, IlmPutLifecycleRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/_ilm/remove <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html</para></summary>
 		///<param name="index">The name of the index to remove policy on</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>

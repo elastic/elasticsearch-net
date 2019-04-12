@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	//https://github.com/elastic/elasticsearch/tree/6.7/client/rest-high-level/src/main/java/org/elasticsearch/client/indexlifecycle
 	public interface IIlmGetLifecycleResponse : IResponse
 	{
 		IReadOnlyDictionary<string, LifecyclePolicies> Policies { get; }

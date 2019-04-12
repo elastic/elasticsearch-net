@@ -22,7 +22,6 @@ namespace ApiGenerator
 		{
 			"ccr.follow_info.json",
 			"ccr.forget_follower.json",
-			"ilm.put_lifecycle.json",
 			"indices.freeze.json",
 			"indices.unfreeze.json",
 			"xpack.ml.set_upgrade_mode.json",

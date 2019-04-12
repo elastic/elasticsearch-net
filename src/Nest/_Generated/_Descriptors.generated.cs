@@ -4181,6 +4181,22 @@ namespace Nest
 		//TODO THIS METHOD IS UNMAPPED!
 		
 	}
+	///<summary>descriptor for IlmPutLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</pre></summary>
+	public partial class IlmPutLifecycleDescriptor  : RequestDescriptorBase<IlmPutLifecycleDescriptor,IlmPutLifecycleRequestParameters, IIlmPutLifecycleRequest>, IIlmPutLifecycleRequest
+	{ 
+		/// <summary>/_ilm/policy/{policy}</summary>
+		///<param name="policy"> this parameter is required</param>
+		public IlmPutLifecycleDescriptor(Policy policy) : base(r=>r.Required("policy", policy)){}
+		// values part of the url path
+		Policy IIlmPutLifecycleRequest.Policy => Self.RouteValues.Get<Policy>("policy");
+
+		// Request parameters
+
+		///<summary>Specifies the period of time to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public IlmPutLifecycleDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		///<summary>Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s.</summary>
+		public IlmPutLifecycleDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+	}
 	///<summary>descriptor for IlmRemovePolicy <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html</pre></summary>
 	public partial class IlmRemovePolicyDescriptor  : RequestDescriptorBase<IlmRemovePolicyDescriptor,IlmRemovePolicyRequestParameters, IIlmRemovePolicyRequest>, IIlmRemovePolicyRequest
 	{ 
