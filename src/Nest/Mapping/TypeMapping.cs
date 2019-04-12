@@ -127,7 +127,7 @@ namespace Nest
 		/// </summary>
 		public TypeMappingDescriptor<T> AutoMap(Type documentType, IPropertyVisitor visitor = null, int maxRecursion = 0)
 		{
-			if (!documentType.IsClass()) throw new ArgumentException("must be a reference type", nameof(documentType));
+			if (!documentType.IsClass) throw new ArgumentException("must be a reference type", nameof(documentType));
 			return Assign(Self.Properties.AutoMap(documentType, visitor, maxRecursion), (a, v) => a.Properties = v);
 		}
 

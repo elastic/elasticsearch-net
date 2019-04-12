@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace Elasticsearch.Net
 {
 #if DOTNETCORE
-	[Obsolete("CoreFX HttpWebRequest uses HttpClient under the covers but does not reuse HttpClient instances, we'll therefor stop shipping with this class in the next major version")]
+	[Obsolete("CoreFX HttpWebRequest uses HttpClient under the covers but does not reuse HttpClient instances, we'll therefore stop shipping with this class in the next major version")]
 #endif
 	public class HttpWebRequestConnection : IConnection
 	{

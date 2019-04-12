@@ -16,13 +16,13 @@ namespace Tests.CodeStandards.Serialization
 		[U]
 		public void CustomConvertersShouldBeInternal()
 		{
-			var converters = typeof(IElasticClient).Assembly().GetTypes()
+			var converters = typeof(IElasticClient).Assembly.GetTypes()
 				.Where(t => typeof(JsonConverter).IsAssignableFrom(t))
 				.ToList();
 			var visible = new List<string>();
 			foreach (var converter in converters)
 			{
-				if (converter.IsVisible())
+				if (converter.IsVisible)
 					visible.Add(converter.Name);
 			}
 			visible.Should().BeEmpty();

@@ -16,9 +16,6 @@ namespace Elasticsearch.Net
 		private static readonly ConcurrentDictionary<string, ObjectActivator<object>> CachedActivators =
 			new ConcurrentDictionary<string, ObjectActivator<object>>();
 
-
-		internal static T CreateInstance<T>(this Type t, params object[] args) => (T)t.CreateInstance(args);
-
 		internal static object CreateInstance(this Type t, params object[] args)
 		{
 			var argKey = args.Length;
@@ -40,15 +37,6 @@ namespace Elasticsearch.Net
 			activator = (ObjectActivator<object>)generic.Invoke(null, new[] { ctor });
 			CachedActivators.TryAdd(key, activator);
 			return activator(args);
-		}
-
-		internal static bool IsValueType(this Type type)
-		{
-#if DOTNETCORE
-			return type.GetTypeInfo().IsValueType;
-#else
-			return type.IsValueType;
-#endif
 		}
 
 		//do not remove this is referenced through GetActivatorMethod

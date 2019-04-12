@@ -123,15 +123,6 @@ namespace Nest
 
 		internal static bool IsNullOrEmpty(this IndexName value) => value == null || value.GetHashCode() == 0;
 
-		internal static bool IsValueType(this Type type)
-		{
-#if DOTNETCORE
-			return type.GetTypeInfo().IsValueType;
-#else
-			return type.IsValueType;
-#endif
-		}
-
 		internal static void ThrowIfNullOrEmpty(this string @object, string parameterName, string when = null)
 		{
 			@object.ThrowIfNull(parameterName, when);

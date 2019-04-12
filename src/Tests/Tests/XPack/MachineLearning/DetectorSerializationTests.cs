@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
@@ -13,9 +14,9 @@ namespace Tests.XPack.MachineLearning
 		[U] public void CanSerializeAndDeserializeAllDetectors()
 		{
 			var detectorTypes =
-				from t in typeof(IDetector).Assembly().Types()
+				from t in typeof(IDetector).Assembly.Types()
 				where typeof(IDetector).IsAssignableFrom(t) &&
-					!t.IsAbstract() &&
+					!t.IsAbstract &&
 					!typeof(IDescriptor).IsAssignableFrom(t)
 				select t;
 

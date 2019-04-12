@@ -62,7 +62,7 @@ namespace Nest
 
 		public static bool IsNumeric(Type myType) => NumericTypes.Contains(Nullable.GetUnderlyingType(myType) ?? myType);
 
-		public static bool IsNullable(Type type) => type.IsGeneric() && type.GetGenericTypeDefinition() == typeof(Nullable<>);
+		public static bool IsNullable(Type type) => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
 
 		private TValue[] FieldArray<TValue>(string field)
 		{

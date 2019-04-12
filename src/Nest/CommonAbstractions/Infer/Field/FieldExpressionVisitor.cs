@@ -46,7 +46,7 @@ namespace Nest
 				var isDict =
 					typeof(IDictionary).IsAssignableFrom(t)
 					|| typeof(IDictionary<,>).IsAssignableFrom(t)
-					|| t.IsGeneric() && t.GetGenericTypeDefinition() == typeof(IDictionary<,>);
+					|| t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IDictionary<,>);
 
 				if (!isDict)
 					return base.VisitMethodCall(node);
@@ -121,7 +121,7 @@ namespace Nest
 				var isDict =
 					typeof(IDictionary).IsAssignableFrom(t)
 					|| typeof(IDictionary<,>).IsAssignableFrom(t)
-					|| t.IsGeneric() && t.GetGenericTypeDefinition() == typeof(IDictionary<,>);
+					|| t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IDictionary<,>);
 
 				if (!isDict) return base.VisitMethodCall(methodCall);
 

@@ -232,7 +232,7 @@ namespace System.Collections.Generic
 		{
 			if (value == null)
 			{
-				if (typeof(T).IsValue()) throw new ArgumentException("value is null and a value type");
+				if (typeof(T).IsValueType) throw new ArgumentException("value is null and a value type");
 			}
 			else if (!(value is T))
 				throw new ArgumentException($"object is of type {value.GetType().FullName} but collection is of {typeof(T).FullName}");

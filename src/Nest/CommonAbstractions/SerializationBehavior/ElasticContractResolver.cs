@@ -14,7 +14,8 @@ namespace Nest
 	internal class ElasticContractResolver : DefaultContractResolver
 	{
 		private static readonly Type[] StringSignalTypes = { typeof(KeywordAttribute), typeof(TextAttribute) };
-		private static readonly Assembly ThisAssembly = typeof(ElasticContractResolver).Assembly();
+
+		private static readonly Assembly ThisAssembly = typeof(ElasticContractResolver).Assembly;
 
 		private static readonly MachineLearningDateTimeConverter MachineLearningDateTimeConverter = new MachineLearningDateTimeConverter();
 		private static readonly StringEnumConverter StringEnumConverter = new StringEnumConverter();
@@ -81,7 +82,7 @@ namespace Nest
 			if (CanRemoveSourceConverter(contract.Converter)) contract.Converter = null; //rely on defaults
 			else if (o == typeof(Error)) contract.Converter = ErrorJsonConverter;
 			else if (o == typeof(ErrorCause)) contract.Converter = ErrorCauseJsonConverter;
-			else if (o.IsGeneric() && o.GetGenericTypeDefinition() == typeof(SuggestDictionary<>))
+			else if (o.IsGenericType && o.GetGenericTypeDefinition() == typeof(SuggestDictionary<>))
 				contract.Converter = typeof(SuggestDictionaryConverter<>).CreateGenericInstance<JsonConverter>(o.GetGenericArguments());
 			else if (contract.Converter == null &&
 				(typeof(IDictionary).IsAssignableFrom(o) || o.IsGenericDictionary()) && !typeof(IIsADictionary).IsAssignableFrom(o))
@@ -240,7 +241,7 @@ namespace Nest
 		{
 			var attributes = member.GetCustomAttributes().ToList();
 			var stringy = attributes.Any(a => StringSignalTypes.Contains(a.GetType()));
-			if (attributes.OfType<StringEnumAttribute>().Any() || property.PropertyType.IsEnumType() && stringy)
+			if (attributes.OfType<StringEnumAttribute>().Any() || property.PropertyType.IsEnum && stringy)
 				property.Converter = StringEnumConverter;
 
 			if ((property.PropertyType == typeof(TimeSpan) || property.PropertyType == typeof(TimeSpan?))

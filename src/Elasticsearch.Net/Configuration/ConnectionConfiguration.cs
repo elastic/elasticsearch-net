@@ -10,7 +10,6 @@ using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
 #if DOTNETCORE
-using System.Net;
 using System.Net.Http;
 #endif
 
@@ -62,7 +61,7 @@ namespace Elasticsearch.Net
 
 		internal static bool IsCurlHandler { get; } =
 #if DOTNETCORE
-                typeof(HttpClientHandler).Assembly().GetType("System.Net.Http.CurlHandler") != null;
+                typeof(HttpClientHandler).Assembly.GetType("System.Net.Http.CurlHandler") != null;
             #else
 			false;
 #endif
