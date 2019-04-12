@@ -14,8 +14,7 @@ namespace Nest
 
 		public Mappings(IDictionary<TypeName, ITypeMapping> container) : base(container) { }
 
-		public Mappings(Dictionary<TypeName, ITypeMapping> container)
-			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value)) { }
+		public Mappings(Dictionary<TypeName, ITypeMapping> container) : base(container) { }
 
 		public void Add(TypeName type, ITypeMapping mapping) => BackingDictionary.Add(type, mapping);
 	}

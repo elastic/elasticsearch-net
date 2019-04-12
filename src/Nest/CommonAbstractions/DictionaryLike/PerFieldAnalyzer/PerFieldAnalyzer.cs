@@ -15,8 +15,7 @@ namespace Nest
 
 		public PerFieldAnalyzer(IDictionary<Field, string> container) : base(container) { }
 
-		public PerFieldAnalyzer(Dictionary<Field, string> container)
-			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value)) { }
+		public PerFieldAnalyzer(Dictionary<Field, string> container) : base(container) { }
 
 		public void Add(Field field, string analyzer) => BackingDictionary.Add(field, analyzer);
 	}

@@ -14,8 +14,7 @@ namespace Nest
 
 		public Tokenizers(IDictionary<string, ITokenizer> container) : base(container) { }
 
-		public Tokenizers(Dictionary<string, ITokenizer> container)
-			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value)) { }
+		public Tokenizers(Dictionary<string, ITokenizer> container) : base(container) { }
 
 		public void Add(string name, ITokenizer analyzer) => BackingDictionary.Add(name, analyzer);
 	}

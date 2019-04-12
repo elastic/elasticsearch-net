@@ -14,8 +14,7 @@ namespace Nest
 
 		public SuggestContainer(IDictionary<string, ISuggestBucket> container) : base(container) { }
 
-		public SuggestContainer(Dictionary<string, ISuggestBucket> container)
-			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value)) { }
+		public SuggestContainer(Dictionary<string, ISuggestBucket> container) : base(container) { }
 
 		public void Add(string name, ISuggestBucket script) => BackingDictionary.Add(name, script);
 	}
