@@ -915,7 +915,7 @@ namespace Elasticsearch.Net
             var day = 0;
             if (hasDay)
             {
-                var poolArray = BufferPool.Default.Rent();
+                var poolArray = JsonSerializer.MemoryPool.Rent();
                 try
                 {
                     for (; array[i] != '.'; i++)
@@ -927,7 +927,7 @@ namespace Elasticsearch.Net
                 }
                 finally
                 {
-                    BufferPool.Default.Return(poolArray);
+					JsonSerializer.MemoryPool.Return(poolArray);
                 }
             }
 

@@ -149,7 +149,7 @@ namespace Elasticsearch.Net
         {
             if (resolver == null) resolver = DefaultResolver;
 
-            var buf = BufferPool.Default.Rent();
+            var buf = MemoryPool.Rent();
             try
             {
                 var writer = new JsonWriter(buf);
@@ -160,7 +160,7 @@ namespace Elasticsearch.Net
             }
             finally
             {
-                BufferPool.Default.Return(buf);
+                MemoryPool.Return(buf);
             }
         }
 
@@ -334,7 +334,7 @@ namespace Elasticsearch.Net
         {
             if (resolver == null) resolver = DefaultResolver;
 
-            var buffer = BufferPool.Default.Rent();
+            var buffer = MemoryPool.Rent();
             var buf = buffer;
             try
             {
@@ -360,7 +360,7 @@ namespace Elasticsearch.Net
             }
             finally
             {
-                BufferPool.Default.Return(buffer);
+                MemoryPool.Return(buffer);
             }
         }
 
