@@ -14,11 +14,11 @@ namespace Nest
 		public override bool IsValid => base.IsValid && !Errors && !ItemsWithErrors.HasAny();
 
 		[DataMember(Name ="items")]
-		public IReadOnlyList<IBulkResponseItem> Items { get; internal set; } = EmptyReadOnly<IBulkResponseItem>.List;
+		public IReadOnlyList<BulkResponseItemBase> Items { get; internal set; } = EmptyReadOnly<BulkResponseItemBase>.List;
 
 		[IgnoreDataMember]
-		public IEnumerable<IBulkResponseItem> ItemsWithErrors => !Items.HasAny()
-			? Enumerable.Empty<IBulkResponseItem>()
+		public IEnumerable<BulkResponseItemBase> ItemsWithErrors => !Items.HasAny()
+			? Enumerable.Empty<BulkResponseItemBase>()
 			: Items.Where(i => !i.IsValid);
 
 		[DataMember(Name ="took")]

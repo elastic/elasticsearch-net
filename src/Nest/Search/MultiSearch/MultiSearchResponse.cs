@@ -8,7 +8,7 @@ namespace Nest
 {
 	[DataContract]
 	[JsonFormatter(typeof(MultiSearchResponseFormatter))]
-	public class MultiSearchResponse : ResponseBase, IMultiSearchResponse
+	public class MultiSearchResponse : ResponseBase
 	{
 		public MultiSearchResponse() => Responses = new Dictionary<string, IResponse>();
 

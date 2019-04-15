@@ -5,7 +5,7 @@ namespace Nest
 {
 	public class FollowIndexStatsResponse : ResponseBase
 	{
-		/// <inheritdoc cref="IFollowIndexStatsResponse.Indices" />
+		/// <inheritdoc cref="FollowIndexStatsResponse.Indices" />
 		[DataMember(Name = "indices")]
 		public IReadOnlyCollection<FollowIndexStats> Indices { get; internal set; } = EmptyReadOnly<FollowIndexStats>.Collection;
 	}

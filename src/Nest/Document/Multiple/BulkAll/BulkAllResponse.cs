@@ -19,6 +19,6 @@ namespace Nest
 		public int Retries { get; internal set; }
 
 		/// <summary>The items returned from the bulk response</summary>
-		public IReadOnlyCollection<IBulkResponseItem> Items { get; internal set; } = EmptyReadOnly<IBulkResponseItem>.Collection;
+		public IReadOnlyCollection<BulkResponseItemBase> Items { get; internal set; } = EmptyReadOnly<BulkResponseItemBase>.Collection;
 	}
 }

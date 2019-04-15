@@ -94,7 +94,7 @@ namespace Nest
 
 		public void Serialize(ref JsonWriter writer, MultiSearchResponse value, IJsonFormatterResolver formatterResolver) =>
 			DynamicObjectResolver
-				.ExcludeNullCamelCase.GetFormatter<IMultiSearchResponse>()
+				.ExcludeNullCamelCase.GetFormatter<MultiSearchResponse>()
 				.Serialize(ref writer, value, formatterResolver);
 
 		private static void CreateSearchResponse<T>(SearchHitTuple tuple, IJsonFormatterResolver formatterResolver,
