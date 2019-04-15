@@ -1,5 +1,7 @@
 :ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.6
 
+:xpack_current: https://www.elastic.co/guide/en/x-pack/5.6
+
 :github: https://github.com/elastic/elasticsearch-net
 
 :nuget: https://www.nuget.org/packages
@@ -115,7 +117,7 @@ public class BadCertgenCaCluster : SslAndKpiXPackCluster
 
 If you go for a vendor generated SSL certificate, it's common practice for the certificate to include the CA _and_ any intermediary CAs
 in the certificate chain. When using such a certificate, use `CertificateValidations.AuthorityPartOfChain` which validates that
-the local CA certificate is part of the chain that was used to generate the servers key.
+the local CA certificate is part of the chain that was used to generate the server's key.
 
 ==== Client Certificates
 
@@ -157,8 +159,11 @@ public class PkiCluster : CertgenCaCluster
 }
 ----
 <1> Set the client certificate on `ConnectionSettings`
+
 <2> The path to the `.cer` file
+
 <3> The path to the `.key` file
+
 <4> The password for the private key
 
 Or per request on `RequestConfiguration` which will take precedence over the ones defined on `ConnectionConfiguration`

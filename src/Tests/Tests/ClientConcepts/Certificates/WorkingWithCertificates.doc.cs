@@ -14,7 +14,7 @@ using Tests.Framework.Integration;
 
 namespace Tests.ClientConcepts.Certificates
 {
-	/**=== Working with certificates
+	/** === Working with certificates
 	 *
 	 * If you've enabled SSL on Elasticsearch with https://www.elastic.co/products/x-pack[X-Pack] or through a
 	 * proxy in front of Elasticsearch, and the Certificate Authority (CA)
@@ -169,7 +169,7 @@ namespace Tests.ClientConcepts.Certificates
 		/**
 		* If you go for a vendor generated SSL certificate, it's common practice for the certificate to include the CA _and_ any intermediary CAs
 		* in the certificate chain. When using such a certificate, use `CertificateValidations.AuthorityPartOfChain` which validates that
-		* the local CA certificate is part of the chain that was used to generate the servers key.
+		* the local CA certificate is part of the chain that was used to generate the server's key.
 		*/
 
 #if !DOTNETCORE
