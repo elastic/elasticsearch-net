@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
+	[InterfaceDataContract]
 	[ReadAs(typeof(HitsMetadata<>))]
 	public interface IHitsMetadata<out T> where T : class
 	{
@@ -17,8 +19,8 @@ namespace Nest
 	}
 
 
-	[DataContract]
-	public class HitsMetadata<T> where T : class
+	public class HitsMetadata<T> : IHitsMetadata<T>
+		where T : class
 	{
 		[DataMember(Name = "hits")]
 		public IReadOnlyCollection<IHit<T>> Hits { get; internal set; } = EmptyReadOnly<IHit<T>>.Collection;

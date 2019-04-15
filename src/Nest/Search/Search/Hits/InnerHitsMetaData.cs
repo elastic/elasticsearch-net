@@ -7,7 +7,7 @@ namespace Nest
 	public class InnerHitsMetadata
 	{
 		[DataMember(Name ="hits")]
-		public List<Hit<ILazyDocument>> Hits { get; internal set; }
+		public List<IHit<ILazyDocument>> Hits { get; internal set; }
 
 		[DataMember(Name ="max_score")]
 		public double? MaxScore { get; internal set; }

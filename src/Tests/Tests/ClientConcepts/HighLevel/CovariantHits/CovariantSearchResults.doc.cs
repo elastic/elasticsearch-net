@@ -74,21 +74,21 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 				{
 					_index = "project",
 					_type = "a",
-					_id = i,
+					_id = i.ToString(),
 					_score = 1.0,
 					_source= new { name= "A object", id = i }
 				}).Concat(Enumerable.Range(26, 25).Select(i => (object)new
 				{
 					_index = "project",
 					_type = "b",
-					_id = i,
+					_id = i.ToString(),
 					_score = 1.0,
 					_source= new { name= "B object", id = i }
 				})).Concat(Enumerable.Range(51, 50).Select(i => new
 				{
 					_index = "project",
 					_type = "c",
-					_id = i,
+					_id = i.ToString(),
 					_score = 1.0,
 					_source= new { name= "C object", id = i }
 				})).ToArray()
