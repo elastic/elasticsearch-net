@@ -8,78 +8,63 @@ namespace Nest
 
 	public partial class IlmPutLifecycleRequest
 	{
-		[JsonProperty("phases")]
-		public Phases Phases { get; set; }
+		[JsonProperty("policy")]
+		public Policy Policy { get; set; }
 	}
 
 	[DescriptorFor("IlmPutLifecycle")]
 	public partial class IlmPutLifecycleDescriptor
 	{
-		public IlmPutLifecycleDescriptor Phases(Func<PhasesDescriptor, Phases> selector)
-		{
-			return null;
-		}
+		public IlmPutLifecycleDescriptor Policy(Func<PolicyDescriptor, object> selector) => null;
 	}
 
-	public class Phases : IsADictionaryBase<string, Phase>
+	public class PolicyDescriptor : IDescriptor
 	{
-		public void Add(string name, Phase phase) => BackingDictionary.Add(name, phase);
+		public PhasesDescriptor Phases(Func<PhasesDescriptor, object> func) => null;
 	}
-
 
 	public class PhasesDescriptor : IDescriptor
 	{
-		private IDictionary<string, Phase> _payload;
-
-		public PhasesDescriptor() { }
-
-		public PhasesDescriptor(IDictionary<string, Phase> payload) => _payload = payload;
-
-	//	IDictionary<string, Phase> ISimpleInput.Payload => _payload;
-
-		public PhasesDescriptor Add(string key, Phase value)
-		{
-			if (_payload == null) _payload = new Dictionary<string, Phase>();
-			_payload.Add(key, value);
-			return this;
-		}
-
-		public PhasesDescriptor Remove(string key)
-		{
-			if (_payload == null) return this;
-
-			_payload.Remove(key);
-			return this;
-		}
+		public PhasesDescriptor Warm(Func<PhaseDescriptor, object> func) => null;
+		public PhasesDescriptor Hot(Func<PhaseDescriptor, object> func) => null;
+		public PhasesDescriptor Cold(Func<PhaseDescriptor, object> func) => null;
+		public PhasesDescriptor Delete(Func<PhaseDescriptor, object> func) => null;
 	}
 
-//	public class LifecycleActionsDescriptor
-//	{
-//		public LifecycleActionsDescriptor Allocate(string name, Func<AllocateLifecycleActionDescriptor, IAllocateLifecycleAction> selector) =>
-//			Assign(name, selector.InvokeOrDefault(new AllocateLifecycleActionDescriptor()));
-//
-//		public LifecycleActionsDescriptor Delete(string name, Func<DeleteLifecycleActionDescriptor, IDeleteLifecycleAction> selector) =>
-//			Assign(name, selector.InvokeOrDefault(new DeleteLifecycleActionDescriptor()));
-//
-//		public LifecycleActionsDescriptor ForceMerge(string name, Func<ForceMergeLifecycleActionDescriptor, IForceMergeLifecycleAction> selector) =>
-//			Assign(name, selector.InvokeOrDefault(new ForceMergeLifecycleActionDescriptor()));
-//
-//		public LifecycleActionsDescriptor Freeze(string name, Func<FreezeLifecycleActionDescriptor, IFreezeLifecycleAction> selector) =>
-//			Assign(name, selector.InvokeOrDefault(new FreezeLifecycleActionDescriptor()));
-//
-//		public LifecycleActionsDescriptor ReadOnly(string name, Func<ReadOnlyLifecycleActionDescriptor, IReadOnlyLifecycleAction> selector) =>
-//			Assign(name, selector.InvokeOrDefault(new ReadOnlyLifecycleActionDescriptor()));
-//
-//		public LifecycleActionsDescriptor Rollover(string name, Func<RolloverLifecycleActionDescriptor, IRolloverLifecycleAction> selector) =>
-//			Assign(name, selector.InvokeOrDefault(new RolloverLifecycleActionDescriptor()));
-//
-//		public LifecycleActionsDescriptor SetPriority(string name, Func<SetPriorityLifecycleActionDescriptor, ISetPriorityLifecycleAction> selector) =>
-//			Assign(name, selector.InvokeOrDefault(new SetPriorityLifecycleActionDescriptor()));
-//
-//		public LifecycleActionsDescriptor Shrink(string name, Func<ShrinkLifecycleActionDescriptor, IShrinkLifecycleAction> selector) =>
-//			Assign(name, selector.InvokeOrDefault(new ShrinkLifecycleActionDescriptor()));
-//
-//		public LifecycleActionsDescriptor Unfollow(string name, Func<UnfollowLifecycleActionDescriptor, IUnfollowLifecycleAction> selector) =>
-//			Assign(name, selector.InvokeOrDefault(new UnfollowLifecycleActionDescriptor()));
-//	}
+	public class PhaseDescriptor : IDescriptor
+	{
+		public PhaseDescriptor MinimumAge(string p0) => null;
+
+		public LifecycleActionsDescriptor Actions(Func<LifecycleActionsDescriptor, object> func) => null;
+	}
+
+	public class LifecycleActionsDescriptor : IsADictionaryDescriptorBase<LifecycleActionsDescriptor, object, string, ILifecycleAction>
+	{
+		public LifecycleActionsDescriptor Allocate(Func<AllocateLifecycleActionDescriptor, IAllocateLifecycleAction> selector) =>
+			Assign("allocate", selector.InvokeOrDefault(new AllocateLifecycleActionDescriptor()));
+
+		public LifecycleActionsDescriptor Delete(Func<DeleteLifecycleActionDescriptor, IDeleteLifecycleAction> selector) =>
+			Assign("delete", selector.InvokeOrDefault(new DeleteLifecycleActionDescriptor()));
+
+		public LifecycleActionsDescriptor ForceMerge(Func<ForceMergeLifecycleActionDescriptor, IForceMergeLifecycleAction> selector) =>
+			Assign("forcemerge", selector.InvokeOrDefault(new ForceMergeLifecycleActionDescriptor()));
+
+		public LifecycleActionsDescriptor Freeze(Func<FreezeLifecycleActionDescriptor, IFreezeLifecycleAction> selector) =>
+			Assign("freeze", selector.InvokeOrDefault(new FreezeLifecycleActionDescriptor()));
+
+		public LifecycleActionsDescriptor ReadOnly(Func<ReadOnlyLifecycleActionDescriptor, IReadOnlyLifecycleAction> selector) =>
+			Assign("readonly", selector.InvokeOrDefault(new ReadOnlyLifecycleActionDescriptor()));
+
+		public LifecycleActionsDescriptor Rollover(Func<RolloverLifecycleActionDescriptor, IRolloverLifecycleAction> selector) =>
+			Assign("rollover", selector.InvokeOrDefault(new RolloverLifecycleActionDescriptor()));
+
+		public LifecycleActionsDescriptor SetPriority(Func<SetPriorityLifecycleActionDescriptor, ISetPriorityLifecycleAction> selector) =>
+			Assign("setpriority", selector.InvokeOrDefault(new SetPriorityLifecycleActionDescriptor()));
+
+		public LifecycleActionsDescriptor Shrink(Func<ShrinkLifecycleActionDescriptor, IShrinkLifecycleAction> selector) =>
+			Assign("shrink", selector.InvokeOrDefault(new ShrinkLifecycleActionDescriptor()));
+
+		public LifecycleActionsDescriptor Unfollow(Func<UnfollowLifecycleActionDescriptor, IUnfollowLifecycleAction> selector) =>
+			Assign("unfollow", selector.InvokeOrDefault(new UnfollowLifecycleActionDescriptor()));
+	}
 }

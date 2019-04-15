@@ -6,16 +6,16 @@ namespace Nest
 {
 	public interface IIlmGetLifecycleResponse : IResponse
 	{
-		IReadOnlyDictionary<string, LifecyclePolicies> Policies { get; }
+		IReadOnlyDictionary<string, LifecyclePolicy> Policies { get; }
 	}
 
 	public class IlmGetLifecycleResponse : ResponseBase, IIlmGetLifecycleResponse
 	{
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, ShardHealthStats>))]
-		public IReadOnlyDictionary<string, LifecyclePolicies> Policies { get; internal set; } = EmptyReadOnly<string, LifecyclePolicies>.Dictionary;
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, LifecyclePolicy>))]
+		public IReadOnlyDictionary<string, LifecyclePolicy> Policies { get; internal set; } = EmptyReadOnly<string, LifecyclePolicy>.Dictionary;
 	}
 
-	public class LifecyclePolicies
+	public class LifecyclePolicy
 	{
 		[JsonProperty("version")]
 		public int Version { get; internal set; }
@@ -25,21 +25,6 @@ namespace Nest
 		public DateTime ModifiedDate { get; internal set; }
 
 		[JsonProperty("policy")]
-		public LifecyclePolicy Policy { get; internal set; }
-	}
-
-	public class LifecyclePolicy
-	{
-		[JsonProperty("phases")]
-		public IReadOnlyDictionary<string, Phase> Phases { get; internal set; } = EmptyReadOnly<string, Phase>.Dictionary;
-	}
-
-	public class Phase
-	{
-		[JsonProperty("min_age")]
-		public Time MinimumAge { get; set; }
-
-		[JsonProperty("actions")]
-		public List<ILifecycleAction> Actions { get; set; }
+		public Policy Policy { get; internal set; }
 	}
 }
