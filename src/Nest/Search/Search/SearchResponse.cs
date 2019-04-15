@@ -9,7 +9,7 @@ namespace Nest
 	/// A response to a search request
 	/// </summary>
 	/// <typeparam name="T">The document type</typeparam>
-	public interface ISearchResponse<T> : IResponse where T : class
+	public interface ISearchResponse<out T> : IResponse where T : class
 	{
 		/// <summary>
 		/// Gets the collection of aggregations
@@ -53,7 +53,7 @@ namespace Nest
 		/// <summary>
 		/// Gets the meta data about the hits that match the search query criteria.
 		/// </summary>
-		HitsMetadata<T> HitsMetadata { get; }
+		IHitsMetadata<T> HitsMetadata { get; }
 
 		/// <summary>
 		/// Gets the maximum score for documents matching the search query criteria
@@ -146,7 +146,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		[DataMember(Name ="hits")]
-		public HitsMetadata<T> HitsMetadata { get; internal set; }
+		public IHitsMetadata<T> HitsMetadata { get; internal set; }
 
 		/// <inheritdoc />
 		[IgnoreDataMember]

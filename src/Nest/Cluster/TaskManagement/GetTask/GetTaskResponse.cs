@@ -1,22 +1,13 @@
 ﻿using System.Runtime.Serialization;
-using Elasticsearch.Net;
 
 namespace Nest
 {
-	[InterfaceDataContract]
-	public interface IGetTaskResponse : IResponse
+	public class GetTaskResponse : ResponseBase
 	{
 		[DataMember(Name = "completed")]
-		bool Completed { get; }
-
-		[DataMember(Name = "task")]
-		TaskInfo Task { get; }
-	}
-
-	public class GetTaskResponse : ResponseBase, IGetTaskResponse
-	{
 		public bool Completed { get; internal set; }
 
+		[DataMember(Name = "task")]
 		public TaskInfo Task { get; internal set; }
 	}
 }

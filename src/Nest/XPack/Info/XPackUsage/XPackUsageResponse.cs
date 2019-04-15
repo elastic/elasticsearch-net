@@ -3,25 +3,7 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-	public interface IXPackUsageResponse : IResponse
-	{
-		[DataMember(Name = "watcher")]
-		AlertingUsage Alerting { get; }
-
-		[DataMember(Name = "graph")]
-		XPackUsage Graph { get; }
-
-		[DataMember(Name = "ml")]
-		MachineLearningUsage MachineLearning { get; }
-
-		[DataMember(Name = "monitoring")]
-		MonitoringUsage Monitoring { get; }
-
-		[DataMember(Name = "security")]
-		SecurityUsage Security { get; }
-	}
-
-	public class XPackUsageResponse : ResponseBase, IXPackUsageResponse
+	public class XPackUsageResponse : ResponseBase
 	{
 		[DataMember(Name = "watcher")]
 		public AlertingUsage Alerting { get; internal set; }
@@ -170,7 +152,7 @@ namespace Nest
 	    /// <remarks>Valid only for Elasticsearch 6.5.0+</remarks>
 		[DataMember(Name = "node_count")]
 		public int NodeCount { get; internal set; }
-	    
+
 		[DataMember(Name = "datafeeds")]
 		public IReadOnlyDictionary<string, DataFeed> Datafeeds { get; set; } = EmptyReadOnly<string, DataFeed>.Dictionary;
 

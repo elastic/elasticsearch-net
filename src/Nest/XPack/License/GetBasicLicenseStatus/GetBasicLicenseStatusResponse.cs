@@ -4,14 +4,10 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-	public interface IGetBasicLicenseStatusResponse : IResponse
+
+	public class GetBasicLicenseStatusResponse : ResponseBase
 	{
 		[DataMember(Name = "eligible_to_start_basic")]
-		bool EligableToStartBasic { get; }
-	}
-
-	public class GetBasicLicenseStatusResponse : ResponseBase, IGetBasicLicenseStatusResponse
-	{
 		public bool EligableToStartBasic { get; internal set; }
 	}
 

@@ -4,35 +4,21 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[InterfaceDataContract]
+	public class UpgradeStatusResponse : ResponseBase
+	{
 	// TODO: look to see if needed
 	//[JsonFormatter(typeof(UpgradeStatusResponseJsonConverter))]
-	public interface IUpgradeStatusResponse : IResponse
-	{
 		[DataMember(Name = "size")]
-		string Size { get; }
-
-		[DataMember(Name = "size_in_bytes")]
-		long SizeInBytes { get; }
-
-		[DataMember(Name = "size_to_upgrade_ancient_in_bytes")]
-		string SizeToUpgradeAncientInBytes { get; }
-
-		[DataMember(Name = "size_to_upgrade_in_bytes")]
-		string SizeToUpgradeInBytes { get; }
-
-		[DataMember(Name = "indices")]
-		IReadOnlyDictionary<string, UpgradeStatus> Upgrades { get; }
-	}
-
-	public class UpgradeStatusResponse : ResponseBase, IUpgradeStatusResponse
-	{
 		public string Size { get; internal set; }
+		[DataMember(Name = "size_in_bytes")]
 		public long SizeInBytes { get; internal set; }
+		[DataMember(Name = "size_to_upgrade_ancient_in_bytes")]
 		public string SizeToUpgradeAncientInBytes { get; internal set; }
+		[DataMember(Name = "size_to_upgrade_in_bytes")]
 		public string SizeToUpgradeInBytes { get; internal set; }
 
 		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, UpgradeStatus>))]
+		[DataMember(Name = "indices")]
 		public IReadOnlyDictionary<string, UpgradeStatus> Upgrades { get; internal set; } = EmptyReadOnly<string, UpgradeStatus>.Dictionary;
 	}
 }

@@ -2,8 +2,6 @@
 
 namespace Nest
 {
-	public interface IClearScrollResponse : IResponse { }
-
 	[DataContract]
-	public class ClearScrollResponse : ResponseBase, IClearScrollResponse { }
+	public class ClearScrollResponse : ResponseBase { }
 }

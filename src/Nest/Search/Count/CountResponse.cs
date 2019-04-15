@@ -2,14 +2,8 @@
 
 namespace Nest
 {
-	public interface ICountResponse : IResponse
-	{
-		long Count { get; }
-		ShardStatistics Shards { get; }
-	}
-
 	[DataContract]
-	public class CountResponse : ResponseBase, ICountResponse
+	public class CountResponse : ResponseBase
 	{
 		[DataMember(Name ="count")]
 		public long Count { get; internal set; }

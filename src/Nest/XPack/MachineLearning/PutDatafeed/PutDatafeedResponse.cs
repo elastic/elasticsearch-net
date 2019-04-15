@@ -3,28 +3,20 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	/// <summary>
-	/// The response from creating a datafeed.
-	/// </summary>
-	public partial interface IPutDatafeedResponse : IResponse
+	/// <summary> The response from creating a datafeed. </summary>
+	public class PutDatafeedResponse : ResponseBase
 	{
-		/// <summary>
-		/// The aggregation searches to perform for the datafeed.
-		/// </summary>
+		/// <summary> The aggregation searches to perform for the datafeed.</summary>
 		[DataMember(Name = "aggregations")]
-		AggregationDictionary Aggregations { get; }
+		public AggregationDictionary Aggregations { get; internal set; }
 
-		/// <summary>
-		/// Specifies how data searches are split into time chunks.
-		/// </summary>
+		/// <summary> Specifies how data searches are split into time chunks.</summary>
 		[DataMember(Name = "chunking_config")]
-		IChunkingConfig ChunkingConfig { get; }
+		public IChunkingConfig ChunkingConfig { get; internal set; }
 
-		/// <summary>
-		/// The datafeed id.
-		/// </summary>
+		/// <summary>The datafeed id. </summary>
 		[DataMember(Name = "datafeed_id")]
-		string DatafeedId { get; }
+		public string DatafeedId { get; internal set; }
 
 		/// <summary>
 		/// The interval at which scheduled queries are made while the datafeed runs in real time.
@@ -32,26 +24,26 @@ namespace Nest
 		/// a sensible fraction of the bucket span.
 		/// </summary>
 		[DataMember(Name = "frequency")]
-		Time Frequency { get; }
+		public Time Frequency { get; internal set; }
 
 		/// <summary>
 		///  A list of index names to search within, wildcards are supported.
 		/// </summary>
 		[DataMember(Name = "indices")]
 		[JsonFormatter(typeof(IndicesFormatter))]
-		Indices Indices { get; }
+		public Indices Indices { get; internal set; }
 
 		/// <summary>
 		/// A numerical character string that uniquely identifies the job.
 		/// </summary>
 		[DataMember(Name = "job_id")]
-		string JobId { get; }
+		public string JobId { get; internal set; }
 
 		/// <summary>
 		/// Describe the query to perform using a query descriptor lambda
 		/// </summary>
 		[DataMember(Name = "query")]
-		QueryContainer Query { get; }
+		public QueryContainer Query { get; internal set; }
 
 		/// <summary>
 		/// The number of seconds behind real time that data is queried.
@@ -59,54 +51,18 @@ namespace Nest
 		/// set this property to 120 seconds. The default value is 60s.
 		/// </summary>
 		[DataMember(Name = "query_delay")]
-		Time QueryDelay { get; }
+		public Time QueryDelay { get; internal set; }
 
 		/// <summary>
 		/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed. T
 		/// The detector configuration in a job can contain functions that use these script fields.
 		/// </summary>
 		[DataMember(Name = "script_fields")]
-		IScriptFields ScriptFields { get; }
-
-		/// <summary>
-		/// The size parameter that used in searches
-		/// </summary>
-		[DataMember(Name = "scroll_size")]
-		int? ScrollSize { get; }
-
-	}
-
-	/// <inheritdoc />
-	public class PutDatafeedResponse : ResponseBase, IPutDatafeedResponse
-	{
-		/// <inheritdoc />
-		public AggregationDictionary Aggregations { get; internal set; }
-
-		/// <inheritdoc />
-		public IChunkingConfig ChunkingConfig { get; internal set; }
-
-		/// <inheritdoc />
-		public string DatafeedId { get; internal set; }
-
-		/// <inheritdoc />
-		public Time Frequency { get; internal set; }
-
-		/// <inheritdoc />
-		public Indices Indices { get; internal set; }
-
-		/// <inheritdoc />
-		public string JobId { get; internal set; }
-
-		/// <inheritdoc />
-		public QueryContainer Query { get; internal set; }
-
-		/// <inheritdoc />
-		public Time QueryDelay { get; internal set; }
-
-		/// <inheritdoc />
 		public IScriptFields ScriptFields { get; internal set; }
 
-		/// <inheritdoc />
+		/// <summary> The size parameter that used in searches </summary>
+		[DataMember(Name = "scroll_size")]
 		public int? ScrollSize { get; internal set; }
+
 	}
 }

@@ -5,16 +5,8 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-	public interface IBulkResponse : IResponse
-	{
-		bool Errors { get; }
-		IReadOnlyList<IBulkResponseItem> Items { get; }
-		IEnumerable<IBulkResponseItem> ItemsWithErrors { get; }
-		long Took { get; }
-	}
-
 	[DataContract]
-	public class BulkResponse : ResponseBase, IBulkResponse
+	public class BulkResponse : ResponseBase
 	{
 		[DataMember(Name ="errors")]
 		public bool Errors { get; internal set; }

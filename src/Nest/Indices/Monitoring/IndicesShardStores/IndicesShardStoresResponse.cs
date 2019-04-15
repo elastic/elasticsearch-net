@@ -4,16 +4,11 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IIndicesShardStoresResponse : IResponse
+	[DataContract]
+	public class IndicesShardStoresResponse : ResponseBase
 	{
 		[DataMember(Name = "indices")]
 		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, IndicesShardStores>))]
-		IReadOnlyDictionary<string, IndicesShardStores> Indices { get; }
-	}
-
-	[DataContract]
-	public class IndicesShardStoresResponse : ResponseBase, IIndicesShardStoresResponse
-	{
 		public IReadOnlyDictionary<string, IndicesShardStores> Indices { get; internal set; } = EmptyReadOnly<string, IndicesShardStores>.Dictionary;
 	}
 

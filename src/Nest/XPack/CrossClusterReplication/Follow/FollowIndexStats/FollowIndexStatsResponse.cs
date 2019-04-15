@@ -3,13 +3,7 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-	public interface IFollowIndexStatsResponse : IResponse
-	{
-		[DataMember(Name = "indices")]
-		IReadOnlyCollection<FollowIndexStats> Indices { get; }
-	}
-
-	public class FollowIndexStatsResponse : ResponseBase, IFollowIndexStatsResponse
+	public class FollowIndexStatsResponse : ResponseBase
 	{
 		/// <inheritdoc cref="IFollowIndexStatsResponse.Indices" />
 		[DataMember(Name = "indices")]

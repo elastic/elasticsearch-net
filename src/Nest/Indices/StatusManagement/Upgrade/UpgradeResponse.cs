@@ -2,14 +2,9 @@
 
 namespace Nest
 {
-	public interface IUpgradeResponse : IResponse
+	public class UpgradeResponse : ResponseBase
 	{
 		[DataMember(Name ="_shards")]
-		ShardStatistics Shards { get; }
-	}
-
-	public class UpgradeResponse : ResponseBase, IUpgradeResponse
-	{
 		public ShardStatistics Shards { get; internal set; }
 	}
 }
