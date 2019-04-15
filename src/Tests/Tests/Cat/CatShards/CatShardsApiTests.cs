@@ -8,7 +8,7 @@ using Tests.Framework.Integration;
 namespace Tests.Cat.CatShards
 {
 	public class CatShardsApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatShardsRecord>, ICatShardsRequest, CatShardsDescriptor, CatShardsRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, CatResponse<CatShardsRecord>, ICatShardsRequest, CatShardsDescriptor, CatShardsRequest>
 	{
 		public CatShardsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -24,7 +24,7 @@ namespace Tests.Cat.CatShards
 			(client, r) => client.CatShardsAsync(r)
 		);
 
-		protected override void ExpectResponse(ICatResponse<CatShardsRecord> response) =>
+		protected override void ExpectResponse(CatResponse<CatShardsRecord> response) =>
 			response.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.PrimaryOrReplica));
 	}
 }

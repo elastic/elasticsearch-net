@@ -10,42 +10,42 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc />
-		ICatResponse<CatHelpRecord> CatHelp(Func<CatHelpDescriptor, ICatHelpRequest> selector = null);
+		CatResponse<CatHelpRecord> CatHelp(Func<CatHelpDescriptor, ICatHelpRequest> selector = null);
 
 		/// <inheritdoc />
-		ICatResponse<CatHelpRecord> CatHelp(ICatHelpRequest request);
+		CatResponse<CatHelpRecord> CatHelp(ICatHelpRequest request);
 
 		/// <inheritdoc />
-		Task<ICatResponse<CatHelpRecord>> CatHelpAsync(Func<CatHelpDescriptor, ICatHelpRequest> selector = null,
+		Task<CatResponse<CatHelpRecord>> CatHelpAsync(Func<CatHelpDescriptor, ICatHelpRequest> selector = null,
 			CancellationToken ct = default(CancellationToken)
 		);
 
 		/// <inheritdoc />
-		Task<ICatResponse<CatHelpRecord>> CatHelpAsync(ICatHelpRequest request, CancellationToken ct = default(CancellationToken));
+		Task<CatResponse<CatHelpRecord>> CatHelpAsync(ICatHelpRequest request, CancellationToken ct = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public ICatResponse<CatHelpRecord> CatHelp(Func<CatHelpDescriptor, ICatHelpRequest> selector = null) =>
+		public CatResponse<CatHelpRecord> CatHelp(Func<CatHelpDescriptor, ICatHelpRequest> selector = null) =>
 			CatHelp(selector.InvokeOrDefault(new CatHelpDescriptor()));
 
 		/// <inheritdoc />
-		public ICatResponse<CatHelpRecord> CatHelp(ICatHelpRequest request)
+		public CatResponse<CatHelpRecord> CatHelp(ICatHelpRequest request)
 		{
 			request.RequestParameters.DeserializationOverride = DeserializeCatHelpResponse;
 			return DoRequest<ICatHelpRequest, CatResponse<CatHelpRecord>>(request, request.RequestParameters);
 		}
 
 		/// <inheritdoc />
-		public Task<ICatResponse<CatHelpRecord>> CatHelpAsync(Func<CatHelpDescriptor, ICatHelpRequest> selector = null, CancellationToken ct = default) =>
+		public Task<CatResponse<CatHelpRecord>> CatHelpAsync(Func<CatHelpDescriptor, ICatHelpRequest> selector = null, CancellationToken ct = default) =>
 			CatHelpAsync(selector.InvokeOrDefault(new CatHelpDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<ICatResponse<CatHelpRecord>> CatHelpAsync(ICatHelpRequest request, CancellationToken ct = default)
+		public Task<CatResponse<CatHelpRecord>> CatHelpAsync(ICatHelpRequest request, CancellationToken ct = default)
 		{
 			request.RequestParameters.DeserializationOverride = DeserializeCatHelpResponse;
-			return DoRequestAsync<ICatHelpRequest, ICatResponse<CatHelpRecord>, CatResponse<CatHelpRecord>>(request, request.RequestParameters, ct);
+			return DoRequestAsync<ICatHelpRequest, CatResponse<CatHelpRecord>, CatResponse<CatHelpRecord>>(request, request.RequestParameters, ct);
 		}
 
 		private static CatResponse<CatHelpRecord> DeserializeCatHelpResponse(IApiCallDetails response, Stream stream)

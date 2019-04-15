@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 namespace Tests.Cat.CatThreadPool
 {
 	public class CatThreadPoolApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatThreadPoolRecord>, ICatThreadPoolRequest, CatThreadPoolDescriptor,
+		: ApiIntegrationTestBase<ReadOnlyCluster, CatResponse<CatThreadPoolRecord>, ICatThreadPoolRequest, CatThreadPoolDescriptor,
 			CatThreadPoolRequest>
 	{
 		public CatThreadPoolApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -28,7 +28,7 @@ namespace Tests.Cat.CatThreadPool
 	}
 
 	public class CatThreadPoolFullApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatThreadPoolRecord>, ICatThreadPoolRequest, CatThreadPoolDescriptor,
+		: ApiIntegrationTestBase<ReadOnlyCluster, CatResponse<CatThreadPoolRecord>, ICatThreadPoolRequest, CatThreadPoolDescriptor,
 			CatThreadPoolRequest>
 	{
 		public CatThreadPoolFullApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -53,7 +53,7 @@ namespace Tests.Cat.CatThreadPool
 			(client, r) => client.CatThreadPoolAsync(r)
 		);
 
-		protected override void ExpectResponse(ICatResponse<CatThreadPoolRecord> response)
+		protected override void ExpectResponse(CatResponse<CatThreadPoolRecord> response)
 		{
 			response.Records.Should().NotBeNull();
 

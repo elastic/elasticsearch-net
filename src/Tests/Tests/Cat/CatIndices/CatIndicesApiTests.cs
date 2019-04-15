@@ -10,7 +10,7 @@ using Tests.Framework.Integration;
 namespace Tests.Cat.CatIndices
 {
 	public class CatIndicesApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatIndicesRecord>, ICatIndicesRequest, CatIndicesDescriptor, CatIndicesRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, CatResponse<CatIndicesRecord>, ICatIndicesRequest, CatIndicesDescriptor, CatIndicesRequest>
 	{
 		public CatIndicesApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -26,12 +26,12 @@ namespace Tests.Cat.CatIndices
 			(client, r) => client.CatIndicesAsync(r)
 		);
 
-		protected override void ExpectResponse(ICatResponse<CatIndicesRecord> response) =>
+		protected override void ExpectResponse(CatResponse<CatIndicesRecord> response) =>
 			response.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.Status));
 	}
 
 	public class CatIndicesApiNotFoundWithSecurityTests
-		: ApiIntegrationTestBase<XPackCluster, ICatResponse<CatIndicesRecord>, ICatIndicesRequest, CatIndicesDescriptor, CatIndicesRequest>
+		: ApiIntegrationTestBase<XPackCluster, CatResponse<CatIndicesRecord>, ICatIndicesRequest, CatIndicesDescriptor, CatIndicesRequest>
 	{
 		public CatIndicesApiNotFoundWithSecurityTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -65,7 +65,7 @@ namespace Tests.Cat.CatIndices
 			(client, r) => client.CatIndicesAsync(r)
 		);
 
-		protected override void ExpectResponse(ICatResponse<CatIndicesRecord> response)
+		protected override void ExpectResponse(CatResponse<CatIndicesRecord> response)
 		{
 			response.Records.Should().BeEmpty();
 			response.ApiCall.Should().NotBeNull();

@@ -8,7 +8,7 @@ using Tests.Framework.Integration;
 namespace Tests.Cat.CatPlugins
 {
 	public class CatPluginsApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatPluginsRecord>, ICatPluginsRequest, CatPluginsDescriptor, CatPluginsRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, CatResponse<CatPluginsRecord>, ICatPluginsRequest, CatPluginsDescriptor, CatPluginsRequest>
 	{
 		public CatPluginsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -24,7 +24,7 @@ namespace Tests.Cat.CatPlugins
 			(client, r) => client.CatPluginsAsync(r)
 		);
 
-		protected override void ExpectResponse(ICatResponse<CatPluginsRecord> response) => response.Records.Should()
+		protected override void ExpectResponse(CatResponse<CatPluginsRecord> response) => response.Records.Should()
 			.NotBeEmpty()
 			.And.Contain(a => !string.IsNullOrEmpty(a.Name) && a.Component == "mapper-murmur3");
 	}

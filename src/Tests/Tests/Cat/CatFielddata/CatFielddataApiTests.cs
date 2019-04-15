@@ -12,7 +12,7 @@ using Tests.Framework.Integration;
 namespace Tests.Cat.CatFielddata
 {
 	public class CatFielddataApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatFielddataRecord>, ICatFielddataRequest, CatFielddataDescriptor, CatFielddataRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, CatResponse<CatFielddataRecord>, ICatFielddataRequest, CatFielddataDescriptor, CatFielddataRequest>
 	{
 		private ISearchResponse<Project> _initialSearchResponse;
 
@@ -46,7 +46,7 @@ namespace Tests.Cat.CatFielddata
 				throw new Exception($"Failure setting up integration test. {_initialSearchResponse.DebugInformation}");
 		}
 
-		protected override void ExpectResponse(ICatResponse<CatFielddataRecord> response)
+		protected override void ExpectResponse(CatResponse<CatFielddataRecord> response)
 		{
 			//this tests is very flaky, only do assertions if the query actually returned
 			// TODO investigate flakiness

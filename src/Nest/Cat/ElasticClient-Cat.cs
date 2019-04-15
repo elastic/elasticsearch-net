@@ -22,7 +22,7 @@ namespace Nest
 			return catResponse;
 		}
 
-		private ICatResponse<TCatRecord> DoCat<TRequest, TParams, TCatRecord>(TRequest request)
+		private CatResponse<TCatRecord> DoCat<TRequest, TParams, TCatRecord>(TRequest request)
 			where TCatRecord : ICatRecord
 			where TParams : RequestParameters<TParams>, new()
 			where TRequest : class, IRequest<TParams>
@@ -31,13 +31,13 @@ namespace Nest
 			return DoRequest<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, r => ForceJson(r));
 		}
 
-		private Task<ICatResponse<TCatRecord>> DoCatAsync<TRequest, TParams, TCatRecord>(TRequest request, CancellationToken ct)
+		private Task<CatResponse<TCatRecord>> DoCatAsync<TRequest, TParams, TCatRecord>(TRequest request, CancellationToken ct)
 			where TCatRecord : ICatRecord
 			where TParams : RequestParameters<TParams>, new()
 			where TRequest : class, IRequest<TParams>
 		{
 			request.RequestParameters.DeserializationOverride = DeserializeCatResponse<TCatRecord>;
-			return DoRequestAsync<TRequest, ICatResponse<TCatRecord>, CatResponse<TCatRecord>>(request, request.RequestParameters, ct, r => ForceJson(r));
+			return DoRequestAsync<TRequest, CatResponse<TCatRecord>, CatResponse<TCatRecord>>(request, request.RequestParameters, ct, r => ForceJson(r));
 		}
 	}
 }

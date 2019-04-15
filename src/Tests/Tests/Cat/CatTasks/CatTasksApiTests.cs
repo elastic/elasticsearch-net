@@ -7,7 +7,7 @@ using Tests.Framework.Integration;
 namespace Tests.Cat.CatTasks
 {
 	public class CatTasksApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatTasksRecord>, ICatTasksRequest, CatTasksDescriptor, CatTasksRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, CatResponse<CatTasksRecord>, ICatTasksRequest, CatTasksDescriptor, CatTasksRequest>
 	{
 		public CatTasksApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
