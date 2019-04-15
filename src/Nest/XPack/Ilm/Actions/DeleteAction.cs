@@ -1,14 +1,12 @@
 namespace Nest
 {
-	public interface IDeleteAction : ILifecycleAction { }
+	public interface IDeleteLifecycleAction : ILifecycleAction { }
 
-	public class DeleteAction : LifecycleActionBase, IDeleteAction
+	public class DeleteLifecycleAction : IDeleteLifecycleAction
 	{
-		public DeleteAction() : base("delete"){ }
 	}
 
-	public class DeleteActionDescriptor : LifecycleActionDescriptorBase<DeleteActionDescriptor, IDeleteAction>, IDeleteAction
+	public class DeleteLifecycleActionDescriptor : DescriptorBase<DeleteLifecycleActionDescriptor, IDeleteLifecycleAction>, IDeleteLifecycleAction
 	{
-		public DeleteActionDescriptor() : base("delete") { }
 	}
 }

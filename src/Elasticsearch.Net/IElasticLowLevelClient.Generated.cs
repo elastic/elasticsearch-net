@@ -2534,14 +2534,14 @@ namespace Elasticsearch.Net
 		///<param name="body">Graph Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> XpackGraphExploreAsync<TResponse>(string index, string type, PostData body, GraphExploreRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>DELETE on /_ilm/policy/{policy} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html</para></summary>
-		///<param name="policy">The name of the index lifecycle policy</param>
+		///<summary>DELETE on /_ilm/policy/{policy_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html</para></summary>
+		///<param name="policy_id">The name of the index lifecycle policy</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IlmDeleteLifecycle<TResponse>(string policy, IlmDeleteLifecycleRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>DELETE on /_ilm/policy/{policy} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html</para></summary>
-		///<param name="policy">The name of the index lifecycle policy</param>
+		TResponse IlmDeleteLifecycle<TResponse>(string policy_id, IlmDeleteLifecycleRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>DELETE on /_ilm/policy/{policy_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html</para></summary>
+		///<param name="policy_id">The name of the index lifecycle policy</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IlmDeleteLifecycleAsync<TResponse>(string policy, IlmDeleteLifecycleRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		Task<TResponse> IlmDeleteLifecycleAsync<TResponse>(string policy_id, IlmDeleteLifecycleRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_ilm/explain <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-explain-lifecycle.html</para></summary>
 		///<param name="index">The name of the index to explain</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -2550,18 +2550,18 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index to explain</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> IlmExplainLifecycleAsync<TResponse>(string index, IlmExplainLifecycleRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_ilm/policy/{policy} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</para></summary>
-		///<param name="policy">The name of the index lifecycle policy</param>
+		///<summary>GET on /_ilm/policy/{policy_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</para></summary>
+		///<param name="policy_id">The name of the index lifecycle policy</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IlmGetLifecycle<TResponse>(string policy, IlmGetLifecycleRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_ilm/policy/{policy} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</para></summary>
-		///<param name="policy">The name of the index lifecycle policy</param>
+		TResponse IlmGetLifecycle<TResponse>(string policy_id, IlmGetLifecycleRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_ilm/policy/{policy_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</para></summary>
+		///<param name="policy_id">The name of the index lifecycle policy</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IlmGetLifecycleAsync<TResponse>(string policy, IlmGetLifecycleRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_ilm/policy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</para></summary>
+		Task<TResponse> IlmGetLifecycleAsync<TResponse>(string policy_id, IlmGetLifecycleRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_ilm/policy_id <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		TResponse IlmGetLifecycle<TResponse>(IlmGetLifecycleRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_ilm/policy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</para></summary>
+		///<summary>GET on /_ilm/policy_id <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> IlmGetLifecycleAsync<TResponse>(IlmGetLifecycleRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /_ilm/status <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html</para></summary>
@@ -2580,16 +2580,16 @@ namespace Elasticsearch.Net
 		///<param name="body">The new lifecycle step to move to</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> IlmMoveToStepAsync<TResponse>(string index, PostData body, IlmMoveToStepRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>PUT on /_ilm/policy/{policy} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</para></summary>
-		///<param name="policy">The name of the index lifecycle policy</param>
+		///<summary>PUT on /_ilm/policy/{policy_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</para></summary>
+		///<param name="policy_id">The name of the index lifecycle policy</param>
 		///<param name="body">The lifecycle policy definition to register</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IlmPutLifecycle<TResponse>(string policy, PostData body, IlmPutLifecycleRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
-		///<summary>PUT on /_ilm/policy/{policy} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</para></summary>
-		///<param name="policy">The name of the index lifecycle policy</param>
+		TResponse IlmPutLifecycle<TResponse>(string policy_id, PostData body, IlmPutLifecycleRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>PUT on /_ilm/policy/{policy_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</para></summary>
+		///<param name="policy_id">The name of the index lifecycle policy</param>
 		///<param name="body">The lifecycle policy definition to register</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IlmPutLifecycleAsync<TResponse>(string policy, PostData body, IlmPutLifecycleRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		Task<TResponse> IlmPutLifecycleAsync<TResponse>(string policy_id, PostData body, IlmPutLifecycleRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /{index}/_ilm/remove <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html</para></summary>
 		///<param name="index">The name of the index to remove policy on</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>

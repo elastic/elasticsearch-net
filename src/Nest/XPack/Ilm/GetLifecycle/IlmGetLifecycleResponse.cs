@@ -37,9 +37,9 @@ namespace Nest
 	public class Phase
 	{
 		[JsonProperty("min_age")]
-		public Time MinimumAge { get; internal set; }
+		public Time MinimumAge { get; set; }
 
 		[JsonProperty("actions")]
-		public IReadOnlyDictionary<string, ILifecycleAction> Actions { get; internal set; } = EmptyReadOnly<string, ILifecycleAction>.Dictionary;
+		public List<ILifecycleAction> Actions { get; set; }
 	}
 }

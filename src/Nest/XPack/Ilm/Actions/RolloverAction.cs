@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IRolloverAction : ILifecycleAction
+	public interface IRolloverLifecycleAction : ILifecycleAction
 	{
 		[JsonProperty("max_size")]
 		long? MaximumSize { get; set; }
@@ -14,10 +14,8 @@ namespace Nest
 		long? MaximumDocuments { get; set; }
 	}
 
-	public class RolloverAction : LifecycleActionBase, IRolloverAction
+	public class RolloverLifecycleAction : IRolloverLifecycleAction
 	{
-		public RolloverAction() : base("rollover"){ }
-
 		public long? MaximumSize { get; set; }
 
 		public Time MaximumAge { get; set; }
@@ -25,21 +23,19 @@ namespace Nest
 		public long? MaximumDocuments { get; set; }
 	}
 
-	public class RolloverActionDescriptor : LifecycleActionDescriptorBase<RolloverActionDescriptor, IRolloverAction>, IRolloverAction
+	public class RolloverLifecycleActionDescriptor : DescriptorBase<RolloverLifecycleActionDescriptor, IRolloverLifecycleAction>, IRolloverLifecycleAction
 	{
-		public RolloverActionDescriptor() : base("rollover") { }
+		long? IRolloverLifecycleAction.MaximumSize { get; set; }
 
-		long? IRolloverAction.MaximumSize { get; set; }
+		Time IRolloverLifecycleAction.MaximumAge { get; set; }
 
-		Time IRolloverAction.MaximumAge { get; set; }
+		long? IRolloverLifecycleAction.MaximumDocuments { get; set; }
 
-		long? IRolloverAction.MaximumDocuments { get; set; }
+		public RolloverLifecycleActionDescriptor MaximumSize(long? maximumSize) => Assign(maximumSize, (a, v) => a.MaximumSize = maximumSize);
 
-		public RolloverActionDescriptor MaximumSize(long? maximumSize) => Assign(maximumSize, (a, v) => a.MaximumSize = maximumSize);
+		public RolloverLifecycleActionDescriptor MaximumAge(Time maximumAge) => Assign(maximumAge, (a, v) => a.MaximumAge = maximumAge);
 
-		public RolloverActionDescriptor MaximumAge(Time maximumAge) => Assign(maximumAge, (a, v) => a.MaximumAge = maximumAge);
-
-		public RolloverActionDescriptor MaximumDocuments(long? maximumDocuments)
+		public RolloverLifecycleActionDescriptor MaximumDocuments(long? maximumDocuments)
 			=> Assign(maximumDocuments, (a, v) => a.MaximumDocuments = maximumDocuments);
 	}
 }

@@ -3205,10 +3205,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case DELETE:
-					if (AllSetNoFallback(p.RouteValues.Policy)) return _lowLevel.IlmDeleteLifecycle<TResponse>(p.RouteValues.Policy,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.PolicyId)) return _lowLevel.IlmDeleteLifecycle<TResponse>(p.RouteValues.PolicyId,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("IlmDeleteLifecycle", p, new [] { DELETE }, "/_ilm/policy/{policy}");
+			throw InvalidDispatch("IlmDeleteLifecycle", p, new [] { DELETE }, "/_ilm/policy/{policy_id}");
 		}
 		
 		internal Task<TResponse> IlmDeleteLifecycleDispatchAsync<TResponse>(IRequest<IlmDeleteLifecycleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -3216,10 +3216,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case DELETE:
-					if (AllSetNoFallback(p.RouteValues.Policy)) return _lowLevel.IlmDeleteLifecycleAsync<TResponse>(p.RouteValues.Policy,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.PolicyId)) return _lowLevel.IlmDeleteLifecycleAsync<TResponse>(p.RouteValues.PolicyId,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("IlmDeleteLifecycle", p, new [] { DELETE }, "/_ilm/policy/{policy}");
+			throw InvalidDispatch("IlmDeleteLifecycle", p, new [] { DELETE }, "/_ilm/policy/{policy_id}");
 		}
 		
 		internal TResponse IlmExplainLifecycleDispatch<TResponse>(IRequest<IlmExplainLifecycleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
@@ -3249,10 +3249,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Policy)) return _lowLevel.IlmGetLifecycle<TResponse>(p.RouteValues.Policy,p.RequestParameters);
+					if (AllSet(p.RouteValues.PolicyId)) return _lowLevel.IlmGetLifecycle<TResponse>(p.RouteValues.PolicyId,p.RequestParameters);
 						return _lowLevel.IlmGetLifecycle<TResponse>(p.RequestParameters);
 			}
-			throw InvalidDispatch("IlmGetLifecycle", p, new [] { GET }, "/_ilm/policy/{policy}", "/_ilm/policy");
+			throw InvalidDispatch("IlmGetLifecycle", p, new [] { GET }, "/_ilm/policy/{policy_id}", "/_ilm/policy_id");
 		}
 		
 		internal Task<TResponse> IlmGetLifecycleDispatchAsync<TResponse>(IRequest<IlmGetLifecycleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -3260,10 +3260,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Policy)) return _lowLevel.IlmGetLifecycleAsync<TResponse>(p.RouteValues.Policy,p.RequestParameters,ct);
+					if (AllSet(p.RouteValues.PolicyId)) return _lowLevel.IlmGetLifecycleAsync<TResponse>(p.RouteValues.PolicyId,p.RequestParameters,ct);
 						return _lowLevel.IlmGetLifecycleAsync<TResponse>(p.RequestParameters,ct);
 			}
-			throw InvalidDispatch("IlmGetLifecycle", p, new [] { GET }, "/_ilm/policy/{policy}", "/_ilm/policy");
+			throw InvalidDispatch("IlmGetLifecycle", p, new [] { GET }, "/_ilm/policy/{policy_id}", "/_ilm/policy_id");
 		}
 		
 		internal TResponse IlmGetStatusDispatch<TResponse>(IRequest<IlmGetStatusRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
@@ -3313,10 +3313,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case PUT:
-					if (AllSetNoFallback(p.RouteValues.Policy)) return _lowLevel.IlmPutLifecycle<TResponse>(p.RouteValues.Policy,body,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.PolicyId)) return _lowLevel.IlmPutLifecycle<TResponse>(p.RouteValues.PolicyId,body,p.RequestParameters);
 					break;
 			}
-			throw InvalidDispatch("IlmPutLifecycle", p, new [] { PUT }, "/_ilm/policy/{policy}");
+			throw InvalidDispatch("IlmPutLifecycle", p, new [] { PUT }, "/_ilm/policy/{policy_id}");
 		}
 		
 		internal Task<TResponse> IlmPutLifecycleDispatchAsync<TResponse>(IRequest<IlmPutLifecycleRequestParameters> p,SerializableData<IIlmPutLifecycleRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -3324,10 +3324,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case PUT:
-					if (AllSetNoFallback(p.RouteValues.Policy)) return _lowLevel.IlmPutLifecycleAsync<TResponse>(p.RouteValues.Policy,body,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.PolicyId)) return _lowLevel.IlmPutLifecycleAsync<TResponse>(p.RouteValues.PolicyId,body,p.RequestParameters,ct);
 					break;
 			}
-			throw InvalidDispatch("IlmPutLifecycle", p, new [] { PUT }, "/_ilm/policy/{policy}");
+			throw InvalidDispatch("IlmPutLifecycle", p, new [] { PUT }, "/_ilm/policy/{policy_id}");
 		}
 		
 		internal TResponse IlmRemovePolicyDispatch<TResponse>(IRequest<IlmRemovePolicyRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()

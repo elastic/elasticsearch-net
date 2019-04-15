@@ -1,14 +1,12 @@
 namespace Nest
 {
-	public interface IReadOnlyAction : ILifecycleAction { }
+	public interface IReadOnlyLifecycleAction : ILifecycleAction { }
 
-	public class ReadOnlyAction : LifecycleActionBase, IReadOnlyAction
+	public class ReadOnlyLifecycleAction : IReadOnlyLifecycleAction
 	{
-		public ReadOnlyAction() : base("readonly"){ }
 	}
 
-	public class ReadOnlyActionDescriptor : LifecycleActionDescriptorBase<ReadOnlyActionDescriptor, IReadOnlyAction>, IReadOnlyAction
+	public class ReadOnlyLifecycleActionDescriptor : DescriptorBase<ReadOnlyLifecycleActionDescriptor, IReadOnlyLifecycleAction>, IReadOnlyLifecycleAction
 	{
-		public ReadOnlyActionDescriptor() : base("readonly") { }
 	}
 }

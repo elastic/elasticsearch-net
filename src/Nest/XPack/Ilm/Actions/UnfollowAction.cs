@@ -1,14 +1,12 @@
 namespace Nest
 {
-	public interface IUnfollowAction : ILifecycleAction { }
+	public interface IUnfollowLifecycleAction : ILifecycleAction { }
 
-	public class UnfollowAction : LifecycleActionBase, IUnfollowAction
+	public class UnfollowLifecycleAction : IUnfollowLifecycleAction
 	{
-		public UnfollowAction() : base("unfollow"){ }
 	}
 
-	public class UnfollowActionDescriptor : LifecycleActionDescriptorBase<UnfollowActionDescriptor, IUnfollowAction>, IUnfollowAction
+	public class UnfollowLifecycleActionDescriptor : DescriptorBase<UnfollowLifecycleActionDescriptor, IUnfollowLifecycleAction>, IUnfollowLifecycleAction
 	{
-		public UnfollowActionDescriptor() : base("unfollow") { }
 	}
 }

@@ -1,14 +1,12 @@
 namespace Nest
 {
-	public interface IFreezeAction : ILifecycleAction { }
+	public interface IFreezeLifecycleAction : ILifecycleAction { }
 
-	public class FreezeAction : LifecycleActionBase, IFreezeAction
+	public class FreezeLifecycleAction : IFreezeLifecycleAction
 	{
-		public FreezeAction() : base("freeze"){ }
 	}
 
-	public class FreezeActionDescriptor : LifecycleActionDescriptorBase<FreezeActionDescriptor, IFreezeAction>, IFreezeAction
+	public class FreezeLifecycleActionDescriptor : DescriptorBase<FreezeLifecycleActionDescriptor, IFreezeLifecycleAction>, IFreezeLifecycleAction
 	{
-		public FreezeActionDescriptor() : base("freeze") { }
 	}
 }

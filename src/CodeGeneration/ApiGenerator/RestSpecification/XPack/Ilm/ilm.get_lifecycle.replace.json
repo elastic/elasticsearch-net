@@ -1,6 +1,16 @@
 {
   "ilm.get_lifecycle": {
+    "documentation": "https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html",
+    "methods": [ "GET" ],
     "url": {
+      "path": "/_ilm/policy/{policy_id}",
+      "paths": ["/_ilm/policy/{policy_id}", "/_ilm/policy_id"],
+      "parts": {
+        "policy_id": {
+          "type" : "string",
+          "description" : "The name of the index lifecycle policy"
+        }
+      },
       "params": {
         "master_timeout": {
           "type" : "time",
@@ -11,6 +21,7 @@
           "description" : "Specifies the period of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Defaults to 30s."
         }
       }
-    }
+    },
+    "body": null
   }
 }

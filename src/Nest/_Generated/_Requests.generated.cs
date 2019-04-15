@@ -3837,17 +3837,17 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IIlmDeleteLifecycleRequest : IRequest<IlmDeleteLifecycleRequestParameters>
 	{
-		Policy Policy { get; }
+		PolicyId PolicyId { get; }
 	}
 	///<summary>Request parameters for IlmDeleteLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html</pre></summary>
 	public partial class IlmDeleteLifecycleRequest : PlainRequestBase<IlmDeleteLifecycleRequestParameters>, IIlmDeleteLifecycleRequest
 	{
 		protected IIlmDeleteLifecycleRequest Self => this;
-		///<summary>/_ilm/policy/{policy}</summary>
-		///<param name="policy">this parameter is required</param>
-		public IlmDeleteLifecycleRequest(Policy policy) : base(r=>r.Required("policy", policy)){}
+		///<summary>/_ilm/policy/{policy_id}</summary>
+		///<param name="policy_id">this parameter is required</param>
+		public IlmDeleteLifecycleRequest(PolicyId policy_id) : base(r=>r.Required("policy_id", policy_id)){}
 		// values part of the url path
-		Policy IIlmDeleteLifecycleRequest.Policy => Self.RouteValues.Get<Policy>("policy");
+		PolicyId IIlmDeleteLifecycleRequest.PolicyId => Self.RouteValues.Get<PolicyId>("policy_id");
 
 		// Request parameters
 		///<summary>
@@ -3891,19 +3891,19 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IIlmGetLifecycleRequest : IRequest<IlmGetLifecycleRequestParameters>
 	{
-		Policy Policy { get; }
+		PolicyId PolicyId { get; }
 	}
 	///<summary>Request parameters for IlmGetLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html</pre></summary>
 	public partial class IlmGetLifecycleRequest : PlainRequestBase<IlmGetLifecycleRequestParameters>, IIlmGetLifecycleRequest
 	{
 		protected IIlmGetLifecycleRequest Self => this;
-		///<summary>/_ilm/policy/{policy}</summary>
-		///<param name="policy">Optional, accepts null</param>
-		public IlmGetLifecycleRequest(Policy policy) : base(r=>r.Optional("policy", policy)){}
-		///<summary>/_ilm/policy</summary>
+		///<summary>/_ilm/policy/{policy_id}</summary>
+		///<param name="policy_id">Optional, accepts null</param>
+		public IlmGetLifecycleRequest(PolicyId policy_id) : base(r=>r.Optional("policy_id", policy_id)){}
+		///<summary>/_ilm/policy_id</summary>
 		public IlmGetLifecycleRequest() : base(){}
 		// values part of the url path
-		Policy IIlmGetLifecycleRequest.Policy => Self.RouteValues.Get<Policy>("policy");
+		PolicyId IIlmGetLifecycleRequest.PolicyId => Self.RouteValues.Get<PolicyId>("policy_id");
 
 		// Request parameters
 		///<summary>
@@ -3969,17 +3969,17 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IIlmPutLifecycleRequest : IRequest<IlmPutLifecycleRequestParameters>
 	{
-		Policy Policy { get; }
+		PolicyId PolicyId { get; }
 	}
 	///<summary>Request parameters for IlmPutLifecycle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html</pre></summary>
 	public partial class IlmPutLifecycleRequest : PlainRequestBase<IlmPutLifecycleRequestParameters>, IIlmPutLifecycleRequest
 	{
 		protected IIlmPutLifecycleRequest Self => this;
-		///<summary>/_ilm/policy/{policy}</summary>
-		///<param name="policy">this parameter is required</param>
-		public IlmPutLifecycleRequest(Policy policy) : base(r=>r.Required("policy", policy)){}
+		///<summary>/_ilm/policy/{policy_id}</summary>
+		///<param name="policy_id">this parameter is required</param>
+		public IlmPutLifecycleRequest(PolicyId policy_id) : base(r=>r.Required("policy_id", policy_id)){}
 		// values part of the url path
-		Policy IIlmPutLifecycleRequest.Policy => Self.RouteValues.Get<Policy>("policy");
+		PolicyId IIlmPutLifecycleRequest.PolicyId => Self.RouteValues.Get<PolicyId>("policy_id");
 
 		// Request parameters
 		///<summary>

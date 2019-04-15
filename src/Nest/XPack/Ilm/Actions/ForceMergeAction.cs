@@ -2,26 +2,22 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IForceMergeAction : ILifecycleAction
+	public interface IForceMergeLifecycleAction : ILifecycleAction
 	{
 		[JsonProperty("max_num_segments")]
 		int MaximumNumberSegments { get; set; }
 	}
 
-	public class ForceMergeAction : LifecycleActionBase, IForceMergeAction
+	public class ForceMergeLifecycleAction : IForceMergeLifecycleAction
 	{
-		public ForceMergeAction() : base("forcemerge"){ }
-
 		public int MaximumNumberSegments { get; set; }
 	}
 
-	public class ForceMergeActionDescriptor : LifecycleActionDescriptorBase<ForceMergeActionDescriptor, IForceMergeAction>, IForceMergeAction
+	public class ForceMergeLifecycleActionDescriptor : DescriptorBase<ForceMergeLifecycleActionDescriptor, IForceMergeLifecycleAction>, IForceMergeLifecycleAction
 	{
-		public ForceMergeActionDescriptor() : base("forcemerge") { }
+		int IForceMergeLifecycleAction.MaximumNumberSegments { get; set; }
 
-		int IForceMergeAction.MaximumNumberSegments { get; set; }
-
-		public ForceMergeActionDescriptor MaximumNumberSegments(int maximumNumberSegments)
+		public ForceMergeLifecycleActionDescriptor MaximumNumberSegments(int maximumNumberSegments)
 			=> Assign(maximumNumberSegments, (a, v) => a.MaximumNumberSegments = maximumNumberSegments);
 	}
 }

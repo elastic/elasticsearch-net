@@ -2,25 +2,21 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface ISetPriorityAction : ILifecycleAction
+	public interface ISetPriorityLifecycleAction : ILifecycleAction
 	{
 		[JsonProperty("priority")]
 		int Priority { get; set; }
 	}
 
-	public class SetPriorityAction : LifecycleActionBase, ISetPriorityAction
+	public class SetPriorityLifecycleAction : ISetPriorityLifecycleAction
 	{
-		public SetPriorityAction() : base("set_priority"){ }
-
 		public int Priority { get; set; }
 	}
 
-	public class SetPriorityActionDescriptor : LifecycleActionDescriptorBase<SetPriorityActionDescriptor, ISetPriorityAction>, ISetPriorityAction
+	public class SetPriorityLifecycleActionDescriptor : DescriptorBase<SetPriorityLifecycleActionDescriptor, ISetPriorityLifecycleAction>, ISetPriorityLifecycleAction
 	{
-		public SetPriorityActionDescriptor() : base("set_priority") { }
+		int ISetPriorityLifecycleAction.Priority { get; set; }
 
-		int ISetPriorityAction.Priority { get; set; }
-
-		public SetPriorityActionDescriptor Priority(int priority) => Assign(priority, (a, v) => a.Priority = priority);
+		public SetPriorityLifecycleActionDescriptor Priority(int priority) => Assign(priority, (a, v) => a.Priority = priority);
 	}
 }

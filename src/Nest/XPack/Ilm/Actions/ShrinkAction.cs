@@ -2,25 +2,21 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IShrinkAction : ILifecycleAction
+	public interface IShrinkLifecycleAction : ILifecycleAction
 	{
 		[JsonProperty("number_of_shards")]
 		int NumberOfShards { get; set; }
 	}
 
-	public class ShrinkAction : LifecycleActionBase, IShrinkAction
+	public class ShrinkLifecycleAction : IShrinkLifecycleAction
 	{
-		public ShrinkAction() : base("shrink"){ }
-
 		public int NumberOfShards { get; set; }
 	}
 
-	public class ShrinkActionDescriptor : LifecycleActionDescriptorBase<ShrinkActionDescriptor, IShrinkAction>, IShrinkAction
+	public class ShrinkLifecycleActionDescriptor : DescriptorBase<ShrinkLifecycleActionDescriptor, IShrinkLifecycleAction>, IShrinkLifecycleAction
 	{
-		public ShrinkActionDescriptor() : base("shrink") { }
+		int IShrinkLifecycleAction.NumberOfShards { get; set; }
 
-		int IShrinkAction.NumberOfShards { get; set; }
-
-		public ShrinkActionDescriptor NumberOfShards(int numberOfShards) => Assign(numberOfShards, (a, v) => a.NumberOfShards = numberOfShards);
+		public ShrinkLifecycleActionDescriptor NumberOfShards(int numberOfShards) => Assign(numberOfShards, (a, v) => a.NumberOfShards = numberOfShards);
 	}
 }
