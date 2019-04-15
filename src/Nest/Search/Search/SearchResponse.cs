@@ -186,6 +186,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		[IgnoreDataMember]
-		public long Total => HitsMetadata?.Total.Value ?? 0;
+		public long Total => HitsMetadata?.Total.Value ?? -1;
 	}
 }

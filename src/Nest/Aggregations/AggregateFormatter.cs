@@ -205,7 +205,7 @@ namespace Nest
 		{
 			var count = 0;
 			double? maxScore = null;
-			HitsTotal total = null;
+			TotalHits total = null;
 			List<LazyDocument> topHits = null;
 
 			while (reader.ReadIsInObject(ref count))
@@ -216,7 +216,7 @@ namespace Nest
 					switch (value)
 					{
 						case 0:
-							var hitsFormatter = formatterResolver.GetFormatter<HitsTotal>();
+							var hitsFormatter = formatterResolver.GetFormatter<TotalHits>();
 							total = hitsFormatter.Deserialize(ref reader, formatterResolver);
 							break;
 						case 1:
