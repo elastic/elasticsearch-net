@@ -28,10 +28,15 @@ namespace Tests.Benchmarking
 		[Benchmark(Description = "Field Resolver", OperationsPerInvoke = 1000)]
 		public void FieldResolver() => FieldResolverImp<Project>(p => p.Suggest.Weight);
 
+		[Benchmark(Description = "Field Resolver Unboxed", OperationsPerInvoke = 1000)]
+		public void FieldResolverUnboxed() => FieldResolverUnboxedImp<Project, int?>(p => p.Suggest.Weight);
+
 		private string ResolveBoxedExpressionToStringImp<T>(Expression<Func<T, object>> expression) => expression.ToString();
 
 		private string ResolvedUnboxedExpressionToStringImp<T, TValue>(Expression<Func<T, TValue>> expression) => expression.ToString();
 
 		private string FieldResolverImp<T>(Expression<Func<T, object>> expression) => Client.Infer.Field(expression);
+
+		private string FieldResolverUnboxedImp<T, TValue>(Expression<Func<T, TValue>> expression) => Client.Infer.Field(expression);
 	}
 }

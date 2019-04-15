@@ -28,9 +28,9 @@ namespace Nest
 			Expression = expression ?? throw new ArgumentNullException(nameof(expression));
 			Boost = boost;
 			Format = format;
-			_comparisonValue = expression.ComparisonValueFromExpression(out var type);
+			_comparisonValue = expression.ComparisonValueFromExpression(out var type, out var cachable);
 			_type = type;
-			CachableExpression = !new HasVariableExpressionVisitor(expression).Found;
+			CachableExpression = cachable;
 		}
 
 		public Field(PropertyInfo property, double? boost = null, string format = null)

@@ -22,8 +22,8 @@ namespace Nest
 		public PropertyName(Expression expression)
 		{
 			Expression = expression;
-			CacheableExpression = !new HasVariableExpressionVisitor(expression).Found;
-			_comparisonValue = expression.ComparisonValueFromExpression(out var type);
+			_comparisonValue = expression.ComparisonValueFromExpression(out var type, out var cachable);
+			CacheableExpression = cachable;
 			_type = type;
 		}
 

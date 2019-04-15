@@ -13,6 +13,8 @@ namespace Nest
 	{
 		private readonly Stack<string> _stack = new Stack<string>();
 
+		public bool Cachable { get; private set; } = true;
+
 		public string Resolve(Expression expression, bool toLastToken = false)
 		{
 			Visit(expression);
@@ -71,7 +73,7 @@ namespace Nest
 			return base.VisitMethodCall(methodCall);
 		}
 
-		private static void VisitConstantOrVariable(MethodCallExpression methodCall, Stack<string> stack)
+		private void VisitConstantOrVariable(MethodCallExpression methodCall, Stack<string> stack)
 		{
 			var lastArg = methodCall.Arguments.Last();
 			if (lastArg is ConstantExpression constantExpression)
@@ -81,9 +83,11 @@ namespace Nest
 			}
 			if (lastArg is MemberExpression memberExpression)
 			{
+				Cachable = false;
 				stack.Push(memberExpression.Member.Name);
 				return;
 			}
+			Cachable = false;
 			stack.Push(lastArg.ToString());
 		}
 

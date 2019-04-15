@@ -19,17 +19,20 @@ namespace Nest
 			return Expression.Lambda<Func<T, object>>(newBody, expression.Parameters[0]);
 		}
 
-		internal static object ComparisonValueFromExpression(this Expression expression, out Type type)
+		internal static object ComparisonValueFromExpression(this Expression expression, out Type type, out bool cachable)
 		{
 			type = null;
+			cachable = false;
 
 			if (expression == null) return null;
 
 			if (!(expression is LambdaExpression lambda)) throw new Exception($"Not a lambda expression: {expression}");
 
 			type = lambda.Parameters.FirstOrDefault()?.Type;
-
-			return new ToStringExpressionVisitor().Resolve(expression);
+			var visitor = new ToStringExpressionVisitor();
+			var toString = visitor.Resolve(expression);
+			cachable = visitor.Cachable;
+			return toString;
 		}
 
 		/// <summary>
