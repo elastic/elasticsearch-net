@@ -47,6 +47,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<MultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IMultiTermVectorsRequest, MultiTermVectorsResponse, MultiTermVectorsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IMultiTermVectorsRequest, MultiTermVectorsResponse>(request, request.RequestParameters, ct);
 	}
 }

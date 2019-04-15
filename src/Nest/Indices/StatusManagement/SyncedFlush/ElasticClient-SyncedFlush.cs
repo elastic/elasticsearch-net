@@ -48,6 +48,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<SyncedFlushResponse> SyncedFlushAsync(ISyncedFlushRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<ISyncedFlushRequest, SyncedFlushResponse, SyncedFlushResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ISyncedFlushRequest, SyncedFlushResponse>(request, request.RequestParameters, ct);
 	}
 }

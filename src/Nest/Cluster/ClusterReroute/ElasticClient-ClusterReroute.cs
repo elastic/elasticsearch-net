@@ -48,6 +48,6 @@ namespace Nest
 		public Task<ClusterRerouteResponse> ClusterRerouteAsync(IClusterRerouteRequest request,
 			CancellationToken ct = default
 		) =>
-			DoRequestAsync<IClusterRerouteRequest, ClusterRerouteResponse, ClusterRerouteResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IClusterRerouteRequest, ClusterRerouteResponse>(request, request.RequestParameters, ct);
 	}
 }

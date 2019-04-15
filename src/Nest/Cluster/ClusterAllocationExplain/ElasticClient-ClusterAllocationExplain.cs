@@ -56,7 +56,7 @@ namespace Nest
 			IClusterAllocationExplainRequest request,
 			CancellationToken ct = default
 		) =>
-			DoRequestAsync<IClusterAllocationExplainRequest, ClusterAllocationExplainResponse, ClusterAllocationExplainResponse>
+			DoRequestAsync<IClusterAllocationExplainRequest, ClusterAllocationExplainResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

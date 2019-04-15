@@ -42,6 +42,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<DeleteLicenseResponse> DeleteLicenseAsync(IDeleteLicenseRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeleteLicenseRequest, DeleteLicenseResponse, DeleteLicenseResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteLicenseRequest, DeleteLicenseResponse>(request, request.RequestParameters, ct);
 	}
 }

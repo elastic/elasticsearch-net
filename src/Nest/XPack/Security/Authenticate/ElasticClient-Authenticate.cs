@@ -40,6 +40,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<AuthenticateResponse> AuthenticateAsync(IAuthenticateRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IAuthenticateRequest, AuthenticateResponse, AuthenticateResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IAuthenticateRequest, AuthenticateResponse>(request, request.RequestParameters, ct);
 	}
 }

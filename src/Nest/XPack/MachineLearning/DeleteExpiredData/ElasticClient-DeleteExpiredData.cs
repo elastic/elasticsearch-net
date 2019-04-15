@@ -44,6 +44,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<DeleteExpiredDataResponse> DeleteExpiredDataAsync(IDeleteExpiredDataRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeleteExpiredDataRequest, DeleteExpiredDataResponse, DeleteExpiredDataResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteExpiredDataRequest, DeleteExpiredDataResponse>(request, request.RequestParameters, ct);
 	}
 }

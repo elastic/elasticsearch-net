@@ -51,6 +51,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<CloseIndexResponse> CloseIndexAsync(ICloseIndexRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<ICloseIndexRequest, CloseIndexResponse, CloseIndexResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ICloseIndexRequest, CloseIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

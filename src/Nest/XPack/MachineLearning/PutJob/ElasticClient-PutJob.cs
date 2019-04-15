@@ -46,6 +46,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<PutJobResponse> PutJobAsync(IPutJobRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IPutJobRequest, PutJobResponse, PutJobResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IPutJobRequest, PutJobResponse>(request, request.RequestParameters, ct);
 	}
 }

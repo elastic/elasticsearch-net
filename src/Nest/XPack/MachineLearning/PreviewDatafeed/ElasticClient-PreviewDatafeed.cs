@@ -53,7 +53,7 @@ namespace Nest
 		public Task<PreviewDatafeedResponse<T>> PreviewDatafeedAsync<T>(IPreviewDatafeedRequest request, CancellationToken ct = default)
 		{
 			request.RequestParameters.DeserializationOverride = PreviewDatafeedResponse<T>;
-			return DoRequestAsync<IPreviewDatafeedRequest, PreviewDatafeedResponse<T>, PreviewDatafeedResponse<T>>(request, request.RequestParameters, ct);
+			return DoRequestAsync<IPreviewDatafeedRequest, PreviewDatafeedResponse<T>>(request, request.RequestParameters, ct);
 		}
 
 		private PreviewDatafeedResponse<T> PreviewDatafeedResponse<T>(IApiCallDetails response, Stream stream) => response.Success

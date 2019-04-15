@@ -65,6 +65,6 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(IExplainRequest<TDocument> request, CancellationToken ct = default)
 			where TDocument : class =>
-			DoRequestAsync<IExplainRequest<TDocument>, ExplainResponse<TDocument>, ExplainResponse<TDocument>>(request, request.RequestParameters, ct);
+			DoRequestAsync<IExplainRequest<TDocument>, ExplainResponse<TDocument>>(request, request.RequestParameters, ct);
 	}
 }

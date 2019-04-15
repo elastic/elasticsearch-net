@@ -59,6 +59,6 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<CountResponse> CountAsync<T>(ICountRequest request, CancellationToken ct = default)
 			where T : class =>
-			DoRequestAsync<ICountRequest, CountResponse, CountResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ICountRequest, CountResponse>(request, request.RequestParameters, ct);
 	}
 }

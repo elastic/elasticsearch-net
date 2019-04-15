@@ -51,6 +51,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<GetUserAccessTokenResponse> GetUserAccessTokenAsync(IGetUserAccessTokenRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetUserAccessTokenRequest, GetUserAccessTokenResponse, GetUserAccessTokenResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetUserAccessTokenRequest, GetUserAccessTokenResponse>(request, request.RequestParameters, ct);
 	}
 }

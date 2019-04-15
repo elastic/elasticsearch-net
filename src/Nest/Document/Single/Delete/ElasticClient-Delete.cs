@@ -50,6 +50,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<DeleteResponse> DeleteAsync(IDeleteRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeleteRequest, DeleteResponse, DeleteResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteRequest, DeleteResponse>(request, request.RequestParameters, ct);
 	}
 }

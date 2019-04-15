@@ -42,6 +42,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<GetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetRepositoryRequest, GetRepositoryResponse, GetRepositoryResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetRepositoryRequest, GetRepositoryResponse>(request, request.RequestParameters, ct);
 	}
 }

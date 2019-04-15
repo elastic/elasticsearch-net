@@ -54,7 +54,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<MigrationAssistanceResponse> MigrationAssistanceAsync(IMigrationAssistanceRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IMigrationAssistanceRequest, MigrationAssistanceResponse, MigrationAssistanceResponse>
+			DoRequestAsync<IMigrationAssistanceRequest, MigrationAssistanceResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

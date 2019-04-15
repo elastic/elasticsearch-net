@@ -40,6 +40,6 @@ namespace Nest
 		) => ShrinkIndexAsync(selector.InvokeOrDefault(new ShrinkIndexDescriptor(source, target)));
 
 		public Task<ShrinkIndexResponse> ShrinkIndexAsync(IShrinkIndexRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IShrinkIndexRequest, ShrinkIndexResponse, ShrinkIndexResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IShrinkIndexRequest, ShrinkIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

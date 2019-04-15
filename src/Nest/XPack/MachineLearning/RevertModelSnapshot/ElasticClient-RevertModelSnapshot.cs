@@ -52,7 +52,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<RevertModelSnapshotResponse> RevertModelSnapshotAsync(IRevertModelSnapshotRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IRevertModelSnapshotRequest, RevertModelSnapshotResponse, RevertModelSnapshotResponse>
+			DoRequestAsync<IRevertModelSnapshotRequest, RevertModelSnapshotResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

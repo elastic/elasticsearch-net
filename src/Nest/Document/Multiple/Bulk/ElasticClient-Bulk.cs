@@ -38,7 +38,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<BulkResponse> BulkAsync(IBulkRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IBulkRequest, BulkResponse, BulkResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IBulkRequest, BulkResponse>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
 		public Task<BulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector, CancellationToken ct = default) =>

@@ -41,6 +41,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<DeleteScriptResponse> DeleteScriptAsync(IDeleteScriptRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeleteScriptRequest, DeleteScriptResponse, DeleteScriptResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteScriptRequest, DeleteScriptResponse>(request, request.RequestParameters, ct);
 	}
 }

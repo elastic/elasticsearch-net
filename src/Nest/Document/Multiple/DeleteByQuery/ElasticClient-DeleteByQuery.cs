@@ -53,7 +53,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<DeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeleteByQueryRequest, DeleteByQueryResponse, DeleteByQueryResponse>
+			DoRequestAsync<IDeleteByQueryRequest, DeleteByQueryResponse>
 				(request, request.RequestParameters, ct, r => AcceptAllStatusCodesHandler(r));
 	}
 }

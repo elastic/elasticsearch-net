@@ -99,6 +99,6 @@ namespace Nest
 		public Task<SearchResponse<TResult>> SearchTemplateAsync<T, TResult>(ISearchTemplateRequest request, CancellationToken ct = default)
 			where T : class
 			where TResult : class =>
-			DoRequestAsync<ISearchTemplateRequest, SearchResponse<TResult>, SearchResponse<TResult>>(request, request.RequestParameters, ct);
+			DoRequestAsync<ISearchTemplateRequest, SearchResponse<TResult>>(request, request.RequestParameters, ct);
 	}
 }

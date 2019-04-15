@@ -54,6 +54,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<SplitIndexResponse> SplitIndexAsync(ISplitIndexRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<ISplitIndexRequest, SplitIndexResponse, SplitIndexResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ISplitIndexRequest, SplitIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

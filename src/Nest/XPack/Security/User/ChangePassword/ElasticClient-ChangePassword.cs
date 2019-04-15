@@ -42,6 +42,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ChangePasswordResponse> ChangePasswordAsync(IChangePasswordRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IChangePasswordRequest, ChangePasswordResponse, ChangePasswordResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IChangePasswordRequest, ChangePasswordResponse>(request, request.RequestParameters, ct);
 	}
 }

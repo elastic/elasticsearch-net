@@ -41,6 +41,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<DisableUserResponse> DisableUserAsync(IDisableUserRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDisableUserRequest, DisableUserResponse, DisableUserResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDisableUserRequest, DisableUserResponse>(request, request.RequestParameters, ct);
 	}
 }

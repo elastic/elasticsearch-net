@@ -49,6 +49,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<CreateRepositoryResponse> CreateRepositoryAsync(ICreateRepositoryRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<ICreateRepositoryRequest, CreateRepositoryResponse, CreateRepositoryResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ICreateRepositoryRequest, CreateRepositoryResponse>(request, request.RequestParameters, ct);
 	}
 }

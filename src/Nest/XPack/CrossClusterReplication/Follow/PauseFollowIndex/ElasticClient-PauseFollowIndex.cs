@@ -45,6 +45,6 @@ namespace Nest
 
 		/// <inheritdoc cref="PauseFollowIndex(IndexName, System.Func{Nest.PauseFollowIndexDescriptor,Nest.IPauseFollowIndexRequest})" />
 		public Task<PauseFollowIndexResponse> PauseFollowIndexAsync(IPauseFollowIndexRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IPauseFollowIndexRequest, PauseFollowIndexResponse, PauseFollowIndexResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IPauseFollowIndexRequest, PauseFollowIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

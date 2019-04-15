@@ -49,6 +49,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IndicesShardStoresResponse> IndicesShardStoresAsync(IIndicesShardStoresRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IIndicesShardStoresRequest, IndicesShardStoresResponse, IndicesShardStoresResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IIndicesShardStoresRequest, IndicesShardStoresResponse>(request, request.RequestParameters, ct);
 	}
 }

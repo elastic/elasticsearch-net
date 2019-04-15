@@ -46,6 +46,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<GetAnomalyRecordsResponse> GetAnomalyRecordsAsync(IGetAnomalyRecordsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetAnomalyRecordsRequest, GetAnomalyRecordsResponse, GetAnomalyRecordsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetAnomalyRecordsRequest, GetAnomalyRecordsResponse>(request, request.RequestParameters, ct);
 	}
 }

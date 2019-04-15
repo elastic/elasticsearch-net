@@ -46,7 +46,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<FieldCapabilitiesResponse> FieldCapabilitiesAsync(IFieldCapabilitiesRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IFieldCapabilitiesRequest, FieldCapabilitiesResponse, FieldCapabilitiesResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IFieldCapabilitiesRequest, FieldCapabilitiesResponse>(request, request.RequestParameters, ct);
 
 	}
 }

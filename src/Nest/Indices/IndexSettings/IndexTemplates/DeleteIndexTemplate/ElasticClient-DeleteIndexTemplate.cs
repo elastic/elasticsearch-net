@@ -54,6 +54,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<DeleteIndexTemplateResponse> DeleteIndexTemplateAsync(IDeleteIndexTemplateRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeleteIndexTemplateRequest, DeleteIndexTemplateResponse, DeleteIndexTemplateResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteIndexTemplateRequest, DeleteIndexTemplateResponse>(request, request.RequestParameters, ct);
 	}
 }

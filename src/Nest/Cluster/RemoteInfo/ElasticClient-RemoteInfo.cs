@@ -46,6 +46,6 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<RemoteInfoResponse> RemoteInfoAsync(IRemoteInfoRequest request, CancellationToken ct = default
 		) =>
-			DoRequestAsync<IRemoteInfoRequest, RemoteInfoResponse, RemoteInfoResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IRemoteInfoRequest, RemoteInfoResponse>(request, request.RequestParameters, ct);
 	}
 }

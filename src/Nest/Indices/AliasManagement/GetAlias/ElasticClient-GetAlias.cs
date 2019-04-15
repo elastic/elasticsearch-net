@@ -48,7 +48,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<GetAliasResponse> GetAliasAsync(IGetAliasRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetAliasRequest, GetAliasResponse, GetAliasResponse>
+			DoRequestAsync<IGetAliasRequest, GetAliasResponse>
 				(request, request.RequestParameters, ct, r => AcceptAllStatusCodesHandler(r));
 	}
 }

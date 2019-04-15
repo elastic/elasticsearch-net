@@ -48,6 +48,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<DeleteJobResponse> DeleteJobAsync(IDeleteJobRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeleteJobRequest, DeleteJobResponse, DeleteJobResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteJobRequest, DeleteJobResponse>(request, request.RequestParameters, ct);
 	}
 }

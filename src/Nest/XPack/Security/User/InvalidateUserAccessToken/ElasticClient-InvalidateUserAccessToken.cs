@@ -51,7 +51,7 @@ namespace Nest
 			IInvalidateUserAccessTokenRequest request,
 			CancellationToken ct = default
 		) =>
-			DoRequestAsync<IInvalidateUserAccessTokenRequest, InvalidateUserAccessTokenResponse, InvalidateUserAccessTokenResponse>
+			DoRequestAsync<IInvalidateUserAccessTokenRequest, InvalidateUserAccessTokenResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

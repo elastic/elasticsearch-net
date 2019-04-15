@@ -43,6 +43,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<CancelTasksResponse> CancelTasksAsync(ICancelTasksRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<ICancelTasksRequest, CancelTasksResponse, CancelTasksResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ICancelTasksRequest, CancelTasksResponse>(request, request.RequestParameters, ct);
 	}
 }

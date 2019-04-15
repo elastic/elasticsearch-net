@@ -41,7 +41,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<PutUserResponse> PutUserAsync(IPutUserRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IPutUserRequest, PutUserResponse, PutUserResponse>
+			DoRequestAsync<IPutUserRequest, PutUserResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

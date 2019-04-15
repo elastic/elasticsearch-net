@@ -44,6 +44,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<GetBucketsResponse> GetBucketsAsync(IGetBucketsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetBucketsRequest, GetBucketsResponse, GetBucketsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetBucketsRequest, GetBucketsResponse>(request, request.RequestParameters, ct);
 	}
 }

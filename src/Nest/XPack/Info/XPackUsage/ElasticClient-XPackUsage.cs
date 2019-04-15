@@ -40,6 +40,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<XPackUsageResponse> XPackUsageAsync(IXPackUsageRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IXPackUsageRequest, XPackUsageResponse, XPackUsageResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IXPackUsageRequest, XPackUsageResponse>(request, request.RequestParameters, ct);
 	}
 }

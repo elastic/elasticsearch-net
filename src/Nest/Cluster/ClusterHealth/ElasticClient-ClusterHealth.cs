@@ -46,6 +46,6 @@ namespace Nest
 
 		/// <inheritdoc cref="ClusterHealth(System.Func{Nest.ClusterHealthDescriptor,Nest.IClusterHealthRequest})" />
 		public Task<ClusterHealthResponse> ClusterHealthAsync(IClusterHealthRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IClusterHealthRequest, ClusterHealthResponse, ClusterHealthResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IClusterHealthRequest, ClusterHealthResponse>(request, request.RequestParameters, ct);
 	}
 }

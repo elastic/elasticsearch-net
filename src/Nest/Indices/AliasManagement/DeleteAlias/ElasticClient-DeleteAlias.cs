@@ -43,7 +43,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<DeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeleteAliasRequest, DeleteAliasResponse, DeleteAliasResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteAliasRequest, DeleteAliasResponse>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
 		public Task<DeleteAliasResponse> DeleteAliasAsync(

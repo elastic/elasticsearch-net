@@ -42,6 +42,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<GetDatafeedsResponse> GetDatafeedsAsync(IGetDatafeedsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetDatafeedsRequest, GetDatafeedsResponse, GetDatafeedsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetDatafeedsRequest, GetDatafeedsResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -48,6 +48,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<GrokProcessorPatternsResponse> GrokProcessorPatternsAsync(IGrokProcessorPatternsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGrokProcessorPatternsRequest, GrokProcessorPatternsResponse, GrokProcessorPatternsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGrokProcessorPatternsRequest, GrokProcessorPatternsResponse>(request, request.RequestParameters, ct);
 	}
 }

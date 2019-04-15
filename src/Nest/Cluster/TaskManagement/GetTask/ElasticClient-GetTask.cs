@@ -35,6 +35,6 @@ namespace Nest
 		) => GetTaskAsync(selector.InvokeOrDefault(new GetTaskDescriptor(id)), ct);
 
 		public Task<GetTaskResponse> GetTaskAsync(IGetTaskRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetTaskRequest, GetTaskResponse, GetTaskResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetTaskRequest, GetTaskResponse>(request, request.RequestParameters, ct);
 	}
 }

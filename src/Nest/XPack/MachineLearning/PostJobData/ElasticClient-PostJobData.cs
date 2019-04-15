@@ -43,7 +43,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<PostJobDataResponse> PostJobDataAsync(IPostJobDataRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IPostJobDataRequest, PostJobDataResponse, PostJobDataResponse>
+			DoRequestAsync<IPostJobDataRequest, PostJobDataResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

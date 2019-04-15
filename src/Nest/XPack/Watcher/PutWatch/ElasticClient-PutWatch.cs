@@ -45,7 +45,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<PutWatchResponse> PutWatchAsync(IPutWatchRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IPutWatchRequest, PutWatchResponse, PutWatchResponse>
+			DoRequestAsync<IPutWatchRequest, PutWatchResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

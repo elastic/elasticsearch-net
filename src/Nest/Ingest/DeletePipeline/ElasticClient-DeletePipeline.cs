@@ -43,6 +43,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<DeletePipelineResponse> DeletePipelineAsync(IDeletePipelineRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeletePipelineRequest, DeletePipelineResponse, DeletePipelineResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeletePipelineRequest, DeletePipelineResponse>(request, request.RequestParameters, ct);
 	}
 }

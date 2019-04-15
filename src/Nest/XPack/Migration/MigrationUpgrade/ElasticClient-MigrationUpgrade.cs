@@ -56,7 +56,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<MigrationUpgradeResponse> MigrationUpgradeAsync(IMigrationUpgradeRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IMigrationUpgradeRequest, MigrationUpgradeResponse, MigrationUpgradeResponse>
+			DoRequestAsync<IMigrationUpgradeRequest, MigrationUpgradeResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

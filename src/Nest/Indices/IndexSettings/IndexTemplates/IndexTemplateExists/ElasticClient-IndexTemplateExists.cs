@@ -47,6 +47,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ExistsResponse> IndexTemplateExistsAsync(IIndexTemplateExistsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IIndexTemplateExistsRequest, ExistsResponse, ExistsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IIndexTemplateExistsRequest, ExistsResponse>(request, request.RequestParameters, ct);
 	}
 }

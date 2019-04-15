@@ -42,6 +42,6 @@ namespace Nest
 
 		/// <inheritdoc cref="GetPrivileges(System.Func{Nest.GetPrivilegesDescriptor,Nest.IGetPrivilegesRequest})" />
 		public Task<GetPrivilegesResponse> GetPrivilegesAsync(IGetPrivilegesRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetPrivilegesRequest, GetPrivilegesResponse, GetPrivilegesResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetPrivilegesRequest, GetPrivilegesResponse>(request, request.RequestParameters, ct);
 	}
 }

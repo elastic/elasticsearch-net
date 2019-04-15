@@ -46,6 +46,6 @@ namespace Nest
 
 		/// <inheritdoc cref="DeleteForecast(Nest.Id,Nest.ForecastIds,System.Func{Nest.DeleteForecastDescriptor,Nest.IDeleteForecastRequest})" />
 		public Task<DeleteForecastResponse> DeleteForecastAsync(IDeleteForecastRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeleteForecastRequest, DeleteForecastResponse, DeleteForecastResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteForecastRequest, DeleteForecastResponse>(request, request.RequestParameters, ct);
 	}
 }

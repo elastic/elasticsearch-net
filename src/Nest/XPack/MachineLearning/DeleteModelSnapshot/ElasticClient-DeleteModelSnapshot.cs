@@ -55,6 +55,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<DeleteModelSnapshotResponse> DeleteModelSnapshotAsync(IDeleteModelSnapshotRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeleteModelSnapshotRequest, DeleteModelSnapshotResponse, DeleteModelSnapshotResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteModelSnapshotRequest, DeleteModelSnapshotResponse>(request, request.RequestParameters, ct);
 	}
 }

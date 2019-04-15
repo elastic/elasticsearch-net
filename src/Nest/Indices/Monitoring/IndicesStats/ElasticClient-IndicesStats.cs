@@ -49,6 +49,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IndicesStatsResponse> IndicesStatsAsync(IIndicesStatsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IIndicesStatsRequest, IndicesStatsResponse, IndicesStatsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IIndicesStatsRequest, IndicesStatsResponse>(request, request.RequestParameters, ct);
 	}
 }

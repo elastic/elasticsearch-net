@@ -40,6 +40,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<GetUserResponse> GetUserAsync(IGetUserRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetUserRequest, GetUserResponse, GetUserResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetUserRequest, GetUserResponse>(request, request.RequestParameters, ct);
 	}
 }

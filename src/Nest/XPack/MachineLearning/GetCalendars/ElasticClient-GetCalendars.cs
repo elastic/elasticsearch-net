@@ -44,6 +44,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<GetCalendarsResponse> GetCalendarsAsync(IGetCalendarsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetCalendarsRequest, GetCalendarsResponse, GetCalendarsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetCalendarsRequest, GetCalendarsResponse>(request, request.RequestParameters, ct);
 	}
 }

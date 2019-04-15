@@ -50,6 +50,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<GetIndexTemplateResponse> GetIndexTemplateAsync(IGetIndexTemplateRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetIndexTemplateRequest, GetIndexTemplateResponse, GetIndexTemplateResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetIndexTemplateRequest, GetIndexTemplateResponse>(request, request.RequestParameters, ct);
 	}
 }

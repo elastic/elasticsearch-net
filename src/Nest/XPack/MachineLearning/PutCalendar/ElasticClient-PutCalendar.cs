@@ -43,6 +43,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<PutCalendarResponse> PutCalendarAsync(IPutCalendarRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IPutCalendarRequest, PutCalendarResponse, PutCalendarResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IPutCalendarRequest, PutCalendarResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -44,7 +44,7 @@ namespace Nest
 
 		/// <inheritdoc cref="ClearSqlCursor(System.Func{Nest.ClearSqlCursorDescriptor,Nest.IClearSqlCursorRequest})" />
 		public Task<ClearSqlCursorResponse> ClearSqlCursorAsync(IClearSqlCursorRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IClearSqlCursorRequest, ClearSqlCursorResponse, ClearSqlCursorResponse>
+			DoRequestAsync<IClearSqlCursorRequest, ClearSqlCursorResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

@@ -47,7 +47,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<DeleteWatchResponse> DeleteWatchAsync(IDeleteWatchRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeleteWatchRequest, DeleteWatchResponse, DeleteWatchResponse>
+			DoRequestAsync<IDeleteWatchRequest, DeleteWatchResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

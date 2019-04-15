@@ -42,6 +42,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<GetScriptResponse> GetScriptAsync(IGetScriptRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetScriptRequest, GetScriptResponse, GetScriptResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetScriptRequest, GetScriptResponse>(request, request.RequestParameters, ct);
 	}
 }

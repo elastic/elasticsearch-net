@@ -42,6 +42,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<SnapshotStatusResponse> SnapshotStatusAsync(ISnapshotStatusRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<ISnapshotStatusRequest, SnapshotStatusResponse, SnapshotStatusResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ISnapshotStatusRequest, SnapshotStatusResponse>(request, request.RequestParameters, ct);
 	}
 }

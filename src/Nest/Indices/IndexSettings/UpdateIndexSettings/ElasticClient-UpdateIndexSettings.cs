@@ -52,6 +52,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<UpdateIndexSettingsResponse> UpdateIndexSettingsAsync(IUpdateIndexSettingsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IUpdateIndexSettingsRequest, UpdateIndexSettingsResponse, UpdateIndexSettingsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IUpdateIndexSettingsRequest, UpdateIndexSettingsResponse>(request, request.RequestParameters, ct);
 	}
 }

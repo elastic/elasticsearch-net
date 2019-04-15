@@ -48,6 +48,6 @@ namespace Nest
 		public Task<ClusterGetSettingsResponse> ClusterGetSettingsAsync(
 			IClusterGetSettingsRequest request,
 			CancellationToken ct = default
-		) => DoRequestAsync<IClusterGetSettingsRequest, ClusterGetSettingsResponse, ClusterGetSettingsResponse>(request, request.RequestParameters, ct);
+		) => DoRequestAsync<IClusterGetSettingsRequest, ClusterGetSettingsResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -53,7 +53,7 @@ namespace Nest
 			IExecutePainlessScriptRequest request,
 			CancellationToken ct = default
 		) =>
-			DoRequestAsync<IExecutePainlessScriptRequest, ExecutePainlessScriptResponse<TResult>, ExecutePainlessScriptResponse<TResult>>
+			DoRequestAsync<IExecutePainlessScriptRequest, ExecutePainlessScriptResponse<TResult>>
 				(request, request.RequestParameters, ct);
 	}
 }

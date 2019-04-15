@@ -43,7 +43,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<PingResponse> PingAsync(IPingRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IPingRequest, PingResponse, PingResponse>(request, request.RequestParameters, ct, r => SetPingTimeout(r));
+			DoRequestAsync<IPingRequest, PingResponse>(request, request.RequestParameters, ct, r => SetPingTimeout(r));
 
 		private void SetPingTimeout(IRequestConfiguration requestConfiguration)
 		{

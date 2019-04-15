@@ -46,7 +46,7 @@ namespace Nest
 		public Task<TranslateSqlResponse> TranslateSqlAsync(ITranslateSqlRequest request, CancellationToken ct = default)
 		{
 			request.RequestParameters.DeserializationOverride = ToTranslateSqlResponse;
-			return DoRequestAsync<ITranslateSqlRequest, TranslateSqlResponse, TranslateSqlResponse>
+			return DoRequestAsync<ITranslateSqlRequest, TranslateSqlResponse>
 				(request, request.RequestParameters, ct);
 		}
 

@@ -46,7 +46,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<GetRollupJobResponse> GetRollupJobAsync(IGetRollupJobRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetRollupJobRequest, GetRollupJobResponse, GetRollupJobResponse>
+			DoRequestAsync<IGetRollupJobRequest, GetRollupJobResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

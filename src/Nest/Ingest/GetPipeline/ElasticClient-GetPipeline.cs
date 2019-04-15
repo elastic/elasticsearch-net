@@ -42,6 +42,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<GetPipelineResponse> GetPipelineAsync(IGetPipelineRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetPipelineRequest, GetPipelineResponse, GetPipelineResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetPipelineRequest, GetPipelineResponse>(request, request.RequestParameters, ct);
 	}
 }

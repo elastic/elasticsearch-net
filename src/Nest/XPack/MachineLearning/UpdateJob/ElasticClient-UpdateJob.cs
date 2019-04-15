@@ -46,7 +46,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<UpdateJobResponse> UpdateJobAsync(IUpdateJobRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IUpdateJobRequest, UpdateJobResponse, UpdateJobResponse>
+			DoRequestAsync<IUpdateJobRequest, UpdateJobResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

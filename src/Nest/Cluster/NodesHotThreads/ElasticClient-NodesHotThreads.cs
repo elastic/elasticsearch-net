@@ -58,7 +58,7 @@ namespace Nest
 		public Task<NodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest request, CancellationToken ct = default)
 		{
 			request.RequestParameters.DeserializationOverride = DeserializeNodesHotThreadResponse;
-			return DoRequestAsync<INodesHotThreadsRequest, NodesHotThreadsResponse, NodesHotThreadsResponse>(request, request.RequestParameters, ct);
+			return DoRequestAsync<INodesHotThreadsRequest, NodesHotThreadsResponse>(request, request.RequestParameters, ct);
 		}
 
 		/// <summary>

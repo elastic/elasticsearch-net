@@ -45,6 +45,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<DeleteCalendarEventResponse> DeleteCalendarEventAsync(IDeleteCalendarEventRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeleteCalendarEventRequest, DeleteCalendarEventResponse, DeleteCalendarEventResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteCalendarEventRequest, DeleteCalendarEventResponse>(request, request.RequestParameters, ct);
 	}
 }

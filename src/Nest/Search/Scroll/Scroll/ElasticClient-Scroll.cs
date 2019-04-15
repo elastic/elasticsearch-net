@@ -54,7 +54,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<SearchResponse<T>> ScrollAsync<T>(IScrollRequest request, CancellationToken ct = default)
 			where T : class =>
-			DoRequestAsync<IScrollRequest, SearchResponse<T>, SearchResponse<T>>(request, request.RequestParameters, ct);
+			DoRequestAsync<IScrollRequest, SearchResponse<T>>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
 		public Task<SearchResponse<T>> ScrollAsync<T>(

@@ -49,6 +49,6 @@ namespace Nest
 		public Task<ClusterPutSettingsResponse> ClusterPutSettingsAsync(IClusterPutSettingsRequest request,
 			CancellationToken ct = default
 		) =>
-			DoRequestAsync<IClusterPutSettingsRequest, ClusterPutSettingsResponse, ClusterPutSettingsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IClusterPutSettingsRequest, ClusterPutSettingsResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -44,6 +44,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<SearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<ISearchShardsRequest, SearchShardsResponse, SearchShardsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ISearchShardsRequest, SearchShardsResponse>(request, request.RequestParameters, ct);
 	}
 }

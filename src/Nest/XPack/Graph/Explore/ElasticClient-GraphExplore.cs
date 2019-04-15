@@ -44,6 +44,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<GraphExploreResponse> GraphExploreAsync(IGraphExploreRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGraphExploreRequest, GraphExploreResponse, GraphExploreResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGraphExploreRequest, GraphExploreResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -56,6 +56,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ExistsResponse> DocumentExistsAsync(IDocumentExistsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDocumentExistsRequest, ExistsResponse, ExistsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDocumentExistsRequest, ExistsResponse>(request, request.RequestParameters, ct);
 	}
 }

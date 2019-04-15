@@ -55,7 +55,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ReindexOnServerResponse> ReindexOnServerAsync(IReindexOnServerRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IReindexOnServerRequest, ReindexOnServerResponse, ReindexOnServerResponse>
+			DoRequestAsync<IReindexOnServerRequest, ReindexOnServerResponse>
 				(request, request.RequestParameters, ct, r => AcceptAllStatusCodesHandler(r));
 	}
 }

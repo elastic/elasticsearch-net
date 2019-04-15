@@ -48,6 +48,6 @@ namespace Nest
 
 		/// <inheritdoc cref="ClusterPendingTasks(System.Func{Nest.ClusterPendingTasksDescriptor,Nest.IClusterPendingTasksRequest})" />
 		public Task<ClusterPendingTasksResponse> ClusterPendingTasksAsync(IClusterPendingTasksRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IClusterPendingTasksRequest, ClusterPendingTasksResponse, ClusterPendingTasksResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IClusterPendingTasksRequest, ClusterPendingTasksResponse>(request, request.RequestParameters, ct);
 	}
 }

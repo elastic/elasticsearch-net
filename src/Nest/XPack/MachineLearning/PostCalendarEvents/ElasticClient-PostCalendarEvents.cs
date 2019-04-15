@@ -43,7 +43,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<PostCalendarEventsResponse> PostCalendarEventsAsync(IPostCalendarEventsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IPostCalendarEventsRequest, PostCalendarEventsResponse, PostCalendarEventsResponse>
+			DoRequestAsync<IPostCalendarEventsRequest, PostCalendarEventsResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

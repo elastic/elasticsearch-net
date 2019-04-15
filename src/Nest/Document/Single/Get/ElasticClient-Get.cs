@@ -53,6 +53,6 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<GetResponse<TDocument>> GetAsync<TDocument>(IGetRequest request, CancellationToken ct = default)
 			where TDocument : class =>
-			DoRequestAsync<IGetRequest, GetResponse<TDocument>, GetResponse<TDocument>>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetRequest, GetResponse<TDocument>>(request, request.RequestParameters, ct);
 	}
 }

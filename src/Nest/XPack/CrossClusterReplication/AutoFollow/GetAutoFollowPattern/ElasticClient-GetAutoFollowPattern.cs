@@ -40,6 +40,6 @@ namespace Nest
 
 		/// <inheritdoc cref="GetAutoFollowPattern(System.Func{Nest.GetAutoFollowPatternDescriptor,Nest.IGetAutoFollowPatternRequest})" />
 		public Task<GetAutoFollowPatternResponse> GetAutoFollowPatternAsync(IGetAutoFollowPatternRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetAutoFollowPatternRequest, GetAutoFollowPatternResponse, GetAutoFollowPatternResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetAutoFollowPatternRequest, GetAutoFollowPatternResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -40,7 +40,7 @@ namespace Nest
 
 		/// <inheritdoc cref="QuerySql(System.Func{Nest.QuerySqlDescriptor,Nest.IQuerySqlRequest})" />
 		public Task<QuerySqlResponse> QuerySqlAsync(IQuerySqlRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IQuerySqlRequest, QuerySqlResponse, QuerySqlResponse>
+			DoRequestAsync<IQuerySqlRequest, QuerySqlResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

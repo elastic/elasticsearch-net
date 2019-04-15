@@ -40,6 +40,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ForceMergeResponse> ForceMergeAsync(IForceMergeRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IForceMergeRequest, ForceMergeResponse, ForceMergeResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IForceMergeRequest, ForceMergeResponse>(request, request.RequestParameters, ct);
 	}
 }

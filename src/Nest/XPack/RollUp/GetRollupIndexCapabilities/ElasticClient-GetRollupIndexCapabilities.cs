@@ -56,7 +56,7 @@ namespace Nest
 			IGetRollupIndexCapabilitiesRequest request,
 			CancellationToken ct = default
 		) =>
-			DoRequestAsync<IGetRollupIndexCapabilitiesRequest, GetRollupIndexCapabilitiesResponse, GetRollupIndexCapabilitiesResponse>
+			DoRequestAsync<IGetRollupIndexCapabilitiesRequest, GetRollupIndexCapabilitiesResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

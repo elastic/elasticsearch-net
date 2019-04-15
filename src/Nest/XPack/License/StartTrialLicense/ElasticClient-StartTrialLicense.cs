@@ -71,6 +71,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<StartTrialLicenseResponse> StartTrialLicenseAsync(IStartTrialLicenseRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IStartTrialLicenseRequest, StartTrialLicenseResponse, StartTrialLicenseResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IStartTrialLicenseRequest, StartTrialLicenseResponse>(request, request.RequestParameters, ct);
 	}
 }

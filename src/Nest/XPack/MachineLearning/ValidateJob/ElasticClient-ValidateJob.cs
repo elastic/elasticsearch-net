@@ -44,7 +44,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ValidateJobResponse> ValidateJobAsync(IValidateJobRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IValidateJobRequest, ValidateJobResponse, ValidateJobResponse>
+			DoRequestAsync<IValidateJobRequest, ValidateJobResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

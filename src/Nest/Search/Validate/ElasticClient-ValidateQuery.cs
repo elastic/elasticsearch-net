@@ -53,6 +53,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ValidateQueryResponse> ValidateQueryAsync(IValidateQueryRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IValidateQueryRequest, ValidateQueryResponse, ValidateQueryResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IValidateQueryRequest, ValidateQueryResponse>(request, request.RequestParameters, ct);
 	}
 }

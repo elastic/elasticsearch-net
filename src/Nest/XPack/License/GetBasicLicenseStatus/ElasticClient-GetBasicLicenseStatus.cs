@@ -40,6 +40,6 @@ namespace Nest
 
 		/// <inheritdoc see cref="GetBasicLicenseStatus(System.Func{Nest.GetBasicLicenseStatusDescriptor,Nest.IGetBasicLicenseStatusRequest})"/>
 		public Task<GetBasicLicenseStatusResponse> GetBasicLicenseStatusAsync(IGetBasicLicenseStatusRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetBasicLicenseStatusRequest, GetBasicLicenseStatusResponse, GetBasicLicenseStatusResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetBasicLicenseStatusRequest, GetBasicLicenseStatusResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -52,7 +52,7 @@ namespace Nest
 		public Task<GetCertificatesResponse> GetCertificatesAsync(IGetCertificatesRequest request, CancellationToken ct = default)
 		{
 			request.RequestParameters.DeserializationOverride = ToCertificatesResponse;
-			return DoRequestAsync<IGetCertificatesRequest, GetCertificatesResponse, GetCertificatesResponse>
+			return DoRequestAsync<IGetCertificatesRequest, GetCertificatesResponse>
 				(request, request.RequestParameters, ct);
 		}
 

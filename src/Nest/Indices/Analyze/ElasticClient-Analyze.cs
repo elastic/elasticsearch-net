@@ -45,6 +45,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<AnalyzeResponse> AnalyzeAsync(IAnalyzeRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IAnalyzeRequest, AnalyzeResponse, AnalyzeResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IAnalyzeRequest, AnalyzeResponse>(request, request.RequestParameters, ct);
 	}
 }

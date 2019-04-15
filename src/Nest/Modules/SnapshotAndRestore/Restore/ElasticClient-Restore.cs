@@ -41,7 +41,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<RestoreResponse> RestoreAsync(IRestoreRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IRestoreRequest, RestoreResponse, RestoreResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IRestoreRequest, RestoreResponse>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
 		public Task<RestoreResponse> RestoreAsync(

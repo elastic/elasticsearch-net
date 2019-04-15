@@ -42,6 +42,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<GetJobStatsResponse> GetJobStatsAsync(IGetJobStatsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetJobStatsRequest, GetJobStatsResponse, GetJobStatsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetJobStatsRequest, GetJobStatsResponse>(request, request.RequestParameters, ct);
 	}
 }

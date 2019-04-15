@@ -49,6 +49,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<GetMappingResponse> GetMappingAsync(IGetMappingRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetMappingRequest, GetMappingResponse, GetMappingResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetMappingRequest, GetMappingResponse>(request, request.RequestParameters, ct);
 	}
 }

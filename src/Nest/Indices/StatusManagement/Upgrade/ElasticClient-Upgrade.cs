@@ -31,7 +31,7 @@ namespace Nest
 			Upgrade(selector.InvokeOrDefault(new UpgradeDescriptor().Index(indices)));
 
 		public Task<UpgradeResponse> UpgradeAsync(IUpgradeRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IUpgradeRequest, UpgradeResponse, UpgradeResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IUpgradeRequest, UpgradeResponse>(request, request.RequestParameters, ct);
 
 		public Task<UpgradeResponse> UpgradeAsync(
 			Indices indices,

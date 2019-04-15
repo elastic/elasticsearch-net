@@ -41,7 +41,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<PutAliasResponse> PutAliasAsync(IPutAliasRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IPutAliasRequest, PutAliasResponse, PutAliasResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IPutAliasRequest, PutAliasResponse>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
 		public Task<PutAliasResponse> PutAliasAsync(

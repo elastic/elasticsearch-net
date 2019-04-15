@@ -38,6 +38,6 @@ namespace Nest
 		) => SimulatePipelineAsync(selector?.Invoke(new SimulatePipelineDescriptor()), ct);
 
 		public Task<SimulatePipelineResponse> SimulatePipelineAsync(ISimulatePipelineRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<ISimulatePipelineRequest, SimulatePipelineResponse, SimulatePipelineResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ISimulatePipelineRequest, SimulatePipelineResponse>(request, request.RequestParameters, ct);
 	}
 }

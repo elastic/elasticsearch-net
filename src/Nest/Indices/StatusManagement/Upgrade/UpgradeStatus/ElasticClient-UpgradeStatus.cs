@@ -36,7 +36,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<UpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IUpgradeStatusRequest, UpgradeStatusResponse, UpgradeStatusResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IUpgradeStatusRequest, UpgradeStatusResponse>(request, request.RequestParameters, ct);
 
 		public Task<UpgradeStatusResponse> UpgradeStatusAsync(
 			Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null,

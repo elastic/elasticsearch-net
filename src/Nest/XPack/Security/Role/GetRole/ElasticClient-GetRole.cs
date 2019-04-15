@@ -40,6 +40,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<GetRoleResponse> GetRoleAsync(IGetRoleRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetRoleRequest, GetRoleResponse, GetRoleResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetRoleRequest, GetRoleResponse>(request, request.RequestParameters, ct);
 	}
 }

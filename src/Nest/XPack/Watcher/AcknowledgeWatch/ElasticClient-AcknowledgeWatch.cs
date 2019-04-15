@@ -49,7 +49,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<AcknowledgeWatchResponse> AcknowledgeWatchAsync(IAcknowledgeWatchRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IAcknowledgeWatchRequest, AcknowledgeWatchResponse, AcknowledgeWatchResponse>
+			DoRequestAsync<IAcknowledgeWatchRequest, AcknowledgeWatchResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

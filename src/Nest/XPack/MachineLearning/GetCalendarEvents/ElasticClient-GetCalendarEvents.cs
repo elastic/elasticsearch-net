@@ -43,6 +43,6 @@ namespace Nest
 
 		/// <inheritdoc cref="IElasticClient.GetCalendarEvents(Nest.Id,System.Func{Nest.GetCalendarEventsDescriptor,Nest.IGetCalendarEventsRequest})" />
 		public Task<GetCalendarEventsResponse> GetCalendarEventsAsync(IGetCalendarEventsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetCalendarEventsRequest, GetCalendarEventsResponse, GetCalendarEventsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetCalendarEventsRequest, GetCalendarEventsResponse>(request, request.RequestParameters, ct);
 	}
 }

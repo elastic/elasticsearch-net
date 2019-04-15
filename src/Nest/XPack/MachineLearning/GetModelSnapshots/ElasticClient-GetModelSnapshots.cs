@@ -45,7 +45,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<GetModelSnapshotsResponse> GetModelSnapshotsAsync(IGetModelSnapshotsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetModelSnapshotsRequest, GetModelSnapshotsResponse, GetModelSnapshotsResponse>
+			DoRequestAsync<IGetModelSnapshotsRequest, GetModelSnapshotsResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

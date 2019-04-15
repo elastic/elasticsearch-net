@@ -46,6 +46,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ClearCachedRealmsResponse> ClearCachedRealmsAsync(IClearCachedRealmsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IClearCachedRealmsRequest, ClearCachedRealmsResponse, ClearCachedRealmsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IClearCachedRealmsRequest, ClearCachedRealmsResponse>(request, request.RequestParameters, ct);
 	}
 }

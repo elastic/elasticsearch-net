@@ -53,7 +53,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<UpdateByQueryResponse> UpdateByQueryAsync(IUpdateByQueryRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IUpdateByQueryRequest, UpdateByQueryResponse, UpdateByQueryResponse>
+			DoRequestAsync<IUpdateByQueryRequest, UpdateByQueryResponse>
 				(request, request.RequestParameters, ct, r => AcceptAllStatusCodesHandler(r));
 	}
 }

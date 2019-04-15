@@ -45,6 +45,6 @@ namespace Nest
 
 		/// <inheritdoc cref="ResumeFollowIndex(IndexName, System.Func{Nest.ResumeFollowIndexDescriptor,Nest.IResumeFollowIndexRequest})" />
 		public Task<ResumeFollowIndexResponse> ResumeFollowIndexAsync(IResumeFollowIndexRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IResumeFollowIndexRequest, ResumeFollowIndexResponse, ResumeFollowIndexResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IResumeFollowIndexRequest, ResumeFollowIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

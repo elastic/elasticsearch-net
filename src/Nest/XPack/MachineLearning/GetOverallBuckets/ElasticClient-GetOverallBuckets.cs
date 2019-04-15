@@ -52,7 +52,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<GetOverallBucketsResponse> GetOverallBucketsAsync(IGetOverallBucketsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetOverallBucketsRequest, GetOverallBucketsResponse, GetOverallBucketsResponse>
+			DoRequestAsync<IGetOverallBucketsRequest, GetOverallBucketsResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

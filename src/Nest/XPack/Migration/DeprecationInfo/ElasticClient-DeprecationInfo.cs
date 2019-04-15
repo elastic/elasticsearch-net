@@ -54,7 +54,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<DeprecationInfoResponse> DeprecationInfoAsync(IDeprecationInfoRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeprecationInfoRequest, DeprecationInfoResponse, DeprecationInfoResponse>
+			DoRequestAsync<IDeprecationInfoRequest, DeprecationInfoResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

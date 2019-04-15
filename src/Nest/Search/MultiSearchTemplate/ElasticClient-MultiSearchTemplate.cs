@@ -56,7 +56,7 @@ namespace Nest
 		public Task<MultiSearchResponse> MultiSearchTemplateAsync(IMultiSearchTemplateRequest request, CancellationToken ct = default)
 		{
 			CreateMultiSearchTemplateDeserializer(request);
-			return DoRequestAsync<IMultiSearchTemplateRequest, MultiSearchResponse, MultiSearchResponse>(request, request.RequestParameters, ct);
+			return DoRequestAsync<IMultiSearchTemplateRequest, MultiSearchResponse>(request, request.RequestParameters, ct);
 		}
 
 		private void CreateMultiSearchTemplateDeserializer(IMultiSearchTemplateRequest request)

@@ -41,6 +41,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<PutRoleResponse> PutRoleAsync(IPutRoleRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IPutRoleRequest, PutRoleResponse, PutRoleResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IPutRoleRequest, PutRoleResponse>(request, request.RequestParameters, ct);
 	}
 }

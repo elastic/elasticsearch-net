@@ -43,6 +43,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<PutRoleMappingResponse> PutRoleMappingAsync(IPutRoleMappingRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IPutRoleMappingRequest, PutRoleMappingResponse, PutRoleMappingResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IPutRoleMappingRequest, PutRoleMappingResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -45,7 +45,7 @@ namespace Nest
 		public Task<CatResponse<CatHelpRecord>> CatHelpAsync(ICatHelpRequest request, CancellationToken ct = default)
 		{
 			request.RequestParameters.DeserializationOverride = DeserializeCatHelpResponse;
-			return DoRequestAsync<ICatHelpRequest, CatResponse<CatHelpRecord>, CatResponse<CatHelpRecord>>(request, request.RequestParameters, ct);
+			return DoRequestAsync<ICatHelpRequest, CatResponse<CatHelpRecord>>(request, request.RequestParameters, ct);
 		}
 
 		private static CatResponse<CatHelpRecord> DeserializeCatHelpResponse(IApiCallDetails response, Stream stream)

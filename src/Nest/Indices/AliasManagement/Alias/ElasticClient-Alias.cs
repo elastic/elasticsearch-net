@@ -51,7 +51,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<BulkAliasResponse> AliasAsync(IBulkAliasRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IBulkAliasRequest, BulkAliasResponse, BulkAliasResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IBulkAliasRequest, BulkAliasResponse>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
 		public Task<BulkAliasResponse> AliasAsync(Func<BulkAliasDescriptor, IBulkAliasRequest> selector, CancellationToken ct = default) =>

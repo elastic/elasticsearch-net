@@ -49,6 +49,6 @@ namespace Nest
 		public Task<ClusterStatsResponse> ClusterStatsAsync(IClusterStatsRequest request,
 			CancellationToken ct = default
 		) =>
-			DoRequestAsync<IClusterStatsRequest, ClusterStatsResponse, ClusterStatsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IClusterStatsRequest, ClusterStatsResponse>(request, request.RequestParameters, ct);
 	}
 }

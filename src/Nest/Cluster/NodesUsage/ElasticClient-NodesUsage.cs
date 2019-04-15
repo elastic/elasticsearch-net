@@ -49,6 +49,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<NodesUsageResponse> NodesUsageAsync(INodesUsageRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<INodesUsageRequest, NodesUsageResponse, NodesUsageResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<INodesUsageRequest, NodesUsageResponse>(request, request.RequestParameters, ct);
 	}
 }

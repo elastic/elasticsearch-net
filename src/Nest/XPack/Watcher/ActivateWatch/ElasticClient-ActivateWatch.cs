@@ -45,7 +45,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ActivateWatchResponse> ActivateWatchAsync(IActivateWatchRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IActivateWatchRequest, ActivateWatchResponse, ActivateWatchResponse>
+			DoRequestAsync<IActivateWatchRequest, ActivateWatchResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

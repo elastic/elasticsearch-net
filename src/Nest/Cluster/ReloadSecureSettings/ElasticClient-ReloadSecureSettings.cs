@@ -56,6 +56,6 @@ namespace Nest
 
 		/// <inheritdoc cref="ReloadSecureSettings(System.Func{Nest.ReloadSecureSettingsDescriptor,Nest.IReloadSecureSettingsRequest})"/>
 		public Task<ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(IReloadSecureSettingsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IReloadSecureSettingsRequest, ReloadSecureSettingsResponse, ReloadSecureSettingsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IReloadSecureSettingsRequest, ReloadSecureSettingsResponse>(request, request.RequestParameters, ct);
 	}
 }

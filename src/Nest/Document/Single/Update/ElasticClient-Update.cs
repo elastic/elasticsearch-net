@@ -135,6 +135,6 @@ namespace Nest
 		)
 			where TDocument : class
 			where TPartialDocument : class =>
-			DoRequestAsync<IUpdateRequest<TDocument, TPartialDocument>, UpdateResponse<TDocument>, UpdateResponse<TDocument>>(request, request.RequestParameters, ct);
+			DoRequestAsync<IUpdateRequest<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(request, request.RequestParameters, ct);
 	}
 }

@@ -41,6 +41,6 @@ namespace Nest
 
 		/// <inheritdoc cref="DeleteAutoFollowPattern(Name,System.Func{Nest.DeleteAutoFollowPatternDescriptor,Nest.IDeleteAutoFollowPatternRequest})" />
 		public Task<DeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(IDeleteAutoFollowPatternRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeleteAutoFollowPatternRequest, DeleteAutoFollowPatternResponse, DeleteAutoFollowPatternResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteAutoFollowPatternRequest, DeleteAutoFollowPatternResponse>(request, request.RequestParameters, ct);
 	}
 }

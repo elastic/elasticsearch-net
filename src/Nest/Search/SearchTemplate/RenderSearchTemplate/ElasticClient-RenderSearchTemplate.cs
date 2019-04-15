@@ -39,6 +39,6 @@ namespace Nest
 			RenderSearchTemplateAsync(selector.InvokeOrDefault(new RenderSearchTemplateDescriptor()), ct);
 
 		public Task<RenderSearchTemplateResponse> RenderSearchTemplateAsync(IRenderSearchTemplateRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IRenderSearchTemplateRequest, RenderSearchTemplateResponse, RenderSearchTemplateResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IRenderSearchTemplateRequest, RenderSearchTemplateResponse>(request, request.RequestParameters, ct);
 	}
 }

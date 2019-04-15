@@ -48,6 +48,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ClearCacheResponse> ClearCacheAsync(IClearCacheRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IClearCacheRequest, ClearCacheResponse, ClearCacheResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IClearCacheRequest, ClearCacheResponse>(request, request.RequestParameters, ct);
 	}
 }

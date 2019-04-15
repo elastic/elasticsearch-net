@@ -45,6 +45,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<GetCategoriesResponse> GetCategoriesAsync(IGetCategoriesRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetCategoriesRequest, GetCategoriesResponse, GetCategoriesResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetCategoriesRequest, GetCategoriesResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -43,6 +43,6 @@ namespace Nest
 
 		/// <inheritdoc cref="FollowIndexStats(Indices, System.Func{Nest.FollowIndexStatsDescriptor,Nest.IFollowIndexStatsRequest})" />
 		public Task<FollowIndexStatsResponse> FollowIndexStatsAsync(IFollowIndexStatsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IFollowIndexStatsRequest, FollowIndexStatsResponse, FollowIndexStatsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IFollowIndexStatsRequest, FollowIndexStatsResponse>(request, request.RequestParameters, ct);
 	}
 }

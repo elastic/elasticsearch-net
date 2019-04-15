@@ -42,7 +42,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<StopWatcherResponse> StopWatcherAsync(IStopWatcherRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IStopWatcherRequest, StopWatcherResponse, StopWatcherResponse>
+			DoRequestAsync<IStopWatcherRequest, StopWatcherResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

@@ -55,6 +55,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<GetRollupCapabilitiesResponse> GetRollupCapabilitiesAsync(IGetRollupCapabilitiesRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetRollupCapabilitiesRequest, GetRollupCapabilitiesResponse, GetRollupCapabilitiesResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetRollupCapabilitiesRequest, GetRollupCapabilitiesResponse>(request, request.RequestParameters, ct);
 	}
 }

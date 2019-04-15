@@ -50,6 +50,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<SegmentsResponse> SegmentsAsync(ISegmentsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<ISegmentsRequest, SegmentsResponse, SegmentsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ISegmentsRequest, SegmentsResponse>(request, request.RequestParameters, ct);
 	}
 }

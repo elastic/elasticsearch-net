@@ -50,6 +50,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ExistsResponse> IndexExistsAsync(IIndexExistsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IIndexExistsRequest, ExistsResponse, ExistsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IIndexExistsRequest, ExistsResponse>(request, request.RequestParameters, ct);
 	}
 }

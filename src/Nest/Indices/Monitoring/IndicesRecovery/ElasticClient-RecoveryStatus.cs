@@ -44,6 +44,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<RecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IRecoveryStatusRequest, RecoveryStatusResponse, RecoveryStatusResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IRecoveryStatusRequest, RecoveryStatusResponse>(request, request.RequestParameters, ct);
 	}
 }

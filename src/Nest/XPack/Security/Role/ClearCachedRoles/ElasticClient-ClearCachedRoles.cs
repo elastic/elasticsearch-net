@@ -43,6 +43,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ClearCachedRolesResponse> ClearCachedRolesAsync(IClearCachedRolesRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IClearCachedRolesRequest, ClearCachedRolesResponse, ClearCachedRolesResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IClearCachedRolesRequest, ClearCachedRolesResponse>(request, request.RequestParameters, ct);
 	}
 }

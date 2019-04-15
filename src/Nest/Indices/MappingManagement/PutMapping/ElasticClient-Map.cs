@@ -51,6 +51,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<PutMappingResponse> MapAsync(IPutMappingRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IPutMappingRequest, PutMappingResponse, PutMappingResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IPutMappingRequest, PutMappingResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -53,6 +53,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<DeleteRepositoryResponse> DeleteRepositoryAsync(IDeleteRepositoryRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeleteRepositoryRequest, DeleteRepositoryResponse, DeleteRepositoryResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteRepositoryRequest, DeleteRepositoryResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -45,6 +45,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<VerifyRepositoryResponse> VerifyRepositoryAsync(IVerifyRepositoryRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IVerifyRepositoryRequest, VerifyRepositoryResponse, VerifyRepositoryResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IVerifyRepositoryRequest, VerifyRepositoryResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -51,6 +51,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ListTasksResponse> DeleteByQueryRethrottleAsync(IDeleteByQueryRethrottleRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeleteByQueryRethrottleRequest, ListTasksResponse, ListTasksResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteByQueryRethrottleRequest, ListTasksResponse>(request, request.RequestParameters, ct);
 	}
 }

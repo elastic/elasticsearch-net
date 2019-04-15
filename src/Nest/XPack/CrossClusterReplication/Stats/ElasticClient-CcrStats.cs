@@ -44,6 +44,6 @@ namespace Nest
 
 		/// <inheritdoc cref="CcrStats(System.Func{Nest.CcrStatsDescriptor,Nest.ICcrStatsRequest})" />
 		public Task<CcrStatsResponse> CcrStatsAsync(ICcrStatsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<ICcrStatsRequest, CcrStatsResponse, CcrStatsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ICcrStatsRequest, CcrStatsResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -48,6 +48,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<NodesInfoResponse> NodesInfoAsync(INodesInfoRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<INodesInfoRequest, NodesInfoResponse, NodesInfoResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<INodesInfoRequest, NodesInfoResponse>(request, request.RequestParameters, ct);
 	}
 }

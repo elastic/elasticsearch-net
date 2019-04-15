@@ -45,6 +45,6 @@ namespace Nest
 
 		/// <inheritdoc cref="StartBasicLicense(System.Func{Nest.StartBasicLicenseDescriptor,Nest.IStartBasicLicenseRequest})"/>
 		public Task<StartBasicLicenseResponse> StartBasicLicenseAsync(IStartBasicLicenseRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IStartBasicLicenseRequest, StartBasicLicenseResponse, StartBasicLicenseResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IStartBasicLicenseRequest, StartBasicLicenseResponse>(request, request.RequestParameters, ct);
 	}
 }

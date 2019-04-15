@@ -40,6 +40,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<XPackInfoResponse> XPackInfoAsync(IXPackInfoRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IXPackInfoRequest, XPackInfoResponse, XPackInfoResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IXPackInfoRequest, XPackInfoResponse>(request, request.RequestParameters, ct);
 	}
 }

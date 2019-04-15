@@ -45,6 +45,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<OpenJobResponse> OpenJobAsync(IOpenJobRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IOpenJobRequest, OpenJobResponse, OpenJobResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IOpenJobRequest, OpenJobResponse>(request, request.RequestParameters, ct);
 	}
 }

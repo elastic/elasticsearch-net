@@ -46,6 +46,6 @@ namespace Nest
 
 		/// <inheritdoc cref="CreateFollowIndex(IndexName, System.Func{Nest.CreateFollowIndexDescriptor,Nest.ICreateFollowIndexRequest})" />
 		public Task<CreateFollowIndexResponse> CreateFollowIndexAsync(ICreateFollowIndexRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<ICreateFollowIndexRequest, CreateFollowIndexResponse, CreateFollowIndexResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ICreateFollowIndexRequest, CreateFollowIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -45,6 +45,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<GetInfluencersResponse> GetInfluencersAsync(IGetInfluencersRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetInfluencersRequest, GetInfluencersResponse, GetInfluencersResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetInfluencersRequest, GetInfluencersResponse>(request, request.RequestParameters, ct);
 	}
 }

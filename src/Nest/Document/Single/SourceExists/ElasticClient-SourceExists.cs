@@ -55,6 +55,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ExistsResponse> SourceExistsAsync(ISourceExistsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<ISourceExistsRequest, ExistsResponse, ExistsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ISourceExistsRequest, ExistsResponse>(request, request.RequestParameters, ct);
 	}
 }

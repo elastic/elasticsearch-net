@@ -67,7 +67,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<CreateResponse> CreateAsync<TDocument>(ICreateRequest<TDocument> request, CancellationToken ct = default)
 			where TDocument : class =>
-			DoRequestAsync<ICreateRequest<TDocument>, CreateResponse, CreateResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ICreateRequest<TDocument>, CreateResponse>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
 		public CreateResponse CreateDocument<TDocument>(TDocument document) where TDocument : class => Create(document, s => s);

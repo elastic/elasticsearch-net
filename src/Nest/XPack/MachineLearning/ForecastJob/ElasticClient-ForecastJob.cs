@@ -49,6 +49,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ForecastJobResponse> ForecastJobAsync(IForecastJobRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IForecastJobRequest, ForecastJobResponse, ForecastJobResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IForecastJobRequest, ForecastJobResponse>(request, request.RequestParameters, ct);
 	}
 }

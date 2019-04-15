@@ -44,6 +44,6 @@ namespace Nest
 
 		/// <inheritdoc cref="DeletePrivileges(Nest.Name,Nest.Name,System.Func{Nest.DeletePrivilegesDescriptor,Nest.IDeletePrivilegesRequest})" />
 		public Task<DeletePrivilegesResponse> DeletePrivilegesAsync(IDeletePrivilegesRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeletePrivilegesRequest, DeletePrivilegesResponse, DeletePrivilegesResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeletePrivilegesRequest, DeletePrivilegesResponse>(request, request.RequestParameters, ct);
 	}
 }

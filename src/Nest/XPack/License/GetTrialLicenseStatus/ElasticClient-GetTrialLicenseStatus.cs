@@ -66,6 +66,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<GetTrialLicenseStatusResponse> GetTrialLicenseStatusAsync(IGetTrialLicenseStatusRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetTrialLicenseStatusRequest, GetTrialLicenseStatusResponse, GetTrialLicenseStatusResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetTrialLicenseStatusRequest, GetTrialLicenseStatusResponse>(request, request.RequestParameters, ct);
 	}
 }

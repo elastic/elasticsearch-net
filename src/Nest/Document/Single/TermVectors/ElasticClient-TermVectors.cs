@@ -55,6 +55,6 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<TermVectorsResponse> TermVectorsAsync<T>(ITermVectorsRequest<T> request, CancellationToken ct = default)
 			where T : class =>
-			DoRequestAsync<ITermVectorsRequest<T>, TermVectorsResponse, TermVectorsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ITermVectorsRequest<T>, TermVectorsResponse>(request, request.RequestParameters, ct);
 	}
 }

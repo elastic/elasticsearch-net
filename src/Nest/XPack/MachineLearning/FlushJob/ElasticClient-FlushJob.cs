@@ -43,6 +43,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<FlushJobResponse> FlushJobAsync(IFlushJobRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IFlushJobRequest, FlushJobResponse, FlushJobResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IFlushJobRequest, FlushJobResponse>(request, request.RequestParameters, ct);
 	}
 }

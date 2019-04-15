@@ -42,7 +42,7 @@ namespace Nest
 
 		/// <inheritdoc cref="HasPrivileges(System.Func{Nest.HasPrivilegesDescriptor,Nest.IHasPrivilegesRequest})" />
 		public Task<HasPrivilegesResponse> HasPrivilegesAsync(IHasPrivilegesRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IHasPrivilegesRequest, HasPrivilegesResponse, HasPrivilegesResponse>
+			DoRequestAsync<IHasPrivilegesRequest, HasPrivilegesResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

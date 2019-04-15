@@ -40,6 +40,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<GetLicenseResponse> GetLicenseAsync(IGetLicenseRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetLicenseRequest, GetLicenseResponse, GetLicenseResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetLicenseRequest, GetLicenseResponse>(request, request.RequestParameters, ct);
 	}
 }

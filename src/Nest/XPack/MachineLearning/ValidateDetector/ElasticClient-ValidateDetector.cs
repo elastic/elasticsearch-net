@@ -47,7 +47,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<ValidateDetectorResponse> ValidateDetectorAsync(IValidateDetectorRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IValidateDetectorRequest, ValidateDetectorResponse, ValidateDetectorResponse>
+			DoRequestAsync<IValidateDetectorRequest, ValidateDetectorResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

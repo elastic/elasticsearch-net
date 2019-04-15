@@ -45,6 +45,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<DeleteDatafeedResponse> DeleteDatafeedAsync(IDeleteDatafeedRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeleteDatafeedRequest, DeleteDatafeedResponse, DeleteDatafeedResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IDeleteDatafeedRequest, DeleteDatafeedResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -40,6 +40,6 @@ namespace Nest
 
 		/// <inheritdoc cref="PutPrivileges(System.Func{Nest.PutPrivilegesDescriptor,Nest.IPutPrivilegesRequest})" />
 		public Task<PutPrivilegesResponse> PutPrivilegesAsync(IPutPrivilegesRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IPutPrivilegesRequest, PutPrivilegesResponse, PutPrivilegesResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IPutPrivilegesRequest, PutPrivilegesResponse>(request, request.RequestParameters, ct);
 	}
 }

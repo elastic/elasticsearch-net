@@ -104,6 +104,6 @@ namespace Nest
 		)
 			where T : class
 			where TResult : class =>
-			DoRequestAsync<ISearchRequest, SearchResponse<TResult>, SearchResponse<TResult>>(request, request.RequestParameters, cancellationToken);
+			DoRequestAsync<ISearchRequest, SearchResponse<TResult>>(request, request.RequestParameters, cancellationToken);
 	}
 }

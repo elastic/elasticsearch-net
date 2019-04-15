@@ -43,6 +43,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<MachineLearningInfoResponse> MachineLearningInfoAsync(IMachineLearningInfoRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IMachineLearningInfoRequest, MachineLearningInfoResponse, MachineLearningInfoResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IMachineLearningInfoRequest, MachineLearningInfoResponse>(request, request.RequestParameters, ct);
 	}
 }

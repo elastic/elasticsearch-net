@@ -37,6 +37,6 @@ namespace Nest
 		) => PutScriptAsync(selector?.Invoke(new PutScriptDescriptor(id)), ct);
 
 		public Task<PutScriptResponse> PutScriptAsync(IPutScriptRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IPutScriptRequest, PutScriptResponse, PutScriptResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IPutScriptRequest, PutScriptResponse>(request, request.RequestParameters, ct);
 	}
 }
