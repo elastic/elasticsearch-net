@@ -19,7 +19,7 @@ namespace Nest
 
 		public double? MaxScore { get; set; }
 
-		public HitsTotal Total { get; set; }
+		public TotalHits Total { get; set; }
 
 		private IEnumerable<Hit<TDocument>> ConvertHits<TDocument>()
 			where TDocument : class

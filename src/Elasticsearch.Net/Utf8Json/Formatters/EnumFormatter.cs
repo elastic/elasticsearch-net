@@ -158,7 +158,7 @@ namespace Elasticsearch.Net
 
 		static EnumFormatter()
 		{
-			var names = new List<String>();
+			var names = new List<string>();
 			var values = new List<object>();
 
 			var type = typeof(T);

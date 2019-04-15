@@ -96,7 +96,10 @@ namespace Tests.Search.Search
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.Hits.Count().Should().BeGreaterThan(0);
+			response.Total.Should().BeGreaterThan(0);
+			response.Hits.Count.Should().BeGreaterThan(0);
+			response.HitsMetadata.Total.Value.Should().Be(response.Total);
+			response.HitsMetadata.Total.Relation.Should().Be(TotalHitsRelation.EqualTo);
 			response.Hits.First().Should().NotBeNull();
 			response.Hits.First().Source.Should().NotBeNull();
 			response.Aggregations.Count.Should().BeGreaterThan(0);
