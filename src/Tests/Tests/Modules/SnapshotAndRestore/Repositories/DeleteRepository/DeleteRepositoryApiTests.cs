@@ -8,7 +8,7 @@ using Tests.Framework.Integration;
 namespace Tests.Modules.SnapshotAndRestore.Repositories.DeleteRepository
 {
 	public class DeleteRepositoryApiTests
-		: ApiTestBase<ReadOnlyCluster, IDeleteRepositoryResponse, IDeleteRepositoryRequest, DeleteRepositoryDescriptor, DeleteRepositoryRequest>
+		: ApiTestBase<ReadOnlyCluster, DeleteRepositoryResponse, IDeleteRepositoryRequest, DeleteRepositoryDescriptor, DeleteRepositoryRequest>
 	{
 		private static readonly string _name = "repository1";
 

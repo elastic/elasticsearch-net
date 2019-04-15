@@ -8,7 +8,7 @@ using Tests.Framework.Integration;
 namespace Tests.Cluster.ClusterPendingTasks
 {
 	public class ClusterPendingTasksApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IClusterPendingTasksResponse, IClusterPendingTasksRequest, ClusterPendingTasksDescriptor,
+		: ApiIntegrationTestBase<ReadOnlyCluster, ClusterPendingTasksResponse, IClusterPendingTasksRequest, ClusterPendingTasksDescriptor,
 			ClusterPendingTasksRequest>
 	{
 		public ClusterPendingTasksApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -25,6 +25,6 @@ namespace Tests.Cluster.ClusterPendingTasks
 			(client, r) => client.ClusterPendingTasksAsync(r)
 		);
 
-		protected override void ExpectResponse(IClusterPendingTasksResponse response) => response.Tasks.Should().NotBeNull();
+		protected override void ExpectResponse(ClusterPendingTasksResponse response) => response.Tasks.Should().NotBeNull();
 	}
 }

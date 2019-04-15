@@ -11,7 +11,7 @@ using Tests.Framework.Integration;
 namespace Tests.Indices.Monitoring.IndicesStats
 {
 	public class IndicesStatsWithShardsInformationApiTests
-		: ApiIntegrationTestBase<WritableCluster, IIndicesStatsResponse,
+		: ApiIntegrationTestBase<WritableCluster, IndicesStatsResponse,
 			IIndicesStatsRequest, IndicesStatsDescriptor, IndicesStatsRequest>
 	{
 		public IndicesStatsWithShardsInformationApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -46,7 +46,7 @@ namespace Tests.Indices.Monitoring.IndicesStats
 			(client, r) => client.IndicesStatsAsync(r)
 		);
 
-		protected override void ExpectResponse(IIndicesStatsResponse response)
+		protected override void ExpectResponse(IndicesStatsResponse response)
 		{
 			var firstIndex = response.Indices.First().Value;
 			firstIndex.Shards.Should().NotBeNull();

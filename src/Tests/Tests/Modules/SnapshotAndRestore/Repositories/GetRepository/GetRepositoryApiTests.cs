@@ -8,7 +8,7 @@ using Tests.Framework.Integration;
 namespace Tests.Modules.SnapshotAndRestore.Repositories.GetRepository
 {
 	public class GetRepositoryApiTests
-		: ApiTestBase<ReadOnlyCluster, IGetRepositoryResponse, IGetRepositoryRequest, GetRepositoryDescriptor, GetRepositoryRequest>
+		: ApiTestBase<ReadOnlyCluster, GetRepositoryResponse, IGetRepositoryRequest, GetRepositoryDescriptor, GetRepositoryRequest>
 	{
 		private static readonly string _name = "repository1";
 

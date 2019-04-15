@@ -23,41 +23,41 @@ namespace Nest
 		/// <para>3. A property named Id on <typeparamref name="TDocument" /></para>
 		/// </param>
 		/// <param name="selector">Optionally further describe the index operation i.e override type, index, id</param>
-		IIndexResponse IndexDocument<TDocument>(TDocument document) where TDocument : class;
+		IndexResponse IndexDocument<TDocument>(TDocument document) where TDocument : class;
 
-		IIndexResponse Index<TDocument>(TDocument document, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector) where TDocument : class;
+		IndexResponse Index<TDocument>(TDocument document, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector) where TDocument : class;
 
 		/// <inheritdoc />
-		IIndexResponse Index<TDocument>(IIndexRequest<TDocument> request) where TDocument : class;
+		IndexResponse Index<TDocument>(IIndexRequest<TDocument> request) where TDocument : class;
 
-		Task<IIndexResponse> IndexDocumentAsync<T>(T document, CancellationToken ct = default)
+		Task<IndexResponse> IndexDocumentAsync<T>(T document, CancellationToken ct = default)
 			where T : class;
 
 		/// <inheritdoc />
-		Task<IIndexResponse> IndexAsync<TDocument>(
+		Task<IndexResponse> IndexAsync<TDocument>(
 			TDocument document,
 			Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector,
 			CancellationToken cancellationToken = default
 		) where TDocument : class;
 
 		/// <inheritdoc />
-		Task<IIndexResponse> IndexAsync<TDocument>(IIndexRequest<TDocument> request, CancellationToken ct = default)
+		Task<IndexResponse> IndexAsync<TDocument>(IIndexRequest<TDocument> request, CancellationToken ct = default)
 			where TDocument : class;
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IIndexResponse Index<TDocument>(TDocument document, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector)
+		public IndexResponse Index<TDocument>(TDocument document, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector)
 			where TDocument : class =>
 			Index(selector?.InvokeOrDefault(new IndexDescriptor<TDocument>(document)));
 
 		/// <inheritdoc />
-		public IIndexResponse Index<TDocument>(IIndexRequest<TDocument> request) where TDocument : class =>
+		public IndexResponse Index<TDocument>(IIndexRequest<TDocument> request) where TDocument : class =>
 			DoRequest<IIndexRequest<TDocument>, IndexResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IIndexResponse> IndexAsync<TDocument>(
+		public Task<IndexResponse> IndexAsync<TDocument>(
 			TDocument document,
 			Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector,
 			CancellationToken cancellationToken = default
@@ -66,15 +66,15 @@ namespace Nest
 			IndexAsync(selector?.InvokeOrDefault(new IndexDescriptor<TDocument>(document)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IIndexResponse> IndexAsync<TDocument>(IIndexRequest<TDocument> request, CancellationToken ct = default)
+		public Task<IndexResponse> IndexAsync<TDocument>(IIndexRequest<TDocument> request, CancellationToken ct = default)
 			where TDocument : class =>
-			DoRequestAsync<IIndexRequest<TDocument>, IIndexResponse, IndexResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IIndexRequest<TDocument>, IndexResponse, IndexResponse>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
-		public IIndexResponse IndexDocument<TDocument>(TDocument document) where TDocument : class => Index(document, s => s);
+		public IndexResponse IndexDocument<TDocument>(TDocument document) where TDocument : class => Index(document, s => s);
 
 		/// <inheritdoc />
-		public Task<IIndexResponse> IndexDocumentAsync<TDocument>(TDocument document, CancellationToken ct = default)
+		public Task<IndexResponse> IndexDocumentAsync<TDocument>(TDocument document, CancellationToken ct = default)
 			where TDocument : class =>
 			IndexAsync(document, s => s, ct);
 	}

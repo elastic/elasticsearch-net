@@ -4,14 +4,8 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[InterfaceDataContract]
-	public interface IRecoveryStatusResponse : IResponse
-	{
-		IReadOnlyDictionary<IndexName, RecoveryStatus> Indices { get; }
-	}
-
 	[JsonFormatter(typeof(ResolvableDictionaryResponseFormatter<RecoveryStatusResponse, IndexName, RecoveryStatus>))]
-	public class RecoveryStatusResponse : DictionaryResponseBase<IndexName, RecoveryStatus>, IRecoveryStatusResponse
+	public class RecoveryStatusResponse : DictionaryResponseBase<IndexName, RecoveryStatus>
 	{
 		[IgnoreDataMember]
 		public IReadOnlyDictionary<IndexName, RecoveryStatus> Indices => Self.BackingDictionary;

@@ -14,7 +14,7 @@ namespace Tests.XPack.Security.ClearCachedRealms
 {
 	[SkipVersion("<2.3.0", "")]
 	public class ClearCachedRealmsApiTests
-		: ApiIntegrationTestBase<XPackCluster, IClearCachedRealmsResponse, IClearCachedRealmsRequest, ClearCachedRealmsDescriptor,
+		: ApiIntegrationTestBase<XPackCluster, ClearCachedRealmsResponse, IClearCachedRealmsRequest, ClearCachedRealmsDescriptor,
 			ClearCachedRealmsRequest>
 	{
 		public ClearCachedRealmsApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -43,7 +43,7 @@ namespace Tests.XPack.Security.ClearCachedRealms
 
 		protected override ClearCachedRealmsDescriptor NewDescriptor() => new ClearCachedRealmsDescriptor(Realm);
 
-		protected override void ExpectResponse(IClearCachedRealmsResponse response)
+		protected override void ExpectResponse(ClearCachedRealmsResponse response)
 		{
 			response.ClusterName.Should().NotBeNullOrWhiteSpace();
 			response.Nodes.Should().NotBeEmpty().And.HaveCount(1);

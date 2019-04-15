@@ -4,14 +4,9 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IRemoteInfoResponse : IResponse
-	{
-		IReadOnlyDictionary<string, RemoteInfo> Remotes { get; }
-	}
-
 	[DataContract]
 	[JsonFormatter(typeof(DictionaryResponseFormatter<RemoteInfoResponse, string, RemoteInfo>))]
-	public class RemoteInfoResponse : DictionaryResponseBase<string, RemoteInfo>, IRemoteInfoResponse
+	public class RemoteInfoResponse : DictionaryResponseBase<string, RemoteInfo>
 	{
 		[IgnoreDataMember]
 		public IReadOnlyDictionary<string, RemoteInfo> Remotes => Self.BackingDictionary;

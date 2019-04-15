@@ -13,38 +13,38 @@ namespace Nest
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-analyze.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the analyze operation</param>
-		IAnalyzeResponse Analyze(Func<AnalyzeDescriptor, IAnalyzeRequest> selector);
+		AnalyzeResponse Analyze(Func<AnalyzeDescriptor, IAnalyzeRequest> selector);
 
 		/// <inheritdoc />
-		IAnalyzeResponse Analyze(IAnalyzeRequest request);
+		AnalyzeResponse Analyze(IAnalyzeRequest request);
 
 		/// <inheritdoc />
-		Task<IAnalyzeResponse> AnalyzeAsync(Func<AnalyzeDescriptor, IAnalyzeRequest> selector,
+		Task<AnalyzeResponse> AnalyzeAsync(Func<AnalyzeDescriptor, IAnalyzeRequest> selector,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest request, CancellationToken ct = default);
+		Task<AnalyzeResponse> AnalyzeAsync(IAnalyzeRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IAnalyzeResponse Analyze(Func<AnalyzeDescriptor, IAnalyzeRequest> selector) =>
+		public AnalyzeResponse Analyze(Func<AnalyzeDescriptor, IAnalyzeRequest> selector) =>
 			Analyze(selector?.Invoke(new AnalyzeDescriptor()));
 
 		/// <inheritdoc />
-		public IAnalyzeResponse Analyze(IAnalyzeRequest request) =>
+		public AnalyzeResponse Analyze(IAnalyzeRequest request) =>
 			DoRequest<IAnalyzeRequest, AnalyzeResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IAnalyzeResponse> AnalyzeAsync(
+		public Task<AnalyzeResponse> AnalyzeAsync(
 			Func<AnalyzeDescriptor, IAnalyzeRequest> selector,
 			CancellationToken ct = default
 		) => AnalyzeAsync(selector?.Invoke(new AnalyzeDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IAnalyzeRequest, IAnalyzeResponse, AnalyzeResponse>(request, request.RequestParameters, ct);
+		public Task<AnalyzeResponse> AnalyzeAsync(IAnalyzeRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IAnalyzeRequest, AnalyzeResponse, AnalyzeResponse>(request, request.RequestParameters, ct);
 	}
 }

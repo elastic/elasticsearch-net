@@ -8,7 +8,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.MachineLearning.DeleteJob
 {
-	public class DeleteJobApiTests : MachineLearningIntegrationTestBase<IDeleteJobResponse, IDeleteJobRequest, DeleteJobDescriptor, DeleteJobRequest>
+	public class DeleteJobApiTests : MachineLearningIntegrationTestBase<DeleteJobResponse, IDeleteJobRequest, DeleteJobDescriptor, DeleteJobRequest>
 	{
 		public DeleteJobApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -34,6 +34,6 @@ namespace Tests.XPack.MachineLearning.DeleteJob
 
 		protected override DeleteJobDescriptor NewDescriptor() => new DeleteJobDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(IDeleteJobResponse response) => response.Acknowledged.Should().BeTrue();
+		protected override void ExpectResponse(DeleteJobResponse response) => response.Acknowledged.Should().BeTrue();
 	}
 }

@@ -12,7 +12,7 @@ namespace Tests.XPack.Security.User.GetUserAccessToken
 {
 	[SkipVersion("<5.5.0", "")]
 	public class GetUserAccessTokenApiTests
-		: ApiIntegrationTestBase<XPackCluster, IGetUserAccessTokenResponse, IGetUserAccessTokenRequest,
+		: ApiIntegrationTestBase<XPackCluster, GetUserAccessTokenResponse, IGetUserAccessTokenRequest,
 			GetUserAccessTokenDescriptor, GetUserAccessTokenRequest>
 	{
 		public GetUserAccessTokenApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -57,7 +57,7 @@ namespace Tests.XPack.Security.User.GetUserAccessToken
 
 		protected override GetUserAccessTokenDescriptor NewDescriptor() => new GetUserAccessTokenDescriptor(Admin.Username, UserPassword);
 
-		protected override void ExpectResponse(IGetUserAccessTokenResponse response)
+		protected override void ExpectResponse(GetUserAccessTokenResponse response)
 		{
 			response.AccessToken.Should().NotBeNullOrEmpty();
 			response.Type.Should().NotBeNullOrEmpty().And.Be("Bearer");
@@ -74,6 +74,6 @@ namespace Tests.XPack.Security.User.GetUserAccessToken
 		protected override int ExpectStatusCode => 401;
 		protected override string UserPassword => "bad_password";
 
-		protected override void ExpectResponse(IGetUserAccessTokenResponse response) => response.ServerError.Should().NotBeNull();
+		protected override void ExpectResponse(GetUserAccessTokenResponse response) => response.ServerError.Should().NotBeNull();
 	}
 }

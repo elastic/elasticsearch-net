@@ -13,21 +13,21 @@ namespace Nest
 		/// <remarks>
 		/// You cannot delete the active model snapshot, unless you first revert to a different one.
 		/// </remarks>
-		IDeleteModelSnapshotResponse DeleteModelSnapshot(Id jobId, Id snapshotId,
+		DeleteModelSnapshotResponse DeleteModelSnapshot(Id jobId, Id snapshotId,
 			Func<DeleteModelSnapshotDescriptor, IDeleteModelSnapshotRequest> selector = null
 		);
 
 		/// <inheritdoc />
-		IDeleteModelSnapshotResponse DeleteModelSnapshot(IDeleteModelSnapshotRequest request);
+		DeleteModelSnapshotResponse DeleteModelSnapshot(IDeleteModelSnapshotRequest request);
 
 		/// <inheritdoc />
-		Task<IDeleteModelSnapshotResponse> DeleteModelSnapshotAsync(Id jobId, Id snapshotId,
+		Task<DeleteModelSnapshotResponse> DeleteModelSnapshotAsync(Id jobId, Id snapshotId,
 			Func<DeleteModelSnapshotDescriptor, IDeleteModelSnapshotRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IDeleteModelSnapshotResponse> DeleteModelSnapshotAsync(IDeleteModelSnapshotRequest request,
+		Task<DeleteModelSnapshotResponse> DeleteModelSnapshotAsync(IDeleteModelSnapshotRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -35,18 +35,18 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IDeleteModelSnapshotResponse DeleteModelSnapshot(
+		public DeleteModelSnapshotResponse DeleteModelSnapshot(
 			Id jobId,
 			Id snapshotId,
 			Func<DeleteModelSnapshotDescriptor, IDeleteModelSnapshotRequest> selector = null
 		) => DeleteModelSnapshot(selector.InvokeOrDefault(new DeleteModelSnapshotDescriptor(jobId, snapshotId)));
 
 		/// <inheritdoc />
-		public IDeleteModelSnapshotResponse DeleteModelSnapshot(IDeleteModelSnapshotRequest request) =>
+		public DeleteModelSnapshotResponse DeleteModelSnapshot(IDeleteModelSnapshotRequest request) =>
 			DoRequest<IDeleteModelSnapshotRequest, DeleteModelSnapshotResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IDeleteModelSnapshotResponse> DeleteModelSnapshotAsync(
+		public Task<DeleteModelSnapshotResponse> DeleteModelSnapshotAsync(
 			Id jobId,
 			Id snapshotId,
 			Func<DeleteModelSnapshotDescriptor, IDeleteModelSnapshotRequest> selector = null,
@@ -54,7 +54,7 @@ namespace Nest
 		) => DeleteModelSnapshotAsync(selector.InvokeOrDefault(new DeleteModelSnapshotDescriptor(jobId, snapshotId)), ct);
 
 		/// <inheritdoc />
-		public Task<IDeleteModelSnapshotResponse> DeleteModelSnapshotAsync(IDeleteModelSnapshotRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeleteModelSnapshotRequest, IDeleteModelSnapshotResponse, DeleteModelSnapshotResponse>(request, request.RequestParameters, ct);
+		public Task<DeleteModelSnapshotResponse> DeleteModelSnapshotAsync(IDeleteModelSnapshotRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeleteModelSnapshotRequest, DeleteModelSnapshotResponse, DeleteModelSnapshotResponse>(request, request.RequestParameters, ct);
 	}
 }

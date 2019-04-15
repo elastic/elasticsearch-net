@@ -17,7 +17,7 @@ namespace Tests.XPack.CrossClusterReplication.AutoFollow.GetAutoFollowPattern
 		+ "for cluster [remote-cluster]]; nested: ConnectTransportException[[][127.0.0.1:9300] general node "
 		+ "connection failure]; nested: TransportException[handshake failed because connection reset];")]
 	public class GetAutoFollowPatternApiTests
-		: ApiIntegrationTestBase<XPackCluster, IGetAutoFollowPatternResponse, IGetAutoFollowPatternRequest, GetAutoFollowPatternDescriptor,
+		: ApiIntegrationTestBase<XPackCluster, GetAutoFollowPatternResponse, IGetAutoFollowPatternRequest, GetAutoFollowPatternDescriptor,
 			GetAutoFollowPatternRequest>
 	{
 		public GetAutoFollowPatternApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -72,7 +72,7 @@ namespace Tests.XPack.CrossClusterReplication.AutoFollow.GetAutoFollowPattern
 			deleteAutoFollowPattern.ShouldBeValid();
 		}
 
-		protected override void ExpectResponse(IGetAutoFollowPatternResponse response)
+		protected override void ExpectResponse(GetAutoFollowPatternResponse response)
 		{
 			response.Patterns.Should().NotBeNull().And.ContainKeys(AutoPattern("getauto-1"), AutoPattern("getauto-2"));
 			foreach (var autoPattern in response.Patterns.Values)

@@ -13,40 +13,40 @@ namespace Nest
 		/// <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-state.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-state.html</a>
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the cluster state operation</param>
-		IClusterStateResponse ClusterState(Func<ClusterStateDescriptor, IClusterStateRequest> selector = null);
+		ClusterStateResponse ClusterState(Func<ClusterStateDescriptor, IClusterStateRequest> selector = null);
 
 		/// <inheritdoc />
-		IClusterStateResponse ClusterState(IClusterStateRequest request);
+		ClusterStateResponse ClusterState(IClusterStateRequest request);
 
 		/// <inheritdoc />
-		Task<IClusterStateResponse> ClusterStateAsync(Func<ClusterStateDescriptor, IClusterStateRequest> selector = null,
+		Task<ClusterStateResponse> ClusterStateAsync(Func<ClusterStateDescriptor, IClusterStateRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IClusterStateResponse> ClusterStateAsync(IClusterStateRequest request, CancellationToken ct = default);
+		Task<ClusterStateResponse> ClusterStateAsync(IClusterStateRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IClusterStateResponse ClusterState(Func<ClusterStateDescriptor, IClusterStateRequest> selector = null) =>
+		public ClusterStateResponse ClusterState(Func<ClusterStateDescriptor, IClusterStateRequest> selector = null) =>
 			ClusterState(selector.InvokeOrDefault(new ClusterStateDescriptor()));
 
 		/// <inheritdoc />
-		public IClusterStateResponse ClusterState(IClusterStateRequest request) =>
+		public ClusterStateResponse ClusterState(IClusterStateRequest request) =>
 			DoRequest<IClusterStateRequest, ClusterStateResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IClusterStateResponse> ClusterStateAsync(Func<ClusterStateDescriptor, IClusterStateRequest> selector = null,
+		public Task<ClusterStateResponse> ClusterStateAsync(Func<ClusterStateDescriptor, IClusterStateRequest> selector = null,
 			CancellationToken ct = default
 		) =>
 			ClusterStateAsync(selector.InvokeOrDefault(new ClusterStateDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IClusterStateResponse> ClusterStateAsync(IClusterStateRequest request,
+		public Task<ClusterStateResponse> ClusterStateAsync(IClusterStateRequest request,
 			CancellationToken ct = default
 		) =>
-			DoRequestAsync<IClusterStateRequest, IClusterStateResponse, ClusterStateResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IClusterStateRequest, ClusterStateResponse, ClusterStateResponse>(request, request.RequestParameters, ct);
 	}
 }

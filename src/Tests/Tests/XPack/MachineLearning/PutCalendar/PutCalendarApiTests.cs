@@ -11,7 +11,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.PutCalendar
 {
 	[SkipVersion("<6.4.0", "Calendar functions for machine learning introduced in 6.4.0")]
-	public class PutCalendarApiTests : MachineLearningIntegrationTestBase<IPutCalendarResponse, IPutCalendarRequest, PutCalendarDescriptor, PutCalendarRequest>
+	public class PutCalendarApiTests : MachineLearningIntegrationTestBase<PutCalendarResponse, IPutCalendarRequest, PutCalendarDescriptor, PutCalendarRequest>
 	{
 		public PutCalendarApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -47,7 +47,7 @@ namespace Tests.XPack.MachineLearning.PutCalendar
 
 		protected override PutCalendarDescriptor NewDescriptor() => new PutCalendarDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(IPutCalendarResponse response)
+		protected override void ExpectResponse(PutCalendarResponse response)
 		{
 			response.ShouldBeValid();
 

@@ -16,7 +16,7 @@ namespace Tests.QueryDsl.Geo
 {
 	public abstract class GeoShapeSerializationTestsBase
 		: ApiIntegrationTestBase<IntrusiveOperationCluster,
-			ISearchResponse<Domain.Shape>,
+			SearchResponse<Domain.Shape>,
 			ISearchRequest,
 			SearchDescriptor<Domain.Shape>,
 			SearchRequest<Domain.Shape>>
@@ -94,7 +94,7 @@ namespace Tests.QueryDsl.Geo
 			(client, r) => client.SearchAsync<Domain.Shape>(r)
 		);
 
-		protected override void ExpectResponse(ISearchResponse<Domain.Shape> response)
+		protected override void ExpectResponse(SearchResponse<Domain.Shape> response)
 		{
 			response.IsValid.Should().BeTrue();
 			response.Documents.Count.Should().Be(10);
@@ -210,7 +210,7 @@ namespace Tests.QueryDsl.Geo
 				throw new Exception($"Error indexing shapes for integration test: {bulkResponse.DebugInformation}");
 		}
 
-		protected override void ExpectResponse(ISearchResponse<Domain.Shape> response)
+		protected override void ExpectResponse(SearchResponse<Domain.Shape> response)
 		{
 			base.ExpectResponse(response);
 

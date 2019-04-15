@@ -14,40 +14,40 @@ namespace Nest
 		/// <remarks>
 		/// Deleting a watch does not delete any watch execution records related to this watch from the watch history.
 		/// </remarks>
-		IDeleteWatchResponse DeleteWatch(Id watchId, Func<DeleteWatchDescriptor, IDeleteWatchRequest> selector = null);
+		DeleteWatchResponse DeleteWatch(Id watchId, Func<DeleteWatchDescriptor, IDeleteWatchRequest> selector = null);
 
 		/// <inheritdoc />
-		IDeleteWatchResponse DeleteWatch(IDeleteWatchRequest request);
+		DeleteWatchResponse DeleteWatch(IDeleteWatchRequest request);
 
 		/// <inheritdoc />
-		Task<IDeleteWatchResponse> DeleteWatchAsync(Id watchId, Func<DeleteWatchDescriptor, IDeleteWatchRequest> selector = null,
+		Task<DeleteWatchResponse> DeleteWatchAsync(Id watchId, Func<DeleteWatchDescriptor, IDeleteWatchRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IDeleteWatchResponse> DeleteWatchAsync(IDeleteWatchRequest request, CancellationToken ct = default);
+		Task<DeleteWatchResponse> DeleteWatchAsync(IDeleteWatchRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IDeleteWatchResponse DeleteWatch(Id watchId, Func<DeleteWatchDescriptor, IDeleteWatchRequest> selector = null) =>
+		public DeleteWatchResponse DeleteWatch(Id watchId, Func<DeleteWatchDescriptor, IDeleteWatchRequest> selector = null) =>
 			DeleteWatch(selector.InvokeOrDefault(new DeleteWatchDescriptor(watchId)));
 
 		/// <inheritdoc />
-		public IDeleteWatchResponse DeleteWatch(IDeleteWatchRequest request) =>
+		public DeleteWatchResponse DeleteWatch(IDeleteWatchRequest request) =>
 			DoRequest<IDeleteWatchRequest, DeleteWatchResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IDeleteWatchResponse> DeleteWatchAsync(
+		public Task<DeleteWatchResponse> DeleteWatchAsync(
 			Id watchId,
 			Func<DeleteWatchDescriptor, IDeleteWatchRequest> selector = null,
 			CancellationToken ct = default
 		) => DeleteWatchAsync(selector.InvokeOrDefault(new DeleteWatchDescriptor(watchId)), ct);
 
 		/// <inheritdoc />
-		public Task<IDeleteWatchResponse> DeleteWatchAsync(IDeleteWatchRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeleteWatchRequest, IDeleteWatchResponse, DeleteWatchResponse>
+		public Task<DeleteWatchResponse> DeleteWatchAsync(IDeleteWatchRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeleteWatchRequest, DeleteWatchResponse, DeleteWatchResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

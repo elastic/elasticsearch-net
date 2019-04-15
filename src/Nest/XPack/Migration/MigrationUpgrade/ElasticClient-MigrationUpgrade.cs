@@ -11,19 +11,19 @@ namespace Nest
 		/// Performs the upgrade of internal indices to make them compatible with the next major version.
 		/// Indices must be upgraded one at a time.
 		/// </summary>
-		IMigrationUpgradeResponse MigrationUpgrade(IndexName index, Func<MigrationUpgradeDescriptor, IMigrationUpgradeRequest> selector = null);
+		MigrationUpgradeResponse MigrationUpgrade(IndexName index, Func<MigrationUpgradeDescriptor, IMigrationUpgradeRequest> selector = null);
 
 		/// <summary>
 		/// Performs the upgrade of internal indices to make them compatible with the next major version.
 		/// Indices must be upgraded one at a time.
 		/// </summary>
-		IMigrationUpgradeResponse MigrationUpgrade(IMigrationUpgradeRequest request);
+		MigrationUpgradeResponse MigrationUpgrade(IMigrationUpgradeRequest request);
 
 		/// <summary>
 		/// Performs the upgrade of internal indices to make them compatible with the next major version.
 		/// Indices must be upgraded one at a time.
 		/// </summary>
-		Task<IMigrationUpgradeResponse> MigrationUpgradeAsync(IndexName index,
+		Task<MigrationUpgradeResponse> MigrationUpgradeAsync(IndexName index,
 			Func<MigrationUpgradeDescriptor, IMigrationUpgradeRequest> selector = null,
 			CancellationToken ct = default
 		);
@@ -32,7 +32,7 @@ namespace Nest
 		/// Performs the upgrade of internal indices to make them compatible with the next major version.
 		/// Indices must be upgraded one at a time.
 		/// </summary>
-		Task<IMigrationUpgradeResponse> MigrationUpgradeAsync(IMigrationUpgradeRequest request,
+		Task<MigrationUpgradeResponse> MigrationUpgradeAsync(IMigrationUpgradeRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -40,23 +40,23 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IMigrationUpgradeResponse MigrationUpgrade(IndexName index, Func<MigrationUpgradeDescriptor, IMigrationUpgradeRequest> selector = null) =>
+		public MigrationUpgradeResponse MigrationUpgrade(IndexName index, Func<MigrationUpgradeDescriptor, IMigrationUpgradeRequest> selector = null) =>
 			MigrationUpgrade(selector.InvokeOrDefault(new MigrationUpgradeDescriptor(index)));
 
 		/// <inheritdoc />
-		public IMigrationUpgradeResponse MigrationUpgrade(IMigrationUpgradeRequest request) =>
+		public MigrationUpgradeResponse MigrationUpgrade(IMigrationUpgradeRequest request) =>
 			DoRequest<IMigrationUpgradeRequest, MigrationUpgradeResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IMigrationUpgradeResponse> MigrationUpgradeAsync(
+		public Task<MigrationUpgradeResponse> MigrationUpgradeAsync(
 			IndexName index,
 			Func<MigrationUpgradeDescriptor, IMigrationUpgradeRequest> selector = null,
 			CancellationToken ct = default
 		) => MigrationUpgradeAsync(selector.InvokeOrDefault(new MigrationUpgradeDescriptor(index)), ct);
 
 		/// <inheritdoc />
-		public Task<IMigrationUpgradeResponse> MigrationUpgradeAsync(IMigrationUpgradeRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IMigrationUpgradeRequest, IMigrationUpgradeResponse, MigrationUpgradeResponse>
+		public Task<MigrationUpgradeResponse> MigrationUpgradeAsync(IMigrationUpgradeRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IMigrationUpgradeRequest, MigrationUpgradeResponse, MigrationUpgradeResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

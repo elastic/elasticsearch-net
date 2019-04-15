@@ -2,7 +2,5 @@
 
 namespace Nest
 {
-	public interface IStopWatcherResponse : IAcknowledgedResponse { }
-
-	public class StopWatcherResponse : AcknowledgedResponseBase, IStopWatcherResponse { }
+	public class StopWatcherResponse : AcknowledgedResponseBase { }
 }

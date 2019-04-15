@@ -10,7 +10,7 @@ namespace Tests.Cluster.ReloadSecureSettings
 {
 	[SkipVersion("<6.5.0", "")]
 	public class ReloadSecureSettingsApiTests
-		: ApiIntegrationTestBase<IntrusiveOperationCluster, IReloadSecureSettingsResponse, IReloadSecureSettingsRequest, ReloadSecureSettingsDescriptor, ReloadSecureSettingsRequest>
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, ReloadSecureSettingsResponse, IReloadSecureSettingsRequest, ReloadSecureSettingsDescriptor, ReloadSecureSettingsRequest>
 	{
 		public ReloadSecureSettingsApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -26,7 +26,7 @@ namespace Tests.Cluster.ReloadSecureSettings
 			(client, r) => client.ReloadSecureSettingsAsync(r)
 		);
 
-		protected override void ExpectResponse(IReloadSecureSettingsResponse response)
+		protected override void ExpectResponse(ReloadSecureSettingsResponse response)
 		{
 			response.Nodes.Should().NotBeEmpty();
 			response.NodeStatistics.Should().NotBeNull();

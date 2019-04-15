@@ -15,40 +15,40 @@ namespace Nest
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html#alias-retrieving
 		/// </summary>
 		/// <param name="selector">A descriptor that describes which aliases/indexes we are interested int</param>
-		IGetAliasResponse GetAlias(Func<GetAliasDescriptor, IGetAliasRequest> selector = null);
+		GetAliasResponse GetAlias(Func<GetAliasDescriptor, IGetAliasRequest> selector = null);
 
 		/// <inheritdoc />
-		IGetAliasResponse GetAlias(IGetAliasRequest request);
+		GetAliasResponse GetAlias(IGetAliasRequest request);
 
 		/// <inheritdoc />
-		Task<IGetAliasResponse> GetAliasAsync(
+		Task<GetAliasResponse> GetAliasAsync(
 			Func<GetAliasDescriptor, IGetAliasRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IGetAliasResponse> GetAliasAsync(IGetAliasRequest request, CancellationToken ct = default);
+		Task<GetAliasResponse> GetAliasAsync(IGetAliasRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IGetAliasResponse GetAlias(Func<GetAliasDescriptor, IGetAliasRequest> selector = null) =>
+		public GetAliasResponse GetAlias(Func<GetAliasDescriptor, IGetAliasRequest> selector = null) =>
 			GetAlias(selector.InvokeOrDefault(new GetAliasDescriptor()));
 
 		/// <inheritdoc />
-		public IGetAliasResponse GetAlias(IGetAliasRequest request) =>
+		public GetAliasResponse GetAlias(IGetAliasRequest request) =>
 			DoRequest<IGetAliasRequest, GetAliasResponse>(request, request.RequestParameters, r => AcceptAllStatusCodesHandler(r));
 
 		/// <inheritdoc />
-		public Task<IGetAliasResponse> GetAliasAsync(
+		public Task<GetAliasResponse> GetAliasAsync(
 			Func<GetAliasDescriptor, IGetAliasRequest> selector = null,
 			CancellationToken ct = default
 		) => GetAliasAsync(selector.InvokeOrDefault(new GetAliasDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IGetAliasResponse> GetAliasAsync(IGetAliasRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetAliasRequest, IGetAliasResponse, GetAliasResponse>
+		public Task<GetAliasResponse> GetAliasAsync(IGetAliasRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetAliasRequest, GetAliasResponse, GetAliasResponse>
 				(request, request.RequestParameters, ct, r => AcceptAllStatusCodesHandler(r));
 	}
 }

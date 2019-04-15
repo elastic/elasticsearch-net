@@ -10,18 +10,18 @@ namespace Nest
 		/// <summary>
 		/// Activates a currently inactive watch.
 		/// </summary>
-		IActivateWatchResponse ActivateWatch(Id id, Func<ActivateWatchDescriptor, IActivateWatchRequest> selector = null);
+		ActivateWatchResponse ActivateWatch(Id id, Func<ActivateWatchDescriptor, IActivateWatchRequest> selector = null);
 
 		/// <inheritdoc />
-		IActivateWatchResponse ActivateWatch(IActivateWatchRequest request);
+		ActivateWatchResponse ActivateWatch(IActivateWatchRequest request);
 
 		/// <inheritdoc />
-		Task<IActivateWatchResponse> ActivateWatchAsync(Id id, Func<ActivateWatchDescriptor, IActivateWatchRequest> selector = null,
+		Task<ActivateWatchResponse> ActivateWatchAsync(Id id, Func<ActivateWatchDescriptor, IActivateWatchRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IActivateWatchResponse> ActivateWatchAsync(IActivateWatchRequest request,
+		Task<ActivateWatchResponse> ActivateWatchAsync(IActivateWatchRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -29,23 +29,23 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IActivateWatchResponse ActivateWatch(Id id, Func<ActivateWatchDescriptor, IActivateWatchRequest> selector = null) =>
+		public ActivateWatchResponse ActivateWatch(Id id, Func<ActivateWatchDescriptor, IActivateWatchRequest> selector = null) =>
 			ActivateWatch(selector.InvokeOrDefault(new ActivateWatchDescriptor(id)));
 
 		/// <inheritdoc />
-		public IActivateWatchResponse ActivateWatch(IActivateWatchRequest request) =>
+		public ActivateWatchResponse ActivateWatch(IActivateWatchRequest request) =>
 			DoRequest<IActivateWatchRequest, ActivateWatchResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IActivateWatchResponse> ActivateWatchAsync(
+		public Task<ActivateWatchResponse> ActivateWatchAsync(
 			Id id,
 			Func<ActivateWatchDescriptor, IActivateWatchRequest> selector = null,
 			CancellationToken ct = default
 		) => ActivateWatchAsync(selector.InvokeOrDefault(new ActivateWatchDescriptor(id)), ct);
 
 		/// <inheritdoc />
-		public Task<IActivateWatchResponse> ActivateWatchAsync(IActivateWatchRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IActivateWatchRequest, IActivateWatchResponse, ActivateWatchResponse>
+		public Task<ActivateWatchResponse> ActivateWatchAsync(IActivateWatchRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IActivateWatchRequest, ActivateWatchResponse, ActivateWatchResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

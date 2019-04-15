@@ -22,25 +22,25 @@ namespace Nest
 		/// <para>3. A property named Id on <typeparamref name="TDocument" /></para>
 		/// </param>
 		/// <param name="selector">Optionally further describe the create operation i.e override type/index/id</param>
-		ICreateResponse CreateDocument<TDocument>(TDocument document) where TDocument : class;
+		CreateResponse CreateDocument<TDocument>(TDocument document) where TDocument : class;
 
-		ICreateResponse Create<TDocument>(TDocument document, Func<CreateDescriptor<TDocument>, ICreateRequest<TDocument>> selector)
+		CreateResponse Create<TDocument>(TDocument document, Func<CreateDescriptor<TDocument>, ICreateRequest<TDocument>> selector)
 			where TDocument : class;
 
 		/// <inheritdoc />
-		ICreateResponse Create<TDocument>(ICreateRequest<TDocument> request) where TDocument : class;
+		CreateResponse Create<TDocument>(ICreateRequest<TDocument> request) where TDocument : class;
 
 		/// <inheritdoc />
-		Task<ICreateResponse> CreateDocumentAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
+		Task<CreateResponse> CreateDocumentAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
 			where TDocument : class;
 
-		Task<ICreateResponse> CreateAsync<TDocument>(
+		Task<CreateResponse> CreateAsync<TDocument>(
 			TDocument document, Func<CreateDescriptor<TDocument>, ICreateRequest<TDocument>> selector,
 			CancellationToken ct = default
 		) where TDocument : class;
 
 		/// <inheritdoc />
-		Task<ICreateResponse> CreateAsync<TDocument>(ICreateRequest<TDocument> request,
+		Task<CreateResponse> CreateAsync<TDocument>(ICreateRequest<TDocument> request,
 			CancellationToken ct = default
 		)
 			where TDocument : class;
@@ -48,16 +48,16 @@ namespace Nest
 
 	public partial class ElasticClient
 	{
-		public ICreateResponse Create<TDocument>(TDocument document, Func<CreateDescriptor<TDocument>, ICreateRequest<TDocument>> selector)
+		public CreateResponse Create<TDocument>(TDocument document, Func<CreateDescriptor<TDocument>, ICreateRequest<TDocument>> selector)
 			where TDocument :
 			class => Create(selector?.InvokeOrDefault(new CreateDescriptor<TDocument>(document)));
 
 		/// <inheritdoc />
-		public ICreateResponse Create<TDocument>(ICreateRequest<TDocument> request) where TDocument : class =>
+		public CreateResponse Create<TDocument>(ICreateRequest<TDocument> request) where TDocument : class =>
 			DoRequest<ICreateRequest<TDocument>, CreateResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<ICreateResponse> CreateAsync<TDocument>(
+		public Task<CreateResponse> CreateAsync<TDocument>(
 			TDocument document,
 			Func<CreateDescriptor<TDocument>, ICreateRequest<TDocument>> selector,
 			CancellationToken ct = default
@@ -65,15 +65,15 @@ namespace Nest
 			CreateAsync(selector?.InvokeOrDefault(new CreateDescriptor<TDocument>(document)), ct);
 
 		/// <inheritdoc />
-		public Task<ICreateResponse> CreateAsync<TDocument>(ICreateRequest<TDocument> request, CancellationToken ct = default)
+		public Task<CreateResponse> CreateAsync<TDocument>(ICreateRequest<TDocument> request, CancellationToken ct = default)
 			where TDocument : class =>
-			DoRequestAsync<ICreateRequest<TDocument>, ICreateResponse, CreateResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ICreateRequest<TDocument>, CreateResponse, CreateResponse>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
-		public ICreateResponse CreateDocument<TDocument>(TDocument document) where TDocument : class => Create(document, s => s);
+		public CreateResponse CreateDocument<TDocument>(TDocument document) where TDocument : class => Create(document, s => s);
 
 		/// <inheritdoc />
-		public Task<ICreateResponse> CreateDocumentAsync<TDocument>(
+		public Task<CreateResponse> CreateDocumentAsync<TDocument>(
 			TDocument document,
 			CancellationToken cancellationToken = default
 		) where TDocument : class =>

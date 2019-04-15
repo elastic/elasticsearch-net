@@ -11,7 +11,7 @@ using Tests.Framework.Integration;
 
 namespace Tests.Indices.Monitoring.IndicesSegments
 {
-	public class SegmentsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ISegmentsResponse, ISegmentsRequest, SegmentsDescriptor, SegmentsRequest>
+	public class SegmentsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, SegmentsResponse, ISegmentsRequest, SegmentsDescriptor, SegmentsRequest>
 	{
 		public SegmentsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -31,7 +31,7 @@ namespace Tests.Indices.Monitoring.IndicesSegments
 			(client, r) => client.SegmentsAsync(r)
 		);
 
-		protected override void ExpectResponse(ISegmentsResponse response)
+		protected override void ExpectResponse(SegmentsResponse response)
 		{
 			response.ShouldBeValid();
 

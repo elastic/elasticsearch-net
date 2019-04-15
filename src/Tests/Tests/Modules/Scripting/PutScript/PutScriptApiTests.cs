@@ -10,7 +10,7 @@ using Tests.Framework.Integration;
 namespace Tests.Modules.Scripting.PutScript
 {
 	public class PutScriptApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IPutScriptResponse, IPutScriptRequest, PutScriptDescriptor, PutScriptRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, PutScriptResponse, IPutScriptRequest, PutScriptDescriptor, PutScriptRequest>
 	{
 		private static readonly string _name = "scrpt1";
 
@@ -51,7 +51,7 @@ namespace Tests.Modules.Scripting.PutScript
 
 		protected override PutScriptDescriptor NewDescriptor() => new PutScriptDescriptor(_name);
 
-		protected override void ExpectResponse(IPutScriptResponse response)
+		protected override void ExpectResponse(PutScriptResponse response)
 		{
 			response.ShouldBeValid();
 			response.Acknowledged.Should().BeTrue();

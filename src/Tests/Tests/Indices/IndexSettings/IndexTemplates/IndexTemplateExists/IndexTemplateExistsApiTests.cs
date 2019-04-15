@@ -8,7 +8,7 @@ using Tests.Framework.Integration;
 namespace Tests.Indices.IndexSettings.IndexTemplates.IndexTemplateExists
 {
 	public class IndexTemplateExistsApiTests
-		: ApiTestBase<WritableCluster, IExistsResponse, IIndexTemplateExistsRequest, IndexTemplateExistsDescriptor, IndexTemplateExistsRequest>
+		: ApiTestBase<WritableCluster, ExistsResponse, IIndexTemplateExistsRequest, IndexTemplateExistsDescriptor, IndexTemplateExistsRequest>
 	{
 		public IndexTemplateExistsApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

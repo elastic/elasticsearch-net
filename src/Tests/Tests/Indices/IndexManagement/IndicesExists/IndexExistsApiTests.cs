@@ -10,7 +10,7 @@ using static Nest.Infer;
 namespace Tests.Indices.IndexManagement.IndicesExists
 {
 	public class IndexExistsApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IExistsResponse, IIndexExistsRequest, IndexExistsDescriptor, IndexExistsRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ExistsResponse, IIndexExistsRequest, IndexExistsDescriptor, IndexExistsRequest>
 	{
 		public IndexExistsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -28,6 +28,6 @@ namespace Tests.Indices.IndexManagement.IndicesExists
 			(client, r) => client.IndexExistsAsync(r)
 		);
 
-		protected override void ExpectResponse(IExistsResponse response) => response.Exists.Should().BeTrue();
+		protected override void ExpectResponse(ExistsResponse response) => response.Exists.Should().BeTrue();
 	}
 }

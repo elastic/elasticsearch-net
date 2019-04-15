@@ -13,7 +13,7 @@ namespace Tests.XPack.License.GetTrialLicenseStatus
 	[SkipVersion("<6.1.0", "Only exists in Elasticsearch 6.1.0+")]
 	[SkipOnTeamCity]
 	public class GetTrialLicenseStatusApiTests
-		: ApiIntegrationTestBase<XPackCluster, IGetTrialLicenseStatusResponse, IGetTrialLicenseStatusRequest, GetTrialLicenseStatusDescriptor,
+		: ApiIntegrationTestBase<XPackCluster, GetTrialLicenseStatusResponse, IGetTrialLicenseStatusRequest, GetTrialLicenseStatusDescriptor,
 			GetTrialLicenseStatusRequest>
 	{
 		public GetTrialLicenseStatusApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -33,7 +33,7 @@ namespace Tests.XPack.License.GetTrialLicenseStatus
 			(client, r) => client.GetTrialLicenseStatusAsync(r)
 		);
 
-		protected override void ExpectResponse(IGetTrialLicenseStatusResponse response)
+		protected override void ExpectResponse(GetTrialLicenseStatusResponse response)
 		{
 			response.ShouldBeValid();
 			// returns false if bootstrap already started the trial

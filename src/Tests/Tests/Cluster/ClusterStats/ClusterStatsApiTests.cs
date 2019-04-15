@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 namespace Tests.Cluster.ClusterStats
 {
 	public class ClusterStatsApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IClusterStatsResponse, IClusterStatsRequest, ClusterStatsDescriptor, ClusterStatsRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ClusterStatsResponse, IClusterStatsRequest, ClusterStatsDescriptor, ClusterStatsRequest>
 	{
 		public ClusterStatsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -25,7 +25,7 @@ namespace Tests.Cluster.ClusterStats
 			(client, r) => client.ClusterStatsAsync(r)
 		);
 
-		protected override void ExpectResponse(IClusterStatsResponse response)
+		protected override void ExpectResponse(ClusterStatsResponse response)
 		{
 			response.ClusterName.Should().NotBeNullOrWhiteSpace();
 			response.NodeStatistics.Should().NotBeNull();

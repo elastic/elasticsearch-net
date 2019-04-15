@@ -54,7 +54,7 @@ namespace Tests.Aggregations.Bucket.Range
 				}
 			};
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
+		protected override void ExpectResponse(SearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var commitRanges = response.Aggregations.Range("commit_ranges");

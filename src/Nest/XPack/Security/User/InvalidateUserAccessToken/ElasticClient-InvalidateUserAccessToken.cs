@@ -8,21 +8,21 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc />
-		IInvalidateUserAccessTokenResponse InvalidateUserAccessToken(string token,
+		InvalidateUserAccessTokenResponse InvalidateUserAccessToken(string token,
 			Func<InvalidateUserAccessTokenDescriptor, IInvalidateUserAccessTokenRequest> selector = null
 		);
 
 		/// <inheritdoc />
-		IInvalidateUserAccessTokenResponse InvalidateUserAccessToken(IInvalidateUserAccessTokenRequest request);
+		InvalidateUserAccessTokenResponse InvalidateUserAccessToken(IInvalidateUserAccessTokenRequest request);
 
 		/// <inheritdoc />
-		Task<IInvalidateUserAccessTokenResponse> InvalidateUserAccessTokenAsync(string token,
+		Task<InvalidateUserAccessTokenResponse> InvalidateUserAccessTokenAsync(string token,
 			Func<InvalidateUserAccessTokenDescriptor, IInvalidateUserAccessTokenRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IInvalidateUserAccessTokenResponse> InvalidateUserAccessTokenAsync(IInvalidateUserAccessTokenRequest request,
+		Task<InvalidateUserAccessTokenResponse> InvalidateUserAccessTokenAsync(IInvalidateUserAccessTokenRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -30,28 +30,28 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IInvalidateUserAccessTokenResponse InvalidateUserAccessToken(
+		public InvalidateUserAccessTokenResponse InvalidateUserAccessToken(
 			string token,
 			Func<InvalidateUserAccessTokenDescriptor, IInvalidateUserAccessTokenRequest> selector = null
 		) => InvalidateUserAccessToken(selector.InvokeOrDefault(new InvalidateUserAccessTokenDescriptor(token)));
 
 		/// <inheritdoc />
-		public IInvalidateUserAccessTokenResponse InvalidateUserAccessToken(IInvalidateUserAccessTokenRequest request) =>
+		public InvalidateUserAccessTokenResponse InvalidateUserAccessToken(IInvalidateUserAccessTokenRequest request) =>
 			DoRequest<IInvalidateUserAccessTokenRequest, InvalidateUserAccessTokenResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IInvalidateUserAccessTokenResponse> InvalidateUserAccessTokenAsync(
+		public Task<InvalidateUserAccessTokenResponse> InvalidateUserAccessTokenAsync(
 			string token,
 			Func<InvalidateUserAccessTokenDescriptor, IInvalidateUserAccessTokenRequest> selector = null,
 			CancellationToken ct = default
 		) => InvalidateUserAccessTokenAsync(selector.InvokeOrDefault(new InvalidateUserAccessTokenDescriptor(token)), ct);
 
 		/// <inheritdoc />
-		public Task<IInvalidateUserAccessTokenResponse> InvalidateUserAccessTokenAsync(
+		public Task<InvalidateUserAccessTokenResponse> InvalidateUserAccessTokenAsync(
 			IInvalidateUserAccessTokenRequest request,
 			CancellationToken ct = default
 		) =>
-			DoRequestAsync<IInvalidateUserAccessTokenRequest, IInvalidateUserAccessTokenResponse, InvalidateUserAccessTokenResponse>
+			DoRequestAsync<IInvalidateUserAccessTokenRequest, InvalidateUserAccessTokenResponse, InvalidateUserAccessTokenResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

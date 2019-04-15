@@ -13,7 +13,7 @@ namespace Tests.XPack.Sql.ClearSqlCursor
 {
 	[SkipVersion("<6.4.0", "")]
 	public class ClearSqlCursorApiTests
-		: ApiIntegrationTestBase<XPackCluster, IClearSqlCursorResponse, IClearSqlCursorRequest, ClearSqlCursorDescriptor, ClearSqlCursorRequest>
+		: ApiIntegrationTestBase<XPackCluster, ClearSqlCursorResponse, IClearSqlCursorRequest, ClearSqlCursorDescriptor, ClearSqlCursorRequest>
 	{
 		private static readonly string SqlQuery =
 			$@"SELECT type, name, startedOn, numberOfCommits
@@ -58,7 +58,7 @@ ORDER BY numberOfContributors DESC";
 			_currentCursor = sqlQueryResponse.Cursor ?? _currentCursor;
 		}
 
-		protected override void ExpectResponse(IClearSqlCursorResponse response) =>
+		protected override void ExpectResponse(ClearSqlCursorResponse response) =>
 			response.Succeeded.Should().BeTrue("succeeded property on response");
 	}
 }

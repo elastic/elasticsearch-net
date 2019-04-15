@@ -12,32 +12,32 @@ namespace Nest
 		/// When this API returns, the follower index exists, and cross-cluster replication starts replicating
 		/// operations from the leader index to the follower index.
 		/// </summary>
-		ICreateFollowIndexResponse CreateFollowIndex(IndexName index, Func<CreateFollowIndexDescriptor, ICreateFollowIndexRequest> selector);
+		CreateFollowIndexResponse CreateFollowIndex(IndexName index, Func<CreateFollowIndexDescriptor, ICreateFollowIndexRequest> selector);
 
 		/// <inheritdoc cref="CreateFollowIndex(IndexName, System.Func{Nest.CreateFollowIndexDescriptor,Nest.ICreateFollowIndexRequest})" />
-		ICreateFollowIndexResponse CreateFollowIndex(ICreateFollowIndexRequest request);
+		CreateFollowIndexResponse CreateFollowIndex(ICreateFollowIndexRequest request);
 
 		/// <inheritdoc cref="CreateFollowIndex(IndexName, System.Func{Nest.CreateFollowIndexDescriptor,Nest.ICreateFollowIndexRequest})" />
-		Task<ICreateFollowIndexResponse> CreateFollowIndexAsync(IndexName index, Func<CreateFollowIndexDescriptor, ICreateFollowIndexRequest> selector,
+		Task<CreateFollowIndexResponse> CreateFollowIndexAsync(IndexName index, Func<CreateFollowIndexDescriptor, ICreateFollowIndexRequest> selector,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="CreateFollowIndex(IndexName, System.Func{Nest.CreateFollowIndexDescriptor,Nest.ICreateFollowIndexRequest})" />
-		Task<ICreateFollowIndexResponse> CreateFollowIndexAsync(ICreateFollowIndexRequest request, CancellationToken ct = default);
+		Task<CreateFollowIndexResponse> CreateFollowIndexAsync(ICreateFollowIndexRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc cref="CreateFollowIndex(IndexName, System.Func{Nest.CreateFollowIndexDescriptor,Nest.ICreateFollowIndexRequest})" />
-		public ICreateFollowIndexResponse CreateFollowIndex(IndexName index, Func<CreateFollowIndexDescriptor, ICreateFollowIndexRequest> selector) =>
+		public CreateFollowIndexResponse CreateFollowIndex(IndexName index, Func<CreateFollowIndexDescriptor, ICreateFollowIndexRequest> selector) =>
 			CreateFollowIndex(selector.InvokeOrDefault(new CreateFollowIndexDescriptor(index)));
 
 		/// <inheritdoc cref="CreateFollowIndex(IndexName, System.Func{Nest.CreateFollowIndexDescriptor,Nest.ICreateFollowIndexRequest})" />
-		public ICreateFollowIndexResponse CreateFollowIndex(ICreateFollowIndexRequest request) =>
+		public CreateFollowIndexResponse CreateFollowIndex(ICreateFollowIndexRequest request) =>
 			DoRequest<ICreateFollowIndexRequest, CreateFollowIndexResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="CreateFollowIndex(IndexName, System.Func{Nest.CreateFollowIndexDescriptor,Nest.ICreateFollowIndexRequest})" />
-		public Task<ICreateFollowIndexResponse> CreateFollowIndexAsync(
+		public Task<CreateFollowIndexResponse> CreateFollowIndexAsync(
 			IndexName index,
 			Func<CreateFollowIndexDescriptor, ICreateFollowIndexRequest> selector,
 			CancellationToken ct = default
@@ -45,7 +45,7 @@ namespace Nest
 			CreateFollowIndexAsync(selector.InvokeOrDefault(new CreateFollowIndexDescriptor(index)), ct);
 
 		/// <inheritdoc cref="CreateFollowIndex(IndexName, System.Func{Nest.CreateFollowIndexDescriptor,Nest.ICreateFollowIndexRequest})" />
-		public Task<ICreateFollowIndexResponse> CreateFollowIndexAsync(ICreateFollowIndexRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<ICreateFollowIndexRequest, ICreateFollowIndexResponse, CreateFollowIndexResponse>(request, request.RequestParameters, ct);
+		public Task<CreateFollowIndexResponse> CreateFollowIndexAsync(ICreateFollowIndexRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<ICreateFollowIndexRequest, CreateFollowIndexResponse, CreateFollowIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

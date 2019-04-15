@@ -6,24 +6,15 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[InterfaceDataContract]
-	public interface IWatcherStatsResponse : IResponse
+	public class WatcherStatsResponse : ResponseBase
 	{
 		[DataMember(Name ="cluster_name")]
-		string ClusterName { get; }
-
-		[DataMember(Name ="manually_stopped")]
-		bool ManuallyStopped { get; }
-
-		[DataMember(Name ="stats")]
-		IReadOnlyCollection<WatcherNodeStats> Stats { get; }
-	}
-
-	public class WatcherStatsResponse : ResponseBase, IWatcherStatsResponse
-	{
 		public string ClusterName { get; internal set; }
 
+		[DataMember(Name ="manually_stopped")]
 		public bool ManuallyStopped { get; internal set; }
+
+		[DataMember(Name ="stats")]
 		public IReadOnlyCollection<WatcherNodeStats> Stats { get; internal set; } = EmptyReadOnly<WatcherNodeStats>.Collection;
 	}
 

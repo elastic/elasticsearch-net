@@ -10,40 +10,40 @@ namespace Nest
 		/// <summary>
 		/// Sends data to a machine learning job for analysis.
 		/// </summary>
-		IPostJobDataResponse PostJobData(Id jobId, Func<PostJobDataDescriptor, IPostJobDataRequest> selector);
+		PostJobDataResponse PostJobData(Id jobId, Func<PostJobDataDescriptor, IPostJobDataRequest> selector);
 
 		/// <inheritdoc />
-		IPostJobDataResponse PostJobData(IPostJobDataRequest request);
+		PostJobDataResponse PostJobData(IPostJobDataRequest request);
 
 		/// <inheritdoc />
-		Task<IPostJobDataResponse> PostJobDataAsync(Id jobId, Func<PostJobDataDescriptor, IPostJobDataRequest> selector,
+		Task<PostJobDataResponse> PostJobDataAsync(Id jobId, Func<PostJobDataDescriptor, IPostJobDataRequest> selector,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IPostJobDataResponse> PostJobDataAsync(IPostJobDataRequest request, CancellationToken ct = default);
+		Task<PostJobDataResponse> PostJobDataAsync(IPostJobDataRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IPostJobDataResponse PostJobData(Id jobId, Func<PostJobDataDescriptor, IPostJobDataRequest> selector) =>
+		public PostJobDataResponse PostJobData(Id jobId, Func<PostJobDataDescriptor, IPostJobDataRequest> selector) =>
 			PostJobData(selector.InvokeOrDefault(new PostJobDataDescriptor(jobId)));
 
 		/// <inheritdoc />
-		public IPostJobDataResponse PostJobData(IPostJobDataRequest request) =>
+		public PostJobDataResponse PostJobData(IPostJobDataRequest request) =>
 			DoRequest<IPostJobDataRequest, PostJobDataResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IPostJobDataResponse> PostJobDataAsync(
+		public Task<PostJobDataResponse> PostJobDataAsync(
 			Id jobId,
 			Func<PostJobDataDescriptor, IPostJobDataRequest> selector,
 			CancellationToken ct = default
 		) => PostJobDataAsync(selector.InvokeOrDefault(new PostJobDataDescriptor(jobId)), ct);
 
 		/// <inheritdoc />
-		public Task<IPostJobDataResponse> PostJobDataAsync(IPostJobDataRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IPostJobDataRequest, IPostJobDataResponse, PostJobDataResponse>
+		public Task<PostJobDataResponse> PostJobDataAsync(IPostJobDataRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IPostJobDataRequest, PostJobDataResponse, PostJobDataResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

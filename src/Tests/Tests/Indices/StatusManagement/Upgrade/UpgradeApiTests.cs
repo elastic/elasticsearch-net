@@ -11,7 +11,7 @@ namespace Tests.Indices.StatusManagement.Upgrade
 	[SkipVersion("<=5.0.0", "AllowNoIndices() only available from 5.0.1 onwards")]
 	public class UpgradeApiTests
 		: ApiIntegrationAgainstNewIndexTestBase
-			<IntrusiveOperationCluster, IUpgradeResponse, IUpgradeRequest, UpgradeDescriptor, UpgradeRequest>
+			<IntrusiveOperationCluster, UpgradeResponse, IUpgradeRequest, UpgradeDescriptor, UpgradeRequest>
 	{
 		public UpgradeApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

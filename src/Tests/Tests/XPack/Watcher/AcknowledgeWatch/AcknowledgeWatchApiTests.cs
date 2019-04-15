@@ -10,7 +10,7 @@ using Tests.Framework.Integration;
 namespace Tests.XPack.Watcher.AcknowledgeWatch
 {
 	public class AcknowledgeWatchApiTests
-		: ApiIntegrationTestBase<XPackCluster, IAcknowledgeWatchResponse, IAcknowledgeWatchRequest, AcknowledgeWatchDescriptor,
+		: ApiIntegrationTestBase<XPackCluster, AcknowledgeWatchResponse, IAcknowledgeWatchRequest, AcknowledgeWatchDescriptor,
 			AcknowledgeWatchRequest>
 	{
 		public AcknowledgeWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -95,7 +95,7 @@ namespace Tests.XPack.Watcher.AcknowledgeWatch
 
 		protected override AcknowledgeWatchDescriptor NewDescriptor() => new AcknowledgeWatchDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(IAcknowledgeWatchResponse response)
+		protected override void ExpectResponse(AcknowledgeWatchResponse response)
 		{
 			var watchStatusState = response.Status.State;
 

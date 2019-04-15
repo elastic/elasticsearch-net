@@ -6,24 +6,8 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IGetMappingResponse : IResponse
-	{
-		IReadOnlyDictionary<IndexName, IndexMappings> Indices { get; }
-
-		void Accept(IMappingVisitor visitor);
-	}
-
-	public class IndexMappings
-	{
-		[Obsolete("Mapping are no longer grouped by type, this indexer is ignored and simply returns Mapppings")]
-		public TypeMapping this[string type] => Mappings;
-
-		[DataMember(Name = "mappings")]
-		public TypeMapping Mappings { get; internal set; }
-	}
-
 	[JsonFormatter(typeof(ResolvableDictionaryResponseFormatter<GetMappingResponse, IndexName, IndexMappings>))]
-	public class GetMappingResponse : DictionaryResponseBase<IndexName, IndexMappings>, IGetMappingResponse
+	public class GetMappingResponse : DictionaryResponseBase<IndexName, IndexMappings>
 	{
 		[IgnoreDataMember]
 		public IReadOnlyDictionary<IndexName, IndexMappings> Indices => Self.BackingDictionary;
@@ -35,11 +19,21 @@ namespace Nest
 		}
 	}
 
+	public class IndexMappings
+	{
+		[Obsolete("Mapping are no longer grouped by type, this indexer is ignored and simply returns Mapppings")]
+		public TypeMapping this[string type] => Mappings;
+
+		[DataMember(Name = "mappings")]
+		public TypeMapping Mappings { get; internal set; }
+	}
+
+
 	public static class GetMappingResponseExtensions
 	{
-		public static ITypeMapping GetMappingFor<T>(this IGetMappingResponse response) => response.GetMappingFor(typeof(T));
+		public static ITypeMapping GetMappingFor<T>(this GetMappingResponse response) => response.GetMappingFor(typeof(T));
 
-		public static ITypeMapping GetMappingFor(this IGetMappingResponse response, IndexName index)
+		public static ITypeMapping GetMappingFor(this GetMappingResponse response, IndexName index)
 		{
 			if (index.IsNullOrEmpty()) return null;
 

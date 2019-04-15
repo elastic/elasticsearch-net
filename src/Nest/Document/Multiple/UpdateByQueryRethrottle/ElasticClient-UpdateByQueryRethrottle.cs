@@ -13,19 +13,19 @@ namespace Nest
 		/// <para> </para>
 		/// <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html#docs-update-by-query-rethrottle">https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html#docs-update-by-query-rethrottle</a>
 		/// </summary>
-		IListTasksResponse UpdateByQueryRethrottle(TaskId taskId, Func<UpdateByQueryRethrottleDescriptor, IUpdateByQueryRethrottleRequest> selector = null);
+		ListTasksResponse UpdateByQueryRethrottle(TaskId taskId, Func<UpdateByQueryRethrottleDescriptor, IUpdateByQueryRethrottleRequest> selector = null);
 
  		/// <inheritdoc cref="UpdateByQueryRethrottle(Nest.TaskId,System.Func{Nest.UpdateByQueryRethrottleDescriptor,Nest.IUpdateByQueryRethrottleRequest})" />
-		IListTasksResponse UpdateByQueryRethrottle(IUpdateByQueryRethrottleRequest request);
+		ListTasksResponse UpdateByQueryRethrottle(IUpdateByQueryRethrottleRequest request);
 
  		/// <inheritdoc cref="UpdateByQueryRethrottle(Nest.TaskId,System.Func{Nest.UpdateByQueryRethrottleDescriptor,Nest.IUpdateByQueryRethrottleRequest})" />
-		Task<IListTasksResponse> UpdateByQueryRethrottleAsync(TaskId taskId,
+		Task<ListTasksResponse> UpdateByQueryRethrottleAsync(TaskId taskId,
 			Func<UpdateByQueryRethrottleDescriptor, IUpdateByQueryRethrottleRequest> selector = null,
 			CancellationToken ct = default
 		);
 
  		/// <inheritdoc cref="UpdateByQueryRethrottle(Nest.TaskId,System.Func{Nest.UpdateByQueryRethrottleDescriptor,Nest.IUpdateByQueryRethrottleRequest})" />
-		Task<IListTasksResponse> UpdateByQueryRethrottleAsync(IUpdateByQueryRethrottleRequest request,
+		Task<ListTasksResponse> UpdateByQueryRethrottleAsync(IUpdateByQueryRethrottleRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -33,22 +33,22 @@ namespace Nest
  	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IListTasksResponse UpdateByQueryRethrottle(TaskId taskId, Func<UpdateByQueryRethrottleDescriptor, IUpdateByQueryRethrottleRequest> selector = null) =>
+		public ListTasksResponse UpdateByQueryRethrottle(TaskId taskId, Func<UpdateByQueryRethrottleDescriptor, IUpdateByQueryRethrottleRequest> selector = null) =>
 			UpdateByQueryRethrottle(selector.InvokeOrDefault(new UpdateByQueryRethrottleDescriptor(taskId)));
 
  		/// <inheritdoc />
-		public IListTasksResponse UpdateByQueryRethrottle(IUpdateByQueryRethrottleRequest request) =>
+		public ListTasksResponse UpdateByQueryRethrottle(IUpdateByQueryRethrottleRequest request) =>
 			DoRequest<IUpdateByQueryRethrottleRequest, ListTasksResponse>(request, request.RequestParameters);
 
  		/// <inheritdoc />
-		public Task<IListTasksResponse> UpdateByQueryRethrottleAsync(
+		public Task<ListTasksResponse> UpdateByQueryRethrottleAsync(
 			TaskId taskId,
 			Func<UpdateByQueryRethrottleDescriptor, IUpdateByQueryRethrottleRequest> selector = null,
 			CancellationToken ct = default
 		) => UpdateByQueryRethrottleAsync(selector.InvokeOrDefault(new UpdateByQueryRethrottleDescriptor(taskId)), ct);
 
  		/// <inheritdoc />
-		public Task<IListTasksResponse> UpdateByQueryRethrottleAsync(IUpdateByQueryRethrottleRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IUpdateByQueryRethrottleRequest, IListTasksResponse, ListTasksResponse>(request, request.RequestParameters, ct);
+		public Task<ListTasksResponse> UpdateByQueryRethrottleAsync(IUpdateByQueryRethrottleRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IUpdateByQueryRethrottleRequest, ListTasksResponse, ListTasksResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -13,19 +13,19 @@ namespace Nest
 		/// <para> </para>
 		/// <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html#docs-delete-by-query-rethrottle">https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html#docs-delete-by-query-rethrottle</a>
 		/// </summary>
-		IListTasksResponse DeleteByQueryRethrottle(TaskId taskId, Func<DeleteByQueryRethrottleDescriptor, IDeleteByQueryRethrottleRequest> selector = null);
+		ListTasksResponse DeleteByQueryRethrottle(TaskId taskId, Func<DeleteByQueryRethrottleDescriptor, IDeleteByQueryRethrottleRequest> selector = null);
 
 		/// <inheritdoc cref="DeleteByQueryRethrottle(Nest.TaskId,System.Func{Nest.DeleteByQueryRethrottleDescriptor,Nest.IDeleteByQueryRethrottleRequest})" />
-		IListTasksResponse DeleteByQueryRethrottle(IDeleteByQueryRethrottleRequest request);
+		ListTasksResponse DeleteByQueryRethrottle(IDeleteByQueryRethrottleRequest request);
 
 		/// <inheritdoc cref="DeleteByQueryRethrottle(Nest.TaskId,System.Func{Nest.DeleteByQueryRethrottleDescriptor,Nest.IDeleteByQueryRethrottleRequest})" />
-		Task<IListTasksResponse> DeleteByQueryRethrottleAsync(TaskId taskId,
+		Task<ListTasksResponse> DeleteByQueryRethrottleAsync(TaskId taskId,
 			Func<DeleteByQueryRethrottleDescriptor, IDeleteByQueryRethrottleRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="DeleteByQueryRethrottle(Nest.TaskId,System.Func{Nest.DeleteByQueryRethrottleDescriptor,Nest.IDeleteByQueryRethrottleRequest})" />
-		Task<IListTasksResponse> DeleteByQueryRethrottleAsync(IDeleteByQueryRethrottleRequest request,
+		Task<ListTasksResponse> DeleteByQueryRethrottleAsync(IDeleteByQueryRethrottleRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -33,24 +33,24 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IListTasksResponse DeleteByQueryRethrottle(
+		public ListTasksResponse DeleteByQueryRethrottle(
 			TaskId taskId,
 			Func<DeleteByQueryRethrottleDescriptor, IDeleteByQueryRethrottleRequest> selector = null
 		) => DeleteByQueryRethrottle(selector.InvokeOrDefault(new DeleteByQueryRethrottleDescriptor(taskId)));
 
 		/// <inheritdoc />
-		public IListTasksResponse DeleteByQueryRethrottle(IDeleteByQueryRethrottleRequest request) =>
+		public ListTasksResponse DeleteByQueryRethrottle(IDeleteByQueryRethrottleRequest request) =>
 			DoRequest<IDeleteByQueryRethrottleRequest, ListTasksResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IListTasksResponse> DeleteByQueryRethrottleAsync(
+		public Task<ListTasksResponse> DeleteByQueryRethrottleAsync(
 			TaskId taskId,
 			Func<DeleteByQueryRethrottleDescriptor, IDeleteByQueryRethrottleRequest> selector = null,
 			CancellationToken ct = default
 		) => DeleteByQueryRethrottleAsync(selector.InvokeOrDefault(new DeleteByQueryRethrottleDescriptor(taskId)), ct);
 
 		/// <inheritdoc />
-		public Task<IListTasksResponse> DeleteByQueryRethrottleAsync(IDeleteByQueryRethrottleRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeleteByQueryRethrottleRequest, IListTasksResponse, ListTasksResponse>(request, request.RequestParameters, ct);
+		public Task<ListTasksResponse> DeleteByQueryRethrottleAsync(IDeleteByQueryRethrottleRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeleteByQueryRethrottleRequest, ListTasksResponse, ListTasksResponse>(request, request.RequestParameters, ct);
 	}
 }

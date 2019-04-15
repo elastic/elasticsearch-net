@@ -176,14 +176,14 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			await Client.RefreshAsync(Indices.Index(typeof(Project), typeof(Developer), typeof(ProjectPercolation)));
 		}
 
-		private Task<IPutIndexTemplateResponse> CreateIndexTemplateAsync() => Client.PutIndexTemplateAsync(
+		private Task<PutIndexTemplateResponse> CreateIndexTemplateAsync() => Client.PutIndexTemplateAsync(
 			new PutIndexTemplateRequest(TestsIndexTemplateName)
 			{
 				IndexPatterns = new[] { "*" },
 				Settings = IndexSettings
 			});
 
-		private Task<ICreateIndexResponse> CreateDeveloperIndexAsync() => Client.CreateIndexAsync(Infer.Index<Developer>(), c => c
+		private Task<CreateIndexResponse> CreateDeveloperIndexAsync() => Client.CreateIndexAsync(Infer.Index<Developer>(), c => c
 			.Map<Developer>(m => m
 				.AutoMap()
 				.Properties(DeveloperProperties)
@@ -191,7 +191,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		);
 
 #pragma warning disable 618
-		private Task<ICreateIndexResponse> CreateProjectIndexAsync() => Client.CreateIndexAsync(typeof(Project), c => c
+		private Task<CreateIndexResponse> CreateProjectIndexAsync() => Client.CreateIndexAsync(typeof(Project), c => c
 			.Settings(settings => settings.Analysis(ProjectAnalysisSettings))
 			// this uses obsolete overload somewhat on purpose to make sure it works just as the rest
 			// TODO 8.0 remove with once the overloads are gone too
@@ -255,7 +255,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		}
 
 
-		private Task<ICreateIndexResponse> CreatePercolatorIndexAsync() => Client.CreateIndexAsync(typeof(ProjectPercolation), c => c
+		private Task<CreateIndexResponse> CreatePercolatorIndexAsync() => Client.CreateIndexAsync(typeof(ProjectPercolation), c => c
 			.Settings(s => s
 				.AutoExpandReplicas("0-all")
 				.Analysis(ProjectAnalysisSettings)

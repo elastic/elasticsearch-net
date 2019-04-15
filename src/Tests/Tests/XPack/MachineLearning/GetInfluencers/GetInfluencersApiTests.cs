@@ -11,7 +11,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.GetInfluencers
 {
 	public class GetInfluencersApiTests
-		: MachineLearningIntegrationTestBase<IGetInfluencersResponse, IGetInfluencersRequest, GetInfluencersDescriptor, GetInfluencersRequest>
+		: MachineLearningIntegrationTestBase<GetInfluencersResponse, IGetInfluencersRequest, GetInfluencersDescriptor, GetInfluencersRequest>
 	{
 		public GetInfluencersApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -41,7 +41,7 @@ namespace Tests.XPack.MachineLearning.GetInfluencers
 			(client, r) => client.GetInfluencersAsync(r)
 		);
 
-		protected override void ExpectResponse(IGetInfluencersResponse response)
+		protected override void ExpectResponse(GetInfluencersResponse response)
 		{
 			response.ShouldBeValid();
 			response.Influencers.Should().HaveCount(1);

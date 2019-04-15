@@ -14,35 +14,35 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="T">The type we want to map in elasticsearch</typeparam>
 		/// <param name="selector">A descriptor to describe the mapping of our type</param>
-		IPutMappingResponse Map<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> selector)
+		PutMappingResponse Map<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> selector)
 			where T : class;
 
 		/// <inheritdoc />
-		IPutMappingResponse Map(IPutMappingRequest request);
+		PutMappingResponse Map(IPutMappingRequest request);
 
 		/// <inheritdoc />
-		Task<IPutMappingResponse> MapAsync<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> selector,
+		Task<PutMappingResponse> MapAsync<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> selector,
 			CancellationToken ct = default
 		)
 			where T : class;
 
 		/// <inheritdoc />
-		Task<IPutMappingResponse> MapAsync(IPutMappingRequest request, CancellationToken ct = default);
+		Task<PutMappingResponse> MapAsync(IPutMappingRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IPutMappingResponse Map<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> selector)
+		public PutMappingResponse Map<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> selector)
 			where T : class =>
 			Map(selector?.Invoke(new PutMappingDescriptor<T>()));
 
 		/// <inheritdoc />
-		public IPutMappingResponse Map(IPutMappingRequest request) =>
+		public PutMappingResponse Map(IPutMappingRequest request) =>
 			DoRequest<IPutMappingRequest, PutMappingResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IPutMappingResponse> MapAsync<T>(
+		public Task<PutMappingResponse> MapAsync<T>(
 			Func<PutMappingDescriptor<T>, IPutMappingRequest> selector,
 			CancellationToken ct = default
 		)
@@ -50,7 +50,7 @@ namespace Nest
 			MapAsync(selector?.Invoke(new PutMappingDescriptor<T>()), ct);
 
 		/// <inheritdoc />
-		public Task<IPutMappingResponse> MapAsync(IPutMappingRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IPutMappingRequest, IPutMappingResponse, PutMappingResponse>(request, request.RequestParameters, ct);
+		public Task<PutMappingResponse> MapAsync(IPutMappingRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IPutMappingRequest, PutMappingResponse, PutMappingResponse>(request, request.RequestParameters, ct);
 	}
 }

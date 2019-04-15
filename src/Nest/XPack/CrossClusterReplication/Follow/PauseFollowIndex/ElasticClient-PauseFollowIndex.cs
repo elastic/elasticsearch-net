@@ -12,39 +12,39 @@ namespace Nest
 		/// the leader index. You can resume following with the resume follower API. Pausing and resuming a follower index can be
 		/// used to change the configuration of the following task.
 		/// </summary>
-		IPauseFollowIndexResponse PauseFollowIndex(IndexName index, Func<PauseFollowIndexDescriptor, IPauseFollowIndexRequest> selector = null);
+		PauseFollowIndexResponse PauseFollowIndex(IndexName index, Func<PauseFollowIndexDescriptor, IPauseFollowIndexRequest> selector = null);
 
 		/// <inheritdoc cref="PauseFollowIndex(IndexName, System.Func{Nest.PauseFollowIndexDescriptor,Nest.IPauseFollowIndexRequest})" />
-		IPauseFollowIndexResponse PauseFollowIndex(IPauseFollowIndexRequest request);
+		PauseFollowIndexResponse PauseFollowIndex(IPauseFollowIndexRequest request);
 
 		/// <inheritdoc cref="PauseFollowIndex(IndexName, System.Func{Nest.PauseFollowIndexDescriptor,Nest.IPauseFollowIndexRequest})" />
-		Task<IPauseFollowIndexResponse> PauseFollowIndexAsync(IndexName index, Func<PauseFollowIndexDescriptor, IPauseFollowIndexRequest> selector = null,
+		Task<PauseFollowIndexResponse> PauseFollowIndexAsync(IndexName index, Func<PauseFollowIndexDescriptor, IPauseFollowIndexRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="PauseFollowIndex(IndexName, System.Func{Nest.PauseFollowIndexDescriptor,Nest.IPauseFollowIndexRequest})" />
-		Task<IPauseFollowIndexResponse> PauseFollowIndexAsync(IPauseFollowIndexRequest request, CancellationToken ct = default);
+		Task<PauseFollowIndexResponse> PauseFollowIndexAsync(IPauseFollowIndexRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc cref="PauseFollowIndex(IndexName, System.Func{Nest.PauseFollowIndexDescriptor,Nest.IPauseFollowIndexRequest})" />
-		public IPauseFollowIndexResponse PauseFollowIndex(IndexName index, Func<PauseFollowIndexDescriptor, IPauseFollowIndexRequest> selector = null) =>
+		public PauseFollowIndexResponse PauseFollowIndex(IndexName index, Func<PauseFollowIndexDescriptor, IPauseFollowIndexRequest> selector = null) =>
 			PauseFollowIndex(selector.InvokeOrDefault(new PauseFollowIndexDescriptor(index)));
 
 		/// <inheritdoc cref="PauseFollowIndex(IndexName, System.Func{Nest.PauseFollowIndexDescriptor,Nest.IPauseFollowIndexRequest})" />
-		public IPauseFollowIndexResponse PauseFollowIndex(IPauseFollowIndexRequest request) =>
+		public PauseFollowIndexResponse PauseFollowIndex(IPauseFollowIndexRequest request) =>
 			DoRequest<IPauseFollowIndexRequest, PauseFollowIndexResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="PauseFollowIndex(IndexName, System.Func{Nest.PauseFollowIndexDescriptor,Nest.IPauseFollowIndexRequest})" />
-		public Task<IPauseFollowIndexResponse> PauseFollowIndexAsync(
+		public Task<PauseFollowIndexResponse> PauseFollowIndexAsync(
 			IndexName index,
 			Func<PauseFollowIndexDescriptor, IPauseFollowIndexRequest> selector = null,
 			CancellationToken ct = default
 		) => PauseFollowIndexAsync(selector.InvokeOrDefault(new PauseFollowIndexDescriptor(index)), ct);
 
 		/// <inheritdoc cref="PauseFollowIndex(IndexName, System.Func{Nest.PauseFollowIndexDescriptor,Nest.IPauseFollowIndexRequest})" />
-		public Task<IPauseFollowIndexResponse> PauseFollowIndexAsync(IPauseFollowIndexRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IPauseFollowIndexRequest, IPauseFollowIndexResponse, PauseFollowIndexResponse>(request, request.RequestParameters, ct);
+		public Task<PauseFollowIndexResponse> PauseFollowIndexAsync(IPauseFollowIndexRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IPauseFollowIndexRequest, PauseFollowIndexResponse, PauseFollowIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 namespace Tests.Search.SearchShards
 {
 	public class SearchShardsApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchShardsResponse, ISearchShardsRequest, SearchShardsDescriptor<Project>,
+		: ApiIntegrationTestBase<ReadOnlyCluster, SearchShardsResponse, ISearchShardsRequest, SearchShardsDescriptor<Project>,
 			SearchShardsRequest<Project>>
 	{
 		public SearchShardsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

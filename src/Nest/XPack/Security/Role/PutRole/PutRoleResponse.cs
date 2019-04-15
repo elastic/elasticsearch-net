@@ -2,14 +2,9 @@
 
 namespace Nest
 {
-	public interface IPutRoleResponse : IResponse
+	public class PutRoleResponse : ResponseBase
 	{
 		[DataMember(Name ="role")]
-		PutRoleStatus Role { get; }
-	}
-
-	public class PutRoleResponse : ResponseBase, IPutRoleResponse
-	{
 		public PutRoleStatus Role { get; internal set; }
 	}
 

@@ -10,18 +10,18 @@ namespace Nest
 		/// <summary>
 		/// Retrieves results for machine learning job influencers.
 		/// </summary>
-		IGetInfluencersResponse GetInfluencers(Id jobId, Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector = null);
+		GetInfluencersResponse GetInfluencers(Id jobId, Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector = null);
 
 		/// <inheritdoc />
-		IGetInfluencersResponse GetInfluencers(IGetInfluencersRequest request);
+		GetInfluencersResponse GetInfluencers(IGetInfluencersRequest request);
 
 		/// <inheritdoc />
-		Task<IGetInfluencersResponse> GetInfluencersAsync(Id jobId, Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector = null,
+		Task<GetInfluencersResponse> GetInfluencersAsync(Id jobId, Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IGetInfluencersResponse> GetInfluencersAsync(IGetInfluencersRequest request,
+		Task<GetInfluencersResponse> GetInfluencersAsync(IGetInfluencersRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -29,22 +29,22 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IGetInfluencersResponse GetInfluencers(Id jobId, Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector = null) =>
+		public GetInfluencersResponse GetInfluencers(Id jobId, Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector = null) =>
 			GetInfluencers(selector.InvokeOrDefault(new GetInfluencersDescriptor(jobId)));
 
 		/// <inheritdoc />
-		public IGetInfluencersResponse GetInfluencers(IGetInfluencersRequest request) =>
+		public GetInfluencersResponse GetInfluencers(IGetInfluencersRequest request) =>
 			DoRequest<IGetInfluencersRequest, GetInfluencersResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetInfluencersResponse> GetInfluencersAsync(
+		public Task<GetInfluencersResponse> GetInfluencersAsync(
 			Id jobId,
 			Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector = null,
 			CancellationToken ct = default
 		) => GetInfluencersAsync(selector.InvokeOrDefault(new GetInfluencersDescriptor(jobId)), ct);
 
 		/// <inheritdoc />
-		public Task<IGetInfluencersResponse> GetInfluencersAsync(IGetInfluencersRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetInfluencersRequest, IGetInfluencersResponse, GetInfluencersResponse>(request, request.RequestParameters, ct);
+		public Task<GetInfluencersResponse> GetInfluencersAsync(IGetInfluencersRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetInfluencersRequest, GetInfluencersResponse, GetInfluencersResponse>(request, request.RequestParameters, ct);
 	}
 }

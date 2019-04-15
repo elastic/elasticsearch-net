@@ -17,20 +17,20 @@ namespace Nest
 		///  typed parts of the query
 		/// </typeparam>
 		/// <param name="selector">An optional descriptor to further describe the delete by query operation</param>
-		IDeleteByQueryResponse DeleteByQuery<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector)
+		DeleteByQueryResponse DeleteByQuery<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector)
 			where T : class;
 
 		/// <inheritdoc />
-		IDeleteByQueryResponse DeleteByQuery(IDeleteByQueryRequest request);
+		DeleteByQueryResponse DeleteByQuery(IDeleteByQueryRequest request);
 
 		/// <inheritdoc />
-		Task<IDeleteByQueryResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector,
+		Task<DeleteByQueryResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector,
 			CancellationToken ct = default
 		)
 			where T : class;
 
 		/// <inheritdoc />
-		Task<IDeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request,
+		Task<DeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -38,22 +38,22 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IDeleteByQueryResponse DeleteByQuery<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector) where T : class =>
+		public DeleteByQueryResponse DeleteByQuery<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector) where T : class =>
 			DeleteByQuery(selector?.Invoke(new DeleteByQueryDescriptor<T>(typeof(T))));
 
 		/// <inheritdoc />
-		public IDeleteByQueryResponse DeleteByQuery(IDeleteByQueryRequest request) =>
+		public DeleteByQueryResponse DeleteByQuery(IDeleteByQueryRequest request) =>
 			DoRequest<IDeleteByQueryRequest, DeleteByQueryResponse>(request, request.RequestParameters, r => AcceptAllStatusCodesHandler(r));
 
 		/// <inheritdoc />
-		public Task<IDeleteByQueryResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector,
+		public Task<DeleteByQueryResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector,
 			CancellationToken ct = default
 		) where T : class =>
 			DeleteByQueryAsync(selector?.Invoke(new DeleteByQueryDescriptor<T>(typeof(T))), ct);
 
 		/// <inheritdoc />
-		public Task<IDeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeleteByQueryRequest, IDeleteByQueryResponse, DeleteByQueryResponse>
+		public Task<DeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeleteByQueryRequest, DeleteByQueryResponse, DeleteByQueryResponse>
 				(request, request.RequestParameters, ct, r => AcceptAllStatusCodesHandler(r));
 	}
 }

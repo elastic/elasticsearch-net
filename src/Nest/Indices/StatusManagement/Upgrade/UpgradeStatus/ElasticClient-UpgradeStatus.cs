@@ -8,18 +8,18 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc />
-		IUpgradeStatusResponse UpgradeStatus(IUpgradeStatusRequest request);
+		UpgradeStatusResponse UpgradeStatus(IUpgradeStatusRequest request);
 
 		/// <inheritdoc />
-		IUpgradeStatusResponse UpgradeStatus(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null);
+		UpgradeStatusResponse UpgradeStatus(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null);
 
 		/// <inheritdoc />
-		Task<IUpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest request,
+		Task<UpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest request,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IUpgradeStatusResponse> UpgradeStatusAsync(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null,
+		Task<UpgradeStatusResponse> UpgradeStatusAsync(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null,
 			CancellationToken ct = default
 		);
 	}
@@ -27,18 +27,18 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IUpgradeStatusResponse UpgradeStatus(IUpgradeStatusRequest request) =>
+		public UpgradeStatusResponse UpgradeStatus(IUpgradeStatusRequest request) =>
 			DoRequest<IUpgradeStatusRequest, UpgradeStatusResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public IUpgradeStatusResponse UpgradeStatus(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null) =>
+		public UpgradeStatusResponse UpgradeStatus(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null) =>
 			UpgradeStatus(selector.InvokeOrDefault(new UpgradeStatusDescriptor()));
 
 		/// <inheritdoc />
-		public Task<IUpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IUpgradeStatusRequest, IUpgradeStatusResponse, UpgradeStatusResponse>(request, request.RequestParameters, ct);
+		public Task<UpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IUpgradeStatusRequest, UpgradeStatusResponse, UpgradeStatusResponse>(request, request.RequestParameters, ct);
 
-		public Task<IUpgradeStatusResponse> UpgradeStatusAsync(
+		public Task<UpgradeStatusResponse> UpgradeStatusAsync(
 			Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null,
 			CancellationToken ct = default
 		) => UpgradeStatusAsync(selector.InvokeOrDefault(new UpgradeStatusDescriptor()), ct);

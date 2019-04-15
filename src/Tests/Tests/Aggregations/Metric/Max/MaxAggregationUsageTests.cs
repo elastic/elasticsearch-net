@@ -32,7 +32,7 @@ namespace Tests.Aggregations.Metric.Max
 		protected override AggregationDictionary InitializerAggs =>
 			new MaxAggregation("max_commits", Field<Project>(p => p.NumberOfCommits));
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
+		protected override void ExpectResponse(SearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var max = response.Aggregations.Max("max_commits");

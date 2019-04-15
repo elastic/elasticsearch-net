@@ -16,38 +16,38 @@ namespace Nest
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html
 		/// </summary>
 		/// <param name="selector">An optional descriptor to further describe the nodes stats operation</param>
-		INodesStatsResponse NodesStats(Func<NodesStatsDescriptor, INodesStatsRequest> selector = null);
+		NodesStatsResponse NodesStats(Func<NodesStatsDescriptor, INodesStatsRequest> selector = null);
 
 		/// <inheritdoc />
-		INodesStatsResponse NodesStats(INodesStatsRequest request);
+		NodesStatsResponse NodesStats(INodesStatsRequest request);
 
 		/// <inheritdoc />
-		Task<INodesStatsResponse> NodesStatsAsync(Func<NodesStatsDescriptor, INodesStatsRequest> selector = null,
+		Task<NodesStatsResponse> NodesStatsAsync(Func<NodesStatsDescriptor, INodesStatsRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<INodesStatsResponse> NodesStatsAsync(INodesStatsRequest request, CancellationToken ct = default);
+		Task<NodesStatsResponse> NodesStatsAsync(INodesStatsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public INodesStatsResponse NodesStats(Func<NodesStatsDescriptor, INodesStatsRequest> selector = null) =>
+		public NodesStatsResponse NodesStats(Func<NodesStatsDescriptor, INodesStatsRequest> selector = null) =>
 			NodesStats(selector.InvokeOrDefault(new NodesStatsDescriptor()));
 
 		/// <inheritdoc />
-		public INodesStatsResponse NodesStats(INodesStatsRequest request) =>
+		public NodesStatsResponse NodesStats(INodesStatsRequest request) =>
 			DoRequest<INodesStatsRequest, NodesStatsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<INodesStatsResponse> NodesStatsAsync(
+		public Task<NodesStatsResponse> NodesStatsAsync(
 			Func<NodesStatsDescriptor, INodesStatsRequest> selector = null,
 			CancellationToken ct = default
 		) => NodesStatsAsync(selector.InvokeOrDefault(new NodesStatsDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<INodesStatsResponse> NodesStatsAsync(INodesStatsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<INodesStatsRequest, INodesStatsResponse, NodesStatsResponse>(request, request.RequestParameters, ct);
+		public Task<NodesStatsResponse> NodesStatsAsync(INodesStatsRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<INodesStatsRequest, NodesStatsResponse, NodesStatsResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -13,18 +13,18 @@ namespace Nest
 		/// Preview a machine learning datafeed.
 		/// This preview shows the structure of the data that will be passed to the anomaly detection engine.
 		/// </summary>
-		IPreviewDatafeedResponse<T> PreviewDatafeed<T>(Id datafeedId, Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> selector = null);
+		PreviewDatafeedResponse<T> PreviewDatafeed<T>(Id datafeedId, Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> selector = null);
 
 		/// <inheritdoc />
-		IPreviewDatafeedResponse<T> PreviewDatafeed<T>(IPreviewDatafeedRequest request);
+		PreviewDatafeedResponse<T> PreviewDatafeed<T>(IPreviewDatafeedRequest request);
 
 		/// <inheritdoc />
-		Task<IPreviewDatafeedResponse<T>> PreviewDatafeedAsync<T>(Id datafeedId,
+		Task<PreviewDatafeedResponse<T>> PreviewDatafeedAsync<T>(Id datafeedId,
 			Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> selector = null, CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
-		Task<IPreviewDatafeedResponse<T>> PreviewDatafeedAsync<T>(IPreviewDatafeedRequest request,
+		Task<PreviewDatafeedResponse<T>> PreviewDatafeedAsync<T>(IPreviewDatafeedRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -32,28 +32,28 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IPreviewDatafeedResponse<T>
+		public PreviewDatafeedResponse<T>
 			PreviewDatafeed<T>(Id datafeedId, Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> selector = null) =>
 			PreviewDatafeed<T>(selector.InvokeOrDefault(new PreviewDatafeedDescriptor(datafeedId)));
 
 		/// <inheritdoc />
-		public IPreviewDatafeedResponse<T> PreviewDatafeed<T>(IPreviewDatafeedRequest request)
+		public PreviewDatafeedResponse<T> PreviewDatafeed<T>(IPreviewDatafeedRequest request)
 		{
 			request.RequestParameters.DeserializationOverride = PreviewDatafeedResponse<T>;
 			return DoRequest<IPreviewDatafeedRequest, PreviewDatafeedResponse<T>>(request, request.RequestParameters);
 		}
 
 		/// <inheritdoc />
-		public Task<IPreviewDatafeedResponse<T>> PreviewDatafeedAsync<T>(Id datafeedId,
+		public Task<PreviewDatafeedResponse<T>> PreviewDatafeedAsync<T>(Id datafeedId,
 			Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> selector = null, CancellationToken cancellationToken = default
 		) =>
 			PreviewDatafeedAsync<T>(selector.InvokeOrDefault(new PreviewDatafeedDescriptor(datafeedId)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IPreviewDatafeedResponse<T>> PreviewDatafeedAsync<T>(IPreviewDatafeedRequest request, CancellationToken ct = default)
+		public Task<PreviewDatafeedResponse<T>> PreviewDatafeedAsync<T>(IPreviewDatafeedRequest request, CancellationToken ct = default)
 		{
 			request.RequestParameters.DeserializationOverride = PreviewDatafeedResponse<T>;
-			return DoRequestAsync<IPreviewDatafeedRequest, IPreviewDatafeedResponse<T>, PreviewDatafeedResponse<T>>(request, request.RequestParameters, ct);
+			return DoRequestAsync<IPreviewDatafeedRequest, PreviewDatafeedResponse<T>, PreviewDatafeedResponse<T>>(request, request.RequestParameters, ct);
 		}
 
 		private PreviewDatafeedResponse<T> PreviewDatafeedResponse<T>(IApiCallDetails response, Stream stream) => response.Success

@@ -5,24 +5,15 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IStartBasicLicenseResponse : IAcknowledgedResponse
+	public class StartBasicLicenseResponse : AcknowledgedResponseBase
 	{
 		[DataMember(Name = "acknowledge")]
-		StartBasicLicenseFeatureAcknowledgements Acknowledge { get; }
-
-		[DataMember(Name = "basic_was_started")]
-		bool BasicWasStarted { get; }
-
-		[DataMember(Name = "error_message")]
-		string ErrorMessage { get; }
-	}
-
-	public class StartBasicLicenseResponse : AcknowledgedResponseBase, IStartBasicLicenseResponse
-	{
 		public StartBasicLicenseFeatureAcknowledgements Acknowledge { get; internal set; }
 
+		[DataMember(Name = "basic_was_started")]
 		public bool BasicWasStarted { get; internal set; }
 
+		[DataMember(Name = "error_message")]
 		public string ErrorMessage { get; internal set; }
 
 		//TODO: make this the default on base class for 7.0 ?

@@ -3,6 +3,9 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	//TODO: Remove this interface
+
+
 	/// <summary>
 	/// An item within a bulk response
 	/// </summary>

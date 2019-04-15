@@ -10,39 +10,39 @@ namespace Nest
 		/// <summary>
 		/// Starts the Watcher/Alerting service, if the service is not already running
 		/// </summary>
-		IStartWatcherResponse StartWatcher(Func<StartWatcherDescriptor, IStartWatcherRequest> selector = null);
+		StartWatcherResponse StartWatcher(Func<StartWatcherDescriptor, IStartWatcherRequest> selector = null);
 
 		/// <inheritdoc />
-		IStartWatcherResponse StartWatcher(IStartWatcherRequest request);
+		StartWatcherResponse StartWatcher(IStartWatcherRequest request);
 
 		/// <inheritdoc />
-		Task<IStartWatcherResponse> StartWatcherAsync(Func<StartWatcherDescriptor, IStartWatcherRequest> selector = null,
+		Task<StartWatcherResponse> StartWatcherAsync(Func<StartWatcherDescriptor, IStartWatcherRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IStartWatcherResponse> StartWatcherAsync(IStartWatcherRequest request, CancellationToken ct = default);
+		Task<StartWatcherResponse> StartWatcherAsync(IStartWatcherRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IStartWatcherResponse StartWatcher(Func<StartWatcherDescriptor, IStartWatcherRequest> selector = null) =>
+		public StartWatcherResponse StartWatcher(Func<StartWatcherDescriptor, IStartWatcherRequest> selector = null) =>
 			StartWatcher(selector.InvokeOrDefault(new StartWatcherDescriptor()));
 
 		/// <inheritdoc />
-		public IStartWatcherResponse StartWatcher(IStartWatcherRequest request) =>
+		public StartWatcherResponse StartWatcher(IStartWatcherRequest request) =>
 			DoRequest<IStartWatcherRequest, StartWatcherResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IStartWatcherResponse> StartWatcherAsync(
+		public Task<StartWatcherResponse> StartWatcherAsync(
 			Func<StartWatcherDescriptor, IStartWatcherRequest> selector = null,
 			CancellationToken ct = default
 		) => StartWatcherAsync(selector.InvokeOrDefault(new StartWatcherDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IStartWatcherResponse> StartWatcherAsync(IStartWatcherRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IStartWatcherRequest, IStartWatcherResponse, StartWatcherResponse>
+		public Task<StartWatcherResponse> StartWatcherAsync(IStartWatcherRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IStartWatcherRequest, StartWatcherResponse, StartWatcherResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

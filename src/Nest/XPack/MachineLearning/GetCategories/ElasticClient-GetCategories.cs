@@ -10,18 +10,18 @@ namespace Nest
 		/// <summary>
 		/// Retrieves machine learning job results for one or more categories.
 		/// </summary>
-		IGetCategoriesResponse GetCategories(Id jobId, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null);
+		GetCategoriesResponse GetCategories(Id jobId, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null);
 
 		/// <inheritdoc />
-		IGetCategoriesResponse GetCategories(IGetCategoriesRequest request);
+		GetCategoriesResponse GetCategories(IGetCategoriesRequest request);
 
 		/// <inheritdoc />
-		Task<IGetCategoriesResponse> GetCategoriesAsync(Id jobId, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null,
+		Task<GetCategoriesResponse> GetCategoriesAsync(Id jobId, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IGetCategoriesResponse> GetCategoriesAsync(IGetCategoriesRequest request,
+		Task<GetCategoriesResponse> GetCategoriesAsync(IGetCategoriesRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -29,22 +29,22 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IGetCategoriesResponse GetCategories(Id jobId, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null) =>
+		public GetCategoriesResponse GetCategories(Id jobId, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null) =>
 			GetCategories(selector.InvokeOrDefault(new GetCategoriesDescriptor(jobId)));
 
 		/// <inheritdoc />
-		public IGetCategoriesResponse GetCategories(IGetCategoriesRequest request) =>
+		public GetCategoriesResponse GetCategories(IGetCategoriesRequest request) =>
 			DoRequest<IGetCategoriesRequest, GetCategoriesResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetCategoriesResponse> GetCategoriesAsync(
+		public Task<GetCategoriesResponse> GetCategoriesAsync(
 			Id jobId,
 			Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null,
 			CancellationToken ct = default
 		) => GetCategoriesAsync(selector.InvokeOrDefault(new GetCategoriesDescriptor(jobId)), ct);
 
 		/// <inheritdoc />
-		public Task<IGetCategoriesResponse> GetCategoriesAsync(IGetCategoriesRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetCategoriesRequest, IGetCategoriesResponse, GetCategoriesResponse>(request, request.RequestParameters, ct);
+		public Task<GetCategoriesResponse> GetCategoriesAsync(IGetCategoriesRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetCategoriesRequest, GetCategoriesResponse, GetCategoriesResponse>(request, request.RequestParameters, ct);
 	}
 }

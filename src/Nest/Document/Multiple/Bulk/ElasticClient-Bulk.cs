@@ -14,34 +14,34 @@ namespace Nest
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
 		/// </summary>
 		/// <param name="request">A descriptor the describe the index/create/delete operation for this bulk operation</param>
-		IBulkResponse Bulk(IBulkRequest request);
+		BulkResponse Bulk(IBulkRequest request);
 
 		/// <inheritdoc />
-		IBulkResponse Bulk(Func<BulkDescriptor, IBulkRequest> selector);
+		BulkResponse Bulk(Func<BulkDescriptor, IBulkRequest> selector);
 
 		/// <inheritdoc />
-		Task<IBulkResponse> BulkAsync(IBulkRequest request, CancellationToken ct = default);
+		Task<BulkResponse> BulkAsync(IBulkRequest request, CancellationToken ct = default);
 
 		/// <inheritdoc />
-		Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector, CancellationToken ct = default);
+		Task<BulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IBulkResponse Bulk(IBulkRequest request) =>
+		public BulkResponse Bulk(IBulkRequest request) =>
 			DoRequest<IBulkRequest, BulkResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public IBulkResponse Bulk(Func<BulkDescriptor, IBulkRequest> selector) =>
+		public BulkResponse Bulk(Func<BulkDescriptor, IBulkRequest> selector) =>
 			Bulk(selector.InvokeOrDefault(new BulkDescriptor()));
 
 		/// <inheritdoc />
-		public Task<IBulkResponse> BulkAsync(IBulkRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IBulkRequest, IBulkResponse, BulkResponse>(request, request.RequestParameters, ct);
+		public Task<BulkResponse> BulkAsync(IBulkRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IBulkRequest, BulkResponse, BulkResponse>(request, request.RequestParameters, ct);
 
 		/// <inheritdoc />
-		public Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector, CancellationToken ct = default) =>
+		public Task<BulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector, CancellationToken ct = default) =>
 			BulkAsync(selector.InvokeOrDefault(new BulkDescriptor()), ct);
 	}
 }

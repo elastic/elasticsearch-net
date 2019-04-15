@@ -12,39 +12,39 @@ namespace Nest
 		/// A job must be opened in order for it to be ready to receive and analyze data.
 		/// A job can be opened and closed multiple times throughout its lifecycle.
 		/// </summary>
-		IOpenJobResponse OpenJob(Id jobId, Func<OpenJobDescriptor, IOpenJobRequest> selector = null);
+		OpenJobResponse OpenJob(Id jobId, Func<OpenJobDescriptor, IOpenJobRequest> selector = null);
 
 		/// <inheritdoc />
-		IOpenJobResponse OpenJob(IOpenJobRequest request);
+		OpenJobResponse OpenJob(IOpenJobRequest request);
 
 		/// <inheritdoc />
-		Task<IOpenJobResponse> OpenJobAsync(Id jobId, Func<OpenJobDescriptor, IOpenJobRequest> selector = null,
+		Task<OpenJobResponse> OpenJobAsync(Id jobId, Func<OpenJobDescriptor, IOpenJobRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IOpenJobResponse> OpenJobAsync(IOpenJobRequest request, CancellationToken ct = default);
+		Task<OpenJobResponse> OpenJobAsync(IOpenJobRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IOpenJobResponse OpenJob(Id jobId, Func<OpenJobDescriptor, IOpenJobRequest> selector = null) =>
+		public OpenJobResponse OpenJob(Id jobId, Func<OpenJobDescriptor, IOpenJobRequest> selector = null) =>
 			OpenJob(selector.InvokeOrDefault(new OpenJobDescriptor(jobId)));
 
 		/// <inheritdoc />
-		public IOpenJobResponse OpenJob(IOpenJobRequest request) =>
+		public OpenJobResponse OpenJob(IOpenJobRequest request) =>
 			DoRequest<IOpenJobRequest, OpenJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IOpenJobResponse> OpenJobAsync(
+		public Task<OpenJobResponse> OpenJobAsync(
 			Id jobId,
 			Func<OpenJobDescriptor, IOpenJobRequest> selector = null,
 			CancellationToken ct = default
 		) => OpenJobAsync(selector.InvokeOrDefault(new OpenJobDescriptor(jobId)), ct);
 
 		/// <inheritdoc />
-		public Task<IOpenJobResponse> OpenJobAsync(IOpenJobRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IOpenJobRequest, IOpenJobResponse, OpenJobResponse>(request, request.RequestParameters, ct);
+		public Task<OpenJobResponse> OpenJobAsync(IOpenJobRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IOpenJobRequest, OpenJobResponse, OpenJobResponse>(request, request.RequestParameters, ct);
 	}
 }

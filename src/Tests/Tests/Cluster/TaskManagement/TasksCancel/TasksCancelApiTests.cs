@@ -11,7 +11,7 @@ using Tests.Framework.Integration;
 namespace Tests.Cluster.TaskManagement.TasksCancel
 {
 	public class TasksCancelApiTests
-		: ApiIntegrationTestBase<IntrusiveOperationCluster, ICancelTasksResponse, ICancelTasksRequest, CancelTasksDescriptor, CancelTasksRequest>
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, CancelTasksResponse, ICancelTasksRequest, CancelTasksDescriptor, CancelTasksRequest>
 	{
 		public TasksCancelApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -61,7 +61,7 @@ namespace Tests.Cluster.TaskManagement.TasksCancel
 			(client, r) => client.CancelTasksAsync(r)
 		);
 
-		protected override void ExpectResponse(ICancelTasksResponse response)
+		protected override void ExpectResponse(CancelTasksResponse response)
 		{
 			response.NodeFailures.Should().BeNullOrEmpty();
 			response.Nodes.Should().NotBeEmpty();

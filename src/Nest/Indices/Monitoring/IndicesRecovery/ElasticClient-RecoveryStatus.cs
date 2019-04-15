@@ -8,18 +8,18 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc />
-		IRecoveryStatusResponse RecoveryStatus(Indices indices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null);
+		RecoveryStatusResponse RecoveryStatus(Indices indices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null);
 
 		/// <inheritdoc />
-		IRecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest request);
+		RecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest request);
 
 		/// <inheritdoc />
-		Task<IRecoveryStatusResponse> RecoveryStatusAsync(Indices indices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null,
+		Task<RecoveryStatusResponse> RecoveryStatusAsync(Indices indices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest request,
+		Task<RecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -27,15 +27,15 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IRecoveryStatusResponse RecoveryStatus(Indices indices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null) =>
+		public RecoveryStatusResponse RecoveryStatus(Indices indices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null) =>
 			RecoveryStatus(selector.InvokeOrDefault(new RecoveryStatusDescriptor().Index(indices)));
 
 		/// <inheritdoc />
-		public IRecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest request) =>
+		public RecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest request) =>
 			DoRequest<IRecoveryStatusRequest, RecoveryStatusResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IRecoveryStatusResponse> RecoveryStatusAsync(
+		public Task<RecoveryStatusResponse> RecoveryStatusAsync(
 			Indices indices,
 			Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null,
 			CancellationToken ct = default
@@ -43,7 +43,7 @@ namespace Nest
 			RecoveryStatusAsync(selector.InvokeOrDefault(new RecoveryStatusDescriptor().Index(indices)), ct);
 
 		/// <inheritdoc />
-		public Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IRecoveryStatusRequest, IRecoveryStatusResponse, RecoveryStatusResponse>(request, request.RequestParameters, ct);
+		public Task<RecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IRecoveryStatusRequest, RecoveryStatusResponse, RecoveryStatusResponse>(request, request.RequestParameters, ct);
 	}
 }

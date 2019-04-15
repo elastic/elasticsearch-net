@@ -4,35 +4,24 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IHasPrivilegesResponse : IResponse
+	public class HasPrivilegesResponse : ResponseBase
 	{
 		[DataMember(Name = "application")]
 		[JsonFormatter(typeof(ApplicationsPrivilegesFormatter))]
-		IReadOnlyDictionary<string, IReadOnlyCollection<ResourcePrivileges>> Applications { get; }
-
-		[DataMember(Name = "cluster")]
-		IReadOnlyDictionary<string, bool> Clusters { get; }
-
-		[DataMember(Name = "has_all_requested")]
-		bool HasAllRequested { get; }
-
-		[DataMember(Name = "index")]
-		[JsonFormatter(typeof(IndicesPrivilegesFormatter))]
-		IReadOnlyCollection<ResourcePrivileges> Indices { get; }
-
-		[DataMember(Name = "username")]
-		string Username { get; }
-	}
-
-	public class HasPrivilegesResponse : ResponseBase, IHasPrivilegesResponse
-	{
 		public IReadOnlyDictionary<string, IReadOnlyCollection<ResourcePrivileges>> Applications { get; internal set; } =
 			EmptyReadOnly<string, IReadOnlyCollection<ResourcePrivileges>>.Dictionary;
 
+		[DataMember(Name = "cluster")]
 		public IReadOnlyDictionary<string, bool> Clusters { get; internal set; } = EmptyReadOnly<string, bool>.Dictionary;
+
+		[DataMember(Name = "has_all_requested")]
 		public bool HasAllRequested { get; internal set; }
 
+		[DataMember(Name = "index")]
+		[JsonFormatter(typeof(IndicesPrivilegesFormatter))]
 		public IReadOnlyCollection<ResourcePrivileges> Indices { get; internal set; } = EmptyReadOnly<ResourcePrivileges>.Collection;
+
+		[DataMember(Name = "username")]
 		public string Username { get; internal set; }
 	}
 

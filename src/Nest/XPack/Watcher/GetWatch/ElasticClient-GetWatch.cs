@@ -10,40 +10,40 @@ namespace Nest
 		/// <summary>
 		/// Retrieves a watch by its id
 		/// </summary>
-		IGetWatchResponse GetWatch(Id watchId, Func<GetWatchDescriptor, IGetWatchRequest> selector = null);
+		GetWatchResponse GetWatch(Id watchId, Func<GetWatchDescriptor, IGetWatchRequest> selector = null);
 
 		/// <inheritdoc />
-		IGetWatchResponse GetWatch(IGetWatchRequest request);
+		GetWatchResponse GetWatch(IGetWatchRequest request);
 
 		/// <inheritdoc />
-		Task<IGetWatchResponse> GetWatchAsync(Id watchId, Func<GetWatchDescriptor, IGetWatchRequest> selector = null,
+		Task<GetWatchResponse> GetWatchAsync(Id watchId, Func<GetWatchDescriptor, IGetWatchRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IGetWatchResponse> GetWatchAsync(IGetWatchRequest request, CancellationToken ct = default);
+		Task<GetWatchResponse> GetWatchAsync(IGetWatchRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IGetWatchResponse GetWatch(Id watchId, Func<GetWatchDescriptor, IGetWatchRequest> selector = null) =>
+		public GetWatchResponse GetWatch(Id watchId, Func<GetWatchDescriptor, IGetWatchRequest> selector = null) =>
 			GetWatch(selector.InvokeOrDefault(new GetWatchDescriptor(watchId)));
 
 		/// <inheritdoc />
-		public IGetWatchResponse GetWatch(IGetWatchRequest request) =>
+		public GetWatchResponse GetWatch(IGetWatchRequest request) =>
 			DoRequest<IGetWatchRequest, GetWatchResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetWatchResponse> GetWatchAsync(
+		public Task<GetWatchResponse> GetWatchAsync(
 			Id watchId,
 			Func<GetWatchDescriptor, IGetWatchRequest> selector = null,
 			CancellationToken ct = default
 		) => GetWatchAsync(selector.InvokeOrDefault(new GetWatchDescriptor(watchId)), ct);
 
 		/// <inheritdoc />
-		public Task<IGetWatchResponse> GetWatchAsync(IGetWatchRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetWatchRequest, IGetWatchResponse, GetWatchResponse>
+		public Task<GetWatchResponse> GetWatchAsync(IGetWatchRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetWatchRequest, GetWatchResponse, GetWatchResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

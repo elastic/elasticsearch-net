@@ -12,40 +12,40 @@ namespace Nest
 		/// A datafeed that is stopped ceases to retrieve data from Elasticsearch. A datafeed can be started and stopped multiple times throughout its
 		/// lifecycle.
 		/// </summary>
-		IStopDatafeedResponse StopDatafeed(Id datafeedId, Func<StopDatafeedDescriptor, IStopDatafeedRequest> selector = null);
+		StopDatafeedResponse StopDatafeed(Id datafeedId, Func<StopDatafeedDescriptor, IStopDatafeedRequest> selector = null);
 
 		/// <inheritdoc />
-		IStopDatafeedResponse StopDatafeed(IStopDatafeedRequest request);
+		StopDatafeedResponse StopDatafeed(IStopDatafeedRequest request);
 
 		/// <inheritdoc />
-		Task<IStopDatafeedResponse> StopDatafeedAsync(Id datafeedId, Func<StopDatafeedDescriptor, IStopDatafeedRequest> selector = null,
+		Task<StopDatafeedResponse> StopDatafeedAsync(Id datafeedId, Func<StopDatafeedDescriptor, IStopDatafeedRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IStopDatafeedResponse> StopDatafeedAsync(IStopDatafeedRequest request, CancellationToken ct = default);
+		Task<StopDatafeedResponse> StopDatafeedAsync(IStopDatafeedRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IStopDatafeedResponse StopDatafeed(Id datafeedId, Func<StopDatafeedDescriptor, IStopDatafeedRequest> selector = null) =>
+		public StopDatafeedResponse StopDatafeed(Id datafeedId, Func<StopDatafeedDescriptor, IStopDatafeedRequest> selector = null) =>
 			StopDatafeed(selector.InvokeOrDefault(new StopDatafeedDescriptor(datafeedId)));
 
 		/// <inheritdoc />
-		public IStopDatafeedResponse StopDatafeed(IStopDatafeedRequest request) =>
+		public StopDatafeedResponse StopDatafeed(IStopDatafeedRequest request) =>
 			DoRequest<IStopDatafeedRequest, StopDatafeedResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IStopDatafeedResponse> StopDatafeedAsync(
+		public Task<StopDatafeedResponse> StopDatafeedAsync(
 			Id datafeedId,
 			Func<StopDatafeedDescriptor, IStopDatafeedRequest> selector = null,
 			CancellationToken ct = default
 		) => StopDatafeedAsync(selector.InvokeOrDefault(new StopDatafeedDescriptor(datafeedId)), ct);
 
 		/// <inheritdoc />
-		public Task<IStopDatafeedResponse> StopDatafeedAsync(IStopDatafeedRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IStopDatafeedRequest, IStopDatafeedResponse, StopDatafeedResponse>
+		public Task<StopDatafeedResponse> StopDatafeedAsync(IStopDatafeedRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IStopDatafeedRequest, StopDatafeedResponse, StopDatafeedResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

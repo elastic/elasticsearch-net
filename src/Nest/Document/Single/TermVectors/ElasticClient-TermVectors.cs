@@ -14,21 +14,21 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="T">The type of the document</typeparam>
 		/// <param name="selector">A descriptor for the terms vector operation</param>
-		ITermVectorsResponse TermVectors<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> selector)
+		TermVectorsResponse TermVectors<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> selector)
 			where T : class;
 
 		/// <inheritdoc />
-		ITermVectorsResponse TermVectors<T>(ITermVectorsRequest<T> request)
+		TermVectorsResponse TermVectors<T>(ITermVectorsRequest<T> request)
 			where T : class;
 
 		/// <inheritdoc />
-		Task<ITermVectorsResponse> TermVectorsAsync<T>(
+		Task<TermVectorsResponse> TermVectorsAsync<T>(
 			Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> selector,
 			CancellationToken ct = default
 		) where T : class;
 
 		/// <inheritdoc />
-		Task<ITermVectorsResponse> TermVectorsAsync<T>(ITermVectorsRequest<T> request,
+		Task<TermVectorsResponse> TermVectorsAsync<T>(ITermVectorsRequest<T> request,
 			CancellationToken ct = default
 		)
 			where T : class;
@@ -37,15 +37,15 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public ITermVectorsResponse TermVectors<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> selector) where T : class =>
+		public TermVectorsResponse TermVectors<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> selector) where T : class =>
 			TermVectors(selector?.Invoke(new TermVectorsDescriptor<T>(typeof(T))));
 
 		/// <inheritdoc />
-		public ITermVectorsResponse TermVectors<T>(ITermVectorsRequest<T> request) where T : class =>
+		public TermVectorsResponse TermVectors<T>(ITermVectorsRequest<T> request) where T : class =>
 			DoRequest<ITermVectorsRequest<T>, TermVectorsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<ITermVectorsResponse> TermVectorsAsync<T>(
+		public Task<TermVectorsResponse> TermVectorsAsync<T>(
 			Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> selector,
 			CancellationToken ct = default
 		)
@@ -53,8 +53,8 @@ namespace Nest
 			TermVectorsAsync(selector?.Invoke(new TermVectorsDescriptor<T>(typeof(T))), ct);
 
 		/// <inheritdoc />
-		public Task<ITermVectorsResponse> TermVectorsAsync<T>(ITermVectorsRequest<T> request, CancellationToken ct = default)
+		public Task<TermVectorsResponse> TermVectorsAsync<T>(ITermVectorsRequest<T> request, CancellationToken ct = default)
 			where T : class =>
-			DoRequestAsync<ITermVectorsRequest<T>, ITermVectorsResponse, TermVectorsResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ITermVectorsRequest<T>, TermVectorsResponse, TermVectorsResponse>(request, request.RequestParameters, ct);
 	}
 }

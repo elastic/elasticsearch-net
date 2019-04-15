@@ -8,18 +8,18 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc />
-		IGetRepositoryResponse GetRepository(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector = null);
+		GetRepositoryResponse GetRepository(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector = null);
 
 		/// <inheritdoc />
-		IGetRepositoryResponse GetRepository(IGetRepositoryRequest request);
+		GetRepositoryResponse GetRepository(IGetRepositoryRequest request);
 
 		/// <inheritdoc />
-		Task<IGetRepositoryResponse> GetRepositoryAsync(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector = null,
+		Task<GetRepositoryResponse> GetRepositoryAsync(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IGetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request,
+		Task<GetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -27,21 +27,21 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IGetRepositoryResponse GetRepository(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector = null) =>
+		public GetRepositoryResponse GetRepository(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector = null) =>
 			GetRepository(selector.InvokeOrDefault(new GetRepositoryDescriptor()));
 
 		/// <inheritdoc />
-		public IGetRepositoryResponse GetRepository(IGetRepositoryRequest request) =>
+		public GetRepositoryResponse GetRepository(IGetRepositoryRequest request) =>
 			DoRequest<IGetRepositoryRequest, GetRepositoryResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetRepositoryResponse> GetRepositoryAsync(
+		public Task<GetRepositoryResponse> GetRepositoryAsync(
 			Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector = null,
 			CancellationToken ct = default
 		) => GetRepositoryAsync(selector.InvokeOrDefault(new GetRepositoryDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IGetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetRepositoryRequest, IGetRepositoryResponse, GetRepositoryResponse>(request, request.RequestParameters, ct);
+		public Task<GetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetRepositoryRequest, GetRepositoryResponse, GetRepositoryResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -10,38 +10,38 @@ namespace Nest
 		/// <summary>
 		/// Retrieves results for machine learning job influencers.
 		/// </summary>
-		IGetJobStatsResponse GetJobStats(Func<GetJobStatsDescriptor, IGetJobStatsRequest> selector = null);
+		GetJobStatsResponse GetJobStats(Func<GetJobStatsDescriptor, IGetJobStatsRequest> selector = null);
 
 		/// <inheritdoc />
-		IGetJobStatsResponse GetJobStats(IGetJobStatsRequest request);
+		GetJobStatsResponse GetJobStats(IGetJobStatsRequest request);
 
 		/// <inheritdoc />
-		Task<IGetJobStatsResponse> GetJobStatsAsync(Func<GetJobStatsDescriptor, IGetJobStatsRequest> selector = null,
+		Task<GetJobStatsResponse> GetJobStatsAsync(Func<GetJobStatsDescriptor, IGetJobStatsRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IGetJobStatsResponse> GetJobStatsAsync(IGetJobStatsRequest request, CancellationToken ct = default);
+		Task<GetJobStatsResponse> GetJobStatsAsync(IGetJobStatsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IGetJobStatsResponse GetJobStats(Func<GetJobStatsDescriptor, IGetJobStatsRequest> selector = null) =>
+		public GetJobStatsResponse GetJobStats(Func<GetJobStatsDescriptor, IGetJobStatsRequest> selector = null) =>
 			GetJobStats(selector.InvokeOrDefault(new GetJobStatsDescriptor()));
 
 		/// <inheritdoc />
-		public IGetJobStatsResponse GetJobStats(IGetJobStatsRequest request) =>
+		public GetJobStatsResponse GetJobStats(IGetJobStatsRequest request) =>
 			DoRequest<IGetJobStatsRequest, GetJobStatsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetJobStatsResponse> GetJobStatsAsync(
+		public Task<GetJobStatsResponse> GetJobStatsAsync(
 			Func<GetJobStatsDescriptor, IGetJobStatsRequest> selector = null,
 			CancellationToken ct = default
 		) => GetJobStatsAsync(selector.InvokeOrDefault(new GetJobStatsDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IGetJobStatsResponse> GetJobStatsAsync(IGetJobStatsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetJobStatsRequest, IGetJobStatsResponse, GetJobStatsResponse>(request, request.RequestParameters, ct);
+		public Task<GetJobStatsResponse> GetJobStatsAsync(IGetJobStatsRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetJobStatsRequest, GetJobStatsResponse, GetJobStatsResponse>(request, request.RequestParameters, ct);
 	}
 }

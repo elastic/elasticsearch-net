@@ -38,7 +38,7 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 		protected override AggregationDictionary InitializerAggs =>
 			new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.Location));
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
+		protected override void ExpectResponse(SearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var centroid = response.Aggregations.GeoCentroid("centroid");
@@ -100,7 +100,7 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 				Aggregations = new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.Location))
 			};
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
+		protected override void ExpectResponse(SearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 
@@ -143,7 +143,7 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 		protected override QueryContainer QueryScope => new TermQuery { Field = Infer.Field<Project>(p => p.Name), Value = "noresult" };
 		protected override object QueryScopeJson { get; } = new { term = new { name = new { value = "noresult" } } };
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
+		protected override void ExpectResponse(SearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var centroid = response.Aggregations.GeoCentroid("centroid");

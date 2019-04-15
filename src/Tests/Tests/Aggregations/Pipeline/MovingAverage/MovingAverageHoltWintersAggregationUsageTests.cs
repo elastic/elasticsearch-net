@@ -101,7 +101,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 					}
 			};
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
+		protected override void ExpectResponse(SearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 

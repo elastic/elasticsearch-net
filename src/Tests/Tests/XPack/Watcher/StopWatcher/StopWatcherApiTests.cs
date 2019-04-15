@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 namespace Tests.XPack.Watcher.StopWatcher
 {
 	public class StopWatcherApiTests
-		: ApiIntegrationTestBase<WatcherStateCluster, IStopWatcherResponse, IStopWatcherRequest, StopWatcherDescriptor, StopWatcherRequest>
+		: ApiIntegrationTestBase<WatcherStateCluster, StopWatcherResponse, IStopWatcherRequest, StopWatcherDescriptor, StopWatcherRequest>
 	{
 		public StopWatcherApiTests(WatcherStateCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -32,6 +32,6 @@ namespace Tests.XPack.Watcher.StopWatcher
 			(client, r) => client.StopWatcherAsync(r)
 		);
 
-		protected override void ExpectResponse(IStopWatcherResponse response) => response.Acknowledged.Should().BeTrue();
+		protected override void ExpectResponse(StopWatcherResponse response) => response.Acknowledged.Should().BeTrue();
 	}
 }

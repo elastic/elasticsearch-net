@@ -10,18 +10,18 @@ namespace Nest
 		/// <summary>
 		/// Validates a detector for a machine learning job
 		/// </summary>
-		IValidateDetectorResponse ValidateDetector<T>(Func<ValidateDetectorDescriptor<T>, IValidateDetectorRequest> selector) where T : class;
+		ValidateDetectorResponse ValidateDetector<T>(Func<ValidateDetectorDescriptor<T>, IValidateDetectorRequest> selector) where T : class;
 
 		/// <inheritdoc />
-		IValidateDetectorResponse ValidateDetector(IValidateDetectorRequest request);
+		ValidateDetectorResponse ValidateDetector(IValidateDetectorRequest request);
 
 		/// <inheritdoc />
-		Task<IValidateDetectorResponse> ValidateDetectorAsync<T>(Func<ValidateDetectorDescriptor<T>, IValidateDetectorRequest> selector,
+		Task<ValidateDetectorResponse> ValidateDetectorAsync<T>(Func<ValidateDetectorDescriptor<T>, IValidateDetectorRequest> selector,
 			CancellationToken ct = default
 		) where T : class;
 
 		/// <inheritdoc />
-		Task<IValidateDetectorResponse> ValidateDetectorAsync(IValidateDetectorRequest request,
+		Task<ValidateDetectorResponse> ValidateDetectorAsync(IValidateDetectorRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -29,16 +29,16 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IValidateDetectorResponse ValidateDetector<T>(Func<ValidateDetectorDescriptor<T>, IValidateDetectorRequest> selector)
+		public ValidateDetectorResponse ValidateDetector<T>(Func<ValidateDetectorDescriptor<T>, IValidateDetectorRequest> selector)
 			where T : class =>
 			ValidateDetector(selector.InvokeOrDefault(new ValidateDetectorDescriptor<T>()));
 
 		/// <inheritdoc />
-		public IValidateDetectorResponse ValidateDetector(IValidateDetectorRequest request) =>
+		public ValidateDetectorResponse ValidateDetector(IValidateDetectorRequest request) =>
 			DoRequest<IValidateDetectorRequest, ValidateDetectorResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IValidateDetectorResponse> ValidateDetectorAsync<T>(
+		public Task<ValidateDetectorResponse> ValidateDetectorAsync<T>(
 			Func<ValidateDetectorDescriptor<T>, IValidateDetectorRequest> selector,
 			CancellationToken ct = default
 		)
@@ -46,8 +46,8 @@ namespace Nest
 			ValidateDetectorAsync(selector.InvokeOrDefault(new ValidateDetectorDescriptor<T>()), ct);
 
 		/// <inheritdoc />
-		public Task<IValidateDetectorResponse> ValidateDetectorAsync(IValidateDetectorRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IValidateDetectorRequest, IValidateDetectorResponse, ValidateDetectorResponse>
+		public Task<ValidateDetectorResponse> ValidateDetectorAsync(IValidateDetectorRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IValidateDetectorRequest, ValidateDetectorResponse, ValidateDetectorResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

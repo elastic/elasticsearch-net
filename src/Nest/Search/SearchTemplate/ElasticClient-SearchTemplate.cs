@@ -14,44 +14,44 @@ namespace Nest
 		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
 		/// <param name="selector">A descriptor that describes the parameters for the search operation</param>
 		/// <returns></returns>
-		ISearchResponse<T> SearchTemplate<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector)
+		SearchResponse<T> SearchTemplate<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector)
 			where T : class;
 
 		/// <inheritdoc />
-		ISearchResponse<TResult> SearchTemplate<T, TResult>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector)
+		SearchResponse<TResult> SearchTemplate<T, TResult>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector)
 			where T : class
 			where TResult : class;
 
 		/// <inheritdoc />
-		ISearchResponse<T> SearchTemplate<T>(ISearchTemplateRequest request)
+		SearchResponse<T> SearchTemplate<T>(ISearchTemplateRequest request)
 			where T : class;
 
 		/// <inheritdoc />
-		ISearchResponse<TResult> SearchTemplate<T, TResult>(ISearchTemplateRequest request)
+		SearchResponse<TResult> SearchTemplate<T, TResult>(ISearchTemplateRequest request)
 			where T : class
 			where TResult : class;
 
 		/// <inheritdoc />
-		Task<ISearchResponse<T>> SearchTemplateAsync<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector,
+		Task<SearchResponse<T>> SearchTemplateAsync<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector,
 			CancellationToken ct = default
 		)
 			where T : class;
 
 		/// <inheritdoc />
-		Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector,
+		Task<SearchResponse<TResult>> SearchTemplateAsync<T, TResult>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector,
 			CancellationToken ct = default
 		)
 			where T : class
 			where TResult : class;
 
 		/// <inheritdoc />
-		Task<ISearchResponse<T>> SearchTemplateAsync<T>(ISearchTemplateRequest request,
+		Task<SearchResponse<T>> SearchTemplateAsync<T>(ISearchTemplateRequest request,
 			CancellationToken ct = default
 		)
 			where T : class;
 
 		/// <inheritdoc />
-		Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(ISearchTemplateRequest request,
+		Task<SearchResponse<TResult>> SearchTemplateAsync<T, TResult>(ISearchTemplateRequest request,
 			CancellationToken ct = default
 		)
 			where T : class
@@ -60,31 +60,31 @@ namespace Nest
 
 	public partial class ElasticClient
 	{
-		public ISearchResponse<T> SearchTemplate<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector) where T : class =>
+		public SearchResponse<T> SearchTemplate<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector) where T : class =>
 			SearchTemplate<T, T>(selector);
 
-		public ISearchResponse<TResult> SearchTemplate<T, TResult>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector)
+		public SearchResponse<TResult> SearchTemplate<T, TResult>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector)
 			where T : class
 			where TResult : class =>
 			SearchTemplate<T, TResult>(selector?.Invoke(new SearchTemplateDescriptor<T>()));
 
-		public ISearchResponse<T> SearchTemplate<T>(ISearchTemplateRequest request)
+		public SearchResponse<T> SearchTemplate<T>(ISearchTemplateRequest request)
 			where T : class =>
 			SearchTemplate<T, T>(request);
 
-		public ISearchResponse<TResult> SearchTemplate<T, TResult>(ISearchTemplateRequest request)
+		public SearchResponse<TResult> SearchTemplate<T, TResult>(ISearchTemplateRequest request)
 			where T : class
 			where TResult : class =>
 			DoRequest<ISearchTemplateRequest, SearchResponse<TResult>>(request, request.RequestParameters);
 
-		public Task<ISearchResponse<T>> SearchTemplateAsync<T>(
+		public Task<SearchResponse<T>> SearchTemplateAsync<T>(
 			Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector,
 			CancellationToken ct = default
 		)
 			where T : class =>
 			SearchTemplateAsync<T, T>(selector, ct);
 
-		public Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(
+		public Task<SearchResponse<TResult>> SearchTemplateAsync<T, TResult>(
 			Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector,
 			CancellationToken ct = default
 		)
@@ -92,13 +92,13 @@ namespace Nest
 			where TResult : class =>
 			SearchTemplateAsync<T, TResult>(selector?.Invoke(new SearchTemplateDescriptor<T>()), ct);
 
-		public Task<ISearchResponse<T>> SearchTemplateAsync<T>(ISearchTemplateRequest request, CancellationToken ct = default)
+		public Task<SearchResponse<T>> SearchTemplateAsync<T>(ISearchTemplateRequest request, CancellationToken ct = default)
 			where T : class =>
 			SearchTemplateAsync<T, T>(request, ct);
 
-		public Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(ISearchTemplateRequest request, CancellationToken ct = default)
+		public Task<SearchResponse<TResult>> SearchTemplateAsync<T, TResult>(ISearchTemplateRequest request, CancellationToken ct = default)
 			where T : class
 			where TResult : class =>
-			DoRequestAsync<ISearchTemplateRequest, ISearchResponse<TResult>, SearchResponse<TResult>>(request, request.RequestParameters, ct);
+			DoRequestAsync<ISearchTemplateRequest, SearchResponse<TResult>, SearchResponse<TResult>>(request, request.RequestParameters, ct);
 	}
 }

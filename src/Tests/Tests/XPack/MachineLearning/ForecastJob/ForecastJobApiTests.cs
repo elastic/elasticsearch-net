@@ -13,7 +13,7 @@ namespace Tests.XPack.MachineLearning.ForecastJob
 {
 	[SkipVersion("<6.1.0", "Only exists in Elasticsearch 6.1.0+")]
 	public class ForecastJobApiTests
-		: MachineLearningIntegrationTestBase<IForecastJobResponse, IForecastJobRequest, ForecastJobDescriptor, ForecastJobRequest>
+		: MachineLearningIntegrationTestBase<ForecastJobResponse, IForecastJobRequest, ForecastJobDescriptor, ForecastJobRequest>
 	{
 		private const int BucketSpanSeconds = 3600;
 
@@ -91,7 +91,7 @@ namespace Tests.XPack.MachineLearning.ForecastJob
 
 		protected override ForecastJobDescriptor NewDescriptor() => new ForecastJobDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(IForecastJobResponse response)
+		protected override void ExpectResponse(ForecastJobResponse response)
 		{
 			response.ShouldBeValid();
 			response.ForecastId.Should().NotBeNullOrEmpty();

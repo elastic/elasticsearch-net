@@ -17,7 +17,7 @@ using static Tests.Domain.Helpers.TestValueHelper;
 namespace Tests.Search.MultiSearch
 {
 	public class MultiSearchApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IMultiSearchResponse, IMultiSearchRequest, MultiSearchDescriptor, MultiSearchRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, MultiSearchResponse, IMultiSearchRequest, MultiSearchDescriptor, MultiSearchRequest>
 	{
 		public MultiSearchApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -126,8 +126,8 @@ namespace Tests.Search.MultiSearch
 		{
 			r.TotalResponses.Should().Be(6);
 
-			var invalidResponses = r.GetInvalidResponses();
-			invalidResponses.Should().BeEmpty();
+			var nvalidResponses = r.GetInvalidResponses();
+			nvalidResponses.Should().BeEmpty();
 
 			var allResponses = r.AllResponses.ToList();
 			allResponses.Should().NotBeEmpty().And.HaveCount(6).And.OnlyContain(rr => rr.IsValid);

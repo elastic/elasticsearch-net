@@ -11,33 +11,33 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc />
-		IGetIndexResponse GetIndex(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> selector = null);
+		GetIndexResponse GetIndex(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> selector = null);
 
 		/// <inheritdoc />
-		IGetIndexResponse GetIndex(IGetIndexRequest request);
+		GetIndexResponse GetIndex(IGetIndexRequest request);
 
 		/// <inheritdoc />
-		Task<IGetIndexResponse> GetIndexAsync(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> selector = null,
+		Task<GetIndexResponse> GetIndexAsync(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest request, CancellationToken ct = default);
+		Task<GetIndexResponse> GetIndexAsync(IGetIndexRequest request, CancellationToken ct = default);
 	}
 
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IGetIndexResponse GetIndex(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> selector = null) =>
+		public GetIndexResponse GetIndex(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> selector = null) =>
 			GetIndex(selector.InvokeOrDefault(new GetIndexDescriptor(indices)));
 
 		/// <inheritdoc />
-		public IGetIndexResponse GetIndex(IGetIndexRequest request) =>
+		public GetIndexResponse GetIndex(IGetIndexRequest request) =>
 			DoRequest<IGetIndexRequest, GetIndexResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetIndexResponse> GetIndexAsync(
+		public Task<GetIndexResponse> GetIndexAsync(
 			Indices indices,
 			Func<GetIndexDescriptor, IGetIndexRequest> selector = null,
 			CancellationToken ct = default
@@ -45,7 +45,7 @@ namespace Nest
 			GetIndexAsync(selector.InvokeOrDefault(new GetIndexDescriptor(indices)), ct);
 
 		/// <inheritdoc />
-		public Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetIndexRequest, IGetIndexResponse, GetIndexResponse>(request, request.RequestParameters, ct);
+		public Task<GetIndexResponse> GetIndexAsync(IGetIndexRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetIndexRequest, GetIndexResponse, GetIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

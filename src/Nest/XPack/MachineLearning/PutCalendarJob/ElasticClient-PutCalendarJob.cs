@@ -10,32 +10,32 @@ namespace Nest
 		/// <summary>
 		/// Adds a job to a machine learning calendar.
 		/// </summary>
-		IPutCalendarJobResponse PutCalendarJob(Id calendarId, Id jobId, Func<PutCalendarJobDescriptor, IPutCalendarJobRequest> selector = null);
+		PutCalendarJobResponse PutCalendarJob(Id calendarId, Id jobId, Func<PutCalendarJobDescriptor, IPutCalendarJobRequest> selector = null);
 
 		/// <inheritdoc cref="PutCalendarJob(Nest.Id,Nest.Id,System.Func{Nest.PutCalendarJobDescriptor,Nest.IPutCalendarJobRequest})" />
-		IPutCalendarJobResponse PutCalendarJob(IPutCalendarJobRequest request);
+		PutCalendarJobResponse PutCalendarJob(IPutCalendarJobRequest request);
 
 		/// <inheritdoc cref="PutCalendarJob(Nest.Id,Nest.Id,System.Func{Nest.PutCalendarJobDescriptor,Nest.IPutCalendarJobRequest})" />
-		Task<IPutCalendarJobResponse> PutCalendarJobAsync(Id calendarId, Id jobId, Func<PutCalendarJobDescriptor, IPutCalendarJobRequest> selector = null,
+		Task<PutCalendarJobResponse> PutCalendarJobAsync(Id calendarId, Id jobId, Func<PutCalendarJobDescriptor, IPutCalendarJobRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="PutCalendarJob(Nest.Id,Nest.Id,System.Func{Nest.PutCalendarJobDescriptor,Nest.IPutCalendarJobRequest})" />
-		Task<IPutCalendarJobResponse> PutCalendarJobAsync(IPutCalendarJobRequest request, CancellationToken ct = default);
+		Task<PutCalendarJobResponse> PutCalendarJobAsync(IPutCalendarJobRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IPutCalendarJobResponse PutCalendarJob(Id calendarId, Id jobId, Func<PutCalendarJobDescriptor, IPutCalendarJobRequest> selector = null)
+		public PutCalendarJobResponse PutCalendarJob(Id calendarId, Id jobId, Func<PutCalendarJobDescriptor, IPutCalendarJobRequest> selector = null)
 			=> PutCalendarJob(selector.InvokeOrDefault(new PutCalendarJobDescriptor(calendarId, jobId)));
 
 		/// <inheritdoc />
-		public IPutCalendarJobResponse PutCalendarJob(IPutCalendarJobRequest request) =>
+		public PutCalendarJobResponse PutCalendarJob(IPutCalendarJobRequest request) =>
 			DoRequest<IPutCalendarJobRequest, PutCalendarJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IPutCalendarJobResponse> PutCalendarJobAsync(
+		public Task<PutCalendarJobResponse> PutCalendarJobAsync(
 			Id calendarId,
 			Id jobId,
 			Func<PutCalendarJobDescriptor, IPutCalendarJobRequest> selector = null,
@@ -43,7 +43,7 @@ namespace Nest
 		) => PutCalendarJobAsync(selector.InvokeOrDefault(new PutCalendarJobDescriptor(calendarId, jobId)), ct);
 
 		/// <inheritdoc />
-		public Task<IPutCalendarJobResponse> PutCalendarJobAsync(IPutCalendarJobRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IPutCalendarJobRequest, IPutCalendarJobResponse, PutCalendarJobResponse>(request, request.RequestParameters, ct);
+		public Task<PutCalendarJobResponse> PutCalendarJobAsync(IPutCalendarJobRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IPutCalendarJobRequest, PutCalendarJobResponse, PutCalendarJobResponse>(request, request.RequestParameters, ct);
 	}
 }

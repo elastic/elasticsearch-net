@@ -12,7 +12,7 @@ using Tests.Framework.Integration;
 namespace Tests.Document.Multiple.DeleteByQueryRethrottle
 {
 	public class DeleteByQueryRethrottleApiTests
-		: ApiIntegrationTestBase<ReindexCluster, IListTasksResponse, IDeleteByQueryRethrottleRequest, DeleteByQueryRethrottleDescriptor,
+		: ApiIntegrationTestBase<ReindexCluster, ListTasksResponse, IDeleteByQueryRethrottleRequest, DeleteByQueryRethrottleDescriptor,
 			DeleteByQueryRethrottleRequest>
 	{
 		protected const string TaskIdKey = "taskId";
@@ -75,7 +75,7 @@ namespace Tests.Document.Multiple.DeleteByQueryRethrottle
 			ExtendedValue(TaskIdKey, deleteByQuery.Task);
 		}
 
-		protected override void ExpectResponse(IListTasksResponse response)
+		protected override void ExpectResponse(ListTasksResponse response)
 		{
 			response.ShouldBeValid();
 

@@ -7,39 +7,39 @@ namespace Nest
 {
 	public partial interface IElasticClient
 	{
-		IForceMergeResponse ForceMerge(Indices indices, Func<ForceMergeDescriptor, IForceMergeRequest> selector = null);
+		ForceMergeResponse ForceMerge(Indices indices, Func<ForceMergeDescriptor, IForceMergeRequest> selector = null);
 
 		/// <inheritdoc />
-		IForceMergeResponse ForceMerge(IForceMergeRequest request);
+		ForceMergeResponse ForceMerge(IForceMergeRequest request);
 
 		/// <inheritdoc />
-		Task<IForceMergeResponse> ForceMergeAsync(Indices indices, Func<ForceMergeDescriptor, IForceMergeRequest> selector = null,
+		Task<ForceMergeResponse> ForceMergeAsync(Indices indices, Func<ForceMergeDescriptor, IForceMergeRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IForceMergeResponse> ForceMergeAsync(IForceMergeRequest request, CancellationToken ct = default);
+		Task<ForceMergeResponse> ForceMergeAsync(IForceMergeRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IForceMergeResponse ForceMerge(Indices indices, Func<ForceMergeDescriptor, IForceMergeRequest> selector = null) =>
+		public ForceMergeResponse ForceMerge(Indices indices, Func<ForceMergeDescriptor, IForceMergeRequest> selector = null) =>
 			ForceMerge(selector.InvokeOrDefault(new ForceMergeDescriptor().Index(indices)));
 
 		/// <inheritdoc />
-		public IForceMergeResponse ForceMerge(IForceMergeRequest request) =>
+		public ForceMergeResponse ForceMerge(IForceMergeRequest request) =>
 			DoRequest<IForceMergeRequest, ForceMergeResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IForceMergeResponse> ForceMergeAsync(
+		public Task<ForceMergeResponse> ForceMergeAsync(
 			Indices indices,
 			Func<ForceMergeDescriptor, IForceMergeRequest> selector = null,
 			CancellationToken ct = default
 		) => ForceMergeAsync(selector.InvokeOrDefault(new ForceMergeDescriptor().Index(indices)), ct);
 
 		/// <inheritdoc />
-		public Task<IForceMergeResponse> ForceMergeAsync(IForceMergeRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IForceMergeRequest, IForceMergeResponse, ForceMergeResponse>(request, request.RequestParameters, ct);
+		public Task<ForceMergeResponse> ForceMergeAsync(IForceMergeRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IForceMergeRequest, ForceMergeResponse, ForceMergeResponse>(request, request.RequestParameters, ct);
 	}
 }

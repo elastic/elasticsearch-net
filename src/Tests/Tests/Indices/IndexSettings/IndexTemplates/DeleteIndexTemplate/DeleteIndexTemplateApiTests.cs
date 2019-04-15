@@ -7,7 +7,7 @@ using Tests.Framework.Integration;
 namespace Tests.Indices.IndexSettings.IndexTemplates.DeleteIndexTemplate
 {
 	public class DeleteIndexTemplateApiTests
-		: ApiTestBase<WritableCluster, IDeleteIndexTemplateResponse, IDeleteIndexTemplateRequest, DeleteIndexTemplateDescriptor,
+		: ApiTestBase<WritableCluster, DeleteIndexTemplateResponse, IDeleteIndexTemplateRequest, DeleteIndexTemplateDescriptor,
 			DeleteIndexTemplateRequest>
 	{
 		public DeleteIndexTemplateApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

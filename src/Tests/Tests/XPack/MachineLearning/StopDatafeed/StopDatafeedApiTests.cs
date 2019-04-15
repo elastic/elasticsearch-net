@@ -9,7 +9,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.StopDatafeed
 {
 	public class StopDatafeedApiTests
-		: MachineLearningIntegrationTestBase<IStopDatafeedResponse, IStopDatafeedRequest, StopDatafeedDescriptor, StopDatafeedRequest>
+		: MachineLearningIntegrationTestBase<StopDatafeedResponse, IStopDatafeedRequest, StopDatafeedDescriptor, StopDatafeedRequest>
 	{
 		public StopDatafeedApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -46,6 +46,6 @@ namespace Tests.XPack.MachineLearning.StopDatafeed
 
 		protected override StopDatafeedDescriptor NewDescriptor() => new StopDatafeedDescriptor(CallIsolatedValue + "-datafeed");
 
-		protected override void ExpectResponse(IStopDatafeedResponse response) => response.Stopped.Should().BeTrue();
+		protected override void ExpectResponse(StopDatafeedResponse response) => response.Stopped.Should().BeTrue();
 	}
 }

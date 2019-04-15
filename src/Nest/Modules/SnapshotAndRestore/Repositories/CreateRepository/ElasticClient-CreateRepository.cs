@@ -14,18 +14,18 @@ namespace Nest
 		/// </summary>
 		/// <param name="repository">The name for the repository</param>
 		/// <param name="selector">describe what the repository looks like</param>
-		ICreateRepositoryResponse CreateRepository(Name repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector);
+		CreateRepositoryResponse CreateRepository(Name repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector);
 
 		/// <inheritdoc />
-		ICreateRepositoryResponse CreateRepository(ICreateRepositoryRequest request);
+		CreateRepositoryResponse CreateRepository(ICreateRepositoryRequest request);
 
 		/// <inheritdoc />
-		Task<ICreateRepositoryResponse> CreateRepositoryAsync(Name repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector,
+		Task<CreateRepositoryResponse> CreateRepositoryAsync(Name repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<ICreateRepositoryResponse> CreateRepositoryAsync(ICreateRepositoryRequest request,
+		Task<CreateRepositoryResponse> CreateRepositoryAsync(ICreateRepositoryRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -33,22 +33,22 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public ICreateRepositoryResponse CreateRepository(Name repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector) =>
+		public CreateRepositoryResponse CreateRepository(Name repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector) =>
 			CreateRepository(selector?.Invoke(new CreateRepositoryDescriptor(repository)));
 
 		/// <inheritdoc />
-		public ICreateRepositoryResponse CreateRepository(ICreateRepositoryRequest request) =>
+		public CreateRepositoryResponse CreateRepository(ICreateRepositoryRequest request) =>
 			DoRequest<ICreateRepositoryRequest, CreateRepositoryResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<ICreateRepositoryResponse> CreateRepositoryAsync(
+		public Task<CreateRepositoryResponse> CreateRepositoryAsync(
 			Name repository,
 			Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector,
 			CancellationToken ct = default
 		) => CreateRepositoryAsync(selector?.Invoke(new CreateRepositoryDescriptor(repository)), ct);
 
 		/// <inheritdoc />
-		public Task<ICreateRepositoryResponse> CreateRepositoryAsync(ICreateRepositoryRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<ICreateRepositoryRequest, ICreateRepositoryResponse, CreateRepositoryResponse>(request, request.RequestParameters, ct);
+		public Task<CreateRepositoryResponse> CreateRepositoryAsync(ICreateRepositoryRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<ICreateRepositoryRequest, CreateRepositoryResponse, CreateRepositoryResponse>(request, request.RequestParameters, ct);
 	}
 }

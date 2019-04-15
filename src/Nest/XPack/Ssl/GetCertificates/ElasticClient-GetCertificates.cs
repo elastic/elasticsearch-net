@@ -13,18 +13,18 @@ namespace Nest
 		/// The certificates API enables you to retrieve information about the X.509 certificates
 		/// that are used to encrypt communications in your Elasticsearch cluster.
 		/// </summary>
-		IGetCertificatesResponse GetCertificates(Func<GetCertificatesDescriptor, IGetCertificatesRequest> selector = null);
+		GetCertificatesResponse GetCertificates(Func<GetCertificatesDescriptor, IGetCertificatesRequest> selector = null);
 
 		/// <inheritdoc cref="GetCertificates(System.Func{Nest.GetCertificatesDescriptor,Nest.IGetCertificatesRequest})" />
-		IGetCertificatesResponse GetCertificates(IGetCertificatesRequest request);
+		GetCertificatesResponse GetCertificates(IGetCertificatesRequest request);
 
 		/// <inheritdoc cref="GetCertificates(System.Func{Nest.GetCertificatesDescriptor,Nest.IGetCertificatesRequest})" />
-		Task<IGetCertificatesResponse> GetCertificatesAsync(Func<GetCertificatesDescriptor, IGetCertificatesRequest> selector = null,
+		Task<GetCertificatesResponse> GetCertificatesAsync(Func<GetCertificatesDescriptor, IGetCertificatesRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="GetCertificates(System.Func{Nest.GetCertificatesDescriptor,Nest.IGetCertificatesRequest})" />
-		Task<IGetCertificatesResponse> GetCertificatesAsync(IGetCertificatesRequest request,
+		Task<GetCertificatesResponse> GetCertificatesAsync(IGetCertificatesRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -32,27 +32,27 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc cref="GetCertificates(System.Func{Nest.GetCertificatesDescriptor,Nest.IGetCertificatesRequest})" />
-		public IGetCertificatesResponse GetCertificates(Func<GetCertificatesDescriptor, IGetCertificatesRequest> selector = null) =>
+		public GetCertificatesResponse GetCertificates(Func<GetCertificatesDescriptor, IGetCertificatesRequest> selector = null) =>
 			GetCertificates(selector.InvokeOrDefault(new GetCertificatesDescriptor()));
 
 		/// <inheritdoc cref="GetCertificates(System.Func{Nest.GetCertificatesDescriptor,Nest.IGetCertificatesRequest})" />
-		public IGetCertificatesResponse GetCertificates(IGetCertificatesRequest request)
+		public GetCertificatesResponse GetCertificates(IGetCertificatesRequest request)
 		{
 			request.RequestParameters.DeserializationOverride = ToCertificatesResponse;
 			return DoRequest<IGetCertificatesRequest, GetCertificatesResponse>(request, request.RequestParameters);
 		}
 
 		/// <inheritdoc cref="GetCertificates(System.Func{Nest.GetCertificatesDescriptor,Nest.IGetCertificatesRequest})" />
-		public Task<IGetCertificatesResponse> GetCertificatesAsync(
+		public Task<GetCertificatesResponse> GetCertificatesAsync(
 			Func<GetCertificatesDescriptor, IGetCertificatesRequest> selector = null,
 			CancellationToken ct = default
 		) => GetCertificatesAsync(selector.InvokeOrDefault(new GetCertificatesDescriptor()), ct);
 
 		/// <inheritdoc cref="GetCertificates(System.Func{Nest.GetCertificatesDescriptor,Nest.IGetCertificatesRequest})" />
-		public Task<IGetCertificatesResponse> GetCertificatesAsync(IGetCertificatesRequest request, CancellationToken ct = default)
+		public Task<GetCertificatesResponse> GetCertificatesAsync(IGetCertificatesRequest request, CancellationToken ct = default)
 		{
 			request.RequestParameters.DeserializationOverride = ToCertificatesResponse;
-			return DoRequestAsync<IGetCertificatesRequest, IGetCertificatesResponse, GetCertificatesResponse>
+			return DoRequestAsync<IGetCertificatesRequest, GetCertificatesResponse, GetCertificatesResponse>
 				(request, request.RequestParameters, ct);
 		}
 

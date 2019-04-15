@@ -11,38 +11,38 @@ namespace Nest
 		/// Does a request to the root of an elasticsearch node
 		/// </summary>
 		/// <param name="selector">A descriptor to further describe the root operation</param>
-		IRootNodeInfoResponse RootNodeInfo(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null);
+		RootNodeInfoResponse RootNodeInfo(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null);
 
 		/// <inheritdoc />
-		IRootNodeInfoResponse RootNodeInfo(IRootNodeInfoRequest request);
+		RootNodeInfoResponse RootNodeInfo(IRootNodeInfoRequest request);
 
 		/// <inheritdoc />
-		Task<IRootNodeInfoResponse> RootNodeInfoAsync(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null,
+		Task<RootNodeInfoResponse> RootNodeInfoAsync(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IRootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest request, CancellationToken ct = default);
+		Task<RootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IRootNodeInfoResponse RootNodeInfo(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null) =>
+		public RootNodeInfoResponse RootNodeInfo(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null) =>
 			RootNodeInfo(selector.InvokeOrDefault(new RootNodeInfoDescriptor()));
 
 		/// <inheritdoc />
-		public IRootNodeInfoResponse RootNodeInfo(IRootNodeInfoRequest request) =>
+		public RootNodeInfoResponse RootNodeInfo(IRootNodeInfoRequest request) =>
 			DoRequest<IRootNodeInfoRequest, RootNodeInfoResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IRootNodeInfoResponse> RootNodeInfoAsync(
+		public Task<RootNodeInfoResponse> RootNodeInfoAsync(
 			Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null,
 			CancellationToken ct = default
 		) => RootNodeInfoAsync(selector.InvokeOrDefault(new RootNodeInfoDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IRootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IRootNodeInfoRequest, IRootNodeInfoResponse, RootNodeInfoResponse>(request, request.RequestParameters, ct);
+		public Task<RootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IRootNodeInfoRequest, RootNodeInfoResponse, RootNodeInfoResponse>(request, request.RequestParameters, ct);
 	}
 }

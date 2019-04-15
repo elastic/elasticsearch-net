@@ -11,7 +11,7 @@ using Tests.Framework.Integration;
 namespace Tests.Indices.IndexManagement.SplitIndex
 {
 	public class SplitIndexApiTests
-		: ApiIntegrationTestBase<WritableCluster, ISplitIndexResponse, ISplitIndexRequest, SplitIndexDescriptor, SplitIndexRequest>
+		: ApiIntegrationTestBase<WritableCluster, SplitIndexResponse, ISplitIndexRequest, SplitIndexDescriptor, SplitIndexRequest>
 	{
 		public SplitIndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -71,7 +71,7 @@ namespace Tests.Indices.IndexManagement.SplitIndex
 
 		protected override SplitIndexDescriptor NewDescriptor() => new SplitIndexDescriptor(CallIsolatedValue, CallIsolatedValue + "-target");
 
-		protected override void ExpectResponse(ISplitIndexResponse response)
+		protected override void ExpectResponse(SplitIndexResponse response)
 		{
 			response.ShouldBeValid();
 			response.Acknowledged.Should().BeTrue();

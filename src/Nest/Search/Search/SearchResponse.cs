@@ -86,7 +86,7 @@ namespace Nest
 		/// <summary>
 		/// Gets the suggester results.
 		/// </summary>
-		SuggestDictionary<T> Suggest { get; }
+		ISuggestDictionary<T> Suggest { get; }
 
 		/// <summary>
 		/// Gets a value indicating whether the search was terminated early
@@ -170,7 +170,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		[DataMember(Name ="suggest")]
-		public SuggestDictionary<T> Suggest { get; internal set; } = SuggestDictionary<T>.Default;
+		public ISuggestDictionary<T> Suggest { get; internal set; } = SuggestDictionary<T>.Default;
 
 		/// <inheritdoc />
 		[DataMember(Name ="terminated_early")]

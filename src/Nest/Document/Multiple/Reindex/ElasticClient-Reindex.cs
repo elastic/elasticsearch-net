@@ -8,8 +8,8 @@ namespace Nest
 		/// <summary>
 		/// Helper method that allows you to reindex from one index into another using ScrollAll and BulkAll.
 		/// </summary>
-		/// <returns>An IObservable&lt;IReindexResponse&lt;T&gt;$gt; you can subscribe to to listen to the progress of the reindex process</returns>
-		IObservable<IBulkAllResponse> Reindex<TSource, TTarget>(
+		/// <returns>An IObservable&lt;ReindexResponse&lt;T&gt;$gt; you can subscribe to to listen to the progress of the reindex process</returns>
+		IObservable<BulkAllResponse> Reindex<TSource, TTarget>(
 			Func<TSource, TTarget> mapper,
 			Func<ReindexDescriptor<TSource, TTarget>, IReindexRequest<TSource, TTarget>> selector,
 			CancellationToken cancellationToken = default(CancellationToken)
@@ -20,8 +20,8 @@ namespace Nest
 		/// <summary>
 		/// Helper method that allows you to reindex from one index into another using ScrollAll and BulkAll.
 		/// </summary>
-		/// <returns>An IObservable&lt;IReindexResponse&lt;T&gt;$gt; you can subscribe to to listen to the progress of the reindex process</returns>
-		IObservable<IBulkAllResponse> Reindex<TSource>(
+		/// <returns>An IObservable&lt;ReindexResponse&lt;T&gt;$gt; you can subscribe to to listen to the progress of the reindex process</returns>
+		IObservable<BulkAllResponse> Reindex<TSource>(
 			Func<ReindexDescriptor<TSource, TSource>, IReindexRequest<TSource, TSource>> selector,
 			CancellationToken cancellationToken = default(CancellationToken)
 		)
@@ -31,8 +31,8 @@ namespace Nest
 		/// Helper method that allows you to reindex from one index into another using ScrollAll and BulkAll.
 		/// </summary>
 		/// <param name="request">a request object to describe the reindex operation</param>
-		/// <returns>An IObservable&lt;IReindexResponse&lt;T&gt;$gt; you can subscribe to to listen to the progress of the reindex process</returns>
-		IObservable<IBulkAllResponse> Reindex<TSource, TTarget>(
+		/// <returns>An IObservable&lt;ReindexResponse&lt;T&gt;$gt; you can subscribe to to listen to the progress of the reindex process</returns>
+		IObservable<BulkAllResponse> Reindex<TSource, TTarget>(
 			IReindexRequest<TSource, TTarget> request,
 			CancellationToken cancellationToken = default(CancellationToken)
 		)
@@ -43,8 +43,8 @@ namespace Nest
 		/// Helper method that allows you to reindex from one index into another using ScrollAll and BulkAll.
 		/// </summary>
 		/// <param name="request">a request object to describe the reindex operation</param>
-		/// <returns>An IObservable&lt;IReindexResponse&lt;T&gt;$gt; you can subscribe to to listen to the progress of the reindex process</returns>
-		IObservable<IBulkAllResponse> Reindex<TSource>(
+		/// <returns>An IObservable&lt;ReindexResponse&lt;T&gt;$gt; you can subscribe to to listen to the progress of the reindex process</returns>
+		IObservable<BulkAllResponse> Reindex<TSource>(
 			IReindexRequest<TSource> request,
 			CancellationToken cancellationToken = default(CancellationToken)
 		)
@@ -61,7 +61,7 @@ namespace Nest
 		/// <paramref name="fromIndex" />
 		/// </param>
 		/// <param name="selector">an optional query limiting the documents found in <paramref name="fromIndex" /></param>
-		IObservable<IBulkAllResponse> Reindex<TSource, TTarget>(
+		IObservable<BulkAllResponse> Reindex<TSource, TTarget>(
 			IndexName fromIndex,
 			IndexName toIndex,
 			Func<TSource, TTarget> mapper,
@@ -82,7 +82,7 @@ namespace Nest
 		/// <paramref name="fromIndex" />
 		/// </param>
 		/// <param name="selector">an optional query limiting the documents found in <paramref name="fromIndex" /></param>
-		IObservable<IBulkAllResponse> Reindex<TSource>(
+		IObservable<BulkAllResponse> Reindex<TSource>(
 			IndexName fromIndex,
 			IndexName toIndex,
 			Func<QueryContainerDescriptor<TSource>, QueryContainer> selector = null,
@@ -94,7 +94,7 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IObservable<IBulkAllResponse> Reindex<TSource>(
+		public IObservable<BulkAllResponse> Reindex<TSource>(
 			Func<ReindexDescriptor<TSource, TSource>, IReindexRequest<TSource, TSource>> selector,
 			CancellationToken cancellationToken = default(CancellationToken)
 		)
@@ -102,7 +102,7 @@ namespace Nest
 			Reindex(selector.InvokeOrDefault(new ReindexDescriptor<TSource, TSource>(s => s)));
 
 		/// <inheritdoc />
-		public IObservable<IBulkAllResponse> Reindex<TSource, TTarget>(
+		public IObservable<BulkAllResponse> Reindex<TSource, TTarget>(
 			Func<TSource, TTarget> mapper,
 			Func<ReindexDescriptor<TSource, TTarget>, IReindexRequest<TSource, TTarget>> selector,
 			CancellationToken cancellationToken = default(CancellationToken)
@@ -112,7 +112,7 @@ namespace Nest
 			Reindex(selector.InvokeOrDefault(new ReindexDescriptor<TSource, TTarget>(mapper)));
 
 		/// <inheritdoc />
-		public IObservable<IBulkAllResponse> Reindex<TSource>(
+		public IObservable<BulkAllResponse> Reindex<TSource>(
 			IReindexRequest<TSource> request,
 			CancellationToken cancellationToken = default(CancellationToken)
 		)
@@ -121,7 +121,7 @@ namespace Nest
 
 
 		/// <inheritdoc />
-		public IObservable<IBulkAllResponse> Reindex<TSource, TTarget>(
+		public IObservable<BulkAllResponse> Reindex<TSource, TTarget>(
 			IReindexRequest<TSource, TTarget> request,
 			CancellationToken cancellationToken = default(CancellationToken)
 		)
@@ -139,7 +139,7 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public IObservable<IBulkAllResponse> Reindex<TSource, TTarget>(
+		public IObservable<BulkAllResponse> Reindex<TSource, TTarget>(
 			IndexName fromIndex,
 			IndexName toIndex,
 			Func<TSource, TTarget> mapper,
@@ -154,7 +154,7 @@ namespace Nest
 				, cancellationToken);
 
 		/// <inheritdoc />
-		public IObservable<IBulkAllResponse> Reindex<TSource>(
+		public IObservable<BulkAllResponse> Reindex<TSource>(
 			IndexName fromIndex,
 			IndexName toIndex,
 			Func<QueryContainerDescriptor<TSource>, QueryContainer> selector = null,

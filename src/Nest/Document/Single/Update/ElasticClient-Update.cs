@@ -20,40 +20,40 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="TDocument">The type to describe the document to be updated</typeparam>
 		/// <param name="selector">a descriptor that describes the update operation</param>
-		IUpdateResponse<TDocument> Update<TDocument>(DocumentPath<TDocument> documentPath,
+		UpdateResponse<TDocument> Update<TDocument>(DocumentPath<TDocument> documentPath,
 			Func<UpdateDescriptor<TDocument, TDocument>, IUpdateRequest<TDocument, TDocument>> selector
 		) where TDocument : class;
 
 		/// <inheritdoc />
-		IUpdateResponse<TDocument> Update<TDocument>(IUpdateRequest<TDocument, TDocument> request) where TDocument : class;
+		UpdateResponse<TDocument> Update<TDocument>(IUpdateRequest<TDocument, TDocument> request) where TDocument : class;
 
 		/// <inheritdoc />
-		IUpdateResponse<TDocument> Update<TDocument, TPartialDocument>(DocumentPath<TDocument> documentPath,
+		UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(DocumentPath<TDocument> documentPath,
 			Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest<TDocument, TPartialDocument>> selector
 		)
 			where TDocument : class
 			where TPartialDocument : class;
 
 		/// <inheritdoc />
-		IUpdateResponse<TDocument> Update<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request)
+		UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request)
 			where TDocument : class
 			where TPartialDocument : class;
 
 		/// <inheritdoc />
-		Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument>(
+		Task<UpdateResponse<TDocument>> UpdateAsync<TDocument>(
 			DocumentPath<TDocument> documentPath,
 			Func<UpdateDescriptor<TDocument, TDocument>, IUpdateRequest<TDocument, TDocument>> selector,
 			CancellationToken cancellationToken = default
 		) where TDocument : class;
 
 		/// <inheritdoc />
-		Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument>(
+		Task<UpdateResponse<TDocument>> UpdateAsync<TDocument>(
 			IUpdateRequest<TDocument, TDocument> request,
 			CancellationToken ct = default
 		) where TDocument : class;
 
 		/// <inheritdoc />
-		Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(
+		Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(
 			DocumentPath<TDocument> documentPath,
 			Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest<TDocument, TPartialDocument>> selector,
 			CancellationToken cancellationToken = default
@@ -62,7 +62,7 @@ namespace Nest
 			where TPartialDocument : class;
 
 		/// <inheritdoc />
-		Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(
+		Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(
 			IUpdateRequest<TDocument, TPartialDocument> request,
 			CancellationToken ct = default
 		)
@@ -74,17 +74,17 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IUpdateResponse<TDocument> Update<TDocument>(DocumentPath<TDocument> documentPath,
+		public UpdateResponse<TDocument> Update<TDocument>(DocumentPath<TDocument> documentPath,
 			Func<UpdateDescriptor<TDocument, TDocument>, IUpdateRequest<TDocument, TDocument>> selector
 		) where TDocument : class =>
 			Update<TDocument, TDocument>(documentPath, selector);
 
 		/// <inheritdoc />
-		public IUpdateResponse<TDocument> Update<TDocument>(IUpdateRequest<TDocument, TDocument> request) where TDocument : class =>
+		public UpdateResponse<TDocument> Update<TDocument>(IUpdateRequest<TDocument, TDocument> request) where TDocument : class =>
 			Update<TDocument, TDocument>(request);
 
 		/// <inheritdoc />
-		public IUpdateResponse<TDocument> Update<TDocument, TPartialDocument>(DocumentPath<TDocument> documentPath,
+		public UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(DocumentPath<TDocument> documentPath,
 			Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest<TDocument, TPartialDocument>> selector
 		)
 			where TDocument : class
@@ -94,13 +94,13 @@ namespace Nest
 			)));
 
 		/// <inheritdoc />
-		public IUpdateResponse<TDocument> Update<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request)
+		public UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request)
 			where TDocument : class
 			where TPartialDocument : class =>
 			DoRequest<IUpdateRequest<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument>(
+		public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument>(
 			DocumentPath<TDocument> documentPath,
 			Func<UpdateDescriptor<TDocument, TDocument>, IUpdateRequest<TDocument, TDocument>> selector,
 			CancellationToken cancellationToken = default
@@ -109,7 +109,7 @@ namespace Nest
 			UpdateAsync<TDocument, TDocument>(documentPath, selector, cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument>(
+		public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument>(
 			IUpdateRequest<TDocument, TDocument> request,
 			CancellationToken ct = default
 		)
@@ -117,7 +117,7 @@ namespace Nest
 			UpdateAsync<TDocument, TDocument>(request, ct);
 
 		/// <inheritdoc />
-		public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(
+		public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(
 			DocumentPath<TDocument> documentPath,
 			Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest<TDocument, TPartialDocument>> selector,
 			CancellationToken cancellationToken = default
@@ -129,12 +129,12 @@ namespace Nest
 			)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(
+		public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(
 			IUpdateRequest<TDocument, TPartialDocument> request,
 			CancellationToken ct = default
 		)
 			where TDocument : class
 			where TPartialDocument : class =>
-			DoRequestAsync<IUpdateRequest<TDocument, TPartialDocument>, IUpdateResponse<TDocument>, UpdateResponse<TDocument>>(request, request.RequestParameters, ct);
+			DoRequestAsync<IUpdateRequest<TDocument, TPartialDocument>, UpdateResponse<TDocument>, UpdateResponse<TDocument>>(request, request.RequestParameters, ct);
 	}
 }

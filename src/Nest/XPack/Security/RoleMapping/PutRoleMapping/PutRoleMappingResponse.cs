@@ -2,15 +2,11 @@
 
 namespace Nest
 {
-	public interface IPutRoleMappingResponse : IResponse
-	{
-		[DataMember(Name ="role_mapping")]
-		PutRoleMappingStatus RoleMapping { get; }
-	}
-
-	public class PutRoleMappingResponse : ResponseBase, IPutRoleMappingResponse
+	public class PutRoleMappingResponse : ResponseBase
 	{
 		public bool Created => RoleMapping?.Created ?? false;
+
+		[DataMember(Name ="role_mapping")]
 		public PutRoleMappingStatus RoleMapping { get; internal set; }
 	}
 

@@ -8,7 +8,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.MachineLearning.FlushJob
 {
-	public class FlushJobApiTests : MachineLearningIntegrationTestBase<IFlushJobResponse, IFlushJobRequest, FlushJobDescriptor, FlushJobRequest>
+	public class FlushJobApiTests : MachineLearningIntegrationTestBase<FlushJobResponse, IFlushJobRequest, FlushJobDescriptor, FlushJobRequest>
 	{
 		public FlushJobApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -60,6 +60,6 @@ namespace Tests.XPack.MachineLearning.FlushJob
 
 		protected override FlushJobDescriptor NewDescriptor() => new FlushJobDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(IFlushJobResponse response) => response.Flushed.Should().BeTrue();
+		protected override void ExpectResponse(FlushJobResponse response) => response.Flushed.Should().BeTrue();
 	}
 }

@@ -8,21 +8,21 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc />
-		IGetUserAccessTokenResponse GetUserAccessToken(string username, string password,
+		GetUserAccessTokenResponse GetUserAccessToken(string username, string password,
 			Func<GetUserAccessTokenDescriptor, IGetUserAccessTokenRequest> selector = null
 		);
 
 		/// <inheritdoc />
-		IGetUserAccessTokenResponse GetUserAccessToken(IGetUserAccessTokenRequest request);
+		GetUserAccessTokenResponse GetUserAccessToken(IGetUserAccessTokenRequest request);
 
 		/// <inheritdoc />
-		Task<IGetUserAccessTokenResponse> GetUserAccessTokenAsync(string username, string password,
+		Task<GetUserAccessTokenResponse> GetUserAccessTokenAsync(string username, string password,
 			Func<GetUserAccessTokenDescriptor, IGetUserAccessTokenRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IGetUserAccessTokenResponse> GetUserAccessTokenAsync(IGetUserAccessTokenRequest request,
+		Task<GetUserAccessTokenResponse> GetUserAccessTokenAsync(IGetUserAccessTokenRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -30,7 +30,7 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IGetUserAccessTokenResponse GetUserAccessToken(
+		public GetUserAccessTokenResponse GetUserAccessToken(
 			string username,
 			string password,
 			Func<GetUserAccessTokenDescriptor, IGetUserAccessTokenRequest> selector = null
@@ -38,11 +38,11 @@ namespace Nest
 			GetUserAccessToken(selector.InvokeOrDefault(new GetUserAccessTokenDescriptor(username, password)));
 
 		/// <inheritdoc />
-		public IGetUserAccessTokenResponse GetUserAccessToken(IGetUserAccessTokenRequest request) =>
+		public GetUserAccessTokenResponse GetUserAccessToken(IGetUserAccessTokenRequest request) =>
 			DoRequest<IGetUserAccessTokenRequest, GetUserAccessTokenResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetUserAccessTokenResponse> GetUserAccessTokenAsync(
+		public Task<GetUserAccessTokenResponse> GetUserAccessTokenAsync(
 			string username,
 			string password,
 			Func<GetUserAccessTokenDescriptor, IGetUserAccessTokenRequest> selector = null,
@@ -50,7 +50,7 @@ namespace Nest
 		) => GetUserAccessTokenAsync(selector.InvokeOrDefault(new GetUserAccessTokenDescriptor(username, password)), ct);
 
 		/// <inheritdoc />
-		public Task<IGetUserAccessTokenResponse> GetUserAccessTokenAsync(IGetUserAccessTokenRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetUserAccessTokenRequest, IGetUserAccessTokenResponse, GetUserAccessTokenResponse>(request, request.RequestParameters, ct);
+		public Task<GetUserAccessTokenResponse> GetUserAccessTokenAsync(IGetUserAccessTokenRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetUserAccessTokenRequest, GetUserAccessTokenResponse, GetUserAccessTokenResponse>(request, request.RequestParameters, ct);
 	}
 }

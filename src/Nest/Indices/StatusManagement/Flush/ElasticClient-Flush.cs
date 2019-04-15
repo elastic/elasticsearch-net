@@ -16,39 +16,39 @@ namespace Nest
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-flush.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the flush operation</param>
-		IFlushResponse Flush(Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null);
+		FlushResponse Flush(Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null);
 
 		/// <inheritdoc />
-		IFlushResponse Flush(IFlushRequest request);
+		FlushResponse Flush(IFlushRequest request);
 
 		/// <inheritdoc />
-		Task<IFlushResponse> FlushAsync(Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null,
+		Task<FlushResponse> FlushAsync(Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IFlushResponse> FlushAsync(IFlushRequest request, CancellationToken ct = default);
+		Task<FlushResponse> FlushAsync(IFlushRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IFlushResponse Flush(Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null) =>
+		public FlushResponse Flush(Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null) =>
 			Flush(selector.InvokeOrDefault(new FlushDescriptor().Index(indices)));
 
 		/// <inheritdoc />
-		public IFlushResponse Flush(IFlushRequest request) =>
+		public FlushResponse Flush(IFlushRequest request) =>
 			DoRequest<IFlushRequest, FlushResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IFlushResponse> FlushAsync(
+		public Task<FlushResponse> FlushAsync(
 			Indices indices,
 			Func<FlushDescriptor, IFlushRequest> selector = null,
 			CancellationToken ct = default
 		) => FlushAsync(selector.InvokeOrDefault(new FlushDescriptor().Index(indices)), ct);
 
 		/// <inheritdoc />
-		public Task<IFlushResponse> FlushAsync(IFlushRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IFlushRequest, IFlushResponse, FlushResponse>(request, request.RequestParameters, ct);
+		public Task<FlushResponse> FlushAsync(IFlushRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IFlushRequest, FlushResponse, FlushResponse>(request, request.RequestParameters, ct);
 	}
 }

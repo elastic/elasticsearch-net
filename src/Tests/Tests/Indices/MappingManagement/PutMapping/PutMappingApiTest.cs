@@ -13,7 +13,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 	[SkipVersion("<5.2.0", "This uses the range types introduced in 5.2.0")]
 	public class PutMappingApiTests
 		: ApiIntegrationAgainstNewIndexTestBase
-			<WritableCluster, IPutMappingResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
+			<WritableCluster, PutMappingResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
 	{
 		public PutMappingApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

@@ -11,7 +11,7 @@ using Tests.Framework.Integration;
 namespace Tests.Cluster.NodesUsage
 {
 	public class NodesUsageApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, INodesUsageResponse, INodesUsageRequest, NodesUsageDescriptor, NodesUsageRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, NodesUsageResponse, INodesUsageRequest, NodesUsageDescriptor, NodesUsageRequest>
 	{
 		public NodesUsageApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -27,7 +27,7 @@ namespace Tests.Cluster.NodesUsage
 			(client, r) => client.NodesUsageAsync(r)
 		);
 
-		protected override void ExpectResponse(INodesUsageResponse response)
+		protected override void ExpectResponse(NodesUsageResponse response)
 		{
 			response.ClusterName.Should().NotBeEmpty();
 

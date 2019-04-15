@@ -13,7 +13,7 @@ using static Nest.Infer;
 
 namespace Tests.Indices.AliasManagement.GetAlias
 {
-	public class GetAliasApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetAliasResponse, IGetAliasRequest, GetAliasDescriptor, GetAliasRequest>
+	public class GetAliasApiTests : ApiIntegrationTestBase<ReadOnlyCluster, GetAliasResponse, IGetAliasRequest, GetAliasDescriptor, GetAliasRequest>
 	{
 		private static readonly Names Names = Names(DefaultSeeder.ProjectsAliasName);
 
@@ -38,7 +38,7 @@ namespace Tests.Indices.AliasManagement.GetAlias
 			(client, r) => client.GetAliasAsync(r)
 		);
 
-		protected override void ExpectResponse(IGetAliasResponse response)
+		protected override void ExpectResponse(GetAliasResponse response)
 		{
 			response.Indices.Should().NotBeEmpty($"expect to find indices pointing to {DefaultSeeder.ProjectsAliasName}");
 			var indexAliases = response.Indices[Index<Project>()];
@@ -50,7 +50,7 @@ namespace Tests.Indices.AliasManagement.GetAlias
 	}
 
 	public class GetAliasPartialMatchApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IGetAliasResponse, IGetAliasRequest, GetAliasDescriptor, GetAliasRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, GetAliasResponse, IGetAliasRequest, GetAliasDescriptor, GetAliasRequest>
 	{
 		private static readonly Names Names = Names(DefaultSeeder.ProjectsAliasName, "x", "y");
 
@@ -75,7 +75,7 @@ namespace Tests.Indices.AliasManagement.GetAlias
 			(client, r) => client.GetAliasAsync(r)
 		);
 
-		protected override void ExpectResponse(IGetAliasResponse response)
+		protected override void ExpectResponse(GetAliasResponse response)
 		{
 			response.Indices.Should().NotBeNull();
 			response.Indices.Count.Should().BeGreaterThan(0);
@@ -83,7 +83,7 @@ namespace Tests.Indices.AliasManagement.GetAlias
 	}
 
 	public class GetAliasNotFoundApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IGetAliasResponse, IGetAliasRequest, GetAliasDescriptor, GetAliasRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, GetAliasResponse, IGetAliasRequest, GetAliasDescriptor, GetAliasRequest>
 	{
 		private static readonly Names Names = Names("bad-alias");
 
@@ -107,7 +107,7 @@ namespace Tests.Indices.AliasManagement.GetAlias
 			(client, r) => client.GetAliasAsync(r)
 		);
 
-		protected override void ExpectResponse(IGetAliasResponse response)
+		protected override void ExpectResponse(GetAliasResponse response)
 		{
 			response.ServerError.Should().NotBeNull();
 			response.ServerError.Error.Reason.Should().Contain("missing");

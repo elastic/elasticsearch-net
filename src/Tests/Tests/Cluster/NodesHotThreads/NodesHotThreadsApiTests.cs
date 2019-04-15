@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 namespace Tests.Cluster.NodesHotThreads
 {
 	public class NodesHotThreadsApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, INodesHotThreadsResponse, INodesHotThreadsRequest, NodesHotThreadsDescriptor, NodesHotThreadsRequest
+		: ApiIntegrationTestBase<ReadOnlyCluster, NodesHotThreadsResponse, INodesHotThreadsRequest, NodesHotThreadsDescriptor, NodesHotThreadsRequest
 		>
 	{
 		public NodesHotThreadsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -26,7 +26,7 @@ namespace Tests.Cluster.NodesHotThreads
 			(client, r) => client.NodesHotThreadsAsync(r)
 		);
 
-		protected override void ExpectResponse(INodesHotThreadsResponse response)
+		protected override void ExpectResponse(NodesHotThreadsResponse response)
 		{
 			response.HotThreads.Should().NotBeEmpty();
 			var t = response.HotThreads.First();

@@ -10,17 +10,17 @@ namespace Nest
 		/// <summary>
 		/// Retrieves machine learning job results for one or more buckets.
 		/// </summary>
-		IGetOverallBucketsResponse GetOverallBuckets(Id jobId, Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> selector = null);
+		GetOverallBucketsResponse GetOverallBuckets(Id jobId, Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> selector = null);
 
 		/// <summary>
 		/// Retrieves machine learning job results for one or more buckets.
 		/// </summary>
-		IGetOverallBucketsResponse GetOverallBuckets(IGetOverallBucketsRequest request);
+		GetOverallBucketsResponse GetOverallBuckets(IGetOverallBucketsRequest request);
 
 		/// <summary>
 		/// Retrieves machine learning job results for one or more buckets.
 		/// </summary>
-		Task<IGetOverallBucketsResponse> GetOverallBucketsAsync(Id jobId,
+		Task<GetOverallBucketsResponse> GetOverallBucketsAsync(Id jobId,
 			Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> selector = null,
 			CancellationToken cancellationToken = default
 		);
@@ -28,7 +28,7 @@ namespace Nest
 		/// <summary>
 		/// Retrieves machine learning job results for one or more buckets.
 		/// </summary>
-		Task<IGetOverallBucketsResponse> GetOverallBucketsAsync(IGetOverallBucketsRequest request,
+		Task<GetOverallBucketsResponse> GetOverallBucketsAsync(IGetOverallBucketsRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -36,23 +36,23 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IGetOverallBucketsResponse GetOverallBuckets(Id jobId, Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> selector = null) =>
+		public GetOverallBucketsResponse GetOverallBuckets(Id jobId, Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> selector = null) =>
 			GetOverallBuckets(selector.InvokeOrDefault(new GetOverallBucketsDescriptor(jobId)));
 
 		/// <inheritdoc />
-		public IGetOverallBucketsResponse GetOverallBuckets(IGetOverallBucketsRequest request) =>
+		public GetOverallBucketsResponse GetOverallBuckets(IGetOverallBucketsRequest request) =>
 			DoRequest<IGetOverallBucketsRequest, GetOverallBucketsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetOverallBucketsResponse> GetOverallBucketsAsync(
+		public Task<GetOverallBucketsResponse> GetOverallBucketsAsync(
 			Id jobId,
 			Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> selector = null,
 			CancellationToken cancellationToken = default
 		) => GetOverallBucketsAsync(selector.InvokeOrDefault(new GetOverallBucketsDescriptor(jobId)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IGetOverallBucketsResponse> GetOverallBucketsAsync(IGetOverallBucketsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetOverallBucketsRequest, IGetOverallBucketsResponse, GetOverallBucketsResponse>
+		public Task<GetOverallBucketsResponse> GetOverallBucketsAsync(IGetOverallBucketsRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetOverallBucketsRequest, GetOverallBucketsResponse, GetOverallBucketsResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

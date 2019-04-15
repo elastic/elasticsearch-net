@@ -12,7 +12,7 @@ using Tests.Framework.Integration;
 namespace Tests.Ingest.SimulatePipeline
 {
 	public class SimulatePipelineApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ISimulatePipelineResponse, ISimulatePipelineRequest, SimulatePipelineDescriptor,
+		: ApiIntegrationTestBase<ReadOnlyCluster, SimulatePipelineResponse, ISimulatePipelineRequest, SimulatePipelineDescriptor,
 			SimulatePipelineRequest>
 	{
 		public SimulatePipelineApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -163,7 +163,7 @@ namespace Tests.Ingest.SimulatePipeline
 			(client, r) => client.SimulatePipelineAsync(r)
 		);
 
-		protected override void ExpectResponse(ISimulatePipelineResponse response)
+		protected override void ExpectResponse(SimulatePipelineResponse response)
 		{
 			response.ShouldBeValid();
 			response.Documents.Should().NotBeNull().And.HaveCount(3);
@@ -217,7 +217,7 @@ namespace Tests.Ingest.SimulatePipeline
 
 		protected override string UrlPath => $"/_ingest/pipeline/_simulate?verbose=true";
 
-		protected override void ExpectResponse(ISimulatePipelineResponse response)
+		protected override void ExpectResponse(SimulatePipelineResponse response)
 		{
 			response.ShouldBeValid();
 			response.Documents.Count.Should().Be(3);

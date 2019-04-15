@@ -10,32 +10,32 @@ namespace Nest
 		/// <summary>
 		/// Removes application privileges.
 		/// </summary>
-		IDeletePrivilegesResponse DeletePrivileges(Name application, Name name, Func<DeletePrivilegesDescriptor, IDeletePrivilegesRequest> selector = null);
+		DeletePrivilegesResponse DeletePrivileges(Name application, Name name, Func<DeletePrivilegesDescriptor, IDeletePrivilegesRequest> selector = null);
 
 		/// <inheritdoc cref="DeletePrivileges(Nest.Name,Nest.Name,System.Func{Nest.DeletePrivilegesDescriptor,Nest.IDeletePrivilegesRequest})" />
-		IDeletePrivilegesResponse DeletePrivileges(IDeletePrivilegesRequest request);
+		DeletePrivilegesResponse DeletePrivileges(IDeletePrivilegesRequest request);
 
 		/// <inheritdoc cref="DeletePrivileges(Nest.Name,Nest.Name,System.Func{Nest.DeletePrivilegesDescriptor,Nest.IDeletePrivilegesRequest})" />
-		Task<IDeletePrivilegesResponse> DeletePrivilegesAsync(Name application, Name name, Func<DeletePrivilegesDescriptor, IDeletePrivilegesRequest> selector = null,
+		Task<DeletePrivilegesResponse> DeletePrivilegesAsync(Name application, Name name, Func<DeletePrivilegesDescriptor, IDeletePrivilegesRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="DeletePrivileges(Nest.Name,Nest.Name,System.Func{Nest.DeletePrivilegesDescriptor,Nest.IDeletePrivilegesRequest})" />
-		Task<IDeletePrivilegesResponse> DeletePrivilegesAsync(IDeletePrivilegesRequest request, CancellationToken ct = default);
+		Task<DeletePrivilegesResponse> DeletePrivilegesAsync(IDeletePrivilegesRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc cref="DeletePrivileges(Nest.Name,Nest.Name,System.Func{Nest.DeletePrivilegesDescriptor,Nest.IDeletePrivilegesRequest})" />
-		public IDeletePrivilegesResponse DeletePrivileges(Name application, Name name, Func<DeletePrivilegesDescriptor, IDeletePrivilegesRequest> selector = null) =>
+		public DeletePrivilegesResponse DeletePrivileges(Name application, Name name, Func<DeletePrivilegesDescriptor, IDeletePrivilegesRequest> selector = null) =>
 			DeletePrivileges(selector.InvokeOrDefault(new DeletePrivilegesDescriptor(application, name)));
 
 		/// <inheritdoc cref="DeletePrivileges(Nest.Name,Nest.Name,System.Func{Nest.DeletePrivilegesDescriptor,Nest.IDeletePrivilegesRequest})" />
-		public IDeletePrivilegesResponse DeletePrivileges(IDeletePrivilegesRequest request) =>
+		public DeletePrivilegesResponse DeletePrivileges(IDeletePrivilegesRequest request) =>
 			DoRequest<IDeletePrivilegesRequest, DeletePrivilegesResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="DeletePrivileges(Nest.Name,Nest.Name,System.Func{Nest.DeletePrivilegesDescriptor,Nest.IDeletePrivilegesRequest})" />
-		public Task<IDeletePrivilegesResponse> DeletePrivilegesAsync(
+		public Task<DeletePrivilegesResponse> DeletePrivilegesAsync(
 			Name application,
 			Name name,
 			Func<DeletePrivilegesDescriptor, IDeletePrivilegesRequest> selector = null,
@@ -43,7 +43,7 @@ namespace Nest
 		) => DeletePrivilegesAsync(selector.InvokeOrDefault(new DeletePrivilegesDescriptor(application, name)), ct);
 
 		/// <inheritdoc cref="DeletePrivileges(Nest.Name,Nest.Name,System.Func{Nest.DeletePrivilegesDescriptor,Nest.IDeletePrivilegesRequest})" />
-		public Task<IDeletePrivilegesResponse> DeletePrivilegesAsync(IDeletePrivilegesRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeletePrivilegesRequest, IDeletePrivilegesResponse, DeletePrivilegesResponse>(request, request.RequestParameters, ct);
+		public Task<DeletePrivilegesResponse> DeletePrivilegesAsync(IDeletePrivilegesRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeletePrivilegesRequest, DeletePrivilegesResponse, DeletePrivilegesResponse>(request, request.RequestParameters, ct);
 	}
 }

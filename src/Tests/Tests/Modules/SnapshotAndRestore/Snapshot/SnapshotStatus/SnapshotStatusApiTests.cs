@@ -8,7 +8,7 @@ using Tests.Framework.Integration;
 namespace Tests.Modules.SnapshotAndRestore.Snapshot.SnapshotStatus
 {
 	public class SnapshotStatusApiTests
-		: ApiTestBase<ReadOnlyCluster, ISnapshotStatusResponse, ISnapshotStatusRequest, SnapshotStatusDescriptor, SnapshotStatusRequest>
+		: ApiTestBase<ReadOnlyCluster, SnapshotStatusResponse, ISnapshotStatusRequest, SnapshotStatusDescriptor, SnapshotStatusRequest>
 	{
 		private static readonly string _repos = "repository1";
 		private static readonly string _snapshot = "snapshot1";

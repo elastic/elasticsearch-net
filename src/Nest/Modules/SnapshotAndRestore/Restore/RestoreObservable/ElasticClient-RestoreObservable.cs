@@ -5,18 +5,18 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc />
-		IObservable<IRecoveryStatusResponse> RestoreObservable(Name repository, Name snapshot, TimeSpan interval,
+		IObservable<RecoveryStatusResponse> RestoreObservable(Name repository, Name snapshot, TimeSpan interval,
 			Func<RestoreDescriptor, IRestoreRequest> selector = null
 		);
 
 		/// <inheritdoc />
-		IObservable<IRecoveryStatusResponse> RestoreObservable(TimeSpan interval, IRestoreRequest request);
+		IObservable<RecoveryStatusResponse> RestoreObservable(TimeSpan interval, IRestoreRequest request);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IObservable<IRecoveryStatusResponse> RestoreObservable(Name repository, Name snapshot, TimeSpan interval,
+		public IObservable<RecoveryStatusResponse> RestoreObservable(Name repository, Name snapshot, TimeSpan interval,
 			Func<RestoreDescriptor, IRestoreRequest> selector = null
 		)
 		{
@@ -26,7 +26,7 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public IObservable<IRecoveryStatusResponse> RestoreObservable(TimeSpan interval, IRestoreRequest request) =>
+		public IObservable<RecoveryStatusResponse> RestoreObservable(TimeSpan interval, IRestoreRequest request) =>
 			new RestoreObservable(this, request, interval);
 	}
 }

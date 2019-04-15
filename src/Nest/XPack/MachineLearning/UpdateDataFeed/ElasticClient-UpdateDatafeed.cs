@@ -10,19 +10,19 @@ namespace Nest
 		/// <summary>
 		/// Update a machine learning datafeed.
 		/// </summary>
-		IUpdateDatafeedResponse UpdateDatafeed<T>(Id datafeedId, Func<UpdateDatafeedDescriptor<T>, IUpdateDatafeedRequest> selector = null)
+		UpdateDatafeedResponse UpdateDatafeed<T>(Id datafeedId, Func<UpdateDatafeedDescriptor<T>, IUpdateDatafeedRequest> selector = null)
 			where T : class;
 
 		/// <inheritdoc />
-		IUpdateDatafeedResponse UpdateDatafeed(IUpdateDatafeedRequest request);
+		UpdateDatafeedResponse UpdateDatafeed(IUpdateDatafeedRequest request);
 
 		/// <inheritdoc />
-		Task<IUpdateDatafeedResponse> UpdateDatafeedAsync<T>(Id datafeedId, Func<UpdateDatafeedDescriptor<T>, IUpdateDatafeedRequest> selector = null,
+		Task<UpdateDatafeedResponse> UpdateDatafeedAsync<T>(Id datafeedId, Func<UpdateDatafeedDescriptor<T>, IUpdateDatafeedRequest> selector = null,
 			CancellationToken ct = default
 		) where T : class;
 
 		/// <inheritdoc />
-		Task<IUpdateDatafeedResponse> UpdateDatafeedAsync(IUpdateDatafeedRequest request,
+		Task<UpdateDatafeedResponse> UpdateDatafeedAsync(IUpdateDatafeedRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -30,16 +30,16 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IUpdateDatafeedResponse UpdateDatafeed<T>(Id datafeedId, Func<UpdateDatafeedDescriptor<T>, IUpdateDatafeedRequest> selector = null)
+		public UpdateDatafeedResponse UpdateDatafeed<T>(Id datafeedId, Func<UpdateDatafeedDescriptor<T>, IUpdateDatafeedRequest> selector = null)
 			where T : class =>
 			UpdateDatafeed(selector.InvokeOrDefault(new UpdateDatafeedDescriptor<T>(datafeedId)));
 
 		/// <inheritdoc />
-		public IUpdateDatafeedResponse UpdateDatafeed(IUpdateDatafeedRequest request) =>
+		public UpdateDatafeedResponse UpdateDatafeed(IUpdateDatafeedRequest request) =>
 			DoRequest<IUpdateDatafeedRequest, UpdateDatafeedResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IUpdateDatafeedResponse> UpdateDatafeedAsync<T>(Id datafeedId,
+		public Task<UpdateDatafeedResponse> UpdateDatafeedAsync<T>(Id datafeedId,
 			Func<UpdateDatafeedDescriptor<T>, IUpdateDatafeedRequest> selector = null,
 			CancellationToken ct = default
 		)
@@ -47,8 +47,8 @@ namespace Nest
 			UpdateDatafeedAsync(selector.InvokeOrDefault(new UpdateDatafeedDescriptor<T>(datafeedId)), ct);
 
 		/// <inheritdoc />
-		public Task<IUpdateDatafeedResponse> UpdateDatafeedAsync(IUpdateDatafeedRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IUpdateDatafeedRequest, IUpdateDatafeedResponse, UpdateDatafeedResponse>
+		public Task<UpdateDatafeedResponse> UpdateDatafeedAsync(IUpdateDatafeedRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IUpdateDatafeedRequest, UpdateDatafeedResponse, UpdateDatafeedResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

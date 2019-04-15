@@ -9,7 +9,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.RevertModelSnapshot
 {
 	public class RevertModelSnapshotApiTests
-		: MachineLearningIntegrationTestBase<IRevertModelSnapshotResponse, IRevertModelSnapshotRequest, RevertModelSnapshotDescriptor,
+		: MachineLearningIntegrationTestBase<RevertModelSnapshotResponse, IRevertModelSnapshotRequest, RevertModelSnapshotDescriptor,
 			RevertModelSnapshotRequest>
 	{
 		public RevertModelSnapshotApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -61,7 +61,7 @@ namespace Tests.XPack.MachineLearning.RevertModelSnapshot
 
 		protected override RevertModelSnapshotDescriptor NewDescriptor() => new RevertModelSnapshotDescriptor(CallIsolatedValue, "first");
 
-		protected override void ExpectResponse(IRevertModelSnapshotResponse response)
+		protected override void ExpectResponse(RevertModelSnapshotResponse response)
 		{
 			response.Model.Should().NotBeNull();
 		}

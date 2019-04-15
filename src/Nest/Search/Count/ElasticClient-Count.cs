@@ -18,38 +18,38 @@ namespace Nest
 		///  typed parts of the query
 		/// </typeparam>
 		/// <param name="selector">An optional descriptor to further describe the count operation</param>
-		ICountResponse Count<T>(Func<CountDescriptor<T>, ICountRequest> selector = null)
+		CountResponse Count<T>(Func<CountDescriptor<T>, ICountRequest> selector = null)
 			where T : class;
 
 		/// <inheritdoc />
-		ICountResponse Count<T>(ICountRequest request)
+		CountResponse Count<T>(ICountRequest request)
 			where T : class;
 
 		/// <inheritdoc />
-		Task<ICountResponse> CountAsync<T>(Func<CountDescriptor<T>, ICountRequest> selector = null,
+		Task<CountResponse> CountAsync<T>(Func<CountDescriptor<T>, ICountRequest> selector = null,
 			CancellationToken ct = default
 		)
 			where T : class;
 
 		/// <inheritdoc />
-		Task<ICountResponse> CountAsync<T>(ICountRequest request, CancellationToken ct = default)
+		Task<CountResponse> CountAsync<T>(ICountRequest request, CancellationToken ct = default)
 			where T : class;
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public ICountResponse Count<T>(Func<CountDescriptor<T>, ICountRequest> selector = null)
+		public CountResponse Count<T>(Func<CountDescriptor<T>, ICountRequest> selector = null)
 			where T : class =>
 			Count<T>(selector.InvokeOrDefault(new CountDescriptor<T>()));
 
 		/// <inheritdoc />
-		public ICountResponse Count<T>(ICountRequest request)
+		public CountResponse Count<T>(ICountRequest request)
 			where T : class =>
 			DoRequest<ICountRequest, CountResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<ICountResponse> CountAsync<T>(
+		public Task<CountResponse> CountAsync<T>(
 			Func<CountDescriptor<T>, ICountRequest> selector = null,
 			CancellationToken ct = default
 		)
@@ -57,8 +57,8 @@ namespace Nest
 			CountAsync<T>(selector.InvokeOrDefault(new CountDescriptor<T>()), ct);
 
 		/// <inheritdoc />
-		public Task<ICountResponse> CountAsync<T>(ICountRequest request, CancellationToken ct = default)
+		public Task<CountResponse> CountAsync<T>(ICountRequest request, CancellationToken ct = default)
 			where T : class =>
-			DoRequestAsync<ICountRequest, ICountResponse, CountResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<ICountRequest, CountResponse, CountResponse>(request, request.RequestParameters, ct);
 	}
 }

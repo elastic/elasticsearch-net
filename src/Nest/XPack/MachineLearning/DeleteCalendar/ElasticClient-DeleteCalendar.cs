@@ -11,38 +11,38 @@ namespace Nest
 		/// Deletes a machine learning calendar.
 		/// Removes all scheduled events from the calendar then deletes the calendar.
 		/// </summary>
-		IDeleteCalendarResponse DeleteCalendar(Id calendarId, Func<DeleteCalendarDescriptor, IDeleteCalendarRequest> selector = null);
+		DeleteCalendarResponse DeleteCalendar(Id calendarId, Func<DeleteCalendarDescriptor, IDeleteCalendarRequest> selector = null);
 
 		/// <inheritdoc cref="DeleteCalendar(Nest.Id,System.Func{Nest.DeleteCalendarDescriptor,Nest.IDeleteCalendarRequest})" />
-		IDeleteCalendarResponse DeleteCalendar(IDeleteCalendarRequest request);
+		DeleteCalendarResponse DeleteCalendar(IDeleteCalendarRequest request);
 
 		/// <inheritdoc cref="DeleteCalendar(Nest.Id,System.Func{Nest.DeleteCalendarDescriptor,Nest.IDeleteCalendarRequest})" />
-		Task<IDeleteCalendarResponse> DeleteCalendarAsync(Id calendarId, Func<DeleteCalendarDescriptor, IDeleteCalendarRequest> selector = null,
+		Task<DeleteCalendarResponse> DeleteCalendarAsync(Id calendarId, Func<DeleteCalendarDescriptor, IDeleteCalendarRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="DeleteCalendar(Nest.Id,System.Func{Nest.DeleteCalendarDescriptor,Nest.IDeleteCalendarRequest})" />
-		Task<IDeleteCalendarResponse> DeleteCalendarAsync(IDeleteCalendarRequest request, CancellationToken ct = default);
+		Task<DeleteCalendarResponse> DeleteCalendarAsync(IDeleteCalendarRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IDeleteCalendarResponse DeleteCalendar(Id calendarId, Func<DeleteCalendarDescriptor, IDeleteCalendarRequest> selector = null) =>
+		public DeleteCalendarResponse DeleteCalendar(Id calendarId, Func<DeleteCalendarDescriptor, IDeleteCalendarRequest> selector = null) =>
 			DeleteCalendar(selector.InvokeOrDefault(new DeleteCalendarDescriptor(calendarId)));
 
 		/// <inheritdoc />
-		public IDeleteCalendarResponse DeleteCalendar(IDeleteCalendarRequest request) =>
+		public DeleteCalendarResponse DeleteCalendar(IDeleteCalendarRequest request) =>
 			DoRequest<IDeleteCalendarRequest, DeleteCalendarResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IDeleteCalendarResponse> DeleteCalendarAsync(Id calendarId, Func<DeleteCalendarDescriptor, IDeleteCalendarRequest> selector = null,
+		public Task<DeleteCalendarResponse> DeleteCalendarAsync(Id calendarId, Func<DeleteCalendarDescriptor, IDeleteCalendarRequest> selector = null,
 			CancellationToken ct = default
 		) =>
 			DeleteCalendarAsync(selector.InvokeOrDefault(new DeleteCalendarDescriptor(calendarId)), ct);
 
 		/// <inheritdoc />
-		public Task<IDeleteCalendarResponse> DeleteCalendarAsync(IDeleteCalendarRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeleteCalendarRequest, IDeleteCalendarResponse, DeleteCalendarResponse>(request, request.RequestParameters, ct);
+		public Task<DeleteCalendarResponse> DeleteCalendarAsync(IDeleteCalendarRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeleteCalendarRequest, DeleteCalendarResponse, DeleteCalendarResponse>(request, request.RequestParameters, ct);
 	}
 }

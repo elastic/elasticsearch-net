@@ -1,42 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
 
 namespace Nest
 {
-	[InterfaceDataContract]
-	public interface IRolloverIndexResponse : IAcknowledgedResponse
+	public class RolloverIndexResponse : AcknowledgedResponseBase
 	{
 		[DataMember(Name = "conditions")]
-		IReadOnlyDictionary<string, bool> Conditions { get; }
+		public IReadOnlyDictionary<string, bool> Conditions { get; internal set; } = EmptyReadOnly<string, bool>.Dictionary;
 
 		[DataMember(Name = "dry_run")]
-		bool DryRun { get; }
-
-		[DataMember(Name = "new_index")]
-		string NewIndex { get; }
-
-		[DataMember(Name = "old_index")]
-		string OldIndex { get; }
-
-		[DataMember(Name = "rolled_over")]
-		bool RolledOver { get; }
-
-		[DataMember(Name = "shards_acknowledged")]
-		bool ShardsAcknowledged { get; }
-	}
-
-	public class RolloverIndexResponse : AcknowledgedResponseBase, IRolloverIndexResponse
-	{
-		public IReadOnlyDictionary<string, bool> Conditions { get; internal set; } = EmptyReadOnly<string, bool>.Dictionary;
 		public bool DryRun { get; internal set; }
 
+		[DataMember(Name = "new_index")]
 		public string NewIndex { get; internal set; }
 
+		[DataMember(Name = "old_index")]
 		public string OldIndex { get; internal set; }
 
+		[DataMember(Name = "rolled_over")]
 		public bool RolledOver { get; internal set; }
 
+		[DataMember(Name = "shards_acknowledged")]
 		public bool ShardsAcknowledged { get; internal set; }
 	}
 }

@@ -6,13 +6,8 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IGetRollupIndexCapabilitiesResponse : IResponse
-	{
-		IReadOnlyDictionary<IndexName, RollupIndexCapabilities> Indices { get; }
-	}
-
 	[JsonFormatter(typeof(ResolvableDictionaryResponseFormatter<GetRollupIndexCapabilitiesResponse, IndexName, RollupIndexCapabilities>))]
-	public class GetRollupIndexCapabilitiesResponse : DictionaryResponseBase<IndexName, RollupIndexCapabilities>, IGetRollupIndexCapabilitiesResponse
+	public class GetRollupIndexCapabilitiesResponse : DictionaryResponseBase<IndexName, RollupIndexCapabilities>
 	{
 		public IReadOnlyDictionary<IndexName, RollupIndexCapabilities> Indices => Self.BackingDictionary;
 	}

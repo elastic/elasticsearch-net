@@ -13,7 +13,7 @@ using Tests.Framework.Integration;
 namespace Tests.Indices.Monitoring.IndicesShardStores
 {
 	public class IndicesShardStoresApiTests
-		: ApiIntegrationTestBase<WritableCluster, IIndicesShardStoresResponse, IIndicesShardStoresRequest, IndicesShardStoresDescriptor,
+		: ApiIntegrationTestBase<WritableCluster, IndicesShardStoresResponse, IIndicesShardStoresRequest, IndicesShardStoresDescriptor,
 			IndicesShardStoresRequest>
 	{
 		private static readonly string IndexWithUnassignedShards = "nest-" + RandomString();

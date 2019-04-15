@@ -10,39 +10,39 @@ namespace Nest
 		/// <summary>
 		/// Forces any buffered data to be processed by the machine learning job.
 		/// </summary>
-		IFlushJobResponse FlushJob(Id jobId, Func<FlushJobDescriptor, IFlushJobRequest> selector = null);
+		FlushJobResponse FlushJob(Id jobId, Func<FlushJobDescriptor, IFlushJobRequest> selector = null);
 
 		/// <inheritdoc />
-		IFlushJobResponse FlushJob(IFlushJobRequest request);
+		FlushJobResponse FlushJob(IFlushJobRequest request);
 
 		/// <inheritdoc />
-		Task<IFlushJobResponse> FlushJobAsync(Id jobId, Func<FlushJobDescriptor, IFlushJobRequest> selector = null,
+		Task<FlushJobResponse> FlushJobAsync(Id jobId, Func<FlushJobDescriptor, IFlushJobRequest> selector = null,
 			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
-		Task<IFlushJobResponse> FlushJobAsync(IFlushJobRequest request, CancellationToken ct = default);
+		Task<FlushJobResponse> FlushJobAsync(IFlushJobRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IFlushJobResponse FlushJob(Id jobId, Func<FlushJobDescriptor, IFlushJobRequest> selector = null) =>
+		public FlushJobResponse FlushJob(Id jobId, Func<FlushJobDescriptor, IFlushJobRequest> selector = null) =>
 			FlushJob(selector.InvokeOrDefault(new FlushJobDescriptor(jobId)));
 
 		/// <inheritdoc />
-		public IFlushJobResponse FlushJob(IFlushJobRequest request) =>
+		public FlushJobResponse FlushJob(IFlushJobRequest request) =>
 			DoRequest<IFlushJobRequest, FlushJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IFlushJobResponse> FlushJobAsync(
+		public Task<FlushJobResponse> FlushJobAsync(
 			Id jobId,
 			Func<FlushJobDescriptor, IFlushJobRequest> selector = null,
 			CancellationToken cancellationToken = default
 		) => FlushJobAsync(selector.InvokeOrDefault(new FlushJobDescriptor(jobId)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IFlushJobResponse> FlushJobAsync(IFlushJobRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IFlushJobRequest, IFlushJobResponse, FlushJobResponse>(request, request.RequestParameters, ct);
+		public Task<FlushJobResponse> FlushJobAsync(IFlushJobRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IFlushJobRequest, FlushJobResponse, FlushJobResponse>(request, request.RequestParameters, ct);
 	}
 }

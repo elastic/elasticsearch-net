@@ -12,7 +12,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.PostJobData
 {
 	public class PostJobDataApiTests
-		: MachineLearningIntegrationTestBase<IPostJobDataResponse, IPostJobDataRequest, PostJobDataDescriptor, PostJobDataRequest>
+		: MachineLearningIntegrationTestBase<PostJobDataResponse, IPostJobDataRequest, PostJobDataDescriptor, PostJobDataRequest>
 	{
 		public PostJobDataApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -91,7 +91,7 @@ namespace Tests.XPack.MachineLearning.PostJobData
 
 		protected override PostJobDataDescriptor NewDescriptor() => new PostJobDataDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(IPostJobDataResponse response)
+		protected override void ExpectResponse(PostJobDataResponse response)
 		{
 			response.ShouldBeValid();
 			response.JobId.Should().Be(CallIsolatedValue);
@@ -111,7 +111,7 @@ namespace Tests.XPack.MachineLearning.PostJobData
 	}
 
 	public class PostJobDataWithResetStartAndResetEndApiTests
-		: MachineLearningIntegrationTestBase<IPostJobDataResponse, IPostJobDataRequest, PostJobDataDescriptor, PostJobDataRequest>
+		: MachineLearningIntegrationTestBase<PostJobDataResponse, IPostJobDataRequest, PostJobDataDescriptor, PostJobDataRequest>
 	{
 		public PostJobDataWithResetStartAndResetEndApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -195,7 +195,7 @@ namespace Tests.XPack.MachineLearning.PostJobData
 
 		protected override PostJobDataDescriptor NewDescriptor() => new PostJobDataDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(IPostJobDataResponse response)
+		protected override void ExpectResponse(PostJobDataResponse response)
 		{
 			response.ShouldBeValid();
 			response.JobId.Should().Be(CallIsolatedValue);

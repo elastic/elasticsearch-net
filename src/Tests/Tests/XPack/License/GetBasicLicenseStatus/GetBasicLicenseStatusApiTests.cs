@@ -14,7 +14,7 @@ namespace Tests.XPack.License.GetBasicLicenseStatus
 	[SkipVersion("<6.5.0", "")]
 	[SkipOnTeamCity]
 	public class GetBasicLicenseStatusApiTests
-		: ApiIntegrationTestBase<XPackCluster, IGetBasicLicenseStatusResponse, IGetBasicLicenseStatusRequest, GetBasicLicenseStatusDescriptor, GetBasicLicenseStatusRequest>
+		: ApiIntegrationTestBase<XPackCluster, GetBasicLicenseStatusResponse, IGetBasicLicenseStatusRequest, GetBasicLicenseStatusDescriptor, GetBasicLicenseStatusRequest>
 	{
 		public GetBasicLicenseStatusApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -33,7 +33,7 @@ namespace Tests.XPack.License.GetBasicLicenseStatus
 			(client, r) => client.GetBasicLicenseStatusAsync(r)
 		);
 
-		protected override void ExpectResponse(IGetBasicLicenseStatusResponse response) =>
+		protected override void ExpectResponse(GetBasicLicenseStatusResponse response) =>
 			response.EligableToStartBasic.Should().BeTrue();
 	}
 }

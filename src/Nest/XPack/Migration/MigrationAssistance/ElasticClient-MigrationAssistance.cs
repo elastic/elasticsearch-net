@@ -11,19 +11,19 @@ namespace Nest
 		/// Analyzes existing indices in the cluster and returns the information about indices that
 		/// require some changes before the cluster can be upgraded to the next major version.
 		/// </summary>
-		IMigrationAssistanceResponse MigrationAssistance(Func<MigrationAssistanceDescriptor, IMigrationAssistanceRequest> selector = null);
+		MigrationAssistanceResponse MigrationAssistance(Func<MigrationAssistanceDescriptor, IMigrationAssistanceRequest> selector = null);
 
 		/// <summary>
 		/// Analyzes existing indices in the cluster and returns the information about indices that
 		/// require some changes before the cluster can be upgraded to the next major version.
 		/// </summary>
-		IMigrationAssistanceResponse MigrationAssistance(IMigrationAssistanceRequest request);
+		MigrationAssistanceResponse MigrationAssistance(IMigrationAssistanceRequest request);
 
 		/// <summary>
 		/// Analyzes existing indices in the cluster and returns the information about indices that
 		/// require some changes before the cluster can be upgraded to the next major version.
 		/// </summary>
-		Task<IMigrationAssistanceResponse> MigrationAssistanceAsync(Func<MigrationAssistanceDescriptor, IMigrationAssistanceRequest> selector = null,
+		Task<MigrationAssistanceResponse> MigrationAssistanceAsync(Func<MigrationAssistanceDescriptor, IMigrationAssistanceRequest> selector = null,
 			CancellationToken ct = default
 		);
 
@@ -31,7 +31,7 @@ namespace Nest
 		/// Analyzes existing indices in the cluster and returns the information about indices that
 		/// require some changes before the cluster can be upgraded to the next major version.
 		/// </summary>
-		Task<IMigrationAssistanceResponse> MigrationAssistanceAsync(IMigrationAssistanceRequest request,
+		Task<MigrationAssistanceResponse> MigrationAssistanceAsync(IMigrationAssistanceRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -39,22 +39,22 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IMigrationAssistanceResponse MigrationAssistance(Func<MigrationAssistanceDescriptor, IMigrationAssistanceRequest> selector = null) =>
+		public MigrationAssistanceResponse MigrationAssistance(Func<MigrationAssistanceDescriptor, IMigrationAssistanceRequest> selector = null) =>
 			MigrationAssistance(selector.InvokeOrDefault(new MigrationAssistanceDescriptor()));
 
 		/// <inheritdoc />
-		public IMigrationAssistanceResponse MigrationAssistance(IMigrationAssistanceRequest request) =>
+		public MigrationAssistanceResponse MigrationAssistance(IMigrationAssistanceRequest request) =>
 			DoRequest<IMigrationAssistanceRequest, MigrationAssistanceResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IMigrationAssistanceResponse> MigrationAssistanceAsync(
+		public Task<MigrationAssistanceResponse> MigrationAssistanceAsync(
 			Func<MigrationAssistanceDescriptor, IMigrationAssistanceRequest> selector = null,
 			CancellationToken ct = default
 		) => MigrationAssistanceAsync(selector.InvokeOrDefault(new MigrationAssistanceDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IMigrationAssistanceResponse> MigrationAssistanceAsync(IMigrationAssistanceRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IMigrationAssistanceRequest, IMigrationAssistanceResponse, MigrationAssistanceResponse>
+		public Task<MigrationAssistanceResponse> MigrationAssistanceAsync(IMigrationAssistanceRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IMigrationAssistanceRequest, MigrationAssistanceResponse, MigrationAssistanceResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

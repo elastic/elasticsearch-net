@@ -10,21 +10,21 @@ namespace Nest
 		/// <summary>
 		/// Reverts a specific snapshot for a machine learning job
 		/// </summary>
-		IRevertModelSnapshotResponse RevertModelSnapshot(Id jobId, Id snapshotId,
+		RevertModelSnapshotResponse RevertModelSnapshot(Id jobId, Id snapshotId,
 			Func<RevertModelSnapshotDescriptor, IRevertModelSnapshotRequest> selector = null
 		);
 
 		/// <inheritdoc />
-		IRevertModelSnapshotResponse RevertModelSnapshot(IRevertModelSnapshotRequest request);
+		RevertModelSnapshotResponse RevertModelSnapshot(IRevertModelSnapshotRequest request);
 
 		/// <inheritdoc />
-		Task<IRevertModelSnapshotResponse> RevertModelSnapshotAsync(Id jobId, Id snapshotId,
+		Task<RevertModelSnapshotResponse> RevertModelSnapshotAsync(Id jobId, Id snapshotId,
 			Func<RevertModelSnapshotDescriptor, IRevertModelSnapshotRequest> selector = null,
 			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
-		Task<IRevertModelSnapshotResponse> RevertModelSnapshotAsync(IRevertModelSnapshotRequest request,
+		Task<RevertModelSnapshotResponse> RevertModelSnapshotAsync(IRevertModelSnapshotRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -32,18 +32,18 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IRevertModelSnapshotResponse RevertModelSnapshot(
+		public RevertModelSnapshotResponse RevertModelSnapshot(
 			Id jobId,
 			Id snapshotId,
 			Func<RevertModelSnapshotDescriptor, IRevertModelSnapshotRequest> selector = null
 		) => RevertModelSnapshot(selector.InvokeOrDefault(new RevertModelSnapshotDescriptor(jobId, snapshotId)));
 
 		/// <inheritdoc />
-		public IRevertModelSnapshotResponse RevertModelSnapshot(IRevertModelSnapshotRequest request) =>
+		public RevertModelSnapshotResponse RevertModelSnapshot(IRevertModelSnapshotRequest request) =>
 			DoRequest<IRevertModelSnapshotRequest, RevertModelSnapshotResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IRevertModelSnapshotResponse> RevertModelSnapshotAsync(
+		public Task<RevertModelSnapshotResponse> RevertModelSnapshotAsync(
 			Id jobId,
 			Id snapshotId,
 			Func<RevertModelSnapshotDescriptor, IRevertModelSnapshotRequest> selector = null,
@@ -51,8 +51,8 @@ namespace Nest
 		) => RevertModelSnapshotAsync(selector.InvokeOrDefault(new RevertModelSnapshotDescriptor(jobId, snapshotId)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IRevertModelSnapshotResponse> RevertModelSnapshotAsync(IRevertModelSnapshotRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IRevertModelSnapshotRequest, IRevertModelSnapshotResponse, RevertModelSnapshotResponse>
+		public Task<RevertModelSnapshotResponse> RevertModelSnapshotAsync(IRevertModelSnapshotRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IRevertModelSnapshotRequest, RevertModelSnapshotResponse, RevertModelSnapshotResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

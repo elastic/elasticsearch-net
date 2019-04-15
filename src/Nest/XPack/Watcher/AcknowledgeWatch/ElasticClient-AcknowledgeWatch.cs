@@ -13,18 +13,18 @@ namespace Nest
 		/// An acknowledged watch action remains in the acknowledged (acked) state until the watch’s condition
 		/// evaluates to <c>false</c>.
 		/// </summary>
-		IAcknowledgeWatchResponse AcknowledgeWatch(Id id, Func<AcknowledgeWatchDescriptor, IAcknowledgeWatchRequest> selector = null);
+		AcknowledgeWatchResponse AcknowledgeWatch(Id id, Func<AcknowledgeWatchDescriptor, IAcknowledgeWatchRequest> selector = null);
 
 		/// <inheritdoc />
-		IAcknowledgeWatchResponse AcknowledgeWatch(IAcknowledgeWatchRequest request);
+		AcknowledgeWatchResponse AcknowledgeWatch(IAcknowledgeWatchRequest request);
 
 		/// <inheritdoc />
-		Task<IAcknowledgeWatchResponse> AcknowledgeWatchAsync(Id id, Func<AcknowledgeWatchDescriptor, IAcknowledgeWatchRequest> selector = null,
+		Task<AcknowledgeWatchResponse> AcknowledgeWatchAsync(Id id, Func<AcknowledgeWatchDescriptor, IAcknowledgeWatchRequest> selector = null,
 			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
-		Task<IAcknowledgeWatchResponse> AcknowledgeWatchAsync(IAcknowledgeWatchRequest request,
+		Task<AcknowledgeWatchResponse> AcknowledgeWatchAsync(IAcknowledgeWatchRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -32,15 +32,15 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IAcknowledgeWatchResponse AcknowledgeWatch(Id id, Func<AcknowledgeWatchDescriptor, IAcknowledgeWatchRequest> selector = null) =>
+		public AcknowledgeWatchResponse AcknowledgeWatch(Id id, Func<AcknowledgeWatchDescriptor, IAcknowledgeWatchRequest> selector = null) =>
 			AcknowledgeWatch(selector.InvokeOrDefault(new AcknowledgeWatchDescriptor(id)));
 
 		/// <inheritdoc />
-		public IAcknowledgeWatchResponse AcknowledgeWatch(IAcknowledgeWatchRequest request) =>
+		public AcknowledgeWatchResponse AcknowledgeWatch(IAcknowledgeWatchRequest request) =>
 			DoRequest<IAcknowledgeWatchRequest, AcknowledgeWatchResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IAcknowledgeWatchResponse> AcknowledgeWatchAsync(
+		public Task<AcknowledgeWatchResponse> AcknowledgeWatchAsync(
 			Id id,
 			Func<AcknowledgeWatchDescriptor, IAcknowledgeWatchRequest> selector = null,
 			CancellationToken cancellationToken = default
@@ -48,8 +48,8 @@ namespace Nest
 			AcknowledgeWatchAsync(selector.InvokeOrDefault(new AcknowledgeWatchDescriptor(id)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IAcknowledgeWatchResponse> AcknowledgeWatchAsync(IAcknowledgeWatchRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IAcknowledgeWatchRequest, IAcknowledgeWatchResponse, AcknowledgeWatchResponse>
+		public Task<AcknowledgeWatchResponse> AcknowledgeWatchAsync(IAcknowledgeWatchRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IAcknowledgeWatchRequest, AcknowledgeWatchResponse, AcknowledgeWatchResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

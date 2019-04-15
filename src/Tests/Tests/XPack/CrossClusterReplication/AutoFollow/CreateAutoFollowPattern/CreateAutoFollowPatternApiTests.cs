@@ -7,7 +7,7 @@ using Tests.Framework.Integration;
 
 namespace Tests.XPack.CrossClusterReplication.AutoFollow.CreateAutoFollowPattern
 {
-	public class CreateAutoFollowPatternApiTests : ApiTestBase<XPackCluster, ICreateAutoFollowPatternResponse, ICreateAutoFollowPatternRequest, CreateAutoFollowPatternDescriptor, CreateAutoFollowPatternRequest>
+	public class CreateAutoFollowPatternApiTests : ApiTestBase<XPackCluster, CreateAutoFollowPatternResponse, ICreateAutoFollowPatternRequest, CreateAutoFollowPatternDescriptor, CreateAutoFollowPatternRequest>
 	{
 		public CreateAutoFollowPatternApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

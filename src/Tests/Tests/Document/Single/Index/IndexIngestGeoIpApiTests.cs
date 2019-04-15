@@ -18,7 +18,7 @@ namespace Tests.Document.Single.Index
 	//TODO 6.6. release revalidate this ticket on server
 	[SkipVersion(">6.4.0", "https://github.com/elastic/elasticsearch/issues/37909")]
 	public class IndexIngestGeoIpApiTests
-		: ApiIntegrationTestBase<IntrusiveOperationCluster, IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, IndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
 	{
 		public IndexIngestGeoIpApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -125,7 +125,7 @@ namespace Tests.Document.Single.Index
 
 		protected override IndexDescriptor<Project> NewDescriptor() => new IndexDescriptor<Project>(Document);
 
-		protected override void ExpectResponse(IIndexResponse response)
+		protected override void ExpectResponse(IndexResponse response)
 		{
 			response.ShouldBeValid();
 

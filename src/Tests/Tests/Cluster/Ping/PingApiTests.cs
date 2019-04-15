@@ -6,7 +6,7 @@ using Tests.Framework.Integration;
 
 namespace Tests.Cluster.Ping
 {
-	public class PingApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IPingResponse, IPingRequest, PingDescriptor, PingRequest>
+	public class PingApiTests : ApiIntegrationTestBase<ReadOnlyCluster, PingResponse, IPingRequest, PingDescriptor, PingRequest>
 	{
 		public PingApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

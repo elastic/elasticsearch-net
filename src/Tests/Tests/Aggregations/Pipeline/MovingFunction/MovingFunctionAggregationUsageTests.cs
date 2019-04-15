@@ -87,7 +87,7 @@ namespace Tests.Aggregations.Pipeline.MovingFunction
 					}
 			};
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
+		protected override void ExpectResponse(SearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 

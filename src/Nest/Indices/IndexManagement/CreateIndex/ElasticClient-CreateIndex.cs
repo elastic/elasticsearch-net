@@ -14,41 +14,41 @@ namespace Nest
 		/// <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html</a>
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the create index operation</param>
-		ICreateIndexResponse CreateIndex(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null);
+		CreateIndexResponse CreateIndex(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null);
 
 		/// <inheritdoc />
-		ICreateIndexResponse CreateIndex(ICreateIndexRequest request);
+		CreateIndexResponse CreateIndex(ICreateIndexRequest request);
 
 		/// <inheritdoc />
-		Task<ICreateIndexResponse> CreateIndexAsync(
+		Task<CreateIndexResponse> CreateIndexAsync(
 			IndexName index,
 			Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null,
 			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
-		Task<ICreateIndexResponse> CreateIndexAsync(ICreateIndexRequest request, CancellationToken ct = default);
+		Task<CreateIndexResponse> CreateIndexAsync(ICreateIndexRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public ICreateIndexResponse CreateIndex(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null) =>
+		public CreateIndexResponse CreateIndex(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null) =>
 			CreateIndex(selector.InvokeOrDefault(new CreateIndexDescriptor(index)));
 
 		/// <inheritdoc />
-		public ICreateIndexResponse CreateIndex(ICreateIndexRequest request) =>
+		public CreateIndexResponse CreateIndex(ICreateIndexRequest request) =>
 			DoRequest<ICreateIndexRequest, CreateIndexResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<ICreateIndexResponse> CreateIndexAsync(
+		public Task<CreateIndexResponse> CreateIndexAsync(
 			IndexName index,
 			Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null,
 			CancellationToken cancellationToken = default
 		) => CreateIndexAsync(selector.InvokeOrDefault(new CreateIndexDescriptor(index)));
 
 		/// <inheritdoc />
-		public Task<ICreateIndexResponse> CreateIndexAsync(ICreateIndexRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<ICreateIndexRequest, ICreateIndexResponse, CreateIndexResponse>(request, request.RequestParameters, ct);
+		public Task<CreateIndexResponse> CreateIndexAsync(ICreateIndexRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<ICreateIndexRequest, CreateIndexResponse, CreateIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

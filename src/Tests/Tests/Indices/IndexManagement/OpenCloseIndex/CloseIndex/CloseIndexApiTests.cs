@@ -7,7 +7,7 @@ using Tests.Framework.Integration;
 namespace Tests.Indices.IndexManagement.OpenCloseIndex.CloseIndex
 {
 	public class CloseIndexApiTests
-		: ApiIntegrationAgainstNewIndexTestBase<WritableCluster, ICloseIndexResponse, ICloseIndexRequest, CloseIndexDescriptor, CloseIndexRequest>
+		: ApiIntegrationAgainstNewIndexTestBase<WritableCluster, CloseIndexResponse, ICloseIndexRequest, CloseIndexDescriptor, CloseIndexRequest>
 	{
 		public CloseIndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

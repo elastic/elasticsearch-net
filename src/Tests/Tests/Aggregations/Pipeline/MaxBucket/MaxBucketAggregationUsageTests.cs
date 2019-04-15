@@ -64,7 +64,7 @@ namespace Tests.Aggregations.Pipeline.MaxBucket
 			}
 			&& new MaxBucketAggregation("max_commits_per_month", "projects_started_per_month>commits");
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
+		protected override void ExpectResponse(SearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 

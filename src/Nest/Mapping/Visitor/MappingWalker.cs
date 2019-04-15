@@ -12,7 +12,7 @@ namespace Nest
 			_visitor = visitor;
 		}
 
-		public void Accept(IGetMappingResponse response)
+		public void Accept(GetMappingResponse response)
 		{
 			if (response?.Indices == null) return;
 

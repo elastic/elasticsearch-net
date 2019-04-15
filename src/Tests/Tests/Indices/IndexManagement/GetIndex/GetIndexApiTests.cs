@@ -11,7 +11,7 @@ using static Nest.Infer;
 namespace Tests.Indices.IndexManagement.GetIndex
 {
 	public class GetIndexApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IGetIndexResponse, IGetIndexRequest, GetIndexDescriptor, GetIndexRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, GetIndexResponse, IGetIndexRequest, GetIndexDescriptor, GetIndexRequest>
 	{
 		private static readonly IndexName ProjectIndex = Index<Project>();
 
@@ -31,7 +31,7 @@ namespace Tests.Indices.IndexManagement.GetIndex
 			(client, r) => client.GetIndexAsync(r)
 		);
 
-		protected override void ExpectResponse(IGetIndexResponse response)
+		protected override void ExpectResponse(GetIndexResponse response)
 		{
 			response.Indices.Should().NotBeNull();
 			response.Indices.Count.Should().BeGreaterThan(0);
@@ -42,7 +42,7 @@ namespace Tests.Indices.IndexManagement.GetIndex
 
 
 	public class GetAllIndicesApiTests
-		: ApiTestBase<ReadOnlyCluster, IGetIndexResponse, IGetIndexRequest, GetIndexDescriptor, GetIndexRequest>
+		: ApiTestBase<ReadOnlyCluster, GetIndexResponse, IGetIndexRequest, GetIndexDescriptor, GetIndexRequest>
 	{
 		public GetAllIndicesApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

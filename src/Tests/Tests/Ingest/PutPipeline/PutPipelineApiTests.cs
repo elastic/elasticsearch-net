@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 namespace Tests.Ingest.PutPipeline
 {
 	public class PutPipelineApiTests
-		: ApiIntegrationTestBase<WritableCluster, IPutPipelineResponse, IPutPipelineRequest, PutPipelineDescriptor, PutPipelineRequest>
+		: ApiIntegrationTestBase<WritableCluster, PutPipelineResponse, IPutPipelineRequest, PutPipelineDescriptor, PutPipelineRequest>
 	{
 		private static readonly string _id = "pipeline-1";
 
@@ -49,6 +49,6 @@ namespace Tests.Ingest.PutPipeline
 
 		protected override PutPipelineDescriptor NewDescriptor() => new PutPipelineDescriptor(_id);
 
-		protected override void ExpectResponse(IPutPipelineResponse response) => response.Acknowledged.Should().BeTrue();
+		protected override void ExpectResponse(PutPipelineResponse response) => response.Acknowledged.Should().BeTrue();
 	}
 }

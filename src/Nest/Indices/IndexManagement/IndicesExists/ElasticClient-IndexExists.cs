@@ -16,40 +16,40 @@ namespace Nest
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-exists.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the index exist operation</param>
-		IExistsResponse IndexExists(Indices indices, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null);
+		ExistsResponse IndexExists(Indices indices, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null);
 
 		/// <inheritdoc />
-		IExistsResponse IndexExists(IIndexExistsRequest request);
+		ExistsResponse IndexExists(IIndexExistsRequest request);
 
 		/// <inheritdoc />
-		Task<IExistsResponse> IndexExistsAsync(Indices indices, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null,
+		Task<ExistsResponse> IndexExistsAsync(Indices indices, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest request, CancellationToken ct = default);
+		Task<ExistsResponse> IndexExistsAsync(IIndexExistsRequest request, CancellationToken ct = default);
 	}
 
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IExistsResponse IndexExists(Indices indices, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null) =>
+		public ExistsResponse IndexExists(Indices indices, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null) =>
 			IndexExists(selector.InvokeOrDefault(new IndexExistsDescriptor(indices)));
 
 		/// <inheritdoc />
-		public IExistsResponse IndexExists(IIndexExistsRequest request) =>
+		public ExistsResponse IndexExists(IIndexExistsRequest request) =>
 			DoRequest<IIndexExistsRequest, ExistsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IExistsResponse> IndexExistsAsync(
+		public Task<ExistsResponse> IndexExistsAsync(
 			Indices indices,
 			Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null,
 			CancellationToken ct = default
 		) => IndexExistsAsync(selector.InvokeOrDefault(new IndexExistsDescriptor(indices)), ct);
 
 		/// <inheritdoc />
-		public Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IIndexExistsRequest, IExistsResponse, ExistsResponse>(request, request.RequestParameters, ct);
+		public Task<ExistsResponse> IndexExistsAsync(IIndexExistsRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IIndexExistsRequest, ExistsResponse, ExistsResponse>(request, request.RequestParameters, ct);
 	}
 }

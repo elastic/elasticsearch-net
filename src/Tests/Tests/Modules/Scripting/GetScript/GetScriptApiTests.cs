@@ -8,7 +8,7 @@ using Tests.Framework.Integration;
 namespace Tests.Modules.Scripting.GetScript
 {
 	public class GetScriptApiTests
-		: ApiTestBase<ReadOnlyCluster, IGetScriptResponse, IGetScriptRequest, GetScriptDescriptor, GetScriptRequest>
+		: ApiTestBase<ReadOnlyCluster, GetScriptResponse, IGetScriptRequest, GetScriptDescriptor, GetScriptRequest>
 	{
 		private static readonly string _name = "scrpt1";
 

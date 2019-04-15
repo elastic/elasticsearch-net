@@ -9,7 +9,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.DeleteForecast
 {
 	public class DeleteForecastApiTests
-		: MachineLearningIntegrationTestBase<IDeleteForecastResponse, IDeleteForecastRequest, DeleteForecastDescriptor, DeleteForecastRequest>
+		: MachineLearningIntegrationTestBase<DeleteForecastResponse, IDeleteForecastRequest, DeleteForecastDescriptor, DeleteForecastRequest>
 	{
 		public DeleteForecastApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -59,6 +59,6 @@ namespace Tests.XPack.MachineLearning.DeleteForecast
 
 		protected override DeleteForecastDescriptor NewDescriptor() => new DeleteForecastDescriptor(CallIsolatedValue + "-job", CallIsolatedValue);
 
-		protected override void ExpectResponse(IDeleteForecastResponse response) => response.Acknowledged.Should().BeTrue();
+		protected override void ExpectResponse(DeleteForecastResponse response) => response.Acknowledged.Should().BeTrue();
 	}
 }

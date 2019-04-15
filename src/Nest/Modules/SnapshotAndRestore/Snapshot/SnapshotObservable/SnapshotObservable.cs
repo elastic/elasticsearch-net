@@ -6,7 +6,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class SnapshotObservable : IDisposable, IObservable<ISnapshotStatusResponse>
+	public class SnapshotObservable : IDisposable, IObservable<SnapshotStatusResponse>
 	{
 		private readonly IElasticClient _elasticClient;
 		private readonly TimeSpan _interval = TimeSpan.FromSeconds(2);
@@ -41,7 +41,7 @@ namespace Nest
 
 		public void Dispose() => Dispose(true);
 
-		public IDisposable Subscribe(IObserver<ISnapshotStatusResponse> observer)
+		public IDisposable Subscribe(IObserver<SnapshotStatusResponse> observer)
 		{
 			observer.ThrowIfNull(nameof(observer));
 
@@ -77,7 +77,7 @@ namespace Nest
 
 		private void Snapshot(object state)
 		{
-			var observer = state as IObserver<ISnapshotStatusResponse>;
+			var observer = state as IObserver<SnapshotStatusResponse>;
 
 			if (observer == null) throw new ArgumentException("state");
 
@@ -124,16 +124,16 @@ namespace Nest
 
 	public class SnapshotNextEventArgs : EventArgs
 	{
-		public SnapshotNextEventArgs(ISnapshotStatusResponse snapshotStatusResponse) => SnapshotStatusResponse = snapshotStatusResponse;
+		public SnapshotNextEventArgs(SnapshotStatusResponse snapshotStatusResponse) => SnapshotStatusResponse = snapshotStatusResponse;
 
-		public ISnapshotStatusResponse SnapshotStatusResponse { get; }
+		public SnapshotStatusResponse SnapshotStatusResponse { get; }
 	}
 
 	public class SnapshotCompletedEventArgs : EventArgs
 	{
-		public SnapshotCompletedEventArgs(ISnapshotStatusResponse snapshotStatusResponse) => SnapshotStatusResponse = snapshotStatusResponse;
+		public SnapshotCompletedEventArgs(SnapshotStatusResponse snapshotStatusResponse) => SnapshotStatusResponse = snapshotStatusResponse;
 
-		public ISnapshotStatusResponse SnapshotStatusResponse { get; private set; }
+		public SnapshotStatusResponse SnapshotStatusResponse { get; private set; }
 	}
 
 	public class SnapshotErrorEventArgs : EventArgs

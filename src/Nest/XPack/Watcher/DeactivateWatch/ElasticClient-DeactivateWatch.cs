@@ -10,18 +10,18 @@ namespace Nest
 		/// <summary>
 		/// Deactivates a currently active watch.
 		/// </summary>
-		IDeactivateWatchResponse DeactivateWatch(Id id, Func<DeactivateWatchDescriptor, IDeactivateWatchRequest> selector = null);
+		DeactivateWatchResponse DeactivateWatch(Id id, Func<DeactivateWatchDescriptor, IDeactivateWatchRequest> selector = null);
 
 		/// <inheritdoc />
-		IDeactivateWatchResponse DeactivateWatch(IDeactivateWatchRequest request);
+		DeactivateWatchResponse DeactivateWatch(IDeactivateWatchRequest request);
 
 		/// <inheritdoc />
-		Task<IDeactivateWatchResponse> DeactivateWatchAsync(Id id, Func<DeactivateWatchDescriptor, IDeactivateWatchRequest> selector = null,
+		Task<DeactivateWatchResponse> DeactivateWatchAsync(Id id, Func<DeactivateWatchDescriptor, IDeactivateWatchRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IDeactivateWatchResponse> DeactivateWatchAsync(IDeactivateWatchRequest request,
+		Task<DeactivateWatchResponse> DeactivateWatchAsync(IDeactivateWatchRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -29,23 +29,23 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IDeactivateWatchResponse DeactivateWatch(Id id, Func<DeactivateWatchDescriptor, IDeactivateWatchRequest> selector = null) =>
+		public DeactivateWatchResponse DeactivateWatch(Id id, Func<DeactivateWatchDescriptor, IDeactivateWatchRequest> selector = null) =>
 			DeactivateWatch(selector.InvokeOrDefault(new DeactivateWatchDescriptor(id)));
 
 		/// <inheritdoc />
-		public IDeactivateWatchResponse DeactivateWatch(IDeactivateWatchRequest request) =>
+		public DeactivateWatchResponse DeactivateWatch(IDeactivateWatchRequest request) =>
 			DoRequest<IDeactivateWatchRequest, DeactivateWatchResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IDeactivateWatchResponse> DeactivateWatchAsync(
+		public Task<DeactivateWatchResponse> DeactivateWatchAsync(
 			Id id,
 			Func<DeactivateWatchDescriptor, IDeactivateWatchRequest> selector = null,
 			CancellationToken ct = default
 		) => DeactivateWatchAsync(selector.InvokeOrDefault(new DeactivateWatchDescriptor(id)), ct);
 
 		/// <inheritdoc />
-		public Task<IDeactivateWatchResponse> DeactivateWatchAsync(IDeactivateWatchRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeactivateWatchRequest, IDeactivateWatchResponse, DeactivateWatchResponse>
+		public Task<DeactivateWatchResponse> DeactivateWatchAsync(IDeactivateWatchRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeactivateWatchRequest, DeactivateWatchResponse, DeactivateWatchResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

@@ -1,6 +1,4 @@
 ﻿namespace Nest
 {
-	public interface IDeleteAutoFollowPatternResponse : IAcknowledgedResponse { }
-
-	public class DeleteAutoFollowPatternResponse : AcknowledgedResponseBase, IDeleteAutoFollowPatternResponse { }
+	public class DeleteAutoFollowPatternResponse : AcknowledgedResponseBase { }
 }

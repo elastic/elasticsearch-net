@@ -26,10 +26,10 @@ namespace Tests.CodeStandards
 				typeof(ITypeMapping).GetProperty(nameof(ITypeMapping.Meta)),
 				typeof(TypeMapping).GetProperty(nameof(TypeMapping.DynamicDateFormats)),
 				typeof(TypeMapping).GetProperty(nameof(TypeMapping.Meta)),
-				typeof(IBulkResponse).GetProperty(nameof(IBulkResponse.ItemsWithErrors)),
-				typeof(IStartBasicLicenseResponse).GetProperty(nameof(IStartBasicLicenseResponse.Acknowledge)),
-				typeof(IFieldCapabilitiesResponse).GetProperty(nameof(IFieldCapabilitiesResponse.Fields)),
-				typeof(IMultiSearchResponse).GetProperty(nameof(IMultiSearchResponse.AllResponses)),
+				typeof(BulkResponse).GetProperty(nameof(BulkResponse.ItemsWithErrors)),
+				typeof(StartBasicLicenseResponse).GetProperty(nameof(StartBasicLicenseResponse.Acknowledge)),
+				typeof(FieldCapabilitiesResponse).GetProperty(nameof(FieldCapabilitiesResponse.Fields)),
+				typeof(MultiSearchResponse).GetProperty(nameof(MultiSearchResponse.AllResponses)),
 			};
 
 			var responseInterfaceTypes = from t in typeof(IResponse).Assembly().Types()

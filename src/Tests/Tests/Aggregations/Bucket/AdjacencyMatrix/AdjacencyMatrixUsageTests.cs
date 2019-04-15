@@ -48,7 +48,7 @@ namespace Tests.Aggregations.Bucket.AdjacencyMatrix
 				}
 			};
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
+		protected override void ExpectResponse(SearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var interactions = response.Aggregations.AdjacencyMatrix("interactions");

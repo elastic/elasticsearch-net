@@ -3,8 +3,5 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[InterfaceDataContract]
-	public interface IRestartWatcherResponse : IAcknowledgedResponse { }
-
-	public class RestartWatcherResponse : AcknowledgedResponseBase, IRestartWatcherResponse { }
+	public class RestartWatcherResponse : AcknowledgedResponseBase { }
 }

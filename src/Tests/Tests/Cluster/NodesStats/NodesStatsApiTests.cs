@@ -15,7 +15,7 @@ namespace Tests.Cluster.NodesStats
 {
 	//TODO: re-evaluate which numerics are safe to assert greater then 0 and add better error messages so we can see which numeric assertion fails on CI.
 	public class NodesStatsApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, INodesStatsResponse, INodesStatsRequest, NodesStatsDescriptor, NodesStatsRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, NodesStatsResponse, INodesStatsRequest, NodesStatsDescriptor, NodesStatsRequest>
 	{
 		public NodesStatsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -47,7 +47,7 @@ namespace Tests.Cluster.NodesStats
 			}
 		}
 
-		protected override void ExpectResponse(INodesStatsResponse response)
+		protected override void ExpectResponse(NodesStatsResponse response)
 		{
 			response.ClusterName.Should().NotBeNullOrWhiteSpace();
 			response.NodeStatistics.Should().NotBeNull();

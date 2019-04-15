@@ -44,7 +44,7 @@ namespace Tests.Aggregations.Bucket.GeoHashGrid
 				ShardSize = 100
 			};
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
+		protected override void ExpectResponse(SearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var myGeoHashGrid = response.Aggregations.GeoHash("my_geohash_grid");

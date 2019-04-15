@@ -14,20 +14,20 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="T">The type used to describe the query</typeparam>
 		/// <param name="selector">A descriptor that describes the query operation</param>
-		IValidateQueryResponse ValidateQuery<T>(Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> selector)
+		ValidateQueryResponse ValidateQuery<T>(Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> selector)
 			where T : class;
 
 		/// <inheritdoc />
-		IValidateQueryResponse ValidateQuery(IValidateQueryRequest request);
+		ValidateQueryResponse ValidateQuery(IValidateQueryRequest request);
 
 		/// <inheritdoc />
-		Task<IValidateQueryResponse> ValidateQueryAsync<T>(Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> selector,
+		Task<ValidateQueryResponse> ValidateQueryAsync<T>(Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> selector,
 			CancellationToken ct = default
 		)
 			where T : class;
 
 		/// <inheritdoc />
-		Task<IValidateQueryResponse> ValidateQueryAsync(IValidateQueryRequest request,
+		Task<ValidateQueryResponse> ValidateQueryAsync(IValidateQueryRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -35,16 +35,16 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IValidateQueryResponse ValidateQuery<T>(Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> selector)
+		public ValidateQueryResponse ValidateQuery<T>(Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> selector)
 			where T : class =>
 			ValidateQuery(selector?.Invoke(new ValidateQueryDescriptor<T>()));
 
 		/// <inheritdoc />
-		public IValidateQueryResponse ValidateQuery(IValidateQueryRequest request) =>
+		public ValidateQueryResponse ValidateQuery(IValidateQueryRequest request) =>
 			DoRequest<IValidateQueryRequest, ValidateQueryResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IValidateQueryResponse> ValidateQueryAsync<T>(
+		public Task<ValidateQueryResponse> ValidateQueryAsync<T>(
 			Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> selector,
 			CancellationToken ct = default
 		)
@@ -52,7 +52,7 @@ namespace Nest
 			ValidateQueryAsync(selector?.Invoke(new ValidateQueryDescriptor<T>()), ct);
 
 		/// <inheritdoc />
-		public Task<IValidateQueryResponse> ValidateQueryAsync(IValidateQueryRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IValidateQueryRequest, IValidateQueryResponse, ValidateQueryResponse>(request, request.RequestParameters, ct);
+		public Task<ValidateQueryResponse> ValidateQueryAsync(IValidateQueryRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IValidateQueryRequest, ValidateQueryResponse, ValidateQueryResponse>(request, request.RequestParameters, ct);
 	}
 }

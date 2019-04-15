@@ -10,7 +10,7 @@ using Tests.Framework.Integration;
 namespace Tests.Cluster.ClusterAllocationExplain
 {
 	public class ClusterAllocationExplainApiTests
-		: ApiIntegrationTestBase<UnbalancedCluster, IClusterAllocationExplainResponse, IClusterAllocationExplainRequest,
+		: ApiIntegrationTestBase<UnbalancedCluster, ClusterAllocationExplainResponse, IClusterAllocationExplainRequest,
 			ClusterAllocationExplainDescriptor, ClusterAllocationExplainRequest>
 	{
 		public ClusterAllocationExplainApiTests(UnbalancedCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -53,7 +53,7 @@ namespace Tests.Cluster.ClusterAllocationExplain
 			(client, r) => client.ClusterAllocationExplainAsync(r)
 		);
 
-		protected override void ExpectResponse(IClusterAllocationExplainResponse response)
+		protected override void ExpectResponse(ClusterAllocationExplainResponse response)
 		{
 			response.Primary.Should().BeTrue();
 			response.Shard.Should().Be(0);

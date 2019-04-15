@@ -18,13 +18,13 @@ namespace Nest
 		/// </summary>
 		/// <param name="name">The name of the template to register</param>
 		/// <param name="selector">An optional selector specifying additional parameters for the put template operation</param>
-		IPutIndexTemplateResponse PutIndexTemplate(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector);
+		PutIndexTemplateResponse PutIndexTemplate(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector);
 
 		/// <inheritdoc />
-		IPutIndexTemplateResponse PutIndexTemplate(IPutIndexTemplateRequest request);
+		PutIndexTemplateResponse PutIndexTemplate(IPutIndexTemplateRequest request);
 
 		/// <inheritdoc />
-		Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(
+		Task<PutIndexTemplateResponse> PutIndexTemplateAsync(
 			Name name,
 			Func<PutIndexTemplateDescriptor,
 				IPutIndexTemplateRequest> selector,
@@ -32,7 +32,7 @@ namespace Nest
 		);
 
 		/// <inheritdoc />
-		Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest request,
+		Task<PutIndexTemplateResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -40,22 +40,22 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IPutIndexTemplateResponse PutIndexTemplate(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector) =>
+		public PutIndexTemplateResponse PutIndexTemplate(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector) =>
 			PutIndexTemplate(selector.InvokeOrDefault(new PutIndexTemplateDescriptor(name)));
 
 		/// <inheritdoc />
-		public IPutIndexTemplateResponse PutIndexTemplate(IPutIndexTemplateRequest request) =>
+		public PutIndexTemplateResponse PutIndexTemplate(IPutIndexTemplateRequest request) =>
 			DoRequest<IPutIndexTemplateRequest, PutIndexTemplateResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(
+		public Task<PutIndexTemplateResponse> PutIndexTemplateAsync(
 			Name name,
 			Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector,
 			CancellationToken ct = default
 		) => PutIndexTemplateAsync(selector.InvokeOrDefault(new PutIndexTemplateDescriptor(name)), ct);
 
 		/// <inheritdoc />
-		public Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IPutIndexTemplateRequest, IPutIndexTemplateResponse, PutIndexTemplateResponse>(request, request.RequestParameters, ct);
+		public Task<PutIndexTemplateResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IPutIndexTemplateRequest, PutIndexTemplateResponse, PutIndexTemplateResponse>(request, request.RequestParameters, ct);
 	}
 }

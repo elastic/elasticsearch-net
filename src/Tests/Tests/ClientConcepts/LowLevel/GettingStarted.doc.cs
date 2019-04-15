@@ -112,10 +112,10 @@ namespace Tests.ClientConcepts.LowLevel
 				LastName = "Laarman"
 			};
 
-			var indexResponse = lowlevelClient.Index<BytesResponse>("people", "1", PostData.Serializable(person)); //<1> synchronous method that returns an `IIndexResponse`
-			byte[] responseBytes = indexResponse.Body;
+			var ndexResponse = lowlevelClient.Index<BytesResponse>("people", "1", PostData.Serializable(person)); //<1> synchronous method that returns an `IndexResponse`
+			byte[] responseBytes = ndexResponse.Body;
 
-			var asyncIndexResponse = await lowlevelClient.IndexAsync<StringResponse>("people", "1", PostData.Serializable(person)); //<2> asynchronous method that returns a `Task<IIndexResponse>` that can be awaited
+			var asyncIndexResponse = await lowlevelClient.IndexAsync<StringResponse>("people", "1", PostData.Serializable(person)); //<2> asynchronous method that returns a `Task<IndexResponse>` that can be awaited
 			string responseString = asyncIndexResponse.Body;
 		}
 
@@ -135,8 +135,8 @@ namespace Tests.ClientConcepts.LowLevel
 				LastName = "Laarman"
 			};
 
-			var indexResponse = await lowlevelClient.IndexAsync<BytesResponse>("people", "1", PostData.Serializable(person));
-			byte[] responseStream = indexResponse.Body;
+			var ndexResponse = await lowlevelClient.IndexAsync<BytesResponse>("people", "1", PostData.Serializable(person));
+			byte[] responseStream = ndexResponse.Body;
 		}
 
 		/**
@@ -165,8 +165,8 @@ namespace Tests.ClientConcepts.LowLevel
 				new { FirstName = "Russ", LastName = "Cam" },
 			};
 
-			var indexResponse = lowlevelClient.Bulk<StringResponse>(PostData.MultiJson(people));
-			string responseStream = indexResponse.Body;
+			var ndexResponse = lowlevelClient.Bulk<StringResponse>(PostData.MultiJson(people));
+			string responseStream = ndexResponse.Body;
 		}
 		/**
 		* The client will serialize each item seperately and join items up using the `\n` character as required by the Bulk API. Refer to the
