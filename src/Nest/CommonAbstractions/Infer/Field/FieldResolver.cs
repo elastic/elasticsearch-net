@@ -44,7 +44,8 @@ namespace Nest
 			if (property.IsConditionless()) return null;
 			if (!property.Name.IsNullOrEmpty()) return property.Name;
 
-			if (property.Expression != null && !property.CacheableExpression) return Resolve(property.Expression, property.Property);
+			if (property.Expression != null && !property.CacheableExpression)
+				return Resolve(property.Expression, property.Property);
 
 			if (Properties.TryGetValue(property, out var propertyName))
 				return propertyName;
