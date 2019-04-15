@@ -7,6 +7,7 @@ open System.Text
 open System.Xml
 open System.Xml.Linq
 open System.Xml.XPath
+open Fake.Core;
 open Microsoft.FSharp.Quotations
 open Microsoft.FSharp.Quotations.Patterns
 
@@ -34,18 +35,10 @@ module Release =
             let semanticVersion = parse version
             sprintf "%i" (semanticVersion.Major + 1u)
             
-    let private addKeyValue (e:Expr<string>) (builder:StringBuilder) =
-        // the binding for this tuple looks like key/value should 
-        // be round the other way (but it's correct as is)...
-        let (value,key) = 
-            match e with
-            | PropertyGet (eo, pi, li) -> (pi.Name, (pi.GetValue(e) |> string))
-            | ValueWithName (obj,ty,nm) -> ((obj |> string), nm)
-            | _ -> failwith (sprintf "%A is not a let-bound value. %A" e (e.GetType()))
-            
+    let private addKeyValue key value (builder:StringBuilder) =
         if (not (String.IsNullOrEmpty value)) then builder.AppendFormat("{0}=\"{1}\";", key, value)
         else builder
-
+        
     let private currentMajorVersion version = sprintf "%i" <| version.Full.Major
     let private nextMajorVersion version = sprintf "%i" <| version.Full.Major + 1u
 
@@ -53,9 +46,9 @@ module Release =
         let currentMajorVersion = currentMajorVersion version
         let nextMajorVersion = nextMajorVersion version
         new StringBuilder()
-        |> addKeyValue <@currentMajorVersion@>
-        |> addKeyValue <@nextMajorVersion@>
-        |> addKeyValue <@year@>
+        |> addKeyValue "currentMajorVersion" currentMajorVersion
+        |> addKeyValue "nextMajorVersion" nextMajorVersion
+        |> addKeyValue "year" year
 
     let pack file n properties version  = 
         Tooling.Nuget.Exec [ "pack"; file; 
@@ -140,9 +133,9 @@ module Release =
 
             let properties =
                 props version
-                |> addKeyValue <@jsonDotNetCurrentVersion@>
-                |> addKeyValue <@jsonDotNetNextVersion@>
-            let properties = properties.ToString()
+                |> addKeyValue "jsonDotNetCurrentVersion" jsonDotNetCurrentVersion
+                |> addKeyValue "jsonDotNetNextVersion" jsonDotNetNextVersion
+                |> StringBuilder.toText
                 
             let nugetId = p.NugetId 
             let nuspec = (sprintf @"build/%s.nuspec" nugetId)
