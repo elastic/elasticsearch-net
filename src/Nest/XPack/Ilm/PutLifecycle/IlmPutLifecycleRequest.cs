@@ -25,21 +25,23 @@ namespace Nest
 
 	public class PhasesDescriptor : IDescriptor
 	{
-		public PhasesDescriptor Warm(Func<PhaseDescriptor, object> func) => null;
-		public PhasesDescriptor Hot(Func<PhaseDescriptor, object> func) => null;
-		public PhasesDescriptor Cold(Func<PhaseDescriptor, object> func) => null;
-		public PhasesDescriptor Delete(Func<PhaseDescriptor, object> func) => null;
+		public PhasesDescriptor Warm(Func<PhaseDescriptor, PhaseDescriptor> func) => null;
+		public PhasesDescriptor Hot(Func<PhaseDescriptor, PhaseDescriptor> func) => null;
+		public PhasesDescriptor Cold(Func<PhaseDescriptor, PhaseDescriptor> func) => null;
+		public PhasesDescriptor Delete(Func<PhaseDescriptor, PhaseDescriptor> func) => null;
 	}
 
 	public class PhaseDescriptor : IDescriptor
 	{
 		public PhaseDescriptor MinimumAge(string p0) => null;
 
-		public LifecycleActionsDescriptor Actions(Func<LifecycleActionsDescriptor, object> func) => null;
+		public PhaseDescriptor Actions(Func<LifecycleActionsDescriptor, object> func) => null;
 	}
 
-	public class LifecycleActionsDescriptor : IsADictionaryDescriptorBase<LifecycleActionsDescriptor, object, string, ILifecycleAction>
+	public class LifecycleActionsDescriptor : IsADictionaryDescriptorBase<LifecycleActionsDescriptor, IsADictionaryBase<string, ILifecycleAction>, string, ILifecycleAction>
 	{
+		public LifecycleActionsDescriptor(IsADictionaryBase<string, ILifecycleAction> instance) : base(instance) { }
+
 		public LifecycleActionsDescriptor Allocate(Func<AllocateLifecycleActionDescriptor, IAllocateLifecycleAction> selector) =>
 			Assign("allocate", selector.InvokeOrDefault(new AllocateLifecycleActionDescriptor()));
 
