@@ -473,11 +473,11 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		public class CachePerformance
 		{
 			private readonly List<HitTiming> _timings = new List<HitTiming>();
-			private readonly ITestOutputHelper output;
+			private readonly ITestOutputHelper _output;
 			private FieldResolver _resolver;
 			private Stopwatch _stopwatch;
 
-			public CachePerformance(ITestOutputHelper output) => this.output = output;
+			public CachePerformance(ITestOutputHelper output) => this._output = output;
 
 			[U]
 			public void CachedVsNonCached()
@@ -501,7 +501,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				AddTiming(() => Field<CommitActivity>(p => p.ProjectName));
 				AddTiming(() => Field<CommitActivity>(p => p.StringDuration));
 
-				output.WriteLine(_timings.Aggregate(new StringBuilder().AppendLine(), (sb, s) => sb.AppendLine(s.ToString()), sb => sb.ToString()));
+				_output.WriteLine(_timings.Aggregate(new StringBuilder().AppendLine(), (sb, s) => sb.AppendLine(s.ToString()), sb => sb.ToString()));
 			}
 
 			private void AddTiming(Func<Field> field)

@@ -7,9 +7,6 @@ namespace Nest
 {
 	public static class ExpressionExtensions
 	{
-		private static readonly Regex ExpressionRegex = new Regex(@"^\s*(.*)\s*\=\>\s*\1\.");
-		private static readonly Regex MemberExpressionRegex = new Regex(@"^[^\.]*\.");
-
 		/// <summary>
 		/// Appends <paramref name="suffix" /> to the path separating it with a dot.
 		/// This is especially useful with multi fields.
@@ -22,20 +19,20 @@ namespace Nest
 			return Expression.Lambda<Func<T, object>>(newBody, expression.Parameters[0]);
 		}
 
-		internal static object ComparisonValueFromExpression(this Expression expression, out Type type)
+		internal static object ComparisonValueFromExpression(this Expression expression, out Type type, out bool cachable)
 		{
 			type = null;
+			cachable = false;
 
 			if (expression == null) return null;
 
-			if (!(expression is LambdaExpression lambda))
-				return ExpressionRegex.Replace(expression.ToString(), string.Empty);
+			if (!(expression is LambdaExpression lambda)) throw new Exception($"Not a lambda expression: {expression}");
 
 			type = lambda.Parameters.FirstOrDefault()?.Type;
-
-			return lambda.Body is MemberExpression memberExpression
-				? MemberExpressionRegex.Replace(memberExpression.ToString(), string.Empty)
-				: ExpressionRegex.Replace(expression.ToString(), string.Empty);
+			var visitor = new ToStringExpressionVisitor();
+			var toString = visitor.Resolve(expression);
+			cachable = visitor.Cachable;
+			return toString;
 		}
 
 		/// <summary>
