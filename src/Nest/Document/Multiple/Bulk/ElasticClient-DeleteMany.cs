@@ -55,7 +55,9 @@ namespace Nest
 				.Select(o => new BulkDeleteOperation<T>(o))
 				.Cast<IBulkOperation>()
 				.ToList();
-			bulkRequest.Operations = deletes;
+
+			bulkRequest.Operations = new BulkOperationsCollection<IBulkOperation>(deletes);
+
 			return bulkRequest;
 		}
 	}

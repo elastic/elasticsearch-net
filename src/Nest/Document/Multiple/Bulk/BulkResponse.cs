@@ -8,7 +8,7 @@ namespace Nest
 	public interface IBulkResponse : IResponse
 	{
 		bool Errors { get; }
-		IReadOnlyCollection<IBulkResponseItem> Items { get; }
+		IReadOnlyList<IBulkResponseItem> Items { get; }
 		IEnumerable<IBulkResponseItem> ItemsWithErrors { get; }
 		long Took { get; }
 	}
@@ -22,7 +22,7 @@ namespace Nest
 		public override bool IsValid => base.IsValid && !Errors && !ItemsWithErrors.HasAny();
 
 		[DataMember(Name ="items")]
-		public IReadOnlyCollection<IBulkResponseItem> Items { get; internal set; } = EmptyReadOnly<IBulkResponseItem>.Collection;
+		public IReadOnlyList<IBulkResponseItem> Items { get; internal set; } = EmptyReadOnly<IBulkResponseItem>.List;
 
 		[IgnoreDataMember]
 		public IEnumerable<IBulkResponseItem> ItemsWithErrors => !Items.HasAny()
