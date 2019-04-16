@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 
 namespace Elasticsearch.Net
 {
+	[DataContract]
 	[JsonFormatter(typeof(ErrorFormatter))]
 	public class Error : ErrorCause
 	{
@@ -20,52 +21,25 @@ namespace Elasticsearch.Net
 
 	internal class ErrorFormatter : IJsonFormatter<Error>
 	{
-		public void Serialize(ref JsonWriter writer, Error value, IJsonFormatterResolver formatterResolver) { }
+		private static readonly IJsonFormatter<Error> Formatter =
+			DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<Error>();
+
+		public void Serialize(ref JsonWriter writer, Error value, IJsonFormatterResolver formatterResolver) =>
+			Formatter.Serialize(ref writer, value, formatterResolver);
 
 		public Error Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			switch (reader.GetCurrentJsonToken())
+			var token = reader.GetCurrentJsonToken();
+			switch (token)
 			{
 				case JsonToken.String:
-				{
-					var error = new Error { Reason = reader.ReadString() };
-					return error;
-				}
+					return new Error { Reason = reader.ReadString() };
 				case JsonToken.BeginObject:
-				{
-					var formatter = formatterResolver.GetFormatter<Dictionary<string, object>>();
-					var dict = formatter.Deserialize(ref reader, formatterResolver);
-
-					var error = new Error();
-					error.FillValues(dict);
-
-					if (dict.TryGetValue("caused_by", out var causedBy))
-						error.CausedBy = formatterResolver.ReserializeAndDeserialize<ErrorCause>(causedBy);
-
-					if (dict.TryGetValue("headers", out var headers))
-					{
-						var d = formatterResolver.ReserializeAndDeserialize<Dictionary<string, string>>(headers);
-						if (d != null) error.Headers = new ReadOnlyDictionary<string, string>(d);
-					}
-
-					error.Metadata = ErrorCause.ErrorCauseMetadata.CreateCauseMetadata(dict, formatterResolver);
-
-					return ReadRootCause(dict, formatterResolver, error);
-				}
+					return Formatter.Deserialize(ref reader, formatterResolver);
 				default:
 					reader.ReadNextBlock();
 					return null;
 			}
-		}
-
-		private static Error ReadRootCause(IDictionary<string, object> dict, IJsonFormatterResolver formatterResolver, Error error)
-		{
-			if (!dict.TryGetValue("root_cause", out var rootCause)) return error;
-
-			if (!(rootCause is List<object> os)) return error;
-
-			error.RootCause = os.Select(formatterResolver.ReserializeAndDeserialize<ErrorCause>).ToList().AsReadOnly();
-			return error;
 		}
 	}
 }

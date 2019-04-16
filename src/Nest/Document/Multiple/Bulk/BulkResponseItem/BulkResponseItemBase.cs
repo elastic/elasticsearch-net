@@ -14,7 +14,7 @@ namespace Nest
 		/// The error associated with the bulk operation
 		/// </summary>
 		[DataMember(Name = "error")]
-		BulkError Error { get; }
+		Error Error { get; }
 
 		/// <summary>
 		/// The id of the document for the bulk operation
@@ -79,7 +79,7 @@ namespace Nest
 	public abstract class BulkResponseItemBase : IBulkResponseItem
 	{
 		/// <inheritdoc />
-		public BulkError Error { get; internal set; }
+		public Error Error { get; internal set; }
 
 		/// <inheritdoc />
 		public string Id { get; internal set; }

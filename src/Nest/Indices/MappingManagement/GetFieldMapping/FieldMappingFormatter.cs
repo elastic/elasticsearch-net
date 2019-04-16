@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using Elasticsearch.Net;
 
-
-
 namespace Nest
 {
 	internal class FieldMappingFormatter : IJsonFormatter<IReadOnlyDictionary<Field, IFieldMapping>>
