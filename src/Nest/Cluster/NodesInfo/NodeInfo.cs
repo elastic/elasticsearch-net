@@ -48,10 +48,9 @@ namespace Nest
 		[DataMember(Name = "settings")]
 		public DynamicBody Settings { get; internal set; }
 
-		// TODO: IReadOnlyDictionary
 		[DataMember(Name = "thread_pool")]
-		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, NodeThreadPoolInfo>))]
-		public Dictionary<string, NodeThreadPoolInfo> ThreadPool { get; internal set; }
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, NodeThreadPoolInfo>))]
+		public IReadOnlyDictionary<string, NodeThreadPoolInfo> ThreadPool { get; internal set; }
 
 		[DataMember(Name = "transport")]
 		public NodeInfoTransport Transport { get; internal set; }

@@ -92,10 +92,9 @@ namespace Nest
 
 		public IHighlight Highlight { get; set; }
 
-		// TODO: Change Utf8Json to look up JsonFormatterType from implemented interface
 		[JsonFormatter(typeof(IndicesBoostFormatter))]
 		public IDictionary<IndexName, double> IndicesBoost { get; set; }
-
+		
 		public double? MinScore { get; set; }
 		public QueryContainer PostFilter { get; set; }
 		public bool? Profile { get; set; }
@@ -109,12 +108,8 @@ namespace Nest
 		public Union<bool, ISourceFilter> Source { get; set; }
 		public ISuggestContainer Suggest { get; set; }
 		public long? TerminateAfter { get; set; }
-
 		public string Timeout { get; set; }
 		public bool? TrackScores { get; set; }
-
-		// TODO: Remove?
-		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 		public bool? Version { get; set; }
 
 		protected override HttpMethod HttpMethod =>
@@ -122,8 +117,7 @@ namespace Nest
 				? HttpMethod.GET
 				: HttpMethod.POST;
 
-		private Type _clrType { get; set; }
-		Type ICovariantSearchRequest.ClrType => _clrType;
+		Type ICovariantSearchRequest.ClrType { get; }
 
 		protected sealed override void Initialize() => TypedKeys = true;
 	}
