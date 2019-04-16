@@ -6,12 +6,9 @@ namespace Nest
 {
 	[DataContract]
 	public class RoleMappingRulesDescriptor
-		: DescriptorPromiseBase<RoleMappingRulesDescriptor, List<RoleMappingRuleBase>>, IPromise<List<RoleMappingRuleBase>>
+		: DescriptorPromiseBase<RoleMappingRulesDescriptor, List<RoleMappingRuleBase>>
 	{
 		public RoleMappingRulesDescriptor() : base(new List<RoleMappingRuleBase>()) { }
-
-		// TODO: Remove in 7.x as it's exposed on base
-		List<RoleMappingRuleBase> IPromise<List<RoleMappingRuleBase>>.Value => PromisedValue;
 
 		private RoleMappingRulesDescriptor Add(RoleMappingRuleBase m)
 		{
