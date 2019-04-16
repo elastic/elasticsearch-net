@@ -28,7 +28,6 @@ namespace Nest
 					double? boost = null;
 					string format = null;
 
-					// TODO: include Format in Field ctor
 					while (reader.ReadIsInObject(ref count))
 					{
 						var property = reader.ReadPropertyNameSegmentRaw();
