@@ -1,18 +1,19 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<PutWatchResponse>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(PutWatchResponse))]
 	public interface IPutWatchResponse : IResponse
 	{
-		[JsonProperty("created")]
+		[DataMember(Name = "created")]
 		bool Created { get; }
 
-		[JsonProperty("_id")]
+		[DataMember(Name = "_id")]
 		string Id { get; }
 
-		[JsonProperty("_version")]
+		[DataMember(Name = "_version")]
 		int Version { get; }
 	}
 

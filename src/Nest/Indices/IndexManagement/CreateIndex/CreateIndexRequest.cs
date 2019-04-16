@@ -1,9 +1,10 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<CreateIndexRequest>))]
+	[MapsApi("indices.create.json")]
+	[ReadAs(typeof(CreateIndexRequest))]
 	public partial interface ICreateIndexRequest : IIndexState { }
 
 	public partial class CreateIndexRequest
@@ -16,9 +17,6 @@ namespace Nest
 			"index.provided_name"
 		};
 
-		//Only here for ReadAsType new() constraint needs to be updated
-		internal CreateIndexRequest() { }
-
 		public CreateIndexRequest(IndexName index, IIndexState state) : this(index)
 		{
 			Settings = state.Settings;
@@ -28,7 +26,7 @@ namespace Nest
 
 		public IAliases Aliases { get; set; }
 
-		public IMappings Mappings { get; set; }
+		public ITypeMapping Mappings { get; set; }
 
 		public IIndexSettings Settings { get; set; }
 
@@ -44,12 +42,11 @@ namespace Nest
 		}
 	}
 
-	[DescriptorFor("IndicesCreate")]
 	public partial class CreateIndexDescriptor
 	{
 		IAliases IIndexState.Aliases { get; set; }
 
-		IMappings IIndexState.Mappings { get; set; }
+		ITypeMapping IIndexState.Mappings { get; set; }
 		IIndexSettings IIndexState.Settings { get; set; }
 
 		public CreateIndexDescriptor InitializeUsing(IIndexState indexSettings) => Assign(a =>
@@ -63,8 +60,15 @@ namespace Nest
 		public CreateIndexDescriptor Settings(Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> selector) =>
 			Assign(a => a.Settings = selector?.Invoke(new IndexSettingsDescriptor())?.Value);
 
-		public CreateIndexDescriptor Mappings(Func<MappingsDescriptor, IPromise<IMappings>> selector) =>
-			Assign(a => a.Mappings = selector?.Invoke(new MappingsDescriptor())?.Value);
+		public CreateIndexDescriptor Map<T>(Func<TypeMappingDescriptor<T>, ITypeMapping> selector) where T : class =>
+			Assign(a => a.Mappings = selector?.Invoke(new TypeMappingDescriptor<T>()));
+
+		public CreateIndexDescriptor Map(Func<TypeMappingDescriptor<object>, ITypeMapping> selector) =>
+			Assign(a => a.Mappings = selector?.Invoke(new TypeMappingDescriptor<object>()));
+
+		[Obsolete("Mappings is no longer a dictionary in 7.x, please use the simplified Map() method on this descriptor instead")]
+		public CreateIndexDescriptor Mappings(Func<MappingsDescriptor, ITypeMapping> selector) =>
+			Assign(a => a.Mappings = selector?.Invoke(new MappingsDescriptor()));
 
 		public CreateIndexDescriptor Aliases(Func<AliasesDescriptor, IPromise<IAliases>> selector) =>
 			Assign(a => a.Aliases = selector?.Invoke(new AliasesDescriptor())?.Value);

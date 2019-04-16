@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
+using Tests.Aggregations;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
@@ -31,14 +32,14 @@ namespace Tests.Search.Request
 			profile = true,
 			query = new
 			{
-				term = new { name = new { value = "elasticsearch" } }
+				term = new { name = new { value = Project.First.Name } }
 			}
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Profile()
 			.Query(q => q
-				.Term(p => p.Name, "elasticsearch")
+				.Term(p => p.Name, Project.First.Name)
 			);
 
 		protected override SearchRequest<Project> Initializer =>
@@ -48,12 +49,14 @@ namespace Tests.Search.Request
 				Query = new TermQuery
 				{
 					Field = "name",
-					Value = "elasticsearch"
+					Value = Project.First.Name
 				}
 			};
 
 		[I] public async Task ProfileResults() => await AssertOnAllResponses((r) =>
 		{
+			r.HitsMetadata.Total.Value.Should().BeGreaterThan(0);
+
 			r.Profile.Should().NotBeNull();
 			r.Profile.Shards.Should().NotBeNullOrEmpty();
 
@@ -74,7 +77,6 @@ namespace Tests.Search.Request
 			firstQuery.Description.Should().NotBeNullOrWhiteSpace();
 			firstQuery.Type.Should().NotBeNullOrWhiteSpace();
 			firstQuery.TimeInNanoseconds.Should().BeGreaterThan(0);
-			firstQuery.Children.Should().NotBeNullOrEmpty();
 
 			var firstCollector = firstSearch.Collector.First();
 			firstCollector.Name.Should().NotBeNullOrEmpty();

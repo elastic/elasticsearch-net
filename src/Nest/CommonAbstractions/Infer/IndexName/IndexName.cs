@@ -4,7 +4,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[ContractJsonConverter(typeof(IndexNameJsonConverter))]
+	[JsonFormatter(typeof(IndexNameFormatter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class IndexName : IEquatable<IndexName>, IUrlParameter
 	{

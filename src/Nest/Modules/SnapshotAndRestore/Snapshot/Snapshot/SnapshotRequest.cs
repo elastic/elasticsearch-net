@@ -1,20 +1,22 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
+	[MapsApi("snapshot.create.json")]
 	public partial interface ISnapshotRequest
 	{
-		[JsonProperty("ignore_unavailable")]
+		[DataMember(Name ="ignore_unavailable")]
 		bool? IgnoreUnavailable { get; set; }
 
-		[JsonProperty("include_global_state")]
+		[DataMember(Name ="include_global_state")]
 		bool? IncludeGlobalState { get; set; }
 
-		[JsonProperty("indices")]
-		[JsonConverter(typeof(IndicesMultiSyntaxJsonConverter))]
+		[DataMember(Name ="indices")]
+		[JsonFormatter(typeof(IndicesMultiSyntaxFormatter))]
 		Indices Indices { get; set; }
 
-		[JsonProperty("partial")]
+		[DataMember(Name ="partial")]
 		bool? Partial { get; set; }
 	}
 
@@ -28,7 +30,6 @@ namespace Nest
 		public bool? Partial { get; set; }
 	}
 
-	[DescriptorFor("SnapshotCreate")]
 	public partial class SnapshotDescriptor
 	{
 		bool? ISnapshotRequest.IgnoreUnavailable { get; set; }

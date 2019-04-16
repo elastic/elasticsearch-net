@@ -90,7 +90,7 @@ namespace Tests.XPack.Security.Role.PutRole
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override string UrlPath => $"/_xpack/security/role/{Role}";
+		protected override string UrlPath => $"/_security/role/{Role}";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.PutRole(Role, f),

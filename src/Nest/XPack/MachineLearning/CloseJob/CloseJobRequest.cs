@@ -1,9 +1,9 @@
 namespace Nest
 {
+	[MapsApi("ml.close_job.json")]
 	public partial interface ICloseJobRequest { }
 
 	public partial class CloseJobRequest { }
 
-	[DescriptorFor("XpackMlCloseJob")]
 	public partial class CloseJobDescriptor { }
 }

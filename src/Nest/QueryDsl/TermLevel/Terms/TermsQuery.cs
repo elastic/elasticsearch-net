@@ -2,18 +2,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(TermsQueryJsonConverter))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(TermsQueryFormatter))]
 	public interface ITermsQuery : IFieldNameQuery
 	{
 		IEnumerable<object> Terms { get; set; }
 		IFieldLookup TermsLookup { get; set; }
 	}
 
+	[DataContract]
 	public class TermsQuery : FieldNameQueryBase, ITermsQuery
 	{
 		public IEnumerable<object> Terms { get; set; }
@@ -33,7 +35,6 @@ namespace Nest
 				|| q.TermsLookup.Id == null
 				|| q.TermsLookup.Path.IsConditionless()
 				|| q.TermsLookup.Index == null
-				|| q.TermsLookup.Type == null
 			);
 	}
 
@@ -42,6 +43,7 @@ namespace Nest
 	/// This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 	/// </summary>
 	/// <typeparam name="T">The type that represents the expected hit type</typeparam>
+	[DataContract]
 	public class TermsQueryDescriptor<T>
 		: FieldNameQueryDescriptorBase<TermsQueryDescriptor<T>, ITermsQuery, T>
 			, ITermsQuery where T : class

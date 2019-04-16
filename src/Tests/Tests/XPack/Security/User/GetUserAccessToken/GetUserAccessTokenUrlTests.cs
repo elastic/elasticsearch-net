@@ -14,7 +14,7 @@ namespace Tests.XPack.Security.User.GetUserAccessToken
 		{
 			var u = ClusterAuthentication.Admin.Username;
 			var p = ClusterAuthentication.Admin.Password;
-			await POST("/_xpack/security/oauth2/token")
+			await POST("/_security/oauth2/token")
 				.Fluent(c => c.GetUserAccessToken(u, p))
 				.Request(c => c.GetUserAccessToken(new GetUserAccessTokenRequest(u, p)))
 				.FluentAsync(c => c.GetUserAccessTokenAsync(u, p))

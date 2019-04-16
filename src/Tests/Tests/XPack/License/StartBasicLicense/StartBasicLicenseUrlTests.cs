@@ -8,7 +8,7 @@ namespace Tests.XPack.License.StartBasicLicense
 {
 	public class StartBasicLicenseUrlTests : UrlTestsBase
 	{
-		[U] public override async Task Urls() => await POST("/_xpack/license/start_basic")
+		[U] public override async Task Urls() => await POST("/_license/start_basic")
 			.Fluent(c => c.StartBasicLicense())
 			.Request(c => c.StartBasicLicense(new StartBasicLicenseRequest()))
 			.FluentAsync(c => c.StartBasicLicenseAsync())

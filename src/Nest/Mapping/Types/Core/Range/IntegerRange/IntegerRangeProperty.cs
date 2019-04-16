@@ -1,11 +1,12 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	/// <summary>
 	/// A range of signed 32-bit integers with a minimum value of -231 and maximum of 231-1.
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
+	[InterfaceDataContract]
 	public interface IIntegerRangeProperty : IRangeProperty { }
 
 	/// <inheritdoc />

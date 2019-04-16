@@ -1,5 +1,6 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -16,22 +17,24 @@ namespace Nest
 
 	public interface IFileSystemRepositorySettings : IRepositorySettings
 	{
-		[JsonProperty("chunk_size")]
+		[DataMember(Name ="chunk_size")]
 		string ChunkSize { get; set; }
 
-		[JsonProperty("compress")]
+		[DataMember(Name ="compress")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? Compress { get; set; }
 
-		[JsonProperty("concurrent_streams")]
+		[DataMember(Name ="concurrent_streams")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? ConcurrentStreams { get; set; }
 
-		[JsonProperty("location")]
+		[DataMember(Name ="location")]
 		string Location { get; set; }
 
-		[JsonProperty("max_restore_bytes_per_second")]
+		[DataMember(Name ="max_restore_bytes_per_second")]
 		string RestoreBytesPerSecondMaximum { get; set; }
 
-		[JsonProperty("max_snapshot_bytes_per_second")]
+		[DataMember(Name ="max_snapshot_bytes_per_second")]
 		string SnapshotBytesPerSecondMaximum { get; set; }
 	}
 

@@ -1,14 +1,15 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[InterfaceDataContract]
 	public interface IGetTaskResponse : IResponse
 	{
-		[JsonProperty("completed")]
+		[DataMember(Name = "completed")]
 		bool Completed { get; }
 
-		[JsonProperty("task")]
+		[DataMember(Name = "task")]
 		TaskInfo Task { get; }
 	}
 

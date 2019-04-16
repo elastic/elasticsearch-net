@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<HourlySchedule>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(HourlySchedule))]
 	public interface IHourlySchedule : ISchedule
 	{
-		[JsonProperty("minute")]
+		[DataMember(Name = "minute")]
 		IEnumerable<int> Minute { get; set; }
 	}
 

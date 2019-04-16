@@ -1,17 +1,17 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IRemoteSource
 	{
-		[JsonProperty("host")]
+		[DataMember(Name ="host")]
 		Uri Host { get; set; }
 
-		[JsonProperty("password")]
+		[DataMember(Name ="password")]
 		string Password { get; set; }
 
-		[JsonProperty("username")]
+		[DataMember(Name ="username")]
 		string Username { get; set; }
 	}
 

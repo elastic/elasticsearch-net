@@ -1,6 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -9,7 +8,7 @@ namespace Nest
 	/// difference considered significant during comparison.
 	/// See also: http://icu-project.org/apiref/icu4j/com/ibm/icu/text/Collator.html
 	/// </summary>
-	[JsonConverter(typeof(StringEnumConverter))]
+	[StringEnum]
 	public enum IcuCollationStrength
 	{
 		/// <summary>

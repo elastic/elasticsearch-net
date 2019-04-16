@@ -1,20 +1,21 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[InterfaceDataContract]
 	public interface IVerifyRepositoryResponse : IResponse
 	{
 		/// <summary>
 		///  A dictionary of nodeId => nodeinfo of nodes that verified the repository
 		/// </summary>
-		[JsonProperty("nodes")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, CompactNodeInfo>))]
+		[DataMember(Name = "nodes")]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, CompactNodeInfo>))]
 		IReadOnlyDictionary<string, CompactNodeInfo> Nodes { get; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class VerifyRepositoryResponse : ResponseBase, IVerifyRepositoryResponse
 	{
 		/// <summary>

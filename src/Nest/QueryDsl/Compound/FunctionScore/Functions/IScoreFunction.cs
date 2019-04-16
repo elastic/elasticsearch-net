@@ -1,16 +1,17 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(ScoreFunctionJsonConverter))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(ScoreFunctionJsonConverter))]
 	public interface IScoreFunction
 	{
-		[JsonProperty("filter")]
+		[DataMember(Name ="filter")]
 		QueryContainer Filter { get; set; }
 
-		[JsonProperty("weight")]
+		[DataMember(Name ="weight")]
 		double? Weight { get; set; }
 	}
 

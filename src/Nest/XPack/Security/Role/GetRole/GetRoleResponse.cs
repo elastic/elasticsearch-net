@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -8,11 +9,11 @@ namespace Nest
 		IReadOnlyDictionary<string, XPackRole> Roles { get; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(DictionaryResponseJsonConverter<GetRoleResponse, string, XPackRole>))]
+	[DataContract]
+	[JsonFormatter(typeof(DictionaryResponseFormatter<GetRoleResponse, string, XPackRole>))]
 	public class GetRoleResponse : DictionaryResponseBase<string, XPackRole>, IGetRoleResponse
 	{
-		[JsonIgnore]
+		[IgnoreDataMember]
 		public IReadOnlyDictionary<string, XPackRole> Roles => Self.BackingDictionary;
 	}
 }

@@ -22,7 +22,7 @@ namespace Tests.XPack.License.GetTrialLicenseStatus
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/_xpack/license/trial_status";
+		protected override string UrlPath => $"/_license/trial_status";
 
 		protected bool BootstrappedWithLicense => !string.IsNullOrEmpty(Cluster.ClusterConfiguration.XPackLicenseJson);
 

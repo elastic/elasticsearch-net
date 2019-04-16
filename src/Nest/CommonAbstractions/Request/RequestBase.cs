@@ -1,16 +1,18 @@
 using System;
 using System.ComponentModel;
 using System.IO;
+using System.Runtime.Serialization;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[InterfaceDataContract]
 	public interface IRequest
 	{
+		[IgnoreDataMember]
 		HttpMethod HttpMethod { get; }
 
+		[IgnoreDataMember]
 		RouteValues RouteValues { get; }
 	}
 
@@ -18,8 +20,10 @@ namespace Nest
 		where TParameters : IRequestParameters, new()
 	{
 		/// <summary>
-		/// Used to describe request parameters that are not part of the body. e.g. query string, connection configuration overrides, etc.
+		/// Used to describe request parameters that are not part of the body. e.g. query string, connection configuration
+		/// overrides, etc.
 		/// </summary>
+		[IgnoreDataMember]
 		TParameters RequestParameters { get; set; }
 	}
 
@@ -43,16 +47,16 @@ namespace Nest
 
 		protected virtual HttpMethod HttpMethod => RequestState.RequestParameters.DefaultHttpMethod;
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		protected IRequest<TParameters> RequestState => this;
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		HttpMethod IRequest.HttpMethod => HttpMethod;
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		TParameters IRequest<TParameters>.RequestParameters { get; set; } = new TParameters();
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		RouteValues IRequest.RouteValues { get; } = new RouteValues();
 
 		protected virtual void Initialize() { }

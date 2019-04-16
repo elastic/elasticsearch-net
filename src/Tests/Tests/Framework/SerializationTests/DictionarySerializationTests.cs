@@ -111,7 +111,7 @@ namespace Tests.Framework
 		}
 
 		[U]
-		public void CanSerializeDictionary()
+		public void CanSerializeHashTable()
 		{
 			var hashTable = new Hashtable
 			{
@@ -178,7 +178,7 @@ namespace Tests.Framework
 
 			public IEnumerable<object> Values => _backingDictionary.Values;
 
-			IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_backingDictionary).GetEnumerator();
+			IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
 			public IEnumerator<KeyValuePair<object, object>> GetEnumerator() => _backingDictionary.GetEnumerator();
 
@@ -223,7 +223,7 @@ namespace Tests.Framework
 
 			public bool TryGetValue(object key, out object value) => _backingDictionary.TryGetValue(key, out value);
 
-			IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_backingDictionary).GetEnumerator();
+			IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
 			public IEnumerator<KeyValuePair<object, object>> GetEnumerator() => _backingDictionary.GetEnumerator();
 		}

@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<TimeOfDay>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(TimeOfDay))]
 	public interface ITimeOfDay
 	{
-		[JsonProperty("hour")]
+		[DataMember(Name ="hour")]
 		IEnumerable<int> Hour { get; set; }
 
-		[JsonProperty("minute")]
+		[DataMember(Name ="minute")]
 		IEnumerable<int> Minute { get; set; }
 	}
 
@@ -35,10 +36,11 @@ namespace Nest
 		public TimeOfDayDescriptor Minute(params int[] minutes) => Assign(a => a.Minute = minutes);
 	}
 
-	[JsonObject]
+	[InterfaceDataContract]
+	[ReadAs(typeof(DailySchedule))]
 	public interface IDailySchedule : ISchedule
 	{
-		[JsonProperty("at")]
+		[DataMember(Name ="at")]
 		Union<IEnumerable<string>, ITimeOfDay> At { get; set; }
 	}
 

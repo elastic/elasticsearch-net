@@ -1,9 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<AlwaysCondition>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(AlwaysCondition))]
 	public interface IAlwaysCondition : ICondition { }
 
 	public class AlwaysCondition : ConditionBase, IAlwaysCondition

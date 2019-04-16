@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -8,10 +9,12 @@ namespace Nest
 	/// </summary>
 	public interface IKuromojiIterationMarkCharFilter : ICharFilter
 	{
-		[JsonProperty("normalize_kana")]
+		[DataMember(Name ="normalize_kana")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? NormalizeKana { get; set; }
 
-		[JsonProperty("normalize_kanji")]
+		[DataMember(Name ="normalize_kanji")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? NormalizeKanji { get; set; }
 	}
 

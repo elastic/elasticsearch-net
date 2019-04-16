@@ -29,12 +29,12 @@ namespace Tests.XPack.MachineLearning.UpdateDatafeed
 					boost = 2.0
 				}
 			},
-			types = new[] { "metric" }
 		};
 
 		protected override int ExpectStatusCode => 200;
 
 		protected override Func<UpdateDatafeedDescriptor<Metric>, IUpdateDatafeedRequest> Fluent => f => f
+			.Indices("server-metrics") //goes on body not in the url
 			.JobId(CallIsolatedValue)
 			.Query(q => q
 				.MatchAll(m => m.Boost(2))
@@ -47,7 +47,6 @@ namespace Tests.XPack.MachineLearning.UpdateDatafeed
 			{
 				JobId = CallIsolatedValue,
 				Indices = "server-metrics",
-				Types = "metric",
 				Query = new MatchAllQuery
 				{
 					Boost = 2
@@ -55,7 +54,7 @@ namespace Tests.XPack.MachineLearning.UpdateDatafeed
 			};
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"_xpack/ml/datafeeds/{CallIsolatedValue}-datafeed/_update";
+		protected override string UrlPath => $"_ml/datafeeds/{CallIsolatedValue}-datafeed/_update";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.UpdateDatafeed(CallIsolatedValue + "-datafeed", f),
@@ -87,9 +86,6 @@ namespace Tests.XPack.MachineLearning.UpdateDatafeed
 
 			response.Indices.Should().NotBeNull("Indices");
 			response.Indices.Should().Be(Nest.Indices.Parse("server-metrics"));
-
-			response.Types.Should().NotBeNull("Types");
-			response.Types.Should().Be(Types.Parse("metric"));
 
 			response.ScrollSize.Should().Be(1000);
 

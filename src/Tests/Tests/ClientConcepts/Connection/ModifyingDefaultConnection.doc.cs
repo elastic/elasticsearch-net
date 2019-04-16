@@ -9,14 +9,11 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Tests.Core.Extensions;
 using Tests.Domain;
 using Tests.Framework;
-#if DOTNETCORE
-using System.Net.Http;
-using System.Net.Http.Headers;
-#endif
+using Newtonsoft.Json;
 
 namespace Tests.ClientConcepts.Connection
 {
@@ -86,7 +83,7 @@ namespace Tests.ClientConcepts.Connection
 				},
 				hits = new
 				{
-					total = 25,
+					total = new { value = 25 },
 					max_score = 1.0,
 					hits = Enumerable.Range(1, 25).Select(i => (object)new
 					{

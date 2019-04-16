@@ -8,7 +8,7 @@ namespace Tests.XPack.MachineLearning.UpdateJob
 {
 	public class UpdateJobUrlTests : UrlTestsBase
 	{
-		[U] public override async Task Urls() => await POST("/_xpack/ml/anomaly_detectors/job_id/_update")
+		[U] public override async Task Urls() => await POST("/_ml/anomaly_detectors/job_id/_update")
 			.Fluent(c => c.UpdateJob<object>("job_id", p => p))
 			.Request(c => c.UpdateJob(new UpdateJobRequest("job_id")))
 			.FluentAsync(c => c.UpdateJobAsync<object>("job_id", p => p))

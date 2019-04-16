@@ -1,18 +1,19 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(FieldNameQueryJsonConverter<MatchPhraseQuery>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(FieldNameQueryFormatter<MatchPhraseQuery, IMatchPhraseQuery>))]
 	public interface IMatchPhraseQuery : IFieldNameQuery
 	{
-		[JsonProperty("analyzer")]
+		[DataMember(Name = "analyzer")]
 		string Analyzer { get; set; }
 
-		[JsonProperty("query")]
+		[DataMember(Name = "query")]
 		string Query { get; set; }
 
-		[JsonProperty("slop")]
+		[DataMember(Name = "slop")]
 		int? Slop { get; set; }
 	}
 

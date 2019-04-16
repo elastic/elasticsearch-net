@@ -1,9 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<SumAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(SumAggregation))]
 	public interface ISumAggregation : IMetricAggregation { }
 
 	public class SumAggregation : MetricAggregationBase, ISumAggregation

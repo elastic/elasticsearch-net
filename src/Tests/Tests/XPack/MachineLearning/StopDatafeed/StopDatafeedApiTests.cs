@@ -19,7 +19,7 @@ namespace Tests.XPack.MachineLearning.StopDatafeed
 		protected override Func<StopDatafeedDescriptor, IStopDatafeedRequest> Fluent => f => f;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override StopDatafeedRequest Initializer => new StopDatafeedRequest(CallIsolatedValue + "-datafeed");
-		protected override string UrlPath => $"_xpack/ml/datafeeds/{CallIsolatedValue}-datafeed/_stop";
+		protected override string UrlPath => $"_ml/datafeeds/{CallIsolatedValue}-datafeed/_stop";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

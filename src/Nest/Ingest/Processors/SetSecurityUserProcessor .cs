@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -8,12 +9,11 @@ namespace Nest
 	/// Sets user-related details (such as username, roles, email, full_name and metadata ) from the
 	/// current authenticated user to the current document by pre-processing the ingest.
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ProcessorJsonConverter<SetSecurityUserProcessor>))]
+	[InterfaceDataContract]
 	public interface ISetSecurityUserProcessor : IProcessor
 	{
 		/// <summary>The field to store the user information into. </summary>
-		[JsonProperty("field")]
+		[DataMember(Name = "field")]
 		Field Field { get; set; }
 	}
 

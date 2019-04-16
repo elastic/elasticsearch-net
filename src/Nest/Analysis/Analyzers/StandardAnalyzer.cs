@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -12,14 +13,14 @@ namespace Nest
 		/// <summary>
 		/// The maximum token length. If a token is seen that exceeds this length then it is discarded. Defaults to 255.
 		/// </summary>
-		[JsonProperty("max_token_length")]
+		[DataMember(Name ="max_token_length")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? MaxTokenLength { get; set; }
 
 		/// <summary>
 		/// A list of stopword to initialize the stop filter with. Defaults to the english stop words.
 		/// </summary>
-		[JsonProperty("stopwords")]
-		[JsonConverter(typeof(StopWordsJsonConverter))]
+		[DataMember(Name ="stopwords")]
 		StopWords StopWords { get; set; }
 	}
 

@@ -1,15 +1,16 @@
 using System;
 using Nest;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace Tests.Domain
 {
 	public class SourceOnlyObject
 	{
-		[Ignore] [JsonIgnore]
+		[Ignore] [IgnoreDataMember]
 		public string NotReadByDefaultSerializer { get; set; }
 
-		[Ignore] [JsonIgnore]
+		[Ignore] [IgnoreDataMember]
 		public string NotWrittenByDefaultSerializer { get; set; }
 	}
 

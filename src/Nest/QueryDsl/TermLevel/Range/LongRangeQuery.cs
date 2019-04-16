@@ -1,22 +1,25 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(FieldNameQueryFormatter<LongRangeQuery, ILongRangeQuery>))]
 	public interface ILongRangeQuery : IRangeQuery
 	{
-		[JsonProperty("gt")]
+		[DataMember(Name ="gt")]
 		long? GreaterThan { get; set; }
 
-		[JsonProperty("gte")]
+		[DataMember(Name ="gte")]
 		long? GreaterThanOrEqualTo { get; set; }
 
-		[JsonProperty("lt")]
+		[DataMember(Name ="lt")]
 		long? LessThan { get; set; }
 
-		[JsonProperty("lte")]
+		[DataMember(Name ="lte")]
 		long? LessThanOrEqualTo { get; set; }
 
-		[JsonProperty("relation")]
+		[DataMember(Name ="relation")]
 		RangeRelation? Relation { get; set; }
 	}
 
@@ -39,7 +42,7 @@ namespace Nest
 			&& q.LessThan == null;
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	public class LongRangeQueryDescriptor<T>
 		: FieldNameQueryDescriptorBase<LongRangeQueryDescriptor<T>, ILongRangeQuery, T>
 			, ILongRangeQuery where T : class

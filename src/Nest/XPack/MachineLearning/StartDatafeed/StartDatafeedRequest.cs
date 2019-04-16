@@ -1,28 +1,30 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
+	[MapsApi("ml.start_datafeed.json")]
 	public partial interface IStartDatafeedRequest
 	{
 		/// <summary>
 		/// The time that the datafeed should end. This value is exclusive.
 		/// </summary>
-		[JsonProperty("end")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[DataMember(Name = "end")]
+		[JsonFormatter(typeof(NullableDateTimeOffsetEpochMillisecondsFormatter))]
 		DateTimeOffset? End { get; set; }
 
 		/// <summary>
 		/// The time that the datafeed should begin. This value is inclusive.
 		/// </summary>
-		[JsonProperty("start")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[DataMember(Name = "start")]
+		[JsonFormatter(typeof(NullableDateTimeOffsetEpochMillisecondsFormatter))]
 		DateTimeOffset? Start { get; set; }
 
 		/// <summary>
 		/// Controls the amount of time to wait until a datafeed starts.
 		/// </summary>
-		[JsonProperty("timeout")]
+		[DataMember(Name = "timeout")]
 		Time Timeout { get; set; }
 	}
 
@@ -40,7 +42,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	[DescriptorFor("XpackMlStartDatafeed")]
 	public partial class StartDatafeedDescriptor
 	{
 		DateTimeOffset? IStartDatafeedRequest.End { get; set; }

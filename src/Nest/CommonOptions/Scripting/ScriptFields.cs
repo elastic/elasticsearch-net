@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ScriptField>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(ScriptField))]
 	public interface IScriptField
 	{
-		[JsonProperty("script")]
+		[DataMember(Name = "script")]
 		IScript Script { get; set; }
 	}
 
@@ -27,7 +28,7 @@ namespace Nest
 			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
 	}
 
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<ScriptFields, string, IScriptField>))]
+	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<ScriptFields, IScriptFields, string, IScriptField>))]
 	public interface IScriptFields : IIsADictionary<string, IScriptField> { }
 
 	public class ScriptFields : IsADictionaryBase<string, IScriptField>, IScriptFields

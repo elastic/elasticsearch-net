@@ -24,13 +24,6 @@ namespace Tests.Document.Multiple.MultiTermVectors
 					.FluentAsync(c => c.MultiTermVectorsAsync(m => m.Index<Project>()))
 					.RequestAsync(c => c.MultiTermVectorsAsync(new MultiTermVectorsRequest(typeof(Project))))
 				;
-
-			await POST("/project/doc/_mtermvectors")
-					.Fluent(c => c.MultiTermVectors(m => m.Index<Project>().Type<Project>()))
-					.Request(c => c.MultiTermVectors(new MultiTermVectorsRequest(typeof(Project), typeof(Project))))
-					.FluentAsync(c => c.MultiTermVectorsAsync(m => m.Index<Project>().Type<Project>()))
-					.RequestAsync(c => c.MultiTermVectorsAsync(new MultiTermVectorsRequest(typeof(Project), typeof(Project))))
-				;
 		}
 	}
 }

@@ -9,7 +9,7 @@ namespace Tests.Document.Single.Exists
 {
 	public class DocumentExistsUrlTests
 	{
-		[U] public async Task Urls() => await HEAD("/project/doc/1")
+		[U] public async Task Urls() => await HEAD("/project/_doc/1")
 			.Fluent(c => c.DocumentExists<Project>(1))
 			.Request(c => c.DocumentExists(new DocumentExistsRequest<Project>(1)))
 			.FluentAsync(c => c.DocumentExistsAsync<Project>(1))

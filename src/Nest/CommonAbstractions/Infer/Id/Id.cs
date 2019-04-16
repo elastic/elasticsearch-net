@@ -2,11 +2,10 @@
 using System.Diagnostics;
 using System.Globalization;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(IdJsonConverter))]
+	[JsonFormatter(typeof(IdFormatter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Id : IEquatable<Id>, IUrlParameter
 	{

@@ -1,21 +1,20 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary>
 	/// Convenience class for use when indexing completion fields.
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
 	public class CompletionField
 	{
-		[JsonProperty("contexts")]
+		[DataMember(Name ="contexts")]
 		public IDictionary<string, IEnumerable<string>> Contexts { get; set; }
 
-		[JsonProperty("input")]
+		[DataMember(Name ="input")]
 		public IEnumerable<string> Input { get; set; }
 
-		[JsonProperty("weight")]
+		[DataMember(Name ="weight")]
 		public int? Weight { get; set; }
 	}
 }

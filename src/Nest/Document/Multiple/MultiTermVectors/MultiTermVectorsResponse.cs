@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -8,11 +8,10 @@ namespace Nest
 		IReadOnlyCollection<ITermVectors> Documents { get; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class MultiTermVectorsResponse : ResponseBase, IMultiTermVectorsResponse
 	{
-		[JsonProperty("docs")]
-		[JsonConverter(typeof(ReadOnlyCollectionJsonConverter<TermVectorsResult, ITermVectors>))]
+		[DataMember(Name ="docs")]
 		public IReadOnlyCollection<ITermVectors> Documents { get; internal set; } = EmptyReadOnly<ITermVectors>.Collection;
 	}
 }

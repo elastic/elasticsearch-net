@@ -45,7 +45,7 @@ namespace Nest
 		public IDeleteByQueryResponse DeleteByQuery(IDeleteByQueryRequest request) =>
 			Dispatcher.Dispatch<IDeleteByQueryRequest, DeleteByQueryRequestParameters, DeleteByQueryResponse>(
 				ForceConfiguration<IDeleteByQueryRequest, DeleteByQueryRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
-				LowLevelDispatch.DeleteByQueryDispatch<DeleteByQueryResponse>
+				(p, d) => LowLevelDispatch.DeleteByQueryDispatch<DeleteByQueryResponse>(p, d)
 			);
 
 		/// <inheritdoc />
@@ -61,7 +61,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IDeleteByQueryRequest, DeleteByQueryRequestParameters, DeleteByQueryResponse, IDeleteByQueryResponse>(
 				ForceConfiguration<IDeleteByQueryRequest, DeleteByQueryRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
 				cancellationToken,
-				LowLevelDispatch.DeleteByQueryDispatchAsync<DeleteByQueryResponse>
+				(p, d, c) => LowLevelDispatch.DeleteByQueryDispatchAsync<DeleteByQueryResponse>(p, d, c)
 			);
 	}
 }

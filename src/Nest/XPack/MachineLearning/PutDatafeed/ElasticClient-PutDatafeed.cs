@@ -36,7 +36,7 @@ namespace Nest
 		public IPutDatafeedResponse PutDatafeed(IPutDatafeedRequest request) =>
 			Dispatcher.Dispatch<IPutDatafeedRequest, PutDatafeedRequestParameters, PutDatafeedResponse>(
 				request,
-				LowLevelDispatch.XpackMlPutDatafeedDispatch<PutDatafeedResponse>
+				LowLevelDispatch.MlPutDatafeedDispatch<PutDatafeedResponse>
 			);
 
 		/// <inheritdoc />
@@ -52,7 +52,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IPutDatafeedRequest, PutDatafeedRequestParameters, PutDatafeedResponse, IPutDatafeedResponse>(
 				request,
 				cancellationToken,
-				LowLevelDispatch.XpackMlPutDatafeedDispatchAsync<PutDatafeedResponse>
+				LowLevelDispatch.MlPutDatafeedDispatchAsync<PutDatafeedResponse>
 			);
 	}
 }

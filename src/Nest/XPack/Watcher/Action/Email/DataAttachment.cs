@@ -1,14 +1,13 @@
 ﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<DataAttachment>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(DataAttachment))]
 	public interface IDataAttachment : IEmailAttachment
 	{
-		[JsonProperty("format")]
+		[DataMember(Name = "format")]
 		DataAttachmentFormat? Format { get; set; }
 	}
 
@@ -24,7 +23,7 @@ namespace Nest
 		public DataAttachmentDescriptor Format(DataAttachmentFormat? format) => Assign(a => a.Format = format);
 	}
 
-	[JsonConverter(typeof(StringEnumConverter))]
+	[StringEnum]
 	public enum DataAttachmentFormat
 	{
 		[EnumMember(Value = "json")]

@@ -29,12 +29,12 @@ namespace Tests.Indices.MappingManagement.GetMapping
 
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
-		protected override GetMappingRequest Initializer => new GetMappingRequest(Index<Project>(), Type<Project>())
+		protected override GetMappingRequest Initializer => new GetMappingRequest(Index<Project>())
 		{
 			IgnoreUnavailable = true
 		};
 
-		protected override string UrlPath => "/project/_mapping/doc?ignore_unavailable=true";
+		protected override string UrlPath => "/project/_mapping?ignore_unavailable=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.GetMapping<Project>(f),
@@ -47,22 +47,27 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		{
 			response.ShouldBeValid();
 
-			response.Indices["project"]["doc"].Properties.Should().NotBeEmpty();
-			response.Indices[Index<Project>()].Mappings[Type<Project>()].Properties.Should().NotBeEmpty();
-			response.Indices[Index<Project>()][Type<Project>()].Properties.Should().NotBeEmpty();
-			var properties = response.Indices[Index<Project>()][Type<Project>()].Properties;
+			/** For backwards compatible reasons you can still ask per type mappings, this is obsolete and will be removed in 8.0 **/
+#pragma warning disable 618
+			response.Indices["project"]["_doc"].Properties.Should().NotBeEmpty();
+			response.Indices[Index<Project>()].Mappings.Properties.Should().NotBeEmpty();
+			response.Indices[Index<Project>()]["_doc"].Properties.Should().NotBeEmpty();
+#pragma warning restore 618
+
+			var mappings = response.Indices[Index<Project>()].Mappings;
+			var properties = mappings.Properties;
 
 			var leadDev = properties[Property<Project>(p => p.LeadDeveloper)];
 			leadDev.Should().NotBeNull();
 
-			var props = response.Indices["x"]?["y"].Properties;
+			var props = response.Indices["x"]?.Mappings.Properties;
 			props.Should().BeNull();
 
 			//hide
 			AssertExtensionMethods(response);
 
 			//hide
-			AssertVisitedProperies(response);
+			AssertVisitedProperties(response);
 		}
 
 		//hide
@@ -70,27 +75,21 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		{
 			/** The `GetMappingFor` extension method can be used to get a type mapping easily and safely */
 			response.GetMappingFor<Project>().Should().NotBeNull();
-			response.GetMappingFor(typeof(Project), typeof(Project)).Should().NotBeNull();
 			response.GetMappingFor(typeof(Project)).Should().NotBeNull();
 
-			/** The following should all return a `null` because we had asked for the mapping of type `doc` in index `project` */
-			response.GetMappingFor<Developer>().Should().BeNull();
-			response.GetMappingFor("dev", "dev").Should().BeNull();
-			response.GetMappingFor(typeof(Project), "x").Should().BeNull();
-			response.GetMappingFor("dev").Should().BeNull();
 		}
 
 		//hide
-		private static void AssertVisitedProperies(IGetMappingResponse response)
+		private static void AssertVisitedProperties(IGetMappingResponse response)
 		{
 			var visitor = new TestVisitor();
 			var b = TestClient.Configuration.Random.SourceSerializer;
 			response.Accept(visitor);
 			visitor.CountsShouldContainKeyAndCountBe("type", 1);
-			visitor.CountsShouldContainKeyAndCountBe("text", b ? 19 : 18);
-			visitor.CountsShouldContainKeyAndCountBe("keyword", b ? 20 : 19);
+			visitor.CountsShouldContainKeyAndCountBe("text", b ? 18 : 17);
+			visitor.CountsShouldContainKeyAndCountBe("keyword", b ? 19 : 18);
 			visitor.CountsShouldContainKeyAndCountBe("object", 8);
-			visitor.CountsShouldContainKeyAndCountBe("number", 8);
+			visitor.CountsShouldContainKeyAndCountBe("number", 9);
 			visitor.CountsShouldContainKeyAndCountBe("ip", 2);
 			visitor.CountsShouldContainKeyAndCountBe("geo_point", 3);
 			visitor.CountsShouldContainKeyAndCountBe("date", 4);
@@ -117,13 +116,11 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;
 
-		protected override Func<GetMappingDescriptor<Project>, IGetMappingRequest> Fluent => d => d
-			.Index(_nonExistentIndex)
-			.AllTypes();
+		protected override Func<GetMappingDescriptor<Project>, IGetMappingRequest> Fluent => d => d.Index(_nonExistentIndex);
 
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
-		protected override GetMappingRequest Initializer => new GetMappingRequest(_nonExistentIndex, AllTypes);
+		protected override GetMappingRequest Initializer => new GetMappingRequest(_nonExistentIndex);
 		protected override string UrlPath => $"/{_nonExistentIndex}/_mapping";
 
 		protected override LazyResponses ClientUsage() => Calls(

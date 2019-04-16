@@ -1,7 +1,7 @@
-version: 1.0.{build} 
+version: 1.0.{build}
 image:
-- Visual Studio 2017
-- Ubuntu
+    - Visual Studio 2017
+    - Ubuntu
 test: off
 environment:
     DOTNET_CLI_TELEMETRY_OPTOUT: true

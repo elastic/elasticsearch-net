@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Aliases, IndexName, IAlias>))]
+	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<Aliases, IAliases, IndexName, IAlias>))]
 	public interface IAliases : IIsADictionary<IndexName, IAlias> { }
 
 	public class Aliases : IsADictionaryBase<IndexName, IAlias>, IAliases

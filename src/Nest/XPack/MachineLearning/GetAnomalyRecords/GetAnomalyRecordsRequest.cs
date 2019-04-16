@@ -1,55 +1,57 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	/// <summary>
 	/// Retrieve anomaly records for a machine learning job.
 	/// </summary>
+	[MapsApi("ml.get_records.json")]
 	public partial interface IGetAnomalyRecordsRequest
 	{
 		/// <summary>
 		/// If true, the results are sorted in descending order.
 		/// </summary>
-		[JsonProperty("desc")]
+		[DataMember(Name ="desc")]
 		bool? Descending { get; set; }
 
 		/// <summary>
 		/// Returns records with timestamps earlier than this time.
 		/// </summary>
-		[JsonProperty("end")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[DataMember(Name ="end")]
+		[JsonFormatter(typeof(NullableDateTimeOffsetEpochMillisecondsFormatter))]
 		DateTimeOffset? End { get; set; }
 
 		/// <summary>
 		/// If true, the output excludes interim results. By default, interim results are included.
 		/// </summary>
-		[JsonProperty("exclude_interim")]
+		[DataMember(Name ="exclude_interim")]
 		bool? ExcludeInterim { get; set; }
 
 		/// <summary>
 		/// Specifies pagination for the records
 		/// </summary>
-		[JsonProperty("page")]
+		[DataMember(Name ="page")]
 		IPage Page { get; set; }
 
 		/// <summary>
 		/// Returns records with anomaly scores higher than this value.
 		/// </summary>
-		[JsonProperty("record_score")]
+		[DataMember(Name ="record_score")]
 		double? RecordScore { get; set; }
 
 		/// <summary>
 		/// Specifies the sort field for the requested records. By default, records are sorted by the anomaly score value.
 		/// </summary>
-		[JsonProperty("sort")]
+		[DataMember(Name ="sort")]
 		Field Sort { get; set; }
 
 		/// <summary>
 		/// Returns records with timestamps after this time.
 		/// </summary>
-		[JsonProperty("start")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[DataMember(Name ="start")]
+		[JsonFormatter(typeof(NullableDateTimeOffsetEpochMillisecondsFormatter))]
 		DateTimeOffset? Start { get; set; }
 	}
 
@@ -79,11 +81,8 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	[DescriptorFor("XpackMlGetRecords")]
 	public partial class GetAnomalyRecordsDescriptor
 	{
-		public GetAnomalyRecordsDescriptor() : base() { }
-
 		bool? IGetAnomalyRecordsRequest.Descending { get; set; }
 		DateTimeOffset? IGetAnomalyRecordsRequest.End { get; set; }
 		bool? IGetAnomalyRecordsRequest.ExcludeInterim { get; set; }

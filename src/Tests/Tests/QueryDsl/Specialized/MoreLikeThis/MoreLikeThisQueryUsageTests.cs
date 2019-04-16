@@ -67,7 +67,6 @@ namespace Tests.QueryDsl.Specialized.MoreLikeThis
 					new
 					{
 						_index = "project",
-						_type = "doc",
 						_id = Project.Instance.Name
 					},
 					"some long text"

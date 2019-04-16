@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(PipelineJsonConverter))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(Pipeline))]
 	public interface IPipeline
 	{
-		[JsonProperty("description")]
+		[DataMember(Name ="description")]
 		string Description { get; set; }
 
-		[JsonProperty("on_failure")]
+		[DataMember(Name ="on_failure")]
 		IEnumerable<IProcessor> OnFailure { get; set; }
 
-		[JsonProperty("processors")]
+		[DataMember(Name ="processors")]
 		IEnumerable<IProcessor> Processors { get; set; }
 	}
 

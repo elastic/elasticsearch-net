@@ -1,19 +1,20 @@
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	public class MetadataState
 	{
-		[JsonProperty("cluster_uuid")]
+		[DataMember(Name = "cluster_uuid")]
 		public string ClusterUUID { get; internal set; }
 
-		[JsonProperty("indices")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, MetadataIndexState>))]
+		[DataMember(Name = "indices")]
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, MetadataIndexState>))]
 		public IReadOnlyDictionary<string, MetadataIndexState> Indices { get; internal set; }
 
-		[JsonProperty("templates")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, TemplateMapping>))]
+		[DataMember(Name = "templates")]
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, TemplateMapping>))]
 		public IReadOnlyDictionary<string, TemplateMapping> Templates { get; internal set; }
 	}
 }

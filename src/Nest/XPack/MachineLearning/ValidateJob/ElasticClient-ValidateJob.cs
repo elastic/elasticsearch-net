@@ -34,7 +34,7 @@ namespace Nest
 		public IValidateJobResponse ValidateJob(IValidateJobRequest request) =>
 			Dispatcher.Dispatch<IValidateJobRequest, ValidateJobRequestParameters, ValidateJobResponse>(
 				request,
-				LowLevelDispatch.XpackMlValidateDispatch<ValidateJobResponse>
+				LowLevelDispatch.MlValidateDispatch<ValidateJobResponse>
 			);
 
 		/// <inheritdoc />
@@ -50,7 +50,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IValidateJobRequest, ValidateJobRequestParameters, ValidateJobResponse, IValidateJobResponse>(
 				request,
 				cancellationToken,
-				LowLevelDispatch.XpackMlValidateDispatchAsync<ValidateJobResponse>
+				LowLevelDispatch.MlValidateDispatchAsync<ValidateJobResponse>
 			);
 	}
 }

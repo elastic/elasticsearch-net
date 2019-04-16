@@ -1,22 +1,22 @@
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
 
 namespace Nest
 {
 	public class MetadataIndexState
 	{
-		[JsonProperty("aliases")]
+		[DataMember(Name = "aliases")]
 		public IEnumerable<string> Aliases { get; internal set; }
 
-		[JsonProperty("mappings")]
-		public IMappings Mappings { get; internal set; }
+		[DataMember(Name = "mappings")]
+		public ITypeMapping Mappings { get; internal set; }
 
-		[JsonProperty("settings")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
+		// TODO: Why this uses DynamicBody
+		[DataMember(Name = "settings")]
 		public DynamicBody Settings { get; internal set; }
 
-		[JsonProperty("state")]
+		[DataMember(Name = "state")]
 		public string State { get; internal set; }
 	}
 }

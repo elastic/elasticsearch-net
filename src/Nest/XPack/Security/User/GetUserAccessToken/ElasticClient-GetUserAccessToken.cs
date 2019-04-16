@@ -39,7 +39,7 @@ namespace Nest
 		public IGetUserAccessTokenResponse GetUserAccessToken(IGetUserAccessTokenRequest request) =>
 			Dispatcher.Dispatch<IGetUserAccessTokenRequest, GetUserAccessTokenRequestParameters, GetUserAccessTokenResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackSecurityGetTokenDispatch<GetUserAccessTokenResponse>(p, d)
+				(p, d) => LowLevelDispatch.SecurityGetTokenDispatch<GetUserAccessTokenResponse>(p, d)
 			);
 
 		/// <inheritdoc />
@@ -58,7 +58,7 @@ namespace Nest
 					IGetUserAccessTokenResponse>(
 					request,
 					cancellationToken,
-					(p, d, c) => LowLevelDispatch.XpackSecurityGetTokenDispatchAsync<GetUserAccessTokenResponse>(p, d, c)
+					(p, d, c) => LowLevelDispatch.SecurityGetTokenDispatchAsync<GetUserAccessTokenResponse>(p, d, c)
 				);
 	}
 }

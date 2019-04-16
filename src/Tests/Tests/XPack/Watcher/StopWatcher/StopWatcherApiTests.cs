@@ -23,7 +23,7 @@ namespace Tests.XPack.Watcher.StopWatcher
 
 		protected override StopWatcherRequest Initializer => new StopWatcherRequest();
 
-		protected override string UrlPath => "/_xpack/watcher/_stop";
+		protected override string UrlPath => "/_watcher/_stop";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.StopWatcher(f),

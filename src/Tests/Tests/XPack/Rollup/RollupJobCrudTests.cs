@@ -7,6 +7,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.Xunit;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -14,6 +15,8 @@ using Tests.Framework.Integration;
 namespace Tests.XPack.Rollup
 {
 	[SkipVersion("<6.5.0", "")]
+	//we send 2 digits for milliseconds sometimes which can cause a failure in parsing starting with 7.x
+	[BlockedByIssue("https://github.com/elastic/elasticsearch/issues/40403")]
 	public class RollupJobCrudTests
 		: CrudTestBase<TimeSeriesCluster, ICreateRollupJobResponse, IGetRollupJobResponse, ICreateRollupJobResponse, IDeleteRollupJobResponse>
 	{
@@ -170,7 +173,7 @@ namespace Tests.XPack.Rollup
 		protected GetRollupCapabilitiesRequest CapsInitializer(string role) => new GetRollupCapabilitiesRequest(TimeSeriesSeeder.IndicesWildCard);
 
 		protected IGetRollupCapabilitiesRequest CapsFluent(string role, GetRollupCapabilitiesDescriptor d) =>
-			d.Index(TimeSeriesSeeder.IndicesWildCard);
+			d.Id(TimeSeriesSeeder.IndicesWildCard);
 
 		[I] public async Task StartsJob() =>
 			await AssertOnAfterCreateResponse<IStartRollupJobResponse>("start", r => r.Started.Should().BeTrue());

@@ -65,7 +65,7 @@ namespace Tests.Reproduce
 
 			Action getIndexRequest = () => client.GetIndex(new GetIndexRequest("products_purchasing"));
 
-			getIndexRequest.ShouldNotThrow();
+			getIndexRequest.Should().NotThrow();
 
 			var response = client.GetIndex(new GetIndexRequest("products_purchasing"));
 

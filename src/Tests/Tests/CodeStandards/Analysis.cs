@@ -5,7 +5,7 @@ using System.Reflection;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Tests.Core.Xunit;
 using Tests.Framework;
 
@@ -55,12 +55,12 @@ namespace Tests.CodeStandards
 		private static void PropertiesOfTypeAreAttributedWithJsonPropertyAttribute(Type type)
 		{
 			var types =
-				from t in type.Assembly().Types()
+				from t in type.Assembly.Types()
 				where t.IsInterface() && type.IsAssignableFrom(t)
 				let properties = t.GetProperties()
 				from p in properties
-				where p.GetCustomAttribute(typeof(JsonPropertyAttribute)) == null
-				select $"{p.Name} on {t.Name} does not have {nameof(JsonPropertyAttribute)} applied";
+				where p.GetCustomAttribute(typeof(DataMemberAttribute)) == null
+				select $"{p.Name} on {t.Name} does not have {nameof(DataMemberAttribute)} applied";
 
 			types.Should().BeEmpty();
 		}

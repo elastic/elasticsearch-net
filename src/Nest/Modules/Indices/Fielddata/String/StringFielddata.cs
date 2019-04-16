@@ -1,12 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<StringFielddata>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(StringFielddata))]
 	public interface IStringFielddata : IFielddata
 	{
-		[JsonProperty("format")]
+		[DataMember(Name ="format")]
 		StringFielddataFormat? Format { get; set; }
 	}
 

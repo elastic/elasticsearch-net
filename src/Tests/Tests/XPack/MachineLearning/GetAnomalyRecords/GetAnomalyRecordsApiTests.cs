@@ -22,7 +22,9 @@ namespace Tests.XPack.MachineLearning.GetAnomalyRecords
 		protected override Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> Fluent => f => f;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override GetAnomalyRecordsRequest Initializer => new GetAnomalyRecordsRequest(CallIsolatedValue);
-		protected override string UrlPath => $"/_xpack/ml/anomaly_detectors/{CallIsolatedValue}/results/records";
+		protected override string UrlPath => $"/_ml/anomaly_detectors/{CallIsolatedValue}/results/records";
+
+		protected override GetAnomalyRecordsDescriptor NewDescriptor() => new GetAnomalyRecordsDescriptor(CallIsolatedValue);
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

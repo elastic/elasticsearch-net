@@ -1,30 +1,31 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(FuzzyQueryJsonConverter))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(FuzzyQueryFormatter))]
 	public interface IFuzzyQuery : IFieldNameQuery
 	{
-		[JsonProperty("max_expansions")]
+		[DataMember(Name ="max_expansions")]
 		int? MaxExpansions { get; set; }
 
-		[JsonProperty("prefix_length")]
+		[DataMember(Name ="prefix_length")]
 		int? PrefixLength { get; set; }
 
-		[JsonProperty("rewrite")]
+		[DataMember(Name ="rewrite")]
 		MultiTermQueryRewrite Rewrite { get; set; }
 
-		[JsonProperty("transpositions")]
+		[DataMember(Name ="transpositions")]
 		bool? Transpositions { get; set; }
 	}
 
 	public interface IFuzzyQuery<TValue, TFuzziness> : IFuzzyQuery
 	{
-		[JsonProperty("fuzziness")]
+		[DataMember(Name ="fuzziness")]
 		TFuzziness Fuzziness { get; set; }
 
-		[JsonProperty("value")]
+		[DataMember(Name ="value")]
 		TValue Value { get; set; }
 	}
 

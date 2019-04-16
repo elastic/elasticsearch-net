@@ -1,9 +1,9 @@
 ﻿namespace Nest
 {
+	[MapsApi("security.delete_role_mapping.json")]
 	public partial interface IDeleteRoleMappingRequest { }
 
 	public partial class DeleteRoleMappingRequest { }
 
-	[DescriptorFor("XpackSecurityDeleteRoleMapping")]
 	public partial class DeleteRoleMappingDescriptor { }
 }

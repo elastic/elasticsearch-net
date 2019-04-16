@@ -1,20 +1,21 @@
 using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<NestedSort>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(NestedSort))]
 	public interface INestedSort
 	{
-		[JsonProperty("filter")]
+		[DataMember(Name = "filter")]
 		QueryContainer Filter { get; set; }
 
-		[JsonProperty("nested")]
+		[DataMember(Name = "nested")]
 		INestedSort Nested { get; set; }
 
-		[JsonProperty("path")]
+		[DataMember(Name = "path")]
 		Field Path { get; set; }
 	}
 

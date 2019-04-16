@@ -1,24 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	internal class SuggestDictionaryConverter<T> : VerbatimDictionaryKeysJsonConverter<string, Suggest<T>[]>
+	internal class SuggestDictionaryFormatter<T> : IJsonFormatter<SuggestDictionary<T>>
 		where T : class
 	{
-		public override bool CanRead => true;
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public SuggestDictionary<T> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var dict = serializer.Deserialize<Dictionary<string, Suggest<T>[]>>(reader);
+			var formatter = formatterResolver.GetFormatter<Dictionary<string, Suggest<T>[]>>();
+			var dict = formatter.Deserialize(ref reader, formatterResolver);
 			return new SuggestDictionary<T>(dict);
+		}
+
+		public void Serialize(ref JsonWriter writer, SuggestDictionary<T> value, IJsonFormatterResolver formatterResolver)
+		{
+			var formatter = new VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, Suggest<T>[]>();
+			formatter.Serialize(ref writer, value, formatterResolver);
 		}
 	}
 
+	[JsonFormatter(typeof(SuggestDictionaryFormatter<>))]
 	public class SuggestDictionary<T> : IsAReadOnlyDictionaryBase<string, Suggest<T>[]>
 		where T : class
 	{
+		[SerializationConstructor]
 		public SuggestDictionary(IReadOnlyDictionary<string, Suggest<T>[]> backingDictionary) : base(backingDictionary) { }
 
 		public static SuggestDictionary<T> Default { get; } = new SuggestDictionary<T>(EmptyReadOnly<string, Suggest<T>[]>.Dictionary);

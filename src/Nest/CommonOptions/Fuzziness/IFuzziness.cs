@@ -1,8 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(FuzzinessJsonConverter))]
+	[JsonFormatter(typeof(FuzzinessInterfaceFormatter))]
 	public interface IFuzziness
 	{
 		bool Auto { get; }

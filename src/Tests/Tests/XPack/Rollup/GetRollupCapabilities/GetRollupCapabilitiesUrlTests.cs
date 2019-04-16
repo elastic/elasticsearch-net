@@ -10,14 +10,14 @@ namespace Tests.XPack.Rollup.GetRollupCapabilities
 	{
 		[U] public override async Task Urls()
 		{
-			const string index = "rollup-index";
-			await GET($"_xpack/rollup/data/{index}")
-				.Fluent(c => c.GetRollupCapabilities(j => j.Index(index)))
-				.Request(c => c.GetRollupCapabilities(new GetRollupCapabilitiesRequest(index)))
-				.FluentAsync(c => c.GetRollupCapabilitiesAsync(j => j.Index(index)))
-				.RequestAsync(c => c.GetRollupCapabilitiesAsync(new GetRollupCapabilitiesRequest(index)));
+			const string id = "rollup-id";
+			await GET($"_rollup/data/{id}")
+				.Fluent(c => c.GetRollupCapabilities(j => j.Id(id)))
+				.Request(c => c.GetRollupCapabilities(new GetRollupCapabilitiesRequest(id)))
+				.FluentAsync(c => c.GetRollupCapabilitiesAsync(j => j.Id(id)))
+				.RequestAsync(c => c.GetRollupCapabilitiesAsync(new GetRollupCapabilitiesRequest(id)));
 
-			await GET($"_xpack/rollup/data/")
+			await GET($"_rollup/data/")
 				.Fluent(c => c.GetRollupCapabilities())
 				.Request(c => c.GetRollupCapabilities(new GetRollupCapabilitiesRequest()))
 				.FluentAsync(c => c.GetRollupCapabilitiesAsync())

@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(SpanGapQueryJsonConverter))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(SpanGapQueryFormatter))]
 	public interface ISpanGapQuery : ISpanSubQuery
 	{
 		Field Field { get; set; }
+
 		int? Width { get; set; }
 	}
 
@@ -24,7 +26,7 @@ namespace Nest
 			throw new Exception("span_gap may only appear as a span near clause");
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[DataContract]
 	public class SpanGapQueryDescriptor<T> : QueryDescriptorBase<SpanGapQueryDescriptor<T>, ISpanGapQuery>, ISpanGapQuery
 		where T : class
 	{
@@ -41,38 +43,41 @@ namespace Nest
 		public SpanGapQueryDescriptor<T> Width(int? width) => Assign(a => a.Width = width);
 	}
 
-	internal class SpanGapQueryJsonConverter : JsonConverter
+	internal class SpanGapQueryFormatter : IJsonFormatter<ISpanGapQuery>
 	{
-		public override bool CanRead => true;
-		public override bool CanWrite => true;
-
-		public override bool CanConvert(Type objectType) => typeof(ISpanGapQuery).IsAssignableFrom(objectType);
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public void Serialize(ref JsonWriter writer, ISpanGapQuery value, IJsonFormatterResolver formatterResolver)
 		{
-			var gapQuery = value as ISpanGapQuery;
-			if (value == null || SpanGapQuery.IsConditionless(gapQuery))
+			if (value == null || SpanGapQuery.IsConditionless(value))
 			{
 				writer.WriteNull();
 				return;
 			}
-			var settings = serializer.GetConnectionSettings();
-			var fieldName = settings.Inferrer.Field(gapQuery.Field);
-			writer.WriteStartObject();
-			writer.WritePropertyName(fieldName);
-			writer.WriteValue(gapQuery.Width);
+
+			writer.WriteBeginObject();
+			var inferrer = formatterResolver.GetConnectionSettings().Inferrer;
+			writer.WritePropertyName(inferrer.Field(value.Field));
+			writer.WriteInt32(value.Width.Value);
 			writer.WriteEndObject();
 		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public ISpanGapQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (reader.TokenType != JsonToken.StartObject) return null;
+			if (reader.GetCurrentJsonToken() == JsonToken.Null)
+				return null;
 
-			reader.Read();
-			var field = (Field)reader.Value.ToString(); // field
-			var width = reader.ReadAsInt32();
-			reader.Read();
-			return new SpanGapQuery { Field = field, Width = width };
+			var count = 0;
+			var query = new SpanGapQuery();
+
+			while (reader.ReadIsInObject(ref count))
+			{
+				if (count > 1)
+					continue;
+
+				query.Field = reader.ReadPropertyName();
+				query.Width = reader.ReadInt32();
+			}
+
+			return query;
 		}
 	}
 }

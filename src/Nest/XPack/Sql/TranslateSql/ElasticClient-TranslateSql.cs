@@ -34,7 +34,7 @@ namespace Nest
 			Dispatcher.Dispatch<ITranslateSqlRequest, TranslateSqlRequestParameters, TranslateSqlResponse>(
 				request,
 				ToTranslateSqlResponse,
-				(p, d) => LowLevelDispatch.XpackSqlTranslateDispatch<TranslateSqlResponse>(p, d)
+				(p, d) => LowLevelDispatch.SqlTranslateDispatch<TranslateSqlResponse>(p, d)
 			);
 
 		/// <inheritdoc cref="TranslateSql(System.Func{Nest.TranslateSqlDescriptor,Nest.ITranslateSqlRequest})" />
@@ -51,7 +51,7 @@ namespace Nest
 				request,
 				cancellationToken,
 				ToTranslateSqlResponse,
-				(p, d, c) => LowLevelDispatch.XpackSqlTranslateDispatchAsync<TranslateSqlResponse>(p, d, c)
+				(p, d, c) => LowLevelDispatch.SqlTranslateDispatchAsync<TranslateSqlResponse>(p, d, c)
 			);
 
 		private TranslateSqlResponse ToTranslateSqlResponse(IApiCallDetails apiCallDetails, Stream stream)

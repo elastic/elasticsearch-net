@@ -1,9 +1,9 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public partial class QueryContainer : IQueryContainer, IDescriptor
 	{
 		private IBoolQuery _bool;
@@ -50,9 +50,12 @@ namespace Nest
 		private ITermQuery _term;
 		private ITermsQuery _terms;
 		private ITermsSetQuery _termsSet;
-		private ITypeQuery _type;
 		private IWildcardQuery _wildcard;
 
+		[IgnoreDataMember]
+		private IQueryContainer Self => this;
+
+		[IgnoreDataMember]
 		internal IQuery ContainedQuery { get; set; }
 
 		IBoolQuery IQueryContainer.Bool
@@ -241,8 +244,6 @@ namespace Nest
 			set => _script = Set(value);
 		}
 
-		private IQueryContainer Self => this;
-
 		ISimpleQueryStringQuery IQueryContainer.SimpleQueryString
 		{
 			get => _simpleQueryString;
@@ -321,12 +322,6 @@ namespace Nest
 			set => _termsSet = Set(value);
 		}
 
-		ITypeQuery IQueryContainer.Type
-		{
-			get => _type;
-			set => _type = Set(value);
-		}
-
 		IWildcardQuery IQueryContainer.Wildcard
 		{
 			get => _wildcard;
@@ -337,7 +332,8 @@ namespace Nest
 		{
 			if (ContainedQuery != null)
 				throw new Exception(
-					$"{nameof(QueryContainer)} can only hold a single query; Instance already contains a {ContainedQuery.GetType().Name}");
+					$"Cannot assign {typeof(T).Name} to {nameof(QueryContainer)}. "
+					+ $"It can only hold a single query and already contains a {ContainedQuery.GetType().Name}");
 
 			ContainedQuery = value;
 			return value;

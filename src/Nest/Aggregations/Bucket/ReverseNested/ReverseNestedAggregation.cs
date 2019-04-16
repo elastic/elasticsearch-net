@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<ReverseNestedAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(ReverseNestedAggregation))]
 	public interface IReverseNestedAggregation : IBucketAggregation
 	{
-		[JsonProperty("path")]
+		[DataMember(Name ="path")]
 		Field Path { get; set; }
 	}
 
@@ -18,7 +19,7 @@ namespace Nest
 
 		public ReverseNestedAggregation(string name) : base(name) { }
 
-		[JsonProperty("path")]
+		[DataMember(Name ="path")]
 		public Field Path { get; set; }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.ReverseNested = this;

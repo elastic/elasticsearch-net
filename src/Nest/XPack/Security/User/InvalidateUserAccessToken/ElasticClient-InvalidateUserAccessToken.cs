@@ -39,7 +39,7 @@ namespace Nest
 		public IInvalidateUserAccessTokenResponse InvalidateUserAccessToken(IInvalidateUserAccessTokenRequest request) =>
 			Dispatcher.Dispatch<IInvalidateUserAccessTokenRequest, InvalidateUserAccessTokenRequestParameters, InvalidateUserAccessTokenResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackSecurityInvalidateTokenDispatch<InvalidateUserAccessTokenResponse>(p, d)
+				(p, d) => LowLevelDispatch.SecurityInvalidateTokenDispatch<InvalidateUserAccessTokenResponse>(p, d)
 			);
 
 		/// <inheritdoc />
@@ -58,7 +58,7 @@ namespace Nest
 					IInvalidateUserAccessTokenResponse>(
 					request,
 					cancellationToken,
-					(p, d, c) => LowLevelDispatch.XpackSecurityInvalidateTokenDispatchAsync<InvalidateUserAccessTokenResponse>(p, d, c)
+					(p, d, c) => LowLevelDispatch.SecurityInvalidateTokenDispatchAsync<InvalidateUserAccessTokenResponse>(p, d, c)
 				);
 	}
 }

@@ -58,7 +58,7 @@ namespace Tests.Framework
 					&& !(r.ApiCall.OriginalException is ElasticsearchClientException))
 				{
 					var e = ExceptionDispatchInfo.Capture(r.ApiCall.OriginalException.Demystify());
-					throw new ResponseAssertionException(e.SourceException, r);
+					throw new ResponseAssertionException(e.SourceException, r).Demystify();
 				}
 
 				try
@@ -67,7 +67,8 @@ namespace Tests.Framework
 				}
 				catch (Exception e)
 				{
-					throw new ResponseAssertionException(e, r);
+					var ex = ExceptionDispatchInfo.Capture(e.Demystify());
+					throw new ResponseAssertionException(ex.SourceException, r).Demystify();
 				}
 			});
 		}

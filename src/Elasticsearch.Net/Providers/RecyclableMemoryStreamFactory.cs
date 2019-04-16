@@ -15,5 +15,7 @@ namespace Elasticsearch.Net
 		public MemoryStream Create() => _manager.GetStream();
 
 		public MemoryStream Create(byte[] bytes) => _manager.GetStream(string.Empty, bytes, 0, bytes.Length);
+
+		public MemoryStream Create(byte[] bytes, int index, int count) => _manager.GetStream(string.Empty, bytes, index, count);
 	}
 }

@@ -2,16 +2,12 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
@@ -29,9 +25,6 @@ namespace Nest
 	{
 		internal static ConcurrentDictionary<string, object> _enumCache = new ConcurrentDictionary<string, object>();
 
-		internal static readonly JsonConverter dateConverter = new IsoDateTimeConverter { Culture = CultureInfo.InvariantCulture };
-		internal static readonly JsonSerializer serializer = new JsonSerializer();
-
 		internal static bool NotWritable(this QueryContainer q) => q == null || !q.IsWritable;
 
 		internal static bool NotWritable(this IEnumerable<QueryContainer> qs) => qs == null || qs.All(q => q.NotWritable());
@@ -43,15 +36,6 @@ namespace Nest
 		internal static TReturn InvokeOrDefault<T1, T2, TReturn>(this Func<T1, T2, TReturn> func, T1 @default, T2 param2)
 			where T1 : class, TReturn where TReturn : class =>
 			func?.Invoke(@default, param2) ?? @default;
-
-		internal static string ToJsonNetString(this DateTime date)
-		{
-			using (var writer = new JTokenWriter())
-			{
-				dateConverter.WriteJson(writer, date, serializer);
-				return writer.Token.ToString();
-			}
-		}
 
 		internal static IEnumerable<T> DistinctBy<T, TKey>(this IEnumerable<T> items, Func<T, TKey> property) =>
 			items.GroupBy(property).Select(x => x.First());
@@ -111,15 +95,19 @@ namespace Nest
 			return null;
 		}
 
+		internal static string Utf8String(this ref ArraySegment<byte> segment) =>
+			Encoding.UTF8.GetString(segment.Array, segment.Offset, segment.Count);
+
 		internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes, 0, bytes.Length);
 
 		internal static byte[] Utf8Bytes(this string s) => s.IsNullOrEmpty() ? null : Encoding.UTF8.GetBytes(s);
 
-		internal static bool IsNullOrEmpty(this TypeName value) => value == null || value.GetHashCode() == 0;
-
 		internal static bool IsNullOrEmpty(this IndexName value) => value == null || value.GetHashCode() == 0;
 
 		internal static bool IsValueType(this Type type) => type.GetTypeInfo().IsValueType;
+
+		internal static bool IsNullable(this TypeInfo type) =>
+			type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
 
 		internal static void ThrowIfNullOrEmpty(this string @object, string parameterName, string when = null)
 		{

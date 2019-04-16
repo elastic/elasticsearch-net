@@ -1,9 +1,9 @@
 namespace Nest
 {
+	[MapsApi("ml.delete_job.json")]
 	public partial interface IDeleteJobRequest { }
 
 	public partial class DeleteJobRequest { }
 
-	[DescriptorFor("XpackMlDeleteJob")]
 	public partial class DeleteJobDescriptor { }
 }

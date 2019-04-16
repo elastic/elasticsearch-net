@@ -28,7 +28,6 @@ namespace Tests.Document.Multiple.DeleteByQuery
 			{
 				ids = new
 				{
-					type = new[] { "doc" },
 					values = new[] { Project.First.Name, "x" }
 				}
 			}
@@ -41,26 +40,24 @@ namespace Tests.Document.Multiple.DeleteByQuery
 			.IgnoreUnavailable()
 			.Query(q => q
 				.Ids(ids => ids
-					.Types(typeof(Project))
 					.Values(Project.First.Name, "x")
 				)
 			);
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(Indices, Type<Project>())
+		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(Indices)
 		{
 			IgnoreUnavailable = true,
 			Query = new IdsQuery
 			{
-				Types = Types.Type<Project>(),
 				Values = new Id[] { Project.First.Name, "x" }
 			}
 		};
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override string UrlPath => $"/{CallIsolatedValue}%2C{SecondIndex}/doc/_delete_by_query?ignore_unavailable=true";
+		protected override string UrlPath => $"/{CallIsolatedValue}%2C{SecondIndex}/_delete_by_query?ignore_unavailable=true";
 		private Nest.Indices Indices => Index(CallIsolatedValue).And(SecondIndex);
 
 		private string SecondIndex => $"{CallIsolatedValue}-clone";
@@ -75,11 +72,9 @@ namespace Tests.Document.Multiple.DeleteByQuery
 						.NumberOfReplicas(0)
 						.Analysis(DefaultSeeder.ProjectAnalysisSettings)
 					)
-					.Mappings(m => m
-						.Map<Project>(p => p
-							.AutoMap()
-							.Properties(DefaultSeeder.ProjectProperties)
-						)
+					.Map<Project>(p => p
+						.AutoMap()
+						.Properties(DefaultSeeder.ProjectProperties)
 					)
 				);
 
@@ -130,14 +125,14 @@ namespace Tests.Document.Multiple.DeleteByQuery
 			.WaitForCompletion(false)
 			.Conflicts(Conflicts.Proceed);
 
-		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(CallIsolatedValue, Type<Project>())
+		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(CallIsolatedValue)
 		{
 			Query = new MatchAllQuery(),
 			WaitForCompletion = false,
 			Conflicts = Conflicts.Proceed
 		};
 
-		protected override string UrlPath => $"/{CallIsolatedValue}/doc/_delete_by_query?wait_for_completion=false&conflicts=proceed";
+		protected override string UrlPath => $"/{CallIsolatedValue}/_delete_by_query?wait_for_completion=false&conflicts=proceed";
 
 		protected override DeleteByQueryDescriptor<Project> NewDescriptor() => new DeleteByQueryDescriptor<Project>(CallIsolatedValue);
 
@@ -173,7 +168,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 				)
 			);
 
-		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(CallIsolatedValue, Type<Project>())
+		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(CallIsolatedValue)
 		{
 			Query = new MatchQuery
 			{
@@ -182,7 +177,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 			},
 		};
 
-		protected override string UrlPath => $"/{CallIsolatedValue}/doc/_delete_by_query";
+		protected override string UrlPath => $"/{CallIsolatedValue}/_delete_by_query";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -194,9 +189,9 @@ namespace Tests.Document.Multiple.DeleteByQuery
 					)
 				);
 				Client.Index(new Project { Name = "project1", Description = "description" },
-					i => i.Index(index).Id(1).Refresh(Refresh.True).Routing(Project.Routing));
+					i => i.Index(index).Id(1).Refresh(Refresh.True).Routing(1));
 				Client.Index(new Project { Name = "project2", Description = "description" },
-					i => i.Index(index).Id(1).Routing(Project.Routing));
+					i => i.Index(index).Id(1).Routing(1));
 			}
 		}
 
@@ -250,7 +245,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 				)
 			);
 
-		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(CallIsolatedValue, Type<Project>())
+		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(CallIsolatedValue)
 		{
 			Slice = new SlicedScroll
 			{
@@ -264,7 +259,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 			},
 		};
 
-		protected override string UrlPath => $"/{CallIsolatedValue}/doc/_delete_by_query";
+		protected override string UrlPath => $"/{CallIsolatedValue}/_delete_by_query";
 		private static List<string> FirstTenProjectNames => Project.Projects.Take(10).Select(p => p.Name).ToList();
 
 		protected override DeleteByQueryDescriptor<Project> NewDescriptor() => new DeleteByQueryDescriptor<Project>(CallIsolatedValue);

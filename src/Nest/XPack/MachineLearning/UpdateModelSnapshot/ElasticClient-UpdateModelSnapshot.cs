@@ -41,7 +41,7 @@ namespace Nest
 		public IUpdateModelSnapshotResponse UpdateModelSnapshot(IUpdateModelSnapshotRequest request) =>
 			Dispatcher.Dispatch<IUpdateModelSnapshotRequest, UpdateModelSnapshotRequestParameters, UpdateModelSnapshotResponse>(
 				request,
-				LowLevelDispatch.XpackMlUpdateModelSnapshotDispatch<UpdateModelSnapshotResponse>
+				LowLevelDispatch.MlUpdateModelSnapshotDispatch<UpdateModelSnapshotResponse>
 			);
 
 		/// <inheritdoc />
@@ -60,7 +60,7 @@ namespace Nest
 					IUpdateModelSnapshotResponse>(
 					request,
 					cancellationToken,
-					LowLevelDispatch.XpackMlUpdateModelSnapshotDispatchAsync<UpdateModelSnapshotResponse>
+					LowLevelDispatch.MlUpdateModelSnapshotDispatchAsync<UpdateModelSnapshotResponse>
 				);
 	}
 }

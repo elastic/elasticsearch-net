@@ -1,10 +1,11 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary>
 	/// Revert a specific snapshot for a machine learning job
 	/// </summary>
+	[MapsApi("ml.revert_model_snapshot.json")]
 	public partial interface IRevertModelSnapshotRequest
 	{
 		/// <summary>
@@ -12,7 +13,7 @@ namespace Nest
 		/// the reverted snapshot. It also resets the model to accept records for this time period.
 		/// The default value is false.
 		/// </summary>
-		[JsonProperty("delete_intervening_results")]
+		[DataMember(Name ="delete_intervening_results")]
 		bool? DeleteInterveningResults { get; set; }
 	}
 
@@ -24,7 +25,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	[DescriptorFor("XpackMlRevertModelSnapshot")]
 	public partial class RevertModelSnapshotDescriptor
 	{
 		bool? IRevertModelSnapshotRequest.DeleteInterveningResults { get; set; }

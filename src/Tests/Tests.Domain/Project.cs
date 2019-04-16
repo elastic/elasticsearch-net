@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Bogus;
 using Nest;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 using Tests.Configuration;
 using Tests.Domain.Extensions;
 using Tests.Domain.Helpers;
@@ -44,7 +44,6 @@ namespace Tests.Domain
 		public string Type => TypeName;
 
 		//the first applies when using internal source serializer the latter when using JsonNetSourceSerializer
-		[StringEnum] [JsonConverter(typeof(StringEnumConverter))]
 		public Visibility Visibility { get; set; }
 
 		// @formatter:off — enable formatter after this line
@@ -92,8 +91,6 @@ namespace Tests.Domain
 			SourceOnly = TestConfiguration.Instance.Random.SourceSerializer ? new SourceOnlyObject() : null
 		};
 
-		public static readonly string Routing = Instance.Name;
-
 		private static readonly object InstanceAnonymousDefault = new
 		{
 			name = Projects.First().Name,
@@ -130,7 +127,7 @@ namespace Tests.Domain
 	}
 
 	//the first applies when using internal source serializer the latter when using JsonNetSourceSerializer
-	[StringEnum] [JsonConverter(typeof(StringEnumConverter))]
+	[StringEnum]
 	public enum StateOfBeing
 	{
 		BellyUp,
@@ -138,6 +135,7 @@ namespace Tests.Domain
 		VeryActive
 	}
 
+	[StringEnum]
 	public enum Visibility
 	{
 		Public,

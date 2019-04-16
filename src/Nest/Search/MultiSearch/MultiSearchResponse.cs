@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject]
-	[ContractJsonConverter(typeof(MultiSearchResponseJsonConverter))]
+	[DataContract]
+	[JsonFormatter(typeof(MultiSearchResponseFormatter))]
 	public class MultiSearchResponse : ResponseBase, IMultiSearchResponse
 	{
-		public MultiSearchResponse() => Responses = new Dictionary<string, object>();
+		public MultiSearchResponse() => Responses = new Dictionary<string, IResponse>();
 
 		public IEnumerable<IResponse> AllResponses => _allResponses<IResponse>();
 
@@ -18,19 +18,20 @@ namespace Nest
 
 		public int TotalResponses => Responses.HasAny() ? Responses.Count() : 0;
 
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
-		internal IDictionary<string, object> Responses { get; set; }
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, IResponse>))]
+		internal IDictionary<string, IResponse> Responses { get; set; }
 
 		public IEnumerable<IResponse> GetInvalidResponses() => _allResponses<IResponse>().Where(r => !r.IsValid);
 
 		public ISearchResponse<T> GetResponse<T>(string name) where T : class
 		{
-			object response;
-			Responses.TryGetValue(name, out response);
-			var r = response as IElasticsearchResponse;
-			if (r != null)
-				r.ApiCall = ApiCall;
-			return response as SearchResponse<T>;
+			if (!Responses.TryGetValue(name, out var response))
+				return null;
+
+			if (response is IElasticsearchResponse elasticSearchResponse)
+				elasticSearchResponse.ApiCall = ApiCall;
+
+			return response as ISearchResponse<T>;
 		}
 
 		public IEnumerable<ISearchResponse<T>> GetResponses<T>() where T : class => _allResponses<SearchResponse<T>>();
@@ -46,7 +47,7 @@ namespace Nest
 		{
 			foreach (var r in Responses.Values.OfType<T>())
 			{
-				((IElasticsearchResponse)r).ApiCall = ApiCall;
+				r.ApiCall = ApiCall;
 				yield return r;
 			}
 		}

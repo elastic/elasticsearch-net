@@ -23,7 +23,10 @@ namespace Tests.Core.Serialization
 		private string DiffFromExpectedExcerpt =>
 			string.IsNullOrEmpty(DiffFromExpected)
 				? string.Empty
-				: DiffFromExpected?.Substring(0, DiffFromExpected.Length > 4896 ? 4896 : DiffFromExpected.Length);
+				: DiffFromExpected?
+//					.Replace("{", "{{") // escape for string format in FluentAssertion
+//					.Replace("}", "}}")
+					.Substring(0, DiffFromExpected.Length > 4896 ? 4896 : DiffFromExpected.Length);
 
 		public override string ToString()
 		{
@@ -51,11 +54,11 @@ namespace Tests.Core.Serialization
 
 	public class RoundTripResult<T> : DeserializationResult<T>
 	{
-		public int Itterations { get; set; }
+		public int Iterations { get; set; }
 
 		public override string ToString()
 		{
-			var s = $"RoundTrip: {Itterations.ToOrdinal()} itteration";
+			var s = $"RoundTrip: {Iterations.ToOrdinal()} iteration";
 			s += Environment.NewLine;
 			s += base.ToString();
 			return s;
@@ -94,7 +97,7 @@ namespace Tests.Core.Serialization
 				return result;
 
 			@object = Deserialize<T>(result.Serialized);
-			result.Itterations += 1;
+			result.Iterations += 1;
 
 			if (!SerializesAndMatches(@object, expectedJsonToken, result))
 				return result;
@@ -157,7 +160,7 @@ namespace Tests.Core.Serialization
 				: TokenMatches(expectedJsonToken, result);
 		}
 
-		private string SerializeUsingClientDefault(object o)
+		private string SerializeUsingClientDefault<T>(T o)
 		{
 			switch (o)
 			{
@@ -191,7 +194,7 @@ namespace Tests.Core.Serialization
 		{
 			var actualJson = itemJson ?? result.Serialized;
 			var message = "This is the first time I am serializing";
-			if (result.Itterations > 0)
+			if (result.Iterations > 0)
 				message = "This is the second time I am serializing, this usually indicates a problem when deserializing";
 			if (item > -1) message += $". This is while comparing the {item.ToOrdinal()} item";
 
@@ -234,7 +237,7 @@ namespace Tests.Core.Serialization
 				ContractResolver = new DefaultContractResolver { NamingStrategy = new DefaultNamingStrategy() },
 				NullValueHandling = preserveNullInExpected ? NullValueHandling.Include : NullValueHandling.Ignore,
 				//copied here because anonymyzing geocoordinates is too tedious
-				Converters = new List<JsonConverter> { new TestGeoCoordinateJsonConverter() }
+				Converters = new List<JsonConverter> { new TestGeoCoordinateJsonConverter(), new Utf8JsonDecimalConverter() }
 			};
 	}
 }

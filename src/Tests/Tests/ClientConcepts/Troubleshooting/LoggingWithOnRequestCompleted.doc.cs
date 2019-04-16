@@ -116,7 +116,6 @@ namespace Tests.ClientConcepts.Troubleshooting
 			var client = new ElasticClient(settings);
 
 			var syncResponse = client.Search<object>(s => s // <4> Make a synchronous call
-				.AllTypes()
 				.AllIndices()
 				.Scroll("2m")
 				.Sort(ss => ss
@@ -127,7 +126,6 @@ namespace Tests.ClientConcepts.Troubleshooting
 			list.Count.Should().Be(2);
 
 			var asyncResponse = await client.SearchAsync<object>(s => s // <5> Make an asynchronous call
-				.AllTypes()
 				.AllIndices()
 				.Scroll("10m")
 				.Sort(ss => ss
@@ -136,7 +134,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 			);
 
 			list.Count.Should().Be(4);
-			list.ShouldAllBeEquivalentTo(new[] // <6> Assert the list contains the contents written in the delegate passed to `OnRequestCompleted`
+			list.Should().BeEquivalentTo(new[] // <6> Assert the list contains the contents written in the delegate passed to `OnRequestCompleted`
 			{
 				@"POST http://localhost:9200/_search?typed_keys=true&scroll=2m {""sort"":[{""_doc"":{""order"":""asc""}}]}",
 				@"Status: 200",
@@ -192,7 +190,6 @@ namespace Tests.ClientConcepts.Troubleshooting
 			var client = new ElasticClient(settings);
 
 			var syncResponse = client.Search<object>(s => s // <1> Make a synchronous call where the request and response bytes will not be buffered
-				.AllTypes()
 				.AllIndices()
 				.Scroll("2m")
 				.Sort(ss => ss
@@ -206,7 +203,6 @@ namespace Tests.ClientConcepts.Troubleshooting
 				.RequestConfiguration(r => r
 					.DisableDirectStreaming()
 				)
-				.AllTypes()
 				.AllIndices()
 				.Scroll("10m")
 				.Sort(ss => ss
@@ -215,7 +211,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 			);
 
 			list.Count.Should().Be(4);
-			list.ShouldAllBeEquivalentTo(new[]
+			list.Should().BeEquivalentTo(new[]
 			{
 				@"POST http://localhost:9200/_search?typed_keys=true&scroll=2m", // <3> Only the method and url for the first request is captured
 				@"Status: 200",

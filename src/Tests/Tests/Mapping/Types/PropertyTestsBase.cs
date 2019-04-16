@@ -27,13 +27,13 @@ namespace Tests.Mapping.Types
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 
 
-		protected override PutMappingRequest<Project> Initializer => new PutMappingRequest<Project>(CallIsolatedValue, typeof(Project))
+		protected override PutMappingRequest<Project> Initializer => new PutMappingRequest<Project>(CallIsolatedValue)
 		{
 			Properties = InitializerProperties
 		};
 
 		protected abstract IProperties InitializerProperties { get; }
-		protected override string UrlPath => $"/{CallIsolatedValue}/doc/_mapping";
+		protected override string UrlPath => $"/{CallIsolatedValue}/_mapping";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.Map(f),

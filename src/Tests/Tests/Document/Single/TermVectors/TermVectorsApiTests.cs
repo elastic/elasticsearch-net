@@ -37,7 +37,7 @@ namespace Tests.Document.Single.TermVectors
 
 		protected override Func<TermVectorsDescriptor<Project>, ITermVectorsRequest<Project>> Fluent => d => d
 			.Id(Id(Project.Instance))
-			.Routing(Project.Routing)
+			.Routing(Project.Instance.Name)
 			.Offsets()
 			.Filter(f => f
 				.MaximimumNumberOfTerms(3)
@@ -51,9 +51,9 @@ namespace Tests.Document.Single.TermVectors
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override TermVectorsRequest<Project> Initializer => new TermVectorsRequest<Project>(Project.Instance.Name)
+		protected override TermVectorsRequest<Project> Initializer => new TermVectorsRequest<Project>((Id)Project.Instance.Name)
 		{
-			Routing = Project.Routing,
+			Routing = Project.Instance.Name,
 			Offsets = true,
 			Filter = new TermVectorFilter
 			{
@@ -68,7 +68,7 @@ namespace Tests.Document.Single.TermVectors
 		};
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/project/doc/{U(Project.Instance.Name)}/_termvectors?offsets=true&routing={U(Project.Routing)}";
+		protected override string UrlPath => $"/project/_termvectors/{U(Project.Instance.Name)}?offsets=true&routing={U(Project.Instance.Name)}";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.TermVectors(f),
@@ -77,7 +77,7 @@ namespace Tests.Document.Single.TermVectors
 			(client, r) => client.TermVectorsAsync(r)
 		);
 
-		protected override TermVectorsDescriptor<Project> NewDescriptor() => new TermVectorsDescriptor<Project>(typeof(Project), typeof(Project));
+		protected override TermVectorsDescriptor<Project> NewDescriptor() => new TermVectorsDescriptor<Project>(typeof(Project));
 
 		protected override void ExpectResponse(ITermVectorsResponse response)
 		{
@@ -88,7 +88,6 @@ namespace Tests.Document.Single.TermVectors
 			response.Version.Should().Be(1);
 			response.Id.Should().NotBeNullOrEmpty();
 			response.Index.Should().NotBeNullOrEmpty();
-			response.Type.Should().NotBeNullOrEmpty();
 
 			foreach (var termVector in response.TermVectors)
 			{

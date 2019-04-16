@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ExistsQuery>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(ExistsQuery))]
 	public interface IExistsQuery : IQuery
 	{
-		[JsonProperty("field")]
+		[DataMember(Name = "field")]
 		Field Field { get; set; }
 	}
 

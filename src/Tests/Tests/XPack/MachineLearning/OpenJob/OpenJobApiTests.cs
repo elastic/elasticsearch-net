@@ -18,7 +18,7 @@ namespace Tests.XPack.MachineLearning.OpenJob
 		protected override Func<OpenJobDescriptor, IOpenJobRequest> Fluent => f => f;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override OpenJobRequest Initializer => new OpenJobRequest(CallIsolatedValue);
-		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/_open";
+		protected override string UrlPath => $"_ml/anomaly_detectors/{CallIsolatedValue}/_open";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

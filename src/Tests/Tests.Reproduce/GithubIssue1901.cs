@@ -30,7 +30,7 @@ namespace Tests.Reproduce
 				"text/html",
 				new Exception("problem with the request as a result of 401")
 			);
-			var source = await client.LowLevel.GetSourceAsync<GetResponse<Example>>("examples", "example", "1");
+			var source = await client.LowLevel.GetSourceAsync<GetResponse<Example>>("examples", "1");
 			source.ApiCall.Success.Should().BeFalse();
 		}
 
@@ -41,7 +41,7 @@ namespace Tests.Reproduce
 				"text/html",
 				new Exception("problem with the request as a result of 401")
 			);
-			var response = await client.LowLevel.GetAsync<GetResponse<Example>>("examples", "example", "1");
+			var response = await client.LowLevel.GetAsync<GetResponse<Example>>("examples", "1");
 			response.ApiCall.Success.Should().BeFalse();
 			response.ApiCall.ResponseBodyInBytes.Should().NotBeNullOrEmpty();
 			response.ApiCall.HttpStatusCode.Should().Be(401);

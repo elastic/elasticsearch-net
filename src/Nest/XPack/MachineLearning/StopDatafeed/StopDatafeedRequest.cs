@@ -1,19 +1,20 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
+	[MapsApi("ml.stop_datafeed.json")]
 	public partial interface IStopDatafeedRequest
 	{
 		/// <summary>
 		/// If true, the datafeed is stopped forcefully.
 		/// </summary>
-		[JsonProperty("force")]
+		[DataMember(Name ="force")]
 		bool? Force { get; set; }
 
 		/// <summary>
 		/// Controls the amount of time to wait until a datafeed stops.
 		/// </summary>
-		[JsonProperty("timeout")]
+		[DataMember(Name ="timeout")]
 		Time Timeout { get; set; }
 	}
 
@@ -28,7 +29,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	[DescriptorFor("XpackMlStopDatafeed")]
 	public partial class StopDatafeedDescriptor
 	{
 		bool? IStopDatafeedRequest.Force { get; set; }

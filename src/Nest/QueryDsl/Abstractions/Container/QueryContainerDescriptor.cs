@@ -1,10 +1,10 @@
 using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public class QueryContainerDescriptor<T> : QueryContainer where T : class
 	{
 		private QueryContainer WrapInContainer<TQuery, TQueryInterface>(
@@ -429,11 +429,6 @@ namespace Nest
 
 		public QueryContainer Exists(Func<ExistsQueryDescriptor<T>, IExistsQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.Exists = query);
-
-		public QueryContainer Type(Func<TypeQueryDescriptor, ITypeQuery> selector) =>
-			WrapInContainer(selector, (query, container) => container.Type = query);
-
-		public QueryContainer Type<TOther>() => Type(q => q.Value<TOther>());
 
 		/// <summary>
 		/// Used to match queries stored in an index.

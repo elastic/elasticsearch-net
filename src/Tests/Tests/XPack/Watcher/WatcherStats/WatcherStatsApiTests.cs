@@ -20,13 +20,13 @@ namespace Tests.XPack.Watcher.WatcherStats
 		protected override int ExpectStatusCode => 200;
 
 		protected override Func<WatcherStatsDescriptor, IWatcherStatsRequest> Fluent => f => f
-			.WatcherStatsMetric(WatcherStatsMetric.All);
+			.Metric(WatcherStatsMetric.All);
 
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
 		protected override WatcherStatsRequest Initializer => new WatcherStatsRequest(WatcherStatsMetric.All);
 
-		protected override string UrlPath => "/_xpack/watcher/stats/_all";
+		protected override string UrlPath => "/_watcher/stats";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -48,7 +48,6 @@ namespace Tests.XPack.Watcher.WatcherStats
 						.Index("test_index", i => i
 							.ThrottlePeriod("1s")
 							.Index("test-" + CallIsolatedValue)
-							.DocType("acknowledgement")
 						)
 					)
 				);

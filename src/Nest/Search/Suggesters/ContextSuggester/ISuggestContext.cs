@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(SuggestContextJsonConverter))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(SuggestContextFormatter))]
 	public interface ISuggestContext
 	{
-		[JsonProperty("name")]
+		[DataMember(Name = "name")]
 		string Name { get; set; }
 
-		[JsonProperty("path")]
+		[DataMember(Name = "path")]
 		Field Path { get; set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name = "type")]
 		string Type { get; }
 	}
 
@@ -29,6 +30,7 @@ namespace Nest
 		where TDescriptor : SuggestContextDescriptorBase<TDescriptor, TInterface, T>, TInterface, ISuggestContext
 		where TInterface : class, ISuggestContext
 	{
+		[IgnoreDataMember]
 		protected abstract string Type { get; }
 		string ISuggestContext.Name { get; set; }
 		Field ISuggestContext.Path { get; set; }

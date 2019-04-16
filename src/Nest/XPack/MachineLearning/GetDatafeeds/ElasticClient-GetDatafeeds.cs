@@ -34,7 +34,7 @@ namespace Nest
 		public IGetDatafeedsResponse GetDatafeeds(IGetDatafeedsRequest request) =>
 			Dispatcher.Dispatch<IGetDatafeedsRequest, GetDatafeedsRequestParameters, GetDatafeedsResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackMlGetDatafeedsDispatch<GetDatafeedsResponse>(p)
+				(p, d) => LowLevelDispatch.MlGetDatafeedsDispatch<GetDatafeedsResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -50,7 +50,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IGetDatafeedsRequest, GetDatafeedsRequestParameters, GetDatafeedsResponse, IGetDatafeedsResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackMlGetDatafeedsDispatchAsync<GetDatafeedsResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.MlGetDatafeedsDispatchAsync<GetDatafeedsResponse>(p, c)
 			);
 	}
 }

@@ -5,6 +5,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.Xunit;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -234,7 +235,6 @@ namespace Tests.XPack.Watcher.PutWatch
 						index = new
 						{
 							index = "put-watch-test-index",
-							doc_type = "reminder",
 							execution_time_field = "execution_time"
 						}
 					},
@@ -280,20 +280,6 @@ namespace Tests.XPack.Watcher.PutWatch
 										author_name = "Russ Cam"
 									}
 								}
-							}
-						}
-					},
-					reminder_hipchat = new
-					{
-						hipchat = new
-						{
-							account = "notify-monitoring",
-							message = new
-							{
-								body = "hipchat message",
-								color = "purple",
-								room = new[] { "nest" },
-								notify = true
 							}
 						}
 					},
@@ -459,7 +445,6 @@ namespace Tests.XPack.Watcher.PutWatch
 				)
 				.Index("reminder_index", i => i
 					.Index("put-watch-test-index")
-					.DocType("reminder")
 					.ExecutionTimeField("execution_time")
 				)
 				.PagerDuty("reminder_pagerduty", pd => pd
@@ -489,15 +474,6 @@ namespace Tests.XPack.Watcher.PutWatch
 								.AuthorName("Russ Cam")
 							)
 						)
-					)
-				)
-				.HipChat("reminder_hipchat", hc => hc
-					.Account("notify-monitoring")
-					.Message(hm => hm
-						.Body("hipchat message")
-						.Color(HipChatMessageColor.Purple)
-						.Room("nest")
-						.Notify()
 					)
 				)
 				.Webhook("webhook", w => w
@@ -666,7 +642,6 @@ namespace Tests.XPack.Watcher.PutWatch
 				} && new IndexAction("reminder_index")
 				{
 					Index = "put-watch-test-index",
-					DocType = "reminder",
 					ExecutionTimeField = "execution_time"
 				} && new PagerDutyAction("reminder_pagerduty")
 				{
@@ -697,16 +672,6 @@ namespace Tests.XPack.Watcher.PutWatch
 							}
 						}
 					}
-				} && new HipChatAction("reminder_hipchat")
-				{
-					Account = "notify-monitoring",
-					Message = new HipChatMessage
-					{
-						Body = "hipchat message",
-						Color = HipChatMessageColor.Purple,
-						Room = new[] { "nest" },
-						Notify = true
-					}
 				} && new WebhookAction("webhook")
 				{
 					Scheme = ConnectionScheme.Https,
@@ -728,7 +693,7 @@ namespace Tests.XPack.Watcher.PutWatch
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}";
+		protected override string UrlPath => $"/_watcher/watch/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.PutWatch(CallIsolatedValue, f),

@@ -27,7 +27,7 @@ namespace Tests.Search.MultiSearch
 			new { query = new { match_all = new { } }, from = 0, size = 10 },
 			new { index = "otherindex" },
 			new { query = new { match = new { name = new { query = "nest" } } } },
-			new { index = "otherindex", type = "othertype", search_type = "dfs_query_then_fetch" },
+			new { index = "otherindex", search_type = "dfs_query_then_fetch" },
 			new { query = new { match_all = new { } } }
 		};
 
@@ -35,33 +35,32 @@ namespace Tests.Search.MultiSearch
 
 		protected override Func<MultiSearchDescriptor, IMultiSearchRequest> Fluent => ms => ms
 			.Index(typeof(Project))
-			.Type(typeof(Project))
 			.Search<Project>(s => s.Query(q => q.MatchAll()).From(0).Size(10))
 			.Search<Project>(s => s.Index("otherindex").Query(q => q.Match(m => m.Field(p => p.Name).Query("nest"))))
-			.Search<Project>(s => s.Index("otherindex").Type("othertype").SearchType(SearchType.DfsQueryThenFetch).Query(q => q.MatchAll()));
+			.Search<Project>(s => s.Index("otherindex").SearchType(SearchType.DfsQueryThenFetch).Query(q => q.MatchAll()));
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override MultiSearchRequest Initializer => new MultiSearchRequest(typeof(Project), typeof(Project))
+		protected override MultiSearchRequest Initializer => new MultiSearchRequest(typeof(Project))
 		{
 			Operations = new Dictionary<string, ISearchRequest>
 			{
 				{ "s1", new SearchRequest<Project> { From = 0, Size = 10, Query = new QueryContainer(new MatchAllQuery()) } },
 				{
 					"s2",
-					new SearchRequest<Project>("otherindex", typeof(Project))
+					new SearchRequest<Project>("otherindex")
 						{ Query = new QueryContainer(new MatchQuery { Field = "name", Query = "nest" }) }
 				},
 				{
 					"s3",
-					new SearchRequest<Project>("otherindex", "othertype")
+					new SearchRequest<Project>("otherindex")
 						{ SearchType = SearchType.DfsQueryThenFetch, Query = new QueryContainer(new MatchAllQuery()) }
 				},
 			}
 		};
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => "/project/doc/_msearch";
+		protected override string UrlPath => "/project/_msearch";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(c, f) => c.MultiSearch(f),
@@ -95,7 +94,7 @@ namespace Tests.Search.MultiSearch
 			searchResponse.ServerError.Status.Should().Be(404);
 			searchResponse.ServerError.Error.Should().NotBeNull();
 			searchResponse.ServerError.Error.Type.Should().Be("index_not_found_exception");
-			searchResponse.ServerError.Error.Reason.Should().Be("no such index");
+			searchResponse.ServerError.Error.Reason.Should().StartWith("no such index");
 		}
 	}
 }

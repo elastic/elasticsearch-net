@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -8,11 +9,12 @@ namespace Nest
 	/// Contains aggregates that are returned by Elasticsearch. In NEST `Aggregation` always refers to an aggregation
 	/// going to elasticsearch and an `Aggregate` describes an aggregation going out.
 	/// </summary>
-	[ContractJsonConverter(typeof(AggregateDictionaryConverter))]
+	[JsonFormatter(typeof(AggregateDictionaryFormatter))]
 	public class AggregateDictionary : IsAReadOnlyDictionaryBase<string, IAggregate>
 	{
 		internal static readonly char[] TypedKeysSeparator = { '#' };
 
+		[SerializationConstructor]
 		public AggregateDictionary(IReadOnlyDictionary<string, IAggregate> backingDictionary) : base(backingDictionary) { }
 
 		public static AggregateDictionary Default { get; } = new AggregateDictionary(EmptyReadOnly<string, IAggregate>.Dictionary);

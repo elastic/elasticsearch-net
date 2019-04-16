@@ -8,6 +8,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.Xunit;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -16,6 +17,7 @@ using static Tests.Domain.Helpers.TestValueHelper;
 namespace Tests.Search.MultiSearch
 {
 	[SkipVersion(">5.0.0-alpha1", "format of percolate query changed.")]
+	[BlockedByIssue("https://github.com/elastic/elasticsearch/pull/39987")]
 	public class MultiSearchApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, IMultiSearchResponse, IMultiSearchRequest, MultiSearchDescriptor, MultiSearchRequest>
 	{
@@ -29,19 +31,19 @@ namespace Tests.Search.MultiSearch
 			new { from = 0, size = 10, query = new { match_all = new { } } },
 			new { search_type = "dfs_query_then_fetch" },
 			new { },
-			new { index = "devs", type = "developer" },
+			new { index = "devs" },
 			new { from = 0, size = 5, query = new { match_all = new { } } },
-			new { index = "devs", type = "developer" },
+			new { index = "devs" },
 			new { from = 0, size = 5, query = new { match_all = new { } } },
-			new { index = "queries", type = PercolatorType },
+			new { index = "queries" },
 			new { query = new { percolate = new { document = Project.InstanceAnonymous, field = "query", routing = Project.First.Name } } },
-			new { index = "queries", type = PercolatorType },
+			new { index = "queries" },
 			new
 			{
 				query = new
 				{
 					percolate = new
-						{ index = "project", type = "doc", id = Project.First.Name, version = 1, field = "query", routing = Project.First.Name }
+						{ index = "project", id = Project.First.Name, version = 1, field = "query", routing = Project.First.Name }
 				}
 			},
 		};
@@ -50,7 +52,6 @@ namespace Tests.Search.MultiSearch
 
 		protected override Func<MultiSearchDescriptor, IMultiSearchRequest> Fluent => ms => ms
 			.Index(typeof(Project))
-			.Type(typeof(Project))
 			.Search<Project>("10projects", s => s.Query(q => q.MatchAll()).From(0).Size(10))
 			.Search<Project>("dfs_projects", s => s.SearchType(SearchType.DfsQueryThenFetch))
 			.Search<Developer>("5developers", s => s.Query(q => q.MatchAll()).From(0).Size(5))
@@ -69,7 +70,6 @@ namespace Tests.Search.MultiSearch
 				.Query(q => q
 					.Percolate(p => p
 						.Index<Project>()
-						.Type<Project>()
 						.Id(Project.First.Name)
 						.Version(1)
 						.Routing(Project.First.Name)
@@ -80,7 +80,7 @@ namespace Tests.Search.MultiSearch
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override MultiSearchRequest Initializer => new MultiSearchRequest(typeof(Project), typeof(Project))
+		protected override MultiSearchRequest Initializer => new MultiSearchRequest(typeof(Project))
 		{
 			Operations = new Dictionary<string, ISearchRequest>
 			{
@@ -104,7 +104,6 @@ namespace Tests.Search.MultiSearch
 						Query = new QueryContainer(new PercolateQuery
 						{
 							Index = typeof(Project),
-							Type = typeof(Project),
 							Id = Project.First.Name,
 							Version = 1,
 							Routing = Project.First.Name,
@@ -116,7 +115,7 @@ namespace Tests.Search.MultiSearch
 		};
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => "/project/doc/_msearch";
+		protected override string UrlPath => "/project/_msearch";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(c, f) => c.MultiSearch(f),

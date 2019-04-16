@@ -1,30 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
+	[MapsApi("watcher.execute_watch.json")]
 	public partial interface IExecuteWatchRequest
 	{
 		/// <summary>
 		/// Determines how to handle the watch actions as part of the watch execution.
 		/// </summary>
-		[JsonProperty("action_modes")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, ActionExecutionMode>))]
+		[DataMember(Name = "action_modes")]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, ActionExecutionMode>))]
 		IDictionary<string, ActionExecutionMode> ActionModes { get; set; }
 
 		/// <summary>
 		/// When present, the watch uses this object as a payload
 		/// instead of executing its own input.
 		/// </summary>
-		[JsonProperty("alternative_input")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
+		[DataMember(Name = "alternative_input")]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, object>))]
 		IDictionary<string, object> AlternativeInput { get; set; }
 
 		/// <summary>
 		/// If this is set to true the watch execution will use the Always Condition.
 		/// </summary>
-		[JsonProperty("ignore_condition")]
+		[DataMember(Name = "ignore_condition")]
 		bool? IgnoreCondition { get; set; }
 
 		/// <summary>
@@ -33,7 +35,7 @@ namespace Nest
 		/// Also the status of the watch is updated,
 		/// possbily throttling subsequent executions.
 		/// </summary>
-		[JsonProperty("record_execution")]
+		[DataMember(Name = "record_execution")]
 		bool? RecordExecution { get; set; }
 
 		/// <summary>
@@ -41,21 +43,21 @@ namespace Nest
 		///  If _all is set or an action that is executed by the watch appears in this list
 		///  it will be executed in simulated mode.
 		/// </summary>
-		[JsonProperty("simulated_actions")]
+		[DataMember(Name = "simulated_actions")]
 		SimulatedActions SimulatedActions { get; set; }
 
 		/// <summary>
 		/// This structure will be parsed as a trigger event and used for the watch execution.
 		/// </summary>
-		[JsonProperty("trigger_data")]
+		[DataMember(Name = "trigger_data")]
 		IScheduleTriggerEvent TriggerData { get; set; }
 
 		/// <summary>
 		/// When present, this watch is used instead of the one specified in the request.
 		/// This watch is not persisted to the index and record_execution cannot be set.
 		/// </summary>
-		[JsonProperty("watch")]
-		IPutWatchRequest Watch { get; set; }
+		[DataMember(Name = "watch")]
+		IWatch Watch { get; set; }
 	}
 
 	public partial class ExecuteWatchRequest
@@ -71,10 +73,9 @@ namespace Nest
 		public SimulatedActions SimulatedActions { get; set; }
 		public IScheduleTriggerEvent TriggerData { get; set; }
 
-		public IPutWatchRequest Watch { get; set; }
+		public IWatch Watch { get; set; }
 	}
 
-	[DescriptorFor("XpackWatcherExecuteWatch")]
 	public partial class ExecuteWatchDescriptor
 	{
 		IDictionary<string, ActionExecutionMode> IExecuteWatchRequest.ActionModes { get; set; }
@@ -83,7 +84,7 @@ namespace Nest
 		bool? IExecuteWatchRequest.RecordExecution { get; set; }
 		SimulatedActions IExecuteWatchRequest.SimulatedActions { get; set; }
 		IScheduleTriggerEvent IExecuteWatchRequest.TriggerData { get; set; }
-		IPutWatchRequest IExecuteWatchRequest.Watch { get; set; }
+		IWatch IExecuteWatchRequest.Watch { get; set; }
 
 		public ExecuteWatchDescriptor TriggerData(Func<ScheduleTriggerEventDescriptor, IScheduleTriggerEvent> selector) =>
 			Assign(a => a.TriggerData = selector?.InvokeOrDefault(new ScheduleTriggerEventDescriptor()));
@@ -113,7 +114,7 @@ namespace Nest
 		public ExecuteWatchDescriptor SimulatedActions(SimulatedActions simulatedActions) =>
 			Assign(a => a.SimulatedActions = simulatedActions);
 
-		public ExecuteWatchDescriptor Watch(Func<PutWatchDescriptor, IPutWatchRequest> watch) =>
-			Assign(a => a.Watch = watch?.InvokeOrDefault(new PutWatchDescriptor()));
+		public ExecuteWatchDescriptor Watch(Func<WatchDescriptor, IWatch> watch) =>
+			Assign(a => a.Watch = watch?.InvokeOrDefault(new WatchDescriptor()));
 	}
 }

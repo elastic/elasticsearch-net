@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(GetRepositoryResponseJsonConverter))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(GetRepositoryResponse))]
 	public interface IGetRepositoryResponse : IResponse
 	{
 		IReadOnlyDictionary<string, ISnapshotRepository> Repositories { get; }
@@ -20,7 +21,8 @@ namespace Nest
 		S3Repository S3(string name);
 	}
 
-	[JsonObject]
+	[DataContract]
+	[JsonFormatter(typeof(GetRepositoryResponseFormatter))]
 	public class GetRepositoryResponse : ResponseBase, IGetRepositoryResponse
 	{
 		public IReadOnlyDictionary<string, ISnapshotRepository> Repositories { get; internal set; } =

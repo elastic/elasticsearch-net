@@ -1,16 +1,17 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchTransform>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(SearchTransform))]
 	public interface ISearchTransform : ITransform
 	{
-		[JsonProperty("request")]
+		[DataMember(Name ="request")]
 		ISearchInputRequest Request { get; set; }
 
-		[JsonProperty("timeout")]
+		[DataMember(Name ="timeout")]
 		Time Timeout { get; set; }
 	}
 

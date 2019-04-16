@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -17,28 +17,28 @@ namespace Nest
 
 	public interface IHdfsRepositorySettings : IRepositorySettings
 	{
-		[JsonProperty("chunk_size")]
+		[DataMember(Name ="chunk_size")]
 		string ChunkSize { get; set; }
 
-		[JsonProperty("compress")]
+		[DataMember(Name ="compress")]
 		bool? Compress { get; set; }
 
-		[JsonProperty("concurrent_streams")]
+		[DataMember(Name ="concurrent_streams")]
 		int? ConcurrentStreams { get; set; }
 
-		[JsonProperty("conf_location")]
+		[DataMember(Name ="conf_location")]
 		string ConfigurationLocation { get; set; }
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		Dictionary<string, object> InlineHadoopConfiguration { get; set; }
 
-		[JsonProperty("load_defaults")]
+		[DataMember(Name ="load_defaults")]
 		bool? LoadDefaults { get; set; }
 
-		[JsonProperty("path")]
+		[DataMember(Name ="path")]
 		string Path { get; set; }
 
-		[JsonProperty("uri")]
+		[DataMember(Name ="uri")]
 		string Uri { get; set; }
 	}
 

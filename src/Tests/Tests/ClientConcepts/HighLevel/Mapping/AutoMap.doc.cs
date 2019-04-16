@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Elastic.Xunit.XunitPlumbing;
@@ -56,15 +56,13 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			/**
 			* Auto mapping can take the pain out of having to define a manual mapping for all properties
 			* on the POCO. In this case we want to index two subclasses into a single index. We call Map
-			* for the base class and then call AutoMap foreach of the types we want it it the implement
+			* for the base class and then call AutoMap foreach of the types we want it to implement
 			*/
 
 			var createIndexResponse = _client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<Document>(m => m
-						.AutoMap<Company>() // <1> Auto map `Company` using the generic method
-						.AutoMap(typeof(Employee)) // <2> Auto map `Employee` using the non-generic method
-					)
+				.Map<Document>(m => m
+					.AutoMap<Company>() // <1> Auto map `Company` using the generic method
+					.AutoMap(typeof(Employee)) // <2> Auto map `Employee` using the non-generic method
 				)
 			);
 
@@ -76,77 +74,74 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					document = new
+					properties = new
 					{
-						properties = new
+						birthday = new {type = "date"},
+						employees = new
 						{
-							birthday = new {type = "date"},
-							employees = new
+							properties = new
 							{
-								properties = new
+								birthday = new {type = "date"},
+								employees = new
 								{
-									birthday = new {type = "date"},
-									employees = new
+									properties = new { },
+									type = "object"
+								},
+								hours = new {type = "long"},
+								isManager = new {type = "boolean"},
+								join = new
+								{
+									properties = new { },
+									type = "object"
+								},
+								lastName = new
+								{
+									fields = new
 									{
-										properties = new { },
-										type = "object"
-									},
-									hours = new {type = "long"},
-									isManager = new {type = "boolean"},
-									join = new
-									{
-										properties = new { },
-										type = "object"
-									},
-									lastName = new
-									{
-										fields = new
+										keyword = new
 										{
-											keyword = new
-											{
-												ignore_above = 256,
-												type = "keyword"
-											}
-										},
-										type = "text"
+											ignore_above = 256,
+											type = "keyword"
+										}
 									},
-									salary = new {type = "integer"}
+									type = "text"
 								},
-								type = "object"
+								salary = new {type = "integer"}
 							},
-							hours = new {type = "long"},
-							isManager = new {type = "boolean"},
-							join = new
+							type = "object"
+						},
+						hours = new {type = "long"},
+						isManager = new {type = "boolean"},
+						join = new
+						{
+							properties = new { },
+							type = "object"
+						},
+						lastName = new
+						{
+							fields = new
 							{
-								properties = new { },
-								type = "object"
-							},
-							lastName = new
-							{
-								fields = new
+								keyword = new
 								{
-									keyword = new
-									{
-										ignore_above = 256,
-										type = "keyword"
-									}
-								},
-								type = "text"
+									ignore_above = 256,
+									type = "keyword"
+								}
 							},
-							name = new
+							type = "text"
+						},
+						name = new
+						{
+							fields = new
 							{
-								fields = new
+								keyword = new
 								{
-									keyword = new
-									{
-										ignore_above = 256,
-										type = "keyword"
-									}
-								},
-								type = "text"
+									ignore_above = 256,
+									type = "keyword"
+								}
 							},
-							salary = new {type = "integer"}
-						}
+							type = "text"
+						},
+						salary = new {type = "integer"}
 					}
 				}
 			};
@@ -174,10 +169,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			var client = new ElasticClient(connectionSettings);
 
 			var createIndexResponse = client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<ParentWithStringId>(m => m
-						.AutoMap()
-					)
+				.Map<ParentWithStringId>(m => m
+					.AutoMap()
 				)
 			);
 
@@ -186,20 +179,17 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					parent = new
+					properties = new
 					{
-						properties = new
+						id = new
 						{
-							id = new
+							type = "text",
+							fields = new
 							{
-								type = "text",
-								fields = new
+								keyword = new
 								{
-									keyword = new
-									{
-										ignore_above = 256,
-										type = "keyword"
-									}
+									ignore_above = 256,
+									type = "keyword"
 								}
 							}
 						}
@@ -305,9 +295,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		{
 			/** By default, `.AutoMap()` only goes as far as depth 1 */
 			var createIndexResponse = _client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<A>(m => m.AutoMap())
-				)
+				.Map<A>(m => m.AutoMap())
 			);
 
 			/** Thus we do not map properties on the second occurrence of our Child property */
@@ -316,15 +304,12 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					a = new
+					properties = new
 					{
-						properties = new
+						child = new
 						{
-							child = new
-							{
-								properties = new { },
-								type = "object"
-							}
+							properties = new { },
+							type = "object"
 						}
 					}
 				}
@@ -335,9 +320,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 
 			/** Now let's specify a maxRecursion of `3` */
 			createIndexResponse = _client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<A>(m => m.AutoMap(3))
-				)
+				.Map<A>(m => m.AutoMap(3))
 			);
 
 			/** `.AutoMap()` has now mapped three levels of our Child property */
@@ -346,30 +329,27 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					a = new
+					properties = new
 					{
-						properties = new
+						child = new
 						{
-							child = new
+							type = "object",
+							properties = new
 							{
-								type = "object",
-								properties = new
+								child = new
 								{
-									child = new
+									type = "object",
+									properties = new
 									{
-										type = "object",
-										properties = new
+										child = new
 										{
-											child = new
+											type = "object",
+											properties = new
 											{
-												type = "object",
-												properties = new
+												child = new
 												{
-													child = new
-													{
-														type = "object",
-														properties = new { }
-													}
+													type = "object",
+													properties = new { }
 												}
 											}
 										}

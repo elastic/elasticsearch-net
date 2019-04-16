@@ -1,13 +1,13 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class SampleDiversity
 	{
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		public Field Field { get; set; }
 
-		[JsonProperty("max_docs_per_value")]
+		[DataMember(Name ="max_docs_per_value")]
 		public int? MaxDocumentsPerValue { get; set; }
 	}
 }

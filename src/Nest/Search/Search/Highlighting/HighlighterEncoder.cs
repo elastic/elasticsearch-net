@@ -1,13 +1,13 @@
 ﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using Elasticsearch.Net;
+
 
 namespace Nest
 {
 	/// <summary>
 	/// Indicates if the highlighted text should be HTML encoded
 	/// </summary>
-	[JsonConverter(typeof(StringEnumConverter))]
+	[StringEnum]
 	public enum HighlighterEncoder
 	{
 		/// <summary>

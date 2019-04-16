@@ -34,7 +34,7 @@ namespace Nest
 		public IWatcherStatsResponse WatcherStats(IWatcherStatsRequest request) =>
 			Dispatcher.Dispatch<IWatcherStatsRequest, WatcherStatsRequestParameters, WatcherStatsResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackWatcherStatsDispatch<WatcherStatsResponse>(p)
+				(p, d) => LowLevelDispatch.WatcherStatsDispatch<WatcherStatsResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -50,7 +50,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IWatcherStatsRequest, WatcherStatsRequestParameters, WatcherStatsResponse, IWatcherStatsResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackWatcherStatsDispatchAsync<WatcherStatsResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.WatcherStatsDispatchAsync<WatcherStatsResponse>(p, c)
 			);
 	}
 }

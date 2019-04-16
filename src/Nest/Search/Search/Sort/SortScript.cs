@@ -1,14 +1,17 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
+	[ReadAs(typeof(ScriptSort))]
+	[InterfaceDataContract]
 	public interface IScriptSort : ISort
 	{
-		[JsonProperty("script")]
+		[DataMember(Name ="script")]
 		IScript Script { get; set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		string Type { get; set; }
 	}
 

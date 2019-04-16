@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -10,19 +11,20 @@ namespace Nest
 		/// <summary>
 		/// The regular expression flags.
 		/// </summary>
-		[JsonProperty("flags")]
+		[DataMember(Name = "flags")]
 		string Flags { get; set; }
 
 		/// <summary>
 		/// Which group to extract into tokens. Defaults to -1 (split).
 		/// </summary>
-		[JsonProperty("group")]
+		[DataMember(Name = "group")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? Group { get; set; }
 
 		/// <summary>
 		/// The regular expression pattern, defaults to \W+.
 		/// </summary>
-		[JsonProperty("pattern")]
+		[DataMember(Name = "pattern")]
 		string Pattern { get; set; }
 	}
 

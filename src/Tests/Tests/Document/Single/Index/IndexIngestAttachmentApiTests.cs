@@ -15,7 +15,7 @@ namespace Tests.Document.Single.Index
 	{
 		static TestDocument()
 		{
-			using (var stream = typeof(TestDocument).Assembly().GetManifestResourceStream("Tests.Document.Single.Index.Attachment_Test_Document.pdf"))
+			using (var stream = typeof(TestDocument).Assembly.GetManifestResourceStream("Tests.Document.Single.Index.Attachment_Test_Document.pdf"))
 			{
 				using (var memoryStream = new MemoryStream())
 				{
@@ -50,16 +50,17 @@ namespace Tests.Document.Single.Index
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 
 		protected override IndexRequest<IngestedAttachment> Initializer =>
-			new IndexRequest<IngestedAttachment>(Document, CallIsolatedValue)
+			new IndexRequest<IngestedAttachment>(CallIsolatedValue, Id.From(Document))
 			{
 				Refresh = Refresh.True,
-				Pipeline = PipelineId
+				Pipeline = PipelineId,
+				Document = Document
 			};
 
 		protected override bool SupportsDeserialization => false;
 
 		protected override string UrlPath
-			=> $"/{CallIsolatedValue}/ingestedattachment/1?refresh=true&pipeline={PipelineId}";
+			=> $"/{CallIsolatedValue}/_doc/1?refresh=true&pipeline={PipelineId}";
 
 		private static string Content => TestDocument.TestPdfDocument;
 
@@ -78,15 +79,13 @@ namespace Tests.Document.Single.Index
 				var index = value.Value;
 
 				client.CreateIndex(index, c => c
-					.Mappings(m => m
-						.Map<IngestedAttachment>(mm => mm
-							.Properties(p => p
-								.Text(s => s
-									.Name(f => f.Content)
-								)
-								.Object<Attachment>(o => o
-									.Name(f => f.Attachment)
-								)
+					.Map<IngestedAttachment>(mm => mm
+						.Properties(p => p
+							.Text(s => s
+								.Name(f => f.Content)
+							)
+							.Object<Attachment>(o => o
+								.Name(f => f.Attachment)
 							)
 						)
 					)

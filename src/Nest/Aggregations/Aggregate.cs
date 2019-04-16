@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	/// <summary>
 	/// Aggregation response for an aggregation request
 	/// </summary>
-	[ExactContractJsonConverter(typeof(AggregateJsonConverter))]
+	[JsonFormatter(typeof(AggregateFormatter))]
 	public interface IAggregate
 	{
 		//TODO this public set is problematic

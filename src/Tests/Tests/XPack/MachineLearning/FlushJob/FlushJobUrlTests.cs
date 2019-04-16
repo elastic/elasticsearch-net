@@ -8,7 +8,7 @@ namespace Tests.XPack.MachineLearning.FlushJob
 {
 	public class FlushJobUrlTests : UrlTestsBase
 	{
-		[U] public override async Task Urls() => await POST("/_xpack/ml/anomaly_detectors/job_id/_flush")
+		[U] public override async Task Urls() => await POST("/_ml/anomaly_detectors/job_id/_flush")
 			.Fluent(c => c.FlushJob("job_id"))
 			.Request(c => c.FlushJob(new FlushJobRequest("job_id")))
 			.FluentAsync(c => c.FlushJobAsync("job_id"))

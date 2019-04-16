@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IDeleteExpiredDataResponse : IResponse
 	{
-		[JsonProperty("deleted")]
+		[DataMember(Name ="deleted")]
 		bool Deleted { get; }
 	}
 

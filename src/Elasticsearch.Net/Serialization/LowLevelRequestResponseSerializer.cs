@@ -8,69 +8,37 @@ namespace Elasticsearch.Net
 {
 	public class LowLevelRequestResponseSerializer : IElasticsearchSerializer
 	{
-		private const int BufferSize = 81920;
 		public static readonly LowLevelRequestResponseSerializer Instance = new LowLevelRequestResponseSerializer();
-		private static readonly ElasticsearchNetJsonStrategy Strategy = new ElasticsearchNetJsonStrategy();
 
 		public object Deserialize(Type type, Stream stream)
 		{
-			if (stream == null) return Default(type);
-
-			using (var ms = new MemoryStream())
-			using (stream)
-			{
-				stream.CopyTo(ms);
-				var buffer = ms.ToArray();
-				if (buffer.Length <= 1) return Default(type);
-
-				return SimpleJson.DeserializeObject(buffer.Utf8String(), type, Strategy);
-			}
+			if (stream == null || stream.CanSeek && stream.Length == 0) return Task.FromResult(type.DefaultValue());
+			return JsonSerializer.NonGeneric.Deserialize(type, stream, ElasticsearchNetFormatterResolver.Instance);
 		}
 
-		public T Deserialize<T>(Stream stream) => (T)Deserialize(typeof(T), stream);
-
-		public async Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default(CancellationToken))
+		public T Deserialize<T>(Stream stream)
 		{
-			if (stream == null) return Default(type);
-
-			using (var ms = new MemoryStream())
-			using (stream)
-			{
-				await stream.CopyToAsync(ms, BufferSize, cancellationToken).ConfigureAwait(false);
-				var buffer = ms.ToArray();
-				if (buffer.Length <= 1) return Default(type);
-
-				var r = SimpleJson.DeserializeObject(buffer.Utf8String(), type, Strategy);
-				return r;
-			}
+			if (stream == null || stream.CanSeek && stream.Length == 0) return default(T);
+			return JsonSerializer.Deserialize<T>(stream, ElasticsearchNetFormatterResolver.Instance);
 		}
 
-		public async Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			var o = await DeserializeAsync(typeof(T), stream, cancellationToken).ConfigureAwait(false);
-			return (T)o;
+			if (stream == null || stream.CanSeek && stream.Length == 0) return Task.FromResult(type.DefaultValue());
+			return JsonSerializer.NonGeneric.DeserializeAsync(type, stream, ElasticsearchNetFormatterResolver.Instance);
 		}
 
-		public void Serialize<T>(T data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented)
+		public Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			var serialized = SimpleJson.SerializeObject(data, Strategy);
-			if (formatting == SerializationFormatting.None) serialized = RemoveNewLinesAndTabs(serialized);
-			using (var ms = new MemoryStream(serialized.Utf8Bytes())) ms.CopyTo(writableStream);
+			if (stream == null || stream.CanSeek && stream.Length == 0) return Task.FromResult(default(T));
+			return JsonSerializer.DeserializeAsync<T>(stream, ElasticsearchNetFormatterResolver.Instance);
 		}
 
-		public async Task SerializeAsync<T>(T data, Stream writableStream, SerializationFormatting formatting,
-			CancellationToken cancellationToken = default(CancellationToken)
-		)
-		{
-			var serialized = SimpleJson.SerializeObject(data, Strategy);
-			if (formatting == SerializationFormatting.None) serialized = RemoveNewLinesAndTabs(serialized);
-			using (var ms = new MemoryStream(serialized.Utf8Bytes())) await ms.CopyToAsync(writableStream).ConfigureAwait(false);
-		}
+		public void Serialize<T>(T data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented) =>
+			JsonSerializer.Serialize(writableStream, data, ElasticsearchNetFormatterResolver.Instance); // TODO: format indentation
 
-		private static object Default(Type type) => type.IsValueType() ? type.CreateInstance() : null;
-
-		private static string RemoveNewLinesAndTabs(string input) => new string(input
-			.Where(c => c != '\r' && c != '\n')
-			.ToArray());
+		public Task SerializeAsync<T>(T data, Stream writableStream, SerializationFormatting formatting,
+			CancellationToken cancellationToken = default(CancellationToken)) =>
+			JsonSerializer.SerializeAsync(writableStream, data, ElasticsearchNetFormatterResolver.Instance); // TODO: format indentation
 	}
 }

@@ -1,21 +1,22 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(FieldNameQueryJsonConverter<MatchPhrasePrefixQuery>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(FieldNameQueryFormatter<MatchPhrasePrefixQuery, IMatchPhrasePrefixQuery>))]
 	public interface IMatchPhrasePrefixQuery : IFieldNameQuery
 	{
-		[JsonProperty("analyzer")]
+		[DataMember(Name = "analyzer")]
 		string Analyzer { get; set; }
 
-		[JsonProperty("max_expansions")]
+		[DataMember(Name = "max_expansions")]
 		int? MaxExpansions { get; set; }
 
-		[JsonProperty("query")]
+		[DataMember(Name = "query")]
 		string Query { get; set; }
 
-		[JsonProperty("slop")]
+		[DataMember(Name = "slop")]
 		int? Slop { get; set; }
 
 		/// <summary>
@@ -24,7 +25,7 @@ namespace Nest
 		/// which accepts <see cref="ZeroTermsQuery.None" /> (default) and <see cref="ZeroTermsQuery.All" />
 		/// which corresponds to a match_all query.
 		/// </summary>
-		[JsonProperty("zero_terms_query")]
+		[DataMember(Name = "zero_terms_query")]
 		ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	}
 

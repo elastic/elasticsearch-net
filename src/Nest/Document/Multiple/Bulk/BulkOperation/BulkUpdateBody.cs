@@ -1,26 +1,28 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
+	[DataContract]
 	internal class BulkUpdateBody<TDocument, TPartialUpdate>
 		where TDocument : class
 		where TPartialUpdate : class
 	{
-		[JsonProperty("doc_as_upsert")]
+		[DataMember(Name ="doc_as_upsert")]
 		public bool? _DocAsUpsert { get; set; }
 
-		[JsonProperty("doc")]
-		[JsonConverter(typeof(CollapsedSourceConverter))]
+		[DataMember(Name ="doc")]
+		[JsonFormatter(typeof(CollapsedSourceFormatter<>))]
 		internal TPartialUpdate _PartialUpdate { get; set; }
 
-		[JsonProperty("script")]
+		[DataMember(Name ="script")]
 		internal IScript _Script { get; set; }
 
-		[JsonProperty("scripted_upsert")]
+		[DataMember(Name ="scripted_upsert")]
 		internal bool? _ScriptedUpsert { get; set; }
 
-		[JsonProperty("upsert")]
-		[JsonConverter(typeof(CollapsedSourceConverter))]
+		[DataMember(Name ="upsert")]
+		[JsonFormatter(typeof(CollapsedSourceFormatter<>))]
 		internal TDocument _Upsert { get; set; }
 	}
 }

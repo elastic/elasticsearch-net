@@ -36,7 +36,7 @@ namespace Nest
 		public IStopDatafeedResponse StopDatafeed(IStopDatafeedRequest request) =>
 			Dispatcher.Dispatch<IStopDatafeedRequest, StopDatafeedRequestParameters, StopDatafeedResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackMlStopDatafeedDispatch<StopDatafeedResponse>(p)
+				(p, d) => LowLevelDispatch.MlStopDatafeedDispatch<StopDatafeedResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -52,7 +52,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IStopDatafeedRequest, StopDatafeedRequestParameters, StopDatafeedResponse, IStopDatafeedResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackMlStopDatafeedDispatchAsync<StopDatafeedResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.MlStopDatafeedDispatchAsync<StopDatafeedResponse>(p, c)
 			);
 	}
 }

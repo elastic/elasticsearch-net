@@ -34,7 +34,7 @@ namespace Nest
 		public IPostJobDataResponse PostJobData(IPostJobDataRequest request) =>
 			Dispatcher.Dispatch<IPostJobDataRequest, PostJobDataRequestParameters, PostJobDataResponse>(
 				request,
-				LowLevelDispatch.XpackMlPostDataDispatch<PostJobDataResponse>
+				LowLevelDispatch.MlPostDataDispatch<PostJobDataResponse>
 			);
 
 		/// <inheritdoc />
@@ -50,7 +50,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IPostJobDataRequest, PostJobDataRequestParameters, PostJobDataResponse, IPostJobDataResponse>(
 				request,
 				cancellationToken,
-				LowLevelDispatch.XpackMlPostDataDispatchAsync<PostJobDataResponse>
+				LowLevelDispatch.MlPostDataDispatchAsync<PostJobDataResponse>
 			);
 	}
 }

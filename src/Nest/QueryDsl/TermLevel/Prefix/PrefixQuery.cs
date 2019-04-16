@@ -1,15 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(FieldNameQueryJsonConverter<PrefixQuery>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(FieldNameQueryFormatter<PrefixQuery, IPrefixQuery>))]
 	public interface IPrefixQuery : ITermQuery
 	{
-		[JsonProperty("rewrite")]
+		[DataMember(Name ="rewrite")]
 		MultiTermQueryRewrite Rewrite { get; set; }
 	}
 
+	[DataContract]
 	public class PrefixQuery : FieldNameQueryBase, IPrefixQuery
 	{
 		public MultiTermQueryRewrite Rewrite { get; set; }

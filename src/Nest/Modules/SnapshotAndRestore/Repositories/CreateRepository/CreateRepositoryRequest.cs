@@ -1,9 +1,11 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CreateRepositoryJsonConverter))]
+	[MapsApi("snapshot.create_repository.json")]
+	[JsonFormatter(typeof(CreateRepositoryFormatter))]
 	public partial interface ICreateRepositoryRequest
 	{
 		ISnapshotRepository Repository { get; set; }
@@ -14,7 +16,6 @@ namespace Nest
 		public ISnapshotRepository Repository { get; set; }
 	}
 
-	[DescriptorFor("SnapshotCreateRepository")]
 	public partial class CreateRepositoryDescriptor
 	{
 		ISnapshotRepository ICreateRepositoryRequest.Repository { get; set; }

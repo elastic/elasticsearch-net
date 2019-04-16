@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -11,13 +11,13 @@ namespace Nest
 		/// <summary>
 		/// The count of jobs
 		/// </summary>
-		[JsonProperty("count")]
+		[DataMember(Name ="count")]
 		long Count { get; }
 
 		/// <summary>
 		/// The configuration of machine learning jobs
 		/// </summary>
-		[JsonProperty("jobs")]
+		[DataMember(Name ="jobs")]
 		IReadOnlyCollection<Job> Jobs { get; }
 	}
 

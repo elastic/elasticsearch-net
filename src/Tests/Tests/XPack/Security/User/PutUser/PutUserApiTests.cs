@@ -6,6 +6,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.Xunit;
 using Tests.Framework;
 using Tests.Framework.Integration;
 
@@ -57,7 +58,7 @@ namespace Tests.XPack.Security.User.PutUser
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override string UrlPath => $"/_xpack/security/user/{CallIsolatedValue}";
+		protected override string UrlPath => $"/_security/user/{CallIsolatedValue}";
 
 		private string Email => $"{CallIsolatedValue}@example.example";
 
@@ -74,8 +75,7 @@ namespace Tests.XPack.Security.User.PutUser
 
 		protected override void ExpectResponse(IPutUserResponse response)
 		{
-			response.User.Should().NotBeNull();
-			response.User.Created.Should().BeTrue();
+			response.Created.Should().BeTrue();
 		}
 	}
 

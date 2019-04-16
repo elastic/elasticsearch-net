@@ -34,7 +34,7 @@ namespace Nest
 		public IStopWatcherResponse StopWatcher(IStopWatcherRequest request) =>
 			Dispatcher.Dispatch<IStopWatcherRequest, StopWatcherRequestParameters, StopWatcherResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackWatcherStopDispatch<StopWatcherResponse>(p)
+				(p, d) => LowLevelDispatch.WatcherStopDispatch<StopWatcherResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -50,7 +50,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IStopWatcherRequest, StopWatcherRequestParameters, StopWatcherResponse, IStopWatcherResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackWatcherStopDispatchAsync<StopWatcherResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.WatcherStopDispatchAsync<StopWatcherResponse>(p, c)
 			);
 	}
 }

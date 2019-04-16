@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -9,20 +9,20 @@ namespace Nest
 
 	public interface INodesResponse : IResponse
 	{
-		[JsonProperty("_nodes")]
+		[DataMember(Name = "_nodes")]
 		NodeStatistics NodeStatistics { get; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class NodeStatistics
 	{
-		[JsonProperty]
+		[DataMember(Name = "failed")]
 		public int Failed { get; internal set; }
 
-		[JsonProperty]
+		[DataMember(Name = "successful")]
 		public int Successful { get; internal set; }
 
-		[JsonProperty]
+		[DataMember(Name = "total")]
 		public int Total { get; internal set; }
 
 		//TODO map failures

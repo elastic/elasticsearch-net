@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(MultiSearchTemplateJsonConverter))]
+	[MapsApi("msearch_template.json")]
+	[JsonFormatter(typeof(MultiSearchTemplateFormatter))]
 	public partial interface IMultiSearchTemplateRequest
 	{
 		IDictionary<string, ISearchTemplateRequest> Operations { get; set; }
@@ -17,7 +18,6 @@ namespace Nest
 		protected sealed override void Initialize() => TypedKeys = true;
 	}
 
-	[DescriptorFor("MsearchTemplate")]
 	public partial class MultiSearchTemplateDescriptor
 	{
 		internal IDictionary<string, ISearchTemplateRequest> _operations = new Dictionary<string, ISearchTemplateRequest>();

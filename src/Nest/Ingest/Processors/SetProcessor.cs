@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ProcessorJsonConverter<SetProcessor>))]
+	[InterfaceDataContract]
 	public interface ISetProcessor : IProcessor
 	{
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
-		[JsonProperty("value")]
-		[JsonConverter(typeof(SourceValueWriteConverter))]
+		[DataMember(Name ="value")]
+		[JsonFormatter(typeof(SourceWriteFormatter<>))]
 		object Value { get; set; }
 	}
 

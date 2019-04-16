@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	public interface IReloadSecureSettingsResponse : INodesResponse
 	{
-		[JsonProperty("cluster_name")]
+		[DataMember(Name = "cluster_name")]
 		string ClusterName { get; }
 
-		[JsonProperty("nodes")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, NodeStats>))]
+		[DataMember(Name = "nodes")]
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, NodeStats>))]
 		IReadOnlyDictionary<string, NodeStats> Nodes { get; }
 	}
 

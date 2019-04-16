@@ -1,8 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
 	public interface IStopWatcherResponse : IAcknowledgedResponse { }
 
 	public class StopWatcherResponse : AcknowledgedResponseBase, IStopWatcherResponse { }

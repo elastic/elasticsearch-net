@@ -18,20 +18,20 @@ namespace Tests.Framework.Integration
 		{
 			_prefix = prefix;
 			FixedForAllCallsValue = UniqueValue;
-			SetupClientMethod(Fluent);
+			SetupClientMethod(ClientMethod.Fluent);
 			SetupClientMethod(FluentAsync);
 			SetupClientMethod(Initializer);
 			SetupClientMethod(InitializerAsync);
-			CurrentView = Fluent;
+			CurrentView = ClientMethod.Fluent;
 		}
 
-		public ClientMethod CurrentView { get; set; } = Fluent;
+		public ClientMethod CurrentView { get; set; } = ClientMethod.Fluent;
 		public string FixedForAllCallsValue { get; }
 
 		public string Value => this[CurrentView];
 		public string ViewName => CurrentView.GetStringValue().ToLowerInvariant();
 
-		public ClientMethod[] Views { get; } = { Fluent, FluentAsync, Initializer, InitializerAsync };
+		public ClientMethod[] Views { get; } = { ClientMethod.Fluent, FluentAsync, Initializer, InitializerAsync };
 
 		private IDictionary<ClientMethod, ConcurrentDictionary<string, object>> ExtendedValues { get; }
 			= new Dictionary<ClientMethod, ConcurrentDictionary<string, object>>();

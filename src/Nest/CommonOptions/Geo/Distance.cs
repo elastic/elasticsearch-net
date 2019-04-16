@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
-using Newtonsoft.Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(DistanceJsonConverter))]
+	[JsonFormatter(typeof(DistanceFormatter))]
 	public class Distance
 	{
 		private static readonly Regex _distanceUnitRegex =
@@ -64,5 +64,7 @@ namespace Nest
 		public static Distance NauticalMiles(double nauticalMiles) => new Distance(nauticalMiles, DistanceUnit.NauticalMiles);
 
 		public static implicit operator Distance(string distanceUnit) => new Distance(distanceUnit);
+
+		public override string ToString() => $"{Precision}{Unit.GetStringValue()}";
 	}
 }

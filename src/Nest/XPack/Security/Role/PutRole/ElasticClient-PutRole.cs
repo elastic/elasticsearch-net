@@ -32,7 +32,7 @@ namespace Nest
 		public IPutRoleResponse PutRole(IPutRoleRequest request) =>
 			Dispatcher.Dispatch<IPutRoleRequest, PutRoleRequestParameters, PutRoleResponse>(
 				request,
-				LowLevelDispatch.XpackSecurityPutRoleDispatch<PutRoleResponse>
+				LowLevelDispatch.SecurityPutRoleDispatch<PutRoleResponse>
 			);
 
 		/// <inheritdoc />
@@ -46,7 +46,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IPutRoleRequest, PutRoleRequestParameters, PutRoleResponse, IPutRoleResponse>(
 				request,
 				cancellationToken,
-				LowLevelDispatch.XpackSecurityPutRoleDispatchAsync<PutRoleResponse>
+				LowLevelDispatch.SecurityPutRoleDispatchAsync<PutRoleResponse>
 			);
 	}
 }

@@ -1,21 +1,22 @@
 ﻿using System.Diagnostics;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[InterfaceDataContract]
 	public interface ITokenCountProperty : IDocValuesProperty
 	{
-		[JsonProperty("analyzer")]
+		[DataMember(Name ="analyzer")]
 		string Analyzer { get; set; }
 
-		[JsonProperty("boost")]
+		[DataMember(Name ="boost")]
 		double? Boost { get; set; }
 
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		bool? Index { get; set; }
 
-		[JsonProperty("null_value")]
+		[DataMember(Name ="null_value")]
 		double? NullValue { get; set; }
 	}
 

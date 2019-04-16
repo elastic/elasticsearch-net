@@ -11,7 +11,7 @@ namespace Tests.XPack.Security.RoleMapping.DeleteRoleMapping
 		[U] public override async Task Urls()
 		{
 			var role = "can_read";
-			await DELETE($"/_xpack/security/role_mapping/{role}")
+			await DELETE($"/_security/role_mapping/{role}")
 					.Fluent(c => c.DeleteRoleMapping(role))
 					.Request(c => c.DeleteRoleMapping(new DeleteRoleMappingRequest(role)))
 					.FluentAsync(c => c.DeleteRoleMappingAsync(role))

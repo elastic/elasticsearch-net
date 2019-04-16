@@ -1,9 +1,9 @@
 ﻿namespace Nest
 {
+	[MapsApi("indices.forcemerge.json")]
 	public partial interface IForceMergeRequest { }
 
 	public partial class ForceMergeRequest { }
 
-	[DescriptorFor("IndicesForcemerge")]
 	public partial class ForceMergeDescriptor { }
 }

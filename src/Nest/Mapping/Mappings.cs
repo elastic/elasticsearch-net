@@ -1,58 +1,95 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Mappings, TypeName, ITypeMapping>))]
-	public interface IMappings : IIsADictionary<TypeName, ITypeMapping> { }
-
-	public class Mappings : IsADictionaryBase<TypeName, ITypeMapping>, IMappings
+	/// <summary>
+	/// Types are gone from Elasticsearch 7.x this class solely exist to help you move your complex mappings over
+	/// to the new way of writing the mappings. Use TypeMapping directly instead.
+	/// <pre>
+	/// This class won't receive updates after the 7.0.0 release please be advised to move over if you need to utilize
+	/// new features in the future.
+	/// </pre>
+	/// </summary>
+	[Obsolete("Mappings are no longer type dependend please use TypeMapping directly")]
+	public class Mappings : ObsoleteMappingsBase, ITypeMapping, IEnumerable<ITypeMapping>
 	{
-		public Mappings() { }
+		private IEnumerable<ITypeMapping> AsEnumerable => new[] { new TypeMapping() };
 
-		public Mappings(IDictionary<TypeName, ITypeMapping> container) : base(container) { }
+		public void Add(object _, ITypeMapping mapping) => Wrapped = mapping ?? Wrapped;
+		public ITypeMapping this[object key] => Wrapped;
 
-		public Mappings(Dictionary<TypeName, ITypeMapping> container)
-			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value)) { }
 
-		public void Add(TypeName type, ITypeMapping mapping) => BackingDictionary.Add(type, mapping);
+		public IEnumerator<ITypeMapping> GetEnumerator() => AsEnumerable.GetEnumerator();
+
+		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 	}
 
-	public class MappingsDescriptor : IsADictionaryDescriptorBase<MappingsDescriptor, IMappings, TypeName, ITypeMapping>
+	public abstract class ObsoleteMappingsBase : ITypeMapping
 	{
-		public MappingsDescriptor() : base(new Mappings()) { }
+		[DataMember(Name = "_all")]
+		public IAllField AllField { get => Wrapped.AllField; set => Wrapped.AllField = value; }
+		[DataMember(Name = "date_detection")]
+		bool? ITypeMapping.DateDetection { get => Wrapped.DateDetection; set => Wrapped.DateDetection = value; }
+		[DataMember(Name = "dynamic")]
+		Union<bool, DynamicMapping> ITypeMapping.Dynamic { get => Wrapped.Dynamic; set => Wrapped.Dynamic = value; }
+		[DataMember(Name = "dynamic_date_formats")]
+		IEnumerable<string> ITypeMapping.DynamicDateFormats { get => Wrapped.DynamicDateFormats; set => Wrapped.DynamicDateFormats = value; }
+		[DataMember(Name = "dynamic_templates")]
+		IDynamicTemplateContainer ITypeMapping.DynamicTemplates { get => Wrapped.DynamicTemplates; set => Wrapped.DynamicTemplates = value; }
+		[DataMember(Name = "_field_names")]
+		IFieldNamesField ITypeMapping.FieldNamesField { get => Wrapped.FieldNamesField; set => Wrapped.FieldNamesField = value; }
+		[DataMember(Name = "_index")]
+		IIndexField ITypeMapping.IndexField { get => Wrapped.IndexField; set => Wrapped.IndexField = value; }
+		[DataMember(Name = "_meta")]
+		IDictionary<string, object> ITypeMapping.Meta { get => Wrapped.Meta; set => Wrapped.Meta = value; }
+		[DataMember(Name = "numeric_detection")]
+		bool? ITypeMapping.NumericDetection { get => Wrapped.NumericDetection; set => Wrapped.NumericDetection = value; }
+		[DataMember(Name = "properties")]
+		IProperties ITypeMapping.Properties { get => Wrapped.Properties; set => Wrapped.Properties = value; }
+		[DataMember(Name = "_routing")]
+		IRoutingField ITypeMapping.RoutingField { get => Wrapped.RoutingField; set => Wrapped.RoutingField = value; }
+		[DataMember(Name = "_size")]
+		ISizeField ITypeMapping.SizeField { get => Wrapped.SizeField; set => Wrapped.SizeField = value; }
+		[DataMember(Name = "_source")]
+		ISourceField ITypeMapping.SourceField { get => Wrapped.SourceField; set => Wrapped.SourceField = value; }
+		protected ITypeMapping Wrapped { get; set; } = new TypeMapping();
 
-		internal MappingsDescriptor(IMappings mappings) : base(mappings) { }
-
-		protected MultipleMappingsDescriptor AssignMap(IPromise<IMappings> d) =>
-			new MultipleMappingsDescriptor(d.Value);
-
-		public virtual MultipleMappingsDescriptor Map<T>(Func<TypeMappingDescriptor<T>, ITypeMapping> selector) where T : class =>
-			AssignMap(Assign(typeof(T), selector?.Invoke(new TypeMappingDescriptor<T>())));
-
-		public virtual MultipleMappingsDescriptor Map<T>(TypeName name, Func<TypeMappingDescriptor<T>, ITypeMapping> selector) where T : class =>
-			AssignMap(Assign(name, selector?.Invoke(new TypeMappingDescriptor<T>())));
-
-		public virtual MultipleMappingsDescriptor Map(TypeName name, Func<TypeMappingDescriptor<object>, ITypeMapping> selector) =>
-			AssignMap(Assign(name, selector?.Invoke(new TypeMappingDescriptor<object>())));
 	}
 
-	public class MultipleMappingsDescriptor : MappingsDescriptor
+	/// <summary>
+	/// The common pattern in NEST is that you can call fluent methods multiple types overriding what was previously set.
+	/// This type prevents a user to call Map() multiple times with different types making it crystal clear not only can you
+	/// no longer have multiple types in an index <see cref="MappingsDescriptor"/> makes the overloads that take type obsolete
+	/// as well. Both <see cref="PreventMappingMultipleTypesDescriptor"/> and <see cref="MappingsDescriptor"/> are obsolete.
+	/// Please move to
+	/// </summary>
+	public class PreventMappingMultipleTypesDescriptor : ObsoleteMappingsBase, IDescriptor
 	{
-		internal MultipleMappingsDescriptor(IMappings mappings) : base(mappings) { }
-#pragma warning disable 0809
-		[Obsolete("Mapping multiple types is no longer supported on indices created in Elasticsearch 6.x and up")]
-		public override MultipleMappingsDescriptor Map<T>(Func<TypeMappingDescriptor<T>, ITypeMapping> selector) =>
-			AssignMap(Assign(typeof(T), selector?.Invoke(new TypeMappingDescriptor<T>())));
+		internal PreventMappingMultipleTypesDescriptor(ITypeMapping mapping) => Wrapped = mapping;
+	}
 
-		[Obsolete("Mapping multiple types is no longer supported on indices created in Elasticsearch 6.x and up")]
-		public override MultipleMappingsDescriptor Map<T>(TypeName name, Func<TypeMappingDescriptor<T>, ITypeMapping> selector) =>
-			AssignMap(Assign(name, selector?.Invoke(new TypeMappingDescriptor<T>())));
+	[Obsolete("MappingsDescriptor is obsolete since 7.x Elasticsearch no longer treats mappings as a dictionary. Please use TypeMappingsDescriptor")]
+	public class MappingsDescriptor : IDescriptor
+	{
+		[Obsolete("MappingsDescriptor is obsolete please call Map() on the parent descriptor")]
+		public ITypeMapping Map<T>(Func<TypeMappingDescriptor<T>, ITypeMapping> selector) where T : class =>
+			new PreventMappingMultipleTypesDescriptor(selector?.Invoke(new TypeMappingDescriptor<T>()));
 
-		[Obsolete("Mapping multiple types is no longer supported on indices created in Elasticsearch 6.x and up")]
-		public override MultipleMappingsDescriptor Map(TypeName name, Func<TypeMappingDescriptor<object>, ITypeMapping> selector) =>
-			AssignMap(Assign(name, selector?.Invoke(new TypeMappingDescriptor<object>())));
+		[Obsolete("MappingsDescriptor is obsolete please call Map() on the parent descriptor")]
+		public ITypeMapping Map(Func<TypeMappingDescriptor<object>, ITypeMapping> selector) =>
+			new PreventMappingMultipleTypesDescriptor(selector?.Invoke(new TypeMappingDescriptor<object>()));
+
+		[Obsolete("Types are gone from Elasticsearch 7.x the first argument is completely ignored please remove it as we will in 8.x")]
+		public ITypeMapping Map<T>(object type, Func<TypeMappingDescriptor<T>, ITypeMapping> selector) where T : class =>
+			new PreventMappingMultipleTypesDescriptor(selector?.Invoke(new TypeMappingDescriptor<T>()));
+
+		[Obsolete("Types are gone from Elasticsearch 7.x the first argument is completely ignored please remove it as we will in 8.x")]
+		public ITypeMapping Map(object type, Func<TypeMappingDescriptor<object>, ITypeMapping> selector) =>
+			new PreventMappingMultipleTypesDescriptor(selector?.Invoke(new TypeMappingDescriptor<object>()));
 	}
 }

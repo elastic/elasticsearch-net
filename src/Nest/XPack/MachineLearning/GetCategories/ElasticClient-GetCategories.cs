@@ -36,7 +36,7 @@ namespace Nest
 		public IGetCategoriesResponse GetCategories(IGetCategoriesRequest request) =>
 			Dispatcher.Dispatch<IGetCategoriesRequest, GetCategoriesRequestParameters, GetCategoriesResponse>(
 				request,
-				LowLevelDispatch.XpackMlGetCategoriesDispatch<GetCategoriesResponse>
+				LowLevelDispatch.MlGetCategoriesDispatch<GetCategoriesResponse>
 			);
 
 		/// <inheritdoc />
@@ -52,7 +52,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IGetCategoriesRequest, GetCategoriesRequestParameters, GetCategoriesResponse, IGetCategoriesResponse>(
 				request,
 				cancellationToken,
-				LowLevelDispatch.XpackMlGetCategoriesDispatchAsync<GetCategoriesResponse>
+				LowLevelDispatch.MlGetCategoriesDispatchAsync<GetCategoriesResponse>
 			);
 	}
 }

@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.Xunit;
 using Tests.Domain;
 using Tests.Domain.Extensions;
 using Tests.Framework;
@@ -58,7 +59,7 @@ namespace Tests.Document.Single.Create
 			};
 
 		protected override string UrlPath
-			=> $"/project/doc/{CallIsolatedValue}/_create?wait_for_active_shards=1&refresh=true&routing=route";
+			=> $"/project/_create/{CallIsolatedValue}?wait_for_active_shards=1&refresh=true&routing=route";
 
 		private Project Document => new Project
 		{
@@ -96,7 +97,7 @@ namespace Tests.Document.Single.Create
 			createResponse.ApiCall.HttpStatusCode.Should().Be(201);
 			createResponse.Result.Should().Be(Result.Created);
 			createResponse.Index.Should().Be(index);
-			createResponse.Type.Should().Be(Client.Infer.TypeName<Project>());
+			createResponse.Type.Should().Be("_doc");
 			createResponse.Id.Should().Be(project.Name);
 
 			createResponse.Shards.Should().NotBeNull();
@@ -114,6 +115,7 @@ namespace Tests.Document.Single.Create
 		}
 	}
 
+	[JsonNetSerializerOnly]
 	public class CreateJObjectIntegrationTests : IntegrationDocumentationTestBase, IClusterFixture<WritableCluster>
 	{
 		public CreateJObjectIntegrationTests(WritableCluster cluster) : base(cluster) { }
@@ -150,7 +152,7 @@ namespace Tests.Document.Single.Create
 			createResponse.ApiCall.HttpStatusCode.Should().Be(201);
 			createResponse.Result.Should().Be(Result.Created);
 			createResponse.Index.Should().Be(index);
-			createResponse.Type.Should().Be("jobject");
+			createResponse.Type.Should().Be("_doc");
 
 			var bulkResponse = Client.Bulk(b => b
 				.Index(index)
@@ -172,8 +174,7 @@ namespace Tests.Document.Single.Create
 	{
 		public CreateAnonymousTypesIntegrationTests(WritableCluster cluster) : base(cluster) { }
 
-		[I]
-		public void Create()
+		[I] public void Create()
 		{
 			var index = RandomString();
 			var anonymousType = new
@@ -197,7 +198,7 @@ namespace Tests.Document.Single.Create
 			createResponse.ApiCall.HttpStatusCode.Should().Be(201);
 			createResponse.Index.Should().Be(index);
 			createResponse.Result.Should().Be(Result.Created);
-			createResponse.Type.Should().StartWith("<>");
+			createResponse.Type.Should().StartWith("_doc");
 		}
 	}
 }

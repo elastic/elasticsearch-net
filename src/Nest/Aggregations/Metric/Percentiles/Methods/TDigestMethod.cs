@@ -1,11 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[InterfaceDataContract]
 	public interface ITDigestMethod : IPercentilesMethod
 	{
-		[JsonProperty("compression")]
+		[DataMember(Name ="compression")]
 		double? Compression { get; set; }
 	}
 

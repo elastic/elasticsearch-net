@@ -1,26 +1,27 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<NestedQueryDescriptor<object>>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(NestedQuery))]
 	public interface INestedQuery : IQuery
 	{
-		[JsonProperty("ignore_unmapped")]
+		[DataMember(Name ="ignore_unmapped")]
 		bool? IgnoreUnmapped { get; set; }
 
-		[JsonProperty("inner_hits")]
+		[DataMember(Name ="inner_hits")]
 		IInnerHits InnerHits { get; set; }
 
-		[JsonProperty("path")]
+		[DataMember(Name ="path")]
 		Field Path { get; set; }
 
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		QueryContainer Query { get; set; }
 
-		[JsonProperty("score_mode")]
+		[DataMember(Name ="score_mode")]
 		NestedScoreMode? ScoreMode { get; set; }
 	}
 
@@ -38,7 +39,6 @@ namespace Nest
 		internal static bool IsConditionless(INestedQuery q) => q.Path == null || q.Query.IsConditionless();
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class NestedQueryDescriptor<T>
 		: QueryDescriptorBase<NestedQueryDescriptor<T>, INestedQuery>
 			, INestedQuery where T : class

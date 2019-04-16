@@ -1,23 +1,24 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReserializeJsonConverter<TransformContainer, ITransformContainer>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(TransformContainer))]
 	public interface ITransformContainer
 	{
-		[JsonProperty("chain")]
+		[DataMember(Name ="chain")]
 		IChainTransform Chain { get; set; }
 
-		[JsonProperty("script")]
+		[DataMember(Name ="script")]
 		IScriptTransform Script { get; set; }
 
-		[JsonProperty("search")]
+		[DataMember(Name ="search")]
 		ISearchTransform Search { get; set; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public class TransformContainer : ITransformContainer, IDescriptor
 	{
 		internal TransformContainer() { }
@@ -30,7 +31,6 @@ namespace Nest
 
 		IChainTransform ITransformContainer.Chain { get; set; }
 		IScriptTransform ITransformContainer.Script { get; set; }
-
 		ISearchTransform ITransformContainer.Search { get; set; }
 	}
 

@@ -6,6 +6,7 @@ namespace Nest
 	/// <summary>
 	/// A custom similarity
 	/// </summary>
+	[ReadAs(typeof(CustomSimilarity))]
 	public interface ICustomSimilarity : ISimilarity, IIsADictionary<string, object> { }
 
 	/// <inheritdoc />

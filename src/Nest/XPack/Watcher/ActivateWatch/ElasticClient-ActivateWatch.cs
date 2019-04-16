@@ -36,7 +36,7 @@ namespace Nest
 		public IActivateWatchResponse ActivateWatch(IActivateWatchRequest request) =>
 			Dispatcher.Dispatch<IActivateWatchRequest, ActivateWatchRequestParameters, ActivateWatchResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackWatcherActivateWatchDispatch<ActivateWatchResponse>(p)
+				(p, d) => LowLevelDispatch.WatcherActivateWatchDispatch<ActivateWatchResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -52,7 +52,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IActivateWatchRequest, ActivateWatchRequestParameters, ActivateWatchResponse, IActivateWatchResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackWatcherActivateWatchDispatchAsync<ActivateWatchResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.WatcherActivateWatchDispatchAsync<ActivateWatchResponse>(p, c)
 			);
 	}
 }

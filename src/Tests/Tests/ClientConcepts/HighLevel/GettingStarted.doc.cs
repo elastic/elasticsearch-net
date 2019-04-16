@@ -9,6 +9,8 @@ using Nest;
 
 namespace Tests.ClientConcepts.HighLevel
 {
+	//TODO update documentation here to reflect type removal
+
 	/**[[nest-getting-started]]
 	 * == Getting started
 	 *
@@ -143,29 +145,12 @@ namespace Tests.ClientConcepts.HighLevel
 
 		/**
 		 * `people` now holds the first ten people whose first name is Martijn. The search endpoint for this query is
-		 * `/people/person/_search` and the index (`"people"`) and type (`"person"`) values has been determined from
+		 * `/people/_search` and the index (`"people"`) has been determined from
 		 *
 		 * . the default index on `ConnectionSettings`
 		 * . the `Person` generic type parameter on the search.
 		 *
-		 * All types within an index can be searched using `.AllTypes()`
-		 */
-		public void SearchingAllTypes()
-		{
-			var searchResponse = client.Search<Person>(s => s
-				.AllTypes()
-				.From(0)
-				.Size(10)
-				.Query(q => q
-					 .Match(m => m
-						.Field(f => f.FirstName)
-						.Query("Martijn")
-					 )
-				)
-			);
-		}
-
-		/**
+		 *
 		 * which generates a request to the search endpoint `/people/_search`, using the default index specified on `ConnectionSettings` as the index
 		 * in the search request.
 		 *
@@ -187,7 +172,7 @@ namespace Tests.ClientConcepts.HighLevel
 		}
 
 		/**
-		 * which generates a request to the search endpoint `/_all/person/_search`, taking the `person` type from the generic type parameter on the search
+		 * which generates a request to the search endpoint `/_search`, taking the `person` type from the generic type parameter on the search
 		 * method.
 		 *
 		 * Both `.AllTypes()` and `.AllIndices()` can be provided to perform a search across _all_ types in _all_ indices, generating a request to `/_search`
@@ -196,7 +181,6 @@ namespace Tests.ClientConcepts.HighLevel
 		{
 			var searchResponse = await client.SearchAsync<Person>(s => s
 				.AllIndices()
-				.AllTypes()
 				.From(0)
 				.Size(10)
 				.Query(q => q
@@ -222,7 +206,7 @@ namespace Tests.ClientConcepts.HighLevel
 		 */
 		public async Task ObjectInitializerSyntax()
 		{
-			var searchRequest = new SearchRequest<Person>(Nest.Indices.All, Types.All) //<1> All indices and types are specified in the constructor
+			var searchRequest = new SearchRequest<Person>(Nest.Indices.All) //<1> All indices and types are specified in the constructor
 			{
 				From = 0,
 				Size = 10,
@@ -254,7 +238,7 @@ namespace Tests.ClientConcepts.HighLevel
 
 		public void SearchingWithTheLowLevelClient()
 		{
-			var searchResponse = client.LowLevel.Search<SearchResponse<Person>>("people", "person", PostData.Serializable(new
+			var searchResponse = client.LowLevel.Search<SearchResponse<Person>>("people", PostData.Serializable(new
 			{
 				from = 0,
 				size = 10,

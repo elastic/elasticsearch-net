@@ -34,7 +34,7 @@ namespace Nest
 		public IPutJobResponse PutJob(IPutJobRequest request) =>
 			Dispatcher.Dispatch<IPutJobRequest, PutJobRequestParameters, PutJobResponse>(
 				request,
-				LowLevelDispatch.XpackMlPutJobDispatch<PutJobResponse>
+				LowLevelDispatch.MlPutJobDispatch<PutJobResponse>
 			);
 
 		/// <inheritdoc />
@@ -48,7 +48,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IPutJobRequest, PutJobRequestParameters, PutJobResponse, IPutJobResponse>(
 				request,
 				cancellationToken,
-				LowLevelDispatch.XpackMlPutJobDispatchAsync<PutJobResponse>
+				LowLevelDispatch.MlPutJobDispatchAsync<PutJobResponse>
 			);
 	}
 }

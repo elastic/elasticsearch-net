@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.Xunit;
 using Tests.Domain;
 using Tests.Domain.Extensions;
 using Tests.Framework;
@@ -60,7 +61,7 @@ namespace Tests.Document.Single.Index
 			};
 
 		protected override string UrlPath
-			=> $"/project/doc/{CallIsolatedValue}?wait_for_active_shards=1&op_type=index&refresh=true&routing=route";
+			=> $"/project/_doc/{CallIsolatedValue}?wait_for_active_shards=1&op_type=index&refresh=true&routing=route";
 
 		private Project Document => new Project
 		{
@@ -98,7 +99,7 @@ namespace Tests.Document.Single.Index
 			indexResult.ApiCall.HttpStatusCode.Should().Be(201);
 			indexResult.Result.Should().Be(Result.Created);
 			indexResult.Index.Should().Be(indexName);
-			indexResult.Type.Should().Be(Client.Infer.TypeName<Project>());
+			indexResult.Type.Should().Be("_doc");
 			indexResult.Id.Should().Be(project.Name);
 
 			indexResult = Client.Index(project, f => f
@@ -123,7 +124,7 @@ namespace Tests.Document.Single.Index
 			indexResult.ApiCall.HttpStatusCode.Should().Be(201);
 			indexResult.Result.Should().Be(Result.Created);
 			indexResult.Index.Should().Be(indexName);
-			indexResult.Type.Should().Be(Client.Infer.TypeName<CommitActivity>());
+			indexResult.Type.Should().Be("_doc");
 			indexResult.Id.Should().Be(commitActivity.Id);
 			indexResult.Version.Should().Be(1);
 			indexResult.Shards.Should().NotBeNull();
@@ -141,6 +142,7 @@ namespace Tests.Document.Single.Index
 		}
 	}
 
+	[JsonNetSerializerOnly]
 	public class IndexJObjectIntegrationTests : IntegrationDocumentationTestBase, IClusterFixture<WritableCluster>
 	{
 		public IndexJObjectIntegrationTests(WritableCluster cluster) : base(cluster) { }
@@ -177,7 +179,7 @@ namespace Tests.Document.Single.Index
 			indexResult.ApiCall.HttpStatusCode.Should().Be(201);
 			indexResult.Result.Should().Be(Result.Created);
 			indexResult.Index.Should().Be(index);
-			indexResult.Type.Should().Be("jobject");
+			indexResult.Type.Should().Be("_doc");
 			indexResult.Shards.Should().NotBeNull();
 			indexResult.Shards.Total.Should().BeGreaterOrEqualTo(1);
 			indexResult.Shards.Successful.Should().BeGreaterOrEqualTo(1);
@@ -209,8 +211,7 @@ namespace Tests.Document.Single.Index
 	{
 		public IndexAnonymousTypesIntegrationTests(WritableCluster cluster) : base(cluster) { }
 
-		[I]
-		public void Index()
+		[I] public void Index()
 		{
 			var index = RandomString();
 			var anonymousType = new
@@ -234,7 +235,7 @@ namespace Tests.Document.Single.Index
 			indexResult.ApiCall.HttpStatusCode.Should().Be(201);
 			indexResult.Result.Should().Be(Result.Created);
 			indexResult.Index.Should().Be(index);
-			indexResult.Type.Should().StartWith("<>");
+			indexResult.Type.Should().StartWith("_doc");
 			indexResult.Shards.Should().NotBeNull();
 			indexResult.Shards.Total.Should().BeGreaterOrEqualTo(1);
 			indexResult.Shards.Successful.Should().BeGreaterOrEqualTo(1);

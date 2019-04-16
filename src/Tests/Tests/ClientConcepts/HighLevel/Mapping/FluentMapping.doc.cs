@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Text;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Tests.Core.Client;
 using Tests.Framework;
 using static Tests.Core.Serialization.SerializationTestHelper;
@@ -55,25 +55,23 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			 * and map each property explicitly
 			 */
 			var createIndexResponse = _client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<Company>(m => m
-						.Properties(ps => ps
-							.Text(s => s
-								.Name(n => n.Name)
-							)
-							.Object<Employee>(o => o
-								.Name(n => n.Employees)
-								.Properties(eps => eps
-									.Text(s => s
-										.Name(e => e.FirstName)
-									)
-									.Text(s => s
-										.Name(e => e.LastName)
-									)
-									.Number(n => n
-										.Name(e => e.Salary)
-										.Type(NumberType.Integer)
-									)
+				.Map<Company>(m => m
+					.Properties(ps => ps
+						.Text(s => s
+							.Name(n => n.Name)
+						)
+						.Object<Employee>(o => o
+							.Name(n => n.Employees)
+							.Properties(eps => eps
+								.Text(s => s
+									.Name(e => e.FirstName)
+								)
+								.Text(s => s
+									.Name(e => e.LastName)
+								)
+								.Number(n => n
+									.Name(e => e.Salary)
+									.Type(NumberType.Integer)
 								)
 							)
 						)
@@ -93,31 +91,28 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					company = new
+					properties = new
 					{
-						properties = new
+						name = new
 						{
-							name = new
+							type = "text"
+						},
+						employees = new
+						{
+							type = "object",
+							properties = new
 							{
-								type = "text"
-							},
-							employees = new
-							{
-								type = "object",
-								properties = new
+								firstName = new
 								{
-									firstName = new
-									{
-										type = "text"
-									},
-									lastName = new
-									{
-										type = "text"
-									},
-									salary = new
-									{
-										type = "integer"
-									}
+									type = "text"
+								},
+								lastName = new
+								{
+									type = "text"
+								},
+								salary = new
+								{
+									type = "integer"
 								}
 							}
 						}
@@ -154,13 +149,11 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			* `List<Employee>` property as an `object` datatype
 			*/
 			var createIndexResponse = _client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<Company>(m => m
-						.AutoMap()
-						.Properties(ps => ps
-							.Nested<Employee>(n => n
-								.Name(nn => nn.Employees)
-							)
+				.Map<Company>(m => m
+					.AutoMap()
+					.Properties(ps => ps
+						.Nested<Employee>(n => n
+							.Name(nn => nn.Employees)
 						)
 					)
 				)
@@ -171,26 +164,23 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					company = new
+					properties = new
 					{
-						properties = new
+						name = new
 						{
-							name = new
+							type = "text",
+							fields = new
 							{
-								type = "text",
-								fields = new
+								keyword = new
 								{
-									keyword = new
-									{
-										type = "keyword",
-										ignore_above = 256
-									}
+									type = "keyword",
+									ignore_above = 256
 								}
-							},
-							employees = new
-							{
-								type = "nested",
 							}
+						},
+						employees = new
+						{
+							type = "nested",
 						}
 					}
 				}
@@ -205,15 +195,13 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			 * generates the same mapping as the previous
 			 */
 			createIndexResponse = _client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<Company>(m => m
-						.Properties(ps => ps
-							.Nested<Employee>(n => n
-								.Name(nn => nn.Employees)
-							)
+				.Map<Company>(m => m
+					.Properties(ps => ps
+						.Nested<Employee>(n => n
+							.Name(nn => nn.Employees)
 						)
-						.AutoMap()
 					)
+					.AutoMap()
 				)
 			);
 
@@ -230,7 +218,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		 *
 		 * Consider the following two POCOS
 		 */
-		[ElasticsearchType(Name = "company")]
+		[ElasticsearchType(RelationName = "company")]
 		public class CompanyWithAttributes
 		{
 			[Keyword(NullValue = "null", Similarity = "BM25")]
@@ -243,7 +231,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			public List<EmployeeWithAttributes> Employees { get; set; }
 		}
 
-		[ElasticsearchType(Name = "employee")]
+		[ElasticsearchType(RelationName = "employee")]
 		public class EmployeeWithAttributes
 		{
 			[Text(Name = "first_name")]
@@ -274,35 +262,33 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		public void OverridingAutoMappedAttributes()
 		{
 			var createIndexResponse = _client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<CompanyWithAttributes>(m => m
-						.AutoMap() // <1> Automap company
-						.Properties(ps => ps // <2> Override company inferred mappings
-							.Nested<EmployeeWithAttributes>(n => n
-								.Name(nn => nn.Employees)
-								.AutoMap() // <3> Automap nested employee type
-								.Properties(pps => pps // <4> Override employee inferred mappings
-									.Text(s => s
-										.Name(e => e.FirstName)
-										.Fields(fs => fs
-											.Keyword(ss => ss
-												.Name("firstNameRaw")
-											)
-											.TokenCount(t => t
-												.Name("length")
-												.Analyzer("standard")
-											)
+				.Map<CompanyWithAttributes>(m => m
+					.AutoMap() // <1> Automap company
+					.Properties(ps => ps // <2> Override company inferred mappings
+						.Nested<EmployeeWithAttributes>(n => n
+							.Name(nn => nn.Employees)
+							.AutoMap() // <3> Automap nested employee type
+							.Properties(pps => pps // <4> Override employee inferred mappings
+								.Text(s => s
+									.Name(e => e.FirstName)
+									.Fields(fs => fs
+										.Keyword(ss => ss
+											.Name("firstNameRaw")
+										)
+										.TokenCount(t => t
+											.Name("length")
+											.Analyzer("standard")
 										)
 									)
-									.Number(nu => nu
-										.Name(e => e.Salary)
-										.Type(NumberType.Double)
-										.IgnoreMalformed(false)
-									)
-									.Date(d => d
-										.Name(e => e.Birthday)
-										.Format("MM-dd-yy")
-									)
+								)
+								.Number(nu => nu
+									.Name(e => e.Salary)
+									.Type(NumberType.Double)
+									.IgnoreMalformed(false)
+								)
+								.Date(d => d
+									.Name(e => e.Birthday)
+									.Format("MM-dd-yy")
 								)
 							)
 						)
@@ -315,115 +301,112 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					company = new
+					properties = new
 					{
-						properties = new
+						employees = new
 						{
-							employees = new
+							type = "nested",
+							properties = new
 							{
-								type = "nested",
-								properties = new
+								birthday = new
 								{
-									birthday = new
+									format = "MM-dd-yy",
+									type = "date"
+								},
+								empl = new
+								{
+									properties = new
 									{
-										format = "MM-dd-yy",
-										type = "date"
-									},
-									empl = new
-									{
-										properties = new
+										birthday = new
 										{
-											birthday = new
-											{
-												type = "date"
-											},
-											employees = new
-											{
-												properties = new {},
-												type = "object"
-											},
-											firstName = new
-											{
-												fields = new
-												{
-													keyword = new
-													{
-														type = "keyword",
-														ignore_above = 256
-													}
-												},
-												type = "text"
-											},
-											hours = new
-											{
-												type = "long"
-											},
-											isManager = new
-											{
-												type = "boolean"
-											},
-											lastName = new
-											{
-												fields = new
-												{
-													keyword = new
-													{
-														type = "keyword",
-														ignore_above = 256
-													}
-												},
-												type = "text"
-											},
-											salary = new
-											{
-												type = "integer"
-											}
+											type = "date"
 										},
-										type = "nested"
-									},
-									first_name = new
-									{
-										fields = new
+										employees = new
 										{
-											firstNameRaw = new
-											{
-												type = "keyword"
-											},
-											length = new
-											{
-												analyzer = "standard",
-												type = "token_count"
-											}
+											properties = new {},
+											type = "object"
 										},
-										type = "text"
+										firstName = new
+										{
+											fields = new
+											{
+												keyword = new
+												{
+													type = "keyword",
+													ignore_above = 256
+												}
+											},
+											type = "text"
+										},
+										hours = new
+										{
+											type = "long"
+										},
+										isManager = new
+										{
+											type = "boolean"
+										},
+										lastName = new
+										{
+											fields = new
+											{
+												keyword = new
+												{
+													type = "keyword",
+													ignore_above = 256
+												}
+											},
+											type = "text"
+										},
+										salary = new
+										{
+											type = "integer"
+										}
 									},
-									isManager = new
+									type = "nested"
+								},
+								first_name = new
+								{
+									fields = new
 									{
-										null_value = false,
-										store = true,
-										type = "boolean"
+										firstNameRaw = new
+										{
+											type = "keyword"
+										},
+										length = new
+										{
+											analyzer = "standard",
+											type = "token_count"
+										}
 									},
-									last_name = new
-									{
-										type = "text"
-									},
-									salary = new
-									{
-										ignore_malformed = false,
-										type = "double"
-									}
+									type = "text"
+								},
+								isManager = new
+								{
+									null_value = false,
+									store = true,
+									type = "boolean"
+								},
+								last_name = new
+								{
+									type = "text"
+								},
+								salary = new
+								{
+									ignore_malformed = false,
+									type = "double"
 								}
-							},
-							name = new
-							{
-								null_value = "null",
-								similarity = "BM25",
-								type = "keyword"
-							},
-							office_hours = new
-							{
-								type = "text"
 							}
+						},
+						name = new
+						{
+							null_value = "null",
+							similarity = "BM25",
+							type = "keyword"
+						},
+						office_hours = new
+						{
+							type = "text"
 						}
 					}
 				}

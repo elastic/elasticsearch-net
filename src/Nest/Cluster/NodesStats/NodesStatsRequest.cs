@@ -1,9 +1,9 @@
 ﻿namespace Nest
 {
+	[MapsApi("nodes.stats.json")]
 	public partial interface INodesStatsRequest { }
 
 	public partial class NodesStatsRequest { }
 
-	[DescriptorFor("NodesStats")]
 	public partial class NodesStatsDescriptor { }
 }

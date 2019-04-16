@@ -1,16 +1,17 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SlackDynamicAttachment>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(SlackDynamicAttachment))]
 	public interface ISlackDynamicAttachment
 	{
-		[JsonProperty("attachment_template")]
+		[DataMember(Name = "attachment_template")]
 		ISlackAttachment AttachmentTemplate { get; set; }
 
-		[JsonProperty("list_path")]
+		[DataMember(Name = "list_path")]
 		string ListPath { get; set; }
 	}
 

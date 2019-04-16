@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
@@ -19,20 +20,20 @@ namespace Tests.Document.Multiple.Bulk
 		protected override object ExpectJson => new object[]
 		{
 			new Dictionary<string, object>
-				{ { "index", new { _type = "doc", _id = Project.Instance.Name, pipeline = "pipeline", routing = Project.Instance.Name } } },
+				{ { "index", new { _id = Project.Instance.Name, pipeline = "pipeline", routing = Project.Instance.Name } } },
 			Project.InstanceAnonymous,
-			new Dictionary<string, object> { { "update", new { _type = "doc", _id = Project.Instance.Name } } },
+			new Dictionary<string, object> { { "update", new { _id = Project.Instance.Name } } },
 			new { doc = new { leadDeveloper = new { firstName = "martijn" } } },
 			new Dictionary<string, object>
-				{ { "create", new { _type = "doc", _id = Project.Instance.Name + "1", routing = Project.Instance.Name } } },
+				{ { "create", new { _id = Project.Instance.Name + "1", routing = Project.Instance.Name } } },
 			Project.InstanceAnonymous,
 			new Dictionary<string, object>
-				{ { "delete", new { _type = "doc", _id = Project.Instance.Name + "1", routing = Project.Instance.Name } } },
+				{ { "delete", new { _id = Project.Instance.Name + "1", routing = Project.Instance.Name } } },
 			new Dictionary<string, object>
-				{ { "create", new { _type = "doc", _id = Project.Instance.Name + "2", routing = Project.Instance.Name } } },
+				{ { "create", new { _id = Project.Instance.Name + "2", routing = Project.Instance.Name } } },
 			Project.InstanceAnonymous,
 			new Dictionary<string, object>
-				{ { "update", new { _type = "doc", _id = Project.Instance.Name + "2", routing = Project.Instance.Name } } },
+				{ { "update", new { _id = Project.Instance.Name + "2", routing = Project.Instance.Name } } },
 			new Dictionary<string, object>
 			{
 				{
@@ -120,18 +121,14 @@ namespace Tests.Document.Multiple.Bulk
 					.Set<Project>(t => t.Field(f => f.Description).Value("Default"))
 				)
 			);
-
-			if (!pipelineResponse.IsValid)
-				throw new Exception("Failed to set up pipeline named 'default-pipeline' required for bulk");
+			pipelineResponse.ShouldBeValid("Failed to set up pipeline named 'default-pipeline' required for bulk {p");
 
 			pipelineResponse = client.PutPipeline("pipeline", p => p
 				.Processors(pr => pr
 					.Set<Project>(t => t.Field(f => f.Description).Value("Overridden"))
 				)
 			);
-
-			if (!pipelineResponse.IsValid)
-				throw new Exception($"Failed to set up pipeline named 'pipeline' required for bulk");
+			pipelineResponse.ShouldBeValid($"Failed to set up pipeline named 'pipeline' required for bulk");
 
 			base.IntegrationSetup(client, values);
 		}
@@ -145,7 +142,7 @@ namespace Tests.Document.Multiple.Bulk
 			foreach (var item in response.Items)
 			{
 				item.Index.Should().Be(CallIsolatedValue);
-				item.Type.Should().Be("doc");
+				item.Type.Should().Be("_doc");
 				item.Status.Should().BeGreaterThan(100);
 				item.Version.Should().BeGreaterThan(0);
 				item.Id.Should().NotBeNullOrWhiteSpace();

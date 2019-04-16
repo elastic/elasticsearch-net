@@ -1,9 +1,9 @@
 using System.Diagnostics;
-using Newtonsoft.Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[InterfaceDataContract]
 	public interface IBinaryProperty : IDocValuesProperty { }
 
 	[DebuggerDisplay("{DebugDisplay}")]

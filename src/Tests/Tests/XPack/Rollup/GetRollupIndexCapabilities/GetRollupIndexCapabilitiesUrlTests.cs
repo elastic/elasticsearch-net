@@ -11,7 +11,7 @@ namespace Tests.XPack.Rollup.GetRollupIndexCapabilities
 		[U] public override async Task Urls()
 		{
 			const string index = "rollup-index";
-			await GET($"{index}/_xpack/rollup/data")
+			await GET($"{index}/_rollup/data")
 				.Fluent(c => c.GetRollupIndexCapabilities(index))
 				.Request(c => c.GetRollupIndexCapabilities(new GetRollupIndexCapabilitiesRequest(index)))
 				.FluentAsync(c => c.GetRollupIndexCapabilitiesAsync(index))

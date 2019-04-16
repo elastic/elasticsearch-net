@@ -1,18 +1,19 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<IpRangeAggregationRange>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(IpRangeAggregationRange))]
 	public interface IIpRangeAggregationRange
 	{
-		[JsonProperty("from")]
+		[DataMember(Name ="from")]
 		string From { get; set; }
 
-		[JsonProperty("mask")]
+		[DataMember(Name ="mask")]
 		string Mask { get; set; }
 
-		[JsonProperty("to")]
+		[DataMember(Name ="to")]
 		string To { get; set; }
 	}
 

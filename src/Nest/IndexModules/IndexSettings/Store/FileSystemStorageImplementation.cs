@@ -1,13 +1,13 @@
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using Elasticsearch.Net;
+
 
 namespace Nest
 {
 	/// <summary>
 	/// The store module allows you to control how index data is stored and accessed on disk.
 	/// </summary>
-	[JsonConverter(typeof(StringEnumConverter))]
+	[StringEnum]
 	public enum FileSystemStorageImplementation
 	{
 		/// <summary>

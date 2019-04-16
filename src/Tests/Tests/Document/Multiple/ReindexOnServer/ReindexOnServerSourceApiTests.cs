@@ -23,13 +23,11 @@ namespace Tests.Document.Multiple.ReindexOnServer
 				dest = new
 				{
 					index = $"{CallIsolatedValue}-clone",
-					type = "test",
 				},
 				source = new
 				{
 					index = CallIsolatedValue,
 					_source = new[] { "id", "flag" },
-					type = new[] { "test" },
 				},
 				conflicts = "proceed"
 			};
@@ -39,7 +37,6 @@ namespace Tests.Document.Multiple.ReindexOnServer
 		protected override Func<ReindexOnServerDescriptor, IReindexOnServerRequest> Fluent => d => d
 			.Source(s => s
 				.Index(CallIsolatedValue)
-				.Type("test")
 				.Source<Test>(f => f
 					.Field(ff => ff.Id)
 					.Field(ff => ff.Flag)
@@ -47,7 +44,6 @@ namespace Tests.Document.Multiple.ReindexOnServer
 			)
 			.Destination(s => s
 				.Index(CallIsolatedValue + "-clone")
-				.Type("test")
 			)
 			.Conflicts(Conflicts.Proceed)
 			.Refresh();
@@ -59,7 +55,6 @@ namespace Tests.Document.Multiple.ReindexOnServer
 			Source = new ReindexSource
 			{
 				Index = CallIsolatedValue,
-				Type = "test",
 				Source = Fields<Test>(
 					ff => ff.Id,
 					ff => ff.Flag
@@ -68,7 +63,6 @@ namespace Tests.Document.Multiple.ReindexOnServer
 			Destination = new ReindexDestination
 			{
 				Index = CallIsolatedValue + "-clone",
-				Type = Type<Test>(),
 			},
 			Conflicts = Conflicts.Proceed,
 			Refresh = true,

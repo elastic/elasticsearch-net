@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
+	[InterfaceDataContract]
 	public interface IFieldSort : ISort
 	{
-		[JsonProperty("ignore_unmapped")]
+		[DataMember(Name ="ignore_unmapped")]
 		bool? IgnoreUnmappedFields { get; set; }
 
-		[JsonProperty("unmapped_type")]
+		[DataMember(Name ="unmapped_type")]
 		FieldType? UnmappedType { get; set; }
 	}
 

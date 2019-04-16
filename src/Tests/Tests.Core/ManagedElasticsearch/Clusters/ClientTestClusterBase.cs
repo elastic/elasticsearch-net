@@ -11,7 +11,7 @@ using Tests.Domain.Extensions;
 
 namespace Tests.Core.ManagedElasticsearch.Clusters
 {
-	public class ClientTestClusterBase : XunitClusterBase<ClientTestClusterConfiguration>, INestTestCluster
+	public abstract class ClientTestClusterBase : XunitClusterBase<ClientTestClusterConfiguration>, INestTestCluster
 	{
 		public ClientTestClusterBase() : this(new ClientTestClusterConfiguration()) { }
 
@@ -35,6 +35,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 		{
 			TestConfiguration = TestClient.Configuration;
 			ShowElasticsearchOutputAfterStarted = true; //this.TestConfiguration.ShowElasticsearchOutputAfterStarted;
+			HttpFiddlerAware = true;
 
 			CacheEsHomeInstallation = true;
 

@@ -25,13 +25,6 @@ namespace Tests.Search.MultiSearch
 					.FluentAsync(c => c.MultiSearchAsync(s => s.Index(index)))
 					.RequestAsync(c => c.MultiSearchAsync(new MultiSearchRequest(index)))
 				;
-
-			await POST($"/{index}/doc/_msearch")
-					.Fluent(c => c.MultiSearch(s => s.Index(index).Type<CommitActivity>()))
-					.Request(c => c.MultiSearch(new MultiSearchRequest(index, TypeName.From<CommitActivity>())))
-					.FluentAsync(c => c.MultiSearchAsync(s => s.Index(index).Type(typeof(CommitActivity))))
-					.RequestAsync(c => c.MultiSearchAsync(new MultiSearchRequest(index, typeof(CommitActivity))))
-				;
 		}
 	}
 }

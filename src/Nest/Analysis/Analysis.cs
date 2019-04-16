@@ -1,23 +1,26 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
+	[InterfaceDataContract]
+	[ReadAs(typeof(Analysis))]
 	public interface IAnalysis
 	{
-		[JsonProperty("analyzer")]
+		[DataMember(Name ="analyzer")]
 		IAnalyzers Analyzers { get; set; }
 
-		[JsonProperty("char_filter")]
+		[DataMember(Name ="char_filter")]
 		ICharFilters CharFilters { get; set; }
 
-		[JsonProperty("normalizer")]
+		[DataMember(Name ="normalizer")]
 		INormalizers Normalizers { get; set; }
 
-		[JsonProperty("filter")]
+		[DataMember(Name ="filter")]
 		ITokenFilters TokenFilters { get; set; }
 
-		[JsonProperty("tokenizer")]
+		[DataMember(Name ="tokenizer")]
 		ITokenizers Tokenizers { get; set; }
 	}
 
@@ -31,6 +34,7 @@ namespace Nest
 		public ITokenizers Tokenizers { get; set; }
 	}
 
+	[DataContract]
 	public class AnalysisDescriptor : DescriptorBase<AnalysisDescriptor, IAnalysis>, IAnalysis
 	{
 		IAnalyzers IAnalysis.Analyzers { get; set; }

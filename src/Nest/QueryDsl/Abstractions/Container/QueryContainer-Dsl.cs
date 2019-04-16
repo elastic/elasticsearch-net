@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -7,6 +9,7 @@ namespace Nest
 		public static bool IsConditionless(this QueryContainer q) => q == null || q.IsConditionless;
 	}
 
+	[JsonFormatter(typeof(QueryContainerFormatter))]
 	public partial class QueryContainer : IQueryContainer, IDescriptor
 	{
 		public QueryContainer() { }
@@ -21,17 +24,31 @@ namespace Nest
 			query.WrapInContainer(this);
 		}
 
+		[IgnoreDataMember]
 		internal bool HoldsOnlyShouldMusts { get; set; }
+
+		[IgnoreDataMember]
 		internal bool IsConditionless => Self.IsConditionless;
+
+		[IgnoreDataMember]
 		internal bool IsStrict => Self.IsStrict;
+
+		[IgnoreDataMember]
 		internal bool IsVerbatim => Self.IsVerbatim;
+
+		[IgnoreDataMember]
 		internal bool IsWritable => Self.IsWritable;
+
+		[IgnoreDataMember]
 		bool IQueryContainer.IsConditionless => ContainedQuery?.Conditionless ?? true;
 
+		[IgnoreDataMember]
 		bool IQueryContainer.IsStrict { get; set; }
 
+		[IgnoreDataMember]
 		bool IQueryContainer.IsVerbatim { get; set; }
 
+		[IgnoreDataMember]
 		bool IQueryContainer.IsWritable => Self.IsVerbatim || !Self.IsConditionless;
 
 		public void Accept(IQueryVisitor visitor)
@@ -83,5 +100,8 @@ namespace Nest
 		public static bool operator false(QueryContainer a) => false;
 
 		public static bool operator true(QueryContainer a) => false;
+
+		// ReSharper disable once UnusedMember.Global
+		internal bool ShouldSerialize(IJsonFormatterResolver formatterResolver) => IsWritable;
 	}
 }

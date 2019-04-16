@@ -171,8 +171,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 						CommitActivity.CommitActivities,
 						(d, c) => d.Document(c).Routing(c.ProjectName)
 					)
-				)
-			};
+				) };
 			await Task.WhenAll(tasks);
 			await Client.RefreshAsync(Indices.Index(typeof(Project), typeof(Developer), typeof(ProjectPercolation)));
 		}
@@ -194,9 +193,12 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		);
 
 		private Task<ICreateIndexResponse> CreateProjectIndexAsync() => Client.CreateIndexAsync(typeof(Project), c => c
-			.Settings(settings => settings
-				.Analysis(ProjectAnalysisSettings)
-			)
+			.Settings(settings => settings.Analysis(ProjectAnalysisSettings))
+// this uses obsolete overload somewhat on purpose to make sure it works just as the rest
+// TODO 8.0 remove with once the overloads are gone too
+#pragma warning disable 618
+			.Mappings(ProjectMappings)
+#pragma warning restore 618
 			.Aliases(aliases => aliases
 				.Alias(ProjectsAliasName)
 				.Alias(ProjectsAliasFilter, a => a
@@ -206,25 +208,28 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 					.Filter<CommitActivity>(f => f.Term(p => p.Join, Infer.Relation<CommitActivity>()))
 				)
 			)
-			.Mappings(map => map
-				.Map<Project>(m => m
-					.RoutingField(r => r.Required())
-					.AutoMap()
-					.Properties(ProjectProperties)
-					.Properties<CommitActivity>(props => props
-						.Object<Developer>(o => o
-							.AutoMap()
-							.Name(p => p.Committer)
-							.Properties(DeveloperProperties)
-						)
-						.Text(t => t
-							.Name(p => p.ProjectName)
-							.Index(false)
-						)
-					)
-				)
-			)
 		);
+
+#pragma warning disable 618
+		public static ITypeMapping ProjectMappings(MappingsDescriptor map) => map
+			.Map<Project>(ProjectTypeMappings);
+#pragma warning restore 618
+
+		public static ITypeMapping ProjectTypeMappings(TypeMappingDescriptor<Project> m) => m
+			.RoutingField(r => r.Required())
+			.AutoMap()
+			.Properties(ProjectProperties)
+			.Properties<CommitActivity>(props => props
+				.Object<Developer>(o => o
+					.AutoMap()
+					.Name(p => p.Committer)
+					.Properties(DeveloperProperties)
+				)
+				.Text(t => t
+					.Name(p => p.ProjectName)
+					.Index(false)
+				)
+			);
 
 		public static IAnalysis ProjectAnalysisSettings(AnalysisDescriptor analysis)
 		{
@@ -237,7 +242,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 				)
 				.Analyzers(analyzers => analyzers
 					.Custom("shingle", shingle => shingle
-						.Filters("standard", "shingle")
+						.Filters("shingle")
 						.Tokenizer("standard")
 					)
 				);

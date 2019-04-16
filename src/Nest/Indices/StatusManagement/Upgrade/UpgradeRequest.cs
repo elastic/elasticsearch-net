@@ -2,10 +2,10 @@
 
 namespace Nest
 {
-	public partial interface IUpgradeRequest : IRequest<UpgradeRequestParameters> { }
+	[MapsApi("indices.upgrade.json")]
+	public partial interface IUpgradeRequest  { }
 
 	public partial class UpgradeRequest { }
 
-	[DescriptorFor("IndicesUpgrade")]
 	public partial class UpgradeDescriptor { }
 }

@@ -16,6 +16,7 @@ namespace Elasticsearch.Net
 	/// <summary>
 	/// A dictionary that supports dynamic access.
 	/// </summary>
+	[JsonFormatter(typeof(DynamicBodyFormatter))]
 	public class DynamicBody
 		: DynamicObject,
 			IEquatable<DynamicBody>,

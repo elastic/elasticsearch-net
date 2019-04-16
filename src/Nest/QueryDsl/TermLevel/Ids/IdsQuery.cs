@@ -1,24 +1,21 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<IdsQueryDescriptor>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(IdsQueryDescriptor))]
 	public interface IIdsQuery : IQuery
 	{
-		[JsonProperty("type")]
-		Types Types { get; set; }
-
-		[JsonProperty("values")]
+		[DataMember(Name = "values")]
 		IEnumerable<Id> Values { get; set; }
 	}
 
 	public class IdsQuery : QueryBase, IIdsQuery
 	{
-		public Types Types { get; set; }
 		public IEnumerable<Id> Values { get; set; }
 		protected override bool Conditionless => IsConditionless(this);
 
@@ -32,14 +29,7 @@ namespace Nest
 			, IIdsQuery
 	{
 		protected override bool Conditionless => IdsQuery.IsConditionless(this);
-		Types IIdsQuery.Types { get; set; }
 		IEnumerable<Id> IIdsQuery.Values { get; set; }
-
-		public IdsQueryDescriptor Types(params TypeName[] types) => Assign(a => a.Types = types);
-
-		public IdsQueryDescriptor Types(IEnumerable<TypeName> values) => Types(values?.ToArray());
-
-		public IdsQueryDescriptor Types(Types types) => Assign(a => a.Types = types);
 
 		public IdsQueryDescriptor Values(params Id[] values) => Assign(a => a.Values = values);
 

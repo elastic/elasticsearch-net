@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
-	[ExactContractJsonConverter(typeof(ReadAsTypeJsonConverter<PagerDutyAction>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(PagerDutyAction))]
 	public interface IPagerDutyAction : IAction, IPagerDutyEvent { }
 
 	public class PagerDutyAction : ActionBase, IPagerDutyAction
@@ -74,7 +73,7 @@ namespace Nest
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new PagerDutyContextDescriptor(type))));
 	}
 
-	[JsonConverter(typeof(StringEnumConverter))]
+	[StringEnum]
 	public enum PagerDutyEventType
 	{
 		[EnumMember(Value = "trigger")]

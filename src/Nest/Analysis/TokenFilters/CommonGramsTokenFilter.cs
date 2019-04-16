@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -12,26 +13,28 @@ namespace Nest
 		/// <summary>
 		/// A list of common words to use.
 		/// </summary>
-		[JsonProperty("common_words")]
-		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<string>))]
+		[DataMember(Name ="common_words")]
+		[JsonFormatter(typeof(SingleOrEnumerableFormatter<string>))]
 		IEnumerable<string> CommonWords { get; set; }
 
 		/// <summary>
 		/// A path (either relative to config location, or absolute) to a list of common words.
 		/// </summary>
-		[JsonProperty("common_words_path")]
+		[DataMember(Name ="common_words_path")]
 		string CommonWordsPath { get; set; }
 
 		/// <summary>
 		/// If true, common words matching will be case insensitive.
 		/// </summary>
-		[JsonProperty("ignore_case")]
+		[DataMember(Name ="ignore_case")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? IgnoreCase { get; set; }
 
 		/// <summary>
 		/// Generates bigrams then removes common words and single terms followed by a common word.
 		/// </summary>
-		[JsonProperty("query_mode")]
+		[DataMember(Name ="query_mode")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? QueryMode { get; set; }
 	}
 

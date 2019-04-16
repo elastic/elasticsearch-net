@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -13,7 +13,7 @@ namespace Nest
 		/// a predicate script that determines whether or not the current token will
 		/// be emitted.  Note that only inline scripts are supported.
 		/// </summary>
-		[JsonProperty("script")]
+		[DataMember(Name = "script")]
 		IScript Script { get; set; }
 	}
 

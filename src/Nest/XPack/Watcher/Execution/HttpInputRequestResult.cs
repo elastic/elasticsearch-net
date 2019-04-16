@@ -1,8 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
-	[ExactContractJsonConverter(typeof(ReadAsTypeJsonConverter<HttpInputRequestResult>))]
+	[DataContract]
 	public class HttpInputRequestResult : HttpInputRequest { }
 }

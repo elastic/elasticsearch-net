@@ -1,29 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(MultiGetRequestJsonConverter))]
+	[MapsApi("mget.json")]
+	[JsonFormatter(typeof(MultiGetRequestFormatter))]
 	public partial interface IMultiGetRequest
 	{
-		[JsonProperty("docs")]
+		[DataMember(Name = "docs")]
 		IEnumerable<IMultiGetOperation> Documents { get; set; }
 	}
 
 	public partial class MultiGetRequest
 	{
+		public Fields StoredFields { get; set; }
 		public IEnumerable<IMultiGetOperation> Documents { get; set; }
-
-		public Fields StoredFields
-		{
-			get => Q<Fields>("stored_fields");
-			set => Q("stored_fields", value);
-		}
 	}
 
-	[DescriptorFor("Mget")]
 	public partial class MultiGetDescriptor
 	{
 		private List<IMultiGetOperation> _operations = new List<IMultiGetOperation>();

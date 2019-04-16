@@ -41,8 +41,8 @@ namespace Elasticsearch.Net
 			var url = method.Path.Split(new[] {'/'}, 2).Last();
 			// Don't replace certain url parts e.g. category_id is defined as a long parameter
 			// which is .ToString()'ed as part of the URL. A .NotNull() method on long doesn't really make sense.
-			var partNames = method.Url.Parts != null
-				? string.Join("|", method.Url.Parts.Where(p => !partsNotToReplace.Contains(p.Key)).Select(p => p.Key))
+			var partNames = method.Url.ExposedApiParts != null
+				? string.Join("|", method.Url.ExposedApiParts.Where(p => !partsNotToReplace.Contains(p.Name)).Select(p => p.Name))
 				: @"\w+";
 			var pattern = string.IsNullOrEmpty(partNames) ? @"\w+" : partNames;
 			var patchedUrl = Regex.Replace(url, "{(" + pattern + ")}", "{$1.NotNull(\"$1\")}");

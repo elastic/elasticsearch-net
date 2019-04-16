@@ -1,21 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<DisMaxQuery>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(DisMaxQuery))]
 	public interface IDisMaxQuery : IQuery
 	{
-		[JsonProperty("queries")]
+		[DataMember(Name = "queries")]
 		IEnumerable<QueryContainer> Queries { get; set; }
 
-		[JsonProperty("tie_breaker")]
+		[DataMember(Name = "tie_breaker")]
 		double? TieBreaker { get; set; }
 	}
 
+	[DataContract]
 	public class DisMaxQuery : QueryBase, IDisMaxQuery
 	{
 		public IEnumerable<QueryContainer> Queries { get; set; }
@@ -27,6 +29,7 @@ namespace Nest
 		internal static bool IsConditionless(IDisMaxQuery q) => q.Queries.NotWritable();
 	}
 
+	[DataContract]
 	public class DisMaxQueryDescriptor<T>
 		: QueryDescriptorBase<DisMaxQueryDescriptor<T>, IDisMaxQuery>
 			, IDisMaxQuery where T : class

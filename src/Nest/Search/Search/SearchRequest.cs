@@ -1,92 +1,101 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchRequest>))]
+	[ReadAs(typeof(SearchRequest))]
 	public partial interface ISearchRequest : ICovariantSearchRequest
 	{
-		[JsonProperty("aggs")]
+		[DataMember(Name = "aggs")]
 		AggregationDictionary Aggregations { get; set; }
 
-		[JsonProperty("collapse")]
+		[DataMember(Name = "collapse")]
 		IFieldCollapse Collapse { get; set; }
 
-		[JsonProperty("explain")]
+		[DataMember(Name = "explain")]
 		bool? Explain { get; set; }
 
-		[JsonProperty("from")]
+		[DataMember(Name = "from")]
 		int? From { get; set; }
 
-		[JsonProperty("highlight")]
+		[DataMember(Name = "highlight")]
 		IHighlight Highlight { get; set; }
 
-		[JsonProperty("indices_boost")]
-		[JsonConverter(typeof(IndicesBoostJsonConverter))]
+		[DataMember(Name = "indices_boost")]
+		[JsonFormatter(typeof(IndicesBoostFormatter))]
 		IDictionary<IndexName, double> IndicesBoost { get; set; }
 
-		[JsonProperty("min_score")]
+		[DataMember(Name = "min_score")]
 		double? MinScore { get; set; }
 
-		[JsonProperty("post_filter")]
+		[DataMember(Name = "post_filter")]
 		QueryContainer PostFilter { get; set; }
 
-		[JsonProperty("profile")]
+		[DataMember(Name = "profile")]
 		bool? Profile { get; set; }
 
-		[JsonProperty("query")]
+		[DataMember(Name = "query")]
 		QueryContainer Query { get; set; }
 
-		[JsonProperty("rescore")]
+		[DataMember(Name = "rescore")]
 		IList<IRescore> Rescore { get; set; }
 
-		[JsonProperty("script_fields")]
+		[DataMember(Name = "script_fields")]
 		IScriptFields ScriptFields { get; set; }
 
-		[JsonProperty("search_after")]
+		[DataMember(Name = "search_after")]
 		IList<object> SearchAfter { get; set; }
 
-		[JsonProperty("size")]
+		[DataMember(Name = "size")]
 		int? Size { get; set; }
 
-		[JsonProperty("slice")]
+		[DataMember(Name = "slice")]
 		ISlicedScroll Slice { get; set; }
 
-		[JsonProperty("sort")]
+		[DataMember(Name = "sort")]
 		IList<ISort> Sort { get; set; }
 
-		[JsonProperty("_source")]
+		[DataMember(Name = "_source")]
 		Union<bool, ISourceFilter> Source { get; set; }
 
-		[JsonProperty("suggest")]
+		[DataMember(Name = "suggest")]
 		ISuggestContainer Suggest { get; set; }
 
-		[JsonProperty("terminate_after")]
+		[DataMember(Name = "terminate_after")]
 		long? TerminateAfter { get; set; }
 
-		[JsonProperty("timeout")]
+		[DataMember(Name = "timeout")]
 		string Timeout { get; set; }
 
-		[JsonProperty("track_scores")]
+		[DataMember(Name = "track_scores")]
 		bool? TrackScores { get; set; }
 
-		[JsonProperty("version")]
+		[DataMember(Name = "version")]
 		bool? Version { get; set; }
 	}
 
+	[ReadAs(typeof(SearchRequest<>))]
+	[InterfaceDataContract]
 	public partial interface ISearchRequest<T> : ISearchRequest { }
 
+	[DataContract]
 	public partial class SearchRequest
 	{
+		public Fields StoredFields { get; set; }
+		public Fields DocValueFields { get; set; }
 		public AggregationDictionary Aggregations { get; set; }
 		public IFieldCollapse Collapse { get; set; }
-		public Fields DocValueFields { get; set; }
 		public bool? Explain { get; set; }
 		public int? From { get; set; }
+
 		public IHighlight Highlight { get; set; }
+
+		// TODO: Change Utf8Json to look up JsonFormatterType from implemented interface
+		[JsonFormatter(typeof(IndicesBoostFormatter))]
 		public IDictionary<IndexName, double> IndicesBoost { get; set; }
+
 		public double? MinScore { get; set; }
 		public QueryContainer PostFilter { get; set; }
 		public bool? Profile { get; set; }
@@ -98,13 +107,13 @@ namespace Nest
 		public ISlicedScroll Slice { get; set; }
 		public IList<ISort> Sort { get; set; }
 		public Union<bool, ISourceFilter> Source { get; set; }
-		public Fields StoredFields { get; set; }
 		public ISuggestContainer Suggest { get; set; }
 		public long? TerminateAfter { get; set; }
 
 		public string Timeout { get; set; }
 		public bool? TrackScores { get; set; }
 
+		// TODO: Remove?
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 		public bool? Version { get; set; }
 
@@ -119,49 +128,16 @@ namespace Nest
 		protected sealed override void Initialize() => TypedKeys = true;
 	}
 
-	public partial class SearchRequest<T>
+	[DataContract]
+	public partial class SearchRequest<T> : ISearchRequest<T>
 	{
-		public AggregationDictionary Aggregations { get; set; }
-		public IFieldCollapse Collapse { get; set; }
-		public Fields DocValueFields { get; set; }
-		public bool? Explain { get; set; }
-		public int? From { get; set; }
-		public IHighlight Highlight { get; set; }
-		public IDictionary<IndexName, double> IndicesBoost { get; set; }
-		public double? MinScore { get; set; }
-		public QueryContainer PostFilter { get; set; }
-		public bool? Profile { get; set; }
-		public QueryContainer Query { get; set; }
-		public IList<IRescore> Rescore { get; set; }
-		public IScriptFields ScriptFields { get; set; }
-		public IList<object> SearchAfter { get; set; }
-		public int? Size { get; set; }
-		public ISlicedScroll Slice { get; set; }
-		public IList<ISort> Sort { get; set; }
-		public Union<bool, ISourceFilter> Source { get; set; }
-		public Fields StoredFields { get; set; }
-		public ISuggestContainer Suggest { get; set; }
-		public long? TerminateAfter { get; set; }
-
-		public string Timeout { get; set; }
-		public bool? TrackScores { get; set; }
-
-		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
-		public bool? Version { get; set; }
-
-		protected override HttpMethod HttpMethod =>
-			RequestState.RequestParameters?.ContainsQueryString("source") == true || RequestState.RequestParameters?.ContainsQueryString("q") == true
-				? HttpMethod.GET
-				: HttpMethod.POST;
-
 		Type ICovariantSearchRequest.ClrType => typeof(T);
-
-		protected sealed override void Initialize() => TypedKeys = true;
 	}
 
 	/// <summary>
 	/// A descriptor which describes a search operation for _search and _msearch
 	/// </summary>
+	[DataContract]
 	public partial class SearchDescriptor<T> where T : class
 	{
 		protected override HttpMethod HttpMethod =>
@@ -264,8 +240,10 @@ namespace Nest
 		public SearchDescriptor<T> MinScore(double? minScore) => Assign(a => a.MinScore = minScore);
 
 		/// <summary>
-		/// The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.
-		/// If set, the response will have a boolean field terminated_early to indicate whether the query execution has actually terminated_early.
+		/// The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate
+		/// early.
+		/// If set, the response will have a boolean field terminated_early to indicate whether the query execution has actually
+		/// terminated_early.
 		/// </summary>
 		public SearchDescriptor<T> TerminateAfter(long? terminateAfter) => Assign(a => a.TerminateAfter = terminateAfter);
 
@@ -379,7 +357,8 @@ namespace Nest
 			Assign(a => a.Query = query?.Invoke(new QueryContainerDescriptor<T>()));
 
 		/// <summary>
-		/// For scroll queries that return a lot of documents it is possible to split the scroll in multiple slices which can be consumed independently
+		/// For scroll queries that return a lot of documents it is possible to split the scroll in multiple slices which can be
+		/// consumed independently
 		/// </summary>
 		public SearchDescriptor<T> Slice(Func<SlicedScrollDescriptor<T>, ISlicedScroll> selector) =>
 			Assign(a => a.Slice = selector?.Invoke(new SlicedScrollDescriptor<T>()));
@@ -396,7 +375,8 @@ namespace Nest
 			Assign(a => a.PostFilter = filter?.Invoke(new QueryContainerDescriptor<T>()));
 
 		/// <summary>
-		/// Allow to highlight search results on one or more fields. The implementation uses the either lucene fast-vector-highlighter or highlighter.
+		/// Allow to highlight search results on one or more fields. The implementation uses the either lucene
+		/// fast-vector-highlighter or highlighter.
 		/// </summary>
 		public SearchDescriptor<T> Highlight(Func<HighlightDescriptor<T>, IHighlight> highlightSelector) =>
 			Assign(a => a.Highlight = highlightSelector?.Invoke(new HighlightDescriptor<T>()));

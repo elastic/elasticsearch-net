@@ -1,16 +1,16 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class RecoveryIndexStatus
 	{
-		[JsonProperty("bytes")]
+		[DataMember(Name ="bytes")]
 		public RecoveryBytes Bytes { get; internal set; }
 
-		[JsonProperty("files")]
+		[DataMember(Name ="files")]
 		public RecoveryFiles Files { get; internal set; }
 
-		[JsonProperty("total_time_in_millis")]
+		[DataMember(Name ="total_time_in_millis")]
 		public long TotalTimeInMilliseconds { get; internal set; }
 	}
 }

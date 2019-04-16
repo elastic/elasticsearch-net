@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SpanFieldMaskingQueryDescriptor<object>>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(SpanFieldMaskingQuery))]
 	public interface ISpanFieldMaskingQuery : ISpanSubQuery
 	{
-		[JsonProperty("field")]
+		[DataMember(Name = "field")]
 		Field Field { get; set; }
 
-		[JsonProperty("query")]
+		[DataMember(Name = "query")]
 		ISpanQuery Query { get; set; }
 	}
 

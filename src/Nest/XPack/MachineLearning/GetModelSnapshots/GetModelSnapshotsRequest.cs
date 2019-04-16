@@ -1,43 +1,45 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	/// <summary>
 	/// Retrieve usage information for machine learning jobs.
 	/// </summary>
+	[MapsApi("ml.get_model_snapshots.json")]
 	public partial interface IGetModelSnapshotsRequest
 	{
 		/// <summary>
 		/// If true, the results are sorted in descending order.
 		/// </summary>
-		[JsonProperty("desc")]
+		[DataMember(Name = "desc")]
 		bool? Descending { get; set; }
 
 		/// <summary>
 		/// Returns snapshots with timestamps earlier than this time.
 		/// </summary>
-		[JsonProperty("end")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[DataMember(Name = "end")]
+		[JsonFormatter(typeof(NullableDateTimeOffsetEpochMillisecondsFormatter))]
 		DateTimeOffset? End { get; set; }
 
 		/// <summary>
 		/// Specifies pagination for the snapshots.
 		/// </summary>
-		[JsonProperty("page")]
+		[DataMember(Name = "page")]
 		IPage Page { get; set; }
 
 		/// <summary>
 		/// Specifies the sort field for the requested snapshots. By default, snapshots are sorted by their timestamp.
 		/// </summary>
-		[JsonProperty("sort")]
+		[DataMember(Name = "sort")]
 		Field Sort { get; set; }
 
 		/// <summary>
 		/// Returns snapshots with timestamps after this time.
 		/// </summary>
-		[JsonProperty("start")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[DataMember(Name = "start")]
+		[JsonFormatter(typeof(NullableDateTimeOffsetEpochMillisecondsFormatter))]
 		DateTimeOffset? Start { get; set; }
 	}
 
@@ -61,7 +63,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	[DescriptorFor("XpackMlGetModelSnapshots")]
 	public partial class GetModelSnapshotsDescriptor
 	{
 		bool? IGetModelSnapshotsRequest.Descending { get; set; }

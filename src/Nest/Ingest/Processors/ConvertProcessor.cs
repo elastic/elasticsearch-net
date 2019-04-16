@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using Elasticsearch.Net;
+
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ProcessorJsonConverter<ConvertProcessor>))]
+	[InterfaceDataContract]
 	public interface IConvertProcessor : IProcessor
 	{
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
-		[JsonProperty("target_field")]
+		[DataMember(Name ="target_field")]
 		Field TargetField { get; set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		ConvertProcessorType? Type { get; set; }
 	}
 
@@ -49,7 +48,7 @@ namespace Nest
 		public ConvertProcessorDescriptor<T> Type(ConvertProcessorType? type) => Assign(a => a.Type = type);
 	}
 
-	[JsonConverter(typeof(StringEnumConverter))]
+	[StringEnum]
 	public enum ConvertProcessorType
 	{
 		[EnumMember(Value = "integer")]

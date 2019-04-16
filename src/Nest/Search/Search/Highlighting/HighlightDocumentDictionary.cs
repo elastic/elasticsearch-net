@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, HighlightHit>))]
+	[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, HighlightHit>))]
 	public class HighlightFieldDictionary : Dictionary<string, HighlightHit>
 	{
 		public HighlightFieldDictionary(IDictionary<string, HighlightHit> dictionary = null)

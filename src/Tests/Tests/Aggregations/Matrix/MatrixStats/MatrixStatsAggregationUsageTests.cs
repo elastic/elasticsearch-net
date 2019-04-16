@@ -28,8 +28,8 @@ namespace Tests.Aggregations.Matrix.MatrixStats
 					fields = new[] { "numberOfCommits", "numberOfContributors" },
 					missing = new
 					{
-						numberOfCommits = 0.0,
-						numberOfContributors = 1.0
+						numberOfCommits = 0,
+						numberOfContributors = 1
 					},
 					mode = "median"
 				}

@@ -6,11 +6,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(FieldsJsonConverter))]
+	[JsonFormatter(typeof(FieldsFormatter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Fields : IUrlParameter, IEnumerable<Field>, IEquatable<Fields>
 	{

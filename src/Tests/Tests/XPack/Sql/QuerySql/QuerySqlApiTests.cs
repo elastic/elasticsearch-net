@@ -44,7 +44,7 @@ ORDER BY numberOfContributors DESC";
 			FetchSize = 5
 		};
 
-		protected override string UrlPath => $"/_xpack/sql";
+		protected override string UrlPath => $"/_sql";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.QuerySql(f),

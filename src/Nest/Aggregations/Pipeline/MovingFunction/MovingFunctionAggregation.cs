@@ -1,15 +1,16 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<MovingFunctionAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(MovingFunctionAggregation))]
 	public interface IMovingFunctionAggregation : IPipelineAggregation
 	{
-		[JsonProperty("script")]
+		[DataMember(Name ="script")]
 		string Script { get; set; }
 
-		[JsonProperty("window")]
+		[DataMember(Name ="window")]
 		int? Window { get; set; }
 	}
 

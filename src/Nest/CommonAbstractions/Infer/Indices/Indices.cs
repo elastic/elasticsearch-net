@@ -6,7 +6,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[ContractJsonConverter(typeof(IndicesMultiSyntaxJsonConverter))]
+	[JsonFormatter(typeof(IndicesMultiSyntaxFormatter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Indices : Union<Indices.AllIndicesMarker, Indices.ManyIndices>, IUrlParameter
 	{

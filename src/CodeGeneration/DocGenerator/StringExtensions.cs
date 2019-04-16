@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace DocGenerator
@@ -227,7 +228,7 @@ namespace DocGenerator
 					using System;
                     using System.Collections.Generic;
 					using System.ComponentModel;
-					using Newtonsoft.Json;
+					using System.Runtime.Serialization;
 					using Newtonsoft.Json.Linq;
 
 					namespace Temporary

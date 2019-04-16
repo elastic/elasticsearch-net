@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
+	[InterfaceDataContract]
 	public interface IBulkUpdateOperation<TDocument, TPartialDocument> : IBulkOperation
 		where TDocument : class
 		where TPartialDocument : class
@@ -42,6 +45,7 @@ namespace Nest
 		TDocument Upsert { get; set; }
 	}
 
+	[DataContract]
 	public class BulkUpdateOperation<TDocument, TPartialDocument> : BulkOperationBase, IBulkUpdateOperation<TDocument, TPartialDocument>
 		where TDocument : class
 		where TPartialDocument : class
@@ -115,8 +119,19 @@ namespace Nest
 		protected override Id GetIdForOperation(Inferrer inferrer) =>
 			Id ?? new Id(new[] { IdFrom, Upsert }.FirstOrDefault(o => o != null));
 
-		protected override Routing GetRoutingForOperation(Inferrer inferrer) =>
-			Routing ?? new Routing(new[] { IdFrom, Upsert }.FirstOrDefault(o => o != null));
+		protected override Routing GetRoutingForOperation(Inferrer inferrer)
+		{
+			if (Routing != null)
+				return Routing;
+
+			if (IdFrom != null)
+				return new Routing(IdFrom);
+
+			if (Upsert != null)
+				return new Routing(Upsert);
+
+			return null;
+		}
 
 		protected override object GetBody() =>
 			new BulkUpdateBody<TDocument, TPartialDocument>
@@ -129,6 +144,7 @@ namespace Nest
 			};
 	}
 
+	[DataContract]
 	public class BulkUpdateDescriptor<TDocument, TPartialDocument>
 		: BulkOperationDescriptorBase<BulkUpdateDescriptor<TDocument, TPartialDocument>, IBulkUpdateOperation<TDocument, TPartialDocument>>
 			, IBulkUpdateOperation<TDocument, TPartialDocument>
@@ -158,8 +174,19 @@ namespace Nest
 		protected override Id GetIdForOperation(Inferrer inferrer) =>
 			Self.Id ?? new Id(new[] { Self.IdFrom, Self.Upsert }.FirstOrDefault(o => o != null));
 
-		protected override Routing GetRoutingForOperation(Inferrer inferrer) =>
-			Self.Routing ?? new Routing(new[] { Self.IdFrom, Self.Upsert }.FirstOrDefault(o => o != null));
+		protected override Routing GetRoutingForOperation(Inferrer inferrer)
+		{
+			if (Self.Routing != null)
+				return Self.Routing;
+
+			if (Self.IdFrom != null)
+				return new Routing(Self.IdFrom);
+
+			if (Self.Upsert != null)
+				return new Routing(Self.Upsert);
+
+			return null;
+		}
 
 		/// <summary>
 		/// Infers the id of the object to update from the provided

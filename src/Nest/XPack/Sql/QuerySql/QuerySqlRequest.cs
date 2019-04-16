@@ -1,10 +1,10 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[MapsApi("xpack.sql.query.json")]
-	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<QuerySqlRequest>))]
+	[MapsApi("sql.query.json")]
+	[ReadAs(typeof(QuerySqlRequest))]
 	public partial interface IQuerySqlRequest : ISqlRequest
 	{
 		/// <summary>
@@ -15,7 +15,7 @@ namespace Nest
 		/// Unlike scroll, receiving the last page is enough to guarantee that the Elasticsearch state is cleared.
 		/// </para>
 		/// </summary>
-		[JsonProperty("cursor")]
+		[DataMember(Name ="cursor")]
 		string Cursor { get; set; }
 	}
 

@@ -1,41 +1,36 @@
 using System;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Runtime.Serialization;
+
 
 namespace Nest
 {
+	[MapsApi("ml.flush_job.json")]
 	public partial interface IFlushJobRequest
 	{
 		/// <summary>
 		/// Specifies that no data prior to this date is expected.
 		/// </summary>
-		[JsonProperty("advance_time")]
-		// Forced to prevent override, ML API always expects ISO8601 format
-		[JsonConverter(typeof(IsoDateTimeConverter))]
+		[DataMember(Name ="advance_time")]
 		DateTimeOffset? AdvanceTime { get; set; }
 
 		/// <summary>
 		/// Calculates the interim results for the most recent bucket or all buckets within the latency period.
 		/// </summary>
-		[JsonProperty("calc_interim")]
+		[DataMember(Name ="calc_interim")]
 		bool? CalculateInterim { get; set; }
 
 		/// <summary>
 		///  When used in conjunction with <see cref="CalculateInterim" />, specifies the range of buckets on
 		/// which to calculate interim results.
 		/// </summary>
-		[JsonProperty("end")]
-		// Forced to prevent override, ML API always expects ISO8601 format
-		[JsonConverter(typeof(IsoDateTimeConverter))]
+		[DataMember(Name ="end")]
 		DateTimeOffset? End { get; set; }
 
 		/// <summary>
 		/// When used in conjunction with <see cref="CalculateInterim" />, specifies the range of buckets
 		/// on which to calculate interim results.
 		/// </summary>
-		[JsonProperty("start")]
-		// Forced to prevent override, ML API always expects ISO8601 format
-		[JsonConverter(typeof(IsoDateTimeConverter))]
+		[DataMember(Name ="start")]
 		DateTimeOffset? Start { get; set; }
 	}
 
@@ -54,7 +49,6 @@ namespace Nest
 		public DateTimeOffset? Start { get; set; }
 	}
 
-	[DescriptorFor("XpackMlFlushJob")]
 	public partial class FlushJobDescriptor
 	{
 		DateTimeOffset? IFlushJobRequest.AdvanceTime { get; set; }

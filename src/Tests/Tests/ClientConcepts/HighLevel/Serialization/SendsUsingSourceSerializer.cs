@@ -102,12 +102,12 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 
 		private static IEnumerable<object> ExpectBulk(object document)
 		{
-			yield return new { delete = new { _index = "default-index", _type = "adocument", _id = "1" } };
-			yield return new { index = new { _index = "default-index", _type = "adocument", _id = "1" } };
+			yield return new { delete = new { _index = "default-index", _id = "1" } };
+			yield return new { index = new { _index = "default-index",  _id = "1" } };
 			yield return document;
-			yield return new { create = new { _index = "default-index", _type = "adocument", _id = "1" } };
+			yield return new { create = new { _index = "default-index", _id = "1" } };
 			yield return document;
-			yield return new { update = new { _index = "default-index", _type = "adocument", _id = "1" } };
+			yield return new { update = new { _index = "default-index", _id = "1" } };
 			yield return new { doc = document, upsert = document };
 		}
 
@@ -130,8 +130,8 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		{
 			docs = new object[]
 			{
-				new { _index = "default-index", _type = "adocument", doc = document },
-				new { _index = "default-index", _type = "adocument", doc = document }
+				new { _index = "default-index", doc = document },
+				new { _index = "default-index", doc = document }
 			}
 		};
 
@@ -149,22 +149,22 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		}
 
 		[U] public void TermQuery() =>
-			SerializesEnumValue(new TermQuery { Field = Infer.Field<Project>(p => p.Name), Value = SomeEnum.AnotherValue });
+			SerializesEnumValue<ITermQuery>(new TermQuery { Field = Infer.Field<Project>(p => p.Name), Value = SomeEnum.AnotherValue });
 
 		[U] public void TermsQuery() =>
-			Serializes(new TermsQuery { Field = Infer.Field<Project>(p => p.Name), Terms = new object[] { SomeEnum.AnotherValue } },
+			Serializes<ITermsQuery>(new TermsQuery { Field = Infer.Field<Project>(p => p.Name), Terms = new object[] { SomeEnum.AnotherValue } },
 				new { name = new[] { 1 } },
 				new { name = new[] { "different" } }
 			);
 
 		[U] public void WildcardQuery() =>
-			SerializesEnumValue(new WildcardQuery { Field = Infer.Field<Project>(p => p.Name), Value = SomeEnum.AnotherValue });
+			SerializesEnumValue<IWildcardQuery>(new WildcardQuery { Field = Infer.Field<Project>(p => p.Name), Value = SomeEnum.AnotherValue });
 
 		[U] public void PrefixQuery() =>
-			SerializesEnumValue(new PrefixQuery { Field = Infer.Field<Project>(p => p.Name), Value = SomeEnum.AnotherValue });
+			SerializesEnumValue<IPrefixQuery>(new PrefixQuery { Field = Infer.Field<Project>(p => p.Name), Value = SomeEnum.AnotherValue });
 
 		[U] public void SpanTermQueryInitializer() =>
-			SerializesEnumValue(new SpanTermQuery { Field = Infer.Field<Project>(p => p.Name), Value = SomeEnum.AnotherValue });
+			SerializesEnumValue<ISpanTermQuery>(new SpanTermQuery { Field = Infer.Field<Project>(p => p.Name), Value = SomeEnum.AnotherValue });
 
 		[U] public void SpanTermQueryFluent() =>
 			SerializesEnumValue<ISpanTermQuery>(new SpanTermQueryDescriptor<Project>().Field(p => p.Name).Value(SomeEnum.AnotherValue));

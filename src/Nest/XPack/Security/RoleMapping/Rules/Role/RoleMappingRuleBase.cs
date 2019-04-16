@@ -1,22 +1,24 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(RoleMappingRuleBaseJsonConverter))]
+	[DataContract]
+	[JsonFormatter(typeof(RoleMappingRuleBaseFormatter))]
 	public abstract class RoleMappingRuleBase
 	{
-		[JsonProperty("all")]
+		[DataMember(Name ="all")]
 		protected internal IEnumerable<RoleMappingRuleBase> AllRules { get; set; }
 
-		[JsonProperty("any")]
+		[DataMember(Name ="any")]
 		protected internal IEnumerable<RoleMappingRuleBase> AnyRules { get; set; }
 
-		[JsonProperty("except")]
-		protected RoleMappingRuleBase ExceptRule { get; set; }
+		[DataMember(Name ="except")]
+		protected internal RoleMappingRuleBase ExceptRule { get; set; }
 
-		[JsonProperty("field")]
-		protected FieldRuleBase FieldRule { get; set; }
+		[DataMember(Name ="field")]
+		protected internal FieldRuleBase FieldRule { get; set; }
 
 		public static AnyRoleMappingRule operator |(RoleMappingRuleBase leftContainer, RoleMappingRuleBase rightContainer) =>
 			CombineAny(leftContainer, rightContainer);

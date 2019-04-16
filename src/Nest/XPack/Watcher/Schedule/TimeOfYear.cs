@@ -1,22 +1,23 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<TimeOfYear>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(TimeOfYear))]
 	public interface ITimeOfYear
 	{
-		[JsonProperty("at")]
-		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<string>))]
+		[DataMember(Name ="at")]
+		[JsonFormatter(typeof(SingleOrEnumerableFormatter<string>))]
 		IEnumerable<string> At { get; set; }
 
-		[JsonProperty("int")]
-		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<Month>))]
+		[DataMember(Name ="int")]
+		[JsonFormatter(typeof(SingleOrEnumerableFormatter<Month>))]
 		IEnumerable<Month> In { get; set; }
 
-		[JsonProperty("on")]
-		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<int>))]
+		[DataMember(Name ="on")]
+		[JsonFormatter(typeof(SingleOrEnumerableFormatter<int>))]
 		IEnumerable<int> On { get; set; }
 	}
 

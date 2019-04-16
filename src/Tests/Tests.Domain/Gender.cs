@@ -1,10 +1,8 @@
-﻿using Nest;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿using Elasticsearch.Net;
 
 namespace Tests.Domain
 {
-	[StringEnum] [JsonConverter(typeof(StringEnumConverter))]
+	[StringEnum]
 	public enum Gender
 	{
 		Male,

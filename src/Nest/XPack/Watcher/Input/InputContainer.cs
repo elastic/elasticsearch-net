@@ -1,26 +1,27 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReserializeJsonConverter<InputContainer, IInputContainer>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(InputContainer))]
 	public interface IInputContainer
 	{
-		[JsonProperty("chain")]
+		[DataMember(Name ="chain")]
 		IChainInput Chain { get; set; }
 
-		[JsonProperty("http")]
+		[DataMember(Name ="http")]
 		IHttpInput Http { get; set; }
 
-		[JsonProperty("search")]
+		[DataMember(Name ="search")]
 		ISearchInput Search { get; set; }
 
-		[JsonProperty("simple")]
+		[DataMember(Name ="simple")]
 		ISimpleInput Simple { get; set; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public class InputContainer : IInputContainer, IDescriptor
 	{
 		internal InputContainer() { }

@@ -1,21 +1,21 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[MapsApi("xpack.rollup.rollup_search.json")]
+	[MapsApi("rollup.rollup_search.json")]
 	public partial interface IRollupSearchRequest
 	{
 		/// <summary> Describe the aggregations to perform</summary>
-		[JsonProperty("aggs")]
+		[DataMember(Name ="aggs")]
 		AggregationDictionary Aggregations { get; set; }
 
 		/// <summary> Describe the query to perform using a query descriptor lambda</summary>
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		QueryContainer Query { get; set; }
 
 		/// <summary>When doing rollup searches against rolled up and live indices size needs to be set to 0 explicitly </summary>
-		[JsonProperty("size")]
+		[DataMember(Name ="size")]
 		int? Size { get; set; }
 	}
 

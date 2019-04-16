@@ -33,20 +33,17 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 			},
 			mappings = new
 			{
-				doc = new
+				properties = new
 				{
-					properties = new
+					branches = new
 					{
-						branches = new
+						type = "text",
+						fields = new
 						{
-							type = "text",
-							fields = new
+							keyword = new
 							{
-								keyword = new
-								{
-									type = "keyword",
-									ignore_above = 256
-								}
+								type = "keyword",
+								ignore_above = 256
 							}
 						}
 					}
@@ -70,16 +67,14 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 				.NumberOfShards(1)
 				.NumberOfReplicas(1)
 			)
-			.Mappings(m => m
-				.Map<Project>(p => p
-					.Properties(pp => pp
-						.Text(t => t
-							.Name(n => n.Branches)
-							.Fields(pf => pf
-								.Keyword(k => k
-									.Name("keyword")
-									.IgnoreAbove(256)
-								)
+			.Map<Project>(p => p
+				.Properties(pp => pp
+					.Text(t => t
+						.Name(n => n.Branches)
+						.Fields(pf => pf
+							.Keyword(k => k
+								.Name("keyword")
+								.IgnoreAbove(256)
 							)
 						)
 					)
@@ -103,24 +98,19 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 				NumberOfShards = 1,
 				NumberOfReplicas = 1
 			},
-			Mappings = new Mappings
+			Mappings = new TypeMapping
 			{
+				Properties = new Properties<Project>
 				{
-					typeof(Project), new TypeMapping
 					{
-						Properties = new Properties<Project>
+						p => p.Branches, new TextProperty
 						{
+							Fields = new Properties
 							{
-								p => p.Branches, new TextProperty
 								{
-									Fields = new Properties
+									"keyword", new KeywordProperty
 									{
-										{
-											"keyword", new KeywordProperty
-											{
-												IgnoreAbove = 256
-											}
-										}
+										IgnoreAbove = 256
 									}
 								}
 							}

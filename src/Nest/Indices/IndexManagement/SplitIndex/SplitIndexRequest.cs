@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -7,28 +7,26 @@ namespace Nest
 	/// A request to split an existing index into a new index, where each original primary
 	/// shard is split into two or more primary shards in the new index.
 	/// </summary>
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SplitIndexRequest>))]
+	[MapsApi("indices.split.json")]
+	[ReadAs(typeof(SplitIndexRequest))]
 	public partial interface ISplitIndexRequest
 	{
 		/// <summary>
 		/// The aliases for the target index
 		/// </summary>
-		[JsonProperty("aliases")]
+		[DataMember(Name ="aliases")]
 		IAliases Aliases { get; set; }
 
 		/// <summary>
 		/// The settings for the target index
 		/// </summary>
-		[JsonProperty("settings")]
+		[DataMember(Name ="settings")]
 		IIndexSettings Settings { get; set; }
 	}
 
 	/// <inheritdoc cref="ISplitIndexRequest" />
 	public partial class SplitIndexRequest
 	{
-		// For ReadAsType()
-		internal SplitIndexRequest() { }
-
 		/// <inheritdoc />
 		public IAliases Aliases { get; set; }
 
@@ -37,7 +35,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="ISplitIndexRequest" />
-	[DescriptorFor("IndicesSplit")]
 	public partial class SplitIndexDescriptor
 	{
 		IAliases ISplitIndexRequest.Aliases { get; set; }

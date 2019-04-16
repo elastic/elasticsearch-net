@@ -1,58 +1,59 @@
 using System;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using Elasticsearch.Net;
+
 
 namespace Nest
 {
 	/// <summary>
 	/// Creates a machine learning job
 	/// </summary>
+	[MapsApi("ml.put_job.json")]
 	public partial interface IPutJobRequest
 	{
 		/// <summary>
 		/// The analysis configuration, which specifies how to analyze the data.
 		/// </summary>
-		[JsonProperty("analysis_config")]
+		[DataMember(Name ="analysis_config")]
 		IAnalysisConfig AnalysisConfig { get; set; }
 
 		/// <summary>
 		/// Defines approximate limits on the memory resource requirements for the job.
 		/// </summary>
-		[JsonProperty("analysis_limits")]
+		[DataMember(Name ="analysis_limits")]
 		IAnalysisLimits AnalysisLimits { get; set; }
 
 		/// <summary>
 		/// Describes the format of the input data. This object is required, but it can be empty
 		/// </summary>
-		[JsonProperty("data_description")]
+		[DataMember(Name ="data_description")]
 		IDataDescription DataDescription { get; set; }
 
 		/// <summary>
 		/// An optional description of the job
 		/// </summary>
-		[JsonProperty("description")]
+		[DataMember(Name ="description")]
 		string Description { get; set; }
 
 		/// <summary>
 		/// This advanced configuration option stores model information along with the results.
 		/// This adds overhead to the performance of the system and is not feasible for jobs with many entities
 		/// </summary>
-		[JsonProperty("model_plot")]
+		[DataMember(Name ="model_plot")]
 		IModelPlotConfig ModelPlotConfig { get; set; }
 
 		/// <summary>
 		/// The time in days that model snapshots are retained for the job.
 		/// Older snapshots are deleted. The default value is 1 day.
 		/// </summary>
-		[JsonProperty("model_snapshot_retention_days")]
+		[DataMember(Name ="model_snapshot_retention_days")]
 		long? ModelSnapshotRetentionDays { get; set; }
 
 		/// <summary>
 		/// The name of the index in which to store the machine learning results.
 		/// The default value is shared, which corresponds to the index name .ml-anomalies-shared.
 		/// </summary>
-		[JsonProperty("results_index_name")]
+		[DataMember(Name ="results_index_name")]
 		IndexName ResultsIndexName { get; set; }
 	}
 
@@ -82,7 +83,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	[DescriptorFor("XpackMlPutJob")]
 	public partial class PutJobDescriptor<T> where T : class
 	{
 		IAnalysisConfig IPutJobRequest.AnalysisConfig { get; set; }
@@ -125,7 +125,7 @@ namespace Nest
 			Assign(a => a.ResultsIndexName = typeof(TIndex));
 	}
 
-	[JsonConverter(typeof(StringEnumConverter))]
+	[StringEnum]
 	public enum ExcludeFrequent
 	{
 		[EnumMember(Value = "all")]

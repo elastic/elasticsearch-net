@@ -10,7 +10,7 @@ namespace Tests.XPack.Migration.DeprecationInfo
 	{
 		[U] public override async Task Urls()
 		{
-			await GET("/_xpack/migration/deprecations")
+			await GET("/_migration/deprecations")
 					.Fluent(c => c.DeprecationInfo())
 					.Request(c => c.DeprecationInfo(new DeprecationInfoRequest()))
 					.FluentAsync(c => c.DeprecationInfoAsync())
@@ -19,7 +19,7 @@ namespace Tests.XPack.Migration.DeprecationInfo
 
 			var index = "another-index";
 
-			await GET($"/{index}/_xpack/migration/deprecations")
+			await GET($"/{index}/_migration/deprecations")
 					.Fluent(c => c.DeprecationInfo(d => d.Index(index)))
 					.Request(c => c.DeprecationInfo(new DeprecationInfoRequest(index)))
 					.FluentAsync(c => c.DeprecationInfoAsync(d => d.Index(index)))

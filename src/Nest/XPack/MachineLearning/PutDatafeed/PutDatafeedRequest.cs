@@ -1,23 +1,25 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	/// <summary>
 	/// Creates a datafeed for a machine learning job.
 	/// </summary>
+	[MapsApi("ml.put_datafeed.json")]
 	public partial interface IPutDatafeedRequest
 	{
 		/// <summary>
 		/// If set, the datafeed performs aggregation searches.
 		/// </summary>
-		[JsonProperty("aggregations")]
+		[DataMember(Name ="aggregations")]
 		AggregationDictionary Aggregations { get; set; }
 
 		/// <summary>
 		/// Specifies how data searches are split into time chunks.
 		/// </summary>
-		[JsonProperty("chunking_config")]
+		[DataMember(Name ="chunking_config")]
 		IChunkingConfig ChunkingConfig { get; set; }
 
 		/// <summary>
@@ -25,26 +27,26 @@ namespace Nest
 		/// The default value is either the bucket span for short bucket spans, or, for longer bucket spans,
 		/// a sensible fraction of the bucket span.
 		/// </summary>
-		[JsonProperty("frequency")]
+		[DataMember(Name ="frequency")]
 		Time Frequency { get; set; }
 
 		/// <summary>
 		///  A list of index names to search within, wildcards are supported.
 		/// </summary>
-		[JsonProperty("indices")]
-		[JsonConverter(typeof(IndicesJsonConverter))]
+		[DataMember(Name ="indices")]
+		[JsonFormatter(typeof(IndicesFormatter))]
 		Indices Indices { get; set; }
 
 		/// <summary>
 		/// A numerical character string that uniquely identifies the job.
 		/// </summary>
-		[JsonProperty("job_id")]
+		[DataMember(Name ="job_id")]
 		Id JobId { get; set; }
 
 		/// <summary>
 		/// Describe the query to perform using a query descriptor lambda.
 		/// </summary>
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		QueryContainer Query { get; set; }
 
 		/// <summary>
@@ -52,28 +54,21 @@ namespace Nest
 		/// For example, if data from 10:04 a.m. might not be searchable until 10:06 a.m.,
 		/// set this property to 120 seconds. The default value is 60s.
 		/// </summary>
-		[JsonProperty("query_delay")]
+		[DataMember(Name ="query_delay")]
 		Time QueryDelay { get; set; }
 
 		/// <summary>
 		/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.
 		/// The detector configuration in a job can contain functions that use these script fields.
 		/// </summary>
-		[JsonProperty("script_fields")]
+		[DataMember(Name ="script_fields")]
 		IScriptFields ScriptFields { get; set; }
 
 		/// <summary>
 		/// The size parameter that is used in Elasticsearch searches.
 		/// </summary>
-		[JsonProperty("scroll_size")]
+		[DataMember(Name ="scroll_size")]
 		int? ScrollSize { get; set; }
-
-		/// <summary>
-		///  A list of types to search for within the specified indices.
-		/// </summary>
-		[JsonProperty("types")]
-		[JsonConverter(typeof(TypesJsonConverter))]
-		Types Types { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -106,11 +101,8 @@ namespace Nest
 		/// <inheritdoc />
 		public int? ScrollSize { get; set; }
 
-		/// <inheritdoc />
-		public Types Types { get; set; }
 	}
 
-	[DescriptorFor("XpackMlPutDatafeed")]
 	public partial class PutDatafeedDescriptor<T> where T : class
 	{
 		AggregationDictionary IPutDatafeedRequest.Aggregations { get; set; }
@@ -122,7 +114,6 @@ namespace Nest
 		Time IPutDatafeedRequest.QueryDelay { get; set; }
 		IScriptFields IPutDatafeedRequest.ScriptFields { get; set; }
 		int? IPutDatafeedRequest.ScrollSize { get; set; }
-		Types IPutDatafeedRequest.Types { get; set; }
 
 		/// <inheritdoc />
 		public PutDatafeedDescriptor<T> Aggregations(Func<AggregationContainerDescriptor<T>, IAggregationContainer> aggregationsSelector) =>
@@ -161,13 +152,5 @@ namespace Nest
 		/// <inheritdoc />
 		public PutDatafeedDescriptor<T> ScrollSize(int? scrollSize) => Assign(a => a.ScrollSize = scrollSize);
 
-		/// <inheritdoc />
-		public PutDatafeedDescriptor<T> Types(Types types) => Assign(a => a.Types = types);
-
-		///<summary>a shortcut into calling Types(typeof(TOther))</summary>
-		public PutDatafeedDescriptor<T> Types<TOther>() => Assign(a => a.Types = typeof(TOther));
-
-		///<summary>a shortcut into calling Types(Types.All)</summary>
-		public PutDatafeedDescriptor<T> AllTypes() => Types(Nest.Types.All);
 	}
 }

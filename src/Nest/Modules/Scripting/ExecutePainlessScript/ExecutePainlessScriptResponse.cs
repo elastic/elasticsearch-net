@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IExecutePainlessScriptResponse<TResult> : IResponse
 	{
-		[JsonProperty("result")]
+		[DataMember(Name ="result")]
 		TResult Result { get; }
 	}
 

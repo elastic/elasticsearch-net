@@ -1,16 +1,17 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary>
 	/// Open a machine learning job.
 	/// </summary>
+	[MapsApi("ml.open_job.json")]
 	public partial interface IOpenJobRequest
 	{
 		/// <summary>
 		/// Controls the time to wait until a job has opened. The default value is 30 minutes.
 		/// </summary>
-		[JsonProperty("timeout")]
+		[DataMember(Name ="timeout")]
 		Time Timeout { get; set; }
 	}
 
@@ -22,7 +23,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	[DescriptorFor("XpackMlOpenJob")]
 	public partial class OpenJobDescriptor
 	{
 		Time IOpenJobRequest.Timeout { get; set; }

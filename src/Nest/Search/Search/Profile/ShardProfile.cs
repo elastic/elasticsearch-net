@@ -1,18 +1,18 @@
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class ShardProfile
 	{
-		[JsonProperty("aggregations")]
+		[DataMember(Name ="aggregations")]
 		public IReadOnlyCollection<AggregationProfile> Aggregations { get; internal set; } =
 			EmptyReadOnly<AggregationProfile>.Collection;
 
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		public string Id { get; internal set; }
 
-		[JsonProperty("searches")]
+		[DataMember(Name ="searches")]
 		public IReadOnlyCollection<SearchProfile> Searches { get; internal set; } =
 			EmptyReadOnly<SearchProfile>.Collection;
 	}

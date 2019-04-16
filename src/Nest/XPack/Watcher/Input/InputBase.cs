@@ -1,8 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
+	[InterfaceDataContract]
 	public interface IInput { }
 
 	public abstract class InputBase : IInput

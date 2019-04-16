@@ -32,7 +32,7 @@ namespace Nest
 		public IGetLicenseResponse GetLicense(IGetLicenseRequest request) =>
 			Dispatcher.Dispatch<IGetLicenseRequest, GetLicenseRequestParameters, GetLicenseResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackLicenseGetDispatch<GetLicenseResponse>(p)
+				(p, d) => LowLevelDispatch.LicenseGetDispatch<GetLicenseResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -47,7 +47,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IGetLicenseRequest, GetLicenseRequestParameters, GetLicenseResponse, IGetLicenseResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackLicenseGetDispatchAsync<GetLicenseResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.LicenseGetDispatchAsync<GetLicenseResponse>(p, c)
 			);
 	}
 }

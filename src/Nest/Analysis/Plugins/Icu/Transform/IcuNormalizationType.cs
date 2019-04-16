@@ -1,13 +1,12 @@
 ﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	/// <summary>
 	/// Forward (default) for LTR and reverse for RTL
 	/// </summary>
-	[JsonConverter(typeof(StringEnumConverter))]
+	[StringEnum]
 	public enum IcuTransformDirection
 	{
 		/// <summary>LTR</summary>

@@ -85,7 +85,7 @@ namespace Tests.QueryDsl.Geo
 			}
 		};
 
-		protected override string UrlPath => $"/{Index}/doc/_search";
+		protected override string UrlPath => $"/{Index}/_search";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.Search<Domain.Shape>(f),
@@ -118,19 +118,18 @@ namespace Tests.QueryDsl.Geo
 					.NumberOfShards(1)
 					.NumberOfReplicas(0)
 				)
-				.Mappings(m => m
-					.Map<Domain.Shape>(mm => mm
-						.AutoMap()
-						.Properties(p => p
-							.GeoShape(g => g
-								.Name(n => n.GeometryCollection)
-							)
-							.GeoShape(g => g
-								.Name(n => n.Envelope)
-							)
-							.GeoShape(g => g
-								.Name(n => n.Circle)
-							)
+				.Map<Domain.Shape>(mm => mm
+					.AutoMap()
+					.Properties(p => p
+						.GeoShape(g => g
+							.Name(n => n.GeometryCollection)
+						)
+						.GeoShape(g => g
+							.Name(n => n.Envelope)
+						)
+						.GeoShape(g => g
+							.Name(n => n.Circle)
+							.Strategy(GeoStrategy.Recursive)
 						)
 					)
 				)
@@ -168,19 +167,18 @@ namespace Tests.QueryDsl.Geo
 					.NumberOfShards(1)
 					.NumberOfReplicas(0)
 				)
-				.Mappings(m => m
-					.Map<Domain.Shape>(mm => mm
-						.AutoMap()
-						.Properties(p => p
-							.GeoShape(g => g
-								.Name(n => n.GeometryCollection)
-							)
-							.GeoShape(g => g
-								.Name(n => n.Envelope)
-							)
-							.GeoShape(g => g
-								.Name(n => n.Circle)
-							)
+				.Map<Domain.Shape>(mm => mm
+					.AutoMap()
+					.Properties(p => p
+						.GeoShape(g => g
+							.Name(n => n.GeometryCollection)
+						)
+						.GeoShape(g => g
+							.Name(n => n.Envelope)
+						)
+						.GeoShape(g => g
+							.Name(n => n.Circle)
+							.Strategy(GeoStrategy.Recursive)
 						)
 					)
 				)
@@ -191,11 +189,9 @@ namespace Tests.QueryDsl.Geo
 
 			var bulk = new List<object>();
 
-			// use the low level client to force WKT
-			var typeName = Client.Infer.TypeName<Domain.Shape>();
 			foreach (var shape in Domain.Shape.Shapes)
 			{
-				bulk.Add(new { index = new { _index = Index, _type = typeName, _id = shape.Id } });
+				bulk.Add(new { index = new { _index = Index, _id = shape.Id } });
 				bulk.Add(new
 				{
 					id = shape.Id,

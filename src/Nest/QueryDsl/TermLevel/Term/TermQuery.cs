@@ -1,19 +1,20 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(FieldNameQueryJsonConverter<TermQuery>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(FieldNameQueryFormatter<TermQuery, ITermQuery>))]
 	public interface ITermQuery : IFieldNameQuery
 	{
-		[JsonProperty("value")]
-		[JsonConverter(typeof(SourceValueWriteConverter))]
+		[DataMember(Name = "value")]
+		[JsonFormatter(typeof(SourceWriteFormatter<object>))]
 		object Value { get; set; }
 	}
 
+	[DataContract]
 	public class TermQuery : FieldNameQueryBase, ITermQuery
 	{
-		[JsonConverter(typeof(SourceValueWriteConverter))]
 		public object Value { get; set; }
 
 		protected override bool Conditionless => IsConditionless(this);

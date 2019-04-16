@@ -1,13 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IStartTrialLicenseResponse : IAcknowledgedResponse
 	{
-		[JsonProperty("error_message")]
+		[DataMember(Name ="error_message")]
 		string ErrorMessage { get; }
 
-		[JsonProperty("trial_was_started")]
+		[DataMember(Name ="trial_was_started")]
 		bool TrialWasStarted { get; }
 	}
 

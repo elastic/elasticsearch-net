@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<PerFieldAnalyzer, Field, string>))]
+	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<PerFieldAnalyzer, IPerFieldAnalyzer, Field, string>))]
 	public interface IPerFieldAnalyzer : IIsADictionary<Field, string> { }
 
 	public class PerFieldAnalyzer : IsADictionaryBase<Field, string>, IPerFieldAnalyzer

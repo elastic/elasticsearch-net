@@ -1,6 +1,6 @@
 ﻿namespace Nest
 {
-	[MapsApi("xpack.rollup.stop_job.json")]
+	[MapsApi("rollup.stop_job.json")]
 	public partial interface IStopRollupJobRequest { }
 
 	public partial class StopRollupJobRequest { }

@@ -1,20 +1,20 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class DatafeedStats
 	{
-		[JsonProperty("assignment_explanation")]
+		[DataMember(Name ="assignment_explanation")]
 		public string AssignmentExplanation { get; internal set; }
 
-		[JsonProperty("datafeed_id")]
+		[DataMember(Name ="datafeed_id")]
 		public string DatafeedId { get; internal set; }
 
-		[JsonProperty("node")]
+		[DataMember(Name ="node")]
 		public DiscoveryNode Node { get; internal set; }
 
-		[JsonProperty("state")]
+		[DataMember(Name ="state")]
 		public DatafeedState State { get; internal set; }
 	}
 }

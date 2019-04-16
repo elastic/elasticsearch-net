@@ -1,24 +1,25 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<IndicesPrivileges>))]
+	[ReadAs(typeof(IndicesPrivileges))]
 	public interface IIndicesPrivileges
 	{
-		[JsonProperty("field_security")]
+		[DataMember(Name = "field_security")]
 		IFieldSecurity FieldSecurity { get; set; }
 
-		[JsonProperty("names")]
-		[JsonConverter(typeof(IndicesJsonConverter))]
+		[DataMember(Name = "names")]
+		[JsonFormatter(typeof(IndicesFormatter))]
 		Indices Names { get; set; }
 
-		[JsonProperty("privileges")]
+		[DataMember(Name = "privileges")]
 		IEnumerable<string> Privileges { get; set; }
 
-		[JsonProperty("query")]
+		[DataMember(Name = "query")]
 		QueryContainer Query { get; set; }
 	}
 
@@ -26,7 +27,7 @@ namespace Nest
 	{
 		public IFieldSecurity FieldSecurity { get; set; }
 
-		[JsonConverter(typeof(IndicesJsonConverter))]
+		[JsonFormatter(typeof(IndicesFormatter))]
 		public Indices Names { get; set; }
 
 		public IEnumerable<string> Privileges { get; set; }

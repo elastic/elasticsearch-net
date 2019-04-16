@@ -35,7 +35,7 @@ namespace Nest
 		public ICloseJobResponse CloseJob(ICloseJobRequest request) =>
 			Dispatcher.Dispatch<ICloseJobRequest, CloseJobRequestParameters, CloseJobResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackMlCloseJobDispatch<CloseJobResponse>(p)
+				(p, d) => LowLevelDispatch.MlCloseJobDispatch<CloseJobResponse>(p, d)
 			);
 
 		/// <inheritdoc />
@@ -49,7 +49,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<ICloseJobRequest, CloseJobRequestParameters, CloseJobResponse, ICloseJobResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackMlCloseJobDispatchAsync<CloseJobResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.MlCloseJobDispatchAsync<CloseJobResponse>(p, d, c)
 			);
 	}
 }

@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[InterfaceDataContract]
 	public interface IReindexRethrottleResponse : IResponse
 	{
-		[JsonProperty("nodes")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, ReindexNode>))]
+		[DataMember(Name ="nodes")]
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, ReindexNode>))]
 		IReadOnlyDictionary<string, ReindexNode> Nodes { get; }
 	}
 

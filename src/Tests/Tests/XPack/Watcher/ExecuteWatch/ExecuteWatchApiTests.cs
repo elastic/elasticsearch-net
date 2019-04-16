@@ -6,6 +6,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.Xunit;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
@@ -28,7 +29,6 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 				email_admin = "force_simulate",
 				webhook_action = "force_simulate",
 				slack_action = "force_simulate",
-				hipchat_action = "force_simulate",
 				pagerduty_action = "force_simulate",
 			},
 			alternative_input = new
@@ -58,7 +58,6 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 				.Add("email_admin", ActionExecutionMode.ForceSimulate)
 				.Add("webhook_action", ActionExecutionMode.ForceSimulate)
 				.Add("slack_action", ActionExecutionMode.ForceSimulate)
-				.Add("hipchat_action", ActionExecutionMode.ForceSimulate)
 				.Add("pagerduty_action", ActionExecutionMode.ForceSimulate)
 			)
 			.RecordExecution();
@@ -84,7 +83,6 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 					{ "email_admin", ActionExecutionMode.ForceSimulate },
 					{ "webhook_action", ActionExecutionMode.ForceSimulate },
 					{ "slack_action", ActionExecutionMode.ForceSimulate },
-					{ "hipchat_action", ActionExecutionMode.ForceSimulate },
 					{ "pagerduty_action", ActionExecutionMode.ForceSimulate },
 				},
 				RecordExecution = true
@@ -92,7 +90,7 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}/_execute";
+		protected override string UrlPath => $"/_watcher/watch/{CallIsolatedValue}/_execute";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -137,7 +135,6 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 						)
 						.Index("index_action", i => i
 							.Index("test")
-							.DocType("doctype2")
 						)
 						.Logging("logging_action", l => l
 							.Text("404 recently encountered")
@@ -176,15 +173,6 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 										.AuthorName("Russ Cam")
 									)
 								)
-							)
-						)
-						.HipChat("hipchat_action", hc => hc
-							.Account("notify-monitoring")
-							.Message(hm => hm
-								.Body("hipchat message")
-								.Color(HipChatMessageColor.Purple)
-								.Room("nest")
-								.Notify()
 							)
 						)
 					)
@@ -226,7 +214,7 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 
 			var resultActions = response.WatchRecord.Result.Actions;
 			resultActions.Should().NotBeNullOrEmpty();
-			resultActions.Count.Should().Be(7);
+			resultActions.Count.Should().Be(6);
 
 			var inputContainer = response.WatchRecord.Input as IInputContainer;
 			inputContainer.Should().NotBeNull();
@@ -248,7 +236,6 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 			indexAction.Status.Should().Be(Status.Success);
 			indexAction.Index.Response.Should().NotBeNull();
 			indexAction.Index.Response.Index.Should().Be("test");
-			indexAction.Index.Response.Type.Should().Be("doctype2");
 			indexAction.Index.Response.Created.Should().BeTrue();
 			indexAction.Index.Response.Version.Should().Be(1);
 
@@ -263,6 +250,8 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 			webhookAction.Type.Should().Be(ActionType.Webhook);
 			webhookAction.Status.Should().Be(Status.Simulated);
 			webhookAction.Webhook.Should().NotBeNull();
+			webhookAction.Webhook.Request.Should().NotBeNull();
+			webhookAction.Webhook.Request.Host.Should().Be("foo.com");
 
 			var pagerDutyAction = resultActions.FirstOrDefault(a => a.Id == "pagerduty_action");
 			pagerDutyAction.Should().NotBeNull();
@@ -275,12 +264,6 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 			slackAction.Type.Should().Be(ActionType.Slack);
 			slackAction.Status.Should().Be(Status.Simulated);
 			slackAction.Slack.Should().NotBeNull();
-
-			var hipchatAction = resultActions.FirstOrDefault(a => a.Id == "hipchat_action");
-			hipchatAction.Should().NotBeNull();
-			hipchatAction.Type.Should().Be(ActionType.HipChat);
-			hipchatAction.Status.Should().Be(Status.Simulated);
-			hipchatAction.HipChat.Should().NotBeNull();
 
 			response.WatchRecord.Result.ExecutionTime.Should().HaveValue();
 		}
@@ -324,7 +307,6 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 					{
 						index = new
 						{
-							doc_type = "doctype2",
 							index = "test"
 						}
 					},
@@ -465,7 +447,6 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 					)
 					.Index("index_action", i => i
 						.Index("test")
-						.DocType("doctype2")
 					)
 					.Logging("logging_action", l => l
 						.Text("404 recently encountered")
@@ -498,7 +479,7 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 					{ "foo", "bar" }
 				},
 				IgnoreCondition = true,
-				Watch = new PutWatchRequest
+				Watch = new Watch
 				{
 					Trigger = new ScheduleContainer
 					{
@@ -537,7 +518,6 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 						} && new IndexAction("index_action")
 						{
 							Index = "test",
-							DocType = "doctype2"
 						} && new LoggingAction("logging_action")
 						{
 							Text = "404 recently encountered"
@@ -559,7 +539,7 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override string UrlPath => $"/_xpack/watcher/watch/_execute";
+		protected override string UrlPath => $"/_watcher/watch/_execute";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -604,7 +584,6 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 						)
 						.Index("index_action", i => i
 							.Index("test")
-							.DocType("doctype2")
 						)
 						.Logging("logging_action", l => l
 							.Text("404 recently encountered")

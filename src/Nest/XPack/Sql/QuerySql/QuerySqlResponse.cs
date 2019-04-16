@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
+	[InterfaceDataContract]
 	public interface IQuerySqlResponse : IResponse
 	{
 		/// <summary>
 		/// Describes the columns being returned, this property will only be set on the first page of results.
 		/// </summary>
-		[JsonProperty("columns")]
+		[DataMember(Name = "columns")]
 		IReadOnlyCollection<SqlColumn> Columns { get; }
 
 		/// <summary>
@@ -18,23 +20,22 @@ namespace Nest
 		/// Unlike scroll, receiving the last page is enough to guarantee that the Elasticsearch state is cleared.
 		/// </para>
 		/// </summary>
-		[JsonProperty("cursor")]
+		[DataMember(Name = "cursor")]
 		string Cursor { get; }
 
-		[JsonProperty("rows")]
+		[DataMember(Name = "rows")]
 		IReadOnlyCollection<SqlRow> Rows { get; }
 	}
 
 	public class QuerySqlResponse : ResponseBase, IQuerySqlResponse
 	{
 		/// <inheritdoc cref="IQuerySqlResponse.Columns" />
-		/// >
 		public IReadOnlyCollection<SqlColumn> Columns { get; internal set; } = EmptyReadOnly<SqlColumn>.Collection;
 
 		/// <inheritdoc cref="IQuerySqlResponse.Cursor" />
-		/// >
 		public string Cursor { get; internal set; }
 
+		/// <inheritdoc cref="IQuerySqlResponse.Rows" />
 		public IReadOnlyCollection<SqlRow> Rows { get; internal set; } = EmptyReadOnly<SqlRow>.Collection;
 	}
 }

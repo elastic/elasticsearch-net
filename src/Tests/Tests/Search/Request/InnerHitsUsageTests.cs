@@ -110,22 +110,20 @@ namespace Tests.Search.Request
 					.Alias(AliasFor<Earl>(), AliasFilterFor<Earl>)
 					.Alias(AliasFor<Baron>(), AliasFilterFor<Baron>)
 				)
-				.Mappings(map => map
-					.Map<King>(RoyalType, m => m
-						.AutoMap()
-						.Properties(props =>
-							RoyalProps(props)
-								.Nested<King>(n => n.Name(p => p.Foes).AutoMap())
-								.Join(j => j
-									.Name(p => p.Join)
-									.Relations(r => r
-										.Join<King, Prince>()
-										.Join<Prince, Duke>()
-										.Join<Duke, Earl>()
-										.Join<Earl, Baron>()
-									)
+				.Map<King>(m => m
+					.AutoMap()
+					.Properties(props =>
+						RoyalProps(props)
+							.Nested<King>(n => n.Name(p => p.Foes).AutoMap())
+							.Join(j => j
+								.Name(p => p.Join)
+								.Relations(r => r
+									.Join<King, Prince>()
+									.Join<Prince, Duke>()
+									.Join<Duke, Earl>()
+									.Join<Earl, Baron>()
 								)
-						)
+							)
 					)
 				)
 			);
@@ -179,7 +177,7 @@ namespace Tests.Search.Request
 				var royal1 = royal;
 				if (parent == null) royal.Join = JoinField.Root<TRoyal>();
 				if (royal.Join == null) royal.Join = JoinField.Link<TRoyal, TParent>(parent);
-				bulk.Index<TRoyal>(i => i.Document(royal1).Index(_index).Type(RoyalType).Routing(parent == null ? royal.Name : parent.Name));
+				bulk.Index<TRoyal>(i => i.Document(royal1).Index(_index).Routing(parent == null ? royal.Name : parent.Name));
 			}
 			if (indexChildren == null) return;
 
@@ -219,7 +217,7 @@ namespace Tests.Search.Request
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected abstract IndexName Index { get; }
-		protected override string UrlPath => $"/{Index}/{RoyalSeeder.RoyalType}/_search";
+		protected override string UrlPath => $"/{Index}/_search";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values) => new RoyalSeeder(Client, Index).Seed();
 
@@ -287,7 +285,6 @@ namespace Tests.Search.Request
 
 		protected override Func<SearchDescriptor<King>, ISearchRequest> Fluent => s => s
 			.Index(Index)
-			.Type(RoyalSeeder.RoyalType)
 			.Query(q =>
 				q.HasChild<Prince>(hc => hc
 					.Query(hcq => hcq.Match(m => m.Field(p => p.FullTextField).Query("default")))
@@ -308,7 +305,7 @@ namespace Tests.Search.Request
 
 		protected override IndexName Index => IndexName;
 
-		protected override SearchRequest<King> Initializer => new SearchRequest<King>(Index, RoyalSeeder.RoyalType)
+		protected override SearchRequest<King> Initializer => new SearchRequest<King>(Index)
 		{
 			Query = new HasChildQuery
 			{

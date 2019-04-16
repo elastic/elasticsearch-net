@@ -1,12 +1,13 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[InterfaceDataContract]
 	public interface IScriptScoreFunction : IScoreFunction
 	{
-		[JsonProperty("script")]
+		[DataMember(Name = "script")]
 		IScriptQuery Script { get; set; }
 	}
 

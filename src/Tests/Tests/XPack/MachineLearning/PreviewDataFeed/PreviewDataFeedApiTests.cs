@@ -23,7 +23,7 @@ namespace Tests.XPack.MachineLearning.PreviewDatafeed
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override PreviewDatafeedRequest Initializer => new PreviewDatafeedRequest(CallIsolatedValue + "-datafeed");
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/_xpack/ml/datafeeds/{CallIsolatedValue}-datafeed/_preview";
+		protected override string UrlPath => $"/_ml/datafeeds/{CallIsolatedValue}-datafeed/_preview";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

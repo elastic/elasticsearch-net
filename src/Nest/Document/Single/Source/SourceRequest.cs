@@ -1,26 +1,18 @@
 ﻿namespace Nest
 {
+	[MapsApi("get_source.json")]
 	public partial interface ISourceRequest { }
 
-	public interface ISourceRequest<T> : ISourceRequest where T : class { }
+	public partial interface ISourceRequest<TDocument> where TDocument : class { }
 
-	public partial class SourceRequest
+	public partial class SourceRequest { }
+
+	public partial class SourceRequest<TDocument> where TDocument : class { }
+
+	public partial class SourceDescriptor<TDocument> where TDocument : class
 	{
-		private object AutoRouteDocument() => null;
-	}
+		public SourceDescriptor<TDocument> ExecuteOnPrimary() => Preference("_primary");
 
-	public partial class SourceRequest<T> where T : class
-	{
-		private object AutoRouteDocument() => null;
-	}
-
-	[DescriptorFor("GetSource")]
-	public partial class SourceDescriptor<T> where T : class
-	{
-		private object AutoRouteDocument() => null;
-
-		public SourceDescriptor<T> ExecuteOnPrimary() => Preference("_primary");
-
-		public SourceDescriptor<T> ExecuteOnLocalShard() => Preference("_local");
+		public SourceDescriptor<TDocument> ExecuteOnLocalShard() => Preference("_local");
 	}
 }

@@ -25,7 +25,7 @@ namespace Nest
 	@foreach (var kv in model.Endpoints)
 	{
 		var endpoint = kv.Value;
-		var endpointsException = string.Join(", ", endpoint.Url.Paths.Select(p=> "\"" + p + "\""));
+		var endpointsException = string.Join(", ", endpoint.Url.ExposedApiPaths.Select(p=> "\"" + p.Path + "\""));
 		var httpMethodsException = string.Join(", ", endpoint.RawDispatches.Select(p=> p.Key.ToUpper() ));
 		var peek = endpoint.GetCsharpMethods().FirstOrDefault();
 		if (peek == null)
@@ -33,10 +33,15 @@ namespace Nest
 			<text>//NO METHOD FOR @endpoint.Url.Path</text>
 			continue;
 		}
-		var isGeneric = peek.InterfaceType.Contains("<");
-		var genericTypes = !isGeneric ? new string[] {} : Regex.Replace(peek.InterfaceType, @"^.+<(.+)>$", "$1").Split(',').Select(s => s.Trim()).ToArray();
+		
+		var concreteInterface = peek.InterfaceTypeGeneric == null ? peek.InterfaceType : peek.InterfaceTypeGeneric;
+		var serializableArg = peek.InterfaceTypeGeneric == null 
+			? peek.InterfaceType 
+			: peek.GenericAndNonGeneric ? peek.InterfaceType : peek.InterfaceTypeGeneric;
+		var isGeneric = concreteInterface.Contains("<");
+		var genericTypes = !isGeneric || (isGeneric && peek.GenericAndNonGeneric) ? new string[] {} : Regex.Replace(concreteInterface, @"^.*?<(.+)>$", "$1").Split(',').Select(s => s.Trim()).ToArray();
 
-		var dispatchGeneric = !isGeneric ? "<TResponse>" : ("<TResponse," + string.Join(",", genericTypes) + ">");
+		var dispatchGeneric = !isGeneric || (isGeneric && peek.GenericAndNonGeneric) ? "<TResponse>" : ("<TResponse," + string.Join(",", genericTypes) + ">");
 		var methodConstraints = "where TResponse : class, IElasticsearchResponse, new()" + (string.Join("", genericTypes.Select(s => " where " + s + " : class")));
 		
 		var generate = new [] {
@@ -46,7 +51,7 @@ namespace Nest
 		foreach(var gen in generate)
 		{
 <text>
-		internal @Raw(gen.Returns) @(Raw(gen.Name))(IRequest<@peek.QueryStringParamName> p@{if (endpoint.Body != null) {<text>,@(Raw("SerializableData<"))@(Raw(peek.InterfaceType))@(Raw(">")) body</text>}}@(gen.Async ? ", CancellationToken ct" : string.Empty)) @methodConstraints
+		internal @Raw(gen.Returns) @(Raw(gen.Name))(IRequest<@peek.QueryStringParamName> p@{if (endpoint.Body != null) {<text>,@(Raw("SerializableData<"))@(Raw(serializableArg))@(Raw(">")) body</text>}}@(gen.Async ? ", CancellationToken ct" : string.Empty)) @methodConstraints
 		{
 			switch(p.HttpMethod)
 			{

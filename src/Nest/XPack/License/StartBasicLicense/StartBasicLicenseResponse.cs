@@ -1,68 +1,94 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	public interface IStartBasicLicenseResponse : IAcknowledgedResponse
 	{
-		[JsonProperty("basic_was_started")]
+		[DataMember(Name = "acknowledge")]
+		StartBasicLicenseFeatureAcknowledgements Acknowledge { get; }
+
+		[DataMember(Name = "basic_was_started")]
 		bool BasicWasStarted { get; }
 
-		[JsonProperty("error_message")]
+		[DataMember(Name = "error_message")]
 		string ErrorMessage { get; }
-
-		[JsonProperty("acknowledge")]
-		StartBasicLicenseFeatureAcknowledgements Acknowledge { get; }
 	}
 
 	public class StartBasicLicenseResponse : AcknowledgedResponseBase, IStartBasicLicenseResponse
 	{
-		//TODO: make this the default on base class for 7.0 ?
-		public override bool IsValid => base.IsValid && Acknowledged;
+		public StartBasicLicenseFeatureAcknowledgements Acknowledge { get; internal set; }
 
 		public bool BasicWasStarted { get; internal set; }
 
 		public string ErrorMessage { get; internal set; }
 
-		public StartBasicLicenseFeatureAcknowledgements Acknowledge { get; internal set; }
+		//TODO: make this the default on base class for 7.0 ?
+		public override bool IsValid => base.IsValid && Acknowledged;
 	}
 
-	[JsonConverter(typeof(StartBasicLicenseFeatureAcknowledgementsJsonConverter))]
+	[JsonFormatter(typeof(StartBasicLicenseFeatureAcknowledgementsFormatter))]
 	public class StartBasicLicenseFeatureAcknowledgements : ReadOnlyDictionary<string, string[]>
 	{
 		internal StartBasicLicenseFeatureAcknowledgements(IDictionary<string, string[]> dictionary)
 			: base(dictionary) { }
 
-		[JsonProperty("message")]
+		[DataMember(Name = "message")]
 		public string Message { get; internal set; }
-
 	}
 
-	internal class StartBasicLicenseFeatureAcknowledgementsJsonConverter : VerbatimDictionaryKeysJsonConverter<string, object>
+	internal class StartBasicLicenseFeatureAcknowledgementsFormatter : IJsonFormatter<StartBasicLicenseFeatureAcknowledgements>
 	{
-		public override bool CanRead => true;
+		private static readonly ArrayFormatter<string> StringArrayFormatter = new ArrayFormatter<string>();
 
-		public override bool CanConvert(Type t) => true;
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public StartBasicLicenseFeatureAcknowledgements Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var jObject = JObject.Load(reader);
+			if (reader.ReadIsNull())
+				return null;
+
+			var count = 0;
 			string message = null;
-			if (jObject.TryGetValue("message", out var mToken))
+			var dict = new Dictionary<string, string[]>();
+			while (reader.ReadIsInObject(ref count))
 			{
-				message = mToken.Value<string>();
-				jObject.Remove("message");
+				var propertyName = reader.ReadPropertyName();
+				if (propertyName == "message")
+					message = reader.ReadString();
+				else
+					dict.Add(propertyName, StringArrayFormatter.Deserialize(ref reader, formatterResolver));
 			}
 
-			var dictionary = serializer.Deserialize<Dictionary<string, string[]>>(jObject.CreateReader());
-			var d = new StartBasicLicenseFeatureAcknowledgements(dictionary);
-			d.Message = message;
-			return d;
+			return new StartBasicLicenseFeatureAcknowledgements(dict) { Message = message };
+		}
+
+		public void Serialize(ref JsonWriter writer, StartBasicLicenseFeatureAcknowledgements value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
+
+			writer.WriteBeginObject();
+			var count = 0;
+			if (!string.IsNullOrEmpty(value.Message))
+			{
+				writer.WritePropertyName("message");
+				writer.WriteString(value.Message);
+				count++;
+			}
+			foreach (var kv in value)
+			{
+				if (count > 0)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName(kv.Key);
+				StringArrayFormatter.Serialize(ref writer, kv.Value, formatterResolver);
+				count++;
+			}
+			writer.WriteEndObject();
 		}
 	}
-
 }

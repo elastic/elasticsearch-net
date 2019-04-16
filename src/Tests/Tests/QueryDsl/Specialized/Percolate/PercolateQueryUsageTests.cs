@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
+using Tests.Core.Xunit;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -40,6 +42,21 @@ namespace Tests.QueryDsl.Specialized.Percolate
 			(client, r) => client.SearchAsync<ProjectPercolation>(r)
 		);
 
+		// https://youtrack.jetbrains.com/issue/RIDER-19912
+		[U] protected override Task HitsTheCorrectUrl() => base.HitsTheCorrectUrl();
+
+		[U] protected override Task UsesCorrectHttpMethod() => base.UsesCorrectHttpMethod();
+
+		[U] protected override void SerializesInitializer() => base.SerializesInitializer();
+
+		[U] protected override void SerializesFluent() => base.SerializesFluent();
+
+		[I] public override async Task ReturnsExpectedStatusCode() => await base.ReturnsExpectedResponse();
+
+		[I] public override async Task ReturnsExpectedIsValid() => await base.ReturnsExpectedIsValid();
+
+		[I] public override async Task ReturnsExpectedResponse() => await base.AssertOnAllResponses(ExpectResponse);
+
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var index in values.Values)
@@ -50,10 +67,8 @@ namespace Tests.QueryDsl.Specialized.Percolate
 						.NumberOfReplicas(0)
 						.Analysis(DefaultSeeder.ProjectAnalysisSettings)
 					)
-					.Mappings(m => m
-						.Map<Project>(mm => mm.AutoMap()
-							.Properties(DefaultSeeder.ProjectProperties)
-						)
+					.Map<Project>(mm => mm.AutoMap()
+						.Properties(DefaultSeeder.ProjectProperties)
 					)
 				);
 				var percolationIndex = index + "-queries";
@@ -63,10 +78,8 @@ namespace Tests.QueryDsl.Specialized.Percolate
 						.NumberOfReplicas(0)
 						.Analysis(DefaultSeeder.ProjectAnalysisSettings)
 					)
-					.Mappings(m => m
-						.Map<ProjectPercolation>(mm => mm.AutoMap()
-							.Properties(DefaultSeeder.PercolatedQueryProperties)
-						)
+					.Map<ProjectPercolation>(mm => mm.AutoMap()
+						.Properties(DefaultSeeder.PercolatedQueryProperties)
 					)
 				);
 
@@ -109,11 +122,11 @@ namespace Tests.QueryDsl.Specialized.Percolate
 
 		//hide
 		protected override Func<SearchDescriptor<ProjectPercolation>, ISearchRequest> Fluent => f =>
-			f.Query(QueryFluent).Index(PercolationIndex).AllTypes();
+			f.Query(QueryFluent).Index(PercolationIndex);
 
 		//hide
 		protected override SearchRequest<ProjectPercolation> Initializer =>
-			new SearchRequest<ProjectPercolation>(PercolationIndex, Types.All)
+			new SearchRequest<ProjectPercolation>(PercolationIndex)
 			{
 				Query = QueryInitializer
 			};
@@ -165,24 +178,24 @@ namespace Tests.QueryDsl.Specialized.Percolate
 	* See the Elasticsearch documentation on {ref_current}/query-dsl-percolate-query.html[percolate query] for more details.
 	*/
 	[SkipVersion("5.0.0-alpha1", "percolate query changed property in query dsl from 'percolator' to 'percolate'")]
+	[BlockedByIssue("https://github.com/elastic/elasticsearch/pull/39987")]
 	public class PercolateQueryExistingDocumentUsageTests : PercolateQueryUsageTestsBase
 	{
 		public PercolateQueryExistingDocumentUsageTests(WritableCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		//hide
 		protected override Func<SearchDescriptor<ProjectPercolation>, ISearchRequest> Fluent => f =>
-			f.Query(QueryFluent).Index(PercolationIndex).AllTypes();
+			f.Query(QueryFluent).Index(PercolationIndex);
 
 		//hide
 		protected override SearchRequest<ProjectPercolation> Initializer =>
-			new SearchRequest<ProjectPercolation>(PercolationIndex, Types.All)
+			new SearchRequest<ProjectPercolation>(PercolationIndex)
 			{
 				Query = QueryInitializer
 			};
 
 		protected QueryContainer QueryInitializer => new PercolateQuery
 		{
-			Type = typeof(Project),
 			Index = IndexName.From<Project>(),
 			Id = Project.Instance.Name,
 			Routing = Project.Instance.Name,
@@ -203,7 +216,6 @@ namespace Tests.QueryDsl.Specialized.Percolate
 
 		protected QueryContainer QueryFluent(QueryContainerDescriptor<ProjectPercolation> q) => q
 			.Percolate(p => p
-				.Type<Project>()
 				.Index<Project>()
 				.Id(Project.Instance.Name)
 				.Routing(Project.Instance.Name)
@@ -230,6 +242,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 	* See the Elasticsearch documentation on {ref_current}/query-dsl-percolate-query.html[percolate query] for more details.
 	*/
 	[SkipVersion("5.0.0-alpha1", "percolate query changed property in query dsl from 'percolator' to 'percolate'")]
+	[BlockedByIssue("https://github.com/elastic/elasticsearch/pull/39987")]
 	public class PercolateMultipleDocumentsQueryUsageTests : PercolateQueryUsageTestsBase
 	{
 		public PercolateMultipleDocumentsQueryUsageTests(WritableCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -241,11 +254,11 @@ namespace Tests.QueryDsl.Specialized.Percolate
 
 		//hide
 		protected override Func<SearchDescriptor<ProjectPercolation>, ISearchRequest> Fluent => f =>
-			f.Query(QueryFluent).Index(PercolationIndex).AllTypes();
+			f.Query(QueryFluent).Index(PercolationIndex);
 
 		//hide
 		protected override SearchRequest<ProjectPercolation> Initializer =>
-			new SearchRequest<ProjectPercolation>(PercolationIndex, Types.All)
+			new SearchRequest<ProjectPercolation>(PercolationIndex)
 			{
 				Query = QueryInitializer
 			};

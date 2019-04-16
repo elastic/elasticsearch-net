@@ -1,9 +1,9 @@
 ﻿namespace Nest
 {
+	[MapsApi("security.clear_cached_roles.json")]
 	public partial interface IClearCachedRolesRequest { }
 
 	public partial class ClearCachedRolesRequest { }
 
-	[DescriptorFor("XpackSecurityClearCachedRoles")]
 	public partial class ClearCachedRolesDescriptor { }
 }

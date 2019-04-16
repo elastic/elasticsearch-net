@@ -1,18 +1,20 @@
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	public class NodeState
 	{
-		[JsonProperty("attributes")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, string>))]
+		// TODO: IReadOnlyDictionary
+		[DataMember(Name ="attributes")]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, string>))]
 		public Dictionary<string, string> Attributes { get; internal set; }
 
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		public string Name { get; internal set; }
 
-		[JsonProperty("transport_address")]
+		[DataMember(Name ="transport_address")]
 		public string TransportAddress { get; internal set; }
 	}
 }

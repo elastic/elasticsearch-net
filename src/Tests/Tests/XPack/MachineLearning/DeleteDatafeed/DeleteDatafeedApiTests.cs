@@ -19,7 +19,7 @@ namespace Tests.XPack.MachineLearning.DeleteDatafeed
 		protected override Func<DeleteDatafeedDescriptor, IDeleteDatafeedRequest> Fluent => f => f;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override DeleteDatafeedRequest Initializer => new DeleteDatafeedRequest(CallIsolatedValue + "-datafeed");
-		protected override string UrlPath => $"_xpack/ml/datafeeds/{CallIsolatedValue}-datafeed";
+		protected override string UrlPath => $"_ml/datafeeds/{CallIsolatedValue}-datafeed";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

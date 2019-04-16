@@ -3,11 +3,10 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(RoutingJsonConverter))]
+	[JsonFormatter(typeof(RoutingFormatter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Routing : IEquatable<Routing>, IUrlParameter
 	{
@@ -145,6 +144,13 @@ namespace Nest
 				result = (result * 397) ^ (Document?.GetHashCode() ?? 0);
 				return result;
 			}
+		}
+
+		internal bool ShouldSerialize(IJsonFormatterResolver formatterResolver)
+		{
+			var inferrer = formatterResolver.GetConnectionSettings().Inferrer;
+			var resolved = inferrer.Resolve(this);
+			return !resolved.IsNullOrEmpty();
 		}
 	}
 }

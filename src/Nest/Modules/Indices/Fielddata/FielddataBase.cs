@@ -1,15 +1,16 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[InterfaceDataContract]
 	public interface IFielddata
 	{
-		[JsonProperty("filter")]
+		[DataMember(Name ="filter")]
 		IFielddataFilter Filter { get; set; }
 
-		[JsonProperty("loading")]
+		[DataMember(Name ="loading")]
 		FielddataLoading? Loading { get; set; }
 	}
 

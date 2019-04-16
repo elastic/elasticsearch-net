@@ -94,7 +94,6 @@ namespace Tests.Analysis.TokenFilters
 						.TokenSeparator("|")
 					)
 					.Snowball("snow", t => t.Language(SnowballLanguage.Dutch))
-					.Standard("standard")
 					.Stemmer("stem", t => t.Language("arabic"))
 					.StemmerOverride("stemo", t => t.RulesPath("analysis/custom_stems.txt"))
 					.Stop("stop", t => t
@@ -248,7 +247,6 @@ namespace Tests.Analysis.TokenFilters
 							}
 						},
 						{ "snow", new SnowballTokenFilter { Language = SnowballLanguage.Dutch } },
-						{ "standard", new StandardTokenFilter() },
 						{ "stem", new StemmerTokenFilter { Language = "arabic" } },
 						{ "stemo", new StemmerOverrideTokenFilter { RulesPath = "analysis/custom_stems.txt" } },
 						{ "stop", new StopTokenFilter { IgnoreCase = true, RemoveTrailing = true, StopWords = new[] { "x", "y", "z" } } },

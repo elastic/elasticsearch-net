@@ -1,6 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -9,7 +8,7 @@ namespace Nest
 	/// The mode parameter controls what array value the aggregation will use for array or
 	/// multi-valued fields.
 	/// </summary>
-	[JsonConverter(typeof(StringEnumConverter))]
+	[StringEnum]
 	public enum MatrixStatsMode
 	{
 		/// <summary>

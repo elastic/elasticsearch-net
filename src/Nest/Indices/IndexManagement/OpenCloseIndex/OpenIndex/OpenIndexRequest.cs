@@ -1,9 +1,9 @@
 ﻿namespace Nest
 {
+	[MapsApi("indices.open.json")]
 	public partial interface IOpenIndexRequest { }
 
 	public partial class OpenIndexRequest { }
 
-	[DescriptorFor("IndicesOpen")]
 	public partial class OpenIndexDescriptor { }
 }

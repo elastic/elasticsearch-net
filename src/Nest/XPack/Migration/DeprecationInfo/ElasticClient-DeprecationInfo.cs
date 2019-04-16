@@ -46,7 +46,7 @@ namespace Nest
 		public IDeprecationInfoResponse DeprecationInfo(IDeprecationInfoRequest request) =>
 			Dispatcher.Dispatch<IDeprecationInfoRequest, DeprecationInfoRequestParameters, DeprecationInfoResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackMigrationDeprecationsDispatch<DeprecationInfoResponse>(p)
+				(p, d) => LowLevelDispatch.MigrationDeprecationsDispatch<DeprecationInfoResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -62,7 +62,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IDeprecationInfoRequest, DeprecationInfoRequestParameters, DeprecationInfoResponse, IDeprecationInfoResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackMigrationDeprecationsDispatchAsync<DeprecationInfoResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.MigrationDeprecationsDispatchAsync<DeprecationInfoResponse>(p, c)
 			);
 	}
 }

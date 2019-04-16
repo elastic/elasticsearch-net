@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ConstantScoreQueryDescriptor<object>>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(ConstantScoreQuery))]
 	public interface IConstantScoreQuery : IQuery
 	{
-		[JsonProperty("filter")]
+		[DataMember(Name ="filter")]
 		QueryContainer Filter { get; set; }
 	}
 
+	[DataContract]
 	public class ConstantScoreQuery : QueryBase, IConstantScoreQuery
 	{
 		public QueryContainer Filter { get; set; }
+
+		// TODO: Remove Lang, Params and Script.
 		public string Lang { get; set; }
 		public Dictionary<string, object> Params { get; set; }
 		public string Script { get; set; }
@@ -25,6 +29,7 @@ namespace Nest
 		internal static bool IsConditionless(IConstantScoreQuery q) => q.Filter.NotWritable();
 	}
 
+	[DataContract]
 	public class ConstantScoreQueryDescriptor<T>
 		: QueryDescriptorBase<ConstantScoreQueryDescriptor<T>, IConstantScoreQuery>
 			, IConstantScoreQuery where T : class

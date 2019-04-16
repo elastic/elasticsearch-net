@@ -31,7 +31,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override UpdateByQueryRequest Initializer => new UpdateByQueryRequest(CallIsolatedValue, Type<Test>())
+		protected override UpdateByQueryRequest Initializer => new UpdateByQueryRequest(CallIsolatedValue)
 		{
 			Query = new MatchAllQuery(),
 			Refresh = true,
@@ -40,19 +40,17 @@ namespace Tests.Document.Multiple.UpdateByQuery
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override string UrlPath => $"/{CallIsolatedValue}/test/_update_by_query?refresh=true&conflicts=proceed";
+		protected override string UrlPath => $"/{CallIsolatedValue}/_update_by_query?refresh=true&conflicts=proceed";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var index in values.Values)
 			{
 				Client.CreateIndex(index, c => c
-					.Mappings(m => m
-						.Map<Test>(map => map
-							.Dynamic(false)
-							.Properties(props => props
-								.Text(s => s.Name(p => p.Text))
-							)
+					.Map<Test>(map => map
+						.Dynamic(false)
+						.Properties(props => props
+							.Text(s => s.Name(p => p.Text))
 						)
 					)
 				);
@@ -80,7 +78,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 
 		protected override void OnAfterCall(IElasticClient client) => client.Refresh(CallIsolatedValue);
 
-		protected override UpdateByQueryDescriptor<Test> NewDescriptor() => new UpdateByQueryDescriptor<Test>(CallIsolatedValue).Type<Test>();
+		protected override UpdateByQueryDescriptor<Test> NewDescriptor() => new UpdateByQueryDescriptor<Test>(CallIsolatedValue);
 
 		private ISearchResponse<Test> SearchFlags(string index) =>
 			Client.Search<Test>(s => s
@@ -118,14 +116,14 @@ namespace Tests.Document.Multiple.UpdateByQuery
 			.WaitForCompletion(false)
 			.Conflicts(Conflicts.Proceed);
 
-		protected override UpdateByQueryRequest Initializer => new UpdateByQueryRequest(CallIsolatedValue, Type<Test>())
+		protected override UpdateByQueryRequest Initializer => new UpdateByQueryRequest(CallIsolatedValue)
 		{
 			Query = new MatchAllQuery(),
 			WaitForCompletion = false,
 			Conflicts = Conflicts.Proceed
 		};
 
-		protected override string UrlPath => $"/{CallIsolatedValue}/test/_update_by_query?wait_for_completion=false&conflicts=proceed";
+		protected override string UrlPath => $"/{CallIsolatedValue}/_update_by_query?wait_for_completion=false&conflicts=proceed";
 
 		protected override void ExpectResponse(IUpdateByQueryResponse response)
 		{
@@ -159,7 +157,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 			.Query(q => q.Match(m => m.Field(p => p.Flag).Query("bar")))
 			.Script(ss => ss.Source(_script));
 
-		protected override UpdateByQueryRequest Initializer => new UpdateByQueryRequest(CallIsolatedValue, Type<Test>())
+		protected override UpdateByQueryRequest Initializer => new UpdateByQueryRequest(CallIsolatedValue)
 		{
 			Query = new MatchQuery
 			{
@@ -169,7 +167,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 			Script = new InlineScript(_script),
 		};
 
-		protected override string UrlPath => $"/{CallIsolatedValue}/test/_update_by_query";
+		protected override string UrlPath => $"/{CallIsolatedValue}/_update_by_query";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class IndexSegment
 	{
-		[JsonProperty("shards")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, ShardsSegment>))]
+		[DataMember(Name ="shards")]
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, ShardsSegment>))]
 		public IReadOnlyDictionary<string, ShardsSegment> Shards { get; internal set; } =
 			EmptyReadOnly<string, ShardsSegment>.Dictionary;
 	}

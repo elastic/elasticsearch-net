@@ -81,5 +81,19 @@ namespace Elasticsearch.Net
 			var compiled = (ObjectActivator<T>)lambda.Compile();
 			return compiled;
 		}
+
+		private static readonly ConcurrentDictionary<Type, Func<object>> CachedDefaultValues =
+			new ConcurrentDictionary<Type, Func<object>>();
+
+		internal static object DefaultValue(this Type type) =>
+			type.IsValueType()
+				? CachedDefaultValues.GetOrAdd(type, t =>
+						Expression.Lambda<Func<object>>(
+								Expression.Convert(Expression.Default(type), typeof(object))
+							)
+							.Compile()
+					)
+					.Invoke()
+				: null;
 	}
 }

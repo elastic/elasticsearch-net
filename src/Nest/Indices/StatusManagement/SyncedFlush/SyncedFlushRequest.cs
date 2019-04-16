@@ -1,9 +1,9 @@
 ﻿namespace Nest
 {
+	[MapsApi("indices.flush_synced.json")]
 	public partial interface ISyncedFlushRequest { }
 
 	public partial class SyncedFlushRequest { }
 
-	[DescriptorFor("IndicesFlushSynced")]
 	public partial class SyncedFlushDescriptor { }
 }

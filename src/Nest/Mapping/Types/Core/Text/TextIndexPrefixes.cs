@@ -1,15 +1,16 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<TextIndexPrefixes>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(TextIndexPrefixes))]
 	public interface ITextIndexPrefixes
 	{
-		[JsonProperty("max_chars")]
+		[DataMember(Name ="max_chars")]
 		int? MaxCharacters { get; set; }
 
-		[JsonProperty("min_chars")]
+		[DataMember(Name ="min_chars")]
 		int? MinCharacters { get; set; }
 	}
 

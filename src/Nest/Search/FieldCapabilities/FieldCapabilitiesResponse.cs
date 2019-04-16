@@ -1,28 +1,28 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject]
+	[InterfaceDataContract]
 	public interface IFieldCapabilitiesResponse : IResponse
 	{
-		[JsonProperty("fields")]
+		[DataMember(Name = "fields")]
 		FieldCapabilitiesFields Fields { get; }
 	}
 
 	public class FieldCapabilitiesResponse : ResponseBase, IFieldCapabilitiesResponse
 	{
 		public FieldCapabilitiesFields Fields { get; internal set; }
-		public ShardStatistics Shards { get; internal set; }
+		//public ShardStatistics Shards { get; internal set; }
 	}
 
-	[JsonConverter(typeof(Converter))]
+	[JsonFormatter(typeof(Converter))]
 	public class FieldCapabilitiesFields : ResolvableDictionaryProxy<Field, FieldTypes>
 	{
 		internal FieldCapabilitiesFields(IConnectionConfigurationValues c, IReadOnlyDictionary<Field, FieldTypes> b) : base(c, b) { }
 
-		internal class Converter : ResolvableDictionaryJsonConverterBase<FieldCapabilitiesFields, Field, FieldTypes>
+		internal class Converter : ResolvableDictionaryFormatterBase<FieldCapabilitiesFields, Field, FieldTypes>
 		{
 			protected override FieldCapabilitiesFields Create(IConnectionSettingsValues s, Dictionary<Field, FieldTypes> d) =>
 				new FieldCapabilitiesFields(s, d);
@@ -67,24 +67,28 @@ namespace Nest
 		public FieldCapabilities TokenCount => BackingDictionary.TryGetValue("token_count", out var f) ? f : null;
 		public FieldCapabilities Type => BackingDictionary.TryGetValue("_type", out var f) ? f : null;
 		public FieldCapabilities Uid => BackingDictionary.TryGetValue("_uid", out var f) ? f : null;
+		public FieldCapabilities ParentJoin => BackingDictionary.TryGetValue("_parent_join", out var f) ? f : null;
 		public FieldCapabilities Version => BackingDictionary.TryGetValue("_version", out var f) ? f : null;
 	}
 
 	public class FieldCapabilities
 	{
-		[JsonProperty("aggregatable")]
+		[DataMember(Name = "aggregatable")]
 		public bool Aggregatable { get; internal set; }
 
-		[JsonProperty("indices")]
+		[DataMember(Name = "indices")]
+		[JsonFormatter(typeof(IndicesFormatter))]
 		public Indices Indices { get; internal set; }
 
-		[JsonProperty("non_aggregatable_indices")]
+		[DataMember(Name = "non_aggregatable_indices")]
+		[JsonFormatter(typeof(IndicesFormatter))]
 		public Indices NonAggregatableIndices { get; internal set; }
 
-		[JsonProperty("non_searchable_indices")]
+		[DataMember(Name = "non_searchable_indices")]
+		[JsonFormatter(typeof(IndicesFormatter))]
 		public Indices NonSearchableIndices { get; internal set; }
 
-		[JsonProperty("searchable")]
+		[DataMember(Name = "searchable")]
 		public bool Searchable { get; internal set; }
 	}
 }

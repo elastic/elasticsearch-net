@@ -4,6 +4,7 @@ using System.Text;
 using BenchmarkDotNet.Attributes;
 using Elasticsearch.Net;
 using Nest;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Tests.Benchmarking.Framework;
 using Tests.Core.Client;
@@ -15,7 +16,7 @@ namespace Tests.Benchmarking
 	{
 		private static readonly IElasticClient Client = TestClient.DefaultInMemoryClient;
 		private byte[] _hugeResponse;
-		private JsonSerializer _jsonSerializer;
+		private Newtonsoft.Json.JsonSerializer _jsonSerializer;
 		private byte[] _largeResponse;
 		private byte[] _mediumResponse;
 		private byte[] _tinyResponse;
@@ -29,7 +30,7 @@ namespace Tests.Benchmarking
 			_largeResponse = serializer.SerializeToBytes(ReturnBulkResponse(1000));
 			_hugeResponse = serializer.SerializeToBytes(ReturnBulkResponse(100000));
 
-			_jsonSerializer = new JsonSerializer();
+			_jsonSerializer = new Newtonsoft.Json.JsonSerializer();
 		}
 
 		[Benchmark(Description = "deserialize 1 item in bulk response")]

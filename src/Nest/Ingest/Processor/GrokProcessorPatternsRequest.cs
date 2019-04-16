@@ -1,9 +1,9 @@
 ﻿namespace Nest
 {
+	[MapsApi("ingest.processor_grok.json")]
 	public partial interface IGrokProcessorPatternsRequest { }
 
 	public partial class GrokProcessorPatternsRequest { }
 
-	[DescriptorFor("IngestProcessorGrok")]
 	public partial class GrokProcessorPatternsDescriptor { }
 }

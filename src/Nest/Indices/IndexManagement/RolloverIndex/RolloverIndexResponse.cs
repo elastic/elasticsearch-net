@@ -1,27 +1,28 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[InterfaceDataContract]
 	public interface IRolloverIndexResponse : IAcknowledgedResponse
 	{
-		[JsonProperty("conditions")]
+		[DataMember(Name = "conditions")]
 		IReadOnlyDictionary<string, bool> Conditions { get; }
 
-		[JsonProperty("dry_run")]
+		[DataMember(Name = "dry_run")]
 		bool DryRun { get; }
 
-		[JsonProperty("new_index")]
+		[DataMember(Name = "new_index")]
 		string NewIndex { get; }
 
-		[JsonProperty("old_index")]
+		[DataMember(Name = "old_index")]
 		string OldIndex { get; }
 
-		[JsonProperty("rolled_over")]
+		[DataMember(Name = "rolled_over")]
 		bool RolledOver { get; }
 
-		[JsonProperty("shards_acknowledged")]
+		[DataMember(Name = "shards_acknowledged")]
 		bool ShardsAcknowledged { get; }
 	}
 

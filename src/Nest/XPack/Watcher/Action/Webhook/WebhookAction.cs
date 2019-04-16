@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
-	[ExactContractJsonConverter(typeof(ReadAsTypeJsonConverter<WebhookAction>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(WebhookAction))]
 	public interface IWebhookAction : IAction, IHttpInputRequest { }
 
 	public class WebhookAction : ActionBase, IWebhookAction

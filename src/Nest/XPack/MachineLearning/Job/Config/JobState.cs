@@ -1,13 +1,13 @@
 ﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using Elasticsearch.Net;
+
 
 namespace Nest
 {
 	/// <summary>
 	/// The state of a machine learning job
 	/// </summary>
-	[JsonConverter(typeof(StringEnumConverter))]
+	[StringEnum]
 	public enum JobState
 	{
 		/// <summary>

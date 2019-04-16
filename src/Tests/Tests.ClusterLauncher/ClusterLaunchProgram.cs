@@ -16,9 +16,13 @@ namespace Tests.ClusterLauncher
 
 		public static int Main(string[] arguments)
 		{
+			var clusters = GetClusters();
 			if (arguments.Length < 1)
 			{
 				Console.Error.WriteLine("cluster command needs atleast one argument to indicate the cluster to start");
+				foreach (var c in clusters)
+					Console.WriteLine(" - " + c.Name.Replace("Cluster", "").ToLowerInvariant());
+
 				return 3;
 			}
 
@@ -27,8 +31,7 @@ namespace Tests.ClusterLauncher
 				Environment.SetEnvironmentVariable("NEST_INTEGRATION_VERSION", arguments[1], EnvironmentVariableTarget.Process);
 			Environment.SetEnvironmentVariable("NEST_INTEGRATION_SHOW_OUTPUT_AFTER_START", "1", EnvironmentVariableTarget.Process);
 
-
-			var cluster = GetClusters().FirstOrDefault(c => c.Name.StartsWith(clusterName, StringComparison.OrdinalIgnoreCase));
+			var cluster = clusters.FirstOrDefault(c => c.Name.StartsWith(clusterName, StringComparison.OrdinalIgnoreCase));
 			if (cluster == null)
 			{
 				Console.Error.WriteLine($"No cluster found that starts with '{clusterName}");
@@ -98,6 +101,7 @@ namespace Tests.ClusterLauncher
 
 			return types
 				.Where(t => t.Implements(typeof(IEphemeralCluster)))
+				.Where(t=> !t.IsAbstract)
 				.ToArray();
 		}
 	}

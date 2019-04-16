@@ -57,19 +57,20 @@ namespace Tests.Search.Search.Collapsing
 			}
 		};
 
-		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/doc/_search";
+		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/_search";
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			var numberOfStates = Enum.GetValues(typeof(StateOfBeing)).Length;
-			response.HitsMetadata.Total.Should().BeGreaterThan(numberOfStates);
+			response.HitsMetadata.Total.Value.Should().BeGreaterThan(numberOfStates);
 			response.Hits.Count.Should().Be(numberOfStates);
 			foreach (var hit in response.Hits)
 			{
 				var name = nameof(StateOfBeing).ToLowerInvariant();
 				hit.InnerHits.Should().NotBeNull().And.ContainKey(name);
-				var innherHits = hit.InnerHits[name];
-				innherHits.Hits.Total.Should().BeGreaterThan(0);
+				var innerHits = hit.InnerHits[name];
+				innerHits.Hits.Total.Should().NotBeNull();
+				innerHits.Hits.Total.Value.Should().BeGreaterThan(0);
 			}
 		}
 	}
@@ -141,19 +142,21 @@ namespace Tests.Search.Search.Collapsing
 			}
 		};
 
-		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/doc/_search";
+		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/_search";
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			var numberOfStates = Enum.GetValues(typeof(StateOfBeing)).Length;
-			response.HitsMetadata.Total.Should().BeGreaterThan(numberOfStates);
+			response.HitsMetadata.Total.Value.Should().BeGreaterThan(numberOfStates);
 			response.Hits.Count.Should().Be(numberOfStates);
 			foreach (var hit in response.Hits)
 			{
 				var name = nameof(StateOfBeing).ToLowerInvariant();
 				hit.InnerHits.Should().NotBeNull().And.ContainKey(name);
 				var innerHits = hit.InnerHits[name];
-				innerHits.Hits.Total.Should().BeGreaterThan(0);
+				innerHits.Hits.Total.Should().NotBeNull();
+				innerHits.Hits.Total.Value.Should().BeGreaterThan(0);
+
 				var i = 0;
 				foreach (var innerHit in innerHits.Hits.Hits)
 				{

@@ -1,20 +1,19 @@
 ﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<PagerDutyContext>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(PagerDutyContext))]
 	public interface IPagerDutyContext
 	{
-		[JsonProperty("href")]
+		[DataMember(Name = "href")]
 		string Href { get; set; }
 
-		[JsonProperty("src")]
+		[DataMember(Name = "src")]
 		string Src { get; set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name = "type")]
 		PagerDutyContextType Type { get; set; }
 	}
 
@@ -44,7 +43,7 @@ namespace Nest
 		public PagerDutyContextDescriptor Src(string src) => Assign(a => a.Src = src);
 	}
 
-	[JsonConverter(typeof(StringEnumConverter))]
+	[StringEnum]
 	public enum PagerDutyContextType
 	{
 		[EnumMember(Value = "link")]

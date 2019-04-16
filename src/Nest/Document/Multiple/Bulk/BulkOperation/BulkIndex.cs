@@ -1,20 +1,29 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
+	[InterfaceDataContract]
 	public interface IBulkIndexOperation<T> : IBulkOperation
 	{
-		[JsonConverter(typeof(SourceConverter))]
+		[JsonFormatter(typeof(SourceWriteFormatter<>))]
 		T Document { get; set; }
 
-		[JsonProperty("_percolate")]
+		[DataMember(Name ="_percolate")]
 		string Percolate { get; set; }
 
-		[JsonProperty("pipeline")]
+		[DataMember(Name ="pipeline")]
 		string Pipeline { get; set; }
+
+		[DataMember(Name = "if_seq_no")]
+		long? IfSeqNo { get; set; }
+
+		[DataMember(Name = "if_primary_term")]
+		long? IfPrimaryTerm { get; set; }
 	}
 
+	[DataContract]
 	public class BulkIndexOperation<T> : BulkOperationBase, IBulkIndexOperation<T>
 		where T : class
 	{
@@ -25,6 +34,10 @@ namespace Nest
 		public string Percolate { get; set; }
 
 		public string Pipeline { get; set; }
+
+		public long? IfSeqNo { get; set; }
+
+		public long? IfPrimaryTerm { get; set; }
 
 		protected override Type ClrType => typeof(T);
 
@@ -37,7 +50,7 @@ namespace Nest
 		protected override Routing GetRoutingForOperation(Inferrer inferrer) => Routing ?? new Routing(Document);
 	}
 
-
+	[DataContract]
 	public class BulkIndexDescriptor<T> : BulkOperationDescriptorBase<BulkIndexDescriptor<T>, IBulkIndexOperation<T>>, IBulkIndexOperation<T>
 		where T : class
 	{
@@ -46,6 +59,8 @@ namespace Nest
 		T IBulkIndexOperation<T>.Document { get; set; }
 		string IBulkIndexOperation<T>.Percolate { get; set; }
 		string IBulkIndexOperation<T>.Pipeline { get; set; }
+		long? IBulkIndexOperation<T>.IfSeqNo { get; set; }
+		long? IBulkIndexOperation<T>.IfPrimaryTerm { get; set; }
 
 		protected override object GetBulkOperationBody() => Self.Document;
 
@@ -64,5 +79,9 @@ namespace Nest
 		public BulkIndexDescriptor<T> Pipeline(string pipeline) => Assign(a => a.Pipeline = pipeline);
 
 		public BulkIndexDescriptor<T> Percolate(string percolate) => Assign(a => a.Percolate = percolate);
+
+		public BulkIndexDescriptor<T> IfSeqNo(long? seqNo) => Assign(a => a.IfSeqNo = seqNo);
+
+		public BulkIndexDescriptor<T> IfPrimaryTerm(long? primaryTerm) => Assign(a => a.IfSeqNo = primaryTerm);
 	}
 }

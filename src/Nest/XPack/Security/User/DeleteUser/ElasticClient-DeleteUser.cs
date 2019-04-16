@@ -32,7 +32,7 @@ namespace Nest
 		public IDeleteUserResponse DeleteUser(IDeleteUserRequest request) =>
 			Dispatcher.Dispatch<IDeleteUserRequest, DeleteUserRequestParameters, DeleteUserResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackSecurityDeleteUserDispatch<DeleteUserResponse>(p)
+				(p, d) => LowLevelDispatch.SecurityDeleteUserDispatch<DeleteUserResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -47,7 +47,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IDeleteUserRequest, DeleteUserRequestParameters, DeleteUserResponse, IDeleteUserResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackSecurityDeleteUserDispatchAsync<DeleteUserResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.SecurityDeleteUserDispatchAsync<DeleteUserResponse>(p, c)
 			);
 	}
 }

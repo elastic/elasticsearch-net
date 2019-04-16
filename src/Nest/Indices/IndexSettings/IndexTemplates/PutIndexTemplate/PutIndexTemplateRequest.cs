@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace Nest
 {
+	[MapsApi("indices.put_template.json")]
 	public partial interface IPutIndexTemplateRequest : ITemplateMapping { }
 
 	public partial class PutIndexTemplateRequest
@@ -11,7 +12,7 @@ namespace Nest
 		public IAliases Aliases { get; set; }
 		public IReadOnlyCollection<string> IndexPatterns { get; set; }
 
-		public IMappings Mappings { get; set; }
+		public ITypeMapping Mappings { get; set; }
 
 		public int? Order { get; set; }
 
@@ -20,14 +21,13 @@ namespace Nest
 		public int? Version { get; set; }
 	}
 
-	[DescriptorFor("IndicesPutTemplate")]
 	public partial class PutIndexTemplateDescriptor
 	{
 		IAliases ITemplateMapping.Aliases { get; set; }
 
 		IReadOnlyCollection<string> ITemplateMapping.IndexPatterns { get; set; }
 
-		IMappings ITemplateMapping.Mappings { get; set; }
+		ITypeMapping ITemplateMapping.Mappings { get; set; }
 		int? ITemplateMapping.Order { get; set; }
 
 		IIndexSettings ITemplateMapping.Settings { get; set; }
@@ -45,8 +45,15 @@ namespace Nest
 		public PutIndexTemplateDescriptor Settings(Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> settingsSelector) =>
 			Assign(a => a.Settings = settingsSelector?.Invoke(new IndexSettingsDescriptor())?.Value);
 
-		public PutIndexTemplateDescriptor Mappings(Func<MappingsDescriptor, IPromise<IMappings>> mappingSelector) =>
-			Assign(a => a.Mappings = mappingSelector?.Invoke(new MappingsDescriptor())?.Value);
+		public PutIndexTemplateDescriptor Map<T>(Func<TypeMappingDescriptor<T>, ITypeMapping> selector) where T : class =>
+			Assign(a => a.Mappings = selector?.Invoke(new TypeMappingDescriptor<T>()));
+
+		public PutIndexTemplateDescriptor Map(Func<TypeMappingDescriptor<object>, ITypeMapping> selector) =>
+			Assign(a => a.Mappings = selector?.Invoke(new TypeMappingDescriptor<object>()));
+
+		[Obsolete("Mappings is no longer a dictionary in 7.x, please use the simplified Map() method on this descriptor instead")]
+		public PutIndexTemplateDescriptor Mappings(Func<MappingsDescriptor, ITypeMapping> mappingSelector) =>
+			Assign(a => a.Mappings = mappingSelector?.Invoke(new MappingsDescriptor()));
 
 		public PutIndexTemplateDescriptor Aliases(Func<AliasesDescriptor, IPromise<IAliases>> aliasDescriptor) =>
 			Assign(a => a.Aliases = aliasDescriptor?.Invoke(new AliasesDescriptor())?.Value);

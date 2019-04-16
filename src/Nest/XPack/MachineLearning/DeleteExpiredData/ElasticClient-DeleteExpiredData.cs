@@ -36,7 +36,7 @@ namespace Nest
 		public IDeleteExpiredDataResponse DeleteExpiredData(IDeleteExpiredDataRequest request) =>
 			Dispatcher.Dispatch<IDeleteExpiredDataRequest, DeleteExpiredDataRequestParameters, DeleteExpiredDataResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackMlDeleteExpiredDataDispatch<DeleteExpiredDataResponse>(p)
+				(p, d) => LowLevelDispatch.MlDeleteExpiredDataDispatch<DeleteExpiredDataResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -53,7 +53,7 @@ namespace Nest
 				.DispatchAsync<IDeleteExpiredDataRequest, DeleteExpiredDataRequestParameters, DeleteExpiredDataResponse, IDeleteExpiredDataResponse>(
 					request,
 					cancellationToken,
-					(p, d, c) => LowLevelDispatch.XpackMlDeleteExpiredDataDispatchAsync<DeleteExpiredDataResponse>(p, c)
+					(p, d, c) => LowLevelDispatch.MlDeleteExpiredDataDispatchAsync<DeleteExpiredDataResponse>(p, c)
 				);
 	}
 }

@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	public class NodeUsageInformation
 	{
-		[JsonProperty("rest_actions")]
+		[DataMember(Name ="rest_actions")]
 		public IReadOnlyDictionary<string, int> RestActions { get; internal set; }
 
-		[JsonProperty("since")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[DataMember(Name ="since")]
+		[JsonFormatter(typeof(DateTimeOffsetEpochMillisecondsFormatter))]
 		public DateTimeOffset Since { get; internal set; }
 
-		[JsonProperty("timestamp")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[DataMember(Name ="timestamp")]
+		[JsonFormatter(typeof(DateTimeOffsetEpochMillisecondsFormatter))]
 		public DateTimeOffset Timestamp { get; internal set; }
 	}
 }

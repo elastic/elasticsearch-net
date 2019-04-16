@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IPingResponse : IResponse { }
 
-	[JsonObject]
+	[DataContract]
 	public class PingResponse : ResponseBase, IPingResponse { }
 }

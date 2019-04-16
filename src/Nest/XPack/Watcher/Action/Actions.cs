@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
+	[JsonFormatter(typeof(ActionsFormatter))]
 	public interface IActions : IIsADictionary<string, IAction> { }
 
-	[JsonConverter(typeof(ActionsJsonConverter))]
+	[JsonFormatter(typeof(ActionsFormatter))]
 	public class Actions : IsADictionaryBase<string, IAction>, IActions
 	{
 		public Actions() { }
@@ -72,9 +74,6 @@ namespace Nest
 
 		public ActionsDescriptor Email(string name, Func<EmailActionDescriptor, IEmailAction> selector) =>
 			Assign(name, selector.InvokeOrDefault(new EmailActionDescriptor(name)));
-
-		public ActionsDescriptor HipChat(string name, Func<HipChatActionDescriptor, IHipChatAction> selector) =>
-			Assign(name, selector.InvokeOrDefault(new HipChatActionDescriptor(name)));
 
 		public ActionsDescriptor Index(string name, Func<IndexActionDescriptor, IIndexAction> selector) =>
 			Assign(name, selector.InvokeOrDefault(new IndexActionDescriptor(name)));

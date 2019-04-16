@@ -2,11 +2,11 @@
 
 namespace Nest
 {
+	[MapsApi("cat.nodeattrs.json")]
 	public partial interface ICatNodeAttributesRequest { }
 
 	public partial class CatNodeAttributesRequest { }
 
-	[DescriptorFor("CatNodeattrs")]
 	public partial class CatNodeAttributesDescriptor { }
 }
 

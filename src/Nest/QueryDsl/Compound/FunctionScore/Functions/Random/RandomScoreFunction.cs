@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<RandomScoreFunction>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(RandomScoreFunction))]
 	public interface IRandomScoreFunction : IScoreFunction
 	{
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
-		[JsonProperty("seed")]
+		[DataMember(Name ="seed")]
 		Union<long, string> Seed { get; set; }
 	}
 

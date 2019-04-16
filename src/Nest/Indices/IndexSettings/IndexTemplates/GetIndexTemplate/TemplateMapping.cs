@@ -1,26 +1,26 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface ITemplateMapping
 	{
-		[JsonProperty("aliases")]
+		[DataMember(Name ="aliases")]
 		IAliases Aliases { get; set; }
 
-		[JsonProperty("index_patterns")]
+		[DataMember(Name ="index_patterns")]
 		IReadOnlyCollection<string> IndexPatterns { get; set; }
 
-		[JsonProperty("mappings")]
-		IMappings Mappings { get; set; }
+		[DataMember(Name = "mappings")]
+		ITypeMapping Mappings { get; set; }
 
-		[JsonProperty("order")]
+		[DataMember(Name ="order")]
 		int? Order { get; set; }
 
-		[JsonProperty("settings")]
+		[DataMember(Name ="settings")]
 		IIndexSettings Settings { get; set; }
 
-		[JsonProperty("version")]
+		[DataMember(Name ="version")]
 		int? Version { get; set; }
 	}
 
@@ -29,7 +29,7 @@ namespace Nest
 		public IAliases Aliases { get; set; }
 		public IReadOnlyCollection<string> IndexPatterns { get; set; } = EmptyReadOnly<string>.Collection;
 
-		public IMappings Mappings { get; set; }
+		public ITypeMapping Mappings { get; set; }
 
 		public int? Order { get; set; }
 

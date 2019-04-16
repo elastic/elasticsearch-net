@@ -10,6 +10,7 @@ namespace ApiGenerator.Domain
 		{
 			get
 			{
+				//TODO treat list with fixed options as Flags Enum
 				switch (Type)
 				{
 					case "int":
@@ -40,7 +41,7 @@ namespace ApiGenerator.Domain
 						return Type == "string" ? "IndexName" : "Indices";
 					case "target":
 						return "IndexName";
-					case "type": return Type == "string" ? "TypeName" : "Types";
+					case "type": return Type == "string" ? "Name" : "Names";
 					case "watch_id":
 					case "job_id":
 					case "calendar_id":
@@ -52,12 +53,10 @@ namespace ApiGenerator.Domain
 					case "category_id": return "CategoryId";
 					case "nodes":
 					case "node_id": return Type == "string" ? "NodeId" : "NodeIds";
-					case "scroll_id": return Type == "string" ? "ScrollId" : "ScrollIds";
 					case "field":
 					case "fields": return Type == "string" ? "Field" : "Fields";
 					case "index_metric": return "IndexMetrics";
 					case "metric":
-					case "watcher_stats_metric":
 						return "Metrics";
 					case "feature": return "Features";
 					case "action_id": return "ActionIds";

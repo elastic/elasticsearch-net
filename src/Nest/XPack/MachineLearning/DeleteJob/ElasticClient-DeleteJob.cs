@@ -39,7 +39,7 @@ namespace Nest
 		public IDeleteJobResponse DeleteJob(IDeleteJobRequest request) =>
 			Dispatcher.Dispatch<IDeleteJobRequest, DeleteJobRequestParameters, DeleteJobResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackMlDeleteJobDispatch<DeleteJobResponse>(p)
+				(p, d) => LowLevelDispatch.MlDeleteJobDispatch<DeleteJobResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -53,7 +53,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IDeleteJobRequest, DeleteJobRequestParameters, DeleteJobResponse, IDeleteJobResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackMlDeleteJobDispatchAsync<DeleteJobResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.MlDeleteJobDispatchAsync<DeleteJobResponse>(p, c)
 			);
 	}
 }

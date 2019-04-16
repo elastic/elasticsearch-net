@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -14,7 +14,7 @@ namespace Nest
 		/// new token is started. This accepts either single characters like eg. -, or character groups: whitespace, letter, digit,
 		/// punctuation, symbol.
 		/// </summary>
-		[JsonProperty("tokenize_on_chars")]
+		[DataMember(Name ="tokenize_on_chars")]
 		IEnumerable<string> TokenizeOnCharacters { get; set; }
 	}
 

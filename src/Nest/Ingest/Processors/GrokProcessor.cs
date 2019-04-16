@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ProcessorJsonConverter<GrokProcessor>))]
+	[InterfaceDataContract]
 	public interface IGrokProcessor : IProcessor
 	{
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
-		[JsonProperty("pattern_definitions")]
+		[DataMember(Name ="pattern_definitions")]
 		IDictionary<string, string> PatternDefinitions { get; set; }
 
-		[JsonProperty("patterns")]
+		[DataMember(Name ="patterns")]
 		IEnumerable<string> Patterns { get; set; }
 
-		[JsonProperty("trace_match")]
+		[DataMember(Name ="trace_match")]
 		bool? TraceMatch { get; set; }
 	}
 

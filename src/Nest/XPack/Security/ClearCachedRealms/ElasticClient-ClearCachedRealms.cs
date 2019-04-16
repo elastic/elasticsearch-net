@@ -36,7 +36,7 @@ namespace Nest
 		public IClearCachedRealmsResponse ClearCachedRealms(IClearCachedRealmsRequest request) =>
 			Dispatcher.Dispatch<IClearCachedRealmsRequest, ClearCachedRealmsRequestParameters, ClearCachedRealmsResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackSecurityClearCachedRealmsDispatch<ClearCachedRealmsResponse>(p)
+				(p, d) => LowLevelDispatch.SecurityClearCachedRealmsDispatch<ClearCachedRealmsResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -54,7 +54,7 @@ namespace Nest
 				.DispatchAsync<IClearCachedRealmsRequest, ClearCachedRealmsRequestParameters, ClearCachedRealmsResponse, IClearCachedRealmsResponse>(
 					request,
 					cancellationToken,
-					(p, d, c) => LowLevelDispatch.XpackSecurityClearCachedRealmsDispatchAsync<ClearCachedRealmsResponse>(p, c)
+					(p, d, c) => LowLevelDispatch.SecurityClearCachedRealmsDispatchAsync<ClearCachedRealmsResponse>(p, c)
 				);
 	}
 }

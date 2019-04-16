@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[MapsApi("xpack.sql.clear_cursor.json")]
-	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<ClearSqlCursorRequest>))]
+	[MapsApi("sql.clear_cursor.json")]
+	[ReadAs(typeof(ClearSqlCursorRequest))]
 	public partial interface IClearSqlCursorRequest
 	{
 		/// <summary>
@@ -13,7 +13,7 @@ namespace Nest
 		/// Unlike scroll, receiving the last page is enough to guarantee that the Elasticsearch state is cleared.
 		/// </para>
 		/// </summary>
-		[JsonProperty("cursor")]
+		[DataMember(Name ="cursor")]
 		string Cursor { get; set; }
 	}
 

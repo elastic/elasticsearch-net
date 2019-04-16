@@ -1,29 +1,29 @@
+using System.Runtime.Serialization;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class BulkIndexByScrollFailure
 	{
-		[JsonProperty("cause")]
+		[DataMember(Name = "cause")]
 		public BulkIndexFailureCause Cause { get; set; }
 
-		[JsonProperty("id")]
+		[DataMember(Name = "id")]
 		public string Id { get; internal set; }
 
-		[JsonProperty("index")]
+		[DataMember(Name = "index")]
 		public string Index { get; set; }
 
-		[JsonProperty("status")]
+		[DataMember(Name = "status")]
 		public int Status { get; set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name = "type")]
 		public string Type { get; internal set; }
 	}
 
-	[JsonObject]
-	[ContractJsonConverter(typeof(ErrorCauseJsonConverter<BulkIndexFailureCause>))]
+	[DataContract]
+	[JsonFormatter(typeof(ErrorCauseFormatter<BulkIndexFailureCause>))]
 	public class BulkIndexFailureCause : Error
 	{
 		public string Index => Metadata?.Index;

@@ -1,22 +1,22 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class AliasDefinition
 	{
-		[JsonProperty("filter")]
+		[DataMember(Name ="filter")]
 		public IQueryContainer Filter { get; internal set; }
 
-		[JsonProperty("index_routing")]
+		[DataMember(Name ="index_routing")]
 		public string IndexRouting { get; internal set; }
 
-		[JsonProperty("is_write_index")]
+		[DataMember(Name ="is_write_index")]
 		public bool? IsWriteIndex { get; internal set; }
 
-		[JsonProperty("routing")]
+		[DataMember(Name ="routing")]
 		public string Routing { get; internal set; }
 
-		[JsonProperty("search_routing")]
+		[DataMember(Name ="search_routing")]
 		public string SearchRouting { get; internal set; }
 	}
 }

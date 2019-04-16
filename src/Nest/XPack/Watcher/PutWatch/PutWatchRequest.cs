@@ -1,37 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	/// <summary>
 	/// A PutWatch request
 	/// </summary>
+	[MapsApi("watcher.put_watch.json")]
 	public partial interface IPutWatchRequest
 	{
 		/// <summary>
 		/// The actions that will be run if the condition matches
 		/// </summary>
-		[JsonProperty("actions")]
+		[DataMember(Name = "actions")]
 		Actions Actions { get; set; }
 
 		/// <summary>
 		/// Defines if the actions should be run
 		/// </summary>
-		[JsonProperty("condition")]
+		[DataMember(Name = "condition")]
 		ConditionContainer Condition { get; set; }
 
 		/// <summary>
 		/// Defines the input that loads the data for the watch
 		/// </summary>
-		[JsonProperty("input")]
+		[DataMember(Name = "input")]
 		InputContainer Input { get; set; }
 
 		/// <summary>
 		/// Metadata that will be copied into the history entries
 		/// </summary>
-		[JsonProperty("metadata")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
+		[DataMember(Name = "metadata")]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, object>))]
 		IDictionary<string, object> Metadata { get; set; }
 
 		/// <summary>
@@ -40,27 +42,25 @@ namespace Nest
 		/// <remarks>
 		/// Default can be changed in the config file with the setting <code>xpack.watcher.throttle.period.default_period</code>.
 		/// </remarks>
-		[JsonProperty("throttle_period")]
+		[DataMember(Name = "throttle_period")]
 		string ThrottlePeriod { get; set; }
 
 		/// <summary>
 		/// Processes and changes the payload in the watch execution context to prepare it for the actions.
 		/// </summary>
-		[JsonProperty("transform")]
+		[DataMember(Name = "transform")]
 		TransformContainer Transform { get; set; }
 
 		/// <summary>
 		/// Defines when the watch should run
 		/// </summary>
-		[JsonProperty("trigger")]
+		[DataMember(Name = "trigger")]
 		TriggerContainer Trigger { get; set; }
 	}
 
 	/// <inheritdoc cref="IPutWatchRequest" />
 	public partial class PutWatchRequest
 	{
-		public PutWatchRequest() { }
-
 		/// <inheritdoc />
 		public Actions Actions { get; set; }
 
@@ -84,11 +84,8 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="IPutWatchRequest" />
-	[DescriptorFor("XpackWatcherPutWatch")]
 	public partial class PutWatchDescriptor
 	{
-		public PutWatchDescriptor() { }
-
 		Actions IPutWatchRequest.Actions { get; set; }
 		ConditionContainer IPutWatchRequest.Condition { get; set; }
 		InputContainer IPutWatchRequest.Input { get; set; }

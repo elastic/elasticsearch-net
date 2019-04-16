@@ -26,7 +26,7 @@ namespace Tests.XPack.MachineLearning.GetOverallBuckets
 		protected override Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> Fluent => f => f;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override GetOverallBucketsRequest Initializer => new GetOverallBucketsRequest(CallIsolatedValue);
-		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/results/overall_buckets";
+		protected override string UrlPath => $"_ml/anomaly_detectors/{CallIsolatedValue}/results/overall_buckets";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

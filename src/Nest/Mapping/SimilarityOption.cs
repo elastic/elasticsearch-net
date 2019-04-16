@@ -1,15 +1,13 @@
 ﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using Elasticsearch.Net;
+
 
 namespace Nest
 {
-	[JsonConverter(typeof(StringEnumConverter))]
+	/// TODO: I think the places that take this currently should just be a string
+	[StringEnum]
 	public enum SimilarityOption
 	{
-		[EnumMember(Value = "classic")]
-		Classic,
-
 		[EnumMember(Value = "BM25")]
 		BM25
 	}

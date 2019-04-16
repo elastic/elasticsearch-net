@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -13,14 +14,15 @@ namespace Nest
 		/// <summary>
 		/// The maximum token size to emit. Defaults to 255.
 		/// </summary>
-		[JsonProperty("max_output_size")]
+		[DataMember(Name ="max_output_size")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? MaxOutputSize { get; set; }
 
 		/// <summary>
 		/// The character that separates the tokens after concatenation.
 		/// Defaults to a space.
 		/// </summary>
-		[JsonProperty("separator")]
+		[DataMember(Name ="separator")]
 		string Separator { get; set; }
 	}
 

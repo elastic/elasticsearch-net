@@ -30,7 +30,7 @@ namespace Tests.Document.Multiple.BulkAll
 			var seenPages = 0;
 			var observableBulk = KickOff(index, documents);
 			Action bulkObserver = () => observableBulk.Wait(TimeSpan.FromMinutes(5), b => Interlocked.Increment(ref seenPages));
-			bulkObserver.ShouldThrow<ElasticsearchClientException>()
+			bulkObserver.Should().Throw<ElasticsearchClientException>()
 				.And.Message.Should()
 				.StartWith("BulkAll halted after receiving failures that can not");
 
@@ -147,8 +147,10 @@ namespace Tests.Document.Multiple.BulkAll
 		private async Task<IEnumerable<SmallObject>> CreateIndexAndReturnDocuments(string index)
 		{
 			await CreateIndexAsync(index, NumberOfShards, m => m
-				.Map<SmallObject>(mm => mm.Properties(p => p.Number(n => n.Name(pp => pp.Number).Coerce(false).IgnoreMalformed(false)))
-				));
+				.Properties(p => p
+					.Number(n => n.Name(pp => pp.Number).Coerce(false).IgnoreMalformed(false))
+				)
+			);
 
 			var documents = CreateLazyStreamOfDocuments(NumberOfDocuments)
 				.Select(s =>

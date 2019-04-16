@@ -1,43 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	/// <summary>
 	/// Allows inline, stored, and file scripts to be executed within ingest pipelines.
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ProcessorJsonConverter<ScriptProcessor>))]
+	[InterfaceDataContract]
 	public interface IScriptProcessor : IProcessor
 	{
 		/// <summary>
 		/// The stored script id to refer to
 		/// </summary>
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		string Id { get; set; }
 
 		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
-		[JsonIgnore]
+		[IgnoreDataMember]
 		string Inline { get; set; }
 
 		/// <summary>
 		/// The scripting language. Defaults to painless
 		/// </summary>
-		[JsonProperty("lang")]
+		[DataMember(Name ="lang")]
 		string Lang { get; set; }
 
 		/// <summary>
 		/// Parameters for the script
 		/// </summary>
-		[JsonProperty("params")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
+		[DataMember(Name ="params")]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, object>))]
 		Dictionary<string, object> Params { get; set; }
 
 		/// <summary>
 		/// An inline script to be executed
 		/// </summary>
-		[JsonProperty("source")]
+		[DataMember(Name ="source")]
 		string Source { get; set; }
 	}
 

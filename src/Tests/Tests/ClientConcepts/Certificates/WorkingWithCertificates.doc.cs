@@ -54,6 +54,7 @@ namespace Tests.ClientConcepts.Certificates
 		 *
 		 * Here we set up `ConnectionSettings` with a validation callback that denies all certificate validation
 		 */
+		[IntegrationOnly]
 		public class DenyAllCertificatesCluster : SslAndKpiXPackCluster
 		{
 			protected override ConnectionSettings ConnectionSettings(ConnectionSettings s) => s
@@ -114,10 +115,9 @@ namespace Tests.ClientConcepts.Certificates
 		 * `CertificateValidations.AuthorityIsRoot` and pass it your local copy of the CA public key to assert that
 		 * the certificate the server presented was generated using it
 		 */
+		[IntegrationOnly]
 		public class CertgenCaCluster : SslAndKpiXPackCluster
 		{
-			public CertgenCaCluster() : this(new SslAndKpiClusterConfiguration()) { }
-			public CertgenCaCluster(SslAndKpiClusterConfiguration configuration) : base(configuration) { }
 			protected override ConnectionSettings ConnectionSettings(ConnectionSettings s) => s
 				.ServerCertificateValidationCallback(
 					CertificateValidations.AuthorityIsRoot(new X509Certificate(this.ClusterConfiguration.FileSystem.CaCertificate))
@@ -132,13 +132,13 @@ namespace Tests.ClientConcepts.Certificates
 			{
 			}
 
-			[I]
-			public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
+			[I] public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
 		}
 
 		/**
 		 * If your local copy does not match the server's CA, the client will fail to connect
 		 */
+		[IntegrationOnly]
 		public class BadCertgenCaCluster : SslAndKpiXPackCluster
 		{
 			protected override ConnectionSettings ConnectionSettings(ConnectionSettings s) => s

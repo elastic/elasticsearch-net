@@ -40,7 +40,7 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 			result.HitsMetadata.Should().NotBeNull();
 			result.HitsMetadata.Hits.Should().NotBeNull();
 			result.HitsMetadata.MaxScore.Should().BeGreaterThan(1.0);
-			result.HitsMetadata.Total.Should().Be(100);
+			result.HitsMetadata.Total.Value.Should().Be(100);
 
 			result.Hits.Should().OnlyContain(hit => hit.Index == "project", "_index on hit");
 			result.Hits.Should().OnlyContain(hit => !string.IsNullOrEmpty(hit.Type), "_type on hit");
@@ -68,7 +68,7 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 				failed = 0
 			},
 			hits = new {
-				total = 100,
+				total = new { value = 100 },
 				max_score = 1.1,
 				hits = Enumerable.Range(1, 25).Select(i => (object)new
 				{

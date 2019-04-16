@@ -1,12 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<ExtendedStatsBucketAggregation>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(ExtendedStatsBucketAggregation))]
 	public interface IExtendedStatsBucketAggregation : IPipelineAggregation
 	{
-		[JsonProperty("sigma")]
+		[DataMember(Name ="sigma")]
 		double? Sigma { get; set; }
 	}
 

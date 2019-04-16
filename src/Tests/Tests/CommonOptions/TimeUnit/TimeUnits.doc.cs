@@ -211,7 +211,7 @@ namespace Tests.CommonOptions.TimeUnit
 			foreach (var testCase in testCases)
 			{
 				Action create = () => new Time(testCase.Item1);
-				var e = create.Invoking((a) => a()).ShouldThrow<ArgumentException>(testCase.Item1).Subject.First();
+				var e = create.Invoking((a) => a()).Should().Throw<ArgumentException>(testCase.Item1).Subject.First();
 				e.Message.Should().Contain(testCase.Item3);
 			}
 		}

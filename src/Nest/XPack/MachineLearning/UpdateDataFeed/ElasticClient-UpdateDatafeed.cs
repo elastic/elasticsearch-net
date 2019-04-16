@@ -38,7 +38,7 @@ namespace Nest
 		public IUpdateDatafeedResponse UpdateDatafeed(IUpdateDatafeedRequest request) =>
 			Dispatcher.Dispatch<IUpdateDatafeedRequest, UpdateDatafeedRequestParameters, UpdateDatafeedResponse>(
 				request,
-				LowLevelDispatch.XpackMlUpdateDatafeedDispatch<UpdateDatafeedResponse>
+				LowLevelDispatch.MlUpdateDatafeedDispatch<UpdateDatafeedResponse>
 			);
 
 		/// <inheritdoc />
@@ -55,7 +55,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IUpdateDatafeedRequest, UpdateDatafeedRequestParameters, UpdateDatafeedResponse, IUpdateDatafeedResponse>(
 				request,
 				cancellationToken,
-				LowLevelDispatch.XpackMlUpdateDatafeedDispatchAsync<UpdateDatafeedResponse>
+				LowLevelDispatch.MlUpdateDatafeedDispatchAsync<UpdateDatafeedResponse>
 			);
 	}
 }

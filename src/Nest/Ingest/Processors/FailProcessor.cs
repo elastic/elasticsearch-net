@@ -1,12 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ProcessorJsonConverter<FailProcessor>))]
+	[InterfaceDataContract]
 	public interface IFailProcessor : IProcessor
 	{
-		[JsonProperty("message")]
+		[DataMember(Name ="message")]
 		string Message { get; set; }
 	}
 

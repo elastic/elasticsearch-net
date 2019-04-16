@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<PutMappingRequest>))]
+	[MapsApi("indices.put_mapping.json")]
+	[ReadAs(typeof(PutMappingRequest))]
 	public partial interface IPutMappingRequest : ITypeMapping { }
 
-	public interface IPutMappingRequest<T> : IPutMappingRequest where T : class { }
+	[InterfaceDataContract]
+	[ReadAs(typeof(PutMappingRequest<object>))]
+	public partial interface IPutMappingRequest<T> where T : class { }
 
+	[DataContract]
 	public partial class PutMappingRequest
 	{
-		// Needed for ReadAsType
-		internal PutMappingRequest() { }
-
 		/// <inheritdoc />
 		public IAllField AllField { get; set; }
 
@@ -54,57 +56,11 @@ namespace Nest
 		public ISourceField SourceField { get; set; }
 	}
 
-	public partial class PutMappingRequest<T> where T : class
-	{
-		public PutMappingRequest() : this(typeof(T), typeof(T)) { }
+	public partial class PutMappingRequest<T> where T : class { }
 
-		/// <inheritdoc />
-		public IAllField AllField { get; set; }
-
-		/// <inheritdoc />
-		public bool? DateDetection { get; set; }
-
-		/// <inheritdoc />
-		public Union<bool, DynamicMapping> Dynamic { get; set; }
-
-		/// <inheritdoc />
-		public IEnumerable<string> DynamicDateFormats { get; set; }
-
-		/// <inheritdoc />
-		public IDynamicTemplateContainer DynamicTemplates { get; set; }
-
-		/// <inheritdoc />
-		public IFieldNamesField FieldNamesField { get; set; }
-
-		/// <inheritdoc />
-		public IIndexField IndexField { get; set; }
-
-		/// <inheritdoc />
-		public IDictionary<string, object> Meta { get; set; }
-
-		/// <inheritdoc />
-		public bool? NumericDetection { get; set; }
-
-		/// <inheritdoc />
-		public IProperties Properties { get; set; }
-
-		/// <inheritdoc />
-		public IRoutingField RoutingField { get; set; }
-
-		/// <inheritdoc />
-		public ISizeField SizeField { get; set; }
-
-		/// <inheritdoc />
-		public ISourceField SourceField { get; set; }
-	}
-
-	[DescriptorFor("IndicesPutMapping")]
+	[DataContract]
 	public partial class PutMappingDescriptor<T> where T : class
 	{
-		public PutMappingDescriptor() : this(typeof(T), typeof(T)) { }
-
-		public PutMappingDescriptor(IndexName index, TypeName type) : base(r => r.Required("index", index).Required("type", type)) { }
-
 		IAllField ITypeMapping.AllField { get; set; }
 		bool? ITypeMapping.DateDetection { get; set; }
 		Union<bool, DynamicMapping> ITypeMapping.Dynamic { get; set; }

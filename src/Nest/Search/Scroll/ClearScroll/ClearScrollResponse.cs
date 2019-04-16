@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IClearScrollResponse : IResponse { }
 
-	[JsonObject]
+	[DataContract]
 	public class ClearScrollResponse : ResponseBase, IClearScrollResponse { }
 }

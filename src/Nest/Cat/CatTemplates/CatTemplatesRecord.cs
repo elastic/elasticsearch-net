@@ -1,20 +1,23 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class CatTemplatesRecord : ICatRecord
 	{
-		[JsonProperty("index_patterns")]
+		[DataMember(Name ="index_patterns")]
 		public string IndexPatterns { get; set; }
 
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		public string Name { get; set; }
 
-		[JsonProperty("order")]
+		[DataMember(Name ="order")]
+		[JsonFormatter(typeof(StringLongFormatter))]
 		public long Order { get; set; }
 
-		[JsonProperty("version")]
-		public long Version { get; set; }
+		[DataMember(Name ="version")]
+		[JsonFormatter(typeof(NullableStringLongFormatter))]
+		public long? Version { get; set; }
 	}
 }

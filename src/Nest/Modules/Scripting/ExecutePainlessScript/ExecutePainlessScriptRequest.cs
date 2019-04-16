@@ -1,21 +1,22 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary> The Painless execute API allows an arbitrary script to be executed and a result to be returned. </summary>
+	[MapsApi("scripts_painless_execute.json")]
 	public partial interface IExecutePainlessScriptRequest
 	{
 		/// <summary> The context the script should be executed in </summary>
-		[JsonProperty("context")]
+		[DataMember(Name ="context")]
 		string Context { get; set; }
 
 		/// <inheritdoc cref="IPainlessContextSetup" />
-		[JsonProperty("context_setup")]
+		[DataMember(Name ="context_setup")]
 		IPainlessContextSetup ContextSetup { get; set; }
 
 		/// <summary> The script to execute </summary>
-		[JsonProperty("script")]
+		[DataMember(Name ="script")]
 		IInlineScript Script { get; set; }
 	}
 
@@ -33,7 +34,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="IExecutePainlessScriptRequest" />
-	[DescriptorFor("ScriptsPainlessExecute")]
 	public partial class ExecutePainlessScriptDescriptor
 	{
 		string IExecutePainlessScriptRequest.Context { get; set; }

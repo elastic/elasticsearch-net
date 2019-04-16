@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(StringEnumConverter))]
+	[StringEnum]
 	public enum KeepTypesMode
 	{
 		[EnumMember(Value = "include")]
@@ -21,16 +20,16 @@ namespace Nest
 	public interface IKeepTypesTokenFilter : ITokenFilter
 	{
 		/// <summary> Whether to include or exclude the types provided on <see cref="Types" /> </summary>
-		[JsonProperty("mode")]
+		[DataMember(Name = "mode")]
 		KeepTypesMode? Mode { get; set; }
 
 		/// <summary> A list of types to keep. </summary>
-		[JsonProperty("types")]
+		[DataMember(Name = "types")]
 		IEnumerable<string> Types { get; set; }
 	}
 
 	/// <inheritdoc cref="IKeepTypesTokenFilter" />
-	public class KeepTypesTokenFilter : TokenFilterBase
+	public class KeepTypesTokenFilter : TokenFilterBase, IKeepTypesTokenFilter
 	{
 		public KeepTypesTokenFilter() : base("keep_types") { }
 

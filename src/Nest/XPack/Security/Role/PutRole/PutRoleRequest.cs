@@ -1,24 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	/// <summary>
 	/// Adds and updates roles in the native realm.
 	/// </summary>
+	[MapsApi("security.put_role.json")]
 	public partial interface IPutRoleRequest
 	{
 		/// <summary>
 		/// A list of application privileges
 		/// </summary>
-		[JsonProperty("applications")]
+		[DataMember(Name = "applications")]
 		IEnumerable<IApplicationPrivileges> Applications { get; set; }
 
 		/// <summary>
 		/// A list of cluster privileges
 		/// </summary>
-		[JsonProperty("cluster")]
+		[DataMember(Name = "cluster")]
 		IEnumerable<string> Cluster { get; set; }
 
 		/// <summary>
@@ -26,27 +28,27 @@ namespace Nest
 		/// request-aware. Support for global privileges is currently limited to
 		/// the management of application privileges.
 		/// </summary>
-		[JsonProperty("global")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysPreservingNullJsonConverter<string, object>))]
+		[DataMember(Name = "global")]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysPreservingNullFormatter<string, object>))]
 		IDictionary<string, object> Global { get; set; }
 
 		/// <summary>
 		/// A list of indices permissions entries
 		/// </summary>
-		[JsonProperty("indices")]
+		[DataMember(Name = "indices")]
 		IEnumerable<IIndicesPrivileges> Indices { get; set; }
 
 		/// <summary>
 		/// Optional meta-data. Within the metadata object, keys that begin with _ are reserved for system usage.
 		/// </summary>
-		[JsonProperty("metadata")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysPreservingNullJsonConverter<string, object>))]
+		[DataMember(Name = "metadata")]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysPreservingNullFormatter<string, object>))]
 		IDictionary<string, object> Metadata { get; set; }
 
 		/// <summary>
 		/// A list of users that the owners of this role can impersonate.
 		/// </summary>
-		[JsonProperty("run_as")]
+		[DataMember(Name = "run_as")]
 		IEnumerable<string> RunAs { get; set; }
 	}
 
@@ -73,7 +75,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="IPutRoleRequest" />
-	[DescriptorFor("XpackSecurityPutRole")]
 	public partial class PutRoleDescriptor
 	{
 		/// <inheritdoc cref="IPutRoleRequest.Applications" />

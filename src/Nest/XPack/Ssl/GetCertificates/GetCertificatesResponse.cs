@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IGetCertificatesResponse : IResponse
 	{
-		[JsonIgnore]
+		[IgnoreDataMember]
 		IReadOnlyCollection<ClusterCertificateInformation> Certificates { get; }
 
 	}
@@ -20,25 +20,25 @@ namespace Nest
 	public class ClusterCertificateInformation
 	{
 
-		[JsonProperty("path")]
+		[DataMember(Name = "path")]
 		public string Path { get; internal set; }
 
-		[JsonProperty("alias")]
+		[DataMember(Name = "alias")]
 		public string Alias { get; internal set; }
 
-		[JsonProperty("format")]
+		[DataMember(Name = "format")]
 		public string Format { get; internal set; }
 
-		[JsonProperty("subject_dn")]
+		[DataMember(Name = "subject_dn")]
 		public string SubjectDomainName { get; internal set; }
 
-		[JsonProperty("serial_number")]
+		[DataMember(Name = "serial_number")]
 		public string SerialNumber { get; internal set; }
 
-		[JsonProperty("has_private_key")]
+		[DataMember(Name = "has_private_key")]
 		public bool HasPrivateKey { get; internal set; }
 
-		[JsonProperty("expiry")]
+		[DataMember(Name = "expiry")]
 		public DateTimeOffset Expiry { get; internal set; }
 	}
 }

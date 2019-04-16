@@ -4,7 +4,7 @@ using System.Reflection;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Tests.Core.Xunit;
 using Tests.Framework;
 
@@ -15,15 +15,16 @@ namespace Tests.CodeStandards
 	{
 		protected static PropertyInfo[] QueryProperties = typeof(IQueryContainer).GetProperties();
 		protected static PropertyInfo[] QueryPlaceHolderProperties = typeof(IQueryContainer).GetProperties()
-			.Where(a=>!a.GetCustomAttributes<JsonIgnoreAttribute>().Any()).ToArray();
+			.Where(a=>!a.GetCustomAttributes<IgnoreDataMemberAttribute>().Any()).ToArray();
 
 		/*
-		* All properties must be either marked with JsonIgnore or JsonProperty
+		* All properties must be either marked with IgnoreDataMemberAttribute or DataMemberAttribute
 		*/
 		[U] public void InterfacePropertiesMustBeMarkedExplicitly()
 		{
 			var properties = from p in QueryProperties
-							 let a = p.GetCustomAttributes<JsonIgnoreAttribute>().Concat<Attribute>(p.GetCustomAttributes<JsonPropertyAttribute>())
+							 let a = p.GetCustomAttributes<IgnoreDataMemberAttribute>()
+								 .Concat<Attribute>(p.GetCustomAttributes<DataMemberAttribute>())
 							 where a.Count() != 1
 							 select p;
 			properties.Should().BeEmpty();
@@ -58,7 +59,7 @@ namespace Tests.CodeStandards
 				typeof(IConditionlessQuery),
 				typeof(ISpanGapQuery)
 			};
-			var queries = typeof(IQuery).Assembly().ExportedTypes
+			var queries = typeof(IQuery).Assembly.ExportedTypes
 				.Where(t => t.IsInterface() && typeof(IQuery).IsAssignableFrom(t))
 				.Where(t => !skipQueryImplementations.Contains(t))
 				.ToList();

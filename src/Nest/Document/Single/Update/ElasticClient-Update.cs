@@ -89,7 +89,9 @@ namespace Nest
 		)
 			where TDocument : class
 			where TPartialDocument : class =>
-			Update(selector?.Invoke(new UpdateDescriptor<TDocument, TPartialDocument>(documentPath)));
+			Update(selector?.Invoke(new UpdateDescriptor<TDocument, TPartialDocument>(
+				documentPath.Document, documentPath.Self.Index, documentPath.Self.Id
+			)));
 
 		/// <inheritdoc />
 		public IUpdateResponse<TDocument> Update<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request)
@@ -121,7 +123,9 @@ namespace Nest
 		)
 			where TDocument : class
 			where TPartialDocument : class =>
-			UpdateAsync(selector?.Invoke(new UpdateDescriptor<TDocument, TPartialDocument>(documentPath)), cancellationToken);
+			UpdateAsync(selector?.Invoke(new UpdateDescriptor<TDocument, TPartialDocument>(
+				documentPath.Document, documentPath.Self.Index, documentPath.Self.Id
+			)), cancellationToken);
 
 		/// <inheritdoc />
 		public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(

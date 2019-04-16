@@ -6,7 +6,6 @@ namespace Nest
 	{
 		Id Id { get; set; }
 		IndexName Index { get; set; }
-		TypeName Type { get; set; }
 	}
 
 	public class DocumentPath<T> : IEquatable<DocumentPath<T>>, IDocumentPath where T : class
@@ -17,20 +16,17 @@ namespace Nest
 		{
 			Self.Id = id;
 			Self.Index = typeof(T);
-			Self.Type = typeof(T);
 		}
 
 		internal T Document { get; set; }
 		internal IDocumentPath Self => this;
 		Id IDocumentPath.Id { get; set; }
 		IndexName IDocumentPath.Index { get; set; }
-		TypeName IDocumentPath.Type { get; set; }
 
 		public bool Equals(DocumentPath<T> other)
 		{
 			IDocumentPath o = other, s = Self;
-			return s.Index.NullOrEquals(o.Index) && s.Type.NullOrEquals(o.Type) && s.Id.NullOrEquals(o.Id)
-				&& (Document?.Equals(other.Document) ?? true);
+			return s.Index.NullOrEquals(o.Index) && s.Id.NullOrEquals(o.Id) && (Document?.Equals(other.Document) ?? true);
 		}
 
 		public static DocumentPath<T> Id(Id id) => new DocumentPath<T>(id);
@@ -55,20 +51,11 @@ namespace Nest
 			return this;
 		}
 
-		public DocumentPath<T> Type(TypeName type)
-		{
-			if (type == null) return this;
-
-			Self.Type = type;
-			return this;
-		}
-
 		public override int GetHashCode()
 		{
 			unchecked
 			{
-				var hashCode = Self.Type?.GetHashCode() ?? 0;
-				hashCode = (hashCode * 397) ^ (Self.Index?.GetHashCode() ?? 0);
+				var hashCode = Self.Index?.GetHashCode() ?? 0;
 				hashCode = (hashCode * 397) ^ (Self.Id?.GetHashCode() ?? 0);
 				return hashCode;
 			}

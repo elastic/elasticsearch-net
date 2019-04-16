@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Text;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Tests.Core.Client;
 using Tests.Framework;
 using static Tests.Core.Serialization.SerializationTestHelper;
@@ -68,9 +68,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		{
 			/** Now we can pass an instance of our custom visitor to `.AutoMap()` */
 			var createIndexResponse = client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<Employee>(m => m.AutoMap(new DisableDocValuesPropertyVisitor()))
-				)
+				.Map<Employee>(m => m.AutoMap(new DisableDocValuesPropertyVisitor()))
 			);
 
 			/** and any time the client maps a property of the POCO (Employee in this example) as a number (INumberProperty) or boolean (IBooleanProperty),
@@ -82,58 +80,55 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					employee = new
+					properties = new
 					{
-						properties = new
+						birthday = new
 						{
-							birthday = new
+							type = "date"
+						},
+						employees = new
+						{
+							properties = new { },
+							type = "object"
+						},
+						firstName = new
+						{
+							type = "text",
+							fields = new
 							{
-								type = "date"
-							},
-							employees = new
-							{
-								properties = new { },
-								type = "object"
-							},
-							firstName = new
-							{
-								type = "text",
-								fields = new
+								keyword = new
 								{
-									keyword = new
-									{
-										type = "keyword",
-										ignore_above = 256
-									}
+									type = "keyword",
+									ignore_above = 256
 								}
-							},
-							isManager = new
-							{
-								doc_values = false,
-								type = "boolean"
-							},
-							lastName = new
-							{
-								type = "text",
-								fields = new
-								{
-									keyword = new
-									{
-										type = "keyword",
-										ignore_above = 256
-									}
-								}
-							},
-							salary = new
-							{
-								doc_values = false,
-								type = "integer"
-							},
-							hours = new
-							{
-								doc_values = false,
-								type = "long"
 							}
+						},
+						isManager = new
+						{
+							doc_values = false,
+							type = "boolean"
+						},
+						lastName = new
+						{
+							type = "text",
+							fields = new
+							{
+								keyword = new
+								{
+									type = "keyword",
+									ignore_above = 256
+								}
+							}
+						},
+						salary = new
+						{
+							doc_values = false,
+							type = "integer"
+						},
+						hours = new
+						{
+							doc_values = false,
+							type = "long"
 						}
 					}
 				}
@@ -159,9 +154,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		public void UsingACustomPropertyVisitorOnPropertyInfo()
 		{
 			var createIndexResponse = client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<Employee>(m => m.AutoMap(new EverythingIsATextPropertyVisitor()))
-				)
+				.Map<Employee>(m => m.AutoMap(new EverythingIsATextPropertyVisitor()))
 			);
 
 			/**
@@ -171,38 +164,35 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					employee = new
+					properties = new
 					{
-						properties = new
+						birthday = new
 						{
-							birthday = new
-							{
-								type = "text"
-							},
-							employees = new
-							{
-								type = "text"
-							},
-							firstName = new
-							{
-								type = "text"
-							},
-							isManager = new
-							{
-								type = "text"
-							},
-							lastName = new
-							{
-								type = "text"
-							},
-							salary = new
-							{
-								type = "text"
-							},
-							hours = new
-							{
-								type = "text"
-							}
+							type = "text"
+						},
+						employees = new
+						{
+							type = "text"
+						},
+						firstName = new
+						{
+							type = "text"
+						},
+						isManager = new
+						{
+							type = "text"
+						},
+						lastName = new
+						{
+							type = "text"
+						},
+						salary = new
+						{
+							type = "text"
+						},
+						hours = new
+						{
+							type = "text"
 						}
 					}
 				}
@@ -235,9 +225,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		[U] public void HidesInheritedMembers()
 		{
 			var createIndexResponse = client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<DictionaryDocument>(m => m.AutoMap(new IgnoreInheritedPropertiesVisitor<DictionaryDocument>()))
-				)
+				.Map<DictionaryDocument>(m => m.AutoMap(new IgnoreInheritedPropertiesVisitor<DictionaryDocument>()))
 			);
 
 			/**
@@ -247,14 +235,11 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					dictionarydocument = new
+					properties = new
 					{
-						properties = new
+						id = new
 						{
-							id = new
-							{
-								type = "integer"
-							}
+							type = "integer"
 						}
 					}
 				}

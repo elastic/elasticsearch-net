@@ -1,21 +1,22 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
+	[InterfaceDataContract]
 	public interface IGetWatchResponse : IResponse
 	{
-		[JsonProperty("found")]
+		[DataMember(Name ="found")]
 		bool Found { get; }
 
-		[JsonProperty("_id")]
+		[DataMember(Name ="_id")]
 		string Id { get; }
 
-		[JsonProperty("status")]
+		[DataMember(Name ="status")]
 		WatchStatus Status { get; }
 
-		[JsonProperty("watch")]
-		Watch Watch { get; }
+		[DataMember(Name ="watch")]
+		IWatch Watch { get; }
 	}
 
 	public class GetWatchResponse : ResponseBase, IGetWatchResponse
@@ -23,6 +24,6 @@ namespace Nest
 		public bool Found { get; internal set; }
 		public string Id { get; internal set; }
 		public WatchStatus Status { get; internal set; }
-		public Watch Watch { get; internal set; }
+		public IWatch Watch { get; internal set; }
 	}
 }

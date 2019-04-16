@@ -6,6 +6,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[DebuggerDisplay("{DebugDisplay,nq}")]
+	[JsonFormatter(typeof(TaskIdFormatter))]
 	public class TaskId : IUrlParameter, IEquatable<TaskId>
 	{
 		/// <summary>
@@ -60,5 +61,34 @@ namespace Nest
 				return (NodeId.GetHashCode() * 397) ^ TaskNumber.GetHashCode();
 			}
 		}
+	}
+
+	internal class TaskIdFormatter : IJsonFormatter<TaskId>, IObjectPropertyNameFormatter<TaskId>
+	{
+		public TaskId Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			if (reader.GetCurrentJsonToken() == JsonToken.String)
+				return new TaskId(reader.ReadString());
+
+			reader.ReadNextBlock();
+			return null;
+		}
+
+		public void Serialize(ref JsonWriter writer, TaskId value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
+
+			writer.WriteString(value.ToString());
+		}
+
+		public TaskId DeserializeFromPropertyName(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
+			Deserialize(ref reader, formatterResolver);
+
+		public void SerializeToPropertyName(ref JsonWriter writer, TaskId value, IJsonFormatterResolver formatterResolver) =>
+			Serialize(ref writer, value, formatterResolver);
 	}
 }

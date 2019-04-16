@@ -1,19 +1,19 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface ICancelClusterRerouteCommand : IClusterRerouteCommand
 	{
-		[JsonProperty("allow_primary")]
+		[DataMember(Name ="allow_primary")]
 		bool? AllowPrimary { get; set; }
 
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		IndexName Index { get; set; }
 
-		[JsonProperty("node")]
+		[DataMember(Name ="node")]
 		string Node { get; set; }
 
-		[JsonProperty("shard")]
+		[DataMember(Name ="shard")]
 		int? Shard { get; set; }
 	}
 

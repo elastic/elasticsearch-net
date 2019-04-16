@@ -118,28 +118,6 @@ namespace Tests.ClientConcepts.Troubleshooting
 			DebugFor(multiple).Should().Be($"Count: 2 [(1: someindex),(2: IndexName for typeof: {nameof(Project)})]");
 		}
 
-		[U] public void TypeName()
-		{
-			TypeName fromString = "index-1";
-			var fromType = Infer.Type<Project>();
-
-			DebugFor(fromString).Should().Be("index-1");
-			DebugFor(fromType).Should().Be("TypeName for typeof: Project");
-		}
-
-		[U] public void TypesDebug()
-		{
-			Types all = Types.All;
-			Types fromTypeName = Infer.Type<Project>();
-			Types fromType = typeof(CommitActivity);
-			Types multiple = Infer.Type("sometype").And<Project>();
-
-			DebugFor(all).Should().Be("_all");
-			DebugFor(fromTypeName).Should().Be($"Count: 1 [(1: TypeName for typeof: {nameof(Project)})]");
-			DebugFor(fromType).Should().Be($"Count: 1 [(1: TypeName for typeof: {nameof(CommitActivity)})]");
-			DebugFor(multiple).Should().Be($"Count: 2 [(1: sometype),(2: TypeName for typeof: {nameof(Project)})]");
-		}
-
 		[U] public void TaskId()
 		{
 			TaskId fromString = "node-1:12";

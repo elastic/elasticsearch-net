@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
+	[JsonFormatter(typeof(GeoShapeFormatter<IEnvelopeGeoShape>))]
 	public interface IEnvelopeGeoShape : IGeoShape
 	{
-		[JsonProperty("coordinates")]
+		[DataMember(Name ="coordinates")]
 		IEnumerable<GeoCoordinate> Coordinates { get; set; }
 	}
 
+	[JsonFormatter(typeof(GeoShapeFormatter<EnvelopeGeoShape>))]
 	public class EnvelopeGeoShape : GeoShapeBase, IEnvelopeGeoShape
 	{
 		internal EnvelopeGeoShape() : base("envelope") { }

@@ -62,7 +62,7 @@ namespace Nest
 		public IStartTrialLicenseResponse StartTrialLicense(IStartTrialLicenseRequest request) =>
 			Dispatcher.Dispatch<IStartTrialLicenseRequest, StartTrialLicenseRequestParameters, StartTrialLicenseResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackLicensePostStartTrialDispatch<StartTrialLicenseResponse>(p)
+				(p, d) => LowLevelDispatch.LicensePostStartTrialDispatch<StartTrialLicenseResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -79,7 +79,7 @@ namespace Nest
 				.DispatchAsync<IStartTrialLicenseRequest, StartTrialLicenseRequestParameters, StartTrialLicenseResponse, IStartTrialLicenseResponse>(
 					request,
 					cancellationToken,
-					(p, d, c) => LowLevelDispatch.XpackLicensePostStartTrialDispatchAsync<StartTrialLicenseResponse>(p, c)
+					(p, d, c) => LowLevelDispatch.LicensePostStartTrialDispatchAsync<StartTrialLicenseResponse>(p, c)
 				);
 	}
 }

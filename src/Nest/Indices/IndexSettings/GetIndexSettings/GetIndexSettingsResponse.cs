@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -8,10 +9,10 @@ namespace Nest
 		IReadOnlyDictionary<IndexName, IndexState> Indices { get; }
 	}
 
-	[JsonConverter(typeof(ResolvableDictionaryResponseJsonConverter<GetIndexSettingsResponse, IndexName, IndexState>))]
+	[JsonFormatter(typeof(ResolvableDictionaryResponseFormatter<GetIndexSettingsResponse, IndexName, IndexState>))]
 	public class GetIndexSettingsResponse : DictionaryResponseBase<IndexName, IndexState>, IGetIndexSettingsResponse
 	{
-		[JsonIgnore]
+		[IgnoreDataMember]
 		public IReadOnlyDictionary<IndexName, IndexState> Indices => Self.BackingDictionary;
 	}
 }

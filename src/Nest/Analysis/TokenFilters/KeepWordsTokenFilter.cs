@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -11,19 +12,20 @@ namespace Nest
 		/// <summary>
 		/// A list of words to keep.
 		/// </summary>
-		[JsonProperty("keep_words")]
+		[DataMember(Name ="keep_words")]
 		IEnumerable<string> KeepWords { get; set; }
 
 		/// <summary>
 		/// A boolean indicating whether to lower case the words.
 		/// </summary>
-		[JsonProperty("keep_words_case")]
+		[DataMember(Name ="keep_words_case")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? KeepWordsCase { get; set; }
 
 		/// <summary>
 		/// A path to a words file.
 		/// </summary>
-		[JsonProperty("keep_words_path")]
+		[DataMember(Name ="keep_words_path")]
 		string KeepWordsPath { get; set; }
 	}
 

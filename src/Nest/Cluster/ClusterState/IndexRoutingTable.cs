@@ -1,12 +1,13 @@
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	public class IndexRoutingTable
 	{
-		[JsonProperty("shards")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, List<RoutingShard>>))]
+		[DataMember(Name = "shards")]
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, List<RoutingShard>>))]
 		public IReadOnlyDictionary<string, List<RoutingShard>> Shards { get; internal set; }
 	}
 }

@@ -43,7 +43,7 @@ namespace Nest
 		public IGetOverallBucketsResponse GetOverallBuckets(IGetOverallBucketsRequest request) =>
 			Dispatcher.Dispatch<IGetOverallBucketsRequest, GetOverallBucketsRequestParameters, GetOverallBucketsResponse>(
 				request,
-				LowLevelDispatch.XpackMlGetOverallBucketsDispatch<GetOverallBucketsResponse>
+				LowLevelDispatch.MlGetOverallBucketsDispatch<GetOverallBucketsResponse>
 			);
 
 		/// <inheritdoc />
@@ -61,7 +61,7 @@ namespace Nest
 				.DispatchAsync<IGetOverallBucketsRequest, GetOverallBucketsRequestParameters, GetOverallBucketsResponse, IGetOverallBucketsResponse>(
 					request,
 					cancellationToken,
-					LowLevelDispatch.XpackMlGetOverallBucketsDispatchAsync<GetOverallBucketsResponse>
+					LowLevelDispatch.MlGetOverallBucketsDispatchAsync<GetOverallBucketsResponse>
 				);
 	}
 }

@@ -1,5 +1,8 @@
-﻿namespace Nest
+﻿using Elasticsearch.Net;
+
+namespace Nest
 {
+	[JsonFormatter(typeof(FuzzinessFormatter))]
 	public class Fuzziness : IFuzziness
 	{
 		private bool _auto;

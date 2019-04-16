@@ -11,6 +11,7 @@ namespace ApiGenerator.Overrides.Endpoints
 			"from",
 			"size",
 			"start",
+			"timestamp",
 			"end",
 			"anomaly_score",
 			"sort",

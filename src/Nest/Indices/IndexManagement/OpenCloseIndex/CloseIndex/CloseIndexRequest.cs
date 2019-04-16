@@ -1,9 +1,9 @@
 ﻿namespace Nest
 {
+	[MapsApi("indices.close.json")]
 	public partial interface ICloseIndexRequest { }
 
 	public partial class CloseIndexRequest { }
 
-	[DescriptorFor("IndicesClose")]
 	public partial class CloseIndexDescriptor { }
 }

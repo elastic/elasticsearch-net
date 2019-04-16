@@ -2,8 +2,6 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace Nest
 {
@@ -17,25 +15,24 @@ namespace Nest
 			_connectionSettings = connectionSettings;
 			IdResolver = new IdResolver(connectionSettings);
 			IndexNameResolver = new IndexNameResolver(connectionSettings);
-			TypeNameResolver = new TypeNameResolver(connectionSettings);
 			RelationNameResolver = new RelationNameResolver(connectionSettings);
 			FieldResolver = new FieldResolver(connectionSettings);
 			RoutingResolver = new RoutingResolver(connectionSettings, IdResolver);
 
-			Contracts = new ConcurrentDictionary<Type, JsonContract>();
 			CreateMultiHitDelegates =
-				new ConcurrentDictionary<Type, Action<MultiGetHitJsonConverter.MultiHitTuple, JsonSerializer, ICollection<IMultiGetHit<object>>>>();
+				new ConcurrentDictionary<Type,
+					Action<MultiGetResponseFormatter.MultiHitTuple, IJsonFormatterResolver, ICollection<IMultiGetHit<object>>>>();
 			CreateSearchResponseDelegates =
-				new ConcurrentDictionary<Type, Action<MultiSearchResponseJsonConverter.SearchHitTuple, JsonSerializer, IDictionary<string, object>>
-				>();
+				new ConcurrentDictionary<Type,
+					Action<MultiSearchResponseFormatter.SearchHitTuple, IJsonFormatterResolver, IDictionary<string, IResponse>>>();
 		}
 
-		internal ConcurrentDictionary<Type, JsonContract> Contracts { get; }
-
-		internal ConcurrentDictionary<Type, Action<MultiGetHitJsonConverter.MultiHitTuple, JsonSerializer, ICollection<IMultiGetHit<object>>>>
+		internal ConcurrentDictionary<Type, Action<MultiGetResponseFormatter.MultiHitTuple, IJsonFormatterResolver, ICollection<IMultiGetHit<object>>>
+			>
 			CreateMultiHitDelegates { get; }
 
-		internal ConcurrentDictionary<Type, Action<MultiSearchResponseJsonConverter.SearchHitTuple, JsonSerializer, IDictionary<string, object>>>
+		internal ConcurrentDictionary<Type,
+				Action<MultiSearchResponseFormatter.SearchHitTuple, IJsonFormatterResolver, IDictionary<string, IResponse>>>
 			CreateSearchResponseDelegates { get; }
 
 		private FieldResolver FieldResolver { get; }
@@ -43,7 +40,6 @@ namespace Nest
 		private IndexNameResolver IndexNameResolver { get; }
 		private RelationNameResolver RelationNameResolver { get; }
 		private RoutingResolver RoutingResolver { get; }
-		private TypeNameResolver TypeNameResolver { get; }
 
 		public string Resolve(IUrlParameter urlParameter) => urlParameter.GetString(_connectionSettings);
 
@@ -58,10 +54,6 @@ namespace Nest
 		public string Id<T>(T instance) where T : class => IdResolver.Resolve(instance);
 
 		public string Id(Type type, object instance) => IdResolver.Resolve(type, instance);
-
-		public string TypeName<T>() where T : class => TypeNameResolver.Resolve<T>();
-
-		public string TypeName(TypeName type) => TypeNameResolver.Resolve(type);
 
 		public string RelationName<T>() where T : class => RelationNameResolver.Resolve<T>();
 

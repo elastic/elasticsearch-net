@@ -1,30 +1,22 @@
-using System;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
 
 namespace Nest
 {
-	internal class SourceValueWriteConverter : JsonConverter
+	internal class SourceWriteFormatter<T> : SourceFormatter<T>
 	{
-		public override bool CanRead => false;
-		public override bool CanWrite => true;
-
-		public override bool CanConvert(Type objectType) => true;
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => Write(writer, value, serializer);
-
-		public static void Write(JsonWriter writer, object value, JsonSerializer serializer)
+		public override void Serialize(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver)
 		{
-			var nativeType = value.GetType().Assembly() == typeof(SourceValueWriteConverter).Assembly();
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
 
-			var settings = serializer.GetConnectionSettings();
-			var s = nativeType ? settings.RequestResponseSerializer : settings.SourceSerializer;
-			var f = writer.Formatting == Formatting.Indented ? SerializationFormatting.Indented : SerializationFormatting.None;
-			var v = s.SerializeToString(value, f);
-			writer.WriteRawValue(v);
+			var nestType = value.GetType().Assembly() == typeof(SourceWriteFormatter<>).Assembly();
+			if (nestType)
+				formatterResolver.GetFormatter<T>().Serialize(ref writer, value, formatterResolver);
+			else
+				base.Serialize(ref writer, value, formatterResolver);
 		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
-			throw new NotSupportedException();
 	}
 }

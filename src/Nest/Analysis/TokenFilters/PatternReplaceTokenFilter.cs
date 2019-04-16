@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -10,13 +10,13 @@ namespace Nest
 		/// <summary>
 		/// The regular expression
 		/// </summary>
-		[JsonProperty("pattern")]
+		[DataMember(Name ="pattern")]
 		string Pattern { get; set; }
 
 		/// <summary>
 		/// Replacement string
 		/// </summary>
-		[JsonProperty("replacement")]
+		[DataMember(Name ="replacement")]
 		string Replacement { get; set; }
 	}
 

@@ -38,7 +38,6 @@ namespace Tests.Document.Multiple.BulkAll
 					.Search(search => search
 						.Size(size / 2)
 						.Index(index)
-						.AllTypes()
 						.MatchAll()
 					)
 				)

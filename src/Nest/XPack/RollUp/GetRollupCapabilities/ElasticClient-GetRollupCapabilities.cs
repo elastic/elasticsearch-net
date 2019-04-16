@@ -49,7 +49,7 @@ namespace Nest
 		public IGetRollupCapabilitiesResponse GetRollupCapabilities(IGetRollupCapabilitiesRequest request) =>
 			Dispatcher.Dispatch<IGetRollupCapabilitiesRequest, GetRollupCapabilitiesRequestParameters, GetRollupCapabilitiesResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackRollupGetRollupCapsDispatch<GetRollupCapabilitiesResponse>(p)
+				(p, d) => LowLevelDispatch.RollupGetRollupCapsDispatch<GetRollupCapabilitiesResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -68,7 +68,7 @@ namespace Nest
 					IGetRollupCapabilitiesResponse>(
 					request,
 					cancellationToken,
-					(p, d, c) => LowLevelDispatch.XpackRollupGetRollupCapsDispatchAsync<GetRollupCapabilitiesResponse>(p, c)
+					(p, d, c) => LowLevelDispatch.RollupGetRollupCapsDispatchAsync<GetRollupCapabilitiesResponse>(p, c)
 				);
 	}
 }

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -11,7 +12,8 @@ namespace Nest
 		/// <summary>
 		/// length parameter which control the number of characters to truncate to, defaults to 10.
 		/// </summary>
-		[JsonProperty("length")]
+		[DataMember(Name ="length")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? Length { get; set; }
 	}
 

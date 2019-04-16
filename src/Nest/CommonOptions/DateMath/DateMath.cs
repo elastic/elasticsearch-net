@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
-using Newtonsoft.Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -13,7 +13,7 @@ namespace Nest
 		DateMathTimeUnit? Round { get; }
 	}
 
-	[JsonConverter(typeof(Json))]
+	[JsonFormatter(typeof(DateMathFormatter))]
 	public abstract class DateMath : IDateMath
 	{
 		private static readonly Regex DateMathRegex =
@@ -79,6 +79,8 @@ namespace Nest
 			return math;
 		}
 
+		internal static bool IsValidDateMathString(string dateMath) => dateMath != null && DateMathRegex.IsMatch(dateMath);
+
 		internal bool IsValid => Self.Anchor.Match(d => d != default, s => !s.IsNullOrEmpty());
 
 		public override string ToString()
@@ -89,7 +91,7 @@ namespace Nest
 
 			var sb = new StringBuilder();
 			var anchor = Self.Anchor.Match(
-				d => d.ToJsonNetString() + separator,
+				d => d.ToString("yyyy-MM-ddTHH:mm:ss.FFFFFFF") + separator,
 				s => s == "now" || s.EndsWith("||", StringComparison.Ordinal) ? s : s + separator
 			);
 			sb.Append(anchor);
@@ -104,24 +106,26 @@ namespace Nest
 
 			return sb.ToString();
 		}
+	}
 
-		private class Json : JsonConverterBase<DateMath>
+	internal class DateMathFormatter : IJsonFormatter<DateMath>
+	{
+		public DateMath Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			public override void WriteJson(JsonWriter writer, DateMath value, JsonSerializer serializer) =>
-				writer.WriteValue(value.ToString());
-
-			public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-			{
-				if (reader.TokenType == JsonToken.String)
-					return FromString(reader.Value as string);
-
-				if (reader.TokenType == JsonToken.Date)
-				{
-					var d = reader.Value as DateTime?;
-					return d.HasValue ? Anchored(d.Value) : null;
-				}
+			var token = reader.GetCurrentJsonToken();
+			if (token != JsonToken.String)
 				return null;
-			}
+
+			var segment = reader.ReadStringSegmentUnsafe();
+
+			if (!segment.ContainsDateMathSeparator() && segment.IsDateTime(formatterResolver, out var dateTime))
+				return DateMath.Anchored(dateTime);
+
+			var value = segment.Utf8String();
+			return DateMath.FromString(value);
 		}
+
+		public void Serialize(ref JsonWriter writer, DateMath value, IJsonFormatterResolver formatterResolver) =>
+			writer.WriteString(value.ToString());
 	}
 }

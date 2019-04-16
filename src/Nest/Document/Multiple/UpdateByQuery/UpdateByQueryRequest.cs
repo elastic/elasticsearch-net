@@ -1,18 +1,18 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public partial interface IUpdateByQueryRequest
 	{
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		QueryContainer Query { get; set; }
 
-		[JsonProperty("script")]
+		[DataMember(Name ="script")]
 		IScript Script { get; set; }
 	}
 
-	public interface IUpdateByQueryRequest<T> : IUpdateByQueryRequest where T : class { }
+	public partial interface IUpdateByQueryRequest<T> where T : class { }
 
 	public partial class UpdateByQueryRequest
 	{
@@ -20,14 +20,11 @@ namespace Nest
 		public IScript Script { get; set; }
 	}
 
-	public partial class UpdateByQueryRequest<T> : IUpdateByQueryRequest<T>
-		where T : class
+	public partial class UpdateByQueryRequest<T> where T : class
 	{
-		public QueryContainer Query { get; set; }
-		public IScript Script { get; set; }
 	}
 
-	public partial class UpdateByQueryDescriptor<T> : IUpdateByQueryRequest<T>
+	public partial class UpdateByQueryDescriptor<T>
 		where T : class
 	{
 		QueryContainer IUpdateByQueryRequest.Query { get; set; }

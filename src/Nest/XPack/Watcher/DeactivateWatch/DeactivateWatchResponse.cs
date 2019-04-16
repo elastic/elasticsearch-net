@@ -1,16 +1,16 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IDeactivateWatchResponse : IResponse
 	{
-		[JsonProperty("status")]
+		[DataMember(Name ="status")]
 		ActivationStatus Status { get; }
 	}
 
 	public class DeactivateWatchResponse : ResponseBase, IDeactivateWatchResponse
 	{
-		[JsonProperty("status")]
+		[DataMember(Name ="status")]
 		public ActivationStatus Status { get; internal set; }
 	}
 }

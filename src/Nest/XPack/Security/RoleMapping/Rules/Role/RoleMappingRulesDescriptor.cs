@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
+	[DataContract]
 	public class RoleMappingRulesDescriptor
 		: DescriptorPromiseBase<RoleMappingRulesDescriptor, List<RoleMappingRuleBase>>, IPromise<List<RoleMappingRuleBase>>
 	{

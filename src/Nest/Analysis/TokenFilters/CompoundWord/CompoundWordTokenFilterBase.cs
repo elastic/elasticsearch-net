@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -11,43 +12,47 @@ namespace Nest
 		/// <summary>
 		/// A path (either relative to config location, or absolute) to a FOP XML hyphenation pattern file.
 		/// </summary>
-		[JsonProperty("hyphenation_patterns_path")]
+		[DataMember(Name ="hyphenation_patterns_path")]
 		string HyphenationPatternsPath { get; set; }
 
 		/// <summary>
 		/// Maximum subword size.
 		/// </summary>
-		[JsonProperty("max_subword_size")]
+		[DataMember(Name ="max_subword_size")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? MaxSubwordSize { get; set; }
 
 		/// <summary>
 		/// Minimum subword size.
 		/// </summary>
-		[JsonProperty("min_subword_size")]
+		[DataMember(Name ="min_subword_size")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? MinSubwordSize { get; set; }
 
 		/// <summary>
 		/// Minimum word size.
 		/// </summary>
-		[JsonProperty("min_word_size")]
+		[DataMember(Name ="min_word_size")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? MinWordSize { get; set; }
 
 		/// <summary>
 		/// Only matching the longest.
 		/// </summary>
-		[JsonProperty("only_longest_match")]
+		[DataMember(Name ="only_longest_match")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? OnlyLongestMatch { get; set; }
 
 		/// <summary>
 		/// A list of words to use.
 		/// </summary>
-		[JsonProperty("word_list")]
+		[DataMember(Name ="word_list")]
 		IEnumerable<string> WordList { get; set; }
 
 		/// <summary>
 		/// A path (either relative to config location, or absolute) to a list of words.
 		/// </summary>
-		[JsonProperty("word_list_path")]
+		[DataMember(Name ="word_list_path")]
 		string WordListPath { get; set; }
 	}
 

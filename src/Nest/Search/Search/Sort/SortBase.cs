@@ -1,25 +1,26 @@
 using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(SortJsonConverter))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(SortFormatter))]
 	public interface ISort
 	{
 		/// <summary>
 		/// Specifies how documents which are missing the sort field should
 		/// be treated.
 		/// </summary>
-		[JsonProperty("missing")]
+		[DataMember(Name ="missing")]
 		object Missing { get; set; }
 
 		/// <summary>
 		/// Controls what collection value is picked for sorting a document
 		/// when the field is a collection
 		/// </summary>
-		[JsonProperty("mode")]
+		[DataMember(Name ="mode")]
 		SortMode? Mode { get; set; }
 
 		/// <summary>
@@ -28,32 +29,33 @@ namespace Nest
 		/// <remarks>
 		/// Valid in Elasticsearch 6.1.0+
 		/// </remarks>
-		[JsonProperty("nested")]
+		[DataMember(Name ="nested")]
 		INestedSort Nested { get; set; }
 
 		/// <summary>
 		/// Specifies the filter to apply when sorting on a nested field
 		/// </summary>
-		[JsonProperty("nested_filter")]
+		[DataMember(Name ="nested_filter")]
 		[Obsolete("Deprecated in 6.1.0. Use Nested. Will be removed in 7.x")]
 		QueryContainer NestedFilter { get; set; }
 
 		/// <summary>
 		/// Specifies the path to apply when sorting on a nested field
 		/// </summary>
-		[JsonProperty("nested_path")]
+		[DataMember(Name ="nested_path")]
 		[Obsolete("Deprecated in 6.1.0. Use Nested. Will be removed in 7.x")]
 		Field NestedPath { get; set; }
 
 		/// <summary>
 		/// Controls the order of sorting
 		/// </summary>
-		[JsonProperty("order")]
+		[DataMember(Name ="order")]
 		SortOrder? Order { get; set; }
 
 		/// <summary>
 		/// The field on which to sort
 		/// </summary>
+		[IgnoreDataMember]
 		Field SortKey { get; }
 	}
 

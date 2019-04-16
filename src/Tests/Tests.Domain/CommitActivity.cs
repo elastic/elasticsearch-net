@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Bogus;
 using Nest;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Tests.Configuration;
 using Tests.Domain.Helpers;
 using Tests.Domain.JsonConverters;
@@ -24,6 +24,13 @@ namespace Tests.Domain
 
 		public string Message { get; set; }
 
+		/// <summary>
+		/// This is lazy, both project and commits end up in the same index under the same type (_doc)
+		/// Quite a few of our tests do script lookups based on this field under the old assumption only a specific type
+		/// is searched.
+		/// </summary>
+		public int? NumberOfCommits { get; set; }
+
 		public string ProjectName
 		{
 			get => _projectName;
@@ -37,8 +44,6 @@ namespace Tests.Domain
 		public long SizeInBytes { get; set; }
 
 		[Text]
-		[StringTimeSpan]
-		[JsonConverter(typeof(StringTimeSpanConverter))]
 		public TimeSpan? StringDuration
 		{
 			get => Duration;
@@ -56,6 +61,7 @@ namespace Tests.Domain
 				.RuleFor(p => p.Committer, p => Developer.Developers[Gimme.Random.Number(0, Developer.Developers.Count - 1)])
 				.RuleFor(p => p.Message, p => p.Lorem.Paragraph(Gimme.Random.Number(1, 3)))
 				.RuleFor(p => p.SizeInBytes, p => p.Random.Number(0, 100000))
+				.RuleFor(p => p.NumberOfCommits, f => Gimme.Random.Number(1, 1000))
 				.RuleFor(p => p.ConfidenceFactor, p => p.Random.Double())
 				.RuleFor(p => p.Duration, p => p.Random.ArrayElement(new TimeSpan?[]
 				{

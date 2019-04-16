@@ -43,7 +43,7 @@ namespace Tests.QueryDsl
 		protected abstract QueryContainer QueryInitializer { get; }
 
 		protected abstract object QueryJson { get; }
-		protected override string UrlPath => "/project/doc/_search";
+		protected override string UrlPath => "/project/_search";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.Search<Project>(f),

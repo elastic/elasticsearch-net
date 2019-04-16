@@ -20,7 +20,7 @@ namespace Tests.XPack.MachineLearning.GetDatafeedStats
 		protected override int ExpectStatusCode => 200;
 		protected override Func<GetDatafeedStatsDescriptor, IGetDatafeedStatsRequest> Fluent => f => f;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"_xpack/ml/datafeeds/_stats";
+		protected override string UrlPath => $"_ml/datafeeds/_stats";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -57,7 +57,7 @@ namespace Tests.XPack.MachineLearning.GetDatafeedStats
 		protected override Func<GetDatafeedStatsDescriptor, IGetDatafeedStatsRequest> Fluent => f => f.DatafeedId(CallIsolatedValue + "-datafeed");
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override GetDatafeedStatsRequest Initializer => new GetDatafeedStatsRequest(CallIsolatedValue + "-datafeed");
-		protected override string UrlPath => $"_xpack/ml/datafeeds/{CallIsolatedValue}-datafeed/_stats";
+		protected override string UrlPath => $"_ml/datafeeds/{CallIsolatedValue}-datafeed/_stats";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

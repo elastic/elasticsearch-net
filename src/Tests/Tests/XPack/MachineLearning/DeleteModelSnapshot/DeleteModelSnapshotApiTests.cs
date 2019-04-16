@@ -20,7 +20,7 @@ namespace Tests.XPack.MachineLearning.DeleteModelSnapshot
 		protected override Func<DeleteModelSnapshotDescriptor, IDeleteModelSnapshotRequest> Fluent => f => f;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override DeleteModelSnapshotRequest Initializer => new DeleteModelSnapshotRequest(CallIsolatedValue, "1");
-		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/model_snapshots/1";
+		protected override string UrlPath => $"_ml/anomaly_detectors/{CallIsolatedValue}/model_snapshots/1";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

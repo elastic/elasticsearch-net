@@ -34,7 +34,7 @@ namespace Nest
 		public IUpdateJobResponse UpdateJob(IUpdateJobRequest request) =>
 			Dispatcher.Dispatch<IUpdateJobRequest, UpdateJobRequestParameters, UpdateJobResponse>(
 				request,
-				LowLevelDispatch.XpackMlUpdateJobDispatch<UpdateJobResponse>
+				LowLevelDispatch.MlUpdateJobDispatch<UpdateJobResponse>
 			);
 
 		/// <inheritdoc />
@@ -48,7 +48,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IUpdateJobRequest, UpdateJobRequestParameters, UpdateJobResponse, IUpdateJobResponse>(
 				request,
 				cancellationToken,
-				LowLevelDispatch.XpackMlUpdateJobDispatchAsync<UpdateJobResponse>
+				LowLevelDispatch.MlUpdateJobDispatchAsync<UpdateJobResponse>
 			);
 	}
 }

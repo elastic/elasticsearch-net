@@ -1,31 +1,31 @@
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary>
 	/// Privileges for an application
 	/// </summary>
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ApplicationPrivileges>))]
+	[ReadAs(typeof(ApplicationPrivileges))]
 	public interface IApplicationPrivileges
 	{
 		/// <summary>
 		/// The name of the application to which this entry applies
 		/// </summary>
-		[JsonProperty("application")]
+		[DataMember(Name ="application")]
 		string Application { get; set; }
 
 		/// <summary>
 		/// A list of strings, where each element is the name of an application privilege or action.
 		/// </summary>
-		[JsonProperty("privileges")]
+		[DataMember(Name ="privileges")]
 		IEnumerable<string> Privileges { get; set; }
 
 		/// <summary>
 		/// A list resources to which the privileges are applied.
 		/// </summary>
-		[JsonProperty("resources")]
+		[DataMember(Name ="resources")]
 		IEnumerable<string> Resources { get; set; }
 	}
 

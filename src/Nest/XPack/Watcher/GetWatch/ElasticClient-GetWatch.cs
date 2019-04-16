@@ -34,7 +34,7 @@ namespace Nest
 		public IGetWatchResponse GetWatch(IGetWatchRequest request) =>
 			Dispatcher.Dispatch<IGetWatchRequest, GetWatchRequestParameters, GetWatchResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackWatcherGetWatchDispatch<GetWatchResponse>(p)
+				(p, d) => LowLevelDispatch.WatcherGetWatchDispatch<GetWatchResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -48,7 +48,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IGetWatchRequest, GetWatchRequestParameters, GetWatchResponse, IGetWatchResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackWatcherGetWatchDispatchAsync<GetWatchResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.WatcherGetWatchDispatchAsync<GetWatchResponse>(p, c)
 			);
 	}
 }

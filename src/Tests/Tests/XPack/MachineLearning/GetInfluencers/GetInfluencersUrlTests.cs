@@ -8,7 +8,7 @@ namespace Tests.XPack.MachineLearning.GetInfluencers
 {
 	public class GetInfluencersUrlTests : UrlTestsBase
 	{
-		[U] public override async Task Urls() => await POST("/_xpack/ml/anomaly_detectors/job_id/results/influencers")
+		[U] public override async Task Urls() => await POST("/_ml/anomaly_detectors/job_id/results/influencers")
 			.Fluent(c => c.GetInfluencers("job_id"))
 			.Request(c => c.GetInfluencers(new GetInfluencersRequest("job_id")))
 			.FluentAsync(c => c.GetInfluencersAsync("job_id"))

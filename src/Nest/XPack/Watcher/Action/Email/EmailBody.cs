@@ -1,15 +1,16 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<EmailBody>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(EmailBody))]
 	public interface IEmailBody
 	{
-		[JsonProperty("html")]
+		[DataMember(Name = "html")]
 		string Html { get; set; }
 
-		[JsonProperty("text")]
+		[DataMember(Name = "text")]
 		string Text { get; set; }
 	}
 

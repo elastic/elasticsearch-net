@@ -5,7 +5,7 @@ using System.Text;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Linq;
 using Tests.Core.Client;
 using Tests.Framework;
@@ -44,10 +44,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		public void DefaultMultiFields()
 		{
 			var createIndexResponse = _client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<Person>(m => m
-						.AutoMap()
-					)
+				.Map<Person>(m => m
+					.AutoMap()
 				)
 			);
 
@@ -59,20 +57,17 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					person = new
+					properties = new
 					{
-						properties = new
+						name = new
 						{
-							name = new
+							type = "text",
+							fields = new
 							{
-								type = "text",
-								fields = new
+								keyword = new
 								{
-									keyword = new
-									{
-										type = "keyword",
-										ignore_above = 256
-									}
+									type = "keyword",
+									ignore_above = 256
 								}
 							}
 						}
@@ -164,24 +159,22 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		public void CreatingMultiFields()
 		{
 			var createIndexResponse = _client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<Person>(m => m
-						.Properties(p => p
-							.Text(t => t
-								.Name(n => n.Name)
-								.Fields(ff => ff
-									.Text(tt => tt
-										.Name("stop") // <1> Use the stop analyzer on this sub field
-										.Analyzer("stop")
-									)
-									.Text(tt => tt
-										.Name("shingles")
-										.Analyzer("name_shingles") // <2> Use a custom analyzer named "named_shingles" that is configured in the index
-									)
-									.Keyword(k => k
-										.Name("keyword") // <3> Index as not analyzed
-										.IgnoreAbove(256)
-									)
+				.Map<Person>(m => m
+					.Properties(p => p
+						.Text(t => t
+							.Name(n => n.Name)
+							.Fields(ff => ff
+								.Text(tt => tt
+									.Name("stop") // <1> Use the stop analyzer on this sub field
+									.Analyzer("stop")
+								)
+								.Text(tt => tt
+									.Name("shingles")
+									.Analyzer("name_shingles") // <2> Use a custom analyzer named "named_shingles" that is configured in the index
+								)
+								.Keyword(k => k
+									.Name("keyword") // <3> Index as not analyzed
+									.IgnoreAbove(256)
 								)
 							)
 						)
@@ -196,30 +189,27 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					person = new
+					properties = new
 					{
-						properties = new
+						name = new
 						{
-							name = new
+							type = "text",
+							fields = new
 							{
-								type = "text",
-								fields = new
+								stop = new
 								{
-									stop = new
-									{
-										type = "text",
-										analyzer = "stop"
-									},
-									shingles = new
-									{
-										type = "text",
-										analyzer = "name_shingles"
-									},
-									keyword = new
-									{
-										type = "keyword",
-										ignore_above = 256
-									}
+									type = "text",
+									analyzer = "stop"
+								},
+								shingles = new
+								{
+									type = "text",
+									analyzer = "name_shingles"
+								},
+								keyword = new
+								{
+									type = "keyword",
+									ignore_above = 256
 								}
 							}
 						}

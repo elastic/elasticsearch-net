@@ -1,11 +1,13 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	/// <summary>
 	/// Retrieve results for machine learning job influencers.
 	/// </summary>
+	[MapsApi("ml.get_influencers.json")]
 	public partial interface IGetInfluencersRequest
 	{
 		/// <summary>
@@ -16,39 +18,40 @@ namespace Nest
 		/// <summary>
 		/// Returns influencers with timestamps earlier than this time.
 		/// </summary>
-		[JsonProperty("end")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[DataMember(Name = "end")]
+		[JsonFormatter(typeof(NullableDateTimeOffsetEpochMillisecondsFormatter))]
 		DateTimeOffset? End { get; set; }
 
 		/// <summary>
 		/// If true, the output excludes interim results. By default, interim results are included.
 		/// </summary>
-		[JsonProperty("exclude_interim")]
+		[DataMember(Name = "exclude_interim")]
 		bool? ExcludeInterim { get; set; }
 
 		/// <summary>
 		/// Returns influencers with anomaly scores higher than this value.
 		/// </summary>
-		[JsonProperty("influencer_score")]
+		[DataMember(Name = "influencer_score")]
 		double? InfluencerScore { get; set; }
 
 		/// <summary>
 		/// Specifies pagination for the influencers.
 		/// </summary>
-		[JsonProperty("page")]
+		[DataMember(Name = "page")]
 		IPage Page { get; set; }
 
 		/// <summary>
-		/// Specifies the sort field for the requested influencers. By default, the influencers are sorted by the <see cref="InfluencerScore" /> value.
+		/// Specifies the sort field for the requested influencers. By default, the influencers are sorted by the
+		/// <see cref="InfluencerScore" /> value.
 		/// </summary>
-		[JsonProperty("sort")]
+		[DataMember(Name = "sort")]
 		Field Sort { get; set; }
 
 		/// <summary>
 		/// Returns influencers with timestamps after this time.
 		/// </summary>
-		[JsonProperty("start")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[DataMember(Name = "start")]
+		[JsonFormatter(typeof(NullableDateTimeOffsetEpochMillisecondsFormatter))]
 		DateTimeOffset? Start { get; set; }
 	}
 
@@ -78,11 +81,8 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	[DescriptorFor("XpackMlGetInfluencers")]
 	public partial class GetInfluencersDescriptor
 	{
-		public GetInfluencersDescriptor() { }
-
 		bool? IGetInfluencersRequest.Descending { get; set; }
 		DateTimeOffset? IGetInfluencersRequest.End { get; set; }
 		bool? IGetInfluencersRequest.ExcludeInterim { get; set; }

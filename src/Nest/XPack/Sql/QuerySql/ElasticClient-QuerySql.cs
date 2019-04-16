@@ -32,7 +32,7 @@ namespace Nest
 		public IQuerySqlResponse QuerySql(IQuerySqlRequest request) =>
 			Dispatcher.Dispatch<IQuerySqlRequest, QuerySqlRequestParameters, QuerySqlResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackSqlQueryDispatch<QuerySqlResponse>(p, d)
+				(p, d) => LowLevelDispatch.SqlQueryDispatch<QuerySqlResponse>(p, d)
 			);
 
 		/// <inheritdoc cref="QuerySql(System.Func{Nest.QuerySqlDescriptor,Nest.IQuerySqlRequest})" />
@@ -46,7 +46,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IQuerySqlRequest, QuerySqlRequestParameters, QuerySqlResponse, IQuerySqlResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackSqlQueryDispatchAsync<QuerySqlResponse>(p, d, c)
+				(p, d, c) => LowLevelDispatch.SqlQueryDispatchAsync<QuerySqlResponse>(p, d, c)
 			);
 	}
 }

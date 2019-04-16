@@ -1,13 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class AliasRemoveOperation
 	{
-		[JsonProperty("alias")]
+		[DataMember(Name ="alias")]
 		public string Alias { get; set; }
 
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		public IndexName Index { get; set; }
 	}
 }

@@ -1,33 +1,34 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
+using System.Runtime.Serialization;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// A mapping for a property type to a document field in Elasticsearch
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(PropertyJsonConverter))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(PropertyFormatter))]
 	public interface IProperty : IFieldMapping
 	{
 		/// <summary>
 		/// Local property metadata that will not be stored in Elasticsearch with the mappings
 		/// </summary>
-		[JsonIgnore]
+		[IgnoreDataMember]
 		IDictionary<string, object> LocalMetadata { get; set; }
 
 		/// <summary>
 		/// The name of the property
 		/// </summary>
+		//[DataMember(Name = "name")]
 		PropertyName Name { get; set; }
 
 		/// <summary>
 		/// The datatype of the property
 		/// </summary>
-		[JsonProperty("type")]
+		[DataMember(Name = "type")]
 		string Type { get; set; }
 	}
 

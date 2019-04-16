@@ -1,29 +1,26 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ShrinkIndexRequest>))]
+	[MapsApi("indices.shrink.json")]
+	[ReadAs(typeof(ShrinkIndexRequest))]
 	public partial interface IShrinkIndexRequest
 	{
-		[JsonProperty("aliases")]
+		[DataMember(Name ="aliases")]
 		IAliases Aliases { get; set; }
 
-		[JsonProperty("settings")]
+		[DataMember(Name ="settings")]
 		IIndexSettings Settings { get; set; }
 	}
 
 	public partial class ShrinkIndexRequest
 	{
-		// For ReadAsType()
-		internal ShrinkIndexRequest() { }
-
 		public IAliases Aliases { get; set; }
 
 		public IIndexSettings Settings { get; set; }
 	}
 
-	[DescriptorFor("IndicesShrink")]
 	public partial class ShrinkIndexDescriptor
 	{
 		IAliases IShrinkIndexRequest.Aliases { get; set; }

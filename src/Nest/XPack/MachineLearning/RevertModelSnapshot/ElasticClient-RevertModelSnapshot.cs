@@ -41,7 +41,7 @@ namespace Nest
 		public IRevertModelSnapshotResponse RevertModelSnapshot(IRevertModelSnapshotRequest request) =>
 			Dispatcher.Dispatch<IRevertModelSnapshotRequest, RevertModelSnapshotRequestParameters, RevertModelSnapshotResponse>(
 				request,
-				LowLevelDispatch.XpackMlRevertModelSnapshotDispatch<RevertModelSnapshotResponse>
+				LowLevelDispatch.MlRevertModelSnapshotDispatch<RevertModelSnapshotResponse>
 			);
 
 		/// <inheritdoc />
@@ -60,7 +60,7 @@ namespace Nest
 					IRevertModelSnapshotResponse>(
 					request,
 					cancellationToken,
-					LowLevelDispatch.XpackMlRevertModelSnapshotDispatchAsync<RevertModelSnapshotResponse>
+					LowLevelDispatch.MlRevertModelSnapshotDispatchAsync<RevertModelSnapshotResponse>
 				);
 	}
 }

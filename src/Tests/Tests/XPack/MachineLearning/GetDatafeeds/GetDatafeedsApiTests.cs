@@ -20,7 +20,7 @@ namespace Tests.XPack.MachineLearning.GetDatafeeds
 		protected override int ExpectStatusCode => 200;
 		protected override Func<GetDatafeedsDescriptor, IGetDatafeedsRequest> Fluent => f => f;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"_xpack/ml/datafeeds";
+		protected override string UrlPath => $"_ml/datafeeds";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -54,9 +54,6 @@ namespace Tests.XPack.MachineLearning.GetDatafeeds
 
 			firstDatafeed.Indices.Should().NotBeNull("Indices");
 			firstDatafeed.Indices.Should().Be(Nest.Indices.Parse("server-metrics"));
-
-			firstDatafeed.Types.Should().NotBeNull("Types");
-			firstDatafeed.Types.Should().Be(Types.Parse("metric"));
 
 			firstDatafeed.ScrollSize.Should().Be(1000);
 
@@ -80,7 +77,7 @@ namespace Tests.XPack.MachineLearning.GetDatafeeds
 		protected override Func<GetDatafeedsDescriptor, IGetDatafeedsRequest> Fluent => f => f.DatafeedId(CallIsolatedValue + "-datafeed");
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override GetDatafeedsRequest Initializer => new GetDatafeedsRequest(CallIsolatedValue + "-datafeed");
-		protected override string UrlPath => $"_xpack/ml/datafeeds/{CallIsolatedValue}-datafeed";
+		protected override string UrlPath => $"_ml/datafeeds/{CallIsolatedValue}-datafeed";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -114,9 +111,6 @@ namespace Tests.XPack.MachineLearning.GetDatafeeds
 
 			firstDatafeed.Indices.Should().NotBeNull("Indices");
 			firstDatafeed.Indices.Should().Be(Nest.Indices.Parse("server-metrics"));
-
-			firstDatafeed.Types.Should().NotBeNull("Types");
-			firstDatafeed.Types.Should().Be(Types.Parse("metric"));
 
 			firstDatafeed.ScrollSize.Should().Be(1000);
 

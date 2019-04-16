@@ -1,28 +1,23 @@
-﻿using System;
-using Elasticsearch.Net;
-using Newtonsoft.Json;
+﻿using Elasticsearch.Net;
 
 namespace Nest
 {
-	internal class MultiSearchJsonConverter : JsonConverter
+	internal class MultiSearchJsonConverter : IJsonFormatter<IMultiSearchRequest>
 	{
-		public override bool CanRead => false;
-		public override bool CanWrite => true;
+		private const byte Newline = (byte)'\n';
 
-		public override bool CanConvert(Type objectType) => true;
+		public IMultiSearchRequest Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
+			DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IMultiSearchRequest>().Deserialize(ref reader, formatterResolver);
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public void Serialize(ref JsonWriter writer, IMultiSearchRequest value, IJsonFormatterResolver formatterResolver)
 		{
-			var request = (IMultiSearchRequest)value;
-			if (request == null) return;
+			if (value?.Operations == null)
+				return;
 
-			var settings = serializer.GetConnectionSettings();
-			var elasticsearchSerializer = settings.RequestResponseSerializer;
-			if (elasticsearchSerializer == null) return;
+			var settings = formatterResolver.GetConnectionSettings();
+			var serializer = settings.RequestResponseSerializer;
 
-			if (request.Operations == null) return;
-
-			foreach (var operation in request.Operations.Values)
+			foreach (var operation in value.Operations.Values)
 			{
 				var p = operation.RequestParameters;
 
@@ -31,12 +26,8 @@ namespace Nest
 					return p.GetResolvedQueryStringValue(key, settings);
 				}
 
-				IUrlParameter indices = request.Index == null || !request.Index.Equals(operation.Index)
+				IUrlParameter indices = value.Index == null || !value.Index.Equals(operation.Index)
 					? operation.Index
-					: null;
-
-				IUrlParameter types = request.Type == null || !request.Type.Equals(operation.Type)
-					? operation.Type
 					: null;
 
 				var searchType = GetString("search_type");
@@ -46,21 +37,19 @@ namespace Nest
 				var header = new
 				{
 					index = indices?.GetString(settings),
-					type = types?.GetString(settings),
 					search_type = searchType,
 					preference = GetString("preference"),
 					routing = GetString("routing"),
 					ignore_unavailable = GetString("ignore_unavailable")
 				};
 
-				var headerString = elasticsearchSerializer.SerializeToString(header, SerializationFormatting.None);
-				writer.WriteRaw($"{headerString}\n");
-				var bodyString = elasticsearchSerializer.SerializeToString(operation, SerializationFormatting.None);
-				writer.WriteRaw($"{bodyString}\n");
+				var headerBytes = serializer.SerializeToBytes(header, SerializationFormatting.None);
+				writer.WriteRaw(headerBytes);
+				writer.WriteRaw(Newline);
+				var bodyBytes = serializer.SerializeToBytes(operation, SerializationFormatting.None);
+				writer.WriteRaw(bodyBytes);
+				writer.WriteRaw(Newline);
 			}
 		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
-			throw new NotSupportedException();
 	}
 }

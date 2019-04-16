@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -11,7 +12,8 @@ namespace Nest
 		/// <summary>
 		/// The lambda parameter
 		/// </summary>
-		[JsonProperty("lambda")]
+		[DataMember(Name ="lambda")]
+		[JsonFormatter(typeof(NullableStringDoubleFormatter))]
 		double? Lambda { get; set; }
 	}
 

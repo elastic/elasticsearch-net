@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ProcessorJsonConverter<ForeachProcessor>))]
+	[InterfaceDataContract]
 	public interface IForeachProcessor : IProcessor
 	{
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
-		[JsonProperty("processor")]
+		[DataMember(Name ="processor")]
 		IProcessor Processor { get; set; }
 	}
 

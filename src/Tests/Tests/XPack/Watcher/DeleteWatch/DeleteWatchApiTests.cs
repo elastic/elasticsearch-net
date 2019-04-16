@@ -3,6 +3,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.Xunit;
 using Tests.Framework;
 using Tests.Framework.Integration;
 
@@ -23,7 +24,7 @@ namespace Tests.XPack.Watcher.DeleteWatch
 
 		protected override DeleteWatchRequest Initializer => new DeleteWatchRequest(CallIsolatedValue);
 
-		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}";
+		protected override string UrlPath => $"/_watcher/watch/{CallIsolatedValue}";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -88,7 +89,7 @@ namespace Tests.XPack.Watcher.DeleteWatch
 
 		protected override DeleteWatchRequest Initializer => new DeleteWatchRequest(CallIsolatedValue);
 
-		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}";
+		protected override string UrlPath => $"/_watcher/watch/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.DeleteWatch(CallIsolatedValue, f),
@@ -104,7 +105,7 @@ namespace Tests.XPack.Watcher.DeleteWatch
 			//This API returns different results depending on whether `.watches` exists or not
 			if (response.ServerError?.Status == 404)
 			{
-				response.ServerError.Error.Reason.Should().Be("no such index");
+				response.ServerError.Error.Reason.Should().Contain("no such index");
 				return;
 			}
 

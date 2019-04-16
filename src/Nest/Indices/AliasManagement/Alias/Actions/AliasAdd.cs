@@ -1,12 +1,13 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[InterfaceDataContract]
 	public interface IAliasAddAction : IAliasAction
 	{
-		[JsonProperty("add")]
+		[DataMember(Name ="add")]
 		AliasAddOperation Add { get; set; }
 	}
 

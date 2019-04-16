@@ -1,22 +1,23 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<RescoreQuery>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(RescoreQuery))]
 	public interface IRescoreQuery
 	{
-		[JsonProperty("rescore_query")]
+		[DataMember(Name = "rescore_query")]
 		QueryContainer Query { get; set; }
 
-		[JsonProperty("query_weight")]
+		[DataMember(Name = "query_weight")]
 		double? QueryWeight { get; set; }
 
-		[JsonProperty("rescore_query_weight")]
+		[DataMember(Name = "rescore_query_weight")]
 		double? RescoreQueryWeight { get; set; }
 
-		[JsonProperty("score_mode")]
+		[DataMember(Name = "score_mode")]
 		ScoreMode? ScoreMode { get; set; }
 	}
 

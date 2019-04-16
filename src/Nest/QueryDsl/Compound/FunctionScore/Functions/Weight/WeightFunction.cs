@@ -1,8 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[InterfaceDataContract]
 	public interface IWeightFunction : IScoreFunction { }
 
 	public class WeightFunction : FunctionScoreFunctionBase, IWeightFunction { }

@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -7,10 +7,10 @@ namespace Nest
 	/// </summary>
 	public interface IPatternReplaceCharFilter : ICharFilter
 	{
-		[JsonProperty("pattern")]
+		[DataMember(Name ="pattern")]
 		string Pattern { get; set; }
 
-		[JsonProperty("replacement")]
+		[DataMember(Name ="replacement")]
 		string Replacement { get; set; }
 	}
 

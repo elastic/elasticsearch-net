@@ -1,18 +1,18 @@
 ﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using Elasticsearch.Net;
+
 
 namespace Nest
 {
 	/// <summary>
 	/// Sorts highlighted fragments
 	/// </summary>
-	[JsonConverter(typeof(StringEnumConverter))]
+	[StringEnum]
 	public enum HighlighterOrder
 	{
 		/// <summary>
-		/// Sorts highlighted fragments by score. Only valid for the <see cref="HighlighterType.Unified" /> highligher
-		/// </remarks>
+		/// Sorts highlighted fragments by score. Only valid for the <see cref="HighlighterType.Unified" /> highlighter
+		/// </summary>
 		[EnumMember(Value = "score")]
 		Score
 	}

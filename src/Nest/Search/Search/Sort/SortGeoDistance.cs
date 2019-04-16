@@ -1,31 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	/// <summary> Allows you to sort based on a proximity to one or more <see cref="GeoLocation" /> </summary>
+	[InterfaceDataContract]
 	public interface IGeoDistanceSort : ISort
 	{
 		/// <summary>
 		/// How to compute the distance. Can either be arc (default), or plane (faster, but
 		/// inaccurate on long distances and close to the poles).
 		/// </summary>
-		[JsonProperty("distance_type")]
+		[DataMember(Name ="distance_type")]
 		GeoDistanceType? DistanceType { get; set; }
 
 		Field Field { get; set; }
 
 		/// <summary> The unit to use when computing sort values. The default is m (meters) </summary>
-		[JsonProperty("unit")]
+		[DataMember(Name ="unit")]
 		DistanceUnit? GeoUnit { get; set; }
 
 		/// <summary>
 		/// Indicates if the unmapped field should be treated as a missing value. Setting it to `true` is equivalent to specifying
 		/// an `unmapped_type` in the field sort. The default is `false` (unmapped field are causing the search to fail)
 		/// </summary>
-		[JsonProperty("ignore_unmapped")]
+		[DataMember(Name ="ignore_unmapped")]
 		bool? IgnoreUnmapped { get; set; }
 
 		IEnumerable<GeoLocation> Points { get; set; }

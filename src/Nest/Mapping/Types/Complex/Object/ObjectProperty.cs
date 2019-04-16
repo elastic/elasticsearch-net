@@ -1,32 +1,33 @@
 using System;
 using System.Diagnostics;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	/// <summary>
 	/// A object datatype mapping for an inner object
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
+	[InterfaceDataContract]
 	public interface IObjectProperty : ICoreProperty
 	{
 		/// <summary>
 		/// Whether or not new properties should be added dynamically to an existing object.
 		/// Default is <c>true</c>
 		/// </summary>
-		[JsonProperty("dynamic")]
+		[DataMember(Name = "dynamic")]
 		Union<bool, DynamicMapping> Dynamic { get; set; }
 
 		/// <summary>
 		/// Whether the JSON value given for this field should be parsed and indexed. Default is <c>true</c>
 		/// </summary>
-		[JsonProperty("enabled")]
+		[DataMember(Name = "enabled")]
 		bool? Enabled { get; set; }
 
 		/// <summary>
 		/// The fields within the object
 		/// </summary>
-		[JsonProperty("properties", TypeNameHandling = TypeNameHandling.None)]
+		[DataMember(Name = "properties")]
 		IProperties Properties { get; set; }
 	}
 
@@ -64,12 +65,9 @@ namespace Nest
 		where TParent : class
 		where TChild : class
 	{
-		protected ObjectPropertyDescriptorBase() : this(FieldType.Object) { }
+		protected ObjectPropertyDescriptorBase() : base(FieldType.Object) { }
 
-		protected ObjectPropertyDescriptorBase(FieldType type) : base(type) =>
-			_TypeName = TypeName.Create<TChild>();
-
-		internal TypeName _TypeName { get; set; }
+		protected ObjectPropertyDescriptorBase(FieldType fieldType) : base(fieldType) { }
 
 		Union<bool, DynamicMapping> IObjectProperty.Dynamic { get; set; }
 		bool? IObjectProperty.Enabled { get; set; }

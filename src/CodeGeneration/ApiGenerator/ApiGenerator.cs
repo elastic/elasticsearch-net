@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using ApiGenerator.Domain;
+using CsQuery.EquationParser.Implementation;
 using Newtonsoft.Json.Linq;
 using RazorLight;
 using ShellProgressBar;
@@ -17,29 +18,6 @@ namespace ApiGenerator
 			.Build();
 
 		public static List<string> Warnings { get; private set; }
-
-		private static string[] IgnoredApis { get; } =
-		{
-			"xpack.ml.delete_filter.json",
-			"xpack.ml.get_filters.json",
-			"xpack.ml.put_filter.json",
-			//"rank_eval.json",
-
-			// these API's are new and need to be mapped
-			"xpack.ml.delete_forecast.json",
-			"xpack.ml.find_file_structure.json",
-			"delete_by_query_rethrottle.json",
-			"update_by_query_rethrottle.json",
-
-			"xpack.ml.update_filter.json",
-			"xpack.security.delete_privileges.json",
-			"xpack.security.get_privileges.json",
-			"xpack.security.get_user_privileges.json",
-			"xpack.security.get_index_privileges.json",
-			"xpack.security.has_privileges.json",
-			"xpack.security.put_privilege.json",
-			"xpack.security.put_privileges.json",
-		};
 
 		public static void Generate(string downloadBranch, params string[] folders)
 		{
@@ -81,12 +59,13 @@ namespace ApiGenerator
 				.ToList();
 
 			var endpoints = new Dictionary<string, ApiEndpoint>();
+			var seenFiles = new HashSet<string>();
 			using (var pbar = new ProgressBar(directories.Count, $"Listing {directories.Count} directories",
 				new ProgressBarOptions { BackgroundColor = ConsoleColor.DarkGray }))
 			{
 				var folderFiles = directories.Select(dir =>
 					Directory.GetFiles(dir)
-						.Where(f => f.EndsWith(".json") && !IgnoredApis.Contains(new FileInfo(f).Name))
+						.Where(f => f.EndsWith(".json") && !CodeConfiguration.IgnoredApis.Contains(new FileInfo(f).Name))
 						.ToList()
 				);
 				var commonFile = Path.Combine(CodeConfiguration.RestSpecificationFolder, "Core", "_common.json");
@@ -108,6 +87,8 @@ namespace ApiGenerator
 							else
 							{
 								var endpoint = CreateApiEndpoint(file);
+								endpoint.Value.FileName = Path.GetFileName(file);
+								seenFiles.Add(Path.GetFileNameWithoutExtension(file));
 								endpoints.Add(endpoint.Key, endpoint.Value);
 							}
 
@@ -116,6 +97,14 @@ namespace ApiGenerator
 					}
 					pbar.Tick();
 				}
+			}
+			var wrongMapsApi = CodeConfiguration.ApiNameMapping.Where(k =>!string.IsNullOrWhiteSpace(k.Key) && !seenFiles.Contains(k.Key));
+			foreach (var (key, value) in wrongMapsApi)
+			{
+				var isIgnored = CodeConfiguration.IgnoredApis.Contains($"{value}.json");
+				if (isIgnored) Warnings.Add($"{value} uses MapsApi: {key} ignored in ${nameof(CodeConfiguration)}.{nameof(CodeConfiguration.IgnoredApis)}");
+				else Warnings.Add($"{value} uses MapsApi: {key} which does not exist");
+
 			}
 
 			return new RestApiSpec { Endpoints = endpoints, Commit = downloadBranch };
@@ -175,8 +164,14 @@ namespace ApiGenerator
 
 		private static string CreateMethodName(string apiEndpointKey) => PascalCase(apiEndpointKey);
 
-		private static string DoRazor(string name, string template, RestApiSpec model) =>
-			Razor.CompileRenderAsync(name, template, model).GetAwaiter().GetResult();
+		private static string DoRazor(string name, string template, RestApiSpec model)
+		{
+			var engine = new RazorLightEngineBuilder()
+				.AddPrerenderCallbacks(t =>
+				{
+				}).Build();
+			return engine.CompileRenderAsync(name, template, model).GetAwaiter().GetResult();
+		}
 
 		private static void GenerateClientInterface(RestApiSpec model)
 		{

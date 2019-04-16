@@ -1,17 +1,18 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
+	[InterfaceDataContract]
 	public interface ILoggingAction : IAction
 	{
-		[JsonProperty("category")]
+		[DataMember(Name = "category")]
 		string Category { get; set; }
 
-		[JsonProperty("level")]
+		[DataMember(Name = "level")]
 		LogLevel? Level { get; set; }
 
-		[JsonProperty("text")]
+		[DataMember(Name = "text")]
 		string Text { get; set; }
 	}
 

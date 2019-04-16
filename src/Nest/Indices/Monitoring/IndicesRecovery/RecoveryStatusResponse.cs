@@ -1,18 +1,19 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[InterfaceDataContract]
 	public interface IRecoveryStatusResponse : IResponse
 	{
 		IReadOnlyDictionary<IndexName, RecoveryStatus> Indices { get; }
 	}
 
-	[JsonConverter(typeof(ResolvableDictionaryResponseJsonConverter<RecoveryStatusResponse, IndexName, RecoveryStatus>))]
+	[JsonFormatter(typeof(ResolvableDictionaryResponseFormatter<RecoveryStatusResponse, IndexName, RecoveryStatus>))]
 	public class RecoveryStatusResponse : DictionaryResponseBase<IndexName, RecoveryStatus>, IRecoveryStatusResponse
 	{
-		[JsonIgnore]
+		[IgnoreDataMember]
 		public IReadOnlyDictionary<IndexName, RecoveryStatus> Indices => Self.BackingDictionary;
 	}
 }

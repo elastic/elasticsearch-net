@@ -1,24 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[InterfaceDataContract]
 	public interface ISimulatePipelineDocument
 	{
-		[JsonProperty("_id")]
+		[DataMember(Name = "_id")]
 		Id Id { get; set; }
 
-		[JsonProperty("_index")]
+		[DataMember(Name = "_index")]
 		IndexName Index { get; set; }
 
-		[JsonProperty("_source")]
-		[JsonConverter(typeof(SourceConverter))]
+		[DataMember(Name = "_source")]
+		[JsonFormatter(typeof(SourceFormatter<>))]
 		object Source { get; set; }
-
-		[JsonProperty("_type")]
-		TypeName Type { get; set; }
 	}
 
 	public class SimulatePipelineDocument : ISimulatePipelineDocument
@@ -35,12 +33,9 @@ namespace Nest
 			{
 				_source = value;
 				Index = Index ?? _source.GetType();
-				Type = Type ?? _source.GetType();
 				Id = Id ?? Id.From(_source);
 			}
 		}
-
-		public TypeName Type { get; set; }
 	}
 
 	public class SimulatePipelineDocumentDescriptor
@@ -49,19 +44,15 @@ namespace Nest
 		Id ISimulatePipelineDocument.Id { get; set; }
 		IndexName ISimulatePipelineDocument.Index { get; set; }
 		object ISimulatePipelineDocument.Source { get; set; }
-		TypeName ISimulatePipelineDocument.Type { get; set; }
 
 		public SimulatePipelineDocumentDescriptor Id(Id id) => Assign(a => a.Id = id);
 
 		public SimulatePipelineDocumentDescriptor Index(IndexName index) => Assign(a => a.Index = index);
 
-		public SimulatePipelineDocumentDescriptor Type(TypeName type) => Assign(a => a.Type = type);
-
 		public SimulatePipelineDocumentDescriptor Source<T>(T source) where T : class => Assign(a =>
 		{
 			a.Source = source;
 			a.Index = a.Index ?? source.GetType();
-			a.Type = a.Type ?? source.GetType();
 			a.Id = a.Id ?? Nest.Id.From(source);
 		});
 	}

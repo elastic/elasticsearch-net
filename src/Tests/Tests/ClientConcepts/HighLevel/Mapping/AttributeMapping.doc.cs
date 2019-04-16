@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Text;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Tests.Core.Client;
 using Tests.Framework;
 using static Tests.Core.Serialization.SerializationTestHelper;
@@ -34,7 +34,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 	{
 		private readonly IElasticClient _client = TestClient.DisabledStreaming;
 
-		[ElasticsearchType(Name = "employee")]
+		[ElasticsearchType(RelationName = "employee")]
 		public class Employee
 		{
 			[Text(Name = "first_name", Norms = false, Similarity = "LMDirichlet")]
@@ -77,9 +77,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		public void UsingAutoMapWithAttributes()
 		{
 			var createIndexResponse = _client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<Employee>(m => m.AutoMap())
-				)
+				.Map<Employee>(m => m.AutoMap())
 			);
 
 			/**
@@ -89,62 +87,59 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					employee = new
+					properties = new
 					{
-						properties = new
+						birthday = new
 						{
-							birthday = new
+							format = "MMddyyyy",
+							type = "date"
+						},
+						empl = new
+						{
+							properties = new {},
+							type = "nested"
+						},
+						first_name = new
+						{
+							type = "text",
+							norms = false,
+							similarity = "LMDirichlet"
+						},
+						isManager = new
+						{
+							null_value = false,
+							store = true,
+							type = "boolean"
+						},
+						last_name = new
+						{
+							type = "text"
+						},
+						office_hours = new
+						{
+							type = "text"
+						},
+						salary = new
+						{
+							coerce = true,
+							doc_values = false,
+							ignore_malformed = true,
+							type = "float"
+						},
+						skills = new
+						{
+							properties = new
 							{
-								format = "MMddyyyy",
-								type = "date"
-							},
-							empl = new
-							{
-								properties = new {},
-								type = "nested"
-							},
-							first_name = new
-							{
-								type = "text",
-								norms = false,
-								similarity = "LMDirichlet"
-							},
-							isManager = new
-							{
-								null_value = false,
-								store = true,
-								type = "boolean"
-							},
-							last_name = new
-							{
-								type = "text"
-							},
-							office_hours = new
-							{
-								type = "text"
-							},
-							salary = new
-							{
-								coerce = true,
-								doc_values = false,
-								ignore_malformed = true,
-								type = "float"
-							},
-							skills = new
-							{
-								properties = new
+								level = new
 								{
-									level = new
-									{
-										type = "byte"
-									},
-									name = new
-									{
-										type = "text"
-									}
+									type = "byte"
 								},
-								type = "object"
-							}
+								name = new
+								{
+									type = "text"
+								}
+							},
+							type = "object"
 						}
 					}
 				}

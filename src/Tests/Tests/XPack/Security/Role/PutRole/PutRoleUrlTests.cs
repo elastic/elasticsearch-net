@@ -8,7 +8,7 @@ namespace Tests.XPack.Security.Role.PutRole
 {
 	public class PutRoleUrlTests : UrlTestsBase
 	{
-		[U] public override async Task Urls() => await PUT("/_xpack/security/role/mpdreamz")
+		[U] public override async Task Urls() => await PUT("/_security/role/mpdreamz")
 			.Fluent(c => c.PutRole("mpdreamz"))
 			.Request(c => c.PutRole(new PutRoleRequest("mpdreamz")))
 			.FluentAsync(c => c.PutRoleAsync("mpdreamz"))

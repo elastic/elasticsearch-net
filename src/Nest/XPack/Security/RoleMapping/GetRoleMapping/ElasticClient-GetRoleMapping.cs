@@ -34,7 +34,7 @@ namespace Nest
 		public IGetRoleMappingResponse GetRoleMapping(IGetRoleMappingRequest request) =>
 			Dispatcher.Dispatch<IGetRoleMappingRequest, GetRoleMappingRequestParameters, GetRoleMappingResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackSecurityGetRoleMappingDispatch<GetRoleMappingResponse>(p)
+				(p, d) => LowLevelDispatch.SecurityGetRoleMappingDispatch<GetRoleMappingResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -50,7 +50,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IGetRoleMappingRequest, GetRoleMappingRequestParameters, GetRoleMappingResponse, IGetRoleMappingResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackSecurityGetRoleMappingDispatchAsync<GetRoleMappingResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.SecurityGetRoleMappingDispatchAsync<GetRoleMappingResponse>(p, c)
 			);
 	}
 }

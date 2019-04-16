@@ -7,6 +7,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
+using Tests.Core.Xunit;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.EndpointTests.TestState;
@@ -15,6 +16,7 @@ using Tests.Framework.Integration;
 namespace Tests.XPack.CrossClusterReplication
 {
 	[SkipVersion("<6.5.0", "")]
+	[BlockedByIssue("CCR change in structure, will be fixed on 6.x and forward ported")]
 	public class CrossClusterReplicationAutoFollowTests : CoordinatedIntegrationTestBase<WritableCluster>
 	{
 		private const string CreateAutoFollowStep = nameof(CreateAutoFollowStep);

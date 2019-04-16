@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
+
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ScriptConditionJsonConverter))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(ScriptConditionFormatter))]
 	public interface IScriptCondition : ICondition
 	{
-		[JsonProperty("lang")]
+		[DataMember(Name = "lang")]
 		string Lang { get; set; }
 
-		[JsonProperty("params")]
+		[DataMember(Name = "params")]
 		IDictionary<string, object> Params { get; set; }
 	}
 
@@ -55,45 +55,105 @@ namespace Nest
 			Assign(a => a.Params = paramsDictionary);
 	}
 
-	internal class ScriptConditionJsonConverter : JsonConverter
+	internal class ScriptConditionFormatter : IJsonFormatter<IScriptCondition>
 	{
-		public override bool CanWrite => false;
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		private static readonly AutomataDictionary AutomataDictionary = new AutomataDictionary
 		{
-			var o = JObject.Load(reader);
-			var dict = o.Properties().ToDictionary(p => p.Name, p => p.Value);
-			if (!dict.HasAny()) return null;
+			{ "inline", 0 },
+			{ "source", 1 },
+			{ "id", 2 },
+			{ "lang", 3 },
+			{ "params", 4 }
+		};
 
+		public IScriptCondition Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
+				return null;
+
+			var count = 0;
 			IScriptCondition scriptCondition = null;
-			if (dict.TryGetValue("inline", out JToken inlineToken))
+			string language = null;
+			Dictionary<string, object> parameters = null;
+
+			while (reader.ReadIsInObject(ref count))
 			{
-				var inline = inlineToken.ToString();
-				scriptCondition = new InlineScriptCondition(inline);
-			}
-			if (dict.TryGetValue("source", out JToken sourceToken))
-			{
-				var inline = sourceToken.ToString();
-				scriptCondition = new InlineScriptCondition(inline);
-			}
-			if (dict.TryGetValue("id", out JToken idToken))
-			{
-				var id = idToken.ToString();
-				scriptCondition = new IndexedScriptCondition(id);
+				if (AutomataDictionary.TryGetValue(reader.ReadPropertyNameSegmentRaw(), out var value))
+				{
+					switch (value)
+					{
+						case 0:
+						case 1:
+							scriptCondition = new InlineScriptCondition(reader.ReadString());
+							break;
+						case 2:
+							scriptCondition = new IndexedScriptCondition(reader.ReadString());
+							break;
+						case 3:
+							language = reader.ReadString();
+							break;
+						case 4:
+							parameters = formatterResolver.GetFormatter<Dictionary<string, object>>()
+								.Deserialize(ref reader, formatterResolver);
+							break;
+					}
+				}
 			}
 
-			if (scriptCondition == null) return null;
+			if (scriptCondition == null)
+				return null;
 
-			if (dict.TryGetValue("lang", out JToken langToken))
-				scriptCondition.Lang = langToken.ToString();
-			if (dict.TryGetValue("params", out JToken paramsToken))
-				scriptCondition.Params = paramsToken.ToObject<Dictionary<string, object>>();
-
+			scriptCondition.Lang = language;
+			scriptCondition.Params = parameters;
 			return scriptCondition;
 		}
 
-		public override bool CanConvert(Type objectType) => true;
+		public void Serialize(ref JsonWriter writer, IScriptCondition value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
+
+			writer.WriteBeginObject();
+			var written = false;
+
+			switch (value)
+			{
+				case IIndexedScriptCondition indexedScriptCondition:
+					writer.WritePropertyName("id");
+					writer.WriteString(indexedScriptCondition.Id);
+					written = true;
+					break;
+				case IInlineScriptCondition inlineScriptCondition:
+					writer.WritePropertyName("source");
+					writer.WriteString(inlineScriptCondition.Source);
+					written = true;
+					break;
+			}
+
+			if (value.Lang != null)
+			{
+				if (written)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName("lang");
+				writer.WriteString(value.Lang);
+				written = true;
+			}
+
+			if (value.Params != null)
+			{
+				if (written)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName("params");
+				var formatter = formatterResolver.GetFormatter<IDictionary<string, object>>();
+				formatter.Serialize(ref writer, value.Params, formatterResolver);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 }

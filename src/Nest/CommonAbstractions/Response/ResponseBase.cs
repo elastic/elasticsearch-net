@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using System.Text;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -14,14 +14,15 @@ namespace Nest
 		/// A lazy human readable string representation of what happened during this request for both successful and
 		/// failed requests, very useful while developing or to log when <see cref="IsValid" /> is false on responses.
 		/// </summary>
-		[JsonIgnore]
+		[IgnoreDataMember]
 		string DebugInformation { get; }
 
 		/// <summary>
 		/// This property can be used to check if a response is functionally valid or not.
 		/// This is a NEST abstraction to have a single point to check whether something wrong happened with the request.
 		/// <para>
-		/// For instance an elasticsearch bulk response always returns 200 and individual bulk items may fail, <see cref="IsValid" /> will be
+		/// For instance an elasticsearch bulk response always returns 200 and individual bulk items may fail,
+		/// <see cref="IsValid" /> will be
 		/// false in that case
 		/// </para>
 		/// <para>
@@ -29,13 +30,14 @@ namespace Nest
 		/// <see cref="IConnectionConfigurationValues.ThrowExceptions" /> if the response is not valid
 		/// </para>
 		/// </summary>
-		[JsonIgnore]
+		[IgnoreDataMember]
 		bool IsValid { get; }
 
 		/// <summary>
 		/// If the request resulted in an exception on the client side this will hold the exception that was thrown.
 		/// <para>
-		/// This property is a shortcut to <see cref="IElasticsearchResponse.ApiCall" />'s <see cref="IApiCallDetails.OriginalException" /> and
+		/// This property is a shortcut to <see cref="IElasticsearchResponse.ApiCall" />'s
+		/// <see cref="IApiCallDetails.OriginalException" /> and
 		/// is possibly set when <see cref="IsValid" /> is false depending on the cause of the error
 		/// </para>
 		/// <para>
@@ -43,11 +45,12 @@ namespace Nest
 		/// <see cref="IConnectionConfigurationValues.ThrowExceptions" /> if the response is not valid
 		/// </para>
 		/// </summary>
-		[JsonIgnore]
+		[IgnoreDataMember]
 		Exception OriginalException { get; }
 
 		/// <summary>
-		/// If the response results in an error on elasticsearch's side an <pre>error</pre> element will be returned, this is mapped to
+		/// If the response results in an error on elasticsearch's side an <pre>error</pre> element will be returned, this is
+		/// mapped to
 		/// <see cref="ServerError" /> in NEST.
 		/// <para>Possibly set when <see cref="IsValid" /> is false, depending on the cause of the error</para>
 		/// <para>
@@ -55,7 +58,7 @@ namespace Nest
 		/// <see cref="IConnectionConfigurationValues.ThrowExceptions" /> if the response is not valid
 		/// </para>
 		/// </summary>
-		[JsonIgnore]
+		[IgnoreDataMember]
 		ServerError ServerError { get; }
 	}
 
@@ -102,7 +105,7 @@ namespace Nest
 			}
 		}
 
-		[JsonProperty("error")]
+		[DataMember(Name = "error")]
 		internal Error Error
 		{
 			get => _error;
@@ -113,7 +116,7 @@ namespace Nest
 			}
 		}
 
-		[JsonProperty("status")]
+		[DataMember(Name = "status")]
 		internal int? StatusCode
 		{
 			get => _statusCode;
@@ -124,7 +127,7 @@ namespace Nest
 			}
 		}
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		IApiCallDetails IElasticsearchResponse.ApiCall
 		{
 			get => _originalApiCall;

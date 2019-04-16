@@ -1,19 +1,20 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class IndicesStats
 	{
-		[JsonProperty("primaries")]
+		[DataMember(Name = "primaries")]
 		public IndexStats Primaries { get; internal set; }
 
-		[JsonProperty("shards")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, ShardStats[]>))]
+		[DataMember(Name = "shards")]
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, ShardStats[]>))]
 		public IReadOnlyDictionary<string, ShardStats[]> Shards { get; internal set; } = EmptyReadOnly<string, ShardStats[]>.Dictionary;
 
-		[JsonProperty("total")]
+		[DataMember(Name = "total")]
 		public IndexStats Total { get; internal set; }
 
 		/// <summary>
@@ -22,7 +23,7 @@ namespace Nest
 		/// <remarks>
 		/// Introduced in Elasticsearch 6.4.0
 		/// </remarks>
-		[JsonProperty("uuid")]
+		[DataMember(Name = "uuid")]
 		public string UUID { get; }
 	}
 }

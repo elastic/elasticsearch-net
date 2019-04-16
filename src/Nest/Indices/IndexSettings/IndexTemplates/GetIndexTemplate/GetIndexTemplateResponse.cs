@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -8,11 +9,11 @@ namespace Nest
 		IReadOnlyDictionary<string, TemplateMapping> TemplateMappings { get; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(DictionaryResponseJsonConverter<GetIndexTemplateResponse, string, TemplateMapping>))]
+	[DataContract]
+	[JsonFormatter(typeof(DictionaryResponseFormatter<GetIndexTemplateResponse, string, TemplateMapping>))]
 	public class GetIndexTemplateResponse : DictionaryResponseBase<string, TemplateMapping>, IGetIndexTemplateResponse
 	{
-		[JsonIgnore]
+		[IgnoreDataMember]
 		public IReadOnlyDictionary<string, TemplateMapping> TemplateMappings => Self.BackingDictionary;
 	}
 }

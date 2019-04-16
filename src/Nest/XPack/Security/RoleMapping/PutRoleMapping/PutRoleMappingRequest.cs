@@ -1,28 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
+	[MapsApi("security.put_role_mapping.json")]
 	public partial interface IPutRoleMappingRequest
 	{
-		[JsonProperty("enabled")]
+		[DataMember(Name = "enabled")]
 		bool? Enabled { get; set; }
 
-		[JsonProperty("metadata")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysPreservingNullJsonConverter<string, object>))]
+		[DataMember(Name = "metadata")]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysPreservingNullFormatter<string, object>))]
 		IDictionary<string, object> Metadata { get; set; }
 
-		[JsonProperty("roles")]
+		[DataMember(Name = "roles")]
 		IEnumerable<string> Roles { get; set; }
 
-		[JsonProperty("rules")]
+		[DataMember(Name = "rules")]
 		RoleMappingRuleBase Rules { get; set; }
 
-		[JsonProperty("run_as")]
+		[DataMember(Name = "run_as")]
 		IEnumerable<string> RunAs { get; set; }
 	}
 
+	[DataContract]
 	public partial class PutRoleMappingRequest
 	{
 		public bool? Enabled { get; set; }
@@ -35,7 +38,6 @@ namespace Nest
 		public IEnumerable<string> RunAs { get; set; }
 	}
 
-	[DescriptorFor("XpackSecurityPutRoleMapping")]
 	public partial class PutRoleMappingDescriptor
 	{
 		bool? IPutRoleMappingRequest.Enabled { get; set; }

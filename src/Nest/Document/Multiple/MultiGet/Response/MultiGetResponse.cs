@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -30,9 +31,9 @@ namespace Nest
 		IEnumerable<IMultiGetHit<T>> GetMany<T>(IEnumerable<long> ids) where T : class;
 	}
 
-	[JsonObject]
+	[DataContract]
 	//TODO validate this, ported over from ElasticContractResolver but it seems out of place
-	[ContractJsonConverter(typeof(MultiGetHitJsonConverter))]
+	[JsonFormatter(typeof(MultiGetResponseFormatter))]
 	public class MultiGetResponse : ResponseBase, IMultiGetResponse
 	{
 		public IReadOnlyCollection<IMultiGetHit<object>> Hits => InternalHits.ToList().AsReadOnly();

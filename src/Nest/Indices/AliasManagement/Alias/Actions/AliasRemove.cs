@@ -1,12 +1,13 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[InterfaceDataContract]
 	public interface IAliasRemoveAction : IAliasAction
 	{
-		[JsonProperty("remove")]
+		[DataMember(Name = "remove")]
 		AliasRemoveOperation Remove { get; set; }
 	}
 

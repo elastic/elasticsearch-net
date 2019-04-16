@@ -34,7 +34,7 @@ namespace Tests.XPack.MachineLearning.RevertModelSnapshot
 		};
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/_xpack/ml/anomaly_detectors/{CallIsolatedValue}/model_snapshots/first/_revert";
+		protected override string UrlPath => $"/_ml/anomaly_detectors/{CallIsolatedValue}/model_snapshots/first/_revert";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -63,7 +63,6 @@ namespace Tests.XPack.MachineLearning.RevertModelSnapshot
 
 		protected override void ExpectResponse(IRevertModelSnapshotResponse response)
 		{
-			response.Acknowledged.Should().BeTrue();
 			response.Model.Should().NotBeNull();
 		}
 	}

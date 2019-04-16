@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	/// <summary>
 	/// Dynamic index settings
 	/// </summary>
-	[ContractJsonConverter(typeof(IndexSettingsConverter))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(DynamicIndexSettingsFormatter))]
 	public interface IDynamicIndexSettings : IIsADictionary<string, object>
 	{
 		/// <summary>

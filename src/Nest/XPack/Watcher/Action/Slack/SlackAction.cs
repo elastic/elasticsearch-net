@@ -1,15 +1,16 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
+	[InterfaceDataContract]
 	public interface ISlackAction : IAction
 	{
-		[JsonProperty("account")]
+		[DataMember(Name = "account")]
 		string Account { get; set; }
 
-		[JsonProperty("message")]
+		[DataMember(Name = "message")]
 		ISlackMessage Message { get; set; }
 	}
 

@@ -30,7 +30,7 @@ namespace Tests.XPack.MachineLearning.GetCategories
 			}
 		};
 
-		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/results/categories/";
+		protected override string UrlPath => $"_ml/anomaly_detectors/{CallIsolatedValue}/results/categories/";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -76,7 +76,7 @@ namespace Tests.XPack.MachineLearning.GetCategories
 		protected override Func<GetCategoriesDescriptor, IGetCategoriesRequest> Fluent => f => f.CategoryId(1);
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override GetCategoriesRequest Initializer => new GetCategoriesRequest(CallIsolatedValue, 1);
-		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/results/categories/1";
+		protected override string UrlPath => $"_ml/anomaly_detectors/{CallIsolatedValue}/results/categories/1";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

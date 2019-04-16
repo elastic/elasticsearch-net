@@ -19,9 +19,9 @@ namespace Tests.Document.Multiple.Bulk
 
 		protected override object ExpectJson { get; } = new object[]
 		{
-			new Dictionary<string, object> { { "update", new { _type = "doc", _id = Project.Instance.Name } } },
+			new Dictionary<string, object> { { "update", new { _id = Project.Instance.Name } } },
 			new { doc = new { leadDeveloper = new { firstName = "martijn" } } },
-			new Dictionary<string, object> { { "delete", new { _type = "doc", _id = Project.Instance.Name + "1" } } },
+			new Dictionary<string, object> { { "delete", new { _id = Project.Instance.Name + "1" } } },
 		};
 
 		protected override int ExpectStatusCode => 200;

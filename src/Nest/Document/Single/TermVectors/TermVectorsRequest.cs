@@ -1,40 +1,39 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
 
 namespace Nest
 {
+	[MapsApi("termvectors.json")]
 	public partial interface ITermVectorsRequest<TDocument>
 		where TDocument : class
 	{
 		/// <summary>
 		/// An optional document to get term vectors for instead of using an already indexed document
 		/// </summary>
-		[JsonProperty("doc")]
-		[JsonConverter(typeof(SourceConverter))]
+		[DataMember(Name = "doc")]
+		[JsonFormatter(typeof(SourceFormatter<>))]
 		TDocument Document { get; set; }
 
 		/// <summary>
 		/// Filter the terms returned based on their TF-IDF scores.
 		/// This can be useful in order find out a good characteristic vector of a document.
 		/// </summary>
-		[JsonProperty("filter")]
+		[DataMember(Name = "filter")]
 		ITermVectorFilter Filter { get; set; }
 
 		/// <summary>
 		/// Provide a different analyzer than the one at the field.
 		/// This is useful in order to generate term vectors in any fashion, especially when using artificial documents.
 		/// </summary>
-		[JsonProperty("per_field_analyzer")]
+		[DataMember(Name = "per_field_analyzer")]
 		IPerFieldAnalyzer PerFieldAnalyzer { get; set; }
 	}
 
 	public partial class TermVectorsRequest<TDocument>
 		where TDocument : class
 	{
-		/// <summary>
-		/// An optional document to get term vectors for instead of using an already indexed document
-		/// </summary>
+		/// <inheritdoc cref="ITermVectorsRequest{TDocument}.Document"/>
 		public TDocument Document { get; set; }
 
 		/// <summary>
@@ -51,17 +50,13 @@ namespace Nest
 
 		HttpMethod IRequest.HttpMethod => Document != null || Filter != null ? HttpMethod.POST : HttpMethod.GET;
 
-		private TDocument AutoRouteDocument() => Self.Document;
-
 		partial void DocumentFromPath(TDocument document)
 		{
-			Self.Document = document;
-			if (Self.Document != null)
-				Self.RouteValues.Remove("id");
+			Document = document;
+			if (Document != null) Self.RouteValues.Remove("id");
 		}
 	}
 
-	[DescriptorFor("Termvectors")]
 	public partial class TermVectorsDescriptor<TDocument> where TDocument : class
 	{
 		TDocument ITermVectorsRequest<TDocument>.Document { get; set; }
@@ -70,8 +65,6 @@ namespace Nest
 		HttpMethod IRequest.HttpMethod => Self.Document != null || Self.Filter != null ? HttpMethod.POST : HttpMethod.GET;
 
 		IPerFieldAnalyzer ITermVectorsRequest<TDocument>.PerFieldAnalyzer { get; set; }
-
-		private TDocument AutoRouteDocument() => Self.Document;
 
 		/// <summary>
 		/// An optional document to get term vectors for instead of using an already indexed document

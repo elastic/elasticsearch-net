@@ -78,7 +78,7 @@ namespace Tests.XPack.MachineLearning.ValidateJob
 			};
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/_validate";
+		protected override string UrlPath => $"_ml/anomaly_detectors/_validate";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.ValidateJob(f),

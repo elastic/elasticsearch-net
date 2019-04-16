@@ -1,24 +1,24 @@
 ﻿using System.Collections.Generic;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IGraphExploreResponse : IResponse
 	{
-		[JsonProperty("connections")]
+		[DataMember(Name ="connections")]
 		IReadOnlyCollection<GraphConnection> Connections { get; }
 
-		[JsonProperty("failures")]
+		[DataMember(Name ="failures")]
 		IReadOnlyCollection<ShardFailure> Failures { get; }
 
-		[JsonProperty("timed_out")]
+		[DataMember(Name ="timed_out")]
 		bool TimedOut { get; }
 
-		[JsonProperty("took")]
+		[DataMember(Name ="took")]
 		long Took { get; }
 
-		[JsonProperty("vertices")]
+		[DataMember(Name ="vertices")]
 		IReadOnlyCollection<GraphVertex> Vertices { get; }
 	}
 

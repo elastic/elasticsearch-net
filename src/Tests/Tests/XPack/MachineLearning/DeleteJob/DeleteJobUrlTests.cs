@@ -8,7 +8,7 @@ namespace Tests.XPack.MachineLearning.DeleteJob
 {
 	public class DeleteJobUrlTests : UrlTestsBase
 	{
-		[U] public override async Task Urls() => await DELETE("/_xpack/ml/anomaly_detectors/job_id")
+		[U] public override async Task Urls() => await DELETE("/_ml/anomaly_detectors/job_id")
 			.Fluent(c => c.DeleteJob("job_id"))
 			.Request(c => c.DeleteJob(new DeleteJobRequest("job_id")))
 			.FluentAsync(c => c.DeleteJobAsync("job_id"))

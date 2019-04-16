@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -11,19 +11,19 @@ namespace Nest
 		/// <summary>
 		/// The query to use to select documents for deletion
 		/// </summary>
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		QueryContainer Query { get; set; }
 
 		/// <summary>
 		/// Parallelize the deleting process. This parallelization can improve efficiency and
 		/// provide a convenient way to break the request down into smaller parts.
 		/// </summary>
-		[JsonProperty("slice")]
+		[DataMember(Name ="slice")]
 		ISlicedScroll Slice { get; set; }
 	}
 
 	/// <inheritdoc />
-	public interface IDeleteByQueryRequest<T> : IDeleteByQueryRequest where T : class { }
+	public partial interface IDeleteByQueryRequest<T>  where T : class { }
 
 	/// <inheritdoc cref="IDeleteByQueryRequest" />
 	public partial class DeleteByQueryRequest
@@ -36,16 +36,9 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="IDeleteByQueryRequest" />
-	public partial class DeleteByQueryRequest<T> : IDeleteByQueryRequest<T>
-		where T : class
+	public partial class DeleteByQueryRequest<T> where T : class
 	{
-		public DeleteByQueryRequest() : this(typeof(T), typeof(T)) { }
 
-		/// <inheritdoc />
-		public QueryContainer Query { get; set; }
-
-		/// <inheritdoc />
-		public ISlicedScroll Slice { get; set; }
 	}
 
 	/// <inheritdoc cref="IDeleteByQueryRequest" />

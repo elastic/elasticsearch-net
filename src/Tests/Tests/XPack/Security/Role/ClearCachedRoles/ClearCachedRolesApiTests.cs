@@ -28,7 +28,7 @@ namespace Tests.XPack.Security.Role.ClearCachedRoles
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override string UrlPath => $"/_xpack/security/role/{Role}/_clear_cache";
+		protected override string UrlPath => $"/_security/role/{Role}/_clear_cache";
 
 		//callisolated value can sometimes start with a digit which is not allowed for rolenames
 		private string Role => $"role-{CallIsolatedValue}";

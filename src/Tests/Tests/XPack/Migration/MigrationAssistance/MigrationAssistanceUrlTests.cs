@@ -10,7 +10,7 @@ namespace Tests.XPack.Migration.MigrationAssistance
 	{
 		[U] public override async Task Urls()
 		{
-			await GET("/_xpack/migration/assistance")
+			await GET("/_migration/assistance")
 					.Fluent(c => c.MigrationAssistance())
 					.Request(c => c.MigrationAssistance(new MigrationAssistanceRequest()))
 					.FluentAsync(c => c.MigrationAssistanceAsync())
@@ -19,7 +19,7 @@ namespace Tests.XPack.Migration.MigrationAssistance
 
 			var index = "another-index";
 
-			await GET($"/_xpack/migration/assistance/{index}")
+			await GET($"/_migration/assistance/{index}")
 					.Fluent(c => c.MigrationAssistance(d => d.Index(index)))
 					.Request(c => c.MigrationAssistance(new MigrationAssistanceRequest(index)))
 					.FluentAsync(c => c.MigrationAssistanceAsync(d => d.Index(index)))

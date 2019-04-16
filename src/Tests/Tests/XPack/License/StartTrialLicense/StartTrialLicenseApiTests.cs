@@ -32,7 +32,7 @@ namespace Tests.XPack.License.StartTrialLicense
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/_xpack/license/start_trial?acknowledge=true";
+		protected override string UrlPath => $"/_license/start_trial?acknowledge=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.StartTrialLicense(f),

@@ -1,18 +1,18 @@
 ﻿using System;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<CountRequest>))]
+	[MapsApi("count.json")]
+	[ReadAs(typeof(CountRequest))]
 	public partial interface ICountRequest
 	{
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		QueryContainer Query { get; set; }
 	}
 
-	public partial interface ICountRequest<T> : ICountRequest
-		where T : class { }
+	public partial interface ICountRequest<T> where T : class { }
 
 	public partial class CountRequest
 	{
@@ -25,18 +25,10 @@ namespace Nest
 				: HttpMethod.POST;
 	}
 
-	public partial class CountRequest<T>
+	public partial class CountRequest<T> where T : class
 	{
-		public QueryContainer Query { get; set; }
-
-		protected override HttpMethod HttpMethod =>
-			Self.RequestParameters.ContainsQueryString("source") || Self.RequestParameters.ContainsQueryString("q") || Self.Query == null
-			|| Self.Query.IsConditionless()
-				? HttpMethod.GET
-				: HttpMethod.POST;
 	}
 
-	[DescriptorFor("Count")]
 	public partial class CountDescriptor<T> where T : class
 	{
 		protected override HttpMethod HttpMethod =>

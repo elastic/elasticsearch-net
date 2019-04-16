@@ -1,40 +1,41 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class DiscoveryNode
 	{
 		/// <summary>
 		/// The node attributes
 		/// </summary>
-		[JsonProperty("attributes")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, string>))]
+		[DataMember(Name = "attributes")]
+		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, string>))]
 		public IReadOnlyDictionary<string, string> Attributes { get; internal set; } = EmptyReadOnly<string, string>.Dictionary;
 
 		/// <summary>
 		/// The ephemeral id of the node.
 		/// </summary>
-		[JsonProperty("ephemeral_id")]
+		[DataMember(Name = "ephemeral_id")]
 		public string EphemeralId { get; internal set; }
 
 		/// <summary>
 		/// The unique identifier of the node.
 		/// </summary>
-		[JsonProperty("id")]
+		[DataMember(Name = "id")]
 		public string Id { get; internal set; }
 
 		/// <summary>
 		/// The node name.
 		/// </summary>
-		[JsonProperty("name")]
+		[DataMember(Name = "name")]
 		public string Name { get; internal set; }
 
 		/// <summary>
 		/// The host and port where transport HTTP connections are accepted.
 		/// </summary>
-		[JsonProperty("transport_address")]
+		[DataMember(Name = "transport_address")]
 		public string TransportAddress { get; internal set; }
 	}
 }

@@ -29,7 +29,7 @@ namespace Tests.XPack.Security.ClearCachedRealms
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override string UrlPath => $"/_xpack/security/realm/{U(Realm)}/_clear_cache";
+		protected override string UrlPath => $"/_security/realm/{U(Realm)}/_clear_cache";
 
 		//callisolated value can sometimes start with a digit which is not allowed for rolenames
 		private string Realm => SecurityRealms.FileRealm;

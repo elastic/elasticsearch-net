@@ -1,23 +1,23 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface ISnapshotRepository
 	{
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		string Type { get; }
 	}
 
 	public interface IRepositoryWithSettings: ISnapshotRepository
 	{
-		[JsonIgnore]
+		[IgnoreDataMember]
 		object DelegateSettings { get; }
 	}
 
 	public interface IRepository<TSettings> : IRepositoryWithSettings
 		where TSettings : class, IRepositorySettings
 	{
-		[JsonProperty("settings")]
+		[DataMember(Name ="settings")]
 		TSettings Settings { get; set; }
 	}
 

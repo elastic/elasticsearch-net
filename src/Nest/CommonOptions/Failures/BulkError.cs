@@ -1,10 +1,10 @@
+using System.Runtime.Serialization;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject]
-	[ContractJsonConverter(typeof(ErrorCauseJsonConverter<BulkError>))]
+	[DataContract]
+	[JsonFormatter(typeof(ErrorCauseFormatter<BulkError>))]
 	public class BulkError : Error
 	{
 		public string Index => Metadata?.Index;

@@ -38,7 +38,7 @@ namespace Nest
 		public IStartDatafeedResponse StartDatafeed(IStartDatafeedRequest request) =>
 			Dispatcher.Dispatch<IStartDatafeedRequest, StartDatafeedRequestParameters, StartDatafeedResponse>(
 				request,
-				LowLevelDispatch.XpackMlStartDatafeedDispatch<StartDatafeedResponse>
+				LowLevelDispatch.MlStartDatafeedDispatch<StartDatafeedResponse>
 			);
 
 		/// <inheritdoc />
@@ -54,7 +54,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IStartDatafeedRequest, StartDatafeedRequestParameters, StartDatafeedResponse, IStartDatafeedResponse>(
 				request,
 				cancellationToken,
-				LowLevelDispatch.XpackMlStartDatafeedDispatchAsync<StartDatafeedResponse>
+				LowLevelDispatch.MlStartDatafeedDispatchAsync<StartDatafeedResponse>
 			);
 	}
 }

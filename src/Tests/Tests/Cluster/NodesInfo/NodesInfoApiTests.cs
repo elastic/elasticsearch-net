@@ -53,7 +53,7 @@ namespace Tests.Cluster.NodesInfo
 			nodesMetada.Successful.Should().BeGreaterThan(0);
 		}
 
-		protected void Assert(NodeInfo node)
+		protected void Assert(Nest.NodeInfo node)
 		{
 			node.Should().NotBeNull();
 			node.Name.Should().NotBeNullOrWhiteSpace();
@@ -117,8 +117,6 @@ namespace Tests.Cluster.NodesInfo
 			var pool = pools["fetch_shard_store"];
 			pool.KeepAlive.Should().NotBeNullOrWhiteSpace();
 			pool.Type.Should().Be("scaling");
-			pool.Min.Should().BeGreaterThan(0);
-			pool.Max.Should().BeGreaterThan(0);
 			pool.QueueSize.Should().BeGreaterOrEqualTo(-1);
 		}
 
@@ -129,7 +127,7 @@ namespace Tests.Cluster.NodesInfo
 			transport.PublishAddress.Should().NotBeNullOrWhiteSpace();
 		}
 
-		protected void Assert(NodeInfoHttp http)
+		protected void Assert(Nest.NodeInfoHttp http)
 		{
 			http.Should().NotBeNull();
 			http.BoundAddress.Should().NotBeEmpty();

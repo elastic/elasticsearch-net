@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public partial interface IGraphExploreRequest : IHop
 	{
-		[JsonProperty("controls")]
+		[DataMember(Name ="controls")]
 		IGraphExploreControls Controls { get; set; }
 	}
 
-	public interface IGraphExploreRequest<T> : IGraphExploreRequest where T : class { }
+	public partial interface IGraphExploreRequest<T> where T : class { }
 
 	public partial class GraphExploreRequest
 	{
@@ -20,24 +20,10 @@ namespace Nest
 		public IEnumerable<IGraphVertexDefinition> Vertices { get; set; }
 	}
 
-	public partial class GraphExploreRequest<T> : IGraphExploreRequest<T>
-		where T : class
+	public partial class GraphExploreRequest<T> where T : class { }
+
+	public partial class GraphExploreDescriptor<T> where T : class
 	{
-		public GraphExploreRequest() : this(typeof(T), typeof(T)) { }
-
-		public IHop Connections { get; set; }
-		public IGraphExploreControls Controls { get; set; }
-
-		public QueryContainer Query { get; set; }
-		public IEnumerable<IGraphVertexDefinition> Vertices { get; set; }
-	}
-
-	[DescriptorFor("XpackGraphExplore")]
-	public partial class GraphExploreDescriptor<T> : IGraphExploreRequest<T>
-		where T : class
-	{
-		public GraphExploreDescriptor() : base(r => r.Optional("index", (Indices)typeof(T)).Optional("type", (Types)typeof(T))) { }
-
 		IHop IHop.Connections { get; set; }
 		IGraphExploreControls IGraphExploreRequest.Controls { get; set; }
 		QueryContainer IHop.Query { get; set; }

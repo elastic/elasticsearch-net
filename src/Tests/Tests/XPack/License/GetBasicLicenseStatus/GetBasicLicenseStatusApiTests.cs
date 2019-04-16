@@ -24,7 +24,7 @@ namespace Tests.XPack.License.GetBasicLicenseStatus
 
 		protected override GetBasicLicenseStatusRequest Initializer => new GetBasicLicenseStatusRequest();
 
-		protected override string UrlPath => $"/_xpack/license/basic_status";
+		protected override string UrlPath => $"/_license/basic_status";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.GetBasicLicenseStatus(f),

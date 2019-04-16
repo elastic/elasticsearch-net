@@ -1,17 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class ShardPath
 	{
-		[JsonProperty("data_path")]
+		[DataMember(Name ="data_path")]
 		public string DataPath { get; internal set; }
 
-		[JsonProperty("is_custom_data_path")]
+		[DataMember(Name ="is_custom_data_path")]
 		public bool IsCustomDataPath { get; internal set; }
 
-		[JsonProperty("state_path")]
+		[DataMember(Name ="state_path")]
 		public string StatePath { get; internal set; }
 	}
 }

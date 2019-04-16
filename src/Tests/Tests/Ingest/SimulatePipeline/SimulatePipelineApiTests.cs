@@ -56,21 +56,18 @@ namespace Tests.Ingest.SimulatePipeline
 				new
 				{
 					_index = "project",
-					_type = "doc",
 					_id = Project.Instance.Name,
 					_source = Project.InstanceAnonymous
 				},
 				new
 				{
 					_index = "otherindex",
-					_type = "othertype",
 					_id = "otherid",
 					_source = Project.InstanceAnonymous
 				},
 				new
 				{
 					_index = "otherindex",
-					_type = "anotherType",
 					_id = "2",
 					_source = new { id = "2", colors = new[] { "red" } }
 				}
@@ -103,12 +100,10 @@ namespace Tests.Ingest.SimulatePipeline
 				.Document(doc => doc
 					.Source(Project.Instance)
 					.Index("otherindex")
-					.Type("othertype")
 					.Id("otherid")
 				)
 				.Document(doc => doc
 					.Index("otherindex")
-					.Type("anotherType")
 					.Source(new AnotherType { Id = "2", Colors = new[] { "red" } })
 				)
 			);
@@ -148,13 +143,11 @@ namespace Tests.Ingest.SimulatePipeline
 				{
 					Source = Project.Instance,
 					Index = "otherindex",
-					Type = "othertype",
 					Id = "otherid"
 				},
 				new SimulatePipelineDocument
 				{
 					Index = "otherindex",
-					Type = "anotherType",
 					Source = new AnotherType { Id = "2", Colors = new[] { "red" } }
 				}
 			}

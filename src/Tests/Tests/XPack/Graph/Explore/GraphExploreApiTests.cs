@@ -95,7 +95,7 @@ namespace Tests.XPack.Graph.Explore
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override GraphExploreRequest Initializer => new GraphExploreRequest(Index<Project>(), Type<Project>())
+		protected override GraphExploreRequest Initializer => new GraphExploreRequest(Index<Project>())
 		{
 			Query = new TermQuery { Field = Field<Project>(p => p.State), Value = StateOfBeing.VeryActive },
 			Vertices = new List<IGraphVertexDefinition>
@@ -135,7 +135,7 @@ namespace Tests.XPack.Graph.Explore
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override string UrlPath => $"/project/doc/_xpack/graph/_explore";
+		protected override string UrlPath => $"/project/_graph/explore";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.GraphExplore<Project>(f),

@@ -38,7 +38,7 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public ITermVectorsResponse TermVectors<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> selector) where T : class =>
-			TermVectors(selector?.Invoke(new TermVectorsDescriptor<T>(typeof(T), typeof(T))));
+			TermVectors(selector?.Invoke(new TermVectorsDescriptor<T>(typeof(T))));
 
 		/// <inheritdoc />
 		public ITermVectorsResponse TermVectors<T>(ITermVectorsRequest<T> request) where T : class =>
@@ -51,7 +51,7 @@ namespace Nest
 		public Task<ITermVectorsResponse> TermVectorsAsync<T>(
 			Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> selector,
 			CancellationToken cancellationToken = default(CancellationToken)
-		) where T : class => TermVectorsAsync(selector?.Invoke(new TermVectorsDescriptor<T>(typeof(T), typeof(T))), cancellationToken);
+		) where T : class => TermVectorsAsync(selector?.Invoke(new TermVectorsDescriptor<T>(typeof(T))), cancellationToken);
 
 		/// <inheritdoc />
 		public Task<ITermVectorsResponse> TermVectorsAsync<T>(ITermVectorsRequest<T> request,

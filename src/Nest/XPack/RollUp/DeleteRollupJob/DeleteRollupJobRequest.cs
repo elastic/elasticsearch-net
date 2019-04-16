@@ -1,6 +1,6 @@
 ﻿namespace Nest
 {
-	[MapsApi("xpack.rollup.delete_job.json")]
+	[MapsApi("rollup.delete_job.json")]
 	public partial interface IDeleteRollupJobRequest { }
 
 	public partial class DeleteRollupJobRequest { }

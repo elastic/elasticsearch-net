@@ -32,7 +32,7 @@ namespace Nest
 		public IGetBasicLicenseStatusResponse GetBasicLicenseStatus(IGetBasicLicenseStatusRequest request) =>
 			Dispatcher.Dispatch<IGetBasicLicenseStatusRequest, GetBasicLicenseStatusRequestParameters, GetBasicLicenseStatusResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackLicenseGetBasicStatusDispatch<GetBasicLicenseStatusResponse>(p)
+				(p, d) => LowLevelDispatch.LicenseGetBasicStatusDispatch<GetBasicLicenseStatusResponse>(p)
 			);
 
 		/// <inheritdoc see cref="GetBasicLicenseStatus(System.Func{Nest.GetBasicLicenseStatusDescriptor,Nest.IGetBasicLicenseStatusRequest})"/>
@@ -47,7 +47,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IGetBasicLicenseStatusRequest, GetBasicLicenseStatusRequestParameters, GetBasicLicenseStatusResponse, IGetBasicLicenseStatusResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackLicenseGetBasicStatusDispatchAsync<GetBasicLicenseStatusResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.LicenseGetBasicStatusDispatchAsync<GetBasicLicenseStatusResponse>(p, c)
 			);
 	}
 }

@@ -1,11 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[InterfaceDataContract]
 	public interface IIndexedScriptTransform : IScriptTransform
 	{
-		[JsonProperty("id")]
+		[DataMember(Name ="id")]
 		string Id { get; set; }
 	}
 

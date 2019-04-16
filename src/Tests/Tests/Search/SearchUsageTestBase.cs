@@ -25,7 +25,7 @@ namespace Tests.Search
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/project/doc/_search";
+		protected override string UrlPath => "/project/_search";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.Search<Project>(f),

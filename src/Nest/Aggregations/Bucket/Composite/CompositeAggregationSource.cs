@@ -2,47 +2,49 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
+
+
 
 namespace Nest
 {
 	/// <summary>
 	/// A values source for <see cref="ICompositeAggregation" />
 	/// </summary>
-	[ContractJsonConverter(typeof(CompositeAggregationSourceConverter))]
+	[JsonFormatter(typeof(CompositeAggregationSourceFormatter))]
 	public interface ICompositeAggregationSource
 	{
 		/// <summary>
 		/// The field from which to extract value
 		/// </summary>
-		[JsonProperty("field")]
+		[DataMember(Name = "field")]
 		Field Field { get; set; }
 
 		/// <summary>
 		/// By default documents without a value for a given source are ignored. It is possible to include
 		/// them in the response as null by setting this to true
 		/// </summary>
-		[JsonProperty("missing_bucket")]
+		[DataMember(Name = "missing_bucket")]
 		bool? MissingBucket { get; set; }
 
 		/// <summary>
 		/// The name of the source
 		/// </summary>
-		[JsonIgnore]
+		[IgnoreDataMember]
 		string Name { get; set; }
 
 		/// <summary>
 		/// Defines the direction of sorting for each
 		/// value source. Defaults to <see cref="SortOrder.Ascending" />
 		/// </summary>
-		[JsonProperty("order")]
+		[DataMember(Name = "order")]
 		SortOrder? Order { get; set; }
 
 		/// <summary>
 		/// The type of the source
 		/// </summary>
-		[JsonIgnore]
+		[IgnoreDataMember]
 		string SourceType { get; }
 	}
 
@@ -132,46 +134,90 @@ namespace Nest
 		public TDescriptor MissingBucket(bool? includeMissing = true) => Assign(a => a.MissingBucket = includeMissing);
 	}
 
-	internal class CompositeAggregationSourceConverter : ReserializeJsonConverter<CompositeAggregationSourceBase, ICompositeAggregationSource>
+	internal class CompositeAggregationSourceFormatter : IJsonFormatter<ICompositeAggregationSource>
 	{
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public void Serialize(ref JsonWriter writer, ICompositeAggregationSource value, IJsonFormatterResolver formatterResolver)
 		{
-			var jObject = JObject.Load(reader);
-			var property = jObject.Properties().Single();
-			var name = property.Name;
-			var source = (JObject)property.Value;
-			var sourceProperty = source.Properties().Single();
-			var sourceValue = sourceProperty.Value;
-			ICompositeAggregationSource compositeAggregationSource;
+			writer.WriteBeginObject();
+			writer.WritePropertyName(value.Name);
+			writer.WriteBeginObject();
+			writer.WritePropertyName(value.SourceType);
 
-			switch (sourceProperty.Name)
+			switch (value)
 			{
-				case "terms":
-					compositeAggregationSource = sourceValue.ToObject<TermsCompositeAggregationSource>(ElasticContractResolver.Empty);
+				case ITermsCompositeAggregationSource termsCompositeAggregationSource:
+					Serialize(ref writer, termsCompositeAggregationSource, formatterResolver);
 					break;
-				case "date_histogram":
-					compositeAggregationSource = sourceValue.ToObject<DateHistogramCompositeAggregationSource>(ElasticContractResolver.Empty);
+				case IDateHistogramCompositeAggregationSource dateHistogramCompositeAggregationSource:
+					Serialize(ref writer, dateHistogramCompositeAggregationSource, formatterResolver);
 					break;
-				case "histogram":
-					compositeAggregationSource = sourceValue.ToObject<HistogramCompositeAggregationSource>(ElasticContractResolver.Empty);
+				case IHistogramCompositeAggregationSource histogramCompositeAggregationSource:
+					Serialize(ref writer, histogramCompositeAggregationSource, formatterResolver);
 					break;
 				default:
-					throw new JsonSerializationException($"Unknown {nameof(ICompositeAggregationSource)}: {sourceProperty.Name}");
+					Serialize(ref writer, value, formatterResolver);
+					break;
 			}
+
+			writer.WriteEndObject();
+			writer.WriteEndObject();
+		}
+
+		private static void Serialize<TCompositeAggregationSource>(ref JsonWriter writer, TCompositeAggregationSource value,
+			IJsonFormatterResolver formatterResolver
+		) where TCompositeAggregationSource : ICompositeAggregationSource
+		{
+			var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<TCompositeAggregationSource>();
+			formatter.Serialize(ref writer, value, formatterResolver);
+		}
+
+		private static readonly AutomataDictionary AggregationSource = new AutomataDictionary
+		{
+			{ "terms", 0 },
+			{ "date_histogram", 1 },
+			{ "histogram", 2 },
+		};
+
+		public ICompositeAggregationSource Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
+				return null;
+
+			reader.ReadIsBeginObjectWithVerify();
+			var name = reader.ReadPropertyName();
+
+			reader.ReadIsBeginObjectWithVerify(); // into source
+
+			var sourcePropertyName = reader.ReadPropertyNameSegmentRaw();
+
+			ICompositeAggregationSource compositeAggregationSource = null;
+
+			if (AggregationSource.TryGetValue(sourcePropertyName, out var value))
+			{
+				switch (value)
+				{
+					case 0:
+						compositeAggregationSource = formatterResolver.GetFormatter<TermsCompositeAggregationSource>()
+							.Deserialize(ref reader, formatterResolver);
+						break;
+					case 1:
+						compositeAggregationSource = formatterResolver.GetFormatter<DateHistogramCompositeAggregationSource>()
+							.Deserialize(ref reader, formatterResolver);
+						break;
+					case 2:
+						compositeAggregationSource = formatterResolver.GetFormatter<HistogramCompositeAggregationSource>()
+							.Deserialize(ref reader, formatterResolver);
+						break;
+				}
+			}
+			else
+				throw new Exception($"Unknown {nameof(ICompositeAggregationSource)}: {sourcePropertyName.Utf8String()}");
+
+			reader.ReadIsEndObjectWithVerify();
+			reader.ReadIsEndObjectWithVerify();
 
 			compositeAggregationSource.Name = name;
 			return compositeAggregationSource;
-		}
-
-		protected override void SerializeJson(JsonWriter writer, object value, ICompositeAggregationSource castValue, JsonSerializer serializer)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName(castValue.Name);
-			writer.WriteStartObject();
-			writer.WritePropertyName(castValue.SourceType);
-			Reserialize(writer, value, serializer);
-			writer.WriteEndObject();
-			writer.WriteEndObject();
 		}
 	}
 }

@@ -37,7 +37,7 @@ namespace Nest
 		public IGetModelSnapshotsResponse GetModelSnapshots(IGetModelSnapshotsRequest request) =>
 			Dispatcher.Dispatch<IGetModelSnapshotsRequest, GetModelSnapshotsRequestParameters, GetModelSnapshotsResponse>(
 				request,
-				LowLevelDispatch.XpackMlGetModelSnapshotsDispatch<GetModelSnapshotsResponse>
+				LowLevelDispatch.MlGetModelSnapshotsDispatch<GetModelSnapshotsResponse>
 			);
 
 		/// <inheritdoc />
@@ -55,7 +55,7 @@ namespace Nest
 				.DispatchAsync<IGetModelSnapshotsRequest, GetModelSnapshotsRequestParameters, GetModelSnapshotsResponse, IGetModelSnapshotsResponse>(
 					request,
 					cancellationToken,
-					LowLevelDispatch.XpackMlGetModelSnapshotsDispatchAsync<GetModelSnapshotsResponse>
+					LowLevelDispatch.MlGetModelSnapshotsDispatchAsync<GetModelSnapshotsResponse>
 				);
 	}
 }

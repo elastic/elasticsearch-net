@@ -1,14 +1,15 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[ContractJsonConverter(typeof(TokenFilterJsonConverter))]
+	[JsonFormatter(typeof(TokenFilterFormatter))]
 	public interface ITokenFilter
 	{
-		[JsonProperty("type")]
+		[DataMember(Name = "type")]
 		string Type { get; }
 
-		[JsonProperty("version")]
+		[DataMember(Name = "version")]
 		string Version { get; set; }
 	}
 
@@ -16,10 +17,10 @@ namespace Nest
 	{
 		protected TokenFilterBase(string type) => Type = type;
 
-		[JsonProperty("type")]
+		[DataMember(Name = "type")]
 		public string Type { get; protected set; }
 
-		[JsonProperty("version")]
+		[DataMember(Name = "version")]
 		public string Version { get; set; }
 	}
 

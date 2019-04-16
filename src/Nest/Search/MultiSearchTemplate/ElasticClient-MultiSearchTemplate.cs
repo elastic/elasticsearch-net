@@ -3,7 +3,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -45,8 +45,8 @@ namespace Nest
 				request,
 				(p, d) =>
 				{
-					var converter = CreateMultiSearchTemplateDeserializer(p);
-					var serializer = ConnectionSettings.CreateStateful(converter);
+					var formatter = CreateMultiSearchTemplateResponseFormatter(p);
+					var serializer = ConnectionSettings.CreateStateful(formatter);
 					var creator = new MultiSearchTemplateCreator((r, s) => serializer.Deserialize<MultiSearchResponse>(s));
 					request.RequestParameters.DeserializationOverride = creator;
 					return LowLevelDispatch.MsearchTemplateDispatch<MultiSearchResponse>(p, new SerializableData<IMultiSearchTemplateRequest>(p));
@@ -68,15 +68,15 @@ namespace Nest
 			cancellationToken,
 			(p, d, c) =>
 			{
-				var converter = CreateMultiSearchTemplateDeserializer(p);
-				var serializer = ConnectionSettings.CreateStateful(converter);
+				var formatter = CreateMultiSearchTemplateResponseFormatter(p);
+				var serializer = ConnectionSettings.CreateStateful(formatter);
 				var creator = new MultiSearchTemplateCreator((r, s) => serializer.Deserialize<MultiSearchResponse>(s));
 				request.RequestParameters.DeserializationOverride = creator;
 				return LowLevelDispatch.MsearchTemplateDispatchAsync<MultiSearchResponse>(p, new SerializableData<IMultiSearchTemplateRequest>(p), c);
 			}
 		);
 
-		private JsonConverter CreateMultiSearchTemplateDeserializer(IMultiSearchTemplateRequest request) =>
-			new MultiSearchResponseJsonConverter(ConnectionSettings, request);
+		private MultiSearchResponseFormatter CreateMultiSearchTemplateResponseFormatter(IMultiSearchTemplateRequest request) =>
+			new MultiSearchResponseFormatter(request);
 	}
 }

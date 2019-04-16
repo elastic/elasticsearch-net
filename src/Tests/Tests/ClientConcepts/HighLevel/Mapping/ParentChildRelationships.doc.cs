@@ -6,7 +6,7 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Newtonsoft.Json.Linq;
 using Tests.Core.Client;
 using Tests.Framework;
@@ -90,17 +90,15 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			*/
 			var createIndexResponse = client.CreateIndex("index", c => c
 				.Index<MyDocument>()
-				.Mappings(ms => ms
-					.Map<MyDocument>(m => m
-						.RoutingField(r => r.Required()) // <1> recommended to make the routing field mandatory so you can not accidentally forget
-						.AutoMap<MyParent>() // <2> Map all of the `MyParent` properties
-						.AutoMap<MyChild>() // <3> Map all of the `MyChild` properties
-						.Properties(props => props
-							.Join(j => j // <4> Additionally map the `JoinField` since it is not automatically mapped by `AutoMap()`
-								.Name(p => p.MyJoinField)
-								.Relations(r => r
-									.Join<MyParent, MyChild>()
-								)
+				.Map<MyDocument>(m => m
+					.RoutingField(r => r.Required()) // <1> recommended to make the routing field mandatory so you can not accidentally forget
+					.AutoMap<MyParent>() // <2> Map all of the `MyParent` properties
+					.AutoMap<MyChild>() // <3> Map all of the `MyChild` properties
+					.Properties(props => props
+						.Join(j => j // <4> Additionally map the `JoinField` since it is not automatically mapped by `AutoMap()`
+							.Name(p => p.MyJoinField)
+							.Relations(r => r
+								.Join<MyParent, MyChild>()
 							)
 						)
 					)
@@ -121,21 +119,18 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					doc = new
+					_routing = new { required = true },
+					properties = new
 					{
-						_routing = new { required = true },
-						properties = new
+						parentProperty = new {type = "text"},
+						childProperty = new {type = "text"},
+						id = new {type = "integer"},
+						myJoinField = new
 						{
-							parentProperty = new {type = "text"},
-							childProperty = new {type = "text"},
-							id = new {type = "integer"},
-							myJoinField = new
+							type = "join",
+							relations = new
 							{
-								type = "join",
-								relations = new
-								{
-									parent = "mychild"
-								}
+								parent = "mychild"
 							}
 						}
 					}
@@ -186,7 +181,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				ParentProperty = "a parent prop",
 				MyJoinField = "myparent" // <2> this lets the join data type know this is a root document of type `myparent`
 			};
-			var indexParent = client.IndexDocument<MyDocument>(parentDocument);
+			var indexParent = client.IndexDocument(parentDocument);
 
 			//json
 			var expected = new
@@ -203,7 +198,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			 * Linking the child document to its parent follows a similar pattern.
 			 * Here we create a link by inferring the id from our parent instance `parentDocument`
 			 */
-			var indexChild = client.IndexDocument<MyDocument>(new MyChild
+			var indexChild = client.IndexDocument(new MyChild
 			{
 				MyJoinField = JoinField.Link<MyChild, MyParent>(parentDocument)
 			});
@@ -212,7 +207,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			 * or here we are simply stating this document is of type `mychild` and should be linked
 			 * to parent id 1 from `parentDocument`.
 			 */
-			indexChild = client.IndexDocument<MyDocument>(new MyChild
+			indexChild = client.IndexDocument(new MyChild
 			{
 				Id = 2,
 				MyJoinField = JoinField.Link<MyChild>(1)
@@ -289,10 +284,6 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			indexResponse = client.Index(child, i => i.Routing(Route(child)));
 			indexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
 
-			/** Wouldn't be handy if NEST does this automatically? It does! */
-			indexResponse = client.IndexDocument(child);
-			indexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
-
 			/** You can always override the default inferred routing though */
 			indexResponse = client.Index(child, i => i.Routing("explicit"));
 			indexResponse.ApiCall.Uri.Query.Should().Contain("routing=explicit");
@@ -300,11 +291,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			indexResponse = client.Index(child, i => i.Routing(null));
 			indexResponse.ApiCall.Uri.Query.Should().NotContain("routing");
 
-			/**
-			 * This works for both the fluent and object initializer syntax
-			 */
-
-			var indexRequest = new IndexRequest<MyChild>(child);
+			var indexRequest = new IndexRequest<MyChild>(child) { Routing = Route(child) } ;
 			indexResponse = client.Index(indexRequest);
 			indexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
 			/**

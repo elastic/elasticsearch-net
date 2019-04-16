@@ -7,6 +7,7 @@ namespace Tests.Configuration
 		string ClusterFilter { get; }
 		string ElasticsearchVersion { get; }
 		bool ForceReseed { get; }
+		bool TestOnlyOne { get; }
 		TestMode Mode { get; }
 
 		RandomConfiguration Random { get; }
@@ -34,9 +35,10 @@ namespace Tests.Configuration
 			Console.WriteLine("Starting tests using config:");
 			Console.WriteLine($" - {nameof(config.TestAgainstAlreadyRunningElasticsearch)}: {config.TestAgainstAlreadyRunningElasticsearch}");
 			Console.WriteLine($" - {nameof(config.ElasticsearchVersion)}: {config.ElasticsearchVersion}");
-			Console.WriteLine($" - {nameof(config.ForceReseed)}: {config.ForceReseed}");
 			Console.WriteLine($" - {nameof(config.Mode)}: {config.Mode}");
 			Console.WriteLine($" - {nameof(config.Seed)}: {config.Seed}");
+			Console.WriteLine($" - {nameof(config.ForceReseed)}: {config.ForceReseed}");
+			Console.WriteLine($" - {nameof(config.TestOnlyOne)}: {config.TestOnlyOne}");
 			if (config.Mode == TestMode.Integration)
 			{
 				Console.WriteLine($" - {nameof(config.ClusterFilter)}: {config.ClusterFilter}");

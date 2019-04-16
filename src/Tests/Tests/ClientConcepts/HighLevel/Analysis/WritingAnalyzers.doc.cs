@@ -56,13 +56,11 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 		public void AddAnalyzerToFieldMapping()
 		{
 			var createIndexResponse = _client.CreateIndex("my-index", c => c
-				.Mappings(m => m
-					.Map<Project>(mm => mm
-						.Properties(p => p
-							.Text(t => t
-								.Name(n => n.Name)
-								.Analyzer("whitespace")
-							)
+				.Map<Project>(mm => mm
+					.Properties(p => p
+						.Text(t => t
+							.Name(n => n.Name)
+							.Analyzer("whitespace")
 						)
 					)
 				)
@@ -92,13 +90,11 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 						)
 					)
 				)
-				.Mappings(m => m
-					.Map<Project>(mm => mm
-						.Properties(p => p
-							.Text(t => t
-								.Name(n => n.Name)
-								.Analyzer("standard_english") // <2> Use the `standard_english` analyzer configured
-							)
+				.Map<Project>(mm => mm
+					.Properties(p => p
+						.Text(t => t
+							.Name(n => n.Name)
+							.Analyzer("standard_english") // <2> Use the `standard_english` analyzer configured
 						)
 					)
 				)
@@ -125,15 +121,12 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 				},
 				mappings = new
 				{
-					doc = new // <3> our connection settings map `Project` to `doc`
+					properties = new
 					{
-						properties = new
+						name = new
 						{
-							name = new
-							{
-								type = "text",
-								analyzer = "standard_english"
-							}
+							type = "text",
+							analyzer = "standard_english"
 						}
 					}
 				}
@@ -189,19 +182,17 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 							.Custom("question", ca => ca
 								.CharFilters("html_strip", "programming_language")
 								.Tokenizer("standard")
-								.Filters("standard", "lowercase", "stop")
+								.Filters("lowercase", "stop")
 							)
 						)
 					)
 				)
-				.Mappings(m => m
-					.Map<Question>(mm => mm
-						.AutoMap()
-						.Properties(p => p
-							.Text(t => t
-								.Name(n => n.Body)
-								.Analyzer("question")
-							)
+				.Map<Question>(mm => mm
+					.AutoMap()
+					.Properties(p => p
+						.Text(t => t
+							.Name(n => n.Body)
+							.Analyzer("question")
 						)
 					)
 				)
@@ -250,25 +241,23 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
 							.Custom("index_question", ca => ca // <1> Use an analyzer at index time that strips HTML tags
 								.CharFilters("html_strip", "programming_language")
 								.Tokenizer("standard")
-								.Filters("standard", "lowercase", "stop")
+								.Filters("lowercase", "stop")
 							)
 							.Custom("search_question", ca => ca // <2> Use an analyzer at search time that does not strip HTML tags
 								.CharFilters("programming_language")
 								.Tokenizer("standard")
-								.Filters("standard", "lowercase", "stop")
+								.Filters("lowercase", "stop")
 							)
 						)
 					)
 				)
-				.Mappings(m => m
-					.Map<Question>(mm => mm
-						.AutoMap()
-						.Properties(p => p
-							.Text(t => t
-								.Name(n => n.Body)
-								.Analyzer("index_question")
-								.SearchAnalyzer("search_question")
-							)
+				.Map<Question>(mm => mm
+					.AutoMap()
+					.Properties(p => p
+						.Text(t => t
+							.Name(n => n.Body)
+							.Analyzer("index_question")
+							.SearchAnalyzer("search_question")
 						)
 					)
 				)

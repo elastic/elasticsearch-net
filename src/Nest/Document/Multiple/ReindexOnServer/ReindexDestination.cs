@@ -1,6 +1,6 @@
 using Elasticsearch.Net;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Runtime.Serialization;
+
 
 namespace Nest
 {
@@ -12,28 +12,22 @@ namespace Nest
 		/// <summary>
 		/// The index to reindex into
 		/// </summary>
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		IndexName Index { get; set; }
 
 		/// <summary>
 		/// Setting to <see cref="Elasticsearch.Net.OpType.Create" /> will cause reindex to only
 		/// create missing documents in the destination index.
 		/// </summary>
-		[JsonProperty("op_type")]
-		[JsonConverter(typeof(StringEnumConverter))]
+		[DataMember(Name ="op_type")]
+
 		OpType? OpType { get; set; }
 
 		/// <summary>
 		/// The routing to use when reindexing
 		/// </summary>
-		[JsonProperty("routing")]
+		[DataMember(Name ="routing")]
 		ReindexRouting Routing { get; set; }
-
-		/// <summary>
-		/// The type to reindex into
-		/// </summary>
-		[JsonProperty("type")]
-		TypeName Type { get; set; }
 
 		/// <summary>
 		/// Setting to <see cref="Elasticsearch.Net.VersionType.External" /> will cause Elasticsearch
@@ -41,8 +35,8 @@ namespace Nest
 		/// and update any documents that have an older version in the destination index
 		/// than they do in the source index
 		/// </summary>
-		[JsonProperty("version_type")]
-		[JsonConverter(typeof(StringEnumConverter))]
+		[DataMember(Name ="version_type")]
+
 		VersionType? VersionType { get; set; }
 	}
 
@@ -59,9 +53,6 @@ namespace Nest
 		public ReindexRouting Routing { get; set; }
 
 		/// <inheritdoc />
-		public TypeName Type { get; set; }
-
-		/// <inheritdoc />
 		public VersionType? VersionType { get; set; }
 	}
 
@@ -71,7 +62,6 @@ namespace Nest
 		IndexName IReindexDestination.Index { get; set; }
 		OpType? IReindexDestination.OpType { get; set; }
 		ReindexRouting IReindexDestination.Routing { get; set; }
-		TypeName IReindexDestination.Type { get; set; }
 		VersionType? IReindexDestination.VersionType { get; set; }
 
 		/// <inheritdoc cref="IReindexDestination.Routing" />
@@ -86,7 +76,5 @@ namespace Nest
 		/// <inheritdoc cref="IReindexDestination.Index" />
 		public ReindexDestinationDescriptor Index(IndexName index) => Assign(a => a.Index = index);
 
-		/// <inheritdoc cref="IReindexDestination.Type" />
-		public ReindexDestinationDescriptor Type(TypeName type) => Assign(a => a.Type = type);
 	}
 }

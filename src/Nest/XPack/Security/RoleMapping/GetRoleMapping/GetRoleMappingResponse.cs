@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -8,27 +9,27 @@ namespace Nest
 		IReadOnlyDictionary<string, XPackRoleMapping> RoleMappings { get; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(DictionaryResponseJsonConverter<GetRoleMappingResponse, string, XPackRoleMapping>))]
+	[DataContract]
+	[JsonFormatter(typeof(DictionaryResponseFormatter<GetRoleMappingResponse, string, XPackRoleMapping>))]
 	public class GetRoleMappingResponse : DictionaryResponseBase<string, XPackRoleMapping>, IGetRoleMappingResponse
 	{
-		[JsonIgnore]
+		[IgnoreDataMember]
 		public IReadOnlyDictionary<string, XPackRoleMapping> RoleMappings => Self.BackingDictionary;
 	}
 
 	//only used by GetRoleMappingResponse thus private setters and IReadOnlyCollection
 	public class XPackRoleMapping
 	{
-		[JsonProperty("enabled")]
+		[DataMember(Name ="enabled")]
 		public bool Enabled { get; private set; }
 
-		[JsonProperty("metadata")]
+		[DataMember(Name ="metadata")]
 		public IDictionary<string, object> Metadata { get; private set; }
 
-		[JsonProperty("roles")]
+		[DataMember(Name ="roles")]
 		public IReadOnlyCollection<string> Roles { get; private set; } = EmptyReadOnly<string>.Collection;
 
-		[JsonProperty("rules")]
+		[DataMember(Name ="rules")]
 		public RoleMappingRuleBase Rules { get; private set; }
 	}
 }

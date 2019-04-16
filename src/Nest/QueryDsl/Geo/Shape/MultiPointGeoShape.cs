@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
+	[JsonFormatter(typeof(GeoShapeFormatter<IMultiPointGeoShape>))]
 	public interface IMultiPointGeoShape : IGeoShape
 	{
-		[JsonProperty("coordinates")]
+		[DataMember(Name ="coordinates")]
 		IEnumerable<GeoCoordinate> Coordinates { get; set; }
 	}
 
+	[JsonFormatter(typeof(GeoShapeFormatter<MultiPointGeoShape>))]
 	public class MultiPointGeoShape : GeoShapeBase, IMultiPointGeoShape
 	{
 		internal MultiPointGeoShape() : base("multipoint") { }

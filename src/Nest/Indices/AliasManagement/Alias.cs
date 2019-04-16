@@ -1,21 +1,21 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<Alias>))]
+	[ReadAs(typeof(Alias))]
 	public interface IAlias
 	{
-		[JsonProperty("filter")]
+		[DataMember(Name ="filter")]
 		QueryContainer Filter { get; set; }
 
-		[JsonProperty("index_routing")]
+		[DataMember(Name ="index_routing")]
 		Routing IndexRouting { get; set; }
 
-		[JsonProperty("routing")]
+		[DataMember(Name ="routing")]
 		Routing Routing { get; set; }
 
-		[JsonProperty("search_routing")]
+		[DataMember(Name ="search_routing")]
 		Routing SearchRouting { get; set; }
 	}
 

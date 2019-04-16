@@ -17,21 +17,18 @@ namespace Tests.Document.Single.Delete
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
-		protected override Func<DeleteDescriptor<Project>, IDeleteRequest> Fluent => d => d.Routing(Project.Instance.Name);
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 
-		protected override DeleteRequest<Project> Initializer => new DeleteRequest<Project>(CallIsolatedValue)
-		{
-			Routing = Project.Instance.Name
-		};
+		protected override Func<DeleteDescriptor<Project>, IDeleteRequest> Fluent => d => d.Routing(CallIsolatedValue);
+		protected override DeleteRequest<Project> Initializer => new DeleteRequest<Project>(CallIsolatedValue) { Routing = CallIsolatedValue };
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/project/doc/{CallIsolatedValue}?routing={U(Project.Routing)}";
+		protected override string UrlPath => $"/project/_doc/{CallIsolatedValue}?routing={U(CallIsolatedValue)}";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var id in values.Values)
-				Client.Index(Project.Instance, i => i.Id(id));
+				Client.Index(Project.Instance, i => i.Id(id).Routing(id));
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -63,16 +60,13 @@ namespace Tests.Document.Single.Delete
 
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;
-		protected override Func<DeleteDescriptor<Project>, IDeleteRequest> Fluent => d => d.Routing(CallIsolatedValue);
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 
-		protected override DeleteRequest<Project> Initializer => new DeleteRequest<Project>(CallIsolatedValue)
-		{
-			Routing = CallIsolatedValue
-		};
+		protected override Func<DeleteDescriptor<Project>, IDeleteRequest> Fluent => d => d.Routing(CallIsolatedValue);
+		protected override DeleteRequest<Project> Initializer => new DeleteRequest<Project>(CallIsolatedValue) { Routing = CallIsolatedValue };
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/project/doc/{CallIsolatedValue}?routing={CallIsolatedValue}";
+		protected override string UrlPath => $"/project/_doc/{CallIsolatedValue}?routing={U(CallIsolatedValue)}";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.Delete<Project>(CallIsolatedValue, f),
@@ -88,7 +82,7 @@ namespace Tests.Document.Single.Delete
 			response.ShouldNotBeValid();
 			response.Result.Should().Be(Result.NotFound);
 			response.Index.Should().Be("project");
-			response.Type.Should().Be("doc");
+			response.Type.Should().Be("_doc");
 			response.Id.Should().Be(CallIsolatedValue);
 			response.Shards.Total.Should().BeGreaterOrEqualTo(1);
 			response.Shards.Successful.Should().BeGreaterOrEqualTo(1);
@@ -105,12 +99,13 @@ namespace Tests.Document.Single.Delete
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;
 
-		protected override Func<DeleteDescriptor<Project>, IDeleteRequest> Fluent => f => f.Index(BadIndex);
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override DeleteRequest<Project> Initializer => new DeleteRequest<Project>(CallIsolatedValue, BadIndex);
+
+		protected override Func<DeleteDescriptor<Project>, IDeleteRequest> Fluent => d => d.Index(BadIndex).Routing(CallIsolatedValue);
+		protected override DeleteRequest<Project> Initializer => new DeleteRequest<Project>(BadIndex, CallIsolatedValue) { Routing = CallIsolatedValue };
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/{BadIndex}/doc/{CallIsolatedValue}";
+		protected override string UrlPath => $"/{BadIndex}/_doc/{CallIsolatedValue}?routing={U(CallIsolatedValue)}";
 
 		private string BadIndex => CallIsolatedValue + "-bad-index";
 
@@ -122,14 +117,14 @@ namespace Tests.Document.Single.Delete
 		);
 
 		protected override DeleteDescriptor<Project> NewDescriptor() =>
-			new DeleteDescriptor<Project>(DocumentPath<Project>.Id(CallIsolatedValue).Index(CallIsolatedValue));
+			new DeleteDescriptor<Project>(index: CallIsolatedValue, id: CallIsolatedValue);
 
 		protected override void ExpectResponse(IDeleteResponse response)
 		{
 			response.ShouldNotBeValid();
 			response.Result.Should().Be(Result.Error);
 			response.ServerError.Should().NotBeNull();
-			response.ServerError.Error.Reason.Should().Be("no such index");
+			response.ServerError.Error.Reason.Should().StartWith("no such index");
 		}
 	}
 }

@@ -1,37 +1,36 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<LikeDocument<object>>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(LikeDocument<object>))]
 	public interface ILikeDocument
 	{
-		[JsonProperty("doc")]
-		[JsonConverter(typeof(SourceConverter))]
+		[DataMember(Name = "doc")]
+		[JsonFormatter(typeof(SourceFormatter<object>))]
 		object Document { get; set; }
 
-		[JsonProperty("fields")]
+		[DataMember(Name = "fields")]
 		Fields Fields { get; set; }
 
-		[JsonProperty("_id")]
+		[DataMember(Name = "_id")]
 		Id Id { get; set; }
 
-		[JsonProperty("_index")]
+		[DataMember(Name = "_index")]
 		IndexName Index { get; set; }
 
-		[JsonProperty("per_field_analyzer")]
+		[DataMember(Name = "per_field_analyzer")]
 		IPerFieldAnalyzer PerFieldAnalyzer { get; set; }
 
-		[JsonProperty("_routing")]
+		[DataMember(Name = "_routing")]
 		Routing Routing { get; set; }
-
-		[JsonProperty("_type")]
-		TypeName Type { get; set; }
 	}
 
 	public abstract class LikeDocumentBase : ILikeDocument
 	{
+		[IgnoreDataMember]
 		private Routing _routing;
 
 		public object Document { get; set; }
@@ -48,8 +47,6 @@ namespace Nest
 			get => _routing ?? (Document == null ? null : new Routing(Document));
 			set => _routing = value;
 		}
-
-		public TypeName Type { get; set; }
 	}
 
 	public class LikeDocument<TDocument> : LikeDocumentBase
@@ -61,7 +58,6 @@ namespace Nest
 		{
 			Id = id;
 			Index = typeof(TDocument);
-			Type = typeof(TDocument);
 		}
 
 		public LikeDocument(TDocument document)
@@ -69,7 +65,6 @@ namespace Nest
 			Id = Id.From(document);
 			Document = document;
 			Index = typeof(TDocument);
-			Type = typeof(TDocument);
 		}
 	}
 
@@ -78,14 +73,9 @@ namespace Nest
 	{
 		private Routing _routing;
 
-		public LikeDocumentDescriptor()
-		{
-			Self.Index = typeof(TDocument);
-			Self.Type = typeof(TDocument);
-		}
+		public LikeDocumentDescriptor() => Self.Index = typeof(TDocument);
 
 		object ILikeDocument.Document { get; set; }
-
 		Fields ILikeDocument.Fields { get; set; }
 		Id ILikeDocument.Id { get; set; }
 		IndexName ILikeDocument.Index { get; set; }
@@ -97,11 +87,7 @@ namespace Nest
 			set => _routing = value;
 		}
 
-		TypeName ILikeDocument.Type { get; set; }
-
 		public LikeDocumentDescriptor<TDocument> Index(IndexName index) => Assign(a => a.Index = index);
-
-		public LikeDocumentDescriptor<TDocument> Type(TypeName type) => Assign(a => a.Type = type);
 
 		public LikeDocumentDescriptor<TDocument> Id(Id id) => Assign(a => a.Id = id);
 

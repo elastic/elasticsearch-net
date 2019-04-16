@@ -1,12 +1,13 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<GoogleNormalizedDistanceHeuristic>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(GoogleNormalizedDistanceHeuristic))]
 	public interface IGoogleNormalizedDistanceHeuristic
 	{
-		[JsonProperty("background_is_superset")]
+		[DataMember(Name ="background_is_superset")]
 		bool? BackgroundIsSuperSet { get; set; }
 	}
 

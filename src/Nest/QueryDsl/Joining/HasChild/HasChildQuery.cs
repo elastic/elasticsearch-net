@@ -1,35 +1,36 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<HasChildQueryDescriptor<object>>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(HasChildQueryDescriptor<object>))]
 	public interface IHasChildQuery : IQuery
 	{
-		[JsonProperty("ignore_unmapped")]
+		[DataMember(Name ="ignore_unmapped")]
 		bool? IgnoreUnmapped { get; set; }
 
-		[JsonProperty("inner_hits")]
+		[DataMember(Name ="inner_hits")]
 		IInnerHits InnerHits { get; set; }
 
 		/// <summary>
 		/// Specify how many child documents are allowed to match.
 		/// </summary>
-		[JsonProperty("max_children")]
+		[DataMember(Name ="max_children")]
 		int? MaxChildren { get; set; }
 
-		[JsonProperty("min_children")]
+		[DataMember(Name ="min_children")]
 		int? MinChildren { get; set; }
 
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		QueryContainer Query { get; set; }
 
-		[JsonProperty("score_mode")]
+		[DataMember(Name ="score_mode")]
 		ChildScoreMode? ScoreMode { get; set; }
 
-		[JsonProperty("type")]
-		TypeName Type { get; set; }
+		[DataMember(Name = "type")]
+		RelationName Type { get; set; }
 	}
 
 	public class HasChildQuery : QueryBase, IHasChildQuery
@@ -45,7 +46,7 @@ namespace Nest
 		public int? MinChildren { get; set; }
 		public QueryContainer Query { get; set; }
 		public ChildScoreMode? ScoreMode { get; set; }
-		public TypeName Type { get; set; }
+		public RelationName Type { get; set; }
 		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.HasChild = this;
@@ -57,7 +58,7 @@ namespace Nest
 		: QueryDescriptorBase<HasChildQueryDescriptor<T>, IHasChildQuery>
 			, IHasChildQuery where T : class
 	{
-		public HasChildQueryDescriptor() => ((IHasChildQuery)this).Type = TypeName.Create<T>();
+		public HasChildQueryDescriptor() => Self.Type = RelationName.Create<T>();
 
 		protected override bool Conditionless => HasChildQuery.IsConditionless(this);
 		bool? IHasChildQuery.IgnoreUnmapped { get; set; }
@@ -71,7 +72,7 @@ namespace Nest
 		int? IHasChildQuery.MinChildren { get; set; }
 		QueryContainer IHasChildQuery.Query { get; set; }
 		ChildScoreMode? IHasChildQuery.ScoreMode { get; set; }
-		TypeName IHasChildQuery.Type { get; set; }
+		RelationName IHasChildQuery.Type { get; set; }
 
 		public HasChildQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
 			Assign(a => a.Query = selector?.Invoke(new QueryContainerDescriptor<T>()));

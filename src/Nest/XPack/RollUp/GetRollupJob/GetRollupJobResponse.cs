@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IGetRollupJobResponse : IResponse
 	{
-		[JsonProperty("jobs")]
+		[DataMember(Name ="jobs")]
 		IReadOnlyCollection<RollupJobInformation> Jobs { get; }
 	}
 

@@ -14,6 +14,9 @@ namespace Tests.Core.Extensions
 		public static void ShouldBeValid(this IResponse response) =>
 			response.IsValid.Should().BeTrue("{0}", response.DebugInformation);
 
+		public static void ShouldBeValid(this IResponse response, string message) =>
+			response.IsValid.Should().BeTrue("{1} {0}", response.DebugInformation, message);
+
 		public static void ShouldNotBeValid(this IResponse response) =>
 			response.IsValid.Should().BeFalse("{0}", response.DebugInformation);
 

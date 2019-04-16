@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
+	[InterfaceDataContract]
 	public interface IIndexAction : IAction
 	{
-		[JsonProperty("doc_type")]
-		TypeName DocType { get; set; }
-
-		[JsonProperty("execution_time_field")]
+		[DataMember(Name = "execution_time_field")]
 		Field ExecutionTimeField { get; set; }
 
-		[JsonProperty("index")]
+		[DataMember(Name = "index")]
 		IndexName Index { get; set; }
 
-		[JsonProperty("timeout")]
+		[DataMember(Name = "timeout")]
 		Time Timeout { get; set; }
 	}
 
@@ -25,8 +23,6 @@ namespace Nest
 		public IndexAction(string name) : base(name) { }
 
 		public override ActionType ActionType => ActionType.Index;
-
-		public TypeName DocType { get; set; }
 
 		public Field ExecutionTimeField { get; set; }
 
@@ -40,7 +36,6 @@ namespace Nest
 		public IndexActionDescriptor(string name) : base(name) { }
 
 		protected override ActionType ActionType => ActionType.Index;
-		TypeName IIndexAction.DocType { get; set; }
 		Field IIndexAction.ExecutionTimeField { get; set; }
 		IndexName IIndexAction.Index { get; set; }
 		Time IIndexAction.Timeout { get; set; }
@@ -48,10 +43,6 @@ namespace Nest
 		public IndexActionDescriptor Index(IndexName index) => Assign(a => a.Index = index);
 
 		public IndexActionDescriptor Index<T>() => Assign(a => a.Index = typeof(T));
-
-		public IndexActionDescriptor DocType(TypeName type) => Assign(a => a.DocType = type);
-
-		public IndexActionDescriptor DocType<T>() => Assign(a => a.DocType = typeof(T));
 
 		public IndexActionDescriptor ExecutionTimeField(Field field) => Assign(a => a.ExecutionTimeField = field);
 

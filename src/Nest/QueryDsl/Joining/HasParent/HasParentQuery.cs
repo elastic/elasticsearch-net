@@ -1,22 +1,23 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<HasParentQueryDescriptor<object>>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(HasParentQueryDescriptor<object>))]
 	public interface IHasParentQuery : IQuery
 	{
-		[JsonProperty("ignore_unmapped")]
+		[DataMember(Name ="ignore_unmapped")]
 		bool? IgnoreUnmapped { get; set; }
 
-		[JsonProperty("inner_hits")]
+		[DataMember(Name ="inner_hits")]
 		IInnerHits InnerHits { get; set; }
 
-		[JsonProperty("parent_type")]
-		TypeName ParentType { get; set; }
+		[DataMember(Name = "parent_type")]
+		RelationName ParentType { get; set; }
 
-		[JsonProperty("query")]
+		[DataMember(Name ="query")]
 		QueryContainer Query { get; set; }
 
 		/// <summary>
@@ -24,7 +25,7 @@ namespace Nest
 		/// document.
 		/// The default is false which ignores the score from the parent document.
 		/// </summary>
-		[JsonProperty("score")]
+		[DataMember(Name ="score")]
 		bool? Score { get; set; }
 	}
 
@@ -32,7 +33,7 @@ namespace Nest
 	{
 		public bool? IgnoreUnmapped { get; set; }
 		public IInnerHits InnerHits { get; set; }
-		public TypeName ParentType { get; set; }
+		public RelationName ParentType { get; set; }
 		public QueryContainer Query { get; set; }
 
 		/// <summary>
@@ -53,12 +54,12 @@ namespace Nest
 		: QueryDescriptorBase<HasParentQueryDescriptor<T>, IHasParentQuery>
 			, IHasParentQuery where T : class
 	{
-		public HasParentQueryDescriptor() => Self.ParentType = TypeName.Create<T>();
+		public HasParentQueryDescriptor() => Self.ParentType = RelationName.Create<T>();
 
 		protected override bool Conditionless => HasParentQuery.IsConditionless(this);
 		bool? IHasParentQuery.IgnoreUnmapped { get; set; }
 		IInnerHits IHasParentQuery.InnerHits { get; set; }
-		TypeName IHasParentQuery.ParentType { get; set; }
+		RelationName IHasParentQuery.ParentType { get; set; }
 		QueryContainer IHasParentQuery.Query { get; set; }
 
 		/// <summary>

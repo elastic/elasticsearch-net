@@ -36,7 +36,7 @@ namespace Nest
 		public IClearSqlCursorResponse ClearSqlCursor(IClearSqlCursorRequest request) =>
 			Dispatcher.Dispatch<IClearSqlCursorRequest, ClearSqlCursorRequestParameters, ClearSqlCursorResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackSqlClearCursorDispatch<ClearSqlCursorResponse>(p, d)
+				(p, d) => LowLevelDispatch.SqlClearCursorDispatch<ClearSqlCursorResponse>(p, d)
 			);
 
 		/// <inheritdoc cref="ClearSqlCursor(System.Func{Nest.ClearSqlCursorDescriptor,Nest.IClearSqlCursorRequest})" />
@@ -52,7 +52,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IClearSqlCursorRequest, ClearSqlCursorRequestParameters, ClearSqlCursorResponse, IClearSqlCursorResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackSqlClearCursorDispatchAsync<ClearSqlCursorResponse>(p, d, c)
+				(p, d, c) => LowLevelDispatch.SqlClearCursorDispatchAsync<ClearSqlCursorResponse>(p, d, c)
 			);
 	}
 }

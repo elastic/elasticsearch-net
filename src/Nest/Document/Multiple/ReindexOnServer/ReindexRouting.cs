@@ -1,8 +1,9 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReindexRoutingJsonConverter))]
+	[JsonFormatter(typeof(ReindexRoutingFormatter))]
 	public class ReindexRouting
 	{
 		public static ReindexRouting Discard = new ReindexRouting("discard", true);

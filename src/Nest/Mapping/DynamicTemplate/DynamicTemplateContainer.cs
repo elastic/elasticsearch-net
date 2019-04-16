@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(DynamicTemplatesJsonConverter))]
+	[JsonFormatter(typeof(DynamicTemplatesInterfaceFormatter))]
 	public interface IDynamicTemplateContainer : IIsADictionary<string, IDynamicTemplate> { }
 
+	[JsonFormatter(typeof(DynamicTemplatesFormatter))]
 	public class DynamicTemplateContainer : IsADictionaryBase<string, IDynamicTemplate>, IDynamicTemplateContainer
 	{
 		public DynamicTemplateContainer() : base() { }

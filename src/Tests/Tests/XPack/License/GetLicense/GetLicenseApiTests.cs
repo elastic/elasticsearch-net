@@ -22,7 +22,7 @@ namespace Tests.XPack.License.GetLicense
 
 		protected override GetLicenseRequest Initializer => new GetLicenseRequest();
 
-		protected override string UrlPath => $"/_xpack/license";
+		protected override string UrlPath => $"/_license";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.GetLicense(f),

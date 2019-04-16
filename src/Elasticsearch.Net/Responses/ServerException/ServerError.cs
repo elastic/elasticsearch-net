@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
+	[JsonFormatter(typeof(ServerErrorFormatter))]
 	public class ServerError
 	{
 		public ServerError(Error error, int? statusCode)
@@ -15,7 +17,10 @@ namespace Elasticsearch.Net
 			Status = statusCode.GetValueOrDefault();
 		}
 
+		[DataMember(Name = "error")]
 		public Error Error { get; }
+
+		[DataMember(Name = "status")]
 		public int Status { get; }
 
 		public static bool TryCreate(Stream stream, out ServerError serverError)
@@ -39,8 +44,27 @@ namespace Elasticsearch.Net
 		public static Task<ServerError> CreateAsync(Stream stream, CancellationToken token) =>
 			LowLevelRequestResponseSerializer.Instance.DeserializeAsync<ServerError>(stream, token);
 
-		internal static ServerError Create(IDictionary<string, object> dict, IJsonSerializerStrategy strategy)
+		public override string ToString()
 		{
+			var sb = new System.Text.StringBuilder();
+			sb.Append($"ServerError: {Status}");
+			if (Error != null)
+				sb.Append(Error);
+			return sb.ToString();
+		}
+	}
+
+	internal class ServerErrorFormatter : IJsonFormatter<ServerError>
+	{
+		public void Serialize(ref JsonWriter writer, ServerError value, IJsonFormatterResolver formatterResolver) =>
+			throw new NotSupportedException();
+
+		// TODO: Optimize this
+		public ServerError Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			var formatter = formatterResolver.GetFormatter<Dictionary<string, object>>();
+			var dict = formatter.Deserialize(ref reader, formatterResolver);
+
 			var statusCode = -1;
 
 			if (dict.TryGetValue("status", out var status))
@@ -48,21 +72,9 @@ namespace Elasticsearch.Net
 
 			if (!dict.TryGetValue("error", out var error)) return null;
 
-			Error err;
-			if (error is string s)
-				err = new Error { Reason = s };
-			else err = (Error)strategy.DeserializeObject(error, typeof(Error));
+			var err = formatterResolver.ReserializeAndDeserialize<Error>(error);
 
 			return new ServerError(err, statusCode);
-		}
-
-		public override string ToString()
-		{
-			var sb = new StringBuilder();
-			sb.Append($"ServerError: {Status}");
-			if (Error != null)
-				sb.Append(Error);
-			return sb.ToString();
 		}
 	}
 }

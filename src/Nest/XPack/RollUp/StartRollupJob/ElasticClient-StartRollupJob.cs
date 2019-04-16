@@ -35,7 +35,7 @@ namespace Nest
 		public IStartRollupJobResponse StartRollupJob(IStartRollupJobRequest request) =>
 			Dispatcher.Dispatch<IStartRollupJobRequest, StartRollupJobRequestParameters, StartRollupJobResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackRollupStartJobDispatch<StartRollupJobResponse>(p)
+				(p, d) => LowLevelDispatch.RollupStartJobDispatch<StartRollupJobResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -49,7 +49,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IStartRollupJobRequest, StartRollupJobRequestParameters, StartRollupJobResponse, IStartRollupJobResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackRollupStartJobDispatchAsync<StartRollupJobResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.RollupStartJobDispatchAsync<StartRollupJobResponse>(p, c)
 			);
 	}
 }

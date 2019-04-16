@@ -25,7 +25,6 @@ namespace Tests.Document.Multiple.MultiTermVectors
 			docs = Developer.Developers.Select(p => new
 				{
 					_index = "devs",
-					_type = "developer",
 					_id = p.Id,
 					payloads = true,
 					field_statistics = true,
@@ -99,7 +98,6 @@ namespace Tests.Document.Multiple.MultiTermVectors
 
 			termvectorDoc.Should().NotBeNull();
 			termvectorDoc.Index.Should().NotBeNull();
-			termvectorDoc.Type.Should().NotBeNull();
 			termvectorDoc.Id.Should().NotBeNull();
 
 			termvectorDoc.TermVectors.Should().NotBeEmpty().And.ContainKey("firstName");
@@ -145,7 +143,6 @@ namespace Tests.Document.Multiple.MultiTermVectors
 
 		protected override Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> Fluent => d => d
 			.Index<Developer>()
-			.Type<Developer>()
 			.Ids(Developer.Developers.Select(p => (Id)p.Id).Take(2))
 			.FieldStatistics()
 			.Payloads()
@@ -155,7 +152,7 @@ namespace Tests.Document.Multiple.MultiTermVectors
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override MultiTermVectorsRequest Initializer => new MultiTermVectorsRequest(Index<Developer>(), Type<Developer>())
+		protected override MultiTermVectorsRequest Initializer => new MultiTermVectorsRequest(Index<Developer>())
 		{
 			Ids = Developer.Developers.Select(p => (Id)p.Id).Take(2),
 			FieldStatistics = true,
@@ -168,7 +165,7 @@ namespace Tests.Document.Multiple.MultiTermVectors
 		protected override bool SupportsDeserialization => false;
 
 		protected override string UrlPath =>
-			$"/devs/developer/_mtermvectors?field_statistics=true&payloads=true&term_statistics=true&positions=true&offsets=true";
+			$"/devs/_mtermvectors?field_statistics=true&payloads=true&term_statistics=true&positions=true&offsets=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.MultiTermVectors(f),
@@ -185,7 +182,6 @@ namespace Tests.Document.Multiple.MultiTermVectors
 
 			termvectorDoc.Should().NotBeNull();
 			termvectorDoc.Index.Should().NotBeNull();
-			termvectorDoc.Type.Should().NotBeNull();
 			termvectorDoc.Id.Should().NotBeNull();
 
 			termvectorDoc.TermVectors.Should().NotBeEmpty().And.ContainKey("firstName");

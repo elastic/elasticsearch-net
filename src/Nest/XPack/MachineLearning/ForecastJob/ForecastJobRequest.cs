@@ -1,23 +1,24 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary>
 	/// Uses historical behavior to predict the future behavior of a time series.
 	/// </summary>
+	[MapsApi("ml.forecast.json")]
 	public partial interface IForecastJobRequest
 	{
 		/// <summary>
 		/// A period of time that indicates how far into the future to forecast. Defaults to 1 day.
 		/// </summary>
-		[JsonProperty("duration")]
+		[DataMember(Name ="duration")]
 		Time Duration { get; set; }
 
 		/// <summary>
 		/// The period of time that forecast results are retained.
 		/// After a forecast expires, the results are deleted. Defaults to 14 days.
 		/// </summary>
-		[JsonProperty("expires_in")]
+		[DataMember(Name ="expires_in")]
 		Time ExpiresIn { get; set; }
 	}
 
@@ -32,7 +33,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="IForecastJobRequest" />
-	[DescriptorFor("XpackMlForecast")]
 	public partial class ForecastJobDescriptor
 	{
 		Time IForecastJobRequest.Duration { get; set; }

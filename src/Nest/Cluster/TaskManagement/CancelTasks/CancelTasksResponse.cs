@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[InterfaceDataContract]
 	public interface ICancelTasksResponse : IResponse
 	{
-		[JsonProperty("node_failures")]
+		[DataMember(Name = "node_failures")]
 		IReadOnlyCollection<ErrorCause> NodeFailures { get; }
 
-		[JsonProperty("nodes")]
+		[DataMember(Name = "nodes")]
 		IReadOnlyDictionary<string, TaskExecutingNode> Nodes { get; }
 	}
 

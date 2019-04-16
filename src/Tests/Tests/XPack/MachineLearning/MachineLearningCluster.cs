@@ -7,6 +7,7 @@ using Elastic.Managed.Ephemeral.Tasks;
 using ICSharpCode.SharpZipLib.GZip;
 using ICSharpCode.SharpZipLib.Tar;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.Xunit;
 using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 
 namespace Tests.Framework.ManagedElasticsearch.Clusters

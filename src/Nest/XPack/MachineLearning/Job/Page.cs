@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -7,13 +7,13 @@ namespace Nest
 		/// <summary>
 		/// Skips the specified number of buckets.
 		/// </summary>
-		[JsonProperty("from")]
+		[DataMember(Name ="from")]
 		int? From { get; set; }
 
 		/// <summary>
 		/// Specifies the maximum number of buckets to obtain.
 		/// </summary>
-		[JsonProperty("size")]
+		[DataMember(Name ="size")]
 		int? Size { get; set; }
 	}
 

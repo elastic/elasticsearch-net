@@ -7,7 +7,7 @@
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\Artifacts.build.props" />
   <PropertyGroup>
 
-    <SignAssembly Condition="'$(OS)' == 'Windows_NT'">true</SignAssembly>
+    <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\build\keys\keypair.snk</AssemblyOriginatorKeyFile>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>1591,1572,1571,1573,1587,1570</NoWarn>

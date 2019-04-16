@@ -85,7 +85,9 @@ namespace Nest
 		)
 			: base(connectionPool, connection, null)
 		{
-			var defaultSerializer = new InternalSerializer(this);
+			var formatterResolver = new NestFormatterResolver(this);
+			//Utf8Json.JsonSerializer.SetDefaultResolver(formatterResolver);
+			var defaultSerializer = new InternalSerializer(this, formatterResolver);
 			_sourceSerializer = sourceSerializerFactory?.Invoke(defaultSerializer, this) ?? defaultSerializer;
 			UseThisRequestResponseSerializer = defaultSerializer;
 			var serializerAsMappingProvider = _sourceSerializer as IPropertyMappingProvider;
@@ -173,9 +175,9 @@ namespace Nest
 			var memberInfo = new MemberInfoResolver(objectPath);
 			var fieldName = memberInfo.Members.Single().Name;
 
-			if (_idProperties.TryGetValue(typeof(TDocument), out string idPropertyFieldName))
+			if (_idProperties.ContainsKey(typeof(TDocument)))
 			{
-				if (idPropertyFieldName.Equals(fieldName)) return;
+				if (_idProperties[typeof(TDocument)].Equals(fieldName)) return;
 
 				throw new ArgumentException(
 					$"Cannot map '{fieldName}' as the id property for type '{typeof(TDocument).Name}': it already has '{_idProperties[typeof(TDocument)]}' mapped.");
@@ -191,9 +193,9 @@ namespace Nest
 			var memberInfo = new MemberInfoResolver(objectPath);
 			var fieldName = memberInfo.Members.Single().Name;
 
-			if (_routeProperties.TryGetValue(typeof(TDocument), out string routePropertyFieldName))
+			if (_routeProperties.ContainsKey(typeof(TDocument)))
 			{
-				if (routePropertyFieldName.Equals(fieldName)) return;
+				if (_routeProperties[typeof(TDocument)].Equals(fieldName)) return;
 
 				throw new ArgumentException(
 					$"Cannot map '{fieldName}' as the route property for type '{typeof(TDocument).Name}': it already has '{_routeProperties[typeof(TDocument)]}' mapped.");
@@ -216,10 +218,19 @@ namespace Nest
 					throw new ArgumentException($"Expression {e} does contain any member access");
 
 				var memberInfo = memberInfoResolver.Members.Last();
-				if (_propertyMappings.TryGetValue(memberInfo, out IPropertyMapping propertyMapping))
+
+				// memberInfo will be the declaringType, which may not be TDocument in the case of an inherited property.
+				// Get the correct memberinfo
+				if (typeof(TDocument) != memberInfo.DeclaringType)
+				{
+					var bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
+					memberInfo = typeof(TDocument).GetMember(memberInfo.Name, bindingFlags).First();
+				}
+
+				if (_propertyMappings.ContainsKey(memberInfo))
 				{
 					var newName = mapping.NewName;
-					var mappedAs = propertyMapping.Name;
+					var mappedAs = _propertyMappings[memberInfo].Name;
 					var typeName = typeof(TDocument).Name;
 					if (mappedAs.IsNullOrEmpty() && newName.IsNullOrEmpty())
 						throw new ArgumentException($"Property mapping '{e}' on type is already ignored");

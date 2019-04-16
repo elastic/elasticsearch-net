@@ -6,6 +6,7 @@
 		public abstract string ClusterFilter { get; protected set; }
 		public abstract string ElasticsearchVersion { get; protected set; }
 		public abstract bool ForceReseed { get; protected set; }
+		public abstract bool TestOnlyOne { get; protected set; }
 		public abstract TestMode Mode { get; protected set; }
 		public RandomConfiguration Random { get; protected set; }
 

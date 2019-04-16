@@ -177,7 +177,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 
-		protected override PutMappingRequest<Project> Initializer => new PutMappingRequest<Project>(CallIsolatedValue, Type<Project>())
+		protected override PutMappingRequest<Project> Initializer => new PutMappingRequest<Project>(CallIsolatedValue)
 		{
 			Properties = new Properties<Project>
 			{
@@ -287,7 +287,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 			}
 		};
 
-		protected override string UrlPath => $"/{CallIsolatedValue}/doc/_mapping";
+		protected override string UrlPath => $"/{CallIsolatedValue}/_mapping";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.Map(f),

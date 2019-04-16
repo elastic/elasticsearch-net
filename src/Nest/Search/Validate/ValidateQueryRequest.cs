@@ -1,30 +1,28 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
+	[MapsApi("indices.validate_query.json")]
 	public partial interface IValidateQueryRequest
 	{
-		[JsonProperty("query")]
+		[DataMember(Name = "query")]
 		QueryContainer Query { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IValidateQueryRequest<T> : IValidateQueryRequest
-		where T : class { }
+	[InterfaceDataContract]
+	public partial interface IValidateQueryRequest<T> where T : class { }
 
 	public partial class ValidateQueryRequest
 	{
 		public QueryContainer Query { get; set; }
 	}
 
-	public partial class ValidateQueryRequest<T>
-		where T : class
+	public partial class ValidateQueryRequest<T> where T : class
 	{
-		public QueryContainer Query { get; set; }
 	}
 
-	[DescriptorFor("IndicesValidateQuery")]
 	public partial class ValidateQueryDescriptor<T> where T : class
 	{
 		QueryContainer IValidateQueryRequest.Query { get; set; }

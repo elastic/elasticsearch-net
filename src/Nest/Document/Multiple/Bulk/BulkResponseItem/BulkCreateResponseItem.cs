@@ -1,11 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(BulkResponseItemJsonConverter))]
+	[DataContract]
 	public class BulkCreateResponseItem : BulkResponseItemBase
 	{
-		public override string Operation { get; internal set; }
+		public override string Operation { get; } = "create";
 	}
 }

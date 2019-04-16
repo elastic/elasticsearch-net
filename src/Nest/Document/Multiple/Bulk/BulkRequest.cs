@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(BulkRequestJsonConverter))]
+	[JsonFormatter(typeof(BulkRequestFormatter))]
 	public partial interface IBulkRequest
 	{
-		[JsonIgnore]
+		[IgnoreDataMember]
 		IList<IBulkOperation> Operations { get; set; }
 	}
 

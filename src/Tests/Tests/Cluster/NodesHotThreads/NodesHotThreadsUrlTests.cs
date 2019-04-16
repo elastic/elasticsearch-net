@@ -10,14 +10,14 @@ namespace Tests.Cluster.NodesHotThreads
 	{
 		[U] public override async Task Urls()
 		{
-			await GET("/_cluster/nodes/hotthreads")
+			await GET("/_nodes/hot_threads")
 					.Fluent(c => c.NodesHotThreads())
 					.Request(c => c.NodesHotThreads(new NodesHotThreadsRequest()))
 					.FluentAsync(c => c.NodesHotThreadsAsync())
 					.RequestAsync(c => c.NodesHotThreadsAsync(new NodesHotThreadsRequest()))
 				;
 
-			await GET("/_cluster/nodes/foo/hotthreads")
+			await GET("/_nodes/foo/hot_threads")
 					.Fluent(c => c.NodesHotThreads(n => n.NodeId("foo")))
 					.Request(c => c.NodesHotThreads(new NodesHotThreadsRequest("foo")))
 					.FluentAsync(c => c.NodesHotThreadsAsync(n => n.NodeId("foo")))

@@ -22,7 +22,6 @@ namespace Tests.Document.Multiple.ReindexOnServer
 				dest = new
 				{
 					index = $"{CallIsolatedValue}-clone",
-					type = "test"
 				},
 				source = new
 				{
@@ -33,7 +32,6 @@ namespace Tests.Document.Multiple.ReindexOnServer
 						password = "changeme"
 					},
 					index = CallIsolatedValue,
-					type = new[] { "test" },
 					size = 100
 				}
 			};
@@ -42,12 +40,10 @@ namespace Tests.Document.Multiple.ReindexOnServer
 			.Source(s => s
 				.Remote(r => r.Host(_host).Username("user").Password("changeme"))
 				.Index(CallIsolatedValue)
-				.Type("test")
 				.Size(100)
 			)
 			.Destination(s => s
 				.Index(CallIsolatedValue + "-clone")
-				.Type("test")
 			);
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
@@ -63,13 +59,11 @@ namespace Tests.Document.Multiple.ReindexOnServer
 					Password = "changeme"
 				},
 				Index = CallIsolatedValue,
-				Type = "test",
 				Size = 100
 			},
 			Destination = new ReindexDestination
 			{
 				Index = CallIsolatedValue + "-clone",
-				Type = "test",
 			}
 		};
 

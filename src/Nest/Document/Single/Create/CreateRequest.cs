@@ -3,7 +3,8 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[ContractJsonConverter(typeof(CreateJsonConverter))]
+	[MapsApi("create.json")]
+	[JsonFormatter(typeof(CreateRequestFormatter<>))]
 	public partial interface ICreateRequest<TDocument> : IProxyRequest where TDocument : class
 	{
 		TDocument Document { get; set; }
@@ -17,11 +18,8 @@ namespace Nest
 			sourceSerializer.Serialize(Document, stream, formatting);
 
 		partial void DocumentFromPath(TDocument document) => Document = document;
-
-		private TDocument AutoRouteDocument() => Document;
 	}
 
-	[DescriptorFor("Create")]
 	public partial class CreateDescriptor<TDocument> where TDocument : class
 	{
 		TDocument ICreateRequest<TDocument>.Document { get; set; }
@@ -30,8 +28,6 @@ namespace Nest
 			sourceSerializer.Serialize(Self.Document, stream, formatting);
 
 		partial void DocumentFromPath(TDocument document) => Assign(a => a.Document = document);
-
-		private TDocument AutoRouteDocument() => Self.Document;
 
 		/// <summary>
 		/// Sets the id for the document. Overrides the id that may be inferred from the document.

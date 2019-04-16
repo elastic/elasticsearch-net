@@ -162,6 +162,7 @@ namespace Tests.XPack.MachineLearning
 		protected IPutDatafeedResponse PutDatafeed(IElasticClient client, string jobId)
 		{
 			var putDataFeedResponse = client.PutDatafeed<Metric>(jobId + "-datafeed", f => f
+				.Indices(typeof(Metric)) // TODO: This should be default inferred from T on method
 				.JobId(jobId)
 				.Query(q => q.MatchAll()));
 
@@ -215,7 +216,6 @@ namespace Tests.XPack.MachineLearning
 					quantile_state = "quantiles-2"
 				}
 			}, i => i.Id(jobId + "_model_snapshot_" + snapshotId)
-				.Type("doc")
 				.Index(".ml-anomalies-" + jobId)
 				.Refresh(Refresh.WaitFor));
 
@@ -227,7 +227,6 @@ namespace Tests.XPack.MachineLearning
 				timestamp = timestamp,
 				bucket_span = 1,
 			}, i => i.Id(jobId + "_" + unixTimestamp + "_1")
-				.Type("doc")
 				.Index(".ml-anomalies-" + jobId)
 				.Refresh(Refresh.WaitFor));
 		}
@@ -240,7 +239,7 @@ namespace Tests.XPack.MachineLearning
 			record_score = 80.0,
 			bucket_span = 1,
 			is_interim = true
-		}, i => i.Type("doc").Index(".ml-anomalies-" + jobId).Refresh(Refresh.WaitFor));
+		}, i => i.Index(".ml-anomalies-" + jobId).Refresh(Refresh.WaitFor));
 
 		protected void IndexBucket(IElasticClient client, string jobId, DateTimeOffset timestamp) => client.Index<object>(new
 		{
@@ -250,13 +249,13 @@ namespace Tests.XPack.MachineLearning
 			anomaly_score = 90.0,
 			bucket_span = 1,
 			is_interim = true
-		}, i => i.Type("doc").Index(".ml-anomalies-" + jobId).Refresh(Refresh.WaitFor));
+		}, i => i.Index(".ml-anomalies-" + jobId).Refresh(Refresh.WaitFor));
 
 		protected void IndexCategory(IElasticClient client, string jobId) => client.Index<object>(new
 		{
 			job_id = jobId,
 			category_id = "1"
-		}, i => i.Type("doc").Index(".ml-anomalies-" + jobId).Refresh(Refresh.WaitFor));
+		}, i => i.Index(".ml-anomalies-" + jobId).Refresh(Refresh.WaitFor));
 
 		protected void IndexInfluencer(IElasticClient client, string jobId, DateTimeOffset timestamp) => client.Index<object>(new
 		{
@@ -267,6 +266,6 @@ namespace Tests.XPack.MachineLearning
 			influencer_score = 50,
 			result_type = "influencer",
 			bucket_span = 1
-		}, i => i.Type("doc").Index(".ml-anomalies-" + jobId).Refresh(Refresh.WaitFor));
+		}, i => i.Index(".ml-anomalies-" + jobId).Refresh(Refresh.WaitFor));
 	}
 }

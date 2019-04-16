@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class InnerHitsResult
 	{
-		[JsonProperty("hits")]
+		[DataMember(Name = "hits")]
 		public InnerHitsMetadata Hits { get; internal set; }
 
 		/// <summary>

@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary>
 	/// A Multi termvectors API request
 	/// </summary>
+	[MapsApi("mtermvectors.json")]
 	public partial interface IMultiTermVectorsRequest
 	{
 		/// <summary>
 		/// The documents for which to generate term vectors
 		/// </summary>
-		[JsonProperty("docs")]
+		[DataMember(Name = "docs")]
 		IEnumerable<IMultiTermVectorOperation> Documents { get; set; }
 
 		/// <summary>
@@ -21,7 +22,7 @@ namespace Nest
 		/// for which to generate term vectors. Must be used in
 		/// conjunction with <see cref="Index" /> and <see cref="Type" />
 		/// </summary>
-		[JsonProperty("ids")]
+		[DataMember(Name = "ids")]
 		IEnumerable<Id> Ids { get; set; }
 	}
 
@@ -36,7 +37,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="IMultiTermVectorsRequest" />
-	[DescriptorFor("Mtermvectors")]
 	public partial class MultiTermVectorsDescriptor
 	{
 		private List<IMultiTermVectorOperation> _operations;

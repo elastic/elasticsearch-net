@@ -1,12 +1,14 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ValidateDetectorRequestConverter))]
+	[MapsApi("ml.validate_detector.json")]
+	[JsonFormatter(typeof(ValidateDetectorRequestFormatter))]
 	public partial interface IValidateDetectorRequest
 	{
-		[JsonIgnore]
+		[IgnoreDataMember]
 		IDetector Detector { get; set; }
 	}
 
@@ -18,7 +20,6 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	[DescriptorFor("XpackMlValidateDetector")]
 	public partial class ValidateDetectorDescriptor<T> where T : class
 	{
 		IDetector IValidateDetectorRequest.Detector { get; set; }
@@ -126,25 +127,24 @@ namespace Nest
 			Assign(a => a.Detector = selector.InvokeOrDefault(new TimeDetectorDescriptor<T>(TimeFunction.TimeOfWeek)));
 	}
 
-	internal class ValidateDetectorRequestConverter : JsonConverter
+	internal class ValidateDetectorRequestFormatter : IJsonFormatter<IValidateDetectorRequest>
 	{
-		public override bool CanRead => false;
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public void Serialize(ref JsonWriter writer, IValidateDetectorRequest value, IJsonFormatterResolver formatterResolver)
 		{
-			var request = (IValidateDetectorRequest)value;
-			if (request == null)
+			if (value == null)
 			{
 				writer.WriteNull();
 				return;
 			}
 
-			serializer.Serialize(writer, request.Detector);
+			var detectorFormatter = formatterResolver.GetFormatter<IDetector>();
+			detectorFormatter.Serialize(ref writer, value.Detector, formatterResolver);
 		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
-			throw new NotSupportedException();
-
-		public override bool CanConvert(Type objectType) => true;
+		public IValidateDetectorRequest Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			var formatter = formatterResolver.GetFormatter<ValidateDetectorRequest>();
+			return formatter.Deserialize(ref reader, formatterResolver);
+		}
 	}
 }

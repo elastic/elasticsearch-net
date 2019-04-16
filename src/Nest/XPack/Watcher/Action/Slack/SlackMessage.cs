@@ -1,29 +1,30 @@
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SlackMessage>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(SlackMessage))]
 	public interface ISlackMessage
 	{
-		[JsonProperty("attachments")]
+		[DataMember(Name ="attachments")]
 		IEnumerable<ISlackAttachment> Attachments { get; set; }
 
-		[JsonProperty("dynamic_attachments")]
+		[DataMember(Name ="dynamic_attachments")]
 		ISlackDynamicAttachment DynamicAttachments { get; set; }
 
-		[JsonProperty("from")]
+		[DataMember(Name ="from")]
 		string From { get; set; }
 
-		[JsonProperty("icon")]
+		[DataMember(Name ="icon")]
 		string Icon { get; set; }
 
-		[JsonProperty("text")]
+		[DataMember(Name ="text")]
 		string Text { get; set; }
 
-		[JsonProperty("to")]
+		[DataMember(Name ="to")]
 		IEnumerable<string> To { get; set; }
 	}
 

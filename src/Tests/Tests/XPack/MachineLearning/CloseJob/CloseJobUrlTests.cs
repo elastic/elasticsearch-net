@@ -8,7 +8,7 @@ namespace Tests.XPack.MachineLearning.CloseJob
 {
 	public class CloseJobUrlTests : UrlTestsBase
 	{
-		[U] public override async Task Urls() => await POST("/_xpack/ml/anomaly_detectors/job_id/_close")
+		[U] public override async Task Urls() => await POST("/_ml/anomaly_detectors/job_id/_close")
 			.Fluent(c => c.CloseJob("job_id"))
 			.Request(c => c.CloseJob(new CloseJobRequest("job_id")))
 			.FluentAsync(c => c.CloseJobAsync("job_id"))

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -12,7 +13,8 @@ namespace Nest
 		/// <summary>
 		/// Katakana words shorter than the minimum length are not stemmed (default is 4).
 		/// </summary>
-		[JsonProperty("minimum_length")]
+		[DataMember(Name ="minimum_length")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? MinimumLength { get; set; }
 	}
 

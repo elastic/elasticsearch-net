@@ -72,7 +72,6 @@ namespace Tests.Document.Multiple.Reindex
 				.ScrollAll("1m", 2, s => s
 					.Search(ss => ss
 						.Index(IndexName)
-						.AllTypes()
 					)
 					.MaxDegreeOfParallelism(4)
 				)
@@ -211,7 +210,7 @@ namespace Tests.Document.Multiple.Reindex
 			var originalIndexCount = _client.Count<Project>(c => c.Index(IndexName));
 
 			// new index should only contain project document types
-			var newIndexCount = _client.Count<Project>(c => c.Index(NewSingleTypeIndexName).AllTypes());
+			var newIndexCount = _client.Count<Project>(c => c.Index(NewSingleTypeIndexName));
 
 			originalIndexCount.Count.Should().BeGreaterThan(0).And.Be(newIndexCount.Count);
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Nest
 {
+	[MapsApi("ingest.put_pipeline.json")]
 	public partial interface IPutPipelineRequest : IPipeline { }
 
 	public partial class PutPipelineRequest
@@ -12,7 +13,6 @@ namespace Nest
 		public IEnumerable<IProcessor> Processors { get; set; }
 	}
 
-	[DescriptorFor("IngestPutPipeline")]
 	public partial class PutPipelineDescriptor
 	{
 		string IPipeline.Description { get; set; }

@@ -1,12 +1,13 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
+
 
 namespace Nest
 {
 	/// <summary>
 	/// Language types used for language analyzers
 	/// </summary>
-	[JsonConverter(typeof(StringEnumConverter))]
+	[StringEnum]
 	public enum Language
 	{
 		Arabic,

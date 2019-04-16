@@ -1,9 +1,9 @@
 ﻿namespace Nest
 {
+	[MapsApi("watcher.get_watch.json")]
 	public partial interface IGetWatchRequest { }
 
 	public partial class GetWatchRequest { }
 
-	[DescriptorFor("XpackWatcherGetWatch")]
 	public partial class GetWatchDescriptor { }
 }

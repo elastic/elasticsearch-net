@@ -1,8 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
+	[InterfaceDataContract]
 	public interface IStartWatcherResponse : IAcknowledgedResponse { }
 
 	public class StartWatcherResponse : AcknowledgedResponseBase, IStartWatcherResponse { }

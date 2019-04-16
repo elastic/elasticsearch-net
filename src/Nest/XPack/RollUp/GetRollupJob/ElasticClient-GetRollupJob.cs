@@ -38,7 +38,7 @@ namespace Nest
 		public IGetRollupJobResponse GetRollupJob(IGetRollupJobRequest request) =>
 			Dispatcher.Dispatch<IGetRollupJobRequest, GetRollupJobRequestParameters, GetRollupJobResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackRollupGetJobsDispatch<GetRollupJobResponse>(p)
+				(p, d) => LowLevelDispatch.RollupGetJobsDispatch<GetRollupJobResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -54,7 +54,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IGetRollupJobRequest, GetRollupJobRequestParameters, GetRollupJobResponse, IGetRollupJobResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackRollupGetJobsDispatchAsync<GetRollupJobResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.RollupGetJobsDispatchAsync<GetRollupJobResponse>(p, c)
 			);
 	}
 }

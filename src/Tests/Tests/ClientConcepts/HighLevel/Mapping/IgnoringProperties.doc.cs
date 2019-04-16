@@ -5,8 +5,9 @@ using System.Text;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Tests.Framework;
+using Newtonsoft.Json;
 using static Tests.Core.Serialization.SerializationTestHelper;
 
 namespace Tests.ClientConcepts.HighLevel.Mapping
@@ -32,7 +33,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 	*/
 	public class IgnoringProperties
 	{
-		[ElasticsearchType(Name = "company")]
+		[ElasticsearchType(RelationName = "company")]
 		public class CompanyWithAttributesAndPropertiesToIgnore
 		{
 			public string Name { get; set; }
@@ -51,7 +52,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		{
 			/** All of the properties except `Name` have been ignored in the mapping */
 			var connectionSettings = new ConnectionSettings(new InMemoryConnection()) // <1> we're using an in-memory connection, but in your application, you'll want to use an `IConnection` that actually sends a request.
-				.DisableDirectStreaming() // <2> we disable direct streaming here to capture the request and response bytes. In your application however, you'll like not want to do this in production.
+				.DisableDirectStreaming() // <2> we disable direct streaming here to capture the request and response bytes. In a production application, you would likely not call this as it adds overhead to each call.
 				.DefaultMappingFor<CompanyWithAttributesAndPropertiesToIgnore>(m => m
 					.Ignore(p => p.AnotherPropertyToIgnore)
 				);
@@ -59,10 +60,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			var client = new ElasticClient(connectionSettings);
 
 			var createIndexResponse = client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<CompanyWithAttributesAndPropertiesToIgnore>(m => m
-						.AutoMap()
-					)
+				.Map<CompanyWithAttributesAndPropertiesToIgnore>(m => m
+					.AutoMap()
 				)
 			);
 
@@ -74,20 +73,17 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					company = new
+					properties = new
 					{
-						properties = new
+						name = new
 						{
-							name = new
+							type = "text",
+							fields = new
 							{
-								type = "text",
-								fields = new
+								keyword = new
 								{
-									keyword = new
-									{
-										type = "keyword",
-										ignore_above = 256
-									}
+									type = "keyword",
+									ignore_above = 256
 								}
 							}
 						}
@@ -127,10 +123,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			var client = new ElasticClient(connectionSettings);
 
 			var createIndexResponse = client.CreateIndex("myindex", c => c
-				.Mappings(ms => ms
-					.Map<Child>(m => m
-						.AutoMap()
-					)
+				.Map<Child>(m => m
+					.AutoMap()
 				)
 			);
 
@@ -140,23 +134,20 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					child = new
+					properties = new
 					{
-						properties = new
+						id = new
 						{
-							id = new
-							{
-								type = "integer"
+							type = "integer"
+						},
+						desc = new {
+							fields = new {
+								keyword = new {
+									ignore_above = 256,
+									type = "keyword"
+								}
 							},
-							desc = new {
-								fields = new {
-									keyword = new {
-										ignore_above = 256,
-										type = "keyword"
-									}
-								},
-								type = "text"
-							}
+							type = "text"
 						}
 					}
 				}

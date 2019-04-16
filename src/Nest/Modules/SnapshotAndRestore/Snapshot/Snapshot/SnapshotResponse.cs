@@ -1,29 +1,29 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface ISnapshotResponse : IResponse
 	{
-		[JsonProperty("accepted")]
+		[DataMember(Name ="accepted")]
 		bool Accepted { get; }
 
-		[JsonProperty("snapshot")]
+		[DataMember(Name ="snapshot")]
 		Snapshot Snapshot { get; set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class SnapshotResponse : ResponseBase, ISnapshotResponse
 	{
 		private bool _accepted = false;
 
-		[JsonProperty("accepted")]
+		[DataMember(Name ="accepted")]
 		public bool Accepted
 		{
 			get => _accepted ? _accepted : Snapshot != null;
 			internal set => _accepted = value;
 		}
 
-		[JsonProperty("snapshot")]
+		[DataMember(Name ="snapshot")]
 		public Snapshot Snapshot { get; set; }
 	}
 }

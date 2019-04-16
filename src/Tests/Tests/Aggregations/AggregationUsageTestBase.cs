@@ -33,7 +33,6 @@ namespace Tests.Aggregations
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Size(0)
 			.Index(AgainstIndex)
-			.Type<Project>()
 			.TypedKeys(TestClient.Configuration.Random.TypedKeys)
 			.Query(q => QueryScope)
 			.Aggregations(FluentAggs);
@@ -42,7 +41,7 @@ namespace Tests.Aggregations
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>(AgainstIndex, Type<Project>())
+			new SearchRequest<Project>(AgainstIndex)
 			{
 				Query = QueryScope,
 				Size = 0,
@@ -52,10 +51,10 @@ namespace Tests.Aggregations
 
 		protected abstract AggregationDictionary InitializerAggs { get; }
 
-		protected virtual QueryContainer QueryScope { get; }
+		protected virtual QueryContainer QueryScope { get; } = new TermQuery { Field = "type", Value = Project.TypeName};
 
-		protected virtual object QueryScopeJson { get; }
-		protected override string UrlPath => $"/project/doc/_search";
+		protected virtual object QueryScopeJson { get; } = new { term = new { type = new { value = Project.TypeName } } };
+		protected override string UrlPath => $"/project/_search";
 
 		// https://youtrack.jetbrains.com/issue/RIDER-19912
 		[U] protected override Task HitsTheCorrectUrl() => base.HitsTheCorrectUrl();
@@ -85,7 +84,7 @@ namespace Tests.Aggregations
 		protected ProjectsOnlyAggregationUsageTestBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override Nest.Indices AgainstIndex => DefaultSeeder.ProjectsAliasFilter;
-		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/doc/_search";
+		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/_search";
 
 		// https://youtrack.jetbrains.com/issue/RIDER-19912
 		[U] protected override Task HitsTheCorrectUrl() => base.HitsTheCorrectUrl();

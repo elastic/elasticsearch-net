@@ -1,65 +1,79 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class CatThreadPoolRecord : ICatRecord
 	{
-		[JsonProperty("active")]
+		[DataMember(Name ="active")]
+		[JsonFormatter(typeof(StringIntFormatter))]
 		public int Active { get; set; }
 
-		[JsonProperty("completed")]
-		public long Completed { get; set; }
+		[DataMember(Name ="completed")]
+		[JsonFormatter(typeof(NullableStringLongFormatter))]
+		public long? Completed { get; set; }
 
-		[JsonProperty("ephemeral_node_id")]
+		[DataMember(Name ="ephemeral_node_id")]
 		public string EphemeralNodeId { get; set; }
 
-		[JsonProperty("host")]
+		[DataMember(Name ="host")]
 		public string Host { get; set; }
 
-		[JsonProperty("ip")]
+		[DataMember(Name ="ip")]
 		public string Ip { get; set; }
 
-		[JsonProperty("keep_alive")]
+		[DataMember(Name ="keep_alive")]
 		public Time KeepAlive { get; set; }
 
-		[JsonProperty("largest")]
-		public int Largest { get; set; }
+		[DataMember(Name ="largest")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
+		public int? Largest { get; set; }
 
-		[JsonProperty("max")]
-		public int Maximum { get; set; }
+		//TODO: This is now often reported back as null since 7.x (investigate)
+		[DataMember(Name ="max")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
+		public int? Maximum { get; set; }
 
-		[JsonProperty("min")]
-		public int Minimum { get; set; }
+		//TODO: this appears to no longer be reported
+		[DataMember(Name ="min")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
+		public int? Minimum { get; set; }
 
-		[JsonProperty("name")]
+		[DataMember(Name ="name")]
 		public string Name { get; set; }
 
-		[JsonProperty("node_id")]
+		[DataMember(Name ="node_id")]
 		public string NodeId { get; set; }
 
-		[JsonProperty("node_name")]
+		[DataMember(Name ="node_name")]
 		public string NodeName { get; set; }
 
-		[JsonProperty("port")]
-		public int Port { get; set; }
+		[DataMember(Name ="port")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
+		public int? Port { get; set; }
 
-		[JsonProperty("pid")]
-		public int ProcessId { get; set; }
+		[DataMember(Name ="pid")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
+		public int? ProcessId { get; set; }
 
-		[JsonProperty("queue")]
+		[DataMember(Name ="queue")]
+		[JsonFormatter(typeof(StringIntFormatter))]
 		public int Queue { get; set; }
 
-		[JsonProperty("queue_size")]
+		[DataMember(Name ="queue_size")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		public int? QueueSize { get; set; }
 
-		[JsonProperty("rejected")]
+		[DataMember(Name ="rejected")]
+		[JsonFormatter(typeof(StringLongFormatter))]
 		public long Rejected { get; set; }
 
-		[JsonProperty("size")]
-		public int Size { get; set; }
+		[DataMember(Name ="size")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
+		public int? Size { get; set; }
 
-		[JsonProperty("type")]
+		[DataMember(Name ="type")]
 		public string Type { get; set; }
 	}
 }

@@ -1,10 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
+	[MapsApi("security.invalidate_token.json")]
 	public partial interface IInvalidateUserAccessTokenRequest
 	{
-		[JsonProperty("token")]
+		[DataMember(Name ="token")]
 		string Token { get; set; }
 	}
 
@@ -12,11 +13,10 @@ namespace Nest
 	{
 		public InvalidateUserAccessTokenRequest(string token) => ((IInvalidateUserAccessTokenRequest)this).Token = token;
 
-		[JsonProperty("token")]
+		[DataMember(Name ="token")]
 		string IInvalidateUserAccessTokenRequest.Token { get; set; }
 	}
 
-	[DescriptorFor("XpackSecurityInvalidateToken")]
 	public partial class InvalidateUserAccessTokenDescriptor
 	{
 		public InvalidateUserAccessTokenDescriptor(string token) => ((IInvalidateUserAccessTokenRequest)this).Token = token;

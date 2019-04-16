@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -11,20 +12,21 @@ namespace Nest
 	/// which needs to look at the keyword as a whole.
 	/// <para>Elasticsearch does not ship with built-in normalizers so far, so the only way to create one is through composing a custom one</para>
 	/// </summary>
+	[InterfaceDataContract]
 	public interface ICustomNormalizer : INormalizer
 	{
 		/// <summary>
 		/// Char filters to normalize the keyword
 		/// </summary>
-		[JsonProperty("char_filter")]
-		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<string>))]
+		[DataMember(Name ="char_filter")]
+		[JsonFormatter(typeof(SingleOrEnumerableFormatter<string>))]
 		IEnumerable<string> CharFilter { get; set; }
 
 		/// <summary>
 		/// An optional list of logical / registered name of token filters.
 		/// </summary>
-		[JsonProperty("filter")]
-		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<string>))]
+		[DataMember(Name ="filter")]
+		[JsonFormatter(typeof(SingleOrEnumerableFormatter<string>))]
 		IEnumerable<string> Filter { get; set; }
 	}
 

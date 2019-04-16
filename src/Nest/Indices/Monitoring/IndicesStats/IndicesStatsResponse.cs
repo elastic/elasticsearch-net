@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -10,17 +11,17 @@ namespace Nest
 		IndicesStats Stats { get; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class IndicesStatsResponse : ResponseBase, IIndicesStatsResponse
 	{
-		[JsonProperty("indices")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, IndicesStats>))]
+		[DataMember(Name ="indices")]
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, IndicesStats>))]
 		public IReadOnlyDictionary<string, IndicesStats> Indices { get; internal set; } = EmptyReadOnly<string, IndicesStats>.Dictionary;
 
-		[JsonProperty("_shards")]
+		[DataMember(Name ="_shards")]
 		public ShardStatistics Shards { get; internal set; }
 
-		[JsonProperty("_all")]
+		[DataMember(Name ="_all")]
 		public IndicesStats Stats { get; internal set; }
 	}
 }

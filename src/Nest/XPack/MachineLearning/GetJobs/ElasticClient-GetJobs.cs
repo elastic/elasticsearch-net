@@ -34,7 +34,7 @@ namespace Nest
 		public IGetJobsResponse GetJobs(IGetJobsRequest request) =>
 			Dispatcher.Dispatch<IGetJobsRequest, GetJobsRequestParameters, GetJobsResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackMlGetJobsDispatch<GetJobsResponse>(p)
+				(p, d) => LowLevelDispatch.MlGetJobsDispatch<GetJobsResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -48,7 +48,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IGetJobsRequest, GetJobsRequestParameters, GetJobsResponse, IGetJobsResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackMlGetJobsDispatchAsync<GetJobsResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.MlGetJobsDispatchAsync<GetJobsResponse>(p, c)
 			);
 	}
 }

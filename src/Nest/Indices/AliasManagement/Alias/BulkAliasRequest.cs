@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
+	[MapsApi("indices.update_aliases.json")]
 	public partial interface IBulkAliasRequest
 	{
-		[JsonProperty("actions")]
+		[DataMember(Name ="actions")]
 		IList<IAliasAction> Actions { get; set; }
 	}
 
@@ -15,8 +16,6 @@ namespace Nest
 		public IList<IAliasAction> Actions { get; set; }
 	}
 
-
-	[DescriptorFor("IndicesUpdateAliases")]
 	public partial class BulkAliasDescriptor
 	{
 		IList<IAliasAction> IBulkAliasRequest.Actions { get; set; } = new List<IAliasAction>();

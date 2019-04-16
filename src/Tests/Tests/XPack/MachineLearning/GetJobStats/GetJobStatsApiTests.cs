@@ -21,7 +21,7 @@ namespace Tests.XPack.MachineLearning.GetJobStats
 		protected override Func<GetJobStatsDescriptor, IGetJobStatsRequest> Fluent => f => f;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override GetJobStatsRequest Initializer => new GetJobStatsRequest();
-		protected override string UrlPath => $"/_xpack/ml/anomaly_detectors/_stats";
+		protected override string UrlPath => $"/_ml/anomaly_detectors/_stats";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -62,7 +62,7 @@ namespace Tests.XPack.MachineLearning.GetJobStats
 			firstJob.ModelSizeStats.BucketAllocationFailuresCount.Should().Be(0);
 			firstJob.ModelSizeStats.LogTime.Should().BeAfter(new DateTime(2017, 9, 1));
 			firstJob.ModelSizeStats.MemoryStatus.Should().Be(MemoryStatus.Ok);
-			firstJob.ModelSizeStats.ModelBytes.Should().Be(0);
+			firstJob.ModelSizeStats.ModelBytes.Should().BeGreaterOrEqualTo(0);
 			firstJob.ModelSizeStats.ResultType.Should().Be("model_size_stats");
 			firstJob.ModelSizeStats.TotalByFieldCount.Should().Be(0);
 			firstJob.ModelSizeStats.TotalOverFieldCount.Should().Be(0);
@@ -81,7 +81,7 @@ namespace Tests.XPack.MachineLearning.GetJobStats
 		protected override Func<GetJobStatsDescriptor, IGetJobStatsRequest> Fluent => f => f.JobId(CallIsolatedValue);
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override GetJobStatsRequest Initializer => new GetJobStatsRequest(CallIsolatedValue);
-		protected override string UrlPath => $"/_xpack/ml/anomaly_detectors/{CallIsolatedValue}/_stats";
+		protected override string UrlPath => $"/_ml/anomaly_detectors/{CallIsolatedValue}/_stats";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

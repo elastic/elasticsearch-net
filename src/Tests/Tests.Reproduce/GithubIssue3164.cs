@@ -5,6 +5,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Nest.JsonNetSerializer;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace Tests.Reproduce
@@ -40,7 +41,7 @@ namespace Tests.Reproduce
 
 			var client = new ElasticClient(connectionSettings);
 
-			var getResponse = client.Get<Dates>(1, g => g.Index("dates").Type("_doc"));
+			var getResponse = client.Get<Dates>(1, g => g.Index("dates"));
 			var dates = getResponse.Source;
 
 			dates.DateTimeLocal.Kind.Should().Be(DateTimeKind.Local);

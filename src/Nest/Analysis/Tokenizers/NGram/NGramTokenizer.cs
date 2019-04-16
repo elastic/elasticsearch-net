@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -11,20 +12,22 @@ namespace Nest
 		/// <summary>
 		/// Maximum size in codepoints of a single n-gram, defaults to 2.
 		/// </summary>
-		[JsonProperty("max_gram")]
+		[DataMember(Name ="max_gram")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? MaxGram { get; set; }
 
 		/// <summary>
 		/// Minimum size in codepoints of a single n-gram, defaults to 1.
 		/// </summary>
-		[JsonProperty("min_gram")]
+		[DataMember(Name ="min_gram")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? MinGram { get; set; }
 
 		/// <summary>
 		/// Characters classes to keep in the tokens, Elasticsearch will
 		/// split on characters that don’t belong to any of these classes.
 		/// </summary>
-		[JsonProperty("token_chars")]
+		[DataMember(Name ="token_chars")]
 		IEnumerable<TokenChar> TokenChars { get; set; }
 	}
 

@@ -1,18 +1,19 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<TimeOfWeek>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(TimeOfWeek))]
 	public interface ITimeOfWeek
 	{
-		[JsonProperty("at")]
-		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<string>))]
+		[DataMember(Name ="at")]
+		[JsonFormatter(typeof(SingleOrEnumerableFormatter<string>))]
 		IEnumerable<string> At { get; set; }
 
-		[JsonProperty("on")]
-		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<Day>))]
+		[DataMember(Name ="on")]
+		[JsonFormatter(typeof(SingleOrEnumerableFormatter<Day>))]
 		IEnumerable<Day> On { get; set; }
 	}
 

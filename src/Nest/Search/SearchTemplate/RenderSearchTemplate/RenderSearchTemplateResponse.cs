@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -7,10 +7,10 @@ namespace Nest
 		ILazyDocument TemplateOutput { get; set; }
 	}
 
-	[JsonObject]
+	[DataContract]
 	public class RenderSearchTemplateResponse : ResponseBase, IRenderSearchTemplateResponse
 	{
-		[JsonProperty("template_output")]
+		[DataMember(Name ="template_output")]
 		public ILazyDocument TemplateOutput { get; set; }
 	}
 }

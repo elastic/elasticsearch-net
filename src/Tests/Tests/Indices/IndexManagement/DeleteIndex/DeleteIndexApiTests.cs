@@ -56,7 +56,7 @@ namespace Tests.Indices.IndexManagement.DeleteIndex
 			response.Acknowledged.Should().BeFalse();
 			response.ServerError.Should().NotBeNull();
 			response.ServerError.Status.Should().Be(404);
-			response.ServerError.Error.Reason.Should().Be("no such index");
+			response.ServerError.Error.Reason.Should().StartWith("no such index");
 		}
 	}
 

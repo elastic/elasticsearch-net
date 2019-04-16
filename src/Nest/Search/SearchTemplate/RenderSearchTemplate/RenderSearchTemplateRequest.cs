@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	public partial interface IRenderSearchTemplateRequest
 	{
-		[JsonProperty("file")]
+		[DataMember(Name = "file")]
 		string File { get; set; }
 
 		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
-		[JsonIgnore]
+		[IgnoreDataMember]
 		string Inline { get; set; }
 
-		[JsonProperty("params")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
+		[DataMember(Name = "params")]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysBaseFormatter<Dictionary<string, object>, string, object>))]
 		Dictionary<string, object> Params { get; set; }
 
-		[JsonProperty("source")]
+		[DataMember(Name = "source")]
 		string Source { get; set; }
 	}
 

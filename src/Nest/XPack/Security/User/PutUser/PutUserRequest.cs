@@ -1,24 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
+	[MapsApi("security.put_user.json")]
 	public partial interface IPutUserRequest
 	{
-		[JsonProperty("email")]
+		[DataMember(Name ="email")]
 		string Email { get; set; }
 
-		[JsonProperty("full_name")]
+		[DataMember(Name ="full_name")]
 		string FullName { get; set; }
 
-		[JsonProperty("metadata")]
+		[DataMember(Name ="metadata")]
 		IDictionary<string, object> Metadata { get; set; }
 
-		[JsonProperty("password")]
+		[DataMember(Name ="password")]
 		string Password { get; set; }
 
-		[JsonProperty("roles")]
+		[DataMember(Name ="roles")]
 		IEnumerable<string> Roles { get; set; }
 	}
 
@@ -31,7 +32,6 @@ namespace Nest
 		public IEnumerable<string> Roles { get; set; }
 	}
 
-	[DescriptorFor("XpackSecurityPutUser")]
 	public partial class PutUserDescriptor
 	{
 		string IPutUserRequest.Email { get; set; }

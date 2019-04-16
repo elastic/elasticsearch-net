@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
@@ -13,61 +12,71 @@ namespace Nest
 
 	public abstract class DictionaryResponseBase<TKey, TValue> : ResponseBase, IDictionaryResponse<TKey, TValue>
 	{
+		[IgnoreDataMember]
 		protected IDictionaryResponse<TKey, TValue> Self => this;
 
 		IReadOnlyDictionary<TKey, TValue> IDictionaryResponse<TKey, TValue>.BackingDictionary { get; set; } =
 			EmptyReadOnly<TKey, TValue>.Dictionary;
 	}
 
-	internal class DictionaryResponseJsonConverterHelpers
+	internal class DictionaryResponseFormatterHelpers
 	{
-		public static JObject ReadServerErrorFirst(JsonReader reader, out Error error, out int? statusCode)
+		internal static readonly AutomataDictionary ServerErrorFields = new AutomataDictionary
 		{
-			var j = JObject.Load(reader);
-			var errorProperty = j.Property("error");
-			error = null;
-			if (errorProperty?.Value?.Type == JTokenType.String)
-			{
-				var reason = errorProperty.Value.Value<string>();
-				error = new Error { Reason = reason };
-				errorProperty.Remove();
-			}
-			else if (errorProperty?.Value?.Type == JTokenType.Object && ((JObject)errorProperty.Value)["reason"] != null)
-			{
-				error = errorProperty.Value.ToObject<Error>();
-				errorProperty.Remove();
-			}
-			var statusProperty = j.Property("status");
-			statusCode = null;
-			if (statusProperty?.Value?.Type == JTokenType.Integer)
-			{
-				statusCode = statusProperty.Value.Value<int>();
-				statusProperty.Remove();
-			}
-			return j;
-		}
+			{ "error", 0 },
+			{ "status", 1 }
+		};
 	}
 
-	internal class DictionaryResponseJsonConverter<TResponse, TKey, TValue> : JsonConverter
+	internal class DictionaryResponseFormatter<TResponse, TKey, TValue> : IJsonFormatter<TResponse>
 		where TResponse : ResponseBase, IDictionaryResponse<TKey, TValue>, new()
 	{
-		public override bool CanRead => true;
-		public override bool CanWrite => false;
-
-		public override bool CanConvert(Type objectType) => true;
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public TResponse Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			var j = DictionaryResponseJsonConverterHelpers.ReadServerErrorFirst(reader, out var error, out var statusCode);
 			var response = new TResponse();
-			var dict = new Dictionary<TKey, TValue>();
-			serializer.Populate(j.CreateReader(), dict);
-			response.BackingDictionary = dict;
-			response.Error = error;
-			response.StatusCode = statusCode;
+			var keyFormatter = formatterResolver.GetFormatter<TKey>();
+			var valueFormatter = formatterResolver.GetFormatter<TValue>();
+			var dictionary = new Dictionary<TKey, TValue>();
+			var count = 0;
+
+			while (reader.ReadIsInObject(ref count))
+			{
+				var property = reader.ReadPropertyNameSegmentRaw();
+				if (DictionaryResponseFormatterHelpers.ServerErrorFields.TryGetValue(property, out var errorValue))
+				{
+					switch (errorValue)
+					{
+						case 0:
+							if (reader.GetCurrentJsonToken() == JsonToken.String)
+								response.Error = new Error { Reason = reader.ReadString() };
+							else
+							{
+								var formatter = formatterResolver.GetFormatter<Error>();
+								response.Error = formatter.Deserialize(ref reader, formatterResolver);
+							}
+							break;
+						case 1:
+							if (reader.GetCurrentJsonToken() == JsonToken.Number)
+								response.StatusCode = reader.ReadInt32();
+							else
+								reader.ReadNextBlock();
+							break;
+					}
+				}
+				else
+				{
+					// include opening string quote in reader (offset - 1)
+					var propertyReader = new JsonReader(property.Array, property.Offset - 1);
+					var key = keyFormatter.Deserialize(ref propertyReader, formatterResolver);
+					var value = valueFormatter.Deserialize(ref reader, formatterResolver);
+					dictionary.Add(key, value);
+				}
+			}
+
+			response.BackingDictionary = dictionary;
 			return response;
 		}
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }
+		public void Serialize(ref JsonWriter writer, TResponse value, IJsonFormatterResolver formatterResolver) => throw new NotSupportedException();
 	}
 }

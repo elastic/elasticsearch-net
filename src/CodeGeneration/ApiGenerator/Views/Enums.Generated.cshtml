@@ -61,7 +61,7 @@ namespace Elasticsearch.Net
 {
 	var isFlag = IsFlag(e.Name);
 	<text>
-	@(isFlag ? "[Flags]" : string.Empty)public enum @e.Name
+	@(isFlag ? "[Flags, StringEnum]" : "[StringEnum]")public enum @e.Name
 	{
 		@Raw(string.Join(",\r\n\t\t", e.Options.OrderBy(s => s == "_all" ? 1 : 0).Select((s, i) => CreateEnum(e.Name, s, isFlag ? (int?)i : null))))
 	}</text>

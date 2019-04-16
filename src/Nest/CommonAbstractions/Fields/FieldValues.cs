@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(FieldValuesJsonConverter))]
+	[JsonFormatter(typeof(FieldValuesFormatter))]
 	public class FieldValues : IsADictionaryBase<string, LazyDocument>
 	{
 		public static readonly FieldValues Empty = new FieldValues();
@@ -21,7 +22,7 @@ namespace Nest
 
 		private readonly Inferrer _inferrer;
 
-		protected FieldValues() : base() { }
+		protected FieldValues() { }
 
 		internal FieldValues(Inferrer inferrer, IDictionary<string, LazyDocument> container)
 			: base(container) => _inferrer = inferrer;

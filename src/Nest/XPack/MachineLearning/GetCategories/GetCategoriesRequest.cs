@@ -1,35 +1,35 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary>
 	/// Retrieve job results for one or more categories.
 	/// </summary>
+	[MapsApi("ml.get_categories.json")]
 	public partial interface IGetCategoriesRequest
 	{
 		/// <summary>
 		/// Specifies pagination for the categories
 		/// </summary>
-		[JsonProperty("page")]
+		[DataMember(Name ="page")]
 		IPage Page { get; set; }
 	}
 
 	/// <inheritdoc />
 	public partial class GetCategoriesRequest
 	{
-		/// <inheritdoc cref="IGetCategoriesRequest.Page" />
+		/// <inheritdoc />
 		public IPage Page { get; set; }
 	}
 
-	[DescriptorFor("XpackMlGetCategories")]
+	/// <inheritdoc />
 	public partial class GetCategoriesDescriptor
 	{
-		/// <inheritdoc cref="IGetCategoriesRequest.Page" />
+		/// <inheritdoc />
 		IPage IGetCategoriesRequest.Page { get; set; }
 
-
-		/// <inheritdoc cref="IGetCategoriesRequest.Page" />
+		/// <inheritdoc />
 		public GetCategoriesDescriptor Page(Func<PageDescriptor, IPage> selector) => Assign(a => a.Page = selector?.Invoke(new PageDescriptor()));
 	}
 }

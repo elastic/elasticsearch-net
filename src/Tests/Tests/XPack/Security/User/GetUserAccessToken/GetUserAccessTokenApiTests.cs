@@ -41,7 +41,7 @@ namespace Tests.XPack.Security.User.GetUserAccessToken
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override string UrlPath => "/_xpack/security/oauth2/token";
+		protected override string UrlPath => "/_security/oauth2/token";
 
 		protected virtual string UserPassword => Admin.Password;
 

@@ -36,7 +36,7 @@ namespace Nest
 		public IGetInfluencersResponse GetInfluencers(IGetInfluencersRequest request) =>
 			Dispatcher.Dispatch<IGetInfluencersRequest, GetInfluencersRequestParameters, GetInfluencersResponse>(
 				request,
-				LowLevelDispatch.XpackMlGetInfluencersDispatch<GetInfluencersResponse>
+				LowLevelDispatch.MlGetInfluencersDispatch<GetInfluencersResponse>
 			);
 
 		/// <inheritdoc />
@@ -52,7 +52,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IGetInfluencersRequest, GetInfluencersRequestParameters, GetInfluencersResponse, IGetInfluencersResponse>(
 				request,
 				cancellationToken,
-				LowLevelDispatch.XpackMlGetInfluencersDispatchAsync<GetInfluencersResponse>
+				LowLevelDispatch.MlGetInfluencersDispatchAsync<GetInfluencersResponse>
 			);
 	}
 }

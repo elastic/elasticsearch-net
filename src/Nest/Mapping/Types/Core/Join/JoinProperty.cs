@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Diagnostics;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[InterfaceDataContract]
 	public interface IJoinProperty : IProperty
 	{
 		/// <summary>
 		/// Should the field be searchable? Accepts true (default) and false.
 		/// </summary>
-		[JsonProperty("relations")]
+		[DataMember(Name = "relations")]
 		IRelations Relations { get; set; }
 	}
 

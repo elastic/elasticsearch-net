@@ -63,8 +63,6 @@ namespace Tests.Cat.CatThreadPool
 				r.EphemeralNodeId.Should().NotBeNullOrWhiteSpace();
 				r.Host.Should().NotBeNullOrWhiteSpace();
 				r.Ip.Should().NotBeNullOrWhiteSpace();
-				r.Maximum.Should().BeGreaterThan(0);
-				r.Minimum.Should().BeGreaterThan(0);
 				r.Name.Should().NotBeNullOrWhiteSpace();
 				r.NodeId.Should().NotBeNullOrWhiteSpace();
 				r.NodeName.Should().NotBeNullOrWhiteSpace();

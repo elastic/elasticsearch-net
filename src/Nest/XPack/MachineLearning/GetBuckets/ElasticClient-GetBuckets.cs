@@ -34,7 +34,7 @@ namespace Nest
 		public IGetBucketsResponse GetBuckets(IGetBucketsRequest request) =>
 			Dispatcher.Dispatch<IGetBucketsRequest, GetBucketsRequestParameters, GetBucketsResponse>(
 				request,
-				LowLevelDispatch.XpackMlGetBucketsDispatch<GetBucketsResponse>
+				LowLevelDispatch.MlGetBucketsDispatch<GetBucketsResponse>
 			);
 
 		/// <inheritdoc />
@@ -49,7 +49,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IGetBucketsRequest, GetBucketsRequestParameters, GetBucketsResponse, IGetBucketsResponse>(
 				request,
 				cancellationToken,
-				LowLevelDispatch.XpackMlGetBucketsDispatchAsync<GetBucketsResponse>
+				LowLevelDispatch.MlGetBucketsDispatchAsync<GetBucketsResponse>
 			);
 	}
 }

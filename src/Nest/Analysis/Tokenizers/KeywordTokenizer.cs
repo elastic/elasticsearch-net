@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -10,7 +11,8 @@ namespace Nest
 		/// <summary>
 		/// The term buffer size. Defaults to 256.
 		/// </summary>
-		[JsonProperty("buffer_size")]
+		[DataMember(Name ="buffer_size")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? BufferSize { get; set; }
 	}
 

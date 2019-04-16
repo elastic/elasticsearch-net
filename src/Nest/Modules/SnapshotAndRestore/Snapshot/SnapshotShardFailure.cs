@@ -1,23 +1,23 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
-	[JsonObject]
+	[DataContract]
 	public class SnapshotShardFailure
 	{
-		[JsonProperty("index")]
+		[DataMember(Name ="index")]
 		public string Index { get; set; }
 
-		[JsonProperty("node_id")]
+		[DataMember(Name ="node_id")]
 		public string NodeId { get; set; }
 
-		[JsonProperty("reason")]
+		[DataMember(Name ="reason")]
 		public string Reason { get; set; }
 
-		[JsonProperty("shard_id")]
+		[DataMember(Name ="shard_id")]
 		public string ShardId { get; set; }
 
-		[JsonProperty("status")]
+		[DataMember(Name ="status")]
 		public string Status { get; set; }
 	}
 }

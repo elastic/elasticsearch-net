@@ -35,7 +35,7 @@ namespace Nest
 		public IExecuteWatchResponse ExecuteWatch(IExecuteWatchRequest request) =>
 			Dispatcher.Dispatch<IExecuteWatchRequest, ExecuteWatchRequestParameters, ExecuteWatchResponse>(
 				request,
-				LowLevelDispatch.XpackWatcherExecuteWatchDispatch<ExecuteWatchResponse>
+				LowLevelDispatch.WatcherExecuteWatchDispatch<ExecuteWatchResponse>
 			);
 
 		/// <inheritdoc />
@@ -51,7 +51,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IExecuteWatchRequest, ExecuteWatchRequestParameters, ExecuteWatchResponse, IExecuteWatchResponse>(
 				request,
 				cancellationToken,
-				LowLevelDispatch.XpackWatcherExecuteWatchDispatchAsync<ExecuteWatchResponse>
+				LowLevelDispatch.WatcherExecuteWatchDispatchAsync<ExecuteWatchResponse>
 			);
 	}
 }

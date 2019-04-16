@@ -1,33 +1,33 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	/// <summary>
 	/// Converts a JSON string into a structured JSON object.
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ProcessorJsonConverter<JsonProcessor>))]
+	[InterfaceDataContract]
 	public interface IJsonProcessor : IProcessor
 	{
 		/// <summary>
 		/// Flag that forces the serialized json to be injected into the top level of the document.
 		/// <see cref="TargetField" /> must not be set when this option is chosen.
 		/// </summary>
-		[JsonProperty("add_to_root")]
+		[DataMember(Name ="add_to_root")]
 		bool? AddToRoot { get; set; }
 
 		/// <summary>
 		/// Field holding json as a string
 		/// </summary>
-		[JsonProperty("field")]
+		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
 		/// <summary>
 		/// The field to insert the converted structured object into
 		/// </summary>
-		[JsonProperty("target_field")]
+		[DataMember(Name ="target_field")]
 		Field TargetField { get; set; }
 	}
 

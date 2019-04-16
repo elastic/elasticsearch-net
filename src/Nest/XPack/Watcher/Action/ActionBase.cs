@@ -1,25 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[InterfaceDataContract]
 	public interface IAction
 	{
-		[JsonIgnore]
+		[IgnoreDataMember]
 		ActionType ActionType { get; }
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		string Name { get; set; }
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		Time ThrottlePeriod { get; set; }
 
-		[JsonProperty("transform")]
+		[DataMember(Name = "transform")]
 		TransformContainer Transform { get; set; }
 	}
 
@@ -67,96 +65,140 @@ namespace Nest
 		}
 	}
 
-	internal class ActionsJsonConverter : JsonConverter
+	internal class ActionsFormatter : IJsonFormatter<Actions>
 	{
-		public override bool CanConvert(Type objectType) => true;
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public Actions Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var dictionary = new Dictionary<string, IAction>();
-			var actions = JObject.Load(reader);
-			foreach (var child in actions.Children())
+
+			var count = 0;
+			while (reader.ReadIsInObject(ref count))
 			{
-				var property = child as JProperty;
-				if (property == null) continue;
-
-				var name = property.Name;
-
-				var actionJson = property.Value as JObject;
-				if (actionJson == null) continue;
+				var name = reader.ReadPropertyName();
+				var actionCount = 0;
 
 				Time throttlePeriod = null;
 				IAction action = null;
 
-				foreach (var prop in actionJson.Properties())
+				while (reader.ReadIsInObject(ref actionCount))
 				{
-					if (prop.Name == "throttle_period")
-						throttlePeriod = prop.Value.ToObject<Time>();
-					else
+					var propertyName = reader.ReadPropertyName();
+					switch (propertyName)
 					{
-						var actionType = prop.Name.ToEnum<ActionType>();
-						switch (actionType)
-						{
-							case ActionType.Email:
-								action = prop.Value.ToObject<EmailAction>();
-								break;
-							case ActionType.Webhook:
-								action = prop.Value.ToObject<WebhookAction>();
-								break;
-							case ActionType.Index:
-								action = prop.Value.ToObject<IndexAction>();
-								break;
-							case ActionType.Logging:
-								action = prop.Value.ToObject<LoggingAction>();
-								break;
-							case ActionType.HipChat:
-								action = prop.Value.ToObject<HipChatAction>();
-								break;
-							case ActionType.Slack:
-								action = prop.Value.ToObject<SlackAction>();
-								break;
-							case ActionType.PagerDuty:
-								action = prop.Value.ToObject<PagerDutyAction>();
-								break;
-							case null:
-								break;
-						}
-
-						if (action != null)
-						{
-							action.Name = name;
-							action.ThrottlePeriod = throttlePeriod;
-							dictionary.Add(name, action);
-						}
+						case "throttle_period":
+						case "throttle_period_in_millis":
+							throttlePeriod = formatterResolver.GetFormatter<Time>()
+								.Deserialize(ref reader, formatterResolver);
+							break;
+						default:
+							// TODO: Introduce AutomataDictionary
+							var actionType = propertyName.ToEnum<ActionType>();
+							switch (actionType)
+							{
+								case ActionType.Email:
+									action = formatterResolver.GetFormatter<EmailAction>()
+										.Deserialize(ref reader, formatterResolver);
+									break;
+								case ActionType.Webhook:
+									action = formatterResolver.GetFormatter<WebhookAction>()
+										.Deserialize(ref reader, formatterResolver);
+									break;
+								case ActionType.Index:
+									action = formatterResolver.GetFormatter<IndexAction>()
+										.Deserialize(ref reader, formatterResolver);
+									break;
+								case ActionType.Logging:
+									action = formatterResolver.GetFormatter<LoggingAction>()
+										.Deserialize(ref reader, formatterResolver);
+									break;
+								case ActionType.Slack:
+									action = formatterResolver.GetFormatter<SlackAction>()
+										.Deserialize(ref reader, formatterResolver);
+									break;
+								case ActionType.PagerDuty:
+									action = formatterResolver.GetFormatter<PagerDutyAction>()
+										.Deserialize(ref reader, formatterResolver);
+									break;
+								case null:
+									reader.ReadNextBlock();
+									break;
+							}
+							break;
 					}
+				}
+
+				if (action != null)
+				{
+					action.Name = name;
+					action.ThrottlePeriod = throttlePeriod;
+					dictionary.Add(name, action);
 				}
 			}
 
 			return new Actions(dictionary);
 		}
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public void Serialize(ref JsonWriter writer, Actions value, IJsonFormatterResolver formatterResolver)
 		{
-			writer.WriteStartObject();
-			var actions = value as IDictionary<string, IAction>;
-			if (actions != null)
+			writer.WriteBeginObject();
+			if (value != null)
 			{
-				foreach (var kvp in actions.Where(kv => kv.Value != null))
+				var count = 0;
+				foreach (var kvp in value.Where(kv => kv.Value != null))
 				{
+					if (count > 0)
+						writer.WriteValueSeparator();
+
 					var action = kvp.Value;
 					writer.WritePropertyName(kvp.Key);
-					writer.WriteStartObject();
+					writer.WriteBeginObject();
 					if (action.ThrottlePeriod != null)
 					{
 						writer.WritePropertyName("throttle_period");
-						serializer.Serialize(writer, action.ThrottlePeriod);
+						var timeFormatter = formatterResolver.GetFormatter<Time>();
+						timeFormatter.Serialize(ref writer, action.ThrottlePeriod, formatterResolver);
+						writer.WriteValueSeparator();
 					}
 					writer.WritePropertyName(kvp.Value.ActionType.GetStringValue());
-					serializer.Serialize(writer, action);
+
+					switch (action.ActionType)
+					{
+						case ActionType.Email:
+							Serialize<IEmailAction>(ref writer, action, formatterResolver);
+							break;
+						case ActionType.Webhook:
+							Serialize<IWebhookAction>(ref writer, action, formatterResolver);
+							break;
+						case ActionType.Index:
+							Serialize<IIndexAction>(ref writer, action, formatterResolver);
+							break;
+						case ActionType.Logging:
+							Serialize<ILoggingAction>(ref writer, action, formatterResolver);
+							break;
+						case ActionType.Slack:
+							Serialize<ISlackAction>(ref writer, action, formatterResolver);
+							break;
+						case ActionType.PagerDuty:
+							Serialize<IPagerDutyAction>(ref writer, action, formatterResolver);
+							break;
+						default:
+							var actionFormatter = formatterResolver.GetFormatter<IAction>();
+							actionFormatter.Serialize(ref writer, action, formatterResolver);
+							break;
+					}
+
 					writer.WriteEndObject();
+					count++;
 				}
 			}
 			writer.WriteEndObject();
+		}
+
+		private static void Serialize<TAction>(ref JsonWriter writer, IAction value, IJsonFormatterResolver formatterResolver)
+			where TAction : class, IAction
+		{
+			var formatter = formatterResolver.GetFormatter<TAction>();
+			formatter.Serialize(ref writer, value as TAction, formatterResolver);
 		}
 	}
 }

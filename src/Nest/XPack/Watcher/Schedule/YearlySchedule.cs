@@ -2,12 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(ScheduleJsonConverter<IYearlySchedule, YearlySchedule, ITimeOfYear>))]
+	[InterfaceDataContract]
+	[JsonFormatter(typeof(ScheduleFormatter<IYearlySchedule, YearlySchedule, ITimeOfYear>))]
 	public interface IYearlySchedule : ISchedule, IEnumerable<ITimeOfYear> { }
 
 	public class YearlySchedule : ScheduleBase, IYearlySchedule

@@ -34,7 +34,7 @@ namespace Nest
 		public IStartWatcherResponse StartWatcher(IStartWatcherRequest request) =>
 			Dispatcher.Dispatch<IStartWatcherRequest, StartWatcherRequestParameters, StartWatcherResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackWatcherStartDispatch<StartWatcherResponse>(p)
+				(p, d) => LowLevelDispatch.WatcherStartDispatch<StartWatcherResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -50,7 +50,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IStartWatcherRequest, StartWatcherRequestParameters, StartWatcherResponse, IStartWatcherResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackWatcherStartDispatchAsync<StartWatcherResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.WatcherStartDispatchAsync<StartWatcherResponse>(p, c)
 			);
 	}
 }

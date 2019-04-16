@@ -1,19 +1,19 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	/// <summary>
 	/// Properties of a mapping for a property type to a document field that has doc_values in Elasticsearch
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(PropertyJsonConverter))]
+	[InterfaceDataContract]
 	public interface IDocValuesProperty : ICoreProperty
 	{
 		/// <summary>
 		/// Whether to persist the value at index time in a columnar data structure (referred to as doc_values in Lucene)
 		/// which makes the value available for efficient sorting and aggregations. Default is <c>true</c>.
 		/// </summary>
-		[JsonProperty("doc_values")]
+		[DataMember(Name ="doc_values")]
 		bool? DocValues { get; set; }
 	}
 

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -10,7 +11,8 @@ namespace Nest
 		/// <summary>
 		/// The mu parameter. Defaults to 2000.
 		/// </summary>
-		[JsonProperty("mu")]
+		[DataMember(Name ="mu")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? Mu { get; set; }
 	}
 

@@ -4,6 +4,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.Xunit;
 using Tests.Domain;
 using Tests.Framework.Integration;
 
@@ -14,10 +15,10 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 		private readonly Scripted Script = new Scripted
 		{
 			Language = "painless",
-			Init = "params._agg.commits = []",
-			Map = "if (doc['state'].value == \"Stable\") { params._agg.commits.add(doc['numberOfCommits'].value) }",
-			Combine = "def sum = 0.0; for (c in params._agg.commits) { sum += c } return sum",
-			Reduce = "def sum = 0.0; for (a in params._aggs) { sum += a } return sum",
+			Init = "state.commits = []",
+			Map = "if (doc['state'].value == \"Stable\") { state.commits.add(doc['numberOfCommits'].value) }",
+			Combine = "def sum = 0.0; for (c in state.commits) { sum += c } return sum",
+			Reduce = "def sum = 0.0; for (a in states) { sum += a } return sum",
 		};
 
 		public ScriptedMetricAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -79,18 +80,18 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 		private readonly Scripted First = new Scripted
 		{
 			Language = "painless",
-			Init = "params._agg.map = [:]",
+			Init = "state.map = [:]",
 			Map =
-				"if (params._agg.map.containsKey(doc['state'].value))" +
-				"    params._agg.map[doc['state'].value] += 1;" +
+				"if (state.map.containsKey(doc['state'].value))" +
+				"    state.map[doc['state'].value] += 1;" +
 				"else" +
-				"    params._agg.map[doc['state'].value] = 1;",
+				"    state.map[doc['state'].value] = 1;",
 
 			Reduce =
 				"def reduce = [:];" +
-				"for (agg in params._aggs)" +
+				"for (map in states)" +
 				"{" +
-				"    for (entry in agg.map.entrySet())" +
+				"    for (entry in map.entrySet())" +
 				"    {" +
 				"        if (reduce.containsKey(entry.getKey()))" +
 				"            reduce[entry.getKey()] += entry.getValue();" +
@@ -98,16 +99,17 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 				"            reduce[entry.getKey()] = entry.getValue();" +
 				"    }" +
 				"}" +
-				"return reduce;"
+				"return reduce;",
+			Combine = "return state.map;"
 		};
 
 		private readonly Scripted Second = new Scripted
 		{
 			Language = "painless",
-			Combine = "def sum = 0.0; for (c in params._agg.commits) { sum += c } return sum",
-			Reduce = "def sum = 0.0; for (a in params._aggs) { sum += a } return sum",
-			Map = "if (doc['state'].value == \"Stable\") { params._agg.commits.add(doc['numberOfCommits'].value) }",
-			Init = "params._agg.commits = []"
+			Init = "state.commits = []",
+			Map = "if (doc['state'].value == \"Stable\") { state.commits.add(doc['numberOfCommits'].value) }",
+			Reduce = "def sum = 0.0; for (a in states) { sum += a } return sum",
+			Combine = "def sum = 0.0; for (c in state.commits) { sum += c } return sum",
 		};
 
 		public ScriptedMetricMultiAggregationTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -121,6 +123,11 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 					init_script = new
 					{
 						source = First.Init,
+						lang = First.Language
+					},
+					combine_script = new
+					{
+						source = First.Combine,
 						lang = First.Language
 					},
 					map_script = new
@@ -166,6 +173,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.ScriptedMetric("by_state_total", sm => sm
 				.InitScript(ss => ss.Source(First.Init).Lang(First.Language))
+				.CombineScript(ss => ss.Source(First.Combine).Lang(First.Language))
 				.MapScript(ss => ss.Source(First.Map).Lang(First.Language))
 				.ReduceScript(ss => ss.Source(First.Reduce).Lang(First.Language))
 			)
@@ -180,6 +188,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 			new ScriptedMetricAggregation("by_state_total")
 			{
 				InitScript = new InlineScript(First.Init) { Lang = First.Language },
+				CombineScript = new InlineScript(First.Combine) { Lang = First.Language },
 				MapScript = new InlineScript(First.Map) { Lang = First.Language },
 				ReduceScript = new InlineScript(First.Reduce) { Lang = First.Language }
 			}

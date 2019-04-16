@@ -1,24 +1,25 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<FuzzySuggester>))]
+	[InterfaceDataContract]
+	[ReadAs(typeof(FuzzySuggester))]
 	public interface IFuzzySuggester
 	{
-		[JsonProperty("fuzziness")]
+		[DataMember(Name = "fuzziness")]
 		IFuzziness Fuzziness { get; set; }
 
-		[JsonProperty("min_length")]
+		[DataMember(Name = "min_length")]
 		int? MinLength { get; set; }
 
-		[JsonProperty("prefix_length")]
+		[DataMember(Name = "prefix_length")]
 		int? PrefixLength { get; set; }
 
-		[JsonProperty("transpositions")]
+		[DataMember(Name = "transpositions")]
 		bool? Transpositions { get; set; }
 
-		[JsonProperty("unicode_aware")]
+		[DataMember(Name = "unicode_aware")]
 		bool? UnicodeAware { get; set; }
 	}
 

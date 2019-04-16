@@ -36,7 +36,7 @@ namespace Nest
 		public IOpenJobResponse OpenJob(IOpenJobRequest request) =>
 			Dispatcher.Dispatch<IOpenJobRequest, OpenJobRequestParameters, OpenJobResponse>(
 				request,
-				(p, d) => LowLevelDispatch.XpackMlOpenJobDispatch<OpenJobResponse>(p)
+				(p, d) => LowLevelDispatch.MlOpenJobDispatch<OpenJobResponse>(p)
 			);
 
 		/// <inheritdoc />
@@ -50,7 +50,7 @@ namespace Nest
 			Dispatcher.DispatchAsync<IOpenJobRequest, OpenJobRequestParameters, OpenJobResponse, IOpenJobResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackMlOpenJobDispatchAsync<OpenJobResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.MlOpenJobDispatchAsync<OpenJobResponse>(p, c)
 			);
 	}
 }

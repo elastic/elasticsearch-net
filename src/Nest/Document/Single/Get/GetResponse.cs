@@ -1,41 +1,42 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	public interface IGetResponse<out TDocument> : IResponse where TDocument : class
 	{
-		[JsonProperty("fields")]
+		[DataMember(Name = "fields")]
 		FieldValues Fields { get; }
 
-		[JsonProperty("found")]
+		[DataMember(Name = "found")]
 		bool Found { get; }
 
-		[JsonProperty("_id")]
+		[DataMember(Name = "_id")]
 		string Id { get; }
 
-		[JsonProperty("_index")]
+		[DataMember(Name = "_index")]
 		string Index { get; }
 
-		[JsonProperty("_parent")]
+		[DataMember(Name = "_parent")]
 		[Obsolete("No longer returned on indices created in Elasticsearch 6.0")]
 		string Parent { get; }
 
-		[JsonProperty("_routing")]
+		[DataMember(Name = "_routing")]
 		string Routing { get; }
 
-		[JsonProperty("_source")]
-		[JsonConverter(typeof(SourceConverter))]
+		[DataMember(Name = "_source")]
+		[JsonFormatter(typeof(SourceFormatter<>))]
 		TDocument Source { get; }
 
-		[JsonProperty("_type")]
+		[DataMember(Name = "_type")]
 		string Type { get; }
 
-		[JsonProperty("_version")]
+		[DataMember(Name = "_version")]
 		long Version { get; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
+	[DataContract]
 	public class GetResponse<TDocument> : ResponseBase, IGetResponse<TDocument> where TDocument : class
 	{
 		public FieldValues Fields { get; internal set; } = FieldValues.Empty;

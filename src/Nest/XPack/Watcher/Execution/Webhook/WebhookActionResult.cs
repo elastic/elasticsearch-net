@@ -1,13 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public class WebhookActionResult
 	{
-		[JsonProperty("request")]
+		[DataMember(Name ="request")]
 		public HttpInputRequestResult Request { get; set; }
 
-		[JsonProperty("response")]
+		[DataMember(Name ="response")]
 		public HttpInputResponseResult Response { get; set; }
 	}
 }

@@ -1,9 +1,10 @@
 ﻿using System.Diagnostics;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[InterfaceDataContract]
 	public interface IMurmur3HashProperty : IDocValuesProperty { }
 
 	[DebuggerDisplay("{DebugDisplay}")]

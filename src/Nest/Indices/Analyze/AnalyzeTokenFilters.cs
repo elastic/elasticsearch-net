@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	/// <summary>
 	/// A list of string references to stored token filters and/or inline token filter definitions
 	/// </summary>
+	[JsonFormatter(typeof(UnionListFormatter<AnalyzeTokenFilters, string, ITokenFilter>))]
 	public class AnalyzeTokenFilters : List<Union<string, ITokenFilter>>
 	{
 		public AnalyzeTokenFilters() { }
@@ -232,14 +234,6 @@ namespace Nest
 		/// </summary>
 		public AnalyzeTokenFiltersDescriptor Snowball(Func<SnowballTokenFilterDescriptor, ISnowballTokenFilter> selector) =>
 			AssignIfNotNull(selector?.Invoke(new SnowballTokenFilterDescriptor()));
-
-		/// <summary>
-		/// A token filter of type standard that normalizes tokens extracted with the Standard Tokenizer.
-		/// </summary>
-#pragma warning disable 618
-		public AnalyzeTokenFiltersDescriptor Standard(Func<StandardTokenFilterDescriptor, IStandardTokenFilter> selector = null) =>
-			AssignIfNotNull(selector.InvokeOrDefault(new StandardTokenFilterDescriptor()));
-#pragma warning restore 618
 
 		/// <inheritdoc cref="IConditionTokenFilter" />
 		public AnalyzeTokenFiltersDescriptor Condition(Func<ConditionTokenFilterDescriptor, IConditionTokenFilter> selector) =>

@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Runtime.Serialization;
+
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
@@ -23,7 +23,7 @@ namespace Tests.QueryDsl.BoolDsl
 
 	public class BoolCluster : ClientTestClusterBase
 	{
-		[JsonConverter(typeof(StringEnumConverter))]
+
 		public enum E
 		{
 			Option1,
@@ -34,12 +34,10 @@ namespace Tests.QueryDsl.BoolDsl
 		{
 			var client = Client;
 			var index = client.CreateIndex(Index<A>(), i => i
-				.Mappings(map => map
-					.Map<A>(m => m
-						.AutoMap()
-						.Properties(props => props
-							.Keyword(s => s.Name(p => p.Option))
-						)
+				.Map<A>(m => m
+					.AutoMap()
+					.Properties(props => props
+						.Keyword(s => s.Name(p => p.Option))
 					)
 				)
 			);
