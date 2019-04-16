@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -39,36 +39,13 @@ a => a
 ----
 new PercentileRanksAggregation("commits_outlier", Field<Project>(p => p.NumberOfCommits))
 {
-    Values = new List<double> {15, 30},
+    Values = new List<double> { 15, 30 },
     Method = new TDigestMethod
     {
         Compression = 200
     },
     Script = new InlineScript("doc['numberOfCommits'].value * 1.2"),
     Missing = 0
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "commits_outlier": {
-    "percentile_ranks": {
-      "field": "numberOfCommits",
-      "values": [
-        15.0,
-        30.0
-      ],
-      "tdigest": {
-        "compression": 200.0
-      },
-      "script": {
-        "source": "doc['numberOfCommits'].value * 1.2"
-      },
-      "missing": 0.0
-    }
-  }
 }
 ----
 

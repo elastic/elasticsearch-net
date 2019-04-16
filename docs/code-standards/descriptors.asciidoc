@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -27,6 +27,7 @@ var descriptors =
     where t.IsClass()
           && t.Name.Contains("Descriptor")
           && !t.Namespace.StartsWith("Nest.Json")
+          && !t.Namespace.StartsWith("Elastic.Internal")
           && !notDescriptors.Contains(t.Name)
 #if __MonoCS__
           && !t.FullName.Contains("c__AnonStore") //compiler generated
@@ -62,8 +63,8 @@ Methods taking a func should have that func return an interface
 [source,csharp]
 ----
 var descriptors =
-    from t in typeof(DescriptorBase<,>).Assembly().Types()
-    where t.IsClass() && typeof(IDescriptor).IsAssignableFrom(t)
+    from t in typeof(DescriptorBase<,>).Assembly.Types()
+    where t.IsClass && typeof(IDescriptor).IsAssignableFrom(t)
     select t;
 
 var exclusions = new Dictionary<Type, Type>
@@ -119,14 +120,14 @@ a nullable bool with a default value
 [source,csharp]
 ----
 var queries =
-    from t in typeof(IQuery).Assembly().Types()
+    from t in typeof(IQuery).Assembly.Types()
     where t.IsInterface() && typeof(IQuery).IsAssignableFrom(t)
     where t.GetProperties().Any(p => p.PropertyType == typeof(bool?))
     select t;
 
 var descriptors =
-    from t in typeof(DescriptorBase<,>).Assembly().Types()
-    where t.IsClass() && typeof(IDescriptor).IsAssignableFrom(t)
+    from t in typeof(DescriptorBase<,>).Assembly.Types()
+    where t.IsClass && typeof(IDescriptor).IsAssignableFrom(t)
     where t.GetInterfaces().Intersect(queries).Any()
     select t;
 
@@ -160,7 +161,7 @@ foreach (var query in queries)
 breakingDescriptors.Should().BeEmpty();
 
 var processors = (
-    from t in typeof(IProcessor).Assembly().Types()
+    from t in typeof(IProcessor).Assembly.Types()
     where typeof(IProcessor).IsAssignableFrom(t)
     select t.Name).ToList();
 
@@ -170,7 +171,7 @@ processors.Should().OnlyContain(p => p.Contains("Processor"));
 var methods = from d in YieldAllDescriptors()
     from m in d.GetMethods()
     let ps = m.GetParameters()
-    where ps.Length == 1 && ps.Any(pp => pp.ParameterType.IsValueType())
+    where ps.Length == 1 && ps.Any(pp => pp.ParameterType.IsValueType)
     let p = ps.First()
     let pt = p.ParameterType
     where (!pt.IsGenericType() || pt.GetGenericTypeDefinition() != typeof(Nullable<>))
@@ -218,7 +219,7 @@ breakingDescriptors.Should().BeEmpty();
 var methods = from d in YieldAllDescriptors()
     from m in d.GetMethods()
     let ps = m.GetParameters()
-    where ps.Length == 1 && ps.Any(pp => pp.ParameterType.IsValueType())
+    where ps.Length == 1 && ps.Any(pp => pp.ParameterType.IsValueType)
     let p = ps.First()
     let pt = p.ParameterType
     where pt == typeof(bool?)
@@ -252,8 +253,8 @@ foreach (var info in methods)
 nullableBools.Should().BeEmpty();
 
 var descriptors =
-    from t in typeof(DescriptorBase<,>).Assembly().Types()
-    where t.IsClass() && typeof(IDescriptor).IsAssignableFrom(t)
+    from t in typeof(DescriptorBase<,>).Assembly.Types()
+    where t.IsClass && typeof(IDescriptor).IsAssignableFrom(t)
     where !t.IsAbstract()
     select t;
 return descriptors;

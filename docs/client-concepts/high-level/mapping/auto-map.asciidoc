@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -50,154 +50,146 @@ public class Employee : Document
 
 Auto mapping can take the pain out of having to define a manual mapping for all properties
 on the POCO. In this case we want to index two subclasses into a single index. We call Map
-for the base class and then call AutoMap foreach of the types we want it it the implement
+for the base class and then call AutoMap foreach of the types we want it to implement
 
 [source,csharp]
 ----
 var createIndexResponse = _client.CreateIndex("myindex", c => c
-    .Mappings(ms => ms
-        .Map<Document>(m => m
-            .AutoMap<Company>() <1>
-            .AutoMap(typeof(Employee)) <2>
-        )
+    .Map<Document>(m => m
+        .AutoMap<Company>() <1>
+        .AutoMap(typeof(Employee)) <2>
     )
 );
 ----
 <1> Auto map `Company` using the generic method
-
 <2> Auto map `Employee` using the non-generic method
 
 This produces the following JSON request
 
-[source,javascript]
-----
-{
-  "mappings": {
-    "document": {
-      "properties": {
-        "birthday": {
-          "type": "date"
-        },
-        "employees": {
-          "properties": {
-            "birthday": {
-              "type": "date"
-            },
-            "employees": {
-              "properties": {},
-              "type": "object"
-            },
-            "hours": {
-              "type": "long"
-            },
-            "isManager": {
-              "type": "boolean"
-            },
-            "join": {
-              "properties": {},
-              "type": "object"
-            },
-            "lastName": {
-              "fields": {
-                "keyword": {
-                  "ignore_above": 256,
-                  "type": "keyword"
-                }
-              },
-              "type": "text"
-            },
-            "salary": {
-              "type": "integer"
-            }
-          },
-          "type": "object"
-        },
-        "hours": {
-          "type": "long"
-        },
-        "isManager": {
-          "type": "boolean"
-        },
-        "join": {
-          "properties": {},
-          "type": "object"
-        },
-        "lastName": {
-          "fields": {
-            "keyword": {
-              "ignore_above": 256,
-              "type": "keyword"
-            }
-          },
-          "type": "text"
-        },
-        "name": {
-          "fields": {
-            "keyword": {
-              "ignore_above": 256,
-              "type": "keyword"
-            }
-          },
-          "type": "text"
-        },
-        "salary": {
-          "type": "integer"
-        }
-      }
-    }
-  }
-}
-----
-
 [source,csharp]
 ----
-public class ParentWithStringId : IgnoringProperties.Parent
+var expected = new
 {
-    public new string Id { get; set; }
-}
+    mappings = new
+    {
+        properties = new
+        {
+            birthday = new {type = "date"},
+            employees = new
+            {
+                properties = new
+                {
+                    birthday = new {type = "date"},
+                    employees = new
+                    {
+                        properties = new { },
+                        type = "object"
+                    },
+                    hours = new {type = "long"},
+                    isManager = new {type = "boolean"},
+                    join = new
+                    {
+                        properties = new { },
+                        type = "object"
+                    },
+                    lastName = new
+                    {
+                        fields = new
+                        {
+                            keyword = new
+                            {
+                                ignore_above = 256,
+                                type = "keyword"
+                            }
+                        },
+                        type = "text"
+                    },
+                    salary = new {type = "integer"}
+                },
+                type = "object"
+            },
+            hours = new {type = "long"},
+            isManager = new {type = "boolean"},
+            join = new
+            {
+                properties = new { },
+                type = "object"
+            },
+            lastName = new
+            {
+                fields = new
+                {
+                    keyword = new
+                    {
+                        ignore_above = 256,
+                        type = "keyword"
+                    }
+                },
+                type = "text"
+            },
+            name = new
+            {
+                fields = new
+                {
+                    keyword = new
+                    {
+                        ignore_above = 256,
+                        type = "keyword"
+                    }
+                },
+                type = "text"
+            },
+            salary = new {type = "integer"}
+        }
+    }
+};
+
+public class ParentWithStringId : IgnoringProperties.Parent
+        {
+public new string Id { get; set; }
+        }
 
 var connectionSettings = new ConnectionSettings(new InMemoryConnection()) <1>
-        .DisableDirectStreaming() <2>
-        .DefaultMappingFor<ParentWithStringId>(m => m
-            .TypeName("parent")
-            .Ignore(p => p.Description)
-            .Ignore(p => p.IgnoreMe)
-        );
+    .DisableDirectStreaming() <2>
+    .DefaultMappingFor<ParentWithStringId>(m => m
+        .TypeName("parent")
+        .Ignore(p => p.Description)
+        .Ignore(p => p.IgnoreMe)
+    );
 
 var client = new ElasticClient(connectionSettings);
 
 var createIndexResponse = client.CreateIndex("myindex", c => c
-        .Mappings(ms => ms
-            .Map<ParentWithStringId>(m => m
-                .AutoMap()
-            )
-        )
-    );
+    .Map<ParentWithStringId>(m => m
+        .AutoMap()
+    )
+);
+
+// json
+var expected = new
+{
+    mappings = new
+    {
+        properties = new
+        {
+            id = new
+            {
+                type = "text",
+                fields = new
+                {
+                    keyword = new
+                    {
+                        ignore_above = 256,
+                        type = "keyword"
+                    }
+                }
+            }
+        }
+    }
+};
 ----
 <1> we're using an _in memory_ connection for this example. In your production application though, you'll want to use an `IConnection` that actually sends a request.
-
 <2> we disable direct streaming here to capture the request and response bytes. In your production application however, you'll likely not want to do this, since it causes the request and response bytes to be buffered in memory.
-
-[source,javascript]
-----
-{
-  "mappings": {
-    "parent": {
-      "properties": {
-        "id": {
-          "type": "text",
-          "fields": {
-            "keyword": {
-              "ignore_above": 256,
-              "type": "keyword"
-            }
-          }
-        }
-      }
-    }
-  }
-}
-----
 
 Observe that NEST has inferred the Elasticsearch types based on the CLR type of our POCO properties.
 In this example,
@@ -371,28 +363,28 @@ By default, `.AutoMap()` only goes as far as depth 1
 [source,csharp]
 ----
 var createIndexResponse = _client.CreateIndex("myindex", c => c
-    .Mappings(ms => ms
-        .Map<A>(m => m.AutoMap())
-    )
+    .Map<A>(m => m.AutoMap())
 );
 ----
 
 Thus we do not map properties on the second occurrence of our Child property 
 
-[source,javascript]
+[source,csharp]
 ----
+var expected = new
 {
-  "mappings": {
-    "a": {
-      "properties": {
-        "child": {
-          "properties": {},
-          "type": "object"
+    mappings = new
+    {
+        properties = new
+        {
+            child = new
+            {
+                properties = new { },
+                type = "object"
+            }
         }
-      }
     }
-  }
-}
+};
 ----
 
 Now let's specify a maxRecursion of `3` 
@@ -400,42 +392,48 @@ Now let's specify a maxRecursion of `3`
 [source,csharp]
 ----
 createIndexResponse = _client.CreateIndex("myindex", c => c
-    .Mappings(ms => ms
-        .Map<A>(m => m.AutoMap(3))
-    )
+    .Map<A>(m => m.AutoMap(3))
 );
 ----
 
 `.AutoMap()` has now mapped three levels of our Child property 
 
-[source,javascript]
+[source,csharp]
 ----
+var expectedWithMaxRecursion = new
 {
-  "mappings": {
-    "a": {
-      "properties": {
-        "child": {
-          "type": "object",
-          "properties": {
-            "child": {
-              "type": "object",
-              "properties": {
-                "child": {
-                  "type": "object",
-                  "properties": {
-                    "child": {
-                      "type": "object",
-                      "properties": {}
+    mappings = new
+    {
+        properties = new
+        {
+            child = new
+            {
+                type = "object",
+                properties = new
+                {
+                    child = new
+                    {
+                        type = "object",
+                        properties = new
+                        {
+                            child = new
+                            {
+                                type = "object",
+                                properties = new
+                                {
+                                    child = new
+                                    {
+                                        type = "object",
+                                        properties = new { }
+                                    }
+                                }
+                            }
+                        }
                     }
-                  }
                 }
-              }
             }
-          }
         }
-      }
     }
-  }
-}
+};
 ----
 

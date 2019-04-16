@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -34,47 +34,54 @@ var analyzeResponse = client.Analyze(a => a
 
 This returns the following response from Elasticsearch
 
-[source,javascript]
+[source,csharp]
 ----
+var expected = new
 {
-  "tokens": [
+    tokens = new object[]
     {
-      "token": "f",
-      "start_offset": 0,
-      "end_offset": 1,
-      "type": "<ALPHANUM>",
-      "position": 0
-    },
-    {
-      "token": "is",
-      "start_offset": 3,
-      "end_offset": 5,
-      "type": "<ALPHANUM>",
-      "position": 1
-    },
-    {
-      "token": "the",
-      "start_offset": 6,
-      "end_offset": 9,
-      "type": "<ALPHANUM>",
-      "position": 2
-    },
-    {
-      "token": "superior",
-      "start_offset": 10,
-      "end_offset": 18,
-      "type": "<ALPHANUM>",
-      "position": 3
-    },
-    {
-      "token": "language",
-      "start_offset": 19,
-      "end_offset": 27,
-      "type": "<ALPHANUM>",
-      "position": 4
+        new
+        {
+            token = "f",
+            start_offset = 0,
+            end_offset = 1,
+            type = "<ALPHANUM>",
+            position = 0
+        },
+        new
+        {
+            token = "is",
+            start_offset = 3,
+            end_offset = 5,
+            type = "<ALPHANUM>",
+            position = 1
+        },
+        new
+        {
+            token = "the",
+            start_offset = 6,
+            end_offset = 9,
+            type = "<ALPHANUM>",
+            position = 2
+        },
+        new
+        {
+            token = "superior",
+            start_offset = 10,
+            end_offset = 18,
+            type = "<ALPHANUM>",
+            position = 3
+        },
+        new
+        {
+            token = "language",
+            start_offset = 19,
+            end_offset = 27,
+            type = "<ALPHANUM>",
+            position = 4
+        }
     }
-  ]
-}
+};
 ----
 
 which is deserialized to an instance of `IAnalyzeResponse` by NEST
@@ -111,35 +118,38 @@ var analyzeResponse = client.Analyze(a => a
     .Filter("lowercase", "stop")
     .Text("F# is THE SUPERIOR language :)")
 );
-----
 
-[source,javascript]
-----
+//json
+var expected = new
 {
-  "tokens": [
+    tokens = new object[]
     {
-      "token": "f",
-      "start_offset": 0,
-      "end_offset": 1,
-      "type": "<ALPHANUM>",
-      "position": 0
-    },
-    {
-      "token": "superior",
-      "start_offset": 10,
-      "end_offset": 18,
-      "type": "<ALPHANUM>",
-      "position": 3
-    },
-    {
-      "token": "language",
-      "start_offset": 19,
-      "end_offset": 27,
-      "type": "<ALPHANUM>",
-      "position": 4
+        new
+        {
+            token = "f",
+            start_offset = 0,
+            end_offset = 1,
+            type = "<ALPHANUM>",
+            position = 0
+        },
+        new
+        {
+            token = "superior",
+            start_offset = 10,
+            end_offset = 18,
+            type = "<ALPHANUM>",
+            position = 3
+        },
+        new
+        {
+            token = "language",
+            start_offset = 19,
+            end_offset = 27,
+            type = "<ALPHANUM>",
+            position = 4
+        }
     }
-  ]
-}
+};
 ----
 
 Great! This has removed stop words, but we still have `F#` tokenized as `"f"`
@@ -222,40 +232,46 @@ var analyzeResponse = client.Analyze(a => a
 
 The output now looks like
 
-[source,javascript]
+[source,csharp]
 ----
+var expected = new
 {
-  "tokens": [
+    tokens = new object[]
     {
-      "token": "fsharp",
-      "start_offset": 0,
-      "end_offset": 2,
-      "type": "<ALPHANUM>",
-      "position": 0
-    },
-    {
-      "token": "superior",
-      "start_offset": 10,
-      "end_offset": 18,
-      "type": "<ALPHANUM>",
-      "position": 3
-    },
-    {
-      "token": "great",
-      "start_offset": 10,
-      "end_offset": 18,
-      "type": "SYNONYM",
-      "position": 3
-    },
-    {
-      "token": "language",
-      "start_offset": 19,
-      "end_offset": 27,
-      "type": "<ALPHANUM>",
-      "position": 4
+        new
+        {
+            token = "fsharp",
+            start_offset = 0,
+            end_offset = 2,
+            type = "<ALPHANUM>",
+            position = 0
+        },
+        new
+        {
+            token = "superior",
+            start_offset = 10,
+            end_offset = 18,
+            type = "<ALPHANUM>",
+            position = 3
+        },
+        new
+        {
+            token = "great",
+            start_offset = 10,
+            end_offset = 18,
+            type = "SYNONYM",
+            position = 3
+        },
+        new
+        {
+            token = "language",
+            start_offset = 19,
+            end_offset = 27,
+            type = "<ALPHANUM>",
+            position = 4
+        }
     }
-  ]
-}
+};
 ----
 
 Exactly what we were after!
@@ -291,13 +307,11 @@ client.CreateIndex("project-index", i => i
 
         )
     )
-    .Mappings(m => m
-        .Map<Project>(mm => mm
-            .Properties(p => p
-                .Text(t => t
-                    .Name(n => n.Name)
-                    .Analyzer("my_analyzer")
-                )
+    .Map<Project>(mm => mm
+        .Properties(p => p
+            .Text(t => t
+                .Name(n => n.Name)
+                .Analyzer("my_analyzer")
             )
         )
     )

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -30,18 +30,6 @@ a => a
 [source,csharp]
 ----
 new ValueCountAggregation("commit_count", Field<Project>(p => p.NumberOfCommits))
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "commit_count": {
-    "value_count": {
-      "field": "numberOfCommits"
-    }
-  }
-}
 ----
 
 ==== Handling Responses

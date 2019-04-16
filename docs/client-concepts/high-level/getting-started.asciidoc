@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -107,7 +107,6 @@ var indexResponse = client.IndexDocument(person); <1>
 var asyncIndexResponse = await client.IndexDocumentAsync(person); <2>
 ----
 <1> synchronous method that returns an `IIndexResponse`
-
 <2> asynchronous method that returns a `Task<IIndexResponse>` that can be awaited
 
 NOTE: All methods available within NEST are exposed as both synchronous and asynchronous versions,
@@ -143,28 +142,11 @@ var people = searchResponse.Documents;
 ----
 
 `people` now holds the first ten people whose first name is Martijn. The search endpoint for this query is
-`/people/person/_search` and the index (`"people"`) and type (`"person"`) values has been determined from
+`/people/_search` and the index (`"people"`) has been determined from
 
 . the default index on `ConnectionSettings`
 
 . the `Person` generic type parameter on the search.
-
-All types within an index can be searched using `.AllTypes()`
-
-[source,csharp]
-----
-var searchResponse = client.Search<Person>(s => s
-    .AllTypes()
-    .From(0)
-    .Size(10)
-    .Query(q => q
-         .Match(m => m
-            .Field(f => f.FirstName)
-            .Query("Martijn")
-         )
-    )
-);
-----
 
 which generates a request to the search endpoint `/people/_search`, using the default index specified on `ConnectionSettings` as the index
 in the search request.
@@ -186,7 +168,7 @@ var searchResponse = client.Search<Person>(s => s
 );
 ----
 
-which generates a request to the search endpoint `/_all/person/_search`, taking the `person` type from the generic type parameter on the search
+which generates a request to the search endpoint `/_search`, taking the `person` type from the generic type parameter on the search
 method.
 
 Both `.AllTypes()` and `.AllIndices()` can be provided to perform a search across _all_ types in _all_ indices, generating a request to `/_search`
@@ -195,7 +177,6 @@ Both `.AllTypes()` and `.AllIndices()` can be provided to perform a search acros
 ----
 var searchResponse = await client.SearchAsync<Person>(s => s
     .AllIndices()
-    .AllTypes()
     .From(0)
     .Size(10)
     .Query(q => q
@@ -220,7 +201,7 @@ Here's the same query as the previous example, this time constructed using the O
 
 [source,csharp]
 ----
-var searchRequest = new SearchRequest<Person>(Nest.Indices.All, Types.All) <1>
+var searchRequest = new SearchRequest<Person>(Nest.Indices.All) <1>
 {
     From = 0,
     Size = 10,
@@ -253,7 +234,7 @@ Here's an example
 
 [source,csharp]
 ----
-var searchResponse = client.LowLevel.Search<SearchResponse<Person>>("people", "person", PostData.Serializable(new
+var searchResponse = client.LowLevel.Search<SearchResponse<Person>>("people", PostData.Serializable(new
 {
     from = 0,
     size = 10,

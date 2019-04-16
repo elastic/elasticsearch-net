@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -49,26 +49,8 @@ new TermsSetQuery
     Name = "named_query",
     Boost = 1.1,
     Field = Infer.Field<Project>(p => p.Branches),
-    Terms = new [] { "master", "dev" },
+    Terms = new[] { "master", "dev" },
     MinimumShouldMatchField = Infer.Field<Project>(p => p.RequiredBranches)
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "terms_set": {
-    "branches": {
-      "_name": "named_query",
-      "boost": 1.1,
-      "terms": [
-        "master",
-        "dev"
-      ],
-      "minimum_should_match_field": "requiredBranches"
-    }
-  }
 }
 ----
 
@@ -79,6 +61,20 @@ Scripts can also be used to control how many terms are required to match in a mo
 
 The `params.num_terms` parameter is available in the script to indicate the number of
 terms that have been specified in the query.
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new TermsSetQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = Infer.Field<Project>(p => p.Branches),
+    Terms = new[] { "master", "dev" },
+    MinimumShouldMatchScript = new InlineScript("Math.min(params.num_terms, doc['requiredBranches'].value)")
+}
+----
 
 ==== Fluent DSL example
 
@@ -94,39 +90,5 @@ q
         .Source("Math.min(params.num_terms, doc['requiredBranches'].value)")
     )
 )
-----
-
-==== Object Initializer syntax example
-
-[source,csharp]
-----
-new TermsSetQuery
-{
-    Name = "named_query",
-    Boost = 1.1,
-    Field = Infer.Field<Project>(p => p.Branches),
-    Terms = new [] { "master", "dev" },
-    MinimumShouldMatchScript = new InlineScript("Math.min(params.num_terms, doc['requiredBranches'].value)")
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "terms_set": {
-    "branches": {
-      "_name": "named_query",
-      "boost": 1.1,
-      "terms": [
-        "master",
-        "dev"
-      ],
-      "minimum_should_match_script": {
-        "source": "Math.min(params.num_terms, doc['requiredBranches'].value)"
-      }
-    }
-  }
-}
 ----
 

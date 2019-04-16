@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -21,7 +21,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ----
 q
 .MultiMatch(c => c
-    .Fields(f => f.Field(p=>p.Description).Field("myOtherField"))
+    .Fields(f => f.Field(p => p.Description).Field("myOtherField"))
     .Query("hello world")
     .Analyzer("standard")
     .Boost(1.1)
@@ -47,7 +47,7 @@ q
 ----
 new MultiMatchQuery
 {
-    Fields = Field<Project>(p=>p.Description).And("myOtherField"),
+    Fields = Field<Project>(p => p.Description).And("myOtherField"),
     Query = "hello world",
     Analyzer = "standard",
     Boost = 1.1,
@@ -67,48 +67,8 @@ new MultiMatchQuery
 }
 ----
 
-[source,javascript]
-.Example json output
-----
-{
-  "multi_match": {
-    "_name": "named_query",
-    "boost": 1.1,
-    "query": "hello world",
-    "analyzer": "standard",
-    "fuzzy_rewrite": "constant_score_boolean",
-    "fuzziness": "AUTO",
-    "cutoff_frequency": 0.001,
-    "prefix_length": 2,
-    "max_expansions": 2,
-    "slop": 2,
-    "lenient": true,
-    "tie_breaker": 1.1,
-    "minimum_should_match": 2,
-    "operator": "or",
-    "fields": [
-      "description",
-      "myOtherField"
-    ],
-    "zero_terms_query": "all",
-    "auto_generate_synonyms_phrase_query": false
-  }
-}
-----
-
 [float]
 === Multi match with boost usage
-
-==== Fluent DSL example
-
-[source,csharp]
-----
-q
-.MultiMatch(c => c
-    .Fields(Field<Project>(p=>p.Description, 2.2).And("myOtherField^0.3"))
-    .Query("hello world")
-)
-----
 
 ==== Object Initializer syntax example
 
@@ -116,23 +76,20 @@ q
 ----
 new MultiMatchQuery
 {
-    Fields = Field<Project>(p=>p.Description, 2.2).And("myOtherField^0.3"),
+    Fields = Field<Project>(p => p.Description, 2.2).And("myOtherField^0.3"),
     Query = "hello world",
 }
 ----
 
-[source,javascript]
-.Example json output
+==== Fluent DSL example
+
+[source,csharp]
 ----
-{
-  "multi_match": {
-    "query": "hello world",
-    "fields": [
-      "description^2.2",
-      "myOtherField^0.3"
-    ]
-  }
-}
+q
+.MultiMatch(c => c
+    .Fields(Field<Project>(p => p.Description, 2.2).And("myOtherField^0.3"))
+    .Query("hello world")
+)
 ----
 
 [float]
@@ -142,16 +99,6 @@ Starting with Elasticsearch 6.1.0+, it's possible to send a Multi Match query wi
 When no fields are provided the Multi Match query will use the fields defined in the index setting `index.query.default_field`
 (which in turns defaults to `*`).
 
-==== Fluent DSL example
-
-[source,csharp]
-----
-q
-.MultiMatch(c => c
-    .Query("hello world")
-)
-----
-
 ==== Object Initializer syntax example
 
 [source,csharp]
@@ -162,13 +109,13 @@ new MultiMatchQuery
 }
 ----
 
-[source,javascript]
-.Example json output
+==== Fluent DSL example
+
+[source,csharp]
 ----
-{
-  "multi_match": {
-    "query": "hello world"
-  }
-}
+q
+.MultiMatch(c => c
+    .Query("hello world")
+)
 ----
 

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -60,37 +60,6 @@ new NestedAggregation("tags")
 }
 ----
 
-[source,javascript]
-.Example json output
-----
-{
-  "tags": {
-    "nested": {
-      "path": "tags"
-    },
-    "aggs": {
-      "tag_names": {
-        "terms": {
-          "field": "tags.name"
-        },
-        "aggs": {
-          "tags_to_project": {
-            "reverse_nested": {},
-            "aggs": {
-              "top_projects_per_tag": {
-                "terms": {
-                  "field": "name"
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-----
-
 ==== Handling Responses
 
 [source,csharp]
@@ -100,7 +69,7 @@ var tags = response.Aggregations.Nested("tags");
 tags.Should().NotBeNull();
 var tagNames = tags.Terms("tag_names");
 tagNames.Should().NotBeNull();
-foreach(var tagName in tagNames.Buckets)
+foreach (var tagName in tagNames.Buckets)
 {
     tagName.Key.Should().NotBeNullOrEmpty();
     tagName.DocCount.Should().BeGreaterThan(0);
@@ -108,7 +77,7 @@ foreach(var tagName in tagNames.Buckets)
     tagsToProjects.Should().NotBeNull();
     var topProjectsPerTag = tagsToProjects.Terms("top_projects_per_tag");
     topProjectsPerTag.Should().NotBeNull();
-    foreach(var topProject in topProjectsPerTag.Buckets)
+    foreach (var topProject in topProjectsPerTag.Buckets)
     {
         topProject.Key.Should().NotBeNullOrEmpty();
         topProject.DocCount.Should().BeGreaterThan(0);

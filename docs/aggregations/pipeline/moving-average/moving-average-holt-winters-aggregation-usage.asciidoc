@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -71,41 +71,6 @@ new DateHistogramAggregation("projects_started_per_month")
 }
 ----
 
-[source,javascript]
-.Example json output
-----
-{
-  "projects_started_per_month": {
-    "date_histogram": {
-      "field": "startedOn",
-      "interval": "month"
-    },
-    "aggs": {
-      "commits": {
-        "sum": {
-          "field": "numberOfCommits"
-        }
-      },
-      "commits_moving_avg": {
-        "moving_avg": {
-          "buckets_path": "commits",
-          "window": 4,
-          "model": "holt_winters",
-          "settings": {
-            "type": "mult",
-            "alpha": 0.5,
-            "beta": 0.5,
-            "gamma": 0.5,
-            "period": 2,
-            "pad": false
-          }
-        }
-      }
-    }
-  }
-}
-----
-
 ==== Handling Responses
 
 [source,csharp]
@@ -131,9 +96,7 @@ foreach (var item in projectsPerMonth.Buckets)
     // Moving Average specifies a window of 4 so
     // moving average values should exist from 5th bucketr onwards
     if (bucketCount <= 4)
-    {
         movingAverage.Should().BeNull();
-    }
     else
     {
         movingAverage.Should().NotBeNull();

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -22,7 +22,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ----
 s => s
 .Scroll("1m")
-.Slice(ss=>ss.Id(0).Max(5))
+.Slice(ss => ss.Id(0).Max(5))
 ----
 
 [float]
@@ -33,18 +33,7 @@ s => s
 new SearchRequest<Project>()
 {
     Scroll = "1m",
-    Slice = new SlicedScroll {  Id = 0, Max = 5 }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "slice": {
-    "id": 0,
-    "max": 5
-  }
+    Slice = new SlicedScroll { Id = 0, Max = 5 }
 }
 ----
 

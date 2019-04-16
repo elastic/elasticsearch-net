@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -39,32 +39,9 @@ a => a
 ----
 new FilterAggregation("bethels_projects")
 {
-    Filter = new TermQuery {Field = Field<Project>(p => p.LeadDeveloper.FirstName), Value = FirstNameToFind},
+    Filter = new TermQuery { Field = Field<Project>(p => p.LeadDeveloper.FirstName), Value = FirstNameToFind },
     Aggregations =
-        new TermsAggregation("project_tags") {Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword"))}
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "bethels_projects": {
-    "filter": {
-      "term": {
-        "leadDeveloper.firstName": {
-          "value": "pierce"
-        }
-      }
-    },
-    "aggs": {
-      "project_tags": {
-        "terms": {
-          "field": "curatedTags.name.keyword"
-        }
-      }
-    }
-  }
+        new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword")) }
 }
 ----
 
@@ -119,20 +96,10 @@ new FilterAggregation("empty_filter")
 }
 ----
 
-[source,javascript]
-.Example json output
-----
-{
-  "empty_filter": {
-    "filter": {}
-  }
-}
-----
-
 ==== Handling Responses
 
 [source,csharp]
 ----
-response.ShouldNotBeValid();
+response.ShouldNotBeValid()
 ----
 

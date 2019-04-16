@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -58,35 +58,6 @@ new DateHistogramAggregation("projects_started_per_month")
 }
 ----
 
-[source,javascript]
-.Example json output
-----
-{
-  "projects_started_per_month": {
-    "date_histogram": {
-      "field": "startedOn",
-      "interval": "month"
-    },
-    "aggs": {
-      "commits": {
-        "sum": {
-          "field": "numberOfCommits"
-        }
-      },
-      "commits_moving_avg": {
-        "moving_avg": {
-          "buckets_path": "commits",
-          "model": "simple",
-          "window": 30,
-          "predict": 10,
-          "settings": {}
-        }
-      }
-    }
-  }
-}
-----
-
 ==== Handling Responses
 
 [source,csharp]
@@ -99,7 +70,7 @@ projectsPerMonth.Buckets.Should().NotBeNull();
 projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
 
 // average not calculated for the first bucket so movingAvg.Value is expected to be null there
-foreach(var item in projectsPerMonth.Buckets.Skip(1))
+foreach (var item in projectsPerMonth.Buckets.Skip(1))
 {
     var movingAvg = item.Sum("commits_moving_avg");
     movingAvg.Should().NotBeNull();

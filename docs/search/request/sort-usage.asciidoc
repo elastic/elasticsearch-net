@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -29,15 +29,16 @@ s => s
     .Descending(p => p.Name)
     .Descending(SortSpecialField.Score)
     .Ascending(SortSpecialField.DocumentIndexOrder)
-
     .Field(f => f
         .Field(p => p.Tags.First().Added)
         .Order(SortOrder.Descending)
         .MissingLast()
         .UnmappedType(FieldType.Date)
         .Mode(SortMode.Average)
-        .NestedPath(p => p.Tags)
-        .NestedFilter(q => q.MatchAll())
+        .Nested(n => n
+            .Path(p => p.Tags)
+            .Filter(q => q.MatchAll())
+        )
     )
     .Field(f => f
         .Field(p => p.NumberOfCommits)
@@ -72,21 +73,24 @@ new SearchRequest<Project>
 {
     Sort = new List<ISort>
     {
-        new SortField { Field = "startedOn", Order = SortOrder.Ascending },
-        new SortField { Field = "name", Order = SortOrder.Descending },
-        new SortField { Field = "_score", Order = SortOrder.Descending },
-        new SortField { Field = "_doc", Order = SortOrder.Ascending },
-        new SortField
+        new FieldSort { Field = "startedOn", Order = SortOrder.Ascending },
+        new FieldSort { Field = "name", Order = SortOrder.Descending },
+        new FieldSort { Field = "_score", Order = SortOrder.Descending },
+        new FieldSort { Field = "_doc", Order = SortOrder.Ascending },
+        new FieldSort
         {
-            Field = Field<Project>(p=>p.Tags.First().Added),
+            Field = Field<Project>(p => p.Tags.First().Added),
             Order = SortOrder.Descending,
             Missing = "_last",
             UnmappedType = FieldType.Date,
             Mode = SortMode.Average,
-            NestedPath = Field<Project>(p=>p.Tags),
-            NestedFilter = new MatchAllQuery(),
+            Nested = new NestedSort
+            {
+                Path = Field<Project>(p => p.Tags),
+                Filter = new MatchAllQuery()
+            }
         },
-        new SortField
+        new FieldSort
         {
             Field = Field<Project>(p => p.NumberOfCommits),
             Order = SortOrder.Descending,
@@ -97,9 +101,9 @@ new SearchRequest<Project>
             Field = "location",
             Order = SortOrder.Ascending,
             DistanceType = GeoDistanceType.Arc,
-            GeoUnit = DistanceUnit.Centimeters,
+            Unit = DistanceUnit.Centimeters,
             Mode = SortMode.Min,
-            Points = new[] {new GeoLocation(70, -70), new GeoLocation(-12, 12)}
+            Points = new[] { new GeoLocation(70, -70), new GeoLocation(-12, 12) }
         },
         new ScriptSort
         {
@@ -109,88 +113,11 @@ new SearchRequest<Project>
             {
                 Params = new Dictionary<string, object>
                 {
-                    {"factor", 1.1}
+                    { "factor", 1.1 }
                 }
             }
         }
     }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "sort": [
-    {
-      "startedOn": {
-        "order": "asc"
-      }
-    },
-    {
-      "name": {
-        "order": "desc"
-      }
-    },
-    {
-      "_score": {
-        "order": "desc"
-      }
-    },
-    {
-      "_doc": {
-        "order": "asc"
-      }
-    },
-    {
-      "tags.added": {
-        "missing": "_last",
-        "order": "desc",
-        "mode": "avg",
-        "nested_path": "tags",
-        "nested_filter": {
-          "match_all": {}
-        },
-        "unmapped_type": "date"
-      }
-    },
-    {
-      "numberOfCommits": {
-        "missing": -1,
-        "order": "desc"
-      }
-    },
-    {
-      "_geo_distance": {
-        "location": [
-          {
-            "lat": 70.0,
-            "lon": -70.0
-          },
-          {
-            "lat": -12.0,
-            "lon": 12.0
-          }
-        ],
-        "order": "asc",
-        "mode": "min",
-        "distance_type": "arc",
-        "unit": "cm"
-      }
-    },
-    {
-      "_script": {
-        "order": "asc",
-        "type": "number",
-        "script": {
-          "params": {
-            "factor": 1.1
-          },
-          "source": "doc['numberOfCommits'].value * params.factor"
-        }
-      }
-    }
-  ]
 }
 ----
 
@@ -229,7 +156,7 @@ new SearchRequest<Project>
 {
     Sort = new List<ISort>
     {
-        new SortField
+        new FieldSort
         {
             Field = Field<Project>(p => p.Tags.First().Added),
             Order = SortOrder.Descending,
@@ -243,29 +170,6 @@ new SearchRequest<Project>
             }
         }
     }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "sort": [
-    {
-      "tags.added": {
-        "missing": "_last",
-        "order": "desc",
-        "mode": "avg",
-        "nested": {
-          "path": "tags",
-          "filter": {
-            "match_all": {}
-          }
-        },
-        "unmapped_type": "date"
-      }
-    }
-  ]
 }
 ----
 

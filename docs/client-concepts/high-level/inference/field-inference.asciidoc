@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -324,6 +324,17 @@ Expect("leadDeveloper.firstName.raw.evendeeper").WhenSerializing(multiSuffixFiel
 Expect("metadata.hardcoded.raw.evendeeper").WhenSerializing(multiSuffixFieldExpressions[4]);
 ----
 
+[[member-expressions-only]]
+==== Member Expressions only
+
+The expression passed to Field should only be a MemberExpression
+https://docs.microsoft.com/en-us/dotnet/api/system.linq.expressions.memberexpression?view=netframework-4.7.2
+
+[source,csharp]
+----
+var fieldExpression = Field<Project>(p => p.Name + 2);
+----
+
 [[field-name-attribute]]
 ==== Attribute based naming
 
@@ -383,7 +394,7 @@ If both a NEST property attribute and a serializer specific attribute are presen
 public class Both
 {
     [Text(Name = "naam")]
-    [PropertyName("nameInJson"), JsonProperty("nameInJson")]
+    [PropertyName("nameInJson"), DataMember(Name = "nameInJson")]
     public string Name { get; set; }
 }
 
@@ -489,7 +500,7 @@ private class Precedence
     [PropertyName("nestProp"),JsonProperty("jsonProp")]
     public string NestProperty { get; set; } <3>
 
-    [JsonProperty("jsonProp")]
+    [DataMember(Name ="jsonProp")]
     public string JsonProperty { get; set; } <4>
 
     [PropertyName("dontaskme"),JsonProperty("dontaskme")]
@@ -502,15 +513,10 @@ private class Precedence
 }
 ----
 <1> Even though this property has various attributes applied we provide an override on ConnectionSettings later that takes precedence.
-
 <2> Has a `TextAttribute`, `PropertyNameAttribute` and a `JsonPropertyAttribute` - the `TextAttribute` takes precedence.
-
 <3> Has both a `PropertyNameAttribute` and a `JsonPropertyAttribute` - the `PropertyNameAttribute` takes precedence.
-
 <4> `JsonPropertyAttribute` takes precedence.
-
 <5> This property we are going to hard code in our custom serializer to resolve to ask.
-
 <6> We are going to register a DefaultFieldNameInferrer on ConnectionSettings that will uppercase all properties.
 
 We'll create a custom `IPropertyMappingProvider` that renames any property named `AskSerializer` to `ask`.
@@ -556,9 +562,7 @@ usingSettings.Expect("data").ForField(Field<Precedence>(p => p.DataMember));
 usingSettings.Expect("DEFAULTFIELDNAMEINFERRER").ForField(Field<Precedence>(p => p.DefaultFieldNameInferrer));
 ----
 <1> Rename on the mapping for the `Precedence` type
-
 <2> Default inference for a field, if no other rules apply or are specified for a given field
-
 <3> Hook up the custom `IPropertyMappingProvider`
 
 The same naming rules also apply when indexing a document 
@@ -622,5 +626,33 @@ usingSettings.Expect(new []
         Description = "this property will be renamed for Child",
         IgnoreMe = "this property will be ignored (won't be serialized) for Child",
     });
+
+public class SourceModel
+{
+    [PropertyName("gexo")]
+    public GeoModel Geo { get; set; }
+}
+
+public class GeoModel
+{
+    [JsonProperty("country_iso_code")]
+    public string CountryIsoCode { get; set; }
+}
+
+var usingSettings = WithConnectionSettings(s => s)
+        .WithSourceSerializer(JsonNetSerializer.Default);
+
+usingSettings.Expect("gexo").ForField(Field<SourceModel>(p=>p.Geo));
+usingSettings.Expect("country_iso_code").ForField(Field<GeoModel>(p=>p.CountryIsoCode));
+usingSettings.Expect(new []
+    {
+        "country_iso_code",
+    }).AsPropertiesOf(new GeoModel { CountryIsoCode = "nl" });
+usingSettings.Expect(new []
+    {
+        "gexo",
+    }).AsPropertiesOf(new SourceModel { Geo = new GeoModel { CountryIsoCode = "nl" } });
+
+usingSettings.Expect("gexo.country_iso_code").ForField(Field<SourceModel>(p=>p.Geo.CountryIsoCode));
 ----
 

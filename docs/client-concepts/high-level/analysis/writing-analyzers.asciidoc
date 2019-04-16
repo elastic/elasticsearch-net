@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -58,13 +58,11 @@ which maps to the `Name` POCO property on the `Project` type, uses the `whitespa
 [source,csharp]
 ----
 var createIndexResponse = _client.CreateIndex("my-index", c => c
-    .Mappings(m => m
-        .Map<Project>(mm => mm
-            .Properties(p => p
-                .Text(t => t
-                    .Name(n => n.Name)
-                    .Analyzer("whitespace")
-                )
+    .Map<Project>(mm => mm
+        .Properties(p => p
+            .Text(t => t
+                .Name(n => n.Name)
+                .Analyzer("whitespace")
             )
         )
     )
@@ -91,48 +89,49 @@ var createIndexResponse = _client.CreateIndex("my-index", c => c
             )
         )
     )
-    .Mappings(m => m
-        .Map<Project>(mm => mm
-            .Properties(p => p
-                .Text(t => t
-                    .Name(n => n.Name)
-                    .Analyzer("standard_english") <2>
-                )
+    .Map<Project>(mm => mm
+        .Properties(p => p
+            .Text(t => t
+                .Name(n => n.Name)
+                .Analyzer("standard_english") <2>
             )
         )
     )
 );
 ----
 <1> Pre-defined list of English stopwords within Elasticsearch
-
 <2> Use the `standard_english` analyzer configured
 
-[source,javascript]
+[source,csharp]
 ----
+var expected = new
 {
-  "settings": {
-    "analysis": {
-      "analyzer": {
-        "standard_english": {
-          "type": "standard",
-          "stopwords": [
-            "_english_"
-          ]
+    settings = new
+    {
+        analysis = new
+        {
+            analyzer = new
+            {
+                standard_english = new
+                {
+                    type = "standard",
+                    stopwords = new [] { "_english_" }
+                }
+            }
         }
-      }
-    }
-  },
-  "mappings": {
-    "doc": {
-      "properties": {
-        "name": {
-          "type": "text",
-          "analyzer": "standard_english"
+    },
+    mappings = new
+    {
+        properties = new
+        {
+            name = new
+            {
+                type = "text",
+                analyzer = "standard_english"
+            }
         }
-      }
     }
-  }
-}
+};
 ----
 
 ==== Creating a custom analyzer
@@ -182,19 +181,17 @@ var createIndexResponse = _client.CreateIndex("questions", c => c
                 .Custom("question", ca => ca
                     .CharFilters("html_strip", "programming_language")
                     .Tokenizer("standard")
-                    .Filters("standard", "lowercase", "stop")
+                    .Filters("lowercase", "stop")
                 )
             )
         )
     )
-    .Mappings(m => m
-        .Map<Question>(mm => mm
-            .AutoMap()
-            .Properties(p => p
-                .Text(t => t
-                    .Name(n => n.Body)
-                    .Analyzer("question")
-                )
+    .Map<Question>(mm => mm
+        .AutoMap()
+        .Properties(p => p
+            .Text(t => t
+                .Name(n => n.Body)
+                .Analyzer("question")
             )
         )
     )
@@ -247,32 +244,29 @@ var createIndexResponse = _client.CreateIndex("questions", c => c
                 .Custom("index_question", ca => ca <1>
                     .CharFilters("html_strip", "programming_language")
                     .Tokenizer("standard")
-                    .Filters("standard", "lowercase", "stop")
+                    .Filters("lowercase", "stop")
                 )
                 .Custom("search_question", ca => ca <2>
                     .CharFilters("programming_language")
                     .Tokenizer("standard")
-                    .Filters("standard", "lowercase", "stop")
+                    .Filters("lowercase", "stop")
                 )
             )
         )
     )
-    .Mappings(m => m
-        .Map<Question>(mm => mm
-            .AutoMap()
-            .Properties(p => p
-                .Text(t => t
-                    .Name(n => n.Body)
-                    .Analyzer("index_question")
-                    .SearchAnalyzer("search_question")
-                )
+    .Map<Question>(mm => mm
+        .AutoMap()
+        .Properties(p => p
+            .Text(t => t
+                .Name(n => n.Body)
+                .Analyzer("index_question")
+                .SearchAnalyzer("search_question")
             )
         )
     )
 );
 ----
 <1> Use an analyzer at index time that strips HTML tags
-
 <2> Use an analyzer at search time that does not strip HTML tags
 
 With this in place, the text of a question body will be analyzed with the `index_question` analyzer

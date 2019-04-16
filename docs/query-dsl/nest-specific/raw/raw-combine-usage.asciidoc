@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -31,28 +31,5 @@ q.Raw(RawTermQuery) && q.Term("x", "y")
 ----
 new RawQuery(RawTermQuery)
 && new TermQuery { Field = "x", Value = "y" }
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "bool": {
-    "must": [
-      {
-        "term": {
-          "fieldname": "value"
-        }
-      },
-      {
-        "term": {
-          "x": {
-            "value": "y"
-          }
-        }
-      }
-    ]
-  }
-}
 ----
 

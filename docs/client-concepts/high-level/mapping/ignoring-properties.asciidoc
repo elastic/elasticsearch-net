@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -34,7 +34,7 @@ json serializer specific attribute  to ignore the property either `IgnorePropert
 
 [source,csharp]
 ----
-[ElasticsearchType(Name = "company")]
+[ElasticsearchType(RelationName = "company")]
 public class CompanyWithAttributesAndPropertiesToIgnore
 {
     public string Name { get; set; }
@@ -62,38 +62,39 @@ var connectionSettings = new ConnectionSettings(new InMemoryConnection()) <1>
 var client = new ElasticClient(connectionSettings);
 
 var createIndexResponse = client.CreateIndex("myindex", c => c
-    .Mappings(ms => ms
-        .Map<CompanyWithAttributesAndPropertiesToIgnore>(m => m
-            .AutoMap()
-        )
+    .Map<CompanyWithAttributesAndPropertiesToIgnore>(m => m
+        .AutoMap()
     )
 );
 ----
 <1> we're using an in-memory connection, but in your application, you'll want to use an `IConnection` that actually sends a request.
-
-<2> we disable direct streaming here to capture the request and response bytes. In your application however, you'll like not want to do this in production.
+<2> we disable direct streaming here to capture the request and response bytes. In a production application, you would likely not call this as it adds overhead to each call.
 
 The JSON output for the mapping does not contain the ignored properties
 
-[source,javascript]
+[source,csharp]
 ----
+var expected = new
 {
-  "mappings": {
-    "company": {
-      "properties": {
-        "name": {
-          "type": "text",
-          "fields": {
-            "keyword": {
-              "type": "keyword",
-              "ignore_above": 256
+    mappings = new
+    {
+        properties = new
+        {
+            name = new
+            {
+                type = "text",
+                fields = new
+                {
+                    keyword = new
+                    {
+                        type = "keyword",
+                        ignore_above = 256
+                    }
+                }
             }
-          }
         }
-      }
     }
-  }
-}
+};
 ----
 
 ==== Ignoring inherited properties
@@ -122,37 +123,37 @@ var connectionSettings = new ConnectionSettings(new InMemoryConnection())
 var client = new ElasticClient(connectionSettings);
 
 var createIndexResponse = client.CreateIndex("myindex", c => c
-        .Mappings(ms => ms
-            .Map<Child>(m => m
-                .AutoMap()
-            )
+        .Map<Child>(m => m
+            .AutoMap()
         )
     );
 ----
 
 The property `IgnoreMe` has been ignored for the child mapping 
 
-[source,javascript]
+[source,csharp]
 ----
+var expected = new
 {
-  "mappings": {
-    "child": {
-      "properties": {
-        "id": {
-          "type": "integer"
-        },
-        "desc": {
-          "fields": {
-            "keyword": {
-              "ignore_above": 256,
-              "type": "keyword"
+    mappings = new
+    {
+        properties = new
+        {
+            id = new
+            {
+                type = "integer"
+            },
+            desc = new {
+                fields = new {
+                    keyword = new {
+                        ignore_above = 256,
+                        type = "keyword"
+                    }
+                },
+                type = "text"
             }
-          },
-          "type": "text"
         }
-      }
     }
-  }
-}
+};
 ----
 

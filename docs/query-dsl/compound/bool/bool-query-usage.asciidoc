@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -67,37 +67,6 @@ new BoolQuery
     Filter = new QueryContainer[] { new MatchAllQuery() },
     MinimumShouldMatch = 1,
     Boost = 2
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "bool": {
-    "must": [
-      {
-        "match_all": {}
-      }
-    ],
-    "must_not": [
-      {
-        "match_all": {}
-      }
-    ],
-    "should": [
-      {
-        "match_all": {}
-      }
-    ],
-    "filter": [
-      {
-        "match_all": {}
-      }
-    ],
-    "minimum_should_match": 1,
-    "boost": 2.0
-  }
 }
 ----
 

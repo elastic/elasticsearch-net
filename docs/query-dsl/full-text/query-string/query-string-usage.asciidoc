@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -23,9 +23,9 @@ q
 .QueryString(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Fields(f => f.Field(p=>p.Description).Field("myOtherField"))
+    .Fields(f => f.Field(p => p.Description).Field("myOtherField"))
     .Query("hello world")
-    .DefaultField(p=>p.Description)
+    .DefaultField(p => p.Description)
     .DefaultOperator(Operator.Or)
     .Analyzer("standard")
     .QuoteAnalyzer("quote-an")
@@ -52,11 +52,11 @@ q
 ----
 new QueryStringQuery
 {
-    Fields = Field<Project>(p=>p.Description).And("myOtherField"),
+    Fields = Field<Project>(p => p.Description).And("myOtherField"),
     Boost = 1.1,
     Name = "named_query",
     Query = "hello world",
-    DefaultField = Field<Project>(p=>p.Description),
+    DefaultField = Field<Project>(p => p.Description),
     DefaultOperator = Operator.Or,
     Analyzer = "standard",
     QuoteAnalyzer = "quote-an",
@@ -74,40 +74,6 @@ new QueryStringQuery
     QuoteFieldSuffix = "'",
     Lenient = true,
     AutoGenerateSynonymsPhraseQuery = false
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "query_string": {
-    "_name": "named_query",
-    "boost": 1.1,
-    "query": "hello world",
-    "default_field": "description",
-    "default_operator": "or",
-    "analyzer": "standard",
-    "quote_analyzer": "quote-an",
-    "allow_leading_wildcard": true,
-    "fuzzy_max_expansions": 3,
-    "fuzziness": "AUTO",
-    "fuzzy_prefix_length": 2,
-    "analyze_wildcard": true,
-    "max_determinized_states": 2,
-    "minimum_should_match": 2,
-    "lenient": true,
-    "fields": [
-      "description",
-      "myOtherField"
-    ],
-    "tie_breaker": 1.2,
-    "rewrite": "constant_score",
-    "fuzzy_rewrite": "constant_score",
-    "quote_field_suffix": "'",
-    "escape": true,
-    "auto_generate_synonyms_phrase_query": false
-  }
 }
 ----
 

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -41,18 +41,16 @@ new TermsQuery
 }
 ----
 
-[source,javascript]
-.Example json output
+==== Object Initializer syntax example
+
+[source,csharp]
 ----
+new TermsQuery
 {
-  "terms": {
-    "_name": "named_query",
-    "boost": 1.1,
-    "description": [
-      "term1",
-      "term2"
-    ]
-  }
+    Name = "named_query",
+    Boost = 1.1,
+    Field = "description",
+    Terms = _terms
 }
 ----
 
@@ -67,36 +65,6 @@ q
     .Field(p => p.Description)
     .Terms(_terms)
 )
-----
-
-==== Object Initializer syntax example
-
-[source,csharp]
-----
-new TermsQuery
-{
-    Name = "named_query",
-    Boost = 1.1,
-    Field = "description",
-    Terms = _terms
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "terms": {
-    "_name": "named_query",
-    "boost": 1.1,
-    "description": [
-      [
-        "term1",
-        "term2"
-      ]
-    ]
-  }
-}
 ----
 
 ==== Handling Responses
@@ -114,19 +82,6 @@ var rootCause = rootCauses.First();
 rootCause.Type.Should().Be("parsing_exception");
 ----
 
-==== Fluent DSL example
-
-[source,csharp]
-----
-q
-.Terms(c => c
-    .Name("named_query")
-    .Boost(1.1)
-    .Field(p => p.NumberOfCommits)
-    .Terms(_terms)
-)
-----
-
 ==== Object Initializer syntax example
 
 [source,csharp]
@@ -140,21 +95,17 @@ new TermsQuery
 }
 ----
 
-[source,javascript]
-.Example json output
+==== Fluent DSL example
+
+[source,csharp]
 ----
-{
-  "terms": {
-    "_name": "named_query",
-    "boost": 1.1,
-    "numberOfCommits": [
-      [
-        "term1",
-        "term2"
-      ]
-    ]
-  }
-}
+q
+.Terms(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.NumberOfCommits)
+    .Terms(_terms)
+)
 ----
 
 ==== Handling Responses

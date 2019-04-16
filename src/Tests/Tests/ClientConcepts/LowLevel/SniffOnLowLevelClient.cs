@@ -22,7 +22,7 @@ namespace Tests.ClientConcepts.LowLevel
 			var elasticClient = new ElasticLowLevelClient(new ConnectionConfiguration(sniffingConnectionPool));
 
 			Func<DynamicResponse> act = () => elasticClient.ClusterHealth<DynamicResponse>();
-			act.Invoking(s => s.Invoke()).ShouldNotThrow();
+			act.Invoking(s => s.Invoke()).Should().NotThrow();
 		}
 
 	}

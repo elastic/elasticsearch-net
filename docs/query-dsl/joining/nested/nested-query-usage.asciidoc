@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -29,8 +29,8 @@ q
 .Nested(c => c
     .Name("named_query")
     .Boost(1.1)
-    .InnerHits(i=>i.Explain())
-    .Path(p=>p.CuratedTags)
+    .InnerHits(i => i.Explain())
+    .Path(p => p.CuratedTags)
     .Query(nq => nq
         .Terms(t => t
             .Field(f => f.CuratedTags.First().Name)
@@ -57,30 +57,6 @@ new NestedQuery
         Terms = new[] { "lorem", "ipsum" }
     },
     IgnoreUnmapped = true
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "nested": {
-    "_name": "named_query",
-    "boost": 1.1,
-    "query": {
-      "terms": {
-        "curatedTags.name": [
-          "lorem",
-          "ipsum"
-        ]
-      }
-    },
-    "ignore_unmapped": true,
-    "path": "curatedTags",
-    "inner_hits": {
-      "explain": true
-    }
-  }
 }
 ----
 

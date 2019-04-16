@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -44,35 +44,6 @@ new ChildrenAggregation("name_of_child_agg", typeof(CommitActivity))
         new AverageAggregation("average_per_child", "confidenceFactor")
         && new MaxAggregation("max_per_child", "confidenceFactor")
         && new MinAggregation("min_per_child", "confidenceFactor")
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "name_of_child_agg": {
-    "children": {
-      "type": "commits"
-    },
-    "aggs": {
-      "average_per_child": {
-        "avg": {
-          "field": "confidenceFactor"
-        }
-      },
-      "max_per_child": {
-        "max": {
-          "field": "confidenceFactor"
-        }
-      },
-      "min_per_child": {
-        "min": {
-          "field": "confidenceFactor"
-        }
-      }
-    }
-  }
 }
 ----
 

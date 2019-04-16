@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -45,31 +45,6 @@ new DateHistogramAggregation("projects_started_per_month")
     Aggregations = new SumAggregation("commits", "numberOfCommits")
 }
 && new StatsBucketAggregation("stats_commits_per_month", "projects_started_per_month>commits")
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "projects_started_per_month": {
-    "date_histogram": {
-      "field": "startedOn",
-      "interval": "month"
-    },
-    "aggs": {
-      "commits": {
-        "sum": {
-          "field": "numberOfCommits"
-        }
-      }
-    }
-  },
-  "stats_commits_per_month": {
-    "stats_bucket": {
-      "buckets_path": "projects_started_per_month>commits"
-    }
-  }
-}
 ----
 
 ==== Handling Responses

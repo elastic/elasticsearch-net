@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -40,21 +40,6 @@ new PrefixQuery
     Field = "description",
     Value = "proj",
     Rewrite = MultiTermQueryRewrite.TopTerms(10)
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "prefix": {
-    "description": {
-      "_name": "named_query",
-      "boost": 1.1,
-      "rewrite": "top_terms_10",
-      "value": "proj"
-    }
-  }
 }
 ----
 

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -14,18 +14,6 @@ please modify the original csharp file found at the link and submit the PR with 
 
 [[scripted-metric-aggregation-usage]]
 === Scripted Metric Aggregation Usage
-
-[source,csharp]
-----
-private class Scripted
-{
-    public string Language { get; set; }
-    public string Combine { get; set; }
-    public string Reduce { get; set; }
-    public string Map { get; set; }
-    public string Init { get; set; }
-}
-----
 
 ==== Fluent DSL example
 
@@ -53,29 +41,6 @@ new ScriptedMetricAggregation("sum_the_hard_way")
 }
 ----
 
-[source,javascript]
-.Example json output
-----
-{
-  "sum_the_hard_way": {
-    "scripted_metric": {
-      "init_script": {
-        "source": "params._agg.commits = []"
-      },
-      "map_script": {
-        "source": "if (doc['state'].value == \"Stable\") { params._agg.commits.add(doc['numberOfCommits'].value) }"
-      },
-      "combine_script": {
-        "source": "def sum = 0.0; for (c in params._agg.commits) { sum += c } return sum"
-      },
-      "reduce_script": {
-        "source": "def sum = 0.0; for (a in params._aggs) { sum += a } return sum"
-      }
-    }
-  }
-}
-----
-
 ==== Handling Responses
 
 [source,csharp]
@@ -86,6 +51,18 @@ sumTheHardWay.Should().NotBeNull();
 sumTheHardWay.Value<int>().Should().BeGreaterThan(0);
 ----
 
+[source,csharp]
+----
+private class Scripted
+{
+    public string Combine { get; set; }
+    public string Init { get; set; }
+    public string Language { get; set; }
+    public string Map { get; set; }
+    public string Reduce { get; set; }
+}
+----
+
 ==== Fluent DSL example
 
 [source,csharp]
@@ -93,6 +70,7 @@ sumTheHardWay.Value<int>().Should().BeGreaterThan(0);
 a => a
 .ScriptedMetric("by_state_total", sm => sm
     .InitScript(ss => ss.Source(First.Init).Lang(First.Language))
+    .CombineScript(ss => ss.Source(First.Combine).Lang(First.Language))
     .MapScript(ss => ss.Source(First.Map).Lang(First.Language))
     .ReduceScript(ss => ss.Source(First.Reduce).Lang(First.Language))
 )
@@ -110,59 +88,17 @@ a => a
 ----
 new ScriptedMetricAggregation("by_state_total")
 {
-    InitScript = new InlineScript(First.Init) {Lang = First.Language},
-    MapScript = new InlineScript(First.Map) {Lang = First.Language},
-    ReduceScript = new InlineScript(First.Reduce) {Lang = First.Language}
+    InitScript = new InlineScript(First.Init) { Lang = First.Language },
+    CombineScript = new InlineScript(First.Combine) { Lang = First.Language },
+    MapScript = new InlineScript(First.Map) { Lang = First.Language },
+    ReduceScript = new InlineScript(First.Reduce) { Lang = First.Language }
 }
 && new ScriptedMetricAggregation("total_commits")
 {
-    InitScript = new InlineScript(Second.Init) {Lang = Second.Language},
-    MapScript = new InlineScript(Second.Map) {Lang = Second.Language},
-    CombineScript = new InlineScript(Second.Combine) {Lang = Second.Language},
-    ReduceScript = new InlineScript(Second.Reduce) {Lang = Second.Language}
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "by_state_total": {
-    "scripted_metric": {
-      "init_script": {
-        "source": "params._agg.map = [:]",
-        "lang": "painless"
-      },
-      "map_script": {
-        "source": "if (params._agg.map.containsKey(doc['state'].value)) params._agg.map[doc['state'].value] += 1 else params._agg.map[doc['state'].value] = 1;",
-        "lang": "painless"
-      },
-      "reduce_script": {
-        "source": "def reduce = [:]; for (agg in params._aggs) { for (entry in agg.map.entrySet()) { if (reduce.containsKey(entry.getKey())) reduce[entry.getKey()] += entry.getValue(); else reduce[entry.getKey()] = entry.getValue(); } } return reduce;",
-        "lang": "painless"
-      }
-    }
-  },
-  "total_commits": {
-    "scripted_metric": {
-      "init_script": {
-        "source": "params._agg.commits = []",
-        "lang": "painless"
-      },
-      "map_script": {
-        "source": "if (doc['state'].value == \"Stable\") { params._agg.commits.add(doc['numberOfCommits'].value) }",
-        "lang": "painless"
-      },
-      "combine_script": {
-        "source": "def sum = 0.0; for (c in params._agg.commits) { sum += c } return sum",
-        "lang": "painless"
-      },
-      "reduce_script": {
-        "source": "def sum = 0.0; for (a in params._aggs) { sum += a } return sum",
-        "lang": "painless"
-      }
-    }
-  }
+    InitScript = new InlineScript(Second.Init) { Lang = Second.Language },
+    MapScript = new InlineScript(Second.Map) { Lang = Second.Language },
+    CombineScript = new InlineScript(Second.Combine) { Lang = Second.Language },
+    ReduceScript = new InlineScript(Second.Reduce) { Lang = Second.Language }
 }
 ----
 

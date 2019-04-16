@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -27,8 +27,10 @@ q
 .Script(sn => sn
     .Name("named_query")
     .Boost(1.1)
-    .Source(_templateString)
-    .Params(p=>p.Add("param1", 50))
+    .Script(s => s
+        .Source(_templateString)
+        .Params(p => p.Add("param1", 50))
+    )
 )
 ----
 
@@ -40,28 +42,13 @@ new ScriptQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Source = _templateString,
-    Params = new Dictionary<string, object>
+    Script = new InlineScript(_templateString)
     {
-        { "param1", 50 }
-    }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "script": {
-    "_name": "named_query",
-    "boost": 1.1,
-    "script": {
-      "source": "doc['numberOfCommits'].value > param1",
-      "params": {
-        "param1": 50
-      }
-    }
-  }
+        Params = new Dictionary<string, object>
+        {
+            { "param1", 50 }
+        }
+    },
 }
 ----
 

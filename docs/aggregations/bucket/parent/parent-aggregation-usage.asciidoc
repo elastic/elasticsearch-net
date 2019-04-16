@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.5
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/Aggregations/Bucket/Parent/ParentAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Bucket/Parent/ParentAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -47,40 +47,7 @@ new ParentAggregation("name_of_parent_agg", typeof(CommitActivity)) <1>
 }
 ----
 <1> `join` field is determined from the _child_ type. In this example, it is `CommitActivity`
-
 <2> sub-aggregations are on the type determined from the `join` field. In this example, a `Project` is a parent of `CommitActivity`
-
-[source,javascript]
-.Example json output
-----
-{
-  "size": 0,
-  "aggs": {
-    "name_of_parent_agg": {
-      "parent": {
-        "type": "commits"
-      },
-      "aggs": {
-        "average_commits": {
-          "avg": {
-            "field": "numberOfCommits"
-          }
-        },
-        "max_commits": {
-          "max": {
-            "field": "numberOfCommits"
-          }
-        },
-        "min_commits": {
-          "min": {
-            "field": "numberOfCommits"
-          }
-        }
-      }
-    }
-  }
-}
-----
 
 ==== Handling Responses
 

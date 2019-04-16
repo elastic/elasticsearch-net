@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -41,38 +41,10 @@ new GeoDistanceAggregation("rings_around_amsterdam")
     Origin = "52.376, 4.894",
     Ranges = new List<AggregationRange>
     {
-        new AggregationRange {To = 100},
-        new AggregationRange {From = 100, To = 300},
-        new AggregationRange {From = 300}
+        new AggregationRange { To = 100 },
+        new AggregationRange { From = 100, To = 300 },
+        new AggregationRange { From = 300 }
     }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "rings_around_amsterdam": {
-    "geo_distance": {
-      "field": "location",
-      "origin": {
-        "lat": 52.376,
-        "lon": 4.894
-      },
-      "ranges": [
-        {
-          "to": 100.0
-        },
-        {
-          "from": 100.0,
-          "to": 300.0
-        },
-        {
-          "from": 300.0
-        }
-      ]
-    }
-  }
 }
 ----
 

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -36,7 +36,7 @@ q
 .GeoShape(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Field(p=>p.Location)
+    .Field(p => p.Location)
     .Shape(s => s
         .Point(PointCoordinates)
     )
@@ -52,30 +52,9 @@ new GeoShapeQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Field = Infer.Field<Project>(p=>p.Location),
+    Field = Infer.Field<Project>(p => p.Location),
     Shape = new PointGeoShape(PointCoordinates),
     Relation = GeoShapeRelation.Intersects,
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "geo_shape": {
-    "_name": "named_query",
-    "boost": 1.1,
-    "location": {
-      "relation": "intersects",
-      "shape": {
-        "type": "point",
-        "coordinates": [
-          38.897676,
-          -77.03653
-        ]
-      }
-    }
-  }
 }
 ----
 
@@ -83,6 +62,20 @@ new GeoShapeQuery
 [float]
 == Querying with MultiPoint
 
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new GeoShapeQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = Infer.Field<Project>(p => p.Location),
+    Shape = new MultiPointGeoShape(MultiPointCoordinates),
+    Relation = GeoShapeRelation.Intersects,
+}
+----
+
 ==== Fluent DSL example
 
 [source,csharp]
@@ -91,7 +84,7 @@ q
 .GeoShape(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Field(p=>p.Location)
+    .Field(p => p.Location)
     .Shape(s => s
         .MultiPoint(MultiPointCoordinates)
     )
@@ -99,6 +92,10 @@ q
 )
 ----
 
+[[geo-shape-query-linestring]]
+[float]
+== Querying with LineString
+
 ==== Object Initializer syntax example
 
 [source,csharp]
@@ -107,42 +104,11 @@ new GeoShapeQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Field = Infer.Field<Project>(p=>p.Location),
-    Shape = new MultiPointGeoShape(MultiPointCoordinates),
+    Field = Infer.Field<Project>(p => p.Location),
+    Shape = new LineStringGeoShape(LineStringCoordinates),
     Relation = GeoShapeRelation.Intersects,
 }
 ----
-
-[source,javascript]
-.Example json output
-----
-{
-  "geo_shape": {
-    "_name": "named_query",
-    "boost": 1.1,
-    "location": {
-      "relation": "intersects",
-      "shape": {
-        "type": "multipoint",
-        "coordinates": [
-          [
-            38.897676,
-            -77.03653
-          ],
-          [
-            38.889939,
-            -77.009051
-          ]
-        ]
-      }
-    }
-  }
-}
-----
-
-[[geo-shape-query-linestring]]
-[float]
-== Querying with LineString
 
 ==== Fluent DSL example
 
@@ -152,7 +118,7 @@ q
 .GeoShape(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Field(p=>p.Location)
+    .Field(p => p.Location)
     .Shape(s => s
         .LineString(LineStringCoordinates)
     )
@@ -160,6 +126,10 @@ q
 )
 ----
 
+[[geo-shape-query-multilinestring]]
+[float]
+== Querying with MultiLineString
+
 ==== Object Initializer syntax example
 
 [source,csharp]
@@ -168,42 +138,11 @@ new GeoShapeQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Field = Infer.Field<Project>(p=>p.Location),
-    Shape = new LineStringGeoShape(LineStringCoordinates),
+    Field = Infer.Field<Project>(p => p.Location),
+    Shape = new MultiLineStringGeoShape(MultiLineStringCoordinates),
     Relation = GeoShapeRelation.Intersects,
 }
 ----
-
-[source,javascript]
-.Example json output
-----
-{
-  "geo_shape": {
-    "_name": "named_query",
-    "boost": 1.1,
-    "location": {
-      "relation": "intersects",
-      "shape": {
-        "type": "linestring",
-        "coordinates": [
-          [
-            38.897676,
-            -77.03653
-          ],
-          [
-            38.889939,
-            -77.009051
-          ]
-        ]
-      }
-    }
-  }
-}
-----
-
-[[geo-shape-query-multilinestring]]
-[float]
-== Querying with MultiLineString
 
 ==== Fluent DSL example
 
@@ -213,13 +152,17 @@ q
 .GeoShape(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Field(p=>p.Location)
+    .Field(p => p.Location)
     .Shape(s => s
         .MultiLineString(MultiLineStringCoordinates)
     )
     .Relation(GeoShapeRelation.Intersects)
 )
 ----
+
+[[geo-shape-query-polygon]]
+[float]
+== Querying with Polygon
 
 ==== Object Initializer syntax example
 
@@ -229,88 +172,12 @@ new GeoShapeQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Field = Infer.Field<Project>(p=>p.Location),
-    Shape = new MultiLineStringGeoShape(MultiLineStringCoordinates),
+    Field = Infer.Field<Project>(p => p.Location),
+    Shape = new PolygonGeoShape(PolygonCoordinates),
+    IgnoreUnmapped = true,
     Relation = GeoShapeRelation.Intersects,
 }
 ----
-
-[source,javascript]
-.Example json output
-----
-{
-  "geo_shape": {
-    "_name": "named_query",
-    "boost": 1.1,
-    "location": {
-      "relation": "intersects",
-      "shape": {
-        "type": "multilinestring",
-        "coordinates": [
-          [
-            [
-              2.0,
-              12.0
-            ],
-            [
-              2.0,
-              13.0
-            ],
-            [
-              3.0,
-              13.0
-            ],
-            [
-              3.0,
-              12.0
-            ]
-          ],
-          [
-            [
-              0.0,
-              10.0
-            ],
-            [
-              0.0,
-              11.0
-            ],
-            [
-              1.0,
-              11.0
-            ],
-            [
-              1.0,
-              10.0
-            ]
-          ],
-          [
-            [
-              0.2,
-              10.2
-            ],
-            [
-              0.2,
-              10.8
-            ],
-            [
-              0.8,
-              10.8
-            ],
-            [
-              0.8,
-              12.0
-            ]
-          ]
-        ]
-      }
-    }
-  }
-}
-----
-
-[[geo-shape-query-polygon]]
-[float]
-== Querying with Polygon
 
 ==== Fluent DSL example
 
@@ -329,6 +196,10 @@ q
 )
 ----
 
+[[geo-shape-query-multipolygon]]
+[float]
+== Querying with MultiPolygon
+
 ==== Object Initializer syntax example
 
 [source,csharp]
@@ -338,79 +209,10 @@ new GeoShapeQuery
     Name = "named_query",
     Boost = 1.1,
     Field = Infer.Field<Project>(p => p.Location),
-    Shape = new PolygonGeoShape(PolygonCoordinates),
-    IgnoreUnmapped = true,
+    Shape = new MultiPolygonGeoShape(MultiPolygonCoordinates),
     Relation = GeoShapeRelation.Intersects,
 }
 ----
-
-[source,javascript]
-.Example json output
-----
-{
-  "geo_shape": {
-    "_name": "named_query",
-    "boost": 1.1,
-    "ignore_unmapped": true,
-    "location": {
-      "relation": "intersects",
-      "shape": {
-        "type": "polygon",
-        "coordinates": [
-          [
-            [
-              10.0,
-              -17.0
-            ],
-            [
-              15.0,
-              16.0
-            ],
-            [
-              0.0,
-              12.0
-            ],
-            [
-              -15.0,
-              16.0
-            ],
-            [
-              -10.0,
-              -17.0
-            ],
-            [
-              10.0,
-              -17.0
-            ]
-          ],
-          [
-            [
-              8.2,
-              18.2
-            ],
-            [
-              8.2,
-              -18.8
-            ],
-            [
-              -8.8,
-              -10.8
-            ],
-            [
-              8.8,
-              18.2
-            ]
-          ]
-        ]
-      }
-    }
-  }
-}
-----
-
-[[geo-shape-query-multipolygon]]
-[float]
-== Querying with MultiPolygon
 
 ==== Fluent DSL example
 
@@ -428,6 +230,10 @@ q
 )
 ----
 
+[[geo-shape-query-geometrycollection]]
+[float]
+== Querying with GeometryCollection
+
 ==== Object Initializer syntax example
 
 [source,csharp]
@@ -437,107 +243,18 @@ new GeoShapeQuery
     Name = "named_query",
     Boost = 1.1,
     Field = Infer.Field<Project>(p => p.Location),
-    Shape = new MultiPolygonGeoShape(MultiPolygonCoordinates),
+    Shape = new GeometryCollection(new IGeoShape[]
+    {
+        new PointGeoShape(PointCoordinates),
+        new MultiPointGeoShape(MultiPointCoordinates),
+        new LineStringGeoShape(LineStringCoordinates),
+        new MultiLineStringGeoShape(MultiLineStringCoordinates),
+        new PolygonGeoShape(PolygonCoordinates),
+        new MultiPolygonGeoShape(MultiPolygonCoordinates),
+    }),
     Relation = GeoShapeRelation.Intersects,
 }
 ----
-
-[source,javascript]
-.Example json output
-----
-{
-  "geo_shape": {
-    "_name": "named_query",
-    "boost": 1.1,
-    "location": {
-      "relation": "intersects",
-      "shape": {
-        "type": "multipolygon",
-        "coordinates": [
-          [
-            [
-              [
-                10.0,
-                -17.0
-              ],
-              [
-                15.0,
-                16.0
-              ],
-              [
-                0.0,
-                12.0
-              ],
-              [
-                -15.0,
-                16.0
-              ],
-              [
-                -10.0,
-                -17.0
-              ],
-              [
-                10.0,
-                -17.0
-              ]
-            ],
-            [
-              [
-                8.2,
-                18.2
-              ],
-              [
-                8.2,
-                -18.8
-              ],
-              [
-                -8.8,
-                -10.8
-              ],
-              [
-                8.8,
-                18.2
-              ]
-            ]
-          ],
-          [
-            [
-              [
-                8.0,
-                -15.0
-              ],
-              [
-                15.0,
-                16.0
-              ],
-              [
-                0.0,
-                12.0
-              ],
-              [
-                -15.0,
-                16.0
-              ],
-              [
-                -10.0,
-                -17.0
-              ],
-              [
-                8.0,
-                -15.0
-              ]
-            ]
-          ]
-        ]
-      }
-    }
-  }
-}
-----
-
-[[geo-shape-query-geometrycollection]]
-[float]
-== Querying with GeometryCollection
 
 ==== Fluent DSL example
 
@@ -547,7 +264,7 @@ q
 .GeoShape(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Field(p=>p.Location)
+    .Field(p => p.Location)
     .Shape(s => s
         .GeometryCollection(
             new PointGeoShape(PointCoordinates),
@@ -562,6 +279,10 @@ q
 )
 ----
 
+[[geo-shape-query-envelope]]
+[float]
+== Querying with Envelope
+
 ==== Object Initializer syntax example
 
 [source,csharp]
@@ -570,262 +291,11 @@ new GeoShapeQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Field = Infer.Field<Project>(p=>p.Location),
-    Shape = new Nest.GeometryCollection(new IGeoShape[]
-        {
-            new PointGeoShape(PointCoordinates),
-            new MultiPointGeoShape(MultiPointCoordinates),
-            new LineStringGeoShape(LineStringCoordinates),
-            new MultiLineStringGeoShape(MultiLineStringCoordinates),
-            new PolygonGeoShape(PolygonCoordinates),
-            new MultiPolygonGeoShape(MultiPolygonCoordinates),
-        }),
+    Field = Infer.Field<Project>(p => p.Location),
+    Shape = new EnvelopeGeoShape(EnvelopeCoordinates),
     Relation = GeoShapeRelation.Intersects,
 }
 ----
-
-[source,javascript]
-.Example json output
-----
-{
-  "geo_shape": {
-    "_name": "named_query",
-    "boost": 1.1,
-    "location": {
-      "relation": "intersects",
-      "shape": {
-        "type": "geometrycollection",
-        "geometries": [
-          {
-            "type": "point",
-            "coordinates": [
-              38.897676,
-              -77.03653
-            ]
-          },
-          {
-            "type": "multipoint",
-            "coordinates": [
-              [
-                38.897676,
-                -77.03653
-              ],
-              [
-                38.889939,
-                -77.009051
-              ]
-            ]
-          },
-          {
-            "type": "linestring",
-            "coordinates": [
-              [
-                38.897676,
-                -77.03653
-              ],
-              [
-                38.889939,
-                -77.009051
-              ]
-            ]
-          },
-          {
-            "type": "multilinestring",
-            "coordinates": [
-              [
-                [
-                  2.0,
-                  12.0
-                ],
-                [
-                  2.0,
-                  13.0
-                ],
-                [
-                  3.0,
-                  13.0
-                ],
-                [
-                  3.0,
-                  12.0
-                ]
-              ],
-              [
-                [
-                  0.0,
-                  10.0
-                ],
-                [
-                  0.0,
-                  11.0
-                ],
-                [
-                  1.0,
-                  11.0
-                ],
-                [
-                  1.0,
-                  10.0
-                ]
-              ],
-              [
-                [
-                  0.2,
-                  10.2
-                ],
-                [
-                  0.2,
-                  10.8
-                ],
-                [
-                  0.8,
-                  10.8
-                ],
-                [
-                  0.8,
-                  12.0
-                ]
-              ]
-            ]
-          },
-          {
-            "type": "polygon",
-            "coordinates": [
-              [
-                [
-                  10.0,
-                  -17.0
-                ],
-                [
-                  15.0,
-                  16.0
-                ],
-                [
-                  0.0,
-                  12.0
-                ],
-                [
-                  -15.0,
-                  16.0
-                ],
-                [
-                  -10.0,
-                  -17.0
-                ],
-                [
-                  10.0,
-                  -17.0
-                ]
-              ],
-              [
-                [
-                  8.2,
-                  18.2
-                ],
-                [
-                  8.2,
-                  -18.8
-                ],
-                [
-                  -8.8,
-                  -10.8
-                ],
-                [
-                  8.8,
-                  18.2
-                ]
-              ]
-            ]
-          },
-          {
-            "type": "multipolygon",
-            "coordinates": [
-              [
-                [
-                  [
-                    10.0,
-                    -17.0
-                  ],
-                  [
-                    15.0,
-                    16.0
-                  ],
-                  [
-                    0.0,
-                    12.0
-                  ],
-                  [
-                    -15.0,
-                    16.0
-                  ],
-                  [
-                    -10.0,
-                    -17.0
-                  ],
-                  [
-                    10.0,
-                    -17.0
-                  ]
-                ],
-                [
-                  [
-                    8.2,
-                    18.2
-                  ],
-                  [
-                    8.2,
-                    -18.8
-                  ],
-                  [
-                    -8.8,
-                    -10.8
-                  ],
-                  [
-                    8.8,
-                    18.2
-                  ]
-                ]
-              ],
-              [
-                [
-                  [
-                    8.0,
-                    -15.0
-                  ],
-                  [
-                    15.0,
-                    16.0
-                  ],
-                  [
-                    0.0,
-                    12.0
-                  ],
-                  [
-                    -15.0,
-                    16.0
-                  ],
-                  [
-                    -10.0,
-                    -17.0
-                  ],
-                  [
-                    8.0,
-                    -15.0
-                  ]
-                ]
-              ]
-            ]
-          }
-        ]
-      }
-    }
-  }
-}
-----
-
-[[geo-shape-query-envelope]]
-[float]
-== Querying with Envelope
 
 ==== Fluent DSL example
 
@@ -835,7 +305,7 @@ q
 .GeoShape(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Field(p=>p.Location)
+    .Field(p => p.Location)
     .Shape(s => s
         .Envelope(EnvelopeCoordinates)
     )
@@ -843,6 +313,10 @@ q
 )
 ----
 
+[[geo-shape-query-circle]]
+[float]
+== Querying with Circle
+
 ==== Object Initializer syntax example
 
 [source,csharp]
@@ -851,42 +325,11 @@ new GeoShapeQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Field = Infer.Field<Project>(p=>p.Location),
-    Shape = new EnvelopeGeoShape(EnvelopeCoordinates),
+    Field = Infer.Field<Project>(p => p.Location),
+    Shape = new CircleGeoShape(CircleCoordinates, "100m"),
     Relation = GeoShapeRelation.Intersects,
 }
 ----
-
-[source,javascript]
-.Example json output
-----
-{
-  "geo_shape": {
-    "_name": "named_query",
-    "boost": 1.1,
-    "location": {
-      "relation": "intersects",
-      "shape": {
-        "type": "envelope",
-        "coordinates": [
-          [
-            45.0,
-            -45.0
-          ],
-          [
-            -45.0,
-            45.0
-          ]
-        ]
-      }
-    }
-  }
-}
-----
-
-[[geo-shape-query-circle]]
-[float]
-== Querying with Circle
 
 ==== Fluent DSL example
 
@@ -896,48 +339,12 @@ q
 .GeoShape(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Field(p=>p.Location)
+    .Field(p => p.Location)
     .Shape(s => s
         .Circle(CircleCoordinates, "100m")
     )
     .Relation(GeoShapeRelation.Intersects)
 )
-----
-
-==== Object Initializer syntax example
-
-[source,csharp]
-----
-new GeoShapeQuery
-{
-    Name = "named_query",
-    Boost = 1.1,
-    Field = Infer.Field<Project>(p=>p.Location),
-    Shape = new CircleGeoShape(CircleCoordinates, "100m"),
-    Relation = GeoShapeRelation.Intersects,
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "geo_shape": {
-    "_name": "named_query",
-    "boost": 1.1,
-    "location": {
-      "relation": "intersects",
-      "shape": {
-        "type": "circle",
-        "radius": "100m",
-        "coordinates": [
-          45.0,
-          -45.0
-        ]
-      }
-    }
-  }
-}
 ----
 
 [[geo-shape-query-indexedshape]]
@@ -950,23 +357,6 @@ using a logical name (for example __New Zealand__), rather than having to provid
 
 See the Elasticsearch documentation on {ref_current}/query-dsl-geo-shape-query.html[geoshape queries] for more detail.
 
-==== Fluent DSL example
-
-[source,csharp]
-----
-q
-.GeoShape(c => c
-    .Name("named_query")
-    .Boost(1.1)
-    .Field(p=>p.Location)
-    .IndexedShape(p=>p
-        .Id(2)
-        .Path(pp=>pp.Location)
-    )
-    .Relation(GeoShapeRelation.Intersects)
-)
-----
-
 ==== Object Initializer syntax example
 
 [source,csharp]
@@ -975,35 +365,31 @@ new GeoShapeQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Field = Infer.Field<Project>(p=>p.Location),
+    Field = Infer.Field<Project>(p => p.Location),
     IndexedShape = new FieldLookup
     {
         Id = 2,
         Index = Infer.Index<Project>(),
-        Type = Infer.Type<Project>(),
-        Path = Infer.Field<Project>(p=>p.Location),
+        Path = Infer.Field<Project>(p => p.Location),
     },
     Relation = GeoShapeRelation.Intersects
 }
 ----
 
-[source,javascript]
-.Example json output
+==== Fluent DSL example
+
+[source,csharp]
 ----
-{
-  "geo_shape": {
-    "_name": "named_query",
-    "boost": 1.1,
-    "location": {
-      "indexed_shape": {
-        "id": 2,
-        "type": "doc",
-        "index": "project",
-        "path": "location"
-      },
-      "relation": "intersects"
-    }
-  }
-}
+q
+.GeoShape(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Location)
+    .IndexedShape(p => p
+        .Id(2)
+        .Path(pp => pp.Location)
+    )
+    .Relation(GeoShapeRelation.Intersects)
+)
 ----
 

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -44,25 +44,6 @@ new NestedAggregation("tags")
 }
 ----
 
-[source,javascript]
-.Example json output
-----
-{
-  "tags": {
-    "nested": {
-      "path": "tags"
-    },
-    "aggs": {
-      "tag_names": {
-        "terms": {
-          "field": "tags.name"
-        }
-      }
-    }
-  }
-}
-----
-
 ==== Handling Responses
 
 [source,csharp]
@@ -72,7 +53,7 @@ var tags = response.Aggregations.Nested("tags");
 tags.Should().NotBeNull();
 var tagNames = tags.Terms("tag_names");
 tagNames.Should().NotBeNull();
-foreach(var item in tagNames.Buckets)
+foreach (var item in tagNames.Buckets)
 {
     item.Key.Should().NotBeNullOrEmpty();
     item.DocCount.Should().BeGreaterThan(0);

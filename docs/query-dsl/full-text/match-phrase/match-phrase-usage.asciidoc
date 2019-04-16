@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -36,28 +36,12 @@ q
 ----
 new MatchPhraseQuery
 {
-    Field = Field<Project>(p=>p.Description),
+    Field = Field<Project>(p => p.Description),
     Analyzer = "standard",
     Boost = 1.1,
     Name = "named_query",
     Query = "hello world",
     Slop = 2,
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "match_phrase": {
-    "description": {
-      "_name": "named_query",
-      "boost": 1.1,
-      "query": "hello world",
-      "analyzer": "standard",
-      "slop": 2
-    }
-  }
 }
 ----
 

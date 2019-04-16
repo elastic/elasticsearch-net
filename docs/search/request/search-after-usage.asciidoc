@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -40,37 +40,14 @@ new SearchRequest<Project>
 {
     Sort = new List<ISort>
     {
-        new SortField { Field = Field<Project>(p => p.NumberOfCommits), Order = SortOrder.Descending },
-        new SortField { Field = Field<Project>(p => p.Name), Order = SortOrder.Descending }
+        new FieldSort { Field = Field<Project>(p => p.NumberOfCommits), Order = SortOrder.Descending },
+        new FieldSort { Field = Field<Project>(p => p.Name), Order = SortOrder.Descending }
     },
     SearchAfter = new List<object>
     {
         Project.First.NumberOfCommits,
         Project.First.Name,
     }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "sort": [
-    {
-      "numberOfCommits": {
-        "order": "desc"
-      }
-    },
-    {
-      "name": {
-        "order": "desc"
-      }
-    }
-  ],
-  "search_after": [
-    775,
-    "Lesch Group"
-  ]
 }
 ----
 

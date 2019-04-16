@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -52,32 +52,6 @@ new DateHistogramAggregation("projects_started_per_month")
 }
 ----
 
-[source,javascript]
-.Example json output
-----
-{
-  "projects_started_per_month": {
-    "date_histogram": {
-      "field": "startedOn",
-      "interval": "month"
-    },
-    "aggs": {
-      "commits": {
-        "sum": {
-          "field": "numberOfCommits"
-        }
-      },
-      "second_difference": {
-        "serial_diff": {
-          "buckets_path": "commits",
-          "lag": 2
-        }
-      }
-    }
-  }
-}
-----
-
 ==== Handling Responses
 
 [source,csharp]
@@ -103,9 +77,7 @@ foreach (var item in projectsPerMonth.Buckets)
     // serial differencing specified a lag of 2, so
     // only expect values from the 3rd bucket onwards
     if (differenceCount <= 2)
-    {
         secondDifference.Should().BeNull();
-    }
     else
     {
         secondDifference.Should().NotBeNull();

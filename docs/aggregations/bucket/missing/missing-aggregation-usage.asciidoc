@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -32,18 +32,6 @@ a => a
 new MissingAggregation("projects_without_a_description")
 {
     Field = Field<Project>(p => p.Description.Suffix("keyword"))
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "projects_without_a_description": {
-    "missing": {
-      "field": "description.keyword"
-    }
-  }
 }
 ----
 

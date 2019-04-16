@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -41,38 +41,12 @@ new TermQuery
 }
 ----
 
-[source,javascript]
-.Example json output
-----
-{
-  "term": {
-    "description": {
-      "_name": "named_query",
-      "boost": 1.1,
-      "value": "project description"
-    }
-  }
-}
-----
-
 [float]
 == Verbatim term query
 
 By default an empty term is conditionless so will be rewritten. Sometimes sending an empty term to
 match nothing makes sense. You can either use the `ConditionlessQuery` construct from NEST to provide a fallback or make the
 query verbatim as followed:
-
-==== Fluent DSL example
-
-[source,csharp]
-----
-q
-.Term(c => c
-    .Verbatim()
-    .Field(p => p.Description)
-    .Value(string.Empty)
-)
-----
 
 ==== Object Initializer syntax example
 
@@ -86,15 +60,15 @@ new TermQuery
 }
 ----
 
-[source,javascript]
-.Example json output
+==== Fluent DSL example
+
+[source,csharp]
 ----
-{
-  "term": {
-    "description": {
-      "value": ""
-    }
-  }
-}
+q
+.Term(c => c
+    .Verbatim()
+    .Field(p => p.Description)
+    .Value(string.Empty)
+)
 ----
 

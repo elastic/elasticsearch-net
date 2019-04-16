@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -60,34 +60,6 @@ new SpanNotQuery
             Field = "field1", Value = "hoya2"
         }
     },
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "span_not": {
-    "_name": "named_query",
-    "boost": 1.1,
-    "include": {
-      "span_term": {
-        "field1": {
-          "value": "hoya"
-        }
-      }
-    },
-    "exclude": {
-      "span_term": {
-        "field1": {
-          "value": "hoya2"
-        }
-      }
-    },
-    "pre": 14,
-    "post": 13,
-    "dist": 12
-  }
 }
 ----
 

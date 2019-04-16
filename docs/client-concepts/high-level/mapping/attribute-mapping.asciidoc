@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -33,7 +33,7 @@ Here we define an `Employee` type and use attributes to define the mappings.
 
 [source,csharp]
 ----
-[ElasticsearchType(Name = "employee")]
+[ElasticsearchType(RelationName = "employee")]
 public class Employee
 {
     [Text(Name = "first_name", Norms = false, Similarity = "LMDirichlet")]
@@ -55,11 +55,11 @@ public class Employee
     [PropertyName("empl")]
     public List<Employee> Employees { get; set; }
 
-     [Text(Name = "office_hours")]
-     public TimeSpan? OfficeHours { get; set; }
+    [Text(Name = "office_hours")]
+    public TimeSpan? OfficeHours { get; set; }
 
-     [Object]
-     public List<Skill> Skills { get; set; }
+    [Object]
+    public List<Skill> Skills { get; set; }
 }
 
 public class Skill
@@ -77,63 +77,73 @@ Then we map the types by calling `.AutoMap()`
 [source,csharp]
 ----
 var createIndexResponse = _client.CreateIndex("myindex", c => c
-    .Mappings(ms => ms
-        .Map<Employee>(m => m.AutoMap())
-    )
+    .Map<Employee>(m => m.AutoMap())
 );
 ----
 
-[source,javascript]
+[source,csharp]
 ----
+var expected = new
 {
-  "mappings": {
-    "employee": {
-      "properties": {
-        "birthday": {
-          "format": "MMddyyyy",
-          "type": "date"
-        },
-        "empl": {
-          "properties": {},
-          "type": "nested"
-        },
-        "first_name": {
-          "type": "text",
-          "norms": false,
-          "similarity": "LMDirichlet"
-        },
-        "isManager": {
-          "null_value": false,
-          "store": true,
-          "type": "boolean"
-        },
-        "last_name": {
-          "type": "text"
-        },
-        "office_hours": {
-          "type": "text"
-        },
-        "salary": {
-          "coerce": true,
-          "doc_values": false,
-          "ignore_malformed": true,
-          "type": "float"
-        },
-        "skills": {
-          "properties": {
-            "level": {
-              "type": "byte"
+    mappings = new
+    {
+        properties = new
+        {
+            birthday = new
+            {
+                format = "MMddyyyy",
+                type = "date"
             },
-            "name": {
-              "type": "text"
+            empl = new
+            {
+                properties = new {},
+                type = "nested"
+            },
+            first_name = new
+            {
+                type = "text",
+                norms = false,
+                similarity = "LMDirichlet"
+            },
+            isManager = new
+            {
+                null_value = false,
+                store = true,
+                type = "boolean"
+            },
+            last_name = new
+            {
+                type = "text"
+            },
+            office_hours = new
+            {
+                type = "text"
+            },
+            salary = new
+            {
+                coerce = true,
+                doc_values = false,
+                ignore_malformed = true,
+                type = "float"
+            },
+            skills = new
+            {
+                properties = new
+                {
+                    level = new
+                    {
+                        type = "byte"
+                    },
+                    name = new
+                    {
+                        type = "text"
+                    }
+                },
+                type = "object"
             }
-          },
-          "type": "object"
         }
-      }
     }
-  }
-}
+};
 ----
 
 Attribute mapping can be a convenient way to control how POCOs are mapped with minimal code, however

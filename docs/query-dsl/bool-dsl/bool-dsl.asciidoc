@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -85,30 +85,40 @@ var secondSearchResponse = client.Search<Project>(new SearchRequest<Project>
 
 Both result in the following JSON query DSL
 
-[source,javascript]
+[source,csharp]
 ----
+var expected = new
 {
-  "query": {
-    "bool": {
-      "should": [
+    query = new
+    {
+        @bool = new
         {
-          "term": {
-            "name": {
-              "value": "x"
+            should = new object[]
+            {
+                new
+                {
+                    term = new
+                    {
+                        name = new
+                        {
+                            value = "x"
+                        }
+                    }
+                },
+                new
+                {
+                    term = new
+                    {
+                        name = new
+                        {
+                            value = "y"
+                        }
+                    }
+                }
             }
-          }
-        },
-        {
-          "term": {
-            "name": {
-              "value": "y"
-            }
-          }
         }
-      ]
     }
-  }
-}
+};
 ----
 
 [[binary-and-operator]]
@@ -140,30 +150,40 @@ var secondSearchResponse = client.Search<Project>(new SearchRequest<Project>
 
 Both result in the following JSON query DSL
 
-[source,javascript]
+[source,csharp]
 ----
+var expected = new
 {
-  "query": {
-    "bool": {
-      "must": [
+    query = new
+    {
+        @bool = new
         {
-          "term": {
-            "name": {
-              "value": "x"
+            must = new object[]
+            {
+                new
+                {
+                    term = new
+                    {
+                        name = new
+                        {
+                            value = "x"
+                        }
+                    }
+                },
+                new
+                {
+                    term = new
+                    {
+                        name = new
+                        {
+                            value = "y"
+                        }
+                    }
+                }
             }
-          }
-        },
-        {
-          "term": {
-            "name": {
-              "value": "y"
-            }
-          }
         }
-      ]
     }
-  }
-}
+};
 ----
 
 A naive implementation of operator overloading would rewrite
@@ -239,23 +259,30 @@ var secondSearchResponse = client.Search<Project>(new SearchRequest<Project>
 
 Both result in the following JSON query DSL
 
-[source,javascript]
+[source,csharp]
 ----
+var expected = new
 {
-  "query": {
-    "bool": {
-      "must_not": [
+    query = new
+    {
+        @bool = new
         {
-          "term": {
-            "name": {
-              "value": "x"
+            must_not = new object[]
+            {
+                new
+                {
+                    term = new
+                    {
+                        name = new
+                        {
+                            value = "x"
+                        }
+                    }
+                }
             }
-          }
         }
-      ]
     }
-  }
-}
+};
 ----
 
 Two queries marked with the unary `!`  operator can be combined with the `&&` operator to form
@@ -300,23 +327,30 @@ var secondSearchResponse = client.Search<Project>(new SearchRequest<Project>
 
 Both result in the following JSON query DSL
 
-[source,javascript]
+[source,csharp]
 ----
+var expected = new
 {
-  "query": {
-    "bool": {
-      "filter": [
+    query = new
+    {
+        @bool = new
         {
-          "term": {
-            "name": {
-              "value": "x"
+            filter = new object[]
+            {
+                new
+                {
+                    term = new
+                    {
+                        name = new
+                        {
+                            value = "x"
+                        }
+                    }
+                }
             }
-          }
         }
-      ]
     }
-  }
-}
+};
 ----
 
 This runs the {ref_current}/query-filter-context.html[query in a filter context],

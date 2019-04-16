@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -53,55 +53,12 @@ new FiltersAggregation("projects_by_state")
     OtherBucketKey = "other_states_of_being",
     Filters = new NamedFiltersContainer
     {
-        {"belly_up", Query<Project>.Term(p => p.State, StateOfBeing.BellyUp)},
-        {"stable", Query<Project>.Term(p => p.State, StateOfBeing.Stable)},
-        {"very_active", Query<Project>.Term(p => p.State, StateOfBeing.VeryActive)}
+        { "belly_up", Query<Project>.Term(p => p.State, StateOfBeing.BellyUp) },
+        { "stable", Query<Project>.Term(p => p.State, StateOfBeing.Stable) },
+        { "very_active", Query<Project>.Term(p => p.State, StateOfBeing.VeryActive) }
     },
     Aggregations =
-        new TermsAggregation("project_tags") {Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword"))}
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "projects_by_state": {
-    "filters": {
-      "other_bucket": true,
-      "other_bucket_key": "other_states_of_being",
-      "filters": {
-        "belly_up": {
-          "term": {
-            "state": {
-              "value": "BellyUp"
-            }
-          }
-        },
-        "stable": {
-          "term": {
-            "state": {
-              "value": "Stable"
-            }
-          }
-        },
-        "very_active": {
-          "term": {
-            "state": {
-              "value": "VeryActive"
-            }
-          }
-        }
-      }
-    },
-    "aggs": {
-      "project_tags": {
-        "terms": {
-          "field": "curatedTags.name.keyword"
-        }
-      }
-    }
-  }
+        new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword")) }
 }
 ----
 
@@ -170,49 +127,7 @@ new FiltersAggregation("projects_by_state")
         Query<Project>.Term(p => p.State, StateOfBeing.VeryActive)
     },
     Aggregations =
-        new TermsAggregation("project_tags") {Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword"))}
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "projects_by_state": {
-    "filters": {
-      "other_bucket": true,
-      "filters": [
-        {
-          "term": {
-            "state": {
-              "value": "BellyUp"
-            }
-          }
-        },
-        {
-          "term": {
-            "state": {
-              "value": "Stable"
-            }
-          }
-        },
-        {
-          "term": {
-            "state": {
-              "value": "VeryActive"
-            }
-          }
-        }
-      ]
-    },
-    "aggs": {
-      "project_tags": {
-        "terms": {
-          "field": "curatedTags.name.keyword"
-        }
-      }
-    }
-  }
+        new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword")) }
 }
 ----
 
@@ -231,10 +146,7 @@ filterAgg.Should().NotBeNull();
 var results = filterAgg.AnonymousBuckets();
 results.Count.Should().Be(4);
 
-foreach (var singleBucket in results.Take(3))
-{
-    singleBucket.DocCount.Should().BeGreaterThan(0);
-}
+foreach (var singleBucket in results.Take(3)) singleBucket.DocCount.Should().BeGreaterThan(0);
 
 results.Last().DocCount.Should().Be(0); <1>
 ----
@@ -260,18 +172,6 @@ a => a
 new FiltersAggregation("empty_filters")
 {
     Filters = new List<QueryContainer>()
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "empty_filters": {
-    "filters": {
-      "filters": []
-    }
-  }
 }
 ----
 
@@ -308,18 +208,6 @@ new FiltersAggregation("conditionless_filters")
     {
         new QueryContainer()
     }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "conditionless_filters": {
-    "filters": {
-      "filters": []
-    }
-  }
 }
 ----
 

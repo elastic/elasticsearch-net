@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -39,37 +39,13 @@ a => a
 ----
 new PercentilesAggregation("commits_outlier", Field<Project>(p => p.NumberOfCommits))
 {
-    Percents = new[] {95, 99, 99.9},
+    Percents = new[] { 95, 99, 99.9 },
     Method = new HDRHistogramMethod
     {
         NumberOfSignificantValueDigits = 3
     },
     Script = new InlineScript("doc['numberOfCommits'].value * 1.2"),
     Missing = 0
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "commits_outlier": {
-    "percentiles": {
-      "field": "numberOfCommits",
-      "percents": [
-        95.0,
-        99.0,
-        99.9
-      ],
-      "hdr": {
-        "number_of_significant_value_digits": 3
-      },
-      "script": {
-        "source": "doc['numberOfCommits'].value * 1.2"
-      },
-      "missing": 0.0
-    }
-  }
 }
 ----
 

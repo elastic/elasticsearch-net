@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -28,15 +28,15 @@ sent in the request to Elasticsearch, bypassing NEST's conditionless checks.
 q
 .Bool(b => b
     .Must(qt => qt
-        .Term(t => t
-            .Verbatim()
-            .Field(p => p.Description)
-            .Value("")
-        ), qt => qt
-        .Term(t => t
-            .Field(p => p.Name)
-            .Value("foo")
-        )
+            .Term(t => t
+                .Verbatim()
+                .Field(p => p.Description)
+                .Value("")
+            ), qt => qt
+            .Term(t => t
+                .Field(p => p.Name)
+                .Value("foo")
+            )
     )
 )
 ----
@@ -58,42 +58,7 @@ new TermQuery
 }
 ----
 
-[source,javascript]
-.Example json output
-----
-{
-  "bool": {
-    "must": [
-      {
-        "term": {
-          "description": {
-            "value": ""
-          }
-        }
-      },
-      {
-        "term": {
-          "name": {
-            "value": "foo"
-          }
-        }
-      }
-    ]
-  }
-}
-----
-
 A compound query can also be marked as verbatim, demonstrated here with a `bool` query. 
-
-==== Fluent DSL example
-
-[source,csharp]
-----
-q
-.Bool(b => b
-    .Verbatim()
-)
-----
 
 ==== Object Initializer syntax example
 
@@ -105,27 +70,17 @@ new BoolQuery
 }
 ----
 
-[source,javascript]
-.Example json output
-----
-{
-  "bool": {}
-}
-----
-
-A single verbatim query will be serialized as-is 
-
 ==== Fluent DSL example
 
 [source,csharp]
 ----
 q
-.Term(t => t
+.Bool(b => b
     .Verbatim()
-    .Field(p => p.Description)
-    .Value("")
 )
 ----
+
+A single verbatim query will be serialized as-is 
 
 ==== Object Initializer syntax example
 
@@ -139,38 +94,19 @@ new TermQuery
 }
 ----
 
-[source,javascript]
-.Example json output
-----
-{
-  "term": {
-    "description": {
-      "value": ""
-    }
-  }
-}
-----
-
-Leaf queries within a compound query marked as verbatim will also be serialized as-is
-
 ==== Fluent DSL example
 
 [source,csharp]
 ----
 q
-.Bool(b => b
-    .Filter(f => !f
-        .Term(t => t
-            .Verbatim()
-            .Field(p => p.Name)
-            .Value("")
-        ) && f
-        .Exists(e => e
-            .Field(p => p.NumberOfCommits)
-        )
-    )
+.Term(t => t
+    .Verbatim()
+    .Field(p => p.Description)
+    .Value("")
 )
 ----
+
+Leaf queries within a compound query marked as verbatim will also be serialized as-is
 
 ==== Object Initializer syntax example
 
@@ -178,7 +114,8 @@ q
 ----
 new BoolQuery
 {
-    Filter = new QueryContainer[] {
+    Filter = new QueryContainer[]
+    {
         !new TermQuery
         {
             IsVerbatim = true,
@@ -193,35 +130,23 @@ new BoolQuery
 }
 ----
 
-[source,javascript]
-.Example json output
+==== Fluent DSL example
+
+[source,csharp]
 ----
-{
-  "bool": {
-    "filter": [
-      {
-        "bool": {
-          "must": [
-            {
-              "exists": {
-                "field": "numberOfCommits"
-              }
-            }
-          ],
-          "must_not": [
-            {
-              "term": {
-                "name": {
-                  "value": ""
-                }
-              }
-            }
-          ]
-        }
-      }
-    ]
-  }
-}
+q
+.Bool(b => b
+    .Filter(f => !f
+            .Term(t => t
+                .Verbatim()
+                .Field(p => p.Name)
+                .Value("")
+            ) && f
+            .Exists(e => e
+                .Field(p => p.NumberOfCommits)
+            )
+    )
+)
 ----
 
 [float]

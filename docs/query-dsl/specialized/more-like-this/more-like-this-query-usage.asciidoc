@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -23,8 +23,8 @@ q
 .MoreLikeThis(sn => sn
     .Name("named_query")
     .Boost(1.1)
-    .Like(l=>l
-        .Document(d=>d .Id(Project.Instance.Name))
+    .Like(l => l
+        .Document(d => d.Id(Project.Instance.Name))
         .Text("some long text")
     )
     .Analyzer("some_analyzer")
@@ -38,8 +38,8 @@ q
     .MinWordLength(10)
     .StopWords("and", "the")
     .MinimumShouldMatch(1)
-    .Fields(f=>f.Field(p=>p.Name))
-    .Unlike(l=>l
+    .Fields(f => f.Field(p => p.Name))
+    .Unlike(l => l
         .Text("not like this text")
     )
 )
@@ -53,7 +53,7 @@ new MoreLikeThisQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Fields = Fields<Project>(p=>p.Name),
+    Fields = Fields<Project>(p => p.Name),
     Like = new List<Like>
     {
         new LikeDocument<Project>(Project.Instance.Name),
@@ -69,50 +69,11 @@ new MoreLikeThisQuery
     MinTermFrequency = 1,
     MinWordLength = 10,
     MinimumShouldMatch = 1,
-    StopWords = new [] { "and", "the"},
+    StopWords = new[] { "and", "the" },
     Unlike = new List<Like>
     {
         "not like this text"
     }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "more_like_this": {
-    "fields": [
-      "name"
-    ],
-    "minimum_should_match": 1,
-    "stop_words": [
-      "and",
-      "the"
-    ],
-    "min_term_freq": 1,
-    "max_query_terms": 12,
-    "min_doc_freq": 1,
-    "max_doc_freq": 12,
-    "min_word_length": 10,
-    "max_word_length": 300,
-    "boost_terms": 1.1,
-    "analyzer": "some_analyzer",
-    "include": true,
-    "like": [
-      {
-        "_index": "project",
-        "_type": "doc",
-        "_id": "Durgan LLC"
-      },
-      "some long text"
-    ],
-    "unlike": [
-      "not like this text"
-    ],
-    "_name": "named_query",
-    "boost": 1.1
-  }
 }
 ----
 

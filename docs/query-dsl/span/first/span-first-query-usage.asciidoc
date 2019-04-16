@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -23,8 +23,8 @@ q
 .SpanFirst(c => c
     .Name("named_query")
     .Boost(1.1)
-    .Match(sq=>sq
-        .SpanTerm(st=>st.Field(p=>p.Name).Value("value"))
+    .Match(sq => sq
+        .SpanTerm(st => st.Field(p => p.Name).Value("value"))
     )
     .End(3)
 )
@@ -43,25 +43,6 @@ new SpanFirstQuery
     {
         SpanTerm = new SpanTermQuery { Field = "name", Value = "value" }
     }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "span_first": {
-    "_name": "named_query",
-    "boost": 1.1,
-    "match": {
-      "span_term": {
-        "name": {
-          "value": "value"
-        }
-      }
-    },
-    "end": 3
-  }
 }
 ----
 

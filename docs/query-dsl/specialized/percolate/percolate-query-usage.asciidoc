@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -48,32 +48,6 @@ new PercolateQuery
 }
 ----
 
-[source,javascript]
-.Example json output
-----
-{
-  "percolate": {
-    "document": {
-      "name": "Koch, Collier and Mohr",
-      "state": "BellyUp",
-      "startedOn": "2015-01-01T00:00:00",
-      "lastActivity": "0001-01-01T00:00:00",
-      "leadDeveloper": {
-        "gender": "Male",
-        "id": 0,
-        "firstName": "Martijn",
-        "lastName": "Laarman"
-      },
-      "location": {
-        "lat": 42.1523,
-        "lon": -80.321
-      }
-    },
-    "field": "query"
-  }
-}
-----
-
 ==== Handling Responses
 
 [source,csharp]
@@ -106,27 +80,12 @@ The required fields to percolate an existing document are:
 
 See the Elasticsearch documentation on {ref_current}/query-dsl-percolate-query.html[percolate query] for more details.
 
-==== Fluent DSL example
-
-[source,csharp]
-----
-q
-.Percolate(p => p
-    .Type<Project>()
-    .Index<Project>()
-    .Id(Project.Instance.Name)
-    .Routing(Project.Instance.Name)
-    .Field(f => f.Query)
-)
-----
-
 ==== Object Initializer syntax example
 
 [source,csharp]
 ----
 new PercolateQuery
 {
-    Type = typeof(Project),
     Index = IndexName.From<Project>(),
     Id = Project.Instance.Name,
     Routing = Project.Instance.Name,
@@ -134,18 +93,17 @@ new PercolateQuery
 }
 ----
 
-[source,javascript]
-.Example json output
+==== Fluent DSL example
+
+[source,csharp]
 ----
-{
-  "percolate": {
-    "type": "doc",
-    "index": "project",
-    "id": "Durgan LLC",
-    "routing": "Durgan LLC",
-    "field": "query"
-  }
-}
+q
+.Percolate(p => p
+    .Index<Project>()
+    .Id(Project.Instance.Name)
+    .Routing(Project.Instance.Name)
+    .Field(f => f.Query)
+)
 ----
 
 ==== Handling Responses
@@ -169,6 +127,17 @@ only need to be parsed and matched once instead of multiple times.
 
 See the Elasticsearch documentation on {ref_current}/query-dsl-percolate-query.html[percolate query] for more details.
 
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new PercolateQuery
+{
+    Documents = new[] { Project.Instance, Project.Instance, Project.Instance },
+    Field = Infer.Field<ProjectPercolation>(f => f.Query)
+}
+----
+
 ==== Fluent DSL example
 
 [source,csharp]
@@ -178,77 +147,6 @@ q
     .Documents(Project.Instance, Project.Instance, Project.Instance)
     .Field(f => f.Query)
 )
-----
-
-==== Object Initializer syntax example
-
-[source,csharp]
-----
-new PercolateQuery
-{
-    Documents = new [] { Project.Instance, Project.Instance, Project.Instance },
-    Field = Infer.Field<ProjectPercolation>(f => f.Query)
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "percolate": {
-    "documents": [
-      {
-        "name": "Koch, Collier and Mohr",
-        "state": "BellyUp",
-        "startedOn": "2015-01-01T00:00:00",
-        "lastActivity": "0001-01-01T00:00:00",
-        "leadDeveloper": {
-          "gender": "Male",
-          "id": 0,
-          "firstName": "Martijn",
-          "lastName": "Laarman"
-        },
-        "location": {
-          "lat": 42.1523,
-          "lon": -80.321
-        }
-      },
-      {
-        "name": "Koch, Collier and Mohr",
-        "state": "BellyUp",
-        "startedOn": "2015-01-01T00:00:00",
-        "lastActivity": "0001-01-01T00:00:00",
-        "leadDeveloper": {
-          "gender": "Male",
-          "id": 0,
-          "firstName": "Martijn",
-          "lastName": "Laarman"
-        },
-        "location": {
-          "lat": 42.1523,
-          "lon": -80.321
-        }
-      },
-      {
-        "name": "Koch, Collier and Mohr",
-        "state": "BellyUp",
-        "startedOn": "2015-01-01T00:00:00",
-        "lastActivity": "0001-01-01T00:00:00",
-        "leadDeveloper": {
-          "gender": "Male",
-          "id": 0,
-          "firstName": "Martijn",
-          "lastName": "Laarman"
-        },
-        "location": {
-          "lat": 42.1523,
-          "lon": -80.321
-        }
-      }
-    ],
-    "field": "query"
-  }
-}
 ----
 
 ==== Handling Responses
@@ -262,7 +160,7 @@ response.Fields.Count.Should().Be(1);
 
 var field = response.Fields.ElementAt(0);
 var values = field.ValuesOf<int>("_percolator_document_slot");
-values.Should().Contain(new[] {0, 1, 2});
+values.Should().Contain(new[] { 0, 1, 2 });
 
 var match = response.Documents.First();
 match.Id.Should().Be(PercolatorId);

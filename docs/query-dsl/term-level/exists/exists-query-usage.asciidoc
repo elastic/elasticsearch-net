@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -36,18 +36,6 @@ new ExistsQuery
     Name = "named_query",
     Boost = 1.1,
     Field = "description",
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "exists": {
-    "_name": "named_query",
-    "boost": 1.1,
-    "field": "description"
-  }
 }
 ----
 

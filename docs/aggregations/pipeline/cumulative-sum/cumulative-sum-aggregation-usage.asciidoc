@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -14,25 +14,6 @@ please modify the original csharp file found at the link and submit the PR with 
 
 [[cumulative-sum-aggregation-usage]]
 === Cumulative Sum Aggregation Usage
-
-==== Handling Responses
-
-[source,csharp]
-----
-response.ShouldBeValid();
-
-var projectsPerMonth = response.Aggregations.DateHistogram("projects_started_per_month");
-projectsPerMonth.Should().NotBeNull();
-projectsPerMonth.Buckets.Should().NotBeNull();
-projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
-
-foreach (var item in projectsPerMonth.Buckets)
-{
-    var commitsDerivative = item.Derivative("cumulative_commits");
-    commitsDerivative.Should().NotBeNull();
-    commitsDerivative.Value.Should().NotBe(null);
-}
-----
 
 ==== Fluent DSL example
 
@@ -67,28 +48,22 @@ new DateHistogramAggregation("projects_started_per_month")
 }
 ----
 
-[source,javascript]
-.Example json output
+==== Handling Responses
+
+[source,csharp]
 ----
+response.ShouldBeValid();
+
+var projectsPerMonth = response.Aggregations.DateHistogram("projects_started_per_month");
+projectsPerMonth.Should().NotBeNull();
+projectsPerMonth.Buckets.Should().NotBeNull();
+projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
+
+foreach (var item in projectsPerMonth.Buckets)
 {
-  "projects_started_per_month": {
-    "date_histogram": {
-      "field": "startedOn",
-      "interval": "month"
-    },
-    "aggs": {
-      "commits": {
-        "sum": {
-          "field": "numberOfCommits"
-        }
-      },
-      "cumulative_commits": {
-        "cumulative_sum": {
-          "buckets_path": "commits"
-        }
-      }
-    }
-  }
+    var commitsDerivative = item.Derivative("cumulative_commits");
+    commitsDerivative.Should().NotBeNull();
+    commitsDerivative.Value.Should().NotBe(null);
 }
 ----
 

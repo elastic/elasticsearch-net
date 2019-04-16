@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -15,7 +15,7 @@ please modify the original csharp file found at the link and submit the PR with 
 [[properties]]
 === Properties
 
-Our Json.NET contract resolver picks up attributes set on the interface
+Our Utf8Json formatter resolver picks up attributes set on the interface
 
 [source,csharp]
 ----

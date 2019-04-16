@@ -110,6 +110,8 @@ In addition to the buckets themselves, the bucket aggregations also compute and 
 
 * <<adjacency-matrix-usage,Adjacency Matrix Usage>>
 
+* <<auto-date-histogram-aggregation-usage,Auto Date Histogram Aggregation Usage>>
+
 * <<children-aggregation-usage,Children Aggregation Usage>>
 
 * <<composite-aggregation-usage,Composite Aggregation Usage>>
@@ -164,6 +166,8 @@ See the Elasticsearch documentation on {ref_current}/search-aggregations-bucket.
 :includes-from-dirs: aggregations/bucket
 
 include::aggregations/bucket/adjacency-matrix/adjacency-matrix-usage.asciidoc[]
+
+include::aggregations/bucket/auto-date-histogram/auto-date-histogram-aggregation-usage.asciidoc[]
 
 include::aggregations/bucket/children/children-aggregation-usage.asciidoc[]
 

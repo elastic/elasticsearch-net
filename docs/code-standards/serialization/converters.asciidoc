@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -17,14 +17,15 @@ please modify the original csharp file found at the link and submit the PR with 
 
 [source,csharp]
 ----
-var converters = typeof(IElasticClient).Assembly().GetTypes()
-    .Where(t => typeof(JsonConverter).IsAssignableFrom(t))
+var formatters = typeof(IElasticClient).Assembly.GetTypes()
+    .Concat(typeof(IElasticLowLevelClient).Assembly.GetTypes())
+    .Where(t => t.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IJsonFormatter<>)))
     .ToList();
 var visible = new List<string>();
-foreach (var converter in converters)
+foreach (var formatter in formatters)
 {
-    if (converter.IsVisible())
-        visible.Add(converter.Name);
+    if (formatter.IsVisible())
+        visible.Add(formatter.Name);
 }
 visible.Should().BeEmpty();
 ----

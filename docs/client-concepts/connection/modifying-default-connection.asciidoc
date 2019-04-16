@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -74,7 +74,7 @@ var response = new
     },
     hits = new
     {
-        total = 25,
+        total = new { value = 25 },
         max_score = 1.0,
         hits = Enumerable.Range(1, 25).Select(i => (object)new
         {
@@ -105,4 +105,45 @@ from our fixed `InMemoryConnection` response
 searchResponse.ShouldBeValid();
 searchResponse.Documents.Count.Should().Be(25);
 ----
+
+==== Changing HttpConnection
+
+There may be a need to change how the default `HttpConnection` works, for example, to add an X509 certificate
+to the request, change the maximum number of connections allowed to an endpoint, etc.
+
+By deriving from `HttpConnection`, it is possible to change the behaviour of the connection. The following
+provides some examples
+
+[[servicepoint-behaviour]]
+===== ServicePoint behaviour
+
+If you are running on the Desktop CLR you can override specific properties for the current `ServicePoint` easily
+by overriding `AlterServicePoint` on an `IConnection` implementation deriving from `HttpConnection`
+
+[source,csharp]
+----
+public class MyCustomHttpConnection : HttpConnection
+{
+    protected override HttpRequestMessage CreateRequestMessage(RequestData requestData)
+    {
+        var message = base.CreateRequestMessage(requestData);
+        var header = string.Empty;
+        message.Headers.Authorization = new AuthenticationHeaderValue("Negotiate", header);
+        return message;
+    }
+}
+----
+
+As before, a new instance of the custom connection is passed to `ConnectionSettings` in order to
+use
+
+[source,csharp]
+----
+var connection = new X509CertificateHttpConnection();
+var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+var settings = new ConnectionSettings(connectionPool, connection);
+var client = new ElasticClient(settings);
+----
+
+See <<working-with-certificates, Working with certificates>> for further details.
 

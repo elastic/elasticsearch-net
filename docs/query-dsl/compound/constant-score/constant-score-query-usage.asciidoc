@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -36,22 +36,6 @@ new ConstantScoreQuery()
     Name = "named_query",
     Boost = 1.1,
     Filter = new MatchAllQuery { Name = "filter" },
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "constant_score": {
-    "_name": "named_query",
-    "boost": 1.1,
-    "filter": {
-      "match_all": {
-        "_name": "filter"
-      }
-    }
-  }
 }
 ----
 

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -35,6 +35,7 @@ a => a
     .Interval(DateInterval.Month)
     .MinimumDocumentCount(2)
     .Format("yyyy-MM-dd'T'HH:mm:ss")
+    //.Format("date_optional_time")
     .ExtendedBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
     .Order(HistogramOrder.CountAscending)
     .Missing(FixedDate)
@@ -59,6 +60,7 @@ new DateHistogramAggregation("projects_started_per_month")
     Interval = DateInterval.Month,
     MinimumDocumentCount = 2,
     Format = "yyyy-MM-dd'T'HH:mm:ss",
+    //Format = "date_optional_time",
     ExtendedBounds = new ExtendedBounds<DateMath>
     {
         Minimum = FixedDate.AddYears(-1),
@@ -74,43 +76,6 @@ new DateHistogramAggregation("projects_started_per_month")
             Field = Field<Project>(p => p.Tags.First().Name)
         }
     }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "projects_started_per_month": {
-    "date_histogram": {
-      "field": "startedOn",
-      "interval": "month",
-      "min_doc_count": 2,
-      "format": "yyyy-MM-dd'T'HH:mm:ss||date_optional_time",
-      "order": {
-        "_count": "asc"
-      },
-      "extended_bounds": {
-        "min": "2014-06-06T12:01:02.123",
-        "max": "2016-06-06T12:01:02.123"
-      },
-      "missing": "2015-06-06T12:01:02.123"
-    },
-    "aggs": {
-      "project_tags": {
-        "nested": {
-          "path": "tags"
-        },
-        "aggs": {
-          "tags": {
-            "terms": {
-              "field": "tags.name"
-            }
-          }
-        }
-      }
-    }
-  }
 }
 ----
 

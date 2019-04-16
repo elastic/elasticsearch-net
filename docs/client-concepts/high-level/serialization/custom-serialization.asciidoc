@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -235,15 +235,16 @@ var indexResponse = client.IndexDocument(document);
 
 it serializes to 
 
-[source,javascript]
+[source,csharp]
 ----
+var expected = new
 {
-  "id": 1,
-  "name": "My first document",
-  "file_path": null,
-  "owner_id": 2,
-  "sub_documents": null
-}
+    id = 1,
+    name = "My first document",
+    file_path = (string) null,
+    owner_id = 2,
+    sub_documents = (object) null
+};
 ----
 
 which adheres to the conventions of our configured `MyCustomJsonNetSerializer` serializer.
@@ -258,9 +259,8 @@ returning covariant document types within a collection.
 ----
 public class MySecondCustomContractResolver : ConnectionSettingsAwareContractResolver
 {
-    public MySecondCustomContractResolver(IConnectionSettingsValues connectionSettings) : base(connectionSettings)
-    {
-    }
+    public MySecondCustomContractResolver(IConnectionSettingsValues connectionSettings)
+        : base(connectionSettings) { }
 
     protected override JsonContract CreateContract(Type objectType)
     {
@@ -329,22 +329,21 @@ var indexResponse = client.IndexDocument(document);
 
 serializes to 
 
-[source,javascript]
+[source,csharp]
 ----
+var expected = new JObject
 {
-  "$type": "Tests.ClientConcepts.HighLevel.Serialization.GettingStarted+MyDocument, Tests",
-  "id": 1,
-  "name": "My first document",
-  "ownerId": 2,
-  "subDocuments": [
-    {
-      "name": "my first sub document"
-    },
-    {
-      "name": "my second sub document"
+    { "$type", "Tests.ClientConcepts.HighLevel.Serialization.GettingStarted+MyDocument, Tests" },
+    { "id", 1 },
+    { "name", "My first document" },
+    { "ownerId", 2 },
+    { "subDocuments", new JArray
+        {
+            new JObject { { "name", "my first sub document" } },
+            new JObject { { "name", "my second sub document" } },
+        }
     }
-  ]
-}
+};
 ----
 
 the type information is serialized for the outer `MyDocument` instance, but not for each

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -92,157 +92,87 @@ new SearchRequest<Project>
     Query = ProjectFilter,
     Suggest = new SuggestContainer
     {
-        { "my-term-suggest", new SuggestBucket
         {
-            Text = "hello world",
-            Term = new TermSuggester
+            "my-term-suggest", new SuggestBucket
             {
-                MaxEdits = 1,
-                MaxInspections = 2,
-                MaxTermFrequency = 3,
-                MinDocFrequency = 4,
-                MinWordLength = 5,
-                PrefixLength = 6,
-                SuggestMode = SuggestMode.Always,
-                Analyzer = "standard",
-                Field = Field<Project>(p=>p.Name),
-                ShardSize = 7,
-                Size = 8
+                Text = "hello world",
+                Term = new TermSuggester
+                {
+                    MaxEdits = 1,
+                    MaxInspections = 2,
+                    MaxTermFrequency = 3,
+                    MinDocFrequency = 4,
+                    MinWordLength = 5,
+                    PrefixLength = 6,
+                    SuggestMode = SuggestMode.Always,
+                    Analyzer = "standard",
+                    Field = Field<Project>(p => p.Name),
+                    ShardSize = 7,
+                    Size = 8
+                }
             }
-        } },
-        { "my-completion-suggest", new SuggestBucket
+        },
         {
-            Prefix = Project.Instance.Name,
-            Completion = new CompletionSuggester
+            "my-completion-suggest", new SuggestBucket
             {
-                Contexts = new Dictionary<string, IList<ISuggestContextQuery>>
+                Prefix = Project.Instance.Name,
+                Completion = new CompletionSuggester
                 {
-                    { "color", new List<ISuggestContextQuery> { new SuggestContextQuery { Context = Project.First.Suggest.Contexts.Values.SelectMany(v => v).First() } } }
-                },
-                Fuzzy = new FuzzySuggester
-                {
-                    Fuzziness = Fuzziness.Auto,
-                    MinLength = 1,
-                    PrefixLength = 2,
-                    Transpositions = true,
-                    UnicodeAware = false
-                },
-                Analyzer = "simple",
-                Field = Field<Project>(p=>p.Suggest),
-                Size = 8,
-                SkipDuplicates = true
-            }
-        } },
-        { "my-phrase-suggest", new SuggestBucket
-        {
-            Text = "hello world",
-            Phrase = new PhraseSuggester
-            {
-                Collate = new PhraseSuggestCollate
-                {
-                    Query = new PhraseSuggestCollateQuery
+                    Contexts = new Dictionary<string, IList<ISuggestContextQuery>>
                     {
-                        Source = "{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}",
+                        {
+                            "color",
+                            new List<ISuggestContextQuery>
+                                { new SuggestContextQuery { Context = Project.First.Suggest.Contexts.Values.SelectMany(v => v).First() } }
+                        }
                     },
-                    Params = new Dictionary<string, object>
+                    Fuzzy = new SuggestFuzziness
                     {
-                        { "field_name", "title" }
+                        Fuzziness = Fuzziness.Auto,
+                        MinLength = 1,
+                        PrefixLength = 2,
+                        Transpositions = true,
+                        UnicodeAware = false
                     },
-                    Prune = true
-                },
-                Confidence = 10.1,
-                DirectGenerator = new List<DirectGenerator>
-                {
-                    new DirectGenerator { Field = "description" }
-                },
-                GramSize = 1,
-                Field = "name",
-                RealWordErrorLikelihood = 0.5,
-                TokenLimit = 5,
-                ForceUnigrams = false
+                    Analyzer = "simple",
+                    Field = Field<Project>(p => p.Suggest),
+                    Size = 8,
+                    SkipDuplicates = true
+                }
             }
-        } },
-    }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "query": {
-    "term": {
-      "type": {
-        "value": "project"
-      }
-    }
-  },
-  "suggest": {
-    "my-completion-suggest": {
-      "completion": {
-        "analyzer": "simple",
-        "contexts": {
-          "color": [
+        },
+        {
+            "my-phrase-suggest", new SuggestBucket
             {
-              "context": "red"
+                Text = "hello world",
+                Phrase = new PhraseSuggester
+                {
+                    Collate = new PhraseSuggestCollate
+                    {
+                        Query = new PhraseSuggestCollateQuery
+                        {
+                            Source = "{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}",
+                        },
+                        Params = new Dictionary<string, object>
+                        {
+                            { "field_name", "title" }
+                        },
+                        Prune = true
+                    },
+                    Confidence = 10.1,
+                    DirectGenerator = new List<DirectGenerator>
+                    {
+                        new DirectGenerator { Field = "description" }
+                    },
+                    GramSize = 1,
+                    Field = "name",
+                    RealWordErrorLikelihood = 0.5,
+                    TokenLimit = 5,
+                    ForceUnigrams = false
+                }
             }
-          ]
         },
-        "field": "suggest",
-        "fuzzy": {
-          "fuzziness": "AUTO",
-          "min_length": 1,
-          "prefix_length": 2,
-          "transpositions": true,
-          "unicode_aware": false
-        },
-        "size": 8,
-        "skip_duplicates": true
-      },
-      "prefix": "Durgan LLC"
-    },
-    "my-phrase-suggest": {
-      "phrase": {
-        "collate": {
-          "query": {
-            "source": "{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}"
-          },
-          "params": {
-            "field_name": "title"
-          },
-          "prune": true
-        },
-        "confidence": 10.1,
-        "direct_generator": [
-          {
-            "field": "description"
-          }
-        ],
-        "field": "name",
-        "gram_size": 1,
-        "real_word_error_likelihood": 0.5,
-        "token_limit": 5,
-        "force_unigrams": false
-      },
-      "text": "hello world"
-    },
-    "my-term-suggest": {
-      "term": {
-        "analyzer": "standard",
-        "field": "name",
-        "max_edits": 1,
-        "max_inspections": 2,
-        "max_term_freq": 3.0,
-        "min_doc_freq": 4.0,
-        "min_word_length": 5,
-        "prefix_length": 6,
-        "shard_size": 7,
-        "size": 8,
-        "suggest_mode": "always"
-      },
-      "text": "hello world"
     }
-  }
 }
 ----
 
@@ -260,7 +190,6 @@ suggest.Length.Should().BeGreaterThan(0);
 var option = suggest.Options.First();
 option.Text.Should().NotBeNullOrEmpty();
 option.Index.Should().Be("project");
-option.Type.Should().Be("doc");
 option.Id.Should().NotBeNull();
 option.Source.Should().NotBeNull();
 option.Source.Name.Should().NotBeNullOrWhiteSpace();
@@ -270,6 +199,6 @@ option.Contexts.Should().NotBeNull().And.NotBeEmpty();
 option.Contexts.Should().ContainKey("color");
 var colorContexts = option.Contexts["color"];
 colorContexts.Should().NotBeNull().And.HaveCount(1);
-colorContexts.First().Category.Should().Be((Project.First.Suggest.Contexts.Values.SelectMany(v => v).First()));
+colorContexts.First().Category.Should().Be(Project.First.Suggest.Contexts.Values.SelectMany(v => v).First());
 ----
 

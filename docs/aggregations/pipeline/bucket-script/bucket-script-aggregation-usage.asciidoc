@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -69,59 +69,12 @@ new DateHistogramAggregation("projects_started_per_month")
         }
         && new BucketScriptAggregation("stable_percentage", new MultiBucketsPath
         {
-            {"totalCommits", "commits"},
-            {"stableCommits", "stable_state>commits"}
+            { "totalCommits", "commits" },
+            { "stableCommits", "stable_state>commits" }
         })
         {
             Script = new InlineScript("params.stableCommits / params.totalCommits * 100")
         }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "projects_started_per_month": {
-    "date_histogram": {
-      "field": "startedOn",
-      "interval": "month"
-    },
-    "aggs": {
-      "commits": {
-        "sum": {
-          "field": "numberOfCommits"
-        }
-      },
-      "stable_state": {
-        "filter": {
-          "term": {
-            "state": {
-              "value": "Stable"
-            }
-          }
-        },
-        "aggs": {
-          "commits": {
-            "sum": {
-              "field": "numberOfCommits"
-            }
-          }
-        }
-      },
-      "stable_percentage": {
-        "bucket_script": {
-          "buckets_path": {
-            "totalCommits": "commits",
-            "stableCommits": "stable_state>commits"
-          },
-          "script": {
-            "source": "params.stableCommits / params.totalCommits * 100"
-          }
-        }
-      }
-    }
-  }
 }
 ----
 
@@ -136,7 +89,7 @@ projectsPerMonth.Should().NotBeNull();
 projectsPerMonth.Buckets.Should().NotBeNull();
 projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
 
-foreach(var item in projectsPerMonth.Buckets)
+foreach (var item in projectsPerMonth.Buckets)
 {
     var stablePercentage = item.BucketScript("stable_percentage");
     stablePercentage.Should().NotBeNull();

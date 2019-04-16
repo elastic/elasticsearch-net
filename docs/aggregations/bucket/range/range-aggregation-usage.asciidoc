@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -39,34 +39,10 @@ new RangeAggregation("commit_ranges")
     Field = Field<Project>(p => p.NumberOfCommits),
     Ranges = new List<AggregationRange>
     {
-        {new AggregationRange {To = 100}},
-        {new AggregationRange {From = 100, To = 500}},
-        {new AggregationRange {From = 500}}
+        { new AggregationRange { To = 100 } },
+        { new AggregationRange { From = 100, To = 500 } },
+        { new AggregationRange { From = 500 } }
     }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "commit_ranges": {
-    "range": {
-      "field": "numberOfCommits",
-      "ranges": [
-        {
-          "to": 100.0
-        },
-        {
-          "from": 100.0,
-          "to": 500.0
-        },
-        {
-          "from": 500.0
-        }
-      ]
-    }
-  }
 }
 ----
 

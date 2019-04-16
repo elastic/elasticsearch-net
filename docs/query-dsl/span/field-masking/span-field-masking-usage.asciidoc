@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -24,8 +24,8 @@ q
     .Name("named_query")
     .Boost(1.1)
     .Field(p => p.Name)
-    .Query(sq=>sq
-        .SpanTerm(st=>st.Field(p=>p.Description).Value("dolorem"))
+    .Query(sq => sq
+        .SpanTerm(st => st.Field(p => p.Description).Value("dolorem"))
     )
 )
 ----
@@ -47,25 +47,6 @@ new SpanFieldMaskingQuery
             Value = "dolorem"
         }
     }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "field_masking_span": {
-    "_name": "named_query",
-    "boost": 1.1,
-    "field": "name",
-    "query": {
-      "span_term": {
-        "description": {
-          "value": "dolorem"
-        }
-      }
-    }
-  }
 }
 ----
 

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -46,24 +46,6 @@ new NumericRangeQuery
     LessThan = 2.1,
     LessThanOrEqualTo = 2.0,
     Relation = RangeRelation.Within
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "range": {
-    "description": {
-      "_name": "named_query",
-      "boost": 1.1,
-      "gt": 1.0,
-      "gte": 1.1,
-      "lt": 2.1,
-      "lte": 2.0,
-      "relation": "within"
-    }
-  }
 }
 ----
 

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -35,18 +35,6 @@ a => a
 [source,csharp]
 ----
 new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.Location))
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "centroid": {
-    "geo_centroid": {
-      "field": "location"
-    }
-  }
-}
 ----
 
 ==== Handling Responses
@@ -95,25 +83,6 @@ new TermsAggregation("projects")
 }
 ----
 
-[source,javascript]
-.Example json output
-----
-{
-  "projects": {
-    "terms": {
-      "field": "name"
-    },
-    "aggs": {
-      "centroid": {
-        "geo_centroid": {
-          "field": "location"
-        }
-      }
-    }
-  }
-}
-----
-
 ==== Handling Responses
 
 [source,csharp]
@@ -149,18 +118,6 @@ a => a
 [source,csharp]
 ----
 new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.Location))
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "centroid": {
-    "geo_centroid": {
-      "field": "location"
-    }
-  }
-}
 ----
 
 ==== Handling Responses

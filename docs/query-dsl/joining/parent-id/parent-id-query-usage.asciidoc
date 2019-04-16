@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.0
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -40,18 +40,6 @@ new ParentIdQuery
     Name = "named_query",
     Type = Infer.Relation<CommitActivity>(),
     Id = Project.Instance.Name
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "parent_id": {
-    "_name": "named_query",
-    "type": "commits",
-    "id": "Durgan LLC"
-  }
 }
 ----
 
