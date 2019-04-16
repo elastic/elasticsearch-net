@@ -1,3 +1,5 @@
+:github: https://github.com/elastic/elasticsearch-net
+
 [[breaking-changes]]
 == Breaking Changes
 
@@ -182,5 +184,5 @@ In quite a few places values that should have been `long` were mapped as `int` i
 [float]
 == Found another breaking change?
 
-If you found another breaking chage please let us know on {github}/issues[the github issues].
+If you found another breaking change, please let us know on {github}/issues[the github issues].
 
