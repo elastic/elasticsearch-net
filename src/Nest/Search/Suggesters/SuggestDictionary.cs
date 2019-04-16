@@ -18,7 +18,7 @@ namespace Nest
 		public void Serialize(ref JsonWriter writer, ISuggestDictionary<T> value, IJsonFormatterResolver formatterResolver)
 		{
 			var formatter = new VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, ISuggest<T>[]>();
-			formatter.Serialize(ref writer, new SuggestDictionary<T>(value), formatterResolver);
+			formatter.Serialize(ref writer, (SuggestDictionary<T>)value, formatterResolver);
 		}
 	}
 
@@ -41,17 +41,6 @@ namespace Nest
 	{
 		[SerializationConstructor]
 		public SuggestDictionary(IReadOnlyDictionary<string, ISuggest<T>[]> backingDictionary) : base(backingDictionary) { }
-
-		public SuggestDictionary(ISuggestDictionary<T> fromInterface) : base(ToDictionary(fromInterface)) { }
-
-		private static IReadOnlyDictionary<string, ISuggest<T>[]> ToDictionary(ISuggestDictionary<T> fromInterface)
-		{
-			if (fromInterface == null) return Default;
-			var keys = fromInterface.Keys.ToList();
-			var dictionary = new Dictionary<string, ISuggest<T>[]>(keys.Count);
-			foreach (var k in keys) dictionary[k] = fromInterface[k];
-			return new ReadOnlyDictionary<string, ISuggest<T>[]>(dictionary);
-		}
 
 		public static SuggestDictionary<T> Default { get; } = new SuggestDictionary<T>(EmptyReadOnly<string, ISuggest<T>[]>.Dictionary);
 

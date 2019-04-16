@@ -32,6 +32,7 @@ namespace Nest
 		[DataMember(Name ="highlighted")]
 		string Highlighted { get; }
 
+		//TODO can this just be a string? Is it used at Request side?
 		/// <summary>
 		/// Completion suggester only, the id of the completed document
 		/// </summary>
