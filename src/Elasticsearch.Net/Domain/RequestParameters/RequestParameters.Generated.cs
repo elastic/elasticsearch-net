@@ -609,9 +609,6 @@ namespace Elasticsearch.Net
 		/// shard (number of replicas + 1)
 		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		///<summary>ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>
 		/// If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
@@ -638,9 +635,6 @@ namespace Elasticsearch.Net
 		/// shard (number of replicas + 1)
 		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		///<summary>ID of parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>
 		/// If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
@@ -735,6 +729,13 @@ namespace Elasticsearch.Net
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
 	}
+	///<summary>Request options for DeleteByQueryRethrottle<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html</pre></summary>
+	public class DeleteByQueryRethrottleRequestParameters : RequestParameters<DeleteByQueryRethrottleRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
+		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+	}
 	///<summary>Request options for DeleteScript<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public class DeleteScriptRequestParameters : RequestParameters<DeleteScriptRequestParameters> 
 	{
@@ -750,9 +751,6 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public string[] StoredFields { get => Q<string[]>("stored_fields"); set => Q("stored_fields", value); }
-		///<summary>The ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
@@ -776,9 +774,6 @@ namespace Elasticsearch.Net
 	public class SourceExistsRequestParameters : RequestParameters<SourceExistsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
-		///<summary>The ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
@@ -814,9 +809,6 @@ namespace Elasticsearch.Net
 		public string[] StoredFields { get => Q<string[]>("stored_fields"); set => Q("stored_fields", value); }
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
-		///<summary>The ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Query in the Lucene query string syntax</summary>
@@ -852,9 +844,6 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public string[] StoredFields { get => Q<string[]>("stored_fields"); set => Q("stored_fields", value); }
-		///<summary>The ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
@@ -866,9 +855,9 @@ namespace Elasticsearch.Net
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public string[] SourceExclude { get => Q<string[]>("_source_excludes"); set => Q("_source_excludes", value); }
+		public string[] SourceExclude { get => Q<string[]>("_source_exclude"); set => Q("_source_exclude", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public string[] SourceInclude { get => Q<string[]>("_source_includes"); set => Q("_source_includes", value); }
+		public string[] SourceInclude { get => Q<string[]>("_source_include"); set => Q("_source_include", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -885,9 +874,6 @@ namespace Elasticsearch.Net
 	public class SourceRequestParameters : RequestParameters<SourceRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>The ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
@@ -919,9 +905,6 @@ namespace Elasticsearch.Net
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 		///<summary>Explicit operation type</summary>
 		public OpType? OpType { get => Q<OpType?>("op_type"); set => Q("op_type", value); }
-		///<summary>ID of the parent document</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>
 		/// If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
@@ -1441,9 +1424,6 @@ namespace Elasticsearch.Net
 	public class ShrinkIndexRequestParameters : RequestParameters<ShrinkIndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		///<summary>whether or not to copy settings from the source index (defaults to false)</summary>
-		[Obsolete("Scheduled to be removed in 7.0, Elasticsearch 6.4 will throw an exception if this is turned off see elastic/elasticsearch#30404")]
-		public bool? CopySettings { get => Q<bool?>("copy_settings"); set => Q("copy_settings", value); }
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
@@ -1455,9 +1435,6 @@ namespace Elasticsearch.Net
 	public class SplitIndexRequestParameters : RequestParameters<SplitIndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		///<summary>whether or not to copy settings from the source index (defaults to false)</summary>
-		[Obsolete("Scheduled to be removed in 7.0, Elasticsearch 6.4 will throw an exception if this is turned off see elastic/elasticsearch#30404")]
-		public bool? CopySettings { get => Q<bool?>("copy_settings"); set => Q("copy_settings", value); }
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
@@ -1675,9 +1652,6 @@ namespace Elasticsearch.Net
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Specific routing value. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
 		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
-		///<summary>Parent id of documents. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>Specifies if requests are real-time as opposed to near-real-time (default: true).</summary>
 		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 		///<summary>Explicit version number for concurrency control</summary>
@@ -1780,10 +1754,10 @@ namespace Elasticsearch.Net
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+		///<summary>Control how long to keep the search context alive</summary>
+		public TimeSpan Scroll { get => Q<TimeSpan>("scroll"); set => Q("scroll", value); }
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
-		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public TimeSpan Scroll { get => Q<TimeSpan>("scroll"); set => Q("scroll", value); }
 	}
 	///<summary>Request options for ReindexRethrottle<pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>
 	public class ReindexRethrottleRequestParameters : RequestParameters<ReindexRethrottleRequestParameters> 
@@ -2090,9 +2064,6 @@ namespace Elasticsearch.Net
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Specific routing value.</summary>
 		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
-		///<summary>Parent id of documents.</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>Specifies if request is real-time as opposed to near-real-time (default: true).</summary>
 		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 		///<summary>Explicit version number for concurrency control</summary>
@@ -2114,9 +2085,6 @@ namespace Elasticsearch.Net
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>The script language (default: painless)</summary>
 		public string Lang { get => Q<string>("lang"); set => Q("lang", value); }
-		///<summary>ID of the parent document. Is is only used for routing and when for the upsert request</summary>
-		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
-		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>
 		/// If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
@@ -2212,6 +2180,13 @@ namespace Elasticsearch.Net
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
+	}
+	///<summary>Request options for UpdateByQueryRethrottle<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html</pre></summary>
+	public class UpdateByQueryRethrottleRequestParameters : RequestParameters<UpdateByQueryRethrottleRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
+		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
 	}
 	///<summary>Request options for CcrDeleteAutoFollowPattern<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-delete-auto-follow-pattern.html</pre></summary>
 	public class DeleteAutoFollowPatternRequestParameters : RequestParameters<DeleteAutoFollowPatternRequestParameters> 
@@ -2354,6 +2329,21 @@ namespace Elasticsearch.Net
 		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
+	///<summary>Request options for MlDeleteCalendar<pre>TODO</pre></summary>
+	public class DeleteCalendarRequestParameters : RequestParameters<DeleteCalendarRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
+	///<summary>Request options for MlDeleteCalendarEvent<pre>TODO</pre></summary>
+	public class DeleteCalendarEventRequestParameters : RequestParameters<DeleteCalendarEventRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
+	///<summary>Request options for MlDeleteCalendarJob<pre>TODO</pre></summary>
+	public class DeleteCalendarJobRequestParameters : RequestParameters<DeleteCalendarJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
 	///<summary>Request options for MlDeleteDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
 	public class DeleteDatafeedRequestParameters : RequestParameters<DeleteDatafeedRequestParameters> 
 	{
@@ -2365,6 +2355,15 @@ namespace Elasticsearch.Net
 	public class DeleteExpiredDataRequestParameters : RequestParameters<DeleteExpiredDataRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
+	///<summary>Request options for MlDeleteForecast<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</pre></summary>
+	public class DeleteForecastRequestParameters : RequestParameters<DeleteForecastRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		///<summary>Whether to ignore if `_all` matches no forecasts</summary>
+		public bool? AllowNoForecasts { get => Q<bool?>("allow_no_forecasts"); set => Q("allow_no_forecasts", value); }
+		///<summary>Controls the time to wait until the forecast(s) are deleted. Default to 30 seconds</summary>
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
 	///<summary>Request options for MlDeleteJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</pre></summary>
 	public class DeleteJobRequestParameters : RequestParameters<DeleteJobRequestParameters> 
@@ -2396,6 +2395,22 @@ namespace Elasticsearch.Net
 	public class GetBucketsRequestParameters : RequestParameters<GetBucketsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for MlGetCalendars<pre>TODO</pre></summary>
+	public class GetCalendarsRequestParameters : RequestParameters<GetCalendarsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for MlGetCalendarEvents<pre>TODO</pre></summary>
+	public class GetCalendarEventsRequestParameters : RequestParameters<GetCalendarEventsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Get events for the job. When this option is used calendar_id must be '_all'</summary>
+		public string JobId { get => Q<string>("job_id"); set => Q("job_id", value); }
+		///<summary>Get events after this time</summary>
+		public string Start { get => Q<string>("start"); set => Q("start", value); }
+		///<summary>Get events before this time</summary>
+		public DateTimeOffset? End { get => Q<DateTimeOffset?>("end"); set => Q("end", value); }
 	}
 	///<summary>Request options for MlGetCategories<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
 	public class GetCategoriesRequestParameters : RequestParameters<GetCategoriesRequestParameters> 
@@ -2450,8 +2465,18 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
+	///<summary>Request options for MlInfo<pre>TODO</pre></summary>
+	public class MachineLearningInfoRequestParameters : RequestParameters<MachineLearningInfoRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
 	///<summary>Request options for MlOpenJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</pre></summary>
 	public class OpenJobRequestParameters : RequestParameters<OpenJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for MlPostCalendarEvents<pre>TODO</pre></summary>
+	public class PostCalendarEventsRequestParameters : RequestParameters<PostCalendarEventsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
@@ -2468,6 +2493,16 @@ namespace Elasticsearch.Net
 	public class PreviewDatafeedRequestParameters : RequestParameters<PreviewDatafeedRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	///<summary>Request options for MlPutCalendar<pre>TODO</pre></summary>
+	public class PutCalendarRequestParameters : RequestParameters<PutCalendarRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+	}
+	///<summary>Request options for MlPutCalendarJob<pre>TODO</pre></summary>
+	public class PutCalendarJobRequestParameters : RequestParameters<PutCalendarJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 	}
 	///<summary>Request options for MlPutDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</pre></summary>
 	public class PutDatafeedRequestParameters : RequestParameters<PutDatafeedRequestParameters> 
@@ -2596,6 +2631,16 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
+	///<summary>Request options for SecurityDeletePrivileges<pre>TODO</pre></summary>
+	public class DeletePrivilegesRequestParameters : RequestParameters<DeletePrivilegesRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+	}
 	///<summary>Request options for SecurityDeleteRole<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html</pre></summary>
 	public class DeleteRoleRequestParameters : RequestParameters<DeleteRoleRequestParameters> 
 	{
@@ -2646,6 +2691,11 @@ namespace Elasticsearch.Net
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
+	///<summary>Request options for SecurityGetPrivileges<pre>TODO</pre></summary>
+	public class GetPrivilegesRequestParameters : RequestParameters<GetPrivilegesRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
 	///<summary>Request options for SecurityGetRole<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</pre></summary>
 	public class GetRoleRequestParameters : RequestParameters<GetRoleRequestParameters> 
 	{
@@ -2666,10 +2716,30 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
+	///<summary>Request options for SecurityGetUserPrivileges<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</pre></summary>
+	public class GetUserPrivilegesRequestParameters : RequestParameters<GetUserPrivilegesRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	///<summary>Request options for SecurityHasPrivileges<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</pre></summary>
+	public class HasPrivilegesRequestParameters : RequestParameters<HasPrivilegesRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
 	///<summary>Request options for SecurityInvalidateToken<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html</pre></summary>
 	public class InvalidateUserAccessTokenRequestParameters : RequestParameters<InvalidateUserAccessTokenRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
+	///<summary>Request options for SecurityPutPrivileges<pre>TODO</pre></summary>
+	public class PutPrivilegesRequestParameters : RequestParameters<PutPrivilegesRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
 	///<summary>Request options for SecurityPutRole<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</pre></summary>
 	public class PutRoleRequestParameters : RequestParameters<PutRoleRequestParameters> 

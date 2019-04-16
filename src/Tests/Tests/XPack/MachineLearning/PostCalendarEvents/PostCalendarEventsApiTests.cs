@@ -76,7 +76,7 @@ namespace Tests.XPack.MachineLearning.PostCalendarEvents
 		};
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"_xpack/ml/calendars/{CallIsolatedValue}/events";
+		protected override string UrlPath => $"_ml/calendars/{CallIsolatedValue}/events";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.PostCalendarEvents(CallIsolatedValue, f),

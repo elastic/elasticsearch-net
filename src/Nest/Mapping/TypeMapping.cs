@@ -118,7 +118,7 @@ namespace Nest
 		/// <pre>Later calls can override whatever is set is by this call.</pre>
 		/// </summary>
 		public TypeMappingDescriptor<T> AutoMap(IPropertyVisitor visitor = null, int maxRecursion = 0) =>
-			Assign(a => a.Properties = a.Properties.AutoMap<T>(visitor, maxRecursion));
+			Assign(Self.Properties.AutoMap<T>(visitor, maxRecursion), (a, v) => a.Properties = v);
 
 		/// <summary>
 		/// Convenience method to map as much as it can based on <see cref="ElasticsearchTypeAttribute" /> attributes set on the
@@ -131,8 +131,7 @@ namespace Nest
 		public TypeMappingDescriptor<T> AutoMap(Type documentType, IPropertyVisitor visitor = null, int maxRecursion = 0)
 		{
 			if (!documentType.IsClass()) throw new ArgumentException("must be a reference type", nameof(documentType));
-
-			return Assign(a => a.Properties = a.Properties.AutoMap(documentType, visitor, maxRecursion));
+			return Assign(Self.Properties.AutoMap(documentType, visitor, maxRecursion), (a, v) => a.Properties = v);
 		}
 
 		/// <summary>
@@ -145,75 +144,75 @@ namespace Nest
 		/// </summary>
 		public TypeMappingDescriptor<T> AutoMap<TDocument>(IPropertyVisitor visitor = null, int maxRecursion = 0)
 			where TDocument : class =>
-			Assign(a => a.Properties = a.Properties.AutoMap<TDocument>(visitor, maxRecursion));
+			Assign(Self.Properties.AutoMap<TDocument>(visitor, maxRecursion), (a, v) => a.Properties = v);
 
 		/// <inheritdoc />
 		public TypeMappingDescriptor<T> AutoMap(int maxRecursion) => AutoMap(null, maxRecursion);
 
 		/// <inheritdoc />
-		public TypeMappingDescriptor<T> Dynamic(Union<bool, DynamicMapping> dynamic) => Assign(a => a.Dynamic = dynamic);
+		public TypeMappingDescriptor<T> Dynamic(Union<bool, DynamicMapping> dynamic) => Assign(dynamic, (a, v) => a.Dynamic = v);
 
 		/// <inheritdoc />
-		public TypeMappingDescriptor<T> Dynamic(bool dynamic = true) => Assign(a => a.Dynamic = dynamic);
+		public TypeMappingDescriptor<T> Dynamic(bool dynamic = true) => Assign(dynamic, (a, v) => a.Dynamic = v);
 
 		/// <inheritdoc />
 		public TypeMappingDescriptor<T> AllField(Func<AllFieldDescriptor, IAllField> allFieldSelector) =>
-			Assign(a => a.AllField = allFieldSelector?.Invoke(new AllFieldDescriptor()));
+			Assign(allFieldSelector, (a, v) => a.AllField = v?.Invoke(new AllFieldDescriptor()));
 
 		/// <inheritdoc />
 		public TypeMappingDescriptor<T> IndexField(Func<IndexFieldDescriptor, IIndexField> indexFieldSelector) =>
-			Assign(a => a.IndexField = indexFieldSelector?.Invoke(new IndexFieldDescriptor()));
+			Assign(indexFieldSelector, (a, v) => a.IndexField = v?.Invoke(new IndexFieldDescriptor()));
 
 		/// <inheritdoc />
 		public TypeMappingDescriptor<T> SizeField(Func<SizeFieldDescriptor, ISizeField> sizeFieldSelector) =>
-			Assign(a => a.SizeField = sizeFieldSelector?.Invoke(new SizeFieldDescriptor()));
+			Assign(sizeFieldSelector, (a, v) => a.SizeField = v?.Invoke(new SizeFieldDescriptor()));
 
 		/// <inheritdoc />
 		public TypeMappingDescriptor<T> SourceField(Func<SourceFieldDescriptor, ISourceField> sourceFieldSelector) =>
-			Assign(a => a.SourceField = sourceFieldSelector?.Invoke(new SourceFieldDescriptor()));
+			Assign(sourceFieldSelector, (a, v) => a.SourceField = v?.Invoke(new SourceFieldDescriptor()));
 
 		/// <inheritdoc />
-		public TypeMappingDescriptor<T> DisableSizeField(bool? disabled = true) => Assign(a => a.SizeField = new SizeField { Enabled = !disabled });
+		public TypeMappingDescriptor<T> DisableSizeField(bool? disabled = true) => Assign(new SizeField { Enabled = !disabled }, (a, v) => a.SizeField = v);
 
 		/// <inheritdoc />
 		public TypeMappingDescriptor<T> DisableIndexField(bool? disabled = true) =>
-			Assign(a => a.IndexField = new IndexField { Enabled = !disabled });
+			Assign(new IndexField { Enabled = !disabled }, (a, v) => a.IndexField = v);
 
 		/// <inheritdoc />
-		public TypeMappingDescriptor<T> DynamicDateFormats(IEnumerable<string> dateFormats) => Assign(a => a.DynamicDateFormats = dateFormats);
+		public TypeMappingDescriptor<T> DynamicDateFormats(IEnumerable<string> dateFormats) => Assign(dateFormats, (a, v) => a.DynamicDateFormats = v);
 
 		/// <inheritdoc />
-		public TypeMappingDescriptor<T> DateDetection(bool? detect = true) => Assign(a => a.DateDetection = detect);
+		public TypeMappingDescriptor<T> DateDetection(bool? detect = true) => Assign(detect, (a, v) => a.DateDetection = v);
 
 		/// <inheritdoc />
-		public TypeMappingDescriptor<T> NumericDetection(bool? detect = true) => Assign(a => a.NumericDetection = detect);
+		public TypeMappingDescriptor<T> NumericDetection(bool? detect = true) => Assign(detect, (a, v) => a.NumericDetection = v);
 
 		/// <inheritdoc />
 		public TypeMappingDescriptor<T> RoutingField(Func<RoutingFieldDescriptor<T>, IRoutingField> routingFieldSelector) =>
-			Assign(a => a.RoutingField = routingFieldSelector?.Invoke(new RoutingFieldDescriptor<T>()));
+			Assign(routingFieldSelector, (a, v) => a.RoutingField = v?.Invoke(new RoutingFieldDescriptor<T>()));
 
 		/// <inheritdoc />
 		public TypeMappingDescriptor<T> FieldNamesField(Func<FieldNamesFieldDescriptor<T>, IFieldNamesField> fieldNamesFieldSelector) =>
-			Assign(a => a.FieldNamesField = fieldNamesFieldSelector.Invoke(new FieldNamesFieldDescriptor<T>()));
+			Assign(fieldNamesFieldSelector.Invoke(new FieldNamesFieldDescriptor<T>()), (a, v) => a.FieldNamesField = v);
 
 		/// <inheritdoc />
 		public TypeMappingDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> metaSelector) =>
-			Assign(a => a.Meta = metaSelector(new FluentDictionary<string, object>()));
+			Assign(metaSelector(new FluentDictionary<string, object>()), (a, v) => a.Meta = v);
 
 		/// <inheritdoc />
-		public TypeMappingDescriptor<T> Meta(Dictionary<string, object> metaDictionary) => Assign(a => a.Meta = metaDictionary);
+		public TypeMappingDescriptor<T> Meta(Dictionary<string, object> metaDictionary) => Assign(metaDictionary, (a, v) => a.Meta = v);
 
 		public TypeMappingDescriptor<T> Properties(Func<PropertiesDescriptor<T>, IPromise<IProperties>> propertiesSelector) =>
-			Assign(a => a.Properties = propertiesSelector?.Invoke(new PropertiesDescriptor<T>(Self.Properties))?.Value);
+			Assign(propertiesSelector, (a, v) => a.Properties = v?.Invoke(new PropertiesDescriptor<T>(Self.Properties))?.Value);
 
 		public TypeMappingDescriptor<T> Properties<TDocument>(Func<PropertiesDescriptor<TDocument>, IPromise<IProperties>> propertiesSelector)
 			where TDocument : class =>
-			Assign(a => a.Properties = propertiesSelector?.Invoke(new PropertiesDescriptor<TDocument>(Self.Properties))?.Value);
+			Assign(propertiesSelector, (a, v) => a.Properties = v?.Invoke(new PropertiesDescriptor<TDocument>(Self.Properties))?.Value);
 
 		/// <inheritdoc />
 		public TypeMappingDescriptor<T> DynamicTemplates(
 			Func<DynamicTemplateContainerDescriptor<T>, IPromise<IDynamicTemplateContainer>> dynamicTemplatesSelector
 		) =>
-			Assign(a => a.DynamicTemplates = dynamicTemplatesSelector?.Invoke(new DynamicTemplateContainerDescriptor<T>())?.Value);
+			Assign(dynamicTemplatesSelector, (a, v) => a.DynamicTemplates = v?.Invoke(new DynamicTemplateContainerDescriptor<T>())?.Value);
 	}
 }

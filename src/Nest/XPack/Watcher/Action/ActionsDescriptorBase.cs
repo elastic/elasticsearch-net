@@ -31,8 +31,8 @@ namespace Nest
 		TransformContainer IAction.Transform { get; set; }
 
 		public TDescriptor Transform(Func<TransformDescriptor, TransformContainer> selector) =>
-			Assign(a => a.Transform = selector.InvokeOrDefault(new TransformDescriptor()));
+			Assign(selector.InvokeOrDefault(new TransformDescriptor()), (a, v) => a.Transform = v);
 
-		public TDescriptor ThrottlePeriod(Time throttlePeriod) => Assign(a => a.ThrottlePeriod = throttlePeriod);
+		public TDescriptor ThrottlePeriod(Time throttlePeriod) => Assign(throttlePeriod, (a, v) => a.ThrottlePeriod = v);
 	}
 }

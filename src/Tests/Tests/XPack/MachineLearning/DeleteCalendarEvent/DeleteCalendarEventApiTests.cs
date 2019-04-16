@@ -49,7 +49,7 @@ namespace Tests.XPack.MachineLearning.DeleteCalendarEvent
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override string UrlPath => $"_xpack/ml/calendars/{CallIsolatedValue}/events/{EventId}";
+		protected override string UrlPath => $"_ml/calendars/{CallIsolatedValue}/events/{EventId}";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.DeleteCalendarEvent(CallIsolatedValue, EventId, f),

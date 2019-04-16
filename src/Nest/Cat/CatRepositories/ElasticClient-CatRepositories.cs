@@ -16,12 +16,12 @@ namespace Nest
 		/// <inheritdoc />
 		Task<ICatResponse<CatRepositoriesRecord>> CatRepositoriesAsync(
 			Func<CatRepositoriesDescriptor, ICatRepositoriesRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default(CancellationToken)
 		);
 
 		/// <inheritdoc />
 		Task<ICatResponse<CatRepositoriesRecord>> CatRepositoriesAsync(ICatRepositoriesRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default(CancellationToken)
 		);
 	}
 
@@ -33,20 +33,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICatResponse<CatRepositoriesRecord> CatRepositories(ICatRepositoriesRequest request) =>
-			DoCat<ICatRepositoriesRequest, CatRepositoriesRequestParameters, CatRepositoriesRecord>(request,
-				LowLevelDispatch.CatRepositoriesDispatch<CatResponse<CatRepositoriesRecord>>);
+			DoCat<ICatRepositoriesRequest, CatRepositoriesRequestParameters, CatRepositoriesRecord>(request);
 
 		/// <inheritdoc />
 		public Task<ICatResponse<CatRepositoriesRecord>> CatRepositoriesAsync(
 			Func<CatRepositoriesDescriptor, ICatRepositoriesRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) => CatRepositoriesAsync(selector.InvokeOrDefault(new CatRepositoriesDescriptor()), cancellationToken);
+			CancellationToken ct = default
+		) => CatRepositoriesAsync(selector.InvokeOrDefault(new CatRepositoriesDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<ICatResponse<CatRepositoriesRecord>> CatRepositoriesAsync(ICatRepositoriesRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			DoCatAsync<ICatRepositoriesRequest, CatRepositoriesRequestParameters, CatRepositoriesRecord>(request, cancellationToken,
-				LowLevelDispatch.CatRepositoriesDispatchAsync<CatResponse<CatRepositoriesRecord>>);
+		public Task<ICatResponse<CatRepositoriesRecord>> CatRepositoriesAsync(ICatRepositoriesRequest request, CancellationToken ct = default) =>
+			DoCatAsync<ICatRepositoriesRequest, CatRepositoriesRequestParameters, CatRepositoriesRecord>(request, ct);
 	}
 }

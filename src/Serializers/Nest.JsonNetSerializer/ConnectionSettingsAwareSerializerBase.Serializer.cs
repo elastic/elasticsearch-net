@@ -30,7 +30,7 @@ namespace Nest.JsonNetSerializer
 			BuiltinSerializer = builtinSerializer;
 			Converters = new List<JsonConverter>
 			{
-				new HandleNestTypesOnSourceJsonConverter(BuiltinSerializer),
+				new HandleNestTypesOnSourceJsonConverter(BuiltinSerializer, connectionSettings.MemoryStreamFactory),
 				new TimeSpanToStringConverter()
 			};
 			_serializer = CreateSerializer(SerializationFormatting.Indented);
@@ -46,11 +46,9 @@ namespace Nest.JsonNetSerializer
 
 		private List<JsonConverter> Converters { get; }
 
-
-		private Newtonsoft.Json.JsonSerializer CreateSerializer(SerializationFormatting formatting)
+		private JsonSerializer CreateSerializer(SerializationFormatting formatting)
 		{
 			var s = CreateJsonSerializerSettings() ?? new JsonSerializerSettings();
-			;
 			var converters = CreateJsonConverters() ?? Enumerable.Empty<JsonConverter>();
 			var contract = CreateContractResolver();
 			s.Formatting = formatting == SerializationFormatting.Indented ? Formatting.Indented : Formatting.None;
@@ -58,10 +56,10 @@ namespace Nest.JsonNetSerializer
 			foreach (var converter in converters.Concat(Converters))
 				s.Converters.Add(converter);
 
-			return Newtonsoft.Json.JsonSerializer.Create(s);
+			return JsonSerializer.Create(s);
 		}
 
-		private IContractResolver CreateContractResolver()
+		protected virtual ConnectionSettingsAwareContractResolver CreateContractResolver()
 		{
 			var contract = new ConnectionSettingsAwareContractResolver(ConnectionSettings);
 			ModifyContractResolver(contract);

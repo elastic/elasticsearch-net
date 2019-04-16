@@ -15,6 +15,7 @@ namespace ApiGenerator
 		private static readonly Dictionary<string, string> OnlineSpecifications = new Dictionary<string, string>
 		{
 			{ "Core", "https://github.com/elastic/elasticsearch/tree/{version}/rest-api-spec/src/main/resources/rest-api-spec/api" },
+			{ "XPack", "https://github.com/elastic/elasticsearch/tree/{version}/x-pack/plugin/src/test/resources/rest-api-spec/api"}
 		};
 
 		private static readonly ProgressBarOptions SubProgressBarOptions = new ProgressBarOptions
@@ -31,7 +32,6 @@ namespace ApiGenerator
 				(from kv in OnlineSpecifications
 					let url = kv.Value.Replace("{version}", branch)
 					select new Specification { FolderOnDisk = kv.Key, Branch = branch, GithubListingUrl = url }).ToList();
-
 
 			using (var pbar = new ProgressBar(specifications.Count, "Downloading specifications", MainProgressBarOptions))
 			{

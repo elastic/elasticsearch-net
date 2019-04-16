@@ -36,8 +36,8 @@ namespace Nest
 		bool? ICardinalityAggregation.Rehash { get; set; }
 
 		public CardinalityAggregationDescriptor<T> PrecisionThreshold(int? precisionThreshold)
-			=> Assign(a => a.PrecisionThreshold = precisionThreshold);
+			=> Assign(precisionThreshold, (a, v) => a.PrecisionThreshold = v);
 
-		public CardinalityAggregationDescriptor<T> Rehash(bool? rehash = true) => Assign(a => a.Rehash = rehash);
+		public CardinalityAggregationDescriptor<T> Rehash(bool? rehash = true) => Assign(rehash, (a, v) => a.Rehash = v);
 	}
 }

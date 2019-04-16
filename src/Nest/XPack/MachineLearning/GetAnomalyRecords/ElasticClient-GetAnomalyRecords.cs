@@ -18,12 +18,12 @@ namespace Nest
 		/// <inheritdoc />
 		Task<IGetAnomalyRecordsResponse> GetAnomalyRecordsAsync(Id jobId,
 			Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<IGetAnomalyRecordsResponse> GetAnomalyRecordsAsync(IGetAnomalyRecordsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -35,27 +35,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetAnomalyRecordsResponse GetAnomalyRecords(IGetAnomalyRecordsRequest request) =>
-			Dispatcher.Dispatch<IGetAnomalyRecordsRequest, GetAnomalyRecordsRequestParameters, GetAnomalyRecordsResponse>(
-				request,
-				LowLevelDispatch.MlGetRecordsDispatch<GetAnomalyRecordsResponse>
-			);
+			DoRequest<IGetAnomalyRecordsRequest, GetAnomalyRecordsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetAnomalyRecordsResponse> GetAnomalyRecordsAsync(Id jobId,
+		public Task<IGetAnomalyRecordsResponse> GetAnomalyRecordsAsync(
+			Id jobId,
 			Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			GetAnomalyRecordsAsync(selector.InvokeOrDefault(new GetAnomalyRecordsDescriptor(jobId)), cancellationToken);
+			CancellationToken ct = default
+		) => GetAnomalyRecordsAsync(selector.InvokeOrDefault(new GetAnomalyRecordsDescriptor(jobId)), ct);
 
 		/// <inheritdoc />
-		public Task<IGetAnomalyRecordsResponse> GetAnomalyRecordsAsync(IGetAnomalyRecordsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<IGetAnomalyRecordsRequest, GetAnomalyRecordsRequestParameters, GetAnomalyRecordsResponse, IGetAnomalyRecordsResponse>(
-					request,
-					cancellationToken,
-					LowLevelDispatch.MlGetRecordsDispatchAsync<GetAnomalyRecordsResponse>
-				);
+		public Task<IGetAnomalyRecordsResponse> GetAnomalyRecordsAsync(IGetAnomalyRecordsRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetAnomalyRecordsRequest, IGetAnomalyRecordsResponse, GetAnomalyRecordsResponse>(request, request.RequestParameters, ct);
 	}
 }

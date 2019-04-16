@@ -19,7 +19,7 @@ namespace Tests.Indices.Monitoring.IndicesStats
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
 		protected override IndicesStatsRequest Initializer => new IndicesStatsRequest(Infer.AllIndices);
-		protected override string UrlPath => "/_stats";
+		protected override string UrlPath => "/_all/_stats";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.IndicesStats(Infer.AllIndices, f),

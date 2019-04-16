@@ -38,7 +38,7 @@ namespace Tests.XPack.MachineLearning.GetCalendarEvents
 		protected override GetCalendarEventsRequest Initializer => new GetCalendarEventsRequest(CallIsolatedValue);
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"_xpack/ml/calendars/{CallIsolatedValue}/events";
+		protected override string UrlPath => $"_ml/calendars/{CallIsolatedValue}/events";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.GetCalendarEvents(CallIsolatedValue),

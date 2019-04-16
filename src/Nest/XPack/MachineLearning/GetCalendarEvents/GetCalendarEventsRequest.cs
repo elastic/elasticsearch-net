@@ -1,23 +1,24 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary>
 	/// Retrieves configuration information for calendars.
 	/// </summary>
+	[MapsApi("ml.get_calendar_events")]
 	public partial interface IGetCalendarEventsRequest
 	{
 		/// <summary>
 		///		Skips a number of events
 		/// </summary>
-		[JsonProperty("from")]
+		[DataMember(Name = "from")]
 		int? From { get; set; }
 
 		/// <summary>
 		///     Specifies a max number of events to get
 		/// </summary>
-		[JsonProperty("size")]
+		[DataMember(Name = "size")]
 		int? Size { get; set; }
 	}
 
@@ -30,7 +31,6 @@ namespace Nest
 		public int? Size { get; set; }
 	}
 
-	[DescriptorFor("XpackMlGetCalendarEvents")]
 	public partial class GetCalendarEventsDescriptor
 	{
 		/// <inheritdoc cref="IGetCalendarEventsRequest.From" />
@@ -40,9 +40,9 @@ namespace Nest
 		int? IGetCalendarEventsRequest.Size { get; set; }
 
 		/// <inheritdoc cref="IGetCalendarEventsRequest.From" />
-		public GetCalendarEventsDescriptor From(int? from) => Assign(a => a.From = from);
+		public GetCalendarEventsDescriptor From(int? from) => Assign(from, (a, v) => a.From = v);
 
 		/// <inheritdoc cref="IGetCalendarEventsRequest.Size" />
-		public GetCalendarEventsDescriptor Size(int? size) => Assign(a => a.Size = size);
+		public GetCalendarEventsDescriptor Size(int? size) => Assign(size, (a, v) => a.Size = v);
 	}
 }

@@ -16,11 +16,11 @@ namespace Nest
 
 		/// <inheritdoc cref="TranslateSql(System.Func{Nest.TranslateSqlDescriptor,Nest.ITranslateSqlRequest})" />
 		Task<ITranslateSqlResponse> TranslateSqlAsync(Func<TranslateSqlDescriptor, ITranslateSqlRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="TranslateSql(System.Func{Nest.TranslateSqlDescriptor,Nest.ITranslateSqlRequest})" />
-		Task<ITranslateSqlResponse> TranslateSqlAsync(ITranslateSqlRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<ITranslateSqlResponse> TranslateSqlAsync(ITranslateSqlRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -30,29 +30,25 @@ namespace Nest
 			TranslateSql(selector.InvokeOrDefault(new TranslateSqlDescriptor()));
 
 		/// <inheritdoc cref="TranslateSql(System.Func{Nest.TranslateSqlDescriptor,Nest.ITranslateSqlRequest})" />
-		public ITranslateSqlResponse TranslateSql(ITranslateSqlRequest request) =>
-			Dispatcher.Dispatch<ITranslateSqlRequest, TranslateSqlRequestParameters, TranslateSqlResponse>(
-				request,
-				ToTranslateSqlResponse,
-				(p, d) => LowLevelDispatch.SqlTranslateDispatch<TranslateSqlResponse>(p, d)
-			);
+		public ITranslateSqlResponse TranslateSql(ITranslateSqlRequest request)
+		{
+			request.RequestParameters.DeserializationOverride = ToTranslateSqlResponse;
+			return DoRequest<ITranslateSqlRequest, TranslateSqlResponse>(request, request.RequestParameters);
+		}
 
 		/// <inheritdoc cref="TranslateSql(System.Func{Nest.TranslateSqlDescriptor,Nest.ITranslateSqlRequest})" />
-		public Task<ITranslateSqlResponse> TranslateSqlAsync(Func<TranslateSqlDescriptor, ITranslateSqlRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			TranslateSqlAsync(selector.InvokeOrDefault(new TranslateSqlDescriptor()), cancellationToken);
+		public Task<ITranslateSqlResponse> TranslateSqlAsync(
+			Func<TranslateSqlDescriptor, ITranslateSqlRequest> selector = null,
+			CancellationToken ct = default
+		) => TranslateSqlAsync(selector.InvokeOrDefault(new TranslateSqlDescriptor()), ct);
 
 		/// <inheritdoc cref="TranslateSql(System.Func{Nest.TranslateSqlDescriptor,Nest.ITranslateSqlRequest})" />
-		public Task<ITranslateSqlResponse> TranslateSqlAsync(ITranslateSqlRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<ITranslateSqlRequest, TranslateSqlRequestParameters, TranslateSqlResponse, ITranslateSqlResponse>(
-				request,
-				cancellationToken,
-				ToTranslateSqlResponse,
-				(p, d, c) => LowLevelDispatch.SqlTranslateDispatchAsync<TranslateSqlResponse>(p, d, c)
-			);
+		public Task<ITranslateSqlResponse> TranslateSqlAsync(ITranslateSqlRequest request, CancellationToken ct = default)
+		{
+			request.RequestParameters.DeserializationOverride = ToTranslateSqlResponse;
+			return DoRequestAsync<ITranslateSqlRequest, ITranslateSqlResponse, TranslateSqlResponse>
+				(request, request.RequestParameters, ct);
+		}
 
 		private TranslateSqlResponse ToTranslateSqlResponse(IApiCallDetails apiCallDetails, Stream stream)
 		{

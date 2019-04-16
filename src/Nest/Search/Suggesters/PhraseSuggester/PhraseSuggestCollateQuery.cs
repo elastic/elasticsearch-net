@@ -33,17 +33,17 @@ namespace Nest
 		public string Source { get; set; }
 	}
 
-	/// <inheritdoc />
+	/// <inheritdoc cref="IPhraseSuggestCollateQuery" />
 	public class PhraseSuggestCollateQueryDescriptor
 		: DescriptorBase<PhraseSuggestCollateQueryDescriptor, IPhraseSuggestCollateQuery>, IPhraseSuggestCollateQuery
 	{
 		Id IPhraseSuggestCollateQuery.Id { get; set; }
 		string IPhraseSuggestCollateQuery.Source { get; set; }
 
-		/// <inheritdoc />
-		public PhraseSuggestCollateQueryDescriptor Source(string source) => Assign(a => a.Source = source);
+		/// <inheritdoc cref="IPhraseSuggestCollateQuery.Source" />
+		public PhraseSuggestCollateQueryDescriptor Source(string source) => Assign(source, (a, v) => a.Source = v);
 
-		/// <inheritdoc />
-		public PhraseSuggestCollateQueryDescriptor Id(Id id) => Assign(a => a.Id = id);
+		/// <inheritdoc cref="IPhraseSuggestCollateQuery.Id" />
+		public PhraseSuggestCollateQueryDescriptor Id(Id id) => Assign(id, (a, v) => a.Id = v);
 	}
 }

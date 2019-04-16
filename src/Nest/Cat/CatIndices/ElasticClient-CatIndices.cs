@@ -16,12 +16,12 @@ namespace Nest
 		/// <inheritdoc />
 		Task<ICatResponse<CatIndicesRecord>> CatIndicesAsync(
 			Func<CatIndicesDescriptor, ICatIndicesRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<ICatResponse<CatIndicesRecord>> CatIndicesAsync(ICatIndicesRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -33,20 +33,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICatResponse<CatIndicesRecord> CatIndices(ICatIndicesRequest request) =>
-			DoCat<ICatIndicesRequest, CatIndicesRequestParameters, CatIndicesRecord>(request,
-				LowLevelDispatch.CatIndicesDispatch<CatResponse<CatIndicesRecord>>);
+			DoCat<ICatIndicesRequest, CatIndicesRequestParameters, CatIndicesRecord>(request);
 
 		/// <inheritdoc />
 		public Task<ICatResponse<CatIndicesRecord>> CatIndicesAsync(
 			Func<CatIndicesDescriptor, ICatIndicesRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) => CatIndicesAsync(selector.InvokeOrDefault(new CatIndicesDescriptor()), cancellationToken);
+			CancellationToken ct = default
+		) => CatIndicesAsync(selector.InvokeOrDefault(new CatIndicesDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<ICatResponse<CatIndicesRecord>> CatIndicesAsync(ICatIndicesRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			DoCatAsync<ICatIndicesRequest, CatIndicesRequestParameters, CatIndicesRecord>(request, cancellationToken,
-				LowLevelDispatch.CatIndicesDispatchAsync<CatResponse<CatIndicesRecord>>);
+		public Task<ICatResponse<CatIndicesRecord>> CatIndicesAsync(ICatIndicesRequest request, CancellationToken ct = default) =>
+			DoCatAsync<ICatIndicesRequest, CatIndicesRequestParameters, CatIndicesRecord>(request, ct);
 	}
 }

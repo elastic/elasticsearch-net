@@ -9,7 +9,7 @@ namespace Nest
 		{
 			if (backingDictionary == null) return;
 
-			var dictionary = new Dictionary<TKey, TValue>();
+			var dictionary = new Dictionary<TKey, TValue>(backingDictionary.Count);
 			foreach (var key in backingDictionary.Keys)
 				// ReSharper disable once VirtualMemberCallInConstructor
 				// expect all implementations of Sanitize to be pure

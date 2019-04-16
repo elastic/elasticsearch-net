@@ -15,12 +15,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IChangePasswordResponse> ChangePasswordAsync(Func<ChangePasswordDescriptor, IChangePasswordRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<IChangePasswordResponse> ChangePasswordAsync(IChangePasswordRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -32,25 +32,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IChangePasswordResponse ChangePassword(IChangePasswordRequest request) =>
-			Dispatcher.Dispatch<IChangePasswordRequest, ChangePasswordRequestParameters, ChangePasswordResponse>(
-				request,
-				(p, d) => LowLevelDispatch.SecurityChangePasswordDispatch<ChangePasswordResponse>(p, d)
-			);
+			DoRequest<IChangePasswordRequest, ChangePasswordResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IChangePasswordResponse> ChangePasswordAsync(Func<ChangePasswordDescriptor, IChangePasswordRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			ChangePasswordAsync(selector.InvokeOrDefault(new ChangePasswordDescriptor()), cancellationToken);
+		public Task<IChangePasswordResponse> ChangePasswordAsync(
+			Func<ChangePasswordDescriptor, IChangePasswordRequest> selector,
+			CancellationToken ct = default
+		) => ChangePasswordAsync(selector.InvokeOrDefault(new ChangePasswordDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IChangePasswordResponse> ChangePasswordAsync(IChangePasswordRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IChangePasswordRequest, ChangePasswordRequestParameters, ChangePasswordResponse, IChangePasswordResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.SecurityChangePasswordDispatchAsync<ChangePasswordResponse>(p, d, c)
-			);
+		public Task<IChangePasswordResponse> ChangePasswordAsync(IChangePasswordRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IChangePasswordRequest, IChangePasswordResponse, ChangePasswordResponse>(request, request.RequestParameters, ct);
 	}
 }

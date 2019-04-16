@@ -23,12 +23,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IGetIndexTemplateResponse> GetIndexTemplateAsync(Func<GetIndexTemplateDescriptor, IGetIndexTemplateRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<IGetIndexTemplateResponse> GetIndexTemplateAsync(IGetIndexTemplateRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -40,26 +40,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetIndexTemplateResponse GetIndexTemplate(IGetIndexTemplateRequest request) =>
-			Dispatcher.Dispatch<IGetIndexTemplateRequest, GetIndexTemplateRequestParameters, GetIndexTemplateResponse>(
-				request,
-				(p, d) => LowLevelDispatch.IndicesGetTemplateDispatch<GetIndexTemplateResponse>(p)
-			);
+			DoRequest<IGetIndexTemplateRequest, GetIndexTemplateResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetIndexTemplateResponse> GetIndexTemplateAsync(Func<GetIndexTemplateDescriptor, IGetIndexTemplateRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			GetIndexTemplateAsync(selector.InvokeOrDefault(new GetIndexTemplateDescriptor()), cancellationToken);
+		public Task<IGetIndexTemplateResponse> GetIndexTemplateAsync(
+			Func<GetIndexTemplateDescriptor, IGetIndexTemplateRequest> selector = null,
+			CancellationToken ct = default
+		) => GetIndexTemplateAsync(selector.InvokeOrDefault(new GetIndexTemplateDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IGetIndexTemplateResponse> GetIndexTemplateAsync(IGetIndexTemplateRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<IGetIndexTemplateRequest, GetIndexTemplateRequestParameters, GetIndexTemplateResponse, IGetIndexTemplateResponse>(
-					request,
-					cancellationToken,
-					(p, d, c) => LowLevelDispatch.IndicesGetTemplateDispatchAsync<GetIndexTemplateResponse>(p, c)
-				);
+		public Task<IGetIndexTemplateResponse> GetIndexTemplateAsync(IGetIndexTemplateRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetIndexTemplateRequest, IGetIndexTemplateResponse, GetIndexTemplateResponse>(request, request.RequestParameters, ct);
 	}
 }

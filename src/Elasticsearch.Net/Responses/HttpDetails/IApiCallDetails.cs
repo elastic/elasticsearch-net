@@ -23,6 +23,11 @@ namespace Elasticsearch.Net
         string DebugInformation { get; }
 
 		/// <summary>
+		/// Reference to the connection configuration that yielded this response
+		/// </summary>
+		IConnectionConfigurationValues ConnectionConfiguration { get; }
+
+		/// <summary>
 		/// A collection of deprecation warnings returned from Elasticsearch.
 		/// <para>Used to signal that the request uses an API feature that is marked as deprecated</para>
 		/// </summary>

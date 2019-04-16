@@ -41,14 +41,14 @@ namespace Nest
 
 		string IMoveClusterRerouteCommand.ToNode { get; set; }
 
-		public MoveClusterRerouteCommandDescriptor Index(IndexName index) => Assign(a => a.Index = index);
+		public MoveClusterRerouteCommandDescriptor Index(IndexName index) => Assign(index, (a, v) => a.Index = v);
 
-		public MoveClusterRerouteCommandDescriptor Index<T>() where T : class => Assign(a => a.Index = typeof(T));
+		public MoveClusterRerouteCommandDescriptor Index<T>() where T : class => Assign(typeof(T), (a, v) => a.Index = v);
 
-		public MoveClusterRerouteCommandDescriptor Shard(int? shard) => Assign(a => a.Shard = shard);
+		public MoveClusterRerouteCommandDescriptor Shard(int? shard) => Assign(shard, (a, v) => a.Shard = v);
 
-		public MoveClusterRerouteCommandDescriptor FromNode(string fromNode) => Assign(a => a.FromNode = fromNode);
+		public MoveClusterRerouteCommandDescriptor FromNode(string fromNode) => Assign(fromNode, (a, v) => a.FromNode = v);
 
-		public MoveClusterRerouteCommandDescriptor ToNode(string toNode) => Assign(a => a.ToNode = toNode);
+		public MoveClusterRerouteCommandDescriptor ToNode(string toNode) => Assign(toNode, (a, v) => a.ToNode = v);
 	}
 }

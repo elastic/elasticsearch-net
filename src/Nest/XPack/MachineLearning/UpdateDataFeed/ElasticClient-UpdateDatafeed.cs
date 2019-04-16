@@ -18,12 +18,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IUpdateDatafeedResponse> UpdateDatafeedAsync<T>(Id datafeedId, Func<UpdateDatafeedDescriptor<T>, IUpdateDatafeedRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) where T : class;
 
 		/// <inheritdoc />
 		Task<IUpdateDatafeedResponse> UpdateDatafeedAsync(IUpdateDatafeedRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -36,26 +36,19 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IUpdateDatafeedResponse UpdateDatafeed(IUpdateDatafeedRequest request) =>
-			Dispatcher.Dispatch<IUpdateDatafeedRequest, UpdateDatafeedRequestParameters, UpdateDatafeedResponse>(
-				request,
-				LowLevelDispatch.MlUpdateDatafeedDispatch<UpdateDatafeedResponse>
-			);
+			DoRequest<IUpdateDatafeedRequest, UpdateDatafeedResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IUpdateDatafeedResponse> UpdateDatafeedAsync<T>(Id datafeedId,
 			Func<UpdateDatafeedDescriptor<T>, IUpdateDatafeedRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) where T : class =>
-			UpdateDatafeedAsync(selector.InvokeOrDefault(new UpdateDatafeedDescriptor<T>(datafeedId)), cancellationToken);
+			CancellationToken ct = default
+		)
+			where T : class =>
+			UpdateDatafeedAsync(selector.InvokeOrDefault(new UpdateDatafeedDescriptor<T>(datafeedId)), ct);
 
 		/// <inheritdoc />
-		public Task<IUpdateDatafeedResponse> UpdateDatafeedAsync(IUpdateDatafeedRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IUpdateDatafeedRequest, UpdateDatafeedRequestParameters, UpdateDatafeedResponse, IUpdateDatafeedResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.MlUpdateDatafeedDispatchAsync<UpdateDatafeedResponse>
-			);
+		public Task<IUpdateDatafeedResponse> UpdateDatafeedAsync(IUpdateDatafeedRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IUpdateDatafeedRequest, IUpdateDatafeedResponse, UpdateDatafeedResponse>
+				(request, request.RequestParameters, ct);
 	}
 }

@@ -43,18 +43,18 @@ namespace Nest
 		Field IRenameProcessor.TargetField { get; set; }
 		bool? IRenameProcessor.IgnoreMissing { get; set; }
 
-		public RenameProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public RenameProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		public RenameProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
-		public RenameProcessorDescriptor<T> TargetField(Field field) => Assign(a => a.TargetField = field);
+		public RenameProcessorDescriptor<T> TargetField(Field field) => Assign(field, (a, v) => a.TargetField = v);
 
 		public RenameProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.TargetField = objectPath);
+			Assign(objectPath, (a, v) => a.TargetField = v);
 
 
 		/// <inheritdoc cref="IRemoveProcessor.IgnoreMissing" />
-		public RenameProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);
+		public RenameProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissing = v);
 	}
 }

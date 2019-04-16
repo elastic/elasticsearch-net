@@ -131,39 +131,39 @@ namespace Nest
 		Time ICreateFollowIndexRequest.ReadPollTimeout { get; set; }
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.RemoteCluster"/>
-		public CreateFollowIndexDescriptor RemoteCluster(string remoteCluster) => Assign(a => a.RemoteCluster = remoteCluster);
+		public CreateFollowIndexDescriptor RemoteCluster(string remoteCluster) => Assign(remoteCluster, (a, v) => a.RemoteCluster = v);
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.LeaderIndex"/>
-		public CreateFollowIndexDescriptor LeaderIndex(IndexName index) => Assign(a => a.LeaderIndex = index);
+		public CreateFollowIndexDescriptor LeaderIndex(IndexName index) => Assign(index, (a, v) => a.LeaderIndex = v);
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxReadRequestOperationCount"/>
-		public CreateFollowIndexDescriptor MaxReadRequestOperationCount(long? max) => Assign(a => a.MaxReadRequestOperationCount = max);
+		public CreateFollowIndexDescriptor MaxReadRequestOperationCount(long? max) => Assign(max, (a, v) => a.MaxReadRequestOperationCount = v);
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxOutstandingReadRequests"/>
-		public CreateFollowIndexDescriptor MaxOutstandingReadRequests(long? max) => Assign(a => a.MaxOutstandingReadRequests = max);
+		public CreateFollowIndexDescriptor MaxOutstandingReadRequests(long? max) => Assign(max, (a, v) => a.MaxOutstandingReadRequests = v);
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxRequestSize"/>
-		public CreateFollowIndexDescriptor MaxRequestSize(string maxRequestSize) => Assign(a => a.MaxRequestSize = maxRequestSize);
+		public CreateFollowIndexDescriptor MaxRequestSize(string maxRequestSize) => Assign(maxRequestSize, (a, v) => a.MaxRequestSize = v);
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxWriteRequestOperationCount"/>
-		public CreateFollowIndexDescriptor MaxWriteRequestOperationCount(long? max) => Assign(a => a.MaxWriteRequestOperationCount = max);
+		public CreateFollowIndexDescriptor MaxWriteRequestOperationCount(long? max) => Assign(max, (a, v) => a.MaxWriteRequestOperationCount = v);
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxWriteRequestSize"/>
-		public CreateFollowIndexDescriptor MaxWriteRequestSize(string maxSize) => Assign(a => a.MaxWriteRequestSize = maxSize);
+		public CreateFollowIndexDescriptor MaxWriteRequestSize(string maxSize) => Assign(maxSize, (a, v) => a.MaxWriteRequestSize = v);
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxOutstandingWriteRequests"/>
-		public CreateFollowIndexDescriptor MaxOutstandingWriteRequests(long? max) => Assign(a => a.MaxOutstandingWriteRequests = max);
+		public CreateFollowIndexDescriptor MaxOutstandingWriteRequests(long? max) => Assign(max, (a, v) => a.MaxOutstandingWriteRequests = v);
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxWriteBufferCount"/>
-		public CreateFollowIndexDescriptor MaxWriteBufferCount(long? max) => Assign(a => a.MaxWriteBufferCount = max);
+		public CreateFollowIndexDescriptor MaxWriteBufferCount(long? max) => Assign(max, (a, v) => a.MaxWriteBufferCount = v);
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxWriteBufferSize"/>
-		public CreateFollowIndexDescriptor MaxWriteBufferSize(string max) => Assign(a => a.MaxWriteBufferSize = max);
+		public CreateFollowIndexDescriptor MaxWriteBufferSize(string max) => Assign(max, (a, v) => a.MaxWriteBufferSize = v);
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxRetryDelay"/>
-		public CreateFollowIndexDescriptor MaxRetryDelay(Time maxRetryDelay) => Assign(a => a.MaxRetryDelay = maxRetryDelay);
+		public CreateFollowIndexDescriptor MaxRetryDelay(Time maxRetryDelay) => Assign(maxRetryDelay, (a, v) => a.MaxRetryDelay = v);
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.ReadPollTimeout"/>
-		public CreateFollowIndexDescriptor ReadPollTimeout(Time readPollTimeout) => Assign(a => a.ReadPollTimeout = readPollTimeout);
+		public CreateFollowIndexDescriptor ReadPollTimeout(Time readPollTimeout) => Assign(readPollTimeout, (a, v) => a.ReadPollTimeout = v);
 	}
 }

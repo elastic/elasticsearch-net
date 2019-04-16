@@ -18,11 +18,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IRootNodeInfoResponse> RootNodeInfoAsync(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IRootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IRootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -33,25 +33,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IRootNodeInfoResponse RootNodeInfo(IRootNodeInfoRequest request) =>
-			Dispatcher.Dispatch<IRootNodeInfoRequest, RootNodeInfoRequestParameters, RootNodeInfoResponse>(
-				request,
-				(p, d) => LowLevelDispatch.InfoDispatch<RootNodeInfoResponse>(p)
-			);
+			DoRequest<IRootNodeInfoRequest, RootNodeInfoResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IRootNodeInfoResponse> RootNodeInfoAsync(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			RootNodeInfoAsync(selector.InvokeOrDefault(new RootNodeInfoDescriptor()), cancellationToken);
+		public Task<IRootNodeInfoResponse> RootNodeInfoAsync(
+			Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null,
+			CancellationToken ct = default
+		) => RootNodeInfoAsync(selector.InvokeOrDefault(new RootNodeInfoDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IRootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IRootNodeInfoRequest, RootNodeInfoRequestParameters, RootNodeInfoResponse, IRootNodeInfoResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.InfoDispatchAsync<RootNodeInfoResponse>(p, c)
-			);
+		public Task<IRootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IRootNodeInfoRequest, IRootNodeInfoResponse, RootNodeInfoResponse>(request, request.RequestParameters, ct);
 	}
 }

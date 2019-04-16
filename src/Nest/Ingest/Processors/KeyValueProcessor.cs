@@ -98,39 +98,39 @@ namespace Nest
 		string IKeyValueProcessor.ValueSplit { get; set; }
 
 		/// <inheritdoc cref="IKeyValueProcessor.Field" />
-		public KeyValueProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public KeyValueProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IKeyValueProcessor.Field" />
-		public KeyValueProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
+		public KeyValueProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="IKeyValueProcessor.TargetField" />
-		public KeyValueProcessorDescriptor<T> TargetField(Field field) => Assign(a => a.TargetField = field);
+		public KeyValueProcessorDescriptor<T> TargetField(Field field) => Assign(field, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc cref="IKeyValueProcessor.TargetField" />
-		public KeyValueProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) => Assign(a => a.TargetField = objectPath);
+		public KeyValueProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc cref="IKeyValueProcessor.FieldSplit" />
-		public KeyValueProcessorDescriptor<T> FieldSplit(string split) => Assign(a => a.FieldSplit = split);
+		public KeyValueProcessorDescriptor<T> FieldSplit(string split) => Assign(split, (a, v) => a.FieldSplit = v);
 
 		/// <inheritdoc cref="IKeyValueProcessor.ValueSplit" />
-		public KeyValueProcessorDescriptor<T> ValueSplit(string split) => Assign(a => a.ValueSplit = split);
+		public KeyValueProcessorDescriptor<T> ValueSplit(string split) => Assign(split, (a, v) => a.ValueSplit = v);
 
 		/// <inheritdoc cref="IKeyValueProcessor.IgnoreMissing" />
-		public KeyValueProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);
+		public KeyValueProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissing = v);
 
 		/// <inheritdoc cref="IKeyValueProcessor.IncludeKeys" />
-		public KeyValueProcessorDescriptor<T> IncludeKeys(IEnumerable<string> includeKeys) => Assign(a => a.IncludeKeys = includeKeys);
+		public KeyValueProcessorDescriptor<T> IncludeKeys(IEnumerable<string> includeKeys) => Assign(includeKeys, (a, v) => a.IncludeKeys = v);
 
 		/// <inheritdoc cref="IKeyValueProcessor.IncludeKeys" />
-		public KeyValueProcessorDescriptor<T> IncludeKeys(params string[] includeKeys) => Assign(a => a.IncludeKeys = includeKeys);
+		public KeyValueProcessorDescriptor<T> IncludeKeys(params string[] includeKeys) => Assign(includeKeys, (a, v) => a.IncludeKeys = v);
 
 		/// <inheritdoc cref="IKeyValueProcessor.TrimKey" />
-		public KeyValueProcessorDescriptor<T> TrimKey(string trimKeys) => Assign(a => a.TrimKey = trimKeys);
+		public KeyValueProcessorDescriptor<T> TrimKey(string trimKeys) => Assign(trimKeys, (a, v) => a.TrimKey = v);
 
 		/// <inheritdoc cref="IKeyValueProcessor.TrimValue" />
-		public KeyValueProcessorDescriptor<T> TrimValue(string trimValues) => Assign(a => a.TrimValue = trimValues);
+		public KeyValueProcessorDescriptor<T> TrimValue(string trimValues) => Assign(trimValues, (a, v) => a.TrimValue = v);
 
 		/// <inheritdoc cref="IKeyValueProcessor.StripBrackets" />
-		public KeyValueProcessorDescriptor<T> StripBrackets(bool? skip = true) => Assign(a => a.StripBrackets = skip);
+		public KeyValueProcessorDescriptor<T> StripBrackets(bool? skip = true) => Assign(skip, (a, v) => a.StripBrackets = v);
 	}
 }

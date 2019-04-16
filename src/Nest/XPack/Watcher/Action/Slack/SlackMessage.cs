@@ -51,20 +51,20 @@ namespace Nest
 		string ISlackMessage.Text { get; set; }
 		IEnumerable<string> ISlackMessage.To { get; set; }
 
-		public SlackMessageDescriptor From(string from) => Assign(a => a.From = from);
+		public SlackMessageDescriptor From(string from) => Assign(from, (a, v) => a.From = v);
 
-		public SlackMessageDescriptor To(IEnumerable<string> to) => Assign(a => a.To = to);
+		public SlackMessageDescriptor To(IEnumerable<string> to) => Assign(to, (a, v) => a.To = v);
 
-		public SlackMessageDescriptor To(params string[] to) => Assign(a => a.To = to);
+		public SlackMessageDescriptor To(params string[] to) => Assign(to, (a, v) => a.To = v);
 
-		public SlackMessageDescriptor Icon(string icon) => Assign(a => a.Icon = icon);
+		public SlackMessageDescriptor Icon(string icon) => Assign(icon, (a, v) => a.Icon = v);
 
-		public SlackMessageDescriptor Text(string text) => Assign(a => a.Text = text);
+		public SlackMessageDescriptor Text(string text) => Assign(text, (a, v) => a.Text = v);
 
 		public SlackMessageDescriptor Attachments(Func<SlackAttachmentsDescriptor, IPromise<IList<ISlackAttachment>>> selector) =>
-			Assign(a => a.Attachments = selector?.Invoke(new SlackAttachmentsDescriptor())?.Value);
+			Assign(selector, (a, v) => a.Attachments = v?.Invoke(new SlackAttachmentsDescriptor())?.Value);
 
 		public SlackMessageDescriptor DynamicAttachments(Func<SlackDynamicAttachmentDescriptor, ISlackDynamicAttachment> selector) =>
-			Assign(a => a.DynamicAttachments = selector?.Invoke(new SlackDynamicAttachmentDescriptor()));
+			Assign(selector, (a, v) => a.DynamicAttachments = v?.Invoke(new SlackDynamicAttachmentDescriptor()));
 	}
 }

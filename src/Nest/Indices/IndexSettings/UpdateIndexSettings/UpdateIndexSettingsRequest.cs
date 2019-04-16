@@ -21,7 +21,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public UpdateIndexSettingsDescriptor IndexSettings(Func<DynamicIndexSettingsDescriptor, IPromise<IDynamicIndexSettings>> settings) =>
-			Assign(a => a.IndexSettings = settings?.Invoke(new DynamicIndexSettingsDescriptor())?.Value);
+			Assign(settings, (a, v) => a.IndexSettings = v?.Invoke(new DynamicIndexSettingsDescriptor())?.Value);
 	}
 
 	internal class UpdateIndexSettingsRequestFormatter : IJsonFormatter<IUpdateIndexSettingsRequest>

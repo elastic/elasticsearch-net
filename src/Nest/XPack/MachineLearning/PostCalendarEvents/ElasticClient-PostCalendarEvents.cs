@@ -17,11 +17,11 @@ namespace Nest
 
 		/// <inheritdoc cref="PostCalendarEvents(Nest.Id,System.Func{Nest.PostCalendarEventsDescriptor,Nest.IPostCalendarEventsRequest})" />
 		Task<IPostCalendarEventsResponse> PostCalendarEventsAsync(Id calendarId, Func<PostCalendarEventsDescriptor, IPostCalendarEventsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc cref="PostCalendarEvents(Nest.Id,System.Func{Nest.PostCalendarEventsDescriptor,Nest.IPostCalendarEventsRequest})" />
-		Task<IPostCalendarEventsResponse> PostCalendarEventsAsync(IPostCalendarEventsRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IPostCalendarEventsResponse> PostCalendarEventsAsync(IPostCalendarEventsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -32,25 +32,18 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IPostCalendarEventsResponse PostCalendarEvents(IPostCalendarEventsRequest request) =>
-			Dispatcher.Dispatch<IPostCalendarEventsRequest, PostCalendarEventsRequestParameters, PostCalendarEventsResponse>(
-				request,
-				LowLevelDispatch.XpackMlPostCalendarEventsDispatch<PostCalendarEventsResponse>
-			);
+			DoRequest<IPostCalendarEventsRequest, PostCalendarEventsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IPostCalendarEventsResponse> PostCalendarEventsAsync(Id calendarId, Func<PostCalendarEventsDescriptor, IPostCalendarEventsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			PostCalendarEventsAsync(selector.InvokeOrDefault(new PostCalendarEventsDescriptor(calendarId)), cancellationToken);
+		public Task<IPostCalendarEventsResponse> PostCalendarEventsAsync(
+			Id calendarId,
+			Func<PostCalendarEventsDescriptor, IPostCalendarEventsRequest> selector = null,
+			CancellationToken cancellationToken = default
+		) => PostCalendarEventsAsync(selector.InvokeOrDefault(new PostCalendarEventsDescriptor(calendarId)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IPostCalendarEventsResponse> PostCalendarEventsAsync(IPostCalendarEventsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IPostCalendarEventsRequest, PostCalendarEventsRequestParameters, PostCalendarEventsResponse, IPostCalendarEventsResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.XpackMlPostCalendarEventsDispatchAsync<PostCalendarEventsResponse>
-			);
+		public Task<IPostCalendarEventsResponse> PostCalendarEventsAsync(IPostCalendarEventsRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IPostCalendarEventsRequest, IPostCalendarEventsResponse, PostCalendarEventsResponse>
+				(request, request.RequestParameters, ct);
 	}
 }

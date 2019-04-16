@@ -19,6 +19,6 @@ namespace Nest
 	{
 		bool? IFieldNamesField.Enabled { get; set; }
 
-		public FieldNamesFieldDescriptor<T> Enabled(bool? enabled = true) => Assign(a => a.Enabled = enabled);
+		public FieldNamesFieldDescriptor<T> Enabled(bool? enabled = true) => Assign(enabled, (a, v) => a.Enabled = v);
 	}
 }

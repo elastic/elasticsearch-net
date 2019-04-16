@@ -22,11 +22,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IDeleteJobResponse> DeleteJobAsync(Id jobId, Func<DeleteJobDescriptor, IDeleteJobRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IDeleteJobResponse> DeleteJobAsync(IDeleteJobRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IDeleteJobResponse> DeleteJobAsync(IDeleteJobRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -37,23 +37,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeleteJobResponse DeleteJob(IDeleteJobRequest request) =>
-			Dispatcher.Dispatch<IDeleteJobRequest, DeleteJobRequestParameters, DeleteJobResponse>(
-				request,
-				(p, d) => LowLevelDispatch.MlDeleteJobDispatch<DeleteJobResponse>(p)
-			);
+			DoRequest<IDeleteJobRequest, DeleteJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IDeleteJobResponse> DeleteJobAsync(Id jobId, Func<DeleteJobDescriptor, IDeleteJobRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			DeleteJobAsync(selector.InvokeOrDefault(new DeleteJobDescriptor(jobId)), cancellationToken);
+		public Task<IDeleteJobResponse> DeleteJobAsync(
+			Id jobId,
+			Func<DeleteJobDescriptor, IDeleteJobRequest> selector = null,
+			CancellationToken ct = default
+		) => DeleteJobAsync(selector.InvokeOrDefault(new DeleteJobDescriptor(jobId)), ct);
 
 		/// <inheritdoc />
-		public Task<IDeleteJobResponse> DeleteJobAsync(IDeleteJobRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IDeleteJobRequest, DeleteJobRequestParameters, DeleteJobResponse, IDeleteJobResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.MlDeleteJobDispatchAsync<DeleteJobResponse>(p, c)
-			);
+		public Task<IDeleteJobResponse> DeleteJobAsync(IDeleteJobRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeleteJobRequest, IDeleteJobResponse, DeleteJobResponse>(request, request.RequestParameters, ct);
 	}
 }

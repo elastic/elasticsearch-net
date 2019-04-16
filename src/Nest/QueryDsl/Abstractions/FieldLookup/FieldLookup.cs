@@ -43,14 +43,14 @@ namespace Nest
 
 		Routing IFieldLookup.Routing { get; set; }
 
-		public FieldLookupDescriptor<T> Index(IndexName index) => Assign(a => a.Index = index);
+		public FieldLookupDescriptor<T> Index(IndexName index) => Assign(index, (a, v) => a.Index = v);
 
-		public FieldLookupDescriptor<T> Id(Id id) => Assign(a => a.Id = id);
+		public FieldLookupDescriptor<T> Id(Id id) => Assign(id, (a, v) => a.Id = v);
 
-		public FieldLookupDescriptor<T> Path(Field path) => Assign(a => a.Path = path);
+		public FieldLookupDescriptor<T> Path(Field path) => Assign(path, (a, v) => a.Path = v);
 
-		public FieldLookupDescriptor<T> Path(Expression<Func<T, object>> objectPath) => Assign(a => a.Path = objectPath);
+		public FieldLookupDescriptor<T> Path(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Path = v);
 
-		public FieldLookupDescriptor<T> Routing(Routing routing) => Assign(a => a.Routing = routing);
+		public FieldLookupDescriptor<T> Routing(Routing routing) => Assign(routing, (a, v) => a.Routing = v);
 	}
 }

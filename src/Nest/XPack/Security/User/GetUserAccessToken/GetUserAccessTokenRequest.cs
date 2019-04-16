@@ -52,8 +52,8 @@ namespace Nest
 		string IGetUserAccessTokenRequest.Scope { get; set; }
 		string IGetUserAccessTokenRequest.Username { get; set; }
 
-		public GetUserAccessTokenDescriptor GrantType(AccessTokenGrantType? type) => Assign(a => a.GrantType = type);
+		public GetUserAccessTokenDescriptor GrantType(AccessTokenGrantType? type) => Assign(type, (a, v) => a.GrantType = v);
 
-		public GetUserAccessTokenDescriptor Scope(string scope) => Assign(a => a.Scope = scope);
+		public GetUserAccessTokenDescriptor Scope(string scope) => Assign(scope, (a, v) => a.Scope = v);
 	}
 }

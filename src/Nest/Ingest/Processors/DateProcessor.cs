@@ -22,7 +22,7 @@ namespace Nest
 		Field TargetField { get; set; }
 
 		[DataMember(Name ="timezone")]
-		string Timezone { get; set; }
+		string TimeZone { get; set; }
 	}
 
 	public class DateProcessor : ProcessorBase, IDateProcessor
@@ -35,7 +35,7 @@ namespace Nest
 
 		public Field TargetField { get; set; }
 
-		public string Timezone { get; set; }
+		public string TimeZone { get; set; }
 		protected override string Name => "date";
 	}
 
@@ -49,24 +49,24 @@ namespace Nest
 		IEnumerable<string> IDateProcessor.Formats { get; set; }
 		string IDateProcessor.Locale { get; set; }
 		Field IDateProcessor.TargetField { get; set; }
-		string IDateProcessor.Timezone { get; set; }
+		string IDateProcessor.TimeZone { get; set; }
 
-		public DateProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public DateProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		public DateProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
-		public DateProcessorDescriptor<T> TargetField(Field field) => Assign(a => a.TargetField = field);
+		public DateProcessorDescriptor<T> TargetField(Field field) => Assign(field, (a, v) => a.TargetField = v);
 
 		public DateProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.TargetField = objectPath);
+			Assign(objectPath, (a, v) => a.TargetField = v);
 
-		public DateProcessorDescriptor<T> Formats(IEnumerable<string> matchFormats) => Assign(a => a.Formats = matchFormats);
+		public DateProcessorDescriptor<T> Formats(IEnumerable<string> matchFormats) => Assign(matchFormats, (a, v) => a.Formats = v);
 
-		public DateProcessorDescriptor<T> Formats(params string[] matchFormats) => Assign(a => a.Formats = matchFormats);
+		public DateProcessorDescriptor<T> Formats(params string[] matchFormats) => Assign(matchFormats, (a, v) => a.Formats = v);
 
-		public DateProcessorDescriptor<T> Timezone(string timezone) => Assign(a => a.Timezone = timezone);
+		public DateProcessorDescriptor<T> TimeZone(string timezone) => Assign(timezone, (a, v) => a.TimeZone = v);
 
-		public DateProcessorDescriptor<T> Locale(string locale) => Assign(a => a.Locale = locale);
+		public DateProcessorDescriptor<T> Locale(string locale) => Assign(locale, (a, v) => a.Locale = v);
 	}
 }

@@ -19,11 +19,11 @@ namespace Nest
 
 		/// <inheritdoc cref="ResumeFollowIndex(IndexName, System.Func{Nest.ResumeFollowIndexDescriptor,Nest.IResumeFollowIndexRequest})" />
 		Task<IResumeFollowIndexResponse> ResumeFollowIndexAsync(IndexName index, Func<ResumeFollowIndexDescriptor, IResumeFollowIndexRequest> selector = null,
-			CancellationToken cancellationToken = default
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="ResumeFollowIndex(IndexName, System.Func{Nest.ResumeFollowIndexDescriptor,Nest.IResumeFollowIndexRequest})" />
-		Task<IResumeFollowIndexResponse> ResumeFollowIndexAsync(IResumeFollowIndexRequest request, CancellationToken cancellationToken = default);
+		Task<IResumeFollowIndexResponse> ResumeFollowIndexAsync(IResumeFollowIndexRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -34,23 +34,17 @@ namespace Nest
 
 		/// <inheritdoc cref="ResumeFollowIndex(IndexName, System.Func{Nest.ResumeFollowIndexDescriptor,Nest.IResumeFollowIndexRequest})" />
 		public IResumeFollowIndexResponse ResumeFollowIndex(IResumeFollowIndexRequest request) =>
-			Dispatcher.Dispatch<IResumeFollowIndexRequest, ResumeFollowIndexRequestParameters, ResumeFollowIndexResponse>(
-				request,
-				(p, d) => LowLevelDispatch.CcrResumeFollowDispatch<ResumeFollowIndexResponse>(p, d)
-			);
+			DoRequest<IResumeFollowIndexRequest, ResumeFollowIndexResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="ResumeFollowIndex(IndexName, System.Func{Nest.ResumeFollowIndexDescriptor,Nest.IResumeFollowIndexRequest})" />
-		public Task<IResumeFollowIndexResponse> ResumeFollowIndexAsync(IndexName index, Func<ResumeFollowIndexDescriptor, IResumeFollowIndexRequest> selector = null,
-			CancellationToken cancellationToken = default
-		) =>
-			ResumeFollowIndexAsync(selector.InvokeOrDefault(new ResumeFollowIndexDescriptor(index)), cancellationToken);
+		public Task<IResumeFollowIndexResponse> ResumeFollowIndexAsync(
+			IndexName index,
+			Func<ResumeFollowIndexDescriptor, IResumeFollowIndexRequest> selector = null,
+			CancellationToken ct = default
+		) => ResumeFollowIndexAsync(selector.InvokeOrDefault(new ResumeFollowIndexDescriptor(index)), ct);
 
 		/// <inheritdoc cref="ResumeFollowIndex(IndexName, System.Func{Nest.ResumeFollowIndexDescriptor,Nest.IResumeFollowIndexRequest})" />
-		public Task<IResumeFollowIndexResponse> ResumeFollowIndexAsync(IResumeFollowIndexRequest request, CancellationToken cancellationToken = default) =>
-			Dispatcher.DispatchAsync<IResumeFollowIndexRequest, ResumeFollowIndexRequestParameters, ResumeFollowIndexResponse, IResumeFollowIndexResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.CcrResumeFollowDispatchAsync<ResumeFollowIndexResponse>(p, d, c)
-			);
+		public Task<IResumeFollowIndexResponse> ResumeFollowIndexAsync(IResumeFollowIndexRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IResumeFollowIndexRequest, IResumeFollowIndexResponse, ResumeFollowIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

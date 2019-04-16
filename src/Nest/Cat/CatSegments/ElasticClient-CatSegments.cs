@@ -16,12 +16,12 @@ namespace Nest
 		/// <inheritdoc />
 		Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(
 			Func<CatSegmentsDescriptor, ICatSegmentsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default(CancellationToken)
 		);
 
 		/// <inheritdoc />
 		Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(ICatSegmentsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default(CancellationToken)
 		);
 	}
 
@@ -33,20 +33,18 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICatResponse<CatSegmentsRecord> CatSegments(ICatSegmentsRequest request) =>
-			DoCat<ICatSegmentsRequest, CatSegmentsRequestParameters, CatSegmentsRecord>(request,
-				LowLevelDispatch.CatSegmentsDispatch<CatResponse<CatSegmentsRecord>>);
+			DoCat<ICatSegmentsRequest, CatSegmentsRequestParameters, CatSegmentsRecord>(request);
 
 		/// <inheritdoc />
 		public Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(
 			Func<CatSegmentsDescriptor, ICatSegmentsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) => CatSegmentsAsync(selector.InvokeOrDefault(new CatSegmentsDescriptor()), cancellationToken);
+			CancellationToken ct = default
+		) => CatSegmentsAsync(selector.InvokeOrDefault(new CatSegmentsDescriptor()), ct);
 
 		/// <inheritdoc />
 		public Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(ICatSegmentsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) =>
-			DoCatAsync<ICatSegmentsRequest, CatSegmentsRequestParameters, CatSegmentsRecord>(request, cancellationToken,
-				LowLevelDispatch.CatSegmentsDispatchAsync<CatResponse<CatSegmentsRecord>>);
+			DoCatAsync<ICatSegmentsRequest, CatSegmentsRequestParameters, CatSegmentsRecord>(request, ct);
 	}
 }

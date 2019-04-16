@@ -26,11 +26,11 @@ namespace Nest
 		IPipeline ISimulatePipelineRequest.Pipeline { get; set; }
 
 		public SimulatePipelineDescriptor Pipeline(Func<PipelineDescriptor, IPipeline> pipeline) =>
-			Assign(a => a.Pipeline = pipeline?.Invoke(new PipelineDescriptor()));
+			Assign(pipeline, (a, v) => a.Pipeline = v?.Invoke(new PipelineDescriptor()));
 
-		public SimulatePipelineDescriptor Documents(IEnumerable<ISimulatePipelineDocument> documents) => Assign(a => a.Documents = documents);
+		public SimulatePipelineDescriptor Documents(IEnumerable<ISimulatePipelineDocument> documents) => Assign(documents, (a, v) => a.Documents = v);
 
 		public SimulatePipelineDescriptor Documents(Func<SimulatePipelineDocumentsDescriptor, IPromise<IList<ISimulatePipelineDocument>>> selector) =>
-			Assign(a => a.Documents = selector?.Invoke(new SimulatePipelineDocumentsDescriptor())?.Value);
+			Assign(selector, (a, v) => a.Documents = v?.Invoke(new SimulatePipelineDocumentsDescriptor())?.Value);
 	}
 }

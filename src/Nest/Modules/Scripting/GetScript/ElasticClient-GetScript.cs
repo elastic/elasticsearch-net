@@ -15,11 +15,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IGetScriptResponse> GetScriptAsync(Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IGetScriptResponse> GetScriptAsync(IGetScriptRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IGetScriptResponse> GetScriptAsync(IGetScriptRequest request, CancellationToken ct = default);
 	}
 
 
@@ -31,23 +31,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetScriptResponse GetScript(IGetScriptRequest request) =>
-			Dispatcher.Dispatch<IGetScriptRequest, GetScriptRequestParameters, GetScriptResponse>(
-				request,
-				(p, d) => LowLevelDispatch.GetScriptDispatch<GetScriptResponse>(p)
-			);
+			DoRequest<IGetScriptRequest, GetScriptResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetScriptResponse> GetScriptAsync(Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			GetScriptAsync(selector.InvokeOrDefault(new GetScriptDescriptor(id)), cancellationToken);
+		public Task<IGetScriptResponse> GetScriptAsync(
+			Id id,
+			Func<GetScriptDescriptor, IGetScriptRequest> selector = null,
+			CancellationToken ct = default
+		) => GetScriptAsync(selector.InvokeOrDefault(new GetScriptDescriptor(id)), ct);
 
 		/// <inheritdoc />
-		public Task<IGetScriptResponse> GetScriptAsync(IGetScriptRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IGetScriptRequest, GetScriptRequestParameters, GetScriptResponse, IGetScriptResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.GetScriptDispatchAsync<GetScriptResponse>(p, c)
-			);
+		public Task<IGetScriptResponse> GetScriptAsync(IGetScriptRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetScriptRequest, IGetScriptResponse, GetScriptResponse>(request, request.RequestParameters, ct);
 	}
 }

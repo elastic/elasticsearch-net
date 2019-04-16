@@ -2,13 +2,13 @@
 
 namespace Nest
 {
-	public interface IRevertModelSnapshotResponse : IAcknowledgedResponse
+	public interface IRevertModelSnapshotResponse : IResponse
 	{
 		[DataMember(Name ="model")]
 		ModelSnapshot Model { get; }
 	}
 
-	public class RevertModelSnapshotResponse : AcknowledgedResponseBase, IRevertModelSnapshotResponse
+	public class RevertModelSnapshotResponse : ResponseBase, IRevertModelSnapshotResponse
 	{
 		public ModelSnapshot Model { get; internal set; }
 	}

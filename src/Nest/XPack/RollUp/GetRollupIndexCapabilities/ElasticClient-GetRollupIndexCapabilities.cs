@@ -26,7 +26,7 @@ namespace Nest
 
 		/// <inheritdoc cref="GetRollupIndexCapabilities(IndexName, System.Func{Nest.GetRollupIndexCapabilitiesDescriptor,Nest.IGetRollupIndexCapabilitiesRequest})" />
 		Task<IGetRollupIndexCapabilitiesResponse> GetRollupIndexCapabilitiesAsync(IGetRollupIndexCapabilitiesRequest request,
-			CancellationToken cancellationToken = default
+			CancellationToken ct = default
 		);
 	}
 
@@ -41,10 +41,7 @@ namespace Nest
 
 		/// <inheritdoc cref="GetRollupIndexCapabilities(IndexName, System.Func{Nest.GetRollupIndexCapabilitiesDescriptor,Nest.IGetRollupIndexCapabilitiesRequest})" />
 		public IGetRollupIndexCapabilitiesResponse GetRollupIndexCapabilities(IGetRollupIndexCapabilitiesRequest request) =>
-			Dispatcher.Dispatch<IGetRollupIndexCapabilitiesRequest, GetRollupIndexCapabilitiesRequestParameters, GetRollupIndexCapabilitiesResponse>(
-				request,
-				(p, d) => LowLevelDispatch.RollupGetRollupIndexCapsDispatch<GetRollupIndexCapabilitiesResponse>(p)
-			);
+			DoRequest<IGetRollupIndexCapabilitiesRequest, GetRollupIndexCapabilitiesResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="GetRollupIndexCapabilities(IndexName, System.Func{Nest.GetRollupIndexCapabilitiesDescriptor,Nest.IGetRollupIndexCapabilitiesRequest})" />
 		public Task<IGetRollupIndexCapabilitiesResponse> GetRollupIndexCapabilitiesAsync(
@@ -55,15 +52,11 @@ namespace Nest
 			GetRollupIndexCapabilitiesAsync(selector.InvokeOrDefault(new GetRollupIndexCapabilitiesDescriptor(index)), cancellationToken);
 
 		/// <inheritdoc cref="GetRollupIndexCapabilities(IndexName, System.Func{Nest.GetRollupIndexCapabilitiesDescriptor,Nest.IGetRollupIndexCapabilitiesRequest})" />
-		public Task<IGetRollupIndexCapabilitiesResponse> GetRollupIndexCapabilitiesAsync(IGetRollupIndexCapabilitiesRequest request,
-			CancellationToken cancellationToken = default
+		public Task<IGetRollupIndexCapabilitiesResponse> GetRollupIndexCapabilitiesAsync(
+			IGetRollupIndexCapabilitiesRequest request,
+			CancellationToken ct = default
 		) =>
-			Dispatcher
-				.DispatchAsync<IGetRollupIndexCapabilitiesRequest, GetRollupIndexCapabilitiesRequestParameters, GetRollupIndexCapabilitiesResponse,
-					IGetRollupIndexCapabilitiesResponse>(
-					request,
-					cancellationToken,
-					(p, d, c) => LowLevelDispatch.RollupGetRollupIndexCapsDispatchAsync<GetRollupIndexCapabilitiesResponse>(p, c)
-				);
+			DoRequestAsync<IGetRollupIndexCapabilitiesRequest, IGetRollupIndexCapabilitiesResponse, GetRollupIndexCapabilitiesResponse>
+				(request, request.RequestParameters, ct);
 	}
 }

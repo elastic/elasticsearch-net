@@ -15,11 +15,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IDeleteUserResponse> DeleteUserAsync(Name username, Func<DeleteUserDescriptor, IDeleteUserRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IDeleteUserResponse> DeleteUserAsync(IDeleteUserRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IDeleteUserResponse> DeleteUserAsync(IDeleteUserRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -30,24 +30,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeleteUserResponse DeleteUser(IDeleteUserRequest request) =>
-			Dispatcher.Dispatch<IDeleteUserRequest, DeleteUserRequestParameters, DeleteUserResponse>(
-				request,
-				(p, d) => LowLevelDispatch.SecurityDeleteUserDispatch<DeleteUserResponse>(p)
-			);
+			DoRequest<IDeleteUserRequest, DeleteUserResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IDeleteUserResponse> DeleteUserAsync(Name username, Func<DeleteUserDescriptor, IDeleteUserRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			DeleteUserAsync(selector.InvokeOrDefault(new DeleteUserDescriptor(username)), cancellationToken);
+		public Task<IDeleteUserResponse> DeleteUserAsync(
+			Name username,
+			Func<DeleteUserDescriptor, IDeleteUserRequest> selector = null,
+			CancellationToken ct = default
+		) => DeleteUserAsync(selector.InvokeOrDefault(new DeleteUserDescriptor(username)), ct);
 
 		/// <inheritdoc />
-		public Task<IDeleteUserResponse> DeleteUserAsync(IDeleteUserRequest request, CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IDeleteUserRequest, DeleteUserRequestParameters, DeleteUserResponse, IDeleteUserResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.SecurityDeleteUserDispatchAsync<DeleteUserResponse>(p, c)
-			);
+		public Task<IDeleteUserResponse> DeleteUserAsync(IDeleteUserRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeleteUserRequest, IDeleteUserResponse, DeleteUserResponse>(request, request.RequestParameters, ct);
 	}
 }

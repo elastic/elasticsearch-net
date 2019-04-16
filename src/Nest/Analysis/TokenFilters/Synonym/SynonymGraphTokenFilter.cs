@@ -18,11 +18,6 @@ namespace Nest
 		[DataMember(Name ="format")]
 		SynonymFormat? Format { get; set; }
 
-		[DataMember(Name ="ignore_case")]
-		[Obsolete("Will be removed in Elasticsearch 7.x, if you need to ignore case add a lowercase filter before this synonym filter")]
-		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
-		bool? IgnoreCase { get; set; }
-
 		/// <inheritdoc cref="ISynonymTokenFilter.Lenient" />
 		[DataMember(Name ="lenient")]
 		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
@@ -52,10 +47,6 @@ namespace Nest
 		/// <inheritdoc />
 		public SynonymFormat? Format { get; set; }
 
-		/// <inheritdoc />
-		[Obsolete("Will be removed in Elasticsearch 7.x, if you need to ignore case add a lowercase filter before this synonym filter")]
-		public bool? IgnoreCase { get; set; }
-
 		/// <inheritdoc cref="ISynonymTokenFilter.Lenient" />
 		public bool? Lenient { get; set; }
 
@@ -77,7 +68,6 @@ namespace Nest
 		bool? ISynonymGraphTokenFilter.Expand { get; set; }
 		SynonymFormat? ISynonymGraphTokenFilter.Format { get; set; }
 
-		bool? ISynonymGraphTokenFilter.IgnoreCase { get; set; }
 		bool? ISynonymGraphTokenFilter.Lenient { get; set; }
 
 		IEnumerable<string> ISynonymGraphTokenFilter.Synonyms { get; set; }
@@ -85,29 +75,25 @@ namespace Nest
 		string ISynonymGraphTokenFilter.Tokenizer { get; set; }
 
 		/// <inheritdoc />
-		[Obsolete("Will be removed in Elasticsearch 7.x, if you need to ignore case add a lowercase filter before this synonym filter")]
-		public SynonymGraphTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true) => Assign(a => a.IgnoreCase = ignoreCase);
-
-		/// <inheritdoc />
-		public SynonymGraphTokenFilterDescriptor Expand(bool? expand = true) => Assign(a => a.Expand = expand);
+		public SynonymGraphTokenFilterDescriptor Expand(bool? expand = true) => Assign(expand, (a, v) => a.Expand = v);
 
 		/// <inheritdoc cref="ISynonymTokenFilter.Lenient" />
-		public SynonymGraphTokenFilterDescriptor Lenient(bool? lenient = true) => Assign(a => a.Lenient = lenient);
+		public SynonymGraphTokenFilterDescriptor Lenient(bool? lenient = true) => Assign(lenient, (a, v) => a.Lenient = v);
 
 
 		/// <inheritdoc />
-		public SynonymGraphTokenFilterDescriptor Tokenizer(string tokenizer) => Assign(a => a.Tokenizer = tokenizer);
+		public SynonymGraphTokenFilterDescriptor Tokenizer(string tokenizer) => Assign(tokenizer, (a, v) => a.Tokenizer = v);
 
 		/// <inheritdoc />
-		public SynonymGraphTokenFilterDescriptor SynonymsPath(string path) => Assign(a => a.SynonymsPath = path);
+		public SynonymGraphTokenFilterDescriptor SynonymsPath(string path) => Assign(path, (a, v) => a.SynonymsPath = v);
 
 		/// <inheritdoc />
-		public SynonymGraphTokenFilterDescriptor Format(SynonymFormat? format) => Assign(a => a.Format = format);
+		public SynonymGraphTokenFilterDescriptor Format(SynonymFormat? format) => Assign(format, (a, v) => a.Format = v);
 
 		/// <inheritdoc />
-		public SynonymGraphTokenFilterDescriptor Synonyms(IEnumerable<string> synonymGraphs) => Assign(a => a.Synonyms = synonymGraphs);
+		public SynonymGraphTokenFilterDescriptor Synonyms(IEnumerable<string> synonymGraphs) => Assign(synonymGraphs, (a, v) => a.Synonyms = v);
 
 		/// <inheritdoc />
-		public SynonymGraphTokenFilterDescriptor Synonyms(params string[] synonymGraphs) => Assign(a => a.Synonyms = synonymGraphs);
+		public SynonymGraphTokenFilterDescriptor Synonyms(params string[] synonymGraphs) => Assign(synonymGraphs, (a, v) => a.Synonyms = v);
 	}
 }

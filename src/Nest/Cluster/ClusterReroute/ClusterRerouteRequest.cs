@@ -40,6 +40,6 @@ namespace Nest
 		) =>
 			AddCommand(selector?.Invoke(new AllocateStalePrimaryRerouteCommandDescriptor()));
 
-		private ClusterRerouteDescriptor AddCommand(IClusterRerouteCommand rerouteCommand) => Assign(a => a.Commands?.AddIfNotNull(rerouteCommand));
+		private ClusterRerouteDescriptor AddCommand(IClusterRerouteCommand rerouteCommand) => Assign(rerouteCommand,(a, v) => a.Commands?.AddIfNotNull(v));
 	}
 }

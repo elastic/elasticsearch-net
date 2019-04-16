@@ -52,23 +52,23 @@ namespace Nest
 
 		/// <inheritdoc cref="ISqlRequest.Query" />
 		/// >
-		public QuerySqlDescriptor Query(string query) => Assign(a => a.Query = query);
+		public QuerySqlDescriptor Query(string query) => Assign(query, (a, v) => a.Query = v);
 
 		/// <inheritdoc cref="ISqlRequest.TimeZone" />
 		/// >
-		public QuerySqlDescriptor TimeZone(string timeZone) => Assign(a => a.TimeZone = timeZone);
+		public QuerySqlDescriptor TimeZone(string timeZone) => Assign(timeZone, (a, v) => a.TimeZone = v);
 
 		/// <inheritdoc cref="ISqlRequest.FetchSize" />
 		/// >
-		public QuerySqlDescriptor FetchSize(int? fetchSize) => Assign(a => a.FetchSize = fetchSize);
+		public QuerySqlDescriptor FetchSize(int? fetchSize) => Assign(fetchSize, (a, v) => a.FetchSize = v);
 
 		/// <inheritdoc cref="ISqlRequest.Filter" />
 		/// >
 		public QuerySqlDescriptor Filter<T>(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
-			where T : class => Assign(a => a.Filter = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
+			where T : class => Assign(querySelector, (a, v) => a.Filter = v?.Invoke(new QueryContainerDescriptor<T>()));
 
 		/// <inheritdoc cref="IQuerySqlRequest.Cursor" />
 		/// >
-		public QuerySqlDescriptor Cursor(string cursor) => Assign(a => a.Cursor = cursor);
+		public QuerySqlDescriptor Cursor(string cursor) => Assign(cursor, (a, v) => a.Cursor = v);
 	}
 }

@@ -59,21 +59,21 @@ namespace Nest
 		string ICommonTermsQuery.Query { get; set; }
 
 		/// <inheritdoc />
-		public CommonTermsQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
+		public CommonTermsQueryDescriptor<T> Query(string query) => Assign(query, (a, v) => a.Query = v);
 
 		/// <inheritdoc />
-		public CommonTermsQueryDescriptor<T> HighFrequencyOperator(Operator? op) => Assign(a => a.HighFrequencyOperator = op);
+		public CommonTermsQueryDescriptor<T> HighFrequencyOperator(Operator? op) => Assign(op, (a, v) => a.HighFrequencyOperator = v);
 
-		public CommonTermsQueryDescriptor<T> LowFrequencyOperator(Operator? op) => Assign(a => a.LowFrequencyOperator = op);
-
-		/// <inheritdoc />
-		public CommonTermsQueryDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
+		public CommonTermsQueryDescriptor<T> LowFrequencyOperator(Operator? op) => Assign(op, (a, v) => a.LowFrequencyOperator = v);
 
 		/// <inheritdoc />
-		public CommonTermsQueryDescriptor<T> CutoffFrequency(double? cutOffFrequency) => Assign(a => a.CutoffFrequency = cutOffFrequency);
+		public CommonTermsQueryDescriptor<T> Analyzer(string analyzer) => Assign(analyzer, (a, v) => a.Analyzer = v);
+
+		/// <inheritdoc />
+		public CommonTermsQueryDescriptor<T> CutoffFrequency(double? cutOffFrequency) => Assign(cutOffFrequency, (a, v) => a.CutoffFrequency = v);
 
 		/// <inheritdoc />
 		public CommonTermsQueryDescriptor<T> MinimumShouldMatch(MinimumShouldMatch minimumShouldMatch) =>
-			Assign(a => a.MinimumShouldMatch = minimumShouldMatch);
+			Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatch = v);
 	}
 }

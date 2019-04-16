@@ -44,13 +44,13 @@ namespace Nest
 		int? IMovingAverageAggregation.Predict { get; set; }
 		int? IMovingAverageAggregation.Window { get; set; }
 
-		public MovingAverageAggregationDescriptor Minimize(bool? minimize = true) => Assign(a => a.Minimize = minimize);
+		public MovingAverageAggregationDescriptor Minimize(bool? minimize = true) => Assign(minimize, (a, v) => a.Minimize = v);
 
-		public MovingAverageAggregationDescriptor Window(int? window) => Assign(a => a.Window = window);
+		public MovingAverageAggregationDescriptor Window(int? window) => Assign(window, (a, v) => a.Window = v);
 
-		public MovingAverageAggregationDescriptor Predict(int? predict) => Assign(a => a.Predict = predict);
+		public MovingAverageAggregationDescriptor Predict(int? predict) => Assign(predict, (a, v) => a.Predict = v);
 
 		public MovingAverageAggregationDescriptor Model(Func<MovingAverageModelDescriptor, IMovingAverageModel> modelSelector) =>
-			Assign(a => a.Model = modelSelector?.Invoke(new MovingAverageModelDescriptor()));
+			Assign(modelSelector, (a, v) => a.Model = v?.Invoke(new MovingAverageModelDescriptor()));
 	}
 }

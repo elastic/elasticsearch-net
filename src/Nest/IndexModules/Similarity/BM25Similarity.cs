@@ -57,12 +57,12 @@ namespace Nest
 		string ISimilarity.Type => "BM25";
 
 		/// <inheritdoc />
-		public BM25SimilarityDescriptor DiscountOverlaps(bool? discount = true) => Assign(a => a.DiscountOverlaps = discount);
+		public BM25SimilarityDescriptor DiscountOverlaps(bool? discount = true) => Assign(discount, (a, v) => a.DiscountOverlaps = v);
 
 		/// <inheritdoc />
-		public BM25SimilarityDescriptor K1(double? k1) => Assign(a => a.K1 = k1);
+		public BM25SimilarityDescriptor K1(double? k1) => Assign(k1, (a, v) => a.K1 = v);
 
 		/// <inheritdoc />
-		public BM25SimilarityDescriptor B(double? b) => Assign(a => a.B = b);
+		public BM25SimilarityDescriptor B(double? b) => Assign(b, (a, v) => a.B = v);
 	}
 }

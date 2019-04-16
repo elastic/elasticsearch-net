@@ -23,11 +23,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IFlushResponse> FlushAsync(Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IFlushResponse> FlushAsync(IFlushRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IFlushResponse> FlushAsync(IFlushRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -38,23 +38,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IFlushResponse Flush(IFlushRequest request) =>
-			Dispatcher.Dispatch<IFlushRequest, FlushRequestParameters, FlushResponse>(
-				request,
-				(p, d) => LowLevelDispatch.IndicesFlushDispatch<FlushResponse>(p)
-			);
+			DoRequest<IFlushRequest, FlushResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IFlushResponse> FlushAsync(Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			FlushAsync(selector.InvokeOrDefault(new FlushDescriptor().Index(indices)), cancellationToken);
+		public Task<IFlushResponse> FlushAsync(
+			Indices indices,
+			Func<FlushDescriptor, IFlushRequest> selector = null,
+			CancellationToken ct = default
+		) => FlushAsync(selector.InvokeOrDefault(new FlushDescriptor().Index(indices)), ct);
 
 		/// <inheritdoc />
-		public Task<IFlushResponse> FlushAsync(IFlushRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IFlushRequest, FlushRequestParameters, FlushResponse, IFlushResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.IndicesFlushDispatchAsync<FlushResponse>(p, c)
-			);
+		public Task<IFlushResponse> FlushAsync(IFlushRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IFlushRequest, IFlushResponse, FlushResponse>(request, request.RequestParameters, ct);
 	}
 }

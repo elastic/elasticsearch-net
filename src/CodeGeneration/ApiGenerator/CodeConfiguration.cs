@@ -29,36 +29,14 @@ namespace ApiGenerator
 			"ml.delete_filter.json",
 			"ml.get_filters.json",
 			"ml.put_filter.json",
+			"ml.update_filter.json",
 			"rank_eval.json",
 
 			// these API's are new and need to be mapped
-			"ml.delete_calendar.json",
-			"ml.delete_calendar_event.json",
-			"ml.delete_calendar_job.json",
-			"ml.get_calendar_events.json",
-			"ml.get_calendars.json",
-			"ml.info.json",
-			"ml.post_calendar_events.json",
-			"ml.put_calendar.json",
-			"ml.put_calendar_job.json",
-			"ml.get_calendar_job.json",
-			"ml.delete_forecast.json",
-			"ml.delete_filter.json",
 			"ml.set_upgrade_mode.json",
-			"ml.put_filter.json",
 			"ml.find_file_structure.json",
 			"monitoring.bulk.json",
-			"delete_by_query_rethrottle.json",
-			"update_by_query_rethrottle.json",
 
-			"ml.update_filter.json",
-			"security.delete_privileges.json",
-			"security.get_privileges.json",
-			"security.put_privileges.json",
-			"security.get_user_privileges.json",
-			"security.get_index_privileges.json",
-			"security.has_privileges.json",
-			"security.put_privilege.json",
 			"security.create_api_key.json",
 			"security.get_api_key.json",
 			"security.invalidate_api_key.json",
@@ -78,9 +56,7 @@ namespace ApiGenerator
 			"indices.unfreeze.json",
 
 			"ccr.follow_info.json",
-
-
-
+			"ccr.forget_follower.json"
 		};
 
 

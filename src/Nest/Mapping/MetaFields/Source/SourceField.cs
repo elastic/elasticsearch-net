@@ -40,19 +40,19 @@ namespace Nest
 		IEnumerable<string> ISourceField.Excludes { get; set; }
 		IEnumerable<string> ISourceField.Includes { get; set; }
 
-		public SourceFieldDescriptor Enabled(bool? enabled = true) => Assign(a => a.Enabled = enabled);
+		public SourceFieldDescriptor Enabled(bool? enabled = true) => Assign(enabled, (a, v) => a.Enabled = v);
 
-		public SourceFieldDescriptor Compress(bool? compress = true) => Assign(a => a.Compress = compress);
+		public SourceFieldDescriptor Compress(bool? compress = true) => Assign(compress, (a, v) => a.Compress = v);
 
 		public SourceFieldDescriptor CompressionThreshold(string compressionThreshold) =>
-			Assign(a =>
+			Assign(compressionThreshold, (a, v) =>
 			{
 				a.Compress = true;
-				a.CompressThreshold = compressionThreshold;
+				a.CompressThreshold = v;
 			});
 
-		public SourceFieldDescriptor Includes(IEnumerable<string> includes) => Assign(a => a.Includes = includes);
+		public SourceFieldDescriptor Includes(IEnumerable<string> includes) => Assign(includes, (a, v) => a.Includes = v);
 
-		public SourceFieldDescriptor Excludes(IEnumerable<string> excludes) => Assign(a => a.Excludes = excludes);
+		public SourceFieldDescriptor Excludes(IEnumerable<string> excludes) => Assign(excludes, (a, v) => a.Excludes = v);
 	}
 }

@@ -36,10 +36,10 @@ namespace Nest
 		Field ISuggestContext.Path { get; set; }
 		string ISuggestContext.Type => Type;
 
-		public TDescriptor Name(string name) => Assign(a => a.Name = name);
+		public TDescriptor Name(string name) => Assign(name, (a, v) => a.Name = v);
 
-		public TDescriptor Path(Field field) => Assign(a => a.Path = field);
+		public TDescriptor Path(Field field) => Assign(field, (a, v) => a.Path = v);
 
-		public TDescriptor Path(Expression<Func<T, object>> objectPath) => Assign(a => a.Path = objectPath);
+		public TDescriptor Path(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.Path = v);
 	}
 }

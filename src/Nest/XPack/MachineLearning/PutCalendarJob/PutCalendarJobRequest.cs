@@ -1,15 +1,13 @@
-﻿using Newtonsoft.Json;
-
-namespace Nest
+﻿namespace Nest
 {
 	/// <summary>
 	/// Adds a job to a calendar.
 	/// </summary>
+	[MapsApi("ml.put_calendar_job")]
 	public partial interface IPutCalendarJobRequest { }
 
 	/// <inheritdoc cref="PutCalendarJobRequest" />
 	public partial class PutCalendarJobRequest { }
 
-	[DescriptorFor("XpackMlPutCalendarJob")]
 	public partial class PutCalendarJobDescriptor { }
 }

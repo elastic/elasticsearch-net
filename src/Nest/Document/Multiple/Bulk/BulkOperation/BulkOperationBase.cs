@@ -8,9 +8,6 @@ namespace Nest
 		public Id Id { get; set; }
 		public IndexName Index { get; set; }
 
-		[Obsolete("This property is no longer available in indices created in Elasticsearch 6.x and up")]
-		public Id Parent { get; set; }
-
 		public int? RetriesOnConflict { get; set; }
 		public Routing Routing { get; set; }
 		public long? Version { get; set; }
@@ -49,9 +46,6 @@ namespace Nest
 		IndexName IBulkOperation.Index { get; set; }
 		string IBulkOperation.Operation => BulkOperationType;
 
-		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 6.x and up")]
-		Id IBulkOperation.Parent { get; set; }
-
 		int? IBulkOperation.RetriesOnConflict { get; set; }
 		Routing IBulkOperation.Routing { get; set; }
 		long? IBulkOperation.Version { get; set; }
@@ -76,22 +70,19 @@ namespace Nest
 		/// <summary>
 		/// Manually set the index, default to the default index or the fixed index set on the bulk operation
 		/// </summary>
-		public TDescriptor Index(IndexName index) => Assign(a => a.Index = index);
+		public TDescriptor Index(IndexName index) => Assign(index, (a, v) => a.Index = v);
 
-		public TDescriptor Index<T>() => Assign(a => a.Index = typeof(T));
+		public TDescriptor Index<T>() => Assign(typeof(T), (a, v) => a.Index = v);
 
 		/// <summary>
 		/// Manually set the id for the newly created object
 		/// </summary>
-		public TDescriptor Id(Id id) => Assign(a => a.Id = id);
+		public TDescriptor Id(Id id) => Assign(id, (a, v) => a.Id = v);
 
-		public TDescriptor Version(long? version) => Assign(a => a.Version = version);
+		public TDescriptor Version(long? version) => Assign(version, (a, v) => a.Version = v);
 
-		public TDescriptor VersionType(VersionType? versionType) => Assign(a => a.VersionType = versionType);
+		public TDescriptor VersionType(VersionType? versionType) => Assign(versionType, (a, v) => a.VersionType = v);
 
-		public TDescriptor Routing(Routing routing) => Assign(a => a.Routing = routing);
-
-		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 6.x and up")]
-		public TDescriptor Parent(Id parent) => Assign(a => a.Parent = parent);
+		public TDescriptor Routing(Routing routing) => Assign(routing, (a, v) => a.Routing = v);
 	}
 }

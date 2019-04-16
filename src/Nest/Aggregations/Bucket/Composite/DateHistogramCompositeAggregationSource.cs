@@ -28,7 +28,7 @@ namespace Nest
 		/// or as a timezone id, an identifier used in the TZ database like America/Los_Angeles.
 		/// </summary>
 		[DataMember(Name ="time_zone")]
-		string Timezone { get; set; }
+		string TimeZone { get; set; }
 	}
 
 	/// <inheritdoc cref="IDateHistogramCompositeAggregationSource" />
@@ -43,7 +43,7 @@ namespace Nest
 		public Union<DateInterval?, Time> Interval { get; set; }
 
 		/// <inheritdoc />
-		public string Timezone { get; set; }
+		public string TimeZone { get; set; }
 
 		/// <inheritdoc />
 		protected override string SourceType => "date_histogram";
@@ -58,20 +58,20 @@ namespace Nest
 
 		string IDateHistogramCompositeAggregationSource.Format { get; set; }
 		Union<DateInterval?, Time> IDateHistogramCompositeAggregationSource.Interval { get; set; }
-		string IDateHistogramCompositeAggregationSource.Timezone { get; set; }
+		string IDateHistogramCompositeAggregationSource.TimeZone { get; set; }
 
 		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource.Interval" />
 		public DateHistogramCompositeAggregationSourceDescriptor<T> Interval(DateInterval? interval) =>
-			Assign(a => a.Interval = interval);
+			Assign(interval, (a, v) => a.Interval = v);
 
 		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource.Interval" />
 		public DateHistogramCompositeAggregationSourceDescriptor<T> Interval(Time interval) =>
-			Assign(a => a.Interval = interval);
+			Assign(interval, (a, v) => a.Interval = v);
 
-		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource.Timezone" />
-		public DateHistogramCompositeAggregationSourceDescriptor<T> Timezone(string timezone) => Assign(a => a.Timezone = timezone);
+		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource.TimeZone" />
+		public DateHistogramCompositeAggregationSourceDescriptor<T> TimeZone(string timezone) => Assign(timezone, (a, v) => a.TimeZone = v);
 
-		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource.Timezone" />
-		public DateHistogramCompositeAggregationSourceDescriptor<T> Format(string format) => Assign(a => a.Format = format);
+		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource.TimeZone" />
+		public DateHistogramCompositeAggregationSourceDescriptor<T> Format(string format) => Assign(format, (a, v) => a.Format = v);
 	}
 }

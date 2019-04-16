@@ -59,19 +59,19 @@ namespace Nest
 
 		DistanceUnit? IGeoDistanceAggregation.Unit { get; set; }
 
-		public GeoDistanceAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public GeoDistanceAggregationDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
-		public GeoDistanceAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public GeoDistanceAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(field, (a, v) => a.Field = v);
 
-		public GeoDistanceAggregationDescriptor<T> Origin(double lat, double lon) => Assign(a => a.Origin = new GeoLocation(lat, lon));
+		public GeoDistanceAggregationDescriptor<T> Origin(double lat, double lon) => Assign(new GeoLocation(lat, lon), (a, v) => a.Origin = v);
 
-		public GeoDistanceAggregationDescriptor<T> Origin(GeoLocation geoLocation) => Assign(a => a.Origin = geoLocation);
+		public GeoDistanceAggregationDescriptor<T> Origin(GeoLocation geoLocation) => Assign(geoLocation, (a, v) => a.Origin = v);
 
-		public GeoDistanceAggregationDescriptor<T> Unit(DistanceUnit? unit) => Assign(a => a.Unit = unit);
+		public GeoDistanceAggregationDescriptor<T> Unit(DistanceUnit? unit) => Assign(unit, (a, v) => a.Unit = v);
 
-		public GeoDistanceAggregationDescriptor<T> DistanceType(GeoDistanceType? geoDistance) => Assign(a => a.DistanceType = geoDistance);
+		public GeoDistanceAggregationDescriptor<T> DistanceType(GeoDistanceType? geoDistance) => Assign(geoDistance, (a, v) => a.DistanceType = v);
 
 		public GeoDistanceAggregationDescriptor<T> Ranges(params Func<AggregationRangeDescriptor, IAggregationRange>[] ranges) =>
-			Assign(a => a.Ranges = ranges?.Select(r => r(new AggregationRangeDescriptor())));
+			Assign(ranges?.Select(r => r(new AggregationRangeDescriptor())), (a, v) => a.Ranges = v);
 	}
 }

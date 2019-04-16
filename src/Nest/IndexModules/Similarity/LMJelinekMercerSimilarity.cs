@@ -34,6 +34,6 @@ namespace Nest
 		string ISimilarity.Type => "LMJelinekMercer";
 
 		/// <inheritdoc />
-		public LMJelinekMercerSimilarityDescriptor Lamdba(double? lamda) => Assign(a => a.Lambda = lamda);
+		public LMJelinekMercerSimilarityDescriptor Lamdba(double? lamda) => Assign(lamda, (a, v) => a.Lambda = v);
 	}
 }

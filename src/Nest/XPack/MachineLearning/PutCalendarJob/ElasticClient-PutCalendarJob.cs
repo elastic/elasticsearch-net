@@ -17,11 +17,11 @@ namespace Nest
 
 		/// <inheritdoc cref="PutCalendarJob(Nest.Id,Nest.Id,System.Func{Nest.PutCalendarJobDescriptor,Nest.IPutCalendarJobRequest})" />
 		Task<IPutCalendarJobResponse> PutCalendarJobAsync(Id calendarId, Id jobId, Func<PutCalendarJobDescriptor, IPutCalendarJobRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="PutCalendarJob(Nest.Id,Nest.Id,System.Func{Nest.PutCalendarJobDescriptor,Nest.IPutCalendarJobRequest})" />
-		Task<IPutCalendarJobResponse> PutCalendarJobAsync(IPutCalendarJobRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IPutCalendarJobResponse> PutCalendarJobAsync(IPutCalendarJobRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -32,25 +32,18 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IPutCalendarJobResponse PutCalendarJob(IPutCalendarJobRequest request) =>
-			Dispatcher.Dispatch<IPutCalendarJobRequest, PutCalendarJobRequestParameters, PutCalendarJobResponse>(
-				request,
-				(p, d) => LowLevelDispatch.XpackMlPutCalendarJobDispatch<PutCalendarJobResponse>(p)
-			);
+			DoRequest<IPutCalendarJobRequest, PutCalendarJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IPutCalendarJobResponse> PutCalendarJobAsync(Id calendarId, Id jobId, Func<PutCalendarJobDescriptor, IPutCalendarJobRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			PutCalendarJobAsync(selector.InvokeOrDefault(new PutCalendarJobDescriptor(calendarId, jobId)), cancellationToken);
+		public Task<IPutCalendarJobResponse> PutCalendarJobAsync(
+			Id calendarId,
+			Id jobId,
+			Func<PutCalendarJobDescriptor, IPutCalendarJobRequest> selector = null,
+			CancellationToken ct = default
+		) => PutCalendarJobAsync(selector.InvokeOrDefault(new PutCalendarJobDescriptor(calendarId, jobId)), ct);
 
 		/// <inheritdoc />
-		public Task<IPutCalendarJobResponse> PutCalendarJobAsync(IPutCalendarJobRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IPutCalendarJobRequest, PutCalendarJobRequestParameters, PutCalendarJobResponse, IPutCalendarJobResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackMlPutCalendarJobDispatchAsync<PutCalendarJobResponse>(p, c)
-			);
+		public Task<IPutCalendarJobResponse> PutCalendarJobAsync(IPutCalendarJobRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IPutCalendarJobRequest, IPutCalendarJobResponse, PutCalendarJobResponse>(request, request.RequestParameters, ct);
 	}
 }

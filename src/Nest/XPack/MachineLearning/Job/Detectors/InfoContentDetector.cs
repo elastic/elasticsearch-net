@@ -67,22 +67,22 @@ namespace Nest
 		Field IOverFieldNameDetector.OverFieldName { get; set; }
 		Field IPartitionFieldNameDetector.PartitionFieldName { get; set; }
 
-		public InfoContentDetectorDescriptor<T> FieldName(Field fieldName) => Assign(a => a.FieldName = fieldName);
+		public InfoContentDetectorDescriptor<T> FieldName(Field fieldName) => Assign(fieldName, (a, v) => a.FieldName = v);
 
-		public InfoContentDetectorDescriptor<T> FieldName(Expression<Func<T, object>> objectPath) => Assign(a => a.FieldName = objectPath);
+		public InfoContentDetectorDescriptor<T> FieldName(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.FieldName = v);
 
-		public InfoContentDetectorDescriptor<T> ByFieldName(Field byFieldName) => Assign(a => a.ByFieldName = byFieldName);
+		public InfoContentDetectorDescriptor<T> ByFieldName(Field byFieldName) => Assign(byFieldName, (a, v) => a.ByFieldName = v);
 
-		public InfoContentDetectorDescriptor<T> ByFieldName(Expression<Func<T, object>> objectPath) => Assign(a => a.ByFieldName = objectPath);
+		public InfoContentDetectorDescriptor<T> ByFieldName(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.ByFieldName = v);
 
-		public InfoContentDetectorDescriptor<T> OverFieldName(Field overFieldName) => Assign(a => a.OverFieldName = overFieldName);
+		public InfoContentDetectorDescriptor<T> OverFieldName(Field overFieldName) => Assign(overFieldName, (a, v) => a.OverFieldName = v);
 
-		public InfoContentDetectorDescriptor<T> OverFieldName(Expression<Func<T, object>> objectPath) => Assign(a => a.OverFieldName = objectPath);
+		public InfoContentDetectorDescriptor<T> OverFieldName(Expression<Func<T, object>> objectPath) => Assign(objectPath, (a, v) => a.OverFieldName = v);
 
 		public InfoContentDetectorDescriptor<T> PartitionFieldName(Field partitionFieldName) =>
-			Assign(a => a.PartitionFieldName = partitionFieldName);
+			Assign(partitionFieldName, (a, v) => a.PartitionFieldName = v);
 
 		public InfoContentDetectorDescriptor<T> PartitionFieldName(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.PartitionFieldName = objectPath);
+			Assign(objectPath, (a, v) => a.PartitionFieldName = v);
 	}
 }

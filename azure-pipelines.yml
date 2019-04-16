@@ -41,4 +41,4 @@ jobs:
         inputs:
             testRunner: VSTest
             testResultsFiles: 'src/Tests/Tests/**/*.trx'
-            testRunTitle: '$(esVersion)  Integration Tests'
+            testRunTitle: '$(esVersion) Integration Tests'

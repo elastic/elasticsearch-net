@@ -149,7 +149,7 @@ namespace Elasticsearch.Net
         {
             if (resolver == null) resolver = DefaultResolver;
 
-            var buf = BufferPool.Default.Rent();
+            var buf = MemoryPool.Rent();
             try
             {
                 var writer = new JsonWriter(buf);
@@ -160,7 +160,7 @@ namespace Elasticsearch.Net
             }
             finally
             {
-                BufferPool.Default.Return(buf);
+                MemoryPool.Return(buf);
             }
         }
 
@@ -285,8 +285,7 @@ namespace Elasticsearch.Net
             var ms = stream as MemoryStream;
             if (ms != null)
             {
-                ArraySegment<byte> buf2;
-                if (ms.TryGetBuffer(out buf2))
+				if (ms.TryGetBuffer(out var buf2))
                 {
                     // when token is number, can not use from pool(can not find end line).
                     var token = new JsonReader(buf2.Array, buf2.Offset).GetCurrentJsonToken();
@@ -335,7 +334,7 @@ namespace Elasticsearch.Net
         {
             if (resolver == null) resolver = DefaultResolver;
 
-            var buffer = BufferPool.Default.Rent();
+            var buffer = MemoryPool.Rent();
             var buf = buffer;
             try
             {
@@ -361,25 +360,22 @@ namespace Elasticsearch.Net
             }
             finally
             {
-                BufferPool.Default.Return(buffer);
+                MemoryPool.Return(buffer);
             }
         }
 
 #endif
 
-        public static string PrettyPrint(byte[] json)
-        {
-            return PrettyPrint(json, 0);
-        }
+        public static string PrettyPrint(byte[] json) => PrettyPrint(json, 0);
 
-        public static string PrettyPrint(byte[] json, int offset)
+		public static string PrettyPrint(byte[] json, int offset)
         {
             var reader = new JsonReader(json, offset);
 			var buffer = MemoryPool.Rent();
 			try
 			{
 				var writer = new JsonWriter(buffer);
-				WritePrittyPrint(ref reader, ref writer, 0);
+				WritePrettyPrint(ref reader, ref writer, 0);
 				return writer.ToString();
 			}
 			finally
@@ -396,7 +392,7 @@ namespace Elasticsearch.Net
 			try
 			{
 				var writer = new JsonWriter(buffer);
-				WritePrittyPrint(ref reader, ref writer, 0);
+				WritePrettyPrint(ref reader, ref writer, 0);
 				return writer.ToString();
 			}
 			finally
@@ -418,7 +414,7 @@ namespace Elasticsearch.Net
 			try
 			{
 				var writer = new JsonWriter(buffer);
-				WritePrittyPrint(ref reader, ref writer, 0);
+				WritePrettyPrint(ref reader, ref writer, 0);
 				return writer.ToUtf8ByteArray();
 			}
 			finally
@@ -434,7 +430,7 @@ namespace Elasticsearch.Net
 			try
 			{
 				var writer = new JsonWriter(buffer);
-				WritePrittyPrint(ref reader, ref writer, 0);
+				WritePrettyPrint(ref reader, ref writer, 0);
 				return writer.ToUtf8ByteArray();
 			}
 			finally
@@ -446,7 +442,7 @@ namespace Elasticsearch.Net
         static readonly byte[][] indent = Enumerable.Range(0, 100).Select(x => Encoding.UTF8.GetBytes(new string(' ', x * 2))).ToArray();
         static readonly byte[] newLine = Encoding.UTF8.GetBytes(Environment.NewLine);
 
-        static void WritePrittyPrint(ref JsonReader reader, ref JsonWriter writer, int depth)
+        static void WritePrettyPrint(ref JsonReader reader, ref JsonWriter writer, int depth)
         {
             var token = reader.GetCurrentJsonToken();
             switch (token)
@@ -466,7 +462,7 @@ namespace Elasticsearch.Net
                             writer.WriteRaw(indent[depth + 1]);
                             writer.WritePropertyName(reader.ReadPropertyName());
                             writer.WriteRaw((byte)' ');
-                            WritePrittyPrint(ref reader, ref writer, depth + 1);
+                            WritePrettyPrint(ref reader, ref writer, depth + 1);
                         }
                         writer.WriteRaw(newLine);
                         writer.WriteRaw(indent[depth]);
@@ -486,7 +482,7 @@ namespace Elasticsearch.Net
                                 writer.WriteRaw(newLine);
                             }
                             writer.WriteRaw(indent[depth + 1]);
-                            WritePrittyPrint(ref reader, ref writer, depth + 1);
+                            WritePrettyPrint(ref reader, ref writer, depth + 1);
                         }
                         writer.WriteRaw(newLine);
                         writer.WriteRaw(indent[depth]);

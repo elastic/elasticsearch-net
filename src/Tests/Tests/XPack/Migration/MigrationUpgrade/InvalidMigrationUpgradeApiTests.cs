@@ -21,7 +21,7 @@ namespace Tests.XPack.Migration.MigrationUpgrade
 		protected override bool ExpectIsValid => false;
 
 		protected override object ExpectJson => null;
-		protected override int ExpectStatusCode => 500;
+		protected override int ExpectStatusCode => 400;
 
 		protected override Func<MigrationUpgradeDescriptor, IMigrationUpgradeRequest> Fluent => f => f;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
@@ -54,7 +54,7 @@ namespace Tests.XPack.Migration.MigrationUpgrade
 		{
 			response.ShouldNotBeValid();
 			response.ServerError.Should().NotBeNull();
-			response.ServerError.Status.Should().Be(500);
+			response.ServerError.Status.Should().Be(400);
 		}
 	}
 }

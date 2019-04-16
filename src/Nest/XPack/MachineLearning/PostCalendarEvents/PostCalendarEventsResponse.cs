@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -11,7 +11,7 @@ namespace Nest
 		/// <summary>
 		///  A list of one of more scheduled events.
 		/// </summary>
-		[JsonProperty("events")]
+		[DataMember(Name = "events")]
 		IReadOnlyCollection<ScheduledEvent> Events { get; }
 	}
 
@@ -19,7 +19,6 @@ namespace Nest
 	public class PostCalendarEventsResponse : ResponseBase, IPostCalendarEventsResponse
 	{
 		/// <inheritdoc cref="IPostCalendarEventsResponse.Events"/>
-		[JsonProperty("events")]
 		public IReadOnlyCollection<ScheduledEvent> Events { get; internal set; } = EmptyReadOnly<ScheduledEvent>.Collection;
 	}
 }

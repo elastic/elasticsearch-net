@@ -4,7 +4,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using ApiGenerator.Domain;
-using CsQuery.EquationParser.Implementation;
 using Newtonsoft.Json.Linq;
 using RazorLight;
 using ShellProgressBar;
@@ -31,7 +30,6 @@ namespace ApiGenerator
 				{ GenerateRequests, "Requests" },
 				{ GenerateEnums, "Enums" },
 				{ GenerateRawClient, "Lowlevel client" },
-				{ GenerateRawDispatch, "Dispatch" },
 			};
 
 			using (var pbar = new ProgressBar(actions.Count, "Generating code", new ProgressBarOptions { BackgroundColor = ConsoleColor.DarkGray }))
@@ -133,13 +131,27 @@ namespace ApiGenerator
 			var endpoint = officialJsonSpec.ToObject<Dictionary<string, ApiEndpoint>>().First();
 			endpoint.Value.RestSpecName = endpoint.Key;
 			endpoint.Value.CsharpMethodName = CreateMethodName(endpoint.Key);
+
+			PatchUrlParts(jsonFile, endpoint.Value.Url);
 			return endpoint;
+		}
+
+		private static void PatchUrlParts(string jsonFile, ApiUrl url)
+		{
+			if (url.IsPartless) return;
+			foreach (var kv in url.Parts)
+			{
+				var required = url.ExposedApiPaths.All(p => p.Path.Contains($"{{{kv.Key}}}"));
+				if (kv.Value.Required != required)
+					Warnings.Add($"{jsonFile} has part: {kv.Key} listed as {kv.Value.Required} but should be {required}");
+				kv.Value.Required = required;
+			}
 		}
 
 		private static void PatchOfficialSpec(JObject original, string jsonFile)
 		{
 			var directory = Path.GetDirectoryName(jsonFile);
-			var patchFile = Path.Combine(directory, Path.GetFileNameWithoutExtension(jsonFile)) + ".patch.json";
+			var patchFile = Path.Combine(directory,"..", "_Patches", Path.GetFileNameWithoutExtension(jsonFile)) + ".patch.json";
 			if (!File.Exists(patchFile)) return;
 
 			var patchedJson = JObject.Parse(File.ReadAllText(patchFile));
@@ -178,14 +190,6 @@ namespace ApiGenerator
 			var targetFile = CodeConfiguration.EsNetFolder + @"IElasticLowLevelClient.Generated.cs";
 			var source = DoRazor(nameof(GenerateClientInterface),
 				File.ReadAllText(CodeConfiguration.ViewFolder + @"IElasticLowLevelClient.Generated.cshtml"), model);
-			File.WriteAllText(targetFile, source);
-		}
-
-		private static void GenerateRawDispatch(RestApiSpec model)
-		{
-			var targetFile = CodeConfiguration.NestFolder + @"_Generated/_LowLevelDispatch.Generated.cs";
-			var source = DoRazor(nameof(GenerateRawDispatch), File.ReadAllText(CodeConfiguration.ViewFolder + @"_LowLevelDispatch.Generated.cshtml"),
-				model);
 			File.WriteAllText(targetFile, source);
 		}
 

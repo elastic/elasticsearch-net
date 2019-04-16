@@ -18,12 +18,12 @@ namespace Nest
 		/// <inheritdoc />
 		Task<IGetModelSnapshotsResponse> GetModelSnapshotsAsync(Id jobId,
 			Func<GetModelSnapshotsDescriptor, IGetModelSnapshotsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
 		Task<IGetModelSnapshotsResponse> GetModelSnapshotsAsync(IGetModelSnapshotsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -35,27 +35,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetModelSnapshotsResponse GetModelSnapshots(IGetModelSnapshotsRequest request) =>
-			Dispatcher.Dispatch<IGetModelSnapshotsRequest, GetModelSnapshotsRequestParameters, GetModelSnapshotsResponse>(
-				request,
-				LowLevelDispatch.MlGetModelSnapshotsDispatch<GetModelSnapshotsResponse>
-			);
+			DoRequest<IGetModelSnapshotsRequest, GetModelSnapshotsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IGetModelSnapshotsResponse> GetModelSnapshotsAsync(Id jobId,
 			Func<GetModelSnapshotsDescriptor, IGetModelSnapshotsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			GetModelSnapshotsAsync(selector.InvokeOrDefault(new GetModelSnapshotsDescriptor(jobId)), cancellationToken);
+			CancellationToken cancellationToken = default
+		) => GetModelSnapshotsAsync(selector.InvokeOrDefault(new GetModelSnapshotsDescriptor(jobId)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IGetModelSnapshotsResponse> GetModelSnapshotsAsync(IGetModelSnapshotsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<IGetModelSnapshotsRequest, GetModelSnapshotsRequestParameters, GetModelSnapshotsResponse, IGetModelSnapshotsResponse>(
-					request,
-					cancellationToken,
-					LowLevelDispatch.MlGetModelSnapshotsDispatchAsync<GetModelSnapshotsResponse>
-				);
+		public Task<IGetModelSnapshotsResponse> GetModelSnapshotsAsync(IGetModelSnapshotsRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetModelSnapshotsRequest, IGetModelSnapshotsResponse, GetModelSnapshotsResponse>
+				(request, request.RequestParameters, ct);
 	}
 }

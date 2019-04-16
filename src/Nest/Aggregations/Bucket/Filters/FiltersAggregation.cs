@@ -72,7 +72,7 @@ namespace Nest
 		/// <param name="otherBucket">whether to set the other bucket</param>
 		/// <returns>the <see cref="FiltersAggregationDescriptor{T}" /></returns>
 		public FiltersAggregationDescriptor<T> OtherBucket(bool? otherBucket = true) =>
-			Assign(a => a.OtherBucket = otherBucket);
+			Assign(otherBucket, (a, v) => a.OtherBucket = v);
 
 		/// <summary>
 		/// Sets the key for the other bucket to a value other than the default "_other_".
@@ -81,16 +81,16 @@ namespace Nest
 		/// <param name="otherBucketKey">the name for the other bucket</param>
 		/// <returns>the <see cref="FiltersAggregationDescriptor{T}" /></returns>
 		public FiltersAggregationDescriptor<T> OtherBucketKey(string otherBucketKey) =>
-			Assign(a => a.OtherBucketKey = otherBucketKey);
+			Assign(otherBucketKey, (a, v) => a.OtherBucketKey = v);
 
 		public FiltersAggregationDescriptor<T> NamedFilters(Func<NamedFiltersContainerDescriptor<T>, IPromise<INamedFiltersContainer>> selector) =>
-			Assign(a => a.Filters =
-				new Union<INamedFiltersContainer, List<QueryContainer>>(selector?.Invoke(new NamedFiltersContainerDescriptor<T>())?.Value));
+			Assign(selector, (a, v) => a.Filters =
+				new Union<INamedFiltersContainer, List<QueryContainer>>(v?.Invoke(new NamedFiltersContainerDescriptor<T>())?.Value));
 
 		public FiltersAggregationDescriptor<T> AnonymousFilters(params Func<QueryContainerDescriptor<T>, QueryContainer>[] selectors) =>
-			Assign(a => a.Filters = selectors.Select(s => s?.Invoke(new QueryContainerDescriptor<T>())).ToList());
+			Assign(selectors, (a, v) => a.Filters = v.Select(vv => vv?.Invoke(new QueryContainerDescriptor<T>())).ToList());
 
 		public FiltersAggregationDescriptor<T> AnonymousFilters(IEnumerable<Func<QueryContainerDescriptor<T>, QueryContainer>> selectors) =>
-			Assign(a => a.Filters = selectors.Select(s => s?.Invoke(new QueryContainerDescriptor<T>())).ToList());
+			Assign(selectors, (a, v) => a.Filters = v.Select(vv => vv?.Invoke(new QueryContainerDescriptor<T>())).ToList());
 	}
 }

@@ -125,7 +125,9 @@ namespace Tests.CodeStandards
 				typeof(IndicesShardStoresRequest),
 				typeof(RenderSearchTemplateRequest),
 				typeof(MultiSearchTemplateRequest),
-				typeof(CreateRequest<>)
+				typeof(CreateRequest<>),
+				typeof(DeleteByQueryRethrottleRequest), // uses ListTasksResponse
+				typeof(UpdateByQueryRethrottleRequest) // uses ListTasksResponse
 			};
 
 			var types = typeof(IRequest).Assembly.GetTypes();
@@ -157,7 +159,6 @@ namespace Tests.CodeStandards
 			{
 				nestAssembly.GetType("System.AssemblyVersionInformation", throwOnError: false),
 				nestAssembly.GetType("System.Runtime.Serialization.Formatters.FormatterAssemblyStyle", throwOnError: false),
-				typeof(SynchronizedCollection<>),
 				nestAssembly.GetType("System.ComponentModel.Browsable", throwOnError: false),
 				nestAssembly.GetType("Microsoft.CodeAnalysis.EmbeddedAttribute", throwOnError: false),
 				nestAssembly.GetType("System.Runtime.CompilerServices.IsReadOnlyAttribute", throwOnError: false),

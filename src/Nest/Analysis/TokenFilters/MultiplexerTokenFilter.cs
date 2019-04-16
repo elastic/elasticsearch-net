@@ -41,12 +41,12 @@ namespace Nest
 		bool? IMultiplexerTokenFilter.PreserveOriginal { get; set; }
 
 		/// <inheritdoc cref="IMultiplexerTokenFilter.Filters" />
-		public MultiplexerTokenFilterDescriptor Filters(IEnumerable<string> filters) => Assign(a => a.Filters = filters);
+		public MultiplexerTokenFilterDescriptor Filters(IEnumerable<string> filters) => Assign(filters, (a, v) => a.Filters = v);
 
 		/// <inheritdoc cref="IMultiplexerTokenFilter.Filters" />
-		public MultiplexerTokenFilterDescriptor Filters(params string[] filters) => Assign(a => a.Filters = filters);
+		public MultiplexerTokenFilterDescriptor Filters(params string[] filters) => Assign(filters, (a, v) => a.Filters = v);
 
 		/// <inheritdoc cref="IMultiplexerTokenFilter.PreserveOriginal" />
-		public MultiplexerTokenFilterDescriptor PreserveOriginal(bool? preserve = true) => Assign(a => a.PreserveOriginal = preserve);
+		public MultiplexerTokenFilterDescriptor PreserveOriginal(bool? preserve = true) => Assign(preserve, (a, v) => a.PreserveOriginal = v);
 	}
 }

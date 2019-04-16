@@ -15,11 +15,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<ICatResponse<CatShardsRecord>> CatShardsAsync(Func<CatShardsDescriptor, ICatShardsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default(CancellationToken)
 		);
 
 		/// <inheritdoc />
-		Task<ICatResponse<CatShardsRecord>> CatShardsAsync(ICatShardsRequest request, CancellationToken cancellationToken = default(CancellationToken)
+		Task<ICatResponse<CatShardsRecord>> CatShardsAsync(ICatShardsRequest request, CancellationToken ct = default(CancellationToken)
 		);
 	}
 
@@ -31,19 +31,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICatResponse<CatShardsRecord> CatShards(ICatShardsRequest request) =>
-			DoCat<ICatShardsRequest, CatShardsRequestParameters, CatShardsRecord>(request,
-				LowLevelDispatch.CatShardsDispatch<CatResponse<CatShardsRecord>>);
+			DoCat<ICatShardsRequest, CatShardsRequestParameters, CatShardsRecord>(request);
 
 		/// <inheritdoc />
-		public Task<ICatResponse<CatShardsRecord>> CatShardsAsync(Func<CatShardsDescriptor, ICatShardsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+		public Task<ICatResponse<CatShardsRecord>> CatShardsAsync(
+			Func<CatShardsDescriptor, ICatShardsRequest> selector = null,
+			CancellationToken ct = default
 		) =>
-			CatShardsAsync(selector.InvokeOrDefault(new CatShardsDescriptor()), cancellationToken);
+			CatShardsAsync(selector.InvokeOrDefault(new CatShardsDescriptor()), ct);
 
-		public Task<ICatResponse<CatShardsRecord>> CatShardsAsync(ICatShardsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			DoCatAsync<ICatShardsRequest, CatShardsRequestParameters, CatShardsRecord>(request, cancellationToken,
-				LowLevelDispatch.CatShardsDispatchAsync<CatResponse<CatShardsRecord>>);
+		public Task<ICatResponse<CatShardsRecord>> CatShardsAsync(ICatShardsRequest request, CancellationToken ct = default) =>
+			DoCatAsync<ICatShardsRequest, CatShardsRequestParameters, CatShardsRecord>(request, ct);
 	}
 }

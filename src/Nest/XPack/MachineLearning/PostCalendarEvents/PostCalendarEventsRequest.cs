@@ -2,20 +2,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	/// <summary>
 	/// Post scheduled events in a calendar.
 	/// </summary>
+	[MapsApi("ml.post_calendar_events")]
 	public partial interface IPostCalendarEventsRequest
 	{
 		/// <summary>
 		///  A list of one of more scheduled events.
 		/// </summary>
-		[JsonProperty("events")]
+		[DataMember(Name = "events")]
 		IEnumerable<ScheduledEvent> Events { get; set; }
 	}
 
@@ -24,33 +25,33 @@ namespace Nest
 		/// <summary>
 		/// An identifier for the calendar that contains the scheduled event.
 		/// </summary>
-		[JsonProperty("calendar_id")]
+		[DataMember(Name = "calendar_id")]
 		public Id CalendarId { get; set; }
 
 		/// <summary>
 		///  A description of the scheduled event.
 		/// </summary>
-		[JsonProperty("description")]
+		[DataMember(Name = "description")]
 		public string Description { get; set; }
 
 		/// <summary>
 		/// The timestamp for the beginning of the scheduled event.
 		/// </summary>
-		[JsonProperty("start_time")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[DataMember(Name = "start_time")]
+		[JsonFormatter(typeof(NullableDateTimeOffsetEpochMillisecondsFormatter))]
 		public DateTimeOffset? StartTime { get; set; }
 
 		/// <summary>
 		/// The timestamp for the end of the scheduled event.
 		/// </summary>
-		[JsonProperty("end_time")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		[DataMember(Name = "end_time")]
+		[JsonFormatter(typeof(NullableDateTimeOffsetEpochMillisecondsFormatter))]
 		public DateTimeOffset? EndTime { get; set; }
 
 		/// <summary>
 		/// An automatically-generated identifier for the scheduled event.
 		/// </summary>
-		[JsonProperty("event_id")]
+		[DataMember(Name = "event_id")]
 		public Id EventId { get; set; }
 	}
 
@@ -58,25 +59,23 @@ namespace Nest
 	public partial class PostCalendarEventsRequest
 	{
 		/// <inheritdoc cref="IPostCalendarEventsRequest.Events"/>
-		[JsonProperty("events")]
 		public IEnumerable<ScheduledEvent> Events { get; set;  }
 	}
 
-	[DescriptorFor("XpackMlPostCalendarEvents")]
 	public partial class PostCalendarEventsDescriptor
 	{
 		/// <inheritdoc cref="IPostCalendarEventsRequest.Events"/>
 		IEnumerable<ScheduledEvent> IPostCalendarEventsRequest.Events { get; set; }
 
 		/// <inheritdoc cref="IPostCalendarEventsRequest.Events"/>
-		public PostCalendarEventsDescriptor Events(IEnumerable<ScheduledEvent> events) => Assign(a => a.Events = events);
+		public PostCalendarEventsDescriptor Events(IEnumerable<ScheduledEvent> events) => Assign(events, (a, v) => a.Events = v);
 
 		/// <inheritdoc cref="IPostCalendarEventsRequest.Events"/>
-		public PostCalendarEventsDescriptor Events(params ScheduledEvent[] events) => Assign(a =>
+		public PostCalendarEventsDescriptor Events(params ScheduledEvent[] events) => Assign(events, (a, v) =>
 		{
-			if (events != null && events.Length == 1 && events[0] is IEnumerable)
-				a.Events = ((IEnumerable)events[0]).Cast<ScheduledEvent>();
-			else a.Events = events;
+			if (v != null && v.Length == 1 && v[0] is IEnumerable)
+				a.Events = ((IEnumerable)v[0]).Cast<ScheduledEvent>();
+			else a.Events = v;
 		});
 	}
 }

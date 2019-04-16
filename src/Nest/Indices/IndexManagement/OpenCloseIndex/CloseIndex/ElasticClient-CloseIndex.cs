@@ -25,11 +25,11 @@ namespace Nest
 		Task<ICloseIndexResponse> CloseIndexAsync(
 			Indices indices,
 			Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<ICloseIndexResponse> CloseIndexAsync(ICloseIndexRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<ICloseIndexResponse> CloseIndexAsync(ICloseIndexRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -40,25 +40,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICloseIndexResponse CloseIndex(ICloseIndexRequest request) =>
-			Dispatcher.Dispatch<ICloseIndexRequest, CloseIndexRequestParameters, CloseIndexResponse>(
-				request,
-				(p, d) => LowLevelDispatch.IndicesCloseDispatch<CloseIndexResponse>(p)
-			);
+			DoRequest<ICloseIndexRequest, CloseIndexResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<ICloseIndexResponse> CloseIndexAsync(
 			Indices indices,
 			Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) => CloseIndexAsync(selector.InvokeOrDefault(new CloseIndexDescriptor(indices)), cancellationToken);
+			CancellationToken ct = default
+		) => CloseIndexAsync(selector.InvokeOrDefault(new CloseIndexDescriptor(indices)), ct);
 
 		/// <inheritdoc />
-		public Task<ICloseIndexResponse> CloseIndexAsync(ICloseIndexRequest request, CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<ICloseIndexRequest, CloseIndexRequestParameters, CloseIndexResponse, ICloseIndexResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.IndicesCloseDispatchAsync<CloseIndexResponse>(p, c)
-			);
+		public Task<ICloseIndexResponse> CloseIndexAsync(ICloseIndexRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<ICloseIndexRequest, ICloseIndexResponse, CloseIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

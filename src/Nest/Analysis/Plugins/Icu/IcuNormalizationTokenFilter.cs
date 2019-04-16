@@ -33,6 +33,6 @@ namespace Nest
 		IcuNormalizationType? IIcuNormalizationTokenFilter.Name { get; set; }
 
 		/// <inheritdoc />
-		public IcuNormalizationTokenFilterDescriptor Name(IcuNormalizationType? name) => Assign(a => a.Name = name);
+		public IcuNormalizationTokenFilterDescriptor Name(IcuNormalizationType? name) => Assign(name, (a, v) => a.Name = v);
 	}
 }

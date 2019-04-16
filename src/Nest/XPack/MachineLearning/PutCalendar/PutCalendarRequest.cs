@@ -1,17 +1,18 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary>
 	/// Creates a machine learning calendar.
 	/// </summary>
+	[MapsApi("ml.put_calendar")]
 	public partial interface IPutCalendarRequest
 	{
 		/// <summary>
 		/// A description of the calendar.
 		/// </summary>
-		[JsonProperty("description")]
+		[DataMember(Name = "description")]
 		string Description { get; set; }
 	}
 
@@ -22,12 +23,11 @@ namespace Nest
 		public string Description { get; set; }
 	}
 
-	[DescriptorFor("XpackMlPutCalendar")]
 	public partial class PutCalendarDescriptor
 	{
 		string IPutCalendarRequest.Description { get; set; }
 
 		/// <inheritdoc cref="IPutCalendarRequest.Description" />
-		public PutCalendarDescriptor Description(string description) => Assign(a => a.Description = description);
+		public PutCalendarDescriptor Description(string description) => Assign(description, (a, v) => a.Description = v);
 	}
 }

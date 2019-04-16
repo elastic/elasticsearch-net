@@ -62,7 +62,7 @@ namespace Nest
 				else
 				{
 					var field = sortProperty.Utf8String();
-					var sortField = formatterResolver.GetFormatter<SortField>()
+					var sortField = formatterResolver.GetFormatter<FieldSort>()
 						.Deserialize(ref reader, formatterResolver);
 					sortField.Field = field;
 					sort = sortField;

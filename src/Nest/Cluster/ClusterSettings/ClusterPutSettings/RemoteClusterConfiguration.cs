@@ -13,19 +13,31 @@ namespace Nest
 			new Dictionary<string, object>();
 
 		public RemoteClusterConfiguration() =>
-			BackingDictionary["cluster"] = new Dictionary<string, object>()
+			BackingDictionary["cluster"] = new Dictionary<string, object>
 			{
 				{ "remote", _remoteDictionary }
 			};
 
+		/// <summary>
+		/// Adds seeds for the remote cluster specified by name
+		/// </summary>
 		public void Add(string name, params Uri[] seeds) =>
 			Add(name, seeds.Select(u => $"{u.Host}:{u.Port}").ToArray());
 
+		/// <summary>
+		/// Adds seeds for the remote cluster specified by name
+		/// </summary>
 		public void Add(string name, params string[] seeds) =>
-			_remoteDictionary[name] = new Dictionary<string, object>()
+			Add(name, new Dictionary<string, object>
 			{
 				{ "seeds", seeds }
-			};
+			});
+
+		/// <summary>
+		/// Adds settings for the remote cluster specified by name
+		/// </summary>
+		public void Add(string name, Dictionary<string, object> remoteSettings) =>
+			_remoteDictionary[name] = remoteSettings;
 
 		public static Dictionary<string, object> operator +(RemoteClusterConfiguration left, IDictionary<string, object> right) => Combine(left, right);
 		public static Dictionary<string, object> operator +(IDictionary<string, object> left, RemoteClusterConfiguration right) => Combine(left, right);

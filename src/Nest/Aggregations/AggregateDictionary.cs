@@ -115,6 +115,8 @@ namespace Nest
 
 		public SingleBucketAggregate Children(string key) => TryGet<SingleBucketAggregate>(key);
 
+		public SingleBucketAggregate Parent(string key) => TryGet<SingleBucketAggregate>(key);
+
 		public SingleBucketAggregate Sampler(string key) => TryGet<SingleBucketAggregate>(key);
 
 		public GeoCentroidAggregate GeoCentroid(string key) => TryGet<GeoCentroidAggregate>(key);
@@ -173,7 +175,7 @@ namespace Nest
 
 		public MultiBucketAggregate<RangeBucket> DateRange(string key) => GetMultiBucketAggregate<RangeBucket>(key);
 
-		public MultiBucketAggregate<RangeBucket> IpRange(string key) => GetMultiBucketAggregate<RangeBucket>(key);
+		public MultiBucketAggregate<IpRangeBucket> IpRange(string key) => GetMultiBucketAggregate<IpRangeBucket>(key);
 
 		public MultiBucketAggregate<RangeBucket> GeoDistance(string key) => GetMultiBucketAggregate<RangeBucket>(key);
 

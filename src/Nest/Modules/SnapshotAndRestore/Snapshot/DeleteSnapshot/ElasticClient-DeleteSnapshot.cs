@@ -25,44 +25,38 @@ namespace Nest
 		/// <inheritdoc />
 		Task<IDeleteSnapshotResponse> DeleteSnapshotAsync(
 			Name repository, Name snapshotName, Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<IDeleteSnapshotResponse> DeleteSnapshotAsync(IDeleteSnapshotRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IDeleteSnapshotResponse DeleteSnapshot(Name repository, Name snapshotName,
+		public IDeleteSnapshotResponse DeleteSnapshot(
+			Name repository,
+			Name snapshotName,
 			Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector = null
-		) =>
-			DeleteSnapshot(selector.InvokeOrDefault(new DeleteSnapshotDescriptor(repository, snapshotName)));
+		) => DeleteSnapshot(selector.InvokeOrDefault(new DeleteSnapshotDescriptor(repository, snapshotName)));
 
 		/// <inheritdoc />
 		public IDeleteSnapshotResponse DeleteSnapshot(IDeleteSnapshotRequest request) =>
-			Dispatcher.Dispatch<IDeleteSnapshotRequest, DeleteSnapshotRequestParameters, DeleteSnapshotResponse>(
-				request,
-				(p, d) => LowLevelDispatch.SnapshotDeleteDispatch<DeleteSnapshotResponse>(p)
-			);
+			DoRequest<IDeleteSnapshotRequest, DeleteSnapshotResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IDeleteSnapshotResponse> DeleteSnapshotAsync(Name repository, Name snapshotName,
-			Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			DeleteSnapshotAsync(selector.InvokeOrDefault(new DeleteSnapshotDescriptor(repository, snapshotName)), cancellationToken);
+		public Task<IDeleteSnapshotResponse> DeleteSnapshotAsync(
+			Name repository,
+			Name snapshotName,
+			Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector = null,
+			CancellationToken ct = default
+		) => DeleteSnapshotAsync(selector.InvokeOrDefault(new DeleteSnapshotDescriptor(repository, snapshotName)), ct);
 
 		/// <inheritdoc />
-		public Task<IDeleteSnapshotResponse> DeleteSnapshotAsync(IDeleteSnapshotRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IDeleteSnapshotRequest, DeleteSnapshotRequestParameters, DeleteSnapshotResponse, IDeleteSnapshotResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.SnapshotDeleteDispatchAsync<DeleteSnapshotResponse>(p, c)
-			);
+		public Task<IDeleteSnapshotResponse> DeleteSnapshotAsync(IDeleteSnapshotRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeleteSnapshotRequest, IDeleteSnapshotResponse, DeleteSnapshotResponse>(request, request.RequestParameters, ct);
 	}
 }

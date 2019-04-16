@@ -12,6 +12,9 @@ namespace Nest
 		[DataMember(Name ="term_freq")]
 		public int TermFrequency { get; internal set; }
 
+		[DataMember(Name = "score")]
+		public double Score { get; internal set; }
+
 		[DataMember(Name ="tokens")]
 		public IReadOnlyCollection<Token> Tokens { get; internal set; } =
 			EmptyReadOnly<Token>.Collection;

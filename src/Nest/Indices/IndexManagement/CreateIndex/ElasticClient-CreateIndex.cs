@@ -23,11 +23,11 @@ namespace Nest
 		Task<ICreateIndexResponse> CreateIndexAsync(
 			IndexName index,
 			Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
-		Task<ICreateIndexResponse> CreateIndexAsync(ICreateIndexRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<ICreateIndexResponse> CreateIndexAsync(ICreateIndexRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -38,26 +38,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICreateIndexResponse CreateIndex(ICreateIndexRequest request) =>
-			Dispatcher.Dispatch<ICreateIndexRequest, CreateIndexRequestParameters, CreateIndexResponse>(
-				request,
-				LowLevelDispatch.IndicesCreateDispatch<CreateIndexResponse>
-			);
+			DoRequest<ICreateIndexRequest, CreateIndexResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<ICreateIndexResponse> CreateIndexAsync(
 			IndexName index,
 			Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		) => CreateIndexAsync(selector.InvokeOrDefault(new CreateIndexDescriptor(index)));
 
 		/// <inheritdoc />
-		public Task<ICreateIndexResponse> CreateIndexAsync(ICreateIndexRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<ICreateIndexRequest, CreateIndexRequestParameters, CreateIndexResponse, ICreateIndexResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.IndicesCreateDispatchAsync<CreateIndexResponse>
-			);
+		public Task<ICreateIndexResponse> CreateIndexAsync(ICreateIndexRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<ICreateIndexRequest, ICreateIndexResponse, CreateIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

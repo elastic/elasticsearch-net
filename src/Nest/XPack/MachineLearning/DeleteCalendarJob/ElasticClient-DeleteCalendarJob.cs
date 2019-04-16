@@ -18,11 +18,11 @@ namespace Nest
 
 		/// <inheritdoc cref="DeleteCalendarJob(Nest.Id,Nest.Id,System.Func{Nest.DeleteCalendarJobDescriptor,Nest.IDeleteCalendarJobRequest})" />
 		Task<IDeleteCalendarJobResponse> DeleteCalendarJobAsync(Id calendarId, Id jobId, Func<DeleteCalendarJobDescriptor, IDeleteCalendarJobRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="DeleteCalendarJob(Nest.Id,Nest.Id,System.Func{Nest.DeleteCalendarJobDescriptor,Nest.IDeleteCalendarJobRequest})" />
-		Task<IDeleteCalendarJobResponse> DeleteCalendarJobAsync(IDeleteCalendarJobRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IDeleteCalendarJobResponse> DeleteCalendarJobAsync(IDeleteCalendarJobRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -33,23 +33,18 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeleteCalendarJobResponse DeleteCalendarJob(IDeleteCalendarJobRequest request) =>
-			Dispatcher.Dispatch<IDeleteCalendarJobRequest, DeleteCalendarJobRequestParameters, DeleteCalendarJobResponse>(
-				request,
-				(p, d) => LowLevelDispatch.XpackMlDeleteCalendarJobDispatch<DeleteCalendarJobResponse>(p)
-			);
+			DoRequest<IDeleteCalendarJobRequest, DeleteCalendarJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IDeleteCalendarJobResponse> DeleteCalendarJobAsync(Id calendarId, Id jobId, Func<DeleteCalendarJobDescriptor, IDeleteCalendarJobRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			DeleteCalendarJobAsync(selector.InvokeOrDefault(new DeleteCalendarJobDescriptor(calendarId, jobId)), cancellationToken);
+		public Task<IDeleteCalendarJobResponse> DeleteCalendarJobAsync(
+			Id calendarId,
+			Id jobId,
+			Func<DeleteCalendarJobDescriptor, IDeleteCalendarJobRequest> selector = null,
+			CancellationToken ct = default
+		) => DeleteCalendarJobAsync(selector.InvokeOrDefault(new DeleteCalendarJobDescriptor(calendarId, jobId)), ct);
 
 		/// <inheritdoc />
-		public Task<IDeleteCalendarJobResponse> DeleteCalendarJobAsync(IDeleteCalendarJobRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IDeleteCalendarJobRequest, DeleteCalendarJobRequestParameters, DeleteCalendarJobResponse, IDeleteCalendarJobResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackMlDeleteCalendarJobDispatchAsync<DeleteCalendarJobResponse>(p, c)
-			);
+		public Task<IDeleteCalendarJobResponse> DeleteCalendarJobAsync(IDeleteCalendarJobRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeleteCalendarJobRequest, IDeleteCalendarJobResponse, DeleteCalendarJobResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -64,18 +64,18 @@ namespace Nest
 		RangeRelation? IDateRangeQuery.Relation { get; set; }
 		string IDateRangeQuery.TimeZone { get; set; }
 
-		public DateRangeQueryDescriptor<T> GreaterThan(DateMath from) => Assign(a => a.GreaterThan = from);
+		public DateRangeQueryDescriptor<T> GreaterThan(DateMath from) => Assign(from, (a, v) => a.GreaterThan = v);
 
-		public DateRangeQueryDescriptor<T> GreaterThanOrEquals(DateMath from) => Assign(a => a.GreaterThanOrEqualTo = from);
+		public DateRangeQueryDescriptor<T> GreaterThanOrEquals(DateMath from) => Assign(from, (a, v) => a.GreaterThanOrEqualTo = v);
 
-		public DateRangeQueryDescriptor<T> LessThan(DateMath to) => Assign(a => a.LessThan = to);
+		public DateRangeQueryDescriptor<T> LessThan(DateMath to) => Assign(to, (a, v) => a.LessThan = v);
 
-		public DateRangeQueryDescriptor<T> LessThanOrEquals(DateMath to) => Assign(a => a.LessThanOrEqualTo = to);
+		public DateRangeQueryDescriptor<T> LessThanOrEquals(DateMath to) => Assign(to, (a, v) => a.LessThanOrEqualTo = v);
 
-		public DateRangeQueryDescriptor<T> TimeZone(string timeZone) => Assign(a => a.TimeZone = timeZone);
+		public DateRangeQueryDescriptor<T> TimeZone(string timeZone) => Assign(timeZone, (a, v) => a.TimeZone = v);
 
-		public DateRangeQueryDescriptor<T> Format(string format) => Assign(a => a.Format = format);
+		public DateRangeQueryDescriptor<T> Format(string format) => Assign(format, (a, v) => a.Format = v);
 
-		public DateRangeQueryDescriptor<T> Relation(RangeRelation? relation) => Assign(a => a.Relation = relation);
+		public DateRangeQueryDescriptor<T> Relation(RangeRelation? relation) => Assign(relation, (a, v) => a.Relation = v);
 	}
 }

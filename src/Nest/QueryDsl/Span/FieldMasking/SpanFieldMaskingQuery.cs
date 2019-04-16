@@ -36,12 +36,12 @@ namespace Nest
 		Field ISpanFieldMaskingQuery.Field { get; set; }
 		ISpanQuery ISpanFieldMaskingQuery.Query { get; set; }
 
-		public SpanFieldMaskingQueryDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public SpanFieldMaskingQueryDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		public SpanFieldMaskingQueryDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
 		public SpanFieldMaskingQueryDescriptor<T> Query(Func<SpanQueryDescriptor<T>, ISpanQuery> selector) =>
-			Assign(a => a.Query = selector?.Invoke(new SpanQueryDescriptor<T>()));
+			Assign(selector, (a, v) => a.Query = v?.Invoke(new SpanQueryDescriptor<T>()));
 	}
 }

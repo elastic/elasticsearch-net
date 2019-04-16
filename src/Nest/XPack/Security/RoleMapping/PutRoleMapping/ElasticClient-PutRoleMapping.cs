@@ -15,12 +15,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IPutRoleMappingResponse> PutRoleMappingAsync(Name role, Func<PutRoleMappingDescriptor, IPutRoleMappingRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
 		Task<IPutRoleMappingResponse> PutRoleMappingAsync(IPutRoleMappingRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -32,25 +32,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IPutRoleMappingResponse PutRoleMapping(IPutRoleMappingRequest request) =>
-			Dispatcher.Dispatch<IPutRoleMappingRequest, PutRoleMappingRequestParameters, PutRoleMappingResponse>(
-				request,
-				LowLevelDispatch.SecurityPutRoleMappingDispatch<PutRoleMappingResponse>
-			);
+			DoRequest<IPutRoleMappingRequest, PutRoleMappingResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IPutRoleMappingResponse> PutRoleMappingAsync(Name role, Func<PutRoleMappingDescriptor, IPutRoleMappingRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			PutRoleMappingAsync(selector.InvokeOrDefault(new PutRoleMappingDescriptor(role)), cancellationToken);
+		public Task<IPutRoleMappingResponse> PutRoleMappingAsync(
+			Name role,
+			Func<PutRoleMappingDescriptor, IPutRoleMappingRequest> selector = null,
+			CancellationToken cancellationToken = default
+		) => PutRoleMappingAsync(selector.InvokeOrDefault(new PutRoleMappingDescriptor(role)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IPutRoleMappingResponse> PutRoleMappingAsync(IPutRoleMappingRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IPutRoleMappingRequest, PutRoleMappingRequestParameters, PutRoleMappingResponse, IPutRoleMappingResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.SecurityPutRoleMappingDispatchAsync<PutRoleMappingResponse>
-			);
+		public Task<IPutRoleMappingResponse> PutRoleMappingAsync(IPutRoleMappingRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IPutRoleMappingRequest, IPutRoleMappingResponse, PutRoleMappingResponse>(request, request.RequestParameters, ct);
 	}
 }

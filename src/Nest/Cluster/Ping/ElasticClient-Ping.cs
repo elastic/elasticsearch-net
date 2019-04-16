@@ -17,14 +17,14 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IPingResponse> PingAsync(Func<PingDescriptor, IPingRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		IPingResponse Ping(IPingRequest request);
 
 		/// <inheritdoc />
-		Task<IPingResponse> PingAsync(IPingRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IPingResponse> PingAsync(IPingRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -35,31 +35,20 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IPingResponse Ping(IPingRequest request) =>
-			Dispatcher.Dispatch<IPingRequest, PingRequestParameters, PingResponse>(
-				SetPingTimeout(request),
-				(p, d) => LowLevelDispatch.PingDispatch<PingResponse>(p)
-			);
+			DoRequest<IPingRequest, PingResponse>(request, request.RequestParameters, r => SetPingTimeout(r));
 
 		/// <inheritdoc />
-		public Task<IPingResponse> PingAsync(Func<PingDescriptor, IPingRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			PingAsync(selector.InvokeOrDefault(new PingDescriptor()), cancellationToken);
+		public Task<IPingResponse> PingAsync(Func<PingDescriptor, IPingRequest> selector = null, CancellationToken ct = default) =>
+			PingAsync(selector.InvokeOrDefault(new PingDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IPingResponse> PingAsync(IPingRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IPingRequest, PingRequestParameters, PingResponse, IPingResponse>(
-				SetPingTimeout(request),
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.PingDispatchAsync<PingResponse>(p, c)
-			);
+		public Task<IPingResponse> PingAsync(IPingRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IPingRequest, IPingResponse, PingResponse>(request, request.RequestParameters, ct, r => SetPingTimeout(r));
 
-		private IPingRequest SetPingTimeout(IPingRequest pingRequest)
+		private void SetPingTimeout(IRequestConfiguration requestConfiguration)
 		{
-			if (!ConnectionSettings.PingTimeout.HasValue) return pingRequest;
-
-			var timeout = ConnectionSettings.PingTimeout.Value;
-			return ForceConfiguration<IPingRequest, PingRequestParameters>(pingRequest, r => r.RequestTimeout = timeout);
+			if (!ConnectionSettings.PingTimeout.HasValue) return;
+			requestConfiguration.RequestTimeout = ConnectionSettings.PingTimeout.Value;
 		}
 	}
 }

@@ -36,7 +36,7 @@ namespace Tests.XPack.MachineLearning.DeleteCalendar
 		protected override DeleteCalendarRequest Initializer => new DeleteCalendarRequest(CallIsolatedValue);
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"_xpack/ml/calendars/{CallIsolatedValue}";
+		protected override string UrlPath => $"_ml/calendars/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.DeleteCalendar(CallIsolatedValue, f),

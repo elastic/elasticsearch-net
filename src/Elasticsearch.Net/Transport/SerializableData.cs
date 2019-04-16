@@ -21,7 +21,7 @@ namespace Elasticsearch.Net
 			MemoryStream ms = null;
 			if (DisableDirectStreaming ?? settings.DisableDirectStreaming)
 			{
-				ms = new MemoryStream();
+				ms = settings.MemoryStreamFactory.Create();
 				stream = ms;
 			}
 			settings.RequestResponseSerializer.Serialize(_serializable, stream, indent);
@@ -43,7 +43,7 @@ namespace Elasticsearch.Net
 			MemoryStream ms = null;
 			if (DisableDirectStreaming ?? settings.DisableDirectStreaming)
 			{
-				ms = new MemoryStream();
+				ms = settings.MemoryStreamFactory.Create();
 				stream = ms;
 			}
 			await settings.RequestResponseSerializer.SerializeAsync(_serializable, stream, indent, cancellationToken).ConfigureAwait(false);

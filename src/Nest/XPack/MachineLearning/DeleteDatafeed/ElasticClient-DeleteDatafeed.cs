@@ -17,12 +17,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IDeleteDatafeedResponse> DeleteDatafeedAsync(Id datafeedId, Func<DeleteDatafeedDescriptor, IDeleteDatafeedRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<IDeleteDatafeedResponse> DeleteDatafeedAsync(IDeleteDatafeedRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -34,25 +34,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeleteDatafeedResponse DeleteDatafeed(IDeleteDatafeedRequest request) =>
-			Dispatcher.Dispatch<IDeleteDatafeedRequest, DeleteDatafeedRequestParameters, DeleteDatafeedResponse>(
-				request,
-				(p, d) => LowLevelDispatch.MlDeleteDatafeedDispatch<DeleteDatafeedResponse>(p)
-			);
+			DoRequest<IDeleteDatafeedRequest, DeleteDatafeedResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IDeleteDatafeedResponse> DeleteDatafeedAsync(Id datafeedId,
-			Func<DeleteDatafeedDescriptor, IDeleteDatafeedRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			DeleteDatafeedAsync(selector.InvokeOrDefault(new DeleteDatafeedDescriptor(datafeedId)), cancellationToken);
+		public Task<IDeleteDatafeedResponse> DeleteDatafeedAsync(
+			Id datafeedId,
+			Func<DeleteDatafeedDescriptor, IDeleteDatafeedRequest> selector = null,
+			CancellationToken ct = default
+		) => DeleteDatafeedAsync(selector.InvokeOrDefault(new DeleteDatafeedDescriptor(datafeedId)), ct);
 
 		/// <inheritdoc />
-		public Task<IDeleteDatafeedResponse> DeleteDatafeedAsync(IDeleteDatafeedRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IDeleteDatafeedRequest, DeleteDatafeedRequestParameters, DeleteDatafeedResponse, IDeleteDatafeedResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.MlDeleteDatafeedDispatchAsync<DeleteDatafeedResponse>(p, c)
-			);
+		public Task<IDeleteDatafeedResponse> DeleteDatafeedAsync(IDeleteDatafeedRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeleteDatafeedRequest, IDeleteDatafeedResponse, DeleteDatafeedResponse>(request, request.RequestParameters, ct);
 	}
 }

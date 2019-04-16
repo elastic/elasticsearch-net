@@ -82,33 +82,33 @@ namespace Nest
 		/// <summary>
 		/// The required terms to match
 		/// </summary>
-		public TermsSetQueryDescriptor<T> Terms<TValue>(IEnumerable<TValue> terms) => Assign(a => a.Terms = terms?.Cast<object>());
+		public TermsSetQueryDescriptor<T> Terms<TValue>(IEnumerable<TValue> terms) => Assign(terms?.Cast<object>(), (a, v) => a.Terms = v);
 
 		/// <summary>
 		/// The required terms to match
 		/// </summary>
-		public TermsSetQueryDescriptor<T> Terms<TValue>(params TValue[] terms) => Assign(a =>
+		public TermsSetQueryDescriptor<T> Terms<TValue>(params TValue[] terms) => Assign(terms, (a, v) =>
 		{
-			if (terms?.Length == 1 && typeof(IEnumerable).IsAssignableFrom(typeof(TValue)) && typeof(TValue) != typeof(string))
-				a.Terms = (terms.First() as IEnumerable)?.Cast<object>();
-			else a.Terms = terms?.Cast<object>();
+			if (v?.Length == 1 && typeof(IEnumerable).IsAssignableFrom(typeof(TValue)) && typeof(TValue) != typeof(string))
+				a.Terms = (v.First() as IEnumerable)?.Cast<object>();
+			else a.Terms = v?.Cast<object>();
 		});
 
 		/// <summary>
 		/// A field containing the number of required terms that must match
 		/// </summary>
-		public TermsSetQueryDescriptor<T> MinimumShouldMatchField(Field field) => Assign(a => a.MinimumShouldMatchField = field);
+		public TermsSetQueryDescriptor<T> MinimumShouldMatchField(Field field) => Assign(field, (a, v) => a.MinimumShouldMatchField = v);
 
 		/// <summary>
 		/// A field containing the number of required terms that must match
 		/// </summary>
 		public TermsSetQueryDescriptor<T> MinimumShouldMatchField(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.MinimumShouldMatchField = objectPath);
+			Assign(objectPath, (a, v) => a.MinimumShouldMatchField = v);
 
 		/// <summary>
 		/// A script to control how many terms are required to match
 		/// </summary>
 		public TermsSetQueryDescriptor<T> MinimumShouldMatchScript(Func<ScriptDescriptor, IScript> scriptSelector) =>
-			Assign(a => a.MinimumShouldMatchScript = scriptSelector?.Invoke(new ScriptDescriptor()));
+			Assign(scriptSelector, (a, v) => a.MinimumShouldMatchScript = v?.Invoke(new ScriptDescriptor()));
 	}
 }

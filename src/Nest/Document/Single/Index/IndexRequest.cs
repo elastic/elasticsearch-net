@@ -19,10 +19,8 @@ namespace Nest
 		void IProxyRequest.WriteJson(IElasticsearchSerializer sourceSerializer, Stream stream, SerializationFormatting formatting) =>
 			sourceSerializer.Serialize(Document, stream, formatting);
 
-		protected void DefaultRouting() => Self.RequestParameters.SetQueryString("routing", new Routing(() => Document));
-
 		internal static HttpMethod GetHttpMethod(IIndexRequest<TDocument> request) =>
-			request.Id?.StringOrLongValue != null || request.RouteValues.Id != null ? HttpMethod.PUT : HttpMethod.POST;
+			request.Id?.StringOrLongValue != null || (request.RouteValues.Resolved?.ContainsKey("id") ?? false) ? HttpMethod.PUT : HttpMethod.POST;
 
 		partial void DocumentFromPath(TDocument document) => Document = document;
 	}
@@ -35,6 +33,6 @@ namespace Nest
 		void IProxyRequest.WriteJson(IElasticsearchSerializer sourceSerializer, Stream stream, SerializationFormatting formatting) =>
 			sourceSerializer.Serialize(Self.Document, stream, formatting);
 
-		partial void DocumentFromPath(TDocument document) => Assign(a => a.Document = document);
+		partial void DocumentFromPath(TDocument document) => Assign(document, (a, v) => a.Document = v);
 	}
 }

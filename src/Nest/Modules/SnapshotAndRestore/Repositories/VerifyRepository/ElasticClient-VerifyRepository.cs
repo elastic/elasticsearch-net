@@ -16,12 +16,12 @@ namespace Nest
 		/// <inheritdoc />
 		Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(Name repository,
 			Func<VerifyRepositoryDescriptor, IVerifyRepositoryRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
 		Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(IVerifyRepositoryRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -34,27 +34,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IVerifyRepositoryResponse VerifyRepository(IVerifyRepositoryRequest request) =>
-			Dispatcher.Dispatch<IVerifyRepositoryRequest, VerifyRepositoryRequestParameters, VerifyRepositoryResponse>(
-				request,
-				(p, d) => LowLevelDispatch.SnapshotVerifyRepositoryDispatch<VerifyRepositoryResponse>(p)
-			);
+			DoRequest<IVerifyRepositoryRequest, VerifyRepositoryResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(Name repository,
+		public Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(
+			Name repository,
 			Func<VerifyRepositoryDescriptor, IVerifyRepositoryRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			VerifyRepositoryAsync(selector.InvokeOrDefault(new VerifyRepositoryDescriptor(repository)), cancellationToken);
+			CancellationToken cancellationToken = default
+		) => VerifyRepositoryAsync(selector.InvokeOrDefault(new VerifyRepositoryDescriptor(repository)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(IVerifyRepositoryRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<IVerifyRepositoryRequest, VerifyRepositoryRequestParameters, VerifyRepositoryResponse, IVerifyRepositoryResponse>(
-					request,
-					cancellationToken,
-					(p, d, c) => LowLevelDispatch.SnapshotVerifyRepositoryDispatchAsync<VerifyRepositoryResponse>(p, c)
-				);
+		public Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(IVerifyRepositoryRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IVerifyRepositoryRequest, IVerifyRepositoryResponse, VerifyRepositoryResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -18,11 +18,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<ICloseJobResponse> CloseJobAsync(Id jobId, Func<CloseJobDescriptor, ICloseJobRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<ICloseJobResponse> CloseJobAsync(ICloseJobRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<ICloseJobResponse> CloseJobAsync(ICloseJobRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -33,23 +33,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICloseJobResponse CloseJob(ICloseJobRequest request) =>
-			Dispatcher.Dispatch<ICloseJobRequest, CloseJobRequestParameters, CloseJobResponse>(
-				request,
-				(p, d) => LowLevelDispatch.MlCloseJobDispatch<CloseJobResponse>(p, d)
-			);
+			DoRequest<ICloseJobRequest, CloseJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<ICloseJobResponse> CloseJobAsync(Id jobId, Func<CloseJobDescriptor, ICloseJobRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			CloseJobAsync(selector.InvokeOrDefault(new CloseJobDescriptor(jobId)), cancellationToken);
+		public Task<ICloseJobResponse> CloseJobAsync(
+			Id jobId,
+			Func<CloseJobDescriptor, ICloseJobRequest> selector = null,
+			CancellationToken ct = default
+		) => CloseJobAsync(selector.InvokeOrDefault(new CloseJobDescriptor(jobId)), ct);
 
 		/// <inheritdoc />
-		public Task<ICloseJobResponse> CloseJobAsync(ICloseJobRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<ICloseJobRequest, CloseJobRequestParameters, CloseJobResponse, ICloseJobResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.MlCloseJobDispatchAsync<CloseJobResponse>(p, d, c)
-			);
+		public Task<ICloseJobResponse> CloseJobAsync(ICloseJobRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<ICloseJobRequest, ICloseJobResponse, CloseJobResponse>(request, request.RequestParameters, ct);
 	}
 }

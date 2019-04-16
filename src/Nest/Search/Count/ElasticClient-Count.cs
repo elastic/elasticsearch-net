@@ -27,12 +27,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<ICountResponse> CountAsync<T>(Func<CountDescriptor<T>, ICountRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		)
 			where T : class;
 
 		/// <inheritdoc />
-		Task<ICountResponse> CountAsync<T>(ICountRequest request, CancellationToken cancellationToken = default(CancellationToken))
+		Task<ICountResponse> CountAsync<T>(ICountRequest request, CancellationToken ct = default)
 			where T : class;
 	}
 
@@ -46,25 +46,19 @@ namespace Nest
 		/// <inheritdoc />
 		public ICountResponse Count<T>(ICountRequest request)
 			where T : class =>
-			Dispatcher.Dispatch<ICountRequest, CountRequestParameters, CountResponse>(
-				request,
-				LowLevelDispatch.CountDispatch<CountResponse>
-			);
+			DoRequest<ICountRequest, CountResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<ICountResponse> CountAsync<T>(Func<CountDescriptor<T>, ICountRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+		public Task<ICountResponse> CountAsync<T>(
+			Func<CountDescriptor<T>, ICountRequest> selector = null,
+			CancellationToken ct = default
 		)
 			where T : class =>
-			CountAsync<T>(selector.InvokeOrDefault(new CountDescriptor<T>()), cancellationToken);
+			CountAsync<T>(selector.InvokeOrDefault(new CountDescriptor<T>()), ct);
 
 		/// <inheritdoc />
-		public Task<ICountResponse> CountAsync<T>(ICountRequest request, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ICountResponse> CountAsync<T>(ICountRequest request, CancellationToken ct = default)
 			where T : class =>
-			Dispatcher.DispatchAsync<ICountRequest, CountRequestParameters, CountResponse, ICountResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.CountDispatchAsync<CountResponse>
-			);
+			DoRequestAsync<ICountRequest, ICountResponse, CountResponse>(request, request.RequestParameters, ct);
 	}
 }

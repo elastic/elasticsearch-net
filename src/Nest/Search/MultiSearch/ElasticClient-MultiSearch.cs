@@ -24,11 +24,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IMultiSearchResponse> MultiSearchAsync(Func<MultiSearchDescriptor, IMultiSearchRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -38,43 +38,32 @@ namespace Nest
 			MultiSearch(selector?.Invoke(new MultiSearchDescriptor()));
 
 		/// <inheritdoc />
-		public IMultiSearchResponse MultiSearch(IMultiSearchRequest request) =>
-			Dispatcher.Dispatch<IMultiSearchRequest, MultiSearchRequestParameters, MultiSearchResponse>(
-				request,
-				(p, d) =>
-				{
-					var formatter = CreateMultiSearchResponseFormatter(p);
-					var serializer = ConnectionSettings.CreateStateful(formatter);
-					var creator = new MultiSearchCreator((r, s) => serializer.Deserialize<MultiSearchResponse>(s));
-					request.RequestParameters.DeserializationOverride = creator;
-					return LowLevelDispatch.MsearchDispatch<MultiSearchResponse>(p, new SerializableData<IMultiSearchRequest>(p));
-				}
-			);
+		public IMultiSearchResponse MultiSearch(IMultiSearchRequest request)
+		{
+			CreateMultiSearchConverter(request);
+			return DoRequest<IMultiSearchRequest, MultiSearchResponse>(request, request.RequestParameters);
+		}
 
 		/// <inheritdoc />
-		public Task<IMultiSearchResponse> MultiSearchAsync(Func<MultiSearchDescriptor, IMultiSearchRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			MultiSearchAsync(selector?.Invoke(new MultiSearchDescriptor()), cancellationToken);
+		public Task<IMultiSearchResponse> MultiSearchAsync(
+			Func<MultiSearchDescriptor, IMultiSearchRequest> selector,
+			CancellationToken ct = default
+		) => MultiSearchAsync(selector?.Invoke(new MultiSearchDescriptor()), ct);
 
 
 		/// <inheritdoc />
-		public Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) => Dispatcher.DispatchAsync<IMultiSearchRequest, MultiSearchRequestParameters, MultiSearchResponse, IMultiSearchResponse>(
-			request,
-			cancellationToken,
-			(p, d, c) =>
-			{
-				var formatter = CreateMultiSearchResponseFormatter(p);
-				var serializer = ConnectionSettings.CreateStateful(formatter);
-				var creator = new MultiSearchCreator((r, s) => serializer.Deserialize<MultiSearchResponse>(s));
-				request.RequestParameters.DeserializationOverride = creator;
-				return LowLevelDispatch.MsearchDispatchAsync<MultiSearchResponse>(p, new SerializableData<IMultiSearchRequest>(p), c);
-			}
-		);
+		public Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest request, CancellationToken ct = default)
+		{
+			CreateMultiSearchConverter(request);
+			return DoRequestAsync<IMultiSearchRequest, IMultiSearchResponse, MultiSearchResponse>(request, request.RequestParameters, ct);
+		}
 
-		private MultiSearchResponseFormatter CreateMultiSearchResponseFormatter(IMultiSearchRequest request) =>
-			new MultiSearchResponseFormatter(request);
+		private void CreateMultiSearchConverter(IMultiSearchRequest request)
+		{
+			var formatter = new MultiSearchResponseFormatter(request);
+			var serializer = ConnectionSettings.CreateStateful(formatter);
+			var creator = new MultiSearchCreator((r, s) => serializer.Deserialize<MultiSearchResponse>(s));
+			request.RequestParameters.DeserializationOverride = creator;
+		}
 	}
 }

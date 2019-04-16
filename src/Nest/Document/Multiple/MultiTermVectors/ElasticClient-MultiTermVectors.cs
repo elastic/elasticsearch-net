@@ -20,12 +20,12 @@ namespace Nest
 
 		/// <inheritdoc cref="MultiTermVectors(System.Func{Nest.MultiTermVectorsDescriptor,Nest.IMultiTermVectorsRequest})" />
 		Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="MultiTermVectors(System.Func{Nest.MultiTermVectorsDescriptor,Nest.IMultiTermVectorsRequest})" />
 		Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -37,26 +37,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IMultiTermVectorsResponse MultiTermVectors(IMultiTermVectorsRequest request) =>
-			Dispatcher.Dispatch<IMultiTermVectorsRequest, MultiTermVectorsRequestParameters, MultiTermVectorsResponse>(
-				request,
-				LowLevelDispatch.MtermvectorsDispatch<MultiTermVectorsResponse>
-			);
+			DoRequest<IMultiTermVectorsRequest, MultiTermVectorsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			MultiTermVectorsAsync(selector.InvokeOrDefault(new MultiTermVectorsDescriptor()), cancellationToken);
+		public Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(
+			Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector = null,
+			CancellationToken ct = default
+		) => MultiTermVectorsAsync(selector.InvokeOrDefault(new MultiTermVectorsDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<IMultiTermVectorsRequest, MultiTermVectorsRequestParameters, MultiTermVectorsResponse, IMultiTermVectorsResponse>(
-					request,
-					cancellationToken,
-					LowLevelDispatch.MtermvectorsDispatchAsync<MultiTermVectorsResponse>
-				);
+		public Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IMultiTermVectorsRequest, IMultiTermVectorsResponse, MultiTermVectorsResponse>(request, request.RequestParameters, ct);
 	}
 }

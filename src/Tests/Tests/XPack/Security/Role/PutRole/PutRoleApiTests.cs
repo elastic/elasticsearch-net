@@ -156,7 +156,7 @@ namespace Tests.XPack.Security.Role.PutRole
 
 		protected override Func<PutRoleDescriptor, IPutRoleRequest> Fluent => f => f
 			.Applications(a => a
-				.Add<Project>(ap => ap
+				.Add(ap => ap
 					.Application("myapp")
 					.Privileges("admin", "read")
 					.Resources("*")

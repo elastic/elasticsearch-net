@@ -23,13 +23,13 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IUpdateByQueryResponse> UpdateByQueryAsync<T>(Func<UpdateByQueryDescriptor<T>, IUpdateByQueryRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		)
 			where T : class;
 
 		/// <inheritdoc />
 		Task<IUpdateByQueryResponse> UpdateByQueryAsync(IUpdateByQueryRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -41,25 +41,19 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IUpdateByQueryResponse UpdateByQuery(IUpdateByQueryRequest request) =>
-			Dispatcher.Dispatch<IUpdateByQueryRequest, UpdateByQueryRequestParameters, UpdateByQueryResponse>(
-				ForceConfiguration<IUpdateByQueryRequest, UpdateByQueryRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
-				LowLevelDispatch.UpdateByQueryDispatch<UpdateByQueryResponse>
-			);
+			DoRequest<IUpdateByQueryRequest, UpdateByQueryResponse>(request, request.RequestParameters, r => AcceptAllStatusCodesHandler(r));
 
 		/// <inheritdoc />
-		public Task<IUpdateByQueryResponse> UpdateByQueryAsync<T>(Func<UpdateByQueryDescriptor<T>, IUpdateByQueryRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) where T : class =>
-			UpdateByQueryAsync(selector?.Invoke(new UpdateByQueryDescriptor<T>(typeof(T))), cancellationToken);
+		public Task<IUpdateByQueryResponse> UpdateByQueryAsync<T>(
+			Func<UpdateByQueryDescriptor<T>, IUpdateByQueryRequest> selector,
+			CancellationToken ct = default
+		)
+			where T : class =>
+			UpdateByQueryAsync(selector?.Invoke(new UpdateByQueryDescriptor<T>(typeof(T))), ct);
 
 		/// <inheritdoc />
-		public Task<IUpdateByQueryResponse> UpdateByQueryAsync(IUpdateByQueryRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IUpdateByQueryRequest, UpdateByQueryRequestParameters, UpdateByQueryResponse, IUpdateByQueryResponse>(
-				ForceConfiguration<IUpdateByQueryRequest, UpdateByQueryRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
-				cancellationToken,
-				LowLevelDispatch.UpdateByQueryDispatchAsync<UpdateByQueryResponse>
-			);
+		public Task<IUpdateByQueryResponse> UpdateByQueryAsync(IUpdateByQueryRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IUpdateByQueryRequest, IUpdateByQueryResponse, UpdateByQueryResponse>
+				(request, request.RequestParameters, ct, r => AcceptAllStatusCodesHandler(r));
 	}
 }

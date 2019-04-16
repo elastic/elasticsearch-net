@@ -53,21 +53,15 @@ namespace Tests.Search.Count
 				;
 
 			await GET("/_count")
-					.Fluent(c => c.Count<Project>(s => s.AllIndices()))
 					.Request(c => c.Count<Project>(new CountRequest()))
-					.Request(c => c.Count<Project>(new CountRequest<Project>(Nest.Indices.All)))
-					.FluentAsync(c => c.CountAsync<Project>(s => s.AllIndices()))
-					.RequestAsync(c => c.CountAsync<Project>(new CountRequest<Project>(Nest.Indices.All)))
 					.RequestAsync(c => c.CountAsync<Project>(new CountRequest()))
 				;
 
-			await POST("/_count")
+			await POST("/_all/_count")
 					.Fluent(c => c.Count<Project>(s => s.AllIndices().Query(q => q.MatchAll())))
-					.Request(c => c.Count<Project>(new CountRequest() { Query = new MatchAllQuery() }))
 					.Request(c => c.Count<Project>(new CountRequest<Project>(Nest.Indices.All) { Query = new MatchAllQuery() }))
 					.FluentAsync(c => c.CountAsync<Project>(s => s.AllIndices().Query(q => q.MatchAll())))
 					.RequestAsync(c => c.CountAsync<Project>(new CountRequest<Project>(Nest.Indices.All) { Query = new MatchAllQuery() }))
-					.RequestAsync(c => c.CountAsync<Project>(new CountRequest() { Query = new MatchAllQuery() }))
 				;
 		}
 	}

@@ -17,12 +17,17 @@ namespace Tests.Indices.IndexSettings.UpdateIndicesSettings
 					.Fluent(c => c.UpdateIndexSettings(indices, s => s))
 					.Request(c => c.UpdateIndexSettings(new UpdateIndexSettingsRequest(index)))
 					.FluentAsync(c => c.UpdateIndexSettingsAsync(indices, s => s))
-					.RequestAsync(c => c.UpdateIndexSettingsAsync(new UpdateIndexSettingsRequest(index)))
-				;
-			await PUT($"/_settings")
+					.RequestAsync(c => c.UpdateIndexSettingsAsync(new UpdateIndexSettingsRequest(index)));
+			
+			await PUT($"/_all/_settings")
 					.Fluent(c => c.UpdateIndexSettings(AllIndices, s => s))
-					.Request(c => c.UpdateIndexSettings(new UpdateIndexSettingsRequest()))
+					.Request(c => c.UpdateIndexSettings(new UpdateIndexSettingsRequest(All)))
 					.FluentAsync(c => c.UpdateIndexSettingsAsync(AllIndices, s => s))
+					.RequestAsync(c => c.UpdateIndexSettingsAsync(new UpdateIndexSettingsRequest(All)))
+				;
+			
+			await PUT($"/_settings")
+					.Request(c => c.UpdateIndexSettings(new UpdateIndexSettingsRequest()))
 					.RequestAsync(c => c.UpdateIndexSettingsAsync(new UpdateIndexSettingsRequest()))
 				;
 		}

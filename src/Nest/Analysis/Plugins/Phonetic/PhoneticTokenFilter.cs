@@ -103,26 +103,26 @@ namespace Nest
 		PhoneticRuleType? IPhoneticTokenFilter.RuleType { get; set; }
 
 		/// <inheritdoc cref="IPhoneticTokenFilter.Replace" />
-		public PhoneticTokenFilterDescriptor Replace(bool? replace = true) => Assign(a => a.Replace = replace);
+		public PhoneticTokenFilterDescriptor Replace(bool? replace = true) => Assign(replace, (a, v) => a.Replace = v);
 
 		/// <inheritdoc cref="IPhoneticTokenFilter.Encoder" />
-		public PhoneticTokenFilterDescriptor Encoder(PhoneticEncoder? encoder) => Assign(a => a.Encoder = encoder);
+		public PhoneticTokenFilterDescriptor Encoder(PhoneticEncoder? encoder) => Assign(encoder, (a, v) => a.Encoder = v);
 
 		/// <inheritdoc cref="IPhoneticTokenFilter.MaxCodeLength" />
-		public PhoneticTokenFilterDescriptor MaxCodeLength(int? maxCodeLength) => Assign(a => a.MaxCodeLength = maxCodeLength);
+		public PhoneticTokenFilterDescriptor MaxCodeLength(int? maxCodeLength) => Assign(maxCodeLength, (a, v) => a.MaxCodeLength = v);
 
 		/// <inheritdoc cref="IPhoneticTokenFilter.RuleType" />
-		public PhoneticTokenFilterDescriptor RuleType(PhoneticRuleType? ruleType) => Assign(a => a.RuleType = ruleType);
+		public PhoneticTokenFilterDescriptor RuleType(PhoneticRuleType? ruleType) => Assign(ruleType, (a, v) => a.RuleType = v);
 
 		/// <inheritdoc cref="IPhoneticTokenFilter.NameType" />
-		public PhoneticTokenFilterDescriptor NameType(PhoneticNameType? nameType) => Assign(a => a.NameType = nameType);
+		public PhoneticTokenFilterDescriptor NameType(PhoneticNameType? nameType) => Assign(nameType, (a, v) => a.NameType = v);
 
 		/// <inheritdoc cref="IPhoneticTokenFilter.LanguageSet" />
 		public PhoneticTokenFilterDescriptor LanguageSet(params PhoneticLanguage[] languageSet) =>
-			Assign(a => a.LanguageSet = languageSet);
+			Assign(languageSet, (a, v) => a.LanguageSet = v);
 
 		/// <inheritdoc cref="IPhoneticTokenFilter.LanguageSet" />
 		public PhoneticTokenFilterDescriptor LanguageSet(IEnumerable<PhoneticLanguage> languageSet) =>
-			Assign(a => a.LanguageSet = languageSet);
+			Assign(languageSet, (a, v) => a.LanguageSet = v);
 	}
 }

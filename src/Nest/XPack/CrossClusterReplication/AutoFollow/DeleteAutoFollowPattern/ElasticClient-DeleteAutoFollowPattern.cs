@@ -15,11 +15,11 @@ namespace Nest
 
 		/// <inheritdoc cref="DeleteAutoFollowPattern(Name,System.Func{Nest.DeleteAutoFollowPatternDescriptor,Nest.IDeleteAutoFollowPatternRequest})" />
 		Task<IDeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(Name name, Func<DeleteAutoFollowPatternDescriptor, IDeleteAutoFollowPatternRequest> selector = null,
-			CancellationToken cancellationToken = default
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="DeleteAutoFollowPattern(Name,System.Func{Nest.DeleteAutoFollowPatternDescriptor,Nest.IDeleteAutoFollowPatternRequest})" />
-		Task<IDeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(IDeleteAutoFollowPatternRequest request, CancellationToken cancellationToken = default);
+		Task<IDeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(IDeleteAutoFollowPatternRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -30,23 +30,17 @@ namespace Nest
 
 		/// <inheritdoc cref="DeleteAutoFollowPattern(Name,System.Func{Nest.DeleteAutoFollowPatternDescriptor,Nest.IDeleteAutoFollowPatternRequest})" />
 		public IDeleteAutoFollowPatternResponse DeleteAutoFollowPattern(IDeleteAutoFollowPatternRequest request) =>
-			Dispatcher.Dispatch<IDeleteAutoFollowPatternRequest, DeleteAutoFollowPatternRequestParameters, DeleteAutoFollowPatternResponse>(
-				request,
-				(p, d) => LowLevelDispatch.CcrDeleteAutoFollowPatternDispatch<DeleteAutoFollowPatternResponse>(p)
-			);
+			DoRequest<IDeleteAutoFollowPatternRequest, DeleteAutoFollowPatternResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="DeleteAutoFollowPattern(Name,System.Func{Nest.DeleteAutoFollowPatternDescriptor,Nest.IDeleteAutoFollowPatternRequest})" />
-		public Task<IDeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(Name name, Func<DeleteAutoFollowPatternDescriptor, IDeleteAutoFollowPatternRequest> selector = null,
-			CancellationToken cancellationToken = default
-		) =>
-			DeleteAutoFollowPatternAsync(selector.InvokeOrDefault(new DeleteAutoFollowPatternDescriptor(name)), cancellationToken);
+		public Task<IDeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(
+			Name name,
+			Func<DeleteAutoFollowPatternDescriptor, IDeleteAutoFollowPatternRequest> selector = null,
+			CancellationToken ct = default
+		) => DeleteAutoFollowPatternAsync(selector.InvokeOrDefault(new DeleteAutoFollowPatternDescriptor(name)), ct);
 
 		/// <inheritdoc cref="DeleteAutoFollowPattern(Name,System.Func{Nest.DeleteAutoFollowPatternDescriptor,Nest.IDeleteAutoFollowPatternRequest})" />
-		public Task<IDeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(IDeleteAutoFollowPatternRequest request, CancellationToken cancellationToken = default) =>
-			Dispatcher.DispatchAsync<IDeleteAutoFollowPatternRequest, DeleteAutoFollowPatternRequestParameters, DeleteAutoFollowPatternResponse, IDeleteAutoFollowPatternResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.CcrDeleteAutoFollowPatternDispatchAsync<DeleteAutoFollowPatternResponse>(p, c)
-			);
+		public Task<IDeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(IDeleteAutoFollowPatternRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeleteAutoFollowPatternRequest, IDeleteAutoFollowPatternResponse, DeleteAutoFollowPatternResponse>(request, request.RequestParameters, ct);
 	}
 }

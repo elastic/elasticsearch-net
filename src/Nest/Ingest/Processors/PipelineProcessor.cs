@@ -34,6 +34,6 @@ namespace Nest
 		string IPipelineProcessor.ProcessorName { get; set; }
 
 		/// <inheritdoc cref="IPipelineProcessor.ProcessorName"/>
-		public PipelineProcessorDescriptor ProcessorName(string processorName) => Assign(a => a.ProcessorName = processorName);
+		public PipelineProcessorDescriptor ProcessorName(string processorName) => Assign(processorName, (a, v) => a.ProcessorName = v);
 	}
 }

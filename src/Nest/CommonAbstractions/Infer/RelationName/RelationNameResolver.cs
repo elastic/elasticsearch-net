@@ -37,7 +37,7 @@ namespace Nest
 			if (att != null && !att.RelationName.IsNullOrEmpty())
 				typeName = att.RelationName;
 			else
-				typeName = _connectionSettings.DefaultTypeNameInferrer(type);
+				typeName = type.Name.ToLowerInvariant();
 
 			RelationNames.TryAdd(type, typeName);
 			return typeName;

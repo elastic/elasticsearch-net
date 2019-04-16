@@ -29,12 +29,14 @@ namespace Tests.Search.SearchTemplate
 				.RequestAsync(c => c.SearchTemplateAsync<Project>(new SearchTemplateRequest<Project>(typeof(Project))));
 
 			await UrlTester.POST("/_search/template")
-					.Fluent(c => c.SearchTemplate<Project>(s => s.AllIndices()))
 					.Request(c => c.SearchTemplate<Project>(new SearchTemplateRequest()))
+					.RequestAsync(c => c.SearchTemplateAsync<Project>(new SearchTemplateRequest()))
+				;
+			await UrlTester.POST("/_all/_search/template")
+					.Fluent(c => c.SearchTemplate<Project>(s => s.AllIndices()))
 					.Request(c => c.SearchTemplate<Project>(new SearchTemplateRequest<Project>(Nest.Indices.All)))
 					.FluentAsync(c => c.SearchTemplateAsync<Project>(s => s.AllIndices()))
 					.RequestAsync(c => c.SearchTemplateAsync<Project>(new SearchTemplateRequest<Project>(Nest.Indices.All)))
-					.RequestAsync(c => c.SearchTemplateAsync<Project>(new SearchTemplateRequest()))
 				;
 		}
 	}

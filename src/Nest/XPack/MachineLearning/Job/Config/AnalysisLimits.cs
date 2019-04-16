@@ -47,11 +47,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		public AnalysisLimitsDescriptor CategorizationExamplesLimit(long? categorizationExamplesLimit) =>
-			Assign(a => a.CategorizationExamplesLimit = categorizationExamplesLimit);
+			Assign(categorizationExamplesLimit, (a, v) => a.CategorizationExamplesLimit = v);
 
 		/// <inheritdoc />
 		public AnalysisLimitsDescriptor ModelMemoryLimit(string modelMemoryLimit) =>
-			Assign(a => a.ModelMemoryLimit = modelMemoryLimit);
+			Assign(modelMemoryLimit, (a, v) => a.ModelMemoryLimit = v);
 	}
 
 	/// <summary>
@@ -83,6 +83,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public AnalysisMemoryLimitDescriptor ModelMemoryLimit(string modelMemoryLimit) =>
-			Assign(a => a.ModelMemoryLimit = modelMemoryLimit);
+			Assign(modelMemoryLimit, (a, v) => a.ModelMemoryLimit = v);
 	}
 }

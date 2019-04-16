@@ -1,0 +1,98 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.5
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/Aggregations/Bucket/Parent/ParentAggregationUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[parent-aggregation-usage]]
+=== Parent Aggregation Usage
+
+A special single bucket aggregation that selects parent documents that have the specified type, as defined in a `join` field.
+
+Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-parent-aggregation.html[Parent Aggregation].
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+a => a
+.Parent<Project>("name_of_parent_agg", parent => parent <1>
+    .Aggregations(parentAggs => parentAggs
+        .Average("average_commits", avg => avg.Field(p => p.NumberOfCommits))
+        .Max("max_commits", avg => avg.Field(p => p.NumberOfCommits))
+        .Min("min_commits", avg => avg.Field(p => p.NumberOfCommits))
+    )
+)
+----
+<1> sub-aggregations are on the type determined from the generic type parameter. In this example, the search is against `CommitActivity` type and `Project` is a parent of `CommitActivity`
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new ParentAggregation("name_of_parent_agg", typeof(CommitActivity)) <1>
+{
+    Aggregations =
+        new AverageAggregation("average_commits", Field<Project>(f => f.NumberOfCommits)) <2>
+        && new MaxAggregation("max_commits", Field<Project>(f => f.NumberOfCommits))
+        && new MinAggregation("min_commits", Field<Project>(f => f.NumberOfCommits))
+}
+----
+<1> `join` field is determined from the _child_ type. In this example, it is `CommitActivity`
+
+<2> sub-aggregations are on the type determined from the `join` field. In this example, a `Project` is a parent of `CommitActivity`
+
+[source,javascript]
+.Example json output
+----
+{
+  "size": 0,
+  "aggs": {
+    "name_of_parent_agg": {
+      "parent": {
+        "type": "commits"
+      },
+      "aggs": {
+        "average_commits": {
+          "avg": {
+            "field": "numberOfCommits"
+          }
+        },
+        "max_commits": {
+          "max": {
+            "field": "numberOfCommits"
+          }
+        },
+        "min_commits": {
+          "min": {
+            "field": "numberOfCommits"
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+==== Handling Responses
+
+[source,csharp]
+----
+response.ShouldBeValid();
+
+var parentAgg = response.Aggregations.Parent("name_of_parent_agg");
+parentAgg.Should().NotBeNull();
+parentAgg.DocCount.Should().BeGreaterThan(0);
+parentAgg.Min("average_commits").Should().NotBeNull();
+parentAgg.Min("min_commits").Should().NotBeNull();
+parentAgg.Max("max_commits").Should().NotBeNull();
+----
+

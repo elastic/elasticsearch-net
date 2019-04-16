@@ -78,42 +78,42 @@ namespace Nest
 		IShardRebalancingSettings IClusterModuleSettings.ShardRebalancing { get; set; }
 
 		/// <inheritdoc />
-		public ClusterModuleSettingsDescriptor ShardRebalancing(bool? readOnly = true) => Assign(a => a.ReadOnly = readOnly);
+		public ClusterModuleSettingsDescriptor ShardRebalancing(bool? readOnly = true) => Assign(readOnly, (a, v) => a.ReadOnly = v);
 
 		/// <inheritdoc />
-		public ClusterModuleSettingsDescriptor Logger(IDictionary<string, LogLevel> logger) => Assign(a => a.Logger = logger);
+		public ClusterModuleSettingsDescriptor Logger(IDictionary<string, LogLevel> logger) => Assign(logger, (a, v) => a.Logger = v);
 
 		/// <inheritdoc />
 		public ClusterModuleSettingsDescriptor Logger(Func<FluentDictionary<string, LogLevel>, FluentDictionary<string, LogLevel>> selector) =>
-			Assign(a => a.Logger = selector?.Invoke(new FluentDictionary<string, LogLevel>()));
+			Assign(selector, (a, v) => a.Logger = v?.Invoke(new FluentDictionary<string, LogLevel>()));
 
 		/// <inheritdoc />
 		public ClusterModuleSettingsDescriptor AllocationAwareness(Func<AllocationAwarenessSettings, IAllocationAwarenessSettings> selector) =>
-			Assign(a => a.AllocationAwareness = selector?.Invoke(new AllocationAwarenessSettings()));
+			Assign(selector, (a, v) => a.AllocationAwareness = v?.Invoke(new AllocationAwarenessSettings()));
 
 		/// <inheritdoc />
 		public ClusterModuleSettingsDescriptor
 			AllocationFiltering(Func<AllocationFilteringSettingsDescriptor, IAllocationFilteringSettings> selector) =>
-			Assign(a => a.AllocationFiltering = selector?.Invoke(new AllocationFilteringSettingsDescriptor()));
+			Assign(selector, (a, v) => a.AllocationFiltering = v?.Invoke(new AllocationFilteringSettingsDescriptor()));
 
 		/// <inheritdoc />
 		public ClusterModuleSettingsDescriptor DiskBasedShardAllocation(
 			Func<DiskBasedShardAllocationSettingsDescriptor, IDiskBasedShardAllocationSettings> selector
 		) =>
-			Assign(a => a.DiskBasedShardAllocation = selector?.Invoke(new DiskBasedShardAllocationSettingsDescriptor()));
+			Assign(selector, (a, v) => a.DiskBasedShardAllocation = v?.Invoke(new DiskBasedShardAllocationSettingsDescriptor()));
 
 		/// <inheritdoc />
 		public ClusterModuleSettingsDescriptor ShardAllocation(Func<ShardAllocationSettingsDescriptor, IShardAllocationSettings> selector) =>
-			Assign(a => a.ShardAllocation = selector?.Invoke(new ShardAllocationSettingsDescriptor()));
+			Assign(selector, (a, v) => a.ShardAllocation = v?.Invoke(new ShardAllocationSettingsDescriptor()));
 
 		/// <inheritdoc />
 		public ClusterModuleSettingsDescriptor ShardBalancingHeuristics(
 			Func<ShardBalancingHeuristicsSettingsDescriptor, IShardBalancingHeuristicsSettings> selector
 		) =>
-			Assign(a => a.ShardBalancingHeuristics = selector?.Invoke(new ShardBalancingHeuristicsSettingsDescriptor()));
+			Assign(selector, (a, v) => a.ShardBalancingHeuristics = v?.Invoke(new ShardBalancingHeuristicsSettingsDescriptor()));
 
 		/// <inheritdoc />
 		public ClusterModuleSettingsDescriptor ShardRebalancing(Func<ShardRebalancingSettingsDescriptor, IShardRebalancingSettings> selector) =>
-			Assign(a => a.ShardRebalancing = selector?.Invoke(new ShardRebalancingSettingsDescriptor()));
+			Assign(selector, (a, v) => a.ShardRebalancing = v?.Invoke(new ShardRebalancingSettingsDescriptor()));
 	}
 }

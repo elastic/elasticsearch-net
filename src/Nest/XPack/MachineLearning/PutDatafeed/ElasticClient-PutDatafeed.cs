@@ -18,11 +18,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IPutDatafeedResponse> PutDatafeedAsync<T>(Id datafeedId, Func<PutDatafeedDescriptor<T>, IPutDatafeedRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		) where T : class;
 
 		/// <inheritdoc />
-		Task<IPutDatafeedResponse> PutDatafeedAsync(IPutDatafeedRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IPutDatafeedResponse> PutDatafeedAsync(IPutDatafeedRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -34,25 +34,19 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IPutDatafeedResponse PutDatafeed(IPutDatafeedRequest request) =>
-			Dispatcher.Dispatch<IPutDatafeedRequest, PutDatafeedRequestParameters, PutDatafeedResponse>(
-				request,
-				LowLevelDispatch.MlPutDatafeedDispatch<PutDatafeedResponse>
-			);
+			DoRequest<IPutDatafeedRequest, PutDatafeedResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IPutDatafeedResponse> PutDatafeedAsync<T>(Id datafeedId, Func<PutDatafeedDescriptor<T>, IPutDatafeedRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) where T : class =>
+		public Task<IPutDatafeedResponse> PutDatafeedAsync<T>(
+			Id datafeedId,
+			Func<PutDatafeedDescriptor<T>, IPutDatafeedRequest> selector = null,
+			CancellationToken cancellationToken = default
+		)
+			where T : class =>
 			PutDatafeedAsync(selector.InvokeOrDefault(new PutDatafeedDescriptor<T>(datafeedId)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IPutDatafeedResponse> PutDatafeedAsync(IPutDatafeedRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IPutDatafeedRequest, PutDatafeedRequestParameters, PutDatafeedResponse, IPutDatafeedResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.MlPutDatafeedDispatchAsync<PutDatafeedResponse>
-			);
+		public Task<IPutDatafeedResponse> PutDatafeedAsync(IPutDatafeedRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IPutDatafeedRequest, IPutDatafeedResponse, PutDatafeedResponse>(request, request.RequestParameters, ct);
 	}
 }

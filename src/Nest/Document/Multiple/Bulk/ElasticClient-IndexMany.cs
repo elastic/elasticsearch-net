@@ -54,7 +54,7 @@ namespace Nest
 				.Select(o => new BulkIndexOperation<T>(o))
 				.Cast<IBulkOperation>()
 				.ToList();
-			bulkRequest.Operations = indexOps;
+			bulkRequest.Operations = new BulkOperationsCollection<IBulkOperation>(indexOps);
 			return bulkRequest;
 		}
 	}

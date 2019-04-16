@@ -20,7 +20,7 @@ namespace ApiGenerator.Domain
 			set => _paths = (value ?? Enumerable.Empty<string>()).ToList();
 		}
 
-		public IDictionary<string, ApiUrlPart> Parts { private get; set; }
+		public IDictionary<string, ApiUrlPart> Parts { get; set; }
 
 		public IEnumerable<ApiPath> ExposedApiPaths
 		{

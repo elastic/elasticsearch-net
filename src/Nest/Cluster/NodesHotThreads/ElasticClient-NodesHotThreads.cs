@@ -25,13 +25,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		);
+		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -44,30 +42,24 @@ namespace Nest
 			NodesHotThreads(selector.InvokeOrDefault(new NodesHotThreadsDescriptor()));
 
 		/// <inheritdoc />
-		public INodesHotThreadsResponse NodesHotThreads(INodesHotThreadsRequest request) =>
-			Dispatcher.Dispatch<INodesHotThreadsRequest, NodesHotThreadsRequestParameters, NodesHotThreadsResponse>(
-				request,
-				new NodesHotThreadConverter(DeserializeNodesHotThreadResponse),
-				(p, d) => LowLevelDispatch.NodesHotThreadsDispatch<NodesHotThreadsResponse>(p)
-			);
+		public INodesHotThreadsResponse NodesHotThreads(INodesHotThreadsRequest request)
+		{
+			request.RequestParameters.DeserializationOverride = DeserializeNodesHotThreadResponse;
+			return DoRequest<INodesHotThreadsRequest, NodesHotThreadsResponse>(request, request.RequestParameters);
+		}
 
 		/// <inheritdoc />
 		public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) =>
-			NodesHotThreadsAsync(selector.InvokeOrDefault(new NodesHotThreadsDescriptor()), cancellationToken);
+			NodesHotThreadsAsync(selector.InvokeOrDefault(new NodesHotThreadsDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<INodesHotThreadsRequest, NodesHotThreadsRequestParameters, NodesHotThreadsResponse, INodesHotThreadsResponse>(
-				request,
-				cancellationToken,
-				new NodesHotThreadConverter(DeserializeNodesHotThreadResponse),
-				(p, d, c) => LowLevelDispatch.NodesHotThreadsDispatchAsync<NodesHotThreadsResponse>(p, c)
-			);
-
+		public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest request, CancellationToken ct = default)
+		{
+			request.RequestParameters.DeserializationOverride = DeserializeNodesHotThreadResponse;
+			return DoRequestAsync<INodesHotThreadsRequest, INodesHotThreadsResponse, NodesHotThreadsResponse>(request, request.RequestParameters, ct);
+		}
 
 		/// <summary>
 		/// Because the nodes.hot_threads endpoint returns plain text instead of JSON, we have to

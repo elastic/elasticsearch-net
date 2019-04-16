@@ -22,12 +22,12 @@ namespace Nest
 		/// <inheritdoc />
 		Task<IIndicesShardStoresResponse> IndicesShardStoresAsync(
 			Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<IIndicesShardStoresResponse> IndicesShardStoresAsync(IIndicesShardStoresRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -39,27 +39,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IIndicesShardStoresResponse IndicesShardStores(IIndicesShardStoresRequest request) =>
-			Dispatcher.Dispatch<IIndicesShardStoresRequest, IndicesShardStoresRequestParameters, IndicesShardStoresResponse>(
-				request,
-				(p, d) => LowLevelDispatch.IndicesShardStoresDispatch<IndicesShardStoresResponse>(p)
-			);
+			DoRequest<IIndicesShardStoresRequest, IndicesShardStoresResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IIndicesShardStoresResponse> IndicesShardStoresAsync(
 			Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) => IndicesShardStoresAsync(selector.InvokeOrDefault(new IndicesShardStoresDescriptor()), cancellationToken);
+			CancellationToken ct = default
+		) => IndicesShardStoresAsync(selector.InvokeOrDefault(new IndicesShardStoresDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IIndicesShardStoresResponse> IndicesShardStoresAsync(IIndicesShardStoresRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<IIndicesShardStoresRequest, IndicesShardStoresRequestParameters, IndicesShardStoresResponse,
-					IIndicesShardStoresResponse>(
-					request,
-					cancellationToken,
-					(p, d, c) => LowLevelDispatch.IndicesShardStoresDispatchAsync<IndicesShardStoresResponse>(p, c)
-				);
+		public Task<IIndicesShardStoresResponse> IndicesShardStoresAsync(IIndicesShardStoresRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IIndicesShardStoresRequest, IIndicesShardStoresResponse, IndicesShardStoresResponse>(request, request.RequestParameters, ct);
 	}
 }

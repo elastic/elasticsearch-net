@@ -97,28 +97,28 @@ namespace Nest
 
 		/// <inheritdoc cref="IReindexSource.Query" />
 		public ReindexSourceDescriptor Query<T>(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) where T : class =>
-			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(querySelector, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<T>()));
 
 		/// <inheritdoc cref="IReindexSource.Sort" />
 		public ReindexSourceDescriptor Sort<T>(Func<SortDescriptor<T>, IPromise<IList<ISort>>> selector) where T : class =>
-			Assign(a => a.Sort = selector?.Invoke(new SortDescriptor<T>())?.Value);
+			Assign(selector, (a, v) => a.Sort = v?.Invoke(new SortDescriptor<T>())?.Value);
 
 		/// <inheritdoc cref="IReindexSource.Remote" />
 		public ReindexSourceDescriptor Remote(Func<RemoteSourceDescriptor, IRemoteSource> selector) =>
-			Assign(a => a.Remote = selector?.Invoke(new RemoteSourceDescriptor()));
+			Assign(selector, (a, v) => a.Remote = v?.Invoke(new RemoteSourceDescriptor()));
 
 		/// <inheritdoc cref="IReindexSource.Index" />
-		public ReindexSourceDescriptor Index(Indices indices) => Assign(a => a.Index = indices);
+		public ReindexSourceDescriptor Index(Indices indices) => Assign(indices, (a, v) => a.Index = v);
 
 		/// <inheritdoc cref="IReindexSource.Size" />
-		public ReindexSourceDescriptor Size(int? size) => Assign(a => a.Size = size);
+		public ReindexSourceDescriptor Size(int? size) => Assign(size, (a, v) => a.Size = v);
 
 		/// <inheritdoc cref="IReindexSource.Slice" />
 		public ReindexSourceDescriptor Slice<T>(Func<SlicedScrollDescriptor<T>, ISlicedScroll> selector) where T : class =>
-			Assign(a => a.Slice = selector?.Invoke(new SlicedScrollDescriptor<T>()));
+			Assign(selector, (a, v) => a.Slice = v?.Invoke(new SlicedScrollDescriptor<T>()));
 
 		/// <inheritdoc cref="IReindexSource.Source" />
 		public ReindexSourceDescriptor Source<T>(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) where T : class =>
-			Assign(a => a.Source = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+			Assign(fields, (a, v) => a.Source = v?.Invoke(new FieldsDescriptor<T>())?.Value);
 	}
 }

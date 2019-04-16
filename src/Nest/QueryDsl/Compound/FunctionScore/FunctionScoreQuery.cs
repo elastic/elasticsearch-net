@@ -57,22 +57,26 @@ namespace Nest
 		QueryContainer IFunctionScoreQuery.Query { get; set; }
 		FunctionScoreMode? IFunctionScoreQuery.ScoreMode { get; set; }
 
-		public FunctionScoreQueryDescriptor<T> ConditionlessWhen(bool isConditionless) => Assign(a => _forcedConditionless = isConditionless);
+		public FunctionScoreQueryDescriptor<T> ConditionlessWhen(bool isConditionless)
+		{
+			_forcedConditionless = isConditionless;
+			return this;
+		}
 
 		public FunctionScoreQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
-			Assign(a => a.Query = selector?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(selector, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<T>()));
 
 		public FunctionScoreQueryDescriptor<T> Functions(Func<ScoreFunctionsDescriptor<T>, IPromise<IList<IScoreFunction>>> functions) =>
-			Assign(a => a.Functions = functions?.Invoke(new ScoreFunctionsDescriptor<T>())?.Value);
+			Assign(functions, (a, v) => a.Functions = v?.Invoke(new ScoreFunctionsDescriptor<T>())?.Value);
 
-		public FunctionScoreQueryDescriptor<T> Functions(IEnumerable<IScoreFunction> functions) => Assign(a => a.Functions = functions);
+		public FunctionScoreQueryDescriptor<T> Functions(IEnumerable<IScoreFunction> functions) => Assign(functions, (a, v) => a.Functions = v);
 
-		public FunctionScoreQueryDescriptor<T> ScoreMode(FunctionScoreMode? mode) => Assign(a => a.ScoreMode = mode);
+		public FunctionScoreQueryDescriptor<T> ScoreMode(FunctionScoreMode? mode) => Assign(mode, (a, v) => a.ScoreMode = v);
 
-		public FunctionScoreQueryDescriptor<T> BoostMode(FunctionBoostMode? mode) => Assign(a => a.BoostMode = mode);
+		public FunctionScoreQueryDescriptor<T> BoostMode(FunctionBoostMode? mode) => Assign(mode, (a, v) => a.BoostMode = v);
 
-		public FunctionScoreQueryDescriptor<T> MaxBoost(double? maxBoost) => Assign(a => a.MaxBoost = maxBoost);
+		public FunctionScoreQueryDescriptor<T> MaxBoost(double? maxBoost) => Assign(maxBoost, (a, v) => a.MaxBoost = v);
 
-		public FunctionScoreQueryDescriptor<T> MinScore(double? minScore) => Assign(a => a.MinScore = minScore);
+		public FunctionScoreQueryDescriptor<T> MinScore(double? minScore) => Assign(minScore, (a, v) => a.MinScore = v);
 	}
 }

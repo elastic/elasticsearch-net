@@ -24,12 +24,12 @@ namespace Nest
 		/// <inheritdoc />
 		Task<ITermVectorsResponse> TermVectorsAsync<T>(
 			Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) where T : class;
 
 		/// <inheritdoc />
 		Task<ITermVectorsResponse> TermVectorsAsync<T>(ITermVectorsRequest<T> request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		)
 			where T : class;
 	}
@@ -42,25 +42,19 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ITermVectorsResponse TermVectors<T>(ITermVectorsRequest<T> request) where T : class =>
-			Dispatcher.Dispatch<ITermVectorsRequest<T>, TermVectorsRequestParameters, TermVectorsResponse>(
-				request,
-				LowLevelDispatch.TermvectorsDispatch<TermVectorsResponse, T>
-			);
+			DoRequest<ITermVectorsRequest<T>, TermVectorsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<ITermVectorsResponse> TermVectorsAsync<T>(
 			Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) where T : class => TermVectorsAsync(selector?.Invoke(new TermVectorsDescriptor<T>(typeof(T))), cancellationToken);
+			CancellationToken ct = default
+		)
+			where T : class =>
+			TermVectorsAsync(selector?.Invoke(new TermVectorsDescriptor<T>(typeof(T))), ct);
 
 		/// <inheritdoc />
-		public Task<ITermVectorsResponse> TermVectorsAsync<T>(ITermVectorsRequest<T> request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) where T : class =>
-			Dispatcher.DispatchAsync<ITermVectorsRequest<T>, TermVectorsRequestParameters, TermVectorsResponse, ITermVectorsResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.TermvectorsDispatchAsync<TermVectorsResponse, T>
-			);
+		public Task<ITermVectorsResponse> TermVectorsAsync<T>(ITermVectorsRequest<T> request, CancellationToken ct = default)
+			where T : class =>
+			DoRequestAsync<ITermVectorsRequest<T>, ITermVectorsResponse, TermVectorsResponse>(request, request.RequestParameters, ct);
 	}
 }

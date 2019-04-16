@@ -17,38 +17,35 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IPutJobResponse> PutJobAsync<T>(Id jobId, Func<PutJobDescriptor<T>, IPutJobRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) where T : class;
 
 		/// <inheritdoc />
-		Task<IPutJobResponse> PutJobAsync(IPutJobRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IPutJobResponse> PutJobAsync(IPutJobRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IPutJobResponse PutJob<T>(Id jobId, Func<PutJobDescriptor<T>, IPutJobRequest> selector) where T : class =>
+		public IPutJobResponse PutJob<T>(Id jobId, Func<PutJobDescriptor<T>, IPutJobRequest> selector)
+			where T : class =>
 			PutJob(selector.InvokeOrDefault(new PutJobDescriptor<T>(jobId)));
 
 		/// <inheritdoc />
 		public IPutJobResponse PutJob(IPutJobRequest request) =>
-			Dispatcher.Dispatch<IPutJobRequest, PutJobRequestParameters, PutJobResponse>(
-				request,
-				LowLevelDispatch.MlPutJobDispatch<PutJobResponse>
-			);
+			DoRequest<IPutJobRequest, PutJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IPutJobResponse> PutJobAsync<T>(Id jobId, Func<PutJobDescriptor<T>, IPutJobRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) where T : class =>
-			PutJobAsync(selector.InvokeOrDefault(new PutJobDescriptor<T>(jobId)), cancellationToken);
+		public Task<IPutJobResponse> PutJobAsync<T>(
+			Id jobId,
+			Func<PutJobDescriptor<T>, IPutJobRequest> selector,
+			CancellationToken ct = default
+		)
+			where T : class =>
+			PutJobAsync(selector.InvokeOrDefault(new PutJobDescriptor<T>(jobId)), ct);
 
 		/// <inheritdoc />
-		public Task<IPutJobResponse> PutJobAsync(IPutJobRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IPutJobRequest, PutJobRequestParameters, PutJobResponse, IPutJobResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.MlPutJobDispatchAsync<PutJobResponse>
-			);
+		public Task<IPutJobResponse> PutJobAsync(IPutJobRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IPutJobRequest, IPutJobResponse, PutJobResponse>(request, request.RequestParameters, ct);
 	}
 }

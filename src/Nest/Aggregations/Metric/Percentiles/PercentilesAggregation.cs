@@ -36,15 +36,15 @@ namespace Nest
 		bool? IPercentilesAggregation.Keyed { get; set; }
 
 		public PercentilesAggregationDescriptor<T> Percents(IEnumerable<double> percentages) =>
-			Assign(a => a.Percents = percentages?.ToList());
+			Assign(percentages, (a, v) => a.Percents = v);
 
 		public PercentilesAggregationDescriptor<T> Percents(params double[] percentages) =>
-			Assign(a => a.Percents = percentages?.ToList());
+			Assign(percentages, (a, v) => a.Percents = v);
 
 		public PercentilesAggregationDescriptor<T> Method(Func<PercentilesMethodDescriptor, IPercentilesMethod> methodSelector) =>
-			Assign(a => a.Method = methodSelector?.Invoke(new PercentilesMethodDescriptor()));
+			Assign(methodSelector, (a, v) => a.Method = v?.Invoke(new PercentilesMethodDescriptor()));
 
 		public PercentilesAggregationDescriptor<T> Keyed(bool? keyed = true) =>
-			Assign(a => a.Keyed = keyed);
+			Assign(keyed, (a, v) => a.Keyed = v);
 	}
 }

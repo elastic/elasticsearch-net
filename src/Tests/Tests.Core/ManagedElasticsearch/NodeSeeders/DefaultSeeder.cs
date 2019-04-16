@@ -91,7 +91,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			};
 
 			if (TestConfiguration.Instance.InRange(">=6.5.0"))
-				clusterConfiguration += new RemoteClusterConfiguration()
+				clusterConfiguration += new RemoteClusterConfiguration
 				{
 					{ RemoteClusterName, "127.0.0.1:9300" }
 				};
@@ -184,21 +184,18 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			});
 
 		private Task<ICreateIndexResponse> CreateDeveloperIndexAsync() => Client.CreateIndexAsync(Infer.Index<Developer>(), c => c
-			.Mappings(map => map
-				.Map<Developer>(m => m
-					.AutoMap()
-					.Properties(DeveloperProperties)
-				)
+			.Map<Developer>(m => m
+				.AutoMap()
+				.Properties(DeveloperProperties)
 			)
 		);
 
+#pragma warning disable 618
 		private Task<ICreateIndexResponse> CreateProjectIndexAsync() => Client.CreateIndexAsync(typeof(Project), c => c
 			.Settings(settings => settings.Analysis(ProjectAnalysisSettings))
-// this uses obsolete overload somewhat on purpose to make sure it works just as the rest
-// TODO 8.0 remove with once the overloads are gone too
-#pragma warning disable 618
+			// this uses obsolete overload somewhat on purpose to make sure it works just as the rest
+			// TODO 8.0 remove with once the overloads are gone too
 			.Mappings(ProjectMappings)
-#pragma warning restore 618
 			.Aliases(aliases => aliases
 				.Alias(ProjectsAliasName)
 				.Alias(ProjectsAliasFilter, a => a
@@ -209,6 +206,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 				)
 			)
 		);
+#pragma warning restore 618
 
 #pragma warning disable 618
 		public static ITypeMapping ProjectMappings(MappingsDescriptor map) => map
@@ -262,11 +260,9 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 				.AutoExpandReplicas("0-all")
 				.Analysis(ProjectAnalysisSettings)
 			)
-			.Mappings(map => map
-				.Map<ProjectPercolation>(m => m
-					.AutoMap()
-					.Properties(PercolatedQueryProperties)
-				)
+			.Map<ProjectPercolation>(m => m
+				.AutoMap()
+				.Properties(PercolatedQueryProperties)
 			)
 		);
 

@@ -41,12 +41,12 @@ namespace Nest
 
 		/// <inheritdoc cref="IHistogramRollupGrouping.Fields" />
 		public HistogramRollupGroupingDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+			Assign(fields, (a, v) => a.Fields = v?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		/// <inheritdoc cref="IHistogramRollupGrouping.Fields" />
-		public HistogramRollupGroupingDescriptor<T> Fields(Fields fields) => Assign(a => a.Fields = fields);
+		public HistogramRollupGroupingDescriptor<T> Fields(Fields fields) => Assign(fields, (a, v) => a.Fields = v);
 
 		/// <inheritdoc cref="IHistogramRollupGrouping.Interval" />
-		public HistogramRollupGroupingDescriptor<T> Interval(long? interval) => Assign(a => a.Interval = interval);
+		public HistogramRollupGroupingDescriptor<T> Interval(long? interval) => Assign(interval, (a, v) => a.Interval = v);
 	}
 }

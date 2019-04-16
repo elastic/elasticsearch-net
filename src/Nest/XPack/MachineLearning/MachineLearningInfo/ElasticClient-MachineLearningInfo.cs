@@ -8,21 +8,21 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Retrieves machine learning job results for one or more categories.
+		/// Returns defaults and limits used by machine learning.
 		/// </summary>
 		IMachineLearningInfoResponse MachineLearningInfo(Func<MachineLearningInfoDescriptor, IMachineLearningInfoRequest> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="MachineLearningInfo(System.Func{Nest.MachineLearningInfoDescriptor,Nest.IMachineLearningInfoRequest})"/>
 		IMachineLearningInfoResponse MachineLearningInfo(IMachineLearningInfoRequest request);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="MachineLearningInfo(System.Func{Nest.MachineLearningInfoDescriptor,Nest.IMachineLearningInfoRequest})"/>
 		Task<IMachineLearningInfoResponse> MachineLearningInfoAsync(Func<MachineLearningInfoDescriptor, IMachineLearningInfoRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="MachineLearningInfo(System.Func{Nest.MachineLearningInfoDescriptor,Nest.IMachineLearningInfoRequest})"/>
 		Task<IMachineLearningInfoResponse> MachineLearningInfoAsync(IMachineLearningInfoRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -34,25 +34,15 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IMachineLearningInfoResponse MachineLearningInfo(IMachineLearningInfoRequest request) =>
-			Dispatcher.Dispatch<IMachineLearningInfoRequest, MachineLearningInfoRequestParameters, MachineLearningInfoResponse>(
-				request,
-				(p, d) => LowLevelDispatch.XpackMlInfoDispatch<MachineLearningInfoResponse>(p)
-			);
+			DoRequest<IMachineLearningInfoRequest, MachineLearningInfoResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IMachineLearningInfoResponse> MachineLearningInfoAsync(Func<MachineLearningInfoDescriptor, IMachineLearningInfoRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			MachineLearningInfoAsync(selector.InvokeOrDefault(new MachineLearningInfoDescriptor()), cancellationToken);
+			CancellationToken ct = default
+		) => MachineLearningInfoAsync(selector.InvokeOrDefault(new MachineLearningInfoDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IMachineLearningInfoResponse> MachineLearningInfoAsync(IMachineLearningInfoRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IMachineLearningInfoRequest, MachineLearningInfoRequestParameters, MachineLearningInfoResponse, IMachineLearningInfoResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.XpackMlInfoDispatchAsync<MachineLearningInfoResponse>(p, c)
-			);
+		public Task<IMachineLearningInfoResponse> MachineLearningInfoAsync(IMachineLearningInfoRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IMachineLearningInfoRequest, IMachineLearningInfoResponse, MachineLearningInfoResponse>(request, request.RequestParameters, ct);
 	}
 }

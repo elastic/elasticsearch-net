@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -8,13 +8,13 @@ namespace Nest
 	/// </summary>
 	public partial interface IPutCalendarJobResponse : IResponse
 	{
-		[JsonProperty("calendar_id")]
+		[DataMember(Name = "calendar_id")]
 		string CalendarId { get; }
 
-		[JsonProperty("job_ids")]
+		[DataMember(Name = "job_ids")]
 		IReadOnlyCollection<string> JobIds { get; }
 
-		[JsonProperty("description")]
+		[DataMember(Name = "description")]
 		string Description { get; }
 	}
 

@@ -16,12 +16,12 @@ namespace Nest
 		/// <inheritdoc />
 		Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(
 			Func<CatPendingTasksDescriptor, ICatPendingTasksRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default(CancellationToken)
 		);
 
 		/// <inheritdoc />
 		Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(ICatPendingTasksRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default(CancellationToken)
 		);
 	}
 
@@ -33,20 +33,18 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICatResponse<CatPendingTasksRecord> CatPendingTasks(ICatPendingTasksRequest request) =>
-			DoCat<ICatPendingTasksRequest, CatPendingTasksRequestParameters, CatPendingTasksRecord>(request,
-				LowLevelDispatch.CatPendingTasksDispatch<CatResponse<CatPendingTasksRecord>>);
+			DoCat<ICatPendingTasksRequest, CatPendingTasksRequestParameters, CatPendingTasksRecord>(request);
 
 		/// <inheritdoc />
 		public Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(
 			Func<CatPendingTasksDescriptor, ICatPendingTasksRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) => CatPendingTasksAsync(selector.InvokeOrDefault(new CatPendingTasksDescriptor()), cancellationToken);
+			CancellationToken ct = default
+		) => CatPendingTasksAsync(selector.InvokeOrDefault(new CatPendingTasksDescriptor()), ct);
 
 		/// <inheritdoc />
 		public Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(ICatPendingTasksRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		) =>
-			DoCatAsync<ICatPendingTasksRequest, CatPendingTasksRequestParameters, CatPendingTasksRecord>(request, cancellationToken,
-				LowLevelDispatch.CatPendingTasksDispatchAsync<CatResponse<CatPendingTasksRecord>>);
+			DoCatAsync<ICatPendingTasksRequest, CatPendingTasksRequestParameters, CatPendingTasksRecord>(request, ct);
 	}
 }

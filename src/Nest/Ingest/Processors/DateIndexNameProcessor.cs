@@ -128,25 +128,25 @@ namespace Nest
 		/// <summary>
 		/// The field to get the date or timestamp from.
 		/// </summary>
-		public DateIndexNameProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public DateIndexNameProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <summary>
 		/// The field to get the date or timestamp from.
 		/// </summary>
 		public DateIndexNameProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <summary>
 		/// A prefix of the index name to be prepended before the printed date.
 		/// </summary>
 		public DateIndexNameProcessorDescriptor<T> IndexNamePrefix(string indexNamePrefix) =>
-			Assign(a => a.IndexNamePrefix = indexNamePrefix);
+			Assign(indexNamePrefix, (a, v) => a.IndexNamePrefix = v);
 
 		/// <summary>
 		/// How to round the date when formatting the date into the index name.
 		/// </summary>
 		public DateIndexNameProcessorDescriptor<T> DateRounding(DateRounding? dateRounding) =>
-			Assign(a => a.DateRounding = dateRounding);
+			Assign(dateRounding, (a, v) => a.DateRounding = v);
 
 		/// <summary>
 		/// An array of the expected date formats for parsing
@@ -154,7 +154,7 @@ namespace Nest
 		/// Default is yyyy-MM-dd’T'HH:mm:ss.SSSZ
 		/// </summary>
 		public DateIndexNameProcessorDescriptor<T> DateFormats(IEnumerable<string> dateFormats) =>
-			Assign(a => a.DateFormats = dateFormats);
+			Assign(dateFormats, (a, v) => a.DateFormats = v);
 
 		/// <summary>
 		/// An array of the expected date formats for parsing
@@ -162,7 +162,7 @@ namespace Nest
 		/// Default is yyyy-MM-dd’T'HH:mm:ss.SSSZ
 		/// </summary>
 		public DateIndexNameProcessorDescriptor<T> DateFormats(params string[] dateFormats) =>
-			Assign(a => a.DateFormats = dateFormats);
+			Assign(dateFormats, (a, v) => a.DateFormats = v);
 
 		/// <summary>
 		/// The timezone to use when parsing the date and when date
@@ -170,7 +170,7 @@ namespace Nest
 		/// index names.
 		/// </summary>
 		public DateIndexNameProcessorDescriptor<T> TimeZone(string timeZone) =>
-			Assign(a => a.TimeZone = timeZone);
+			Assign(timeZone, (a, v) => a.TimeZone = v);
 
 		/// <summary>
 		/// The locale to use when parsing the date from the document
@@ -178,14 +178,14 @@ namespace Nest
 		/// week days.
 		/// </summary>
 		public DateIndexNameProcessorDescriptor<T> Locale(string locale) =>
-			Assign(a => a.Locale = locale);
+			Assign(locale, (a, v) => a.Locale = v);
 
 		/// <summary>
 		/// The format to be used when printing the parsed date into
 		/// the index name.
 		/// </summary>
 		public DateIndexNameProcessorDescriptor<T> IndexNameFormat(string indexNameFormat) =>
-			Assign(a => a.IndexNameFormat = indexNameFormat);
+			Assign(indexNameFormat, (a, v) => a.IndexNameFormat = v);
 	}
 
 	[StringEnum]

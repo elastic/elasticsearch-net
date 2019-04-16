@@ -85,30 +85,30 @@ namespace Nest
 
 		/// <inheritdoc />
 		public MergePolicySettingsDescriptor ExpungeDeletesAllowed(int? allowed) =>
-			Assign(a => a.ExpungeDeletesAllowed = allowed);
+			Assign(allowed, (a, v) => a.ExpungeDeletesAllowed = v);
 
 		/// <inheritdoc />
 		public MergePolicySettingsDescriptor FloorSegment(string floorSegment) =>
-			Assign(a => a.FloorSegment = floorSegment);
+			Assign(floorSegment, (a, v) => a.FloorSegment = v);
 
 		/// <inheritdoc />
 		public MergePolicySettingsDescriptor MaxMergeAtOnce(int? maxMergeAtOnce) =>
-			Assign(a => a.MaxMergeAtOnce = maxMergeAtOnce);
+			Assign(maxMergeAtOnce, (a, v) => a.MaxMergeAtOnce = v);
 
 		/// <inheritdoc />
 		public MergePolicySettingsDescriptor MaxMergeAtOnceExplicit(int? maxMergeOnceAtOnceExplicit) =>
-			Assign(a => a.MaxMergeAtOnceExplicit = maxMergeOnceAtOnceExplicit);
+			Assign(maxMergeOnceAtOnceExplicit, (a, v) => a.MaxMergeAtOnceExplicit = v);
 
 		/// <inheritdoc />
 		public MergePolicySettingsDescriptor MaxMergedSegement(string maxMergedSegment) =>
-			Assign(a => a.MaxMergedSegment = maxMergedSegment);
+			Assign(maxMergedSegment, (a, v) => a.MaxMergedSegment = v);
 
 		/// <inheritdoc />
 		public MergePolicySettingsDescriptor ReclaimDeletesWeight(double? weight) =>
-			Assign(a => a.ReclaimDeletesWeight = weight);
+			Assign(weight, (a, v) => a.ReclaimDeletesWeight = v);
 
 		/// <inheritdoc />
 		public MergePolicySettingsDescriptor SegmentsPerTier(int? segmentsPerTier) =>
-			Assign(a => a.SegmentsPerTier = segmentsPerTier);
+			Assign(segmentsPerTier, (a, v) => a.SegmentsPerTier = v);
 	}
 }

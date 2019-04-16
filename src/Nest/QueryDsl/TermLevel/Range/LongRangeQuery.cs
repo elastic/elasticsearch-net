@@ -54,14 +54,14 @@ namespace Nest
 		long? ILongRangeQuery.LessThanOrEqualTo { get; set; }
 		RangeRelation? ILongRangeQuery.Relation { get; set; }
 
-		public LongRangeQueryDescriptor<T> Relation(RangeRelation? relation) => Assign(a => a.Relation = relation);
+		public LongRangeQueryDescriptor<T> Relation(RangeRelation? relation) => Assign(relation, (a, v) => a.Relation = v);
 
-		public LongRangeQueryDescriptor<T> GreaterThan(long? from) => Assign(a => a.GreaterThan = from);
+		public LongRangeQueryDescriptor<T> GreaterThan(long? from) => Assign(from, (a, v) => a.GreaterThan = v);
 
-		public LongRangeQueryDescriptor<T> GreaterThanOrEquals(long? from) => Assign(a => a.GreaterThanOrEqualTo = from);
+		public LongRangeQueryDescriptor<T> GreaterThanOrEquals(long? from) => Assign(from, (a, v) => a.GreaterThanOrEqualTo = v);
 
-		public LongRangeQueryDescriptor<T> LessThan(long? to) => Assign(a => a.LessThan = to);
+		public LongRangeQueryDescriptor<T> LessThan(long? to) => Assign(to, (a, v) => a.LessThan = v);
 
-		public LongRangeQueryDescriptor<T> LessThanOrEquals(long? to) => Assign(a => a.LessThanOrEqualTo = to);
+		public LongRangeQueryDescriptor<T> LessThanOrEquals(long? to) => Assign(to, (a, v) => a.LessThanOrEqualTo = v);
 	}
 }

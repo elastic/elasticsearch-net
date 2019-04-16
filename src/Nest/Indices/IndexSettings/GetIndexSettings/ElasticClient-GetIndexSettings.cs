@@ -20,12 +20,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IGetIndexSettingsResponse> GetIndexSettingsAsync(Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<IGetIndexSettingsResponse> GetIndexSettingsAsync(IGetIndexSettingsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -37,26 +37,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetIndexSettingsResponse GetIndexSettings(IGetIndexSettingsRequest request) =>
-			Dispatcher.Dispatch<IGetIndexSettingsRequest, GetIndexSettingsRequestParameters, GetIndexSettingsResponse>(
-				request,
-				(p, d) => LowLevelDispatch.IndicesGetSettingsDispatch<GetIndexSettingsResponse>(p)
-			);
+			DoRequest<IGetIndexSettingsRequest, GetIndexSettingsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetIndexSettingsResponse> GetIndexSettingsAsync(Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			GetIndexSettingsAsync(selector?.Invoke(new GetIndexSettingsDescriptor()), cancellationToken);
+		public Task<IGetIndexSettingsResponse> GetIndexSettingsAsync(
+			Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector,
+			CancellationToken ct = default
+		) => GetIndexSettingsAsync(selector?.Invoke(new GetIndexSettingsDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IGetIndexSettingsResponse> GetIndexSettingsAsync(IGetIndexSettingsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<IGetIndexSettingsRequest, GetIndexSettingsRequestParameters, GetIndexSettingsResponse, IGetIndexSettingsResponse>(
-					request,
-					cancellationToken,
-					(p, d, c) => LowLevelDispatch.IndicesGetSettingsDispatchAsync<GetIndexSettingsResponse>(p, c)
-				);
+		public Task<IGetIndexSettingsResponse> GetIndexSettingsAsync(IGetIndexSettingsRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetIndexSettingsRequest, IGetIndexSettingsResponse, GetIndexSettingsResponse>(request, request.RequestParameters, ct);
 	}
 }

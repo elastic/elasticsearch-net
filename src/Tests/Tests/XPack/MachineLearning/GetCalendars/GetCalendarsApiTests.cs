@@ -40,7 +40,7 @@ namespace Tests.XPack.MachineLearning.GetCalendars
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override string UrlPath => $"_xpack/ml/calendars/{CallIsolatedValue}";
+		protected override string UrlPath => $"_ml/calendars/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.GetCalendars(f),
@@ -106,7 +106,7 @@ namespace Tests.XPack.MachineLearning.GetCalendars
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override string UrlPath => $"_xpack/ml/calendars";
+		protected override string UrlPath => $"_ml/calendars";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.GetCalendars(),

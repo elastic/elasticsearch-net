@@ -36,15 +36,15 @@ namespace Nest
 
 	public class TransformDescriptor : TransformContainer
 	{
-		private TransformDescriptor Assign(Action<ITransformContainer> assigner) => Fluent.Assign(this, assigner);
+		private TransformDescriptor Assign<TValue>(TValue value, Action<ITransformContainer, TValue> assigner) => Fluent.Assign(this, value, assigner);
 
 		public TransformDescriptor Search(Func<SearchTransformDescriptor, ISearchTransform> selector) =>
-			Assign(a => a.Search = selector?.InvokeOrDefault(new SearchTransformDescriptor()));
+			Assign(selector,(a, v) => a.Search = v?.InvokeOrDefault(new SearchTransformDescriptor()));
 
 		public TransformDescriptor Script(Func<ScriptTransformDescriptor, IScriptTransform> selector) =>
-			Assign(a => a.Script = selector?.Invoke(new ScriptTransformDescriptor()));
+			Assign(selector,(a, v) => a.Script = v?.Invoke(new ScriptTransformDescriptor()));
 
 		public TransformDescriptor Chain(Func<ChainTransformDescriptor, IChainTransform> selector) =>
-			Assign(a => a.Chain = selector.Invoke(new ChainTransformDescriptor()));
+			Assign(selector,(a, v) => a.Chain = v?.Invoke(new ChainTransformDescriptor()));
 	}
 }

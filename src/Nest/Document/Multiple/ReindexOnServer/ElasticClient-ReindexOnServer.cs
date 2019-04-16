@@ -24,7 +24,7 @@ namespace Nest
 		/// within Elasticsearch
 		/// </summary>
 		Task<IReindexOnServerResponse> ReindexOnServerAsync(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <summary>
@@ -32,37 +32,30 @@ namespace Nest
 		/// within Elasticsearch
 		/// </summary>
 		Task<IReindexOnServerResponse> ReindexOnServerAsync(IReindexOnServerRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
 	public partial class ElasticClient
 	{
+
 		/// <inheritdoc />
 		public IReindexOnServerResponse ReindexOnServer(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector) =>
 			ReindexOnServer(selector.InvokeOrDefault(new ReindexOnServerDescriptor()));
 
 		/// <inheritdoc />
 		public IReindexOnServerResponse ReindexOnServer(IReindexOnServerRequest request) =>
-			Dispatcher.Dispatch<IReindexOnServerRequest, ReindexOnServerRequestParameters, ReindexOnServerResponse>(
-				ForceConfiguration<IReindexOnServerRequest, ReindexOnServerRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
-				LowLevelDispatch.ReindexDispatch<ReindexOnServerResponse>
-			);
+			DoRequest<IReindexOnServerRequest, ReindexOnServerResponse>(request, request.RequestParameters, r => AcceptAllStatusCodesHandler(r));
 
 		/// <inheritdoc />
-		public Task<IReindexOnServerResponse> ReindexOnServerAsync(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			ReindexOnServerAsync(selector.InvokeOrDefault(new ReindexOnServerDescriptor()), cancellationToken);
+		public Task<IReindexOnServerResponse> ReindexOnServerAsync(
+			Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector,
+			CancellationToken ct = default
+		) => ReindexOnServerAsync(selector.InvokeOrDefault(new ReindexOnServerDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IReindexOnServerResponse> ReindexOnServerAsync(IReindexOnServerRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IReindexOnServerRequest, ReindexOnServerRequestParameters, ReindexOnServerResponse, IReindexOnServerResponse>(
-				ForceConfiguration<IReindexOnServerRequest, ReindexOnServerRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
-				cancellationToken,
-				LowLevelDispatch.ReindexDispatchAsync<ReindexOnServerResponse>
-			);
+		public Task<IReindexOnServerResponse> ReindexOnServerAsync(IReindexOnServerRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IReindexOnServerRequest, IReindexOnServerResponse, ReindexOnServerResponse>
+				(request, request.RequestParameters, ct, r => AcceptAllStatusCodesHandler(r));
 	}
 }

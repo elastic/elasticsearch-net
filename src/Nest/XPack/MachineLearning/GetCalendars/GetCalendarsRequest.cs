@@ -1,17 +1,18 @@
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	/// <summary>
 	/// Retrieves configuration information for calendars.
 	/// </summary>
+	[MapsApi("ml.get_calendars")]
 	public partial interface IGetCalendarsRequest
 	{
 		/// <summary>
 		/// Specifies pagination for the calendars
 		/// </summary>
-		[JsonProperty("page")]
+		[DataMember(Name = "page")]
 		IPage Page { get; set; }
 	}
 
@@ -21,13 +22,12 @@ namespace Nest
 		public IPage Page { get; set; }
 	}
 
-	[DescriptorFor("XpackMlGetCalendars")]
 	public partial class GetCalendarsDescriptor
 	{
 		/// <inheritdoc cref="IGetCalendarsRequest.Page" />
 		IPage IGetCalendarsRequest.Page { get; set; }
 
 		/// <inheritdoc cref="IGetCalendarsRequest.Page" />
-		public GetCalendarsDescriptor Page(Func<PageDescriptor, IPage> selector) => Assign(a => a.Page = selector?.Invoke(new PageDescriptor()));
+		public GetCalendarsDescriptor Page(Func<PageDescriptor, IPage> selector) => Assign(selector, (a, v) => a.Page = v?.Invoke(new PageDescriptor()));
 	}
 }

@@ -32,8 +32,8 @@ namespace Nest
 	{
 		Field IReverseNestedAggregation.Path { get; set; }
 
-		public ReverseNestedAggregationDescriptor<T> Path(Field path) => Assign(a => a.Path = path);
+		public ReverseNestedAggregationDescriptor<T> Path(Field path) => Assign(path, (a, v) => a.Path = v);
 
-		public ReverseNestedAggregationDescriptor<T> Path(Expression<Func<T, object>> path) => Assign(a => a.Path = path);
+		public ReverseNestedAggregationDescriptor<T> Path(Expression<Func<T, object>> path) => Assign(path, (a, v) => a.Path = v);
 	}
 }

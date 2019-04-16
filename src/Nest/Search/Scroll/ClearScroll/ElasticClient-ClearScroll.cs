@@ -20,11 +20,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IClearScrollResponse> ClearScrollAsync(Func<ClearScrollDescriptor, IClearScrollRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IClearScrollResponse> ClearScrollAsync(IClearScrollRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IClearScrollResponse> ClearScrollAsync(IClearScrollRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -35,26 +35,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IClearScrollResponse ClearScroll(IClearScrollRequest request) =>
-			Dispatcher.Dispatch<IClearScrollRequest, ClearScrollRequestParameters, ClearScrollResponse>(
-				request,
-				(p, d) => LowLevelDispatch.ClearScrollDispatch<ClearScrollResponse>(p, d)
-			);
-
+			DoRequest<IClearScrollRequest, ClearScrollResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IClearScrollResponse> ClearScrollAsync(Func<ClearScrollDescriptor, IClearScrollRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			ClearScrollAsync(selector.InvokeOrDefault(new ClearScrollDescriptor()), cancellationToken);
+		public Task<IClearScrollResponse> ClearScrollAsync(
+			Func<ClearScrollDescriptor, IClearScrollRequest> selector,
+			CancellationToken ct = default
+		) => ClearScrollAsync(selector.InvokeOrDefault(new ClearScrollDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IClearScrollResponse> ClearScrollAsync(IClearScrollRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IClearScrollRequest, ClearScrollRequestParameters, ClearScrollResponse, IClearScrollResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.ClearScrollDispatchAsync<ClearScrollResponse>(p, d, c)
-			);
+		public Task<IClearScrollResponse> ClearScrollAsync(IClearScrollRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IClearScrollRequest, IClearScrollResponse, ClearScrollResponse>(request, request.RequestParameters, ct);
 	}
 }

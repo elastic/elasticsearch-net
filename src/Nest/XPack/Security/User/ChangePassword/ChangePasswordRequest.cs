@@ -18,6 +18,6 @@ namespace Nest
 	{
 		string IChangePasswordRequest.Password { get; set; }
 
-		public ChangePasswordDescriptor Password(string password) => Assign(r => r.Password = password);
+		public ChangePasswordDescriptor Password(string password) => Assign(password, (a, v) => a.Password = v);
 	}
 }

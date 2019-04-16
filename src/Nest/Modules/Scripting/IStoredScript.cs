@@ -74,10 +74,10 @@ namespace Nest
 		string IStoredScript.Lang { get; set; }
 		string IStoredScript.Source { get; set; }
 
-		public StoredScriptDescriptor Source(string source) => Assign(a => a.Source = source);
+		public StoredScriptDescriptor Source(string source) => Assign(source, (a, v) => a.Source = v);
 
-		public StoredScriptDescriptor Lang(string lang) => Assign(a => a.Lang = lang);
+		public StoredScriptDescriptor Lang(string lang) => Assign(lang, (a, v) => a.Lang = v);
 
-		public StoredScriptDescriptor Lang(ScriptLang lang) => Assign(a => a.Lang = lang.GetStringValue());
+		public StoredScriptDescriptor Lang(ScriptLang lang) => Assign(lang.GetStringValue(), (a, v) => a.Lang = v);
 	}
 }

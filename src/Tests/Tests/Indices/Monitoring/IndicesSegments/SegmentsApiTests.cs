@@ -22,7 +22,7 @@ namespace Tests.Indices.Monitoring.IndicesSegments
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
 		protected override SegmentsRequest Initializer => new SegmentsRequest(Infer.AllIndices);
-		protected override string UrlPath => "/_segments";
+		protected override string UrlPath => "/_all/_segments";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.Segments(Infer.AllIndices, f),

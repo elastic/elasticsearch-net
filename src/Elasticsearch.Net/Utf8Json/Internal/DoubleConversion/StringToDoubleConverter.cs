@@ -160,6 +160,7 @@ namespace Elasticsearch.Net
     // port
     internal static partial class StringToDoubleConverter
     {
+		[Flags]
         enum Flags
         {
             NO_FLAGS = 0,

@@ -39,7 +39,7 @@ namespace Tests.XPack.MachineLearning.PutCalendarJob
 		protected override PutCalendarJobRequest Initializer => new PutCalendarJobRequest(CallIsolatedValue + "_calendar",CallIsolatedValue + "_job");
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"_xpack/ml/calendars/{CallIsolatedValue}_calendar/jobs/{CallIsolatedValue}_job";
+		protected override string UrlPath => $"_ml/calendars/{CallIsolatedValue}_calendar/jobs/{CallIsolatedValue}_job";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.PutCalendarJob(CallIsolatedValue + "_calendar",CallIsolatedValue + "_job", f),

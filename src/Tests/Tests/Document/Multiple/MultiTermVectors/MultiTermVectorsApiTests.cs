@@ -119,6 +119,7 @@ namespace Tests.Document.Multiple.MultiTermVectors
 				vectorTerm.Value.DocumentFrequency.Should().BeGreaterThan(0);
 				vectorTerm.Value.TotalTermFrequency.Should().BeGreaterThan(0);
 				vectorTerm.Value.Tokens.Should().NotBeEmpty();
+				vectorTerm.Value.Score.Should().BeGreaterThan(0);
 
 				var token = vectorTerm.Value.Tokens.First();
 				token.EndOffset.Should().BeGreaterThan(0);

@@ -53,15 +53,15 @@ namespace Nest
 		IFieldLookup ITermsQuery.TermsLookup { get; set; }
 
 		public TermsQueryDescriptor<T> TermsLookup<TOther>(Func<FieldLookupDescriptor<TOther>, IFieldLookup> selector)
-			where TOther : class => Assign(a => a.TermsLookup = selector(new FieldLookupDescriptor<TOther>()));
+			where TOther : class => Assign(selector(new FieldLookupDescriptor<TOther>()), (a, v) => a.TermsLookup = v);
 
-		public TermsQueryDescriptor<T> Terms<TValue>(IEnumerable<TValue> terms) => Assign(a => a.Terms = terms?.Cast<object>());
+		public TermsQueryDescriptor<T> Terms<TValue>(IEnumerable<TValue> terms) => Assign(terms?.Cast<object>(), (a, v) => a.Terms = v);
 
-		public TermsQueryDescriptor<T> Terms<TValue>(params TValue[] terms) => Assign(a =>
+		public TermsQueryDescriptor<T> Terms<TValue>(params TValue[] terms) => Assign(terms, (a, v) =>
 		{
-			if (terms?.Length == 1 && typeof(IEnumerable).IsAssignableFrom(typeof(TValue)) && typeof(TValue) != typeof(string))
-				a.Terms = (terms.First() as IEnumerable)?.Cast<object>();
-			else a.Terms = terms?.Cast<object>();
+			if (v?.Length == 1 && typeof(IEnumerable).IsAssignableFrom(typeof(TValue)) && typeof(TValue) != typeof(string))
+				a.Terms = (v.First() as IEnumerable)?.Cast<object>();
+			else a.Terms = v?.Cast<object>();
 		});
 	}
 }

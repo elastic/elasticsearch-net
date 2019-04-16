@@ -96,7 +96,10 @@ namespace Tests.Search.Search
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.Hits.Count().Should().BeGreaterThan(0);
+			response.Total.Should().BeGreaterThan(0);
+			response.Hits.Count.Should().BeGreaterThan(0);
+			response.HitsMetadata.Total.Value.Should().Be(response.Total);
+			response.HitsMetadata.Total.Relation.Should().Be(TotalHitsRelation.EqualTo);
 			response.Hits.First().Should().NotBeNull();
 			response.Hits.First().Source.Should().NotBeNull();
 			response.Aggregations.Count.Should().BeGreaterThan(0);
@@ -501,6 +504,55 @@ namespace Tests.Search.Search
 //						$"No OpaqueId header for task {task.Key} and OpaqueId value {this.CallIsolatedValue}");
 //				}
 			}
+		}
+	}
+
+	[SkipVersion("<6.5.0", "_clusters on response only available in 6.1.0+, but ability to skip_unavailable only works in 6.5.0+")]
+	public class CrossClusterSearchApiTests
+		: ApiIntegrationTestBase<CrossCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+	{
+		public CrossClusterSearchApiTests(CrossCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+
+		protected override object ExpectJson => new
+		{
+			query = new
+			{
+				match_all = new { }
+			}
+		};
+
+		protected override int ExpectStatusCode => 200;
+
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Index(Nest.Indices.Index<Project>().And("cluster_two:project"))
+			.Query(q => q
+				.MatchAll()
+			);
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
+		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>(Nest.Indices.Index<Project>().And("cluster_two:project"))
+		{
+			Query = new MatchAllQuery()
+		};
+
+		protected override string UrlPath => $"/project%2Ccluster_two%3Aproject/_search";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(c, f) => c.Search(f),
+			(c, f) => c.SearchAsync(f),
+			(c, r) => c.Search<Project>(r),
+			(c, r) => c.SearchAsync<Project>(r)
+		);
+
+		protected override void ExpectResponse(ISearchResponse<Project> response)
+		{
+			response.Clusters.Should().NotBeNull();
+			response.Clusters.Total.Should().Be(2);
+			response.Clusters.Skipped.Should().Be(1);
+			response.Clusters.Successful.Should().Be(1);
 		}
 	}
 }

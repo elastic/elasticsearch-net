@@ -20,7 +20,7 @@ namespace Nest
 	{
 		DataAttachmentFormat? IDataAttachment.Format { get; set; }
 
-		public DataAttachmentDescriptor Format(DataAttachmentFormat? format) => Assign(a => a.Format = format);
+		public DataAttachmentDescriptor Format(DataAttachmentFormat? format) => Assign(format, (a, v) => a.Format = v);
 	}
 
 	[StringEnum]

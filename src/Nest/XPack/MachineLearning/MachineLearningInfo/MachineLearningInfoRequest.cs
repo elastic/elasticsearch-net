@@ -1,17 +1,14 @@
-using System;
-using Newtonsoft.Json;
-
 namespace Nest
 {
 	/// <summary>
-	/// Retrieve job results for one or more categories.
+	/// Returns defaults and limits used by machine learning.
 	/// </summary>
+	[MapsApi("ml.info")]
 	public partial interface IMachineLearningInfoRequest { }
 
-	/// <inheritdoc />
+	/// <inheritdoc cref="IMachineLearningInfoRequest" />
 	public partial class MachineLearningInfoRequest { }
 
-	/// <inheritdoc />
-	[DescriptorFor("XpackMlInfo")]
+	/// <inheritdoc cref="IMachineLearningInfoRequest" />
 	public partial class MachineLearningInfoDescriptor { }
 }

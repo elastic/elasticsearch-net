@@ -44,15 +44,15 @@ namespace Nest
 		public SpanNearQueryDescriptor<T> Clauses(params Func<SpanQueryDescriptor<T>, SpanQueryDescriptor<T>>[] selectors) =>
 			Clauses(selectors.ToList());
 
-		public SpanNearQueryDescriptor<T> Clauses(IEnumerable<Func<SpanQueryDescriptor<T>, SpanQueryDescriptor<T>>> selectors) => Assign(a =>
+		public SpanNearQueryDescriptor<T> Clauses(IEnumerable<Func<SpanQueryDescriptor<T>, SpanQueryDescriptor<T>>> selectors) => Assign(selectors, (a, v) =>
 		{
-			a.Clauses = selectors.Select(selector => selector?.Invoke(new SpanQueryDescriptor<T>()))
+			a.Clauses = v.Select(selector => selector?.Invoke(new SpanQueryDescriptor<T>()))
 				.Where(query => query != null && !((IQuery)query).Conditionless)
 				.ToListOrNullIfEmpty();
 		});
 
-		public SpanNearQueryDescriptor<T> Slop(int? slop) => Assign(a => a.Slop = slop);
+		public SpanNearQueryDescriptor<T> Slop(int? slop) => Assign(slop, (a, v) => a.Slop = v);
 
-		public SpanNearQueryDescriptor<T> InOrder(bool? inOrder = true) => Assign(a => a.InOrder = inOrder);
+		public SpanNearQueryDescriptor<T> InOrder(bool? inOrder = true) => Assign(inOrder, (a, v) => a.InOrder = v);
 	}
 }

@@ -285,10 +285,9 @@ namespace Nest
 			IJsonFormatterResolver formatterResolver
 		)
 		{
-			if (!settings.ContainsKey(key))
+			if (!settings.TryGetValue(key, out var setting))
 				return;
 
-			var setting = settings[key];
 			var value = ConvertToValue<T>(setting, formatterResolver);
 			assign(value);
 			s.Add(key, value);
@@ -333,9 +332,8 @@ namespace Nest
 		)
 			where TArray : IEnumerable<TItem>
 		{
-			if (!settings.ContainsKey(key)) return;
+			if (!settings.TryGetValue(key, out var v)) return;
 
-			var v = settings[key];
 			if (!(v is string) && v is IEnumerable)
 			{
 				var value = ConvertToValue<TArray>(v, formatterResolver);

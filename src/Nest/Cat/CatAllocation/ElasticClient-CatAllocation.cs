@@ -16,12 +16,12 @@ namespace Nest
 		/// <inheritdoc />
 		Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(
 			Func<CatAllocationDescriptor, ICatAllocationRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(ICatAllocationRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -33,23 +33,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICatResponse<CatAllocationRecord> CatAllocation(ICatAllocationRequest request) =>
-			DoCat<ICatAllocationRequest, CatAllocationRequestParameters, CatAllocationRecord>(request,
-				LowLevelDispatch.CatAllocationDispatch<CatResponse<CatAllocationRecord>>);
+			DoCat<ICatAllocationRequest, CatAllocationRequestParameters, CatAllocationRecord>(request);
 
 		/// <inheritdoc />
 		public Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(
 			Func<CatAllocationDescriptor, ICatAllocationRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) => CatAllocationAsync(selector.InvokeOrDefault(new CatAllocationDescriptor()), cancellationToken);
+			CancellationToken ct = default
+		) => CatAllocationAsync(selector.InvokeOrDefault(new CatAllocationDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(ICatAllocationRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			DoCatAsync<ICatAllocationRequest, CatAllocationRequestParameters, CatAllocationRecord>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.CatAllocationDispatchAsync<CatResponse<CatAllocationRecord>>
-			);
+		public Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(ICatAllocationRequest request, CancellationToken ct = default) =>
+			DoCatAsync<ICatAllocationRequest, CatAllocationRequestParameters, CatAllocationRecord>(request,ct);
 	}
 }

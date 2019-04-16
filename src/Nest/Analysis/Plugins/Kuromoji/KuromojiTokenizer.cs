@@ -80,18 +80,18 @@ namespace Nest
 		string IKuromojiTokenizer.UserDictionary { get; set; }
 
 		/// <inheritdoc />
-		public KuromojiTokenizerDescriptor Mode(KuromojiTokenizationMode? mode) => Assign(a => a.Mode = mode);
+		public KuromojiTokenizerDescriptor Mode(KuromojiTokenizationMode? mode) => Assign(mode, (a, v) => a.Mode = v);
 
 		/// <inheritdoc />
-		public KuromojiTokenizerDescriptor DiscardPunctuation(bool? discard = true) => Assign(a => a.DiscardPunctuation = discard);
+		public KuromojiTokenizerDescriptor DiscardPunctuation(bool? discard = true) => Assign(discard, (a, v) => a.DiscardPunctuation = v);
 
 		/// <inheritdoc />
-		public KuromojiTokenizerDescriptor UserDictionary(string userDictionary) => Assign(a => a.UserDictionary = userDictionary);
+		public KuromojiTokenizerDescriptor UserDictionary(string userDictionary) => Assign(userDictionary, (a, v) => a.UserDictionary = v);
 
 		/// <inheritdoc />
-		public KuromojiTokenizerDescriptor NBestExamples(string examples) => Assign(a => a.NBestExamples = examples);
+		public KuromojiTokenizerDescriptor NBestExamples(string examples) => Assign(examples, (a, v) => a.NBestExamples = v);
 
 		/// <inheritdoc />
-		public KuromojiTokenizerDescriptor NBestCost(int? cost) => Assign(a => a.NBestCost = cost);
+		public KuromojiTokenizerDescriptor NBestCost(int? cost) => Assign(cost, (a, v) => a.NBestCost = v);
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 
 namespace Nest
@@ -17,7 +18,8 @@ namespace Nest
 		[IgnoreDataMember]
 		protected TInterface Self => _self;
 
-		protected TDescriptor Assign(Action<TInterface> assigner) => Fluent.Assign(_self, assigner);
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		protected TDescriptor Assign<TValue>(TValue value, Action<TInterface, TValue> assigner) => Fluent.Assign(_self, value, assigner);
 
 		/// <summary>
 		/// Hides the <see cref="Equals" /> method.

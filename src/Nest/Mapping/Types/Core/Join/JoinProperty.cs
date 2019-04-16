@@ -32,6 +32,6 @@ namespace Nest
 		IRelations IJoinProperty.Relations { get; set; }
 
 		public JoinPropertyDescriptor<T> Relations(Func<RelationsDescriptor, IPromise<IRelations>> selector) =>
-			Assign(a => a.Relations = selector?.Invoke(new RelationsDescriptor())?.Value);
+			Assign(selector, (a, v) => a.Relations = v?.Invoke(new RelationsDescriptor())?.Value);
 	}
 }

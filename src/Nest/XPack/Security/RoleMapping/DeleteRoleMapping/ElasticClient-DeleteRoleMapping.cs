@@ -16,12 +16,12 @@ namespace Nest
 		/// <inheritdoc />
 		Task<IDeleteRoleMappingResponse> DeleteRoleMappingAsync(Name role,
 			Func<DeleteRoleMappingDescriptor, IDeleteRoleMappingRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
 		Task<IDeleteRoleMappingResponse> DeleteRoleMappingAsync(IDeleteRoleMappingRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -34,27 +34,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IDeleteRoleMappingResponse DeleteRoleMapping(IDeleteRoleMappingRequest request) =>
-			Dispatcher.Dispatch<IDeleteRoleMappingRequest, DeleteRoleMappingRequestParameters, DeleteRoleMappingResponse>(
-				request,
-				(p, d) => LowLevelDispatch.SecurityDeleteRoleMappingDispatch<DeleteRoleMappingResponse>(p)
-			);
+			DoRequest<IDeleteRoleMappingRequest, DeleteRoleMappingResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IDeleteRoleMappingResponse> DeleteRoleMappingAsync(Name role,
+		public Task<IDeleteRoleMappingResponse> DeleteRoleMappingAsync(
+			Name role,
 			Func<DeleteRoleMappingDescriptor, IDeleteRoleMappingRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			DeleteRoleMappingAsync(selector.InvokeOrDefault(new DeleteRoleMappingDescriptor(role)), cancellationToken);
+			CancellationToken ct = default
+		) => DeleteRoleMappingAsync(selector.InvokeOrDefault(new DeleteRoleMappingDescriptor(role)), ct);
 
 		/// <inheritdoc />
-		public Task<IDeleteRoleMappingResponse> DeleteRoleMappingAsync(IDeleteRoleMappingRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
-				.DispatchAsync<IDeleteRoleMappingRequest, DeleteRoleMappingRequestParameters, DeleteRoleMappingResponse, IDeleteRoleMappingResponse>(
-					request,
-					cancellationToken,
-					(p, d, c) => LowLevelDispatch.SecurityDeleteRoleMappingDispatchAsync<DeleteRoleMappingResponse>(p, c)
-				);
+		public Task<IDeleteRoleMappingResponse> DeleteRoleMappingAsync(IDeleteRoleMappingRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeleteRoleMappingRequest, IDeleteRoleMappingResponse, DeleteRoleMappingResponse>(request, request.RequestParameters, ct);
 	}
 }

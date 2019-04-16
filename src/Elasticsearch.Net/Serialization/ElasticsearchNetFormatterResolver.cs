@@ -29,6 +29,7 @@ namespace Elasticsearch.Net
 				ElasticsearchNetEnumResolver.Instance, // Specialized Enum handling
 				AttributeFormatterResolver.Instance, // [JsonFormatter]
 				DynamicGenericResolver.Instance, // T[], List<T>, etc...
+				ExceptionFormatterResolver.Instance
 			};
 
 			private readonly IJsonFormatterResolver _finalFormatter;

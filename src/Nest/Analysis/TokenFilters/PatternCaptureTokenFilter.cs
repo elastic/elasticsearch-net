@@ -45,12 +45,12 @@ namespace Nest
 		bool? IPatternCaptureTokenFilter.PreserveOriginal { get; set; }
 
 		/// <inheritdoc />
-		public PatternCaptureTokenFilterDescriptor PreserveOriginal(bool? preserve = true) => Assign(a => a.PreserveOriginal = preserve);
+		public PatternCaptureTokenFilterDescriptor PreserveOriginal(bool? preserve = true) => Assign(preserve, (a, v) => a.PreserveOriginal = v);
 
 		/// <inheritdoc />
-		public PatternCaptureTokenFilterDescriptor Patterns(IEnumerable<string> patterns) => Assign(a => a.Patterns = patterns);
+		public PatternCaptureTokenFilterDescriptor Patterns(IEnumerable<string> patterns) => Assign(patterns, (a, v) => a.Patterns = v);
 
 		/// <inheritdoc />
-		public PatternCaptureTokenFilterDescriptor Patterns(params string[] patterns) => Assign(a => a.Patterns = patterns);
+		public PatternCaptureTokenFilterDescriptor Patterns(params string[] patterns) => Assign(patterns, (a, v) => a.Patterns = v);
 	}
 }

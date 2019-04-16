@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -8,7 +7,7 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 
-namespace Tests.XPack.MachineLearning.Info
+namespace Tests.XPack.MachineLearning.MachineLearningInfo
 {
 	public class MachineLearningInfoApiTests
 		: MachineLearningIntegrationTestBase<IMachineLearningInfoResponse, IMachineLearningInfoRequest, MachineLearningInfoDescriptor, MachineLearningInfoRequest>
@@ -23,7 +22,7 @@ namespace Tests.XPack.MachineLearning.Info
 
 		protected override MachineLearningInfoRequest Initializer => new MachineLearningInfoRequest();
 
-		protected override string UrlPath => $"_xpack/ml/info";
+		protected override string UrlPath => $"_ml/info";
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.MachineLearningInfo(f),
 			(client, f) => client.MachineLearningInfoAsync(f),

@@ -36,6 +36,8 @@ namespace Elasticsearch.Net
 
 		public Uri Uri { get; set; }
 
+		public IConnectionConfigurationValues ConnectionConfiguration { get; set; }
+
 		public override string ToString() =>
 			$"{(Success ? "S" : "Uns")}uccessful low level call on {HttpMethod.GetStringValue()}: {Uri.PathAndQuery}";
 	}

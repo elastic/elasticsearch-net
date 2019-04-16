@@ -24,13 +24,13 @@ namespace Nest
 		/// Checks if aliases exist for indices
 		/// </summary>
 		Task<IExistsResponse> AliasExistsAsync(Names name, Func<AliasExistsDescriptor, IAliasExistsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		);
 
 		/// <summary>
 		/// Checks if aliases exist for indices
 		/// </summary>
-		Task<IExistsResponse> AliasExistsAsync(IAliasExistsRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IExistsResponse> AliasExistsAsync(IAliasExistsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -41,25 +41,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IExistsResponse AliasExists(IAliasExistsRequest request) =>
-			Dispatcher.Dispatch<IAliasExistsRequest, AliasExistsRequestParameters, ExistsResponse>(
-				request,
-				(p, d) => LowLevelDispatch.IndicesExistsAliasDispatch<ExistsResponse>(p)
-			);
+			DoRequest<IAliasExistsRequest, ExistsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IExistsResponse> AliasExistsAsync(Names name, Func<AliasExistsDescriptor, IAliasExistsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			AliasExistsAsync(selector.InvokeOrDefault(new AliasExistsDescriptor(name)), cancellationToken);
-
+		public Task<IExistsResponse> AliasExistsAsync(
+			Names name,
+			Func<AliasExistsDescriptor, IAliasExistsRequest> selector = null,
+			CancellationToken cancellationToken = default
+		) => AliasExistsAsync(selector.InvokeOrDefault(new AliasExistsDescriptor(name)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IExistsResponse> AliasExistsAsync(IAliasExistsRequest request, CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher.DispatchAsync<IAliasExistsRequest, AliasExistsRequestParameters, ExistsResponse, IExistsResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.IndicesExistsAliasDispatchAsync<ExistsResponse>(p, c)
-			);
+		public Task<IExistsResponse> AliasExistsAsync(IAliasExistsRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IAliasExistsRequest, IExistsResponse, ExistsResponse>(request, request.RequestParameters, ct);
 	}
 }

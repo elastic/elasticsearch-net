@@ -19,7 +19,7 @@ namespace Tests.Indices.Monitoring.IndicesRecovery
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
 		protected override RecoveryStatusRequest Initializer => new RecoveryStatusRequest(Infer.AllIndices);
-		protected override string UrlPath => "/_recovery";
+		protected override string UrlPath => "/_all/_recovery";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.RecoveryStatus(Infer.AllIndices, f),

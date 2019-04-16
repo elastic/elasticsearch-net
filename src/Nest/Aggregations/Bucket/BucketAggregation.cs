@@ -31,16 +31,16 @@ namespace Nest
 
 		string IAggregation.Name { get; set; }
 
-		protected TBucketAggregation Assign(Action<TBucketAggregationInterface> assigner) =>
-			Fluent.Assign((TBucketAggregation)this, assigner);
+		protected TBucketAggregation Assign<TValue>(TValue value, Action<TBucketAggregationInterface, TValue> assigner) =>
+			Fluent.Assign((TBucketAggregation)this, value, assigner);
 
 		public TBucketAggregation Aggregations(Func<AggregationContainerDescriptor<T>, IAggregationContainer> selector) =>
-			Assign(a => a.Aggregations = selector?.Invoke(new AggregationContainerDescriptor<T>())?.Aggregations);
+			Assign(selector, (a, v) => a.Aggregations = v?.Invoke(new AggregationContainerDescriptor<T>())?.Aggregations);
 
 		public TBucketAggregation Aggregations(AggregationDictionary aggregations) =>
-			Assign(a => a.Aggregations = aggregations);
+			Assign(aggregations, (a, v) => a.Aggregations = v);
 
 		public TBucketAggregation Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) =>
-			Assign(a => a.Meta = selector?.Invoke(new FluentDictionary<string, object>()));
+			Assign(selector, (a, v) => a.Meta = v?.Invoke(new FluentDictionary<string, object>()));
 	}
 }

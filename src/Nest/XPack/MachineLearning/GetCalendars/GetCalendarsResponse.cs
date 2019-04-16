@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -11,25 +11,25 @@ namespace Nest
 		/// <summary>
 		/// The count of calendars.
 		/// </summary>
-		[JsonProperty("count")]
+		[DataMember(Name = "count")]
 		long Count { get; }
 
 		/// <summary>
 		/// An array of calendar resources.
 		/// </summary>
-		[JsonProperty("calendars")]
+		[DataMember(Name = "calendars")]
 		IReadOnlyCollection<Calendar> Calendars { get; }
 	}
 
 	public class Calendar
 	{
-		[JsonProperty("calendar_id")]
+		[DataMember(Name = "calendar_id")]
 		public string CalendarId { get; set; }
 
-		[JsonProperty("job_ids")]
+		[DataMember(Name = "job_ids")]
 		public IReadOnlyCollection<string> JobIds { get; set; } = EmptyReadOnly<string>.Collection;
 
-		[JsonProperty("description")]
+		[DataMember(Name = "description")]
 		public string Description { get; set; }
 	}
 

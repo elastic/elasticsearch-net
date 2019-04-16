@@ -22,40 +22,22 @@ namespace Nest
 			return catResponse;
 		}
 
-		private ICatResponse<TCatRecord> DoCat<TRequest, TParams, TCatRecord>(
-			TRequest request,
-			Func<IRequest<TParams>, CatResponse<TCatRecord>> dispatch
-		)
+		private ICatResponse<TCatRecord> DoCat<TRequest, TParams, TCatRecord>(TRequest request)
 			where TCatRecord : ICatRecord
 			where TParams : RequestParameters<TParams>, new()
-			where TRequest : IRequest<TParams> =>
-			Dispatcher.Dispatch<TRequest, TParams, CatResponse<TCatRecord>>(
-				ForceConfiguration<TRequest, TParams>(request, c =>
-				{
-					c.Accept = RequestData.MimeType;
-					c.ContentType = RequestData.MimeType;
-				}),
-				new Func<IApiCallDetails, Stream, CatResponse<TCatRecord>>(DeserializeCatResponse<TCatRecord>),
-				(p, d) => dispatch(p)
-			);
+			where TRequest : class, IRequest<TParams>
+		{
+			request.RequestParameters.DeserializationOverride = DeserializeCatResponse<TCatRecord>;
+			return DoRequest<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, r => ForceJson(r));
+		}
 
-		private Task<ICatResponse<TCatRecord>> DoCatAsync<TRequest, TParams, TCatRecord>(
-			TRequest request,
-			CancellationToken cancellationToken,
-			Func<IRequest<TParams>, CancellationToken, Task<CatResponse<TCatRecord>>> dispatch
-		)
+		private Task<ICatResponse<TCatRecord>> DoCatAsync<TRequest, TParams, TCatRecord>(TRequest request, CancellationToken ct)
 			where TCatRecord : ICatRecord
 			where TParams : RequestParameters<TParams>, new()
-			where TRequest : IRequest<TParams> =>
-			Dispatcher.DispatchAsync<TRequest, TParams, CatResponse<TCatRecord>, ICatResponse<TCatRecord>>(
-				ForceConfiguration<TRequest, TParams>(request, c =>
-				{
-					c.Accept = RequestData.MimeType;
-					c.ContentType = RequestData.MimeType;
-				}),
-				cancellationToken,
-				new Func<IApiCallDetails, Stream, CatResponse<TCatRecord>>(DeserializeCatResponse<TCatRecord>),
-				(p, d, c) => dispatch(p, c)
-			);
+			where TRequest : class, IRequest<TParams>
+		{
+			request.RequestParameters.DeserializationOverride = DeserializeCatResponse<TCatRecord>;
+			return DoRequestAsync<TRequest, ICatResponse<TCatRecord>, CatResponse<TCatRecord>>(request, request.RequestParameters, ct, r => ForceJson(r));
+		}
 	}
 }

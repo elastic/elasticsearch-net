@@ -58,20 +58,20 @@ namespace Nest
 		Field IJsonProcessor.TargetField { get; set; }
 
 		/// <inheritdoc />
-		public JsonProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public JsonProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc />
 		public JsonProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.Field = objectPath);
+			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc />
-		public JsonProcessorDescriptor<T> TargetField(Field field) => Assign(a => a.TargetField = field);
+		public JsonProcessorDescriptor<T> TargetField(Field field) => Assign(field, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc />
 		public JsonProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) =>
-			Assign(a => a.TargetField = objectPath);
+			Assign(objectPath, (a, v) => a.TargetField = v);
 
 		/// <inheritdoc />
-		public JsonProcessorDescriptor<T> AddToRoot(bool? addToRoot = true) => Assign(a => a.AddToRoot = addToRoot);
+		public JsonProcessorDescriptor<T> AddToRoot(bool? addToRoot = true) => Assign(addToRoot, (a, v) => a.AddToRoot = v);
 	}
 }

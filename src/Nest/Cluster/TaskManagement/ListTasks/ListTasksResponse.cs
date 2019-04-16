@@ -18,12 +18,18 @@ namespace Nest
 	{
 		public override bool IsValid => base.IsValid && !NodeFailures.HasAny();
 		public IReadOnlyCollection<ErrorCause> NodeFailures { get; internal set; } = EmptyReadOnly<ErrorCause>.Collection;
-
 		public IReadOnlyDictionary<string, TaskExecutingNode> Nodes { get; internal set; } = EmptyReadOnly<string, TaskExecutingNode>.Dictionary;
 	}
 
+	/// <summary>
+	/// A node executing a task
+	/// </summary>
 	public class TaskExecutingNode
 	{
+		[DataMember(Name = "attributes")]
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, string>))]
+		public IReadOnlyDictionary<string, string> Attributes { get; internal set; } = EmptyReadOnly<string, string>.Dictionary;
+
 		[DataMember(Name = "host")]
 		public string Host { get; internal set; }
 
@@ -33,6 +39,9 @@ namespace Nest
 		[DataMember(Name = "name")]
 		public string Name { get; internal set; }
 
+		[DataMember(Name = "roles")]
+		public IEnumerable<string> Roles { get; internal set; }
+
 		[DataMember(Name = "tasks")]
 		public IReadOnlyDictionary<TaskId, TaskState> Tasks { get; internal set; } = EmptyReadOnly<TaskId, TaskState>.Dictionary;
 
@@ -40,6 +49,9 @@ namespace Nest
 		public string TransportAddress { get; internal set; }
 	}
 
+	/// <summary>
+	/// The state of the task
+	/// </summary>
 	public class TaskState
 	{
 		[DataMember(Name = "action")]

@@ -78,7 +78,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 			{
 				Index = CallIsolatedValue,
 				Query = new MatchQuery { Field = Field<Test>(p => p.Flag), Query = "bar" },
-				Sort = new List<ISort> { new SortField { Field = "id", Order = SortOrder.Ascending } },
+				Sort = new List<ISort> { new FieldSort { Field = "id", Order = SortOrder.Ascending } },
 				Size = 100
 			},
 			Destination = new ReindexDestination

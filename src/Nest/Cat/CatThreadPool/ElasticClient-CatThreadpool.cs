@@ -16,12 +16,12 @@ namespace Nest
 		/// <inheritdoc />
 		Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(
 			Func<CatThreadPoolDescriptor, ICatThreadPoolRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default(CancellationToken)
 		);
 
 		/// <inheritdoc />
 		Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(ICatThreadPoolRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default(CancellationToken)
 		);
 	}
 
@@ -33,20 +33,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ICatResponse<CatThreadPoolRecord> CatThreadPool(ICatThreadPoolRequest request) =>
-			DoCat<ICatThreadPoolRequest, CatThreadPoolRequestParameters, CatThreadPoolRecord>(request,
-				LowLevelDispatch.CatThreadPoolDispatch<CatResponse<CatThreadPoolRecord>>);
+			DoCat<ICatThreadPoolRequest, CatThreadPoolRequestParameters, CatThreadPoolRecord>(request);
 
 		/// <inheritdoc />
 		public Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(
 			Func<CatThreadPoolDescriptor, ICatThreadPoolRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) => CatThreadPoolAsync(selector.InvokeOrDefault(new CatThreadPoolDescriptor()), cancellationToken);
+			CancellationToken ct = default
+		) => CatThreadPoolAsync(selector.InvokeOrDefault(new CatThreadPoolDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(ICatThreadPoolRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			DoCatAsync<ICatThreadPoolRequest, CatThreadPoolRequestParameters, CatThreadPoolRecord>(request, cancellationToken,
-				LowLevelDispatch.CatThreadPoolDispatchAsync<CatResponse<CatThreadPoolRecord>>);
+		public Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(ICatThreadPoolRequest request, CancellationToken ct = default) =>
+			DoCatAsync<ICatThreadPoolRequest, CatThreadPoolRequestParameters, CatThreadPoolRecord>(request, ct);
 	}
 }

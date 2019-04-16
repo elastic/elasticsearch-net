@@ -23,11 +23,11 @@ namespace Nest
 		/// <inheritdoc />
 		Task<IGetAliasResponse> GetAliasAsync(
 			Func<GetAliasDescriptor, IGetAliasRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IGetAliasResponse> GetAliasAsync(IGetAliasRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IGetAliasResponse> GetAliasAsync(IGetAliasRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -38,23 +38,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetAliasResponse GetAlias(IGetAliasRequest request) =>
-			Dispatcher.Dispatch<IGetAliasRequest, GetAliasRequestParameters, GetAliasResponse>(
-				ForceConfiguration<IGetAliasRequest, GetAliasRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
-				(p, d) => LowLevelDispatch.IndicesGetAliasDispatch<GetAliasResponse>(p)
-			);
+			DoRequest<IGetAliasRequest, GetAliasResponse>(request, request.RequestParameters, r => AcceptAllStatusCodesHandler(r));
 
 		/// <inheritdoc />
 		public Task<IGetAliasResponse> GetAliasAsync(
 			Func<GetAliasDescriptor, IGetAliasRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) => GetAliasAsync(selector.InvokeOrDefault(new GetAliasDescriptor()), cancellationToken);
+			CancellationToken ct = default
+		) => GetAliasAsync(selector.InvokeOrDefault(new GetAliasDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IGetAliasResponse> GetAliasAsync(IGetAliasRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IGetAliasRequest, GetAliasRequestParameters, GetAliasResponse, IGetAliasResponse>(
-				ForceConfiguration<IGetAliasRequest, GetAliasRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
-				cancellationToken,
-				(p, d, c) => LowLevelDispatch.IndicesGetAliasDispatchAsync<GetAliasResponse>(p, c)
-			);
+		public Task<IGetAliasResponse> GetAliasAsync(IGetAliasRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetAliasRequest, IGetAliasResponse, GetAliasResponse>
+				(request, request.RequestParameters, ct, r => AcceptAllStatusCodesHandler(r));
 	}
 }

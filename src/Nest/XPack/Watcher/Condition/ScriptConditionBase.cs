@@ -29,12 +29,6 @@ namespace Nest
 	{
 		public IndexedScriptConditionDescriptor Id(string id) => new IndexedScriptConditionDescriptor(id);
 
-		[Obsolete("Indexed() sets a property named id, this is confusing and thats why we intent to remove this in NEST 7.x please use Id()")]
-		public IndexedScriptConditionDescriptor Indexed(string id) => new IndexedScriptConditionDescriptor(id);
-
-		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
-		public InlineScriptConditionDescriptor Inline(string script) => new InlineScriptConditionDescriptor(script);
-
 		public InlineScriptConditionDescriptor Source(string source) => new InlineScriptConditionDescriptor(source);
 	}
 
@@ -46,24 +40,23 @@ namespace Nest
 		string IScriptCondition.Lang { get; set; }
 		IDictionary<string, object> IScriptCondition.Params { get; set; }
 
-		public TDescriptor Lang(string lang) => Assign(a => a.Lang = lang);
+		public TDescriptor Lang(string lang) => Assign(lang, (a, v) => a.Lang = v);
 
 		public TDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramsDictionary) =>
-			Assign(a => a.Params = paramsDictionary(new FluentDictionary<string, object>()));
+			Assign(paramsDictionary(new FluentDictionary<string, object>()), (a, v) => a.Params = v);
 
 		public TDescriptor Params(Dictionary<string, object> paramsDictionary) =>
-			Assign(a => a.Params = paramsDictionary);
+			Assign(paramsDictionary, (a, v) => a.Params = v);
 	}
 
 	internal class ScriptConditionFormatter : IJsonFormatter<IScriptCondition>
 	{
 		private static readonly AutomataDictionary AutomataDictionary = new AutomataDictionary
 		{
-			{ "inline", 0 },
-			{ "source", 1 },
-			{ "id", 2 },
-			{ "lang", 3 },
-			{ "params", 4 }
+			{ "source", 0 },
+			{ "id", 1 },
+			{ "lang", 2 },
+			{ "params", 3 }
 		};
 
 		public IScriptCondition Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -83,16 +76,15 @@ namespace Nest
 					switch (value)
 					{
 						case 0:
-						case 1:
 							scriptCondition = new InlineScriptCondition(reader.ReadString());
 							break;
-						case 2:
+						case 1:
 							scriptCondition = new IndexedScriptCondition(reader.ReadString());
 							break;
-						case 3:
+						case 2:
 							language = reader.ReadString();
 							break;
-						case 4:
+						case 3:
 							parameters = formatterResolver.GetFormatter<Dictionary<string, object>>()
 								.Deserialize(ref reader, formatterResolver);
 							break;

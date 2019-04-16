@@ -36,7 +36,7 @@ namespace Tests.XPack.MachineLearning.PutCalendar
 			};
 
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"_xpack/ml/calendars/{CallIsolatedValue}";
+		protected override string UrlPath => $"_ml/calendars/{CallIsolatedValue}";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.PutCalendar(CallIsolatedValue, f),

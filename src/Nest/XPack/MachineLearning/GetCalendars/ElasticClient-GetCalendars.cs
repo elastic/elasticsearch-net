@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
@@ -18,11 +19,11 @@ namespace Nest
 
 		/// <inheritdoc cref="GetCalendars(System.Func{Nest.GetCalendarsDescriptor,Nest.IGetCalendarsRequest})" />
 		Task<IGetCalendarsResponse> GetCalendarsAsync(Func<GetCalendarsDescriptor, IGetCalendarsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="GetCalendars(System.Func{Nest.GetCalendarsDescriptor,Nest.IGetCalendarsRequest})" />
-		Task<IGetCalendarsResponse> GetCalendarsAsync(IGetCalendarsRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IGetCalendarsResponse> GetCalendarsAsync(IGetCalendarsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -33,23 +34,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IGetCalendarsResponse GetCalendars(IGetCalendarsRequest request) =>
-			Dispatcher.Dispatch<IGetCalendarsRequest, GetCalendarsRequestParameters, GetCalendarsResponse>(
-				request,
-				LowLevelDispatch.XpackMlGetCalendarsDispatch<GetCalendarsResponse>
-			);
+			DoRequest<IGetCalendarsRequest, GetCalendarsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetCalendarsResponse> GetCalendarsAsync(Func<GetCalendarsDescriptor, IGetCalendarsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			GetCalendarsAsync(selector.InvokeOrDefault(new GetCalendarsDescriptor()), cancellationToken);
+		public Task<IGetCalendarsResponse> GetCalendarsAsync(
+			Func<GetCalendarsDescriptor, IGetCalendarsRequest> selector = null,
+			CancellationToken ct = default
+		) => GetCalendarsAsync(selector.InvokeOrDefault(new GetCalendarsDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IGetCalendarsResponse> GetCalendarsAsync(IGetCalendarsRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			Dispatcher.DispatchAsync<IGetCalendarsRequest, GetCalendarsRequestParameters, GetCalendarsResponse, IGetCalendarsResponse>(
-				request,
-				cancellationToken,
-				LowLevelDispatch.XpackMlGetCalendarsDispatchAsync<GetCalendarsResponse>
-			);
+		public Task<IGetCalendarsResponse> GetCalendarsAsync(IGetCalendarsRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetCalendarsRequest, IGetCalendarsResponse, GetCalendarsResponse>(request, request.RequestParameters, ct);
 	}
 }

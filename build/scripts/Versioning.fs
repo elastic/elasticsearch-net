@@ -103,7 +103,7 @@ module Versioning =
                 | Some sn -> sn
                 | None -> failwithf "Could not locate sn.exe"
 
-    let private oficialToken = "96c599bbe3e70f5d"
+    let private officialToken = "96c599bbe3e70f5d"
 
     let private validate dll name =
         let sn = sn ()
@@ -122,8 +122,8 @@ module Versioning =
     
         let valid = (out.ExitCode, token)
         match valid with
-        | (Some 0, t) when t = oficialToken  -> printfn "%s was signed with official key token %s" name t
-        | (_, t) -> printfn "%s was not signed with the official token: %s but %s" name oficialToken t
+        | (Some 0, t) when t = officialToken  -> printfn "%s was signed with official key token %s" name t
+        | (_, t) -> printfn "%s was not signed with the official token: %s but %s" name officialToken t
         
     let private validateDllStrongName dll name =
         match File.Exists dll with

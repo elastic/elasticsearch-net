@@ -19,12 +19,12 @@ namespace Nest
 		/// <inheritdoc />
 		Task<IExistsResponse> IndexTemplateExistsAsync(Name template,
 			Func<IndexTemplateExistsDescriptor, IIndexTemplateExistsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
 		Task<IExistsResponse> IndexTemplateExistsAsync(IIndexTemplateExistsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken ct = default
 		);
 	}
 
@@ -36,25 +36,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IExistsResponse IndexTemplateExists(IIndexTemplateExistsRequest request) =>
-			Dispatcher.Dispatch<IIndexTemplateExistsRequest, IndexTemplateExistsRequestParameters, ExistsResponse>(
-				request,
-				(p, d) => LowLevelDispatch.IndicesExistsTemplateDispatch<ExistsResponse>(p)
-			);
+			DoRequest<IIndexTemplateExistsRequest, ExistsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
 		public Task<IExistsResponse> IndexTemplateExistsAsync(Name template,
 			Func<IndexTemplateExistsDescriptor, IIndexTemplateExistsRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)
+			CancellationToken cancellationToken = default
 		) =>
 			IndexTemplateExistsAsync(selector.InvokeOrDefault(new IndexTemplateExistsDescriptor(template)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IExistsResponse> IndexTemplateExistsAsync(IIndexTemplateExistsRequest request,
-			CancellationToken cancellationToken = default(CancellationToken)
-		) => Dispatcher.DispatchAsync<IIndexTemplateExistsRequest, IndexTemplateExistsRequestParameters, ExistsResponse, IExistsResponse>(
-			request,
-			cancellationToken,
-			(p, d, c) => LowLevelDispatch.IndicesExistsTemplateDispatchAsync<ExistsResponse>(p, c)
-		);
+		public Task<IExistsResponse> IndexTemplateExistsAsync(IIndexTemplateExistsRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IIndexTemplateExistsRequest, IExistsResponse, ExistsResponse>(request, request.RequestParameters, ct);
 	}
 }

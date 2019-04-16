@@ -1,9 +1,9 @@
 namespace Nest
 {
+	[MapsApi("ml.delete_calendar_event")]
 	public partial interface IDeleteCalendarEventRequest { }
 
 	public partial class DeleteCalendarEventRequest { }
 
-	[DescriptorFor("XpackMlDeleteCalendarEvent")]
 	public partial class DeleteCalendarEventDescriptor { }
 }

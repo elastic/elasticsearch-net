@@ -13,7 +13,7 @@ namespace Nest
 		public double? MaxScore { get; internal set; }
 
 		[DataMember(Name = "total")]
-		public HitsTotal Total { get; internal set; }
+		public TotalHits Total { get; internal set; }
 
 		public IEnumerable<T> Documents<T>() where T : class
 		{

@@ -8,11 +8,13 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	/// <summary>
-	/// Provides the connection settings for NEST's <see cref="ElasticClient" />
-	/// </summary>
+	/// <inheritdoc cref="IConnectionSettingsValues" />
 	public class ConnectionSettings : ConnectionSettingsBase<ConnectionSettings>
 	{
+		/// <summary>
+		/// A delegate used to construct a serializer to serialize CLR types representing documents and other types related to documents.
+		/// By default, the internal serializer will be used to serializer all types.
+		/// </summary>
 		public delegate IElasticsearchSerializer SourceSerializerFactory(IElasticsearchSerializer builtIn, IConnectionSettingsValues values);
 
 		public ConnectionSettings(Uri uri = null)
@@ -44,9 +46,7 @@ namespace Nest
 			: base(connectionPool, connection, sourceSerializer, propertyMappingProvider) { }
 	}
 
-	/// <summary>
-	/// Provides the connection settings for NEST's <see cref="ElasticClient" />
-	/// </summary>
+	/// <inheritdoc cref="IConnectionSettingsValues" />
 	[Browsable(false)]
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public abstract class ConnectionSettingsBase<TConnectionSettings> : ConnectionConfiguration<TConnectionSettings>, IConnectionSettingsValues
@@ -73,9 +73,8 @@ namespace Nest
 		private Func<string, string> _defaultFieldNameInferrer;
 		private string _defaultIndex;
 
-		private string _defaultTypeName;
-
-		private Func<Type, string> _defaultTypeNameInferrer;
+		private HashSet<Type> _disableIdInference = new HashSet<Type>();
+		private bool _defaultDisableAllInference;
 
 		protected ConnectionSettingsBase(
 			IConnectionPool connectionPool,
@@ -93,12 +92,10 @@ namespace Nest
 			var serializerAsMappingProvider = _sourceSerializer as IPropertyMappingProvider;
 			_propertyMappingProvider = propertyMappingProvider ?? serializerAsMappingProvider ?? new PropertyMappingProvider();
 
-			_defaultTypeNameInferrer = t => !_defaultTypeName.IsNullOrEmpty() ? _defaultTypeName : t.Name.ToLowerInvariant();
 			_defaultFieldNameInferrer = p => p.ToCamelCase();
 			_defaultIndices = new FluentDictionary<Type, string>();
 			_defaultTypeNames = new FluentDictionary<Type, string>();
 			_defaultRelationNames = new FluentDictionary<Type, string>();
-
 			_inferrer = new Inferrer(this);
 		}
 
@@ -106,68 +103,26 @@ namespace Nest
 		string IConnectionSettingsValues.DefaultIndex => _defaultIndex;
 		FluentDictionary<Type, string> IConnectionSettingsValues.DefaultIndices => _defaultIndices;
 		FluentDictionary<Type, string> IConnectionSettingsValues.DefaultRelationNames => _defaultRelationNames;
-		string IConnectionSettingsValues.DefaultTypeName => _defaultTypeName;
-		Func<Type, string> IConnectionSettingsValues.DefaultTypeNameInferrer => _defaultTypeNameInferrer;
-		FluentDictionary<Type, string> IConnectionSettingsValues.DefaultTypeNames => _defaultTypeNames;
 		FluentDictionary<Type, string> IConnectionSettingsValues.IdProperties => _idProperties;
 		Inferrer IConnectionSettingsValues.Inferrer => _inferrer;
 		IPropertyMappingProvider IConnectionSettingsValues.PropertyMappingProvider => _propertyMappingProvider;
 		FluentDictionary<MemberInfo, IPropertyMapping> IConnectionSettingsValues.PropertyMappings => _propertyMappings;
 		FluentDictionary<Type, string> IConnectionSettingsValues.RouteProperties => _routeProperties;
 		IElasticsearchSerializer IConnectionSettingsValues.SourceSerializer => _sourceSerializer;
+		HashSet<Type> IConnectionSettingsValues.DisableIdInference => _disableIdInference;
+		bool IConnectionSettingsValues.DefaultDisableIdInference => _defaultDisableAllInference;
 
-		/// <summary>
-		/// The default index to use when no index is specified.
-		/// </summary>
-		/// <param name="defaultIndex">
-		/// When null/empty/not set might throw
-		/// <see cref="NullReferenceException" /> later on when not specifying index explicitly while indexing.
-		/// </param>
-		public TConnectionSettings DefaultIndex(string defaultIndex)
-		{
-			_defaultIndex = defaultIndex;
-			return (TConnectionSettings)this;
-		}
+		/// <inheritdoc cref="IConnectionSettingsValues.DefaultIndex"/>
+		public TConnectionSettings DefaultIndex(string defaultIndex) => Assign(defaultIndex, (a, v) => a._defaultIndex = v);
 
-		/// <summary>
-		/// Sets a default type name to use within Elasticsearch for all CLR types. If <see cref="DefaultTypeNameInferrer" /> is also set, a configured
-		/// default type name will only be used when <see cref="DefaultTypeNameInferrer" />returns null or empty. If unset, the default type
-		/// name for types will be the lowercased CLR type name.
-		/// </summary>
-		public TConnectionSettings DefaultTypeName(string defaultTypeName)
-		{
-			_defaultTypeName = defaultTypeName;
-			return (TConnectionSettings)this;
-		}
+		/// <inheritdoc cref="IConnectionSettingsValues.DefaultFieldNameInferrer"/>
+		public TConnectionSettings DefaultFieldNameInferrer(Func<string, string> fieldNameInferrer) => 
+			Assign(fieldNameInferrer, (a, v) => a._defaultFieldNameInferrer = v);
 
-		/// <summary>
-		/// Specify how field names are inferred from POCO property names.
-		/// <para></para>
-		/// By default, NEST camel cases property names
-		/// e.g. EmailAddress POCO property => "emailAddress" Elasticsearch document field name
-		/// </summary>
-		public TConnectionSettings DefaultFieldNameInferrer(Func<string, string> fieldNameInferrer)
-		{
-			_defaultFieldNameInferrer = fieldNameInferrer;
-			return (TConnectionSettings)this;
-		}
+		/// <inheritdoc cref="IConnectionSettingsValues.DisableIdInference"/>
+		public TConnectionSettings DefaultDisableIdInference(bool disable = true) => Assign(disable, (a, v) => a._defaultDisableAllInference = v);
 
-		/// <summary>
-		/// Specify how type names are inferred from POCO types.
-		/// By default, type names are inferred by calling <see cref="string.ToLowerInvariant" />
-		/// on the type's name.
-		/// </summary>
-		public TConnectionSettings DefaultTypeNameInferrer(Func<Type, string> typeNameInferrer)
-		{
-			typeNameInferrer.ThrowIfNull(nameof(typeNameInferrer));
-			_defaultTypeNameInferrer = typeNameInferrer;
-			return (TConnectionSettings)this;
-		}
-
-		/// <summary>
-		/// Specify which property on a given POCO should be used to infer the id of the document when
-		/// indexed in Elasticsearch.
-		/// </summary>
+		/// <inheritdoc cref="IConnectionSettingsValues.IdProperties"/>
 		private void MapIdPropertyFor<TDocument>(Expression<Func<TDocument, object>> objectPath)
 		{
 			objectPath.ThrowIfNull(nameof(objectPath));
@@ -175,9 +130,9 @@ namespace Nest
 			var memberInfo = new MemberInfoResolver(objectPath);
 			var fieldName = memberInfo.Members.Single().Name;
 
-			if (_idProperties.ContainsKey(typeof(TDocument)))
+			if (_idProperties.TryGetValue(typeof(TDocument), out var idPropertyFieldName))
 			{
-				if (_idProperties[typeof(TDocument)].Equals(fieldName)) return;
+				if (idPropertyFieldName.Equals(fieldName)) return;
 
 				throw new ArgumentException(
 					$"Cannot map '{fieldName}' as the id property for type '{typeof(TDocument).Name}': it already has '{_idProperties[typeof(TDocument)]}' mapped.");
@@ -186,6 +141,7 @@ namespace Nest
 			_idProperties.Add(typeof(TDocument), fieldName);
 		}
 
+		/// <inheritdoc cref="IConnectionSettingsValues.RouteProperties"/>
 		private void MapRoutePropertyFor<TDocument>(Expression<Func<TDocument, object>> objectPath)
 		{
 			objectPath.ThrowIfNull(nameof(objectPath));
@@ -193,9 +149,9 @@ namespace Nest
 			var memberInfo = new MemberInfoResolver(objectPath);
 			var fieldName = memberInfo.Members.Single().Name;
 
-			if (_routeProperties.ContainsKey(typeof(TDocument)))
+			if (_routeProperties.TryGetValue(typeof(TDocument), out var routePropertyFieldName))
 			{
-				if (_routeProperties[typeof(TDocument)].Equals(fieldName)) return;
+				if (routePropertyFieldName.Equals(fieldName)) return;
 
 				throw new ArgumentException(
 					$"Cannot map '{fieldName}' as the route property for type '{typeof(TDocument).Name}': it already has '{_routeProperties[typeof(TDocument)]}' mapped.");
@@ -227,10 +183,10 @@ namespace Nest
 					memberInfo = typeof(TDocument).GetMember(memberInfo.Name, bindingFlags).First();
 				}
 
-				if (_propertyMappings.ContainsKey(memberInfo))
+				if (_propertyMappings.TryGetValue(memberInfo, out var propertyMapping))
 				{
 					var newName = mapping.NewName;
-					var mappedAs = _propertyMappings[memberInfo].Name;
+					var mappedAs = propertyMapping.Name;
 					var typeName = typeof(TDocument).Name;
 					if (mappedAs.IsNullOrEmpty() && newName.IsNullOrEmpty())
 						throw new ArgumentException($"Property mapping '{e}' on type is already ignored");
@@ -249,16 +205,10 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Specify how the mapping is inferred for a given POCO type. Can be used to infer the index, type and relation names.
-		/// The generic version also allows you to set a default id property and control serialization behavior for properties for the POCO.
+		/// Specify how the mapping is inferred for a given CLR type.
+		/// The mapping can infer the index, type, id and relation name for a given CLR type, as well as control
+		/// serialization behaviour for CLR properties.
 		/// </summary>
-		/// <typeparam name="TDocument">The type of the document.</typeparam>
-		/// <param name="selector">The selector.</param>
-		[Obsolete("Please use " + nameof(DefaultMappingFor))]
-		public TConnectionSettings InferMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>> selector)
-			where TDocument : class =>
-			DefaultMappingFor<TDocument>(selector);
-
 		public TConnectionSettings DefaultMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>> selector)
 			where TDocument : class
 		{
@@ -276,22 +226,24 @@ namespace Nest
 				_idProperties[inferMapping.ClrType] = inferMapping.IdPropertyName;
 
 			if (inferMapping.IdProperty != null)
-				MapIdPropertyFor<TDocument>(inferMapping.IdProperty);
+				MapIdPropertyFor(inferMapping.IdProperty);
 
 			if (inferMapping.RoutingProperty != null)
-				MapRoutePropertyFor<TDocument>(inferMapping.RoutingProperty);
+				MapRoutePropertyFor(inferMapping.RoutingProperty);
 
 			if (inferMapping.Properties != null)
-				ApplyPropertyMappings<TDocument>(inferMapping.Properties);
+				ApplyPropertyMappings(inferMapping.Properties);
 
-			return (TConnectionSettings)this;
+			if (inferMapping.DisableIdInference) _disableIdInference.Add(inferMapping.ClrType);
+			else _disableIdInference.Remove(inferMapping.ClrType);
+
+			return UpdateId();
 		}
 
 		/// <summary>
-		/// Specify how the mapping is inferred for a given POCO type. Can be used to infer the index, type, and relation names.
+		/// Specify how the mapping is inferred for a given CLR type.
+		/// The mapping can infer the index, type and relation name for a given CLR type.
 		/// </summary>
-		/// <param name="documentType">The type of the POCO you wish to configure</param>
-		/// <param name="selector">describe the POCO configuration</param>
 		public TConnectionSettings DefaultMappingFor(Type documentType, Func<ClrTypeMappingDescriptor, IClrTypeMapping> selector)
 		{
 			var inferMapping = selector(new ClrTypeMappingDescriptor(documentType));
@@ -307,16 +259,13 @@ namespace Nest
 			if (!string.IsNullOrWhiteSpace(inferMapping.IdPropertyName))
 				_idProperties[inferMapping.ClrType] = inferMapping.IdPropertyName;
 
-			return (TConnectionSettings)this;
+			return UpdateId();
 		}
 
-		/// <summary>
-		/// Specify how the mapping is inferred for a given POCO type. Can be used to infer the index, type, and relation names.
-		/// </summary>
-		/// <param name="typeMappings">The mappings for the POCO types you wish to configure</param>
+		/// <inheritdoc cref="DefaultMappingFor(Type, Func{ClrTypeMappingDescriptor,IClrTypeMapping})"/>
 		public TConnectionSettings DefaultMappingFor(IEnumerable<IClrTypeMapping> typeMappings)
 		{
-			if (typeMappings == null) return (TConnectionSettings)this;
+			if (typeMappings == null) return UpdateId();
 
 			foreach (var inferMapping in typeMappings)
 			{
@@ -330,7 +279,7 @@ namespace Nest
 					_defaultRelationNames.Add(inferMapping.ClrType, inferMapping.RelationName);
 			}
 
-			return (TConnectionSettings)this;
+			return UpdateId();
 		}
 	}
 }

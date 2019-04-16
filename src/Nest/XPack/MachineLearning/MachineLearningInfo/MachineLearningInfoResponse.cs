@@ -1,61 +1,61 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public interface IMachineLearningInfoResponse : IResponse
 	{
-		[JsonProperty("defaults")]
+		[DataMember(Name = "defaults")]
 		Defaults Defaults { get; }
 
-		[JsonProperty("limits")]
+		[DataMember(Name = "limits")]
 		Limits Limits { get; }
 
-		[JsonProperty("upgrade_mode")]
+		[DataMember(Name = "upgrade_mode")]
 		bool? UpgradeMode { get; }
 	}
 
 	public class MachineLearningInfoResponse : ResponseBase, IMachineLearningInfoResponse
 	{
-		[JsonProperty("defaults")]
+		[DataMember(Name = "defaults")]
 		public Defaults Defaults { get; internal set; }
 
-		[JsonProperty("limits")]
+		[DataMember(Name = "limits")]
 		public Limits Limits { get; internal set; }
 
-		[JsonProperty("upgrade_mode")]
+		[DataMember(Name = "upgrade_mode")]
 		public bool? UpgradeMode { get; internal set; }
 	}
 
 	public class Defaults
 	{
-		[JsonProperty("anomaly_detectors")]
+		[DataMember(Name = "anomaly_detectors")]
 		public AnomalyDetectors AnomalyDetectors { get; internal set; }
 
-		[JsonProperty("datafeeds")]
+		[DataMember(Name = "datafeeds")]
 		public Datafeeds Datafeeds { get; internal set; }
 	}
 
 	public class AnomalyDetectors
 	{
-		[JsonProperty("model_memory_limit")]
+		[DataMember(Name = "model_memory_limit")]
 		public string ModelMemoryLimit { get; internal set; }
 
-		[JsonProperty("categorization_examples_limit")]
+		[DataMember(Name = "categorization_examples_limit")]
 		public int CategorizationExamplesLimit { get; internal set; }
 
-		[JsonProperty("model_snapshot_retention_days")]
+		[DataMember(Name = "model_snapshot_retention_days")]
 		public int ModelSnapshotRetentionDays { get; internal set; }
 	}
 
 	public class Datafeeds
 	{
-		[JsonProperty("scroll_size")]
+		[DataMember(Name = "scroll_size")]
 		public int ScrollSize { get; internal set; }
 	}
 
 	public class Limits
 	{
-		[JsonProperty("max_model_memory_limit")]
+		[DataMember(Name = "max_model_memory_limit")]
 		public string MaxModelMemoryLimit { get; internal set; }
 	}
 }

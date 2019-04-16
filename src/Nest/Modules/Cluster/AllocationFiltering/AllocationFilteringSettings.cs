@@ -39,24 +39,24 @@ namespace Nest
 		IAllocationAttributes IAllocationFilteringSettings.Require { get; set; }
 
 		/// <inheritdoc />
-		public AllocationFilteringSettingsDescriptor Include(IAllocationAttributes include) => Assign(a => a.Include = include);
+		public AllocationFilteringSettingsDescriptor Include(IAllocationAttributes include) => Assign(include, (a, v) => a.Include = v);
 
 		/// <inheritdoc />
 		public AllocationFilteringSettingsDescriptor Include(Func<AllocationAttributesDescriptor, IAllocationAttributes> selector) =>
-			Assign(a => a.Include = selector?.Invoke(new AllocationAttributesDescriptor()));
+			Assign(selector, (a, v) => a.Include = v?.Invoke(new AllocationAttributesDescriptor()));
 
 		/// <inheritdoc />
-		public AllocationFilteringSettingsDescriptor Exlude(IAllocationAttributes include) => Assign(a => a.Exclude = include);
+		public AllocationFilteringSettingsDescriptor Exlude(IAllocationAttributes include) => Assign(include, (a, v) => a.Exclude = v);
 
 		/// <inheritdoc />
 		public AllocationFilteringSettingsDescriptor Exclude(Func<AllocationAttributesDescriptor, IAllocationAttributes> selector) =>
-			Assign(a => a.Exclude = selector?.Invoke(new AllocationAttributesDescriptor()));
+			Assign(selector, (a, v) => a.Exclude = v?.Invoke(new AllocationAttributesDescriptor()));
 
 		/// <inheritdoc />
-		public AllocationFilteringSettingsDescriptor Require(IAllocationAttributes include) => Assign(a => a.Require = include);
+		public AllocationFilteringSettingsDescriptor Require(IAllocationAttributes include) => Assign(include, (a, v) => a.Require = v);
 
 		/// <inheritdoc />
 		public AllocationFilteringSettingsDescriptor Require(Func<AllocationAttributesDescriptor, IAllocationAttributes> selector) =>
-			Assign(a => a.Require = selector?.Invoke(new AllocationAttributesDescriptor()));
+			Assign(selector, (a, v) => a.Require = v?.Invoke(new AllocationAttributesDescriptor()));
 	}
 }

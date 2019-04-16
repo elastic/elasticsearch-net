@@ -5,11 +5,15 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	/// <summary>
+	/// An attachment indexed with an ingest pipeline using the ingest-attachment plugin.
+	/// Convenience class for working with attachment fields.
+	/// </summary>
 	[JsonFormatter(typeof(AttachmentFormatter))]
 	public class Attachment
 	{
 		/// <summary>
-		/// The author.
+		/// The author
 		/// </summary>
 		[DataMember(Name = "author")]
 		public string Author { get; set; }
@@ -20,11 +24,17 @@ namespace Nest
 		/// attachment.
 		/// </summary>
 		[IgnoreDataMember]
-		public bool ContainsMetadata => !Name.IsNullOrEmpty() ||
+		public bool ContainsMetadata =>
+			!Author.IsNullOrEmpty() ||
+			ContentLength.HasValue ||
 			!ContentType.IsNullOrEmpty() ||
-			!Language.IsNullOrEmpty() ||
+			Date.HasValue ||
 			DetectLanguage.HasValue ||
-			IndexedCharacters.HasValue;
+			IndexedCharacters.HasValue ||
+			!Keywords.IsNullOrEmpty() ||
+			!Language.IsNullOrEmpty() ||
+			!Name.IsNullOrEmpty() ||
+			!Title.IsNullOrEmpty();
 
 		/// <summary>
 		/// The base64 encoded content. Can be explicitly set
@@ -93,7 +103,7 @@ namespace Nest
 
 	internal class AttachmentFormatter : IJsonFormatter<Attachment>
 	{
-		private static readonly AutomataDictionary _automataDictionary = new AutomataDictionary
+		private static readonly AutomataDictionary AutomataDictionary = new AutomataDictionary
 		{
 			{ "_content", 0 },
 			{ "content", 0 },
@@ -104,15 +114,13 @@ namespace Nest
 			{ "date", 4 },
 			{ "_content_type", 5 },
 			{ "content_type", 5 },
-			{ "contenttype", 5 },
-			{ "contentType", 5 },
 			{ "_content_length", 6 },
 			{ "content_length", 6 },
 			{ "contentlength", 6 },
-			{ "contentLength", 6 },
 			{ "_language", 7 },
 			{ "language", 7 },
 			{ "_detect_language", 8 },
+			{ "detect_language", 8 },
 			{ "_indexed_chars", 9 },
 			{ "indexed_chars", 9 },
 			{ "title", 10 },
@@ -132,7 +140,7 @@ namespace Nest
 				while (reader.ReadIsInObject(ref count))
 				{
 					var propertyName = reader.ReadPropertyNameSegmentRaw();
-					if (_automataDictionary.TryGetValue(propertyName, out var value))
+					if (AutomataDictionary.TryGetValue(propertyName, out var value))
 					{
 						switch (value)
 						{
@@ -193,42 +201,77 @@ namespace Nest
 			else
 			{
 				writer.WriteBeginObject();
-				writer.WritePropertyName("_content");
+				writer.WritePropertyName("content");
 				writer.WriteString(value.Content);
 
-				if (!string.IsNullOrEmpty(value.Name))
+				if (!string.IsNullOrEmpty(value.Author))
 				{
 					writer.WriteValueSeparator();
-					writer.WritePropertyName("_name");
-					writer.WriteString(value.Name);
+					writer.WritePropertyName("author");
+					writer.WriteString(value.Author);
+				}
+
+				if (value.ContentLength.HasValue)
+				{
+					writer.WriteValueSeparator();
+					writer.WritePropertyName("content_length");
+					writer.WriteInt64(value.ContentLength.Value);
 				}
 
 				if (!string.IsNullOrEmpty(value.ContentType))
 				{
 					writer.WriteValueSeparator();
-					writer.WritePropertyName("_content_type");
+					writer.WritePropertyName("content_type");
 					writer.WriteString(value.ContentType);
 				}
 
-				if (!string.IsNullOrEmpty(value.Language))
+				if (value.Date.HasValue)
 				{
 					writer.WriteValueSeparator();
-					writer.WritePropertyName("_language");
-					writer.WriteString(value.Language);
+					writer.WritePropertyName("date");
+					formatterResolver.GetFormatter<DateTime?>().Serialize(ref writer, value.Date, formatterResolver);
 				}
 
 				if (value.DetectLanguage.HasValue)
 				{
 					writer.WriteValueSeparator();
-					writer.WritePropertyName("_detect_language");
+					writer.WritePropertyName("detect_language");
 					writer.WriteBoolean(value.DetectLanguage.Value);
 				}
 
 				if (value.IndexedCharacters.HasValue)
 				{
 					writer.WriteValueSeparator();
-					writer.WritePropertyName("_indexed_chars");
+					writer.WritePropertyName("indexed_chars");
 					writer.WriteInt64(value.IndexedCharacters.Value);
+				}
+
+				if (!string.IsNullOrEmpty(value.Keywords))
+				{
+					writer.WriteValueSeparator();
+					writer.WritePropertyName("keywords");
+					writer.WriteString(value.Keywords);
+				}
+
+				if (!string.IsNullOrEmpty(value.Language))
+				{
+					writer.WriteValueSeparator();
+					writer.WritePropertyName("language");
+					writer.WriteString(value.Language);
+				}
+
+				if (!string.IsNullOrEmpty(value.Name))
+				{
+					writer.WriteValueSeparator();
+					writer.WritePropertyName("name");
+					writer.WriteString(value.Name);
+				}
+
+				if (!string.IsNullOrEmpty(value.Title))
+				{
+					writer.WriteValueSeparator();
+					writer.WritePropertyName("title");
+					writer.WriteString(value.Title);
 				}
 
 				writer.WriteEndObject();

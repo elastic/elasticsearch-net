@@ -34,6 +34,6 @@ namespace Nest
 		int? IUaxEmailUrlTokenizer.MaxTokenLength { get; set; }
 
 		/// <inheritdoc />
-		public UaxEmailUrlTokenizerDescriptor MaxTokenLength(int? maxLength) => Assign(a => a.MaxTokenLength = maxLength);
+		public UaxEmailUrlTokenizerDescriptor MaxTokenLength(int? maxLength) => Assign(maxLength, (a, v) => a.MaxTokenLength = v);
 	}
 }
