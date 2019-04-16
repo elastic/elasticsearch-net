@@ -46,6 +46,40 @@ namespace Tests.CodeStandards
 			ruleBreakers.Should().BeEmpty();
 		}
 
+		[U] public void ResponsesShouldNotHaveInterfaceUnlessThatInterfaceIsCovariant()
+		{
+			var responses = from t in typeof(IResponse).Assembly.ExportedTypes
+							where t.IsClass && typeof(IResponse).IsAssignableFrom(t)
+							select t;
+
+			var offenders = new List<string>();
+			foreach (var r in responses)
+			{
+				var interfaces = r.GetInterfaces();
+				var sameNamedInterface = interfaces.FirstOrDefault(i => i.Name.StartsWith("I" + r.Name));
+				if (sameNamedInterface != null)
+				{
+					if (!sameNamedInterface.IsGenericType)
+					{
+						offenders.Add(sameNamedInterface.Name + " is not generic and thus can not be an allow covariant interface");
+						continue;
+					}
+					else
+					{
+						var generic = sameNamedInterface.GetGenericTypeDefinition();
+						var genericArg = generic.GetTypeInfo().GenericTypeParameters
+							.FirstOrDefault(a => a.GenericParameterAttributes.HasFlag(GenericParameterAttributes.Covariant));
+						if (genericArg == null)
+							offenders.Add(sameNamedInterface.Name + " is generic but not of its type arguments are covariant");
+					}
+				}
+			}
+			offenders.Should().BeEmpty("Responses may only have a same named interface if that interface is used to provide covariance");
+
+
+		}
+
+
 		private static readonly Type[] ResponseDictionaries = {typeof(AggregateDictionary)};
 
 		private static void FindPropertiesBreakingRule(Type type, HashSet<PropertyInfo> exceptions, HashSet<Type> seenTypes, List<string> ruleBreakers)
