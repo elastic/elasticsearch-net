@@ -9,12 +9,11 @@ using System.Text;
 
 namespace Nest
 {
-	internal class FieldExpressionVisitor : ExpressionVisitor
+	internal class ToStringExpressionVisitor : ExpressionVisitor
 	{
-		private readonly IConnectionSettingsValues _settings;
 		private readonly Stack<string> _stack = new Stack<string>();
 
-		public FieldExpressionVisitor(IConnectionSettingsValues settings) => _settings = settings;
+		public bool Cachable { get; private set; } = true;
 
 		public string Resolve(Expression expression, bool toLastToken = false)
 		{
@@ -29,21 +28,7 @@ namespace Nest
 				.ToString();
 		}
 
-		public string Resolve(MemberInfo info)
-		{
-			if (info == null) return null;
-
-			var name = info.Name;
-
-			if (_settings.PropertyMappings.TryGetValue(info, out var propertyMapping))
-				return propertyMapping.Name;
-
-			var att = ElasticsearchPropertyAttributeBase.From(info);
-			if (att != null && !att.Name.IsNullOrEmpty())
-				return att.Name;
-
-			return _settings.PropertyMappingProvider?.CreatePropertyMapping(info)?.Name ?? _settings.DefaultFieldNameInferrer(name);
-		}
+		public string Resolve(MemberInfo info) => info == null ? null : info.Name;
 
 		protected override Expression VisitMember(MemberExpression expression)
 		{
@@ -88,13 +73,22 @@ namespace Nest
 			return base.VisitMethodCall(methodCall);
 		}
 
-		private static void VisitConstantOrVariable(MethodCallExpression methodCall, Stack<string> stack)
+		private void VisitConstantOrVariable(MethodCallExpression methodCall, Stack<string> stack)
 		{
 			var lastArg = methodCall.Arguments.Last();
-			var value = lastArg is ConstantExpression constantExpression
-				? constantExpression.Value.ToString()
-				: Expression.Lambda(lastArg).Compile().DynamicInvoke().ToString();
-			stack.Push(value);
+			if (lastArg is ConstantExpression constantExpression)
+			{
+				stack.Push(constantExpression.Value.ToString());
+				return;
+			}
+			if (lastArg is MemberExpression memberExpression)
+			{
+				Cachable = false;
+				stack.Push(memberExpression.Member.Name);
+				return;
+			}
+			Cachable = false;
+			stack.Push(lastArg.ToString());
 		}
 
 		private static bool IsLinqOperator(MethodInfo methodInfo)
