@@ -34,7 +34,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 			: base(TestClient.Configuration.ElasticsearchVersion, features, new ElasticsearchPlugins(plugins), numberOfNodes)
 		{
 			TestConfiguration = TestClient.Configuration;
-			ShowElasticsearchOutputAfterStarted = true; //this.TestConfiguration.ShowElasticsearchOutputAfterStarted;
+			ShowElasticsearchOutputAfterStarted = TestConfiguration.ShowElasticsearchOutputAfterStarted;
 			HttpFiddlerAware = true;
 
 			CacheEsHomeInstallation = true;
@@ -55,6 +55,6 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 		}
 
 		public string AnalysisFolder => Path.Combine(FileSystem.ConfigPath, "analysis");
-		public ITestConfiguration TestConfiguration { get; }
+		public TestConfigurationBase TestConfiguration { get; }
 	}
 }

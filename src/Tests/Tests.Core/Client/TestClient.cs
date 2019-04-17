@@ -8,7 +8,7 @@ namespace Tests.Core.Client
 {
 	public static class TestClient
 	{
-		public static readonly ITestConfiguration Configuration = TestConfiguration.Instance;
+		public static readonly TestConfigurationBase Configuration = TestConfiguration.Instance;
 		public static readonly IElasticClient Default = new ElasticClient(new TestConnectionSettings().ApplyDomainSettings());
 		public static readonly IElasticClient DefaultInMemoryClient = new ElasticClient(new AlwaysInMemoryConnectionSettings().ApplyDomainSettings());
 

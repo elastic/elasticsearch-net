@@ -1,11 +1,10 @@
 ﻿namespace Scripts
 
 open System
-open Tooling
-open Commandline
-open Versioning
 open Fake.Core
 open System.IO
+open Commandline
+open Versioning
 
 module Tests =
 
@@ -24,7 +23,6 @@ module Tests =
         env "NEST_INTEGRATION_CLUSTER" clusterFilter
         env "NEST_TEST_FILTER" testFilter
         env "NEST_TEST_SEED" (Some <| args.Seed)
-        env "NEST_COMMAND_LINE_BUILD" <| Some "1"
 
         for random in args.RandomArguments do 
             let tokens = random.Split [|':'|]
@@ -78,5 +76,6 @@ module Tests =
         | None -> failwith "No versions specified to run integration tests against"
         | Some esVersions ->
             for esVersion in esVersions do
+                Environment.setEnvironVar "NEST_INTEGRATION_TEST" "1"
                 Environment.setEnvironVar "NEST_INTEGRATION_VERSION" esVersion
                 dotnetTest args.MultiTarget |> ignore
