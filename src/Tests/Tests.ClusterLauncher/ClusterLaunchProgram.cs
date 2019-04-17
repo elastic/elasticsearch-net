@@ -26,10 +26,23 @@ namespace Tests.ClusterLauncher
 				return 3;
 			}
 
+			// Force TestConfiguration to load as if started from the command line even if we are actually starting
+			// from the IDE. Also force configuration mode to integration test so the seeders run
+			Environment.SetEnvironmentVariable("NEST_COMMAND_LINE_BUILD", "1", EnvironmentVariableTarget.Process);
+			Environment.SetEnvironmentVariable("NEST_INTEGRATION_TEST", "1", EnvironmentVariableTarget.Process);
+
+			if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("NEST_YAML_FILE")))
+			{
+				// build always sets previous argument, assume we are running from the IDE or dotnet run
+                var yamlFile = TestConfiguration.LocateTestYamlFile();
+                Environment.SetEnvironmentVariable("NEST_YAML_FILE", yamlFile, EnvironmentVariableTarget.Process);
+			}
+
+			// if version is passed this will take precedence over the version in the yaml file
+			// in the constructor of EnvironmentConfiguration
 			var clusterName = arguments[0];
 			if (arguments.Length > 1)
 				Environment.SetEnvironmentVariable("NEST_INTEGRATION_VERSION", arguments[1], EnvironmentVariableTarget.Process);
-			Environment.SetEnvironmentVariable("NEST_INTEGRATION_SHOW_OUTPUT_AFTER_START", "1", EnvironmentVariableTarget.Process);
 
 			var cluster = clusters.FirstOrDefault(c => c.Name.StartsWith(clusterName, StringComparison.OrdinalIgnoreCase));
 			if (cluster == null)
