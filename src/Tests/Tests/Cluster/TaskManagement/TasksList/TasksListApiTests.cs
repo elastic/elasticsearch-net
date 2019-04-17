@@ -103,7 +103,7 @@ namespace Tests.Cluster.TaskManagement.TasksList
 			var targetIndex = "tasks-lists-detailed";
 			var bulkResponse = client.IndexMany(Project.Generator.Generate(10000), sourceIndex);
 			if (!bulkResponse.IsValid)
-				throw new Exception("failure in setting up integration");
+				throw new Exception($"failure in setting up integration {bulkResponse.ServerError}");
 
 			client.Refresh(sourceIndex);
 
