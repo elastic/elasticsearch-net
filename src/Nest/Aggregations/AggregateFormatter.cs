@@ -570,6 +570,18 @@ namespace Nest
 				items.Add(item);
 			}
 
+			token = reader.GetCurrentJsonToken();
+			if (token == JsonToken.ValueSeparator)
+			{
+				reader.ReadNext();
+				propertyName = reader.ReadPropertyNameSegmentRaw();
+				if (propertyName.EqualsBytes(JsonWriter.GetEncodedPropertyNameWithoutQuotation("interval")))
+					bucket.Interval = formatterResolver.GetFormatter<Time>().Deserialize(ref reader, formatterResolver);
+				else
+					// skip for now
+					reader.ReadNextBlock();
+			}
+
 			bucket.Items = items;
 			reader.ReadNext(); // close outer }
 			return bucket;
@@ -745,15 +757,21 @@ namespace Nest
 			reader.ReadNext(); // ,
 			reader.ReadNext(); // "key"
 			reader.ReadNext(); // :
-			var key = reader.ReadNullableLong().GetValueOrDefault(0);
+			var key = reader.ReadInt64();
 			reader.ReadNext(); // ,
 			reader.ReadNext(); // "doc_count"
 			reader.ReadNext(); // :
-			var docCount = reader.ReadNullableLong().GetValueOrDefault(0);
-			reader.ReadNext(); // ,
+			var docCount = reader.ReadInt64();
 
-			var propertyName = reader.ReadPropertyName();
-			var subAggregates = GetSubAggregates(ref reader, propertyName, formatterResolver);
+			Dictionary<string, IAggregate> subAggregates = null;
+			if (reader.GetCurrentJsonToken() == JsonToken.ValueSeparator)
+			{
+				reader.ReadNext(); // ,
+				var propertyName = reader.ReadPropertyName();
+				subAggregates = GetSubAggregates(ref reader, propertyName, formatterResolver);
+			}
+			else
+				reader.ReadNext(); // }
 
 			var dateHistogram = new DateHistogramBucket(subAggregates)
 			{
