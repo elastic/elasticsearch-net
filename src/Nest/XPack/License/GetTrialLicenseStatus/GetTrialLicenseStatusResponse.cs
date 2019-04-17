@@ -2,14 +2,9 @@
 
 namespace Nest
 {
-	public interface IGetTrialLicenseStatusResponse : IResponse
+	public class GetTrialLicenseStatusResponse : ResponseBase
 	{
 		[DataMember(Name ="eligible_to_start_trial")]
-		bool EligibleToStartTrial { get; }
-	}
-
-	public class GetTrialLicenseStatusResponse : ResponseBase, IGetTrialLicenseStatusResponse
-	{
 		public bool EligibleToStartTrial { get; internal set; }
 	}
 }

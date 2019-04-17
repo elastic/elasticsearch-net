@@ -14,7 +14,7 @@ using static Nest.Infer;
 namespace Tests.Cluster.ClusterState
 {
 	public class ClusterStateApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IClusterStateResponse, IClusterStateRequest, ClusterStateDescriptor, ClusterStateRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ClusterStateResponse, IClusterStateRequest, ClusterStateDescriptor, ClusterStateRequest>
 	{
 		public ClusterStateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -30,7 +30,7 @@ namespace Tests.Cluster.ClusterState
 			(client, r) => client.ClusterStateAsync(r)
 		);
 
-		protected override void ExpectResponse(IClusterStateResponse response)
+		protected override void ExpectResponse(ClusterStateResponse response)
 		{
 			response.ClusterName.Should().NotBeNullOrWhiteSpace();
 			response.MasterNode.Should().NotBeNullOrWhiteSpace();

@@ -8,7 +8,7 @@ using Tests.Framework.Integration;
 namespace Tests.Modules.Scripting.DeleteScript
 {
 	public class DeleteScriptApiTests
-		: ApiTestBase<ReadOnlyCluster, IDeleteScriptResponse, IDeleteScriptRequest, DeleteScriptDescriptor, DeleteScriptRequest>
+		: ApiTestBase<ReadOnlyCluster, DeleteScriptResponse, IDeleteScriptRequest, DeleteScriptDescriptor, DeleteScriptRequest>
 	{
 		private static readonly string _name = "scrpt1";
 

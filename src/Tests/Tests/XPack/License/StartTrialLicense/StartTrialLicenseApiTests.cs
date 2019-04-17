@@ -15,7 +15,7 @@ namespace Tests.XPack.License.StartTrialLicense
 
 	[SkipVersion("<6.4.0", "Only exists in Elasticsearch 6.1.0+, expect x-pack to ship in default distribution")]
 	public class StartTrialLicenseApiTests
-		: ApiIntegrationTestBase<TrialLicenseCluster, IStartTrialLicenseResponse, IStartTrialLicenseRequest, StartTrialLicenseDescriptor,
+		: ApiIntegrationTestBase<TrialLicenseCluster, StartTrialLicenseResponse, IStartTrialLicenseRequest, StartTrialLicenseDescriptor,
 			StartTrialLicenseRequest>
 	{
 		public StartTrialLicenseApiTests(TrialLicenseCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -44,7 +44,7 @@ namespace Tests.XPack.License.StartTrialLicense
 		protected override StartTrialLicenseRequest Initializer => new StartTrialLicenseRequest { Acknowledge = true };
 		protected override Func<StartTrialLicenseDescriptor, IStartTrialLicenseRequest> Fluent => s => s.Acknowledge();
 
-		protected override void ExpectResponse(IStartTrialLicenseResponse response)
+		protected override void ExpectResponse(StartTrialLicenseResponse response)
 		{
 			response.Acknowledged.Should().BeTrue();
 			if (!response.TrialWasStarted)

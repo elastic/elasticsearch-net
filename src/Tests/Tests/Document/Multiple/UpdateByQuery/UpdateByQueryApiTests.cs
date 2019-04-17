@@ -13,7 +13,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 {
 	[SkipVersion("<2.3.0", "")]
 	public class UpdateByQueryApiTests
-		: ApiIntegrationTestBase<IntrusiveOperationCluster, IUpdateByQueryResponse, IUpdateByQueryRequest,
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, UpdateByQueryResponse, IUpdateByQueryRequest,
 			UpdateByQueryDescriptor<UpdateByQueryApiTests.Test>, UpdateByQueryRequest>
 	{
 		public UpdateByQueryApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -80,13 +80,13 @@ namespace Tests.Document.Multiple.UpdateByQuery
 
 		protected override UpdateByQueryDescriptor<Test> NewDescriptor() => new UpdateByQueryDescriptor<Test>(CallIsolatedValue);
 
-		private ISearchResponse<Test> SearchFlags(string index) =>
+		private SearchResponse<Test> SearchFlags(string index) =>
 			Client.Search<Test>(s => s
 				.Index(index)
 				.Query(q => q.Match(m => m.Field(p => p.Flag).Query("foo")))
 			);
 
-		protected override void ExpectResponse(IUpdateByQueryResponse response)
+		protected override void ExpectResponse(UpdateByQueryResponse response)
 		{
 			response.Task.Should().BeNull();
 			response.Took.Should().BeGreaterThan(0);
@@ -125,7 +125,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 
 		protected override string UrlPath => $"/{CallIsolatedValue}/_update_by_query?wait_for_completion=false&conflicts=proceed";
 
-		protected override void ExpectResponse(IUpdateByQueryResponse response)
+		protected override void ExpectResponse(UpdateByQueryResponse response)
 		{
 			response.Task.Should().NotBeNull();
 			response.Task.TaskNumber.Should().BeGreaterThan(0);
@@ -183,7 +183,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 			}
 		}
 
-		protected override void ExpectResponse(IUpdateByQueryResponse response)
+		protected override void ExpectResponse(UpdateByQueryResponse response)
 		{
 			response.VersionConflicts.Should().Be(1);
 			response.Failures.Should().NotBeEmpty();

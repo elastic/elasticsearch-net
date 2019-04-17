@@ -11,38 +11,38 @@ namespace Nest
 		/// Retrieve information about the tasks currently executing on one or more nodes in the cluster.
 		/// </summary>
 		/// <param name="selector">A descriptor to further describe the tasks to retrieve information for</param>
-		IListTasksResponse ListTasks(Func<ListTasksDescriptor, IListTasksRequest> selector = null);
+		ListTasksResponse ListTasks(Func<ListTasksDescriptor, IListTasksRequest> selector = null);
 
 		/// <inheritdoc />
-		IListTasksResponse ListTasks(IListTasksRequest request);
+		ListTasksResponse ListTasks(IListTasksRequest request);
 
 		/// <inheritdoc />
-		Task<IListTasksResponse> ListTasksAsync(Func<ListTasksDescriptor, IListTasksRequest> selector = null,
+		Task<ListTasksResponse> ListTasksAsync(Func<ListTasksDescriptor, IListTasksRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IListTasksResponse> ListTasksAsync(IListTasksRequest request, CancellationToken ct = default);
+		Task<ListTasksResponse> ListTasksAsync(IListTasksRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IListTasksResponse ListTasks(Func<ListTasksDescriptor, IListTasksRequest> selector = null) =>
+		public ListTasksResponse ListTasks(Func<ListTasksDescriptor, IListTasksRequest> selector = null) =>
 			ListTasks(selector.InvokeOrDefault(new ListTasksDescriptor()));
 
 		/// <inheritdoc />
-		public IListTasksResponse ListTasks(IListTasksRequest request) =>
+		public ListTasksResponse ListTasks(IListTasksRequest request) =>
 			DoRequest<IListTasksRequest, ListTasksResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IListTasksResponse> ListTasksAsync(Func<ListTasksDescriptor, IListTasksRequest> selector = null,
+		public Task<ListTasksResponse> ListTasksAsync(Func<ListTasksDescriptor, IListTasksRequest> selector = null,
 			CancellationToken ct = default
 		) =>
 			ListTasksAsync(selector.InvokeOrDefault(new ListTasksDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IListTasksResponse> ListTasksAsync(IListTasksRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IListTasksRequest, IListTasksResponse, ListTasksResponse>(request, request.RequestParameters, ct);
+		public Task<ListTasksResponse> ListTasksAsync(IListTasksRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IListTasksRequest, ListTasksResponse>(request, request.RequestParameters, ct);
 	}
 }

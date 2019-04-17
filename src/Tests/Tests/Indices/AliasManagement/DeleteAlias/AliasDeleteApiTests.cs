@@ -8,7 +8,7 @@ using Tests.Framework.Integration;
 namespace Tests.Indices.AliasManagement.DeleteAlias
 {
 	public class DeleteAliasApiTests
-		: ApiIntegrationTestBase<WritableCluster, IDeleteAliasResponse, IDeleteAliasRequest, DeleteAliasDescriptor, DeleteAliasRequest>
+		: ApiIntegrationTestBase<WritableCluster, DeleteAliasResponse, IDeleteAliasRequest, DeleteAliasDescriptor, DeleteAliasRequest>
 	{
 		public DeleteAliasApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

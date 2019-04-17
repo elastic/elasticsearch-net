@@ -2,12 +2,10 @@
 
 namespace Nest
 {
-	public interface IExplainResponse<TDocument> : IResponse
+	public interface IExplainResponse<out TDocument> : IResponse
 		where TDocument : class
 	{
-		ExplanationDetail Explanation { get; }
-		InstantGet<TDocument> Get { get; }
-		bool Matched { get; }
+		IInlineGet<TDocument> Get { get; }
 	}
 
 	[DataContract]
@@ -18,7 +16,7 @@ namespace Nest
 		public ExplanationDetail Explanation { get; internal set; }
 
 		[DataMember(Name ="get")]
-		public InstantGet<TDocument> Get { get; internal set; }
+		public IInlineGet<TDocument> Get { get; internal set; }
 
 		[DataMember(Name ="matched")]
 		public bool Matched { get; internal set; }

@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 namespace Tests.Mapping.Types
 {
 	public abstract class SingleMappingPropertyTestsBase
-		: ApiIntegrationTestBase<ReadOnlyCluster, IPutIndexTemplateResponse, IPutIndexTemplateRequest, PutIndexTemplateDescriptor,
+		: ApiIntegrationTestBase<ReadOnlyCluster, PutIndexTemplateResponse, IPutIndexTemplateRequest, PutIndexTemplateDescriptor,
 			PutIndexTemplateRequest>
 	{
 		protected SingleMappingPropertyTestsBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

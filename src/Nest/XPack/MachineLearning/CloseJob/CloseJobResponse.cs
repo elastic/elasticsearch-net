@@ -2,14 +2,9 @@
 
 namespace Nest
 {
-	public interface ICloseJobResponse : IResponse
+	public class CloseJobResponse : ResponseBase
 	{
 		[DataMember(Name ="closed")]
-		bool Closed { get; }
-	}
-
-	public class CloseJobResponse : ResponseBase, ICloseJobResponse
-	{
 		public bool Closed { get; internal set; }
 	}
 }

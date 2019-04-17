@@ -10,7 +10,7 @@ using Tests.Framework.Integration;
 namespace Tests.XPack.Watcher.DeleteWatch
 {
 	public class DeleteWatchApiTests
-		: ApiIntegrationTestBase<XPackCluster, IDeleteWatchResponse, IDeleteWatchRequest, DeleteWatchDescriptor, DeleteWatchRequest>
+		: ApiIntegrationTestBase<XPackCluster, DeleteWatchResponse, IDeleteWatchRequest, DeleteWatchDescriptor, DeleteWatchRequest>
 	{
 		public DeleteWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -66,7 +66,7 @@ namespace Tests.XPack.Watcher.DeleteWatch
 
 		protected override DeleteWatchDescriptor NewDescriptor() => new DeleteWatchDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(IDeleteWatchResponse response)
+		protected override void ExpectResponse(DeleteWatchResponse response)
 		{
 			response.Version.Should().Be(2);
 			response.Found.Should().BeTrue();
@@ -75,7 +75,7 @@ namespace Tests.XPack.Watcher.DeleteWatch
 	}
 
 	public class DeleteNonExistentWatchApiTests
-		: ApiIntegrationTestBase<XPackCluster, IDeleteWatchResponse, IDeleteWatchRequest, DeleteWatchDescriptor, DeleteWatchRequest>
+		: ApiIntegrationTestBase<XPackCluster, DeleteWatchResponse, IDeleteWatchRequest, DeleteWatchDescriptor, DeleteWatchRequest>
 	{
 		public DeleteNonExistentWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -100,7 +100,7 @@ namespace Tests.XPack.Watcher.DeleteWatch
 
 		protected override DeleteWatchDescriptor NewDescriptor() => new DeleteWatchDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(IDeleteWatchResponse response)
+		protected override void ExpectResponse(DeleteWatchResponse response)
 		{
 			//This API returns different results depending on whether `.watches` exists or not
 			if (response.ServerError?.Status == 404)

@@ -11,7 +11,7 @@ using Tests.Framework.Integration;
 namespace Tests.Search.Explain
 {
 	public class ExplainApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IExplainResponse<Project>, IExplainRequest<Project>, ExplainDescriptor<Project>,
+		: ApiIntegrationTestBase<ReadOnlyCluster, ExplainResponse<Project>, IExplainRequest<Project>, ExplainDescriptor<Project>,
 			ExplainRequest<Project>>
 	{
 		private readonly Project _project = new Project { Name = Project.Instance.Name };
@@ -73,7 +73,7 @@ namespace Tests.Search.Explain
 
 		protected override ExplainDescriptor<Project> NewDescriptor() => new ExplainDescriptor<Project>(_project);
 
-		protected override void ExpectResponse(IExplainResponse<Project> response)
+		protected override void ExpectResponse(ExplainResponse<Project> response)
 		{
 			response.IsValid.Should().BeTrue();
 			response.Matched.Should().BeTrue();

@@ -11,7 +11,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.GetBuckets
 {
 	public class GetBucketsApiTests
-		: MachineLearningIntegrationTestBase<IGetBucketsResponse, IGetBucketsRequest, GetBucketsDescriptor, GetBucketsRequest>
+		: MachineLearningIntegrationTestBase<GetBucketsResponse, IGetBucketsRequest, GetBucketsDescriptor, GetBucketsRequest>
 	{
 		public GetBucketsApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -41,7 +41,7 @@ namespace Tests.XPack.MachineLearning.GetBuckets
 
 		protected override GetBucketsDescriptor NewDescriptor() => new GetBucketsDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(IGetBucketsResponse response)
+		protected override void ExpectResponse(GetBucketsResponse response)
 		{
 			response.ShouldBeValid();
 			response.Count.Should().Be(1);
@@ -61,7 +61,7 @@ namespace Tests.XPack.MachineLearning.GetBuckets
 	}
 
 	public class GetBucketsWithTimestampApiTests
-		: MachineLearningIntegrationTestBase<IGetBucketsResponse, IGetBucketsRequest, GetBucketsDescriptor, GetBucketsRequest>
+		: MachineLearningIntegrationTestBase<GetBucketsResponse, IGetBucketsRequest, GetBucketsDescriptor, GetBucketsRequest>
 	{
 		public GetBucketsWithTimestampApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -97,7 +97,7 @@ namespace Tests.XPack.MachineLearning.GetBuckets
 
 		protected override GetBucketsDescriptor NewDescriptor() => new GetBucketsDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(IGetBucketsResponse response)
+		protected override void ExpectResponse(GetBucketsResponse response)
 		{
 			response.ShouldBeValid();
 			response.Count.Should().Be(1);

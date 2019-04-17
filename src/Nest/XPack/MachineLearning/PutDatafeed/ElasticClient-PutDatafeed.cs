@@ -11,33 +11,33 @@ namespace Nest
 		/// Creates a machine learning datafeed.
 		/// You must create a job before you create a datafeed. You can associate only one datafeed to each job.
 		/// </summary>
-		IPutDatafeedResponse PutDatafeed<T>(Id datafeedId, Func<PutDatafeedDescriptor<T>, IPutDatafeedRequest> selector = null) where T : class;
+		PutDatafeedResponse PutDatafeed<T>(Id datafeedId, Func<PutDatafeedDescriptor<T>, IPutDatafeedRequest> selector = null) where T : class;
 
 		/// <inheritdoc />
-		IPutDatafeedResponse PutDatafeed(IPutDatafeedRequest request);
+		PutDatafeedResponse PutDatafeed(IPutDatafeedRequest request);
 
 		/// <inheritdoc />
-		Task<IPutDatafeedResponse> PutDatafeedAsync<T>(Id datafeedId, Func<PutDatafeedDescriptor<T>, IPutDatafeedRequest> selector = null,
+		Task<PutDatafeedResponse> PutDatafeedAsync<T>(Id datafeedId, Func<PutDatafeedDescriptor<T>, IPutDatafeedRequest> selector = null,
 			CancellationToken cancellationToken = default
 		) where T : class;
 
 		/// <inheritdoc />
-		Task<IPutDatafeedResponse> PutDatafeedAsync(IPutDatafeedRequest request, CancellationToken ct = default);
+		Task<PutDatafeedResponse> PutDatafeedAsync(IPutDatafeedRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IPutDatafeedResponse PutDatafeed<T>(Id datafeedId, Func<PutDatafeedDescriptor<T>, IPutDatafeedRequest> selector = null)
+		public PutDatafeedResponse PutDatafeed<T>(Id datafeedId, Func<PutDatafeedDescriptor<T>, IPutDatafeedRequest> selector = null)
 			where T : class =>
 			PutDatafeed(selector.InvokeOrDefault(new PutDatafeedDescriptor<T>(datafeedId)));
 
 		/// <inheritdoc />
-		public IPutDatafeedResponse PutDatafeed(IPutDatafeedRequest request) =>
+		public PutDatafeedResponse PutDatafeed(IPutDatafeedRequest request) =>
 			DoRequest<IPutDatafeedRequest, PutDatafeedResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IPutDatafeedResponse> PutDatafeedAsync<T>(
+		public Task<PutDatafeedResponse> PutDatafeedAsync<T>(
 			Id datafeedId,
 			Func<PutDatafeedDescriptor<T>, IPutDatafeedRequest> selector = null,
 			CancellationToken cancellationToken = default
@@ -46,7 +46,7 @@ namespace Nest
 			PutDatafeedAsync(selector.InvokeOrDefault(new PutDatafeedDescriptor<T>(datafeedId)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IPutDatafeedResponse> PutDatafeedAsync(IPutDatafeedRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IPutDatafeedRequest, IPutDatafeedResponse, PutDatafeedResponse>(request, request.RequestParameters, ct);
+		public Task<PutDatafeedResponse> PutDatafeedAsync(IPutDatafeedRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IPutDatafeedRequest, PutDatafeedResponse>(request, request.RequestParameters, ct);
 	}
 }

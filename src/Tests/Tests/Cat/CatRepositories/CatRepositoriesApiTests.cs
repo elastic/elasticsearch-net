@@ -13,7 +13,7 @@ namespace Tests.Cat.CatRepositories
 {
 	[SkipVersion("<2.1.0", "")]
 	public class CatRepositoriesApiTests
-		: ApiIntegrationTestBase<IntrusiveOperationCluster, ICatResponse<CatRepositoriesRecord>, ICatRepositoriesRequest, CatRepositoriesDescriptor,
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, CatResponse<CatRepositoriesRecord>, ICatRepositoriesRequest, CatRepositoriesDescriptor,
 			CatRepositoriesRequest>
 	{
 		private static readonly string RepositoryName = RandomString();
@@ -48,7 +48,7 @@ namespace Tests.Cat.CatRepositories
 			(client, r) => client.CatRepositoriesAsync(r)
 		);
 
-		protected override void ExpectResponse(ICatResponse<CatRepositoriesRecord> response) => response.Records.Should()
+		protected override void ExpectResponse(CatResponse<CatRepositoriesRecord> response) => response.Records.Should()
 			.NotBeEmpty()
 			.And.OnlyContain(r =>
 				!string.IsNullOrEmpty(r.Id)

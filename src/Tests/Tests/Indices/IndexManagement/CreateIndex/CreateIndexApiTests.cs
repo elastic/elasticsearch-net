@@ -11,7 +11,7 @@ using Tests.Framework.Integration;
 namespace Tests.Indices.IndexManagement.CreateIndex
 {
 	public class CreateIndexApiTests
-		: ApiIntegrationTestBase<WritableCluster, ICreateIndexResponse, ICreateIndexRequest, CreateIndexDescriptor, CreateIndexRequest>
+		: ApiIntegrationTestBase<WritableCluster, CreateIndexResponse, ICreateIndexRequest, CreateIndexDescriptor, CreateIndexRequest>
 	{
 		public CreateIndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -207,7 +207,7 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 
 		protected override CreateIndexDescriptor NewDescriptor() => new CreateIndexDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(ICreateIndexResponse response)
+		protected override void ExpectResponse(CreateIndexResponse response)
 		{
 			response.ShouldBeValid();
 			response.Acknowledged.Should().BeTrue();

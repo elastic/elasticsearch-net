@@ -51,7 +51,7 @@ namespace Tests.Reproduce
 			}
 		}
 
-		private static void AssertHttpStats(IElasticClient c, INodesStatsResponse r, int i, int requestsPerIteration)
+		private static void AssertHttpStats(IElasticClient c, NodesStatsResponse r, int i, int requestsPerIteration)
 		{
 			const int leeWay = 10;
 			var connectionLimit = c.ConnectionSettings.ConnectionLimit;

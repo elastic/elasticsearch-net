@@ -10,13 +10,13 @@ using Tests.Framework.Integration;
 namespace Tests.Indices.IndexSettings.IndexTemplates
 {
 	public class IndexTemplateCrudTests
-		: CrudTestBase<WritableCluster, IPutIndexTemplateResponse, IGetIndexTemplateResponse, IPutIndexTemplateResponse, IDeleteIndexTemplateResponse,
-			IExistsResponse>
+		: CrudTestBase<WritableCluster, PutIndexTemplateResponse, GetIndexTemplateResponse, PutIndexTemplateResponse, DeleteIndexTemplateResponse,
+			ExistsResponse>
 	{
 		public IndexTemplateCrudTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses Exists() =>
-			Calls<IndexTemplateExistsDescriptor, IndexTemplateExistsRequest, IIndexTemplateExistsRequest, IExistsResponse>(
+			Calls<IndexTemplateExistsDescriptor, IndexTemplateExistsRequest, IIndexTemplateExistsRequest, ExistsResponse>(
 				id => new IndexTemplateExistsRequest(id),
 				(id, d) => d,
 				(s, c, f) => c.IndexTemplateExists(s, f),
@@ -26,7 +26,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 			);
 
 		protected override LazyResponses Create() =>
-			Calls<PutIndexTemplateDescriptor, PutIndexTemplateRequest, IPutIndexTemplateRequest, IPutIndexTemplateResponse>(
+			Calls<PutIndexTemplateDescriptor, PutIndexTemplateRequest, IPutIndexTemplateRequest, PutIndexTemplateResponse>(
 				CreateInitializer,
 				CreateFluent,
 				(s, c, f) => c.PutIndexTemplate(s, f),
@@ -51,7 +51,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 			);
 
 		protected override LazyResponses Read() =>
-			Calls<GetIndexTemplateDescriptor, GetIndexTemplateRequest, IGetIndexTemplateRequest, IGetIndexTemplateResponse>(
+			Calls<GetIndexTemplateDescriptor, GetIndexTemplateRequest, IGetIndexTemplateRequest, GetIndexTemplateResponse>(
 				name => new GetIndexTemplateRequest(name),
 				(name, d) => d.Name(name),
 				(s, c, f) => c.GetIndexTemplate(f),
@@ -60,7 +60,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 				(s, c, r) => c.GetIndexTemplateAsync(r)
 			);
 
-		protected override void ExpectAfterCreate(IGetIndexTemplateResponse response)
+		protected override void ExpectAfterCreate(GetIndexTemplateResponse response)
 		{
 			response.TemplateMappings.Should().NotBeNull().And.HaveCount(1);
 			var templateMapping = response.TemplateMappings.First().Value;
@@ -70,7 +70,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 		}
 
 		protected override LazyResponses Update() =>
-			Calls<PutIndexTemplateDescriptor, PutIndexTemplateRequest, IPutIndexTemplateRequest, IPutIndexTemplateResponse>(
+			Calls<PutIndexTemplateDescriptor, PutIndexTemplateRequest, IPutIndexTemplateRequest, PutIndexTemplateResponse>(
 				PutInitializer,
 				PutFluent,
 				(s, c, f) => c.PutIndexTemplate(s, f),
@@ -94,7 +94,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 				.NumberOfShards(1)
 			);
 
-		protected override void ExpectAfterUpdate(IGetIndexTemplateResponse response)
+		protected override void ExpectAfterUpdate(GetIndexTemplateResponse response)
 		{
 			response.TemplateMappings.Should().NotBeNull().And.HaveCount(1);
 			var templateMapping = response.TemplateMappings.First().Value;
@@ -104,7 +104,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 		}
 
 		protected override LazyResponses Delete() =>
-			Calls<DeleteIndexTemplateDescriptor, DeleteIndexTemplateRequest, IDeleteIndexTemplateRequest, IDeleteIndexTemplateResponse>(
+			Calls<DeleteIndexTemplateDescriptor, DeleteIndexTemplateRequest, IDeleteIndexTemplateRequest, DeleteIndexTemplateResponse>(
 				name => new DeleteIndexTemplateRequest(name),
 				(name, d) => d,
 				(s, c, f) => c.DeleteIndexTemplate(s, f),
@@ -115,7 +115,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 
 		protected override async Task GetAfterDeleteIsValid() => await AssertOnGetAfterDelete(r => r.ShouldNotBeValid());
 
-		protected override void ExpectDeleteNotFoundResponse(IDeleteIndexTemplateResponse response)
+		protected override void ExpectDeleteNotFoundResponse(DeleteIndexTemplateResponse response)
 		{
 			response.ServerError.Should().NotBeNull();
 			response.ServerError.Status.Should().Be(404);

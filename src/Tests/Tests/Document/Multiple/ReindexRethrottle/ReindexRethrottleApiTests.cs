@@ -57,7 +57,7 @@ namespace Tests.Document.Multiple.ReindexRethrottle
 	}
 
 	public abstract class ReindexRethrottleApiTests
-		: ApiIntegrationTestBase<ReindexCluster, IReindexRethrottleResponse, IReindexRethrottleRequest, ReindexRethrottleDescriptor,
+		: ApiIntegrationTestBase<ReindexCluster, ReindexRethrottleResponse, IReindexRethrottleRequest, ReindexRethrottleDescriptor,
 			ReindexRethrottleRequest>
 	{
 		protected const string TaskIdKey = "taskId";
@@ -99,7 +99,7 @@ namespace Tests.Document.Multiple.ReindexRethrottle
 
 		protected override ReindexRethrottleDescriptor NewDescriptor() => new ReindexRethrottleDescriptor(TaskId);
 
-		protected override void ExpectResponse(IReindexRethrottleResponse response)
+		protected override void ExpectResponse(ReindexRethrottleResponse response)
 		{
 			response.ShouldBeValid();
 

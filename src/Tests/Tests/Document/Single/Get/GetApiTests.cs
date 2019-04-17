@@ -12,7 +12,7 @@ using Tests.Framework.Integration;
 namespace Tests.Document.Single.Get
 {
 	public class GetApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IGetResponse<Project>, IGetRequest, GetDescriptor<Project>, GetRequest<Project>>
+		: ApiIntegrationTestBase<ReadOnlyCluster, GetResponse<Project>, IGetRequest, GetDescriptor<Project>, GetRequest<Project>>
 	{
 		public GetApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -40,7 +40,7 @@ namespace Tests.Document.Single.Get
 
 		protected override GetDescriptor<Project> NewDescriptor() => new GetDescriptor<Project>(ProjectId);
 
-		protected override void ExpectResponse(IGetResponse<Project> response)
+		protected override void ExpectResponse(GetResponse<Project> response)
 		{
 			response.Source.Should().NotBeNull();
 			response.Source.Name.Should().Be(ProjectId);
@@ -49,7 +49,7 @@ namespace Tests.Document.Single.Get
 	}
 
 	public class GetNonExistentDocumentApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IGetResponse<Project>, IGetRequest, GetDescriptor<Project>, GetRequest<Project>>
+		: ApiIntegrationTestBase<ReadOnlyCluster, GetResponse<Project>, IGetRequest, GetDescriptor<Project>, GetRequest<Project>>
 	{
 		public GetNonExistentDocumentApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -77,7 +77,7 @@ namespace Tests.Document.Single.Get
 
 		protected override GetDescriptor<Project> NewDescriptor() => new GetDescriptor<Project>(ProjectId);
 
-		protected override void ExpectResponse(IGetResponse<Project> response)
+		protected override void ExpectResponse(GetResponse<Project> response)
 		{
 			response.Found.Should().BeFalse();
 			response.Index.Should().Be("project");
@@ -87,7 +87,7 @@ namespace Tests.Document.Single.Get
 	}
 
 	public class GetNonExistentIndexDocumentApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IGetResponse<Project>, IGetRequest, GetDescriptor<Project>, GetRequest<Project>>
+		: ApiIntegrationTestBase<ReadOnlyCluster, GetResponse<Project>, IGetRequest, GetDescriptor<Project>, GetRequest<Project>>
 	{
 		public GetNonExistentIndexDocumentApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -115,7 +115,7 @@ namespace Tests.Document.Single.Get
 		protected override GetDescriptor<Project> NewDescriptor() =>
 			new GetDescriptor<Project>(index: BadIndex, id: ProjectId);
 
-		protected override void ExpectResponse(IGetResponse<Project> response)
+		protected override void ExpectResponse(GetResponse<Project> response)
 		{
 			response.Found.Should().BeFalse();
 			response.Index.Should().BeNullOrWhiteSpace();
@@ -124,7 +124,7 @@ namespace Tests.Document.Single.Get
 	}
 
 	public class GetApiParentTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IGetResponse<CommitActivity>, IGetRequest, GetDescriptor<CommitActivity>, GetRequest<CommitActivity>
+		: ApiIntegrationTestBase<ReadOnlyCluster, GetResponse<CommitActivity>, IGetRequest, GetDescriptor<CommitActivity>, GetRequest<CommitActivity>
 		>
 	{
 		public GetApiParentTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -158,7 +158,7 @@ namespace Tests.Document.Single.Get
 
 		protected override GetDescriptor<CommitActivity> NewDescriptor() => new GetDescriptor<CommitActivity>(CommitActivity);
 
-		protected override void ExpectResponse(IGetResponse<CommitActivity> response)
+		protected override void ExpectResponse(GetResponse<CommitActivity> response)
 		{
 			response.Source.Should().NotBeNull();
 			response.Source.Id.Should().Be(CommitActivityId);
@@ -185,7 +185,7 @@ namespace Tests.Document.Single.Get
 
 		protected override string UrlPath => $"/project/_doc/{U(ProjectId)}?stored_fields=name%2CnumberOfCommits&routing={U(ProjectId)}";
 
-		protected override void ExpectResponse(IGetResponse<Project> response)
+		protected override void ExpectResponse(GetResponse<Project> response)
 		{
 			response.Fields.Should().NotBeNull();
 			response.Fields.ValueOf<Project, string>(p => p.Name).Should().Be(ProjectId);

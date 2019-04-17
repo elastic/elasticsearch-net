@@ -14,7 +14,7 @@ using static Nest.Infer;
 namespace Tests.XPack.Security.Role.PutRole
 {
 	[SkipVersion("<2.3.0", "")]
-	public class PutRoleApiTests : ApiIntegrationTestBase<XPackCluster, IPutRoleResponse, IPutRoleRequest, PutRoleDescriptor, PutRoleRequest>
+	public class PutRoleApiTests : ApiIntegrationTestBase<XPackCluster, PutRoleResponse, IPutRoleRequest, PutRoleDescriptor, PutRoleRequest>
 	{
 		public PutRoleApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -101,7 +101,7 @@ namespace Tests.XPack.Security.Role.PutRole
 
 		protected override PutRoleDescriptor NewDescriptor() => new PutRoleDescriptor(Role);
 
-		protected override void ExpectResponse(IPutRoleResponse response)
+		protected override void ExpectResponse(PutRoleResponse response)
 		{
 			response.Role.Should().NotBeNull();
 			response.Role.Created.Should().BeTrue();
@@ -133,7 +133,7 @@ namespace Tests.XPack.Security.Role.PutRole
 			}
 		}
 
-		protected override void ExpectResponse(IPutRoleResponse response) { }
+		protected override void ExpectResponse(PutRoleResponse response) { }
 	}
 
 	[SkipVersion("<6.4.0", "Application privileges introduced in 6.4.0")]

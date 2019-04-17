@@ -32,7 +32,7 @@ namespace Tests.Aggregations.Metric.Min
 		protected override AggregationDictionary InitializerAggs =>
 			new MinAggregation("min_last_activity", Field<Project>(p => p.LastActivity));
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
+		protected override void ExpectResponse(SearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var min = response.Aggregations.Min("min_last_activity");

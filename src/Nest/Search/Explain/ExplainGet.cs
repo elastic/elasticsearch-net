@@ -3,17 +3,28 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[DataContract]
-	public class InstantGet<TDocument> where TDocument : class
+	[InterfaceDataContract]
+	public interface IInlineGet<out TDocument> where TDocument : class
 	{
 		[DataMember(Name = "fields")]
-		public FieldValues Fields { get; internal set; }
+		FieldValues Fields { get; }
 
 		[DataMember(Name = "found")]
-		public bool Found { get; internal set; }
+		bool Found { get; }
 
 		[DataMember(Name = "_source")]
 		[JsonFormatter(typeof(SourceFormatter<>))]
+		TDocument Source { get; }
+	}
+
+
+	public class InlineGet<TDocument> : IInlineGet<TDocument>
+		where TDocument : class
+	{
+		public FieldValues Fields { get; internal set; }
+
+		public bool Found { get; internal set; }
+
 		public TDocument Source { get; internal set; }
 	}
 }

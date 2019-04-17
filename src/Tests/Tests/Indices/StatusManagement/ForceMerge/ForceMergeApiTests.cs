@@ -12,7 +12,7 @@ namespace Tests.Indices.StatusManagement.ForceMerge
 {
 	[SkipVersion("<2.1.0", "")]
 	public class ForceMergeApiTests
-		: ApiIntegrationAgainstNewIndexTestBase<IntrusiveOperationCluster, IForceMergeResponse, IForceMergeRequest, ForceMergeDescriptor,
+		: ApiIntegrationAgainstNewIndexTestBase<IntrusiveOperationCluster, ForceMergeResponse, IForceMergeRequest, ForceMergeDescriptor,
 			ForceMergeRequest>
 	{
 		public ForceMergeApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

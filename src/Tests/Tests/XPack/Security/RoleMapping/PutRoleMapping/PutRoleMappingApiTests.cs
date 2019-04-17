@@ -12,7 +12,7 @@ namespace Tests.XPack.Security.RoleMapping.PutRoleMapping
 {
 	[SkipVersion("<5.5.0", "")]
 	public class PutRoleMappingApiTests
-		: ApiIntegrationTestBase<XPackCluster, IPutRoleMappingResponse, IPutRoleMappingRequest,
+		: ApiIntegrationTestBase<XPackCluster, PutRoleMappingResponse, IPutRoleMappingRequest,
 			PutRoleMappingDescriptor, PutRoleMappingRequest>
 	{
 		private readonly string _dn = "*,ou=admin,dc=example,dc=com";
@@ -104,7 +104,7 @@ namespace Tests.XPack.Security.RoleMapping.PutRoleMapping
 
 		protected override PutRoleMappingDescriptor NewDescriptor() => new PutRoleMappingDescriptor(Role);
 
-		protected override void ExpectResponse(IPutRoleMappingResponse response)
+		protected override void ExpectResponse(PutRoleMappingResponse response)
 		{
 			response.RoleMapping.Should().NotBeNull();
 			response.RoleMapping.Created.Should().BeTrue();

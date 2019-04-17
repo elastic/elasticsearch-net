@@ -10,8 +10,8 @@ using Tests.Framework.Integration;
 namespace Tests.Modules.SnapshotAndRestore.Repositories
 {
 	public class RepositoryCrudTests
-		: CrudTestBase<IntrusiveOperationCluster, ICreateRepositoryResponse, IGetRepositoryResponse, ICreateRepositoryResponse,
-			IDeleteRepositoryResponse>
+		: CrudTestBase<IntrusiveOperationCluster, CreateRepositoryResponse, GetRepositoryResponse, CreateRepositoryResponse,
+			DeleteRepositoryResponse>
 	{
 		private readonly string _rootRepositoryPath;
 
@@ -19,7 +19,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 			_rootRepositoryPath = cluster.FileSystem.RepositoryPath;
 
 		protected override LazyResponses Create() =>
-			Calls<CreateRepositoryDescriptor, CreateRepositoryRequest, ICreateRepositoryRequest, ICreateRepositoryResponse>(
+			Calls<CreateRepositoryDescriptor, CreateRepositoryRequest, ICreateRepositoryRequest, CreateRepositoryResponse>(
 				CreateInitializer,
 				CreateFluent,
 				(s, c, f) => c.CreateRepository(s, f),
@@ -51,7 +51,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 			);
 
 		protected override LazyResponses Read() =>
-			Calls<GetRepositoryDescriptor, GetRepositoryRequest, IGetRepositoryRequest, IGetRepositoryResponse>(
+			Calls<GetRepositoryDescriptor, GetRepositoryRequest, IGetRepositoryRequest, GetRepositoryResponse>(
 				ReadInitializer,
 				ReadFluent,
 				(s, c, f) => c.GetRepository(f),
@@ -66,7 +66,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 			.RepositoryName(name);
 
 		protected override LazyResponses Update() =>
-			Calls<CreateRepositoryDescriptor, CreateRepositoryRequest, ICreateRepositoryRequest, ICreateRepositoryResponse>(
+			Calls<CreateRepositoryDescriptor, CreateRepositoryRequest, ICreateRepositoryRequest, CreateRepositoryResponse>(
 				UpdateInitializer,
 				UpdateFluent,
 				(s, c, f) => c.CreateRepository(s, f),
@@ -96,7 +96,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 			);
 
 		protected override LazyResponses Delete() =>
-			Calls<DeleteRepositoryDescriptor, DeleteRepositoryRequest, IDeleteRepositoryRequest, IDeleteRepositoryResponse>(
+			Calls<DeleteRepositoryDescriptor, DeleteRepositoryRequest, IDeleteRepositoryRequest, DeleteRepositoryResponse>(
 				DeleteInitializer,
 				DeleteFluent,
 				(s, c, f) => c.DeleteRepository(s),
@@ -109,7 +109,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 
 		protected IDeleteRepositoryRequest DeleteFluent(string name, DeleteRepositoryDescriptor d) => null;
 
-		protected override void ExpectAfterCreate(IGetRepositoryResponse response)
+		protected override void ExpectAfterCreate(GetRepositoryResponse response)
 		{
 			response.Repositories.Should().NotBeNull().And.HaveCount(1);
 			var name = response.Repositories.Keys.First();
@@ -121,7 +121,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 			repository.Settings.Compress.Should().BeTrue();
 		}
 
-		protected override void ExpectAfterUpdate(IGetRepositoryResponse response)
+		protected override void ExpectAfterUpdate(GetRepositoryResponse response)
 		{
 			response.Repositories.Should().NotBeNull().And.HaveCount(1);
 			var name = response.Repositories.Keys.First();
@@ -134,7 +134,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 			repository.Settings.ConcurrentStreams.Should().Be(5);
 		}
 
-		protected override void ExpectDeleteNotFoundResponse(IDeleteRepositoryResponse response)
+		protected override void ExpectDeleteNotFoundResponse(DeleteRepositoryResponse response)
 		{
 			response.ServerError.Should().NotBeNull();
 			response.ServerError.Status.Should().Be(404);

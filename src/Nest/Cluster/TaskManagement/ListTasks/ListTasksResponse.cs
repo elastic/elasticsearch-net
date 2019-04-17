@@ -4,20 +4,14 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[InterfaceDataContract]
-	public interface IListTasksResponse : IResponse
-	{
-		[DataMember(Name = "node_failures")]
-		IReadOnlyCollection<ErrorCause> NodeFailures { get; }
-
-		[DataMember(Name = "nodes")]
-		IReadOnlyDictionary<string, TaskExecutingNode> Nodes { get; }
-	}
-
-	public class ListTasksResponse : ResponseBase, IListTasksResponse
+	[DataContract]
+	public class ListTasksResponse : ResponseBase
 	{
 		public override bool IsValid => base.IsValid && !NodeFailures.HasAny();
+
+		[DataMember(Name = "node_failures")]
 		public IReadOnlyCollection<ErrorCause> NodeFailures { get; internal set; } = EmptyReadOnly<ErrorCause>.Collection;
+		[DataMember(Name = "nodes")]
 		public IReadOnlyDictionary<string, TaskExecutingNode> Nodes { get; internal set; } = EmptyReadOnly<string, TaskExecutingNode>.Dictionary;
 	}
 

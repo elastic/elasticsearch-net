@@ -7,7 +7,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class BulkAllObservable<T> : IDisposable, IObservable<IBulkAllResponse> where T : class
+	public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse> where T : class
 	{
 		private readonly int _backOffRetries;
 		private readonly TimeSpan _backOffTime;
@@ -16,10 +16,10 @@ namespace Nest
 
 		private readonly CancellationToken _compositeCancelToken;
 		private readonly CancellationTokenSource _compositeCancelTokenSource;
-		private readonly Action<IBulkResponseItem, T> _droppedDocumentCallBack;
+		private readonly Action<BulkResponseItemBase, T> _droppedDocumentCallBack;
 		private readonly int _maxDegreeOfParallelism;
 		private readonly IBulkAllRequest<T> _partitionedBulkRequest;
-		private readonly Func<IBulkResponseItem, T, bool> _retryPredicate;
+		private readonly Func<BulkResponseItemBase, T, bool> _retryPredicate;
 		private Action _incrementFailed = () => { };
 		private Action _incrementRetries = () => { };
 
@@ -51,7 +51,7 @@ namespace Nest
 			_compositeCancelTokenSource?.Dispose();
 		}
 
-		public IDisposable Subscribe(IObserver<IBulkAllResponse> observer)
+		public IDisposable Subscribe(IObserver<BulkAllResponse> observer)
 		{
 			observer.ThrowIfNull(nameof(observer));
 			BulkAll(observer);
@@ -62,10 +62,10 @@ namespace Nest
 		{
 			_incrementFailed = observer.IncrementTotalNumberOfFailedBuffers;
 			_incrementRetries = observer.IncrementTotalNumberOfRetries;
-			return Subscribe((IObserver<IBulkAllResponse>)observer);
+			return Subscribe((IObserver<BulkAllResponse>)observer);
 		}
 
-		private void BulkAll(IObserver<IBulkAllResponse> observer)
+		private void BulkAll(IObserver<BulkAllResponse> observer)
 		{
 			var documents = _partitionedBulkRequest.Documents;
 			var partitioned = new PartitionHelper<T>(documents, _bulkSize);
@@ -79,7 +79,7 @@ namespace Nest
 			);
 		}
 
-		private void OnCompleted(Exception exception, IObserver<IBulkAllResponse> observer)
+		private void OnCompleted(Exception exception, IObserver<BulkAllResponse> observer)
 		{
 			if (exception != null)
 				observer.OnError(exception);
@@ -108,7 +108,7 @@ namespace Nest
 			if (!refresh.IsValid) throw Throw($"Refreshing after all documents have indexed failed", refresh.ApiCall);
 		}
 
-		private async Task<IBulkAllResponse> BulkAsync(IList<T> buffer, long page, int backOffRetries)
+		private async Task<BulkAllResponse> BulkAsync(IList<T> buffer, long page, int backOffRetries)
 		{
 			_compositeCancelToken.ThrowIfCancellationRequested();
 
@@ -131,9 +131,9 @@ namespace Nest
 			if (!response.ApiCall.Success)
 				return await HandleBulkRequest(buffer, page, backOffRetries, response);
 
-			var successfulDocuments = new List<Tuple<IBulkResponseItem, T>>();
+			var successfulDocuments = new List<Tuple<BulkResponseItemBase, T>>();
 			var retryableDocuments = new List<T>();
-			var droppedDocuments = new List<Tuple<IBulkResponseItem, T>>();
+			var droppedDocuments = new List<Tuple<BulkResponseItemBase, T>>();
 
 			foreach (var documentWithResponse in response.Items.Zip(buffer, Tuple.Create))
 			{
@@ -161,7 +161,7 @@ namespace Nest
 			return new BulkAllResponse { Retries = backOffRetries, Page = page, Items = response.Items };
 		}
 
-		private void HandleDroppedDocuments(List<Tuple<IBulkResponseItem, T>> droppedDocuments, IBulkResponse response)
+		private void HandleDroppedDocuments(List<Tuple<BulkResponseItemBase, T>> droppedDocuments, BulkResponse response)
 		{
 			if (droppedDocuments.Count <= 0) return;
 
@@ -170,7 +170,7 @@ namespace Nest
 				throw ThrowOnBadBulk(response, $"BulkAll halted after receiving failures that can not be retried from _bulk");
 		}
 
-		private async Task<IBulkAllResponse> HandleBulkRequest(IList<T> buffer, long page, int backOffRetries, IBulkResponse response)
+		private async Task<BulkAllResponse> HandleBulkRequest(IList<T> buffer, long page, int backOffRetries, BulkResponse response)
 		{
 			var clientException = response.ApiCall.OriginalException as ElasticsearchClientException;
 			//TODO expose this on IAPiCallDetails as RetryLater in 7.0?
@@ -195,7 +195,7 @@ namespace Nest
 			}
 		}
 
-		private async Task<IBulkAllResponse> RetryDocuments(long page, int backOffRetries, IList<T> retryDocuments)
+		private async Task<BulkAllResponse> RetryDocuments(long page, int backOffRetries, IList<T> retryDocuments)
 		{
 			_incrementRetries();
 			await Task.Delay(_backOffTime, _compositeCancelToken).ConfigureAwait(false);
@@ -213,8 +213,8 @@ namespace Nest
 			new ElasticsearchClientException(PipelineFailure.BadResponse, message, details);
 
 
-		private static bool RetryBulkActionPredicate(IBulkResponseItem bulkResponseItem, T d) => bulkResponseItem.Status == 429;
+		private static bool RetryBulkActionPredicate(BulkResponseItemBase bulkResponseItem, T d) => bulkResponseItem.Status == 429;
 
-		private static void DroppedDocumentCallbackDefault(IBulkResponseItem bulkResponseItem, T d) { }
+		private static void DroppedDocumentCallbackDefault(BulkResponseItemBase bulkResponseItem, T d) { }
 	}
 }

@@ -9,7 +9,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.DeleteModelSnapshot
 {
 	public class DeleteModelSnapshotApiTests
-		: MachineLearningIntegrationTestBase<IDeleteModelSnapshotResponse, IDeleteModelSnapshotRequest, DeleteModelSnapshotDescriptor,
+		: MachineLearningIntegrationTestBase<DeleteModelSnapshotResponse, IDeleteModelSnapshotRequest, DeleteModelSnapshotDescriptor,
 			DeleteModelSnapshotRequest>
 	{
 		public DeleteModelSnapshotApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -42,6 +42,6 @@ namespace Tests.XPack.MachineLearning.DeleteModelSnapshot
 
 		protected override DeleteModelSnapshotDescriptor NewDescriptor() => new DeleteModelSnapshotDescriptor(CallIsolatedValue, "1");
 
-		protected override void ExpectResponse(IDeleteModelSnapshotResponse response) => response.Acknowledged.Should().BeTrue();
+		protected override void ExpectResponse(DeleteModelSnapshotResponse response) => response.Acknowledged.Should().BeTrue();
 	}
 }

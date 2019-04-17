@@ -8,7 +8,7 @@ using Tests.Framework.Integration;
 namespace Tests.Indices.Monitoring.IndicesRecovery
 {
 	public class RecoveryStatusApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IRecoveryStatusResponse, IRecoveryStatusRequest, RecoveryStatusDescriptor, RecoveryStatusRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, RecoveryStatusResponse, IRecoveryStatusRequest, RecoveryStatusDescriptor, RecoveryStatusRequest>
 	{
 		public RecoveryStatusApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

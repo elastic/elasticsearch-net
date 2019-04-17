@@ -1,19 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
 
 namespace Nest
 {
-	[InterfaceDataContract]
-	public interface ISimulatePipelineResponse : IResponse
+	public class SimulatePipelineResponse : ResponseBase
 	{
 		[DataMember(Name ="docs")]
-		IReadOnlyCollection<PipelineSimulation> Documents { get; }
-	}
-
-	public class SimulatePipelineResponse : ResponseBase, ISimulatePipelineResponse
-	{
 		public IReadOnlyCollection<PipelineSimulation> Documents { get; internal set; } = EmptyReadOnly<PipelineSimulation>.Collection;
 	}
 

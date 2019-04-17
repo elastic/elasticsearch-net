@@ -21,10 +21,10 @@ namespace Nest
 
 		public TotalHits Total { get; set; }
 
-		private IEnumerable<Hit<TDocument>> ConvertHits<TDocument>()
+		private IEnumerable<IHit<TDocument>> ConvertHits<TDocument>()
 			where TDocument : class
 		{
-			var formatter = _formatterResolver.GetFormatter<Hit<TDocument>>();		
+			var formatter = _formatterResolver.GetFormatter<IHit<TDocument>>();
 			return _hits.Select(h =>
 			{
 				var reader = new JsonReader(h.Bytes);
@@ -32,7 +32,7 @@ namespace Nest
 			});
 		}
 
-		public IReadOnlyCollection<Hit<TDocument>> Hits<TDocument>()
+		public IReadOnlyCollection<IHit<TDocument>> Hits<TDocument>()
 			where TDocument : class =>
 			ConvertHits<TDocument>().ToList().AsReadOnly();
 

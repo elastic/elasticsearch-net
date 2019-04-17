@@ -10,12 +10,12 @@ using Tests.Framework.Integration;
 namespace Tests.Ingest
 {
 	public class PipelineCrudTests
-		: CrudTestBase<IntrusiveOperationCluster, IPutPipelineResponse, IGetPipelineResponse, IPutPipelineResponse, IDeletePipelineResponse>
+		: CrudTestBase<IntrusiveOperationCluster, PutPipelineResponse, GetPipelineResponse, PutPipelineResponse, DeletePipelineResponse>
 	{
 		//These calls have low priority and often cause `process_cluster_event_timeout_exception`'s
 		public PipelineCrudTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses Create() => Calls<PutPipelineDescriptor, PutPipelineRequest, IPutPipelineRequest, IPutPipelineResponse>(
+		protected override LazyResponses Create() => Calls<PutPipelineDescriptor, PutPipelineRequest, IPutPipelineRequest, PutPipelineResponse>(
 			CreateInitializer,
 			CreateFluent,
 			(s, c, f) => c.PutPipeline(s, f),
@@ -24,7 +24,7 @@ namespace Tests.Ingest
 			(s, c, r) => c.PutPipelineAsync(r)
 		);
 
-		protected override void ExpectAfterCreate(IGetPipelineResponse response)
+		protected override void ExpectAfterCreate(GetPipelineResponse response)
 		{
 			response.Pipelines.Should().NotBeNull().And.HaveCount(1);
 
@@ -77,7 +77,7 @@ namespace Tests.Ingest
 				)
 			);
 
-		protected override LazyResponses Read() => Calls<GetPipelineDescriptor, GetPipelineRequest, IGetPipelineRequest, IGetPipelineResponse>(
+		protected override LazyResponses Read() => Calls<GetPipelineDescriptor, GetPipelineRequest, IGetPipelineRequest, GetPipelineResponse>(
 			id => new GetPipelineRequest(id),
 			(id, d) => d.Id(id),
 			(s, c, f) => c.GetPipeline(f),
@@ -86,7 +86,7 @@ namespace Tests.Ingest
 			(s, c, r) => c.GetPipelineAsync(r)
 		);
 
-		protected override LazyResponses Update() => Calls<PutPipelineDescriptor, PutPipelineRequest, IPutPipelineRequest, IPutPipelineResponse>(
+		protected override LazyResponses Update() => Calls<PutPipelineDescriptor, PutPipelineRequest, IPutPipelineRequest, PutPipelineResponse>(
 			UpdateInitializer,
 			UpdateFluent,
 			(s, c, f) => c.PutPipeline(s, f),
@@ -133,7 +133,7 @@ namespace Tests.Ingest
 				)
 			);
 
-		protected override void ExpectAfterUpdate(IGetPipelineResponse response)
+		protected override void ExpectAfterUpdate(GetPipelineResponse response)
 		{
 			response.Pipelines.Should().NotBeNull().And.HaveCount(1);
 
@@ -163,7 +163,7 @@ namespace Tests.Ingest
 		}
 
 		protected override LazyResponses Delete() =>
-			Calls<DeletePipelineDescriptor, DeletePipelineRequest, IDeletePipelineRequest, IDeletePipelineResponse>(
+			Calls<DeletePipelineDescriptor, DeletePipelineRequest, IDeletePipelineRequest, DeletePipelineResponse>(
 				id => new DeletePipelineRequest(id),
 				(id, d) => d,
 				(s, c, f) => c.DeletePipeline(s, f),

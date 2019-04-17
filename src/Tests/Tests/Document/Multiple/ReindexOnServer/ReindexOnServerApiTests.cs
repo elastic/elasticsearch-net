@@ -13,7 +13,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 {
 	[SkipVersion("<2.3.0", "")]
 	public class ReindexOnServerApiTests
-		: ApiIntegrationTestBase<IntrusiveOperationCluster, IReindexOnServerResponse, IReindexOnServerRequest, ReindexOnServerDescriptor,
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, ReindexOnServerResponse, IReindexOnServerRequest, ReindexOnServerDescriptor,
 			ReindexOnServerRequest>
 	{
 		public ReindexOnServerApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -117,7 +117,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 
 		protected override void OnAfterCall(IElasticClient client) => client.Refresh(CallIsolatedValue);
 
-		protected override void ExpectResponse(IReindexOnServerResponse response)
+		protected override void ExpectResponse(ReindexOnServerResponse response)
 		{
 			response.Task.Should().BeNull();
 			response.Took.Should().BeGreaterThan(TimeSpan.FromMilliseconds(0));

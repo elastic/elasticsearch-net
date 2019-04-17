@@ -8,38 +8,38 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc />
-		IGetRoleResponse GetRole(Func<GetRoleDescriptor, IGetRoleRequest> selector = null);
+		GetRoleResponse GetRole(Func<GetRoleDescriptor, IGetRoleRequest> selector = null);
 
 		/// <inheritdoc />
-		IGetRoleResponse GetRole(IGetRoleRequest request);
+		GetRoleResponse GetRole(IGetRoleRequest request);
 
 		/// <inheritdoc />
-		Task<IGetRoleResponse> GetRoleAsync(Func<GetRoleDescriptor, IGetRoleRequest> selector = null,
+		Task<GetRoleResponse> GetRoleAsync(Func<GetRoleDescriptor, IGetRoleRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IGetRoleResponse> GetRoleAsync(IGetRoleRequest request, CancellationToken ct = default);
+		Task<GetRoleResponse> GetRoleAsync(IGetRoleRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IGetRoleResponse GetRole(Func<GetRoleDescriptor, IGetRoleRequest> selector = null) =>
+		public GetRoleResponse GetRole(Func<GetRoleDescriptor, IGetRoleRequest> selector = null) =>
 			GetRole(selector.InvokeOrDefault(new GetRoleDescriptor()));
 
 		/// <inheritdoc />
-		public IGetRoleResponse GetRole(IGetRoleRequest request) =>
+		public GetRoleResponse GetRole(IGetRoleRequest request) =>
 			DoRequest<IGetRoleRequest, GetRoleResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetRoleResponse> GetRoleAsync(
+		public Task<GetRoleResponse> GetRoleAsync(
 			Func<GetRoleDescriptor, IGetRoleRequest> selector = null,
 			CancellationToken ct = default
 		) => GetRoleAsync(selector.InvokeOrDefault(new GetRoleDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IGetRoleResponse> GetRoleAsync(IGetRoleRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetRoleRequest, IGetRoleResponse, GetRoleResponse>(request, request.RequestParameters, ct);
+		public Task<GetRoleResponse> GetRoleAsync(IGetRoleRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetRoleRequest, GetRoleResponse>(request, request.RequestParameters, ct);
 	}
 }

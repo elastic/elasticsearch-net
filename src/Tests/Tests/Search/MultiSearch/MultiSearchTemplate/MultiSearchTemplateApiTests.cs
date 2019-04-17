@@ -13,7 +13,7 @@ using Tests.Framework.Integration;
 namespace Tests.Search.MultiSearch.MultiSearchTemplate
 {
 	public class MultiSearchTemplateApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IMultiSearchResponse, IMultiSearchTemplateRequest, MultiSearchTemplateDescriptor,
+		: ApiIntegrationTestBase<ReadOnlyCluster, MultiSearchResponse, IMultiSearchTemplateRequest, MultiSearchTemplateDescriptor,
 			MultiSearchTemplateRequest>
 	{
 		public MultiSearchTemplateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -71,7 +71,7 @@ namespace Tests.Search.MultiSearch.MultiSearchTemplate
 			(c, r) => c.MultiSearchTemplateAsync(r)
 		);
 
-		protected override void ExpectResponse(IMultiSearchResponse response)
+		protected override void ExpectResponse(MultiSearchResponse response)
 		{
 			var inline = response.GetResponse<Project>("inline");
 			inline.Should().NotBeNull();

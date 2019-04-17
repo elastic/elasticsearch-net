@@ -10,7 +10,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.UpdateJob
 {
 	public class UpdateJobApiTests
-		: MachineLearningIntegrationTestBase<IUpdateJobResponse, IUpdateJobRequest, UpdateJobDescriptor<Metric>, UpdateJobRequest>
+		: MachineLearningIntegrationTestBase<UpdateJobResponse, IUpdateJobRequest, UpdateJobDescriptor<Metric>, UpdateJobRequest>
 	{
 		public UpdateJobApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -61,6 +61,6 @@ namespace Tests.XPack.MachineLearning.UpdateJob
 
 		protected override UpdateJobDescriptor<Metric> NewDescriptor() => new UpdateJobDescriptor<Metric>(CallIsolatedValue);
 
-		protected override void ExpectResponse(IUpdateJobResponse response) => response.ShouldBeValid();
+		protected override void ExpectResponse(UpdateJobResponse response) => response.ShouldBeValid();
 	}
 }

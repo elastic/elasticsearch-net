@@ -230,7 +230,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 				OwnerId = 2
 			};
 
-			var indexResponse = client.IndexDocument(document);
+			var ndexResponse = client.IndexDocument(document);
 
 			/** it serializes to */
 			//json
@@ -247,7 +247,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			 */
 
 			// hide
-			Expect(expected, preserveNullInExpected: true).FromRequest(indexResponse);
+			Expect(expected, preserveNullInExpected: true).FromRequest(ndexResponse);
 		}
 
 		/** ==== Serializing Type Information
@@ -320,7 +320,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 				}
 			};
 
-			var indexResponse = client.IndexDocument(document);
+			var ndexResponse = client.IndexDocument(document);
 
 			/** serializes to */
 			//json
@@ -353,7 +353,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			 */
 
 			// hide
-			Expect(expected).FromRequest(indexResponse);
+			Expect(expected).FromRequest(ndexResponse);
 		}
 	}
 }

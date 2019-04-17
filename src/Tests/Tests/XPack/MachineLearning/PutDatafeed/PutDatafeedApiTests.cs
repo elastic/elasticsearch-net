@@ -12,7 +12,7 @@ using Xunit;
 namespace Tests.XPack.MachineLearning.PutDatafeed
 {
 	public class PutDatafeedApiTests
-		: MachineLearningIntegrationTestBase<IPutDatafeedResponse,
+		: MachineLearningIntegrationTestBase<PutDatafeedResponse,
 			IPutDatafeedRequest, PutDatafeedDescriptor<Metric>, PutDatafeedRequest>
 	{
 		private IElasticClient _client;
@@ -68,7 +68,7 @@ namespace Tests.XPack.MachineLearning.PutDatafeed
 
 		protected override PutDatafeedDescriptor<Metric> NewDescriptor() => new PutDatafeedDescriptor<Metric>(CallIsolatedValue);
 
-		protected override void ExpectResponse(IPutDatafeedResponse response)
+		protected override void ExpectResponse(PutDatafeedResponse response)
 		{
 			response.ShouldBeValid();
 

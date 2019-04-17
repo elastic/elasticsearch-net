@@ -4,20 +4,12 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[InterfaceDataContract]
-	public interface ISearchShardsResponse : IResponse
+	public class SearchShardsResponse : ResponseBase
 	{
 		[DataMember(Name = "nodes")]
-		IReadOnlyDictionary<string, SearchNode> Nodes { get; }
-
-		[DataMember(Name = "shards")]
-		IReadOnlyCollection<IReadOnlyCollection<SearchShard>> Shards { get; }
-	}
-
-	public class SearchShardsResponse : ResponseBase, ISearchShardsResponse
-	{
 		public IReadOnlyDictionary<string, SearchNode> Nodes { get; internal set; } = EmptyReadOnly<string, SearchNode>.Dictionary;
 
+		[DataMember(Name = "shards")]
 		public IReadOnlyCollection<IReadOnlyCollection<SearchShard>> Shards { get; internal set; } =
 			EmptyReadOnly<IReadOnlyCollection<SearchShard>>.Collection;
 	}

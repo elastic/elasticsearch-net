@@ -8,18 +8,18 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc />
-		IGetRoleMappingResponse GetRoleMapping(Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null);
+		GetRoleMappingResponse GetRoleMapping(Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null);
 
 		/// <inheritdoc />
-		IGetRoleMappingResponse GetRoleMapping(IGetRoleMappingRequest request);
+		GetRoleMappingResponse GetRoleMapping(IGetRoleMappingRequest request);
 
 		/// <inheritdoc />
-		Task<IGetRoleMappingResponse> GetRoleMappingAsync(Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null,
+		Task<GetRoleMappingResponse> GetRoleMappingAsync(Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IGetRoleMappingResponse> GetRoleMappingAsync(IGetRoleMappingRequest request,
+		Task<GetRoleMappingResponse> GetRoleMappingAsync(IGetRoleMappingRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -27,21 +27,21 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IGetRoleMappingResponse GetRoleMapping(Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null) =>
+		public GetRoleMappingResponse GetRoleMapping(Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null) =>
 			GetRoleMapping(selector.InvokeOrDefault(new GetRoleMappingDescriptor()));
 
 		/// <inheritdoc />
-		public IGetRoleMappingResponse GetRoleMapping(IGetRoleMappingRequest request) =>
+		public GetRoleMappingResponse GetRoleMapping(IGetRoleMappingRequest request) =>
 			DoRequest<IGetRoleMappingRequest, GetRoleMappingResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetRoleMappingResponse> GetRoleMappingAsync(
+		public Task<GetRoleMappingResponse> GetRoleMappingAsync(
 			Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null,
 			CancellationToken ct = default
 		) => GetRoleMappingAsync(selector.InvokeOrDefault(new GetRoleMappingDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IGetRoleMappingResponse> GetRoleMappingAsync(IGetRoleMappingRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetRoleMappingRequest, IGetRoleMappingResponse, GetRoleMappingResponse>(request, request.RequestParameters, ct);
+		public Task<GetRoleMappingResponse> GetRoleMappingAsync(IGetRoleMappingRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetRoleMappingRequest, GetRoleMappingResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -4,13 +4,8 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IGetPrivilegesResponse : IResponse
-	{
-		IReadOnlyDictionary<string, IDictionary<string, PrivilegesActions>> Applications { get; }
-	}
-
 	[JsonFormatter(typeof(DictionaryResponseFormatter<GetPrivilegesResponse, string, IDictionary<string, PrivilegesActions>>))]
-	public class GetPrivilegesResponse : DictionaryResponseBase<string, IDictionary<string, PrivilegesActions>>, IGetPrivilegesResponse
+	public class GetPrivilegesResponse : DictionaryResponseBase<string, IDictionary<string, PrivilegesActions>>
 	{
 		[IgnoreDataMember]
 		public IReadOnlyDictionary<string, IDictionary<string, PrivilegesActions>> Applications => Self.BackingDictionary;

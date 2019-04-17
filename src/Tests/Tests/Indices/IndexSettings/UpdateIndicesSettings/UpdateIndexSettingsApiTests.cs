@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 namespace Tests.Indices.IndexSettings.UpdateIndicesSettings
 {
 	public class UpdateIndexSettingsApiTests
-		: ApiIntegrationTestBase<WritableCluster, IUpdateIndexSettingsResponse, IUpdateIndexSettingsRequest, UpdateIndexSettingsDescriptor,
+		: ApiIntegrationTestBase<WritableCluster, UpdateIndexSettingsResponse, IUpdateIndexSettingsRequest, UpdateIndexSettingsDescriptor,
 			UpdateIndexSettingsRequest>
 	{
 		public UpdateIndexSettingsApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -71,7 +71,7 @@ namespace Tests.Indices.IndexSettings.UpdateIndicesSettings
 	}
 
 	public class UpdateIndexSettingsRefreshIntervalNullApiTests
-		: ApiIntegrationTestBase<WritableCluster, IUpdateIndexSettingsResponse, IUpdateIndexSettingsRequest, UpdateIndexSettingsDescriptor,
+		: ApiIntegrationTestBase<WritableCluster, UpdateIndexSettingsResponse, IUpdateIndexSettingsRequest, UpdateIndexSettingsDescriptor,
 			UpdateIndexSettingsRequest>
 	{
 		public UpdateIndexSettingsRefreshIntervalNullApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

@@ -11,7 +11,7 @@ using static Nest.Infer;
 namespace Tests.XPack.MachineLearning.ValidateJob
 {
 	public class ValidateJobApiTests
-		: MachineLearningIntegrationTestBase<IValidateJobResponse, IValidateJobRequest, ValidateJobDescriptor<Metric>, ValidateJobRequest>
+		: MachineLearningIntegrationTestBase<ValidateJobResponse, IValidateJobRequest, ValidateJobDescriptor<Metric>, ValidateJobRequest>
 	{
 		public ValidateJobApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -87,6 +87,6 @@ namespace Tests.XPack.MachineLearning.ValidateJob
 			(client, r) => client.ValidateJobAsync(r)
 		);
 
-		protected override void ExpectResponse(IValidateJobResponse response) => response.Acknowledged.Should().BeTrue();
+		protected override void ExpectResponse(ValidateJobResponse response) => response.Acknowledged.Should().BeTrue();
 	}
 }

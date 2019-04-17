@@ -8,7 +8,7 @@ using Tests.Framework.Integration;
 namespace Tests.Cat.CatHelp
 {
 	public class CatHelpApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatHelpRecord>, ICatHelpRequest, CatHelpDescriptor, CatHelpRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, CatResponse<CatHelpRecord>, ICatHelpRequest, CatHelpDescriptor, CatHelpRequest>
 	{
 		public CatHelpApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -24,7 +24,7 @@ namespace Tests.Cat.CatHelp
 			(client, r) => client.CatHelpAsync(r)
 		);
 
-		protected override void ExpectResponse(ICatResponse<CatHelpRecord> response) => response.Records.Should()
+		protected override void ExpectResponse(CatResponse<CatHelpRecord> response) => response.Records.Should()
 			.NotBeEmpty()
 			.And.Contain(a => a.Endpoint == "/_cat/shards/{index}")
 			.And.NotContain(a => a.Endpoint == "=^.^=");

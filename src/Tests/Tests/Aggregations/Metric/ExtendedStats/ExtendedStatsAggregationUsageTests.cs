@@ -37,7 +37,7 @@ namespace Tests.Aggregations.Metric.ExtendedStats
 				Sigma = 1
 			};
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
+		protected override void ExpectResponse(SearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var commitStats = response.Aggregations.ExtendedStats("commit_stats");

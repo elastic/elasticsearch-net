@@ -8,34 +8,34 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc />
-		ISearchShardsResponse SearchShards<T>(Func<SearchShardsDescriptor<T>, ISearchShardsRequest> selector) where T : class;
+		SearchShardsResponse SearchShards<T>(Func<SearchShardsDescriptor<T>, ISearchShardsRequest> selector) where T : class;
 
 		/// <inheritdoc />
-		ISearchShardsResponse SearchShards(ISearchShardsRequest request);
+		SearchShardsResponse SearchShards(ISearchShardsRequest request);
 
 		/// <inheritdoc />
-		Task<ISearchShardsResponse> SearchShardsAsync<T>(Func<SearchShardsDescriptor<T>, ISearchShardsRequest> selector,
+		Task<SearchShardsResponse> SearchShardsAsync<T>(Func<SearchShardsDescriptor<T>, ISearchShardsRequest> selector,
 			CancellationToken ct = default
 		)
 			where T : class;
 
 		/// <inheritdoc />
-		Task<ISearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request, CancellationToken ct = default);
+		Task<SearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public ISearchShardsResponse SearchShards<T>(Func<SearchShardsDescriptor<T>, ISearchShardsRequest> selector)
+		public SearchShardsResponse SearchShards<T>(Func<SearchShardsDescriptor<T>, ISearchShardsRequest> selector)
 			where T : class =>
 			SearchShards(selector?.Invoke(new SearchShardsDescriptor<T>()));
 
 		/// <inheritdoc />
-		public ISearchShardsResponse SearchShards(ISearchShardsRequest request) =>
+		public SearchShardsResponse SearchShards(ISearchShardsRequest request) =>
 			DoRequest<ISearchShardsRequest, SearchShardsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<ISearchShardsResponse> SearchShardsAsync<T>(
+		public Task<SearchShardsResponse> SearchShardsAsync<T>(
 			Func<SearchShardsDescriptor<T>, ISearchShardsRequest> selector,
 			CancellationToken ct = default
 		)
@@ -43,7 +43,7 @@ namespace Nest
 			SearchShardsAsync(selector?.Invoke(new SearchShardsDescriptor<T>()), ct);
 
 		/// <inheritdoc />
-		public Task<ISearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<ISearchShardsRequest, ISearchShardsResponse, SearchShardsResponse>(request, request.RequestParameters, ct);
+		public Task<SearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<ISearchShardsRequest, SearchShardsResponse>(request, request.RequestParameters, ct);
 	}
 }

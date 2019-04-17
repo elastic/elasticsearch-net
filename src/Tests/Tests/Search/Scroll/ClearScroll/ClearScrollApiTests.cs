@@ -11,7 +11,7 @@ namespace Tests.Search.Scroll.ClearScroll
 	// ReadOnlyCluster because eventhough its technically a write action it does not hinder
 	// on going reads
 	public class ClearScrollApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IClearScrollResponse, IClearScrollRequest, ClearScrollDescriptor, ClearScrollRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ClearScrollResponse, IClearScrollRequest, ClearScrollDescriptor, ClearScrollRequest>
 	{
 		private string _scrollId = "default-for-unit-tests";
 

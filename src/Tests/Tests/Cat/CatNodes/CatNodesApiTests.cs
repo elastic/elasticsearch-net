@@ -8,7 +8,7 @@ using Tests.Framework.Integration;
 namespace Tests.Cat.CatNodes
 {
 	public class CatNodesApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatNodesRecord>, ICatNodesRequest, CatNodesDescriptor, CatNodesRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, CatResponse<CatNodesRecord>, ICatNodesRequest, CatNodesDescriptor, CatNodesRequest>
 	{
 		public CatNodesApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -24,7 +24,7 @@ namespace Tests.Cat.CatNodes
 			(client, r) => client.CatNodesAsync(r)
 		);
 
-		protected override void ExpectResponse(ICatResponse<CatNodesRecord> response) =>
+		protected override void ExpectResponse(CatResponse<CatNodesRecord> response) =>
 			response.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.Name));
 	}
 }

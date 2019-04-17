@@ -10,7 +10,7 @@ using static Nest.Infer;
 namespace Tests.Indices.IndexManagement.TypesExists
 {
 	public class TypeExistsApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IExistsResponse, ITypeExistsRequest, TypeExistsDescriptor, TypeExistsRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ExistsResponse, ITypeExistsRequest, TypeExistsDescriptor, TypeExistsRequest>
 	{
 		public TypeExistsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

@@ -6,42 +6,33 @@ namespace Nest
 {
 	public interface IGetResponse<out TDocument> : IResponse where TDocument : class
 	{
+		TDocument Source { get; }
+	}
+	public class GetResponse<TDocument> : ResponseBase, IGetResponse<TDocument> where TDocument : class
+	{
 		[DataMember(Name = "fields")]
-		FieldValues Fields { get; }
+		public FieldValues Fields { get; internal set; }
 
 		[DataMember(Name = "found")]
-		bool Found { get; }
+		public bool Found { get; internal set; }
 
 		[DataMember(Name = "_id")]
-		string Id { get; }
+		public string Id { get; internal set; }
 
 		[DataMember(Name = "_index")]
-		string Index { get; }
+		public string Index { get; internal set; }
 
 		[DataMember(Name = "_routing")]
-		string Routing { get; }
+		public string Routing { get; internal set; }
 
 		[DataMember(Name = "_source")]
 		[JsonFormatter(typeof(SourceFormatter<>))]
-		TDocument Source { get; }
+		public TDocument Source { get; internal set; }
 
 		[DataMember(Name = "_type")]
-		string Type { get; }
+		public string Type { get; internal set; }
 
 		[DataMember(Name = "_version")]
-		long Version { get; }
-	}
-
-	[DataContract]
-	public class GetResponse<TDocument> : ResponseBase, IGetResponse<TDocument> where TDocument : class
-	{
-		public FieldValues Fields { get; internal set; } = FieldValues.Empty;
-		public bool Found { get; internal set; }
-		public string Id { get; internal set; }
-		public string Index { get; internal set; }
-		public string Routing { get; internal set; }
-		public TDocument Source { get; internal set; }
-		public string Type { get; internal set; }
 		public long Version { get; internal set; }
 	}
 }

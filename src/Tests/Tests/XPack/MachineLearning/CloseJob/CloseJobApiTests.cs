@@ -8,7 +8,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.MachineLearning.CloseJob
 {
-	public class CloseJobApiTests : MachineLearningIntegrationTestBase<ICloseJobResponse, ICloseJobRequest, CloseJobDescriptor, CloseJobRequest>
+	public class CloseJobApiTests : MachineLearningIntegrationTestBase<CloseJobResponse, ICloseJobRequest, CloseJobDescriptor, CloseJobRequest>
 	{
 		public CloseJobApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -38,6 +38,6 @@ namespace Tests.XPack.MachineLearning.CloseJob
 
 		protected override CloseJobDescriptor NewDescriptor() => new CloseJobDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(ICloseJobResponse response) => response.Closed.Should().BeTrue();
+		protected override void ExpectResponse(CloseJobResponse response) => response.Closed.Should().BeTrue();
 	}
 }

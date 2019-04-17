@@ -14,7 +14,7 @@ using static Nest.Infer;
 namespace Tests.Document.Multiple.MultiGet
 {
 	public class MultiGetSimplifiedApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IMultiGetResponse, IMultiGetRequest, MultiGetDescriptor, MultiGetRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, MultiGetResponse, IMultiGetRequest, MultiGetDescriptor, MultiGetRequest>
 	{
 		private readonly IEnumerable<long> _ids = Developer.Developers.Select(d => (long)d.Id).Take(10);
 
@@ -52,7 +52,7 @@ namespace Tests.Document.Multiple.MultiGet
 			(client, r) => client.MultiGetAsync(r)
 		);
 
-		protected override void ExpectResponse(IMultiGetResponse response)
+		protected override void ExpectResponse(MultiGetResponse response)
 		{
 			response.Hits.Should().NotBeEmpty().And.HaveCount(10);
 			foreach (var document in response.Hits)
@@ -65,7 +65,7 @@ namespace Tests.Document.Multiple.MultiGet
 		}
 	}
 
-	public class MultiGetApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IMultiGetResponse, IMultiGetRequest, MultiGetDescriptor, MultiGetRequest>
+	public class MultiGetApiTests : ApiIntegrationTestBase<ReadOnlyCluster, MultiGetResponse, IMultiGetRequest, MultiGetDescriptor, MultiGetRequest>
 	{
 		private readonly IEnumerable<long> _ids = Developer.Developers.Select(d => (long)d.Id).Take(10);
 
@@ -102,7 +102,7 @@ namespace Tests.Document.Multiple.MultiGet
 			(client, r) => client.MultiGetAsync(r)
 		);
 
-		protected override void ExpectResponse(IMultiGetResponse response)
+		protected override void ExpectResponse(MultiGetResponse response)
 		{
 			response.Hits.Should().NotBeEmpty().And.HaveCount(10);
 			foreach (var hit in response.Hits)
@@ -118,7 +118,7 @@ namespace Tests.Document.Multiple.MultiGet
 
 
 	public class MultiGetMetadataApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IMultiGetResponse, IMultiGetRequest, MultiGetDescriptor, MultiGetRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, MultiGetResponse, IMultiGetRequest, MultiGetDescriptor, MultiGetRequest>
 	{
 		private readonly IEnumerable<string> _ids = Project.Projects.Select(d => d.Name).Take(10);
 
@@ -157,7 +157,7 @@ namespace Tests.Document.Multiple.MultiGet
 			(client, r) => client.MultiGetAsync(r)
 		);
 
-		protected override void ExpectResponse(IMultiGetResponse response)
+		protected override void ExpectResponse(MultiGetResponse response)
 		{
 			response.Hits.Should().NotBeEmpty().And.HaveCount(10);
 
@@ -174,7 +174,7 @@ namespace Tests.Document.Multiple.MultiGet
 	}
 
 	public class MultiGetParentApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IMultiGetResponse, IMultiGetRequest, MultiGetDescriptor, MultiGetRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, MultiGetResponse, IMultiGetRequest, MultiGetDescriptor, MultiGetRequest>
 	{
 		private readonly IEnumerable<CommitActivity> _activities = CommitActivity.CommitActivities.Take(10);
 
@@ -210,7 +210,7 @@ namespace Tests.Document.Multiple.MultiGet
 			(client, r) => client.MultiGetAsync(r)
 		);
 
-		protected override void ExpectResponse(IMultiGetResponse response)
+		protected override void ExpectResponse(MultiGetResponse response)
 		{
 			response.Hits.Should().NotBeEmpty().And.HaveCount(10);
 

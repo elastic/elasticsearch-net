@@ -10,18 +10,18 @@ namespace Nest
 		/// <summary>
 		/// Returns defaults and limits used by machine learning.
 		/// </summary>
-		IMachineLearningInfoResponse MachineLearningInfo(Func<MachineLearningInfoDescriptor, IMachineLearningInfoRequest> selector = null);
+		MachineLearningInfoResponse MachineLearningInfo(Func<MachineLearningInfoDescriptor, IMachineLearningInfoRequest> selector = null);
 
 		/// <inheritdoc cref="MachineLearningInfo(System.Func{Nest.MachineLearningInfoDescriptor,Nest.IMachineLearningInfoRequest})"/>
-		IMachineLearningInfoResponse MachineLearningInfo(IMachineLearningInfoRequest request);
+		MachineLearningInfoResponse MachineLearningInfo(IMachineLearningInfoRequest request);
 
 		/// <inheritdoc cref="MachineLearningInfo(System.Func{Nest.MachineLearningInfoDescriptor,Nest.IMachineLearningInfoRequest})"/>
-		Task<IMachineLearningInfoResponse> MachineLearningInfoAsync(Func<MachineLearningInfoDescriptor, IMachineLearningInfoRequest> selector = null,
+		Task<MachineLearningInfoResponse> MachineLearningInfoAsync(Func<MachineLearningInfoDescriptor, IMachineLearningInfoRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="MachineLearningInfo(System.Func{Nest.MachineLearningInfoDescriptor,Nest.IMachineLearningInfoRequest})"/>
-		Task<IMachineLearningInfoResponse> MachineLearningInfoAsync(IMachineLearningInfoRequest request,
+		Task<MachineLearningInfoResponse> MachineLearningInfoAsync(IMachineLearningInfoRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -29,20 +29,20 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IMachineLearningInfoResponse MachineLearningInfo(Func<MachineLearningInfoDescriptor, IMachineLearningInfoRequest> selector = null) =>
+		public MachineLearningInfoResponse MachineLearningInfo(Func<MachineLearningInfoDescriptor, IMachineLearningInfoRequest> selector = null) =>
 			MachineLearningInfo(selector.InvokeOrDefault(new MachineLearningInfoDescriptor()));
 
 		/// <inheritdoc />
-		public IMachineLearningInfoResponse MachineLearningInfo(IMachineLearningInfoRequest request) =>
+		public MachineLearningInfoResponse MachineLearningInfo(IMachineLearningInfoRequest request) =>
 			DoRequest<IMachineLearningInfoRequest, MachineLearningInfoResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IMachineLearningInfoResponse> MachineLearningInfoAsync(Func<MachineLearningInfoDescriptor, IMachineLearningInfoRequest> selector = null,
+		public Task<MachineLearningInfoResponse> MachineLearningInfoAsync(Func<MachineLearningInfoDescriptor, IMachineLearningInfoRequest> selector = null,
 			CancellationToken ct = default
 		) => MachineLearningInfoAsync(selector.InvokeOrDefault(new MachineLearningInfoDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IMachineLearningInfoResponse> MachineLearningInfoAsync(IMachineLearningInfoRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IMachineLearningInfoRequest, IMachineLearningInfoResponse, MachineLearningInfoResponse>(request, request.RequestParameters, ct);
+		public Task<MachineLearningInfoResponse> MachineLearningInfoAsync(IMachineLearningInfoRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IMachineLearningInfoRequest, MachineLearningInfoResponse>(request, request.RequestParameters, ct);
 	}
 }

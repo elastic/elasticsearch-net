@@ -12,7 +12,7 @@ using Tests.Framework.Integration;
 namespace Tests.Indices.IndexManagement.RolloverIndex
 {
 	public class RolloverIndexApiTests
-		: ApiIntegrationTestBase<WritableCluster, IRolloverIndexResponse, IRolloverIndexRequest, RolloverIndexDescriptor, RolloverIndexRequest>
+		: ApiIntegrationTestBase<WritableCluster, RolloverIndexResponse, IRolloverIndexRequest, RolloverIndexDescriptor, RolloverIndexRequest>
 	{
 		public RolloverIndexApiTests(WritableCluster cluster, EndpointUsage usage)
 			: base(cluster, usage) { }
@@ -147,7 +147,7 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 
 		protected override RolloverIndexDescriptor NewDescriptor() => new RolloverIndexDescriptor(CallIsolatedValue + "-alias");
 
-		protected override void ExpectResponse(IRolloverIndexResponse response)
+		protected override void ExpectResponse(RolloverIndexResponse response)
 		{
 			response.ShouldBeValid();
 			response.OldIndex.Should().NotBeNullOrEmpty();

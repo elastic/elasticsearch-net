@@ -19,7 +19,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 		//bad painless script - missing opening ( in front of ctx.
 		protected override string PainlessScript { get; } = "if ctx._source.flag == 'bar') {ctx._source.remove('flag')}";
 
-		protected override void ExpectResponse(IReindexOnServerResponse response)
+		protected override void ExpectResponse(ReindexOnServerResponse response)
 		{
 			response.ServerError.Should().NotBeNull();
 			response.ServerError.Status.Should().Be(400);

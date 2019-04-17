@@ -12,7 +12,7 @@ namespace Tests.XPack.License.StartBasicLicense
 {
 	[SkipVersion("<6.5.0", "")]
 	public class StartBasicLicenseInvalidApiTests
-		: ApiIntegrationTestBase<XPackCluster, IStartBasicLicenseResponse, IStartBasicLicenseRequest, StartBasicLicenseDescriptor,
+		: ApiIntegrationTestBase<XPackCluster, StartBasicLicenseResponse, IStartBasicLicenseRequest, StartBasicLicenseDescriptor,
 			StartBasicLicenseRequest>
 	{
 		public StartBasicLicenseInvalidApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -32,7 +32,7 @@ namespace Tests.XPack.License.StartBasicLicense
 			(client, r) => client.StartBasicLicenseAsync(r)
 		);
 
-		protected override void ExpectResponse(IStartBasicLicenseResponse response)
+		protected override void ExpectResponse(StartBasicLicenseResponse response)
 		{
 			response.BasicWasStarted.Should().BeFalse();
 			response.Acknowledged.Should().BeFalse();

@@ -10,7 +10,7 @@ using static Nest.Infer;
 namespace Tests.Document.Multiple.ReindexOnServer
 {
 	public class ReindexOnServerSourceApiTests
-		: ApiIntegrationTestBase<IntrusiveOperationCluster, IReindexOnServerResponse, IReindexOnServerRequest, ReindexOnServerDescriptor,
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, ReindexOnServerResponse, IReindexOnServerRequest, ReindexOnServerDescriptor,
 			ReindexOnServerRequest>
 	{
 		public ReindexOnServerSourceApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -93,7 +93,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 			(client, r) => client.ReindexOnServerAsync(r)
 		);
 
-		protected override void ExpectResponse(IReindexOnServerResponse response) => response.ShouldBeValid();
+		protected override void ExpectResponse(ReindexOnServerResponse response) => response.ShouldBeValid();
 
 		public class Test
 		{

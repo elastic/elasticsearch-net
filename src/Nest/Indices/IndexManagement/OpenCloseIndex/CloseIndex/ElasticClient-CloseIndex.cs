@@ -16,41 +16,41 @@ namespace Nest
 		/// <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-open-close.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-open-close.html</a>
 		/// </summary>
 		/// <param name="selector">A descriptor thata describes the close index operation</param>
-		ICloseIndexResponse CloseIndex(Indices indices, Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null);
+		CloseIndexResponse CloseIndex(Indices indices, Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null);
 
 		/// <inheritdoc />
-		ICloseIndexResponse CloseIndex(ICloseIndexRequest request);
+		CloseIndexResponse CloseIndex(ICloseIndexRequest request);
 
 		/// <inheritdoc />
-		Task<ICloseIndexResponse> CloseIndexAsync(
+		Task<CloseIndexResponse> CloseIndexAsync(
 			Indices indices,
 			Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<ICloseIndexResponse> CloseIndexAsync(ICloseIndexRequest request, CancellationToken ct = default);
+		Task<CloseIndexResponse> CloseIndexAsync(ICloseIndexRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public ICloseIndexResponse CloseIndex(Indices indices, Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null) =>
+		public CloseIndexResponse CloseIndex(Indices indices, Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null) =>
 			CloseIndex(selector.InvokeOrDefault(new CloseIndexDescriptor(indices)));
 
 		/// <inheritdoc />
-		public ICloseIndexResponse CloseIndex(ICloseIndexRequest request) =>
+		public CloseIndexResponse CloseIndex(ICloseIndexRequest request) =>
 			DoRequest<ICloseIndexRequest, CloseIndexResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<ICloseIndexResponse> CloseIndexAsync(
+		public Task<CloseIndexResponse> CloseIndexAsync(
 			Indices indices,
 			Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null,
 			CancellationToken ct = default
 		) => CloseIndexAsync(selector.InvokeOrDefault(new CloseIndexDescriptor(indices)), ct);
 
 		/// <inheritdoc />
-		public Task<ICloseIndexResponse> CloseIndexAsync(ICloseIndexRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<ICloseIndexRequest, ICloseIndexResponse, CloseIndexResponse>(request, request.RequestParameters, ct);
+		public Task<CloseIndexResponse> CloseIndexAsync(ICloseIndexRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<ICloseIndexRequest, CloseIndexResponse>(request, request.RequestParameters, ct);
 	}
 }

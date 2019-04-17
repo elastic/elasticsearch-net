@@ -72,7 +72,7 @@ namespace Nest
 		}
 
 		public void Serialize(ref JsonWriter writer, MultiGetResponse value, IJsonFormatterResolver formatterResolver) => DynamicObjectResolver
-			.ExcludeNullCamelCase.GetFormatter<IMultiGetResponse>()
+			.ExcludeNullCamelCase.GetFormatter<MultiGetResponse>()
 			.Serialize(ref writer, value, formatterResolver);
 
 		private static void CreateMultiHit<T>(MultiHitTuple tuple, IJsonFormatterResolver formatterResolver,

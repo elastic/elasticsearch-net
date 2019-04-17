@@ -13,7 +13,7 @@ namespace Nest
 		/// The number of slices to chop the scroll into, typically the number of shards but can be higher and using a
 		/// custom routing key
 		/// </param>
-		IObservable<IScrollAllResponse<T>> ScrollAll<T>(Time scrollTime, int numberOfSlices,
+		IObservable<ScrollAllResponse<T>> ScrollAll<T>(Time scrollTime, int numberOfSlices,
 			Func<ScrollAllDescriptor<T>, IScrollAllRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)
 		)
 			where T : class;
@@ -21,21 +21,21 @@ namespace Nest
 		/// <summary>
 		/// Helper method that can parallelize a scroll using the sliced scroll feature of elasticsearch and return the results as an IObservable.
 		/// </summary>
-		IObservable<IScrollAllResponse<T>> ScrollAll<T>(IScrollAllRequest request, CancellationToken cancellationToken = default(CancellationToken))
+		IObservable<ScrollAllResponse<T>> ScrollAll<T>(IScrollAllRequest request, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class;
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IObservable<IScrollAllResponse<T>> ScrollAll<T>(Time scrollTime, int numberOfSlices,
+		public IObservable<ScrollAllResponse<T>> ScrollAll<T>(Time scrollTime, int numberOfSlices,
 			Func<ScrollAllDescriptor<T>, IScrollAllRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)
 		)
 			where T : class =>
 			ScrollAll<T>(selector.InvokeOrDefault(new ScrollAllDescriptor<T>(scrollTime, numberOfSlices)), cancellationToken);
 
 		/// <inheritdoc />
-		public IObservable<IScrollAllResponse<T>> ScrollAll<T>(IScrollAllRequest request,
+		public IObservable<ScrollAllResponse<T>> ScrollAll<T>(IScrollAllRequest request,
 			CancellationToken cancellationToken = default(CancellationToken)
 		)
 			where T : class =>

@@ -11,7 +11,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.GetCategories
 {
 	public class GetCategoriesApiTests
-		: MachineLearningIntegrationTestBase<IGetCategoriesResponse, IGetCategoriesRequest, GetCategoriesDescriptor, GetCategoriesRequest>
+		: MachineLearningIntegrationTestBase<GetCategoriesResponse, IGetCategoriesRequest, GetCategoriesDescriptor, GetCategoriesRequest>
 	{
 		public GetCategoriesApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -50,7 +50,7 @@ namespace Tests.XPack.MachineLearning.GetCategories
 
 		protected override GetCategoriesDescriptor NewDescriptor() => new GetCategoriesDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(IGetCategoriesResponse response)
+		protected override void ExpectResponse(GetCategoriesResponse response)
 		{
 			response.ShouldBeValid();
 			response.Categories.Should().HaveCount(1);
@@ -66,7 +66,7 @@ namespace Tests.XPack.MachineLearning.GetCategories
 	}
 
 	public class GetCategoriesWithCategoriesApiTests
-		: MachineLearningIntegrationTestBase<IGetCategoriesResponse, IGetCategoriesRequest, GetCategoriesDescriptor, GetCategoriesRequest>
+		: MachineLearningIntegrationTestBase<GetCategoriesResponse, IGetCategoriesRequest, GetCategoriesDescriptor, GetCategoriesRequest>
 	{
 		public GetCategoriesWithCategoriesApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -96,7 +96,7 @@ namespace Tests.XPack.MachineLearning.GetCategories
 
 		protected override GetCategoriesDescriptor NewDescriptor() => new GetCategoriesDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(IGetCategoriesResponse response)
+		protected override void ExpectResponse(GetCategoriesResponse response)
 		{
 			response.ShouldBeValid();
 			response.Categories.Should().HaveCount(1);

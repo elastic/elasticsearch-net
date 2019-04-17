@@ -8,40 +8,40 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc />
-		IPutUserResponse PutUser(Name username, Func<PutUserDescriptor, IPutUserRequest> selector = null);
+		PutUserResponse PutUser(Name username, Func<PutUserDescriptor, IPutUserRequest> selector = null);
 
 		/// <inheritdoc />
-		IPutUserResponse PutUser(IPutUserRequest request);
+		PutUserResponse PutUser(IPutUserRequest request);
 
 		/// <inheritdoc />
-		Task<IPutUserResponse> PutUserAsync(Name username, Func<PutUserDescriptor, IPutUserRequest> selector = null,
+		Task<PutUserResponse> PutUserAsync(Name username, Func<PutUserDescriptor, IPutUserRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IPutUserResponse> PutUserAsync(IPutUserRequest request, CancellationToken ct = default);
+		Task<PutUserResponse> PutUserAsync(IPutUserRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IPutUserResponse PutUser(Name username, Func<PutUserDescriptor, IPutUserRequest> selector = null) =>
+		public PutUserResponse PutUser(Name username, Func<PutUserDescriptor, IPutUserRequest> selector = null) =>
 			PutUser(selector.InvokeOrDefault(new PutUserDescriptor(username)));
 
 		/// <inheritdoc />
-		public IPutUserResponse PutUser(IPutUserRequest request) =>
+		public PutUserResponse PutUser(IPutUserRequest request) =>
 			DoRequest<IPutUserRequest, PutUserResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IPutUserResponse> PutUserAsync(
+		public Task<PutUserResponse> PutUserAsync(
 			Name username,
 			Func<PutUserDescriptor, IPutUserRequest> selector = null,
 			CancellationToken ct = default
 		) => PutUserAsync(selector.InvokeOrDefault(new PutUserDescriptor(username)), ct);
 
 		/// <inheritdoc />
-		public Task<IPutUserResponse> PutUserAsync(IPutUserRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IPutUserRequest, IPutUserResponse, PutUserResponse>
+		public Task<PutUserResponse> PutUserAsync(IPutUserRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IPutUserRequest, PutUserResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

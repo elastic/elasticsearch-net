@@ -19,7 +19,7 @@ using static Tests.Domain.Helpers.TestValueHelper;
 namespace Tests.Document.Single.Create
 {
 	public class CreateApiTests
-		: ApiIntegrationTestBase<WritableCluster, ICreateResponse, ICreateRequest<Project>, CreateDescriptor<Project>, CreateRequest<Project>>
+		: ApiIntegrationTestBase<WritableCluster, CreateResponse, ICreateRequest<Project>, CreateDescriptor<Project>, CreateRequest<Project>>
 	{
 		public CreateApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

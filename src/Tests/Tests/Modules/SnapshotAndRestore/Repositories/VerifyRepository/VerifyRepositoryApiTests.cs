@@ -8,7 +8,7 @@ using Tests.Framework.Integration;
 namespace Tests.Modules.SnapshotAndRestore.Repositories.VerifyRepository
 {
 	public class VerifyRepositoryApiTests
-		: ApiTestBase<ReadOnlyCluster, IVerifyRepositoryResponse, IVerifyRepositoryRequest, VerifyRepositoryDescriptor, VerifyRepositoryRequest>
+		: ApiTestBase<ReadOnlyCluster, VerifyRepositoryResponse, IVerifyRepositoryRequest, VerifyRepositoryDescriptor, VerifyRepositoryRequest>
 	{
 		private static readonly string _name = "repository1";
 

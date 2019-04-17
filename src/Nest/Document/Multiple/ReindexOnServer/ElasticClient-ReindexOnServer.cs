@@ -11,19 +11,19 @@ namespace Nest
 		/// Reindexes documents from one or more indices to another. the reindex operation takes place
 		/// within Elasticsearch
 		/// </summary>
-		IReindexOnServerResponse ReindexOnServer(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector);
+		ReindexOnServerResponse ReindexOnServer(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector);
 
 		/// <summary>
 		/// Reindexes documents from one or more indices to another. the reindex operation takes place
 		/// within Elasticsearch
 		/// </summary>
-		IReindexOnServerResponse ReindexOnServer(IReindexOnServerRequest request);
+		ReindexOnServerResponse ReindexOnServer(IReindexOnServerRequest request);
 
 		/// <summary>
 		/// Reindexes documents from one or more indices to another. the reindex operation takes place
 		/// within Elasticsearch
 		/// </summary>
-		Task<IReindexOnServerResponse> ReindexOnServerAsync(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector,
+		Task<ReindexOnServerResponse> ReindexOnServerAsync(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector,
 			CancellationToken ct = default
 		);
 
@@ -31,7 +31,7 @@ namespace Nest
 		/// Reindexes documents from one or more indices to another. the reindex operation takes place
 		/// within Elasticsearch
 		/// </summary>
-		Task<IReindexOnServerResponse> ReindexOnServerAsync(IReindexOnServerRequest request,
+		Task<ReindexOnServerResponse> ReindexOnServerAsync(IReindexOnServerRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -40,22 +40,22 @@ namespace Nest
 	{
 
 		/// <inheritdoc />
-		public IReindexOnServerResponse ReindexOnServer(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector) =>
+		public ReindexOnServerResponse ReindexOnServer(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector) =>
 			ReindexOnServer(selector.InvokeOrDefault(new ReindexOnServerDescriptor()));
 
 		/// <inheritdoc />
-		public IReindexOnServerResponse ReindexOnServer(IReindexOnServerRequest request) =>
+		public ReindexOnServerResponse ReindexOnServer(IReindexOnServerRequest request) =>
 			DoRequest<IReindexOnServerRequest, ReindexOnServerResponse>(request, request.RequestParameters, r => AcceptAllStatusCodesHandler(r));
 
 		/// <inheritdoc />
-		public Task<IReindexOnServerResponse> ReindexOnServerAsync(
+		public Task<ReindexOnServerResponse> ReindexOnServerAsync(
 			Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector,
 			CancellationToken ct = default
 		) => ReindexOnServerAsync(selector.InvokeOrDefault(new ReindexOnServerDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IReindexOnServerResponse> ReindexOnServerAsync(IReindexOnServerRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IReindexOnServerRequest, IReindexOnServerResponse, ReindexOnServerResponse>
+		public Task<ReindexOnServerResponse> ReindexOnServerAsync(IReindexOnServerRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IReindexOnServerRequest, ReindexOnServerResponse>
 				(request, request.RequestParameters, ct, r => AcceptAllStatusCodesHandler(r));
 	}
 }

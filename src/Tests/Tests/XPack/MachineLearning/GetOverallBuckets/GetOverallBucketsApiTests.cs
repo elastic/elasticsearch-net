@@ -12,7 +12,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.GetOverallBuckets
 {
 	public class GetOverallBucketsApiTests
-		: MachineLearningIntegrationTestBase<IGetOverallBucketsResponse, IGetOverallBucketsRequest, GetOverallBucketsDescriptor,
+		: MachineLearningIntegrationTestBase<GetOverallBucketsResponse, IGetOverallBucketsRequest, GetOverallBucketsDescriptor,
 			GetOverallBucketsRequest>
 	{
 		private const int BucketSpanSeconds = 3600;
@@ -70,7 +70,7 @@ namespace Tests.XPack.MachineLearning.GetOverallBuckets
 
 		protected override GetOverallBucketsDescriptor NewDescriptor() => new GetOverallBucketsDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(IGetOverallBucketsResponse response)
+		protected override void ExpectResponse(GetOverallBucketsResponse response)
 		{
 			response.ShouldBeValid();
 			response.Count.Should().Be(OverallBucketCount);

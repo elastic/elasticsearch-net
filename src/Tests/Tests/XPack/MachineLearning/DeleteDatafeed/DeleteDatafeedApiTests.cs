@@ -9,7 +9,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.DeleteDatafeed
 {
 	public class DeleteDatafeedApiTests
-		: MachineLearningIntegrationTestBase<IDeleteDatafeedResponse, IDeleteDatafeedRequest, DeleteDatafeedDescriptor, DeleteDatafeedRequest>
+		: MachineLearningIntegrationTestBase<DeleteDatafeedResponse, IDeleteDatafeedRequest, DeleteDatafeedDescriptor, DeleteDatafeedRequest>
 	{
 		public DeleteDatafeedApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -39,6 +39,6 @@ namespace Tests.XPack.MachineLearning.DeleteDatafeed
 
 		protected override DeleteDatafeedDescriptor NewDescriptor() => new DeleteDatafeedDescriptor(CallIsolatedValue + "-datafeed");
 
-		protected override void ExpectResponse(IDeleteDatafeedResponse response) => response.Acknowledged.Should().BeTrue();
+		protected override void ExpectResponse(DeleteDatafeedResponse response) => response.Acknowledged.Should().BeTrue();
 	}
 }

@@ -11,7 +11,7 @@ namespace Tests.XPack.Ssl.GetCertificates
 {
 	[SkipVersion("<6.5.0", "")]
 	public class GetCertificatesApiTests
-		: ApiIntegrationTestBase<XPackCluster, IGetCertificatesResponse, IGetCertificatesRequest, GetCertificatesDescriptor, GetCertificatesRequest>
+		: ApiIntegrationTestBase<XPackCluster, GetCertificatesResponse, IGetCertificatesRequest, GetCertificatesDescriptor, GetCertificatesRequest>
 	{
 		public GetCertificatesApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -30,7 +30,7 @@ namespace Tests.XPack.Ssl.GetCertificates
 			(client, r) => client.GetCertificatesAsync(r)
 		);
 
-		protected override void ExpectResponse(IGetCertificatesResponse response)
+		protected override void ExpectResponse(GetCertificatesResponse response)
 		{
 			response.Certificates.Should().NotBeEmpty();
 			foreach (var c in response.Certificates)

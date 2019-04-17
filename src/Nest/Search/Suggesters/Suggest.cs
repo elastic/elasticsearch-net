@@ -1,20 +1,35 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class Suggest<T> where T : class
+	[InterfaceDataContract]
+	[ReadAs(typeof(Suggest<>))]
+	public interface ISuggest<out T> where T : class
 	{
 		[DataMember(Name = "length")]
-		public int Length { get; internal set; }
+		int Length { get; }
 
 		[DataMember(Name = "offset")]
-		public int Offset { get; internal set; }
+		int Offset { get; }
 
 		[DataMember(Name = "options")]
-		public IReadOnlyCollection<SuggestOption<T>> Options { get; internal set; } = EmptyReadOnly<SuggestOption<T>>.Collection;
+		IReadOnlyCollection<ISuggestOption<T>> Options { get; }
 
 		[DataMember(Name = "text")]
+		string Text { get; }
+
+	}
+	public class Suggest<T> : ISuggest<T>
+		where T : class
+	{
+		public int Length { get; internal set; }
+
+		public int Offset { get; internal set; }
+
+		public IReadOnlyCollection<ISuggestOption<T>> Options { get; internal set; } = EmptyReadOnly<ISuggestOption<T>>.Collection;
+
 		public string Text { get; internal set; }
 	}
 }

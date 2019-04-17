@@ -3,83 +3,54 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-	public interface IDeleteByQueryResponse : IResponse
+	public class DeleteByQueryResponse : ResponseBase
 	{
+		public override bool IsValid => ApiCall?.HttpStatusCode == 200 || !Failures.HasAny();
+
 		[DataMember(Name ="batches")]
-		long Batches { get; }
+		public long Batches { get; internal set; }
 
 		[DataMember(Name ="deleted")]
-		long Deleted { get; }
+		public long Deleted { get; internal set; }
 
 		[DataMember(Name ="failures")]
-		IReadOnlyCollection<BulkIndexByScrollFailure> Failures { get; }
+		public IReadOnlyCollection<BulkIndexByScrollFailure> Failures { get; internal set; }
+			= EmptyReadOnly<BulkIndexByScrollFailure>.Collection;
 
 		[DataMember(Name ="noops")]
-		long Noops { get; }
+		public long Noops { get; internal set; }
 
 		[DataMember(Name ="requests_per_second")]
-		float RequestsPerSecond { get; }
+		public float RequestsPerSecond { get; internal set; }
 
 		[DataMember(Name ="retries")]
-		Retries Retries { get; }
+		public Retries Retries { get; internal set; }
 
 		[DataMember(Name ="slice_id")]
-		int? SliceId { get; }
+		public int? SliceId { get; internal set; }
 
 		/// <summary>
 		/// Only has a value if WaitForCompletion is set to false on the request
 		/// </summary>
 		[DataMember(Name ="task")]
-		TaskId Task { get; }
-
-		[DataMember(Name ="throttled_millis")]
-		long ThrottledMilliseconds { get; }
-
-		[DataMember(Name ="throttled_until_millis")]
-		long ThrottledUntilMilliseconds { get; }
-
-		[DataMember(Name ="timed_out")]
-		bool TimedOut { get; }
-
-		[DataMember(Name ="took")]
-		long Took { get; }
-
-		[DataMember(Name ="total")]
-		long Total { get; }
-
-		[DataMember(Name ="version_conflicts")]
-		long VersionConflicts { get; }
-	}
-
-	public class DeleteByQueryResponse : ResponseBase, IDeleteByQueryResponse
-	{
-		public long Batches { get; internal set; }
-
-		public long Deleted { get; internal set; }
-
-		public IReadOnlyCollection<BulkIndexByScrollFailure> Failures { get; internal set; } = EmptyReadOnly<BulkIndexByScrollFailure>.Collection;
-		public override bool IsValid => ApiCall?.HttpStatusCode == 200 || !Failures.HasAny();
-
-		public long Noops { get; internal set; }
-
-		public float RequestsPerSecond { get; internal set; }
-
-		public Retries Retries { get; internal set; }
-
-		public int? SliceId { get; internal set; }
-
 		public TaskId Task { get; internal set; }
 
+		[DataMember(Name ="throttled_millis")]
 		public long ThrottledMilliseconds { get; internal set; }
 
+		[DataMember(Name ="throttled_until_millis")]
 		public long ThrottledUntilMilliseconds { get; internal set; }
 
+		[DataMember(Name ="timed_out")]
 		public bool TimedOut { get; internal set; }
 
+		[DataMember(Name ="took")]
 		public long Took { get; internal set; }
 
+		[DataMember(Name ="total")]
 		public long Total { get; internal set; }
 
+		[DataMember(Name ="version_conflicts")]
 		public long VersionConflicts { get; internal set; }
 	}
 }

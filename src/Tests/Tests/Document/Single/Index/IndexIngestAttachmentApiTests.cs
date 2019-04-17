@@ -38,7 +38,7 @@ namespace Tests.Document.Single.Index
 	}
 
 	public class IndexIngestAttachmentApiTests
-		: ApiIntegrationTestBase<IntrusiveOperationCluster, IIndexResponse,
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, IndexResponse,
 			IIndexRequest<IngestedAttachment>,
 			IndexDescriptor<IngestedAttachment>,
 			IndexRequest<IngestedAttachment>>
@@ -122,7 +122,7 @@ namespace Tests.Document.Single.Index
 
 		protected override IndexDescriptor<IngestedAttachment> NewDescriptor() => new IndexDescriptor<IngestedAttachment>(Document);
 
-		protected override void ExpectResponse(IIndexResponse response)
+		protected override void ExpectResponse(IndexResponse response)
 		{
 			response.ShouldBeValid();
 
@@ -192,13 +192,13 @@ namespace Tests.Document.Single.Index
 			);
 
 			createIndexResponse.ShouldBeValid();
-			var indexResponse = _client.Index<IngestedAttachment>(Document, i => i
+			var ndexResponse = _client.Index<IngestedAttachment>(Document, i => i
 				.Index(Index)
 				.Refresh(Refresh.True)
 				.Pipeline(PipelineId)
 			);
 
-			indexResponse.ShouldBeValid();
+			ndexResponse.ShouldBeValid();
 		}
 
 		[I]
@@ -212,12 +212,12 @@ namespace Tests.Document.Single.Index
 			var ingestedAttachment = getResponse.Source;
 			ingestedAttachment.Should().NotBeNull();
 
-			var indexResponse = _client.Index<IngestedAttachment>(ingestedAttachment, i => i
+			var ndexResponse = _client.Index<IngestedAttachment>(ingestedAttachment, i => i
 				.Index(Index + "2")
 				.Refresh(Refresh.True)
 			);
 
-			indexResponse.ShouldBeValid();
+			ndexResponse.ShouldBeValid();
 
 			getResponse = _client.Get<IngestedAttachment>(1, g => g
 				.Index(Index + "2")

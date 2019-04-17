@@ -8,18 +8,18 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc />
-		IPutRoleMappingResponse PutRoleMapping(Name role, Func<PutRoleMappingDescriptor, IPutRoleMappingRequest> selector = null);
+		PutRoleMappingResponse PutRoleMapping(Name role, Func<PutRoleMappingDescriptor, IPutRoleMappingRequest> selector = null);
 
 		/// <inheritdoc />
-		IPutRoleMappingResponse PutRoleMapping(IPutRoleMappingRequest request);
+		PutRoleMappingResponse PutRoleMapping(IPutRoleMappingRequest request);
 
 		/// <inheritdoc />
-		Task<IPutRoleMappingResponse> PutRoleMappingAsync(Name role, Func<PutRoleMappingDescriptor, IPutRoleMappingRequest> selector = null,
+		Task<PutRoleMappingResponse> PutRoleMappingAsync(Name role, Func<PutRoleMappingDescriptor, IPutRoleMappingRequest> selector = null,
 			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
-		Task<IPutRoleMappingResponse> PutRoleMappingAsync(IPutRoleMappingRequest request,
+		Task<PutRoleMappingResponse> PutRoleMappingAsync(IPutRoleMappingRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -27,22 +27,22 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IPutRoleMappingResponse PutRoleMapping(Name role, Func<PutRoleMappingDescriptor, IPutRoleMappingRequest> selector = null) =>
+		public PutRoleMappingResponse PutRoleMapping(Name role, Func<PutRoleMappingDescriptor, IPutRoleMappingRequest> selector = null) =>
 			PutRoleMapping(selector.InvokeOrDefault(new PutRoleMappingDescriptor(role)));
 
 		/// <inheritdoc />
-		public IPutRoleMappingResponse PutRoleMapping(IPutRoleMappingRequest request) =>
+		public PutRoleMappingResponse PutRoleMapping(IPutRoleMappingRequest request) =>
 			DoRequest<IPutRoleMappingRequest, PutRoleMappingResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IPutRoleMappingResponse> PutRoleMappingAsync(
+		public Task<PutRoleMappingResponse> PutRoleMappingAsync(
 			Name role,
 			Func<PutRoleMappingDescriptor, IPutRoleMappingRequest> selector = null,
 			CancellationToken cancellationToken = default
 		) => PutRoleMappingAsync(selector.InvokeOrDefault(new PutRoleMappingDescriptor(role)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IPutRoleMappingResponse> PutRoleMappingAsync(IPutRoleMappingRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IPutRoleMappingRequest, IPutRoleMappingResponse, PutRoleMappingResponse>(request, request.RequestParameters, ct);
+		public Task<PutRoleMappingResponse> PutRoleMappingAsync(IPutRoleMappingRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IPutRoleMappingRequest, PutRoleMappingResponse>(request, request.RequestParameters, ct);
 	}
 }

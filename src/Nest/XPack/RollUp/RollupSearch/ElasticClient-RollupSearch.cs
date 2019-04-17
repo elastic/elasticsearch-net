@@ -13,44 +13,44 @@ namespace Nest
 		/// The Rollup Search endpoint rewrites standard query DSL into a format that matches the rollup documents,
 		/// then takes the response and rewrites it back to what a client would expect given the original query.
 		/// </summary>
-		IRollupSearchResponse<THit> RollupSearch<THit>(Indices indices, Func<RollupSearchDescriptor<THit>, IRollupSearchRequest> selector = null)
+		RollupSearchResponse<THit> RollupSearch<THit>(Indices indices, Func<RollupSearchDescriptor<THit>, IRollupSearchRequest> selector = null)
 			where THit : class;
 
 		/// <inheritdoc cref="RollupSearch{THit}(Nest.Indices,System.Func{Nest.RollupSearchDescriptor{THit},Nest.IRollupSearchRequest})" />
-		IRollupSearchResponse<THit> RollupSearch<T, THit>(Indices indices, Func<RollupSearchDescriptor<T>, IRollupSearchRequest> selector = null)
+		RollupSearchResponse<THit> RollupSearch<T, THit>(Indices indices, Func<RollupSearchDescriptor<T>, IRollupSearchRequest> selector = null)
 			where THit : class
 			where T : class;
 
 		/// <inheritdoc cref="RollupSearch{THit}(Nest.Indices,System.Func{Nest.RollupSearchDescriptor{THit},Nest.IRollupSearchRequest})" />
-		IRollupSearchResponse<THit> RollupSearch<THit>(IRollupSearchRequest request) where THit : class;
+		RollupSearchResponse<THit> RollupSearch<THit>(IRollupSearchRequest request) where THit : class;
 
 		/// <inheritdoc cref="RollupSearch{THit}(Nest.Indices,System.Func{Nest.RollupSearchDescriptor{THit},Nest.IRollupSearchRequest})" />
-		Task<IRollupSearchResponse<THit>> RollupSearchAsync<THit>(Indices indices,
+		Task<RollupSearchResponse<THit>> RollupSearchAsync<THit>(Indices indices,
 			Func<RollupSearchDescriptor<THit>, IRollupSearchRequest> selector = null, CancellationToken ct = default
 		)
 			where THit : class;
 
 		/// <inheritdoc cref="RollupSearch{THit}(Nest.Indices,System.Func{Nest.RollupSearchDescriptor{THit},Nest.IRollupSearchRequest})" />
-		Task<IRollupSearchResponse<THit>> RollupSearchAsync<T, THit>(Indices indices,
+		Task<RollupSearchResponse<THit>> RollupSearchAsync<T, THit>(Indices indices,
 			Func<RollupSearchDescriptor<T>, IRollupSearchRequest> selector = null, CancellationToken ct = default
 		)
 			where THit : class
 			where T : class;
 
 		/// <inheritdoc cref="RollupSearch{THit}(Nest.Indices,System.Func{Nest.RollupSearchDescriptor{THit},Nest.IRollupSearchRequest})" />
-		Task<IRollupSearchResponse<THit>> RollupSearchAsync<THit>(IRollupSearchRequest request, CancellationToken ct = default)
+		Task<RollupSearchResponse<THit>> RollupSearchAsync<THit>(IRollupSearchRequest request, CancellationToken ct = default)
 			where THit : class;
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IRollupSearchResponse<THit> RollupSearch<THit>(Indices indices, Func<RollupSearchDescriptor<THit>, IRollupSearchRequest> selector = null)
+		public RollupSearchResponse<THit> RollupSearch<THit>(Indices indices, Func<RollupSearchDescriptor<THit>, IRollupSearchRequest> selector = null)
 			where THit : class =>
 			RollupSearch<THit>(selector.InvokeOrDefault(new RollupSearchDescriptor<THit>(indices)));
 
 		/// <inheritdoc />
-		public IRollupSearchResponse<THit> RollupSearch<T, THit>(
+		public RollupSearchResponse<THit> RollupSearch<T, THit>(
 			Indices indices,
 			Func<RollupSearchDescriptor<T>, IRollupSearchRequest> selector = null
 		)
@@ -59,12 +59,12 @@ namespace Nest
 			RollupSearch<THit>(selector.InvokeOrDefault(new RollupSearchDescriptor<T>(indices)));
 
 		/// <inheritdoc />
-		public IRollupSearchResponse<THit> RollupSearch<THit>(IRollupSearchRequest request)
+		public RollupSearchResponse<THit> RollupSearch<THit>(IRollupSearchRequest request)
 			where THit : class =>
 			DoRequest<IRollupSearchRequest, RollupSearchResponse<THit>>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IRollupSearchResponse<THit>> RollupSearchAsync<THit>(
+		public Task<RollupSearchResponse<THit>> RollupSearchAsync<THit>(
 			Indices indices,
 			Func<RollupSearchDescriptor<THit>, IRollupSearchRequest> selector = null,
 			CancellationToken ct = default
@@ -73,7 +73,7 @@ namespace Nest
 			RollupSearchAsync<THit>(selector.InvokeOrDefault(new RollupSearchDescriptor<THit>(indices)), ct);
 
 		/// <inheritdoc />
-		public Task<IRollupSearchResponse<THit>> RollupSearchAsync<T, THit>(
+		public Task<RollupSearchResponse<THit>> RollupSearchAsync<T, THit>(
 			Indices indices, Func<RollupSearchDescriptor<T>, IRollupSearchRequest> selector = null,
 			CancellationToken ct = default
 		)
@@ -82,9 +82,9 @@ namespace Nest
 			RollupSearchAsync<THit>(selector.InvokeOrDefault(new RollupSearchDescriptor<T>(indices)), ct);
 
 		/// <inheritdoc />
-		public Task<IRollupSearchResponse<THit>> RollupSearchAsync<THit>(IRollupSearchRequest request, CancellationToken ct = default)
+		public Task<RollupSearchResponse<THit>> RollupSearchAsync<THit>(IRollupSearchRequest request, CancellationToken ct = default)
 			where THit : class =>
-			DoRequestAsync<IRollupSearchRequest, IRollupSearchResponse<THit>, RollupSearchResponse<THit>>
+			DoRequestAsync<IRollupSearchRequest, RollupSearchResponse<THit>>
 				(request, request.RequestParameters, ct);
 	}
 }

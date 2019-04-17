@@ -10,7 +10,7 @@ using Tests.Framework.Integration;
 namespace Tests.Document.Single.Exists
 {
 	public class DocumentExistsApiTests
-		: ApiIntegrationTestBase<WritableCluster, IExistsResponse, IDocumentExistsRequest, DocumentExistsDescriptor<Project>,
+		: ApiIntegrationTestBase<WritableCluster, ExistsResponse, IDocumentExistsRequest, DocumentExistsDescriptor<Project>,
 			DocumentExistsRequest<Project>>
 	{
 		public DocumentExistsApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -40,7 +40,7 @@ namespace Tests.Document.Single.Exists
 		protected override DocumentExistsRequest<Project> Initializer => new DocumentExistsRequest<Project>(CallIsolatedValue) { Routing = CallIsolatedValue };
 		protected override Func<DocumentExistsDescriptor<Project>, IDocumentExistsRequest> Fluent => d => d.Routing(CallIsolatedValue);
 
-		protected override void ExpectResponse(IExistsResponse response)
+		protected override void ExpectResponse(ExistsResponse response)
 		{
 			response.Should().NotBeNull();
 			response.Exists.Should().BeTrue();

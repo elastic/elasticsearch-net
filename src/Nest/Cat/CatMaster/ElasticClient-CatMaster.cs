@@ -8,41 +8,41 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc />
-		ICatResponse<CatMasterRecord> CatMaster(Func<CatMasterDescriptor, ICatMasterRequest> selector = null);
+		CatResponse<CatMasterRecord> CatMaster(Func<CatMasterDescriptor, ICatMasterRequest> selector = null);
 
 		/// <inheritdoc />
-		ICatResponse<CatMasterRecord> CatMaster(ICatMasterRequest request);
+		CatResponse<CatMasterRecord> CatMaster(ICatMasterRequest request);
 
 		/// <inheritdoc />
-		Task<ICatResponse<CatMasterRecord>> CatMasterAsync(
+		Task<CatResponse<CatMasterRecord>> CatMasterAsync(
 			Func<CatMasterDescriptor, ICatMasterRequest> selector = null,
 			CancellationToken ct = default(CancellationToken)
 		);
 
 		/// <inheritdoc />
-		Task<ICatResponse<CatMasterRecord>> CatMasterAsync(ICatMasterRequest request, CancellationToken ct = default(CancellationToken)
+		Task<CatResponse<CatMasterRecord>> CatMasterAsync(ICatMasterRequest request, CancellationToken ct = default(CancellationToken)
 		);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public ICatResponse<CatMasterRecord> CatMaster(Func<CatMasterDescriptor, ICatMasterRequest> selector = null) =>
+		public CatResponse<CatMasterRecord> CatMaster(Func<CatMasterDescriptor, ICatMasterRequest> selector = null) =>
 			CatMaster(selector.InvokeOrDefault(new CatMasterDescriptor()));
 
 		/// <inheritdoc />
-		public ICatResponse<CatMasterRecord> CatMaster(ICatMasterRequest request) =>
+		public CatResponse<CatMasterRecord> CatMaster(ICatMasterRequest request) =>
 			DoCat<ICatMasterRequest, CatMasterRequestParameters, CatMasterRecord>(request);
 
 		/// <inheritdoc />
-		public Task<ICatResponse<CatMasterRecord>> CatMasterAsync(
+		public Task<CatResponse<CatMasterRecord>> CatMasterAsync(
 			Func<CatMasterDescriptor, ICatMasterRequest> selector = null,
 			CancellationToken ct = default
 		) =>
 			CatMasterAsync(selector.InvokeOrDefault(new CatMasterDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<ICatResponse<CatMasterRecord>> CatMasterAsync(ICatMasterRequest request, CancellationToken ct = default) =>
+		public Task<CatResponse<CatMasterRecord>> CatMasterAsync(ICatMasterRequest request, CancellationToken ct = default) =>
 			DoCatAsync<ICatMasterRequest, CatMasterRequestParameters, CatMasterRecord>(request, ct);
 	}
 }

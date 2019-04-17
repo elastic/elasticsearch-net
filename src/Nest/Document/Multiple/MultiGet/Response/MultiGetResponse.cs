@@ -6,35 +6,10 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IMultiGetResponse : IResponse
-	{
-		IReadOnlyCollection<IMultiGetHit<object>> Hits { get; }
-
-		MultiGetHit<T> Get<T>(string id) where T : class;
-
-		MultiGetHit<T> Get<T>(long id) where T : class;
-
-		T Source<T>(string id) where T : class;
-
-		T Source<T>(long id) where T : class;
-
-		FieldValues GetFieldValues<T>(string id) where T : class;
-
-		FieldValues GetFieldSelection<T>(long id) where T : class;
-
-		IEnumerable<T> SourceMany<T>(IEnumerable<string> ids) where T : class;
-
-		IEnumerable<T> SourceMany<T>(IEnumerable<long> ids) where T : class;
-
-		IEnumerable<IMultiGetHit<T>> GetMany<T>(IEnumerable<string> ids) where T : class;
-
-		IEnumerable<IMultiGetHit<T>> GetMany<T>(IEnumerable<long> ids) where T : class;
-	}
-
 	[DataContract]
 	//TODO validate this, ported over from ElasticContractResolver but it seems out of place
 	[JsonFormatter(typeof(MultiGetResponseFormatter))]
-	public class MultiGetResponse : ResponseBase, IMultiGetResponse
+	public class MultiGetResponse : ResponseBase
 	{
 		public IReadOnlyCollection<IMultiGetHit<object>> Hits => InternalHits.ToList().AsReadOnly();
 		public override bool IsValid => base.IsValid && !InternalHits.HasAny(d => d.Error != null);

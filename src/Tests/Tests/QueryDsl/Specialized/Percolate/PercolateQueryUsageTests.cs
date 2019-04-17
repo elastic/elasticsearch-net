@@ -18,7 +18,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 	public abstract class PercolateQueryUsageTestsBase
 		: ApiIntegrationTestBase<
 			WritableCluster,
-			ISearchResponse<ProjectPercolation>,
+			SearchResponse<ProjectPercolation>,
 			ISearchRequest,
 			SearchDescriptor<ProjectPercolation>,
 			SearchRequest<ProjectPercolation>
@@ -152,7 +152,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 				.Field(f => f.Query)
 			);
 
-		protected override void ExpectResponse(ISearchResponse<ProjectPercolation> response)
+		protected override void ExpectResponse(SearchResponse<ProjectPercolation> response)
 		{
 			response.Total.Should().BeGreaterThan(0);
 			response.Hits.Should().NotBeNull();
@@ -222,7 +222,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 				.Field(f => f.Query)
 			);
 
-		protected override void ExpectResponse(ISearchResponse<ProjectPercolation> response)
+		protected override void ExpectResponse(SearchResponse<ProjectPercolation> response)
 		{
 			response.Total.Should().BeGreaterThan(0);
 			response.Hits.Should().NotBeNull();
@@ -289,7 +289,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 				.Field(f => f.Query)
 			);
 
-		protected override void ExpectResponse(ISearchResponse<ProjectPercolation> response)
+		protected override void ExpectResponse(SearchResponse<ProjectPercolation> response)
 		{
 			response.Total.Should().Be(1);
 			response.Hits.Should().NotBeNull();

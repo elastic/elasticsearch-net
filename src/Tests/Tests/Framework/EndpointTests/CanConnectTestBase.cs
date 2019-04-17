@@ -10,7 +10,7 @@ using Tests.Framework.Integration;
 namespace Tests.Framework
 {
 	public abstract class CanConnectTestBase<TCluster>
-		: ApiIntegrationTestBase<TCluster, IRootNodeInfoResponse, IRootNodeInfoRequest, RootNodeInfoDescriptor, RootNodeInfoRequest>
+		: ApiIntegrationTestBase<TCluster, RootNodeInfoResponse, IRootNodeInfoRequest, RootNodeInfoDescriptor, RootNodeInfoRequest>
 		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster, new()
 	{
 		protected CanConnectTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -27,7 +27,7 @@ namespace Tests.Framework
 			(client, r) => client.RootNodeInfoAsync(r)
 		);
 
-		protected override void ExpectResponse(IRootNodeInfoResponse response)
+		protected override void ExpectResponse(RootNodeInfoResponse response)
 		{
 			response.Version.Should().NotBeNull();
 			response.Version.LuceneVersion.Should().NotBeNullOrWhiteSpace();

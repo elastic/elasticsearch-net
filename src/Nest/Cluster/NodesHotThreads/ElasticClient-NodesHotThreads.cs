@@ -18,18 +18,18 @@ namespace Nest
 		/// </summary>
 		/// <param name="selector"></param>
 		/// <returns>An optional descriptor to further describe the nodes hot threads operation</returns>
-		INodesHotThreadsResponse NodesHotThreads(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null);
+		NodesHotThreadsResponse NodesHotThreads(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null);
 
 		/// <inheritdoc />
-		INodesHotThreadsResponse NodesHotThreads(INodesHotThreadsRequest request);
+		NodesHotThreadsResponse NodesHotThreads(INodesHotThreadsRequest request);
 
 		/// <inheritdoc />
-		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null,
+		Task<NodesHotThreadsResponse> NodesHotThreadsAsync(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest request, CancellationToken ct = default);
+		Task<NodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
@@ -38,27 +38,27 @@ namespace Nest
 		private static readonly Regex NodeRegex = new Regex(@"^\s\{(?<name>.+?)\}\{(?<id>.+?)\}(?<hosts>.+)\n");
 
 		/// <inheritdoc />
-		public INodesHotThreadsResponse NodesHotThreads(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null) =>
+		public NodesHotThreadsResponse NodesHotThreads(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null) =>
 			NodesHotThreads(selector.InvokeOrDefault(new NodesHotThreadsDescriptor()));
 
 		/// <inheritdoc />
-		public INodesHotThreadsResponse NodesHotThreads(INodesHotThreadsRequest request)
+		public NodesHotThreadsResponse NodesHotThreads(INodesHotThreadsRequest request)
 		{
 			request.RequestParameters.DeserializationOverride = DeserializeNodesHotThreadResponse;
 			return DoRequest<INodesHotThreadsRequest, NodesHotThreadsResponse>(request, request.RequestParameters);
 		}
 
 		/// <inheritdoc />
-		public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null,
+		public Task<NodesHotThreadsResponse> NodesHotThreadsAsync(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null,
 			CancellationToken ct = default
 		) =>
 			NodesHotThreadsAsync(selector.InvokeOrDefault(new NodesHotThreadsDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest request, CancellationToken ct = default)
+		public Task<NodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest request, CancellationToken ct = default)
 		{
 			request.RequestParameters.DeserializationOverride = DeserializeNodesHotThreadResponse;
-			return DoRequestAsync<INodesHotThreadsRequest, INodesHotThreadsResponse, NodesHotThreadsResponse>(request, request.RequestParameters, ct);
+			return DoRequestAsync<INodesHotThreadsRequest, NodesHotThreadsResponse>(request, request.RequestParameters, ct);
 		}
 
 		/// <summary>

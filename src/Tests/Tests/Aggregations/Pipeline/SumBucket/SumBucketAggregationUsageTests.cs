@@ -64,7 +64,7 @@ namespace Tests.Aggregations.Pipeline.SumBucket
 			}
 			&& new SumBucketAggregation("sum_of_commits", "projects_started_per_month>commits");
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
+		protected override void ExpectResponse(SearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 

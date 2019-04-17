@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 {
 	public class CreateAzureRepositoryApiTests
-		: ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
+		: ApiTestBase<WritableCluster, CreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
 	{
 		private static readonly string _name = "repository1";
 
@@ -67,7 +67,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 	}
 
 	public class CreateHdfsRepositoryApiTests
-		: ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
+		: ApiTestBase<WritableCluster, CreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
 	{
 		private static readonly string _name = "repository1";
 
@@ -131,7 +131,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 
 	[SkipVersion("<6.5.0", "new feature")]
 	public class CreateSourceOnlyRepositoryApiTests
-		: ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
+		: ApiTestBase<WritableCluster, CreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
 	{
 		private static readonly string _name = "repository10";
 
@@ -194,7 +194,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 
 
 	public class CreateFileSystemRepositoryApiTests
-		: ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
+		: ApiTestBase<WritableCluster, CreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
 	{
 		private static readonly string _name = "repository1";
 
@@ -253,7 +253,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 	}
 
 	public class CreateReadOnlyUrlRepositoryApiTests
-		: ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
+		: ApiTestBase<WritableCluster, CreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
 	{
 		private static readonly string _name = "repository1";
 
@@ -300,7 +300,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 	}
 
 	public class CreateS3RepositoryApiTests
-		: ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
+		: ApiTestBase<WritableCluster, CreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
 	{
 		private static readonly string _name = "repository1";
 

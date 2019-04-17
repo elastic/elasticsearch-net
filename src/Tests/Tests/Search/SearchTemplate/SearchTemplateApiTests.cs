@@ -12,7 +12,7 @@ using Tests.Framework.Integration;
 namespace Tests.Search.SearchTemplate
 {
 	public class SearchTemplateApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchTemplateRequest,
+		: ApiIntegrationTestBase<ReadOnlyCluster, SearchResponse<Project>, ISearchTemplateRequest,
 			SearchTemplateDescriptor<Project>, SearchTemplateRequest<Project>>
 	{
 		public SearchTemplateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -53,11 +53,11 @@ namespace Tests.Search.SearchTemplate
 			(c, r) => c.SearchTemplateAsync<Project>(r)
 		);
 
-		protected override void ExpectResponse(ISearchResponse<Project> response) => response.Hits.Count().Should().BeGreaterThan(0);
+		protected override void ExpectResponse(SearchResponse<Project> response) => response.Hits.Count().Should().BeGreaterThan(0);
 	}
 
 	public class SearchTemplateInvalidApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchTemplateRequest,
+		: ApiIntegrationTestBase<ReadOnlyCluster, SearchResponse<Project>, ISearchTemplateRequest,
 			SearchTemplateDescriptor<Project>, SearchTemplateRequest<Project>>
 	{
 		private readonly string _templateString = "{\"query\": {\"atch\":  {\"state\" : \"{{state}}\" }}}";
@@ -100,7 +100,7 @@ namespace Tests.Search.SearchTemplate
 			(c, r) => c.SearchTemplateAsync<Project>(r)
 		);
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
+		protected override void ExpectResponse(SearchResponse<Project> response)
 		{
 			response.ServerError.Should().NotBeNull();
 			response.ServerError.Error.Reason.Should().Contain("no [query]");

@@ -11,7 +11,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.DeleteCalendar
 {
 	[SkipVersion("<6.4.0", "Calendar functions for machine learning introduced in 6.4.0")]
-	public class DeleteCalendarApiTests : MachineLearningIntegrationTestBase<IDeleteCalendarResponse, IDeleteCalendarRequest, DeleteCalendarDescriptor, DeleteCalendarRequest>
+	public class DeleteCalendarApiTests : MachineLearningIntegrationTestBase<DeleteCalendarResponse, IDeleteCalendarRequest, DeleteCalendarDescriptor, DeleteCalendarRequest>
 	{
 		public DeleteCalendarApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -47,7 +47,7 @@ namespace Tests.XPack.MachineLearning.DeleteCalendar
 
 		protected override DeleteCalendarDescriptor NewDescriptor() => new DeleteCalendarDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(IDeleteCalendarResponse response)
+		protected override void ExpectResponse(DeleteCalendarResponse response)
 		{
 			response.ShouldBeValid();
 		}

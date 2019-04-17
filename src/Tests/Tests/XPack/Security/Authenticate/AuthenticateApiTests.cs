@@ -13,7 +13,7 @@ namespace Tests.XPack.Security.Authenticate
 {
 	[SkipVersion("<2.3.0", "")]
 	public class AuthenticateApiTests
-		: ApiIntegrationTestBase<XPackCluster, IAuthenticateResponse, IAuthenticateRequest, AuthenticateDescriptor, AuthenticateRequest>
+		: ApiIntegrationTestBase<XPackCluster, AuthenticateResponse, IAuthenticateRequest, AuthenticateDescriptor, AuthenticateRequest>
 	{
 		public AuthenticateApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -30,7 +30,7 @@ namespace Tests.XPack.Security.Authenticate
 			(client, r) => client.AuthenticateAsync(r)
 		);
 
-		protected override void ExpectResponse(IAuthenticateResponse response)
+		protected override void ExpectResponse(AuthenticateResponse response)
 		{
 			response.Username.Should().Be(Admin.Username);
 			response.Roles.Should().Contain(Admin.Role);
@@ -59,7 +59,7 @@ namespace Tests.XPack.Security.Authenticate
 			}
 		};
 
-		protected override void ExpectResponse(IAuthenticateResponse response)
+		protected override void ExpectResponse(AuthenticateResponse response)
 		{
 			response.Username.Should().Be(ClusterAuthentication.User.Username);
 			response.Roles.Should().Contain(ClusterAuthentication.User.Role);

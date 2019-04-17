@@ -10,21 +10,21 @@ namespace Nest
 		/// <summary>
 		/// Updates a machine learning model snapshot.
 		/// </summary>
-		IUpdateModelSnapshotResponse UpdateModelSnapshot(Id jobId, Id snapshotId,
+		UpdateModelSnapshotResponse UpdateModelSnapshot(Id jobId, Id snapshotId,
 			Func<UpdateModelSnapshotDescriptor, IUpdateModelSnapshotRequest> selector = null
 		);
 
 		/// <inheritdoc />
-		IUpdateModelSnapshotResponse UpdateModelSnapshot(IUpdateModelSnapshotRequest request);
+		UpdateModelSnapshotResponse UpdateModelSnapshot(IUpdateModelSnapshotRequest request);
 
 		/// <inheritdoc />
-		Task<IUpdateModelSnapshotResponse> UpdateModelSnapshotAsync(Id jobId, Id snapshotId,
+		Task<UpdateModelSnapshotResponse> UpdateModelSnapshotAsync(Id jobId, Id snapshotId,
 			Func<UpdateModelSnapshotDescriptor, IUpdateModelSnapshotRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IUpdateModelSnapshotResponse> UpdateModelSnapshotAsync(IUpdateModelSnapshotRequest request,
+		Task<UpdateModelSnapshotResponse> UpdateModelSnapshotAsync(IUpdateModelSnapshotRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -32,17 +32,17 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IUpdateModelSnapshotResponse UpdateModelSnapshot(Id jobId, Id snapshotId,
+		public UpdateModelSnapshotResponse UpdateModelSnapshot(Id jobId, Id snapshotId,
 			Func<UpdateModelSnapshotDescriptor, IUpdateModelSnapshotRequest> selector = null
 		) =>
 			UpdateModelSnapshot(selector.InvokeOrDefault(new UpdateModelSnapshotDescriptor(jobId, snapshotId)));
 
 		/// <inheritdoc />
-		public IUpdateModelSnapshotResponse UpdateModelSnapshot(IUpdateModelSnapshotRequest request) =>
+		public UpdateModelSnapshotResponse UpdateModelSnapshot(IUpdateModelSnapshotRequest request) =>
 			DoRequest<IUpdateModelSnapshotRequest, UpdateModelSnapshotResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IUpdateModelSnapshotResponse> UpdateModelSnapshotAsync(
+		public Task<UpdateModelSnapshotResponse> UpdateModelSnapshotAsync(
 			Id jobId,
 			Id snapshotId,
 			Func<UpdateModelSnapshotDescriptor, IUpdateModelSnapshotRequest> selector = null,
@@ -50,8 +50,8 @@ namespace Nest
 		) => UpdateModelSnapshotAsync(selector.InvokeOrDefault(new UpdateModelSnapshotDescriptor(jobId, snapshotId)), ct);
 
 		/// <inheritdoc />
-		public Task<IUpdateModelSnapshotResponse> UpdateModelSnapshotAsync(IUpdateModelSnapshotRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IUpdateModelSnapshotRequest, IUpdateModelSnapshotResponse, UpdateModelSnapshotResponse>
+		public Task<UpdateModelSnapshotResponse> UpdateModelSnapshotAsync(IUpdateModelSnapshotRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IUpdateModelSnapshotRequest, UpdateModelSnapshotResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

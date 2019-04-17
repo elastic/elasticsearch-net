@@ -11,7 +11,7 @@ using Tests.Framework.Integration;
 namespace Tests.Indices.IndexManagement.ShrinkIndex
 {
 	public class ShrinkIndexApiTests
-		: ApiIntegrationTestBase<WritableCluster, IShrinkIndexResponse, IShrinkIndexRequest, ShrinkIndexDescriptor, ShrinkIndexRequest>
+		: ApiIntegrationTestBase<WritableCluster, ShrinkIndexResponse, IShrinkIndexRequest, ShrinkIndexDescriptor, ShrinkIndexRequest>
 	{
 		public ShrinkIndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -70,7 +70,7 @@ namespace Tests.Indices.IndexManagement.ShrinkIndex
 
 		protected override ShrinkIndexDescriptor NewDescriptor() => new ShrinkIndexDescriptor(CallIsolatedValue, CallIsolatedValue + "-target");
 
-		protected override void ExpectResponse(IShrinkIndexResponse response)
+		protected override void ExpectResponse(ShrinkIndexResponse response)
 		{
 			response.ShouldBeValid();
 			response.Acknowledged.Should().BeTrue();

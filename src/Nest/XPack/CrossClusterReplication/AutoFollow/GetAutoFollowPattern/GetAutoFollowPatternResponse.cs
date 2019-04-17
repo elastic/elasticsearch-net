@@ -4,15 +4,10 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IGetAutoFollowPatternResponse : IResponse
+	public class GetAutoFollowPatternResponse : ResponseBase
 	{
 		[DataMember(Name = "patterns")]
 		[JsonFormatter(typeof(AutoFollowPatternFormatter))]
-		IReadOnlyDictionary<string, AutoFollowPattern> Patterns { get; }
-	}
-
-	public class GetAutoFollowPatternResponse : ResponseBase, IGetAutoFollowPatternResponse
-	{
 		public IReadOnlyDictionary<string, AutoFollowPattern> Patterns { get; internal set; } = EmptyReadOnly<string, AutoFollowPattern>.Dictionary;
 	}
 

@@ -38,7 +38,7 @@ namespace Tests.XPack.MachineLearning
 
 		[I] public override Task ReturnsExpectedResponse() => base.ReturnsExpectedResponse();
 
-		protected IPutCalendarResponse PutCalendar(IElasticClient client, string calendarId)
+		protected PutCalendarResponse PutCalendar(IElasticClient client, string calendarId)
 		{
 			var putCalendarResponse = client.PutCalendar(calendarId, f => f
 				.Description("Planned outages")
@@ -49,7 +49,7 @@ namespace Tests.XPack.MachineLearning
 
 			return putCalendarResponse;
 		}
-		protected IPostCalendarEventsResponse PostCalendarEvent(IElasticClient client, string calendarId)
+		protected PostCalendarEventsResponse PostCalendarEvent(IElasticClient client, string calendarId)
 		{
 			var startDate = DateTime.Now.Year;
 
@@ -85,7 +85,7 @@ namespace Tests.XPack.MachineLearning
 			}
 		}
 
-		protected IPostCalendarEventsResponse PostCalendarEvents(IElasticClient client, string calendarId)
+		protected PostCalendarEventsResponse PostCalendarEvents(IElasticClient client, string calendarId)
 		{
 			var postCalendarEventsResponse = client.PostCalendarEvents(calendarId, f => f.Events(GetScheduledEvents(calendarId)));
 
@@ -95,7 +95,7 @@ namespace Tests.XPack.MachineLearning
 			return postCalendarEventsResponse;
 		}
 
-		protected IPutCalendarJobResponse PutCalendarJob(IElasticClient client, string calendarId, string jobId)
+		protected PutCalendarJobResponse PutCalendarJob(IElasticClient client, string calendarId, string jobId)
 		{
 			var putCalendarJobResponse = client.PutCalendarJob(calendarId, jobId, f => f);
 
@@ -105,7 +105,7 @@ namespace Tests.XPack.MachineLearning
 			return putCalendarJobResponse;
 		}
 
-		protected IPutJobResponse PutJob(IElasticClient client, string jobId)
+		protected PutJobResponse PutJob(IElasticClient client, string jobId)
 		{
 			var putJobResponse = client.PutJob<Metric>(jobId, f => f
 				.Description("Lab 1 - Simple example")
@@ -123,7 +123,7 @@ namespace Tests.XPack.MachineLearning
 			return putJobResponse;
 		}
 
-		protected IOpenJobResponse OpenJob(IElasticClient client, string jobId)
+		protected OpenJobResponse OpenJob(IElasticClient client, string jobId)
 		{
 			var openJobResponse = client.OpenJob(jobId);
 			if (!openJobResponse.IsValid || openJobResponse.Opened == false)
@@ -132,7 +132,7 @@ namespace Tests.XPack.MachineLearning
 			return openJobResponse;
 		}
 
-		protected IPostJobDataResponse PostJobData(IElasticClient client, string jobId, int bucketSize, int bucketSpanSeconds)
+		protected PostJobDataResponse PostJobData(IElasticClient client, string jobId, int bucketSize, int bucketSpanSeconds)
 		{
 			var timestamp = 1483228800000L; // 2017-01-01T00:00:00Z
 			var data = new List<object>(bucketSize);
@@ -156,7 +156,7 @@ namespace Tests.XPack.MachineLearning
 			return postJobDataResponse;
 		}
 
-		protected IFlushJobResponse FlushJob(IElasticClient client, string jobId, bool calculateInterim)
+		protected FlushJobResponse FlushJob(IElasticClient client, string jobId, bool calculateInterim)
 		{
 			var flushJobResponse = client.FlushJob(jobId, f => f.CalculateInterim(calculateInterim));
 			if (!flushJobResponse.IsValid || flushJobResponse.Flushed == false)
@@ -165,7 +165,7 @@ namespace Tests.XPack.MachineLearning
 			return flushJobResponse;
 		}
 
-		protected ICloseJobResponse CloseJob(IElasticClient client, string jobId)
+		protected CloseJobResponse CloseJob(IElasticClient client, string jobId)
 		{
 			var closeJobResponse = client.CloseJob(jobId);
 			if (!closeJobResponse.IsValid || closeJobResponse.Closed == false)
@@ -174,7 +174,7 @@ namespace Tests.XPack.MachineLearning
 			return closeJobResponse;
 		}
 
-		protected IDeleteJobResponse DeleteJob(IElasticClient client, string jobId)
+		protected DeleteJobResponse DeleteJob(IElasticClient client, string jobId)
 		{
 			var deleteJobResponse = client.DeleteJob(jobId);
 			if (!deleteJobResponse.IsValid || deleteJobResponse.Acknowledged == false)
@@ -183,7 +183,7 @@ namespace Tests.XPack.MachineLearning
 			return deleteJobResponse;
 		}
 
-		protected IPutDatafeedResponse PutDatafeed(IElasticClient client, string jobId)
+		protected PutDatafeedResponse PutDatafeed(IElasticClient client, string jobId)
 		{
 			var putDataFeedResponse = client.PutDatafeed<Metric>(jobId + "-datafeed", f => f
 				.Indices(typeof(Metric)) // TODO: This should be default inferred from T on method
@@ -196,7 +196,7 @@ namespace Tests.XPack.MachineLearning
 			return putDataFeedResponse;
 		}
 
-		protected IStartDatafeedResponse StartDatafeed(IElasticClient client, string jobId)
+		protected StartDatafeedResponse StartDatafeed(IElasticClient client, string jobId)
 		{
 			var startDatafeedResponse = client.StartDatafeed(jobId + "-datafeed");
 			if (!startDatafeedResponse.IsValid || startDatafeedResponse.Started == false)
@@ -205,7 +205,7 @@ namespace Tests.XPack.MachineLearning
 			return startDatafeedResponse;
 		}
 
-		protected IStopDatafeedResponse StopDatafeed(IElasticClient client, string jobId)
+		protected StopDatafeedResponse StopDatafeed(IElasticClient client, string jobId)
 		{
 			var stopDatafeedResponse = client.StopDatafeed(jobId + "-datafeed");
 			if (!stopDatafeedResponse.IsValid || stopDatafeedResponse.Stopped == false)

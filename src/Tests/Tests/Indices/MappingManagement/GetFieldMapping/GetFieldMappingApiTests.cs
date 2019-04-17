@@ -12,7 +12,7 @@ using static Nest.Infer;
 namespace Tests.Indices.MappingManagement.GetFieldMapping
 {
 	public class GetFieldMappingApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IGetFieldMappingResponse, IGetFieldMappingRequest, GetFieldMappingDescriptor<Project>,
+		: ApiIntegrationTestBase<ReadOnlyCluster, GetFieldMappingResponse, IGetFieldMappingRequest, GetFieldMappingDescriptor<Project>,
 			GetFieldMappingRequest>
 	{
 		private static readonly Fields Fields = Fields<Project>(p => p.Name, p => p.LeadDeveloper.IpAddress);
@@ -39,7 +39,7 @@ namespace Tests.Indices.MappingManagement.GetFieldMapping
 
 		protected override GetFieldMappingDescriptor<Project> NewDescriptor() => new GetFieldMappingDescriptor<Project>(Fields);
 
-		protected override void ExpectResponse(IGetFieldMappingResponse response)
+		protected override void ExpectResponse(GetFieldMappingResponse response)
 		{
 			response.Indices.Should()
 				.NotBeEmpty("expect indices on the response")

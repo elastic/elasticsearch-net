@@ -11,7 +11,7 @@ using Tests.Framework.Integration;
 namespace Tests.Indices.IndexSettings.IndexTemplates.GetIndexTemplate
 {
 	public class GetIndexTemplateApiTests
-		: ApiIntegrationTestBase<WritableCluster, IGetIndexTemplateResponse, IGetIndexTemplateRequest, GetIndexTemplateDescriptor,
+		: ApiIntegrationTestBase<WritableCluster, GetIndexTemplateResponse, IGetIndexTemplateRequest, GetIndexTemplateDescriptor,
 			GetIndexTemplateRequest>
 	{
 		public GetIndexTemplateApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -52,7 +52,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.GetIndexTemplate
 			}
 		}
 
-		protected override void ExpectResponse(IGetIndexTemplateResponse response)
+		protected override void ExpectResponse(GetIndexTemplateResponse response)
 		{
 			response.ShouldBeValid();
 

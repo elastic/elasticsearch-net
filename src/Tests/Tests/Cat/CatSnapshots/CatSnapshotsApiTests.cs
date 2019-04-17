@@ -13,7 +13,7 @@ namespace Tests.Cat.CatSnapshots
 {
 	[SkipVersion("<2.1.0", "")]
 	public class CatSnapshotsApiTests
-		: ApiIntegrationTestBase<IntrusiveOperationCluster, ICatResponse<CatSnapshotsRecord>, ICatSnapshotsRequest, CatSnapshotsDescriptor,
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, CatResponse<CatSnapshotsRecord>, ICatSnapshotsRequest, CatSnapshotsDescriptor,
 			CatSnapshotsRequest>
 	{
 		private static readonly string RepositoryName = RandomString();
@@ -56,7 +56,7 @@ namespace Tests.Cat.CatSnapshots
 			(client, r) => client.CatSnapshotsAsync(r)
 		);
 
-		protected override void ExpectResponse(ICatResponse<CatSnapshotsRecord> response) =>
+		protected override void ExpectResponse(CatResponse<CatSnapshotsRecord> response) =>
 			response.Records.Should().NotBeEmpty().And.OnlyContain(r => r.Status == "SUCCESS");
 	}
 }

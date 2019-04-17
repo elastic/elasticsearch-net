@@ -13,7 +13,7 @@ using Tests.Framework.Integration;
 namespace Tests.QueryDsl
 {
 	public abstract class QueryDslUsageTestsBase
-		: ApiTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+		: ApiTestBase<ReadOnlyCluster, SearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		protected readonly QueryContainer ConditionlessQuery = new QueryContainer(new TermQuery { });
 

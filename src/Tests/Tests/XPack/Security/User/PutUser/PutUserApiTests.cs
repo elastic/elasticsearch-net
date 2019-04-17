@@ -13,7 +13,7 @@ using Tests.Framework.Integration;
 namespace Tests.XPack.Security.User.PutUser
 {
 	[SkipVersion("<2.3.0", "")]
-	public class PutUserApiTests : ApiIntegrationTestBase<XPackCluster, IPutUserResponse, IPutUserRequest, PutUserDescriptor, PutUserRequest>
+	public class PutUserApiTests : ApiIntegrationTestBase<XPackCluster, PutUserResponse, IPutUserRequest, PutUserDescriptor, PutUserRequest>
 	{
 		public PutUserApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -73,7 +73,7 @@ namespace Tests.XPack.Security.User.PutUser
 
 		protected override PutUserDescriptor NewDescriptor() => new PutUserDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(IPutUserResponse response)
+		protected override void ExpectResponse(PutUserResponse response)
 		{
 			response.Created.Should().BeTrue();
 		}
@@ -108,6 +108,6 @@ namespace Tests.XPack.Security.User.PutUser
 			}
 		}
 
-		protected override void ExpectResponse(IPutUserResponse response) { }
+		protected override void ExpectResponse(PutUserResponse response) { }
 	}
 }

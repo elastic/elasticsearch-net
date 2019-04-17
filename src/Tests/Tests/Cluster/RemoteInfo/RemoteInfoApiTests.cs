@@ -12,7 +12,7 @@ using static Nest.Infer;
 namespace Tests.Cluster.RemoteInfo
 {
 	public class RemoteInfoApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IRemoteInfoResponse, IRemoteInfoRequest, RemoteInfoDescriptor, RemoteInfoRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, RemoteInfoResponse, IRemoteInfoRequest, RemoteInfoDescriptor, RemoteInfoRequest>
 	{
 		public RemoteInfoApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -74,7 +74,7 @@ namespace Tests.Cluster.RemoteInfo
 			(client, r) => client.RemoteInfoAsync(r)
 		);
 
-		protected override void ExpectResponse(IRemoteInfoResponse response)
+		protected override void ExpectResponse(RemoteInfoResponse response)
 		{
 			response.Remotes.Should()
 				.NotBeEmpty()

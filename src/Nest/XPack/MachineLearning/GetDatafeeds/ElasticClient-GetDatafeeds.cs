@@ -10,38 +10,38 @@ namespace Nest
 		/// <summary>
 		/// Retrieves configuration information for machine learning datafeeds.
 		/// </summary>
-		IGetDatafeedsResponse GetDatafeeds(Func<GetDatafeedsDescriptor, IGetDatafeedsRequest> selector = null);
+		GetDatafeedsResponse GetDatafeeds(Func<GetDatafeedsDescriptor, IGetDatafeedsRequest> selector = null);
 
 		/// <inheritdoc />
-		IGetDatafeedsResponse GetDatafeeds(IGetDatafeedsRequest request);
+		GetDatafeedsResponse GetDatafeeds(IGetDatafeedsRequest request);
 
 		/// <inheritdoc />
-		Task<IGetDatafeedsResponse> GetDatafeedsAsync(Func<GetDatafeedsDescriptor, IGetDatafeedsRequest> selector = null,
+		Task<GetDatafeedsResponse> GetDatafeedsAsync(Func<GetDatafeedsDescriptor, IGetDatafeedsRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IGetDatafeedsResponse> GetDatafeedsAsync(IGetDatafeedsRequest request, CancellationToken ct = default);
+		Task<GetDatafeedsResponse> GetDatafeedsAsync(IGetDatafeedsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IGetDatafeedsResponse GetDatafeeds(Func<GetDatafeedsDescriptor, IGetDatafeedsRequest> selector = null) =>
+		public GetDatafeedsResponse GetDatafeeds(Func<GetDatafeedsDescriptor, IGetDatafeedsRequest> selector = null) =>
 			GetDatafeeds(selector.InvokeOrDefault(new GetDatafeedsDescriptor()));
 
 		/// <inheritdoc />
-		public IGetDatafeedsResponse GetDatafeeds(IGetDatafeedsRequest request) =>
+		public GetDatafeedsResponse GetDatafeeds(IGetDatafeedsRequest request) =>
 			DoRequest<IGetDatafeedsRequest, GetDatafeedsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetDatafeedsResponse> GetDatafeedsAsync(
+		public Task<GetDatafeedsResponse> GetDatafeedsAsync(
 			Func<GetDatafeedsDescriptor, IGetDatafeedsRequest> selector = null,
 			CancellationToken ct = default
 		) => GetDatafeedsAsync(selector.InvokeOrDefault(new GetDatafeedsDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IGetDatafeedsResponse> GetDatafeedsAsync(IGetDatafeedsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetDatafeedsRequest, IGetDatafeedsResponse, GetDatafeedsResponse>(request, request.RequestParameters, ct);
+		public Task<GetDatafeedsResponse> GetDatafeedsAsync(IGetDatafeedsRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetDatafeedsRequest, GetDatafeedsResponse>(request, request.RequestParameters, ct);
 	}
 }

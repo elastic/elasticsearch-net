@@ -14,35 +14,35 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="TDocument">The type used to infer the default index and typename</typeparam>
 		/// <param name="selector">A descriptor that describes which document's source to fetch</param>
-		IGetResponse<TDocument> Get<TDocument>(DocumentPath<TDocument> document, Func<GetDescriptor<TDocument>, IGetRequest> selector = null) where TDocument : class;
+		GetResponse<TDocument> Get<TDocument>(DocumentPath<TDocument> document, Func<GetDescriptor<TDocument>, IGetRequest> selector = null) where TDocument : class;
 
 		/// <inheritdoc />
-		IGetResponse<TDocument> Get<TDocument>(IGetRequest request) where TDocument : class;
+		GetResponse<TDocument> Get<TDocument>(IGetRequest request) where TDocument : class;
 
 		/// <inheritdoc />
-		Task<IGetResponse<TDocument>> GetAsync<TDocument>(
+		Task<GetResponse<TDocument>> GetAsync<TDocument>(
 			DocumentPath<TDocument> document,
 			Func<GetDescriptor<TDocument>, IGetRequest> selector = null,
 			CancellationToken ct = default
 		) where TDocument : class;
 
 		/// <inheritdoc />
-		Task<IGetResponse<TDocument>> GetAsync<TDocument>(IGetRequest request, CancellationToken ct = default) where TDocument : class;
+		Task<GetResponse<TDocument>> GetAsync<TDocument>(IGetRequest request, CancellationToken ct = default) where TDocument : class;
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IGetResponse<TDocument> Get<TDocument>(DocumentPath<TDocument> document, Func<GetDescriptor<TDocument>, IGetRequest> selector = null)
+		public GetResponse<TDocument> Get<TDocument>(DocumentPath<TDocument> document, Func<GetDescriptor<TDocument>, IGetRequest> selector = null)
 			where TDocument : class =>
 			Get<TDocument>(selector.InvokeOrDefault(new GetDescriptor<TDocument>(document.Document, document.Self.Index, document.Self.Id)));
 
 		/// <inheritdoc />
-		public IGetResponse<TDocument> Get<TDocument>(IGetRequest request) where TDocument : class =>
+		public GetResponse<TDocument> Get<TDocument>(IGetRequest request) where TDocument : class =>
 			DoRequest<IGetRequest, GetResponse<TDocument>>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetResponse<TDocument>> GetAsync<TDocument>(
+		public Task<GetResponse<TDocument>> GetAsync<TDocument>(
 			DocumentPath<TDocument> document,
 			Func<GetDescriptor<TDocument>, IGetRequest> selector = null,
 			CancellationToken ct = default
@@ -51,8 +51,8 @@ namespace Nest
 			GetAsync<TDocument>(selector.InvokeOrDefault(new GetDescriptor<TDocument>(document.Document, document.Self.Index, document.Self.Id)), ct);
 
 		/// <inheritdoc />
-		public Task<IGetResponse<TDocument>> GetAsync<TDocument>(IGetRequest request, CancellationToken ct = default)
+		public Task<GetResponse<TDocument>> GetAsync<TDocument>(IGetRequest request, CancellationToken ct = default)
 			where TDocument : class =>
-			DoRequestAsync<IGetRequest, IGetResponse<TDocument>, GetResponse<TDocument>>(request, request.RequestParameters, ct);
+			DoRequestAsync<IGetRequest, GetResponse<TDocument>>(request, request.RequestParameters, ct);
 	}
 }

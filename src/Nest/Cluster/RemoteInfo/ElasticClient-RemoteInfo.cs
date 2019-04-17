@@ -13,39 +13,39 @@ namespace Nest
 		/// <a href="http://www.elastic.co/guide/en/elasticsearch/reference/master/remote-info.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/remote-info.html</a>
 		/// </summary>
 		/// <param name="selector">An optional descriptor to further describe the remote info operation</param>
-		IRemoteInfoResponse RemoteInfo(Func<RemoteInfoDescriptor, IRemoteInfoRequest> selector = null);
+		RemoteInfoResponse RemoteInfo(Func<RemoteInfoDescriptor, IRemoteInfoRequest> selector = null);
 
 		/// <inheritdoc />
-		IRemoteInfoResponse RemoteInfo(IRemoteInfoRequest request);
+		RemoteInfoResponse RemoteInfo(IRemoteInfoRequest request);
 
 		/// <inheritdoc />
-		Task<IRemoteInfoResponse> RemoteInfoAsync(Func<RemoteInfoDescriptor, IRemoteInfoRequest> selector = null,
+		Task<RemoteInfoResponse> RemoteInfoAsync(Func<RemoteInfoDescriptor, IRemoteInfoRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IRemoteInfoResponse> RemoteInfoAsync(IRemoteInfoRequest request, CancellationToken ct = default);
+		Task<RemoteInfoResponse> RemoteInfoAsync(IRemoteInfoRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IRemoteInfoResponse RemoteInfo(Func<RemoteInfoDescriptor, IRemoteInfoRequest> selector = null) =>
+		public RemoteInfoResponse RemoteInfo(Func<RemoteInfoDescriptor, IRemoteInfoRequest> selector = null) =>
 			RemoteInfo(selector.InvokeOrDefault(new RemoteInfoDescriptor()));
 
 		/// <inheritdoc />
-		public IRemoteInfoResponse RemoteInfo(IRemoteInfoRequest request) =>
+		public RemoteInfoResponse RemoteInfo(IRemoteInfoRequest request) =>
 			DoRequest<IRemoteInfoRequest, RemoteInfoResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IRemoteInfoResponse> RemoteInfoAsync(Func<RemoteInfoDescriptor, IRemoteInfoRequest> selector = null,
+		public Task<RemoteInfoResponse> RemoteInfoAsync(Func<RemoteInfoDescriptor, IRemoteInfoRequest> selector = null,
 			CancellationToken ct = default
 		) =>
 			RemoteInfoAsync(selector.InvokeOrDefault(new RemoteInfoDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IRemoteInfoResponse> RemoteInfoAsync(IRemoteInfoRequest request, CancellationToken ct = default
+		public Task<RemoteInfoResponse> RemoteInfoAsync(IRemoteInfoRequest request, CancellationToken ct = default
 		) =>
-			DoRequestAsync<IRemoteInfoRequest, IRemoteInfoResponse, RemoteInfoResponse>(request, request.RequestParameters, ct);
+			DoRequestAsync<IRemoteInfoRequest, RemoteInfoResponse>(request, request.RequestParameters, ct);
 	}
 }

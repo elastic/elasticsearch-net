@@ -10,7 +10,7 @@ using Tests.Framework.Integration;
 namespace Tests.XPack.Watcher.ActivateWatch
 {
 	public class ActivateWatchApiTests
-		: ApiIntegrationTestBase<XPackCluster, IActivateWatchResponse, IActivateWatchRequest, ActivateWatchDescriptor, ActivateWatchRequest>
+		: ApiIntegrationTestBase<XPackCluster, ActivateWatchResponse, IActivateWatchRequest, ActivateWatchDescriptor, ActivateWatchRequest>
 	{
 		public ActivateWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -78,7 +78,7 @@ namespace Tests.XPack.Watcher.ActivateWatch
 
 		protected override ActivateWatchDescriptor NewDescriptor() => new ActivateWatchDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(IActivateWatchResponse response)
+		protected override void ExpectResponse(ActivateWatchResponse response)
 		{
 			var watchStatusState = response.Status.State;
 

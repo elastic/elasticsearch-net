@@ -4,31 +4,21 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-	public interface IGraphExploreResponse : IResponse
+	public class GraphExploreResponse : ResponseBase
 	{
 		[DataMember(Name ="connections")]
-		IReadOnlyCollection<GraphConnection> Connections { get; }
+		public IReadOnlyCollection<GraphConnection> Connections { get; internal set; } = EmptyReadOnly<GraphConnection>.Collection;
 
 		[DataMember(Name ="failures")]
-		IReadOnlyCollection<ShardFailure> Failures { get; }
-
-		[DataMember(Name ="timed_out")]
-		bool TimedOut { get; }
-
-		[DataMember(Name ="took")]
-		long Took { get; }
-
-		[DataMember(Name ="vertices")]
-		IReadOnlyCollection<GraphVertex> Vertices { get; }
-	}
-
-	public class GraphExploreResponse : ResponseBase, IGraphExploreResponse
-	{
-		public IReadOnlyCollection<GraphConnection> Connections { get; internal set; } = EmptyReadOnly<GraphConnection>.Collection;
 		public IReadOnlyCollection<ShardFailure> Failures { get; internal set; } = EmptyReadOnly<ShardFailure>.Collection;
 
+		[DataMember(Name ="timed_out")]
 		public bool TimedOut { get; internal set; }
+
+		[DataMember(Name ="took")]
 		public long Took { get; internal set; }
+
+		[DataMember(Name ="vertices")]
 		public IReadOnlyCollection<GraphVertex> Vertices { get; internal set; } = EmptyReadOnly<GraphVertex>.Collection;
 	}
 }

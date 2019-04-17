@@ -95,7 +95,7 @@ namespace Nest
 
 		public void Serialize(ref JsonWriter writer, GetRepositoryResponse value, IJsonFormatterResolver formatterResolver)
 		{
-			var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IGetRepositoryResponse>();
+			var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<GetRepositoryResponse>();
 			formatter.Serialize(ref writer, value, formatterResolver);
 		}
 

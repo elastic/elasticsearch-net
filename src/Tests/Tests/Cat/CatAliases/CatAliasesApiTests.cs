@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 namespace Tests.Cat.CatAliases
 {
 	public class CatAliasesApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatAliasesRecord>, ICatAliasesRequest, CatAliasesDescriptor, CatAliasesRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, CatResponse<CatAliasesRecord>, ICatAliasesRequest, CatAliasesDescriptor, CatAliasesRequest>
 	{
 		public CatAliasesApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -25,7 +25,7 @@ namespace Tests.Cat.CatAliases
 			(client, r) => client.CatAliasesAsync(r)
 		);
 
-		protected override void ExpectResponse(ICatResponse<CatAliasesRecord> response) =>
+		protected override void ExpectResponse(CatResponse<CatAliasesRecord> response) =>
 			response.Records.Should().NotBeEmpty().And.Contain(a => a.Alias == DefaultSeeder.ProjectsAliasName);
 	}
 }

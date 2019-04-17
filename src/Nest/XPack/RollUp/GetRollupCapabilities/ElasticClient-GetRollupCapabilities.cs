@@ -20,19 +20,19 @@ namespace Nest
 		/// <para />
 		/// 2. If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
 		/// </summary>
-		IGetRollupCapabilitiesResponse GetRollupCapabilities(Func<GetRollupCapabilitiesDescriptor, IGetRollupCapabilitiesRequest> selector = null);
+		GetRollupCapabilitiesResponse GetRollupCapabilities(Func<GetRollupCapabilitiesDescriptor, IGetRollupCapabilitiesRequest> selector = null);
 
 		/// <inheritdoc cref="GetRollupCapabilities(System.Func{Nest.GetRollupCapabilitiesDescriptor,Nest.IGetRollupCapabilitiesRequest})" />
-		IGetRollupCapabilitiesResponse GetRollupCapabilities(IGetRollupCapabilitiesRequest request);
+		GetRollupCapabilitiesResponse GetRollupCapabilities(IGetRollupCapabilitiesRequest request);
 
 		/// <inheritdoc cref="GetRollupCapabilities(System.Func{Nest.GetRollupCapabilitiesDescriptor,Nest.IGetRollupCapabilitiesRequest})" />
-		Task<IGetRollupCapabilitiesResponse> GetRollupCapabilitiesAsync(
+		Task<GetRollupCapabilitiesResponse> GetRollupCapabilitiesAsync(
 			Func<GetRollupCapabilitiesDescriptor, IGetRollupCapabilitiesRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="GetRollupCapabilities(System.Func{Nest.GetRollupCapabilitiesDescriptor,Nest.IGetRollupCapabilitiesRequest})" />
-		Task<IGetRollupCapabilitiesResponse> GetRollupCapabilitiesAsync(IGetRollupCapabilitiesRequest request,
+		Task<GetRollupCapabilitiesResponse> GetRollupCapabilitiesAsync(IGetRollupCapabilitiesRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -40,21 +40,21 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IGetRollupCapabilitiesResponse GetRollupCapabilities(Func<GetRollupCapabilitiesDescriptor, IGetRollupCapabilitiesRequest> selector = null) =>
+		public GetRollupCapabilitiesResponse GetRollupCapabilities(Func<GetRollupCapabilitiesDescriptor, IGetRollupCapabilitiesRequest> selector = null) =>
 			GetRollupCapabilities(selector.InvokeOrDefault(new GetRollupCapabilitiesDescriptor()));
 
 		/// <inheritdoc />
-		public IGetRollupCapabilitiesResponse GetRollupCapabilities(IGetRollupCapabilitiesRequest request) =>
+		public GetRollupCapabilitiesResponse GetRollupCapabilities(IGetRollupCapabilitiesRequest request) =>
 			DoRequest<IGetRollupCapabilitiesRequest, GetRollupCapabilitiesResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetRollupCapabilitiesResponse> GetRollupCapabilitiesAsync(
+		public Task<GetRollupCapabilitiesResponse> GetRollupCapabilitiesAsync(
 			Func<GetRollupCapabilitiesDescriptor, IGetRollupCapabilitiesRequest> selector = null,
 			CancellationToken ct = default
 		) => GetRollupCapabilitiesAsync(selector.InvokeOrDefault(new GetRollupCapabilitiesDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IGetRollupCapabilitiesResponse> GetRollupCapabilitiesAsync(IGetRollupCapabilitiesRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetRollupCapabilitiesRequest, IGetRollupCapabilitiesResponse, GetRollupCapabilitiesResponse>(request, request.RequestParameters, ct);
+		public Task<GetRollupCapabilitiesResponse> GetRollupCapabilitiesAsync(IGetRollupCapabilitiesRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetRollupCapabilitiesRequest, GetRollupCapabilitiesResponse>(request, request.RequestParameters, ct);
 	}
 }

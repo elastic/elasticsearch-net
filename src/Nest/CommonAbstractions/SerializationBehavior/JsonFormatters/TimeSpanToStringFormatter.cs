@@ -19,6 +19,7 @@ namespace Nest
 		public void Serialize(ref JsonWriter writer, TimeSpan value, IJsonFormatterResolver formatterResolver) => writer.WriteInt64(value.Ticks);
 	}
 
+	//TODO: what d
 	internal class TimeSpanToStringFormatterResolver : IJsonFormatterResolver
 	{
 		public IJsonFormatter<T> GetFormatter<T>() => null;

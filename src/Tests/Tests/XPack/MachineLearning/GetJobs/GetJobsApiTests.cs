@@ -10,7 +10,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.MachineLearning.GetJobs
 {
-	public class GetJobsApiTests : MachineLearningIntegrationTestBase<IGetJobsResponse, IGetJobsRequest, GetJobsDescriptor, GetJobsRequest>
+	public class GetJobsApiTests : MachineLearningIntegrationTestBase<GetJobsResponse, IGetJobsRequest, GetJobsDescriptor, GetJobsRequest>
 	{
 		public GetJobsApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -34,7 +34,7 @@ namespace Tests.XPack.MachineLearning.GetJobs
 			(client, r) => client.GetJobsAsync(r)
 		);
 
-		protected override void ExpectResponse(IGetJobsResponse response)
+		protected override void ExpectResponse(GetJobsResponse response)
 		{
 			response.ShouldBeValid();
 			response.Count.Should().BeGreaterOrEqualTo(1);
@@ -68,7 +68,7 @@ namespace Tests.XPack.MachineLearning.GetJobs
 		}
 	}
 
-	public class GetJobsWithJobIdApiTests : MachineLearningIntegrationTestBase<IGetJobsResponse, IGetJobsRequest, GetJobsDescriptor, GetJobsRequest>
+	public class GetJobsWithJobIdApiTests : MachineLearningIntegrationTestBase<GetJobsResponse, IGetJobsRequest, GetJobsDescriptor, GetJobsRequest>
 	{
 		public GetJobsWithJobIdApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -92,7 +92,7 @@ namespace Tests.XPack.MachineLearning.GetJobs
 			(client, r) => client.GetJobsAsync(r)
 		);
 
-		protected override void ExpectResponse(IGetJobsResponse response)
+		protected override void ExpectResponse(GetJobsResponse response)
 		{
 			response.ShouldBeValid();
 			response.Count.Should().BeGreaterOrEqualTo(1);

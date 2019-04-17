@@ -13,41 +13,41 @@ namespace Nest
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-clearcache.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the clear cache operation</param>
-		IClearCacheResponse ClearCache(Indices indices, Func<ClearCacheDescriptor, IClearCacheRequest> selector = null);
+		ClearCacheResponse ClearCache(Indices indices, Func<ClearCacheDescriptor, IClearCacheRequest> selector = null);
 
 		/// <inheritdoc />
-		IClearCacheResponse ClearCache(IClearCacheRequest request);
+		ClearCacheResponse ClearCache(IClearCacheRequest request);
 
 		/// <inheritdoc />
-		Task<IClearCacheResponse> ClearCacheAsync(
+		Task<ClearCacheResponse> ClearCacheAsync(
 			Indices indices,
 			Func<ClearCacheDescriptor, IClearCacheRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IClearCacheResponse> ClearCacheAsync(IClearCacheRequest request, CancellationToken ct = default);
+		Task<ClearCacheResponse> ClearCacheAsync(IClearCacheRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IClearCacheResponse ClearCache(Indices indices, Func<ClearCacheDescriptor, IClearCacheRequest> selector = null) =>
+		public ClearCacheResponse ClearCache(Indices indices, Func<ClearCacheDescriptor, IClearCacheRequest> selector = null) =>
 			ClearCache(selector.InvokeOrDefault(new ClearCacheDescriptor().Index(indices)));
 
 		/// <inheritdoc />
-		public IClearCacheResponse ClearCache(IClearCacheRequest request) =>
+		public ClearCacheResponse ClearCache(IClearCacheRequest request) =>
 			DoRequest<IClearCacheRequest, ClearCacheResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IClearCacheResponse> ClearCacheAsync(
+		public Task<ClearCacheResponse> ClearCacheAsync(
 			Indices indices,
 			Func<ClearCacheDescriptor, IClearCacheRequest> selector = null,
 			CancellationToken ct = default
 		) => ClearCacheAsync(selector.InvokeOrDefault(new ClearCacheDescriptor().Index(indices)), ct);
 
 		/// <inheritdoc />
-		public Task<IClearCacheResponse> ClearCacheAsync(IClearCacheRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IClearCacheRequest, IClearCacheResponse, ClearCacheResponse>(request, request.RequestParameters, ct);
+		public Task<ClearCacheResponse> ClearCacheAsync(IClearCacheRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IClearCacheRequest, ClearCacheResponse>(request, request.RequestParameters, ct);
 	}
 }

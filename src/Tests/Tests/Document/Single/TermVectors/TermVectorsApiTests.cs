@@ -13,7 +13,7 @@ using static Nest.Infer;
 namespace Tests.Document.Single.TermVectors
 {
 	public class TermVectorsApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ITermVectorsResponse, ITermVectorsRequest<Project>, TermVectorsDescriptor<Project>,
+		: ApiIntegrationTestBase<ReadOnlyCluster, TermVectorsResponse, ITermVectorsRequest<Project>, TermVectorsDescriptor<Project>,
 			TermVectorsRequest<Project>>
 	{
 		public TermVectorsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -80,7 +80,7 @@ namespace Tests.Document.Single.TermVectors
 
 		protected override TermVectorsDescriptor<Project> NewDescriptor() => new TermVectorsDescriptor<Project>(typeof(Project));
 
-		protected override void ExpectResponse(ITermVectorsResponse response)
+		protected override void ExpectResponse(TermVectorsResponse response)
 		{
 			response.ShouldBeValid();
 

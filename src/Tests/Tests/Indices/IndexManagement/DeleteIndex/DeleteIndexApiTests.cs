@@ -10,7 +10,7 @@ namespace Tests.Indices.IndexManagement.DeleteIndex
 {
 	public class DeleteIndexApiTests
 		: ApiIntegrationAgainstNewIndexTestBase
-			<WritableCluster, IDeleteIndexResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>
+			<WritableCluster, DeleteIndexResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>
 	{
 		public DeleteIndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -28,12 +28,12 @@ namespace Tests.Indices.IndexManagement.DeleteIndex
 			(client, r) => client.DeleteIndexAsync(r)
 		);
 
-		protected override void ExpectResponse(IDeleteIndexResponse response) => response.Acknowledged.Should().BeTrue();
+		protected override void ExpectResponse(DeleteIndexResponse response) => response.Acknowledged.Should().BeTrue();
 	}
 
 	public class DeleteNonExistentIndexApiTests
 		: ApiIntegrationTestBase
-			<WritableCluster, IDeleteIndexResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>
+			<WritableCluster, DeleteIndexResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>
 	{
 		public DeleteNonExistentIndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -51,7 +51,7 @@ namespace Tests.Indices.IndexManagement.DeleteIndex
 			(client, r) => client.DeleteIndexAsync(r)
 		);
 
-		protected override void ExpectResponse(IDeleteIndexResponse response)
+		protected override void ExpectResponse(DeleteIndexResponse response)
 		{
 			response.Acknowledged.Should().BeFalse();
 			response.ServerError.Should().NotBeNull();
@@ -61,7 +61,7 @@ namespace Tests.Indices.IndexManagement.DeleteIndex
 	}
 
 	public class DeleteAllIndicesApiTests
-		: ApiTestBase<WritableCluster, IDeleteIndexResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>
+		: ApiTestBase<WritableCluster, DeleteIndexResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>
 	{
 		public DeleteAllIndicesApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

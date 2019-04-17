@@ -1,11 +1,6 @@
 ﻿namespace Nest
 {
-	public interface ITranslateSqlResponse : IResponse
-	{
-		ISearchRequest Result { get; }
-	}
-
-	public class TranslateSqlResponse : ResponseBase, ITranslateSqlResponse
+	public class TranslateSqlResponse : ResponseBase
 	{
 		public ISearchRequest Result { get; internal set; }
 	}

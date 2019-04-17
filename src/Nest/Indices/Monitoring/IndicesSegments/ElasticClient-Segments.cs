@@ -15,41 +15,41 @@ namespace Nest
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-segments.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the segments operation</param>
-		ISegmentsResponse Segments(Indices indices, Func<SegmentsDescriptor, ISegmentsRequest> selector = null);
+		SegmentsResponse Segments(Indices indices, Func<SegmentsDescriptor, ISegmentsRequest> selector = null);
 
 		/// <inheritdoc />
-		ISegmentsResponse Segments(ISegmentsRequest request);
+		SegmentsResponse Segments(ISegmentsRequest request);
 
 		/// <inheritdoc />
-		Task<ISegmentsResponse> SegmentsAsync(
+		Task<SegmentsResponse> SegmentsAsync(
 			Indices indices,
 			Func<SegmentsDescriptor, ISegmentsRequest> selector = null,
 			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
-		Task<ISegmentsResponse> SegmentsAsync(ISegmentsRequest request, CancellationToken ct = default);
+		Task<SegmentsResponse> SegmentsAsync(ISegmentsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public ISegmentsResponse Segments(Indices indices, Func<SegmentsDescriptor, ISegmentsRequest> selector = null) =>
+		public SegmentsResponse Segments(Indices indices, Func<SegmentsDescriptor, ISegmentsRequest> selector = null) =>
 			Segments(selector.InvokeOrDefault(new SegmentsDescriptor().Index(indices)));
 
 		/// <inheritdoc />
-		public ISegmentsResponse Segments(ISegmentsRequest request) =>
+		public SegmentsResponse Segments(ISegmentsRequest request) =>
 			DoRequest<ISegmentsRequest, SegmentsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<ISegmentsResponse> SegmentsAsync(
+		public Task<SegmentsResponse> SegmentsAsync(
 			Indices indices,
 			Func<SegmentsDescriptor, ISegmentsRequest> selector = null,
 			CancellationToken cancellationToken = default
 		) => SegmentsAsync(selector.InvokeOrDefault(new SegmentsDescriptor().Index(indices)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<ISegmentsResponse> SegmentsAsync(ISegmentsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<ISegmentsRequest, ISegmentsResponse, SegmentsResponse>(request, request.RequestParameters, ct);
+		public Task<SegmentsResponse> SegmentsAsync(ISegmentsRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<ISegmentsRequest, SegmentsResponse>(request, request.RequestParameters, ct);
 	}
 }

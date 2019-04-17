@@ -8,18 +8,18 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc />
-		IDeletePipelineResponse DeletePipeline(Id id, Func<DeletePipelineDescriptor, IDeletePipelineRequest> selector = null);
+		DeletePipelineResponse DeletePipeline(Id id, Func<DeletePipelineDescriptor, IDeletePipelineRequest> selector = null);
 
 		/// <inheritdoc />
-		IDeletePipelineResponse DeletePipeline(IDeletePipelineRequest request);
+		DeletePipelineResponse DeletePipeline(IDeletePipelineRequest request);
 
 		/// <inheritdoc />
-		Task<IDeletePipelineResponse> DeletePipelineAsync(Id id, Func<DeletePipelineDescriptor, IDeletePipelineRequest> selector = null,
+		Task<DeletePipelineResponse> DeletePipelineAsync(Id id, Func<DeletePipelineDescriptor, IDeletePipelineRequest> selector = null,
 			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
-		Task<IDeletePipelineResponse> DeletePipelineAsync(IDeletePipelineRequest request,
+		Task<DeletePipelineResponse> DeletePipelineAsync(IDeletePipelineRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -27,22 +27,22 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IDeletePipelineResponse DeletePipeline(IDeletePipelineRequest request) =>
+		public DeletePipelineResponse DeletePipeline(IDeletePipelineRequest request) =>
 			DoRequest<IDeletePipelineRequest, DeletePipelineResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public IDeletePipelineResponse DeletePipeline(Id id, Func<DeletePipelineDescriptor, IDeletePipelineRequest> selector = null) =>
+		public DeletePipelineResponse DeletePipeline(Id id, Func<DeletePipelineDescriptor, IDeletePipelineRequest> selector = null) =>
 			DeletePipeline(selector.InvokeOrDefault(new DeletePipelineDescriptor(id)));
 
 		/// <inheritdoc />
-		public Task<IDeletePipelineResponse> DeletePipelineAsync(
+		public Task<DeletePipelineResponse> DeletePipelineAsync(
 			Id id,
 			Func<DeletePipelineDescriptor, IDeletePipelineRequest> selector = null,
 			CancellationToken cancellationToken = default
 		) => DeletePipelineAsync(selector.InvokeOrDefault(new DeletePipelineDescriptor(id)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IDeletePipelineResponse> DeletePipelineAsync(IDeletePipelineRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeletePipelineRequest, IDeletePipelineResponse, DeletePipelineResponse>(request, request.RequestParameters, ct);
+		public Task<DeletePipelineResponse> DeletePipelineAsync(IDeletePipelineRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeletePipelineRequest, DeletePipelineResponse>(request, request.RequestParameters, ct);
 	}
 }

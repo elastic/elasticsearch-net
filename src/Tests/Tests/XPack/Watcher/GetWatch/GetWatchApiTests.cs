@@ -13,7 +13,7 @@ using Tests.Framework.Integration;
 namespace Tests.XPack.Watcher.GetWatch
 {
 	// TODO: there was already a bunch of commented code in this file which needs to be revalidated
-	public class GetWatchApiTests : ApiIntegrationTestBase<XPackCluster, IGetWatchResponse, IGetWatchRequest, GetWatchDescriptor, GetWatchRequest>
+	public class GetWatchApiTests : ApiIntegrationTestBase<XPackCluster, GetWatchResponse, IGetWatchRequest, GetWatchDescriptor, GetWatchRequest>
 	{
 		public GetWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -221,7 +221,7 @@ namespace Tests.XPack.Watcher.GetWatch
 
 		protected override GetWatchDescriptor NewDescriptor() => new GetWatchDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(IGetWatchResponse response)
+		protected override void ExpectResponse(GetWatchResponse response)
 		{
 			response.Found.Should().BeTrue();
 			response.Id.Should().Be(CallIsolatedValue);
@@ -295,7 +295,7 @@ namespace Tests.XPack.Watcher.GetWatch
 	}
 
 	public class GetNonExistentWatchApiTests
-		: ApiIntegrationTestBase<XPackCluster, IGetWatchResponse, IGetWatchRequest, GetWatchDescriptor, GetWatchRequest>
+		: ApiIntegrationTestBase<XPackCluster, GetWatchResponse, IGetWatchRequest, GetWatchDescriptor, GetWatchRequest>
 	{
 		public GetNonExistentWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -322,7 +322,7 @@ namespace Tests.XPack.Watcher.GetWatch
 
 		protected override GetWatchDescriptor NewDescriptor() => new GetWatchDescriptor(CallIsolatedValue + "x");
 
-		protected override void ExpectResponse(IGetWatchResponse response)
+		protected override void ExpectResponse(GetWatchResponse response)
 		{
 			response.Found.Should().BeFalse();
 			response.Id.Should().Be(CallIsolatedValue + "x");

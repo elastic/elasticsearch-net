@@ -8,39 +8,39 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc />
-		IDisableUserResponse DisableUser(Name username, Func<DisableUserDescriptor, IDisableUserRequest> selector = null);
+		DisableUserResponse DisableUser(Name username, Func<DisableUserDescriptor, IDisableUserRequest> selector = null);
 
 		/// <inheritdoc />
-		IDisableUserResponse DisableUser(IDisableUserRequest request);
+		DisableUserResponse DisableUser(IDisableUserRequest request);
 
 		/// <inheritdoc />
-		Task<IDisableUserResponse> DisableUserAsync(Name username, Func<DisableUserDescriptor, IDisableUserRequest> selector = null,
+		Task<DisableUserResponse> DisableUserAsync(Name username, Func<DisableUserDescriptor, IDisableUserRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IDisableUserResponse> DisableUserAsync(IDisableUserRequest request, CancellationToken ct = default);
+		Task<DisableUserResponse> DisableUserAsync(IDisableUserRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IDisableUserResponse DisableUser(Name username, Func<DisableUserDescriptor, IDisableUserRequest> selector = null) =>
+		public DisableUserResponse DisableUser(Name username, Func<DisableUserDescriptor, IDisableUserRequest> selector = null) =>
 			DisableUser(selector.InvokeOrDefault(new DisableUserDescriptor(username)));
 
 		/// <inheritdoc />
-		public IDisableUserResponse DisableUser(IDisableUserRequest request) =>
+		public DisableUserResponse DisableUser(IDisableUserRequest request) =>
 			DoRequest<IDisableUserRequest, DisableUserResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IDisableUserResponse> DisableUserAsync(
+		public Task<DisableUserResponse> DisableUserAsync(
 			Name username,
 			Func<DisableUserDescriptor, IDisableUserRequest> selector = null,
 			CancellationToken ct = default
 		) => DisableUserAsync(selector.InvokeOrDefault(new DisableUserDescriptor(username)), ct);
 
 		/// <inheritdoc />
-		public Task<IDisableUserResponse> DisableUserAsync(IDisableUserRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDisableUserRequest, IDisableUserResponse, DisableUserResponse>(request, request.RequestParameters, ct);
+		public Task<DisableUserResponse> DisableUserAsync(IDisableUserRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDisableUserRequest, DisableUserResponse>(request, request.RequestParameters, ct);
 	}
 }

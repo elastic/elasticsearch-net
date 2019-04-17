@@ -11,7 +11,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.GetDatafeeds
 {
 	public class GetDatafeedsApiTests
-		: MachineLearningIntegrationTestBase<IGetDatafeedsResponse, IGetDatafeedsRequest, GetDatafeedsDescriptor, GetDatafeedsRequest>
+		: MachineLearningIntegrationTestBase<GetDatafeedsResponse, IGetDatafeedsRequest, GetDatafeedsDescriptor, GetDatafeedsRequest>
 	{
 		public GetDatafeedsApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -38,7 +38,7 @@ namespace Tests.XPack.MachineLearning.GetDatafeeds
 			(client, r) => client.GetDatafeedsAsync(r)
 		);
 
-		protected override void ExpectResponse(IGetDatafeedsResponse response)
+		protected override void ExpectResponse(GetDatafeedsResponse response)
 		{
 			response.ShouldBeValid();
 			response.Count.Should().BeGreaterOrEqualTo(1);
@@ -67,7 +67,7 @@ namespace Tests.XPack.MachineLearning.GetDatafeeds
 	}
 
 	public class GetDatafeedsWithDatafeedIdApiTests
-		: MachineLearningIntegrationTestBase<IGetDatafeedsResponse, IGetDatafeedsRequest, GetDatafeedsDescriptor, GetDatafeedsRequest>
+		: MachineLearningIntegrationTestBase<GetDatafeedsResponse, IGetDatafeedsRequest, GetDatafeedsDescriptor, GetDatafeedsRequest>
 	{
 		public GetDatafeedsWithDatafeedIdApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -95,7 +95,7 @@ namespace Tests.XPack.MachineLearning.GetDatafeeds
 			(client, r) => client.GetDatafeedsAsync(r)
 		);
 
-		protected override void ExpectResponse(IGetDatafeedsResponse response)
+		protected override void ExpectResponse(GetDatafeedsResponse response)
 		{
 			response.ShouldBeValid();
 			response.Count.Should().BeGreaterOrEqualTo(1);

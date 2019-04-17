@@ -11,7 +11,7 @@ using static Nest.Infer;
 namespace Tests.XPack.MachineLearning.ValidateDetector
 {
 	public class ValidateDetectorApiTests
-		: MachineLearningIntegrationTestBase<IValidateDetectorResponse, IValidateDetectorRequest, ValidateDetectorDescriptor<Project>,
+		: MachineLearningIntegrationTestBase<ValidateDetectorResponse, IValidateDetectorRequest, ValidateDetectorDescriptor<Project>,
 			ValidateDetectorRequest>
 	{
 		public ValidateDetectorApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -71,6 +71,6 @@ namespace Tests.XPack.MachineLearning.ValidateDetector
 			(client, r) => client.ValidateDetectorAsync(r)
 		);
 
-		protected override void ExpectResponse(IValidateDetectorResponse response) => response.Acknowledged.Should().BeTrue();
+		protected override void ExpectResponse(ValidateDetectorResponse response) => response.Acknowledged.Should().BeTrue();
 	}
 }

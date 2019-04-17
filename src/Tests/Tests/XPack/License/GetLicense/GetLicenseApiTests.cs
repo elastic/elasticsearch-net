@@ -12,7 +12,7 @@ namespace Tests.XPack.License.GetLicense
 {
 	[SkipVersion("<2.3.0", "")]
 	public class GetLicenseApiTests
-		: ApiIntegrationTestBase<XPackCluster, IGetLicenseResponse, IGetLicenseRequest, GetLicenseDescriptor, GetLicenseRequest>
+		: ApiIntegrationTestBase<XPackCluster, GetLicenseResponse, IGetLicenseRequest, GetLicenseDescriptor, GetLicenseRequest>
 	{
 		public GetLicenseApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -31,7 +31,7 @@ namespace Tests.XPack.License.GetLicense
 			(client, r) => client.GetLicenseAsync(r)
 		);
 
-		protected override void ExpectResponse(IGetLicenseResponse response)
+		protected override void ExpectResponse(GetLicenseResponse response)
 		{
 			var l = response.License;
 			l.Should().NotBeNull();
