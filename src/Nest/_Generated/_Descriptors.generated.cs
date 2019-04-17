@@ -4962,6 +4962,14 @@ namespace Nest
 		///<summary>Block for (at maximum) the specified duration while waiting for the job to stop.  Defaults to 30s.</summary>
 		public StopRollupJobDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
+	///<summary>descriptor for SecurityInvalidateApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</pre></summary>
+	public partial class SecurityInvalidateApiKeyDescriptor  : RequestDescriptorBase<SecurityInvalidateApiKeyDescriptor,SecurityInvalidateApiKeyRequestParameters, ISecurityInvalidateApiKeyRequest>, ISecurityInvalidateApiKeyRequest
+	{ 
+		// values part of the url path
+
+		// Request parameters
+
+	}
 	///<summary>descriptor for XpackSecurityAuthenticate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
 	public partial class AuthenticateDescriptor  : RequestDescriptorBase<AuthenticateDescriptor,AuthenticateRequestParameters, IAuthenticateRequest>, IAuthenticateRequest
 	{ 

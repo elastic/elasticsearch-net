@@ -5663,6 +5663,18 @@ namespace Nest
 		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISecurityInvalidateApiKeyRequest : IRequest<SecurityInvalidateApiKeyRequestParameters>
+	{
+	}
+	///<summary>Request parameters for SecurityInvalidateApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</pre></summary>
+	public partial class SecurityInvalidateApiKeyRequest : PlainRequestBase<SecurityInvalidateApiKeyRequestParameters>, ISecurityInvalidateApiKeyRequest
+	{
+		protected ISecurityInvalidateApiKeyRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISegmentsRequest : IRequest<SegmentsRequestParameters>
 	{
 		Indices Index { get; }

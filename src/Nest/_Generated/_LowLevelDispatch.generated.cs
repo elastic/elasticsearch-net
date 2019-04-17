@@ -4642,6 +4642,26 @@ namespace Nest
 			throw InvalidDispatch("XpackRollupStopJob", p, new [] { POST }, "/_xpack/rollup/job/{id}/_stop");
 		}
 		
+		internal TResponse SecurityInvalidateApiKeyDispatch<TResponse>(IRequest<SecurityInvalidateApiKeyRequestParameters> p,SerializableData<ISecurityInvalidateApiKeyRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+						return _lowLevel.SecurityInvalidateApiKey<TResponse>(body,p.RequestParameters);
+			}
+			throw InvalidDispatch("SecurityInvalidateApiKey", p, new [] { DELETE }, "/_xpack/security/oauth2/token");
+		}
+		
+		internal Task<TResponse> SecurityInvalidateApiKeyDispatchAsync<TResponse>(IRequest<SecurityInvalidateApiKeyRequestParameters> p,SerializableData<ISecurityInvalidateApiKeyRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+						return _lowLevel.SecurityInvalidateApiKeyAsync<TResponse>(body,p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("SecurityInvalidateApiKey", p, new [] { DELETE }, "/_xpack/security/oauth2/token");
+		}
+		
 		internal TResponse XpackSecurityAuthenticateDispatch<TResponse>(IRequest<AuthenticateRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)

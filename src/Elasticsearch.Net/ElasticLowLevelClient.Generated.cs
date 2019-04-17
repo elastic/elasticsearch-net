@@ -4052,6 +4052,16 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> XpackRollupStopJobAsync<TResponse>(string id, StopRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(POST, Url($"_xpack/rollup/job/{id.NotNull("id")}/_stop"), ctx, null, _params(requestParameters));
+		///<summary>DELETE on /_xpack/security/oauth2/token <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</para></summary>
+		///<param name="body">The api key request to invalidate API key(s)</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public TResponse SecurityInvalidateApiKey<TResponse>(PostData body, SecurityInvalidateApiKeyRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(DELETE, Url($"_xpack/security/oauth2/token"), body, _params(requestParameters));
+		///<summary>DELETE on /_xpack/security/oauth2/token <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</para></summary>
+		///<param name="body">The api key request to invalidate API key(s)</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> SecurityInvalidateApiKeyAsync<TResponse>(PostData body, SecurityInvalidateApiKeyRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(DELETE, Url($"_xpack/security/oauth2/token"), ctx, body, _params(requestParameters));
 		///<summary>GET on /_xpack/security/_authenticate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public TResponse XpackSecurityAuthenticate<TResponse>(AuthenticateRequestParameters requestParameters = null)

@@ -37,7 +37,6 @@ namespace ApiGenerator
 			"xpack.ml.set_upgrade_mode.json",
 			"security.create_api_key.json",
 			"security.get_api_key.json",
-			"security.invalidate_api_key.json",
 			"xpack.monitoring.bulk.json",
 
 			// these API's are not ready for primetime yet

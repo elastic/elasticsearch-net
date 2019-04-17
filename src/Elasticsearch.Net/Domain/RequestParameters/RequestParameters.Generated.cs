@@ -2718,6 +2718,11 @@ namespace Elasticsearch.Net
 		///<summary>Block for (at maximum) the specified duration while waiting for the job to stop. Defaults to 30s.</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
+	///<summary>Request options for SecurityInvalidateApiKey<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</pre></summary>
+	public partial class SecurityInvalidateApiKeyRequestParameters : RequestParameters<SecurityInvalidateApiKeyRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
 	///<summary>Request options for XpackSecurityAuthenticate<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
 	public partial class AuthenticateRequestParameters : RequestParameters<AuthenticateRequestParameters> 
 	{

@@ -1,0 +1,8 @@
+{
+  "security.invalidate_api_key": {
+    "url": {
+      "path": "/_xpack/security/oauth2/token",
+      "paths": [ "/_xpack/security/oauth2/token" ]
+    }
+  }
+}
