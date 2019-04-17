@@ -78,7 +78,7 @@ namespace Tests.Aggregations.Bucket.SignificantText
 			}
 		};
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
+		protected override void ExpectResponse(SearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var sigNames = response.Aggregations.SignificantText("significant_descriptions");

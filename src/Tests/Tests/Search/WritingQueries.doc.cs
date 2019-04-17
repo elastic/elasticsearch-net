@@ -414,7 +414,7 @@ namespace Tests.Search
 		/**
 		* ==== Search response
 		*
-		* The response returned from a search query is an `ISearchResponse<T>`, where `T` is the
+		* The response returned from a search query is an `SearchResponse<T>`, where `T` is the
 		* generic parameter type defined in the search method call. There are a fair few properties
 		* on the response, but the most common you're likely to work with is `.Documents`,
 		* which we'll demonstrate below.

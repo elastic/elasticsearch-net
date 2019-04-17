@@ -2,12 +2,7 @@
 
 namespace Nest
 {
-	public interface IStopDatafeedResponse : IResponse
-	{
-		bool Stopped { get; }
-	}
-
-	public class StopDatafeedResponse : ResponseBase, IStopDatafeedResponse
+	public class StopDatafeedResponse : ResponseBase
 	{
 		[DataMember(Name ="stopped")]
 		public bool Stopped { get; internal set; }

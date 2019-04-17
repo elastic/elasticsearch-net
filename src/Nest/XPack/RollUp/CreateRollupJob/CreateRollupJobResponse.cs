@@ -1,10 +1,4 @@
-﻿using System.Runtime.Serialization;
-using Elasticsearch.Net;
-
-namespace Nest
+﻿namespace Nest
 {
-	[InterfaceDataContract]
-	public interface ICreateRollupJobResponse : IAcknowledgedResponse { }
-
-	public class CreateRollupJobResponse : AcknowledgedResponseBase, ICreateRollupJobResponse { }
+	public class CreateRollupJobResponse : AcknowledgedResponseBase { }
 }

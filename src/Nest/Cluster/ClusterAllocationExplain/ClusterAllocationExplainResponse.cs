@@ -5,127 +5,82 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[InterfaceDataContract]
-	public interface IClusterAllocationExplainResponse : IResponse
+	[DataContract]
+	public class ClusterAllocationExplainResponse : ResponseBase
 	{
 		[DataMember(Name = "allocate_explanation")]
-		string AllocateExplanation { get; }
-
-		[DataMember(Name = "allocation_delay")]
-		string AllocationDelay { get; }
-
-		[DataMember(Name = "allocation_delay_in_millis")]
-		long AllocationDelayInMilliseconds { get; }
-
-		[DataMember(Name = "can_allocate")]
-		Decision? CanAllocate { get; }
-
-		[DataMember(Name = "can_move_to_other_node")]
-		Decision? CanMoveToOtherNode { get; }
-
-		[DataMember(Name = "can_rebalance_cluster")]
-		Decision? CanRebalanceCluster { get; }
-
-		[DataMember(Name = "can_rebalance_cluster_decisions")]
-		IReadOnlyCollection<AllocationDecision> CanRebalanceClusterDecisions { get; }
-
-		[DataMember(Name = "can_rebalance_to_other_node")]
-		Decision? CanRebalanceToOtherNode { get; }
-
-		[DataMember(Name = "can_remain_decisions")]
-		IReadOnlyCollection<AllocationDecision> CanRemainDecisions { get; }
-
-		[DataMember(Name = "can_remain_on_current_node")]
-		Decision? CanRemainOnCurrentNode { get; }
-
-		[DataMember(Name = "configured_delay")]
-		string ConfiguredDelay { get; }
-
-		[DataMember(Name = "configured_delay_in_mills")]
-		long ConfiguredDelayInMilliseconds { get; }
-
-		[DataMember(Name = "current_node")]
-		CurrentNode CurrentNode { get; }
-
-		[DataMember(Name = "current_state")]
-		string CurrentState { get; }
-
-		[DataMember(Name = "index")]
-		string Index { get; }
-
-		[DataMember(Name = "move_explanation")]
-		string MoveExplanation { get; }
-
-		[DataMember(Name = "node_allocation_decisions")]
-		IReadOnlyCollection<NodeAllocationExplanation> NodeAllocationDecisions { get; }
-
-		[DataMember(Name = "primary")]
-		bool Primary { get; }
-
-		[DataMember(Name = "rebalance_explanation")]
-		string RebalanceExplanation { get; }
-
-		[DataMember(Name = "remaining_delay")]
-		string RemainingDelay { get; }
-
-		[DataMember(Name = "remaining_delay_in_millis")]
-		long RemainingDelayInMilliseconds { get; }
-
-		[DataMember(Name = "shard")]
-		int Shard { get; }
-
-		[DataMember(Name = "unassigned_info")]
-		UnassignedInformation UnassignedInformation { get; }
-	}
-
-	public class ClusterAllocationExplainResponse : ResponseBase, IClusterAllocationExplainResponse
-	{
 		public string AllocateExplanation { get; internal set; }
 
+		[DataMember(Name = "allocation_delay")]
 		public string AllocationDelay { get; internal set; }
 
+		[DataMember(Name = "allocation_delay_in_millis")]
 		public long AllocationDelayInMilliseconds { get; internal set; }
 
+		[DataMember(Name = "can_allocate")]
 		public Decision? CanAllocate { get; internal set; }
 
+		[DataMember(Name = "can_move_to_other_node")]
 		public Decision? CanMoveToOtherNode { get; internal set; }
 
+		[DataMember(Name = "can_rebalance_cluster")]
 		public Decision? CanRebalanceCluster { get; internal set; }
 
-		public IReadOnlyCollection<AllocationDecision> CanRebalanceClusterDecisions { get; internal set; } =
-			EmptyReadOnly<AllocationDecision>.Collection;
+		[DataMember(Name = "can_rebalance_cluster_decisions")]
+		public IReadOnlyCollection<AllocationDecision> CanRebalanceClusterDecisions { get; internal set; }
+			= EmptyReadOnly<AllocationDecision>.Collection;
 
+		[DataMember(Name = "can_rebalance_to_other_node")]
 		public Decision? CanRebalanceToOtherNode { get; internal set; }
 
+		[DataMember(Name = "can_remain_decisions")]
 		public IReadOnlyCollection<AllocationDecision> CanRemainDecisions { get; internal set; }
+			= EmptyReadOnly<AllocationDecision>.Collection;
 
+		[DataMember(Name = "can_remain_on_current_node")]
 		public Decision? CanRemainOnCurrentNode { get; internal set; }
 
+		[DataMember(Name = "configured_delay")]
 		public string ConfiguredDelay { get; internal set; }
 
+		[DataMember(Name = "configured_delay_in_mills")]
 		public long ConfiguredDelayInMilliseconds { get; internal set; }
 
+		[DataMember(Name = "current_node")]
 		public CurrentNode CurrentNode { get; internal set; }
 
+		[DataMember(Name = "current_state")]
 		public string CurrentState { get; internal set; }
+
+		[DataMember(Name = "index")]
 		public string Index { get; internal set; }
 
+		[DataMember(Name = "move_explanation")]
 		public string MoveExplanation { get; internal set; }
 
+		[DataMember(Name = "node_allocation_decisions")]
 		public IReadOnlyCollection<NodeAllocationExplanation> NodeAllocationDecisions { get; internal set; }
+			= EmptyReadOnly<NodeAllocationExplanation>.Collection;
 
+		[DataMember(Name = "primary")]
 		public bool Primary { get; internal set; }
 
+		[DataMember(Name = "rebalance_explanation")]
 		public string RebalanceExplanation { get; internal set; }
 
+		[DataMember(Name = "remaining_delay")]
 		public string RemainingDelay { get; internal set; }
 
+		[DataMember(Name = "remaining_delay_in_millis")]
 		public long RemainingDelayInMilliseconds { get; internal set; }
 
+		[DataMember(Name = "shard")]
 		public int Shard { get; internal set; }
 
+		[DataMember(Name = "unassigned_info")]
 		public UnassignedInformation UnassignedInformation { get; internal set; }
 	}
+
 
 	[DataContract]
 	public class CurrentNode

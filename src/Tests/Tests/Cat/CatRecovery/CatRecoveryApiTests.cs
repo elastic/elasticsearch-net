@@ -7,7 +7,7 @@ using Tests.Framework.Integration;
 namespace Tests.Cat.CatRecovery
 {
 	public class CatRecoveryApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatRecoveryRecord>, ICatRecoveryRequest, CatRecoveryDescriptor, CatRecoveryRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, CatResponse<CatRecoveryRecord>, ICatRecoveryRequest, CatRecoveryDescriptor, CatRecoveryRequest>
 	{
 		public CatRecoveryApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

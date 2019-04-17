@@ -5,9 +5,9 @@ namespace Nest
 {
 	public static class BlockingSubscribeExtensions
 	{
-		public static BulkAllObserver Wait<T>(this BulkAllObservable<T> observable, TimeSpan maximumRunTime, Action<IBulkAllResponse> onNext)
+		public static BulkAllObserver Wait<T>(this BulkAllObservable<T> observable, TimeSpan maximumRunTime, Action<BulkAllResponse> onNext)
 			where T : class =>
-			WaitOnObservable<BulkAllObservable<T>, IBulkAllResponse, BulkAllObserver>(
+			WaitOnObservable<BulkAllObservable<T>, BulkAllResponse, BulkAllObserver>(
 				observable, maximumRunTime, (e, c) => new BulkAllObserver(onNext, e, c));
 
 		public static ScrollAllObserver<T> Wait<T>(this IObservable<IScrollAllResponse<T>> observable, TimeSpan maximumRunTime,
@@ -17,8 +17,8 @@ namespace Nest
 			WaitOnObservable<IObservable<IScrollAllResponse<T>>, IScrollAllResponse<T>, ScrollAllObserver<T>>(
 				observable, maximumRunTime, (e, c) => new ScrollAllObserver<T>(onNext, e, c));
 
-		public static ReindexObserver Wait(this IObservable<IBulkAllResponse> observable, TimeSpan maximumRunTime, Action<IBulkAllResponse> onNext) =>
-			WaitOnObservable<IObservable<IBulkAllResponse>, IBulkAllResponse, ReindexObserver>(
+		public static ReindexObserver Wait(this IObservable<BulkAllResponse> observable, TimeSpan maximumRunTime, Action<BulkAllResponse> onNext) =>
+			WaitOnObservable<IObservable<BulkAllResponse>, BulkAllResponse, ReindexObserver>(
 				observable, maximumRunTime, (e, c) => new ReindexObserver(onNext, e, c));
 
 		private static TObserver WaitOnObservable<TObservable, TObserve, TObserver>(

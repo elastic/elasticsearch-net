@@ -3,10 +3,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[InterfaceDataContract]
-	public interface IDeleteRollupJobResponse : IAcknowledgedResponse { }
-
-	public class DeleteRollupJobResponse : AcknowledgedResponseBase, IDeleteRollupJobResponse
+	public class DeleteRollupJobResponse : AcknowledgedResponseBase
 	{
 		/// <summary>
 		/// Checks whether the response returned a valid HTTP status code and that the delete is acknowledged

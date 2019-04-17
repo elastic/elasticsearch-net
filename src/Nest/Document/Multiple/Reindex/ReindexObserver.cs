@@ -9,7 +9,7 @@ namespace Nest
 		private long _seenScrollOperations;
 
 		public ReindexObserver(
-			Action<IBulkAllResponse> onNext = null,
+			Action<BulkAllResponse> onNext = null,
 			Action<Exception> onError = null,
 			Action onCompleted = null
 		)

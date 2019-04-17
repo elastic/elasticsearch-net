@@ -13,7 +13,7 @@ using Tests.Framework.Integration;
 namespace Tests.Cluster.ClusterReroute
 {
 	public class ClusterRerouteApiTests
-		: ApiIntegrationTestBase<IntrusiveOperationCluster, IClusterRerouteResponse, IClusterRerouteRequest, ClusterRerouteDescriptor,
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, ClusterRerouteResponse, IClusterRerouteRequest, ClusterRerouteDescriptor,
 			ClusterRerouteRequest>
 	{
 		public ClusterRerouteApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -155,7 +155,7 @@ namespace Tests.Cluster.ClusterReroute
 			(client, r) => client.ClusterRerouteAsync(r)
 		);
 
-		protected override void ExpectResponse(IClusterRerouteResponse response)
+		protected override void ExpectResponse(ClusterRerouteResponse response)
 		{
 			response.ShouldNotBeValid();
 			response.ServerError.Should().NotBeNull();

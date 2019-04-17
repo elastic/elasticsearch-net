@@ -2,19 +2,7 @@
 
 namespace Nest
 {
-	public interface IMachineLearningInfoResponse : IResponse
-	{
-		[DataMember(Name = "defaults")]
-		Defaults Defaults { get; }
-
-		[DataMember(Name = "limits")]
-		Limits Limits { get; }
-
-		[DataMember(Name = "upgrade_mode")]
-		bool? UpgradeMode { get; }
-	}
-
-	public class MachineLearningInfoResponse : ResponseBase, IMachineLearningInfoResponse
+	public class MachineLearningInfoResponse : ResponseBase
 	{
 		[DataMember(Name = "defaults")]
 		public Defaults Defaults { get; internal set; }

@@ -13,7 +13,7 @@ using static Nest.Infer;
 namespace Tests.Indices.IndexSettings.GetIndexSettings
 {
 	public class GetIndexSettingsApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IGetIndexSettingsResponse, IGetIndexSettingsRequest, GetIndexSettingsDescriptor,
+		: ApiIntegrationTestBase<ReadOnlyCluster, GetIndexSettingsResponse, IGetIndexSettingsRequest, GetIndexSettingsDescriptor,
 			GetIndexSettingsRequest>
 	{
 		private static readonly IndexName PercolationIndex = Index<ProjectPercolation>();
@@ -44,7 +44,7 @@ namespace Tests.Indices.IndexSettings.GetIndexSettings
 			(client, r) => client.GetIndexSettingsAsync(r)
 		);
 
-		protected override void ExpectResponse(IGetIndexSettingsResponse response)
+		protected override void ExpectResponse(GetIndexSettingsResponse response)
 		{
 			response.Indices.Should().NotBeEmpty();
 			var index = response.Indices[PercolationIndex];

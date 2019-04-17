@@ -13,7 +13,7 @@ namespace Tests.XPack.Sql.TranslateSql
 {
 	[SkipVersion("<6.4.0", "")]
 	public class TranslateSqlApiTests
-		: ApiIntegrationTestBase<XPackCluster, ITranslateSqlResponse, ITranslateSqlRequest, TranslateSqlDescriptor, TranslateSqlRequest>
+		: ApiIntegrationTestBase<XPackCluster, TranslateSqlResponse, ITranslateSqlRequest, TranslateSqlDescriptor, TranslateSqlRequest>
 	{
 		private static readonly string SqlQuery =
 			$@"SELECT type, name, startedOn, numberOfCommits
@@ -54,7 +54,7 @@ ORDER BY numberOfContributors DESC";
 			(client, r) => client.TranslateSqlAsync(r)
 		);
 
-		protected override void ExpectResponse(ITranslateSqlResponse response)
+		protected override void ExpectResponse(TranslateSqlResponse response)
 		{
 			var search = response.Result;
 			search.Should().NotBeNull();

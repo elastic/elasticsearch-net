@@ -25,9 +25,9 @@ namespace Tests.Document.Multiple.Reindex
 	public class ReindexApiTests : IClusterFixture<ManualReindexCluster>
 	{
 		private readonly IElasticClient _client;
-		private readonly IObservable<IBulkAllResponse> _reindexManyTypesResult;
-		private readonly IObservable<IBulkAllResponse> _reindexProjectionResult;
-		private readonly IObservable<IBulkAllResponse> _reindexSingleTypeResult;
+		private readonly IObservable<BulkAllResponse> _reindexManyTypesResult;
+		private readonly IObservable<BulkAllResponse> _reindexProjectionResult;
+		private readonly IObservable<BulkAllResponse> _reindexSingleTypeResult;
 
 		public ReindexApiTests(ManualReindexCluster cluster)
 		{
@@ -35,7 +35,7 @@ namespace Tests.Document.Multiple.Reindex
 
 			// create a couple of projects
 			var projects = Project.Generator.Generate(2);
-			var indexProjectsResponse = _client.IndexMany(projects, IndexName);
+			var ndexProjectsResponse = _client.IndexMany(projects, IndexName);
 			_client.Refresh(IndexName);
 
 			// create a thousand commits and associate with the projects

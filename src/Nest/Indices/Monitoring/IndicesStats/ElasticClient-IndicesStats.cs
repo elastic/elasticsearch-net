@@ -14,41 +14,41 @@ namespace Nest
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-stats.html
 		/// </summary>
 		/// <param name="selector">Optionaly further describe the indices stats operation</param>
-		IIndicesStatsResponse IndicesStats(Indices indices, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null);
+		IndicesStatsResponse IndicesStats(Indices indices, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null);
 
 		/// <inheritdoc />
-		IIndicesStatsResponse IndicesStats(IIndicesStatsRequest request);
+		IndicesStatsResponse IndicesStats(IIndicesStatsRequest request);
 
 		/// <inheritdoc />
-		Task<IIndicesStatsResponse> IndicesStatsAsync(
+		Task<IndicesStatsResponse> IndicesStatsAsync(
 			Indices indices,
 			Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null,
 			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
-		Task<IIndicesStatsResponse> IndicesStatsAsync(IIndicesStatsRequest request, CancellationToken ct = default);
+		Task<IndicesStatsResponse> IndicesStatsAsync(IIndicesStatsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IIndicesStatsResponse IndicesStats(Indices indices, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null) =>
+		public IndicesStatsResponse IndicesStats(Indices indices, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null) =>
 			IndicesStats(selector.InvokeOrDefault(new IndicesStatsDescriptor().Index(indices)));
 
 		/// <inheritdoc />
-		public IIndicesStatsResponse IndicesStats(IIndicesStatsRequest request) =>
+		public IndicesStatsResponse IndicesStats(IIndicesStatsRequest request) =>
 			DoRequest<IIndicesStatsRequest, IndicesStatsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IIndicesStatsResponse> IndicesStatsAsync(
+		public Task<IndicesStatsResponse> IndicesStatsAsync(
 			Indices indices,
 			Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null,
 			CancellationToken cancellationToken = default
 		) => IndicesStatsAsync(selector.InvokeOrDefault(new IndicesStatsDescriptor().Index(indices)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IIndicesStatsResponse> IndicesStatsAsync(IIndicesStatsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IIndicesStatsRequest, IIndicesStatsResponse, IndicesStatsResponse>(request, request.RequestParameters, ct);
+		public Task<IndicesStatsResponse> IndicesStatsAsync(IIndicesStatsRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IIndicesStatsRequest, IndicesStatsResponse>(request, request.RequestParameters, ct);
 	}
 }

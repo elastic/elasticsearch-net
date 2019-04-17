@@ -5,16 +5,11 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IGetLicenseResponse : IResponse
-	{
-		[DataMember(Name ="license")]
-		LicenseInformation License { get; }
-	}
-
-	public class GetLicenseResponse : ResponseBase, IGetLicenseResponse
+	public class GetLicenseResponse : ResponseBase
 	{
 		public override bool IsValid => base.IsValid && (!License?.UID.IsNullOrEmpty() ?? false);
 
+		[DataMember(Name ="license")]
 		public LicenseInformation License { get; internal set; }
 	}
 

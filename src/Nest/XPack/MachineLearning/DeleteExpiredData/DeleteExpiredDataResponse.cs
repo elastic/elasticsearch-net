@@ -2,14 +2,9 @@
 
 namespace Nest
 {
-	public interface IDeleteExpiredDataResponse : IResponse
+	public class DeleteExpiredDataResponse : ResponseBase
 	{
 		[DataMember(Name ="deleted")]
-		bool Deleted { get; }
-	}
-
-	public class DeleteExpiredDataResponse : ResponseBase, IDeleteExpiredDataResponse
-	{
 		public bool Deleted { get; internal set; }
 	}
 }

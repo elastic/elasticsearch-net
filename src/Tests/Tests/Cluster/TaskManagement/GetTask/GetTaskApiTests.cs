@@ -11,7 +11,7 @@ using Tests.Framework.Integration;
 
 namespace Tests.Cluster.TaskManagement.GetTask
 {
-	public class GetTaskApiTests : ApiIntegrationTestBase<WritableCluster, IGetTaskResponse, IGetTaskRequest, GetTaskDescriptor, GetTaskRequest>
+	public class GetTaskApiTests : ApiIntegrationTestBase<WritableCluster, GetTaskResponse, IGetTaskRequest, GetTaskDescriptor, GetTaskRequest>
 	{
 		private static TaskId _taskId = new TaskId("fakeid:1");
 
@@ -35,7 +35,7 @@ namespace Tests.Cluster.TaskManagement.GetTask
 
 		protected override GetTaskDescriptor NewDescriptor() => new GetTaskDescriptor(_taskId);
 
-		protected override void ExpectResponse(IGetTaskResponse response)
+		protected override void ExpectResponse(GetTaskResponse response)
 		{
 			response.ShouldBeValid();
 			response.Task.Should().NotBeNull();

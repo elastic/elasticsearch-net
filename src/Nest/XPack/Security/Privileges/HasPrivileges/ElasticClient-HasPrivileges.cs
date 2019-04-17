@@ -10,39 +10,39 @@ namespace Nest
 		/// <summary>
 		/// Determine whether the authenticated user has a specified list of privileges.
 		/// </summary>
-		IHasPrivilegesResponse HasPrivileges(Func<HasPrivilegesDescriptor, IHasPrivilegesRequest> selector = null);
+		HasPrivilegesResponse HasPrivileges(Func<HasPrivilegesDescriptor, IHasPrivilegesRequest> selector = null);
 
 		/// <inheritdoc cref="HasPrivileges(System.Func{Nest.HasPrivilegesDescriptor,Nest.IHasPrivilegesRequest})" />
-		IHasPrivilegesResponse HasPrivileges(IHasPrivilegesRequest request);
+		HasPrivilegesResponse HasPrivileges(IHasPrivilegesRequest request);
 
 		/// <inheritdoc cref="HasPrivileges(System.Func{Nest.HasPrivilegesDescriptor,Nest.IHasPrivilegesRequest})" />
-		Task<IHasPrivilegesResponse> HasPrivilegesAsync(Func<HasPrivilegesDescriptor, IHasPrivilegesRequest> selector = null,
+		Task<HasPrivilegesResponse> HasPrivilegesAsync(Func<HasPrivilegesDescriptor, IHasPrivilegesRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="HasPrivileges(System.Func{Nest.HasPrivilegesDescriptor,Nest.IHasPrivilegesRequest})" />
-		Task<IHasPrivilegesResponse> HasPrivilegesAsync(IHasPrivilegesRequest request, CancellationToken ct = default);
+		Task<HasPrivilegesResponse> HasPrivilegesAsync(IHasPrivilegesRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc cref="HasPrivileges(System.Func{Nest.HasPrivilegesDescriptor,Nest.IHasPrivilegesRequest})" />
-		public IHasPrivilegesResponse HasPrivileges(Func<HasPrivilegesDescriptor, IHasPrivilegesRequest> selector = null) =>
+		public HasPrivilegesResponse HasPrivileges(Func<HasPrivilegesDescriptor, IHasPrivilegesRequest> selector = null) =>
 			HasPrivileges(selector.InvokeOrDefault(new HasPrivilegesDescriptor()));
 
 		/// <inheritdoc cref="HasPrivileges(System.Func{Nest.HasPrivilegesDescriptor,Nest.IHasPrivilegesRequest})" />
-		public IHasPrivilegesResponse HasPrivileges(IHasPrivilegesRequest request) =>
+		public HasPrivilegesResponse HasPrivileges(IHasPrivilegesRequest request) =>
 			DoRequest<IHasPrivilegesRequest, HasPrivilegesResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="HasPrivileges(System.Func{Nest.HasPrivilegesDescriptor,Nest.IHasPrivilegesRequest})" />
-		public Task<IHasPrivilegesResponse> HasPrivilegesAsync(
+		public Task<HasPrivilegesResponse> HasPrivilegesAsync(
 			Func<HasPrivilegesDescriptor, IHasPrivilegesRequest> selector = null,
 			CancellationToken ct = default
 		) => HasPrivilegesAsync(selector.InvokeOrDefault(new HasPrivilegesDescriptor()), ct);
 
 		/// <inheritdoc cref="HasPrivileges(System.Func{Nest.HasPrivilegesDescriptor,Nest.IHasPrivilegesRequest})" />
-		public Task<IHasPrivilegesResponse> HasPrivilegesAsync(IHasPrivilegesRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IHasPrivilegesRequest, IHasPrivilegesResponse, HasPrivilegesResponse>
+		public Task<HasPrivilegesResponse> HasPrivilegesAsync(IHasPrivilegesRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IHasPrivilegesRequest, HasPrivilegesResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

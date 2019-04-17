@@ -7,148 +7,71 @@ namespace Nest
 	/// <summary>
 	/// The Post Job Data API response
 	/// </summary>
-	public interface IPostJobDataResponse : IResponse
+	public class PostJobDataResponse : ResponseBase
 	{
-		/// <summary>
-		/// The count of buckets.
-		/// </summary>
+		/// <summary>The count of buckets. </summary>
 		[DataMember(Name = "bucket_count")]
-		long BucketCount { get; }
+		public long BucketCount { get; internal set; }
 
-		/// <summary>
-		/// The earliest record timestamp
-		/// </summary>
+		/// <summary> The earliest record timestamp</summary>
 		[DataMember(Name = "earliest_record_timestamp")]
 		[JsonFormatter(typeof(NullableDateTimeOffsetEpochMillisecondsFormatter))]
-		DateTimeOffset? EarliestRecordTimestamp { get; }
+		public DateTimeOffset? EarliestRecordTimestamp { get; internal set; }
 
-		/// <summary>
-		/// The count of empty buckets.
-		/// </summary>
+		/// <summaryThe count of empty buckets.</summary>
 		[DataMember(Name = "empty_bucket_count")]
-		long EmptyBucketCount { get; }
+		public long EmptyBucketCount { get; internal set; }
 
-		/// <summary>
-		/// Total input bytes.
-		/// </summary>
+		/// <summary>Total input bytes.</summary>
 		[DataMember(Name = "input_bytes")]
-		long InputBytes { get; }
+		public long InputBytes { get; internal set; }
 
-		/// <summary>
-		/// The count of input fields.
-		/// </summary>
+		/// <summary> The count of input fields. </summary>
 		[DataMember(Name = "input_field_count")]
-		long InputFieldCount { get; }
+		public long InputFieldCount { get; internal set; }
 
-		/// <summary>
-		/// The count of input records.
-		/// </summary>
+		/// <summary> The count of input records. </summary>
 		[DataMember(Name = "input_record_count")]
-		long InputRecordCount { get; }
+		public long InputRecordCount { get; internal set; }
 
-		/// <summary>
-		/// The count of invalid dates.
-		/// </summary>
+		/// <summary> The count of invalid dates. </summary>
 		[DataMember(Name = "invalid_date_count")]
-		long InvalidDateCount { get; }
+		public long InvalidDateCount { get; internal set; }
 
-		/// <summary>
-		/// The unique identifier for the job.
-		/// </summary>
+		/// <summary>The unique identifier for the job.</summary>
 		[DataMember(Name = "job_id")]
-		string JobId { get; }
+		public string JobId { get; internal set; }
 
-		/// <summary>
-		/// The time of the last data item.
-		/// </summary>
+		/// <summary> The time of the last data item. </summary>
 		[DataMember(Name = "last_data_time")]
 		[JsonFormatter(typeof(DateTimeOffsetEpochMillisecondsFormatter))]
-		DateTimeOffset LastDataTime { get; }
+		public DateTimeOffset LastDataTime { get; internal set; }
 
-		/// <summary>
-		/// The latest record timestamp
-		/// </summary>
+		/// <summary> The latest record timestamp </summary>
 		[DataMember(Name = "latest_record_timestamp")]
 		[JsonFormatter(typeof(NullableDateTimeOffsetEpochMillisecondsFormatter))]
-		DateTimeOffset? LatestRecordTimestamp { get; }
+		public DateTimeOffset? LatestRecordTimestamp { get; internal set; }
 
-		/// <summary>
-		/// The count of missing fields.
-		/// </summary>
+		/// <summary> The count of missing fields. </summary>
 		[DataMember(Name = "missing_field_count")]
-		long MissingFieldCount { get; }
+		public long MissingFieldCount { get; internal set; }
 
 		/// <summary>
 		/// The count of out of order timestamps.
 		/// </summary>
 		[DataMember(Name = "out_of_order_timestamp_count")]
-		long OutOfOrderTimestampCount { get; }
-
-		/// <summary>
-		/// The count of processed fields.
-		/// </summary>
-		[DataMember(Name = "processed_field_count")]
-		long ProcessedFieldCount { get; }
-
-		/// <summary>
-		/// The count of processed records.
-		/// </summary>
-		[DataMember(Name = "processed_record_count")]
-		long ProcessedRecordCount { get; }
-
-		/// <summary>
-		/// The count of sparse buckets.
-		/// </summary>
-		[DataMember(Name = "sparse_bucket_count")]
-		long SparseBucketCount { get; }
-	}
-
-	/// <inheritdoc cref="IPostJobDataResponse" />
-	public class PostJobDataResponse : ResponseBase, IPostJobDataResponse
-	{
-		/// <inheritdoc />
-		public long BucketCount { get; internal set; }
-
-		/// <inheritdoc />
-		public DateTimeOffset? EarliestRecordTimestamp { get; internal set; }
-
-		/// <inheritdoc />
-		public long EmptyBucketCount { get; internal set; }
-
-		/// <inheritdoc />
-		public long InputBytes { get; internal set; }
-
-		/// <inheritdoc />
-		public long InputFieldCount { get; internal set; }
-
-		/// <inheritdoc />
-		public long InputRecordCount { get; internal set; }
-
-		/// <inheritdoc />
-		public long InvalidDateCount { get; internal set; }
-
-		/// <inheritdoc />
-		public string JobId { get; internal set; }
-
-		/// <inheritdoc />
-		public DateTimeOffset LastDataTime { get; internal set; }
-
-		/// <inheritdoc />
-		public DateTimeOffset? LatestRecordTimestamp { get; internal set; }
-
-		/// <inheritdoc />
-		public long MissingFieldCount { get; internal set; }
-
-		/// <inheritdoc />
 		public long OutOfOrderTimestampCount { get; internal set; }
 
-		/// <inheritdoc />
+		/// <summary> The count of processed fields. </summary>
+		[DataMember(Name = "processed_field_count")]
 		public long ProcessedFieldCount { get; internal set; }
 
-		/// <inheritdoc />
+		/// <summary> The count of processed records. </summary>
+		[DataMember(Name = "processed_record_count")]
 		public long ProcessedRecordCount { get; internal set; }
 
-		/// <inheritdoc />
+		/// <summary> The count of sparse buckets. </summary>
+		[DataMember(Name = "sparse_bucket_count")]
 		public long SparseBucketCount { get; internal set; }
 	}
 }

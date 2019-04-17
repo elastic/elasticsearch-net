@@ -6,14 +6,9 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IAcknowledgeWatchResponse : IResponse
+	public class AcknowledgeWatchResponse : ResponseBase
 	{
 		[DataMember(Name ="status")]
-		WatchStatus Status { get; }
-	}
-
-	public class AcknowledgeWatchResponse : ResponseBase, IAcknowledgeWatchResponse
-	{
 		public WatchStatus Status { get; internal set; }
 	}
 

@@ -8,19 +8,19 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc />
-		ICatResponse<CatAllocationRecord> CatAllocation(Func<CatAllocationDescriptor, ICatAllocationRequest> selector = null);
+		CatResponse<CatAllocationRecord> CatAllocation(Func<CatAllocationDescriptor, ICatAllocationRequest> selector = null);
 
 		/// <inheritdoc />
-		ICatResponse<CatAllocationRecord> CatAllocation(ICatAllocationRequest request);
+		CatResponse<CatAllocationRecord> CatAllocation(ICatAllocationRequest request);
 
 		/// <inheritdoc />
-		Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(
+		Task<CatResponse<CatAllocationRecord>> CatAllocationAsync(
 			Func<CatAllocationDescriptor, ICatAllocationRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(ICatAllocationRequest request,
+		Task<CatResponse<CatAllocationRecord>> CatAllocationAsync(ICatAllocationRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -28,21 +28,21 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public ICatResponse<CatAllocationRecord> CatAllocation(Func<CatAllocationDescriptor, ICatAllocationRequest> selector = null) =>
+		public CatResponse<CatAllocationRecord> CatAllocation(Func<CatAllocationDescriptor, ICatAllocationRequest> selector = null) =>
 			CatAllocation(selector.InvokeOrDefault(new CatAllocationDescriptor()));
 
 		/// <inheritdoc />
-		public ICatResponse<CatAllocationRecord> CatAllocation(ICatAllocationRequest request) =>
+		public CatResponse<CatAllocationRecord> CatAllocation(ICatAllocationRequest request) =>
 			DoCat<ICatAllocationRequest, CatAllocationRequestParameters, CatAllocationRecord>(request);
 
 		/// <inheritdoc />
-		public Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(
+		public Task<CatResponse<CatAllocationRecord>> CatAllocationAsync(
 			Func<CatAllocationDescriptor, ICatAllocationRequest> selector = null,
 			CancellationToken ct = default
 		) => CatAllocationAsync(selector.InvokeOrDefault(new CatAllocationDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(ICatAllocationRequest request, CancellationToken ct = default) =>
+		public Task<CatResponse<CatAllocationRecord>> CatAllocationAsync(ICatAllocationRequest request, CancellationToken ct = default) =>
 			DoCatAsync<ICatAllocationRequest, CatAllocationRequestParameters, CatAllocationRecord>(request,ct);
 	}
 }

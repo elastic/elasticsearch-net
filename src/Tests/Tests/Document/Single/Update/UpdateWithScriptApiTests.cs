@@ -10,7 +10,7 @@ using Tests.Framework.Integration;
 namespace Tests.Document.Single.Update
 {
 	public class UpdateWithScriptApiTests
-		: ApiIntegrationTestBase<WritableCluster, IUpdateResponse<Project>, IUpdateRequest<Project, Project>, UpdateDescriptor<Project, Project>,
+		: ApiIntegrationTestBase<WritableCluster, UpdateResponse<Project>, IUpdateRequest<Project, Project>, UpdateDescriptor<Project, Project>,
 			UpdateRequest<Project, Project>>
 	{
 		public UpdateWithScriptApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

@@ -52,7 +52,7 @@ namespace Tests.Aggregations.Bucket.IpRange
 				}
 			};
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
+		protected override void ExpectResponse(SearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var ipRanges = response.Aggregations.IpRange("ip_ranges");

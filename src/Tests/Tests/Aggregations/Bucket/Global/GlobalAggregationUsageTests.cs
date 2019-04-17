@@ -49,7 +49,7 @@ namespace Tests.Aggregations.Bucket.Global
 				}
 			};
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
+		protected override void ExpectResponse(SearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			var allProjects = response.Aggregations.Global("all_projects");

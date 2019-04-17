@@ -15,20 +15,20 @@ namespace Nest
 		///  typed parts of the query
 		/// </typeparam>
 		/// <param name="selector">An optional descriptor to further describe the update by query operation</param>
-		IUpdateByQueryResponse UpdateByQuery<T>(Func<UpdateByQueryDescriptor<T>, IUpdateByQueryRequest> selector)
+		UpdateByQueryResponse UpdateByQuery<T>(Func<UpdateByQueryDescriptor<T>, IUpdateByQueryRequest> selector)
 			where T : class;
 
 		/// <inheritdoc />
-		IUpdateByQueryResponse UpdateByQuery(IUpdateByQueryRequest request);
+		UpdateByQueryResponse UpdateByQuery(IUpdateByQueryRequest request);
 
 		/// <inheritdoc />
-		Task<IUpdateByQueryResponse> UpdateByQueryAsync<T>(Func<UpdateByQueryDescriptor<T>, IUpdateByQueryRequest> selector,
+		Task<UpdateByQueryResponse> UpdateByQueryAsync<T>(Func<UpdateByQueryDescriptor<T>, IUpdateByQueryRequest> selector,
 			CancellationToken ct = default
 		)
 			where T : class;
 
 		/// <inheritdoc />
-		Task<IUpdateByQueryResponse> UpdateByQueryAsync(IUpdateByQueryRequest request,
+		Task<UpdateByQueryResponse> UpdateByQueryAsync(IUpdateByQueryRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -36,15 +36,15 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IUpdateByQueryResponse UpdateByQuery<T>(Func<UpdateByQueryDescriptor<T>, IUpdateByQueryRequest> selector) where T : class =>
+		public UpdateByQueryResponse UpdateByQuery<T>(Func<UpdateByQueryDescriptor<T>, IUpdateByQueryRequest> selector) where T : class =>
 			UpdateByQuery(selector?.Invoke(new UpdateByQueryDescriptor<T>(typeof(T))));
 
 		/// <inheritdoc />
-		public IUpdateByQueryResponse UpdateByQuery(IUpdateByQueryRequest request) =>
+		public UpdateByQueryResponse UpdateByQuery(IUpdateByQueryRequest request) =>
 			DoRequest<IUpdateByQueryRequest, UpdateByQueryResponse>(request, request.RequestParameters, r => AcceptAllStatusCodesHandler(r));
 
 		/// <inheritdoc />
-		public Task<IUpdateByQueryResponse> UpdateByQueryAsync<T>(
+		public Task<UpdateByQueryResponse> UpdateByQueryAsync<T>(
 			Func<UpdateByQueryDescriptor<T>, IUpdateByQueryRequest> selector,
 			CancellationToken ct = default
 		)
@@ -52,8 +52,8 @@ namespace Nest
 			UpdateByQueryAsync(selector?.Invoke(new UpdateByQueryDescriptor<T>(typeof(T))), ct);
 
 		/// <inheritdoc />
-		public Task<IUpdateByQueryResponse> UpdateByQueryAsync(IUpdateByQueryRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IUpdateByQueryRequest, IUpdateByQueryResponse, UpdateByQueryResponse>
+		public Task<UpdateByQueryResponse> UpdateByQueryAsync(IUpdateByQueryRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IUpdateByQueryRequest, UpdateByQueryResponse>
 				(request, request.RequestParameters, ct, r => AcceptAllStatusCodesHandler(r));
 	}
 }

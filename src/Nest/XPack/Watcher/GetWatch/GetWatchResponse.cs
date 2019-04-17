@@ -1,29 +1,19 @@
 ﻿using System.Runtime.Serialization;
-using Elasticsearch.Net;
 
 namespace Nest
 {
-	[InterfaceDataContract]
-	public interface IGetWatchResponse : IResponse
+	public class GetWatchResponse : ResponseBase
 	{
 		[DataMember(Name ="found")]
-		bool Found { get; }
+		public bool Found { get; internal set; }
 
 		[DataMember(Name ="_id")]
-		string Id { get; }
+		public string Id { get; internal set; }
 
 		[DataMember(Name ="status")]
-		WatchStatus Status { get; }
+		public WatchStatus Status { get; internal set; }
 
 		[DataMember(Name ="watch")]
-		IWatch Watch { get; }
-	}
-
-	public class GetWatchResponse : ResponseBase, IGetWatchResponse
-	{
-		public bool Found { get; internal set; }
-		public string Id { get; internal set; }
-		public WatchStatus Status { get; internal set; }
 		public IWatch Watch { get; internal set; }
 	}
 }

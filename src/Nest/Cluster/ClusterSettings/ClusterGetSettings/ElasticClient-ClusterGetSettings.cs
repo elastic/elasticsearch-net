@@ -13,41 +13,41 @@ namespace Nest
 		/// <para> </para>
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-update-settings.html
 		/// </summary>
-		IClusterGetSettingsResponse ClusterGetSettings(Func<ClusterGetSettingsDescriptor, IClusterGetSettingsRequest> selector = null);
+		ClusterGetSettingsResponse ClusterGetSettings(Func<ClusterGetSettingsDescriptor, IClusterGetSettingsRequest> selector = null);
 
 		/// <inheritdoc cref="ClusterGetSettings(System.Func{Nest.ClusterGetSettingsDescriptor,Nest.IClusterGetSettingsRequest})"/>
-		Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(
+		Task<ClusterGetSettingsResponse> ClusterGetSettingsAsync(
 			Func<ClusterGetSettingsDescriptor, IClusterGetSettingsRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="ClusterGetSettings(System.Func{Nest.ClusterGetSettingsDescriptor,Nest.IClusterGetSettingsRequest})"/>
-		IClusterGetSettingsResponse ClusterGetSettings(IClusterGetSettingsRequest request);
+		ClusterGetSettingsResponse ClusterGetSettings(IClusterGetSettingsRequest request);
 
 		/// <inheritdoc cref="ClusterGetSettings(System.Func{Nest.ClusterGetSettingsDescriptor,Nest.IClusterGetSettingsRequest})"/>
-		Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(IClusterGetSettingsRequest request, CancellationToken ct = default);
+		Task<ClusterGetSettingsResponse> ClusterGetSettingsAsync(IClusterGetSettingsRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc cref="ClusterGetSettings(System.Func{Nest.ClusterGetSettingsDescriptor,Nest.IClusterGetSettingsRequest})"/>
-		public IClusterGetSettingsResponse ClusterGetSettings(Func<ClusterGetSettingsDescriptor, IClusterGetSettingsRequest> selector = null) =>
+		public ClusterGetSettingsResponse ClusterGetSettings(Func<ClusterGetSettingsDescriptor, IClusterGetSettingsRequest> selector = null) =>
 			ClusterGetSettings(selector.InvokeOrDefault(new ClusterGetSettingsDescriptor()));
 
 		/// <inheritdoc cref="ClusterGetSettings(System.Func{Nest.ClusterGetSettingsDescriptor,Nest.IClusterGetSettingsRequest})"/>
-		public IClusterGetSettingsResponse ClusterGetSettings(IClusterGetSettingsRequest request) =>
+		public ClusterGetSettingsResponse ClusterGetSettings(IClusterGetSettingsRequest request) =>
 			DoRequest<IClusterGetSettingsRequest, ClusterGetSettingsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc cref="ClusterGetSettings(System.Func{Nest.ClusterGetSettingsDescriptor,Nest.IClusterGetSettingsRequest})"/>
-		public Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(
+		public Task<ClusterGetSettingsResponse> ClusterGetSettingsAsync(
 			Func<ClusterGetSettingsDescriptor, IClusterGetSettingsRequest> selector = null,
 			CancellationToken ct = default
 		) => ClusterGetSettingsAsync(selector.InvokeOrDefault(new ClusterGetSettingsDescriptor()), ct);
 
 		/// <inheritdoc cref="ClusterGetSettings(System.Func{Nest.ClusterGetSettingsDescriptor,Nest.IClusterGetSettingsRequest})"/>
-		public Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(
+		public Task<ClusterGetSettingsResponse> ClusterGetSettingsAsync(
 			IClusterGetSettingsRequest request,
 			CancellationToken ct = default
-		) => DoRequestAsync<IClusterGetSettingsRequest, IClusterGetSettingsResponse, ClusterGetSettingsResponse>(request, request.RequestParameters, ct);
+		) => DoRequestAsync<IClusterGetSettingsRequest, ClusterGetSettingsResponse>(request, request.RequestParameters, ct);
 	}
 }

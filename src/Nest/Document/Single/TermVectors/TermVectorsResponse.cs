@@ -4,10 +4,8 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface ITermVectorsResponse : IResponse, ITermVectors { }
-
 	[DataContract]
-	public class TermVectorsResponse : ResponseBase, ITermVectorsResponse
+	public class TermVectorsResponse : ResponseBase
 	{
 		[DataMember(Name ="found")]
 		public bool Found { get; internal set; }

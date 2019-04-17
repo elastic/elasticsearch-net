@@ -3,7 +3,7 @@
 namespace Nest
 {
 	/// <summary> A response returned for each scroll in ScrollAll() </summary>
-	public interface IScrollAllResponse<T> where T : class
+	public interface IScrollAllResponse<out T> where T : class
 	{
 		/// <summary>
 		/// The nth scroll this response represents

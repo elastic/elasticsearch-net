@@ -7,7 +7,7 @@ using Tests.Framework.Integration;
 namespace Tests.Cluster.ClusterSettings.ClusterGetSettings
 {
 	public class ClusterGetSettingsApiTests
-		: ApiTestBase<ReadOnlyCluster, IClusterGetSettingsResponse, IClusterGetSettingsRequest, ClusterGetSettingsDescriptor,
+		: ApiTestBase<ReadOnlyCluster, ClusterGetSettingsResponse, IClusterGetSettingsRequest, ClusterGetSettingsDescriptor,
 			ClusterGetSettingsRequest>
 	{
 		public ClusterGetSettingsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

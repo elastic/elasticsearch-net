@@ -10,7 +10,7 @@ using Tests.Framework.Integration;
 
 namespace Tests.Modules.SnapshotAndRestore.Restore
 {
-	public class RestoreApiTests : ApiTestBase<IntrusiveOperationCluster, IRestoreResponse, IRestoreRequest, RestoreDescriptor, RestoreRequest>
+	public class RestoreApiTests : ApiTestBase<IntrusiveOperationCluster, RestoreResponse, IRestoreRequest, RestoreDescriptor, RestoreRequest>
 	{
 		public RestoreApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{

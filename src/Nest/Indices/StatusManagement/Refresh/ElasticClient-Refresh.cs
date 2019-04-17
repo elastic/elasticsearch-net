@@ -14,39 +14,39 @@ namespace Nest
 		/// <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-refresh.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-refresh.html</a>
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the refresh operation</param>
-		IRefreshResponse Refresh(Indices indices, Func<RefreshDescriptor, IRefreshRequest> selector = null);
+		RefreshResponse Refresh(Indices indices, Func<RefreshDescriptor, IRefreshRequest> selector = null);
 
 		/// <inheritdoc />
-		IRefreshResponse Refresh(IRefreshRequest request);
+		RefreshResponse Refresh(IRefreshRequest request);
 
 		/// <inheritdoc />
-		Task<IRefreshResponse> RefreshAsync(Indices indices, Func<RefreshDescriptor, IRefreshRequest> selector = null,
+		Task<RefreshResponse> RefreshAsync(Indices indices, Func<RefreshDescriptor, IRefreshRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IRefreshResponse> RefreshAsync(IRefreshRequest request, CancellationToken ct = default);
+		Task<RefreshResponse> RefreshAsync(IRefreshRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IRefreshResponse Refresh(Indices indices, Func<RefreshDescriptor, IRefreshRequest> selector = null) =>
+		public RefreshResponse Refresh(Indices indices, Func<RefreshDescriptor, IRefreshRequest> selector = null) =>
 			Refresh(selector.InvokeOrDefault(new RefreshDescriptor().Index(indices)));
 
 		/// <inheritdoc />
-		public IRefreshResponse Refresh(IRefreshRequest request) =>
+		public RefreshResponse Refresh(IRefreshRequest request) =>
 			DoRequest<IRefreshRequest, RefreshResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IRefreshResponse> RefreshAsync(
+		public Task<RefreshResponse> RefreshAsync(
 			Indices indices,
 			Func<RefreshDescriptor, IRefreshRequest> selector = null,
 			CancellationToken ct = default
 		) => RefreshAsync(selector.InvokeOrDefault(new RefreshDescriptor().Index(indices)), ct);
 
 		/// <inheritdoc />
-		public Task<IRefreshResponse> RefreshAsync(IRefreshRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IRefreshRequest, IRefreshResponse, RefreshResponse>(request, request.RequestParameters, ct);
+		public Task<RefreshResponse> RefreshAsync(IRefreshRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IRefreshRequest, RefreshResponse>(request, request.RequestParameters, ct);
 	}
 }

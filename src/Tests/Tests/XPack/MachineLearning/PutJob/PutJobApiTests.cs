@@ -12,7 +12,7 @@ using static Nest.Infer;
 
 namespace Tests.XPack.MachineLearning.PutJob
 {
-	public class PutJobApiTests : MachineLearningIntegrationTestBase<IPutJobResponse, IPutJobRequest, PutJobDescriptor<Metric>, PutJobRequest>
+	public class PutJobApiTests : MachineLearningIntegrationTestBase<PutJobResponse, IPutJobRequest, PutJobDescriptor<Metric>, PutJobRequest>
 	{
 		public PutJobApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -90,7 +90,7 @@ namespace Tests.XPack.MachineLearning.PutJob
 
 		protected override PutJobDescriptor<Metric> NewDescriptor() => new PutJobDescriptor<Metric>(CallIsolatedValue);
 
-		protected override void ExpectResponse(IPutJobResponse response)
+		protected override void ExpectResponse(PutJobResponse response)
 		{
 			response.ShouldBeValid();
 

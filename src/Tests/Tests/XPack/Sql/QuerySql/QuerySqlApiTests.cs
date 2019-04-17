@@ -12,7 +12,7 @@ using Tests.Framework.Integration;
 namespace Tests.XPack.Sql.QuerySql
 {
 	[SkipVersion("<6.4.0", "")]
-	public class QuerySqlApiTests : ApiIntegrationTestBase<XPackCluster, IQuerySqlResponse, IQuerySqlRequest, QuerySqlDescriptor, QuerySqlRequest>
+	public class QuerySqlApiTests : ApiIntegrationTestBase<XPackCluster, QuerySqlResponse, IQuerySqlRequest, QuerySqlDescriptor, QuerySqlRequest>
 	{
 		private static readonly string SqlQuery =
 			$@"SELECT type, name, startedOn, numberOfCommits
@@ -53,7 +53,7 @@ ORDER BY numberOfContributors DESC";
 			(client, r) => client.QuerySqlAsync(r)
 		);
 
-		protected override void ExpectResponse(IQuerySqlResponse response)
+		protected override void ExpectResponse(QuerySqlResponse response)
 		{
 			response.Cursor.Should().NotBeNullOrWhiteSpace("response cursor");
 			response.Rows.Should().NotBeNullOrEmpty();

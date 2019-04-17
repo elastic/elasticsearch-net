@@ -3,26 +3,15 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-	public interface IXPackInfoResponse : IResponse
+	public class XPackInfoResponse : ResponseBase
 	{
 		[DataMember(Name ="build")]
-		XPackBuildInformation Build { get; }
-
-		[DataMember(Name ="features")]
-		XPackFeatures Features { get; }
-
-		[DataMember(Name ="license")]
-		MinimalLicenseInformation License { get; }
-
-		[DataMember(Name ="tagline")]
-		string Tagline { get; }
-	}
-
-	public class XPackInfoResponse : ResponseBase, IXPackInfoResponse
-	{
 		public XPackBuildInformation Build { get; internal set; }
+		[DataMember(Name ="features")]
 		public XPackFeatures Features { get; internal set; }
+		[DataMember(Name ="license")]
 		public MinimalLicenseInformation License { get; internal set; }
+		[DataMember(Name ="tagline")]
 		public string Tagline { get; internal set; }
 	}
 

@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 
 namespace Tests.Indices.Analyze
 {
-	public class AnalyzeApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IAnalyzeResponse, IAnalyzeRequest, AnalyzeDescriptor, AnalyzeRequest>
+	public class AnalyzeApiTests : ApiIntegrationTestBase<ReadOnlyCluster, AnalyzeResponse, IAnalyzeRequest, AnalyzeDescriptor, AnalyzeRequest>
 	{
 		public AnalyzeApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -52,7 +52,7 @@ namespace Tests.Indices.Analyze
 	}
 
 	public class AnalyzeInlineAnalyzerApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IAnalyzeResponse, IAnalyzeRequest, AnalyzeDescriptor, AnalyzeRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, AnalyzeResponse, IAnalyzeRequest, AnalyzeDescriptor, AnalyzeRequest>
 	{
 		protected const string TextToAnalyze = "F# is <b>THE SUPERIOR</b> language :) :gandalf: ";
 
@@ -117,7 +117,7 @@ namespace Tests.Indices.Analyze
 			(client, r) => client.AnalyzeAsync(r)
 		);
 
-		protected override void ExpectResponse(IAnalyzeResponse response)
+		protected override void ExpectResponse(AnalyzeResponse response)
 		{
 			//TIL standard chops up words greater than `MaxTokenLength` classic tokenizer drops them
 			response.Tokens.Should().HaveCount(6);
@@ -127,7 +127,7 @@ namespace Tests.Indices.Analyze
 	}
 
 	public class AnalyzeInlineNormalizerApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IAnalyzeResponse, IAnalyzeRequest, AnalyzeDescriptor, AnalyzeRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, AnalyzeResponse, IAnalyzeRequest, AnalyzeDescriptor, AnalyzeRequest>
 	{
 		private const string TextToAnalyze = "F# is <b>THE SUPERIOR</b> language :) :gandalf: ";
 
@@ -183,7 +183,7 @@ namespace Tests.Indices.Analyze
 			(client, r) => client.AnalyzeAsync(r)
 		);
 
-		protected override void ExpectResponse(IAnalyzeResponse response)
+		protected override void ExpectResponse(AnalyzeResponse response)
 		{
 			response.Tokens.Should().HaveCount(1);
 			var token = response.Tokens.Single().Token;
@@ -224,7 +224,7 @@ namespace Tests.Indices.Analyze
 			}
 		}
 
-		protected override void ExpectResponse(IAnalyzeResponse response)
+		protected override void ExpectResponse(AnalyzeResponse response)
 		{
 			response.Tokens.Should().HaveCount(0);
 			response.Detail.Should().NotBeNull("details should not be null because explain was specified");

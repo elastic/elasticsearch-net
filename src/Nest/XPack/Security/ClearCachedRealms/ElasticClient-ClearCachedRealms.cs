@@ -8,19 +8,19 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc />
-		IClearCachedRealmsResponse ClearCachedRealms(Names realms, Func<ClearCachedRealmsDescriptor, IClearCachedRealmsRequest> selector = null);
+		ClearCachedRealmsResponse ClearCachedRealms(Names realms, Func<ClearCachedRealmsDescriptor, IClearCachedRealmsRequest> selector = null);
 
 		/// <inheritdoc />
-		IClearCachedRealmsResponse ClearCachedRealms(IClearCachedRealmsRequest request);
+		ClearCachedRealmsResponse ClearCachedRealms(IClearCachedRealmsRequest request);
 
 		/// <inheritdoc />
-		Task<IClearCachedRealmsResponse> ClearCachedRealmsAsync(Names realms,
+		Task<ClearCachedRealmsResponse> ClearCachedRealmsAsync(Names realms,
 			Func<ClearCachedRealmsDescriptor, IClearCachedRealmsRequest> selector = null,
 			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
-		Task<IClearCachedRealmsResponse> ClearCachedRealmsAsync(IClearCachedRealmsRequest request,
+		Task<ClearCachedRealmsResponse> ClearCachedRealmsAsync(IClearCachedRealmsRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -28,16 +28,16 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IClearCachedRealmsResponse ClearCachedRealms(Names realms, Func<ClearCachedRealmsDescriptor, IClearCachedRealmsRequest> selector = null
+		public ClearCachedRealmsResponse ClearCachedRealms(Names realms, Func<ClearCachedRealmsDescriptor, IClearCachedRealmsRequest> selector = null
 		) =>
 			ClearCachedRealms(selector.InvokeOrDefault(new ClearCachedRealmsDescriptor(realms)));
 
 		/// <inheritdoc />
-		public IClearCachedRealmsResponse ClearCachedRealms(IClearCachedRealmsRequest request) =>
+		public ClearCachedRealmsResponse ClearCachedRealms(IClearCachedRealmsRequest request) =>
 			DoRequest<IClearCachedRealmsRequest, ClearCachedRealmsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IClearCachedRealmsResponse> ClearCachedRealmsAsync(
+		public Task<ClearCachedRealmsResponse> ClearCachedRealmsAsync(
 			Names realms,
 			Func<ClearCachedRealmsDescriptor, IClearCachedRealmsRequest> selector = null,
 			CancellationToken cancellationToken = default
@@ -45,7 +45,7 @@ namespace Nest
 			ClearCachedRealmsAsync(selector.InvokeOrDefault(new ClearCachedRealmsDescriptor(realms)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IClearCachedRealmsResponse> ClearCachedRealmsAsync(IClearCachedRealmsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IClearCachedRealmsRequest, IClearCachedRealmsResponse, ClearCachedRealmsResponse>(request, request.RequestParameters, ct);
+		public Task<ClearCachedRealmsResponse> ClearCachedRealmsAsync(IClearCachedRealmsRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IClearCachedRealmsRequest, ClearCachedRealmsResponse>(request, request.RequestParameters, ct);
 	}
 }

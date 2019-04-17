@@ -13,7 +13,7 @@ using Tests.Framework.Integration;
 namespace Tests.Framework
 {
 	public abstract class ConnectionErrorTestBase<TCluster>
-		: RequestResponseApiTestBase<TCluster, IRootNodeInfoResponse, IRootNodeInfoRequest, RootNodeInfoDescriptor, RootNodeInfoRequest>
+		: RequestResponseApiTestBase<TCluster, RootNodeInfoResponse, IRootNodeInfoRequest, RootNodeInfoDescriptor, RootNodeInfoRequest>
 		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster, new()
 	{
 		protected ConnectionErrorTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

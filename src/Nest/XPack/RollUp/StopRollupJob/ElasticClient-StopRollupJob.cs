@@ -11,39 +11,39 @@ namespace Nest
 		/// Stops an existing, started rollup job. If the job does not exist an exception will be thrown.
 		/// Stopping an already stopped job has no action.
 		/// </summary>
-		IStopRollupJobResponse StopRollupJob(Id id, Func<StopRollupJobDescriptor, IStopRollupJobRequest> selector = null);
+		StopRollupJobResponse StopRollupJob(Id id, Func<StopRollupJobDescriptor, IStopRollupJobRequest> selector = null);
 
 		/// <inheritdoc cref="StopRollupJob(Nest.Id,System.Func{Nest.StopRollupJobDescriptor,Nest.IStopRollupJobRequest})" />
-		IStopRollupJobResponse StopRollupJob(IStopRollupJobRequest request);
+		StopRollupJobResponse StopRollupJob(IStopRollupJobRequest request);
 
 		/// <inheritdoc cref="StopRollupJob(Nest.Id,System.Func{Nest.StopRollupJobDescriptor,Nest.IStopRollupJobRequest})" />
-		Task<IStopRollupJobResponse> StopRollupJobAsync(Id id,
+		Task<StopRollupJobResponse> StopRollupJobAsync(Id id,
 			Func<StopRollupJobDescriptor, IStopRollupJobRequest> selector = null, CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="StopRollupJob(Nest.Id,System.Func{Nest.StopRollupJobDescriptor,Nest.IStopRollupJobRequest})" />
-		Task<IStopRollupJobResponse> StopRollupJobAsync(IStopRollupJobRequest request, CancellationToken ct = default);
+		Task<StopRollupJobResponse> StopRollupJobAsync(IStopRollupJobRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IStopRollupJobResponse StopRollupJob(Id id, Func<StopRollupJobDescriptor, IStopRollupJobRequest> selector = null) =>
+		public StopRollupJobResponse StopRollupJob(Id id, Func<StopRollupJobDescriptor, IStopRollupJobRequest> selector = null) =>
 			StopRollupJob(selector.InvokeOrDefault(new StopRollupJobDescriptor(id)));
 
 		/// <inheritdoc />
-		public IStopRollupJobResponse StopRollupJob(IStopRollupJobRequest request) =>
+		public StopRollupJobResponse StopRollupJob(IStopRollupJobRequest request) =>
 			DoRequest<IStopRollupJobRequest, StopRollupJobResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IStopRollupJobResponse> StopRollupJobAsync(
+		public Task<StopRollupJobResponse> StopRollupJobAsync(
 			Id id,
 			Func<StopRollupJobDescriptor, IStopRollupJobRequest> selector = null,
 			CancellationToken ct = default
 		) => StopRollupJobAsync(selector.InvokeOrDefault(new StopRollupJobDescriptor(id)), ct);
 
 		/// <inheritdoc />
-		public Task<IStopRollupJobResponse> StopRollupJobAsync(IStopRollupJobRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IStopRollupJobRequest, IStopRollupJobResponse, StopRollupJobResponse>(request, request.RequestParameters, ct);
+		public Task<StopRollupJobResponse> StopRollupJobAsync(IStopRollupJobRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IStopRollupJobRequest, StopRollupJobResponse>(request, request.RequestParameters, ct);
 	}
 }

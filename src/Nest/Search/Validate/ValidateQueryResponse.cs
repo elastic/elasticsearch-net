@@ -3,15 +3,8 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-	public interface IValidateQueryResponse : IResponse
-	{
-		IReadOnlyCollection<ValidationExplanation> Explanations { get; }
-		ShardStatistics Shards { get; }
-		bool Valid { get; }
-	}
-
 	[DataContract]
-	public class ValidateQueryResponse : ResponseBase, IValidateQueryResponse
+	public class ValidateQueryResponse : ResponseBase
 	{
 		/// <summary>
 		/// Gets the explanations if Explain() was set.

@@ -29,7 +29,7 @@ namespace Nest
 			return AliasesPointingToIndex(index, response);
 		}
 
-		private static IReadOnlyDictionary<string, AliasDefinition> AliasesPointingToIndex(IndexName index, IGetAliasResponse response)
+		private static IReadOnlyDictionary<string, AliasDefinition> AliasesPointingToIndex(IndexName index, GetAliasResponse response)
 		{
 			if (!response.IsValid || !response.Indices.HasAny()) return EmptyReadOnly<string, AliasDefinition>.Dictionary;
 

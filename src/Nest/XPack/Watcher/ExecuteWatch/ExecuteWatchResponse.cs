@@ -5,20 +5,12 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[InterfaceDataContract]
-	public interface IExecuteWatchResponse : IResponse
+	public class ExecuteWatchResponse : ResponseBase
 	{
 		[DataMember(Name = "_id")]
-		string Id { get; set; }
-
-		[DataMember(Name = "watch_record")]
-		WatchRecord WatchRecord { get; set; }
-	}
-
-	public class ExecuteWatchResponse : ResponseBase, IExecuteWatchResponse
-	{
 		public string Id { get; set; }
 
+		[DataMember(Name = "watch_record")]
 		public WatchRecord WatchRecord { get; set; }
 	}
 

@@ -57,7 +57,7 @@ namespace Tests.Document.Multiple.BulkAll
 		{
 			var seenPages = 0;
 
-			var droppedDocuments = new ConcurrentBag<Tuple<IBulkResponseItem, SmallObject>>();
+			var droppedDocuments = new ConcurrentBag<Tuple<BulkResponseItemBase, SmallObject>>();
 			//first we setup our cold observable
 			var observableBulk = Client.BulkAll(documents, f => f
 				.MaxDegreeOfParallelism(8)

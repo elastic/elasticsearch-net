@@ -3,13 +3,7 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-	public interface IActivateWatchResponse : IResponse
-	{
-		[DataMember(Name ="status")]
-		ActivationStatus Status { get; }
-	}
-
-	public class ActivateWatchResponse : ResponseBase, IActivateWatchResponse
+	public class ActivateWatchResponse : ResponseBase
 	{
 		[DataMember(Name ="status")]
 		public ActivationStatus Status { get; internal set; }

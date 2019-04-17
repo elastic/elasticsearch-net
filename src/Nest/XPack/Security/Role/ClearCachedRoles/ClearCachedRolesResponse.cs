@@ -3,18 +3,12 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-	public interface IClearCachedRolesResponse : IResponse
+	public class ClearCachedRolesResponse : ResponseBase
 	{
 		[DataMember(Name ="cluster_name")]
-		string ClusterName { get; }
+		public string ClusterName { get; internal set; }
 
 		[DataMember(Name ="nodes")]
-		IReadOnlyDictionary<string, SecurityNode> Nodes { get; }
-	}
-
-	public class ClearCachedRolesResponse : ResponseBase, IClearCachedRolesResponse
-	{
-		public string ClusterName { get; internal set; }
 		public IReadOnlyDictionary<string, SecurityNode> Nodes { get; internal set; } = EmptyReadOnly<string, SecurityNode>.Dictionary;
 	}
 }

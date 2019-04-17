@@ -7,36 +7,8 @@ using static Nest.Infer;
 
 namespace Nest
 {
-	public class TypeFieldMappings
-	{
-		[DataMember(Name = "mappings")]
-		[JsonFormatter(typeof(ResolvableReadOnlyDictionaryFormatter<Field, FieldMapping>))]
-		public IReadOnlyDictionary<Field, FieldMapping> Mappings { get; internal set; } = EmptyReadOnly<Field, FieldMapping>.Dictionary;
-	}
-
-	public class FieldMapping
-	{
-		[DataMember(Name = "full_name")]
-		public string FullName { get; internal set; }
-
-		[DataMember(Name = "mapping")]
-		[JsonFormatter(typeof(FieldMappingFormatter))]
-		public IReadOnlyDictionary<Field, IFieldMapping> Mapping { get; internal set; } = EmptyReadOnly<Field, IFieldMapping>.Dictionary;
-	}
-
-	public interface IGetFieldMappingResponse : IResponse
-	{
-		IReadOnlyDictionary<IndexName, TypeFieldMappings> Indices { get; }
-
-		IFieldMapping GetMapping(IndexName index, Field property);
-
-		IFieldMapping MappingFor<T>(Field property, IndexName index = null);
-
-		IFieldMapping MappingFor<T>(Expression<Func<T, object>> objectPath, IndexName index = null) where T : class;
-	}
-
 	[JsonFormatter(typeof(ResolvableDictionaryResponseFormatter<GetFieldMappingResponse, IndexName, TypeFieldMappings>))]
-	public class GetFieldMappingResponse : DictionaryResponseBase<IndexName, TypeFieldMappings>, IGetFieldMappingResponse
+	public class GetFieldMappingResponse : DictionaryResponseBase<IndexName, TypeFieldMappings>
 	{
 		[IgnoreDataMember]
 		public IReadOnlyDictionary<IndexName, TypeFieldMappings> Indices => Self.BackingDictionary;
@@ -56,6 +28,8 @@ namespace Nest
 			return fieldMapping.Mapping.TryGetValue(property, out var field) ? field : null;
 		}
 
+		public IFieldMapping MappingFor<T>(Field property) => MappingFor<T>(property, null);
+
 		public IFieldMapping MappingFor<T>(Field property, IndexName index) =>
 			GetMapping(index ?? Index<T>(), property);
 
@@ -70,4 +44,22 @@ namespace Nest
 			return indexMapping.Mappings;
 		}
 	}
+
+	public class TypeFieldMappings
+	{
+		[DataMember(Name = "mappings")]
+		[JsonFormatter(typeof(ResolvableReadOnlyDictionaryFormatter<Field, FieldMapping>))]
+		public IReadOnlyDictionary<Field, FieldMapping> Mappings { get; internal set; } = EmptyReadOnly<Field, FieldMapping>.Dictionary;
+	}
+
+	public class FieldMapping
+	{
+		[DataMember(Name = "full_name")]
+		public string FullName { get; internal set; }
+
+		[DataMember(Name = "mapping")]
+		[JsonFormatter(typeof(FieldMappingFormatter))]
+		public IReadOnlyDictionary<Field, IFieldMapping> Mapping { get; internal set; } = EmptyReadOnly<Field, IFieldMapping>.Dictionary;
+	}
+
 }

@@ -2,13 +2,8 @@
 
 namespace Nest
 {
-	public interface IGetScriptResponse : IResponse
-	{
-		IStoredScript Script { get; }
-	}
-
 	[DataContract]
-	public class GetScriptResponse : ResponseBase, IGetScriptResponse
+	public class GetScriptResponse : ResponseBase
 	{
 		[DataMember(Name ="script")]
 		public IStoredScript Script { get; set; }

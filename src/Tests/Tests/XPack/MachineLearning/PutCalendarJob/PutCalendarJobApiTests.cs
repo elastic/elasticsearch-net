@@ -12,7 +12,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.PutCalendarJob
 {
 	[SkipVersion("<6.4.0", "Calendar functions for machine learning introduced in 6.4.0")]
-	public class PutCalendarJobApiTests : MachineLearningIntegrationTestBase<IPutCalendarJobResponse, IPutCalendarJobRequest, PutCalendarJobDescriptor, PutCalendarJobRequest>
+	public class PutCalendarJobApiTests : MachineLearningIntegrationTestBase<PutCalendarJobResponse, IPutCalendarJobRequest, PutCalendarJobDescriptor, PutCalendarJobRequest>
 	{
 		public PutCalendarJobApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -50,7 +50,7 @@ namespace Tests.XPack.MachineLearning.PutCalendarJob
 
 		protected override PutCalendarJobDescriptor NewDescriptor() => new PutCalendarJobDescriptor(CallIsolatedValue + "_calendar",CallIsolatedValue + "_job");
 
-		protected override void ExpectResponse(IPutCalendarJobResponse response)
+		protected override void ExpectResponse(PutCalendarJobResponse response)
 		{
 			response.ShouldBeValid();
 

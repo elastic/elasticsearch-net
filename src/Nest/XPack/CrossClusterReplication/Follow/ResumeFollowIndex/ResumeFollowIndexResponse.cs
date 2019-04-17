@@ -2,7 +2,5 @@
 
 namespace Nest
 {
-	public interface IResumeFollowIndexResponse : IAcknowledgedResponse { }
-
-	public class ResumeFollowIndexResponse : AcknowledgedResponseBase, IResumeFollowIndexResponse { }
+	public class ResumeFollowIndexResponse : AcknowledgedResponseBase { }
 }

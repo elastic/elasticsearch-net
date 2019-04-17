@@ -10,7 +10,7 @@ using static Nest.Infer;
 namespace Tests.Indices.AliasManagement.AliasExists
 {
 	public class AliasExistsApiTests
-		: ApiIntegrationTestBase<WritableCluster, IExistsResponse, IAliasExistsRequest, AliasExistsDescriptor, AliasExistsRequest>
+		: ApiIntegrationTestBase<WritableCluster, ExistsResponse, IAliasExistsRequest, AliasExistsDescriptor, AliasExistsRequest>
 	{
 		public AliasExistsApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -42,11 +42,11 @@ namespace Tests.Indices.AliasManagement.AliasExists
 
 		protected override AliasExistsDescriptor NewDescriptor() => new AliasExistsDescriptor(Names(CallIsolatedValue + "-alias"));
 
-		protected override void ExpectResponse(IExistsResponse response) => response.Exists.Should().BeTrue();
+		protected override void ExpectResponse(ExistsResponse response) => response.Exists.Should().BeTrue();
 	}
 
 	public class AliasExistsNotFoundApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IExistsResponse, IAliasExistsRequest, AliasExistsDescriptor, AliasExistsRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ExistsResponse, IAliasExistsRequest, AliasExistsDescriptor, AliasExistsRequest>
 
 	{
 		public AliasExistsNotFoundApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -71,7 +71,7 @@ namespace Tests.Indices.AliasManagement.AliasExists
 
 		protected override AliasExistsDescriptor NewDescriptor() => new AliasExistsDescriptor(Names("unknown-alias"));
 
-		protected override void ExpectResponse(IExistsResponse response)
+		protected override void ExpectResponse(ExistsResponse response)
 		{
 			response.ServerError.Should().BeNull();
 			response.Exists.Should().BeFalse();

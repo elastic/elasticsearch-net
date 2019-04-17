@@ -12,7 +12,7 @@ using Tests.Framework.Integration;
 namespace Tests.Cluster.NodesInfo
 {
 	public class NodesInfoApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, INodesInfoResponse, INodesInfoRequest, NodesInfoDescriptor, NodesInfoRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, NodesInfoResponse, INodesInfoRequest, NodesInfoDescriptor, NodesInfoRequest>
 	{
 		public NodesInfoApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -28,7 +28,7 @@ namespace Tests.Cluster.NodesInfo
 			(client, r) => client.NodesInfoAsync(r)
 		);
 
-		protected override void ExpectResponse(INodesInfoResponse response)
+		protected override void ExpectResponse(NodesInfoResponse response)
 		{
 			response.ClusterName.Should().NotBeNullOrWhiteSpace();
 			Assert(response.NodeStatistics);
@@ -156,7 +156,7 @@ namespace Tests.Cluster.NodesInfo
 			(client, r) => client.NodesInfoAsync(r)
 		);
 
-		protected override void ExpectResponse(INodesInfoResponse response)
+		protected override void ExpectResponse(NodesInfoResponse response)
 		{
 			response.ClusterName.Should().NotBeNullOrWhiteSpace();
 			Assert(response.NodeStatistics);

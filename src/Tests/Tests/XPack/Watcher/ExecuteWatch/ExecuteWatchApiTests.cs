@@ -14,7 +14,7 @@ using Xunit;
 namespace Tests.XPack.Watcher.ExecuteWatch
 {
 	public class ExecuteWatchApiTests
-		: ApiIntegrationTestBase<XPackCluster, IExecuteWatchResponse, IExecuteWatchRequest, ExecuteWatchDescriptor, ExecuteWatchRequest>
+		: ApiIntegrationTestBase<XPackCluster, ExecuteWatchResponse, IExecuteWatchRequest, ExecuteWatchDescriptor, ExecuteWatchRequest>
 	{
 		private readonly DateTimeOffset _triggeredDateTime = new DateTimeOffset(2016, 11, 17, 13, 00, 00, TimeSpan.Zero);
 
@@ -190,7 +190,7 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 			(client, r) => client.ExecuteWatchAsync(r)
 		);
 
-		protected override void ExpectResponse(IExecuteWatchResponse response)
+		protected override void ExpectResponse(ExecuteWatchResponse response)
 		{
 			response.ShouldBeValid();
 			response.WatchRecord.Should().NotBeNull();
@@ -270,7 +270,7 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 	}
 
 	public class ExecuteInlineWatchApiTests
-		: ApiIntegrationTestBase<XPackCluster, IExecuteWatchResponse, IExecuteWatchRequest, ExecuteWatchDescriptor, ExecuteWatchRequest>
+		: ApiIntegrationTestBase<XPackCluster, ExecuteWatchResponse, IExecuteWatchRequest, ExecuteWatchDescriptor, ExecuteWatchRequest>
 	{
 		private readonly DateTimeOffset _triggeredDateTime = new DateTimeOffset(2016, 11, 17, 13, 00, 00, TimeSpan.Zero);
 
@@ -610,7 +610,7 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 			(client, r) => client.ExecuteWatchAsync(r)
 		);
 
-		protected override void ExpectResponse(IExecuteWatchResponse response)
+		protected override void ExpectResponse(ExecuteWatchResponse response)
 		{
 			response.ShouldBeValid();
 			response.WatchRecord.TriggerEvent.Should().NotBeNull();

@@ -10,7 +10,7 @@ using Tests.Framework.Integration;
 namespace Tests.Search
 {
 	public abstract class SearchUsageTestBase
-		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+		: ApiIntegrationTestBase<ReadOnlyCluster, SearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		protected TermQuery ProjectFilter = new TermQuery
 		{

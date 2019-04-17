@@ -27,7 +27,7 @@ namespace Tests.XPack.Security.Privileges
 		public ApplicationPrivilegesApiTests(XPackCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
 		{
 			{
-				PutPrivilegesStep, u => u.Calls<PutPrivilegesDescriptor, PutPrivilegesRequest, IPutPrivilegesRequest, IPutPrivilegesResponse>(
+				PutPrivilegesStep, u => u.Calls<PutPrivilegesDescriptor, PutPrivilegesRequest, IPutPrivilegesRequest, PutPrivilegesResponse>(
 					v => new PutPrivilegesRequest
 					{
 						Applications = new AppPrivileges
@@ -69,7 +69,7 @@ namespace Tests.XPack.Security.Privileges
 				)
 			},
 			{
-				GetPrivilegesStep, u => u.Calls<GetPrivilegesDescriptor, GetPrivilegesRequest, IGetPrivilegesRequest, IGetPrivilegesResponse>(
+				GetPrivilegesStep, u => u.Calls<GetPrivilegesDescriptor, GetPrivilegesRequest, IGetPrivilegesRequest, GetPrivilegesResponse>(
 					v => new GetPrivilegesRequest($"app-{v}", $"p1-{v}"),
 					(v, d) => d.Application($"app-{v}").Name($"p1-{v}"),
 					(v, c, f) => c.GetPrivileges(f),
@@ -90,7 +90,7 @@ namespace Tests.XPack.Security.Privileges
 					r => r.Roles("admin", $"role-{v}").Password($"pass-{v}")))
 			},
 			{
-				HasPrivilegesStep, u => u.Calls<HasPrivilegesDescriptor, HasPrivilegesRequest, IHasPrivilegesRequest, IHasPrivilegesResponse>(
+				HasPrivilegesStep, u => u.Calls<HasPrivilegesDescriptor, HasPrivilegesRequest, IHasPrivilegesRequest, HasPrivilegesResponse>(
 					v => new HasPrivilegesRequest
 					{
 						RequestConfiguration = new RequestConfiguration
@@ -127,7 +127,7 @@ namespace Tests.XPack.Security.Privileges
 				)
 			},
 			{
-				GetUserPrivilegesStep, u => u.Calls<GetUserPrivilegesDescriptor, GetUserPrivilegesRequest, IGetUserPrivilegesRequest, IGetUserPrivilegesResponse>(
+				GetUserPrivilegesStep, u => u.Calls<GetUserPrivilegesDescriptor, GetUserPrivilegesRequest, IGetUserPrivilegesRequest, GetUserPrivilegesResponse>(
 					v => new GetUserPrivilegesRequest
 					{
 						RequestConfiguration = new RequestConfiguration
@@ -146,7 +146,7 @@ namespace Tests.XPack.Security.Privileges
 				)
 			},
 			{
-				DeletePrivilegesStep, u => u.Calls<DeletePrivilegesDescriptor, DeletePrivilegesRequest, IDeletePrivilegesRequest, IDeletePrivilegesResponse>(
+				DeletePrivilegesStep, u => u.Calls<DeletePrivilegesDescriptor, DeletePrivilegesRequest, IDeletePrivilegesRequest, DeletePrivilegesResponse>(
 					v => new DeletePrivilegesRequest($"app-{v}", $"p1-{v}"),
 					(v, d) => d,
 					(v, c, f) => c.DeletePrivileges($"app-{v}", $"p1-{v}"),

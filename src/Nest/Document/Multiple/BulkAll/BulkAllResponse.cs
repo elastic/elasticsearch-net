@@ -4,35 +4,21 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-	/// <summary>
-	/// Notification for each bulk response, indicates the page its currently processing and how many retries it took to index this buffer
-	/// </summary>
-	public interface IBulkAllResponse
-	{
-		/// <summary>This is the Nth buffer.</summary>
-		long Page { get; }
-
-		/// <summary>The number of back off retries were needed to store this document.</summary>
-		int Retries { get; }
-
-		/// <summary>The items returned from the bulk response</summary>
-		IReadOnlyCollection<IBulkResponseItem> Items { get; }
-	}
-
 	/// <inheritdoc />
 	[DataContract]
-	public class BulkAllResponse : IBulkAllResponse
+	public class BulkAllResponse
 	{
+		// TODO: why is this here?
 		/// <inheritdoc />
 		public bool IsValid => true;
 
-		/// <inheritdoc />
+		/// <summary>This is the Nth buffer.</summary>
 		public long Page { get; internal set; }
 
-		/// <inheritdoc />
+		/// <summary>The number of back off retries were needed to store this document.</summary>
 		public int Retries { get; internal set; }
 
-		/// <inheritdoc />
-		public IReadOnlyCollection<IBulkResponseItem> Items { get; internal set; }
+		/// <summary>The items returned from the bulk response</summary>
+		public IReadOnlyCollection<BulkResponseItemBase> Items { get; internal set; } = EmptyReadOnly<BulkResponseItemBase>.Collection;
 	}
 }

@@ -10,19 +10,19 @@ namespace Nest
 		/// <summary>
 		/// Retrieve anomaly records for a machine learning job.
 		/// </summary>
-		IGetAnomalyRecordsResponse GetAnomalyRecords(Id jobId, Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> selector = null);
+		GetAnomalyRecordsResponse GetAnomalyRecords(Id jobId, Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> selector = null);
 
 		/// <inheritdoc />
-		IGetAnomalyRecordsResponse GetAnomalyRecords(IGetAnomalyRecordsRequest request);
+		GetAnomalyRecordsResponse GetAnomalyRecords(IGetAnomalyRecordsRequest request);
 
 		/// <inheritdoc />
-		Task<IGetAnomalyRecordsResponse> GetAnomalyRecordsAsync(Id jobId,
+		Task<GetAnomalyRecordsResponse> GetAnomalyRecordsAsync(Id jobId,
 			Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IGetAnomalyRecordsResponse> GetAnomalyRecordsAsync(IGetAnomalyRecordsRequest request,
+		Task<GetAnomalyRecordsResponse> GetAnomalyRecordsAsync(IGetAnomalyRecordsRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -30,22 +30,22 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IGetAnomalyRecordsResponse GetAnomalyRecords(Id jobId, Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> selector = null) =>
+		public GetAnomalyRecordsResponse GetAnomalyRecords(Id jobId, Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> selector = null) =>
 			GetAnomalyRecords(selector.InvokeOrDefault(new GetAnomalyRecordsDescriptor(jobId)));
 
 		/// <inheritdoc />
-		public IGetAnomalyRecordsResponse GetAnomalyRecords(IGetAnomalyRecordsRequest request) =>
+		public GetAnomalyRecordsResponse GetAnomalyRecords(IGetAnomalyRecordsRequest request) =>
 			DoRequest<IGetAnomalyRecordsRequest, GetAnomalyRecordsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IGetAnomalyRecordsResponse> GetAnomalyRecordsAsync(
+		public Task<GetAnomalyRecordsResponse> GetAnomalyRecordsAsync(
 			Id jobId,
 			Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> selector = null,
 			CancellationToken ct = default
 		) => GetAnomalyRecordsAsync(selector.InvokeOrDefault(new GetAnomalyRecordsDescriptor(jobId)), ct);
 
 		/// <inheritdoc />
-		public Task<IGetAnomalyRecordsResponse> GetAnomalyRecordsAsync(IGetAnomalyRecordsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IGetAnomalyRecordsRequest, IGetAnomalyRecordsResponse, GetAnomalyRecordsResponse>(request, request.RequestParameters, ct);
+		public Task<GetAnomalyRecordsResponse> GetAnomalyRecordsAsync(IGetAnomalyRecordsRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IGetAnomalyRecordsRequest, GetAnomalyRecordsResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -2,20 +2,8 @@
 
 namespace Nest
 {
-	public interface ICreateResponse : IResponse
-	{
-		string Id { get; }
-		string Index { get; }
-		long PrimaryTerm { get; }
-		Result Result { get; }
-		long SequenceNumber { get; }
-		ShardStatistics Shards { get; }
-		string Type { get; }
-		long Version { get; }
-	}
-
 	[DataContract]
-	public class CreateResponse : ResponseBase, ICreateResponse
+	public class CreateResponse : ResponseBase
 	{
 		[DataMember(Name ="_id")]
 		public string Id { get; internal set; }

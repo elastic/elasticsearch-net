@@ -12,18 +12,18 @@ namespace Nest
 		/// A datafeed must be started in order to retrieve data from Elasticsearch. A datafeed can be started and stopped multiple times throughout
 		/// its lifecycle.
 		/// </summary>
-		IStartDatafeedResponse StartDatafeed(Id datafeedId, Func<StartDatafeedDescriptor, IStartDatafeedRequest> selector = null);
+		StartDatafeedResponse StartDatafeed(Id datafeedId, Func<StartDatafeedDescriptor, IStartDatafeedRequest> selector = null);
 
 		/// <inheritdoc />
-		IStartDatafeedResponse StartDatafeed(IStartDatafeedRequest request);
+		StartDatafeedResponse StartDatafeed(IStartDatafeedRequest request);
 
 		/// <inheritdoc />
-		Task<IStartDatafeedResponse> StartDatafeedAsync(Id datafeedId, Func<StartDatafeedDescriptor, IStartDatafeedRequest> selector = null,
+		Task<StartDatafeedResponse> StartDatafeedAsync(Id datafeedId, Func<StartDatafeedDescriptor, IStartDatafeedRequest> selector = null,
 			CancellationToken cancellationToken = default
 		);
 
 		/// <inheritdoc />
-		Task<IStartDatafeedResponse> StartDatafeedAsync(IStartDatafeedRequest request,
+		Task<StartDatafeedResponse> StartDatafeedAsync(IStartDatafeedRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -31,15 +31,15 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IStartDatafeedResponse StartDatafeed(Id datafeedId, Func<StartDatafeedDescriptor, IStartDatafeedRequest> selector = null) =>
+		public StartDatafeedResponse StartDatafeed(Id datafeedId, Func<StartDatafeedDescriptor, IStartDatafeedRequest> selector = null) =>
 			StartDatafeed(selector.InvokeOrDefault(new StartDatafeedDescriptor(datafeedId)));
 
 		/// <inheritdoc />
-		public IStartDatafeedResponse StartDatafeed(IStartDatafeedRequest request) =>
+		public StartDatafeedResponse StartDatafeed(IStartDatafeedRequest request) =>
 			DoRequest<IStartDatafeedRequest, StartDatafeedResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IStartDatafeedResponse> StartDatafeedAsync(
+		public Task<StartDatafeedResponse> StartDatafeedAsync(
 			Id datafeedId,
 			Func<StartDatafeedDescriptor, IStartDatafeedRequest> selector = null,
 			CancellationToken cancellationToken = default
@@ -47,8 +47,8 @@ namespace Nest
 			StartDatafeedAsync(selector.InvokeOrDefault(new StartDatafeedDescriptor(datafeedId)), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IStartDatafeedResponse> StartDatafeedAsync(IStartDatafeedRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IStartDatafeedRequest, IStartDatafeedResponse, StartDatafeedResponse>
+		public Task<StartDatafeedResponse> StartDatafeedAsync(IStartDatafeedRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IStartDatafeedRequest, StartDatafeedResponse>
 				(request, request.RequestParameters, ct);
 	}
 }

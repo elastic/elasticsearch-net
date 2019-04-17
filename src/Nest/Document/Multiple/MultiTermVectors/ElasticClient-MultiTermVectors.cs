@@ -13,18 +13,18 @@ namespace Nest
 		/// <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-termvectors.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-termvectors.html</a>
 		/// </summary>
 		/// <param name="selector">The descriptor describing the multi termvectors operation</param>
-		IMultiTermVectorsResponse MultiTermVectors(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector = null);
+		MultiTermVectorsResponse MultiTermVectors(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector = null);
 
 		/// <inheritdoc cref="MultiTermVectors(System.Func{Nest.MultiTermVectorsDescriptor,Nest.IMultiTermVectorsRequest})" />
-		IMultiTermVectorsResponse MultiTermVectors(IMultiTermVectorsRequest request);
+		MultiTermVectorsResponse MultiTermVectors(IMultiTermVectorsRequest request);
 
 		/// <inheritdoc cref="MultiTermVectors(System.Func{Nest.MultiTermVectorsDescriptor,Nest.IMultiTermVectorsRequest})" />
-		Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector = null,
+		Task<MultiTermVectorsResponse> MultiTermVectorsAsync(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc cref="MultiTermVectors(System.Func{Nest.MultiTermVectorsDescriptor,Nest.IMultiTermVectorsRequest})" />
-		Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest request,
+		Task<MultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -32,21 +32,21 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IMultiTermVectorsResponse MultiTermVectors(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector = null) =>
+		public MultiTermVectorsResponse MultiTermVectors(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector = null) =>
 			MultiTermVectors(selector.InvokeOrDefault(new MultiTermVectorsDescriptor()));
 
 		/// <inheritdoc />
-		public IMultiTermVectorsResponse MultiTermVectors(IMultiTermVectorsRequest request) =>
+		public MultiTermVectorsResponse MultiTermVectors(IMultiTermVectorsRequest request) =>
 			DoRequest<IMultiTermVectorsRequest, MultiTermVectorsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(
+		public Task<MultiTermVectorsResponse> MultiTermVectorsAsync(
 			Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector = null,
 			CancellationToken ct = default
 		) => MultiTermVectorsAsync(selector.InvokeOrDefault(new MultiTermVectorsDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IMultiTermVectorsRequest, IMultiTermVectorsResponse, MultiTermVectorsResponse>(request, request.RequestParameters, ct);
+		public Task<MultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IMultiTermVectorsRequest, MultiTermVectorsResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -11,7 +11,7 @@ using Tests.Framework.Integration;
 
 namespace Tests.Document.Multiple.Bulk
 {
-	public class BulkApiTests : ApiIntegrationTestBase<WritableCluster, IBulkResponse, IBulkRequest, BulkDescriptor, BulkRequest>
+	public class BulkApiTests : ApiIntegrationTestBase<WritableCluster, BulkResponse, IBulkRequest, BulkDescriptor, BulkRequest>
 	{
 		public BulkApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -133,7 +133,7 @@ namespace Tests.Document.Multiple.Bulk
 			base.IntegrationSetup(client, values);
 		}
 
-		protected override void ExpectResponse(IBulkResponse response)
+		protected override void ExpectResponse(BulkResponse response)
 		{
 			response.Took.Should().BeGreaterThan(0);
 			response.Errors.Should().BeFalse();

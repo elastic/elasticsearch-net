@@ -13,7 +13,7 @@ namespace Tests.XPack.Security.Role.ClearCachedRoles
 {
 	[SkipVersion("<2.3.0", "")]
 	public class ClearCachedRolesApiTests
-		: ApiIntegrationTestBase<XPackCluster, IClearCachedRolesResponse, IClearCachedRolesRequest, ClearCachedRolesDescriptor,
+		: ApiIntegrationTestBase<XPackCluster, ClearCachedRolesResponse, IClearCachedRolesRequest, ClearCachedRolesDescriptor,
 			ClearCachedRolesRequest>
 	{
 		public ClearCachedRolesApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -44,7 +44,7 @@ namespace Tests.XPack.Security.Role.ClearCachedRoles
 
 		protected override ClearCachedRolesDescriptor NewDescriptor() => new ClearCachedRolesDescriptor(Role);
 
-		protected override void ExpectResponse(IClearCachedRolesResponse response)
+		protected override void ExpectResponse(ClearCachedRolesResponse response)
 		{
 			response.ClusterName.Should().NotBeNullOrWhiteSpace();
 			response.Nodes.Should().NotBeEmpty().And.HaveCount(1);

@@ -11,7 +11,7 @@ using Tests.Framework.Integration;
 namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 {
 	public class PutIndexTemplateApiTests
-		: ApiIntegrationTestBase<WritableCluster, IPutIndexTemplateResponse, IPutIndexTemplateRequest, PutIndexTemplateDescriptor,
+		: ApiIntegrationTestBase<WritableCluster, PutIndexTemplateResponse, IPutIndexTemplateRequest, PutIndexTemplateDescriptor,
 			PutIndexTemplateRequest>
 	{
 		public PutIndexTemplateApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -105,7 +105,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 
 		protected override PutIndexTemplateDescriptor NewDescriptor() => new PutIndexTemplateDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(IPutIndexTemplateResponse response)
+		protected override void ExpectResponse(PutIndexTemplateResponse response)
 		{
 			response.ShouldBeValid();
 			response.Acknowledged.Should().BeTrue();

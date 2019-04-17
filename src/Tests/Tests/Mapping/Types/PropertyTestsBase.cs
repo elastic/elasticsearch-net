@@ -11,7 +11,7 @@ using Tests.Framework.Integration;
 namespace Tests.Mapping.Types
 {
 	public abstract class PropertyTestsBase
-		: ApiIntegrationAgainstNewIndexTestBase<WritableCluster, IPutMappingResponse, IPutMappingRequest, PutMappingDescriptor<Project>,
+		: ApiIntegrationAgainstNewIndexTestBase<WritableCluster, PutMappingResponse, IPutMappingRequest, PutMappingDescriptor<Project>,
 			PutMappingRequest<Project>>
 	{
 		protected PropertyTestsBase(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

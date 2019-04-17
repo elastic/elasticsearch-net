@@ -3,19 +3,12 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-	public interface IGetDatafeedsResponse : IResponse
+	public class GetDatafeedsResponse : ResponseBase
 	{
 		[DataMember(Name ="count")]
-		long Count { get; }
-
-		[DataMember(Name ="datafeeds")]
-		IReadOnlyCollection<DatafeedConfig> Datafeeds { get; }
-	}
-
-	public class GetDatafeedsResponse : ResponseBase, IGetDatafeedsResponse
-	{
 		public long Count { get; internal set; }
 
+		[DataMember(Name ="datafeeds")]
 		public IReadOnlyCollection<DatafeedConfig> Datafeeds { get; internal set; } = EmptyReadOnly<DatafeedConfig>.Collection;
 	}
 }

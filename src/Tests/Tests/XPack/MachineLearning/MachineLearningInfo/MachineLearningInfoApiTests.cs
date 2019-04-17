@@ -10,7 +10,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.MachineLearningInfo
 {
 	public class MachineLearningInfoApiTests
-		: MachineLearningIntegrationTestBase<IMachineLearningInfoResponse, IMachineLearningInfoRequest, MachineLearningInfoDescriptor, MachineLearningInfoRequest>
+		: MachineLearningIntegrationTestBase<MachineLearningInfoResponse, IMachineLearningInfoRequest, MachineLearningInfoDescriptor, MachineLearningInfoRequest>
 	{
 		public MachineLearningInfoApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -32,7 +32,7 @@ namespace Tests.XPack.MachineLearning.MachineLearningInfo
 
 		protected override MachineLearningInfoDescriptor NewDescriptor() => new MachineLearningInfoDescriptor();
 
-		protected override void ExpectResponse(IMachineLearningInfoResponse response)
+		protected override void ExpectResponse(MachineLearningInfoResponse response)
 		{
 			response.ShouldBeValid();
 

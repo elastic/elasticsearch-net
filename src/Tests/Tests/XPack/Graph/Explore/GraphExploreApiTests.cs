@@ -14,7 +14,7 @@ namespace Tests.XPack.Graph.Explore
 {
 	[SkipVersion("<2.3.0", "")]
 	public class GraphExploreApiTests
-		: ApiIntegrationTestBase<XPackCluster, IGraphExploreResponse, IGraphExploreRequest, GraphExploreDescriptor<Project>, GraphExploreRequest>
+		: ApiIntegrationTestBase<XPackCluster, GraphExploreResponse, IGraphExploreRequest, GraphExploreDescriptor<Project>, GraphExploreRequest>
 	{
 		public GraphExploreApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -144,7 +144,7 @@ namespace Tests.XPack.Graph.Explore
 			(client, r) => client.GraphExploreAsync(r)
 		);
 
-		protected override void ExpectResponse(IGraphExploreResponse response)
+		protected override void ExpectResponse(GraphExploreResponse response)
 		{
 			response.Failures.Should().BeEmpty();
 			response.Connections.Should().NotBeEmpty();

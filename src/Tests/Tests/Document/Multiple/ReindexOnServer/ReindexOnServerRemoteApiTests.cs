@@ -10,7 +10,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 {
 	[SkipVersion("<2.3.0", "")]
 	public class ReindexOnServerRemoteApiTests
-		: ApiTestBase<IntrusiveOperationCluster, IReindexOnServerResponse, IReindexOnServerRequest, ReindexOnServerDescriptor, ReindexOnServerRequest>
+		: ApiTestBase<IntrusiveOperationCluster, ReindexOnServerResponse, IReindexOnServerRequest, ReindexOnServerDescriptor, ReindexOnServerRequest>
 	{
 		private readonly Uri _host = new Uri("http://myremoteserver.example:9200");
 

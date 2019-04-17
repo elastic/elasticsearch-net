@@ -69,7 +69,7 @@ namespace Tests.Aggregations.Pipeline.PercentilesBucket
 				Percents = new[] { 95, 99, 99.9 }
 			};
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
+		protected override void ExpectResponse(SearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 

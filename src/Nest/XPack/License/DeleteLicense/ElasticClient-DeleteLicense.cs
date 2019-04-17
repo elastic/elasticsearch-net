@@ -8,18 +8,18 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc />
-		IDeleteLicenseResponse DeleteLicense(Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector = null);
+		DeleteLicenseResponse DeleteLicense(Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector = null);
 
 		/// <inheritdoc />
-		IDeleteLicenseResponse DeleteLicense(IDeleteLicenseRequest request);
+		DeleteLicenseResponse DeleteLicense(IDeleteLicenseRequest request);
 
 		/// <inheritdoc />
-		Task<IDeleteLicenseResponse> DeleteLicenseAsync(Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector = null,
+		Task<DeleteLicenseResponse> DeleteLicenseAsync(Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IDeleteLicenseResponse> DeleteLicenseAsync(IDeleteLicenseRequest request,
+		Task<DeleteLicenseResponse> DeleteLicenseAsync(IDeleteLicenseRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -27,21 +27,21 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IDeleteLicenseResponse DeleteLicense(Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector = null) =>
+		public DeleteLicenseResponse DeleteLicense(Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector = null) =>
 			DeleteLicense(selector.InvokeOrDefault(new DeleteLicenseDescriptor()));
 
 		/// <inheritdoc />
-		public IDeleteLicenseResponse DeleteLicense(IDeleteLicenseRequest request) =>
+		public DeleteLicenseResponse DeleteLicense(IDeleteLicenseRequest request) =>
 			DoRequest<IDeleteLicenseRequest, DeleteLicenseResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IDeleteLicenseResponse> DeleteLicenseAsync(
+		public Task<DeleteLicenseResponse> DeleteLicenseAsync(
 			Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector = null,
 			CancellationToken ct = default
 		) => DeleteLicenseAsync(selector.InvokeOrDefault(new DeleteLicenseDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IDeleteLicenseResponse> DeleteLicenseAsync(IDeleteLicenseRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IDeleteLicenseRequest, IDeleteLicenseResponse, DeleteLicenseResponse>(request, request.RequestParameters, ct);
+		public Task<DeleteLicenseResponse> DeleteLicenseAsync(IDeleteLicenseRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IDeleteLicenseRequest, DeleteLicenseResponse>(request, request.RequestParameters, ct);
 	}
 }

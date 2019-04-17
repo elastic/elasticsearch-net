@@ -8,7 +8,7 @@ using Tests.Framework.Integration;
 namespace Tests.Indices.IndexManagement.OpenCloseIndex.OpenIndex
 {
 	public class OpenIndexApiTests
-		: ApiIntegrationTestBase<WritableCluster, IOpenIndexResponse, IOpenIndexRequest, OpenIndexDescriptor, OpenIndexRequest>
+		: ApiIntegrationTestBase<WritableCluster, OpenIndexResponse, IOpenIndexRequest, OpenIndexDescriptor, OpenIndexRequest>
 	{
 		public OpenIndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

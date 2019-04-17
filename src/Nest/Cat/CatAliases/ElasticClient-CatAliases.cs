@@ -8,18 +8,18 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc />
-		ICatResponse<CatAliasesRecord> CatAliases(Func<CatAliasesDescriptor, ICatAliasesRequest> selector = null);
+		CatResponse<CatAliasesRecord> CatAliases(Func<CatAliasesDescriptor, ICatAliasesRequest> selector = null);
 
 		/// <inheritdoc />
-		ICatResponse<CatAliasesRecord> CatAliases(ICatAliasesRequest request);
+		CatResponse<CatAliasesRecord> CatAliases(ICatAliasesRequest request);
 
 		/// <inheritdoc />
-		Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(Func<CatAliasesDescriptor, ICatAliasesRequest> selector = null,
+		Task<CatResponse<CatAliasesRecord>> CatAliasesAsync(Func<CatAliasesDescriptor, ICatAliasesRequest> selector = null,
 			CancellationToken ct = default(CancellationToken)
 		);
 
 		/// <inheritdoc />
-		Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(ICatAliasesRequest request,
+		Task<CatResponse<CatAliasesRecord>> CatAliasesAsync(ICatAliasesRequest request,
 			CancellationToken ct = default(CancellationToken)
 		);
 	}
@@ -27,22 +27,22 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public ICatResponse<CatAliasesRecord> CatAliases(Func<CatAliasesDescriptor, ICatAliasesRequest> selector = null) =>
+		public CatResponse<CatAliasesRecord> CatAliases(Func<CatAliasesDescriptor, ICatAliasesRequest> selector = null) =>
 			CatAliases(selector.InvokeOrDefault(new CatAliasesDescriptor()));
 
 		/// <inheritdoc />
-		public ICatResponse<CatAliasesRecord> CatAliases(ICatAliasesRequest request) =>
+		public CatResponse<CatAliasesRecord> CatAliases(ICatAliasesRequest request) =>
 			DoCat<ICatAliasesRequest, CatAliasesRequestParameters, CatAliasesRecord>(request);
 
 		/// <inheritdoc />
-		public Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(
+		public Task<CatResponse<CatAliasesRecord>> CatAliasesAsync(
 			Func<CatAliasesDescriptor, ICatAliasesRequest> selector = null,
 			CancellationToken ct = default
 		) =>
 			CatAliasesAsync(selector.InvokeOrDefault(new CatAliasesDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(ICatAliasesRequest request, CancellationToken ct = default) =>
+		public Task<CatResponse<CatAliasesRecord>> CatAliasesAsync(ICatAliasesRequest request, CancellationToken ct = default) =>
 			DoCatAsync<ICatAliasesRequest, CatAliasesRequestParameters, CatAliasesRecord>(request, ct);
 	}
 }

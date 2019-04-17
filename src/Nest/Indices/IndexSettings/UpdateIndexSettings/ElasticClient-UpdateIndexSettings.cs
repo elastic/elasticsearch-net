@@ -13,20 +13,20 @@ namespace Nest
 		/// <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-update-settings.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-update-settings.html</a>
 		/// </summary>
 		/// <param name="selector">A descriptor that strongly types all the updateable settings</param>
-		IUpdateIndexSettingsResponse UpdateIndexSettings(Indices indices, Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector);
+		UpdateIndexSettingsResponse UpdateIndexSettings(Indices indices, Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector);
 
 		/// <inheritdoc />
-		IUpdateIndexSettingsResponse UpdateIndexSettings(IUpdateIndexSettingsRequest request);
+		UpdateIndexSettingsResponse UpdateIndexSettings(IUpdateIndexSettingsRequest request);
 
 		/// <inheritdoc />
-		Task<IUpdateIndexSettingsResponse> UpdateIndexSettingsAsync(
+		Task<UpdateIndexSettingsResponse> UpdateIndexSettingsAsync(
 			Indices indices,
 			Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IUpdateIndexSettingsResponse> UpdateIndexSettingsAsync(IUpdateIndexSettingsRequest request,
+		Task<UpdateIndexSettingsResponse> UpdateIndexSettingsAsync(IUpdateIndexSettingsRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -34,24 +34,24 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IUpdateIndexSettingsResponse UpdateIndexSettings(Indices indices,
+		public UpdateIndexSettingsResponse UpdateIndexSettings(Indices indices,
 			Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector
 		) =>
 			UpdateIndexSettings(selector.InvokeOrDefault(new UpdateIndexSettingsDescriptor().Index(indices)));
 
 		/// <inheritdoc />
-		public IUpdateIndexSettingsResponse UpdateIndexSettings(IUpdateIndexSettingsRequest request) =>
+		public UpdateIndexSettingsResponse UpdateIndexSettings(IUpdateIndexSettingsRequest request) =>
 			DoRequest<IUpdateIndexSettingsRequest, UpdateIndexSettingsResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IUpdateIndexSettingsResponse> UpdateIndexSettingsAsync(
+		public Task<UpdateIndexSettingsResponse> UpdateIndexSettingsAsync(
 			Indices indices,
 			Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector,
 			CancellationToken ct = default
 		) => UpdateIndexSettingsAsync(selector.InvokeOrDefault(new UpdateIndexSettingsDescriptor().Index(indices)), ct);
 
 		/// <inheritdoc />
-		public Task<IUpdateIndexSettingsResponse> UpdateIndexSettingsAsync(IUpdateIndexSettingsRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<IUpdateIndexSettingsRequest, IUpdateIndexSettingsResponse, UpdateIndexSettingsResponse>(request, request.RequestParameters, ct);
+		public Task<UpdateIndexSettingsResponse> UpdateIndexSettingsAsync(IUpdateIndexSettingsRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<IUpdateIndexSettingsRequest, UpdateIndexSettingsResponse>(request, request.RequestParameters, ct);
 	}
 }

@@ -16,7 +16,7 @@ namespace Nest
 			: base(client, connectionSettings, reindexRequest, cancellationToken) { }
 	}
 
-	public class ReindexObservable<TSource, TTarget> : IDisposable, IObservable<IBulkAllResponse>
+	public class ReindexObservable<TSource, TTarget> : IDisposable, IObservable<BulkAllResponse>
 		where TSource : class
 		where TTarget : class
 	{
@@ -51,7 +51,7 @@ namespace Nest
 			_compositeCancelTokenSource?.Cancel();
 		}
 
-		public IDisposable Subscribe(IObserver<IBulkAllResponse> observer)
+		public IDisposable Subscribe(IObserver<BulkAllResponse> observer)
 		{
 			observer.ThrowIfNull(nameof(observer));
 			try
@@ -69,10 +69,10 @@ namespace Nest
 		{
 			_incrementSeenDocuments = observer.IncrementSeenScrollDocuments;
 			_incrementSeenScrollOperations = observer.IncrementSeenScrollOperations;
-			return Subscribe((IObserver<IBulkAllResponse>)observer);
+			return Subscribe((IObserver<BulkAllResponse>)observer);
 		}
 
-		private void Reindex(IObserver<IBulkAllResponse> observer)
+		private void Reindex(IObserver<BulkAllResponse> observer)
 		{
 			var bulkMeta = _reindexRequest.BulkAll?.Invoke(Enumerable.Empty<IHitMetadata<TTarget>>());
 			var scrollAll = _reindexRequest.ScrollAll;

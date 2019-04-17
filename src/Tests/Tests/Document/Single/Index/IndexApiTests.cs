@@ -19,7 +19,7 @@ using static Tests.Domain.Helpers.TestValueHelper;
 namespace Tests.Document.Single.Index
 {
 	public class IndexApiTests
-		: ApiIntegrationTestBase<WritableCluster, IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
+		: ApiIntegrationTestBase<WritableCluster, IndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
 	{
 		public IndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

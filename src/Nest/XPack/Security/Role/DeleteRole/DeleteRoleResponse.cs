@@ -2,14 +2,9 @@
 
 namespace Nest
 {
-	public interface IDeleteRoleResponse : IResponse
+	public class DeleteRoleResponse : ResponseBase
 	{
 		[DataMember(Name ="found")]
-		bool Found { get; }
-	}
-
-	public class DeleteRoleResponse : ResponseBase, IDeleteRoleResponse
-	{
 		public bool Found { get; internal set; }
 	}
 }

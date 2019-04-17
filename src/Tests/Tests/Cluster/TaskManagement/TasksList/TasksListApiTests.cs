@@ -14,7 +14,7 @@ using Tests.Framework.Integration;
 namespace Tests.Cluster.TaskManagement.TasksList
 {
 	public class TasksListApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IListTasksResponse, IListTasksRequest, ListTasksDescriptor, ListTasksRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ListTasksResponse, IListTasksRequest, ListTasksDescriptor, ListTasksRequest>
 	{
 		public TasksListApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -40,7 +40,7 @@ namespace Tests.Cluster.TaskManagement.TasksList
 			(client, r) => client.ListTasksAsync(r)
 		);
 
-		protected override void ExpectResponse(IListTasksResponse response)
+		protected override void ExpectResponse(ListTasksResponse response)
 		{
 			response.Nodes.Should().NotBeEmpty();
 			var taskExecutingNode = response.Nodes.First().Value;
@@ -68,7 +68,7 @@ namespace Tests.Cluster.TaskManagement.TasksList
 
 	[SkipVersion("<2.3.0", "")]
 	public class TasksListDetailedApiTests
-		: ApiIntegrationTestBase<IntrusiveOperationCluster, IListTasksResponse, IListTasksRequest, ListTasksDescriptor, ListTasksRequest>
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, ListTasksResponse, IListTasksRequest, ListTasksDescriptor, ListTasksRequest>
 	{
 		private static TaskId _taskId = new TaskId("fakeid:1");
 
@@ -127,7 +127,7 @@ namespace Tests.Cluster.TaskManagement.TasksList
 			_taskId = response.Task;
 		}
 
-		protected override void ExpectResponse(IListTasksResponse response)
+		protected override void ExpectResponse(ListTasksResponse response)
 		{
 			response.Nodes.Should().NotBeEmpty();
 			var taskExecutingNode = response.Nodes.First().Value;

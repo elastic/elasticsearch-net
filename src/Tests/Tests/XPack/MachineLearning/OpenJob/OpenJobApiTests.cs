@@ -8,7 +8,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.MachineLearning.OpenJob
 {
-	public class OpenJobApiTests : MachineLearningIntegrationTestBase<IOpenJobResponse, IOpenJobRequest, OpenJobDescriptor, OpenJobRequest>
+	public class OpenJobApiTests : MachineLearningIntegrationTestBase<OpenJobResponse, IOpenJobRequest, OpenJobDescriptor, OpenJobRequest>
 	{
 		public OpenJobApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -43,6 +43,6 @@ namespace Tests.XPack.MachineLearning.OpenJob
 
 		protected override OpenJobDescriptor NewDescriptor() => new OpenJobDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(IOpenJobResponse response) => response.Opened.Should().BeTrue();
+		protected override void ExpectResponse(OpenJobResponse response) => response.Opened.Should().BeTrue();
 	}
 }

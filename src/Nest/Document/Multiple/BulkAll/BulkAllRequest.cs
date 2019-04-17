@@ -46,7 +46,7 @@ namespace Nest
 		/// If <see cref="ContinueAfterDroppedDocuments" /> is set to <c>true</c> processing will continue, so this callback can be used
 		/// to feed into a dead letter queue. Otherwise bulk all indexing will be halted.
 		/// </summary>
-		Action<IBulkResponseItem, T> DroppedDocumentCallback { get; set; }
+		Action<BulkResponseItemBase, T> DroppedDocumentCallback { get; set; }
 
 		///<summary>Default index for items which don't provide one</summary>
 		IndexName Index { get; set; }
@@ -69,7 +69,7 @@ namespace Nest
 		/// A predicate to control which documents should be retried.
 		/// Defaults to failed bulk items with a HTTP 429 (Too Many Requests) response status code.
 		/// </summary>
-		Func<IBulkResponseItem, T, bool> RetryDocumentPredicate { get; set; }
+		Func<BulkResponseItemBase, T, bool> RetryDocumentPredicate { get; set; }
 
 		///<summary>Specific per bulk operation routing value</summary>
 		Routing Routing { get; set; }
@@ -116,7 +116,7 @@ namespace Nest
 		public IEnumerable<T> Documents { get; }
 
 		/// <inheritdoc />
-		public Action<IBulkResponseItem, T> DroppedDocumentCallback { get; set; }
+		public Action<BulkResponseItemBase, T> DroppedDocumentCallback { get; set; }
 
 		/// <inheritdoc />
 		public IndexName Index { get; set; }
@@ -134,7 +134,7 @@ namespace Nest
 		public bool RefreshOnCompleted { get; set; }
 
 		/// <inheritdoc />
-		public Func<IBulkResponseItem, T, bool> RetryDocumentPredicate { get; set; }
+		public Func<BulkResponseItemBase, T, bool> RetryDocumentPredicate { get; set; }
 
 		/// <inheritdoc />
 		public Routing Routing { get; set; }
@@ -167,13 +167,13 @@ namespace Nest
 		Action<BulkDescriptor, IList<T>> IBulkAllRequest<T>.BufferToBulk { get; set; }
 		bool IBulkAllRequest<T>.ContinueAfterDroppedDocuments { get; set; }
 		IEnumerable<T> IBulkAllRequest<T>.Documents => _documents;
-		Action<IBulkResponseItem, T> IBulkAllRequest<T>.DroppedDocumentCallback { get; set; }
+		Action<BulkResponseItemBase, T> IBulkAllRequest<T>.DroppedDocumentCallback { get; set; }
 		IndexName IBulkAllRequest<T>.Index { get; set; }
 		int? IBulkAllRequest<T>.MaxDegreeOfParallelism { get; set; }
 		string IBulkAllRequest<T>.Pipeline { get; set; }
 		Indices IBulkAllRequest<T>.RefreshIndices { get; set; }
 		bool IBulkAllRequest<T>.RefreshOnCompleted { get; set; }
-		Func<IBulkResponseItem, T, bool> IBulkAllRequest<T>.RetryDocumentPredicate { get; set; }
+		Func<BulkResponseItemBase, T, bool> IBulkAllRequest<T>.RetryDocumentPredicate { get; set; }
 		Routing IBulkAllRequest<T>.Routing { get; set; }
 		int? IBulkAllRequest<T>.Size { get; set; }
 		Time IBulkAllRequest<T>.Timeout { get; set; }
@@ -218,7 +218,7 @@ namespace Nest
 		public BulkAllDescriptor<T> BufferToBulk(Action<BulkDescriptor, IList<T>> modifier) => Assign(modifier, (a, v) => a.BufferToBulk = v);
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.RetryDocumentPredicate" />
-		public BulkAllDescriptor<T> RetryDocumentPredicate(Func<IBulkResponseItem, T, bool> predicate) =>
+		public BulkAllDescriptor<T> RetryDocumentPredicate(Func<BulkResponseItemBase, T, bool> predicate) =>
 			Assign(predicate, (a, v) => a.RetryDocumentPredicate = v);
 
 		/// <summary>
@@ -237,7 +237,7 @@ namespace Nest
 		public BulkAllDescriptor<T> ContinueAfterDroppedDocuments(bool proceed = true) => Assign(proceed, (a, v) => a.ContinueAfterDroppedDocuments = v);
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.DroppedDocumentCallback" />
-		public BulkAllDescriptor<T> DroppedDocumentCallback(Action<IBulkResponseItem, T> callback) =>
+		public BulkAllDescriptor<T> DroppedDocumentCallback(Action<BulkResponseItemBase, T> callback) =>
 			Assign(callback, (a, v) => a.DroppedDocumentCallback = v);
 	}
 }

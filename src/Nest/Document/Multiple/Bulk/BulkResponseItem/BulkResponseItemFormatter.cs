@@ -4,7 +4,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	internal class BulkResponseItemFormatter : IJsonFormatter<IBulkResponseItem>
+	internal class BulkResponseItemFormatter : IJsonFormatter<BulkResponseItemBase>
 	{
 		private static readonly AutomataDictionary Operations = new AutomataDictionary
 		{
@@ -14,14 +14,14 @@ namespace Nest
 			{ "create", 3 }
 		};
 
-		public IBulkResponseItem Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		public BulkResponseItemBase Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			IBulkResponseItem bulkResponseItem = null;
+			BulkResponseItemBase bulkResponseItem = null;
 
 			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
 			{
 				reader.ReadNextBlock();
-				return bulkResponseItem;
+				return null;
 			}
 
 			reader.ReadIsBeginObjectWithVerify();
@@ -57,7 +57,7 @@ namespace Nest
 			return bulkResponseItem;
 		}
 
-		public void Serialize(ref JsonWriter writer, IBulkResponseItem value, IJsonFormatterResolver formatterResolver) =>
+		public void Serialize(ref JsonWriter writer, BulkResponseItemBase value, IJsonFormatterResolver formatterResolver) =>
 			throw new NotSupportedException();
 	}
 }

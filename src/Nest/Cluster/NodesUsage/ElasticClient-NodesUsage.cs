@@ -16,39 +16,39 @@ namespace Nest
 		/// https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html
 		/// </summary>
 		/// <param name="selector">An optional descriptor to further describe the nodes usage operation</param>
-		INodesUsageResponse NodesUsage(Func<NodesUsageDescriptor, INodesUsageRequest> selector = null);
+		NodesUsageResponse NodesUsage(Func<NodesUsageDescriptor, INodesUsageRequest> selector = null);
 
 		/// <inheritdoc />
-		INodesUsageResponse NodesUsage(INodesUsageRequest request);
+		NodesUsageResponse NodesUsage(INodesUsageRequest request);
 
 		/// <inheritdoc />
-		Task<INodesUsageResponse> NodesUsageAsync(Func<NodesUsageDescriptor, INodesUsageRequest> selector = null,
+		Task<NodesUsageResponse> NodesUsageAsync(Func<NodesUsageDescriptor, INodesUsageRequest> selector = null,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<INodesUsageResponse> NodesUsageAsync(INodesUsageRequest request, CancellationToken ct = default);
+		Task<NodesUsageResponse> NodesUsageAsync(INodesUsageRequest request, CancellationToken ct = default);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public INodesUsageResponse NodesUsage(Func<NodesUsageDescriptor, INodesUsageRequest> selector = null) =>
+		public NodesUsageResponse NodesUsage(Func<NodesUsageDescriptor, INodesUsageRequest> selector = null) =>
 			NodesUsage(selector.InvokeOrDefault(new NodesUsageDescriptor()));
 
 		/// <inheritdoc />
-		public INodesUsageResponse NodesUsage(INodesUsageRequest request) =>
+		public NodesUsageResponse NodesUsage(INodesUsageRequest request) =>
 			DoRequest<INodesUsageRequest, NodesUsageResponse>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<INodesUsageResponse> NodesUsageAsync(
+		public Task<NodesUsageResponse> NodesUsageAsync(
 			Func<NodesUsageDescriptor, INodesUsageRequest> selector = null,
 			CancellationToken ct = default
 		) =>
 			NodesUsageAsync(selector.InvokeOrDefault(new NodesUsageDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<INodesUsageResponse> NodesUsageAsync(INodesUsageRequest request, CancellationToken ct = default) =>
-			DoRequestAsync<INodesUsageRequest, INodesUsageResponse, NodesUsageResponse>(request, request.RequestParameters, ct);
+		public Task<NodesUsageResponse> NodesUsageAsync(INodesUsageRequest request, CancellationToken ct = default) =>
+			DoRequestAsync<INodesUsageRequest, NodesUsageResponse>(request, request.RequestParameters, ct);
 	}
 }

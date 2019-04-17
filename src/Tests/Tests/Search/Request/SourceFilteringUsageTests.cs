@@ -55,7 +55,7 @@ namespace Tests.Search.Request
 				}
 			};
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
+		protected override void ExpectResponse(SearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 
@@ -86,7 +86,7 @@ namespace Tests.Search.Request
 				Source = false
 			};
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
+		protected override void ExpectResponse(SearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
 			foreach (var hit in response.Hits)

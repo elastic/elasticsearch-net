@@ -11,7 +11,7 @@ namespace Tests.XPack.Security.User
 {
 	[SkipVersion("<2.3.0", "")]
 	public class UserCrudTests
-		: CrudTestBase<XPackCluster, IPutUserResponse, IGetUserResponse, IPutUserResponse, IDeleteUserResponse>
+		: CrudTestBase<XPackCluster, PutUserResponse, GetUserResponse, PutUserResponse, DeleteUserResponse>
 	{
 		private readonly string[] _roles = { "user" };
 
@@ -21,7 +21,7 @@ namespace Tests.XPack.Security.User
 		//to guarantee it starts with a-zA-Z which is mandatory since 5.1
 		protected override string Sanitize(string callDistinctValue) => "u" + callDistinctValue;
 
-		protected override LazyResponses Create() => Calls<PutUserDescriptor, PutUserRequest, IPutUserRequest, IPutUserResponse>(
+		protected override LazyResponses Create() => Calls<PutUserDescriptor, PutUserRequest, IPutUserRequest, PutUserResponse>(
 			CreateInitializer,
 			CreateFluent,
 			(s, c, f) => c.PutUser(s, f),
@@ -39,7 +39,7 @@ namespace Tests.XPack.Security.User
 			.Password(username)
 			.Roles(_roles);
 
-		protected override LazyResponses Read() => Calls<GetUserDescriptor, GetUserRequest, IGetUserRequest, IGetUserResponse>(
+		protected override LazyResponses Read() => Calls<GetUserDescriptor, GetUserRequest, IGetUserRequest, GetUserResponse>(
 			ReadInitializer,
 			ReadFluent,
 			(s, c, f) => c.GetUser(f),
@@ -52,7 +52,7 @@ namespace Tests.XPack.Security.User
 
 		protected IGetUserRequest ReadFluent(string username, GetUserDescriptor d) => d.Username(username);
 
-		protected override LazyResponses Update() => Calls<PutUserDescriptor, PutUserRequest, IPutUserRequest, IPutUserResponse>(
+		protected override LazyResponses Update() => Calls<PutUserDescriptor, PutUserRequest, IPutUserRequest, PutUserResponse>(
 			UpdateInitializer,
 			UpdateFluent,
 			(s, c, f) => c.PutUser(s, f),
@@ -71,7 +71,7 @@ namespace Tests.XPack.Security.User
 			.FullName(username)
 			.Roles(_roles);
 
-		protected override LazyResponses Delete() => Calls<DeleteUserDescriptor, DeleteUserRequest, IDeleteUserRequest, IDeleteUserResponse>(
+		protected override LazyResponses Delete() => Calls<DeleteUserDescriptor, DeleteUserRequest, IDeleteUserRequest, DeleteUserResponse>(
 			DeleteInitializer,
 			DeleteFluent,
 			(s, c, f) => c.DeleteUser(s, f),
@@ -84,7 +84,7 @@ namespace Tests.XPack.Security.User
 
 		protected IDeleteUserRequest DeleteFluent(string username, DeleteUserDescriptor d) => d;
 
-		protected override void ExpectAfterCreate(IGetUserResponse response)
+		protected override void ExpectAfterCreate(GetUserResponse response)
 		{
 			response.Users.Should().NotBeEmpty();
 			var user = response.Users.First().Value;
@@ -93,7 +93,7 @@ namespace Tests.XPack.Security.User
 			user.FullName.Should().BeNullOrEmpty();
 		}
 
-		protected override void ExpectAfterUpdate(IGetUserResponse response)
+		protected override void ExpectAfterUpdate(GetUserResponse response)
 		{
 			response.Users.Should().NotBeEmpty();
 			var user = response.Users.First().Value;
@@ -102,7 +102,7 @@ namespace Tests.XPack.Security.User
 			user.FullName.Should().NotBeNullOrWhiteSpace();
 		}
 
-		protected override void ExpectDeleteNotFoundResponse(IDeleteUserResponse response)
+		protected override void ExpectDeleteNotFoundResponse(DeleteUserResponse response)
 		{
 			response.Found.Should().BeFalse();
 			response.ServerError.Should().BeNull();

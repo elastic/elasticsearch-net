@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 namespace Tests.XPack.License.PostLicense
 {
 	[SkipVersion("<2.3.0", "")]
-	public class PostLicenseApiTests : ApiTestBase<XPackCluster, IPostLicenseResponse, IPostLicenseRequest, PostLicenseDescriptor, PostLicenseRequest>
+	public class PostLicenseApiTests : ApiTestBase<XPackCluster, PostLicenseResponse, IPostLicenseRequest, PostLicenseDescriptor, PostLicenseRequest>
 	{
 		public PostLicenseApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

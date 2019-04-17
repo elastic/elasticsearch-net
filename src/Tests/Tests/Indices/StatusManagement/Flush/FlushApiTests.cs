@@ -8,7 +8,7 @@ using Tests.Framework.Integration;
 namespace Tests.Indices.StatusManagement.Flush
 {
 	public class FlushApiTests
-		: ApiIntegrationAgainstNewIndexTestBase<IntrusiveOperationCluster, IFlushResponse, IFlushRequest, FlushDescriptor, FlushRequest>
+		: ApiIntegrationAgainstNewIndexTestBase<IntrusiveOperationCluster, FlushResponse, IFlushRequest, FlushDescriptor, FlushRequest>
 	{
 		public FlushApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

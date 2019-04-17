@@ -6,19 +6,19 @@ namespace Nest
 	/// <summary>
 	/// Retrieves configuration information for calendars.
 	/// </summary>
-	public interface IGetCalendarsResponse : IResponse
+	public class GetCalendarsResponse : ResponseBase
 	{
 		/// <summary>
 		/// The count of calendars.
 		/// </summary>
 		[DataMember(Name = "count")]
-		long Count { get; }
+		public long Count { get; internal set; }
 
 		/// <summary>
 		/// An array of calendar resources.
 		/// </summary>
 		[DataMember(Name = "calendars")]
-		IReadOnlyCollection<Calendar> Calendars { get; }
+		public IReadOnlyCollection<Calendar> Calendars { get; internal set; } = EmptyReadOnly<Calendar>.Collection;
 	}
 
 	public class Calendar
@@ -33,12 +33,4 @@ namespace Nest
 		public string Description { get; set; }
 	}
 
-	public class GetCalendarsResponse : ResponseBase, IGetCalendarsResponse
-	{
-		/// <inheritdoc cref="IGetCalendarsResponse.Count" />
-		public long Count { get; internal set; }
-
-		/// <inheritdoc cref="IGetCalendarsResponse.Calendars" />
-		public IReadOnlyCollection<Calendar> Calendars { get; internal set; } = EmptyReadOnly<Calendar>.Collection;
-	}
 }

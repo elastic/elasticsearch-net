@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 namespace Tests.Search.Count
 {
 	public class CountApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ICountResponse, ICountRequest, CountDescriptor<Project>, CountRequest<Project>>
+		: ApiIntegrationTestBase<ReadOnlyCluster, CountResponse, ICountRequest, CountDescriptor<Project>, CountRequest<Project>>
 	{
 		public CountApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

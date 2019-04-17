@@ -16,7 +16,7 @@ using static Nest.Infer;
 namespace Tests.Indices.MappingManagement.GetMapping
 {
 	public class GetMappingApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IGetMappingResponse, IGetMappingRequest, GetMappingDescriptor<Project>,
+		: ApiIntegrationTestBase<ReadOnlyCluster, GetMappingResponse, IGetMappingRequest, GetMappingDescriptor<Project>,
 			GetMappingRequest>
 	{
 		public GetMappingApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -43,7 +43,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			(client, r) => client.GetMappingAsync(r)
 		);
 
-		protected override void ExpectResponse(IGetMappingResponse response)
+		protected override void ExpectResponse(GetMappingResponse response)
 		{
 			response.ShouldBeValid();
 
@@ -71,7 +71,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		}
 
 		//hide
-		private static void AssertExtensionMethods(IGetMappingResponse response)
+		private static void AssertExtensionMethods(GetMappingResponse response)
 		{
 			/** The `GetMappingFor` extension method can be used to get a type mapping easily and safely */
 			response.GetMappingFor<Project>().Should().NotBeNull();
@@ -80,7 +80,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		}
 
 		//hide
-		private static void AssertVisitedProperties(IGetMappingResponse response)
+		private static void AssertVisitedProperties(GetMappingResponse response)
 		{
 			var visitor = new TestVisitor();
 			var b = TestClient.Configuration.Random.SourceSerializer;
@@ -106,7 +106,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 	}
 
 	public class GetMappingNonExistentIndexApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IGetMappingResponse, IGetMappingRequest,
+		: ApiIntegrationTestBase<ReadOnlyCluster, GetMappingResponse, IGetMappingRequest,
 			GetMappingDescriptor<Project>, GetMappingRequest>
 	{
 		private readonly string _nonExistentIndex = "non-existent-index";
@@ -130,7 +130,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			(client, r) => client.GetMappingAsync(r)
 		);
 
-		protected override void ExpectResponse(IGetMappingResponse response)
+		protected override void ExpectResponse(GetMappingResponse response)
 		{
 			response.Indices.Should().BeEmpty();
 			response.ServerError.Should().NotBeNull();

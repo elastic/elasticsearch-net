@@ -9,7 +9,7 @@ namespace Tests.Indices.StatusManagement.Refresh
 {
 	public class RefreshApiTests
 		: ApiIntegrationAgainstNewIndexTestBase
-			<IntrusiveOperationCluster, IRefreshResponse, IRefreshRequest, RefreshDescriptor, RefreshRequest>
+			<IntrusiveOperationCluster, RefreshResponse, IRefreshRequest, RefreshDescriptor, RefreshRequest>
 	{
 		public RefreshApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

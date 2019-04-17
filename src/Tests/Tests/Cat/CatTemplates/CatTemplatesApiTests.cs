@@ -10,7 +10,7 @@ namespace Tests.Cat.CatTemplates
 {
 	[SkipVersion("<5.1.0", "CatTemplates is an API introduced in 5.1")]
 	public class CatTemplatesApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatTemplatesRecord>, ICatTemplatesRequest, CatTemplatesDescriptor, CatTemplatesRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, CatResponse<CatTemplatesRecord>, ICatTemplatesRequest, CatTemplatesDescriptor, CatTemplatesRequest>
 	{
 		public CatTemplatesApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -26,7 +26,7 @@ namespace Tests.Cat.CatTemplates
 			(client, r) => client.CatTemplatesAsync(r)
 		);
 
-		protected override void ExpectResponse(ICatResponse<CatTemplatesRecord> response)
+		protected override void ExpectResponse(CatResponse<CatTemplatesRecord> response)
 		{
 #pragma warning disable CS0618 // Type or member is obsolete
 			response.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.IndexPatterns));

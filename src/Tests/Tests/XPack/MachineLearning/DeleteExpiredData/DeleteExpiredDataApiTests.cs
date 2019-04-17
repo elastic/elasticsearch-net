@@ -9,7 +9,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.DeleteExpiredData
 {
 	public class DeleteExpiredDataApiTests
-		: MachineLearningIntegrationTestBase<IDeleteExpiredDataResponse, IDeleteExpiredDataRequest, DeleteExpiredDataDescriptor,
+		: MachineLearningIntegrationTestBase<DeleteExpiredDataResponse, IDeleteExpiredDataRequest, DeleteExpiredDataDescriptor,
 			DeleteExpiredDataRequest>
 	{
 		public DeleteExpiredDataApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -31,6 +31,6 @@ namespace Tests.XPack.MachineLearning.DeleteExpiredData
 
 		protected override DeleteExpiredDataDescriptor NewDescriptor() => new DeleteExpiredDataDescriptor();
 
-		protected override void ExpectResponse(IDeleteExpiredDataResponse response) => response.Deleted.Should().BeTrue();
+		protected override void ExpectResponse(DeleteExpiredDataResponse response) => response.Deleted.Should().BeTrue();
 	}
 }

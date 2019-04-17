@@ -11,7 +11,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.GetModelSnapshots
 {
 	public class GetModelSnapshotsApiTests
-		: MachineLearningIntegrationTestBase<IGetModelSnapshotsResponse, IGetModelSnapshotsRequest, GetModelSnapshotsDescriptor,
+		: MachineLearningIntegrationTestBase<GetModelSnapshotsResponse, IGetModelSnapshotsRequest, GetModelSnapshotsDescriptor,
 			GetModelSnapshotsRequest>
 	{
 		public GetModelSnapshotsApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -42,7 +42,7 @@ namespace Tests.XPack.MachineLearning.GetModelSnapshots
 
 		protected override GetModelSnapshotsDescriptor NewDescriptor() => new GetModelSnapshotsDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(IGetModelSnapshotsResponse response)
+		protected override void ExpectResponse(GetModelSnapshotsResponse response)
 		{
 			response.ShouldBeValid();
 			response.ModelSnapshots.Should().HaveCount(1);
@@ -58,7 +58,7 @@ namespace Tests.XPack.MachineLearning.GetModelSnapshots
 	}
 
 	public class GetModelSnapshotsWithSnapshotIdApiTests
-		: MachineLearningIntegrationTestBase<IGetModelSnapshotsResponse, IGetModelSnapshotsRequest, GetModelSnapshotsDescriptor,
+		: MachineLearningIntegrationTestBase<GetModelSnapshotsResponse, IGetModelSnapshotsRequest, GetModelSnapshotsDescriptor,
 			GetModelSnapshotsRequest>
 	{
 		public GetModelSnapshotsWithSnapshotIdApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -89,7 +89,7 @@ namespace Tests.XPack.MachineLearning.GetModelSnapshots
 
 		protected override GetModelSnapshotsDescriptor NewDescriptor() => new GetModelSnapshotsDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(IGetModelSnapshotsResponse response)
+		protected override void ExpectResponse(GetModelSnapshotsResponse response)
 		{
 			response.ShouldBeValid();
 			response.ModelSnapshots.Should().HaveCount(1);

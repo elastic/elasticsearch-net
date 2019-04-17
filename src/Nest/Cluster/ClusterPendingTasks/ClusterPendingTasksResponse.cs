@@ -3,13 +3,8 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-	public interface IClusterPendingTasksResponse : IResponse
-	{
-		IReadOnlyCollection<PendingTask> Tasks { get; }
-	}
-
 	[DataContract]
-	public class ClusterPendingTasksResponse : ResponseBase, IClusterPendingTasksResponse
+	public class ClusterPendingTasksResponse : ResponseBase
 	{
 		[DataMember(Name ="tasks")]
 		public IReadOnlyCollection<PendingTask> Tasks { get; internal set; } = EmptyReadOnly<PendingTask>.Collection;

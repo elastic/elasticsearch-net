@@ -17,18 +17,18 @@ namespace Nest
 		/// <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-multi-search.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-multi-search.html</a>
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the search operations on the multi search api</param>
-		IMultiSearchResponse MultiSearchTemplate(Func<MultiSearchTemplateDescriptor, IMultiSearchTemplateRequest> selector);
+		MultiSearchResponse MultiSearchTemplate(Func<MultiSearchTemplateDescriptor, IMultiSearchTemplateRequest> selector);
 
 		/// <inheritdoc />
-		IMultiSearchResponse MultiSearchTemplate(IMultiSearchTemplateRequest request);
+		MultiSearchResponse MultiSearchTemplate(IMultiSearchTemplateRequest request);
 
 		/// <inheritdoc />
-		Task<IMultiSearchResponse> MultiSearchTemplateAsync(Func<MultiSearchTemplateDescriptor, IMultiSearchTemplateRequest> selector,
+		Task<MultiSearchResponse> MultiSearchTemplateAsync(Func<MultiSearchTemplateDescriptor, IMultiSearchTemplateRequest> selector,
 			CancellationToken ct = default
 		);
 
 		/// <inheritdoc />
-		Task<IMultiSearchResponse> MultiSearchTemplateAsync(IMultiSearchTemplateRequest request,
+		Task<MultiSearchResponse> MultiSearchTemplateAsync(IMultiSearchTemplateRequest request,
 			CancellationToken ct = default
 		);
 	}
@@ -36,27 +36,27 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IMultiSearchResponse MultiSearchTemplate(Func<MultiSearchTemplateDescriptor, IMultiSearchTemplateRequest> selector) =>
+		public MultiSearchResponse MultiSearchTemplate(Func<MultiSearchTemplateDescriptor, IMultiSearchTemplateRequest> selector) =>
 			MultiSearchTemplate(selector?.Invoke(new MultiSearchTemplateDescriptor()));
 
 		/// <inheritdoc />
-		public IMultiSearchResponse MultiSearchTemplate(IMultiSearchTemplateRequest request)
+		public MultiSearchResponse MultiSearchTemplate(IMultiSearchTemplateRequest request)
 		{
 			CreateMultiSearchTemplateDeserializer(request);
 			return DoRequest<IMultiSearchTemplateRequest, MultiSearchResponse>(request, request.RequestParameters);
 		}
 
 		/// <inheritdoc />
-		public Task<IMultiSearchResponse> MultiSearchTemplateAsync(
+		public Task<MultiSearchResponse> MultiSearchTemplateAsync(
 			Func<MultiSearchTemplateDescriptor, IMultiSearchTemplateRequest> selector,
 			CancellationToken ct = default
 		) => MultiSearchTemplateAsync(selector?.Invoke(new MultiSearchTemplateDescriptor()), ct);
 
 		/// <inheritdoc />
-		public Task<IMultiSearchResponse> MultiSearchTemplateAsync(IMultiSearchTemplateRequest request, CancellationToken ct = default)
+		public Task<MultiSearchResponse> MultiSearchTemplateAsync(IMultiSearchTemplateRequest request, CancellationToken ct = default)
 		{
 			CreateMultiSearchTemplateDeserializer(request);
-			return DoRequestAsync<IMultiSearchTemplateRequest, IMultiSearchResponse, MultiSearchResponse>(request, request.RequestParameters, ct);
+			return DoRequestAsync<IMultiSearchTemplateRequest, MultiSearchResponse>(request, request.RequestParameters, ct);
 		}
 
 		private void CreateMultiSearchTemplateDeserializer(IMultiSearchTemplateRequest request)

@@ -13,23 +13,23 @@ namespace Nest
 		/// <para> </para>
 		/// <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-explain.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/search-explain.html</a>
 		/// </summary>
-		IExplainResponse<TDocument> Explain<TDocument>(DocumentPath<TDocument> document,
+		ExplainResponse<TDocument> Explain<TDocument>(DocumentPath<TDocument> document,
 			Func<ExplainDescriptor<TDocument>, IExplainRequest<TDocument>> selector
 		)
 			where TDocument : class;
 
 		/// <inheritdoc />
-		IExplainResponse<TDocument> Explain<TDocument>(IExplainRequest<TDocument> request)
+		ExplainResponse<TDocument> Explain<TDocument>(IExplainRequest<TDocument> request)
 			where TDocument : class;
 
 		/// <inheritdoc />
-		Task<IExplainResponse<TDocument>> ExplainAsync<TDocument>(DocumentPath<TDocument> document,
+		Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(DocumentPath<TDocument> document,
 			Func<ExplainDescriptor<TDocument>, IExplainRequest<TDocument>> selector, CancellationToken ct = default
 		)
 			where TDocument : class;
 
 		/// <inheritdoc />
-		Task<IExplainResponse<TDocument>> ExplainAsync<TDocument>(IExplainRequest<TDocument> request,
+		Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(IExplainRequest<TDocument> request,
 			CancellationToken ct = default
 		)
 			where TDocument : class;
@@ -38,7 +38,7 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IExplainResponse<TDocument> Explain<TDocument>(DocumentPath<TDocument> document,
+		public ExplainResponse<TDocument> Explain<TDocument>(DocumentPath<TDocument> document,
 			Func<ExplainDescriptor<TDocument>, IExplainRequest<TDocument>> selector
 		)
 			where TDocument : class =>
@@ -47,12 +47,12 @@ namespace Nest
 			)));
 
 		/// <inheritdoc />
-		public IExplainResponse<TDocument> Explain<TDocument>(IExplainRequest<TDocument> request)
+		public ExplainResponse<TDocument> Explain<TDocument>(IExplainRequest<TDocument> request)
 			where TDocument : class =>
 			DoRequest<IExplainRequest<TDocument>, ExplainResponse<TDocument>>(request, request.RequestParameters);
 
 		/// <inheritdoc />
-		public Task<IExplainResponse<TDocument>> ExplainAsync<TDocument>(
+		public Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(
 			DocumentPath<TDocument> document,
 			Func<ExplainDescriptor<TDocument>, IExplainRequest<TDocument>> selector,
 			CancellationToken ct = default
@@ -63,8 +63,8 @@ namespace Nest
 			)), ct);
 
 		/// <inheritdoc />
-		public Task<IExplainResponse<TDocument>> ExplainAsync<TDocument>(IExplainRequest<TDocument> request, CancellationToken ct = default)
+		public Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(IExplainRequest<TDocument> request, CancellationToken ct = default)
 			where TDocument : class =>
-			DoRequestAsync<IExplainRequest<TDocument>, IExplainResponse<TDocument>, ExplainResponse<TDocument>>(request, request.RequestParameters, ct);
+			DoRequestAsync<IExplainRequest<TDocument>, ExplainResponse<TDocument>>(request, request.RequestParameters, ct);
 	}
 }

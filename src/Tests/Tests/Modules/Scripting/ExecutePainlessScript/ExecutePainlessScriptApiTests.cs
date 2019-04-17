@@ -13,7 +13,7 @@ namespace Tests.Modules.Scripting.ExecutePainlessScript
 {
 	[SkipVersion("<6.3.0", "this API was introduced in 6.3.0")]
 	public class ExecutePainlessScriptApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IExecutePainlessScriptResponse<string>, IExecutePainlessScriptRequest,
+		: ApiIntegrationTestBase<ReadOnlyCluster, ExecutePainlessScriptResponse<string>, IExecutePainlessScriptRequest,
 			ExecutePainlessScriptDescriptor, ExecutePainlessScriptRequest>
 	{
 		private static readonly string _painlessScript = "params.count / params.total";
@@ -63,7 +63,7 @@ namespace Tests.Modules.Scripting.ExecutePainlessScript
 			(client, r) => client.ExecutePainlessScriptAsync<string>(r)
 		);
 
-		protected override void ExpectResponse(IExecutePainlessScriptResponse<string> response)
+		protected override void ExpectResponse(ExecutePainlessScriptResponse<string> response)
 		{
 			response.ShouldBeValid();
 			response.Result.Should().NotBeNullOrWhiteSpace();
@@ -72,7 +72,7 @@ namespace Tests.Modules.Scripting.ExecutePainlessScript
 
 	[SkipVersion("<6.4.0", "Context only tested on 6.4.0 when they were introduced")]
 	public class ExecutePainlessScriptContextApiTests
-		: ApiIntegrationTestBase<WritableCluster, IExecutePainlessScriptResponse<double>, IExecutePainlessScriptRequest,
+		: ApiIntegrationTestBase<WritableCluster, ExecutePainlessScriptResponse<double>, IExecutePainlessScriptRequest,
 			ExecutePainlessScriptDescriptor, ExecutePainlessScriptRequest>
 	{
 		private static readonly string _painlessScript = "doc['rank'].value / params.max_rank";
@@ -147,7 +147,7 @@ namespace Tests.Modules.Scripting.ExecutePainlessScript
 			create.ShouldBeValid();
 		}
 
-		protected override void ExpectResponse(IExecutePainlessScriptResponse<double> response)
+		protected override void ExpectResponse(ExecutePainlessScriptResponse<double> response)
 		{
 			response.ShouldBeValid();
 			response.Result.Should().BeGreaterOrEqualTo(0);

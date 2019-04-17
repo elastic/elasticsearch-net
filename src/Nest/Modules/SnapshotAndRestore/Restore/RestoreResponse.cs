@@ -2,14 +2,8 @@
 
 namespace Nest
 {
-	public interface IRestoreResponse : IResponse
-	{
-		[DataMember(Name ="snapshot")]
-		SnapshotRestore Snapshot { get; set; }
-	}
-
 	[DataContract]
-	public class RestoreResponse : ResponseBase, IRestoreResponse
+	public class RestoreResponse : ResponseBase
 	{
 		[DataMember(Name ="snapshot")]
 		public SnapshotRestore Snapshot { get; set; }

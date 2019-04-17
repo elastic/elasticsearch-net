@@ -11,14 +11,14 @@ using Tests.Framework.Integration;
 namespace Tests.Document.Single
 {
 	public class DocumentCrudTests
-		: CrudTestBase<WritableCluster, IIndexResponse, IGetResponse<Project>, IUpdateResponse<Project>, IDeleteResponse, IExistsResponse>
+		: CrudTestBase<WritableCluster, IndexResponse, GetResponse<Project>, UpdateResponse<Project>, DeleteResponse, ExistsResponse>
 	{
 		public DocumentCrudTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool SupportsDeletes => true;
 
 		protected override LazyResponses Exists() =>
-			Calls<DocumentExistsDescriptor<Project>, DocumentExistsRequest<Project>, IDocumentExistsRequest, IExistsResponse>(
+			Calls<DocumentExistsDescriptor<Project>, DocumentExistsRequest<Project>, IDocumentExistsRequest, ExistsResponse>(
 				id => new DocumentExistsRequest<Project>(id){ Routing = Project.Instance.Name },
 				(id, d) => d.Routing(Project.Instance.Name),
 				(s, c, f) => c.DocumentExists<Project>(s, f),
@@ -27,7 +27,7 @@ namespace Tests.Document.Single
 				(s, c, r) => c.DocumentExistsAsync(r)
 			);
 
-		protected override LazyResponses Create() => Calls<IndexDescriptor<Project>, IndexRequest<Project>, IIndexRequest<Project>, IIndexResponse>(
+		protected override LazyResponses Create() => Calls<IndexDescriptor<Project>, IndexRequest<Project>, IIndexRequest<Project>, IndexResponse>(
 			id => new IndexRequest<Project>(Project.Instance, id: id){ Routing = Project.Instance.Name },
 			(id, d) => d.Id(id).Routing(Project.Instance.Name),
 			(s, c, f) => c.Index(Project.Instance, f),
@@ -36,7 +36,7 @@ namespace Tests.Document.Single
 			(s, c, r) => c.IndexAsync(r)
 		);
 
-		protected override LazyResponses Read() => Calls<GetDescriptor<Project>, GetRequest<Project>, IGetRequest, IGetResponse<Project>>(
+		protected override LazyResponses Read() => Calls<GetDescriptor<Project>, GetRequest<Project>, IGetRequest, GetResponse<Project>>(
 			id => new GetRequest<Project>(id) { Routing = Project.Instance.Name },
 			(id, d) => d.Routing(Project.Instance.Name),
 			(s, c, f) => c.Get<Project>(s, f),
@@ -49,7 +49,7 @@ namespace Tests.Document.Single
 			UpdateDescriptor<Project, Project>,
 			UpdateRequest<Project, Project>,
 			IUpdateRequest<Project, Project>,
-			IUpdateResponse<Project>
+			UpdateResponse<Project>
 		>(
 			id => new UpdateRequest<Project, Project>(id)
 			{
@@ -65,7 +65,7 @@ namespace Tests.Document.Single
 			(s, c, r) => c.UpdateAsync<Project, Project>(r)
 		);
 
-		protected override LazyResponses Delete() => Calls<DeleteDescriptor<Project>, DeleteRequest<Project>, IDeleteRequest, IDeleteResponse>(
+		protected override LazyResponses Delete() => Calls<DeleteDescriptor<Project>, DeleteRequest<Project>, IDeleteRequest, DeleteResponse>(
 			id => new DeleteRequest<Project>(id) { Routing = Project.Instance.Name },
 			(id, d) => d.Routing(Project.Instance.Name),
 			(s, c, f) => c.Delete<Project>(s, f),
@@ -94,7 +94,7 @@ namespace Tests.Document.Single
 			r.Id.Should().NotBeNullOrEmpty();
 		});
 
-		protected override void ExpectDeleteNotFoundResponse(IDeleteResponse response)
+		protected override void ExpectDeleteNotFoundResponse(DeleteResponse response)
 		{
 			response.Index.Should().NotBeNullOrEmpty();
 			response.Type.Should().NotBeNullOrEmpty();

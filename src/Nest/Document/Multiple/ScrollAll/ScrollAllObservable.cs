@@ -6,7 +6,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class ScrollAllObservable<T> : IDisposable, IObservable<IScrollAllResponse<T>> where T : class
+	public class ScrollAllObservable<T> : IDisposable, IObservable<ScrollAllResponse<T>> where T : class
 	{
 		private readonly ProducerConsumerBackPressure _backPressure;
 		private readonly IElasticClient _client;
@@ -46,14 +46,14 @@ namespace Nest
 			_compositeCancelTokenSource?.Cancel();
 		}
 
-		public IDisposable Subscribe(IObserver<IScrollAllResponse<T>> observer)
+		public IDisposable Subscribe(IObserver<ScrollAllResponse<T>> observer)
 		{
 			observer.ThrowIfNull(nameof(observer));
 			ScrollAll(observer);
 			return this;
 		}
 
-		private void ScrollAll(IObserver<IScrollAllResponse<T>> observer)
+		private void ScrollAll(IObserver<ScrollAllResponse<T>> observer)
 		{
 			var slices = _scrollAllRequest.Slices;
 			var maxSlicesAtOnce = _scrollAllRequest.MaxDegreeOfParallelism ?? _scrollAllRequest.Slices;
@@ -69,7 +69,7 @@ namespace Nest
 				);
 		}
 
-		private async Task<bool> ScrollSliceAsync(IObserver<IScrollAllResponse<T>> observer, int slice)
+		private async Task<bool> ScrollSliceAsync(IObserver<ScrollAllResponse<T>> observer, int slice)
 		{
 			var searchResult = await InitiateSearchAsync(slice).ConfigureAwait(false);
 			await ScrollToCompletionAsync(slice, observer, searchResult).ConfigureAwait(false);
@@ -89,7 +89,7 @@ namespace Nest
 			_compositeCancelToken.ThrowIfCancellationRequested();
 		}
 
-		private async Task ScrollToCompletionAsync(int slice, IObserver<IScrollAllResponse<T>> observer, ISearchResponse<T> searchResult)
+		private async Task ScrollToCompletionAsync(int slice, IObserver<ScrollAllResponse<T>> observer, ISearchResponse<T> searchResult)
 		{
 			var page = 0;
 			ThrowOnBadSearchResult(searchResult, slice, page);
@@ -135,7 +135,7 @@ namespace Nest
 			}
 		}
 
-		private static void OnCompleted(Exception exception, IObserver<IScrollAllResponse<T>> observer)
+		private static void OnCompleted(Exception exception, IObserver<ScrollAllResponse<T>> observer)
 		{
 			if (exception == null)
 				observer.OnCompleted();

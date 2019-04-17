@@ -12,7 +12,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.GetCalendarEvents
 {
 	[SkipVersion("<6.4.0", "Calendar functions for machine learning introduced in 6.4.0")]
-	public class GetCalendarEventsApiTests : MachineLearningIntegrationTestBase<IGetCalendarEventsResponse, IGetCalendarEventsRequest, GetCalendarEventsDescriptor, GetCalendarEventsRequest>
+	public class GetCalendarEventsApiTests : MachineLearningIntegrationTestBase<GetCalendarEventsResponse, IGetCalendarEventsRequest, GetCalendarEventsDescriptor, GetCalendarEventsRequest>
 	{
 		public GetCalendarEventsApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -49,7 +49,7 @@ namespace Tests.XPack.MachineLearning.GetCalendarEvents
 
 		protected override GetCalendarEventsDescriptor NewDescriptor() => new GetCalendarEventsDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(IGetCalendarEventsResponse response)
+		protected override void ExpectResponse(GetCalendarEventsResponse response)
 		{
 			response.ShouldBeValid();
 
