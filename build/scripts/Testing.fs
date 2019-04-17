@@ -76,5 +76,6 @@ module Tests =
         | None -> failwith "No versions specified to run integration tests against"
         | Some esVersions ->
             for esVersion in esVersions do
+                Environment.setEnvironVar "NEST_INTEGRATION_TEST" "1"
                 Environment.setEnvironVar "NEST_INTEGRATION_VERSION" esVersion
                 dotnetTest args.MultiTarget |> ignore

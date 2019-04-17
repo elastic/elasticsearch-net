@@ -6,12 +6,12 @@ namespace Tests.Configuration
 	{
 		public EnvironmentConfiguration(YamlConfiguration yamlConfiguration)
 		{
+			Mode = Environment.GetEnvironmentVariable("NEST_INTEGRATION_TEST") != null ? TestMode.Integration : TestMode.Unit;
+
 			ClusterFilter = Environment.GetEnvironmentVariable("NEST_INTEGRATION_CLUSTER");
 			TestFilter = Environment.GetEnvironmentVariable("NEST_TEST_FILTER");
 
 			var version = Environment.GetEnvironmentVariable("NEST_INTEGRATION_VERSION");
-			if (!string.IsNullOrEmpty(version)) Mode = TestMode.Integration;
-
 			ElasticsearchVersion = string.IsNullOrWhiteSpace(version) ? yamlConfiguration.ElasticsearchVersion : version;
 			if (string.IsNullOrWhiteSpace(ElasticsearchVersion))
 				throw new Exception("Elasticsearch Version could not be determined from env var NEST_INTEGRATION_VERSION nor the test yaml configuration");

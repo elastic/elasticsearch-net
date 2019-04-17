@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.IO;
 using System.Threading;
 
@@ -19,7 +18,7 @@ namespace Tests.Configuration
 
 		/// <summary>
 		/// Loads configuration by reading from the yaml and overriding specific configuration settings through
-		/// environment variables set by the command line build
+		/// environment variables set by the command line build.
 		/// </summary>
 		private static EnvironmentConfiguration LoadCommandLineConfiguration()
 		{
@@ -34,8 +33,7 @@ namespace Tests.Configuration
 			return new EnvironmentConfiguration(tempYamlConfiguration);
 		}
 
-		/// <summary> The test configuration loaded when you run the tests in your IDE or if you call dotnet test directly </summary>
-		private static YamlConfiguration LoadYamlConfiguration()
+		public static string LocateTestYamlFile()
 		{
 			var directory = new DirectoryInfo(Directory.GetCurrentDirectory());
 			var testsConfigurationFolder = FindTestsConfigurationFolder(directory);
@@ -43,14 +41,24 @@ namespace Tests.Configuration
 				throw new Exception($"Tried to locate a parent test folder starting from  pwd:{directory.FullName}");
 
 			var localYamlFile = Path.Combine(testsConfigurationFolder.FullName, "tests.yaml");
-			if (File.Exists(localYamlFile))
-				return new YamlConfiguration(localYamlFile);
-
 			var defaultYamlFile = Path.Combine(testsConfigurationFolder.FullName, "tests.default.yaml");
-			if (File.Exists(defaultYamlFile))
-				return new YamlConfiguration(defaultYamlFile);
+			if (File.Exists(localYamlFile)) return localYamlFile;
+
+			if (File.Exists(defaultYamlFile)) return defaultYamlFile;
 
 			throw new Exception($"Tried to load a yaml file from {testsConfigurationFolder.FullName}");
+
+		}
+
+		/// <summary>
+		/// The test configuration loaded when you run the tests
+		/// <para> - from the IDE </para>
+		/// <para> - when calling dotnet test in the tests directory </para>
+		/// </summary>
+		private static YamlConfiguration LoadYamlConfiguration()
+		{
+			var yamlFile = LocateTestYamlFile();
+			return new YamlConfiguration(yamlFile);
 		}
 
 		private static DirectoryInfo FindTestsConfigurationFolder(DirectoryInfo directoryInfo)
