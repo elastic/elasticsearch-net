@@ -24,11 +24,6 @@ namespace Nest
 		RoleDescriptors RoleDescriptors { get; set; }
 	}
 
-	public class RoleDescriptors
-	{
-
-	}
-
 	public partial class SecurityCreateApiKeyRequest
 	{
 		/// <inheritdoc />
@@ -59,4 +54,11 @@ namespace Nest
 		/// <inheritdoc cref="ISecurityCreateApiKeyRequest.Expiration" />
 		public SecurityCreateApiKeyDescriptor Expiration(Time expiration) => Assign(expiration, (a, v) => a.Expiration = v);
 	}
+
+	public class RoleDescriptors : IsADictionaryBase<string, RoleDescriptor>
+	{
+
+	}
+
+	public class RoleDescriptor{}
 }

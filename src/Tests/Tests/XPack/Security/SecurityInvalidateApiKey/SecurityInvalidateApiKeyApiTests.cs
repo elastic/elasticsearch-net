@@ -16,37 +16,37 @@ namespace Tests.XPack.Security.User.SecurityInvalidateApiKey
 		: ApiIntegrationTestBase<XPackCluster, ISecurityInvalidateApiKeyResponse, ISecurityInvalidateApiKeyRequest, SecurityInvalidateApiKeyDescriptor
 			, SecurityInvalidateApiKeyRequest>
 	{
-		private const string AccessTokenValueKey = "accesstoken";
+		private const string ApiKey = "apikey";
 
-		protected virtual string CurrentAccessToken => RanIntegrationSetup ? ExtendedValue<string>(AccessTokenValueKey) : "foo";
+		protected virtual string CurrentApiKey => RanIntegrationSetup ? ExtendedValue<string>(ApiKey) : "-";
 
 		public SecurityInvalidateApiKeyApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void OnBeforeCall(IElasticClient client)
 		{
-			var r = client.GetUserAccessToken(Admin.Username, Admin.Password, f => f.Scope("FULL").GrantType(AccessTokenGrantType.Password));
+			var r = client.SecurityCreateApiKey(f => f.Name(CallIsolatedValue));
 			r.ShouldBeValid();
-			ExtendedValue(AccessTokenValueKey, r.AccessToken);
+			ExtendedValue(ApiKey, r.ApiKey);
 		}
 
 		protected override bool ExpectIsValid => true;
 
 		protected override object ExpectJson => new
 		{
-			token = CurrentAccessToken
+			id = CurrentApiKey
 		};
 
 		protected override int ExpectStatusCode => 200;
 
 		protected override Func<SecurityInvalidateApiKeyDescriptor, ISecurityInvalidateApiKeyRequest> Fluent => d => d
-			.Token(CurrentAccessToken)
+			.Id(CurrentApiKey)
 			;
 
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 
 		protected override SecurityInvalidateApiKeyRequest Initializer => new SecurityInvalidateApiKeyRequest
 		{
-			Token = CurrentAccessToken
+			Id = CurrentApiKey
 		};
 
 		protected override bool SupportsDeserialization => false;
@@ -65,11 +65,8 @@ namespace Tests.XPack.Security.User.SecurityInvalidateApiKey
 		protected override void ExpectResponse(ISecurityInvalidateApiKeyResponse response)
 		{
 			response.ShouldBeValid();
-			response.Created.Should().BeTrue();
 			response.ErrorCount.Should().Be(0);
 			response.ErrorDetails.Should().BeEmpty();
-			response.InvalidatedTokens.Should().Be(1);
-			response.PreviousInvalidatedTokens.Should().Be(0);
 		}
 	}
 }

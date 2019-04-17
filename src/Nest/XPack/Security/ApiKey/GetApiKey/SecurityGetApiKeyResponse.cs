@@ -4,13 +4,19 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface ISecurityCreateApiKeyResponse : IResponse
+	public interface ISecurityGetApiKeyResponse : IResponse
 	{
 		/// <summary>
 		/// The list of API keys that were retrieved for this request.
 		/// </summary>
 		[JsonProperty("api_keys")]
 		IReadOnlyCollection<ApiKeys> ApiKeys { get; }
+	}
+
+	public class SecurityGetApiKeyResponse : ResponseBase, ISecurityGetApiKeyResponse
+	{
+		/// <inheritdoc />
+		public IReadOnlyCollection<ApiKeys> ApiKeys { get; internal set; } = EmptyReadOnly<ApiKeys>.Collection;
 	}
 
 	public class ApiKeys
@@ -58,11 +64,5 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("realm")]
 		public string Realm { get; set; }
-	}
-
-	public class SecurityCreateApiKeyResponse : ResponseBase, ISecurityCreateApiKeyResponse
-	{
-		/// <inheritdoc />
-		public IReadOnlyCollection<ApiKeys> ApiKeys { get; internal set; } = EmptyReadOnly<ApiKeys>.Collection;
 	}
 }

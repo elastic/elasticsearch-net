@@ -31,8 +31,7 @@ namespace Nest
 	{
 		/// <inheritdoc cref="SecurityCreateApiKey(System.Func{Nest.SecurityCreateApiKeyDescriptor,Nest.ISecurityCreateApiKeyRequest})" />
 		public ISecurityCreateApiKeyResponse SecurityCreateApiKey(Func<SecurityCreateApiKeyDescriptor, ISecurityCreateApiKeyRequest> selector = null
-		) =>
-			SecurityCreateApiKey(selector.InvokeOrDefault(new SecurityCreateApiKeyDescriptor()));
+		) => SecurityCreateApiKey(selector.InvokeOrDefault(new SecurityCreateApiKeyDescriptor()));
 
 		/// <inheritdoc cref="SecurityCreateApiKey(System.Func{Nest.SecurityCreateApiKeyDescriptor,Nest.ISecurityCreateApiKeyRequest})" />
 		public ISecurityCreateApiKeyResponse SecurityCreateApiKey(ISecurityCreateApiKeyRequest request) =>
@@ -45,14 +44,12 @@ namespace Nest
 		public Task<ISecurityCreateApiKeyResponse> SecurityCreateApiKeyAsync(
 			Func<SecurityCreateApiKeyDescriptor, ISecurityCreateApiKeyRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			SecurityCreateApiKeyAsync(selector.InvokeOrDefault(new SecurityCreateApiKeyDescriptor()), cancellationToken);
+		) => SecurityCreateApiKeyAsync(selector.InvokeOrDefault(new SecurityCreateApiKeyDescriptor()), cancellationToken);
 
 		/// <inheritdoc cref="SecurityCreateApiKey(System.Func{Nest.SecurityCreateApiKeyDescriptor,Nest.ISecurityCreateApiKeyRequest})" />
 		public Task<ISecurityCreateApiKeyResponse> SecurityCreateApiKeyAsync(ISecurityCreateApiKeyRequest request,
 			CancellationToken cancellationToken = default(CancellationToken)
-		) =>
-			Dispatcher
+		) => Dispatcher
 				.DispatchAsync<ISecurityCreateApiKeyRequest, SecurityCreateApiKeyRequestParameters, SecurityCreateApiKeyResponse, ISecurityCreateApiKeyResponse>(
 					request,
 					cancellationToken,

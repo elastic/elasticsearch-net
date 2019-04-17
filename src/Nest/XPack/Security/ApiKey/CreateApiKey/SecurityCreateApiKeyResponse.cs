@@ -1,24 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface ISecurityGetApiKeyResponse : IResponse
+	public interface ISecurityCreateApiKeyResponse : IResponse
 	{
 		/// <summary>
-		/// Unique id for this API key
+		/// Id for the API key
 		/// </summary>
 		[JsonProperty("id")]
 		string Id { get; }
 
 		/// <summary>
-		/// Name for this API key
+		/// Name of the API key
 		/// </summary>
 		[JsonProperty("name")]
 		string Name { get; }
 
 		/// <summary>
-		/// Optional expiration for this API key
+		/// Optional expiration time for the API key in milliseconds
 		/// </summary>
 		[JsonProperty("expiration")]
 		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
@@ -27,11 +28,11 @@ namespace Nest
 		/// <summary>
 		/// Generated API key
 		/// </summary>
-		[JsonProperty("api_key")]
+		[JsonProperty("api_key ")]
 		string ApiKey { get; }
 	}
 
-	public class SecurityGetApiKeyResponse : ResponseBase, ISecurityGetApiKeyResponse
+	public class SecurityCreateApiKeyResponse : ResponseBase, ISecurityCreateApiKeyResponse
 	{
 		/// <inheritdoc />
 		public string Id { get; internal set; }
