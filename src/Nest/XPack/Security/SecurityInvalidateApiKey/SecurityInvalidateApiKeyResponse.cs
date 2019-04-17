@@ -6,32 +6,43 @@ namespace Nest
 {
 	public interface ISecurityInvalidateApiKeyResponse : IResponse
 	{
-		[JsonProperty("created")]
-		bool Created { get; }
+		/// <summary>
+		/// The ids of the API keys that were invalidated as part of this request.
+		/// </summary>
+		[JsonProperty("invalidated_api_keys")]
+		IReadOnlyCollection<string> InvalidatedApiKeys { get; }
 
-		[JsonProperty("invalidated_tokens")]
-		int InvalidatedTokens { get; }
+		/// <summary>
+		/// The ids of the API keys that were already invalidated.
+		/// </summary>
+		[JsonProperty("previously_invalidated_api_keys")]
+		IReadOnlyCollection<string> PreviouslyInvalidatedApiKeys { get; }
 
-		[JsonProperty("previously_invalidated_tokens")]
-		int PreviousInvalidatedTokens { get; }
-
+		/// <summary>
+		/// The number of errors that were encountered when invalidating the API keys.
+		/// </summary>
 		[JsonProperty("error_count")]
 		int? ErrorCount { get; }
 
+		/// <summary>
+		/// Details about these errors. This field is not present in the response when there are no errors.
+		/// </summary>
 		[JsonProperty("error_details")]
 		IReadOnlyCollection<ErrorCause> ErrorDetails { get; }
 	}
 
 	public class SecurityInvalidateApiKeyResponse : ResponseBase, ISecurityInvalidateApiKeyResponse
 	{
-		public bool Created { get; internal set; }
+		/// <inheritdoc />
+		public IReadOnlyCollection<string> InvalidatedApiKeys { get; internal set; } = EmptyReadOnly<string>.Collection;
 
-		public int InvalidatedTokens { get; internal set; }
+		/// <inheritdoc />
+		public IReadOnlyCollection<string> PreviouslyInvalidatedApiKeys { get; internal set; } = EmptyReadOnly<string>.Collection;
 
-		public int PreviousInvalidatedTokens { get; internal set; }
-
+		/// <inheritdoc />
 		public int? ErrorCount { get; internal set; }
 
-		public IReadOnlyCollection<ErrorCause> ErrorDetails { get; internal set;  } = EmptyReadOnly<ErrorCause>.Collection;
+		/// <inheritdoc />
+		public IReadOnlyCollection<ErrorCause> ErrorDetails { get; internal set; } = EmptyReadOnly<ErrorCause>.Collection;
 	}
 }

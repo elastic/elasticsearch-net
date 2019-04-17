@@ -2718,6 +2718,29 @@ namespace Elasticsearch.Net
 		///<summary>Block for (at maximum) the specified duration while waiting for the job to stop. Defaults to 30s.</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
+	///<summary>Request options for SecurityCreateApiKey<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</pre></summary>
+	public partial class SecurityCreateApiKeyRequestParameters : RequestParameters<SecurityCreateApiKeyRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+	}
+	///<summary>Request options for SecurityGetApiKey<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html</pre></summary>
+	public partial class SecurityGetApiKeyRequestParameters : RequestParameters<SecurityGetApiKeyRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>API key id of the API key to be retrieved</summary>
+		public string Id { get => Q<string>("id"); set => Q("id", value); }
+		///<summary>API key name of the API key to be retrieved</summary>
+		public string Name { get => Q<string>("name"); set => Q("name", value); }
+		///<summary>user name of the user who created this API key to be retrieved</summary>
+		public string Username { get => Q<string>("username"); set => Q("username", value); }
+		///<summary>realm name of the user who created this API key to be retrieved</summary>
+		public string RealmName { get => Q<string>("realm_name"); set => Q("realm_name", value); }
+	}
 	///<summary>Request options for SecurityInvalidateApiKey<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html</pre></summary>
 	public partial class SecurityInvalidateApiKeyRequestParameters : RequestParameters<SecurityInvalidateApiKeyRequestParameters> 
 	{

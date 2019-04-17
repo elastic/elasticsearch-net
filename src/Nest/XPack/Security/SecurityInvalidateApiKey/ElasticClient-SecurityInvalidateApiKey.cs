@@ -7,19 +7,21 @@ namespace Nest
 {
 	public partial interface IElasticClient
 	{
-		/// <inheritdoc />
+		/// <summary>
+		/// Invalidates one or more API keys.
+		/// </summary>
 		ISecurityInvalidateApiKeyResponse SecurityInvalidateApiKey(Func<SecurityInvalidateApiKeyDescriptor, ISecurityInvalidateApiKeyRequest> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="SecurityInvalidateApiKey(System.Func{Nest.SecurityInvalidateApiKeyDescriptor,Nest.ISecurityInvalidateApiKeyRequest})" />
 		ISecurityInvalidateApiKeyResponse SecurityInvalidateApiKey(ISecurityInvalidateApiKeyRequest request);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="SecurityInvalidateApiKey(System.Func{Nest.SecurityInvalidateApiKeyDescriptor,Nest.ISecurityInvalidateApiKeyRequest})" />
 		Task<ISecurityInvalidateApiKeyResponse> SecurityInvalidateApiKeyAsync(
 			Func<SecurityInvalidateApiKeyDescriptor, ISecurityInvalidateApiKeyRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
 		);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="SecurityInvalidateApiKey(System.Func{Nest.SecurityInvalidateApiKeyDescriptor,Nest.ISecurityInvalidateApiKeyRequest})" />
 		Task<ISecurityInvalidateApiKeyResponse> SecurityInvalidateApiKeyAsync(ISecurityInvalidateApiKeyRequest request,
 			CancellationToken cancellationToken = default(CancellationToken)
 		);
@@ -27,26 +29,25 @@ namespace Nest
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc cref="SecurityInvalidateApiKey(System.Func{Nest.SecurityInvalidateApiKeyDescriptor,Nest.ISecurityInvalidateApiKeyRequest})" />
 		public ISecurityInvalidateApiKeyResponse SecurityInvalidateApiKey(Func<SecurityInvalidateApiKeyDescriptor, ISecurityInvalidateApiKeyRequest> selector = null
 		) =>
 			SecurityInvalidateApiKey(selector.InvokeOrDefault(new SecurityInvalidateApiKeyDescriptor()));
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="SecurityInvalidateApiKey(System.Func{Nest.SecurityInvalidateApiKeyDescriptor,Nest.ISecurityInvalidateApiKeyRequest})" />
 		public ISecurityInvalidateApiKeyResponse SecurityInvalidateApiKey(ISecurityInvalidateApiKeyRequest request) =>
 			Dispatcher.Dispatch<ISecurityInvalidateApiKeyRequest, SecurityInvalidateApiKeyRequestParameters, SecurityInvalidateApiKeyResponse>(
 				request,
 				LowLevelDispatch.SecurityInvalidateApiKeyDispatch<SecurityInvalidateApiKeyResponse>
 			);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="SecurityInvalidateApiKey(System.Func{Nest.SecurityInvalidateApiKeyDescriptor,Nest.ISecurityInvalidateApiKeyRequest})" />
 		public Task<ISecurityInvalidateApiKeyResponse> SecurityInvalidateApiKeyAsync(
 			Func<SecurityInvalidateApiKeyDescriptor, ISecurityInvalidateApiKeyRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
 		) =>
 			SecurityInvalidateApiKeyAsync(selector.InvokeOrDefault(new SecurityInvalidateApiKeyDescriptor()), cancellationToken);
-
-		/// <inheritdoc />
+		/// <inheritdoc cref="SecurityInvalidateApiKey(System.Func{Nest.SecurityInvalidateApiKeyDescriptor,Nest.ISecurityInvalidateApiKeyRequest})" />
 		public Task<ISecurityInvalidateApiKeyResponse> SecurityInvalidateApiKeyAsync(ISecurityInvalidateApiKeyRequest request,
 			CancellationToken cancellationToken = default(CancellationToken)
 		) =>

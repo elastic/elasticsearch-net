@@ -51,7 +51,7 @@ namespace Tests.XPack.Security.User.SecurityInvalidateApiKey
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override string UrlPath => $"/_xpack/security/oauth2/token";
+		protected override string UrlPath => $"/_security/api_key";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.SecurityInvalidateApiKey(f),

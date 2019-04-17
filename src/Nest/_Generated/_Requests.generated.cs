@@ -5663,6 +5663,45 @@ namespace Nest
 		public bool? TotalHitsAsInteger { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISecurityCreateApiKeyRequest : IRequest<SecurityCreateApiKeyRequestParameters>
+	{
+	}
+	///<summary>Request parameters for SecurityCreateApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</pre></summary>
+	public partial class SecurityCreateApiKeyRequest : PlainRequestBase<SecurityCreateApiKeyRequestParameters>, ISecurityCreateApiKeyRequest
+	{
+		protected ISecurityCreateApiKeyRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISecurityGetApiKeyRequest : IRequest<SecurityGetApiKeyRequestParameters>
+	{
+	}
+	///<summary>Request parameters for SecurityGetApiKey <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html</pre></summary>
+	public partial class SecurityGetApiKeyRequest : PlainRequestBase<SecurityGetApiKeyRequestParameters>, ISecurityGetApiKeyRequest
+	{
+		protected ISecurityGetApiKeyRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+		///<summary>API key id of the API key to be retrieved</summary>
+		public string Id { get => Q<string>("id"); set => Q("id", value); }
+		///<summary>API key name of the API key to be retrieved</summary>
+		public string Name { get => Q<string>("name"); set => Q("name", value); }
+		///<summary>user name of the user who created this API key to be retrieved</summary>
+		public string Username { get => Q<string>("username"); set => Q("username", value); }
+		///<summary>realm name of the user who created this API key to be retrieved</summary>
+		public string RealmName { get => Q<string>("realm_name"); set => Q("realm_name", value); }
+		//TODO THIS METHOD IS UNMAPPED!
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISecurityInvalidateApiKeyRequest : IRequest<SecurityInvalidateApiKeyRequestParameters>
 	{
 	}
