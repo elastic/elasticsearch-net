@@ -539,13 +539,13 @@ namespace Elasticsearch.Net
 			for (int index = 0; index < values.Length; index++)
 			{
 				var value = values.GetValue(index);
-				var info = type.GetTypeInfo().GetDeclaredField(value.ToString());
+				var info = type.GetField(value.ToString());
 				var da = (EnumMemberAttribute[])info.GetCustomAttributes(typeof(EnumMemberAttribute), false);
 				var stringValue = da.Length > 0 ? da[0].Value : Enum.GetName(type, value);
 				dictionary.Add((Enum)value, stringValue);
 			}
 
-			var isFlag = type.GetTypeInfo().GetCustomAttributes(typeof(FlagsAttribute), false).Any();
+			var isFlag = type.GetCustomAttributes(typeof(FlagsAttribute), false).Length > 0;
 
 			return (e) => 
 			{

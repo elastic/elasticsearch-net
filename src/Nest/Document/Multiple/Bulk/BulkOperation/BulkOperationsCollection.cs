@@ -213,7 +213,7 @@ namespace Nest
 		{
 			if (value == null)
 			{
-				if (typeof(TOperation).IsValue()) throw new ArgumentException("value is null and a value type");
+				if (typeof(TOperation).IsValueType) throw new ArgumentException("value is null and a value type");
 			}
 			else if (!(value is TOperation))
 				throw new ArgumentException($"object is of type {value.GetType().FullName} but collection is of {typeof(TOperation).FullName}");

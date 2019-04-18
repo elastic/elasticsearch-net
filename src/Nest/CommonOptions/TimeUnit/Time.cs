@@ -110,16 +110,12 @@ namespace Nest
 
 			if (StaticTimeValue.HasValue && other.StaticTimeValue.HasValue)
 			{
-				// ReSharper disable PossibleInvalidOperationException
 				if (StaticTimeValue.Value == other.StaticTimeValue.Value) return 0;
 				if (StaticTimeValue.Value < other.StaticTimeValue.Value) return -1;
-
 				return 1;
-
-				// ReSharper enable PossibleInvalidOperationException
 			}
-			;
 
+			// ReSharper disable once PossibleInvalidOperationException
 			if (Math.Abs(Milliseconds.Value - other.Milliseconds.Value) < FLOAT_TOLERANCE) return 0;
 			if (Milliseconds < other.Milliseconds) return -1;
 

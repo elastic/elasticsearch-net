@@ -14,8 +14,7 @@ namespace Nest
 
 		public Normalizers(IDictionary<string, INormalizer> container) : base(container) { }
 
-		public Normalizers(Dictionary<string, INormalizer> container)
-			: base(container.ToDictionary(kv => kv.Key, kv => kv.Value)) { }
+		public Normalizers(Dictionary<string, INormalizer> container) : base(container) { }
 
 		public void Add(string name, INormalizer analyzer) => BackingDictionary.Add(name, analyzer);
 	}

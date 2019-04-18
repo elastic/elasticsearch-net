@@ -83,7 +83,7 @@ namespace Elasticsearch.Net
 		{
 			if (value == null) return TypeCode.Empty;
 
-			return value.GetType().GetTypeCode();
+			return Type.GetTypeCode(value.GetType());
 		}
 
 		/// <summary>
@@ -475,17 +475,17 @@ namespace Elasticsearch.Net
 						if (DateTime.TryParse(stringValue, CultureInfo.InvariantCulture, DateTimeStyles.None, out result))
 						{
 							return (T)(object)result;
-						}
+					}
 					}
 					else if (stringValue != null)
 					{
 						var converter = TypeDescriptor.GetConverter(TType);
-						return (T)converter.ConvertFromInvariantString(stringValue);
+						if (converter.IsValid(stringValue)) return (T)converter.ConvertFromInvariantString(stringValue);
 					}
 					else if (TType == typeof(string))
 					{
 						return (T)Convert.ChangeType(value, TypeCode.String, CultureInfo.InvariantCulture);
-					}
+				}
 				}
 				catch
 				{
@@ -639,12 +639,10 @@ namespace Elasticsearch.Net
 			}
 			else
 			{
-				if (binderType.IsGeneric() && binderType.GetGenericTypeDefinition() == typeof(Nullable<>))
-				{
+				if (binderType.IsGenericType && binderType.GetGenericTypeDefinition() == typeof(Nullable<>))
 					binderType = binderType.GetGenericArguments()[0];
-				}
 
-				var typeCode = binderType.GetTypeCode();
+				var typeCode = Type.GetTypeCode(binderType);
 
 				if (typeCode == TypeCode.Object)
 				{
@@ -654,12 +652,10 @@ namespace Elasticsearch.Net
 						return true;
 					}
 					else
-					{
 						return false;
-					}
 				}
-				result = Convert.ChangeType(value, binderType);
 
+				result = Convert.ChangeType(value, typeCode);
 				return true;
 			}
 			return base.TryConvert(binder, out result);
@@ -672,21 +668,11 @@ namespace Elasticsearch.Net
 
 		public static implicit operator bool(ElasticsearchDynamicValue dynamicValue)
 		{
-			if (!dynamicValue.HasValue)
-			{
-				return false;
-			}
+			if (!dynamicValue.HasValue) return false;
 
-			if (dynamicValue.value.GetType().IsValue())
-			{
-				return Convert.ToBoolean(dynamicValue.value);
-			}
+			if (dynamicValue.value.GetType().IsValueType) return Convert.ToBoolean(dynamicValue.value);
 
-			bool result;
-			if (bool.TryParse(dynamicValue.ToString(), out result))
-			{
-				return result;
-			}
+			if (bool.TryParse(dynamicValue.ToString(), out var result)) return result;
 
 			return true;
 		}
@@ -700,10 +686,7 @@ namespace Elasticsearch.Net
 
 		public static implicit operator int(ElasticsearchDynamicValue dynamicValue)
 		{
-			if (dynamicValue.value.GetType().IsValue())
-			{
-				return Convert.ToInt32(dynamicValue.value);
-			}
+			if (dynamicValue.value.GetType().IsValueType) return Convert.ToInt32(dynamicValue.value);
 
 			return int.Parse(dynamicValue.ToString());
 		}
@@ -740,40 +723,28 @@ namespace Elasticsearch.Net
 
 		public static implicit operator long(ElasticsearchDynamicValue dynamicValue)
 		{
-			if (dynamicValue.value.GetType().IsValue())
-			{
-				return Convert.ToInt64(dynamicValue.value);
-			}
+			if (dynamicValue.value.GetType().IsValueType) return Convert.ToInt64(dynamicValue.value);
 
 			return long.Parse(dynamicValue.ToString());
 		}
 
 		public static implicit operator float(ElasticsearchDynamicValue dynamicValue)
 		{
-			if (dynamicValue.value.GetType().IsValue())
-			{
-				return Convert.ToSingle(dynamicValue.value);
-			}
+			if (dynamicValue.value.GetType().IsValueType) return Convert.ToSingle(dynamicValue.value);
 
 			return float.Parse(dynamicValue.ToString());
 		}
 
 		public static implicit operator decimal(ElasticsearchDynamicValue dynamicValue)
 		{
-			if (dynamicValue.value.GetType().IsValue())
-			{
-				return Convert.ToDecimal(dynamicValue.value);
-			}
+			if (dynamicValue.value.GetType().IsValueType) return Convert.ToDecimal(dynamicValue.value);
 
 			return decimal.Parse(dynamicValue.ToString());
 		}
 
 		public static implicit operator double(ElasticsearchDynamicValue dynamicValue)
 		{
-			if (dynamicValue.value.GetType().IsValue())
-			{
-				return Convert.ToDouble(dynamicValue.value);
-			}
+			if (dynamicValue.value.GetType().IsValueType) return Convert.ToDouble(dynamicValue.value);
 
 			return double.Parse(dynamicValue.ToString());
 		}
